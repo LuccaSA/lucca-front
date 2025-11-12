@@ -1,9 +1,11 @@
 import { Component } from '@angular/core';
+import { VerticalNavigationComponent, VerticalNavigationGroupComponent, VerticalNavigationItemComponent, VerticalNavigationLinkComponent } from '@lucca-front/ng/vertical-navigation';
 import { Meta, StoryFn, moduleMetadata } from '@storybook/angular';
 
 @Component({
 	selector: 'vertical-navigation-stories',
 	templateUrl: './vertical-navigation.stories.html',
+	imports: [VerticalNavigationComponent, VerticalNavigationLinkComponent, VerticalNavigationItemComponent, VerticalNavigationGroupComponent],
 })
 class VerticalNavigationStory {}
 

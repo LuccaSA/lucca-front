@@ -3,7 +3,7 @@ import { Meta, StoryFn } from '@storybook/angular';
 interface VerticalNavigationDisabledStory {}
 
 export default {
-	title: 'Documentation/Navigation/VerticalNavigation/Disabled',
+	title: 'Documentation/Navigation/VerticalNavigation/HTML&CSS/Disabled',
 } as Meta;
 
 function getTemplate(args: VerticalNavigationDisabledStory): string {
