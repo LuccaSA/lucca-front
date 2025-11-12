@@ -5,19 +5,25 @@
 	padding: 0;
 	margin: 0;
 	padding-inline-start: var(--components-listing-paddingInlineStart);
+	margin-inline-start: var(--components-listing-marginInlineStart);
 	display: flex;
-	flex-direction: column;
-	gap: var(--pr-t-spacings-50);
+	flex-direction: var(--components-listing-flexDirection);
+	flex-wrap: wrap;
+	row-gap: var(--pr-t-spacings-50);
+	column-gap: var(--pr-t-spacings-100);
 	list-style-type: var(--components-listing-listStyleType);
+	clip-path: var(--components-listing-clipPath);
 
 	@at-root ($atRoot) {
 		.listing-item {
 			display: var(--components-listing-item-display);
 			align-items: flex-start;
 			gap: var(--pr-t-spacings-100);
+			margin-inline-start: var(--components-listing-item-marginInlineStart);
 
 			&::marker {
 				line-height: 1;
+				content: var(--components-listing-item-marker) '  ';
 			}
 		}
 
