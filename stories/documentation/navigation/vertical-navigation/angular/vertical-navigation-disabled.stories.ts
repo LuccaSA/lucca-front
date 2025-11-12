@@ -20,21 +20,22 @@ export default {
 		}),
 	],
 	render: (args: VerticalNavigationDisabledStories) => {
-		const disabled = args.disabled ? ` disabled="true"` : '';
+		const disabledItem = args.disabled ? `<span luVerticalNavigationLink icon="heart" disabled>Item</span>` : '<a luVerticalNavigationLink href="#" icon="heart">Item</a>';
+		const disabledArgs = args.disabled ? ` disabled` : '';
 		return {
 			template: `<lu-vertical-navigation heading="Section">
 	<lu-vertical-navigation-item>
-		<a luVerticalNavigationLink href="#" icon="heart"${disabled}>Item 1</a>
+		${disabledItem}
 	</lu-vertical-navigation-item>
 	<lu-vertical-navigation-group label="Group" icon="star">
 		<lu-vertical-navigation-item>
-			<a luVerticalNavigationLink href="#"${disabled}>Item 2</a>
+			${disabledItem}
 		</lu-vertical-navigation-item>
 		<lu-vertical-navigation-item>
-			<a luVerticalNavigationLink href="#"${disabled}>Item 3</a>
+			${disabledItem}
 		</lu-vertical-navigation-item>
 	</lu-vertical-navigation-group>
-	<lu-vertical-navigation-group label="Group" expanded="false" icon="heartFilled"${disabled}>
+	<lu-vertical-navigation-group label="Group" expanded="false" icon="heartFilled"${disabledArgs}>
 		<lu-vertical-navigation-item>
 			<a luVerticalNavigationLink href="#">Item 4</a>
 		</lu-vertical-navigation-item>

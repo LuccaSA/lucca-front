@@ -3,7 +3,7 @@
 	class="verticalNavigation-list-item-link"
 	[attr.aria-expanded]="expanded()"
 	(click)="toggleExpanded()"
-	[disabled]="disabled()"
+	[attr.disabled]="disabled()"
 >
 	@if (icon()) {
 		<lu-icon class="verticalNavigation-list-item-link-icon" [icon]="icon()" />
