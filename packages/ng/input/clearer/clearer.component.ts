@@ -12,7 +12,6 @@ import { LU_CLEARER_TRANSLATIONS } from './clearer.translate';
 	styleUrl: './clearer.component.scss',
 	changeDetection: ChangeDetectionStrategy.OnPush,
 	exportAs: 'luClearer',
-	standalone: true,
 	providers: [
 		{
 			provide: ALuClearer,

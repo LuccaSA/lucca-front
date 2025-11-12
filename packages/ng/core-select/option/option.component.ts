@@ -36,7 +36,6 @@ export const MAGIC_OPTION_SCROLL_DELAY = 15;
 	templateUrl: './option.component.html',
 	styleUrl: './option.component.scss',
 	changeDetection: ChangeDetectionStrategy.OnPush,
-	standalone: true,
 	imports: [LuOptionOutletDirective, PortalDirective, LuOptionGroupPipe, LuTooltipTriggerDirective],
 })
 export class LuOptionComponent<T> implements AfterViewInit, OnDestroy, OnInit {

@@ -7,7 +7,6 @@ import { LU_CHIP_TRANSLATIONS } from './chip.translate';
 
 @Component({
 	selector: 'lu-chip',
-	standalone: true,
 	templateUrl: './chip.component.html',
 	styleUrl: './chip.component.scss',
 	encapsulation: ViewEncapsulation.None,

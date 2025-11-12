@@ -6,7 +6,6 @@ import { LU_DATA_TABLE_HEAD_INSTANCE } from '../data-table-head/data-table-head.
 @Component({
 	// eslint-disable-next-line @angular-eslint/component-selector
 	selector: 'td[luDataTableCell]',
-	standalone: true,
 	templateUrl: './data-table-cell.component.html',
 	encapsulation: ViewEncapsulation.None,
 	host: {

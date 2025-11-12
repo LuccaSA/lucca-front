@@ -41,7 +41,6 @@ export type DateInputValidatorErrorType = {
 
 @Component({
 	selector: 'lu-date-input',
-	standalone: true,
 	imports: [PopoverDirective, Calendar2Component, IconComponent, InputDirective, NgTemplateOutlet, FilterPillDisplayerDirective, ClearComponent],
 	templateUrl: './date-input.component.html',
 	styleUrl: './date-input.component.scss',

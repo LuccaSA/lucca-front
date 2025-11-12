@@ -10,7 +10,6 @@ import { LuUserPopoverComponent } from './user-popover.component';
 	host: {
 		'[attr.aria-expanded]': 'opened()',
 	},
-	standalone: true,
 	exportAs: 'LuUserPopoverDirective',
 })
 export class LuUserPopoverDirective extends PopoverDirective {

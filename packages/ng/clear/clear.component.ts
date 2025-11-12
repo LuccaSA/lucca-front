@@ -5,7 +5,6 @@ import { LU_CLEAR_TRANSLATIONS } from './clear.translate';
 
 @Component({
 	selector: 'lu-clear',
-	standalone: true,
 	styleUrl: './clear.component.scss',
 	templateUrl: './clear.component.html',
 	encapsulation: ViewEncapsulation.None,

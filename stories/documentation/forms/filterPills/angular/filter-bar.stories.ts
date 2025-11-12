@@ -1,5 +1,6 @@
 import { allLegumes, FilterLegumesPipe } from '@/stories/forms/select/select.utils';
 import { provideHttpClient } from '@angular/common/http';
+import { LOCALE_ID } from '@angular/core';
 import { FormsModule } from '@angular/forms';
 import { ButtonComponent } from '@lucca-front/ng/button';
 import { LuCoreSelectApiV4Directive } from '@lucca-front/ng/core-select/api';
@@ -12,7 +13,6 @@ import { NumericBadgeComponent } from '@lucca-front/ng/numeric-badge';
 import { LuSimpleSelectInputComponent } from '@lucca-front/ng/simple-select';
 import { applicationConfig, Meta, moduleMetadata, StoryObj } from '@storybook/angular';
 import { StoryModelDisplayComponent } from '../../../../helpers/story-model-display.component';
-import { LOCALE_ID } from '@angular/core';
 
 export default {
 	title: 'Documentation/Forms/FiltersPills/FilterBar/Angular',
@@ -87,7 +87,7 @@ export default {
 		<lu-multi-select [ngModel]="[]" apiV4="/organization/structure/api/establishments" filterPillLabelPlural="établissements" />
 	</lu-filter-pill>
 	<lu-form-field label="Test" hiddenLabel>
-		<lu-text-input [ngModel]="example2" [ngModelOptions]="{standalone: true}" hasSearchIcon hasClearer />
+		<lu-text-input [ngModel]="example2" [ngModelOptions]="{ standalone: true }" hasSearchIcon hasClearer />
 	</lu-form-field>
 	<button  *luFilterPillAddonAfter type="submit" size="S" luButton="outlined">Exporter</button>
 </lu-filter-bar>`,

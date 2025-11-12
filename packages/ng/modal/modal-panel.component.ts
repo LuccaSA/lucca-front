@@ -110,7 +110,6 @@ const panelImports = [A11yModule, AsyncPipe, LuTooltipModule, NgClass];
 
 @Component({
 	selector: 'lu-modal-panel',
-	standalone: true,
 	imports: panelImports,
 	templateUrl: './modal-panel.component.html',
 	changeDetection: ChangeDetectionStrategy.OnPush,
@@ -123,7 +122,6 @@ export class LuModalPanelComponent<T extends ILuModalContent = ILuModalContent> 
 }
 @Component({
 	selector: 'lu-modal-panel-default',
-	standalone: true,
 	imports: panelImports,
 	templateUrl: './modal-panel.component.html',
 	changeDetection: ChangeDetectionStrategy.Default,

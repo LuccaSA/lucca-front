@@ -12,7 +12,6 @@ import { ALuDepartmentService, LuDepartmentV4Service } from '../../service/index
 	selector: 'lu-department-feeder',
 	template: '',
 	changeDetection: ChangeDetectionStrategy.OnPush,
-	standalone: true,
 	providers: [
 		{
 			provide: ALuTreeOptionOperator,

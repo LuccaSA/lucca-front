@@ -20,7 +20,6 @@ interface AdapterData<D, C> {
 
 @Component({
 	selector: 'lu-dialog-content-adapter',
-	standalone: true,
 	templateUrl: './dialog-content-adapter.component.html',
 	changeDetection: ChangeDetectionStrategy.Default,
 	encapsulation: ViewEncapsulation.None,

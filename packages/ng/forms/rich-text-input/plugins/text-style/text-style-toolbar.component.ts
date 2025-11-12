@@ -7,7 +7,6 @@ import { TextStyleComponent } from './text-style.component';
 
 @Component({
 	selector: 'lu-rich-text-toolbar-text-style',
-	standalone: true,
 	changeDetection: ChangeDetectionStrategy.OnPush,
 	templateUrl: `text-style-toolbar.component.html`,
 	imports: [TextStyleComponent],

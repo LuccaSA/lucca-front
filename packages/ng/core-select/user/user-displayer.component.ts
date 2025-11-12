@@ -13,7 +13,6 @@ import { LuCoreSelectUsersDirective } from './users.directive';
 			<span translate="no">{{ user | luUserDisplay: userDirective.displayFormat() }}</span>
 		}
 	`,
-	standalone: true,
 })
 export class LuUserDisplayerComponent {
 	protected context = inject<ILuOptionContext<LuCoreSelectUser>>(LU_OPTION_CONTEXT);

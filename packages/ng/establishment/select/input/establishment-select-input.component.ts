@@ -24,7 +24,6 @@ import { LU_ESTABLISHMENT_SELECT_INPUT_TRANSLATIONS } from './establishment-sele
 	templateUrl: './establishment-select-input.component.html',
 	styleUrl: './establishment-select-input.component.scss',
 	changeDetection: ChangeDetectionStrategy.OnPush,
-	standalone: true,
 	imports: [
 		OverlayModule,
 		ClearComponent,

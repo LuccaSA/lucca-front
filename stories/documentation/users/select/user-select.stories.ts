@@ -6,7 +6,6 @@ import { ILuUser, LuUserSelectModule } from '@lucca-front/ng/user';
 import { Meta, StoryFn, applicationConfig } from '@storybook/angular';
 
 @Component({
-	standalone: true,
 	selector: 'user-select-stories',
 	templateUrl: './user-select.stories.html',
 	imports: [LuUserSelectModule, FormsModule],

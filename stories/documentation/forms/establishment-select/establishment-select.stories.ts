@@ -5,7 +5,6 @@ import { LuEstablishmentSelectInputComponent } from '@lucca-front/ng/establishme
 import { Meta, StoryFn, applicationConfig } from '@storybook/angular';
 @Component({
 	selector: 'establishment-select-stories',
-	standalone: true,
 	imports: [LuEstablishmentSelectInputComponent],
 	template: `
 		<label class="textfield mod-inline pr-u-marginInlineEnd200">
@@ -40,7 +39,6 @@ import { LuEstablishmentSelectInputComponent } from '@lucca-front/ng/establishme
 
 @Component({
 	selector: 'establishment-select-stories',
-	standalone: true,
 	imports: [LuEstablishmentSelectInputComponent],
 	template: \`
 	<label class="textfield">

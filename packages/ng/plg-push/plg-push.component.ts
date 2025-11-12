@@ -6,7 +6,6 @@ import { LU_PLG_PUSH_TRANSLATIONS } from './plg-push.translate';
 
 @Component({
 	selector: 'lu-plg-push',
-	standalone: true,
 	imports: [IconComponent, ButtonComponent],
 	templateUrl: './plg-push.component.html',
 	styleUrl: './plg-push.component.scss',

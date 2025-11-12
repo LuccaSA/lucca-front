@@ -4,7 +4,6 @@ import { ILuOptionContext, LU_OPTION_CONTEXT } from './option.token';
 
 @Component({
 	selector: 'lu-simple-select-default-option',
-	standalone: true,
 	imports: [AsyncPipe],
 	template: `@if (context.option$ | async; as option) {
 		{{ option?.name ?? option }}
