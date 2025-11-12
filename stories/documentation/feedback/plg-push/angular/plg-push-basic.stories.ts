@@ -12,9 +12,9 @@ export default {
 		}),
 	],
 	render: (args: PLGPushComponent & { description: string; linkLabel: string; linkURL: string }, context) => {
-		const { description, linkLabel, linkURL, ...inputs } = args;
+		const { description, linkLabel, linkURL, removed, ...inputs } = args;
 		return {
-			template: `<lu-plg-push ${generateInputs(inputs, context.argTypes)}>
+			template: `<lu-plg-push ${generateInputs(inputs, context.argTypes)}${removed ? ' removed="true"' : ' '}>
 	${description}
 	<a class="link mod-icon" href="${linkURL}" target="_blank" rel="noopener noreferrer">
 		<span class="link-text">${linkLabel}</span><!-- no text node here --><span class="link-icon"><lu-icon class="pr-u-displayContents" icon="arrowExternal" alt="Ouvrir dans une nouvelle fenêtre" /></span>
@@ -48,5 +48,6 @@ export const Template: StoryObj<PLGPushComponent & { description: string; linkLa
 		linkLabel: `Demander un essai gratuit`,
 		linkURL: `#`,
 		removable: false,
+		removed: false,
 	},
 };

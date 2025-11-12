@@ -1,4 +1,4 @@
-import { booleanAttribute, ChangeDetectionStrategy, Component, EventEmitter, HostBinding, Input, Output, ViewEncapsulation } from '@angular/core';
+import { booleanAttribute, ChangeDetectionStrategy, Component, HostBinding, Input, model, ViewEncapsulation } from '@angular/core';
 import { ButtonComponent } from '@lucca-front/ng/button';
 import { getIntl } from '@lucca-front/ng/core';
 import { IconComponent } from '@lucca-front/ng/icon';
@@ -21,17 +21,13 @@ export class PLGPushComponent {
 	@Input({ transform: booleanAttribute })
 	removable = false;
 
-	@Input({ transform: booleanAttribute })
 	/**
 	 * Is the callout removed? Works with two way binding too.
 	 */
-	removed = false;
+	removed = model(false);
 
 	@HostBinding('attr.hidden')
 	get hiddenAttr(): 'hidden' | null {
-		return this.removed ? 'hidden' : null;
+		return this.removed() ? 'hidden' : null;
 	}
-
-	@Output()
-	removedChange: EventEmitter<boolean> = new EventEmitter<boolean>();
 }
