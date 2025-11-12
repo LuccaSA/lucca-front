@@ -35,10 +35,13 @@
 		.filterPill[disabled] &,
 		.filterPill:not(.is-filled) &,
 		.textfield-input[disabled] &,
-		.textfield-input:not(.is-filled) & {
-			.multiSelect:not(.is-clearable) & {
-				@include hidden;
-			}
+		.textfield-input:not(.is-filled) &,
+		.textfield-input:not(.is-selected) & {
+			@include hidden;
+		}
+
+		.multiSelect.is-selected:has(.multipleSelect-clear) & {
+			--components-clear-display: grid;
 		}
 	}
 }
