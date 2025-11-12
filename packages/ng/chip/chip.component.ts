@@ -1,6 +1,8 @@
 import { NgTemplateOutlet } from '@angular/common';
 import { booleanAttribute, Component, computed, input, output, ViewEncapsulation } from '@angular/core';
 import { getIntl } from '@lucca-front/ng/core';
+
+import { LuTooltipModule } from '@lucca-front/ng/tooltip';
 import { LU_CHIP_TRANSLATIONS } from './chip.translate';
 
 @Component({
@@ -9,7 +11,7 @@ import { LU_CHIP_TRANSLATIONS } from './chip.translate';
 	templateUrl: './chip.component.html',
 	styleUrl: './chip.component.scss',
 	encapsulation: ViewEncapsulation.None,
-	imports: [NgTemplateOutlet],
+	imports: [NgTemplateOutlet, LuTooltipModule],
 	host: {
 		class: 'chip',
 		'[class.is-disabled]': 'disabled()',
