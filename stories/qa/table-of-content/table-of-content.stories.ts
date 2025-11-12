@@ -3,7 +3,6 @@ import { TableOfContentComponent, TableOfContentLinkDirective } from '@lucca-fro
 import { Meta, StoryFn } from '@storybook/angular';
 
 @Component({
-	standalone: true,
 	selector: 'table-of-content-stories',
 	templateUrl: './table-of-content.stories.html',
 	imports: [TableOfContentComponent, TableOfContentLinkDirective],

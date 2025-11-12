@@ -2,7 +2,6 @@ import { ChangeDetectionStrategy, Component, ElementRef, OnInit, signal, viewChi
 
 @Component({
 	selector: 'lu-scroll-box',
-	standalone: true,
 	templateUrl: './scroll-box.component.html',
 	styleUrl: './scroll-box.component.scss',
 	changeDetection: ChangeDetectionStrategy.OnPush,

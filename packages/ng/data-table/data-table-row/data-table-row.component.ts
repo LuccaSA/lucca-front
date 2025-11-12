@@ -10,7 +10,6 @@ import { LU_DATA_TABLE_INSTANCE } from '../data-table.token';
 @Component({
 	// eslint-disable-next-line @angular-eslint/component-selector
 	selector: 'tr[luDataTableRow]',
-	standalone: true,
 	templateUrl: './data-table-row.component.html',
 	encapsulation: ViewEncapsulation.None,
 	host: {

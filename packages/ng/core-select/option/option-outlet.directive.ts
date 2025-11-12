@@ -4,7 +4,6 @@ import { LU_OPTION_CONTEXT, provideOptionContext } from './option.token';
 
 @Directive({
 	selector: '[luOptionOutlet]',
-	standalone: true,
 	providers: [provideOptionContext()],
 })
 export class LuOptionOutletDirective<T> implements OnChanges, OnDestroy {

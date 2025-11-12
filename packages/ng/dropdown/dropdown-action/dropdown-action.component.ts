@@ -3,7 +3,6 @@ import { PopoverContentComponent } from '@lucca-front/ng/popover2';
 
 @Component({
 	selector: '[lu-dropdown-action]',
-	standalone: true,
 	template: '<ng-content />',
 	encapsulation: ViewEncapsulation.None,
 	host: {

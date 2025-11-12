@@ -14,10 +14,10 @@ import {
 	ViewEncapsulation,
 } from '@angular/core';
 import { ALuPopoverPanel, ILuPopoverPanel, luTransformPopover } from '@lucca-front/ng/popover';
+import { PopoverContentComponent } from '@lucca-front/ng/popover2';
 import { merge, Observable, Subscription } from 'rxjs';
 import { debounceTime, delay, map, share, startWith, switchMap } from 'rxjs/operators';
 import { ALuDropdownItem, ILuDropdownItem } from '../item/index';
-import { PopoverContentComponent } from '@lucca-front/ng/popover2';
 
 /**
  * @deprecated prefer the new menu approach: https://prisme.lucca.io/94310e217/p/557682-dropdown
@@ -29,7 +29,6 @@ import { PopoverContentComponent } from '@lucca-front/ng/popover2';
 	changeDetection: ChangeDetectionStrategy.OnPush,
 	animations: [luTransformPopover],
 	exportAs: 'LuDropdownPanel',
-	standalone: true,
 	encapsulation: ViewEncapsulation.None,
 })
 export class LuDropdownPanelComponent extends ALuPopoverPanel implements ILuPopoverPanel, OnDestroy, AfterViewInit {

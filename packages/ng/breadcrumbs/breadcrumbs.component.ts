@@ -8,7 +8,6 @@ let nextId = 0;
 
 @Component({
 	selector: 'lu-breadcrumbs',
-	standalone: true,
 	styleUrl: './breadcrumbs.component.scss',
 	templateUrl: './breadcrumbs.component.html',
 	encapsulation: ViewEncapsulation.None,

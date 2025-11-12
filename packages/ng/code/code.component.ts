@@ -2,7 +2,6 @@ import { booleanAttribute, Component, input, ViewEncapsulation } from '@angular/
 
 @Component({
 	selector: 'lu-code',
-	standalone: true,
 	templateUrl: './code.component.html',
 	styleUrl: './code.component.scss',
 	encapsulation: ViewEncapsulation.None,

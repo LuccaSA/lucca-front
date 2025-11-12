@@ -6,7 +6,6 @@ import { NoopValueAccessorDirective } from '../noop-value-accessor.directive';
 
 @Component({
 	selector: 'lu-switch-input',
-	standalone: true,
 	imports: [ReactiveFormsModule, InputDirective],
 	templateUrl: './switch-input.component.html',
 	styleUrl: './switch-input.component.scss',
