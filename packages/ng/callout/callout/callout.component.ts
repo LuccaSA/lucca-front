@@ -1,4 +1,4 @@
-import { booleanAttribute, ChangeDetectionStrategy, Component, EventEmitter, HostBinding, input, Input, Output, ViewEncapsulation } from '@angular/core';
+import { booleanAttribute, ChangeDetectionStrategy, Component, HostBinding, input, Input, output, ViewEncapsulation } from '@angular/core';
 import { LuccaIcon } from '@lucca-front/icons';
 import { getIntl, Palette, PortalContent, PortalDirective } from '@lucca-front/ng/core';
 import { IconComponent } from '@lucca-front/ng/icon';
@@ -69,8 +69,7 @@ export class CalloutComponent {
 		return this.removed ? 'hidden' : null;
 	}
 
-	@Output()
-	removedChange: EventEmitter<boolean> = new EventEmitter<boolean>();
+	removedChange = output<boolean>();
 
 	AI = input(false, { transform: booleanAttribute });
 
