@@ -1,3 +1,4 @@
+{{ hx }}{{ hxStyle }}
 <section
 	class="emptyState mod-page"
 	[attr.role]="heading ? null : 'presentation'"
@@ -19,7 +20,7 @@
 					</div>
 				}
 				@if (heading) {
-					<div role="heading" [attr.aria-level]="hx" class="emptyState-content-heading">{{ heading }}</div>
+					<div role="heading" [attr.aria-level]="hx" [class]="hxStyle" class="emptyState-content-heading">{{ heading }}</div>
 				}
 				@if (description) {
 					<p class="emptyState-content-description">

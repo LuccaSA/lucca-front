@@ -1,7 +1,7 @@
 import { ChangeDetectionStrategy, Component, Input, numberAttribute, ViewEncapsulation } from '@angular/core';
 import { PortalContent, PortalDirective } from '@lucca-front/ng/core';
 import { LuSafeExternalSvgPipe } from '@lucca-front/ng/safe-content';
-import { Hx } from '../empty-state.model';
+import { Hx, HxStyle } from '../empty-state.model';
 
 @Component({
 	selector: 'lu-empty-state-page',
@@ -66,4 +66,9 @@ export class EmptyStatePageComponent {
 		transform: numberAttribute as (value: Hx | `${Hx}`) => Hx,
 	})
 	hx: Hx = 1;
+
+	@Input({
+		transform: numberAttribute as (value: HxStyle | `pr-u-${HxStyle}`) => HxStyle,
+	})
+	hxStyle: HxStyle = 1;
 }

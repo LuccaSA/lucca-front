@@ -47,6 +47,7 @@
 
 		.emptyState-content-heading {
 			font: var(--pr-t-font-heading-3);
+			color: var(--pr-t-color-text-heading);
 			margin-block-end: var(--pr-t-spacings-50);
 
 			@if config.$deprecatedSpacings {
