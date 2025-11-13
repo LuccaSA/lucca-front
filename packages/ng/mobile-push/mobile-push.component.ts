@@ -1,4 +1,4 @@
-import { ChangeDetectionStrategy, Component, EventEmitter, Output, ViewEncapsulation } from '@angular/core';
+import { ChangeDetectionStrategy, Component, output, ViewEncapsulation } from '@angular/core';
 import { getIntl } from '@lucca-front/ng/core';
 import { IconComponent } from '@lucca-front/ng/icon';
 import { LU_MOBILE_PUSH_TRANSLATIONS } from './mobile-push.translate';
@@ -14,6 +14,6 @@ import { LU_MOBILE_PUSH_TRANSLATIONS } from './mobile-push.translate';
 export class MobilePushComponent {
 	intl = getIntl(LU_MOBILE_PUSH_TRANSLATIONS);
 
-	@Output() appStoreLinkClicked = new EventEmitter<void>();
-	@Output() googlePlayLinkClicked = new EventEmitter<void>();
+	appStoreLinkClicked = output<void>();
+	googlePlayLinkClicked = output<void>();
 }
