@@ -37,7 +37,7 @@ export const Basic: StoryObj<ButtonComponent> = {
 			description: 'Applique une palette de couleurs au bouton.',
 		},
 		state: {
-			description: 'État du composant.',
+			description: "Modifie l'état du bouton.",
 			control: {
 				type: 'select',
 			},
