@@ -32,28 +32,42 @@ export default {
 export const Basic: StoryObj<ButtonComponent & { label: string }> = {
 	argTypes: {
 		label: {
-			description: "La présence d'un label augmente le padding horizontal automatiquement via la classe <code>mod-withIcon</code>",
+			description: '[Story] Modifie le label du boutton.',
 		},
 		luButton: {
 			options: ['', 'outlined', 'ghost', 'ghost-invert', 'AI'],
 			control: {
 				type: 'select',
 			},
-			description: '[v20.3] AI',
+			description: 'Modifie la hierarchie ou le style du bouton.<br>[v20.3] AI',
+		},
+		block: {
+			description: 'Applique <code>display: block</code>.',
 		},
 		palette: {
 			if: { arg: 'luButton', neq: 'AI' },
+			description: 'Applique une palette de couleurs au bouton.',
 		},
-		critical: {
-			description: '[v20.2] Couleur critical au hover / focus',
-		},
-		size: {
+		state: {
+			description: 'État du composant.',
 			control: {
 				type: 'select',
 			},
 		},
+		critical: {
+			description: '[v20.2] Marque une action aux conséquences importantes ou irréversibles au survol et focus. Seulement compatible avec <code>outlined</code> et <code>ghost</code>.',
+		},
+		disclosure: {
+			description: "Indique le présence d'un menu.",
+		},
 		delete: {
-			description: 'Deprecated 💀, use critical instead',
+			description: '[Deprecated] Remplacé par <code>critical</code>.',
+		},
+		size: {
+			description: 'Modifie la taille du composant.',
+			control: {
+				type: 'select',
+			},
 		},
 	},
 	args: {
@@ -61,7 +75,7 @@ export const Basic: StoryObj<ButtonComponent & { label: string }> = {
 		palette: 'none',
 		state: 'default',
 		luButton: '',
-		label: 'Label',
+		label: 'Button',
 		critical: false,
 		disclosure: false,
 	},
