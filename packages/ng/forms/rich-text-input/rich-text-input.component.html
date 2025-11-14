@@ -16,7 +16,7 @@
 	}
 	<div
 		class="richTextField-toolbar"
-		[ngClass]="{ 'richTextField-hideToolbar': hideToolbar() }"
+		[class.richTextField-hideToolbar]="hideToolbar()"
 		(keydown.arrowleft)="focusSiblingPlugin($event, -1)"
 		(keydown.arrowRight)="focusSiblingPlugin($event, 1)"
 		role="toolbar"
