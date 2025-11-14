@@ -19,7 +19,12 @@ import { LU_DATA_TABLE_INSTANCE } from '../data-table.token';
 		'[class.dataTable-foot-row]': 'footRef !== null',
 		'[class.mod-selectable]': 'tableRef.selectable()',
 	},
-	hostDirectives: [CdkDrag],
+	hostDirectives: [
+		{
+			directive: CdkDrag,
+			inputs: ['cdkDragDisabled: dragDisabled'],
+		},
+	],
 	imports: [CheckboxInputComponent, FormFieldComponent, FormsModule],
 })
 export class DataTableRowComponent {
@@ -34,4 +39,9 @@ export class DataTableRowComponent {
 	selected = model<boolean>(false);
 	selectedLabel = input<string | null>(null);
 	disabled = input(false, { transform: booleanAttribute });
+	drag = input(false, { transform: booleanAttribute });
+
+	get dragDisabled() {
+		return !this.drag();
+	}
 }
