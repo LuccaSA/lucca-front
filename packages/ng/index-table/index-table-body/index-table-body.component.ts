@@ -2,27 +2,27 @@ import { Component, computed, forwardRef, inject, input, model, ViewEncapsulatio
 import { ButtonComponent } from '@lucca-front/ng/button';
 import { PortalContent } from '@lucca-front/ng/core';
 import { IconComponent } from '@lucca-front/ng/icon';
-import { LU_DATA_TABLE_INSTANCE } from '../data-table.token';
-import { LU_DATA_TABLE_BODY_INSTANCE } from './data-table-body.token';
+import { LU_INDEX_TABLE_INSTANCE } from '../index-table.token';
+import { LU_INDEX_TABLE_BODY_INSTANCE } from './index-table-body.token';
 
 @Component({
 	// eslint-disable-next-line @angular-eslint/component-selector
-	selector: 'tbody[luDataTableBody]',
+	selector: 'tbody[luIndexTableBody]',
 	standalone: true,
-	templateUrl: `./data-table-body.component.html`,
+	templateUrl: `./index-table-body.component.html`,
 	encapsulation: ViewEncapsulation.None,
 	host: {
-		class: 'dataTable-body',
+		class: 'indexTable-body',
 	},
 	imports: [ButtonComponent, IconComponent],
 	providers: [
 		{
-			provide: LU_DATA_TABLE_BODY_INSTANCE,
-			useExisting: forwardRef(() => DataTableBodyComponent),
+			provide: LU_INDEX_TABLE_BODY_INSTANCE,
+			useExisting: forwardRef(() => IndexTableBodyComponent),
 		},
 	],
 })
-export class DataTableBodyComponent {
+export class IndexTableBodyComponent {
 	group = input<PortalContent | null>(null);
 	groupButtonAlt = input<string | null>(null);
 
@@ -32,7 +32,7 @@ export class DataTableBodyComponent {
 		this.expanded.set(!this.expanded());
 	}
 
-	protected tableRef = inject(LU_DATA_TABLE_INSTANCE);
+	protected tableRef = inject(LU_INDEX_TABLE_INSTANCE);
 
 	colspan = computed(() => this.tableRef.cols().length + (this.tableRef.selectable() ? 1 : 0));
 }

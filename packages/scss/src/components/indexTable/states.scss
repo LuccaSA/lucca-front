@@ -79,3 +79,7 @@
 	--components-indexTable-cell-z-index: 2;
 	--components-indexTable-cell-subAction-opacity: 1;
 }
+
+@mixin rowsHidden {
+	--components-indexTable-row-display: none;
+}

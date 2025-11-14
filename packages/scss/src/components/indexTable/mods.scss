@@ -4,10 +4,6 @@
 @use '@lucca-front/scss/src/components/button/exports' as button;
 
 @mixin selectable {
-	.indexTable-head-row {
-		cursor: pointer;
-	}
-
 	.indexTable-body-row {
 		&:is(:focus-within, :hover) {
 			outline: none;
@@ -359,10 +355,49 @@
 	}
 }
 
-@mixin alignRight {
-	text-align: end;
+@mixin alignEnd {
+	&,
+	.indexTable-body-row-cell-link {
+		text-align: end;
+	}
 }
 
 @mixin alignCenter {
-	text-align: center;
+	&,
+	.indexTable-body-row-cell-link {
+		text-align: center;
+	}
+}
+
+@mixin alignStart {
+	&,
+	.indexTable-body-row-cell-link {
+		text-align: start;
+	}
+}
+
+@mixin tfoot {
+	padding-block: var(--pr-t-spacings-50);
+
+	&::before,
+	&::after {
+		content: none;
+	}
+}
+
+@mixin groupButton {
+	@include button.ghost;
+	@include button.S;
+	@include button.onlyIconS;
+
+	--components-button-padding: var(--pr-t-spacings-25);
+
+	// Extend button reactive zone to his whole parent
+	position: static;
+
+	&::before {
+		content: '';
+		position: absolute;
+		inset: 0;
+	}
 }

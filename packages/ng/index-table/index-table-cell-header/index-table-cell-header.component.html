@@ -1,0 +1,21 @@
+@if (sort()) {
+	<button luButton type="button" class="tableSortable">
+		<ng-container *ngTemplateOutlet="contentTpl" />
+		<span class="tableSortable-arrows">
+			<lu-icon icon="chevronTop" class="tableSortable-arrows-ascending" />
+			<lu-icon icon="chevronBottom" class="tableSortable-arrows-descending" />
+		</span>
+	</button>
+} @else {
+	<ng-container *ngTemplateOutlet="contentTpl" />
+}
+
+<ng-template #contentTpl>
+	@if (hiddenLabel() || actions()) {
+		<span class="pr-u-mask"><ng-container *ngTemplateOutlet="contentTpl2" /></span>
+	} @else {
+		<ng-container *ngTemplateOutlet="content" />
+	}
+</ng-template>
+
+<ng-template #content><ng-content /></ng-template>

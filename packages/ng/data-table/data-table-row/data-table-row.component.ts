@@ -1,4 +1,5 @@
-import { booleanAttribute, Component, ElementRef, inject, input, model, ViewEncapsulation } from '@angular/core';
+import { NgTemplateOutlet } from '@angular/common';
+import { booleanAttribute, Component, inject, input, model, ViewEncapsulation } from '@angular/core';
 import { FormsModule } from '@angular/forms';
 import { FormFieldComponent } from '@lucca-front/ng/form-field';
 import { CheckboxInputComponent } from '@lucca-front/ng/forms';
@@ -19,14 +20,12 @@ import { LU_DATA_TABLE_INSTANCE } from '../data-table.token';
 		'[class.dataTable-foot-row]': 'footRef !== null',
 		'[class.mod-selectable]': 'tableRef.selectable()',
 	},
-	imports: [CheckboxInputComponent, FormFieldComponent, FormsModule],
+	imports: [CheckboxInputComponent, FormFieldComponent, FormsModule, NgTemplateOutlet],
 })
 export class DataTableRowComponent {
 	bodyRef = inject(LU_DATA_TABLE_BODY_INSTANCE, { optional: true });
 	headRef = inject(LU_DATA_TABLE_HEAD_INSTANCE, { optional: true });
 	footRef = inject(LU_DATA_TABLE_FOOT_INSTANCE, { optional: true });
-
-	elementRef = inject<ElementRef<Element>>(ElementRef);
 
 	protected tableRef = inject(LU_DATA_TABLE_INSTANCE);
 

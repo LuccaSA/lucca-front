@@ -7,7 +7,7 @@ import { LU_DATA_TABLE_HEAD_INSTANCE } from '../data-table-head/data-table-head.
 	// eslint-disable-next-line @angular-eslint/component-selector
 	selector: 'td[luDataTableCell]',
 	standalone: true,
-	templateUrl: './data-table-cell.component.html',
+	template: '<ng-content />',
 	encapsulation: ViewEncapsulation.None,
 	host: {
 		'[class.dataTable-body-row-cell]': 'bodyRef !== null',

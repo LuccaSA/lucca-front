@@ -1,10 +1,10 @@
 @if (group() && groupButtonAlt()) {
-	<tr class="dataTable-body-row mod-group">
-		<td class="dataTable-body-row-cell" [attr.colspan]="colspan()">
-			<div class="dataTable-body-row-cell-expand">
+	<tr class="indexTable-body-row mod-group">
+		<th scope="colgroup" class="indexTable-body-row-transparentCell" [attr.colspan]="colspan()">
+			<div class="indexTable-body-row-cellTitle">
 				<button
 					type="button"
-					class="dataTable-body-row-cell-expand-button"
+					class="indexTable-body-row-cellTitle-button"
 					luButton
 					disclosure
 					[attr.aria-expanded]="expanded()"
@@ -14,7 +14,7 @@
 				</button>
 				{{ group() }}
 			</div>
-		</td>
+		</th>
 	</tr>
 }
 <ng-content />
