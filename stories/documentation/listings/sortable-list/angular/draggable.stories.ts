@@ -53,9 +53,9 @@ export default {
 		const helperMessage = args.helperMessage?.length ? ` helperMessage="${args.helperMessage}"` : '';
 		return {
 			template: cleanupTemplate(`<lu-sortable-list${small} cdkDropList>
-	<lu-sortable-list-item${label}${helperMessage}${clearable}${clickable} cdkDrag/>
-	<lu-sortable-list-item${label}${helperMessage}${clearable}${clickable} cdkDrag/>
-	<lu-sortable-list-item${label}${helperMessage}${clearable}${clickable} cdkDrag/>
+	<lu-sortable-list-item${label}${helperMessage}${clearable}${clickable}/>
+	<lu-sortable-list-item${label}${helperMessage}${clearable}${clickable}/>
+	<lu-sortable-list-item${label}${helperMessage}${clearable}${clickable}/>
 </lu-sortable-list>`),
 		};
 	},
