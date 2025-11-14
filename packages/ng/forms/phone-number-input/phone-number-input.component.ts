@@ -42,7 +42,6 @@ function tryParsePhoneNumber(phoneNumber: string, countryCode?: CountryCode): Pa
 
 @Component({
 	selector: 'lu-phone-number-input',
-	standalone: true,
 	imports: [LuSimpleSelectInputComponent, TextInputComponent, FormsModule, LuDisplayerDirective, LuOptionDirective, InputDirective, FormFieldComponent],
 	templateUrl: './phone-number-input.component.html',
 	styleUrl: './phone-number-input.component.scss',

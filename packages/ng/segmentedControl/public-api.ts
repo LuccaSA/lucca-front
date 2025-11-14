@@ -1,2 +1,1 @@
-export * from './filter/filter.component';
-export * from './segmented-control.component';
+export * from '@lucca-front/ng/segmented-control';

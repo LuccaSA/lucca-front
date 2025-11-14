@@ -82,7 +82,6 @@ class DialogRoutingWithRouterOutletTestComponent {}
 
 @Component({
 	selector: 'lu-app-test',
-	standalone: true,
 	imports: [RouterOutlet],
 	template: '<router-outlet />',
 })

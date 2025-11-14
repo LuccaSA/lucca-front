@@ -5,7 +5,6 @@ import { LU_LISTING_INSTANCE } from '../listing.token';
 
 @Component({
 	selector: 'lu-listing-item',
-	standalone: true,
 	templateUrl: './listing-item.component.html',
 	imports: [IconComponent],
 	encapsulation: ViewEncapsulation.None,

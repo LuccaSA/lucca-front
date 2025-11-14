@@ -4,7 +4,6 @@ import { FormFieldComponent } from '@lucca-front/ng/form-field';
 import { applicationConfig, Meta } from '@storybook/angular';
 
 @Component({
-	standalone: true,
 	selector: 'date-range-input-stories',
 	templateUrl: './date-range-input.stories.html',
 	imports: [FormFieldComponent, DateRangeInputComponent],

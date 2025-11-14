@@ -4,7 +4,6 @@ const INITIAL_INTERVAL = 500;
 
 @Directive({
 	selector: '[luRepeatOnHold]',
-	standalone: true,
 })
 export class RepeatOnHoldDirective implements OnDestroy, OnInit {
 	@Output() hold = new EventEmitter<void>();

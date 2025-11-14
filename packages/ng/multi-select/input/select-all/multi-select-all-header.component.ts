@@ -10,7 +10,6 @@ import { MULTI_SELECT_WITH_SELECT_ALL_CONTEXT } from './select-all.models';
 
 @Component({
 	selector: 'lu-multi-select-all-header',
-	standalone: true,
 	imports: [FormsModule, CheckboxInputComponent, FormFieldComponent],
 	hostDirectives: [ɵCoreSelectPanelElement],
 	styleUrl: './multi-select-all-header.component.scss',

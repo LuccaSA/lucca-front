@@ -6,7 +6,6 @@ import { map, Subscription } from 'rxjs';
 
 @Pipe({
 	name: 'luSafeExternalSvg',
-	standalone: true,
 	pure: false,
 })
 export class LuSafeExternalSvgPipe implements PipeTransform {

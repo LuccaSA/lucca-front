@@ -16,7 +16,6 @@ import { formatSize } from '../formatter';
 
 @Component({
 	selector: 'lu-file-entry',
-	standalone: true,
 	templateUrl: './file-entry.component.html',
 	styleUrl: './file-entry.component.scss',
 	encapsulation: ViewEncapsulation.None,

@@ -8,7 +8,6 @@ import { LU_DATA_TABLE_BODY_INSTANCE } from './data-table-body.token';
 @Component({
 	// eslint-disable-next-line @angular-eslint/component-selector
 	selector: 'tbody[luDataTableBody]',
-	standalone: true,
 	templateUrl: `./data-table-body.component.html`,
 	encapsulation: ViewEncapsulation.None,
 	host: {

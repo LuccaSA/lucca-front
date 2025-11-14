@@ -7,7 +7,6 @@ import { BaseFileUploadComponent } from '../base-file-upload/base-file-upload.co
 
 @Component({
 	selector: 'lu-multi-file-upload',
-	standalone: true,
 	templateUrl: './multi-file-upload.component.html',
 	styleUrl: './multi-file-upload.component.scss',
 	encapsulation: ViewEncapsulation.None,

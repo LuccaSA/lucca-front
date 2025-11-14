@@ -3,7 +3,6 @@ import { Meta, StoryFn } from '@storybook/angular';
 
 @Component({
 	selector: 'lu-index-table-interactive-nested-selectable',
-	standalone: true,
 	templateUrl: './index-table-interactive-nested-selectable.stories.html',
 })
 class IndexTableInteractiveNestedSelectableStory {

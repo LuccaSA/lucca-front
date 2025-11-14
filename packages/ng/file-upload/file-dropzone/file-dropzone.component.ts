@@ -5,7 +5,6 @@ import { BaseFileUploadComponent } from '../base-file-upload/base-file-upload.co
 
 @Component({
 	selector: 'lu-file-dropzone',
-	standalone: true,
 	templateUrl: './file-dropzone.component.html',
 	styleUrl: './file-dropzone.component.scss',
 	encapsulation: ViewEncapsulation.None,

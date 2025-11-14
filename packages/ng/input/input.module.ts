@@ -1,5 +1,5 @@
 import { NgModule } from '@angular/core';
-import { LuInputClearerComponent } from './clearer/index';
+import { LuInputClearerComponent } from './clearer';
 import { LuInputDisplayerDirective } from './displayer/index';
 import { LuInputDirective } from './input.directive';
 

@@ -3,7 +3,6 @@ import { PORTAL_CONTEXT, PortalContent } from './portal-content';
 
 @Directive({
 	selector: '[luPortal]',
-	standalone: true,
 })
 export class PortalDirective<T = unknown> implements OnChanges, OnDestroy {
 	private viewContainerRef = inject(ViewContainerRef);

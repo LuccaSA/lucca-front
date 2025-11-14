@@ -3,7 +3,6 @@ import { LuOptionComparer } from '@lucca-front/ng/core-select';
 
 @Pipe({
 	name: 'luIsOptionSelected',
-	standalone: true,
 })
 export class LuIsOptionSelectedPipe implements PipeTransform {
 	transform<T>(option: T, comparer: LuOptionComparer<T>, selectedOption: T): boolean {

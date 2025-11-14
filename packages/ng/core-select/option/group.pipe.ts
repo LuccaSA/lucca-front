@@ -33,7 +33,6 @@ export function generateGroups<T, TGroup>(options: T[], selector: (option: T) =>
 
 @Pipe({
 	name: 'luOptionGroup',
-	standalone: true,
 })
 export class LuOptionGroupPipe<T, TGroup> implements PipeTransform {
 	public transform(options: T[], selector: (option: T) => TGroup): LuOptionGroup<T, TGroup>[];

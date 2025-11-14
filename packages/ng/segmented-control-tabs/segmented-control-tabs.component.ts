@@ -9,7 +9,6 @@ let nextId = 0;
 
 @Component({
 	selector: 'lu-segmented-control-tabs',
-	standalone: true,
 	templateUrl: './segmented-control-tabs.component.html',
 	styleUrl: './segmented-control-tabs.component.scss',
 	encapsulation: ViewEncapsulation.None,

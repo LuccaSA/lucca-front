@@ -5,7 +5,6 @@ import { LuCoreSelectEstablishment } from './models';
 
 @Component({
 	selector: 'lu-establishment-grouping',
-	standalone: true,
 	template: `{{ group.options[0].legalUnit.name }}`,
 })
 export class LuEstablishmentGroupingComponent {

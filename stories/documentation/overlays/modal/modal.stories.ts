@@ -41,7 +41,6 @@ import { ILuModalContent } from '@lucca-front/ng/modal';
 
 @Component({
 	selector: 'modal-content',
-	standalone: true,
 	template: '<p>General Kenobi</p>',
 })
 class ModalContentComponent implements ILuModalContent {
@@ -54,7 +53,6 @@ class ModalContentComponent implements ILuModalContent {
 
 @Component({
 	selector: 'modal-content',
-	standalone: true,
 	template: '<p>{{ message }}</p>',
 })
 class ModalContentComponent implements ILuModalContent {
@@ -65,7 +63,6 @@ class ModalContentComponent implements ILuModalContent {
 
 @Component({
 	selector: 'modal-content',
-	standalone: true,
 	template: '<p>General Kenobi</p>',
 })
 class ModalDynamicContentComponent implements ILuModalContent {
@@ -82,7 +79,6 @@ class ModalDynamicContentComponent implements ILuModalContent {
 
 @Component({
 	selector: 'modal-stories',
-	standalone: true,
 	template: `
 		<lu-toasts [sources]="[]" />
 		<button type="button" luButton (click)="openModal()">Open</button>
@@ -161,7 +157,6 @@ export interface MyModalData {
 
 @Component({
 	selector: 'modal-content',
-	standalone: true,
 	template: '<p>{{data.message}}</p>',
 })
 class MyModalComponent implements ILuModalContent {
@@ -235,7 +230,6 @@ ${generateMarkdownCodeBlock(
 	`
 @Component({
 	selector: 'modal-content',
-	standalone: true,
 	template: '<p>General Kenobi</p>',
 })
 class ModalDynamicContentComponent implements ILuModalContent {
