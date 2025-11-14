@@ -1,15 +1,15 @@
-import { Component, Input } from '@angular/core';
+import { Component, input } from '@angular/core';
 import { LuNumberPipe } from '@lucca-front/ng/number';
 import { Meta, StoryFn } from '@storybook/angular';
 
 @Component({
 	selector: 'precision-stories',
 	imports: [LuNumberPipe],
-	template: `<code [innerHTML]="value | luNumber: precision"></code>`,
+	template: `<code [innerHTML]="value() | luNumber: precision()"></code>`,
 })
 class PrecisionStory {
-	@Input() value: number;
-	@Input() precision: number;
+	value = input<number>();
+	precision = input<number>();
 }
 
 export default {
@@ -40,8 +40,8 @@ class StoriesModule {}
 	template: \`<code [innerHTML]="value | luNumber: precision"></code>\`,
 })
 class PrecisionStory {
-	@Input() value: number;
-	@Input() precision: number;
+	value = input<number>();
+	precision = input<number>();
 }
 `;
 export const Precision = template.bind({});

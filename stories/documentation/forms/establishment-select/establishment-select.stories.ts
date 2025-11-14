@@ -1,8 +1,8 @@
 import { provideHttpClient } from '@angular/common/http';
-import { Component, Input } from '@angular/core';
+import { Component, input } from '@angular/core';
 import { provideAnimations } from '@angular/platform-browser/animations';
 import { LuEstablishmentSelectInputComponent } from '@lucca-front/ng/establishment';
-import { Meta, StoryFn, applicationConfig } from '@storybook/angular';
+import { applicationConfig, Meta, StoryFn } from '@storybook/angular';
 @Component({
 	selector: 'establishment-select-stories',
 	imports: [LuEstablishmentSelectInputComponent],
@@ -12,13 +12,13 @@ import { Meta, StoryFn, applicationConfig } from '@storybook/angular';
 			<span class="textfield-label">Establishment Select</span>
 		</label>
 		<label class="textfield mod-inline">
-			<lu-establishment-select class="textfield-input" placeholder="Select an establishment" [multiple]="multiple" data-testid="lu-select-multiple" />
+			<lu-establishment-select class="textfield-input" placeholder="Select an establishment" [multiple]="multiple()" data-testid="lu-select-multiple" />
 			<span class="textfield-label">Establishment Multiple Select</span>
 		</label>
 	`,
 })
 class EstablishmentSelectStory {
-	@Input() multiple: boolean = true;
+	multiple = input<boolean>(true);
 }
 
 export default {
@@ -42,13 +42,13 @@ import { LuEstablishmentSelectInputComponent } from '@lucca-front/ng/establishme
 	imports: [LuEstablishmentSelectInputComponent],
 	template: \`
 	<label class="textfield">
-		<lu-establishment-select class="textfield-input" placeholder="Select an establishment" [multiple]="multiple" />
+		<lu-establishment-select class="textfield-input" placeholder="Select an establishment" [multiple]="multiple()" />
 		<span class="textfield-label">Establishment Multiple Select</span>
 	</label>
 	\`,
 })
 class EstablishmentSelectStory {
-	@Input() multiple: boolean;
+		multiple = input<boolean>(true);
 }`;
 
 Basic.parameters = {
