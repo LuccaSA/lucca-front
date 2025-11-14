@@ -11,8 +11,19 @@ import {
 
 import { Meta, moduleMetadata, StoryObj } from '@storybook/angular';
 
+interface DataTableDraggableStories {
+	draggable: boolean;
+}
+
 export default {
 	title: 'Documentation/Listings/Data table/Angular/Draggable',
+	argTypes: {
+		draggable: {
+			control: {
+				type: 'boolean',
+			},
+		},
+	},
 	decorators: [
 		moduleMetadata({
 			imports: [
@@ -28,7 +39,8 @@ export default {
 			],
 		}),
 	],
-	render: (args) => {
+	render: (args: DataTableDraggableStories) => {
+		const draggable = args.draggable ? ` draggable="true"` : '';
 		const lines = [
 			{ text: 'cell #1', header: 'header #1' },
 			{ text: 'cell #2', header: 'header #2' },
@@ -47,7 +59,7 @@ export default {
 			},
 			template: `<lu-data-table>
 	<thead luDataTableHead>
-		<tr luDataTableRow>
+		<tr luDataTableRow${draggable}>
 			<th luDataTableCell>Header</th>
 			<th luDataTableCell>Cell</th>
 		</tr>
@@ -68,4 +80,8 @@ export default {
 	},
 } as Meta;
 
-export const Draggable: StoryObj = {};
+export const Draggable: StoryObj = {
+	args: {
+		draggable: true,
+	},
+};
