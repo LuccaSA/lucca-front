@@ -1,3 +1,4 @@
+import { CdkDrag } from '@angular/cdk/drag-drop';
 import { booleanAttribute, Component, ElementRef, inject, input, model, ViewEncapsulation } from '@angular/core';
 import { FormsModule } from '@angular/forms';
 import { FormFieldComponent } from '@lucca-front/ng/form-field';
@@ -18,6 +19,7 @@ import { LU_DATA_TABLE_INSTANCE } from '../data-table.token';
 		'[class.dataTable-foot-row]': 'footRef !== null',
 		'[class.mod-selectable]': 'tableRef.selectable()',
 	},
+	hostDirectives: [CdkDrag],
 	imports: [CheckboxInputComponent, FormFieldComponent, FormsModule],
 })
 export class DataTableRowComponent {
