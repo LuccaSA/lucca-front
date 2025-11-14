@@ -1,3 +1,4 @@
+import { CdkDrag, CdkDragHandle } from '@angular/cdk/drag-drop';
 import { booleanAttribute, ChangeDetectionStrategy, Component, input, output, ViewEncapsulation } from '@angular/core';
 import { ClearComponent } from '@lucca-front/ng/clear';
 
@@ -8,18 +9,20 @@ import { ClearComponent } from '@lucca-front/ng/clear';
 	styleUrl: './sortable-list-item.component.scss',
 	changeDetection: ChangeDetectionStrategy.OnPush,
 	encapsulation: ViewEncapsulation.None,
-	imports: [ClearComponent],
+	imports: [ClearComponent, CdkDragHandle],
 	host: {
 		class: 'sortableList-item',
 		'[class.mod-clickable]': 'clickable()',
 		role: 'listitem',
 	},
+	hostDirectives: [CdkDrag],
 })
 export class SortableListItemComponent {
 	label = input.required<string>();
 	helperMessage = input<string>();
 	clickable = input(false, { transform: booleanAttribute });
 	clearable = input(true, { transform: booleanAttribute });
+	drag = input(false, { transform: booleanAttribute });
 
 	delete = output<void>();
 }
