@@ -18,7 +18,7 @@ import {
 } from '@lexical/markdown';
 import { registerRichText } from '@lexical/rich-text';
 import { RICH_TEXT_FORMATTER, RichTextFormatter } from '@lucca-front/ng/forms/rich-text-input';
-import { sanitize } from 'dompurify';
+import { sanitize } from 'isomorphic-dompurify';
 import { LexicalEditor } from 'lexical';
 
 export const DEFAULT_MARKDOWN_TRANSFORMERS: Transformer[] = [
@@ -54,7 +54,6 @@ export class MarkdownFormatter extends RichTextFormatter {
 		editor.update(() => {
 			$convertFromMarkdownString(sanitize(markdown ?? ''), this.#transformers, null, true);
 		});
-		$convertFromMarkdownString(markdown ?? '', this.#transformers);
 	}
 
 	override format(editor: LexicalEditor): string {
