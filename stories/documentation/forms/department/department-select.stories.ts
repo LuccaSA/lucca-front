@@ -79,13 +79,8 @@ class DepartmentStory {
 	filters = input<string[]>([]);
 	uniqueOperation = input<number>(null);
 }`;
-// Select.args = {
-// 	appInstanceId: 15,
-// 	operations: [1],
-// 	filters: ['isactive=false'],
-// };
+
 Select.parameters = {
-	// controls: { include: ['appInstanceId', 'operations', 'filters'] },
 	controls: { include: [] },
 	docs: {
 		source: {
