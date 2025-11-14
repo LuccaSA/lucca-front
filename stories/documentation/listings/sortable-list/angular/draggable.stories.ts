@@ -9,6 +9,7 @@ interface SortableListDraggableStories {
 	small: boolean;
 	clickable: boolean;
 	clearable: boolean;
+	draggable: boolean;
 }
 
 export default {
@@ -39,6 +40,11 @@ export default {
 				type: 'boolean',
 			},
 		},
+		draggable: {
+			control: {
+				type: 'boolean',
+			},
+		},
 	},
 	decorators: [
 		moduleMetadata({
@@ -49,13 +55,14 @@ export default {
 		const small = args.small ? ` small="true"` : '';
 		const clickable = args.clickable ? ` clickable` : '';
 		const clearable = args.clearable ? '' : ` clearable="false"`;
+		const draggable = args.draggable ? ` drag="true"` : '';
 		const label = ` label="${args.label}"`;
 		const helperMessage = args.helperMessage?.length ? ` helperMessage="${args.helperMessage}"` : '';
 		return {
 			template: cleanupTemplate(`<lu-sortable-list${small} cdkDropList>
-	<lu-sortable-list-item${label}${helperMessage}${clearable}${clickable}/>
-	<lu-sortable-list-item${label}${helperMessage}${clearable}${clickable}/>
-	<lu-sortable-list-item${label}${helperMessage}${clearable}${clickable}/>
+	<lu-sortable-list-item${label}${helperMessage}${clearable}${clickable}${draggable}/>
+	<lu-sortable-list-item${label}${helperMessage}${clearable}${clickable}${draggable}/>
+	<lu-sortable-list-item${label}${helperMessage}${clearable}${clickable}${draggable}/>
 </lu-sortable-list>`),
 		};
 	},
@@ -68,5 +75,6 @@ export const Basic = {
 		small: false,
 		clickable: false,
 		clearable: true,
+		draggable: true,
 	},
 };

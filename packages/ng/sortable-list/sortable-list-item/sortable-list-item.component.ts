@@ -22,6 +22,7 @@ export class SortableListItemComponent {
 	helperMessage = input<string>();
 	clickable = input(false, { transform: booleanAttribute });
 	clearable = input(true, { transform: booleanAttribute });
+	drag = input(false, { transform: booleanAttribute });
 
 	delete = output<void>();
 }
