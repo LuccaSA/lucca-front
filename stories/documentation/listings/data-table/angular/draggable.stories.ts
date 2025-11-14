@@ -56,7 +56,7 @@ export default {
 		${lines
 			.map(
 				(line) =>
-					`<tr luDataTableRow cdkDrag>
+					`<tr luDataTableRow>
 				<th luDataTableCell>${line.header}</th>
 				<td luDataTableCell>${line.text}</td>
 			</tr>`,
