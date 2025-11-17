@@ -1,7 +1,7 @@
-import { booleanAttribute, Component, computed, forwardRef, inject, input, numberAttribute, ViewEncapsulation } from '@angular/core';
+import { booleanAttribute, Component, computed, forwardRef, input, ViewEncapsulation } from '@angular/core';
 
-import { LU_DATA_TABLE_CELL_INSTANCE } from '../data-table-cell.token';
 import { BaseDataTableCell } from '../base-data-table-cell';
+import { LU_DATA_TABLE_CELL_INSTANCE } from '../data-table-cell.token';
 
 @Component({
 	// eslint-disable-next-line @angular-eslint/component-selector
