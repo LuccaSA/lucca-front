@@ -46,10 +46,10 @@ export class LuCoreSelectEstablishmentsDirective<T extends LuCoreSelectEstablish
 
 	protected initGrouping() {
 		this.#groupingService.useGrouping$.pipe(filter(Boolean), takeUntilDestroyed(this.#destroyRef)).subscribe(() => {
-			this.select.grouping = {
+			this.select.groupingSignal.set({
 				selector: (option) => option.legalUnitId,
 				content: LuEstablishmentGroupingComponent,
-			};
+			});
 		});
 	}
 

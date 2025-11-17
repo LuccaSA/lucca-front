@@ -62,7 +62,7 @@ export class LuMultiSelectPanelComponent<T> implements AfterViewInit, CoreSelect
 	intl = getIntl(LU_MULTI_SELECT_TRANSLATIONS);
 
 	options$ = this.selectInput.options$;
-	grouping = this.selectInput.grouping;
+	grouping = this.selectInput.groupingSignal;
 	treeGenerator = this.selectInput.treeGenerator;
 	loading$ = this.selectInput.loading$;
 	searchable = this.selectInput.searchable;
