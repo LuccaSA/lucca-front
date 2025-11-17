@@ -1,3 +1,4 @@
+import { CdkDrag, CdkDragDrop, CdkDropList, moveItemInArray } from '@angular/cdk/drag-drop';
 import { Component } from '@angular/core';
 import {
 	DataTableBodyComponent,
@@ -12,10 +13,30 @@ import { Meta, StoryFn } from '@storybook/angular';
 
 @Component({
 	selector: 'data-table-draggable-stories',
-	imports: [DataTableComponent, DataTableHeadComponent, DataTableBodyComponent, DataTableFootComponent, DataTableRowComponent, DataTableRowCellComponent, DataTableRowCellHeaderComponent],
+	imports: [
+		DataTableComponent,
+		DataTableHeadComponent,
+		DataTableBodyComponent,
+		DataTableFootComponent,
+		DataTableRowComponent,
+		DataTableRowCellComponent,
+		DataTableRowCellHeaderComponent,
+		CdkDropList,
+		CdkDrag,
+	],
 	templateUrl: './draggable.stories.html',
 })
-class DataTableDraggableStory {}
+class DataTableDraggableStory {
+	listItem: Array<{ id: number; header: string; cell: string }> = [
+		{ id: 1, header: 'Header 1', cell: 'cell 1' },
+		{ id: 2, header: 'Header 2', cell: 'cell 2' },
+		{ id: 3, header: 'Header 3', cell: 'cell 3' },
+	];
+
+	drop(event: CdkDragDrop<string[]>) {
+		moveItemInArray(this.listItem, event.previousIndex, event.currentIndex);
+	}
+}
 
 export default {
 	title: 'Documentation/Listings/Data table/Angular/Draggable',
