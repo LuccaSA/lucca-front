@@ -60,7 +60,7 @@ export class LuSelectPanelComponent<T> implements AfterViewInit, CoreSelectPanel
 	public intl = getIntl(LU_SIMPLE_SELECT_TRANSLATIONS);
 
 	options$ = this.selectInput.options$;
-	grouping = this.selectInput.grouping;
+	grouping = this.selectInput.groupingSignal;
 	treeGenerator = this.selectInput.treeGenerator;
 	loading$ = this.selectInput.loading$;
 	searchable = this.selectInput.searchable;

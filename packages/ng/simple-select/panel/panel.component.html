@@ -14,6 +14,7 @@
 				</div>
 			}
 			<div role="listbox">
+				@let grouping = this.grouping();
 				@if (grouping && ctx.groupTemplateLocation === "group-header") {
 					@for (group of ctx.options | luOptionGroup: grouping.selector; track trackGroupsBy(groupIndex, group); let groupIndex = $index) {
 						<div class="lu-picker-content-option-group" role="group" [attr.aria-labelledby]="selectId + '-group-' + group.key">
