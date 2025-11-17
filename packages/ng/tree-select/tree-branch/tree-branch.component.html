@@ -13,17 +13,21 @@
 	(onlyChildren)="selectOnlyChildren(branch())"
 	[hasChildren]="!simpleMode() && branch().children?.length > 0"
 />
-@for (child of branch().children; track $index) {
-	<lu-tree-branch
-		[depth]="depth() + 1"
-		[branch]="child"
-		[optionTpl]="optionTpl()"
-		[optionIndex]="optionIndex() + '-' + $index"
-		[optionComparer]="optionComparer()"
-		[selectedOptions]="selectedOptions()"
-		[simpleMode]="simpleMode()"
-		(toggleOne)="toggleOne.emit($event)"
-		(selectMany)="selectMany.emit($event)"
-		(unselectMany)="unselectMany.emit($event)"
-	/>
+@if (branch().children.length > 0) {
+	<ng-container treeitem>
+		@for (child of branch().children; track $index) {
+			<lu-tree-branch
+				[depth]="depth() + 1"
+				[branch]="child"
+				[optionTpl]="optionTpl()"
+				[optionIndex]="optionIndex() + '-' + $index"
+				[optionComparer]="optionComparer()"
+				[selectedOptions]="selectedOptions()"
+				[simpleMode]="simpleMode()"
+				(toggleOne)="toggleOne.emit($event)"
+				(selectMany)="selectMany.emit($event)"
+				(unselectMany)="unselectMany.emit($event)"
+			/>
+		}
+	</ng-container>
 }

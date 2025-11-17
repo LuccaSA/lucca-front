@@ -49,7 +49,7 @@ export class OptionComponent {
 
 	groupId = `group${nextId++}`;
 
-	treeitemContent = contentChild(Treeitem);
+	treeitemContent = contentChild(Treeitem, { descendants: true });
 
 	level: number = (this.#parentOptionRef?.level || 0) + 1;
 }

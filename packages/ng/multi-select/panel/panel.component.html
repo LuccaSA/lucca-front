@@ -6,54 +6,25 @@
 	};
 	as ctx
 ) {
-	<div class="lu-picker-panel lu-option-picker-panel mod-multiple" data-testid="dialog-panel">
-		<div
-			class="lu-picker-content"
-			[class.is-loading]="loading$ | async"
-			[class.is-filled]="ctx.options.length > 0"
-			tabindex="0"
-			role="listbox"
-			aria-multiselectable="true"
-			(scroll)="onScroll($event)"
-		>
+	<div class="lu-picker-panel lu-option-picker-panel" cdkTrapFocus>
+		<div class="lu-picker-content" [class.is-loading]="loading$ | async" (scroll)="onScroll($event)">
 			@if (selectInput.panelHeaderTpl(); as tpl) {
 				<div>
 					<ng-container *luPortal="tpl" />
 				</div>
 			}
-			<div class="lu-picker-content-option">
+			@let loading = loading$ | async;
+			@let empty = !loading && ctx.options.length === 0;
+			@let listboxState = loading ? "loading" : empty ? "empty" : null;
+			@let statusMsg = { loading: intl.loading, empty: intl.emptyResults }[listboxState];
+			<lu-listbox [state]="listboxState" [statusMsg]="statusMsg" [tree]="!!treeGenerator" multiple>
 				@if (grouping && ctx.groupTemplateLocation === "group-header") {
 					@for (group of ctx.options | luOptionGroup: grouping.selector; track trackGroupsBy(groupIndex, group); let groupIndex = $index) {
-						<div class="lu-picker-content-group" role="group" attr.aria-labelledby="lu-select-{{ selectId }}-group-{{ groupIndex }}">
-							@let groupCtx = group.options | luOptionsGroupContext: selectedOptions : optionComparer;
-							<div
-								luCoreSelectPanelElement
-								elementId="lu-select-{{ selectId }}-group-{{ groupIndex }}"
-								class="lu-picker-content-option-group-title"
-								role="presentation"
-								(selected)="toggleOptions(groupCtx.notSelectedOptions, group.options)"
-							>
-								<span #groupingTitleRef>
-									<ng-container *luPortal="grouping.content; context: { $implicit: group }" />
-								</span>
-
-								@if (someGroupOptionEnabled()(group.options)) {
-									<button
-										type="button"
-										class="link"
-										(click)="toggleOptions(groupCtx.notSelectedOptions, group.options)"
-										[id]="selectId + '-group-' + group.key"
-									>
-										<span class="pr-u-mask">{{ groupingTitleRef.innerText }}&nbsp;– </span
-										>{{ groupCtx.isGroupSelected ? intl.unselectAll : intl.selectAll }}
-									</button>
-								}
-							</div>
-							<ng-template
-								[ngTemplateOutlet]="optionsList"
-								[ngTemplateOutletContext]="{ $implicit: group.options, groupIndex: groupIndex }"
-							/>
-						</div>
+						<lu-listbox-option group> <ng-container *luPortal="grouping.content; context: { $implicit: group }" /> </lu-listbox-option>
+						<ng-template
+							[ngTemplateOutlet]="optionsList"
+							[ngTemplateOutletContext]="{ $implicit: group.options, groupIndex: groupIndex }"
+						/>
 					}
 				}
 				@if (!grouping || ctx.groupTemplateLocation !== "group-header") {
@@ -65,8 +36,8 @@
 							<lu-tree-branch
 								[branch]="branch"
 								[optionTpl]="optionTpl()"
-								[selectedOptions]="selectedOptions"
 								[optionComparer]="optionComparer"
+								[selectedOptions]="selectedOptions"
 								[optionIndex]="index"
 								(toggleOne)="toggleOption($event)"
 								(selectMany)="toggleOptions($event, [])"
@@ -76,45 +47,66 @@
 					} @else {
 						@for (option of options; track trackOptionsBy(index, option); let index = $index) {
 							<lu-select-option
-								luCoreSelectPanelElement
 								[option]="option"
 								[optionTpl]="optionTpl()"
 								[optionIndex]="index"
-								[grouping]="ctx.groupTemplateLocation === 'option' ? grouping : undefined"
-								[groupIndex]="groupIndex"
 								[groupTemplateLocation]="ctx.groupTemplateLocation"
-								[scrollIntoViewOptions]="{ block: 'nearest' }"
+								[groupIndex]="groupIndex"
+								[grouping]="grouping"
+								[scrollIntoViewOptions]="{ block: 'center' }"
 								[isSelected]="option | luIsOptionSelected: optionComparer : selectedOptions"
+								[class.withAddOption]="ctx.shouldDisplayAddOption"
 								(selected)="toggleOption(option)"
 								(click)="toggleOption(option)"
-								[class.withAddOption]="ctx.shouldDisplayAddOption"
 							/>
 						}
 					}
 				</ng-template>
-				@if (ctx.options.length === 0 && (loading$ | async) === false) {
-					<div class="lu-picker-content-option-emptyState">
-						{{ intl.emptyResults }}
+				@if (ctx.shouldDisplayAddOption) {
+					<lu-listbox-option (click)="selectInput.emitAddOption()" (selected)="selectInput.emitAddOption()" add luCoreSelectPanelElement>
+						<ng-container *luPortal="selectInput.addOptionLabel" />
+					</lu-listbox-option>
+				}
+			</lu-listbox>
+		</div>
+	</div>
+
+	<div class="lu-picker-panel lu-option-picker-panel mod-multiple" data-testid="dialog-panel">
+		<lu-listbox [state]="listboxState" [statusMsg]="statusMsg" [tree]="!!treeGenerator" multiple>
+			@if (grouping && ctx.groupTemplateLocation === "group-header") {
+				@for (group of ctx.options | luOptionGroup: grouping.selector; track trackGroupsBy(groupIndex, group); let groupIndex = $index) {
+					<div class="lu-picker-content-group" role="group" attr.aria-labelledby="lu-select-{{ selectId }}-group-{{ groupIndex }}">
+						@let groupCtx = group.options | luOptionsGroupContext: selectedOptions : optionComparer;
+						<div
+							luCoreSelectPanelElement
+							elementId="lu-select-{{ selectId }}-group-{{ groupIndex }}"
+							class="lu-picker-content-option-group-title"
+							role="presentation"
+							(selected)="toggleOptions(groupCtx.notSelectedOptions, group.options)"
+						>
+							<span #groupingTitleRef>
+								<ng-container *luPortal="grouping.content; context: { $implicit: group }" />
+							</span>
+
+							@if (someGroupOptionEnabled()(group.options)) {
+								<button
+									type="button"
+									class="link"
+									(click)="toggleOptions(groupCtx.notSelectedOptions, group.options)"
+									[id]="selectId + '-group-' + group.key"
+								>
+									<span class="pr-u-mask">{{ groupingTitleRef.innerText }}&nbsp;– </span
+									>{{ groupCtx.isGroupSelected ? intl.unselectAll : intl.selectAll }}
+								</button>
+							}
+						</div>
+						<ng-template
+							[ngTemplateOutlet]="optionsList"
+							[ngTemplateOutletContext]="{ $implicit: group.options, groupIndex: groupIndex }"
+						/>
 					</div>
 				}
-			</div>
-			@if (loading$ | async) {
-				<div class="lu-picker-content-loading">
-					<div class="loading">{{ intl.loading }}</div>
-				</div>
 			}
-			@if (ctx.shouldDisplayAddOption) {
-				<div
-					class="addOption palette-product"
-					(click)="selectInput.emitAddOption()"
-					(selected)="selectInput.emitAddOption()"
-					elementId="picker-content-add"
-					luCoreSelectPanelElement
-				>
-					<lu-icon icon="mathsPlus" />
-					<ng-container *luPortal="selectInput.addOptionLabel" />
-				</div>
-			}
-		</div>
+		</lu-listbox>
 	</div>
 }

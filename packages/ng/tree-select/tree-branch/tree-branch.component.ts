@@ -1,10 +1,11 @@
 import { booleanAttribute, ChangeDetectionStrategy, Component, inject, input, output, TemplateRef, Type, viewChild, ViewEncapsulation } from '@angular/core';
 import { ALuSelectInputComponent, LuIsOptionSelectedPipe, LuOptionComparer, LuOptionContext, TreeNode, ɵCoreSelectPanelElement, ɵLuOptionComponent } from '@lucca-front/ng/core-select';
 import { takeUntilDestroyed } from '@angular/core/rxjs-interop';
+import { Treeitem } from '../../listbox/option/option.component';
 
 @Component({
 	selector: 'lu-tree-branch',
-	imports: [ɵCoreSelectPanelElement, LuIsOptionSelectedPipe, ɵLuOptionComponent],
+	imports: [ɵCoreSelectPanelElement, LuIsOptionSelectedPipe, ɵLuOptionComponent, Treeitem],
 	templateUrl: './tree-branch.component.html',
 	styleUrl: './tree-branch.component.scss',
 	encapsulation: ViewEncapsulation.None,

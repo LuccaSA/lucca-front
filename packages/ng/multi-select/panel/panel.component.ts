@@ -17,7 +17,6 @@ import {
 	ɵLuOptionComponent,
 	ɵLuOptionGroupPipe,
 } from '@lucca-front/ng/core-select';
-import { IconComponent } from '@lucca-front/ng/icon';
 import { TreeBranchComponent } from '@lucca-front/ng/tree-select';
 import { EMPTY } from 'rxjs';
 import { LuMultiSelectInputComponent } from '../input';
@@ -25,6 +24,7 @@ import { LuMultiSelectPanelRef } from '../input/panel.model';
 import { MULTI_SELECT_INPUT } from '../select.model';
 import { LU_MULTI_SELECT_TRANSLATIONS } from '../select.translate';
 import { LuOptionsGroupContextPipe } from './option-group-context.pipe';
+import { ListboxComponent, OptionComponent } from '@lucca-front/ng/listbox';
 
 @Component({
 	selector: 'lu-select-panel',
@@ -43,9 +43,10 @@ import { LuOptionsGroupContextPipe } from './option-group-context.pipe';
 		PortalDirective,
 		LuOptionsGroupContextPipe,
 		ɵCoreSelectPanelElement,
-		IconComponent,
 		TreeDisplayPipe,
 		TreeBranchComponent,
+		ListboxComponent,
+		OptionComponent,
 	],
 	providers: [
 		CoreSelectKeyManager,

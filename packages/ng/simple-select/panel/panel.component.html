@@ -13,18 +13,18 @@
 					<ng-container *luPortal="tpl" />
 				</div>
 			}
-			<lu-listbox>
+			@let loading = loading$ | async;
+			@let empty = !loading && ctx.options.length === 0;
+			@let listboxState = loading ? "loading" : empty ? "empty" : null;
+			@let statusMsg = { loading: intl.loading, empty: intl.emptyResults }[listboxState];
+			<lu-listbox [state]="listboxState" [statusMsg]="statusMsg" [tree]="!!treeGenerator">
 				@if (grouping && ctx.groupTemplateLocation === "group-header") {
 					@for (group of ctx.options | luOptionGroup: grouping.selector; track trackGroupsBy(groupIndex, group); let groupIndex = $index) {
-						<div class="lu-picker-content-option-group" role="group" [attr.aria-labelledby]="selectId + '-group-' + group.key">
-							<span class="lu-picker-content-option-group-title" role="presentation" [id]="selectId + '-group-' + group.key">
-								<ng-container *luPortal="grouping.content; context: { $implicit: group }" />
-							</span>
-							<ng-template
-								[ngTemplateOutlet]="optionsList"
-								[ngTemplateOutletContext]="{ $implicit: group.options, groupIndex: groupIndex }"
-							/>
-						</div>
+						<lu-listbox-option group> <ng-container *luPortal="grouping.content; context: { $implicit: group }" /> </lu-listbox-option>
+						<ng-template
+							[ngTemplateOutlet]="optionsList"
+							[ngTemplateOutletContext]="{ $implicit: group.options, groupIndex: groupIndex }"
+						/>
 					}
 				}
 				@if (!grouping || ctx.groupTemplateLocation !== "group-header") {
@@ -61,29 +61,12 @@
 						}
 					}
 				</ng-template>
-				@if (ctx.options.length === 0 && (loading$ | async) === false) {
-					<div class="lu-picker-content-option-emptyState">
-						{{ intl.emptyResults }}
-					</div>
+				@if (ctx.shouldDisplayAddOption) {
+					<lu-listbox-option (click)="selectInput.emitAddOption()" (selected)="selectInput.emitAddOption()" add luCoreSelectPanelElement>
+						<ng-container *luPortal="selectInput.addOptionLabel" />
+					</lu-listbox-option>
 				}
 			</lu-listbox>
-			@if (loading$ | async) {
-				<div class="lu-picker-content-loading">
-					<div class="loading">{{ intl.loading }}</div>
-				</div>
-			}
-			@if (ctx.shouldDisplayAddOption) {
-				<div
-					class="addOption palette-product"
-					(click)="selectInput.emitAddOption()"
-					(selected)="selectInput.emitAddOption()"
-					elementId="picker-content-add"
-					luCoreSelectPanelElement
-				>
-					<lu-icon icon="mathsPlus" />
-					<ng-container *luPortal="selectInput.addOptionLabel" />
-				</div>
-			}
 		</div>
 	</div>
 }
