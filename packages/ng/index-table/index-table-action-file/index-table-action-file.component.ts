@@ -9,4 +9,4 @@ import { Component, ViewEncapsulation } from '@angular/core';
 		class: 'indexTable-body-row-cell-link, pr-u-mask',
 	},
 })
-export class IndexTableActionInputComponent {}
+export class IndexTableActionFileComponent {}

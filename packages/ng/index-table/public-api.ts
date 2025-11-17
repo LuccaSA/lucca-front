@@ -1,3 +1,4 @@
+export * from './index-table-action-file/index-table-action-file.component';
 export * from './index-table-action/index-table-action.component';
 export * from './index-table-body/index-table-body.component';
 export * from './index-table-cell-header/index-table-cell-header.component';

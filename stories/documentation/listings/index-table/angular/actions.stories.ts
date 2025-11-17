@@ -21,7 +21,10 @@ import { LuUserPopoverComponent, LuUserPopoverDirective, provideLuUserPopover } 
 import { applicationConfig, Meta, moduleMetadata, StoryFn } from '@storybook/angular';
 import { HiddenArgType } from 'stories/helpers/common-arg-types';
 
-interface BasicStory {}
+interface BasicStory {
+	layoutFixed: boolean;
+	dropdown: boolean;
+}
 
 export default {
 	title: 'Documentation/Listings/Index Table/Angular/Actions',
@@ -60,71 +63,11 @@ export default {
 } as Meta;
 
 function getTemplate(args: BasicStory): string {
-	return `<lu-index-table>
-	<thead luIndexTableHead>
-		<tr luIndexTableRow>
-			<th luIndexTableCell>Label</th>
-			<th luIndexTableCell>Label</th>
-			<th luIndexTableCell actions>Label</th>
-		</tr>
-	</thead>
-	<tbody luIndexTableBody>
-		<tr luIndexTableRow>
-			<th luIndexTableCell><a href="#" luIndexTableAction>Content <code class="code">a</code></a></th>
-			<td luIndexTableCell>Content</td>
-			<td luIndexTableCell align="end">
-				<button type="button" luButton [luDropdown]="dropdownSample">
-					<lu-icon icon="ellipsis" alt="Plus d’options" />
-				</button>
-			</td>
-		</tr>
-		<tr luIndexTableRow>
-			<th luIndexTableCell><a href="#" luIndexTableAction>Content <code class="code">a</code></a></th>
-			<td luIndexTableCell>Content</td>
-			<td luIndexTableCell>
-				<button type="button" luButton luTooltip="Supprimer" luTooltipOnlyForDisplay>
-					<lu-icon icon="trash" alt="Supprimer" />
-				</button>
-				<button type="button" luButton luTooltip="Modifier" luTooltipOnlyForDisplay>
-					<lu-icon icon="officePen" alt="Modifier" />
-				</button>
-			</td>
-		</tr>
-	</tbody>
-</lu-index-table>
-
-<lu-index-table layoutFixed>
-	<thead luIndexTableHead>
-		<tr luIndexTableRow>
-			<th luIndexTableCell>Label</th>
-			<th luIndexTableCell>Label</th>
-			<th luIndexTableCell actions size="4.5">Label</th>
-		</tr>
-	</thead>
-	<tbody luIndexTableBody>
-		<tr luIndexTableRow>
-			<th luIndexTableCell><a href="#" luIndexTableAction>Content <code class="code">a</code></a></th>
-			<td luIndexTableCell>Content</td>
-			<td luIndexTableCell align="end">
-				<button type="button" luButton [luDropdown]="dropdownSample">
-					<lu-icon icon="ellipsis" alt="Plus d’options" />
-				</button>
-			</td>
-		</tr>
-		<tr luIndexTableRow>
-			<th luIndexTableCell><a href="#" luIndexTableAction>Content <code class="code">a</code></a></th>
-			<td luIndexTableCell>Content</td>
-			<td luIndexTableCell>
-				<button type="button" luButton luTooltip="Supprimer" luTooltipOnlyForDisplay>
-					<lu-icon icon="trash" alt="Supprimer" />
-				</button>
-				<button type="button" luButton luTooltip="Modifier" luTooltipOnlyForDisplay>
-					<lu-icon icon="officePen" alt="Modifier" />
-				</button>
-			</td>
-		</tr>
-	</tbody>
-</lu-index-table>
+	const layoutFixedAttr = args.layoutFixed ? ` layoutFixed` : ``;
+	const value = args.dropdown ? `2.5` : `4.5`;
+	const sizeAttr = args.layoutFixed ? ` size="${value}"` : ``;
+	const dropdownTpl = args.dropdown
+		? `
 
 <ng-template #dropdownSample>
 	<lu-dropdown-menu>
@@ -141,21 +84,47 @@ function getTemplate(args: BasicStory): string {
 		</button>
 		</lu-dropdown-item>
 	</lu-dropdown-menu>
-</ng-template>
+</ng-template>`
+		: ``;
+	const actionsTpl = args.dropdown
+		? `<button type="button" luButton [luDropdown]="dropdownSample">
+					<lu-icon icon="ellipsis" alt="Plus d’options" />
+				</button>`
+		: `<button type="button" luButton luTooltip="Supprimer" luTooltipOnlyForDisplay>
+					<lu-icon icon="trash" alt="Supprimer" />
+				</button>
+				<button type="button" luButton luTooltip="Modifier" luTooltipOnlyForDisplay>
+					<lu-icon icon="officePen" alt="Modifier" />
+				</button>`;
+	return `<lu-index-table${layoutFixedAttr}>
+	<thead luIndexTableHead>
+		<tr luIndexTableRow>
+			<th luIndexTableCell>Label</th>
+			<th luIndexTableCell>Label</th>
+			<th luIndexTableCell actions${sizeAttr}>Label</th>
+		</tr>
+	</thead>
+	<tbody luIndexTableBody>
+		<tr luIndexTableRow>
+			<th luIndexTableCell><a href="#" luIndexTableAction>Content</a></th>
+			<td luIndexTableCell>Content Content Content</td>
+			<td luIndexTableCell align="end">
+				${actionsTpl}
+			</td>
+		</tr>
+	</tbody>
+</lu-index-table>${dropdownTpl}
 `;
 }
 
 const Template: StoryFn<BasicStory> = (args) => ({
 	props: args,
 	template: getTemplate(args),
-	styles: [
-		`
-		.indexTableWrapper + .indexTableWrapper {
-			margin-block-start: var(--pr-t-spacings-200);
-		}
-		`,
-	],
 });
 
 export const Basic = Template.bind({});
-Basic.args = { bob };
+Basic.args = {
+	bob,
+	layoutFixed: false,
+	dropdown: false,
+};
