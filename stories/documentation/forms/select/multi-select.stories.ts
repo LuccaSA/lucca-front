@@ -10,6 +10,7 @@ import {
 	LuOptionDirective,
 	LuOptionGroupDirective,
 	TreeGroupingFn,
+	ɵLuOptionOutletDirective,
 } from '@lucca-front/ng/core-select';
 import { LuCoreSelectApiV3Directive, LuCoreSelectApiV4Directive } from '@lucca-front/ng/core-select/api';
 import { LuCoreSelectDepartmentsDirective } from '@lucca-front/ng/core-select/department';
@@ -19,6 +20,7 @@ import { LuCoreSelectUsersDirective, provideCoreSelectCurrentUserId } from '@luc
 import {
 	LuMultiDisplayerDirective,
 	LuMultiSelectCounterDisplayerComponent,
+	LuMultiSelectDefaultDisplayerComponent,
 	LuMultiSelectDisplayerInputDirective,
 	LuMultiSelectInputComponent,
 	LuMultiSelection,
@@ -295,6 +297,44 @@ export const WithMultiDisplayer = generateStory({
 	},
 	storyPartial: {
 		args: {
+			selectedLegumes: [],
+			keepSearchAfterSelection: false,
+		},
+	},
+});
+
+export const AllAsDefaultValue = generateStory({
+	name: 'All as default value',
+	description:
+		"Il est possible de personnaliser le contenu de la valeur sélectionnée en utilisant la directive `luMultiDisplayer`. Le *template* prend le tableau contenant l'ensemble des valeurs sélectionnées.",
+	template: `<lu-multi-select
+	#selectRef
+	[clearable]="clearable"
+	[loading]="loading"
+	[(ngModel)]="selectedLegumes"
+	placeholder="Placeholder..."
+	[options]="legumes | filterLegumes:clue"
+	[keepSearchAfterSelection]="keepSearchAfterSelection"
+	(clueChange)="clue = $event"
+>
+		<ng-container *luMultiDisplayer="let values; select: selectRef">
+		@if (values.length === 0) {
+		<div class="multipleSelect-displayer mod-filter">
+			<div class="multipleSelect-displayer-filter">
+				All departments
+			</div>
+		</div>
+		} @else {
+			<ng-container *luOptionOutlet="valuesTpl; value: values || []" />
+		}
+	</ng-container>
+</lu-multi-select>`,
+	neededImports: {
+		'@lucca-front/ng/multi-select': ['LuMultiSelectInputComponent', 'LuMultiDisplayerDirective', 'ɵLuOptionOutletDirective', 'MultiSelectDisplayerInputDirective'],
+	},
+	storyPartial: {
+		args: {
+			valuesTpl: LuMultiSelectDefaultDisplayerComponent,
 			selectedLegumes: [],
 			keepSearchAfterSelection: false,
 		},
@@ -767,6 +807,7 @@ const meta: Meta<LuMultiSelectInputStoryComponent> = {
 				SortLegumesPipe,
 				LuMultiSelectInputComponent,
 				LuMultiDisplayerDirective,
+				ɵLuOptionOutletDirective,
 				LuMultiSelectWithSelectAllDirective,
 				LuOptionDirective,
 				LuOptionGroupDirective,
