@@ -1,4 +1,4 @@
-import { CdkDrag, CdkDragHandle } from '@angular/cdk/drag-drop';
+import { CdkDragHandle } from '@angular/cdk/drag-drop';
 import { booleanAttribute, ChangeDetectionStrategy, Component, input, output, ViewEncapsulation } from '@angular/core';
 import { ClearComponent } from '@lucca-front/ng/clear';
 
@@ -15,7 +15,6 @@ import { ClearComponent } from '@lucca-front/ng/clear';
 		'[class.mod-clickable]': 'clickable()',
 		role: 'listitem',
 	},
-	hostDirectives: [CdkDrag],
 })
 export class SortableListItemComponent {
 	label = input.required<string>();

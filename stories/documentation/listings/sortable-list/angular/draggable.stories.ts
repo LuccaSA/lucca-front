@@ -1,80 +1,102 @@
-import { CdkDrag, CdkDropList } from '@angular/cdk/drag-drop';
+import { CdkDrag, CdkDragDrop, CdkDropList, moveItemInArray } from '@angular/cdk/drag-drop';
+import { Component, input } from '@angular/core';
 import { SortableListComponent, SortableListItemComponent } from '@lucca-front/ng/sortable-list';
-import { Meta, moduleMetadata } from '@storybook/angular';
-import { cleanupTemplate } from 'stories/helpers/stories';
+import { Meta, StoryFn } from '@storybook/angular';
 
-interface SortableListDraggableStories {
-	label: string;
-	helperMessage: string;
-	small: boolean;
-	clickable: boolean;
-	clearable: boolean;
-	draggable: boolean;
+@Component({
+	selector: 'sortable-list-draggable-stories',
+	imports: [SortableListComponent, SortableListItemComponent, CdkDropList, CdkDrag],
+	templateUrl: './draggable.stories.html',
+})
+class SortableListDraggableStory {
+	small = input<boolean>(false);
+	clickable = input<boolean>(false);
+	clearable = input<boolean>(false);
+
+	listItem: Array<{ id: number; label: string; helperMessage: string }> = [
+		{ id: 1, label: 'Label 1', helperMessage: 'help 1' },
+		{ id: 2, label: 'Label 2', helperMessage: 'help 2' },
+		{ id: 3, label: 'Label 3', helperMessage: 'help 3' },
+	];
+
+	drop(event: CdkDragDrop<string[]>) {
+		moveItemInArray(this.listItem, event.previousIndex, event.currentIndex);
+	}
 }
 
 export default {
 	title: 'Documentation/Listings/Sortable List/Angular/Draggable',
-	argsTyps: {
-		label: {
-			control: {
-				type: 'text',
-			},
-		},
-		helperMessage: {
-			control: {
-				type: 'text',
-			},
-		},
+	component: SortableListDraggableStory,
+	argTypes: {
 		small: {
-			control: {
-				type: 'boolean',
-			},
+			control: 'boolean',
 		},
 		clickable: {
-			control: {
-				type: 'boolean',
-			},
+			control: 'boolean',
 		},
 		clearable: {
-			control: {
-				type: 'boolean',
-			},
+			control: 'boolean',
 		},
-		draggable: {
-			control: {
-				type: 'boolean',
-			},
-		},
-	},
-	decorators: [
-		moduleMetadata({
-			imports: [SortableListComponent, SortableListItemComponent, CdkDropList, CdkDrag],
-		}),
-	],
-	render: (args: SortableListDraggableStories) => {
-		const small = args.small ? ` small="true"` : '';
-		const clickable = args.clickable ? ` clickable` : '';
-		const clearable = args.clearable ? '' : ` clearable="false"`;
-		const draggable = args.draggable ? ` drag="true"` : '';
-		const label = ` label="${args.label}"`;
-		const helperMessage = args.helperMessage?.length ? ` helperMessage="${args.helperMessage}"` : '';
-		return {
-			template: cleanupTemplate(`<lu-sortable-list${small} cdkDropList>
-	<lu-sortable-list-item${label}${helperMessage}${clearable}${clickable}${draggable}/>
-	<lu-sortable-list-item${label}${helperMessage}${clearable}${clickable}${draggable}/>
-	<lu-sortable-list-item${label}${helperMessage}${clearable}${clickable}${draggable}/>
-</lu-sortable-list>`),
-		};
 	},
 } as Meta;
 
-export const Basic = {
-	args: {
-		label: 'Label',
-		helperMessage: 'Helper message',
-		small: false,
-		clickable: false,
-		clearable: true,
-		draggable: true,
+const template: StoryFn<SortableListDraggableStory> = (args) => ({
+	props: args,
+});
+
+export const Basic = template.bind({});
+Basic.args = {
+	small: false,
+	clickable: false,
+	clearable: false,
+};
+
+const code = `
+import { CdkDrag, CdkDragDrop, CdkDropList, moveItemInArray } from '@angular/cdk/drag-drop';
+import { SortableListComponent, SortableListItemComponent } from '@lucca-front/ng/sortable-list';
+
+@component({
+	selector: 'sortable-list-draggable-stories',
+	imports: [SortableListComponent, SortableListItemComponent, CdkDropList, CdkDrag],
+	template: \`
+	<lu-sortable-list cdkDropList (cdkDropListDropped)="drop($event)" [small]="small()">
+		@for (item of listItem; track $index) {
+			<lu-sortable-list-item
+				[label]="item.label"
+				[helperMessage]="item.helperMessage"
+				[clearable]="clearable()"
+				[clickable]="clickable()"
+				cdkDrag
+			/>
+		}
+	</lu-sortable-list>
+	\`,
+})
+class SortableListDraggableStory {
+	small = input<boolean>(false);
+	clickable = input<boolean>(false);
+	clearable = input<boolean>(false);
+
+	/* Your Api List */
+	listItem: Array<{ id: number; label: string; helperMessage: string }> = [
+		{ id: 1, label: 'Label 1', helperMessage: 'help 1' },
+		{ id: 2, label: 'Label 2', helperMessage: 'help 2' },
+		{ id: 3, label: 'Label 3', helperMessage: 'help 3' },
+	];
+
+	/* Handle moving item in list */
+	drop(event: CdkDragDrop<string[]>) {
+		moveItemInArray(this.listItem, event.previousIndex, event.currentIndex);
+	}
+}
+`;
+
+Basic.parameters = {
+	docs: {
+		source: {
+			language: 'ts',
+			type: 'code',
+			code,
+		},
 	},
 };

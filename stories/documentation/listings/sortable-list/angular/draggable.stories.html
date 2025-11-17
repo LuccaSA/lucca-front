@@ -1,0 +1,11 @@
+<lu-sortable-list cdkDropList (cdkDropListDropped)="drop($event)" [small]="small()">
+	@for (item of listItem; track $index) {
+		<lu-sortable-list-item
+			[label]="item.label"
+			[helperMessage]="item.helperMessage"
+			[clearable]="clearable()"
+			[clickable]="clickable()"
+			cdkDrag
+		/>
+	}
+</lu-sortable-list>
