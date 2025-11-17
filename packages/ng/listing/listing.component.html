@@ -11,17 +11,31 @@
 		<ng-container *ngTemplateOutlet="content" />
 	</ol>
 } @else {
-	<ul
-		class="listing"
-		[class.mod-hideFirstItems]="hideFirstItems()"
-		[class.mod-inline]="inline()"
-		[class.mod-icons]="icons()"
-		[class.mod-checklist]="checklist()"
-		[class]="paletteClass"
-		[class.mod-divider]="divider()"
-	>
-		<ng-container *ngTemplateOutlet="content" />
-	</ul>
+	@if (descriptionList()) {
+		<dl
+			class="listing"
+			[class.mod-hideFirstItems]="hideFirstItems()"
+			[class.mod-inline]="inline()"
+			[class.mod-icons]="icons()"
+			[class.mod-checklist]="checklist()"
+			[class]="paletteClass"
+			[class.mod-divider]="divider()"
+		>
+			<ng-container *ngTemplateOutlet="content" />
+		</dl>
+	} @else {
+		<ul
+			class="listing"
+			[class.mod-hideFirstItems]="hideFirstItems()"
+			[class.mod-inline]="inline()"
+			[class.mod-icons]="icons()"
+			[class.mod-checklist]="checklist()"
+			[class]="paletteClass"
+			[class.mod-divider]="divider()"
+		>
+			<ng-container *ngTemplateOutlet="content" />
+		</ul>
+	}
 }
 
 <ng-template #content><ng-content /></ng-template>

@@ -24,6 +24,7 @@ export class ListingComponent {
 	hideFirstItems = input(false, { transform: booleanAttribute });
 	start = input(1, { transform: numberAttribute });
 	ordered = input(false, { transform: booleanAttribute });
+	descriptionList = input(false, { transform: booleanAttribute });
 	checklist = input(false, { transform: booleanAttribute });
 	icons = input(false, { transform: booleanAttribute });
 	defaultIcon = input<LuccaIcon>('signConfirm');

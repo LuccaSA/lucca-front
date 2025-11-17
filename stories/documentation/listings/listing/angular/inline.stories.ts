@@ -7,6 +7,7 @@ import { generateInputs } from 'stories/helpers/stories';
 interface ListingBasicStory {
 	checklist: boolean;
 	ordered: boolean;
+	descriptionList: boolean;
 	icons: boolean;
 	type: string;
 	palette: string;
@@ -25,21 +26,25 @@ export default {
 	],
 
 	render: (args: ListingBasicStory, context) => {
-		const { type, checklist, ordered, icons, defaultIcon, icon, ...inputs } = args;
+		const { type, checklist, ordered, descriptionList, icons, defaultIcon, icon, ...inputs } = args;
 		const checklistParam = args.type === 'checklist' ? ` checklist` : ``;
 		const orderedParam = args.type === 'ordered' ? ` ordered` : ``;
+		const descriptionListParam = args.type === 'descriptionList' ? ` descriptionList` : ``;
 		const iconsParam = args.type === 'icons' ? ` icons` : ``;
 		const iconParam = args.type === 'icons' ? ` icon="${args.icon}"` : ``;
 		const defaultIconParam = args.type === 'icons' ? ` defaultIcon="${defaultIcon}"` : ``;
 		return {
-			template: `<lu-listing inline${checklistParam}${orderedParam}${iconsParam}${iconsParam}${defaultIconParam}${generateInputs(inputs, context.argTypes)}>
+			template: `<lu-listing inline${checklistParam}${orderedParam}${descriptionListParam}${iconsParam}${iconsParam}${defaultIconParam}${generateInputs(inputs, context.argTypes)}>
 	<lu-listing-item><a href="#">lorem ipsum dolor sit amet</a></lu-listing-item>
 	<lu-listing-item${iconParam}><a href="#">lorem ipsum dolor sit amet</a></lu-listing-item>
 	<lu-listing-item><a href="#">lorem ipsum dolor sit amet</a></lu-listing-item>
 	<lu-listing-item><a href="#">lorem ipsum dolor sit amet</a></lu-listing-item>
 	<lu-listing-item><a href="#">lorem ipsum dolor sit amet</a></lu-listing-item>
-	<lu-listing-item>lorem ipsum dolor</lu-listing-item>
-	<lu-listing-item><a href="#">lorem ipsum dolor sit amet</a></lu-listing-item>
+	<dt lu-listing-item>term</dt>
+	<dd lu-listing-item><a href="#">definition</a></dd>
+	<dt lu-listing-item>term</dt>
+	<dt lu-listing-item>term</dt>
+	<dd lu-listing-item><a href="#">definition</a></dd>
 </lu-listing>`,
 		};
 	},
@@ -48,7 +53,7 @@ export default {
 export const Template: StoryObj<ListingComponent & ListingItemComponent & { type: string }> = {
 	argTypes: {
 		type: {
-			options: ['', 'checklist', 'icons'],
+			options: ['', 'checklist', 'icons', 'descriptionList'],
 			control: {
 				type: 'select',
 			},

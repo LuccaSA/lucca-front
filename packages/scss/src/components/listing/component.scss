@@ -21,7 +21,8 @@
 			gap: var(--pr-t-spacings-100);
 			margin-inline-start: 0;
 			// divider pseudo element
-			&::before {
+			&:not(dd)::before,
+			&:not(+ dt.listing-item)::before {
 				content: var(--components-listing-item-before-content);
 				border-inline-start: var(--commons-divider-border);
 				height: 0.75lh;
