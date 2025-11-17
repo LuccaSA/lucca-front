@@ -5,10 +5,16 @@
 			<th luDataTableCell>Cell</th>
 		</tr>
 	</thead>
-	<tbody luDataTableBody>
-		<tr luDataTableRow [drag]="true">
-			<th luDataTableCell>1</th>
-			<td luDataTableCell>2</td>
+	<tbody luDataTableBody cdkDropList (cdkDropListDropped)="drop($event)">
+		@for (item of listItem; track $index) {
+			<tr luDataTableRow [drag]="true" cdkDrag>
+				<th luDataTableCell>{{ item.header }}</th>
+				<td luDataTableCell>{{ item.cell }}</td>
+			</tr>
+		}
+		<tr luDataTableRow>
+			<th luDataTableCell>Header 4</th>
+			<td luDataTableCell>cell 4</td>
 		</tr>
 	</tbody>
 </lu-data-table>
