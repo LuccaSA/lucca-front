@@ -16,7 +16,7 @@ import { IconComponent } from '@lucca-front/ng/icon';
 import { Meta, moduleMetadata, StoryObj } from '@storybook/angular';
 
 export default {
-	title: 'Documentation/Listings/Data table/Angular/Sticky',
+	title: 'Documentation/Listings/Data table/Angular/Overflow',
 	argTypes: {
 		cols: {
 			control: { type: 'range', min: 2, max: 8 },
@@ -85,7 +85,7 @@ export default {
 		}
 
 		return {
-			styles: stickyHeader ? [`lu-data-table { max-block-size: 15rem; inline-size: 30rem; white-space: nowrap }`] : [`lu-data-table { inline-size: 30rem; white-space: nowrap }`],
+			styles: [`lu-data-table { max-block-size: 15rem; max-inline-size: 30rem }`],
 			props: { example: text },
 			template: `<lu-data-table${stickyColsStartAttr}${stickyColsEndAttr}>
 	<thead luDataTableHead${stickyHeaderAttr}>

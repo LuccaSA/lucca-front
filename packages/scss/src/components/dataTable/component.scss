@@ -19,10 +19,11 @@
 		.dataTableWrapper {
 			border-radius: var(--components-dataTable-borderRadius);
 			border: 1px solid var(--commons-border-200);
-			overflow: var(--components-dataTable-overflow);
+			overflow: auto;
 			background-color: var(--components-dataTable-cell-background);
 			contain: paint; // Fix overflow on webkit when table has scroll
 			display: block;
+			inline-size: fit-content;
 
 			&:focus-visible {
 				@include a11y.focusVisible;

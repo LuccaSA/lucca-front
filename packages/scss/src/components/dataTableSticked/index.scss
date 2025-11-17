@@ -12,10 +12,12 @@
 			@include stickyHeader;
 		}
 
+		&:has(.dataTableShadows),
 		&:has(.dataTable.mod-columnsOverflow) {
 			@include columnsOverflow;
 		}
 
+		&:has(.dataTableShadows),
 		&:has(.dataTable.mod-rowsOverflow) {
 			@include rowsOverflow;
 		}

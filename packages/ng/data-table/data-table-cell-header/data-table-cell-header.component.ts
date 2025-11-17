@@ -4,8 +4,8 @@ import { toSignal } from '@angular/core/rxjs-interop';
 import { ButtonComponent } from '@lucca-front/ng/button';
 import { IconComponent } from '@lucca-front/ng/icon';
 import { ReplaySubject } from 'rxjs';
-import { LU_DATA_TABLE_CELL_INSTANCE } from '../data-table-cell.token';
 import { BaseDataTableCell } from '../base-data-table-cell';
+import { LU_DATA_TABLE_CELL_INSTANCE } from '../data-table-cell.token';
 
 @Component({
 	// eslint-disable-next-line @angular-eslint/component-selector
@@ -76,8 +76,8 @@ export class DataTableRowCellHeaderComponent extends BaseDataTableCell implement
 	inlineSizePx = toSignal(this.#inlineSizePx$);
 
 	ngAfterContentInit(): void {
-		setTimeout(() => {
+		new ResizeObserver(() => {
 			this.#inlineSizePx$.next(this.elementRef.nativeElement.clientWidth);
-		});
+		}).observe(this.elementRef.nativeElement);
 	}
 }

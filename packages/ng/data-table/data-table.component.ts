@@ -1,4 +1,19 @@
-import { booleanAttribute, Component, computed, contentChild, contentChildren, ElementRef, forwardRef, inject, input, numberAttribute, viewChild, ViewEncapsulation } from '@angular/core';
+import {
+	afterNextRender,
+	booleanAttribute,
+	Component,
+	computed,
+	contentChild,
+	contentChildren,
+	ElementRef,
+	forwardRef,
+	inject,
+	input,
+	numberAttribute,
+	signal,
+	viewChild,
+	ViewEncapsulation,
+} from '@angular/core';
 import { ResponsiveConfig, ɵeffectWithDeps } from '@lucca-front/ng/core';
 import { DataTableHeadComponent } from './data-table-head/data-table-head.component';
 import { DataTableRowComponent } from './data-table-row/data-table-row.component';
@@ -44,6 +59,15 @@ export class DataTableComponent {
 	stickyColsStart = input(0, { transform: numberAttribute });
 	stickyColsEnd = input(0, { transform: numberAttribute });
 
+	firstColumnVisibleAfterColsStart = signal(true);
+	lastColumnVisibleBeforeColsEnd = signal(false);
+
+	firstColumnVisible = signal(true);
+	lastColumnVisible = signal(false);
+
+	firstRowVisible = signal(true);
+	lastRowVisible = signal(false);
+
 	cols = computed(() => this.header().cols());
 
 	classMods = computed(() => {
@@ -56,10 +80,12 @@ export class DataTableComponent {
 			['mod-verticalAlignMiddle']: this.verticalAlign() === 'middle',
 			['mod-verticalAlignBottom']: this.verticalAlign() === 'bottom',
 			['mod-columnsOverflow']: this.stickyColsStart() || this.stickyColsEnd(),
-			['is-firstColumnVisible']: this.stickyColsStart(),
-			['is-lastColumnVisible']: this.stickyColsEnd(),
-			['is-firstColumnVisibleAfterColsStart']: false,
-			['is-lastColumnVisibleBeforeColsEnd']: false,
+			['is-firstColumnVisible']: this.stickyColsStart() || this.firstColumnVisible(),
+			['is-lastColumnVisible']: this.stickyColsEnd() || this.lastColumnVisible(),
+			['is-firstColumnVisibleAfterColsStart']: this.firstColumnVisibleAfterColsStart(),
+			['is-lastColumnVisibleBeforeColsEnd']: this.lastColumnVisibleBeforeColsEnd(),
+			['is-firstRowVisible']: this.firstRowVisible(),
+			['is-lastRowVisible']: this.lastRowVisible(),
 			['mod-layoutFixed']: this.layoutFixed(),
 			...Object.entries(this.responsive()).reduce((acc, [key, value]) => {
 				return {
@@ -72,9 +98,22 @@ export class DataTableComponent {
 
 	scroll() {
 		this.header().isFirstVisible.set(this.#elementRef.nativeElement.scrollTop === 0);
+
+		this.firstRowVisible.set(this.#elementRef.nativeElement.scrollTop === 0);
+		this.lastRowVisible.set(this.#elementRef.nativeElement.scrollTop >= this.#elementRef.nativeElement.scrollHeight - this.#elementRef.nativeElement.clientHeight);
+
+		this.firstColumnVisibleAfterColsStart.set(this.#elementRef.nativeElement.scrollLeft === 0);
+		this.lastColumnVisibleBeforeColsEnd.set(this.#elementRef.nativeElement.scrollLeft >= this.#elementRef.nativeElement.scrollWidth - this.#elementRef.nativeElement.clientWidth);
+
+		this.firstColumnVisible.set(this.#elementRef.nativeElement.scrollLeft === 0);
+		this.lastColumnVisible.set(this.#elementRef.nativeElement.scrollLeft >= this.#elementRef.nativeElement.scrollWidth - this.#elementRef.nativeElement.clientWidth);
 	}
 
 	constructor() {
 		ɵeffectWithDeps([this.rows], () => this.scroll());
+
+		afterNextRender(() => {
+			this.scroll();
+		});
 	}
 }

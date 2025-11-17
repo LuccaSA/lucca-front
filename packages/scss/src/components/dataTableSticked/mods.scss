@@ -1,8 +1,6 @@
 @use '@lucca-front/scss/src/commons/utils/color';
 
 @mixin stickyHeader {
-	--components-dataTable-overflow: auto;
-
 	.dataTable-head {
 		position: sticky;
 		inset-block-start: -1px;
@@ -22,8 +20,6 @@
 }
 
 @mixin columnsOverflow {
-	--components-dataTable-overflow: auto;
-
 	display: flex;
 
 	&::before,
@@ -52,8 +48,6 @@
 }
 
 @mixin rowsOverflow {
-	--components-dataTable-overflow: auto;
-
 	.dataTableShadows {
 		display: flex;
 		flex-direction: column;
@@ -85,8 +79,6 @@
 }
 
 @mixin stickyColumn {
-	--components-dataTable-overflow: auto;
-
 	%addShadow {
 		content: '';
 		position: absolute;
