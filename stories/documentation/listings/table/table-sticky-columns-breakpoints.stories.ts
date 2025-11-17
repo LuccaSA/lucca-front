@@ -59,7 +59,7 @@ function getTemplate(args: TableStickyColumnsAndHeaderWithBreakpointsStory): str
 						<div class="stickyHeader-shadow-wrapper"></div>
 					</td>
 				</tr>
-				@for (_ of [].constructor(5)) {
+				@for (_ of [].constructor(5); track $index) {
 					<tr class="table-body-row">
 						<td class="table-body-row-cell mod-stickyColumn-left">
 							Body cell

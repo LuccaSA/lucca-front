@@ -6,7 +6,6 @@ import { BaseDataTableCell } from '../base-data-table-cell';
 @Component({
 	// eslint-disable-next-line @angular-eslint/component-selector
 	selector: 'td[luDataTableCell]',
-	standalone: true,
 	templateUrl: './data-table-cell.component.html',
 	encapsulation: ViewEncapsulation.None,
 	host: {

@@ -30,6 +30,14 @@
 			}
 		}
 
+		.dataTableWrapper-pagination {
+			border-block-start: 1px solid var(--commons-border-200);
+
+			&:empty {
+				display: none;
+			}
+		}
+
 		.dataTable-head-row-cell {
 			color: var(--pr-t-color-text-subtle);
 			padding: var(--components-dataTable-cell-padding);

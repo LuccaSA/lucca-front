@@ -53,7 +53,7 @@ export abstract class AbstractDateComponent {
 		transform: transformDateInputToDate,
 	});
 
-	calendarMode = model<CalendarMode>('day');
+	calendarMode = model<CalendarMode>();
 
 	panelOpened = output<void>();
 

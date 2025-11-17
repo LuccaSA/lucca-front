@@ -7,7 +7,6 @@ import { Meta, StoryFn, StoryObj, applicationConfig } from '@storybook/angular';
 
 @Directive({
 	selector: '[fakeLocaleId]',
-	standalone: true,
 })
 class FakeLocaleIdDirective implements OnChanges {
 	#templateRef = inject(TemplateRef);
@@ -31,7 +30,6 @@ class FakeLocaleIdDirective implements OnChanges {
 
 @Component({
 	selector: 'humanize-stories',
-	standalone: true,
 	imports: [LuHumanizeDatePipe, AsyncPipe, FakeLocaleIdDirective, ButtonComponent, CalloutComponent],
 	template: `
 		<h1>Humanize</h1>

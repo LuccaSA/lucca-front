@@ -2,4 +2,7 @@
 	<table [class]="classMods()" #tableRef>
 		<ng-content />
 	</table>
+	<div class="dataTableWrapper-pagination">
+		<ng-content select="[dataTablePagination]" />
+	</div>
 </div>

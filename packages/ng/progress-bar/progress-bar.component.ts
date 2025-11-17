@@ -2,7 +2,6 @@ import { booleanAttribute, Component, input, numberAttribute, ViewEncapsulation 
 
 @Component({
 	selector: 'lu-progress-bar',
-	standalone: true,
 	templateUrl: './progress-bar.component.html',
 	styleUrl: './progress-bar.component.scss',
 	encapsulation: ViewEncapsulation.None,

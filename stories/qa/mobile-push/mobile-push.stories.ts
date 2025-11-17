@@ -2,7 +2,6 @@ import { Component } from '@angular/core';
 import { Meta, StoryFn } from '@storybook/angular';
 
 @Component({
-	standalone: true,
 	selector: 'mobile-push-stories',
 	templateUrl: './mobile-push.stories.html',
 })

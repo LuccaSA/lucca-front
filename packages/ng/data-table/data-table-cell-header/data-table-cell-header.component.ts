@@ -10,7 +10,6 @@ import { LU_DATA_TABLE_CELL_INSTANCE } from '../data-table-cell.token';
 @Component({
 	// eslint-disable-next-line @angular-eslint/component-selector
 	selector: 'th[luDataTableCell]',
-	standalone: true,
 	templateUrl: './data-table-cell-header.component.html',
 	styleUrl: './data-table-cell-header.component.scss',
 	encapsulation: ViewEncapsulation.None,

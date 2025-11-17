@@ -3,7 +3,6 @@ import { ResponsiveConfig } from '@lucca-front/ng/core';
 
 @Component({
 	selector: 'lu-grid-column',
-	standalone: true,
 	template: '<ng-content />',
 	encapsulation: ViewEncapsulation.None,
 	host: {
@@ -19,7 +18,7 @@ export class GridColumnComponent {
 	align = input<'start' | 'center' | 'end' | 'auto' | null>(null);
 	justify = input<'start' | 'center' | 'end' | 'auto' | null>(null);
 
-	responsive = input<ResponsiveConfig<'row' | 'col' | 'rowspan' | 'colspan', number>>({});
+	responsive = input<ResponsiveConfig<'row' | 'column' | 'rowspan' | 'colspan', number>>({});
 
 	style = computed(() => {
 		return {

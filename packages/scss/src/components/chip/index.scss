@@ -28,5 +28,9 @@
 		&.is-disabled {
 			@include disabled;
 		}
+
+		&:has(.chip-content:focus-visible) {
+			@include focusVisible;
+		}
 	}
 }

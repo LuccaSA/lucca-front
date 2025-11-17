@@ -11,7 +11,6 @@ const formatters = {
 
 @Component({
 	selector: 'display-stories',
-	standalone: true,
 	imports: [LuUserDisplayModule],
 	templateUrl: './display.stories.html',
 })

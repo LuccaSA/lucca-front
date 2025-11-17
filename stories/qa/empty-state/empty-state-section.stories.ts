@@ -4,7 +4,6 @@ import { LuSafeExternalSvgPipe } from '@lucca-front/ng/safe-content';
 import { Meta, StoryFn, applicationConfig } from '@storybook/angular';
 
 @Component({
-	standalone: true,
 	selector: 'empty-state-section-stories',
 	templateUrl: './empty-state-section.stories.html',
 	imports: [LuSafeExternalSvgPipe],

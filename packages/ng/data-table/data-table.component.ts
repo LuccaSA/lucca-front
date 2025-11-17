@@ -21,7 +21,6 @@ import { LU_DATA_TABLE_INSTANCE } from './data-table.token';
 
 @Component({
 	selector: 'lu-data-table',
-	standalone: true,
 	templateUrl: './data-table.component.html',
 	styleUrl: './data-table.component.scss',
 	encapsulation: ViewEncapsulation.None,

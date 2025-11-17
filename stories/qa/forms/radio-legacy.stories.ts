@@ -2,7 +2,6 @@ import { Component } from '@angular/core';
 import { Meta, StoryFn, moduleMetadata } from '@storybook/angular';
 
 @Component({
-	standalone: true,
 	selector: 'forms-radio-legacy-stories',
 	templateUrl: './radio-legacy.stories.html',
 })

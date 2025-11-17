@@ -11,7 +11,6 @@ export interface LuCustomEstablishment extends LuCoreSelectEstablishment {
 	// The attribute is already prefixed with "lu-simple-select" / "lu-multi-select"
 	// eslint-disable-next-line @angular-eslint/directive-selector
 	selector: 'lu-simple-select[customEstablishments],lu-multi-select[customEstablishments]',
-	standalone: true,
 	exportAs: 'luCustomEstablishments',
 })
 export class LuCoreSelectCustomEstablishmentsDirective extends LuCoreSelectEstablishmentsDirective<LuCustomEstablishment> {

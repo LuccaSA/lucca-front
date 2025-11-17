@@ -24,7 +24,6 @@ export interface Legume {
 
 @Directive({
   selector: '[luLegumes]',
-  standalone: true,
   exportAs: 'luLegumes',
 })
 export class LuCoreSelectLegumesDirective extends LuCoreSelectApiV4Directive<Legume> {
@@ -71,7 +70,6 @@ interface MyCustomApiQuery {
 
 @Directive({
   selector: '[luMyCustomApi]',
-  standalone: true,
   exportAs: 'luMyCustomApi',
 })
 export class LuCoreSelectMyCustomApiDirective extends ALuCoreSelectApiDirective<MyCustomEntity, MyCustomApiQuery> {

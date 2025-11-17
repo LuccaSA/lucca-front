@@ -2,15 +2,19 @@ import { FormsModule, ReactiveFormsModule } from '@angular/forms';
 import { BrowserAnimationsModule } from '@angular/platform-browser/animations';
 import { FormFieldComponent } from '@lucca-front/ng/form-field';
 import { NumberFormatInputComponent } from '@lucca-front/ng/forms';
-import { Meta, moduleMetadata, StoryObj } from '@storybook/angular';
+import { applicationConfig, Meta, moduleMetadata, StoryObj } from '@storybook/angular';
 import { cleanupTemplate, generateInputs } from 'stories/helpers/stories';
 import { StoryModelDisplayComponent } from 'stories/helpers/story-model-display.component';
+import { LOCALE_ID } from '@angular/core';
 
 export default {
 	title: 'Documentation/Forms/Fields/NumberFormatField/Angular',
 	decorators: [
 		moduleMetadata({
 			imports: [NumberFormatInputComponent, FormFieldComponent, FormsModule, ReactiveFormsModule, BrowserAnimationsModule, StoryModelDisplayComponent],
+		}),
+		applicationConfig({
+			providers: [{ provide: LOCALE_ID, useValue: 'fr-FR' }],
 		}),
 	],
 	argTypes: {

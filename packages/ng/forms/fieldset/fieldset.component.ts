@@ -7,7 +7,6 @@ let nextId = 0;
 
 @Component({
 	selector: 'lu-fieldset',
-	standalone: true,
 	templateUrl: './fieldset.component.html',
 	styleUrl: './fieldset.component.scss',
 	encapsulation: ViewEncapsulation.None,

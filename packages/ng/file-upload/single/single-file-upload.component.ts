@@ -9,7 +9,6 @@ import { FileEntry } from '../file-upload-entry';
 
 @Component({
 	selector: 'lu-single-file-upload',
-	standalone: true,
 	templateUrl: './single-file-upload.component.html',
 	styleUrl: './single-file-upload.component.scss',
 	encapsulation: ViewEncapsulation.None,
@@ -21,7 +20,7 @@ import { FileEntry } from '../file-upload-entry';
 export class SingleFileUploadComponent extends BaseFileUploadComponent {
 	entry = input<FileEntry | null>(null);
 
-	state = input<'loading' | 'success' | 'error' | null>(null);
+	state = input<'loading' | 'success' | 'error' | 'default'>('default');
 
 	inlineMessageError = input<string | null>(null);
 

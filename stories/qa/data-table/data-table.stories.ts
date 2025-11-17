@@ -1,11 +1,10 @@
 import { Component } from '@angular/core';
-import { StatusBadgeComponent } from '@lucca-front/ng/statusBadge';
+import { StatusBadgeComponent } from '@lucca-front/ng/status-badge';
 import { TagComponent } from '@lucca-front/ng/tag';
 import { LuUserPictureComponent } from '@lucca-front/ng/user';
 import { Meta, StoryFn } from '@storybook/angular';
 
 @Component({
-	standalone: true,
 	selector: 'data-table-stories',
 	templateUrl: './data-table.stories.html',
 	imports: [StatusBadgeComponent, TagComponent, LuUserPictureComponent],
