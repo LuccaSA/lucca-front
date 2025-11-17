@@ -1,5 +1,5 @@
 import { CdkDrag, CdkDragDrop, CdkDropList, moveItemInArray } from '@angular/cdk/drag-drop';
-import { Component } from '@angular/core';
+import { Component, input } from '@angular/core';
 import {
 	DataTableBodyComponent,
 	DataTableComponent,
@@ -27,6 +27,8 @@ import { Meta, StoryFn } from '@storybook/angular';
 	templateUrl: './draggable.stories.html',
 })
 class DataTableDraggableStory {
+	selectable = input<boolean>(false);
+
 	listItem: Array<{ id: number; header: string; cell: string }> = [
 		{ id: 1, header: 'Header 1', cell: 'cell 1' },
 		{ id: 2, header: 'Header 2', cell: 'cell 2' },
@@ -41,6 +43,11 @@ class DataTableDraggableStory {
 export default {
 	title: 'Documentation/Listings/Data table/Angular/Draggable',
 	component: DataTableDraggableStory,
+	argTypes: {
+		selectable: {
+			control: 'boolean',
+		},
+	},
 } as Meta;
 
 const template: StoryFn<DataTableDraggableStory> = (args) => ({
@@ -48,6 +55,9 @@ const template: StoryFn<DataTableDraggableStory> = (args) => ({
 });
 
 export const Basic = template.bind({});
+Basic.args = {
+	selectable: false,
+};
 
 const code = ``;
 
