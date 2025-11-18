@@ -173,6 +173,24 @@ export const WithDisplayerTEST = createTestStory(WithDisplayer, async (context) 
 	await expect(input.parentElement).toHaveTextContent(new RegExp(`🥗🥗.+`));
 });
 
+export const WithPrefix = generateStory({
+	name: 'With Prefix',
+	description: "Il est possible d'ajouter un préfixe à l'affichage, qui sera là même si le placeholder est utilisé.",
+	template: `<lu-simple-select
+	#selectRef
+	placeholder="Placeholder…"
+	[(ngModel)]="selectedLegume"
+	[options]="legumes | filterLegumes:clue"
+	(clueChange)="clue = $event"
+	prefix="🥗"
+>
+</lu-simple-select>`,
+	neededImports: {
+		'@lucca-front/ng/icon': ['IconComponent'],
+		'@lucca-front/ng/simple-select': ['LuSimpleSelectInputComponent', 'LuDisplayerDirective'],
+	},
+});
+
 export const WithClue = generateStory({
 	name: 'Clue',
 	description: "Il est possible d'afficher une barre de recherche pour filtrer les options en écoutant l'évènement `(clueChange)`.",
