@@ -16,11 +16,17 @@
 					</tr>
 				</thead>
 				@for (group of groups; track $index) {
+					@let groupId = "group-" + $index;
 					<tbody class="indexTable-body">
-						<tr class="indexTable-body-row" id="r0">
-							<th class="indexTable-body-row-transparentCell" colspan="3" id="y2021">
+						<tr class="indexTable-body-row" [id]="groupId + '-header'">
+							<th class="indexTable-body-row-transparentCell" colspan="3" [id]="groupId">
 								<div class="indexTable-body-row-cellTitle">
-									<button class="indexTable-body-row-cellTitle-button button" aria-expanded="true" aria-controls="r1 r2 r3" type="button">
+									<button
+										class="indexTable-body-row-cellTitle-button button"
+										aria-expanded="true"
+										[attr.aria-controls]="group | ariaControls: groupId"
+										type="button"
+									>
 										<span class="lucca-icon icon-arrowChevronTop" aria-hidden="true"></span>
 										<span class="pr-u-mask">Hide details</span>
 									</button>
@@ -30,13 +36,18 @@
 							</th>
 						</tr>
 						@for (task of group.tasks; track task.id) {
-							<tr class="indexTable-body-row" id="r1">
-								<td class="indexTable-body-row-cell" headers="y2021">
+							@let rowId = groupId + "-row-" + $index;
+							<tr class="indexTable-body-row" [id]="rowId">
+								<td class="indexTable-body-row-cell" [headers]="groupId">
 									<a href="#" class="indexTable-body-row-cell-link">{{ task.name }}</a>
 								</td>
-								<td class="indexTable-body-row-cell" headers="y2021">{{ task.status }}</td>
-								<td class="indexTable-body-row-cell" headers="y2021">{{ task.user.firstName }}</td>
-								<td class="indexTable-body-row-cell" headers="y2021">{{ task.dueDate }}</td>
+								<td class="indexTable-body-row-cell" [headers]="groupId">
+									<lu-status-badge [label]="labelByStatus[task.status]" [palette]="paletteByStatus[task.status]" />
+								</td>
+								<td class="indexTable-body-row-cell" [headers]="groupId">
+									<lu-user-tile class="mod-XS" [user]="task.user" />
+								</td>
+								<td class="indexTable-body-row-cell" [headers]="groupId">{{ task.dueDate | date: "shortDate" }}</td>
 							</tr>
 						}
 					</tbody>
