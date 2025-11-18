@@ -9,67 +9,38 @@
 			<table class="indexTable">
 				<thead class="indexTable-head">
 					<tr class="indexTable-head-row">
-						<th class="indexTable-head-row-cell" scope="col">Label</th>
-						<th class="indexTable-head-row-cell" scope="col">Label</th>
-						<th class="indexTable-head-row-cell" scope="col">Label</th>
+						<th class="indexTable-head-row-cell" scope="col">Tâche</th>
+						<th class="indexTable-head-row-cell" scope="col">Statut</th>
+						<th class="indexTable-head-row-cell" scope="col">Affectée par</th>
+						<th class="indexTable-head-row-cell" scope="col">Date cible</th>
 					</tr>
 				</thead>
-				<tbody class="indexTable-body">
-					<tr class="indexTable-body-row" id="r0">
-						<th class="indexTable-body-row-transparentCell" colspan="3" id="y2021">
-							<div class="indexTable-body-row-cellTitle">
-								<button class="indexTable-body-row-cellTitle-button button" aria-expanded="true" aria-controls="r1 r2 r3" type="button">
-									<span class="lucca-icon icon-arrowChevronTop" aria-hidden="true"></span>
-									<span class="pr-u-mask">Hide details</span>
-								</button>
-								<span class="indexTable-body-row-cellTitle-title">2021</span>
-								<span class="numericBadge">3<span class="pr-u-mask"> lines</span></span>
-							</div>
-						</th>
-					</tr>
-					<tr class="indexTable-body-row" id="r1">
-						<td class="indexTable-body-row-cell" headers="y2021">
-							<a href="#" class="indexTable-body-row-cell-link">Content</a>
-						</td>
-						<td class="indexTable-body-row-cell" headers="y2021">Content</td>
-						<td class="indexTable-body-row-cell" headers="y2021">Content</td>
-					</tr>
-					<tr class="indexTable-body-row" id="r2">
-						<td class="indexTable-body-row-cell" headers="y2021">
-							<a href="#" class="indexTable-body-row-cell-link">Content</a>
-						</td>
-						<td class="indexTable-body-row-cell" headers="y2021">Content</td>
-						<td class="indexTable-body-row-cell" headers="y2021">Content</td>
-					</tr>
-					<tr class="indexTable-body-row" id="r3">
-						<td class="indexTable-body-row-cell" headers="y2021">
-							<a href="#" class="indexTable-body-row-cell-link">Content</a>
-						</td>
-						<td class="indexTable-body-row-cell" headers="y2021">Content</td>
-						<td class="indexTable-body-row-cell" headers="y2021">Content</td>
-					</tr>
-				</tbody>
-				<tbody class="indexTable-body">
-					<tr class="indexTable-body-row" id="r4">
-						<th class="indexTable-body-row-transparentCell" colspan="3" id="y2022">
-							<div class="indexTable-body-row-cellTitle">
-								<button class="indexTable-body-row-cellTitle-button button" aria-expanded="true" aria-controls="r5" type="button">
-									<span class="lucca-icon icon-arrowChevronTop" aria-hidden="true"></span>
-									<span class="pr-u-mask">Hide details</span>
-								</button>
-								<span class="indexTable-body-row-cellTitle-title">2022</span>
-								<span class="numericBadge">1<span class="pr-u-mask"> line</span></span>
-							</div>
-						</th>
-					</tr>
-					<tr class="indexTable-body-row" id="r5">
-						<td class="indexTable-body-row-cell" headers="y2022">
-							<a href="#" class="indexTable-body-row-cell-link">Content</a>
-						</td>
-						<td class="indexTable-body-row-cell" headers="y2022">Content</td>
-						<td class="indexTable-body-row-cell" headers="y2022">Content</td>
-					</tr>
-				</tbody>
+				@for (group of groups; track $index) {
+					<tbody class="indexTable-body">
+						<tr class="indexTable-body-row" id="r0">
+							<th class="indexTable-body-row-transparentCell" colspan="3" id="y2021">
+								<div class="indexTable-body-row-cellTitle">
+									<button class="indexTable-body-row-cellTitle-button button" aria-expanded="true" aria-controls="r1 r2 r3" type="button">
+										<span class="lucca-icon icon-arrowChevronTop" aria-hidden="true"></span>
+										<span class="pr-u-mask">Hide details</span>
+									</button>
+									<span class="indexTable-body-row-cellTitle-title">{{ group.groupName }}</span>
+									<span class="numericBadge">{{ group.tasks.length }}<span class="pr-u-mask"> lines</span></span>
+								</div>
+							</th>
+						</tr>
+						@for (task of group.tasks; track task.id) {
+							<tr class="indexTable-body-row" id="r1">
+								<td class="indexTable-body-row-cell" headers="y2021">
+									<a href="#" class="indexTable-body-row-cell-link">{{ task.name }}</a>
+								</td>
+								<td class="indexTable-body-row-cell" headers="y2021">{{ task.status }}</td>
+								<td class="indexTable-body-row-cell" headers="y2021">{{ task.user.firstName }}</td>
+								<td class="indexTable-body-row-cell" headers="y2021">{{ task.dueDate }}</td>
+							</tr>
+						}
+					</tbody>
+				}
 			</table>
 		</div>
 	</ng-container>
