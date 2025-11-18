@@ -26,6 +26,7 @@
     "build:ng": "ng run ng:build",
     "build:remaining": "node build.js",
     "start": "ng run ng:storybook",
+    "start:sandbox": "ng serve sandbox",
     "jenkins-test": "jest --no-cache --runInBand",
     "ci-test": "jest --no-cache --runInBand",
     "test": "jest --maxWorkers=4 --isolatedModules=true --detectOpenHandles --watchAll",
@@ -129,7 +130,7 @@
     "@nx/nx-win32-x64-msvc": "^21.2.0"
   },
   "volta": {
-    "node": "22.14.0"
+    "node": "24.11.1"
   },
   "msw": {
     "workerDirectory": ".storybook/public"
