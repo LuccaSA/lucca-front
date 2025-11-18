@@ -92,7 +92,7 @@ export class CalloutPopoverComponent {
 
 	calloutOverlayClasses = computed(() => {
 		return {
-			[`mod-${this.contentSize}`]: !!this.contentSize,
+			[`mod-${this.contentSize()}`]: !!this.contentSize(),
 		};
 	});
 
