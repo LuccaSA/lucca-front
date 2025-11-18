@@ -85,7 +85,7 @@ export default {
 		}
 
 		return {
-			styles: [`lu-data-table { max-block-size: 15rem; max-inline-size: 30rem; inline-size: fit-content; }`],
+			styles: [`lu-data-table { max-block-size: 15rem; max-inline-size: 30rem; inline-size: fit-content }`],
 			props: { example: text },
 			template: `<lu-data-table${stickyColsStartAttr}${stickyColsEndAttr}>
 	<thead luDataTableHead${stickyHeaderAttr}>

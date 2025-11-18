@@ -12,9 +12,9 @@ import { LU_DATA_TABLE_CELL_INSTANCE } from '../data-table-cell.token';
 		'[class.dataTable-body-row-cell]': 'bodyRef !== null',
 		'[class.dataTable-head-row-cell]': 'headRef !== null',
 		'[class.dataTable-foot-row-cell]': 'footRef !== null',
-		'[class.mod-alignStart]': 'align() === "start"',
-		'[class.mod-alignCenter]': 'align() === "center"',
-		'[class.mod-alignEnd]': 'align() === "end"',
+		'[class.mod-alignStart]': 'align() === "start" || alignCol() === "start"',
+		'[class.mod-alignCenter]': 'align() === "center" || alignCol() === "center"',
+		'[class.mod-alignEnd]': 'align() === "end" || alignCol() === "end"',
 		'[class.mod-editable]': 'editable()',
 		'[class.mod-actions]': 'actions()',
 		'[class.mod-stickyColumn]': 'isSticky()',
@@ -33,6 +33,10 @@ export class DataTableRowCellComponent extends BaseDataTableCell {
 
 	isSticky = computed(() => {
 		return this.isStickyStart() || this.isStickyEnd();
+	});
+
+	alignCol = computed(() => {
+		return this.tableRef.header().cols()[this.position()].align();
 	});
 
 	insetInlineStart = computed(() => {

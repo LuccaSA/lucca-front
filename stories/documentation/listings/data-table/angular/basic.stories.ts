@@ -156,7 +156,7 @@ export default {
 		const line = `
 		<tr luDataTableRow${selectableLabelAttr}>
 			<th luDataTableCell>${textHeader}</th>${colsContent}
-			<td luDataTableCell${alignAttr}>${text}</td>
+			<td luDataTableCell>${text}</td>
 		</tr>`;
 		for (let i = 1; i <= lines - 2; i++) {
 			linesContent = linesContent + line;
@@ -188,7 +188,7 @@ export default {
 	<tfoot luDataTableFoot>
 		<tr luDataTableRow${selectableLabelAttr}>
 			<th luDataTableCell>${textHeader}</th>${colsContent}
-			<td luDataTableCell${alignAttr}>${text}</td>
+			<td luDataTableCell>${text}</td>
 		</tr>
 	</tfoot>`
 			: ``;
@@ -205,11 +205,11 @@ export default {
 	<tbody luDataTableBody${groupAttr}${expandedAttr}>${linesContent}
 		<tr luDataTableRow${selectableLabelAttr}>
 			<th luDataTableCell>${textHeader}${verticalAlignContent}</th>${colsContent}
-			<td luDataTableCell${alignAttr}${actionsAttr}>${actionsContent}</td>
+			<td luDataTableCell${actionsAttr}>${actionsContent}</td>
 		</tr>
 		<tr luDataTableRow${selectableLabelAttr}${selectedAttr}${disabledAttr}>
 			<th luDataTableCell>${textHeader}</th>${colsContent}
-			<td luDataTableCell${alignAttr}${editableAttr}>${editableContent}</td>
+			<td luDataTableCell${editableAttr}>${editableContent}</td>
 		</tr>
 	</tbody>${tfootTpl}${paginationTpl}
 </lu-data-table>`,
