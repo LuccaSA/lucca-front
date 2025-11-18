@@ -4,6 +4,7 @@ import { LuInputClearerComponent, LuInputDisplayerDirective } from '@lucca-front
 import { LuOptionPickerModule } from '@lucca-front/ng/option';
 import { LuSelectInputComponent } from '@lucca-front/ng/select';
 import { FieldType, FieldTypeConfig, FormlyModule } from '@ngx-formly/core';
+import { NgFor, NgIf } from '@angular/common';
 
 @Component({
 	selector: 'lu-formly-field-select',
@@ -11,7 +12,7 @@ import { FieldType, FieldTypeConfig, FormlyModule } from '@ngx-formly/core';
 	templateUrl: './select.html',
 	changeDetection: ChangeDetectionStrategy.OnPush,
 	standalone: true,
-	imports: [ReactiveFormsModule, FormlyModule, LuSelectInputComponent, LuOptionPickerModule, LuInputClearerComponent, LuInputDisplayerDirective],
+	imports: [ReactiveFormsModule, FormlyModule, LuSelectInputComponent, LuOptionPickerModule, LuInputClearerComponent, LuInputDisplayerDirective, NgIf, NgFor],
 })
 export class LuFormlyFieldSelect extends FieldType<FieldTypeConfig> {
 	get _options() {
