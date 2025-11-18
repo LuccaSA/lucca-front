@@ -1,5 +1,5 @@
 import { AsyncPipe } from '@angular/common';
-import { Component, Directive, Injector, Input, LOCALE_ID, OnChanges, TemplateRef, ViewContainerRef, inject } from '@angular/core';
+import { Component, Directive, Injector, LOCALE_ID, OnChanges, TemplateRef, ViewContainerRef, inject, input } from '@angular/core';
 import { ButtonComponent } from '@lucca-front/ng/button';
 import { CalloutComponent } from '@lucca-front/ng/callout';
 import { LuHumanizeDateFormatter, LuHumanizeDatePipe, LuRelativeTime, LuRelativeTimeFormatUnit } from '@lucca-front/ng/date';
@@ -12,7 +12,7 @@ class FakeLocaleIdDirective implements OnChanges {
 	#templateRef = inject(TemplateRef);
 	#viewContainerRef = inject(ViewContainerRef);
 
-	@Input() fakeLocaleId = 'fr';
+	fakeLocaleId = input<string>('fr');
 
 	ngOnChanges(): void {
 		this.#viewContainerRef.clear();
@@ -21,7 +21,7 @@ class FakeLocaleIdDirective implements OnChanges {
 			{},
 			{
 				injector: Injector.create({
-					providers: [{ provide: LOCALE_ID, useValue: this.fakeLocaleId }],
+					providers: [{ provide: LOCALE_ID, useValue: this.fakeLocaleId() }],
 				}),
 			},
 		);
