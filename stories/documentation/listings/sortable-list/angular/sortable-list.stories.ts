@@ -66,6 +66,6 @@ export const Basic = {
 		helperMessage: 'Helper message',
 		small: false,
 		clickable: false,
-		clearable: true,
+		clearable: false,
 	},
 };
