@@ -7,7 +7,7 @@ interface SortableListBasicStories {
 	helperMessage: string;
 	small: boolean;
 	clickable: boolean;
-	clearable: boolean;
+	unclearable: boolean;
 }
 
 export default {
@@ -33,7 +33,7 @@ export default {
 				type: 'boolean',
 			},
 		},
-		clearable: {
+		unclearable: {
 			control: {
 				type: 'boolean',
 			},
@@ -47,14 +47,14 @@ export default {
 	render: (args: SortableListBasicStories) => {
 		const small = args.small ? ` small="true"` : '';
 		const clickable = args.clickable ? ` clickable` : '';
-		const clearable = args.clearable ? '' : ` clearable="false"`;
+		const unclearable = args.unclearable ? ` unclearable` : '';
 		const label = ` label="${args.label}"`;
 		const helperMessage = args.helperMessage?.length ? ` helperMessage="${args.helperMessage}"` : '';
 		return {
 			template: cleanupTemplate(`<lu-sortable-list${small}>
-  <lu-sortable-list-item${label}${helperMessage}${clearable}${clickable} />
-	<lu-sortable-list-item${label}${helperMessage}${clearable}${clickable} />
-	<lu-sortable-list-item${label}${helperMessage}${clearable}${clickable} />
+  <lu-sortable-list-item${label}${helperMessage}${unclearable}${clickable} />
+	<lu-sortable-list-item${label}${helperMessage}${unclearable}${clickable} />
+	<lu-sortable-list-item${label}${helperMessage}${unclearable}${clickable} />
 </lu-sortable-list>`),
 		};
 	},
@@ -66,6 +66,6 @@ export const Basic = {
 		helperMessage: 'Helper message',
 		small: false,
 		clickable: false,
-		clearable: false,
+		unclearable: false,
 	},
 };

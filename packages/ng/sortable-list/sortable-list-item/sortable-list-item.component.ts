@@ -19,7 +19,7 @@ export class SortableListItemComponent {
 	label = input.required<string>();
 	helperMessage = input<string>();
 	clickable = input(false, { transform: booleanAttribute });
-	clearable = input(true, { transform: booleanAttribute });
+	unclearable = input(false, { transform: booleanAttribute });
 
 	delete = output<void>();
 }

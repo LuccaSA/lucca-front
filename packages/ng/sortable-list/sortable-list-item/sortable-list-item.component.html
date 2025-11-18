@@ -5,6 +5,6 @@
 		<p class="sortableList-item-content-helper">{{ helperMessage() }}</p>
 	}
 </div>
-@if (clearable()) {
+@if (!unclearable()) {
 	<lu-clear class="sortableList-clear" (onClear)="delete.emit()" />
 }
