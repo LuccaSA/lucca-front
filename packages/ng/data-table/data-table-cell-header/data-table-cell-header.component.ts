@@ -24,7 +24,7 @@ import { LU_DATA_TABLE_CELL_INSTANCE } from '../data-table-cell.token';
 		'[attr.aria-sort]': 'sort()',
 		'[class.mod-editable]': 'editable()',
 		'[attr.scope]': 'bodyRef !== null ? "row" : "col"',
-		'[style.--dataTable-layoutFixed-width]': 'fixedWidth()',
+		'[style.--dataTable-layoutFixed-width]': 'inlineSize() || fixedWidth()',
 		'[style.insetInlineStart]': 'insetInlineStart()',
 		'[style.insetInlineEnd]': 'insetInlineEnd()',
 	},
@@ -41,6 +41,7 @@ export class DataTableRowCellHeaderComponent extends BaseDataTableCell implement
 
 	sort = input<undefined | null | 'ascending' | 'descending'>(undefined);
 	fixedWidth = input<string | null>(null);
+	inlineSize = input<string | null>(null);
 
 	insetInlineStart = computed(() => {
 		if (!this.isStickyStart() || !this.headRef) {

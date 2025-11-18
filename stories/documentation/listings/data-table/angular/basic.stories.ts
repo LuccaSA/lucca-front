@@ -37,7 +37,7 @@ export default {
 				type: 'select',
 			},
 		},
-		fixedWidth: {
+		inlineSize: {
 			if: { arg: 'layoutFixed', truthy: true },
 		},
 		selected: {
@@ -52,8 +52,8 @@ export default {
 		disabled: {
 			if: { arg: 'selectable', truthy: true },
 		},
-		fixedWidthValue: {
-			if: { arg: 'fixedWidth', truthy: true },
+		inlineSizeValue: {
+			if: { arg: 'inlineSize', truthy: true },
 		},
 		groupLabel: {
 			if: { arg: 'group', truthy: true },
@@ -109,8 +109,8 @@ export default {
 			hover,
 			sort,
 			cellBorder,
-			fixedWidth,
-			fixedWidthValue,
+			inlineSize,
+			inlineSizeValue,
 			selectable,
 			lines,
 			nested,
@@ -126,7 +126,7 @@ export default {
 		const hoverAttr = hover ? ` hover` : ``;
 		const cellBorderAttr = cellBorder ? ` cellBorder` : ``;
 		const sortAttr = sort ? ` sort="${sort}"` : ``;
-		const fixedWithAttr = fixedWidth && fixedWidthValue !== '' ? ` fixedWidth="${fixedWidthValue}"` : ``;
+		const inlineSizeAttr = inlineSize && inlineSizeValue !== `` ? ` inlineSize="${inlineSizeValue}"` : ``;
 		const selectableAttr = selectable ? ` selectable` : ``;
 		const selectedAttr = selected ? ` [selected]="true"` : ``;
 		const selectableLabelAttr = selectable ? ` selectedLabel="${selectedLabel}"` : ``;
@@ -199,7 +199,7 @@ export default {
 	<thead luDataTableHead>
 		<tr luDataTableRow${selectableLabelHeadAttr}>
 			<th luDataTableCell>${textHeader}</th>${colsHeaderContent}
-			<th luDataTableCell${fixedWithAttr}${sortAttr}${alignAttr}>${textHeader}</th>
+			<th luDataTableCell${inlineSizeAttr}${sortAttr}${alignAttr}>${textHeader}</th>
 		</tr>
 	</thead>
 	<tbody luDataTableBody${groupAttr}${expandedAttr}>${linesContent}
@@ -228,8 +228,8 @@ export const Basic: StoryObj = {
 		hover: false,
 		cellBorder: false,
 		layoutFixed: false,
-		fixedWidth: false,
-		fixedWidthValue: '6rem',
+		inlineSize: false,
+		inlineSizeValue: '6rem',
 		selectable: false,
 		selected: false,
 		disabled: false,
