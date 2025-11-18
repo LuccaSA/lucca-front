@@ -105,6 +105,19 @@ Il est aussi possible de créer une barre d'outil personnalisée en assemblant l
 </lu-rich-text-input>
 ```
 
+Il est nécessaire d'avoir la barre d'outil pour utiliser les noeuds Lexical correspondants aux outils.
+Pour cacher la barre d'outil tout en gardant les fonctionnalités, il est possible d'utiliser le composant `lu-rich-text-input` avec l'attribut `hideToolbar`.
+
+```angular2html
+<lu-rich-text-input
+  placeholder="Enter some text..."
+  [(ngModel)]="example"
+  hideToolbar
+>
+  <lu-rich-text-input-toolbar>
+</lu-rich-text-input>
+```
+
 #### Styles
 
 - Bouton de style individuel
