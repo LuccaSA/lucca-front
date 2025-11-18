@@ -1,7 +1,7 @@
 import { ChangeDetectionStrategy, Component, effect, ElementRef, forwardRef, inject, input, OnDestroy, signal, viewChildren, ViewContainerRef } from '@angular/core';
 import { getIntl } from '@lucca-front/ng/core';
 import { $getNodeByKey, $getRoot, $getSelection, type Klass, type LexicalEditor, type LexicalNode, type NodeKey } from 'lexical';
-import { RICH_TEXT_PLUGIN_COMPONENT, RichTextPluginComponent } from '../../rich-text-input.component';
+import { INITIAL_UPDATE_TAG, RICH_TEXT_PLUGIN_COMPONENT, RichTextPluginComponent, SKIP_DOM_SELECTION_TAG } from '../../rich-text-input.component';
 import { LU_RICH_TEXT_INPUT_TRANSLATIONS } from '../../rich-text-input.translate';
 import { $createTagNode, TagNode } from './tag-node';
 import type { Tag } from './tag.model';
@@ -46,20 +46,23 @@ export class RichTextPluginTagComponent implements RichTextPluginComponent, OnDe
 			const nodes = this.#tagNodeKeys();
 			const isDisabled = this.isDisabled();
 
-			this.editor?.update(() => {
-				nodes.forEach((node) => {
-					const tagNode = $getNodeByKey<TagNode>(node);
-					if (!tagNode) {
-						return;
-					}
-					const tag = tags.find((t) => t.key === tagNode.getTagKey());
-					if (tag) {
-						tagNode.setTagDescription(tag.description ?? '').setDisabled(isDisabled);
-					} else {
-						tagNode.remove();
-					}
-				});
-			});
+			this.editor?.update(
+				() => {
+					nodes.forEach((node) => {
+						const tagNode = $getNodeByKey<TagNode>(node);
+						if (!tagNode) {
+							return;
+						}
+						const tag = tags.find((t) => t.key === tagNode.getTagKey());
+						if (tag) {
+							tagNode.setTagDescription(tag.description ?? '').setDisabled(isDisabled);
+						} else {
+							tagNode.remove();
+						}
+					});
+				},
+				{ tag: [SKIP_DOM_SELECTION_TAG, INITIAL_UPDATE_TAG] },
+			);
 		});
 	}
 
