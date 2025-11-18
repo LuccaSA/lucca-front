@@ -17,7 +17,6 @@ import {
 	ɵLuOptionComponent,
 	ɵLuOptionGroupPipe,
 } from '@lucca-front/ng/core-select';
-import { IconComponent } from '@lucca-front/ng/icon';
 import { TreeBranchComponent } from '@lucca-front/ng/tree-select';
 import { EMPTY } from 'rxjs';
 import { LuSimpleSelectInputComponent } from '../input/select-input.component';
@@ -43,7 +42,6 @@ import { OptionComponent } from '../../listbox/option/option.component';
 		LuIsOptionSelectedPipe,
 		PortalDirective,
 		ɵCoreSelectPanelElement,
-		IconComponent,
 		TreeBranchComponent,
 		TreeDisplayPipe,
 		ListboxComponent,

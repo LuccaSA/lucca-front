@@ -4,32 +4,28 @@ import {
 	ChangeDetectionStrategy,
 	ChangeDetectorRef,
 	Component,
-	contentChild,
 	effect,
 	ElementRef,
 	inject,
 	Input,
 	input,
 	OnDestroy,
-	OnInit,
 	output,
 	TemplateRef,
 	Type,
 	viewChild,
 	ViewChild,
 } from '@angular/core';
-import { getIntl, PortalDirective } from '@lucca-front/ng/core';
-import { LuTooltipTriggerDirective } from '@lucca-front/ng/tooltip';
+import { getIntl } from '@lucca-front/ng/core';
 import { asyncScheduler, observeOn, Subscription } from 'rxjs';
 import { GroupTemplateLocation } from '../panel/panel.utils';
 import { CoreSelectPanelElement } from '../panel/selectable-item';
 import { LuOptionContext, SELECT_ID } from '../select.model';
 import { LuOptionGrouping } from './group.directive';
-import { LuOptionGroupPipe } from './group.pipe';
 import { LuOptionOutletDirective } from './option-outlet.directive';
 import { ILuOptionContext, LU_OPTION_CONTEXT } from './option.token';
 import { LU_OPTION_TRANSLATIONS } from './option.translate';
-import { OptionComponent } from '../../listbox/option/option.component';
+import { OptionComponent } from '@lucca-front/ng/listbox';
 
 export const MAGIC_OPTION_SCROLL_DELAY = 15;
 
@@ -39,11 +35,14 @@ export const MAGIC_OPTION_SCROLL_DELAY = 15;
 	styleUrl: './option.component.scss',
 	changeDetection: ChangeDetectionStrategy.OnPush,
 	standalone: true,
-	imports: [LuOptionOutletDirective, PortalDirective, LuOptionGroupPipe, LuTooltipTriggerDirective, OptionComponent, CoreSelectPanelElement],
+	imports: [LuOptionOutletDirective, OptionComponent, CoreSelectPanelElement],
 })
 export class LuOptionComponent<T> implements AfterViewInit, OnDestroy {
-	protected selectableItem = viewChild('selectableItemRef', { read: CoreSelectPanelElement });
+	public selectableItem = viewChild('selectableItemRef', { read: CoreSelectPanelElement });
+	protected listboxOptionRef = viewChild('listboxOption', { read: OptionComponent });
 	protected intl = getIntl(LU_OPTION_TRANSLATIONS);
+
+	public tree = input(false, { transform: booleanAttribute });
 
 	public isSelected = input<boolean>(false);
 	public selected = output<void>();
@@ -86,7 +85,7 @@ export class LuOptionComponent<T> implements AfterViewInit, OnDestroy {
 		effect(() => {
 			if (this.selectableItem()?.isHighlighted()) {
 				setTimeout(() => {
-					this.elementRef.nativeElement.scrollIntoView(this.scrollIntoViewOptions);
+					this.listboxOptionRef()?.optionContent().nativeElement.scrollIntoView(this.scrollIntoViewOptions);
 				}, MAGIC_OPTION_SCROLL_DELAY);
 			}
 		});

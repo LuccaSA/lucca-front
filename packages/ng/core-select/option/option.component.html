@@ -4,9 +4,18 @@
 	luCoreSelectPanelElement
 	[option]="option"
 	#selectableItemRef="luCoreSelectPanelElement"
+	#listboxOption
 	[isSelected]="isSelected()"
 	(selected)="selected.emit()"
 	[disabled]="selectableItemRef.disabled"
+	[hasTreeChildren]="hasChildren()"
+	[hovered]="selectableItemRef.isHighlighted()"
+	optionRole="treeitem"
 >
 	<ng-container *luOptionOutlet="optionTpl; value: option" />
+	@if (tree()) {
+		<ng-container treeitem>
+			<ng-content />
+		</ng-container>
+	}
 </lu-listbox-option>

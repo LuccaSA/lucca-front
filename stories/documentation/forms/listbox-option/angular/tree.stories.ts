@@ -19,7 +19,7 @@ export default {
 	render: (args: OptionBasicStory) => {
 		const multiple = args.multiple ? ` multiple` : ``;
 		return {
-			template: cleanupTemplate(`<lu-listbox tree${multiple}>
+			template: `<lu-listbox tree${multiple}>
 	<lu-listbox-option>option 1</lu-listbox-option>
 	<lu-listbox-option>
 		option 2
@@ -36,7 +36,7 @@ export default {
 			</lu-listbox-option>
 		</ng-container>
 	</lu-listbox-option>
-</lu-listbox>`),
+</lu-listbox>`,
 		};
 	},
 } as Meta;

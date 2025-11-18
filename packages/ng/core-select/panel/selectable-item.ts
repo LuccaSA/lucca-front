@@ -10,7 +10,7 @@ import { CoreSelectPanelInstance, SELECT_PANEL_INSTANCE } from './panel.instance
 		'[attr.id]': 'idAttribute()',
 		'[attr.aria-selected]': 'isSelected()',
 		'[class.is-highlighted]': 'isHighlighted()',
-		role: 'option',
+		'[role]': 'optionRole()',
 	},
 })
 export class CoreSelectPanelElement<T> implements Highlightable, OnDestroy {
@@ -27,6 +27,8 @@ export class CoreSelectPanelElement<T> implements Highlightable, OnDestroy {
 	isSelected = model(false);
 
 	option = input<T>();
+
+	optionRole = input<'option' | 'treeitem'>('option');
 
 	isHighlighted = signal(false);
 

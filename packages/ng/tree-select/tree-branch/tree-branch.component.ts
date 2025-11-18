@@ -1,11 +1,10 @@
 import { booleanAttribute, ChangeDetectionStrategy, Component, inject, input, output, TemplateRef, Type, viewChild, ViewEncapsulation } from '@angular/core';
-import { ALuSelectInputComponent, LuIsOptionSelectedPipe, LuOptionComparer, LuOptionContext, TreeNode, ɵCoreSelectPanelElement, ɵLuOptionComponent } from '@lucca-front/ng/core-select';
+import { ALuSelectInputComponent, LuIsOptionSelectedPipe, LuOptionComparer, LuOptionContext, TreeNode, ɵLuOptionComponent } from '@lucca-front/ng/core-select';
 import { takeUntilDestroyed } from '@angular/core/rxjs-interop';
-import { Treeitem } from '../../listbox/option/option.component';
 
 @Component({
 	selector: 'lu-tree-branch',
-	imports: [ɵCoreSelectPanelElement, LuIsOptionSelectedPipe, ɵLuOptionComponent, Treeitem],
+	imports: [LuIsOptionSelectedPipe, ɵLuOptionComponent],
 	templateUrl: './tree-branch.component.html',
 	styleUrl: './tree-branch.component.scss',
 	encapsulation: ViewEncapsulation.None,
@@ -14,7 +13,7 @@ import { Treeitem } from '../../listbox/option/option.component';
 export class TreeBranchComponent<T> {
 	selectInputComponent = inject(ALuSelectInputComponent);
 
-	rootOptionRef = viewChild<ɵCoreSelectPanelElement<T>>('rootOption');
+	rootOptionRef = viewChild<ɵLuOptionComponent<T>>('rootOption');
 
 	branch = input.required<TreeNode<T>>();
 
@@ -39,12 +38,12 @@ export class TreeBranchComponent<T> {
 	constructor() {
 		if (this.selectInputComponent.selectChildren$) {
 			this.selectInputComponent.selectChildren$.pipe(takeUntilDestroyed()).subscribe(() => {
-				if (this.rootOptionRef().isHighlighted()) {
+				if (this.rootOptionRef().selectableItem().isHighlighted()) {
 					this.selectOnlyChildren(this.branch());
 				}
 			});
 			this.selectInputComponent.selectParent$.pipe(takeUntilDestroyed()).subscribe(() => {
-				if (this.rootOptionRef().isHighlighted()) {
+				if (this.rootOptionRef().selectableItem().isHighlighted()) {
 					this.toggleOne.emit(this.branch().node);
 				}
 			});

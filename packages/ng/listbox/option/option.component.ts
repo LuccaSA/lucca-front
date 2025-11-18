@@ -1,4 +1,4 @@
-import { booleanAttribute, Component, computed, contentChild, Directive, forwardRef, inject, input, ViewEncapsulation } from '@angular/core';
+import { booleanAttribute, Component, computed, Directive, ElementRef, forwardRef, inject, input, viewChild, ViewEncapsulation } from '@angular/core';
 import { IconComponent } from '@lucca-front/ng/icon';
 import { LISTBOX_INSTANCE, OPTION_INSTANCE } from '../tokens';
 
@@ -32,6 +32,7 @@ export class Treeitem {}
 export class OptionComponent {
 	#listboxRef = inject(LISTBOX_INSTANCE);
 	#parentOptionRef = inject(OPTION_INSTANCE, { skipSelf: true, optional: true });
+	public readonly optionContent = viewChild<ElementRef<HTMLElement>>('optionContent');
 
 	multiple = computed(() => this.#listboxRef.multiple());
 	tree = computed(() => this.#listboxRef.tree());
@@ -46,10 +47,9 @@ export class OptionComponent {
 	group = input(false, { transform: booleanAttribute });
 	select = input(false, { transform: booleanAttribute });
 	selectAll = input<'string' | null>();
+	hasTreeChildren = input(false, { transform: booleanAttribute });
 
 	groupId = `group${nextId++}`;
-
-	treeitemContent = contentChild(Treeitem, { descendants: true });
 
 	level: number = (this.#parentOptionRef?.level || 0) + 1;
 }

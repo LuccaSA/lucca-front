@@ -17,6 +17,7 @@
 			@let empty = !loading && ctx.options.length === 0;
 			@let listboxState = loading ? "loading" : empty ? "empty" : null;
 			@let statusMsg = { loading: intl.loading, empty: intl.emptyResults }[listboxState];
+
 			<lu-listbox [state]="listboxState" [statusMsg]="statusMsg" [tree]="!!treeGenerator">
 				@if (grouping && ctx.groupTemplateLocation === "group-header") {
 					@for (group of ctx.options | luOptionGroup: grouping.selector; track trackGroupsBy(groupIndex, group); let groupIndex = $index) {
