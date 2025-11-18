@@ -168,15 +168,15 @@ function getTemplate(args: BasicStory): string {
 		: `<tr luIndexTableRow${selectableParam}${stackParam}>
 			<th luIndexTableCell>${actionTpl}</th>
 			<td luIndexTableCell>Content</td>
-			<td luIndexTableCell${alignAttr}>Content</td>
+			<td luIndexTableCell>Content</td>
 		</tr>
-		<tr luIndexTableRow>
+		<tr luIndexTableRow${selectableParam}>
 			<td luIndexTableCell colspan="3"${alignAttr}${intermediateFooterAttr}>Content</td>
 		</tr>
 		<tr luIndexTableRow${selectableParam}>
 			<th luIndexTableCell><a href="#" luIndexTableAction>Content</a></th>
 			<td luIndexTableCell${allowSelectionAttr}>${allowActionTpl}</td>
-			<td luIndexTableCell${alignAttr}>Content Content Content</td>
+			<td luIndexTableCell>Content Content Content</td>
 		</tr>`;
 
 	return `<lu-index-table${selectableAttr}${layoutFixedAttr}${emptyAttr}>

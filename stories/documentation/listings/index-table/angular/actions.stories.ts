@@ -65,7 +65,7 @@ export default {
 function getTemplate(args: BasicStory): string {
 	const layoutFixedAttr = args.layoutFixed ? ` layoutFixed` : ``;
 	const value = args.dropdown ? `2.5` : `4.5`;
-	const sizeAttr = args.layoutFixed ? ` size="${value}"` : ``;
+	const sizeAttr = args.layoutFixed ? ` inlineSize="${value}"` : ``;
 	const dropdownTpl = args.dropdown
 		? `
 

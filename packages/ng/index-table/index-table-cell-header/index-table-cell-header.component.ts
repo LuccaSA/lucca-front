@@ -16,15 +16,14 @@ import { LU_INDEX_TABLE_CELL_INSTANCE } from '../index-table-cell.token';
 		'[class.indexTable-body-row-cell]': 'bodyRef !== null',
 		'[class.indexTable-head-row-cell]': 'headRef !== null',
 		'[class.indexTable-foot-row-cell]': 'footRef !== null',
-		'[class.mod-alignStart]': 'align() === "start"',
-		'[class.mod-alignCenter]': 'align() === "center"',
-		'[class.mod-alignEnd]': 'align() === "end"',
+		'[class.mod-alignStart]': 'align() === "start" || alignCol() === "start"',
+		'[class.mod-alignCenter]': 'align() === "center" || alignCol() === "center"',
+		'[class.mod-alignEnd]': 'align() === "end" || alignCol() === "end"',
 		'[attr.aria-sort]': 'sort()',
 		'[attr.scope]': 'bodyRef !== null ? "row" : "col"',
-		'[style.--indexTable-layoutFixed-width]': 'fixedWidth()',
 		'[class.mod-selectable]': 'selectable()',
 		'[class.mod-actions]': 'actions()',
-		'[style.--components-indexTable-cell-fixed-width]': 'size() !== 0 ? size() : null',
+		'[style.--components-indexTable-cell-fixed-width]': 'inlineSize() !== 0 ? inlineSize() : null',
 	},
 	imports: [NgTemplateOutlet, ButtonComponent, IconComponent],
 	providers: [
@@ -38,9 +37,8 @@ export class IndexTableRowCellHeaderComponent extends BaseIndexTableCell {
 	elementRef = inject<ElementRef<HTMLTableCellElement>>(ElementRef);
 
 	sort = input<undefined | null | 'ascending' | 'descending'>(undefined);
-	fixedWidth = input<string | null>(null);
 	selectable = input(false, { transform: booleanAttribute });
 	hiddenLabel = input(false, { transform: booleanAttribute });
 	actions = input(false, { transform: booleanAttribute });
-	size = input(0, { transform: numberAttribute });
+	inlineSize = input(0, { transform: numberAttribute });
 }
