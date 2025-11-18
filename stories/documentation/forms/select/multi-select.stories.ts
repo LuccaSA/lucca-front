@@ -319,9 +319,10 @@ export const AllAsDefaultValue = generateStory({
 >
 		<ng-container *luMultiDisplayer="let values; select: selectRef">
 		@if (values.length === 0) {
+		<!-- voir pour pas avoir de classe ici -->
 		<div class="multipleSelect-displayer mod-filter">
 			<div class="multipleSelect-displayer-filter">
-				All departments
+				All vegetables
 			</div>
 		</div>
 		} @else {
