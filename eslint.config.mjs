@@ -62,7 +62,8 @@ export default typescript.config(
 			'@typescript-eslint/no-restricted-imports': [
 				'error',
 				{
-					paths: ['rxjs/Rx', '@ngneat/spectator'],
+					paths: ['rxjs/Rx', '@ngneat/spectator', '@lucca-front/ng'],
+					patterns: [{ group: ['dist/ng/*', 'packages/ng/*'], message: 'Use @lucca-front/ng/* instead.' }],
 				},
 			],
 			'@typescript-eslint/no-unused-vars': [
