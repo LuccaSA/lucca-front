@@ -8,7 +8,7 @@ import typescript from 'typescript-eslint';
 
 export default typescript.config(
 	{
-		ignores: ['**/*.stories.ts', '**/schematics/**/tests/'],
+		ignores: ['**/schematics/**/tests/'],
 	},
 	{
 		linterOptions: {
@@ -30,6 +30,7 @@ export default typescript.config(
 			curly: 'error',
 			'max-classes-per-file': 'off',
 			'no-console': ['error', { allow: ['warn', 'error'] }],
+			'no-irregular-whitespace': ['error', { skipStrings: true, skipTemplates: true }],
 			'quote-props': ['error', 'as-needed'],
 			'space-before-function-paren': [
 				'error',
@@ -63,7 +64,16 @@ export default typescript.config(
 				'error',
 				{
 					paths: ['rxjs/Rx', '@ngneat/spectator', '@lucca-front/ng'],
-					patterns: [{ group: ['dist/ng/*', 'packages/ng/*'], message: 'Use @lucca-front/ng/* instead.' }],
+					patterns: [
+						{
+							regex: 'dist\/ng',
+							message: 'Use @lucca-front/ng/* instead.',
+						},
+						{
+							regex: '(\.\.\/)*packages\/ng',
+							message: 'Use @lucca-front/ng/* instead.',
+						},
+					],
 				},
 			],
 			'@typescript-eslint/no-unused-vars': [
@@ -100,6 +110,17 @@ export default typescript.config(
 			],
 			'@angular-eslint/no-host-metadata-property': 'off',
 			'@angular-eslint/no-input-rename': 'off',
+		},
+	},
+	{
+		files: ['stories/**/*.ts'],
+		rules: {
+			'@angular-eslint/component-selector': 'off',
+			'@angular-eslint/directive-selector': 'off',
+			'@typescript-eslint/no-unsafe-assignment': 'off',
+			'@typescript-eslint/no-unsafe-member-access': 'off',
+			'@typescript-eslint/no-empty-object-type': 'off', // Remove this line to kill empty interfaces (long work)
+			'@typescript-eslint/no-unused-vars': 'off',
 		},
 	},
 	{
