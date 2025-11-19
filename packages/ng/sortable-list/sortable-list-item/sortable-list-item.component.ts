@@ -1,6 +1,8 @@
 import { CdkDragHandle } from '@angular/cdk/drag-drop';
 import { booleanAttribute, ChangeDetectionStrategy, Component, input, output, ViewEncapsulation } from '@angular/core';
 import { ClearComponent } from '@lucca-front/ng/clear';
+import { IconComponent } from '@lucca-front/ng/icon';
+import { LuTooltipModule } from '@lucca-front/ng/tooltip';
 
 @Component({
 	selector: 'lu-sortable-list-item',
@@ -9,7 +11,7 @@ import { ClearComponent } from '@lucca-front/ng/clear';
 	styleUrl: './sortable-list-item.component.scss',
 	changeDetection: ChangeDetectionStrategy.OnPush,
 	encapsulation: ViewEncapsulation.None,
-	imports: [ClearComponent, CdkDragHandle],
+	imports: [ClearComponent, CdkDragHandle, IconComponent, LuTooltipModule],
 	host: {
 		class: 'sortableList-item',
 		'[class.mod-clickable]': 'clickable()',

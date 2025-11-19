@@ -4,13 +4,16 @@
 	box-shadow: form.fakeBorderOverlay(var(--palettes-neutral-200));
 	background-color: var(--palettes-neutral-100);
 
+	&.sortableList-item {
+		box-shadow: none;
+	}
+
 	* {
-		opacity: 0;
+		visibility: hidden;
 	}
 }
 
-.cdk-drag-handle,
-.cdk-drag-placeholder {
+.cdk-drag-handle {
 	cursor: move;
 }
 
