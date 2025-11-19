@@ -19,6 +19,7 @@ import { LuCoreSelectJobQualificationsDirective } from '@lucca-front/ng/core-sel
 import { LuCoreSelectUsersDirective, provideCoreSelectCurrentUserId } from '@lucca-front/ng/core-select/user';
 import {
 	LuMultiDisplayerDirective,
+	LuMultiSelectContentDisplayerComponent,
 	LuMultiSelectCounterDisplayerComponent,
 	LuMultiSelectDefaultDisplayerComponent,
 	LuMultiSelectDisplayerInputDirective,
@@ -304,34 +305,33 @@ export const WithMultiDisplayer = generateStory({
 });
 
 export const AllAsDefaultValue = generateStory({
-	name: 'All as default value',
-	description:
-		"Il est possible de personnaliser le contenu de la valeur sélectionnée en utilisant la directive `luMultiDisplayer`. Le *template* prend le tableau contenant l'ensemble des valeurs sélectionnées.",
+	name: 'With ContentDisplayer',
+	description: "Il est possible de personnaliser le contenu du displayer en utilisant la directive `luMultiDisplayer`. Avec le `ContentDisplayer` il est possible de lui passer n'importe quel contenu",
 	template: `<lu-multi-select
 	#selectRef
 	[clearable]="clearable"
 	[loading]="loading"
 	[(ngModel)]="selectedLegumes"
-	placeholder="Placeholder..."
 	[options]="legumes | filterLegumes:clue"
 	[keepSearchAfterSelection]="keepSearchAfterSelection"
 	(clueChange)="clue = $event"
 >
 		<ng-container *luMultiDisplayer="let values; select: selectRef">
 		@if (values.length === 0) {
-		<!-- voir pour pas avoir de classe ici -->
-		<div class="multipleSelect-displayer mod-filter">
-			<div class="multipleSelect-displayer-filter">
-				All vegetables
-			</div>
-		</div>
+			<lu-multi-select-content-displayer>🥔 All vegetables 🍆</lu-multi-select-content-displayer>
 		} @else {
 			<ng-container *luOptionOutlet="valuesTpl; value: values || []" />
 		}
 	</ng-container>
 </lu-multi-select>`,
 	neededImports: {
-		'@lucca-front/ng/multi-select': ['LuMultiSelectInputComponent', 'LuMultiDisplayerDirective', 'ɵLuOptionOutletDirective', 'MultiSelectDisplayerInputDirective'],
+		'@lucca-front/ng/multi-select': [
+			'LuMultiSelectInputComponent',
+			'LuMultiDisplayerDirective',
+			'ɵLuOptionOutletDirective',
+			'MultiSelectDisplayerInputDirective',
+			'MultiSelectContentDisplayerComponent',
+		],
 	},
 	storyPartial: {
 		args: {
@@ -825,6 +825,7 @@ const meta: Meta<LuMultiSelectInputStoryComponent> = {
 				LuDisabledOptionDirective,
 				LuMultiSelectDisplayerInputDirective,
 				LuMultiSelectCounterDisplayerComponent,
+				LuMultiSelectContentDisplayerComponent,
 				AsyncPipe,
 				TreeSelectDirective,
 				StoryModelDisplayComponent,
