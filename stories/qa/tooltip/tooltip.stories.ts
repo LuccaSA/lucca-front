@@ -14,7 +14,7 @@ import { BehaviorSubject, combineLatest, map, shareReplay, switchMap, timer } fr
 		<p>Ellapsed: {{ (timer$ | async) / 10 | number: '1.1-1' }}s</p>
 		<p>Blocked time: {{ (diff$ | async) / 1000 | number: '1.1-1' }}s</p>
 
-		<button luButton (click)="toggleDisplay()">Toggle dislay</button>
+		<button luButton type="button" (click)="toggleDisplay()">Toggle dislay</button>
 
 		@if (displayed) {
 			@for (cell of cells; track $index) {

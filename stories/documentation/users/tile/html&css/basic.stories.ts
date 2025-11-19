@@ -1,13 +1,11 @@
 import { Meta, StoryFn } from '@storybook/angular';
 
-interface UserTileBasicStory {}
-
 export default {
 	title: 'Documentation/Users/Tile/HTML&CSS/Basic',
 	argTypes: {},
 } as Meta;
 
-function getTemplate(args: UserTileBasicStory): string {
+function getTemplate(): string {
 	return `<div class="userTile">
 	<div class="avatar">
 		<img alt="" class="avatar-picture" loading="lazy" src="https://cdn.lucca.fr/lucca-front/avatars/finn.png" />
@@ -19,10 +17,8 @@ function getTemplate(args: UserTileBasicStory): string {
 </div>`;
 }
 
-const Template: StoryFn<UserTileBasicStory> = (args) => ({
-	props: args,
-	template: getTemplate(args),
+const Template: StoryFn = () => ({
+	template: getTemplate(),
 });
 
 export const Basic = Template.bind({});
-Basic.args = {};
