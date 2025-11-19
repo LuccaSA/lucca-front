@@ -25,6 +25,8 @@ import { LuMultiSelectPanelRef } from '../input/panel.model';
 import { MULTI_SELECT_INPUT } from '../select.model';
 import { LU_MULTI_SELECT_TRANSLATIONS } from '../select.translate';
 import { LuOptionsGroupContextPipe } from './option-group-context.pipe';
+import { toObservable } from '@angular/core/rxjs-interop';
+import { map } from 'rxjs/operators';
 
 @Component({
 	selector: 'lu-select-panel',
@@ -88,10 +90,11 @@ export class LuMultiSelectPanelComponent<T> implements AfterViewInit, CoreSelect
 		};
 	});
 
+	hasGrouping$ = toObservable(this.grouping).pipe(map((grouping) => !!grouping));
 	public clueChange$ = this.selectInput.clue$;
 	public shouldDisplayAddOption$ = this.selectInput.shouldDisplayAddOption$;
 
-	groupTemplateLocation$ = ɵgetGroupTemplateLocation(!!this.grouping, this.clueChange$, this.options$, this.searchable);
+	groupTemplateLocation$ = ɵgetGroupTemplateLocation(this.hasGrouping$, this.clueChange$, this.options$, this.searchable);
 
 	onScroll(evt: Event): void {
 		if (!(evt.target instanceof HTMLElement)) {
