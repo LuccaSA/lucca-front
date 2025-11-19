@@ -132,6 +132,12 @@ export default typescript.config(
 			'@angular-eslint/template/prefer-control-flow': 'error',
 		},
 	},
+	{
+		files: ['stories/**/*.html'],
+		rules: {
+			'@angular-eslint/template/prefer-self-closing-tags': 'off',
+		},
+	},
 	prettier,
 	storybook.configs['flat/recommended'],
 );

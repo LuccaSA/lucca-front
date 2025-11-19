@@ -129,7 +129,7 @@ class TestDialogComponent {
 		<pr-story-model-display class="pr-u-marginBlockStart0">{{ service.dialogOut() | json }}</pr-story-model-display>
 
 		<p class="pr-u-marginBlockStart200">Outlet</p>
-		<router-outlet></router-outlet>
+		<router-outlet />
 	`,
 	imports: [RouterOutlet, RouterLink, JsonPipe, ButtonComponent, StoryModelDisplayComponent],
 })
