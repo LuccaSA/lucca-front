@@ -1,8 +1,10 @@
-@if (drag()) {
+@if (tableRef.drag()) {
 	<td class="dataTable-body-row-cell mod-draggable">
-		<button type="button" class="button dataTable-body-row-cell-drag" cdkDragHandle>
-			<span aria-hidden="true" class="lucca-icon icon-dotsDrag"></span><span class="pr-u-mask">{{ intl.move }}</span>
-		</button>
+		@if (bodyRef) {
+			<button type="button" class="button dataTable-body-row-cell-drag" cdkDragHandle>
+				<span aria-hidden="true" class="lucca-icon icon-dotsDrag"></span><span class="pr-u-mask">{{ intl.move }}</span>
+			</button>
+		}
 	</td>
 }
 
