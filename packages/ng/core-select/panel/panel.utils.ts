@@ -1,4 +1,4 @@
-import { Observable, distinctUntilChanged, map, of, skip, startWith, switchMap, take, mergeMap } from 'rxjs';
+import { Observable, distinctUntilChanged, map, of, skip, startWith, switchMap, take } from 'rxjs';
 
 export type GroupTemplateLocation = 'group-header' | 'option' | 'none';
 
@@ -13,7 +13,7 @@ export function getGroupTemplateLocation(
 	searchable = true,
 ): Observable<GroupTemplateLocation> {
 	return hasGrouping$.pipe(
-		mergeMap((hasGrouping) => {
+		switchMap((hasGrouping) => {
 			if (!hasGrouping) {
 				return of<GroupTemplateLocation>('none');
 			}

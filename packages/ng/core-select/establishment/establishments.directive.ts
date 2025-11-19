@@ -3,7 +3,7 @@ import { DestroyRef, Directive, OnInit, computed, forwardRef, inject, input } fr
 import { takeUntilDestroyed, toObservable, toSignal } from '@angular/core/rxjs-interop';
 import { CORE_SELECT_API_TOTAL_COUNT_PROVIDER, CoreSelectApiTotalCountProvider, applySearchDelimiter } from '@lucca-front/ng/core-select';
 import { ALuCoreSelectApiDirective } from '@lucca-front/ng/core-select/api';
-import { Observable, debounceTime, filter, map, switchMap, mergeMap } from 'rxjs';
+import { Observable, debounceTime, filter, map, switchMap } from 'rxjs';
 import { LuEstablishmentGroupingComponent } from './establishment-grouping.component';
 import { EstablishmentGroupingService } from './establishment-grouping.service';
 import { LuCoreSelectEstablishment } from './models';
@@ -64,7 +64,7 @@ export class LuCoreSelectEstablishmentsDirective<T extends LuCoreSelectEstablish
 			})
 			.pipe(map((res) => (Array.isArray(res) ? res : res?.items) ?? []));
 
-		return this.#groupingService.useGrouping$.pipe(mergeMap(() => options$));
+		return this.#groupingService.useGrouping$.pipe(switchMap(() => options$));
 	}
 
 	protected override params$: Observable<Record<string, string | number | boolean>> = toObservable(
