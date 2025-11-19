@@ -1,6 +1,6 @@
 <section class="contentSection">
 	<h4>Un utilisateur</h4>
-	<div translate="no">{{ users[0] | luUserDisplay: displayFormat }}</div>
+	<div translate="no">{{ users()[0] | luUserDisplay: displayFormat() }}</div>
 </section>
 
 <section class="contentSection">
@@ -8,11 +8,11 @@
 	<div class="pr-u-displayFlex pr-u-flexDirectionColumn">
 		<div>
 			<label>Avec un séparateur : </label>
-			<span translate="no">{{ users | luUserDisplay: { format: displayFormat, separator } }}</span>
+			<span translate="no">{{ users() | luUserDisplay: { format: displayFormat(), separator: separator() } }}</span>
 		</div>
 		<div>
 			<label>Avec un formatter : </label>
-			<span translate="no">{{ users | luUserDisplay: { format: displayFormat, formatter } }}</span>
+			<span translate="no">{{ users() | luUserDisplay: { format: displayFormat(), formatter: formatter() } }}</span>
 		</div>
 	</div>
 </section>

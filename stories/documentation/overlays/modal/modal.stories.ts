@@ -1,4 +1,4 @@
-import { Component, inject, Input, Type } from '@angular/core';
+import { Component, inject, input, Type } from '@angular/core';
 import { provideAnimations } from '@angular/platform-browser/animations';
 import { ButtonComponent } from '@lucca-front/ng/button';
 import { ILuModalContent, LU_MODAL_DATA, LuModal, LuModalConfig, LuModalModule } from '@lucca-front/ng/modal';
@@ -86,15 +86,14 @@ class ModalDynamicContentComponent implements ILuModalContent {
 	imports: [LuToastsModule, ButtonComponent],
 })
 class ModalStories {
-	@Input() mode: 'modal' | 'sidepanel' = 'modal';
-	@Input() position: 'left' | 'right' = 'right';
-	@Input() panelClass: string;
-	@Input() undismissable: boolean;
-	@Input() size: 'XS' | 'S' | 'M' | 'L' | 'XL' = 'M';
-	@Input() noBackdrop: boolean;
-
-	@Input() useDynamicContent: boolean;
-	@Input() message: string;
+	mode = input<'modal' | 'sidepanel'>('modal');
+	position = input<'left' | 'right'>('right');
+	panelClass = input<string>();
+	undismissable = input<boolean>();
+	size = input<'XS' | 'S' | 'M' | 'L' | 'XL'>('M');
+	noBackdrop = input<boolean>();
+	useDynamicContent = input<boolean>();
+	message = input<string>();
 
 	constructor(
 		private modal: LuModal,
@@ -102,22 +101,23 @@ class ModalStories {
 	) {}
 
 	public openModal() {
-		const cmp: Type<ILuModalContent> = this.useDynamicContent ? ModalDynamicContentComponent : ModalContentComponent;
+		const cmp: Type<ILuModalContent> = this.useDynamicContent() ? ModalDynamicContentComponent : ModalContentComponent;
 		const baseOptions = {
-			...(this.panelClass ? { panelClass: this.panelClass } : {}),
-			size: this.size ?? 'M',
-			noBackdrop: this.noBackdrop ?? false,
-			undismissable: this.undismissable ?? false,
+			...(this.panelClass() ? { panelClass: this.panelClass() } : {}),
+			size: this.size() ?? 'M',
+			noBackdrop: this.noBackdrop() ?? false,
+			undismissable: this.undismissable() ?? false,
 		};
+		const mode = this.mode();
 		const options =
-			this.mode === 'sidepanel'
+			mode === 'sidepanel'
 				? {
 						...baseOptions,
-						position: this.position,
-						mode: this.mode,
+						position: this.position(),
+						mode,
 					}
 				: baseOptions;
-		const data = this.message ? { message: this.message } : {};
+		const data = this.message() ? { message: this.message() } : {};
 
 		const ref = this.modal.legacyOpen(cmp, data, options);
 

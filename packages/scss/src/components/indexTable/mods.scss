@@ -306,7 +306,7 @@
 		.indexTable-head-row-cell,
 		.indexTable-body-row-cell,
 		.indexTable-foot-row-cell {
-			@include cellFixedWidth;
+			@include cellInlineSize;
 		}
 	}
 
@@ -319,14 +319,14 @@
 				.indexTable-head-row-cell,
 				.indexTable-body-row-cell,
 				.indexTable-foot-row-cell {
-					@include cellFixedWidth;
+					@include cellInlineSize;
 				}
 			}
 		}
 	}
 }
 
-@mixin cellFixedWidth {
+@mixin cellInlineSize {
 	min-inline-size: var(--cell-width, auto);
 	max-inline-size: var(--cell-width, auto);
 	inline-size: var(--cell-width, auto);

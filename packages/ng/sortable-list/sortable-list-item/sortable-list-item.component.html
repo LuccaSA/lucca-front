@@ -1,0 +1,10 @@
+<div class="sortableList-item-handler"></div>
+<div class="sortableList-item-content">
+	<p class="sortableList-item-content-description">{{ label() }}</p>
+	@if (helperMessage()?.length) {
+		<p class="sortableList-item-content-helper">{{ helperMessage() }}</p>
+	}
+</div>
+@if (!unclearable()) {
+	<lu-clear class="sortableList-clear" (onClear)="delete.emit()" />
+}

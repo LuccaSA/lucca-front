@@ -7,5 +7,6 @@ type: Feature
 ---
 
 ### Intention
+### Design
 ### Key points
 ### Mistakes to avoid
