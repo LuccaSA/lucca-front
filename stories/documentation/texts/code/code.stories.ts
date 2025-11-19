@@ -10,6 +10,7 @@ export default {
 		block: {
 			control: {
 				type: 'boolean',
+				description: 'Passe le composant en pleine largeur et prend compte les blancs ainsi que les retours chariot.',
 			},
 		},
 	},
