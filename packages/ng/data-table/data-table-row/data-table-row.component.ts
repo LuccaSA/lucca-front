@@ -47,9 +47,4 @@ export class DataTableRowComponent {
 	selected = model<boolean>(false);
 	selectedLabel = input<string | null>(null);
 	disabled = input(false, { transform: booleanAttribute });
-	drag = input(false, { transform: booleanAttribute });
-
-	get dragDisabled() {
-		return !this.drag();
-	}
 }
