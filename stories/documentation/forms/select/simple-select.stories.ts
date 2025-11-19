@@ -22,12 +22,12 @@ import { applicationConfig, Meta, moduleMetadata } from '@storybook/angular';
 import { HiddenArgType } from 'stories/helpers/common-arg-types';
 import { createTestStory, getStoryGenerator, useDocumentationStory } from 'stories/helpers/stories';
 import { expect, screen, userEvent, within } from 'storybook/test';
+import { IconComponent } from '../../../../packages/ng/icon/icon.component';
 import { waitForAngular } from '../../../helpers/test';
 import { LuCoreSelectLegumesDirective } from './custom-api-example.component';
 import { LuCoreSelectCustomEstablishmentsDirective } from './custom-establishment-example.component';
 import { LuCoreSelectCustomUsersDirective } from './custom-user-example.component';
 import { allLegumes, colorNameByColor, coreSelectStory, FilterLegumesPipe, ILegume, LuCoreSelectInputStoryComponent, SortLegumesPipe } from './select.utils';
-import { IconComponent } from '../../../../packages/ng/icon/icon.component';
 
 export type LuSimpleSelectInputStoryComponent = LuCoreSelectInputStoryComponent & {
 	selectedLegume: ILegume | null;
