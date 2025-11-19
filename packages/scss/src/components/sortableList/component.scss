@@ -1,5 +1,6 @@
 @use '@lucca-front/icons/src/commons/utils/icon';
 @use '@lucca-front/scss/src/commons/utils/namespace';
+@use '@lucca-front/scss/src/commons/utils/reset';
 
 @mixin component($atRoot: namespace.$defaultAtRoot) {
 	background-color: var(--pr-t-elevation-surface-raised);
@@ -7,6 +8,7 @@
 	border-radius: var(--pr-t-border-radius-default);
 	list-style: none;
 	padding: 0;
+	overflow: hidden;
 
 	@at-root ($atRoot) {
 		.sortableList-item {
@@ -51,14 +53,22 @@
 		}
 
 		.sortableList-item-handler {
+			@include reset.button;
+
 			color: var(--palettes-neutral-600);
 			font-size: var(--components-sortableList-handler-size);
 			cursor: move;
+			inline-size: auto;
+			border-radius: var(--pr-t-border-radius-small);
+			display: flex;
+			align-items: center;
 
-			&::before {
-				@include icon.generate('drag');
+			&:not(:has(.lucca-icon)) {
+				&::before {
+					@include icon.generate('drag');
 
-				vertical-align: top;
+					vertical-align: top;
+				}
 			}
 		}
 

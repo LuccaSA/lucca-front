@@ -3,8 +3,9 @@
 		<lu-sortable-list-item
 			[label]="item.label"
 			[helperMessage]="item.helperMessage"
-			[clearable]="clearable()"
+			[unclearable]="unclearable()"
 			[clickable]="clickable()"
+			drag
 			cdkDrag
 		/>
 	}

@@ -11,7 +11,7 @@ import { Meta, StoryFn } from '@storybook/angular';
 class SortableListDraggableStory {
 	small = input<boolean>(false);
 	clickable = input<boolean>(false);
-	clearable = input<boolean>(false);
+	unclearable = input<boolean>(false);
 
 	listItem: Array<{ id: number; label: string; helperMessage: string }> = [
 		{ id: 1, label: 'Label 1', helperMessage: 'help 1' },
@@ -34,7 +34,7 @@ export default {
 		clickable: {
 			control: 'boolean',
 		},
-		clearable: {
+		unclearable: {
 			control: 'boolean',
 		},
 	},
@@ -48,14 +48,14 @@ export const Basic = template.bind({});
 Basic.args = {
 	small: false,
 	clickable: false,
-	clearable: false,
+	unclearable: false,
 };
 
 const code = `<lu-sortable-list cdkDropList (cdkDropListDropped)="drop($event)" [small]="small()">
 	<lu-sortable-list-item
 		[label]="item.label"
 		[helperMessage]="item.helperMessage"
-		[clearable]="clearable()"
+		[unclearable]="unclearable()"
 		[clickable]="clickable()"
 		cdkDrag
 	/>
