@@ -7,7 +7,7 @@
 	</thead>
 	<tbody luDataTableBody cdkDropList (cdkDropListDropped)="drop($event)">
 		@for (item of listItem; track $index) {
-			<tr luDataTableRow selectedLabel="selectable" cdkDrag>
+			<tr luDataTableRow selectedLabel="selectable" draggable cdkDrag>
 				<th luDataTableCell>{{ item.header }}</th>
 				<td luDataTableCell>{{ item.cell }}</td>
 			</tr>
