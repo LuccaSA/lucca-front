@@ -32,7 +32,7 @@ function getTemplate(args: SortableListBasicStory): string {
 	const small = args.small ? ` mod-S` : '';
 	return `<ul class="sortableList${small}">
 	<li class="sortableList-item cdk-drag-placeholder${clickable}">
-		<span class="sortableList-item-handler">
+		<span class="sortableList-item-handler button">
 			<span class="lucca-icon icon-drag" aria-hidden="true"></span>
 			<span class="pr-u-mask">Position 1. Utilisez les touches directionnelles pour réordonner</span>
 		</span>
@@ -45,7 +45,7 @@ function getTemplate(args: SortableListBasicStory): string {
 		</button>
 	</li>
 	<li class="sortableList-item${clickable}">
-		<span class="sortableList-item-handler">
+		<span class="sortableList-item-handler button">
 			<span class="lucca-icon icon-drag" aria-hidden="true"></span>
 			<span class="pr-u-mask">Position 1. Utilisez les touches directionnelles pour réordonner</span>
 		</span>
@@ -58,7 +58,7 @@ function getTemplate(args: SortableListBasicStory): string {
 		</button>
 	</li>
 	<li class="sortableList-item${clickable}">
-		<span class="sortableList-item-handler">
+		<span class="sortableList-item-handler button">
 			<span class="lucca-icon icon-drag" aria-hidden="true"></span>
 			<span class="pr-u-mask">Position 1. Utilisez les touches directionnelles pour réordonner</span>
 		</span>
@@ -73,7 +73,7 @@ function getTemplate(args: SortableListBasicStory): string {
 </ul>
 
 <li class="sortableList-item cdk-drag-preview${clickable}${small}" aria-hidden="true">
-	<span class="sortableList-item-handler">
+	<span class="sortableList-item-handler button">
 		<span class="lucca-icon icon-drag" aria-hidden="true"></span>
 		<span class="pr-u-mask">Position 1. Utilisez les touches directionnelles pour réordonner</span>
 	</span>
