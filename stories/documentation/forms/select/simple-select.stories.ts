@@ -452,9 +452,9 @@ export const UserCustomTemplate = generateStory({
 	},
 });
 
-export const UserAvatarDisplayerTemplate = generateStory({
-	name: 'User Select (custom displayer)',
-	description: `Pour personnaliser l'affichage de l'option sélectionnée, il est conseillé de ne pas écraser le template à l'aide de *luOption. La directive \`luUserOption\` permet de garder la gestion des homonymes et de l'utilisateur courant.`,
+export const UserAvatarTemplate = generateStory({
+	name: 'User Picture',
+	description: `Personnalisation de l'affichage des user dans les options avec le lu-user-picture.`,
 	template: `<lu-simple-select
 	placeholder="Placeholder…"
 	users
