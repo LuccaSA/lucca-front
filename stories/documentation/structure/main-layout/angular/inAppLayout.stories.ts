@@ -62,17 +62,18 @@ export default {
 		</ng-container>`
 			: ``;
 		const template = `
-			<lu-main-layout-block>
-				<lu-container>
-					<div class="fakeContent">content</div>
-				</lu-container>
-			</lu-main-layout-block>`;
+		<lu-main-layout-block>
+			<lu-container>
+				<div class="fakeContent">content</div>
+			</lu-container>
+		</lu-main-layout-block>`;
 		const contentOverflow = `\n			content overflowing`;
 		let overflow = ``;
 		for (let i = 1; i <= args.repeatOverflow; i++) {
 			overflow = overflow + contentOverflow;
 		}
-		const templateOverflow = `<lu-main-layout-block overflow>
+		const templateOverflow = `
+		<lu-main-layout-block overflow>
 			<lu-container>
 				<div class="fakeContent">${overflow}
 				</div>
@@ -189,8 +190,8 @@ export default {
 		navSide
 	</ng-container>
 	<lu-main-layout${headerStickyParam}${footerStickyParam}>${sidebarContainer}${headerContainer}
-		<ng-container mainLayoutContent>${content}
-		</ng-container>${footerContainer}
+		${content}
+		${footerContainer}
 	</lu-main-layout>
 </lu-app-layout>`,
 		};
