@@ -1,5 +1,6 @@
 import { NgTemplateOutlet } from '@angular/common';
-import { booleanAttribute, Component, inject, input, ViewEncapsulation } from '@angular/core';
+import { booleanAttribute, Component, inject, input, model, ViewEncapsulation } from '@angular/core';
+import { FormsModule } from '@angular/forms';
 import { ButtonComponent } from '@lucca-front/ng/button';
 import { IconComponent } from '@lucca-front/ng/icon';
 import { LU_DATA_TABLE_BODY_INSTANCE } from '../data-table-body/data-table-body.token';
@@ -24,14 +25,14 @@ import { LU_DATA_TABLE_HEAD_INSTANCE } from '../data-table-head/data-table-head.
 		'[style.--dataTable-layoutFixed-width]': 'fixedWidth()',
 		'[class.mod-editable]': 'editable()',
 	},
-	imports: [NgTemplateOutlet, ButtonComponent, IconComponent],
+	imports: [NgTemplateOutlet, ButtonComponent, IconComponent, FormsModule],
 })
 export class DataTableRowCellHeaderComponent {
 	bodyRef = inject(LU_DATA_TABLE_BODY_INSTANCE, { optional: true });
 	headRef = inject(LU_DATA_TABLE_HEAD_INSTANCE, { optional: true });
 	footRef = inject(LU_DATA_TABLE_FOOT_INSTANCE, { optional: true });
 
-	sort = input<undefined | null | 'ascending' | 'descending'>(undefined);
+	sort = model<undefined | null | 'ascending' | 'descending'>(undefined);
 	fixedWidth = input<string | null>(null);
 	editable = input(false, { transform: booleanAttribute });
 	align = input<null | 'start' | 'center' | 'end'>(null);
