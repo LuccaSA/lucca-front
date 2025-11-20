@@ -78,7 +78,7 @@ const code = `<lu-data-table drag>
 Basic.parameters = {
 	docs: {
 		source: {
-			language: 'ts',
+			language: 'html',
 			type: 'code',
 			code,
 		},
