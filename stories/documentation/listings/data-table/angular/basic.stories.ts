@@ -70,6 +70,9 @@ export default {
 		lines: {
 			control: { type: 'range', min: 2, max: 6 },
 		},
+		drag: {
+			control: { type: 'boolean' },
+		},
 	},
 	decorators: [
 		moduleMetadata({
@@ -117,6 +120,7 @@ export default {
 			selectedLabel,
 			selectedLabelHead,
 			pagination,
+			drag,
 			...inputArgs
 		} = args;
 
@@ -128,6 +132,7 @@ export default {
 		const sortAttr = sort ? ` sort="${sort}"` : ``;
 		const inlineSizeAttr = inlineSize && inlineSizeValue !== `` ? ` inlineSize="${inlineSizeValue}"` : ``;
 		const selectableAttr = selectable ? ` selectable` : ``;
+		const draggable = drag ? ` drag` : ``;
 		const selectedAttr = selected ? ` [selected]="true"` : ``;
 		const selectableLabelAttr = selectable ? ` selectedLabel="${selectedLabel}"` : ``;
 		const selectableLabelHeadAttr = selectable ? ` selectedLabel="${selectedLabelHead}"` : ``;
@@ -195,7 +200,7 @@ export default {
 
 		return {
 			props: { example: text },
-			template: `<lu-data-table${layoutFixedAttr}${hoverAttr}${cellBorderAttr}${selectableAttr}${verticalAlignAttr}${nestedAttr}>
+			template: `<lu-data-table${layoutFixedAttr}${hoverAttr}${cellBorderAttr}${selectableAttr}${verticalAlignAttr}${nestedAttr}${draggable}>
 	<thead luDataTableHead>
 		<tr luDataTableRow${selectableLabelHeadAttr}>
 			<th luDataTableCell>${textHeader}</th>${colsHeaderContent}
@@ -243,5 +248,6 @@ export const Basic: StoryObj = {
 		actions: false,
 		nested: false,
 		pagination: false,
+		drag: false,
 	},
 };
