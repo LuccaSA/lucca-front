@@ -12,6 +12,7 @@ import {
 import { FormFieldComponent } from '@lucca-front/ng/form-field';
 import { TextInputComponent } from '@lucca-front/ng/forms';
 import { IconComponent } from '@lucca-front/ng/icon';
+import { NumericBadgeComponent } from '@lucca-front/ng/numeric-badge';
 import { PaginationComponent } from '@lucca-front/ng/pagination';
 
 import { Meta, moduleMetadata, StoryObj } from '@storybook/angular';
@@ -87,6 +88,7 @@ export default {
 				ButtonComponent,
 				IconComponent,
 				PaginationComponent,
+				NumericBadgeComponent,
 			],
 		}),
 	],
@@ -134,7 +136,7 @@ export default {
 		const selectableLabelHeadAttr = selectable ? ` selectedLabel="${selectedLabelHead}"` : ``;
 		const disabledAttr = disabled ? ` disabled` : ``;
 		const stickyHeaderAttr = stickyHeader ? ` sticky` : ``;
-		const groupAttr = group ? ` groupButtonAlt="${groupButtonAlt}" group="${groupLabel}"` : ``;
+		const groupAttr = group ? ` groupButtonAlt="${groupButtonAlt}" [group]="samplePortalContent"` : ``;
 		const expandedAttr = expanded ? ` [expanded]="true"` : ``;
 		const alignAttr = align ? ` align="${align}"` : ``;
 		const verticalAlignAttr = verticalAlign ? ` verticalAlign="${verticalAlign}"` : ``;
@@ -185,6 +187,13 @@ export default {
 				</lu-form-field>
 			`
 			: text;
+		const samplePortalContentTpl = group
+			? `
+<ng-template #samplePortalContent>
+	${groupLabel}
+	<lu-numeric-badge [value]="${lines}" />
+</ng-template>`
+			: ``;
 		const tfootTpl = tfoot
 			? `
 	<tfoot luDataTableFoot>
@@ -215,7 +224,7 @@ export default {
 			<td luDataTableCell${alignAttr}${editableAttr}>${editableContent}</td>
 		</tr>
 	</tbody>${tfootTpl}${paginationTpl}
-</lu-data-table>`,
+</lu-data-table>${samplePortalContentTpl}`,
 		};
 	},
 } as Meta;
