@@ -7,7 +7,7 @@
 	@at-root ($atRoot) {
 		.simpleSelect-field {
 			display: grid;
-			grid-template-columns: 1fr auto auto;
+			grid-template-columns: auto 1fr auto auto;
 			align-items: center;
 			box-shadow: 0 0 0 1px var(--components-simpleSelect-border-color);
 			background-color: var(--components-simpleSelect-background);
@@ -17,28 +17,19 @@
 			outline: none;
 			cursor: pointer;
 
-			&:has(.simpleSelect-field-prefix) {
-				grid-template-columns: auto 1fr auto auto;
-
-				.simpleSelect-field-input,
-				.simpleSelect-field-value {
-					grid-column-start: 2;
-				}
-			}
-
 			&:hover {
 				--components-simpleSelect-border-color: var(--pr-t-color-input-border-hover);
 			}
 		}
 
 		.simpleSelect-field-prefix {
-			grid-column-start: 1;
-			grid-row-start: 1;
-			margin-inline-end: var(--pr-t-spacings-50);
+			&:not(:empty) {
+				margin-inline-end: var(--pr-t-spacings-50);
+			}
 		}
 
 		.simpleSelect-field-input {
-			grid-column-start: 1;
+			grid-column-start: 2;
 			grid-row-start: 1;
 			font: var(--components-simpleSelect-font);
 			padding: 0;
@@ -57,7 +48,7 @@
 		}
 
 		.simpleSelect-field-value {
-			grid-column-start: 1;
+			grid-column-start: 2;
 			grid-row-start: 1;
 			inline-size: 100%;
 			font: var(--components-simpleSelect-font);
