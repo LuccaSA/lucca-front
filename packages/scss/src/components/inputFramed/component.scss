@@ -86,6 +86,6 @@
 @mixin wrapper($atRoot: namespace.$defaultAtRoot) {
 	display: flex;
 	flex-direction: column;
-	gap: var(--pr-t-spacings-150);
+	gap: var(--components-inputFramed-wrapper-gap);
 	margin-block: var(--pr-t-spacings-50);
 }
