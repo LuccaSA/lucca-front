@@ -97,7 +97,6 @@ export default {
 			],
 		}),
 	],
-
 	render: (args, { argTypes }) => {
 		const {
 			cols,
