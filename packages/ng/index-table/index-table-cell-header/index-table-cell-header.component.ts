@@ -1,5 +1,6 @@
 import { NgTemplateOutlet } from '@angular/common';
-import { booleanAttribute, Component, ElementRef, forwardRef, inject, input, numberAttribute, ViewEncapsulation } from '@angular/core';
+import { booleanAttribute, Component, ElementRef, forwardRef, inject, input, model, numberAttribute, ViewEncapsulation } from '@angular/core';
+import { FormsModule } from '@angular/forms';
 import { ButtonComponent } from '@lucca-front/ng/button';
 import { IconComponent } from '@lucca-front/ng/icon';
 import { BaseIndexTableCell } from '../base-index-table-cell';
@@ -25,7 +26,7 @@ import { LU_INDEX_TABLE_CELL_INSTANCE } from '../index-table-cell.token';
 		'[class.mod-actions]': 'actions()',
 		'[style.--components-indexTable-cell-fixed-width]': 'inlineSize() !== 0 ? inlineSize() : null',
 	},
-	imports: [NgTemplateOutlet, ButtonComponent, IconComponent],
+	imports: [NgTemplateOutlet, ButtonComponent, IconComponent, FormsModule],
 	providers: [
 		{
 			provide: LU_INDEX_TABLE_CELL_INSTANCE,
@@ -36,7 +37,7 @@ import { LU_INDEX_TABLE_CELL_INSTANCE } from '../index-table-cell.token';
 export class IndexTableRowCellHeaderComponent extends BaseIndexTableCell {
 	elementRef = inject<ElementRef<HTMLTableCellElement>>(ElementRef);
 
-	sort = input<undefined | null | 'ascending' | 'descending'>(undefined);
+	sort = model<undefined | null | 'ascending' | 'descending'>(undefined);
 	selectable = input(false, { transform: booleanAttribute });
 	hiddenLabel = input(false, { transform: booleanAttribute });
 	actions = input(false, { transform: booleanAttribute });
