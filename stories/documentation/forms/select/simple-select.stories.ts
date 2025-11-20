@@ -461,7 +461,10 @@ export const UserAvatarTemplate = generateStory({
 	#usersRef="luUsers"
 	[(ngModel)]="selectedUser"
 >
-	<span translate="no" *luUserOption="let user; usersRef: usersRef"><lu-user-picture class="mod-XS pr-u-marginInlineEnd75" [user]="user" />{{ user | luUserDisplay }}</span>
+	<ng-container *luUserOption="let user; usersRef: usersRef">
+		<lu-user-picture class="mod-XS" [user]="user" aria-hidden="true" />
+		<span translate="no">{{ user | luUserDisplay }}</span>
+	</ng-container>
 </lu-simple-select>
 	`,
 	neededImports: {
