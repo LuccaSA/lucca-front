@@ -58,7 +58,8 @@
 						"lintFilePatterns": [
 							"packages/**/*.ts",
 							"stories/**/*.ts",
-							"packages/**/*.html"
+							"packages/**/*.html",
+							"stories/**/*.html"
 						]
 					}
 				},

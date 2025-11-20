@@ -8,7 +8,7 @@ import typescript from 'typescript-eslint';
 
 export default typescript.config(
 	{
-		ignores: ['**/schematics/**/tests/'],
+		ignores: ['dist/', '.storybook/**', '**/schematics/**/tests/'],
 	},
 	{
 		linterOptions: {
@@ -113,17 +113,6 @@ export default typescript.config(
 		},
 	},
 	{
-		files: ['stories/**/*.ts'],
-		rules: {
-			'@angular-eslint/component-selector': 'off',
-			'@angular-eslint/directive-selector': 'off',
-			'@typescript-eslint/no-unsafe-assignment': 'off',
-			'@typescript-eslint/no-unsafe-member-access': 'off',
-			'@typescript-eslint/no-empty-object-type': 'off', // Remove this line to kill empty interfaces (long work)
-			'@typescript-eslint/no-unused-vars': 'off',
-		},
-	},
-	{
 		files: ['**/*.html'],
 		extends: [...angular.configs.templateRecommended],
 		rules: {
@@ -132,10 +121,32 @@ export default typescript.config(
 			'@angular-eslint/template/prefer-control-flow': 'error',
 		},
 	},
+	// Storybook
+	{
+		files: ['stories/**/*.ts'],
+		rules: {
+			'@angular-eslint/component-selector': 'off',
+			'@angular-eslint/directive-selector': 'off',
+			// TODO A lot of issues currently so a lot of rules are turned off. Would be nice to enable them but requires a lot of fixes
+			'@typescript-eslint/no-empty-object-type': 'off', // Remove this line to kill empty interfaces (long work)
+			'@typescript-eslint/no-explicit-any': 'off',
+			'@typescript-eslint/no-floating-promises': 'off',
+			'@typescript-eslint/restrict-template-expressions': 'off',
+			'@typescript-eslint/no-unsafe-argument': 'off',
+			'@typescript-eslint/no-unsafe-assignment': 'off',
+			'@typescript-eslint/no-unsafe-call': 'off',
+			'@typescript-eslint/no-unsafe-declaration-merging': 'off', // This one seems really bad
+			'@typescript-eslint/no-unsafe-member-access': 'off',
+			'@typescript-eslint/no-unused-vars': 'off',
+			'@angular-eslint/template/button-has-type': 'off',
+		},
+	},
 	{
 		files: ['stories/**/*.html'],
 		rules: {
 			'@angular-eslint/template/prefer-self-closing-tags': 'off',
+			// TODO A lot of issues currently so a lot of rules are turned off. Would be nice to enable them but requires a lot of fixes
+			'@angular-eslint/template/button-has-type': 'off',
 		},
 	},
 	prettier,
