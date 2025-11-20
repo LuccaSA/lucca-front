@@ -10,9 +10,9 @@
 					[attr.aria-expanded]="expanded()"
 					(click)="expandedToggle()"
 				>
-					<lu-icon icon="arrowChevronTop" [alt]="groupButtonAlt()" />
+					<lu-icon icon="arrowChevronBottom" [alt]="groupButtonAlt()" />
 				</button>
-				{{ group() }}
+				<ng-container *luPortal="group()" />
 			</div>
 		</th>
 	</tr>

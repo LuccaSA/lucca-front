@@ -14,6 +14,7 @@ import {
 	IndexTableRowCellHeaderComponent,
 	IndexTableRowComponent,
 } from '@lucca-front/ng/index-table';
+import { NumericBadgeComponent } from '@lucca-front/ng/numeric-badge';
 import { PaginationComponent } from '@lucca-front/ng/pagination';
 import { LuUserDisplayModule } from '@lucca-front/ng/user';
 import { LuUserPopoverComponent, LuUserPopoverDirective, provideLuUserPopover } from '@lucca-front/ng/user-popover';
@@ -94,6 +95,7 @@ export default {
 				LuUserPopoverDirective,
 				EmptyStateSectionComponent,
 				HttpClientModule,
+				NumericBadgeComponent,
 			],
 		}),
 		applicationConfig({
@@ -107,7 +109,7 @@ function getTemplate(args: BasicStory): string {
 	const selectableAttr = args.selectable ? ` selectable` : ``;
 	const selectableParam = args.selectable ? ` selectedLabel="Sélectionner cette ligne"` : ``;
 	const selectableAllParam = args.selectable ? ` selectedLabel="Sélectionner toutes les lignes"` : ``;
-	const groupAttr = args.group ? ` group="${args.groupLabel}"` : ``;
+	const groupAttr = args.group ? ` [group]="samplePortalContent"` : ``;
 	const allowSelectionAttr = args.allowSelection ? ` allowTextSelection` : ``;
 	const allowActionTpl = args.allowAction ? `<a href="#">Content</a>` : `Content`;
 	const intermediateFooterAttr = args.intermediateFooter ? ` tfoot` : ``;
@@ -191,6 +193,10 @@ function getTemplate(args: BasicStory): string {
 		${tbodyTpl}
 	</tbody>${footerTpl}${paginationTpl}
 </lu-index-table>
+<ng-template #samplePortalContent>
+	${args.groupLabel}
+	<lu-numeric-badge [value]="8" />
+</ng-template>
 `;
 }
 
