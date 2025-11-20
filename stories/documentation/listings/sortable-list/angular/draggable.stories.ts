@@ -53,8 +53,15 @@ Basic.args = {
 
 const code = `<lu-sortable-list cdkDropList (cdkDropListDropped)="drop($event)" [small]="small()">
 	<lu-sortable-list-item
-		[label]="item.label"
-		[helperMessage]="item.helperMessage"
+		label="Label 1"
+		helperMessage="help 1"
+		[unclearable]="unclearable()"
+		[clickable]="clickable()"
+		cdkDrag
+	/>
+	<lu-sortable-list-item
+		label="Label 2"
+		helperMessage="help 2"
 		[unclearable]="unclearable()"
 		[clickable]="clickable()"
 		cdkDrag

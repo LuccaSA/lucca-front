@@ -71,6 +71,10 @@ const code = `<lu-data-table drag>
 			<th luDataTableCell>Header 1</th>
 			<td luDataTableCell>cell 1</td>
 		</tr>
+		<tr luDataTableRow selectedLabel="selectable" draggable cdkDrag>
+			<th luDataTableCell>Header 2</th>
+			<td luDataTableCell>cell 2</td>
+		</tr>
 	</tbody>
 </lu-data-table>
 `;
