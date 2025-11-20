@@ -16,7 +16,7 @@ class IndexTableInteractiveNestedSelectableStory {
 		// If the button is not expanded...
 		if (clickedBtn.getAttribute('aria-expanded') == 'false') {
 			// Loop through the rows and show them
-			for (var i = 0; i < targetRows.length; i++) {
+			for (let i = 0; i < targetRows.length; i++) {
 				targetRows[i].classList.remove('is-closed');
 			}
 			// Now set the button to expanded
@@ -24,7 +24,7 @@ class IndexTableInteractiveNestedSelectableStory {
 			// Otherwise button is not expanded...
 		} else {
 			// Loop through the rows and hide them
-			for (var i = 0; i < targetRows.length; i++) {
+			for (let i = 0; i < targetRows.length; i++) {
 				targetRows[i].classList.add('is-closed');
 			}
 			// Now set the button to collapsed
@@ -43,7 +43,7 @@ class IndexTableInteractiveNestedSelectableStory {
 
 		// if this checkbox has childs, propagate her states
 		if (childChbxs) {
-			for (var i = 0; i < childChbxs.length; i++) {
+			for (let i = 0; i < childChbxs.length; i++) {
 				const childChbx = childChbxs[i] as HTMLInputElement;
 				childChbx.checked = clickedChbxState;
 				childChbx.removeAttribute('aria-checked');
@@ -56,7 +56,7 @@ class IndexTableInteractiveNestedSelectableStory {
 		const parentChbxs = document.querySelectorAll(".checkboxField-input[aria-controls*='" + clickedChbx.id + "']");
 		if (parentChbxs) {
 			// for each ancestor
-			for (var i = parentChbxs.length - 1; i >= 0; i--) {
+			for (let i = parentChbxs.length - 1; i >= 0; i--) {
 				const parentChbx = parentChbxs[i] as HTMLInputElement;
 				parentChbx.removeAttribute('aria-checked');
 				// parse their childs list and sum their states (unchecked = 0 ; checked = 1)

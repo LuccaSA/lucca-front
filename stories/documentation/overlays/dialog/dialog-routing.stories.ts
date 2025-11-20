@@ -161,6 +161,7 @@ const routes: Routes = [
 		dataFactory: () => inject(DataProvider).dummy(),
 		dialogRouteConfig: {
 			// Can be overridden here
+			// eslint-disable-next-line @typescript-eslint/no-unsafe-return
 			canDeactivate: [(c) => c.allowThisDialogToClose()],
 		},
 	}),
