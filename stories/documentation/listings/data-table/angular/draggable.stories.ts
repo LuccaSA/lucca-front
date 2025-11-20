@@ -59,7 +59,21 @@ Basic.args = {
 	selectable: false,
 };
 
-const code = ``;
+const code = `<lu-data-table drag>
+	<thead luDataTableHead>
+		<tr luDataTableRow>
+			<th luDataTableCell>Header</th>
+			<th luDataTableCell>Cell</th>
+		</tr>
+	</thead>
+	<tbody luDataTableBody cdkDropList (cdkDropListDropped)="drop($event)">
+		<tr luDataTableRow selectedLabel="selectable" draggable cdkDrag>
+			<th luDataTableCell>Header 1</th>
+			<td luDataTableCell>cell 1</td>
+		</tr>
+	</tbody>
+</lu-data-table>
+`;
 
 Basic.parameters = {
 	docs: {
