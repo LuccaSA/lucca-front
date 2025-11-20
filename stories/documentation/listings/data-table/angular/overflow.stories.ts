@@ -107,6 +107,6 @@ export const Basic: StoryObj = {
 		lines: 2,
 		stickyColsStart: 0,
 		stickyColsEnd: 0,
-		stickyHeader: true,
+		stickyHeader: false,
 	},
 };

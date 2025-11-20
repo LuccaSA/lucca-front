@@ -1,0 +1,6 @@
+<table [class]="classMods()" [attr.role]="empty() ? 'presentation' : null" #tableRef>
+	<ng-content />
+</table>
+<div class="indexTableWrapper-pagination">
+	<ng-content select="[indexTablePagination]" />
+</div>
