@@ -17,4 +17,4 @@ export default {
 
 const template: StoryFn<FramedStory> = () => ({});
 
-export const basic = template.bind({});
+export const Basic = template.bind({});

@@ -29,4 +29,4 @@ export default {
 
 const template: StoryFn<GridStory> = () => ({});
 
-export const basic = template.bind({});
+export const Basic = template.bind({});

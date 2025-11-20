@@ -626,7 +626,7 @@ export const GroupBySelectAll = generateStory({
 	},
 });
 
-export const testDynamicDisabled = generateStory({
+export const TestDynamicDisabled = generateStory({
 	name: '[test] Dynamic disabled',
 	description: 'technical test to check dynamic disabled',
 	neededImports: {
