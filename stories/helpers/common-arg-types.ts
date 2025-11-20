@@ -30,6 +30,7 @@ export const PaletteAllArgType = {
 		type: 'select',
 	},
 	if: { arg: 'AI', truthy: false },
+	description: 'Applique une palette de couleurs au composant.',
 } as const;
 
 export const HiddenArgType = {
