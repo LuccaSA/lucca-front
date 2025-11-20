@@ -10,18 +10,20 @@ export default {
 	title: 'Documentation/Actions/Button/HTML&CSS/Group',
 	argTypes: {
 		outlined: {
+			description: 'Applique le style outlined (ghost) au bouton.',
 			control: {
 				type: 'boolean',
 			},
 		},
 		size: {
+			description: 'Modifie la taille du composant.',
 			options: ['', 'mod-S', 'mod-XS'],
 			control: {
 				type: 'select',
 			},
 		},
 		noFlexWrap: {
-			description: 'Désactive la réorganisation des butons en cas de manque de place.',
+			description: 'Désactive la réorganisation des boutons en cas de manque de place.',
 			control: {
 				type: 'boolean',
 			},
