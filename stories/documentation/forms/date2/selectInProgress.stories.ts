@@ -71,4 +71,4 @@ export default {
 	},
 } as Meta;
 
-export const selectInProgress: StoryObj<Calendar2Component> = {};
+export const SelectInProgress: StoryObj<Calendar2Component> = {};

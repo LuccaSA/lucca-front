@@ -32,7 +32,7 @@ export default {
 
 function getTemplate(args: CalloutIconStory): string {
 	const s = args.s ? ` mod-S` : '';
-	let palette = args.palette ? ` palette-${args.palette}` : ``;
+	const palette = args.palette ? ` palette-${args.palette}` : ``;
 	const icon = args.icon ? ' icon-' + args.icon : '';
 	return `<div class="callout${s}${palette}">
 	<div class="callout-icon">

@@ -11,7 +11,7 @@ interface CheckboxBasicStory {
 	mixed: false;
 	invalid: false;
 	help: false;
-	messageState: '';
+	messageState: '' | 'error' | 'warning' | 'success';
 	checklist: boolean;
 }
 
@@ -94,7 +94,7 @@ function getTemplate(args: CheckboxBasicStory): string {
 	const mixed = args.mixed ? ` aria-checked="mixed"` : '';
 	const invalid = args.invalid ? ` aria-invalid="true"` : '';
 	const help = args.help;
-	const messageState = args.messageState ? ' is-' + args.messageState : '';
+	const messageState = args.messageState ? ` is-${args.messageState}` : '';
 	const checklist = args.checklist ? ' mod-checklist' : '';
 
 	return `<div class="form-field${s} pr-u-marginBlockEnd200">

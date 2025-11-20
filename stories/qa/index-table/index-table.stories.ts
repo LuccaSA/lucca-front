@@ -1,5 +1,5 @@
 import { Component } from '@angular/core';
-import { ButtonComponent } from "@lucca-front/ng/button";
+import { ButtonComponent } from '@lucca-front/ng/button';
 import { IconComponent } from '@lucca-front/ng/icon';
 import { StatusBadgeComponent } from '@lucca-front/ng/statusBadge';
 import { TagComponent } from '@lucca-front/ng/tag';
@@ -21,4 +21,4 @@ export default {
 
 const template: StoryFn<IndexTableStory> = () => ({});
 
-export const basic = template.bind({});
+export const Basic = template.bind({});

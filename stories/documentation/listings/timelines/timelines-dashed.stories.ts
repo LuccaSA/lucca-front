@@ -7,8 +7,7 @@ interface TimelinesDashedStory {
 
 export default {
 	title: 'Documentation/Listings/Timelines/Dashed',
-	argTypes: {
-	},
+	argTypes: {},
 } as Meta;
 
 function getTemplate(args: TimelinesDashedStory): string {
@@ -44,4 +43,4 @@ const Template: StoryFn<TimelinesDashedStory> = (args) => ({
 });
 
 export const Dashed = Template.bind({});
-Dashed.args = { };
+Dashed.args = {};

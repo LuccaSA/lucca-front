@@ -20,4 +20,4 @@ export default {
 
 const template: StoryFn<InlineMessageStory> = () => ({});
 
-export const basic = template.bind({});
+export const Basic = template.bind({});

@@ -15,4 +15,4 @@ export default {
 
 const template: StoryFn<TableStory> = () => ({});
 
-export const basic = template.bind({});
+export const Basic = template.bind({});

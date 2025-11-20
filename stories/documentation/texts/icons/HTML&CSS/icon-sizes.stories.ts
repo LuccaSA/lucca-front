@@ -10,9 +10,9 @@ export default {
 <span aria-hidden="true" class="lucca-icon icon-heart mod-M"></span>
 <span aria-hidden="true" class="lucca-icon icon-heart mod-L"></span>
 <span aria-hidden="true" class="lucca-icon icon-heart mod-XL"></span>
-<span aria-hidden="true" class="lucca-icon icon-heart mod-XXL"></span>`
-		}
-	}
+<span aria-hidden="true" class="lucca-icon icon-heart mod-XXL"></span>`,
+		};
+	},
 } as Meta;
 
 export const Size: StoryObj = {};

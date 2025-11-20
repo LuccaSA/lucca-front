@@ -42,8 +42,8 @@ const template: StoryFn<SidePanelStory> = (args) => ({
 	props: args,
 });
 
-export const basic = template.bind({});
-basic.args = {};
+export const Basic = template.bind({});
+Basic.args = {};
 
 const code = `
 /* 1. Importer ILuSidePanelContent, LuSidepanel, LuSidepanelModule */
@@ -77,7 +77,7 @@ class SidePanelStories {
 	}
 }`;
 
-basic.parameters = {
+Basic.parameters = {
 	docs: {
 		source: {
 			language: 'ts',

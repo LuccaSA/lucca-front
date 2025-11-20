@@ -20,4 +20,4 @@ export default {
 
 const template: StoryFn<DialogStory> = () => ({});
 
-export const basic = template.bind({});
+export const Basic = template.bind({});

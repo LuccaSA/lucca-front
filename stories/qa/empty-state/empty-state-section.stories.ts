@@ -23,4 +23,4 @@ export default {
 
 const template: StoryFn<EmptyStateSectionStory> = () => ({});
 
-export const basic = template.bind({});
+export const Basic = template.bind({});

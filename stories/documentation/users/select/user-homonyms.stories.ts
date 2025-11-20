@@ -74,10 +74,10 @@ const code = `
 </label>
 `;
 
-export const homonyms = template.bind({});
-homonyms.args = {};
+export const Homonyms = template.bind({});
+Homonyms.args = {};
 
-homonyms.parameters = {
+Homonyms.parameters = {
 	controls: { include: [] },
 	docs: {
 		source: {

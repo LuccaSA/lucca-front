@@ -6,7 +6,7 @@ import { Meta, StoryFn } from '@storybook/angular';
 	selector: 'precision-stories',
 	standalone: true,
 	imports: [LuNumberPipe],
-	template: `<code [innerHTML]="value | luNumber : precision"></code>`,
+	template: `<code [innerHTML]="value | luNumber: precision"></code>`,
 })
 class PrecisionStory {
 	@Input() value: number;

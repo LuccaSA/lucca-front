@@ -243,7 +243,6 @@ export class Calendar2Component implements OnInit {
 	});
 
 	currentDecadeLabel = computed(() => {
-		// eslint-disable-next-line no-irregular-whitespace
 		return `${this.#intlDateYear.format(startOfDecade(this.decade()))} – ${this.#intlDateYear.format(endOfDecade(this.decade()))}`;
 	});
 

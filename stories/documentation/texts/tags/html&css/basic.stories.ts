@@ -1,22 +1,15 @@
 import { Meta, StoryFn } from '@storybook/angular';
 
-interface TagsBasicStory {
-}
-
 export default {
 	title: 'Documentation/Texts/Tags/HTML&CSS/Basic',
-	argTypes: {
-	},
 } as Meta;
 
-function getTemplate(args: TagsBasicStory): string {
+function getTemplate(): string {
 	return '<span class="tag">Text</span>';
 }
 
-const Template: StoryFn<TagsBasicStory> = (args) => ({
-	props: args,
-	template: getTemplate(args),
+const Template: StoryFn = () => ({
+	template: getTemplate(),
 });
 
 export const Basic = Template.bind({});
-Basic.args = { };
