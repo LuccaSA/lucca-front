@@ -1,4 +1,5 @@
 @mixin vars {
+	--components-inputFramed-wrapper-gap: var(--pr-t-spacings-100);
 	--components-inputFramed-content-display: none;
 	--components-inputFramed-borderColor: var(--palettes-neutral-300);
 	--components-inputFramed-header-info-borderColor: var(--palettes-neutral-200);

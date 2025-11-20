@@ -54,4 +54,10 @@
 		@include vars;
 		@include wrapper;
 	}
+
+	@layer mods {
+		&:has(.inputFramed.mod-L) {
+			@include wrapperL;
+		}
+	}
 }

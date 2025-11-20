@@ -11,3 +11,7 @@
 	--components-inputFramed-header-info-marginBlockStart: var(--pr-t-spacings-100);
 	--components-inputFramed-header-info-paddingBlockStart: var(--pr-t-spacings-200);
 }
+
+@mixin wrapperL {
+	--components-inputFramed-wrapper-gap: var(--pr-t-spacings-150);
+}
