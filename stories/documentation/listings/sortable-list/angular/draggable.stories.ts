@@ -64,7 +64,7 @@ const code = `<lu-sortable-list cdkDropList (cdkDropListDropped)="drop($event)" 
 Basic.parameters = {
 	docs: {
 		source: {
-			language: 'ts',
+			language: 'html',
 			type: 'code',
 			code,
 		},
