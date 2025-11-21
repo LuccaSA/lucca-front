@@ -81,6 +81,7 @@ class DismissedComponent {}
 				</lu-dialog-content>
 				<lu-dialog-footer>
 					<div class="footer-actions">
+						<button luButton type="button" (click)="resize()">Resize</button>
 						<button luButton type="submit" (click)="submit(); $event.preventDefault()">Submit</button>
 						<button luButton="outline" type="button" luDialogDismiss>Dismiss</button>
 					</div>
@@ -105,8 +106,20 @@ class TestDialogComponent {
 		dataString: this.dataString(),
 	}));
 
+	size = 'M';
+
 	submit() {
 		this.ref.close(this.formValue());
+	}
+
+	resize() {
+		if (this.size === 'M') {
+			this.ref.resize('XS');
+			this.size = 'XS';
+		} else {
+			this.ref.resize('M');
+			this.size = 'M';
+		}
 	}
 }
 
@@ -140,6 +153,7 @@ const dialogRoute = dialogRouteFactory(TestDialogComponent, {
 	dialogConfig: {
 		modal: true,
 		size: 'M',
+		resizeAnimated: true,
 	},
 	dialogRouteConfig: {
 		onClosed: (onClosedData) => {
