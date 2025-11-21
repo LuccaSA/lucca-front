@@ -18,5 +18,18 @@
 		&.mod-clickable {
 			@include clickable;
 		}
+
+		&.mod-S {
+			@include S;
+		}
+	}
+}
+
+// drag and drop preview
+:not(.sortableList) {
+	> .sortableList-item {
+			@layer components {
+				@include vars;
+			}
 	}
 }
