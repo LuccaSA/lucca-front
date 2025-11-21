@@ -1,3 +1,5 @@
+import { ButtonComponent } from '@lucca-front/ng/button';
+import { IconComponent } from '@lucca-front/ng/icon';
 import { ListingComponent, ListingItemComponent } from '@lucca-front/ng/listing';
 import { Meta, moduleMetadata, StoryObj } from '@storybook/angular';
 import { IconsList } from 'packages/icons/icons-list';
@@ -13,6 +15,7 @@ interface ListingBasicStory {
 	palette: string;
 	defaultIcon: string;
 	icon: string;
+	action: string;
 }
 
 export default {
@@ -21,39 +24,58 @@ export default {
 
 	decorators: [
 		moduleMetadata({
-			imports: [ListingComponent, ListingItemComponent],
+			imports: [ListingComponent, ListingItemComponent, IconComponent, ButtonComponent],
 		}),
 	],
 
 	render: (args: ListingBasicStory, context) => {
-		const { type, checklist, ordered, descriptionList, icons, defaultIcon, icon, ...inputs } = args;
+		const { type, checklist, ordered, descriptionList, icons, defaultIcon, icon, action, ...inputs } = args;
 		const checklistParam = args.type === 'checklist' ? ` checklist` : ``;
 		const orderedParam = args.type === 'ordered' ? ` ordered` : ``;
 		const descriptionListParam = args.type === 'descriptionList' ? ` descriptionList` : ``;
 		const iconsParam = args.type === 'icons' ? ` icons` : ``;
 		const iconParam = args.type === 'icons' ? ` icon="${args.icon}"` : ``;
 		const defaultIconParam = args.type === 'icons' ? ` defaultIcon="${defaultIcon}"` : ``;
-		return {
-			template: `<lu-listing inline${checklistParam}${orderedParam}${descriptionListParam}${iconsParam}${iconsParam}${defaultIconParam}${generateInputs(inputs, context.argTypes)}>
+		let actionContent = '';
+		if (action === 'button') {
+			actionContent = '<button luButton="outlined" type="button">Action</button>';
+		} else if (action === 'link') {
+			actionContent = '<a luLink>Link</a>';
+		}
+		if (args.type === 'descriptionList') {
+			return {
+				template: `<lu-listing inline${descriptionListParam}${generateInputs(inputs, context.argTypes)}>
+		<dt lu-listing-item>Term:</dt>
+		<dd lu-listing-item>definition</dd>
+		<dt lu-listing-item>Term,</dt>
+		<dt lu-listing-item>term:</dt>
+		<dd lu-listing-item>definition</dd>
+		<dt lu-listing-item><lu-icon icon="user" size="S" alt="term"/></dt>
+		<dd lu-listing-item>definition</dd>
+		<dt lu-listing-item>Term:</dt>
+		<dd lu-listing-item>definition,</dd>
+		<dd lu-listing-item>definition</dd>
+		<dt lu-listing-item>Term:</dt>
+		<dd lu-listing-item><a href="#">lien</a></dd>
+
+	</lu-listing>
+	${actionContent}`,
+			};
+		} else {
+			return {
+				template: `<lu-listing inline${checklistParam}${orderedParam}${iconsParam}${iconsParam}${defaultIconParam}${generateInputs(inputs, context.argTypes)}>
 	<lu-listing-item><a href="#">lorem ipsum dolor sit amet</a></lu-listing-item>
 	<lu-listing-item${iconParam}><a href="#">lorem ipsum dolor sit amet</a></lu-listing-item>
 	<lu-listing-item><a href="#">lorem ipsum dolor sit amet</a></lu-listing-item>
 	<lu-listing-item><a href="#">lorem ipsum dolor sit amet</a></lu-listing-item>
 	<lu-listing-item><a href="#">lorem ipsum dolor sit amet</a></lu-listing-item>
-	<dt lu-listing-item>term</dt>
-	<dd lu-listing-item><a href="#">definition</a></dd>
-	<dt lu-listing-item>term</dt>
-	<dt lu-listing-item>double term</dt>
-	<dd lu-listing-item><a href="#">definition</a></dd>
-	<dt lu-listing-item>term</dt>
-	<dd lu-listing-item><a href="#">definition</a></dd>
-	<dd lu-listing-item>double definition</dd>
 </lu-listing>`,
-		};
+			};
+		}
 	},
 } as Meta;
 
-export const Template: StoryObj<ListingComponent & ListingItemComponent & { type: string }> = {
+export const Template: StoryObj<ListingComponent & ListingItemComponent & { type: string } & { action: string }> = {
 	argTypes: {
 		type: {
 			options: ['', 'checklist', 'icons', 'descriptionList'],
@@ -79,14 +101,20 @@ export const Template: StoryObj<ListingComponent & ListingItemComponent & { type
 				type: 'select',
 			},
 		},
+		action: {
+			options: [null, 'button', 'link'],
+			control: {
+				type: 'select',
+			},
+		},
 	},
 
 	args: {
 		type: '',
 		divider: false,
-		hideFirstItems: false,
 		defaultIcon: 'book',
 		icon: 'foodCroissant',
 		palette: 'none',
+		action: null,
 	},
 };

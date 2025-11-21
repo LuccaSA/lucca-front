@@ -21,7 +21,6 @@ import { LU_LISTING_INSTANCE } from './listing.token';
 })
 export class ListingComponent {
 	inline = input(false, { transform: booleanAttribute });
-	hideFirstItems = input(false, { transform: booleanAttribute });
 	start = input(1, { transform: numberAttribute });
 	ordered = input(false, { transform: booleanAttribute });
 	descriptionList = input(false, { transform: booleanAttribute });
@@ -30,6 +29,7 @@ export class ListingComponent {
 	defaultIcon = input<LuccaIcon>('signConfirm');
 	palette = input<Palette>('none');
 	divider = input(false, { transform: booleanAttribute });
+	action = input(false, { transform: booleanAttribute });
 
 	get paletteClass() {
 		return {

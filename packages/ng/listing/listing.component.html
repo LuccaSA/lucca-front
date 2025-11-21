@@ -1,7 +1,6 @@
 @if (ordered()) {
 	<ol
 		class="listing"
-		[class.mod-hideFirstItems]="hideFirstItems()"
 		[class.mod-inline]="inline()"
 		[class.mod-icons]="icons()"
 		[class.mod-checklist]="checklist()"
@@ -14,7 +13,6 @@
 	@if (descriptionList()) {
 		<dl
 			class="listing"
-			[class.mod-hideFirstItems]="hideFirstItems()"
 			[class.mod-inline]="inline()"
 			[class.mod-icons]="icons()"
 			[class.mod-checklist]="checklist()"
@@ -26,7 +24,6 @@
 	} @else {
 		<ul
 			class="listing"
-			[class.mod-hideFirstItems]="hideFirstItems()"
 			[class.mod-inline]="inline()"
 			[class.mod-icons]="icons()"
 			[class.mod-checklist]="checklist()"
