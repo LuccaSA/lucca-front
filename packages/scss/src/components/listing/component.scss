@@ -21,14 +21,19 @@
 			gap: var(--pr-t-spacings-100);
 			margin-inline-start: 0;
 			// divider pseudo element
-			&:not(dd)::before,
-			&:not(+ dt.listing-item)::before {
+			&::before {
 				content: var(--components-listing-item-before-content);
 				border-inline-start: var(--commons-divider-border);
 				height: 0.75lh;
 				align-self: center;
 			}
+			&:is(dd)::before {
+				content: unset;
+			}
+			&:is(dt + dt)::before {
+				content: unset;
 		}
+	}
 
 		.listing-item-icon {
 			inline-size: calc(var(--pr-t-spacings-200) + var(--pr-t-spacings-50));

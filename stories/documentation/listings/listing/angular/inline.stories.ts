@@ -43,8 +43,11 @@ export default {
 	<dt lu-listing-item>term</dt>
 	<dd lu-listing-item><a href="#">definition</a></dd>
 	<dt lu-listing-item>term</dt>
+	<dt lu-listing-item>double term</dt>
+	<dd lu-listing-item><a href="#">definition</a></dd>
 	<dt lu-listing-item>term</dt>
 	<dd lu-listing-item><a href="#">definition</a></dd>
+	<dd lu-listing-item>double definition</dd>
 </lu-listing>`,
 		};
 	},
