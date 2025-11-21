@@ -12,15 +12,9 @@
 
 	@at-root ($atRoot) {
 		.fancyBox-content {
-			display: contents;
-		}
-
-		.fancyBox-content-box {
 			position: relative;
 			min-block-size: var(--components-fancyBox-contentMinBlockSize);
 			min-inline-size: var(--components-fancyBox-contentMinInlineSize);
-
-			// Prevent content with `wrap: nowrap` to overflow.
 			max-inline-size: 100%;
 			padding-block: var(--components-fancyBox-contentPaddingBlock);
 			padding-inline: var(--components-fancyBox-contentPaddingInline);
@@ -42,6 +36,7 @@
 				background-repeat: no-repeat;
 				background-size: contain;
 				transition-duration: var(--commons-animations-durations-slow);
+				pointer-events: none;
 			}
 
 			&::before {
@@ -59,7 +54,7 @@
 			}
 		}
 
-		.fancyBox-content-box-foreground {
+		.fancyBox-content-foreground {
 			position: absolute;
 			inline-size: var(--components-fancyBox-imageWidth);
 			block-size: var(--components-fancyBox-imageHeight);
@@ -70,6 +65,7 @@
 			background-size: contain;
 			transition-property: width, height, top, right;
 			transition-duration: var(--commons-animations-durations-slow);
+			pointer-events: none;
 		}
 	}
 }

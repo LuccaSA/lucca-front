@@ -1,10 +1,12 @@
 import { Component } from '@angular/core';
+import { FancyBoxComponent } from '@lucca-front/ng/fancy-box';
 import { Meta, StoryFn } from '@storybook/angular';
 
 @Component({
 	standalone: true,
 	selector: 'fancy-box-stories',
 	templateUrl: './fancy-box.stories.html',
+	imports: [FancyBoxComponent],
 })
 class FancyBoxStory {}
 

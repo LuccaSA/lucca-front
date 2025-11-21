@@ -9,11 +9,7 @@
 		@include narrow;
 	}
 
-	&.mod-paddingS {
-		@include paddingS;
-	}
-
-	&.mod-fitContentBlock {
-		@include fitContentBlock;
+	&.mod-S {
+		@include S;
 	}
 }

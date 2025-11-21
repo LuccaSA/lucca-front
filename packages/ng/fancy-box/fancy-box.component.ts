@@ -1,4 +1,4 @@
-import { ChangeDetectionStrategy, Component, HostBinding, Input, ViewEncapsulation } from '@angular/core';
+import { ChangeDetectionStrategy, Component, HostBinding, input, Input, ViewEncapsulation } from '@angular/core';
 
 @Component({
 	selector: 'lu-fancy-box',
@@ -9,6 +9,7 @@ import { ChangeDetectionStrategy, Component, HostBinding, Input, ViewEncapsulati
 	encapsulation: ViewEncapsulation.None,
 	host: {
 		class: 'fancyBox',
+		'[class.mod-S]': 'size() === "S"',
 	},
 })
 export class FancyBoxComponent {
@@ -32,4 +33,6 @@ export class FancyBoxComponent {
 	get backgroundRightStyle(): string {
 		return this.backgroundRight ? `url(${this.backgroundRight})` : ``;
 	}
+
+	size = input<null | 'S'>(null);
 }
