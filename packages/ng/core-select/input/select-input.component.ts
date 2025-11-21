@@ -66,6 +66,8 @@ export abstract class ALuSelectInputComponent<TOption, TValue> implements OnDest
 	public disabled$ = new BehaviorSubject(false);
 	filterPillDisabled = toSignal(this.disabled$);
 
+	prefix = input<PortalContent | null>(null);
+
 	@Input()
 	set placeholder(value: string) {
 		this.placeholder$.next(value);
