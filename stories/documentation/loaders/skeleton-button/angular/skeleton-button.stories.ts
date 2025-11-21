@@ -12,7 +12,6 @@ export default {
 		},
 		size: {
 			control: {
-				options: ['mod-M', 'mod-S', 'mod-XS'],
 				type: 'select',
 			},
 		},
