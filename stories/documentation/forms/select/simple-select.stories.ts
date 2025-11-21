@@ -15,9 +15,10 @@ import { LuCoreSelectDepartmentsDirective } from '@lucca-front/ng/core-select/de
 import { LuCoreSelectEstablishmentsDirective } from '@lucca-front/ng/core-select/establishment';
 import { LuCoreSelectJobQualificationsDirective } from '@lucca-front/ng/core-select/job-qualification';
 import { LuCoreSelectUserOptionDirective, LuCoreSelectUsersDirective, provideCoreSelectCurrentUserId } from '@lucca-front/ng/core-select/user';
+import { IconComponent } from '@lucca-front/ng/icon';
 import { LuSimpleSelectInputComponent } from '@lucca-front/ng/simple-select';
 import { TreeSelectDirective } from '@lucca-front/ng/tree-select';
-import { LuUserDisplayPipe } from '@lucca-front/ng/user';
+import { LuUserDisplayPipe, LuUserPictureComponent } from '@lucca-front/ng/user';
 import { applicationConfig, Meta, moduleMetadata } from '@storybook/angular';
 import { HiddenArgType } from 'stories/helpers/common-arg-types';
 import { createTestStory, getStoryGenerator, useDocumentationStory } from 'stories/helpers/stories';
@@ -27,7 +28,6 @@ import { LuCoreSelectLegumesDirective } from './custom-api-example.component';
 import { LuCoreSelectCustomEstablishmentsDirective } from './custom-establishment-example.component';
 import { LuCoreSelectCustomUsersDirective } from './custom-user-example.component';
 import { allLegumes, colorNameByColor, coreSelectStory, FilterLegumesPipe, ILegume, LuCoreSelectInputStoryComponent, SortLegumesPipe } from './select.utils';
-import { IconComponent } from '../../../../packages/ng/icon/icon.component';
 
 export type LuSimpleSelectInputStoryComponent = LuCoreSelectInputStoryComponent & {
 	selectedLegume: ILegume | null;
@@ -452,6 +452,28 @@ export const UserCustomTemplate = generateStory({
 	},
 });
 
+export const UserAvatarTemplate = generateStory({
+	name: 'User Picture',
+	description: `Personnalisation de l'affichage des user dans les options avec le lu-user-picture.`,
+	template: `<lu-simple-select
+	placeholder="Placeholder…"
+	users
+	#usersRef="luUsers"
+	[(ngModel)]="selectedUser"
+>
+	<ng-container *luUserOption="let user; usersRef: usersRef">
+		<lu-user-picture size="XS" [user]="user" aria-hidden="true" />
+		<span translate="no">{{ user | luUserDisplay }}</span>
+	</ng-container>
+</lu-simple-select>
+	`,
+	neededImports: {
+		'@lucca-front/ng/simple-select': ['LuSimpleSelectInputComponent'],
+		'@lucca-front/ng/core-select/user': ['LuCoreSelectUserOptionDirective', 'LuCoreSelectUsersDirective', 'provideCoreSelectCurrentUserId'],
+		'@lucca-front/ng/user': ['LuUserPictureComponent'],
+	},
+});
+
 export const FormerUser = generateStory({
 	name: 'User Select (with former)',
 	description: "Pour saisir des utilisateurs, il suffit d'utiliser la directive `users`",
@@ -703,6 +725,7 @@ const meta: Meta<LuSimpleSelectInputStoryComponent> = {
 				LuOptionGroupDirective,
 				TreeSelectDirective,
 				IconComponent,
+				LuUserPictureComponent,
 			],
 		}),
 		applicationConfig({ providers: [provideHttpClient(), provideCoreSelectCurrentUserId(() => 66)] }),
