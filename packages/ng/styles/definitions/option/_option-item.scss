@@ -51,6 +51,12 @@
 			padding-inline: var(--components-options-item-padding-horizontal);
 			transition: background-color 50ms;
 			cursor: pointer;
+
+			::ng-deep {
+				.avatar {
+					margin-inline-end: var(--pr-t-spacings-75);
+				}
+			}
 		}
 
 		@layer mods {
