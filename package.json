@@ -128,7 +128,7 @@
     "@nx/nx-win32-x64-msvc": "^21.2.0"
   },
   "volta": {
-    "node": "22.14.0"
+    "node": "24.11.1"
   },
   "msw": {
     "workerDirectory": ".storybook/public"

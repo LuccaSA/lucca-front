@@ -71,6 +71,6 @@ export const Basic: StoryObj<LuUserPictureComponent & { sizes: string; placehold
 		sizes: '',
 		placeholder: false,
 		displayFormat: LuDisplayInitials.firstlast,
-		AI: true,
+		AI: false,
 	},
 };
