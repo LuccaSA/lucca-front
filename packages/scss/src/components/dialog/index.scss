@@ -57,4 +57,8 @@
 			@include fullScreen;
 		}
 	}
+
+	&.mod-resizeAnimated {
+		@include resizeAnimated;
+	}
 }
