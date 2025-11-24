@@ -28,7 +28,10 @@ export default {
 			description: 'Ajoute un titre au composant.',
 		},
 		removable: {
-			type: 'boolean',
+			control: {
+				type: 'boolean',
+			},
+			description: 'Rend le composant supprimable.',
 		},
 	},
 } as Meta;
