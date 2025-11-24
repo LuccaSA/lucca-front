@@ -16,6 +16,11 @@
       "factory": "./lu-select/index",
       "schema": "./lu-select/schema.json"
     },
+    "lu-text-input": {
+      "description": "Migrate deprecated textfield into lu-text-input where possible.",
+      "factory": "./lu-text-input/index",
+      "schema": "./lu-text-input/schema.json"
+    },
     "tokens-spacings": {
       "description": "Replace spacing tokens with new names.",
       "factory": "./tokens-spacing/index",
