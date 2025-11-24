@@ -34,9 +34,7 @@
 			}
 		</button>
 		@if (inputIsClearable()) {
-			<button type="button" class="filterPill-clear clear" (click)="$event.stopPropagation(); clear(); comboboxRef.focus()">
-				<span class="pr-u-mask">{{ intl.clear }}</span>
-			</button>
+			<lu-clear class="filterPill-clear" (onClear)="clear(); comboboxRef.focus()">{{ intl.clear }}</lu-clear>
 		}
 		<button
 			type="button"

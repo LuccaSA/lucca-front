@@ -3,7 +3,6 @@ import { LuClass, Palette } from '@lucca-front/ng/core';
 
 @Component({
 	selector: 'lu-gauge',
-	standalone: true,
 	templateUrl: './gauge.component.html',
 	styleUrl: './gauge.component.scss',
 	encapsulation: ViewEncapsulation.None,

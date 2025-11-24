@@ -14,7 +14,6 @@ export const FORMER_EMPLOYEES_CONTEXT = new InjectionToken<FormerEmployeesContex
 @Component({
 	selector: 'lu-core-select-former-employees',
 	styleUrl: './former-employees.component.scss',
-	standalone: true,
 	imports: [FormsModule],
 	hostDirectives: [ɵCoreSelectPanelElement],
 	template: `

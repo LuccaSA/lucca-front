@@ -12,9 +12,9 @@ export default {
 		}),
 	],
 	render: (args: PLGPushComponent & { description: string; linkLabel: string; linkURL: string }, context) => {
-		const { ...inputs } = args;
+		const { description, linkLabel, linkURL, removed, ...inputs } = args;
 		return {
-			template: `<lu-plg-push ${generateInputs(inputs, context.argTypes)}>
+			template: `<lu-plg-push ${generateInputs(inputs, context.argTypes)}${removed ? ' removed="true"' : ' '}>
 	Bénéficiez de toutes les options liées au télétravail avec Timmi Office.
 	<a class="link mod-icon" href="#" target="_blank" rel="noopener noreferrer">
 		<span class="link-text">Demander un essai gratuit</span><!-- no text node here --><span class="link-icon"><lu-icon class="pr-u-displayContents" icon="arrowExternal" alt="Ouvrir dans une nouvelle fenêtre" /></span>
@@ -26,6 +26,9 @@ export default {
 		heading: {
 			type: 'string',
 			description: 'Ajoute un titre au composant.',
+		},
+		removable: {
+			type: 'boolean',
 		},
 	},
 } as Meta;

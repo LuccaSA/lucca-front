@@ -15,9 +15,10 @@ import { LuCoreSelectDepartmentsDirective } from '@lucca-front/ng/core-select/de
 import { LuCoreSelectEstablishmentsDirective } from '@lucca-front/ng/core-select/establishment';
 import { LuCoreSelectJobQualificationsDirective } from '@lucca-front/ng/core-select/job-qualification';
 import { LuCoreSelectUserOptionDirective, LuCoreSelectUsersDirective, provideCoreSelectCurrentUserId } from '@lucca-front/ng/core-select/user';
+import { IconComponent } from '@lucca-front/ng/icon';
 import { LuSimpleSelectInputComponent } from '@lucca-front/ng/simple-select';
 import { TreeSelectDirective } from '@lucca-front/ng/tree-select';
-import { LuUserDisplayPipe } from '@lucca-front/ng/user';
+import { LuUserDisplayPipe, LuUserPictureComponent } from '@lucca-front/ng/user';
 import { applicationConfig, Meta, moduleMetadata } from '@storybook/angular';
 import { HiddenArgType } from 'stories/helpers/common-arg-types';
 import { createTestStory, getStoryGenerator, useDocumentationStory } from 'stories/helpers/stories';
@@ -132,6 +133,30 @@ export const WithDisplayer = generateStory({
 	<ng-container *luDisplayer="let legume; select: selectRef">🥗🥗 {{ legume.name }} 🥗🥗</ng-container>
 </lu-simple-select>`,
 	neededImports: {
+		'@lucca-front/ng/core-select': ['LuOptionDirective'],
+		'@lucca-front/ng/simple-select': ['LuSimpleSelectInputComponent', 'LuDisplayerDirective'],
+	},
+	storyPartial: {
+		args: {
+			selectedLegume: allLegumes[4],
+		},
+	},
+});
+
+export const WithIcon = generateStory({
+	name: 'With Icon',
+	description: "Il est possible de customiser l'affichage des options ainsi que de l'option sélectionnée en utilisant `*luOption`.",
+	template: `<lu-simple-select
+	#selectRef
+	placeholder="Placeholder…"
+	[(ngModel)]="selectedLegume"
+	[options]="legumes | filterLegumes:clue"
+	(clueChange)="clue = $event"
+>
+	<ng-container *luOption="let legume; select: selectRef"><lu-icon icon="app"></lu-icon> {{ legume.name }}</ng-container>
+</lu-simple-select>`,
+	neededImports: {
+		'@lucca-front/ng/icon': ['IconComponent'],
 		'@lucca-front/ng/core-select': ['LuOptionDirective'],
 		'@lucca-front/ng/simple-select': ['LuSimpleSelectInputComponent', 'LuDisplayerDirective'],
 	},
@@ -427,6 +452,28 @@ export const UserCustomTemplate = generateStory({
 	},
 });
 
+export const UserAvatarTemplate = generateStory({
+	name: 'User Picture',
+	description: `Personnalisation de l'affichage des user dans les options avec le lu-user-picture.`,
+	template: `<lu-simple-select
+	placeholder="Placeholder…"
+	users
+	#usersRef="luUsers"
+	[(ngModel)]="selectedUser"
+>
+	<ng-container *luUserOption="let user; usersRef: usersRef">
+		<lu-user-picture size="XS" [user]="user" aria-hidden="true" />
+		<span translate="no">{{ user | luUserDisplay }}</span>
+	</ng-container>
+</lu-simple-select>
+	`,
+	neededImports: {
+		'@lucca-front/ng/simple-select': ['LuSimpleSelectInputComponent'],
+		'@lucca-front/ng/core-select/user': ['LuCoreSelectUserOptionDirective', 'LuCoreSelectUsersDirective', 'provideCoreSelectCurrentUserId'],
+		'@lucca-front/ng/user': ['LuUserPictureComponent'],
+	},
+});
+
 export const FormerUser = generateStory({
 	name: 'User Select (with former)',
 	description: "Pour saisir des utilisateurs, il suffit d'utiliser la directive `users`",
@@ -615,7 +662,7 @@ export const AddOptionTEST = createTestStory(AddOption, async (context) => {
 	await waitForAngular();
 	await expect(screen.getByRole('listbox')).toBeVisible();
 	const panel = within(screen.getByRole('listbox').parentElement);
-	const addOptionButton = panel.getByRole('button', { name: /ajouter/i });
+	const addOptionButton = panel.getByRole('option', { name: /ajouter un /i });
 	await userEvent.click(addOptionButton);
 	await expect(+count.innerText).toBe(previousTotal + 1);
 });
@@ -677,6 +724,8 @@ const meta: Meta<LuSimpleSelectInputStoryComponent> = {
 				LuDisabledOptionDirective,
 				LuOptionGroupDirective,
 				TreeSelectDirective,
+				IconComponent,
+				LuUserPictureComponent,
 			],
 		}),
 		applicationConfig({ providers: [provideHttpClient(), provideCoreSelectCurrentUserId(() => 66)] }),

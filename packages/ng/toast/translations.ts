@@ -1,6 +1,15 @@
 ﻿export const Translations = {
-	en: {
-		close: 'Close',
+	pt: {
+		close: 'Fechar',
+	},
+	'nl-BE': {
+		close: 'Sluiten',
+	},
+	nl: {
+		close: 'Sluiten',
+	},
+	it: {
+		close: 'Chiudere',
 	},
 	de: {
 		close: 'Schließen',
@@ -8,19 +17,10 @@
 	fr: {
 		close: 'Fermer',
 	},
-	it: {
-		close: 'Chiudere',
-	},
-	nl: {
-		close: 'Sluiten',
-	},
-	'nl-BE': {
-		close: 'Sluiten',
-	},
 	es: {
 		close: 'Cerrar',
 	},
-	pt: {
-		close: 'Fechar',
+	en: {
+		close: 'Close',
 	},
 };

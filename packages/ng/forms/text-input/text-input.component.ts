@@ -2,6 +2,7 @@ import { NgTemplateOutlet } from '@angular/common';
 import { booleanAttribute, Component, ElementRef, EventEmitter, input, Input, Output, ViewChild, ViewEncapsulation } from '@angular/core';
 import { ReactiveFormsModule } from '@angular/forms';
 import { LuccaIcon } from '@lucca-front/icons';
+import { ClearComponent } from '@lucca-front/ng/clear';
 import { getIntl } from '@lucca-front/ng/core';
 import { InputDirective } from '@lucca-front/ng/form-field';
 import { NgxMaskDirective, provideNgxMask } from 'ngx-mask';
@@ -15,8 +16,7 @@ type TextFieldType = 'text' | 'email' | 'password' | 'url';
 
 @Component({
 	selector: 'lu-text-input',
-	standalone: true,
-	imports: [InputDirective, ReactiveFormsModule, FormFieldIdDirective, NgTemplateOutlet, NgxMaskDirective],
+	imports: [InputDirective, ReactiveFormsModule, FormFieldIdDirective, NgTemplateOutlet, NgxMaskDirective, ClearComponent],
 	templateUrl: './text-input.component.html',
 	hostDirectives: [NoopValueAccessorDirective],
 	encapsulation: ViewEncapsulation.None,

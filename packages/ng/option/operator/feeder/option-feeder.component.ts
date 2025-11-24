@@ -6,7 +6,6 @@ import { ALuOptionOperator, ILuOptionOperator } from '../option-operator.model';
 	selector: 'lu-option-feeder',
 	template: '',
 	changeDetection: ChangeDetectionStrategy.OnPush,
-	standalone: true,
 	providers: [
 		{
 			provide: ALuOptionOperator,

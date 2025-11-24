@@ -38,7 +38,7 @@ export default {
 				type: 'select',
 			},
 		},
-		fixedWidth: {
+		inlineSize: {
 			if: { arg: 'layoutFixed', truthy: true },
 		},
 		selected: {
@@ -53,8 +53,8 @@ export default {
 		disabled: {
 			if: { arg: 'selectable', truthy: true },
 		},
-		fixedWidthValue: {
-			if: { arg: 'fixedWidth', truthy: true },
+		inlineSizeValue: {
+			if: { arg: 'inlineSize', truthy: true },
 		},
 		groupLabel: {
 			if: { arg: 'group', truthy: true },
@@ -100,7 +100,6 @@ export default {
 			editable,
 			verticalAlign,
 			align,
-			stickyHeader,
 			group,
 			groupLabel,
 			expanded,
@@ -112,8 +111,8 @@ export default {
 			hover,
 			sort,
 			cellBorder,
-			fixedWidth,
-			fixedWidthValue,
+			inlineSize,
+			inlineSizeValue,
 			selectable,
 			lines,
 			nested,
@@ -129,13 +128,12 @@ export default {
 		const hoverAttr = hover ? ` hover` : ``;
 		const cellBorderAttr = cellBorder ? ` cellBorder` : ``;
 		const sortAttr = sort ? ` sort="${sort}"` : ``;
-		const fixedWithAttr = fixedWidth && fixedWidthValue !== '' ? ` fixedWidth="${fixedWidthValue}"` : ``;
+		const inlineSizeAttr = inlineSize && inlineSizeValue !== `` ? ` inlineSize="${inlineSizeValue}"` : ``;
 		const selectableAttr = selectable ? ` selectable` : ``;
 		const selectedAttr = selected ? ` [selected]="true"` : ``;
 		const selectableLabelAttr = selectable ? ` selectedLabel="${selectedLabel}"` : ``;
 		const selectableLabelHeadAttr = selectable ? ` selectedLabel="${selectedLabelHead}"` : ``;
 		const disabledAttr = disabled ? ` disabled` : ``;
-		const stickyHeaderAttr = stickyHeader ? ` sticky` : ``;
 		const groupAttr = group ? ` groupButtonAlt="${groupButtonAlt}" [group]="samplePortalContent"` : ``;
 		const expandedAttr = expanded ? ` [expanded]="true"` : ``;
 		const alignAttr = align ? ` align="${align}"` : ``;
@@ -160,7 +158,7 @@ export default {
 		const line = `
 		<tr luDataTableRow${selectableLabelAttr}>
 			<th luDataTableCell>${textHeader}</th>${colsContent}
-			<td luDataTableCell${alignAttr}>${text}</td>
+			<td luDataTableCell>${text}</td>
 		</tr>`;
 		for (let i = 1; i <= lines - 2; i++) {
 			linesContent = linesContent + line;
@@ -199,29 +197,28 @@ export default {
 	<tfoot luDataTableFoot>
 		<tr luDataTableRow${selectableLabelAttr}>
 			<th luDataTableCell>${textHeader}</th>${colsContent}
-			<td luDataTableCell${alignAttr}>${text}</td>
+			<td luDataTableCell>${text}</td>
 		</tr>
 	</tfoot>`
 			: ``;
 
 		return {
-			styles: stickyHeader ? [`lu-data-table { max-block-size: 7.5rem }`] : [``],
 			props: { example: text },
 			template: `<lu-data-table${layoutFixedAttr}${hoverAttr}${cellBorderAttr}${selectableAttr}${verticalAlignAttr}${nestedAttr}>
-	<thead luDataTableHead${stickyHeaderAttr}>
+	<thead luDataTableHead>
 		<tr luDataTableRow${selectableLabelHeadAttr}>
 			<th luDataTableCell>${textHeader}</th>${colsHeaderContent}
-			<th luDataTableCell${fixedWithAttr}${sortAttr}${alignAttr}>${textHeader}</th>
+			<th luDataTableCell${inlineSizeAttr}${sortAttr}${alignAttr}>${textHeader}</th>
 		</tr>
 	</thead>
 	<tbody luDataTableBody${groupAttr}${expandedAttr}>${linesContent}
 		<tr luDataTableRow${selectableLabelAttr}>
 			<th luDataTableCell>${textHeader}${verticalAlignContent}</th>${colsContent}
-			<td luDataTableCell${alignAttr}${actionsAttr}>${actionsContent}</td>
+			<td luDataTableCell${actionsAttr}>${actionsContent}</td>
 		</tr>
 		<tr luDataTableRow${selectableLabelAttr}${selectedAttr}${disabledAttr}>
 			<th luDataTableCell>${textHeader}</th>${colsContent}
-			<td luDataTableCell${alignAttr}${editableAttr}>${editableContent}</td>
+			<td luDataTableCell${editableAttr}>${editableContent}</td>
 		</tr>
 	</tbody>${tfootTpl}${paginationTpl}
 </lu-data-table>${samplePortalContentTpl}`,
@@ -237,12 +234,11 @@ export const Basic: StoryObj = {
 		align: undefined,
 		verticalAlign: undefined,
 		sort: undefined,
-		stickyHeader: false,
 		hover: false,
 		cellBorder: false,
 		layoutFixed: false,
-		fixedWidth: false,
-		fixedWidthValue: '6rem',
+		inlineSize: false,
+		inlineSizeValue: '6rem',
 		selectable: false,
 		selected: false,
 		disabled: false,

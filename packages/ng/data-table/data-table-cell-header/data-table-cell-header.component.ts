@@ -1,16 +1,16 @@
 import { NgTemplateOutlet } from '@angular/common';
-import { booleanAttribute, Component, inject, input, model, ViewEncapsulation } from '@angular/core';
+import { AfterContentInit, Component, computed, ElementRef, forwardRef, inject, input, model, ViewEncapsulation } from '@angular/core';
+import { toSignal } from '@angular/core/rxjs-interop';
 import { FormsModule } from '@angular/forms';
 import { ButtonComponent } from '@lucca-front/ng/button';
 import { IconComponent } from '@lucca-front/ng/icon';
-import { LU_DATA_TABLE_BODY_INSTANCE } from '../data-table-body/data-table-body.token';
-import { LU_DATA_TABLE_FOOT_INSTANCE } from '../data-table-foot/data-table-foot.token';
-import { LU_DATA_TABLE_HEAD_INSTANCE } from '../data-table-head/data-table-head.token';
+import { ReplaySubject } from 'rxjs';
+import { BaseDataTableCell } from '../base-data-table-cell';
+import { LU_DATA_TABLE_CELL_INSTANCE } from '../data-table-cell.token';
 
 @Component({
 	// eslint-disable-next-line @angular-eslint/component-selector
 	selector: 'th[luDataTableCell]',
-	standalone: true,
 	templateUrl: './data-table-cell-header.component.html',
 	styleUrl: './data-table-cell-header.component.scss',
 	encapsulation: ViewEncapsulation.None,
@@ -21,19 +21,64 @@ import { LU_DATA_TABLE_HEAD_INSTANCE } from '../data-table-head/data-table-head.
 		'[class.mod-alignStart]': 'align() === "start"',
 		'[class.mod-alignCenter]': 'align() === "center"',
 		'[class.mod-alignEnd]': 'align() === "end"',
+		'[class.mod-stickyColumn]': 'isStickyStart() || isStickyEnd()',
 		'[attr.aria-sort]': 'sort()',
-		'[style.--dataTable-layoutFixed-width]': 'fixedWidth()',
 		'[class.mod-editable]': 'editable()',
+		'[attr.scope]': 'bodyRef !== null ? "row" : "col"',
+		'[style.--dataTable-layoutFixed-width]': 'inlineSize() || fixedWidth()',
+		'[style.insetInlineStart]': 'insetInlineStart()',
+		'[style.insetInlineEnd]': 'insetInlineEnd()',
 	},
 	imports: [NgTemplateOutlet, ButtonComponent, IconComponent, FormsModule],
+	providers: [
+		{
+			provide: LU_DATA_TABLE_CELL_INSTANCE,
+			useExisting: forwardRef(() => DataTableRowCellHeaderComponent),
+		},
+	],
 })
-export class DataTableRowCellHeaderComponent {
-	bodyRef = inject(LU_DATA_TABLE_BODY_INSTANCE, { optional: true });
-	headRef = inject(LU_DATA_TABLE_HEAD_INSTANCE, { optional: true });
-	footRef = inject(LU_DATA_TABLE_FOOT_INSTANCE, { optional: true });
+export class DataTableRowCellHeaderComponent extends BaseDataTableCell implements AfterContentInit {
+	elementRef = inject<ElementRef<HTMLTableCellElement>>(ElementRef);
 
 	sort = model<undefined | null | 'ascending' | 'descending'>(undefined);
 	fixedWidth = input<string | null>(null);
-	editable = input(false, { transform: booleanAttribute });
-	align = input<null | 'start' | 'center' | 'end'>(null);
+	inlineSize = input<string | null>(null);
+
+	insetInlineStart = computed(() => {
+		if (!this.isStickyStart() || !this.headRef) {
+			return '';
+		}
+		return (
+			this.headRef
+				.cols()
+				.slice(0, this.position())
+				.reduce((acc, col) => {
+					return acc + col.inlineSizePx();
+				}, 0) + 'px'
+		);
+	});
+
+	insetInlineEnd = computed(() => {
+		if (!this.isStickyEnd() || !this.headRef) {
+			return '';
+		}
+		return (
+			this.headRef
+				.cols()
+				.slice(this.position() + 1)
+				.reduce((acc, col) => {
+					return acc + col.inlineSizePx();
+				}, 0) + 'px'
+		);
+	});
+
+	#inlineSizePx$ = new ReplaySubject<number>();
+
+	inlineSizePx = toSignal(this.#inlineSizePx$);
+
+	ngAfterContentInit(): void {
+		new ResizeObserver(() => {
+			this.#inlineSizePx$.next(this.elementRef.nativeElement.clientWidth);
+		}).observe(this.elementRef.nativeElement);
+	}
 }

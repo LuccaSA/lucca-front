@@ -102,8 +102,12 @@
 			border-block-start: 0;
 		}
 
-		.richTextField-toolbar-chips-item {
+		.richTextField-toolbar-chips-chip {
 			border: 0;
+
+			&:focus-visible {
+				@include a11y.focusVisible;
+			}
 		}
 
 		.richTextField-content {

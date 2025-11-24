@@ -2,7 +2,6 @@ import { Component } from '@angular/core';
 import { Meta, StoryFn, moduleMetadata } from '@storybook/angular';
 
 @Component({
-	standalone: true,
 	selector: 'form-label-stories',
 	templateUrl: './form-label.stories.html',
 })

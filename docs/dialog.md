@@ -21,7 +21,6 @@ import { provideLuDialog } from '@lucca-front/ng/dialog';
 
 @Component({
   selector: 'my-component',
-  standalone: true,
   ...
   providers: [provideLuDialog()]
 })

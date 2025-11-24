@@ -6,7 +6,6 @@ import { LU_DATE_INPUT_TRANSLATIONS } from './date-input.translate';
 
 @Directive({
 	selector: 'input[luDateInput]',
-	standalone: true,
 	providers: [
 		{
 			provide: NG_VALUE_ACCESSOR,

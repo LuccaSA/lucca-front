@@ -8,7 +8,6 @@ let nextId = 0;
 
 @Component({
 	selector: 'lu-listbox',
-	standalone: true,
 	templateUrl: './listbox.component.html',
 	encapsulation: ViewEncapsulation.None,
 	host: {

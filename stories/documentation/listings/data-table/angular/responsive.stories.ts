@@ -18,8 +18,8 @@ import { Meta, moduleMetadata, StoryObj } from '@storybook/angular';
 export default {
 	title: 'Documentation/Listings/Data table/Angular/Responsive',
 	argTypes: {
-		fixedWidthValue: {
-			if: { arg: 'fixedWidth', truthy: true },
+		inlineSizeValue: {
+			if: { arg: 'inlineSize', truthy: true },
 		},
 	},
 	decorators: [
@@ -60,8 +60,8 @@ export default {
 			hover,
 			sort,
 			cellBorder,
-			fixedWidth,
-			fixedWidthValue,
+			inlineSize,
+			inlineSizeValue,
 			selectable,
 			lines,
 			nested,
@@ -75,7 +75,7 @@ export default {
 		const hoverAttr = hover ? ` hover` : ``;
 		const cellBorderAttr = cellBorder ? ` cellBorder` : ``;
 		const sortAttr = sort ? ` sort="${sort}"` : ``;
-		const fixedWithAttr = fixedWidth && fixedWidthValue !== '' ? ` fixedWidth="${fixedWidthValue}"` : ``;
+		const inlineSizeAttr = inlineSize && inlineSizeValue !== '' ? ` inlineSize="${inlineSizeValue}"` : ``;
 		const selectableAttr = selectable ? ` selectable` : ``;
 		const selectedAttr = selected ? ` [selected]="true"` : ``;
 		const disabledAttr = disabled ? ` disabled` : ``;
@@ -145,7 +145,7 @@ export default {
 	<thead luDataTableHead${stickyHeaderAttr}>
 		<tr luDataTableRow>
 			<th luDataTableCell>${textHeader} ${textHeader} ${textHeader}</th>${colsHeaderContent}
-			<th luDataTableCell${fixedWithAttr}${sortAttr}${alignAttr}>${textHeader}</th>
+			<th luDataTableCell${inlineSizeAttr}${sortAttr}${alignAttr}>${textHeader}</th>
 		</tr>
 	</thead>
 	<tbody luDataTableBody${groupAttr}${expandedAttr}>${linesContent}
@@ -165,8 +165,8 @@ export default {
 
 export const Basic: StoryObj = {
 	args: {
-		fixedWidth: false,
-		fixedWidthValue: '6rem',
+		inlineSize: false,
+		inlineSizeValue: '6rem',
 		responsiveConfig: `@let layoutfixed = {
 	layoutFixedAtMediaMinS: true
 };`,
