@@ -2,7 +2,6 @@ import { computed, Directive, forwardRef, inject, input, signal } from '@angular
 import { toSignal } from '@angular/core/rxjs-interop';
 import { CORE_SELECT_API_TOTAL_COUNT_PROVIDER, ɵIsSelectedStrategy } from '@lucca-front/ng/core-select';
 import { LuOptionComparer } from '@lucca-front/ng/option';
-import { map } from 'rxjs';
 import { LuMultiSelection, LuMultiSelectionMode } from '../../select.model';
 import { LuMultiSelectInputComponent } from '../select-input.component';
 import { LuMultiSelectAllDisplayerComponent } from './multi-select-all-displayer.component';
@@ -33,8 +32,9 @@ export class LuMultiSelectWithSelectAllDirective<TValue> extends ɵIsSelectedStr
 
 	readonly mode = this.#mode.asReadonly();
 	readonly values = this.#values.asReadonly();
+	readonly options = toSignal(this.#select.options$);
 	readonly totalCount = toSignal(inject(CORE_SELECT_API_TOTAL_COUNT_PROVIDER).totalCount$);
-	readonly optionsCount = toSignal(this.#select.options$.pipe(map((options) => options.length)));
+	readonly optionsCount = computed(() => this.options().length);
 
 	readonly #hasValue = computed(() => this.mode() !== 'none');
 
@@ -54,7 +54,8 @@ export class LuMultiSelectWithSelectAllDirective<TValue> extends ɵIsSelectedStr
 
 	readonly #selectAllValue = computed<LuMultiSelection<TValue>>(() => {
 		const mode = this.#mode();
-		return mode === 'all' || mode === 'none' ? { mode } : { mode, values: this.#values() };
+		const values = this.#valuesCount() === this.optionsCount() ? this.#values() : (this.options() as TValue[]);
+		return mode === 'all' || mode === 'none' ? { mode } : { mode, values };
 	});
 
 	// Keep the original registerOnChange / writeValue / clearValye methods
