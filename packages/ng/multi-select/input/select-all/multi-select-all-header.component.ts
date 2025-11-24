@@ -1,7 +1,7 @@
 import { Component, computed, effect, ElementRef, inject } from '@angular/core';
 import { outputToObservable, takeUntilDestroyed } from '@angular/core/rxjs-interop';
 import { FormsModule } from '@angular/forms';
-import { getIntl } from '@lucca-front/ng/core';
+import { getIntl, IntlParamsPipe } from '@lucca-front/ng/core';
 import { ɵCoreSelectPanelElement } from '@lucca-front/ng/core-select';
 import { FormFieldComponent } from '@lucca-front/ng/form-field';
 import { CheckboxInputComponent } from '@lucca-front/ng/forms';
@@ -10,13 +10,13 @@ import { MULTI_SELECT_WITH_SELECT_ALL_CONTEXT } from './select-all.models';
 
 @Component({
 	selector: 'lu-multi-select-all-header',
-	imports: [FormsModule, CheckboxInputComponent, FormFieldComponent],
+	imports: [FormsModule, CheckboxInputComponent, FormFieldComponent, IntlParamsPipe],
 	hostDirectives: [ɵCoreSelectPanelElement],
 	styleUrl: './multi-select-all-header.component.scss',
 	template: `
 		@if (optionsCount()) {
 			<div class="multiSelectAllDisplayer">
-				<lu-form-field [label]="canSelectAll() ? intl.selectAll : 'elem'">
+				<lu-form-field [label]="canSelectAll() ? intl.selectAll : (intl.selectCountOptions | intlParams: { optionsCount: optionsCount() })">
 					<lu-checkbox-input
 						class="multiSelectAllDisplayer-checkbox"
 						[ngModel]="isSelected()"
