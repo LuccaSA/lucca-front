@@ -74,7 +74,6 @@ function getTemplate(args: FancyBoxBasicStory): string {
 const Template: StoryFn<FancyBoxBasicStory> = (args) => ({
 	props: args,
 	template: getTemplate(args),
-	styles: [`:host ::ng-deep .fancyBox-content > div:first-child { outline: 1px dashed var(--palettes-neutral-300); inline-size: 100%; flex-grow: 1; display: grid; place-items: center }`],
 });
 
 export const Basic = Template.bind({});
