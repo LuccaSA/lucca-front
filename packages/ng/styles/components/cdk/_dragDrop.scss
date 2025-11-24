@@ -4,13 +4,18 @@
 	box-shadow: form.fakeBorderOverlay(var(--palettes-neutral-200));
 	background-color: var(--palettes-neutral-100);
 
-	* {
-		opacity: 0;
+	*,
+	&::before,
+	&::after {
+		visibility: hidden;
+	}
+
+	&.resourceCard {
+		box-shadow: none;
 	}
 }
 
-.cdk-drag-handle,
-.cdk-drag-placeholder {
+.cdk-drag-handle {
 	cursor: move;
 }
 
@@ -49,10 +54,20 @@
 .cdk-drag-preview {
 	z-index: 9999 !important;
 	box-sizing: border-box;
-	box-shadow: form.fakeBorderOverlay(var(--palettes-product-200));
+	box-shadow: 0 0 0 1px var(--palettes-product-200);
 	background-color: var(--palettes-product-50);
 	border-radius: var(--pr-t-border-radius-default);
 	cursor: grabbing;
+
+	&.resourceCard {
+		border-radius: var(--pr-t-border-radius-structure);
+
+		&::before {
+			box-shadow: none;
+			inset: 0 !important;
+			background-color: transparent;
+		}
+	}
 }
 
 .cdk-drop-list-dragging {

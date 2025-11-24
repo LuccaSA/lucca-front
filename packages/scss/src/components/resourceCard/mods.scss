@@ -1,0 +1,32 @@
+@use '@lucca-front/scss/src/components/button/exports' as button;
+
+@mixin onlyTitle {
+	--components-resourceCard-content-after-paddingBlock: 0;
+}
+
+@mixin onlyTitleWithDrag {
+	--components-resourceCard-content-header-minBlockSize: var(--pr-t-spacings-400);
+}
+
+@mixin narrow {
+	--components-resourceCard-content-header-infos-flexWrap: wrap;
+	--components-resourceCard-content-header-flexDirection: column;
+	--components-resourceCard-content-header-alignItems: start;
+	--components-resourceCard-content-header-justifyContent: center;
+	--components-resourceCard-content-description-not-empty-marginBlockStart: var(--pr-t-spacings-150);
+	--components-resourceCard-content-gridTemplate: "before header after" auto
+																									"main   main   main " auto
+																									/auto   1fr    auto;
+
+	.resourceCard-content-after .button {
+		@include button.S;
+
+		&:has(> lu-icon:only-child, > .lucca-icon:only-child, > .lucca-icon:first-child + .pr-u-mask:last-child) {
+			@include button.onlyIconS;
+		}
+	}
+}
+
+@mixin grid {
+	--components-resourceCardWrapper-display: grid;
+}

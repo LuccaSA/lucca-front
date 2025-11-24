@@ -81,13 +81,13 @@ export default {
 	style="width: 10rem;"
 	luTooltip="Ce texte est trop long pour être affiché entièrement. Le tooltip apparait au survol."
 	${generateInputs(args, argTypes)}
-	luTooltipWhenEllipsis
+	[luTooltipWhenEllipsis]="true"
 >Ce texte est trop long pour être affiché entièrement. Le tooltip apparait au survol.</div>
 <div
 	class="pr-u-ellipsis"
 	luTooltip="Ce texte est affiché entièrement. Le tooltip n'apparait pas au survol."
 	${generateInputs(args, argTypes)}
-	luTooltipWhenEllipsis
+	[luTooltipWhenEllipsis]="true"
 >Ce texte est affiché entièrement. Le tooltip n'apparait pas au survol.</div>
 <h3>Tooltip et icône (avec alternative)</h3>
 <lu-icon icon="star" alt="Favoris" luTooltip="Favoris" luTooltipOnlyForDisplay="true" />
@@ -105,6 +105,5 @@ export const Basic: StoryObj<LuTooltipTriggerDirective> = {
 		luTooltipLeaveDelay: 100,
 		luTooltipDisabled: false,
 		luTooltipPosition: 'above',
-		luTooltipWhenEllipsis: false,
 	},
 };

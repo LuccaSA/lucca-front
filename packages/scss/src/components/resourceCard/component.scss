@@ -1,0 +1,179 @@
+@use '@lucca-front/icons/src/icon/exports' as icon;
+@use '@lucca-front/scss/src/commons/utils/namespace';
+@use '@lucca-front/scss/src/commons/utils/reset';
+@use '@lucca-front/scss/src/components/button/exports' as button;
+
+@mixin component($atRoot: namespace.$defaultAtRoot) {
+	position: relative;
+	border-radius: var(--pr-t-border-radius-structure);
+	display: block;
+	color: var(--components-resourceCard-color);
+	block-size: 100%;
+
+	&::before {
+		content: '';
+		position: absolute;
+		inset: var(--components-resourceCard-before-inset);
+		background-color: var(--pr-t-elevation-surface-raised);
+		box-shadow: var(--pr-t-elevation-shadow-raised);
+		border-radius: var(--pr-t-border-radius-structure);
+		transition-duration: var(--commons-animations-durations-fast);
+		transition-property: inset;
+	}
+
+	@at-root ($atRoot) {
+		.resourceCardContainer {
+			container: resourceCard / inline-size;
+			display: block;
+			block-size: 100%;
+		}
+
+		.resourceCardWrapper {
+			// (breakpointXS - spacing100) / 2
+			//        (40rem - 0.5rem)     / 2
+			grid-template-columns: repeat(auto-fill, minmax(19.75rem, 1fr));
+			display: var(--components-resourceCardWrapper-display);
+			flex-direction: column;
+			gap: var(--pr-t-spacings-100);
+			background-color: var(--pr-t-elevation-surface-sunken);
+			padding: var(--pr-t-spacings-100);
+			border-radius: var(--pr-t-border-radius-structure);
+		}
+
+		.resourceCard-content-before-content-illustration {
+			display: grid;
+			block-size: var(--pr-t-spacings-600);
+			inline-size: var(--pr-t-spacings-600);
+
+			&:empty {
+				display: none;
+			}
+		}
+
+		.resourceCard-content-before-content-handleButton.button {
+			@include button.S;
+			@include button.ghost;
+			@include button.onlyIcon;
+			@include button.onlyIconS;
+		}
+
+		.resourceCard-content-before-content-handleButton,
+		.resourceCard-content-after .button {
+			position: relative;
+			z-index: 2;
+		}
+
+		.resourceCard-content-before {
+			grid-area: before;
+		}
+
+		.resourceCard-content-before-content {
+			display: flex;
+			align-items: center;
+			gap: var(--pr-t-spacings-75);
+
+			&:has(.resourceCard-content-before-content-illustration:not(:empty), .resourceCard-content-before-content-handleButton) {
+				margin-inline-end: var(--pr-t-spacings-150);
+			}
+		}
+
+		.resourceCard-content-after {
+			grid-area: after;
+			padding-block: var(--components-resourceCard-content-after-paddingBlock);
+
+			&:not(:empty) {
+				margin-inline-start: var(--pr-t-spacings-150);
+			}
+		}
+
+		.resourceCard-content-after .button {
+			@include button.ghost;
+
+			&:has(> lu-icon:only-child, > .lucca-icon:only-child, > .lucca-icon:first-child + .pr-u-mask:last-child) {
+				@include button.onlyIcon;
+			}
+		}
+
+		.resourceCard-content {
+			padding: var(--pr-t-spacings-100) var(--pr-t-spacings-150);
+			position: relative;
+			display: grid;
+			grid-template: var(--components-resourceCard-content-gridTemplate);
+			block-size: 100%;
+			align-items: start;
+		}
+
+		.resourceCard-content-description {
+			flex-grow: 1;
+			grid-area: main;
+
+			&:not(:empty) {
+				margin-block-start: var(--components-resourceCard-content-description-not-empty-marginBlockStart);
+			}
+
+			&:empty {
+				display: none;
+			}
+
+			a, button, [tabindex] {
+				position: relative;
+				z-index: 2;
+			}
+		}
+
+		.resourceCard-content-header {
+			display: flex;
+			gap: var(--pr-t-spacings-50) var(--pr-t-spacings-100);
+			grid-area: header;
+			min-inline-size: 0;
+			flex-direction: var(--components-resourceCard-content-header-flexDirection);
+			align-items: var(--components-resourceCard-content-header-alignItems);
+			justify-content: var(--components-resourceCard-content-header-justifyContent);
+			min-block-size: var(--components-resourceCard-content-header-minBlockSize);
+		}
+
+		.resourceCard-content-header-infos {
+			display: flex;
+			gap: var(--pr-t-spacings-50) var(--pr-t-spacings-100);
+			flex-wrap: var(--components-resourceCard-content-header-infos-flexWrap);
+
+			&:empty {
+				display: none;
+			}
+		}
+
+		.resourceCard-content-header-title {
+			display: flex;
+			gap: var(--pr-t-spacings-100);
+			align-items: center;
+			min-inline-size: 0;
+			max-inline-size: 100%;
+
+			.link-text {
+				text-decoration: none !important;
+			}
+		}
+
+		.resourceCard-content-header-title .link {
+			@include reset.button;
+
+			outline: none !important;
+			color: var(--components-resourceCard-content-header-title-link-color) !important;
+			text-decoration: none;
+			white-space: nowrap;
+			overflow: hidden;
+			text-overflow: ellipsis;
+			outline: none;
+
+			&::before {
+				content: '';
+				position: absolute;
+				inset: var(--components-resourceCard-content-header-title-link-inset-before);
+				border-radius: var(--pr-t-border-radius-structure);
+				transition-duration: var(--commons-animations-durations-fast);
+				transition-property: inset;
+				z-index: 1;
+			}
+		}
+	}
+}

@@ -55,6 +55,9 @@ export class LuTooltipTriggerDirective implements AfterContentInit, OnDestroy {
 
 	luTooltip = input<string | SafeHtml>();
 
+	//luTooltipInput = input<string | SafeHtml>({ alias: 'luTooltip' });
+	//luTooltip = linkedSignal(this.luTooltipInput);
+
 	#openDelay$ = new BehaviorSubject<number>(300);
 
 	@Input({ transform: numberAttribute })
@@ -78,6 +81,9 @@ export class LuTooltipTriggerDirective implements AfterContentInit, OnDestroy {
 	luTooltipPosition: LuPopoverPosition = 'above';
 
 	luTooltipWhenEllipsis = input(false, { transform: booleanAttribute });
+
+	//luTooltipWhenEllipsisInput = input(false, { alias: 'luTooltipWhenEllipsis', transform: booleanAttribute });
+	//luTooltipWhenEllipsis = linkedSignal(this.luTooltipWhenEllipsisInput);
 
 	luTooltipAnchor = input<FlexibleConnectedPositionStrategyOrigin>(this.#host);
 
