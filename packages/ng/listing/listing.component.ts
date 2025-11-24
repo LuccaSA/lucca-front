@@ -1,6 +1,6 @@
 import { NgTemplateOutlet } from '@angular/common';
 import { booleanAttribute, Component, forwardRef, input, numberAttribute, ViewEncapsulation } from '@angular/core';
-import { Palette } from '@lucca-front/ng/core';
+import { Palette, PortalContent } from '@lucca-front/ng/core';
 
 import { LuccaIcon } from '@lucca-front/icons';
 import { LU_LISTING_INSTANCE } from './listing.token';
@@ -30,6 +30,8 @@ export class ListingComponent {
 	palette = input<Palette>('none');
 	divider = input(false, { transform: booleanAttribute });
 	action = input(false, { transform: booleanAttribute });
+	heading = input.required<PortalContent>();
+	value = input.required<PortalContent>();
 
 	get paletteClass() {
 		return {

@@ -1,6 +1,11 @@
-@if (listingRef.checklist() || listingRef.icons()) {
-	<lu-icon class="listing-item-icon" size="S" [icon]="icon() || listingRef.defaultIcon()" />
+@if (listingRef.descriptionList()) {
+	<dt class="listing-item-title"><ng-container *luPortal="heading()" /></dt>
+	<dd class="listing-item-value"><ng-container *luPortal="value()" /></dd>
+} @else {
+	@if (listingRef.checklist() || listingRef.icons()) {
+		<lu-icon class="listing-item-icon" size="S" [icon]="icon() || listingRef.defaultIcon()" />
+	}
+	<div class="listing-item-content">
+		<ng-content />
+	</div>
 }
-<div class="listing-item-content">
-	<ng-content />
-</div>

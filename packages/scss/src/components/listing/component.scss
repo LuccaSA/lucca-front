@@ -8,6 +8,7 @@
 	margin-inline-start: var(--components-listing-marginInlineStart);
 	display: flex;
 	flex-direction: var(--components-listing-flexDirection);
+	align-items: var(--components-listing-alignItems);
 	flex-wrap: wrap;
 	row-gap: var(--pr-t-spacings-50);
 	column-gap: var(--pr-t-spacings-100);
@@ -17,7 +18,7 @@
 	@at-root ($atRoot) {
 		.listing-item {
 			display: var(--components-listing-item-display);
-			align-items: flex-start;
+			align-items: var(--components-listing-item-alignItems);
 			gap: var(--pr-t-spacings-100);
 			margin-inline-start: 0;
 			// divider pseudo element
@@ -32,7 +33,10 @@
 			}
 			&:is(dt + dt)::before {
 				content: unset;
-		}
+			}
+			.listing-item-value {
+				margin: 0;
+			}
 	}
 
 		.listing-item-icon {

@@ -55,7 +55,9 @@
 	--components-listing-paddingInlineStart: 0;
 	// --components-listing-item-marginInlineStart: 0;
 	--components-listing-flexDirection: row;
+	--components-listing-alignItems: center;
 	--components-listing-item-display: flex;
+	--components-listing-item-alignItems: center;
 }
 
 @mixin hideFirstItems {

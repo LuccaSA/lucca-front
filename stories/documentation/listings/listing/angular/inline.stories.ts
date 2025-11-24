@@ -1,6 +1,7 @@
 import { ButtonComponent } from '@lucca-front/ng/button';
 import { IconComponent } from '@lucca-front/ng/icon';
 import { ListingComponent, ListingItemComponent } from '@lucca-front/ng/listing';
+import { TagComponent } from '@lucca-front/ng/tag';
 import { Meta, moduleMetadata, StoryObj } from '@storybook/angular';
 import { IconsList } from 'packages/icons/icons-list';
 import { HiddenArgType, PaletteAllArgType } from 'stories/helpers/common-arg-types';
@@ -16,6 +17,8 @@ interface ListingBasicStory {
 	defaultIcon: string;
 	icon: string;
 	action: string;
+	value: string;
+	heading: string;
 }
 
 export default {
@@ -24,12 +27,12 @@ export default {
 
 	decorators: [
 		moduleMetadata({
-			imports: [ListingComponent, ListingItemComponent, IconComponent, ButtonComponent],
+			imports: [ListingComponent, ListingItemComponent, IconComponent, ButtonComponent, TagComponent],
 		}),
 	],
 
 	render: (args: ListingBasicStory, context) => {
-		const { type, checklist, ordered, descriptionList, icons, defaultIcon, icon, action, ...inputs } = args;
+		const { type, checklist, ordered, descriptionList, icons, defaultIcon, icon, action, value, heading, ...inputs } = args;
 		const checklistParam = args.type === 'checklist' ? ` checklist` : ``;
 		const orderedParam = args.type === 'ordered' ? ` ordered` : ``;
 		const descriptionListParam = args.type === 'descriptionList' ? ` descriptionList` : ``;
@@ -40,26 +43,23 @@ export default {
 		if (action === 'button') {
 			actionContent = '<button luButton="outlined" type="button">Action</button>';
 		} else if (action === 'link') {
-			actionContent = '<a luLink>Link</a>';
+			actionContent = '<a href="#">Link</a>';
 		}
 		if (args.type === 'descriptionList') {
 			return {
 				template: `<lu-listing inline${descriptionListParam}${generateInputs(inputs, context.argTypes)}>
-		<dt lu-listing-item>Term:</dt>
-		<dd lu-listing-item>definition</dd>
-		<dt lu-listing-item>Term,</dt>
-		<dt lu-listing-item>term:</dt>
-		<dd lu-listing-item>definition</dd>
-		<dt lu-listing-item><lu-icon icon="user" size="S" alt="term"/></dt>
-		<dd lu-listing-item>definition</dd>
-		<dt lu-listing-item>Term:</dt>
-		<dd lu-listing-item>definition,</dd>
-		<dd lu-listing-item>definition</dd>
-		<dt lu-listing-item>Term:</dt>
-		<dd lu-listing-item><a href="#">lien</a></dd>
-
+	<lu-listing-item${generateInputs(inputs, context.argTypes)} [heading]="heading" [value]="value">
+	<ng-template #heading>Je passe par un template</ng-template>
+	<ng-template #value><lu-tag label="Moi aussi"/></ng-template>
+	</lu-listing-item>
+	<lu-listing-item${generateInputs(inputs, context.argTypes)} [heading]="headingWithIcon" value="${value}">
+	<ng-template #headingWithIcon><lu-icon size="S" icon="user"/></ng-template></lu-listing-item>
+	<lu-listing-item${generateInputs(inputs, context.argTypes)} heading="${heading}" value="${value}"></lu-listing-item>
+	<lu-listing-item${generateInputs(inputs, context.argTypes)} heading="${heading}" value="${value}"></lu-listing-item>
+<ng-container actionsContent>
+	${actionContent}</ng-container>
 	</lu-listing>
-	${actionContent}`,
+	`,
 			};
 		} else {
 			return {
@@ -77,6 +77,12 @@ export default {
 
 export const Template: StoryObj<ListingComponent & ListingItemComponent & { type: string } & { action: string }> = {
 	argTypes: {
+		heading: {
+			type: 'string',
+		},
+		value: {
+			type: 'string',
+		},
 		type: {
 			options: ['', 'checklist', 'icons', 'descriptionList'],
 			control: {
@@ -116,5 +122,7 @@ export const Template: StoryObj<ListingComponent & ListingItemComponent & { type
 		icon: 'foodCroissant',
 		palette: 'none',
 		action: null,
+		heading: 'Title:',
+		value: 'content',
 	},
 };
