@@ -274,6 +274,10 @@
 		}
 	}
 
+	%placeItemsCenter {
+		place-items: center;
+	}
+
 
 
 	[data-content-before] {
@@ -436,6 +440,10 @@
 
 	.pr-u-focusVisible {
 		@extend %focusVisible;
+	}
+
+	.pr-u-placeItemsCenter {
+		@extend %placeItemsCenter;
 	}
 
 	@include core.classes('float', core.$float);

@@ -14,6 +14,7 @@
 	padding-inline: var(--pr-t-spacings-75) var(--pr-t-spacings-100);
 	white-space: nowrap;
 	max-inline-size: 100%;
+	color: var(--pr-t-color-text);
 
 	&::before {
 		background-color: var(--palettes-700, var(--palettes-product-700));

@@ -1,0 +1,67 @@
+@use 'exports' as *;
+@use '@lucca-front/scss/src/commons/utils/container';
+
+.resourceCard {
+	@layer components {
+		@include vars;
+		@include component;
+	}
+
+	@layer mods {
+		&:hover {
+			@include hover;
+		}
+
+		// &:not(:has(.resourceCard-content-after:empty)) {
+		// 	&:has(.resourceCard-content-description:empty) {
+		// 		outline: 2px solid red;
+
+		// 		.resourceCard-content-header {
+		// 			align-self: center;
+		// 			grid-row-end: span 2;
+		// 		}
+
+		// 		.resourceCard-content-after {
+		// 			align-self: center;
+		// 		}
+		// 	}
+		// }
+
+		&:has(.resourceCard-content-header-title .link:focus-visible) {
+			@include focusVisible;
+		}
+
+		&:has(.resourceCard-content-description:empty) {
+			&:has(.resourceCard-content-before-content-illustration:empty) {
+				&:has(.resourceCard-content-after:empty) {
+					@include onlyTitle;
+
+					&:has(.resourceCard-content-before-content-handleButton) {
+						@include onlyTitleWithDrag;
+					}
+				}
+			}
+		}
+
+		&:has(.resourceCard-content-header-title .link.is-disabled),
+		&.is-disabled {
+			@include disabled;
+		}
+
+		@include container.max('XS', $name: 'resourceCard') {
+			@include narrow;
+		}
+	}
+}
+
+.resourceCardWrapper {
+	@layer components {
+		@include varsWrapper;
+	}
+
+	@layer mods {
+		&.mod-grid {
+			@include grid;
+		}
+	}
+}
