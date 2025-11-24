@@ -11,16 +11,17 @@
 	</ol>
 } @else {
 	@if (descriptionList()) {
-		<dl
-			class="listing"
-			[class.mod-inline]="inline()"
-			[class.mod-icons]="icons()"
-			[class.mod-checklist]="checklist()"
-			[class]="paletteClass"
-			[class.mod-divider]="divider()"
-		>
-			<ng-container *ngTemplateOutlet="content" />
-		</dl>
+		<div class="listing" [class.mod-inline]="inline()" [class.mod-divider]="divider()">
+			<dl class="pr-u-displayContents">
+				<ng-container *ngTemplateOutlet="content" />
+			</dl>
+			<!-- TODO: condition this to avoid having a separator at the end -->
+			@if (action() !== "") {
+				<div class="listing-item">
+					<ng-content select="[action]" />
+				</div>
+			}
+		</div>
 	} @else {
 		<ul
 			class="listing"

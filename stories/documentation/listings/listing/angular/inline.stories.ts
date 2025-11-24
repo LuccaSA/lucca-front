@@ -15,7 +15,7 @@ interface ListingBasicStory {
 	palette: string;
 	defaultIcon: string;
 	icon: string;
-	action: string;
+	action: string | null;
 }
 
 export default {
@@ -36,30 +36,40 @@ export default {
 		const iconsParam = args.type === 'icons' ? ` icons` : ``;
 		const iconParam = args.type === 'icons' ? ` icon="${args.icon}"` : ``;
 		const defaultIconParam = args.type === 'icons' ? ` defaultIcon="${defaultIcon}"` : ``;
-		let actionContent = '';
+		let actionContainer = '';
 		if (action === 'button') {
-			actionContent = '<button luButton="outlined" type="button">Action</button>';
+			actionContainer = '<ng-container action><button luButton="outlined" type="button">Action</button></ng-container>';
 		} else if (action === 'link') {
-			actionContent = '<a luLink>Link</a>';
+			actionContainer = '<ng-container action><a luLink>Link</a></ng-container>';
 		}
 		if (args.type === 'descriptionList') {
 			return {
 				template: `<lu-listing inline${descriptionListParam}${generateInputs(inputs, context.argTypes)}>
-		<dt lu-listing-item>Term:</dt>
-		<dd lu-listing-item>definition</dd>
-		<dt lu-listing-item>Term,</dt>
-		<dt lu-listing-item>term:</dt>
-		<dd lu-listing-item>definition</dd>
-		<dt lu-listing-item><lu-icon icon="user" size="S" alt="term"/></dt>
-		<dd lu-listing-item>definition</dd>
-		<dt lu-listing-item>Term:</dt>
-		<dd lu-listing-item>definition,</dd>
-		<dd lu-listing-item>definition</dd>
-		<dt lu-listing-item>Term:</dt>
-		<dd lu-listing-item><a href="#">lien</a></dd>
-
-	</lu-listing>
-	${actionContent}`,
+				<lu-listing-item>
+					<dt>Term:</dt>
+					<dd>definition</dd>
+				</lu-listing-item>
+				<lu-listing-item>
+					<dt>Term,</dt>
+					<dt>term:</dt>
+					<dd>definition</dd>
+				</lu-listing-item>
+				<div lu-listing-item>
+					<dt><lu-icon icon="user" size="S" alt="term"/></dt>
+					<dd><a href="#">lien</a></dd>
+				</div>
+				<div lu-listing-item>
+					<dt>Term:</dt>
+					<dd>definition,</dd>
+					<dd>definition</dd>
+				</div>
+				<div lu-listing-item>
+					<dt>Term:</dt>
+					<dd>definition</dd>
+				</div>
+				${actionContainer}
+			</lu-listing>
+	`,
 			};
 		} else {
 			return {
@@ -75,7 +85,7 @@ export default {
 	},
 } as Meta;
 
-export const Template: StoryObj<ListingComponent & ListingItemComponent & { type: string } & { action: string }> = {
+export const Template: StoryObj<ListingComponent & ListingItemComponent & { type: string }> = {
 	argTypes: {
 		type: {
 			options: ['', 'checklist', 'icons', 'descriptionList'],

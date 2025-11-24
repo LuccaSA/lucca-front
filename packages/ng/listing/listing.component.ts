@@ -29,7 +29,7 @@ export class ListingComponent {
 	defaultIcon = input<LuccaIcon>('signConfirm');
 	palette = input<Palette>('none');
 	divider = input(false, { transform: booleanAttribute });
-	action = input(false, { transform: booleanAttribute });
+	action = input<string | null>(null);
 
 	get paletteClass() {
 		return {

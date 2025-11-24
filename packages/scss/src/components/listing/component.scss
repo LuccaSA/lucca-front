@@ -1,5 +1,6 @@
 @use '@lucca-front/scss/src/commons/utils/namespace';
 @use '@lucca-front/icons/src/icon/exports' as icon;
+@use '@lucca-front/scss/src/commons/utils/reset';
 
 @mixin component($atRoot: namespace.$defaultAtRoot) {
 	padding: 0;
@@ -17,9 +18,10 @@
 	@at-root ($atRoot) {
 		.listing-item {
 			display: var(--components-listing-item-display);
-			align-items: flex-start;
+			align-items: var(--components-listing-item-alignItems);
 			gap: var(--pr-t-spacings-100);
 			margin-inline-start: 0;
+			@include reset.list($list: "dl");
 			// divider pseudo element
 			&::before {
 				content: var(--components-listing-item-before-content);
@@ -27,12 +29,6 @@
 				height: 0.75lh;
 				align-self: center;
 			}
-			&:is(dd)::before {
-				content: unset;
-			}
-			&:is(dt + dt)::before {
-				content: unset;
-		}
 	}
 
 		.listing-item-icon {
