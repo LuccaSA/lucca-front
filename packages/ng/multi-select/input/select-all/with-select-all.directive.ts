@@ -54,8 +54,15 @@ export class LuMultiSelectWithSelectAllDirective<TValue> extends ɵIsSelectedStr
 
 	readonly #selectAllValue = computed<LuMultiSelection<TValue>>(() => {
 		const mode = this.#mode();
-		const values = this.#valuesCount() === this.optionsCount() ? this.#values() : (this.options() as TValue[]);
-		return mode === 'all' || mode === 'none' ? { mode } : { mode, values };
+		const hasAllValues = this.#valuesCount() === this.optionsCount();
+		const hasDiff = this.values().every((value) => this.options().some((option) => this.#select.optionComparer(value, option)));
+		if (mode === 'all' && !hasAllValues) {
+			return { mode: 'include', values: this.options() as TValue[] };
+		} else if (mode === 'none' && !hasDiff && !hasAllValues) {
+			return { mode: 'exclude', values: this.options() as TValue[] };
+		} else {
+			return mode === 'all' || mode === 'none' ? { mode } : { mode, values: this.#values() };
+		}
 	});
 
 	// Keep the original registerOnChange / writeValue / clearValye methods
