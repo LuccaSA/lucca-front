@@ -26,19 +26,11 @@
 		}
 
 		.inputFramed-header-field {
+			flex: 1;
+
 			&.form-field.form-field {
 				position: static;
 				margin-block: 0;
-			}
-		}
-
-		.inputFramed-header-input.radioField-input,
-		.inputFramed-header-input.checkboxField-input {
-			~ .inputFramed-header-icon.radioField-icon,
-			~ .inputFramed-header-icon.checkboxField-icon {
-				&::after {
-					outline: none;
-				}
 			}
 		}
 
@@ -51,6 +43,7 @@
 			position: relative;
 			flex-grow: 1;
 			display: flex;
+			flex-wrap: wrap;
 			justify-content: space-between;
 			align-content: flex-start;
 			gap: var(--pr-t-spacings-100);

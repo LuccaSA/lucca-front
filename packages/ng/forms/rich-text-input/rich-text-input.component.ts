@@ -25,7 +25,9 @@ import { FormFieldComponent, InputDirective } from '@lucca-front/ng/form-field';
 import { $getRoot, createEditor, Klass, LexicalEditor, LexicalNode, LexicalNodeReplacement } from 'lexical';
 import { RICH_TEXT_FORMATTER, RichTextFormatter } from './formatters';
 
-const INITIAL_UPDATE_TAG = 'initial-update';
+export const INITIAL_UPDATE_TAG = 'initial-update';
+// TODO replace by lexical import when upgrade lexical
+export const SKIP_DOM_SELECTION_TAG = 'skip-dom-selection';
 
 export interface RichTextPluginComponent {
 	setEditorInstance(editor: LexicalEditor): void;
@@ -130,7 +132,7 @@ export class RichTextInputComponent implements OnInit, OnDestroy, ControlValueAc
 	}
 
 	writeValue(value: string | null): void {
-		const updateTags = ['skip-dom-selection', INITIAL_UPDATE_TAG];
+		const updateTags = [SKIP_DOM_SELECTION_TAG, INITIAL_UPDATE_TAG];
 		if (value) {
 			this.#editor?.update(
 				() => {

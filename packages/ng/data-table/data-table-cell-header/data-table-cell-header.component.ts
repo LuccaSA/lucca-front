@@ -1,6 +1,7 @@
 import { NgTemplateOutlet } from '@angular/common';
-import { AfterContentInit, Component, computed, ElementRef, forwardRef, inject, input, ViewEncapsulation } from '@angular/core';
+import { AfterContentInit, Component, computed, ElementRef, forwardRef, inject, input, model, ViewEncapsulation } from '@angular/core';
 import { toSignal } from '@angular/core/rxjs-interop';
+import { FormsModule } from '@angular/forms';
 import { ButtonComponent } from '@lucca-front/ng/button';
 import { IconComponent } from '@lucca-front/ng/icon';
 import { ReplaySubject } from 'rxjs';
@@ -28,7 +29,7 @@ import { LU_DATA_TABLE_CELL_INSTANCE } from '../data-table-cell.token';
 		'[style.insetInlineStart]': 'insetInlineStart()',
 		'[style.insetInlineEnd]': 'insetInlineEnd()',
 	},
-	imports: [NgTemplateOutlet, ButtonComponent, IconComponent],
+	imports: [NgTemplateOutlet, ButtonComponent, IconComponent, FormsModule],
 	providers: [
 		{
 			provide: LU_DATA_TABLE_CELL_INSTANCE,
@@ -39,7 +40,7 @@ import { LU_DATA_TABLE_CELL_INSTANCE } from '../data-table-cell.token';
 export class DataTableRowCellHeaderComponent extends BaseDataTableCell implements AfterContentInit {
 	elementRef = inject<ElementRef<HTMLTableCellElement>>(ElementRef);
 
-	sort = input<undefined | null | 'ascending' | 'descending'>(undefined);
+	sort = model<undefined | null | 'ascending' | 'descending'>(undefined);
 	fixedWidth = input<string | null>(null);
 	inlineSize = input<string | null>(null);
 

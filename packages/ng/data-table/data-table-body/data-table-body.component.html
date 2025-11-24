@@ -12,7 +12,7 @@
 				>
 					<lu-icon icon="arrowChevronTop" [alt]="groupButtonAlt()" />
 				</button>
-				{{ group() }}
+				<ng-container *luPortal="group()" />
 			</div>
 		</td>
 	</tr>
