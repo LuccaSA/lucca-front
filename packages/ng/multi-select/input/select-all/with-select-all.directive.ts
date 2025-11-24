@@ -2,6 +2,7 @@ import { computed, Directive, forwardRef, inject, input, signal } from '@angular
 import { toSignal } from '@angular/core/rxjs-interop';
 import { CORE_SELECT_API_TOTAL_COUNT_PROVIDER, ɵIsSelectedStrategy } from '@lucca-front/ng/core-select';
 import { LuOptionComparer } from '@lucca-front/ng/option';
+import { map } from 'rxjs';
 import { LuMultiSelection, LuMultiSelectionMode } from '../../select.model';
 import { LuMultiSelectInputComponent } from '../select-input.component';
 import { LuMultiSelectAllDisplayerComponent } from './multi-select-all-displayer.component';
@@ -33,6 +34,7 @@ export class LuMultiSelectWithSelectAllDirective<TValue> extends ɵIsSelectedStr
 	readonly mode = this.#mode.asReadonly();
 	readonly values = this.#values.asReadonly();
 	readonly totalCount = toSignal(inject(CORE_SELECT_API_TOTAL_COUNT_PROVIDER).totalCount$);
+	readonly optionsCount = toSignal(this.#select.options$.pipe(map((options) => options.length)));
 
 	readonly #hasValue = computed(() => this.mode() !== 'none');
 

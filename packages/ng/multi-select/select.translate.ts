@@ -18,6 +18,7 @@ export interface ILuMultiSelectLabel {
 	reduce: string;
 	selectAll: string;
 	unselectAll: string;
+	selectCountOptions: string;
 	loading: string;
 }
 

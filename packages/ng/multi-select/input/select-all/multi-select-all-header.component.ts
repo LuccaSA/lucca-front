@@ -14,17 +14,19 @@ import { MULTI_SELECT_WITH_SELECT_ALL_CONTEXT } from './select-all.models';
 	hostDirectives: [ɵCoreSelectPanelElement],
 	styleUrl: './multi-select-all-header.component.scss',
 	template: `
-		<div class="multiSelectAllDisplayer">
-			<lu-form-field [label]="intl.selectAll">
-				<lu-checkbox-input
-					class="multiSelectAllDisplayer-checkbox"
-					[ngModel]="isSelected()"
-					(ngModelChange)="selectAllContext.setSelectAll($event)"
-					[ngModelOptions]="{ standalone: true }"
-					[mixed]="mixed()"
-				/>
-			</lu-form-field>
-		</div>
+		@if (optionsCount()) {
+			<div class="multiSelectAllDisplayer">
+				<lu-form-field [label]="canSelectAll() ? intl.selectAll : 'elem'">
+					<lu-checkbox-input
+						class="multiSelectAllDisplayer-checkbox"
+						[ngModel]="isSelected()"
+						(ngModelChange)="selectAllContext.setSelectAll($event)"
+						[ngModelOptions]="{ standalone: true }"
+						[mixed]="mixed()"
+					/>
+				</lu-form-field>
+			</div>
+		}
 	`,
 })
 export class LuMultiSelectAllHeaderComponent {
@@ -32,6 +34,8 @@ export class LuMultiSelectAllHeaderComponent {
 	readonly selectAllContext = inject(MULTI_SELECT_WITH_SELECT_ALL_CONTEXT);
 	readonly mixed = computed(() => this.selectAllContext.mode() === 'exclude' || this.selectAllContext.mode() === 'include');
 	readonly isSelected = computed(() => this.selectAllContext.mode() === 'all' || this.mixed());
+	readonly canSelectAll = computed(() => this.selectAllContext.totalCount() === this.selectAllContext.optionsCount());
+	readonly optionsCount = computed(() => this.selectAllContext.optionsCount());
 	readonly #selectableItem = inject(ɵCoreSelectPanelElement);
 	readonly #elementRef = inject<ElementRef<HTMLElement>>(ElementRef);
 
