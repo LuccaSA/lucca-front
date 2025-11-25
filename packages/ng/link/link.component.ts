@@ -1,4 +1,5 @@
-import { booleanAttribute, Component, effect, HostBinding, inject, input, Input, ViewEncapsulation } from '@angular/core';
+import { booleanAttribute, Component, effect, HostBinding, HostListener, inject, input, Input, ViewEncapsulation } from '@angular/core';
+import { Router } from '@angular/router';
 import { getIntl } from '@lucca-front/ng/core';
 import { LU_LINK_TRANSLATIONS } from './link.translate';
 import { LuRouterLink } from './lu-router-link';
@@ -24,6 +25,7 @@ import { LuRouterLink } from './lu-router-link';
 export class LinkComponent {
 	intl = getIntl(LU_LINK_TRANSLATIONS);
 	routerLink = inject(LuRouterLink);
+	router = inject(Router);
 
 	luHref = input('', { alias: 'href' });
 
@@ -63,6 +65,13 @@ export class LinkComponent {
 		return this.disabled();
 	}
 
+	@HostListener('click')
+	redirect(): void {
+		if (!this.disabled() && this.routerLinkCommands() && this.external) {
+			window.open(this.router.serializeUrl(this.router.createUrlTree([this.routerLinkCommands()])), '_blank');
+		}
+	}
+
 	hrefBackup: string;
 
 	constructor() {
@@ -78,7 +87,7 @@ export class LinkComponent {
 					this.routerLink.routerLink = null;
 				}
 				this.routerLink.publicReactiveHref.set(null);
-			} else if (this.routerLinkCommands()) {
+			} else if (this.routerLinkCommands() && !this.external) {
 				this.routerLink.routerLink = this.routerLinkCommands();
 				// We need to do this in order to have `routerLink` update the value for `href`:
 				// See https://github.com/angular/angular/blob/main/packages/router/src/directives/router_link.ts#L281
