@@ -54,14 +54,25 @@ export class LuMultiSelectWithSelectAllDirective<TValue> extends ɵIsSelectedStr
 
 	readonly #selectAllValue = computed<LuMultiSelection<TValue>>(() => {
 		const mode = this.#mode();
-		const hasAllValues = this.#valuesCount() === this.optionsCount();
-		const hasDiff = this.values().every((value) => this.options().some((option) => this.#select.optionComparer(value, option)));
+		const values = this.#values();
+		const options = this.options() as TValue[];
+		const hasAllValues = this.totalCount() === this.optionsCount();
+		const hasDiff = this.options().every((option) => this.values().some((value) => this.#select.optionComparer(option, value)));
+
 		if (mode === 'all' && !hasAllValues) {
-			return { mode: 'include', values: this.options() as TValue[] };
-		} else if (mode === 'none' && !hasDiff && !hasAllValues) {
-			return { mode: 'exclude', values: this.options() as TValue[] };
-		} else {
-			return mode === 'all' || mode === 'none' ? { mode } : { mode, values: this.#values() };
+			return { mode: 'include', values: options };
+		}
+		// else if (mode === 'none' && !hasDiff && this.#values().length < this.options().length) {
+		// 	const tab = [];
+		// 	values.forEach((value) => {
+		// 		if (options.some((option) => this.#select.optionComparer(option, value))) {
+		// 			tab.push(value);
+		// 		}
+		// 	});
+		// 	return { mode: 'include', values: tab as TValue[] };
+		// }
+		else {
+			return mode === 'all' || mode === 'none' ? { mode } : { mode, values };
 		}
 	});
 
