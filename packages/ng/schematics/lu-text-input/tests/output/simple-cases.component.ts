@@ -1,31 +1,31 @@
 import { Component } from '@angular/core';
 import { FormsModule,ReactiveFormsModule } from '@angular/forms';
-import { LuSelectInputComponent } from '../../../../select/input';
-import { LuOptionPickerAdvancedComponent } from '../../../../option/picker';
-import { LuOptionItemComponent } from '../../../../option/item';
+import { FormFieldComponent } from '@lucca-front/ng/form-field';
+import { TextInputComponent } from '@lucca-front/ng/forms';
 
 @Component({
 	selector: 'lu-test',
 	standalone: true,
 	template: `
-		<!--Should be migrated-->
+		<!--Missing label value-->
 		<div class="form-group-line">
 			<label class="textfield mod-short u-marginRightS">
 				<input [(ngModel)]="example" class="textfield-input" type="text">
 			</label>
 		</div>
+		<!-- Has everything for migration -->
+		<lu-form-field [label]="labelTpl">
+			<ng-template #labelTpl>{{ 'ROLE_HEADER_CREATION_NAME_LABEL' | translate }}</ng-template>
+			<lu-text-input [placeholder]="'ROLE_HEADER_CREATION_NAME_LABEL' | translate" formControlName="name" />
+		</lu-form-field>
 
-		<label class="textfield pr-u-marginBottom300">
-			<input
-				formControlName="name"
-				class="textfield-input"
-				type="text"
-				[placeholder]="'ROLE_HEADER_CREATION_NAME_LABEL' | translate"
-				#nameInput
-			/>
-			<span class="textfield-label">{{ 'ROLE_HEADER_CREATION_NAME_LABEL' | translate }}</span>
-		</label>
+		<!-- Has everything for migration but with ngModel -->
+		<lu-form-field [label]="labelTpl">
+			<ng-template #labelTpl>{{ 'ROLE_HEADER_CREATION_NAME_LABEL' | translate }}</ng-template>
+			<lu-text-input [placeholder]="'ROLE_HEADER_CREATION_NAME_LABEL' | translate" [(ngModel)]="name" />
+		</lu-form-field>
 
+		<!-- Textarea, not handling for now -->
 		<label class="textfield mod-multiline mod-block">
                         <textarea
 	                        class="textfield-input textareaForm"
@@ -51,7 +51,7 @@ import { LuOptionItemComponent } from '../../../../option/item';
 	`,
 	imports: [
 		FormsModule,
-		ReactiveFormsModule
+		ReactiveFormsModule, FormFieldComponent, TextInputComponent
 	]
 })
 export class SimpleCasesComponent {

@@ -1,20 +1,17 @@
 import { Component } from '@angular/core';
 import { FormsModule,ReactiveFormsModule } from '@angular/forms';
-import { LuSelectInputComponent } from '../../../../select/input';
-import { LuOptionPickerAdvancedComponent } from '../../../../option/picker';
-import { LuOptionItemComponent } from '../../../../option/item';
 
 @Component({
 	selector: 'lu-test',
 	standalone: true,
 	template: `
-		<!--Should be migrated-->
+		<!--Missing label value-->
 		<div class="form-group-line">
 			<label class="textfield mod-short u-marginRightS">
 				<input [(ngModel)]="example" class="textfield-input" type="text">
 			</label>
 		</div>
-
+		<!-- Has everything for migration -->
 		<label class="textfield pr-u-marginBottom300">
 			<input
 				formControlName="name"
@@ -26,6 +23,19 @@ import { LuOptionItemComponent } from '../../../../option/item';
 			<span class="textfield-label">{{ 'ROLE_HEADER_CREATION_NAME_LABEL' | translate }}</span>
 		</label>
 
+		<!-- Has everything for migration but with ngModel -->
+		<label class="textfield pr-u-marginBottom300">
+			<input
+				[(ngModel)]="name"
+				class="textfield-input"
+				type="text"
+				[placeholder]="'ROLE_HEADER_CREATION_NAME_LABEL' | translate"
+				#nameInput
+			/>
+			<span class="textfield-label">{{ 'ROLE_HEADER_CREATION_NAME_LABEL' | translate }}</span>
+		</label>
+
+		<!-- Textarea, not handling for now -->
 		<label class="textfield mod-multiline mod-block">
                         <textarea
 	                        class="textfield-input textareaForm"
