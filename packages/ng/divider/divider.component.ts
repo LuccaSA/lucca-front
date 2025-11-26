@@ -33,10 +33,6 @@ export class DividerComponent implements OnChanges {
 	}
 
 	updateClasses(): void {
-		const classesConfig = {
-			[`mod-${this.size()}`]: !!this.size(),
-		};
-
-		this.#luClass.setState(classesConfig);
+		this.#luClass.setState(this.classesConfig());
 	}
 }
