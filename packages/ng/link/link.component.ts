@@ -1,4 +1,4 @@
-import { booleanAttribute, Component, effect, HostBinding, HostListener, inject, input, Input, ViewEncapsulation } from '@angular/core';
+import { afterNextRender, booleanAttribute, Component, effect, HostBinding, HostListener, inject, input, Input, ViewEncapsulation } from '@angular/core';
 import { Router } from '@angular/router';
 import { getIntl } from '@lucca-front/ng/core';
 import { LU_LINK_TRANSLATIONS } from './link.translate';
@@ -68,7 +68,7 @@ export class LinkComponent {
 	@HostListener('click')
 	redirect(): void {
 		if (!this.disabled() && this.routerLinkCommands() && this.external) {
-			window.open(this.router.serializeUrl(this.router.createUrlTree([this.routerLinkCommands()])), '_blank');
+			afterNextRender(() => window.open(this.router.serializeUrl(this.router.createUrlTree([this.routerLinkCommands()])), '_blank'));
 		}
 	}
 
