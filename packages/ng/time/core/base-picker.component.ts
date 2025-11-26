@@ -1,9 +1,10 @@
-import { Component, computed, input, model, ViewChild } from '@angular/core';
+import { ChangeDetectionStrategy, Component, computed, input, model, viewChild } from '@angular/core';
 import { ControlValueAccessor } from '@angular/forms';
 import { ISO8601Duration, ISO8601Time } from './date-primitives';
 import { TimePickerPartComponent } from './time-picker-part.component';
 
 @Component({
+	changeDetection: ChangeDetectionStrategy.OnPush,
 	template: '',
 })
 export abstract class BasePickerComponent implements ControlValueAccessor {
@@ -16,11 +17,9 @@ export abstract class BasePickerComponent implements ControlValueAccessor {
 
 	size = input<'S' | 'M'>();
 
-	@ViewChild('hoursPart')
-	hoursPart?: TimePickerPartComponent;
+	hoursPart? = viewChild<TimePickerPartComponent>('hoursPart');
 
-	@ViewChild('minutesPart')
-	minutesPart?: TimePickerPartComponent;
+	minutesPart? = viewChild<TimePickerPartComponent>('minutesPart');
 
 	protected hoursIncrement = computed(() => this.getHoursIncrement());
 	protected minutesIncrement = computed(() => this.getMinutesIncrement());
@@ -46,14 +45,14 @@ export abstract class BasePickerComponent implements ControlValueAccessor {
 				return;
 			}
 
-			this.hoursPart?.focus();
+			this.hoursPart()?.focus();
 		}
 		if (type === 'minutes') {
 			if (this.minutesIncrement() === 0) {
 				return;
 			}
 
-			this.minutesPart?.focus();
+			this.minutesPart()?.focus();
 		}
 	}
 }
