@@ -1,4 +1,4 @@
-import { Component, inject, input, ViewEncapsulation } from '@angular/core';
+import { ChangeDetectionStrategy, Component, inject, input, ViewEncapsulation } from '@angular/core';
 import { PortalContent } from '@lucca-front/ng/core';
 import { LU_SEGMENTEDCONTROLTABS_INSTANCE } from '../segmented-control-tabs.token';
 
@@ -8,22 +8,23 @@ let nextId = 0;
 	selector: 'lu-segmented-control-tabs-panel',
 	template: '<ng-content />',
 	encapsulation: ViewEncapsulation.None,
+	changeDetection: ChangeDetectionStrategy.OnPush,
 	host: {
 		class: 'segmentedControl_panel',
 		role: 'tabpanel',
 		'[tabindex]': '0',
-		'[class.is-active]': 'segmentedControlTabsRef.active() === this.value()',
-		'[id]': 'this.panelId',
-		'[attr.aria-labelledby]': 'this.labelId',
+		'[class.is-active]': 'segmentedControlTabsRef.active() === value()',
+		'[id]': 'panelId',
+		'[attr.aria-labelledby]': 'labelId',
 	},
 })
 export class SegmentedControlTabsPanelComponent<T = unknown> {
 	protected segmentedControlTabsRef = inject(LU_SEGMENTEDCONTROLTABS_INSTANCE);
-	label = input<PortalContent>();
-	value = input.required<T>();
+	readonly label = input<PortalContent>();
+	readonly value = input.required<T>();
 
-	id = nextId++;
+	readonly id = nextId++;
 
-	panelId = `panel${this.id}`;
-	labelId = `tab${this.id}`;
+	readonly panelId = `panel${this.id}`;
+	readonly labelId = `tab${this.id}`;
 }
