@@ -4,7 +4,7 @@ import { SourceFile } from 'typescript';
 import { extractNgTemplatesIncludingHtml } from '../lib/angular-template';
 import { HtmlAst,HtmlAstVisitor } from '../lib/html-ast.js';
 import { currentSchematicContext } from '../lib/lf-schematic-context';
-import { insertAngularImportIfNeeded, insertTSImportIfNeeded, getInputValue, InputValue,inputValueToHTML } from '../lib/angular-component-ast';
+import { getInputValue,InputValue,inputValueToHTML,insertAngularImportIfNeeded,insertTSImportIfNeeded } from '../lib/angular-component-ast';
 import { applyToUpdateRecorder } from '@schematics/angular/utility/change';
 
 
@@ -16,6 +16,7 @@ interface TextField {
 		formControlName?: InputValue;
 		formControl?: InputValue;
 		ngModel?: InputValue;
+		forceRequired?: InputValue;
 	},
 	classes: string[];
 	label?: string;
@@ -42,9 +43,10 @@ export function migrateComponent(sourceFile: SourceFile, path: string, tree: Tre
 				const textInput = `<lu-text-input ${
 					inputValueToHTML('placeholder', field.inputs.placeholder)} ${
 					inputValueToHTML('formControlName', field.inputs.formControlName)} ${
-					inputValueToHTML('ngModel', field.inputs.ngModel)
-				} />`.replace(/\s\s/, " ");
-				const newInput = `<lu-form-field [label]="labelTpl">
+					inputValueToHTML('ngModel', field.inputs.ngModel)} />`.replace(/\s{2,}/, " ");
+				const fieldOpeningTag = `lu-form-field [label]="labelTpl"`.replace(/\s{2,}/, " ").trim();
+				// TODO handle required migration from template-driven to form-driven???
+				const newInput = `<${fieldOpeningTag}>
 			<ng-template #labelTpl>${field.label}</ng-template>
 			${textInput}
 		</lu-form-field>`
@@ -98,6 +100,7 @@ function findTextfields(sourceFile: SourceFile, basePath: string, tree: Tree): T
 						inputs.placeholder = getInputValue(nativeInput, "placeholder");
 						inputs.formControlName = getInputValue(nativeInput, "formControlName");
 						inputs.ngModel = getInputValue(nativeInput, "ngModel");
+						inputs.forceRequired = getInputValue(nativeInput, "aria-required")
 					}
 					// This is a textfield, now let's find if it has everything required for migration
 					const visitor = new HtmlAstVisitor(node);
