@@ -1,4 +1,4 @@
-import { Component, computed, ElementRef, inject, viewChild } from '@angular/core';
+import { ChangeDetectionStrategy, Component, computed, ElementRef, inject, viewChild } from '@angular/core';
 import { toSignal } from '@angular/core/rxjs-interop';
 import { ChipComponent } from '@lucca-front/ng/chip';
 import { getIntl } from '@lucca-front/ng/core';
@@ -12,6 +12,7 @@ import { MULTI_SELECT_WITH_SELECT_ALL_CONTEXT } from './select-all.models';
 @Component({
 	selector: 'lu-multi-select-all-displayer',
 	imports: [NumericBadgeComponent, LuMultiSelectDisplayerInputDirective, ɵLuOptionOutletDirective, ChipComponent],
+	changeDetection: ChangeDetectionStrategy.OnPush,
 	template: `
 		<div class="multipleSelect-displayer mod-filter" [class.is-filled]="isFilled()">
 			<input type="text" luMultiSelectDisplayerInput />
@@ -49,7 +50,7 @@ export class LuMultiSelectAllDisplayerComponent<TValue> {
 	readonly intl = getIntl(LU_MULTI_SELECT_DISPLAYER_TRANSLATIONS);
 	readonly disabled = toSignal(this.select.disabled$);
 
-	inputElementRef = viewChild.required<LuMultiSelectDisplayerInputDirective<TValue>, ElementRef<HTMLInputElement>>(LuMultiSelectDisplayerInputDirective, { read: ElementRef });
+	readonly inputElementRef = viewChild.required<LuMultiSelectDisplayerInputDirective<TValue>, ElementRef<HTMLInputElement>>(LuMultiSelectDisplayerInputDirective, { read: ElementRef });
 
 	unselectOption(option: TValue, $event: Event): void {
 		$event.stopPropagation();
