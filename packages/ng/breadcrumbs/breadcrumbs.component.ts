@@ -29,5 +29,5 @@ export class BreadcrumbsComponent {
 
 	isCompact = computed(() => this.links().length <= 2 && !this.disableCompact());
 
-	id = `breadcrumbs-title-${nextId++}`;
+	readonly id = `breadcrumbs-title-${nextId++}`;
 }
