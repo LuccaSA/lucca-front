@@ -36,18 +36,17 @@ import { TextInputComponent } from '@lucca-front/ng/forms';
                         </span>
 		</label>
 
-		<label class="textfield palette-neutral mod-outlined mod-block">
-			<input class="textfield-input" type="text" placeholder="Nom du fichier%%" aria-required="true" />
-			<span class="textfield-label pr-u-displayFlex"
-			>Nom du fichier%%
+		<lu-form-field [label]="labelTpl">
+			<ng-template #labelTpl>Nom du fichier%%
                       <lu-icon icon="signHelp" size="XS" class="u-help pr-u-marginInlineStart100 pr-u-order1"
-                      /></span>
-		</label>
+                      /></ng-template>
+			<lu-text-input placeholder="Nom du fichier%%" />
+		</lu-form-field>
 
-		<label class="textfield palette-neutral mod-outlined mod-block">
-			<input class="textfield-input" type="text" placeholder="Type de fichier%%" aria-required="true" />
-			<span class="textfield-label">Type de fichier%%</span>
-		</label>
+		<lu-form-field [label]="labelTpl">
+			<ng-template #labelTpl>Type de fichier%%</ng-template>
+			<lu-text-input placeholder="Type de fichier%%" />
+		</lu-form-field>
 	`,
 	imports: [
 		FormsModule,
