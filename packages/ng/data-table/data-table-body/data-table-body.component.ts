@@ -1,4 +1,4 @@
-import { Component, computed, forwardRef, inject, input, model, ViewEncapsulation } from '@angular/core';
+import { ChangeDetectionStrategy, Component, computed, forwardRef, inject, input, model, ViewEncapsulation } from '@angular/core';
 import { ButtonComponent } from '@lucca-front/ng/button';
 import { PortalContent, PortalDirective } from '@lucca-front/ng/core';
 import { LU_DATA_TABLE_INSTANCE } from '../data-table.token';
@@ -19,6 +19,7 @@ import { LU_DATA_TABLE_BODY_INSTANCE } from './data-table-body.token';
 			useExisting: forwardRef(() => DataTableBodyComponent),
 		},
 	],
+	changeDetection: ChangeDetectionStrategy.OnPush,
 })
 export class DataTableBodyComponent {
 	group = input<PortalContent | null>(null);
