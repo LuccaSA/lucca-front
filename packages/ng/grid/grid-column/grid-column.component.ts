@@ -1,26 +1,27 @@
-import { Component, computed, input, numberAttribute, ViewEncapsulation } from '@angular/core';
+import { ChangeDetectionStrategy, Component, computed, input, numberAttribute, ViewEncapsulation } from '@angular/core';
 import { ResponsiveConfig } from '@lucca-front/ng/core';
 
 @Component({
 	selector: 'lu-grid-column, [lu-grid-column]',
 	template: '<ng-content />',
 	encapsulation: ViewEncapsulation.None,
+	changeDetection: ChangeDetectionStrategy.OnPush,
 	host: {
 		class: 'grid-column',
 		'[style]': 'style()',
 	},
 })
 export class GridColumnComponent {
-	colspan = input(null, { transform: numberAttribute });
-	rowspan = input(null, { transform: numberAttribute });
-	column = input(null, { transform: numberAttribute });
-	row = input(null, { transform: numberAttribute });
-	align = input<'start' | 'center' | 'end' | 'auto' | null>(null);
-	justify = input<'start' | 'center' | 'end' | 'auto' | null>(null);
+	readonly colspan = input(null, { transform: numberAttribute });
+	readonly rowspan = input(null, { transform: numberAttribute });
+	readonly column = input(null, { transform: numberAttribute });
+	readonly row = input(null, { transform: numberAttribute });
+	readonly align = input<'start' | 'center' | 'end' | 'auto' | null>(null);
+	readonly justify = input<'start' | 'center' | 'end' | 'auto' | null>(null);
 
-	responsive = input<ResponsiveConfig<'row' | 'column' | 'rowspan' | 'colspan', number>>({});
+	readonly responsive = input<ResponsiveConfig<'row' | 'column' | 'rowspan' | 'colspan', number>>({});
 
-	style = computed(() => {
+	readonly style = computed(() => {
 		return {
 			'--grid-colspan': this.colspan(),
 			'--grid-rowspan': this.rowspan(),
