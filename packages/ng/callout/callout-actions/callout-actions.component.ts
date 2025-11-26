@@ -1,4 +1,4 @@
-import { booleanAttribute, Component, input, ViewEncapsulation } from '@angular/core';
+import { booleanAttribute, ChangeDetectionStrategy, Component, input, ViewEncapsulation } from '@angular/core';
 
 @Component({
 	selector: 'lu-callout-actions',
@@ -8,6 +8,7 @@ import { booleanAttribute, Component, input, ViewEncapsulation } from '@angular/
 		class: 'callout-content-description-actions',
 		'[class.mod-inline]': 'inline()',
 	},
+	changeDetection: ChangeDetectionStrategy.OnPush,
 })
 export class CalloutActionsComponent {
 	inline = input(false, { transform: booleanAttribute });
