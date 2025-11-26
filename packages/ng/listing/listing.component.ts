@@ -1,5 +1,5 @@
 import { NgTemplateOutlet } from '@angular/common';
-import { booleanAttribute, Component, forwardRef, input, ViewEncapsulation } from '@angular/core';
+import { booleanAttribute, ChangeDetectionStrategy, Component, computed, forwardRef, input, ViewEncapsulation } from '@angular/core';
 import { Palette } from '@lucca-front/ng/core';
 
 import { LuccaIcon } from '@lucca-front/icons';
@@ -11,6 +11,7 @@ import { LU_LISTING_INSTANCE } from './listing.token';
 	styleUrl: './listing.component.scss',
 	imports: [NgTemplateOutlet],
 	encapsulation: ViewEncapsulation.None,
+	changeDetection: ChangeDetectionStrategy.OnPush,
 	providers: [
 		{
 			provide: LU_LISTING_INSTANCE,
@@ -19,15 +20,15 @@ import { LU_LISTING_INSTANCE } from './listing.token';
 	],
 })
 export class ListingComponent {
-	ordered = input(false, { transform: booleanAttribute });
-	checklist = input(false, { transform: booleanAttribute });
-	icons = input(false, { transform: booleanAttribute });
-	defaultIcon = input<LuccaIcon>('signConfirm');
-	palette = input<Palette>('none');
+	readonly ordered = input(false, { transform: booleanAttribute });
+	readonly checklist = input(false, { transform: booleanAttribute });
+	readonly icons = input(false, { transform: booleanAttribute });
+	readonly defaultIcon = input<LuccaIcon>('signConfirm');
+	readonly palette = input<Palette>('none');
 
-	get paletteClass() {
+	readonly paletteClass = computed(() => {
 		return {
 			[`palette-${this.palette()}`]: !!this.palette(),
 		};
-	}
+	});
 }
