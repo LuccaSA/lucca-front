@@ -1,4 +1,4 @@
-import { Component, inject, input, ViewEncapsulation } from '@angular/core';
+import { ChangeDetectionStrategy, Component, inject, input, ViewEncapsulation } from '@angular/core';
 import { LuccaIcon } from '@lucca-front/icons';
 import { IconComponent } from '@lucca-front/ng/icon';
 import { LU_LISTING_INSTANCE } from '../listing.token';
@@ -8,13 +8,14 @@ import { LU_LISTING_INSTANCE } from '../listing.token';
 	templateUrl: './listing-item.component.html',
 	imports: [IconComponent],
 	encapsulation: ViewEncapsulation.None,
+	changeDetection: ChangeDetectionStrategy.OnPush,
 	host: {
 		class: 'listing-item',
 		role: 'listitem',
 	},
 })
 export class ListingItemComponent {
-	icon = input<LuccaIcon | null>(null);
+	readonly icon = input<LuccaIcon | null>(null);
 
 	protected listingRef = inject(LU_LISTING_INSTANCE);
 }
