@@ -32,12 +32,14 @@ export function migrateComponent(sourceFile: SourceFile, path: string, tree: Tre
 		const tsUpdate = tree.beginUpdate(path);
 		const isInlineTemplate = textfields[0].filePath === path;
 		const templateUpdate = isInlineTemplate ? tsUpdate : tree.beginUpdate(textfields[0].filePath);
-
+		let updatedStuff = false
 		textfields.forEach((field) => {
 			if(field.rejection) {
+				// TODO check if custom directive is in place for custom inputs
 				// eslint-disable-next-line no-console
 				console.log(`[REJECTED] ${field.filePath}#L${field.node.startSourceSpan.start.line} => ${field.rejection}`)
 			} else {
+				updatedStuff = true;
 				// Let's remove everything first
 				templateUpdate.remove(field.nodeOffset + field.node.startSourceSpan.start.offset, field.node.sourceSpan.toString().length);
 				// Then forge the new input
@@ -53,17 +55,21 @@ export function migrateComponent(sourceFile: SourceFile, path: string, tree: Tre
 		</lu-form-field>`
 				templateUpdate.insertRight(field.nodeOffset + field.node.startSourceSpan.start.offset, newInput);
 			}
+
+			// For errors management, how can we detect it??? Then we could migrate text logic in its own ng-template like formation does.
 		});
-		// Add import if needed
-		applyToUpdateRecorder(tsUpdate, [
-			insertTSImportIfNeeded(sourceFile, path, 'FormFieldComponent', '@lucca-front/ng/form-field'),
-			insertAngularImportIfNeeded(sourceFile, path, 'FormFieldComponent'),
-			insertTSImportIfNeeded(sourceFile, path, 'TextInputComponent', '@lucca-front/ng/forms'),
-			insertAngularImportIfNeeded(sourceFile, path, 'TextInputComponent')
-		]);
-		tree.commitUpdate(tsUpdate);
-		if (!isInlineTemplate) {
-			tree.commitUpdate(templateUpdate);
+		if (updatedStuff) {
+			// Add import if needed
+			applyToUpdateRecorder(tsUpdate, [
+				insertTSImportIfNeeded(sourceFile, path, 'FormFieldComponent', '@lucca-front/ng/form-field'),
+				insertAngularImportIfNeeded(sourceFile, path, 'FormFieldComponent'),
+				insertTSImportIfNeeded(sourceFile, path, 'TextInputComponent', '@lucca-front/ng/forms'),
+				insertAngularImportIfNeeded(sourceFile, path, 'TextInputComponent')
+			]);
+			tree.commitUpdate(tsUpdate);
+			if (!isInlineTemplate) {
+				tree.commitUpdate(templateUpdate);
+			}
 		}
 	}
 	return tree.readText(path);
