@@ -41,6 +41,6 @@ export class DataTableRowComponent {
 	protected tableRef = inject(LU_DATA_TABLE_INSTANCE);
 
 	selected = model<boolean>(false);
-	selectedLabel = input<string | null>(null);
-	disabled = input(false, { transform: booleanAttribute });
+	readonly selectedLabel = input<string | null>(null);
+	readonly disabled = input(false, { transform: booleanAttribute });
 }
