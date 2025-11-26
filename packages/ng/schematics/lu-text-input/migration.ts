@@ -35,6 +35,7 @@ export function migrateComponent(sourceFile: SourceFile, path: string, tree: Tre
 
 		textfields.forEach((field) => {
 			if(field.rejection) {
+				// eslint-disable-next-line no-console
 				console.log(`[REJECTED] ${field.filePath}#L${field.node.startSourceSpan.start.line} => ${field.rejection}`)
 			} else {
 				// Let's remove everything first
