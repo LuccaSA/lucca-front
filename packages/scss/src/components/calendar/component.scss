@@ -220,17 +220,11 @@
 			display: var(--components-calendar-table-body-row-cell-actionDisplay);
 			block-size: 100%;
 			text-transform: lowercase;
+			cursor: var(--components-calendar-table-body-row-cell-actionCursor);
+			text-decoration: var(--components-calendar-table-body-row-cell-actionTextDecoration);
 			box-shadow:
 				0 0 0 1px var(--components-calendar-table-body-row-cell-actionHighlight),
 				0 0 0 1px var(--components-calendar-table-body-row-cell-actionHighlight) inset;
-
-			&:disabled,
-			&[aria-disabled='true'] {
-				--components-calendar-table-body-row-cell-actionColor: var(--palettes-neutral-500);
-
-				text-decoration: line-through;
-				cursor: default;
-			}
 
 			&:not(:disabled, [aria-disabled='true']) {
 				&:hover {
