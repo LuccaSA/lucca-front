@@ -1,4 +1,4 @@
-import { Component, TemplateRef, viewChild } from '@angular/core';
+import { ChangeDetectionStrategy, Component, TemplateRef, viewChild } from '@angular/core';
 import { ComponentFixture, TestBed } from '@angular/core/testing';
 import { PortalDirective } from './portal.directive';
 
@@ -11,6 +11,7 @@ import { PortalDirective } from './portal.directive';
 		}
 		<ng-template #tpl let-value>{{ value }}</ng-template>
 	`,
+	changeDetection: ChangeDetectionStrategy.OnPush,
 })
 class PortalTestComponent {
 	content: PortalDirective['luPortal'] | null = null;
@@ -23,6 +24,7 @@ class PortalTestComponent {
 @Component({
 	selector: 'lu-portal-test-content',
 	template: 'Component content',
+	changeDetection: ChangeDetectionStrategy.OnPush,
 })
 class PortalTestContentComponent {}
 
