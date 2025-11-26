@@ -1,4 +1,4 @@
-import { afterNextRender, booleanAttribute, Component, effect, HostBinding, HostListener, inject, input, Input, ViewEncapsulation } from '@angular/core';
+import { afterNextRender, booleanAttribute, Component, effect, HostBinding, HostListener, inject, Injector, input, Input, ViewEncapsulation } from '@angular/core';
 import { Router } from '@angular/router';
 import { getIntl } from '@lucca-front/ng/core';
 import { LU_LINK_TRANSLATIONS } from './link.translate';
@@ -25,6 +25,7 @@ import { LuRouterLink } from './lu-router-link';
 export class LinkComponent {
 	intl = getIntl(LU_LINK_TRANSLATIONS);
 	routerLink = inject(LuRouterLink);
+	#injector = inject(Injector);
 	router = inject(Router);
 
 	luHref = input('', { alias: 'href' });
@@ -68,7 +69,7 @@ export class LinkComponent {
 	@HostListener('click')
 	redirect(): void {
 		if (!this.disabled() && this.routerLinkCommands() && this.external) {
-			afterNextRender(() => window.open(this.router.serializeUrl(this.router.createUrlTree([this.routerLinkCommands()])), '_blank'));
+			afterNextRender(() => window.open(this.router.serializeUrl(this.router.createUrlTree([this.routerLinkCommands()])), '_blank'), { injector: this.#injector });
 		}
 	}
 
