@@ -1,5 +1,5 @@
 import { NgTemplateOutlet } from '@angular/common';
-import { booleanAttribute, Component, computed, input, numberAttribute, ViewEncapsulation } from '@angular/core';
+import { booleanAttribute, ChangeDetectionStrategy, Component, computed, input, numberAttribute, ViewEncapsulation } from '@angular/core';
 import { ResponsiveProperty } from '@lucca-front/ng/core';
 
 @Component({
@@ -7,13 +7,14 @@ import { ResponsiveProperty } from '@lucca-front/ng/core';
 	templateUrl: './grid.component.html',
 	styleUrls: ['./grid.component.scss'],
 	encapsulation: ViewEncapsulation.None,
+	changeDetection: ChangeDetectionStrategy.OnPush,
 	imports: [NgTemplateOutlet],
 })
 export class GridComponent {
-	container = input(false, { transform: booleanAttribute });
-	columns = input(null, { transform: numberAttribute });
+	readonly container = input(false, { transform: booleanAttribute });
+	readonly columns = input(null, { transform: numberAttribute });
 
-	mode = input<'form' | 'auto' | ResponsiveProperty<'auto'> | null>(null);
+	readonly mode = input<'form' | 'auto' | ResponsiveProperty<'auto'> | null>(null);
 
 	#gapTransform = (gap: Gap | null): string | null => {
 		const spacingRegexp = /.*(\d)$/g;
@@ -27,9 +28,9 @@ export class GridComponent {
 		return gap;
 	};
 
-	gap = input<Gap | null>(null);
-	columnGap = input<Gap | null>(null);
-	rowGap = input<Gap | null>(null);
+	readonly gap = input<Gap | null>(null);
+	readonly columnGap = input<Gap | null>(null);
+	readonly rowGap = input<Gap | null>(null);
 
 	protected gridStyle = computed(() => ({
 		'--grid-columns': this.mode() === null ? this.columns() : null,
