@@ -1,5 +1,5 @@
 import { NgClass } from '@angular/common';
-import { booleanAttribute, ChangeDetectionStrategy, Component, computed, forwardRef, Input, input, model, output, ViewEncapsulation } from '@angular/core';
+import { booleanAttribute, ChangeDetectionStrategy, Component, computed, forwardRef, input, model, output, ViewEncapsulation } from '@angular/core';
 import { NG_VALUE_ACCESSOR } from '@angular/forms';
 import { getIntl, isNil, isNotNil } from '@lucca-front/ng/core';
 import { BasePickerComponent } from '../core/base-picker.component';
@@ -31,21 +31,21 @@ export class DurationPickerComponent extends BasePickerComponent {
 	protected intl = getIntl(LU_DURATION_PICKER_TRANSLATIONS);
 
 	value = model<ISO8601Duration>('PT0S');
-	max = input<ISO8601Duration>('PT99H');
+	readonly max = input<ISO8601Duration>('PT99H');
 
-	displayArrows = input(false, { transform: booleanAttribute });
+	readonly displayArrows = input(false, { transform: booleanAttribute });
 
-	@Input() label: string;
+	readonly label = input<string>();
 
-	hideZeroValue = input(false, { transform: booleanAttribute });
+	readonly hideZeroValue = input(false, { transform: booleanAttribute });
 
-	durationChange = output<DurationChangeEvent>();
+	readonly durationChange = output<DurationChangeEvent>();
 
-	protected hours = computed(() => getHoursPartFromDuration(this.value()));
-	protected minutes = computed(() => getMinutesPartFromDuration(this.value()));
-	protected shouldHideValue = computed(() => this.hideZeroValue() && this.hours() === 0 && this.minutes() === 0);
+	protected readonly hours = computed(() => getHoursPartFromDuration(this.value()));
+	protected readonly minutes = computed(() => getMinutesPartFromDuration(this.value()));
+	protected readonly shouldHideValue = computed(() => this.hideZeroValue() && this.hours() === 0 && this.minutes() === 0);
 
-	protected pickerClasses = computed(() => {
+	protected readonly pickerClasses = computed(() => {
 		return {
 			timePicker: true,
 			'mod-stepper': this.displayArrows(),
@@ -53,7 +53,7 @@ export class DurationPickerComponent extends BasePickerComponent {
 			[`mod-${this.size()}`]: Boolean(this.size()),
 		};
 	});
-	protected fieldsetSuffixClasses = computed(() => {
+	protected readonly fieldsetSuffixClasses = computed(() => {
 		return {
 			'timePicker-fieldset-groupSeparator': true,
 			'pr-u-visibilityHidden': this.shouldHideValue(),
