@@ -32,13 +32,14 @@ import { LuMultiSelectDefaultDisplayerComponent } from '../displayer';
 import { LU_MULTI_SELECT_TRANSLATIONS } from '../select.translate';
 import { LuMultiSelectPanelRefFactory } from './panel-ref.factory';
 import { LuMultiSelectPanelRef } from './panel.model';
+import { IconComponent } from '../../icon/icon.component';
 
 @Component({
 	selector: 'lu-multi-select',
 	templateUrl: './select-input.component.html',
 	styleUrl: './select-input.component.scss',
 	changeDetection: ChangeDetectionStrategy.OnPush,
-	imports: [AsyncPipe, LuTooltipModule, ɵLuOptionOutletDirective, FilterPillDisplayerDirective, FilterPillLabelDirective, ClearComponent],
+	imports: [AsyncPipe, LuTooltipModule, ɵLuOptionOutletDirective, FilterPillDisplayerDirective, FilterPillLabelDirective, ClearComponent, IconComponent],
 	providers: [
 		{
 			provide: NG_VALUE_ACCESSOR,
