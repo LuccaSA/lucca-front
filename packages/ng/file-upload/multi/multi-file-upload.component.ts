@@ -1,4 +1,4 @@
-import { Component, ViewEncapsulation } from '@angular/core';
+import { ChangeDetectionStrategy, Component, ViewEncapsulation } from '@angular/core';
 import { IntlParamsPipe } from '@lucca-front/ng/core';
 import { InputDirective } from '@lucca-front/ng/form-field';
 import { LuSafeExternalSvgPipe } from '@lucca-front/ng/safe-content';
@@ -14,5 +14,6 @@ import { BaseFileUploadComponent } from '../base-file-upload/base-file-upload.co
 		'[class.mod-structure]': 'structure()',
 	},
 	imports: [LuSafeExternalSvgPipe, InputDirective, LuTooltipModule, IntlParamsPipe],
+	changeDetection: ChangeDetectionStrategy.OnPush,
 })
 export class MultiFileUploadComponent extends BaseFileUploadComponent {}
