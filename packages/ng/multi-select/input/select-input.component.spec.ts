@@ -1,4 +1,4 @@
-import { Component } from '@angular/core';
+import { ChangeDetectionStrategy, Component } from '@angular/core';
 import { ComponentFixture, MetadataOverride, TestBed } from '@angular/core/testing';
 import { FormControl, FormsModule, NgControl, ReactiveFormsModule } from '@angular/forms';
 import { LuCoreSelectTotalCountDirective } from '@lucca-front/ng/core-select';
@@ -20,6 +20,7 @@ const options = [
 @Component({
 	selector: 'lu-multi-select-ng-model-host',
 	imports: [FormsModule, LuMultiSelectInputComponent, LuMultiSelectWithSelectAllDirective, LuCoreSelectTotalCountDirective],
+	changeDetection: ChangeDetectionStrategy.OnPush,
 	template: ` <lu-multi-select [ngModel]="selectedOptions" (ngModelChange)="setSelectedOptions($event)" [options]="options" withSelectAll withSelectAllLabel="lol" [totalCount]="options.length" /> `,
 })
 class MultiSelectNgModelHostComponent {
@@ -35,6 +36,7 @@ class MultiSelectNgModelHostComponent {
 @Component({
 	selector: 'lu-multi-select-form-control-host',
 	imports: [ReactiveFormsModule, LuMultiSelectInputComponent, LuMultiSelectWithSelectAllDirective, LuCoreSelectTotalCountDirective],
+	changeDetection: ChangeDetectionStrategy.OnPush,
 	template: ` <lu-multi-select [formControl]="formControl" [options]="options" withSelectAll withSelectAllLabel="lol" [totalCount]="options.length" /> `,
 })
 class MultiSelectFormControlHostComponent {
