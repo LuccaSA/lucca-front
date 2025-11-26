@@ -17,9 +17,9 @@ export abstract class BasePickerComponent implements ControlValueAccessor {
 
 	size = input<'S' | 'M'>();
 
-	hoursPart? = viewChild<TimePickerPartComponent>('hoursPart');
+	hoursPart = viewChild<TimePickerPartComponent>('hoursPart');
 
-	minutesPart? = viewChild<TimePickerPartComponent>('minutesPart');
+	minutesPart = viewChild<TimePickerPartComponent>('minutesPart');
 
 	protected hoursIncrement = computed(() => this.getHoursIncrement());
 	protected minutesIncrement = computed(() => this.getMinutesIncrement());
