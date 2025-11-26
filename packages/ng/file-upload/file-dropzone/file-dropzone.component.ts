@@ -1,4 +1,4 @@
-import { Component, ViewEncapsulation } from '@angular/core';
+import { ChangeDetectionStrategy, Component, ViewEncapsulation } from '@angular/core';
 import { IntlParamsPipe } from '@lucca-front/ng/core';
 import { LuSafeExternalSvgPipe } from '@lucca-front/ng/safe-content';
 import { BaseFileUploadComponent } from '../base-file-upload/base-file-upload.component';
@@ -9,5 +9,6 @@ import { BaseFileUploadComponent } from '../base-file-upload/base-file-upload.co
 	styleUrl: './file-dropzone.component.scss',
 	encapsulation: ViewEncapsulation.None,
 	imports: [LuSafeExternalSvgPipe, IntlParamsPipe],
+	changeDetection: ChangeDetectionStrategy.OnPush,
 })
 export class FileDropzoneComponent extends BaseFileUploadComponent {}
