@@ -399,7 +399,7 @@
 		@extend %textLight;
 	}
 
-	.pr-u-textPlaceholder {
+	.pr-u-textPlaceholder, .pr-u-colorInputTextPlaceholder {
 		@extend %textPlaceholder;
 	}
 

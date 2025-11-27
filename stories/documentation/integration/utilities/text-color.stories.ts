@@ -19,9 +19,36 @@ function getTemplate(args: TextColorStory): string {
 	<div class="pr-u-colorTextCritical demo-utility"><code class="code">pr-u-colorTextCritical</code> Lorem ipsum</div>
 </div>
 <div class="demo-utilityWrapper">
+	<div class="pr-u-colorTextProduct demo-utility"><code class="code">pr-u-colorTextProduct</code> Lorem ipsum</div>
+	<div class="pr-u-colorTextBrand demo-utility"><code class="code">pr-colorTextBrand-textBrand</code> Lorem ipsum</div>
+	<div class="pr-u-colorInputTextPlaceholder demo-utility"><code class="code">pr-u-colorInputTextPlaceholder</code> Lorem ipsum</div>
+</div>
+<div class="demo-utilityWrapper">
+	<div class="pr-u-colorTextKiwi demo-utility"><code class="code">pr-u-colorTextKiwi</code> Lorem ipsum</div>
+	<div class="pr-u-colorTextLime demo-utility"><code class="code">pr-u-colorTextLime</code> Lorem ipsum</div>
+	<div class="pr-u-colorTextCucumber demo-utility"><code class="code">pr-u-colorTextCucumber</code> Lorem ipsum</div>
+	<div class="pr-u-colorTextMint demo-utility"><code class="code">pr-u-colorTextMint</code> Lorem ipsum</div>
+	<div class="pr-u-colorTextGlacier demo-utility"><code class="code">pr-u-colorTextGlacier</code> Lorem ipsum</div>
+	<div class="pr-u-colorTextLagoon demo-utility"><code class="code">pr-u-colorTextLagoon</code> Lorem ipsum</div>
+	<div class="pr-u-colorTextBlueberry demo-utility"><code class="code">pr-u-colorTextBlueberry</code> Lorem ipsum</div>
+	<div class="pr-u-colorTextLavender demo-utility"><code class="code">pr-u-colorTextLavender</code> Lorem ipsum</div>
+	<div class="pr-u-colorTextGrape demo-utility"><code class="code">pr-u-colorTextGrape</code> Lorem ipsum</div>
+	<div class="pr-u-colorTextWatermelon demo-utility"><code class="code">pr-u-colorTextWatermelon</code> Lorem ipsum</div>
+	<div class="pr-u-colorTextPumpkin demo-utility"><code class="code">pr-u-colorTextPumpkin</code> Lorem ipsum</div>
+	<div class="pr-u-colorTextPineapple demo-utility"><code class="code">pr-u-colorTextPineapple</code> Lorem ipsum</div>
+</div>
+<h2>💀 Deprecated</h2>
+<div class="demo-utilityWrapper">
 	<div class="pr-u-textProduct demo-utility"><code class="code">pr-u-textProduct</code> Lorem ipsum</div>
 	<div class="pr-u-textBrand demo-utility"><code class="code">pr-u-textBrand</code> Lorem ipsum</div>
 	<div class="pr-u-textPlaceholder demo-utility"><code class="code">pr-u-textPlaceholder</code> Lorem ipsum</div>
+</div>
+<div class="demo-utilityWrapper">
+	<div class="pr-u-textNeutral demo-utility"><code class="code">pr-u-textNeutral</code> Lorem ipsum</div>
+	<div class="pr-u-textLight demo-utility"><code class="code">pr-u-textLight</code> Lorem ipsum</div>
+	<div class="pr-u-textSuccess demo-utility"><code class="code">pr-u-textSuccess</code> Lorem ipsum</div>
+	<div class="pr-u-textWarning demo-utility"><code class="code">pr-u-textWarning</code> Lorem ipsum</div>
+	<div class="pr-u-textCritical demo-utility"><code class="code">pr-u-textCritical</code> Lorem ipsum</div>
 </div>
 <div class="demo-utilityWrapper">
 	<div class="pr-u-textKiwi demo-utility"><code class="code">pr-u-textKiwi</code> Lorem ipsum</div>
@@ -36,14 +63,6 @@ function getTemplate(args: TextColorStory): string {
 	<div class="pr-u-textWatermelon demo-utility"><code class="code">pr-u-textWatermelon</code> Lorem ipsum</div>
 	<div class="pr-u-textPumpkin demo-utility"><code class="code">pr-u-textPumpkin</code> Lorem ipsum</div>
 	<div class="pr-u-textPineapple demo-utility"><code class="code">pr-u-textPineapple</code> Lorem ipsum</div>
-</div>
-<h2>💀 Deprecated</h2>
-<div class="demo-utilityWrapper">
-	<div class="pr-u-textNeutral demo-utility"><code class="code">pr-u-textNeutral</code> Lorem ipsum</div>
-	<div class="pr-u-textLight demo-utility"><code class="code">pr-u-textLight</code> Lorem ipsum</div>
-	<div class="pr-u-textSuccess demo-utility"><code class="code">pr-u-textSuccess</code> Lorem ipsum</div>
-	<div class="pr-u-textWarning demo-utility"><code class="code">pr-u-textWarning</code> Lorem ipsum</div>
-	<div class="pr-u-textCritical demo-utility"><code class="code">pr-u-textCritical</code> Lorem ipsum</div>
 </div>`;
 }
 
