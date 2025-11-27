@@ -21,6 +21,7 @@ interface AdapterData<D, C> {
 @Component({
 	selector: 'lu-dialog-content-adapter',
 	templateUrl: './dialog-content-adapter.component.html',
+	// eslint-disable-next-line @angular-eslint/prefer-on-push-component-change-detection
 	changeDetection: ChangeDetectionStrategy.Default,
 	encapsulation: ViewEncapsulation.None,
 	imports: [DialogComponent, DialogHeaderComponent, DialogContentComponent, DialogFooterComponent, AsyncPipe, ButtonComponent, NumericBadgeComponent],

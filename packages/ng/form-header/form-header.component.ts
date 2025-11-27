@@ -1,4 +1,4 @@
-import { Component, input, ViewEncapsulation } from '@angular/core';
+import { ChangeDetectionStrategy, Component, input, ViewEncapsulation } from '@angular/core';
 
 @Component({
 	selector: 'lu-form-header]',
@@ -7,7 +7,8 @@ import { Component, input, ViewEncapsulation } from '@angular/core';
 	host: {
 		class: 'form-header',
 	},
+	changeDetection: ChangeDetectionStrategy.OnPush,
 })
 export class FormHeaderComponent {
-	headingLevel = input<1 | 2 | 3 | 4 | 5 | 6>(1);
+	readonly headingLevel = input<1 | 2 | 3 | 4 | 5 | 6>(1);
 }

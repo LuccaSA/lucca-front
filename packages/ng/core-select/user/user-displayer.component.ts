@@ -1,5 +1,5 @@
 import { AsyncPipe } from '@angular/common';
-import { Component, inject } from '@angular/core';
+import { ChangeDetectionStrategy, Component, inject } from '@angular/core';
 import { ILuOptionContext, LU_OPTION_CONTEXT } from '@lucca-front/ng/core-select';
 import { LuUserDisplayPipe } from '@lucca-front/ng/user';
 import { LuCoreSelectUser } from './user-option.model';
@@ -13,6 +13,7 @@ import { LuCoreSelectUsersDirective } from './users.directive';
 			<span translate="no">{{ user | luUserDisplay: userDirective.displayFormat() }}</span>
 		}
 	`,
+	changeDetection: ChangeDetectionStrategy.OnPush,
 })
 export class LuUserDisplayerComponent {
 	protected context = inject<ILuOptionContext<LuCoreSelectUser>>(LU_OPTION_CONTEXT);

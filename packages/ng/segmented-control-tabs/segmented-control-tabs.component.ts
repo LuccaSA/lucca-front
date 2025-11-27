@@ -1,4 +1,17 @@
-import { AfterContentInit, booleanAttribute, Component, computed, contentChildren, ElementRef, forwardRef, input, model, viewChildren, ViewEncapsulation } from '@angular/core';
+import {
+	AfterContentInit,
+	booleanAttribute,
+	ChangeDetectionStrategy,
+	Component,
+	computed,
+	contentChildren,
+	ElementRef,
+	forwardRef,
+	input,
+	model,
+	viewChildren,
+	ViewEncapsulation,
+} from '@angular/core';
 import { ReactiveFormsModule } from '@angular/forms';
 import { PortalDirective } from '@lucca-front/ng/core';
 import { NoopValueAccessorDirective } from '@lucca-front/ng/forms';
@@ -13,6 +26,7 @@ let nextId = 0;
 	styleUrl: './segmented-control-tabs.component.scss',
 	encapsulation: ViewEncapsulation.None,
 	imports: [ReactiveFormsModule, PortalDirective],
+	changeDetection: ChangeDetectionStrategy.OnPush,
 	hostDirectives: [NoopValueAccessorDirective],
 	providers: [
 		{
@@ -22,17 +36,17 @@ let nextId = 0;
 	],
 })
 export class SegmentedControlTabsComponent<T = unknown> implements AfterContentInit {
-	small = input(false, { transform: booleanAttribute });
-	vertical = input(false, { transform: booleanAttribute });
+	readonly small = input(false, { transform: booleanAttribute });
+	readonly vertical = input(false, { transform: booleanAttribute });
 
-	id = `segmentedControl${nextId++}`;
+	readonly id = `segmentedControl${nextId++}`;
 
-	tabs = contentChildren<SegmentedControlTabsPanelComponent<T>>(SegmentedControlTabsPanelComponent);
-	tabButtons = viewChildren<ElementRef<HTMLButtonElement>>('tabButton');
+	readonly tabs = contentChildren<SegmentedControlTabsPanelComponent<T>>(SegmentedControlTabsPanelComponent);
+	readonly tabButtons = viewChildren<ElementRef<HTMLButtonElement>>('tabButton');
 
 	active = model<T>(null);
 
-	currentIndex = computed(() => this.tabs().findIndex((tab) => tab.value() === this.active()));
+	readonly currentIndex = computed(() => this.tabs().findIndex((tab) => tab.value() === this.active()));
 
 	previous() {
 		let newIndex = this.currentIndex() - 1;

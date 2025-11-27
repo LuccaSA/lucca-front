@@ -1,4 +1,4 @@
-import { Component, computed, effect, ElementRef, inject } from '@angular/core';
+import { ChangeDetectionStrategy, Component, computed, effect, ElementRef, inject } from '@angular/core';
 import { outputToObservable, takeUntilDestroyed } from '@angular/core/rxjs-interop';
 import { FormsModule } from '@angular/forms';
 import { getIntl } from '@lucca-front/ng/core';
@@ -11,6 +11,7 @@ import { MULTI_SELECT_WITH_SELECT_ALL_CONTEXT } from './select-all.models';
 @Component({
 	selector: 'lu-multi-select-all-header',
 	imports: [FormsModule, CheckboxInputComponent, FormFieldComponent],
+	changeDetection: ChangeDetectionStrategy.OnPush,
 	hostDirectives: [ɵCoreSelectPanelElement],
 	styleUrl: './multi-select-all-header.component.scss',
 	template: `

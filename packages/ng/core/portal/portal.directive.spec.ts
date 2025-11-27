@@ -1,21 +1,23 @@
-import { Component, TemplateRef, viewChild } from '@angular/core';
+import { ChangeDetectionStrategy, Component, input, TemplateRef, viewChild } from '@angular/core';
 import { ComponentFixture, TestBed } from '@angular/core/testing';
+import { PortalContent } from './portal-content';
 import { PortalDirective } from './portal.directive';
 
 @Component({
 	selector: 'lu-portal-test',
 	imports: [PortalDirective],
 	template: `
-		@if (displayed) {
-			<div *luPortal="content; context: context"></div>
+		@if (displayed()) {
+			<div *luPortal="content(); context: context()"></div>
 		}
 		<ng-template #tpl let-value>{{ value }}</ng-template>
 	`,
+	changeDetection: ChangeDetectionStrategy.OnPush,
 })
 class PortalTestComponent {
-	content: PortalDirective['luPortal'] | null = null;
-	context: PortalDirective['luPortalContext'] | null = null;
-	displayed = true;
+	context = input<PortalDirective['luPortalContext'] | null>(null);
+	content = input<PortalContent | null>(null);
+	displayed = input(true);
 
 	contentTpl = viewChild.required<TemplateRef<unknown>>('tpl');
 }
@@ -23,6 +25,7 @@ class PortalTestComponent {
 @Component({
 	selector: 'lu-portal-test-content',
 	template: 'Component content',
+	changeDetection: ChangeDetectionStrategy.OnPush,
 })
 class PortalTestContentComponent {}
 
@@ -42,50 +45,52 @@ describe('PortalDirective', () => {
 	});
 
 	it('should work with string', () => {
-		host.content = 'test';
+		fixture.componentRef.setInput('content', 'test');
 		fixture.detectChanges();
 		expect(hostContent.textContent).toBe('test');
 	});
 
 	it('should work with string with updates', () => {
-		host.content = 'test1';
+		fixture.componentRef.setInput('content', 'test1');
 		fixture.detectChanges();
-		host.content = 'test2';
+		fixture.componentRef.setInput('content', 'test2');
 		fixture.detectChanges();
 		expect(hostContent.textContent).toBe('test2');
 	});
 
 	it('should clean string when hidding luportal', () => {
-		host.content = 'test';
+		fixture.componentRef.setInput('content', 'test');
 		fixture.detectChanges();
-		host.displayed = false;
+		fixture.componentRef.setInput('displayed', false);
 		fixture.detectChanges();
 		expect(hostContent.textContent).toBe('');
 	});
 
 	it('should work with component', () => {
-		host.content = PortalTestContentComponent;
+		fixture.componentRef.setInput('content', PortalTestContentComponent);
 		fixture.detectChanges();
 		expect(hostContent.textContent).toBe('Component content');
 	});
 
 	it('should work with string then component', () => {
-		host.content = 'test';
+		fixture.componentRef.setInput('content', 'test');
 		fixture.detectChanges();
-		host.content = PortalTestContentComponent;
+
+		fixture.componentRef.setInput('content', PortalTestContentComponent);
 		fixture.detectChanges();
 		expect(hostContent.textContent).toBe('Component content');
 	});
 
 	it('should work with templateRef with context updates', () => {
 		// Arrange
-		host.content = host.contentTpl();
-		host.context = { $implicit: 'test' };
+		fixture.componentRef.setInput('content', host.contentTpl());
+		fixture.componentRef.setInput('context', { $implicit: 'test' });
+
 		fixture.detectChanges();
 
 		// Act
 		const firstText = hostContent.textContent;
-		host.context = { $implicit: 'test2' };
+		fixture.componentRef.setInput('context', { $implicit: 'test2' });
 		fixture.detectChanges();
 
 		// Assert

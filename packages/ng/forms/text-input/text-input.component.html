@@ -48,12 +48,12 @@
 			}
 			@if (hasTogglePasswordVisibilityIcon()) {
 				<button
-					[attr.aria-pressed]="showPassword"
+					[attr.aria-pressed]="showPassword()"
 					type="button"
 					class="button mod-onlyIcon mod-ghost textField-input-affix-toggle"
 					(click)="togglePasswordVisibility()"
 				>
-					<span aria-hidden="true" class="lucca-icon icon-{{ showPassword ? 'unwatch' : 'watch' }}"></span>
+					<span aria-hidden="true" [class]="`lucca-icon icon-${ showPassword() ? 'unwatch' : 'watch' }`"></span>
 					<span class="pr-u-mask">{{ intl.togglePasswordVisibility }}</span>
 				</button>
 			}

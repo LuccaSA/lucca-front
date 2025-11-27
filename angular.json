@@ -66,6 +66,7 @@
 					"options": {
 						"browserTarget": "ng:build",
 						"compodoc": true,
+						"experimentalZoneless": true,
 						"compodocArgs": [
 							"-p",
 							"./tsconfig.compodoc-json.json",
@@ -91,6 +92,7 @@
 					"options": {
 						"browserTarget": "ng:build",
 						"compodoc": true,
+						"experimentalZoneless": true,
 						"compodocArgs": [
 							"-p",
 							"./tsconfig.compodoc-json.json",
