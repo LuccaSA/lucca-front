@@ -1,9 +1,11 @@
 import { Component } from '@angular/core';
+import { ChipComponent } from '@lucca-front/ng/chip';
 import { Meta, StoryFn } from '@storybook/angular';
 
 @Component({
 	selector: 'chip-stories',
 	templateUrl: './chip.stories.html',
+	imports: [ChipComponent],
 })
 class ChipStory {}
 

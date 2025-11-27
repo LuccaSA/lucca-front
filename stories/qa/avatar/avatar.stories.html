@@ -1,5 +1,27 @@
+@let userWithPic =
+	{
+		id: 12,
+		firstName: "Finn",
+		lastName: "Mertens",
+		pictureHref: "https://cdn.lucca.fr/lucca-front/avatars/finn.png",
+	};
+@let userWithoutPic =
+	{
+		id: 14,
+		firstName: "Jake",
+		lastName: "The Dog",
+	};
 <table class="demo-QAtable">
 	<tbody>
+		<tr>
+			<td></td>
+			<td style="width: 50%">
+				<div class="demo-QAtable-list">HTML</div>
+			</td>
+			<td style="width: 50%">
+				<div class="demo-QAtable-list">Angular</div>
+			</td>
+		</tr>
 		<tr>
 			<td>Default</td>
 			<td>
@@ -9,32 +31,50 @@
 					</div>
 				</div>
 			</td>
+			<td>
+				<div class="demo-QAtable-list">
+					<lu-user-picture [user]="userWithPic" />
+				</div>
+			</td>
 		</tr>
 		<tr>
 			<td>Sizes</td>
 			<td>
 				<div class="demo-QAtable-list">
-					<div class="avatar mod-XS">
-						<img alt="" class="avatar-picture" src="https://cdn.lucca.fr/transverse/prisme/visuals/avatars/finn.png" loading="lazy" />
+					<div class="demo-QAtable-list">
+						<div class="avatar mod-XS">
+							<img alt="" class="avatar-picture" src="https://cdn.lucca.fr/transverse/prisme/visuals/avatars/finn.png" loading="lazy" />
+						</div>
+						<div class="avatar mod-S">
+							<img alt="" class="avatar-picture" src="https://cdn.lucca.fr/transverse/prisme/visuals/avatars/finn.png" loading="lazy" />
+						</div>
+						<div class="avatar mod-M">
+							<img alt="" class="avatar-picture" src="https://cdn.lucca.fr/transverse/prisme/visuals/avatars/finn.png" loading="lazy" />
+						</div>
+						<div class="avatar mod-L">
+							<img alt="" class="avatar-picture" src="https://cdn.lucca.fr/transverse/prisme/visuals/avatars/finn.png" loading="lazy" />
+						</div>
+						<div class="avatar mod-XL">
+							<img alt="" class="avatar-picture" src="https://cdn.lucca.fr/transverse/prisme/visuals/avatars/finn.png" loading="lazy" />
+						</div>
+						<div class="avatar mod-XXL">
+							<img alt="" class="avatar-picture" src="https://cdn.lucca.fr/transverse/prisme/visuals/avatars/finn.png" loading="lazy" />
+						</div>
+						<div class="avatar mod-XXXL">
+							<img alt="" class="avatar-picture" src="https://cdn.lucca.fr/transverse/prisme/visuals/avatars/finn.png" loading="lazy" />
+						</div>
 					</div>
-					<div class="avatar mod-S">
-						<img alt="" class="avatar-picture" src="https://cdn.lucca.fr/transverse/prisme/visuals/avatars/finn.png" loading="lazy" />
-					</div>
-					<div class="avatar mod-M">
-						<img alt="" class="avatar-picture" src="https://cdn.lucca.fr/transverse/prisme/visuals/avatars/finn.png" loading="lazy" />
-					</div>
-					<div class="avatar mod-L">
-						<img alt="" class="avatar-picture" src="https://cdn.lucca.fr/transverse/prisme/visuals/avatars/finn.png" loading="lazy" />
-					</div>
-					<div class="avatar mod-XL">
-						<img alt="" class="avatar-picture" src="https://cdn.lucca.fr/transverse/prisme/visuals/avatars/finn.png" loading="lazy" />
-					</div>
-					<div class="avatar mod-XXL">
-						<img alt="" class="avatar-picture" src="https://cdn.lucca.fr/transverse/prisme/visuals/avatars/finn.png" loading="lazy" />
-					</div>
-					<div class="avatar mod-XXXL">
-						<img alt="" class="avatar-picture" src="https://cdn.lucca.fr/transverse/prisme/visuals/avatars/finn.png" loading="lazy" />
-					</div>
+				</div>
+			</td>
+			<td>
+				<div class="demo-QAtable-list">
+					<lu-user-picture class="mod-XS" [user]="userWithPic" />
+					<lu-user-picture class="mod-S" [user]="userWithPic" />
+					<lu-user-picture class="mod-M" [user]="userWithPic" />
+					<lu-user-picture class="mod-L" [user]="userWithPic" />
+					<lu-user-picture class="mod-XL" [user]="userWithPic" />
+					<lu-user-picture class="mod-XXL" [user]="userWithPic" />
+					<lu-user-picture class="mod-XXXL" [user]="userWithPic" />
 				</div>
 			</td>
 		</tr>
@@ -44,39 +84,50 @@
 				<div class="demo-QAtable-list">
 					<div class="avatar mod-XS">
 						<div class="avatar-picture">
-							<span class="avatar-picture-initials" translate="no">FH</span>
+							<span class="avatar-picture-initials" translate="no">TJ</span>
 						</div>
 					</div>
 					<div class="avatar mod-S">
 						<div class="avatar-picture">
-							<span class="avatar-picture-initials" translate="no">FH</span>
+							<span class="avatar-picture-initials" translate="no">TJ</span>
 						</div>
 					</div>
 					<div class="avatar">
 						<div class="avatar-picture">
-							<span class="avatar-picture-initials" translate="no">FH</span>
+							<span class="avatar-picture-initials" translate="no">TJ</span>
 						</div>
 					</div>
 					<div class="avatar mod-L">
 						<div class="avatar-picture">
-							<span class="avatar-picture-initials" translate="no">FH</span>
+							<span class="avatar-picture-initials" translate="no">TJ</span>
 						</div>
 					</div>
 					<div class="avatar mod-XL">
 						<div class="avatar-picture">
-							<span class="avatar-picture-initials" translate="no">FH</span>
+							<span class="avatar-picture-initials" translate="no">TJ</span>
 						</div>
 					</div>
 					<div class="avatar mod-XXL">
 						<div class="avatar-picture">
-							<span class="avatar-picture-initials" translate="no">FH</span>
+							<span class="avatar-picture-initials" translate="no">TJ</span>
 						</div>
 					</div>
 					<div class="avatar mod-XXXL">
 						<div class="avatar-picture">
-							<span class="avatar-picture-initials" translate="no">FH</span>
+							<span class="avatar-picture-initials" translate="no">TJ</span>
 						</div>
 					</div>
+				</div>
+			</td>
+			<td>
+				<div class="demo-QAtable-list">
+					<lu-user-picture [user]="userWithoutPic" class="mod-XS" />
+					<lu-user-picture [user]="userWithoutPic" class="mod-S" />
+					<lu-user-picture [user]="userWithoutPic" />
+					<lu-user-picture [user]="userWithoutPic" class="mod-L" />
+					<lu-user-picture [user]="userWithoutPic" class="mod-XL" />
+					<lu-user-picture [user]="userWithoutPic" class="mod-XXL" />
+					<lu-user-picture [user]="userWithoutPic" class="mod-XXXL" />
 				</div>
 			</td>
 		</tr>
@@ -105,6 +156,18 @@
 					<div class="avatar mod-placeholder mod-XXXL">
 						<div class="avatar-picture"></div>
 					</div>
+				</div>
+			</td>
+			<td>
+				<div class="demo-QAtable-list">
+					<lu-user-picture class="mod-placeholder mod-XS" />
+					<lu-user-picture class="mod-placeholder mod-S" />
+					<lu-user-picture class="mod-placeholder" />
+					<lu-user-picture class="mod-placeholder mod-M" />
+					<lu-user-picture class="mod-placeholder mod-L" />
+					<lu-user-picture class="mod-placeholder mod-XL" />
+					<lu-user-picture class="mod-placeholder mod-XXL" />
+					<lu-user-picture class="mod-placeholder mod-XXXL" />
 				</div>
 			</td>
 		</tr>
@@ -974,6 +1037,21 @@
 				</div>
 			</td>
 		</tr>
+	</tbody>
+</table>
+
+<!-- To tell the ui-diff tool that the page has finished rendering -->
+<span id="ready"></span>
+
+<table class="demo-QAtable">
+	<tbody>
+		<tr></tr>
+		<tr></tr>
+		<tr></tr>
+		<tr></tr>
+		<tr></tr>
+		<tr></tr>
+		<tr></tr>
 	</tbody>
 </table>
 
