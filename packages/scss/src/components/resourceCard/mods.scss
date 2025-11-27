@@ -1,24 +1,48 @@
 @use '@lucca-front/scss/src/components/button/exports' as button;
 
-@mixin noDescription {
-	--components-resourceCard-content-header-minBlockSize: var(--pr-t-spacings-400);
-	--components-resourceCard-content-after-paddingBlock: 0;
-}
+// @mixin noDescription {
+// 	--components-resourceCard-content-header-minBlockSize: var(--pr-t-spacings-400);
+// 	--components-resourceCard-content-after-paddingBlock: 0;
+// }
 
 
-@mixin noDescriptionNoAction {
-	--components-resourceCard-content-header-minBlockSize: var(--pr-t-spacings-600);
-}
+// @mixin noDescriptionNoAction {
+// 	--components-resourceCard-content-header-minBlockSize: var(--pr-t-spacings-600);
+// }
 
-@mixin noDescriptionNoActionNoIllustration {
-	--components-resourceCard-content-header-minBlockSize: var(--pr-t-spacings-400);
+// @mixin noDescriptionNoActionNoIllustration {
+// 	--components-resourceCard-content-header-minBlockSize: var(--pr-t-spacings-400);
 
-	// --components-resourceCard-content-after-paddingBlock: 0;
-}
+// 	// --components-resourceCard-content-after-paddingBlock: 0;
+// }
 
-@mixin noDescriptionNoActionNoIllustrationAndHandle {
-//	--components-resourceCard-content-header-minBlockSize: var(--pr-t-spacings-400);
-}
+// @mixin noDescriptionNoActionNoIllustrationAndHandle {
+// //	--components-resourceCard-content-header-minBlockSize: var(--pr-t-spacings-400);
+// }
+
+// @mixin draggableAction {
+// 	--components-resourceCard-content-header-minBlockSize: var(--pr-t-spacings-500);
+
+// 	.resourceCard-content-before-content-handleButton {
+// 		margin-block: var(--pr-t-spacings-50);
+// 	}
+// }
+
+// @mixin draggableActionNarrow {
+// 	--components-resourceCard-content-header-minBlockSize: var(--pr-t-spacings-400);
+
+// 	.resourceCard-content-before-content-handleButton {
+// 		margin-block: var(--pr-t-spacings-0);
+// 	}
+// }
+
+// @mixin draggableInfos {
+
+// }
+
+// @mixin draggableInfosNarrow {
+// 	--components-resourceCard-content-header-minBlockSize: var(--pr-t-spacings-500);
+// }
 
 
 @mixin narrow {
@@ -27,9 +51,15 @@
 	--components-resourceCard-content-header-alignItems: start;
 	--components-resourceCard-content-header-justifyContent: center;
 	--components-resourceCard-content-description-not-empty-marginBlockStart: var(--pr-t-spacings-150);
-	--components-resourceCard-content-gridTemplate: "before header after" auto
+	--components-resourceCard-content-gridTemplate: "before header after" minmax(var(--pr-t-spacings-400), auto)
 																									"main   main   main " auto
 																									/auto   1fr    auto;
+
+	.resourceCard-content-header,
+	.resourceCard-content-after,
+	.resourceCard-content-before {
+		align-self: center;
+	}
 
 	.resourceCard-content-after .button {
 		@include button.S;
@@ -42,4 +72,8 @@
 
 @mixin grid {
 	--components-resourceCardWrapper-display: grid;
+}
+
+@mixin draggable {
+	// --components-resourceCard-content-header-minBlockSize: var(--pr-t-spacings-400);
 }

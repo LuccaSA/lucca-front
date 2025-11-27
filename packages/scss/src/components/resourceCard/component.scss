@@ -83,10 +83,11 @@
 
 		.resourceCard-content-after {
 			grid-area: after;
-			padding-block: var(--components-resourceCard-content-after-paddingBlock);
+
+			// padding-block: var(--components-resourceCard-content-after-paddingBlock);
 
 			&:not(:empty) {
-				margin-inline-start: var(--pr-t-spacings-150);
+			//	margin-inline-start: var(--pr-t-spacings-150);
 			}
 		}
 
@@ -133,7 +134,8 @@
 			flex-direction: var(--components-resourceCard-content-header-flexDirection);
 			align-items: var(--components-resourceCard-content-header-alignItems);
 			justify-content: var(--components-resourceCard-content-header-justifyContent);
-			min-block-size: var(--components-resourceCard-content-header-minBlockSize);
+
+			// min-block-size: var(--components-resourceCard-content-header-minBlockSize);
 		}
 
 		.resourceCard-content-header-infos {

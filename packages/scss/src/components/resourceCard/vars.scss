@@ -2,9 +2,11 @@
 	--components-resourceCard-color: inherit;
 	--components-resourceCard-content-header-title-link-color: var(--components-resourceCard-color);
 	--components-resourceCard-content-header-infos-flexWrap: nowrap;
-	--components-resourceCard-content-header-minBlockSize: 0;
+
+	// --components-resourceCard-content-header-minBlockSize: 0;
 	--components-resourceCard-before-inset: 0;
-	--components-resourceCard-content-after-paddingBlock: var(--pr-t-spacings-50);
+
+	// --components-resourceCard-content-after-paddingBlock: var(--pr-t-spacings-50);
 	--components-resourceCard-content-header-title-link-inset-before: var(--components-resourceCard-before-inset);
 	--components-resourceCard-content-header-flexDirection: row;
 	--components-resourceCard-content-header-alignItems: center;
