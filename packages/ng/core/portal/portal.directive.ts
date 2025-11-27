@@ -1,66 +1,67 @@
-import { ComponentRef, Directive, EmbeddedViewRef, inject, Injector, Input, OnChanges, OnDestroy, Renderer2, SimpleChanges, TemplateRef, ViewContainerRef } from '@angular/core';
+import { ComponentRef, Directive, effect, EmbeddedViewRef, inject, Injector, input, OnDestroy, Renderer2, TemplateRef, untracked, ViewContainerRef } from '@angular/core';
 import { PORTAL_CONTEXT, PortalContent } from './portal-content';
 
 @Directive({
 	selector: '[luPortal]',
 })
-export class PortalDirective<T = unknown> implements OnChanges, OnDestroy {
+export class PortalDirective<T = unknown> implements OnDestroy {
 	private viewContainerRef = inject(ViewContainerRef);
 	private renderer = inject(Renderer2);
 	private templateRef = inject(TemplateRef);
 	private injector = inject(Injector);
 
-	@Input({ required: true })
-	public luPortal: PortalContent<T> = null;
+	luPortal = input.required<PortalContent<T>>();
 
-	@Input()
-	public luPortalContext: T | null = null;
+	luPortalContext = input<T | null>(null);
 
 	private createdTextElement: Text | null = null;
 	private embeddedViewRef?: EmbeddedViewRef<T>;
 	private componentRef?: ComponentRef<unknown>;
 
-	private render(): void {
+	constructor() {
+		effect(() => {
+			const portal = this.luPortal();
+			const ctx = this.luPortalContext();
+
+			untracked(() => {
+				this.render(portal, ctx);
+				if (this.embeddedViewRef) {
+					this.updateEmbeddedViewContext(ctx);
+				}
+			});
+		});
+	}
+
+	private render(luPortal: PortalContent<T>, ctx: T | null): void {
 		this.viewContainerRef.clear();
 		this.embeddedViewRef = undefined;
 		this.componentRef = undefined;
 
-		if (typeof this.luPortal !== 'string') {
+		if (typeof luPortal !== 'string') {
 			this.destroyRenderedText();
 		}
 
-		if (!this.luPortal) {
+		if (!luPortal) {
 			return;
 		}
 
-		const injector = Injector.create({
-			parent: this.injector,
-			providers: [{ provide: PORTAL_CONTEXT, useValue: this.luPortalContext }],
-		});
-
-		if (this.luPortal instanceof TemplateRef) {
-			const context = Object.assign({}, this.luPortalContext);
-			this.embeddedViewRef = this.viewContainerRef.createEmbeddedView<T>(this.luPortal, context, { injector });
-		} else if (typeof this.luPortal === 'string') {
-			this.renderText(this.luPortal);
+		if (luPortal instanceof TemplateRef) {
+			const context = Object.assign({}, ctx);
+			this.embeddedViewRef = this.viewContainerRef.createEmbeddedView<T>(luPortal, context, { injector: this.injector });
+		} else if (typeof luPortal === 'string') {
+			this.renderText(luPortal);
 		} else {
+			const injector = Injector.create({
+				parent: this.injector,
+				providers: [{ provide: PORTAL_CONTEXT, useValue: ctx }],
+			});
 			try {
-				this.componentRef = this.viewContainerRef.createComponent(this.luPortal, { injector });
+				this.componentRef = this.viewContainerRef.createComponent(luPortal, { injector });
 				this.componentRef.changeDetectorRef.detectChanges();
 			} catch (e) {
 				console.error(e);
 				throw new Error('[LuPortal] Angular failed to create component, make sure you are not giving LuPortal an Object that is not a Type<>');
 			}
-		}
-	}
-
-	ngOnChanges(changes: SimpleChanges): void {
-		if (changes['luPortal']) {
-			// If we're here, it means that either the template ref changed or the string changed,
-			// meaning that we need to render again
-			this.render();
-		} else if (changes['luPortalContext'] && this.embeddedViewRef) {
-			this.updateEmbeddedViewContext(this.luPortalContext);
 		}
 	}
 
