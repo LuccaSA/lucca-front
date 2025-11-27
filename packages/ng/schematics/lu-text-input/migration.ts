@@ -1,5 +1,5 @@
 import { Tree } from '@angular-devkit/schematics';
-import type { TmplAstElement } from '@angular/compiler';
+import  { TmplAstDeferredBlock,TmplAstElement,TmplAstForLoopBlock,TmplAstIfBlock,TmplAstSwitchBlock } from '@angular/compiler';
 import { SourceFile } from 'typescript';
 import { extractNgTemplatesIncludingHtml } from '../lib/angular-template';
 import { HtmlAst,HtmlAstVisitor } from '../lib/html-ast.js';
@@ -96,7 +96,7 @@ function findTextfields(sourceFile: SourceFile, basePath: string, tree: Tree): T
 					classes: classes
 				}
 				if (classes.includes("textfield")) {
-					if (node.children.filter(el => isInterestingNode(el)).length > 2) {
+					if (node.children.filter(el => isInterestingNode(el) || isControlFlowNode(el)).length > 2) {
 						field.rejection = "Field contains more than an input + label"
 					}
 					// Find native input and grab params from it
@@ -135,4 +135,12 @@ function getNodeClasses(node: TmplAstElement) {
 
 function isInterestingNode(node: unknown): node is TmplAstElement {
 	return node instanceof currentSchematicContext.angularCompiler.TmplAstElement;
+}
+
+
+function isControlFlowNode(node: unknown): node is TmplAstIfBlock | TmplAstForLoopBlock | TmplAstSwitchBlock | TmplAstDeferredBlock {
+	return node instanceof currentSchematicContext.angularCompiler.TmplAstIfBlock ||
+		node instanceof currentSchematicContext.angularCompiler.TmplAstForLoopBlock ||
+		node instanceof currentSchematicContext.angularCompiler.TmplAstSwitchBlock ||
+		node instanceof currentSchematicContext.angularCompiler.TmplAstDeferredBlock
 }

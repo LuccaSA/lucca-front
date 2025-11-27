@@ -25,6 +25,21 @@ import { TextInputComponent } from '@lucca-front/ng/forms';
 			<lu-text-input [placeholder]="'ROLE_HEADER_CREATION_NAME_LABEL' | translate" [(ngModel)]="name" />
 		</lu-form-field>
 
+		<!-- Has control flow nodes => should be rejected-->
+		<label class="textfield pr-u-marginBottom300">
+			<input
+				formControlName="name"
+				class="textfield-input"
+				type="text"
+				[placeholder]="'ROLE_HEADER_CREATION_NAME_LABEL' | translate"
+				#nameInput
+			/>
+			<span class="textfield-label">{{ 'ROLE_HEADER_CREATION_NAME_LABEL' | translate }}</span>
+			@if(something) {
+				<span>something something</span>
+			}
+		</label>
+
 		<!-- Textarea, not handling for now -->
 		<label class="textfield mod-multiline mod-block">
                         <textarea
