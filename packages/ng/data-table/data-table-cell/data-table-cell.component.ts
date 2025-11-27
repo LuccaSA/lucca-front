@@ -6,7 +6,7 @@ import { LU_DATA_TABLE_CELL_INSTANCE } from '../data-table-cell.token';
 @Component({
 	// eslint-disable-next-line @angular-eslint/component-selector
 	selector: 'td[luDataTableCell]',
-	templateUrl: './data-table-cell.component.html',
+	template: '<ng-content />',
 	encapsulation: ViewEncapsulation.None,
 	host: {
 		'[class.dataTable-body-row-cell]': 'bodyRef !== null',

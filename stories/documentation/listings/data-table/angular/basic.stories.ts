@@ -16,6 +16,7 @@ import { NumericBadgeComponent } from '@lucca-front/ng/numeric-badge';
 import { PaginationComponent } from '@lucca-front/ng/pagination';
 
 import { Meta, moduleMetadata, StoryObj } from '@storybook/angular';
+import { StoryModelDisplayComponent } from 'stories/helpers/story-model-display.component';
 
 export default {
 	title: 'Documentation/Listings/Data table/Angular/Basic',
@@ -88,6 +89,7 @@ export default {
 				ButtonComponent,
 				IconComponent,
 				PaginationComponent,
+				StoryModelDisplayComponent,
 				NumericBadgeComponent,
 			],
 		}),
@@ -201,6 +203,7 @@ export default {
 		</tr>
 	</tfoot>`
 			: ``;
+		const modelEditableDisplayer = editable ? `<pr-story-model-display>{{ example }}</pr-story-model-display>` : ``;
 
 		return {
 			props: { example: text },
@@ -221,7 +224,8 @@ export default {
 			<td luDataTableCell${editableAttr}>${editableContent}</td>
 		</tr>
 	</tbody>${tfootTpl}${paginationTpl}
-</lu-data-table>${samplePortalContentTpl}`,
+</lu-data-table>
+${samplePortalContentTpl}${modelEditableDisplayer}`,
 		};
 	},
 } as Meta;
