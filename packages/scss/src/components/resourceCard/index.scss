@@ -12,36 +12,28 @@
 			@include hover;
 		}
 
-		// &:not(:has(.resourceCard-content-after:empty)) {
-		// 	&:has(.resourceCard-content-description:empty) {
-		// 		outline: 2px solid red;
-
-		// 		.resourceCard-content-header {
-		// 			align-self: center;
-		// 			grid-row-end: span 2;
-		// 		}
-
-		// 		.resourceCard-content-after {
-		// 			align-self: center;
-		// 		}
-		// 	}
-		// }
 
 		&:has(.resourceCard-content-header-title .link:focus-visible) {
 			@include focusVisible;
 		}
 
 		&:has(.resourceCard-content-description:empty) {
-			&:has(.resourceCard-content-before-content-illustration:empty) {
-				&:has(.resourceCard-content-after:empty) {
-					@include onlyTitle;
+			@include noDescription;
+
+			&:has(.resourceCard-content-after:empty) {
+				@include noDescriptionNoAction;
+
+				&:has(.resourceCard-content-before-content-illustration:empty) {
+					@include noDescriptionNoActionNoIllustration;
 
 					&:has(.resourceCard-content-before-content-handleButton) {
-						@include onlyTitleWithDrag;
+						@include noDescriptionNoActionNoIllustrationAndHandle;
 					}
 				}
 			}
 		}
+
+
 
 		&:has(.resourceCard-content-header-title .link.is-disabled),
 		&.is-disabled {

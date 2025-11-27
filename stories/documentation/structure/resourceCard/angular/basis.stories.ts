@@ -5,6 +5,7 @@ import { LinkComponent } from '@lucca-front/ng/link';
 import { NumericBadgeComponent } from '@lucca-front/ng/numeric-badge';
 import { ResourceCardComponent, ResourceCardWrapperComponent } from '@lucca-front/ng/resource-card';
 import { StatusBadgeComponent } from '@lucca-front/ng/status-badge';
+import { TagComponent } from '@lucca-front/ng/tag';
 import { LuTooltipModule } from '@lucca-front/ng/tooltip';
 import { applicationConfig, Meta, moduleMetadata } from '@storybook/angular';
 
@@ -80,7 +81,7 @@ export default {
 	},
 	decorators: [
 		moduleMetadata({
-			imports: [ResourceCardComponent, LuTooltipModule, NumericBadgeComponent, IconComponent, StatusBadgeComponent, ButtonComponent, LinkComponent, ResourceCardWrapperComponent],
+			imports: [ResourceCardComponent, LuTooltipModule, NumericBadgeComponent, IconComponent, StatusBadgeComponent, ButtonComponent, LinkComponent, ResourceCardWrapperComponent, TagComponent],
 		}),
 		applicationConfig({
 			providers: [provideRouter([{ path: 'iframe.html', redirectTo: '', pathMatch: 'full' }])],
@@ -133,7 +134,7 @@ export default {
 		<lu-resource-card>
 			<a href="#" luLink>Sit amet</a>
 			<ng-container resourceCardDescription>
-				Consectetur adipiscing elit.
+				Consectetur adipiscing elit. Consectetur adipiscing elit. Consectetur adipiscing elit. Consectetur adipiscing elit. Consectetur adipiscing elit. Consectetur adipiscing elit.
 			</ng-container>
 		</lu-resource-card>`;
 		const cards = `
@@ -169,8 +170,9 @@ export const Basic = {
 		headingNumericBadge: false,
 		headingAction: 'a',
 		headingInfos: false,
-		headingInfosContent: `<lu-status-badge label="Status" />`,
-		description: '',
+		headingInfosContent: `<lu-status-badge label="Status" />
+				<lu-tag label="Text" />`,
+		description: 'Lorem <a href="#" luLink>ipsum</a> dolor',
 		illustration: false,
 		illustrationContent: `<div class="pr-u-displayGrid pr-u-placeItemsCenter pr-u-borderRadiusDefault"
 					 style="background-color: var(--palettes-lavender-100); color: var(--palettes-lavender-700)"
