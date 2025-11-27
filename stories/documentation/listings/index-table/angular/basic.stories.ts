@@ -180,6 +180,13 @@ function getTemplate(args: BasicStory): string {
 			<td luIndexTableCell${allowSelectionAttr}>${allowActionTpl}</td>
 			<td luIndexTableCell>Content Content Content</td>
 		</tr>`;
+	const samplePortalContentTpl = args.group
+		? `
+<ng-template #samplePortalContent>
+	${args.groupLabel}
+	<lu-numeric-badge [value]="8" />
+</ng-template>`
+		: ``;
 
 	return `<lu-index-table${selectableAttr}${layoutFixedAttr}${emptyAttr}>
 	<thead luIndexTableHead>
@@ -192,11 +199,7 @@ function getTemplate(args: BasicStory): string {
 	<tbody luIndexTableBody${groupAttr}${groupButtonAltAttr}${groupExpandedAttr}>
 		${tbodyTpl}
 	</tbody>${footerTpl}${paginationTpl}
-</lu-index-table>
-<ng-template #samplePortalContent>
-	${args.groupLabel}
-	<lu-numeric-badge [value]="8" />
-</ng-template>
+</lu-index-table>${samplePortalContentTpl}
 `;
 }
 
