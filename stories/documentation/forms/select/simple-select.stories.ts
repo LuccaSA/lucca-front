@@ -23,6 +23,7 @@ import { applicationConfig, Meta, moduleMetadata } from '@storybook/angular';
 import { HiddenArgType } from 'stories/helpers/common-arg-types';
 import { createTestStory, getStoryGenerator, useDocumentationStory } from 'stories/helpers/stories';
 import { expect, screen, userEvent, within } from 'storybook/test';
+import { IconComponent } from '@lucca-front/ng/icon';
 import { waitForAngular } from '../../../helpers/test';
 import { LuCoreSelectLegumesDirective } from './custom-api-example.component';
 import { LuCoreSelectCustomEstablishmentsDirective } from './custom-establishment-example.component';
@@ -171,6 +172,24 @@ export const WithDisplayerTEST = createTestStory(WithDisplayer, async (context) 
 	await basePlay(context);
 	const input = within(context.canvasElement).getByRole('combobox');
 	await expect(input.parentElement).toHaveTextContent(new RegExp(`🥗🥗.+`));
+});
+
+export const WithPrefix = generateStory({
+	name: 'With Prefix',
+	description: "Il est possible d'ajouter un préfixe à l'affichage, qui sera là même si le placeholder est utilisé.",
+	template: `<lu-simple-select
+	#selectRef
+	placeholder="Placeholder…"
+	[(ngModel)]="selectedLegume"
+	[options]="legumes | filterLegumes:clue"
+	(clueChange)="clue = $event"
+	prefix="🥗"
+>
+</lu-simple-select>`,
+	neededImports: {
+		'@lucca-front/ng/icon': ['IconComponent'],
+		'@lucca-front/ng/simple-select': ['LuSimpleSelectInputComponent', 'LuDisplayerDirective'],
+	},
 });
 
 export const WithClue = generateStory({
