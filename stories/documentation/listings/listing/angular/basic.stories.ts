@@ -1,8 +1,8 @@
 import { IconsList } from '@lucca-front/icons/icons-list';
 import { ListingComponent, ListingItemComponent } from '@lucca-front/ng/listing';
 import { Meta, moduleMetadata, StoryObj } from '@storybook/angular';
-import { PaletteAllArgType } from 'stories/helpers/common-arg-types';
-import { cleanupTemplate, generateInputs } from 'stories/helpers/stories';
+import { HiddenArgType, PaletteAllArgType } from 'stories/helpers/common-arg-types';
+import { generateInputs } from 'stories/helpers/stories';
 
 interface ListingBasicStory {
 	checklist: boolean;
@@ -12,6 +12,7 @@ interface ListingBasicStory {
 	palette: string;
 	defaultIcon: string;
 	icon: string;
+	start: number;
 }
 
 export default {
@@ -25,25 +26,26 @@ export default {
 	],
 
 	render: (args: ListingBasicStory, context) => {
-		const { type, checklist, ordered, icons, defaultIcon, ...inputs } = args;
-		const checklistParam = args.type === 'checklist' ? ' checklist' : '';
-		const orderedParam = args.type === 'ordered' ? ' ordered' : '';
-		const iconsParam = args.type === 'icons' ? ' icons' : '';
-		const iconParam = args.type === 'icons' ? ` icon="${args.icon}"` : '';
-		const defaultIconParam = args.type === 'icons' ? ` defaultIcon="${defaultIcon}"` : '';
+		const { type, checklist, ordered, icons, defaultIcon, icon, start, ...inputs } = args;
+		const checklistParam = args.type === 'checklist' ? ` checklist` : ``;
+		const orderedParam = args.type === 'ordered' ? ` ordered` : ``;
+		const iconsParam = args.type === 'icons' ? ` icons` : ``;
+		const iconParam = args.type === 'icons' ? ` icon="${args.icon}"` : ``;
+		const defaultIconParam = args.type === 'icons' ? ` defaultIcon="${defaultIcon}"` : ``;
+		const startParam = args.start !== 1 ? ` start="${start}"` : ``;
 		return {
-			template: cleanupTemplate(`<lu-listing${checklistParam}${orderedParam}${iconsParam}${defaultIconParam} ${generateInputs(inputs, context.argTypes)}>
+			template: `<lu-listing${checklistParam}${orderedParam}${startParam}${iconsParam}${defaultIconParam}${generateInputs(inputs, context.argTypes)}>
 	<lu-listing-item>item</lu-listing-item>
 	<lu-listing-item${iconParam}>item</lu-listing-item>
 	<lu-listing-item>
 		item
-		<lu-listing${checklistParam}${orderedParam}${iconsParam}${defaultIconParam} ${generateInputs(inputs, context.argTypes)}>
+		<lu-listing${checklistParam}${orderedParam}${startParam}${iconsParam}${defaultIconParam}${generateInputs(inputs, context.argTypes)}>
 			<lu-listing-item>item</lu-listing-item>
 			<lu-listing-item>item</lu-listing-item>
 			<lu-listing-item>item</lu-listing-item>
 		</lu-listing>
 	</lu-listing-item>
-</lu-listing>`),
+</lu-listing>`,
 		};
 	},
 } as Meta;
@@ -68,6 +70,12 @@ export const Template: StoryObj<ListingComponent & ListingItemComponent & { type
 				type: 'select',
 			},
 		},
+		start: {
+			if: { arg: 'type', eq: 'ordered' },
+		},
+		checklist: HiddenArgType,
+		icons: HiddenArgType,
+		ordered: HiddenArgType,
 		palette: PaletteAllArgType,
 	},
 
@@ -76,5 +84,6 @@ export const Template: StoryObj<ListingComponent & ListingItemComponent & { type
 		palette: 'none',
 		defaultIcon: 'heart',
 		icon: 'foodCroissant',
+		start: 1,
 	},
 };
