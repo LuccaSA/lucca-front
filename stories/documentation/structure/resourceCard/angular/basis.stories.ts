@@ -17,7 +17,8 @@ interface ResourceCardAngularBasicStory {
 	disabled: boolean;
 	heading: string;
 	headingAction: string;
-	description: string;
+	description: boolean;
+	descriptionContent: string;
 	headingLevel: number;
 	headingStyle: number;
 	headingNumericBadge: boolean;
@@ -29,6 +30,7 @@ interface ResourceCardAngularBasicStory {
 	actions: boolean;
 	actionsContent: string;
 	actionsContentDisabled: string;
+	descriptionContentDisabled: string;
 }
 
 export default {
@@ -48,6 +50,12 @@ export default {
 		},
 		illustrationContent: {
 			if: { arg: 'illustration', truthy: true },
+		},
+		descriptionContent: {
+			if: { arg: 'description', truthy: true },
+		},
+		descriptionContentDisabled: {
+			if: { arg: 'disabled', truthy: true },
 		},
 		actionsContent: {
 			if: { arg: 'actions', truthy: true },
@@ -102,13 +110,17 @@ export default {
 				${args.headingInfosContent}
 			</ng-container>`
 			: ``;
-		const descriptionTpl =
-			args.description !== ''
+		const descriptionTpl = args.description
+			? args.disabled
 				? `
 			<ng-container resourceCardDescription>
-				${args.description}
+				${args.descriptionContentDisabled}
 			</ng-container>`
-				: ``;
+				: `
+			<ng-container resourceCardDescription>
+				${args.descriptionContent}
+			</ng-container>`
+			: ``;
 		const illustrationTpl = args.illustration
 			? args.disabled
 				? `<ng-container resourceCardIllustration>
@@ -172,7 +184,9 @@ export const Basic = {
 		headingInfos: false,
 		headingInfosContent: `<lu-status-badge label="Status" />
 				<lu-tag label="Text" />`,
-		description: 'Lorem <a href="#" luLink>ipsum</a> dolor',
+		description: false,
+		descriptionContent: `Lorem ipsum dolor sit amet, consectetur adipiscing elit, sed do. `,
+		descriptionContentDisabled: `Lorem <a href="#" luLink disabled>ipsum</a> dolor`,
 		illustration: false,
 		illustrationContent: `<div class="pr-u-displayGrid pr-u-placeItemsCenter pr-u-borderRadiusDefault"
 					 style="background-color: var(--palettes-lavender-100); color: var(--palettes-lavender-700)"
