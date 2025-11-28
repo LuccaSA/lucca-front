@@ -22,19 +22,13 @@
 			@include disabled;
 		}
 
-		&:not(:has(.resourceCard-content-before-content-illustration:empty)) {
-			@include container.max('XS', $name: 'resourceCard') {
-				@include hasIllustrationNarrow;
-			}
-
-			@include container.min('XS', $name: 'resourceCard') {
-				@include hasIllustrationWide;
-			}
-		}
-
-		@include container.min('XS', $name: 'resourceCard') {
+		@include container.min('XXS', $name: 'resourceCard') {
 			&:has(.resourceCard-content-description:empty) {
 				@include noDescriptionWide;
+			}
+
+			&:not(:has(.resourceCard-content-before-content-illustration:empty)) {
+				@include hasIllustrationWide;
 			}
 
 			&:not(:has(.resourceCard-content-description:empty)) {
@@ -46,11 +40,15 @@
 			}
 		}
 
-		@include container.max('XS', $name: 'resourceCard') {
+		@include container.max('XXS', $name: 'resourceCard') {
 			@include narrow;
 
 			&:has(.resourceCard-content-description:empty) {
 				@include noDescriptionNarrow;
+			}
+
+			&:not(:has(.resourceCard-content-before-content-illustration:empty)) {
+				@include hasIllustrationNarrow;
 			}
 		}
 	}

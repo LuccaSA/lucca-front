@@ -14,6 +14,7 @@
 	--components-resourceCard-content-description-not-empty-marginBlockStart: 0;
 	--components-resourceCard-content-gridTemplate: "before header after" minmax(var(--components-resourceCard-content-gridTemplate-min), auto)
 																									"before main   after" auto
+																									"space  space  space" 1fr
 																									/auto   1fr    auto;
 }
 
