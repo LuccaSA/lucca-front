@@ -32,7 +32,9 @@ export class LuMultiSelectWithSelectAllDirective<TValue> extends ɵIsSelectedStr
 
 	readonly mode = this.#mode.asReadonly();
 	readonly values = this.#values.asReadonly();
+	readonly options = toSignal(this.#select.options$);
 	readonly totalCount = toSignal(inject(CORE_SELECT_API_TOTAL_COUNT_PROVIDER).totalCount$);
+	readonly optionsCount = computed(() => this.options().length);
 
 	readonly #hasValue = computed(() => this.mode() !== 'none');
 
@@ -52,7 +54,26 @@ export class LuMultiSelectWithSelectAllDirective<TValue> extends ɵIsSelectedStr
 
 	readonly #selectAllValue = computed<LuMultiSelection<TValue>>(() => {
 		const mode = this.#mode();
-		return mode === 'all' || mode === 'none' ? { mode } : { mode, values: this.#values() };
+		const values = this.#values();
+		const options = this.options() as TValue[];
+		const hasAllValues = this.totalCount() === this.optionsCount();
+		const hasDiff = this.options().every((option) => this.values().some((value) => this.#select.optionComparer(option, value)));
+
+		if (mode === 'all' && !hasAllValues) {
+			return { mode: 'include', values: options };
+		}
+		// else if (mode === 'none' && !hasDiff && this.#values().length < this.options().length) {
+		// 	const tab = [];
+		// 	values.forEach((value) => {
+		// 		if (options.some((option) => this.#select.optionComparer(option, value))) {
+		// 			tab.push(value);
+		// 		}
+		// 	});
+		// 	return { mode: 'include', values: tab as TValue[] };
+		// }
+		else {
+			return mode === 'all' || mode === 'none' ? { mode } : { mode, values };
+		}
 	});
 
 	// Keep the original registerOnChange / writeValue / clearValye methods
