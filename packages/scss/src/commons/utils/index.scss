@@ -270,10 +270,13 @@
 
 	%focusVisible {
 		&:focus-visible {
-			@include a11y.focusVisible;
+			@include a11y.focusVisible($suffix: '!important');
 		}
 	}
 
+	%opacity0 {
+		@include a11y.opacity(0.0001, '!important');
+	}
 
 
 	[data-content-before] {
@@ -433,6 +436,10 @@
 
 	.pr-u-focusVisible {
 		@extend %focusVisible;
+	}
+
+	.pr-u-opacity0 {
+		@extend %opacity0;
 	}
 
 	@include core.classes('float', core.$float);

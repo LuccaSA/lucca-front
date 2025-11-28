@@ -11,11 +11,15 @@
 	contain: paint #{$suffix};
 }
 
-@mixin focusVisible($offset: 2px, $borderRadius: false, $color: var(--palettes-product-700)) {
-	outline: 2px solid $color;
-	outline-offset: $offset;
+@mixin focusVisible($offset: 2px, $borderRadius: false, $color: var(--palettes-product-700), $suffix: '') {
+	outline: 2px solid $color #{$suffix};
+	outline-offset: $offset #{$suffix};
 
 	@if $borderRadius != false {
-		border-radius: $borderRadius;
+		border-radius: $borderRadius #{$suffix};
 	}
+}
+
+@mixin opacity($level, $suffix: '') {
+	opacity: $level #{$suffix};
 }
