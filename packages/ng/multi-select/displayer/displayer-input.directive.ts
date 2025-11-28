@@ -21,7 +21,7 @@ import { MULTI_SELECT_WITH_SELECT_ALL_CONTEXT } from '../input/select-all/select
 })
 export class LuMultiSelectDisplayerInputDirective<T> implements OnInit {
 	select = inject<LuMultiSelectInputComponent<T>>(LuMultiSelectInputComponent);
-	readonly selectAllContext = inject(MULTI_SELECT_WITH_SELECT_ALL_CONTEXT);
+	readonly selectAllContext = inject(MULTI_SELECT_WITH_SELECT_ALL_CONTEXT, { optional: true });
 
 	context = inject<ILuOptionContext<T[]>>(LU_OPTION_CONTEXT);
 
@@ -80,11 +80,13 @@ export class LuMultiSelectDisplayerInputDirective<T> implements OnInit {
 	);
 
 	constructor() {
-		ɵeffectWithDeps([this.selectAllContext.mode], (mode) => {
-			if (mode === 'all') {
-				this.#clearText();
-			}
-		});
+		if (this.selectAllContext) {
+			ɵeffectWithDeps([this.selectAllContext.mode], (mode) => {
+				if (mode === 'all') {
+					this.#clearText();
+				}
+			});
+		}
 	}
 
 	ngOnInit(): void {
