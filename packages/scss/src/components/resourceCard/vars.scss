@@ -1,9 +1,9 @@
 @mixin vars {
-	--components-resourceCard-content-after-paddingBlock: 0;
+	--components-resourceCard-content-after-paddingBlock: var(--pr-t-spacings-100);
 	--components-resourceCard-content-before-paddingBlock: 0;
 	--components-resourceCard-content-header-alignSelf: center;
-	--components-resourceCard-content-before-alignSelf: center;
-	--components-resourceCard-content-after-alignSelf: center;
+	--components-resourceCard-content-before-alignSelf: start;
+	--components-resourceCard-content-after-alignSelf: start;
 	--components-resourceCard-content-gridTemplate-min: var(--pr-t-spacings-400);
 	--components-resourceCard-color: inherit;
 	--components-resourceCard-content-header-title-link-color: var(--components-resourceCard-color);
