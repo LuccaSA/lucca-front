@@ -19,7 +19,3 @@
 		border-radius: $borderRadius #{$suffix};
 	}
 }
-
-@mixin opacity($level, $suffix: '') {
-	opacity: $level #{$suffix};
-}

@@ -274,10 +274,6 @@
 		}
 	}
 
-	%opacity0 {
-		@include a11y.opacity(0.0001, '!important');
-	}
-
 
 	[data-content-before] {
 		&::before {
@@ -436,10 +432,6 @@
 
 	.pr-u-focusVisible {
 		@extend %focusVisible;
-	}
-
-	.pr-u-opacity0 {
-		@extend %opacity0;
 	}
 
 	@include core.classes('float', core.$float);
