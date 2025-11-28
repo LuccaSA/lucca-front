@@ -115,10 +115,10 @@
 			&:is([aria-required='true']) {
 				@include required;
 			}
-		}
 
-		&.mod-row {
-			@include inputRow;
+			&.mod-row {
+				@include inputRow;
+			}
 		}
 	}
 }
