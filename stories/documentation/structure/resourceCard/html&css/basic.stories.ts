@@ -12,235 +12,71 @@ export default {
 		}),
 	],
 	render: (args: ResourceCardHTMLBasicStory) => {
+		const card = `
+	<div class="resourceCardContainer">
+		<section class="resourceCard">
+			<div class="resourceCard-content">
+				<!--
+				<div class="resourceCard-content-before">
+					<div class="resourceCard-content-before-content">
+						<div class="resourceCard-content-before-content-illustration"></div>
+					</div>
+				</div>
+				-->
+				<header class="resourceCard-content-header">
+					<h3 class="pr-u-h3 resourceCard-content-header-title">
+						<a href="#" class="link"><span class="link-text">Sit amet</span></a>
+					</h3>
+					<!-- <div class="resourceCard-content-header-infos"></div> -->
+				</header>
+				<div class="resourceCard-content-description">
+					Consectetur adipiscing elit. Consectetur adipiscing elit.
+					Consectetur adipiscing elit. Consectetur adipiscing elit.
+					Consectetur adipiscing elit. Consectetur adipiscing elit.
+				</div>
+				<!-- <div class="resourceCard-content-after"></div> -->
+			</div>
+		</section>
+	</div>`;
+		const cards = `
+	<div class="resourceCardContainer">
+		<section class="resourceCard">
+			<div class="resourceCard-content">
+				<div class="resourceCard-content-before">
+					<div class="resourceCard-content-before-content">
+						<div class="button cdk-drag-handle resourceCard-content-before-content-handleButton">
+							<span aria-hidden="true" class="lucca-icon icon-dotsDrag icon-color-inherit"></span>
+						</div>
+						<div class="resourceCard-content-before-content-illustration">
+							<div class="pr-u-displayGrid pr-u-placeItemsCenter pr-u-borderRadiusDefault" style="background-color: var(--palettes-lavender-100); color: var(--palettes-lavender-700);">
+								<span aria-hidden="true" class="lucca-icon icon-heart icon-color-inherit mod-L"></span>
+							</div>
+						</div>
+					</div>
+				</div>
+				<header class="resourceCard-content-header">
+					<h3 class="pr-u-h3 resourceCard-content-header-title">
+						<a href="#" class="link"><span class="link-text">Lorem ipsum dolor</span></a>
+						<span class="numericBadge-value">88</span>
+					</h3>
+					<div class="resourceCard-content-header-infos">
+						<span class="statusBadge mod-M"> Status</span>
+						<span class="tag mod-M palette-none"><span class="tag-content">Text</span></span>
+					</div>
+				</header>
+				<div class="resourceCard-content-description">
+					Lorem <a href="#" class="link"><span class="link-text">ipsum</span></a> dolor sit amet, consectetur adipiscing elit, sed do.
+				</div>
+				<div class="resourceCard-content-after">
+					<button type="button" class="button palette-none">Lorem ipsum</button>
+				</div>
+			</div>
+		</section>
+	</div>${card.repeat(3)}`;
 		return {
 			template: `
-		<div class="resourceCardWrapper">
-			<section class="resourceCard">
-				<div class="resourceCard-content">
-					<div class="resourceCard-content-before">
-						<div class="resourceCard-content-before-content">
-							<div class="button mod-S mod-ghost mod-onlyIcon cdk-drag-handle resourceCard-content-before-content-handleButton"><span class="lucca-icon icon-dotsDrag" aria-hidden="true"></span></div>
-							<div class="resourceCard-content-before-content-illustration">
-								<div
-									class="pr-u-displayGrid pr-u-placeItemsCenter pr-u-borderRadiusDefault"
-									style="background-color: var(--palettes-lavender-100); color: var(--palettes-lavender-700)"
-								>
-									<span class="lucca-icon icon-heart mod-L" aria-hidden="true"></span>
-								</div>
-							</div>
-						</div>
-					</div>
-					<header class="resourceCard-content-header">
-						<h3 class="resourceCard-content-header-title"><a href="#" class="link">Title</a></h3>
-						<span class="statusBadge">status</span>
-					</header>
-					<div class="resourceCard-content-description">
-						<p class="pr-u-margin0">Lorem ipsum dolor sit amet, consectetur adipiscing elit, sed do eiusmod tempor incididunt ut labore et dolore magna aliqua.</p>
-					</div>
-					<div class="resourceCard-content-after">
-						<button class="button" type="button">button</button>
-					</div>
-				</div>
-			</section>
-			<section class="resourceCard" #card>
-				<div class="resourceCard-content">
-					<div class="resourceCard-content-before">
-						<div class="resourceCard-content-before-content">
-							<div class="button mod-S mod-ghost mod-onlyIcon cdk-drag-handle resourceCard-content-before-content-handleButton"><span class="lucca-icon icon-dotsDrag" aria-hidden="true"></span></div>
-							<div class="resourceCard-content-before-content-illustration">
-								<div
-									class="pr-u-displayGrid pr-u-placeItemsCenter pr-u-borderRadiusDefault"
-									style="background-color: var(--palettes-lavender-100); color: var(--palettes-lavender-700)"
-								>
-									<span class="lucca-icon icon-heart mod-L" aria-hidden="true"></span>
-								</div>
-							</div>
-						</div>
-					</div>
-					<header class="resourceCard-content-header">
-						<h3 class="resourceCard-content-header-title">
-							<a href="#"
-								luTooltip="Lorem ipsum dolor sit amet, consectetur adipiscing elit, sed do eiusmod tempor incididunt ut labore et dolore magna aliqua"
-								luTooltipOnlyForDisplay [luTooltipAnchor]="card" class="link"
-							>
-									Lorem ipsum dolor sit amet, consectetur adipiscing elit, sed do eiusmod tempor incididunt ut labore et dolore magna aliqua
-							</a>
-							<span class="numericBadge">88</span>
-						</h3>
-						<span class="statusBadge">status</span>
-					</header>
-					<div class="resourceCard-content-description">
-						<p class="pr-u-margin0">Lorem ipsum dolor sit amet, consectetur adipiscing elit, sed do eiusmod tempor incididunt ut labore et dolore magna aliqua. Ut enim ad minim veniam, quis nostrud exercitation ullamco laboris nisi ut aliquip ex ea commodo consequat. </p>
-					</div>
-					<div class="resourceCard-content-after">
-						<button class="button" type="button">button</button>
-					</div>
-				</div>
-			</section>
-			<section class="resourceCard">
-				<div class="resourceCard-content">
-					<div class="resourceCard-content-before">
-						<div class="resourceCard-content-before-content">
-							<div class="button mod-S mod-ghost mod-onlyIcon cdk-drag-handle resourceCard-content-before-content-handleButton"><span class="lucca-icon icon-dotsDrag" aria-hidden="true"></span></div>
-							<div class="resourceCard-content-before-content-illustration">
-								<div
-									class="pr-u-displayGrid pr-u-placeItemsCenter pr-u-borderRadiusDefault"
-									style="background-color: var(--palettes-lavender-100); color: var(--palettes-lavender-700)"
-								>
-									<span class="lucca-icon icon-heart mod-L" aria-hidden="true"></span>
-								</div>
-							</div>
-						</div>
-					</div>
-					<header class="resourceCard-content-header">
-						<h3 class="resourceCard-content-header-title">
-							<a href="#" class="link">
-								Title
-							</a>
-							<span class="numericBadge">88</span>
-						</h3>
-
-					</header>
-					<div class="resourceCard-content-description">
-						<p class="pr-u-margin0">Lorem ipsum dolor</p>
-					</div>
-					<div class="resourceCard-content-after">
-						<button class="button" type="button">button</button>
-					</div>
-				</div>
-			</section>
-			<section class="resourceCard">
-				<div class="resourceCard-content">
-					<div class="resourceCard-content-before">
-						<div class="resourceCard-content-before-content">
-							<div class="button mod-S mod-ghost mod-onlyIcon cdk-drag-handle resourceCard-content-before-content-handleButton"><span class="lucca-icon icon-dotsDrag" aria-hidden="true"></span></div>
-							<div class="resourceCard-content-before-content-illustration">
-								<div
-									class="pr-u-displayGrid pr-u-placeItemsCenter pr-u-borderRadiusDefault"
-									style="background-color: var(--palettes-lavender-100); color: var(--palettes-lavender-700)"
-								>
-									<span class="lucca-icon icon-heart mod-L" aria-hidden="true"></span>
-								</div>
-							</div>
-						</div>
-					</div>
-					<header class="resourceCard-content-header">
-						<h3 class="resourceCard-content-header-title"><a href="#" class="link">Title</a></h3>
-					</header>
-					<div class="resourceCard-content-description">
-						<p class="pr-u-margin0">Lorem ipsum dolor</p>
-					</div>
-					<div class="resourceCard-content-after">
-						<button class="button" type="button">button</button>
-					</div>
-				</div>
-			</section>
-			<section class="resourceCard">
-				<div class="resourceCard-content">
-					<div class="resourceCard-content-before">
-						<div class="resourceCard-content-before-content">
-							<div class="resourceCard-content-before-content-illustration">
-								<div
-									class="pr-u-displayGrid pr-u-placeItemsCenter pr-u-borderRadiusDefault"
-									style="background-color: var(--palettes-lavender-100); color: var(--palettes-lavender-700)"
-								>
-									<span class="lucca-icon icon-heart mod-L" aria-hidden="true"></span>
-								</div>
-							</div>
-						</div>
-					</div>
-					<header class="resourceCard-content-header">
-						<h3 class="resourceCard-content-header-title"><a href="#" class="link">Title</a></h3>
-					</header>
-					<div class="resourceCard-content-description">
-						<p class="pr-u-margin0">Lorem ipsum dolor</p>
-					</div>
-					<div class="resourceCard-content-after">
-						<button class="button" type="button">button</button>
-					</div>
-				</div>
-			</section>
-			<section class="resourceCard">
-				<div class="resourceCard-content">
-					<div class="resourceCard-content-before">
-						<div class="resourceCard-content-before-content">
-							<div class="button mod-S mod-ghost mod-onlyIcon cdk-drag-handle resourceCard-content-before-content-handleButton"><span class="lucca-icon icon-dotsDrag" aria-hidden="true"></span></div>
-						</div>
-					</div>
-					<header class="resourceCard-content-header">
-						<h3 class="resourceCard-content-header-title"><a href="#" class="link">Title</a></h3>
-					</header>
-					<div class="resourceCard-content-description">
-						<p class="pr-u-margin0">Lorem ipsum dolor</p>
-					</div>
-					<div class="resourceCard-content-after">
-						<button class="button" type="button">button</button>
-					</div>
-				</div>
-			</section>
-			<section class="resourceCard">
-				<div class="resourceCard-content">
-					<div class="resourceCard-content-before">
-						<div class="resourceCard-content-before-content">
-							<div class="resourceCard-content-before-content-illustration"></div>
-						</div>
-					</div>
-					<header class="resourceCard-content-header">
-						<h3 class="resourceCard-content-header-title"><a href="#" class="link">Title</a></h3>
-					</header>
-					<div class="resourceCard-content-description">
-						<p class="pr-u-margin0">Lorem ipsum dolor</p>
-					</div>
-					<div class="resourceCard-content-after">
-						<button class="button" type="button">button</button>
-					</div>
-				</div>
-			</section>
-			<section class="resourceCard">
-				<div class="resourceCard-content">
-					<div class="resourceCard-content-before">
-						<div class="resourceCard-content-before-content">
-							<div class="resourceCard-content-before-content-illustration"></div>
-						</div>
-					</div>
-					<header class="resourceCard-content-header">
-						<h3 class="resourceCard-content-header-title"><a href="#" class="link">Title</a></h3>
-					</header>
-					<div class="resourceCard-content-description">
-						<p class="pr-u-margin0">Lorem ipsum dolor</p>
-					</div>
-					<div class="resourceCard-content-after"></div>
-				</div>
-			</section>
-			<section class="resourceCard">
-				<div class="resourceCard-content">
-					<div class="resourceCard-content-before">
-						<div class="resourceCard-content-before-content">
-							<div class="resourceCard-content-before-content-illustration"></div>
-						</div>
-					</div>
-					<header class="resourceCard-content-header">
-						<h3 class="resourceCard-content-header-title"><a href="#" class="link">Title</a></h3>
-					</header>
-					<div class="resourceCard-content-description"></div>
-					<div class="resourceCard-content-after"></div>
-				</div>
-			</section>
-			<section class="resourceCard">
-				<div class="resourceCard-content">
-					<div class="resourceCard-content-before">
-						<div class="resourceCard-content-before-content">
-							<div class="resourceCard-content-before-content-illustration"></div>
-						</div>
-					</div>
-					<header class="resourceCard-content-header">
-						<h4 class="resourceCard-content-header-title"><a href="#" class="link">Title</a></h4>
-					</header>
-					<div class="resourceCard-content-description"></div>
-					<div class="resourceCard-content-after"></div>
-				</div>
-			</section>
-		</div>
+<div class="resourceCardWrapper">${cards}
+</div>
 `,
 		};
 	},
