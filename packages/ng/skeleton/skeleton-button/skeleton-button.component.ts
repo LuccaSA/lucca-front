@@ -9,4 +9,7 @@ import { booleanAttribute, ChangeDetectionStrategy, Component, Input } from '@an
 export class SkeletonButtonComponent {
 	@Input({ transform: booleanAttribute })
 	dark = false;
+
+	@Input()
+	size: 'XS' | 'S' | 'M';
 }

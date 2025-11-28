@@ -192,7 +192,7 @@
 		// .disabled is deprecated
 		&.is-disabled,
 		&.disabled,
-		&[aria-disabled] {
+		&[aria-disabled="true"] {
 			@include disabled;
 		}
 	}

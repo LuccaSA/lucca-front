@@ -1,7 +1,7 @@
 import { ChangeDetectionStrategy, Component } from '@angular/core';
 import { ReactiveFormsModule } from '@angular/forms';
 import { ClearComponent } from '@lucca-front/ng/clear';
-import { LuDisplayerDirective } from '@lucca-front/ng/core-select';
+import { LuInputDisplayerDirective } from '@lucca-front/ng/input';
 import { LuOptionPickerModule } from '@lucca-front/ng/option';
 import { LuSelectInputComponent } from '@lucca-front/ng/select';
 import { FieldType, FieldTypeConfig, FormlyModule } from '@ngx-formly/core';
@@ -11,7 +11,8 @@ import { FieldType, FieldTypeConfig, FormlyModule } from '@ngx-formly/core';
 	styleUrls: ['formly-field.common.scss', 'select.scss'],
 	templateUrl: './select.html',
 	changeDetection: ChangeDetectionStrategy.OnPush,
-	imports: [ReactiveFormsModule, FormlyModule, LuSelectInputComponent, LuDisplayerDirective, LuOptionPickerModule, ClearComponent],
+	standalone: true,
+	imports: [ReactiveFormsModule, FormlyModule, LuSelectInputComponent, LuOptionPickerModule, LuInputDisplayerDirective, ClearComponent],
 })
 export class LuFormlyFieldSelect extends FieldType<FieldTypeConfig> {
 	get _options() {

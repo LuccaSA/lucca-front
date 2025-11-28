@@ -27,7 +27,8 @@ const code = `
 
   /* Ajouter la directive luDropdownItem pour lier le parent luDropdown à ses enfants */
   <li class="dropdown-list-option">
-    <a luDropdownItem routerLink="." fragment="link2" class="dropdown-list-option-action">Link 2</a>
+		/* Mettre un relativeTo afin de conserver la navigation relative au chemin courant */
+    <a luDropdownItem routerLink="." [relativeTo]="activatedRoute" fragment="link2" class="dropdown-list-option-action">Link 2</a>
   </li>
 
   /* Vous pouvez disable un enfant avec 'is-disabled' */

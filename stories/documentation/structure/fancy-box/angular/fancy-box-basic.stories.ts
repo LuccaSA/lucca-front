@@ -6,6 +6,7 @@ interface FancyBoxBasicStory {
 	backgroundLeft: string;
 	backgroundRight: string;
 	foreground: string;
+	size: string;
 }
 
 export default {
@@ -39,17 +40,33 @@ export default {
 			},
 			description: 'URL',
 		},
+		size: {
+			options: ['', 'S'],
+			control: {
+				type: 'select',
+			},
+		},
 	},
 } as Meta;
 
 function getTemplate(args: FancyBoxBasicStory): string {
-	const bgLeft = args.backgroundLeft ? `backgroundLeft="${args.backgroundLeft}"` : ``;
-	const bgRight = args.backgroundRight ? `backgroundRight="${args.backgroundRight}"` : ``;
-	const fg = args.foreground ? `foreground="${args.foreground}"` : ``;
+	const bgLeft = args.backgroundLeft
+		? `
+		backgroundLeft="${args.backgroundLeft}"`
+		: ``;
+	const bgRight = args.backgroundRight
+		? `
+		backgroundRight="${args.backgroundRight}"`
+		: ``;
+	const fg = args.foreground
+		? `
+		foreground="${args.foreground}"`
+		: ``;
+	const sizeAttr = args.size === 'S' ? ` size="S"` : ``;
 
 	return `
-	<lu-fancy-box ${bgLeft} ${bgRight} ${fg}>
-		${args.content}
+	<lu-fancy-box${sizeAttr}${bgLeft}${bgRight}${fg}>
+		<div>${args.content}</div>
 	</lu-fancy-box>
 	`;
 }
@@ -62,7 +79,8 @@ const Template: StoryFn<FancyBoxBasicStory> = (args) => ({
 export const Basic = Template.bind({});
 Basic.args = {
 	content: 'Fancy box content',
-	backgroundLeft: 'https://cdn.lucca.fr/transverse/prisme/visuals/fancy-box/background-left-bubbles.svg',
+	backgroundLeft: 'https://cdn.lucca.fr/transverse/prisme/visuals/fancy-box/background-left-plant.svg',
 	backgroundRight: 'https://cdn.lucca.fr/transverse/prisme/visuals/fancy-box/background-right-candies.svg',
 	foreground: 'https://cdn.lucca.fr/transverse/prisme/visuals/fancy-box/foreground-right-pizza.svg',
+	size: null,
 };

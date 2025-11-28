@@ -1,5 +1,5 @@
 import { NgStyle } from '@angular/common';
-import { booleanAttribute, ChangeDetectionStrategy, Component, inject, input, Input, OnChanges, Optional, ViewEncapsulation } from '@angular/core';
+import { booleanAttribute, ChangeDetectionStrategy, Component, computed, inject, input, Input, OnChanges, Optional, ViewEncapsulation } from '@angular/core';
 import { IconComponent } from '@lucca-front/ng/icon';
 import { LU_DEFAULT_DISPLAY_POLICY, LuDisplayFormat, LuDisplayFullname, LuDisplayHybrid, LuDisplayInitials, luUserDisplay } from '../display';
 
@@ -39,6 +39,13 @@ export const displayPictureFormatRecord: Record<LuDisplayFormat, LuDisplayInitia
 	host: {
 		class: 'avatar',
 		'[class.mod-AI]': 'AI()',
+		'[class.mod-XS]': 'size() === "XS"',
+		'[class.mod-S]': 'size() === "S"',
+		'[class.mod-M]': 'size() === "M"',
+		'[class.mod-L]': 'size() === "L"',
+		'[class.mod-XL]': 'size() === "XL"',
+		'[class.mod-XXL]': 'size() === "XXL"',
+		'[class.mod-XXXL]': 'size() === "XXXL"',
 	},
 	changeDetection: ChangeDetectionStrategy.OnPush,
 	encapsulation: ViewEncapsulation.None,
@@ -78,6 +85,9 @@ export class LuUserPictureComponent implements OnChanges {
 		}
 	}
 
+	AI = input(false, { transform: booleanAttribute });
+	size = input<'XS' | 'S' | 'M' | 'L' | 'XL' | 'XXL' | 'XXXL'>('M');
+
 	get user() {
 		return this._user;
 	}
@@ -86,9 +96,9 @@ export class LuUserPictureComponent implements OnChanges {
 	hasPicture = false;
 	pictureHref = '';
 
-	AI = input(false, { transform: booleanAttribute });
-
 	style = {};
+
+	modSize = computed(() => `mod-${this.size()}`);
 
 	ngOnChanges(): void {
 		this.initials = luUserDisplay(this.user, this.displayFormat);

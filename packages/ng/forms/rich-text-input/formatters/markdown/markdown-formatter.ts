@@ -12,12 +12,15 @@ import {
 	ITALIC_UNDERSCORE,
 	LINK,
 	ORDERED_LIST,
+	registerMarkdownShortcuts,
 	STRIKETHROUGH,
 	Transformer,
 	UNORDERED_LIST,
 } from '@lexical/markdown';
 import { registerRichText } from '@lexical/rich-text';
+import { mergeRegister } from '@lexical/utils';
 import { RICH_TEXT_FORMATTER, RichTextFormatter } from '@lucca-front/ng/forms/rich-text-input';
+import { sanitize } from 'isomorphic-dompurify';
 import { LexicalEditor } from 'lexical';
 
 export const DEFAULT_MARKDOWN_TRANSFORMERS: Transformer[] = [
@@ -45,21 +48,20 @@ export class MarkdownFormatter extends RichTextFormatter {
 		}
 	}
 
-	override registerTextPlugin(editor: LexicalEditor) {
-		return registerRichText(editor);
+	override registerTextPlugin(editor: LexicalEditor): () => void {
+		return mergeRegister(registerMarkdownShortcuts(editor, this.#transformers), registerRichText(editor));
 	}
 
 	override parse(editor: LexicalEditor, markdown?: string | null): void {
 		editor.update(() => {
-			$convertFromMarkdownString(markdown ?? '', this.#transformers);
+			$convertFromMarkdownString(sanitize(markdown ?? ''), this.#transformers, null, true);
 		});
-		$convertFromMarkdownString(markdown ?? '', this.#transformers);
 	}
 
 	override format(editor: LexicalEditor): string {
 		let result = '';
-		editor.getEditorState().read(() => (result = $convertToMarkdownString(this.#transformers)));
-		return result;
+		editor.getEditorState().read(() => (result = $convertToMarkdownString(this.#transformers, null, true)));
+		return sanitize(result);
 	}
 }
 

@@ -48,6 +48,7 @@
 			[min]="min()"
 			[max]="max()"
 			[class.pr-u-noSpinButtons]="noSpinButtons()"
+			(wheel)="$event.preventDefault()"
 			#inputElement
 		/>
 		<div class="textField-input-affix">

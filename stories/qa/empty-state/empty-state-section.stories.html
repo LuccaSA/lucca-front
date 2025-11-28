@@ -1,6 +1,15 @@
 <table class="demo-QAtable">
 	<tbody>
 		<tr>
+			<td></td>
+			<td style="width: 50%">
+				<div class="demo-QAtable-list">HTML</div>
+			</td>
+			<td style="width: 50%">
+				<div class="demo-QAtable-list">Angular</div>
+			</td>
+		</tr>
+		<tr>
 			<td>Default</td>
 			<td>
 				<div class="demo-QAtable-list">
@@ -25,6 +34,19 @@
 							</div>
 						</div>
 					</section>
+				</div>
+			</td>
+			<td>
+				<div class="demo-QAtable-list">
+					<lu-empty-state-section
+						icon="https://cdn.lucca.fr/lucca-front/assets/empty-states/icons/iconCalendarAction.svg"
+						heading="Empty State"
+						description="Flatus obsequiorum potest inanes pomerium obsequiorum credi homines vero caelibes orbos potest vile diversitate flatus."
+						palette="none"
+					>
+						<button type="button" class="button">Button</button>
+						<button type="button" class="button mod-outlined">Button</button>
+					</lu-empty-state-section>
 				</div>
 			</td>
 		</tr>
@@ -55,6 +77,74 @@
 					</section>
 				</div>
 			</td>
+			<td>
+				<div class="demo-QAtable-list">
+					<lu-empty-state-section
+						icon="https://cdn.lucca.fr/lucca-front/assets/empty-states/icons/iconBanknote.svg"
+						heading="Empty State"
+						description="Flatus obsequiorum potest inanes pomerium obsequiorum credi homines vero caelibes orbos potest vile diversitate flatus."
+						palette="none"
+						center
+					>
+						<button type="button" class="button">Button</button>
+						<button type="button" class="button mod-outlined">Button</button>
+					</lu-empty-state-section>
+				</div>
+			</td>
+		</tr>
+		<tr>
+			<td>Palette</td>
+			<td></td>
+			<td>
+				<lu-empty-state-section
+					icon="https://cdn.lucca.fr/lucca-front/assets/empty-states/icons/iconChat.svg"
+					heading="Empty State"
+					description="Flatus obsequiorum potest inanes pomerium obsequiorum credi homines vero caelibes orbos potest vile diversitate flatus."
+					palette="product"
+				>
+					<button type="button" class="button">Button</button>
+					<button type="button" class="button mod-outlined">Button</button>
+				</lu-empty-state-section>
+				<lu-empty-state-section
+					icon="https://cdn.lucca.fr/lucca-front/assets/empty-states/icons/iconChat.svg"
+					heading="Empty State"
+					description="Flatus obsequiorum potest inanes pomerium obsequiorum credi homines vero caelibes orbos potest vile diversitate flatus."
+					palette="neutral"
+				>
+					<button type="button" class="button">Button</button>
+					<button type="button" class="button mod-outlined">Button</button>
+				</lu-empty-state-section>
+				<lu-empty-state-section
+					icon="https://cdn.lucca.fr/lucca-front/assets/empty-states/icons/iconChat.svg"
+					heading="Empty State"
+					description="Flatus obsequiorum potest inanes pomerium obsequiorum credi homines vero caelibes orbos potest vile diversitate flatus."
+					palette="success"
+				>
+					<button type="button" class="button">Button</button>
+					<button type="button" class="button mod-outlined">Button</button>
+				</lu-empty-state-section>
+				<lu-empty-state-section
+					icon="https://cdn.lucca.fr/lucca-front/assets/empty-states/icons/iconChat.svg"
+					heading="Empty State"
+					description="Flatus obsequiorum potest inanes pomerium obsequiorum credi homines vero caelibes orbos potest vile diversitate flatus."
+					palette="warning"
+				>
+					<button type="button" class="button">Button</button>
+					<button type="button" class="button mod-outlined">Button</button>
+				</lu-empty-state-section>
+				<lu-empty-state-section
+					icon="https://cdn.lucca.fr/lucca-front/assets/empty-states/icons/iconChat.svg"
+					heading="Empty State"
+					description="Flatus obsequiorum potest inanes pomerium obsequiorum credi homines vero caelibes orbos potest vile diversitate flatus."
+					palette="error"
+				>
+					<button type="button" class="button">Button</button>
+					<button type="button" class="button mod-outlined">Button</button>
+				</lu-empty-state-section>
+			</td>
 		</tr>
 	</tbody>
 </table>
+
+<!-- To tell the ui-diff tool that the page has finished rendering -->
+<span id="ready"></span>

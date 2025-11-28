@@ -55,8 +55,8 @@ const Template: StoryFn = (args) => ({
 				</button>
 			</lu-dropdown-item>
 			<lu-dropdown-item>
-				<a lu-dropdown-action href="#">
-					<lu-icon icon="flag" />
+				<a lu-dropdown-action critical href="#">
+					<lu-icon icon="trashDelete" />
 					Sit amet
 				</a>
 			</lu-dropdown-item>

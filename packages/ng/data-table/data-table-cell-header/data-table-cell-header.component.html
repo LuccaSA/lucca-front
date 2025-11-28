@@ -1,5 +1,5 @@
 @if (sort()) {
-	<button luButton type="button" class="tableSortable">
+	<button luButton type="button" class="tableSortable" [(ngModel)]="sort">
 		<ng-container *ngTemplateOutlet="contentTpl" />
 		<span class="tableSortable-arrows">
 			<lu-icon icon="chevronTop" class="tableSortable-arrows-ascending" />

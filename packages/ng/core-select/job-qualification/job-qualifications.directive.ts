@@ -34,10 +34,10 @@ export class LuCoreSelectJobQualificationsDirective<T extends LuCoreSelectJobQua
 	public constructor() {
 		super();
 
-		this.select.grouping = {
+		this.select.groupingSignal.set({
 			selector: (option) => option.job.id,
 			content: LuJobQualificationGroupingComponent,
-		};
+		});
 	}
 
 	protected override getOptions(params: Record<string, string | number | boolean> | null, page: number): Observable<T[]> {

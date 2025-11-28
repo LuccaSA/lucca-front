@@ -71,7 +71,8 @@ export default {
 		for (let i = 1; i <= args.repeatOverflow; i++) {
 			overflow = overflow + contentOverflow;
 		}
-		const templateOverflow = `<lu-main-layout-block overflow>
+		const templateOverflow = `
+		<lu-main-layout-block overflow>
 			<lu-container>
 				<div class="fakeContent">${overflow}
 				</div>
@@ -132,8 +133,8 @@ export default {
 			],
 			template: `
 	<lu-main-layout${headerStickyParam}${footerStickyParam}>${sidebarContainer}${headerContainer}
-		<ng-container mainLayoutContent>${content}
-		</ng-container>${footerContainer}
+		${content}
+		${footerContainer}
 	</lu-main-layout>`,
 		};
 	},

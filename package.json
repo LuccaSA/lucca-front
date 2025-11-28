@@ -52,18 +52,18 @@
     "@angular/platform-browser": "^20.0.2",
     "@angular/platform-browser-dynamic": "^20.0.2",
     "@angular/router": "^20.0.2",
-    "@lexical/history": "^0.32.1",
-    "@lexical/html": "^0.32.1",
-    "@lexical/link": "^0.32.1",
-    "@lexical/markdown": "^0.32.1",
-    "@lexical/plain-text": "^0.32.1",
-    "@lexical/rich-text": "^0.32.1",
-    "@lexical/selection": "^0.32.1",
-    "@lexical/utils": "^0.32.1",
+    "@lexical/history": "^0.38.2",
+    "@lexical/html": "^0.38.2",
+    "@lexical/link": "^0.38.2",
+    "@lexical/markdown": "^0.38.2",
+    "@lexical/plain-text": "^0.38.2",
+    "@lexical/rich-text": "^0.38.2",
+    "@lexical/selection": "^0.38.2",
+    "@lexical/utils": "^0.38.2",
     "@ngx-formly/core": "^6.3.11",
     "date-fns": "^3.6.0",
     "isomorphic-dompurify": "^2.25.0",
-    "lexical": "^0.32.1",
+    "lexical": "^0.38.2",
     "libphonenumber-js": "^1.12.9",
     "marked": "^14.1.0",
     "ngx-mask": "^20.0.3",
@@ -128,7 +128,7 @@
     "@nx/nx-win32-x64-msvc": "^21.2.0"
   },
   "volta": {
-    "node": "22.14.0"
+    "node": "24.11.1"
   },
   "msw": {
     "workerDirectory": ".storybook/public"
