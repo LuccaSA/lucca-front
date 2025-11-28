@@ -1,0 +1,23 @@
+@use '@lucca-front/scss/src/components/button/exports' as button;
+@use '@lucca-front/scss/src/commons/utils/a11y';
+
+@mixin hover {
+	--components-resourceCard-before-inset: -4px;
+}
+
+@mixin focusVisible {
+	.resourceCard-content-header-title .link {
+		&::before {
+			@include a11y.focusVisible;
+		}
+	}
+}
+
+@mixin disabled {
+	--components-resourceCard-before-inset: 0;
+	--components-resourceCard-color: var(--pr-t-color-text-disabled);
+
+	.resourceCard-content-before-content-handleButton {
+		@include button.disabled;
+	}
+}

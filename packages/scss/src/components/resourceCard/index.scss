@@ -1,0 +1,64 @@
+@use 'exports' as *;
+@use '@lucca-front/scss/src/commons/utils/container';
+
+$noDescription: '&:has(.resourceCard-content-description:empty)';
+$noIllustration: '&:has(.resourceCard-content-before-content-illustration:empty)';
+$noAction: '&:has(.resourceCard-content-after:empty)';
+
+$hasDescription: '&:not(#{$noDescription})';
+$hasIllustration: '&:not(#{$noIllustration})';
+$hasAction: '&:not(#{$noAction})';
+
+.resourceCard {
+	@layer components {
+		@include vars;
+		@include component;
+	}
+
+	@layer mods {
+		&:hover {
+			@include hover;
+		}
+
+		&:has(.resourceCard-content-header-title .link:focus-visible) {
+			@include focusVisible;
+		}
+
+		&:has(.resourceCard-content-header-title .link.is-disabled),
+		&.is-disabled {
+			@include disabled;
+		}
+
+		#{$noDescription} {
+			@include noDescription;
+		}
+
+		#{$hasDescription} {
+			#{$hasIllustration} {
+				@include hasDescriptionHasIllustration;
+			}
+		}
+
+		@include container.max('XXS', $name: 'resourceCard') {
+			@include narrow;
+
+			#{$noDescription} {
+				#{$hasIllustration} {
+					@include narrowNoDescriptionHasIllustration;
+				}
+			}
+		}
+	}
+}
+
+.resourceCardWrapper {
+	@layer components {
+		@include varsWrapper;
+	}
+
+	@layer mods {
+		&.mod-grid {
+			@include grid;
+		}
+	}
+}
