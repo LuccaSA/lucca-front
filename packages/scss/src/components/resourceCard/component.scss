@@ -65,6 +65,7 @@
 		.resourceCard-content-before {
 			grid-area: before;
 			align-self: var(--components-resourceCard-content-before-alignSelf);
+			padding-block: var(--components-resourceCard-content-before-paddingBlock);
 		}
 
 		.resourceCard-content-before-content {
@@ -80,6 +81,7 @@
 		.resourceCard-content-after {
 			grid-area: after;
 			align-self: var(--components-resourceCard-content-after-alignSelf);
+			padding-block: var(--components-resourceCard-content-after-paddingBlock);
 		}
 
 		.resourceCard-content-after .button {

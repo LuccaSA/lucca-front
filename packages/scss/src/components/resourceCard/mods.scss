@@ -1,7 +1,13 @@
 @use '@lucca-front/scss/src/components/button/exports' as button;
 
 @mixin hasIllustrationNarrow {
-	--components-resourceCard-content-gridTemplate-min: calc(var(--pr-t-spacings-50) + var(--pr-t-spacings-600));
+	// --components-resourceCard-content-gridTemplate-min: calc(var(--pr-t-spacings-50) + var(--pr-t-spacings-600));
+  // condition pas assez stricte
+}
+
+@mixin hasIllustrationWide {
+	// --components-resourceCard-content-before-paddingBlock: var(--pr-t-spacings-25);
+	// condition pas assez stricte
 }
 
 @mixin noDescriptionWide {
@@ -23,17 +29,15 @@
 }
 
 @mixin hasDescriptionHasActionWide {
-	.resourceCard-content-after {
-		padding-block: var(--pr-t-spacings-100);
-	}
+	--components-resourceCard-content-after-paddingBlock: var(--pr-t-spacings-100);
 }
 
-@mixin hasIllustrationWide {
-	--components-resourceCard-content-gridTemplate-min: auto !important;
+@mixin hasIllustrationNoDescriptionWide {
+	--components-resourceCard-content-gridTemplate-min: auto;
+}
 
-	.resourceCard-content-before {
-		padding-block: var(--pr-t-spacings-50);
-	}
+@mixin hasIllustrationHasDescriptionWide {
+	--components-resourceCard-content-before-paddingBlock: var(--pr-t-spacings-50);
 }
 
 @mixin narrow {

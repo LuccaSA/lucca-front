@@ -185,8 +185,8 @@ export const Basic = {
 		headingInfosContent: `<lu-status-badge label="Status" />
 				<lu-tag label="Text" />`,
 		description: false,
-		descriptionContent: `Lorem ipsum dolor sit amet, consectetur adipiscing elit, sed do. `,
-		descriptionContentDisabled: `Lorem <a href="#" luLink disabled>ipsum</a> dolor`,
+		descriptionContent: `Lorem <a href="#" luLink>ipsum</a> dolor sit amet, consectetur adipiscing elit, sed do. `,
+		descriptionContentDisabled: `Lorem <a href="#" luLink disabled>ipsum</a> dolor sit amet, consectetur adipiscing elit, sed do. `,
 		illustration: false,
 		illustrationContent: `<div class="pr-u-displayGrid pr-u-placeItemsCenter pr-u-borderRadiusDefault"
 					 style="background-color: var(--palettes-lavender-100); color: var(--palettes-lavender-700)"

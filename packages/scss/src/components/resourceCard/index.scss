@@ -22,6 +22,7 @@
 			@include disabled;
 		}
 
+		// TODO
 		@include container.min('XXS', $name: 'resourceCard') {
 			&:has(.resourceCard-content-description:empty) {
 				@include noDescriptionWide;
@@ -29,6 +30,14 @@
 
 			&:not(:has(.resourceCard-content-before-content-illustration:empty)) {
 				@include hasIllustrationWide;
+
+				&:has(.resourceCard-content-description:empty) {
+					@include hasIllustrationNoDescriptionWide;
+				}
+
+				&:not(:has(.resourceCard-content-description:empty)) {
+					@include hasIllustrationHasDescriptionWide;
+				}
 			}
 
 			&:not(:has(.resourceCard-content-description:empty)) {
