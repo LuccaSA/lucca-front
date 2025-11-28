@@ -12,54 +12,46 @@
 			@include hover;
 		}
 
-
 		&:has(.resourceCard-content-header-title .link:focus-visible) {
 			@include focusVisible;
 		}
 
-		// &:has(.resourceCard-content-description:empty) {
-		// 	@include noDescription;
-
-		// 	&:has(.resourceCard-content-after:empty) {
-		// 		@include noDescriptionNoAction;
-
-		// 		&:has(.resourceCard-content-before-content-illustration:empty) {
-		// 			@include noDescriptionNoActionNoIllustration;
-
-		// 			&:has(.resourceCard-content-before-content-handleButton) {
-		// 				@include noDescriptionNoActionNoIllustrationAndHandle;
-		// 			}
-		// 		}
-		// 	}
-		// }
-
-		// &:has(.resourceCard-content-before-content-handleButton) {
-		// 	@include draggable;
-
-		// 	&:not(:has(.resourceCard-content-after:empty)) {
-		// 		@include draggableAction;
-
-		// 		@include container.max('XS', $name: 'resourceCard') {
-		// 			@include draggableActionNarrow;
-		// 		}
-		// 	}
-
-		// 	&:not(:has(.resourceCard-content-header-infos:empty)) {
-		// 		@include draggableInfos;
-
-		// 		@include container.max('XS', $name: 'resourceCard') {
-		// 			@include draggableInfosNarrow;
-		// 		}
-		// 	}
-		// }
 
 		&:has(.resourceCard-content-header-title .link.is-disabled),
 		&.is-disabled {
 			@include disabled;
 		}
 
+		&:not(:has(.resourceCard-content-before-content-illustration:empty)) {
+			@include container.max('XS', $name: 'resourceCard') {
+				@include hasIllustrationNarrow;
+			}
+
+			@include container.min('XS', $name: 'resourceCard') {
+				@include hasIllustrationWide;
+			}
+		}
+
+		@include container.min('XS', $name: 'resourceCard') {
+			&:has(.resourceCard-content-description:empty) {
+				@include noDescriptionWide;
+			}
+
+			&:not(:has(.resourceCard-content-description:empty)) {
+				@include hasDescriptionWide;
+
+				&:not(:has(.resourceCard-content-after:empty)) {
+					@include hasDescriptionHasActionWide;
+				}
+			}
+		}
+
 		@include container.max('XS', $name: 'resourceCard') {
 			@include narrow;
+
+			&:has(.resourceCard-content-description:empty) {
+				@include noDescriptionNarrow;
+			}
 		}
 	}
 }

@@ -1,65 +1,49 @@
 @use '@lucca-front/scss/src/components/button/exports' as button;
 
-// @mixin noDescription {
-// 	--components-resourceCard-content-header-minBlockSize: var(--pr-t-spacings-400);
-// 	--components-resourceCard-content-after-paddingBlock: 0;
-// }
+@mixin hasIllustrationNarrow {
+	--components-resourceCard-content-gridTemplate-min: calc(var(--pr-t-spacings-50) + var(--pr-t-spacings-600));
+}
 
+@mixin noDescriptionWide {
+	--components-resourceCard-content-gridTemplate: "before header after" minmax(var(--components-resourceCard-content-gridTemplate-min), auto)
+																									/auto   1fr    auto;
+}
 
-// @mixin noDescriptionNoAction {
-// 	--components-resourceCard-content-header-minBlockSize: var(--pr-t-spacings-600);
-// }
+@mixin hasDescriptionWide {
+	--components-resourceCard-content-before-alignSelf: start;
+	--components-resourceCard-content-after-alignSelf: start;
+	--components-resourceCard-content-gridTemplate-min: var(--pr-t-spacings-400);
+}
 
-// @mixin noDescriptionNoActionNoIllustration {
-// 	--components-resourceCard-content-header-minBlockSize: var(--pr-t-spacings-400);
+@mixin noDescriptionNarrow {
+	--components-resourceCard-content-gridTemplate: "before header after" minmax(var(--components-resourceCard-content-gridTemplate-min), auto)
+																									/auto   1fr    auto;
+}
 
-// 	// --components-resourceCard-content-after-paddingBlock: 0;
-// }
+@mixin hasDescriptionHasActionWide {
+	.resourceCard-content-after {
+		padding-block: var(--pr-t-spacings-100);
+	}
+}
 
-// @mixin noDescriptionNoActionNoIllustrationAndHandle {
-// //	--components-resourceCard-content-header-minBlockSize: var(--pr-t-spacings-400);
-// }
+@mixin hasIllustrationWide {
+	--components-resourceCard-content-gridTemplate-min: auto !important;
 
-// @mixin draggableAction {
-// 	--components-resourceCard-content-header-minBlockSize: var(--pr-t-spacings-500);
-
-// 	.resourceCard-content-before-content-handleButton {
-// 		margin-block: var(--pr-t-spacings-50);
-// 	}
-// }
-
-// @mixin draggableActionNarrow {
-// 	--components-resourceCard-content-header-minBlockSize: var(--pr-t-spacings-400);
-
-// 	.resourceCard-content-before-content-handleButton {
-// 		margin-block: var(--pr-t-spacings-0);
-// 	}
-// }
-
-// @mixin draggableInfos {
-
-// }
-
-// @mixin draggableInfosNarrow {
-// 	--components-resourceCard-content-header-minBlockSize: var(--pr-t-spacings-500);
-// }
-
+	.resourceCard-content-before {
+		padding-block: var(--pr-t-spacings-50);
+	}
+}
 
 @mixin narrow {
+	--components-resourceCard-content-gridTemplate-min: var(--pr-t-spacings-400);
 	--components-resourceCard-content-header-infos-flexWrap: wrap;
 	--components-resourceCard-content-header-flexDirection: column;
 	--components-resourceCard-content-header-alignItems: start;
 	--components-resourceCard-content-header-justifyContent: center;
 	--components-resourceCard-content-description-not-empty-marginBlockStart: var(--pr-t-spacings-150);
-	--components-resourceCard-content-gridTemplate: "before header after" minmax(var(--pr-t-spacings-400), auto)
+	--components-resourceCard-content-gridTemplate: "before header after" minmax(var(--components-resourceCard-content-gridTemplate-min), auto)
 																									"main   main   main " auto
 																									/auto   1fr    auto;
-
-	.resourceCard-content-header,
-	.resourceCard-content-after,
-	.resourceCard-content-before {
-		align-self: center;
-	}
 
 	.resourceCard-content-after .button {
 		@include button.S;
@@ -72,8 +56,4 @@
 
 @mixin grid {
 	--components-resourceCardWrapper-display: grid;
-}
-
-@mixin draggable {
-	// --components-resourceCard-content-header-minBlockSize: var(--pr-t-spacings-400);
 }
