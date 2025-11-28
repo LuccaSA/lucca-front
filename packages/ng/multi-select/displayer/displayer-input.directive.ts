@@ -1,10 +1,12 @@
 import { DestroyRef, Directive, ElementRef, HostBinding, HostListener, inject, OnInit } from '@angular/core';
 import { takeUntilDestroyed, toSignal } from '@angular/core/rxjs-interop';
+import { ɵeffectWithDeps } from '@lucca-front/ng/core';
 import { ILuOptionContext, LU_OPTION_CONTEXT } from '@lucca-front/ng/core-select';
+import { InputDirective } from '@lucca-front/ng/form-field';
 import { of } from 'rxjs';
 import { startWith, switchMap } from 'rxjs/operators';
 import { LuMultiSelectInputComponent } from '../input';
-import { InputDirective } from '@lucca-front/ng/form-field';
+import { MULTI_SELECT_WITH_SELECT_ALL_CONTEXT } from '../input/select-all/select-all.models';
 
 @Directive({
 	selector: '[luMultiSelectDisplayerInput]',
@@ -19,6 +21,7 @@ import { InputDirective } from '@lucca-front/ng/form-field';
 })
 export class LuMultiSelectDisplayerInputDirective<T> implements OnInit {
 	select = inject<LuMultiSelectInputComponent<T>>(LuMultiSelectInputComponent);
+	readonly selectAllContext = inject(MULTI_SELECT_WITH_SELECT_ALL_CONTEXT);
 
 	context = inject<ILuOptionContext<T[]>>(LU_OPTION_CONTEXT);
 
@@ -76,16 +79,28 @@ export class LuMultiSelectDisplayerInputDirective<T> implements OnInit {
 		),
 	);
 
+	constructor() {
+		ɵeffectWithDeps([this.selectAllContext.mode], (mode) => {
+			if (mode === 'all') {
+				this.#clearText();
+			}
+		});
+	}
+
 	ngOnInit(): void {
 		this.select.focusInput$.pipe(takeUntilDestroyed(this.destroyRef)).subscribe((data?: { keepClue: boolean }) => {
 			if (!data?.keepClue) {
-				this.elementRef.nativeElement.value = '';
-				this.select.clueChanged('');
+				this.#clearText();
 			}
 			this.elementRef.nativeElement.focus();
 		});
 		this.select.emptyClue$.pipe(takeUntilDestroyed(this.destroyRef)).subscribe(() => {
 			this.elementRef.nativeElement.value = '';
 		});
+	}
+
+	#clearText() {
+		this.elementRef.nativeElement.value = '';
+		this.select.clueChanged('');
 	}
 }
