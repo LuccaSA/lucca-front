@@ -1,0 +1,14 @@
+<div class="resourceCard skeleton is-loading" [class.mod-dark]="dark()" inert="inert">
+	<div class="resourceCard-content">
+		<div class="resourceCard-content-header">
+			<h3 class="skeleton-item" [style.--components-skeleton-text-width]="getRandomPercent()"></h3>
+		</div>
+		@if (descriptionLines() > 0) {
+			<div class="resourceCard-content-description">
+				@for (line of lines(); track $index) {
+					<span class="skeleton-item" [style.--components-skeleton-text-width]="getRandomPercent(98, 100)"></span>
+				}
+			</div>
+		}
+	</div>
+</div>
