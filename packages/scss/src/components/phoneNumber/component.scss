@@ -1,7 +1,6 @@
 @use '@lucca-front/scss/src/commons/utils/namespace';
 
 @mixin component($atRoot: namespace.$defaultAtRoot) {
-
 	@at-root ($atRoot) {
 		.phoneNumber-fieldset {
 			border: 0;
