@@ -1,6 +1,15 @@
 @use 'exports' as *;
 @use '@lucca-front/scss/src/commons/utils/container';
 
+$noDescription: '&:has(.resourceCard-content-description:empty)';
+$noDescriptionHTML: '&:not(:has(.resourceCard-content-description))';
+$noIllustration: '&:has(.resourceCard-content-before-content-illustration:empty)';
+$noAction: '&:has(.resourceCard-content-after:empty)';
+
+$hasDescription: '&:not(#{$noDescription})';
+$hasIllustration: '&:not(#{$noIllustration})';
+$hasAction: '&:not(#{$noAction})';
+
 .resourceCard {
 	@layer components {
 		@include vars;
@@ -16,41 +25,30 @@
 			@include focusVisible;
 		}
 
-
 		&:has(.resourceCard-content-header-title .link.is-disabled),
 		&.is-disabled {
 			@include disabled;
 		}
 
-		&:not(:has(.resourceCard-content-before-content-illustration:empty)) {
-			@include container.max('XS', $name: 'resourceCard') {
-				@include hasIllustrationNarrow;
-			}
+		#{$noDescription},
+		#{$noDescriptionHTML} {
+			@include noDescription;
+		}
 
-			@include container.min('XS', $name: 'resourceCard') {
-				@include hasIllustrationWide;
+		#{$hasDescription} {
+			#{$hasIllustration} {
+				@include hasDescriptionHasIllustration;
 			}
 		}
 
-		@include container.min('XS', $name: 'resourceCard') {
-			&:has(.resourceCard-content-description:empty) {
-				@include noDescriptionWide;
-			}
-
-			&:not(:has(.resourceCard-content-description:empty)) {
-				@include hasDescriptionWide;
-
-				&:not(:has(.resourceCard-content-after:empty)) {
-					@include hasDescriptionHasActionWide;
-				}
-			}
-		}
-
-		@include container.max('XS', $name: 'resourceCard') {
+		@include container.max('XXS', $name: 'resourceCard') {
 			@include narrow;
 
-			&:has(.resourceCard-content-description:empty) {
-				@include noDescriptionNarrow;
+			#{$noDescription},
+			#{$noDescriptionHTML} {
+				#{$hasIllustration} {
+					@include narrowNoDescriptionHasIllustration;
+				}
 			}
 		}
 	}

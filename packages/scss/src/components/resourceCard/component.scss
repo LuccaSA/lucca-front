@@ -8,8 +8,7 @@
 	border-radius: var(--pr-t-border-radius-structure);
 	display: block;
 	color: var(--components-resourceCard-color);
-
-	// block-size: 100%;
+	block-size: 100%;
 
 	&::before {
 		content: '';
@@ -26,13 +25,11 @@
 		.resourceCardContainer {
 			container: resourceCard / inline-size;
 			display: block;
-
-			// block-size: 100%;
 		}
 
 		.resourceCardWrapper {
-			// (breakpoint XS - spacings 100) / 2
-			//         (40rem - 0.5rem)       / 2
+			// (breakpoint XXS - spacings 100) / 2
+			//          (30rem - 0.5rem)       / 2
 			grid-template-columns: repeat(auto-fill, minmax(19.75rem, 1fr));
 			display: var(--components-resourceCardWrapper-display);
 			flex-direction: column;
@@ -44,8 +41,6 @@
 
 		.resourceCard-content-before-content-illustration {
 			display: grid;
-			block-size: var(--pr-t-spacings-600);
-			inline-size: var(--pr-t-spacings-600);
 
 			&:empty {
 				display: none;
@@ -68,6 +63,7 @@
 		.resourceCard-content-before {
 			grid-area: before;
 			align-self: var(--components-resourceCard-content-before-alignSelf);
+			padding-block: var(--components-resourceCard-content-before-paddingBlock);
 		}
 
 		.resourceCard-content-before-content {
@@ -83,6 +79,7 @@
 		.resourceCard-content-after {
 			grid-area: after;
 			align-self: var(--components-resourceCard-content-after-alignSelf);
+			padding-block: var(--components-resourceCard-content-after-paddingBlock);
 		}
 
 		.resourceCard-content-after .button {
@@ -100,8 +97,7 @@
 			grid-template: var(--components-resourceCard-content-gridTemplate);
 			align-items: start;
 			min-block-size: var(--pr-t-spacings-600);
-
-			// block-size: 100%;
+			block-size: 100%;
 		}
 
 		.resourceCard-content-description {
