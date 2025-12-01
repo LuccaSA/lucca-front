@@ -100,7 +100,10 @@ export default {
 		const draggableAttr = args.draggable ? ` draggable` : ``;
 		const disabledAttr = args.disabled ? ` disabled` : ``;
 		const gridAttr = args.wrapperGrid ? ` grid` : ``;
-		const actionTpl = args.headingAction === 'a' ? `<a href="#" luLink${disabledAttr}>${args.heading}</a>` : `<button type="button" luLink${disabledAttr}>${args.heading}</button>`;
+		const actionTpl =
+			args.headingAction === 'a'
+				? `<a href="#" luTooltip luTooltipOnlyForDisplay luTooltipWhenEllipsis luLink${disabledAttr}>${args.heading}</a>`
+				: `<button type="button" luLink${disabledAttr}>${args.heading}</button>`;
 		const headingLevelAttr = args.headingLevel !== 3 ? ` headingLevel="${args.headingLevel}"` : ``;
 		const headingStyleAttr = args.headingStyle !== 3 ? ` headingStyle="${args.headingStyle}"` : ``;
 		const numericBadgeTpl = args.headingNumericBadge ? `<lu-numeric-badge value="88" />` : ``;
@@ -179,22 +182,24 @@ export const Basic = {
 		heading: 'Lorem ipsum dolor',
 		headingLevel: 3,
 		headingStyle: 3,
-		headingNumericBadge: false,
 		headingAction: 'a',
+		headingNumericBadge: false,
 		headingInfos: false,
 		headingInfosContent: `<lu-status-badge label="Status" />
 				<lu-tag label="Text" />`,
 		description: false,
-		descriptionContent: `Lorem ipsum dolor sit amet, consectetur adipiscing elit, sed do. `,
-		descriptionContentDisabled: `Lorem <a href="#" luLink disabled>ipsum</a> dolor`,
+		descriptionContent: `Lorem <a href="#" luLink>ipsum</a> dolor sit amet, consectetur adipiscing elit, sed do. `,
+		descriptionContentDisabled: `Lorem <a href="#" luLink disabled>ipsum</a> dolor sit amet, consectetur adipiscing elit, sed do. `,
 		illustration: false,
 		illustrationContent: `<div class="pr-u-displayGrid pr-u-placeItemsCenter pr-u-borderRadiusDefault"
-					 style="background-color: var(--palettes-lavender-100); color: var(--palettes-lavender-700)"
+					 style="background-color: var(--palettes-lavender-100); color: var(--palettes-lavender-700);
+					 		block-size: var(--pr-t-spacings-600); inline-size: var(--pr-t-spacings-600);"
 				>
 					<lu-icon icon="heart" size="L" />
 				</div>`,
 		illustrationContentDisabled: `<div class="pr-u-displayGrid pr-u-placeItemsCenter pr-u-borderRadiusDefault"
-					 style="background-color: var(--palettes-neutral-50); color: var(--palettes-neutral-500)"
+					 style="background-color: var(--palettes-neutral-50); color: var(--palettes-neutral-500);
+					 		block-size: var(--pr-t-spacings-600); inline-size: var(--pr-t-spacings-600);"
 				>
 					<lu-icon icon="heart" size="L" />
 				</div>`,

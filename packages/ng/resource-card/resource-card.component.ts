@@ -1,6 +1,5 @@
 import { booleanAttribute, ChangeDetectionStrategy, Component, inject, input, ViewEncapsulation } from '@angular/core';
 import { IconComponent } from '@lucca-front/ng/icon';
-import { LuTooltipModule } from '../tooltip/tooltip.module';
 import { LU_RESOURCE_CARD_WRAPPER_INSTANCE } from './resource-card-wrapper.token';
 
 @Component({
@@ -9,7 +8,7 @@ import { LU_RESOURCE_CARD_WRAPPER_INSTANCE } from './resource-card-wrapper.token
 	styleUrl: './resource-card.component.scss',
 	changeDetection: ChangeDetectionStrategy.OnPush,
 	encapsulation: ViewEncapsulation.None,
-	imports: [IconComponent, LuTooltipModule],
+	imports: [IconComponent],
 	host: {
 		class: 'resourceCardContainer',
 	},

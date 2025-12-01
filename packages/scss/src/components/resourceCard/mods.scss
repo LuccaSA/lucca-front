@@ -1,41 +1,23 @@
 @use '@lucca-front/scss/src/components/button/exports' as button;
 
-@mixin hasIllustrationNarrow {
-	--components-resourceCard-content-gridTemplate-min: calc(var(--pr-t-spacings-50) + var(--pr-t-spacings-600));
-}
-
-@mixin noDescriptionWide {
+@mixin noDescription {
+	--components-resourceCard-content-after-paddingBlock: 0;
+	--components-resourceCard-content-before-alignSelf: center;
+	--components-resourceCard-content-after-alignSelf: center;
 	--components-resourceCard-content-gridTemplate: "before header after" minmax(var(--components-resourceCard-content-gridTemplate-min), auto)
+																									"space  space  space" 1fr
 																									/auto   1fr    auto;
 }
 
-@mixin hasDescriptionWide {
-	--components-resourceCard-content-before-alignSelf: start;
-	--components-resourceCard-content-after-alignSelf: start;
-	--components-resourceCard-content-gridTemplate-min: var(--pr-t-spacings-400);
-}
-
-@mixin noDescriptionNarrow {
-	--components-resourceCard-content-gridTemplate: "before header after" minmax(var(--components-resourceCard-content-gridTemplate-min), auto)
-																									/auto   1fr    auto;
-}
-
-@mixin hasDescriptionHasActionWide {
-	.resourceCard-content-after {
-		padding-block: var(--pr-t-spacings-100);
-	}
-}
-
-@mixin hasIllustrationWide {
-	--components-resourceCard-content-gridTemplate-min: auto !important;
-
-	.resourceCard-content-before {
-		padding-block: var(--pr-t-spacings-50);
-	}
+@mixin hasDescriptionHasIllustration {
+	--components-resourceCard-content-before-paddingBlock: var(--pr-t-spacings-50);
 }
 
 @mixin narrow {
-	--components-resourceCard-content-gridTemplate-min: var(--pr-t-spacings-400);
+	--components-resourceCard-content-before-paddingBlock: 0;
+	--components-resourceCard-content-after-paddingBlock: 0;
+	--components-resourceCard-content-before-alignSelf: center;
+	--components-resourceCard-content-after-alignSelf: center;
 	--components-resourceCard-content-header-infos-flexWrap: wrap;
 	--components-resourceCard-content-header-flexDirection: column;
 	--components-resourceCard-content-header-alignItems: start;
@@ -43,6 +25,7 @@
 	--components-resourceCard-content-description-not-empty-marginBlockStart: var(--pr-t-spacings-150);
 	--components-resourceCard-content-gridTemplate: "before header after" minmax(var(--components-resourceCard-content-gridTemplate-min), auto)
 																									"main   main   main " auto
+																									"space  space  space" 1fr
 																									/auto   1fr    auto;
 
 	.resourceCard-content-after .button {
@@ -52,6 +35,10 @@
 			@include button.onlyIconS;
 		}
 	}
+}
+
+@mixin narrowNoDescriptionHasIllustration {
+	--components-resourceCard-content-gridTemplate-min: var(--pr-t-spacings-400);
 }
 
 @mixin grid {
