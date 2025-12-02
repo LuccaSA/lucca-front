@@ -6,6 +6,9 @@ import { LexicalEditor } from 'lexical';
 
 const DEFAULT_PLAIN_TEXT_MD_TRANSFORMERS: Transformer[] = [];
 
+/**
+ * @deprecated use MarkdownFormatter with no transformers instead
+ */
 export class PlainTextFormatter extends RichTextFormatter {
 	#transformers: Transformer[] = DEFAULT_PLAIN_TEXT_MD_TRANSFORMERS;
 	readonly #shouldPreserveNewLinesInMarkdown = true;
@@ -35,6 +38,9 @@ export class PlainTextFormatter extends RichTextFormatter {
 	}
 }
 
+/**
+ * @deprecated use provideLuRichTextMarkdownFormatter([])
+ */
 export function provideLuRichTextPlainTextFormatter(transformers?: Transformer[]): Provider {
 	return {
 		provide: RICH_TEXT_FORMATTER,
