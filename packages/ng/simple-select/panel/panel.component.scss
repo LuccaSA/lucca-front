@@ -13,6 +13,10 @@
 
 		& {
 			justify-content: left;
+			position: sticky;
+			inset-block-end: 0;
+			background-color: var(--pr-t-elevation-surface-raised);
+			box-shadow: 0 0 0 var(--pr-t-spacings-50) var(--pr-t-elevation-surface-raised), var(--pr-t-elevation-shadow-overflow);
 		}
 	}
 
