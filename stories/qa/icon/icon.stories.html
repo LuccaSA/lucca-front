@@ -1,6 +1,15 @@
 <table class="demo-QAtable">
 	<tbody>
 		<tr>
+			<td></td>
+			<td style="width: 50%">
+				<div class="demo-QAtable-list">HTML</div>
+			</td>
+			<td style="width: 50%">
+				<div class="demo-QAtable-list">Angular</div>
+			</td>
+		</tr>
+		<tr>
 			<td>Default</td>
 			<td>
 				<div class="demo-QAtable-list">
@@ -8,17 +17,35 @@
 					<span aria-hidden="true" class="lucca-icon icon-heart"></span>
 				</div>
 			</td>
+			<td>
+				<div class="demo-QAtable-list">
+					<lu-icon [icon]="'heart'" />
+					<lu-icon [icon]="'heart'" />
+				</div>
+			</td>
 		</tr>
 		<tr>
 			<td>Sizes</td>
 			<td>
 				<div class="demo-QAtable-list">
+					<span aria-hidden="true" class="lucca-icon icon-heart mod-XXS"></span>
 					<span aria-hidden="true" class="lucca-icon icon-heart mod-XS"></span>
 					<span aria-hidden="true" class="lucca-icon icon-heart mod-S"></span>
 					<span aria-hidden="true" class="lucca-icon icon-heart mod-M"></span>
 					<span aria-hidden="true" class="lucca-icon icon-heart mod-L"></span>
 					<span aria-hidden="true" class="lucca-icon icon-heart mod-XL"></span>
 					<span aria-hidden="true" class="lucca-icon icon-heart mod-XXL"></span>
+				</div>
+			</td>
+			<td>
+				<div class="demo-QAtable-list">
+					<lu-icon [icon]="'heart'" [size]="'XXS'" />
+					<lu-icon [icon]="'heart'" [size]="'XS'" />
+					<lu-icon [icon]="'heart'" [size]="'S'" />
+					<lu-icon [icon]="'heart'" [size]="'M'" />
+					<lu-icon [icon]="'heart'" [size]="'L'" />
+					<lu-icon [icon]="'heart'" [size]="'XL'" />
+					<lu-icon [icon]="'heart'" [size]="'XXL'" />
 				</div>
 			</td>
 		</tr>
@@ -34,12 +61,30 @@
 					<span aria-hidden="true" class="lucca-icon icon-heart pr-u-textPlaceholder"></span>
 				</div>
 			</td>
+			<td>
+				<div class="demo-QAtable-list">
+					<lu-icon [icon]="'heart'" [color]="'primary'" />
+					<lu-icon [icon]="'heart'" [color]="'secondary'" />
+					<lu-icon [icon]="'heart'" [color]="'product'" />
+					<lu-icon [icon]="'heart'" [color]="'error'" />
+					<lu-icon [icon]="'heart'" [color]="'warning'" />
+					<lu-icon [icon]="'heart'" [color]="'success'" />
+					<lu-icon [icon]="'heart'" [color]="'light'" />
+					<lu-icon [icon]="'heart'" [color]="'placeholder'" />
+					<lu-icon [icon]="'heart'" [color]="'inherit'" />
+				</div>
+			</td>
 		</tr>
 		<tr>
 			<td>AI</td>
 			<td>
 				<div class="demo-QAtable-list">
 					<span aria-hidden="true" class="lucca-icon icon-heart mod-AI"></span>
+				</div>
+			</td>
+			<td>
+				<div class="demo-QAtable-list">
+					<lu-icon [icon]="'heart'" [AI]="true" />
 				</div>
 			</td>
 		</tr>
@@ -119,6 +164,16 @@
 					@for (icon of icons; track icon.icon) {
 						<div>
 							<span aria-hidden="true" class="lucca-icon icon-{{ icon.icon }}"></span>
+							<code class="code">icon-{{ icon.icon }}</code>
+						</div>
+					}
+				</div>
+			</td>
+			<td>
+				<div class="demo-QAtable-list mod-column">
+					@for (icon of icons; track icon.icon) {
+						<div>
+							<lu-icon [icon]="icon.icon" />
 							<code class="code">icon-{{ icon.icon }}</code>
 						</div>
 					}
