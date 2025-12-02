@@ -107,7 +107,6 @@ export const Minimal = generateStory({
 	name: 'Minimal',
 	description: "Pas besoin systématiquement de `*luOption`, le simple-select affiche par défaut la propriété `name` ou l'option elle-même.",
 	template: `<lu-simple-select
-	placeholder="Placeholder…"
 	[(ngModel)]="selectedLegume"
 	[options]="legumes | filterLegumes:clue"
 	(clueChange)="clue = $event"
@@ -124,7 +123,6 @@ export const WithDisplayer = generateStory({
 	description: "Il est possible de customiser l'affichage de l'option sélectionnée en utilisant `*luDisplayer`.",
 	template: `<lu-simple-select
 	#selectRef
-	placeholder="Placeholder…"
 	[(ngModel)]="selectedLegume"
 	[options]="legumes | filterLegumes:clue"
 	(clueChange)="clue = $event"
@@ -148,7 +146,6 @@ export const WithIcon = generateStory({
 	description: "Il est possible de customiser l'affichage des options ainsi que de l'option sélectionnée en utilisant `*luOption`.",
 	template: `<lu-simple-select
 	#selectRef
-	placeholder="Placeholder…"
 	[(ngModel)]="selectedLegume"
 	[options]="legumes | filterLegumes:clue"
 	(clueChange)="clue = $event"
@@ -178,7 +175,6 @@ export const WithClue = generateStory({
 	description: "Il est possible d'afficher une barre de recherche pour filtrer les options en écoutant l'évènement `(clueChange)`.",
 	template: `<lu-simple-select
 	#selectRef
-	placeholder="Placeholder…"
 	[(ngModel)]="selectedLegume"
 	[options]="legumes | filterLegumes:clue"
 	(clueChange)="clue = $event"
@@ -211,7 +207,6 @@ export const WithPagination = generateStory({
 	description: "Il est possible de charger les options au fur et à mesure en écoutant l'évènement `(nextPage)`.",
 	template: `<lu-simple-select
 	#selectRef
-	placeholder="Placeholder…"
 	[(ngModel)]="selectedLegume"
 	[options]="legumes | slice : 0 : page * 10"
 	(nextPage)="page = page + 1"
@@ -231,7 +226,6 @@ export const WithClearer = generateStory({
 	description: "Il est possible vider le contenu du select via l'input clearable",
 	template: `<lu-simple-select
 	#selectRef
-	placeholder="Placeholder…"
 	[(ngModel)]="selectedLegume"
 	[options]="legumes"
 	clearable
@@ -260,7 +254,6 @@ export const WithDisabledOptions = generateStory({
 	description: "Il est possible de désactiver certaines options en utilisant la directive `luDisabledOption` sur l'option.",
 	template: `<lu-simple-select
 	#selectRef
-	placeholder="Placeholder…"
 	[(ngModel)]="selectedLegume"
 	[options]="legumes"
 >
@@ -288,7 +281,6 @@ export const ApiV3 = generateStory({
 
 	Plus d'informations sur les directives API personnalisée sur la [documentation dédiée](https://github.com/LuccaSA/lucca-front/blob/master/docs/core-select-api-directive.md).`,
 	template: `<lu-simple-select
-	placeholder="Placeholder…"
 	apiV3="/api/v3/axisSections"
 	[(ngModel)]="selectedAxisSection"
 ></lu-simple-select>`,
@@ -306,7 +298,6 @@ export const ApiV4 = generateStory({
 
 	Plus d'informations sur les directives API personnalisée sur la [documentation dédiée](https://github.com/LuccaSA/lucca-front/blob/master/docs/core-select-api-directive.md).`,
 	template: `<lu-simple-select
-	placeholder="Placeholder…"
 	apiV4="/organization/structure/api/establishments"
 	[(ngModel)]="selectedEstablishment"
 ></lu-simple-select>`,
@@ -323,7 +314,6 @@ export const ApiV4NoCLue = generateStory({
 	name: 'Api V4 (no clue)',
 	description: `Il est possible de désactiver la recherche ajoutée par les directives apiV3 et apiV4 en utilisant la directive \`noClue\`.`,
 	template: `<lu-simple-select
-	placeholder="Placeholder..."
 	apiV4="/organization/structure/api/establishments"
 	noClue
 	[(ngModel)]="selectedEstablishment"
@@ -360,7 +350,6 @@ export const CustomApiV4 = generateStory({
 
 Plus d'informations sur les directives API personnalisée sur la [documentation dédiée](https://github.com/LuccaSA/lucca-front/blob/master/docs/core-select-api-directive.md).`,
 	template: `<lu-simple-select
-	placeholder="Placeholder…"
 	luLegumes
 	#legumeRef="luLegumes"
 >
@@ -391,7 +380,6 @@ La première fois que cette directive est utilisée, il faut ajouter \`provideCo
 
 Plus d'informations sur les directives users personnalisée sur la [documentation dédiée](https://github.com/LuccaSA/lucca-front/blob/master/docs/core-select-users-directive.md).`,
 	template: `<lu-simple-select
-	placeholder="Placeholder…"
 	users
 	[(ngModel)]="selectedUser"
 ></lu-simple-select>
@@ -412,7 +400,6 @@ export const UserCustom = generateStory({
 	Plus d'informations sur les directives users personnalisée sur la [documentation dédiée](https://github.com/LuccaSA/lucca-front/blob/master/docs/core-select-users-directive.md).`,
 	template: `<lu-simple-select
 	#usersRef="luCustomUsers"
-	placeholder="Placeholder…"
 	customUsers
 	[(ngModel)]="selectedUser"
 >
@@ -438,7 +425,6 @@ export const UserCustomTemplate = generateStory({
 	name: 'User Select (custom template)',
 	description: `Pour personnaliser l'affichage de l'option sélectionnée, il est conseillé de ne pas écraser le template à l'aide de *luOption. La directive \`luUserOption\` permet de garder la gestion des homonymes et de l'utilisateur courant.`,
 	template: `<lu-simple-select
-	placeholder="Placeholder…"
 	users
 	#usersRef="luUsers"
 	[(ngModel)]="selectedUser"
@@ -456,7 +442,6 @@ export const UserAvatarTemplate = generateStory({
 	name: 'User Picture',
 	description: `Personnalisation de l'affichage des user dans les options avec le lu-user-picture.`,
 	template: `<lu-simple-select
-	placeholder="Placeholder…"
 	users
 	#usersRef="luUsers"
 	[(ngModel)]="selectedUser"
@@ -478,7 +463,6 @@ export const FormerUser = generateStory({
 	name: 'User Select (with former)',
 	description: "Pour saisir des utilisateurs, il suffit d'utiliser la directive `users`",
 	template: `<lu-simple-select
-	placeholder="Placeholder…"
 	users
 	enableFormerEmployees
 	[(ngModel)]="selectedUsers"
@@ -493,7 +477,6 @@ export const Establishment = generateStory({
 	name: 'Establishment Select',
 	description: "Pour saisir un établissement, il suffit d'utiliser la directive `establishments`",
 	template: `<lu-simple-select
-	placeholder="Placeholder…"
 	establishments
 	[(ngModel)]="selectedEstablishment"
 ></lu-simple-select>`,
@@ -508,7 +491,6 @@ export const EstablishmentCustom = generateStory({
 	description: "Pour saisir un établissement, il suffit d'utiliser la directive `establishments`",
 	template: `<lu-simple-select
 	#establishmentsRef="luCustomEstablishments"
-	placeholder="Placeholder…"
 	customEstablishments
 	[(ngModel)]="selectedEstablishment"
 >
@@ -534,7 +516,6 @@ export const Tree = generateStory({
 	name: 'Tree Select',
 	description: '',
 	template: `<lu-simple-select
-	placeholder="Placeholder…"
 	[treeSelect]="groupingFn"
 	[options]="legumes"
 	[(ngModel)]="selectedTree"
