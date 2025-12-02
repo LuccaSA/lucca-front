@@ -1,13 +1,13 @@
 @mixin product {
 	--components-clear-cross-color: var(--palettes-neutral-0);
-	--components-clear-background: var(--palettes-product-700);
+	--components-clear-background: var(--palettes-product-800);
 
 	&:hover {
-		--components-clear-background: var(--palettes-product-600);
+		--components-clear-background: var(--palettes-product-700);
 	}
 
 	&:active {
-		--components-clear-background: var(--palettes-product-800);
+		--components-clear-background: var(--palettes-product-900);
 	}
 }
 
@@ -17,7 +17,7 @@
 }
 
 @mixin inverted {
-	--components-clear-cross-color: var(--palettes-neutral-700);
+	--components-clear-cross-color: var(--palettes-neutral-800);
 	--components-clear-background: var(--palettes-neutral-0);
 
 	&:hover {
@@ -30,7 +30,7 @@
 }
 
 @mixin invertedProduct {
-	--components-clear-cross-color: var(--palettes-product-700);
+	--components-clear-cross-color: var(--palettes-product-800);
 	--components-clear-background: var(--palettes-neutral-0);
 
 	&:hover {
