@@ -8,6 +8,7 @@ export interface LuMultiSelectWithSelectAllContext {
 	displayerLabel: Signal<string>;
 	totalCount: Signal<number>;
 	displayerCount: Signal<number>;
+	clue: Signal<string | null>;
 }
 
 export const MULTI_SELECT_WITH_SELECT_ALL_CONTEXT = new InjectionToken<LuMultiSelectWithSelectAllContext>('LuMultiSelectWithSelectAllContext');

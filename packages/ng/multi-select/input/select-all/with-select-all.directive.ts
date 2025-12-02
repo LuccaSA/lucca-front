@@ -33,6 +33,7 @@ export class LuMultiSelectWithSelectAllDirective<TValue> extends ɵIsSelectedStr
 	readonly mode = this.#mode.asReadonly();
 	readonly values = this.#values.asReadonly();
 	readonly totalCount = toSignal(inject(CORE_SELECT_API_TOTAL_COUNT_PROVIDER).totalCount$);
+	readonly clue = toSignal(this.#select.clue$);
 
 	readonly #hasValue = computed(() => this.mode() !== 'none');
 
