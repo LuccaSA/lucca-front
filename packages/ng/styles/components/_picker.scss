@@ -35,6 +35,10 @@
 
 	.lu-picker-content-option-group {
 		margin-block-end: var(--pr-t-spacings-50);
+
+		.optionItem-value {
+			--components-options-item-padding-horizontal: var(--pr-t-spacings-200) var(--pr-t-spacings-100);
+		}
 	}
 
 	.lu-picker-content-option-group-title {
