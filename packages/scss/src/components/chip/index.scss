@@ -25,6 +25,14 @@
 			@include clickable;
 		}
 
+		&.mod-warning {
+			@include warning;
+		}
+
+		&.mod-critical {
+			@include critical;
+		}
+
 		&.is-disabled {
 			@include disabled;
 		}

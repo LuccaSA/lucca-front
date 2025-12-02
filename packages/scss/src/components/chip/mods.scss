@@ -1,8 +1,13 @@
+@use '@lucca-front/icons/src/icon/exports' as icon;
 @use '@lucca-front/scss/src/commons/utils/a11y';
 
 @mixin S {
 	--components-chip-font: var(--pr-t-font-body-XS);
 	--components-chip-borderRadius: var(--pr-t-border-radius-small);
+
+	.lucca-icon {
+		@include icon.XXS;
+	}
 }
 
 @mixin product {
@@ -41,4 +46,38 @@
 
 @mixin focusVisible {
 	@include a11y.focusVisible;
+}
+
+@mixin warning {
+	--components-chip-backgroundColor: var(--palettes-warning-200);
+	--components-chip-color: var(--palettes-warning-800);
+
+	.chip-kill {
+		--components-chip-kill-disk-color: var(--palettes-warning-800);
+
+		&:hover {
+			--components-chip-kill-disk-color: var(--palettes-warning-700);
+		}
+
+		&:active {
+			--components-chip-kill-disk-color: var(--palettes-warning-900);
+		}
+	}
+}
+
+@mixin critical {
+	--components-chip-backgroundColor: var(--palettes-critical-200);
+	--components-chip-color: var(--palettes-critical-800);
+
+	.chip-kill {
+		--components-chip-kill-disk-color: var(--palettes-critical-800);
+
+		&:hover {
+			--components-chip-kill-disk-color: var(--palettes-critical-700);
+		}
+
+		&:active {
+			--components-chip-kill-disk-color: var(--palettes-critical-900);
+		}
+	}
 }

@@ -101,8 +101,62 @@
 			</td>
 			<td>
 				<div class="demo-QAtable-list">
-					<lu-chip class="mod-S">John Doe</lu-chip>
-					<lu-chip class="mod-S" unkillable>John Doe</lu-chip>
+					<lu-chip size="S">John Doe</lu-chip>
+					<lu-chip size="S" unkillable>John Doe</lu-chip>
+				</div>
+			</td>
+		</tr>
+		<tr>
+			<td>Feedback</td>
+			<td>
+				<div class="demo-QAtable-list">
+					<div class="chip mod-warning">
+						<span aria-hidden="true" class="chip-icon lucca-icon icon-signWarning"></span>
+						John Doe
+						<button type="button" class="chip-kill">
+							<span class="pr-u-mask">delete</span>
+						</button>
+					</div>
+					<div class="chip mod-critical">
+						<span aria-hidden="true" class="chip-icon lucca-icon icon-signError"></span>
+						John Doe
+						<button type="button" class="chip-kill">
+							<span class="pr-u-mask">delete</span>
+						</button>
+					</div>
+				</div>
+			</td>
+			<td>
+				<div class="demo-QAtable-list">
+					<lu-chip warning><lu-icon icon="signWarning" />John Doe</lu-chip>
+					<lu-chip critical><lu-icon icon="signError" />John Doe</lu-chip>
+				</div>
+			</td>
+		</tr>
+		<tr>
+			<td>Feedback Small</td>
+			<td>
+				<div class="demo-QAtable-list">
+					<div class="chip mod-S mod-warning">
+						<span aria-hidden="true" class="chip-icon lucca-icon icon-signWarning"></span>
+						John Doe
+						<button type="button" class="chip-kill">
+							<span class="pr-u-mask">delete</span>
+						</button>
+					</div>
+					<div class="chip mod-S mod-critical">
+						<span aria-hidden="true" class="chip-icon lucca-icon icon-signError"></span>
+						John Doe
+						<button type="button" class="chip-kill">
+							<span class="pr-u-mask">delete</span>
+						</button>
+					</div>
+				</div>
+			</td>
+			<td>
+				<div class="demo-QAtable-list">
+					<lu-chip size="S" warning><lu-icon icon="signWarning" />John Doe</lu-chip>
+					<lu-chip size="S" critical><lu-icon icon="signError" />John Doe</lu-chip>
 				</div>
 			</td>
 		</tr>

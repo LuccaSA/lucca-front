@@ -15,6 +15,9 @@ import { LU_CHIP_TRANSLATIONS } from './chip.translate';
 		class: 'chip',
 		'[class.is-disabled]': 'disabled()',
 		'[class.palette-product]': 'classPalette()',
+		'[class.mod-S]': 'size() === "S"',
+		'[class.mod-warning]': 'warning()',
+		'[class.mod-critical]': 'critical()',
 	},
 })
 export class ChipComponent {
@@ -31,4 +34,10 @@ export class ChipComponent {
 	readonly classPalette = computed(() => this.palette() === 'product');
 
 	readonly kill = output<Event>();
+
+	readonly size = input<'S' | null>(null);
+
+	readonly warning = input(false, { transform: booleanAttribute });
+
+	readonly critical = input(false, { transform: booleanAttribute });
 }

@@ -1,4 +1,4 @@
-@use '@lucca-front/icons/src/commons/utils/icon';
+@use '@lucca-front/icons/src/icon/exports' as icon;
 @use '@lucca-front/scss/src/commons/utils/a11y';
 @use '@lucca-front/scss/src/commons/utils/reset';
 @use '@lucca-front/scss/src/commons/utils/namespace';
@@ -9,7 +9,6 @@
 	color: var(--components-chip-color);
 	display: inline-flex;
 	align-items: center;
-	gap: var(--pr-t-spacings-100);
 	position: relative;
 	vertical-align: middle;
 	padding-block: calc(var(--pr-t-spacings-50) / 2);
@@ -33,6 +32,7 @@
 			inline-size: var(--pr-t-spacings-300);
 			block-size: var(--pr-t-spacings-300);
 			margin: calc(var(--pr-t-spacings-75) * -1);
+			margin-inline-start: var(--pr-t-spacings-25);
 			flex-shrink: 0;
 			cursor: pointer;
 
@@ -68,6 +68,12 @@
 			&:active {
 				--components-chip-kill-disk-color: var(--palettes-50, var(--palettes-neutral-800));
 			}
+		}
+
+		.lucca-icon {
+			@include icon.XS;
+
+			margin-inline-end: var(--pr-t-spacings-50);
 		}
 	}
 }
