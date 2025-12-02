@@ -10,7 +10,7 @@ import { LuClass } from '@lucca-front/ng/core';
 	encapsulation: ViewEncapsulation.None,
 	host: {
 		class: 'divider',
-		'[role]': 'separatorRole() || withRole() ? "separator" : null',
+		'[attr.role]': 'separatorRole() || withRole() ? "separator" : null',
 		'[class.mod-vertical]': 'vertical()',
 	},
 })
