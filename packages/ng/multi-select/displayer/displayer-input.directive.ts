@@ -1,10 +1,12 @@
 import { DestroyRef, Directive, ElementRef, HostBinding, HostListener, inject, OnInit } from '@angular/core';
 import { takeUntilDestroyed, toSignal } from '@angular/core/rxjs-interop';
+import { getIntl } from '@lucca-front/ng/core';
 import { ILuOptionContext, LU_OPTION_CONTEXT } from '@lucca-front/ng/core-select';
 import { InputDirective } from '@lucca-front/ng/form-field';
 import { of } from 'rxjs';
 import { startWith, switchMap } from 'rxjs/operators';
 import { LuMultiSelectInputComponent } from '../input';
+import { LU_MULTI_SELECT_TRANSLATIONS } from '../select.translate';
 
 @Directive({
 	selector: '[luMultiSelectDisplayerInput]',
@@ -17,6 +19,7 @@ import { LuMultiSelectInputComponent } from '../input';
 	hostDirectives: [InputDirective],
 })
 export class LuMultiSelectDisplayerInputDirective<T> implements OnInit {
+	intl = getIntl(LU_MULTI_SELECT_TRANSLATIONS);
 	select = inject<LuMultiSelectInputComponent<T>>(LuMultiSelectInputComponent);
 
 	context = inject<ILuOptionContext<T[]>>(LU_OPTION_CONTEXT);
@@ -47,7 +50,7 @@ export class LuMultiSelectDisplayerInputDirective<T> implements OnInit {
 
 	@HostBinding('placeholder')
 	get placeholder() {
-		return this.#placeholder();
+		return this.#placeholder() ? this.#placeholder() : this.intl.placeholder;
 	}
 
 	@HostBinding('readonly')

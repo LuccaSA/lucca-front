@@ -7,7 +7,7 @@
 		[attr.aria-activedescendant]="activeDescendant$ | async"
 		[attr.aria-expanded]="isPanelOpen"
 		[attr.aria-controls]="ariaControls"
-		placeholder="{{ inputPlaceholder }}"
+		placeholder="{{ inputPlaceholder ? inputPlaceholder : intl.placeholder }}"
 		[ngModel]="clue"
 		(ngModelChange)="clueChanged($event)"
 		[ngModelOptions]="{ standalone: true }"
