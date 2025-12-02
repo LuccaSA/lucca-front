@@ -36,15 +36,6 @@
 			@include chip.S;
 		}
 	}
-
-	.multipleSelect-displayer-numericBadge {
-		// :not(.class) is only there to increase specificity when the class isn’t present
-		// but the class should be present, and this code is temporary
-		&.numericBadge,
-		&:not(.numericBadge) {
-			@include numericBadge.S;
-		}
-	}
 }
 
 @mixin displayerFilter {
