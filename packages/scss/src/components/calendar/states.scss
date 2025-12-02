@@ -168,3 +168,9 @@
 		--components-calendar-table-body-row-cell-actionColor: var(--palettes-neutral-600);
 	}
 }
+
+@mixin disabled {
+	--components-calendar-table-body-row-cell-actionColor: var(--palettes-neutral-500);
+	--components-calendar-table-body-row-cell-actionTextDecoration: line-through;
+	--components-calendar-table-body-row-cell-actionCursor: default;
+}
