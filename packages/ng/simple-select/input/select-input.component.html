@@ -27,10 +27,8 @@
 			<lu-clear class="simpleSelect-field-clear" (onClear)="clearValue($event); inputElement.focus()">{{ intl.clear }}</lu-clear>
 		}
 		<lu-icon icon="arrowChevronBottom" class="simpleSelect-field-icon" />
-		<lu-icon icon="searchMagnifyingGlass" class="simpleSelect-field-icon mod-search" />
-	} @else {
-		<lu-icon icon="searchMagnifyingGlass" class="simpleSelect-field-icon mod-search" />
 	}
+	<lu-icon icon="searchMagnifyingGlass" class="simpleSelect-field-icon mod-search" />
 </div>
 <ng-container #filterPillPanelAnchor />
 <ng-container *luFilterPillDisplayer>
