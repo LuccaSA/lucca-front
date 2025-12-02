@@ -152,11 +152,11 @@
 			}
 		}
 
-		.resourceCard-content-header-title .link {
+		.resourceCard-content-header-title-action {
 			@include reset.button;
 
-			outline: none !important;
-			color: var(--components-resourceCard-content-header-title-link-color) !important;
+			outline: none;
+			color: var(--components-resourceCard-content-header-title-action-color);
 			text-decoration: none;
 			white-space: nowrap;
 			overflow: hidden;
@@ -165,7 +165,7 @@
 			&::before {
 				content: '';
 				position: absolute;
-				inset: var(--components-resourceCard-content-header-title-link-inset-before);
+				inset: var(--components-resourceCard-content-header-title-action-inset-before);
 				border-radius: var(--pr-t-border-radius-structure);
 				transition-duration: var(--commons-animations-durations-fast);
 				transition-property: inset;

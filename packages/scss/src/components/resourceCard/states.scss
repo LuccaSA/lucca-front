@@ -6,7 +6,7 @@
 }
 
 @mixin focusVisible {
-	.resourceCard-content-header-title .link {
+	.resourceCard-content-header-title-action {
 		&::before {
 			@include a11y.focusVisible;
 		}

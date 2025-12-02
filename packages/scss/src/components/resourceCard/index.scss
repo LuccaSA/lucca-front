@@ -22,11 +22,10 @@ $hasAction: '&:not(#{$noAction})';
 			@include hover;
 		}
 
-		&:has(.resourceCard-content-header-title .link:focus-visible) {
+		&:has(.resourceCard-content-header-title-action:focus-visible) {
 			@include focusVisible;
 		}
 
-		&:has(.resourceCard-content-header-title .link.is-disabled),
 		&.is-disabled {
 			@include disabled;
 		}

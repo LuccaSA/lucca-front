@@ -8,6 +8,7 @@ import { StatusBadgeComponent } from '@lucca-front/ng/status-badge';
 import { TagComponent } from '@lucca-front/ng/tag';
 import { LuTooltipModule } from '@lucca-front/ng/tooltip';
 import { applicationConfig, Meta, moduleMetadata } from '@storybook/angular';
+import { ResourceCardActionComponent } from 'packages/ng/resource-card/resource-card-action.component';
 
 interface ResourceCardAngularBasicStory {
 	wrapper: boolean;
@@ -89,7 +90,18 @@ export default {
 	},
 	decorators: [
 		moduleMetadata({
-			imports: [ResourceCardComponent, LuTooltipModule, NumericBadgeComponent, IconComponent, StatusBadgeComponent, ButtonComponent, LinkComponent, ResourceCardWrapperComponent, TagComponent],
+			imports: [
+				ResourceCardComponent,
+				LuTooltipModule,
+				NumericBadgeComponent,
+				IconComponent,
+				StatusBadgeComponent,
+				ButtonComponent,
+				LinkComponent,
+				ResourceCardWrapperComponent,
+				TagComponent,
+				ResourceCardActionComponent,
+			],
 		}),
 		applicationConfig({
 			providers: [provideRouter([{ path: 'iframe.html', redirectTo: '', pathMatch: 'full' }])],
@@ -100,10 +112,12 @@ export default {
 		const draggableAttr = args.draggable ? ` draggable` : ``;
 		const disabledAttr = args.disabled ? ` disabled` : ``;
 		const gridAttr = args.wrapperGrid ? ` grid` : ``;
+		const actionLinkAttr = args.disabled ? `` : ` href="#"`;
+		const actionButtonAttr = args.disabled ? `` : ` (click)="console.log()"`;
 		const actionTpl =
 			args.headingAction === 'a'
-				? `<a href="#" luTooltip luTooltipOnlyForDisplay luTooltipWhenEllipsis luLink${disabledAttr}>${args.heading}</a>`
-				: `<button type="button" luLink${disabledAttr}>${args.heading}</button>`;
+				? `<a${actionLinkAttr} luResourceCardAction>${args.heading}</a>`
+				: `<button${actionButtonAttr} type="button" luTooltipOnlyForDisplay luTooltipWhenEllipsis luResourceCardAction>${args.heading}</button>`;
 		const headingLevelAttr = args.headingLevel !== 3 ? ` headingLevel="${args.headingLevel}"` : ``;
 		const headingStyleAttr = args.headingStyle !== 3 ? ` headingStyle="${args.headingStyle}"` : ``;
 		const numericBadgeTpl = args.headingNumericBadge ? `<lu-numeric-badge value="88" />` : ``;
@@ -147,13 +161,13 @@ export default {
 			: ``;
 		const card = `
 		<lu-resource-card>
-			<a href="#" luLink>Sit amet</a>
+			<a href="#" luResourceCardAction>Sit amet</a>
 			<ng-container resourceCardDescription>
 				Consectetur adipiscing elit. Consectetur adipiscing elit. Consectetur adipiscing elit. Consectetur adipiscing elit. Consectetur adipiscing elit. Consectetur adipiscing elit.
 			</ng-container>
 		</lu-resource-card>`;
 		const cards = `
-		<lu-resource-card${draggableAttr}${headingLevelAttr}${headingStyleAttr}>
+		<lu-resource-card${disabledAttr}${draggableAttr}${headingLevelAttr}${headingStyleAttr}>
 			${actionTpl}${numericBadgeTpl}${headingInfosTpl}${illustrationTpl}${actionsTpl}${descriptionTpl}
 		</lu-resource-card>${card.repeat(args.wrapper ? 3 : 0)}`;
 		if (args.wrapper) {
