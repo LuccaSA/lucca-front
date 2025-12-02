@@ -186,7 +186,7 @@ export const Basic = {
 		headingNumericBadge: false,
 		headingInfos: false,
 		headingInfosContent: `<lu-status-badge label="Status" />
-				<lu-tag label="Text" />`,
+				<lu-status-badge label="Status" />`,
 		description: false,
 		descriptionContent: `Lorem <a href="#" luLink>ipsum</a> dolor sit amet, consectetur adipiscing elit, sed do. `,
 		descriptionContentDisabled: `Lorem <a href="#" luLink disabled>ipsum</a> dolor sit amet, consectetur adipiscing elit, sed do. `,

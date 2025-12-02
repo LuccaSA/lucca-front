@@ -8,6 +8,7 @@ $noAction: '&:has(.resourceCard-content-after:empty)';
 
 $hasDescription: '&:not(#{$noDescription})';
 $hasIllustration: '&:not(#{$noIllustration})';
+$hasDrag: '&:has(.resourceCard-content-before-content-handleButton)';
 $hasAction: '&:not(#{$noAction})';
 
 .resourceCard {
@@ -28,6 +29,10 @@ $hasAction: '&:not(#{$noAction})';
 		&:has(.resourceCard-content-header-title .link.is-disabled),
 		&.is-disabled {
 			@include disabled;
+		}
+
+		#{$hasDrag} {
+			@include hasDrag;
 		}
 
 		#{$noDescription},

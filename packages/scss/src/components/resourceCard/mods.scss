@@ -1,6 +1,7 @@
 @use '@lucca-front/scss/src/components/button/exports' as button;
 
 @mixin noDescription {
+	--components-resourceCard-content-gridTemplate-min: var(--pr-t-spacings-400);
 	--components-resourceCard-content-after-paddingBlock: 0;
 	--components-resourceCard-content-before-alignSelf: center;
 	--components-resourceCard-content-after-alignSelf: center;
@@ -43,4 +44,8 @@
 
 @mixin grid {
 	--components-resourceCardWrapper-display: grid;
+}
+
+@mixin hasDrag {
+	--components-resourceCard-content-gridTemplate-min: var(--pr-t-spacings-400);
 }
