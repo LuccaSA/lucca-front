@@ -51,12 +51,13 @@ Basic.args = {
 	unclearable: false,
 };
 
-const code = `<lu-sortable-list cdkDropList (cdkDropListDropped)="drop($event)" [small]="small()">
+const code = `<lu-sortable-list cdkDropList (cdkDropListDropped)="drop($event)">
 	<lu-sortable-list-item
 		label="Label 1"
 		helperMessage="help 1"
 		[unclearable]="unclearable()"
 		[clickable]="clickable()"
+		[small]="small()"
 		cdkDrag
 	/>
 	<lu-sortable-list-item
@@ -64,6 +65,7 @@ const code = `<lu-sortable-list cdkDropList (cdkDropListDropped)="drop($event)" 
 		helperMessage="help 2"
 		[unclearable]="unclearable()"
 		[clickable]="clickable()"
+		[small]="small()"
 		cdkDrag
 	/>
 </lu-sortable-list>`;

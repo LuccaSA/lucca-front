@@ -45,13 +45,13 @@ export default {
 		}),
 	],
 	render: (args: SortableListBasicStories) => {
-		const small = args.small ? ` small="true"` : '';
+		const small = args.small ? ` small` : '';
 		const clickable = args.clickable ? ` clickable` : '';
 		const unclearable = args.unclearable ? ` unclearable` : '';
 		const label = ` label="${args.label}"`;
 		const helperMessage = args.helperMessage?.length ? ` helperMessage="${args.helperMessage}"` : '';
 		return {
-			template: cleanupTemplate(`<lu-sortable-list${small}>
+			template: cleanupTemplate(`<lu-sortable-list>
   <lu-sortable-list-item${label}${helperMessage}${unclearable}${clickable} />
 	<lu-sortable-list-item${label}${helperMessage}${unclearable}${clickable} />
 	<lu-sortable-list-item${label}${helperMessage}${unclearable}${clickable} />

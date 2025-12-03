@@ -1,8 +1,9 @@
 import { CdkDragHandle } from '@angular/cdk/drag-drop';
-import { booleanAttribute, ChangeDetectionStrategy, Component, input, output, ViewEncapsulation } from '@angular/core';
+import { booleanAttribute, ChangeDetectionStrategy, Component, inject, input, output, ViewEncapsulation } from '@angular/core';
 import { ClearComponent } from '@lucca-front/ng/clear';
 import { IconComponent } from '@lucca-front/ng/icon';
 import { LuTooltipModule } from '@lucca-front/ng/tooltip';
+import { LU_SORTABLE_LIST_INSTANCE } from '../sortable-list.token';
 
 @Component({
 	selector: 'lu-sortable-list-item',
@@ -15,6 +16,7 @@ import { LuTooltipModule } from '@lucca-front/ng/tooltip';
 	host: {
 		class: 'sortableList-item',
 		'[class.mod-clickable]': 'clickable()',
+		'[class.mod-S]': 'small() || listRef.small()',
 		role: 'listitem',
 	},
 })
@@ -24,6 +26,9 @@ export class SortableListItemComponent {
 	clickable = input(false, { transform: booleanAttribute });
 	unclearable = input(false, { transform: booleanAttribute });
 	drag = input(false, { transform: booleanAttribute });
+	small = input(false, { transform: booleanAttribute });
 
 	delete = output<void>();
+
+	listRef = inject(LU_SORTABLE_LIST_INSTANCE);
 }
