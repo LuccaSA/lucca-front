@@ -1,4 +1,9 @@
 <div class="simpleSelect-field">
+	<span class="simpleSelect-field-prefix">
+		@if (prefix()) {
+			<ng-container *luPortal="prefix()" />
+		}
+	</span>
 	<input
 		class="simpleSelect-field-input"
 		type="text"
