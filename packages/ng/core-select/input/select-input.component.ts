@@ -165,7 +165,21 @@ export abstract class ALuSelectInputComponent<TOption, TValue> implements OnDest
 
 	displayerTpl = computed(() => this.valueTpl() || this.optionTpl());
 
-	grouping?: LuOptionGrouping<TOption, unknown>;
+	groupingSignal = signal<LuOptionGrouping<TOption, unknown> | undefined>(undefined);
+
+	/**
+	 * @deprecated use groupingSignal
+	 */
+	get grouping() {
+		return this.groupingSignal();
+	}
+	/**
+	 * @deprecated use groupingSignal
+	 */
+	set grouping(grouping: LuOptionGrouping<TOption, unknown> | undefined) {
+		this.groupingSignal.set(grouping);
+	}
+
 	treeGenerator?: TreeGenerator<TOption, TreeNode<TOption>>;
 
 	@Output() clueChange = new EventEmitter<string>();

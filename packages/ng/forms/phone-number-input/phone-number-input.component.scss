@@ -18,7 +18,9 @@ lu-phone-number-input {
 			flex-grow: 1;
 		}
 	}
+}
 
+@layer components {
 	.phoneNumber-option-flag {
 		vertical-align: top;
 		margin-block-start: var(--pr-t-spacings-50);

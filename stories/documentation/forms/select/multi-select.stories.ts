@@ -10,15 +10,19 @@ import {
 	LuOptionDirective,
 	LuOptionGroupDirective,
 	TreeGroupingFn,
+	ɵLuOptionOutletDirective,
 } from '@lucca-front/ng/core-select';
 import { LuCoreSelectApiV3Directive, LuCoreSelectApiV4Directive } from '@lucca-front/ng/core-select/api';
 import { LuCoreSelectDepartmentsDirective } from '@lucca-front/ng/core-select/department';
 import { LuCoreSelectEstablishmentsDirective } from '@lucca-front/ng/core-select/establishment';
 import { LuCoreSelectJobQualificationsDirective } from '@lucca-front/ng/core-select/job-qualification';
+import { LuCoreSelectOccupationCategoriesDirective } from '@lucca-front/ng/core-select/occupation-category';
 import { LuCoreSelectUsersDirective, provideCoreSelectCurrentUserId } from '@lucca-front/ng/core-select/user';
 import {
 	LuMultiDisplayerDirective,
+	LuMultiSelectContentDisplayerComponent,
 	LuMultiSelectCounterDisplayerComponent,
+	LuMultiSelectDefaultDisplayerComponent,
 	LuMultiSelectDisplayerInputDirective,
 	LuMultiSelectInputComponent,
 	LuMultiSelection,
@@ -301,6 +305,44 @@ export const WithMultiDisplayer = generateStory({
 	},
 });
 
+export const AllAsDefaultValue = generateStory({
+	name: 'With ContentDisplayer',
+	description: "Il est possible de personnaliser le contenu du displayer en utilisant la directive `luMultiDisplayer`. Avec le `ContentDisplayer` il est possible de lui passer n'importe quel contenu",
+	template: `<lu-multi-select
+	#selectRef
+	[clearable]="clearable"
+	[loading]="loading"
+	[(ngModel)]="selectedLegumes"
+	[options]="legumes | filterLegumes:clue"
+	[keepSearchAfterSelection]="keepSearchAfterSelection"
+	(clueChange)="clue = $event"
+>
+		<ng-container *luMultiDisplayer="let values; select: selectRef">
+		@if (values.length === 0) {
+			<lu-multi-select-content-displayer>🥔 All vegetables 🍆</lu-multi-select-content-displayer>
+		} @else {
+			<ng-container *luOptionOutlet="valuesTpl; value: values || []" />
+		}
+	</ng-container>
+</lu-multi-select>`,
+	neededImports: {
+		'@lucca-front/ng/multi-select': [
+			'LuMultiSelectInputComponent',
+			'LuMultiDisplayerDirective',
+			'ɵLuOptionOutletDirective',
+			'MultiSelectDisplayerInputDirective',
+			'MultiSelectContentDisplayerComponent',
+		],
+	},
+	storyPartial: {
+		args: {
+			valuesTpl: LuMultiSelectDefaultDisplayerComponent,
+			selectedLegumes: [],
+			keepSearchAfterSelection: false,
+		},
+	},
+});
+
 export const WithDisplayer = generateStory({
 	name: 'With Displayer',
 	description:
@@ -574,7 +616,21 @@ export const JobQualification = generateStory({
 	},
 	neededImports: {
 		'@lucca-front/ng/multi-select': ['LuMultiSelectInputComponent'],
-		'@lucca-front/ng/core-select/establishment': ['LuCoreSelectJobQualificationsDirective'],
+		'@lucca-front/ng/core-select/job-qualification': ['LuCoreSelectJobQualificationsDirective'],
+	},
+});
+
+export const OccupationCategory = generateStory({
+	name: 'OccupationCategory Select',
+	description: "Pour saisir une catégorie d'occupation, il suffit d'utiliser la directive `occupationCategories`",
+	template: `<lu-multi-select
+	placeholder="Placeholder..."
+	occupationCategories
+	[(ngModel)]="selectedOccupationCategories"
+/>`,
+	neededImports: {
+		'@lucca-front/ng/multi-select': ['LuMultiSelectInputComponent'],
+		'@lucca-front/ng/core-select/occupation-category': ['LuCoreSelectOccupationCategoriesDirective'],
 	},
 });
 
@@ -767,6 +823,7 @@ const meta: Meta<LuMultiSelectInputStoryComponent> = {
 				SortLegumesPipe,
 				LuMultiSelectInputComponent,
 				LuMultiDisplayerDirective,
+				ɵLuOptionOutletDirective,
 				LuMultiSelectWithSelectAllDirective,
 				LuOptionDirective,
 				LuOptionGroupDirective,
@@ -779,10 +836,12 @@ const meta: Meta<LuMultiSelectInputStoryComponent> = {
 				LuCoreSelectDepartmentsDirective,
 				LuCoreSelectUsersDirective,
 				LuCoreSelectJobQualificationsDirective,
+				LuCoreSelectOccupationCategoriesDirective,
 				LuCoreSelectPanelHeaderDirective,
 				LuDisabledOptionDirective,
 				LuMultiSelectDisplayerInputDirective,
 				LuMultiSelectCounterDisplayerComponent,
+				LuMultiSelectContentDisplayerComponent,
 				AsyncPipe,
 				TreeSelectDirective,
 				StoryModelDisplayComponent,

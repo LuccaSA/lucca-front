@@ -14,11 +14,12 @@ import { LuCoreSelectApiV3Directive, LuCoreSelectApiV4Directive } from '@lucca-f
 import { LuCoreSelectDepartmentsDirective } from '@lucca-front/ng/core-select/department';
 import { LuCoreSelectEstablishmentsDirective } from '@lucca-front/ng/core-select/establishment';
 import { LuCoreSelectJobQualificationsDirective } from '@lucca-front/ng/core-select/job-qualification';
+import { LuCoreSelectOccupationCategoriesDirective } from '@lucca-front/ng/core-select/occupation-category';
 import { LuCoreSelectUserOptionDirective, LuCoreSelectUsersDirective, provideCoreSelectCurrentUserId } from '@lucca-front/ng/core-select/user';
 import { IconComponent } from '@lucca-front/ng/icon';
 import { LuSimpleSelectInputComponent } from '@lucca-front/ng/simple-select';
 import { TreeSelectDirective } from '@lucca-front/ng/tree-select';
-import { LuUserDisplayPipe } from '@lucca-front/ng/user';
+import { LuUserDisplayPipe, LuUserPictureComponent } from '@lucca-front/ng/user';
 import { applicationConfig, Meta, moduleMetadata } from '@storybook/angular';
 import { HiddenArgType } from 'stories/helpers/common-arg-types';
 import { createTestStory, getStoryGenerator, useDocumentationStory } from 'stories/helpers/stories';
@@ -473,6 +474,28 @@ export const UserCustomTemplate = generateStory({
 	},
 });
 
+export const UserAvatarTemplate = generateStory({
+	name: 'User Picture',
+	description: `Personnalisation de l'affichage des user dans les options avec le lu-user-picture.`,
+	template: `<lu-simple-select
+	placeholder="Placeholder…"
+	users
+	#usersRef="luUsers"
+	[(ngModel)]="selectedUser"
+>
+	<ng-container *luUserOption="let user; usersRef: usersRef">
+		<lu-user-picture size="XS" [user]="user" aria-hidden="true" />
+		<span translate="no">{{ user | luUserDisplay }}</span>
+	</ng-container>
+</lu-simple-select>
+	`,
+	neededImports: {
+		'@lucca-front/ng/simple-select': ['LuSimpleSelectInputComponent'],
+		'@lucca-front/ng/core-select/user': ['LuCoreSelectUserOptionDirective', 'LuCoreSelectUsersDirective', 'provideCoreSelectCurrentUserId'],
+		'@lucca-front/ng/user': ['LuUserPictureComponent'],
+	},
+});
+
 export const FormerUser = generateStory({
 	name: 'User Select (with former)',
 	description: "Pour saisir des utilisateurs, il suffit d'utiliser la directive `users`",
@@ -579,7 +602,21 @@ export const JobQualification = generateStory({
 ></lu-simple-select>`,
 	neededImports: {
 		'@lucca-front/ng/simple-select': ['LuSimpleSelectInputComponent'],
-		'@lucca-front/ng/core-select/establishment': ['LuCoreSelectJobQualificationsDirective'],
+		'@lucca-front/ng/core-select/job-qualification': ['LuCoreSelectJobQualificationsDirective'],
+	},
+});
+
+export const OccupationCategory = generateStory({
+	name: 'OccupationCategory Select',
+	description: "Pour saisir une catégorie socioprofessionnelle (CSP), il suffit d'utiliser la directive `occupationCategories`",
+	template: `<lu-simple-select
+	placeholder="Placeholder…"
+	occupationCategories
+	[(ngModel)]="selectedOccupationCategories"
+></lu-simple-select>`,
+	neededImports: {
+		'@lucca-front/ng/simple-select': ['LuSimpleSelectInputComponent'],
+		'@lucca-front/ng/core-select/occupation-category': ['LuCoreSelectOccupationCategoriesDirective'],
 	},
 });
 
@@ -719,11 +756,13 @@ const meta: Meta<LuSimpleSelectInputStoryComponent> = {
 				LuCoreSelectUsersDirective,
 				LuCoreSelectUserOptionDirective,
 				LuCoreSelectJobQualificationsDirective,
+				LuCoreSelectOccupationCategoriesDirective,
 				LuCoreSelectPanelHeaderDirective,
 				LuDisabledOptionDirective,
 				LuOptionGroupDirective,
 				TreeSelectDirective,
 				IconComponent,
+				LuUserPictureComponent,
 			],
 		}),
 		applicationConfig({ providers: [provideHttpClient(), provideCoreSelectCurrentUserId(() => 66)] }),

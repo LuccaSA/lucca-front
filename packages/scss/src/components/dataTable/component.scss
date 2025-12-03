@@ -19,7 +19,7 @@
 		.dataTableWrapper {
 			border-radius: var(--components-dataTable-borderRadius);
 			border: 1px solid var(--commons-border-200);
-			overflow: var(--components-dataTable-overflow);
+			overflow: auto;
 			background-color: var(--components-dataTable-cell-background);
 			contain: paint; // Fix overflow on webkit when table has scroll
 			display: block;
@@ -80,6 +80,10 @@
 
 			&:first-child {
 				inline-size: var(--components-dataTable-cellFirst-width);
+
+				.checkboxField {
+					--component-checkboxField-top: 0;
+				}
 			}
 		}
 
@@ -100,12 +104,6 @@
 
 		.dataTable-body-row-cell {
 			vertical-align: var(--components-dataTable-cell-verticalAlign);
-
-			&:first-child {
-				&:has(.checkboxField-input) {
-					padding-bottom: var(--pr-t-spacings-150);
-				}
-			}
 		}
 
 		.dataTable-foot-row-cell {
@@ -116,6 +114,7 @@
 			display: flex;
 			gap: var(--pr-t-spacings-100);
 			align-items: flex-start;
+			font-weight: var(--pr-t-font-fontWeight-semibold);
 		}
 
 		.dataTable-body-row-cell-expand-button.button {
