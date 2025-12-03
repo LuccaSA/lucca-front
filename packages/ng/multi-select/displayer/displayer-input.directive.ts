@@ -1,11 +1,12 @@
 import { DestroyRef, Directive, ElementRef, HostBinding, HostListener, inject, OnInit } from '@angular/core';
 import { takeUntilDestroyed, toSignal } from '@angular/core/rxjs-interop';
-import { getIntl } from '@lucca-front/ng/core';
+import { getIntl, isNotNil } from '@lucca-front/ng/core';
 import { ILuOptionContext, LU_OPTION_CONTEXT } from '@lucca-front/ng/core-select';
 import { InputDirective } from '@lucca-front/ng/form-field';
 import { of } from 'rxjs';
-import { startWith, switchMap } from 'rxjs/operators';
+import { map, startWith, switchMap } from 'rxjs/operators';
 import { LuMultiSelectInputComponent } from '../input';
+import { LuMultiSelectContentDisplayerComponent } from '../public-api';
 import { LU_MULTI_SELECT_TRANSLATIONS } from '../select.translate';
 
 @Directive({
@@ -21,6 +22,7 @@ import { LU_MULTI_SELECT_TRANSLATIONS } from '../select.translate';
 export class LuMultiSelectDisplayerInputDirective<T> implements OnInit {
 	intl = getIntl(LU_MULTI_SELECT_TRANSLATIONS);
 	select = inject<LuMultiSelectInputComponent<T>>(LuMultiSelectInputComponent);
+	contentDisplayer = inject(LuMultiSelectContentDisplayerComponent, { optional: true });
 
 	context = inject<ILuOptionContext<T[]>>(LU_OPTION_CONTEXT);
 
@@ -50,7 +52,7 @@ export class LuMultiSelectDisplayerInputDirective<T> implements OnInit {
 
 	@HostBinding('placeholder')
 	get placeholder() {
-		return this.#placeholder() ? this.#placeholder() : this.intl.placeholder;
+		return this.#placeholder();
 	}
 
 	@HostBinding('readonly')
@@ -73,7 +75,7 @@ export class LuMultiSelectDisplayerInputDirective<T> implements OnInit {
 				if ((options || []).length > 0) {
 					return of('');
 				}
-				return this.select.placeholder$;
+				return this.select.placeholder$.pipe(map((placeholder) => ((isNotNil(placeholder) && placeholder.length > 0) || this.contentDisplayer ? placeholder : this.intl.placeholder)));
 			}),
 		),
 	);
