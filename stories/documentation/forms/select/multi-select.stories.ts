@@ -265,7 +265,6 @@ export const Basic = generateStory({
 		},
 		argTypes: {
 			clearable: { control: { type: 'boolean' } },
-			placeholder: { control: { type: 'text' } },
 			maxValuesShown: { control: { type: 'number' } },
 		},
 	},
@@ -709,7 +708,6 @@ export const testDynamicDisabled = generateStory({
 		} as any,
 		argTypes: {
 			clearable: { control: { type: 'boolean' } },
-			placeholder: { control: { type: 'text' } },
 			maxValuesShown: { control: { type: 'number' } },
 		},
 	},
@@ -816,7 +814,6 @@ const meta: Meta<LuMultiSelectInputStoryComponent> = {
 		}),
 	],
 	args: {
-		placeholder: 'Placeholder...',
 		legumes: allLegumes,
 		clearable: true,
 		keepSearchAfterSelection: false,

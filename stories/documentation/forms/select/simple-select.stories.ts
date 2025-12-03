@@ -80,7 +80,6 @@ export const Basic = generateStory({
 	description: '',
 	template: `<lu-simple-select
 	#selectRef
-	[placeholder]="placeholder"
 	[options]="legumes | filterLegumes:clue"
 	(clueChange)="clue = $event"
 	[clearable]="clearable"
@@ -96,7 +95,6 @@ export const Basic = generateStory({
 	storyPartial: {
 		argTypes: {
 			clearable: { control: { type: 'boolean' } },
-			placeholder: { control: { type: 'text' } },
 		},
 	},
 });
@@ -541,7 +539,6 @@ export const Department = generateStory({
 	name: 'Department Select',
 	description: "Pour saisir un département, il suffit d'utiliser la directive `departments`",
 	template: `<lu-simple-select
-	placeholder="Placeholder…"
 	departments
 	[(ngModel)]="selectedDepartment"
 ></lu-simple-select>`,
@@ -555,7 +552,6 @@ export const JobQualification = generateStory({
 	name: 'JobQualification Select',
 	description: "Pour saisir une qualification, il suffit d'utiliser la directive `jobQualifications`",
 	template: `<lu-simple-select
-	placeholder="Placeholder…"
 	jobQualifications
 	[(ngModel)]="selectedJobQualifications"
 ></lu-simple-select>`,
@@ -570,7 +566,6 @@ export const GroupBy = generateStory({
 	description: "Pour grouper les options, il suffit d'utiliser la directive `luOptionGroup`.",
 	template: `<lu-simple-select
 	#selectRef
-	placeholder="Placeholder…"
 	[(ngModel)]="selectedLegume"
 	[options]="legumes | filterLegumes:clue | sortLegumes:(clue ? ['name', legumeColor] : [legumeColor])"
 	(clueChange)="clue = $event"
@@ -597,7 +592,6 @@ export const AddOption = generateStory({
 	template: `<div class="pr-u-marginBlockEnd200">There is <span data-testid="legumes-count">{{ legumes.length }}</span> legumes in the list.</div>
 <lu-simple-select
 	#selectRef
-	placeholder="Placeholder…"
 	[(ngModel)]="selectedLegume"
 	[options]="legumes | filterLegumes:clue"
 	[addOptionLabel]="addOptionLabel || ('Ajouter ' + (clue || 'un légume'))"
@@ -653,7 +647,6 @@ export const CustomPanelHeader = generateStory({
 	description: "Pour customiser l'en-tête du panel, il suffit d'utiliser la directive `luCoreSelectPanelHeader`.",
 	template: `<lu-simple-select
 	#selectRef
-	placeholder="Placeholder…"
 	[(ngModel)]="selectedLegume"
 	[options]="legumes | filterLegumes:clue"
 	(clueChange)="clue = $event"
@@ -712,7 +705,6 @@ const meta: Meta<LuSimpleSelectInputStoryComponent> = {
 		applicationConfig({ providers: [provideHttpClient(), provideCoreSelectCurrentUserId(() => 66)] }),
 	],
 	args: {
-		placeholder: 'Placeholder...',
 		legumes: allLegumes,
 		clearable: true,
 		loading: false,
