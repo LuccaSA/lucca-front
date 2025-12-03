@@ -59,5 +59,7 @@
 @layer components {
 	.multipleSelect-displayer-filter {
 		min-inline-size: 0;
+		display: flex;
+		gap: 0.5ch;
 	}
 }
