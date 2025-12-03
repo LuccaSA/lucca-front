@@ -6,8 +6,8 @@ import { InputDirective } from '@lucca-front/ng/form-field';
 import { of } from 'rxjs';
 import { map, startWith, switchMap } from 'rxjs/operators';
 import { LuMultiSelectInputComponent } from '../input';
-import { LuMultiSelectContentDisplayerComponent } from '../public-api';
 import { LU_MULTI_SELECT_TRANSLATIONS } from '../select.translate';
+import { LuMultiSelectContentDisplayerComponent } from './content-displayer/content-displayer.component';
 
 @Directive({
 	selector: '[luMultiSelectDisplayerInput]',
