@@ -31,7 +31,7 @@ class DataTableDraggableStory {
 
 	listItem: Array<{ id: number; header: string; cell: string }> = [
 		{ id: 1, header: 'Header 1', cell: 'cell 1' },
-		{ id: 2, header: 'Header 2', cell: 'cell 2' },
+		{ id: 2, header: 'Header 2', cell: 'cell 2 cell 2 cell 2' },
 		{ id: 3, header: 'Header 3', cell: 'cell 3' },
 	];
 
@@ -59,11 +59,11 @@ Basic.args = {
 	selectable: false,
 };
 
-const code = `<lu-data-table drag>
+const code = `<lu-data-table layoutFixed drag>
 	<thead luDataTableHead>
 		<tr luDataTableRow>
 			<th luDataTableCell>Header</th>
-			<th luDataTableCell>Cell</th>
+			<th luDataTableCell inlineSize="10rem">Cell</th>
 		</tr>
 	</thead>
 	<tbody luDataTableBody cdkDropList (cdkDropListDropped)="drop($event)">

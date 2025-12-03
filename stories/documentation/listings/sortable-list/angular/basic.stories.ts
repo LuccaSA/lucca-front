@@ -51,7 +51,7 @@ export default {
 		const label = ` label="${args.label}"`;
 		const helperMessage = args.helperMessage?.length ? ` helperMessage="${args.helperMessage}"` : '';
 		return {
-			template: cleanupTemplate(`<lu-sortable-list>
+			template: cleanupTemplate(`<lu-sortable-list${small}>
   <lu-sortable-list-item${label}${helperMessage}${unclearable}${clickable} />
 	<lu-sortable-list-item${label}${helperMessage}${unclearable}${clickable} />
 	<lu-sortable-list-item${label}${helperMessage}${unclearable}${clickable} />

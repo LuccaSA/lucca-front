@@ -1,8 +1,8 @@
-<lu-data-table [selectable]="selectable()" drag>
+<lu-data-table [selectable]="selectable()" layoutFixed drag>
 	<thead luDataTableHead>
 		<tr luDataTableRow>
 			<th luDataTableCell>Header</th>
-			<th luDataTableCell>Cell</th>
+			<th luDataTableCell inlineSize="10rem">Cell</th>
 		</tr>
 	</thead>
 	<tbody luDataTableBody cdkDropList (cdkDropListDropped)="drop($event)">

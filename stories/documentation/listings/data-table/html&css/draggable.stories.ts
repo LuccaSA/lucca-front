@@ -53,7 +53,7 @@ function getTemplate(args: DraggableStory): string {
 	</table>
 </div>
 
-<tr class="dataTable-body-row mod-draggable cdk-drag-preview" aria-hidden="true" style="inline-size: 937px; block-size: 44px">
+<tr class="dataTable-body-row mod-draggable cdk-drag-preview mod-layoutFixed" aria-hidden="true" style="inline-size: 937px; block-size: 44px">
 	<td class="dataTable-body-row-cell" aria-hidden="true">
 		<span class="button dataTable-body-row-cell-drag">
 			<span aria-hidden="true" class="lucca-icon icon-dotsDrag"></span>
@@ -61,7 +61,7 @@ function getTemplate(args: DraggableStory): string {
 	</td>
 	<td class="dataTable-body-row-cell">Table cell</td>
 	<td class="dataTable-body-row-cell">Table cell</td>
-	<td class="dataTable-body-row-cell">Table cell</td>
+	<td class="dataTable-body-row-cell" [attr.style]="'--dataTable-layoutFixed-width: 10rem'">Table cell Table cell</td>
 </tr>`;
 }
 

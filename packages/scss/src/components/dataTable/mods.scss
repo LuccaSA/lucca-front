@@ -68,12 +68,14 @@
 }
 
 @mixin draggable {
+	--components-dataTable-cellFirst-width: 2.5rem;
+
 	.dataTable-head-row-cell,
 	.dataTable-body-row-cell,
 	.dataTable-foot-row-cell {
 		&:first-child {
-			--components-dataTable-cellFirst-width: 2.5rem;
-
+			inline-size: var(--components-dataTable-cellFirst-width);
+			max-inline-size: var(--components-dataTable-cellFirst-width);
 			padding-inline: var(--pr-t-spacings-75);
 		}
 	}

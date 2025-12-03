@@ -1,4 +1,5 @@
 @use '@lucca-front/scss/src/commons/utils/form';
+@use '@lucca-front/scss/src/components/dataTable/exports' as dataTable;
 
 .cdk-drag-placeholder {
 	box-shadow: form.fakeBorderOverlay(var(--palettes-neutral-200));
@@ -73,11 +74,19 @@
 	cursor: grabbing;
 
 	&.dataTable-body-row {
+		@include dataTable.draggable;
+
 		display: table;
+
+		&.mod-layoutFixed {
+			table-layout: fixed;
+		}
 
 		.dataTable-body-row-cell {
 			--components-dataTable-cell-background: transparent;
 			--components-dataTable-cell-shadow: none;
+
+			@include dataTable.cellInlineSize;
 		}
 	}
 }
