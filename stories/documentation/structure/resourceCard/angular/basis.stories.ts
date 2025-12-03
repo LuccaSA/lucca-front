@@ -115,9 +115,7 @@ export default {
 		const actionLinkAttr = args.disabled ? `` : ` href="#"`;
 		const actionButtonAttr = args.disabled ? `` : ` (click)="console.log()"`;
 		const actionTpl =
-			args.headingAction === 'a'
-				? `<a${actionLinkAttr} luResourceCardAction>${args.heading}</a>`
-				: `<button${actionButtonAttr} type="button" luTooltipOnlyForDisplay luTooltipWhenEllipsis luResourceCardAction>${args.heading}</button>`;
+			args.headingAction === 'a' ? `<a${actionLinkAttr} luResourceCardAction>${args.heading}</a>` : `<button${actionButtonAttr} type="button" luResourceCardAction>${args.heading}</button>`;
 		const headingLevelAttr = args.headingLevel !== 3 ? ` headingLevel="${args.headingLevel}"` : ``;
 		const headingStyleAttr = args.headingStyle !== 3 ? ` headingStyle="${args.headingStyle}"` : ``;
 		const numericBadgeTpl = args.headingNumericBadge ? `<lu-numeric-badge value="88" />` : ``;

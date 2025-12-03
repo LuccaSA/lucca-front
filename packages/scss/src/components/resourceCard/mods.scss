@@ -11,7 +11,7 @@
 }
 
 @mixin hasDescriptionHasIllustration {
-	--components-resourceCard-content-before-paddingBlock: var(--pr-t-spacings-50);
+	// --components-resourceCard-content-before-paddingBlock: var(--pr-t-spacings-50);
 }
 
 @mixin narrow {
@@ -48,4 +48,8 @@
 
 @mixin hasDrag {
 	--components-resourceCard-content-gridTemplate-min: var(--pr-t-spacings-400);
+}
+
+@mixin hadDragHasIllustration {
+	--components-resourceCard-content-gridTemplate-min: auto;
 }

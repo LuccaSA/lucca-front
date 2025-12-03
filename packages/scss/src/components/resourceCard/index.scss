@@ -3,11 +3,11 @@
 
 $noDescription: '&:has(.resourceCard-content-description:empty)';
 $noDescriptionHTML: '&:not(:has(.resourceCard-content-description))';
-$noIllustration: '&:has(.resourceCard-content-before-content-illustration:empty)';
 $noAction: '&:has(.resourceCard-content-after:empty)';
 
-$hasDescription: '&:not(#{$noDescription})';
+$noIllustration: '&:has(.resourceCard-content-before-content-illustration:empty)';
 $hasIllustration: '&:not(#{$noIllustration})';
+$hasDescription: '&:not(#{$noDescription})';
 $hasDrag: '&:has(.resourceCard-content-before-content-handleButton)';
 $hasAction: '&:not(#{$noAction})';
 
@@ -32,6 +32,10 @@ $hasAction: '&:not(#{$noAction})';
 
 		#{$hasDrag} {
 			@include hasDrag;
+
+			#{$hasIllustration} {
+				@include hadDragHasIllustration;
+			}
 		}
 
 		#{$noDescription},
@@ -39,11 +43,13 @@ $hasAction: '&:not(#{$noAction})';
 			@include noDescription;
 		}
 
-		#{$hasDescription} {
-			#{$hasIllustration} {
-				@include hasDescriptionHasIllustration;
-			}
-		}
+
+
+		// #{$hasDescription} {
+		// 	#{$hasIllustration} {
+		// 		@include hasDescriptionHasIllustration;
+		// 	}
+		// }
 
 		@include container.max('XXS', $name: 'resourceCard') {
 			@include narrow;
