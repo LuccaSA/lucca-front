@@ -3,13 +3,9 @@
 
 $noDescription: '&:has(.resourceCard-content-description:empty)';
 $noDescriptionHTML: '&:not(:has(.resourceCard-content-description))';
-$noAction: '&:has(.resourceCard-content-after:empty)';
-
 $noIllustration: '&:has(.resourceCard-content-before-content-illustration:empty)';
 $hasIllustration: '&:not(#{$noIllustration})';
-$hasDescription: '&:not(#{$noDescription})';
 $hasDrag: '&:has(.resourceCard-content-before-content-handleButton)';
-$hasAction: '&:not(#{$noAction})';
 
 .resourceCard {
 	@layer components {
@@ -42,14 +38,6 @@ $hasAction: '&:not(#{$noAction})';
 		#{$noDescriptionHTML} {
 			@include noDescription;
 		}
-
-
-
-		// #{$hasDescription} {
-		// 	#{$hasIllustration} {
-		// 		@include hasDescriptionHasIllustration;
-		// 	}
-		// }
 
 		@include container.max('XXS', $name: 'resourceCard') {
 			@include narrow;
