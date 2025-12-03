@@ -5,6 +5,15 @@ import { LuOptionPickerAdvancedComponent, LuOptionPickerComponent } from './pick
 import { LuOptionPlaceholderComponent } from './placeholder/index';
 import { LuOptionSelectAllComponent } from './selector/index';
 
+/**
+ * @deprecated use `LuOptionItemComponent, LuOptionPickerComponent, LuOptionPickerAdvancedComponent, LuOptionPagerComponent,
+		LuOptionFeederComponent,
+		LuOptionSearcherComponent,
+		LuForOptionsDirective,
+		LuForGroupsDirective,
+		LuOptionSelectAllComponent,
+		LuOptionPlaceholderComponent` instead
+ */
 @NgModule({
 	imports: [
 		LuOptionItemComponent,

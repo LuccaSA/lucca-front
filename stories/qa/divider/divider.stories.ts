@@ -1,9 +1,11 @@
 import { Component } from '@angular/core';
+import { DividerComponent } from '@lucca-front/ng/divider';
 import { Meta, StoryFn } from '@storybook/angular';
 
 @Component({
 	selector: 'divider-stories',
 	templateUrl: './divider.stories.html',
+	imports: [DividerComponent],
 })
 class DividerStory {}
 

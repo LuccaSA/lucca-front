@@ -1,4 +1,5 @@
 import { Component } from '@angular/core';
+import { GridColumnComponent, GridComponent } from '@lucca-front/ng/grid';
 import { Meta, StoryFn } from '@storybook/angular';
 
 @Component({
@@ -18,6 +19,7 @@ import { Meta, StoryFn } from '@storybook/angular';
 			}
 		`,
 	],
+	imports: [GridColumnComponent, GridComponent],
 })
 class GridStory {}
 

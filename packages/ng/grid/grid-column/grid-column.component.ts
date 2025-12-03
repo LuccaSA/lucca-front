@@ -2,7 +2,7 @@ import { Component, computed, input, numberAttribute, ViewEncapsulation } from '
 import { ResponsiveConfig } from '@lucca-front/ng/core';
 
 @Component({
-	selector: 'lu-grid-column',
+	selector: 'lu-grid-column, [lu-grid-column]',
 	template: '<ng-content />',
 	encapsulation: ViewEncapsulation.None,
 	host: {

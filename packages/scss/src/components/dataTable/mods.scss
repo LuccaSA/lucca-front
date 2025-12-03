@@ -95,7 +95,7 @@
 
 @mixin actions {
 	padding-block: 0;
-	padding-inline: 0 var(--pr-t-spacings-50);
+	padding-inline: var(--pr-t-spacings-50);
 	text-align: end;
 	white-space: nowrap;
 
@@ -142,7 +142,7 @@
 	}
 }
 
-@mixin cellFixedWidth {
+@mixin cellInlineSize {
 	min-inline-size: var(--dataTable-layoutFixed-width, auto);
 	inline-size: var(--dataTable-layoutFixed-width, auto);
 }
@@ -152,7 +152,7 @@
 		.dataTable-head-row-cell,
 		.dataTable-body-row-cell,
 		.dataTable-foot-row-cell {
-			@include cellFixedWidth;
+			@include cellInlineSize;
 		}
 	}
 
@@ -162,7 +162,7 @@
 				.dataTable-head-row-cell,
 				.dataTable-body-row-cell,
 				.dataTable-foot-row-cell {
-					@include cellFixedWidth;
+					@include cellInlineSize;
 				}
 			}
 		}
