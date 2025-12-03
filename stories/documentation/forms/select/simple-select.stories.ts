@@ -15,6 +15,7 @@ import { LuCoreSelectDepartmentsDirective } from '@lucca-front/ng/core-select/de
 import { LuCoreSelectEstablishmentsDirective } from '@lucca-front/ng/core-select/establishment';
 import { LuCoreSelectJobQualificationsDirective } from '@lucca-front/ng/core-select/job-qualification';
 import { LuCoreSelectUserOptionDirective, LuCoreSelectUsersDirective, provideCoreSelectCurrentUserId } from '@lucca-front/ng/core-select/user';
+import { IconComponent } from '@lucca-front/ng/icon';
 import { LuSimpleSelectInputComponent } from '@lucca-front/ng/simple-select';
 import { TreeSelectDirective } from '@lucca-front/ng/tree-select';
 import { LuUserDisplayPipe } from '@lucca-front/ng/user';
@@ -22,7 +23,6 @@ import { applicationConfig, Meta, moduleMetadata } from '@storybook/angular';
 import { HiddenArgType } from 'stories/helpers/common-arg-types';
 import { createTestStory, getStoryGenerator, useDocumentationStory } from 'stories/helpers/stories';
 import { expect, screen, userEvent, within } from 'storybook/test';
-import { IconComponent } from '@lucca-front/ng/icon';
 import { waitForAngular } from '../../../helpers/test';
 import { LuCoreSelectLegumesDirective } from './custom-api-example.component';
 import { LuCoreSelectCustomEstablishmentsDirective } from './custom-establishment-example.component';
@@ -182,8 +182,12 @@ export const WithPrefix = generateStory({
 	[(ngModel)]="selectedLegume"
 	[options]="legumes | filterLegumes:clue"
 	(clueChange)="clue = $event"
-	prefix="🥗"
+	[prefix]="test"
 >
+
+<ng-template #test>
+	<lu-icon icon="heart" alt="coucou" />
+</ng-template>
 </lu-simple-select>`,
 	neededImports: {
 		'@lucca-front/ng/icon': ['IconComponent'],
