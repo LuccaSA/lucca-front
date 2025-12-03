@@ -10,10 +10,6 @@
 																									/auto   1fr    auto;
 }
 
-@mixin hasDescriptionHasIllustration {
-	// --components-resourceCard-content-before-paddingBlock: var(--pr-t-spacings-50);
-}
-
 @mixin narrow {
 	--components-resourceCard-content-before-paddingBlock: 0;
 	--components-resourceCard-content-after-paddingBlock: 0;
