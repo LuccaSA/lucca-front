@@ -25,22 +25,6 @@
 			}
 		}
 
-		// &:not(.mod-filterPill) {
-		// 	.multipleSelect-displayer {
-		// 		&.mod-filter {
-		// 			@include displayerFilter;
-
-		// 			&.is-filled {
-		// 				@include displayerFilterFilled;
-		// 			}
-
-		// 			&:has([aria-expanded='true']):not(:has(:placeholder-shown)) {
-		// 				@include displayerFilterExpanded;
-		// 			}
-		// 		}
-		// 	}
-		// }
-
 		&.is-selected {
 			@include selected;
 		}
