@@ -24,6 +24,7 @@
 
 		.simpleSelect-field-prefix {
 			&:not(:empty) {
+				display: flex;
 				margin-inline-end: var(--pr-t-spacings-50);
 			}
 		}

@@ -182,11 +182,10 @@ export const WithPrefix = generateStory({
 	[(ngModel)]="selectedLegume"
 	[options]="legumes | filterLegumes:clue"
 	(clueChange)="clue = $event"
-	[prefix]="test"
+	[prefix]="prefix"
 >
-
-<ng-template #test>
-	<lu-icon icon="heart" alt="coucou" />
+<ng-template #prefix>
+	<lu-icon icon="foodSandwich" alt="Sandwich" />
 </ng-template>
 </lu-simple-select>`,
 	neededImports: {
