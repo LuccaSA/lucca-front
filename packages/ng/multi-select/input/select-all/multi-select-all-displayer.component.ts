@@ -23,8 +23,6 @@ import { MULTI_SELECT_WITH_SELECT_ALL_CONTEXT } from './select-all.models';
 						</lu-chip>
 					} @else {
 						<lu-chip class="multipleSelect-displayer-chip" unkillable>{{ displayerCount() }} {{ displayerLabel() }}</lu-chip>
-						<!-- <lu-numeric-badge disableTooltip class="multipleSelect-displayer-numericBadge" [value]="" />
-						<span class="multipleSelect-displayer-label"> </span> -->
 					}
 				</div>
 			}
