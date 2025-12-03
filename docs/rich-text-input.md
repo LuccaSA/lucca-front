@@ -1,5 +1,7 @@
 ### Configuration
 
+#### Dépendances
+
 Avant toute utilisation de `lu-rich-text-input`, il est nécessaire d'ajouter les `peerDependencies` suivantes à votre projet :
 
 ```sh
@@ -20,6 +22,13 @@ npm i @lexical/html
 npm i @lexical/markdown
 ```
 
+- Plain text
+
+```sh
+npm i @lexical/plain-text
+```
+
+#### Formats d'entrée/sortie
 Avant toute utilisation du composant, il est nécessaire de définir le formateur à utiliser.
 Trois formateurs par défaut sont disponibles, à provide au niveau du composant parent de l'input :
 
@@ -39,7 +48,23 @@ import { provideLuRichTextMarkdownFormatter } from '@lucca-front/ng/forms/rich-t
 provideLuRichTextMarkdownFormatter(transformers);
 ```
 
-Exemple d'utilisation :
+- Plain Text
+
+Ce formateur accepte en paramètres une liste optionnelle de `PlainTextTransformer` pour les noeuds custom.
+
+Il peut être utilisé dans des contextes où le formatage riche n'est pas désiré, mais où l'on souhaite tout de même bénéficier d'un outil en particulier (l'outil "Tags" par exemple).
+
+En conséquent:
+- La plupart des outils n'auront aucun effet sur le contenu de l'éditeur.
+- Il n'intègre pas les raccourcis clavier de formatage de texte (gras, italique, listes, etc...).
+- La récupération du contenu se fait en texte brut lors du copier/coller.
+
+```ts
+import { provideLuRichTextPlainTextFormatter } from '@lucca-front/ng/forms/rich-text-input/formatters/plain-text';
+provideLuRichTextPlainTextFormatter(transformers);
+```
+
+#### Exemple d'utilisation
 
 ```angular2html
 <lu-form-field label="Rich Text">
@@ -152,10 +177,12 @@ Si le contenu en entrée de l'éditeur contient des tags non reconnus par l'outi
 <lu-rich-text-plugin-tag [tags]="[{ key: 'tag1', description: 'Premier tag'}, { key: 'tag2', description: 'Second tag'}]" />
 ```
 
-Pour gérer les tags en markdown, il est nécessaire de fournir le transformer `TAGS` au formateur.
+Pour gérer les tags en markdown ou en plain-text, il est nécessaire de fournir le transformer approprié.
 
 ```ts
 provideLuRichTextMarkdownFormatter([...DEFAULT_MARKDOWN_TRANSFORMERS, TAGS]);
+
+provideLuRichTextPlainTextFormatter([PLAINTEXT_TAGS]);
 ```
 
 ### Ajout d'outils personnalisés
