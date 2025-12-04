@@ -88,6 +88,11 @@
 
 			@include dataTable.cellInlineSize;
 		}
+
+		&.mod-selectable {
+			@include dataTable.selectableDraggable;
+		}
+
 	}
 }
 
