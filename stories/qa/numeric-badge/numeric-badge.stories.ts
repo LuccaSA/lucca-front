@@ -1,10 +1,12 @@
 import { Component } from '@angular/core';
+import { NumericBadgeComponent } from '@lucca-front/ng/numeric-badge';
 import { Meta, StoryFn, moduleMetadata } from '@storybook/angular';
 
 @Component({
 	selector: 'numeric-badge-stories',
 	templateUrl: './numeric-badge.stories.html',
 	styles: ['.numericBadge::after { animation-play-state: paused; }'],
+	imports: [NumericBadgeComponent],
 })
 class NumericBadgeStory {}
 

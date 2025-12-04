@@ -36,6 +36,26 @@
 			@include chip.S;
 		}
 	}
+<<<<<<< HEAD
+=======
+}
+
+@mixin displayerFilter {
+	display: grid;
+
+	.multipleSelect-displayer-filter {
+		grid-column-start: 1;
+		grid-row-start: 1;
+		display: flex;
+		gap: var(--pr-t-spacings-50);
+		min-inline-size: 0;
+	}
+
+	.multipleSelect-displayer-search {
+		grid-column-start: 1;
+		grid-row-start: 1;
+	}
+>>>>>>> ce48e2a94ec102b0cc7822f3e2fc4981f212469f
 }
 
 @mixin filterPill {

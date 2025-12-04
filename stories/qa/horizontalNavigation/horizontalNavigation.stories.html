@@ -1,133 +1,185 @@
-<!-- Basics -->
-<section class="contentSection">
-	<h2>Horizontal navigation</h2>
-	<div class="horizontalNavigation">
-		<ul class="horizontalNavigation-list">
-			<li class="horizontalNavigation-list-item">
-				<a class="horizontalNavigation-list-item-action" href="#" aria-current="page">Page</a>
-			</li>
-			<li class="horizontalNavigation-list-item">
-				<a class="horizontalNavigation-list-item-action" href="#">Page</a>
-			</li>
-			<li class="horizontalNavigation-list-item">
-				<a class="horizontalNavigation-list-item-action" href="#">Page</a>
-			</li>
-		</ul>
-	</div>
-</section>
-
-<section class="contentSection">
-	<h2>Horizontal navigation with buttons</h2>
-	<div class="horizontalNavigation">
-		<ul class="horizontalNavigation-list">
-			<li class="horizontalNavigation-list-item">
-				<button type="button" class="horizontalNavigation-list-item-action" aria-current="page">Page</button>
-			</li>
-			<li class="horizontalNavigation-list-item">
-				<button type="button" class="horizontalNavigation-list-item-action">Page</button>
-			</li>
-			<li class="horizontalNavigation-list-item">
-				<button type="button" class="horizontalNavigation-list-item-action">Page</button>
-			</li>
-		</ul>
-	</div>
-</section>
-
-<!-- Small -->
-<section class="contentSection">
-	<h2>Horizontal navigation</h2>
-	<div class="horizontalNavigation mod-S">
-		<ul class="horizontalNavigation-list">
-			<li class="horizontalNavigation-list-item">
-				<a class="horizontalNavigation-list-item-action" href="#" aria-current="page">Page</a>
-			</li>
-			<li class="horizontalNavigation-list-item">
-				<a class="horizontalNavigation-list-item-action" href="#">Page</a>
-			</li>
-			<li class="horizontalNavigation-list-item">
-				<a class="horizontalNavigation-list-item-action" href="#">Page</a>
-			</li>
-		</ul>
-	</div>
-</section>
-
-<!-- Header -->
-<section class="contentSection">
-	<h2>Mod header</h2>
-	<div class="horizontalNavigation mod-header">
-		<ul class="horizontalNavigation-list">
-			<li class="horizontalNavigation-list-item">
-				<a class="horizontalNavigation-list-item-action" href="#" aria-current="page">Page</a>
-			</li>
-			<li class="horizontalNavigation-list-item">
-				<a class="horizontalNavigation-list-item-action" href="#">Page</a>
-			</li>
-			<li class="horizontalNavigation-list-item">
-				<a class="horizontalNavigation-list-item-action" href="#">Page</a>
-			</li>
-		</ul>
-	</div>
-</section>
-
-<!-- Palette -->
-<section class="contentSection">
-	<h2>Palette</h2>
-	<div class="horizontalNavigation palette-warning">
-		<ul class="horizontalNavigation-list">
-			<li class="horizontalNavigation-list-item">
-				<a class="horizontalNavigation-list-item-action" href="#" aria-current="page">Page</a>
-			</li>
-			<li class="horizontalNavigation-list-item">
-				<a class="horizontalNavigation-list-item-action" href="#">Page</a>
-			</li>
-			<li class="horizontalNavigation-list-item">
-				<a class="horizontalNavigation-list-item-action" href="#">Page</a>
-			</li>
-		</ul>
-	</div>
-	<em><b>Tip:</b> It will works with all palette's colors</em>
-</section>
-
-<!-- Basics -->
-<section class="contentSection">
-	<h2>Horizontal navigation with number</h2>
-	<div class="horizontalNavigation">
-		<ul class="horizontalNavigation-list">
-			<li class="horizontalNavigation-list-item">
-				<a class="horizontalNavigation-list-item-action" href="#" aria-current="page">Page <span class="numericBadge">9</span></a>
-			</li>
-			<li class="horizontalNavigation-list-item">
-				<a class="horizontalNavigation-list-item-action" href="#">Page <span class="numericBadge">9</span></a>
-			</li>
-			<li class="horizontalNavigation-list-item">
-				<a class="horizontalNavigation-list-item-action is-disabled" href="#">Page <span class="numericBadge">9</span></a>
-			</li>
-		</ul>
-	</div>
-</section>
-
-<!-- Legacy -->
-<section class="contentSection">
-	<h2>Horizontal navigation (legacy)</h2>
-	<div class="menu">
-		<a class="menu-link is-active">Page</a>
-		<a class="menu-link">Page</a>
-		<a class="menu-link">Page</a>
-		<a class="menu-link">Page</a>
-		<a class="menu-link">Page</a>
-	</div>
-</section>
-
-<section class="contentSection">
-	<h2>Horizontal navigation header (legacy)</h2>
-	<div class="menu mod-header">
-		<a class="menu-link is-active">Page</a>
-		<a class="menu-link">Page</a>
-		<a class="menu-link">Page</a>
-		<a class="menu-link">Page</a>
-		<a class="menu-link">Page</a>
-	</div>
-</section>
+<table class="demo-QAtable">
+	<tbody>
+		<tr>
+			<td></td>
+			<td style="width: 50%">
+				<div class="demo-QAtable-list">HTML</div>
+			</td>
+			<td style="width: 50%">
+				<div class="demo-QAtable-list">Angular</div>
+			</td>
+		</tr>
+		<tr>
+			<td>Default</td>
+			<td>
+				<div class="horizontalNavigation">
+					<ul class="horizontalNavigation-list">
+						<li class="horizontalNavigation-list-item">
+							<a class="horizontalNavigation-list-item-action" href="#" aria-current="page">Page</a>
+						</li>
+						<li class="horizontalNavigation-list-item">
+							<a class="horizontalNavigation-list-item-action" href="#">Page</a>
+						</li>
+						<li class="horizontalNavigation-list-item">
+							<a class="horizontalNavigation-list-item-action" href="#">Page</a>
+						</li>
+					</ul>
+				</div>
+			</td>
+			<td>
+				<lu-horizontal-navigation>
+					<a *luHorizontalNavigationLink class="horizontalNavigation-list-item-action" href="#" aria-current="page">Page</a>
+					<a *luHorizontalNavigationLink class="horizontalNavigation-list-item-action" href="#">Page</a>
+					<a *luHorizontalNavigationLink class="horizontalNavigation-list-item-action" href="#">Page</a>
+				</lu-horizontal-navigation>
+			</td>
+		</tr>
+		<tr>
+			<td>Butons</td>
+			<td>
+				<div class="horizontalNavigation">
+					<ul class="horizontalNavigation-list">
+						<li class="horizontalNavigation-list-item">
+							<button type="button" class="horizontalNavigation-list-item-action" aria-current="page">Page</button>
+						</li>
+						<li class="horizontalNavigation-list-item">
+							<button type="button" class="horizontalNavigation-list-item-action">Page</button>
+						</li>
+						<li class="horizontalNavigation-list-item">
+							<button type="button" class="horizontalNavigation-list-item-action">Page</button>
+						</li>
+					</ul>
+				</div>
+			</td>
+			<td></td>
+		</tr>
+		<tr>
+			<td>Size</td>
+			<td>
+				<div class="horizontalNavigation mod-S">
+					<ul class="horizontalNavigation-list">
+						<li class="horizontalNavigation-list-item">
+							<a class="horizontalNavigation-list-item-action" href="#" aria-current="page">Page</a>
+						</li>
+						<li class="horizontalNavigation-list-item">
+							<a class="horizontalNavigation-list-item-action" href="#">Page</a>
+						</li>
+						<li class="horizontalNavigation-list-item">
+							<a class="horizontalNavigation-list-item-action" href="#">Page</a>
+						</li>
+					</ul>
+				</div>
+			</td>
+			<td>
+				<lu-horizontal-navigation size="S">
+					<a *luHorizontalNavigationLink class="horizontalNavigation-list-item-action" href="#" aria-current="page">Page</a>
+					<a *luHorizontalNavigationLink class="horizontalNavigation-list-item-action" href="#">Page</a>
+					<a *luHorizontalNavigationLink class="horizontalNavigation-list-item-action" href="#">Page</a>
+				</lu-horizontal-navigation>
+			</td>
+		</tr>
+		<tr>
+			<td>No Border</td>
+			<td></td>
+			<td>
+				<lu-horizontal-navigation noBorder>
+					<a *luHorizontalNavigationLink class="horizontalNavigation-list-item-action" href="#" aria-current="page">Page</a>
+					<a *luHorizontalNavigationLink class="horizontalNavigation-list-item-action" href="#">Page</a>
+					<a *luHorizontalNavigationLink class="horizontalNavigation-list-item-action" href="#">Page</a>
+				</lu-horizontal-navigation>
+			</td>
+		</tr>
+		<tr>
+			<td>Header</td>
+			<td>
+				<div class="horizontalNavigation mod-header">
+					<ul class="horizontalNavigation-list">
+						<li class="horizontalNavigation-list-item">
+							<a class="horizontalNavigation-list-item-action" href="#" aria-current="page">Page</a>
+						</li>
+						<li class="horizontalNavigation-list-item">
+							<a class="horizontalNavigation-list-item-action" href="#">Page</a>
+						</li>
+						<li class="horizontalNavigation-list-item">
+							<a class="horizontalNavigation-list-item-action" href="#">Page</a>
+						</li>
+					</ul>
+				</div>
+			</td>
+			<td></td>
+		</tr>
+		<tr>
+			<td>Palette</td>
+			<td>
+				<div class="horizontalNavigation palette-warning">
+					<ul class="horizontalNavigation-list">
+						<li class="horizontalNavigation-list-item">
+							<a class="horizontalNavigation-list-item-action" href="#" aria-current="page">Page</a>
+						</li>
+						<li class="horizontalNavigation-list-item">
+							<a class="horizontalNavigation-list-item-action" href="#">Page</a>
+						</li>
+						<li class="horizontalNavigation-list-item">
+							<a class="horizontalNavigation-list-item-action" href="#">Page</a>
+						</li>
+					</ul>
+				</div>
+			</td>
+			<td></td>
+		</tr>
+		<tr>
+			<td>Numeric Badge</td>
+			<td>
+				<div class="horizontalNavigation">
+					<ul class="horizontalNavigation-list">
+						<li class="horizontalNavigation-list-item">
+							<a class="horizontalNavigation-list-item-action" href="#" aria-current="page">Page <span class="numericBadge">9</span></a>
+						</li>
+						<li class="horizontalNavigation-list-item">
+							<a class="horizontalNavigation-list-item-action" href="#">Page <span class="numericBadge">9</span></a>
+						</li>
+						<li class="horizontalNavigation-list-item">
+							<a class="horizontalNavigation-list-item-action is-disabled" href="#">Page <span class="numericBadge">9</span></a>
+						</li>
+					</ul>
+				</div>
+			</td>
+			<td>
+				<lu-horizontal-navigation>
+					<a *luHorizontalNavigationLink class="horizontalNavigation-list-item-action" href="#" aria-current="page"
+						>Page<span class="numericBadge">9</span></a
+					>
+					<a *luHorizontalNavigationLink class="horizontalNavigation-list-item-action" href="#">Page<span class="numericBadge">9</span></a>
+					<a *luHorizontalNavigationLink class="horizontalNavigation-list-item-action" href="#">Page<span class="numericBadge">9</span></a>
+				</lu-horizontal-navigation>
+			</td>
+		</tr>
+		<tr>
+			<td>Horizontal navigation (legacy)</td>
+			<td>
+				<div class="menu">
+					<a class="menu-link is-active">Page</a>
+					<a class="menu-link">Page</a>
+					<a class="menu-link">Page</a>
+					<a class="menu-link">Page</a>
+					<a class="menu-link">Page</a>
+				</div>
+			</td>
+		</tr>
+		<tr>
+			<td>Horizontal navigation header (legacy)</td>
+			<td>
+				<div class="menu mod-header">
+					<a class="menu-link is-active">Page</a>
+					<a class="menu-link">Page</a>
+					<a class="menu-link">Page</a>
+					<a class="menu-link">Page</a>
+					<a class="menu-link">Page</a>
+				</div>
+			</td>
+		</tr>
+	</tbody>
+</table>
 
 <!-- To tell the ui-diff tool that the page has finished rendering -->
 <span id="ready"></span>
