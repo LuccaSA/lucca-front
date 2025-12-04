@@ -163,6 +163,7 @@
 			white-space: nowrap;
 			overflow: hidden;
 			text-overflow: ellipsis;
+			cursor: var(--components-resourceCard-content-header-title-action-cursor);
 
 			&::before {
 				content: '';

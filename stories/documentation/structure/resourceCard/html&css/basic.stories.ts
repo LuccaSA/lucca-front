@@ -103,7 +103,6 @@ export default {
 			: ``;
 		const wrapperGridClass = args.wrapperGrid ? ` mod-grid` : ``;
 		const disableClass = args.disabled ? ` is-disabled` : ``;
-		const disableRole = args.disabled ? ` role="presentation"` : ``;
 		const beforeTpl = args.before
 			? `
 							<div class="resourceCard-content-dragBefore-content-before">
@@ -116,8 +115,12 @@ export default {
 			: ``;
 		const headingTpl =
 			args.headingAction === 'a'
-				? `<a href="#" luTooltip luTooltipOnlyForDisplay luTooltipWhenEllipsis [luTooltipAnchor]="resourceCard1" class="link${disableClass}"${disableRole}><span class="link-text">${args.heading}</span></a>`
-				: `<button type="button" luTooltip luTooltipOnlyForDisplay luTooltipWhenEllipsis [luTooltipAnchor]="resourceCard1" class="link${disableClass}"${disableRole}><span class="link-text">${args.heading}</span></button>`;
+				? args.disabled
+					? `<span luTooltip luTooltipOnlyForDisplay luTooltipWhenEllipsis [luTooltipAnchor]="resourceCard1" class="resourceCard-content-header-title-action">${args.heading}</span>`
+					: `<a href="#" luTooltip luTooltipOnlyForDisplay luTooltipWhenEllipsis [luTooltipAnchor]="resourceCard1" class="resourceCard-content-header-title-action">${args.heading}</a>`
+				: args.disabled
+					? `<span luTooltip luTooltipOnlyForDisplay luTooltipWhenEllipsis [luTooltipAnchor]="resourceCard1" class="resourceCard-content-header-title-action">${args.heading}</span>`
+					: `<button type="button" luTooltip luTooltipOnlyForDisplay luTooltipWhenEllipsis [luTooltipAnchor]="resourceCard1" class="resourceCard-content-header-title-action">${args.heading}</button>`;
 		const draggableTpl = args.draggable
 			? `
 							<div class="button cdk-drag-handle resourceCard-content-dragBefore-content-handleButton">
@@ -146,7 +149,7 @@ export default {
 				: ``;
 		const cards = `
 		<div class="resourceCardContainer">
-			<section class="resourceCard" #resourceCard1>
+			<section class="resourceCard${disableClass}" #resourceCard1>
 				<div class="resourceCard-content">${beforeContent}
 					<header class="resourceCard-content-header">
 						<h${args.headingLevel} class="pr-u-h${args.headingStyle} resourceCard-content-header-title">
