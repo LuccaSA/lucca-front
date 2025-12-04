@@ -15,4 +15,4 @@ export default {
 
 const template: StoryFn<TagsStory> = () => ({});
 
-export const basic = template.bind({});
+export const Basic = template.bind({});

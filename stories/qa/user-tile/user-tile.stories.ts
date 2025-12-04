@@ -16,4 +16,4 @@ export default {
 
 const template: StoryFn<UserTileStory> = () => ({});
 
-export const basic = template.bind({});
+export const Basic = template.bind({});

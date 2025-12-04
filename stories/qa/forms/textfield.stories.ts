@@ -20,4 +20,4 @@ export default {
 
 const template: StoryFn<TextfieldStory> = () => ({});
 
-export const basic = template.bind({});
+export const Basic = template.bind({});

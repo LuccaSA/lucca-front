@@ -207,4 +207,4 @@ const meta: Meta = {
 
 export default meta;
 
-export const basic: StoryObj<FormlyStory> = {};
+export const Basic: StoryObj<FormlyStory> = {};

@@ -2,7 +2,6 @@ import { ChangeDetectionStrategy, Component, ViewEncapsulation } from '@angular/
 import { CalloutComponent } from '@lucca-front/ng/callout';
 
 @Component({
-	// eslint-disable-next-line @angular-eslint/component-selector
 	selector: 'pr-story-model-display',
 	standalone: true,
 	imports: [CalloutComponent],

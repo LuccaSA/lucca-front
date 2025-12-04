@@ -24,7 +24,6 @@ ${code}
 export function useDocumentationStory<TComponent>(story: StoryObj<TComponent>) {
 	return {
 		description: {
-			// eslint-disable-next-line @typescript-eslint/no-unsafe-assignment, @typescript-eslint/no-unsafe-member-access
 			component: story.parameters['docs'].description.story,
 		},
 	};

@@ -24,4 +24,4 @@ export default {
 
 const template: StoryFn<DropdownStory> = () => ({});
 
-export const basic = template.bind({});
+export const Basic = template.bind({});
