@@ -1,7 +1,6 @@
-import { NgTemplateOutlet } from '@angular/common';
-import { booleanAttribute, ChangeDetectionStrategy, Component, forwardRef, inject, input, signal, ViewEncapsulation } from '@angular/core';
+import { CdkDragHandle } from '@angular/cdk/drag-drop';
+import { booleanAttribute, ChangeDetectionStrategy, Component, forwardRef, inject, input, ViewEncapsulation } from '@angular/core';
 import { IconComponent } from '@lucca-front/ng/icon';
-import { ResourceCardActionComponent } from './action/resource-card-action.component';
 import { LU_RESOURCE_CARD_INSTANCE } from './resource-card.token';
 import { LU_RESOURCE_CARD_WRAPPER_INSTANCE } from './wrapper/resource-card-wrapper.token';
 
@@ -11,7 +10,7 @@ import { LU_RESOURCE_CARD_WRAPPER_INSTANCE } from './wrapper/resource-card-wrapp
 	styleUrl: './resource-card.component.scss',
 	changeDetection: ChangeDetectionStrategy.OnPush,
 	encapsulation: ViewEncapsulation.None,
-	imports: [IconComponent, NgTemplateOutlet],
+	imports: [IconComponent, CdkDragHandle],
 	host: {
 		class: 'resourceCardContainer',
 	},
@@ -29,8 +28,6 @@ export class ResourceCardComponent {
 	disabled = input(false, { transform: booleanAttribute });
 	headingLevel = input<'1' | '2' | '3' | '4' | '5' | '6'>('3');
 	headingStyle = input<'3' | '4'>('3');
-
-	actionRef = signal<ResourceCardActionComponent | null>(null);
 
 	// #tooltip = inject(LuTooltipTriggerDirective);
 

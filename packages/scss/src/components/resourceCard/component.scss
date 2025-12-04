@@ -5,7 +5,7 @@
 
 @mixin component($atRoot: namespace.$defaultAtRoot) {
 	position: relative;
-	border-radius: var(--pr-t-border-radius-structure);
+	border-radius: var(--components-resourceCard-borderRadius);
 	display: block;
 	color: var(--components-resourceCard-color);
 	block-size: 100%;
@@ -16,7 +16,7 @@
 		inset: var(--components-resourceCard-before-inset);
 		background-color: var(--pr-t-elevation-surface-raised);
 		box-shadow: var(--pr-t-elevation-shadow-raised);
-		border-radius: var(--pr-t-border-radius-structure);
+		border-radius: var(--components-resourceCard-borderRadius);
 		transition-duration: var(--commons-animations-durations-fast);
 		transition-property: inset;
 	}
@@ -36,7 +36,7 @@
 			gap: var(--pr-t-spacings-100);
 			background-color: var(--pr-t-elevation-surface-sunken);
 			padding: var(--pr-t-spacings-100);
-			border-radius: var(--pr-t-border-radius-structure);
+			border-radius: var(--components-resourceCard-borderRadius);
 		}
 
 		.resourceCard-content-dragBefore-content-before {
@@ -169,7 +169,7 @@
 				content: '';
 				position: absolute;
 				inset: var(--components-resourceCard-content-header-title-action-inset-before);
-				border-radius: var(--pr-t-border-radius-structure);
+				border-radius: var(--components-resourceCard-borderRadius);
 				transition-duration: var(--commons-animations-durations-fast);
 				transition-property: inset;
 				z-index: 1;

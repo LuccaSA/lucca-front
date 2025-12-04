@@ -1,5 +1,4 @@
-import { NgTemplateOutlet } from '@angular/common';
-import { ChangeDetectionStrategy, Component, inject, OnInit, TemplateRef, viewChild, ViewEncapsulation } from '@angular/core';
+import { ChangeDetectionStrategy, Component, inject, ViewEncapsulation } from '@angular/core';
 import { LuTooltipTriggerDirective } from '@lucca-front/ng/tooltip';
 import { LU_RESOURCE_CARD_INSTANCE } from '../resource-card.token';
 
@@ -15,15 +14,9 @@ import { LU_RESOURCE_CARD_INSTANCE } from '../resource-card.token';
 		'[attr.disabled]': 'resourceCardRef.disabled() ? "disabled" : null',
 	},
 	hostDirectives: [LuTooltipTriggerDirective],
-	imports: [NgTemplateOutlet],
 })
-export class ResourceCardActionComponent implements OnInit {
+export class ResourceCardActionComponent {
 	resourceCardRef = inject(LU_RESOURCE_CARD_INSTANCE);
-	contentRef = viewChild<TemplateRef<unknown>>('content');
-
-	ngOnInit(): void {
-		this.resourceCardRef.actionRef.set(this);
-	}
 }
 
 // luTooltip luTooltipOnlyForDisplay luTooltipWhenEllipsis

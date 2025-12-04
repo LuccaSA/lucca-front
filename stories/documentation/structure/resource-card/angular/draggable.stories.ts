@@ -47,7 +47,8 @@ Basic.args = {
 };
 
 const code = `
-<lu-resource-card-wrapper draggable cdkDropList (cdkDropListDropped)="drop($event)">
+<!--  cdkDropListOrientation="mixed" is only required for grid display -->
+<lu-resource-card-wrapper draggable cdkDropList cdkDropListOrientation="mixed" (cdkDropListDropped)="drop($event)">
 	<lu-resource-card cdkDrag>
 		<a href="#" luResourceCardAction>Header 1</a>
 		<ng-container resourceCardDescription>Lorem ipsum dolor</ng-container>

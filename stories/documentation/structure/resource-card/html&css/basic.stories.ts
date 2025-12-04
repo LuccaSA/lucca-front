@@ -193,10 +193,10 @@ export const Basic = {
 		descriptionContentDisabled: `Lorem <span class="link is-disabled"><span class="link-text">ipsum</span></span> dolor sit amet, consectetur adipiscing elit, sed do.`,
 		before: false,
 		beforeContent: `<div class="pr-u-displayGrid pr-u-placeItemsCenter pr-u-borderRadiusDefault" style="background-color: var(--palettes-lavender-100); color: var(--palettes-lavender-700);">
-									<span aria-hidden="true" class="lucca-icon icon-heart icon-color-inherit mod-L"></span>
+									<span aria-hidden="true" class="lucca-icon icon-heart"></span>
 								</div>`,
 		beforeContentDisabled: `<div class="pr-u-displayGrid pr-u-placeItemsCenter pr-u-borderRadiusDefault" style="background-color: var(--palettes-neutral-50); color: var(--palettes-neutral-500);">
-									<span aria-hidden="true" class="lucca-icon icon-heart icon-color-inherit mod-L"></span>
+									<span aria-hidden="true" class="lucca-icon icon-heart"></span>
 								</div>`,
 		after: false,
 		afterContent: `<button type="button" class="button">Lorem ipsum</button>`,

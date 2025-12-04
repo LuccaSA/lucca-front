@@ -3,7 +3,7 @@
 		<div class="resourceCard-content-dragBefore">
 			<div class="resourceCard-content-dragBefore-content">
 				@if (wrapperRef?.draggable() || draggable()) {
-					<div class="button cdk-drag-handle resourceCard-content-dragBefore-content-handleButton">
+					<div class="button cdk-drag-handle resourceCard-content-dragBefore-content-handleButton" cdkDragHandle>
 						<lu-icon icon="dotsDrag" />
 					</div>
 				}
@@ -14,12 +14,7 @@
 		</div>
 		<header class="resourceCard-content-header">
 			<div role="heading" [attr.aria-level]="headingLevel()" [class]="`resourceCard-content-header-title pr-u-h${headingStyle()}`">
-				<div [class.pr-u-displayNone]="disabled()">
-					<ng-content />
-				</div>
-				@if (disabled()) {
-					<ng-container *ngTemplateOutlet="this.actionRef()?.contentRef()" />
-				}
+				<ng-content />
 			</div>
 			<div class="resourceCard-content-header-infos">
 				<ng-content select="[resourceCardInfos]" />
