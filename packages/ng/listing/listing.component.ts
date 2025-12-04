@@ -1,5 +1,5 @@
 import { NgTemplateOutlet } from '@angular/common';
-import { booleanAttribute, ChangeDetectionStrategy, Component, computed, forwardRef, input, ViewEncapsulation } from '@angular/core';
+import { booleanAttribute, ChangeDetectionStrategy, Component, computed, forwardRef, input, numberAttribute, ViewEncapsulation } from '@angular/core';
 import { Palette } from '@lucca-front/ng/core';
 
 import { LuccaIcon } from '@lucca-front/icons';
@@ -25,6 +25,9 @@ export class ListingComponent {
 	readonly icons = input(false, { transform: booleanAttribute });
 	readonly defaultIcon = input<LuccaIcon>('signConfirm');
 	readonly palette = input<Palette>('none');
+	readonly start = input(1, { transform: numberAttribute });
+	readonly inline = input(false, { transform: booleanAttribute });
+	readonly divider = input(false, { transform: booleanAttribute });
 
 	readonly paletteClass = computed(() => {
 		return {
