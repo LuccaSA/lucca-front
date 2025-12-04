@@ -46,19 +46,18 @@
 
 			&::before {
 				border-radius: var(--pr-t-border-radius-full);
-				background-color: var(--components-chip-kill-disk-color, var(--palettes-neutral-700));
+				background-color: var(--components-chip-kill-disk-color);
 			}
 
 			&::after {
 				mask-image: var(--components-chip-kill-background-image);
 				mask-size: var(--components-chip-kill-size);
 				mask-repeat: no-repeat;
-				background-color: var(--components-chip-kill-cross-color, var(--palettes-neutral-0));
+				background-color: var(--components-chip-kill-cross-color);
 			}
 
 			&:hover {
-				--components-chip-kill-disk-color: var(--palettes-neutral-600);
-				--components-chip-kill-cross-color: var(--palettes-700, var(--palettes-neutral-0));
+				--components-chip-kill-disk-color: var(--palettes-700, var(--palettes-neutral-700));
 			}
 
 			&:focus-visible {
@@ -66,7 +65,7 @@
 			}
 
 			&:active {
-				--components-chip-kill-disk-color: var(--palettes-50, var(--palettes-neutral-800));
+				--components-chip-kill-disk-color: var(--palettes-900, var(--palettes-neutral-900));
 			}
 		}
 

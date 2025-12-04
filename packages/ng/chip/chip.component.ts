@@ -18,8 +18,8 @@ import { LU_CHIP_TRANSLATIONS } from './chip.translate';
 		'[class.is-disabled]': 'disabled()',
 		'[class.palette-product]': 'classPalette()',
 		'[class.mod-S]': 'size() === "S"',
-		'[class.is-warning]': 'isWarning()',
-		'[class.is-critical]': 'isCritical()',
+		'[class.palette-warning]': 'isWarning()',
+		'[class.palette-critical]': 'isCritical()',
 	},
 })
 export class ChipComponent {

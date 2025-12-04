@@ -6,37 +6,3 @@
 		display: none;
 	}
 }
-
-@mixin warning {
-	--components-chip-backgroundColor: var(--palettes-warning-200);
-	--components-chip-color: var(--palettes-warning-800);
-
-	.chip-kill {
-		--components-chip-kill-disk-color: var(--palettes-warning-800);
-
-		&:hover {
-			--components-chip-kill-disk-color: var(--palettes-warning-700);
-		}
-
-		&:active {
-			--components-chip-kill-disk-color: var(--palettes-warning-900);
-		}
-	}
-}
-
-@mixin critical {
-	--components-chip-backgroundColor: var(--palettes-critical-200);
-	--components-chip-color: var(--palettes-critical-800);
-
-	.chip-kill {
-		--components-chip-kill-disk-color: var(--palettes-critical-800);
-
-		&:hover {
-			--components-chip-kill-disk-color: var(--palettes-critical-700);
-		}
-
-		&:active {
-			--components-chip-kill-disk-color: var(--palettes-critical-900);
-		}
-	}
-}
