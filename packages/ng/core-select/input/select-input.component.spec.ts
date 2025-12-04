@@ -43,8 +43,8 @@ export function runALuSelectInputComponentTestSuite<TValue>(config: LuSelectInpu
 	it.each(['a', 'A', 'À'])('should openPanel and emit clueChange when pressing %s and select is searchable', async (key) => {
 		// Arrange
 		const event = new KeyboardEvent('keydown', { key });
-		const clueChangeSpy = jest.spyOn(component.clueChange, 'emit');
-		component.clueChange.subscribe(); // Emulate a `(clueChange)=""` binding
+		const clueChangeSpy = jest.spyOn(component.clueChange$, 'next');
+		component.clueChange$.subscribe(); // Emulate a `(clueChange)=""` binding
 
 		// Act
 		nativeElement.dispatchEvent(event);
@@ -58,7 +58,7 @@ export function runALuSelectInputComponentTestSuite<TValue>(config: LuSelectInpu
 	it.each(['a', 'A', 'À'])('should openPanel and not emit clueChange when pressing %s and select is not searchable', async (key) => {
 		// Arrange
 		const event = new KeyboardEvent('keydown', { key });
-		const clueChangeSpy = jest.spyOn(component.clueChange, 'emit');
+		const clueChangeSpy = jest.spyOn(component.clueChange$, 'next');
 
 		// Act
 		nativeElement.dispatchEvent(event);
@@ -72,7 +72,7 @@ export function runALuSelectInputComponentTestSuite<TValue>(config: LuSelectInpu
 	it('should openPanel and but not emit clueChange when pressing Space', async () => {
 		// Arrange
 		const event = new KeyboardEvent('keydown', { key: ' ' });
-		const clueChangeSpy = jest.spyOn(component.clueChange, 'emit');
+		const clueChangeSpy = jest.spyOn(component.clueChange$, 'next');
 
 		// Act
 		nativeElement.dispatchEvent(event);
@@ -106,7 +106,7 @@ export function runALuSelectInputComponentTestSuite<TValue>(config: LuSelectInpu
 	it.each(['ArrowLeft', 'ArrowRight', 'Backspace', 'Meta'])('should not open the panel when sending not a letter events (%s)', (key) => {
 		// Arrange
 		const event = new KeyboardEvent('keydown', { key });
-		const clueChangeSpy = jest.spyOn(component.clueChange, 'emit');
+		const clueChangeSpy = jest.spyOn(component.clueChange$, 'next');
 
 		// Act
 		nativeElement.dispatchEvent(event);

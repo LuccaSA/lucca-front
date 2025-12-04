@@ -7,6 +7,6 @@ import { ALuSelectInputComponent } from '../input/index';
 })
 export class LuCoreSelectNoClueDirective {
 	constructor() {
-		inject(ALuSelectInputComponent).clueChange.complete();
+		inject(ALuSelectInputComponent).clueChange$.complete();
 	}
 }
