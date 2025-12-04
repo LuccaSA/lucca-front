@@ -105,7 +105,7 @@
 			position: relative;
 			z-index: 1;
 
-			//@include clear.product;
+			@include clear.product;
 		}
 
 		.filterPill-combobox {

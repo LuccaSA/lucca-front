@@ -1,3 +1,16 @@
+@mixin product {
+	--components-clear-cross-color: var(--palettes-neutral-0);
+	--components-clear-background: var(--palettes-product-800);
+
+	&:hover {
+		--components-clear-background: var(--palettes-product-700);
+	}
+
+	&:active {
+		--components-clear-background: var(--palettes-product-900);
+	}
+}
+
 @mixin S {
 	--components-clear-size: 0.75rem;
 	--icon-size: 0.75rem;
