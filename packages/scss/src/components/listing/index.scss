@@ -11,6 +11,14 @@
 		&:is(ol) {
 			@include ordered;
 		}
+		&.mod-inline {
+			@include inline;
+			@include hideFirstItems;
+
+			&.mod-divider {
+				@include divider;
+			}
+		}
 
 		.listing {
 			@include nested;
