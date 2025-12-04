@@ -21,11 +21,16 @@ export class PortalDirective<T = unknown> implements OnDestroy {
 	constructor() {
 		effect(() => {
 			const portal = this.luPortal();
-			const ctx = this.luPortalContext();
-
 			untracked(() => {
-				this.render(portal, ctx);
-				if (this.embeddedViewRef) {
+				if (portal) {
+					this.render(portal, this.luPortalContext());
+				}
+			});
+		});
+		effect(() => {
+			const ctx = this.luPortalContext();
+			untracked(() => {
+				if (this.embeddedViewRef && ctx) {
 					this.updateEmbeddedViewContext(ctx);
 				}
 			});
@@ -95,6 +100,7 @@ export class PortalDirective<T = unknown> implements OnDestroy {
 	 * @see https://github.com/angular/angular/pull/51887
 	 */
 	private updateEmbeddedViewContext(context: T): void {
+		console.log(context);
 		if (this.embeddedViewRef) {
 			const props = Object.keys(context);
 
