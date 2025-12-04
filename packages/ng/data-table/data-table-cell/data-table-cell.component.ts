@@ -20,6 +20,7 @@ import { LU_DATA_TABLE_CELL_INSTANCE } from '../data-table-cell.token';
 		'[class.mod-stickyColumn]': 'isSticky()',
 		'[style.insetInlineStart]': 'insetInlineStart()',
 		'[style.insetInlineEnd]': 'insetInlineEnd()',
+		'[style.--dataTable-layoutFixed-width]': 'tableRef.cols()[this.position()].inlineSize() || tableRef.cols()[this.position()].fixedWidth()',
 	},
 	providers: [
 		{
@@ -30,6 +31,7 @@ import { LU_DATA_TABLE_CELL_INSTANCE } from '../data-table-cell.token';
 })
 export class DataTableRowCellComponent extends BaseDataTableCell {
 	actions = input(false, { transform: booleanAttribute });
+	// inlineSize = input<string | null>(null);
 
 	isSticky = computed(() => {
 		return this.isStickyStart() || this.isStickyEnd();

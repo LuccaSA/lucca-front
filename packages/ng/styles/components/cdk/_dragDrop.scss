@@ -1,16 +1,35 @@
 @use '@lucca-front/scss/src/commons/utils/form';
+@use '@lucca-front/scss/src/components/dataTable/exports' as dataTable;
 
 .cdk-drag-placeholder {
 	box-shadow: form.fakeBorderOverlay(var(--palettes-neutral-200));
 	background-color: var(--palettes-neutral-100);
 
+	&.sortableList-item {
+		box-shadow: none;
+	}
+
+	&.dataTable-body-row {
+		box-shadow: none;
+
+		> .dataTable-body-row-cell {
+			visibility: visible;
+			background-color: var(--palettes-neutral-100);
+
+			* {
+				visibility: hidden;
+				color: transparent;
+			}
+		}
+	}
+
 	* {
-		opacity: 0;
+		visibility: hidden;
+		color: transparent;
 	}
 }
 
-.cdk-drag-handle,
-.cdk-drag-placeholder {
+.cdk-drag-handle {
 	cursor: move;
 }
 
@@ -53,6 +72,28 @@
 	background-color: var(--palettes-product-50);
 	border-radius: var(--pr-t-border-radius-default);
 	cursor: grabbing;
+
+	&.dataTable-body-row {
+		@include dataTable.draggable;
+
+		display: table;
+
+		&.mod-layoutFixed {
+			table-layout: fixed;
+		}
+
+		.dataTable-body-row-cell {
+			--components-dataTable-cell-background: transparent;
+			--components-dataTable-cell-shadow: none;
+
+			@include dataTable.cellInlineSize;
+		}
+
+		&.mod-selectable {
+			@include dataTable.selectableDraggable;
+		}
+
+	}
 }
 
 .cdk-drop-list-dragging {
