@@ -2,9 +2,9 @@ import { LuTooltipModule } from '@lucca-front/ng/tooltip';
 import { Meta, moduleMetadata } from '@storybook/angular';
 
 interface ResourceCardHTMLBasicStory {
-	actions: boolean;
-	actionsContent: string;
-	actionsContentDisabled: string;
+	after: boolean;
+	afterContent: string;
+	afterContentDisabled: string;
 	heading: string;
 	headingLevel: number;
 	headingStyle: number;
@@ -18,9 +18,9 @@ interface ResourceCardHTMLBasicStory {
 	description: boolean;
 	descriptionContent: string;
 	descriptionContentDisabled: string;
-	illustration: boolean;
-	illustrationContent: string;
-	illustrationContentDisabled: string;
+	before: boolean;
+	beforeContent: string;
+	beforeContentDisabled: string;
 	draggable: boolean;
 }
 
@@ -33,8 +33,8 @@ export default {
 		headingInfosContent: {
 			if: { arg: 'headingInfos', truthy: true },
 		},
-		illustrationContent: {
-			if: { arg: 'illustration', truthy: true },
+		beforeContent: {
+			if: { arg: 'before', truthy: true },
 		},
 		descriptionContent: {
 			if: { arg: 'description', truthy: true },
@@ -42,13 +42,13 @@ export default {
 		descriptionContentDisabled: {
 			if: { arg: 'disabled', truthy: true },
 		},
-		actionsContent: {
-			if: { arg: 'actions', truthy: true },
+		afterContent: {
+			if: { arg: 'after', truthy: true },
 		},
-		actionsContentDisabled: {
+		afterContentDisabled: {
 			if: { arg: 'disabled', truthy: true },
 		},
-		illustrationContentDisabled: {
+		beforeContentDisabled: {
 			if: { arg: 'disabled', truthy: true },
 		},
 		headingAction: {
@@ -95,19 +95,19 @@ export default {
 				</div>
 			</section>
 		</div>`;
-		const actionTpl = args.actions
+		const actionTpl = args.after
 			? `
 					<div class="resourceCard-content-after">
-						${args.disabled ? args.actionsContentDisabled : args.actionsContent}
+						${args.disabled ? args.afterContentDisabled : args.afterContent}
 					</div>`
 			: ``;
 		const wrapperGridClass = args.wrapperGrid ? ` mod-grid` : ``;
 		const disableClass = args.disabled ? ` is-disabled` : ``;
 		const disableRole = args.disabled ? ` role="presentation"` : ``;
-		const illustrationTpl = args.illustration
+		const beforeTpl = args.before
 			? `
-							<div class="resourceCard-content-before-content-illustration">
-								${args.disabled ? args.illustrationContentDisabled : args.illustrationContent}
+							<div class="resourceCard-content-dragBefore-content-before">
+								${args.disabled ? args.beforeContentDisabled : args.beforeContent}
 							</div>`
 			: ``;
 		const headingNumericBadgeTpl = args.headingNumericBadge
@@ -120,7 +120,7 @@ export default {
 				: `<button type="button" luTooltip luTooltipOnlyForDisplay luTooltipWhenEllipsis [luTooltipAnchor]="resourceCard1" class="link${disableClass}"${disableRole}><span class="link-text">${args.heading}</span></button>`;
 		const draggableTpl = args.draggable
 			? `
-							<div class="button cdk-drag-handle resourceCard-content-before-content-handleButton">
+							<div class="button cdk-drag-handle resourceCard-content-dragBefore-content-handleButton">
 								<span aria-hidden="true" class="lucca-icon icon-dotsDrag icon-color-inherit"></span>
 							</div>`
 			: ``;
@@ -137,10 +137,10 @@ export default {
 						</div>`
 			: ``;
 		const beforeContent =
-			args.illustration || args.draggable
+			args.before || args.draggable
 				? `
-					<div class="resourceCard-content-before">
-						<div class="resourceCard-content-before-content">${draggableTpl}${illustrationTpl}
+					<div class="resourceCard-content-dragBefore">
+						<div class="resourceCard-content-dragBefore-content">${draggableTpl}${beforeTpl}
 						</div>
 					</div>`
 				: ``;
@@ -188,15 +188,15 @@ export const Basic = {
 		description: false,
 		descriptionContent: `Lorem <a href="#" class="link"><span class="link-text">ipsum</span></a> dolor sit amet, consectetur adipiscing elit, sed do.`,
 		descriptionContentDisabled: `Lorem <span class="link is-disabled"><span class="link-text">ipsum</span></span> dolor sit amet, consectetur adipiscing elit, sed do.`,
-		illustration: false,
-		illustrationContent: `<div class="pr-u-displayGrid pr-u-placeItemsCenter pr-u-borderRadiusDefault" style="background-color: var(--palettes-lavender-100); color: var(--palettes-lavender-700);">
+		before: false,
+		beforeContent: `<div class="pr-u-displayGrid pr-u-placeItemsCenter pr-u-borderRadiusDefault" style="background-color: var(--palettes-lavender-100); color: var(--palettes-lavender-700);">
 									<span aria-hidden="true" class="lucca-icon icon-heart icon-color-inherit mod-L"></span>
 								</div>`,
-		illustrationContentDisabled: `<div class="pr-u-displayGrid pr-u-placeItemsCenter pr-u-borderRadiusDefault" style="background-color: var(--palettes-neutral-50); color: var(--palettes-neutral-500);">
+		beforeContentDisabled: `<div class="pr-u-displayGrid pr-u-placeItemsCenter pr-u-borderRadiusDefault" style="background-color: var(--palettes-neutral-50); color: var(--palettes-neutral-500);">
 									<span aria-hidden="true" class="lucca-icon icon-heart icon-color-inherit mod-L"></span>
 								</div>`,
-		actions: false,
-		actionsContent: `<button type="button" class="button">Lorem ipsum</button>`,
-		actionsContentDisabled: `<button type="button" class="button" disabled="disabled">Lorem ipsum</button>`,
+		after: false,
+		afterContent: `<button type="button" class="button">Lorem ipsum</button>`,
+		afterContentDisabled: `<button type="button" class="button" disabled="disabled">Lorem ipsum</button>`,
 	},
 };

@@ -3,9 +3,9 @@
 
 $noDescription: '&:has(.resourceCard-content-description:empty)';
 $noDescriptionHTML: '&:not(:has(.resourceCard-content-description))';
-$noIllustration: '&:has(.resourceCard-content-before-content-illustration:empty)';
-$hasIllustration: '&:not(#{$noIllustration})';
-$hasDrag: '&:has(.resourceCard-content-before-content-handleButton)';
+$noBefore: '&:has(.resourceCard-content-dragBefore-content-before:empty)';
+$hasBefore: '&:not(#{$noBefore})';
+$hasDrag: '&:has(.resourceCard-content-dragBefore-content-handleButton)';
 
 .resourceCard {
 	@layer components {
@@ -29,8 +29,8 @@ $hasDrag: '&:has(.resourceCard-content-before-content-handleButton)';
 		#{$hasDrag} {
 			@include hasDrag;
 
-			#{$hasIllustration} {
-				@include hadDragHasIllustration;
+			#{$hasBefore} {
+				@include hadDragHasBefore;
 			}
 		}
 
@@ -44,8 +44,8 @@ $hasDrag: '&:has(.resourceCard-content-before-content-handleButton)';
 
 			#{$noDescription},
 			#{$noDescriptionHTML} {
-				#{$hasIllustration} {
-					@include narrowNoDescriptionHasIllustration;
+				#{$hasBefore} {
+					@include narrowNoDescriptionHasBefore;
 				}
 			}
 		}
