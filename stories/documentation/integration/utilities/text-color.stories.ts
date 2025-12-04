@@ -20,7 +20,7 @@ function getTemplate(args: TextColorStory): string {
 </div>
 <div class="demo-utilityWrapper">
 	<div class="pr-u-colorTextProduct demo-utility"><code class="code">pr-u-colorTextProduct</code> Lorem ipsum</div>
-	<div class="pr-u-colorTextBrand demo-utility"><code class="code">pr-colorTextBrand-textBrand</code> Lorem ipsum</div>
+	<div class="pr-u-colorTextBrand demo-utility"><code class="code">pr-u-colorTextBrand</code> Lorem ipsum</div>
 	<div class="pr-u-colorInputTextPlaceholder demo-utility"><code class="code">pr-u-colorInputTextPlaceholder</code> Lorem ipsum</div>
 </div>
 <div class="demo-utilityWrapper">
