@@ -10,8 +10,8 @@
 		visibility: hidden;
 	}
 
-	&.resourceCard {
-		box-shadow: none;
+	&.resourceCardContainer {
+		border-radius: var(--pr-t-border-radius-default);
 	}
 }
 

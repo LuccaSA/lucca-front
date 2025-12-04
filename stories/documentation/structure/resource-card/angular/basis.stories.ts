@@ -112,10 +112,7 @@ export default {
 		const draggableAttr = args.draggable ? ` draggable` : ``;
 		const disabledAttr = args.disabled ? ` disabled` : ``;
 		const gridAttr = args.wrapperGrid ? ` grid` : ``;
-		const actionLinkAttr = args.disabled ? `` : ` href="#"`;
-		const actionButtonAttr = args.disabled ? `` : ` (click)="console.log()"`;
-		const actionTpl =
-			args.headingAction === 'a' ? `<a${actionLinkAttr} luResourceCardAction>${args.heading}</a>` : `<button${actionButtonAttr} type="button" luResourceCardAction>${args.heading}</button>`;
+		const actionTpl = args.headingAction === 'a' ? `<a href="#" luResourceCardAction>${args.heading}</a>` : `<button type="button" luResourceCardAction>${args.heading}</button>`;
 		const headingLevelAttr = args.headingLevel !== 3 ? ` headingLevel="${args.headingLevel}"` : ``;
 		const headingStyleAttr = args.headingStyle !== 3 ? ` headingStyle="${args.headingStyle}"` : ``;
 		const numericBadgeTpl = args.headingNumericBadge ? `<lu-numeric-badge value="88" />` : ``;
@@ -206,12 +203,12 @@ export const Basic = {
 		beforeContent: `<div class="pr-u-displayGrid pr-u-placeItemsCenter pr-u-borderRadiusDefault"
 					 style="background-color: var(--palettes-lavender-100); color: var(--palettes-lavender-700)"
 				>
-					<lu-icon icon="heart" size="L" />
+					<lu-icon icon="heart" />
 				</div>`,
 		beforeContentDisabled: `<div class="pr-u-displayGrid pr-u-placeItemsCenter pr-u-borderRadiusDefault"
 					 style="background-color: var(--palettes-neutral-50); color: var(--palettes-neutral-500)"
 				>
-					<lu-icon icon="heart" size="L" />
+					<lu-icon icon="heart" />
 				</div>`,
 		after: false,
 		afterContent: `<button type="button" luResourceCardAfterAction>Lorem ipsum</button>`,

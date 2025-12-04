@@ -1,4 +1,4 @@
-<lu-resource-card-wrapper [grid]="wrapperGrid()" draggable cdkDropList (cdkDropListDropped)="drop($event)">
+<lu-resource-card-wrapper [grid]="wrapperGrid()" draggable cdkDropList cdkDropListOrientation="mixed" (cdkDropListDropped)="drop($event)">
 	@for (item of listItem; track $index) {
 		<lu-resource-card cdkDrag>
 			<a href="#" luResourceCardAction>{{ item.header }}</a>
