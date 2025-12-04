@@ -1,4 +1,4 @@
-import { Component, computed, inject, input } from '@angular/core';
+import { ChangeDetectionStrategy, Component, computed, inject, input } from '@angular/core';
 
 import { LU_INDEX_TABLE_BODY_INSTANCE } from './index-table-body/index-table-body.token';
 import { LU_INDEX_TABLE_FOOT_INSTANCE } from './index-table-foot/index-table-foot.token';
@@ -9,6 +9,7 @@ import { LU_INDEX_TABLE_INSTANCE } from './index-table.token';
 @Component({
 	selector: 'lu-base-index-table-cell',
 	template: '',
+	changeDetection: ChangeDetectionStrategy.OnPush,
 })
 export abstract class BaseIndexTableCell {
 	tableRef = inject(LU_INDEX_TABLE_INSTANCE);

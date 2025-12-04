@@ -100,7 +100,6 @@ export class PortalDirective<T = unknown> implements OnDestroy {
 	 * @see https://github.com/angular/angular/pull/51887
 	 */
 	private updateEmbeddedViewContext(context: T): void {
-		console.log(context);
 		if (this.embeddedViewRef) {
 			const props = Object.keys(context);
 
