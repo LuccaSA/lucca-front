@@ -10,9 +10,7 @@ export default {
 			imports: [CommentComponent, CommentBlockComponent, LuUserPictureModule, CommentChatComponent],
 		}),
 	],
-	render: (args, { argTypes }) => {
-		const { content } = args;
-
+	render: ({ argTypes }) => {
 		return {
 			props: {
 				date: new Date(),
@@ -22,7 +20,7 @@ export default {
 		<ng-template #avatarAI>
 			<lu-user-picture AI />
 		</ng-template>
-		<lu-comment [date]="date" content="${content}" />
+		<lu-comment [date]="date" content="Bonjour, comment puis-je vous accompagner aujourd’hui ?" />
 	</lu-comment-block>
 	<lu-comment-block chatAnswer compact [avatar]="avatarTpl"${generateInputs({}, argTypes)} authorName="Chloé Alibert">
 		<ng-template #avatarTpl>
@@ -36,7 +34,5 @@ export default {
 } as Meta;
 
 export const Chat: StoryObj = {
-	args: {
-		content: `Bonjour, comment puis-je vous accompagner aujourd’hui ?`,
-	},
+	args: {},
 };

@@ -40,6 +40,9 @@ export const Template: StoryObj<HighlightDataComponent & { action: string }> = {
 		value: {
 			type: 'string',
 		},
+		subText: {
+			type: 'string',
+		},
 		bubble: {
 			options: [1, 2, 3, 4, null],
 			control: {
@@ -93,5 +96,6 @@ export const Template: StoryObj<HighlightDataComponent & { action: string }> = {
 		theme: null,
 		palette: null,
 		action: null,
+		subText: null,
 	},
 };

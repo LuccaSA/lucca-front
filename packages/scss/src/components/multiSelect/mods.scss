@@ -70,7 +70,7 @@
 	box-shadow: none;
 	padding: 0;
 	gap: 0;
-	inline-size: 21rem;
+	inline-size: 26.5rem;
 	max-inline-size: calc(100vw - 2.5rem);
 
 	.multipleSelect-displayer {
@@ -79,6 +79,8 @@
 		padding: var(--components-multiSelect-padding);
 		z-index: 1;
 		position: relative;
+		max-block-size: min(14rem, 80vh);
+		overflow: auto;
 	}
 
 	.lu-picker-content {

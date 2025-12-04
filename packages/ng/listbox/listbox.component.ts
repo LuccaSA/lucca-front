@@ -13,7 +13,7 @@ let nextId = 0;
 	encapsulation: ViewEncapsulation.None,
 	host: {
 		class: 'listboxOptionWrapper',
-		'[role]': 'tree() ? "tree" : "listbox"',
+		'[attr.role]': 'tree() ? "tree" : "listbox"',
 		'[class.mod-multiple]': 'multiple()',
 		'[attr.aria-busy]': 'state() === "loading"',
 		'[attr.aria-describedby]': 'state() === "empty" ? listboxId : null',
