@@ -1,4 +1,5 @@
 @mixin vars {
+	--components-resourceCard-content-header-title-action-cursor: pointer;
 	--components-resourceCard-content-after-paddingBlock: var(--pr-t-spacings-50);
 	--components-resourceCard-content-dragBefore-paddingBlock: 0;
 	--components-resourceCard-content-header-alignSelf: center;
