@@ -109,7 +109,7 @@ $cursor: 'pointer', 'auto', 'default', 'text';
 
 @mixin palettes($suffix: '!important') {
 	@each $palette in config.$palettesAll {
-		.pr-u-text#{transform.capitalize($palette)} {
+		.pr-u-text#{transform.capitalize($palette)}, .pr-u-colorText#{transform.capitalize($palette)} {
 			color: var(--palettes-#{$palette}-700) #{$suffix};
 		}
 
