@@ -2,6 +2,8 @@ import { NgTemplateOutlet } from '@angular/common';
 import { booleanAttribute, Component, computed, input, output, ViewEncapsulation } from '@angular/core';
 import { getIntl } from '@lucca-front/ng/core';
 
+import { LuccaIcon } from '@lucca-front/icons';
+import { IconComponent } from '@lucca-front/ng/icon';
 import { LuTooltipModule } from '@lucca-front/ng/tooltip';
 import { LU_CHIP_TRANSLATIONS } from './chip.translate';
 
@@ -10,14 +12,14 @@ import { LU_CHIP_TRANSLATIONS } from './chip.translate';
 	templateUrl: './chip.component.html',
 	styleUrl: './chip.component.scss',
 	encapsulation: ViewEncapsulation.None,
-	imports: [NgTemplateOutlet, LuTooltipModule],
+	imports: [NgTemplateOutlet, LuTooltipModule, IconComponent],
 	host: {
 		class: 'chip',
 		'[class.is-disabled]': 'disabled()',
 		'[class.palette-product]': 'classPalette()',
 		'[class.mod-S]': 'size() === "S"',
-		'[class.mod-warning]': 'warning()',
-		'[class.mod-critical]': 'critical()',
+		'[class.is-warning]': 'isWarning()',
+		'[class.is-critical]': 'isCritical()',
 	},
 })
 export class ChipComponent {
@@ -31,13 +33,16 @@ export class ChipComponent {
 
 	readonly disabled = input(false, { transform: booleanAttribute });
 
-	readonly classPalette = computed(() => this.palette() === 'product');
+	readonly size = input<'S' | null>(null);
+
+	readonly state = input<'warning' | 'critical' | null>(null);
+
+	readonly icon = input<LuccaIcon | null>(null);
 
 	readonly kill = output<Event>();
 
-	readonly size = input<'S' | null>(null);
-
-	readonly warning = input(false, { transform: booleanAttribute });
-
-	readonly critical = input(false, { transform: booleanAttribute });
+	readonly classPalette = computed<boolean>(() => this.palette() === 'product');
+	readonly isWarning = computed<boolean>(() => this.state() === 'warning');
+	readonly isCritical = computed<boolean>(() => this.state() === 'critical');
+	readonly displayedIcon = computed<LuccaIcon | null>(() => (this.isWarning() ? 'signWarning' : this.isCritical() ? 'signError' : this.icon()));
 }

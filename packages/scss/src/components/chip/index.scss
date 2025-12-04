@@ -25,11 +25,11 @@
 			@include clickable;
 		}
 
-		&.mod-warning {
+		&.is-warning {
 			@include warning;
 		}
 
-		&.mod-critical {
+		&.is-critical {
 			@include critical;
 		}
 
