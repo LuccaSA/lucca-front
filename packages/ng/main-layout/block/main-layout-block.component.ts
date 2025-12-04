@@ -3,7 +3,7 @@ import { booleanAttribute, Component, input, ViewEncapsulation } from '@angular/
 @Component({
 	selector: 'lu-main-layout-block',
 	encapsulation: ViewEncapsulation.None,
-	template: `<ng-content />`,
+	template: '<ng-content />',
 	host: {
 		class: 'mainLayout-content-inside-block',
 		'[class.mod-overflow]': 'overflow()',
