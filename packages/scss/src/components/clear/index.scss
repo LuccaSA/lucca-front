@@ -11,18 +11,8 @@
 			@include S;
 		}
 
-		// .palette-primary is deprecated
-		&.palette-product,
-		&.palette-primary {
-			@include product;
-		}
-
 		&.mod-inverted {
 			@include inverted;
-
-			&:where(.palette-product) {
-				@include invertedProduct;
-			}
 		}
 
 		&[disabled] {
