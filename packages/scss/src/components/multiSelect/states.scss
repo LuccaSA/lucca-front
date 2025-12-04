@@ -35,22 +35,6 @@
 	}
 }
 
-@mixin displayerFilterFilled {
-	.multipleSelect-displayer-search {
-		opacity: 0;
-	}
-}
-
-@mixin displayerFilterExpanded {
-	.multipleSelect-displayer-filter {
-		display: none;
-	}
-
-	.multipleSelect-displayer-search {
-		opacity: 1;
-	}
-}
-
 @mixin selected {
 	.multipleSelect-displayer-search {
 		&[readonly],
