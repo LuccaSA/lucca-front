@@ -17,7 +17,8 @@
 	--components-resourceCard-before-inset: 0;
 	--components-resourceCard-color: var(--pr-t-color-text-disabled);
 
-	.resourceCard-content-before-content-handleButton {
+	.resourceCard-content-after-action,
+	.resourceCard-content-dragBefore-content-handleButton {
 		@include button.disabled;
 	}
 }

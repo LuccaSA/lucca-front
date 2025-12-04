@@ -3,12 +3,11 @@ import { ButtonComponent } from '@lucca-front/ng/button';
 import { IconComponent } from '@lucca-front/ng/icon';
 import { LinkComponent } from '@lucca-front/ng/link';
 import { NumericBadgeComponent } from '@lucca-front/ng/numeric-badge';
-import { ResourceCardComponent, ResourceCardWrapperComponent } from '@lucca-front/ng/resource-card';
+import { ResourceCardActionComponent, ResourceCardAfterActionComponent, ResourceCardComponent, ResourceCardWrapperComponent } from '@lucca-front/ng/resource-card';
 import { StatusBadgeComponent } from '@lucca-front/ng/status-badge';
 import { TagComponent } from '@lucca-front/ng/tag';
 import { LuTooltipModule } from '@lucca-front/ng/tooltip';
 import { applicationConfig, Meta, moduleMetadata } from '@storybook/angular';
-import { ResourceCardActionComponent } from 'packages/ng/resource-card/resource-card-action.component';
 
 interface ResourceCardAngularBasicStory {
 	wrapper: boolean;
@@ -23,14 +22,14 @@ interface ResourceCardAngularBasicStory {
 	headingLevel: number;
 	headingStyle: number;
 	headingNumericBadge: boolean;
-	illustration: boolean;
-	illustrationContent: string;
-	illustrationContentDisabled: string;
+	before: boolean;
+	beforeContent: string;
+	beforeContentDisabled: string;
 	headingInfos: boolean;
 	headingInfosContent: string;
-	actions: boolean;
-	actionsContent: string;
-	actionsContentDisabled: string;
+	after: boolean;
+	afterContent: string;
+	afterContentDisabled: string;
 	descriptionContentDisabled: string;
 }
 
@@ -49,8 +48,8 @@ export default {
 		headingInfosContent: {
 			if: { arg: 'headingInfos', truthy: true },
 		},
-		illustrationContent: {
-			if: { arg: 'illustration', truthy: true },
+		beforeContent: {
+			if: { arg: 'before', truthy: true },
 		},
 		descriptionContent: {
 			if: { arg: 'description', truthy: true },
@@ -58,13 +57,13 @@ export default {
 		descriptionContentDisabled: {
 			if: { arg: 'disabled', truthy: true },
 		},
-		actionsContent: {
-			if: { arg: 'actions', truthy: true },
+		afterContent: {
+			if: { arg: 'after', truthy: true },
 		},
-		actionsContentDisabled: {
+		afterContentDisabled: {
 			if: { arg: 'disabled', truthy: true },
 		},
-		illustrationContentDisabled: {
+		beforeContentDisabled: {
 			if: { arg: 'disabled', truthy: true },
 		},
 		headingAction: {
@@ -91,16 +90,17 @@ export default {
 	decorators: [
 		moduleMetadata({
 			imports: [
-				ResourceCardComponent,
 				LuTooltipModule,
 				NumericBadgeComponent,
 				IconComponent,
 				StatusBadgeComponent,
 				ButtonComponent,
 				LinkComponent,
-				ResourceCardWrapperComponent,
 				TagComponent,
+				ResourceCardComponent,
+				ResourceCardWrapperComponent,
 				ResourceCardActionComponent,
+				ResourceCardAfterActionComponent,
 			],
 		}),
 		applicationConfig({
@@ -136,25 +136,25 @@ export default {
 				${args.descriptionContent}
 			</ng-container>`
 			: ``;
-		const illustrationTpl = args.illustration
+		const beforeTpl = args.before
 			? args.disabled
-				? `<ng-container resourceCardIllustration>
-				${args.illustrationContentDisabled}
+				? `<ng-container resourceCardBefore>
+				${args.beforeContentDisabled}
 			</ng-container>`
 				: `
-			<ng-container resourceCardIllustration>
-				${args.illustrationContent}
+			<ng-container resourceCardBefore>
+				${args.beforeContent}
 			</ng-container>`
 			: ``;
-		const actionsTpl = args.actions
+		const afterTpl = args.after
 			? args.disabled
 				? `
-			<ng-container resourceCardActions>
-				${args.actionsContentDisabled}
+			<ng-container resourceCardAfter>
+				${args.afterContentDisabled}
 			</ng-container>`
 				: `
-			<ng-container resourceCardActions>
-				${args.actionsContent}
+			<ng-container resourceCardAfter>
+				${args.afterContent}
 			</ng-container>`
 			: ``;
 		const card = `
@@ -166,7 +166,7 @@ export default {
 		</lu-resource-card>`;
 		const cards = `
 		<lu-resource-card${disabledAttr}${draggableAttr}${headingLevelAttr}${headingStyleAttr}>
-			${actionTpl}${numericBadgeTpl}${headingInfosTpl}${illustrationTpl}${actionsTpl}${descriptionTpl}
+			${actionTpl}${numericBadgeTpl}${headingInfosTpl}${beforeTpl}${afterTpl}${descriptionTpl}
 		</lu-resource-card>${card.repeat(args.wrapper ? 3 : 0)}`;
 		if (args.wrapper) {
 			return {
@@ -202,21 +202,19 @@ export const Basic = {
 		description: false,
 		descriptionContent: `Lorem <a href="#" luLink>ipsum</a> dolor sit amet, consectetur adipiscing elit, sed do. `,
 		descriptionContentDisabled: `Lorem <a href="#" luLink disabled>ipsum</a> dolor sit amet, consectetur adipiscing elit, sed do. `,
-		illustration: false,
-		illustrationContent: `<div class="pr-u-displayGrid pr-u-placeItemsCenter pr-u-borderRadiusDefault"
-					 style="background-color: var(--palettes-lavender-100); color: var(--palettes-lavender-700);
-					 		block-size: var(--pr-t-spacings-600); inline-size: var(--pr-t-spacings-600);"
+		before: false,
+		beforeContent: `<div class="pr-u-displayGrid pr-u-placeItemsCenter pr-u-borderRadiusDefault"
+					 style="background-color: var(--palettes-lavender-100); color: var(--palettes-lavender-700)"
 				>
 					<lu-icon icon="heart" size="L" />
 				</div>`,
-		illustrationContentDisabled: `<div class="pr-u-displayGrid pr-u-placeItemsCenter pr-u-borderRadiusDefault"
-					 style="background-color: var(--palettes-neutral-50); color: var(--palettes-neutral-500);
-					 		block-size: var(--pr-t-spacings-600); inline-size: var(--pr-t-spacings-600);"
+		beforeContentDisabled: `<div class="pr-u-displayGrid pr-u-placeItemsCenter pr-u-borderRadiusDefault"
+					 style="background-color: var(--palettes-neutral-50); color: var(--palettes-neutral-500)"
 				>
 					<lu-icon icon="heart" size="L" />
 				</div>`,
-		actions: false,
-		actionsContent: `<button type="button" luButton>Lorem ipsum</button>`,
-		actionsContentDisabled: `<button type="button" luButton disabled>Lorem ipsum</button>`,
+		after: false,
+		afterContent: `<button type="button" luResourceCardAfterAction>Lorem ipsum</button>`,
+		afterContentDisabled: `<button type="button" luResourceCardAfterAction>Lorem ipsum</button>`,
 	},
 };

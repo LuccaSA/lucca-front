@@ -39,39 +39,41 @@
 			border-radius: var(--pr-t-border-radius-structure);
 		}
 
-		.resourceCard-content-before-content-illustration {
+		.resourceCard-content-dragBefore-content-before {
 			display: grid;
+			min-block-size: var(--pr-t-spacings-600);
+			min-inline-size: var(--pr-t-spacings-600);
 
 			&:empty {
 				display: none;
 			}
 		}
 
-		.resourceCard-content-before-content-handleButton.button {
+		.resourceCard-content-dragBefore-content-handleButton.button {
 			@include button.S;
 			@include button.ghost;
 			@include button.onlyIcon;
 			@include button.onlyIconS;
 		}
 
-		.resourceCard-content-before-content-handleButton,
-		.resourceCard-content-after .button {
+		.resourceCard-content-dragBefore-content-handleButton,
+		.resourceCard-content-after-action {
 			position: relative;
 			z-index: 2;
 		}
 
-		.resourceCard-content-before {
-			grid-area: before;
-			align-self: var(--components-resourceCard-content-before-alignSelf);
-			padding-block: var(--components-resourceCard-content-before-paddingBlock);
+		.resourceCard-content-dragBefore {
+			grid-area: dragBefore;
+			align-self: var(--components-resourceCard-content-dragBefore-alignSelf);
+			padding-block: var(--components-resourceCard-content-dragBefore-paddingBlock);
 		}
 
-		.resourceCard-content-before-content {
+		.resourceCard-content-dragBefore-content {
 			display: flex;
 			align-items: center;
 			gap: var(--pr-t-spacings-75);
 
-			&:has(.resourceCard-content-before-content-illustration:not(:empty), .resourceCard-content-before-content-handleButton) {
+			&:has(.resourceCard-content-dragBefore-content-before:not(:empty), .resourceCard-content-dragBefore-content-handleButton) {
 				margin-inline-end: var(--pr-t-spacings-150);
 			}
 		}
@@ -82,7 +84,7 @@
 			padding-block: var(--components-resourceCard-content-after-paddingBlock);
 		}
 
-		.resourceCard-content-after .button {
+		.resourceCard-content-after-action {
 			@include button.ghost;
 
 			&:has(> lu-icon:only-child, > .lucca-icon:only-child, > .lucca-icon:first-child + .pr-u-mask:last-child) {

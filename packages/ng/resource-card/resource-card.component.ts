@@ -1,7 +1,9 @@
-import { booleanAttribute, ChangeDetectionStrategy, Component, forwardRef, inject, input, ViewEncapsulation } from '@angular/core';
+import { NgTemplateOutlet } from '@angular/common';
+import { booleanAttribute, ChangeDetectionStrategy, Component, forwardRef, inject, input, signal, ViewEncapsulation } from '@angular/core';
 import { IconComponent } from '@lucca-front/ng/icon';
-import { LU_RESOURCE_CARD_WRAPPER_INSTANCE } from './resource-card-wrapper.token';
+import { ResourceCardActionComponent } from './action/resource-card-action.component';
 import { LU_RESOURCE_CARD_INSTANCE } from './resource-card.token';
+import { LU_RESOURCE_CARD_WRAPPER_INSTANCE } from './wrapper/resource-card-wrapper.token';
 
 @Component({
 	selector: 'lu-resource-card',
@@ -9,7 +11,7 @@ import { LU_RESOURCE_CARD_INSTANCE } from './resource-card.token';
 	styleUrl: './resource-card.component.scss',
 	changeDetection: ChangeDetectionStrategy.OnPush,
 	encapsulation: ViewEncapsulation.None,
-	imports: [IconComponent],
+	imports: [IconComponent, NgTemplateOutlet],
 	host: {
 		class: 'resourceCardContainer',
 	},
@@ -21,8 +23,6 @@ import { LU_RESOURCE_CARD_INSTANCE } from './resource-card.token';
 	],
 })
 export class ResourceCardComponent {
-	// #tooltip = inject(LuTooltipTriggerDirective);
-
 	wrapperRef = inject(LU_RESOURCE_CARD_WRAPPER_INSTANCE, { optional: true });
 
 	draggable = input(false, { transform: booleanAttribute });
@@ -30,8 +30,13 @@ export class ResourceCardComponent {
 	headingLevel = input<'1' | '2' | '3' | '4' | '5' | '6'>('3');
 	headingStyle = input<'3' | '4'>('3');
 
-	// constructor() {
-	// 	this.#tooltip.luTooltipOnlyForDisplay = true;
-	// 	this.#tooltip.luTooltipWhenEllipsis.set(true);
-	// }
+	actionRef = signal<ResourceCardActionComponent | null>(null);
+
+	// #tooltip = inject(LuTooltipTriggerDirective);
+
+	constructor() {
+		// this.#tooltip.luTooltipOnlyForDisplay = true;
+		// this.#tooltip.luTooltipWhenEllipsis.set(true);
+		// console.log(this.actionRef()?.contentRef());
+	}
 }
