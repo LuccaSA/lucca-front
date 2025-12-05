@@ -14,6 +14,7 @@
 		&.mod-inline {
 			@include inline;
 			@include hideFirstItems;
+			@include nestedInline;
 
 			&.mod-divider {
 				@include divider;
