@@ -28,6 +28,7 @@ export class ListingComponent {
 	readonly start = input(1, { transform: numberAttribute });
 	readonly inline = input(false, { transform: booleanAttribute });
 	readonly divider = input(false, { transform: booleanAttribute });
+	readonly reversed = input(false, { transform: booleanAttribute });
 
 	readonly paletteClass = computed(() => {
 		return {

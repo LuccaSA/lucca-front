@@ -13,6 +13,7 @@ interface ListingBasicStory {
 	defaultIcon: string;
 	icon: string;
 	start: number;
+	reversed: boolean;
 }
 
 export default {
@@ -32,14 +33,15 @@ export default {
 		const iconsParam = args.type === 'icons' ? ` icons` : ``;
 		const iconParam = args.type === 'icons' ? ` icon="${args.icon}"` : ``;
 		const defaultIconParam = args.type === 'icons' ? ` defaultIcon="${defaultIcon}"` : ``;
-		const startParam = args.start !== 1 ? ` start="${start}"` : ``;
+		const startParam = args.start !== 1 && args.start !== undefined ? ` start="${start}"` : ``;
+		const reversedParam = args.reversed ? ` reversed` : ``;
 		return {
-			template: cleanupTemplate(`<lu-listing${checklistParam}${orderedParam}${startParam}${iconsParam}${defaultIconParam}${generateInputs(inputs, context.argTypes)} ordered>
+			template: cleanupTemplate(`<lu-listing${checklistParam}${orderedParam}${startParam}${reversedParam}${iconsParam}${defaultIconParam}${generateInputs(inputs, context.argTypes)}>
 	<lu-listing-item>item</lu-listing-item>
 	<lu-listing-item${iconParam}>item</lu-listing-item>
 	<lu-listing-item>
 		item
-		<lu-listing${checklistParam}${orderedParam}${startParam}${iconsParam}${defaultIconParam}${generateInputs(inputs, context.argTypes)} >
+<lu-listing${checklistParam}${orderedParam}${startParam}${iconsParam}${defaultIconParam}${generateInputs(inputs, context.argTypes)}>
 			<lu-listing-item>item</lu-listing-item>
 			<lu-listing-item>item</lu-listing-item>
 			<lu-listing-item>item</lu-listing-item>
@@ -73,6 +75,9 @@ export const Template: StoryObj<ListingComponent & ListingItemComponent & { type
 		start: {
 			if: { arg: 'type', eq: 'ordered' },
 		},
+		reversed: {
+			if: { arg: 'type', eq: 'ordered' },
+		},
 		checklist: HiddenArgType,
 		icons: HiddenArgType,
 		ordered: HiddenArgType,
@@ -85,5 +90,6 @@ export const Template: StoryObj<ListingComponent & ListingItemComponent & { type
 		defaultIcon: 'heart',
 		icon: 'foodCroissant',
 		start: 1,
+		reversed: false,
 	},
 };
