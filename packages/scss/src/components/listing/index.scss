@@ -11,6 +11,7 @@
 		&:is(ol) {
 			@include ordered;
 		}
+
 		&.mod-inline {
 			@include inline;
 			@include hideFirstItems;

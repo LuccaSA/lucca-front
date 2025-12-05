@@ -63,14 +63,17 @@
 		&:has(.listing) {
 			--components-listing-item-content-display: flex;
 			--components-listing-item-content-columnGap: var(--pr-t-spacings-100);
+
 			.listing {
 				--components-listing-clipPath: none;
 			}
 		}
+
 		&:has(.listing.mod-divider) {
 			--components-listing-item-content-columnGap: var(--pr-t-spacings-200);
 		}
 	}
+
 	&:has(.listing.mod-divider) {
 		--components-listing-item-content-columnGap: var(--pr-t-spacings-200);
 		--components-listing-clipPath: inset(
@@ -91,6 +94,7 @@
 @mixin divider {
 	--components-listing-item-before-content: '';
 	--components-listing-inlineFirst: calc(var(--pr-t-spacings-100) + var(--pr-t-spacings-25) - var(--commons-divider-width));
+
 	.listing-item:has(.listing) {
 		--components-listing-item-content-columnGap: var(--pr-t-spacings-200);
 	}
