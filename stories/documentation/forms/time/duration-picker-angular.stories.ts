@@ -75,7 +75,7 @@ export default {
 			control: {
 				type: 'text',
 			},
-			description: "Modifie le pas d\'incrémentation.",
+			description: "Modifie le pas d'incrémentation.",
 		},
 		max: {
 			control: {
