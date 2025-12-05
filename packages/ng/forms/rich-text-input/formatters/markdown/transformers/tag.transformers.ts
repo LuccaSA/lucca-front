@@ -1,5 +1,5 @@
 import { TextMatchTransformer } from '@lexical/markdown';
-import { $createTagNode, TagNode } from './tag-node';
+import { $createTagNode, TagNode } from '@lucca-front/ng/forms/rich-text-input';
 
 /**
  * Transformer for tag nodes
