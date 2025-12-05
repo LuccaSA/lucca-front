@@ -1,3 +1,7 @@
+@if (displayedIcon()) {
+	<lu-icon [icon]="displayedIcon()" />
+}
+
 <ng-template #content><ng-content /></ng-template>
 
 @if (withEllipsis()) {

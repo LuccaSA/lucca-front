@@ -11,12 +11,6 @@
 			@include S;
 		}
 
-		// .palette-primary is deprecated
-		&.palette-product,
-		&.palette-primary {
-			@include product;
-		}
-
 		&.mod-unkillable {
 			@include unkillable;
 		}
