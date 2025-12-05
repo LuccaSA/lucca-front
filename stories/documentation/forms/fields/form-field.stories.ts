@@ -42,11 +42,7 @@ export default {
 			description: "Modifie l'état de l'inline message.",
 		},
 		errorInlineMessage: {
-			options: ['default', 'success', 'warning', 'error'],
-			control: {
-				type: 'select',
-			},
-			description: "Ajoute un texte d\'erreur sous le champ de formulaire lorsque celui-ci est en erreur.",
+			description: "Ajoute un texte d'erreur sous le champ de formulaire lorsque celui-ci est en erreur.",
 		},
 		tooltip: {
 			if: { arg: 'hiddenLabel', truthy: false },
