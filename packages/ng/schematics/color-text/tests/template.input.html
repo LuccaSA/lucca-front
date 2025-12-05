@@ -1,0 +1,11 @@
+<!-- basic class -->
+<div class="pr-u-textPrimary"></div>
+<div [class]="'pr-u-textPlaceholder'"></div>
+<div [class]="condition ? 'pr-u-textCleemy' : 'pr-u-textTimmi'"></div>
+
+<!-- NgClass -->
+<span aria-hidden="true" [ngClass]="{ 'pr-u-textWatermelon': showBillingInfos, 'pr-u-textPumpkin': !showBillingInfos }"></span>
+<span aria-hidden="true" [ngClass]="event.expanded ? 'pr-u-textSuccessContrasted' : 'pr-u-textWarningContrasted'"></span>
+
+<!-- Class bound attribute -->
+<span [class.pr-u-textPagga]="!showDetails"></span>
