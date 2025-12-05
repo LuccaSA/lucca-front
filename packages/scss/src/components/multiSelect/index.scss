@@ -59,21 +59,7 @@
 @layer components {
 	.multipleSelect-displayer-filter {
 		min-inline-size: 0;
-	}
-}
-
-@layer mods {
-	.multipleSelect-displayer {
-		&.mod-filter {
-			@include displayerFilter;
-
-			&.is-filled {
-				@include displayerFilterFilled;
-			}
-
-			&:has([aria-expanded='true']):not(:has(:placeholder-shown)) {
-				@include displayerFilterExpanded;
-			}
-		}
+		display: flex;
+		gap: 0.5ch;
 	}
 }
