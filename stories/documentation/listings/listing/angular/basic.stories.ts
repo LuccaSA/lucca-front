@@ -27,7 +27,7 @@ export default {
 	],
 
 	render: (args: ListingBasicStory, context) => {
-		const { type, checklist, ordered, icons, defaultIcon, icon, start, ...inputs } = args;
+		const { type, checklist, ordered, icons, defaultIcon, icon, start, reversed, ...inputs } = args;
 		const checklistParam = args.type === 'checklist' ? ` checklist` : ``;
 		const orderedParam = args.type === 'ordered' ? ` ordered` : ``;
 		const iconsParam = args.type === 'icons' ? ` icons` : ``;
@@ -89,7 +89,7 @@ export const Template: StoryObj<ListingComponent & ListingItemComponent & { type
 		palette: 'none',
 		defaultIcon: 'heart',
 		icon: 'foodCroissant',
-		start: 1,
+		start: 3,
 		reversed: false,
 	},
 };
