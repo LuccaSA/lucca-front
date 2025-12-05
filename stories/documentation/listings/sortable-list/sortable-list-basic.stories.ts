@@ -12,11 +12,13 @@ export default {
 			control: {
 				type: 'boolean',
 			},
+			description: 'Rend un élément de la liste cliquable.',
 		},
 		small: {
 			control: {
 				type: 'boolean',
 			},
+			description: 'Modifie la taille de la liste.',
 		},
 	},
 } as Meta;

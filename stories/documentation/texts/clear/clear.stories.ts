@@ -14,21 +14,25 @@ export default {
 			control: {
 				type: 'boolean',
 			},
+			descripotion: 'Modifie la taille du bouton.',
 		},
 		product: {
 			control: {
 				type: 'boolean',
 			},
+			descripotion: 'Applique la palette product au bouton.',
 		},
 		disabled: {
 			control: {
 				type: 'boolean',
 			},
+			descripotion: 'Désactive le bouton.',
 		},
 		inverted: {
 			control: {
 				type: 'boolean',
 			},
+			description: 'Modifie les couleurs du bouton pour le placer sur fond foncé.',
 		},
 	},
 } as Meta;

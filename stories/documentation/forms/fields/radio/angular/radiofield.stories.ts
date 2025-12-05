@@ -19,18 +19,39 @@ export default {
 			control: {
 				type: 'select',
 			},
+			description: 'Modifie la taille du radio.',
 		},
 		inlineMessageState: {
 			options: ['default', 'success', 'warning', 'error'],
 			control: {
 				type: 'select',
 			},
+			description: "Modifie l'état de l'inline message.",
 		},
 		hiddenLabel: {
 			description: "Masque le label en le conservant dans le DOM pour les lecteurs d'écrans",
 		},
 		tooltip: {
 			if: { arg: 'hiddenLabel', truthy: false },
+			description: 'Affiche une icône (?) associée à une info-bulle.',
+		},
+		label: {
+			control: {
+				type: 'text',
+			},
+			description: "Modifie le label de l'input.",
+		},
+		required: {
+			control: {
+				type: 'boolean',
+			},
+			description: 'Marque le champ comme obligatoire.',
+		},
+		inlineMessage: {
+			control: {
+				type: 'text',
+			},
+			description: 'Ajoute un texte descriptif (aide, erreur, etc.) sous le champ de formulaire.',
 		},
 	},
 } as Meta;

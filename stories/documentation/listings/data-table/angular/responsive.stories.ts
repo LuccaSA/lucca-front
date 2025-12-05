@@ -18,8 +18,14 @@ import { Meta, moduleMetadata, StoryObj } from '@storybook/angular';
 export default {
 	title: 'Documentation/Listings/Data table/Angular/Responsive',
 	argTypes: {
+		fixedWidth: {
+			description: "Modifie la largeur d'une colonne lorsque <code>layoutFixed</code> est activé.",
+		},
 		fixedWidthValue: {
 			if: { arg: 'fixedWidth', truthy: true },
+		},
+		responsiveConfig: {
+			description: 'Applique une configuration responsive à LayoutFixed.',
 		},
 	},
 	decorators: [

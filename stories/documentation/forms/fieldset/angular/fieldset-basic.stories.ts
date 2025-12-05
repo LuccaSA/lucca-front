@@ -10,24 +10,40 @@ export default {
 				type: 'boolean',
 			},
 			if: { arg: 'expandable', truthy: false },
+			description: 'Place le titre du fieldset à gauche des champs.',
 		},
 		expandable: {
 			control: {
 				type: 'boolean',
 			},
 			if: { arg: 'horizontal', truthy: false },
+			description: 'Permet au fieldset de se replier.',
 		},
 		expanded: {
 			control: {
 				type: 'boolean',
 			},
 			if: { arg: 'expandable', truthy: true },
+			description: 'Affiche le fieldset en vue dépliée.',
 		},
 		size: {
 			options: ['', 'S'],
 			control: {
 				type: 'select',
 			},
+			description: 'Modifie la taille du fieldset.',
+		},
+		heading: {
+			control: {
+				type: 'text',
+			},
+			description: 'Titre du fieldset.',
+		},
+		helper: {
+			control: {
+				type: 'text',
+			},
+			description: 'Ajoute un sous-titre au fieldset.',
 		},
 	},
 	decorators: [
