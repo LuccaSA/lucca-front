@@ -49,13 +49,13 @@ export default {
 		},
 		required: {
 			control: {
-				type: 'text',
+				type: 'boolean',
 			},
 			description: 'Marque le champ comme obligatoire.',
 		},
 		mixed: {
 			control: {
-				type: 'text',
+				type: 'boolean',
 			},
 			description: 'Applique un état de sélection mixte (-) à la checkbox.',
 		},
