@@ -1,5 +1,5 @@
 import { NgTemplateOutlet } from '@angular/common';
-import { booleanAttribute, Component, ElementRef, EventEmitter, input, Input, Output, ViewChild, ViewEncapsulation } from '@angular/core';
+import { booleanAttribute, ChangeDetectionStrategy, Component, ElementRef, EventEmitter, input, Input, Output, signal, ViewChild, ViewEncapsulation } from '@angular/core';
 import { ReactiveFormsModule } from '@angular/forms';
 import { LuccaIcon } from '@lucca-front/icons';
 import { ClearComponent } from '@lucca-front/ng/clear';
@@ -20,12 +20,13 @@ type TextFieldType = 'text' | 'email' | 'password' | 'url';
 	templateUrl: './text-input.component.html',
 	hostDirectives: [NoopValueAccessorDirective],
 	encapsulation: ViewEncapsulation.None,
+	changeDetection: ChangeDetectionStrategy.OnPush,
 	providers: [provideNgxMask()],
 })
 export class TextInputComponent {
 	ngControl = injectNgControl();
 
-	mask = input<string | null>(null);
+	readonly mask = input<string | null>(null);
 
 	@Input()
 	placeholder: string = '';
@@ -57,7 +58,7 @@ export class TextInputComponent {
 
 	@Input()
 	get type(): TextFieldType {
-		return this.showPassword ? 'text' : this._type;
+		return this.showPassword() ? 'text' : this._type;
 	}
 
 	set type(type: TextFieldType) {
@@ -70,7 +71,7 @@ export class TextInputComponent {
 	 */
 	searchIcon: LuccaIcon = 'searchMagnifyingGlass';
 
-	showPassword: boolean = false;
+	protected showPassword = signal<boolean>(false);
 
 	private _type: TextFieldType = 'text';
 
@@ -86,6 +87,7 @@ export class TextInputComponent {
 	}
 
 	togglePasswordVisibility() {
-		this.showPassword = !this.showPassword;
+		const _showPassword = this.showPassword();
+		this.showPassword.set(!_showPassword);
 	}
 }

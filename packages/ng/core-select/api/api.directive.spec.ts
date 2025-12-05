@@ -1,4 +1,4 @@
-import { Component, Directive } from '@angular/core';
+import { ChangeDetectionStrategy, Component, Directive } from '@angular/core';
 import { fakeAsync } from '@angular/core/testing';
 import { LuSimpleSelectInputComponent } from '@lucca-front/ng/simple-select';
 import { Spectator, createComponentFactory } from '@ngneat/spectator/jest';
@@ -46,6 +46,7 @@ class TestDirective extends ALuCoreSelectApiDirective<TestEntity> {
 @Component({
 	template: ` <lu-simple-select testApi />`,
 	imports: [TestDirective, LuSimpleSelectInputComponent],
+	changeDetection: ChangeDetectionStrategy.OnPush,
 })
 class HostComponent {}
 

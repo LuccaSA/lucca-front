@@ -1,3 +1,4 @@
+import { signal } from '@angular/core';
 import { fakeAsync, tick } from '@angular/core/testing';
 import { LuRelativeTime, LuRelativeTimeFormatUnit } from './humanize.model';
 import { getRelativeTime, relativeTimeTimer } from './humanize.utils';
@@ -182,13 +183,13 @@ describe('HumanizeUtils', () => {
 				// Arrange
 				const date = Date.now() + 55_000;
 				const relativeTime$ = relativeTimeTimer(date);
-				const emittedValues: LuRelativeTime[] = [];
+				const emittedValues = signal<LuRelativeTime[]>([]);
 
 				// Act
-				const sub = relativeTime$.subscribe((relativeTime) => emittedValues.push(relativeTime));
+				const sub = relativeTime$.subscribe((relativeTime) => emittedValues.set([relativeTime]));
 
 				// Assert
-				expect(emittedValues).toEqual([{ unit: 'second', value: 55 }]);
+				expect(emittedValues()).toEqual([{ unit: 'second', value: 55 }]);
 				sub.unsubscribe();
 			});
 

@@ -1,6 +1,7 @@
 import {
 	afterNextRender,
 	booleanAttribute,
+	ChangeDetectionStrategy,
 	Component,
 	computed,
 	contentChild,
@@ -35,28 +36,29 @@ import { LU_DATA_TABLE_INSTANCE } from './data-table.token';
 			useExisting: forwardRef(() => DataTableComponent),
 		},
 	],
+	changeDetection: ChangeDetectionStrategy.OnPush,
 })
 export class DataTableComponent {
 	#elementRef = inject<ElementRef<Element>>(ElementRef);
 	tableRef = viewChild<ElementRef<Element>>('tableRef');
 
-	hover = input(false, { transform: booleanAttribute });
-	selectable = input(false, { transform: booleanAttribute });
-	layoutFixed = input(false, { transform: booleanAttribute });
-	cellBorder = input(false, { transform: booleanAttribute });
-	nested = input(false, { transform: booleanAttribute });
+	readonly hover = input(false, { transform: booleanAttribute });
+	readonly selectable = input(false, { transform: booleanAttribute });
+	readonly layoutFixed = input(false, { transform: booleanAttribute });
+	readonly cellBorder = input(false, { transform: booleanAttribute });
+	readonly nested = input(false, { transform: booleanAttribute });
 
-	responsive = input<ResponsiveConfig<'layoutFixed', true>>({});
+	readonly responsive = input<ResponsiveConfig<'layoutFixed', true>>({});
 
-	verticalAlign = input<null | 'top' | 'middle' | 'bottom'>(null);
+	readonly verticalAlign = input<null | 'top' | 'middle' | 'bottom'>(null);
 
-	rows = contentChildren(DataTableRowComponent, { descendants: true });
-	header = contentChild(DataTableHeadComponent, { descendants: true });
+	readonly rows = contentChildren(DataTableRowComponent, { descendants: true });
+	readonly header = contentChild(DataTableHeadComponent, { descendants: true });
 
-	stickyHeader = computed(() => this.header().sticky());
+	readonly stickyHeader = computed(() => this.header().sticky());
 
-	stickyColsStart = input(0, { transform: numberAttribute });
-	stickyColsEnd = input(0, { transform: numberAttribute });
+	readonly stickyColsStart = input(0, { transform: numberAttribute });
+	readonly stickyColsEnd = input(0, { transform: numberAttribute });
 
 	firstColumnVisibleAfterColsStart = signal(true);
 	lastColumnVisibleBeforeColsEnd = signal(false);
@@ -67,9 +69,9 @@ export class DataTableComponent {
 	firstRowVisible = signal(true);
 	lastRowVisible = signal(false);
 
-	cols = computed(() => this.header().cols());
+	readonly cols = computed(() => this.header().cols());
 
-	classMods = computed(() => {
+	readonly classMods = computed(() => {
 		return {
 			dataTable: true,
 			['mod-stickyHeader']: this.stickyHeader(),

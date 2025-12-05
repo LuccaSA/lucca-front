@@ -1,4 +1,4 @@
-import { Component, ViewEncapsulation } from '@angular/core';
+import { ChangeDetectionStrategy, Component, ViewEncapsulation } from '@angular/core';
 
 @Component({
 	// eslint-disable-next-line @angular-eslint/component-selector
@@ -8,5 +8,6 @@ import { Component, ViewEncapsulation } from '@angular/core';
 	host: {
 		class: 'indexTable-body-row-cell-link, pr-u-mask',
 	},
+	changeDetection: ChangeDetectionStrategy.OnPush,
 })
 export class IndexTableActionFileComponent {}

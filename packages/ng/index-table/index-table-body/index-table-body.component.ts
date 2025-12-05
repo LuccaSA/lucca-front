@@ -1,4 +1,4 @@
-import { Component, computed, forwardRef, inject, input, model, ViewEncapsulation } from '@angular/core';
+import { ChangeDetectionStrategy, Component, computed, forwardRef, inject, input, model, ViewEncapsulation } from '@angular/core';
 import { ButtonComponent } from '@lucca-front/ng/button';
 import { PortalContent, PortalDirective } from '@lucca-front/ng/core';
 import { IconComponent } from '@lucca-front/ng/icon';
@@ -21,6 +21,7 @@ import { LU_INDEX_TABLE_BODY_INSTANCE } from './index-table-body.token';
 			useExisting: forwardRef(() => IndexTableBodyComponent),
 		},
 	],
+	changeDetection: ChangeDetectionStrategy.OnPush,
 })
 export class IndexTableBodyComponent {
 	group = input<PortalContent | null>(null);

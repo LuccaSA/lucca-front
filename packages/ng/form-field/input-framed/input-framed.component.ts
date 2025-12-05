@@ -1,4 +1,4 @@
-import { booleanAttribute, Component, forwardRef, input, ViewEncapsulation } from '@angular/core';
+import { booleanAttribute, ChangeDetectionStrategy, Component, forwardRef, input, ViewEncapsulation } from '@angular/core';
 import { PortalContent, PortalDirective } from '@lucca-front/ng/core';
 import { INPUT_FRAMED_INSTANCE } from './input-framed.token';
 
@@ -13,9 +13,10 @@ import { INPUT_FRAMED_INSTANCE } from './input-framed.token';
 			useExisting: forwardRef(() => InputFramedComponent),
 		},
 	],
+	changeDetection: ChangeDetectionStrategy.OnPush,
 })
 export class InputFramedComponent {
-	framedPortal = input<PortalContent | null>(null);
-	center = input(false, { transform: booleanAttribute });
-	size = input<'L' | null>(null);
+	readonly framedPortal = input<PortalContent | null>(null);
+	readonly center = input(false, { transform: booleanAttribute });
+	readonly size = input<'L' | null>(null);
 }

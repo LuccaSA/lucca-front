@@ -1,4 +1,4 @@
-import { booleanAttribute, Component, computed, contentChild, contentChildren, ElementRef, forwardRef, input, viewChild, ViewEncapsulation } from '@angular/core';
+import { booleanAttribute, ChangeDetectionStrategy, Component, computed, contentChild, contentChildren, ElementRef, forwardRef, input, viewChild, ViewEncapsulation } from '@angular/core';
 import { ResponsiveConfig } from '@lucca-front/ng/core';
 
 import { IndexTableHeadComponent } from './index-table-head/index-table-head.component';
@@ -20,6 +20,7 @@ import { LU_INDEX_TABLE_INSTANCE } from './index-table.token';
 			useExisting: forwardRef(() => IndexTableComponent),
 		},
 	],
+	changeDetection: ChangeDetectionStrategy.OnPush,
 })
 export class IndexTableComponent {
 	tableRef = viewChild<ElementRef<Element>>('tableRef');

@@ -1,5 +1,5 @@
 import { NgTemplateOutlet } from '@angular/common';
-import { booleanAttribute, Component, contentChildren, ElementRef, forwardRef, inject, input, model, ViewEncapsulation } from '@angular/core';
+import { booleanAttribute, ChangeDetectionStrategy, Component, contentChildren, ElementRef, forwardRef, inject, input, model, ViewEncapsulation } from '@angular/core';
 import { FormsModule } from '@angular/forms';
 import { FormFieldComponent } from '@lucca-front/ng/form-field';
 import { CheckboxInputComponent } from '@lucca-front/ng/forms';
@@ -28,6 +28,7 @@ import { LU_DATA_TABLE_ROW_INSTANCE } from './data-table-row.token';
 			useExisting: forwardRef(() => DataTableRowComponent),
 		},
 	],
+	changeDetection: ChangeDetectionStrategy.OnPush,
 })
 export class DataTableRowComponent {
 	bodyRef = inject(LU_DATA_TABLE_BODY_INSTANCE, { optional: true });
@@ -41,6 +42,6 @@ export class DataTableRowComponent {
 	protected tableRef = inject(LU_DATA_TABLE_INSTANCE);
 
 	selected = model<boolean>(false);
-	selectedLabel = input<string | null>(null);
-	disabled = input(false, { transform: booleanAttribute });
+	readonly selectedLabel = input<string | null>(null);
+	readonly disabled = input(false, { transform: booleanAttribute });
 }

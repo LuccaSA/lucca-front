@@ -1,4 +1,4 @@
-import { Component, ViewEncapsulation } from '@angular/core';
+import { ChangeDetectionStrategy, Component, ViewEncapsulation } from '@angular/core';
 
 @Component({
 	selector: 'lu-dropdown-item',
@@ -8,5 +8,6 @@ import { Component, ViewEncapsulation } from '@angular/core';
 		class: 'dropdown-list-option',
 		role: 'listitem',
 	},
+	changeDetection: ChangeDetectionStrategy.OnPush,
 })
 export class DropdownItemComponent {}

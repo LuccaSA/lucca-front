@@ -1,4 +1,4 @@
-import { booleanAttribute, Component, inject, input, OnChanges, ViewEncapsulation } from '@angular/core';
+import { booleanAttribute, ChangeDetectionStrategy, Component, inject, input, OnChanges, ViewEncapsulation } from '@angular/core';
 import { LuClass, Palette } from '@lucca-front/ng/core';
 import { LuTooltipModule } from '@lucca-front/ng/tooltip';
 
@@ -9,20 +9,21 @@ import { LuTooltipModule } from '@lucca-front/ng/tooltip';
 	encapsulation: ViewEncapsulation.None,
 	providers: [LuClass],
 	imports: [LuTooltipModule],
+	changeDetection: ChangeDetectionStrategy.OnPush,
 	host: {
 		class: 'statusBadge',
 	},
 })
 export class StatusBadgeComponent implements OnChanges {
-	#luClass = inject(LuClass);
+	readonly #luClass = inject(LuClass);
 
-	withEllipsis = input(false, { transform: booleanAttribute });
+	readonly withEllipsis = input(false, { transform: booleanAttribute });
 
-	label = input.required<string>();
+	readonly label = input.required<string>();
 
-	size = input<'L' | 'M'>('M');
+	readonly size = input<'L' | 'M'>('M');
 
-	palette = input<Palette | null>(null);
+	readonly palette = input<Palette | null>(null);
 
 	ngOnChanges(): void {
 		this.#luClass.setState({ [`palette-${this.palette()}`]: !!this.palette(), [`mod-${this.size()}`]: true });

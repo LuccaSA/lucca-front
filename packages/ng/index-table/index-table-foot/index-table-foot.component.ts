@@ -1,4 +1,4 @@
-import { Component, forwardRef, ViewEncapsulation } from '@angular/core';
+import { ChangeDetectionStrategy, Component, forwardRef, ViewEncapsulation } from '@angular/core';
 import { LU_INDEX_TABLE_FOOT_INSTANCE } from './index-table-foot.token';
 
 @Component({
@@ -16,5 +16,6 @@ import { LU_INDEX_TABLE_FOOT_INSTANCE } from './index-table-foot.token';
 			useExisting: forwardRef(() => IndexTableFootComponent),
 		},
 	],
+	changeDetection: ChangeDetectionStrategy.OnPush,
 })
 export class IndexTableFootComponent {}
