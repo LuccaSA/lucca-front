@@ -1,5 +1,12 @@
 @if (ordered()) {
-	<ol class="listing" [class.mod-icons]="icons()" [class.mod-checklist]="checklist()" [class]="paletteClass" [attr.start]="start()">
+	<ol
+		class="listing"
+		[class.mod-icons]="icons()"
+		[class.mod-checklist]="checklist()"
+		[class]="paletteClass"
+		[attr.start]="start()"
+		[attr.reversed]="reversed() ? 'reversed' : null"
+	>
 		<ng-container *ngTemplateOutlet="content" />
 	</ol>
 } @else {

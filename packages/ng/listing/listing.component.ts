@@ -21,6 +21,7 @@ import { LU_LISTING_INSTANCE } from './listing.token';
 export class ListingComponent {
 	ordered = input(false, { transform: booleanAttribute });
 	start = input(1, { transform: numberAttribute });
+	reversed = input(false, { transform: booleanAttribute });
 	checklist = input(false, { transform: booleanAttribute });
 	inline = input(false, { transform: booleanAttribute });
 	divider = input(false, { transform: booleanAttribute });
