@@ -85,5 +85,5 @@
 
 @mixin divider {
 	--components-listing-item-before-content: '';
-	--components-listing-inlineFirst: calc(var(--pr-t-spacings-100) + var(--pr-t-spacings-25) - var(--commons-divider-width));
+	--components-listing-inlineFirst: calc(var(--pr-t-spacings-100) + var(--pr-t-spacings-25) + var(--commons-divider-width));
 }
