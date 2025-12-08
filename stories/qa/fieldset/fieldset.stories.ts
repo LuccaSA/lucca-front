@@ -1,9 +1,11 @@
 import { Component } from '@angular/core';
+import { FieldsetComponent } from '@lucca-front/ng/forms';
 import { Meta, StoryFn } from '@storybook/angular';
 
 @Component({
 	selector: 'fieldset-stories',
 	templateUrl: './fieldset.stories.html',
+	imports: [FieldsetComponent],
 })
 class fieldsetStory {}
 
