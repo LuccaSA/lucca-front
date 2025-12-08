@@ -1,30 +1,16 @@
-<section class="resourceCard" [class.is-disabled]="disabled()">
-	<div class="resourceCard-content">
-		<div class="resourceCard-content-dragBefore">
-			<div class="resourceCard-content-dragBefore-content">
-				@if (wrapperRef?.draggable() || draggable()) {
-					<div class="button cdk-drag-handle resourceCard-content-dragBefore-content-handleButton" cdkDragHandle>
-						<lu-icon icon="dotsDrag" />
-					</div>
-				}
-				<div class="resourceCard-content-dragBefore-content-before">
-					<ng-content select="[resourceCardBefore]" />
-				</div>
+<section class="resourceCard" [class.mod-S]="size() === 'S'">
+	<div class="resourceCard-layout">
+		<div class="resourceCard-layout-before">
+			<div class="button cdk-drag-handle resourceCard-layout-before-button" cdkDragHandle>
+				<lu-icon icon="dotsDrag" class="resourceCard-layout-before-button-icon" />
 			</div>
+			<div class="resourceCard-layout-before-illustration"><ng-content select="[resourceCardIllustration]" /></div>
 		</div>
-		<header class="resourceCard-content-header">
-			<div role="heading" [attr.aria-level]="headingLevel()" [class]="`resourceCard-content-header-title pr-u-h${headingStyle()}`">
-				<ng-content />
-			</div>
-			<div class="resourceCard-content-header-infos">
-				<ng-content select="[resourceCardInfos]" />
-			</div>
+		<header class="resourceCard-layout-header">
+			<div class="resourceCard-layout-header-title" role="heading" level="3"><ng-content /></div>
+			<div class="resourceCard-layout-header-infos"><ng-content select="[resourceCardInfos]" /></div>
 		</header>
-		<div class="resourceCard-content-description">
-			<ng-content select="[resourceCardDescription]" />
-		</div>
-		<div class="resourceCard-content-after">
-			<ng-content select="[resourceCardAfter]" />
-		</div>
+		<div class="resourceCard-layout-after"><ng-content select="[resourceCardAction]" /></div>
+		<div class="resourceCard-layout-content"><ng-content select="[resourceCardContent]" /></div>
 	</div>
 </section>
