@@ -31,18 +31,13 @@ export default {
 		const defaultIconParam = args.type === 'icons' ? ` defaultIcon="${defaultIcon}"` : ``;
 		return {
 			template: `<lu-listing inline${checklistParam}${iconsParam}${defaultIconParam}${generateInputs(inputs, context.argTypes)}>
-	<lu-listing-item>lorem ipsum</lu-listing-item>
-	<lu-listing-item>lorem ipsum dolor sit amet</lu-listing-item>
-	<lu-listing-item><a href="#">lorem ipsum dolor sit</a></lu-listing-item>
-	<lu-listing-item><a href="#">lorem</a></lu-listing-item>
-	<lu-listing-item><a href="#">lorem ipsum dolor sit amet</a></lu-listing-item>
-	<lu-listing-item> item
-		<lu-listing inline${checklistParam}${iconsParam}${defaultIconParam}${generateInputs(inputs, context.argTypes)}>
-			<lu-listing-item${iconParam}>lorem ipsum</lu-listing-item>
-			<lu-listing-item>lorem ipsum dolor sit amet</lu-listing-item>
-		</lu-listing>
-	</lu-listing-item>
-		<lu-listing-item>item</lu-listing-item>
+	<lu-listing-item>Lorem ipsum</lu-listing-item>
+	<lu-listing-item>Lorem ipsum dolor sit amet</lu-listing-item>
+	<lu-listing-item>Lorem ipsum dolor sit</lu-listing-item>
+	<lu-listing-item>Lorem</lu-listing-item>
+	<lu-listing-item>Lorem ipsum</lu-listing-item>
+	<lu-listing-item>Lorem ipsum dolor</lu-listing-item>
+	<lu-listing-item>Lorem ipsum</lu-listing-item>
 </lu-listing>`,
 		};
 	},
