@@ -3,13 +3,14 @@ import { BrowserAnimationsModule } from '@angular/platform-browser/animations';
 import { FormFieldComponent } from '@lucca-front/ng/form-field';
 import { TimePickerComponent } from '@lucca-front/ng/time';
 import { Meta, moduleMetadata, StoryObj } from '@storybook/angular';
+import { StoryModelDisplayComponent } from 'stories/helpers/story-model-display.component';
 import { cleanupTemplate, generateInputs } from '../../../helpers/stories';
 
 export default {
 	title: 'Documentation/Forms/Time/Time Picker/Angular Form',
 	decorators: [
 		moduleMetadata({
-			imports: [TimePickerComponent, FormFieldComponent, FormsModule, BrowserAnimationsModule],
+			imports: [TimePickerComponent, FormFieldComponent, FormsModule, BrowserAnimationsModule, StoryModelDisplayComponent],
 		}),
 	],
 	argTypes: {
@@ -24,6 +25,9 @@ export default {
 			control: {
 				type: 'select',
 			},
+		},
+		tooltip: {
+			if: { arg: 'hiddenLabel', truthy: false },
 		},
 		hiddenLabel: {
 			description: "Masque le label en le conservant dans le DOM pour les lecteurs d'écrans",
@@ -49,14 +53,14 @@ export const Basic: StoryObj<TimePickerComponent & FormFieldComponent & { requir
 			<span aria-hidden="true">${label}</span>
 		</ng-template>
 </lu-form-field>
-{{example}}
+<pr-story-model-display>{{ example }}</pr-story-model-display>
 `),
 		};
 	},
 	args: {
+		hiddenLabel: false,
 		label: 'Label',
 		tooltip: 'Tooltip message',
-		hiddenLabel: false,
 		required: true,
 		inlineMessage: 'Helper message',
 		inlineMessageState: 'default',

@@ -19,7 +19,7 @@ export default {
 			props: {
 				currentMonth: new Date(),
 			},
-			template: `<lu-calendar2 [hideToday]="false" [showOverflow]="true" [enableOverflow]="true" [date]="currentMonth" mode="day" (dateClicked)="selected($event)"></lu-calendar2>`,
+			template: `<lu-calendar2 [hideToday]="false" [showOverflow]="true" [enableOverflow]="true" [date]="currentMonth" mode="day" (dateClicked)="selected($event)" />`,
 		};
 	},
 } as Meta;

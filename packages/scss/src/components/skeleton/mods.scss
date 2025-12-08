@@ -4,13 +4,13 @@
 }
 
 @mixin square {
-	border-radius: var(--commons-borderRadius-M);
+	border-radius: var(--pr-t-border-radius-small);
 	block-size: var(--components-skeleton-shape-height);
 	inline-size: var(--components-skeleton-shape-width);
 }
 
 @mixin circle {
-	border-radius: var(--commons-borderRadius-full);
+	border-radius: var(--pr-t-border-radius-full);
 	block-size: var(--components-skeleton-shape-height);
 	inline-size: var(--components-skeleton-shape-width);
 }

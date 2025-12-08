@@ -1,31 +1,24 @@
 @use '@lucca-front/scss/src/commons/utils/namespace';
 
 @mixin component($atRoot: namespace.$defaultAtRoot) {
-	overflow: hidden;
-	padding-inline: var(--pr-t-spacings-200);
-	display: block;
-	position: relative;
-	z-index: 0;
+	display: flex;
+	flex-direction: column;
+	justify-content: center;
+	align-items: center;
+	padding-inline: var(--components-fancyBox-paddingInline);
+	margin-inline: var(--components-fancyBox-marginInline);
+	contain: layout;
 
 	@at-root ($atRoot) {
 		.fancyBox-content {
-			display: flex;
-			flex-direction: column;
-			margin-block: 0;
-			margin-inline: auto;
-			min-block-size: 10rem;
-			min-inline-size: min(20rem, 100%);
-			padding-block: var(--pr-t-spacings-300);
-			inline-size: fit-content;
 			position: relative;
-		}
-
-		.fancyBox-content-box {
-			position: relative;
-			padding-block: var(--pr-t-spacings-300);
-			padding-inline: var(--pr-t-spacings-700);
+			min-block-size: var(--components-fancyBox-contentMinBlockSize);
+			min-inline-size: var(--components-fancyBox-contentMinInlineSize);
+			max-inline-size: 100%;
+			padding-block: var(--components-fancyBox-contentPaddingBlock);
+			padding-inline: var(--components-fancyBox-contentPaddingInline);
 			background-color: var(--pr-t-elevation-surface-raised);
-			border-radius: 16px;
+			border-radius: var(--pr-t-border-radius-structure);
 			flex-grow: 1;
 			display: flex;
 			flex-direction: column;
@@ -42,6 +35,7 @@
 				background-repeat: no-repeat;
 				background-size: contain;
 				transition-duration: var(--commons-animations-durations-slow);
+				pointer-events: none;
 			}
 
 			&::before {
@@ -59,7 +53,7 @@
 			}
 		}
 
-		.fancyBox-content-box-foreground {
+		.fancyBox-content-foreground {
 			position: absolute;
 			inline-size: var(--components-fancyBox-imageWidth);
 			block-size: var(--components-fancyBox-imageHeight);
@@ -70,6 +64,7 @@
 			background-size: contain;
 			transition-property: width, height, top, right;
 			transition-duration: var(--commons-animations-durations-slow);
+			pointer-events: none;
 		}
 	}
 }

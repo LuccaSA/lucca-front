@@ -1,10 +1,10 @@
-import { booleanAttribute, Component, computed, effect, inject, input, LOCALE_ID, signal } from '@angular/core';
+import { booleanAttribute, Component, computed, effect, inject, input, LOCALE_ID, model, output, signal } from '@angular/core';
 import { getIntl } from '@lucca-front/ng/core';
 import { addMonths, addYears, isAfter, isBefore, isSameMonth, startOfDay, startOfMonth } from 'date-fns';
 import { CalendarMode } from './calendar2/calendar-mode';
 import { CellStatus } from './calendar2/cell-status';
 import { DateRange, DateRangeInput } from './calendar2/date-range';
-import { getDateFormat, getLocalizedDateFormat } from './date-format';
+import { getDateFormat, getLocalizedDateFormat, getSeparator } from './date-format';
 import { DATE_FORMAT, DateFormat } from './date.const';
 import { LU_DATE2_TRANSLATIONS } from './date2.translate';
 import { transformDateInputToDate, transformDateRangeInputToDateRange } from './utils';
@@ -18,6 +18,7 @@ export abstract class AbstractDateComponent {
 	protected locale = inject(LOCALE_ID);
 	// Contains the current date format (like dd/mm/yy etc) based on current locale
 	protected dateFormat = getDateFormat(this.locale);
+	protected separator = getSeparator(this.locale);
 	intlDateTimeFormat = new Intl.DateTimeFormat(this.locale);
 
 	intlDateTimeFormatMonth = new Intl.DateTimeFormat(this.locale, { month: 'numeric', year: 'numeric' });
@@ -32,12 +33,13 @@ export abstract class AbstractDateComponent {
 	protected inDateISOFormat = computed(() => this.format() === DATE_FORMAT.DATE_ISO);
 
 	ranges = input([], { transform: (v: readonly DateRange[] | readonly DateRangeInput[]) => v.map(transformDateRangeInputToDateRange) });
-	hideToday = input<boolean, boolean>(false, { transform: booleanAttribute });
-	hasTodayButton = input<boolean, boolean>(false, { transform: booleanAttribute });
-	clearable = input<boolean, boolean>(null, { transform: booleanAttribute });
+	hideToday = input(false, { transform: booleanAttribute });
+	hasTodayButton = input(false, { transform: booleanAttribute });
+	clearable = input(null, { transform: booleanAttribute });
+	clearBehavior = input<'clear' | 'reset'>('clear');
 
 	mode = input<CalendarMode>('day');
-	hideWeekend = input<boolean, boolean>(false, { transform: booleanAttribute });
+	hideWeekend = input(false, { transform: booleanAttribute });
 
 	getCellInfo = input<((day: Date, mode: CalendarMode) => CellStatus) | null>();
 
@@ -51,7 +53,11 @@ export abstract class AbstractDateComponent {
 		transform: transformDateInputToDate,
 	});
 
-	calendarMode = signal<CalendarMode>('day');
+	calendarMode = model<CalendarMode>();
+
+	panelOpened = output<void>();
+
+	panelClosed = output<void>();
 
 	dateFormatLocalized = computed(() => {
 		return getLocalizedDateFormat(this.locale, this.mode());
@@ -71,34 +77,41 @@ export abstract class AbstractDateComponent {
 	}
 
 	isInMinMax(date: Date, mode: CalendarMode): boolean {
-		let result = true;
-		if (this.min()) {
-			switch (mode) {
-				case 'day':
-					result = result && this.min().getTime() <= date.getTime();
-					break;
-				case 'month':
-					result = (result && isBefore(startOfMonth(this.min()), startOfMonth(date))) || isSameMonth(this.min(), date);
-					break;
-				case 'year':
-					result = result && this.min().getFullYear() <= date.getFullYear();
-					break;
-			}
+		return this.isAfterMin(date, mode) && this.isBeforeMax(date, mode);
+	}
+
+	isAfterMin(date: Date, mode: CalendarMode): boolean {
+		if (!this.min()) {
+			return true;
 		}
-		if (this.max()) {
-			switch (mode) {
-				case 'day':
-					result = result && this.max().getTime() >= date.getTime();
-					break;
-				case 'month':
-					result = (result && isAfter(startOfMonth(this.max()), startOfMonth(date))) || isSameMonth(this.max(), date);
-					break;
-				case 'year':
-					result = result && this.max().getFullYear() >= date.getFullYear();
-					break;
-			}
+
+		switch (mode) {
+			case 'day':
+				return this.min().getTime() <= date.getTime();
+			case 'month':
+				return isBefore(startOfMonth(this.min()), startOfMonth(date)) || isSameMonth(this.min(), date);
+			case 'year':
+				return this.min().getFullYear() <= date.getFullYear();
+			default:
+				return true;
 		}
-		return result;
+	}
+
+	isBeforeMax(date: Date, mode: CalendarMode): boolean {
+		if (!this.max()) {
+			return true;
+		}
+
+		switch (mode) {
+			case 'day':
+				return this.max().getTime() >= date.getTime();
+			case 'month':
+				return isAfter(startOfMonth(this.max()), startOfMonth(date)) || isSameMonth(this.max(), date);
+			case 'year':
+				return this.max().getFullYear() >= date.getFullYear();
+			default:
+				return true;
+		}
 	}
 
 	isValidDate(date: Date): boolean {

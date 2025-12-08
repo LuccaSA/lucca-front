@@ -4,24 +4,23 @@
 @use '@lucca-front/scss/src/commons/utils/namespace';
 
 @mixin component($atRoot: namespace.$defaultAtRoot) {
-	border-radius: var(--commons-borderRadius-L);
+	border-radius: var(--pr-t-border-radius-default);
 	background-color: var(--palettes-50, var(--palettes-neutral-50));
-	color: var(--palettes-neutral-800);
+	color: var(--pr-t-color-text);
 	box-shadow: 0 0 0 var(--commons-divider-width) var(--palettes-300, var(--palettes-neutral-300));
 
 	a,
 	.link {
-		--commons-text-link-color: var(--palettes-neutral-800);
+		--commons-text-link-color: var(--pr-t-color-text);
 		--commons-text-link-hover: var(--palettes-neutral-900);
 	}
 
 	@at-root ($atRoot) {
 		.calloutDisclosure-summary {
 			display: flex;
-			gap: var(--pr-t-spacings-150);
-			padding-block: var(--pr-t-spacings-100);
-			padding-inline: var(--components-calloutDisclosure-paddingHorizontal);
-			border-radius: var(--commons-borderRadius-L);
+			gap: var(--components-calloutDisclosure-gap);
+			padding: var(--components-calloutDisclosure-padding);
+			border-radius: var(--pr-t-border-radius-default);
 			transition: background-color var(--commons-animations-durations-fast) ease;
 			cursor: pointer;
 			z-index: 1;
@@ -49,7 +48,7 @@
 		}
 
 		.calloutDisclosure-summary-title {
-			font-weight: 600;
+			font-weight: var(--pr-t-font-fontWeight-semibold);
 		}
 
 		.calloutDisclosure-summary-chevron {

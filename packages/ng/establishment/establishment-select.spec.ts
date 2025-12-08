@@ -44,11 +44,11 @@ mockLegalUnit.count = jest.fn(() => of(0));
 
 describe('establishment select', () => {
 	const testingStoryTemplate = `<label class="textfield mod-inline pr-u-marginInlineEnd200">
-	<lu-establishment-select class="textfield-input" placeholder="Select an establishment" data-testid="lu-select"></lu-establishment-select>
+	<lu-establishment-select class="textfield-input" placeholder="Select an establishment" data-testid="lu-select" />
 	<span class="textfield-label">Establishment Select</span>
 </label>
 <label class="textfield mod-inline">
-	<lu-establishment-select class="textfield-input" placeholder="Select an establishment" [multiple]="true" data-testid="lu-select-multiple"></lu-establishment-select>
+	<lu-establishment-select class="textfield-input" placeholder="Select an establishment" [multiple]="true" data-testid="lu-select-multiple" />
 	<span class="textfield-label">Establishment Multiple Select</span>
 </label>`;
 
@@ -72,7 +72,7 @@ describe('establishment select', () => {
 
 			const luSelectElement = screen.getByTestId('lu-select');
 			await userEvent.click(luSelectElement);
-			const dial = screen.getByRole('dialog');
+			const dial = screen.getByTestId('dialog-panel');
 
 			expect(dial).toBeInTheDocument();
 		});
@@ -108,7 +108,7 @@ describe('establishment select', () => {
 			await render(testingStoryTemplate, rendererTemplateOptions);
 			const luSelectElement = screen.getByTestId('lu-select-multiple');
 			await userEvent.click(luSelectElement);
-			const dial = screen.getByRole('dialog');
+			const dial = screen.getByTestId('dialog-panel');
 			expect(dial).toBeInTheDocument();
 		});
 
@@ -123,7 +123,7 @@ describe('establishment select', () => {
 			const button: HTMLButtonElement = await screen.findByRole('button', { name: 'Select all' });
 			fireEvent.click(button);
 			// // FIXME could not query by role checkbox
-			const selectedValues = screen.getByRole('dialog').querySelectorAll('.optionItem-value.is-selected');
+			const selectedValues = screen.getByTestId('dialog-panel').querySelectorAll('.optionItem-value.is-selected');
 			expect(selectedValues).toHaveLength(3);
 		}));
 
@@ -134,12 +134,12 @@ describe('establishment select', () => {
 			tick(300); // debouncetime du composant
 			const t: HTMLButtonElement = await screen.findByRole('button', { name: 'Select all' });
 			fireEvent.click(t);
-			let selectedValues = screen.getByRole('dialog').querySelectorAll('.optionItem-value.is-selected');
+			let selectedValues = screen.getByTestId('dialog-panel').querySelectorAll('.optionItem-value.is-selected');
 			expect(selectedValues).toHaveLength(3);
 			const button: HTMLButtonElement = screen.getByRole('button', { name: 'Deselect all' });
 			fireEvent.click(button);
 			// FIXME could not query by role checkbox
-			selectedValues = screen.getByRole('dialog').querySelectorAll('.optionItem-value.is-selected');
+			selectedValues = screen.getByTestId('dialog-panel').querySelectorAll('.optionItem-value.is-selected');
 			expect(selectedValues).toHaveLength(0);
 		}));
 

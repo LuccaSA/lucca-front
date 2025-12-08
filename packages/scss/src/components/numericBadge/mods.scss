@@ -2,16 +2,22 @@
 
 @mixin S {
 	--components-numericBadge-size: 1.25rem;
-	--components-numericBadge-borderRadius: 6px;
-	--components-numericBadge-fontSize: var(--sizes-XS-fontSize);
-	--components-numericBadge-lineHeight: var(--sizes-XS-lineHeight);
+	--components-numericBadge-borderRadius: var(--pr-t-border-radius-small);
+	--components-numericBadge-font: var(--pr-t-font-body-XS);
+
+	// Deprecated
+	--components-numericBadge-fontSize: var(--pr-t-font-body-XS-fontSize);
+	--components-numericBadge-lineHeight: var(--pr-t-font-body-XS-lineHeight);
 }
 
 @mixin XS {
 	--components-numericBadge-size: 1rem;
-	--components-numericBadge-borderRadius: var(--commons-borderRadius-M);
-	--components-numericBadge-fontSize: var(--sizes-XS-fontSize);
-	--components-numericBadge-lineHeight: var(--sizes-XS-lineHeight);
+	--components-numericBadge-borderRadius: var(--pr-t-border-radius-small);
+	--components-numericBadge-font: var(--pr-t-font-body-XS);
+
+	// Deprecated
+	--components-numericBadge-fontSize: var(--pr-t-font-body-XS-fontSize);
+	--components-numericBadge-lineHeight: var(--pr-t-font-body-XS-lineHeight);
 }
 
 @mixin inherit {

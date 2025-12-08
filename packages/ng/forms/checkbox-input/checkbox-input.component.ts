@@ -1,7 +1,7 @@
-import { booleanAttribute, Component, forwardRef, inject, Input, signal, Signal, ViewEncapsulation } from '@angular/core';
+import { booleanAttribute, Component, forwardRef, inject, input, Input, signal, Signal, ViewEncapsulation } from '@angular/core';
 import { ReactiveFormsModule } from '@angular/forms';
 import { FILTER_PILL_INPUT_COMPONENT, FilterPillInputComponent, FilterPillLabelDirective, FilterPillLayout } from '@lucca-front/ng/filter-pills';
-import { FORM_FIELD_INSTANCE, FormFieldComponent, FRAMED_INPUT_INSTANCE, InputDirective } from '@lucca-front/ng/form-field';
+import { FORM_FIELD_INSTANCE, FormFieldComponent, INPUT_FRAMED_INSTANCE, InputDirective } from '@lucca-front/ng/form-field';
 import { LuTooltipTriggerDirective } from '@lucca-front/ng/tooltip';
 import { injectNgControl } from '../inject-ng-control';
 import { NoopValueAccessorDirective } from '../noop-value-accessor.directive';
@@ -10,11 +10,10 @@ let nextId = 0;
 
 @Component({
 	selector: 'lu-checkbox-input',
-	standalone: true,
 	imports: [ReactiveFormsModule, InputDirective, FilterPillLabelDirective, LuTooltipTriggerDirective],
 	hostDirectives: [NoopValueAccessorDirective],
 	templateUrl: './checkbox-input.component.html',
-	styleUrls: ['./checkbox-input.component.scss'],
+	styleUrl: './checkbox-input.component.scss',
 	encapsulation: ViewEncapsulation.None,
 	providers: [
 		{
@@ -23,14 +22,17 @@ let nextId = 0;
 		},
 	],
 	host: {
-		class: 'checkboxField',
+		'[class.checkboxField]': 'true',
+		'[class.mod-checklist]': 'checklist()',
 	},
 })
 export class CheckboxInputComponent implements FilterPillInputComponent {
+	parentInput = inject(FILTER_PILL_INPUT_COMPONENT, { optional: true, skipSelf: true });
 	formField = inject<FormFieldComponent>(FORM_FIELD_INSTANCE, { optional: true });
 
 	isFilterPill = false;
 	filterPillInputId = `lu-checkbox-pill-input-${nextId++}`;
+	checklist = input(false, { transform: booleanAttribute });
 
 	filterPillLayout: Signal<FilterPillLayout> = signal('checkable');
 	isFilterPillEmpty: Signal<boolean> = signal(true);
@@ -46,7 +48,7 @@ export class CheckboxInputComponent implements FilterPillInputComponent {
 	 */
 	mixed = false;
 
-	framed = inject(FRAMED_INPUT_INSTANCE, { optional: true }) !== null;
+	framed = inject(INPUT_FRAMED_INSTANCE, { optional: true }) !== null;
 
 	constructor() {
 		if (this.formField) {

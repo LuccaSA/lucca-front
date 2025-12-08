@@ -1,15 +1,15 @@
 import { ChangeDetectionStrategy, Component } from '@angular/core';
-import { FieldType, FieldTypeConfig } from '@ngx-formly/core';
+import { ReactiveFormsModule } from '@angular/forms';
+import { LuInputDirective } from '@lucca-front/ng/input';
+import { FieldType, FieldTypeConfig, FormlyModule } from '@ngx-formly/core';
 
 @Component({
 	selector: 'lu-formly-field-input',
-	styleUrls: ['formly-field.common.scss'],
+	styleUrl: 'formly-field.common.scss',
 	templateUrl: './textarea.html',
 	changeDetection: ChangeDetectionStrategy.OnPush,
-	// eslint-disable-next-line @angular-eslint/prefer-standalone
-	standalone: false,
+	imports: [ReactiveFormsModule, FormlyModule, LuInputDirective],
 })
-// eslint-disable-next-line @angular-eslint/component-class-suffix
 export class LuFormlyFieldTextarea extends FieldType<FieldTypeConfig> {
 	focus() {
 		this.props['_isFocused'] = true;

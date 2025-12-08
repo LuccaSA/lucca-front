@@ -1,0 +1,21 @@
+@use 'exports' as *;
+@use '@lucca-front/scss/src/commons/utils/media';
+
+.appLayout {
+	@layer components {
+		@include vars;
+		@include component;
+
+		@include media.min('S') {
+			@include wide;
+		}
+	}
+
+	@layer mods {
+		@include media.max('S') {
+			&.mod-mobileNavSideBottom {
+				@include mobileNavSideBottom;
+			}
+		}
+	}
+}

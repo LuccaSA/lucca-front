@@ -3,12 +3,11 @@ import { ALuSelectInputComponent } from '../input';
 
 @Directive({
 	selector: '[luSelectPanelHeader]',
-	standalone: true,
 })
 export class LuCoreSelectPanelHeaderDirective {
 	readonly templateRef = inject<TemplateRef<void>>(TemplateRef);
 
-	readonly select = input.required<ALuSelectInputComponent<unknown, unknown>>({ alias: 'luSelectPanelHeader' });
+	readonly select = input.required<ALuSelectInputComponent<unknown, unknown> | ALuSelectInputComponent<unknown, unknown[]>>({ alias: 'luSelectPanelHeader' });
 
 	constructor() {
 		effect(() => {

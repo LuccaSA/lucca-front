@@ -1,4 +1,4 @@
-import { CommonModule } from '@angular/common';
+import { AsyncPipe } from '@angular/common';
 import { ChangeDetectionStrategy, Component, ElementRef, forwardRef, Input, ViewChild } from '@angular/core';
 import { FormControl, ReactiveFormsModule } from '@angular/forms';
 import { ALuOnOpenSubscriber, ILuOnOpenSubscriber } from '@lucca-front/ng/core';
@@ -10,10 +10,9 @@ import { ALuOptionOperator, ILuOptionOperator } from '../option-operator.model';
 @Component({
 	selector: 'lu-option-searcher',
 	templateUrl: 'option-searcher.component.html',
-	styleUrls: ['option-searcher.component.scss'],
+	styleUrl: 'option-searcher.component.scss',
 	changeDetection: ChangeDetectionStrategy.OnPush,
-	standalone: true,
-	imports: [ReactiveFormsModule, CommonModule, LuOptionPlaceholderComponent],
+	imports: [AsyncPipe, ReactiveFormsModule, LuOptionPlaceholderComponent],
 	providers: [
 		{
 			provide: ALuOptionOperator,

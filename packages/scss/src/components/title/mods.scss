@@ -1,48 +1,41 @@
 @mixin XXXL {
+	--components-title-font: 900 2.25rem/2.5rem var(--pr-t-font-family-brand);
 	--sizes-verticalPadding: var(--sizes-XXXL-verticalPadding);
-	--sizes-fontSize: var(--sizes-XXXL-fontSize);
-	--sizes-lineHeight: var(--sizes-XXXL-lineHeight);
-	--components-title-weight: 900;
 }
 
 @mixin h1 {
-	--sizes-verticalPadding: var(--sizes-XXL-verticalPadding);
-	--sizes-fontSize: var(--sizes-XXL-fontSize);
-	--sizes-lineHeight: var(--sizes-XXL-lineHeight);
-	--components-title-weight: 900;
+	--components-title-font: var(--pr-t-font-heading-1);
+	--sizes-verticalPadding: var(--sizes-XXL-verticalPadding); // Deprecated
 }
 
 @mixin h2 {
-	--sizes-verticalPadding: var(--sizes-XL-verticalPadding);
-	--sizes-fontSize: var(--sizes-XL-fontSize);
-	--sizes-lineHeight: var(--sizes-XL-lineHeight);
-	--components-title-weight: 700;
+	--components-title-font: var(--pr-t-font-heading-2);
+	--sizes-verticalPadding: var(--sizes-XL-verticalPadding); // Deprecated
 }
 
 @mixin h3 {
-	--sizes-verticalPadding: var(--sizes-L-verticalPadding);
-	--sizes-fontSize: var(--sizes-L-fontSize);
-	--sizes-lineHeight: var(--sizes-L-lineHeight);
-	--components-title-weight: 700;
+	--components-title-font: var(--pr-t-font-heading-3);
+	--sizes-verticalPadding: var(--sizes-L-verticalPadding); // Deprecated
 }
 
 @mixin h4 {
-	--sizes-verticalPadding: var(--sizes-M-verticalPadding);
-	--sizes-fontSize: var(--sizes-M-fontSize);
-	--sizes-lineHeight: var(--sizes-M-lineHeight);
-	--components-title-weight: 600;
+	--components-title-font: var(--pr-t-font-heading-4);
+	--sizes-verticalPadding: var(--sizes-M-verticalPadding); // Deprecated
 }
 
+// Deprecated
 @mixin h5 {
+	--components-title-font: 600 var(--pr-t-font-fontSize-175)/var(--pr-t-font-lineHeight-250) var(--pr-t-font-family);
 	--sizes-verticalPadding: var(--sizes-S-verticalPadding);
-	--sizes-fontSize: var(--sizes-S-fontSize);
-	--sizes-lineHeight: var(--sizes-S-lineHeight);
-	--components-title-weight: 600;
 }
 
 @mixin h6 {
+	--components-title-font: 600 var(--pr-t-font-fontSize-150)/var(--pr-t-font-lineHeight-200) var(--pr-t-font-family);
 	--sizes-verticalPadding: var(--sizes-XS-verticalPadding);
-	--sizes-fontSize: var(--sizes-XS-fontSize);
-	--sizes-lineHeight: var(--sizes-XS-lineHeight);
-	--components-title-weight: 600;
+}
+
+@mixin elementAfterText {
+	display: flex;
+	flex-wrap: wrap;
+	column-gap: var(--pr-t-spacings-100);
 }

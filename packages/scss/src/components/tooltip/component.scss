@@ -7,9 +7,8 @@
 	padding-block: var(--pr-t-spacings-50);
 	padding-inline: var(--pr-t-spacings-100);
 	max-inline-size: var(--components-tooltip-max-width);
-	border-radius: var(--commons-borderRadius-M);
-	font-size: var(--sizes-XS-fontSize);
-	line-height: var(--sizes-XS-lineHeight);
+	border-radius: var(--pr-t-border-radius-default);
+	font: var(--pr-t-font-body-XS);
 	transform-origin: var(--components-tooltip-transformOrigin);
 	margin: var(--components-tooltip-margin);
 	text-align: center;
@@ -17,7 +16,7 @@
 	animation-name: scaleIn;
 	animation-duration: var(--commons-animations-durations-fast);
 	animation-iteration-count: 1;
-	hyphens: auto;
+	overflow-wrap: break-word;
 
 	@include keyframe.scaleIn;
 

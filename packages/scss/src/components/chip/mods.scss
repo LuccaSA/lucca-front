@@ -1,8 +1,8 @@
 @use '@lucca-front/scss/src/commons/utils/a11y';
 
 @mixin S {
-	--components-chip-fontSize: var(--sizes-XS-fontSize);
-	--components-chip-lineHeight: var(--sizes-XS-lineHeight);
+	--components-chip-font: var(--pr-t-font-body-XS);
+	--components-chip-borderRadius: var(--pr-t-border-radius-small);
 }
 
 @mixin product {
@@ -19,7 +19,7 @@
 		}
 
 		&:focus-visible {
-			@include a11y.focusVisible($color: var(--palettes-neutral-0), $offset: -4px, $borderRadius: var(--commons-borderRadius-full));
+			@include a11y.focusVisible($color: var(--palettes-neutral-0), $offset: -4px, $borderRadius: var(--pr-t-border-radius-full));
 		}
 	}
 }
@@ -37,4 +37,8 @@
 	&:hover {
 		background-color: var(--palettes-600, var(--palettes-neutral-100));
 	}
+}
+
+@mixin focusVisible {
+	@include a11y.focusVisible;
 }

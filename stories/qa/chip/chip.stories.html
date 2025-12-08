@@ -1,15 +1,29 @@
 <table class="demo-QAtable">
 	<tbody>
 		<tr>
+			<td></td>
+			<td style="width: 50%">
+				<div class="demo-QAtable-list">HTML</div>
+			</td>
+			<td style="width: 50%">
+				<div class="demo-QAtable-list">Angular</div>
+			</td>
+		</tr>
+		<tr>
 			<td>Default</td>
 			<td>
 				<div class="demo-QAtable-list">
 					<div class="chip">
 						John Doe
 						<button type="button" class="chip-kill">
-							<span class="u-mask">delete</span>
+							<span class="pr-u-mask">delete</span>
 						</button>
 					</div>
+				</div>
+			</td>
+			<td>
+				<div class="demo-QAtable-list">
+					<lu-chip>John Doe</lu-chip>
 				</div>
 			</td>
 		</tr>
@@ -20,9 +34,14 @@
 					<div class="chip palette-product">
 						John Doe
 						<button type="button" class="chip-kill">
-							<span class="u-mask">delete</span>
+							<span class="pr-u-mask">delete</span>
 						</button>
 					</div>
+				</div>
+			</td>
+			<td>
+				<div class="demo-QAtable-list">
+					<lu-chip palette="product">John Doe</lu-chip>
 				</div>
 			</td>
 		</tr>
@@ -30,6 +49,11 @@
 			<td>Unkillable</td>
 			<td>
 				<div class="demo-QAtable-list"><div class="chip">John Doe</div></div>
+			</td>
+			<td>
+				<div class="demo-QAtable-list">
+					<lu-chip unkillable>John Doe</lu-chip>
+				</div>
 			</td>
 		</tr>
 		<tr>
@@ -39,17 +63,46 @@
 					<div class="chip is-disabled">
 						John Doe
 						<button type="button" class="chip-kill">
-							<span class="u-mask">delete</span>
+							<span class="pr-u-mask">delete</span>
 						</button>
 					</div>
 					<div class="chip is-disabled">John Doe</div>
 					<div class="chip is-disabled palette-product">
 						John Doe
 						<button type="button" class="chip-kill">
-							<span class="u-mask">delete</span>
+							<span class="pr-u-mask">delete</span>
 						</button>
 					</div>
 					<div class="chip is-disabled palette-product">John Doe</div>
+				</div>
+			</td>
+			<td>
+				<div class="demo-QAtable-list">
+					<lu-chip disabled unkillable>John Doe</lu-chip>
+					<lu-chip disabled>John Doe</lu-chip>
+					<lu-chip disabled palette="product">John Doe</lu-chip>
+				</div>
+			</td>
+		</tr>
+		<tr>
+			<td>Small</td>
+			<td>
+				<div class="demo-QAtable-list">
+					<div class="demo-QAtable-list">
+						<div class="chip mod-S">
+							John Doe
+							<button type="button" class="chip-kill">
+								<span class="pr-u-mask">delete</span>
+							</button>
+						</div>
+						<div class="chip mod-S">John Doe</div>
+					</div>
+				</div>
+			</td>
+			<td>
+				<div class="demo-QAtable-list">
+					<lu-chip class="mod-S">John Doe</lu-chip>
+					<lu-chip class="mod-S" unkillable>John Doe</lu-chip>
 				</div>
 			</td>
 		</tr>

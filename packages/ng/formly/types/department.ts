@@ -1,15 +1,15 @@
 import { ChangeDetectionStrategy, Component } from '@angular/core';
-import { FieldType, FieldTypeConfig } from '@ngx-formly/core';
+import { ReactiveFormsModule } from '@angular/forms';
+import { LuDepartmentSelectInputComponent } from '@lucca-front/ng/department';
+import { FieldType, FieldTypeConfig, FormlyModule } from '@ngx-formly/core';
 
 @Component({
 	selector: 'lu-formly-field-department',
 	styleUrls: ['formly-field.common.scss', 'select.scss'],
 	templateUrl: './department.html',
 	changeDetection: ChangeDetectionStrategy.OnPush,
-	// eslint-disable-next-line @angular-eslint/prefer-standalone
-	standalone: false,
+	imports: [ReactiveFormsModule, FormlyModule, LuDepartmentSelectInputComponent],
 })
-// eslint-disable-next-line @angular-eslint/component-class-suffix
 export class LuFormlyFieldDepartment extends FieldType<FieldTypeConfig> {
 	focus() {
 		this.props['_isFocused'] = true;

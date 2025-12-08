@@ -1,4 +1,4 @@
-import { CommonModule } from '@angular/common';
+import { AsyncPipe } from '@angular/common';
 import { ChangeDetectionStrategy, Component, ElementRef, forwardRef, Input, ViewChild } from '@angular/core';
 import { FormControl, ReactiveFormsModule } from '@angular/forms';
 import { ALuOnOpenSubscriber, ILuOnOpenSubscriber, ILuTree } from '@lucca-front/ng/core';
@@ -7,13 +7,15 @@ import { map } from 'rxjs/operators';
 import { LuOptionPlaceholderComponent } from '../../placeholder';
 import { ALuTreeOptionOperator, ILuTreeOptionOperator } from '../tree-option-operator.model';
 
+/**
+ * @deprecated
+ */
 @Component({
 	selector: 'lu-tree-option-searcher',
 	templateUrl: './option-searcher.component.html',
-	styleUrls: ['./option-searcher.component.scss'],
+	styleUrl: './option-searcher.component.scss',
 	changeDetection: ChangeDetectionStrategy.OnPush,
-	imports: [ReactiveFormsModule, CommonModule, LuOptionPlaceholderComponent],
-	standalone: true,
+	imports: [AsyncPipe, ReactiveFormsModule, LuOptionPlaceholderComponent],
 	providers: [
 		{
 			provide: ALuTreeOptionOperator,

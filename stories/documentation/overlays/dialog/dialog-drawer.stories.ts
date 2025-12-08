@@ -13,7 +13,7 @@ function getTemplate(args: DialogDrawerStory): string {
 			<header class="dialog-inside-header">
 				<button type="button" class="dialog-inside-header-button button">
 					<span class="lucca-icon icon-signClose" aria-hidden="true"></span>
-					<span class="u-mask">Fermer</span>
+					<span class="pr-u-mask">Fermer</span>
 				</button>
 				<div class="dialog-inside-header-container">
 					<h1 class="dialog-inside-header-container-title" id="dialogInsideHeaderTitle1">Title</h1>
@@ -23,7 +23,7 @@ function getTemplate(args: DialogDrawerStory): string {
 			<footer class="dialog-inside-footer footer">
 				<div class="footer-actions">
 					<button type="submit" class="button">Action</button>
-					<button type="button" class="button mod-text">Action</button>
+					<button type="button" class="button mod-ghost">Action</button>
 				</div>
 			</footer>
 		</form>
@@ -52,7 +52,7 @@ export default {
 	component: DialogDrawerStory,
 	argTypes: {
 		size: {
-			options: ['mod-fitContent', 'mod-XS', 'mod-S', '', 'mod-L', 'mod-XL', 'mod-maxContent', 'mod-fullScreen'],
+			options: ['mod-fitContent', 'mod-XS', 'mod-S', '', 'mod-L', 'mod-XL', 'mod-XXL', 'mod-maxContent', 'mod-fullScreen'],
 			control: {
 				type: 'select',
 			},

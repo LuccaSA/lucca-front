@@ -1,0 +1,7 @@
+@use '@lucca-front/scss/src/components/mobilePush';
+
+@layer base {
+	lu-mobile-push {
+		display: contents;
+	}
+}

@@ -1,5 +1,6 @@
 @use 'sass:list';
 
+@use '@lucca-front/scss/src/commons/config';
 @use '@lucca-front/icons/src/commons/core' as transform;
 @use '@lucca-front/scss/src/commons/core';
 
@@ -7,363 +8,725 @@
 @use '@lucca-front/scss/src/commons/utils/reset';
 @use '@lucca-front/scss/src/commons/utils/text';
 @use '@lucca-front/scss/src/commons/utils/a11y';
-
+@use '@lucca-front/scss/src/commons/utils/media';
+@use '@lucca-front/scss/src/commons/utils/container';
 @use '@lucca-front/scss/src/components/title/exports' as title;
 
-[data-content-before] {
-	&::before {
-		content: attr(data-content-before);
-	}
-}
-
-[data-content-after] {
-	&::after {
-		content: attr(data-content-after);
-	}
-}
-
-[class*='u-animated'] {
-	animation-duration: var(--commons-animations-duration, var(--commons-animations-durations-standard));
-	animation-timing-function: var(--commons-animations-function);
-
-	&.mod-animation-duration-fast {
-		--commons-animations-duration: var(--commons-animations-durations-fast);
-	}
-
-	&.mod-animation-duration-slow {
-		--commons-animations-duration: var(--commons-animations-durations-slow);
-	}
-}
-
-.u-animated {
-	&FadeIn,
-	&FadeOut {
-		animation-name: fadeIn;
-
-		@include keyframe.fadeIn;
-	}
-
-	&ScaleIn,
-	&ScaleOut {
-		animation-name: scaleIn;
-
-		@include keyframe.scaleIn;
-	}
-
-	&ScaleInTop,
-	&ScaleOutTop {
-		animation-name: scaleInTop;
-
-		@include keyframe.scaleIn;
-	}
-
-	&ScaleInRight,
-	&ScaleOutRight {
-		animation-name: scaleInRight;
-
-		@include keyframe.scaleInRight;
-	}
-
-	&ScaleInBottom,
-	&ScaleOutBottom {
-		animation-name: scaleInBottom;
-
-		@include keyframe.scaleInBottom;
-	}
-
-	&ScaleInLeft,
-	&ScaleOutLeft {
-		animation-name: scaleInLeft;
-
-		@include keyframe.scaleInLeft;
-	}
-
-	&SlideIn,
-	&SlideInTop,
-	&SlideOut,
-	&SlideOutTop {
-		animation-name: slideIn;
-
-		@include keyframe.slideIn;
-	}
-
-	&SlideInRight,
-	&SlideOutRight {
-		animation-name: slideInRight;
-
-		@include keyframe.slideInRight;
-	}
-
-	&SlideInBottom,
-	&SlideOutBottom {
-		animation-name: slideInBottom;
-
-		@include keyframe.slideInBottom;
-	}
-
-	&SlideInLeft,
-	&SlideOutLeft {
-		animation-name: slideInLeft;
-
-		@include keyframe.slideInLeft;
-	}
-
-	&Shake {
-		animation-name: shake;
-
-		@include keyframe.shake;
-	}
-
-	&Pulse {
-		animation-name: pulse;
-		animation-direction: alternate;
-		animation-iteration-count: var(--commons-animations-iteration-count);
-
-		@include keyframe.pulse;
-	}
-
-	&FadeOut,
-	&SlideOut,
-	&SlideOutTop,
-	&SlideOutRight,
-	&SlideOutBottom,
-	&SlideOutLeft,
-	&ScaleOut,
-	&ScaleOutTop,
-	&ScaleOutRight,
-	&ScaleOutBottom,
-	&ScaleOutLeft {
-		animation-direction: reverse;
-	}
-}
-
-.u-mask {
-	@include a11y.mask('!important');
-}
-
-.u-clearfix {
-	@include reset.clearfix('!important');
-}
-
-// .u-clear is deprecated
-.u-clearBoth,
-.u-clear {
-	@include reset.clear('both', '!important');
-}
-
-// .u-clearLeft is deprecated
-.u-clearInlineStart,
-.u-clearLeft {
-	@include reset.clear('inline-start', '!important');
-}
-
-// .u-clearRight is deprecated
-.u-clearInlineEnd,
-.u-clearRight {
-	@include reset.clear('inline-end', '!important');
-}
-
-.u-listReset {
-	@include reset.list('!important');
-}
-
-.u-descriptionListReset {
-	@include reset.list($list: 'dl', $suffix: '!important');
-}
-
-.u-summaryReset {
-	@include reset.summary('!important');
-}
-
-.u-buttonReset {
-	@include reset.button('!important');
-}
-
-.u-ellipsis {
-	@include text.ellipsis('!important');
-}
-
-.u-h1,
-.u-h2,
-.u-h3,
-.u-h4,
-.u-h5,
-.u-h6 {
-	@include title.component;
-}
-
-.u-h1 {
-	@include title.h1;
-
-	&.mod-XXXL {
-		@include title.XXXL;
-	}
-}
-
-.u-h2 {
-	@include title.h2;
-}
-
-.u-h3 {
-	@include title.h3;
-}
-
-.u-h4 {
-	@include title.h4;
-}
-
-.u-h5 {
-	@include title.h5;
-}
-
-.u-h6 {
-	@include title.h6;
-}
-
-// .u-textLeft is deprecated
-.u-textLeft {
-	text-align: start !important;
-}
-
-// .u-textRight is deprecated
-.u-textRight {
-	text-align: end !important;
-}
-
-// .u-textCenter is deprecated
-.u-textCenter {
-	text-align: center !important;
-}
-
-.u-textLight {
-	color: var(--palettes-neutral-600) !important;
-}
-
-.u-textPlaceholder {
-	color: var(--palettes-neutral-400) !important;
-}
-
-.u-textDefault {
-	color: var(--palettes-neutral-700) !important;
-}
-
-.u-fontWeightRegular {
-	font-weight: 400 !important;
-}
-
-.u-fontWeightSemiBold {
-	font-weight: 600 !important;
-}
-
-.u-noSpinButtons {
-	&::-webkit-outer-spin-button,
-	&::-webkit-inner-spin-button {
-		appearance: none !important;
-	}
-
-	&[type='number'] {
-		appearance: textfield !important;
-	}
-}
-
-.u-fontFamily {
-	font-family: var(--commons-font-family) !important;
-}
-
-.u-fontFamilyCursive {
-	font-family: var(--commons-font-family-cursive) !important;
-}
-
-.u-fontFamilyBrand {
-	font-family: var(--commons-font-family-brand) !important;
-}
-
-.pr-u-focusVisible {
-	&:focus-visible {
-		@include a11y.focusVisible;
-	}
-}
-
-@include core.classes('float', core.$float);
-@include core.classes('vertical-align', core.$verticalAlign);
-@include core.classes('white-space', core.$whiteSpace);
-@include core.classes('display', core.$displays);
-@include core.classes('flex-direction', core.$direction);
-@include core.classes('flex-wrap', core.$wrap);
-@include core.classes('justify-content', core.$justify);
-@include core.classes('align-items', core.$align);
-@include core.classes('flex-grow', core.$flex);
-@include core.classes('flex-shrink', core.$flex);
-@include core.classes('flex-basis', core.$basis);
-@include core.classes('order', core.$order);
-@include core.classes('align-self', core.$align);
-@include core.classes('position', core.$position);
-
-@include core.classes('width', core.$contents);
-@include core.classes('height', core.$contents);
-@include core.classes('min-width', '0');
-@include core.classes('min-height', '0');
-
-@include core.classes('inline-size', core.$contents);
-@include core.classes('block-size', core.$contents);
-@include core.classes('min-inline-size', '0');
-@include core.classes('min-block-size', '0');
-@include core.classes('max-inline-size', core.$contents);
-
-@include core.classes('visibility', core.$visibility);
-@include core.classes('font-weight', core.$fontWeight);
-@include core.classes('font-style', core.$fontStyle);
-@include core.classes('pointer-events', core.$pointerEvents);
-@include core.classes('cursor', core.$cursor);
-@include core.classes('text-align', core.$textAlign);
-@include core.classes('text-decoration', core.$decoration);
-@include core.classes('overflow', core.$overflow);
-
-@media (prefers-reduced-motion: no-preference) {
-	@include core.classes('scroll-behavior', core.$scrollBehavior);
-}
-
-@media only print {
-	@include core.classes('display', core.$displays, $prefix: 'onlyPrint');
-}
-
-%displayNone {
-	display: none;
-}
-
-@each $display in core.$displays {
-	@if $display != 'none' {
-		.u-onlyPrintDisplay#{transform.capitalize(transform.camelize($display))} {
-			@extend %displayNone;
+@layer utils {
+	%animatedAll {
+		animation-duration: var(--commons-animations-duration, var(--commons-animations-durations-standard));
+		animation-timing-function: var(--commons-animations-function);
+
+		&.mod-animation-duration-fast {
+			--commons-animations-duration: var(--commons-animations-durations-fast);
+		}
+
+		&.mod-animation-duration-slow {
+			--commons-animations-duration: var(--commons-animations-durations-slow);
 		}
 	}
-}
 
-@each $direction in core.$boxDirection {
-	@if $direction == '' {
-		// .u-insetReset is deprecated
-		.u-inset0,
-		.u-insetReset {
-			inset: 0 !important;
+	%animated {
+		&FadeIn,
+		&FadeOut {
+			animation-name: fadeIn;
+
+			@include keyframe.fadeIn;
 		}
-	} @else if $direction != 'block' and $direction != 'inline' {
-		// .u-#{$direction}Reset is deprecated
-		.u-#{$direction}0,
-		.u-#{$direction}Reset {
-			#{$direction}: 0 !important;
+
+		&ScaleIn,
+		&ScaleOut {
+			animation-name: scaleIn;
+
+			@include keyframe.scaleIn;
 		}
-	} @else {
-		@each $boxModel in core.$boxModel {
-			@if $boxModel != 'border' {
-				.u-#{$boxModel}#{transform.capitalize($direction)}0 {
-					#{$boxModel}-#{$direction}: 0 !important;
+
+		&ScaleInTop,
+		&ScaleOutTop {
+			animation-name: scaleInTop;
+
+			@include keyframe.scaleIn;
+		}
+
+		&ScaleInRight,
+		&ScaleOutRight {
+			animation-name: scaleInRight;
+
+			@include keyframe.scaleInRight;
+		}
+
+		&ScaleInBottom,
+		&ScaleOutBottom {
+			animation-name: scaleInBottom;
+
+			@include keyframe.scaleInBottom;
+		}
+
+		&ScaleInLeft,
+		&ScaleOutLeft {
+			animation-name: scaleInLeft;
+
+			@include keyframe.scaleInLeft;
+		}
+
+		&SlideIn,
+		&SlideInTop,
+		&SlideOut,
+		&SlideOutTop {
+			animation-name: slideIn;
+
+			@include keyframe.slideIn;
+		}
+
+		&SlideInRight,
+		&SlideOutRight {
+			animation-name: slideInRight;
+
+			@include keyframe.slideInRight;
+		}
+
+		&SlideInBottom,
+		&SlideOutBottom {
+			animation-name: slideInBottom;
+
+			@include keyframe.slideInBottom;
+		}
+
+		&SlideInLeft,
+		&SlideOutLeft {
+			animation-name: slideInLeft;
+
+			@include keyframe.slideInLeft;
+		}
+
+		&Shake {
+			animation-name: shake;
+
+			@include keyframe.shake;
+		}
+
+		&Pulse {
+			animation-name: pulse;
+			animation-direction: alternate;
+			animation-iteration-count: var(--commons-animations-iteration-count);
+
+			@include keyframe.pulse;
+		}
+
+		&FadeOut,
+		&SlideOut,
+		&SlideOutTop,
+		&SlideOutRight,
+		&SlideOutBottom,
+		&SlideOutLeft,
+		&ScaleOut,
+		&ScaleOutTop,
+		&ScaleOutRight,
+		&ScaleOutBottom,
+		&ScaleOutLeft {
+			animation-direction: reverse;
+		}
+	}
+
+	%mask {
+		@include a11y.mask('!important');
+	}
+
+	%clearfix {
+		@include reset.clearfix('!important');
+	}
+
+	%clearBoth {
+		@include reset.clear('both', '!important');
+	}
+
+	%clearInlineStart {
+		@include reset.clear('both', '!important');
+	}
+
+	%clearInlineEnd {
+		@include reset.clear('inline-end', '!important');
+	}
+
+	%listReset {
+		@include reset.list('!important');
+	}
+
+	%descriptionListReset {
+		@include reset.list($list: 'dl', $suffix: '!important');
+	}
+
+	%summaryReset {
+		@include reset.summary('!important');
+	}
+
+	%buttonReset {
+		@include reset.button('!important');
+	}
+
+	%ellipsis {
+		@include text.ellipsis('!important');
+	}
+
+	%h1 {
+		font: var(--pr-t-font-heading-1);
+		color: var(--pr-t-color-text-heading);
+
+		&.mod-XXXL {
+			// Deprecated
+			@include title.XXXL;
+		}
+	}
+
+	%h2 {
+		font: var(--pr-t-font-heading-2);
+		color: var(--pr-t-color-text-heading);
+	}
+
+	%h3 {
+		font: var(--pr-t-font-heading-3);
+		color: var(--pr-t-color-text-heading);
+	}
+
+	%h4 {
+		font: var(--pr-t-font-heading-4);
+		color: var(--pr-t-color-text-heading);
+	}
+
+	%h5 {
+		@include title.h5;
+	}
+
+	%h6 {
+		@include title.h6;
+	}
+
+	%bodyM {
+		font: var(--pr-t-font-body-M);
+	}
+
+	%bodyS {
+		font: var(--pr-t-font-body-S);
+	}
+
+	%bodyXS {
+		font: var(--pr-t-font-body-XS);
+	}
+
+	%textLeft {
+		text-align: start !important;
+	}
+
+	%textRight {
+		text-align: end !important;
+	}
+
+	%textCenter {
+		text-align: center !important;
+	}
+
+	%textLight {
+		color: var(--palettes-neutral-600) !important;
+	}
+
+	%textPlaceholder {
+		color: var(--palettes-neutral-400) !important;
+	}
+
+	%textDefault {
+		color: var(--palettes-neutral-700) !important;
+	}
+
+	%fontWeightRegular {
+		font-weight: var(--pr-t-font-fontWeight-regular) !important;
+	}
+
+	%fontWeightSemiBold {
+		font-weight: var(--pr-t-font-fontWeight-semibold) !important;
+	}
+
+	%noSpinButtons {
+		&::-webkit-outer-spin-button,
+		&::-webkit-inner-spin-button {
+			appearance: none !important;
+		}
+
+		&[type='number'] {
+			appearance: textfield !important;
+		}
+	}
+
+	%fontFamily {
+		font-family: var(--pr-t-font-family) !important;
+	}
+
+	%fontFamilyCursive {
+		font-family: var(--pr-t-font-family-cursive) !important;
+	}
+
+	%fontFamilyBrand {
+		font-family: var(--pr-t-font-family-brand) !important;
+	}
+
+	%focusVisible {
+		&:focus-visible {
+			@include a11y.focusVisible;
+		}
+	}
+
+
+
+	[data-content-before] {
+		&::before {
+			content: attr(data-content-before);
+		}
+	}
+
+	[data-content-after] {
+		&::after {
+			content: attr(data-content-after);
+		}
+	}
+
+	[class*='pr-u-animated'] {
+		@extend %animatedAll;
+	}
+
+	.pr-u-animated {
+		@extend %animated;
+	}
+
+	.pr-u-mask {
+		@extend %mask;
+	}
+
+	.pr-u-clearfix {
+		@extend %clearfix;
+	}
+
+	// clear is deprecated
+	.pr-u-clearBoth,
+	.pr-u-clear {
+		@extend %clearBoth;
+	}
+
+	// clearLeft is deprecated
+	.pr-u-clearInlineStart,
+	.pr-u-clearLeft {
+		@extend %clearInlineStart;
+	}
+
+	// clearRight is deprecated
+	.pr-u-clearInlineEnd,
+	.pr-u-clearRight {
+		@extend %clearInlineEnd;
+	}
+
+	.pr-u-listReset {
+		@extend %listReset;
+	}
+
+	.pr-u-descriptionListReset {
+		@extend %descriptionListReset;
+	}
+
+	.pr-u-summaryReset {
+		@extend %summaryReset;
+	}
+
+	.pr-u-buttonReset {
+		@extend %buttonReset;
+	}
+
+	.pr-u-ellipsis {
+		@extend %ellipsis;
+	}
+
+	.pr-u-h1 {
+		@extend %h1;
+	}
+
+	.pr-u-h2 {
+		@extend %h2;
+	}
+
+	.pr-u-h3 {
+		@extend %h3;
+	}
+
+	.pr-u-h4 {
+		@extend %h4;
+	}
+
+	.pr-u-h5 {
+		// Deprecated
+		@extend %h5;
+	}
+
+	.pr-u-h6 {
+		// Deprecated
+		@extend %h6;
+	}
+
+	.pr-u-bodyM {
+		@extend %bodyM;
+	}
+
+	.pr-u-bodyS {
+		@extend %bodyS;
+	}
+
+	.pr-u-bodyXS {
+		@extend %bodyXS;
+	}
+
+	// textLeft is deprecated
+	.pr-u-textLeft {
+		@extend %textLeft;
+	}
+
+	// textRight is deprecated
+	.pr-u-textRight {
+		@extend %textRight;
+	}
+
+	// textCenter is deprecated
+	.pr-u-textCenter {
+		@extend %textCenter;
+	}
+
+	.pr-u-textLight {
+		@extend %textLight;
+	}
+
+	.pr-u-textPlaceholder {
+		@extend %textPlaceholder;
+	}
+
+	.pr-u-textDefault {
+		@extend %textDefault;
+	}
+
+	.pr-u-fontWeightRegular {
+		@extend %fontWeightRegular;
+	}
+
+	.pr-u-fontWeightSemiBold {
+		@extend %fontWeightSemiBold;
+	}
+
+	.pr-u-noSpinButtons {
+		@extend %noSpinButtons;
+	}
+
+	.pr-u-fontFamily {
+		@extend %fontFamily;
+	}
+
+	.pr-u-fontFamilyCursive {
+		@extend %fontFamilyCursive;
+	}
+
+	.pr-u-fontFamilyBrand {
+		@extend %fontFamilyBrand;
+	}
+
+	.pr-u-focusVisible {
+		@extend %focusVisible;
+	}
+
+	@include core.classes('float', core.$float);
+	@include core.classes('vertical-align', core.$verticalAlign);
+	@include core.classes('white-space', core.$whiteSpace);
+	@include core.classes('display', core.$displays);
+	@include core.classes('flex-direction', core.$direction);
+	@include core.classes('flex-wrap', core.$wrap);
+	@include core.classes('justify-content', core.$justify);
+	@include core.classes('align-items', core.$align);
+	@include core.classes('flex-grow', core.$flex);
+	@include core.classes('flex-shrink', core.$flex);
+	@include core.classes('flex-basis', core.$basis);
+	@include core.classes('order', core.$order);
+	@include core.classes('align-self', core.$align);
+	@include core.classes('position', core.$position);
+
+	@include core.classes('width', core.$contents);
+	@include core.classes('height', core.$contents);
+	@include core.classes('min-width', '0');
+	@include core.classes('min-height', '0');
+
+	@include core.classes('inline-size', core.$contents);
+	@include core.classes('block-size', core.$contents);
+	@include core.classes('min-inline-size', '0');
+	@include core.classes('min-block-size', '0');
+	@include core.classes('max-inline-size', core.$contents);
+
+	@include core.classes('visibility', core.$visibility);
+	@include core.classes('font-weight', core.$fontWeight);
+	@include core.classes('font-style', core.$fontStyle);
+	@include core.classes('pointer-events', core.$pointerEvents);
+	@include core.classes('cursor', core.$cursor);
+	@include core.classes('text-align', core.$textAlign);
+	@include core.classes('text-decoration', core.$decoration);
+	@include core.classes('overflow', core.$overflow);
+
+	@media (prefers-reduced-motion: no-preference) {
+		@include core.classes('scroll-behavior', core.$scrollBehavior);
+	}
+
+	@media only print {
+		@include core.classes('display', core.$displays, $prefix: 'onlyPrint');
+	}
+
+	%displayNone {
+		display: none;
+	}
+
+	@each $display in core.$displays {
+		@if $display != 'none' {
+			.pr-u-onlyPrintDisplay#{transform.capitalize(transform.camelize($display))} {
+				@extend %displayNone;
+			}
+		}
+	}
+
+	@each $breakpoint, $value in config.$breakpoints {
+		@include media.min($breakpoint) {
+			.pr-u-displayNoneAtMediaMin#{$breakpoint} {
+				display: none !important;
+			}
+		}
+
+		@include media.max($breakpoint) {
+			.pr-u-displayNoneAtMediaMax#{$breakpoint} {
+				display: none !important;
+			}
+		}
+
+		@include container.min($breakpoint) {
+			.pr-u-displayNoneAtContainerMin#{$breakpoint} {
+				display: none !important;
+			}
+		}
+
+		@include container.max($breakpoint) {
+			.pr-u-displayNoneAtContainerMax#{$breakpoint} {
+				display: none !important;
+			}
+		}
+	}
+
+	%inset0 {
+		inset: 0 !important;
+	}
+
+	@each $direction in core.$boxDirection {
+		@if $direction == '' {
+			// insetReset is deprecated
+			.pr-u-inset0,
+			.pr-u-insetReset {
+				@extend %inset0;
+			}
+		} @else if $direction == 'top' or $direction == 'bottom' or $direction == 'left' or $direction == 'right' {
+			// Reset is deprecated
+			.pr-u-#{$direction}0,
+			.pr-u-#{$direction}Reset {
+				#{$direction}: 0 !important;
+			}
+		} @else {
+			@each $boxModel in core.$boxModel {
+				@if $boxModel != 'border' {
+					.pr-u-#{$boxModel}#{transform.capitalize($direction)}0 {
+						#{$boxModel}-#{$direction}: 0 !important;
+					}
+				}
+			}
+		}
+	}
+
+	@include core.spacings;
+	@include core.sizes;
+	@include core.borderRadius;
+	@include core.palettes;
+	@include core.borderRadiusTokens;
+
+	// Deprecated .u- utilities
+	// Delete when all utilities are prefixed in .pr-u-
+	@if config.$deprecatedUtilityPrefix {
+		[class*='u-animated'] {
+			@extend %animatedAll;
+		}
+
+		.u-animated {
+			@extend %animated;
+		}
+
+		.u-mask {
+			@extend %mask;
+		}
+
+		.u-clearfix {
+			@extend %clearfix;
+		}
+
+		// clear is deprecated
+		.u-clearBoth,
+		.u-clear {
+			@extend %clearBoth;
+		}
+
+		// clearLeft is deprecated
+		.u-clearInlineStart,
+		.u-clearLeft {
+			@extend %clearInlineStart;
+		}
+
+		// clearRight is deprecated
+		.u-clearInlineEnd,
+		.u-clearRight {
+			@extend %clearInlineEnd;
+		}
+
+		.u-listReset {
+			@extend %listReset;
+		}
+
+		.u-descriptionListReset {
+			@extend %descriptionListReset;
+		}
+
+		.u-summaryReset {
+			@extend %summaryReset;
+		}
+
+		.u-buttonReset {
+			@extend %buttonReset;
+		}
+
+		.u-ellipsis {
+			@extend %ellipsis;
+		}
+
+		.u-h1 {
+			@extend %h1;
+		}
+
+		.u-h2 {
+			@extend %h2;
+		}
+
+		.u-h3 {
+			@extend %h3;
+		}
+
+		.u-h4 {
+			@extend %h4;
+		}
+
+		.u-h5 {
+			// Deprecated
+			@extend %h5;
+		}
+
+		.u-h6 {
+			// Deprecated
+			@extend %h6;
+		}
+
+		.u-bodyM {
+			@extend %bodyM;
+		}
+
+		.u-bodyS {
+			@extend %bodyS;
+		}
+
+		.u-bodyXS {
+			@extend %bodyXS;
+		}
+
+		// textLeft is deprecated
+		.u-textLeft {
+			@extend %textLeft;
+		}
+
+		// textRight is deprecated
+		.u-textRight {
+			@extend %textRight;
+		}
+
+		// textCenter is deprecated
+		.u-textCenter {
+			@extend %textCenter;
+		}
+
+		.u-textLight {
+			@extend %textLight;
+		}
+
+		.u-textPlaceholder {
+			@extend %textPlaceholder;
+		}
+
+		.u-textDefault {
+			@extend %textDefault;
+		}
+
+		.u-fontWeightRegular {
+			@extend %fontWeightRegular;
+		}
+
+		.u-fontWeightSemiBold {
+			@extend %fontWeightSemiBold;
+		}
+
+		.u-noSpinButtons {
+			@extend %noSpinButtons;
+		}
+
+		.u-fontFamily {
+			@extend %fontFamily;
+		}
+
+		.u-fontFamilyCursive {
+			@extend %fontFamilyCursive;
+		}
+
+		.u-fontFamilyBrand {
+			@extend %fontFamilyBrand;
+		}
+
+
+		@each $display in core.$displays {
+			@if $display != 'none' {
+				.u-onlyPrintDisplay#{transform.capitalize(transform.camelize($display))} {
+					@extend %displayNone;
+				}
+			}
+		}
+
+		@each $direction in core.$boxDirection {
+			@if $direction == '' {
+				// insetReset is deprecated
+				.u-inset0,
+				.u-insetReset {
+					@extend %inset0;
+				}
+			} @else if $direction == 'top' or $direction == 'bottom' or $direction == 'left' or $direction == 'right' {
+				// Reset is deprecated
+				.u-#{$direction}0,
+				.u-#{$direction}Reset {
+					#{$direction}: 0 !important;
+				}
+			} @else {
+				@each $boxModel in core.$boxModel {
+					@if $boxModel != 'border' {
+						.u-#{$boxModel}#{transform.capitalize($direction)}0 {
+							#{$boxModel}-#{$direction}: 0 !important;
+						}
+					}
 				}
 			}
 		}
 	}
 }
-
-@include core.spacings;
-@include core.sizes;
-@include core.borderRadius;
-@include core.palettes;

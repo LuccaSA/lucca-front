@@ -8,7 +8,7 @@
 	display: flex;
 	box-shadow: 0 0 0 1px var(--components-multiSelect-border-color);
 	background-color: var(--components-multiSelect-background);
-	border-radius: var(--commons-borderRadius-M);
+	border-radius: var(--pr-t-border-radius-input);
 	padding: var(--components-multiSelect-padding);
 	align-items: flex-end;
 	gap: var(--components-multiSelect-gap);
@@ -34,13 +34,6 @@
 			min-inline-size: 0;
 		}
 
-		.multipleSelect-displayer-chip-value {
-			max-inline-size: 8rem;
-			white-space: nowrap;
-			overflow: hidden;
-			text-overflow: ellipsis;
-		}
-
 		.multipleSelect-displayer-search {
 			display: block;
 			min-inline-size: 2rem;
@@ -51,8 +44,7 @@
 			padding: 0;
 			outline: none;
 			color: var(--pr-t-color-input-text);
-			font-size: var(--components-multiSelect-fontSize);
-			line-height: var(--components-multiSelect-lineHeight);
+			font: var(--components-multiSelect-font);
 			background-color: transparent;
 			cursor: pointer;
 
@@ -62,8 +54,7 @@
 		}
 
 		.multipleSelect-displayer-label {
-			font-size: var(--components-multiSelect-fontSize);
-			line-height: var(--components-multiSelect-lineHeight);
+			font: var(--components-multiSelect-font);
 		}
 
 		.multipleSelect-clear {
@@ -88,7 +79,7 @@
 		}
 
 		.multipleSelect-pill-displayer-label {
-			font-weight: 600;
+			font-weight: var(--pr-t-font-fontWeight-semibold);
 		}
 	}
 }

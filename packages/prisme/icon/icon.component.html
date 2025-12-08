@@ -1,4 +1,4 @@
-<span aria-hidden="true" class="lucca-icon icon-{{icon}} icon-color-{{color}}" [ngClass]="iconClasses"></span>
+<span aria-hidden="true" [class.mod-AI]="AI()" class="lucca-icon icon-{{ icon }} icon-color-{{ color }}" [ngClass]="iconClasses"></span>
 @if (alt) {
-<span class="u-mask">{{alt}}</span>
+	<span class="pr-u-mask">{{ alt }}</span>
 }

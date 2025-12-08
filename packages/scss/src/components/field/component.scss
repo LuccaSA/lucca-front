@@ -52,8 +52,8 @@
 		.radiosfield-label,
 		.checkboxesfield-label {
 			color: var(--components-field-label-color);
-			font-size: var(--sizes-M-fontSize);
-			line-height: var(--sizes-M-lineHeight);
+			font-size: var(--pr-t-font-body-M-fontSize);
+			line-height: var(--pr-t-font-body-M-lineHeight);
 			min-block-size: var(--pr-t-spacings-200);
 			margin-block-end: var(--components-field-label-margin-bottom);
 			transition-duration: var(--commons-animations-durations-fast);
@@ -61,7 +61,7 @@
 			overflow: hidden;
 			position: relative;
 			text-overflow: ellipsis;
-			word-break: break-word;
+			overflow-wrap: anywhere;
 			white-space: nowrap;
 			order: -1;
 		}
@@ -69,8 +69,8 @@
 		.textfield-messages,
 		.radiosfield-messages,
 		.checkboxesfield-messages {
-			font-size: var(--sizes-S-fontSize);
-			line-height: var(--sizes-S-lineHeight);
+			font-size: var(--pr-t-font-body-S-fontSize);
+			line-height: var(--pr-t-font-body-S-lineHeight);
 			margin-block-start: var(--components-field-message-margin-top);
 
 			> * {
@@ -81,11 +81,11 @@
 		.textfield-messages-error,
 		.radiosfield-messages-error,
 		.checkboxesfield-messages-error {
-			color: var(--palettes-error-700);
+			color: var(--pr-t-color-text-critical);
 
 			.lucca-icon {
-				font-size: var(--sizes-XS-lineHeight);
-				line-height: var(--sizes-S-lineHeight);
+				font-size: var(--pr-t-font-body-XS-lineHeight);
+				line-height: var(--pr-t-font-body-S-lineHeight);
 				vertical-align: top;
 			}
 		}
@@ -93,7 +93,7 @@
 		.textfield-messages-warning,
 		.radiosfield-messages-warning,
 		.checkboxesfield-messages-warning {
-			color: var(--palettes-warning-700);
+			color: var(--pr-t-color-text-warning);
 		}
 
 		.textfield-messages-valid,
@@ -102,7 +102,7 @@
 		.textfield-messages-success,
 		.radiosfield-messages-success,
 		.checkboxesfield-messages-success {
-			color: var(--palettes-success-700);
+			color: var(--pr-t-color-text-success);
 		}
 
 		.textfield-messages-helper,

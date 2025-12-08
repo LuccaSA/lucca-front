@@ -11,25 +11,25 @@
 	text-align: center;
 
 	.file-icon {
-		font-size: var(--sizes-M-lineHeight);
+		font-size: var(--pr-t-font-body-M-lineHeight);
 		margin-block: 0;
 		margin-inline: var(--pr-t-spacings-50);
 		display: none;
 	}
 
 	.file-title {
-		font-size: var(--sizes-M-fontSize);
-		line-height: var(--sizes-M-lineHeight);
+		font-size: var(--pr-t-font-body-M-fontSize);
+		line-height: var(--pr-t-font-body-M-lineHeight);
 		margin-block-end: 0;
-		font-weight: 600;
+		font-weight: var(--pr-t-font-fontWeight-semibold);
 		display: block;
 		position: relative;
 		color: var(--palettes-neutral-700);
 	}
 
 	.file-or {
-		font-size: var(--sizes-S-fontSize);
-		line-height: var(--sizes-S-lineHeight);
+		font-size: var(--pr-t-font-body-S-fontSize);
+		line-height: var(--pr-t-font-body-S-lineHeight);
 		margin-block-end: var(--pr-t-spacings-50);
 		display: block;
 		position: relative;
@@ -37,7 +37,7 @@
 
 		&:not(:empty) {
 			margin-block-end: var(--pr-t-spacings-100);
-			color: var(--palettes-neutral-800);
+			color: var(--pr-t-color-text);
 		}
 	}
 
@@ -49,8 +49,8 @@
 
 	.file-name {
 		&:not(:empty) {
-			font-size: var(--sizes-S-fontSize);
-			line-height: var(--sizes-S-lineHeight);
+			font-size: var(--pr-t-font-body-S-fontSize);
+			line-height: var(--pr-t-font-body-S-lineHeight);
 			margin-block-end: var(--pr-t-spacings-200);
 			color: var(--palettes-neutral-600);
 			display: block;
@@ -58,8 +58,8 @@
 	}
 
 	.file-formats {
-		font-size: var(--sizes-S-fontSize);
-		line-height: var(--sizes-S-lineHeight);
+		font-size: var(--pr-t-font-body-S-fontSize);
+		line-height: var(--pr-t-font-body-S-lineHeight);
 		color: var(--palettes-neutral-600);
 		position: relative;
 		display: block;
@@ -91,7 +91,7 @@
 		~ .file-content {
 			&::before {
 				border: 1px dashed var(--palettes-neutral-400);
-				border-radius: var(--commons-borderRadius-M);
+				border-radius: var(--pr-t-border-radius-default);
 				position: absolute;
 				inset: 0;
 				content: '';

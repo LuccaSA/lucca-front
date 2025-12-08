@@ -15,7 +15,7 @@ function getTemplate(args: TextfieldPasswordStory): string {
 		<a href="#" onClick="event.preventDefault()" role="button" aria-pressed="false" class="textfield-suffix-action">
 	  	<span aria-hidden="true" class="lucca-icon icon-eye"></span>
 	  	<span aria-hidden="true" class="lucca-icon icon-eyeStrikethrough"></span>
-	  	<span class="u-mask">Show password</span>
+	  	<span class="pr-u-mask">Show password</span>
 			</a>
 	</span>
 </label>
@@ -26,7 +26,7 @@ function getTemplate(args: TextfieldPasswordStory): string {
 		<a href="#" onClick="event.preventDefault()" role="button" aria-pressed="true" class="textfield-suffix-action">
 			<span aria-hidden="true" class="lucca-icon icon-eye"></span>
 			<span aria-hidden="true" class="lucca-icon icon-eyeStrikethrough"></span>
-			<span class="u-mask">Show password</span>
+			<span class="pr-u-mask">Show password</span>
 		</a>
 	</span>
 </label>`;

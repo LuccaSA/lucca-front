@@ -1,5 +1,5 @@
 import { A11yModule } from '@angular/cdk/a11y';
-import { AsyncPipe, NgClass, NgIf } from '@angular/common';
+import { AsyncPipe, NgClass } from '@angular/common';
 import { ChangeDetectionStrategy, Component, Directive, DoCheck, ElementRef, HostBinding, Injector, OnDestroy, Renderer2, Type, ViewChild, ViewContainerRef } from '@angular/core';
 import { getIntl } from '@lucca-front/ng/core';
 import { LuTooltipModule } from '@lucca-front/ng/tooltip';
@@ -106,14 +106,12 @@ export abstract class ALuModalPanelComponent<T extends ILuModalContent> implemen
 	}
 }
 
-const panelImports = [A11yModule, AsyncPipe, LuTooltipModule, NgClass, NgIf];
+const panelImports = [A11yModule, AsyncPipe, LuTooltipModule, NgClass];
 
 @Component({
 	selector: 'lu-modal-panel',
-	standalone: true,
 	imports: panelImports,
 	templateUrl: './modal-panel.component.html',
-	styleUrls: ['./modal-panel.component.scss'],
 	changeDetection: ChangeDetectionStrategy.OnPush,
 })
 export class LuModalPanelComponent<T extends ILuModalContent = ILuModalContent> extends ALuModalPanelComponent<T> {
@@ -124,13 +122,10 @@ export class LuModalPanelComponent<T extends ILuModalContent = ILuModalContent> 
 }
 @Component({
 	selector: 'lu-modal-panel-default',
-	standalone: true,
 	imports: panelImports,
 	templateUrl: './modal-panel.component.html',
-	styleUrls: ['./modal-panel.component.scss'],
 	changeDetection: ChangeDetectionStrategy.Default,
 })
-// eslint-disable-next-line @angular-eslint/component-class-suffix
 export class LuModalPanelComponentDefaultCD<T extends ILuModalContent = ILuModalContent> extends ALuModalPanelComponent<T> {
 	@HostBinding('class.lu-modal-panel') class = true;
 	constructor(_ref: ALuModalRef<T>, _elementRef: ElementRef<HTMLElement>, _renderer: Renderer2) {

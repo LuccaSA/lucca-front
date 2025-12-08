@@ -1,23 +1,27 @@
-import { booleanAttribute, ChangeDetectionStrategy, Component, ContentChild, ElementRef, inject, Input, OnChanges, ViewEncapsulation } from '@angular/core';
+import { booleanAttribute, ChangeDetectionStrategy, Component, ContentChild, ElementRef, inject, Input, OnChanges, signal, SimpleChanges, ViewEncapsulation } from '@angular/core';
 import { Palette, PrClass } from '@lucca/prisme/core';
 import { IconComponent } from '@lucca/prisme/icon';
 
 @Component({
 	// eslint-disable-next-line @angular-eslint/component-selector
 	selector: 'button[prButton],a[prButton],button[luButton],a[luButton]',
-	standalone: true,
 	providers: [PrClass],
-	template: '<ng-content></ng-content>',
-	styleUrls: ['./button.component.scss'],
+	template: '<ng-content />',
+	styleUrl: './button.component.scss',
 	changeDetection: ChangeDetectionStrategy.OnPush,
 	encapsulation: ViewEncapsulation.None,
 	host: {
 		class: 'button',
+		'[class.is-error]': 'notifyError()',
+		'(click)': 'triggerErrorIfNeeded()',
+		'(animationend)': 'notifyError.set(false)',
 	},
 })
 export class ButtonComponent implements OnChanges {
 	#prClass = inject(PrClass);
 	#elementRef = inject<ElementRef<HTMLButtonElement>>(ElementRef);
+
+	notifyError = signal(false);
 
 	@Input()
 	size: 'M' | 'S' | 'XS';
@@ -26,6 +30,11 @@ export class ButtonComponent implements OnChanges {
 		transform: booleanAttribute,
 	})
 	block = false;
+
+	@Input({
+		transform: booleanAttribute,
+	})
+	critical = false;
 
 	@Input({
 		transform: booleanAttribute,
@@ -55,7 +64,7 @@ export class ButtonComponent implements OnChanges {
 	 * '' is the default value when you just set the `prButton` directive without a value attached to it.
 	 * We just make this explicit here.
 	 */
-	prButton: '' | 'outlined' | 'text' | 'text-invert' = '';
+	prButton: '' | 'outlined' | 'AI' | 'ghost' | 'ghost-invert' | 'text' | 'text-invert' = '';
 
 	#iconComponentRef?: ElementRef<HTMLElement>;
 
@@ -71,13 +80,30 @@ export class ButtonComponent implements OnChanges {
 		// ignore icon and comment
 		const noSpan =
 			childNodes.filter((node: HTMLElement) => {
-				return node.nodeName !== '#comment' && node.nodeName.toLowerCase() !== 'lu-icon' && !node?.className?.includes('u-mask');
+				return node.nodeName !== '#comment' && node.nodeName.toLowerCase() !== 'lu-icon' && !node?.className?.includes('mask');
 			}).length == 0;
 		return !!this.#iconComponentRef && noSpan && noText;
 	}
 
-	ngOnChanges(): void {
+	private get iconOnLeft(): boolean {
+		return this.#iconComponentRef?.nativeElement === this.#elementRef?.nativeElement?.firstChild;
+	}
+
+	private get iconOnRight(): boolean {
+		return this.#iconComponentRef?.nativeElement === this.#elementRef?.nativeElement?.lastChild;
+	}
+
+	ngOnChanges({ state }: SimpleChanges): void {
 		this.updateClasses();
+		if (state) {
+			this.triggerErrorIfNeeded();
+		}
+	}
+
+	triggerErrorIfNeeded(): void {
+		if (this.state === 'error') {
+			this.notifyError.set(true);
+		}
 	}
 
 	updateClasses(): void {
@@ -85,16 +111,18 @@ export class ButtonComponent implements OnChanges {
 			[`mod-${this.size}`]: !!this.size,
 			[`mod-block`]: this.block,
 			[`palette-${this.palette}`]: !!this.palette,
-			[`is-${this.state}`]: !!this.state,
+			[`is-${this.state}`]: !!this.state && this.state !== 'error',
 			['mod-onlyIcon']: this.iconOnly,
+			['mod-iconOnLeft']: this.iconOnLeft,
+			['mod-iconOnRight']: this.iconOnRight,
 			['mod-withIcon']: this.#iconComponentRef !== undefined && !this.disclosure && !this.iconOnly,
-			['mod-delete']: this.delete,
+			['mod-critical']: this.critical || this.delete,
 			['mod-disclosure']: this.disclosure,
 		};
 
 		if (this.luButton !== '') {
-			if (this.luButton === 'text-invert') {
-				classesConfig['mod-text'] = true;
+			if (this.luButton === 'ghost-invert') {
+				classesConfig['mod-ghost'] = true;
 				classesConfig['mod-invert'] = true;
 			} else {
 				classesConfig[`mod-${this.luButton}`] = true;

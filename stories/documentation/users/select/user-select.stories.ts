@@ -1,19 +1,18 @@
 import { provideHttpClient } from '@angular/common/http';
-import { Component, Input } from '@angular/core';
+import { Component, input } from '@angular/core';
 import { FormsModule } from '@angular/forms';
 import { provideAnimations } from '@angular/platform-browser/animations';
 import { ILuUser, LuUserSelectModule } from '@lucca-front/ng/user';
-import { Meta, StoryFn, applicationConfig } from '@storybook/angular';
+import { applicationConfig, Meta, StoryFn } from '@storybook/angular';
 
 @Component({
-	standalone: true,
 	selector: 'user-select-stories',
 	templateUrl: './user-select.stories.html',
 	imports: [LuUserSelectModule, FormsModule],
 })
 class UserSelectStory {
 	model: ILuUser;
-	@Input() disablePrincipal = false;
+	disablePrincipal = input<boolean>(false);
 }
 
 export default {
@@ -38,13 +37,13 @@ class UserSelectStoriesModule {}
 
 /* 2. (Exemple n° 1) Utiliser le lu-user-select */
 <label class="textfield">
-  <lu-user-select class="textfield-input" [ngModel]="model"></lu-user-select>
+  <lu-user-select class="textfield-input" [ngModel]="model" />
   <span class="textfield-label">Utilisateurs</span>
 </label>
 
 /* 3. (Exemple n° 2) Utiliser le lu-user-select avec <code class="code">enableFormerEmployees</code> */
 <label class="textfield pr-u-marginBlockStart300">
-  <lu-user-select class="textfield-input" [ngModel]="model" [enableFormerEmployees]="true"></lu-user-select>
+  <lu-user-select class="textfield-input" [ngModel]="model" [enableFormerEmployees]="true" />
   <span class="textfield-label">Utilisateurs avec <code class="code">enableFormerEmployees</code></span>
 </label>
 

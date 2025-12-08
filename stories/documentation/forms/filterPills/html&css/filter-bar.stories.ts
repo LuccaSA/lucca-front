@@ -1,3 +1,4 @@
+import { LOCALE_ID } from '@angular/core';
 import { FormsModule } from '@angular/forms';
 import { ButtonComponent } from '@lucca-front/ng/button';
 import { DateInputComponent } from '@lucca-front/ng/date2';
@@ -7,9 +8,9 @@ import { FormFieldComponent } from '@lucca-front/ng/form-field';
 import { CheckboxInputComponent, TextInputComponent } from '@lucca-front/ng/forms';
 import { IconComponent } from '@lucca-front/ng/icon';
 import { PopoverDirective } from '@lucca-front/ng/popover2';
-import { ScrollBoxComponent } from '@lucca-front/ng/scrollBox';
+import { ScrollBoxComponent } from '@lucca-front/ng/scroll-box';
 import { LuTooltipModule } from '@lucca-front/ng/tooltip';
-import { Meta, moduleMetadata, StoryFn } from '@storybook/angular';
+import { applicationConfig, Meta, moduleMetadata, StoryFn } from '@storybook/angular';
 import { StoryModelDisplayComponent } from 'stories/helpers/story-model-display.component';
 
 interface FilterBarBasicStory {
@@ -38,6 +39,9 @@ export default {
 				LuTooltipModule,
 			],
 		}),
+		applicationConfig({
+			providers: [{ provide: LOCALE_ID, useValue: 'fr-FR' }],
+		}),
 	],
 	argTypes: {},
 } as Meta;
@@ -45,10 +49,8 @@ export default {
 function getTemplate(args: FilterBarBasicStory): string {
 	return `
 	<form>
-		<div class="filterBar" [ngModel]="group" [ngModelOptions]="{standalone: true}">
+		<div class="filterBar" [ngModel]="group" [ngModelOptions]="{ standalone: true }">
 			<lu-scroll-box class="filterBar-scrollBox">
-				<div class="filterBar-scrollBox-first"></div>
-
 				<div class="filterBar-scrollBox-group">
 					<ul class="segmentedControl filterBar-segmentedControl" role="presentation">
 						<li class="segmentedControl-item">
@@ -61,14 +63,18 @@ function getTemplate(args: FilterBarBasicStory): string {
 							<input type="radio" class="segmentedControl-item-input" name="tab" id="tab2" />
 							<label for="tab2" class="segmentedControl-item-action">
 								En cours d’approbation
-								<span class="numericBadge" *ngIf="withNumericBadge">8</span>
+								@if (withNumericBadge) {
+									<span class="numericBadge">8</span>
+								}
 							</label>
 						</li>
 						<li class="segmentedControl-item">
 							<input type="radio" class="segmentedControl-item-input" name="tab" id="tab3" />
 							<label for="tab3" class="segmentedControl-item-action">
 								Approuvés
-								<span class="numericBadge" *ngIf="withNumericBadge">88</span>
+								@if (withNumericBadge) {
+									<span class="numericBadge">88</span>
+								}
 							</label>
 						</li>
 						<li class="segmentedControl-item">
@@ -103,26 +109,24 @@ function getTemplate(args: FilterBarBasicStory): string {
 						<button class="filterPill-combobox" type="button" id="input1" role="combobox" aria-expanded="false" luTooltipWhenEllipsis="true">
 							Finance
 						</button>
-						<button type="button" class="filterPill-clear clear"><span class="u-mask">Vider ce champ</span></button>
+						<button type="button" class="filterPill-clear clear"><span class="pr-u-mask">Vider ce champ</span></button>
 						<button type="button" aria-hidden="true" tabindex="-1" class="filterPill-toggle">
 							<lu-icon icon="arrowChevronBottom" size="S" />
 						</button>
 					</div>
 
-					<lu-filter-pill label="Échéance"><lu-date-input [ngModel]="example6" [ngModelOptions]="{standalone: true}" /></lu-filter-pill>
+					<lu-filter-pill label="Échéance"><lu-date-input [ngModel]="example6" [ngModelOptions]="{ standalone: true }" /></lu-filter-pill>
 
 					<lu-form-field label="Test" hiddenLabel>
-						<lu-text-input [ngModel]="example10" [ngModelOptions]="{standalone: true}" hasSearchIcon hasClearer />
+						<lu-text-input [ngModel]="example10" [ngModelOptions]="{ standalone: true }" hasSearchIcon hasClearer />
 					</lu-form-field>
 
-					<button type="submit" size="S" luButton="text" palette="product">Appliquer les filtres</button>
+					<button type="submit" size="S" luButton="ghost" palette="product">Appliquer les filtres</button>
 
 				</div>
 				<div class="filterBar-scrollBox-export">
 					<button type="submit" size="S" luButton="outlined">Exporter</button>
 				</div>
-
-				<div class="filterBar-scrollBox-last"></div>
 			</lu-scroll-box>
 		</div>
 
@@ -131,19 +135,19 @@ function getTemplate(args: FilterBarBasicStory): string {
 	<ng-template #contentOptions>
 		<form class="filterPill_popover-content popover-contentOptional">
 			<lu-form-field label="Inclure les collaborateurs partis" class="filterPill_popover-content-formField mod-selectOption">
-				<lu-checkbox-input [ngModel]="true" [ngModelOptions]="{standalone: true}" />
+				<lu-checkbox-input [ngModel]="true" [ngModelOptions]="{ standalone: true }" />
 			</lu-form-field>
 			<lu-form-field label="Équipe" class="filterPill_popover-content-formField mod-selectOption">
-				<lu-checkbox-input [ngModel]="true" [ngModelOptions]="{standalone: true}" />
+				<lu-checkbox-input [ngModel]="true" [ngModelOptions]="{ standalone: true }" />
 			</lu-form-field>
 			<lu-form-field label="Statut" class="filterPill_popover-content-formField mod-selectOption">
-				<lu-checkbox-input [ngModel]="false" [ngModelOptions]="{standalone: true}" />
+				<lu-checkbox-input [ngModel]="false" [ngModelOptions]="{ standalone: true }" />
 			</lu-form-field>
 			<lu-form-field label="Échéance" class="filterPill_popover-content-formField mod-selectOption">
-				<lu-checkbox-input [ngModel]="true" [ngModelOptions]="{standalone: true}" />
+				<lu-checkbox-input [ngModel]="true" [ngModelOptions]="{ standalone: true }" />
 			</lu-form-field>
 			<lu-form-field label="Fréquence de facturation" class="filterPill_popover-content-formField mod-selectOption">
-				<lu-checkbox-input [ngModel]="false" [ngModelOptions]="{standalone: true}"  />
+				<lu-checkbox-input [ngModel]="false" [ngModelOptions]="{ standalone: true }"  />
 			</lu-form-field>
 		</form>
 	</ng-template>

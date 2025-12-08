@@ -2,7 +2,7 @@ import { HttpClient } from '@angular/common/http';
 import { computed, Directive, forwardRef, inject, input, model } from '@angular/core';
 import { toObservable, toSignal } from '@angular/core/rxjs-interop';
 import { ILuApiItem } from '@lucca-front/ng/api';
-import { CORE_SELECT_API_TOTAL_COUNT_PROVIDER, CoreSelectApiTotalCountProvider, applySearchDelimiter } from '@lucca-front/ng/core-select';
+import { applySearchDelimiter, CORE_SELECT_API_TOTAL_COUNT_PROVIDER, CoreSelectApiTotalCountProvider } from '@lucca-front/ng/core-select';
 import { debounceTime, map, Observable, switchMap } from 'rxjs';
 import { ALuCoreSelectApiDirective } from './api.directive';
 
@@ -10,7 +10,6 @@ import { ALuCoreSelectApiDirective } from './api.directive';
 	// The attribute is already prefixed with "lu-simple-select"
 	// eslint-disable-next-line @angular-eslint/directive-selector
 	selector: 'lu-simple-select[apiV4],lu-multi-select[apiV4]',
-	standalone: true,
 	providers: [
 		{
 			provide: CORE_SELECT_API_TOTAL_COUNT_PROVIDER,
@@ -66,6 +65,5 @@ export class LuCoreSelectApiV4Directive<T extends ILuApiItem> extends ALuCoreSel
 			.pipe(map((res) => (Array.isArray(res) ? res : res?.items) ?? []));
 	}
 
-	protected override optionComparer = (a: T, b: T) => a.id === b.id;
 	protected override optionKey = (option: T) => option.id;
 }

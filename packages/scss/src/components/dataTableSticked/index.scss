@@ -3,41 +3,59 @@
 @use 'exports' as *;
 
 .dataTableWrapper {
-	@include vars;
-
-	&:has(.dataTable.mod-stickyHeader) {
-		@include stickyHeader;
+	@layer components {
+		@include vars;
 	}
 
-	&:has(.dataTable.mod-columnsOverflow) {
-		@include columnsOverflow;
-	}
-
-	&:has(.dataTable.is-firstColumnVisible) {
-		@include firstColumnVisible;
-	}
-
-	&:has(.dataTable.is-lastColumnVisible) {
-		@include lastColumnVisible;
-	}
-
-	&:has(.dataTable.mod-rowsOverflow) {
-		@include rowsOverflow;
-	}
-
-	&:has(.dataTable.is-firstRowVisible) {
-		@include firstRowVisible;
-	}
-
-	&:has(.dataTable.is-lastRowVisible) {
-		@include lastRowVisible;
-	}
-
-	&:has(:is(.dataTable-head-row-cell, .dataTable-head-body-cell, .dataTable-foot-row-cell).mod-stickyColumn) {
-		@include stickyColumn;
-
-		&:has(.dataTable.mod-cellBorder) {
-			@include stickyColumnBorder;
+	@layer mods {
+		&:has(.dataTable.mod-stickyHeader, .dataTable-head.mod-sticky) {
+			@include stickyHeader;
 		}
+
+		&:has(.dataTableShadows),
+		&:has(.dataTable.mod-columnsOverflow) {
+			@include columnsOverflow;
+		}
+
+		&:has(.dataTableShadows),
+		&:has(.dataTable.mod-rowsOverflow) {
+			@include rowsOverflow;
+		}
+
+		&:has(.dataTable.is-firstColumnVisible) {
+			@include firstColumnVisible;
+		}
+
+		&:has(.dataTable.is-lastColumnVisible) {
+			@include lastColumnVisible;
+		}
+
+		&:has(.dataTable.is-firstRowVisible) {
+			@include firstRowVisible;
+		}
+
+		&:has(.dataTable.is-lastRowVisible) {
+			@include lastRowVisible;
+		}
+
+		&:has(:is(.dataTable-head-row-cell, .dataTable-head-body-cell, .dataTable-foot-row-cell).mod-stickyColumn) {
+			@include stickyColumn;
+
+			&:has(.dataTable.mod-cellBorder) {
+				@include stickyColumnBorder;
+			}
+		}
+
+		&:has(.dataTable.is-firstColumnVisibleAfterColsStart) {
+			@include firstColumnVisibleAfterColsStart;
+		}
+
+		&:has(.dataTable.is-lastColumnVisibleBeforeColsEnd) {
+			@include lastColumnVisibleBeforeColsEnd;
+		}
+	}
+
+	&:has(.dataTable-head.is-firstBodyRowVisible) {
+		@include firstBodyRowVisible;
 	}
 }

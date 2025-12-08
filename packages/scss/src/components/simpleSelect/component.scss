@@ -7,11 +7,11 @@
 	@at-root ($atRoot) {
 		.simpleSelect-field {
 			display: grid;
-			grid-template-columns: 1fr auto auto;
+			grid-template-columns: auto 1fr auto auto;
 			align-items: center;
 			box-shadow: 0 0 0 1px var(--components-simpleSelect-border-color);
 			background-color: var(--components-simpleSelect-background);
-			border-radius: var(--commons-borderRadius-M);
+			border-radius: var(--pr-t-border-radius-input);
 			padding: var(--components-simpleSelect-padding);
 			overflow: hidden;
 			outline: none;
@@ -22,11 +22,17 @@
 			}
 		}
 
+		.simpleSelect-field-prefix {
+			&:not(:empty) {
+				display: flex;
+				margin-inline-end: var(--pr-t-spacings-50);
+			}
+		}
+
 		.simpleSelect-field-input {
-			grid-column-start: 1;
+			grid-column-start: 2;
 			grid-row-start: 1;
-			font-size: var(--components-simpleSelect-fontSize);
-			line-height: var(--components-simpleSelect-lineHeight);
+			font: var(--components-simpleSelect-font);
 			padding: 0;
 			background-color: transparent;
 			color: var(--components-simpleSelect-value-color);
@@ -43,11 +49,10 @@
 		}
 
 		.simpleSelect-field-value {
-			grid-column-start: 1;
+			grid-column-start: 2;
 			grid-row-start: 1;
 			inline-size: 100%;
-			font-size: var(--components-simpleSelect-fontSize);
-			line-height: var(--components-simpleSelect-lineHeight);
+			font: var(--components-simpleSelect-font);
 			color: var(--components-simpleSelect-value-color);
 			white-space: nowrap;
 			overflow: hidden;

@@ -1,0 +1,18 @@
+@if (tableRef.selectable()) {
+	@if (headRef) {
+		<th class="dataTable-head-row-cell" scope="col"><ng-container *ngTemplateOutlet="input" /></th>
+	} @else {
+		<td [class.dataTable-body-row-cell]="bodyRef !== null" [class.dataTable-foot-row-cell]="footRef !== null">
+			<ng-container *ngTemplateOutlet="input" />
+		</td>
+	}
+}
+<ng-content />
+
+<ng-template #input>
+	@if (!footRef && selectedLabel()) {
+		<lu-form-field [label]="selectedLabel()" hiddenLabel>
+			<lu-checkbox-input [(ngModel)]="selected" [disabled]="disabled()" />
+		</lu-form-field>
+	}
+</ng-template>

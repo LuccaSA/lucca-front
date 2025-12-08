@@ -27,7 +27,8 @@
 			white-space: nowrap;
 
 			&::before {
-				content: '\a0';
+				// stylelint-disable-next-line no-irregular-whitespace
+				content: ' ' / '';
 			}
 		}
 	}

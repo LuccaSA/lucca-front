@@ -1,3 +1,4 @@
 @mixin vars {
-	--components-filterBar-extremitiesDisplay: none;
+	--components-filterBar-scrollBox-flexGrow: 0;
+	--components-filterBar-scrollBox-group-flexWrap: wrap;
 }

@@ -78,15 +78,23 @@ function getTemplate(args: SwitchBasicStory): string {
 
 	return `<div class="form-field${s}">
 	<label class="formLabel" for="${id}">
-		Label<span *ngIf="help" class="formLabel-info"><span aria-hidden="true" class="lucca-icon icon-signHelp"></span><span class="u-mask">?</span></span>
+		Label
+		@if (help) {
+			<span class="formLabel-info">
+				<span aria-hidden="true" class="lucca-icon icon-signHelp"></span>
+				<span class="pr-u-mask">?</span>
+			</span>
+		}
 	</label>
 	<span class="switchField">
 		<input type="checkbox" class="switchField-input" id="${id}" aria-describedby="${id}message"${checked}${disabled}${invalid} />
 		<span class="switchField-icon" aria-hidden="true"><span class="switchField-icon-check"></span></span>
 	</span>
-	<div class="inlineMessage ${messageState}" id="${id}message" *ngIf="message">
-		<p class="inlineMessage-content">Helper text</p>
-	</div>
+	@if (message) {
+		<div class="inlineMessage ${messageState}" id="${id}message">
+			<p class="inlineMessage-content">Helper text</p>
+		</div>
+	}
 </div>`;
 }
 

@@ -12,7 +12,7 @@
 		[@transformPopover]="'enter'"
 	>
 		<div class="lu-popover-content" [class]="contentClassesMap" [cdkTrapFocus]="trapFocus">
-			<ng-content></ng-content><ng-container *ngTemplateOutlet="template; context: templateContext"></ng-container>
+			<ng-content /><ng-container *ngTemplateOutlet="template; context: templateContext" />
 		</div>
 	</div>
 </ng-template>

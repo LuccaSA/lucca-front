@@ -1,7 +1,7 @@
 <ng-template>
 	<div
 		class="lu-picker-panel lu-option-picker-panel"
-		role="dialog"
+		data-testid="dialog-panel"
 		[class]="panelClassesMap"
 		[class.mod-multiple]="multiple"
 		(click)="onClick()"
@@ -11,7 +11,7 @@
 	>
 		<div class="lu-picker-content" [class]="contentClassesMap" [cdkTrapFocus]="trapFocus">
 			<div class="lu-picker-content-option">
-				<ng-content></ng-content>
+				<ng-content />
 			</div>
 		</div>
 	</div>

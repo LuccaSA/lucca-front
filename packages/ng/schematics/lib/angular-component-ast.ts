@@ -136,6 +136,8 @@ export function insertAngularImportIfNeeded(sourceFile: SourceFile, fileToEdit: 
 		return new NoopChange();
 	}
 	let insertPos = 0;
+	let needsComma = true;
+	let insertContent = symbolName;
 	forEachChild(
 		sourceFile,
 		createVisitor(isDecorator, (decorator) => {
@@ -153,18 +155,32 @@ export function insertAngularImportIfNeeded(sourceFile: SourceFile, fileToEdit: 
 			if (!argument || !isObjectLiteralExpression(argument)) {
 				return;
 			}
-			const imports = argument.properties
+			const importsProperties = argument.properties
 				.filter(isPropertyAssignment)
 				.filter((prop) => isIdentifier(prop.name) && prop.name.text === 'imports')
+			const imports = importsProperties
 				.map((prop) => prop.initializer)
-				.find(isArrayLiteralExpression)?.elements;
-			if (imports) {
-				insertPos = imports[imports.length - 1].getEnd() || 0;
+				.find(isArrayLiteralExpression);
+			if (imports?.elements) {
+				if (imports.elements.length > 0) {
+					insertPos = imports.elements[imports.elements.length - 1].getEnd() || 0;
+				} else {
+					insertPos = imports.elements.pos;
+					needsComma = false;
+				}
+			} else {
+				// There is no imports at all, add them !
+				const allParams = argument.properties
+					.filter(isPropertyAssignment)
+				insertPos = allParams[allParams.length - 1].pos;
+				needsComma = false;
+				insertContent = `
+	imports: [${insertContent}],`;
 			}
 		})
 	);
 	if (insertPos > 0) {
-		return new InsertChange(fileToEdit, insertPos, `, ${symbolName}`);
+		return new InsertChange(fileToEdit, insertPos, needsComma ? `, ${insertContent}` : insertContent);
 	}
 	return new NoopChange();
 }

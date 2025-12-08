@@ -1,22 +1,23 @@
 import { booleanAttribute, ChangeDetectionStrategy, Component, computed, effect, HostBinding, inject, input, ViewEncapsulation } from '@angular/core';
-import { LuClass } from '@lucca-front/ng/core';
+import { LuClass, PortalContent, PortalDirective } from '@lucca-front/ng/core';
+
 @Component({
 	selector: 'lu-highlight-data',
-	standalone: true,
 	templateUrl: './highlight-data.component.html',
-	styleUrls: ['./highlight-data.component.scss'],
+	styleUrl: './highlight-data.component.scss',
 	changeDetection: ChangeDetectionStrategy.OnPush,
 	encapsulation: ViewEncapsulation.None,
 	providers: [LuClass],
 	host: {
 		class: 'highlightData',
 	},
+	imports: [PortalDirective],
 })
 export class HighlightDataComponent {
 	#luClass = inject(LuClass);
-	heading = input.required<string>();
-	value = input.required<string>();
-	subText = input<string>();
+	heading = input.required<PortalContent>();
+	value = input.required<PortalContent>();
+	subText = input<PortalContent>();
 	bubble = input<1 | 2 | 3 | 4 | number>();
 	bubbleSrc = computed(() => {
 		return `https://cdn.lucca.fr/transverse/prisme/visuals/highlight-data/${this.palette()}/bubbles-${this.bubbleTheme()}-${this.bubble()}.svg`;
@@ -64,11 +65,14 @@ export class HighlightDataComponent {
 	 */
 	valueFirst = input(false, { transform: booleanAttribute });
 
+	nested = input(false, { transform: booleanAttribute });
+
 	constructor() {
 		effect(() => {
 			this.#luClass.setState({
 				[`mod-${this.size()}`]: !!this.size(),
 				'mod-valueFirst': this.valueFirst(),
+				'mod-nested': this.nested(),
 				[`palette-${this.palette()}`]: !!this.palette(),
 			});
 		});

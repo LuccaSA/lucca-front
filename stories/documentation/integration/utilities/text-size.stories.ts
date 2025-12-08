@@ -8,12 +8,9 @@ export default {
 
 function getTemplate(args: TextSizeStory): string {
 	return `<div class="demo-utilityWrapper">
-	<div class="u-textXS demo-utility"><code class="code">u-textXS</code> Lorem ipsum</div>
-	<div class="u-textS demo-utility"><code class="code">u-textS</code> Lorem ipsum</div>
-	<div class="u-textM demo-utility"><code class="code">u-textM</code> Lorem ipsum</div>
-	<div class="u-textL demo-utility"><code class="code">u-textL</code> Lorem ipsum</div>
-	<div class="u-textXL demo-utility"><code class="code">u-textXL</code> Lorem ipsum</div>
-	<div class="u-textXXL demo-utility"><code class="code">u-textXXL</code> Lorem ipsum</div>
+	<div class="pr-u-bodyM demo-utility"><code class="code">pr-u-bodyM</code> Lorem ipsum</div>
+	<div class="pr-u-bodyS demo-utility"><code class="code">pr-u-bodyS</code> Lorem ipsum</div>
+	<div class="pr-u-bodyXS demo-utility"><code class="code">pr-u-bodyXS</code> Lorem ipsum</div>
 </div>`;
 }
 

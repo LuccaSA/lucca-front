@@ -1,0 +1,64 @@
+@use '@lucca-front/icons/src/commons/utils/icon';
+@use '@lucca-front/scss/src/commons/utils/reset';
+@use '@lucca-front/scss/src/commons/utils/a11y';
+@use '@lucca-front/scss/src/components/link/exports' as link;
+@use '@lucca-front/scss/src/commons/utils/namespace';
+
+@mixin component($atRoot: namespace.$defaultAtRoot) {
+	container: mobilePush / inline-size;
+
+	@at-root ($atRoot) {
+		.mobilePush {
+			display: flex;
+			align-items: var(--components-mobilePush-icon-content-align-items);
+			gap: var(--pr-t-spacings-100);
+			padding: var(--pr-t-spacings-100);
+			font: var(--pr-t-font-body-S);
+			border: var(--commons-divider-width) var(--commons-divider-style) var(--palettes-brand-200);
+			border-radius: var(--pr-t-border-radius-default);
+			background-color: var(--palettes-brand-50);
+		}
+
+		.mobilePush-icons {
+			display: grid;
+			grid-template: 1fr / 1fr;
+			justify-items: center;
+			align-items: center;
+		}
+
+		.mobilePush-icons-front {
+			grid-area: 1 / 1 ;
+			color: var(--palettes-brand-600);
+			z-index: 1;
+			padding-inline-start: 0.0625rem;
+			padding-block-end: var(--pr-t-spacings-25);
+		}
+
+		.mobilePush-icons-back {
+			grid-area: 1 / 1;
+		}
+
+		.mobilePush-content {
+			display: flex;
+			flex-direction: var(--components-mobilePush-flex-direction);
+			align-items: var(--components-mobilePush-content-align-items);
+			justify-content: space-between;
+			flex-grow: 1;
+			gap: var(--components-mobilePush-align-gap);
+		}
+
+		.mobilePush-content-downloadApps {
+			display: flex;
+			gap: var(--pr-t-spacings-50);
+		}
+
+		.mobilePush-content-downloadApps-link {
+			@include reset.button;
+		}
+
+		.mobilePush-content-downloadApps-link-badge {
+			display: block;
+			height: 1.75rem;
+		}
+	}
+}

@@ -1,26 +1,26 @@
 ﻿export const Translations = {
-	en: {
-		includeFormerEmployees: 'Include former employees',
-	},
-	de: {
-		includeFormerEmployees: 'Ausgeschiedene Mitarbeitende einbeziehen ',
-	},
-	fr: {
-		includeFormerEmployees: 'Inclure les salariés partis',
-	},
-	it: {
-		includeFormerEmployees: 'Includere gli ex dipendenti',
-	},
-	nl: {
-		includeFormerEmployees: 'Inclusief medewerkers die zijn vertrokken',
+	pt: {
+		includeFormerEmployees: 'Incluir os trabalhadores que saíram',
 	},
 	'nl-BE': {
 		includeFormerEmployees: 'Inclusief medewerkers die zijn vertrokken',
 	},
-	es: {
-		includeFormerEmployees: 'Incluir a los antiguos empleados',
+	nl: {
+		includeFormerEmployees: 'Inclusief medewerkers die zijn vertrokken',
 	},
-	pt: {
-		includeFormerEmployees: 'Incluir os trabalhadores que saíram',
+	it: {
+		includeFormerEmployees: 'Includere gli ex collaboratori',
+	},
+	fr: {
+		includeFormerEmployees: 'Inclure les collaborateurs partis',
+	},
+	es: {
+		includeFormerEmployees: 'Incluir a los empleados inactivos',
+	},
+	de: {
+		includeFormerEmployees: 'Ausgeschiedene Mitarbeitende einbeziehen',
+	},
+	en: {
+		includeFormerEmployees: 'Include former employees',
 	},
 };

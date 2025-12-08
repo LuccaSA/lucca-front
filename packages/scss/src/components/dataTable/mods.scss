@@ -1,9 +1,6 @@
 @use '@lucca-front/scss/src/commons/config';
-
 @use '@lucca-front/scss/src/commons/utils/media';
-
 @use '@lucca-front/scss/src/components/button/exports' as button;
-@use '@lucca-front/scss/src/components/title/exports' as title;
 
 @mixin cellBorder {
 	--components-dataTable-cell-shadow: 0 1px inset var(--commons-border-200), 1px 0 inset var(--commons-border-200);
@@ -17,8 +14,16 @@
 	}
 }
 
-@mixin alignTop {
+@mixin verticalAlignTop {
 	--components-dataTable-cell-verticalAlign: top;
+}
+
+@mixin verticalAlignBottom {
+	--components-dataTable-cell-verticalAlign: bottom;
+}
+
+@mixin verticalAlignMiddle {
+	--components-dataTable-cell-verticalAlign: middle;
 }
 
 @mixin buttonExpand {
@@ -31,7 +36,7 @@
 	.dataTable-body-row-cell-expand-button.button {
 		@include button.S;
 		@include button.onlyIconS;
-		@include button.text;
+		@include button.ghost;
 
 		--components-button-padding: var(--pr-t-spacings-25);
 		--components-button-color: var(--palettes-neutral-800);
@@ -41,17 +46,24 @@
 @mixin group {
 	@include buttonExpand;
 
-	@include title.component;
-	@include title.h4;
+	font: var(--pr-t-font-heading-4);
 
-	--components-dataTable-cell-background: var(--palettes-neutral-25);
+	&,
+	&:hover {
+		--components-dataTable-cell-background: var(--palettes-neutral-50);
+	}
 }
 
 @mixin selectable {
-	--components-dataTable-cellFirst-width: 2.5rem;
+	--components-dataTable-cellFirst-width: 2.625rem;
 
-	&:has(input:checked) {
-		--components-dataTable-cell-background: var(--palettes-product-50);
+	.dataTable-head-row-cell,
+	.dataTable-body-row-cell,
+	.dataTable-foot-row-cell {
+		&:first-child {
+			inline-size: var(--components-dataTable-cellFirst-width);
+			max-inline-size: var(--components-dataTable-cellFirst-width);
+		}
 	}
 }
 
@@ -78,12 +90,12 @@
 
 @mixin editable {
 	--components-dataTable-cell-padding: var(--pr-t-spacings-100);
-	--components-dataTable-cell-paddingInlineStart: var(--components-dataTable-cell-padding);
+	--components-dataTable-cell-paddingInlineStart: var(--pr-t-spacings-50);
 }
 
 @mixin actions {
 	padding-block: 0;
-	padding-inline: 0 var(--pr-t-spacings-50);
+	padding-inline: var(--pr-t-spacings-50);
 	text-align: end;
 	white-space: nowrap;
 
@@ -91,7 +103,9 @@
 		@include button.S;
 		@include button.onlyIcon;
 		@include button.onlyIconS;
-		@include button.text;
+		@include button.ghost;
+
+		transition-property: box-shadow, color;
 	}
 
 	&:is(.dataTable-head-row-cell) {
@@ -106,8 +120,12 @@
 	--components-dataTable-cell-textAlign: center;
 }
 
-@mixin alignRight {
-	--components-dataTable-cell-textAlign: right;
+@mixin alignEnd {
+	--components-dataTable-cell-textAlign: end;
+}
+
+@mixin alignStart {
+	--components-dataTable-cell-textAlign: start;
 }
 
 @mixin layoutFixed {
@@ -124,7 +142,7 @@
 	}
 }
 
-@mixin cellFixedWidth {
+@mixin cellInlineSize {
 	min-inline-size: var(--dataTable-layoutFixed-width, auto);
 	inline-size: var(--dataTable-layoutFixed-width, auto);
 }
@@ -134,7 +152,7 @@
 		.dataTable-head-row-cell,
 		.dataTable-body-row-cell,
 		.dataTable-foot-row-cell {
-			@include cellFixedWidth;
+			@include cellInlineSize;
 		}
 	}
 
@@ -144,9 +162,13 @@
 				.dataTable-head-row-cell,
 				.dataTable-body-row-cell,
 				.dataTable-foot-row-cell {
-					@include cellFixedWidth;
+					@include cellInlineSize;
 				}
 			}
 		}
 	}
+}
+
+@mixin nested {
+	--components-dataTable-borderRadius: var(--pr-t-border-radius-default);
 }

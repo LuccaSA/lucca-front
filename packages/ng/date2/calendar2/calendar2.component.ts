@@ -44,7 +44,6 @@ const MODE_HIERARCHY: CalendarMode[] = ['day', 'month', 'year'];
 
 @Component({
 	selector: 'lu-calendar2',
-	standalone: true,
 	imports: [RepeatTimesDirective, Calendar2CellDirective, LuTooltipTriggerDirective],
 	templateUrl: './calendar2.component.html',
 	styleUrl: './calendar2.component.scss',
@@ -80,19 +79,19 @@ export class Calendar2Component implements OnInit {
 
 	intl = getIntl(LU_DATE2_TRANSLATIONS);
 
-	showOverflow = input<boolean, boolean>(false, { transform: booleanAttribute });
+	showOverflow = input(false, { transform: booleanAttribute });
 
-	enableOverflow = input<boolean, boolean>(false, { transform: booleanAttribute });
+	enableOverflow = input(false, { transform: booleanAttribute });
 
-	removeYearOverflow = input<boolean, boolean>(false, { transform: booleanAttribute });
+	removeYearOverflow = input(false, { transform: booleanAttribute });
 
-	hideToday = input<boolean, boolean>(false, { transform: booleanAttribute });
+	hideToday = input(false, { transform: booleanAttribute });
 
-	hasTodayButton = input<boolean, boolean>(false, { transform: booleanAttribute });
+	hasTodayButton = input(false, { transform: booleanAttribute });
 
-	hideWeekend = input<boolean, boolean>(false, { transform: booleanAttribute });
+	hideWeekend = input(false, { transform: booleanAttribute });
 
-	disableModeChange = input<boolean, boolean>(false, { transform: booleanAttribute });
+	disableModeChange = input(false, { transform: booleanAttribute });
 
 	// Date used to init the component and as internal focus model
 	date = model.required<Date>();
@@ -101,7 +100,7 @@ export class Calendar2Component implements OnInit {
 
 	mode = model<CalendarMode>('day');
 
-	displayMode = model<CalendarMode>('year');
+	displayMode = model<CalendarMode | null>(null);
 
 	ranges = input<readonly DateRange[]>([]);
 
@@ -273,7 +272,9 @@ export class Calendar2Component implements OnInit {
 
 	ngOnInit(): void {
 		// On init, set display mode to the mode specified by component consumer
-		this.displayMode.set(this.mode());
+		if (this.displayMode() === null) {
+			this.displayMode.set(this.mode());
+		}
 	}
 
 	onCellClicked(date: Date): void {

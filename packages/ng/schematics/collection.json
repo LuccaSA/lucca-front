@@ -17,9 +17,24 @@
       "schema": "./lu-select/schema.json"
     },
     "tokens-spacings": {
-      "description": "Replace tokens with new names.",
+      "description": "Replace spacing tokens with new names.",
       "factory": "./tokens-spacing/index",
       "schema": "./tokens-spacing/schema.json"
+    },
+    "tokens-radius": {
+      "description": "Replace radius tokens with new names.",
+      "factory": "./tokens-radius/index",
+      "schema": "./tokens-radius/schema.json"
+    },
+    "class-prefix": {
+      "description": "Add pr- prefix to all utility classes",
+      "factory": "./class-prefix/index",
+      "schema": "./class-prefix/schema.json"
+    },
+    "tokens-typo": {
+      "description": "Replace typography tokens with new names.",
+      "factory": "./tokens-typo/index",
+      "schema": "./tokens-typo/schema.json"
     },
     "palettes": {
       "description": "Replace palettes with new names.",
@@ -40,6 +55,11 @@
       "description": "Migrate HTML icons to the new lu-icon component",
       "factory": "./lu-icon/index",
       "schema": "./lu-icon/schema.json"
+    },
+    "lu-button": {
+      "description": "Migrate CSS-only buttons to the new luButton component",
+      "factory": "./lu-button/index",
+      "schema": "./lu-button/schema.json"
     }
   }
 }

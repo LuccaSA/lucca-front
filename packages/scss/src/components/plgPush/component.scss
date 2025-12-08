@@ -9,10 +9,9 @@
 	align-items: flex-start;
 	gap: var(--pr-t-spacings-100);
 	padding: var(--pr-t-spacings-100);
-	font-size: var(--sizes-S-fontSize);
-	line-height: var(--sizes-S-lineHeight);
+	font: var(--pr-t-font-body-S);
 	border: var(--commons-divider-width) var(--commons-divider-style) var(--palettes-brand-200);
-	border-radius: var(--commons-borderRadius-L);
+	border-radius: var(--pr-t-border-radius-default);
 	background-color: var(--palettes-brand-50);
 
 	.link {
@@ -51,7 +50,7 @@
 		}
 
 		.plgPush-content-title {
-			font-weight: 600;
+			font-weight: var(--pr-t-font-fontWeight-semibold);
 		}
 
 		.plgPush-content-link {
@@ -59,6 +58,10 @@
 			align-items: center;
 			gap: var(--pr-t-spacings-25);
 			padding: var(--pr-t-spacings-0);
+		}
+
+		.plgPush-close {
+			margin-inline-start: auto;
 		}
 	}
 }

@@ -13,49 +13,49 @@ function getTemplate(args: StickyColumnsMultipleStory): string {
 		<thead class="dataTable-head">
 			<tr class="dataTable-head-row">
 				<th class="dataTable-head-row-cell mod-stickyColumn">Head cell</th>
-				<th class="dataTable-head-row-cell mod-stickyColumn" style="left: 5.5rem">Head cell</th>
+				<th class="dataTable-head-row-cell mod-stickyColumn" style="left: var(--dataTable-layoutFixed-width)">Head cell</th>
 				<th class="dataTable-head-row-cell">Head cell</th>
 				<th class="dataTable-head-row-cell">Head cell</th>
 				<th class="dataTable-head-row-cell">Head cell</th>
-				<th class="dataTable-head-row-cell mod-stickyColumn" style="right: 5.5rem">Head cell</th>
+				<th class="dataTable-head-row-cell mod-stickyColumn" style="right: var(--dataTable-layoutFixed-width)">Head cell</th>
 				<th class="dataTable-head-row-cell mod-stickyColumn">Head cell</th>
 			</tr>
 		</thead>
 		<tbody class="dataTable-body">
 			<tr class="dataTable-body-row">
 				<td class="dataTable-body-row-cell mod-stickyColumn">Body cell</td>
-				<td class="dataTable-body-row-cell mod-stickyColumn" style="left: 5.5rem">Body cell</td>
+				<td class="dataTable-body-row-cell mod-stickyColumn" style="left: var(--dataTable-layoutFixed-width)">Body cell</td>
 				<td class="dataTable-body-row-cell">Body cell</td>
 				<td class="dataTable-body-row-cell">Body cell</td>
 				<td class="dataTable-body-row-cell">Body cell</td>
-				<td class="dataTable-body-row-cell mod-stickyColumn" style="right: 5.5rem">Body cell</td>
+				<td class="dataTable-body-row-cell mod-stickyColumn" style="right: var(--dataTable-layoutFixed-width)">Body cell</td>
 				<td class="dataTable-body-row-cell mod-stickyColumn">Body cell</td>
 			</tr>
 			<tr class="dataTable-body-row">
 				<td class="dataTable-body-row-cell mod-stickyColumn">Body cell</td>
-				<td class="dataTable-body-row-cell mod-stickyColumn" style="left: 5.5rem">Body cell</td>
+				<td class="dataTable-body-row-cell mod-stickyColumn" style="left: var(--dataTable-layoutFixed-width)">Body cell</td>
 				<td class="dataTable-body-row-cell">Body cell</td>
 				<td class="dataTable-body-row-cell">Body cell</td>
 				<td class="dataTable-body-row-cell">Body cell</td>
-				<td class="dataTable-body-row-cell mod-stickyColumn" style="right: 5.5rem">Body cell</td>
+				<td class="dataTable-body-row-cell mod-stickyColumn" style="right: var(--dataTable-layoutFixed-width)">Body cell</td>
 				<td class="dataTable-body-row-cell mod-stickyColumn">Body cell</td>
 			</tr>
 			<tr class="dataTable-body-row">
 				<td class="dataTable-body-row-cell mod-stickyColumn">Body cell</td>
-				<td class="dataTable-body-row-cell mod-stickyColumn" style="left: 5.5rem">Body cell</td>
+				<td class="dataTable-body-row-cell mod-stickyColumn" style="left: var(--dataTable-layoutFixed-width)">Body cell</td>
 				<td class="dataTable-body-row-cell">Body cell</td>
 				<td class="dataTable-body-row-cell">Body cell</td>
 				<td class="dataTable-body-row-cell">Body cell</td>
-				<td class="dataTable-body-row-cell mod-stickyColumn" style="right: 5.5rem">Body cell</td>
+				<td class="dataTable-body-row-cell mod-stickyColumn" style="right: var(--dataTable-layoutFixed-width)">Body cell</td>
 				<td class="dataTable-body-row-cell mod-stickyColumn">Body cell</td>
 			</tr>
 			<tr class="dataTable-body-row">
 				<td class="dataTable-body-row-cell mod-stickyColumn">Body cell</td>
-				<td class="dataTable-body-row-cell mod-stickyColumn" style="left: 5.5rem">Body cell</td>
+				<td class="dataTable-body-row-cell mod-stickyColumn" style="left: var(--dataTable-layoutFixed-width)">Body cell</td>
 				<td class="dataTable-body-row-cell">Body cell</td>
 				<td class="dataTable-body-row-cell">Body cell</td>
 				<td class="dataTable-body-row-cell">Body cell</td>
-				<td class="dataTable-body-row-cell mod-stickyColumn" style="right: 5.5rem">Body cell</td>
+				<td class="dataTable-body-row-cell mod-stickyColumn" style="right: var(--dataTable-layoutFixed-width)">Body cell</td>
 				<td class="dataTable-body-row-cell mod-stickyColumn">Body cell</td>
 			</tr>
 		</tbody>

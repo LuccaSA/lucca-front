@@ -3,9 +3,8 @@ import { LuClass } from '@lucca-front/ng/core';
 
 @Component({
 	selector: 'lu-loading',
-	standalone: true,
 	providers: [LuClass],
-	styleUrls: ['./loading.component.scss'],
+	styleUrl: './loading.component.scss',
 	template: `<ng-content />`,
 	encapsulation: ViewEncapsulation.None,
 	host: {

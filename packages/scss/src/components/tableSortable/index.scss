@@ -1,131 +1,45 @@
 @use 'exports' as *;
 
-// .table-head-row-cell-sortableButton is deprecated
-// .indexTable-head-row-cell-sortableButton is deprecated
-.tableSortable,
-.table-head-row-cell-sortableButton,
-.indexTable-head-row-cell-sortableButton {
-	@include vars;
-}
-
-// :not(.class) is only there to increase specificity when the class isn’t present
-// but the class should be present, and this code is temporary
-// .table-head-row-cell-sortableButton is deprecated
-// .indexTable-head-row-cell-sortableButton is deprecated
-.tableSortable.button,
-.tableSortable:not(.button),
-.table-head-row-cell-sortableButton,
-.indexTable-head-row-cell-sortableButton {
-	@include component;
+.tableSortable.button {
+	@layer components {
+		@include vars;
+		@include component;
+	}
 }
 
 .table-head-row-cell,
 .dataTable-head-row-cell,
 .indexTable-head-row-cell {
-	&.mod-alignRight {
-		// .table-head-row-cell-sortableButton is deprecated
-		// .indexTable-head-row-cell-sortableButton is deprecated
-		.tableSortable,
-		.table-head-row-cell-sortableButton,
-		.indexTable-head-row-cell-sortableButton {
-			@include sortAlignRight;
-		}
-	}
-
-	&.mod-alignCenter {
-		// .table-head-row-cell-sortableButton is deprecated
-		// .indexTable-head-row-cell-sortableButton is deprecated
-		.tableSortable,
-		.table-head-row-cell-sortableButton,
-		.indexTable-head-row-cell-sortableButton {
-			@include sortAlignCenter;
-		}
-	}
-
-	&[aria-sort='ascending'] {
-		// table-head-row-cell-sortableButton is deprecated
-		// .indexTable-head-row-cell-sortableButton is deprecated
-		.tableSortable,
-		.table-head-row-cell-sortableButton,
-		.indexTable-head-row-cell-sortableButton {
-			@include sortAscending;
-		}
-	}
-
-	&[aria-sort='descending'] {
-		// .table-head-row-cell-sortableButton is deprecated
-		// .indexTable-head-row-cell-sortableButton is deprecated
-		.tableSortable,
-		.table-head-row-cell-sortableButton,
-		.indexTable-head-row-cell-sortableButton {
-			@include sortDescending;
-		}
-	}
-}
-
-// .mod-sortable is deprecated
-// .table-head-row-cell-sortableButton is deprecated
-.indexTable-head-row-cell,
-.table-head-row-cell {
-	&:not(:has(.tableSortable-arrows)) {
-		&.mod-sortable,
-		.table-head-row-cell-sortableButton,
-		.indexTable-head-row-cell-sortableButton {
-			@include sortableLegacy;
-
-			.table.mod-S & {
-				@include sortableLegacyS;
+	@layer mods {
+		&.mod-alignStart,
+		&.mod-alignLeft {
+			.tableSortable {
+				@include sortAlignStart;
 			}
 		}
 
-		&:is(.is-sorted-descending, .sortedDescending) {
-			@include descendingLegacy;
-		}
-
-		&:is(.is-sorted-ascending, .sortedAscending) {
-			@include ascendingLegacy;
-		}
-
-		&:is([aria-sort='descending']) {
-			@include descendingLegacy2;
-		}
-
-		&:is([aria-sort='ascending']) {
-			@include ascendingLegacy2;
+		&.mod-alignEnd,
+		&.mod-alignRight {
+			.tableSortable {
+				@include sortAlignEnd;
+			}
 		}
 
 		&.mod-alignCenter {
-			&.mod-sortable,
-			.table-head-row-cell-sortableButton {
-				@include sortableLegacyAlignCenter;
+			.tableSortable {
+				@include sortAlignCenter;
 			}
 		}
 
-		&.mod-alignRight {
-			&.mod-sortable,
-			.table-head-row-cell-sortableButton,
-			.indexTable-head-row-cell-sortableButton {
-				@include sortableLegacyAlignRight;
+		&[aria-sort='ascending'] {
+			.tableSortable{
+				@include sortAscending;
 			}
+		}
 
-			&.mod-sortable {
-				@include sortableLegacy2AlignRight;
-			}
-
-			&:is(.is-sorted-descending, .sortedDescending) {
-				@include descendingLegacyAlignRight;
-			}
-
-			&:is(.is-sorted-ascending, .sortedAscending) {
-				@include ascendingLegacyAlignRight;
-			}
-
-			&:is([aria-sort='descending']) {
-				@include descendingAlignRight;
-			}
-
-			&:is([aria-sort='ascending']) {
-				@include ascendingAlignRight;
+		&[aria-sort='descending'] {
+			.tableSortable {
+				@include sortDescending;
 			}
 		}
 	}

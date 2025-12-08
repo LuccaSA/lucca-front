@@ -4,10 +4,6 @@
 @use '@lucca-front/scss/src/components/button/exports' as button;
 
 @mixin selectable {
-	.indexTable-head-row {
-		cursor: pointer;
-	}
-
 	.indexTable-body-row {
 		&:is(:focus-within, :hover) {
 			outline: none;
@@ -192,7 +188,7 @@
 
 		&::before {
 			content: attr(data-label);
-			font-weight: 600;
+			font-weight: var(--pr-t-font-fontWeight-semibold);
 		}
 	}
 
@@ -286,12 +282,13 @@
 
 	.button {
 		@include button.S;
-		@include button.text;
+		@include button.ghost;
 		@include button.onlyIconS;
 
-		&.mod-delete {
-			// For specificity purpose. Could be removed if we decide to remove automatic CSS imports in Angular components 
-			@include button.delete;
+		// .mod-delete is deprecated
+		&.mod-critical, &.mod-delete {
+			// For specificity purpose. Could be removed if we decide to remove automatic CSS imports in Angular components
+			@include button.critical;
 		}
 	}
 }
@@ -309,7 +306,7 @@
 		.indexTable-head-row-cell,
 		.indexTable-body-row-cell,
 		.indexTable-foot-row-cell {
-			@include cellFixedWidth;
+			@include cellInlineSize;
 		}
 	}
 
@@ -322,14 +319,14 @@
 				.indexTable-head-row-cell,
 				.indexTable-body-row-cell,
 				.indexTable-foot-row-cell {
-					@include cellFixedWidth;
+					@include cellInlineSize;
 				}
 			}
 		}
 	}
 }
 
-@mixin cellFixedWidth {
+@mixin cellInlineSize {
 	min-inline-size: var(--cell-width, auto);
 	max-inline-size: var(--cell-width, auto);
 	inline-size: var(--cell-width, auto);
@@ -346,23 +343,61 @@
 		justify-content: center;
 		gap: var(--pr-t-spacings-100);
 		padding: var(--pr-t-spacings-50);
-		border-radius: var(--commons-borderRadius-L);
-		font-size: var(--sizes-S-fontSize);
-		line-height: var(--sizes-S-lineHeight);
-		color: var(--palettes-neutral-800);
+		border-radius: var(--pr-t-border-radius-default);
+		font: var(--pr-t-font-body-S);
+		color: var(--pr-t-color-text);
 		background-color: var(--pr-t-elevation-surface-default);
 
 		.button {
-			@include button.text;
+			@include button.ghost;
 			@include button.S;
 		}
 	}
 }
 
-@mixin alignRight {
-	text-align: end;
+@mixin alignEnd {
+	&,
+	.indexTable-body-row-cell-link {
+		text-align: end;
+	}
 }
 
 @mixin alignCenter {
-	text-align: center;
+	&,
+	.indexTable-body-row-cell-link {
+		text-align: center;
+	}
+}
+
+@mixin alignStart {
+	&,
+	.indexTable-body-row-cell-link {
+		text-align: start;
+	}
+}
+
+@mixin tfoot {
+	padding-block: var(--pr-t-spacings-50);
+
+	&::before,
+	&::after {
+		content: none;
+	}
+}
+
+@mixin groupButton {
+	@include button.ghost;
+	@include button.S;
+	@include button.onlyIconS;
+
+	--components-button-padding: var(--pr-t-spacings-25);
+
+	// Extend button reactive zone to his whole parent
+	position: static;
+
+	&::before {
+		content: '';
+		position: absolute;
+		inset: 0;
+	}
 }

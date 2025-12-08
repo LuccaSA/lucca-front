@@ -5,7 +5,6 @@ import { LU_LISTING_INSTANCE } from '../listing.token';
 
 @Component({
 	selector: 'lu-listing-item',
-	standalone: true,
 	templateUrl: './listing-item.component.html',
 	imports: [IconComponent],
 	encapsulation: ViewEncapsulation.None,
@@ -15,7 +14,7 @@ import { LU_LISTING_INSTANCE } from '../listing.token';
 	},
 })
 export class ListingItemComponent {
-	icon = input<LuccaIcon>('signConfirm');
+	icon = input<LuccaIcon | null>(null);
 
 	protected listingRef = inject(LU_LISTING_INSTANCE);
 }

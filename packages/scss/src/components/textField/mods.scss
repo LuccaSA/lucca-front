@@ -2,8 +2,7 @@
 @use '@lucca-front/icons/src/icon/exports' as icon;
 
 @mixin S {
-	--component-textField-fontSize: var(--sizes-S-fontSize);
-	--component-textField-lineHeight: var(--sizes-S-lineHeight);
+	--component-textField-font: var(--pr-t-font-body-S);
 	--component-textField-padding: var(--pr-t-spacings-75);
 	--component-textField-affix-size: 1.5rem;
 
@@ -26,9 +25,9 @@
 }
 
 @mixin XS {
-	--component-textField-fontSize: var(--sizes-XS-fontSize);
-	--component-textField-lineHeight: var(--sizes-XS-lineHeight);
+	--component-textField-font: var(--pr-t-font-body-XS);
 	--component-textField-padding: var(--pr-t-spacings-50);
+	--component-textField-borderRadius: var(--pr-t-border-radius-small);
 
 	.textField-prefix,
 	.textField-suffix {
@@ -78,13 +77,14 @@
 		visibility: hidden;
 
 		&::after {
-			content: ' ';
+			// stylelint-disable-next-line no-irregular-whitespace
+			content: ' ' / '';
 		}
 	}
 }
 
 @mixin filterPill {
-	--component-textField-borderRadius: var(--commons-borderRadius-L);
+	--component-textField-borderRadius: var(--pr-t-border-radius-default);
 	--component-textField-border: var(--palettes-neutral-100);
 	--component-textField-borderHover: var(--palettes-product-400);
 	--component-textField-width: 15rem;

@@ -1,6 +1,8 @@
 @use 'exports' as *;
 
 .skipLinks {
-	@include vars;
-	@include component;
+	@layer components {
+		@include vars;
+		@include component;
+	}
 }

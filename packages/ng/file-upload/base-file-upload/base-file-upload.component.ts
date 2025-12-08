@@ -1,5 +1,6 @@
-import { booleanAttribute, Directive, computed, inject, input, LOCALE_ID, output } from '@angular/core';
+import { booleanAttribute, computed, Directive, effect, inject, input, LOCALE_ID, output } from '@angular/core';
 import { getIntl } from '@lucca-front/ng/core';
+import { FORM_FIELD_INSTANCE } from '@lucca-front/ng/form-field';
 import { LU_FILE_UPLOAD_TRANSLATIONS } from '../file-upload.translate';
 import { formatSize, MEGA_BYTE } from '../formatter';
 
@@ -14,6 +15,8 @@ export abstract class BaseFileUploadComponent {
 	protected droppable = false;
 
 	intl = getIntl(LU_FILE_UPLOAD_TRANSLATIONS);
+
+	protected formFieldRef = inject(FORM_FIELD_INSTANCE, { optional: true });
 
 	filePicked = output<File>();
 
@@ -41,13 +44,15 @@ export abstract class BaseFileUploadComponent {
 		return this.acceptAttribute().some((str) => str.includes('*'));
 	});
 
+	structure = input(false, { transform: booleanAttribute });
+
 	fileMaxSize = input<number>(80 * MEGA_BYTE);
 
 	maxSizeDisplay = computed(() => formatSize(this.locale, this.fileMaxSize()));
 
 	size = input<'S' | null>(null);
 
-	password = input<boolean, boolean>(false, { transform: booleanAttribute });
+	password = input(false, { transform: booleanAttribute });
 
 	illustration = input<'picture' | 'paper'>('paper');
 
@@ -58,6 +63,14 @@ export abstract class BaseFileUploadComponent {
 			return 'https://cdn.lucca.fr/transverse/prisme/visuals/empty-states/icons/iconPaperAction.svg';
 		}
 	});
+
+	required = input(false, { transform: booleanAttribute });
+
+	constructor() {
+		effect(() => {
+			this.formFieldRef?.forceInputRequired.set(this.required());
+		});
+	}
 
 	filesChange(event: Event) {
 		const host = event.target as HTMLInputElement;

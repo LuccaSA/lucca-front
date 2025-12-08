@@ -8,10 +8,9 @@ import { Meta, StoryFn, applicationConfig } from '@storybook/angular';
 
 @Component({
 	selector: 'select-stories',
-	standalone: true,
 	imports: [LuSelectInputComponent, LuOptionItemComponent, LuOptionPickerComponent, LuInputDisplayerDirective, FormsModule],
 	template: `
-		<div class="u-displayFlex">
+		<div class="pr-u-displayFlex">
 			<label class="textfield pr-u-marginInlineEnd200">
 				<lu-select class="textfield-input" placeholder="Select an item">
 					<ng-container *luDisplayer="let value">{{ value }}</ng-container>
@@ -94,7 +93,6 @@ import { LuOptionItemComponent, LuOptionPickerComponent } from '@lucca-front/ng/
 import { LuInputDisplayerDirective } from '@lucca-front/ng/input';
 @Component({
 	selector: 'select-story',
-	standalone: true,
 	imports: [LuSelectInputComponent, LuOptionItemComponent, LuOptionPickerComponent, LuInputDisplayerDirective],
 	template: \`
 		<label class="textfield">

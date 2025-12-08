@@ -1,6 +1,8 @@
 <div [class]="pickerClasses()" (copy)="copyHandler($event)" (paste)="pasteHandler($event)">
 	<fieldset class="timePicker-fieldset" [disabled]="disabled()">
-		<legend><span class="u-mask">{{ label }}</span></legend>
+		<legend>
+			<span class="pr-u-mask">{{ label }}</span>
+		</legend>
 		<lu-time-picker-part
 			#hoursPart
 			class="timePicker-fieldset-group"
@@ -32,71 +34,71 @@
 			(inputControlClick)="inputControlClickHandler('minutes', $event)"
 		/>
 		@if (enableMeridiemDisplay()) {
-		<div
-			class="timePicker-fieldset-meridiem"
-			(copy)="copyHandler($event)"
-			(paste)="pasteHandler($event)"
-			(keydown.A)="anteMeridiemRef.click()"
-			(keydown.P)="postMeridiemRef.click()"
-			(keydown.shift.A)="anteMeridiemRef.click()"
-			(keydown.shift.P)="postMeridiemRef.click()"
-			(click)="ampmDisplay() === 'AM' ? anteMeridiemRef.focus() : postMeridiemRef.focus()"
-		>
-			<div class="timePicker-fieldset-meridiem-ante">
-				<label [attr.for]="'anteMeridiem-' + idSuffix">AM</label>
-				<input
-					#anteMeridiemRef
-					type="radio"
-					[attr.name]="'meridiem-' + idSuffix"
-					[name]="'meridiem-' + idSuffix"
-					[attr.id]="'anteMeridiem-' + idSuffix"
-					class="timePicker-fieldset-meridiem-ante-input"
-					value="AM"
-					[ngModel]="ampmDisplay()"
-					(ngModelChange)="switchMeridiem($event)"
-					(click)="$event.stopPropagation()"
-					(keydown.arrowleft)="$event.preventDefault();focusPart('minutes')"
-					(keydown.arrowright)="$event.preventDefault()"
-				/>
-			</div>
-			<div class="timePicker-fieldset-meridiem-post">
-				<label [attr.for]="'postMeridiem-' + idSuffix">PM</label>
-				<input
-					#postMeridiemRef
-					type="radio"
-					[attr.name]="'meridiem-' + idSuffix"
-					[name]="'meridiem-' + idSuffix"
-					[attr.id]="'postMeridiem-' + idSuffix"
-					class="timePicker-fieldset-meridiem-post-input"
-					value="PM"
-					[ngModel]="ampmDisplay()"
-					(ngModelChange)="switchMeridiem($event)"
-					(click)="$event.stopPropagation()"
-					(keydown.arrowleft)="$event.preventDefault();focusPart('minutes')"
-					(keydown.arrowright)="$event.preventDefault()"
-				/>
-			</div>
-			@if (displayArrows()) {
-			<button
-				class="timePicker-fieldset-group-stepper"
-				type="button"
-				tabindex="-1"
-				aria-hidden="true"
-				(click)="switchMeridiem(ampmDisplay() === 'AM' ? 'PM' : 'AM')"
+			<div
+				class="timePicker-fieldset-meridiem"
+				(copy)="copyHandler($event)"
+				(paste)="pasteHandler($event)"
+				(keydown.A)="anteMeridiemRef.click()"
+				(keydown.P)="postMeridiemRef.click()"
+				(keydown.shift.A)="anteMeridiemRef.click()"
+				(keydown.shift.P)="postMeridiemRef.click()"
+				(click)="ampmDisplay() === 'AM' ? anteMeridiemRef.focus() : postMeridiemRef.focus()"
 			>
-				<span aria-hidden="true" class="lucca-icon icon-northArrow"></span>
-			</button>
-			<button
-				class="timePicker-fieldset-group-stepper"
-				type="button"
-				tabindex="-1"
-				aria-hidden="true"
-				(click)="switchMeridiem(ampmDisplay() === 'AM' ? 'PM' : 'AM')"
-			>
-				<span aria-hidden="true" class="lucca-icon icon-southArrow"></span>
-			</button>
-			}
-		</div>
+				<div class="timePicker-fieldset-meridiem-ante">
+					<label [attr.for]="'anteMeridiem-' + idSuffix">AM</label>
+					<input
+						#anteMeridiemRef
+						type="radio"
+						[attr.name]="'meridiem-' + idSuffix"
+						[name]="'meridiem-' + idSuffix"
+						[attr.id]="'anteMeridiem-' + idSuffix"
+						class="timePicker-fieldset-meridiem-ante-input"
+						value="AM"
+						[ngModel]="ampmDisplay()"
+						(ngModelChange)="switchMeridiem($event)"
+						(click)="$event.stopPropagation()"
+						(keydown.arrowleft)="$event.preventDefault(); focusPart('minutes')"
+						(keydown.arrowright)="$event.preventDefault()"
+					/>
+				</div>
+				<div class="timePicker-fieldset-meridiem-post">
+					<label [attr.for]="'postMeridiem-' + idSuffix">PM</label>
+					<input
+						#postMeridiemRef
+						type="radio"
+						[attr.name]="'meridiem-' + idSuffix"
+						[name]="'meridiem-' + idSuffix"
+						[attr.id]="'postMeridiem-' + idSuffix"
+						class="timePicker-fieldset-meridiem-post-input"
+						value="PM"
+						[ngModel]="ampmDisplay()"
+						(ngModelChange)="switchMeridiem($event)"
+						(click)="$event.stopPropagation()"
+						(keydown.arrowleft)="$event.preventDefault(); focusPart('minutes')"
+						(keydown.arrowright)="$event.preventDefault()"
+					/>
+				</div>
+				@if (displayArrows()) {
+					<button
+						class="timePicker-fieldset-group-stepper"
+						type="button"
+						tabindex="-1"
+						aria-hidden="true"
+						(click)="switchMeridiem(ampmDisplay() === 'AM' ? 'PM' : 'AM')"
+					>
+						<span aria-hidden="true" class="lucca-icon icon-northArrow"></span>
+					</button>
+					<button
+						class="timePicker-fieldset-group-stepper"
+						type="button"
+						tabindex="-1"
+						aria-hidden="true"
+						(click)="switchMeridiem(ampmDisplay() === 'AM' ? 'PM' : 'AM')"
+					>
+						<span aria-hidden="true" class="lucca-icon icon-southArrow"></span>
+					</button>
+				}
+			</div>
 		}
 	</fieldset>
 </div>

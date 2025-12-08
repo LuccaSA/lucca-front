@@ -1,7 +1,6 @@
 @use '@lucca-front/scss/src/commons/config';
 @use '@lucca-front/scss/src/commons/utils/media';
 @use '@lucca-front/scss/src/commons/utils/namespace';
-@use '@lucca-front/scss/src/components/title/exports' as title;
 
 @mixin component($atRoot: namespace.$defaultAtRoot) {
 	display: flex;
@@ -28,7 +27,7 @@
 		}
 
 		.emptyState-content {
-			border-radius: var(--commons-borderRadius-L);
+			border-radius: var(--pr-t-border-radius-structure);
 			max-inline-size: 100%;
 			padding: var(--pr-t-spacings-50);
 			inline-size: calc(25rem + var(--pr-t-spacings-50) * 2); // content max width
@@ -37,6 +36,9 @@
 		.emptyState-content-icon {
 			--components-emptyState-icon-background-color: var(--palettes-100, var(--palettes-product-100));
 			--components-emptyState-icon-action-color: var(--palettes-600, var(--palettes-brand-600));
+
+			display: inline-flex;
+			margin-block-end: var(--pr-t-spacings-200);
 		}
 
 		.emptyState-content-text {
@@ -44,9 +46,7 @@
 		}
 
 		.emptyState-content-heading {
-			@include title.component;
-			@include title.h3;
-
+			font: var(--pr-t-font-heading-3);
 			margin-block-end: var(--pr-t-spacings-50);
 
 			@if config.$deprecatedSpacings {

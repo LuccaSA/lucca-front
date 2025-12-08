@@ -1,30 +1,30 @@
 import { Meta, StoryFn } from '@storybook/angular';
 
-interface CalloutActionStory {}
+interface CalloutActionsStory {}
 
 export default {
-	title: 'Documentation/Feedback/Callout/HTML & CSS/Action',
+	title: 'Documentation/Feedback/Callout/HTML & CSS/Actions',
 	argTypes: {},
 } as Meta;
 
-function getTemplate(args: CalloutActionStory): string {
+function getTemplate(args: CalloutActionsStory): string {
 	return `<div class="callout">
 	<div class="callout-content">
 		<div class="callout-content-description">
 			Feedback description
 			<div class="callout-content-description-actions">
 				<button class="button mod-outlined" type="button">Button</button>
-				<button class="button mod-text" type="button">Button</button>
+				<button class="button mod-ghost" type="button">Button</button>
 			</div>
 		</div>
 	</div>
 </div>`;
 }
 
-const Template: StoryFn<CalloutActionStory> = (args) => ({
+const Template: StoryFn<CalloutActionsStory> = (args) => ({
 	props: args,
 	template: getTemplate(args),
 });
 
-export const Action = Template.bind({});
-Action.args = {};
+export const Actions = Template.bind({});
+Actions.args = {};

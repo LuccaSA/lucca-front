@@ -41,7 +41,6 @@ let nextId = 0;
 @Directive({
 	selector: '[luTooltip]',
 	exportAs: 'luTooltip',
-	standalone: true,
 })
 export class LuTooltipTriggerDirective implements AfterContentInit, OnDestroy {
 	#overlay = inject(Overlay);
@@ -82,7 +81,7 @@ export class LuTooltipTriggerDirective implements AfterContentInit, OnDestroy {
 
 	luTooltipAnchor = input<FlexibleConnectedPositionStrategyOrigin>(this.#host);
 
-	resize$ = new Observable((observer) => {
+	resize$ = new Observable<void>((observer) => {
 		const resizeObserver = new ResizeObserver(() => {
 			observer.next();
 		});
@@ -255,6 +254,10 @@ export class LuTooltipTriggerDirective implements AfterContentInit, OnDestroy {
 
 		if (!isNativelyFocusableTag && !hasATabIndex) {
 			this.#renderer.setAttribute(this.#host.nativeElement, 'tabindex', tabindex.toString());
+		}
+
+		if (!isNativelyFocusableTag && !this.luTooltipWhenEllipsis() && !this.luTooltipOnlyForDisplay) {
+			this.#renderer.setAttribute(this.#host.nativeElement, 'role', 'button');
 		}
 	}
 

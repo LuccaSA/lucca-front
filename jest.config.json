@@ -23,5 +23,6 @@
     "<rootDir>/packages/ng",
     "<rootDir>/packages/prisme",
     "<rootDir>/stories/documentation"
-  ]
+  ],
+  "globalSetup": "./jest-global-setup.js"
 }

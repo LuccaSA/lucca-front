@@ -42,7 +42,6 @@ function tryParsePhoneNumber(phoneNumber: string, countryCode?: CountryCode): Pa
 
 @Component({
 	selector: 'lu-phone-number-input',
-	standalone: true,
 	imports: [LuSimpleSelectInputComponent, TextInputComponent, FormsModule, LuDisplayerDirective, LuOptionDirective, InputDirective, FormFieldComponent],
 	templateUrl: './phone-number-input.component.html',
 	styleUrl: './phone-number-input.component.scss',
@@ -78,11 +77,13 @@ export class PhoneNumberInputComponent implements ControlValueAccessor, Validato
 
 	#displayNames = new Intl.DisplayNames(this.#locale, { type: 'region' });
 
-	prefixEntries = getCountries().map((country) => ({
-		country,
-		prefix: getCountryCallingCode(country),
-		name: this.#displayNames.of(country),
-	}));
+	prefixEntries = getCountries()
+		.map((country) => ({
+			country,
+			prefix: getCountryCallingCode(country),
+			name: this.#displayNames.of(country),
+		}))
+		.sort((a, b) => a.name.localeCompare(b.name));
 
 	/**
 	 * Which countries should be shown? Defaults to empty array which means all of them.

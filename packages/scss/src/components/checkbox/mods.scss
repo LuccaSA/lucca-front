@@ -7,19 +7,19 @@
 @mixin S {
 	--components-checkbox-input-size: 1rem;
 
-	line-height: var(--sizes-S-lineHeight);
+	line-height: var(--pr-t-font-body-S-lineHeight);
 
 	.checkbox-label {
-		font-size: var(--sizes-S-fontSize);
+		font-size: var(--pr-t-font-body-S-fontSize);
 
 		&::before {
-			border-radius: var(--commons-borderRadius-M);
+			border-radius: var(--pr-t-border-radius-50);
 		}
 	}
 
 	.checkbox-label-helper {
-		font-size: var(--sizes-XS-fontSize);
-		line-height: var(--sizes-XS-lineHeight);
+		font-size: var(--pr-t-font-body-XS-fontSize);
+		line-height: var(--pr-t-font-body-XS-lineHeight);
 	}
 }
 

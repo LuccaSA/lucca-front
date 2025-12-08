@@ -6,9 +6,9 @@ import { COMMENT_BLOCK_INSTANCE } from '../token';
 
 @Component({
 	selector: 'lu-comment',
-	standalone: true,
 	imports: [PortalDirective, DatePipe, LuUserPictureModule, NgTemplateOutlet],
 	templateUrl: './comment.component.html',
+	styleUrl: './comment.component.scss',
 	encapsulation: ViewEncapsulation.None,
 	changeDetection: ChangeDetectionStrategy.OnPush,
 	host: {
@@ -37,6 +37,13 @@ export class CommentComponent {
 	size = computed(() => this.#parentBlock.size());
 
 	date = input<Date>();
+
+	/**
+	 * format given to the date pipe for display.
+	 *
+	 * See https://angular.dev/api/common/DatePipe#custom-format-options
+	 */
+	datePipeFormat = input<string | undefined>(undefined);
 
 	content = input<string>();
 

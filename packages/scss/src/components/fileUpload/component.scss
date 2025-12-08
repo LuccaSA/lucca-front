@@ -7,7 +7,7 @@
 	position: relative;
 	border: 1px var(--components-fileUpload-borderStyle) var(--components-fileUpload-borderColor);
 	overflow: hidden;
-	border-radius: var(--commons-borderRadius-L);
+	border-radius: var(--components-fileUpload-borderRadius);
 	background-color: var(--components-fileUpload-backgroundColor);
 	padding: var(--components-fileUpload-padding);
 	text-align: var(--components-fileUpload-textAlign);
@@ -16,7 +16,7 @@
 	align-items: var(--components-fileUpload-alignItems);
 	justify-content: var(--components-fileUpload-justifyContent);
 	gap: var(--pr-t-spacings-200);
-	color: var(--palettes-neutral-800);
+	color: var(--pr-t-color-text);
 	min-block-size: var(--components-fileUpload-minHeight);
 
 	&:has(.fileUpload-input:focus-visible) {
@@ -39,7 +39,7 @@
 			inset: var(--components-fileUpload-status-img-inset);
 			inline-size: var(--components-fileUpload-status-img-size);
 			block-size: var(--components-fileUpload-status-img-size);
-			border-radius: var(--commons-borderRadius-M);
+			border-radius: var(--pr-t-border-radius-50);
 			background-color: var(--palettes-neutral-25);
 			display: flex;
 			overflow: hidden;
@@ -48,8 +48,8 @@
 		.fileUpload-status-preview-img {
 			object-fit: cover;
 			opacity: 0.08;
-			width: 100%;
-			height: 100%;
+			inline-size: 100%;
+			block-size: 100%;
 		}
 
 		.fileUpload-input {
@@ -65,13 +65,13 @@
 			flex-direction: column;
 			align-items: var(--components-fileUpload-instruction-alignItems);
 			max-inline-size: var(--components-fileUpload-instruction-maxWidth);
-			line-height: var(--sizes-S-lineHeight);
+			line-height: var(--pr-t-font-body-S-lineHeight);
 		}
 
 		.fileUpload-instruction-action {
 			display: block;
 			margin-bottom: var(--fileUpload-instruction-action-marginBottom);
-			line-height: var(--sizes-M-lineHeight);
+			line-height: var(--pr-t-font-body-M-lineHeight);
 
 			span {
 				color: var(--components-fileUpload-instruction-action-color);
@@ -82,7 +82,7 @@
 		.fileUpload-instruction-size,
 		.fileUpload-instruction-formats {
 			color: var(--palettes-neutral-600);
-			font-size: var(--sizes-S-fontSize);
+			font-size: var(--pr-t-font-body-S-fontSize);
 			vertical-align: top;
 		}
 
@@ -93,7 +93,7 @@
 
 		.fileUpload-instruction-filename {
 			display: block;
-			font-weight: 600;
+			font-weight: var(--pr-t-font-fontWeight-semibold);
 			color: var(--components-fileUpload-instruction-filename-color);
 			margin-block-start: var(--components-fileUpload-instruction-filename-marginTop);
 			inset-block-end: var(--pr-t-spacings-100);

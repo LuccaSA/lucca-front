@@ -4,7 +4,7 @@
 @mixin component($atRoot: namespace.$defaultAtRoot) {
 	background-color: var(--pr-t-elevation-surface-raised);
 	border: var(--commons-divider-width) solid var(--commons-divider-color);
-	border-radius: var(--commons-borderRadius-M);
+	border-radius: var(--pr-t-border-radius-default);
 	list-style: none;
 	padding: 0;
 
@@ -13,7 +13,7 @@
 			border-block-end-width: var(--commons-divider-width);
 			border-block-end-color: var(--commons-divider-color);
 			border-block-end-style: solid;
-			color: var(--palettes-neutral-800);
+			color: var(--pr-t-color-text);
 			display: flex;
 			position: relative;
 			text-decoration: none;
@@ -26,22 +26,22 @@
 		}
 
 		.sortableList-item-content {
-			color: var(--palettes-neutral-800);
+			color: var(--pr-t-color-text);
 			text-decoration: none;
 			inline-size: 100%;
 		}
 
 		.sortableList-item-content-description {
 			margin: 0;
-			font-size: var(--components-sortableList-description-fontSize);
-			line-height: var(--components-sortableList-description-lineHeight);
+			font: var(--components-sortableList-description-font);
+			font-size: var(--components-sortableList-description-fontSize); // Deprecated
+			line-height: var(--components-sortableList-description-lineHeight); // Deprecated
 		}
 
 		.sortableList-item-content-helper {
 			margin: 0;
 			color: var(--palettes-neutral-600);
-			font-size: var(--components-sortableList-helper-fontSize);
-			line-height: var(--components-sortableList-helper-lineHeight);
+			font: var(--components-sortableList-helper-font);
 		}
 
 		.sortableList-item-actions {

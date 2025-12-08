@@ -7,13 +7,13 @@
 		</lu-dialog-content>
 		<lu-dialog-footer>
 			@if (dialogData) {
-			<div class="footer-content">
-				<button type="button" luButton="text" delete (click)="deleteLink()">{{intl.linksDelete}}</button>
-			</div>
+				<div class="footer-content">
+					<button type="button" luButton="ghost" delete (click)="deleteLink()">{{ intl.linksDelete }}</button>
+				</div>
 			}
 			<div class="footer-actions">
 				<button type="submit" luButton>{{ intl.linksSubmit }}</button>
-				<button type="button" luButton="text" luDialogDismiss>{{ intl.linksCancel }}</button>
+				<button type="button" luButton="ghost" luDialogDismiss>{{ intl.linksCancel }}</button>
 			</div>
 		</lu-dialog-footer>
 	</form>

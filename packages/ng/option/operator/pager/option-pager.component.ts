@@ -7,9 +7,7 @@ const MAGIC_STEP = 10;
 @Component({
 	selector: 'lu-option-pager',
 	template: '',
-	styleUrls: [],
 	changeDetection: ChangeDetectionStrategy.OnPush,
-	standalone: true,
 	providers: [
 		{
 			provide: ALuOptionOperator,

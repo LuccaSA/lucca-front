@@ -4,12 +4,11 @@ import { cleanupTemplate } from 'stories/helpers/stories';
 interface ListingIconsStory {}
 
 export default {
-	title: 'Documentation/Listing/Listing/HTML&CSS/Icons',
+	title: 'Documentation/Listings/Listing/HTML&CSS/Icons',
 	argTypes: {},
 	render: (args: ListingIconsStory) => {
 		return {
-			template: cleanupTemplate(`
-<ul class="listing mod-icons">
+			template: cleanupTemplate(`<ul class="listing mod-icons">
 	<li class="listing-item">
 		<span class="listing-item-icon lucca-icon icon-foodCroissant" aria-hidden="true"></span>
 		<div class="listing-item-content">
@@ -48,8 +47,7 @@ export default {
 			</ul>
 		</div>
 	</li>
-</ul>
-`),
+</ul>`),
 		};
 	},
 } as Meta;

@@ -2,9 +2,13 @@
 @use '@lucca-front/scss/src/components/calloutFeedbackList/exports' as calloutFeedbackList;
 
 @mixin S {
+	--components-calloutDisclosure-paddingHorizontal: var(--pr-t-spacings-100);
+  --components-calloutDisclosure-paddingVertical: var(--pr-t-spacings-75);
+	--components-calloutDisclosure-gap: var(--pr-t-spacings-100);
+
 	.calloutDisclosure-summary-title {
-		font-size: var(--sizes-S-fontSize);
-		line-height: var(--sizes-S-lineHeight);
+		font: var(--pr-t-font-body-S);
+		font-weight: var(--pr-t-font-fontWeight-semibold);
 	}
 
 	.calloutDisclosure-summary-icon {

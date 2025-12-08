@@ -1,4 +1,4 @@
-import { AsyncPipe, NgIf } from '@angular/common';
+import { AsyncPipe } from '@angular/common';
 import { Component, inject } from '@angular/core';
 import { getIntl } from '@lucca-front/ng/core';
 import { ILuOptionContext, LU_OPTION_CONTEXT, ɵLuOptionOutletDirective } from '@lucca-front/ng/core-select';
@@ -10,24 +10,27 @@ import { LuCoreSelectUsersDirective } from './users.directive';
 
 @Component({
 	selector: 'lu-user-option',
-	imports: [NgIf, AsyncPipe, LuUserDisplayPipe, ɵLuOptionOutletDirective],
+	imports: [AsyncPipe, LuUserDisplayPipe, ɵLuOptionOutletDirective],
 	template: `
-		<ng-container *ngIf="context.option$ | async as user">
-			<div *ngIf="userDirective.displayMeOption() && user.id === userDirective.currentUserId && hasEmptyClue$ | async; else notMe">
-				<b>{{ intl.me }} <ng-container *luOptionOutlet="customUserOptionTpl() || defaultUserTpl; value: user" /></b>
-			</div>
-
-			<ng-template #notMe>
+		@if (context.option$ | async; as user) {
+			@if (userDirective.displayMeOption() && user.id === userDirective.currentUserId && hasEmptyClue$ | async) {
+				<div>
+					<strong>{{ intl.me }}</strong
+					>&ngsp;
+					<strong translate="no"><ng-container *luOptionOutlet="customUserOptionTpl() || defaultUserTpl; value: user" /></strong>
+				</div>
+			} @else {
 				<div *luOptionOutlet="customUserOptionTpl() || defaultUserTpl; value: user"></div>
-			</ng-template>
-			<div class="lu-select-additionalInformation" *ngIf="user.additionalInformation">({{ user.additionalInformation }})</div>
-		</ng-container>
+			}
+			@if (user.additionalInformation) {
+				<div class="lu-select-additionalInformation">({{ user.additionalInformation }})</div>
+			}
+		}
 
 		<ng-template #defaultUserTpl let-user>
-			{{ user | luUserDisplay: userDirective.displayFormat() }}
+			<span translate="no">{{ user | luUserDisplay: userDirective.displayFormat() }}</span>
 		</ng-template>
 	`,
-	standalone: true,
 	styles: [
 		`
 			.lu-select-additionalInformation {

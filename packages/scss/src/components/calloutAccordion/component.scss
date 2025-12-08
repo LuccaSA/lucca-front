@@ -4,16 +4,16 @@
 @use '@lucca-front/scss/src/commons/utils/namespace';
 
 @mixin component($atRoot: namespace.$defaultAtRoot) {
-	border-radius: var(--commons-borderRadius-L);
+	border-radius: var(--pr-t-border-radius-default);
 	background-color: var(--palettes-50, var(--palettes-neutral-50));
-	color: var(--palettes-neutral-800);
+	color: var(--pr-t-color-text);
 	border-color: var(--palettes-300, var(--palettes-neutral-300));
 	border-style: solid;
 	border-width: var(--commons-divider-width);
 
 	a,
 	.link {
-		--commons-text-link-color: var(--palettes-neutral-800);
+		--commons-text-link-color: var(--pr-t-color-text);
 		--commons-text-link-hover: var(--palettes-neutral-900);
 	}
 
@@ -31,7 +31,7 @@
 		}
 
 		.calloutAccordion-summary-title {
-			font-weight: 600;
+			font-weight: var(--pr-t-font-fontWeight-semibold);
 		}
 
 		.calloutAccordion-summary-icon {

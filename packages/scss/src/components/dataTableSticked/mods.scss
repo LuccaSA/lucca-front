@@ -1,12 +1,10 @@
 @use '@lucca-front/scss/src/commons/utils/color';
 
 @mixin stickyHeader {
-	--components-dataTable-overflow: auto;
-
 	.dataTable-head {
 		position: sticky;
 		inset-block-start: -1px;
-		z-index: 1;
+		z-index: 2;
 
 		&::after {
 			content: '';
@@ -16,13 +14,12 @@
 			background-image: linear-gradient(#{color.transparentize(var(--palettes-neutral-400), 0.24)}, transparent);
 			pointer-events: none;
 			box-shadow: 0 1px var(--commons-border-200) inset;
+			opacity: var(--components-dataTable-header-shadow-opacity);
 		}
 	}
 }
 
 @mixin columnsOverflow {
-	--components-dataTable-overflow: auto;
-
 	display: flex;
 
 	&::before,
@@ -51,11 +48,10 @@
 }
 
 @mixin rowsOverflow {
-	--components-dataTable-overflow: auto;
-
 	.dataTableShadows {
 		display: flex;
 		flex-direction: column;
+		flex-grow: 1;
 
 		&::before,
 		&::after {
@@ -84,8 +80,6 @@
 }
 
 @mixin stickyColumn {
-	--components-dataTable-overflow: auto;
-
 	%addShadow {
 		content: '';
 		position: absolute;
@@ -103,7 +97,7 @@
 	.dataTable-head-row-cell {
 		&.mod-stickyColumn {
 			&:first-child {
-				z-index: 1;
+				z-index: 2;
 			}
 		}
 	}
@@ -124,10 +118,13 @@
 
 			&:has(~ :is(.dataTable-body-row-cell, .dataTable-head-row-cell, .dataTable-foot-row-cell):not(.mod-stickyColumn)) {
 				transform: translateX(-1px);
+				z-index: 1;
 
 				&:not(:has(+ :is(.dataTable-head-row-cell, .dataTable-body-row-cell, .dataTable-foot-row-cell).mod-stickyColumn)) {
 					&::after {
 						@extend %addShadow;
+
+						opacity: var(--components-dataTable-shadow-colsStart-opacity);
 					}
 				}
 			}
@@ -141,6 +138,7 @@
 					inset-inline-start: auto;
 					inset-inline-end: 100%;
 					transform: scaleX(-1);
+					opacity: var(--components-dataTable-shadow-colsEnd-opacity);
 				}
 
 				& ~ :is(.dataTable-head-row-cell, .dataTable-body-row-cell, .dataTable-foot-row-cell).mod-stickyColumn {

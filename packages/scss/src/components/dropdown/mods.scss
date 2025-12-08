@@ -1,12 +1,12 @@
-@mixin delete {
-	--components-dropdown-option-actionColor: var(--palettes-error-800);
+@mixin critical {
+	--components-dropdown-list-option-action-color: var(--pr-t-color-text-critical);
 
 	&:hover,
 	&:focus-visible {
-		--components-dropdown-option-actionBackground: var(--palettes-error-50);
+		--components-dropdown-list-option-action-backgroundColor: var(--palettes-critical-50);
 	}
 
 	&:active {
-		--components-dropdown-option-actionBackground: var(--palettes-error-100);
+		--components-dropdown-list-option-action-backgroundColor: var(--palettes-critical-100);
 	}
 }

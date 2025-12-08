@@ -1,156 +1,219 @@
 @use '@lucca-front/scss/src/commons/utils/a11y';
 
 .calendar {
-	background-color: var(--pr-t-elevation-surface-raised);
-	inline-size: var(--components-calendar-width);
+	@layer components {
+		background-color: var(--pr-t-elevation-surface-raised);
+		inline-size: var(--components-calendar-width);
+	}
 }
 
 :host-context(.mod-block) {
-	.calendar {
-		inline-size: auto;
-		max-inline-size: var(--components-calendar-width);
+	@layer mods {
+		.calendar {
+			inline-size: auto;
+			max-inline-size: var(--components-calendar-width);
+		}
 	}
 }
 
 .calendar-header {
-	display: flex;
-	align-items: center;
-	justify-content: space-between;
+	@layer components {
+		display: flex;
+		align-items: center;
+		justify-content: space-between;
+	}
 }
 
 .calendar-header-date {
-	font-weight: 600;
-	color: var(--palettes-neutral-900);
-	font-size: var(--sizes-L-fontSize);
-	line-height: var(--sizes-L-lineHeight);
-	padding: 0;
-	background: transparent;
-	border: none;
-	cursor: pointer;
+	@layer components {
+		font: var(--pr-t-font-heading-3);
+		color: var(--pr-t-color-text-heading);
+		font-weight: var(--pr-t-font-fontWeight-semibold);
+		padding: 0;
+		background: transparent;
+		border: none;
+		cursor: pointer;
+	}
 
-	&:focus-visible {
-		@include a11y.focusVisible($borderRadius: 4px);
+	@layer mods {
+		&:focus-visible {
+			@include a11y.focusVisible($borderRadius: 4px);
+		}
 	}
 }
 
 .calendar-labels {
-	display: none;
+	@layer components {
+		display: none;
+	}
 
-	&.mod-dailyView {
-		display: flex;
-		align-items: center;
-		flex-wrap: wrap;
-		text-align: center;
-		block-size: var(--components-calendar-day-size);
-		font-size: var(--sizes-S-fontSize);
-		color: var(--palettes-product-700);
+	@layer mods {
+		&.mod-dailyView {
+			display: flex;
+			align-items: center;
+			flex-wrap: wrap;
+			text-align: center;
+			block-size: var(--components-calendar-day-size);
+			font-size: var(--pr-t-font-body-S-fontSize);
+			color: var(--palettes-product-700);
 
-		.calendar-labels-item {
-			inline-size: var(--components-calendar-day-size);
+			.calendar-labels-item {
+				inline-size: var(--components-calendar-day-size);
+			}
 		}
 	}
 }
 
 .calendar-grid {
-	display: flex;
-	text-align: center;
-	align-self: stretch;
-	flex-wrap: wrap;
-	inline-size: var(--components-calendar-width);
-
-	&.mod-dailyView {
-		.calendar-grid-item {
-			inline-size: var(--components-calendar-day-size);
-		}
+	@layer components {
+		display: flex;
+		text-align: center;
+		align-self: stretch;
+		flex-wrap: wrap;
+		inline-size: var(--components-calendar-width);
 	}
 
-	&.mod-monthlyView,
-	&.mod-yearlyView {
-		.calendar-grid-item-content {
-			inline-size: 5.83rem;
+	@layer mods {
+		&.mod-dailyView {
+			.calendar-grid-item {
+				inline-size: var(--components-calendar-day-size);
+			}
+		}
+
+		&.mod-monthlyView,
+		&.mod-yearlyView {
+			.calendar-grid-item-content {
+				inline-size: 5.83rem;
+			}
 		}
 	}
 }
 
 .calendar-grid-item {
-	block-size: var(--components-calendar-day-size);
-	border: none;
-	cursor: pointer;
-	background: transparent;
-	position: relative;
-	padding: 0;
-	outline: none;
-	color: var(--palettes-neutral-800);
-
-	&.is-previousMonth,
-	&.is-nextMonth {
-		color: var(--palettes-neutral-500);
+	@layer components {
+		block-size: var(--components-calendar-day-size);
+		border: none;
+		cursor: pointer;
+		background: transparent;
+		position: relative;
+		padding: 0;
+		outline: none;
+		color: var(--pr-t-color-text);
 	}
 
-	&.is-today {
-		color: var(--palettes-product-700);
-		font-weight: 600;
-
-		&::after {
-			content: '';
-			position: absolute;
-			inset-block-end: var(--pr-t-spacings-50);
-			inset-inline: var(--pr-t-spacings-100) var(--pr-t-spacings-100);
-			block-size: 2px;
-			background: var(--palettes-product-700);
-			z-index: 1;
-		}
-	}
-
-	&:hover {
-		.calendar-grid-item-content {
-			background: var(--palettes-neutral-50);
-		}
-	}
-
-	&:active {
-		.calendar-grid-item-content {
-			background: var(--palettes-neutral-100);
-		}
-	}
-
-	&:focus-visible {
-		@include a11y.focusVisible($borderRadius: var(--commons-borderRadius-L));
-
-		z-index: 1;
-	}
-
-	&.is-active {
-		.calendar-grid-item-content {
-			background: var(--palettes-product-700);
-			color: var(--palettes-product-0);
+	@layer mods {
+		&.is-previousMonth,
+		&.is-nextMonth {
+			color: var(--palettes-neutral-500);
 		}
 
 		&.is-today {
+			color: var(--palettes-product-700);
+			font-weight: var(--pr-t-font-fontWeight-semibold);
+
 			&::after {
-				background-color: var(--palettes-neutral-0) !important;
-				transition: background-color var(--commons-animations-durations-fast);
+				content: '';
+				position: absolute;
+				inset-block-end: var(--pr-t-spacings-50);
+				inset-inline: var(--pr-t-spacings-100) var(--pr-t-spacings-100);
+				block-size: 2px;
+				background: var(--palettes-product-700);
+				z-index: 1;
 			}
 		}
-	}
 
-	&.is-disabled,
-	&[disabled] {
-		color: var(--palettes-neutral-500); // disabled token candidate
-		pointer-events: none;
+		&:hover {
+			.calendar-grid-item-content {
+				background: var(--palettes-neutral-50);
+			}
+		}
 
-		&:hover .calendar-grid-item-content {
-			background-color: var(--palettes-neutral-0); // disabled token candidate
+		&:active {
+			.calendar-grid-item-content {
+				background: var(--palettes-neutral-100);
+			}
+		}
+
+		&:focus-visible {
+			@include a11y.focusVisible($borderRadius: var(--pr-t-border-radius-default));
+
+			z-index: 1;
+		}
+
+		&.is-active {
+			.calendar-grid-item-content {
+				background: var(--palettes-product-700);
+				color: var(--palettes-product-0);
+			}
+
+			&.is-today {
+				color: var(--palettes-product-700);
+				font-weight: 600;
+
+				&::after {
+					content: '';
+					position: absolute;
+					inset-block-end: var(--pr-t-spacings-50);
+					inset-inline: var(--pr-t-spacings-100) var(--pr-t-spacings-100);
+					block-size: 2px;
+					background: var(--palettes-product-700);
+					z-index: 1;
+				}
+			}
+
+			&:hover {
+				.calendar-grid-item-content {
+					background: var(--palettes-neutral-50);
+				}
+			}
+
+			&:active {
+				.calendar-grid-item-content {
+					background: var(--palettes-neutral-100);
+				}
+			}
+
+			&:focus-visible {
+				@include a11y.focusVisible($borderRadius: var(--pr-t-border-radius-default));
+
+				z-index: 1;
+			}
+
+			&.is-active {
+				.calendar-grid-item-content {
+					background: var(--palettes-product-700);
+					color: var(--palettes-product-0);
+				}
+
+				&.is-today {
+					&::after {
+						background-color: var(--palettes-neutral-0) !important;
+						transition: background-color var(--commons-animations-durations-fast);
+					}
+				}
+			}
+
+			&.is-disabled,
+			&[disabled] {
+				color: var(--palettes-neutral-500); // disabled token candidate
+				pointer-events: none;
+
+				&:hover .calendar-grid-item-content {
+					background-color: var(--palettes-neutral-0); // disabled token candidate
+				}
+			}
 		}
 	}
 }
 
 .calendar-grid-item-content {
-	position: relative;
-	block-size: var(--components-calendar-day-size);
-	inline-size: var(--components-calendar-day-size);
-	line-height: var(--components-calendar-day-size);
-	border-radius: var(--commons-borderRadius-L);
-	transition-duration: var(--commons-animations-durations-fast);
-	transition-property: background-color, color;
+	@layer components {
+		position: relative;
+		block-size: var(--components-calendar-day-size);
+		inline-size: var(--components-calendar-day-size);
+		line-height: var(--components-calendar-day-size);
+		border-radius: var(--pr-t-border-radius-default);
+		transition-duration: var(--commons-animations-durations-fast);
+		transition-property: background-color, color;
+	}
 }

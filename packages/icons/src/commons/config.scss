@@ -1,13 +1,14 @@
-/***********************************************
- ***		THIS FILE IS GENERATED, DO NOT EDIT		***
- ***		The generator is update-icons.js			***
- ***********************************************/
+// *******************************************
+// *** THIS FILE IS GENERATED, DO NOT EDIT ***
+// *** The generator is update-icons.js		 ***
+// *******************************************
 
 // to test locally (without the CDN)
 // $font-path: '../../font/lucca-icons' !default;
 $font-path: '//cdn.lucca.fr/transverse/prisme/icons/font/lucca-icons' !default;
 $font-name: 'Lucca icons' !default;
 $isNamespaced: false !default;
+$layers: 'reset, base, components, mods, product, utils' !default;
 
 $icons: (
 	'app': '\e959',
@@ -66,8 +67,11 @@ $icons: (
 	'login': '\e93f',
 	'arrow_logout': '\e940',
 	'logout': '\e940',
+	'arrow_opposite_left_right': '\e9ad',
 	'arrow_opposite_horizontal': '\e9ad',
 	'swap': '\e9ad',
+	'arrow_opposite_right_left': '\ea1b',
+	'arrow_opposite_top_bottom': '\ea1c',
 	'arrow_opposite_vertical': '\e912',
 	'credit_debit': '\e912',
 	'arrow_reply': '\e9ba',
@@ -111,6 +115,7 @@ $icons: (
 	'chat': '\e982',
 	'talk': '\e982',
 	'dialog': '\e982',
+	'bubble_stars': '\ea1d',
 	'building_company': '\e903',
 	'building': '\e903',
 	'establishment': '\e903',
@@ -322,6 +327,7 @@ $icons: (
 	'map_pin': '\e967',
 	'pin': '\e967',
 	'map_plan': '\ea06',
+	'map_trip_step': '\ea18',
 	'maths_divide': '\e954',
 	'divide': '\e954',
 	'maths_equals': '\e93d',
@@ -368,6 +374,7 @@ $icons: (
 	'euro': '\e92d',
 	'money_payment_card': '\e90a',
 	'banking_card': '\e90a',
+	'money_payment_cards': '\ea16',
 	'money_piggy_bank': '\e966',
 	'piggy_bank': '\e966',
 	'money_wallet': '\e9d8',
@@ -379,6 +386,7 @@ $icons: (
 	'compass': '\e9a0',
 	'office_electrical_plug': '\e9bd',
 	'office_first_aid': '\ea07',
+	'office_microphone': '\ea19',
 	'office_pen': '\e928',
 	'edit': '\e928',
 	'edit_mini': '\e928',
@@ -398,6 +406,7 @@ $icons: (
 	'adduser': '\e902',
 	'people_arrow_up': '\ea05',
 	'people_edit': '\ea0a',
+	'people_folder': '\ea1a',
 	'people_group': '\e93c',
 	'user_group': '\e93c',
 	'group': '\e93c',
@@ -429,6 +438,7 @@ $icons: (
 	'play_full': '\e944',
 	'player_play_circle': '\e92f',
 	'play': '\e92f',
+	'player_recording': '\ea17',
 	'player_stop_circle': '\e958',
 	'stop': '\e958',
 	'price_tag': '\e96a',
@@ -467,6 +477,7 @@ $icons: (
 	'forbidden': '\e936',
 	'sign_cancel': '\e963',
 	'cancel': '\e963',
+	'sign_checkbox': '\ea15',
 	'sign_close': '\e9bf',
 	'sign_confirm': '\e97d',
 	'confirm': '\e97d',
@@ -525,14 +536,19 @@ $icons: (
 	'bus': '\e911',
 	'transport_car': '\e9a9',
 	'car': '\e9a9',
+	'transport_car_electric': '\ea10',
 	'transport_carwash_station': '\e918',
 	'clean_car': '\e918',
 	'transport_gaz_station': '\e93a',
 	'gasoline': '\e93a',
+	'transport_motocycle': '\ea11',
+	'transport_motocycle_electric': '\ea12',
 	'transport_plane': '\e968',
 	'plane': '\e968',
 	'transport_rocket': '\e995',
 	'rocket': '\e995',
+	'transport_scooter': '\ea13',
+	'transport_scooter_electric': '\ea14',
 	'transport_speedometer': '\e951',
 	'speedometer': '\e951',
 	'mileage': '\e951',

@@ -3,20 +3,23 @@
 @mixin component($atRoot: namespace.$defaultAtRoot) {
 	align-items: flex-start;
 	background-color: var(--palettes-100, var(--palettes-product-100));
-	border-radius: var(--commons-borderRadius-L);
+	border-radius: var(--pr-t-border-radius-full);
 	display: inline-flex;
 	font-size: var(--components-statusBadge-fontSize);
-	gap: var(--pr-t-spacings-50);
+	font-weight: var(--pr-t-font-fontWeight-regular);
+	font-family: var(--pr-t-font-family);
 	line-height: var(--components-statusBadge-lineHeight);
+	gap: var(--pr-t-spacings-50);
 	padding-block: calc(var(--pr-t-spacings-50) / 2);
 	padding-inline: var(--pr-t-spacings-75) var(--pr-t-spacings-100);
 	white-space: nowrap;
-	font-weight: normal;
+	max-inline-size: 100%;
 
 	&::before {
 		background-color: var(--palettes-700, var(--palettes-product-700));
-		border-radius: var(--commons-borderRadius-full);
-		content: '\a0'; // Unbreakable space to avoid vertical alignement issues with inline-flex in some contexts like tables
+		border-radius: var(--pr-t-border-radius-full);
+		/* stylelint-disable-next-line no-irregular-whitespace */
+		content: ' ' / ''; // Unbreakable space to avoid vertical alignement issues with inline-flex in some contexts like tables
 		display: block;
 		block-size: var(--components-statusBadge-dot-size);
 		flex-shrink: 0;
@@ -26,5 +29,10 @@
 	}
 
 	@at-root ($atRoot) {
+		.statusBadge-content {
+			overflow: hidden;
+			text-overflow: ellipsis;
+			outline: none;
+		}
 	}
 }

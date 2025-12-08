@@ -23,6 +23,7 @@ import {
 } from '@angular/core';
 import { FormsModule } from '@angular/forms';
 import { LuccaIcon } from '@lucca-front/icons';
+import { ClearComponent } from '@lucca-front/ng/clear';
 import { getIntl } from '@lucca-front/ng/core';
 import { IconComponent } from '@lucca-front/ng/icon';
 import { PopoverDirective } from '@lucca-front/ng/popover2';
@@ -34,8 +35,7 @@ let nextId = 0;
 
 @Component({
 	selector: 'lu-filter-pill',
-	standalone: true,
-	imports: [PopoverDirective, FormsModule, IconComponent, NgTemplateOutlet, LuTooltipModule],
+	imports: [PopoverDirective, FormsModule, IconComponent, NgTemplateOutlet, LuTooltipModule, ClearComponent],
 	templateUrl: './filter-pill.component.html',
 	styleUrl: './filter-pill.component.scss',
 	encapsulation: ViewEncapsulation.None,
@@ -82,7 +82,7 @@ export class FilterPillComponent {
 
 	name = input<string>();
 
-	optional = input<boolean, boolean>(false, { transform: booleanAttribute });
+	optional = input(false, { transform: booleanAttribute });
 
 	disabled = computed(() => this.inputComponentRef()?.filterPillDisabled?.() || false);
 
@@ -122,14 +122,14 @@ export class FilterPillComponent {
 
 	icon = input<LuccaIcon>();
 
-	defaultIcon = computed<LuccaIcon>(() => this.inputComponentRef()?.getDefaultFilterPillIcon?.() || 'arrowChevronBottom');
+	defaultIcon = computed<LuccaIcon>(() => this.inputComponentRef()?.getDefaultFilterPillIcon?.() ?? 'arrowChevronBottom');
 
 	displayedIcon = computed(() => this.icon() || this.defaultIcon());
 
-	shouldHideCombobox = computed(() => this.inputComponentRef()?.hideCombobox?.() || false);
+	shouldHideCombobox = computed(() => this.inputComponentRef()?.hideCombobox?.() ?? false);
 
-	inputIsEmpty = computed(() => this.inputComponentRef()?.isFilterPillEmpty());
-	inputIsClearable = computed(() => this.inputComponentRef()?.isFilterPillClearable());
+	inputIsEmpty = computed(() => this.inputComponentRef()?.isFilterPillEmpty() ?? true);
+	inputIsClearable = computed(() => this.inputComponentRef()?.isFilterPillClearable() ?? false);
 
 	shouldShowColon = computed(() => this.inputComponentRef()?.showColon?.() || !this.inputIsEmpty());
 
@@ -169,6 +169,20 @@ export class FilterPillComponent {
 					ref.registerFilterPillClosePopover(this.closePopover);
 					ref.registerFilterPillUpdatePosition?.(this.updatePosition);
 				});
+			}
+		});
+
+		effect(() => {
+			// When an optional filter pill has a value, it must be displayed
+			if (this.optional() && !this.inputIsEmpty() && !untracked(this.displayed)) {
+				this.displayed.set(true);
+			}
+		});
+
+		effect(() => {
+			// When an optional filter pill is hidden, its value must be clear
+			if (this.optional() && !this.displayed() && !untracked(this.inputIsEmpty)) {
+				this.clear();
 			}
 		});
 	}

@@ -1,5 +1,4 @@
 @use '@lucca-front/scss/src/commons/utils/a11y';
-@use '@lucca-front/scss/src/components/title/exports' as title;
 @use '@lucca-front/icons/src/icon/exports' as icon;
 @use '@lucca-front/scss/src/commons/utils/namespace';
 
@@ -8,7 +7,7 @@
 	gap: var(--pr-t-spacings-75);
 	align-items: center;
 	padding: var(--pr-t-spacings-100);
-	border-radius: var(--commons-borderRadius-L);
+	border-radius: var(--pr-t-border-radius-default);
 	background-color: var(--palettes-50, var(--palettes-neutral-50));
 	border: 0;
 	box-shadow: 0 0 0 var(--commons-divider-width) var(--palettes-300, var(--palettes-neutral-300));
@@ -23,6 +22,12 @@
 	}
 
 	@at-root ($atRoot) {
+		.calloutPopover-content {
+			&:empty {
+				display: none;
+			}
+		}
+
 		.calloutPopover-icon {
 			color: var(--palettes-700, var(--palettes-neutral-700));
 		}
@@ -30,34 +35,30 @@
 		.calloutPopover-overlay {
 			inline-size: var(--components-calloutPopover-width);
 			max-inline-size: 100vw;
-		}
-
-		.calloutPopover-overlay-head {
 			display: flex;
 			gap: var(--pr-t-spacings-100);
 		}
 
 		.calloutPopover-overlay-head-title {
-			@include title.component;
-			@include title.h4;
-
-			margin: 0;
+			display: block;
+			font: var(--pr-t-font-body-M);
+			font-weight: var(--pr-t-font-fontWeight-semibold);
 			padding: 0;
+			margin: 0;
+			padding-block-end: var(--pr-t-spacings-100);
+			margin-block-end: var(--pr-t-spacings-100);
+			border-block-end: var(--commons-divider-width) solid var(--palettes-neutral-200);
 		}
 
-		.calloutPopover-overlay-head-icon {
+		.calloutPopover-overlay-icon {
 			@include icon.M;
 
 			color: var(--palettes-700, var(--palettes-neutral-700));
+
 		}
 
 		.calloutPopover-overlay-content {
-			margin-block-start: var(--pr-t-spacings-100);
-			margin-inline-end: var(--pr-t-spacings-150);
 			margin-block-end: var(--pr-t-spacings-100);
-			margin-inline-start: var(--components-calloutPopover-content-margin);
-			padding-block-start: var(--pr-t-spacings-100);
-			border-block-start: var(--commons-divider-width) solid var(--palettes-neutral-200);
 		}
 	}
 }

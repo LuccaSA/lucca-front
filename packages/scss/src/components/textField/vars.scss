@@ -1,17 +1,21 @@
 @mixin vars {
-	--component-textField-lineHeight: var(--sizes-M-lineHeight);
-	--component-textField-fontSize: var(--sizes-M-fontSize);
+	--component-textField-font: var(--pr-t-font-body-M);
 	--component-textField-placeholder: var(--pr-t-color-input-text-placeholder);
 	--component-textField-background: var(--pr-t-color-input-background);
 	--component-textField-border: var(--pr-t-color-input-border);
 	--component-textField-borderHover: var(--pr-t-color-input-border-hover);
 	--component-textField-color: var(--pr-t-color-input-text);
+	--component-textField-textDecoration: none;
 	--component-textField-padding: var(--pr-t-spacings-100);
 	--component-textField-affix-padding: var(--component-textField-padding);
 	--component-textField-affix-size: 1.75rem;
 	--component-textField-scrollMargin: 88rem; // un nombre arbitraire suffit pour scrollIntoView
 	--component-textField-maxHeight: 90dvh;
 	--component-textField-maxHeightFallback: 90vh;
-	--component-textField-borderRadius: var(--commons-borderRadius-M);
+	--component-textField-borderRadius: var(--pr-t-border-radius-input);
 	--component-textField-width: auto;
+
+	// Deprecated
+	--component-textField-fontSize: var(--pr-t-font-body-M-fontSize);
+	--component-textField-lineHeight: var(--pr-t-font-body-M-lineHeight);
 }

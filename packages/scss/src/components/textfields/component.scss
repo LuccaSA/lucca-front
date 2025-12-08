@@ -9,7 +9,7 @@
 			min-inline-size: 0;
 			border: 0;
 			box-shadow: 0 0 0 1px var(--palettes-neutral-300);
-			line-height: var(--sizes-M-lineHeight);
+			line-height: var(--pr-t-font-body-M-lineHeight);
 			appearance: none;
 			background-color: var(--palettes-neutral-0);
 			border-radius: var(--components-textfield-border-radius);
@@ -38,14 +38,14 @@
 			inset-inline-end: var(--components-textfield-input-padding-horizontal);
 			position: absolute;
 			pointer-events: none;
-			line-height: var(--sizes-M-lineHeight);
+			line-height: var(--pr-t-font-body-M-lineHeight);
 			z-index: 1;
 		}
 
 		.textfield-options {
 			box-shadow: var(--pr-t-elevation-shadow-overflow);
 			background-color: var(--palettes-neutral-0);
-			border-radius: var(--commons-borderRadius-M);
+			border-radius: var(--pr-t-border-radius-small);
 			transition-duration: var(--commons-animations-durations-fast);
 			transition-property: all;
 			list-style: none;

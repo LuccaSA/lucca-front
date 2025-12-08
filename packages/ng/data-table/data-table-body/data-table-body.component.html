@@ -1,0 +1,20 @@
+@if (group() && groupButtonAlt()) {
+	<tr class="dataTable-body-row mod-group">
+		<td class="dataTable-body-row-cell" [attr.colspan]="colspan()">
+			<div class="dataTable-body-row-cell-expand">
+				<button
+					type="button"
+					class="dataTable-body-row-cell-expand-button"
+					luButton
+					disclosure
+					[attr.aria-expanded]="expanded()"
+					(click)="expandedToggle()"
+				>
+					<lu-icon icon="arrowChevronTop" [alt]="groupButtonAlt()" />
+				</button>
+				<ng-container *luPortal="group()" />
+			</div>
+		</td>
+	</tr>
+}
+<ng-content />

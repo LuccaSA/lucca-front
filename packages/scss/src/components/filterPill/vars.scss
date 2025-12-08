@@ -5,22 +5,17 @@
 	--components-filterPill-label-fontWeightChecked: 600;
 	--components-filterPill-borderColor: var(--palettes-neutral-100);
 	--components-filterPill-backgroundColor: var(--palettes-neutral-0);
-	--components-filterPill-color: var(--palettes-neutral-700);
+	--components-filterPill-color: var(--pr-t-color-text);
 	--components-filterPill-label-cursor: pointer;
 	--components-filterPill-checkbox-backgroundColor: var(--palettes-neutral-0);
 	--components-filterPill-checkbox-color: var(--palettes-neutral-0);
 	--components-filterPill-checkbox-borderColor: var(--palettes-neutral-700);
 	--components-filterPill-checkbox-icon-scale: 0;
 	--components-filterPill-checkbox-icon-timingFonction: cubic-bezier(0.5, -0.5, 0.5, 0);
-	--components-filterPill-clear-display: none;
 	--components-filterPill-toggle-rotation: 0;
 	--components-filterPill-toggle-iconColor: var(--palettes-neutral-600);
 	--components-filterPill-shadow: 0 0 0 1px var(--components-filterPill-borderColor);
 	--components-filterPill-display: flex;
 	--components-filterPill-arrowColor: var(--palettes-product-700);
 	--components-filterPill-label-maxInlineSize: none;
-}
-
-@mixin barVars {
-	--components-filterBar-extremitiesDisplay: none;
 }

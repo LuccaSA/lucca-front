@@ -4,7 +4,7 @@
 
 @mixin component($atRoot: namespace.$defaultAtRoot) {
 	background-color: var(--components-filterBar-backgroundColor);
-	border-radius: var(--commons-borderRadius-L);
+	border-radius: var(--pr-t-border-radius-structure);
 	border: var(--commons-divider-width) solid var(--commons-border-200);
 	container-name: filterBar;
 	container-type: inline-size;

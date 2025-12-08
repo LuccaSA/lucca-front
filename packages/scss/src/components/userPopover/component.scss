@@ -1,4 +1,6 @@
 @use '@lucca-front/scss/src/components/avatar/exports' as avatar;
+@use '@lucca-front/scss/src/commons/utils/reset';
+@use '@lucca-front/scss/src/commons/utils/a11y';
 @use '@lucca-front/scss/src/commons/utils/namespace';
 
 @mixin component($atRoot: namespace.$defaultAtRoot) {
@@ -7,6 +9,20 @@
 	padding: var(--pr-t-spacings-200);
 
 	@at-root ($atRoot) {
+		.userPopover_trigger {
+			@include reset.button;
+
+			inline-size: fit-content;
+
+			&:focus-visible {
+				@include a11y.focusVisible($borderRadius: var(--pr-t-border-radius-default));
+
+				&:has(> .avatar) {
+					@include a11y.focusVisible($borderRadius: var(--pr-t-border-radius-full));
+				}
+			}
+		}
+
 		.userPopover-details {
 			display: flex;
 			align-items: flex-start;
@@ -15,14 +31,13 @@
 
 		.userPopover-details-info {
 			min-inline-size: 0;
+			flex-grow: 1;
 		}
 
 		.userPopover-details-info-name {
 			margin: calc(var(--pr-t-spacings-50) * -1);
 			padding: var(--pr-t-spacings-50);
-			font-size: var(--sizes-L-fontSize);
-			line-height: var(--sizes-L-lineHeight);
-			font-weight: 700;
+			font: var(--pr-t-font-highlight-L);
 			color: currentColor;
 		}
 
@@ -40,8 +55,7 @@
 
 		.userPopover-details-info-detail {
 			margin-block-end: 0;
-			font-size: var(--sizes-S-fontSize);
-			line-height: var(--sizes-S-lineHeight);
+			font: var(--pr-t-font-body-S);
 		}
 
 		.userPopover-details-info-detail-workplace {

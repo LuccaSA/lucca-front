@@ -1,18 +1,19 @@
 <dl class="highlightData-content">
-	<dt class="highlightData-content-title">{{ heading() }}</dt>
-	<dd class="highlightData-content-value">{{ value() }}</dd>
+	<dt class="highlightData-content-title"><ng-container *luPortal="heading()" /></dt>
+	<dd class="highlightData-content-value"><ng-container *luPortal="value()" /></dd>
 	@if (subText()) {
-	<dd class="highlightData-content-subText">{{ subText() }}</dd>
+		<dd class="highlightData-content-subText"><ng-container *luPortal="subText()" /></dd>
 	}
-	<dd class="highlightData-content-action"><ng-content></ng-content></dd>
+	<dd class="highlightData-content-action"><ng-content /></dd>
 </dl>
 
 @if (bubble() || illustration()) {
-<div class="highlightData-illustrations">
-	@if (bubble()) {
-	<img alt="" class="highlightData-illustrations-back" [attr.src]="bubbleSrc()" />
-	} @if (illustration()) {
-	<img alt="" class="highlightData-illustrations-front" [attr.src]="illustrationSrc()" />
-	}
-</div>
+	<div class="highlightData-illustrations">
+		@if (bubble()) {
+			<img alt="" class="highlightData-illustrations-back" [attr.src]="bubbleSrc()" />
+		}
+		@if (illustration()) {
+			<img alt="" class="highlightData-illustrations-front" [attr.src]="illustrationSrc()" />
+		}
+	</div>
 }

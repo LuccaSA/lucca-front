@@ -1,8 +1,17 @@
 <table class="demo-QAtable">
 	<tbody>
 		<tr>
+			<td></td>
+			<td style="width: 50%">
+				<div class="demo-QAtable-list">HTML</div>
+			</td>
+			<td style="width: 50%">
+				<div class="demo-QAtable-list">Angular</div>
+			</td>
+		</tr>
+		<tr>
 			<td>Default</td>
-			<td style="width: 100%">
+			<td style="width: 50%">
 				<ul class="sortableList">
 					<li class="sortableList-item">
 						<div class="sortableList-item-handler"></div>
@@ -11,7 +20,7 @@
 							<p class="sortableList-item-content-helper">Helper message</p>
 						</div>
 						<button class="clear sortableList-clear" type="button">
-							<span class="u-mask">Clear</span>
+							<span class="pr-u-mask">Clear</span>
 						</button>
 					</li>
 					<li class="sortableList-item">
@@ -21,7 +30,7 @@
 							<p class="sortableList-item-content-helper">Helper message</p>
 						</div>
 						<button class="clear sortableList-clear" type="button">
-							<span class="u-mask">Clear</span>
+							<span class="pr-u-mask">Clear</span>
 						</button>
 					</li>
 					<li class="sortableList-item">
@@ -31,15 +40,22 @@
 							<p class="sortableList-item-content-helper">Helper message</p>
 						</div>
 						<button class="clear sortableList-clear" type="button">
-							<span class="u-mask">Clear</span>
+							<span class="pr-u-mask">Clear</span>
 						</button>
 					</li>
 				</ul>
+			</td>
+			<td style="width: 50%">
+				<lu-sortable-list>
+					<lu-sortable-list-item label="Label" helperMessage="Helper message" />
+					<lu-sortable-list-item label="Label" helperMessage="Helper message" />
+					<lu-sortable-list-item label="Label" helperMessage="Helper message" />
+				</lu-sortable-list>
 			</td>
 		</tr>
 		<tr>
 			<td>Clickable</td>
-			<td>
+			<td style="width: 50%">
 				<ul class="sortableList">
 					<li class="sortableList-item mod-clickable">
 						<div class="sortableList-item-handler"></div>
@@ -48,7 +64,7 @@
 							<p class="sortableList-item-content-helper">Helper message</p>
 						</div>
 						<button class="clear sortableList-clear" type="button">
-							<span class="u-mask">Clear</span>
+							<span class="pr-u-mask">Clear</span>
 						</button>
 					</li>
 					<li class="sortableList-item mod-clickable">
@@ -58,15 +74,21 @@
 							<p class="sortableList-item-content-helper">Helper message</p>
 						</div>
 						<button class="clear sortableList-clear" type="button">
-							<span class="u-mask">Clear</span>
+							<span class="pr-u-mask">Clear</span>
 						</button>
 					</li>
 				</ul>
 			</td>
+			<td style="width: 50%">
+				<lu-sortable-list>
+					<lu-sortable-list-item label="Label" helperMessage="Helper message" clickable />
+					<lu-sortable-list-item label="Label" helperMessage="Helper message" clickable />
+				</lu-sortable-list>
+			</td>
 		</tr>
 		<tr>
 			<td>Small</td>
-			<td>
+			<td style="width: 50%">
 				<ul class="sortableList mod-S">
 					<li class="sortableList-item">
 						<div class="sortableList-item-handler"></div>
@@ -75,7 +97,7 @@
 							<p class="sortableList-item-content-helper">Helper message</p>
 						</div>
 						<button class="clear sortableList-clear" type="button">
-							<span class="u-mask">Clear</span>
+							<span class="pr-u-mask">Clear</span>
 						</button>
 					</li>
 					<li class="sortableList-item">
@@ -85,7 +107,7 @@
 							<p class="sortableList-item-content-helper">Helper message</p>
 						</div>
 						<button class="clear sortableList-clear" type="button">
-							<span class="u-mask">Clear</span>
+							<span class="pr-u-mask">Clear</span>
 						</button>
 					</li>
 					<li class="sortableList-item">
@@ -95,10 +117,83 @@
 							<p class="sortableList-item-content-helper">Helper message</p>
 						</div>
 						<button class="clear sortableList-clear" type="button">
-							<span class="u-mask">Clear</span>
+							<span class="pr-u-mask">Clear</span>
 						</button>
 					</li>
 				</ul>
+			</td>
+			<td style="width: 50%">
+				<lu-sortable-list small="true">
+					<lu-sortable-list-item label="Label" helperMessage="Helper message" />
+					<lu-sortable-list-item label="Label" helperMessage="Helper message" />
+					<lu-sortable-list-item label="Label" helperMessage="Helper message" />
+				</lu-sortable-list>
+			</td>
+		</tr>
+		<tr>
+			<td>unclearable</td>
+			<td style="width: 50%">
+				<ul class="sortableList">
+					<li class="sortableList-item">
+						<div class="sortableList-item-handler"></div>
+						<div class="sortableList-item-content">
+							<p class="sortableList-item-content-description">Label</p>
+							<p class="sortableList-item-content-helper">Helper message</p>
+						</div>
+					</li>
+					<li class="sortableList-item">
+						<div class="sortableList-item-handler"></div>
+						<div class="sortableList-item-content">
+							<p class="sortableList-item-content-description">Label</p>
+							<p class="sortableList-item-content-helper">Helper message</p>
+						</div>
+					</li>
+					<li class="sortableList-item">
+						<div class="sortableList-item-handler"></div>
+						<div class="sortableList-item-content">
+							<p class="sortableList-item-content-description">Label</p>
+							<p class="sortableList-item-content-helper">Helper message</p>
+						</div>
+					</li>
+				</ul>
+			</td>
+			<td style="width: 50%">
+				<lu-sortable-list>
+					<lu-sortable-list-item label="Label" helperMessage="Helper message" unclearable />
+					<lu-sortable-list-item label="Label" helperMessage="Helper message" unclearable />
+					<lu-sortable-list-item label="Label" helperMessage="Helper message" unclearable />
+				</lu-sortable-list>
+			</td>
+		</tr>
+		<tr>
+			<td>OnlyLabel</td>
+			<td style="width: 50%">
+				<ul class="sortableList">
+					<li class="sortableList-item">
+						<div class="sortableList-item-handler"></div>
+						<div class="sortableList-item-content">
+							<p class="sortableList-item-content-description">Label</p>
+						</div>
+						<button class="clear sortableList-clear" type="button">
+							<span class="pr-u-mask">Clear</span>
+						</button>
+					</li>
+					<li class="sortableList-item">
+						<div class="sortableList-item-handler"></div>
+						<div class="sortableList-item-content">
+							<p class="sortableList-item-content-description">Label</p>
+						</div>
+						<button class="clear sortableList-clear" type="button">
+							<span class="pr-u-mask">Clear</span>
+						</button>
+					</li>
+				</ul>
+			</td>
+			<td style="width: 50%">
+				<lu-sortable-list>
+					<lu-sortable-list-item label="Label" />
+					<lu-sortable-list-item label="Label" />
+				</lu-sortable-list>
 			</td>
 		</tr>
 	</tbody>

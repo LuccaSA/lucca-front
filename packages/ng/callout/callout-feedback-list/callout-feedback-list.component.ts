@@ -3,9 +3,8 @@ import { LuClass, Palette } from '@lucca-front/ng/core';
 
 @Component({
 	selector: 'ul[lu-callout-feedback-list]',
-	standalone: true,
-	template: '<ng-content></ng-content>',
-	styleUrls: ['./callout-feedback-list.component.scss'],
+	template: '<ng-content />',
+	styleUrl: './callout-feedback-list.component.scss',
 	changeDetection: ChangeDetectionStrategy.OnPush,
 	host: {
 		class: 'calloutFeedbackList',

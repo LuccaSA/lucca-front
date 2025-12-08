@@ -1,8 +1,11 @@
 import { Observable, of } from 'rxjs';
-import { importProvidersFrom, inject, InjectionToken, makeEnvironmentProviders } from '@angular/core';
+import { importProvidersFrom, inject, InjectionToken, makeEnvironmentProviders, Signal } from '@angular/core';
 import { HttpClient } from '@angular/common/http';
 import { catchError, map, shareReplay } from 'rxjs/operators';
 import { OverlayModule } from '@angular/cdk/overlay';
+import { ILuUser } from '@lucca-front/ng/user';
+
+export const LU_USER_POPOVER_USER = new InjectionToken<Signal<ILuUser>>('user-popover-user');
 
 export const USER_POPOVER_IS_ACTIVATED = new InjectionToken<Observable<boolean>>('user-popover-is-activated', {
 	factory: () =>

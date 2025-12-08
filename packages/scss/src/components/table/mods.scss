@@ -2,8 +2,8 @@
 @use '@lucca-front/scss/src/commons/utils/namespace';
 
 @mixin S {
-	font-size: var(--sizes-S-fontSize);
-	line-height: var(--sizes-S-lineHeight);
+	font-size: var(--pr-t-font-body-S-fontSize);
+	line-height: var(--pr-t-font-body-S-lineHeight);
 }
 
 @mixin zebra {
@@ -145,9 +145,9 @@
 	.table-foot-row-cell {
 		color: var(--palettes-neutral-700);
 		background-color: var(--palettes-neutral-50);
-		font-size: var(--sizes-S-fontSize);
-		line-height: var(--sizes-S-lineHeight);
-		font-weight: 600;
+		font-size: var(--pr-t-font-body-S-fontSize);
+		line-height: var(--pr-t-font-body-S-lineHeight);
+		font-weight: var(--pr-t-font-fontWeight-semibold);
 	}
 }
 
@@ -170,8 +170,8 @@
 		&::before {
 			@include icon.generate('arrow_chevron_top');
 
-			font-size: var(--sizes-M-lineHeight);
-			font-weight: 400;
+			font-size: var(--pr-t-font-body-M-lineHeight);
+			font-weight: var(--pr-t-font-fontWeight-regular);
 			margin-inline-end: var(--pr-t-spacings-100);
 			transition-duration: var(--commons-animations-durations-fast);
 			transition-property: transform;
@@ -212,7 +212,7 @@
 				@include icon.generate('dots_drag');
 
 				color: var(--palettes-neutral-600);
-				font-size: var(--sizes-M-lineHeight);
+				font-size: var(--pr-t-font-body-M-lineHeight);
 				block-size: 100%;
 				margin: auto;
 				display: flex;
@@ -267,7 +267,7 @@
 		.table-head-row-cell-secondLine {
 			margin-block-start: var(--pr-t-spacings-50);
 			display: block;
-			font-weight: 400;
+			font-weight: var(--pr-t-font-fontWeight-regular);
 		}
 	}
 
@@ -284,7 +284,7 @@
 	.table-head-row-cell-secondLine {
 		margin-block-start: var(--pr-t-spacings-50);
 		display: block;
-		font-weight: 400;
+		font-weight: var(--pr-t-font-fontWeight-regular);
 	}
 }
 

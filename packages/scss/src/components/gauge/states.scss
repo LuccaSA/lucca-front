@@ -1,0 +1,8 @@
+@mixin zero {
+	--components-gauge-before-minInlineSize: 0;
+	--components-gauge-color: var(--components-gauge-background);
+}
+
+@mixin animated {
+	--components-gauge-animationName: gauge-fill;
+}

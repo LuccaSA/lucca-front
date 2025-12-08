@@ -2,24 +2,32 @@
 	class="emptyState mod-page"
 	[attr.role]="heading ? null : 'presentation'"
 	[style.--components-emptyState-background-color]="contentBackgroundColor"
-	style.--components-emptyState-illustration-background-bottom-left="url({{bottomLeftBackground}})"
-	style.--components-emptyState-illustration-foreground-bottom-left="url({{bottomLeftForeground}})"
-	style.--components-emptyState-illustration-background-top-right="url({{topRightBackground}})"
-	style.--components-emptyState-illustration-foreground-top-right="url({{topRightForeground}})"
+	style.--components-emptyState-illustration-background-bottom-left="url({{ bottomLeftBackground }})"
+	style.--components-emptyState-illustration-foreground-bottom-left="url({{ bottomLeftForeground }})"
+	style.--components-emptyState-illustration-background-top-right="url({{ topRightBackground }})"
+	style.--components-emptyState-illustration-foreground-top-right="url({{ topRightForeground }})"
 >
 	<div class="emptyState-container">
 		<div class="emptyState-content">
-			<div *ngIf="icon" class="emptyState-content-icon" aria-hidden="true" [innerHtml]="icon | luSafeExternalSvg"></div>
+			@if (icon) {
+				<div class="emptyState-content-icon" aria-hidden="true" [innerHtml]="icon | luSafeExternalSvg"></div>
+			}
 			<div class="emptyState-content-text">
-				<div *ngIf="slotTop">
-					<ng-container *luPortal="slotTop"></ng-container>
-				</div>
-				<div role="heading" [attr.aria-level]="hx" class="emptyState-content-heading" *ngIf="heading">{{ heading }}</div>
-				<p class="emptyState-content-description" *ngIf="description">
-					<ng-container *luPortal="description"></ng-container>
-				</p>
+				@if (slotTop) {
+					<div>
+						<ng-container *luPortal="slotTop" />
+					</div>
+				}
+				@if (heading) {
+					<div role="heading" [attr.aria-level]="hx" class="emptyState-content-heading">{{ heading }}</div>
+				}
+				@if (description) {
+					<p class="emptyState-content-description">
+						<ng-container *luPortal="description" />
+					</p>
+				}
 				<div class="emptyState-actions">
-					<ng-content></ng-content>
+					<ng-content />
 				</div>
 			</div>
 		</div>

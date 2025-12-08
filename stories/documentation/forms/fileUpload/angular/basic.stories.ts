@@ -216,6 +216,7 @@ export const Multi = {
 		displayFileName: false,
 		fileMaxSize: 5000000,
 		illustration: 'paper',
+		structure: false,
 	},
 };
 
@@ -227,8 +228,8 @@ export const Single = {
 			props: { ...multi.props, accept },
 			template: `@let fileUpload = fileUploadFeature.fileUploads()[0];
 <lu-form-field label="Label">
-	<lu-single-file-upload${generateInputs(mainArgs, argTypes)} [accept]="accept" (filePicked)="fileUploadFeature.uploadFiles([$event])"
-		[entry]="fileUpload | fileUploadToLFEntry" [state]="fileUpload?.state" [previewUrl]="getPreviewUrl(fileUpload)" [inlineMessageError]="fileUpload?.error?.detail" (deleteFile)="deleteFile(fileUpload)"/>
+	<lu-single-file-upload ${generateInputs(mainArgs, argTypes)} [accept]="accept" (filePicked)="fileUploadFeature.uploadFiles([$event])"
+		[entry]="fileUpload | fileUploadToLFEntry" [state]="fileUpload?.state" [previewUrl]="getPreviewUrl(fileUpload)" [inlineMessageError]="fileUpload?.error?.detail" (deleteFile)="deleteFile(fileUpload)" />
 </lu-form-field>`,
 		};
 	},
@@ -243,5 +244,6 @@ export const Single = {
 		fileMaxSize: 5000000,
 		illustration: 'paper',
 		displayFileName: false,
+		structure: false,
 	},
 };

@@ -1,7 +1,7 @@
-/***********************************************
- ***		THIS FILE IS GENERATED, DO NOT EDIT		***
- ***		The generator is update-icons.js			***
- ***********************************************/
+// *******************************************
+// *** THIS FILE IS GENERATED, DO NOT EDIT ***
+// *** The generator is update-icons.js		 ***
+// *******************************************
 
 export const IconsList = [
 	{ icon: 'app', deprecated: false },
@@ -60,8 +60,11 @@ export const IconsList = [
 	{ icon: 'login', deprecated: true },
 	{ icon: 'arrowLogout', deprecated: false },
 	{ icon: 'logout', deprecated: true },
-	{ icon: 'arrowOppositeHorizontal', deprecated: false },
+	{ icon: 'arrowOppositeLeftRight', deprecated: false },
+	{ icon: 'arrowOppositeHorizontal', deprecated: true },
 	{ icon: 'swap', deprecated: true },
+	{ icon: 'arrowOppositeRightLeft', deprecated: false },
+	{ icon: 'arrowOppositeTopBottom', deprecated: false },
 	{ icon: 'arrowOppositeVertical', deprecated: false },
 	{ icon: 'creditDebit', deprecated: true },
 	{ icon: 'arrowReply', deprecated: false },
@@ -105,6 +108,7 @@ export const IconsList = [
 	{ icon: 'chat', deprecated: true },
 	{ icon: 'talk', deprecated: true },
 	{ icon: 'dialog', deprecated: true },
+	{ icon: 'bubbleStars', deprecated: false },
 	{ icon: 'buildingCompany', deprecated: false },
 	{ icon: 'building', deprecated: true },
 	{ icon: 'establishment', deprecated: true },
@@ -316,6 +320,7 @@ export const IconsList = [
 	{ icon: 'mapPin', deprecated: false },
 	{ icon: 'pin', deprecated: true },
 	{ icon: 'mapPlan', deprecated: false },
+	{ icon: 'mapTripStep', deprecated: false },
 	{ icon: 'mathsDivide', deprecated: false },
 	{ icon: 'divide', deprecated: true },
 	{ icon: 'mathsEquals', deprecated: false },
@@ -362,6 +367,7 @@ export const IconsList = [
 	{ icon: 'euro', deprecated: true },
 	{ icon: 'moneyPaymentCard', deprecated: false },
 	{ icon: 'bankingCard', deprecated: true },
+	{ icon: 'moneyPaymentCards', deprecated: false },
 	{ icon: 'moneyPiggyBank', deprecated: false },
 	{ icon: 'piggyBank', deprecated: true },
 	{ icon: 'moneyWallet', deprecated: false },
@@ -373,6 +379,7 @@ export const IconsList = [
 	{ icon: 'compass', deprecated: true },
 	{ icon: 'officeElectricalPlug', deprecated: false },
 	{ icon: 'officeFirstAid', deprecated: false },
+	{ icon: 'officeMicrophone', deprecated: false },
 	{ icon: 'officePen', deprecated: false },
 	{ icon: 'edit', deprecated: true },
 	{ icon: 'editMini', deprecated: true },
@@ -392,6 +399,7 @@ export const IconsList = [
 	{ icon: 'adduser', deprecated: true },
 	{ icon: 'peopleArrowUp', deprecated: false },
 	{ icon: 'peopleEdit', deprecated: false },
+	{ icon: 'peopleFolder', deprecated: false },
 	{ icon: 'peopleGroup', deprecated: false },
 	{ icon: 'userGroup', deprecated: true },
 	{ icon: 'group', deprecated: true },
@@ -423,6 +431,7 @@ export const IconsList = [
 	{ icon: 'playFull', deprecated: true },
 	{ icon: 'playerPlayCircle', deprecated: false },
 	{ icon: 'play', deprecated: true },
+	{ icon: 'playerRecording', deprecated: false },
 	{ icon: 'playerStopCircle', deprecated: false },
 	{ icon: 'stop', deprecated: true },
 	{ icon: 'priceTag', deprecated: false },
@@ -461,6 +470,7 @@ export const IconsList = [
 	{ icon: 'forbidden', deprecated: true },
 	{ icon: 'signCancel', deprecated: false },
 	{ icon: 'cancel', deprecated: true },
+	{ icon: 'signCheckbox', deprecated: false },
 	{ icon: 'signClose', deprecated: false },
 	{ icon: 'signConfirm', deprecated: false },
 	{ icon: 'confirm', deprecated: true },
@@ -519,14 +529,19 @@ export const IconsList = [
 	{ icon: 'bus', deprecated: true },
 	{ icon: 'transportCar', deprecated: false },
 	{ icon: 'car', deprecated: true },
+	{ icon: 'transportCarElectric', deprecated: false },
 	{ icon: 'transportCarwashStation', deprecated: false },
 	{ icon: 'cleanCar', deprecated: true },
 	{ icon: 'transportGazStation', deprecated: false },
 	{ icon: 'gasoline', deprecated: true },
+	{ icon: 'transportMotocycle', deprecated: false },
+	{ icon: 'transportMotocycleElectric', deprecated: false },
 	{ icon: 'transportPlane', deprecated: false },
 	{ icon: 'plane', deprecated: true },
 	{ icon: 'transportRocket', deprecated: false },
 	{ icon: 'rocket', deprecated: true },
+	{ icon: 'transportScooter', deprecated: false },
+	{ icon: 'transportScooterElectric', deprecated: false },
 	{ icon: 'transportSpeedometer', deprecated: false },
 	{ icon: 'speedometer', deprecated: true },
 	{ icon: 'mileage', deprecated: true },

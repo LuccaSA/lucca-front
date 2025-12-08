@@ -19,7 +19,6 @@ const options = [
 
 @Component({
 	selector: 'lu-multi-select-ng-model-host',
-	standalone: true,
 	imports: [FormsModule, LuMultiSelectInputComponent, LuMultiSelectWithSelectAllDirective, LuCoreSelectTotalCountDirective],
 	template: ` <lu-multi-select [ngModel]="selectedOptions" (ngModelChange)="setSelectedOptions($event)" [options]="options" withSelectAll withSelectAllLabel="lol" [totalCount]="options.length" /> `,
 })
@@ -35,7 +34,6 @@ class MultiSelectNgModelHostComponent {
 
 @Component({
 	selector: 'lu-multi-select-form-control-host',
-	standalone: true,
 	imports: [ReactiveFormsModule, LuMultiSelectInputComponent, LuMultiSelectWithSelectAllDirective, LuCoreSelectTotalCountDirective],
 	template: ` <lu-multi-select [formControl]="formControl" [options]="options" withSelectAll withSelectAllLabel="lol" [totalCount]="options.length" /> `,
 })

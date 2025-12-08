@@ -23,15 +23,17 @@
 			<td>
 				<div class="demo-QAtable-list">
 					<button type="button" class="button mod-outlined">Outlined</button>
-					<button type="button" class="button mod-text palette-product">Text</button>
-					<button type="button" class="button mod-text">Text</button>
+					<button type="button" class="button mod-outlined palette-product">Outlined product</button>
+					<button type="button" class="button mod-ghost">Ghost</button>
+					<button type="button" class="button mod-AI">AI</button>
 				</div>
 			</td>
 			<td>
 				<div class="demo-QAtable-list">
 					<button type="button" luButton="outlined">Outlined</button>
-					<button type="button" luButton="text" palette="product">Text</button>
-					<button type="button" luButton="text">Text</button>
+					<button type="button" luButton="outlined" palette="product">Outlined product</button>
+					<button type="button" luButton="ghost">Ghost</button>
+					<button type="button" luButton="AI">AI</button>
 				</div>
 			</td>
 		</tr>
@@ -75,10 +77,10 @@
 		<tr>
 			<td>Inverted</td>
 			<td>
-				<div class="demo-QAtable-list mod-black"><button type="button" class="button mod-text mod-invert">Text inverted</button></div>
+				<div class="demo-QAtable-list mod-black"><button type="button" class="button mod-ghost mod-invert">Ghost inverted</button></div>
 			</td>
 			<td>
-				<div class="demo-QAtable-list mod-black"><button type="button" luButton="text-invert">Text inverted</button></div>
+				<div class="demo-QAtable-list mod-black"><button type="button" luButton="ghost-invert">Ghost inverted</button></div>
 			</td>
 		</tr>
 		<tr>
@@ -102,14 +104,14 @@
 				<div class="demo-QAtable-list">
 					<button type="button" class="button palette-error">Critical</button>
 					<button type="button" class="button palette-error mod-outlined">Critical outlined</button>
-					<button type="button" class="button palette-error mod-text">Critical text</button>
+					<button type="button" class="button palette-error mod-ghost">Critical text</button>
 				</div>
 			</td>
 			<td>
 				<div class="demo-QAtable-list">
 					<button type="button" luButton palette="error">Critical</button>
 					<button type="button" luButton="outlined" palette="error">Critical outlined</button>
-					<button type="button" luButton="text" palette="error">Critical text</button>
+					<button type="button" luButton="ghost" palette="error">Critical text</button>
 				</div>
 			</td>
 		</tr>
@@ -141,9 +143,9 @@
 			</td>
 			<td>
 				<div class="demo-QAtable-list">
-					<button type="button" luButton>Counter<lu-numeric-badge [value]="7"></lu-numeric-badge></button>
-					<button type="button" luButton size="S">Counter S<lu-numeric-badge [value]="7"></lu-numeric-badge></button>
-					<button type="button" luButton size="XS">Counter XS<lu-numeric-badge [value]="7"></lu-numeric-badge></button>
+					<button type="button" luButton>Counter<lu-numeric-badge [value]="7" /></button>
+					<button type="button" luButton size="S">Counter S<lu-numeric-badge [value]="7" /></button>
+					<button type="button" luButton size="XS">Counter XS<lu-numeric-badge [value]="7" /></button>
 				</div>
 			</td>
 		</tr>
@@ -151,22 +153,22 @@
 			<td>With icon</td>
 			<td>
 				<div class="demo-QAtable-list">
-					<button type="button" class="button mod-withIcon">
+					<button type="button" class="button mod-withIcon mod-iconOnLeft">
 						<span aria-hidden="true" class="lucca-icon icon-mailPaperPlane"></span>With icon
 					</button>
-					<button type="button" class="button mod-withIcon">
+					<button type="button" class="button mod-withIcon mod-iconOnRight">
 						With icon<span aria-hidden="true" class="lucca-icon icon-mailPaperPlane"></span>
 					</button>
-					<button type="button" class="button mod-withIcon mod-S">
+					<button type="button" class="button mod-withIcon mod-S mod-iconOnLeft">
 						<span aria-hidden="true" class="lucca-icon icon-mailPaperPlane"></span>With icon
 					</button>
-					<button type="button" class="button mod-withIcon mod-S">
+					<button type="button" class="button mod-withIcon mod-S mod-iconOnRight">
 						With icon<span aria-hidden="true" class="lucca-icon icon-mailPaperPlane"></span>
 					</button>
-					<button type="button" class="button mod-withIcon mod-XS">
+					<button type="button" class="button mod-withIcon mod-XS mod-iconOnLeft">
 						<span aria-hidden="true" class="lucca-icon icon-mailPaperPlane"></span>With icon
 					</button>
-					<button type="button" class="button mod-withIcon mod-XS">
+					<button type="button" class="button mod-withIcon mod-XS mod-iconOnRight">
 						With icon<span aria-hidden="true" class="lucca-icon icon-mailPaperPlane"></span>
 					</button>
 				</div>
@@ -188,8 +190,10 @@
 				<div class="demo-QAtable-list">
 					<a href="#" class="button mod-onlyIcon"><span aria-hidden="true" class="lucca-icon icon-heart"></span></a>
 					<a href="#" class="button mod-onlyIcon mod-outlined"><span aria-hidden="true" class="lucca-icon icon-heart"></span></a>
-					<a href class="button mod-onlyIcon mod-text"><span aria-hidden="true" class="lucca-icon icon-heart"></span></a>
-					<a href="#"><span aria-hidden="true" class="lucca-icon icon-heart"></span></a>
+					<a href class="button mod-onlyIcon mod-ghost"><span aria-hidden="true" class="lucca-icon icon-heart"></span></a>
+					<a href="#" class="button mod-onlyIcon mod-ghost palette-product"
+						><span aria-hidden="true" class="lucca-icon icon-heart"></span
+					></a>
 					<button type="button" class="button mod-onlyIcon mod-outlined">
 						<span aria-hidden="true" class="lucca-icon icon-heart"></span>
 					</button>
@@ -199,25 +203,25 @@
 					<button type="button" class="button mod-onlyIcon mod-outlined mod-XS">
 						<span aria-hidden="true" class="lucca-icon icon-heart"></span>
 					</button>
-					<button type="button" class="button mod-onlyIcon mod-outlined mod-delete">
+					<button type="button" class="button mod-onlyIcon mod-outlined mod-critical">
 						<span aria-hidden="true" class="lucca-icon icon-trashDelete"></span>
 					</button>
-					<button type="button" class="button mod-onlyIcon mod-text mod-delete">
+					<button type="button" class="button mod-onlyIcon mod-ghost mod-critical">
 						<span aria-hidden="true" class="lucca-icon icon-trashDelete"></span>
 					</button>
 				</div>
 			</td>
 			<td>
 				<div class="demo-QAtable-list">
-					<button type="button" luButton><lu-icon icon="heart" /><span class="u-mask">Alt text</span></button>
-					<button type="button" luButton="outlined"><lu-icon icon="heart" /><span class="u-mask">Alt text</span></button>
-					<button type="button" luButton="text"><lu-icon icon="heart" /><span class="u-mask">Alt text</span></button>
-					<button type="button" luButton="text" palette="product"><lu-icon icon="heart" /><span class="u-mask">Alt text</span></button>
-					<button type="button" luButton="outlined"><lu-icon icon="heart" /><span class="u-mask">Alt text</span></button>
-					<button type="button" luButton="outlined" size="S"><lu-icon icon="heart" /><span class="u-mask">Alt text</span></button>
-					<button type="button" luButton="outlined" size="XS"><lu-icon icon="heart" /><span class="u-mask">Alt text</span></button>
-					<button type="button" luButton="outlined" delete><lu-icon icon="trash" /><span class="u-mask">Alt text</span></button>
-					<button type="button" luButton="text" delete><lu-icon icon="trash" /><span class="u-mask">Alt text</span></button>
+					<button type="button" luButton><lu-icon icon="heart" /><span class="pr-u-mask">Alt text</span></button>
+					<button type="button" luButton="outlined"><lu-icon icon="heart" /><span class="pr-u-mask">Alt text</span></button>
+					<button type="button" luButton="ghost"><lu-icon icon="heart" /><span class="pr-u-mask">Alt text</span></button>
+					<button type="button" luButton="ghost" palette="product"><lu-icon icon="heart" /><span class="pr-u-mask">Alt text</span></button>
+					<button type="button" luButton="outlined"><lu-icon icon="heart" /><span class="pr-u-mask">Alt text</span></button>
+					<button type="button" luButton="outlined" size="S"><lu-icon icon="heart" /><span class="pr-u-mask">Alt text</span></button>
+					<button type="button" luButton="outlined" size="XS"><lu-icon icon="heart" /><span class="pr-u-mask">Alt text</span></button>
+					<button type="button" luButton="outlined" delete><lu-icon icon="trash" /><span class="pr-u-mask">Alt text</span></button>
+					<button type="button" luButton="ghost" delete><lu-icon icon="trash" /><span class="pr-u-mask">Alt text</span></button>
 				</div>
 			</td>
 		</tr>
@@ -227,26 +231,30 @@
 				<div class="demo-QAtable-list">
 					<button type="button" class="button is-loading">Loading</button>
 					<button type="button" class="button mod-outlined is-loading">Loading</button>
-					<button type="button" class="button mod-text is-loading">Loading</button>
+					<button type="button" class="button mod-ghost is-loading">Loading</button>
 					<button type="button" class="button is-success">Success</button>
 					<button type="button" class="button mod-outlined is-success">Success</button>
-					<button type="button" class="button mod-text is-success">Success</button>
-					<button type="button" class="button is-error">Error</button>
-					<button type="button" class="button mod-outlined is-error">Error</button>
-					<button type="button" class="button mod-text is-error">Error</button>
+					<button type="button" class="button mod-ghost is-success">Success</button>
+					<button type="button" class="button is-error">Error (reset .is-error class)</button>
+					<button type="button" class="button is-loading mod-S">Loading S</button>
+					<button type="button" class="button is-success mod-S">Success S</button>
+					<button type="button" class="button is-loading mod-XS">Loading XS</button>
+					<button type="button" class="button is-success mod-XS">Success XS</button>
 				</div>
 			</td>
 			<td>
 				<div class="demo-QAtable-list">
 					<button type="button" luButton state="loading">Loading</button>
 					<button type="button" luButton="outlined" state="loading">Loading</button>
-					<button type="button" luButton="text" state="loading">Loading</button>
+					<button type="button" luButton="ghost" state="loading">Loading</button>
 					<button type="button" luButton state="success">Success</button>
 					<button type="button" luButton="outlined" state="success">Success</button>
-					<button type="button" luButton="text" state="success">Success</button>
-					<button type="button" luButton state="error">Error</button>
-					<button type="button" luButton="outlined" state="error">Error</button>
-					<button type="button" luButton="text" state="error">Error</button>
+					<button type="button" luButton="ghost" state="success">Success</button>
+					<button type="button" luButton state="error">Error (reset .is-error class)</button>
+					<button type="button" luButton state="loading" size="S">Loading S</button>
+					<button type="button" luButton state="success" size="S">Success S</button>
+					<button type="button" luButton state="loading" size="XS">Loading XS</button>
+					<button type="button" luButton state="success" size="XS">Success XS</button>
 				</div>
 			</td>
 		</tr>
@@ -255,21 +263,23 @@
 			<td>
 				<div class="demo-QAtable-list">
 					<button type="button" class="button" disabled>Disabled</button>
-					<button type="button" class="button palette-product is-disabled">Disabled</button>
-					<button type="button" class="button palette-error mod-outlined" disabled>Disabled</button>
+					<button type="button" class="button" aria-disabled="true">Disabled</button>
 					<button type="button" class="button is-disabled">Disabled</button>
-					<button type="button" class="button mod-outlined" disabled>Disabled</button>
-					<button type="button" class="button mod-text" disabled>Disabled</button>
+					<button type="button" class="button palette-product is-disabled">Disabled</button>
 					<button type="button" class="button" disabled>Disabled<span class="numericBadge palette-product">7</span></button>
+					<button type="button" class="button palette-error mod-outlined" disabled>Disabled</button>
+					<button type="button" class="button mod-outlined" disabled>Disabled</button>
+					<button type="button" class="button mod-ghost" disabled>Disabled</button>
 				</div>
 			</td>
 			<td>
 				<div class="demo-QAtable-list">
 					<button type="button" luButton disabled>Disabled</button>
+					<button type="button" luButton aria-disabled="true">Disabled</button>
 					<button type="button" luButton disabled palette="product">Disabled</button>
+					<button type="button" luButton disabled>Disabled<lu-numeric-badge [value]="7" /></button>
 					<button type="button" luButton="outlined" disabled>Disabled</button>
-					<button type="button" luButton="text" disabled>Disabled</button>
-					<button type="button" luButton disabled>Disabled<lu-numeric-badge [value]="7"></lu-numeric-badge></button>
+					<button type="button" luButton="ghost" disabled>Disabled</button>
 				</div>
 			</td>
 		</tr>
@@ -284,7 +294,7 @@
 						<li class="button-group-item">
 							<button type="button" class="button mod-more">
 								<span class="lucca-icon icon-arrowChevronBottom" aria-hidden="true"></span>
-								<span class="u-mask">Plus d'actions</span>
+								<span class="pr-u-mask">Plus d'actions</span>
 							</button>
 						</li>
 					</ul>
@@ -296,7 +306,7 @@
 						<li class="button-group-item">
 							<button type="button" class="button mod-outlined mod-more">
 								<span class="lucca-icon icon-arrowChevronBottom" aria-hidden="true"></span>
-								<span class="u-mask">Plus d'actions</span>
+								<span class="pr-u-mask">Plus d'actions</span>
 							</button>
 						</li>
 					</ul>
@@ -307,6 +317,21 @@
 				</div>
 			</td>
 			<td></td>
+		</tr>
+		<tr>
+			<td>Deprecated</td>
+			<td>
+				<div class="demo-QAtable-list">
+					<button type="button" class="button mod-text">Text</button>
+					<button type="button" class="button mod-ghost palette-product">Text</button>
+				</div>
+			</td>
+			<td>
+				<div class="demo-QAtable-list">
+					<button type="button" luButton="text">Text</button>
+					<button type="button" luButton="ghost" palette="product">Text</button>
+				</div>
+			</td>
 		</tr>
 	</tbody>
 </table>

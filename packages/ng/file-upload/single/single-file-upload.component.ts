@@ -9,16 +9,18 @@ import { FileEntry } from '../file-upload-entry';
 
 @Component({
 	selector: 'lu-single-file-upload',
-	standalone: true,
 	templateUrl: './single-file-upload.component.html',
-	styleUrls: ['./single-file-upload.component.scss'],
+	styleUrl: './single-file-upload.component.scss',
 	encapsulation: ViewEncapsulation.None,
+	host: {
+		'[class.mod-structure]': 'structure()',
+	},
 	imports: [LuSafeExternalSvgPipe, InputDirective, LuTooltipModule, FileEntryComponent, IntlParamsPipe],
 })
 export class SingleFileUploadComponent extends BaseFileUploadComponent {
 	entry = input<FileEntry | null>(null);
 
-	state = input<'loading' | 'success' | 'error' | null>(null);
+	state = input<'loading' | 'success' | 'error' | 'default'>('default');
 
 	inlineMessageError = input<string | null>(null);
 

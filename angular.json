@@ -14,8 +14,29 @@
       "viewEncapsulation": "None",
       "skipTests": true,
       "standalone": true,
-      "style": "scss"
-    }
+      "style": "scss",
+    "type": "component"
+    },
+    "@schematics/angular:directive": {
+      "type": "directive"
+    },
+    "@schematics/angular:service": {
+      "type": "service"
+    },
+    "@schematics/angular:guard": {
+      "typeSeparator": "."
+    },
+    "@schematics/angular:interceptor": {
+      "typeSeparator": "."
+    },
+    "@schematics/angular:module": {
+      "typeSeparator": "."
+    },
+    "@schematics/angular:pipe": {
+      "typeSeparator": "."
+    },
+    "@schematics/angular:resolver": {
+      "typeSeparator": "."}
   },
   "newProjectRoot": "packages/ng",
   "projects": {

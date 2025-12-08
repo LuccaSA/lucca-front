@@ -1,80 +1,148 @@
 <table class="demo-QAtable">
 	<tbody>
 		<tr>
+			<td></td>
+			<td style="width: 50%">
+				<div class="demo-QAtable-list">HTML</div>
+			</td>
+			<td style="width: 50%">
+				<div class="demo-QAtable-list">Angular</div>
+			</td>
+		</tr>
+		<tr>
 			<td>Default</td>
 			<td>
-				<footer class="footer">
-					<div class="footer-actions">
+				<div class="demo-QAtable-list">
+					<footer class="footer">
+						<div class="footer-actions">
+							<button type="button" class="button">Button</button>
+							<button type="button" class="button mod-outlined">Button</button>
+							<button type="button" class="button mod-ghost">Button</button>
+						</div>
+					</footer>
+				</div>
+			</td>
+			<td>
+				<div class="demo-QAtable-list">
+					<lu-footer>
 						<button type="button" class="button">Button</button>
 						<button type="button" class="button mod-outlined">Button</button>
-						<button type="button" class="button mod-text">Button</button>
-					</div>
-				</footer>
+						<button type="button" class="button mod-ghost">Button</button>
+					</lu-footer>
+				</div>
 			</td>
 		</tr>
 		<tr>
 			<td>With content</td>
 			<td>
-				<footer class="footer">
-					<div class="footer-content">Content</div>
-					<div class="footer-actions">
+				<div class="demo-QAtable-list">
+					<footer class="footer">
+						<div class="footer-content">Content</div>
+						<div class="footer-actions">
+							<button type="button" class="button">Button</button>
+							<button type="button" class="button mod-outlined">Button</button>
+							<button type="button" class="button mod-ghost">Button</button>
+						</div>
+					</footer>
+				</div>
+			</td>
+			<td>
+				<div class="demo-QAtable-list">
+					<lu-footer>
+						<ng-container footerContent>Content</ng-container>
 						<button type="button" class="button">Button</button>
 						<button type="button" class="button mod-outlined">Button</button>
-						<button type="button" class="button mod-text">Button</button>
-					</div>
-				</footer>
+						<button type="button" class="button mod-ghost">Button</button>
+					</lu-footer>
+				</div>
 			</td>
 		</tr>
 		<tr>
 			<td>Sticky</td>
 			<td>
-				<section class="contentSection" style="height: 10rem; overflow: auto">
-					<div style="height: 10rem">Content</div>
-					<footer class="footer mod-sticky">
-						<div class="footer-actions">
+				<div class="demo-QAtable-list">
+					<section class="contentSection" style="height: 10rem; overflow: auto">
+						<div style="height: 10rem">Content</div>
+						<footer class="footer mod-sticky">
+							<div class="footer-actions">
+								<button type="button" class="button">Button</button>
+								<button type="button" class="button mod-outlined">Button</button>
+								<button type="button" class="button mod-ghost">Button</button>
+							</div>
+						</footer>
+					</section>
+				</div>
+			</td>
+			<td>
+				<div class="demo-QAtable-list">
+					<section class="contentSection" style="height: 10rem; overflow: auto">
+						<div style="height: 10rem">Content</div>
+						<lu-footer sticky>
 							<button type="button" class="button">Button</button>
 							<button type="button" class="button mod-outlined">Button</button>
-							<button type="button" class="button mod-text">Button</button>
-						</div>
-					</footer>
-				</section>
+							<button type="button" class="button mod-ghost">Button</button>
+						</lu-footer>
+					</section>
+				</div>
 			</td>
 		</tr>
 		<tr>
 			<td>Container</td>
 			<td>
-				<footer class="footer">
-					<div class="footer-containerOptional">
-						<div class="footer-content">Content</div>
-						<div class="footer-actions">
-							<button type="button" class="button">Button</button>
-							<button type="button" class="button mod-outlined">Button</button>
+				<div class="demo-QAtable-list">
+					<footer class="footer">
+						<div class="footer-containerOptional">
+							<div class="footer-content">Content</div>
+							<div class="footer-actions">
+								<button type="button" class="button">Button</button>
+								<button type="button" class="button mod-outlined">Button</button>
+							</div>
 						</div>
-					</div>
-				</footer>
+					</footer>
+				</div>
+			</td>
+			<td>
+				<div class="demo-QAtable-list">
+					<lu-footer container>
+						<ng-container footerContent>Content</ng-container>
+						<button type="button" class="button">Button</button>
+						<button type="button" class="button mod-outlined">Button</button>
+					</lu-footer>
+				</div>
+			</td>
+		</tr>
+		<tr>
+			<td>Narrow</td>
+			<td></td>
+			<td>
+				<div class="demo-QAtable-list">
+					<lu-footer forceNarrow container>
+						<ng-container footerContent>Content</ng-container>
+						<button type="button" class="button">Button</button>
+						<button type="button" class="button mod-outlined">Button</button>
+					</lu-footer>
+				</div>
 			</td>
 		</tr>
 		<tr>
 			<td>Container deprecated</td>
 			<td>
-				<footer class="footer">
-					<div class="footer-containerOptional container mod-maxL">
-						<div class="footer-content">Content</div>
-						<div class="footer-actions">
-							<button type="button" class="button">Button</button>
-							<button type="button" class="button mod-outlined">Button</button>
+				<div class="demo-QAtable-list">
+					<footer class="footer">
+						<div class="footer-containerOptional container mod-maxL">
+							<div class="footer-content">Content</div>
+							<div class="footer-actions">
+								<button type="button" class="button">Button</button>
+								<button type="button" class="button mod-outlined">Button</button>
+							</div>
 						</div>
-					</div>
-				</footer>
+					</footer>
+				</div>
 			</td>
+			<td></td>
 		</tr>
 	</tbody>
 </table>
-<style>
-	.footer {
-		min-width: 30rem;
-	}
-</style>
 
 <!-- To tell the ui-diff tool that the page has finished rendering -->
 <span id="ready"></span>

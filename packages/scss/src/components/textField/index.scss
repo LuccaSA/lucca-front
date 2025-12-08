@@ -1,36 +1,44 @@
 @use 'exports' as *;
 
 .textField {
-	@include vars;
-	@include component;
-
-	&.mod-S {
-		@include S;
+	@layer components {
+		@include vars;
+		@include component;
 	}
 
-	&.mod-XS {
-		@include XS;
+	@layer mods {
+		&.mod-S {
+			@include S;
+		}
+
+		&.mod-XS {
+			@include XS;
+		}
+
+		&.mod-valueAlignRight {
+			@include valueAlignRight;
+		}
+
+		&.is-invalid,
+		&:has(.textField-input-value[aria-invalid='true']) {
+			@include invalid;
+		}
+
+		&.is-disabled,
+		&:has(.textField-input-value:disabled) {
+			@include disabled;
+		}
+
+		&.mod-autoResize {
+			@include autoResize;
+		}
+
+		&.mod-filterPill {
+			@include filterPill;
+		}
 	}
 
-	&.mod-valueAlignRight {
-		@include valueAlignRight;
-	}
-
-	&.is-invalid,
-	&:has(.textField-input-value[aria-invalid='true']) {
-		@include invalid;
-	}
-
-	&.is-disabled,
-	&:has(.textField-input-value:disabled) {
-		@include disabled;
-	}
-
-	&.mod-autoResize {
-		@include autoResize;
-	}
-
-	&.mod-filterPill {
-		@include filterPill;
+	&.is-lineThrough {
+		@include lineThrough;
 	}
 }

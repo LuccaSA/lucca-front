@@ -13,12 +13,12 @@
 
 	@at-root ($atRoot) {
 		.checkboxField-icon {
-			border: 2px solid var(--palettes-neutral-700);
+			border: 2px solid var(--component-checkboxField-borderColor);
 			border-radius: var(--component-checkboxField-borderRadius);
-			color: var(--palettes-neutral-0);
+			color: var(--component-checkboxField-icon-color);
 			transition-property: color, border-color, background-color;
 			transition-duration: var(--commons-animations-durations-fast);
-			background-color: var(--palettes-neutral-0);
+			background-color: var(--component-checkboxField-backgroundColor);
 			cursor: pointer;
 			grid-area: checkbox;
 			display: flex;
@@ -42,9 +42,10 @@
 			justify-content: center;
 			inline-size: 100%;
 			block-size: 100%;
-			transform: scale(0);
+			transform: scale(var(--component-checkboxField-icon-scale));
 			transition-property: transform;
 			transition-duration: var(--commons-animations-durations-fast);
+			transform-origin: center;
 			transition-timing-function: cubic-bezier(0.5, -0.5, 0.5, 0);
 
 			@media (prefers-reduced-motion: reduce) {
@@ -52,7 +53,7 @@
 			}
 
 			&::before {
-				font-weight: 400;
+				font-weight: var(--pr-t-font-fontWeight-regular);
 				font-size: var(--component-checkboxField-icon-fontSize);
 				direction: ltr;
 
@@ -65,8 +66,7 @@
 				text-transform: none;
 				white-space: nowrap;
 				word-wrap: normal;
-				content: '\e97d'; // Remove when content alternative will have a good support
-				content: '\e97d'/ '';
+				content: '\e97d' / '';
 			}
 		}
 

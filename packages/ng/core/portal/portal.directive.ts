@@ -3,7 +3,6 @@ import { PORTAL_CONTEXT, PortalContent } from './portal-content';
 
 @Directive({
 	selector: '[luPortal]',
-	standalone: true,
 })
 export class PortalDirective<T = unknown> implements OnChanges, OnDestroy {
 	private viewContainerRef = inject(ViewContainerRef);
@@ -34,20 +33,22 @@ export class PortalDirective<T = unknown> implements OnChanges, OnDestroy {
 			return;
 		}
 
+		const injector = Injector.create({
+			parent: this.injector,
+			providers: [{ provide: PORTAL_CONTEXT, useValue: this.luPortalContext }],
+		});
+
 		if (this.luPortal instanceof TemplateRef) {
 			const context = Object.assign({}, this.luPortalContext);
-			this.embeddedViewRef = this.viewContainerRef.createEmbeddedView<T>(this.luPortal, context);
+			this.embeddedViewRef = this.viewContainerRef.createEmbeddedView<T>(this.luPortal, context, { injector });
 		} else if (typeof this.luPortal === 'string') {
 			this.renderText(this.luPortal);
 		} else {
-			const injector = Injector.create({
-				parent: this.injector,
-				providers: [{ provide: PORTAL_CONTEXT, useValue: this.luPortalContext }],
-			});
 			try {
 				this.componentRef = this.viewContainerRef.createComponent(this.luPortal, { injector });
 				this.componentRef.changeDetectorRef.detectChanges();
-			} catch {
+			} catch (e) {
+				console.error(e);
 				throw new Error('[LuPortal] Angular failed to create component, make sure you are not giving LuPortal an Object that is not a Type<>');
 			}
 		}

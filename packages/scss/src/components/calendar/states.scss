@@ -83,7 +83,7 @@
 	&::before {
 		inset-inline-start: var(--pr-t-spacings-75);
 
-		--components-calendar-table-body-row-cellSelectedBeforeBorderRadius: var(--commons-borderRadius-L) 0 0 var(--commons-borderRadius-L);
+		--components-calendar-table-body-row-cellSelectedBeforeBorderRadius: var(--pr-t-border-radius-default) 0 0 var(--pr-t-border-radius-default);
 	}
 }
 
@@ -93,7 +93,7 @@
 	&::before {
 		inset-inline-end: var(--pr-t-spacings-75);
 
-		--components-calendar-table-body-row-cellSelectedBeforeBorderRadius: 0 var(--commons-borderRadius-L) var(--commons-borderRadius-L) 0;
+		--components-calendar-table-body-row-cellSelectedBeforeBorderRadius: 0 var(--pr-t-border-radius-default) var(--pr-t-border-radius-default) 0;
 	}
 }
 
@@ -122,7 +122,7 @@
 		inset-inline-end: 0;
 
 		--components-calendar-table-body-row-cellSelectedBeforeContent: '';
-		--components-calendar-table-body-row-cellSelectedBeforeBorderRadius: var(--commons-borderRadius-L) 0 0 var(--commons-borderRadius-L);
+		--components-calendar-table-body-row-cellSelectedBeforeBorderRadius: var(--pr-t-border-radius-default) 0 0 var(--pr-t-border-radius-default);
 	}
 }
 
@@ -151,7 +151,7 @@
 		inset-inline-start: 0;
 
 		--components-calendar-table-body-row-cellSelectedBeforeContent: '';
-		--components-calendar-table-body-row-cellSelectedBeforeBorderRadius: 0 var(--commons-borderRadius-L) var(--commons-borderRadius-L) 0;
+		--components-calendar-table-body-row-cellSelectedBeforeBorderRadius: 0 var(--pr-t-border-radius-default) var(--pr-t-border-radius-default) 0;
 	}
 }
 
@@ -167,4 +167,10 @@
 	.calendar-table-body-row-cell-action {
 		--components-calendar-table-body-row-cell-actionColor: var(--palettes-neutral-600);
 	}
+}
+
+@mixin disabled {
+	--components-calendar-table-body-row-cell-actionColor: var(--palettes-neutral-500);
+	--components-calendar-table-body-row-cell-actionTextDecoration: line-through;
+	--components-calendar-table-body-row-cell-actionCursor: default;
 }

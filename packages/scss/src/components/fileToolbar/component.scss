@@ -6,7 +6,7 @@
 @use '@lucca-front/icons/src/icon/exports' as icon;
 
 @mixin component($atRoot: namespace.$defaultAtRoot) {
-	border-radius: var(--commons-borderRadius-L);
+	border-radius: var(--pr-t-border-radius-default);
 	position: absolute;
 	transform: translateX(-50%);
 	inset-inline-start: 50%;
@@ -26,7 +26,7 @@
 		}
 
 		.fileToolbar-list-item-button.button {
-			@include button.text;
+			@include button.ghost;
 			@include button.S;
 
 			--components-button-padding: var(--pr-t-spacings-75) !important;

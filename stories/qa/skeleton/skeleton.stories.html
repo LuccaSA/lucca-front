@@ -1,37 +1,55 @@
 <table class="demo-QAtable skeleton is-loading">
 	<tbody>
 		<tr>
+			<td></td>
+			<td style="width: 50%">
+				<div class="demo-QAtable-list">HTML</div>
+			</td>
+			<td style="width: 50%">
+				<div class="demo-QAtable-list">Angular</div>
+			</td>
+		</tr>
+		<tr>
 			<td>Default</td>
 			<td>
-				<span class="skeleton-item u-textXXL" style="--components-skeleton-text-width: 50%"></span>
-				<span class="skeleton-item u-textXL"></span>
-				<span class="skeleton-item u-textL"></span>
-				<span class="skeleton-item"></span>
-				<span class="skeleton-item u-textS"></span>
-				<span class="skeleton-item u-textXS"></span>
+				<div class="demo-QAtable-list">
+					<span class="skeleton-item" style="--components-skeleton-text-width: 50%"></span>
+					<span class="skeleton-item pr-u-bodyS mod-dark"></span>
+					<span class="skeleton-item pr-u-bodyXS"></span>
+				</div>
 			</td>
+			<td></td>
 		</tr>
 		<tr>
 			<td>Headings</td>
 			<td>
-				<h1 class="skeleton-item mod-dark"></h1>
-				<h2 class="skeleton-item mod-dark"></h2>
-				<h3 class="skeleton-item mod-dark"></h3>
-				<h4 class="skeleton-item mod-dark"></h4>
-				<h5 class="skeleton-item mod-dark"></h5>
-				<h6 class="skeleton-item mod-dark"></h6>
+				<div class="demo-QAtable-list">
+					<h1 class="skeleton-item mod-dark"></h1>
+					<h2 class="skeleton-item mod-dark"></h2>
+					<h3 class="skeleton-item mod-dark"></h3>
+					<h4 class="skeleton-item"></h4>
+					<h5 class="skeleton-item"></h5>
+					<h6 class="skeleton-item"></h6>
+				</div>
+			</td>
+			<td>
+				<lu-skeleton-header [dark]="false" />
+				<lu-skeleton-header [dark]="true" />
 			</td>
 		</tr>
 		<tr>
 			<td>Headings utilities</td>
 			<td>
-				<span class="u-h1 skeleton-item"></span>
-				<span class="u-h2 skeleton-item"></span>
-				<span class="u-h3 skeleton-item"></span>
-				<span class="u-h4 skeleton-item"></span>
-				<span class="u-h5 skeleton-item"></span>
-				<span class="u-h6 skeleton-item"></span>
+				<div class="demo-QAtable-list">
+					<span class="pr-u-h1 skeleton-item"></span>
+					<span class="pr-u-h2 skeleton-item"></span>
+					<span class="pr-u-h3 skeleton-item"></span>
+					<span class="pr-u-h4 skeleton-item"></span>
+					<span class="pr-u-h5 skeleton-item"></span>
+					<span class="pr-u-h6 skeleton-item"></span>
+				</div>
 			</td>
+			<td></td>
 		</tr>
 		<tr>
 			<td>Squares</td>
@@ -45,6 +63,7 @@
 					<span class="skeleton-item mod-square mod-XXL"></span>
 				</div>
 			</td>
+			<td></td>
 		</tr>
 		<tr>
 			<td>Circles</td>
@@ -57,6 +76,46 @@
 					<span class="skeleton-item mod-circle mod-XL"></span>
 					<span class="skeleton-item mod-circle mod-XXL"></span>
 				</div>
+			</td>
+			<td></td>
+		</tr>
+		<tr>
+			<td>Button</td>
+			<td></td>
+			<td>
+				<lu-skeleton-button [dark]="false" />
+				<lu-skeleton-button [dark]="true" />
+			</td>
+		</tr>
+		<tr>
+			<td>Field</td>
+			<td></td>
+			<td>
+				<lu-skeleton-field [dark]="false" [hiddenLabel]="false" [rows]="1" />
+				<lu-skeleton-field [dark]="true" [hiddenLabel]="false" [rows]="1" />
+				<lu-skeleton-field [dark]="false" [hiddenLabel]="true" [rows]="1" />
+				<lu-skeleton-field [dark]="true" [hiddenLabel]="true" [rows]="1" />
+			</td>
+		</tr>
+		<tr>
+			<td>IndexTable</td>
+			<td></td>
+			<td>
+				<lu-skeleton-index-table [cols]="2" [rows]="4" />
+			</td>
+		</tr>
+		<tr>
+			<td>DataTable</td>
+			<td></td>
+			<td>
+				<lu-skeleton-data-table [cols]="2" [rows]="4" />
+			</td>
+		</tr>
+		<tr>
+			<td>Table</td>
+			<td></td>
+			<td>
+				<lu-skeleton-table [cols]="2" [rows]="4" />
 			</td>
 		</tr>
 	</tbody>

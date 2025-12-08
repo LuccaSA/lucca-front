@@ -15,7 +15,7 @@
 		.switch-label {
 			padding: 0;
 			padding-inline-start: calc(var(--components-switch-width) + var(--pr-t-spacings-100));
-			color: var(--palettes-neutral-800);
+			color: var(--pr-t-color-text);
 			transition: color var(--commons-animations-durations-fast);
 			display: inline-block;
 			font-size: var(--components-switch-fontSize);
@@ -28,7 +28,7 @@
 
 				align-items: center;
 				background-color: var(--palettes-neutral-500);
-				border-radius: var(--commons-borderRadius-full);
+				border-radius: var(--pr-t-border-radius-full);
 				color: var(--palettes-neutral-0);
 				display: flex;
 				font-size: var(--components-switch-icon-size);
@@ -47,7 +47,7 @@
 			&::after {
 				background-color: var(--palettes-neutral-0);
 				box-shadow: var(--pr-t-elevation-shadow-overflow);
-				border-radius: var(--commons-borderRadius-full);
+				border-radius: var(--pr-t-border-radius-full);
 				content: '';
 				display: block;
 				block-size: var(--components-switch-slider-size);

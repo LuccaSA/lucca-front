@@ -1,4 +1,6 @@
-import { ArgTypes, StoryObj } from '@storybook/angular';
+import { applicationConfig, Args, ArgTypes, StoryObj } from '@storybook/angular';
+import { PlayFunction, Renderer } from 'storybook/internal/types';
+import { LOCALE_ID } from '@angular/core';
 
 export interface StoryGeneratorArgs<TComponent> {
 	name: string;
@@ -109,4 +111,20 @@ export function generateInputs(inputs: Record<string, unknown>, argTypes: ArgTyp
 		}
 		return `${acc} ${name}="${value.toString()}"`;
 	}, '');
+}
+
+export function createTestStory<TRenderer extends Renderer, TArgs = Args>(story: StoryObj<TArgs>, test: PlayFunction<TRenderer, TArgs>): StoryObj {
+	// We don't handle function decorators at all
+	const storyDecorators = typeof story.decorators === 'function' ? [] : story.decorators;
+	return {
+		...story,
+		decorators: [
+			...(storyDecorators || []),
+			applicationConfig({
+				providers: [{ provide: LOCALE_ID, useValue: 'fr-FR' }],
+			}),
+		],
+		name: `${story.name} TEST`,
+		play: test,
+	};
 }

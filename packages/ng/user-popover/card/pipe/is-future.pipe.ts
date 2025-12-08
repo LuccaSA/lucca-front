@@ -3,7 +3,6 @@ import { isFuture, isToday } from 'date-fns';
 
 @Pipe({
 	name: 'isFuture',
-	standalone: true,
 })
 export class IsFuturePipe implements PipeTransform {
 	public transform(value: Date | undefined): boolean {
@@ -13,9 +12,8 @@ export class IsFuturePipe implements PipeTransform {
 
 @Pipe({
 	name: 'isFutureOrToday',
-	standalone: true,
 })
-export class isFutureOrTodayPipe implements PipeTransform {
+export class IsFutureOrTodayPipe implements PipeTransform {
 	public transform(value: Date | undefined): boolean {
 		return !value || isFuture(value) || isToday(value);
 	}

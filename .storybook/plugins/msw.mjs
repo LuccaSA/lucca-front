@@ -18,6 +18,7 @@ export default {
 					url: `${pathname}/mockServiceWorker.js`,
 					scope: '/',
 				},
+				onUnhandledRequest: 'bypass',
 			});
 		}
 	},

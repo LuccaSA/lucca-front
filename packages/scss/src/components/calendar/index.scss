@@ -2,75 +2,95 @@
 @use '@lucca-front/scss/src/commons/utils/media';
 
 .calendarWrapper {
-	@include wrapperVars;
-
-	&.mod-daysOffHidden {
-		@include daysOffHidden;
+	@layer components {
+		@include wrapperVars;
 	}
 
-	&.mod-daysOverflowingHidden {
-		@include daysOverflowingHidden;
+	@layer mods {
+		&.mod-daysOffHidden {
+			@include daysOffHidden;
+		}
+
+		&.mod-daysOverflowingHidden {
+			@include daysOverflowingHidden;
+		}
 	}
 }
 
 .calendar {
-	@include vars;
-	@include component;
+	@layer components {
+		@include vars;
+		@include component;
+	}
 
-	// if rows have three columns (display for months and years)
-	&:has(.calendar-table-body-row-cell:nth-child(3):last-child) {
-		@include third;
+	@layer mods {
+		// if rows have three columns (display for months and years)
+		&:has(.calendar-table-body-row-cell:nth-child(3):last-child) {
+			@include third;
+		}
 	}
 }
 
 .calendarShortcuts {
-	@include media.max('S') {
-		display: none;
+	@layer components {
+		@include media.max('S') {
+			display: none;
+		}
 	}
 }
 
 .calendar-table-body-row-cell {
-	&.is-daysOff {
-		@include daysOff;
-	}
-
-	&.is-overflow {
-		@include overflow;
-	}
-
-	&.is-current {
-		@include current;
-	}
-
-	&.is-selected,
-	&.is-selectionInProgress {
-		&:not(.is-overflow) {
-			@include selected;
+	@layer mods {
+		&.is-daysOff {
+			@include daysOff;
 		}
-	}
 
-	&.is-singleDayInProgress,
-	&.is-start {
-		@include start;
-	}
+		&.is-overflow {
+			@include overflow;
+		}
 
-	&.is-end {
-		@include end;
-	}
+		&.is-current {
+			@include current;
+		}
 
-	&.is-startInProgress {
-		&:not(.is-endInProgress) {
-			@include startInProgress;
+		&.is-selected,
+		&.is-selectionInProgress {
+			&:not(.is-overflow) {
+				@include selected;
+			}
+		}
+
+		&.is-singleDayInProgress,
+		&.is-start {
+			@include start;
+		}
+
+		&.is-end {
+			@include end;
+		}
+
+		&.is-startInProgress {
+			&:not(.is-endInProgress) {
+				@include startInProgress;
+			}
+
+			&.is-endInProgress {
+				@include startEndInProgress;
+			}
 		}
 
 		&.is-endInProgress {
-			@include startEndInProgress;
+			&:not(.is-startInProgress) {
+				@include endInProgress;
+			}
 		}
-	}
 
-	&.is-endInProgress {
-		&:not(.is-startInProgress) {
-			@include endInProgress;
+		.calendar-table-body-row-cell-action {
+			&:disabled,
+			&[aria-disabled='true'] {
+				@include disabled;
+			}
 		}
 	}
 }
+

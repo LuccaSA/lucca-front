@@ -6,15 +6,15 @@
 	justify-content: center;
 	align-items: center;
 	white-space: nowrap;
-	border-radius: var(--commons-borderRadius-full);
-	font-size: var(--sizes-S-fontSize);
-	line-height: var(--sizes-XS-lineHeight);
-	font-weight: 600;
+	border-radius: var(--pr-t-border-radius-full);
+	font-size: var(--pr-t-font-body-S-fontSize);
+	line-height: var(--pr-t-font-body-XS-lineHeight);
+	font-weight: var(--pr-t-font-fontWeight-semibold);
 	padding-block: var(--pr-t-spacings-50);
 	padding-inline: var(--pr-t-spacings-100);
 
 	.label-icon {
 		margin: 0;
-		font-size: var(--sizes-M-fontSize);
+		font-size: var(--pr-t-font-body-M-fontSize);
 	}
 }

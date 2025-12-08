@@ -7,9 +7,10 @@
 	block-size: var(--components-numericBadge-size);
 	min-inline-size: var(--components-numericBadge-size);
 	padding: var(--pr-t-spacings-50);
-	font-size: var(--components-numericBadge-fontSize);
-	line-height: var(--components-numericBadge-lineHeight);
-	font-weight: 600;
+	font: var(--components-numericBadge-font);
+	font-size: var(--components-numericBadge-fontSize); // Deprecated
+	line-height: var(--components-numericBadge-lineHeight); // Deprecated
+	font-weight: var(--pr-t-font-fontWeight-semibold);
 	background-color: var(--components-numericBadge-background);
 	color: var(--components-numericBadge-color);
 	border-radius: var(--components-numericBadge-borderRadius);
@@ -22,7 +23,7 @@
 	&:empty {
 		&::before {
 			// stylelint-disable-next-line no-irregular-whitespace -- Don’t wrap content because of a space.
-			content: ' ';
+			content: ' ' / '';
 		}
 	}
 

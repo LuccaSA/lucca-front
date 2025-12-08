@@ -7,10 +7,12 @@ import { BaseFileUploadComponent } from '../base-file-upload/base-file-upload.co
 
 @Component({
 	selector: 'lu-multi-file-upload',
-	standalone: true,
 	templateUrl: './multi-file-upload.component.html',
-	styleUrls: ['./multi-file-upload.component.scss'],
+	styleUrl: './multi-file-upload.component.scss',
 	encapsulation: ViewEncapsulation.None,
+	host: {
+		'[class.mod-structure]': 'structure()',
+	},
 	imports: [LuSafeExternalSvgPipe, InputDirective, LuTooltipModule, IntlParamsPipe],
 })
 export class MultiFileUploadComponent extends BaseFileUploadComponent {}

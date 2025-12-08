@@ -28,7 +28,7 @@ function getTemplate(args: ChipBasicStory): string {
 	<div class="chip ${product} ${disabled}">
 		Label
 		<button type="button" class="chip-kill">
-			<span class="u-mask">delete</span>
+			<span class="pr-u-mask">delete</span>
 		</button>
 	</div>
 	<div class="chip ${product} ${disabled}">

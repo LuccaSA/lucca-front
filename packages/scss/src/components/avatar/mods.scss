@@ -1,39 +1,40 @@
 @use '@lucca-front/icons/src/commons/utils/icon';
+@use '@lucca-front/icons/src/icon/exports' as icons;
 
 @mixin XS {
 	--components-avatar-size: 1.5rem;
-	--components-avatar-fontSize: var(--sizes-XS-fontSize);
+	--components-avatar-fontSize: var(--pr-t-font-fontSize-150);
 	--components-avatar-placeholder-size: 0.75rem;
 	--components-avatar-border: 1px;
 }
 
 @mixin S {
 	--components-avatar-size: 2rem;
-	--components-avatar-fontSize: var(--sizes-S-fontSize);
+	--components-avatar-fontSize: var(--pr-t-font-fontSize-175);
 	--components-avatar-placeholder-size: 1rem;
 }
 
 @mixin L {
 	--components-avatar-size: 3rem;
-	--components-avatar-fontSize: var(--sizes-L-fontSize);
+	--components-avatar-fontSize: var(--pr-t-font-fontSize-225);
 	--components-avatar-placeholder-size: 1.75rem;
 }
 
 @mixin XL {
 	--components-avatar-size: 4rem;
-	--components-avatar-fontSize: var(--sizes-XL-fontSize);
+	--components-avatar-fontSize: var(--pr-t-font-fontSize-275);
 	--components-avatar-placeholder-size: 2rem;
 }
 
 @mixin XXL {
 	--components-avatar-size: 5rem;
-	--components-avatar-fontSize: var(--sizes-XXL-fontSize);
+	--components-avatar-fontSize: var(--pr-t-font-fontSize-350);
 	--components-avatar-placeholder-size: 2.25rem;
 }
 
 @mixin XXXL {
 	--components-avatar-size: 6rem;
-	--components-avatar-fontSize: var(--sizes-XXXL-fontSize);
+	--components-avatar-fontSize: 2.25rem;
 	--components-avatar-placeholder-size: 2.5rem;
 }
 
@@ -72,23 +73,33 @@
 }
 
 @mixin placeholder {
-	// .picture is deprecated
-	.avatar-picture,
-	.picture {
+	--components-avatar-picture-initials-display: none;
+
+	.avatar-picture {
 		background-color: var(--palettes-neutral-200) !important;
 
 		&::before {
 			@include icon.generate('people_person');
 
 			color: var(--palettes-neutral-600);
-			font-weight: 400;
+			font-weight: var(--pr-t-font-fontWeight-regular);
 			font-size: var(--components-avatar-placeholder-size);
 		}
 	}
 
-	// .userPicture-initials is deprecated
-	.avatar-picture-initials,
-	.userPicture-initials {
-		display: none;
+}
+
+@mixin AI {
+	--components-avatar-borderRadius: var(--pr-t-border-radius-default);
+	--components-avatar-picture-background: var(--palettes-neutral-0);
+	--components-avatar-picture-initials-display: none;
+
+	.avatar-picture {
+		&::before {
+			@include icons.AI;
+			@include icon.generate('weather_stars');
+
+			font-size: var(--components-avatar-AI-size);
+		}
 	}
 }

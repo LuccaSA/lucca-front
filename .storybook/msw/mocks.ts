@@ -134,6 +134,94 @@ export const mockJobQualifications = [
 		},
 	},
 ];
+export const mockOccupationCategories = [
+	{
+		id: 0,
+		name: 'Cadre',
+		createdAt: '2017-10-12T22:59:23.977',
+		createdBy: {
+			id: 0,
+			firstName: 'Lucca',
+			lastName: 'Admin',
+			fullName: 'Lucca Admin',
+			url: 'https://demo-ux1.ilucca.net/api/v3/users/0',
+		},
+		modifiedAt: '2017-10-12T22:59:23.977',
+		modifiedBy: {
+			id: 0,
+			firstName: 'Lucca',
+			lastName: 'Admin',
+			fullName: 'Lucca Admin',
+			url: 'https://demo-ux1.ilucca.net/api/v3/users/0',
+		},
+		usages: [
+			{
+				id: 1,
+				name: 'Lucca FR',
+				url: 'https://demo-ux1.ilucca.net/organization/structure/api/establishments/1',
+			},
+			{
+				id: 2,
+				name: 'Lucca UK',
+				url: 'https://demo-ux1.ilucca.net/organization/structure/api/establishments/2',
+			},
+		],
+	},
+	{
+		id: 9,
+		name: 'Cadre supérieur',
+		createdAt: '2017-10-12T22:59:23.977',
+		createdBy: {
+			id: 0,
+			firstName: 'Lucca',
+			lastName: 'Admin',
+			fullName: 'Lucca Admin',
+			url: 'https://demo-ux1.ilucca.net/api/v3/users/0',
+		},
+		modifiedAt: '2017-10-12T22:59:23.977',
+		modifiedBy: {
+			id: 0,
+			firstName: 'Lucca',
+			lastName: 'Admin',
+			fullName: 'Lucca Admin',
+			url: 'https://demo-ux1.ilucca.net/api/v3/users/0',
+		},
+		usages: [
+			{
+				id: 1,
+				name: 'Lucca FR',
+				url: 'https://demo-ux1.ilucca.net/organization/structure/api/establishments/1',
+			},
+		],
+	},
+	{
+		id: 18,
+		name: 'Cuadros medios',
+		createdAt: '2020-01-08T21:45:27.2983351',
+		createdBy: {
+			id: 0,
+			firstName: 'Lucca',
+			lastName: 'Admin',
+			fullName: 'Lucca Admin',
+			url: 'https://demo-ux1.ilucca.net/api/v3/users/0',
+		},
+		modifiedAt: '2020-01-08T21:45:27.2983351',
+		modifiedBy: {
+			id: 0,
+			firstName: 'Lucca',
+			lastName: 'Admin',
+			fullName: 'Lucca Admin',
+			url: 'https://demo-ux1.ilucca.net/api/v3/users/0',
+		},
+		usages: [
+			{
+				id: 3,
+				name: 'Lucca España',
+				url: 'https://demo-ux1.ilucca.net/organization/structure/api/establishments/3',
+			},
+		],
+	},
+];
 export const mockDepartmentsTree = [
 	{
 		node: { id: 17, name: 'Lucca France' },
@@ -142,7 +230,13 @@ export const mockDepartmentsTree = [
 				node: { id: 14, name: 'Administration' },
 				children: [
 					{ node: { id: 8, name: 'Comptabilité / Finances' }, children: [] },
-					{ node: { id: 11, name: 'Secrétariat' }, children: [] },
+					{
+						node: { id: 11, name: 'Secrétariat' },
+						children: [
+							{ node: { id: 19, name: 'Sous secrétariat' }, children: [] },
+							{ node: { id: 20, name: 'Sous secrétariat 2' }, children: [] },
+						],
+					},
 				],
 			},
 			{ node: { id: 13, name: 'Direction commerciale' }, children: [] },

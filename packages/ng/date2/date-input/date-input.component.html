@@ -1,5 +1,5 @@
 @if (isFilterPill) {
-<label for="dateInput" class="u-mask">{{ intl.pickDate }}</label>
+	<label for="dateInput" class="pr-u-mask">{{ intl.pickDate }}</label>
 }
 <div class="textField dateField-textField" #popoverAnchor>
 	<div class="textField-input">
@@ -9,9 +9,8 @@
 			#date
 			luInput
 			class="textField-input-value"
-			[value]="displayValue()"
 			(input)="userTextInput.set(date.value)"
-			(blur)="onTouched?.();inputFocused.set(false)"
+			(blur)="inputBlurred()"
 			(focus)="inputFocused.set(true)"
 			aria-haspopup="true"
 			role="combobox"
@@ -25,16 +24,11 @@
 		/>
 
 		<div class="textField-input-affix">
-			@if (clearable() && !disabled() && date.value !== '') {
-			<button class="textField-input-affix-clear clear" type="button" (click)="clear()">
-				<span aria-hidden="true" class="lucca-icon icon-signClose"></span>
-				<span class="u-mask">{{ intl.clear }}</span>
-			</button>
-			} @if (isFilterPill && !isFilterPillEmpty()) {
-			<button class="textField-input-affix-clear clear" type="button" (click)="clear()">
-				<span aria-hidden="true" class="lucca-icon icon-signClose"></span>
-				<span class="u-mask">{{ intl.clear }}</span>
-			</button>
+			@if (clearable() && !disabled() && (clearBehavior() === "clear" ? date.value !== "" : selectedDate() !== initialValue())) {
+				<lu-clear class="textField-input-affix-clear" (onClear)="clear(); date.focus()">{{ intl.clear }}</lu-clear>
+			}
+			@if (isFilterPill && !isFilterPillEmpty()) {
+				<lu-clear class="textField-input-affix-clear" (onClear)="clear(); date.focus()">{{ intl.clear }}</lu-clear>
 			}
 			<button
 				[luPopover2]="calendar"
@@ -44,9 +38,11 @@
 				[luPopoverDisabled]="isFilterPill"
 				#popoverRef="luPopover2"
 				[customPositions]="popoverPositions"
+				(luPopoverClosed)="panelClosed.emit()"
+				(luPopoverOpened)="panelOpened.emit()"
 				tabindex="-1"
 				type="button"
-				class="button mod-onlyIcon mod-text textField-input-affix-toggle"
+				class="button mod-onlyIcon mod-ghost textField-input-affix-toggle"
 			>
 				<lu-icon [icon]="'calendarDate'" [alt]="intl.pickDate" />
 			</button>
@@ -55,21 +51,21 @@
 </div>
 
 @if (isFilterPill) {
-<ng-container *ngTemplateOutlet="calendar"></ng-container>
+	<ng-container *ngTemplateOutlet="calendar" />
 }
 
 <div *luFilterPillDisplayer>{{ displayValue() }}</div>
 
 <ng-template #calendar>
 	<div class="calendarWrapper">
-		<div class="calendarWrapper-navigation u-left0">
+		<div class="calendarWrapper-navigation pr-u-left0">
 			<button class="calendarWrapper-navigation-button button" type="button" (click)="prev(calendarMode())" #previousButtonRef>
-				<span aria-hidden="true" class="lucca-icon icon-chevronLeft"></span><span class="u-mask">{{ intl.previous }}</span>
+				<span aria-hidden="true" class="lucca-icon icon-arrowChevronLeft"></span><span class="pr-u-mask">{{ intl.previous }}</span>
 			</button>
 		</div>
-		<div class="calendarWrapper-navigation u-right0">
+		<div class="calendarWrapper-navigation pr-u-right0">
 			<button class="calendarWrapper-navigation-button button" type="button" (click)="next(calendarMode())" #nextButtonRef>
-				<span aria-hidden="true" class="lucca-icon icon-chevronRight"></span><span class="u-mask"> {{ intl.next }}</span>
+				<span aria-hidden="true" class="lucca-icon icon-arrowChevronRight"></span><span class="pr-u-mask"> {{ intl.next }}</span>
 			</button>
 		</div>
 		<div class="calendarWrapper-content" tabindex="-1">
@@ -89,7 +85,7 @@
 				[(displayMode)]="calendarMode"
 				[mode]="mode()"
 				[hideWeekend]="hideWeekend()"
-			></lu-calendar2>
+			/>
 		</div>
 	</div>
 </ng-template>

@@ -1,13 +1,17 @@
-import { CommentBlockComponent, CommentComponent, CommentChatComponent } from '@lucca-front/ng/comment';
+import { CommentBlockComponent, CommentChatComponent, CommentComponent } from '@lucca-front/ng/comment';
 import { LuUserPictureModule } from '@lucca-front/ng/user';
-import { Meta, moduleMetadata, StoryObj } from '@storybook/angular';
+import { applicationConfig, Meta, moduleMetadata, StoryObj } from '@storybook/angular';
 import { generateInputs } from '../../../../helpers/stories';
+import { LOCALE_ID } from '@angular/core';
 
 export default {
 	title: 'Documentation/Texts/Comment/Angular/Chat',
 	decorators: [
 		moduleMetadata({
 			imports: [CommentComponent, CommentBlockComponent, LuUserPictureModule, CommentChatComponent],
+		}),
+		applicationConfig({
+			providers: [{ provide: LOCALE_ID, useValue: 'fr-FR' }],
 		}),
 	],
 	render: (args, { argTypes }) => {
@@ -36,35 +40,53 @@ export default {
 				argTypes,
 			)} authorName="${firstName} ${lastName}">
 		<ng-template #avatarTpl>
-			<lu-user-picture [user]="{firstName: 'Marie', lastName: 'Bragoulet'}"></lu-user-picture>
+			<lu-user-picture [user]="{firstName: 'Marie', lastName: 'Bragoulet'}" />
 		</ng-template>
-		<lu-comment [date]="date" content="${content}" />
+		<lu-comment [date]="date" content="Lorem ipsum dolor sit amet, consectetur adipisicing elit. Temporibus a veniam necessitatibus aut facilis repellendus provident nulla iste neque ex?" />
 		<lu-comment [date]="date" content="Lorem ipsum dolor sit amet." />
 		<lu-comment [date]="date" content="${richContent}" />
 	</lu-comment-block>
 	<lu-comment-block [chatAnswer]="true" ${avatar2} ${generateInputs({ compact, small }, argTypes)} authorName="Chloé Alibert">
 		<ng-template #avatarTpl2>
-			<lu-user-picture [user]="{firstName: 'Chloé', lastName: 'Alibert'}"></lu-user-picture>
+			<lu-user-picture [user]="{firstName: 'Chloé', lastName: 'Alibert'}" />
 		</ng-template>
-		<lu-comment [date]="date" content="${content}" />
+		<lu-comment [date]="date" content="Lorem ipsum dolor sit amet, consectetur adipisicing elit. Temporibus a veniam necessitatibus aut facilis repellendus provident nulla iste neque ex?" />
 	</lu-comment-block>
 </lu-comment-chat>`,
 		};
 	},
 	argTypes: {
+		noAvatar: {
+			description: "Masque l'avatar.",
+		},
 		compact: {
 			description: "N'affiche l'auteur que sur le premier commentaire de <code><lu-comment-block></code>",
+		},
+		small: {
+			description: 'Modifie la taille du composant.',
+		},
+		date: {
+			description: 'Modifie la date du commentaire.',
+		},
+		datePipeFormat: {
+			description: "[v20.3] Modifie le format de date affiché, via <a href='https://angular.dev/api/common/DatePipe' target='_blank'>Angular DatePipe</a>. Exemples : 'mediumDate', 'YYYY', etc.",
+		},
+		firstName: {
+			description: "Modifie le prénom de l'auteur.",
+		},
+		lastName: {
+			description: "Modifie le nom de l'auteur.",
 		},
 	},
 } as Meta;
 
 export const Chat: StoryObj = {
 	args: {
-		content: `Lorem ipsum dolor sit amet, consectetur adipisicing elit. Temporibus a veniam necessitatibus aut facilis repellendus provident nulla iste neque ex?`,
 		noAvatar: false,
 		compact: false,
 		small: false,
 		date: new Date(),
+		datePipeFormat: '',
 		firstName: 'Marie',
 		lastName: 'Bragoulet',
 	},

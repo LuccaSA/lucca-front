@@ -10,12 +10,11 @@
 	--components-horizontalNavigation-listAlign: flex-end;
 	--components-horizontalNavigation-listItemActionAlign: center;
 	--components-horizontalNavigation-listItemActionTransform: scale(0, 1);
-	--components-horizontalNavigation-listItemActionColor: var(--palettes-neutral-800);
+	--components-horizontalNavigation-listItemActionColor: var(--pr-t-color-text);
 	--components-horizontalNavigation-listItemActionSize: 2px;
-	--components-horizontalNavigation-listItemActionFontSize: inherit;
-	--components-horizontalNavigation-listItemActionLineHeight: inherit;
+	--components-horizontalNavigation-listItemActionFont: inherit;
 	--components-horizontalNavigation-listItemActionInset: auto 0 0 0;
-	--components-horizontalNavigation-listItemActionRadius: var(--commons-borderRadius-M) var(--commons-borderRadius-M) 0 0;
+	--components-horizontalNavigation-listItemActionRadius: var(--pr-t-border-radius-default) var(--pr-t-border-radius-default) 0 0;
 	--components-horizontalNavigation-listItemActionRadiusWidth: auto;
 	--components-horizontalNavigation-listItemActionRadiusHeight: var(--components-horizontalNavigation-listItemActionSize);
 }

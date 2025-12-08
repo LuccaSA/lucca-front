@@ -20,7 +20,7 @@ function getTemplate(args: FilesUploadingStory): string {
 			</span>
 			<span class="file-or"></span>
 			<span class="file-button button mod-outlined"></span>
-			<span class="u-mask"></span>
+			<span class="pr-u-mask"></span>
 			<span class="file-formats pr-u-marginBlockStart100"></span>
 			<span class="file-progress progress">
 				<span class="progress-bar" style="width: 50%"></span>

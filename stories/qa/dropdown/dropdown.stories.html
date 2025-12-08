@@ -1,0 +1,105 @@
+<table class="demo-QAtable">
+	<tbody>
+		<tr>
+			<td></td>
+			<td style="width: 50%">
+				<div class="demo-QAtable-list">HTML</div>
+			</td>
+			<td style="width: 50%">
+				<div class="demo-QAtable-list">Angular</div>
+			</td>
+		</tr>
+		<tr>
+			<td>Default</td>
+			<td>
+				<div class="demo-QAtable-list">
+					<div class="dropdown">
+						<ul class="dropdown-list">
+							<li class="dropdown-list-option">
+								<button type="button" class="dropdown-list-option-action" disabled="disabled">
+									<lu-icon icon="eye" />
+									Prévisualiser
+								</button>
+							</li>
+							<li class="dropdown-list-option" aria-hidden="true">
+								<lu-divider class="dropdown-list-option-divider" />
+							</li>
+							<li class="dropdown-list-option">
+								<button type="button" class="dropdown-list-option-action">
+									<lu-icon icon="officePen" />
+									Modifier
+								</button>
+							</li>
+							<li class="dropdown-list-option">
+								<button type="button" class="dropdown-list-option-action">
+									<lu-icon icon="boxArchive" />
+									Archiver
+								</button>
+							</li>
+							<li class="dropdown-list-option">
+								<button type="button" class="dropdown-list-option-action">
+									<lu-icon icon="fileCopy" />
+									Dupliquer
+								</button>
+							</li>
+							<li class="dropdown-list-option">
+								<button type="button" class="dropdown-list-option-action mod-critical">
+									<lu-icon icon="trashDelete" />
+									Supprimer
+								</button>
+							</li>
+						</ul>
+					</div>
+				</div>
+			</td>
+			<td>
+				<div class="demo-QAtable-list">
+					<lu-dropdown-menu>
+						<lu-dropdown-item>
+							<button lu-dropdown-action type="button">
+								<lu-icon icon="heart" />
+								Lorem
+							</button>
+						</lu-dropdown-item>
+						<lu-dropdown-item>
+							<button lu-dropdown-action disabled type="button">
+								<lu-icon icon="cross" />
+								Lorem
+							</button>
+						</lu-dropdown-item>
+						<lu-dropdown-divider />
+						<lu-dropdown-item>
+							<button lu-dropdown-action type="button">
+								<lu-icon icon="star" />
+								Ipsum
+							</button>
+						</lu-dropdown-item>
+						<lu-dropdown-group label="Group">
+							<lu-dropdown-item>
+								<button lu-dropdown-action type="button">
+									<lu-icon icon="buildingHouse" />
+									Dolor
+								</button>
+							</lu-dropdown-item>
+							<lu-dropdown-item>
+								<a lu-dropdown-action critical href="#">
+									<lu-icon icon="trashDelete" />
+									Sit amet
+								</a>
+							</lu-dropdown-item>
+							<lu-dropdown-item>
+								<span lu-dropdown-action disabled class="dropdown-list-option-action">
+									<lu-icon icon="cross" />
+									Sit amet
+								</span>
+							</lu-dropdown-item>
+						</lu-dropdown-group>
+					</lu-dropdown-menu>
+				</div>
+			</td>
+		</tr>
+	</tbody>
+</table>
+
+<!-- To tell the ui-diff tool that the page has finished rendering -->
+<span id="ready"></span>

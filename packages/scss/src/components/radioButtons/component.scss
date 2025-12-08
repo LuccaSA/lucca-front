@@ -14,13 +14,13 @@
 				margin-inline-start: 0;
 
 				.radioButtons-item-label {
-					border-radius: var(--commons-borderRadius-M) 0 0 var(--commons-borderRadius-M);
+					border-radius: var(--pr-t-border-radius-default) 0 0 var(--pr-t-border-radius-default);
 				}
 			}
 
 			&:last-child {
 				.radioButtons-item-label {
-					border-radius: 0 var(--commons-borderRadius-M) var(--commons-borderRadius-M) 0;
+					border-radius: 0 var(--pr-t-border-radius-default) var(--pr-t-border-radius-default) 0;
 				}
 			}
 		}
@@ -31,8 +31,7 @@
 			gap: var(--pr-t-spacings-100);
 			background-color: var(--palettes-neutral-0);
 			padding: var(--components-radioButtons-padding);
-			font-size: var(--components-radioButtons-font-size);
-			line-height: var(--components-radioButtons-line-height);
+			font: var(--components-radioButtons-font);
 			color: var(--palettes-neutral-700);
 			box-shadow: 0 0 0 var(--commons-divider-width) var(--palettes-neutral-300);
 			transition-duration: var(--commons-animations-durations-fast);

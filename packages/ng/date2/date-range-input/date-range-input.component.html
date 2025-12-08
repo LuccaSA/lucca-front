@@ -1,28 +1,28 @@
 <fieldset class="dateRangeField-fieldset">
 	<legend>
-		<span class="u-mask">
-			<ng-container *luPortal="label"></ng-container>
+		<span class="pr-u-mask">
+			<ng-container *luPortal="label" />
 		</span>
 	</legend>
 	<div class="dateRangeField-fieldset-textField textField" #popoverAnchor>
 		<div class="textField-input">
 			<div class="dateRangeField-fieldset-content mod-start" [class.is-highlighted]="highlightedField() === 0">
-				<label for="range-input-start-{{idSuffix}}" class="u-mask">Start</label>
+				<label for="range-input-start-{{ idSuffix }}" class="pr-u-mask">Start</label>
 				<input
 					type="text"
 					#start
-					id="range-input-start-{{idSuffix}}"
-					attr.aria-describedby="range-input-start-{{idSuffix}}-message"
+					id="range-input-start-{{ idSuffix }}"
+					attr.aria-describedby="range-input-start-{{ idSuffix }}-message"
 					luInput
 					luInputStandalone
 					class="textField-input-value dateRangeField-fieldset-input-value"
 					[value]="startLabel()"
-					(input)="startTextInput.set(start.value)"
+					(input)="textInputChange(start.value, 'start')"
 					(blur)="inputBlur()"
-					(focus)="inputFocused.set(true);editedField.set(0);highlightedField.set(0)"
+					(focus)="inputFocused.set(true); editedField.set(0); highlightedField.set(0)"
 					aria-haspopup="true"
 					role="combobox"
-					(click)="editedField.set(0);openPopover(popoverRef, 'start')"
+					(click)="editedField.set(0); openPopover(popoverRef, 'start')"
 					(keydown.arrowDown)="arrowDown(popoverRef, 'start')"
 					(keydown.escape)="popoverRef.close()"
 					[disabled]="disabled()"
@@ -31,22 +31,22 @@
 				/>
 			</div>
 			<div class="dateRangeField-fieldset-content mod-end" [class.is-highlighted]="highlightedField() === 1">
-				<label for="range-input-end-{{idSuffix}}" class="u-mask">End</label>
+				<label for="range-input-end-{{ idSuffix }}" class="pr-u-mask">End</label>
 				<input
 					type="text"
 					#end
-					id="range-input-end-{{idSuffix}}"
-					attr.aria-describedby="range-input-start-{{idSuffix}}-message"
+					id="range-input-end-{{ idSuffix }}"
+					attr.aria-describedby="range-input-start-{{ idSuffix }}-message"
 					luInput
 					luInputStandalone
 					class="textField-input-value dateRangeField-fieldset-input-value"
 					[value]="endLabel()"
-					(input)="endTextInput.set(end.value)"
-					(blur)="inputBlur();fixOrderIfNeeded()"
-					(focus)="inputFocused.set(true);editedField.set(1);highlightedField.set(1)"
+					(input)="textInputChange(start.value, 'end')"
+					(blur)="inputBlur(); fixOrderIfNeeded()"
+					(focus)="inputFocused.set(true); editedField.set(1); highlightedField.set(1)"
 					aria-haspopup="true"
 					role="combobox"
-					(click)="editedField.set(1);openPopover(popoverRef, 'end')"
+					(click)="editedField.set(1); openPopover(popoverRef, 'end')"
 					(keydown.arrowDown)="arrowDown(popoverRef, 'end')"
 					(keydown.escape)="popoverRef.close()"
 					[disabled]="disabled()"
@@ -56,12 +56,11 @@
 			</div>
 			<lu-icon [icon]="'arrowRight'" [alt]="''" class="dateRangeField-fieldset-arrow" />
 			<div class="textField-input-affix">
-				@if (!isFilterPill) { @if (clearable() && (start.value !== '' || end.value !== '')) {
-				<button class="textField-input-affix-clear clear" type="button" (click)="clear(start, end)">
-					<span aria-hidden="true" class="lucca-icon icon-signClose"></span>
-					<span class="u-mask">{{ intl.clear }}</span>
-				</button>
-				} }
+				@if (!isFilterPill) {
+					@if (clearable() && (start.value !== "" || end.value !== "")) {
+						<lu-clear class="textField-input-affix-clear" (onClear)="clear(); start.focus()">{{ intl.clear }}</lu-clear>
+					}
+				}
 				<button
 					[luPopover2]="calendar"
 					[disabled]="disabled()"
@@ -70,9 +69,10 @@
 					#popoverRef="luPopover2"
 					[customPositions]="popoverPositions"
 					(luPopoverClosed)="popoverClosed()"
+					(luPopoverOpened)="panelOpened.emit()"
 					tabindex="-1"
 					type="button"
-					class="button mod-onlyIcon mod-text textField-input-affix-toggle"
+					class="button mod-onlyIcon mod-ghost textField-input-affix-toggle"
 					(click)="editedField.set(0)"
 				>
 					<lu-icon [icon]="'calendarPlanning'" [alt]="intl.pickDate" />
@@ -85,30 +85,30 @@
 <ng-template #calendar>
 	<div class="calendarShortcutsOptional">
 		@if (shortcuts()?.length > 0) {
-		<ul
-			class="calendarShortcuts"
-			[class.mod-day]="mode() === 'day'"
-			[class.mod-month]="mode() === 'month'"
-			[class.mod-year]="mode() === 'year'"
-		>
-			@for (shortcut of shortcuts(); track $index) {
-			<li class="calendarShortcutsButton-item">
-				<button type="button" class="calendarShortcutsButton-item-button button" (click)="selectShortcut(shortcut, popoverRef)">
-					{{ shortcut.label }}
-				</button>
-			</li>
-			}
-		</ul>
+			<ul
+				class="calendarShortcuts"
+				[class.mod-day]="mode() === 'day'"
+				[class.mod-month]="mode() === 'month'"
+				[class.mod-year]="mode() === 'year'"
+			>
+				@for (shortcut of shortcuts(); track $index) {
+					<li class="calendarShortcutsButton-item">
+						<button type="button" class="calendarShortcutsButton-item-button button" (click)="selectShortcut(shortcut, popoverRef)">
+							{{ shortcut.label }}
+						</button>
+					</li>
+				}
+			</ul>
 		}
 		<div class="calendarWrapper">
-			<div class="calendarWrapper-navigation u-left0">
+			<div class="calendarWrapper-navigation pr-u-left0">
 				<button class="calendarWrapper-navigation-button button" type="button" (click)="prev(mode())" #previousButtonRef>
-					<span aria-hidden="true" class="lucca-icon icon-chevronLeft"></span><span class="u-mask">{{ intl.previous }}</span>
+					<span aria-hidden="true" class="lucca-icon icon-arrowChevronLeft"></span><span class="pr-u-mask">{{ intl.previous }}</span>
 				</button>
 			</div>
-			<div class="calendarWrapper-navigation u-right0">
+			<div class="calendarWrapper-navigation pr-u-right0">
 				<button class="calendarWrapper-navigation-button button" type="button" (click)="next(mode())" #nextButtonRef>
-					<span aria-hidden="true" class="lucca-icon icon-chevronRight"></span><span class="u-mask"> {{ intl.next }}</span>
+					<span aria-hidden="true" class="lucca-icon icon-arrowChevronRight"></span><span class="pr-u-mask"> {{ intl.next }}</span>
 				</button>
 			</div>
 			<div class="calendarWrapper-content" tabindex="-1">
@@ -128,25 +128,25 @@
 					[mode]="mode()"
 					[hideWeekend]="hideWeekend()"
 					[disableModeChange]="true"
-				></lu-calendar2>
+				/>
 				@if (hasTwoCalendars()) {
-				<lu-calendar2
-					[removeYearOverflow]="true"
-					[hideToday]="hideToday()"
-					[date]="currentRightDate()"
-					(dateChange)="currentDateChangeFromCalendar($event)"
-					[tabbableDate]="tabbableDate()"
-					(tabbableDateChange)="tabbableDateChange($event, 1)"
-					[getCellInfo]="combinedGetCellInfo"
-					[(dateHovered)]="dateHovered"
-					[ranges]="calendarRanges()"
-					(dateClicked)="dateClicked($event, popoverRef)"
-					(nextPage)="move(1, mode())"
-					(previousPage)="move(-1, mode())"
-					[mode]="mode()"
-					[hideWeekend]="hideWeekend()"
-					[disableModeChange]="true"
-				></lu-calendar2>
+					<lu-calendar2
+						[removeYearOverflow]="true"
+						[hideToday]="hideToday()"
+						[date]="currentRightDate()"
+						(dateChange)="currentDateChangeFromCalendar($event)"
+						[tabbableDate]="tabbableDate()"
+						(tabbableDateChange)="tabbableDateChange($event, 1)"
+						[getCellInfo]="combinedGetCellInfo"
+						[(dateHovered)]="dateHovered"
+						[ranges]="calendarRanges()"
+						(dateClicked)="dateClicked($event, popoverRef)"
+						(nextPage)="move(1, mode())"
+						(previousPage)="move(-1, mode())"
+						[mode]="mode()"
+						[hideWeekend]="hideWeekend()"
+						[disableModeChange]="true"
+					/>
 				}
 			</div>
 		</div>
@@ -154,13 +154,14 @@
 </ng-template>
 
 @if (isFilterPill) {
-<ng-container *ngTemplateOutlet="calendar"></ng-container>
+	<ng-container *ngTemplateOutlet="calendar" />
 }
 
 <ng-container *luFilterPillDisplayer="let empty = isEmpty">
 	@if (!empty) {
-	<span class="u-mask">{{ intl.from }}</span>
-	{{ startLabel() }}
-	<lu-icon [icon]="'arrowRight'" size="XS" [alt]="intl.to" />
-	{{ endLabel() }} }
+		<span class="pr-u-mask">{{ intl.from }}</span>
+		{{ startLabel() }}
+		<lu-icon [icon]="'arrowRight'" size="XS" [alt]="intl.to" />
+		{{ endLabel() }}
+	}
 </ng-container>

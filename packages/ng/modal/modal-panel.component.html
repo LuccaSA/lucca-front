@@ -8,28 +8,31 @@
 >
 	<div [class]="modalClasses.panelContainer" role="document">
 		<div class="lu-modal-header" tabindex="-1" cdkFocusInitial>
-			<button type="button" class="button mod-onlyIcon mod-text mod-S lu-modal-header-close" (click)="dismiss()" [luTooltip]="closeLabel">
+			<button type="button" class="button mod-onlyIcon mod-ghost mod-S lu-modal-header-close" (click)="dismiss()" [luTooltip]="closeLabel">
 				<span aria-hidden="true" class="lucca-icon icon-signClose"></span>
-				<span class="u-mask">{{ closeLabel }}</span>
+				<span class="pr-u-mask">{{ closeLabel }}</span>
 			</button>
 			<h1 [attr.id]="'luModalTitle' + modalId" class="lu-modal-header-title">{{ title$ | async }}</h1>
 		</div>
 		<div class="lu-modal-content">
-			<ng-container #container></ng-container>
+			<ng-container #container />
 		</div>
 		<div class="lu-modal-footer">
-			<button
-				type="button"
-				*ngIf="!isSubmitHidden"
-				class="button palette-{{ submitPalette }}"
-				[disabled]="submitDisabled$ | async"
-				[class]="submitClass$ | async"
-				(click)="submit()"
-			>
-				{{ submitLabel$ | async }}
-				<label class="numericBadge palette-product" *ngIf="hasSubmitCounter$ | async">{{ submitCounter$ | async }}</label>
-			</button>
-			<button type="button" class="button mod-text" (click)="dismiss()">{{ cancelLabel$ | async }}</button>
+			@if (!isSubmitHidden) {
+				<button
+					type="button"
+					class="button palette-{{ submitPalette }}"
+					[ngClass]="submitClass$ | async"
+					[disabled]="submitDisabled$ | async"
+					(click)="submit()"
+				>
+					{{ submitLabel$ | async }}
+					@if (hasSubmitCounter$ | async) {
+						<label class="numericBadge palette-product">{{ submitCounter$ | async }}</label>
+					}
+				</button>
+			}
+			<button type="button" class="button mod-ghost" (click)="dismiss()">{{ cancelLabel$ | async }}</button>
 		</div>
 	</div>
 </div>

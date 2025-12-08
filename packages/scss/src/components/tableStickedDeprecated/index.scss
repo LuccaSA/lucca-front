@@ -3,68 +3,74 @@
 @use 'exports' as *;
 
 .table {
-	@include vars;
-
-	&.mod-stickyColumn {
-		@include stickyColumn;
+	@layer components {
+		@include vars;
 	}
 
-	@each $breakpoint, $value in config.$breakpoints {
-		@include media.min($breakpoint) {
-			&.mod-stickyColumn\@mediaMin#{$breakpoint} {
-				@include stickyColumn;
-			}
+	@layer mods {
+		&.mod-stickyColumn {
+			@include stickyColumn;
 		}
-	}
-
-	&.mod-stickyColumn-shadow {
-		@include shadow;
-	}
-
-	&[class*='mod-stickyColumn'] {
-		.table-head-row-cell,
-		.table-body-row-cell,
-		.table-foot-row-cell {
-			@for $i from 0 through 50 {
-				&.mod-stickyColumn-leftOffset#{$i} {
-					@include leftOffset($i);
-				}
-
-				&.mod-stickyColumn-rightOffset#{$i} {
-					@include rightOffset($i);
-				}
-			}
-		}
-	}
-
-	[class*='sticky'][class*='shadow-wrapper'] {
-		@include wrapper;
-	}
-
-	&[class*='mod-stickyHeader'] {
-		@include stickyHeaderCommon;
 
 		@each $breakpoint, $value in config.$breakpoints {
-			@include media.max($breakpoint) {
+			@include media.min($breakpoint) {
 				&.mod-stickyColumn\@mediaMin#{$breakpoint} {
-					@include stickyColumnBreakpoint;
+					@include stickyColumn;
 				}
 			}
 		}
-	}
 
-	&.mod-stickyHeader {
-		@include stickyHeader;
-	}
+		&.mod-stickyColumn-shadow {
+			@include shadow;
+		}
 
-	&.mod-stickyHeader-withBanner {
-		@include stickyHeaderBanner;
+		&[class*='mod-stickyColumn'] {
+			.table-head-row-cell,
+			.table-body-row-cell,
+			.table-foot-row-cell {
+				@for $i from 0 through 50 {
+					&.mod-stickyColumn-leftOffset#{$i} {
+						@include leftOffset($i);
+					}
+
+					&.mod-stickyColumn-rightOffset#{$i} {
+						@include rightOffset($i);
+					}
+				}
+			}
+		}
+
+		[class*='sticky'][class*='shadow-wrapper'] {
+			@include wrapper;
+		}
+
+		&[class*='mod-stickyHeader'] {
+			@include stickyHeaderCommon;
+
+			@each $breakpoint, $value in config.$breakpoints {
+				@include media.max($breakpoint) {
+					&.mod-stickyColumn\@mediaMin#{$breakpoint} {
+						@include stickyColumnBreakpoint;
+					}
+				}
+			}
+		}
+
+		&.mod-stickyHeader {
+			@include stickyHeader;
+		}
+
+		&.mod-stickyHeader-withBanner {
+			@include stickyHeaderBanner;
+		}
 	}
 }
 
 .table-body-row,
 .table-foot-row {
-	&.mod-stickyHeader-shadow {
-		@include stickyHeaderShadow;
+	@layer mods {
+		&.mod-stickyHeader-shadow {
+			@include stickyHeaderShadow;
+		}
 	}
 }

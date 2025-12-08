@@ -1,4 +1,4 @@
-import { CommonModule, FormStyle, getLocaleDayNames, getLocaleFirstDayOfWeek, TranslationWidth } from '@angular/common';
+import { FormStyle, getLocaleDayNames, getLocaleFirstDayOfWeek, TranslationWidth } from '@angular/common';
 import { ChangeDetectionStrategy, ChangeDetectorRef, Component, ElementRef, forwardRef, Inject, Input, LOCALE_ID, OnInit, Renderer2 } from '@angular/core';
 import { AbstractControl, ControlValueAccessor, FormsModule, NG_VALIDATORS, NG_VALUE_ACCESSOR, ValidationErrors, Validator } from '@angular/forms';
 import { ALuDateAdapter, ELuDateGranularity, getIntl, LuDateGranularity } from '@lucca-front/ng/core';
@@ -10,10 +10,9 @@ import { ICalendarItem } from './calendar-item.interface';
 @Component({
 	selector: 'lu-calendar',
 	templateUrl: './calendar-input.component.html',
-	styleUrls: ['./calendar-input.component.scss'],
+	styleUrl: './calendar-input.component.scss',
 	changeDetection: ChangeDetectionStrategy.OnPush,
-	standalone: true,
-	imports: [FormsModule, CommonModule],
+	imports: [FormsModule],
 	providers: [
 		{
 			provide: NG_VALUE_ACCESSOR,
@@ -279,10 +278,6 @@ export class LuCalendarInputComponent<D> extends ALuInput<D> implements ControlV
 				break;
 		}
 		this.render();
-	}
-
-	trackBy(_idx, item: ICalendarItem<D>) {
-		return item.id;
 	}
 
 	increaseGranularity() {

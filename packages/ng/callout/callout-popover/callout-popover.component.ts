@@ -1,19 +1,33 @@
 import { animate, state, style, transition, trigger } from '@angular/animations';
 import { Overlay, OverlayRef } from '@angular/cdk/overlay';
 import { TemplatePortal } from '@angular/cdk/portal';
-import { CommonModule } from '@angular/common';
-import { ChangeDetectionStrategy, Component, ElementRef, inject, Input, numberAttribute, OnDestroy, TemplateRef, ViewChild, ViewContainerRef, ViewEncapsulation } from '@angular/core';
+import {
+	booleanAttribute,
+	ChangeDetectionStrategy,
+	Component,
+	contentChildren,
+	ElementRef,
+	inject,
+	input,
+	Input,
+	numberAttribute,
+	OnDestroy,
+	TemplateRef,
+	ViewChild,
+	ViewContainerRef,
+	ViewEncapsulation,
+} from '@angular/core';
 import { LuccaIcon } from '@lucca-front/icons';
 import { Palette, PortalContent, PortalDirective } from '@lucca-front/ng/core';
 import { IconComponent } from '@lucca-front/ng/icon';
+import { CalloutFeedbackItemComponent } from '../callout-feedback-item/callout-feedback-item.component';
 import { CalloutIconPipe } from '../callout-icon.pipe';
 import { CalloutState } from '../callout-state';
 import { getCalloutPalette } from '../callout.utils';
 
 @Component({
 	selector: 'lu-callout-popover',
-	standalone: true,
-	imports: [CommonModule, IconComponent, PortalDirective, CalloutIconPipe],
+	imports: [IconComponent, PortalDirective, CalloutIconPipe],
 	animations: [
 		trigger('tooltip', [
 			state(
@@ -34,7 +48,7 @@ import { getCalloutPalette } from '../callout.utils';
 		]),
 	],
 	templateUrl: './callout-popover.component.html',
-	styleUrls: ['./callout-popover.component.scss'],
+	styleUrl: './callout-popover.component.scss',
 	changeDetection: ChangeDetectionStrategy.OnPush,
 	encapsulation: ViewEncapsulation.None,
 })
@@ -70,10 +84,17 @@ export class CalloutPopoverComponent implements OnDestroy {
 	readonly closeDelay = 500;
 
 	/**
-	 * Label to put inside the button, often used to show just a number
+	 * Label (visual only) to put inside the button, often used to show just a number
 	 */
 	@Input()
 	buttonLabel: string;
+
+	/**
+	 * Alternative for the button
+	 */
+	buttonAlt = input<string>('');
+
+	headingHiddenIfSingleItem = input(false, { transform: booleanAttribute });
 
 	/**
 	 * Palette for both the button and the popover content
@@ -106,8 +127,10 @@ export class CalloutPopoverComponent implements OnDestroy {
 	/**
 	 * Heading for the details popover
 	 */
-	@Input({ required: true })
+	@Input()
 	heading: PortalContent;
+
+	feedbackItems = contentChildren(CalloutFeedbackItemComponent, { descendants: true });
 
 	get contentSize(): 'S' | 'M' | undefined {
 		if (this.size === 'XS') {
@@ -126,7 +149,7 @@ export class CalloutPopoverComponent implements OnDestroy {
 
 	get calloutOverlayClasses() {
 		return {
-			[`mod-${this.size}`]: !!this.size,
+			[`mod-${this.contentSize}`]: !!this.contentSize,
 		};
 	}
 

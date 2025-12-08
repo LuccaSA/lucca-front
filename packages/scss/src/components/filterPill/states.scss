@@ -1,4 +1,5 @@
 @use '@lucca-front/scss/src/commons/utils/a11y';
+@use '@lucca-front/scss/src/components/clear/exports' as clear;
 
 @mixin checkboxChecked {
 	--components-filterPill-borderColor: var(--palettes-product-300);
@@ -18,7 +19,7 @@
 @mixin hover {
 	--components-filterPill-borderColor: var(--palettes-product-400);
 	--components-filterPill-checkbox-borderColor: var(--palettes-neutral-600);
-	--components-filterPill-shadow: 0 0 0 1px var(--components-filterPill-borderColor), var(--pr-t-elevation-shadow-raised);
+	--components-filterPill-shadow: 0 0 0 1px var(--components-filterPill-borderColor), var(--pr-t-elevation-shadow-button);
 }
 
 @mixin active {
@@ -26,7 +27,7 @@
 
 	box-shadow:
 		0 0 0 1px var(--palettes-product-500),
-		var(--pr-t-elevation-shadow-raised);
+		var(--pr-t-elevation-shadow-button);
 }
 
 @mixin filledHover {
@@ -66,7 +67,6 @@
 	--components-filterPill-backgroundColor: var(--palettes-product-50);
 	--components-filterPill-color: var(--palettes-product-800);
 	--components-filterPill-toggle-iconColor: var(--palettes-product-700);
-	--components-filterPill-clear-display: grid;
 }
 
 @mixin notFilled {
@@ -91,7 +91,6 @@
 }
 
 @mixin disabled {
-	--components-filterPill-clear-display: none;
 	--components-filterPill-backgroundColor: var(--palettes-neutral-50);
 	--components-filterPill-borderColor: var(--palettes-neutral-300) !important;
 	--components-filterPill-color: var(--palettes-neutral-500);
@@ -101,6 +100,8 @@
 	--components-filterPill-shadow: 0 0 0 1px var(--components-filterPill-borderColor);
 
 	box-shadow: var(--components-filterPill-shadow);
+
+	@include clear.hidden;
 
 	// TODO
 	// --components-filterPill-checkbox-borderColor: var(--palettes-neutral-600);

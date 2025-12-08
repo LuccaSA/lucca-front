@@ -2,6 +2,7 @@
 @use '@lucca-front/scss/src/commons/utils/loading';
 @use '@lucca-front/scss/src/commons/utils/a11y';
 @use '@lucca-front/scss/src/commons/utils/color';
+@use '@lucca-front/scss/src/commons/utils/media';
 @use '@lucca-front/scss/src/commons/utils/keyframe';
 @use '@lucca-front/scss/src/commons/utils/namespace';
 @use '@lucca-front/scss/src/components/numericBadge/exports' as numericBadge;
@@ -87,7 +88,7 @@
 			color: var(--components-navSide-fullwidth-palette-text);
 			transition-property: background-color, color;
 			transition-duration: var(--commons-animations-durations-fast);
-			border-radius: var(--commons-borderRadius-M);
+			border-radius: var(--pr-t-border-radius-default);
 
 			&:focus-visible {
 				@include a11y.focusVisible;
@@ -108,11 +109,11 @@
 		}
 
 		.navSide-item-link {
-			font-size: var(--sizes-S-fontSize);
-			line-height: var(--sizes-S-lineHeight);
+			font-size: var(--pr-t-font-body-S-fontSize);
+			line-height: var(--pr-t-font-body-S-lineHeight);
 			padding-block: var(--pr-t-spacings-150);
 			padding-inline: var(--pr-t-spacings-200);
-			font-weight: 600;
+			font-weight: var(--pr-t-font-fontWeight-semibold);
 		}
 
 		.navSide-item-link-badgesOptional {
@@ -146,11 +147,11 @@
 		}
 
 		.navSide-item-subMenu-link {
-			font-weight: 400;
+			font-weight: var(--pr-t-font-fontWeight-regular);
 			padding-block: var(--pr-t-spacings-100);
 			padding-inline: var(--pr-t-spacings-600) var(--pr-t-spacings-200);
-			font-size: var(--sizes-S-fontSize);
-			line-height: var(--sizes-S-lineHeight);
+			font-size: var(--pr-t-font-body-S-fontSize);
+			line-height: var(--pr-t-font-body-S-lineHeight);
 		}
 
 		.navSide-item-subMenu-item {
@@ -175,21 +176,15 @@
 		}
 
 		.navSide-bottomSection {
-			block-size: var(--components-navSide-bottom-section-height);
 			inline-size: var(--commons-navSide-width);
+			padding: var(--pr-t-spacings-100);
 			z-index: 1;
-
-			.navSide-item,
-			.navSide-item-link {
-				block-size: 100%;
-				background-color: transparent;
-				padding: 0.5em;
-			}
 
 			.navSide-item-link {
 				background-color: var(--components-navSide-bottom-section-palette-bg-color);
 				color: var(--components-navSide-bottom-section-palette-text);
-				padding: var(--pr-t-spacings-200);
+				padding-block: var(--pr-t-spacings-150);
+				padding-inline: var(--pr-t-spacings-200);
 				box-sizing: border-box;
 				cursor: pointer;
 
@@ -197,6 +192,10 @@
 					background-color: var(--components-navSide-bottom-section-palette-hovered-bg);
 					color: var(--components-navSide-bottom-section-palette-hovered-text);
 				}
+			}
+
+			&:empty {
+				display: none;
 			}
 		}
 
@@ -219,7 +218,7 @@
 			}
 
 			&::after {
-				border-radius: var(--commons-borderRadius-M);
+				border-radius: var(--pr-t-border-radius-default);
 				flex: 1 1 auto;
 				block-size: 0.9em;
 				margin-inline-start: 1em;

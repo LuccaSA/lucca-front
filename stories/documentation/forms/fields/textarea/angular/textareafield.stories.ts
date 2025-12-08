@@ -15,6 +15,7 @@ export default {
 	argTypes: {
 		tooltip: {
 			type: 'string',
+			if: { arg: 'hiddenLabel', truthy: false },
 		},
 		size: {
 			options: ['M', 'S', 'XS'],
@@ -31,9 +32,6 @@ export default {
 		rows: {
 			control: { type: 'number' },
 			description: '[v18.1]',
-		},
-		counter: {
-			description: '[v17.4]',
 		},
 		autoResize: {
 			type: 'boolean',
@@ -78,9 +76,9 @@ export const Basic: StoryObj<TextareaInputComponent & { disabled: boolean; requi
 		};
 	},
 	args: {
+		hiddenLabel: false,
 		label: 'Label',
 		required: true,
-		hiddenLabel: false,
 		disabled: false,
 		inlineMessage: 'Helper text',
 		inlineMessageState: 'default',

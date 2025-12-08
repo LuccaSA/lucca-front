@@ -33,6 +33,11 @@ export default {
 		clearable: {
 			control: 'boolean',
 		},
+		clearBehavior: {
+			control: 'select',
+			options: ['clear', 'reset'],
+			description: '[v20.1] Change le comportement au clic sur la croix de suppression',
+		},
 		format: {
 			control: 'select',
 			options: ['date', 'date-iso'],
@@ -43,7 +48,10 @@ export default {
 		},
 		focusedDate: {
 			control: 'date',
-		}
+		},
+		widthAuto: {
+			control: 'boolean',
+		},
 	},
 	render: (args, { argTypes }) => {
 		const { min, max, focusedDate, ...flags } = args;
@@ -61,23 +69,44 @@ export default {
 			},
 			template: `
 			<lu-form-field label="Date input example" inlineMessage="Inline message example">
-				<lu-date-input [(ngModel)]="selected" [min]="min" [max]="max" [focusedDate]="focusedDate" ${generateInputs(flags, argTypes)}></lu-date-input>
+				<lu-date-input [(ngModel)]="selected" [min]="min" [max]="max" [focusedDate]="focusedDate" autocomplete="off" ${generateInputs(flags, argTypes)} />
 			</lu-form-field>
 
-			<pr-story-model-display>{{selected}}</pr-story-model-display>
+			<pr-story-model-display>{{ selected }}</pr-story-model-display>
 			`,
 		};
 	},
 } as Meta;
 
-export const Basic: StoryObj<DateInputComponent> = {
+export const Basic: StoryObj<DateInputComponent & { selected: Date }> = {
 	args: {
 		disableOverflow: false,
 		hideOverflow: false,
 		hideToday: false,
 		hideWeekend: false,
 		clearable: false,
+		clearBehavior: 'clear',
+		widthAuto: false,
 		mode: 'day',
 		format: 'date',
+		// Underlying ngModel
+		selected: new Date(),
+	},
+};
+
+export const StartFromYear: StoryObj<DateInputComponent & { selected: Date }> = {
+	args: {
+		disableOverflow: false,
+		hideOverflow: false,
+		hideToday: false,
+		hideWeekend: false,
+		clearable: false,
+		clearBehavior: 'clear',
+		widthAuto: false,
+		mode: 'day',
+		calendarMode: 'year',
+		format: 'date',
+		// Underlying ngModel
+		selected: null,
 	},
 };

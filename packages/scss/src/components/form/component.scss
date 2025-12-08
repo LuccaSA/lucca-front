@@ -1,9 +1,12 @@
 @use '@lucca-front/scss/src/commons/utils/form';
 @use '@lucca-front/scss/src/components/formLabel/exports' as formLabel;
 @use '@lucca-front/scss/src/components/inlineMessage/exports' as inlineMessage;
+@use '@lucca-front/scss/src/components/title/exports' as title;
 @use '@lucca-front/scss/src/commons/utils/namespace';
 
 @mixin component($atRoot: namespace.$defaultAtRoot) {
+	display: block;
+
 	.divider {
 		margin-block: var(--pr-t-spacings-300);
 	}
@@ -34,17 +37,18 @@
 
 	@at-root ($atRoot) {
 		.form-header {
+			display: block;
 			margin-block-end: var(--pr-t-spacings-300);
 		}
 
 		.form-header-title {
-			margin: 0;
-			padding: 0;
+			@include title.component;
+			@include title.h1;
 		}
 
 		.form-header-mandatory {
-			font-size: var(--sizes-S-fontSize);
-			line-height: var(--sizes-S-lineHeight);
+			font-size: var(--pr-t-font-body-S-fontSize);
+			line-height: var(--pr-t-font-body-S-lineHeight);
 			color: var(--palettes-neutral-700);
 		}
 
@@ -57,11 +61,21 @@
 			display: flex;
 			flex-direction: column;
 			gap: var(--pr-t-spacings-50);
-			width: var(--components-form-field-width);
+			inline-size: var(--components-form-field-width);
 			max-inline-size: 100%;
 
 			.formLabel {
 				@include formLabel.label;
+			}
+		}
+
+		.form-field-contentOptional {
+			display: flex;
+			gap: var(--pr-t-spacings-100);
+			align-items: center;
+
+			> :first-child {
+				flex-grow: 1;
 			}
 		}
 
@@ -71,7 +85,7 @@
 		.form-group-legend,
 		.form-group-title {
 			display: block;
-			font-weight: 600;
+			font-weight: var(--pr-t-font-fontWeight-semibold);
 			font-size: var(--components-form-label-font-size);
 			margin: 0;
 			padding-block: 0 var(--components-form-label-margin-bottom);

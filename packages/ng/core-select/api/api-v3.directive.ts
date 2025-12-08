@@ -9,7 +9,6 @@ import { ALuCoreSelectApiDirective } from './api.directive';
 	// The attribute is already prefixed with "lu-simple-select"
 	// eslint-disable-next-line @angular-eslint/directive-selector
 	selector: 'lu-simple-select[apiV3],lu-multi-select[apiV3]',
-	standalone: true,
 	providers: [
 		{
 			provide: CORE_SELECT_API_TOTAL_COUNT_PROVIDER,
@@ -82,6 +81,5 @@ export class LuCoreSelectApiV3Directive<T extends ILuApiItem> extends ALuCoreSel
 		);
 	}
 
-	protected override optionComparer = (a: T, b: T) => a.id === b.id;
 	protected override optionKey = (option: T) => option.id;
 }

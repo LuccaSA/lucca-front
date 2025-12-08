@@ -4,11 +4,9 @@ import { LU_READMORE_TRANSLATIONS } from './read-more.translate';
 
 @Component({
 	selector: 'lu-read-more',
-	standalone: true,
 	templateUrl: './read-more.component.html',
-	styleUrls: ['./read-more.component.scss'],
+	styleUrl: './read-more.component.scss',
 	encapsulation: ViewEncapsulation.None,
-
 	host: {
 		class: 'readMore',
 	},
@@ -65,9 +63,14 @@ export class ReadMoreComponent implements OnInit {
 	ngOnInit(): void {
 		new ResizeObserver(() => {
 			const contentElement = this.contentRef()?.nativeElement;
+			const lineHeight = parseFloat(window.getComputedStyle(contentElement).lineHeight);
+			const totalLines = Math.round(contentElement.scrollHeight / lineHeight);
 
 			this.isClamped.set(contentElement.scrollHeight > contentElement.clientHeight);
-		}).observe(this.contentRef().nativeElement);
+			if (!this.isClamped() && totalLines <= this.lineClamp()) {
+				this.expanded.set(false);
+			}
+		}).observe(this.contentRef().nativeElement, { box: 'border-box' });
 	}
 
 	toggleExpanded() {

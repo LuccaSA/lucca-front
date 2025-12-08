@@ -1,7 +1,6 @@
 @use 'vars' as *;
 @use '@lucca-front/scss/src/commons/utils/a11y';
 @use '@lucca-front/scss/src/commons/utils/reset';
-@use '@lucca-front/scss/src/components/button/exports' as button;
 @use '@lucca-front/scss/src/commons/utils/namespace';
 
 @mixin component($atRoot: namespace.$defaultAtRoot) {
@@ -14,7 +13,7 @@
 	border-spacing: 0 var(--components-indexTable-row-spacing);
 	border-radius: var(--components-indexTable-border-radius);
 	background-color: var(--components-indexTable-background-color);
-	color: var(--palettes-neutral-800);
+	color: var(--pr-t-color-text);
 	contain: paint;
 
 	@at-root ($atRoot) {
@@ -39,7 +38,7 @@
 		.indexTable-head-row,
 		.indexTable-body-row,
 		.indexTable-foot-row {
-			display: table-row;
+			display: var(--components-indexTable-row-display);
 		}
 
 		.indexTable-head-row-transparentCell,
@@ -49,7 +48,7 @@
 		.indexTable-foot-row-cell {
 			display: table-cell;
 			text-align: start;
-			font-weight: 400;
+			font-weight: var(--pr-t-font-fontWeight-regular);
 		}
 
 		.indexTable-head-row-transparentCell,
@@ -74,7 +73,7 @@
 		}
 
 		.indexTable-body-row {
-			border-radius: var(--commons-borderRadius-L);
+			border-radius: var(--pr-t-border-radius-default);
 
 			&:has(.indexTable-body-row-cell-link) {
 				.indexTable-body-row-cell {
@@ -92,7 +91,7 @@
 		}
 
 		.indexTable-head-row-cell {
-			color: var(--palettes-neutral-700);
+			color: var(--pr-t-color-text-subtle);
 		}
 
 		.indexTable-foot-row-cell {
@@ -180,9 +179,7 @@
 
 		.indexTable-body-row-cell-checkbox,
 		.indexTable-head-row-cell-checkbox {
-			margin-block: var(--pr-t-spacings-50);
-			margin-inline-start: var(--pr-t-spacings-50);
-			margin-inline-end: var(--pr-t-spacings-150);
+			margin: var(--pr-t-spacings-50);
 		}
 
 		// .indexTable-body-row-cell-action is deprecated
@@ -217,34 +214,13 @@
 			display: flex;
 			align-items: center;
 			gap: var(--pr-t-spacings-100);
+			padding: var(--pr-t-spacings-25);
+			font-weight: var(--pr-t-font-fontWeight-semibold);
 		}
 
-		.indexTable-body-row-cellTitle-button {
-			// :not(.class) is only there to increase specificity when the class isn’t present
-			// but the class should be present, and this code is temporary
-			&.button,
-			&:not(.button) {
-				@include button.text;
-				@include button.S;
-				@include button.onlyIconS;
-
-				position: static;
-
-				.lucca-icon {
-					transition: transform var(--commons-animations-durations-fast) ease;
-				}
-
-				// Extend button reactive zone to his whole parent
-				&::before {
-					content: '';
-					position: absolute;
-					inset: 0;
-				}
-			}
-		}
 
 		.indexTable-body-row-cellTitle-title {
-			font-weight: 600;
+			font-weight: var(--pr-t-font-fontWeight-semibold);
 		}
 
 		// A wrapper is needed for pagination
@@ -268,6 +244,17 @@
 				padding-inline: 0;
 				margin-inline-end: var(--pr-t-spacings-100);
 			}
+
+			.pagination-scrolling .button:hover {
+				--components-button-backgroundColor: var(--palettes-neutral-100);
+				--components-button-color: var(--palettes-neutral-700);
+			}
+		}
+	}
+
+	.indexTableWrapper-pagination {
+		&:empty {
+			display: none;
 		}
 	}
 
@@ -284,5 +271,11 @@
 
 	.avatarWrapper {
 		display: inline-flex;
+	}
+
+	.tableSortable.button:hover {
+		--components-button-backgroundColor: var(--palettes-neutral-100);
+
+		color: var(--palettes-neutral-700);
 	}
 }

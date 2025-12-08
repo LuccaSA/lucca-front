@@ -1,4 +1,3 @@
-
 ### Appeler une API
 
 Pour un format de retour V3 ou V4 sans customisation de l'affichage (l'entité doit avoir une propriété `name`), il suffit de donner l'API à appeler :
@@ -25,7 +24,6 @@ export interface Legume {
 
 @Directive({
   selector: '[luLegumes]',
-  standalone: true,
   exportAs: 'luLegumes',
 })
 export class LuCoreSelectLegumesDirective extends LuCoreSelectApiV4Directive<Legume> {
@@ -51,7 +49,7 @@ export class LuCoreSelectLegumesDirective extends LuCoreSelectApiV4Directive<Leg
 </lu-simple-select>
 ```
 
-### API non conventionnelle
+### API non conventionnelle (sans id)
 
 Dans le cas d'un appel API ne rentrant pas dans le moule habituel, il est nécessaire de créer votre propre directive en s'aidant de `ALuCoreSelectApiDirective` :
 
@@ -62,6 +60,7 @@ import { ALuCoreSelectApiDirective } from '@lucca-front/ng/core-select/api';
 interface MyCustomEntity {
   code: number;
   name: string;
+  ownerId: number;
 }
 
 interface MyCustomApiQuery {
@@ -71,7 +70,6 @@ interface MyCustomApiQuery {
 
 @Directive({
   selector: '[luMyCustomApi]',
-  standalone: true,
   exportAs: 'luMyCustomApi',
 })
 export class LuCoreSelectMyCustomApiDirective extends ALuCoreSelectApiDirective<MyCustomEntity, MyCustomApiQuery> {
@@ -84,7 +82,9 @@ export class LuCoreSelectMyCustomApiDirective extends ALuCoreSelectApiDirective<
     this.clue$, // ALuCoreSelectApiDirective is bound to the select's clue
   ]).pipe(map(([exampleFilter, clue]) => ({ exampleFilter, clue })));
 
-  protected optionComparer = (a: MyCustomEntity, b: MyCustomEntity) => a.code === b.code;
+  // Default value is option.id but here we want the code to be the key.
+  // optionKey must return a unique value as it is used in track functions
+  protected optionKey = (option: MyCustomEntity) => `${option.code}-${option.ownerId}`;
 
   protected getOptions(params: MyCustomApiQuery, page: number): Observable<MyCustomEntity[]> {
     return this.#customApiService.getAll(params, page);

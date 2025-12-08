@@ -2,10 +2,18 @@
 @use '@lucca-front/scss/src/commons/utils/media';
 
 .fancyBox {
-	@include vars;
-	@include component;
+	@layer components {
+		@include vars;
+		@include component;
+	}
 
-	@include media.max('XS') {
-		@include narrow;
+	@layer mods {
+		@include media.max('XS') {
+			@include narrow;
+		}
+	}
+
+	&.mod-S {
+		@include S;
 	}
 }

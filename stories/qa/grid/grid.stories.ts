@@ -1,15 +1,15 @@
 import { Component } from '@angular/core';
+import { GridColumnComponent, GridComponent } from '@lucca-front/ng/grid';
 import { Meta, StoryFn } from '@storybook/angular';
 
 @Component({
-	standalone: true,
 	selector: 'grid-stories',
 	templateUrl: './grid.stories.html',
 	styles: [
 		`
 			.gridDemo {
 				background-color: var(--pr-t-elevation-surface-sunken);
-				border-radius: 3px;
+				border-radius: var(--pr-t-border-radius-50);
 				min-block-size: 2.7rem;
 				padding-block: 0.6rem;
 				padding-inline: var(--pr-t-spacings-200);
@@ -19,6 +19,7 @@ import { Meta, StoryFn } from '@storybook/angular';
 			}
 		`,
 	],
+	imports: [GridColumnComponent, GridComponent],
 })
 class GridStory {}
 

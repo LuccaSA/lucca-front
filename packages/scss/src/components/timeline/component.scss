@@ -35,7 +35,7 @@
 			position: relative;
 			display: block;
 			color: var(--palettes-product-700);
-			font-weight: 600;
+			font-weight: var(--pr-t-font-fontWeight-semibold);
 			margin: 0;
 			font-size: var(--components-timeline-title-fontSize);
 			line-height: var(--components-timeline-title-lineHeight);
@@ -53,7 +53,7 @@
 				display: flex;
 				align-items: center;
 				justify-content: center;
-				border-radius: var(--commons-borderRadius-full);
+				border-radius: var(--pr-t-border-radius-full);
 				background-color: var(--palettes-product-700);
 				position: absolute;
 				inset-inline-start: var(--pr-t-spacings-50);

@@ -1,4 +1,4 @@
-import { CommonModule } from '@angular/common';
+import { AsyncPipe } from '@angular/common';
 import {
 	booleanAttribute,
 	ChangeDetectionStrategy,
@@ -6,12 +6,15 @@ import {
 	computed,
 	forwardRef,
 	HostBinding,
+	HostListener,
 	inject,
 	Input,
 	model,
 	numberAttribute,
 	OnDestroy,
 	OnInit,
+	Signal,
+	signal,
 	TemplateRef,
 	Type,
 	viewChild,
@@ -19,23 +22,23 @@ import {
 	ViewEncapsulation,
 } from '@angular/core';
 import { ControlValueAccessor, NG_VALUE_ACCESSOR } from '@angular/forms';
+import { ClearComponent } from '@lucca-front/ng/clear';
 import { getIntl } from '@lucca-front/ng/core';
 import { ALuSelectInputComponent, LuOptionContext, provideLuSelectLabelsAndIds, ɵLuOptionOutletDirective } from '@lucca-front/ng/core-select';
-import { FilterPillDisplayerDirective, FilterPillLabelDirective, FILTER_PILL_INPUT_COMPONENT } from '@lucca-front/ng/filter-pills';
+import { FILTER_PILL_INPUT_COMPONENT, FilterPillDisplayerDirective, FilterPillLabelDirective } from '@lucca-front/ng/filter-pills';
 import { LuTooltipModule } from '@lucca-front/ng/tooltip';
 import { Subject } from 'rxjs';
-import { LuMultiSelectDefaultDisplayerComponent } from '../displayer/index';
+import { LuMultiSelectDefaultDisplayerComponent } from '../displayer';
 import { LU_MULTI_SELECT_TRANSLATIONS } from '../select.translate';
 import { LuMultiSelectPanelRefFactory } from './panel-ref.factory';
 import { LuMultiSelectPanelRef } from './panel.model';
 
 @Component({
 	selector: 'lu-multi-select',
-	standalone: true,
-	imports: [CommonModule, LuTooltipModule, ɵLuOptionOutletDirective, FilterPillDisplayerDirective, FilterPillLabelDirective],
 	templateUrl: './select-input.component.html',
-	styleUrls: ['./select-input.component.scss'],
+	styleUrl: './select-input.component.scss',
 	changeDetection: ChangeDetectionStrategy.OnPush,
+	imports: [AsyncPipe, LuTooltipModule, ɵLuOptionOutletDirective, FilterPillDisplayerDirective, FilterPillLabelDirective, ClearComponent],
 	providers: [
 		{
 			provide: NG_VALUE_ACCESSOR,
@@ -74,6 +77,9 @@ export class LuMultiSelectInputComponent<T> extends ALuSelectInputComponent<T, T
 	@Input()
 	filterPillLabelPlural: string;
 
+	override selectParent$ = new Subject<void>();
+	override selectChildren$ = new Subject<void>();
+
 	@HostBinding('class.mod-filterPill')
 	public get filterPillClass() {
 		return this.filterPillMode;
@@ -83,8 +89,13 @@ export class LuMultiSelectInputComponent<T> extends ALuSelectInputComponent<T, T
 
 	filterPillPanelAnchorRef = viewChild('filterPillPanelAnchor', { read: ViewContainerRef });
 
-	override isFilterPillEmpty = computed(() => this.valueSignal()?.length === 0);
+	override isFilterPillEmpty = computed(() => {
+		const valueSignal = this.valueSignal();
+		return !valueSignal || valueSignal.length === 0;
+	});
 
+	public valueLength = computed(() => this.valueSignal()?.length ?? 0);
+	public useSingleOptionDisplayer: Signal<boolean> = signal(true);
 	override _value: T[] = [];
 
 	public override get panelRef(): LuMultiSelectPanelRef<T> | undefined {
@@ -103,6 +114,16 @@ export class LuMultiSelectInputComponent<T> extends ALuSelectInputComponent<T, T
 	public readonly focusInput$ = new Subject<void | { keepClue: boolean }>();
 
 	public readonly emptyClue$ = new Subject<void>();
+
+	@HostListener('keydown.control.enter')
+	public selectParentOnly() {
+		this.selectParent$.next();
+	}
+
+	@HostListener('keydown.shift.enter')
+	public selectChildrenOnly() {
+		this.selectChildren$.next();
+	}
 
 	public override focusInput(): void {
 		this.focusInput$.next({ keepClue: true });

@@ -1,7 +1,8 @@
-import { AsyncPipe, NgFor, NgIf } from '@angular/common';
+import { AsyncPipe } from '@angular/common';
 import { ChangeDetectionStrategy, Component, DestroyRef, ElementRef, inject, OnInit, ViewChild } from '@angular/core';
 import { takeUntilDestroyed } from '@angular/core/rxjs-interop';
 import { FormsModule } from '@angular/forms';
+import { ChipComponent } from '@lucca-front/ng/chip';
 import { getIntl } from '@lucca-front/ng/core';
 import { ILuOptionContext, LU_OPTION_CONTEXT, ɵLuOptionOutletDirective } from '@lucca-front/ng/core-select';
 import { LuTooltipModule } from '@lucca-front/ng/tooltip';
@@ -12,21 +13,21 @@ import { LuMultiSelectDisplayerInputDirective } from './displayer-input.directiv
 
 @Component({
 	selector: 'lu-multi-select-default-displayer',
-	standalone: true,
-	imports: [AsyncPipe, LuTooltipModule, NgIf, NgFor, ɵLuOptionOutletDirective, FormsModule, LuMultiSelectDisplayerInputDirective],
+	imports: [AsyncPipe, LuTooltipModule, ɵLuOptionOutletDirective, FormsModule, LuMultiSelectDisplayerInputDirective, ChipComponent],
 	template: `
 		<div class="multipleSelect-displayer">
 			<input autocomplete="off" #inputElement (keydown.backspace)="inputBackspace()" (keydown.space)="inputSpace($event)" luMultiSelectDisplayerInput />
-			<div *ngFor="let option of displayedOptions$ | async; let index = index" class="multipleSelect-displayer-chip chip" [class.mod-unkillable]="select.disabled$ | async">
-				<span class="multipleSelect-displayer-chip-value"><ng-container *luOptionOutlet="select.displayerTpl(); value: option"></ng-container></span>
-				<button *ngIf="(select.disabled$ | async) === false" type="button" class="chip-kill" (click)="unselectOption(option, $event)">
-					<span class="u-mask">{{ intl.removeOption }}</span>
-				</button>
-			</div>
-			<div class="multipleSelect-displayer-chip chip" *ngIf="overflowOptions$ | async as overflow">+ {{ overflow }}</div>
+			@for (option of displayedOptions$ | async; track option; let index = $index) {
+				<lu-chip withEllipsis (kill)="unselectOption(option, $event)" [unkillable]="select.disabled$ | async">
+					<ng-container *luOptionOutlet="select.displayerTpl(); value: option" />
+				</lu-chip>
+			}
+			@if (overflowOptions$ | async; as overflow) {
+				<lu-chip unkillable>+ {{ overflow }}</lu-chip>
+			}
 		</div>
 	`,
-	styleUrls: ['./default-displayer.component.scss'],
+	styleUrl: './default-displayer.component.scss',
 	changeDetection: ChangeDetectionStrategy.OnPush,
 })
 export class LuMultiSelectDefaultDisplayerComponent<T> implements OnInit {

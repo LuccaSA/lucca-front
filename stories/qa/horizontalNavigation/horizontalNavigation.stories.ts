@@ -1,10 +1,11 @@
 import { Component } from '@angular/core';
+import { HorizontalNavigationComponent, HorizontalNavigationLinkDirective } from '@lucca-front/ng/horizontal-navigation';
 import { Meta, StoryFn } from '@storybook/angular';
 
 @Component({
-	standalone: true,
 	selector: 'horizontalNavigation-stories',
 	templateUrl: './horizontalNavigation.stories.html',
+	imports: [HorizontalNavigationComponent, HorizontalNavigationLinkDirective],
 })
 class HorizontalNavigationStory {}
 

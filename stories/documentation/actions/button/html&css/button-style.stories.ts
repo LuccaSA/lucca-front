@@ -1,23 +1,36 @@
-import { Meta, StoryFn } from '@storybook/angular';
+import { IconComponent } from '@lucca-front/ng/icon';
+import { Meta, moduleMetadata, StoryFn } from '@storybook/angular';
 
 interface ButtonStyleStory {}
 
 export default {
 	title: 'Documentation/Actions/Button/HTML&CSS/Style',
 	argTypes: {},
+	decorators: [
+		moduleMetadata({
+			imports: [IconComponent],
+		}),
+	],
 } as Meta;
 
 function getTemplate(args: ButtonStyleStory): string {
-	return `<div class="u-displayFlex pr-u-gap100 u-alignItemsCenter">
-	<button type="button" class="button">Button</button>
-	<button type="button" class="button mod-outlined">Button</button>
-	<button type="button" class="button mod-text">Button</button>
-</div>`;
+	return `<button type="button" class="button">Button</button>
+<button type="button" class="button mod-outlined">Button</button>
+<button type="button" class="button mod-ghost">Button</button>
+<!-- 20.3 --><button type="button" class="button mod-AI">Button</button>`;
 }
 
 const Template: StoryFn<ButtonStyleStory> = (args) => ({
 	props: args,
 	template: getTemplate(args),
+	styles: [
+		`
+		:host {
+			display: flex;
+			gap: 1rem;
+		}
+	`,
+	],
 });
 
 export const StyleButton = Template.bind({});

@@ -36,9 +36,7 @@ abstract class BaseMultiSelectPanelRef<T> extends LuMultiSelectPanelRef<T> {
 	}
 
 	selectCurrentlyHighlightedValue(): void {
-		if (this.instance.keyManager.activeItem) {
-			this.instance.toggleOption(this.instance.keyManager.activeItem.option);
-		}
+		this.instance.keyManager.activeItem?.selected.emit();
 	}
 
 	updateSelectedOptions(selectedOptions: T[]): void {
@@ -141,6 +139,8 @@ export class LuMultiSelectPanelRefFactory {
 		const config = { overlapInput: false, offsetY: 2 };
 		overlayConfig.positionStrategy = this.positionBuilder
 			.flexibleConnectedTo(this.elementRef)
+			.withGrowAfterOpen(true)
+			.withLockedPosition(false)
 			.withViewportMargin(10)
 			.withPositions([
 				this.buildPosition('bottom', 'right', config),

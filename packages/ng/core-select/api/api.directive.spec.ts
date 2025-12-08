@@ -14,7 +14,6 @@ interface TestEntity {
 @Directive({
 	// eslint-disable-next-line @angular-eslint/directive-selector
 	selector: 'lu-simple-select[testApi]',
-	standalone: true,
 })
 class TestDirective extends ALuCoreSelectApiDirective<TestEntity> {
 	protected override params$ = this.clue$.pipe(
@@ -22,8 +21,6 @@ class TestDirective extends ALuCoreSelectApiDirective<TestEntity> {
 			...(clue ? { clue } : {}),
 		})),
 	);
-
-	protected override optionComparer = (a: TestEntity, b: TestEntity) => a.id === b.id;
 
 	protected override optionKey = (option: TestEntity) => option.id;
 
@@ -47,8 +44,7 @@ class TestDirective extends ALuCoreSelectApiDirective<TestEntity> {
 }
 
 @Component({
-	template: ` <lu-simple-select testApi></lu-simple-select> `,
-	standalone: true,
+	template: ` <lu-simple-select testApi />`,
 	imports: [TestDirective, LuSimpleSelectInputComponent],
 })
 class HostComponent {}

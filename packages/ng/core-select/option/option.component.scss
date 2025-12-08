@@ -2,16 +2,39 @@
 
 @include definitions.optionItemStyle;
 
-.is-disabled {
-	color: var(--palettes-neutral-500); // disabled token candidate
-	user-select: none;
-	cursor: default;
+@layer mods {
+	.is-disabled {
+		color: var(--palettes-neutral-500); // disabled token candidate
+		user-select: none;
+		cursor: default;
 
-	&.is-selected {
-		background-color: var(--commons-disabled-background);
+		&.is-selected {
+			background-color: var(--commons-disabled-background);
+		}
+
+		&:hover {
+			background-color: inherit;
+		}
 	}
 
-	&:hover {
-		background-color: inherit;
+	.optionItem-value:has(.optionItem-icon) {
+		display: flex;
+		justify-content: space-between;
+	}
+}
+
+@layer components {
+	.optionItem-icons {
+		display: flex;
+		gap: var(--pr-t-spacings-50);
+	}
+
+	.optionItem-icon-shape {
+		display: block;
+		fill: var(--palettes-neutral-500);
+
+		&:hover {
+			fill: var(--palettes-neutral-800);
+		}
 	}
 }

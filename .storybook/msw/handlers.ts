@@ -1,6 +1,17 @@
 import { delay, http, HttpResponse } from 'msw';
 import { applyFilter, applyV3Fields, applyV3Paging, applyV4Paging, applyV4Sorting, genericHandler, handleFieldsRoot } from './helpers';
-import { mockAxisSectionsV3, mockDepartmentsTree, mockEstablishments, mockJobQualifications, mockLegalUnits, mockMe, mockProjectUsers, mockUserPopover, mockUsers } from './mocks';
+import {
+	mockAxisSectionsV3,
+	mockDepartmentsTree,
+	mockEstablishments,
+	mockJobQualifications,
+	mockLegalUnits,
+	mockMe,
+	mockOccupationCategories,
+	mockProjectUsers,
+	mockUserPopover,
+	mockUsers,
+} from './mocks';
 
 const usersSearchHandler = genericHandler(
 	mockUsers,
@@ -78,6 +89,11 @@ export const handlers = [
 		),
 	),
 
+	http.get('/lucca-banner/meta/api/feature-flag-statuses/user-popover-is-activated', async () => {
+		await delay(300);
+		return HttpResponse.json({ key: 'popover-is-activated', status: 'Enabled' });
+	}),
+
 	http.get(
 		'/organization/structure/api/job-qualifications',
 		genericHandler(
@@ -100,6 +116,31 @@ export const handlers = [
 				limit: (items, { limit }) => items.slice(0, limit),
 			},
 			handleFieldsRoot(mockJobQualifications.length),
+		),
+	),
+
+	http.get(
+		'/organization/structure/api/occupation-categories',
+		genericHandler(
+			mockOccupationCategories,
+			// Get and parse params from query params
+			{
+				page: (p) => parseInt(p),
+				limit: (l) => parseInt(l),
+				search: (s) => s.toLowerCase(),
+				sort: (s) => s,
+				'fields.root': (f) => f,
+			},
+			{
+				// Apply filters to items
+				search: applyFilter((oc, { search }) => oc.name.toLowerCase().includes(search)),
+				// Then sorting
+				sort: (items, { sort }) => applyV4Sorting(items, sort),
+				// Then paging/limiting
+				page: applyV4Paging,
+				limit: (items, { limit }) => items.slice(0, limit),
+			},
+			handleFieldsRoot(mockOccupationCategories.length),
 		),
 	),
 

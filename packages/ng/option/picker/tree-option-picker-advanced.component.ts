@@ -1,15 +1,19 @@
 import { A11yModule } from '@angular/cdk/a11y';
-import { CommonModule, DOCUMENT } from '@angular/common';
+import { AsyncPipe, DOCUMENT } from '@angular/common';
 import { AfterViewInit, ChangeDetectionStrategy, ChangeDetectorRef, Component, ContentChildren, Directive, forwardRef, Inject, QueryList } from '@angular/core';
 import { ALuOnCloseSubscriber, ALuOnOpenSubscriber, ALuOnScrollBottomSubscriber, ILuOnCloseSubscriber, ILuOnOpenSubscriber, ILuOnScrollBottomSubscriber, ILuTree } from '@lucca-front/ng/core';
 import { ALuPickerPanel } from '@lucca-front/ng/picker';
 import { luTransformPopover } from '@lucca-front/ng/popover';
+import { LuScrollDirective } from '@lucca-front/ng/scroll';
 import { merge, Observable } from 'rxjs';
 import { first, map, mergeAll, shareReplay, startWith } from 'rxjs/operators';
 import { ALuTreeOptionOperator, ILuTreeOptionOperator } from '../operator/index';
 import { ALuTreeOptionSelector, ILuTreeOptionSelector } from '../selector/index';
 import { ALuTreeOptionPickerComponent } from './tree-option-picker.component';
 
+/**
+ * @deprecated
+ */
 @Directive()
 export abstract class ALuTreeOptionPickerAdvancedComponent<T, O extends import('../item/tree-option-item.model').ILuTreeOptionItem<T> = import('../item/tree-option-item.model').ILuTreeOptionItem<T>>
 	extends ALuTreeOptionPickerComponent<T, O>
@@ -110,6 +114,7 @@ export abstract class ALuTreeOptionPickerAdvancedComponent<T, O extends import('
 
 /**
  * advanced option picker panel
+ * @deprecated
  */
 @Component({
 	selector: 'lu-tree-option-picker-advanced',
@@ -117,8 +122,7 @@ export abstract class ALuTreeOptionPickerAdvancedComponent<T, O extends import('
 	changeDetection: ChangeDetectionStrategy.OnPush,
 	animations: [luTransformPopover],
 	exportAs: 'LuOptionPicker',
-	standalone: true,
-	imports: [CommonModule, A11yModule],
+	imports: [AsyncPipe, LuScrollDirective, A11yModule],
 	providers: [
 		{
 			provide: ALuPickerPanel,

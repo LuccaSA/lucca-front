@@ -1,4 +1,4 @@
-import { CommonModule } from '@angular/common';
+import { AsyncPipe } from '@angular/common';
 import { ChangeDetectionStrategy, Component, Input, OnDestroy } from '@angular/core';
 import { getIntl, PortalContent, PortalDirective } from '@lucca-front/ng/core';
 import { merge, Observable, Subject } from 'rxjs';
@@ -11,8 +11,7 @@ import { LU_TOAST_TRANSLATIONS } from './toasts.translate';
 	selector: 'lu-toasts',
 	templateUrl: './toasts.component.html',
 	changeDetection: ChangeDetectionStrategy.OnPush,
-	standalone: true,
-	imports: [CommonModule, PortalDirective],
+	imports: [AsyncPipe, PortalDirective],
 })
 export class LuToastsComponent implements OnDestroy {
 	@Input() public bottom = false;
@@ -55,10 +54,6 @@ export class LuToastsComponent implements OnDestroy {
 
 	public removeToast(toast: LuToast): void {
 		this.toastsService.removeToast(toast);
-	}
-
-	public trackToast(_index: number, toast: LuToast): string {
-		return toast.id;
 	}
 
 	public isOnlyDismissibleManually(toast: LuToast): boolean {

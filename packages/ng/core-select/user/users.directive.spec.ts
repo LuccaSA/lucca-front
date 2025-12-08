@@ -11,7 +11,6 @@ import { LuCoreSelectUsersDirective } from './users.directive';
 
 @Directive({
 	selector: '[luTestUsers]',
-	standalone: true,
 	providers: [
 		{
 			provide: LuCoreSelectUsersDirective,
@@ -27,7 +26,6 @@ class TestUsersDirective extends LuCoreSelectUsersDirective {
 
 @Component({
 	selector: 'lu-users-directive-host',
-	standalone: true,
 	imports: [LuSimpleSelectInputComponent, TestUsersDirective],
 	template: `<lu-simple-select luTestUsers />`,
 })
@@ -158,10 +156,59 @@ describe('LuCoreSelectUsersDirective', () => {
 		expect(options).toEqual([meUser, ...page1, ...page2.filter((u) => u.id !== CURRENT_USER_ID)]);
 		httpTestingController.verify();
 	}));
+
+	it('should append additional information for homonyms when paging is greater than the number of items', fakeAsync(() => {
+		// Arrange
+		usersDirective.setPageSize(4);
+		simpleSelect.openPanel();
+		fixture.detectChanges();
+
+		tick(MAGIC_OPTION_SCROLL_DELAY);
+
+		const meUser = createUser(CURRENT_USER_ID);
+		const user1 = createUser(1);
+		const user2 = createUser(2, 'Doe', 'John');
+		const user3 = createUser(3, 'Doe', 'John');
+
+		const page1 = [user1, user2, user3];
+		const additionalInfo = {
+			data: {
+				items: [
+					{ id: 2, department: { name: 'Engineering' } },
+					{ id: 3, department: { name: 'Marketing' } },
+				],
+			},
+		};
+
+		// Act
+		const options: Array<readonly LuCoreSelectUser[]> = [];
+		simpleSelect.options$.subscribe((o) => options.push(o));
+
+		const meReq = httpTestingController.expectOne(`/api/v3/users/search?fields=${fields}&id=${CURRENT_USER_ID}`);
+		meReq.flush(usersResponse([meUser]));
+		fixture.detectChanges();
+
+		const page1Req = httpTestingController.expectOne(`/api/v3/users/search?fields=${fields}&paging=0,4`);
+		page1Req.flush(usersResponse(page1));
+		fixture.detectChanges();
+
+		const additionalInfoReq = httpTestingController.expectOne(`/api/v3/users?id=2,3&fields=id,department.name`);
+		additionalInfoReq.flush(additionalInfo);
+		fixture.detectChanges();
+
+		// Assert
+		httpTestingController.verify();
+		expect(options).toEqual([
+			// Without additional information
+			[meUser, user1, user2, user3],
+			// With additional information
+			[meUser, user1, { ...user2, additionalInformation: 'Engineering' }, { ...user3, additionalInformation: 'Marketing' }],
+		]);
+	}));
 });
 
-function createUser(id: number): LuCoreSelectUser {
-	return { id, firstName: 'test ' + id, lastName: 'test' + id, picture: null };
+function createUser(id: number, lastName = 'test ' + id, firstName = 'test ' + id): LuCoreSelectUser {
+	return { id, firstName, lastName, picture: null };
 }
 
 function usersResponse(users: LuCoreSelectUser[]) {

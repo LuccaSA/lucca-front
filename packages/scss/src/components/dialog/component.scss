@@ -1,4 +1,3 @@
-@use '@lucca-front/scss/src/components/title/exports' as title;
 @use '@lucca-front/scss/src/components/button/exports' as button;
 @use '@lucca-front/scss/src/components/footer/exports' as footer;
 @use '@lucca-front/scss/src/commons/utils/keyframe';
@@ -11,15 +10,16 @@
 	inset: var(--components-dialog-inset);
 	inline-size: var(--components-dialog-width);
 	block-size: var(--components-dialog-height);
-	max-inline-size: var(--components-dialog-maxWidth);
-	max-block-size: var(--components-dialog-maxHeight);
 	background-color: var(--palettes-neutral-0);
 	border-radius: var(--components-dialog-borderRadius);
 	box-shadow: var(--pr-t-elevation-shadow-overlay);
-	position: fixed !important;
 	margin: auto;
-	display: flex;
 	flex-direction: column;
+	display: flex !important;
+	position: fixed !important;
+	max-inline-size: var(--components-dialog-maxWidth) !important;
+	max-block-size: var(--components-dialog-maxHeight) !important;
+	overflow: hidden;
 
 	@supports not (height: 1dvh) {
 		--components-dialog-maxHeight: var(--components-dialog-maxHeightFallback);
@@ -44,7 +44,7 @@
 					flex-grow: 1;
 					min-block-size: 0;
 
-					&:has(.dialog-content:focus-visible) {
+					&:has(.dialog-inside-content:focus-visible) {
 						&::after {
 							@include a11y.focusVisible($offset: -4px);
 
@@ -65,7 +65,7 @@
 				flex-grow: 1;
 				min-block-size: 0;
 
-				&:has(.dialog-content:focus-visible) {
+				&:has(.dialog-inside-content:focus-visible) {
 					&::after {
 						@include a11y.focusVisible($offset: -4px);
 
@@ -78,7 +78,7 @@
 
 		.dialog-inside-header-button {
 			&.button {
-				@include button.text;
+				@include button.ghost;
 				@include button.S;
 				@include button.onlyIconS;
 
@@ -86,6 +86,14 @@
 				justify-self: end;
 				grid-area: close;
 				display: var(--components-dialog-insideHeaderButtonDisplay);
+			}
+		}
+
+		.dialog-inside-header-actionOptional {
+			margin-right: calc(var(--pr-t-spacings-100) * -1);
+
+			&:empty {
+				display: none;
 			}
 		}
 
@@ -126,8 +134,7 @@
 		}
 
 		.dialog-inside-header-container-title {
-			@include title.h2;
-
+			font: var(--pr-t-font-heading-2);
 			padding: var(--components-dialog-insideHeaderTitlePadding);
 			text-align: var(--components-dialog-insideHeaderTitleAlign);
 			margin: 0;
@@ -137,7 +144,7 @@
 		.dialog_backdrop {
 			background-color: var(--palettes-neutral-900);
 			position: fixed;
-			opacity: 0.4;
+			opacity: 0.4 !important; // weird bug with Chrome and its inspector open
 			inset: 0;
 		}
 	}

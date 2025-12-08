@@ -2,8 +2,7 @@
 @use '@lucca-front/scss/src/commons/utils/namespace';
 
 @mixin S {
-	--components-comment-text-fontSize: var(--sizes-S-fontSize);
-	--components-comment-text-lineHeight: var(--sizes-S-lineHeight);
+	--components-comment-text-font: var(--pr-t-font-body-S);
 }
 
 @mixin wrapperS {
@@ -46,8 +45,8 @@
 		--components-comment-background-color: var(--palettes-product-50);
 		--components-comment-align: end;
 		--components-comment-margin: auto;
-		--components-comment-border-radius: var(--commons-borderRadius-L) var(--commons-borderRadius-M) var(--commons-borderRadius-L)
-			var(--commons-borderRadius-L);
+		--components-comment-border-radius: var(--pr-t-border-radius-default) var(--pr-t-border-radius-small) var(--pr-t-border-radius-default)
+			var(--pr-t-border-radius-default);
 	}
 
 	.comment-content {

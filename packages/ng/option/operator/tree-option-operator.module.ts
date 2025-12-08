@@ -4,6 +4,9 @@ import { LuForTreeOptionsDirective } from './for-options/index';
 import { LuTreeOptionPagerComponent } from './pager/index';
 import { LuTreeOptionSearcherModule } from './searcher/index';
 
+/**
+ * @deprecated use `LuTreeOptionFeederComponent, LuForTreeOptionsDirective, LuTreeOptionPagerComponent, LuTreeOptionSearcherComponent` instead
+ */
 @NgModule({
 	imports: [LuTreeOptionFeederComponent, LuForTreeOptionsDirective, LuTreeOptionPagerComponent, LuTreeOptionSearcherModule],
 	exports: [LuTreeOptionFeederComponent, LuForTreeOptionsDirective, LuTreeOptionPagerComponent, LuTreeOptionSearcherModule],

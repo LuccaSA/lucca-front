@@ -14,7 +14,7 @@
 			<td>
 				<div class="demo-QAtable-list">
 					<nav class="breadcrumbs" aria-describedby="breadcrumbs-title">
-						<p id="breadcrumbs-title" class="u-mask">Breadcrumbs</p>
+						<p id="breadcrumbs-title" class="pr-u-mask">Breadcrumbs</p>
 						<ol class="breadcrumbs-list">
 							<li class="breadcrumbs-list-item"><a href="#" class="breadcrumbs-list-item-action">You</a></li>
 							<li class="breadcrumbs-list-item"><a href="#" class="breadcrumbs-list-item-action">are</a></li>
@@ -24,10 +24,10 @@
 				</div>
 			</td>
 			<td>
-				<lu-breadcrumbs >
-					<a *luBreadcrumbsLink class="breadcrumbs-list-item-action" routerLink="/" ariaCurrentWhenActive="page">You</a>
-					<a *luBreadcrumbsLink class="breadcrumbs-list-item-action" ariaCurrentWhenActive="page" href="#2">are</a>
-					<a *luBreadcrumbsLink class="breadcrumbs-list-item-action" aria-current="page">here</a>
+				<lu-breadcrumbs>
+					<a *luBreadcrumbsLink routerLink="/" ariaCurrentWhenActive="page">You</a>
+					<a *luBreadcrumbsLink ariaCurrentWhenActive="page" href="#2">are</a>
+					<a *luBreadcrumbsLink aria-current="page">here</a>
 				</lu-breadcrumbs>
 			</td>
 		</tr>
@@ -36,7 +36,7 @@
 			<td>
 				<div class="demo-QAtable-list">
 					<nav class="breadcrumbs mod-compact" aria-describedby="breadcrumbs-title">
-						<p id="breadcrumbs-title" class="u-mask">Breadcrumbs</p>
+						<p id="breadcrumbs-title" class="pr-u-mask">Breadcrumbs</p>
 						<ol class="breadcrumbs-list">
 							<li class="breadcrumbs-list-item"><a href="#" class="breadcrumbs-list-item-action">Previous page</a></li>
 							<li class="breadcrumbs-list-item"><span aria-current="page" class="breadcrumbs-list-item-action">Current page</span></li>
@@ -45,9 +45,9 @@
 				</div>
 			</td>
 			<td>
-				<lu-breadcrumbs >
-					<a *luBreadcrumbsLink class="breadcrumbs-list-item-action" ariaCurrentWhenActive="page" href="#2">Previous page</a>
-					<a *luBreadcrumbsLink class="breadcrumbs-list-item-action" aria-current="page">mode</a>
+				<lu-breadcrumbs>
+					<a *luBreadcrumbsLink ariaCurrentWhenActive="page" href="#2">Previous page</a>
+					<a *luBreadcrumbsLink aria-current="page">mode</a>
 				</lu-breadcrumbs>
 			</td>
 		</tr>

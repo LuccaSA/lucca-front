@@ -14,10 +14,9 @@ import { LU_DURATION_PICKER_TRANSLATIONS } from './duration-picker.translate';
 
 @Component({
 	selector: 'lu-duration-picker',
-	standalone: true,
 	imports: [TimePickerPartComponent, NgClass],
 	templateUrl: './duration-picker.component.html',
-	styleUrls: ['./duration-picker.component.scss'],
+	styleUrl: './duration-picker.component.scss',
 	changeDetection: ChangeDetectionStrategy.OnPush,
 	encapsulation: ViewEncapsulation.None,
 	providers: [
@@ -57,7 +56,7 @@ export class DurationPickerComponent extends BasePickerComponent {
 	protected fieldsetSuffixClasses = computed(() => {
 		return {
 			'timePicker-fieldset-groupSeparator': true,
-			'u-visibilityHidden': this.shouldHideValue(),
+			'pr-u-visibilityHidden': this.shouldHideValue(),
 		};
 	});
 	protected separator = this.intl.timePickerTimeSeparator;

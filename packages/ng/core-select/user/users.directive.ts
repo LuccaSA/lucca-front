@@ -40,7 +40,6 @@ function provideBaseCoreSelectUsersContext<T extends LuCoreSelectUser = LuCoreSe
 	// The attribute is already prefixed with "lu-simple-select"
 	// eslint-disable-next-line @angular-eslint/directive-selector
 	selector: 'lu-simple-select[users],lu-multi-select[users]',
-	standalone: true,
 	exportAs: 'luUsers',
 	providers: [provideBaseCoreSelectUsersContext(() => LuCoreSelectUsersDirective)],
 })
@@ -119,6 +118,7 @@ export class LuCoreSelectUsersDirective<T extends LuCoreSelectUser = LuCoreSelec
 		computed(() => ({
 			fields: this.#userFields,
 			...this.filters(),
+			...(this.uniqueOperationIds() ? { uniqueOperations: this.uniqueOperationIds().join(',') } : {}),
 			...(this.operationIds() ? { operations: this.operationIds().join(',') } : {}),
 			...(this.appInstanceId() ? { appInstanceId: this.appInstanceId() } : {}),
 			id: this.currentUserId,
@@ -208,13 +208,11 @@ export class LuCoreSelectUsersDirective<T extends LuCoreSelectUser = LuCoreSelec
 		);
 	}
 
-	protected override optionComparer = (a: T, b: T) => a.id === b.id;
 	protected override optionKey = (option: T) => option.id;
 }
 
 @Directive({
 	selector: '[luUserOption]',
-	standalone: true,
 })
 export class LuCoreSelectUserOptionDirective<T extends LuCoreSelectUser = LuCoreSelectUser> {
 	#templateRef = inject(TemplateRef<LuOptionContext<T>>);

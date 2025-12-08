@@ -10,15 +10,18 @@ import {
 	forwardRef,
 	HostBinding,
 	inject,
+	Injector,
 	input,
+	OnInit,
 	signal,
 	untracked,
 	viewChild,
 	ViewEncapsulation,
 } from '@angular/core';
-import { AbstractControl, ControlValueAccessor, NG_VALIDATORS, NG_VALUE_ACCESSOR, ValidationErrors, Validator } from '@angular/forms';
+import { AbstractControl, ControlValueAccessor, NG_VALIDATORS, NG_VALUE_ACCESSOR, NgControl, NgModel, Validator } from '@angular/forms';
 import { LuccaIcon } from '@lucca-front/icons';
-import { LuClass, ɵeffectWithDeps } from '@lucca-front/ng/core';
+import { ClearComponent } from '@lucca-front/ng/clear';
+import { isNil, LuClass, ɵeffectWithDeps } from '@lucca-front/ng/core';
 import { FILTER_PILL_INPUT_COMPONENT, FilterPillDisplayerDirective, FilterPillInputComponent } from '@lucca-front/ng/filter-pills';
 import { InputDirective } from '@lucca-front/ng/form-field';
 import { IconComponent } from '@lucca-front/ng/icon';
@@ -30,10 +33,15 @@ import { Calendar2Component } from '../calendar2/calendar2.component';
 import { CellStatus } from '../calendar2/cell-status';
 import { comparePeriods, startOfPeriod, transformDateInputToDate, transformDateToDateISO } from '../utils';
 
+export type DateInputValidatorErrorType = {
+	min: true;
+	max: true;
+	date: true;
+};
+
 @Component({
 	selector: 'lu-date-input',
-	standalone: true,
-	imports: [PopoverDirective, Calendar2Component, IconComponent, InputDirective, NgTemplateOutlet, FilterPillDisplayerDirective],
+	imports: [PopoverDirective, Calendar2Component, IconComponent, InputDirective, NgTemplateOutlet, FilterPillDisplayerDirective, ClearComponent],
 	templateUrl: './date-input.component.html',
 	styleUrl: './date-input.component.scss',
 	host: {
@@ -59,18 +67,23 @@ import { comparePeriods, startOfPeriod, transformDateInputToDate, transformDateT
 		LuClass,
 	],
 })
-export class DateInputComponent extends AbstractDateComponent implements ControlValueAccessor, Validator, FilterPillInputComponent {
+export class DateInputComponent extends AbstractDateComponent implements OnInit, ControlValueAccessor, Validator, FilterPillInputComponent {
+	public parentInput = inject(FILTER_PILL_INPUT_COMPONENT, { optional: true, skipSelf: true });
+	#injector = inject(Injector);
+	#ngControl: NgControl; // Initialized in ngOnInit
+
 	// CVA stuff
 	#onChange?: (value: Date | null) => void;
 
 	#luClass = inject(LuClass);
 
-	autocomplete = input<string>('');
+	autocomplete = input<AutoFill>('off');
 
 	placeholder = input<string>();
 
 	disableOverflow = input(false, { transform: booleanAttribute });
 	hideOverflow = input(false, { transform: booleanAttribute });
+	widthAuto = input(false, { transform: booleanAttribute });
 
 	filterPillDisabled = signal(false);
 
@@ -91,6 +104,7 @@ export class DateInputComponent extends AbstractDateComponent implements Control
 
 	selectedDate = signal<Date | null>(null);
 
+	initialValue = signal<Date | null>(undefined);
 	dateFromWriteValue = signal<Date | null>(null);
 
 	calendar = viewChild(Calendar2Component);
@@ -98,6 +112,13 @@ export class DateInputComponent extends AbstractDateComponent implements Control
 	inputRef = viewChild<ElementRef<HTMLInputElement>>('date');
 
 	displayValue = computed(() => {
+		const textInput = this.userTextInput();
+		if (textInput !== 'ɵ') {
+			const parsedInput = parse(textInput, this.dateFormat, startOfDay(new Date()));
+			if (this.isValidDate(parsedInput) && this.inputFocused()) {
+				return textInput;
+			}
+		}
 		if (this.selectedDate() && this.isValidDate(this.selectedDate())) {
 			let formatter: Intl.DateTimeFormat;
 			switch (this.mode()) {
@@ -113,7 +134,6 @@ export class DateInputComponent extends AbstractDateComponent implements Control
 			}
 			return formatter.format(this.selectedDate());
 		}
-		const textInput = this.userTextInput();
 		// If we are initializing the component, we don't want to display the value
 		if (textInput === 'ɵ') {
 			return '';
@@ -141,6 +161,11 @@ export class DateInputComponent extends AbstractDateComponent implements Control
 	@HostBinding('class.mod-filterPill')
 	isFilterPill = false;
 
+	@HostBinding('class.mod-auto')
+	get isWidthAuto() {
+		return this.widthAuto();
+	}
+
 	isFilterPillEmpty = computed(() => !this.selectedDate());
 	isFilterPillClearable = computed(() => this.clearable() ?? this.#defaultFilterPillClearable() ?? this.#defaultClearable);
 	#defaultClearable = false;
@@ -154,6 +179,18 @@ export class DateInputComponent extends AbstractDateComponent implements Control
 
 	constructor() {
 		super();
+
+		effect(() => {
+			const nativeElement = this.inputRef().nativeElement;
+			const cursorPositionBefore = nativeElement.selectionStart;
+			const displayValue = this.displayValue();
+			nativeElement.value = this.displayValue();
+			if (displayValue.endsWith(this.separator)) {
+				nativeElement.setSelectionRange(cursorPositionBefore + 1, cursorPositionBefore + 1);
+			} else {
+				nativeElement.setSelectionRange(cursorPositionBefore, cursorPositionBefore);
+			}
+		});
 
 		effect(() => {
 			const inputValue = this.userTextInput();
@@ -196,6 +233,12 @@ export class DateInputComponent extends AbstractDateComponent implements Control
 			});
 		});
 
+		ɵeffectWithDeps([this.mode, this.calendarMode], (mode, calendarMode) => {
+			if (mode && isNil(calendarMode)) {
+				this.calendarMode.set(mode);
+			}
+		});
+
 		ɵeffectWithDeps([this.calendarMode, this.tabbableDate], (calendarMode, tabbableDate) => {
 			if (tabbableDate && !comparePeriods(calendarMode, tabbableDate, this.currentDate())) {
 				this.currentDate.set(startOfPeriod(calendarMode, tabbableDate));
@@ -207,6 +250,10 @@ export class DateInputComponent extends AbstractDateComponent implements Control
 				});
 			}
 		});
+	}
+
+	ngOnInit() {
+		this.#ngControl = this.#injector.get(NgControl);
 	}
 
 	#safeCompareDate(a: Date, b: Date): boolean {
@@ -260,7 +307,7 @@ export class DateInputComponent extends AbstractDateComponent implements Control
 		}
 	}
 
-	validate(control: AbstractControl<Date | string | null>): ValidationErrors | null {
+	validate(control: AbstractControl<Date | string | null>): Partial<DateInputValidatorErrorType> | null {
 		// null is not an error but means we'll skip everything else, we'll let the presence of a
 		// Validators.required (or not) decide if it's an error.
 		if (control.value === null || control.value === undefined) {
@@ -279,28 +326,41 @@ export class DateInputComponent extends AbstractDateComponent implements Control
 			return { date: true };
 		}
 		// Check min and max
-		if (!this.isInMinMax(date, this.mode())) {
-			return { minMax: true };
+		if (this.min() && !this.isAfterMin(date, this.mode())) {
+			return { min: true };
+		} else if (this.max() && !this.isBeforeMax(date, this.mode())) {
+			return { max: true };
 		}
 		// Everything is valid
 		return null;
 	}
 
 	writeValue(date: Date | string | null): void {
+		if (this.#ngControl instanceof NgModel && isNil(this.#onChange)) {
+			// avoid phantom call for ngModel
+			// https://github.com/angular/angular/issues/14988#issuecomment-1310420293
+			return;
+		}
+
+		const _date = transformDateInputToDate(date);
+
+		if (this.initialValue() === undefined) {
+			this.initialValue.set(_date);
+		}
+
 		if (date != null) {
-			const _date = transformDateInputToDate(date);
 			const start = startOfDay(_date);
 			this.dateFromWriteValue.set(start);
 			this.selectedDate.set(start);
 			this.currentDate.set(start);
 		} else {
-			this.clear();
+			this.reset();
 		}
 	}
 
 	registerOnChange(fn: (value: Date | string | null) => void): void {
 		this.#onChange = (date: Date | null) => {
-			fn(date && this.inDateISOFormat() ? transformDateToDateISO(date) : date);
+			fn(date && this.inDateISOFormat() && this.isValidDate(date) ? transformDateToDateISO(date) : date);
 		};
 	}
 
@@ -309,10 +369,16 @@ export class DateInputComponent extends AbstractDateComponent implements Control
 		super.setDisabledState(isDisabled);
 	}
 
+	reset(): Date | null {
+		const newValue = this.clearBehavior() === 'reset' ? this.initialValue() : null;
+		this.dateFromWriteValue.set(newValue);
+		this.selectedDate.set(newValue);
+		return newValue;
+	}
+
 	clear() {
-		this.inputRef().nativeElement.value = '';
-		this.selectedDate.set(null);
-		this.#onChange?.(null);
+		const newValue = this.reset();
+		this.#onChange?.(newValue);
 		this.onTouched?.();
 	}
 
@@ -330,5 +396,11 @@ export class DateInputComponent extends AbstractDateComponent implements Control
 			this.inputRef().nativeElement.focus();
 		}
 		this.filterPillPopoverCloseFn?.();
+	}
+
+	inputBlurred(): void {
+		this.onTouched?.();
+		this.inputFocused.set(false);
+		this.userTextInput.set('ɵ');
 	}
 }

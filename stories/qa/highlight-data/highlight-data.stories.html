@@ -32,7 +32,7 @@
 				</div>
 			</td>
 			<td style="width: 50%">
-				<lu-highlight-data heading="Title" value="Content" illustration="piggy-bank" bubble="1"></lu-highlight-data>
+				<lu-highlight-data heading="Title" value="Content" illustration="piggy-bank" bubble="1" />
 			</td>
 		</tr>
 		<tr>
@@ -52,7 +52,7 @@
 					</div>
 				</div>
 			</td>
-			<td><lu-highlight-data heading="Title" value="Content" bubble="1"></lu-highlight-data></td>
+			<td><lu-highlight-data heading="Title" value="Content" bubble="1" /></td>
 		</tr>
 		<tr>
 			<td>No illustration</td>
@@ -64,7 +64,7 @@
 					</dl>
 				</div>
 			</td>
-			<td><lu-highlight-data heading="Title" value="Content"></lu-highlight-data></td>
+			<td><lu-highlight-data heading="Title" value="Content" /></td>
 		</tr>
 		<tr>
 			<td>Actions & illustration</td>
@@ -171,18 +171,13 @@
 							<dt class="highlightData-content-title">Title</dt>
 							<dd class="highlightData-content-value">Content</dd>
 							<dd class="highlightData-content-action"><a href="#" class="link">Link</a></dd>
-						</dl>	
+						</dl>
 					</div>
 				</div>
 			</td>
 			<td>
 				<div class="demo-QAtable-list mod-white">
-					<lu-highlight-data
-						heading="Title"
-						value="Content"
-						theme="light"
-						style="width: 100%"
-					><a luLink>Link</a></lu-highlight-data>
+					<lu-highlight-data heading="Title" value="Content" theme="light" style="width: 100%"><a luLink>Link</a></lu-highlight-data>
 				</div>
 			</td>
 		</tr>
@@ -209,7 +204,33 @@
 				</div>
 			</td>
 			<td>
-				<lu-highlight-data heading="Title" value="Content" bubble="1" illustration="piggy-bank" theme="dark"></lu-highlight-data>
+				<lu-highlight-data heading="Title" value="Content" bubble="1" illustration="piggy-bank" theme="dark" />
+			</td>
+		</tr>
+		<tr>
+			<td>Nested</td>
+			<td style="width: 50%">
+				<div class="highlightData mod-nested mod-light">
+					<dl class="highlightData-content">
+						<dt class="highlightData-content-title">Title</dt>
+						<dd class="highlightData-content-value">Content</dd>
+					</dl>
+					<div class="highlightData-illustrations">
+						<img
+							alt=""
+							class="highlightData-illustrations-back"
+							src="https://cdn.lucca.fr/transverse/prisme/visuals/highlight-data/lucca/bubbles-light-1.svg"
+						/>
+						<img
+							alt=""
+							class="highlightData-illustrations-front"
+							src="https://cdn.lucca.fr/transverse/prisme/visuals/highlight-data/generic/piggy-bank.svg"
+						/>
+					</div>
+				</div>
+			</td>
+			<td style="width: 50%">
+				<lu-highlight-data heading="Title" value="Content" illustration="piggy-bank" bubble="1" theme="light" nested />
 			</td>
 		</tr>
 		<tr>
@@ -234,7 +255,19 @@
 					</div>
 				</div>
 			</td>
-			<td><lu-highlight-data heading="Title" value="Content" bubble="1" illustration="piggy-bank" valueFirst></lu-highlight-data></td>
+			<td><lu-highlight-data heading="Title" value="Content" bubble="1" illustration="piggy-bank" valueFirst /></td>
+		</tr>
+		<tr>
+			<td>Value first no illustration</td>
+			<td>
+				<div class="highlightData mod-valueFirst">
+					<dl class="highlightData-content">
+						<dt class="highlightData-content-title">Title</dt>
+						<dd class="highlightData-content-value">Content</dd>
+					</dl>
+				</div>
+			</td>
+			<td><lu-highlight-data heading="Title" value="Content" valueFirst /></td>
 		</tr>
 		<tr>
 			<td>Sizes</td>
@@ -281,8 +314,22 @@
 			</td>
 			<td>
 				<div class="demo-QAtable-list mod-column">
-					<lu-highlight-data heading="Title" value="Content" bubble="1" illustration="piggy-bank" size="S" style="width: 100%"></lu-highlight-data>
-					<lu-highlight-data heading="Title" value="Content" bubble="1" illustration="piggy-bank" size="XS" style="width: 100%"></lu-highlight-data>
+					<lu-highlight-data
+						heading="Title"
+						value="Content"
+						bubble="1"
+						illustration="piggy-bank"
+						size="S"
+						style="width: 100%"
+					></lu-highlight-data>
+					<lu-highlight-data
+						heading="Title"
+						value="Content"
+						bubble="1"
+						illustration="piggy-bank"
+						size="XS"
+						style="width: 100%"
+					></lu-highlight-data>
 				</div>
 			</td>
 		</tr>
@@ -309,7 +356,7 @@
 				</div>
 			</td>
 			<td>
-				<lu-highlight-data heading="Title" value="Content" bubble="1" illustration="piggy-bank" size="S" valueFirst></lu-highlight-data>
+				<lu-highlight-data heading="Title" value="Content" bubble="1" illustration="piggy-bank" size="S" valueFirst />
 			</td>
 		</tr>
 		<tr>
@@ -336,7 +383,7 @@
 				</div>
 			</td>
 			<td>
-				<lu-highlight-data heading="Title" value="Content" subText="Subtext" bubble="1" illustration="piggy-bank"></lu-highlight-data>
+				<lu-highlight-data heading="Title" value="Content" subText="Subtext" bubble="1" illustration="piggy-bank" />
 			</td>
 		</tr>
 

@@ -8,7 +8,6 @@ import { NoopValueAccessorDirective } from '../noop-value-accessor.directive';
 
 @Component({
 	selector: 'lu-textarea-input',
-	standalone: true,
 	imports: [InputDirective, ReactiveFormsModule],
 	templateUrl: './textarea-input.component.html',
 	hostDirectives: [NoopValueAccessorDirective],
@@ -40,7 +39,7 @@ export class TextareaInputComponent implements OnInit {
 	})
 	autoResizeScrollIntoView = false;
 
-	disableSpeelcheck = input<boolean, boolean>(false, { transform: booleanAttribute });
+	disableSpeelcheck = input(false, { transform: booleanAttribute });
 
 	cloneValue = '';
 

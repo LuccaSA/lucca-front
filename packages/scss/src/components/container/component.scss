@@ -1,6 +1,10 @@
-@mixin component {
+@use '@lucca-front/scss/src/commons/utils/namespace';
+
+@mixin component($atRoot: namespace.$defaultAtRoot) {
 	padding: var(--commons-container-padding);
+	min-inline-size: var(--components-container-minInlineSize);
 	max-inline-size: var(--commons-container-maxWidth);
 	margin-inline: var(--commons-container-marginInline);
 	position: relative;
+	display: block;
 }

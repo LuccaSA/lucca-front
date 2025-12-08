@@ -1,34 +1,31 @@
 <div class="textField" [class.mod-valueAlignRight]="valueAlignRight">
 	<ng-template #textfieldAddon let-addon="addon" let-type="type">
-		<span class="textField-{{type}}" luFormFieldId="{{type}}" *ngIf="addon.content">
-			<span class="textField-label-{{type}}-item" aria-hidden="true">{{ addon.content }}</span>
-			<span class="u-mask">{{ addon.ariaLabel }}</span>
-		</span>
-		<span class="textField-{{type}}" luFormFieldId="{{type}}" *ngIf="addon.icon">
-			<span class="textField-label-{{type}}-item" [attr.aria-label]="addon.ariaLabel"
-				><span class="lucca-icon icon-{{addon.icon}}"></span
-			></span>
-		</span>
+		@if (addon.content) {
+			<span class="textField-{{ type }}" luFormFieldId="{{ type }}">
+				<span class="textField-label-{{ type }}-item" aria-hidden="true">{{ addon.content }}</span>
+				<span class="pr-u-mask">{{ addon.ariaLabel }}</span>
+			</span>
+		}
+		@if (addon.icon) {
+			<span class="textField-{{ type }}" luFormFieldId="{{ type }}">
+				<span class="textField-label-{{ type }}-item" [attr.aria-label]="addon.ariaLabel"
+					><span class="lucca-icon icon-{{ addon.icon }}"></span
+				></span>
+			</span>
+		}
 	</ng-template>
 
-	<ng-container *ngIf="prefix">
+	@if (prefix) {
 		<ng-container
-			*ngTemplateOutlet="textfieldAddon; context:{
-			type: 'prefix',
-			addon: prefix
-     }"
-		>
-		</ng-container>
-	</ng-container>
-	<ng-container *ngIf="suffix">
-		<ng-container
-			*ngTemplateOutlet="textfieldAddon; context:{
-			type: 'suffix',
-			addon: suffix
-     }"
-		>
-		</ng-container>
-	</ng-container>
+			*ngTemplateOutlet="
+				textfieldAddon;
+				context: {
+					type: 'prefix',
+					addon: prefix,
+				}
+			"
+		/>
+	}
 
 	<div class="textField-input">
 		<input
@@ -39,24 +36,38 @@
 			[placeholder]="placeholder"
 			[formControl]="ngControl.control"
 			(blur)="blur.emit($event)"
+			[mask]="mask()"
 			#inputElement
 		/>
 		<div class="textField-input-affix">
-			<button class="textField-input-affix-clear clear" type="button" (click)="clearValue()" *ngIf="hasClearer && inputElement.value">
-				<span aria-hidden="true" class="lucca-icon icon-signClose"></span>
-				<span class="u-mask">{{ intl.clear }}</span>
-			</button>
-			<span aria-hidden="true" class="textField-input-affix-icon lucca-icon icon-{{searchIcon}}" *ngIf="hasSearchIcon"></span>
-			<button
-				[attr.aria-pressed]="showPassword"
-				type="button"
-				class="button mod-onlyIcon mod-text textField-input-affix-toggle"
-				(click)="togglePasswordVisibility()"
-				*ngIf="hasTogglePasswordVisibilityIcon()"
-			>
-				<span aria-hidden="true" class="lucca-icon icon-{{showPassword ? 'unwatch' : 'watch'}}"></span>
-				<span class="u-mask">{{ intl.togglePasswordVisibility }}</span>
-			</button>
+			@if (hasClearer && inputElement.value) {
+				<lu-clear (click)="clearValue()" class="textField-input-affix-clear">{{ intl.clear }}</lu-clear>
+			}
+			@if (hasSearchIcon) {
+				<span aria-hidden="true" class="textField-input-affix-icon lucca-icon icon-{{ searchIcon }}"></span>
+			}
+			@if (hasTogglePasswordVisibilityIcon()) {
+				<button
+					[attr.aria-pressed]="showPassword"
+					type="button"
+					class="button mod-onlyIcon mod-ghost textField-input-affix-toggle"
+					(click)="togglePasswordVisibility()"
+				>
+					<span aria-hidden="true" class="lucca-icon icon-{{ showPassword ? 'unwatch' : 'watch' }}"></span>
+					<span class="pr-u-mask">{{ intl.togglePasswordVisibility }}</span>
+				</button>
+			}
 		</div>
 	</div>
+	@if (suffix) {
+		<ng-container
+			*ngTemplateOutlet="
+				textfieldAddon;
+				context: {
+					type: 'suffix',
+					addon: suffix,
+				}
+			"
+		/>
+	}
 </div>

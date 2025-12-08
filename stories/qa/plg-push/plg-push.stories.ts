@@ -1,10 +1,11 @@
 import { Component } from '@angular/core';
+import { PLGPushComponent } from '@lucca-front/ng/plg-push';
 import { Meta, StoryFn } from '@storybook/angular';
 
 @Component({
-	standalone: true,
 	selector: 'plg-push-stories',
 	templateUrl: './plg-push.stories.html',
+	imports: [PLGPushComponent],
 })
 class PLGPushStory {}
 

@@ -1,4 +1,4 @@
-import { AsyncPipe, NgIf } from '@angular/common';
+import { AsyncPipe } from '@angular/common';
 import { Component, inject } from '@angular/core';
 import { ILuOptionContext, LU_OPTION_CONTEXT } from '@lucca-front/ng/core-select';
 import { LuUserDisplayPipe } from '@lucca-front/ng/user';
@@ -7,13 +7,12 @@ import { LuCoreSelectUsersDirective } from './users.directive';
 
 @Component({
 	selector: 'lu-user-displayer',
-	imports: [NgIf, AsyncPipe, LuUserDisplayPipe],
+	imports: [AsyncPipe, LuUserDisplayPipe],
 	template: `
-		<ng-container *ngIf="context.option$ | async as user">
-			{{ user | luUserDisplay: userDirective.displayFormat() }}
-		</ng-container>
+		@if (context.option$ | async; as user) {
+			<span translate="no">{{ user | luUserDisplay: userDirective.displayFormat() }}</span>
+		}
 	`,
-	standalone: true,
 })
 export class LuUserDisplayerComponent {
 	protected context = inject<ILuOptionContext<LuCoreSelectUser>>(LU_OPTION_CONTEXT);

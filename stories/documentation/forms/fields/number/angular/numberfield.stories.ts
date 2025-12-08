@@ -4,17 +4,19 @@ import { FormFieldComponent } from '@lucca-front/ng/form-field';
 import { NumberInputComponent } from '@lucca-front/ng/forms';
 import { Meta, moduleMetadata, StoryObj } from '@storybook/angular';
 import { cleanupTemplate, generateInputs } from 'stories/helpers/stories';
+import { StoryModelDisplayComponent } from 'stories/helpers/story-model-display.component';
 
 export default {
 	title: 'Documentation/Forms/Fields/NumberField/Angular',
 	decorators: [
 		moduleMetadata({
-			imports: [NumberInputComponent, FormFieldComponent, FormsModule, ReactiveFormsModule, BrowserAnimationsModule],
+			imports: [NumberInputComponent, FormFieldComponent, FormsModule, ReactiveFormsModule, BrowserAnimationsModule, StoryModelDisplayComponent],
 		}),
 	],
 	argTypes: {
 		tooltip: {
 			type: 'string',
+			if: { arg: 'hiddenLabel', truthy: false },
 		},
 		size: {
 			options: ['M', 'S', 'XS'],
@@ -52,21 +54,18 @@ export const Basic: StoryObj<NumberInputComponent & { disabled: boolean; require
 				},
 				argTypes,
 			)}>
-	<lu-number-input
-	${generateInputs(inputArgs, argTypes)}
-		[(ngModel)]="example">
-	</lu-number-input>
+	<lu-number-input [(ngModel)]="example"${generateInputs(inputArgs, argTypes)} />
 </lu-form-field>
-{{example}}`),
+<pr-story-model-display>{{ example }}</pr-story-model-display>`),
 			moduleMetadata: {
 				imports: [NumberInputComponent, FormFieldComponent, FormsModule, BrowserAnimationsModule],
 			},
 		};
 	},
 	args: {
+		hiddenLabel: false,
 		label: 'Label',
 		required: true,
-		hiddenLabel: false,
 		hasClearer: true,
 		disabled: false,
 		inlineMessage: 'Helper text',
@@ -77,6 +76,7 @@ export const Basic: StoryObj<NumberInputComponent & { disabled: boolean; require
 		min: 0,
 		max: 999,
 		noSpinButtons: false,
+		valueAlignRight: false,
 	},
 };
 
@@ -104,23 +104,18 @@ export const WithPrefixAndSuffix: StoryObj<
 				},
 				argTypes,
 			)}>
-	<lu-number-input
-		${generateInputs(inputArgs, argTypes)}
-		[prefix]="prefix"
-		[suffix]="suffix"
-		[(ngModel)]="example">
-	</lu-number-input>
+	<lu-number-input [(ngModel)]="example" [prefix]="prefix" [suffix]="suffix"${generateInputs(inputArgs, argTypes)} />
 </lu-form-field>
-{{example}}`),
+<pr-story-model-display>{{ example }}</pr-story-model-display>`),
 			moduleMetadata: {
 				imports: [NumberInputComponent, FormFieldComponent, FormsModule, BrowserAnimationsModule],
 			},
 		};
 	},
 	args: {
+		hiddenLabel: false,
 		label: 'Label',
 		tooltip: 'Tooltip message',
-		hiddenLabel: false,
 		required: true,
 		placeholder: 'Placeholder',
 		disabled: false,
@@ -139,5 +134,6 @@ export const WithPrefixAndSuffix: StoryObj<
 		min: 0,
 		max: 999,
 		noSpinButtons: false,
+		valueAlignRight: false,
 	},
 };

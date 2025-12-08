@@ -5,6 +5,7 @@ import { LuOptionDirective } from '@lucca-front/ng/core-select';
 import { FormFieldComponent } from '@lucca-front/ng/form-field';
 import { LuSimpleSelectInputComponent } from '@lucca-front/ng/simple-select';
 import { Meta, moduleMetadata, StoryObj } from '@storybook/angular';
+import { StoryModelDisplayComponent } from 'stories/helpers/story-model-display.component';
 import { HiddenArgType } from '../../../../../helpers/common-arg-types';
 import { generateInputs } from '../../../../../helpers/stories';
 
@@ -12,12 +13,13 @@ export default {
 	title: 'Documentation/Forms/Fields/Simple Select/Angular',
 	decorators: [
 		moduleMetadata({
-			imports: [LuSimpleSelectInputComponent, FormFieldComponent, FormsModule, BrowserAnimationsModule, LuOptionDirective, FilterLegumesPipe],
+			imports: [LuSimpleSelectInputComponent, FormFieldComponent, FormsModule, BrowserAnimationsModule, LuOptionDirective, FilterLegumesPipe, StoryModelDisplayComponent],
 		}),
 	],
 	argTypes: {
 		tooltip: {
 			type: 'string',
+			if: { arg: 'hiddenLabel', truthy: false },
 		},
 		size: {
 			options: ['M', 'S', 'XS'],
@@ -80,17 +82,16 @@ export const Basic: StoryObj<
 		[(ngModel)]="example">
 	</lu-simple-select>
 </lu-form-field>
-
-{{example | json}}`,
+<pr-story-model-display>{{ example | json }}</pr-story-model-display>`,
 			moduleMetadata: {
 				imports: [LuSimpleSelectInputComponent, FormFieldComponent, FormsModule, BrowserAnimationsModule],
 			},
 		};
 	},
 	args: {
+		hiddenLabel: false,
 		label: 'Label',
 		tooltip: 'Tooltip message',
-		hiddenLabel: false,
 		placeholder: 'Placeholder',
 		clearable: true,
 		inlineMessage: 'Helper text',

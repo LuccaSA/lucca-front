@@ -1,17 +1,17 @@
-import { ChangeDetectionStrategy, Component, DestroyRef, DoCheck, inject, Injector, OnInit, signal, ViewChild, ViewContainerRef, ViewEncapsulation } from '@angular/core';
-import { DialogComponent, DialogContentComponent, DialogFooterComponent, DialogHeaderComponent, injectDialogData, injectDialogRef } from '@lucca-front/ng/dialog';
 import { ComponentType } from '@angular/cdk/overlay';
-import { ILuModalContent, LuModalContentResult } from '../../modal.model';
-import { ALuModalRef } from '../../modal-ref.model';
-import { LU_MODAL_DATA } from '../../modal.token';
-import { delay, distinctUntilChanged, map, switchMap, tap } from 'rxjs/operators';
-import { isObservable, Observable, of, ReplaySubject, Subject } from 'rxjs';
-import { getIntl, Palette } from '@lucca-front/ng/core';
-import { LU_MODAL_TRANSLATIONS } from '../../modal.translate';
-import { AsyncPipe, NgClass, NgIf } from '@angular/common';
+import { AsyncPipe } from '@angular/common';
+import { ChangeDetectionStrategy, Component, DestroyRef, DoCheck, inject, Injector, OnInit, signal, ViewChild, ViewContainerRef, ViewEncapsulation } from '@angular/core';
 import { takeUntilDestroyed } from '@angular/core/rxjs-interop';
 import { ButtonComponent } from '@lucca-front/ng/button';
+import { getIntl, Palette } from '@lucca-front/ng/core';
+import { DialogComponent, DialogContentComponent, DialogFooterComponent, DialogHeaderComponent, injectDialogData, injectDialogRef } from '@lucca-front/ng/dialog';
 import { NumericBadgeComponent } from '@lucca-front/ng/numeric-badge';
+import { isObservable, Observable, of, ReplaySubject, Subject } from 'rxjs';
+import { delay, distinctUntilChanged, map, switchMap, tap } from 'rxjs/operators';
+import { ALuModalRef } from '../../modal-ref.model';
+import { ILuModalContent, LuModalContentResult } from '../../modal.model';
+import { LU_MODAL_DATA } from '../../modal.token';
+import { LU_MODAL_TRANSLATIONS } from '../../modal.translate';
 
 interface AdapterData<D, C> {
 	component: ComponentType<C>;
@@ -20,11 +20,10 @@ interface AdapterData<D, C> {
 
 @Component({
 	selector: 'lu-dialog-content-adapter',
-	standalone: true,
 	templateUrl: './dialog-content-adapter.component.html',
 	changeDetection: ChangeDetectionStrategy.Default,
 	encapsulation: ViewEncapsulation.None,
-	imports: [DialogComponent, DialogHeaderComponent, DialogContentComponent, DialogFooterComponent, AsyncPipe, ButtonComponent, NgIf, NumericBadgeComponent, NgClass],
+	imports: [DialogComponent, DialogHeaderComponent, DialogContentComponent, DialogFooterComponent, AsyncPipe, ButtonComponent, NumericBadgeComponent],
 })
 export class DialogContentAdapterComponent<D, C extends ILuModalContent> implements OnInit, DoCheck {
 	#destroyRef = inject(DestroyRef);

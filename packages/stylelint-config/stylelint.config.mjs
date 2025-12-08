@@ -70,6 +70,12 @@ export default {
 		],
 		'block-no-empty': null,
 		'color-hex-length': null,
+		'container-name-pattern': [
+			'^(([a-z][a-zA-Z0-9]*)((-(([a-z0-9]+[a-zA-Z0-9]*)|([A-Z]+))+)*)|[A-Z]+)$',
+			{
+				message: (containerName) => `Expected "${containerName}" to match pattern foo(-bar(Baz)*)*`,
+			},
+		],
 		'custom-property-empty-line-before': [
 			'always',
 			{
@@ -131,7 +137,6 @@ export default {
 			getDisallowedObjects(LFDeprecatedSelectors),
 			{
 				splitList: true,
-				reportDisables: true,
 				url: 'https://prisme.lucca.io/94310e217/p/40c515-cycle-de-vie-des-composants/b/95175f',
 				message: (selector) => getDisallowedData(LFDeprecatedSelectors, selector).message,
 				severity: (selector) => getDisallowedData(LFDeprecatedSelectors, selector).severity,

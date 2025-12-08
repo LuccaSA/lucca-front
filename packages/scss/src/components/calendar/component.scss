@@ -20,7 +20,7 @@
 			overflow: auto;
 			position: relative;
 			z-index: 1;
-			border-radius: var(--commons-borderRadius-M) 0 0 var(--commons-borderRadius-M);
+			border-radius: var(--pr-t-border-radius-default) 0 0 var(--pr-t-border-radius-default);
 
 			&:focus-visible {
 				@include a11y.focusVisible;
@@ -42,11 +42,11 @@
 
 		.calendarShortcutsButton-item-button.button {
 			@include button.block;
-			@include button.text;
+			@include button.ghost;
 			@include button.S;
 
 			justify-content: flex-start;
-			font-weight: 400;
+			font-weight: var(--pr-t-font-fontWeight-regular);
 			white-space: wrap;
 			text-align: start;
 		}
@@ -101,12 +101,12 @@
 			border-width: var(--pr-t-spacings-150);
 			border-style: solid;
 			border-color: var(--components-calendarWrapper-navigationBackground);
-			border-radius: var(--commons-borderRadius-L);
+			border-radius: var(--pr-t-border-radius-default);
 		}
 
 		.calendarWrapper-navigation-button {
 			&.button {
-				@include button.text;
+				@include button.ghost;
 				@include button.onlyIconXS;
 			}
 		}
@@ -127,7 +127,7 @@
 				display: block;
 				margin: auto;
 				padding: var(--pr-t-spacings-100);
-				line-height: var(--sizes-M-lineHeight);
+				line-height: var(--pr-t-font-body-M-lineHeight);
 
 				@include link.decorationHover;
 
@@ -142,11 +142,9 @@
 		}
 
 		.calendar-name {
-			line-height: var(--sizes-L-lineHeight);
+			font: var(--pr-t-font-heading-3);
 			padding-block: var(--pr-t-spacings-50);
 			padding-inline: calc(var(--pr-t-spacings-300) + var(--pr-t-spacings-100));
-			font-size: var(--sizes-L-fontSize);
-			font-weight: 700;
 			border: var(--pr-t-spacings-150) solid transparent;
 			border-block-end: var(--pr-t-spacings-100) solid transparent;
 			text-transform: lowercase;
@@ -157,7 +155,7 @@
 		.calendar-name-button {
 			@include reset.button;
 
-			border-radius: var(--commons-borderRadius-L);
+			border-radius: var(--pr-t-border-radius-default);
 			text-align: inherit;
 			inline-size: fit-content;
 			display: inline-block;
@@ -184,13 +182,13 @@
 		.calendar-table-head-row-cell,
 		.calendar-table-body-row-cell {
 			padding: var(--pr-t-spacings-25);
+			block-size: var(--pr-t-spacings-400);
+			box-sizing: content-box;
 		}
 
 		.calendar-table-head-row-cell {
-			font-weight: 400;
-			line-height: var(--sizes-S-lineHeight);
-			font-size: var(--sizes-S-fontSize);
-			color: var(--palettes-neutral-700);
+			font: var(--pr-t-font-body-S);
+			color: var(--pr-t-color-text-subtle);
 			text-transform: uppercase;
 			border-block-end: var(--pr-t-spacings-50) solid transparent;
 		}
@@ -211,7 +209,7 @@
 		.calendar-table-body-row-cell-action {
 			@include reset.button;
 
-			border-radius: var(--commons-borderRadius-L);
+			border-radius: var(--pr-t-border-radius-default);
 			position: relative;
 			z-index: 1;
 			text-align: center;
@@ -220,19 +218,13 @@
 			color: var(--components-calendar-table-body-row-cell-actionColor);
 			background-color: var(--components-calendar-table-body-row-cell-actionHighlight);
 			display: var(--components-calendar-table-body-row-cell-actionDisplay);
-			block-size: var(--pr-t-spacings-400);
+			block-size: 100%;
 			text-transform: lowercase;
+			cursor: var(--components-calendar-table-body-row-cell-actionCursor);
+			text-decoration: var(--components-calendar-table-body-row-cell-actionTextDecoration);
 			box-shadow:
 				0 0 0 1px var(--components-calendar-table-body-row-cell-actionHighlight),
 				0 0 0 1px var(--components-calendar-table-body-row-cell-actionHighlight) inset;
-
-			&:disabled,
-			&[aria-disabled='true'] {
-				--components-calendar-table-body-row-cell-actionColor: var(--palettes-neutral-500);
-
-				text-decoration: line-through;
-				cursor: default;
-			}
 
 			&:not(:disabled, [aria-disabled='true']) {
 				&:hover {

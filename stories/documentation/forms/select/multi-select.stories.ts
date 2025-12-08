@@ -1,4 +1,4 @@
-import { AsyncPipe, CommonModule, I18nPluralPipe } from '@angular/common';
+import { AsyncPipe, I18nPluralPipe } from '@angular/common';
 import { provideHttpClient } from '@angular/common/http';
 import { FormsModule } from '@angular/forms';
 import { provideAnimations } from '@angular/platform-browser/animations';
@@ -9,14 +9,20 @@ import {
 	LuDisplayerDirective,
 	LuOptionDirective,
 	LuOptionGroupDirective,
+	TreeGroupingFn,
+	ɵLuOptionOutletDirective,
 } from '@lucca-front/ng/core-select';
 import { LuCoreSelectApiV3Directive, LuCoreSelectApiV4Directive } from '@lucca-front/ng/core-select/api';
+import { LuCoreSelectDepartmentsDirective } from '@lucca-front/ng/core-select/department';
 import { LuCoreSelectEstablishmentsDirective } from '@lucca-front/ng/core-select/establishment';
 import { LuCoreSelectJobQualificationsDirective } from '@lucca-front/ng/core-select/job-qualification';
+import { LuCoreSelectOccupationCategoriesDirective } from '@lucca-front/ng/core-select/occupation-category';
 import { LuCoreSelectUsersDirective, provideCoreSelectCurrentUserId } from '@lucca-front/ng/core-select/user';
 import {
 	LuMultiDisplayerDirective,
+	LuMultiSelectContentDisplayerComponent,
 	LuMultiSelectCounterDisplayerComponent,
+	LuMultiSelectDefaultDisplayerComponent,
 	LuMultiSelectDisplayerInputDirective,
 	LuMultiSelectInputComponent,
 	LuMultiSelection,
@@ -27,10 +33,12 @@ import { applicationConfig, Meta, moduleMetadata } from '@storybook/angular';
 import { interval, map } from 'rxjs';
 import { startWith } from 'rxjs/operators';
 import { HiddenArgType } from 'stories/helpers/common-arg-types';
-import { getStoryGenerator } from 'stories/helpers/stories';
+import { createTestStory, getStoryGenerator } from 'stories/helpers/stories';
+import { StoryModelDisplayComponent } from 'stories/helpers/story-model-display.component';
+import { expect, screen, userEvent, within } from 'storybook/test';
+import { TreeSelectDirective } from '../../../../packages/ng/tree-select/tree-select.directive';
+import { waitForAngular } from '../../../helpers/test';
 import { allLegumes, colorNameByColor, coreSelectStory, FilterLegumesPipe, ILegume, LuCoreSelectInputStoryComponent, SortLegumesPipe } from './select.utils';
-import { expect, fireEvent, screen, userEvent, within } from '@storybook/test';
-import { sleep, waitForAngular } from '../../../helpers/test';
 
 type LuMultiSelectInputStoryComponent = LuCoreSelectInputStoryComponent & {
 	selectedLegumes: ILegume[] | LuMultiSelection<ILegume>;
@@ -38,7 +46,9 @@ type LuMultiSelectInputStoryComponent = LuCoreSelectInputStoryComponent & {
 	maxValuesShown: number;
 	selectedAxisSection: LuMultiSelection<{ id: number; name: string }>;
 	selectedEstablishment: LuMultiSelection<{ id: number; name: string }>;
+	selectedDepartments: LuMultiSelection<{ id: number; name: string }>;
 	selectLegume(legume: ILegume, legumes: ILegume[]): ILegume[];
+	groupingFn?: TreeGroupingFn<ILegume>;
 } & LuMultiSelectInputComponent<ILegume>;
 
 const generateStory = getStoryGenerator<LuMultiSelectInputStoryComponent>({
@@ -55,13 +65,16 @@ const generateStory = getStoryGenerator<LuMultiSelectInputStoryComponent>({
 });
 
 async function checkValues(input: HTMLElement, values: string[]) {
+	if (values.length === 0) {
+		await expect(input.parentElement.getElementsByTagName('lu-numeric-badge').length).toBe(0);
+	}
 	// If it's a counter displayer
 	if (input.parentElement.getElementsByTagName('lu-numeric-badge').length > 0) {
 		const counter = input.parentElement.getElementsByTagName('lu-numeric-badge')[0];
 		await expect(counter).toHaveTextContent(values.length.toString());
 	} else {
 		for (const value of values) {
-			await expect(input.parentElement).toHaveTextContent(value);
+			await expect(input.parentElement).toHaveTextContent(value.trim());
 		}
 	}
 }
@@ -81,7 +94,7 @@ const basePlay = async ({ canvasElement, step }) => {
 	await userEvent.click(input);
 	await waitForAngular();
 	const panel = within(screen.getByRole('listbox'));
-	const options = await panel.findAllByRole('option');
+	const options = await panel.findAllByRole('option').then((options) => options.filter((el) => !el.id.includes('select-all')));
 	const optionValues = options.slice(0, 4).map((option) => option.textContent);
 	await userEvent.click(options[0]);
 	await userEvent.click(options[1]);
@@ -110,7 +123,9 @@ const basePlay = async ({ canvasElement, step }) => {
 	// Doing the same but with keyboard
 	await step('Keyboard interactions', async () => {
 		const buttons = await within(canvasElement).findAllByRole('button');
-		await userEvent.click(buttons.find((button) => button.className.includes('multipleSelect-clear')));
+		const clearButton = buttons.find((button) => button.className.includes('clear'));
+		await expect(clearButton).not.toBeUndefined();
+		await userEvent.click(clearButton);
 		await waitForAngular();
 		input.focus();
 		await expect(input).toHaveFocus();
@@ -136,13 +151,20 @@ const basePlay = async ({ canvasElement, step }) => {
 		await userEvent.keyboard('{Enter}');
 		// Because of the arrowDown issue, we'll select more using mouse in order to be able to test more stuff
 		const panel = within(screen.getByRole('listbox'));
-		const options = await panel.findAllByRole('option');
+		const options = await panel.findAllByRole('option').then((options) => options.filter((el) => !el.id.includes('select-all')));
 		const optionValues = options.slice(0, 4).map((option) => option.textContent);
 		await userEvent.click(options[1]);
 		await userEvent.click(options[2]);
 		await userEvent.click(options[3]);
+		const allOptions = await panel.findAllByRole('option');
 		await userEvent.keyboard('{Escape}');
-		await checkValues(input, optionValues);
+		if (allOptions.some((opt) => opt.id.includes('select-all'))) {
+			const valuesWithSelectAll = options.map((opt) => opt.textContent);
+			valuesWithSelectAll.splice(1, 3);
+			await checkValues(input, valuesWithSelectAll);
+		} else {
+			await checkValues(input, optionValues);
+		}
 		if (isBadgeDisplayer) {
 			input.focus();
 			await userEvent.tab();
@@ -172,7 +194,6 @@ export const SelectAll = generateStory({
 	withSelectAll
 	[totalCount]="legumes.length"
 	withSelectAllDisplayerLabel="légumes"
-	[placeholder]="placeholder"
 	[clearable]="clearable"
 	[loading]="loading"
 	[(ngModel)]="legumeSelection"
@@ -180,7 +201,7 @@ export const SelectAll = generateStory({
 	[keepSearchAfterSelection]="keepSearchAfterSelection"
 	(clueChange)="clue = $event"
 />
-{{ legumeSelection | json }}`,
+<pr-story-model-display>{{ legumeSelection | json }}</pr-story-model-display>`,
 	neededImports: {
 		'@lucca-front/ng/multi-select': ['LuMultiSelectInputComponent', 'LuMultiSelectWithSelectAllDirective'],
 		'@lucca-front/ng/core-select/user': ['LuCoreSelectUsersDirective', 'LuCoreSelectTotalCountDirective'],
@@ -190,26 +211,36 @@ export const SelectAll = generateStory({
 			legumeSelection: { mode: 'none' },
 			keepSearchAfterSelection: false,
 		},
-		play: async (context) => {
-			await basePlay(context);
-			const input = within(context.canvasElement).getByRole('combobox');
-			const buttons = within(context.canvasElement).queryAllByRole('button');
-			if (buttons.length > 0) {
-				const clearButton = buttons.find((button) => button.className.includes('multipleSelect-clear'));
-				if (clearButton) {
-					await userEvent.click(clearButton);
-				}
-			}
-			await userEvent.click(input);
-			await waitForAngular();
-			const panel = within(screen.getByRole('listbox'));
-			const selectAllCheckbox = panel.getByLabelText('Tout sélectionner');
-			await userEvent.click(selectAllCheckbox);
-			const options = await panel.findAllByRole('option');
-			const optionValues = options.map((option) => option.textContent);
-			await checkValues(input, optionValues);
-		},
 	},
+});
+
+export const SelectAllTEST = createTestStory(SelectAll, async (context) => {
+	await basePlay(context);
+	const input = within(context.canvasElement).getByRole('combobox');
+	const buttons = within(context.canvasElement).queryAllByRole('button');
+	if (buttons.length > 0) {
+		const clearButton = buttons.find((button) => button.className.includes('multipleSelect-clear'));
+		if (clearButton) {
+			await userEvent.click(clearButton);
+		}
+	}
+	await userEvent.click(input);
+	await waitForAngular();
+	const panel = within(screen.getByRole('listbox'));
+	const selectAllCheckbox = panel.getByLabelText('Tout sélectionner');
+	await userEvent.click(selectAllCheckbox);
+	const options = await panel.findAllByRole('option').then((options) => options.filter((el) => !el.id.includes('select-all')));
+	const optionValues = options.map((option) => option.textContent);
+	await checkValues(input, optionValues);
+	await userEvent.keyboard('{Escape}');
+	context.step('Select all keyboard interactions', async () => {
+		input.focus();
+		await userEvent.keyboard('{ArrowDown}');
+		await waitForAngular();
+		await userEvent.keyboard('{Enter}');
+		// We should have unselected everything with this keyboard input sequence
+		await checkValues(input, []);
+	});
 });
 
 export const Basic = generateStory({
@@ -217,7 +248,6 @@ export const Basic = generateStory({
 	description: '',
 	template: `<lu-multi-select
 	#selectRef
-	[placeholder]="placeholder"
 	[clearable]="clearable"
 	[loading]="loading"
 	[keepSearchAfterSelection]="keepSearchAfterSelection"
@@ -225,24 +255,23 @@ export const Basic = generateStory({
 	[options]="legumes | filterLegumes:clue"
 	(clueChange)="clue = $event"
 	[maxValuesShown]="maxValuesShown"
->
-</lu-multi-select>`,
+/>`,
 	neededImports: {
 		'@lucca-front/ng/multi-select': ['LuMultiSelectInputComponent'],
 	},
 	storyPartial: {
-		play: basePlay,
 		args: {
 			selectedLegumes: allLegumes.slice(0, 15),
 			keepSearchAfterSelection: false,
 		},
 		argTypes: {
 			clearable: { control: { type: 'boolean' } },
-			placeholder: { control: { type: 'text' } },
 			maxValuesShown: { control: { type: 'number' } },
 		},
 	},
 });
+
+export const BasicTEST = createTestStory(Basic, basePlay);
 
 export const WithMultiDisplayer = generateStory({
 	name: 'With MultiDisplayer',
@@ -253,13 +282,12 @@ export const WithMultiDisplayer = generateStory({
 	[clearable]="clearable"
 	[loading]="loading"
 	[(ngModel)]="selectedLegumes"
-	placeholder="Placeholder..."
 	[options]="legumes | filterLegumes:clue"
 	[keepSearchAfterSelection]="keepSearchAfterSelection"
 	(clueChange)="clue = $event"
 >
 	<ng-container *luMultiDisplayer="let values; select: selectRef">
-		<lu-multi-select-counter-displayer [selected]="values" label="légumes sélectionnés"></lu-multi-select-counter-displayer>
+		<lu-multi-select-counter-displayer [selected]="values" label="légumes sélectionnés" />
 	</ng-container>
 </lu-multi-select>`,
 	neededImports: {
@@ -273,13 +301,50 @@ export const WithMultiDisplayer = generateStory({
 	},
 });
 
+export const AllAsDefaultValue = generateStory({
+	name: 'With ContentDisplayer',
+	description: "Il est possible de personnaliser le contenu du displayer en utilisant la directive `luMultiDisplayer`. Avec le `ContentDisplayer` il est possible de lui passer n'importe quel contenu",
+	template: `<lu-multi-select
+	#selectRef
+	[clearable]="clearable"
+	[loading]="loading"
+	[(ngModel)]="selectedLegumes"
+	[options]="legumes | filterLegumes:clue"
+	[keepSearchAfterSelection]="keepSearchAfterSelection"
+	(clueChange)="clue = $event"
+>
+		<ng-container *luMultiDisplayer="let values; select: selectRef">
+		@if (values.length === 0) {
+			<lu-multi-select-content-displayer>🥔 All vegetables 🍆</lu-multi-select-content-displayer>
+		} @else {
+			<ng-container *luOptionOutlet="valuesTpl; value: values || []" />
+		}
+	</ng-container>
+</lu-multi-select>`,
+	neededImports: {
+		'@lucca-front/ng/multi-select': [
+			'LuMultiSelectInputComponent',
+			'LuMultiDisplayerDirective',
+			'ɵLuOptionOutletDirective',
+			'MultiSelectDisplayerInputDirective',
+			'MultiSelectContentDisplayerComponent',
+		],
+	},
+	storyPartial: {
+		args: {
+			valuesTpl: LuMultiSelectDefaultDisplayerComponent,
+			selectedLegumes: [],
+			keepSearchAfterSelection: false,
+		},
+	},
+});
+
 export const WithDisplayer = generateStory({
 	name: 'With Displayer',
 	description:
 		"Il est possible de personnaliser le contenu des *chips* dans l'affichage de la valeur sélectionnée en utilisant la directive `luDisplayer`. Le *template* prend une option parmi les valeurs sélectionnées.",
 	template: `<lu-multi-select
 	#selectRef
-	[placeholder]="placeholder"
 	[options]="legumes | filterLegumes:clue"
 	[keepSearchAfterSelection]="keepSearchAfterSelection"
 	(clueChange)="clue = $event"
@@ -309,7 +374,6 @@ export const WithPagination = generateStory({
 	description: "Il est possible de charger les options au fur et à mesure en écoutant l'évènement `(nextPage)`.",
 	template: `<lu-multi-select
 	#selectRef
-	placeholder="Placeholder..."
 	[(ngModel)]="selectedLegumes"
 	[options]="legumes.slice(0, page * 10)"
 	(nextPage)="page = page + 1"
@@ -328,11 +392,11 @@ export const WithDisabledOptions = generateStory({
 	description: "Il est possible de désactiver certaines options en utilisant la directive `luDisabledOption` sur l'option.",
 	template: `<lu-multi-select
 	#selectRef
-	placeholder="Placeholder..."
 	[(ngModel)]="selectedLegumes"
 	[options]="legumes | filterLegumes:clue"
 	(clueChange)="clue = $event"
 	[maxValuesShown]="maxValuesShown"
+	[keepSearchAfterSelection]="keepSearchAfterSelection"
 >
 	<ng-container *luOption="let legume; select: selectRef" [luDisabledOption]="legume.index % 2 === 0">{{ legume.name }}</ng-container>
 </lu-multi-select>`,
@@ -351,13 +415,14 @@ export const ApiV3 = generateStory({
 	name: 'Api V3',
 	description: "Pour récupérer automatiquement les options depuis une api V3 avec pagination et recherche, il suffit d'utiliser la directive `apiV3`.",
 	template: `<lu-multi-select
-	placeholder="Placeholder..."
 	apiV3="/api/v3/axisSections"
 	withSelectAll
 	withSelectAllDisplayerLabel="sections"
 	[(ngModel)]="selectedAxisSection"
 	[maxValuesShown]="maxValuesShown"
-/> {{ selectedAxisSection | json }}`,
+	[keepSearchAfterSelection]="keepSearchAfterSelection"
+/>
+<pr-story-model-display>{{ selectedAxisSection | json }}</pr-story-model-display>`,
 	neededImports: {
 		'@lucca-front/ng/multi-select': ['LuMultiSelectInputComponent', 'LuMultiSelectWithSelectAllDirective'],
 		'@lucca-front/ng/core-select/api': ['LuCoreSelectApiV3Directive'],
@@ -373,13 +438,14 @@ export const ApiV4 = generateStory({
 	name: 'Api V4',
 	description: "Pour récupérer automatiquement les options depuis une api V4 avec pagination et recherche, il suffit d'utiliser la directive `apiV4`.",
 	template: `<lu-multi-select
-	placeholder="Placeholder..."
 	withSelectAll
 	withSelectAllDisplayerLabel="établissements"
 	apiV4="/organization/structure/api/establishments"
 	[(ngModel)]="selectedEstablishment"
 	[maxValuesShown]="maxValuesShown"
-/>{{ selectedEstablishment | json }}`,
+	[keepSearchAfterSelection]="keepSearchAfterSelection"
+/>
+<pr-story-model-display>{{ selectedEstablishment | json }}</pr-story-model-display>`,
 	neededImports: {
 		'@lucca-front/ng/multi-select': ['LuMultiSelectInputComponent', 'LuMultiSelectWithSelectAllDirective'],
 		'@lucca-front/ng/core-select/api': ['LuCoreSelectApiV4Directive'],
@@ -395,12 +461,13 @@ export const Establishment = generateStory({
 	name: 'Establishment Select',
 	description: "Pour saisir un établissement, il suffit d'utiliser la directive `establishments`",
 	template: `<lu-multi-select
-	placeholder="Placeholder..."
 	withSelectAll
 	withSelectAllDisplayerLabel="établissements"
 	establishments
 	[(ngModel)]="selectedEstablishment"
-/>{{ selectedEstablishment | json }}`,
+	[keepSearchAfterSelection]="keepSearchAfterSelection"
+/>
+<pr-story-model-display>{{ selectedEstablishment | json }}</pr-story-model-display>`,
 	neededImports: {
 		'@lucca-front/ng/multi-select': ['LuMultiSelectInputComponent', 'LuMultiSelectWithSelectAllDirective'],
 		'@lucca-front/ng/core-select/establishment': ['LuCoreSelectEstablishmentsDirective'],
@@ -412,14 +479,65 @@ export const Establishment = generateStory({
 	},
 });
 
+export const Department = generateStory({
+	name: 'Departement Select',
+	description: "Pour saisir un département, il suffit d'utiliser la directive `departments`",
+	template: `<lu-multi-select
+	withSelectAll
+	withSelectAllDisplayerLabel="départements"
+	departments
+	[(ngModel)]="selectedDepartements"
+	[keepSearchAfterSelection]="keepSearchAfterSelection"
+/>{{ selectedDepartements | json }}`,
+	neededImports: {
+		'@lucca-front/ng/multi-select': ['LuMultiSelectInputComponent', 'LuMultiSelectWithSelectAllDirective'],
+		'@lucca-front/ng/core-select/departments': ['LuCoreSelectDepartmentsDirective'],
+	},
+	storyPartial: {
+		args: {
+			selectedDepartments: { mode: 'none' },
+		},
+	},
+});
+
+export const Tree = generateStory({
+	name: 'Tree Select',
+	description: '',
+	template: `<lu-multi-select
+	[options]="legumes"
+	[treeSelect]="groupingFn"
+	[(ngModel)]="selectedTree"
+/>{{ selectedTree | json }}`,
+	neededImports: {
+		'@lucca-front/ng/multi-select': ['LuMultiSelectInputComponent', 'LuMultiSelectWithSelectAllDirective'],
+		'@lucca-front/ng/tree-select': ['TreeSelectDirective'],
+	},
+	storyPartial: {
+		args: {
+			groupingFn: (legume: ILegume) => {
+				const parent = allLegumes.find((l) => l.color === legume.color);
+				if (parent === legume) {
+					return null;
+				}
+				return parent;
+			},
+		},
+	},
+});
+
 export const User = generateStory({
 	name: 'User Select',
 	description: "Pour saisir des utilisateurs, il suffit d'utiliser la directive `users`",
 	template: `<lu-multi-select
-	placeholder="Placeholder..."
 	users
 	[(ngModel)]="selectedUsers"
-></lu-multi-select>`,
+	[keepSearchAfterSelection]="keepSearchAfterSelection"
+/>`,
+	storyPartial: {
+		args: {
+			keepSearchAfterSelection: false,
+		},
+	},
 	neededImports: {
 		'@lucca-front/ng/multi-select': ['LuMultiSelectInputComponent'],
 		'@lucca-front/ng/core-select/user': ['LuCoreSelectUsersDirective'],
@@ -430,12 +548,17 @@ export const UserWithSelectAll = generateStory({
 	name: 'User Select (select all)',
 	description: "Pour saisir des utilisateurs, il suffit d'utiliser la directive `users` et `withSelectAll`",
 	template: `<lu-multi-select
-	placeholder="Placeholder..."
 	users
 	withSelectAll
 	withSelectAllDisplayerLabel="utilisateurs"
+	[keepSearchAfterSelection]="keepSearchAfterSelection"
 	[(ngModel)]="selectedUsers"
-></lu-multi-select>`,
+/>`,
+	storyPartial: {
+		args: {
+			keepSearchAfterSelection: false,
+		},
+	},
 	neededImports: {
 		'@lucca-front/ng/multi-select': ['LuMultiSelectInputComponent'],
 		'@lucca-front/ng/core-select/user': ['LuCoreSelectUsersDirective'],
@@ -446,11 +569,16 @@ export const FormerUser = generateStory({
 	name: 'User Select (with former)',
 	description: "Pour saisir des utilisateurs, il suffit d'utiliser la directive `users`",
 	template: `<lu-multi-select
-	placeholder="Placeholder..."
 	users
 	enableFormerEmployees
+	[keepSearchAfterSelection]="keepSearchAfterSelection"
 	[(ngModel)]="selectedUsers"
-></lu-multi-select>`,
+/>`,
+	storyPartial: {
+		args: {
+			keepSearchAfterSelection: false,
+		},
+	},
 	neededImports: {
 		'@lucca-front/ng/multi-select': ['LuMultiSelectInputComponent'],
 		'@lucca-front/ng/core-select/user': ['LuCoreSelectUsersDirective'],
@@ -461,13 +589,32 @@ export const JobQualification = generateStory({
 	name: 'JobQualification Select',
 	description: "Pour saisir une qualification, il suffit d'utiliser la directive `jobQualifications`",
 	template: `<lu-multi-select
-	placeholder="Placeholder..."
 	jobQualifications
+	[keepSearchAfterSelection]="keepSearchAfterSelection"
 	[(ngModel)]="selectedJobQualifications"
-></lu-multi-select>`,
+/>`,
+	storyPartial: {
+		args: {
+			keepSearchAfterSelection: false,
+		},
+	},
 	neededImports: {
 		'@lucca-front/ng/multi-select': ['LuMultiSelectInputComponent'],
-		'@lucca-front/ng/core-select/establishment': ['LuCoreSelectJobQualificationsDirective'],
+		'@lucca-front/ng/core-select/job-qualification': ['LuCoreSelectJobQualificationsDirective'],
+	},
+});
+
+export const OccupationCategory = generateStory({
+	name: 'OccupationCategory Select',
+	description: "Pour saisir une catégorie d'occupation, il suffit d'utiliser la directive `occupationCategories`",
+	template: `<lu-multi-select
+	placeholder="Placeholder..."
+	occupationCategories
+	[(ngModel)]="selectedOccupationCategories"
+/>`,
+	neededImports: {
+		'@lucca-front/ng/multi-select': ['LuMultiSelectInputComponent'],
+		'@lucca-front/ng/core-select/occupation-category': ['LuCoreSelectOccupationCategoriesDirective'],
 	},
 });
 
@@ -477,17 +624,17 @@ export const GroupBy = generateStory({
 	template: `<lu-multi-select
 	#selectRef
 	class="textfield-input"
-	placeholder="Placeholder..."
 	[(ngModel)]="selectedLegumes"
 	[options]="legumes | filterLegumes:clue | sortLegumes:(clue ? ['name', legumeColor] : [legumeColor])"
 	(clueChange)="clue = $event"
 	[maxValuesShown]="maxValuesShown"
+	clearable
 >
 	<ng-container *luOptionGroup="let group by legumeColor; select: selectRef">
 		Légume {{colorNameByColor[group.key]}}{{group.options.length > 1 ? 's' : ''}}
 	</ng-container>
 </lu-multi-select>
-{{ selectedLegumes | json }}`,
+<pr-story-model-display>{{ selectedLegumes | json }}</pr-story-model-display>`,
 	neededImports: {
 		'@lucca-front/ng/core-select': ['LuOptionDirective', 'LuOptionGroupDirective'],
 		'@lucca-front/ng/multi-select': ['LuMultiSelectInputComponent'],
@@ -500,6 +647,22 @@ export const GroupBy = generateStory({
 	},
 });
 
+export const GroupByTEST = createTestStory(GroupBy, async (context) => {
+	await basePlay(context);
+	context.step('Group select all keyboard interactions', async () => {
+		const input = within(context.canvasElement).getByRole('combobox');
+		input.focus();
+		await userEvent.keyboard('{ArrowDown}');
+		await waitForAngular();
+		await userEvent.keyboard('{Enter}');
+		const panel = within(screen.getByRole('listbox'));
+		const options = await panel.findAllByRole('option');
+		const optionValues = options.map((option) => option.textContent);
+		// We should have unselected everything with this keyboard input sequence
+		await checkValues(input, optionValues.slice(1, 3));
+	});
+});
+
 export const GroupBySelectAll = generateStory({
 	name: 'Group options (with selectAll)',
 	description: "Pour grouper les options, il suffit d'utiliser la directive `luOptionGroup`.",
@@ -509,17 +672,17 @@ export const GroupBySelectAll = generateStory({
 	withSelectAllDisplayerLabel="légumes"
 	[totalCount]="legumes.length"
 	class="textfield-input"
-	placeholder="Placeholder..."
 	[(ngModel)]="selectedLegumes"
 	[options]="legumes | filterLegumes:clue | sortLegumes:(clue ? ['name', legumeColor] : [legumeColor])"
 	(clueChange)="clue = $event"
 	[maxValuesShown]="maxValuesShown"
+	[keepSearchAfterSelection]="keepSearchAfterSelection"
 >
 	<ng-container *luOptionGroup="let group by legumeColor; select: selectRef">
 		Légume {{colorNameByColor[group.key]}}{{group.options.length > 1 ? 's' : ''}}
 	</ng-container>
 </lu-multi-select>
-{{ selectedLegumes | json }}`,
+<pr-story-model-display>{{ selectedLegumes | json }}</pr-story-model-display>`,
 	neededImports: {
 		'@lucca-front/ng/core-select': ['LuOptionDirective', 'LuOptionGroupDirective', 'LuCoreSelectTotalCountDirective'],
 		'@lucca-front/ng/multi-select': ['LuMultiSelectInputComponent', 'LuMultiSelectWithSelectAllDirective'],
@@ -541,7 +704,6 @@ export const testDynamicDisabled = generateStory({
 	},
 	template: `<lu-multi-select
 	#selectRef
-	[placeholder]="placeholder"
 	[clearable]="clearable"
 	[loading]="loading"
 	[disabled]="dynamicDisabled | async"
@@ -549,8 +711,8 @@ export const testDynamicDisabled = generateStory({
 	[options]="legumes | filterLegumes:clue"
 	(clueChange)="clue = $event"
 	[maxValuesShown]="maxValuesShown"
->
-</lu-multi-select>`,
+	[keepSearchAfterSelection]="keepSearchAfterSelection"
+/>`,
 	storyPartial: {
 		args: {
 			selectedLegumes: allLegumes.slice(0, 15),
@@ -561,7 +723,6 @@ export const testDynamicDisabled = generateStory({
 		} as any,
 		argTypes: {
 			clearable: { control: { type: 'boolean' } },
-			placeholder: { control: { type: 'text' } },
 			maxValuesShown: { control: { type: 'number' } },
 		},
 	},
@@ -573,12 +734,12 @@ export const AddOption = generateStory({
 	template: `<div class="pr-u-marginBlockEnd200">There is {{ legumes.length }} legumes in the list.</div>
 <lu-multi-select
 	#selectRef
-	placeholder="Placeholder..."
 	[(ngModel)]="selectedLegumes"
 	[options]="legumes | filterLegumes:clue"
 	[addOptionLabel]="'Ajouter ' + (clue || 'un légume')"
 	[addOptionStrategy]="addOptionStrategy"
 	(clueChange)="clue = $event"
+	[keepSearchAfterSelection]="keepSearchAfterSelection"
 	(addOption)="legumes = addLegume($event, legumes); selectedLegumes = selectLegume(legumes[legumes.length - 1], selectedLegumes)"
 />`,
 	neededImports: {
@@ -615,10 +776,10 @@ export const CustomPanelHeader = generateStory({
 	description: "Pour customiser l'en-tête du panel, il suffit d'utiliser la directive `luCoreSelectPanelHeader`.",
 	template: `<lu-multi-select
 	#selectRef
-	placeholder="Placeholder..."
 	[(ngModel)]="selectedLegume"
 	[options]="legumes | filterLegumes:clue"
 	(clueChange)="clue = $event"
+	[keepSearchAfterSelection]="keepSearchAfterSelection"
 >
 	<h1 *luSelectPanelHeader="selectRef">Custom Header</h1>
 </lu-multi-select>`,
@@ -640,6 +801,7 @@ const meta: Meta<LuMultiSelectInputStoryComponent> = {
 				SortLegumesPipe,
 				LuMultiSelectInputComponent,
 				LuMultiDisplayerDirective,
+				ɵLuOptionOutletDirective,
 				LuMultiSelectWithSelectAllDirective,
 				LuOptionDirective,
 				LuOptionGroupDirective,
@@ -649,14 +811,18 @@ const meta: Meta<LuMultiSelectInputStoryComponent> = {
 				LuCoreSelectApiV4Directive,
 				LuCoreSelectTotalCountDirective,
 				LuCoreSelectEstablishmentsDirective,
+				LuCoreSelectDepartmentsDirective,
 				LuCoreSelectUsersDirective,
 				LuCoreSelectJobQualificationsDirective,
+				LuCoreSelectOccupationCategoriesDirective,
 				LuCoreSelectPanelHeaderDirective,
 				LuDisabledOptionDirective,
 				LuMultiSelectDisplayerInputDirective,
 				LuMultiSelectCounterDisplayerComponent,
-				CommonModule,
+				LuMultiSelectContentDisplayerComponent,
 				AsyncPipe,
+				TreeSelectDirective,
+				StoryModelDisplayComponent,
 			],
 		}),
 		applicationConfig({
@@ -664,9 +830,9 @@ const meta: Meta<LuMultiSelectInputStoryComponent> = {
 		}),
 	],
 	args: {
-		placeholder: 'Placeholder...',
 		legumes: allLegumes,
 		clearable: true,
+		keepSearchAfterSelection: false,
 		loading: false,
 		maxValuesShown: 500,
 		selectedLegumes: [],

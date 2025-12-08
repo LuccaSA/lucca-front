@@ -1,4 +1,3 @@
-import { NgClass } from '@angular/common';
 import { booleanAttribute, Component, computed, inject, input, LOCALE_ID, ViewEncapsulation } from '@angular/core';
 import { outputFromObservable } from '@angular/core/rxjs-interop';
 import { FormsModule } from '@angular/forms';
@@ -17,13 +16,12 @@ import { formatSize } from '../formatter';
 
 @Component({
 	selector: 'lu-file-entry',
-	standalone: true,
 	templateUrl: './file-entry.component.html',
-	styleUrls: ['./file-entry.component.scss'],
+	styleUrl: './file-entry.component.scss',
 	encapsulation: ViewEncapsulation.None,
-	imports: [IconComponent, LuTooltipModule, ButtonComponent, InlineMessageComponent, DividerComponent, NgClass, FormFieldComponent, TextInputComponent, FormsModule, IntlParamsPipe],
+	imports: [IconComponent, LuTooltipModule, ButtonComponent, InlineMessageComponent, DividerComponent, FormFieldComponent, TextInputComponent, FormsModule, IntlParamsPipe],
 	host: {
-		class: 'u-displayContents',
+		class: 'pr-u-displayContents',
 	},
 })
 export class FileEntryComponent {
@@ -31,7 +29,7 @@ export class FileEntryComponent {
 
 	intl = getIntl(LU_FILE_UPLOAD_TRANSLATIONS);
 
-	state = input<'success' | 'loading' | 'error' | null>(null);
+	state = input<'success' | 'loading' | 'error' | 'default'>('default');
 
 	displayFileName = input(false, { transform: booleanAttribute });
 

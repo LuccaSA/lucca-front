@@ -1,169 +1,175 @@
 @use '@lucca-front/scss/src/commons/utils/namespace';
 @use '@lucca-front/scss/src/commons/utils/media';
-@use '@lucca-front/scss/src/components/title/exports' as title;
 
 @include namespace.appendRootVars {
-	--components-popup-XS: 25rem;
-	--components-popup-S: 30rem;
-	--components-popup-M: 40rem;
-	--components-popup-L: 50rem;
-	--components-popup-XL: 60rem;
-	--components-popup-padding-horizontal: var(--pr-t-spacings-300);
-	--components-popup-padding-vertical: var(--pr-t-spacings-200);
+	@layer components {
+		--components-popup-XS: 25rem;
+		--components-popup-S: 30rem;
+		--components-popup-M: 40rem;
+		--components-popup-L: 50rem;
+		--components-popup-XL: 60rem;
+		--components-popup-padding-horizontal: var(--pr-t-spacings-300);
+		--components-popup-padding-vertical: var(--pr-t-spacings-200);
+	}
 }
 
 .lu-popup-panel {
-	position: relative;
-	box-shadow: var(--pr-t-elevation-shadow-overlay);
-	background-color: var(--pr-t-elevation-surface-raised);
-	border-radius: var(--commons-borderRadius-L);
-	inline-size: var(--components-popup-M);
-	max-inline-size: 95%;
-	max-block-size: 90vh;
-	overflow: auto;
-	animation: popup var(--commons-animations-durations-standard) cubic-bezier(0.25, 0.8, 0.25, 1);
-
-	&.mod-XS {
-		inline-size: var(--components-popup-XS);
+	@layer components {
+		position: relative;
+		box-shadow: var(--pr-t-elevation-shadow-overlay);
+		background-color: var(--pr-t-elevation-surface-raised);
+		border-radius: var(--pr-t-border-radius-structure);
+		inline-size: var(--components-popup-M);
+		max-inline-size: 95%;
+		max-block-size: 90vh;
+		overflow: auto;
+		animation: popup var(--commons-animations-durations-standard) cubic-bezier(0.25, 0.8, 0.25, 1);
 	}
 
-	&.mod-S {
-		inline-size: var(--components-popup-S);
-	}
+	@layer mods {
+		&.mod-XS {
+			inline-size: var(--components-popup-XS);
+		}
 
-	&.mod-L {
-		inline-size: var(--components-popup-L);
-	}
+		&.mod-S {
+			inline-size: var(--components-popup-S);
+		}
 
-	&.mod-XL {
-		inline-size: var(--components-popup-XL);
-	}
+		&.mod-L {
+			inline-size: var(--components-popup-L);
+		}
 
-	&.mod-commInApp {
-		inline-size: 30rem;
+		&.mod-XL {
+			inline-size: var(--components-popup-XL);
+		}
 
-		.lu-modal-content {
-			text-align: center;
+		&.mod-commInApp {
+			inline-size: 30rem;
 
-			&::after {
-				content: none;
+			.lu-modal-content {
+				text-align: center;
+
+				&::after {
+					content: none;
+				}
+			}
+
+			.lu-modal-content-title {
+				color: var(--pr-t-color-text-heading);
+				font-size: var(--pr-t-font-heading-2-fontSize);
+				margin-block-start: 2.5rem;
+			}
+
+			.button {
+				margin-block-end: 2.5rem;
+			}
+
+			.modal-visual {
+				margin-block: 4.5rem 0;
+				margin-inline: calc(var(--pr-t-spacings-400) * -1);
+			}
+
+			.modal-visual-illustration {
+				vertical-align: bottom;
+			}
+
+			.lu-modal-footer {
+				display: none;
 			}
 		}
-
-		.lu-modal-content-title {
-			color: var(--palettes-neutral-800);
-			font-size: var(--sizes-XL-fontSize);
-			margin-block-start: 2.5rem;
-		}
-
-		.button {
-			margin-block-end: 2.5rem;
-		}
-
-		.modal-visual {
-			margin-block: 4.5rem 0;
-			margin-inline: calc(var(--pr-t-spacings-400) * -1);
-		}
-
-		.modal-visual-illustration {
-			vertical-align: bottom;
-		}
-
-		.lu-modal-footer {
-			display: none;
-		}
 	}
 }
 
-.lu-modal-panel-inner {
-	display: flex;
-	flex-flow: column;
-	max-block-size: 90vh;
-}
-
-.lu-modal-container {
-	display: flex;
-	flex-flow: column;
-	flex-grow: 1;
-}
-
-.lu-modal-header {
-	position: sticky;
-	inset-block-start: 0;
-	z-index: 5;
-	background-color: var(--pr-t-elevation-surface-raised);
-	padding-block: var(--components-popup-padding-vertical);
-	padding-inline: var(--components-popup-padding-horizontal) var(--pr-t-spacings-800);
-	border-block-end: 1px solid var(--commons-border-100);
-}
-
-.lu-modal-header-title {
-	@include title.h2;
-
-	margin: 0;
-	padding: 0;
-}
-
-.button.lu-modal-header-close {
-	position: absolute;
-	inset-inline-end: 1.25rem;
-	inset-block-start: var(--pr-t-spacings-150);
-}
-
-.lu-modal-content {
-	padding-block: var(--components-popup-padding-vertical);
-	padding-inline: var(--components-popup-padding-horizontal);
-	overflow: auto;
-	block-size: auto;
-
-	&.mod-noPadding {
-		padding: 0;
-
-		&::after {
-			padding-block-end: 0;
-		}
-	}
-}
-
-.lu-modal-footer {
-	position: sticky;
-	inset-block-end: 0;
-	z-index: 5;
-	display: flex;
-	align-items: center;
-	justify-content: flex-end;
-	background-color: var(--pr-t-elevation-surface-raised);
-	box-shadow: var(--pr-t-elevation-shadow-overflow);
-	margin-block-start: auto;
-	padding-block: var(--components-popup-padding-vertical);
-	padding-inline: var(--components-popup-padding-horizontal);
-}
-
-@include media.max('XXS') {
-	.lu-popup-panel {
-		border-radius: 0;
-		max-inline-size: none;
-		max-block-size: 100vh;
-		inline-size: 100%;
-		inline-size: stretch;
-		block-size: 100vh;
-		block-size: stretch;
-	}
-
+@layer components {
 	.lu-modal-panel-inner {
-		max-block-size: 100vh;
-		max-block-size: stretch;
-		block-size: 100vh;
-		block-size: stretch;
-	}
-}
-
-@keyframes popup {
-	0% {
-		transform: scale(0.7);
+		display: flex;
+		flex-flow: column;
+		max-block-size: 90vh;
 	}
 
-	100% {
-		transform: none;
+	.lu-modal-container {
+		display: flex;
+		flex-flow: column;
+		flex-grow: 1;
+	}
+
+	.lu-modal-header {
+		position: sticky;
+		inset-block-start: 0;
+		z-index: 5;
+		background-color: var(--pr-t-elevation-surface-raised);
+		padding-block: var(--components-popup-padding-vertical);
+		padding-inline: var(--components-popup-padding-horizontal) var(--pr-t-spacings-800);
+		border-block-end: 1px solid var(--commons-border-100);
+	}
+
+	.lu-modal-header-title {
+		font: var(--pr-t-font-heading-2);
+		margin: 0;
+		padding: 0;
+	}
+
+	.button.lu-modal-header-close {
+		position: absolute;
+		inset-inline-end: 1.25rem;
+		inset-block-start: var(--pr-t-spacings-150);
+	}
+
+	.lu-modal-content {
+		padding-block: var(--components-popup-padding-vertical);
+		padding-inline: var(--components-popup-padding-horizontal);
+		overflow: auto;
+		block-size: auto;
+
+		&.mod-noPadding {
+			padding: 0;
+
+			&::after {
+				padding-block-end: 0;
+			}
+		}
+	}
+
+	.lu-modal-footer {
+		position: sticky;
+		inset-block-end: 0;
+		z-index: 5;
+		display: flex;
+		align-items: center;
+		justify-content: flex-end;
+		background-color: var(--pr-t-elevation-surface-raised);
+		box-shadow: var(--pr-t-elevation-shadow-overflow);
+		margin-block-start: auto;
+		padding-block: var(--components-popup-padding-vertical);
+		padding-inline: var(--components-popup-padding-horizontal);
+	}
+
+	@include media.max('XXS') {
+		.lu-popup-panel {
+			border-radius: 0;
+			max-inline-size: none;
+			max-block-size: 100vh;
+			inline-size: 100%;
+			inline-size: stretch;
+			block-size: 100vh;
+			block-size: stretch;
+		}
+
+		.lu-modal-panel-inner {
+			max-block-size: 100vh;
+			max-block-size: stretch;
+			block-size: 100vh;
+			block-size: stretch;
+		}
+	}
+
+	@keyframes popup {
+		0% {
+			transform: scale(0.7);
+		}
+
+		100% {
+			transform: none;
+		}
 	}
 }

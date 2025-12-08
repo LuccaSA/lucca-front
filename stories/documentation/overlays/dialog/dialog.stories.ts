@@ -7,11 +7,13 @@ import {
 	DialogContentComponent,
 	DialogDismissDirective,
 	DialogFooterComponent,
+	DialogHeaderAction,
 	DialogHeaderComponent,
 	DialogOpenDirective,
 } from '@lucca-front/ng/dialog';
 import { FormFieldComponent } from '@lucca-front/ng/form-field';
 import { CheckboxInputComponent, TextInputComponent } from '@lucca-front/ng/forms';
+import { IconComponent } from '@lucca-front/ng/icon';
 import { applicationConfig, Meta, moduleMetadata, StoryObj } from '@storybook/angular';
 
 export default {
@@ -35,6 +37,8 @@ export default {
 				TextInputComponent,
 				FormsModule,
 				ReactiveFormsModule,
+				IconComponent,
+				DialogHeaderAction,
 			],
 		}),
 	],
@@ -49,16 +53,18 @@ export default {
 
 <ng-template #dialogTpl>
 	<lu-dialog #dialog>
-		<lu-dialog-header><h1>Template driven header</h1> You can also add more content in header</lu-dialog-header>
+		<lu-dialog-header>
+			<h1>Template driven header</h1> You can also add more content in header
+		</lu-dialog-header>
 
 		<lu-dialog-content>Template-driven content</lu-dialog-content>
 
 		<lu-dialog-footer>
-
 			<div class="footer-content">Optional footer text</div>
-
-			<button type="button" luButton luDialogClose>Confirm</button>
-			<button type="button" luButton="text" luDialogDismiss>Cancel</button>
+			<div class="footer-actions">
+				<button type="button" luButton luDialogClose>Confirm</button>
+				<button type="button" luButton="ghost" luDialogDismiss>Cancel</button>
+			</div>
 		</lu-dialog-footer>
 	</lu-dialog>
 </ng-template>`,
@@ -79,7 +85,7 @@ export default {
 			},
 		},
 		size: {
-			options: ['fitContent', 'XS', 'S', '', 'L', 'XL', 'maxContent', 'fullScreen'],
+			options: ['fitContent', 'XS', 'S', '', 'L', 'XL', 'XXL', 'maxContent', 'fullScreen'],
 			control: {
 				type: 'select',
 			},
@@ -115,7 +121,7 @@ export const Focus: StoryObj = {
 
 		<lu-dialog-content>
 			<lu-form-field label="Example input">
-				<lu-text-input [ngModel]="example" placeholder="This will be focused if autoFocus is set to first-input"></lu-text-input>
+				<lu-text-input [ngModel]="example" placeholder="This will be focused if autoFocus is set to first-input" />
 			</lu-form-field>
 		</lu-dialog-content>
 
@@ -123,7 +129,7 @@ export const Focus: StoryObj = {
 			<div class="footer-content">Optional footer text</div>
 			<div class="footer-actions">
 				<button type="button" luButton luDialogClose>Confirm</button>
-				<button type="button" luButton="text" luDialogDismiss>Cancel</button>
+				<button type="button" luButton="ghost" luDialogDismiss>Cancel</button>
 			</div>
 		</lu-dialog-footer>
 	</lu-dialog>
@@ -161,7 +167,7 @@ export const WithForm: StoryObj = {
 
 			<lu-dialog-content>
 				<lu-form-field label="Example input">
-					<lu-text-input formControlName="example" placeholder="This will be focused if autoFocus is set to first-input"></lu-text-input>
+					<lu-text-input formControlName="example" placeholder="This will be focused if autoFocus is set to first-input" />
 				</lu-form-field>
 			</lu-dialog-content>
 
@@ -169,7 +175,7 @@ export const WithForm: StoryObj = {
 				<div class="footer-content">Optional footer text</div>
 				<div class="footer-actions">
 					<button type="submit" luButton [disabled]="!form.valid" luDialogClose>Submit</button>
-					<button type="button" luButton="text" luDialogDismiss>Cancel</button>
+					<button type="button" luButton="ghost" luDialogDismiss>Cancel</button>
 				</div>
 			</lu-dialog-footer>
 		</form>
@@ -182,5 +188,43 @@ export const WithForm: StoryObj = {
 		alert: false,
 		mode: 'default',
 		autoFocus: 'first-tabbable',
+	},
+};
+
+export const withAction: StoryObj = {
+	render: (args) => {
+		return {
+			props: {
+				config: args,
+			},
+			template: `
+<button luButton [luDialogOpen]="dialogTpl" [luDialogConfig]="config">Open Template-driven Dialog with action</button>
+
+<ng-template #dialogTpl>
+	<lu-dialog #dialog>
+		<lu-dialog-header>
+			Template driven header
+			<ng-container dialogHeaderAction>
+				<button luButton="text" size="S"><lu-icon icon="menuDots" alt="More options" /></button>
+			</ng-container>
+		</lu-dialog-header>
+
+		<lu-dialog-content>Template-driven content</lu-dialog-content>
+
+		<lu-dialog-footer>
+			<div class="footer-content">Optional footer text</div>
+			<div class="footer-actions">
+				<button type="button" luButton luDialogClose>Confirm</button>
+				<button type="button" luButton="text" luDialogDismiss>Cancel</button>
+			</div>
+		</lu-dialog-footer>
+	</lu-dialog>
+</ng-template>`,
+		};
+	},
+	args: {
+		size: 'S',
+		alert: false,
+		mode: 'default',
 	},
 };

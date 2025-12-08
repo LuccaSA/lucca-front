@@ -1,0 +1,22 @@
+<div class="listboxOption-content" [class.is-hovered]="hovered()" [attr.id]="group() ? groupId : null">
+	@if (multiple() && !add() && !selectAll() && !select()) {
+		<span class="listboxOption-content-checkboxField checkboxField" aria-hidden="true">
+			<span class="listboxOption-content-checkboxField-input checkboxField-input"></span>
+			<span class="checkboxField-icon"><span class="checkboxField-icon-check"></span></span>
+		</span>
+	}
+	@if (add()) {
+		<lu-icon icon="mathsPlus" />
+	}
+	<ng-content />
+	@if (selectAll()) {
+		<lu-listbox-option select>{{ selectAll() }}</lu-listbox-option>
+	}
+</div>
+<ng-content select="[optgroup]" />
+
+@if (treeitemContent()) {
+	<div class="listboxOptionWrapper" role="group" [attr.style]="level ? '--components-listboxOptionWrapper-level: ' + level : null">
+		<ng-content select="[treeitem]" />
+	</div>
+}

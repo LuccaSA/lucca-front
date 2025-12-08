@@ -2,14 +2,19 @@ import { FormsModule, ReactiveFormsModule } from '@angular/forms';
 import { BrowserAnimationsModule } from '@angular/platform-browser/animations';
 import { FormFieldComponent } from '@lucca-front/ng/form-field';
 import { NumberFormatInputComponent } from '@lucca-front/ng/forms';
-import { Meta, moduleMetadata, StoryObj } from '@storybook/angular';
+import { applicationConfig, Meta, moduleMetadata, StoryObj } from '@storybook/angular';
 import { cleanupTemplate, generateInputs } from 'stories/helpers/stories';
+import { StoryModelDisplayComponent } from 'stories/helpers/story-model-display.component';
+import { LOCALE_ID } from '@angular/core';
 
 export default {
 	title: 'Documentation/Forms/Fields/NumberFormatField/Angular',
 	decorators: [
 		moduleMetadata({
-			imports: [NumberFormatInputComponent, FormFieldComponent, FormsModule, ReactiveFormsModule, BrowserAnimationsModule],
+			imports: [NumberFormatInputComponent, FormFieldComponent, FormsModule, ReactiveFormsModule, BrowserAnimationsModule, StoryModelDisplayComponent],
+		}),
+		applicationConfig({
+			providers: [{ provide: LOCALE_ID, useValue: 'fr-FR' }],
 		}),
 	],
 	argTypes: {
@@ -96,13 +101,9 @@ export const Basic: StoryObj<
 				},
 				argTypes,
 			)}>
-	<lu-number-format-input
-	${generateInputs(inputArgs, argTypes)}
-		[(ngModel)]="example">
-	</lu-number-format-input>
+	<lu-number-format-input [(ngModel)]="example"${generateInputs(inputArgs, argTypes)} />
 </lu-form-field>
-
-{{example}}`),
+<pr-story-model-display>{{ example }}</pr-story-model-display>`),
 			moduleMetadata: {
 				imports: [NumberFormatInputComponent, FormFieldComponent, FormsModule, BrowserAnimationsModule],
 			},
@@ -121,6 +122,7 @@ export const Basic: StoryObj<
 		formatStyle: 'decimal',
 		currency: 'EUR',
 		useAutoPrefixSuffix: true,
+		valueAlignRight: false,
 	},
 };
 
@@ -144,13 +146,9 @@ export const WithCurrency: StoryObj<
 				},
 				argTypes,
 			)}>
-	<lu-number-format-input
-		${generateInputs(inputArgs, argTypes)}
-		[(ngModel)]="example">
-	</lu-number-format-input>
+	<lu-number-format-input [(ngModel)]="example"${generateInputs(inputArgs, argTypes)} />
 </lu-form-field>
-
-{{example}}`),
+<pr-story-model-display>{{ example }}</pr-story-model-display>`),
 			moduleMetadata: {
 				imports: [NumberFormatInputComponent, FormFieldComponent, FormsModule, BrowserAnimationsModule],
 			},
@@ -170,6 +168,7 @@ export const WithCurrency: StoryObj<
 		useAutoPrefixSuffix: true,
 		currency: 'EUR',
 		currencyDisplay: 'name',
+		valueAlignRight: false,
 	},
 };
 
@@ -193,13 +192,9 @@ export const WithUnitKm: StoryObj<
 				},
 				argTypes,
 			)}>
-	<lu-number-format-input
-		${generateInputs(inputArgs, argTypes)}
-		[(ngModel)]="example">
-	</lu-number-format-input>
+	<lu-number-format-input [(ngModel)]="example"${generateInputs(inputArgs, argTypes)} />
 </lu-form-field>
-
-{{example}}`),
+<pr-story-model-display>{{ example }}</pr-story-model-display>`),
 			moduleMetadata: {
 				imports: [NumberFormatInputComponent, FormFieldComponent, FormsModule, BrowserAnimationsModule],
 			},
@@ -219,6 +214,7 @@ export const WithUnitKm: StoryObj<
 		useAutoPrefixSuffix: true,
 		unit: 'kilometer',
 		unitDisplay: 'long',
+		valueAlignRight: false,
 	},
 };
 
@@ -242,13 +238,9 @@ export const WithPercent: StoryObj<
 				},
 				argTypes,
 			)}>
-	<lu-number-format-input
-		${generateInputs(inputArgs, argTypes)}
-		[(ngModel)]="example">
-	</lu-number-format-input>
+	<lu-number-format-input [(ngModel)]="example"${generateInputs(inputArgs, argTypes)} />
 </lu-form-field>
-
-{{example}}`),
+<pr-story-model-display>{{ example }}</pr-story-model-display>`),
 			moduleMetadata: {
 				imports: [NumberFormatInputComponent, FormFieldComponent, FormsModule, BrowserAnimationsModule],
 			},
@@ -266,5 +258,6 @@ export const WithPercent: StoryObj<
 		tooltip: 'Je suis un message d’aide',
 		formatStyle: 'percent',
 		useAutoPrefixSuffix: true,
+		valueAlignRight: false,
 	},
 };

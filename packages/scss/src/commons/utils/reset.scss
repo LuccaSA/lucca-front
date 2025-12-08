@@ -33,7 +33,8 @@
 @mixin clearfix($suffix: '') {
 	&::before,
 	&::after {
-		content: ' ' #{$suffix};
+		// stylelint-disable-next-line no-irregular-whitespace
+		content: ' ' / '' #{$suffix};
 		display: table #{$suffix};
 	}
 

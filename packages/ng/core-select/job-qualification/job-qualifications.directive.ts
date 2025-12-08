@@ -11,7 +11,6 @@ import { LuCoreSelectJobQualification } from './models';
 	// The attribute is already prefixed with "lu-simple-select" / "lu-multi-select"
 	// eslint-disable-next-line @angular-eslint/directive-selector
 	selector: 'lu-simple-select[jobQualifications],lu-multi-select[jobQualifications]',
-	standalone: true,
 	exportAs: 'jobQualifications',
 	providers: [
 		{
@@ -35,10 +34,10 @@ export class LuCoreSelectJobQualificationsDirective<T extends LuCoreSelectJobQua
 	public constructor() {
 		super();
 
-		this.select.grouping = {
+		this.select.groupingSignal.set({
 			selector: (option) => option.job.id,
 			content: LuJobQualificationGroupingComponent,
-		};
+		});
 	}
 
 	protected override getOptions(params: Record<string, string | number | boolean> | null, page: number): Observable<T[]> {
@@ -82,6 +81,5 @@ export class LuCoreSelectJobQualificationsDirective<T extends LuCoreSelectJobQua
 		map((res) => res?.count ?? 0),
 	);
 
-	protected override optionComparer = (a: T, b: T) => a.id === b.id;
 	protected override optionKey = (option: T) => option.id;
 }

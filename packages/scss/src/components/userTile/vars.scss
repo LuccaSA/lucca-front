@@ -1,7 +1,7 @@
 @mixin vars {
-  --components-userTile-title-fontSize: var(--sizes-M-fontSize);
-  --components-userTile-title-lineHeight: var(--sizes-M-lineHeight);
-  --components-userTile-info-fontSize: var(--sizes-S-fontSize);
-  --components-userTile-info-lineHeight: var(--sizes-S-lineHeight);
+  --components-userTile-title-fontSize: var(--pr-t-font-body-M-fontSize);
+  --components-userTile-title-lineHeight: var(--pr-t-font-body-M-lineHeight);
+  --components-userTile-info-fontSize: var(--pr-t-font-body-S-fontSize);
+  --components-userTile-info-lineHeight: var(--pr-t-font-body-S-lineHeight);
   --components-userTile-gap: var(--pr-t-spacings-150);
 }

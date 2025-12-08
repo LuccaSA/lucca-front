@@ -1,14 +1,14 @@
-import { ChangeDetectionStrategy, Component, HostBinding, Input, ViewEncapsulation } from '@angular/core';
+import { ChangeDetectionStrategy, Component, HostBinding, input, Input, ViewEncapsulation } from '@angular/core';
 
 @Component({
 	selector: 'lu-fancy-box',
-	standalone: true,
 	templateUrl: './fancy-box.component.html',
-	styleUrls: ['./fancy-box.component.scss'],
+	styleUrl: './fancy-box.component.scss',
 	changeDetection: ChangeDetectionStrategy.OnPush,
 	encapsulation: ViewEncapsulation.None,
 	host: {
 		class: 'fancyBox',
+		'[class.mod-S]': 'size() === "S"',
 	},
 })
 export class FancyBoxComponent {
@@ -32,4 +32,6 @@ export class FancyBoxComponent {
 	get backgroundRightStyle(): string {
 		return this.backgroundRight ? `url(${this.backgroundRight})` : ``;
 	}
+
+	size = input<null | 'S'>(null);
 }
