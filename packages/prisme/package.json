@@ -15,9 +15,9 @@
   ],
   "author": "Guilde Front Lucca <guilde-front@lucca.fr>",
   "peerDependencies": {
-    "@angular/common": "^19.0.1",
-    "@angular/core": "^19.0.1",
-    "@angular/cdk": "^19.0.1",
+    "@angular/cdk": "^20.0.3",
+    "@angular/common": "^20.0.7",
+    "@angular/core": "^20.0.2",
     "@lucca-front/icons": "*",
     "@types/dompurify": "^3.0.0",
     "isomorphic-dompurify": "^2.11.0",
