@@ -1,3 +1,4 @@
 @mixin vars {
 	--components-popover-padding: var(--pr-t-spacings-100);
+	--components-popover-maxInlineSize: 25rem;
 }
