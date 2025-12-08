@@ -1,5 +1,5 @@
 import { NgTemplateOutlet } from '@angular/common';
-import { booleanAttribute, Component, ElementRef, input, numberAttribute, viewChild, ViewEncapsulation } from '@angular/core';
+import { booleanAttribute, ChangeDetectionStrategy, Component, ElementRef, input, numberAttribute, viewChild, ViewEncapsulation } from '@angular/core';
 import { ReactiveFormsModule } from '@angular/forms';
 import { ClearComponent } from '@lucca-front/ng/clear';
 import { getIntl } from '@lucca-front/ng/core';
@@ -16,31 +16,32 @@ import { LU_NUMBERFIELD_TRANSLATIONS } from './number-input.translate';
 	templateUrl: './number-input.component.html',
 	hostDirectives: [NoopValueAccessorDirective],
 	encapsulation: ViewEncapsulation.None,
+	changeDetection: ChangeDetectionStrategy.OnPush,
 })
 export class NumberInputComponent {
 	ngControl = injectNgControl();
 
-	placeholder = input<string>('');
+	readonly placeholder = input<string>('');
 
-	step = input<number, number>(1, { transform: numberAttribute });
+	readonly step = input<number, number>(1, { transform: numberAttribute });
 
-	noSpinButtons = input(false, { transform: booleanAttribute });
+	readonly noSpinButtons = input(false, { transform: booleanAttribute });
 
-	hasClearer = input(false, { transform: booleanAttribute });
+	readonly hasClearer = input(false, { transform: booleanAttribute });
 
-	inputElementRef = viewChild.required<ElementRef<HTMLInputElement>>('inputElement');
+	readonly inputElementRef = viewChild.required<ElementRef<HTMLInputElement>>('inputElement');
 
-	prefix = input<TextInputAddon>();
+	readonly prefix = input<TextInputAddon>();
 
-	suffix = input<TextInputAddon>();
+	readonly suffix = input<TextInputAddon>();
 
-	min = input<number>();
+	readonly min = input<number>();
 
-	max = input<number>();
+	readonly max = input<number>();
 
-	valueAlignRight = input(false, { transform: booleanAttribute });
+	readonly valueAlignRight = input(false, { transform: booleanAttribute });
 
-	intl = getIntl(LU_NUMBERFIELD_TRANSLATIONS);
+	readonly intl = getIntl(LU_NUMBERFIELD_TRANSLATIONS);
 
 	clearValue(): void {
 		this.ngControl.reset();

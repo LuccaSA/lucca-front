@@ -1,4 +1,4 @@
-import { Component, ViewEncapsulation } from '@angular/core';
+import { ChangeDetectionStrategy, Component, ViewEncapsulation } from '@angular/core';
 import { DividerComponent } from '@lucca-front/ng/divider';
 
 @Component({
@@ -11,5 +11,6 @@ import { DividerComponent } from '@lucca-front/ng/divider';
 		role: 'listitem',
 		'[attr.aria-hidden]': 'true',
 	},
+	changeDetection: ChangeDetectionStrategy.OnPush,
 })
 export class DropdownDividerComponent {}

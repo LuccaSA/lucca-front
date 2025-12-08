@@ -1,4 +1,4 @@
-import { booleanAttribute, Component, input, ViewEncapsulation } from '@angular/core';
+import { booleanAttribute, ChangeDetectionStrategy, Component, input, ViewEncapsulation } from '@angular/core';
 
 @Component({
 	// eslint-disable-next-line @angular-eslint/component-selector
@@ -10,7 +10,8 @@ import { booleanAttribute, Component, input, ViewEncapsulation } from '@angular/
 		class: 'form',
 		'[class.mod-maxWidth]': 'maxWidth()',
 	},
+	changeDetection: ChangeDetectionStrategy.OnPush,
 })
 export class FormComponent {
-	maxWidth = input(false, { transform: booleanAttribute });
+	readonly maxWidth = input(false, { transform: booleanAttribute });
 }
