@@ -1,5 +1,5 @@
 import { booleanAttribute, Component, ElementRef, HostBinding, input, OnInit, signal, viewChild, ViewEncapsulation } from '@angular/core';
-import { getIntl } from '@lucca-front/ng/core';
+import { getIntl, isNil } from '@lucca-front/ng/core';
 import { LU_READMORE_TRANSLATIONS } from './read-more.translate';
 
 @Component({
@@ -23,6 +23,8 @@ export class ReadMoreComponent implements OnInit {
 	labelReadLess = this.intl.readLess;
 
 	label = signal<string>(this.labelReadMore);
+
+	innerContent = input<null | string>(null);
 
 	contentRef = viewChild<ElementRef<HTMLDivElement>>('content');
 
@@ -60,17 +62,21 @@ export class ReadMoreComponent implements OnInit {
 		return `${this.surface()}`;
 	}
 
-	ngOnInit(): void {
-		new ResizeObserver(() => {
-			const contentElement = this.contentRef()?.nativeElement;
-			const lineHeight = parseFloat(window.getComputedStyle(contentElement).lineHeight);
-			const totalLines = Math.round(contentElement.scrollHeight / lineHeight);
+	isNil = isNil;
 
-			this.isClamped.set(contentElement.scrollHeight > contentElement.clientHeight);
-			if (!this.isClamped() && totalLines <= this.lineClamp()) {
-				this.expanded.set(false);
-			}
-		}).observe(this.contentRef().nativeElement, { box: 'border-box' });
+	ngOnInit(): void {
+		setTimeout(() => {
+			new ResizeObserver(() => {
+				const contentElement = this.contentRef()?.nativeElement;
+				const lineHeight = parseFloat(window.getComputedStyle(contentElement).lineHeight);
+				const totalLines = Math.round(contentElement.scrollHeight / lineHeight);
+
+				this.isClamped.set(contentElement.scrollHeight > contentElement.clientHeight);
+				if (!this.isClamped() && totalLines <= this.lineClamp()) {
+					this.expanded.set(false);
+				}
+			}).observe(this.contentRef().nativeElement, { box: 'border-box' });
+		});
 	}
 
 	toggleExpanded() {
