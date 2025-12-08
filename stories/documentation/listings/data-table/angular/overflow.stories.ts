@@ -12,6 +12,7 @@ import {
 import { FormFieldComponent } from '@lucca-front/ng/form-field';
 import { TextInputComponent } from '@lucca-front/ng/forms';
 import { IconComponent } from '@lucca-front/ng/icon';
+import { PaginationComponent } from '@lucca-front/ng/pagination';
 
 import { Meta, moduleMetadata, StoryObj } from '@storybook/angular';
 
@@ -46,12 +47,13 @@ export default {
 				FormsModule,
 				ButtonComponent,
 				IconComponent,
+				PaginationComponent,
 			],
 		}),
 	],
 
 	render: (args, { argTypes }) => {
-		const { cols, stickyHeader, lines, stickyColsStart, stickyColsEnd, ...inputArgs } = args;
+		const { cols, stickyHeader, lines, stickyColsStart, stickyColsEnd, pagination, ...inputArgs } = args;
 
 		const text = 'cell';
 		const textHeader = 'header';
@@ -83,6 +85,10 @@ export default {
 		for (let i = 1; i <= lines; i++) {
 			linesContent = linesContent + line;
 		}
+		const paginationTpl = pagination
+			? `
+	<lu-pagination dataTablePagination from="1" to="20" itemsCount="27" isFirstPage />`
+			: ``;
 
 		return {
 			styles: [`lu-data-table { max-block-size: 15rem; max-inline-size: 30rem; inline-size: fit-content }`],
@@ -95,7 +101,7 @@ export default {
 		</tr>
 	</thead>
 	<tbody luDataTableBody>${linesContent}
-	</tbody>
+	</tbody>${paginationTpl}
 </lu-data-table>`,
 		};
 	},
@@ -108,5 +114,6 @@ export const Basic: StoryObj = {
 		stickyColsStart: 0,
 		stickyColsEnd: 0,
 		stickyHeader: false,
+		pagination: false,
 	},
 };
