@@ -1,4 +1,4 @@
-import { booleanAttribute, Component, computed, forwardRef, input, ViewEncapsulation } from '@angular/core';
+import { booleanAttribute, ChangeDetectionStrategy, Component, computed, forwardRef, input, ViewEncapsulation } from '@angular/core';
 
 import { BaseIndexTableCell } from '../base-index-table-cell';
 import { LU_INDEX_TABLE_CELL_INSTANCE } from '../index-table-cell.token';
@@ -26,6 +26,7 @@ import { LU_INDEX_TABLE_CELL_INSTANCE } from '../index-table-cell.token';
 			useExisting: forwardRef(() => IndexTableRowCellComponent),
 		},
 	],
+	changeDetection: ChangeDetectionStrategy.OnPush,
 })
 export class IndexTableRowCellComponent extends BaseIndexTableCell {
 	allowTextSelection = input(false, { transform: booleanAttribute });
