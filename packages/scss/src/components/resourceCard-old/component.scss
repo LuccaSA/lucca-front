@@ -1,0 +1,179 @@
+@use '@lucca-front/icons/src/icon/exports' as icon;
+@use '@lucca-front/scss/src/commons/utils/namespace';
+@use '@lucca-front/scss/src/commons/utils/reset';
+@use '@lucca-front/scss/src/components/button/exports' as button;
+
+@mixin component($atRoot: namespace.$defaultAtRoot) {
+	position: relative;
+	border-radius: var(--components-resourceCard-borderRadius);
+	display: block;
+	color: var(--components-resourceCard-color);
+	block-size: 100%;
+
+	&::before {
+		content: '';
+		position: absolute;
+		inset: var(--components-resourceCard-before-inset);
+		background-color: var(--pr-t-elevation-surface-raised);
+		box-shadow: var(--pr-t-elevation-shadow-raised);
+		border-radius: var(--components-resourceCard-borderRadius);
+		transition-duration: var(--commons-animations-durations-fast);
+		transition-property: inset;
+	}
+
+	@at-root ($atRoot) {
+		.resourceCardContainer {
+			container: resourceCard / inline-size;
+			display: block;
+		}
+
+		.resourceCardWrapper {
+			// (breakpoint XXS - spacings 100) / 2
+			//          (30rem - 0.5rem)       / 2
+			grid-template-columns: repeat(auto-fill, minmax(19.75rem, 1fr));
+			display: var(--components-resourceCardWrapper-display);
+			flex-direction: column;
+			gap: var(--pr-t-spacings-100);
+			background-color: var(--pr-t-elevation-surface-sunken);
+			padding: var(--pr-t-spacings-100);
+			border-radius: var(--components-resourceCard-borderRadius);
+		}
+
+		.resourceCard-content-dragBefore-content-before {
+			display: grid;
+			min-block-size: var(--pr-t-spacings-600);
+			min-inline-size: var(--pr-t-spacings-600);
+
+			&:empty {
+				display: none;
+			}
+		}
+
+		.resourceCard-content-dragBefore-content-handleButton.button {
+			@include button.S;
+			@include button.ghost;
+			@include button.onlyIcon;
+			@include button.onlyIconS;
+		}
+
+		.resourceCard-content-dragBefore-content-handleButton,
+		.resourceCard-content-after-action {
+			position: relative;
+			z-index: 2;
+		}
+
+		.resourceCard-content-dragBefore {
+			grid-area: dragBefore;
+			align-self: var(--components-resourceCard-content-dragBefore-alignSelf);
+			padding-block: var(--components-resourceCard-content-dragBefore-paddingBlock);
+		}
+
+		.resourceCard-content-dragBefore-content {
+			display: flex;
+			align-items: center;
+			gap: var(--pr-t-spacings-75);
+
+			&:has(.resourceCard-content-dragBefore-content-before:not(:empty), .resourceCard-content-dragBefore-content-handleButton) {
+				margin-inline-end: var(--pr-t-spacings-150);
+			}
+		}
+
+		.resourceCard-content-after {
+			grid-area: after;
+			align-self: var(--components-resourceCard-content-after-alignSelf);
+			padding-block: var(--components-resourceCard-content-after-paddingBlock);
+		}
+
+		.resourceCard-content-after-action {
+			@include button.ghost;
+
+			&:has(> lu-icon:only-child, > .lucca-icon:only-child, > .lucca-icon:first-child + .pr-u-mask:last-child) {
+				@include button.onlyIcon;
+			}
+		}
+
+		.resourceCard-content {
+			padding: var(--pr-t-spacings-100) var(--pr-t-spacings-150);
+			position: relative;
+			display: grid;
+			grid-template: var(--components-resourceCard-content-gridTemplate);
+			align-items: start;
+			min-block-size: var(--pr-t-spacings-600);
+			block-size: 100%;
+		}
+
+		.resourceCard-content-description {
+			flex-grow: 1;
+			grid-area: main;
+
+			&:not(:empty) {
+				margin-block-start: var(--components-resourceCard-content-description-not-empty-marginBlockStart);
+			}
+
+			&:empty {
+				display: none;
+			}
+
+			a, button, [tabindex] {
+				position: relative;
+				z-index: 2;
+			}
+		}
+
+		.resourceCard-content-header {
+			align-self: var(--components-resourceCard-content-header-alignSelf);
+			display: flex;
+			gap: var(--pr-t-spacings-50) var(--pr-t-spacings-100);
+			grid-area: header;
+			min-inline-size: 0;
+			flex-direction: var(--components-resourceCard-content-header-flexDirection);
+			align-items: var(--components-resourceCard-content-header-alignItems);
+			justify-content: var(--components-resourceCard-content-header-justifyContent);
+		}
+
+		.resourceCard-content-header-infos {
+			display: flex;
+			gap: var(--pr-t-spacings-50) var(--pr-t-spacings-100);
+			flex-wrap: var(--components-resourceCard-content-header-infos-flexWrap);
+			align-items: center;
+
+			&:empty {
+				display: none;
+			}
+		}
+
+		.resourceCard-content-header-title {
+			display: flex;
+			gap: var(--pr-t-spacings-100);
+			align-items: center;
+			min-inline-size: 0;
+			max-inline-size: 100%;
+
+			.link-text {
+				text-decoration: none !important;
+			}
+		}
+
+		.resourceCard-content-header-title-action {
+			@include reset.button;
+
+			outline: none;
+			color: var(--components-resourceCard-content-header-title-action-color);
+			text-decoration: none;
+			white-space: nowrap;
+			overflow: hidden;
+			text-overflow: ellipsis;
+			cursor: var(--components-resourceCard-content-header-title-action-cursor);
+
+			&::before {
+				content: '';
+				position: absolute;
+				inset: var(--components-resourceCard-content-header-title-action-inset-before);
+				border-radius: var(--components-resourceCard-borderRadius);
+				transition-duration: var(--commons-animations-durations-fast);
+				transition-property: inset;
+				z-index: 1;
+			}
+		}
+	}
+}

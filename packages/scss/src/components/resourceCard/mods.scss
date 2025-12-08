@@ -1,51 +1,33 @@
 @use '@lucca-front/scss/src/components/button/exports' as button;
 
-@mixin noDescription {
-	--components-resourceCard-content-gridTemplate-min: var(--pr-t-spacings-400);
-	--components-resourceCard-content-after-paddingBlock: 0;
-	--components-resourceCard-content-dragBefore-alignSelf: center;
-	--components-resourceCard-content-after-alignSelf: center;
-	--components-resourceCard-content-gridTemplate: "dragBefore header after" minmax(var(--components-resourceCard-content-gridTemplate-min), auto)
-																									"space      space  space" 1fr
-																									/auto       1fr    auto;
+@mixin grid {
+
 }
 
-@mixin narrow {
-	--components-resourceCard-content-dragBefore-paddingBlock: 0;
-	--components-resourceCard-content-after-paddingBlock: 0;
-	--components-resourceCard-content-dragBefore-alignSelf: center;
-	--components-resourceCard-content-after-alignSelf: center;
-	--components-resourceCard-content-header-infos-flexWrap: wrap;
-	--components-resourceCard-content-header-flexDirection: column;
-	--components-resourceCard-content-header-alignItems: start;
-	--components-resourceCard-content-header-justifyContent: center;
-	--components-resourceCard-content-description-not-empty-marginBlockStart: var(--pr-t-spacings-150);
-	--components-resourceCard-content-gridTemplate: "dragBefore header after" minmax(var(--components-resourceCard-content-gridTemplate-min), auto)
-																									"main       main   main " auto
-																									"space      space  space" 1fr
-																									/auto       1fr    auto;
+@mixin hasIllustration {
+	--components-resourceCard-layout-before-button-marginBlock: var(--pr-t-spacings-150);
+	--components-resourceCard-layout-paddingBlockEnd: var(--pr-t-spacings-100);
+}
 
-	.resourceCard-content-after-action {
-		@include button.S;
+@mixin S {
+	--components-resourceCard-layout-before-illustration-minSize: calc(var(--pr-t-spacings-400) + var(--pr-t-spacings-50));
+	--components-resourceCard-layout-header-title-font: var(--pr-t-font-heading-4);
+	--components-resourceCard-layout-header-paddingBlockStart: 0;
+	--components-resourceCard-layout-paddingBlockEnd: var(--pr-t-spacings-100);
+	--components-resourceCard-layout-before-button-marginBlock: 0.625rem;
+	--components-resourceCard-layout-before-illustration-margin: var(--pr-t-spacings-50);
+	--components-resourceCard-layout-content-font: var(--pr-t-font-body-S);
+
+	.resourceCard-layout-before-button.button {
+		@include button.XS;
+		@include button.onlyIconXS;
+	}
+
+	.resourceCard-layout-after-button.button {
+		@include button.XS;
 
 		&:has(> lu-icon:only-child, > .lucca-icon:only-child, > .lucca-icon:first-child + .pr-u-mask:last-child) {
-			@include button.onlyIconS;
+			@include button.onlyIconXS;
 		}
 	}
-}
-
-@mixin narrowNoDescriptionHasBefore {
-	--components-resourceCard-content-gridTemplate-min: var(--pr-t-spacings-400);
-}
-
-@mixin grid {
-	--components-resourceCardWrapper-display: grid;
-}
-
-@mixin hasDrag {
-	--components-resourceCard-content-gridTemplate-min: var(--pr-t-spacings-400);
-}
-
-@mixin hadDragHasBefore {
-	--components-resourceCard-content-gridTemplate-min: auto;
 }

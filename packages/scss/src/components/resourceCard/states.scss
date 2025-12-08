@@ -3,25 +3,17 @@
 
 @mixin hover {
 	--components-resourceCard-before-inset: -4px;
+	--components-resourceCard-before-boxShadow: var(--pr-t-elevation-shadow-overlay);
 }
 
 @mixin focusVisible {
-	.resourceCard-content-header-title-action {
-		&::before {
+	.resourceCard-layout-header-title-link {
+		&::after {
 			@include a11y.focusVisible;
 		}
 	}
 }
 
 @mixin disabled {
-	--components-resourceCard-before-inset: 0;
-	--components-resourceCard-color: var(--pr-t-color-text-disabled);
-	--components-resourceCard-content-header-title-action-cursor: default;
 
-	.resourceCard-content-after-action,
-	.resourceCard-content-dragBefore-content-handleButton {
-		@include button.disabled;
-
-		cursor: default;
-	}
 }

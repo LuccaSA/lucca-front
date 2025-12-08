@@ -1,0 +1,27 @@
+@mixin vars {
+	--components-resourceCard-borderRadius: var(--pr-t-border-radius-structure);
+	--components-resourceCard-content-header-title-action-cursor: pointer;
+	--components-resourceCard-content-after-paddingBlock: var(--pr-t-spacings-50);
+	--components-resourceCard-content-dragBefore-paddingBlock: 0;
+	--components-resourceCard-content-header-alignSelf: center;
+	--components-resourceCard-content-dragBefore-alignSelf: start;
+	--components-resourceCard-content-after-alignSelf: start;
+	--components-resourceCard-content-gridTemplate-min: auto;
+	--components-resourceCard-color: inherit;
+	--components-resourceCard-content-header-title-action-color: var(--components-resourceCard-color);
+	--components-resourceCard-content-header-infos-flexWrap: nowrap;
+	--components-resourceCard-before-inset: 0;
+	--components-resourceCard-content-header-title-action-inset-before: var(--components-resourceCard-before-inset);
+	--components-resourceCard-content-header-flexDirection: row;
+	--components-resourceCard-content-header-alignItems: center;
+	--components-resourceCard-content-header-justifyContent: start;
+	--components-resourceCard-content-description-not-empty-marginBlockStart: 0;
+	--components-resourceCard-content-gridTemplate: "dragBefore header after" minmax(var(--components-resourceCard-content-gridTemplate-min), auto)
+																									"dragBefore main   after" auto
+																									"space      space  space" 1fr
+																									/auto       1fr    auto;
+}
+
+@mixin varsWrapper {
+	--components-resourceCardWrapper-display: flex;
+}
