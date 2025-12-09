@@ -6,7 +6,6 @@ import {
 	Component,
 	effect,
 	ElementRef,
-	HostBinding,
 	inject,
 	Input,
 	input,
@@ -36,14 +35,14 @@ export const MAGIC_OPTION_SCROLL_DELAY = 15;
 	templateUrl: './option.component.html',
 	styleUrl: './option.component.scss',
 	changeDetection: ChangeDetectionStrategy.OnPush,
+	host: {
+		class: 'optionItem',
+	},
 	imports: [LuOptionOutletDirective, PortalDirective, LuOptionGroupPipe, LuTooltipTriggerDirective],
 })
 export class LuOptionComponent<T> implements AfterViewInit, OnDestroy, OnInit {
 	protected selectableItem = inject(CoreSelectPanelElement);
 	protected intl = getIntl(LU_OPTION_TRANSLATIONS);
-
-	@HostBinding('class.optionItem')
-	public hasOptionItemClass = true;
 
 	@Input()
 	public optionTpl: TemplateRef<LuOptionContext<T>> | Type<unknown> | undefined;
