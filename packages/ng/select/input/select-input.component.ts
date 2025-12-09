@@ -25,14 +25,20 @@ import { ALuInputDisplayer, ILuInputDisplayer } from '@lucca-front/ng/input';
 import { ALuPickerPanel, ILuPickerPanel } from '@lucca-front/ng/picker';
 import { ALuSelectInput } from './select-input.model';
 
-@Directive()
+@Directive({
+	host: {
+		'[tabindex]': '0',
+		'[class.is-disabled]': 'disabled',
+		'[class.is-focused]': '_popoverOpen && !target.overlap',
+		'[class.mod-multiple]': '_multiple',
+		'[is-clearable]': '!!_clearer',
+	},
+})
 export abstract class ALuSelectInputComponent<T, TPicker extends ILuPickerPanel<T> = ILuPickerPanel<T>> extends ALuSelectInput<T, TPicker> implements ControlValueAccessor, AfterViewInit, OnDestroy {
 	@ViewChild('display', { read: ViewContainerRef, static: true })
 	protected set _vcDisplayContainer(vcr: ViewContainerRef) {
 		this.displayContainer = vcr;
 	}
-
-	@HostBinding('tabindex') tabindex = 0;
 
 	@Input('pickerOverlap') set overlapInput(o: boolean) {
 		this.target.overlap = o;
@@ -67,28 +73,8 @@ export abstract class ALuSelectInputComponent<T, TPicker extends ILuPickerPanel<
 		super(_changeDetectorRef, _overlay, _elementRef, _viewContainerRef, _renderer);
 	}
 
-	@HostBinding('class.is-disabled')
-	get isDisabled() {
-		return this.disabled;
-	}
-
 	@Input('disabled') set inputDisabled(d: boolean) {
 		this._disabled = d;
-	}
-
-	@HostBinding('class.is-focused')
-	get isFocused() {
-		return this._popoverOpen && !this.target.overlap;
-	}
-
-	@HostBinding('class.mod-multiple')
-	get modMultiple() {
-		return this._multiple;
-	}
-
-	@HostBinding('class.is-clearable')
-	get isClearable() {
-		return !!this._clearer;
 	}
 
 	/**
