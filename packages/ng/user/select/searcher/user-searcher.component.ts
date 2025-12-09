@@ -1,5 +1,5 @@
 import { AsyncPipe } from '@angular/common';
-import { ChangeDetectionStrategy, Component, ElementRef, forwardRef, HostBinding, Inject, Input, OnDestroy, OnInit, Optional, Output, Self, SkipSelf, ViewChild } from '@angular/core';
+import { ChangeDetectionStrategy, Component, ElementRef, forwardRef, Inject, Input, OnDestroy, OnInit, Optional, Output, Self, SkipSelf, ViewChild } from '@angular/core';
 import { FormControl, FormGroup, ReactiveFormsModule } from '@angular/forms';
 import { ALuOnCloseSubscriber, ALuOnOpenSubscriber, ALuOnScrollBottomSubscriber, getIntl, ILuOnCloseSubscriber, ILuOnOpenSubscriber, ILuOnScrollBottomSubscriber } from '@lucca-front/ng/core';
 import { ALuOptionOperator, LuOptionPlaceholderComponent } from '@lucca-front/ng/option';
@@ -20,6 +20,9 @@ interface UserPagedSearcherForm {
 	styleUrl: 'user-searcher.component.scss',
 	changeDetection: ChangeDetectionStrategy.OnPush,
 	imports: [AsyncPipe, ReactiveFormsModule, LuOptionPlaceholderComponent],
+	host: {
+		class: 'position-fixed',
+	},
 	providers: [
 		{
 			provide: ALuOptionOperator,
@@ -51,7 +54,6 @@ export class LuUserPagedSearcherComponent<U extends ILuUser = ILuUser> implement
 	private _service: LuUserV3Service<U>;
 	private _subs = new Subscription();
 
-	@HostBinding('class.position-fixed') fixed = true;
 	@ViewChild('searchInput', { read: ElementRef, static: true })
 	searchInput: ElementRef<HTMLInputElement>;
 
