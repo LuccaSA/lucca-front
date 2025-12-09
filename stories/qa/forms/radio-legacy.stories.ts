@@ -8,7 +8,7 @@ import { Meta, StoryFn, moduleMetadata } from '@storybook/angular';
 class RadioLegacyStory {}
 
 export default {
-	title: 'QA/Forms/Radio Legacy',
+	title: 'QA/Forms/RadioLegacy',
 	component: RadioLegacyStory,
 	decorators: [
 		moduleMetadata({

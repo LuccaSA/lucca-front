@@ -11,7 +11,7 @@ import { applicationConfig, Meta } from '@storybook/angular';
 class DateRangeInputStory {}
 
 export default {
-	title: 'QA/Date Range Input',
+	title: 'QA/DateRangeInput',
 	component: DateRangeInputStory,
 	decorators: [
 		applicationConfig({

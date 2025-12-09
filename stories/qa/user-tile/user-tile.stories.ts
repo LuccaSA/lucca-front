@@ -4,7 +4,6 @@ import { Meta, StoryFn } from '@storybook/angular';
 @Component({
 	selector: 'user-tile-stories',
 	templateUrl: './user-tile.stories.html',
-	styleUrl: './user-tile.stories.scss',
 })
 class UserTileStory {}
 

@@ -1,5 +1,5 @@
 import { NgTemplateOutlet } from '@angular/common';
-import { booleanAttribute, Component, computed, input, output, ViewEncapsulation } from '@angular/core';
+import { booleanAttribute, ChangeDetectionStrategy, Component, computed, input, output, ViewEncapsulation } from '@angular/core';
 import { getIntl } from '@lucca-front/ng/core';
 
 import { LuTooltipModule } from '@lucca-front/ng/tooltip';
@@ -16,6 +16,7 @@ import { LU_CHIP_TRANSLATIONS } from './chip.translate';
 		'[class.is-disabled]': 'disabled()',
 		'[class.palette-product]': 'classPalette()',
 	},
+	changeDetection: ChangeDetectionStrategy.OnPush,
 })
 export class ChipComponent {
 	intl = getIntl(LU_CHIP_TRANSLATIONS);

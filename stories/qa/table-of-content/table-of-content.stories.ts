@@ -10,7 +10,7 @@ import { Meta, StoryFn } from '@storybook/angular';
 class TableOfContentStory {}
 
 export default {
-	title: 'QA/Table Of Content',
+	title: 'QA/TableOfContent',
 	component: TableOfContentStory,
 } as Meta;
 

@@ -1,4 +1,4 @@
-import { Component, EventEmitter, Output } from '@angular/core';
+import { ChangeDetectionStrategy, Component, EventEmitter, Output } from '@angular/core';
 import { getIntl } from '@lucca-front/ng/core';
 import { LU_OPTION_PLACEHOLDER_TRANSLATIONS } from './option-placeholder.translate';
 
@@ -9,6 +9,7 @@ import { LU_OPTION_PLACEHOLDER_TRANSLATIONS } from './option-placeholder.transla
 	selector: 'lu-option-placeholder',
 	templateUrl: './option-placeholder.component.html',
 	styleUrl: './option-placeholder.component.scss',
+	changeDetection: ChangeDetectionStrategy.OnPush,
 })
 export class LuOptionPlaceholderComponent {
 	// eslint-disable-next-line @angular-eslint/no-output-on-prefix

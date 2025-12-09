@@ -1,5 +1,5 @@
 import { AsyncPipe } from '@angular/common';
-import { Component, inject } from '@angular/core';
+import { ChangeDetectionStrategy, Component, inject } from '@angular/core';
 import { ILuOptionContext, LU_OPTION_CONTEXT } from './option.token';
 
 @Component({
@@ -9,6 +9,7 @@ import { ILuOptionContext, LU_OPTION_CONTEXT } from './option.token';
 		{{ option?.name ?? option }}
 	}`,
 	host: { class: 'pr-u-ellipsis' },
+	changeDetection: ChangeDetectionStrategy.OnPush,
 })
 export class LuSimpleSelectDefaultOptionComponent {
 	public context = inject<ILuOptionContext<{ name?: string }>>(LU_OPTION_CONTEXT);

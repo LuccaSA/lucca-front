@@ -1,5 +1,5 @@
 import { NgTemplateOutlet } from '@angular/common';
-import { AfterContentInit, Component, computed, ElementRef, forwardRef, inject, input, model, ViewEncapsulation } from '@angular/core';
+import { AfterContentInit, ChangeDetectionStrategy, Component, computed, ElementRef, forwardRef, inject, input, model, ViewEncapsulation } from '@angular/core';
 import { toSignal } from '@angular/core/rxjs-interop';
 import { FormsModule } from '@angular/forms';
 import { ButtonComponent } from '@lucca-front/ng/button';
@@ -36,6 +36,7 @@ import { LU_DATA_TABLE_CELL_INSTANCE } from '../data-table-cell.token';
 			useExisting: forwardRef(() => DataTableRowCellHeaderComponent),
 		},
 	],
+	changeDetection: ChangeDetectionStrategy.OnPush,
 })
 export class DataTableRowCellHeaderComponent extends BaseDataTableCell implements AfterContentInit {
 	elementRef = inject<ElementRef<HTMLTableCellElement>>(ElementRef);

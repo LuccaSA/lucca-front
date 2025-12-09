@@ -1,4 +1,4 @@
-import { booleanAttribute, Component, computed, forwardRef, input, ViewEncapsulation } from '@angular/core';
+import { booleanAttribute, ChangeDetectionStrategy, Component, computed, forwardRef, input, ViewEncapsulation } from '@angular/core';
 
 import { BaseDataTableCell } from '../base-data-table-cell';
 import { LU_DATA_TABLE_CELL_INSTANCE } from '../data-table-cell.token';
@@ -27,6 +27,7 @@ import { LU_DATA_TABLE_CELL_INSTANCE } from '../data-table-cell.token';
 			useExisting: forwardRef(() => DataTableRowCellComponent),
 		},
 	],
+	changeDetection: ChangeDetectionStrategy.OnPush,
 })
 export class DataTableRowCellComponent extends BaseDataTableCell {
 	actions = input(false, { transform: booleanAttribute });
