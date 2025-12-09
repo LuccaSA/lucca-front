@@ -16,6 +16,9 @@ export const byProp = {
 @Component({
 	selector: 'lu-test2',
 	templateUrl: './template.input.html',
+	host: {
+		class: 'palette-lucca'
+	}
 })
 export class Test2Component {
 	@HostBinding('class.palette-lucca') a = true;
