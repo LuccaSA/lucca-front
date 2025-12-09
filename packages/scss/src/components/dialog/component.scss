@@ -138,7 +138,7 @@
 			padding: var(--components-dialog-insideHeaderTitlePadding);
 			text-align: var(--components-dialog-insideHeaderTitleAlign);
 			margin: 0;
-			overflow-wrap: break-word;
+			overflow-wrap: anywhere;
 		}
 
 		.dialog_backdrop {
