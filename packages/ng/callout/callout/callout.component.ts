@@ -1,4 +1,4 @@
-import { booleanAttribute, ChangeDetectionStrategy, Component, EventEmitter, HostBinding, input, Input, Output, ViewEncapsulation } from '@angular/core';
+import { booleanAttribute, ChangeDetectionStrategy, Component, EventEmitter, input, Input, Output, ViewEncapsulation } from '@angular/core';
 import { LuccaIcon } from '@lucca-front/icons';
 import { getIntl, Palette, PortalContent, PortalDirective } from '@lucca-front/ng/core';
 import { IconComponent } from '@lucca-front/ng/icon';
@@ -14,6 +14,9 @@ import { getCalloutPalette } from '../callout.utils';
 	styleUrl: './callout.component.scss',
 	changeDetection: ChangeDetectionStrategy.OnPush,
 	encapsulation: ViewEncapsulation.None,
+	host: {
+		'[attr.hidden]': 'removed',
+	},
 })
 export class CalloutComponent {
 	@Input()
@@ -63,11 +66,6 @@ export class CalloutComponent {
 	 * Is the callout removed? Works with two way binding too.
 	 */
 	removed = false;
-
-	@HostBinding('attr.hidden')
-	get hiddenAttr(): 'hidden' | null {
-		return this.removed ? 'hidden' : null;
-	}
 
 	@Output()
 	removedChange: EventEmitter<boolean> = new EventEmitter<boolean>();
