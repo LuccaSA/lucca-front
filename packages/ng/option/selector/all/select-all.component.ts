@@ -1,4 +1,4 @@
-import { ChangeDetectionStrategy, Component, forwardRef, HostBinding } from '@angular/core';
+import { ChangeDetectionStrategy, Component, forwardRef } from '@angular/core';
 import { getIntl } from '@lucca-front/ng/core';
 import { Observable, Subject } from 'rxjs';
 import { tap } from 'rxjs/operators';
@@ -14,6 +14,9 @@ import { LU_OPTION_SELECT_ALL_TRANSLATIONS } from './select-all.translate';
 	templateUrl: './select-all.component.html',
 	styleUrl: 'select-all.component.scss',
 	changeDetection: ChangeDetectionStrategy.OnPush,
+	host: {
+		class: 'position-fixed',
+	},
 	providers: [
 		{
 			provide: ALuOptionOperator,
@@ -32,7 +35,6 @@ export class LuOptionSelectAllComponent<T> extends ALuOptionOperator<T> implemen
 	onSelectValue = new Subject<T | T[]>();
 	private _values: T[];
 
-	@HostBinding('class.position-fixed') fixed = true;
 	options: T[];
 	outOptions$: Observable<T[]>;
 	set inOptions$(in$: Observable<T[]>) {
