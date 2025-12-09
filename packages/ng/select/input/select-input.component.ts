@@ -10,7 +10,6 @@ import {
 	ElementRef,
 	EventEmitter,
 	forwardRef,
-	HostBinding,
 	HostListener,
 	Input,
 	OnDestroy,
@@ -182,6 +181,9 @@ export abstract class ALuSelectInputComponent<T, TPicker extends ILuPickerPanel<
 	templateUrl: './select-input.component.html',
 	styleUrl: './select-input.component.scss',
 	changeDetection: ChangeDetectionStrategy.OnPush,
+	host: {
+		'[class.mod-multipleView]': 'useMultipleViews()',
+	},
 	providers: [
 		{
 			provide: NG_VALUE_ACCESSOR,
@@ -191,11 +193,6 @@ export abstract class ALuSelectInputComponent<T, TPicker extends ILuPickerPanel<
 	],
 })
 export class LuSelectInputComponent<T> extends ALuSelectInputComponent<T> implements AfterViewInit {
-	@HostBinding('class.mod-multipleView')
-	get modMultipleView() {
-		return this.useMultipleViews();
-	}
-
 	constructor(
 		protected override _changeDetectorRef: ChangeDetectorRef,
 		protected override _overlay: Overlay,
