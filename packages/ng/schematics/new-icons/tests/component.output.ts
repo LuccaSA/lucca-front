@@ -1,4 +1,4 @@
-import { Component } from '@angular/core';
+import { Component, HostBinding } from '@angular/core';
 
 @Component({
 	selector: 'lu-test',
@@ -18,11 +18,11 @@ export const outsideIconByProp = {
 @Component({
 	selector: 'lu-test2',
 	templateUrl: './template.input.html',
-	host: {
-		class: 'icon-app, icon-app.icon-arrowChevronBottom'
-	}
 })
 export class Test2Component {
+	@HostBinding('class.icon-app') a = true;
+	@HostBinding('class.icon-app.icon-arrowChevronBottom') b = true;
+
 	icons = ['icon-app', 'icon-arrowChevronBottom'];
 
 	iconByProp = {
