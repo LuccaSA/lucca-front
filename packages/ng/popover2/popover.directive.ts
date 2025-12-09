@@ -5,7 +5,6 @@ import {
 	DestroyRef,
 	Directive,
 	ElementRef,
-	HostBinding,
 	HostListener,
 	inject,
 	Injector,
@@ -68,6 +67,7 @@ const defaultPositionPairs: Record<PopoverPosition, ConnectionPositionPair> = {
 	selector: '[luPopover2]',
 	host: {
 		'[attr.aria-expanded]': 'opened()',
+		'[attr.aria-controls]': 'ariaControls',
 	},
 	exportAs: 'luPopover2',
 })
@@ -139,7 +139,6 @@ export class PopoverDirective implements OnDestroy {
 
 	opened = signal(false);
 
-	@HostBinding('attr.aria-controls')
 	ariaControls = `popover-content-${nextId++}`;
 
 	#screenReaderDescription?: HTMLSpanElement;
