@@ -16,7 +16,7 @@ class FormFieldStory {
 }
 
 export default {
-	title: 'QA/Form field',
+	title: 'QA/Form Field',
 	component: FormFieldStory,
 	decorators: [
 		moduleMetadata({
