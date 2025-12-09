@@ -8,7 +8,7 @@ import { Meta, StoryFn, moduleMetadata } from '@storybook/angular';
 class FormLabelStory {}
 
 export default {
-	title: 'QA/Form Label',
+	title: 'QA/FormLabel',
 	component: FormLabelStory,
 	decorators: [
 		moduleMetadata({

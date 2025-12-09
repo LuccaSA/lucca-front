@@ -10,7 +10,7 @@ import { Meta, StoryFn } from '@storybook/angular';
 class ScrollBoxStory {}
 
 export default {
-	title: 'QA/Scroll-Box',
+	title: 'QA/ScrollBox',
 	component: ScrollBoxStory,
 } as Meta;
 

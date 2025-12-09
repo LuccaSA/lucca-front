@@ -8,7 +8,7 @@ import { Meta, StoryFn } from '@storybook/angular';
 class MobilePushStory {}
 
 export default {
-	title: 'QA/Mobile Push',
+	title: 'QA/MobilePush',
 	component: MobilePushStory,
 } as Meta;
 
