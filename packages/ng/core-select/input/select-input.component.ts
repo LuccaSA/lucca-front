@@ -6,7 +6,6 @@ import {
 	Directive,
 	ElementRef,
 	EventEmitter,
-	HostBinding,
 	HostListener,
 	inject,
 	input,
@@ -36,7 +35,14 @@ import { TreeGenerator } from './tree-generator';
 export const coreSelectDefaultOptionComparer: LuOptionComparer<unknown> = (option1, option2) => JSON.stringify(option1) === JSON.stringify(option2);
 export const coreSelectDefaultOptionKey: (option: unknown) => unknown = (option) => option;
 
-@Directive()
+@Directive({
+	host: {
+		'[class.is-clearable]': 'clearable()',
+		'[class.is-selected]': 'hasValue()',
+		'[class.is-searchFilled]': 'clue?.length > 0',
+		'[class.mod-noClueIcon]': 'noClueIcon()',
+	},
+})
 export abstract class ALuSelectInputComponent<TOption, TValue> implements OnDestroy, OnInit, ControlValueAccessor, FilterPillInputComponent {
 	public parentInput = inject(FILTER_PILL_INPUT_COMPONENT, { optional: true, skipSelf: true });
 	protected changeDetectorRef = inject(ChangeDetectorRef);
@@ -74,7 +80,6 @@ export abstract class ALuSelectInputComponent<TOption, TValue> implements OnDest
 	}
 
 	@Input({ transform: booleanAttribute })
-	@HostBinding('class.is-clearable')
 	set clearable(value: boolean) {
 		this.#inputClearable.set(value);
 	}
@@ -96,16 +101,6 @@ export abstract class ALuSelectInputComponent<TOption, TValue> implements OnDest
 	@Input()
 	set addOptionStrategy(strategy: CoreSelectAddOptionStrategy) {
 		this.addOptionStrategy$.next(strategy);
-	}
-
-	@HostBinding('class.is-selected')
-	protected get isSelectedClass(): boolean {
-		return this.hasValue();
-	}
-
-	@HostBinding('class.is-searchFilled')
-	protected get isSearchFilledClass(): boolean {
-		return this.clue?.length > 0;
 	}
 
 	protected abstract hasValue(): boolean;
@@ -153,11 +148,6 @@ export abstract class ALuSelectInputComponent<TOption, TValue> implements OnDest
 
 	noClueIcon = input(false, { transform: booleanAttribute });
 	inputTabindex = input<number>(0);
-
-	@HostBinding('class.mod-noClueIcon')
-	protected get isNoClueIconClass(): boolean {
-		return this.noClueIcon();
-	}
 
 	optionTpl = model<TemplateRef<LuOptionContext<TOption>> | Type<unknown>>(LuSimpleSelectDefaultOptionComponent);
 	valueTpl = model<TemplateRef<LuOptionContext<TOption>> | Type<unknown> | undefined>();
