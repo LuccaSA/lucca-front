@@ -1,5 +1,5 @@
 import { Overlay } from '@angular/cdk/overlay';
-import { AfterViewInit, Directive, ElementRef, EventEmitter, HostBinding, HostListener, Input, OnDestroy, Output, ViewContainerRef } from '@angular/core';
+import { AfterViewInit, Directive, ElementRef, EventEmitter, HostListener, Input, OnDestroy, Output, ViewContainerRef } from '@angular/core';
 import { ILuPopoverPanel } from '../panel/index';
 import { ILuPopoverTarget, LuPopoverAlignment, LuPopoverPosition, LuPopoverTarget } from '../target/index';
 import { ALuPopoverTrigger, ILuPopoverTrigger, LuPopoverTriggerEvent } from './popover-trigger.model';
@@ -7,6 +7,12 @@ import { ALuPopoverTrigger, ILuPopoverTrigger, LuPopoverTriggerEvent } from './p
 @Directive({
 	selector: '[luPopover]',
 	exportAs: 'LuPopoverTrigger',
+	host: {
+		/** accessibility attribute - dont override */
+		'[attr.aria-expanded]': '_popoverOpen',
+		'[attr.id]': '_triggerId',
+		'[attr.aria-controls]': '_panelId',
+	},
 })
 export class LuPopoverTriggerDirective<TPanel extends ILuPopoverPanel = ILuPopoverPanel, TTarget extends ILuPopoverTarget = ILuPopoverTarget>
 	extends ALuPopoverTrigger<TPanel, TTarget>
@@ -68,19 +74,6 @@ export class LuPopoverTriggerDirective<TPanel extends ILuPopoverPanel = ILuPopov
 	}
 	@Input('luPopoverOffsetY') set inputOffsetY(oy: number) {
 		this.target.offsetY = oy;
-	}
-
-	/** accessibility attribute - dont override */
-	@HostBinding('attr.aria-expanded') get _attrAriaExpanded() {
-		return this._popoverOpen;
-	}
-	/** accessibility attribute - dont override */
-	@HostBinding('attr.id') get _attrId() {
-		return this._triggerId;
-	}
-	/** accessibility attribute - dont override */
-	@HostBinding('attr.aria-controls') get _attrAriaControls() {
-		return this._panelId;
 	}
 
 	constructor(
