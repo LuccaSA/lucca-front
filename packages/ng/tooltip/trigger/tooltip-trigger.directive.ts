@@ -42,7 +42,7 @@ let nextId = 0;
 	exportAs: 'luTooltip',
 	host: {
 		'[attr.id]': '_id',
-		'[attr.aria-describedby]': 'this.luTooltipDisabled() || this.luTooltipWhenEllipsis() || this.luTooltipOnlyForDisplay ? null : `${generatedId}-panel`',
+		'[attr.aria-describedby]': 'this.luTooltipDisabled() || this.luTooltipWhenEllipsis() || this.luTooltipOnlyForDisplay ? null : ariaDescribedBy',
 	},
 })
 export class LuTooltipTriggerDirective implements AfterContentInit, OnDestroy {
@@ -139,6 +139,7 @@ export class LuTooltipTriggerDirective implements AfterContentInit, OnDestroy {
 	generatedId = `${this.#host.nativeElement.tagName.toLowerCase()}-tooltip-${nextId++}`;
 
 	_id: string;
+	ariaDescribedBy: string;
 
 	overlayRef?: OverlayRef;
 
@@ -256,7 +257,8 @@ export class LuTooltipTriggerDirective implements AfterContentInit, OnDestroy {
 	}
 
 	ngAfterContentInit(): void {
-		this._id = this.#host.nativeElement.id || this.#generatedId;
+		this._id = this.#host.nativeElement.id || this.generatedId;
+		this.ariaDescribedBy = `${this.generatedId}-panel`;
 	}
 
 	private runOutsideZoneJS<T>(callback: () => T): T {
