@@ -6,17 +6,13 @@ import { Meta, StoryFn, applicationConfig } from '@storybook/angular';
 
 @Component({
 	selector: 'empty-state-page-stories',
-	styleUrl: 'empty-state-page.stories.scss',
 	templateUrl: './empty-state-page.stories.html',
 	imports: [LuSafeExternalSvgPipe, EmptyStatePageComponent],
-	host: {
-		display: 'block',
-	},
 })
 class EmptyStatePageStory {}
 
 export default {
-	title: 'QA/EmptyState/Page',
+	title: 'QA/Empty State/Page',
 	component: EmptyStatePageStory,
 	decorators: [
 		applicationConfig({
