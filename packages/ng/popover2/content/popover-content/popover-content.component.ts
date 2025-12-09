@@ -1,5 +1,5 @@
 import { CdkObserveContent } from '@angular/cdk/observers';
-import { AfterViewInit, ChangeDetectionStrategy, Component, DestroyRef, ElementRef, HostBinding, HostListener, inject, ViewEncapsulation } from '@angular/core';
+import { AfterViewInit, ChangeDetectionStrategy, Component, DestroyRef, ElementRef, HostListener, inject, ViewEncapsulation } from '@angular/core';
 import { ButtonComponent } from '@lucca-front/ng/button';
 import { getIntl, PortalDirective } from '@lucca-front/ng/core';
 import { IconComponent } from '@lucca-front/ng/icon';
@@ -13,7 +13,9 @@ import { LU_POPOVER2_TRANSLATIONS } from '../../popover.translate';
 	imports: [ButtonComponent, IconComponent, CdkObserveContent, PortalDirective],
 	templateUrl: './popover-content.component.html',
 	styleUrl: './popover-content.component.scss',
-
+	host: {
+		'[attr.id]': 'config.contentId',
+	},
 	encapsulation: ViewEncapsulation.None,
 	changeDetection: ChangeDetectionStrategy.OnPush,
 })
@@ -25,9 +27,6 @@ export class PopoverContentComponent implements AfterViewInit {
 	config = inject(POPOVER_CONFIG);
 
 	destroyRef = inject(DestroyRef);
-
-	@HostBinding('attr.id')
-	contentId = this.config.contentId;
 
 	content = this.config.content;
 
