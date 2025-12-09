@@ -18,7 +18,7 @@ export const byProp = {
 	selector: 'lu-test2',
 	templateUrl: './template.input.html',
 	host: {
-		class: 'pr-u-padding400',
+		class: 'pr-u-padding400'
 	}
 })
 export class Test2Component {
