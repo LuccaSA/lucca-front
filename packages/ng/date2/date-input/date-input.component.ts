@@ -8,7 +8,6 @@ import {
 	effect,
 	ElementRef,
 	forwardRef,
-	HostBinding,
 	inject,
 	Injector,
 	input,
@@ -46,6 +45,8 @@ export type DateInputValidatorErrorType = {
 	styleUrl: './date-input.component.scss',
 	host: {
 		class: 'dateField',
+		'[class.mod-filterPill]': 'isFilterPill',
+		'[class.mod-auto]': 'widthAuto()',
 	},
 	encapsulation: ViewEncapsulation.None,
 	changeDetection: ChangeDetectionStrategy.OnPush,
@@ -158,13 +159,7 @@ export class DateInputComponent extends AbstractDateComponent implements OnInit,
 
 	nextButton = viewChild<ElementRef<Element>>('nextButtonRef');
 
-	@HostBinding('class.mod-filterPill')
 	isFilterPill = false;
-
-	@HostBinding('class.mod-auto')
-	get isWidthAuto() {
-		return this.widthAuto();
-	}
 
 	isFilterPillEmpty = computed(() => !this.selectedDate());
 	isFilterPillClearable = computed(() => this.clearable() ?? this.#defaultFilterPillClearable() ?? this.#defaultClearable);
