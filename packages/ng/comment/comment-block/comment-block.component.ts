@@ -1,5 +1,5 @@
 import { NgTemplateOutlet } from '@angular/common';
-import { booleanAttribute, ChangeDetectionStrategy, Component, computed, contentChildren, forwardRef, HostBinding, inject, Input, input, TemplateRef, ViewEncapsulation } from '@angular/core';
+import { booleanAttribute, ChangeDetectionStrategy, Component, computed, contentChildren, forwardRef, inject, Input, input, TemplateRef, ViewEncapsulation } from '@angular/core';
 import { PortalContent } from '@lucca-front/ng/core';
 import { CommentComponent } from '../comment/comment.component';
 import { COMMENT_BLOCK_INSTANCE, COMMENT_CHAT_INSTANCE } from '../token';
@@ -8,10 +8,11 @@ import { COMMENT_BLOCK_INSTANCE, COMMENT_CHAT_INSTANCE } from '../token';
 	selector: 'lu-comment-block',
 	imports: [NgTemplateOutlet],
 	templateUrl: './comment-block.component.html',
-
 	encapsulation: ViewEncapsulation.None,
 	changeDetection: ChangeDetectionStrategy.OnPush,
-
+	host: {
+		'[attr.role]': 'chatBlock ? "listitem" : null',
+	},
 	providers: [
 		{
 			provide: COMMENT_BLOCK_INSTANCE,
@@ -51,8 +52,5 @@ export class CommentBlockComponent {
 		return this.comments().length === 1;
 	});
 
-	#chatBlock = inject(COMMENT_CHAT_INSTANCE, { optional: true });
-
-	@HostBinding('attr.role')
-	public role = this.#chatBlock ? 'listitem' : null;
+	chatBlock = inject(COMMENT_CHAT_INSTANCE, { optional: true });
 }
