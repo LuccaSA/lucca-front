@@ -9,7 +9,7 @@ import { Meta } from '@storybook/angular';
 class SegmentedControlStory {}
 
 export default {
-	title: 'QA/Segmented Control',
+	title: 'QA/SegmentedControl',
 	component: SegmentedControlStory,
 } as Meta;
 

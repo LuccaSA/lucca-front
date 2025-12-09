@@ -8,7 +8,7 @@ import { Meta, StoryFn } from '@storybook/angular';
 class SecondaryNavStory {}
 
 export default {
-	title: 'QA/Secondary Nav',
+	title: 'QA/SecondaryNav',
 	component: SecondaryNavStory,
 } as Meta;
 

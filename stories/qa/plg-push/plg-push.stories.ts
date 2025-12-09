@@ -10,7 +10,7 @@ import { Meta, StoryFn } from '@storybook/angular';
 class PLGPushStory {}
 
 export default {
-	title: 'QA/PLG Push',
+	title: 'QA/PLGPush',
 	component: PLGPushStory,
 } as Meta;
 

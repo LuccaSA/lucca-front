@@ -6,7 +6,6 @@ import { Meta, StoryFn, applicationConfig } from '@storybook/angular';
 
 @Component({
 	selector: 'empty-state-page-stories',
-	styleUrl: 'empty-state-page.stories.scss',
 	templateUrl: './empty-state-page.stories.html',
 	imports: [LuSafeExternalSvgPipe, EmptyStatePageComponent],
 })

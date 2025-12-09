@@ -10,7 +10,7 @@ import { Meta, StoryFn } from '@storybook/angular';
 class FancyBoxStory {}
 
 export default {
-	title: 'QA/Fancy box',
+	title: 'QA/FancyBox',
 	component: FancyBoxStory,
 } as Meta;
 

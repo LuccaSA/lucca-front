@@ -42,7 +42,7 @@ class FilterPillStory {
 }
 
 export default {
-	title: 'QA/Filter pill',
+	title: 'QA/FilterPill',
 	component: FilterPillStory,
 	decorators: [applicationConfig({ providers: [{ provide: LOCALE_ID, useValue: 'fr-FR' }, provideAnimations(), provideHttpClient()] })],
 } as Meta;

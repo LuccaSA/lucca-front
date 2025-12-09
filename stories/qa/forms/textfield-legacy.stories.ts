@@ -12,7 +12,7 @@ import { Meta, moduleMetadata, StoryFn } from '@storybook/angular';
 class TextfieldLegacyStory {}
 
 export default {
-	title: 'QA/Forms/Textfield Legacy',
+	title: 'QA/Forms/TextfieldLegacy',
 	component: TextfieldLegacyStory,
 	decorators: [
 		moduleMetadata({

@@ -42,7 +42,7 @@ class FilterBarStory {
 }
 
 export default {
-	title: 'QA/Filter bar',
+	title: 'QA/FilterBar',
 	component: FilterBarStory,
 	decorators: [applicationConfig({ providers: [provideHttpClient(), { provide: LOCALE_ID, useValue: 'fr-FR' }] })],
 } as Meta;
