@@ -1,4 +1,4 @@
-import { Component, HostBinding } from '@angular/core';
+import { Component } from '@angular/core';
 
 @Component({
 	selector: 'lu-test',
@@ -21,8 +21,6 @@ export const byProp = {
 	}
 })
 export class Test2Component {
-	@HostBinding('class.palette-lucca') a = true;
-
 	classes = ['palette-grey', 'palette-lucca'];
 
 	byProp = {
