@@ -1,4 +1,4 @@
-import { booleanAttribute, ChangeDetectionStrategy, Component, HostBinding, Input, model, ViewEncapsulation } from '@angular/core';
+import { booleanAttribute, ChangeDetectionStrategy, Component, Input, model, ViewEncapsulation } from '@angular/core';
 import { ButtonComponent } from '@lucca-front/ng/button';
 import { getIntl } from '@lucca-front/ng/core';
 import { IconComponent } from '@lucca-front/ng/icon';
@@ -9,6 +9,9 @@ import { LU_PLG_PUSH_TRANSLATIONS } from './plg-push.translate';
 	imports: [IconComponent, ButtonComponent],
 	templateUrl: './plg-push.component.html',
 	styleUrl: './plg-push.component.scss',
+	host: {
+		'[attr.hidden]': 'this.removed() ? "hidden" : null',
+	},
 	changeDetection: ChangeDetectionStrategy.OnPush,
 	encapsulation: ViewEncapsulation.None,
 })
@@ -24,9 +27,4 @@ export class PLGPushComponent {
 	 * Is the callout removed? Works with two way binding too.
 	 */
 	removed = model(false);
-
-	@HostBinding('attr.hidden')
-	get hiddenAttr(): 'hidden' | null {
-		return this.removed() ? 'hidden' : null;
-	}
 }
