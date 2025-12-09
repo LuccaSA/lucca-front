@@ -5,6 +5,7 @@
 
 @mixin component($atRoot: namespace.$defaultAtRoot) {
 	background-color: var(--components-chip-backgroundColor);
+	border: none;
 	border-radius: var(--components-chip-borderRadius);
 	color: var(--components-chip-color);
 	display: inline-flex;
