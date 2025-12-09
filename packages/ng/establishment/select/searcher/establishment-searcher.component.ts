@@ -1,5 +1,5 @@
 import { AsyncPipe } from '@angular/common';
-import { ChangeDetectionStrategy, Component, ElementRef, EventEmitter, forwardRef, HostBinding, Inject, Input, Optional, Output, Self, ViewChild } from '@angular/core';
+import { ChangeDetectionStrategy, Component, ElementRef, EventEmitter, forwardRef, Inject, Input, Optional, Output, Self, ViewChild } from '@angular/core';
 import { FormControl, ReactiveFormsModule } from '@angular/forms';
 import { ALuOnCloseSubscriber, ALuOnOpenSubscriber, ALuOnScrollBottomSubscriber, ILuOnCloseSubscriber, ILuOnOpenSubscriber, ILuOnScrollBottomSubscriber } from '@lucca-front/ng/core';
 import { ALuOptionOperator, ILuOptionOperator, LuOptionPlaceholderComponent } from '@lucca-front/ng/option';
@@ -14,6 +14,9 @@ import { DEFAULT_ESTABLISHMENT_SERVICE } from '../establishment-select.token';
 	templateUrl: 'establishment-searcher.component.html',
 	styleUrl: 'establishment-searcher.component.scss',
 	changeDetection: ChangeDetectionStrategy.OnPush,
+	host: {
+		class: 'position-fixed',
+	},
 	imports: [AsyncPipe, ReactiveFormsModule, LuOptionPlaceholderComponent],
 	providers: [
 		{
@@ -58,7 +61,6 @@ export class LuEstablishmentSearcherComponent implements ILuOnOpenSubscriber, IL
 
 	private _service: LuEstablishmentService;
 
-	@HostBinding('class.position-fixed') fixed = true;
 	@ViewChild('searchInput', { read: ElementRef, static: true })
 	searchInput: ElementRef<HTMLElement>;
 
