@@ -1,4 +1,4 @@
-import { computed, Directive, ElementRef, HostBinding, HostListener, inject, input } from '@angular/core';
+import { computed, Directive, ElementRef, HostListener, inject, input } from '@angular/core';
 import { add, addMonths, addYears, endOfWeek, startOfWeek, sub, subMonths, subYears } from 'date-fns';
 import type { Duration } from 'date-fns/types';
 import { WEEK_INFO } from '../calendar.token';
@@ -14,6 +14,9 @@ const modeToDurationKey: Record<CalendarMode, keyof Duration> = {
 
 @Directive({
 	selector: '[luCalendar2Cell]',
+	host: {
+		'[attr.tabindex]': 'isTabbableDate() ? 0 : -1',
+	},
 })
 export class Calendar2CellDirective {
 	#host = inject<ElementRef<HTMLButtonElement>>(ElementRef);
@@ -27,11 +30,6 @@ export class Calendar2CellDirective {
 	luCalendar2Mode = input.required<CalendarMode>();
 
 	luCalendar2Date = input.required<Date>();
-
-	@HostBinding('tabindex')
-	get tabindex(): 0 | -1 {
-		return this.isTabbableDate() ? 0 : -1;
-	}
 
 	isTabbableDate = computed(() => {
 		return comparePeriods(this.luCalendar2Mode(), this.luCalendar2Date(), this.#tabbableDate());
