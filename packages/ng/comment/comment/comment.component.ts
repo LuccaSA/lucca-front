@@ -1,5 +1,5 @@
 import { DatePipe, NgTemplateOutlet } from '@angular/common';
-import { ChangeDetectionStrategy, Component, computed, HostBinding, inject, input, LOCALE_ID, ViewEncapsulation } from '@angular/core';
+import { ChangeDetectionStrategy, Component, computed, inject, input, LOCALE_ID, ViewEncapsulation } from '@angular/core';
 import { PortalDirective } from '@lucca-front/ng/core';
 import { LuUserPictureModule } from '@lucca-front/ng/user';
 import { COMMENT_BLOCK_INSTANCE } from '../token';
@@ -13,6 +13,7 @@ import { COMMENT_BLOCK_INSTANCE } from '../token';
 	changeDetection: ChangeDetectionStrategy.OnPush,
 	host: {
 		class: 'commentWrapper-item',
+		'[attr.role]': 'role()',
 	},
 })
 export class CommentComponent {
@@ -59,9 +60,4 @@ export class CommentComponent {
 	role = computed(() => {
 		return this.#parentBlock.isSingleComment() ? null : 'listitem';
 	});
-
-	@HostBinding('attr.role')
-	get roleAttr(): string {
-		return this.role();
-	}
 }
