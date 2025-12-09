@@ -16,6 +16,12 @@
 	font: var(--components-chip-font);
 	max-inline-size: 100%;
 
+	.lucca-icon {
+		@include icon.XS;
+
+		margin-inline-end: var(--pr-t-spacings-50);
+	}
+
 	@at-root ($atRoot) {
 		.chip-content {
 			outline: none;
@@ -67,12 +73,6 @@
 			&:active {
 				--components-chip-kill-disk-color: var(--palettes-900, var(--palettes-neutral-900));
 			}
-		}
-
-		.lucca-icon {
-			@include icon.XS;
-
-			margin-inline-end: var(--pr-t-spacings-50);
 		}
 	}
 }
