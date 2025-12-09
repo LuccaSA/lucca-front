@@ -3,7 +3,7 @@
 		class="listing"
 		[class.mod-icons]="icons()"
 		[class.mod-checklist]="checklist()"
-		[class]="paletteClass"
+		[class]="paletteClass()"
 		[attr.start]="start()"
 		[attr.reversed]="reversed() ? 'reversed' : null"
 	>
@@ -16,7 +16,7 @@
 		[class.mod-checklist]="checklist()"
 		[class.mod-inline]="inline()"
 		[class.mod-divider]="divider()"
-		[class]="paletteClass"
+		[class]="paletteClass()"
 	>
 		<ng-container *ngTemplateOutlet="content" />
 	</ul>
