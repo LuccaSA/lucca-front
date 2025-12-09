@@ -9,7 +9,6 @@ import {
 	effect,
 	ElementRef,
 	forwardRef,
-	HostBinding,
 	HostListener,
 	inject,
 	input,
@@ -48,6 +47,10 @@ let nextId = 0;
 	],
 	host: {
 		class: 'filterPill',
+		'[class.is-hidden]': 'isHidden()',
+		'[class.mod-checkbox]': 'modCheckbox()',
+		'[class.is-filled]': '!inputIsEmpty()',
+		'[class.is-comboboxHidden]': 'shouldHideCombobox()',
 	},
 })
 export class FilterPillComponent {
@@ -85,11 +88,6 @@ export class FilterPillComponent {
 	optional = input(false, { transform: booleanAttribute });
 
 	disabled = computed(() => this.inputComponentRef()?.filterPillDisabled?.() || false);
-
-	@HostBinding('class.is-hidden')
-	get isHiddenClass() {
-		return this.isHidden();
-	}
 
 	displayed = model(false);
 
@@ -144,21 +142,6 @@ export class FilterPillComponent {
 	});
 
 	modCheckbox = computed(() => this.layout() === 'checkable');
-
-	@HostBinding('class.mod-checkbox')
-	get isModCheckbox() {
-		return this.modCheckbox();
-	}
-
-	@HostBinding('class.is-filled')
-	get isFilled() {
-		return !this.inputIsEmpty();
-	}
-
-	@HostBinding('class.is-comboboxHidden')
-	get hideCombobox() {
-		return this.shouldHideCombobox();
-	}
 
 	constructor() {
 		effect(() => {
