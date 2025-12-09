@@ -1,5 +1,5 @@
 import { NgTemplateOutlet } from '@angular/common';
-import { booleanAttribute, ChangeDetectionStrategy, Component, HostBinding, inject, Input, OnChanges, ViewEncapsulation } from '@angular/core';
+import { booleanAttribute, ChangeDetectionStrategy, Component, inject, Input, OnChanges, ViewEncapsulation } from '@angular/core';
 import { ReactiveFormsModule } from '@angular/forms';
 import { LuClass, PortalContent } from '@lucca-front/ng/core';
 import { InputDirective, InputFramedComponent } from '@lucca-front/ng/form-field';
@@ -15,6 +15,10 @@ let nextId = 0;
 	styleUrl: './radio.component.scss',
 	encapsulation: ViewEncapsulation.None,
 	changeDetection: ChangeDetectionStrategy.OnPush,
+	host: {
+		'[class.form-field]': '!framed',
+		'[attr.id]': 'id',
+	},
 	providers: [LuClass],
 })
 export class RadioComponent<T = unknown> implements OnChanges {
@@ -53,11 +57,6 @@ export class RadioComponent<T = unknown> implements OnChanges {
 		return this.#parentGroup.framedSize();
 	}
 
-	@HostBinding('class.form-field')
-	public get notFramed() {
-		return !this.framed;
-	}
-
 	public get formControl() {
 		return this.#parentGroup.ngControl.control;
 	}
@@ -66,7 +65,6 @@ export class RadioComponent<T = unknown> implements OnChanges {
 		return this.#parentGroup.name;
 	}
 
-	@HostBinding('id')
 	id = `radio-${++nextId}`;
 
 	ngOnChanges(): void {
