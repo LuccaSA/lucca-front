@@ -1,6 +1,6 @@
 import { HorizontalConnectionPos, VerticalConnectionPos } from '@angular/cdk/overlay';
 import { NgClass } from '@angular/common';
-import { ChangeDetectionStrategy, Component, DestroyRef, HostBinding, HostListener, inject, Signal } from '@angular/core';
+import { ChangeDetectionStrategy, Component, DestroyRef, HostListener, inject, Signal } from '@angular/core';
 import { SafeHtml } from '@angular/platform-browser';
 import { Subject } from 'rxjs';
 
@@ -10,6 +10,7 @@ import { Subject } from 'rxjs';
 	styleUrl: './tooltip-panel.component.scss',
 	host: {
 		role: 'tooltip',
+		'[attr.id]': 'id',
 	},
 	changeDetection: ChangeDetectionStrategy.OnPush,
 	imports: [NgClass],
@@ -33,7 +34,6 @@ export class LuTooltipPanelComponent {
 
 	content: Signal<string | SafeHtml>;
 
-	@HostBinding('attr.id')
 	id: string;
 
 	contentPositionClasses: Record<string, boolean> = {};
