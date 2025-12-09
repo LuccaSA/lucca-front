@@ -1,4 +1,4 @@
-import { booleanAttribute, ChangeDetectionStrategy, Component, computed, effect, HostBinding, inject, input, ViewEncapsulation } from '@angular/core';
+import { booleanAttribute, ChangeDetectionStrategy, Component, computed, effect, inject, input, ViewEncapsulation } from '@angular/core';
 import { LuClass, PortalContent, PortalDirective } from '@lucca-front/ng/core';
 
 @Component({
@@ -10,6 +10,8 @@ import { LuClass, PortalContent, PortalDirective } from '@lucca-front/ng/core';
 	providers: [LuClass],
 	host: {
 		class: 'highlightData',
+		'[class.mod-light]': 'theme() === "light"',
+		'[class.mod-dark]': 'this.theme() === "dark"',
 	},
 	imports: [PortalDirective],
 })
@@ -35,16 +37,6 @@ export class HighlightDataComponent {
 		}
 		return 'light';
 	});
-
-	@HostBinding('class.mod-light')
-	get lightClass() {
-		return this.theme() === 'light';
-	}
-
-	@HostBinding('class.mod-dark')
-	get darkClass() {
-		return this.theme() === 'dark';
-	}
 
 	/**
 	 * Main illustration
