@@ -5,7 +5,6 @@ import {
 	Component,
 	computed,
 	forwardRef,
-	HostBinding,
 	HostListener,
 	inject,
 	Input,
@@ -58,6 +57,7 @@ import { LuMultiSelectPanelRef } from './panel.model';
 	],
 	host: {
 		class: 'multiSelect',
+		'[class.mod-filterPill]': 'filterPillMode',
 	},
 	encapsulation: ViewEncapsulation.None,
 })
@@ -79,11 +79,6 @@ export class LuMultiSelectInputComponent<T> extends ALuSelectInputComponent<T, T
 
 	override selectParent$ = new Subject<void>();
 	override selectChildren$ = new Subject<void>();
-
-	@HostBinding('class.mod-filterPill')
-	public get filterPillClass() {
-		return this.filterPillMode;
-	}
 
 	hideCombobox = computed(() => this.valueSignal()?.length > 1);
 
