@@ -97,17 +97,3 @@ const Template: StoryFn<SortableListBasicStory> = (args) => ({
 
 export const Basic = Template.bind({});
 Basic.args = { clickable: false, small: false };
-
-/*
-<button type="button" class="sortableList-item-handler"
-	luTooltip="Vous pouvez aussi utiliser les touches directionnelles"
-		luTooltipOnlyForDisplay
-		luTooltipEnterDelay="900"
-		(keydown.arrowup)="$event.preventDefault()"
-		(keydown.arrowdown)="$event.preventDefault()"
-		(keydown.arrowleft)="$event.preventDefault()"
-		(keydown.arrowright)="$event.preventDefault()"
->
-	<span class="pr-u-mask">Position X. Utilisez les touches directionnelles pour réordonner</span>
-</button>
-*/

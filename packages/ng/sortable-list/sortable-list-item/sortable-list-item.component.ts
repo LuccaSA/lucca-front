@@ -15,6 +15,7 @@ import { LuTooltipModule } from '@lucca-front/ng/tooltip';
 	host: {
 		class: 'sortableList-item',
 		'[class.mod-clickable]': 'clickable()',
+		'[class.mod-S]': 'small()',
 		role: 'listitem',
 	},
 })
@@ -24,6 +25,7 @@ export class SortableListItemComponent {
 	clickable = input(false, { transform: booleanAttribute });
 	unclearable = input(false, { transform: booleanAttribute });
 	drag = input(false, { transform: booleanAttribute });
+	small = input(false, { transform: booleanAttribute });
 
 	delete = output<void>();
 }
