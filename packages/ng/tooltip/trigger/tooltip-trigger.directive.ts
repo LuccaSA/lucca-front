@@ -14,7 +14,6 @@ import {
 	DestroyRef,
 	Directive,
 	ElementRef,
-	HostBinding,
 	HostListener,
 	Input,
 	NgZone,
@@ -41,6 +40,10 @@ let nextId = 0;
 @Directive({
 	selector: '[luTooltip]',
 	exportAs: 'luTooltip',
+	host: {
+		'[attr.id]': '_id',
+		'[attr.aria-describedby]': 'this.luTooltipDisabled() || this.luTooltipWhenEllipsis() || this.luTooltipOnlyForDisplay ? null : `${generatedId}-panel`',
+	},
 })
 export class LuTooltipTriggerDirective implements AfterContentInit, OnDestroy {
 	#overlay = inject(Overlay);
@@ -133,18 +136,9 @@ export class LuTooltipTriggerDirective implements AfterContentInit, OnDestroy {
 		this.close$.next();
 	}
 
-	#generatedId = `${this.#host.nativeElement.tagName.toLowerCase()}-tooltip-${nextId++}`;
+	generatedId = `${this.#host.nativeElement.tagName.toLowerCase()}-tooltip-${nextId++}`;
 
-	@HostBinding('attr.id')
 	_id: string;
-
-	@HostBinding('attr.aria-describedby')
-	get ariaDescribedBy() {
-		if (this.luTooltipDisabled() || this.luTooltipWhenEllipsis() || this.luTooltipOnlyForDisplay) {
-			return null;
-		}
-		return `${this.#generatedId}-panel`;
-	}
 
 	overlayRef?: OverlayRef;
 
