@@ -29,5 +29,18 @@ export class SingleFileUploadComponent extends BaseFileUploadComponent {
 
 	deleteFile = output<void>();
 
+	editFile = output<void>();
+
+	editable = input(false, { transform: booleanAttribute });
+
 	displayFileName = input(false, { transform: booleanAttribute });
+
+	onEditFile(fileInput: HTMLInputElement) {
+		if (this.editable()) {
+			fileInput?.removeAttribute('disabled');
+			fileInput?.click();
+			fileInput?.setAttribute('disabled', 'disabled');
+			this.editFile.emit();
+		}
+	}
 }

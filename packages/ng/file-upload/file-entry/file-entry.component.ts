@@ -62,6 +62,12 @@ export class FileEntryComponent {
 		return this.deleteFile$.observed;
 	}
 
+	editable = input(false, { transform: booleanAttribute });
+
+	editFile$ = new Subject<void>();
+
+	editFile = outputFromObservable(this.editFile$);
+
 	fileName = computed(() => this.entry().name);
 	fileType = computed(() => this.entry().type);
 	fileSize = computed(() => this.entry().size);

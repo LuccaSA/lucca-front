@@ -155,7 +155,7 @@ export const Multi = {
 		const { media, size, displayFileName, ...mainArgs } = args;
 		const service = new MockFileUploadService();
 		const uploads = signal([] as FileUpload<LuccaFileUploadResult>[]);
-		const fileUploadFeature = {
+		const multiFileUploadFeature = {
 			uploadFiles: (files: File[]) => {
 				uploads.set([
 					...uploads(),
@@ -193,7 +193,7 @@ export const Multi = {
 
 		return {
 			props: {
-				fileUploadFeature,
+				fileUploadFeature: multiFileUploadFeature,
 				deleteFile: (upload: FileUpload<LuccaFileUploadResult>) => {
 					uploads.set([...uploads().filter(({ file: f }) => f !== upload.file)]);
 				},
@@ -233,13 +233,60 @@ export const Multi = {
 
 export const Single = {
 	render: (args, { argTypes }) => {
-		const multi = Multi.render(args, { argTypes });
-		const { accept, ...mainArgs } = args;
+		const { accept, editable, size, fileMaxSize, illustration, structure, ...mainArgs } = args;
+		const service = new MockFileUploadService();
+		const upload = signal(null as FileUpload<LuccaFileUploadResult> | null);
+		const singleFileUploadFeature = {
+			uploadFiles: (files: File[]) => {
+				upload.set({
+					file: files[0],
+					progress: 20,
+					state: 'loading',
+				});
+
+				service.uploadFile(files[0]).subscribe({
+					next: (result) => {
+						upload.set({ file: files[0], result, progress: 100, state: 'success' });
+					},
+					error: (error) => {
+						upload.set({
+							file: files[0],
+							error: error.error,
+							progress: 100,
+							state: 'error',
+						});
+					},
+				});
+			},
+			fileUploads: upload,
+		};
+		const previewCache = new Map<File, string>();
 		return {
-			props: { ...multi.props, accept },
-			template: `@let fileUpload = fileUploadFeature.fileUploads()[0];
+			props: {
+				fileUploadFeature: singleFileUploadFeature,
+				deleteFile: () => {
+					upload.set(null);
+				},
+				getPreviewUrl: (fileUpload: FileUpload<LuccaFileUploadResult>) => {
+					if (!fileUpload) {
+						return null;
+					}
+					if (previewCache.has(fileUpload.file)) {
+						return previewCache.get(fileUpload.file);
+					} else if (fileUpload.state !== 'error' && fileUpload.file.type.startsWith('image/')) {
+						const url = URL.createObjectURL(fileUpload.file);
+						previewCache.set(fileUpload.file, url);
+						return url;
+					}
+					return null;
+				},
+				accept,
+				editable,
+			},
+			template: `@let fileUpload = fileUploadFeature.fileUploads();
 <lu-form-field label="Label">
-	<lu-single-file-upload ${generateInputs(mainArgs, argTypes)} [accept]="accept" (filePicked)="fileUploadFeature.uploadFiles([$event])"
+	<lu-single-file-upload ${generateInputs(mainArgs, argTypes)} [accept]="accept" [editable]="editable"
+		(filePicked)="fileUploadFeature.uploadFiles([$event])"
 		[entry]="fileUpload | fileUploadToLFEntry" [state]="fileUpload?.state" [previewUrl]="getPreviewUrl(fileUpload)" [inlineMessageError]="fileUpload?.error?.detail" (deleteFile)="deleteFile(fileUpload)" />
 </lu-form-field>`,
 		};
@@ -256,5 +303,6 @@ export const Single = {
 		illustration: 'paper',
 		displayFileName: false,
 		structure: false,
+		editable: false,
 	},
 };
