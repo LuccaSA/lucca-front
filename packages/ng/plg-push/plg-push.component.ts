@@ -10,7 +10,7 @@ import { LU_PLG_PUSH_TRANSLATIONS } from './plg-push.translate';
 	templateUrl: './plg-push.component.html',
 	styleUrl: './plg-push.component.scss',
 	host: {
-		'[attr.hidden]': 'this.removed() ? "hidden" : null',
+		'[attr.hidden]': 'removed() ? "hidden" : null',
 	},
 	changeDetection: ChangeDetectionStrategy.OnPush,
 	encapsulation: ViewEncapsulation.None,
