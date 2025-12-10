@@ -55,7 +55,7 @@ export class CalloutComponent {
 	/**
 	 * Should we display the remove icon?
 	 */
-	readonly removable = input<boolean>(false);
+	readonly removable = input(false, { transform: booleanAttribute });
 
 	/**
 	 * Is the callout removed? Works with two way binding too.
