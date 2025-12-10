@@ -1,33 +1,26 @@
 @use '@lucca-front/scss/src/components/button/exports' as button;
 
 @mixin grid {
+	--components-resourceCard-layout-rowGap: var(--pr-t-spacings-50);
+	--components-resourceCard-layout-alignItems: center;
+	--components-resourceCard-layout-header-alignItems: start;
+	--components-resourceCard-layout-header-flexDirection: column;
+	--components-resourceCard-layout-before-illustration-marginBlock: 0;
 
-}
-
-@mixin hasIllustration {
-	--components-resourceCard-layout-before-button-marginBlock: var(--pr-t-spacings-150);
-	--components-resourceCard-layout-paddingBlockEnd: var(--pr-t-spacings-100);
+	// --components-resourceCard-layout-before-button-marginBlock: 0;
+	--components-resourceCard-layout-gridTemplate: "before  header  after"  auto
+																								 "content content content" 1fr
+																								 /auto    1fr     auto;
 }
 
 @mixin S {
-	--components-resourceCard-layout-before-illustration-minSize: calc(var(--pr-t-spacings-400) + var(--pr-t-spacings-50));
-	--components-resourceCard-layout-header-title-font: var(--pr-t-font-heading-4);
-	--components-resourceCard-layout-header-paddingBlockStart: 0;
-	--components-resourceCard-layout-paddingBlockEnd: var(--pr-t-spacings-100);
-	--components-resourceCard-layout-before-button-marginBlock: 0.625rem;
-	--components-resourceCard-layout-before-illustration-margin: var(--pr-t-spacings-50);
 	--components-resourceCard-layout-content-font: var(--pr-t-font-body-S);
+	--components-resourceCard-layout-header-title-font: var(--pr-t-font-heading-4);
+	--components-resourceCard-layout-before-illustration-minSize: calc(var(--pr-t-spacings-400) + var(--pr-t-spacings-50));
 
-	.resourceCard-layout-before-button.button {
-		@include button.XS;
-		@include button.onlyIconXS;
-	}
+	// --components-resourceCard-layout-before-button-marginBlock: var(--pr-t-spacings-75);
+}
 
-	.resourceCard-layout-after-button.button {
-		@include button.XS;
+@mixin drag {
 
-		&:has(> lu-icon:only-child, > .lucca-icon:only-child, > .lucca-icon:first-child + .pr-u-mask:last-child) {
-			@include button.onlyIconXS;
-		}
-	}
 }

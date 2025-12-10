@@ -8,6 +8,7 @@
 	border-radius: var(--components-resourceCard-borderRadius);
 	position: relative;
 	color: var(--components-resourceCard-color);
+	display: block;
 
 	&::before {
 		content: '';
@@ -23,24 +24,32 @@
 	@at-root ($atRoot) {
 		.resourceCard-layout {
 			isolation: isolate;
-			padding: var(--pr-t-spacings-100);
-			padding-block-end: var(--components-resourceCard-layout-paddingBlockEnd);
+			padding: var(--components-resourceCard-layout-padding); // var(--pr-t-spacings-150) var(--pr-t-spacings-100);
 			display: grid;
 			grid-template: var(--components-resourceCard-layout-gridTemplate);
+			align-items: var(--components-resourceCard-layout-alignItems);
+			row-gap: var(--components-resourceCard-layout-rowGap);
+
+			// column-gap: var(--pr-t-spacings-100);
 		}
 
 		.resourceCard-layout-header {
 			display: flex;
-			align-items: center;
-			gap: var(--pr-t-spacings-100);
+			align-items: var(--components-resourceCard-layout-header-alignItems);
+			flex-direction: var(--components-resourceCard-layout-header-flexDirection);
+			gap: var(--pr-t-spacings-50) var(--pr-t-spacings-100);
 			grid-area: header;
-			padding-block-start: var(--components-resourceCard-layout-header-paddingBlockStart);
+
 		}
 
 		.resourceCard-layout-header-infos {
 			display: flex;
 			align-items: center;
 			gap: var(--pr-t-spacings-100);
+
+			&:empty {
+				display: none;
+			}
 		}
 
 		.resourceCard-layout-header-title {
@@ -74,10 +83,7 @@
 			grid-area: before;
 			display: flex;
 			align-items: start;
-
-			&:not(:empty) {
-				padding-inline-end: var(--pr-t-spacings-100);
-			}
+			gap: var(--pr-t-spacings-100);
 		}
 
 		.resourceCard-layout-before-button.button {
@@ -93,8 +99,7 @@
 			&:not(:empty) {
 				min-block-size: var(--components-resourceCard-layout-before-illustration-minSize);
 				min-inline-size: var(--components-resourceCard-layout-before-illustration-minSize);
-				margin: var(--components-resourceCard-layout-before-illustration-margin);
-				margin-inline-end: var(--pr-t-spacings-50);
+				margin-block: var(--components-resourceCard-layout-before-illustration-marginBlock);
 				display: grid;
 				place-items: center;
 			}
@@ -103,10 +108,6 @@
 		.resourceCard-layout-after {
 			grid-area: after;
 			margin-block: var(--components-resourceCard-layout-after-marginBlock);
-
-			&:not(:empty) {
-				padding-inline-start: var(--pr-t-spacings-100);
-			}
 		}
 
 		.resourceCard-layout-after-button.button {

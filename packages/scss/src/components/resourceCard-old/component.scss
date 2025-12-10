@@ -22,11 +22,6 @@
 	}
 
 	@at-root ($atRoot) {
-		.resourceCardContainer {
-			container: resourceCard / inline-size;
-			display: block;
-		}
-
 		.resourceCardWrapper {
 			// (breakpoint XXS - spacings 100) / 2
 			//          (30rem - 0.5rem)       / 2
