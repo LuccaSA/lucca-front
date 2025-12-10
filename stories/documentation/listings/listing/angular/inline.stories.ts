@@ -32,7 +32,7 @@ export default {
 		return {
 			template: `<lu-listing inline${checklistParam}${iconsParam}${defaultIconParam}${generateInputs(inputs, context.argTypes)}>
 	<lu-listing-item>Lorem ipsum</lu-listing-item>
-	<lu-listing-item>Lorem ipsum dolor sit amet</lu-listing-item>
+	<lu-listing-item${iconParam}>Lorem ipsum dolor sit amet</lu-listing-item>
 	<lu-listing-item>Lorem ipsum dolor sit</lu-listing-item>
 	<lu-listing-item>Lorem</lu-listing-item>
 	<lu-listing-item>Lorem ipsum dolor</lu-listing-item>
