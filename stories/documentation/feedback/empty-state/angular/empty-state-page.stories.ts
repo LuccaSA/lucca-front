@@ -12,7 +12,7 @@ export default {
 		}),
 	],
 	render: (args) => {
-		const { heading, description, slotTop, icon, topRightBackground, topRightForeground, bottomLeftBackground, bottomLeftForeground, contentBackgroundColor, hx } = args;
+		const { heading, description, slotTop, hx } = args;
 		const paramIcon = args['icon'] === '' ? '' : 'icon="https://cdn.lucca.fr/lucca-front/assets/empty-states/message/' + args['icon'] + '.svg"';
 		const paramTopRightBackground = args['topRightBackground'] === '' ? '' : 'topRightBackground="https://cdn.lucca.fr/lucca-front/assets/empty-states/' + args['topRightBackground'] + '.svg"';
 		const paramTopRightForeground = args['topRightForeground'] === '' ? '' : 'topRightForeground="https://cdn.lucca.fr/lucca-front/assets/empty-states/' + args['topRightForeground'] + '.svg"';
