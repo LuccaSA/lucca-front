@@ -89,11 +89,3 @@
 		display: var(--components-dialog-insideHeaderButtonDisplay);
 	}
 }
-
-@mixin withAction {
-	--components-dialog-insideHeaderAreas: 'container action close';
-}
-
-@mixin stacked {
-
-}
