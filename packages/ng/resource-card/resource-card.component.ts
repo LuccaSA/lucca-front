@@ -10,12 +10,16 @@ import { IconComponent } from '@lucca-front/ng/icon';
 	encapsulation: ViewEncapsulation.None,
 	imports: [IconComponent, CdkDragHandle],
 	host: {
-		class: 'resourceCardContainer',
+		class: 'resourceCard',
+		role: 'region',
+		'[class.mod-S]': 'size() === "S"',
+		'[class.mod-grid]': 'grid()',
 	},
 })
 export class ResourceCardComponent {
 	draggable = input(false, { transform: booleanAttribute });
 	disabled = input(false, { transform: booleanAttribute });
+	grid = input(false, { transform: booleanAttribute });
 	headingLevel = input<'1' | '2' | '3' | '4' | '5' | '6'>('3');
 	size = input<'S' | null>(null);
 }

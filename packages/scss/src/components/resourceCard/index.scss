@@ -1,5 +1,4 @@
 @use 'exports' as *;
-@use '@lucca-front/scss/src/commons/utils/container';
 
 .resourceCard {
 	@layer components {
@@ -16,12 +15,20 @@
 			@include focusVisible;
 		}
 
-		&:where(:not(:has(.resourceCard-layout-before-illustration:empty))) {
-			@include hasIllustration;
-		}
+		// &:where(:not(:has(.resourceCard-layout-before-illustration:empty))) {
+		// 	@include hasIllustration;
+		// }
 
 		&.mod-S {
 			@include S;
+		}
+
+		&.mod-grid {
+			@include grid;
+		}
+
+		&:has(.resourceCard-layout-before-button) {
+			@include drag;
 		}
 	}
 }

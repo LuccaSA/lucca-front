@@ -8,7 +8,10 @@ import { TagComponent } from '@lucca-front/ng/tag';
 import { LuTooltipModule } from '@lucca-front/ng/tooltip';
 import { Meta, moduleMetadata } from '@storybook/angular';
 
-interface ResourceCardAngularBasicStory {}
+interface ResourceCardAngularBasicStory {
+	small: boolean;
+	drag: boolean;
+}
 
 export default {
 	title: 'Documentation/Structure/Resource Card/Angular/Basic',
@@ -19,9 +22,62 @@ export default {
 		}),
 	],
 	render: (args: ResourceCardAngularBasicStory) => {
+		const smallParam = args.small ? ` size="S"` : ``;
+		const dragParam = args.drag ? ` draggable` : ``;
 		return {
 			template: `
-	<lu-resource-card>
+	<lu-resource-card${smallParam}${dragParam}>
+		<a href="#" class="resourceCard-layout-header-title-link">Lorem ipsum dolor</a>
+	</lu-resource-card>
+
+	<br />
+
+	<lu-resource-card${smallParam}${dragParam}>
+		<a href="#" class="resourceCard-layout-header-title-link">Lorem ipsum dolor</a>
+		<ng-container resourceCardContent>
+			Consectetur adipiscing elit. Consectetur adipiscing elit. Consectetur adipiscing elit. Consectetur adipiscing elit.
+		</ng-container>
+	</lu-resource-card>
+
+	<br />
+
+	<lu-resource-card${smallParam}${dragParam}>
+		<a href="#" class="resourceCard-layout-header-title-link">Lorem ipsum dolor</a>
+		<ng-container resourceCardContent>
+			Consectetur adipiscing elit. Consectetur adipiscing elit. Consectetur adipiscing elit. Consectetur adipiscing elit.
+			Consectetur adipiscing elit. Consectetur adipiscing elit. Consectetur adipiscing elit. Consectetur adipiscing elit.
+		</ng-container>
+	</lu-resource-card>
+
+	<br />
+
+	<lu-resource-card${smallParam}${dragParam} grid style="max-inline-size: 20rem">
+		<a href="#" class="resourceCard-layout-header-title-link">Lorem ipsum dolor</a>
+	</lu-resource-card>
+
+	<br />
+
+	<lu-resource-card${smallParam}${dragParam} grid style="max-inline-size: 20rem">
+		<a href="#" class="resourceCard-layout-header-title-link">Lorem ipsum dolor</a>
+		<ng-container resourceCardContent>
+			Consectetur adipiscing elit.
+		</ng-container>
+	</lu-resource-card>
+
+	<br />
+
+	<lu-resource-card${smallParam}${dragParam} grid style="max-inline-size: 20rem">
+		<a href="#" class="resourceCard-layout-header-title-link">Lorem ipsum dolor</a>
+		<ng-container resourceCardContent>
+			Consectetur adipiscing elit. Consectetur adipiscing elit. Consectetur adipiscing elit. Consectetur adipiscing elit.
+			Consectetur adipiscing elit. Consectetur adipiscing elit. Consectetur adipiscing elit. Consectetur adipiscing elit.
+		</ng-container>
+	</lu-resource-card>
+
+	<br />
+
+	<!--
+	<lu-resource-card${smallParam}${dragParam}>
 		<ng-container resourceCardIllustration>
 			<div style="background-color: var(--palettes-lavender-100)" class="pr-u-inlineSize100% pr-u-blockSize100% pr-u-borderRadiusDefault"></div>
 		</ng-container>
@@ -41,11 +97,38 @@ export default {
 			Consectetur adipiscing elit. Consectetur adipiscing elit. Consectetur adipiscing elit. Consectetur adipiscing elit.
 		</ng-container>
 	</lu-resource-card>
+
+	<br />
+
+	<lu-resource-card grid${smallParam}${dragParam}>
+		<ng-container resourceCardIllustration>
+			<div style="background-color: var(--palettes-lavender-100)" class="pr-u-inlineSize100% pr-u-blockSize100% pr-u-borderRadiusDefault"></div>
+		</ng-container>
+		<a href="#" class="resourceCard-layout-header-title-link">test</a>
+		<lu-numeric-badge value="88" />
+
+		<ng-container resourceCardInfos>
+			<lu-status-badge label="Status" />
+			<lu-status-badge label="Status" />
+		</ng-container>
+		<ng-container resourceCardAction>
+			<button type="button" luButton class="resourceCard-layout-after-button">
+				<lu-icon icon="menuDots" />
+			</button>
+		</ng-container>
+		<ng-container resourceCardContent>
+			Consectetur adipiscing elit. Consectetur adipiscing elit. Consectetur adipiscing elit. Consectetur adipiscing elit.
+		</ng-container>
+	</lu-resource-card>
+	-->
 	`,
 		};
 	},
 } as Meta;
 
 export const Basic = {
-	args: {},
+	args: {
+		small: false,
+		drag: false,
+	},
 };
