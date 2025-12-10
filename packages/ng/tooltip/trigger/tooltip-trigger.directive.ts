@@ -13,9 +13,11 @@ import {
 	AfterContentInit,
 	DestroyRef,
 	Directive,
+	EffectRef,
 	ElementRef,
 	HostBinding,
 	HostListener,
+	Injector,
 	Input,
 	NgZone,
 	OnDestroy,
@@ -26,10 +28,10 @@ import {
 	inject,
 	input,
 	numberAttribute,
-	signal,
 } from '@angular/core';
 import { takeUntilDestroyed, toObservable, toSignal } from '@angular/core/rxjs-interop';
 import { SafeHtml } from '@angular/platform-browser';
+import { ɵeffectWithDeps } from '@lucca-front/ng/core';
 import { LuPopoverPosition } from '@lucca-front/ng/popover';
 import { BehaviorSubject, Observable, Subject, combineLatest, merge, startWith, switchMap, timer } from 'rxjs';
 import { debounce, debounceTime, filter, map } from 'rxjs/operators';
@@ -51,6 +53,7 @@ export class LuTooltipTriggerDirective implements AfterContentInit, OnDestroy {
 	#ruler = inject(EllipsisRuler);
 	#zone = inject(NgZone, { optional: true });
 
+	#injector = inject(Injector);
 	#destroyRef = inject(DestroyRef);
 
 	luTooltip = input<string | SafeHtml>();
@@ -147,6 +150,7 @@ export class LuTooltipTriggerDirective implements AfterContentInit, OnDestroy {
 	}
 
 	overlayRef?: OverlayRef;
+	#effectRef?: EffectRef;
 
 	constructor() {
 		combineLatest([this.#openDelay$, this.#closeDelay$])
@@ -219,14 +223,22 @@ export class LuTooltipTriggerDirective implements AfterContentInit, OnDestroy {
 			.subscribe(({ overlayX, overlayY }) => {
 				ref.instance.setPanelPosition(overlayX, overlayY);
 			});
+
 		if (this.luTooltip()) {
-			ref.instance.content = this.luTooltip;
+			this.#effectRef = ɵeffectWithDeps(
+				[this.luTooltip],
+				(luTooltip) => {
+					ref.instance.content.set(luTooltip);
+				},
+				{ injector: this.#injector },
+			);
 		} else if (this.luTooltipWhenEllipsis()) {
-			ref.instance.content = signal(this.#host.nativeElement.innerText);
+			ref.instance.content.set(this.#host.nativeElement.innerText);
 		} else {
-			ref.instance.content = signal('');
+			ref.instance.content.set('');
 		}
-		ref.instance.id = this.ariaDescribedBy;
+
+		ref.instance.id.set(this.ariaDescribedBy);
 		// On tooltip leave => trigger close
 		ref.instance.mouseLeave$.pipe(takeUntilDestroyed(ref.instance.destroyRef)).subscribe(() => this.close$.next());
 		// On tooltip enter => trigger open to keep it opened
@@ -238,6 +250,7 @@ export class LuTooltipTriggerDirective implements AfterContentInit, OnDestroy {
 			this.overlayRef.detach();
 			delete this.overlayRef;
 		}
+		this.#effectRef?.destroy();
 	}
 
 	private setAccessibilityProperties(tabindex: number | null): void {
