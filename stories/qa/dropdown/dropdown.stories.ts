@@ -2,7 +2,7 @@ import { Component } from '@angular/core';
 import { ButtonComponent } from '@lucca-front/ng/button';
 import { DividerComponent } from '@lucca-front/ng/divider';
 import { IconComponent } from '@lucca-front/ng/icon';
-import { Meta, moduleMetadata, StoryFn } from '@storybook/angular';
+import { Meta, moduleMetadata, StoryObj } from '@storybook/angular';
 
 @Component({
 	standalone: true,
@@ -22,6 +22,9 @@ export default {
 	],
 } as Meta;
 
-const template: StoryFn<DropdownStory> = () => ({});
+const template = () => ({});
 
-export const Basic = template.bind({});
+export const Basic: StoryObj<DropdownStory> = {
+	args: {},
+	render: template,
+};

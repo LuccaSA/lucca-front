@@ -1,5 +1,5 @@
 import { Component } from '@angular/core';
-import { Meta, StoryFn } from '@storybook/angular';
+import { Meta, StoryObj } from '@storybook/angular';
 
 @Component({
 	standalone: true,
@@ -13,6 +13,9 @@ export default {
 	component: TableStory,
 } as Meta;
 
-const template: StoryFn<TableStory> = () => ({});
+const template = () => ({});
 
-export const Basic = template.bind({});
+export const Basic: StoryObj<TableStory> = {
+	args: {},
+	render: template,
+};

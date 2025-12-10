@@ -1,5 +1,5 @@
 import { ChipComponent } from '@lucca-front/ng/chip';
-import { Meta, moduleMetadata, StoryFn } from '@storybook/angular';
+import { Meta, moduleMetadata, StoryObj } from '@storybook/angular';
 
 interface ChipBasicStory {
 	unkillable: boolean;
@@ -46,14 +46,16 @@ function getTemplate(args: ChipBasicStory): string {
 `;
 }
 
-const Template: StoryFn<ChipBasicStory> = (args) => ({
+const Template = (args: ChipBasicStory) => ({
 	props: args,
 	template: getTemplate(args),
 });
 
-export const Basic = Template.bind({});
-Basic.args = {
-	unkillable: false,
-	disabled: false,
-	product: false,
+export const Basic: StoryObj<ChipBasicStory> = {
+	args: {
+		unkillable: false,
+		disabled: false,
+		product: false,
+	},
+	render: Template,
 };

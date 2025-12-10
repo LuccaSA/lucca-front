@@ -5,7 +5,7 @@ import { FormsModule } from '@angular/forms';
 import { LuCoreSelectTotalCountDirective } from '@lucca-front/ng/core-select';
 import { FormFieldComponent } from '@lucca-front/ng/form-field';
 import { LuMultiSelectInputComponent, LuMultiSelectWithSelectAllDirective, LuMultiSelection } from '@lucca-front/ng/multi-select';
-import { Meta, StoryFn } from '@storybook/angular';
+import { Meta, StoryObj } from '@storybook/angular';
 import { ILegume, allLegumes } from '../../documentation/forms/select/select.utils';
 
 registerLocaleData(localesFr);
@@ -41,11 +41,14 @@ export default {
 	component: MultiSelectWithSelectAllStory,
 } as Meta;
 
-const template: StoryFn<MultiSelectWithSelectAllStory> = (args) => ({
+const template = (args: MultiSelectWithSelectAllStory) => ({
 	props: args,
 });
 
-export const SelectAll = template.bind({});
+export const SelectAll: StoryObj<MultiSelectWithSelectAllStory> = {
+	args: {},
+	render: template,
+};
 SelectAll.parameters = {
 	// Disable controls as they are not modifiable because of ComponentWrapper
 	controls: { include: [] },

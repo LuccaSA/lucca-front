@@ -1,4 +1,4 @@
-import { Meta, StoryFn } from '@storybook/angular';
+import { Meta, StoryObj } from '@storybook/angular';
 
 interface IndexTableNestedSubTotalsStory {}
 
@@ -151,10 +151,12 @@ function getTemplate(args: IndexTableNestedSubTotalsStory): string {
 </table>`;
 }
 
-const Template: StoryFn<IndexTableNestedSubTotalsStory> = (args) => ({
+const Template = (args: IndexTableNestedSubTotalsStory) => ({
 	props: args,
 	template: getTemplate(args),
 });
 
-export const NestedSubTotals = Template.bind({});
-NestedSubTotals.args = {};
+export const NestedSubTotals: StoryObj<IndexTableNestedSubTotalsStory> = {
+	args: {},
+	render: Template,
+};

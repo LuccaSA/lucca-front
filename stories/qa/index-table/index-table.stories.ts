@@ -4,7 +4,7 @@ import { IconComponent } from '@lucca-front/ng/icon';
 import { StatusBadgeComponent } from '@lucca-front/ng/statusBadge';
 import { TagComponent } from '@lucca-front/ng/tag';
 import { LuUserPictureComponent } from '@lucca-front/ng/user';
-import { Meta, StoryFn } from '@storybook/angular';
+import { Meta, StoryObj } from '@storybook/angular';
 
 @Component({
 	standalone: true,
@@ -19,6 +19,9 @@ export default {
 	component: IndexTableStory,
 } as Meta;
 
-const template: StoryFn<IndexTableStory> = () => ({});
+const template = () => ({});
 
-export const Basic = template.bind({});
+export const Basic: StoryObj<IndexTableStory> = {
+	args: {},
+	render: template,
+};

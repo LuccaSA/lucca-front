@@ -1,6 +1,6 @@
 import { IconComponent } from '@lucca-front/ng/icon';
 import { LuTooltipModule } from '@lucca-front/ng/tooltip';
-import { Meta, moduleMetadata, StoryFn } from '@storybook/angular';
+import { Meta, moduleMetadata, StoryObj } from '@storybook/angular';
 
 interface SelectBasicStory {
 	label: string;
@@ -49,15 +49,17 @@ function getTemplate(args: SelectBasicStory): string {
 </div>`;
 }
 
-const Template: StoryFn<SelectBasicStory> = (args) => ({
+const Template = (args: SelectBasicStory) => ({
 	props: args,
 	template: getTemplate(args),
 });
 
-export const Basic = Template.bind({});
-Basic.args = {
-	label: 'Lorem ipsum',
-	value: 'Lorem ipsum',
-	expanded: false,
-	disabled: false,
+export const Basic: StoryObj<SelectBasicStory> = {
+	args: {
+		label: 'Lorem ipsum',
+		value: 'Lorem ipsum',
+		expanded: false,
+		disabled: false,
+	},
+	render: Template,
 };

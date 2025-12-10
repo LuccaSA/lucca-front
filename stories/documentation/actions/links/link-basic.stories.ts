@@ -1,4 +1,4 @@
-import { Meta, StoryFn } from '@storybook/angular';
+import { Meta, StoryObj } from '@storybook/angular';
 
 interface LinkBasicStory {}
 
@@ -13,7 +13,7 @@ function getTemplate(args: LinkBasicStory): string {
 `;
 }
 
-const Template: StoryFn<LinkBasicStory> = (args) => ({
+const Template = (args: LinkBasicStory) => ({
 	props: args,
 	template: getTemplate(args),
 	styles: [
@@ -26,5 +26,7 @@ const Template: StoryFn<LinkBasicStory> = (args) => ({
 	],
 });
 
-export const BasicLink = Template.bind({});
-BasicLink.args = {};
+export const BasicLink: StoryObj<LinkBasicStory> = {
+	args: {},
+	render: Template,
+};

@@ -2,7 +2,7 @@ import { Component } from '@angular/core';
 import { StatusBadgeComponent } from '@lucca-front/ng/statusBadge';
 import { TagComponent } from '@lucca-front/ng/tag';
 import { LuUserPictureComponent } from '@lucca-front/ng/user';
-import { Meta, StoryFn } from '@storybook/angular';
+import { Meta, StoryObj } from '@storybook/angular';
 
 @Component({
 	standalone: true,
@@ -25,6 +25,9 @@ export default {
 	component: DataTableStory,
 } as Meta;
 
-const template: StoryFn<DataTableStory> = () => ({});
+const template = () => ({});
 
-export const Basic = template.bind({});
+export const Basic: StoryObj<DataTableStory> = {
+	args: {},
+	render: template,
+};

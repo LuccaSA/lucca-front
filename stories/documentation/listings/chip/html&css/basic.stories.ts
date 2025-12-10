@@ -1,4 +1,4 @@
-import { Meta, StoryFn } from '@storybook/angular';
+import { Meta, StoryObj } from '@storybook/angular';
 
 interface ChipBasicStory {
 	product: boolean;
@@ -39,10 +39,12 @@ function getTemplate(args: ChipBasicStory): string {
 	`;
 }
 
-const Template: StoryFn<ChipBasicStory> = (args) => ({
+const Template = (args: ChipBasicStory) => ({
 	props: args,
 	template: getTemplate(args),
 });
 
-export const Basic = Template.bind({});
-Basic.args = { product: false, disabled: false };
+export const Basic: StoryObj<ChipBasicStory> = {
+	args: { product: false, disabled: false },
+	render: Template,
+};

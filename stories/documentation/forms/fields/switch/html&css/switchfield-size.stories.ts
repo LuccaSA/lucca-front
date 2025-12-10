@@ -1,4 +1,4 @@
-import { Meta, StoryFn } from '@storybook/angular';
+import { Meta, StoryObj } from '@storybook/angular';
 
 interface SwitchSizeStory {}
 
@@ -20,10 +20,12 @@ function getTemplate(args: SwitchSizeStory): string {
 </div>`;
 }
 
-const Template: StoryFn<SwitchSizeStory> = (args) => ({
+const Template = (args: SwitchSizeStory) => ({
 	props: args,
 	template: getTemplate(args),
 });
 
-export const Size = Template.bind({});
-Size.args = {};
+export const Size: StoryObj<SwitchSizeStory> = {
+	args: {},
+	render: Template,
+};

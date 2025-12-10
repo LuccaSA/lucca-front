@@ -1,4 +1,4 @@
-import { Meta, StoryFn } from '@storybook/angular';
+import { Meta, StoryObj } from '@storybook/angular';
 
 interface ButtonGroupStory {
 	outlined: boolean;
@@ -49,10 +49,12 @@ function getTemplate(args: ButtonGroupStory): string {
 </ul>`;
 }
 
-const Template: StoryFn<ButtonGroupStory> = (args) => ({
+const Template = (args: ButtonGroupStory) => ({
 	props: args,
 	template: getTemplate(args),
 });
 
-export const GroupButton = Template.bind({});
-GroupButton.args = { noFlexWrap: false, outlined: false, size: '' };
+export const GroupButton: StoryObj<ButtonGroupStory> = {
+	args: { noFlexWrap: false, outlined: false, size: '' },
+	render: Template,
+};

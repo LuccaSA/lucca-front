@@ -1,4 +1,4 @@
-import { Meta, StoryFn } from '@storybook/angular';
+import { Meta, StoryObj } from '@storybook/angular';
 
 interface FilesUploadingStory {}
 
@@ -49,7 +49,7 @@ function getTemplate(args: FilesUploadingStory): string {
 	`;
 }
 
-const Template: StoryFn<FilesUploadingStory> = (args) => ({
+const Template = (args: FilesUploadingStory) => ({
 	props: args,
 	template: getTemplate(args),
 	styles: [
@@ -59,5 +59,7 @@ const Template: StoryFn<FilesUploadingStory> = (args) => ({
 	],
 });
 
-export const Uploading = Template.bind({});
-Uploading.args = {};
+export const Uploading: StoryObj<FilesUploadingStory> = {
+	args: {},
+	render: Template,
+};

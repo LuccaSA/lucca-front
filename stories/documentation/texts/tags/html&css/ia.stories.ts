@@ -1,4 +1,4 @@
-import { Meta, StoryFn } from '@storybook/angular';
+import { Meta, StoryObj } from '@storybook/angular';
 
 export default {
 	title: 'Documentation/Texts/Tags/HTML&CSS/AI',
@@ -9,8 +9,11 @@ function getTemplate(): string {
 	return '<span class="tag mod-AI">Text</span>';
 }
 
-const Template: StoryFn = () => ({
+const Template = () => ({
 	template: getTemplate(),
 });
 
-export const AI = Template.bind({});
+export const AI: StoryObj = {
+	args: {},
+	render: Template,
+};

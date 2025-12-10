@@ -1,4 +1,4 @@
-import { Meta, StoryFn } from '@storybook/angular';
+import { Meta, StoryObj } from '@storybook/angular';
 
 interface GaugeBasicStory {
 	palette: string;
@@ -35,7 +35,7 @@ function getTemplate(args: GaugeBasicStory): string {
 	return `<div class="gauge${thin}${vertical}${palette}${animated}"${value}></div>`;
 }
 
-const Template: StoryFn<GaugeBasicStory> = (args) => ({
+const Template = (args: GaugeBasicStory) => ({
 	props: args,
 	template: getTemplate(args),
 	styles: [
@@ -47,5 +47,7 @@ const Template: StoryFn<GaugeBasicStory> = (args) => ({
 	],
 });
 
-export const Basic = Template.bind({});
-Basic.args = { palette: '', thin: false, vertical: false, animated: false, value: 33 };
+export const Basic: StoryObj<GaugeBasicStory> = {
+	args: { palette: '', thin: false, vertical: false, animated: false, value: 33 },
+	render: Template,
+};

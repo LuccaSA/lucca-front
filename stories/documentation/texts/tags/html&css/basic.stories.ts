@@ -1,4 +1,4 @@
-import { Meta, StoryFn } from '@storybook/angular';
+import { Meta, StoryObj } from '@storybook/angular';
 
 export default {
 	title: 'Documentation/Texts/Tags/HTML&CSS/Basic',
@@ -8,8 +8,11 @@ function getTemplate(): string {
 	return '<span class="tag">Text</span>';
 }
 
-const Template: StoryFn = () => ({
+const Template = () => ({
 	template: getTemplate(),
 });
 
-export const Basic = Template.bind({});
+export const Basic: StoryObj = {
+	args: {},
+	render: Template,
+};

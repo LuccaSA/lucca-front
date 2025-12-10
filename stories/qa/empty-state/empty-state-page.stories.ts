@@ -1,7 +1,7 @@
 import { provideHttpClient } from '@angular/common/http';
 import { Component } from '@angular/core';
 import { LuSafeExternalSvgPipe } from '@lucca-front/ng/safe-content';
-import { Meta, StoryFn, applicationConfig } from '@storybook/angular';
+import { Meta, applicationConfig, StoryObj } from '@storybook/angular';
 
 @Component({
 	standalone: true,
@@ -22,6 +22,9 @@ export default {
 	],
 } as Meta;
 
-const template: StoryFn<EmptyStatePageStory> = () => ({});
+const template = () => ({});
 
-export const Basic = template.bind({});
+export const Basic: StoryObj<EmptyStatePageStory> = {
+	args: {},
+	render: template,
+};

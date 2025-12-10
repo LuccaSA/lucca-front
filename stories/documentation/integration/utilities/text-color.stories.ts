@@ -1,4 +1,4 @@
-import { Meta, StoryFn } from '@storybook/angular';
+import { Meta, StoryObj } from '@storybook/angular';
 
 interface TextColorStory {}
 
@@ -37,7 +37,7 @@ function getTemplate(args: TextColorStory): string {
 </div>`;
 }
 
-const Template: StoryFn<TextColorStory> = (args) => ({
+const Template = (args: TextColorStory) => ({
 	props: args,
 	template: getTemplate(args),
 	styles: [
@@ -63,5 +63,7 @@ const Template: StoryFn<TextColorStory> = (args) => ({
 	],
 });
 
-export const TextColor = Template.bind({});
-TextColor.args = {};
+export const TextColor: StoryObj<TextColorStory> = {
+	args: {},
+	render: Template,
+};

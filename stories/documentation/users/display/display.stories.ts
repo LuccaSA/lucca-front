@@ -1,6 +1,6 @@
 import { Component, Input } from '@angular/core';
 import { ILuUser, LuDisplayFormat, LuDisplayFullname, LuDisplayHybrid, LuDisplayInitials, LuUserDisplayModule } from '@lucca-front/ng/user';
-import { Meta, StoryFn } from '@storybook/angular';
+import { Meta, StoryObj } from '@storybook/angular';
 import { bob, patrick, squidwards } from '../user.mocks';
 
 const formatters = {
@@ -48,15 +48,12 @@ export default {
 	},
 } as Meta;
 
-const template: StoryFn<DisplayStory> = (args: DisplayStory) => ({
-	props: args,
-});
-
-export const Basic = template.bind({});
-Basic.args = {
-	displayFormat: LuDisplayFullname.lastfirst,
-	separator: ', ',
-	formatter: formatters.enLongConjFormatter,
+export const Basic: StoryObj<DisplayStory> = {
+	args: {
+		displayFormat: LuDisplayFullname.lastfirst,
+		separator: ', ',
+		formatter: formatters.enLongConjFormatter,
+	},
 };
 
 const code = `
