@@ -13,7 +13,7 @@ import { getCalloutPalette } from '../callout.utils';
 	templateUrl: './callout.component.html',
 	styleUrl: './callout.component.scss',
 	host: {
-		'[attr.hidden]': 'removed ? "hidden" : null',
+		'[attr.hidden]': 'removed() ? "hidden" : null',
 	},
 	changeDetection: ChangeDetectionStrategy.OnPush,
 	encapsulation: ViewEncapsulation.None,

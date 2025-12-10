@@ -5,15 +5,15 @@ import {
 	booleanAttribute,
 	ChangeDetectionStrategy,
 	Component,
+	computed,
 	contentChildren,
 	ElementRef,
 	inject,
 	input,
-	Input,
 	numberAttribute,
 	OnDestroy,
 	TemplateRef,
-	ViewChild,
+	viewChild,
 	ViewContainerRef,
 	ViewEncapsulation,
 } from '@angular/core';
@@ -57,64 +57,55 @@ export class CalloutPopoverComponent implements OnDestroy {
 	#viewContainerRef = inject(ViewContainerRef);
 	#elementRef = inject<ElementRef<HTMLElement>>(ElementRef);
 
-	@ViewChild('overlayOriginRef')
-	overlayOrigin: ElementRef;
+	readonly overlayOrigin = viewChild<ElementRef>('overlayOriginRef');
 
-	@ViewChild('overlayContentRef')
-	overlayContent: TemplateRef<unknown>;
+	readonly overlayContent = viewChild<TemplateRef<unknown>>('overlayContentRef');
 
 	#overlayRef: OverlayRef;
 
 	// Using unknown here because it's using Node types for whatever reason but it's a number
-	private _hideDelayId: unknown | undefined;
+	#hideDelayId: unknown | undefined;
 
 	// Using unknown here because it's using Node types for whatever reason but it's a number
-	private _showDelayId: unknown | undefined;
+	#showDelayId: unknown | undefined;
 
 	/**
 	 * Debounce for the popover to open (mouse will have to be on the element fox openDelay milliseconds for popover to show)
 	 */
-	@Input({ transform: numberAttribute })
-	readonly openDelay = 50;
+	readonly openDelay = input(50, { transform: numberAttribute });
 
 	/**
 	 * Debounce for the popover to close (mouse will have to be out of both popover and trigger for closeDelay milliseconds for it to close)
 	 */
-	@Input({ transform: numberAttribute })
-	readonly closeDelay = 500;
+	readonly closeDelay = input(500, { transform: numberAttribute });
 
 	/**
 	 * Label (visual only) to put inside the button, often used to show just a number
 	 */
-	@Input()
-	buttonLabel: string;
+	readonly buttonLabel = input<string>();
 
 	/**
 	 * Alternative for the button
 	 */
-	buttonAlt = input<string>('');
+	readonly buttonAlt = input<string>('');
 
-	headingHiddenIfSingleItem = input(false, { transform: booleanAttribute });
+	readonly headingHiddenIfSingleItem = input(false, { transform: booleanAttribute });
 
 	/**
 	 * Palette for both the button and the popover content
 	 */
-	@Input()
-	palette: Palette = 'none';
+	readonly palette = input<Palette>('none');
 
 	/**
 	 * Size for both button and popover content
 	 */
-	@Input()
-	size?: 'M' | 'S' | 'XS';
+	readonly size = input<'M' | 'S' | 'XS'>();
 
 	/**
 	 * Icon shows in button and next to popover's title
 	 */
-	@Input()
-	icon: LuccaIcon;
+	readonly icon = input<LuccaIcon>();
 
-	@Input()
 	/**
 	 * State is a shorthand to set the icon and the palette to the recommended values for the icon and palette based on
 	 * the provided state.
@@ -122,60 +113,54 @@ export class CalloutPopoverComponent implements OnDestroy {
 	 * If one of the icon or palette inputs are filled along with the state input, their values will have the priority over
 	 * state (so setting state to success and palette to warning will make the palette warning)
 	 */
-	state: CalloutState;
+	readonly state = input<CalloutState>();
 
 	/**
 	 * Heading for the details popover
 	 */
-	@Input()
-	heading: PortalContent;
+	readonly heading = input<PortalContent>();
 
-	feedbackItems = contentChildren(CalloutFeedbackItemComponent, { descendants: true });
+	readonly feedbackItems = contentChildren(CalloutFeedbackItemComponent, { descendants: true });
 
-	get contentSize(): 'S' | 'M' | undefined {
-		if (this.size === 'XS') {
-			return 'S';
-		}
-		return this.size;
-	}
+	readonly contentSize = computed<'S' | 'M' | undefined>(() => {
+		const size = this.size();
+		return size === 'XS' ? 'S' : size;
+	});
 
-	get calloutClasses() {
-		const palette = getCalloutPalette(this.state, this.palette);
+	readonly calloutOverlayClasses = computed(() => ({
+		[`mod-${this.contentSize()}`]: !!this.contentSize(),
+	}));
+
+	readonly calloutPalette = computed(() => getCalloutPalette(this.state(), this.palette()));
+
+	readonly calloutClasses = computed(() => {
+		const palette = this.calloutPalette();
 		return {
-			[`mod-${this.size}`]: !!this.size,
+			[`mod-${this.size()}`]: !!this.size(),
 			[`palette-${palette}`]: !!palette,
 		};
-	}
+	});
 
-	get calloutOverlayClasses() {
-		return {
-			[`mod-${this.contentSize}`]: !!this.contentSize,
-		};
-	}
-
-	get calloutOverlayHeadClasses() {
-		const palette = getCalloutPalette(this.state, this.palette);
-		return {
-			[`palette-${palette}`]: !!palette,
-		};
-	}
+	readonly calloutOverlayHeadClasses = computed(() => ({
+		[`palette-${this.calloutPalette()}`]: !!this.calloutPalette(),
+	}));
 
 	public showContent() {
-		clearTimeout(this._hideDelayId as number);
+		clearTimeout(this.#hideDelayId as number);
 		// Don't open if we still have one opened
-		if (this._showDelayId) {
+		if (this.#showDelayId) {
 			return;
 		}
-		this._showDelayId = setTimeout(() => {
+		this.#showDelayId = setTimeout(() => {
 			this.createPanelContent();
-			delete this._hideDelayId;
-		}, this.openDelay);
+			this.#hideDelayId = undefined;
+		}, this.openDelay());
 	}
 
 	private createPanelContent() {
 		const positionStrategy = this.#overlay
 			.position()
-			.flexibleConnectedTo(this.overlayOrigin)
+			.flexibleConnectedTo(this.overlayOrigin())
 			.withPositions([
 				{
 					originX: 'center',
@@ -195,25 +180,25 @@ export class CalloutPopoverComponent implements OnDestroy {
 			positionStrategy,
 		});
 
-		const portal = new TemplatePortal(this.overlayContent, this.#viewContainerRef);
+		const portal = new TemplatePortal(this.overlayContent(), this.#viewContainerRef);
 
 		this.#overlayRef.attach(portal);
 	}
 
 	public hideContent(event: MouseEvent | null) {
-		clearTimeout(this._showDelayId as number);
-		this._hideDelayId = setTimeout(() => {
+		clearTimeout(this.#showDelayId as number);
+		this.#hideDelayId = setTimeout(() => {
 			const newTarget = event?.relatedTarget as Node | null;
 			// This is to prevent tooltip closing when user puts cursor on tooltip, thus leaving the origin trigger
 			if (!newTarget || !(this.#overlayRef?.overlayElement?.contains(newTarget) || this.#elementRef?.nativeElement?.contains(newTarget))) {
 				// Remove the tooltip if needed.
 				if (this.#overlayRef) {
 					this.#overlayRef.dispose();
-					delete this._showDelayId;
-					delete this._hideDelayId;
+					this.#showDelayId = undefined;
+					this.#hideDelayId = undefined;
 				}
 			}
-		}, this.closeDelay);
+		}, this.closeDelay());
 	}
 
 	ngOnDestroy(): void {
