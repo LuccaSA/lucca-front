@@ -1,4 +1,4 @@
-@if (!removed()) {
+@if (!removedRef()) {
 	<div class="callout" [class]="calloutClasses()" [class.mod-AI]="AI()">
 		@if (state() | luCalloutIcon: icon(); as calloutIcon) {
 			<div class="callout-icon">
@@ -16,7 +16,7 @@
 			</div>
 		</div>
 		@if (removable()) {
-			<button type="button" class="callout-kill" (click)="removed.set(true); removedChange.emit(true)">
+			<button type="button" class="callout-kill" (click)="removedRef.set(true); removedChange.emit(true)">
 				<span class="pr-u-mask">{{ intl.close }}</span>
 			</button>
 		}

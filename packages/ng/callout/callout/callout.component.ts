@@ -1,4 +1,4 @@
-import { booleanAttribute, ChangeDetectionStrategy, Component, computed, input, model, output, ViewEncapsulation } from '@angular/core';
+import { booleanAttribute, ChangeDetectionStrategy, Component, computed, input, linkedSignal, output, ViewEncapsulation } from '@angular/core';
 import { LuccaIcon } from '@lucca-front/icons';
 import { getIntl, Palette, PortalContent, PortalDirective } from '@lucca-front/ng/core';
 import { IconComponent } from '@lucca-front/ng/icon';
@@ -60,7 +60,8 @@ export class CalloutComponent {
 	/**
 	 * Is the callout removed? Works with two way binding too.
 	 */
-	readonly removed = model<boolean>(false);
+
+	readonly removed = input(false, { transform: booleanAttribute });
 
 	/**
 	 * Defines the icon’s alt attribute used for accessibility
@@ -76,6 +77,8 @@ export class CalloutComponent {
 	 * Emit event when button removed is click
 	 */
 	readonly removedChange = output<boolean>();
+
+	readonly removedRef = linkedSignal(() => this.removed());
 
 	readonly calloutClasses = computed(() => {
 		const palette = getCalloutPalette(this.state(), this.palette());
