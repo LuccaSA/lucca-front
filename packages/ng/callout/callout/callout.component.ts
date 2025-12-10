@@ -60,7 +60,7 @@ export class CalloutComponent {
 	/**
 	 * Is the callout removed? Works with two way binding too.
 	 */
-	removed = model<boolean>(false);
+	readonly removed = model<boolean>(false);
 
 	/**
 	 * Defines the icon’s alt attribute used for accessibility
@@ -77,7 +77,7 @@ export class CalloutComponent {
 	 */
 	readonly removedChange = output<boolean>();
 
-	calloutClasses = computed(() => {
+	readonly calloutClasses = computed(() => {
 		const palette = getCalloutPalette(this.state(), this.palette());
 		const size = this.size();
 		const AI = this.AI();
