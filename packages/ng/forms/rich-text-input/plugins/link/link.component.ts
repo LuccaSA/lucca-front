@@ -106,15 +106,18 @@ export class LinkComponent implements OnDestroy, AfterViewInit, RichTextPluginCo
 		this.#registeredCommands();
 	}
 
-	dispatchCommand() {
+	dispatchCommand(urlFromPopover?: string) {
 		this.#editor?.read(() => {
-			let url = '';
-			const selection = $getSelection();
-			if ($isRangeSelection(selection)) {
-				const node = getSelectedNode(selection);
-				const parent = $getNearestNodeOfType(node, LinkNode);
-				if (parent) {
-					url = parent.getURL();
+			let url = urlFromPopover || '';
+			// Only try to get URL from selection if not provided from popover
+			if (!url) {
+				const selection = $getSelection();
+				if ($isRangeSelection(selection)) {
+					const node = getSelectedNode(selection);
+					const parent = $getNearestNodeOfType(node, LinkNode);
+					if (parent) {
+						url = parent.getURL();
+					}
 				}
 			}
 
