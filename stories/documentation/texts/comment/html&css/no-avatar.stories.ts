@@ -1,4 +1,4 @@
-import { Meta, StoryFn } from '@storybook/angular';
+import { Meta, StoryObj } from '@storybook/angular';
 
 interface CommentNoAvatarStory {}
 
@@ -24,10 +24,12 @@ function getTemplate(args: CommentNoAvatarStory): string {
 </div>`;
 }
 
-const Template: StoryFn<CommentNoAvatarStory> = (args) => ({
+const Template = (args: CommentNoAvatarStory) => ({
 	props: args,
 	template: getTemplate(args),
 });
 
-export const NoAvatar = Template.bind({});
-NoAvatar.args = {};
+export const NoAvatar: StoryObj<CommentNoAvatarStory> = {
+	args: {},
+	render: Template,
+};

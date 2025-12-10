@@ -1,4 +1,4 @@
-import { Meta, StoryFn } from '@storybook/angular';
+import { Meta, StoryObj } from '@storybook/angular';
 
 interface IndexTableActionsSubActionStory {}
 
@@ -44,9 +44,12 @@ function getTemplate(args: IndexTableActionsSubActionStory): string {
 </table>`;
 }
 
-const Template: StoryFn<IndexTableActionsSubActionStory> = (args) => ({
+const Template = (args: IndexTableActionsSubActionStory) => ({
 	props: args,
 	template: getTemplate(args),
 });
 
-export const SubActions = Template.bind({});
+export const SubActions: StoryObj<IndexTableActionsSubActionStory> = {
+	args: {},
+	render: Template,
+};

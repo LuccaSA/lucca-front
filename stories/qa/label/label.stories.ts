@@ -1,5 +1,5 @@
 import { Component } from '@angular/core';
-import { Meta, StoryFn } from '@storybook/angular';
+import { Meta, StoryObj } from '@storybook/angular';
 
 @Component({
 	selector: 'label-stories',
@@ -12,6 +12,9 @@ export default {
 	component: LabelStory,
 } as Meta;
 
-const template: StoryFn<LabelStory> = () => ({});
+const template = () => ({});
 
-export const Basic = template.bind({});
+export const Basic: StoryObj<LabelStory> = {
+	args: {},
+	render: template,
+};

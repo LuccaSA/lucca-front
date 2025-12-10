@@ -1,4 +1,4 @@
-import { Meta, StoryFn } from '@storybook/angular';
+import { Meta, StoryObj } from '@storybook/angular';
 
 export default {
 	title: 'Documentation/Users/Avatar/HTML&CSS/Sizes',
@@ -29,8 +29,11 @@ function getTemplate(): string {
 </span>`;
 }
 
-const Template: StoryFn = () => ({
+const Template = () => ({
 	template: getTemplate(),
 });
 
-export const Sizes = Template.bind({});
+export const Sizes: StoryObj = {
+	args: {},
+	render: Template,
+};

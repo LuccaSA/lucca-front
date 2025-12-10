@@ -1,4 +1,4 @@
-import { Meta, StoryFn } from '@storybook/angular';
+import { Meta, StoryObj } from '@storybook/angular';
 
 interface CardsBasicStory {
 	neutral: boolean;
@@ -33,10 +33,12 @@ function getTemplate(args: CardsBasicStory): string {
 </div>`;
 }
 
-const Template: StoryFn<CardsBasicStory> = (args) => ({
+const Template = (args: CardsBasicStory) => ({
 	props: args,
 	template: getTemplate(args),
 });
 
-export const Basic = Template.bind({});
-Basic.args = { disabled: false, neutral: false };
+export const Basic: StoryObj<CardsBasicStory> = {
+	args: { disabled: false, neutral: false },
+	render: Template,
+};

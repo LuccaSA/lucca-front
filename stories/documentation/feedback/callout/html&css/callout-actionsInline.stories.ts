@@ -1,4 +1,4 @@
-import { Meta, StoryFn } from '@storybook/angular';
+import { Meta, StoryObj } from '@storybook/angular';
 
 interface CalloutActionsInlineStory {}
 
@@ -21,10 +21,12 @@ function getTemplate(args: CalloutActionsInlineStory): string {
 </div>`;
 }
 
-const Template: StoryFn<CalloutActionsInlineStory> = (args) => ({
+const Template = (args: CalloutActionsInlineStory) => ({
 	props: args,
 	template: getTemplate(args),
 });
 
-export const ActionsInline = Template.bind({});
-ActionsInline.args = {};
+export const ActionsInline: StoryObj<CalloutActionsInlineStory> = {
+	args: {},
+	render: Template,
+};

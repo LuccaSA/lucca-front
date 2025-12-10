@@ -1,4 +1,4 @@
-import { Meta, StoryFn } from '@storybook/angular';
+import { Meta, StoryObj } from '@storybook/angular';
 
 interface ArrowBasicStory {
 	s: boolean;
@@ -104,7 +104,7 @@ function getTemplate(args: ArrowBasicStory): string {
 	}
 }
 
-const Template: StoryFn<ArrowBasicStory> = (args) => ({
+const Template = (args: ArrowBasicStory) => ({
 	props: args,
 	template: getTemplate(args),
 	styles: [
@@ -116,5 +116,7 @@ const Template: StoryFn<ArrowBasicStory> = (args) => ({
 	],
 });
 
-export const Basic = Template.bind({});
-Basic.args = { s: false, neutral: true, field: 'radio', checked: true };
+export const Basic: StoryObj<ArrowBasicStory> = {
+	args: { s: false, neutral: true, field: 'radio', checked: true },
+	render: Template,
+};

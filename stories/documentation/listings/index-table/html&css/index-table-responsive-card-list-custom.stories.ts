@@ -1,4 +1,4 @@
-import { Meta, StoryFn } from '@storybook/angular';
+import { Meta, StoryObj } from '@storybook/angular';
 
 interface IndexTableResponsiveCardListCustomStory {}
 
@@ -52,10 +52,12 @@ function getTemplate(args: IndexTableResponsiveCardListCustomStory): string {
 </table>`;
 }
 
-const Template: StoryFn<IndexTableResponsiveCardListCustomStory> = (args) => ({
+const Template = (args: IndexTableResponsiveCardListCustomStory) => ({
 	props: args,
 	template: getTemplate(args),
 });
 
-export const ResponsiveCardListCustom = Template.bind({});
-ResponsiveCardListCustom.args = {};
+export const ResponsiveCardListCustom: StoryObj<IndexTableResponsiveCardListCustomStory> = {
+	args: {},
+	render: Template,
+};

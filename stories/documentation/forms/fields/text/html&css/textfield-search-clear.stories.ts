@@ -1,4 +1,4 @@
-import { Meta, StoryFn } from '@storybook/angular';
+import { Meta, StoryObj } from '@storybook/angular';
 
 interface TextfieldSearchClearStory {}
 
@@ -24,10 +24,12 @@ function getTemplate(args: TextfieldSearchClearStory): string {
 </div>`;
 }
 
-const Template: StoryFn<TextfieldSearchClearStory> = (args) => ({
+const Template = (args: TextfieldSearchClearStory) => ({
 	props: args,
 	template: getTemplate(args),
 });
 
-export const SearchClear = Template.bind({});
-SearchClear.args = {};
+export const SearchClear: StoryObj<TextfieldSearchClearStory> = {
+	args: {},
+	render: Template,
+};

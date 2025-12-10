@@ -1,6 +1,6 @@
 import { Component } from '@angular/core';
 import { ContainerComponent } from '@lucca-front/ng/container';
-import { Meta, StoryFn } from '@storybook/angular';
+import { Meta, StoryObj } from '@storybook/angular';
 
 @Component({
 	selector: 'container-stories',
@@ -31,6 +31,9 @@ export default {
 	component: ContainerStory,
 } as Meta;
 
-const template: StoryFn<ContainerStory> = () => ({});
+const template = () => ({});
 
-export const basic = template.bind({});
+export const basic: StoryObj<ContainerStory> = {
+	args: {},
+	render: template,
+};

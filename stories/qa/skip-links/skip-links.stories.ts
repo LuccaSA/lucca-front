@@ -1,5 +1,5 @@
 import { Component } from '@angular/core';
-import { Meta, StoryFn } from '@storybook/angular';
+import { Meta, StoryObj } from '@storybook/angular';
 
 @Component({
 	selector: 'skip-links-stories',
@@ -12,6 +12,9 @@ export default {
 	component: SkipLinksStory,
 } as Meta;
 
-const template: StoryFn<SkipLinksStory> = () => ({});
+const template = () => ({});
 
-export const basic = template.bind({});
+export const basic: StoryObj<SkipLinksStory> = {
+	args: {},
+	render: template,
+};

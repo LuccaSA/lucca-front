@@ -1,5 +1,5 @@
 import { LuTooltipModule } from '@lucca-front/ng/tooltip';
-import { Meta, moduleMetadata, StoryFn } from '@storybook/angular';
+import { Meta, moduleMetadata, StoryObj } from '@storybook/angular';
 
 interface CheckboxBasicStory {
 	label: string;
@@ -46,14 +46,16 @@ function getTemplate(args: CheckboxBasicStory): string {
 </div>`;
 }
 
-const Template: StoryFn<CheckboxBasicStory> = (args) => ({
+const Template = (args: CheckboxBasicStory) => ({
 	props: args,
 	template: getTemplate(args),
 });
 
-export const Basic = Template.bind({});
-Basic.args = {
-	label: 'Lorem ipsum dolor',
-	checked: false,
-	disabled: false,
+export const Basic: StoryObj<CheckboxBasicStory> = {
+	args: {
+		label: 'Lorem ipsum dolor',
+		checked: false,
+		disabled: false,
+	},
+	render: Template,
 };

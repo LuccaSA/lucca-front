@@ -1,4 +1,4 @@
-import { Meta, StoryFn } from '@storybook/angular';
+import { Meta, StoryObj } from '@storybook/angular';
 
 interface BorderStory {}
 
@@ -18,10 +18,12 @@ function getTemplate(args: BorderStory): string {
 </div>`;
 }
 
-const Template: StoryFn<BorderStory> = (args) => ({
+const Template = (args: BorderStory) => ({
 	props: args,
 	template: getTemplate(args),
 });
 
-export const Border = Template.bind({});
-Border.args = {};
+export const Border: StoryObj<BorderStory> = {
+	args: {},
+	render: Template,
+};

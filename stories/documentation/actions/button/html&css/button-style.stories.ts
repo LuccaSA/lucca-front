@@ -1,5 +1,5 @@
 import { IconComponent } from '@lucca-front/ng/icon';
-import { Meta, moduleMetadata, StoryFn } from '@storybook/angular';
+import { Meta, moduleMetadata, StoryObj } from '@storybook/angular';
 
 interface ButtonStyleStory {}
 
@@ -20,7 +20,7 @@ function getTemplate(args: ButtonStyleStory): string {
 <!-- 20.3 --><button type="button" class="button mod-AI">Button</button>`;
 }
 
-const Template: StoryFn<ButtonStyleStory> = (args) => ({
+const Template = (args: ButtonStyleStory) => ({
 	props: args,
 	template: getTemplate(args),
 	styles: [
@@ -33,5 +33,7 @@ const Template: StoryFn<ButtonStyleStory> = (args) => ({
 	],
 });
 
-export const StyleButton = Template.bind({});
-StyleButton.args = {};
+export const StyleButton: StoryObj<ButtonStyleStory> = {
+	args: {},
+	render: Template,
+};

@@ -1,4 +1,4 @@
-import { Meta, StoryFn } from '@storybook/angular';
+import { Meta, StoryObj } from '@storybook/angular';
 
 interface ProgressionBasicStory {
 	status: string;
@@ -41,10 +41,12 @@ function getTemplate(args: ProgressionBasicStory): string {
 	`;
 }
 
-const Template: StoryFn<ProgressionBasicStory> = (args) => ({
+const Template = (args: ProgressionBasicStory) => ({
 	props: args,
 	template: getTemplate(args),
 });
 
-export const Basic = Template.bind({});
-Basic.args = { status: '', indeterminate: false, width: 50 };
+export const Basic: StoryObj<ProgressionBasicStory> = {
+	args: { status: '', indeterminate: false, width: 50 },
+	render: Template,
+};

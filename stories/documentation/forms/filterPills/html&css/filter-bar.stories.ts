@@ -10,7 +10,7 @@ import { IconComponent } from '@lucca-front/ng/icon';
 import { PopoverDirective } from '@lucca-front/ng/popover2';
 import { ScrollBoxComponent } from '@lucca-front/ng/scroll-box';
 import { LuTooltipModule } from '@lucca-front/ng/tooltip';
-import { applicationConfig, Meta, moduleMetadata, StoryFn } from '@storybook/angular';
+import { applicationConfig, Meta, moduleMetadata, StoryObj } from '@storybook/angular';
 import { StoryModelDisplayComponent } from 'stories/helpers/story-model-display.component';
 
 interface FilterBarBasicStory {
@@ -154,10 +154,12 @@ function getTemplate(args: FilterBarBasicStory): string {
 `;
 }
 
-const Template: StoryFn<FilterBarBasicStory> = (args) => ({
+const Template = (args: FilterBarBasicStory) => ({
 	props: args,
 	template: getTemplate(args),
 });
 
-export const Basic = Template.bind({});
-Basic.args = {};
+export const Basic: StoryObj<FilterBarBasicStory> = {
+	args: {},
+	render: Template,
+};

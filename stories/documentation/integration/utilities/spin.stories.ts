@@ -1,4 +1,4 @@
-import { Meta, StoryFn } from '@storybook/angular';
+import { Meta, StoryObj } from '@storybook/angular';
 
 interface SpinStory {}
 
@@ -15,7 +15,7 @@ function getTemplate(args: SpinStory): string {
 </label>`;
 }
 
-const Template: StoryFn<SpinStory> = (args) => ({
+const Template = (args: SpinStory) => ({
 	props: args,
 	template: getTemplate(args),
 	styles: [
@@ -28,5 +28,7 @@ const Template: StoryFn<SpinStory> = (args) => ({
 	],
 });
 
-export const Spin = Template.bind({});
-Spin.args = {};
+export const Spin: StoryObj<SpinStory> = {
+	args: {},
+	render: Template,
+};

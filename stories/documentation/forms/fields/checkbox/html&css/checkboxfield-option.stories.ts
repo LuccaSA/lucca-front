@@ -1,4 +1,4 @@
-import { Meta, StoryFn } from '@storybook/angular';
+import { Meta, StoryObj } from '@storybook/angular';
 
 interface CheckboxOptionStory {}
 
@@ -45,10 +45,12 @@ function getTemplate(args: CheckboxOptionStory): string {
 `;
 }
 
-const Template: StoryFn<CheckboxOptionStory> = (args) => ({
+const Template = (args: CheckboxOptionStory) => ({
 	props: args,
 	template: getTemplate(args),
 });
 
-export const Option = Template.bind({});
-Option.args = {};
+export const Option: StoryObj<CheckboxOptionStory> = {
+	args: {},
+	render: Template,
+};

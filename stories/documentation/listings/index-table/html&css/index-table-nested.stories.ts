@@ -1,4 +1,4 @@
-import { Meta, StoryFn } from '@storybook/angular';
+import { Meta, StoryObj } from '@storybook/angular';
 
 interface IndexTableNestedStory {}
 
@@ -75,10 +75,12 @@ function getTemplate(args: IndexTableNestedStory): string {
 </table>`;
 }
 
-const Template: StoryFn<IndexTableNestedStory> = (args) => ({
+const Template = (args: IndexTableNestedStory) => ({
 	props: args,
 	template: getTemplate(args),
 });
 
-export const Nested = Template.bind({});
-Nested.args = {};
+export const Nested: StoryObj<IndexTableNestedStory> = {
+	args: {},
+	render: Template,
+};

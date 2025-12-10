@@ -1,5 +1,5 @@
 import { LuTooltipModule } from '@lucca-front/ng/tooltip';
-import { Meta, moduleMetadata, StoryFn } from '@storybook/angular';
+import { Meta, moduleMetadata, StoryObj } from '@storybook/angular';
 
 interface IndexTableActionsTooltipsCellStory {}
 
@@ -73,7 +73,7 @@ function getTemplate(args: IndexTableActionsTooltipsCellStory): string {
 </table>`;
 }
 
-const Template: StoryFn<IndexTableActionsTooltipsCellStory> = (args) => ({
+const Template = (args: IndexTableActionsTooltipsCellStory) => ({
 	props: {
 		...args,
 		message: (msg) => {
@@ -83,4 +83,7 @@ const Template: StoryFn<IndexTableActionsTooltipsCellStory> = (args) => ({
 	template: getTemplate(args),
 });
 
-export const TooltipsCell = Template.bind({});
+export const TooltipsCell: StoryObj<IndexTableActionsTooltipsCellStory> = {
+	args: {},
+	render: Template,
+};

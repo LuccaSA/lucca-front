@@ -1,4 +1,4 @@
-import { Meta, StoryFn } from '@storybook/angular';
+import { Meta, StoryObj } from '@storybook/angular';
 
 interface BreadcrumbsCompactStory {}
 
@@ -15,10 +15,12 @@ function getTemplate(args: BreadcrumbsCompactStory): string {
 </nav>`;
 }
 
-const Template: StoryFn<BreadcrumbsCompactStory> = (args) => ({
+const Template = (args: BreadcrumbsCompactStory) => ({
 	props: args,
 	template: getTemplate(args),
 });
 
-export const Compact = Template.bind({});
-Compact.args = {};
+export const Compact: StoryObj<BreadcrumbsCompactStory> = {
+	args: {},
+	render: Template,
+};

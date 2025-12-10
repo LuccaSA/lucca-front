@@ -1,4 +1,4 @@
-import { Meta, StoryFn } from '@storybook/angular';
+import { Meta, StoryObj } from '@storybook/angular';
 
 export default {
 	title: 'Documentation/Texts/StatusBadge/HTML & CSS/Palettes',
@@ -13,7 +13,7 @@ function getTemplate(): string {
 <div class="statusBadge palette-error">Status</div>`;
 }
 
-const Template: StoryFn = () => ({
+const Template = () => ({
 	template: getTemplate(),
 	styles: [
 		`:host {
@@ -23,4 +23,7 @@ const Template: StoryFn = () => ({
 	],
 });
 
-export const Palettes = Template.bind({});
+export const Palettes: StoryObj = {
+	args: {},
+	render: Template,
+};

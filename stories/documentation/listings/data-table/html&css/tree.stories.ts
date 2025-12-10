@@ -1,4 +1,4 @@
-import { Meta, StoryFn } from '@storybook/angular';
+import { Meta, StoryObj } from '@storybook/angular';
 
 interface TreeStory {}
 
@@ -74,10 +74,12 @@ function getTemplate(args: TreeStory): string {
 </div>`;
 }
 
-const Template: StoryFn<TreeStory> = (args) => ({
+const Template = (args: TreeStory) => ({
 	props: args,
 	template: getTemplate(args),
 });
 
-export const Tree = Template.bind({});
-Tree.args = {};
+export const Tree: StoryObj<TreeStory> = {
+	args: {},
+	render: Template,
+};

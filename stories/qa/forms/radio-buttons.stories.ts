@@ -1,5 +1,5 @@
 import { Component } from '@angular/core';
-import { Meta, StoryFn } from '@storybook/angular';
+import { Meta, StoryObj } from '@storybook/angular';
 
 @Component({
 	selector: 'forms-radio-buttons-stories',
@@ -12,6 +12,9 @@ export default {
 	component: RadioButtonsStory,
 } as Meta;
 
-const template: StoryFn<RadioButtonsStory> = () => ({});
+const template = () => ({});
 
-export const Basic = template.bind({});
+export const Basic: StoryObj<RadioButtonsStory> = {
+	args: {},
+	render: template,
+};

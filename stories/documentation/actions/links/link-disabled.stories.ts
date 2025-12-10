@@ -1,4 +1,4 @@
-import { Meta, StoryFn } from '@storybook/angular';
+import { Meta, StoryObj } from '@storybook/angular';
 
 interface LinkDisabledStory {}
 
@@ -12,7 +12,7 @@ function getTemplate(args: LinkDisabledStory): string {
 <span class="link is-disabled mod-icon">Text link<!-- no text node here --><span aria-hidden="true" class="lucca-icon icon-arrowExternal"></span></span>`;
 }
 
-const Template: StoryFn<LinkDisabledStory> = (args) => ({
+const Template = (args: LinkDisabledStory) => ({
 	props: args,
 	template: getTemplate(args),
 	styles: [
@@ -25,5 +25,7 @@ const Template: StoryFn<LinkDisabledStory> = (args) => ({
 	],
 });
 
-export const DisabledLink = Template.bind({});
-DisabledLink.args = {};
+export const DisabledLink: StoryObj<LinkDisabledStory> = {
+	args: {},
+	render: Template,
+};

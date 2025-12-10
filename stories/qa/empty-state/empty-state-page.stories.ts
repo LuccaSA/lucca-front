@@ -2,7 +2,7 @@ import { provideHttpClient } from '@angular/common/http';
 import { Component } from '@angular/core';
 import { EmptyStatePageComponent } from '@lucca-front/ng/empty-state';
 import { LuSafeExternalSvgPipe } from '@lucca-front/ng/safe-content';
-import { Meta, StoryFn, applicationConfig } from '@storybook/angular';
+import { Meta, applicationConfig, StoryObj } from '@storybook/angular';
 
 @Component({
 	selector: 'empty-state-page-stories',
@@ -21,6 +21,9 @@ export default {
 	],
 } as Meta;
 
-const template: StoryFn<EmptyStatePageStory> = () => ({});
+const template = () => ({});
 
-export const Basic = template.bind({});
+export const Basic: StoryObj<EmptyStatePageStory> = {
+	args: {},
+	render: template,
+};

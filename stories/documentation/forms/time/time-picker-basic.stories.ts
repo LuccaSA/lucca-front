@@ -1,4 +1,4 @@
-import { Meta, StoryFn } from '@storybook/angular';
+import { Meta, StoryObj } from '@storybook/angular';
 
 interface timepickerBasicStory {
 	s: boolean;
@@ -93,10 +93,12 @@ function getTemplate(args: timepickerBasicStory): string {
 	`;
 }
 
-const Template: StoryFn<timepickerBasicStory> = (args) => ({
+const Template = (args: timepickerBasicStory) => ({
 	props: args,
 	template: getTemplate(args),
 });
 
-export const Basic = Template.bind({});
-Basic.args = { s: false, disabled: false, stepper: false, stepperHover: false, invalid: false };
+export const Basic: StoryObj<timepickerBasicStory> = {
+	args: { s: false, disabled: false, stepper: false, stepperHover: false, invalid: false },
+	render: Template,
+};

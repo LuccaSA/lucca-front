@@ -1,4 +1,4 @@
-import { Meta, StoryFn } from '@storybook/angular';
+import { Meta, StoryObj } from '@storybook/angular';
 
 interface FooterBasicStory {
 	sticky: boolean;
@@ -54,10 +54,12 @@ function getTemplate(args: FooterBasicStory): string {
 	}
 }
 
-const Template: StoryFn<FooterBasicStory> = (args) => ({
+const Template = (args: FooterBasicStory) => ({
 	props: args,
 	template: getTemplate(args),
 });
 
-export const Basic = Template.bind({});
-Basic.args = { sticky: false, responsive: '', container: false };
+export const Basic: StoryObj<FooterBasicStory> = {
+	args: { sticky: false, responsive: '', container: false },
+	render: Template,
+};

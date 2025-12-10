@@ -1,4 +1,4 @@
-import { Meta, StoryFn } from '@storybook/angular';
+import { Meta, StoryObj } from '@storybook/angular';
 
 interface PageHeaderLeadingTrainlingStory {
 	sticky: boolean;
@@ -57,10 +57,12 @@ function getTemplate(args: PageHeaderLeadingTrainlingStory): string {
 </header>`;
 }
 
-const Template: StoryFn<PageHeaderLeadingTrainlingStory> = (args) => ({
+const Template = (args: PageHeaderLeadingTrainlingStory) => ({
 	props: args,
 	template: getTemplate(args),
 });
 
-export const PageHeaderLeadingTrainlingStory = Template.bind({});
-PageHeaderLeadingTrainlingStory.args = {};
+export const PageHeaderLeadingTrainlingStory: StoryObj<PageHeaderLeadingTrainlingStory> = {
+	args: {},
+	render: Template,
+};

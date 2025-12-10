@@ -1,4 +1,4 @@
-import { Meta, StoryFn } from '@storybook/angular';
+import { Meta, StoryObj } from '@storybook/angular';
 
 interface BoxKillableStory {
 	neutral: boolean;
@@ -29,7 +29,7 @@ function getTemplate(args: BoxKillableStory): string {
 </div>`;
 }
 
-const Template: StoryFn<BoxKillableStory> = (args) => ({
+const Template = (args: BoxKillableStory) => ({
 	props: args,
 	template: getTemplate(args),
 	styles: [
@@ -41,5 +41,7 @@ const Template: StoryFn<BoxKillableStory> = (args) => ({
 	],
 });
 
-export const Killable = Template.bind({});
-Killable.args = { neutral: false };
+export const Killable: StoryObj<BoxKillableStory> = {
+	args: { neutral: false },
+	render: Template,
+};

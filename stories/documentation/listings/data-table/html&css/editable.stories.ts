@@ -1,4 +1,4 @@
-import { Meta, StoryFn } from '@storybook/angular';
+import { Meta, StoryObj } from '@storybook/angular';
 
 interface EditableStory {}
 
@@ -59,10 +59,12 @@ function getTemplate(args: EditableStory): string {
 </form>`;
 }
 
-const Template: StoryFn<EditableStory> = (args) => ({
+const Template = (args: EditableStory) => ({
 	props: args,
 	template: getTemplate(args),
 });
 
-export const Editable = Template.bind({});
-Editable.args = {};
+export const Editable: StoryObj<EditableStory> = {
+	args: {},
+	render: Template,
+};

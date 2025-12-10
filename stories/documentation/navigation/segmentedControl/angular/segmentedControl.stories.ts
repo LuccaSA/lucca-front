@@ -1,11 +1,11 @@
 import { FormsModule } from '@angular/forms';
 import { NumericBadgeComponent } from '@lucca-front/ng/numeric-badge';
 import { SegmentedControlComponent, SegmentedControlFilterComponent } from '@lucca-front/ng/segmented-control';
-import { Meta, moduleMetadata, StoryFn } from '@storybook/angular';
+import { Meta, moduleMetadata, StoryObj } from '@storybook/angular';
 import { StoryModelDisplayComponent } from 'stories/helpers/story-model-display.component';
 
 interface segmentedControlBasicStory {
-	S: string;
+	S: boolean;
 	withNumericBadge: boolean;
 	vertical: boolean;
 }
@@ -37,14 +37,16 @@ function getTemplate(args: segmentedControlBasicStory): string {
 `;
 }
 
-const Template: StoryFn<segmentedControlBasicStory> = (args: segmentedControlBasicStory) => ({
+const Template = (args: segmentedControlBasicStory) => ({
 	props: args,
 	template: getTemplate(args),
 });
 
-export const Basic = Template.bind({});
-Basic.args = {
-	S: false,
-	withNumericBadge: false,
-	vertical: false,
+export const Basic: StoryObj<segmentedControlBasicStory> = {
+	args: {
+		S: false,
+		withNumericBadge: false,
+		vertical: false,
+	},
+	render: Template,
 };

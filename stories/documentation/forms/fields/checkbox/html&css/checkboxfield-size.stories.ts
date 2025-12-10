@@ -1,4 +1,4 @@
-import { Meta, StoryFn } from '@storybook/angular';
+import { Meta, StoryObj } from '@storybook/angular';
 
 interface CheckboxSizeStory {}
 
@@ -20,10 +20,12 @@ function getTemplate(args: CheckboxSizeStory): string {
 </div>`;
 }
 
-const Template: StoryFn<CheckboxSizeStory> = (args) => ({
+const Template = (args: CheckboxSizeStory) => ({
 	props: args,
 	template: getTemplate(args),
 });
 
-export const Size = Template.bind({});
-Size.args = {};
+export const Size: StoryObj<CheckboxSizeStory> = {
+	args: {},
+	render: Template,
+};

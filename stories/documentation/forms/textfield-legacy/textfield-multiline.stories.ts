@@ -1,4 +1,4 @@
-import { Meta, StoryFn } from '@storybook/angular';
+import { Meta, StoryObj } from '@storybook/angular';
 
 interface TextfieldMultilineStory {}
 
@@ -14,10 +14,12 @@ function getTemplate(args: TextfieldMultilineStory): string {
 </label>`;
 }
 
-const Template: StoryFn<TextfieldMultilineStory> = (args) => ({
+const Template = (args: TextfieldMultilineStory) => ({
 	props: args,
 	template: getTemplate(args),
 });
 
-export const Multiline = Template.bind({});
-Multiline.args = {};
+export const Multiline: StoryObj<TextfieldMultilineStory> = {
+	args: {},
+	render: Template,
+};

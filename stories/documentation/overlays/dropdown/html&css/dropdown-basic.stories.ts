@@ -1,4 +1,4 @@
-import { Meta, StoryFn } from '@storybook/angular';
+import { Meta, StoryObj } from '@storybook/angular';
 
 interface DropdownStory {}
 
@@ -55,10 +55,12 @@ function getTemplate(args: DropdownStory): string {
 </div>`;
 }
 
-const Template: StoryFn<DropdownStory> = (args) => ({
+const Template = (args: DropdownStory) => ({
 	props: args,
 	template: getTemplate(args),
 });
 
-export const Basic = Template.bind({});
-Basic.args = {};
+export const Basic: StoryObj<DropdownStory> = {
+	args: {},
+	render: Template,
+};
