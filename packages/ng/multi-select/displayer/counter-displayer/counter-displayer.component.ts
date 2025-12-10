@@ -3,7 +3,7 @@ import { ChangeDetectionStrategy, Component, DestroyRef, ElementRef, Input, OnIn
 import { takeUntilDestroyed } from '@angular/core/rxjs-interop';
 import { FormsModule } from '@angular/forms';
 import { ChipComponent } from '@lucca-front/ng/chip';
-import { ɵLuOptionOutletDirective } from '@lucca-front/ng/core-select';
+import { ILuOptionContext, LU_OPTION_CONTEXT, ɵLuOptionOutletDirective } from '@lucca-front/ng/core-select';
 import { LuTooltipModule } from '@lucca-front/ng/tooltip';
 import { BehaviorSubject } from 'rxjs';
 import { LuMultiSelectInputComponent } from '../../input';
@@ -34,6 +34,7 @@ import { LuMultiSelectDisplayerInputDirective } from '../displayer-input.directi
 })
 export class LuMultiSelectCounterDisplayerComponent<T> implements OnInit {
 	select = inject<LuMultiSelectInputComponent<T>>(LuMultiSelectInputComponent);
+	context = inject<ILuOptionContext<T[]>>(LU_OPTION_CONTEXT);
 
 	protected destroyRef = inject(DestroyRef);
 
@@ -55,6 +56,8 @@ export class LuMultiSelectCounterDisplayerComponent<T> implements OnInit {
 	label: string;
 
 	ngOnInit(): void {
+		// we need to pass selectedOptions values to update options values from optionContext
+		this.selectedOptions$.pipe(takeUntilDestroyed(this.destroyRef)).subscribe((options) => this.context.option$.next(options));
 		this.select.focusInput$.pipe(takeUntilDestroyed(this.destroyRef)).subscribe((data?: { keepClue: true }) => {
 			// Everytime we want to focus, we need to reset the input
 			// This is done when a value is selected and when panel is opened.
