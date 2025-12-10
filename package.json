@@ -88,8 +88,8 @@
     "@storybook/addon-docs": "^9.0.15",
     "@storybook/angular": "^9.0.15",
     "@storybook/test-runner": "^0.23.0",
-    "@swc/core": "^1.13.5",
     "@stylistic/stylelint-config": "^3.0.1",
+    "@swc/core": "^1.13.5",
     "@testing-library/angular": "^17.4.0",
     "@testing-library/dom": "^10.4.0",
     "@testing-library/jest-dom": "^6.6.3",
@@ -117,7 +117,7 @@
     "prettier": "^3.5.1",
     "sass": "^1.62.1",
     "storybook": "^9.0.15",
-    "stylelint": "^16.25.0",
+    "stylelint": "^16.26.1",
     "ts-node": "~10.9.1",
     "typescript": "5.8.3",
     "typescript-eslint": "^8.33.1"
