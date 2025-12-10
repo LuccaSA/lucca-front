@@ -20,6 +20,7 @@ import {
 } from '@angular/core';
 import { AbstractControl, ControlValueAccessor, NG_VALIDATORS, NG_VALUE_ACCESSOR, NgControl, NgModel, Validator } from '@angular/forms';
 import { LuccaIcon } from '@lucca-front/icons';
+import { ClearComponent } from '@lucca-front/ng/clear';
 import { isNil, LuClass, ɵeffectWithDeps } from '@lucca-front/ng/core';
 import { FILTER_PILL_INPUT_COMPONENT, FilterPillDisplayerDirective, FilterPillInputComponent } from '@lucca-front/ng/filter-pills';
 import { InputDirective } from '@lucca-front/ng/form-field';
@@ -40,8 +41,7 @@ export type DateInputValidatorErrorType = {
 
 @Component({
 	selector: 'lu-date-input',
-	standalone: true,
-	imports: [PopoverDirective, Calendar2Component, IconComponent, InputDirective, NgTemplateOutlet, FilterPillDisplayerDirective],
+	imports: [PopoverDirective, Calendar2Component, IconComponent, InputDirective, NgTemplateOutlet, FilterPillDisplayerDirective, ClearComponent],
 	templateUrl: './date-input.component.html',
 	styleUrl: './date-input.component.scss',
 	host: {
@@ -231,6 +231,12 @@ export class DateInputComponent extends AbstractDateComponent implements OnInit,
 				'mod-month': this.mode() === 'month',
 				'mod-year': this.mode() === 'year',
 			});
+		});
+
+		ɵeffectWithDeps([this.mode, this.calendarMode], (mode, calendarMode) => {
+			if (mode && isNil(calendarMode)) {
+				this.calendarMode.set(mode);
+			}
 		});
 
 		ɵeffectWithDeps([this.calendarMode, this.tabbableDate], (calendarMode, tabbableDate) => {

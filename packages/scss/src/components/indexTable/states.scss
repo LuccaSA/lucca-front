@@ -8,7 +8,7 @@
 		}
 	}
 
-	.indexTable-body-row-cellTitle-button[aria-expanded='false'] .lucca-icon {
+	.indexTable-body-row-cellTitle-button[aria-expanded='false'] .icon-arrowChevronTop {
 		transform: rotate(180deg);
 	}
 
@@ -80,4 +80,8 @@
 	--components-indexTable-cell-inset-y: var(--components-indexTable-hover-offset-y);
 	--components-indexTable-cell-z-index: 2;
 	--components-indexTable-cell-subAction-opacity: 1;
+}
+
+@mixin rowsHidden {
+	--components-indexTable-row-display: none;
 }

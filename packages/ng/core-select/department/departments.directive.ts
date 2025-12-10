@@ -3,15 +3,15 @@ import { computed, Directive, forwardRef, inject, input, OnInit } from '@angular
 import { toObservable } from '@angular/core/rxjs-interop';
 import { CORE_SELECT_API_TOTAL_COUNT_PROVIDER, CoreSelectApiTotalCountProvider, TreeNode } from '@lucca-front/ng/core-select';
 import { ALuCoreSelectApiDirective } from '@lucca-front/ng/core-select/api';
-import { combineLatest, map, Observable } from 'rxjs';
-import { NoopTreeSelectDirective } from './noop-tree-select.directive';
 import { ILuDepartment } from '@lucca-front/ng/department';
+import { combineLatest, map, Observable } from 'rxjs';
+import { filter } from 'rxjs/operators';
+import { NoopTreeSelectDirective } from './noop-tree-select.directive';
 
 @Directive({
 	// The attribute is already prefixed with "lu-simple-select" / "lu-multi-select"
 	// eslint-disable-next-line @angular-eslint/directive-selector
 	selector: 'lu-simple-select[departments],lu-multi-select[departments]',
-	standalone: true,
 	exportAs: 'luDepartments',
 	providers: [
 		{
@@ -85,6 +85,7 @@ export class LuCoreSelectDepartmentsDirective<T extends ILuDepartment = ILuDepar
 	);
 
 	public totalCount$ = this.select.options$.pipe(
+		filter((opts) => opts.length > 0),
 		map((opts) => {
 			return opts.map((branch) => this.flattenTree(branch)).flat().length;
 		}),

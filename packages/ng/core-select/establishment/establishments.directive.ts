@@ -12,7 +12,6 @@ import { LuCoreSelectEstablishment } from './models';
 	// The attribute is already prefixed with "lu-simple-select" / "lu-multi-select"
 	// eslint-disable-next-line @angular-eslint/directive-selector
 	selector: 'lu-simple-select[establishments],lu-multi-select[establishments]',
-	standalone: true,
 	exportAs: 'luEstablishments',
 	providers: [
 		{
@@ -46,15 +45,15 @@ export class LuCoreSelectEstablishmentsDirective<T extends LuCoreSelectEstablish
 
 	protected initGrouping() {
 		this.#groupingService.useGrouping$.pipe(filter(Boolean), takeUntilDestroyed(this.#destroyRef)).subscribe(() => {
-			this.select.grouping = {
+			this.select.groupingSignal.set({
 				selector: (option) => option.legalUnitId,
 				content: LuEstablishmentGroupingComponent,
-			};
+			});
 		});
 	}
 
 	protected override getOptions(params: Record<string, string | number | boolean> | null, page: number): Observable<T[]> {
-		return this.httpClient
+		const options$ = this.httpClient
 			.get<T[] | { items: T[] }>(this.url(), {
 				params: {
 					...params,
@@ -63,6 +62,8 @@ export class LuCoreSelectEstablishmentsDirective<T extends LuCoreSelectEstablish
 				},
 			})
 			.pipe(map((res) => (Array.isArray(res) ? res : res?.items) ?? []));
+
+		return this.#groupingService.useGrouping$.pipe(switchMap(() => options$));
 	}
 
 	protected override params$: Observable<Record<string, string | number | boolean>> = toObservable(

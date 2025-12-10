@@ -12,10 +12,12 @@
 			@include stickyHeader;
 		}
 
+		&:has(.dataTableShadows),
 		&:has(.dataTable.mod-columnsOverflow) {
 			@include columnsOverflow;
 		}
 
+		&:has(.dataTableShadows),
 		&:has(.dataTable.mod-rowsOverflow) {
 			@include rowsOverflow;
 		}
@@ -42,6 +44,14 @@
 			&:has(.dataTable.mod-cellBorder) {
 				@include stickyColumnBorder;
 			}
+		}
+
+		&:has(.dataTable.is-firstColumnVisibleAfterColsStart) {
+			@include firstColumnVisibleAfterColsStart;
+		}
+
+		&:has(.dataTable.is-lastColumnVisibleBeforeColsEnd) {
+			@include lastColumnVisibleBeforeColsEnd;
 		}
 	}
 

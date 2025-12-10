@@ -1,27 +1,20 @@
 import { NgTemplateOutlet } from '@angular/common';
-import { booleanAttribute, Component, input, ViewEncapsulation } from '@angular/core';
+import { booleanAttribute, ChangeDetectionStrategy, Component, computed, input, ViewEncapsulation } from '@angular/core';
 
 @Component({
 	selector: 'lu-footer',
-	standalone: true,
 	styleUrl: './footer.component.scss',
 	templateUrl: './footer.component.html',
 	encapsulation: ViewEncapsulation.None,
 	imports: [NgTemplateOutlet],
+	changeDetection: ChangeDetectionStrategy.OnPush,
 })
 export class FooterComponent {
-	sticky = input(false, { transform: booleanAttribute });
-	container = input(false, { transform: booleanAttribute });
-	forceNarrow = input(false, { transform: booleanAttribute });
-	dialog = input(false, { transform: booleanAttribute });
-	narrowAtMediaMax = input<'XXS' | 'XS' | 'S' | 'M'>('XXS');
+	readonly sticky = input(false, { transform: booleanAttribute });
+	readonly container = input(false, { transform: booleanAttribute });
+	readonly forceNarrow = input(false, { transform: booleanAttribute });
+	readonly dialog = input(false, { transform: booleanAttribute });
+	readonly narrowAtMediaMax = input<'XXS' | 'XS' | 'S' | 'M'>('XXS');
 
-	get breakpointClass() {
-		if (this.forceNarrow()) {
-			return 'mod-narrow';
-		}
-		return {
-			[`mod-narrowAtMediaMax${this.narrowAtMediaMax()}`]: !!this.narrowAtMediaMax(),
-		};
-	}
+	readonly breakpointClass = computed(() => (this.forceNarrow() ? 'mod-narrow' : { [`mod-narrowAtMediaMax${this.narrowAtMediaMax()}`]: !!this.narrowAtMediaMax() }));
 }

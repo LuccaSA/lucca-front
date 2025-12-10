@@ -4,7 +4,6 @@ import { ALuSelectInputComponent, TreeGenerator, TreeGroupingFn, TreeNode } from
 @Directive({
 	// eslint-disable-next-line @angular-eslint/directive-selector
 	selector: 'lu-simple-select[noopTreeSelect],lu-multi-select[noopTreeSelect]',
-	standalone: true,
 })
 // eslint-disable-next-line @typescript-eslint/no-explicit-any
 export class NoopTreeSelectDirective<T extends TreeNode<any>, V> implements TreeGenerator<T, T> {

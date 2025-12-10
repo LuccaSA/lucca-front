@@ -2,7 +2,6 @@ import { ChangeDetectionStrategy, Component, HostBinding, Input, ViewEncapsulati
 
 @Component({
 	selector: 'lu-new-badge',
-	standalone: true,
 	templateUrl: './new-badge.component.html',
 	styleUrl: './new-badge.component.scss',
 	changeDetection: ChangeDetectionStrategy.OnPush,

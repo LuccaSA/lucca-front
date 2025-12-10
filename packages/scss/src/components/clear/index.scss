@@ -12,23 +12,36 @@
 		}
 
 		// .palette-primary is deprecated
-		&.palette-product:not([disabled]),
-		&.palette-primary:not([disabled]) {
+		&.palette-product,
+		&.palette-primary {
 			@include product;
 		}
 
-		&.mod-inverted:not([disabled]) {
+		&.mod-inverted {
 			@include inverted;
 
-			&.palette-product:not([disabled]) {
+			&:where(.palette-product) {
 				@include invertedProduct;
 			}
 		}
 
 		&[disabled] {
-			@include disabled;
-
 			cursor: default;
+
+			@include disabled;
+		}
+
+		&[hidden],
+		.filterPill[disabled] &,
+		.filterPill:not(.is-filled) &,
+		.textfield-input[disabled] &,
+		.textfield-input:not(.is-filled) &,
+		.textfield-input:not(.is-selected) & {
+			@include hidden;
+		}
+
+		.multiSelect.is-selected:has(.multipleSelect-clear) & {
+			--components-clear-display: grid;
 		}
 	}
 }

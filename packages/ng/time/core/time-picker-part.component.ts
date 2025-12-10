@@ -23,7 +23,6 @@ let nextId = 0;
 
 @Component({
 	selector: 'lu-time-picker-part',
-	standalone: true,
 	imports: [RepeatOnHoldDirective, DecimalPipe, InputDirective],
 	templateUrl: './time-picker-part.component.html',
 	changeDetection: ChangeDetectionStrategy.OnPush,

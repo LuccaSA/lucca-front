@@ -7,7 +7,6 @@ import { FieldWrapper } from '@ngx-formly/core';
 	styleUrl: 'flex-layout.scss',
 	templateUrl: './radiosfield-layout.html',
 	changeDetection: ChangeDetectionStrategy.OnPush,
-	standalone: true,
 })
 export class LuFormlyWrapperRadiosfieldLayout extends FieldWrapper {
 	@ViewChild('fieldComponent', { read: ViewContainerRef, static: true })

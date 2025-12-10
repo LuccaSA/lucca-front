@@ -8,7 +8,6 @@ import { Subject } from 'rxjs';
 	selector: 'lu-tooltip-panel',
 	templateUrl: './tooltip-panel.component.html',
 	styleUrl: './tooltip-panel.component.scss',
-	standalone: true,
 	host: {
 		role: 'tooltip',
 	},

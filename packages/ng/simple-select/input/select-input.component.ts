@@ -2,7 +2,8 @@ import { OverlayModule } from '@angular/cdk/overlay';
 import { AsyncPipe, NgTemplateOutlet } from '@angular/common';
 import { ChangeDetectionStrategy, Component, forwardRef, HostBinding, inject, input, viewChild, ViewContainerRef, ViewEncapsulation } from '@angular/core';
 import { ControlValueAccessor, FormsModule, NG_VALUE_ACCESSOR } from '@angular/forms';
-import { getIntl } from '@lucca-front/ng/core';
+import { ClearComponent } from '@lucca-front/ng/clear';
+import { getIntl, PortalDirective } from '@lucca-front/ng/core';
 import { ALuSelectInputComponent, LuSelectPanelRef, provideLuSelectLabelsAndIds, ɵLuOptionOutletDirective } from '@lucca-front/ng/core-select';
 import { FILTER_PILL_INPUT_COMPONENT, FilterPillDisplayerDirective } from '@lucca-front/ng/filter-pills';
 import { InputDirective } from '@lucca-front/ng/form-field';
@@ -16,8 +17,7 @@ import { LuSimpleSelectPanelRefFactory } from './panel-ref.factory';
 	styleUrl: './select-input.component.scss',
 	host: { class: 'simpleSelect' },
 	changeDetection: ChangeDetectionStrategy.OnPush,
-	standalone: true,
-	imports: [AsyncPipe, ɵLuOptionOutletDirective, OverlayModule, FormsModule, InputDirective, FilterPillDisplayerDirective, NgTemplateOutlet, IconComponent],
+	imports: [AsyncPipe, ɵLuOptionOutletDirective, OverlayModule, FormsModule, InputDirective, FilterPillDisplayerDirective, NgTemplateOutlet, IconComponent, ClearComponent, PortalDirective],
 	providers: [
 		{
 			provide: NG_VALUE_ACCESSOR,

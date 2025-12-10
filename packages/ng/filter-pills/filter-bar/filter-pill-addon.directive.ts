@@ -3,7 +3,6 @@ import { FilterBarComponent } from './filter-bar.component';
 
 @Directive({
 	selector: '[luFilterPillAddonBefore]',
-	standalone: true,
 })
 export class FilterPillAddonBeforeDirective {
 	constructor() {
@@ -17,7 +16,6 @@ export class FilterPillAddonBeforeDirective {
 
 @Directive({
 	selector: '[luFilterPillAddonAfter]',
-	standalone: true,
 })
 export class FilterPillAddonAfterDirective {
 	constructor() {

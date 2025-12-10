@@ -10,7 +10,6 @@ import { ALuUserHomonymsService, ILuUserHomonymsService, LuUserHomonymsService }
 	selector: 'lu-user-homonyms',
 	template: '',
 	changeDetection: ChangeDetectionStrategy.OnPush,
-	standalone: true,
 	providers: [
 		LuUserDisplayPipe,
 		{

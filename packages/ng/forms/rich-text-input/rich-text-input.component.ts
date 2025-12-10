@@ -1,3 +1,4 @@
+import { CommonModule } from '@angular/common';
 import {
 	booleanAttribute,
 	ChangeDetectionStrategy,
@@ -25,7 +26,9 @@ import { FormFieldComponent, InputDirective } from '@lucca-front/ng/form-field';
 import { $getRoot, createEditor, Klass, LexicalEditor, LexicalNode, LexicalNodeReplacement } from 'lexical';
 import { RICH_TEXT_FORMATTER, RichTextFormatter } from './formatters';
 
-const INITIAL_UPDATE_TAG = 'initial-update';
+export const INITIAL_UPDATE_TAG = 'initial-update';
+// TODO replace by lexical import when upgrade lexical
+export const SKIP_DOM_SELECTION_TAG = 'skip-dom-selection';
 
 export interface RichTextPluginComponent {
 	setEditorInstance(editor: LexicalEditor): void;
@@ -46,8 +49,7 @@ export const RICH_TEXT_PLUGIN_COMPONENT = new InjectionToken<RichTextPluginCompo
 
 @Component({
 	selector: 'lu-rich-text-input',
-	standalone: true,
-	imports: [InputDirective],
+	imports: [InputDirective, CommonModule],
 	templateUrl: './rich-text-input.component.html',
 	styleUrl: './rich-text-input.component.scss',
 	encapsulation: ViewEncapsulation.None,
@@ -67,6 +69,7 @@ export class RichTextInputComponent implements OnInit, OnDestroy, ControlValueAc
 	readonly placeholder = input<string>('');
 	readonly disableSpellcheck = input(false, { transform: booleanAttribute });
 	readonly autoResize = input(false, { transform: booleanAttribute });
+	readonly hideToolbar = input(false, { transform: booleanAttribute });
 
 	readonly content = viewChild.required<string, ElementRef<HTMLElement>>('content', {
 		read: ElementRef,
@@ -131,7 +134,7 @@ export class RichTextInputComponent implements OnInit, OnDestroy, ControlValueAc
 	}
 
 	writeValue(value: string | null): void {
-		const updateTags = ['skip-dom-selection', INITIAL_UPDATE_TAG];
+		const updateTags = [SKIP_DOM_SELECTION_TAG, INITIAL_UPDATE_TAG];
 		if (value) {
 			this.#editor?.update(
 				() => {
@@ -175,6 +178,10 @@ export class RichTextInputComponent implements OnInit, OnDestroy, ControlValueAc
 		}
 		this.#focusedPlugin = nextFocusedPlugin;
 		plugins[this.#focusedPlugin].focus();
+	}
+
+	focus() {
+		this.content().nativeElement.focus();
 	}
 
 	touch() {

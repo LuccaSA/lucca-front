@@ -1,7 +1,5 @@
 @use '@lucca-front/icons/src/icon/exports' as icon;
-
 @use '@lucca-front/scss/src/commons/utils/a11y';
-
 @use '@lucca-front/scss/src/components/clear/exports' as clear;
 @use '@lucca-front/scss/src/components/chip/exports' as chip;
 @use '@lucca-front/scss/src/components/numericBadge/exports' as numericBadge;
@@ -35,32 +33,6 @@
 		&:not(.chip) {
 			@include chip.S;
 		}
-	}
-
-	.multipleSelect-displayer-numericBadge {
-		// :not(.class) is only there to increase specificity when the class isn’t present
-		// but the class should be present, and this code is temporary
-		&.numericBadge,
-		&:not(.numericBadge) {
-			@include numericBadge.S;
-		}
-	}
-}
-
-@mixin displayerFilter {
-	display: grid;
-
-	.multipleSelect-displayer-filter {
-		grid-column-start: 1;
-		grid-row-start: 1;
-		display: flex;
-		gap: var(--pr-t-spacings-50);
-		min-inline-size: 0;
-	}
-
-	.multipleSelect-displayer-search {
-		grid-column-start: 1;
-		grid-row-start: 1;
 	}
 }
 

@@ -25,13 +25,14 @@ import { LuMultiSelectPanelRef } from '../input/panel.model';
 import { MULTI_SELECT_INPUT } from '../select.model';
 import { LU_MULTI_SELECT_TRANSLATIONS } from '../select.translate';
 import { LuOptionsGroupContextPipe } from './option-group-context.pipe';
+import { toObservable } from '@angular/core/rxjs-interop';
+import { map } from 'rxjs/operators';
 
 @Component({
 	selector: 'lu-select-panel',
 	templateUrl: './panel.component.html',
 	styleUrl: './panel.component.scss',
 	changeDetection: ChangeDetectionStrategy.OnPush,
-	standalone: true,
 	imports: [
 		A11yModule,
 		AsyncPipe,
@@ -62,7 +63,7 @@ export class LuMultiSelectPanelComponent<T> implements AfterViewInit, CoreSelect
 	intl = getIntl(LU_MULTI_SELECT_TRANSLATIONS);
 
 	options$ = this.selectInput.options$;
-	grouping = this.selectInput.grouping;
+	grouping = this.selectInput.groupingSignal;
 	treeGenerator = this.selectInput.treeGenerator;
 	loading$ = this.selectInput.loading$;
 	searchable = this.selectInput.searchable;
@@ -88,10 +89,11 @@ export class LuMultiSelectPanelComponent<T> implements AfterViewInit, CoreSelect
 		};
 	});
 
+	hasGrouping$ = toObservable(this.grouping).pipe(map((grouping) => !!grouping));
 	public clueChange$ = this.selectInput.clue$;
 	public shouldDisplayAddOption$ = this.selectInput.shouldDisplayAddOption$;
 
-	groupTemplateLocation$ = ɵgetGroupTemplateLocation(!!this.grouping, this.clueChange$, this.options$, this.searchable);
+	groupTemplateLocation$ = ɵgetGroupTemplateLocation(this.hasGrouping$, this.clueChange$, this.options$, this.searchable);
 
 	onScroll(evt: Event): void {
 		if (!(evt.target instanceof HTMLElement)) {

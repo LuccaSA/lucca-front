@@ -66,6 +66,8 @@ export abstract class ALuSelectInputComponent<TOption, TValue> implements OnDest
 	public disabled$ = new BehaviorSubject(false);
 	filterPillDisabled = toSignal(this.disabled$);
 
+	prefix = input<PortalContent | null>(null);
+
 	@Input()
 	set placeholder(value: string) {
 		this.placeholder$.next(value);
@@ -140,6 +142,8 @@ export abstract class ALuSelectInputComponent<TOption, TValue> implements OnDest
 			setTimeout(() => {
 				this.panelRef?.updatePosition();
 				this.updatePositionFn?.();
+				// If no fixes are found, last resort fix is here
+				// window.dispatchEvent(new Event('resize'));
 			});
 		}
 	}
@@ -161,7 +165,21 @@ export abstract class ALuSelectInputComponent<TOption, TValue> implements OnDest
 
 	displayerTpl = computed(() => this.valueTpl() || this.optionTpl());
 
-	grouping?: LuOptionGrouping<TOption, unknown>;
+	groupingSignal = signal<LuOptionGrouping<TOption, unknown> | undefined>(undefined);
+
+	/**
+	 * @deprecated use groupingSignal
+	 */
+	get grouping() {
+		return this.groupingSignal();
+	}
+	/**
+	 * @deprecated use groupingSignal
+	 */
+	set grouping(grouping: LuOptionGrouping<TOption, unknown> | undefined) {
+		this.groupingSignal.set(grouping);
+	}
+
 	treeGenerator?: TreeGenerator<TOption, TreeNode<TOption>>;
 
 	@Output() clueChange = new EventEmitter<string>();

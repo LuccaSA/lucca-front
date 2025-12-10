@@ -1,20 +1,20 @@
-import { booleanAttribute, Component, input, numberAttribute, ViewEncapsulation } from '@angular/core';
+import { booleanAttribute, ChangeDetectionStrategy, Component, computed, input, numberAttribute, ViewEncapsulation } from '@angular/core';
 
 @Component({
 	selector: 'lu-progress-bar',
-	standalone: true,
 	templateUrl: './progress-bar.component.html',
 	styleUrl: './progress-bar.component.scss',
 	encapsulation: ViewEncapsulation.None,
+	changeDetection: ChangeDetectionStrategy.OnPush,
 })
 export class ProgressBarComponent {
-	value = input(0, { transform: numberAttribute });
-	state = input<'success' | 'error' | 'null'>(null);
-	indeterminate = input(false, { transform: booleanAttribute });
+	readonly value = input(0, { transform: numberAttribute });
+	readonly state = input<'success' | 'error' | 'null'>(null);
+	readonly indeterminate = input(false, { transform: booleanAttribute });
 
-	get stateClass() {
+	readonly stateClass = computed(() => {
 		return {
 			[`is-${this.state()}`]: !!this.state(),
 		};
-	}
+	});
 }
