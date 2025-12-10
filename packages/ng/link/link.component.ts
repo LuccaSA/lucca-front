@@ -1,5 +1,9 @@
+<<<<<<< HEAD
 import { afterNextRender, booleanAttribute, Component, effect, HostBinding, HostListener, inject, Injector, input, Input, ViewEncapsulation } from '@angular/core';
 import { Router } from '@angular/router';
+=======
+import { booleanAttribute, ChangeDetectionStrategy, Component, effect, inject, input, Input, ViewEncapsulation } from '@angular/core';
+>>>>>>> rc
 import { getIntl } from '@lucca-front/ng/core';
 import { LU_LINK_TRANSLATIONS } from './link.translate';
 import { LuRouterLink } from './lu-router-link';
@@ -7,13 +11,19 @@ import { LuRouterLink } from './lu-router-link';
 @Component({
 	// eslint-disable-next-line @angular-eslint/component-selector
 	selector: 'a[luLink], button[luLink]',
-	standalone: true,
 	templateUrl: './link.component.html',
 	styleUrl: './link.component.scss',
 	encapsulation: ViewEncapsulation.None,
+	changeDetection: ChangeDetectionStrategy.OnPush,
 	host: {
 		class: 'link',
 		'[attr.href]': 'routerLink.publicReactiveHref()',
+		'[class.mod-decorationHover]': 'decorationHover',
+		'[class.mod-icon]': 'external',
+		'[attr.rel]': 'external && !disabled() ? `noopener noreferrer` : null',
+		'[attr.target]': 'external && !disabled() ? `_blank` : null',
+		'[attr.role]': 'disabled() ? `presentation` : null',
+		'[class.is-disabled]': 'disabled()',
 	},
 	hostDirectives: [
 		{
@@ -28,22 +38,20 @@ export class LinkComponent {
 	#injector = inject(Injector);
 	router = inject(Router);
 
-	luHref = input('', { alias: 'href' });
+	readonly luHref = input('', { alias: 'href' });
 
-	routerLinkCommands = input<LuRouterLink['routerLink'] | null>(null, { alias: 'luLink' });
+	readonly routerLinkCommands = input<LuRouterLink['routerLink'] | null>(null, { alias: 'luLink' });
 
-	disabled = input(false, { transform: booleanAttribute });
+	readonly disabled = input(false, { transform: booleanAttribute });
 
 	@Input({
 		transform: booleanAttribute,
 	})
-	@HostBinding('class.mod-decorationHover')
 	decorationHover = false;
 
 	@Input({
 		transform: booleanAttribute,
 	})
-	@HostBinding('class.mod-icon')
 	external = false;
 
 	@HostBinding('attr.rel')
@@ -73,15 +81,15 @@ export class LinkComponent {
 		}
 	}
 
-	hrefBackup: string;
+	#hrefBackup: string;
 
 	constructor() {
 		const href = this.luHref;
 
 		effect(() => {
 			if (href()) {
-				this.hrefBackup = href();
-				this.routerLink.publicReactiveHref.set(this.hrefBackup);
+				this.#hrefBackup = href();
+				this.routerLink.publicReactiveHref.set(this.#hrefBackup);
 			}
 			if (this.disabled()) {
 				if (this.routerLinkCommands()) {
@@ -93,8 +101,8 @@ export class LinkComponent {
 				// We need to do this in order to have `routerLink` update the value for `href`:
 				// See https://github.com/angular/angular/blob/main/packages/router/src/directives/router_link.ts#L281
 				this.routerLink.ngOnChanges({});
-			} else if (!href() && this.hrefBackup) {
-				this.routerLink.publicReactiveHref.set(this.hrefBackup);
+			} else if (!href() && this.#hrefBackup) {
+				this.routerLink.publicReactiveHref.set(this.#hrefBackup);
 			}
 		});
 	}

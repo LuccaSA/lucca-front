@@ -1,65 +1,48 @@
-import { booleanAttribute, Component, ElementRef, HostBinding, input, OnInit, signal, viewChild, ViewEncapsulation } from '@angular/core';
+import { booleanAttribute, ChangeDetectionStrategy, Component, computed, ElementRef, input, OnInit, signal, viewChild, ViewEncapsulation } from '@angular/core';
 import { getIntl } from '@lucca-front/ng/core';
 import { LU_READMORE_TRANSLATIONS } from './read-more.translate';
 
 @Component({
 	selector: 'lu-read-more',
-	standalone: true,
 	templateUrl: './read-more.component.html',
 	styleUrl: './read-more.component.scss',
 	encapsulation: ViewEncapsulation.None,
+	changeDetection: ChangeDetectionStrategy.OnPush,
 	host: {
 		class: 'readMore',
+		'[style.--components-readMore-lineClamp]': 'lineClamp()',
+		'[style.--components-readMore-content-lastChild-content]': 'labelReadLess',
+		'[class.is-disabled]': '!expanded() && !isClamped()',
+		'[class.mod-openOnly]': 'openOnly()',
+		'[class.mod-sunken]': 'surface() === `sunken`',
+		'[class.mod-default]': 'surface() === `default`',
+		'[style.--components-readMore-link-backgroudColor]': 'backgroundColor()',
 	},
 })
 export class ReadMoreComponent implements OnInit {
 	intl = getIntl(LU_READMORE_TRANSLATIONS);
 
-	lineClamp = input<number>(5);
-	openOnly = input(false, { transform: booleanAttribute });
-	textFlow = input(false, { transform: booleanAttribute });
-	surface = input<null | 'sunken' | 'default' | string>(null);
+	readonly lineClamp = input<number>(5);
+	readonly openOnly = input(false, { transform: booleanAttribute });
+	readonly textFlow = input(false, { transform: booleanAttribute });
+	readonly surface = input<null | 'sunken' | 'default' | string>(null);
 
 	labelReadMore = this.intl.readMore;
 	labelReadLess = this.intl.readLess;
 
 	label = signal<string>(this.labelReadMore);
 
-	contentRef = viewChild<ElementRef<HTMLDivElement>>('content');
+	readonly contentRef = viewChild<ElementRef<HTMLDivElement>>('content');
 
 	expanded = signal(false);
 	isClamped = signal(false);
 
-	@HostBinding('style.--components-readMore-lineClamp') get lines() {
-		return this.lineClamp();
-	}
-
-	@HostBinding('style.--components-readMore-content-lastChild-content') get labelText() {
-		return `'${this.labelReadLess}'`;
-	}
-
-	@HostBinding('class.is-disabled') get isDisabled() {
-		return !this.expanded() && !this.isClamped();
-	}
-
-	@HostBinding('class.mod-openOnly') get isOpenOnly() {
-		return this.openOnly();
-	}
-
-	@HostBinding('class.mod-sunken') get surfaceSunken() {
-		return this.surface() === 'sunken';
-	}
-
-	@HostBinding('class.mod-default') get surfaceRaised() {
-		return this.surface() === 'default';
-	}
-
-	@HostBinding('style.--components-readMore-link-backgroudColor') get backgroundColor() {
+	readonly backgroundColor = computed(() => {
 		if (this.surface() === 'sunken' || this.surface() === 'default' || this.surface() === null) {
 			return null;
 		}
 		return `${this.surface()}`;
-	}
+	});
 
 	ngOnInit(): void {
 		new ResizeObserver(() => {

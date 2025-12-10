@@ -1,14 +1,13 @@
 import { provideHttpClient } from '@angular/common/http';
 import { Component } from '@angular/core';
+import { EmptyStatePageComponent } from '@lucca-front/ng/empty-state';
 import { LuSafeExternalSvgPipe } from '@lucca-front/ng/safe-content';
 import { Meta, StoryFn, applicationConfig } from '@storybook/angular';
 
 @Component({
-	standalone: true,
 	selector: 'empty-state-page-stories',
-	styleUrl: 'empty-state-page.stories.scss',
 	templateUrl: './empty-state-page.stories.html',
-	imports: [LuSafeExternalSvgPipe],
+	imports: [LuSafeExternalSvgPipe, EmptyStatePageComponent],
 })
 class EmptyStatePageStory {}
 

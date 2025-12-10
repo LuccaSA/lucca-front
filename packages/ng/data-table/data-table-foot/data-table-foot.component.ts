@@ -1,10 +1,9 @@
-import { Component, forwardRef, ViewEncapsulation } from '@angular/core';
+import { ChangeDetectionStrategy, Component, forwardRef, ViewEncapsulation } from '@angular/core';
 import { LU_DATA_TABLE_FOOT_INSTANCE } from './data-table-foot.token';
 
 @Component({
 	// eslint-disable-next-line @angular-eslint/component-selector
 	selector: 'tfoot[luDataTableFoot]',
-	standalone: true,
 	template: '<ng-content />',
 	encapsulation: ViewEncapsulation.None,
 	host: {
@@ -16,5 +15,6 @@ import { LU_DATA_TABLE_FOOT_INSTANCE } from './data-table-foot.token';
 			useExisting: forwardRef(() => DataTableFootComponent),
 		},
 	],
+	changeDetection: ChangeDetectionStrategy.OnPush,
 })
 export class DataTableFootComponent {}

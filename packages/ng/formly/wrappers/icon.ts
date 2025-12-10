@@ -8,7 +8,6 @@ import { buildAddWrapperExtension } from '../formly.utils';
 	styleUrls: ['flex-layout.scss', 'suffixes.common.scss'],
 	templateUrl: './icon.html',
 	changeDetection: ChangeDetectionStrategy.OnPush,
-	standalone: true,
 })
 export class LuFormlyWrapperIcon extends FieldWrapper {
 	@ViewChild('fieldComponent', { read: ViewContainerRef, static: true })

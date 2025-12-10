@@ -26,6 +26,10 @@
 
 		&.is-disabled {
 			@include disabled;
+
+			.richTextField-content-chip {
+				@include chipDisabled;
+			}
 		}
 
 		&.mod-autoResize {

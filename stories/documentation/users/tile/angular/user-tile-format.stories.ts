@@ -5,7 +5,6 @@ import { Meta, StoryFn, applicationConfig } from '@storybook/angular';
 import { bob, patrick, squidwards } from '../../user.mocks';
 
 @Component({
-	standalone: true,
 	selector: 'user-tile-format-stories',
 	templateUrl: './user-tile-format.stories.html',
 	imports: [LuUserTileModule, LuUserPictureModule, LuUserDisplayModule],

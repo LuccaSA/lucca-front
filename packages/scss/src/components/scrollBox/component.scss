@@ -16,6 +16,10 @@
 	margin-block: var(--components-scrollBox-marginBlock);
 	border-radius: var(--pr-t-border-radius-default);
 
+	> * {
+		flex-shrink: 0;
+	}
+
 	&:focus-visible {
 		@include a11y.focusVisible($offset: 0);
 	}

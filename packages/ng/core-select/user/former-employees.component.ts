@@ -1,4 +1,4 @@
-import { Component, inject, InjectionToken, WritableSignal } from '@angular/core';
+import { ChangeDetectionStrategy, Component, inject, InjectionToken, WritableSignal } from '@angular/core';
 import { outputToObservable, takeUntilDestroyed } from '@angular/core/rxjs-interop';
 import { FormsModule } from '@angular/forms';
 import { getIntl } from '@lucca-front/ng/core';
@@ -14,7 +14,6 @@ export const FORMER_EMPLOYEES_CONTEXT = new InjectionToken<FormerEmployeesContex
 @Component({
 	selector: 'lu-core-select-former-employees',
 	styleUrl: './former-employees.component.scss',
-	standalone: true,
 	imports: [FormsModule],
 	hostDirectives: [ɵCoreSelectPanelElement],
 	template: `
@@ -24,6 +23,7 @@ export const FORMER_EMPLOYEES_CONTEXT = new InjectionToken<FormerEmployeesContex
 			</div>
 		</div>
 	`,
+	changeDetection: ChangeDetectionStrategy.OnPush,
 })
 export class LuCoreSelectFormerEmployeesComponent {
 	readonly intl = getIntl(LU_CORE_SELECT_USER_TRANSLATIONS);

@@ -1,6 +1,6 @@
 ﻿export const Translations = {
 	en: {
-		breadcrumbs: 'Breadcrumbs',
+		breadcrumbs: 'Breadcrumb navigation',
 	},
 	de: {
 		breadcrumbs: 'Roter Faden',
@@ -9,7 +9,7 @@
 		breadcrumbs: 'Fil d’Ariane',
 	},
 	it: {
-		breadcrumbs: 'Controllo di navigazione',
+		breadcrumbs: 'Filo di Arianna',
 	},
 	nl: {
 		breadcrumbs: 'Navigatiepad',

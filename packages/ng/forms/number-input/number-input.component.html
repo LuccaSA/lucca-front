@@ -53,10 +53,7 @@
 		/>
 		<div class="textField-input-affix">
 			@if (hasClearer() && inputElement.value) {
-				<button class="textField-input-affix-clear clear" type="button" (click)="clearValue()">
-					<span aria-hidden="true" class="lucca-icon icon-signClose"></span>
-					<span class="pr-u-mask">{{ intl.clear }}</span>
-				</button>
+				<lu-clear class="textField-input-affix-clear" (onClear)="clearValue(); inputElement.focus()">{{ intl.clear }}</lu-clear>
 			}
 		</div>
 	</div>

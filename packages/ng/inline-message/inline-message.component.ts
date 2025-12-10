@@ -5,7 +5,6 @@ import { InlineMessageState } from './inline-message-state';
 
 @Component({
 	selector: 'lu-inline-message',
-	standalone: true,
 	imports: [PortalDirective, LuTooltipModule],
 	providers: [LuClass],
 	templateUrl: './inline-message.component.html',

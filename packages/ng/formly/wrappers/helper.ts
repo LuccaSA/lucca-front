@@ -8,7 +8,6 @@ import { buildAddWrapperExtension } from '../formly.utils';
 	styleUrl: 'flex-layout.scss',
 	templateUrl: './helper.html',
 	changeDetection: ChangeDetectionStrategy.OnPush,
-	standalone: true,
 })
 export class LuFormlyWrapperHelper extends FieldWrapper {
 	@ViewChild('fieldComponent', { read: ViewContainerRef, static: true })

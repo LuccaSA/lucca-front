@@ -1,4 +1,4 @@
-import { booleanAttribute, Component, computed, inject, input, LOCALE_ID, ViewEncapsulation } from '@angular/core';
+import { booleanAttribute, ChangeDetectionStrategy, Component, computed, inject, input, LOCALE_ID, ViewEncapsulation } from '@angular/core';
 import { outputFromObservable } from '@angular/core/rxjs-interop';
 import { FormsModule } from '@angular/forms';
 import { ButtonComponent } from '@lucca-front/ng/button';
@@ -16,7 +16,6 @@ import { formatSize } from '../formatter';
 
 @Component({
 	selector: 'lu-file-entry',
-	standalone: true,
 	templateUrl: './file-entry.component.html',
 	styleUrl: './file-entry.component.scss',
 	encapsulation: ViewEncapsulation.None,
@@ -24,27 +23,28 @@ import { formatSize } from '../formatter';
 	host: {
 		class: 'pr-u-displayContents',
 	},
+	changeDetection: ChangeDetectionStrategy.OnPush,
 })
 export class FileEntryComponent {
 	#locale = inject(LOCALE_ID);
 
-	intl = getIntl(LU_FILE_UPLOAD_TRANSLATIONS);
+	readonly intl = getIntl(LU_FILE_UPLOAD_TRANSLATIONS);
 
-	state = input<'success' | 'loading' | 'error' | 'default'>('default');
+	readonly state = input<'success' | 'loading' | 'error' | 'default'>('default');
 
-	displayFileName = input(false, { transform: booleanAttribute });
+	readonly displayFileName = input(false, { transform: booleanAttribute });
 
-	inlineMessageError = input<string | null>(null);
+	readonly inlineMessageError = input<string | null>(null);
 
-	entry = input.required<FileEntry>();
+	readonly entry = input.required<FileEntry>();
 
-	size = input<'S' | null>(null);
+	readonly size = input<'S' | null>(null);
 
-	iconOverride = input('');
+	readonly iconOverride = input('');
 
-	downloadURL = input('');
+	readonly downloadURL = input('');
 
-	password = input('');
+	readonly password = input('');
 	passwordChange$ = new Subject<string>();
 	passwordChange = outputFromObservable(this.passwordChange$);
 
@@ -52,7 +52,7 @@ export class FileEntryComponent {
 		return this.passwordChange$.observed;
 	}
 
-	media = input(false, { transform: booleanAttribute });
+	readonly media = input(false, { transform: booleanAttribute });
 
 	deleteFile$ = new Subject<void>();
 
@@ -62,16 +62,16 @@ export class FileEntryComponent {
 		return this.deleteFile$.observed;
 	}
 
-	fileName = computed(() => this.entry().name);
-	fileType = computed(() => this.entry().type);
-	fileSize = computed(() => this.entry().size);
+	readonly fileName = computed(() => this.entry().name);
+	readonly fileType = computed(() => this.entry().type);
+	readonly fileSize = computed(() => this.entry().size);
 
-	fileSizeDisplay = computed(() => formatSize(this.#locale, this.fileSize()));
-	fileTypeDisplay = computed(() => this.intl.file.replace('{{fileTypeLastPart}}', this.fileType().split('/')[1].toUpperCase()));
+	readonly fileSizeDisplay = computed(() => formatSize(this.#locale, this.fileSize()));
+	readonly fileTypeDisplay = computed(() => this.intl.file.replace('{{fileTypeLastPart}}', this.fileType().split('/')[1].toUpperCase()));
 
-	previewUrl = input<string>('');
+	readonly previewUrl = input<string>('');
 
-	fileEntryIconSrc = computed(() => {
+	readonly fileEntryIconSrc = computed(() => {
 		const fileExtension = this.fileName().split('.').pop();
 		const fileEntryIconRoot = 'https://cdn.lucca.fr/transverse/prisme/visuals/file-entry/';
 		const fileEntryIconExtension = '.svg';
@@ -94,7 +94,7 @@ export class FileEntryComponent {
 		}
 	});
 
-	tooltip = computed(() => {
+	readonly tooltip = computed(() => {
 		if (this.state() === 'error') {
 			if (!this.media()) {
 				return null;
@@ -114,7 +114,7 @@ export class FileEntryComponent {
 		return this.fileName() + ' – ' + this.fileTypeDisplay() + ' – ' + this.fileSizeDisplay();
 	});
 
-	dlClasses = computed(() => ({
+	readonly dlClasses = computed(() => ({
 		[`is-${this.state()}`]: !!this.state(),
 		[`mod-${this.size()}`]: !!this.size(),
 	}));

@@ -5,7 +5,7 @@ import { createRequire } from 'module';
 export default {
 	framework: {
 		name: '@storybook/angular',
-		options: { fastRefresh: true },
+		options: { fastRefresh: !process.env.CI },
 	},
 	docs: {
 		autodocs: true,
@@ -14,6 +14,7 @@ export default {
 	features: { buildStoriesJson: true },
 	staticDirs: ['./public'],
 	addons: ['@storybook/addon-a11y', '@storybook/addon-coverage', '@storybook/addon-docs'],
+	loglevel: process.env.CI ? 'error' : 'info',
 	webpackFinal: (config) => {
 		return {
 			...config,

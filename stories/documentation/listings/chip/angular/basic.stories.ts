@@ -5,6 +5,7 @@ interface ChipBasicStory {
 	unkillable: boolean;
 	disabled: boolean;
 	product: boolean;
+	withEllipsis: boolean;
 }
 
 export default {
@@ -40,10 +41,8 @@ function getTemplate(args: ChipBasicStory): string {
 	const unkillable = args.unkillable ? ` unkillable` : ``;
 	const product = args.product ? ` palette="product"` : ``;
 	const disabled = args.disabled ? ` disabled` : ``;
-	return `<lu-chip${disabled}${unkillable}${product}>
-	Label
-</lu-chip>
-`;
+	const ellipsis = args.withEllipsis ? ` withEllipsis` : ``;
+	return `<lu-chip${disabled}${unkillable}${product}${ellipsis}>Label</lu-chip>`;
 }
 
 const Template: StoryFn<ChipBasicStory> = (args) => ({
@@ -56,4 +55,5 @@ Basic.args = {
 	unkillable: false,
 	disabled: false,
 	product: false,
+	withEllipsis: false,
 };

@@ -3,7 +3,6 @@ import { LuClass, PortalContent, PortalDirective } from '@lucca-front/ng/core';
 
 @Component({
 	selector: 'lu-highlight-data',
-	standalone: true,
 	templateUrl: './highlight-data.component.html',
 	styleUrl: './highlight-data.component.scss',
 	changeDetection: ChangeDetectionStrategy.OnPush,

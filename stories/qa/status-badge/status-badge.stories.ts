@@ -1,9 +1,11 @@
 import { Component } from '@angular/core';
+import { StatusBadgeComponent } from '@lucca-front/ng/status-badge';
 import { Meta, StoryFn } from '@storybook/angular';
 
 @Component({
 	selector: 'status-badge-stories',
 	templateUrl: './status-badge.stories.html',
+	imports: [StatusBadgeComponent],
 })
 class StatusBadgeStory {}
 

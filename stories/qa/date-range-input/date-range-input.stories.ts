@@ -1,10 +1,9 @@
-import { Component } from '@angular/core';
+import { Component, LOCALE_ID } from '@angular/core';
 import { DateRangeInputComponent } from '@lucca-front/ng/date2';
 import { FormFieldComponent } from '@lucca-front/ng/form-field';
-import { Meta } from '@storybook/angular';
+import { applicationConfig, Meta } from '@storybook/angular';
 
 @Component({
-	standalone: true,
 	selector: 'date-range-input-stories',
 	templateUrl: './date-range-input.stories.html',
 	imports: [FormFieldComponent, DateRangeInputComponent],
@@ -12,8 +11,13 @@ import { Meta } from '@storybook/angular';
 class DateRangeInputStory {}
 
 export default {
-	title: 'QA/Date Range Input',
+	title: 'QA/DateRangeInput',
 	component: DateRangeInputStory,
+	decorators: [
+		applicationConfig({
+			providers: [{ provide: LOCALE_ID, useValue: 'fr-FR' }],
+		}),
+	],
 } as Meta;
 
 export const Basic = {};

@@ -1,3 +1,4 @@
+import { CommonModule } from '@angular/common';
 import {
 	booleanAttribute,
 	ChangeDetectionStrategy,
@@ -48,8 +49,7 @@ export const RICH_TEXT_PLUGIN_COMPONENT = new InjectionToken<RichTextPluginCompo
 
 @Component({
 	selector: 'lu-rich-text-input',
-	standalone: true,
-	imports: [InputDirective],
+	imports: [InputDirective, CommonModule],
 	templateUrl: './rich-text-input.component.html',
 	styleUrl: './rich-text-input.component.scss',
 	encapsulation: ViewEncapsulation.None,
@@ -69,6 +69,7 @@ export class RichTextInputComponent implements OnInit, OnDestroy, ControlValueAc
 	readonly placeholder = input<string>('');
 	readonly disableSpellcheck = input(false, { transform: booleanAttribute });
 	readonly autoResize = input(false, { transform: booleanAttribute });
+	readonly hideToolbar = input(false, { transform: booleanAttribute });
 
 	readonly content = viewChild.required<string, ElementRef<HTMLElement>>('content', {
 		read: ElementRef,
@@ -169,6 +170,10 @@ export class RichTextInputComponent implements OnInit, OnDestroy, ControlValueAc
 		}
 		this.#focusedPlugin = nextFocusedPlugin;
 		plugins[this.#focusedPlugin].focus();
+	}
+
+	focus() {
+		this.content().nativeElement.focus();
 	}
 
 	touch() {
