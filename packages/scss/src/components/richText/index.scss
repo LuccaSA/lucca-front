@@ -1,6 +1,5 @@
 @use 'exports' as *;
 
-
 .richTextField {
 	@layer components {
 		@include vars;

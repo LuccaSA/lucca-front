@@ -1,12 +1,12 @@
 @mixin vars {
 	--components-fancyBox-paddingInline: var(--pr-t-spacings-200);
-  --components-fancyBox-marginInline: auto;
+	--components-fancyBox-marginInline: auto;
 
 	// Content
 	--components-fancyBox-contentMinBlockSize: 7rem;
 	--components-fancyBox-contentMinInlineSize: min(22rem, 100%);
-  --components-fancyBox-contentPaddingBlock: var(--pr-t-spacings-300);
-  --components-fancyBox-contentPaddingInline: var(--pr-t-spacings-700);
+	--components-fancyBox-contentPaddingBlock: var(--pr-t-spacings-300);
+	--components-fancyBox-contentPaddingInline: var(--pr-t-spacings-700);
 
 	// Visuals
 	--components-fancyBox-background-left: none;
