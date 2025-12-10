@@ -7,6 +7,6 @@ import { booleanAttribute, ChangeDetectionStrategy, Component, input, ViewEncaps
 	encapsulation: ViewEncapsulation.None,
 	changeDetection: ChangeDetectionStrategy.OnPush,
 })
-export class codeComponent {
+export class CodeComponent {
 	block = input(false, { transform: booleanAttribute });
 }
