@@ -1,11 +1,11 @@
 import { booleanAttribute, ChangeDetectionStrategy, Component, ContentChild, ElementRef, inject, Input, OnChanges, signal, SimpleChanges, ViewEncapsulation } from '@angular/core';
-import { LuClass, Palette } from '@lucca-front/ng/core';
-import { IconComponent } from '@lucca-front/ng/icon';
+import { Palette, PrClass } from '@lucca/prisme/core';
+import { IconComponent } from '@lucca/prisme/icon';
 
 @Component({
 	// eslint-disable-next-line @angular-eslint/component-selector
-	selector: 'button[luButton],a[luButton]',
-	providers: [LuClass],
+	selector: 'button[prButton],a[prButton],button[luButton],a[luButton]',
+	providers: [PrClass],
 	template: '<ng-content />',
 	styleUrl: './button.component.scss',
 	changeDetection: ChangeDetectionStrategy.OnPush,
@@ -18,7 +18,7 @@ import { IconComponent } from '@lucca-front/ng/icon';
 	},
 })
 export class ButtonComponent implements OnChanges {
-	#luClass = inject(LuClass);
+	#prClass = inject(PrClass);
 	#elementRef = inject<ElementRef<HTMLButtonElement>>(ElementRef);
 
 	notifyError = signal(false);
@@ -52,12 +52,19 @@ export class ButtonComponent implements OnChanges {
 	@Input()
 	state: 'default' | 'loading' | 'error' | 'success' = 'default';
 
+	@Input({
+		alias: 'luButton',
+	})
+	set luButton(value: this['prButton']) {
+		this.prButton = value;
+	}
+
 	@Input()
 	/**
-	 * '' is the default value when you just set the `luButton` directive without a value attached to it.
+	 * '' is the default value when you just set the `prButton` directive without a value attached to it.
 	 * We just make this explicit here.
 	 */
-	luButton: '' | 'outlined' | 'AI' | 'ghost' | 'ghost-invert' | 'text' | 'text-invert' = '';
+	prButton: '' | 'outlined' | 'AI' | 'ghost' | 'ghost-invert' | 'text' | 'text-invert' = '';
 
 	#iconComponentRef?: ElementRef<HTMLElement>;
 
@@ -121,6 +128,6 @@ export class ButtonComponent implements OnChanges {
 				classesConfig[`mod-${this.luButton}`] = true;
 			}
 		}
-		this.#luClass.setState(classesConfig);
+		this.#prClass.setState(classesConfig);
 	}
 }
