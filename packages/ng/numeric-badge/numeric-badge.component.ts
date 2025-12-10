@@ -49,11 +49,16 @@ export class NumericBadgeComponent {
 	readonly displayValue = computed(() => {
 		const value = this.value();
 		const maxValue = this.maxValue();
-		if (typeof this.value === 'number') {
+		if (typeof value === 'number') {
 			return +value > maxValue ? `${maxValue}+` : value;
 		} else {
 			return value;
 		}
+	});
+
+	readonly isDisabled = computed<boolean>(() => {
+		const value = this.value();
+		return this.disableTooltip() || typeof value !== 'number' || this.loading() || this.maxValue() >= +value;
 	});
 
 	constructor() {
