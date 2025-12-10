@@ -66,11 +66,11 @@ const generateStory = getStoryGenerator<LuMultiSelectInputStoryComponent>({
 
 async function checkValues(input: HTMLElement, values: string[]) {
 	if (values.length === 0) {
-		await expect(input.parentElement.getElementsByTagName('lu-numeric-badge').length).toBe(0);
+		await expect(input.parentElement.getElementsByTagName('lu-chip').length).toBe(0);
 	}
 	// If it's a counter displayer
-	if (input.parentElement.getElementsByTagName('lu-numeric-badge').length > 0) {
-		const counter = input.parentElement.getElementsByTagName('lu-numeric-badge')[0];
+	if (input.parentElement.getElementsByTagName('lu-chip').length === 1) {
+		const counter = input.parentElement.getElementsByTagName('lu-chip')[0];
 		await expect(counter).toHaveTextContent(values.length.toString());
 	} else {
 		for (const value of values) {
