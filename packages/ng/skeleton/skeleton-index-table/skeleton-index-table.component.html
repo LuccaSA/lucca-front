@@ -1,4 +1,4 @@
-@if (tableBodyOnly) {
+@if (tableBodyOnly()) {
 	<ng-container *ngTemplateOutlet="tbody" />
 } @else {
 	<table class="indexTable mod-layoutFixed skeleton is-loading" inert="inert">
@@ -6,7 +6,7 @@
 			<tr class="indexTable-head-row">
 				@for (col of colsNumber(); track col) {
 					<th class="indexTable-head-row-cell" scope="col">
-						<span class="skeleton-item mod-dark" [style.--components-skeleton-text-width]="getRandomPercent()"></span>
+						<span class="skeleton-item mod-dark" [style.--components-skeleton-text-width]="randomPercent"></span>
 					</th>
 				}
 			</tr>
@@ -20,7 +20,7 @@
 			<tr class="indexTable-body-row">
 				@for (col of colsNumber(); track col) {
 					<td class="indexTable-body-row-cell">
-						<span class="skeleton-item" [style.--components-skeleton-text-width]="getRandomPercent()"></span>
+						<span class="skeleton-item" [style.--components-skeleton-text-width]="randomPercent"></span>
 					</td>
 				}
 			</tr>

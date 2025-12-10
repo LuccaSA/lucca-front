@@ -1,15 +1,12 @@
 <div class="form-field skeleton is-loading" [class.mod-dark]="dark()" inert="inert">
 	@if (!hiddenLabel()) {
-		<span class="skeleton-item" [style.--components-skeleton-text-width.%]="getRandomPercent()"></span>
+		<span class="skeleton-item" [style.--components-skeleton-text-width.%]="randomPercent()"></span>
 	}
 	<div class="textField">
 		<div class="textField-input">
 			<span class="textField-input-value">
 				@for (line of lines(); track $index) {
-					<span
-						class="skeleton-item"
-						[style.--components-skeleton-text-width.%]="$last ? getRandomPercent() : getRandomPercent(98, 100)"
-					></span>
+					<span class="skeleton-item" [style.--components-skeleton-text-width.%]="$last ? randomPercent() : randomPercent(98, 100)"></span>
 				}
 			</span>
 		</div>
