@@ -50,14 +50,13 @@ export class LuMultiSelectCounterDisplayerComponent<T> implements OnInit {
 	@Input()
 	set selected(options: T[]) {
 		this.selectedOptions$.next(options);
+		this.context.option$.next(options);
 	}
 
 	@Input({ required: true })
 	label: string;
 
 	ngOnInit(): void {
-		// we need to pass selectedOptions values to update options values from optionContext
-		this.selectedOptions$.pipe(takeUntilDestroyed(this.destroyRef)).subscribe((options) => this.context.option$.next(options));
 		this.select.focusInput$.pipe(takeUntilDestroyed(this.destroyRef)).subscribe((data?: { keepClue: true }) => {
 			// Everytime we want to focus, we need to reset the input
 			// This is done when a value is selected and when panel is opened.
