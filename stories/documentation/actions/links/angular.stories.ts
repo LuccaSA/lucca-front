@@ -26,9 +26,9 @@ export default {
 				tick$: timer(0, 1000),
 			},
 			template: `
-<a luLink="${routerLink}"${externe}${disable}${decoration}>${label}</a>
-<br /><br />
-<a href="${href}" luLink${externe}${disable}${decoration}>${label}</a>
+Angular Navigation side: <a luLink="${routerLink}"${externe}${disable}${decoration}>${label}</a>
+<br>
+Browser Navigation side: <a href="${href}" luLink${externe}${disable}${decoration}>${label}</a>
 `,
 		};
 	},
