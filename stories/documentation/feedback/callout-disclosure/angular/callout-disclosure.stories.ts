@@ -1,5 +1,5 @@
 import { ButtonComponent } from '@lucca-front/ng/button';
-import { CalloutDisclosureComponent, CalloutFeedbackItemComponent, CalloutFeedbackListComponent } from '@lucca-front/ng/callout';
+import { CalloutDisclosureComponent, CalloutFeedbackItemComponent, CalloutFeedbackItemDescriptionDirective, CalloutFeedbackListComponent } from '@lucca-front/ng/callout';
 import { Meta, StoryObj, moduleMetadata } from '@storybook/angular';
 import { generateInputs } from 'stories/helpers/stories';
 
@@ -8,7 +8,7 @@ export default {
 	component: CalloutDisclosureComponent,
 	decorators: [
 		moduleMetadata({
-			imports: [CalloutFeedbackItemComponent, CalloutFeedbackListComponent, ButtonComponent],
+			imports: [CalloutFeedbackItemComponent, CalloutFeedbackListComponent, CalloutFeedbackItemDescriptionDirective, ButtonComponent],
 		}),
 	],
 	render: (args, { argTypes }) => {

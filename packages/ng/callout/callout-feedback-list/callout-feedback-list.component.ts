@@ -1,5 +1,5 @@
-import { ChangeDetectionStrategy, Component, inject, Input, OnChanges, ViewEncapsulation } from '@angular/core';
-import { LuClass, Palette } from '@lucca-front/ng/core';
+import { ChangeDetectionStrategy, Component, inject, input, ViewEncapsulation } from '@angular/core';
+import { LuClass, Palette, ɵeffectWithDeps } from '@lucca-front/ng/core';
 
 @Component({
 	selector: 'ul[lu-callout-feedback-list]',
@@ -12,16 +12,16 @@ import { LuClass, Palette } from '@lucca-front/ng/core';
 	providers: [LuClass],
 	encapsulation: ViewEncapsulation.None,
 })
-export class CalloutFeedbackListComponent implements OnChanges {
+export class CalloutFeedbackListComponent {
 	#luClass = inject(LuClass);
 
-	@Input()
-	palette: Palette;
+	readonly palette = input<Palette>();
 
-	@Input()
-	size: 'M' | 'S';
+	readonly size = input<'M' | 'S'>();
 
-	ngOnChanges(): void {
-		this.#luClass.setState({ [`palette-${this.palette}`]: !!this.palette, [`mod-${this.size}`]: !!this.size });
+	constructor() {
+		ɵeffectWithDeps([this.palette, this.size], (palette, size) => {
+			this.#luClass.setState({ [`palette-${palette}`]: !!palette, [`mod-${size}`]: !!size });
+		});
 	}
 }

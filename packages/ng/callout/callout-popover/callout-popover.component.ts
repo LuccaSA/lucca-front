@@ -1,4 +1,21 @@
-import { booleanAttribute, ChangeDetectionStrategy, Component, computed, contentChildren, input, numberAttribute, ViewEncapsulation } from '@angular/core';
+import { Overlay, OverlayRef } from '@angular/cdk/overlay';
+import { TemplatePortal } from '@angular/cdk/portal';
+import {
+	booleanAttribute,
+	ChangeDetectionStrategy,
+	Component,
+	computed,
+	contentChildren,
+	ElementRef,
+	inject,
+	input,
+	numberAttribute,
+	OnDestroy,
+	TemplateRef,
+	viewChild,
+	ViewContainerRef,
+	ViewEncapsulation,
+} from '@angular/core';
 import { LuccaIcon } from '@lucca-front/icons';
 import { Palette, PortalContent, PortalDirective } from '@lucca-front/ng/core';
 import { IconComponent } from '@lucca-front/ng/icon';
@@ -16,32 +33,44 @@ import { getCalloutPalette } from '../callout.utils';
 	changeDetection: ChangeDetectionStrategy.OnPush,
 	encapsulation: ViewEncapsulation.None,
 })
-export class CalloutPopoverComponent {
+export class CalloutPopoverComponent implements OnDestroy {
+	#overlay = inject(Overlay);
+	#viewContainerRef = inject(ViewContainerRef);
+	#elementRef = inject<ElementRef<HTMLElement>>(ElementRef);
+
+	readonly overlayOrigin = viewChild<ElementRef>('overlayOriginRef');
+
+	readonly overlayContent = viewChild<TemplateRef<unknown>>('overlayContentRef');
+
+	#overlayRef: OverlayRef;
+
+	// Using unknown here because it's using Node types for whatever reason but it's a number
+	#hideDelayId: unknown | undefined;
+
+	// Using unknown here because it's using Node types for whatever reason but it's a number
+	#showDelayId: unknown | undefined;
+
 	/**
 	 * Debounce for the popover to open (mouse will have to be on the element fox openDelay milliseconds for popover to show)
 	 */
-	readonly openDelay = input(50, {
-		transform: numberAttribute,
-	});
+	readonly openDelay = input(50, { transform: numberAttribute });
 
 	/**
 	 * Debounce for the popover to close (mouse will have to be out of both popover and trigger for closeDelay milliseconds for it to close)
 	 */
-	readonly closeDelay = input(500, {
-		transform: numberAttribute,
-	});
+	readonly closeDelay = input(500, { transform: numberAttribute });
 
 	/**
 	 * Label (visual only) to put inside the button, often used to show just a number
 	 */
-	readonly buttonLabel = input<string>('');
+	readonly buttonLabel = input<string>();
 
 	/**
 	 * Alternative for the button
 	 */
-	buttonAlt = input<string>('');
+	readonly buttonAlt = input<string>('');
 
-	headingHiddenIfSingleItem = input(false, { transform: booleanAttribute });
+	readonly headingHiddenIfSingleItem = input(false, { transform: booleanAttribute });
 
 	/**
 	 * Palette for both the button and the popover content
@@ -72,34 +101,88 @@ export class CalloutPopoverComponent {
 	 */
 	readonly heading = input<PortalContent>();
 
-	feedbackItems = contentChildren(CalloutFeedbackItemComponent, { descendants: true });
+	readonly feedbackItems = contentChildren(CalloutFeedbackItemComponent, { descendants: true });
 
-	contentSize = computed((): 'S' | 'M' | undefined => {
+	readonly contentSize = computed<'S' | 'M' | undefined>(() => {
 		const size = this.size();
-		if (size === 'XS') {
-			return 'S';
-		}
-		return size;
+		return size === 'XS' ? 'S' : size;
 	});
 
-	calloutClasses = computed(() => {
-		const palette = getCalloutPalette(this.state(), this.palette());
+	readonly calloutOverlayClasses = computed(() => ({
+		[`mod-${this.contentSize()}`]: !!this.contentSize(),
+	}));
+
+	readonly calloutPalette = computed(() => getCalloutPalette(this.state(), this.palette()));
+
+	readonly calloutClasses = computed(() => {
+		const palette = this.calloutPalette();
 		return {
 			[`mod-${this.size()}`]: !!this.size(),
 			[`palette-${palette}`]: !!palette,
 		};
 	});
 
-	calloutOverlayClasses = computed(() => {
-		return {
-			[`mod-${this.contentSize()}`]: !!this.contentSize(),
-		};
-	});
+	readonly calloutOverlayHeadClasses = computed(() => ({
+		[`palette-${this.calloutPalette()}`]: !!this.calloutPalette(),
+	}));
 
-	calloutOverlayHeadClasses = computed(() => {
-		const palette = getCalloutPalette(this.state(), this.palette());
-		return {
-			[`palette-${palette}`]: !!palette,
-		};
-	});
+	public showContent() {
+		clearTimeout(this.#hideDelayId as number);
+		// Don't open if we still have one opened
+		if (this.#showDelayId) {
+			return;
+		}
+		this.#showDelayId = setTimeout(() => {
+			this.createPanelContent();
+			this.#hideDelayId = undefined;
+		}, this.openDelay());
+	}
+
+	private createPanelContent() {
+		const positionStrategy = this.#overlay
+			.position()
+			.flexibleConnectedTo(this.overlayOrigin())
+			.withPositions([
+				{
+					originX: 'center',
+					originY: 'top',
+					overlayX: 'center',
+					overlayY: 'bottom',
+				},
+				{
+					originX: 'center',
+					originY: 'bottom',
+					overlayX: 'center',
+					overlayY: 'top',
+				},
+			]);
+
+		this.#overlayRef = this.#overlay.create({
+			positionStrategy,
+		});
+
+		const portal = new TemplatePortal(this.overlayContent(), this.#viewContainerRef);
+
+		this.#overlayRef.attach(portal);
+	}
+
+	public hideContent(event: MouseEvent | null) {
+		clearTimeout(this.#showDelayId as number);
+		this.#hideDelayId = setTimeout(() => {
+			const newTarget = event?.relatedTarget as Node | null;
+			// This is to prevent tooltip closing when user puts cursor on tooltip, thus leaving the origin trigger
+			if (!newTarget || !(this.#overlayRef?.overlayElement?.contains(newTarget) || this.#elementRef?.nativeElement?.contains(newTarget))) {
+				// Remove the tooltip if needed.
+				if (this.#overlayRef) {
+					this.#overlayRef.dispose();
+					this.#showDelayId = undefined;
+					this.#hideDelayId = undefined;
+				}
+			}
+		}, this.closeDelay());
+	}
+
+	ngOnDestroy(): void {
+		this.hideContent(null);
+	}
 }

@@ -11,5 +11,5 @@ import { booleanAttribute, ChangeDetectionStrategy, Component, input, ViewEncaps
 	changeDetection: ChangeDetectionStrategy.OnPush,
 })
 export class CalloutActionsComponent {
-	inline = input(false, { transform: booleanAttribute });
+	readonly inline = input(false, { transform: booleanAttribute });
 }
