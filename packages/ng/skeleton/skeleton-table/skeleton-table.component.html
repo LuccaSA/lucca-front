@@ -6,7 +6,7 @@
 			<tr class="table-head-row">
 				@for (col of colsNumber(); track col) {
 					<th class="table-head-row-cell">
-						<span class="skeleton-item mod-dark pr-u-bodyS" [style.--components-skeleton-text-width]="getRandomPercent()"></span>
+						<span class="skeleton-item mod-dark pr-u-bodyS" [style.--components-skeleton-text-width]="randomPercent"></span>
 					</th>
 				}
 			</tr>
@@ -20,7 +20,7 @@
 			<tr class="table-body-row">
 				@for (col of colsNumber(); track col) {
 					<td class="table-body-row-cell">
-						<span class="skeleton-item" [style.--components-skeleton-text-width]="getRandomPercent()"></span>
+						<span class="skeleton-item" [style.--components-skeleton-text-width]="randomPercent"></span>
 					</td>
 				}
 			</tr>

@@ -12,9 +12,9 @@ export default {
 			imports: [EmptyStateSectionComponent, ButtonComponent, HttpClientModule],
 		}),
 	],
-	render: (args: EmptyStateSectionComponent) => {
-		const { heading, description, center, palette, hx, icon } = args;
-		const paramIcon = args.icon === '' ? '' : 'icon="https://cdn.lucca.fr/lucca-front/assets/empty-states/icons/' + args.icon + '.svg"';
+	render: (args) => {
+		const { heading, description, center, palette, hx } = args;
+		const paramIcon = args['icon'] === '' ? '' : 'icon="https://cdn.lucca.fr/lucca-front/assets/empty-states/icons/' + args['icon'] + '.svg"';
 		return {
 			template: `<lu-empty-state-section hx="${hx}" ${paramIcon} heading="${heading}" description="${description}" palette="${palette}" ${center ? ' center' : ''}>
 	<button luButton type="button" palette="product">Button</button>

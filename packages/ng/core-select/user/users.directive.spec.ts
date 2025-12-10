@@ -144,7 +144,7 @@ describe('LuCoreSelectUsersDirective', () => {
 		expect(options).toEqual([meUser, ...page1]);
 
 		// Act (Page 2)
-		simpleSelect.nextPage.emit();
+		simpleSelect.nextPage$.next();
 		fixture.detectChanges();
 		tick(MAGIC_OPTION_SCROLL_DELAY);
 

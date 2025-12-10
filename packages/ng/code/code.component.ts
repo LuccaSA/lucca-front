@@ -8,5 +8,5 @@ import { booleanAttribute, ChangeDetectionStrategy, Component, input, ViewEncaps
 	changeDetection: ChangeDetectionStrategy.OnPush,
 })
 export class codeComponent {
-	block = input(false, { transform: booleanAttribute });
+	readonly block = input(false, { transform: booleanAttribute });
 }

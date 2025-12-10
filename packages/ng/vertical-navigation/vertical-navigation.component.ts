@@ -5,7 +5,6 @@ import { VerticalNavigationLinkComponent } from './link/vertical-navigation-link
 
 @Component({
 	selector: 'lu-vertical-navigation',
-	standalone: true,
 	templateUrl: './vertical-navigation.component.html',
 	styleUrl: './vertical-navigation.component.scss',
 	changeDetection: ChangeDetectionStrategy.OnPush,
@@ -17,13 +16,13 @@ import { VerticalNavigationLinkComponent } from './link/vertical-navigation-link
 	},
 })
 export class VerticalNavigationComponent {
-	heading = input.required<PortalContent>();
-	level = input<number>(3);
+	readonly heading = input.required<PortalContent>();
+	readonly level = input<number>(3);
 
-	verticalNavigationGroup = contentChildren(VerticalNavigationGroupComponent, { descendants: true });
-	vertivalNavigationLinks = contentChildren(VerticalNavigationLinkComponent, { descendants: true });
+	readonly verticalNavigationGroup = contentChildren(VerticalNavigationGroupComponent, { descendants: true });
+	readonly verticalNavigationLinks = contentChildren(VerticalNavigationLinkComponent, { descendants: true });
 
-	isIconless = computed(
-		() => !this.verticalNavigationGroup().filter((verticalGroup) => verticalGroup?.icon()).length || !this.vertivalNavigationLinks().filter((verticalLink) => verticalLink?.icon()).length,
+	readonly isIconless = computed(
+		() => !this.verticalNavigationGroup().filter((verticalGroup) => verticalGroup?.icon()).length || !this.verticalNavigationLinks().filter((verticalLink) => verticalLink?.icon()).length,
 	);
 }

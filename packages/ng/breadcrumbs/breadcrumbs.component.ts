@@ -23,11 +23,11 @@ let nextId = 0;
 export class BreadcrumbsComponent {
 	intl = getIntl(LU_BREADCRUMBS_TRANSLATIONS);
 
-	disableCompact = input(false, { transform: booleanAttribute });
+	readonly disableCompact = input(false, { transform: booleanAttribute });
 
-	links = contentChildren(BreadcrumbsLinkDirective);
+	readonly links = contentChildren(BreadcrumbsLinkDirective);
 
-	isCompact = computed(() => this.links().length <= 2 && !this.disableCompact());
+	readonly isCompact = computed(() => this.links().length <= 2 && !this.disableCompact());
 
 	readonly id = `breadcrumbs-title-${nextId++}`;
 }

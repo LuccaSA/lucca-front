@@ -12,5 +12,5 @@ import { booleanAttribute, ChangeDetectionStrategy, Component, input, ViewEncaps
 	changeDetection: ChangeDetectionStrategy.OnPush,
 })
 export class AppLayoutComponent {
-	mobileNavSideBottom = input(false, { transform: booleanAttribute });
+	readonly mobileNavSideBottom = input(false, { transform: booleanAttribute });
 }

@@ -11,13 +11,13 @@ export default {
 			imports: [EmptyStatePageComponent, ButtonComponent, HttpClientModule],
 		}),
 	],
-	render: (args: EmptyStatePageComponent) => {
-		const { heading, description, slotTop, icon, topRightBackground, topRightForeground, bottomLeftBackground, bottomLeftForeground, contentBackgroundColor, hx } = args;
-		const paramIcon = args.icon === '' ? '' : 'icon="https://cdn.lucca.fr/lucca-front/assets/empty-states/message/' + args.icon + '.svg"';
-		const paramTopRightBackground = args.topRightBackground === '' ? '' : 'topRightBackground="https://cdn.lucca.fr/lucca-front/assets/empty-states/' + args.topRightBackground + '.svg"';
-		const paramTopRightForeground = args.topRightForeground === '' ? '' : 'topRightForeground="https://cdn.lucca.fr/lucca-front/assets/empty-states/' + args.topRightForeground + '.svg"';
-		const paramBottomLeftBackground = args.bottomLeftBackground === '' ? '' : 'bottomLeftBackground="https://cdn.lucca.fr/lucca-front/assets/empty-states/' + args.bottomLeftBackground + '.svg"';
-		const paramBottomLeftForeground = args.bottomLeftForeground === '' ? '' : 'bottomLeftForeground="https://cdn.lucca.fr/lucca-front/assets/empty-states/' + args.bottomLeftForeground + '.svg"';
+	render: (args) => {
+		const { heading, description, slotTop, hx } = args;
+		const paramIcon = args['icon'] === '' ? '' : 'icon="https://cdn.lucca.fr/lucca-front/assets/empty-states/message/' + args['icon'] + '.svg"';
+		const paramTopRightBackground = args['topRightBackground'] === '' ? '' : 'topRightBackground="https://cdn.lucca.fr/lucca-front/assets/empty-states/' + args['topRightBackground'] + '.svg"';
+		const paramTopRightForeground = args['topRightForeground'] === '' ? '' : 'topRightForeground="https://cdn.lucca.fr/lucca-front/assets/empty-states/' + args['topRightForeground'] + '.svg"';
+		const paramBottomLeftBackground = args['bottomLeftBackground'] === '' ? '' : 'bottomLeftBackground="https://cdn.lucca.fr/lucca-front/assets/empty-states/' + args['bottomLeftBackground'] + '.svg"';
+		const paramBottomLeftForeground = args['bottomLeftForeground'] === '' ? '' : 'bottomLeftForeground="https://cdn.lucca.fr/lucca-front/assets/empty-states/' + args['bottomLeftForeground'] + '.svg"';
 		return {
 			styles: [
 				`

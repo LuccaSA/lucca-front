@@ -1,4 +1,4 @@
-import { ChangeDetectionStrategy, Component, EventEmitter, Input, Output, ViewEncapsulation, booleanAttribute } from '@angular/core';
+import { ChangeDetectionStrategy, Component, ViewEncapsulation, booleanAttribute, output, input, computed } from '@angular/core';
 import { LuccaIcon } from '@lucca-front/icons';
 import { Palette, PortalContent, PortalDirective } from '@lucca-front/ng/core';
 import { IconComponent } from '@lucca-front/ng/icon';
@@ -15,19 +15,14 @@ import { getCalloutPalette } from '../callout.utils';
 	encapsulation: ViewEncapsulation.None,
 })
 export class CalloutDisclosureComponent {
-	@Input()
-	icon: LuccaIcon;
+	readonly heading = input.required<PortalContent>();
 
-	@Input({ required: true })
-	heading: PortalContent;
+	readonly icon = input<LuccaIcon>();
 
-	@Input()
-	palette: Palette = 'none';
+	readonly palette = input<Palette>('none');
 
-	@Input()
-	size: 'M' | 'S' = 'M';
+	readonly size = input<'M' | 'S'>('M');
 
-	@Input()
 	/**
 	 * State is a shorthand to set the icon and the palette to the recommended values for the icon and palette based on
 	 * the provided state.
@@ -35,23 +30,27 @@ export class CalloutDisclosureComponent {
 	 * If one of the icon or palette inputs are filled along with the state input, their values will have the priority over
 	 * state (so setting state to success and palette to warning will make the palette warning)
 	 */
-	state: CalloutState;
+	readonly state = input<CalloutState>();
 
-	@Input({ transform: booleanAttribute }) open = false;
+	readonly open = input(false, { transform: booleanAttribute });
 
-	@Output() openChange = new EventEmitter<boolean>();
+	readonly calloutPalette = computed<string>(() => {
+		return getCalloutPalette(this.state(), this.palette());
+	});
+
+	readonly calloutClasses = computed(() => {
+		const palette = this.calloutPalette();
+		return {
+			[`mod-${this.size()}`]: !!this.size(),
+			[`palette-${palette}`]: !!palette,
+		};
+	});
+
+	openChange = output<boolean>();
 
 	public onToggle(event: Event) {
 		if (event.target instanceof HTMLDetailsElement) {
 			this.openChange.emit(event.target.open);
 		}
-	}
-
-	get calloutClasses() {
-		const palette = getCalloutPalette(this.state, this.palette);
-		return {
-			[`mod-${this.size}`]: !!this.size,
-			[`palette-${palette}`]: !!palette,
-		};
 	}
 }

@@ -1,4 +1,4 @@
-import { ChangeDetectionStrategy, Component, Input, numberAttribute, ViewEncapsulation } from '@angular/core';
+import { ChangeDetectionStrategy, Component, input, numberAttribute, ViewEncapsulation } from '@angular/core';
 import { PortalContent, PortalDirective } from '@lucca-front/ng/core';
 import { LuSafeExternalSvgPipe } from '@lucca-front/ng/safe-content';
 import { Hx } from '../empty-state.model';
@@ -15,54 +15,42 @@ import { Hx } from '../empty-state.model';
 	},
 })
 export class EmptyStatePageComponent {
-	@Input()
-
 	/**
 	 * Icon image (URL)
 	 */
-	icon = null;
+	readonly icon = input<string | null>(null);
 
 	/**
 	 * Top right background image (URL)
 	 */
-	@Input()
-	topRightBackground = 'https://cdn.lucca.fr/lucca-front/assets/empty-states/poplee/bubbles-top-right-01.svg';
+	readonly topRightBackground = input<string>('https://cdn.lucca.fr/lucca-front/assets/empty-states/poplee/bubbles-top-right-01.svg');
 
 	/**
 	 * Top right foreground image (URL)
 	 */
-	@Input()
-	topRightForeground = 'https://cdn.lucca.fr/lucca-front/assets/empty-states/generic/coffee-01.svg';
+
+	readonly topRightForeground = input<string>('https://cdn.lucca.fr/lucca-front/assets/empty-states/generic/coffee-01.svg');
 
 	/**
 	 * Bottom left background image (URL)
 	 */
-	@Input()
-	bottomLeftBackground = 'https://cdn.lucca.fr/lucca-front/assets/empty-states/poplee/bubbles-bottom-left-01.svg';
+	readonly bottomLeftBackground = input<string>('https://cdn.lucca.fr/lucca-front/assets/empty-states/poplee/bubbles-bottom-left-01.svg');
 
 	/**
 	 * Bottom left foreground image (URL)
 	 */
-	@Input()
-	bottomLeftForeground = 'https://cdn.lucca.fr/lucca-front/assets/empty-states/poplee/core-hr-01.svg';
+	readonly bottomLeftForeground = input<string>('https://cdn.lucca.fr/lucca-front/assets/empty-states/poplee/core-hr-01.svg');
 
 	/**
 	 * Background color for content (text)
 	 */
-	@Input()
-	contentBackgroundColor = 'var(--pr-t-elevation-surface-default)';
+	readonly contentBackgroundColor = input<string>('var(--pr-t-elevation-surface-default)');
 
-	@Input()
-	slotTop: PortalContent;
+	readonly slotTop = input<PortalContent>();
 
-	@Input()
-	heading: string;
+	readonly heading = input<string>();
 
-	@Input()
-	description: PortalContent;
+	readonly description = input<PortalContent>();
 
-	@Input({
-		transform: numberAttribute as (value: Hx | `${Hx}`) => Hx,
-	})
-	hx: Hx = 1;
+	readonly hx = input(1, { transform: numberAttribute as (value: Hx | `${Hx}`) => Hx });
 }

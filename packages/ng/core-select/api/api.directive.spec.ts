@@ -139,19 +139,19 @@ describe('ALuCoreSelectApiDirective', () => {
 				{ id: 4, name: 'test 4' },
 			]),
 		);
-		select.nextPage.emit();
+		select.nextPage$.next();
 		spectator.tick(MAGIC_OPTION_SCROLL_DELAY);
 		spectator.tick();
 
 		// // Act (Page 3)
 		getOptionsSpy.mockReturnValue(of([{ id: 5, name: 'test 5' }]));
-		select.nextPage.emit();
+		select.nextPage$.next();
 		spectator.tick(MAGIC_OPTION_SCROLL_DELAY);
 		spectator.tick();
 
 		// Act (do nothing)
-		select.nextPage.emit();
-		select.nextPage.emit();
+		select.nextPage$.next();
+		select.nextPage$.next();
 
 		// // Assert
 		expect(testApi.getOptions).toHaveBeenCalledTimes(3);
@@ -197,7 +197,7 @@ describe('ALuCoreSelectApiDirective', () => {
 		spectator.tick(MAGIC_OPTION_SCROLL_DELAY);
 
 		// Act (Page 2)
-		select.nextPage.emit();
+		select.nextPage$.next();
 		spectator.tick(MAGIC_OPTION_SCROLL_DELAY);
 
 		// Assert

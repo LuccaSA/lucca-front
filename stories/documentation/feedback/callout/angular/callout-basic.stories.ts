@@ -13,7 +13,7 @@ export default {
 			imports: [CalloutFeedbackItemComponent, CalloutFeedbackListComponent, ButtonComponent, CalloutActionsComponent, IconComponent],
 		}),
 	],
-	render: (args: CalloutComponent & { description: string; actions: boolean; actionsInline: boolean }, context) => {
+	render: (args, context) => {
 		const { palette, description, heading, actions, actionsInline, ...inputs } = args;
 		const paletteArg = palette !== 'none' && palette !== undefined ? ` palette="${palette}"` : ``;
 		const headingArg = heading ? ` heading="${heading}"` : ``;

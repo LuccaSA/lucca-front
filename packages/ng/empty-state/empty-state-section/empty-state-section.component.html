@@ -1,16 +1,21 @@
-<section class="emptyState" [class.mod-center]="center" [attr.role]="heading ? null : 'presentation'">
+<section class="emptyState" [class.mod-center]="center()" [attr.role]="heading() ? null : 'presentation'">
 	<div class="emptyState-container">
 		<div class="emptyState-content">
-			@if (icon) {
-				<div class="emptyState-content-icon" [class]="emptyStateClasses" aria-hidden="true" [innerHtml]="icon | luSafeExternalSvg"></div>
+			@if (icon()) {
+				<div
+					class="emptyState-content-icon"
+					[class]="emptyStateClasses()"
+					aria-hidden="true"
+					[innerHtml]="icon() | luSafeExternalSvg"
+				></div>
 			}
 			<div class="emptyState-content-text">
-				@if (heading) {
-					<div role="heading" [attr.aria-level]="hx" class="emptyState-content-heading">{{ heading }}</div>
+				@if (heading()) {
+					<div role="heading" [attr.aria-level]="hx()" class="emptyState-content-heading">{{ heading() }}</div>
 				}
-				@if (description) {
+				@if (description()) {
 					<p class="emptyState-content-description">
-						<ng-container *luPortal="description" />
+						<ng-container *luPortal="description()" />
 					</p>
 				}
 				<div class="emptyState-actions">
