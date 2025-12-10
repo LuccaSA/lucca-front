@@ -47,6 +47,7 @@ export class DataTableComponent {
 	readonly layoutFixed = input(false, { transform: booleanAttribute });
 	readonly cellBorder = input(false, { transform: booleanAttribute });
 	readonly nested = input(false, { transform: booleanAttribute });
+	readonly drag = input(false, { transform: booleanAttribute });
 
 	readonly responsive = input<ResponsiveConfig<'layoutFixed', true>>({});
 
