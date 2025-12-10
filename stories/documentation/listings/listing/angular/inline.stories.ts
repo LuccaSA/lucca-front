@@ -24,13 +24,14 @@ export default {
 	],
 
 	render: (args: ListingBasicStory, context) => {
-		const { type, checklist, icons, defaultIcon, icon, ...inputs } = args;
+		const { type, checklist, icons, defaultIcon, icon, palette, ...inputs } = args;
 		const checklistParam = args.type === 'checklist' ? ` checklist` : ``;
 		const iconsParam = args.type === 'icons' ? ` icons` : ``;
 		const iconParam = args.type === 'icons' ? ` icon="${args.icon}"` : ``;
 		const defaultIconParam = args.type === 'icons' ? ` defaultIcon="${defaultIcon}"` : ``;
+		const paletteParam = args.palette !== 'none' ? ` palette="${palette}"` : ``;
 		return {
-			template: `<lu-listing inline${checklistParam}${iconsParam}${defaultIconParam}${generateInputs(inputs, context.argTypes)}>
+			template: `<lu-listing inline${checklistParam}${iconsParam}${defaultIconParam}${paletteParam}${generateInputs(inputs, context.argTypes)}>
 	<lu-listing-item>Lorem ipsum</lu-listing-item>
 	<lu-listing-item${iconParam}>Lorem ipsum dolor sit amet</lu-listing-item>
 	<lu-listing-item>Lorem ipsum dolor sit</lu-listing-item>
@@ -53,7 +54,6 @@ export const Template: StoryObj<ListingComponent & ListingItemComponent & { type
 
 		checklist: HiddenArgType,
 		icons: HiddenArgType,
-		palette: PaletteAllArgType,
 		defaultIcon: {
 			options: IconsList.map((i) => i.icon),
 			control: {
@@ -61,12 +61,16 @@ export const Template: StoryObj<ListingComponent & ListingItemComponent & { type
 			},
 			if: { arg: 'type', eq: 'icons' },
 		},
-
 		icon: {
 			options: IconsList.map((i) => i.icon),
 			control: {
 				type: 'select',
 			},
+			if: { arg: 'type', eq: 'icons' },
+		},
+		palette: {
+			PaletteAllArgType,
+			if: { arg: 'type', truthy: true },
 		},
 	},
 

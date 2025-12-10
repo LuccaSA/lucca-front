@@ -4,7 +4,7 @@
 		[class.mod-icons]="icons()"
 		[class.mod-checklist]="checklist()"
 		[class]="paletteClass()"
-		[attr.start]="start()"
+		[attr.start]="start() !== 1 ? start() : null"
 		[attr.reversed]="reversed() ? 'reversed' : null"
 	>
 		<ng-container *ngTemplateOutlet="content" />

@@ -1,5 +1,4 @@
 import { Meta } from '@storybook/angular';
-import { cleanupTemplate } from 'stories/helpers/stories';
 
 interface ListingInlineStory {}
 
@@ -8,7 +7,7 @@ export default {
 	argTypes: {},
 	render: (args: ListingInlineStory) => {
 		return {
-			template: cleanupTemplate(`<ul class="listing mod-inline">
+			template: `<ul class="listing mod-inline">
 	<li class="listing-item">
 		<div class="listing-item-content">item</div>
 	</li>
@@ -30,7 +29,7 @@ export default {
 	<li class="listing-item">
 		<div class="listing-item-content">item</div>
 	</li>
-</ul>`),
+</ul>`,
 		};
 	},
 } as Meta;
