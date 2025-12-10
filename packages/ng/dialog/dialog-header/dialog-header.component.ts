@@ -1,5 +1,6 @@
 import { CdkDialogContainer } from '@angular/cdk/dialog';
 import { ChangeDetectionStrategy, Component, contentChild, Directive, ElementRef, inject, OnInit, Renderer2, ViewEncapsulation } from '@angular/core';
+import { ButtonComponent } from '@lucca-front/ng/button';
 import { getIntl } from '@lucca-front/ng/core';
 import { IconComponent } from '@lucca-front/ng/icon';
 import { LuDialogRef } from '../model';
@@ -16,7 +17,7 @@ export class DialogHeaderAction {}
 @Component({
 	selector: 'lu-dialog-header',
 	standalone: true,
-	imports: [IconComponent],
+	imports: [IconComponent, ButtonComponent],
 	templateUrl: './dialog-header.component.html',
 	changeDetection: ChangeDetectionStrategy.OnPush,
 	encapsulation: ViewEncapsulation.None,
