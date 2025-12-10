@@ -1,22 +1,22 @@
-@if (!removed) {
-	<div class="callout" [class]="calloutClasses" [class.mod-AI]="AI()">
-		@if (state | luCalloutIcon: icon; as calloutIcon) {
+@if (!removed()) {
+	<div class="callout" [class]="calloutClasses()" [class.mod-AI]="AI()">
+		@if (state() | luCalloutIcon: icon(); as calloutIcon) {
 			<div class="callout-icon">
 				<lu-icon [icon]="calloutIcon" [alt]="iconAlt()" />
 			</div>
 		}
 		<div class="callout-content">
-			@if (heading) {
+			@if (heading()) {
 				<strong class="callout-content-title">
-					<ng-container *luPortal="heading" />
+					<ng-container *luPortal="heading()" />
 				</strong>
 			}
 			<div class="callout-content-description">
 				<ng-content />
 			</div>
 		</div>
-		@if (removable) {
-			<button type="button" class="callout-kill" (click)="removed = true; removedChange.emit(true)">
+		@if (removable()) {
+			<button type="button" class="callout-kill" (click)="removed.set(true); removedChange.emit(true)">
 				<span class="pr-u-mask">{{ intl.close }}</span>
 			</button>
 		}
