@@ -34,6 +34,13 @@
 			min-inline-size: 0;
 		}
 
+		.multipleSelect-displayer-chip-value {
+			max-inline-size: 8.75rem;
+			white-space: nowrap;
+			overflow: hidden;
+			text-overflow: ellipsis;
+		}
+
 		.multipleSelect-displayer-search {
 			display: block;
 			min-inline-size: 2rem;

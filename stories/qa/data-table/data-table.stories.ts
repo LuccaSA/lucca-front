@@ -63,4 +63,4 @@ export default {
 
 const template: StoryFn<DataTableStory> = () => ({});
 
-export const basic = template.bind({});
+export const Basic = template.bind({});

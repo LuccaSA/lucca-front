@@ -19,4 +19,4 @@ export default {
 
 const template: StoryFn<SwitchLegacyStory> = () => ({});
 
-export const basic = template.bind({});
+export const Basic = template.bind({});

@@ -23,4 +23,4 @@ export default {
 
 const template: StoryFn<AvatarStory> = () => ({});
 
-export const basic = template.bind({});
+export const Basic = template.bind({});

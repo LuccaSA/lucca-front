@@ -16,4 +16,4 @@ export default {
 
 const template: StoryFn<StatusBadgeStory> = () => ({});
 
-export const basic = template.bind({});
+export const Basic = template.bind({});

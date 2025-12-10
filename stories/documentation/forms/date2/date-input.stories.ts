@@ -20,18 +20,23 @@ export default {
 	argTypes: {
 		min: {
 			control: 'date',
+			description: 'Définit une date minimum de sélection.',
 		},
 		max: {
 			control: 'date',
+			description: 'Définit une date maximum de sélection.',
 		},
 		selected: {
 			control: 'date',
+			description: 'Définit une date sélectionnée.',
 		},
 		hideToday: {
 			control: 'boolean',
+			description: 'Retire la mise en valeur de la date du jour.',
 		},
 		clearable: {
 			control: 'boolean',
+			description: "Ajoute un bouton de suppression lorsqu'une date est sélectionnée.",
 		},
 		clearBehavior: {
 			control: 'select',
@@ -41,16 +46,29 @@ export default {
 		format: {
 			control: 'select',
 			options: ['date', 'date-iso'],
+			description: 'Modifie le format de date.',
 		},
 		mode: {
 			control: 'select',
 			options: ['day', 'month', 'year'],
+			description: "Modifie le mode de sélection au mois ou à l'année.",
 		},
 		focusedDate: {
 			control: 'date',
+			description: '',
 		},
 		widthAuto: {
 			control: 'boolean',
+			description: 'Applique une pleine largeur au composant.',
+		},
+		disableOverflow: {
+			description: 'Empêche la sélection des jours du mois précédent ou suivant visibles sur le mois en cours.',
+		},
+		hideOverflow: {
+			description: 'Masque les jours du mois précédent ou suivant visibles sur le mois en cours.',
+		},
+		hideWeekend: {
+			description: "Retire l'effet grisé visible sur les jours du isWeekend.",
 		},
 	},
 	render: (args, { argTypes }) => {

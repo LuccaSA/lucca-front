@@ -9,7 +9,6 @@ export interface LuCustomUser extends LuCoreSelectUser {
 
 @Directive({
 	// The attribute is already prefixed with "lu-simple-select" / "lu-multi-select"
-	// eslint-disable-next-line @angular-eslint/directive-selector
 	selector: 'lu-simple-select[customUsers],lu-multi-select[customUsers]',
 	exportAs: 'luCustomUsers',
 })

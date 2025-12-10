@@ -12,11 +12,13 @@ export default {
 			control: {
 				type: 'boolean',
 			},
+			description: 'Applique la palette product au composant.',
 		},
 		disabled: {
 			control: {
 				type: 'boolean',
 			},
+			description: 'Désactive le composant.',
 		},
 	},
 } as Meta;

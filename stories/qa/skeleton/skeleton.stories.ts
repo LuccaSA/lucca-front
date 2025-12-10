@@ -16,4 +16,4 @@ export default {
 
 const template: StoryFn<SkeletonStory> = () => ({});
 
-export const basic = template.bind({});
+export const Basic = template.bind({});
