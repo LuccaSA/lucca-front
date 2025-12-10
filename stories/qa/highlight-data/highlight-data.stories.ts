@@ -24,4 +24,4 @@ export default {
 
 const template: StoryFn<HighlightDataStory> = () => ({});
 
-export const basic = template.bind({});
+export const Basic = template.bind({});

@@ -88,7 +88,7 @@ export class TagNode extends DecoratorNode<string> {
 	 * This method must be implemented but has no purpose outside of react
 	 */
 	override decorate(): string {
-		return `{{${this.getKey()}}}`;
+		return this.getTextContent();
 	}
 
 	override createDOM(_config: EditorConfig, editor: LexicalEditor): HTMLElement {
@@ -132,7 +132,7 @@ export class TagNode extends DecoratorNode<string> {
 	}
 
 	override exportDOM(): DOMExportOutput {
-		const element = document.createTextNode(`{{${this.#tagKey}}}`);
+		const element = document.createTextNode(this.getTextContent());
 		return { element };
 	}
 
@@ -161,6 +161,11 @@ export class TagNode extends DecoratorNode<string> {
 			...super.exportJSON(),
 			...{ tagDescription: this.#tagDescription, tagKey: this.#tagKey, disabled: this.#disabled },
 		};
+	}
+
+	override getTextContent(): string {
+		// node must have text content or it will be ignored when formatting
+		return `{{${this.#tagKey}}}`;
 	}
 }
 

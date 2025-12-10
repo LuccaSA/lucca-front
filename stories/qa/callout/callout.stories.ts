@@ -34,4 +34,4 @@ export default {
 
 const template: StoryFn<CalloutStory> = () => ({});
 
-export const basic = template.bind({});
+export const Basic = template.bind({});

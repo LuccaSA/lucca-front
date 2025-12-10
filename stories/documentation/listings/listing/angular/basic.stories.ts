@@ -60,12 +60,14 @@ export const Template: StoryObj<ListingComponent & ListingItemComponent & { type
 			control: {
 				type: 'select',
 			},
+			description: 'Modifie le type de liste (ordonnée, checklist, icônes, etc.)',
 		},
 		defaultIcon: {
 			options: IconsList.map((i) => i.icon),
 			control: {
 				type: 'select',
 			},
+			description: "Modifie l'icône par défaut de chaque élément lorsque le type <code>icons</code> est sélectionné.",
 			if: { arg: 'type', eq: 'icons' },
 		},
 		icon: {
@@ -73,6 +75,7 @@ export const Template: StoryObj<ListingComponent & ListingItemComponent & { type
 			control: {
 				type: 'select',
 			},
+			description: "Modifie l'icône par défaut d'un élément lorsque le type <code>icons</code> est sélectionné.",
 			if: { arg: 'type', eq: 'icons' },
 		},
 		start: {

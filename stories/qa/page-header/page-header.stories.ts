@@ -34,4 +34,4 @@ export default {
 
 const template: StoryFn<PageHeaderStory> = () => ({});
 
-export const basic = template.bind({});
+export const Basic = template.bind({});

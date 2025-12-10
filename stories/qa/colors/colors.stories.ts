@@ -28,4 +28,4 @@ export default {
 
 const template: StoryFn<ColorsStory> = () => ({});
 
-export const basic = template.bind({});
+export const Basic = template.bind({});

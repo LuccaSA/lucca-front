@@ -55,12 +55,12 @@ class UserSelectStoriesModule {}
 </label>
 `;
 
-export const basic = template.bind({});
-basic.args = {
+export const Basic = template.bind({});
+Basic.args = {
 	disablePrincipal: false,
 };
 
-basic.parameters = {
+Basic.parameters = {
 	docs: {
 		source: {
 			language: 'ts',

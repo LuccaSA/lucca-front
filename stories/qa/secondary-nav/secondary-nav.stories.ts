@@ -14,4 +14,4 @@ export default {
 
 const template: StoryFn<SecondaryNavStory> = () => ({});
 
-export const basic = template.bind({});
+export const Basic = template.bind({});

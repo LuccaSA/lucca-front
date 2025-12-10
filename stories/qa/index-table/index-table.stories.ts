@@ -51,4 +51,4 @@ export default {
 
 const template: StoryFn<IndexTableStory> = () => ({});
 
-export const basic = template.bind({});
+export const Basic = template.bind({});

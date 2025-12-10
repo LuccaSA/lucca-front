@@ -17,7 +17,7 @@ import { applicationConfig, Meta, StoryFn } from '@storybook/angular';
 				[uniqueOperation]="uniqueOperation()"
 				placeholder="Select a departement"
 				data-testid="lu-select"
-			></lu-department-select>
+			/>
 			<div class="textfield-label">Departement</div>
 		</label>
 
@@ -31,7 +31,7 @@ import { applicationConfig, Meta, StoryFn } from '@storybook/angular';
 				placeholder="Select a departement"
 				multiple="true"
 				data-testid="lu-select"
-			></lu-department-select>
+			/>
 			<div class="textfield-label">Departement multiple</div>
 		</label>
 	`,
