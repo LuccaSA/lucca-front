@@ -1,9 +1,5 @@
-<<<<<<< HEAD
-import { afterNextRender, booleanAttribute, Component, effect, HostBinding, HostListener, inject, Injector, input, Input, ViewEncapsulation } from '@angular/core';
+import { afterNextRender, booleanAttribute, ChangeDetectionStrategy, Component, effect, HostBinding, HostListener, inject, Injector, input, Input, ViewEncapsulation } from '@angular/core';
 import { Router } from '@angular/router';
-=======
-import { booleanAttribute, ChangeDetectionStrategy, Component, effect, inject, input, Input, ViewEncapsulation } from '@angular/core';
->>>>>>> rc
 import { getIntl } from '@lucca-front/ng/core';
 import { LU_LINK_TRANSLATIONS } from './link.translate';
 import { LuRouterLink } from './lu-router-link';
