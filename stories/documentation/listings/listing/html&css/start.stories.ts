@@ -1,13 +1,13 @@
 import { Meta } from '@storybook/angular';
 
-interface ListingBasicStory {}
+interface ListingReversedStory {}
 
 export default {
-	title: 'Documentation/Listings/Listing/HTML&CSS/Basic',
+	title: 'Documentation/Listings/Listing/HTML&CSS/Start',
 	argTypes: {},
-	render: (args: ListingBasicStory) => {
+	render: (args: ListingReversedStory) => {
 		return {
-			template: `<ul class="listing">
+			template: `<ol class="listing" start="3">
 	<li class="listing-item">
 		<div class="listing-item-content">item</div>
 	</li>
@@ -17,7 +17,7 @@ export default {
 	<li class="listing-item">
 		<div class="listing-item-content">
 			item
-			<ul class="listing">
+			<ol class="listing" start="3">
 				<li class="listing-item">
 					<div class="listing-item-content">item</div>
 				</li>
@@ -27,10 +27,10 @@ export default {
 				<li class="listing-item">
 					<div class="listing-item-content">item</div>
 				</li>
-			</ul>
+			</ol>
 		</div>
 	</li>
-</ul>`,
+</ol>`,
 		};
 	},
 } as Meta;
