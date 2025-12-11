@@ -18,12 +18,12 @@ import { LuMultiSelectDisplayerInputDirective } from '../displayer-input.directi
 			@if (selectedOptions$ | async; as selectedOptions) {
 				<div class="multipleSelect-displayer-filter">
 					@if (selectedOptions?.length === 1) {
-						<div class="multipleSelect-displayer-chip chip mod-unkillable">
+						<div class="multipleSelect-displayer-chip chip palette-product mod-unkillable">
 							<ng-container *luOptionOutlet="select.displayerTpl(); value: selectedOptions[0]" />
 						</div>
 					}
 					@if (selectedOptions?.length > 1) {
-						<lu-chip class="multipleSelect-displayer-chip" unkillable>{{ selectedOptions?.length }} {{ label }}</lu-chip>
+						<lu-chip class="multipleSelect-displayer-chip palette-product" unkillable>{{ selectedOptions?.length }} {{ label }}</lu-chip>
 					}
 				</div>
 			}

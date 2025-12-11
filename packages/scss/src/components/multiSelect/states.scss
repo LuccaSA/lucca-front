@@ -1,4 +1,5 @@
 @use '@lucca-front/scss/src/commons/utils/a11y';
+@use '@lucca-front/scss/src/components/chip/exports' as chip;
 
 @mixin focused {
 	@include a11y.focusVisible($offset: 3px);
@@ -16,6 +17,10 @@
 	--components-multiSelect-arrow-color: var(--pr-t-color-input-icon-disabled);
 
 	pointer-events: none;
+
+	.multipleSelect-displayer-chip {
+		@include chip.disabled;
+	}
 }
 
 @mixin expanded {
