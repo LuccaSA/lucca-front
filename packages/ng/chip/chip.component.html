@@ -1,5 +1,5 @@
 @if (displayedIcon()) {
-	<lu-icon [icon]="displayedIcon()" />
+	<lu-icon [icon]="displayedIcon()" [alt]="stateAlt()" />
 }
 
 <ng-template #content><ng-content /></ng-template>
