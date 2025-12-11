@@ -37,9 +37,14 @@ export class SingleFileUploadComponent extends BaseFileUploadComponent {
 
 	onEditFile(fileInput: HTMLInputElement) {
 		if (this.editable()) {
-			fileInput?.removeAttribute('disabled');
+			const isDisabled = fileInput?.hasAttribute('disabled');
+			if (isDisabled) {
+				fileInput?.removeAttribute('disabled');
+			}
 			fileInput?.click();
-			fileInput?.setAttribute('disabled', 'disabled');
+			if (isDisabled) {
+				fileInput?.setAttribute('disabled', 'disabled');
+			}
 			this.editFile.emit();
 		}
 	}
