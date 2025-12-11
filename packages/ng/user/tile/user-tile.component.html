@@ -1,4 +1,4 @@
-<lu-user-picture [user]="user" [displayFormat]="displayPictureFormat" />
+<lu-user-picture aria-hidden="true" [user]="user" [displayFormat]="displayPictureFormat" />
 <div class="userTile-content">
 	<div class="userTile-content-name" translate="no">{{ user | luUserDisplay: displayFormat }}</div>
 	@if (role || user?.jobTitle) {
