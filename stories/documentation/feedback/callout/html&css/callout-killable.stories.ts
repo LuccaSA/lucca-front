@@ -1,4 +1,4 @@
-import { Meta, StoryFn } from '@storybook/angular';
+import { Meta, StoryObj } from '@storybook/angular';
 
 interface CalloutKillableStory {}
 
@@ -16,10 +16,12 @@ function getTemplate(args: CalloutKillableStory): string {
 </div>`;
 }
 
-const Template: StoryFn<CalloutKillableStory> = (args) => ({
+const Template = (args: CalloutKillableStory) => ({
 	props: args,
 	template: getTemplate(args),
 });
 
-export const Killable = Template.bind({});
-Killable.args = {};
+export const Killable: StoryObj<CalloutKillableStory> = {
+	args: {},
+	render: Template,
+};

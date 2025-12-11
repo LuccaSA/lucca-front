@@ -1,4 +1,4 @@
-import { Meta, moduleMetadata, StoryFn } from '@storybook/angular';
+import { Meta, moduleMetadata, StoryObj } from '@storybook/angular';
 import { LuSafeExternalSvgPipe } from '@lucca-front/ng/safe-content';
 import { HttpClientModule } from '@angular/common/http';
 
@@ -36,10 +36,12 @@ function getTemplate(args: EmptyStateSectionPaletteStory): string {
 </section>`;
 }
 
-const Template: StoryFn<EmptyStateSectionPaletteStory> = (args: EmptyStateSectionPaletteStory) => ({
+const Template = (args: EmptyStateSectionPaletteStory) => ({
 	props: args,
 	template: getTemplate(args),
 });
 
-export const SectionPalette = Template.bind({});
-SectionPalette.args = {};
+export const SectionPalette: StoryObj<EmptyStateSectionPaletteStory> = {
+	args: {},
+	render: Template,
+};

@@ -1,4 +1,4 @@
-import { Meta, StoryFn } from '@storybook/angular';
+import { Meta, StoryObj } from '@storybook/angular';
 
 interface GridsAutoStory {
 	reverse: boolean;
@@ -47,7 +47,7 @@ function getTemplate(args: GridsAutoStory): string {
 </div>`;
 }
 
-const Template: StoryFn<GridsAutoStory> = (args) => ({
+const Template = (args: GridsAutoStory) => ({
 	props: args,
 	template: getTemplate(args),
 	styles: [
@@ -70,5 +70,7 @@ const Template: StoryFn<GridsAutoStory> = (args) => ({
 	],
 });
 
-export const Basic = Template.bind({});
-Basic.args = {};
+export const Basic: StoryObj<GridsAutoStory> = {
+	args: {},
+	render: Template,
+};

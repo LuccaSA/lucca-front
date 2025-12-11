@@ -1,7 +1,7 @@
 import { Component } from '@angular/core';
 import { provideAnimations } from '@angular/platform-browser/animations';
 import { LuDropdownModule } from '@lucca-front/ng/dropdown';
-import { applicationConfig, Meta, StoryFn } from '@storybook/angular';
+import { applicationConfig, Meta, StoryObj } from '@storybook/angular';
 
 @Component({
 	selector: 'dropdown-stories',
@@ -18,7 +18,7 @@ export default {
 	decorators: [applicationConfig({ providers: [provideAnimations()] })],
 } as Meta;
 
-const Template: StoryFn<DropdownBasicStory> = (args) => ({
+const Template = (args: DropdownBasicStory) => ({
 	props: args,
 });
 
@@ -47,8 +47,11 @@ const code = `/* 1. Ajouter un bouton détenant la directive [luDropdown]="dropd
 	</li>
 </lu-dropdown>`;
 
-export const Basic = Template.bind({});
-Basic.args = {};
+export const Basic: StoryObj<DropdownBasicStory> = {
+	args: {},
+	render: Template,
+};
+
 Basic.parameters = {
 	controls: { include: [] },
 	docs: {

@@ -1,4 +1,4 @@
-import { Meta, StoryFn } from '@storybook/angular';
+import { Meta, StoryObj } from '@storybook/angular';
 
 interface TextfieldValueAlignRightStory {}
 
@@ -24,10 +24,12 @@ function getTemplate(args: TextfieldValueAlignRightStory): string {
 </div>`;
 }
 
-const Template: StoryFn<TextfieldValueAlignRightStory> = (args) => ({
+const Template = (args: TextfieldValueAlignRightStory) => ({
 	props: args,
 	template: getTemplate(args),
 });
 
-export const ValueAlignRight = Template.bind({});
-ValueAlignRight.args = {};
+export const ValueAlignRight: StoryObj<TextfieldValueAlignRightStory> = {
+	args: {},
+	render: Template,
+};

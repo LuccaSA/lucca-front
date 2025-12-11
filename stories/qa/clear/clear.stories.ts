@@ -1,6 +1,6 @@
 import { Component } from '@angular/core';
 import { ClearComponent } from '@lucca-front/ng/clear';
-import { Meta, StoryFn } from '@storybook/angular';
+import { Meta, StoryObj } from '@storybook/angular';
 
 @Component({
 	selector: 'clear-stories',
@@ -14,6 +14,9 @@ export default {
 	component: ClearStory,
 } as Meta;
 
-const template: StoryFn<ClearStory> = () => ({});
+const template = () => ({});
 
-export const basic = template.bind({});
+export const basic: StoryObj<ClearStory> = {
+	args: {},
+	render: template,
+};

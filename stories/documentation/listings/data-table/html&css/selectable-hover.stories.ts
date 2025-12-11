@@ -1,4 +1,4 @@
-import { Meta, StoryFn } from '@storybook/angular';
+import { Meta, StoryObj } from '@storybook/angular';
 
 interface SelectableStory {}
 
@@ -82,10 +82,12 @@ function getTemplate(args: SelectableStory): string {
 </form>`;
 }
 
-const Template: StoryFn<SelectableStory> = (args) => ({
+const Template = (args: SelectableStory) => ({
 	props: args,
 	template: getTemplate(args),
 });
 
-export const Selectable = Template.bind({});
-Selectable.args = {};
+export const Selectable: StoryObj<SelectableStory> = {
+	args: {},
+	render: Template,
+};

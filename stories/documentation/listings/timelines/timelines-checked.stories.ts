@@ -1,4 +1,4 @@
-import { Meta, StoryFn } from '@storybook/angular';
+import { Meta, StoryObj } from '@storybook/angular';
 
 interface TimelinesCheckedStory {}
 
@@ -37,10 +37,12 @@ function getTemplate(args: TimelinesCheckedStory): string {
 	`;
 }
 
-const Template: StoryFn<TimelinesCheckedStory> = (args) => ({
+const Template = (args: TimelinesCheckedStory) => ({
 	props: args,
 	template: getTemplate(args),
 });
 
-export const Checked = Template.bind({});
-Checked.args = {};
+export const Checked: StoryObj<TimelinesCheckedStory> = {
+	args: {},
+	render: Template,
+};

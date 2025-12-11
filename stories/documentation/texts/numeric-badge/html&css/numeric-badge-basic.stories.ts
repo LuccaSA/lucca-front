@@ -1,4 +1,4 @@
-import { Meta, StoryFn } from '@storybook/angular';
+import { Meta, StoryObj } from '@storybook/angular';
 
 interface NumericBadgeBasicStory {}
 
@@ -11,10 +11,12 @@ function getTemplate(args: NumericBadgeBasicStory): string {
 	return `<span class="numericBadge">7</span>`;
 }
 
-const Template: StoryFn<NumericBadgeBasicStory> = (args) => ({
+const Template = (args: NumericBadgeBasicStory) => ({
 	props: args,
 	template: getTemplate(args),
 });
 
-export const Basic = Template.bind({});
-Basic.args = {};
+export const Basic: StoryObj<NumericBadgeBasicStory> = {
+	args: {},
+	render: Template,
+};

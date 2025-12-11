@@ -1,4 +1,4 @@
-import { Meta, StoryFn } from '@storybook/angular';
+import { Meta, StoryObj } from '@storybook/angular';
 
 interface PageHeaderBackStory {
 	sticky: boolean;
@@ -57,10 +57,12 @@ function getTemplate(args: PageHeaderBackStory): string {
 </header>`;
 }
 
-const Template: StoryFn<PageHeaderBackStory> = (args) => ({
+const Template = (args: PageHeaderBackStory) => ({
 	props: args,
 	template: getTemplate(args),
 });
 
-export const PageHeaderBackStory = Template.bind({});
-PageHeaderBackStory.args = {};
+export const PageHeaderBackStory: StoryObj<PageHeaderBackStory> = {
+	args: {},
+	render: Template,
+};

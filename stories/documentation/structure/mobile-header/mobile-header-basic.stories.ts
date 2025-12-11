@@ -1,4 +1,4 @@
-import { Meta, StoryFn } from '@storybook/angular';
+import { Meta, StoryObj } from '@storybook/angular';
 
 interface MobileHeaderBasicStory {
 	largeTitle: boolean;
@@ -34,10 +34,12 @@ function getTemplate(args: MobileHeaderBasicStory): string {
 	</div>`;
 }
 
-const Template: StoryFn<MobileHeaderBasicStory> = (args) => ({
+const Template = (args: MobileHeaderBasicStory) => ({
 	props: args,
 	template: getTemplate(args),
 });
 
-export const Basic = Template.bind({});
-Basic.args = { largeTitle: false };
+export const Basic: StoryObj<MobileHeaderBasicStory> = {
+	args: { largeTitle: false },
+	render: Template,
+};

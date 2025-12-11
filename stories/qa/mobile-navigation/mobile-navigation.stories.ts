@@ -1,5 +1,5 @@
 import { Component } from '@angular/core';
-import { Meta, StoryFn, moduleMetadata } from '@storybook/angular';
+import { Meta, moduleMetadata, StoryObj } from '@storybook/angular';
 
 @Component({
 	selector: 'mobile-navigation-stories',
@@ -17,6 +17,9 @@ export default {
 	],
 } as Meta;
 
-const template: StoryFn<MobileNavigationStory> = () => ({});
+const template = () => ({});
 
-export const Basic = template.bind({});
+export const Basic: StoryObj<MobileNavigationStory> = {
+	args: {},
+	render: template,
+};

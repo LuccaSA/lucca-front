@@ -1,6 +1,6 @@
 import { Component } from '@angular/core';
 import { LuUserPictureComponent } from '@lucca-front/ng/user';
-import { Meta, StoryFn } from '@storybook/angular';
+import { Meta, StoryObj } from '@storybook/angular';
 
 @Component({
 	selector: 'avatar-stories',
@@ -21,6 +21,9 @@ export default {
 	component: AvatarStory,
 } as Meta;
 
-const template: StoryFn<AvatarStory> = () => ({});
+const template = () => ({});
 
-export const Basic = template.bind({});
+export const Basic: StoryObj<AvatarStory> = {
+	args: {},
+	render: template,
+};

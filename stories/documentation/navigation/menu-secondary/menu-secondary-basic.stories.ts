@@ -1,4 +1,4 @@
-import { Meta, StoryFn } from '@storybook/angular';
+import { Meta, StoryObj } from '@storybook/angular';
 
 interface MenuSecondaryBasicStory {
 	compact: boolean;
@@ -124,7 +124,7 @@ function getTemplate(args: MenuSecondaryBasicStory): string {
 	`;
 }
 
-const Template: StoryFn<MenuSecondaryBasicStory> = (args) => ({
+const Template = (args: MenuSecondaryBasicStory) => ({
 	props: args,
 	template: getTemplate(args),
 	styles: [
@@ -136,5 +136,7 @@ const Template: StoryFn<MenuSecondaryBasicStory> = (args) => ({
 	],
 });
 
-export const Basic = Template.bind({});
-Basic.args = { compact: false, banner: false, open: false };
+export const Basic: StoryObj<MenuSecondaryBasicStory> = {
+	args: { compact: false, banner: false, open: false },
+	render: Template,
+};

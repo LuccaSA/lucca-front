@@ -18,10 +18,11 @@ import { NumericBadgeComponent } from '@lucca-front/ng/numeric-badge';
 import { PaginationComponent } from '@lucca-front/ng/pagination';
 import { LuUserDisplayModule } from '@lucca-front/ng/user';
 import { LuUserPopoverComponent, LuUserPopoverDirective, provideLuUserPopover } from '@lucca-front/ng/user-popover';
-import { applicationConfig, Meta, moduleMetadata, StoryFn } from '@storybook/angular';
+import { applicationConfig, Meta, moduleMetadata, StoryObj } from '@storybook/angular';
 import { HiddenArgType } from 'stories/helpers/common-arg-types';
 
 interface BasicStory {
+	bob: typeof bob;
 	action: string;
 	pagination: boolean;
 	selectable: boolean;
@@ -203,34 +204,36 @@ function getTemplate(args: BasicStory): string {
 `;
 }
 
-const Template: StoryFn<BasicStory> = (args) => ({
+const Template = (args: BasicStory) => ({
 	props: args,
 	template: getTemplate(args),
 });
 
-export const Basic = Template.bind({});
-Basic.args = {
-	bob,
-	empty: false,
-	layoutFixed: false,
-	selectable: false,
+export const Basic: StoryObj<BasicStory> = {
+	args: {
+		bob,
+		empty: false,
+		layoutFixed: false,
+		selectable: false,
 
-	sort: '',
-	align: '',
-	hiddenLabel: false,
+		sort: '',
+		align: '',
+		hiddenLabel: false,
 
-	action: 'link',
-	stack: 1,
+		action: 'link',
+		stack: 1,
 
-	group: false,
-	groupLabel: 'Group label',
-	groupButtonAlt: 'Afficher X lignes supplémentaires',
-	expanded: false,
+		group: false,
+		groupLabel: 'Group label',
+		groupButtonAlt: 'Afficher X lignes supplémentaires',
+		expanded: false,
 
-	allowSelection: false,
-	allowAction: false,
+		allowSelection: false,
+		allowAction: false,
 
-	intermediateFooter: false,
-	footer: false,
-	pagination: false,
+		intermediateFooter: false,
+		footer: false,
+		pagination: false,
+	},
+	render: Template,
 };

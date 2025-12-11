@@ -1,4 +1,4 @@
-import { Meta, StoryFn } from '@storybook/angular';
+import { Meta, StoryObj } from '@storybook/angular';
 
 interface FieldsetBasicStory {}
 
@@ -157,10 +157,12 @@ function getTemplate(args: FieldsetBasicStory): string {
 </form>`;
 }
 
-const Template: StoryFn<FieldsetBasicStory> = (args: FieldsetBasicStory) => ({
+const Template = (args: FieldsetBasicStory) => ({
 	props: args,
 	template: getTemplate(args),
 });
 
-export const Basic = Template.bind({});
-Basic.args = {};
+export const Basic: StoryObj<FieldsetBasicStory> = {
+	args: {},
+	render: Template,
+};

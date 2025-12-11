@@ -1,7 +1,7 @@
 import { ButtonComponent } from '@lucca-front/ng/button';
 import { DropdownActionComponent, DropdownDividerComponent, DropdownGroupComponent, DropdownItemComponent, DropdownMenuComponent, LuDropdownTriggerDirective } from '@lucca-front/ng/dropdown';
 import { IconComponent } from '@lucca-front/ng/icon';
-import { Meta, StoryFn } from '@storybook/angular';
+import { Meta, StoryObj } from '@storybook/angular';
 
 export default {
 	title: 'Documentation/Overlays/Dropdown/Angular/Directive',
@@ -9,7 +9,7 @@ export default {
 	decorators: [],
 } as Meta;
 
-const Template: StoryFn = (args) => ({
+const Template = (args) => ({
 	props: args,
 	moduleMetadata: {
 		imports: [
@@ -71,8 +71,11 @@ const Template: StoryFn = (args) => ({
 </ng-template>`,
 });
 
-export const Directive = Template.bind({});
-Directive.args = {};
+export const Directive: StoryObj = {
+	args: {},
+	render: Template,
+};
+
 Directive.parameters = {
 	controls: { include: [] },
 };

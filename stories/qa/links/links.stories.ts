@@ -1,7 +1,7 @@
 import { Component } from '@angular/core';
 import { provideRouter, RouterLink } from '@angular/router';
 import { LinkComponent } from '@lucca-front/ng/link';
-import { applicationConfig, Meta, StoryFn } from '@storybook/angular';
+import { applicationConfig, Meta, StoryObj } from '@storybook/angular';
 
 @Component({
 	selector: 'links-stories',
@@ -20,6 +20,9 @@ export default {
 	],
 } as Meta;
 
-const template: StoryFn<LinksStory> = () => ({});
+const template = () => ({});
 
-export const Basic = template.bind({});
+export const Basic: StoryObj<LinksStory> = {
+	args: {},
+	render: template,
+};

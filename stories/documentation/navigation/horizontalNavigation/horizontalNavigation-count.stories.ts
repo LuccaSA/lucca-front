@@ -1,4 +1,4 @@
-import { Meta, StoryFn } from '@storybook/angular';
+import { Meta, StoryObj } from '@storybook/angular';
 
 interface HorizontalNavigationCountStory {
 	noBorder: boolean;
@@ -94,10 +94,12 @@ function getTemplate(args: HorizontalNavigationCountStory): string {
 	}
 }
 
-const Template: StoryFn<HorizontalNavigationCountStory> = (args) => ({
+const Template = (args: HorizontalNavigationCountStory) => ({
 	props: args,
 	template: getTemplate(args),
 });
 
-export const Count = Template.bind({});
-Count.args = { noBorder: false, header: false, s: false, disabled: false, vertical: false };
+export const Count: StoryObj<HorizontalNavigationCountStory> = {
+	args: { noBorder: false, header: false, s: false, disabled: false, vertical: false },
+	render: Template,
+};

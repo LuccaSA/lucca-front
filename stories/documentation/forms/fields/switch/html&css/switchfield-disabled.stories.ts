@@ -1,4 +1,4 @@
-import { Meta, StoryFn } from '@storybook/angular';
+import { Meta, StoryObj } from '@storybook/angular';
 
 interface SwitchDisabledStory {}
 
@@ -20,10 +20,12 @@ function getTemplate(args: SwitchDisabledStory): string {
 </div>`;
 }
 
-const Template: StoryFn<SwitchDisabledStory> = (args) => ({
+const Template = (args: SwitchDisabledStory) => ({
 	props: args,
 	template: getTemplate(args),
 });
 
-export const Disabled = Template.bind({});
-Disabled.args = {};
+export const Disabled: StoryObj<SwitchDisabledStory> = {
+	args: {},
+	render: Template,
+};

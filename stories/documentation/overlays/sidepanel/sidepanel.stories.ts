@@ -3,7 +3,7 @@ import { provideAnimations } from '@angular/platform-browser/animations';
 import { ILuModalContent, LuModal, LuModalModule } from '@lucca-front/ng/modal';
 import { LuSidepanel, LuSidepanelModule } from '@lucca-front/ng/sidepanel';
 import { LuToastsModule, LuToastsService } from '@lucca-front/ng/toast';
-import { applicationConfig, Meta, StoryFn } from '@storybook/angular';
+import { applicationConfig, Meta, StoryObj } from '@storybook/angular';
 import { map, shareReplay, timer } from 'rxjs';
 
 @Component({
@@ -88,12 +88,15 @@ export default {
 	decorators: [applicationConfig({ providers: [provideAnimations()] })],
 } as Meta;
 
-const Template: StoryFn<SidepanelStory> = (args) => ({
+const Template = (args: SidepanelStory) => ({
 	props: args,
 });
 
-export const Basic = Template.bind({});
-Basic.args = {};
+export const Basic: StoryObj<SidepanelStory> = {
+	args: {},
+	render: Template,
+};
+
 Basic.parameters = {
 	docs: {
 		source: {

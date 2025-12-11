@@ -1,4 +1,4 @@
-import { Meta, StoryFn } from '@storybook/angular';
+import { Meta, StoryObj } from '@storybook/angular';
 
 export default {
 	title: 'Documentation/Texts/Tags/HTML&CSS/Clickable',
@@ -8,8 +8,11 @@ function getTemplate(): string {
 	return '<a href="#" class="tag">Text</a>';
 }
 
-const Template: StoryFn = () => ({
+const Template = () => ({
 	template: getTemplate(),
 });
 
-export const Clickable = Template.bind({});
+export const Clickable: StoryObj = {
+	args: {},
+	render: Template,
+};

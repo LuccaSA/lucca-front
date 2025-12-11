@@ -1,6 +1,6 @@
 import { ButtonComponent } from '@lucca-front/ng/button';
 import { EmptyStateSectionComponent } from '@lucca-front/ng/empty-state';
-import { Meta, moduleMetadata, StoryFn } from '@storybook/angular';
+import { Meta, moduleMetadata, StoryObj } from '@storybook/angular';
 
 interface TableBasicStory {
 	withOverflow: boolean;
@@ -53,7 +53,7 @@ function getTemplate(args: TableBasicStory): string {
 	`;
 }
 
-const Template: StoryFn<TableBasicStory> = (args) => ({
+const Template = (args: TableBasicStory) => ({
 	props: args,
 	template: getTemplate(args),
 	styles: [
@@ -66,7 +66,9 @@ const Template: StoryFn<TableBasicStory> = (args) => ({
 	],
 });
 
-export const Basic = Template.bind({});
-Basic.args = {
-	withOverflow: false,
+export const Basic: StoryObj<TableBasicStory> = {
+	args: {
+		withOverflow: false,
+	},
+	render: Template,
 };

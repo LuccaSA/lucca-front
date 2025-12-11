@@ -1,4 +1,4 @@
-import { Meta, StoryFn } from '@storybook/angular';
+import { Meta, StoryObj } from '@storybook/angular';
 
 interface IndexTableActionsDropdownStory {}
 
@@ -35,9 +35,12 @@ function getTemplate(args: IndexTableActionsDropdownStory): string {
 </table>`;
 }
 
-const Template: StoryFn<IndexTableActionsDropdownStory> = (args) => ({
+const Template = (args: IndexTableActionsDropdownStory) => ({
 	props: args,
 	template: getTemplate(args),
 });
 
-export const Dropdown = Template.bind({});
+export const Dropdown: StoryObj<IndexTableActionsDropdownStory> = {
+	args: {},
+	render: Template,
+};

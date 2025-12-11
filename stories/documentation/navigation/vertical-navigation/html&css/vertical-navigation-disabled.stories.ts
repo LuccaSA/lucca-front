@@ -1,4 +1,4 @@
-import { Meta, StoryFn } from '@storybook/angular';
+import { Meta, StoryObj } from '@storybook/angular';
 
 interface VerticalNavigationDisabledStory {}
 
@@ -36,10 +36,12 @@ function getTemplate(args: VerticalNavigationDisabledStory): string {
 </div>`;
 }
 
-const Template: StoryFn<VerticalNavigationDisabledStory> = (args) => ({
+const Template = (args: VerticalNavigationDisabledStory) => ({
 	props: args,
 	template: getTemplate(args),
 });
 
-export const Disabled = Template.bind({});
-Disabled.args = {};
+export const Disabled: StoryObj<VerticalNavigationDisabledStory> = {
+	args: {},
+	render: Template,
+};

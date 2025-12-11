@@ -1,4 +1,4 @@
-import { Meta, StoryFn } from '@storybook/angular';
+import { Meta, StoryObj } from '@storybook/angular';
 
 interface RadioInlineStory {}
 
@@ -35,10 +35,12 @@ function getTemplate(args: RadioInlineStory): string {
 </fieldset>`;
 }
 
-const Template: StoryFn<RadioInlineStory> = (args) => ({
+const Template = (args: RadioInlineStory) => ({
 	props: args,
 	template: getTemplate(args),
 });
 
-export const Inline = Template.bind({});
-Inline.args = {};
+export const Inline: StoryObj<RadioInlineStory> = {
+	args: {},
+	render: Template,
+};

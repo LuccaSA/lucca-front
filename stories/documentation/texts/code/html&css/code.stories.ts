@@ -1,4 +1,4 @@
-import { Meta, StoryFn } from '@storybook/angular';
+import { Meta, StoryObj } from '@storybook/angular';
 
 interface TextCodeStory {
 	block: boolean;
@@ -25,7 +25,7 @@ sit</code>
 amet`;
 }
 
-const Template: StoryFn<TextCodeStory> = (args) => ({
+const Template = (args: TextCodeStory) => ({
 	props: args,
 	template: getTemplate(args),
 	styles: [
@@ -37,5 +37,7 @@ const Template: StoryFn<TextCodeStory> = (args) => ({
 	],
 });
 
-export const Basic = Template.bind({});
-Basic.args = { block: false };
+export const Basic: StoryObj<TextCodeStory> = {
+	args: { block: false },
+	render: Template,
+};

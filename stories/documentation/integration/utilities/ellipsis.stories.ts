@@ -1,4 +1,4 @@
-import { Meta, StoryFn } from '@storybook/angular';
+import { Meta, StoryObj } from '@storybook/angular';
 
 interface EllipsisStory {}
 
@@ -12,10 +12,12 @@ function getTemplate(args: EllipsisStory): string {
 </div>`;
 }
 
-const Template: StoryFn<EllipsisStory> = (args) => ({
+const Template = (args: EllipsisStory) => ({
 	props: args,
 	template: getTemplate(args),
 });
 
-export const Ellipsis = Template.bind({});
-Ellipsis.args = {};
+export const Ellipsis: StoryObj<EllipsisStory> = {
+	args: {},
+	render: Template,
+};

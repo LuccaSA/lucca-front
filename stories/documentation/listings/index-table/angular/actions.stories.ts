@@ -18,10 +18,11 @@ import { PaginationComponent } from '@lucca-front/ng/pagination';
 import { LuTooltipModule } from '@lucca-front/ng/tooltip';
 import { LuUserDisplayModule } from '@lucca-front/ng/user';
 import { LuUserPopoverComponent, LuUserPopoverDirective, provideLuUserPopover } from '@lucca-front/ng/user-popover';
-import { applicationConfig, Meta, moduleMetadata, StoryFn } from '@storybook/angular';
+import { applicationConfig, Meta, moduleMetadata, StoryObj } from '@storybook/angular';
 import { HiddenArgType } from 'stories/helpers/common-arg-types';
 
 interface BasicStory {
+	bob: typeof bob;
 	layoutFixed: boolean;
 	dropdown: boolean;
 }
@@ -117,14 +118,16 @@ function getTemplate(args: BasicStory): string {
 `;
 }
 
-const Template: StoryFn<BasicStory> = (args) => ({
+const Template = (args: BasicStory) => ({
 	props: args,
 	template: getTemplate(args),
 });
 
-export const Basic = Template.bind({});
-Basic.args = {
-	bob,
-	layoutFixed: false,
-	dropdown: false,
+export const Basic: StoryObj<BasicStory> = {
+	args: {
+		bob,
+		layoutFixed: false,
+		dropdown: false,
+	},
+	render: Template,
 };

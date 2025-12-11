@@ -1,4 +1,4 @@
-import { Meta, StoryFn } from '@storybook/angular';
+import { Meta, StoryObj } from '@storybook/angular';
 
 interface GroupStory {}
 
@@ -69,10 +69,12 @@ function getTemplate(args: GroupStory): string {
 </div>`;
 }
 
-const Template: StoryFn<GroupStory> = (args) => ({
+const Template = (args: GroupStory) => ({
 	props: args,
 	template: getTemplate(args),
 });
 
-export const Group = Template.bind({});
-Group.args = {};
+export const Group: StoryObj<GroupStory> = {
+	args: {},
+	render: Template,
+};

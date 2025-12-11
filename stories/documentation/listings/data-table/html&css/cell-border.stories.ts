@@ -1,4 +1,4 @@
-import { Meta, StoryFn } from '@storybook/angular';
+import { Meta, StoryObj } from '@storybook/angular';
 
 interface CellBorderStory {}
 
@@ -40,10 +40,12 @@ function getTemplate(args: CellBorderStory): string {
 </div>`;
 }
 
-const Template: StoryFn<CellBorderStory> = (args) => ({
+const Template = (args: CellBorderStory) => ({
 	props: args,
 	template: getTemplate(args),
 });
 
-export const CellBorder = Template.bind({});
-CellBorder.args = {};
+export const CellBorder: StoryObj<CellBorderStory> = {
+	args: {},
+	render: Template,
+};

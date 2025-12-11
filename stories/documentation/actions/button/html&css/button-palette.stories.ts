@@ -1,4 +1,4 @@
-import { Meta, StoryFn } from '@storybook/angular';
+import { Meta, StoryObj } from '@storybook/angular';
 
 interface ButtonPaletteStory {}
 
@@ -12,7 +12,7 @@ function getTemplate(args: ButtonPaletteStory): string {
 <button type="button" class="button palette-error">Button</button>`;
 }
 
-const Template: StoryFn<ButtonPaletteStory> = (args) => ({
+const Template = (args: ButtonPaletteStory) => ({
 	props: args,
 	template: getTemplate(args),
 	styles: [
@@ -25,5 +25,7 @@ const Template: StoryFn<ButtonPaletteStory> = (args) => ({
 	],
 });
 
-export const PaletteButton = Template.bind({});
-PaletteButton.args = {};
+export const PaletteButton: StoryObj<ButtonPaletteStory> = {
+	args: {},
+	render: Template,
+};

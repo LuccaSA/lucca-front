@@ -18,7 +18,7 @@ import {
 } from '@lucca-front/ng/dialog';
 import { FormFieldComponent } from '@lucca-front/ng/form-field';
 import { CheckboxInputComponent, NumberInputComponent, TextInputComponent } from '@lucca-front/ng/forms';
-import { applicationConfig, Meta, StoryFn } from '@storybook/angular';
+import { applicationConfig, Meta, StoryObj } from '@storybook/angular';
 import { map } from 'rxjs';
 import { StoryModelDisplayComponent } from 'stories/helpers/story-model-display.component';
 
@@ -171,7 +171,7 @@ export default {
 	decorators: [applicationConfig({ providers: [provideRouter(routes, withComponentInputBinding()), DataProvider] })],
 } as Meta;
 
-const Template: StoryFn<DialogRoutingStory> = (args) => ({
+const Template = (args: DialogRoutingStory) => ({
 	props: args,
 });
 
@@ -242,7 +242,10 @@ class DialogRoutingStory {
 }
 `;
 
-export const Basic = Template.bind({});
+export const Basic: StoryObj<DialogRoutingStory> = {
+	args: {},
+	render: Template,
+};
 Basic.parameters = {
 	// Disable controls as they are not modifiable because of ComponentWrapper
 	controls: { include: [] },

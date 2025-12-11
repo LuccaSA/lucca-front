@@ -1,4 +1,4 @@
-import { Meta, StoryFn } from '@storybook/angular';
+import { Meta, StoryObj } from '@storybook/angular';
 
 interface CommentWrapperStory {}
 
@@ -57,7 +57,7 @@ function getTemplate(args: CommentWrapperStory): string {
 </ol>`;
 }
 
-const Template: StoryFn<CommentWrapperStory> = (args) => ({
+const Template = (args: CommentWrapperStory) => ({
 	props: args,
 	template: getTemplate(args),
 	styles: [
@@ -72,5 +72,7 @@ const Template: StoryFn<CommentWrapperStory> = (args) => ({
 	],
 });
 
-export const Wrapper = Template.bind({});
-Wrapper.args = {};
+export const Wrapper: StoryObj<CommentWrapperStory> = {
+	args: {},
+	render: Template,
+};

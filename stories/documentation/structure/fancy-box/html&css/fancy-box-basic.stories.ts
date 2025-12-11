@@ -1,5 +1,5 @@
 import { FancyBoxComponent } from '@lucca-front/ng/fancy-box';
-import { Meta, moduleMetadata, StoryFn } from '@storybook/angular';
+import { Meta, moduleMetadata, StoryObj } from '@storybook/angular';
 
 interface FancyBoxBasicStory {
 	content: string;
@@ -73,16 +73,18 @@ function getTemplate(args: FancyBoxBasicStory): string {
 </div>`;
 }
 
-const Template: StoryFn<FancyBoxBasicStory> = (args) => ({
+const Template = (args: FancyBoxBasicStory) => ({
 	props: args,
 	template: getTemplate(args),
 });
 
-export const Basic = Template.bind({});
-Basic.args = {
-	content: 'Fancy box content',
-	backgroundLeft: 'https://cdn.lucca.fr/transverse/prisme/visuals/fancy-box/background-left-plant.svg',
-	backgroundRight: 'https://cdn.lucca.fr/transverse/prisme/visuals/fancy-box/background-right-candies.svg',
-	foreground: 'https://cdn.lucca.fr/transverse/prisme/visuals/fancy-box/foreground-right-pizza.svg',
-	size: null,
+export const Basic: StoryObj<FancyBoxBasicStory> = {
+	args: {
+		content: 'Fancy box content',
+		backgroundLeft: 'https://cdn.lucca.fr/transverse/prisme/visuals/fancy-box/background-left-plant.svg',
+		backgroundRight: 'https://cdn.lucca.fr/transverse/prisme/visuals/fancy-box/background-right-candies.svg',
+		foreground: 'https://cdn.lucca.fr/transverse/prisme/visuals/fancy-box/foreground-right-pizza.svg',
+		size: null,
+	},
+	render: Template,
 };

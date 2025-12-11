@@ -1,4 +1,4 @@
-import { Meta, StoryFn } from '@storybook/angular';
+import { Meta, StoryObj } from '@storybook/angular';
 
 interface UserAvatarGroupClickableStory {}
 
@@ -36,10 +36,12 @@ function getTemplate(args: UserAvatarGroupClickableStory): string {
 </ul>`;
 }
 
-const Template: StoryFn<UserAvatarGroupClickableStory> = (args) => ({
+const Template = (args: UserAvatarGroupClickableStory) => ({
 	props: args,
 	template: getTemplate(args),
 });
 
-export const Clickable = Template.bind({});
-Clickable.args = {};
+export const Clickable: StoryObj<UserAvatarGroupClickableStory> = {
+	args: {},
+	render: Template,
+};

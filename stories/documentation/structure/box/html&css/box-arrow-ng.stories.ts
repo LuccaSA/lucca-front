@@ -2,7 +2,7 @@ import { FormsModule } from '@angular/forms';
 import { BrowserAnimationsModule } from '@angular/platform-browser/animations';
 import { FormFieldComponent } from '@lucca-front/ng/form-field';
 import { RadioComponent, RadioGroupInputComponent } from '@lucca-front/ng/forms';
-import { Meta, moduleMetadata, StoryFn } from '@storybook/angular';
+import { Meta, moduleMetadata, StoryObj } from '@storybook/angular';
 
 interface ArrowBasicStory {
 	s: boolean;
@@ -82,7 +82,7 @@ function getTemplate(args: ArrowBasicStory): string {
 	}
 }
 
-const Template: StoryFn<ArrowBasicStory> = (args) => ({
+const Template = (args: ArrowBasicStory) => ({
 	props: args,
 	template: getTemplate(args),
 	styles: [
@@ -94,5 +94,7 @@ const Template: StoryFn<ArrowBasicStory> = (args) => ({
 	],
 });
 
-export const Basic = Template.bind({});
-Basic.args = { s: false, neutral: true, field: 'radio', checked: true };
+export const Basic: StoryObj<ArrowBasicStory> = {
+	args: { s: false, neutral: true, field: 'radio', checked: true },
+	render: Template,
+};
