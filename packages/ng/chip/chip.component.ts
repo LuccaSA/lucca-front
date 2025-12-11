@@ -8,7 +8,7 @@ import { LuTooltipModule } from '@lucca-front/ng/tooltip';
 import { LU_CHIP_TRANSLATIONS } from './chip.translate';
 
 @Component({
-	selector: 'lu-chip',
+	selector: 'lu-chip, button[luChip], a[luChip]',
 	templateUrl: './chip.component.html',
 	styleUrl: './chip.component.scss',
 	encapsulation: ViewEncapsulation.None,
