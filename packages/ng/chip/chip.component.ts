@@ -16,7 +16,7 @@ import { LU_CHIP_TRANSLATIONS } from './chip.translate';
 	host: {
 		class: 'chip',
 		'[class.is-disabled]': 'disabled()',
-		'[class.palette-product]': 'classPalette()',
+		'[class.palette-product]': 'palette() === "product"',
 		'[class.mod-S]': 'size() === "S"',
 		'[class.palette-warning]': 'isWarning()',
 		'[class.palette-critical]': 'isCritical()',
@@ -38,13 +38,12 @@ export class ChipComponent {
 
 	readonly state = input<'warning' | 'critical' | null>(null);
 
-	readonly stateAlt = computed(() => (this.isWarning() ? 'Warning' : this.isCritical() ? 'Error' : ''));
+	readonly stateAlt = computed(() => (this.isWarning() ? this.intl.warning : this.isCritical() ? this.intl.error : ''));
 
 	readonly icon = input<LuccaIcon | null>(null);
 
 	readonly kill = output<Event>();
 
-	readonly classPalette = computed<boolean>(() => this.palette() === 'product');
 	readonly isWarning = computed<boolean>(() => this.state() === 'warning');
 	readonly isCritical = computed<boolean>(() => this.state() === 'critical');
 	readonly displayedIcon = computed<LuccaIcon | null>(() => (this.isWarning() ? 'signWarning' : this.isCritical() ? 'signError' : this.icon()));
