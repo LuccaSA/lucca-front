@@ -1,6 +1,7 @@
 @mixin vars {
 	--components-fieldset-title: var(--pr-t-font-heading-3);
-	--components-fieldset-gap: var(--pr-t-spacings-150);
+	--components-fieldset-gap: var(--pr-t-spacings-100);
 	--components-fieldset-contentMaxWidth: 40rem;
 	--components-fieldset-title-iconRotation: 0deg;
+	--components-fieldset-title-content-alignItems: flex-start;
 }

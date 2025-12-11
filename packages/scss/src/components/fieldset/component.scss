@@ -27,7 +27,7 @@
 			background-color: transparent;
 			text-align: start;
 			display: flex;
-			align-items: flex-start;
+			align-items: var(--components-fieldset-title-content-alignItems);
 			justify-content: space-between;
 			gap: var(--components-fieldset-gap);
 			max-inline-size: var(--components-fieldset-contentMaxWidth);

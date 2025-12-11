@@ -22,5 +22,9 @@
 		&:has(.fieldset-title-content[aria-expanded='true']) {
 			@include expanded;
 		}
+
+		&:has(.fieldset-title-content-action:not(:empty)) {
+			@include withAction;
+		}
 	}
 }
