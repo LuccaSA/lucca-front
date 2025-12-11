@@ -4,55 +4,68 @@
 	>
 	<ng-container mainLayoutMain>
 		<div class="container">
-			<button luButton type="button">Click me</button>
+			<button luButton type="button" (click)="useEmptyGroup()">Go Empty</button>
+			<button luButton type="button" (click)="toggleLoadingState()">
+				{{ isLoading() ? "Stop Loading" : "Start Loading" }}
+			</button>
+			<button luButton type="button" (click)="useGroupMocks()">Go Tasks</button>
 
-			<table class="indexTable">
-				<thead class="indexTable-head">
-					<tr class="indexTable-head-row">
-						<th class="indexTable-head-row-cell" scope="col">Tâche</th>
-						<th class="indexTable-head-row-cell" scope="col">Statut</th>
-						<th class="indexTable-head-row-cell" scope="col">Affectée par</th>
-						<th class="indexTable-head-row-cell" scope="col">Date cible</th>
-					</tr>
-				</thead>
-				@for (group of groups; track $index) {
-					@let groupId = "group-" + $index;
-					<tbody class="indexTable-body">
-						<tr class="indexTable-body-row" [id]="groupId + '-header'">
-							<th class="indexTable-body-row-transparentCell" colspan="3" [id]="groupId">
-								<div class="indexTable-body-row-cellTitle">
-									<button
-										class="indexTable-body-row-cellTitle-button button"
-										aria-expanded="true"
-										[attr.aria-controls]="group | ariaControls: groupId"
-										type="button"
-									>
-										<span class="lucca-icon icon-arrowChevronTop" aria-hidden="true"></span>
-										<span class="pr-u-mask">Hide details</span>
-									</button>
-									<span class="indexTable-body-row-cellTitle-title">{{ group.groupName }}</span>
-									<span class="numericBadge">{{ group.tasks.length }}<span class="pr-u-mask"> lines</span></span>
-								</div>
-							</th>
+			<h1 class="pr-u-marginBlock200">Mes tâches <lu-numeric-badge [value]="tasksCount()" [loading]="isLoading()" /></h1>
+
+			@if (isLoading()) {
+				<lu-skeleton-index-table class="pr-u-displayBlock pr-u-marginBlock100" [cols]="4" [rows]="5" />
+			} @else if (isEmpty()) {
+				<lu-empty-state-section description="Aucune tâche. C'est les vacances !" />
+			} @else {
+				<table class="indexTable pr-u-marginBlock100">
+					<thead class="indexTable-head">
+						<tr class="indexTable-head-row">
+							<th class="indexTable-head-row-cell" scope="col">Tâche</th>
+							<th class="indexTable-head-row-cell" scope="col">Statut</th>
+							<th class="indexTable-head-row-cell" scope="col">Affectée par</th>
+							<th class="indexTable-head-row-cell" scope="col">Date cible</th>
 						</tr>
-						@for (task of group.tasks; track task.id) {
-							@let rowId = groupId + "-row-" + $index;
-							<tr class="indexTable-body-row" [id]="rowId">
-								<td class="indexTable-body-row-cell" [headers]="groupId">
-									<a href="#" class="indexTable-body-row-cell-link">{{ task.name }}</a>
-								</td>
-								<td class="indexTable-body-row-cell" [headers]="groupId">
-									<lu-status-badge [label]="labelByStatus[task.status]" [palette]="paletteByStatus[task.status]" />
-								</td>
-								<td class="indexTable-body-row-cell" [headers]="groupId">
-									<lu-user-tile class="mod-XS" [user]="task.user" />
-								</td>
-								<td class="indexTable-body-row-cell" [headers]="groupId">{{ task.dueDate | date: "shortDate" }}</td>
+					</thead>
+					@for (group of groups(); track $index) {
+						@let groupId = "group-" + $index;
+						<tbody class="indexTable-body">
+							<tr class="indexTable-body-row" [id]="groupId + '-header'">
+								<th class="indexTable-body-row-transparentCell" colspan="3" [id]="groupId">
+									<div class="indexTable-body-row-cellTitle">
+										<button
+											class="indexTable-body-row-cellTitle-button button"
+											aria-expanded="true"
+											[attr.aria-controls]="group | ariaControls: groupId"
+											type="button"
+										>
+											<span class="lucca-icon icon-arrowChevronTop" aria-hidden="true"></span>
+											<span class="pr-u-mask">Hide details</span>
+										</button>
+										<span class="indexTable-body-row-cellTitle-title">{{ group.groupName }}</span>
+										<lu-numeric-badge [value]="group.tasks.length" />
+										<span class="pr-u-mask"> lines</span>
+									</div>
+								</th>
 							</tr>
-						}
-					</tbody>
-				}
-			</table>
+							@for (task of group.tasks; track task.id) {
+								@let rowId = groupId + "-row-" + $index;
+								<tr class="indexTable-body-row" [id]="rowId">
+									<td class="indexTable-body-row-cell" [headers]="groupId">
+										<a href="#" class="indexTable-body-row-cell-link">{{ task.name }}</a>
+									</td>
+									<td class="indexTable-body-row-cell" [headers]="groupId">
+										<lu-status-badge [label]="labelByStatus[task.status]" [palette]="paletteByStatus[task.status]" />
+									</td>
+									<td class="indexTable-body-row-cell" [headers]="groupId">
+										<lu-user-tile class="mod-XS" [user]="task.user" />
+									</td>
+									<td class="indexTable-body-row-cell" [headers]="groupId">{{ task.dueDate | date: "shortDate" }}</td>
+								</tr>
+							}
+						</tbody>
+					}
+				</table>
+			}
 		</div>
 	</ng-container>
 	<ng-container mainLayoutFooter
