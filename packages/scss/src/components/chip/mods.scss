@@ -19,10 +19,6 @@
 @mixin clickable {
 	cursor: pointer;
 	text-decoration: none;
-
-	&:hover {
-		//background-color: var(--palettes-600, var(--palettes-neutral-100));
-	}
 }
 
 @mixin focusVisible {
