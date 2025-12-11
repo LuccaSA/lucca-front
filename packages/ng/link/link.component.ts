@@ -68,8 +68,11 @@ export class LinkComponent {
 
 	@HostListener('click')
 	redirect(): void {
-		if (!this.disabled() && this.routerLinkCommands() && this.external) {
-			afterNextRender(() => window.open(this.router.serializeUrl(this.router.createUrlTree([this.routerLinkCommands()])), '_blank'), { injector: this.#injector });
+		const routerLinkCommands = this.routerLinkCommands();
+		if (!this.disabled() && routerLinkCommands && this.external) {
+			afterNextRender(() => window.open(this.router.serializeUrl(this.router.createUrlTree(Array.isArray(routerLinkCommands) ? routerLinkCommands : [routerLinkCommands])), '_blank'), {
+				injector: this.#injector,
+			});
 		}
 	}
 
