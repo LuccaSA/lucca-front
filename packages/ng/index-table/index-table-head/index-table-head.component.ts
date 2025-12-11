@@ -1,4 +1,4 @@
-import { Component, contentChildren, forwardRef, inject, ViewEncapsulation } from '@angular/core';
+import { ChangeDetectionStrategy, Component, contentChildren, forwardRef, inject, ViewEncapsulation } from '@angular/core';
 
 import { IndexTableRowCellHeaderComponent } from '../index-table-cell-header/index-table-cell-header.component';
 import { LU_INDEX_TABLE_INSTANCE } from '../index-table.token';
@@ -20,6 +20,7 @@ import { LU_INDEX_TABLE_HEAD_INSTANCE } from './index-table-head.token';
 			useExisting: forwardRef(() => IndexTableHeadComponent),
 		},
 	],
+	changeDetection: ChangeDetectionStrategy.OnPush,
 })
 export class IndexTableHeadComponent {
 	cols = contentChildren(IndexTableRowCellHeaderComponent, { descendants: true });

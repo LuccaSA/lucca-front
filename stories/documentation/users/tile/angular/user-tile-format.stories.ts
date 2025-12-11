@@ -29,10 +29,10 @@ const template: StoryFn<LuUserTileComponent> = (args) => ({
 	props: args,
 });
 
-export const format = template.bind({});
-format.args = {};
+export const Format = template.bind({});
+Format.args = {};
 
-format.parameters = {
+Format.parameters = {
 	controls: { include: [] },
 	docs: {
 		source: {

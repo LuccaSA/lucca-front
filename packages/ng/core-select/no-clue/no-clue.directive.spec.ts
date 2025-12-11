@@ -1,6 +1,6 @@
 import { provideHttpClient } from '@angular/common/http';
 import { provideHttpClientTesting } from '@angular/common/http/testing';
-import { Component, viewChild } from '@angular/core';
+import { ChangeDetectionStrategy, Component, viewChild } from '@angular/core';
 import { TestBed } from '@angular/core/testing';
 import { LuSimpleSelectInputComponent } from '@lucca-front/ng/simple-select';
 import { LuCoreSelectApiV3Directive } from '../api/api-v3.directive';
@@ -11,6 +11,7 @@ import { LuCoreSelectNoClueDirective } from './no-clue.directive';
 	selector: 'lu-test-v3-no-clue',
 	imports: [LuSimpleSelectInputComponent, LuCoreSelectNoClueDirective, LuCoreSelectApiV4Directive],
 	template: `<lu-simple-select noClue apiV4="/some/api" />`,
+	changeDetection: ChangeDetectionStrategy.OnPush,
 })
 class TestV3NoClueComponent {
 	select = viewChild.required(LuSimpleSelectInputComponent);
@@ -20,6 +21,7 @@ class TestV3NoClueComponent {
 	selector: 'lu-test-v4-no-clue',
 	imports: [LuSimpleSelectInputComponent, LuCoreSelectNoClueDirective, LuCoreSelectApiV3Directive],
 	template: `<lu-simple-select noClue apiV3="/some/api" />`,
+	changeDetection: ChangeDetectionStrategy.OnPush,
 })
 class TestV4NoClueComponent {
 	select = viewChild.required(LuSimpleSelectInputComponent);

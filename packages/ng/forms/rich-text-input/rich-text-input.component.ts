@@ -1,3 +1,4 @@
+import { CommonModule } from '@angular/common';
 import {
 	booleanAttribute,
 	ChangeDetectionStrategy,
@@ -19,10 +20,10 @@ import {
 } from '@angular/core';
 import { ControlValueAccessor, NG_VALUE_ACCESSOR } from '@angular/forms';
 import { createEmptyHistoryState, registerHistory } from '@lexical/history';
-import { $canShowPlaceholderCurry } from '@lexical/text';
+import { $canShowPlaceholderCurry, $isRootTextContentEmpty } from '@lexical/text';
 import { mergeRegister } from '@lexical/utils';
 import { FormFieldComponent, InputDirective } from '@lucca-front/ng/form-field';
-import { $getRoot, createEditor, Klass, LexicalEditor, LexicalNode, LexicalNodeReplacement } from 'lexical';
+import { $getRoot, createEditor, Klass, LexicalEditor, LexicalNode, LexicalNodeReplacement, UpdateListenerPayload } from 'lexical';
 import { RICH_TEXT_FORMATTER, RichTextFormatter } from './formatters';
 
 export const INITIAL_UPDATE_TAG = 'initial-update';
@@ -48,7 +49,7 @@ export const RICH_TEXT_PLUGIN_COMPONENT = new InjectionToken<RichTextPluginCompo
 
 @Component({
 	selector: 'lu-rich-text-input',
-	imports: [InputDirective],
+	imports: [InputDirective, CommonModule],
 	templateUrl: './rich-text-input.component.html',
 	styleUrl: './rich-text-input.component.scss',
 	encapsulation: ViewEncapsulation.None,
@@ -68,6 +69,7 @@ export class RichTextInputComponent implements OnInit, OnDestroy, ControlValueAc
 	readonly placeholder = input<string>('');
 	readonly disableSpellcheck = input(false, { transform: booleanAttribute });
 	readonly autoResize = input(false, { transform: booleanAttribute });
+	readonly hideToolbar = input(false, { transform: booleanAttribute });
 
 	readonly content = viewChild.required<string, ElementRef<HTMLElement>>('content', {
 		read: ElementRef,
@@ -108,15 +110,7 @@ export class RichTextInputComponent implements OnInit, OnDestroy, ControlValueAc
 		this.#cleanup = mergeRegister(
 			this.#richTextFormatter.registerTextPlugin(this.#editor),
 			registerHistory(this.#editor, createEmptyHistoryState(), 300),
-			this.#editor.registerUpdateListener(({ tags, dirtyElements }) => {
-				if (!tags.has(INITIAL_UPDATE_TAG) && dirtyElements.size) {
-					const result = this.#richTextFormatter.format(this.#editor);
-					this.touch();
-					this.#onChange?.(result);
-				}
-				const currentCanShowPlaceholder = this.#editor.getEditorState().read($canShowPlaceholderCurry(this.#editor.isComposing()));
-				this.currentCanShowPlaceholder.set(currentCanShowPlaceholder);
-			}),
+			this.#editor.registerUpdateListener((payload) => this.#onEditorUpdate(payload)),
 		);
 		this.#editor.setRootElement(this.content().nativeElement);
 
@@ -195,5 +189,22 @@ export class RichTextInputComponent implements OnInit, OnDestroy, ControlValueAc
 				return p;
 			}
 		});
+	}
+
+	#onEditorUpdate({ tags, dirtyElements }: UpdateListenerPayload) {
+		const isComposing = this.#editor.isComposing();
+		if (!tags.has(INITIAL_UPDATE_TAG) && dirtyElements.size) {
+			this.#editor.read(() => {
+				let result = '';
+				// ignore empty nodes
+				if (!$isRootTextContentEmpty(isComposing, false)) {
+					result = this.#richTextFormatter.format(this.#editor);
+				}
+				this.touch();
+				this.#onChange?.(result);
+			});
+		}
+		const currentCanShowPlaceholder = this.#editor.getEditorState().read($canShowPlaceholderCurry(isComposing));
+		this.currentCanShowPlaceholder.set(currentCanShowPlaceholder);
 	}
 }

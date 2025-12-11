@@ -1,13 +1,11 @@
 import { Meta, StoryFn } from '@storybook/angular';
 
-interface TextFlowBasicStory {}
-
 export default {
 	title: 'Documentation/Texts/Text flow/HTML&CSS/Basic',
 	argTypes: {},
 } as Meta;
 
-function getTemplate(args: TextFlowBasicStory): string {
+function getTemplate(): string {
 	return `<div class="textFlow">
 	<h1>Heading 1</h1>
 	<h2>Heading 2</h2>
@@ -31,10 +29,8 @@ function getTemplate(args: TextFlowBasicStory): string {
 </div>`;
 }
 
-const Template: StoryFn<TextFlowBasicStory> = (args) => ({
-	props: args,
-	template: getTemplate(args),
+const Template: StoryFn = () => ({
+	template: getTemplate(),
 });
 
 export const Basic = Template.bind({});
-Basic.args = {};

@@ -17,4 +17,4 @@ export default {
 
 const template: StoryFn<ChipStory> = () => ({});
 
-export const basic = template.bind({});
+export const Basic = template.bind({});

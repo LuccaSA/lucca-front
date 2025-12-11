@@ -1,4 +1,4 @@
-import { Component, forwardRef, ViewEncapsulation } from '@angular/core';
+import { ChangeDetectionStrategy, Component, forwardRef, ViewEncapsulation } from '@angular/core';
 import { LU_DATA_TABLE_FOOT_INSTANCE } from './data-table-foot.token';
 
 @Component({
@@ -15,5 +15,6 @@ import { LU_DATA_TABLE_FOOT_INSTANCE } from './data-table-foot.token';
 			useExisting: forwardRef(() => DataTableFootComponent),
 		},
 	],
+	changeDetection: ChangeDetectionStrategy.OnPush,
 })
 export class DataTableFootComponent {}

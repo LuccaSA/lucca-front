@@ -1,5 +1,5 @@
 import { NgTemplateOutlet } from '@angular/common';
-import { booleanAttribute, Component, computed, input, output, ViewEncapsulation } from '@angular/core';
+import { booleanAttribute, ChangeDetectionStrategy, Component, computed, input, output, ViewEncapsulation } from '@angular/core';
 import { getIntl } from '@lucca-front/ng/core';
 
 import { LuccaIcon } from '@lucca-front/icons';
@@ -21,6 +21,7 @@ import { LU_CHIP_TRANSLATIONS } from './chip.translate';
 		'[class.palette-warning]': 'isWarning()',
 		'[class.palette-critical]': 'isCritical()',
 	},
+	changeDetection: ChangeDetectionStrategy.OnPush,
 })
 export class ChipComponent {
 	intl = getIntl(LU_CHIP_TRANSLATIONS);

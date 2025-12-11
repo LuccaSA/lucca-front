@@ -22,4 +22,4 @@ export default {
 
 const template: StoryFn<NumericBadgeStory> = () => ({});
 
-export const basic = template.bind({});
+export const Basic = template.bind({});

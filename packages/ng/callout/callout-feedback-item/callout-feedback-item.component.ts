@@ -1,4 +1,4 @@
-import { Component, Directive, ViewEncapsulation } from '@angular/core';
+import { ChangeDetectionStrategy, Component, Directive, ViewEncapsulation } from '@angular/core';
 
 @Directive({
 	// eslint-disable-next-line @angular-eslint/directive-selector
@@ -15,5 +15,6 @@ export class CalloutFeedbackItemDescriptionDirective {}
 		class: 'calloutFeedbackList-item',
 	},
 	encapsulation: ViewEncapsulation.None,
+	changeDetection: ChangeDetectionStrategy.OnPush,
 })
 export class CalloutFeedbackItemComponent {}

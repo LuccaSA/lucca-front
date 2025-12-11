@@ -8,10 +8,6 @@
 	}
 
 	@layer mods {
-		&.mod-outlined {
-			@include outlined;
-		}
-
 		// .mod-text deprecated
 		&.mod-text,
 		&.mod-ghost {

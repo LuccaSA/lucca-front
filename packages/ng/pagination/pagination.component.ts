@@ -27,7 +27,7 @@ export class PaginationComponent {
 
 	constructor() {
 		effect(() => {
-			if (this.mod() === 'default' && (!this.from() || !this.to() || !this.itemsCount())) {
+			if (this.mod() === 'default' && (this.from() === null || this.to() === null || this.itemsCount() === null)) {
 				throw new Error('Pagination in "default" mode requires "from", "to", and "itemsCount" inputs.');
 			}
 		});

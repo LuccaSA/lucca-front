@@ -45,7 +45,7 @@ export default {
 		}),
 	],
 	render: (args: SortableListBasicStories) => {
-		const small = args.small ? ` small="true"` : '';
+		const small = args.small ? ` small` : '';
 		const clickable = args.clickable ? ` clickable` : '';
 		const unclearable = args.unclearable ? ` unclearable` : '';
 		const label = ` label="${args.label}"`;

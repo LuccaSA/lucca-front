@@ -1,9 +1,8 @@
-import { Component, computed, ElementRef, inject, viewChild } from '@angular/core';
+import { ChangeDetectionStrategy, Component, computed, ElementRef, inject, viewChild } from '@angular/core';
 import { toSignal } from '@angular/core/rxjs-interop';
 import { ChipComponent } from '@lucca-front/ng/chip';
 import { getIntl } from '@lucca-front/ng/core';
 import { ɵLuOptionOutletDirective } from '@lucca-front/ng/core-select';
-import { NumericBadgeComponent } from '@lucca-front/ng/numeric-badge';
 import { LU_MULTI_SELECT_DISPLAYER_TRANSLATIONS } from '../../displayer/default-displayer.translate';
 import { LuMultiSelectDisplayerInputDirective } from '../../displayer/displayer-input.directive';
 import { LuMultiSelectInputComponent } from '../select-input.component';
@@ -11,7 +10,8 @@ import { MULTI_SELECT_WITH_SELECT_ALL_CONTEXT } from './select-all.models';
 
 @Component({
 	selector: 'lu-multi-select-all-displayer',
-	imports: [NumericBadgeComponent, LuMultiSelectDisplayerInputDirective, ɵLuOptionOutletDirective, ChipComponent],
+	imports: [LuMultiSelectDisplayerInputDirective, ɵLuOptionOutletDirective, ChipComponent],
+	changeDetection: ChangeDetectionStrategy.OnPush,
 	template: `
 		<div class="multipleSelect-displayer mod-filter" [class.is-filled]="isFilled()">
 			<input type="text" luMultiSelectDisplayerInput />
@@ -23,8 +23,7 @@ import { MULTI_SELECT_WITH_SELECT_ALL_CONTEXT } from './select-all.models';
 							<ng-template *luOptionOutlet="select.displayerTpl(); value: select.value[0]" />
 						</lu-chip>
 					} @else {
-						<lu-numeric-badge disableTooltip class="multipleSelect-displayer-numericBadge" [value]="displayerCount()" />
-						<span class="multipleSelect-displayer-label"> {{ displayerLabel() }} </span>
+						<lu-chip class="multipleSelect-displayer-chip" unkillable>{{ displayerCount() }} {{ displayerLabel() }}</lu-chip>
 					}
 				</div>
 			}
@@ -49,7 +48,7 @@ export class LuMultiSelectAllDisplayerComponent<TValue> {
 	readonly intl = getIntl(LU_MULTI_SELECT_DISPLAYER_TRANSLATIONS);
 	readonly disabled = toSignal(this.select.disabled$);
 
-	inputElementRef = viewChild.required<LuMultiSelectDisplayerInputDirective<TValue>, ElementRef<HTMLInputElement>>(LuMultiSelectDisplayerInputDirective, { read: ElementRef });
+	readonly inputElementRef = viewChild.required<LuMultiSelectDisplayerInputDirective<TValue>, ElementRef<HTMLInputElement>>(LuMultiSelectDisplayerInputDirective, { read: ElementRef });
 
 	unselectOption(option: TValue, $event: Event): void {
 		$event.stopPropagation();

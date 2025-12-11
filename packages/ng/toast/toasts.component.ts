@@ -10,6 +10,7 @@ import { LU_TOAST_TRANSLATIONS } from './toasts.translate';
 @Component({
 	selector: 'lu-toasts',
 	templateUrl: './toasts.component.html',
+	styleUrl: './toasts.component.scss',
 	changeDetection: ChangeDetectionStrategy.OnPush,
 	imports: [AsyncPipe, PortalDirective],
 })

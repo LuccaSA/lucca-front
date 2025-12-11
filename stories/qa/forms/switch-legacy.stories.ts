@@ -8,7 +8,7 @@ import { Meta, StoryFn, moduleMetadata } from '@storybook/angular';
 class SwitchLegacyStory {}
 
 export default {
-	title: 'QA/Forms/Switch Legacy',
+	title: 'QA/Forms/SwitchLegacy',
 	component: SwitchLegacyStory,
 	decorators: [
 		moduleMetadata({
@@ -19,4 +19,4 @@ export default {
 
 const template: StoryFn<SwitchLegacyStory> = () => ({});
 
-export const basic = template.bind({});
+export const Basic = template.bind({});
