@@ -10,7 +10,11 @@
 			</button>
 			<button luButton type="button" (click)="useGroupMocks()">Go Tasks</button>
 
-			<h1 class="pr-u-marginBlock200">Mes tâches <lu-numeric-badge [value]="tasksCount()" [loading]="isLoading()" /></h1>
+			<h1 class="pr-u-marginBlock200">
+				Mes tâches
+				<lu-numeric-badge [value]="tasksCount()" [loading]="isLoading()" />
+				<lu-numeric-badge [value]="expandedGroupsCount()" [loading]="isLoading()" />
+			</h1>
 
 			@if (isLoading()) {
 				<lu-skeleton-index-table class="pr-u-displayBlock pr-u-marginBlock100" [cols]="4" [rows]="5" />
@@ -34,12 +38,12 @@
 									<div class="indexTable-body-row-cellTitle">
 										<button
 											class="indexTable-body-row-cellTitle-button button"
-											aria-expanded="true"
+											[attr.aria-expanded]="group.isExpanded"
 											[attr.aria-controls]="group | ariaControls: groupId"
+											(click)="toggleGroup(group)"
 											type="button"
 										>
-											<span class="lucca-icon icon-arrowChevronTop" aria-hidden="true"></span>
-											<span class="pr-u-mask">Hide details</span>
+											<lu-icon icon="arrowChevronTop" alt="Hide details" />
 										</button>
 										<span class="indexTable-body-row-cellTitle-title">{{ group.groupName }}</span>
 										<lu-numeric-badge [value]="group.tasks.length" />
@@ -49,7 +53,7 @@
 							</tr>
 							@for (task of group.tasks; track task.id) {
 								@let rowId = groupId + "-row-" + $index;
-								<tr class="indexTable-body-row" [id]="rowId">
+								<tr class="indexTable-body-row" [id]="rowId" [class.is-closed]="!group.isExpanded">
 									<td class="indexTable-body-row-cell" [headers]="groupId">
 										<a href="#" class="indexTable-body-row-cell-link">{{ task.name }}</a>
 									</td>

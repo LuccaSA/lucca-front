@@ -3,6 +3,7 @@ import { ChangeDetectionStrategy, Component, computed, Pipe, PipeTransform, sign
 import { ButtonComponent } from '@lucca-front/ng/button';
 import { Palette } from '@lucca-front/ng/core';
 import { EmptyStateSectionComponent } from '@lucca-front/ng/empty-state';
+import { IconComponent } from '@lucca-front/ng/icon';
 import { MainLayoutComponent } from '@lucca-front/ng/main-layout';
 import { NumericBadgeComponent } from '@lucca-front/ng/numeric-badge';
 import { SkeletonIndexTableComponent } from '@lucca-front/ng/skeleton';
@@ -21,6 +22,7 @@ type TaskStatus = 'Completed' | 'InProgress' | 'Late';
 
 interface TaskGroup {
 	groupName: string;
+	isExpanded: boolean;
 	tasks: Task[];
 }
 
@@ -36,6 +38,7 @@ export class AriaControlsPipe implements PipeTransform {
 const groupsMock: TaskGroup[] = [
 	{
 		groupName: 'Novembre 2025',
+		isExpanded: true,
 		tasks: [
 			{
 				id: 1,
@@ -55,6 +58,7 @@ const groupsMock: TaskGroup[] = [
 	},
 	{
 		groupName: 'Octobre 2025',
+		isExpanded: true,
 		tasks: [
 			{
 				id: 3,
@@ -82,6 +86,7 @@ const groupsMock: TaskGroup[] = [
 
 	{
 		groupName: 'Septembre 2025',
+		isExpanded: false,
 		tasks: [
 			{
 				id: 6,
@@ -107,6 +112,7 @@ const groupsMock: TaskGroup[] = [
 		SkeletonIndexTableComponent,
 		EmptyStateSectionComponent,
 		NumericBadgeComponent,
+		IconComponent,
 	],
 	changeDetection: ChangeDetectionStrategy.OnPush,
 	templateUrl: './data-table.component.html',
@@ -123,6 +129,7 @@ export class DataTableComponent {
 	// });
 
 	tasksCount = computed(() => this.groups().reduce((count, group) => count + group.tasks.length, 0));
+	expandedGroupsCount = computed(() => this.groups().filter((group) => group.isExpanded).length);
 
 	// Complètement équivalent à tasksCount
 	// tasksCount2 = computed(() => {
@@ -154,15 +161,29 @@ export class DataTableComponent {
 		}, 1000);
 	}
 
-	useGroupMocks() {
+	toggleGroup(groupToUpdate: TaskGroup): void {
+		const updatedGroups = this.groups().map((group) => {
+			if (group === groupToUpdate) {
+				return { ...group, isExpanded: !group.isExpanded };
+			} else {
+				return group;
+			}
+		});
+
+		// const updatedGroups2 = this.groups().map((group) => (group === groupToUpdate ? { ...group, isExpanded: !group.isExpanded } : group));
+
+		this.groups.set(updatedGroups);
+	}
+
+	useGroupMocks(): void {
 		this.groups.set(groupsMock);
 	}
 
-	useEmptyGroup() {
+	useEmptyGroup(): void {
 		this.groups.set([]);
 	}
 
-	toggleLoadingState() {
+	toggleLoadingState(): void {
 		this.isLoading.set(!this.isLoading());
 	}
 }
