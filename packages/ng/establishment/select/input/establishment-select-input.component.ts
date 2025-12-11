@@ -52,9 +52,9 @@ import { LU_ESTABLISHMENT_SELECT_INPUT_TRANSLATIONS } from './establishment-sele
 	],
 })
 export class LuEstablishmentSelectInputComponent<
-		D extends import('../../establishment.model').ILuEstablishment = import('../../establishment.model').ILuEstablishment,
-		P extends ILuOptionPickerPanel<D> = ILuOptionPickerPanel<D>,
-	>
+	D extends import('../../establishment.model').ILuEstablishment = import('../../establishment.model').ILuEstablishment,
+	P extends ILuOptionPickerPanel<D> = ILuOptionPickerPanel<D>,
+>
 	extends ALuSelectInputComponent<D, P>
 	implements ControlValueAccessor, ILuInputWithPicker<D>, OnInit, AfterViewInit
 {

@@ -48,9 +48,9 @@ import { LU_DEPARTMENT_SELECT_INPUT_TRANSLATIONS } from './department-select-inp
 	],
 })
 export class LuDepartmentSelectInputComponent<
-		D extends import('../../department.model').ILuDepartment = import('../../department.model').ILuDepartment,
-		P extends ILuTreeOptionPickerPanel<D> = ILuTreeOptionPickerPanel<D>,
-	>
+	D extends import('../../department.model').ILuDepartment = import('../../department.model').ILuDepartment,
+	P extends ILuTreeOptionPickerPanel<D> = ILuTreeOptionPickerPanel<D>,
+>
 	extends ALuSelectInputComponent<D, P>
 	implements ControlValueAccessor, ILuInputWithPicker<D>, AfterViewInit
 {
