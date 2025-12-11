@@ -12,7 +12,7 @@
 @mixin component($atRoot: namespace.$defaultAtRoot) {
 	display: flex;
 	align-items: flex-start;
-	flex-wrap: wrap;
+	flex-wrap: var(--components-filterBar-flexWrap);
 	gap: var(--pr-t-spacings-100);
 
 	.textField {
