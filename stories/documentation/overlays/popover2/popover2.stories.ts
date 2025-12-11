@@ -40,21 +40,21 @@ export const Basic: StoryObj<PopoverDirective> = {
 			openDelay = ' ' + args.luPopoverOpenDelay + 'ms';
 		}
 		return {
-			template: cleanupTemplate(`<div class="demo">
+			template: `<div class="demo">
 	<button luButton [luPopover2]="contentRef" ${generateInputs(args, argTypes)}>${action}${openDelay} !</button>
 	<ng-template #contentRef>
 		<div class="popover-contentOptional">
-			<h3>Titre</h3>
+			<h3>Title</h3>
 			<lu-divider />
 			<lu-listing checklist palette="success">
-				<lu-listing-item>Élement de liste</lu-listing-item>
-				<lu-listing-item>Élement de liste</lu-listing-item>
-				<lu-listing-item>Élement de liste</lu-listing-item>
+				<lu-listing-item>item item item item item item item item item item item</lu-listing-item>
+				<lu-listing-item>item</lu-listing-item>
+				<lu-listing-item>item</lu-listing-item>
 			</lu-listing>
 		</div>
 	</ng-template>
 </div>
-`),
+`,
 			styles: [
 				`
 	.demo {
