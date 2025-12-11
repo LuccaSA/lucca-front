@@ -24,7 +24,7 @@ const Template: StoryFn = (args) => ({
 			DropdownMenuComponent,
 		],
 	},
-	template: `<button type="button" luButton [luDropdown]="dropdownSample">Dropdown</button>
+	template: `<button type="button" luButton disclosure [luDropdown]="dropdownSample">Dropdown<lu-icon icon="arrowChevronBottom" /></button>
 
 <ng-template #dropdownSample>
 	<lu-dropdown-menu>
