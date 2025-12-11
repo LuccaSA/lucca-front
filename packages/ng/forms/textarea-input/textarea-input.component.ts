@@ -1,4 +1,4 @@
-import { booleanAttribute, ChangeDetectionStrategy, ChangeDetectorRef, Component, DestroyRef, ElementRef, inject, input, Input, OnInit, ViewChild, ViewEncapsulation } from '@angular/core';
+import { booleanAttribute, ChangeDetectionStrategy, ChangeDetectorRef, Component, DestroyRef, ElementRef, inject, input, OnInit, viewChild, ViewEncapsulation } from '@angular/core';
 import { takeUntilDestroyed } from '@angular/core/rxjs-interop';
 import { ReactiveFormsModule } from '@angular/forms';
 import { InputDirective } from '@lucca-front/ng/form-field';
@@ -15,31 +15,22 @@ import { NoopValueAccessorDirective } from '../noop-value-accessor.directive';
 	changeDetection: ChangeDetectionStrategy.OnPush,
 })
 export class TextareaInputComponent implements OnInit {
-	@ViewChild('parent')
-	parent?: ElementRef<HTMLElement>;
-
-	ngControl = injectNgControl();
-
 	#cdr = inject(ChangeDetectorRef);
 	#destroyRef = inject(DestroyRef);
 
-	@Input()
-	placeholder: string = '';
+	ngControl = injectNgControl();
 
-	@Input()
-	rows?: number = 3;
+	readonly parent = viewChild<ElementRef<HTMLElement>>('parent');
 
-	@Input({
-		transform: booleanAttribute,
-	})
-	autoResize = false;
+	readonly placeholder = input<string>('');
 
-	@Input({
-		transform: booleanAttribute,
-	})
-	autoResizeScrollIntoView = false;
+	readonly rows = input<number>(3);
 
-	disableSpeelcheck = input(false, { transform: booleanAttribute });
+	readonly autoResize = input(false, { transform: booleanAttribute });
+
+	readonly autoResizeScrollIntoView = input(false, { transform: booleanAttribute });
+
+	readonly disableSpeelcheck = input(false, { transform: booleanAttribute });
 
 	cloneValue = '';
 
@@ -48,7 +39,7 @@ export class TextareaInputComponent implements OnInit {
 		this.#cdr.detectChanges(); // Needed to apply cloneValue to autoresize HTML clone
 
 		if (this.autoResizeScrollIntoView && this.parent) {
-			this.parent.nativeElement.scrollIntoView({
+			this.parent().nativeElement.scrollIntoView({
 				behavior: 'instant',
 				block: 'end',
 			});
