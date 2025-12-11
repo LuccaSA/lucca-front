@@ -11,6 +11,7 @@ import {
 	inject,
 	input,
 	numberAttribute,
+	OnInit,
 	signal,
 	viewChild,
 	ViewEncapsulation,
@@ -38,7 +39,7 @@ import { LU_DATA_TABLE_INSTANCE } from './data-table.token';
 	],
 	changeDetection: ChangeDetectionStrategy.OnPush,
 })
-export class DataTableComponent {
+export class DataTableComponent implements OnInit {
 	#elementRef = inject<ElementRef<Element>>(ElementRef);
 	tableRef = viewChild<ElementRef<Element>>('tableRef');
 
@@ -117,5 +118,11 @@ export class DataTableComponent {
 		afterNextRender(() => {
 			this.scroll();
 		});
+	}
+
+	ngOnInit(): void {
+		new ResizeObserver(() => {
+			this.scroll();
+		}).observe(this.tableRef().nativeElement);
 	}
 }
