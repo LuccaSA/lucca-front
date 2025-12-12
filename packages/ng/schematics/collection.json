@@ -36,6 +36,11 @@
       "factory": "./tokens-typo/index",
       "schema": "./tokens-typo/schema.json"
     },
+    "color-text": {
+      "description": "Replace color text tokens.",
+      "factory": "./color-text/index",
+      "schema": "./color-text/schema.json"
+    },
     "palettes": {
       "description": "Replace palettes with new names.",
       "factory": "./palettes/index",
