@@ -1,45 +1,37 @@
-import { Directive, HostBinding, inject, Input, OnDestroy } from '@angular/core';
+import { computed, Directive, inject, input, OnDestroy } from '@angular/core';
 import { FormFieldComponent } from '@lucca-front/ng/form-field';
 import { filter, take } from 'rxjs/operators';
+import { ɵeffectWithDeps } from '../core/signal';
 
 @Directive({
 	selector: '[luFormFieldId]',
+	host: {
+		'[attr.id]': 'id()',
+	},
 })
 export class FormFieldIdDirective implements OnDestroy {
 	#formFieldComponent = inject(FormFieldComponent);
 
-	#suffix: string;
+	readonly suffix = input.required<string>({ alias: 'luFormFieldId' });
 
-	@Input({
-		required: true,
-		alias: 'luFormFieldId',
-	})
-	set suffix(suffix: string) {
-		this.#suffix = suffix;
-		if (this.#formFieldComponent.ready) {
-			this.applyLabelledBy();
-		}
-	}
+	readonly labelledByStrategy = input<'prepend' | 'append'>('append');
 
-	@Input()
-	labelledByStrategy: 'prepend' | 'append' = 'append';
-
-	@HostBinding('attr.id')
-	get id(): string {
-		return `${this.#formFieldComponent.id()}-${this.#suffix}`;
-	}
+	readonly id = computed(() => `${this.#formFieldComponent.id()}-${this.suffix()}`);
 
 	constructor() {
-		this.#formFieldComponent.ready$.pipe(filter(Boolean), take(1)).subscribe(() => {
-			this.applyLabelledBy();
+		ɵeffectWithDeps([this.suffix], (suffix) => {
+			if (suffix && this.#formFieldComponent.ready) {
+				this.applyLabelledBy();
+			}
 		});
+		this.#formFieldComponent.ready$.pipe(filter(Boolean), take(1)).subscribe(() => this.applyLabelledBy());
 	}
 
 	private applyLabelledBy(): void {
-		this.#formFieldComponent.addLabelledBy(`${this.#formFieldComponent.id()}-${this.#suffix}`, this.labelledByStrategy === 'prepend');
+		this.#formFieldComponent.addLabelledBy(this.id(), this.labelledByStrategy() === 'prepend');
 	}
 
 	ngOnDestroy(): void {
-		this.#formFieldComponent.removeLabelledBy(`${this.#formFieldComponent.id()}-${this.#suffix}`);
+		this.#formFieldComponent.removeLabelledBy(this.id());
 	}
 }
