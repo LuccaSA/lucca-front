@@ -1,4 +1,4 @@
-import { booleanAttribute, Component, input, ViewEncapsulation } from '@angular/core';
+import { booleanAttribute, ChangeDetectionStrategy, Component, computed, input, ViewEncapsulation } from '@angular/core';
 
 @Component({
 	selector: 'lu-container',
@@ -7,19 +7,20 @@ import { booleanAttribute, Component, input, ViewEncapsulation } from '@angular/
 	encapsulation: ViewEncapsulation.None,
 	host: {
 		class: 'container',
-		'[class]': 'classesConfig',
+		'[class]': 'classesConfig()',
 	},
+	changeDetection: ChangeDetectionStrategy.OnPush,
 })
 export class ContainerComponent {
 	center = input(false, { transform: booleanAttribute });
 	overflow = input(false, { transform: booleanAttribute });
 	max = input<null | 'M' | 'L' | 'XL' | 'XXL' | 'XXXL'>(null);
 
-	get classesConfig() {
+	classesConfig = computed(() => {
 		return {
 			['mod-center']: this.center(),
 			['mod-overflow']: this.overflow(),
 			[`mod-max${this.max()}`]: !!this.max(),
 		};
-	}
+	});
 }

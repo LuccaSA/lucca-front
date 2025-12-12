@@ -9,12 +9,12 @@ export default {
 function getTemplate(args: SizesStory): string {
 	return `<div>
 	<div class="pr-u-widthFitContent demo-utility"><code class="code">pr-u-widthFitContent</code></div>
-	<div class="pr-u-width100\% demo-utility"><code class="code">pr-u-width100\\%</code></div>
+	<div class="pr-u-width100% demo-utility"><code class="code">pr-u-width100%</code></div>
 	<div class="pr-u-minWidth0 demo-utility"><code class="code">pr-u-minWidth0</code></div>
 </div>
 <div>
 	<div class="pr-u-heightFitContent demo-utility"><code class="code">pr-u-heightFitContent</code></div>
-	<div class="pr-u-height100\% demo-utility"><code class="code">pr-u-height100\\%</code></div>
+	<div class="pr-u-height100% demo-utility"><code class="code">pr-u-height100%</code></div>
 	<div class="pr-u-minHeight0 demo-utility"><code class="code">pr-u-minHeight0</code></div>
 </div>`;
 }

@@ -26,30 +26,37 @@ export default {
 			control: {
 				type: 'select',
 			},
+			description: "Définit l'état de tri d'une cellule head.",
 		},
 		align: {
 			options: ['', 'start', 'center', 'end'],
 			control: {
 				type: 'select',
 			},
+			description: 'Aligne le contenu des cellules horizontalement.',
 		},
 		verticalAlign: {
 			options: ['', 'top', 'middle', 'bottom'],
 			control: {
 				type: 'select',
 			},
+			description: 'Aligne le contenu des cellules verticalement.',
 		},
 		inlineSize: {
 			if: { arg: 'layoutFixed', truthy: true },
+			description: "Modifie la largeur d'une colonne lorsque <code>layoutFixed</code> est activé.",
 		},
 		selected: {
 			if: { arg: 'selectable', truthy: true },
+			description: "Applique l'état actif à une ligne sélectionnable.",
 		},
 		selectedLabel: {
 			if: { arg: 'selectable', truthy: true },
+			description: "Texte alternatif restitué à la sélection d'une ligne.",
 		},
 		selectedLabelHead: {
 			if: { arg: 'selectable', truthy: true },
+			description: "Texte alternatif restitué à la sélection de l'ensemble des lignes.",
 		},
 		disabled: {
 			if: { arg: 'selectable', truthy: true },
@@ -57,20 +64,90 @@ export default {
 		inlineSizeValue: {
 			if: { arg: 'inlineSize', truthy: true },
 		},
-		groupLabel: {
-			if: { arg: 'group', truthy: true },
-		},
 		groupButtonAlt: {
 			if: { arg: 'group', truthy: true },
+			description: "Texte alternatif restitué au focus de l'action sur le groupe.",
 		},
 		expanded: {
 			if: { arg: 'group', truthy: true },
+			description: 'Affiche le groupe dans son état étendu.',
 		},
 		cols: {
 			control: { type: 'range', min: 2, max: 6 },
+			description: 'Modifie le nombre de colonnes dans la story.',
 		},
 		lines: {
 			control: { type: 'range', min: 2, max: 6 },
+			description: 'Modifie le nombre de lignes dans la story.',
+		},
+		tfoot: {
+			control: {
+				type: 'boolean',
+			},
+			description: 'Affiche un footer.',
+		},
+		stickyHeader: {
+			control: {
+				type: 'boolean',
+			},
+			description: 'Conserve le header visible en cas de scroll.',
+		},
+		hover: {
+			control: {
+				type: 'boolean',
+			},
+			description: 'Marque la ligne au survol pour faciliter la lisibilité des tableaux larges (ne sous-entend pas une interaction).',
+		},
+		cellBorder: {
+			control: {
+				type: 'boolean',
+			},
+			description: 'Ajoute un séparateur vertical entre les cellules.',
+		},
+		layoutFixed: {
+			control: {
+				type: 'boolean',
+			},
+			description: 'Applique une largeur fixe à une colonne. La largeur peut être redéfinie via <code>fixedWidth</code>.',
+		},
+		selectable: {
+			control: {
+				type: 'boolean',
+			},
+			description: 'Rend les lignes du tableau sélectionnables via des checkbox.',
+		},
+		group: {
+			control: {
+				type: 'boolean',
+			},
+			description: 'Présente un groupe de lignes dans la story.',
+		},
+		editable: {
+			control: {
+				type: 'boolean',
+			},
+			description: 'Ajoute un champ de saisi dans une cellule.',
+		},
+		nested: {
+			control: {
+				type: 'boolean',
+			},
+			description: "Réduit le <code>border-radius</code> du tableau pour l'imbriquer dans un composant structure.",
+		},
+		actions: {
+			control: {
+				type: 'boolean',
+			},
+			description: "Ajoute des actions rapides à droite d'une ligne.",
+		},
+		pagination: {
+			control: {
+				type: 'boolean',
+			},
+			description: 'Ajoute une pagination au tableau.',
+		},
+		drag: {
+			control: { type: 'boolean' },
 		},
 	},
 	decorators: [
@@ -94,7 +171,6 @@ export default {
 			],
 		}),
 	],
-
 	render: (args, { argTypes }) => {
 		const {
 			cols,
@@ -103,7 +179,6 @@ export default {
 			verticalAlign,
 			align,
 			group,
-			groupLabel,
 			expanded,
 			groupButtonAlt,
 			tfoot,
@@ -121,6 +196,7 @@ export default {
 			selectedLabel,
 			selectedLabelHead,
 			pagination,
+			drag,
 			...inputArgs
 		} = args;
 
@@ -132,6 +208,7 @@ export default {
 		const sortAttr = sort ? ` sort="${sort}"` : ``;
 		const inlineSizeAttr = inlineSize && inlineSizeValue !== `` ? ` inlineSize="${inlineSizeValue}"` : ``;
 		const selectableAttr = selectable ? ` selectable` : ``;
+		const draggable = drag ? ` drag` : ``;
 		const selectedAttr = selected ? ` [selected]="true"` : ``;
 		const selectableLabelAttr = selectable ? ` selectedLabel="${selectedLabel}"` : ``;
 		const selectableLabelHeadAttr = selectable ? ` selectedLabel="${selectedLabelHead}"` : ``;
@@ -190,7 +267,7 @@ export default {
 		const samplePortalContentTpl = group
 			? `
 <ng-template #samplePortalContent>
-	${groupLabel}
+	Group
 	<lu-numeric-badge [value]="${lines}" />
 </ng-template>`
 			: ``;
@@ -207,7 +284,7 @@ export default {
 
 		return {
 			props: { example: text },
-			template: `<lu-data-table${layoutFixedAttr}${hoverAttr}${cellBorderAttr}${selectableAttr}${verticalAlignAttr}${nestedAttr}>
+			template: `<lu-data-table${layoutFixedAttr}${hoverAttr}${cellBorderAttr}${selectableAttr}${verticalAlignAttr}${nestedAttr}${draggable}>
 	<thead luDataTableHead>
 		<tr luDataTableRow${selectableLabelHeadAttr}>
 			<th luDataTableCell>${textHeader}</th>${colsHeaderContent}
@@ -249,12 +326,12 @@ export const Basic: StoryObj = {
 		selectedLabel: 'Sélectionner cette ligne',
 		selectedLabelHead: 'Sélectionner toutes les lignes',
 		group: false,
-		groupLabel: 'Group',
 		groupButtonAlt: 'Afficher X lignes supplémentaires',
 		expanded: false,
 		editable: false,
 		actions: false,
 		nested: false,
 		pagination: false,
+		drag: false,
 	},
 };

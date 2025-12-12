@@ -3,6 +3,7 @@
 @use '@lucca-front/scss/src/commons/utils/text';
 @use '@lucca-front/icons/src/icon/exports' as icon;
 @use '@lucca-front/scss/src/commons/utils/namespace';
+@use '@lucca-front/scss/src/commons/utils/color';
 
 @mixin component($atRoot: namespace.$defaultAtRoot) {
 	display: flex;
@@ -32,6 +33,15 @@
 
 		.multipleSelect-displayer-chip {
 			min-inline-size: 0;
+
+			@include color.palette('product');
+		}
+
+		.multipleSelect-displayer-chip-value {
+			max-inline-size: 8.75rem;
+			white-space: nowrap;
+			overflow: hidden;
+			text-overflow: ellipsis;
 		}
 
 		.multipleSelect-displayer-search {

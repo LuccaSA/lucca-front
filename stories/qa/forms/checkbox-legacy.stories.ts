@@ -8,7 +8,7 @@ import { Meta, StoryFn, moduleMetadata } from '@storybook/angular';
 class CheckboxLegacyStory {}
 
 export default {
-	title: 'QA/Forms/Checkbox Legacy',
+	title: 'QA/Forms/CheckboxLegacy',
 	component: CheckboxLegacyStory,
 	decorators: [
 		moduleMetadata({
@@ -19,4 +19,4 @@ export default {
 
 const template: StoryFn<CheckboxLegacyStory> = () => ({});
 
-export const basic = template.bind({});
+export const Basic = template.bind({});

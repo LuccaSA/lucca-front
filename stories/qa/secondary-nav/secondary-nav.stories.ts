@@ -8,10 +8,10 @@ import { Meta, StoryFn } from '@storybook/angular';
 class SecondaryNavStory {}
 
 export default {
-	title: 'QA/Secondary Nav',
+	title: 'QA/SecondaryNav',
 	component: SecondaryNavStory,
 } as Meta;
 
 const template: StoryFn<SecondaryNavStory> = () => ({});
 
-export const basic = template.bind({});
+export const Basic = template.bind({});

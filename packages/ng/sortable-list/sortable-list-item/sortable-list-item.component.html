@@ -1,4 +1,8 @@
-<div class="sortableList-item-handler"></div>
+@if (drag()) {
+	<span class="sortableList-item-handler button" cdkDragHandle>
+		<lu-icon icon="drag" />
+	</span>
+}
 <div class="sortableList-item-content">
 	<p class="sortableList-item-content-description">{{ label() }}</p>
 	@if (helperMessage()?.length) {

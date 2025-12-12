@@ -12,7 +12,7 @@ import { Meta, StoryFn, applicationConfig } from '@storybook/angular';
 class EmptyStateSectionStory {}
 
 export default {
-	title: 'QA/Empty State/Section',
+	title: 'QA/EmptyState/Section',
 	component: EmptyStateSectionStory,
 	decorators: [
 		applicationConfig({
@@ -23,4 +23,4 @@ export default {
 
 const template: StoryFn<EmptyStateSectionStory> = () => ({});
 
-export const basic = template.bind({});
+export const Basic = template.bind({});
