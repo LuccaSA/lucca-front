@@ -28,5 +28,7 @@
 }
 
 @mixin varsWrapper {
-
+	--components-resourceCardWrapper-gridTemplateColumnsMin: 20rem;
+	--components-resourceCardWrapper-display: flex;
+	--components-resourceCardWrapper-borderRadius: var(--pr-t-border-radius-structure);
 }
