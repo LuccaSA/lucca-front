@@ -1,5 +1,5 @@
 import { NgTemplateOutlet } from '@angular/common';
-import { booleanAttribute, ChangeDetectionStrategy, Component, computed, contentChildren, forwardRef, HostBinding, inject, Input, input, TemplateRef, ViewEncapsulation } from '@angular/core';
+import { booleanAttribute, ChangeDetectionStrategy, Component, computed, contentChildren, forwardRef, inject, input, TemplateRef, ViewEncapsulation } from '@angular/core';
 import { PortalContent } from '@lucca-front/ng/core';
 import { CommentComponent } from '../comment/comment.component';
 import { COMMENT_BLOCK_INSTANCE, COMMENT_CHAT_INSTANCE } from '../token';
@@ -8,10 +8,11 @@ import { COMMENT_BLOCK_INSTANCE, COMMENT_CHAT_INSTANCE } from '../token';
 	selector: 'lu-comment-block',
 	imports: [NgTemplateOutlet],
 	templateUrl: './comment-block.component.html',
-
+	host: {
+		'[attr.role]': 'role()',
+	},
 	encapsulation: ViewEncapsulation.None,
 	changeDetection: ChangeDetectionStrategy.OnPush,
-
 	providers: [
 		{
 			provide: COMMENT_BLOCK_INSTANCE,
@@ -20,39 +21,23 @@ import { COMMENT_BLOCK_INSTANCE, COMMENT_CHAT_INSTANCE } from '../token';
 	],
 })
 export class CommentBlockComponent {
-	@Input({
-		transform: booleanAttribute,
-	})
-	compact = false;
-
-	@Input({
-		transform: booleanAttribute,
-	})
-	small = false;
-
-	@Input({
-		transform: booleanAttribute,
-	})
-	chatAnswer = false;
-
-	comments = contentChildren(CommentComponent, { read: CommentComponent, descendants: true });
-
-	authorName = input<PortalContent>();
-
-	avatar = input<TemplateRef<unknown>>();
-
-	size = input<'S' | 'M'>();
-
-	noAvatar = computed(() => {
-		return !this.avatar();
-	});
-
-	isSingleComment = computed(() => {
-		return this.comments().length === 1;
-	});
-
 	#chatBlock = inject(COMMENT_CHAT_INSTANCE, { optional: true });
 
-	@HostBinding('attr.role')
-	public role = this.#chatBlock ? 'listitem' : null;
+	readonly comments = contentChildren(CommentComponent, { read: CommentComponent, descendants: true });
+
+	readonly compact = input(false, { transform: booleanAttribute });
+
+	readonly small = input(false, { transform: booleanAttribute });
+
+	readonly chatAnswer = input(false, { transform: booleanAttribute });
+
+	readonly authorName = input<PortalContent>();
+
+	readonly avatar = input<TemplateRef<unknown>>();
+
+	readonly size = input<'S' | 'M'>();
+
+	readonly noAvatar = computed(() => !this.avatar());
+	readonly isSingleComment = computed(() => this.comments().length === 1);
+	readonly role = computed(() => (this.#chatBlock ? 'listitem' : null));
 }
