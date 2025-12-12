@@ -1,9 +1,9 @@
-import { Observable } from 'rxjs';
+import { OutputEmitterRef } from '@angular/core';
 
 export interface ILuScrollable {
-	onScroll: Observable<Event>;
-	onScrollTop: Observable<Event>;
-	onScrollBottom: Observable<Event>;
-	onScrollLeft: Observable<Event>;
-	onScrollRight: Observable<Event>;
+	onScroll: OutputEmitterRef<Event>;
+	onScrollTop: OutputEmitterRef<Event>;
+	onScrollBottom: OutputEmitterRef<Event>;
+	onScrollLeft: OutputEmitterRef<Event>;
+	onScrollRight: OutputEmitterRef<Event>;
 }
