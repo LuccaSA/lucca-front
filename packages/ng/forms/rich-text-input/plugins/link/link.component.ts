@@ -1,5 +1,7 @@
-import { AfterViewInit, ChangeDetectionStrategy, Component, ElementRef, forwardRef, inject, OnDestroy, signal, TemplateRef, viewChild, ViewContainerRef } from '@angular/core';
+import { CommonModule } from '@angular/common';
+import { ChangeDetectionStrategy, Component, ElementRef, forwardRef, inject, NgZone, OnDestroy, signal, viewChild } from '@angular/core';
 import { AutoLinkNode, createLinkMatcherWithRegExp, LinkNode, registerAutoLink } from '@lexical/link';
+import { $isAtNodeEnd } from '@lexical/selection';
 import { $getNearestNodeOfType, mergeRegister } from '@lexical/utils';
 import { ButtonComponent } from '@lucca-front/ng/button';
 import { getIntl } from '@lucca-front/ng/core';
@@ -8,14 +10,12 @@ import { IconComponent } from '@lucca-front/ng/icon';
 import { LinkComponent as LuLinkComponent } from '@lucca-front/ng/link';
 import { PopoverDirective } from '@lucca-front/ng/popover2';
 import { LuTooltipTriggerDirective } from '@lucca-front/ng/tooltip';
-import { $getSelection, $isRangeSelection, LexicalEditor, SELECTION_CHANGE_COMMAND } from 'lexical';
+import { $getSelection, $isRangeSelection, CLICK_COMMAND, COMMAND_PRIORITY_LOW, LexicalEditor, SELECTION_CHANGE_COMMAND } from 'lexical';
 import { RICH_TEXT_PLUGIN_COMPONENT, RichTextPluginComponent } from '../../rich-text-input.component';
 import { LU_RICH_TEXT_INPUT_TRANSLATIONS } from '../../rich-text-input.translate';
 import { getSelectedNode } from '../../utils';
 import { LinkDialogComponent } from './link-dialog';
 import { FORMAT_LINK, registerLink, registerLinkSelectionChange } from './link.command';
-import { PopoverAutoLinkNode } from './popover-autolink-node';
-import { PopoverLinkNode } from './popover-link-node';
 
 const URL_REGEX = /https?:\/\/(?:www\.)?[-a-zA-Z0-9@:%._+~#=]{1,256}\.[a-zA-Z0-9()]{1,6}\b(?:[-a-zA-Z0-9()@:%_+.~#?&/=;,[\]]*)/;
 const EMAIL_REGEX = /(([^<>()[\]\\.,;:\s@"]+(\.[^<>()[\]\\.,;:\s@"]+)*)|(".+"))@((\[[0-9]{1,3}\.[0-9]{1,3}\.[0-9]{1,3}\.[0-9]{1,3}\])|(([a-zA-Z\-0-9]+\.)+[a-zA-Z]{2,}))/;
@@ -25,7 +25,7 @@ const EMAIL_REGEX = /(([^<>()[\]\\.,;:\s@"]+(\.[^<>()[\]\\.,;:\s@"]+)*)|(".+"))@
 	changeDetection: ChangeDetectionStrategy.OnPush,
 	templateUrl: './link.component.html',
 	styleUrl: 'link.component.scss',
-	imports: [ButtonComponent, IconComponent, LuTooltipTriggerDirective, PopoverDirective, LuLinkComponent],
+	imports: [CommonModule, ButtonComponent, IconComponent, LuTooltipTriggerDirective, PopoverDirective, LuLinkComponent],
 	host: {
 		class: 'richTextField-toolbar-col-group',
 	},
@@ -37,95 +37,93 @@ const EMAIL_REGEX = /(([^<>()[\]\\.,;:\s@"]+(\.[^<>()[\]\\.,;:\s@"]+)*)|(".+"))@
 		},
 	],
 })
-export class LinkComponent implements OnDestroy, AfterViewInit, RichTextPluginComponent {
+export class LinkComponent implements OnDestroy, RichTextPluginComponent {
 	readonly #luDialogService = inject(LuDialogService);
-	readonly #viewContainerRef = inject(ViewContainerRef);
+	readonly #ngZone = inject(NgZone);
 
-	readonly linkNodeTemplate = viewChild.required('linkNodeTemplate', { read: TemplateRef });
 	readonly element = viewChild.required('element', { read: ElementRef<HTMLButtonElement> });
+	readonly popoverDirective = viewChild(PopoverDirective);
 
 	readonly tabindex = signal<number>(-1);
 	readonly active = signal(false);
 	readonly isDisabled = signal(false);
+
+	readonly selectedLinkElement = signal<HTMLElement | null>(null);
+	readonly selectedLinkUrl = signal<string>('');
 
 	#editor?: LexicalEditor;
 	intl = getIntl(LU_RICH_TEXT_INPUT_TRANSLATIONS);
 
 	#registeredCommands: () => void = () => {};
 
-	constructor() {
-		PopoverLinkNode.setViewContainerRef(this.#viewContainerRef);
-		PopoverAutoLinkNode.setViewContainerRef(this.#viewContainerRef);
-	}
-
-	ngAfterViewInit() {
-		PopoverLinkNode.setTemplateRef(this.linkNodeTemplate());
-		PopoverAutoLinkNode.setTemplateRef(this.linkNodeTemplate());
-	}
-
 	setEditorInstance(editor: LexicalEditor) {
 		this.#editor = editor;
 		this.#registeredCommands = mergeRegister(
 			registerLink(editor),
 			registerLinkSelectionChange(editor, (isLink) => this.active.set(isLink)),
+			editor.registerUpdateListener(({ editorState }) => {
+				editorState.read(() => {
+					const selection = $getSelection();
+					if ($isRangeSelection(selection)) {
+						const node = getSelectedNode(selection);
+						const linkNode = $getNearestNodeOfType(node, LinkNode) || $getNearestNodeOfType(node, AutoLinkNode);
+
+						if (linkNode) {
+							const element = editor.getElementByKey(linkNode.getKey());
+							this.selectedLinkElement.set(element);
+							this.selectedLinkUrl.set(linkNode.getURL());
+						} else {
+							this.selectedLinkElement.set(null);
+							this.selectedLinkUrl.set('');
+						}
+					} else {
+						this.selectedLinkElement.set(null);
+					}
+				});
+			}),
 			registerAutoLink(editor, {
 				matchers: [createLinkMatcherWithRegExp(URL_REGEX, (text) => (text.startsWith('http') ? text : `https://${text}`)), createLinkMatcherWithRegExp(EMAIL_REGEX, (text) => `mailto:${text}`)],
 				changeHandlers: [],
 			}),
+			editor.registerCommand(
+				CLICK_COMMAND,
+				() => {
+					const selection = $getSelection();
+					if ($isRangeSelection(selection)) {
+						const node = getSelectedNode(selection);
+						const linkNode = $getNearestNodeOfType(node, LinkNode) || $getNearestNodeOfType(node, AutoLinkNode);
+						const isNotAtEnd = !($isAtNodeEnd(selection.anchor) && selection.isCollapsed());
+
+						if (linkNode && isNotAtEnd) {
+							this.#ngZone.run(() => {
+								this.popoverDirective()?.openPopover(true);
+							});
+						}
+					}
+					return false;
+				},
+				COMMAND_PRIORITY_LOW,
+			),
 		);
 	}
 
 	getLexicalNodes() {
-		return [
-			PopoverLinkNode,
-			PopoverAutoLinkNode,
-			{
-				replace: LinkNode,
-				with: (node: LinkNode) =>
-					new PopoverLinkNode(node.getURL(), {
-						rel: node.getRel(),
-						target: node.getTarget(),
-						title: node.getTitle(),
-					}),
-				withKlass: PopoverLinkNode,
-			},
-			{
-				replace: AutoLinkNode,
-				with: (node: AutoLinkNode) =>
-					new PopoverAutoLinkNode(node.getURL(), {
-						rel: node.getRel(),
-						target: node.getTarget(),
-						title: node.getTitle(),
-					}),
-				withKlass: PopoverAutoLinkNode,
-			},
-		];
+		return [LinkNode, AutoLinkNode];
 	}
 
 	ngOnDestroy() {
 		this.#registeredCommands();
 	}
 
-	dispatchCommand(urlFromPopover?: string) {
+	dispatchCommand() {
+		this.popoverDirective()?.close();
 		this.#editor?.read(() => {
-			let url = urlFromPopover || '';
-			// Only try to get URL from selection if not provided from popover
-			if (!url) {
-				const selection = $getSelection();
-				if ($isRangeSelection(selection)) {
-					const node = getSelectedNode(selection);
-					const parent = $getNearestNodeOfType(node, LinkNode);
-					if (parent) {
-						url = parent.getURL();
-					}
-				}
-			}
-
+			console.log('opening dialog', { url: this.selectedLinkUrl() });
 			this.#luDialogService
 				.open({
 					content: LinkDialogComponent,
 					size: 'S',
-					data: url,
+					data: this.selectedLinkUrl(),
 				})
 				.result$.subscribe((href) => {
 					let newHref = href;
@@ -139,6 +137,7 @@ export class LinkComponent implements OnDestroy, AfterViewInit, RichTextPluginCo
 	}
 
 	deleteLink() {
+		this.popoverDirective()?.close();
 		this.#editor?.dispatchCommand(FORMAT_LINK, undefined);
 		this.#editor?.dispatchCommand(SELECTION_CHANGE_COMMAND, undefined);
 	}
