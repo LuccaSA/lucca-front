@@ -37,12 +37,17 @@ Once the files are sent, the display management changes depending on the approac
 
 <lu-form-field label="Label">
   @let fileUpload = fileUploadFeature.fileUploads()[0];
-  <lu-single-file-upload [accept]="accept" (filePicked)="fileUploadFeature.uploadFiles([$event])"
-                         [entry]="fileUpload | luFileEntry" [state]="fileUpload?.state"
-                         [previewUrl]="getPreviewUrl(fileUpload)" [inlineMessageError]="fileUpload?.error?.detail"
-                         (deleteFile)="deleteFile(fileUpload)" />
+  <lu-single-file-upload
+    [accept]="accept"
+    [entry]="fileUpload | luFileEntry"
+    [state]="fileUpload?.state"
+    [previewUrl]="getPreviewUrl(fileUpload)"
+    [editable]="true"
+    (filePicked)="fileUploadFeature.uploadFiles([$event])"
+    (editFile)="onFileEdit()"
+    (deleteFile)="deleteFile(fileUpload)"
+  />
 </lu-form-field>
-```
 
 ### Details
 
