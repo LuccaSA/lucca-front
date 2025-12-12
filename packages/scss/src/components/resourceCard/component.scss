@@ -1,8 +1,4 @@
-@use '@lucca-front/icons/src/icon/exports' as icon;
 @use '@lucca-front/scss/src/commons/utils/namespace';
-@use '@lucca-front/scss/src/commons/utils/reset';
-@use '@lucca-front/scss/src/components/button/exports' as button;
-@use '@lucca-front/scss/src/components/numericBadge/exports' as numericBadge;
 
 @mixin component($atRoot: namespace.$defaultAtRoot) {
 	border-radius: var(--components-resourceCard-borderRadius);
@@ -24,13 +20,10 @@
 	@at-root ($atRoot) {
 		.resourceCard-layout {
 			isolation: isolate;
-			padding: var(--components-resourceCard-layout-padding); // var(--pr-t-spacings-150) var(--pr-t-spacings-100);
+			padding: var(--pr-t-spacings-100);
 			display: grid;
 			grid-template: var(--components-resourceCard-layout-gridTemplate);
 			align-items: var(--components-resourceCard-layout-alignItems);
-			row-gap: var(--components-resourceCard-layout-rowGap);
-
-			// column-gap: var(--pr-t-spacings-100);
 		}
 
 		.resourceCard-layout-header {
@@ -39,7 +32,9 @@
 			flex-direction: var(--components-resourceCard-layout-header-flexDirection);
 			gap: var(--pr-t-spacings-50) var(--pr-t-spacings-100);
 			grid-area: header;
-
+			padding-block-start: var(--components-resourceCard-layout-header-paddingBlockStart);
+			padding-block-end: var(--components-resourceCard-layout-header-paddingBlockEnd);
+			padding-inline: var(--pr-t-spacings-100);
 		}
 
 		.resourceCard-layout-header-infos {
@@ -57,21 +52,18 @@
 			display: flex;
 			gap: var(--pr-t-spacings-100);
 			align-items: center;
-
-			.numericBadge {
-				@include numericBadge.S;
-			}
 		}
 
-		.resourceCard-layout-header-title-link {
-			color: inherit;
+		.resourceCard-layout-header-title-action {
+			color: var(--components-resourceCard-layout-header-title-action-color);
 			text-decoration: none;
 			outline: none;
+			cursor: var(--components-resourceCard-layout-header-title-action-cursor);
 
 			&::after {
-				// content: '';
+				content: '';
 				position: absolute;
-				inset: var(--components-resourceCard-layout-header-title-link-after-inset);
+				inset: var(--components-resourceCard-layout-header-title-action-after-inset);
 				border-radius: var(--components-resourceCard-borderRadius);
 				transition-duration: var(--commons-animations-durations-fast);
 				transition-property: inset;
@@ -82,26 +74,20 @@
 		.resourceCard-layout-before {
 			grid-area: before;
 			display: flex;
-			align-items: start;
-			gap: var(--pr-t-spacings-100);
-		}
-
-		.resourceCard-layout-before-button.button {
-			@include button.S;
-			@include button.ghost;
-			@include button.onlyIcon;
-			@include button.onlyIconS;
-
-			margin-block: var(--components-resourceCard-layout-before-button-marginBlock);
+			align-items: center;
 		}
 
 		.resourceCard-layout-before-illustration {
 			&:not(:empty) {
 				min-block-size: var(--components-resourceCard-layout-before-illustration-minSize);
 				min-inline-size: var(--components-resourceCard-layout-before-illustration-minSize);
-				margin-block: var(--components-resourceCard-layout-before-illustration-marginBlock);
+				margin: var(--pr-t-spacings-100) var(--pr-t-spacings-50) var(--pr-t-spacings-100) var(--pr-t-spacings-100);
 				display: grid;
 				place-items: center;
+			}
+
+			&:empty {
+				display: none;
 			}
 		}
 
@@ -110,22 +96,17 @@
 			margin-block: var(--components-resourceCard-layout-after-marginBlock);
 		}
 
-		.resourceCard-layout-after-button.button {
-			@include button.S;
-			@include button.ghost;
-
-			&:has(> lu-icon:only-child, > .lucca-icon:only-child, > .lucca-icon:first-child + .pr-u-mask:last-child) {
-				@include button.onlyIcon;
-				@include button.onlyIconS;
-			}
-		}
-
 		.resourceCard-layout-content {
 			grid-area: content;
 			font: var(--components-resourceCard-layout-content-font);
+
+			&:not(:empty) {
+				padding: var(--components-resourceCard-layout-content-paddingBlockStart) var(--pr-t-spacings-100) var(--pr-t-spacings-50);
+			}
 		}
 
-		.resourceCard-layout-before-button {
+		.resourceCard-layout-before-button,
+		.resourceCard-layout-after {
 			z-index: 2;
 		}
 	}

@@ -7,7 +7,7 @@
 }
 
 @mixin focusVisible {
-	.resourceCard-layout-header-title-link {
+	.resourceCard-layout-header-title-action {
 		&::after {
 			@include a11y.focusVisible;
 		}
@@ -15,5 +15,14 @@
 }
 
 @mixin disabled {
+	--components-resourceCard-layout-header-title-action-cursor: default;
+	--components-resourceCard-before-inset: 0;
+	--components-resourceCard-color: var(--palettes-neutral-500);
+	--components-resourceCard-layout-header-title-action-color: var(--palettes-neutral-500);
+	--components-resourceCard-before-boxShadow: 0 0 0 1px var(--palettes-neutral-50);
+}
 
+@mixin active {
+	--components-resourceCard-layout-header-title-action-color: var(--palettes-product-700);
+	--components-resourceCard-before-boxShadow: 0 0 0 1px var(--palettes-product-400);
 }

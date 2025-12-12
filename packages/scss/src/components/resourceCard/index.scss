@@ -11,13 +11,61 @@
 			@include hover;
 		}
 
-		&:has(.resourceCard-layout-header-title-link:focus-visible) {
+		&:has(.resourceCard-layout-header-title-action:focus-visible) {
 			@include focusVisible;
 		}
 
-		// &:where(:not(:has(.resourceCard-layout-before-illustration:empty))) {
-		// 	@include hasIllustration;
-		// }
+		&:has(.resourceCard-layout-header-title-action:active) {
+			@include active;
+		}
+
+		&:has(.resourceCard-layout-header-title-action.is-disabled) {
+			@include disabled;
+		}
+
+		&:has(.resourceCard-layout-before-button) {
+			@include hasDrag;
+		}
+
+		&:has(.resourceCard-layout-header-title .numericBadge) {
+			@include hasNumericBadge;
+		}
+
+		&:has(.resourceCard-layout-content:not(:empty)) {
+			&:not(.mod-grid) {
+				@include hasContentNoGrid;
+
+				&:has(.resourceCard-layout-before-illustration:not(:empty)) {
+					@include hasContentNoGridHasIllustration;
+
+					&.mod-S {
+						@include hasContentNoGridHasIllustrationS;
+					}
+				}
+			}
+		}
+
+		&:has(.resourceCard-layout-content:empty) {
+			&:has(.resourceCard-layout-before-illustration:not(:empty)) {
+				&:not(.mod-grid) {
+					@include hasNoContentHasIllustrationNoGrid;
+				}
+			}
+		}
+
+		&:has(.resourceCard-layout-after-button:not(:empty)) {
+			@include hasAction;
+		}
+
+		&:has(.resourceCard-layout-before-illustration:not(:empty)) {
+			&.mod-grid {
+				@include hasIllustrationGrid;
+
+				&.mod-S {
+					@include hasIllustrationGridS;
+				}
+			}
+		}
 
 		&.mod-S {
 			@include S;
@@ -25,10 +73,6 @@
 
 		&.mod-grid {
 			@include grid;
-		}
-
-		&:has(.resourceCard-layout-before-button) {
-			@include drag;
 		}
 	}
 }

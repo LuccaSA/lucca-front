@@ -6,20 +6,21 @@
 	--components-resourceCard-before-boxShadow: var(--pr-t-elevation-shadow-raised);
 
 	--components-resourceCard-layout-alignItems: start;
-	--components-resourceCard-layout-rowGap: 0;
 	--components-resourceCard-layout-content-font: var(--pr-t-font-body-M);
-	--components-resourceCard-layout-padding: var(--pr-t-spacings-150) var(--pr-t-spacings-200);
+	--components-resourceCard-layout-content-paddingBlockStart: 0;
 
-	--components-resourceCard-layout-before-button-marginBlock: 0;
 	--components-resourceCard-layout-before-illustration-minSize: var(--pr-t-spacings-500);
-	--components-resourceCard-layout-before-illustration-marginBlock: var(--pr-t-spacings-50);
 
-	--components-resourceCard-layout-header-title-link-after-inset: var(--components-resourceCard-before-inset);
+	--components-resourceCard-layout-after-marginBlock: 0;
+
+	--components-resourceCard-layout-header-title-action-cursor: pointer;
+	--components-resourceCard-layout-header-title-action-color: inherit;
+	--components-resourceCard-layout-header-title-action-after-inset: var(--components-resourceCard-before-inset);
 	--components-resourceCard-layout-header-title-font: var(--pr-t-font-heading-3);
 	--components-resourceCard-layout-header-alignItems: center;
 	--components-resourceCard-layout-header-flexDirection: row;
-
-	--components-resourceCard-layout-after-marginBlock: calc(var(--components-resourceCard-layout-before-button-marginBlock) - var(--pr-t-spacings-25));
+	--components-resourceCard-layout-header-paddingBlockStart: var(--pr-t-spacings-50);
+	--components-resourceCard-layout-header-paddingBlockEnd: var(--pr-t-spacings-50);
 
 	--components-resourceCard-layout-gridTemplate: "before header  after" auto
 																								 "before content after" 1fr
