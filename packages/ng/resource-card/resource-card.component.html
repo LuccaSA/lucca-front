@@ -1,14 +1,22 @@
 <div class="resourceCard-layout">
 	<div class="resourceCard-layout-before">
-		@if (!grid() && draggable()) {
-			<div class="button cdk-drag-handle resourceCard-layout-before-button" cdkDragHandle>
-				<lu-icon icon="dotsDrag" class="resourceCard-layout-before-button-icon" />
-			</div>
+		@if (wrapperRef) {
+			@if (!wrapperRef.grid() && wrapperRef.draggable()) {
+				<div class="button cdk-drag-handle resourceCard-layout-before-button" cdkDragHandle>
+					<lu-icon icon="dotsDrag" class="resourceCard-layout-before-button-icon" />
+				</div>
+			}
+		} @else {
+			@if (!grid() && draggable()) {
+				<div class="button cdk-drag-handle resourceCard-layout-before-button" cdkDragHandle>
+					<lu-icon icon="dotsDrag" class="resourceCard-layout-before-button-icon" />
+				</div>
+			}
 		}
 		<div class="resourceCard-layout-before-illustration"><ng-content select="[resourceCardIllustration]" /></div>
 	</div>
 	<header class="resourceCard-layout-header">
-		<div class="resourceCard-layout-header-title" role="heading" level="3"><ng-content /></div>
+		<div class="resourceCard-layout-header-title" role="heading" [attr.level]="headingLevel()"><ng-content /></div>
 		<div class="resourceCard-layout-header-infos"><ng-content select="[resourceCardInfos]" /></div>
 	</header>
 	<div class="resourceCard-layout-after"><ng-content select="[resourceCardAction]" /></div>

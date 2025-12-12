@@ -19,7 +19,8 @@
 			@include active;
 		}
 
-		&:has(.resourceCard-layout-header-title-action.is-disabled) {
+		&:has(.resourceCard-layout-header-title-action.is-disabled),
+		&:has(.resourceCard-layout-header-title-action:disabled) {
 			@include disabled;
 		}
 
@@ -32,7 +33,8 @@
 		}
 
 		&:has(.resourceCard-layout-content:not(:empty)) {
-			&:not(.mod-grid) {
+			&:not(.mod-grid),
+			&:not(.resourceCardWrapper.mod-grid &) {
 				@include hasContentNoGrid;
 
 				&:has(.resourceCard-layout-before-illustration:not(:empty)) {
@@ -45,20 +47,23 @@
 			}
 		}
 
-		&:has(.resourceCard-layout-content:empty) {
+		&:has(.resourceCard-layout-content:empty),
+		&:not(:has(.resourceCard-layout-content)) {
 			&:has(.resourceCard-layout-before-illustration:not(:empty)) {
-				&:not(.mod-grid) {
+				&:not(.mod-grid),
+				.resourceCardWrapper.mod-grid & {
 					@include hasNoContentHasIllustrationNoGrid;
 				}
 			}
 		}
 
-		&:has(.resourceCard-layout-after-button:not(:empty)) {
+		&:has(.resourceCard-layout-after:not(:empty)) {
 			@include hasAction;
 		}
 
 		&:has(.resourceCard-layout-before-illustration:not(:empty)) {
-			&.mod-grid {
+			&.mod-grid,
+			.resourceCardWrapper.mod-grid & {
 				@include hasIllustrationGrid;
 
 				&.mod-S {
@@ -71,7 +76,8 @@
 			@include S;
 		}
 
-		&.mod-grid {
+		&.mod-grid,
+		.resourceCardWrapper.mod-grid & {
 			@include grid;
 		}
 	}
@@ -83,8 +89,12 @@
 	}
 
 	@layer mods {
+		.resourceCard {
+			@include wrapped;
+		}
+
 		&.mod-grid {
-			@include grid;
+			@include gridWrapper;
 		}
 	}
 }

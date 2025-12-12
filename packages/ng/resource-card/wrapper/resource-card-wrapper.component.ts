@@ -9,6 +9,7 @@ import { LU_RESOURCE_CARD_WRAPPER_INSTANCE } from './resource-card-wrapper.token
 	host: {
 		class: 'resourceCardWrapper',
 		'[class.mod-grid]': 'grid()',
+		'[class.mod-S]': 'size() === "S"',
 	},
 	providers: [
 		{
@@ -20,4 +21,5 @@ import { LU_RESOURCE_CARD_WRAPPER_INSTANCE } from './resource-card-wrapper.token
 export class ResourceCardWrapperComponent {
 	grid = input(false, { transform: booleanAttribute });
 	draggable = input(false, { transform: booleanAttribute });
+	size = input<'S' | null>(null);
 }

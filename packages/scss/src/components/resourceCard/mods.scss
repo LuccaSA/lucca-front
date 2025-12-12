@@ -1,13 +1,21 @@
 @use '@lucca-front/scss/src/components/button/exports' as button;
 @use '@lucca-front/scss/src/components/numericBadge/exports' as numericBadge;
 
+@mixin gridWrapper {
+	--components-resourceCardWrapper-display: grid;
+}
+
 @mixin grid {
 	--components-resourceCard-layout-content-paddingBlockStart: var(--pr-t-spacings-50);
 	--components-resourceCard-layout-header-alignItems: start;
 	--components-resourceCard-layout-header-flexDirection: column;
-	--components-resourceCard-layout-gridTemplate: "before  header  after"  auto
-																								 "content content content" 1fr
+	--components-resourceCard-layout-gridTemplate: "before  header  after"   auto
+																								 "content content content" auto
 																								 /auto    1fr     auto;
+}
+
+@mixin wrapped {
+	--components-resourceCard-borderRadius: var(--pr-t-border-radius-default);
 }
 
 @mixin S {
@@ -36,7 +44,7 @@
 }
 
 @mixin hasContentNoGridHasIllustrationS {
-	--components-resourceCard-layout-after-marginBlock: var(--pr-t-spacings-75);
+	--components-resourceCard-layout-after-marginBlock: 0.625rem;
 }
 
 @mixin hasContentNoGrid {
@@ -44,7 +52,7 @@
 }
 
 @mixin hasAction {
-	.resourceCard-layout-after-button.button {
+	.resourceCard-layout-after .button {
 			@include button.S;
 			@include button.ghost;
 
