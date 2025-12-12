@@ -14,7 +14,6 @@ import { buildAddWrapperExtension } from '../formly.utils';
 		}
 	`,
 	changeDetection: ChangeDetectionStrategy.OnPush,
-	standalone: true,
 })
 export class LuFormlyErrorMessage {
 	@Input() formControl?: FormControl;
@@ -39,7 +38,6 @@ export class LuFormlyErrorMessage {
 	styleUrls: ['flex-layout.scss'],
 	templateUrl: './error.html',
 	changeDetection: ChangeDetectionStrategy.OnPush,
-	standalone: true,
 	imports: [ReactiveFormsModule, LuFormlyErrorMessage],
 })
 export class LuFormlyWrapperError extends FieldWrapper<FieldTypeConfig> {

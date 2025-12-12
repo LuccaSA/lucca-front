@@ -16,16 +16,16 @@ export default {
 		}),
 	],
 	render: ({ user, sizes, placeholder, displayFormat, AI }) => {
-		const AIarg = AI ? ` AI` : ``;
+		const argAI = AI ? ` AI` : ``;
+		const argSize = sizes ? ` size="${sizes}"` : ``;
 		return {
 			template: `<button class="userPopover_trigger" type="button" [luUserPopover]="user">
 	<lu-user-picture
 		[user]="user"
 		[displayFormat]="displayFormat"
 		data-testid="lu-user-picture"
-		[class]="sizes"
 		[class.mod-placeholder]="placeholder"
-		${AIarg} />
+		${argSize}${argAI}/>
 </button>`,
 			props: {
 				user,
@@ -46,7 +46,7 @@ export default {
 			},
 		},
 		sizes: {
-			options: ['mod-XS', 'mod-S', '', 'mod-L', 'mod-XL', 'mod-XXL', 'mod-XXXL'],
+			options: ['XS', 'S', '', 'L', 'XL', 'XXL', 'XXXL'],
 			control: {
 				type: 'select',
 			},

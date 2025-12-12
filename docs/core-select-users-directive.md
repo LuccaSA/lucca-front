@@ -29,7 +29,7 @@ Il est possible de modifier l'affichage d'une option en fournissant un template 
 
     <!-- Ne pas oublier la gestion des homonymes en affichant `additionalInformation` -->
     @if (user.additionalInformation) {
-      <div>({{ user.additionalInformation }})</div>
+    <div>({{ user.additionalInformation }})</div>
     }
   </ng-container>
 </lu-simple-select>
@@ -54,7 +54,6 @@ import { PersonService } from '../services';
 @Directive({
   selector: '[appPersons]',
   exportAs: 'appPersons',
-  standalone: true,
   providers: [provideCoreSelectUsersContext(() => PersonsDirective)],
 })
 export class PersonsDirective extends LuCoreSelectUsersDirective<Person> {

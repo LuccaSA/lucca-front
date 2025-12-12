@@ -104,7 +104,6 @@
 			margin-inline-end: var(--pr-t-spacings-25);
 			position: relative;
 			z-index: 1;
-			display: var(--components-filterPill-clear-display);
 
 			@include clear.product;
 		}

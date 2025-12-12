@@ -14,7 +14,8 @@
 	}
 }
 
-.breadcrumbs-list-item-action {
+// Second selector to get rid of breadcrumbs-list-item-action on angular component
+.breadcrumbs-list-item-action, .breadcrumbs-list-item > a {
 	@layer mods {
 		// .active is deprecated
 		&.is-active,

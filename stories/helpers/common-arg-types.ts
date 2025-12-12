@@ -39,3 +39,7 @@ export const HiddenArgType = {
 	},
 	control: undefined,
 };
+
+export const stateArgType = {
+	options: ['default', 'success', 'warning', 'error'],
+};

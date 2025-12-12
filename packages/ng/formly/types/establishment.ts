@@ -8,7 +8,6 @@ import { FieldType, FieldTypeConfig, FormlyModule } from '@ngx-formly/core';
 	styleUrls: ['formly-field.common.scss', 'select.scss'],
 	templateUrl: './establishment.html',
 	changeDetection: ChangeDetectionStrategy.OnPush,
-	standalone: true,
 	imports: [ReactiveFormsModule, FormlyModule, LuEstablishmentSelectInputComponent],
 })
 export class LuFormlyFieldEstablishment extends FieldType<FieldTypeConfig> {

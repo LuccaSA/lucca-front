@@ -6,7 +6,6 @@ import { ALuInputDisplayer, ILuInputDisplayer } from './input-displayer.model';
  */
 @Directive({
 	selector: '[luDisplayer]',
-	standalone: true,
 	providers: [
 		{
 			provide: ALuInputDisplayer,

@@ -1,7 +1,7 @@
 <div [class]="pickerClasses()" (copy)="copyHandler($event)" (paste)="pasteHandler($event)">
 	<fieldset class="timePicker-fieldset" [disabled]="disabled()">
 		<legend>
-			<span class="pr-u-mask">{{ label }}</span>
+			<span class="pr-u-mask">{{ label() }}</span>
 		</legend>
 		<lu-time-picker-part
 			#hoursPart

@@ -1,9 +1,21 @@
 <table class="demo-QAtable">
 	<tbody>
 		<tr>
+			<td></td>
+			<td>
+				<div class="demo-QAtable-list">HTML</div>
+			</td>
+			<td>
+				<div class="demo-QAtable-list">Angular</div>
+			</td>
+		</tr>
+		<tr>
 			<td>Default</td>
 			<td>
 				<div class="demo-QAtable-list"><div class="loading"></div></div>
+			</td>
+			<td>
+				<div class="demo-QAtable-list"><lu-loading /></div>
 			</td>
 		</tr>
 		<tr>
@@ -11,11 +23,17 @@
 			<td>
 				<div class="demo-QAtable-list"><div class="loading">Loading…</div></div>
 			</td>
+			<td>
+				<div class="demo-QAtable-list"><lu-loading>Loading…</lu-loading></div>
+			</td>
 		</tr>
 		<tr>
 			<td>Block</td>
 			<td>
 				<div class="demo-QAtable-list"><div class="loading mod-block">Loading…</div></div>
+			</td>
+			<td>
+				<div class="demo-QAtable-list"><lu-loading block /></div>
 			</td>
 		</tr>
 		<tr>
@@ -23,11 +41,26 @@
 			<td>
 				<div class="demo-QAtable-list"><div class="loading mod-L">Loading</div></div>
 			</td>
+			<td>
+				<div class="demo-QAtable-list"><lu-loading size="L" /></div>
+			</td>
 		</tr>
 		<tr>
 			<td>Inverted</td>
 			<td>
 				<div class="demo-QAtable-list mod-black"><div class="loading mod-invert">Loading…</div></div>
+			</td>
+			<td>
+				<div class="demo-QAtable-list"><lu-loading invert /></div>
+			</td>
+		</tr>
+		<tr>
+			<td>Template Popin</td>
+			<td></td>
+			<td>
+				<div class="demo-QAtable-list">
+					<lu-loading template="popin" />
+				</div>
 			</td>
 		</tr>
 	</tbody>

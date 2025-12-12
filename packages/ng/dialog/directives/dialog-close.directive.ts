@@ -3,7 +3,6 @@ import { LuDialogRef } from '../model';
 
 @Directive({
 	selector: '[luDialogClose]',
-	standalone: true,
 })
 export class DialogCloseDirective {
 	#ref = inject<LuDialogRef>(LuDialogRef);

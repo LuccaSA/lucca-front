@@ -1,4 +1,4 @@
-import { ScrollBoxComponent } from '@lucca-front/ng/scrollBox';
+import { ScrollBoxComponent } from '@lucca-front/ng/scroll-box';
 import { Meta, moduleMetadata, StoryFn } from '@storybook/angular';
 
 interface ScrollBoxBasicStory {}
@@ -96,6 +96,9 @@ function getTemplate(args: ScrollBoxBasicStory): string {
 		</div>
 	</lu-scroll-box>
 </div>
+<lu-scroll-box>
+	<div style="width: 110vw" class="box">box</div>
+</lu-scroll-box>
 `;
 }
 

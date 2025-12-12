@@ -3,7 +3,6 @@ import { ALuSelectInputComponent } from '../input';
 
 @Directive({
 	selector: '[luSelectPanelHeader]',
-	standalone: true,
 })
 export class LuCoreSelectPanelHeaderDirective {
 	readonly templateRef = inject<TemplateRef<void>>(TemplateRef);

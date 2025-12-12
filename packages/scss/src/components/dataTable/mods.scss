@@ -79,6 +79,19 @@
 	}
 }
 
+@mixin selectableDraggable {
+	.dataTable-head-row-cell,
+	.dataTable-body-row-cell,
+	.dataTable-foot-row-cell {
+		&:nth-child(2) {
+			--components-dataTable-cellFirst-width: 2.625rem;
+
+			inline-size: var(--components-dataTable-cellFirst-width);
+			max-inline-size: var(--components-dataTable-cellFirst-width);
+		}
+	}
+}
+
 @mixin tree {
 	@include buttonExpand;
 
@@ -142,7 +155,7 @@
 	}
 }
 
-@mixin cellFixedWidth {
+@mixin cellInlineSize {
 	min-inline-size: var(--dataTable-layoutFixed-width, auto);
 	inline-size: var(--dataTable-layoutFixed-width, auto);
 }
@@ -152,7 +165,7 @@
 		.dataTable-head-row-cell,
 		.dataTable-body-row-cell,
 		.dataTable-foot-row-cell {
-			@include cellFixedWidth;
+			@include cellInlineSize;
 		}
 	}
 
@@ -162,7 +175,7 @@
 				.dataTable-head-row-cell,
 				.dataTable-body-row-cell,
 				.dataTable-foot-row-cell {
-					@include cellFixedWidth;
+					@include cellInlineSize;
 				}
 			}
 		}

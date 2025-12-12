@@ -1,10 +1,11 @@
 import { Component } from '@angular/core';
+import { BoxComponent } from '@lucca-front/ng/box';
 import { Meta, StoryFn } from '@storybook/angular';
 
 @Component({
-	standalone: true,
 	selector: 'box-stories',
 	templateUrl: './box.stories.html',
+	imports: [BoxComponent],
 })
 class BoxStory {}
 

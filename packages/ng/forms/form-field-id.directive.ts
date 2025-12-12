@@ -4,7 +4,6 @@ import { filter, take } from 'rxjs/operators';
 
 @Directive({
 	selector: '[luFormFieldId]',
-	standalone: true,
 })
 export class FormFieldIdDirective implements OnDestroy {
 	#formFieldComponent = inject(FormFieldComponent);

@@ -1,4 +1,4 @@
-import { Component, Directive } from '@angular/core';
+import { ChangeDetectionStrategy, Component, Directive } from '@angular/core';
 import { fakeAsync } from '@angular/core/testing';
 import { LuSimpleSelectInputComponent } from '@lucca-front/ng/simple-select';
 import { Spectator, createComponentFactory } from '@ngneat/spectator/jest';
@@ -14,7 +14,6 @@ interface TestEntity {
 @Directive({
 	// eslint-disable-next-line @angular-eslint/directive-selector
 	selector: 'lu-simple-select[testApi]',
-	standalone: true,
 })
 class TestDirective extends ALuCoreSelectApiDirective<TestEntity> {
 	protected override params$ = this.clue$.pipe(
@@ -46,8 +45,8 @@ class TestDirective extends ALuCoreSelectApiDirective<TestEntity> {
 
 @Component({
 	template: ` <lu-simple-select testApi />`,
-	standalone: true,
 	imports: [TestDirective, LuSimpleSelectInputComponent],
+	changeDetection: ChangeDetectionStrategy.OnPush,
 })
 class HostComponent {}
 

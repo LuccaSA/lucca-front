@@ -10,7 +10,6 @@ import { LuUserDisplayPipe, LuUserHomonymsComponent, LuUserMeOptionDirective } f
 import { Meta, StoryFn, applicationConfig } from '@storybook/angular';
 
 @Component({
-	standalone: true,
 	selector: 'user-select-stories',
 	templateUrl: './user-homonyms.stories.html',
 	imports: [

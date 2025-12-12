@@ -1,8 +1,6 @@
 @use '@lucca-front/scss/src/commons/utils/color';
 
 @mixin stickyHeader {
-	--components-dataTable-overflow: auto;
-
 	.dataTable-head {
 		position: sticky;
 		inset-block-start: -1px;
@@ -22,8 +20,6 @@
 }
 
 @mixin columnsOverflow {
-	--components-dataTable-overflow: auto;
-
 	display: flex;
 
 	&::before,
@@ -52,11 +48,10 @@
 }
 
 @mixin rowsOverflow {
-	--components-dataTable-overflow: auto;
-
 	.dataTableShadows {
 		display: flex;
 		flex-direction: column;
+		flex-grow: 1;
 
 		&::before,
 		&::after {
@@ -85,8 +80,6 @@
 }
 
 @mixin stickyColumn {
-	--components-dataTable-overflow: auto;
-
 	%addShadow {
 		content: '';
 		position: absolute;
@@ -130,6 +123,8 @@
 				&:not(:has(+ :is(.dataTable-head-row-cell, .dataTable-body-row-cell, .dataTable-foot-row-cell).mod-stickyColumn)) {
 					&::after {
 						@extend %addShadow;
+
+						opacity: var(--components-dataTable-shadow-colsStart-opacity);
 					}
 				}
 			}
@@ -143,6 +138,7 @@
 					inset-inline-start: auto;
 					inset-inline-end: 100%;
 					transform: scaleX(-1);
+					opacity: var(--components-dataTable-shadow-colsEnd-opacity);
 				}
 
 				& ~ :is(.dataTable-head-row-cell, .dataTable-body-row-cell, .dataTable-foot-row-cell).mod-stickyColumn {

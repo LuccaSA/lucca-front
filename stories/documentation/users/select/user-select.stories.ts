@@ -1,19 +1,18 @@
 import { provideHttpClient } from '@angular/common/http';
-import { Component, Input } from '@angular/core';
+import { Component, input } from '@angular/core';
 import { FormsModule } from '@angular/forms';
 import { provideAnimations } from '@angular/platform-browser/animations';
 import { ILuUser, LuUserSelectModule } from '@lucca-front/ng/user';
-import { Meta, StoryFn, applicationConfig } from '@storybook/angular';
+import { applicationConfig, Meta, StoryFn } from '@storybook/angular';
 
 @Component({
-	standalone: true,
 	selector: 'user-select-stories',
 	templateUrl: './user-select.stories.html',
 	imports: [LuUserSelectModule, FormsModule],
 })
 class UserSelectStory {
 	model: ILuUser;
-	@Input() disablePrincipal = false;
+	disablePrincipal = input<boolean>(false);
 }
 
 export default {

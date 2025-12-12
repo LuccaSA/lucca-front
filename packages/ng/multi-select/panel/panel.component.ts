@@ -33,7 +33,6 @@ import { map } from 'rxjs/operators';
 	templateUrl: './panel.component.html',
 	styleUrl: './panel.component.scss',
 	changeDetection: ChangeDetectionStrategy.OnPush,
-	standalone: true,
 	imports: [
 		A11yModule,
 		AsyncPipe,

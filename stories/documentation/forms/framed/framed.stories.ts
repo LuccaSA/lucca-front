@@ -1,15 +1,14 @@
-import { Component, Input } from '@angular/core';
+import { Component, input } from '@angular/core';
 import { Meta, StoryFn } from '@storybook/angular';
 
 @Component({
 	selector: 'framed-stories',
-	standalone: true,
 	templateUrl: './framed.stories.html',
 })
 class FramedStory {
-	@Input() state: string = '';
-	@Input() disabled: boolean = false;
-	@Input() isRequired: boolean = false;
+	state = input<string>('');
+	disabled = input<boolean>(false);
+	isRequired = input<boolean>(false);
 }
 
 export default {

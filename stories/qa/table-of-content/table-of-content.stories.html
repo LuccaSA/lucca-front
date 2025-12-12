@@ -1,6 +1,15 @@
 <table class="demo-QAtable">
 	<tbody>
 		<tr>
+			<td></td>
+			<td>
+				<div class="demo-QAtable-list">HTML</div>
+			</td>
+			<td>
+				<div class="demo-QAtable-list">Angular</div>
+			</td>
+		</tr>
+		<tr>
 			<td>Default</td>
 			<td>
 				<nav class="tableOfContent">
@@ -19,6 +28,43 @@
 						</li>
 					</ul>
 				</nav>
+			</td>
+			<td>
+				<lu-table-of-content>
+					<a *luTableOfContentLink class="is-active" href="#">Section 1</a>
+					<a *luTableOfContentLink href="#">Section 2</a>
+					<a *luTableOfContentLink href="#">Section 3</a>
+					<a *luTableOfContentLink href="#">Section 4</a>
+				</lu-table-of-content>
+			</td>
+		</tr>
+		<tr>
+			<td>Disabled</td>
+			<td>
+				<nav class="tableOfContent">
+					<ul class="tableOfContent-list">
+						<li class="tableOfContent-list-item">
+							<a href="#" class="tableOfContent-list-item-action is-active">Section 1</a>
+						</li>
+						<li class="tableOfContent-list-item">
+							<a href="#" class="tableOfContent-list-item-action" disabled>Section 2</a>
+						</li>
+						<li class="tableOfContent-list-item">
+							<a href="#" class="tableOfContent-list-item-action" disabled>Section 3</a>
+						</li>
+						<li class="tableOfContent-list-item">
+							<a href="#" class="tableOfContent-list-item-action" disabled>Section 4</a>
+						</li>
+					</ul>
+				</nav>
+			</td>
+			<td>
+				<lu-table-of-content>
+					<a *luTableOfContentLink class="is-active" href="#">Section 1</a>
+					<a *luTableOfContentLink href="#" disabled>Section 2</a>
+					<a *luTableOfContentLink href="#" disabled>Section 3</a>
+					<a *luTableOfContentLink href="#" disabled>Section 4</a>
+				</lu-table-of-content>
 			</td>
 		</tr>
 	</tbody>

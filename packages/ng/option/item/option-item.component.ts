@@ -10,7 +10,6 @@ import { ALuOptionItem, ILuOptionItem } from './option-item.model';
 	templateUrl: './option-item.component.html',
 	styleUrl: './option-item.component.scss',
 	changeDetection: ChangeDetectionStrategy.OnPush,
-	standalone: true,
 	providers: [
 		{
 			provide: ALuOptionItem,

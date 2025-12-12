@@ -1,6 +1,6 @@
-import { Pipe, PipeTransform } from '@angular/core';
+import { LOCALE_ID, Pipe, PipeTransform } from '@angular/core';
 import { ALuSelectInputComponent } from '@lucca-front/ng/core-select';
-import { StoryObj } from '@storybook/angular';
+import { applicationConfig, StoryObj } from '@storybook/angular';
 import { HiddenArgType } from '../../../helpers/common-arg-types';
 
 export type LegumeColor = 'green' | 'purple' | 'red' | 'orange' | 'white' | 'yellow' | 'brown';

@@ -25,16 +25,10 @@
 
 		<div class="textField-input-affix">
 			@if (clearable() && !disabled() && (clearBehavior() === "clear" ? date.value !== "" : selectedDate() !== initialValue())) {
-				<button class="textField-input-affix-clear clear" type="button" (click)="clear()">
-					<span aria-hidden="true" class="lucca-icon icon-signClose"></span>
-					<span class="pr-u-mask">{{ intl.clear }}</span>
-				</button>
+				<lu-clear class="textField-input-affix-clear" (onClear)="clear(); date.focus()">{{ intl.clear }}</lu-clear>
 			}
 			@if (isFilterPill && !isFilterPillEmpty()) {
-				<button class="textField-input-affix-clear clear" type="button" (click)="clear()">
-					<span aria-hidden="true" class="lucca-icon icon-signClose"></span>
-					<span class="pr-u-mask">{{ intl.clear }}</span>
-				</button>
+				<lu-clear class="textField-input-affix-clear" (onClear)="clear(); date.focus()">{{ intl.clear }}</lu-clear>
 			}
 			<button
 				[luPopover2]="calendar"

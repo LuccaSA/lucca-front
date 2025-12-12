@@ -5,7 +5,6 @@ import { LU_MOBILE_PUSH_TRANSLATIONS } from './mobile-push.translate';
 
 @Component({
 	selector: 'lu-mobile-push',
-	standalone: true,
 	imports: [IconComponent],
 	templateUrl: './mobile-push.component.html',
 	styleUrl: './mobile-push.component.scss',

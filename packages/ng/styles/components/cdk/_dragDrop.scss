@@ -4,13 +4,31 @@
 	box-shadow: form.fakeBorderOverlay(var(--palettes-neutral-200));
 	background-color: var(--palettes-neutral-100);
 
+	&.sortableList-item {
+		box-shadow: none;
+	}
+
+	&.dataTable-body-row {
+		box-shadow: none;
+
+		> .dataTable-body-row-cell {
+			visibility: visible;
+			background-color: var(--palettes-neutral-100);
+
+			* {
+				visibility: hidden;
+				color: transparent;
+			}
+		}
+	}
+
 	* {
-		opacity: 0;
+		visibility: hidden;
+		color: transparent;
 	}
 }
 
-.cdk-drag-handle,
-.cdk-drag-placeholder {
+.cdk-drag-handle {
 	cursor: move;
 }
 
@@ -52,7 +70,17 @@
 	box-shadow: form.fakeBorderOverlay(var(--palettes-product-200));
 	background-color: var(--palettes-product-50);
 	border-radius: var(--pr-t-border-radius-default);
+	rotate: 1deg;
 	cursor: grabbing;
+
+	&.dataTable-body-row {
+		display: table;
+
+		.dataTable-body-row-cell {
+			--components-dataTable-cell-background: transparent;
+			--components-dataTable-cell-shadow: none;
+		}
+	}
 }
 
 .cdk-drop-list-dragging {

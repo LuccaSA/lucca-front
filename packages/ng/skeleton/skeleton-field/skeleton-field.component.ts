@@ -2,7 +2,6 @@ import { booleanAttribute, ChangeDetectionStrategy, Component, computed, input, 
 
 @Component({
 	selector: 'lu-skeleton-field',
-	standalone: true,
 	templateUrl: './skeleton-field.component.html',
 	styleUrl: './skeleton-field.component.scss',
 	changeDetection: ChangeDetectionStrategy.OnPush,

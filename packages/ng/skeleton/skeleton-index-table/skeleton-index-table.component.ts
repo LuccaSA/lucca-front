@@ -3,7 +3,6 @@ import { booleanAttribute, ChangeDetectionStrategy, Component, computed, input, 
 
 @Component({
 	selector: 'lu-skeleton-index-table',
-	standalone: true,
 	templateUrl: './skeleton-index-table.component.html',
 	styleUrl: './skeleton-index-table.component.scss',
 	changeDetection: ChangeDetectionStrategy.OnPush,

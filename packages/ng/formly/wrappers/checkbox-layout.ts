@@ -7,7 +7,6 @@ import { FieldWrapper } from '@ngx-formly/core';
 	styleUrl: 'flex-layout.scss',
 	templateUrl: './checkbox-layout.html',
 	changeDetection: ChangeDetectionStrategy.OnPush,
-	standalone: true,
 })
 export class LuFormlyWrapperCheckboxLayout extends FieldWrapper {
 	@ViewChild('fieldComponent', { read: ViewContainerRef, static: true })

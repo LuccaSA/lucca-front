@@ -40,10 +40,14 @@
 				@include disabled;
 			}
 		}
-	}
 
-	&.mod-center {
-		@include center;
+		&.mod-center {
+			@include center;
+		}
+
+		&.mod-L {
+			@include L;
+		}
 	}
 }
 
@@ -51,5 +55,11 @@
 	@layer components {
 		@include vars;
 		@include wrapper;
+	}
+
+	@layer mods {
+		&:has(.inputFramed.mod-L) {
+			@include wrapperL;
+		}
 	}
 }

@@ -3,7 +3,6 @@ import { COMMENT_CHAT_INSTANCE } from '../token';
 
 @Component({
 	selector: 'lu-comment-chat',
-	standalone: true,
 	imports: [],
 	templateUrl: './comment-chat.component.html',
 	encapsulation: ViewEncapsulation.None,

@@ -4,7 +4,6 @@ import { Meta, StoryFn } from '@storybook/angular';
 
 @Component({
 	selector: 'skip-links-story',
-	standalone: true,
 	imports: [LuSkipLinksComponent],
 	template: `
 		<lu-skip-links />
@@ -55,7 +54,6 @@ const Template: StoryFn<SkipLinksStory> = (props) => ({ props });
 const code = `
 import { LuSkipLinksComponent } from '@lucca-front/ng/a11y';
 @Component({
-	standalone: true,
 	imports: [LuSkipLinksComponent],
 	selector: 'app-component',
 	template: \`<lu-skip-links />\`,

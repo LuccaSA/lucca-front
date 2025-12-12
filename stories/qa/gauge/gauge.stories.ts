@@ -1,10 +1,11 @@
 import { Component } from '@angular/core';
+import { GaugeComponent } from '@lucca-front/ng/gauge';
 import { Meta, StoryFn } from '@storybook/angular';
 
 @Component({
-	standalone: true,
 	selector: 'gauge-stories',
 	templateUrl: './gauge.stories.html',
+	imports: [GaugeComponent],
 })
 class GaugeStory {}
 

@@ -1,8 +1,9 @@
-import { AsyncPipe, NgPlural, NgPluralCase } from '@angular/common';
+import { AsyncPipe } from '@angular/common';
 import { ChangeDetectionStrategy, Component, DestroyRef, ElementRef, Input, OnInit, ViewChild, inject } from '@angular/core';
 import { takeUntilDestroyed } from '@angular/core/rxjs-interop';
 import { FormsModule } from '@angular/forms';
-import { ɵLuOptionOutletDirective } from '@lucca-front/ng/core-select';
+import { ChipComponent } from '@lucca-front/ng/chip';
+import { ILuOptionContext, LU_OPTION_CONTEXT, ɵLuOptionOutletDirective } from '@lucca-front/ng/core-select';
 import { LuTooltipModule } from '@lucca-front/ng/tooltip';
 import { BehaviorSubject } from 'rxjs';
 import { LuMultiSelectInputComponent } from '../../input';
@@ -10,8 +11,7 @@ import { LuMultiSelectDisplayerInputDirective } from '../displayer-input.directi
 
 @Component({
 	selector: 'lu-multi-select-counter-displayer',
-	standalone: true,
-	imports: [AsyncPipe, LuTooltipModule, NgPlural, NgPluralCase, ɵLuOptionOutletDirective, FormsModule, LuMultiSelectDisplayerInputDirective],
+	imports: [AsyncPipe, LuTooltipModule, ChipComponent, ɵLuOptionOutletDirective, FormsModule, LuMultiSelectDisplayerInputDirective],
 	template: `
 		<div class="multipleSelect-displayer mod-filter" [class.is-filled]="(selectedOptions$ | async)?.length > 0">
 			<input type="text" autocomplete="off" #inputElement luMultiSelectDisplayerInput />
@@ -23,8 +23,7 @@ import { LuMultiSelectDisplayerInputDirective } from '../displayer-input.directi
 						</div>
 					}
 					@if (selectedOptions?.length > 1) {
-						<span class="multipleSelect-displayer-numericBadge numericBadge">{{ selectedOptions?.length }}</span
-						><span class="multipleSelect-displayer-label">{{ label }}</span>
+						<lu-chip class="multipleSelect-displayer-chip" unkillable>{{ selectedOptions?.length }} {{ label }}</lu-chip>
 					}
 				</div>
 			}
@@ -35,6 +34,7 @@ import { LuMultiSelectDisplayerInputDirective } from '../displayer-input.directi
 })
 export class LuMultiSelectCounterDisplayerComponent<T> implements OnInit {
 	select = inject<LuMultiSelectInputComponent<T>>(LuMultiSelectInputComponent);
+	context = inject<ILuOptionContext<T[]>>(LU_OPTION_CONTEXT);
 
 	protected destroyRef = inject(DestroyRef);
 
@@ -50,6 +50,7 @@ export class LuMultiSelectCounterDisplayerComponent<T> implements OnInit {
 	@Input()
 	set selected(options: T[]) {
 		this.selectedOptions$.next(options);
+		this.context.option$.next(options);
 	}
 
 	@Input({ required: true })

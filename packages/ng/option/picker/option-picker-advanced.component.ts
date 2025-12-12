@@ -128,7 +128,6 @@ export abstract class ALuOptionPickerAdvancedComponent<T, O extends import('../i
 	changeDetection: ChangeDetectionStrategy.OnPush,
 	animations: [luTransformPopover],
 	exportAs: 'LuOptionPickerAdvanced',
-	standalone: true,
 	imports: [AsyncPipe, OverlayModule, LuScrollDirective, A11yModule],
 	providers: [
 		{

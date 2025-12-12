@@ -102,8 +102,12 @@
 			border-block-start: 0;
 		}
 
-		.richTextField-toolbar-chips-item {
+		.richTextField-toolbar-chips-chip {
 			border: 0;
+
+			&:focus-visible {
+				@include a11y.focusVisible;
+			}
 		}
 
 		.richTextField-content {
@@ -118,11 +122,6 @@
 
 			&:focus-visible {
 				@include a11y.focusVisible;
-			}
-
-			&.is-disabled {
-				--components-chip-backgroundColor: var(--palettes-neutral-200);
-				--components-chip-color: var(--pr-t-color-input-text-disabled);
 			}
 		}
 

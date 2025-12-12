@@ -12,6 +12,7 @@ export interface ILuMultiSelectLabel {
 	clear: string;
 	clearSearch: string;
 	emptyResults: string;
+	emptyOptions: string;
 	emptySelection: string;
 	expand: string;
 	reduce: string;

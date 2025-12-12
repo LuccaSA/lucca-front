@@ -4,8 +4,9 @@
 	.lucca-icon {
 		text-decoration: none;
 		font-size: 1em;
-		line-height: 1lh;
-		vertical-align: bottom;
+		vertical-align: baseline;
+		position: relative;
+		top: 0.075rem; // magic number
 	}
 
 	&:has(.link-text) {

@@ -1,5 +1,4 @@
 import { Meta } from '@storybook/angular';
-import { cleanupTemplate } from 'stories/helpers/stories';
 
 interface InputFramedAlignCenterStory {}
 
@@ -8,7 +7,7 @@ export default {
 	argTypes: {},
 	render: (args: InputFramedAlignCenterStory) => {
 		return {
-			template: cleanupTemplate(`
+			template: `
 <div class="inputFramed mod-alignCenter">
 	<div class="inputFramed-header">
 		<div class="form-field inputFramed-header-field">
@@ -23,12 +22,12 @@ export default {
 			</span>
 		</div>
 		<div class="inputFramed-header-illustration">
-				<div style="background-color: var(--palettes-product-100); color: var(--palettes-product-700)" class="pr-u-padding150 pr-u-borderRadiusXL pr-u-displayFlex">
-					<span aria-hidden="true" class="lucca-icon icon-moneyBag"></span>
-				</div>
+			<div style="background-color: var(--palettes-product-100); color: var(--palettes-product-700)" class="pr-u-padding150 pr-u-borderRadiusXL pr-u-displayFlex">
+				<span aria-hidden="true" class="lucca-icon icon-moneyBag"></span>
+			</div>
 		</div>
 	</div>
-</div>`),
+</div>`,
 		};
 	},
 } as Meta;

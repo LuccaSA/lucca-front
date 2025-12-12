@@ -10,7 +10,6 @@ export interface LuCustomUser extends LuCoreSelectUser {
 @Directive({
 	// The attribute is already prefixed with "lu-simple-select" / "lu-multi-select"
 	selector: 'lu-simple-select[customUsers],lu-multi-select[customUsers]',
-	standalone: true,
 	exportAs: 'luCustomUsers',
 })
 export class LuCoreSelectCustomUsersDirective extends LuCoreSelectUsersDirective<LuCustomUser> {

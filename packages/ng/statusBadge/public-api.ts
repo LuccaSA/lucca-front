@@ -1,1 +1,1 @@
-export * from './statusBadge.component';
+export * from '@lucca-front/ng/status-badge';

@@ -2,10 +2,8 @@ import { Component } from '@angular/core';
 import { Meta, StoryFn } from '@storybook/angular';
 
 @Component({
-	standalone: true,
 	selector: 'user-tile-stories',
 	templateUrl: './user-tile.stories.html',
-	styleUrl: './user-tile.stories.scss',
 })
 class UserTileStory {}
 

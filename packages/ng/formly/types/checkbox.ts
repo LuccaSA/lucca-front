@@ -7,7 +7,6 @@ import { FieldType, FieldTypeConfig, FormlyModule } from '@ngx-formly/core';
 	styleUrl: 'formly-field.common.scss',
 	templateUrl: './checkbox.html',
 	changeDetection: ChangeDetectionStrategy.OnPush,
-	standalone: true,
 	imports: [ReactiveFormsModule, FormlyModule],
 })
 export class LuFormlyFieldCheckbox extends FieldType<FieldTypeConfig> {

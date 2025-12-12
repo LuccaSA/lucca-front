@@ -1,4 +1,9 @@
 <div class="simpleSelect-field">
+	<span class="simpleSelect-field-prefix">
+		@if (prefix()) {
+			<ng-container *luPortal="prefix()" />
+		}
+	</span>
 	<input
 		class="simpleSelect-field-input"
 		type="text"
@@ -7,7 +12,7 @@
 		[attr.aria-activedescendant]="activeDescendant$ | async"
 		[attr.aria-expanded]="isPanelOpen"
 		[attr.aria-controls]="ariaControls"
-		placeholder="{{ inputPlaceholder }}"
+		placeholder="{{ inputPlaceholder ? inputPlaceholder : intl.placeholder }}"
 		[ngModel]="clue"
 		(ngModelChange)="clueChanged($event)"
 		[ngModelOptions]="{ standalone: true }"
@@ -24,15 +29,7 @@
 	</div>
 	@if (!filterPillMode) {
 		@if (clearable && hasValue() && (disabled$ | async) === false) {
-			<button
-				class="simpleSelect-field-clear clear"
-				role="button"
-				type="button"
-				(click)="clearValue($event)"
-				(keydown.space)="clearValue($event)"
-			>
-				<span class="pr-u-mask">{{ intl.clear }}</span>
-			</button>
+			<lu-clear class="simpleSelect-field-clear" (onClear)="clearValue($event); inputElement.focus()">{{ intl.clear }}</lu-clear>
 		}
 		<lu-icon icon="arrowChevronBottom" class="simpleSelect-field-icon" />
 		<lu-icon icon="searchMagnifyingGlass" class="simpleSelect-field-icon mod-search" />

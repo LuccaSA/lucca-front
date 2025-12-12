@@ -8,7 +8,6 @@ import { LuForOptionsDirective } from './for-options.directive';
  */
 @Directive({
 	selector: '[luForTreeOptions]',
-	standalone: true,
 	providers: [
 		{
 			provide: ALuTreeOptionOperator,

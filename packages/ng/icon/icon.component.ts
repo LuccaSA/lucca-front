@@ -4,7 +4,6 @@ import { LuccaIcon } from '@lucca-front/icons';
 
 @Component({
 	selector: 'lu-icon',
-	standalone: true,
 	imports: [NgClass],
 	templateUrl: './icon.component.html',
 	styleUrl: './icon.component.scss',

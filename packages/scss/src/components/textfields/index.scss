@@ -391,15 +391,15 @@
 
 		.textfield-input {
 			&:is(:hover) {
-				@include framedInputHover;
+				@include inputFramedHover;
 			}
 
 			&:is(:focus) {
-				@include framedInputFocus;
+				@include inputFramedFocus;
 			}
 
 			&:is(:invalid, .is-invalid, .invalid) {
-				@include framedInputInvalid;
+				@include inputFramedInvalid;
 			}
 		}
 	}

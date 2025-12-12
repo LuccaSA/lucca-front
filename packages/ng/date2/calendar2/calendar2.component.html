@@ -62,6 +62,9 @@
 							<td class="calendar-table-body-row-cell is-overflow" *luRepeatTimes="isLastWeek ? 7 - week.length : 0"></td>
 						</tr>
 					}
+					<tr class="calendar-table-body-row" *luRepeatTimes="6 - monthGridDisplay().length">
+						<td class="calendar-table-body-row-cell is-overflow" *luRepeatTimes="7"></td>
+					</tr>
 				</tbody>
 			</table>
 			@if (hasTodayButton()) {

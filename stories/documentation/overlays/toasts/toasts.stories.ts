@@ -8,7 +8,6 @@ import { map } from 'rxjs/operators';
 
 @Component({
 	selector: 'toasts-stories',
-	standalone: true,
 	imports: [FormsModule, LuToastsComponent],
 	templateUrl: './toasts.stories.html',
 })

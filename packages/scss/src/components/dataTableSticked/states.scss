@@ -18,3 +18,10 @@
 	--components-dataTable-header-shadow-opacity: 0;
 }
 
+@mixin firstColumnVisibleAfterColsStart {
+	--components-dataTable-shadow-colsStart-opacity: 0;
+}
+
+@mixin lastColumnVisibleBeforeColsEnd {
+	--components-dataTable-shadow-colsEnd-opacity: 0;
+}

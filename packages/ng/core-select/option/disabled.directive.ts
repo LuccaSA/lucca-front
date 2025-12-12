@@ -3,7 +3,6 @@ import { LU_OPTION_CONTEXT } from './option.token';
 
 @Directive({
 	selector: '[luDisabledOption]',
-	standalone: true,
 })
 export class LuDisabledOptionDirective {
 	private context = inject(LU_OPTION_CONTEXT);

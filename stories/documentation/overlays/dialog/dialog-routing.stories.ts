@@ -29,27 +29,23 @@ class DataProvider {
 }
 
 @Component({
-	standalone: true,
 	template: `Empty component, no route matched`,
 })
 class EmptyComponent {}
 
 @Component({
-	standalone: true,
 	imports: [CalloutComponent],
 	template: `<lu-callout heading="" size="M" state="success">dialog onClosed() called</lu-callout>`,
 })
 class ClosedComponent {}
 
 @Component({
-	standalone: true,
 	imports: [CalloutComponent],
 	template: `<lu-callout heading="" size="M" state="error">dialog onDismissed() called</lu-callout>`,
 })
 class DismissedComponent {}
 
 @Component({
-	standalone: true,
 	imports: [
 		DialogComponent,
 		DialogHeaderComponent,
@@ -116,7 +112,6 @@ class TestDialogComponent {
 
 @Component({
 	selector: 'dialog-routing-stories',
-	standalone: true,
 	template: `
 		<div class="pr-u-marginBlockEnd200">
 			<p>
@@ -223,14 +218,12 @@ class DataProvider {
 
 // Components in sub routes
 @Component({
-	standalone: true,
 	imports: [CalloutComponent],
 	template: \`<lu-callout heading="" size="M" state="success">dialog onClosed() called</lu-callout>\`,
 })
 class ClosedComponent {}
 
 @Component({
-	standalone: true,
 	imports: [CalloutComponent],
 	template: \`<lu-callout heading="" size="M" state="error">dialog onDismissed() called</lu-callout>\`,
 })
@@ -239,7 +232,6 @@ class DismissedComponent {}
 // Story
 @Component({
 	selector: 'dialog-routing-stories',
-	standalone: true,
 	template: \`
 	<button luButton type="button" routerLink="/dialog">Navigate to /dialog</button>
 \`,

@@ -12,7 +12,6 @@ import { ICalendarItem } from './calendar-item.interface';
 	templateUrl: './calendar-input.component.html',
 	styleUrl: './calendar-input.component.scss',
 	changeDetection: ChangeDetectionStrategy.OnPush,
-	standalone: true,
 	imports: [FormsModule],
 	providers: [
 		{

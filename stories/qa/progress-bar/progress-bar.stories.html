@@ -1,0 +1,60 @@
+<table class="demo-QAtable">
+	<tbody>
+		<tr>
+			<td></td>
+			<td style="width: 50%">
+				<div class="demo-QAtable-list">HTML</div>
+			</td>
+			<td style="width: 50%">
+				<div class="demo-QAtable-list">Angular</div>
+			</td>
+		</tr>
+		<tr>
+			<td>Default</td>
+			<td style="width: 50%">
+				<div class="progress">
+					<div class="progress-bar" style="width: 50%"></div>
+				</div>
+			</td>
+			<td style="width: 50%">
+				<lu-progress-bar value="50" />
+			</td>
+		</tr>
+		<tr>
+			<td>Indeterminate</td>
+			<td>
+				<div class="progress mod-indeterminate">
+					<div class="progress-bar"></div>
+				</div>
+			</td>
+			<td>
+				<lu-progress-bar [indeterminate]="true" />
+			</td>
+		</tr>
+		<tr>
+			<td>Success</td>
+			<td>
+				<div class="progress is-success">
+					<div class="progress-bar" style="width: 50%"></div>
+				</div>
+			</td>
+			<td>
+				<lu-progress-bar state="success" value="50" />
+			</td>
+		</tr>
+		<tr>
+			<td>Error</td>
+			<td>
+				<div class="progress is-error">
+					<div class="progress-bar" style="width: 50%"></div>
+				</div>
+			</td>
+			<td>
+				<lu-progress-bar state="success" value="50" />
+			</td>
+		</tr>
+	</tbody>
+</table>
+
+<!-- To tell the ui-diff tool that the page has finished rendering -->
+<span id="ready"></span>

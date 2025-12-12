@@ -1,3 +1,4 @@
+export * from './content-displayer/content-displayer.component';
 export * from './counter-displayer/counter-displayer.component';
 export * from './default-displayer.component';
 export * from './default-displayer.translate';

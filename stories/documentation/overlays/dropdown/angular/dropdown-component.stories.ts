@@ -6,7 +6,6 @@ import { applicationConfig, Meta, StoryFn } from '@storybook/angular';
 @AngularComponent({
 	selector: 'dropdown-component-stories',
 	templateUrl: './dropdown-basic.stories.html',
-	standalone: true,
 	imports: [LuDropdownModule],
 })
 class DropdownComponentStories {

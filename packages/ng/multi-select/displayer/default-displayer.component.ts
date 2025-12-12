@@ -2,6 +2,7 @@ import { AsyncPipe } from '@angular/common';
 import { ChangeDetectionStrategy, Component, DestroyRef, ElementRef, inject, OnInit, ViewChild } from '@angular/core';
 import { takeUntilDestroyed } from '@angular/core/rxjs-interop';
 import { FormsModule } from '@angular/forms';
+import { ChipComponent } from '@lucca-front/ng/chip';
 import { getIntl } from '@lucca-front/ng/core';
 import { ILuOptionContext, LU_OPTION_CONTEXT, ɵLuOptionOutletDirective } from '@lucca-front/ng/core-select';
 import { LuTooltipModule } from '@lucca-front/ng/tooltip';
@@ -12,23 +13,17 @@ import { LuMultiSelectDisplayerInputDirective } from './displayer-input.directiv
 
 @Component({
 	selector: 'lu-multi-select-default-displayer',
-	standalone: true,
-	imports: [AsyncPipe, LuTooltipModule, ɵLuOptionOutletDirective, FormsModule, LuMultiSelectDisplayerInputDirective],
+	imports: [AsyncPipe, LuTooltipModule, ɵLuOptionOutletDirective, FormsModule, LuMultiSelectDisplayerInputDirective, ChipComponent],
 	template: `
 		<div class="multipleSelect-displayer">
 			<input autocomplete="off" #inputElement (keydown.backspace)="inputBackspace()" (keydown.space)="inputSpace($event)" luMultiSelectDisplayerInput />
 			@for (option of displayedOptions$ | async; track option; let index = $index) {
-				<div class="multipleSelect-displayer-chip chip" [class.mod-unkillable]="select.disabled$ | async">
-					<span class="multipleSelect-displayer-chip-value"><ng-container *luOptionOutlet="select.displayerTpl(); value: option" /></span>
-					@if ((select.disabled$ | async) === false) {
-						<button type="button" class="chip-kill" (click)="unselectOption(option, $event)">
-							<span class="pr-u-mask">{{ intl.removeOption }}</span>
-						</button>
-					}
-				</div>
+				<lu-chip class="multipleSelect-displayer-chip" withEllipsis (kill)="unselectOption(option, $event)" [unkillable]="select.disabled$ | async">
+					<ng-container *luOptionOutlet="select.displayerTpl(); value: option" />
+				</lu-chip>
 			}
 			@if (overflowOptions$ | async; as overflow) {
-				<div class="multipleSelect-displayer-chip chip">+ {{ overflow }}</div>
+				<lu-chip class="multipleSelect-displayer-chip" unkillable>+ {{ overflow }}</lu-chip>
 			}
 		</div>
 	`,

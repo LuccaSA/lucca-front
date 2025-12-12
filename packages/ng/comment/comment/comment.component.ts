@@ -6,7 +6,6 @@ import { COMMENT_BLOCK_INSTANCE } from '../token';
 
 @Component({
 	selector: 'lu-comment',
-	standalone: true,
 	imports: [PortalDirective, DatePipe, LuUserPictureModule, NgTemplateOutlet],
 	templateUrl: './comment.component.html',
 	styleUrl: './comment.component.scss',

@@ -10,8 +10,7 @@
 					[attr.aria-expanded]="expanded()"
 					(click)="expandedToggle()"
 				>
-					<span aria-hidden="true" class="lucca-icon icon-arrowChevronTop"></span>
-					<span class="pr-u-mask">{{ groupButtonAlt() }}</span>
+					<lu-icon icon="arrowChevronTop" [alt]="groupButtonAlt()" />
 				</button>
 				<ng-container *luPortal="group()" />
 			</div>

@@ -12,7 +12,6 @@ registerLocaleData(localesFr);
 
 @Component({
 	selector: 'multi-select-stories',
-	standalone: true,
 	imports: [JsonPipe, FormsModule, LuMultiSelectInputComponent, LuMultiSelectWithSelectAllDirective, FormFieldComponent, LuCoreSelectTotalCountDirective],
 	template: `
 		<lu-form-field>

@@ -1,16 +1,15 @@
+import { CdkObserveContent } from '@angular/cdk/observers';
 import { AfterViewInit, ChangeDetectionStrategy, Component, DestroyRef, ElementRef, HostBinding, HostListener, inject, ViewEncapsulation } from '@angular/core';
 import { ButtonComponent } from '@lucca-front/ng/button';
+import { getIntl, PortalDirective } from '@lucca-front/ng/core';
 import { IconComponent } from '@lucca-front/ng/icon';
-import { PopoverFocusTrap } from '../../popover-focus-trap';
 import { Subject } from 'rxjs';
+import { PopoverFocusTrap } from '../../popover-focus-trap';
 import { POPOVER_CONFIG } from '../../popover-tokens';
 import { LU_POPOVER2_TRANSLATIONS } from '../../popover.translate';
-import { getIntl, PortalDirective } from '@lucca-front/ng/core';
-import { CdkObserveContent } from '@angular/cdk/observers';
 
 @Component({
 	selector: 'lu-popover-content',
-	standalone: true,
 	imports: [ButtonComponent, IconComponent, CdkObserveContent, PortalDirective],
 	templateUrl: './popover-content.component.html',
 	styleUrl: './popover-content.component.scss',

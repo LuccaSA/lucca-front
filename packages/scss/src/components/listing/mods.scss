@@ -48,3 +48,52 @@
 		--components-listing-listStyleType: lower-roman;
 	}
 }
+
+@mixin inline {
+	--components-listing-paddingInlineStart: 0;
+	--components-listing-flexDirection: row;
+	--components-listing-item-display: flex;
+	--components-listing-flexWrap: wrap;
+	--components-listing-item-content-flexWrap: wrap;
+	--components-listing-item-content-rowGap: var(--pr-t-spacings-50);
+}
+
+@mixin nestedInline {
+	&:has(.listing) {
+		.listing {
+			--components-listing-clipPath: 0;
+
+			@include inline;
+		}
+
+		.listing-item {
+			--components-listing-item-content-display: flex;
+			--components-listing-item-content-columnGap: var(--pr-t-spacings-100);
+		}
+	}
+
+	&.mod-divider:has(.listing) {
+		.listing {
+			--components-listing-marginInlineStart: calc(var(--components-listing-inlineFirst) * -1);
+
+			@include divider;
+		}
+
+		.listing-item-content {
+			--components-listing-item-content-columnGap: var(--pr-t-spacings-200);
+		}
+	}
+}
+
+@mixin hideFirstItems {
+	--components-listing-marginInlineStart: calc(var(--components-listing-inlineFirst) * -1);
+	--components-listing-clipPath: inset(
+		calc(var(--pr-t-spacings-50) * -1) calc(var(--pr-t-spacings-50) * -1) calc(var(--pr-t-spacings-50) * -1)
+			calc(var(--components-listing-inlineFirst) - var(--pr-t-spacings-50))
+	);
+}
+
+@mixin divider {
+	--components-listing-item-before-content: '';
+	--components-listing-inlineFirst: calc(var(--pr-t-spacings-100) + var(--pr-t-spacings-25) - var(--commons-divider-width));
+}

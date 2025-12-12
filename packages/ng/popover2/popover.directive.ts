@@ -70,7 +70,6 @@ const defaultPositionPairs: Record<PopoverPosition, ConnectionPositionPair> = {
 		'[attr.aria-expanded]': 'opened()',
 	},
 	exportAs: 'luPopover2',
-	standalone: true,
 })
 export class PopoverDirective implements OnDestroy {
 	overlay = inject(Overlay);

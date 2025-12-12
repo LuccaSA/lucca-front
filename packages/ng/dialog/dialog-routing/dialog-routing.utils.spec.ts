@@ -41,6 +41,7 @@ interface DialogRoutingTestDialogData {
 @Component({
 	selector: 'lu-dialog-routing-test',
 	template: '',
+	changeDetection: ChangeDetectionStrategy.OnPush,
 })
 class DialogRoutingTestComponent {
 	dialogData = injectDialogData<DialogRoutingTestDialogData>();
@@ -61,12 +62,14 @@ class ProvidedInParentRouteService {
 	imports: [RouterOutlet],
 	providers: [ProvidedInParentComponentService],
 	template: '<router-outlet />',
+	changeDetection: ChangeDetectionStrategy.OnPush,
 })
 class ParentComponent {}
 
 @Component({
 	selector: 'lu-dialog-routing-test',
 	template: '',
+	changeDetection: ChangeDetectionStrategy.OnPush,
 })
 class DialogRoutingTestWithParentDIComponent {
 	parentService = inject(ProvidedInParentComponentService);
@@ -77,14 +80,15 @@ class DialogRoutingTestWithParentDIComponent {
 	selector: 'lu-dialog-routing-with-router-outlet-test',
 	imports: [RouterOutlet],
 	template: '<router-outlet />',
+	changeDetection: ChangeDetectionStrategy.OnPush,
 })
 class DialogRoutingWithRouterOutletTestComponent {}
 
 @Component({
 	selector: 'lu-app-test',
-	standalone: true,
 	imports: [RouterOutlet],
 	template: '<router-outlet />',
+	changeDetection: ChangeDetectionStrategy.OnPush,
 })
 class AppTestComponent {}
 

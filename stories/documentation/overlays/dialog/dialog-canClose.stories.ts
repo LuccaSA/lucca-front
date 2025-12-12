@@ -60,7 +60,6 @@ import { Meta, StoryObj, applicationConfig } from '@storybook/angular';
 		LuSimpleSelectInputComponent,
 		FormsModule,
 	],
-	standalone: true,
 })
 export class DialogContentStoryComponent {
 	ref = injectDialogRef<string>();
@@ -75,7 +74,6 @@ export class DialogContentStoryComponent {
 
 @Component({
 	selector: 'lu-dialog-story',
-	standalone: true,
 	template: ` <button luButton (click)="openDialog()">Open dialog</button>`,
 	imports: [ButtonComponent],
 	providers: [provideLuDialog()],

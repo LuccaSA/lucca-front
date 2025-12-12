@@ -1,22 +1,33 @@
-@use '@lucca-front/icons/src/commons/utils/icon';
+@use '@lucca-front/icons/src/icon/exports' as icon;
 @use '@lucca-front/scss/src/commons/utils/a11y';
 @use '@lucca-front/scss/src/commons/utils/reset';
 @use '@lucca-front/scss/src/commons/utils/namespace';
 
 @mixin component($atRoot: namespace.$defaultAtRoot) {
 	background-color: var(--components-chip-backgroundColor);
+	border: none;
 	border-radius: var(--components-chip-borderRadius);
 	color: var(--components-chip-color);
 	display: inline-flex;
 	align-items: center;
-	gap: var(--pr-t-spacings-100);
 	position: relative;
 	vertical-align: middle;
 	padding-block: calc(var(--pr-t-spacings-50) / 2);
 	padding-inline: var(--pr-t-spacings-100);
 	font: var(--components-chip-font);
+	max-inline-size: 100%;
+
+	.lucca-icon {
+		@include icon.XS;
+
+		margin-inline-end: var(--pr-t-spacings-50);
+	}
 
 	@at-root ($atRoot) {
+		.chip-content {
+			outline: none;
+		}
+
 		.chip-kill {
 			@include reset.button;
 
@@ -28,6 +39,7 @@
 			inline-size: var(--pr-t-spacings-300);
 			block-size: var(--pr-t-spacings-300);
 			margin: calc(var(--pr-t-spacings-75) * -1);
+			margin-inline-start: var(--pr-t-spacings-25);
 			flex-shrink: 0;
 			cursor: pointer;
 
@@ -41,19 +53,18 @@
 
 			&::before {
 				border-radius: var(--pr-t-border-radius-full);
-				background-color: var(--components-chip-kill-disk-color, var(--palettes-neutral-700));
+				background-color: var(--components-chip-kill-disk-color);
 			}
 
 			&::after {
 				mask-image: var(--components-chip-kill-background-image);
 				mask-size: var(--components-chip-kill-size);
 				mask-repeat: no-repeat;
-				background-color: var(--components-chip-kill-cross-color, var(--palettes-neutral-0));
+				background-color: var(--components-chip-kill-cross-color);
 			}
 
 			&:hover {
-				--components-chip-kill-disk-color: var(--palettes-neutral-600);
-				--components-chip-kill-cross-color: var(--palettes-700, var(--palettes-neutral-0));
+				--components-chip-kill-disk-color: var(--palettes-700, var(--palettes-neutral-700));
 			}
 
 			&:focus-visible {
@@ -61,7 +72,7 @@
 			}
 
 			&:active {
-				--components-chip-kill-disk-color: var(--palettes-50, var(--palettes-neutral-800));
+				--components-chip-kill-disk-color: var(--palettes-900, var(--palettes-neutral-900));
 			}
 		}
 	}
