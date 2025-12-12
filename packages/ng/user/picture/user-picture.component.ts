@@ -1,6 +1,6 @@
 import { NgStyle } from '@angular/common';
-import { booleanAttribute, ChangeDetectionStrategy, Component, computed, inject, input, Input, OnChanges, Optional, ViewEncapsulation } from '@angular/core';
-import { IconComponent } from '@lucca-front/ng/icon';
+import { booleanAttribute, ChangeDetectionStrategy, Component, computed, inject, input, ViewEncapsulation } from '@angular/core';
+import { ɵeffectWithDeps } from '@lucca-front/ng/core';
 import { LU_DEFAULT_DISPLAY_POLICY, LuDisplayFormat, LuDisplayFullname, LuDisplayHybrid, LuDisplayInitials, luUserDisplay } from '../display';
 
 export interface LuUserPictureUserInput {
@@ -33,7 +33,7 @@ export const displayPictureFormatRecord: Record<LuDisplayFormat, LuDisplayInitia
  */
 @Component({
 	selector: 'lu-user-picture',
-	imports: [NgStyle, IconComponent],
+	imports: [NgStyle],
 	templateUrl: './user-picture.component.html',
 	styleUrl: './user-picture.component.scss',
 	host: {
@@ -50,14 +50,18 @@ export const displayPictureFormatRecord: Record<LuDisplayFormat, LuDisplayInitia
 	changeDetection: ChangeDetectionStrategy.OnPush,
 	encapsulation: ViewEncapsulation.None,
 })
-export class LuUserPictureComponent implements OnChanges {
+export class LuUserPictureComponent {
 	/**
 	 * User Display format.
 	 * It is set to 'LU_DEFAULT_DISPLAY_POLICY' by default
 	 */
-	@Input()
-	@Optional()
-	displayFormat: LuDisplayInitials = displayPictureFormatRecord[inject(LU_DEFAULT_DISPLAY_POLICY)];
+	readonly displayFormat = input<LuDisplayInitials>(displayPictureFormatRecord[inject(LU_DEFAULT_DISPLAY_POLICY)]);
+
+	readonly user = input<LuUserPictureUserInput>();
+
+	readonly AI = input(false, { transform: booleanAttribute });
+
+	readonly size = input<'XS' | 'S' | 'M' | 'L' | 'XL' | 'XXL' | 'XXXL'>('M');
 
 	/**
 	 * Image loading attribute
@@ -65,43 +69,27 @@ export class LuUserPictureComponent implements OnChanges {
 	 *
 	 * (more info: https://developer.mozilla.org/en-US/docs/Web/HTML/Element/img#loading)
 	 */
-	@Input()
-	imageLoadingAttribute: HTMLImageElement['loading'] = 'lazy';
+	readonly imageLoadingAttribute = input<HTMLImageElement['loading']>('lazy');
 
-	/**
-	 * UserPictureUserInput whose picture you want to display.
-	 */
-	private _user: LuUserPictureUserInput;
+	readonly initials = computed(() => luUserDisplay(this.user(), this.displayFormat()));
+	readonly modSize = computed(() => `mod-${this.size()}`);
 
-	@Input()
-	set user(user: LuUserPictureUserInput) {
-		this._user = user;
-		const pictureHref = user?.picture?.href || user?.pictureHref;
-		this.hasPicture = !!pictureHref;
-		this.pictureHref = pictureHref;
-		if (!this.hasPicture) {
-			const hsl = this.getNameHue();
-			this.style = { 'background-color': `hsl(${hsl}, 60%, 60%)` };
-		}
-	}
-
-	AI = input(false, { transform: booleanAttribute });
-	size = input<'XS' | 'S' | 'M' | 'L' | 'XL' | 'XXL' | 'XXXL'>('M');
-
-	get user() {
-		return this._user;
-	}
-
-	initials = '';
 	hasPicture = false;
 	pictureHref = '';
-
 	style = {};
 
-	modSize = computed(() => `mod-${this.size()}`);
-
-	ngOnChanges(): void {
-		this.initials = luUserDisplay(this.user, this.displayFormat);
+	constructor() {
+		ɵeffectWithDeps([this.user], (user) => {
+			if (user) {
+				const pictureHref = user?.picture?.href || user?.pictureHref;
+				this.hasPicture = !!pictureHref;
+				this.pictureHref = pictureHref;
+				if (!this.hasPicture) {
+					const hsl = this.getNameHue();
+					this.style = { 'background-color': `hsl(${hsl}, 60%, 60%)` };
+				}
+			}
+		});
 	}
 
 	pictureError() {
@@ -112,7 +100,7 @@ export class LuUserPictureComponent implements OnChanges {
 
 	private getNameHue(): number {
 		// we sum the chars in user's firstname + lastname
-		const charSum = luUserDisplay(this._user, LuDisplayFullname.firstlast)
+		const charSum = luUserDisplay(this.user(), LuDisplayFullname.firstlast)
 			.split('')
 			.reduce((sum, a) => sum + a.charCodeAt(0), 0);
 		// and take a modulo 360 for hue

@@ -1,7 +1,7 @@
 @if (hasPicture) {
-	<img class="avatar-picture" [src]="pictureHref" alt="" (error)="pictureError()" [loading]="imageLoadingAttribute" />
+	<img class="avatar-picture" [src]="pictureHref" alt="" (error)="pictureError()" [loading]="imageLoadingAttribute()" />
 } @else {
 	<div class="avatar-picture" [ngStyle]="!AI() && style">
-		<span class="avatar-picture-initials" translate="no">{{ initials }}</span>
+		<span class="avatar-picture-initials" translate="no">{{ initials() }}</span>
 	</div>
 }
