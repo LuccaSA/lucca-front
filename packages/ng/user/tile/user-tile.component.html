@@ -1,8 +1,8 @@
-<lu-user-picture [user]="user" [displayFormat]="displayPictureFormat" />
+<lu-user-picture [user]="user()" [displayFormat]="displayPictureFormat()" />
 <div class="userTile-content">
-	<div class="userTile-content-name" translate="no">{{ user | luUserDisplay: displayFormat }}</div>
-	@if (role || user?.jobTitle) {
-		<div class="userTile-content-info">{{ role ? role : user?.jobTitle }}</div>
+	<div class="userTile-content-name" translate="no">{{ user() | luUserDisplay: displayFormat() }}</div>
+	@if (role() || user()?.jobTitle) {
+		<div class="userTile-content-info">{{ role() ? role() : user()?.jobTitle }}</div>
 	}
 	<div class="userTile-content-slotBottom">
 		<ng-content />
