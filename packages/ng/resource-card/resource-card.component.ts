@@ -18,10 +18,10 @@ import { LU_RESOURCE_CARD_WRAPPER_INSTANCE } from './wrapper/resource-card-wrapp
 	},
 })
 export class ResourceCardComponent {
-	wrapperRef = inject(LU_RESOURCE_CARD_WRAPPER_INSTANCE, { optional: true });
+	readonly wrapperRef = inject(LU_RESOURCE_CARD_WRAPPER_INSTANCE, { optional: true });
 
-	draggable = input(false, { transform: booleanAttribute });
-	grid = input(false, { transform: booleanAttribute });
-	headingLevel = input<'1' | '2' | '3' | '4' | '5' | '6'>('3');
-	size = input<'S' | null>(null);
+	readonly draggable = input(false, { transform: booleanAttribute });
+	readonly grid = input(false, { transform: booleanAttribute });
+	readonly headingLevel = input<'1' | '2' | '3' | '4' | '5' | '6'>('3');
+	readonly size = input<'S' | null>(null);
 }

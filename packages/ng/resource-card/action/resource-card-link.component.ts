@@ -13,5 +13,5 @@ import { booleanAttribute, ChangeDetectionStrategy, Component, input, ViewEncaps
 	},
 })
 export class ResourceCardLinkComponent {
-	disabled = input(false, { transform: booleanAttribute });
+	readonly disabled = input(false, { transform: booleanAttribute });
 }
