@@ -40,6 +40,10 @@
 			}
 		}
 
+		.fieldset-title-content-text {
+			padding-block: var(--pr-t-spacings-50);
+		}
+
 		.fieldset-title-content-text-helper {
 			font: var(--pr-t-font-body-S);
 			font-weight: var(--pr-t-font-fontWeight-regular);
