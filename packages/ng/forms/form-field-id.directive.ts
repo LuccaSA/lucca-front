@@ -1,7 +1,7 @@
 import { computed, Directive, inject, input, OnDestroy } from '@angular/core';
+import { ɵeffectWithDeps } from '@lucca-front/ng/core';
 import { FormFieldComponent } from '@lucca-front/ng/form-field';
 import { filter, take } from 'rxjs/operators';
-import { ɵeffectWithDeps } from '../core/signal';
 
 @Directive({
 	selector: '[luFormFieldId]',
