@@ -32,7 +32,7 @@ export class DataTableRowCellHeaderComponent {
 	headRef = inject(LU_DATA_TABLE_HEAD_INSTANCE, { optional: true });
 	footRef = inject(LU_DATA_TABLE_FOOT_INSTANCE, { optional: true });
 
-	sort = model<undefined | null | 'ascending' | 'descending'>(undefined);
+	sort = model<null | 'none' | 'ascending' | 'descending'>(null);
 	fixedWidth = input<string | null>(null);
 	editable = input(false, { transform: booleanAttribute });
 	align = input<null | 'start' | 'center' | 'end'>(null);

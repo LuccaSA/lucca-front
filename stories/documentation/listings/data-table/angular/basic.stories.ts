@@ -21,7 +21,7 @@ export default {
 	title: 'Documentation/Listings/Data table/Angular/Basic',
 	argTypes: {
 		sort: {
-			options: ['', 'null', 'ascending', 'descending'],
+			options: ['', 'none', 'ascending', 'descending'],
 			control: {
 				type: 'select',
 			},
