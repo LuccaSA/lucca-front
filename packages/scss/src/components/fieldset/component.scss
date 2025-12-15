@@ -27,7 +27,7 @@
 			background-color: transparent;
 			text-align: start;
 			display: flex;
-			align-items: var(--components-fieldset-title-content-alignItems);
+			align-items: flex-start;
 			justify-content: space-between;
 			gap: var(--components-fieldset-gap);
 			max-inline-size: var(--components-fieldset-contentMaxWidth);
@@ -38,6 +38,10 @@
 				transition-duration: var(--commons-animations-durations-fast);
 				color: var(--palettes-neutral-700);
 			}
+		}
+
+		.fieldset-title-content-text {
+			padding-block: var(--pr-t-spacings-50);
 		}
 
 		.fieldset-title-content-text-helper {

@@ -22,8 +22,6 @@
 }
 
 @mixin withAction {
-	--components-fieldset-title-content-alignItems: center;
-
 	.fieldset-title-content-action {
 		.button {
 			@include button.outlined;
