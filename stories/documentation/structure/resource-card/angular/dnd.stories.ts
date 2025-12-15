@@ -1,3 +1,4 @@
+import { CdkDrag, CdkDropList } from '@angular/cdk/drag-drop';
 import { provideRouter } from '@angular/router';
 import { ButtonComponent } from '@lucca-front/ng/button';
 import { IconComponent } from '@lucca-front/ng/icon';
@@ -27,7 +28,6 @@ export default {
 			control: {
 				type: 'select',
 			},
-			if: { arg: 'wrapper', truthy: true },
 		},
 	},
 	decorators: [
@@ -43,6 +43,8 @@ export default {
 				ResourceCardButtonComponent,
 				ResourceCardLinkComponent,
 				ResourceCardWrapperComponent,
+				CdkDropList,
+				CdkDrag,
 			],
 		}),
 		applicationConfig({
@@ -77,13 +79,13 @@ export default {
 			</ng-container>`
 			: ``;
 		const cards = `
-		<lu-resource-card>
+		<lu-resource-card cdkDrag>
 			<a href="#" luResourceCardAction>Lorem ipsum dolor</a>${headingInfosTpl}${beforeTpl}${afterTpl}${descriptionTpl}
-		</lu-resource-card>`.repeat(4);
+		</lu-resource-card>`.repeat(3);
 
 		return {
 			template: `
-	<lu-resource-card-wrapper draggable${sizeWrapperAttr}>${cards}
+	<lu-resource-card-wrapper cdkDropList draggable${sizeWrapperAttr}>${cards}
 	</lu-resource-card-wrapper>
 
 	`,
