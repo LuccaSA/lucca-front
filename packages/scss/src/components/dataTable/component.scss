@@ -31,6 +31,17 @@
 
 		.dataTableWrapper-pagination {
 			border-block-start: 1px solid var(--commons-border-200);
+			background-color: var(--components-dataTable-cell-background);
+			display: flex;
+			justify-content: flex-end;
+			position: sticky;
+			inset-block-end: 0;
+			z-index: 4;
+
+			> * {
+				position: sticky;
+				inset-inline-end: 0;
+			}
 
 			&:empty {
 				display: none;

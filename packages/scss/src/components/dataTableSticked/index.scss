@@ -10,6 +10,7 @@
 	@layer mods {
 		&:has(.dataTable.mod-stickyHeader, .dataTable-head.mod-sticky) {
 			@include stickyHeader;
+			@include firstRowVisible;
 		}
 
 		&:has(.dataTableShadows),
@@ -52,6 +53,10 @@
 
 		&:has(.dataTable.is-lastColumnVisibleBeforeColsEnd) {
 			@include lastColumnVisibleBeforeColsEnd;
+		}
+
+		&:has(.dataTableWrapper-pagination:not(:empty)) {
+			@include pagination;
 		}
 	}
 
