@@ -1,4 +1,4 @@
-import { booleanAttribute, ChangeDetectionStrategy, Component, computed, input, numberAttribute } from '@angular/core';
+import { ChangeDetectionStrategy, Component, computed, input, numberAttribute } from '@angular/core';
 
 @Component({
 	selector: 'lu-skeleton-resource-card',
@@ -7,7 +7,6 @@ import { booleanAttribute, ChangeDetectionStrategy, Component, computed, input, 
 	changeDetection: ChangeDetectionStrategy.OnPush,
 })
 export class SkeletonResourceCardComponent {
-	dark = input(false, { transform: booleanAttribute });
 	descriptionLines = input(0, { transform: numberAttribute });
 
 	readonly lines = computed(() => Array.from({ length: this.descriptionLines() }));

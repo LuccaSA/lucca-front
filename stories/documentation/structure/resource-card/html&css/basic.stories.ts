@@ -109,7 +109,7 @@ export default {
 		const headingTpl =
 			args.actionType === 'a'
 				? args.disabled
-					? `<a luTooltip luTooltipOnlyForDisplay luTooltipWhenEllipsis [luTooltipAnchor]="resourceCard1" class="resourceCard-layout-header-title-action is-disabled">${args.heading}</a>`
+					? `<span luTooltip luTooltipOnlyForDisplay luTooltipWhenEllipsis [luTooltipAnchor]="resourceCard1" class="resourceCard-layout-header-title-action is-disabled">${args.heading}</span>`
 					: `<a href="#" luTooltip luTooltipOnlyForDisplay luTooltipWhenEllipsis [luTooltipAnchor]="resourceCard1" class="resourceCard-layout-header-title-action">${args.heading}</a>`
 				: args.disabled
 					? `<button luTooltip luTooltipOnlyForDisplay luTooltipWhenEllipsis [luTooltipAnchor]="resourceCard1" class="resourceCard-layout-header-title-action" disabled="disabled">${args.heading}</button>`

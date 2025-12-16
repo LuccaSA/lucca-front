@@ -16,7 +16,6 @@ export const Template: StoryObj<SkeletonResourceCardComponent> = {
 	argTypes: {},
 
 	args: {
-		dark: false,
 		descriptionLines: 0,
 	},
 };
