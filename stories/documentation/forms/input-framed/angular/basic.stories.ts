@@ -35,6 +35,27 @@ export default {
 		}),
 	],
 	argTypes: {
+		panel: {
+			description: 'Ajoute une section visible lorsque le champ est sélectionné.',
+		},
+		illustration: {
+			description: "Slot dédié à l'ajout d'illustrations.",
+		},
+		info: {
+			description: 'Ajoute une section informative toujours visible sous le champ.',
+		},
+		tag: {
+			description: 'Ajoute un tag après le label du champ.',
+		},
+		checkbox: {
+			description: 'Passe le composant au format checkbox.',
+		},
+		center: {
+			description: 'Aligne le champ et son illustration verticalement lorsque le label est trop court.',
+		},
+		inlineMessage: {
+			description: 'Ajoute un texte descriptif (aide, erreur, etc.) sous le champ de formulaire.',
+		},
 		grid: {
 			if: { arg: 'panel', truthy: false },
 		},
