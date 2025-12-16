@@ -1,5 +1,5 @@
-import { ChangeDetectionStrategy, ChangeDetectorRef, Component, computed, effect, inject, input, ViewEncapsulation } from '@angular/core';
-import { LuClass, ɵeffectWithDeps } from '@lucca-front/ng/core';
+import { ChangeDetectionStrategy, Component, computed, effect, inject, input, ViewEncapsulation } from '@angular/core';
+import { LuClass } from '@lucca-front/ng/core';
 import { LU_DEFAULT_DISPLAY_POLICY, LuDisplayFormat, LuUserDisplayPipe } from '../display/index';
 import { displayPictureFormatRecord, LuUserPictureComponent } from '../picture/user-picture.component';
 
@@ -27,7 +27,6 @@ export interface LuUserTileUserInput {
 export class LuUserTileComponent {
 	#luClass = inject(LuClass);
 	readonly #defaultFormat = inject(LU_DEFAULT_DISPLAY_POLICY);
-	readonly #changeDetector = inject(ChangeDetectorRef);
 
 	/**
 	 * LuUserTileUserInput to display.
@@ -53,7 +52,6 @@ export class LuUserTileComponent {
 	readonly displayPictureFormat = computed(() => (this.displayFormat() ? displayPictureFormatRecord[this.displayFormat()] : displayPictureFormatRecord[this.#defaultFormat]));
 
 	constructor() {
-		ɵeffectWithDeps([this.user, this.role, this.displayFormat], (_user, _role, _displayFormat) => this.#changeDetector.markForCheck());
 		effect(() => {
 			this.#luClass.setState({
 				[`mod-${this.size()}`]: !!this.size(),
