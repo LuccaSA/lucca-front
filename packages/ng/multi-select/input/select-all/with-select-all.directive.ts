@@ -11,7 +11,6 @@ import { LuMultiSelectWithSelectAllContext, MULTI_SELECT_WITH_SELECT_ALL_CONTEXT
 @Directive({
 	// eslint-disable-next-line @angular-eslint/directive-selector
 	selector: 'lu-multi-select[withSelectAll]',
-	standalone: true,
 	providers: [
 		{
 			provide: ɵIsSelectedStrategy,
@@ -37,6 +36,20 @@ export class LuMultiSelectWithSelectAllDirective<TValue> extends ɵIsSelectedStr
 
 	readonly #hasValue = computed(() => this.mode() !== 'none');
 
+	readonly #valuesCount = computed(() => this.values().length);
+	readonly displayerCount = computed(() => {
+		switch (this.mode()) {
+			case 'all':
+				return this.totalCount();
+			case 'include':
+				return this.#valuesCount();
+			case 'exclude':
+				return this.totalCount() - this.#valuesCount();
+			case 'none':
+				return null;
+		}
+	});
+
 	readonly #selectAllValue = computed<LuMultiSelection<TValue>>(() => {
 		const mode = this.#mode();
 		return mode === 'all' || mode === 'none' ? { mode } : { mode, values: this.#values() };
@@ -59,6 +72,9 @@ export class LuMultiSelectWithSelectAllDirective<TValue> extends ɵIsSelectedStr
 		this.#select.panelHeaderTpl.set(LuMultiSelectAllHeaderComponent);
 		this.#select.valuesTpl.set(LuMultiSelectAllDisplayerComponent);
 		this.#select.hasValue = () => this.#hasValue();
+		this.#select.isFilterPillEmpty = computed(() => !this.#hasValue());
+		this.#select.useSingleOptionDisplayer = computed(() => this.#mode() === 'include');
+		this.#select.valueLength = this.displayerCount;
 	}
 
 	setSelectAll(selectAll: boolean): void {

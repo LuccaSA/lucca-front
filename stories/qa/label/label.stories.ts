@@ -2,7 +2,6 @@ import { Component } from '@angular/core';
 import { Meta, StoryFn } from '@storybook/angular';
 
 @Component({
-	standalone: true,
 	selector: 'label-stories',
 	templateUrl: './label.stories.html',
 })
@@ -15,4 +14,4 @@ export default {
 
 const template: StoryFn<LabelStory> = () => ({});
 
-export const basic = template.bind({});
+export const Basic = template.bind({});

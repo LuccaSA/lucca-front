@@ -23,6 +23,7 @@
 	transition-property: transform, inline-size, block-size, inset;
 	transition-duration: var(--commons-animations-durations-standard);
 	interpolate-size: allow-keywords;
+	overflow: hidden;
 
 	@supports not (height: 1dvh) {
 		--components-dialog-maxHeight: var(--components-dialog-maxHeightFallback);
@@ -79,19 +80,6 @@
 			}
 		}
 
-		.dialog-inside-header-button {
-			&.button {
-				@include button.ghost;
-				@include button.S;
-				@include button.onlyIconS;
-
-				align-self: start;
-				justify-self: end;
-				grid-area: close;
-				display: var(--components-dialog-insideHeaderButtonDisplay);
-			}
-		}
-
 		.dialog-inside-header-actionOptional {
 			margin-right: calc(var(--pr-t-spacings-100) * -1);
 
@@ -141,13 +129,13 @@
 			padding: var(--components-dialog-insideHeaderTitlePadding);
 			text-align: var(--components-dialog-insideHeaderTitleAlign);
 			margin: 0;
-			overflow-wrap: break-word;
+			overflow-wrap: anywhere;
 		}
 
 		.dialog_backdrop {
 			background-color: var(--palettes-neutral-900);
 			position: fixed;
-			opacity: 0.4;
+			opacity: 0.4 !important; // weird bug with Chrome and its inspector open
 			inset: 0;
 		}
 	}

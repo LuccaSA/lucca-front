@@ -83,6 +83,11 @@
 
 		&.mod-draggable {
 			@include draggable;
+
+			&:has([selectable]),
+			&.mod-selectable {
+				@include selectableDraggable;
+			}
 		}
 	}
 
@@ -130,6 +135,15 @@
 	.dataTable-body-row-cell-expand-button {
 		&[aria-expanded='true'] {
 			@include expanded;
+		}
+	}
+}
+
+// drag and drop preview
+:not(.dataTable-body) {
+	> .dataTable-body-row {
+		@layer components {
+			@include vars;
 		}
 	}
 }

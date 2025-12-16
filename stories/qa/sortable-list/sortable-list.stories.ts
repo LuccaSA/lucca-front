@@ -1,10 +1,11 @@
 import { Component } from '@angular/core';
+import { SortableListComponent, SortableListItemComponent } from '@lucca-front/ng/sortable-list';
 import { Meta, StoryFn, moduleMetadata } from '@storybook/angular';
 
 @Component({
-	standalone: true,
 	selector: 'sortable-list-stories',
 	templateUrl: './sortable-list.stories.html',
+	imports: [SortableListComponent, SortableListItemComponent],
 })
 class SortableListStory {}
 
@@ -20,4 +21,4 @@ export default {
 
 const template: StoryFn<SortableListStory> = () => ({});
 
-export const basic = template.bind({});
+export const Basic = template.bind({});

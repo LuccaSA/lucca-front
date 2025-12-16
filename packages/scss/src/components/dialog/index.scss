@@ -56,5 +56,9 @@
 		&.mod-fullScreen {
 			@include fullScreen;
 		}
+
+		&:has(.dialog-inside-header-button) {
+			@include withCloseButton;
+		}
 	}
 }

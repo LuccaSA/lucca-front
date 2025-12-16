@@ -2,7 +2,6 @@ import { Component } from '@angular/core';
 import { Meta, StoryFn, moduleMetadata } from '@storybook/angular';
 
 @Component({
-	standalone: true,
 	selector: 'forms-checkbox-stories',
 	templateUrl: './checkbox.stories.html',
 })
@@ -20,4 +19,4 @@ export default {
 
 const template: StoryFn<CheckboxStory> = () => ({});
 
-export const basic = template.bind({});
+export const Basic = template.bind({});

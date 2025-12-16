@@ -5,7 +5,6 @@ import { NumericBadgeComponent } from '@lucca-front/ng/numeric-badge';
 import { Meta, StoryFn } from '@storybook/angular';
 
 @Component({
-	standalone: true,
 	selector: 'button-stories',
 	templateUrl: './button.stories.html',
 	styles: ['.button::after { animation-play-state: paused; }'],
@@ -20,4 +19,4 @@ export default {
 
 const template: StoryFn<ButtonStory> = () => ({});
 
-export const basic = template.bind({});
+export const Basic = template.bind({});

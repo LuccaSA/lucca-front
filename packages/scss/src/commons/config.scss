@@ -5,9 +5,6 @@
 
 $layers: 'reset, base, components, mods, product, utils' !default;
 
-/* stylelint-disable-next-line layer-name-pattern */
-@layer #{$layers};
-
 $isNamespaced: false !default;
 $deprecatedSpacings: false !default;
 $deprecatedCardBoxMargin: false !default;
@@ -607,11 +604,11 @@ $elevation: (
 
 // Tokens : Colors
 $colorInput: (
-	text: var(--palettes-neutral-800),
+	text: var(--pr-t-color-text),
 	text-placeholder: var(--palettes-neutral-400),
 	text-placeholder-critical: var(--palettes-critical-400),
-	text-suffix: var(--palettes-neutral-600),
-	text-disabled: var(--palettes-neutral-500),
+	text-suffix: var(--pr-t-color-text-subtle),
+	text-disabled: var(--palettes-neutral-700),
 	icon: var(--palettes-neutral-600),
 	icon-disabled: var(--palettes-neutral-500),
 	background: var(--palettes-neutral-0),

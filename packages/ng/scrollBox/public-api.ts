@@ -1,1 +1,1 @@
-export * from './scroll-box.component';
+export * from '@lucca-front/ng/scroll-box';

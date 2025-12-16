@@ -2,7 +2,6 @@ import { Component } from '@angular/core';
 import { Meta, moduleMetadata, StoryFn } from '@storybook/angular';
 
 @Component({
-	standalone: true,
 	selector: 'dialog-stories',
 	templateUrl: './dialog.stories.html',
 })
@@ -20,4 +19,4 @@ export default {
 
 const template: StoryFn<DialogStory> = () => ({});
 
-export const basic = template.bind({});
+export const Basic = template.bind({});

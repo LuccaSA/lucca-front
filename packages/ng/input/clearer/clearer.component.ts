@@ -1,17 +1,17 @@
-import { CommonModule } from '@angular/common';
 import { ChangeDetectionStrategy, Component, EventEmitter, forwardRef, Output } from '@angular/core';
 import { getIntl } from '@lucca-front/ng/core';
 import { ALuClearer, ILuClearer } from './clearer.model';
 import { LU_CLEARER_TRANSLATIONS } from './clearer.translate';
 
+/**
+ * @deprecated use `ClearComponent` instead
+ */
 @Component({
 	selector: 'lu-input-clearer',
 	templateUrl: './clearer.component.html',
 	styleUrl: './clearer.component.scss',
 	changeDetection: ChangeDetectionStrategy.OnPush,
 	exportAs: 'luClearer',
-	standalone: true,
-	imports: [CommonModule],
 	providers: [
 		{
 			provide: ALuClearer,

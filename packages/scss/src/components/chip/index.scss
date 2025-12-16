@@ -11,12 +11,6 @@
 			@include S;
 		}
 
-		// .palette-primary is deprecated
-		&.palette-product,
-		&.palette-primary {
-			@include product;
-		}
-
 		&.mod-unkillable {
 			@include unkillable;
 		}
@@ -27,6 +21,10 @@
 
 		&.is-disabled {
 			@include disabled;
+		}
+
+		&:has(.chip-content:focus-visible) {
+			@include focusVisible;
 		}
 	}
 }

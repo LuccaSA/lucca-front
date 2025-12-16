@@ -4,7 +4,6 @@ import { LuMultiSelectInputComponent } from '../input';
 
 @Directive({
 	selector: '[luMultiDisplayer]',
-	standalone: true,
 })
 export class LuMultiDisplayerDirective<T> {
 	@Input('luMultiDisplayerSelect') set select(select: LuMultiSelectInputComponent<T>) {

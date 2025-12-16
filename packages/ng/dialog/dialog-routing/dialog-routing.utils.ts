@@ -18,7 +18,7 @@ export function deferrableToObservable<T>(deferrable: Promise<T> | Observable<T>
 }
 
 export function createDialogRoute<C>(dialogRouteConfig: DialogRouteConfig<C>): Route {
-	const { dialogConfigFactory, dataFactory, ...baseRoute } = dialogRouteConfig;
+	const { dialogConfigFactory, dataFactory, canMatch, ...baseRoute } = dialogRouteConfig;
 
 	const data: DialogRouteData<C> = { dialogRouteConfig };
 
@@ -26,6 +26,7 @@ export function createDialogRoute<C>(dialogRouteConfig: DialogRouteConfig<C>): R
 		path: dialogRouteConfig.path,
 		component: DialogRoutingContainerComponent,
 		data,
+		canMatch,
 		children: [
 			{
 				...baseRoute,

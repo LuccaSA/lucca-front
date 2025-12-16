@@ -191,7 +191,7 @@ export const WithForm: StoryObj = {
 	},
 };
 
-export const withAction: StoryObj = {
+export const WithAction: StoryObj = {
 	render: (args) => {
 		return {
 			props: {

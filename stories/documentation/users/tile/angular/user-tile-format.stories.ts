@@ -5,7 +5,6 @@ import { Meta, StoryFn, applicationConfig } from '@storybook/angular';
 import { bob, patrick, squidwards } from '../../user.mocks';
 
 @Component({
-	standalone: true,
 	selector: 'user-tile-format-stories',
 	templateUrl: './user-tile-format.stories.html',
 	imports: [LuUserTileModule, LuUserPictureModule, LuUserDisplayModule],
@@ -30,10 +29,10 @@ const template: StoryFn<LuUserTileComponent> = (args) => ({
 	props: args,
 });
 
-export const format = template.bind({});
-format.args = {};
+export const Format = template.bind({});
+Format.args = {};
 
-format.parameters = {
+Format.parameters = {
 	controls: { include: [] },
 	docs: {
 		source: {

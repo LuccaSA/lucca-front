@@ -26,28 +26,35 @@ export default {
 				tick$: timer(0, 1000),
 			},
 			template: `
-Internal link: <a luLink="${routerLink}"${externe}${disable}${decoration}>${label}</a>
+Angular Navigation side: <a luLink="${routerLink}"${externe}${disable}${decoration}>${label}</a>
 <br>
-External link: <a href="${href}" luLink${externe}${disable}${decoration}>${label}</a>
+Browser Navigation side: <a href="${href}" luLink${externe}${disable}${decoration}>${label}</a>
 `,
 		};
 	},
 	argTypes: {
 		disabled: {
+			description: 'Désactive le lien.',
 			type: 'boolean',
 		},
 		external: {
+			description: "Précise que le lien va s'ouvrir dans un nouvel onglet.",
 			type: 'boolean',
 		},
 		label: {
 			type: 'string',
+			description: '[Story] Modifie le label du lien.',
 		},
 		href: {
 			type: 'string',
-			description: "A n'utiliser qu'en lien externe ou non connu par le routeur.",
+			description: "Adresse de la page cible. A n'utiliser qu'en lien externe ou non connu par le routeur.",
 		},
 		routerLink: {
 			type: 'string',
+			description: 'Adresse de la page cible.',
+		},
+		decorationHover: {
+			description: 'Souligne le lien seulement au survol.',
 		},
 	},
 } as Meta;
@@ -55,10 +62,10 @@ External link: <a href="${href}" luLink${externe}${disable}${decoration}>${label
 export const Basic: StoryObj = {
 	args: {
 		label: `Text link`,
-		href: `https://www.example.org`,
 		routerLink: './#example',
-		disabled: false,
+		href: `https://www.example.org`,
 		external: false,
+		disabled: false,
 		decorationHover: false,
 	},
 };

@@ -1,3 +1,4 @@
+@use '@lucca-front/scss/src/components/button/exports' as button;
 @use '@lucca-front/scss/src/commons/utils/a11y';
 @use '@lucca-front/scss/src/components/title/exports' as title;
 @use '@lucca-front/scss/src/commons/utils/keyframe';
@@ -75,3 +76,17 @@
 @mixin neutralBackground {
 	--components-dialog-insideContent-background: var(--pr-t-elevation-surface-default);
 }
+
+@mixin withCloseButton {
+	.dialog-inside-header-button.button {
+		@include button.ghost;
+		@include button.S;
+		@include button.onlyIconS;
+
+		align-self: start;
+		justify-self: end;
+		grid-area: close;
+		display: var(--components-dialog-insideHeaderButtonDisplay);
+	}
+}
+

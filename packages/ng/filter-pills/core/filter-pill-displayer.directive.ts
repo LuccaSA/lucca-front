@@ -9,7 +9,6 @@ interface FilterPillDisplayerContext {
 
 @Directive({
 	selector: '[luFilterPillDisplayer]',
-	standalone: true,
 })
 export class FilterPillDisplayerDirective {
 	#filterPillComponentRef = inject(FilterPillComponent, { optional: true });

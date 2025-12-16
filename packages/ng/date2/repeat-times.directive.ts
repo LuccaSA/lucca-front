@@ -2,7 +2,6 @@ import { Directive, inject, Input, TemplateRef, ViewContainerRef } from '@angula
 
 @Directive({
 	selector: '[luRepeatTimes]',
-	standalone: true,
 })
 export class RepeatTimesDirective {
 	private templateRef = inject<TemplateRef<void>>(TemplateRef);

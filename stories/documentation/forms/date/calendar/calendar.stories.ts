@@ -1,6 +1,6 @@
 import { registerLocaleData } from '@angular/common';
 import localesFr from '@angular/common/locales/fr';
-import { Component, LOCALE_ID, OnInit } from '@angular/core';
+import { Component, LOCALE_ID } from '@angular/core';
 import { FormsModule } from '@angular/forms';
 import { provideAnimations } from '@angular/platform-browser/animations';
 import { ALuDateAdapter, LuNativeDateAdapter } from '@lucca-front/ng/core';
@@ -11,7 +11,6 @@ registerLocaleData(localesFr);
 
 @Component({
 	selector: 'date-calendar-stories',
-	standalone: true,
 	imports: [LuCalendarInputComponent, LuDateAdapterPipe, FormsModule],
 	providers: [{ provide: ALuDateAdapter, useClass: LuNativeDateAdapter }],
 	template: `
@@ -22,9 +21,9 @@ registerLocaleData(localesFr);
 		{{ date | luDate: 'full' }}
 	`,
 })
-class CalendarStory implements OnInit {
+class CalendarStory {
 	date = new Date();
-	ngOnInit() {}
+
 	random() {
 		this.date = new Date(this.date);
 		this.date.setDate(Math.ceil(Math.random() * 30));
@@ -62,7 +61,6 @@ import { LuCalendarInputComponent } from '@lucca-front/ng/date';
 
 @Component({
 	selector: 'calendar-story',
-	standalone: true,
 	imports: [LuCalendarInputComponent],
 	providers: [{ provide: ALuDateAdapter, useClass: LuNativeDateAdapter }],
 	template: \`

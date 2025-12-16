@@ -2,7 +2,6 @@ import { Component } from '@angular/core';
 import { Meta, moduleMetadata, StoryFn } from '@storybook/angular';
 
 @Component({
-	standalone: true,
 	selector: 'forms-textfield-legacy-stories',
 	templateUrl: './textfield-legacy.stories.html',
 	styles: [
@@ -13,7 +12,7 @@ import { Meta, moduleMetadata, StoryFn } from '@storybook/angular';
 class TextfieldLegacyStory {}
 
 export default {
-	title: 'QA/Forms/Textfield Legacy',
+	title: 'QA/Forms/TextfieldLegacy',
 	component: TextfieldLegacyStory,
 	decorators: [
 		moduleMetadata({
@@ -24,4 +23,4 @@ export default {
 
 const template: StoryFn<TextfieldLegacyStory> = () => ({});
 
-export const basic = template.bind({});
+export const Basic = template.bind({});

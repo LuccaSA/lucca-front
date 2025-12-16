@@ -3,7 +3,6 @@ import { FormlyModule } from '@ngx-formly/core';
 import { Meta, StoryFn } from '@storybook/angular';
 
 @Component({
-	standalone: true,
 	selector: 'forms-framed-stories',
 	templateUrl: './framed.stories.html',
 	imports: [FormlyModule],
@@ -17,4 +16,4 @@ export default {
 
 const template: StoryFn<FramedStory> = () => ({});
 
-export const basic = template.bind({});
+export const Basic = template.bind({});

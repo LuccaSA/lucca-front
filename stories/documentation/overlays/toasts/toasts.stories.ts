@@ -8,7 +8,6 @@ import { map } from 'rxjs/operators';
 
 @Component({
 	selector: 'toasts-stories',
-	standalone: true,
 	imports: [FormsModule, LuToastsComponent],
 	templateUrl: './toasts.stories.html',
 })
@@ -109,9 +108,9 @@ class ToastsStory implements OnInit, OnDestroy {
 
 `;
 
-export const basic = template.bind({});
-basic.args = {};
-basic.parameters = {
+export const Basic = template.bind({});
+Basic.args = {};
+Basic.parameters = {
 	docs: {
 		source: {
 			language: 'ts',

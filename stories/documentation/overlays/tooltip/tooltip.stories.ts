@@ -1,8 +1,8 @@
 import { provideAnimations } from '@angular/platform-browser/animations';
+import { ButtonComponent } from '@lucca-front/ng/button';
 import { IconComponent } from '@lucca-front/ng/icon';
 import { LuTooltipModule, LuTooltipTriggerDirective } from '@lucca-front/ng/tooltip';
 import { applicationConfig, Meta, moduleMetadata, StoryObj } from '@storybook/angular';
-import { ButtonComponent } from '../../../../packages/ng/button/button.component';
 import { generateInputs } from '../../../helpers/stories';
 
 export default {

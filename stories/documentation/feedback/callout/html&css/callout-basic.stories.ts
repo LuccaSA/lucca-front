@@ -24,7 +24,7 @@ export default {
 } as Meta;
 
 function getTemplate(args: CalloutBasicStory): string {
-	let palette = args.palette ? ` palette-${args.palette}` : ``;
+	const palette = args.palette ? ` palette-${args.palette}` : ``;
 	const s = args.s ? ` mod-S` : ``;
 	return `<div class="callout${palette}${s}">
 	<div class="callout-content">

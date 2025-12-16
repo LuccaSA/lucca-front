@@ -1,6 +1,6 @@
+import { TemplateRef, ViewContainerRef } from '@angular/core';
 import { LinkNode } from '@lexical/link';
 import { DOMExportOutput, LexicalEditor } from 'lexical';
-import { TemplateRef, ViewContainerRef } from '@angular/core';
 
 export class PopoverLinkNode extends LinkNode {
 	static #viewContainerRef: ViewContainerRef;

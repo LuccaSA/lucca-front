@@ -2,7 +2,6 @@ import { Component } from '@angular/core';
 import { Meta, StoryFn } from '@storybook/angular';
 
 @Component({
-	standalone: true,
 	selector: 'text-flow-stories',
 	templateUrl: './text-flow.stories.html',
 })
@@ -15,4 +14,4 @@ export default {
 
 const template: StoryFn<TextFlowStory> = () => ({});
 
-export const basic = template.bind({});
+export const Basic = template.bind({});

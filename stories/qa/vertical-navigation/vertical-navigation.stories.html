@@ -7,8 +7,17 @@ We need 2 Angular components :
 <table class="demo-QAtable">
 	<tbody>
 		<tr>
+			<td></td>
+			<td style="width: 50%">
+				<div class="demo-QAtable-list">HTML</div>
+			</td>
+			<td style="width: 50%">
+				<div class="demo-QAtable-list">Angular</div>
+			</td>
+		</tr>
+		<tr>
 			<td>Default</td>
-			<td style="width: 100%">
+			<td>
 				<div class="verticalNavigation">
 					<h3 class="verticalNavigation-sectionTitle">Section title</h3>
 					<ul class="verticalNavigation-list">
@@ -69,51 +78,41 @@ We need 2 Angular components :
 							</ul>
 						</li>
 					</ul>
-					<h3 class="verticalNavigation-sectionTitle">Section title</h3>
-					<ul class="verticalNavigation-list">
-						<li class="verticalNavigation-list-item">
-							<button type="button" class="verticalNavigation-list-item-link" aria-expanded="false">
-								<span aria-hidden="true" class="verticalNavigation-list-item-link-icon lucca-icon icon-heart"></span>Item<span
-									aria-hidden="true"
-									class="verticalNavigation-list-item-link-arrow lucca-icon icon-arrowChevronBottom"
-								></span>
-							</button>
-							<ul class="verticalNavigation-list mod-child" id="childList1">
-								<li class="verticalNavigation-list-item">
-									<a href="#" class="verticalNavigation-list-item-link">Item</a>
-								</li>
-								<li class="verticalNavigation-list-item">
-									<a href="#" class="verticalNavigation-list-item-link">Item</a>
-								</li>
-							</ul>
-						</li>
-						<li class="verticalNavigation-list-item">
-							<button type="button" class="verticalNavigation-list-item-link" aria-expanded="true">
-								<span aria-hidden="true" class="verticalNavigation-list-item-link-icon lucca-icon icon-heart"></span>Item<span
-									aria-hidden="true"
-									class="verticalNavigation-list-item-link-arrow lucca-icon icon-arrowChevronBottom"
-								></span>
-							</button>
-							<ul class="verticalNavigation-list mod-child" id="childList2">
-								<li class="verticalNavigation-list-item">
-									<a href="#" class="verticalNavigation-list-item-link">Item</a>
-								</li>
-								<li class="verticalNavigation-list-item">
-									<a href="#" class="verticalNavigation-list-item-link">Item</a>
-								</li>
-							</ul>
-						</li>
-					</ul>
-					<h3 class="verticalNavigation-sectionTitle">Section title</h3>
-					<ul class="verticalNavigation-list">
-						<li class="verticalNavigation-list-item">
-							<a href="#" class="verticalNavigation-list-item-link">Item</a>
-						</li>
-						<li class="verticalNavigation-list-item">
-							<span class="verticalNavigation-list-item-link">Item</span>
-						</li>
-					</ul>
 				</div>
+			</td>
+			<td>
+				<lu-vertical-navigation heading="Section title">
+					<lu-vertical-navigation-group label="Item" expanded="false" icon="heart">
+						<lu-vertical-navigation-item>
+							<a luVerticalNavigationLink href="#">Item</a>
+						</lu-vertical-navigation-item>
+						<lu-vertical-navigation-item>
+							<a luVerticalNavigationLink href="#">Item</a>
+						</lu-vertical-navigation-item>
+					</lu-vertical-navigation-group>
+					<lu-vertical-navigation-group label="Item" icon="heart">
+						<lu-vertical-navigation-item>
+							<a luVerticalNavigationLink href="#">Item</a>
+						</lu-vertical-navigation-item>
+						<lu-vertical-navigation-item>
+							<a luVerticalNavigationLink href="#" aria-current="page">Item</a>
+						</lu-vertical-navigation-item>
+						<lu-vertical-navigation-item>
+							<span luVerticalNavigationLink disabled>Item</span>
+						</lu-vertical-navigation-item>
+					</lu-vertical-navigation-group>
+					<lu-vertical-navigation-item>
+						<a luVerticalNavigationLink href="#" icon="heart">Item</a>
+					</lu-vertical-navigation-item>
+					<lu-vertical-navigation-group label="Item" expanded="false" icon="heart">
+						<lu-vertical-navigation-item>
+							<a luVerticalNavigationLink href="#">Item</a>
+						</lu-vertical-navigation-item>
+						<lu-vertical-navigation-item>
+							<a luVerticalNavigationLink href="#">Item</a>
+						</lu-vertical-navigation-item>
+					</lu-vertical-navigation-group>
+				</lu-vertical-navigation>
 			</td>
 		</tr>
 		<tr>
@@ -180,6 +179,140 @@ We need 2 Angular components :
 						</li>
 					</ul>
 				</div>
+			</td>
+			<td>
+				<lu-vertical-navigation heading="Section title">
+					<lu-vertical-navigation-group label="Item" expanded="false">
+						<lu-vertical-navigation-item>
+							<a luVerticalNavigationLink href="#">Item</a>
+						</lu-vertical-navigation-item>
+						<lu-vertical-navigation-item>
+							<a luVerticalNavigationLink href="#">Item</a>
+						</lu-vertical-navigation-item>
+					</lu-vertical-navigation-group>
+					<lu-vertical-navigation-group label="Item">
+						<lu-vertical-navigation-item>
+							<a luVerticalNavigationLink href="#">Item</a>
+						</lu-vertical-navigation-item>
+						<lu-vertical-navigation-item>
+							<a luVerticalNavigationLink href="#" aria-current="page">Item</a>
+						</lu-vertical-navigation-item>
+						<lu-vertical-navigation-item>
+							<span luVerticalNavigationLink disabled>Item</span>
+						</lu-vertical-navigation-item>
+					</lu-vertical-navigation-group>
+					<lu-vertical-navigation-item>
+						<a luVerticalNavigationLink href="#">Item</a>
+					</lu-vertical-navigation-item>
+					<lu-vertical-navigation-group label="Item" expanded="false">
+						<lu-vertical-navigation-item>
+							<a luVerticalNavigationLink href="#">Item</a>
+						</lu-vertical-navigation-item>
+						<lu-vertical-navigation-item>
+							<a luVerticalNavigationLink href="#">Item</a>
+						</lu-vertical-navigation-item>
+					</lu-vertical-navigation-group>
+				</lu-vertical-navigation>
+			</td>
+		</tr>
+		<tr>
+			<td>Disabled</td>
+			<td>
+				<div class="verticalNavigation">
+					<h3 class="verticalNavigation-sectionTitle">Section title</h3>
+					<ul class="verticalNavigation-list">
+						<li class="verticalNavigation-list-item is-disabled">
+							<button type="button" class="verticalNavigation-list-item-link" aria-expanded="false" disabled>
+								<span aria-hidden="true" class="verticalNavigation-list-item-link-icon lucca-icon icon-heart"></span>Item<span
+									aria-hidden="true"
+									class="verticalNavigation-list-item-link-arrow lucca-icon icon-arrowChevronBottom"
+								></span>
+							</button>
+							<ul class="verticalNavigation-list mod-child" id="childList1">
+								<li class="verticalNavigation-list-item">
+									<a href="#" class="verticalNavigation-list-item-link">Item</a>
+								</li>
+								<li class="verticalNavigation-list-item">
+									<a href="#" class="verticalNavigation-list-item-link">Item</a>
+								</li>
+							</ul>
+						</li>
+						<li class="verticalNavigation-list-item">
+							<button type="button" class="verticalNavigation-list-item-link" aria-expanded="true">
+								<span aria-hidden="true" class="verticalNavigation-list-item-link-icon lucca-icon icon-heart"></span>Item<span
+									aria-hidden="true"
+									class="verticalNavigation-list-item-link-arrow lucca-icon icon-arrowChevronBottom"
+								></span>
+							</button>
+							<ul class="verticalNavigation-list mod-child" id="childList2">
+								<li class="verticalNavigation-list-item">
+									<a href="#" class="verticalNavigation-list-item-link is-disabled">Item</a>
+								</li>
+								<li class="verticalNavigation-list-item">
+									<a href="#" class="verticalNavigation-list-item-link" aria-current="page">Item</a>
+								</li>
+								<li class="verticalNavigation-list-item">
+									<a href="#" class="verticalNavigation-list-item-link is-disabled" tabindex="-1">Item</a>
+								</li>
+							</ul>
+						</li>
+						<li class="verticalNavigation-list-item is-disabled">
+							<a href="#" class="verticalNavigation-list-item-link"
+								><span aria-hidden="true" class="verticalNavigation-list-item-link-icon lucca-icon icon-heart"></span>Item</a
+							>
+						</li>
+						<li class="verticalNavigation-list-item is-disabled">
+							<button type="button" class="verticalNavigation-list-item-link" aria-expanded="true" disabled>
+								<span aria-hidden="true" class="verticalNavigation-list-item-link-icon lucca-icon icon-heart"></span>Item<span
+									aria-hidden="true"
+									class="verticalNavigation-list-item-link-arrow lucca-icon icon-arrowChevronBottom"
+								></span>
+							</button>
+							<ul class="verticalNavigation-list mod-child" id="childList2">
+								<li class="verticalNavigation-list-item">
+									<a href="#" class="verticalNavigation-list-item-link is-disabled">Item</a>
+								</li>
+								<li class="verticalNavigation-list-item">
+									<a href="#" class="verticalNavigation-list-item-link is-disabled" tabindex="-1">Item</a>
+								</li>
+							</ul>
+						</li>
+					</ul>
+				</div>
+			</td>
+			<td>
+				<lu-vertical-navigation heading="Section title">
+					<lu-vertical-navigation-group label="Item" expanded="false" icon="heart" disabled="true">
+						<lu-vertical-navigation-item>
+							<a luVerticalNavigationLink href="#">Item</a>
+						</lu-vertical-navigation-item>
+						<lu-vertical-navigation-item>
+							<a luVerticalNavigationLink href="#">Item</a>
+						</lu-vertical-navigation-item>
+					</lu-vertical-navigation-group>
+					<lu-vertical-navigation-group label="Item" icon="heart">
+						<lu-vertical-navigation-item>
+							<span luVerticalNavigationLink disabled>Item</span>
+						</lu-vertical-navigation-item>
+						<lu-vertical-navigation-item>
+							<a luVerticalNavigationLink href="#" aria-current="page">Item</a>
+						</lu-vertical-navigation-item>
+						<lu-vertical-navigation-item>
+							<span luVerticalNavigationLink disabled>Item</span>
+						</lu-vertical-navigation-item>
+					</lu-vertical-navigation-group>
+					<lu-vertical-navigation-item>
+						<a luVerticalNavigationLink href="#" icon="heart">Item</a>
+					</lu-vertical-navigation-item>
+					<lu-vertical-navigation-group label="Item" icon="heart" disabled="true">
+						<lu-vertical-navigation-item>
+							<span luVerticalNavigationLink disabled>Item</span>
+						</lu-vertical-navigation-item>
+						<lu-vertical-navigation-item>
+							<span luVerticalNavigationLink disabled>Item</span>
+						</lu-vertical-navigation-item>
+					</lu-vertical-navigation-group>
+				</lu-vertical-navigation>
 			</td>
 		</tr>
 	</tbody>

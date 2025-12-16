@@ -1,14 +1,13 @@
 import { Overlay, OverlayModule } from '@angular/cdk/overlay';
-import { CommonModule } from '@angular/common';
 import { AfterViewInit, ChangeDetectionStrategy, ChangeDetectorRef, Component, ElementRef, Inject, Input, OnInit, Optional, Renderer2, Self, ViewContainerRef, forwardRef } from '@angular/core';
 import { ControlValueAccessor, NG_VALUE_ACCESSOR } from '@angular/forms';
+import { ClearComponent } from '@lucca-front/ng/clear';
 import { getIntl } from '@lucca-front/ng/core';
-import { LuInputClearerComponent, LuInputDisplayerDirective } from '@lucca-front/ng/input';
+import { LuInputDisplayerDirective } from '@lucca-front/ng/input';
 import { ILuOptionPickerPanel, LuOptionComparer, LuOptionItemComponent, LuOptionPickerAdvancedComponent } from '@lucca-front/ng/option';
 import { ILuInputWithPicker } from '@lucca-front/ng/picker';
 import { ALuSelectInputComponent } from '@lucca-front/ng/select';
 import { combineLatest } from 'rxjs';
-import { ILuEstablishment } from '../../establishment.model';
 import { ALuEstablishmentService, ALuLegalUnitService, LuEstablishmentService, LuLegalUnitService } from '../../service/index';
 import { DEFAULT_ESTABLISHMENT_SERVICE, DEFAULT_LEGAL_UNIT_SERVICE } from '../establishment-select.token';
 import { LuForLegalUnitsDirective } from '../for-legal-units';
@@ -25,11 +24,9 @@ import { LU_ESTABLISHMENT_SELECT_INPUT_TRANSLATIONS } from './establishment-sele
 	templateUrl: './establishment-select-input.component.html',
 	styleUrl: './establishment-select-input.component.scss',
 	changeDetection: ChangeDetectionStrategy.OnPush,
-	standalone: true,
 	imports: [
-		CommonModule,
 		OverlayModule,
-		LuInputClearerComponent,
+		ClearComponent,
 		LuOptionPickerAdvancedComponent,
 		LuEstablishmentSearcherComponent,
 		LuEstablishmentSelectAllComponent,
@@ -112,9 +109,5 @@ export class LuEstablishmentSelectInputComponent<
 	onIsSearchingChanged(isSearching: boolean) {
 		this.isSearching = isSearching;
 		this._changeDetectorRef.detectChanges();
-	}
-
-	trackById(_idx: number, item: ILuEstablishment): number {
-		return item.id;
 	}
 }

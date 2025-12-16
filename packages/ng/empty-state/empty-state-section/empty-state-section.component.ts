@@ -1,4 +1,3 @@
-import { NgClass, NgIf } from '@angular/common';
 import { ChangeDetectionStrategy, Component, Input, ViewEncapsulation, booleanAttribute, numberAttribute } from '@angular/core';
 import { Palette, PortalContent, PortalDirective } from '@lucca-front/ng/core';
 import { LuSafeExternalSvgPipe } from '@lucca-front/ng/safe-content';
@@ -6,8 +5,7 @@ import { Hx } from '../empty-state.model';
 
 @Component({
 	selector: 'lu-empty-state-section',
-	standalone: true,
-	imports: [NgClass, NgIf, LuSafeExternalSvgPipe, PortalDirective],
+	imports: [LuSafeExternalSvgPipe, PortalDirective],
 	templateUrl: './empty-state-section.component.html',
 	styleUrl: './empty-state-section.component.scss',
 	changeDetection: ChangeDetectionStrategy.OnPush,

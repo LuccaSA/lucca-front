@@ -16,6 +16,7 @@
 	}
 	<div
 		class="richTextField-toolbar"
+		[class.pr-u-displayNone]="hideToolbar()"
 		(keydown.arrowleft)="focusSiblingPlugin($event, -1)"
 		(keydown.arrowRight)="focusSiblingPlugin($event, 1)"
 		role="toolbar"

@@ -3,7 +3,6 @@ import { BreadcrumbsComponent, BreadcrumbsLinkDirective } from '@lucca-front/ng/
 import { Meta, StoryFn } from '@storybook/angular';
 
 @Component({
-	standalone: true,
 	selector: 'breadcrumb-stories',
 	templateUrl: './breadcrumb.stories.html',
 	imports: [BreadcrumbsComponent, BreadcrumbsLinkDirective],
@@ -17,4 +16,4 @@ export default {
 
 const template: StoryFn<BreadcrumbStory> = () => ({});
 
-export const basic = template.bind({});
+export const Basic = template.bind({});

@@ -1,5 +1,6 @@
 @use 'exports' as *;
 
+
 .richTextField {
 	@layer components {
 		@include vars;
@@ -7,6 +8,10 @@
 	}
 
 	@layer mods {
+		&:has(.richTextField-content:focus-visible) {
+			@include focusVisible;
+		}
+
 		&:hover {
 			@include hover;
 		}
@@ -25,6 +30,30 @@
 
 		&.mod-autoResize {
 			@include autoResize;
+		}
+	}
+}
+
+@layer mods {
+	.richTextField-toolbar-button.button.mod-onlyIcon {
+		&[aria-pressed='true'] {
+			@include buttonPressed;
+
+			&:hover {
+				@include buttonPressedHover;
+			}
+
+			&:active {
+				@include buttonPressedActive;
+			}
+
+			&:focus-visible {
+				@include buttonPressedFocusVisible;
+			}
+
+			&:disabled {
+				@include buttonPressedDisabled;
+			}
 		}
 	}
 }

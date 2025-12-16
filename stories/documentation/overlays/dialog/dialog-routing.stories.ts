@@ -29,27 +29,23 @@ class DataProvider {
 }
 
 @Component({
-	standalone: true,
 	template: `Empty component, no route matched`,
 })
 class EmptyComponent {}
 
 @Component({
-	standalone: true,
 	imports: [CalloutComponent],
 	template: `<lu-callout heading="" size="M" state="success">dialog onClosed() called</lu-callout>`,
 })
 class ClosedComponent {}
 
 @Component({
-	standalone: true,
 	imports: [CalloutComponent],
 	template: `<lu-callout heading="" size="M" state="error">dialog onDismissed() called</lu-callout>`,
 })
 class DismissedComponent {}
 
 @Component({
-	standalone: true,
 	imports: [
 		DialogComponent,
 		DialogHeaderComponent,
@@ -116,7 +112,6 @@ class TestDialogComponent {
 
 @Component({
 	selector: 'dialog-routing-stories',
-	standalone: true,
 	template: `
 		<div class="pr-u-marginBlockEnd200">
 			<p>
@@ -129,7 +124,7 @@ class TestDialogComponent {
 		<pr-story-model-display class="pr-u-marginBlockStart0">{{ service.dialogOut() | json }}</pr-story-model-display>
 
 		<p class="pr-u-marginBlockStart200">Outlet</p>
-		<router-outlet></router-outlet>
+		<router-outlet />
 	`,
 	imports: [RouterOutlet, RouterLink, JsonPipe, ButtonComponent, StoryModelDisplayComponent],
 })
@@ -161,6 +156,7 @@ const routes: Routes = [
 		dataFactory: () => inject(DataProvider).dummy(),
 		dialogRouteConfig: {
 			// Can be overridden here
+			// eslint-disable-next-line @typescript-eslint/no-unsafe-return
 			canDeactivate: [(c) => c.allowThisDialogToClose()],
 		},
 	}),
@@ -222,14 +218,12 @@ class DataProvider {
 
 // Components in sub routes
 @Component({
-	standalone: true,
 	imports: [CalloutComponent],
 	template: \`<lu-callout heading="" size="M" state="success">dialog onClosed() called</lu-callout>\`,
 })
 class ClosedComponent {}
 
 @Component({
-	standalone: true,
 	imports: [CalloutComponent],
 	template: \`<lu-callout heading="" size="M" state="error">dialog onDismissed() called</lu-callout>\`,
 })
@@ -238,7 +232,6 @@ class DismissedComponent {}
 // Story
 @Component({
 	selector: 'dialog-routing-stories',
-	standalone: true,
 	template: \`
 	<button luButton type="button" routerLink="/dialog">Navigate to /dialog</button>
 \`,

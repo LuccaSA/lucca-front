@@ -84,5 +84,13 @@
 				@include endInProgress;
 			}
 		}
+
+		.calendar-table-body-row-cell-action {
+			&:disabled,
+			&[aria-disabled='true'] {
+				@include disabled;
+			}
+		}
 	}
 }
+

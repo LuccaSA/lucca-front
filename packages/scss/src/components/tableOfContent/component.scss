@@ -12,7 +12,8 @@
 			@include reset.list;
 		}
 
-		.tableOfContent-list-item-action {
+		// Second selector to get rid of tableOfContent-list-item-action on angular component
+		.tableOfContent-list-item-action, .tableOfContent-list-item > a {
 			@include reset.button;
 
 			border-radius: var(--pr-t-border-radius-default);

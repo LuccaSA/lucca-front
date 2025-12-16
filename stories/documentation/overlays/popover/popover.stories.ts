@@ -1,22 +1,21 @@
-import { Component, Input } from '@angular/core';
+import { Component, input } from '@angular/core';
 import { provideAnimations } from '@angular/platform-browser/animations';
 import { LuPopoverAlignment, LuPopoverModule, LuPopoverPosition, LuPopoverTriggerEvent } from '@lucca-front/ng/popover';
-import { Meta, StoryFn, applicationConfig } from '@storybook/angular';
+import { applicationConfig, Meta, StoryFn } from '@storybook/angular';
 
 @Component({
 	selector: 'popover-story',
-	standalone: true,
 	imports: [LuPopoverModule],
 	template: `
-		<button type="button" class="button" [luPopover]="popover" [luPopoverPosition]="position" [luPopoverAlignment]="alignment" [luPopoverTrigger]="trigger">{{ trigger }} me</button>
-		<lu-popover #popover>{{ popoverContent }}</lu-popover>
+		<button type="button" class="button" [luPopover]="popover" [luPopoverPosition]="position()" [luPopoverAlignment]="alignment()" [luPopoverTrigger]="trigger()">{{ trigger() }} me</button>
+		<lu-popover #popover>{{ popoverContent() }}</lu-popover>
 	`,
 })
 class PopoverStory {
-	@Input() popoverContent: string = '🎉 popover content 🏖️';
-	@Input() position: LuPopoverPosition = 'above';
-	@Input() alignment: LuPopoverAlignment = 'top';
-	@Input() trigger: LuPopoverTriggerEvent = 'click';
+	popoverContent = input<string>('🎉 popover content 🏖️');
+	position = input<LuPopoverPosition>('above');
+	alignment = input<LuPopoverAlignment>('top');
+	trigger = input<LuPopoverTriggerEvent>('click');
 }
 
 export default {
@@ -46,10 +45,15 @@ class PopoverStoriesModule {}
 		<lu-popover #popover>🎉 popover content 🏖️</lu-popover>
 	\`
 })
-class PopoverStory { }`;
+class PopoverStory {
+	popoverContent = input<string>('🎉 popover content 🏖️');
+	position = input<LuPopoverPosition>('above');
+	alignment = input<LuPopoverAlignment>('top');
+	trigger = input<LuPopoverTriggerEvent>('click');
+}`;
 
-export const basic = template.bind({});
-basic.parameters = {
+export const Basic = template.bind({});
+Basic.parameters = {
 	// Disable controls as they are not modifiable because of ComponentWrapper
 	controls: { include: [] },
 	docs: {

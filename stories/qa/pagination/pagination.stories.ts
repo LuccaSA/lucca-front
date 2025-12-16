@@ -1,10 +1,11 @@
 import { Component } from '@angular/core';
+import { PaginationComponent } from '@lucca-front/ng/pagination';
 import { Meta, StoryFn } from '@storybook/angular';
 
 @Component({
-	standalone: true,
 	selector: 'pagination-stories',
 	templateUrl: './pagination.stories.html',
+	imports: [PaginationComponent],
 })
 class PaginationStory {}
 
@@ -15,4 +16,4 @@ export default {
 
 const template: StoryFn<PaginationStory> = () => ({});
 
-export const basic = template.bind({});
+export const Basic = template.bind({});

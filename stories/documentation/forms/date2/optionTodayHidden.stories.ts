@@ -26,4 +26,4 @@ export default {
 	},
 } as Meta;
 
-export const optionTodayHidden: StoryObj<Calendar2Component> = {};
+export const OptionTodayHidden: StoryObj<Calendar2Component> = {};

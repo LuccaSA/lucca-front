@@ -1,4 +1,3 @@
-import { NgFor } from '@angular/common';
 import { ChangeDetectionStrategy, Component } from '@angular/core';
 import { ReactiveFormsModule } from '@angular/forms';
 import { FieldType, FieldTypeConfig, FormlyModule } from '@ngx-formly/core';
@@ -8,8 +7,7 @@ import { FieldType, FieldTypeConfig, FormlyModule } from '@ngx-formly/core';
 	styleUrl: 'formly-field.common.scss',
 	templateUrl: './radios.html',
 	changeDetection: ChangeDetectionStrategy.OnPush,
-	standalone: true,
-	imports: [ReactiveFormsModule, FormlyModule, NgFor],
+	imports: [ReactiveFormsModule, FormlyModule],
 })
 export class LuFormlyFieldRadios extends FieldType<FieldTypeConfig> {
 	get _options() {

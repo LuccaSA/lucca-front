@@ -1,4 +1,3 @@
-import { NgIf } from '@angular/common';
 import { ChangeDetectionStrategy, Component, Input, ViewChild, ViewContainerRef } from '@angular/core';
 import { FormControl, ReactiveFormsModule } from '@angular/forms';
 import { FieldTypeConfig, FieldWrapper, FormlyFieldConfig } from '@ngx-formly/core';
@@ -15,7 +14,6 @@ import { buildAddWrapperExtension } from '../formly.utils';
 		}
 	`,
 	changeDetection: ChangeDetectionStrategy.OnPush,
-	standalone: true,
 })
 export class LuFormlyErrorMessage {
 	@Input() formControl?: FormControl;
@@ -40,8 +38,7 @@ export class LuFormlyErrorMessage {
 	styleUrls: ['flex-layout.scss'],
 	templateUrl: './error.html',
 	changeDetection: ChangeDetectionStrategy.OnPush,
-	standalone: true,
-	imports: [NgIf, ReactiveFormsModule, LuFormlyErrorMessage],
+	imports: [ReactiveFormsModule, LuFormlyErrorMessage],
 })
 export class LuFormlyWrapperError extends FieldWrapper<FieldTypeConfig> {
 	@ViewChild('fieldComponent', { read: ViewContainerRef, static: true })

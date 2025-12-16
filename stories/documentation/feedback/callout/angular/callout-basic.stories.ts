@@ -72,6 +72,15 @@ export default {
 			description: 'Required',
 		},
 		removedChange: HiddenArgType,
+		AI: {
+			description: '[v20.3]',
+		},
+		actions: {
+			description: '[v20.3]',
+		},
+		actionsInline: {
+			description: '[v20.3]',
+		},
 	},
 } as Meta;
 

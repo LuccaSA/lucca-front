@@ -1,7 +1,8 @@
-import { NgIf, NgTemplateOutlet } from '@angular/common';
+import { NgTemplateOutlet } from '@angular/common';
 import {
 	afterNextRender,
 	booleanAttribute,
+	ChangeDetectionStrategy,
 	Component,
 	computed,
 	contentChildren,
@@ -28,8 +29,8 @@ import { BehaviorSubject } from 'rxjs';
 import { FormFieldSize } from './form-field-size';
 import { FORM_FIELD_INSTANCE } from './form-field.token';
 import { LU_FORM_FIELD_TRANSLATIONS } from './form-field.translate';
-import { FRAMED_INPUT_INSTANCE } from './framed-input/framed-input-token';
 import { InputDirective } from './input.directive';
+import { INPUT_FRAMED_INSTANCE } from './public-api';
 
 let nextId = 0;
 
@@ -37,8 +38,7 @@ type FormFieldWidth = 20 | 30 | 40 | 50 | 60;
 
 @Component({
 	selector: 'lu-form-field',
-	standalone: true,
-	imports: [NgIf, NgTemplateOutlet, InlineMessageComponent, LuTooltipModule, ReactiveFormsModule, IconComponent, IntlParamsPipe, PortalDirective],
+	imports: [NgTemplateOutlet, InlineMessageComponent, LuTooltipModule, ReactiveFormsModule, IconComponent, IntlParamsPipe, PortalDirective],
 	templateUrl: './form-field.component.html',
 	styleUrl: './form-field.component.scss',
 	providers: [
@@ -52,53 +52,54 @@ type FormFieldWidth = 20 | 30 | 40 | 50 | 60;
 		'[class.inputFramed-header-field]': 'framed',
 	},
 	encapsulation: ViewEncapsulation.None,
+	changeDetection: ChangeDetectionStrategy.OnPush,
 })
 export class FormFieldComponent implements OnDestroy, DoCheck {
-	intl = getIntl(LU_FORM_FIELD_TRANSLATIONS);
+	readonly intl = getIntl(LU_FORM_FIELD_TRANSLATIONS);
 
 	#luClass = inject(LuClass);
 	#injector = inject(Injector);
 	#renderer = inject(Renderer2);
 
-	framed = inject(FRAMED_INPUT_INSTANCE, { optional: true }) !== null;
+	framed = inject(INPUT_FRAMED_INSTANCE, { optional: true }) !== null;
 
-	formFieldChildren = contentChildren(FormFieldComponent, { descendants: true });
+	readonly formFieldChildren = contentChildren(FormFieldComponent, { descendants: true });
 
-	requiredValidators = contentChildren(RequiredValidator, { descendants: true });
-	ngControls = contentChildren(NgControl, { descendants: true });
+	readonly requiredValidators = contentChildren(RequiredValidator, { descendants: true });
+	readonly ngControls = contentChildren(NgControl, { descendants: true });
 
-	ignoredRequiredValidators = computed(() => new Set(this.formFieldChildren().flatMap((f) => f.requiredValidators())));
-	ignoredControls = computed(() => new Set(this.formFieldChildren().flatMap((f) => f.ngControls())));
+	readonly ignoredRequiredValidators = computed(() => new Set(this.formFieldChildren().flatMap((f) => f.requiredValidators())));
+	readonly ignoredControls = computed(() => new Set(this.formFieldChildren().flatMap((f) => f.ngControls())));
 
-	ownRequiredValidators = computed(() => this.requiredValidators().filter((c) => !this.ignoredRequiredValidators().has(c)));
-	ownControls = computed(() => this.ngControls().filter((c) => !this.ignoredControls().has(c)));
+	readonly ownRequiredValidators = computed(() => this.requiredValidators().filter((c) => !this.ignoredRequiredValidators().has(c)));
+	readonly ownControls = computed(() => this.ngControls().filter((c) => !this.ignoredControls().has(c)));
 
 	#hasInputRequired = signal(false);
 	forceInputRequired = signal(false);
-	isInputRequired = computed(() => this.forceInputRequired() || this.#hasInputRequired());
+	readonly isInputRequired = computed(() => this.forceInputRequired() || this.#hasInputRequired());
 
-	label = input.required<PortalContent>();
+	readonly label = input.required<PortalContent>();
 
 	/**
 	 * Hide field label, while keeping it in DOM for screen readers
 	 */
-	hiddenLabel = input(false, { transform: booleanAttribute });
+	readonly hiddenLabel = input(false, { transform: booleanAttribute });
 
 	rolePresentationLabel = model(false);
 
-	inline = input(false, { transform: booleanAttribute });
+	readonly inline = input(false, { transform: booleanAttribute });
 
-	statusControl = input<AbstractControl | null>(null);
+	readonly statusControl = input<AbstractControl | null>(null);
 
-	tooltip = input<string | SafeHtml | null>(null);
+	readonly tooltip = input<string | SafeHtml | null>(null);
 
-	tag = input<string | null>(null);
+	readonly tag = input<string | null>(null);
 
-	AI = input(false, { transform: booleanAttribute });
-	iconAItooltip = input<string | null>(null);
-	iconAIalt = input<string | null>(null);
+	readonly AI = input(false, { transform: booleanAttribute });
+	readonly iconAItooltip = input<string | null>(null);
+	readonly iconAIalt = input<string | null>(null);
 
-	width = input<FormFieldWidth, FormFieldWidth | `${FormFieldWidth}`>(null, {
+	readonly width = input<FormFieldWidth, FormFieldWidth | `${FormFieldWidth}`>(null, {
 		transform: numberAttribute as (value: FormFieldWidth | `${FormFieldWidth}`) => FormFieldWidth,
 	});
 
@@ -107,24 +108,24 @@ export class FormFieldComponent implements OnDestroy, DoCheck {
 
 	invalid = input<boolean | null, boolean>(null, { transform: booleanAttribute });
 
-	inlineMessage = input<PortalContent | null>(null);
+	readonly inlineMessage = input<PortalContent | null>(null);
 
 	/**
 	 * Inline message for when the control is in error state
 	 */
-	errorInlineMessage = input<PortalContent | null>(null);
+	readonly errorInlineMessage = input<PortalContent | null>(null);
 
 	/**
 	 * State of the inline message, will be ignored if form state is invalid
 	 */
-	inlineMessageState = input<InlineMessageState | null>(null);
+	readonly inlineMessageState = input<InlineMessageState | null>(null);
 
-	size = input<FormFieldSize | null>(null);
+	readonly size = input<FormFieldSize | null>(null);
 
 	/**
 	 * Extra aria-describedby attribute
 	 */
-	extraDescribedBy = input<string>('');
+	readonly extraDescribedBy = input<string>('');
 
 	layout = model<'default' | 'checkable' | 'fieldset'>('default');
 
@@ -133,7 +134,7 @@ export class FormFieldComponent implements OnDestroy, DoCheck {
 	/**
 	 * Max amount of characters allowed, defaults to 0, which means hidden, no maximum
 	 */
-	counter = input<number>(0);
+	readonly counter = input<number>(0);
 
 	get contentLength(): number {
 		return (this.#inputs[0]?.host?.nativeElement as HTMLInputElement)?.value?.length || 0;

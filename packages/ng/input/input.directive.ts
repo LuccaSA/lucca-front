@@ -6,7 +6,6 @@ import { NgControl } from '@angular/forms';
  */
 @Directive({
 	selector: '[luInput]',
-	standalone: true,
 })
 export class LuInputDirective implements OnInit {
 	constructor(

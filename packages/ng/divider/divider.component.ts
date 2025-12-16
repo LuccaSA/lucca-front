@@ -1,40 +1,38 @@
-import { booleanAttribute, Component, ElementRef, inject, input, OnChanges, ViewChild, ViewEncapsulation } from '@angular/core';
+import { booleanAttribute, ChangeDetectionStrategy, Component, computed, ElementRef, inject, input, OnChanges, ViewChild, ViewEncapsulation } from '@angular/core';
 import { LuClass } from '@lucca-front/ng/core';
 
 @Component({
 	selector: 'lu-divider',
-	standalone: true,
 	providers: [LuClass],
 	template: '<ng-content />',
 	styleUrl: './divider.component.scss',
 	encapsulation: ViewEncapsulation.None,
 	host: {
 		class: 'divider',
-		'[role]': 'separatorRole() || withRole() ? "separator" : null',
+		'[attr.role]': 'separatorRole() || withRole() ? "separator" : null',
 		'[class.mod-vertical]': 'vertical()',
 	},
+	changeDetection: ChangeDetectionStrategy.OnPush,
 })
 export class DividerComponent implements OnChanges {
 	#luClass = inject(LuClass);
 
 	@ViewChild('content') content: ElementRef;
 
-	separatorRole = input(false, { transform: booleanAttribute });
-	vertical = input(false, { transform: booleanAttribute });
-	size = input<'M' | 'S' | null>(null);
+	readonly separatorRole = input(false, { transform: booleanAttribute });
+	readonly vertical = input(false, { transform: booleanAttribute });
+	readonly size = input<'M' | 'S' | null>(null);
 
 	// deprecated
-	withRole = input(false, { transform: booleanAttribute });
+	readonly withRole = input(false, { transform: booleanAttribute });
+
+	readonly classesConfig = computed(() => ({ [`mod-${this.size()}`]: !!this.size() }));
 
 	ngOnChanges(): void {
 		this.updateClasses();
 	}
 
 	updateClasses(): void {
-		const classesConfig = {
-			[`mod-${this.size()}`]: !!this.size(),
-		};
-
-		this.#luClass.setState(classesConfig);
+		this.#luClass.setState(this.classesConfig());
 	}
 }

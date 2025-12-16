@@ -2,7 +2,6 @@
 /* eslint-disable @angular-eslint/no-output-on-prefix */
 /* eslint-disable @angular-eslint/no-output-native */
 import { A11yModule } from '@angular/cdk/a11y';
-import { CommonModule } from '@angular/common';
 import { ChangeDetectionStrategy, Component, EventEmitter, forwardRef, Input, Output, TemplateRef, ViewChild } from '@angular/core';
 import { FormsModule } from '@angular/forms';
 import { ALuDateAdapter, ELuDateGranularity, LuDateGranularity } from '@lucca-front/ng/core';
@@ -17,8 +16,7 @@ import { LuDateInputDirective } from '../input';
 	changeDetection: ChangeDetectionStrategy.OnPush,
 	exportAs: 'LuDatePicker',
 	animations: [luTransformPopover],
-	standalone: true,
-	imports: [FormsModule, CommonModule, LuCalendarInputComponent, LuDateInputDirective, A11yModule],
+	imports: [FormsModule, LuCalendarInputComponent, LuDateInputDirective, A11yModule],
 	providers: [
 		{
 			provide: ALuPickerPanel,

@@ -2,7 +2,6 @@ import { Component } from '@angular/core';
 import { Meta, StoryFn } from '@storybook/angular';
 
 @Component({
-	standalone: true,
 	selector: 'table-stories',
 	templateUrl: './table.stories.html',
 })
@@ -15,4 +14,4 @@ export default {
 
 const template: StoryFn<TableStory> = () => ({});
 
-export const basic = template.bind({});
+export const Basic = template.bind({});

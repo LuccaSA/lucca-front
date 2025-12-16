@@ -8,6 +8,8 @@ export const LU_CHIP_TRANSLATIONS = new InjectionToken('luChipTranslations', {
 
 export interface ChipTranslate {
 	delete: string;
+	error: string;
+	warning: string;
 }
 
 export const luChipTranslations: LuTranslation<ChipTranslate> = Translations;

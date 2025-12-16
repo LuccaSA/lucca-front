@@ -4,7 +4,6 @@ import { LU_DIALOG_INSTANCE } from './dialog.token';
 
 @Component({
 	selector: 'lu-dialog',
-	standalone: true,
 	template: '<ng-content />',
 	styleUrl: './dialog.component.scss',
 	changeDetection: ChangeDetectionStrategy.OnPush,

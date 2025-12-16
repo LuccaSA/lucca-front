@@ -9,7 +9,6 @@ let nextId = 0;
 
 @Component({
 	selector: 'lu-radio-group-input',
-	standalone: true,
 	imports: [ReactiveFormsModule],
 	hostDirectives: [NoopValueAccessorDirective],
 	template: '<ng-content />',
@@ -33,6 +32,7 @@ export class RadioGroupInputComponent {
 
 	framed = input(false, { transform: booleanAttribute });
 	framedCenter = input(false, { transform: booleanAttribute });
+	framedSize = input<'L' | null>(null);
 
 	name = `radio-group-${nextId++}`;
 

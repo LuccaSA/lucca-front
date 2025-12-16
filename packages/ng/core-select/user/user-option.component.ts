@@ -1,5 +1,5 @@
-import { AsyncPipe, NgIf } from '@angular/common';
-import { Component, inject } from '@angular/core';
+import { AsyncPipe } from '@angular/common';
+import { ChangeDetectionStrategy, Component, inject } from '@angular/core';
 import { getIntl } from '@lucca-front/ng/core';
 import { ILuOptionContext, LU_OPTION_CONTEXT, ɵLuOptionOutletDirective } from '@lucca-front/ng/core-select';
 import { LuUserDisplayPipe } from '@lucca-front/ng/user';
@@ -10,26 +10,27 @@ import { LuCoreSelectUsersDirective } from './users.directive';
 
 @Component({
 	selector: 'lu-user-option',
-	imports: [NgIf, AsyncPipe, LuUserDisplayPipe, ɵLuOptionOutletDirective],
+	imports: [AsyncPipe, LuUserDisplayPipe, ɵLuOptionOutletDirective],
 	template: `
-		<ng-container *ngIf="context.option$ | async as user">
-			<div *ngIf="userDirective.displayMeOption() && user.id === userDirective.currentUserId && hasEmptyClue$ | async; else notMe">
-				<strong>{{ intl.me }}</strong
-				>&ngsp;
-				<strong translate="no"><ng-container *luOptionOutlet="customUserOptionTpl() || defaultUserTpl; value: user" /></strong>
-			</div>
-
-			<ng-template #notMe>
+		@if (context.option$ | async; as user) {
+			@if (userDirective.displayMeOption() && user.id === userDirective.currentUserId && hasEmptyClue$ | async) {
+				<div>
+					<strong>{{ intl.me }}</strong
+					>&ngsp;
+					<strong translate="no"><ng-container *luOptionOutlet="customUserOptionTpl() || defaultUserTpl; value: user" /></strong>
+				</div>
+			} @else {
 				<div *luOptionOutlet="customUserOptionTpl() || defaultUserTpl; value: user"></div>
-			</ng-template>
-			<div class="lu-select-additionalInformation" *ngIf="user.additionalInformation">({{ user.additionalInformation }})</div>
-		</ng-container>
+			}
+			@if (user.additionalInformation) {
+				<div class="lu-select-additionalInformation">({{ user.additionalInformation }})</div>
+			}
+		}
 
 		<ng-template #defaultUserTpl let-user>
 			<span translate="no">{{ user | luUserDisplay: userDirective.displayFormat() }}</span>
 		</ng-template>
 	`,
-	standalone: true,
 	styles: [
 		`
 			.lu-select-additionalInformation {
@@ -39,6 +40,7 @@ import { LuCoreSelectUsersDirective } from './users.directive';
 			}
 		`,
 	],
+	changeDetection: ChangeDetectionStrategy.OnPush,
 })
 export class LuUserOptionComponent {
 	protected context = inject<ILuOptionContext<LuCoreSelectWithAdditionnalInformation<LuCoreSelectUser>>>(LU_OPTION_CONTEXT);

@@ -24,13 +24,14 @@ import { LuSimpleSelectInputComponent } from '../input/select-input.component';
 import { SIMPLE_SELECT_INPUT } from '../select.model';
 import { LU_SIMPLE_SELECT_TRANSLATIONS } from '../select.translate';
 import { LuIsOptionSelectedPipe } from './option-selected.pipe';
+import { toObservable } from '@angular/core/rxjs-interop';
+import { map } from 'rxjs/operators';
 
 @Component({
 	selector: 'lu-select-panel',
 	templateUrl: './panel.component.html',
 	styleUrl: './panel.component.scss',
 	changeDetection: ChangeDetectionStrategy.OnPush,
-	standalone: true,
 	imports: [
 		A11yModule,
 		AsyncPipe,
@@ -60,7 +61,7 @@ export class LuSelectPanelComponent<T> implements AfterViewInit, CoreSelectPanel
 	public intl = getIntl(LU_SIMPLE_SELECT_TRANSLATIONS);
 
 	options$ = this.selectInput.options$;
-	grouping = this.selectInput.grouping;
+	grouping = this.selectInput.groupingSignal;
 	treeGenerator = this.selectInput.treeGenerator;
 	loading$ = this.selectInput.loading$;
 	searchable = this.selectInput.searchable;
@@ -80,9 +81,10 @@ export class LuSelectPanelComponent<T> implements AfterViewInit, CoreSelectPanel
 
 	public selected = computed(() => this.selectInput.valueSignal());
 
+	hasGrouping$ = toObservable(this.grouping).pipe(map((grouping) => !!grouping));
 	public clueChange$ = this.selectInput.clue$;
 	public shouldDisplayAddOption$ = this.selectInput.shouldDisplayAddOption$;
-	public groupTemplateLocation$ = ɵgetGroupTemplateLocation(!!this.grouping, this.clueChange$, this.options$, this.searchable);
+	public groupTemplateLocation$ = ɵgetGroupTemplateLocation(this.hasGrouping$, this.clueChange$, this.options$, this.searchable);
 
 	onScroll(evt: Event): void {
 		if (!(evt.target instanceof HTMLElement)) {
