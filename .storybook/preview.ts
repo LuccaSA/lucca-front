@@ -1,13 +1,13 @@
+import type { Preview } from '@storybook/angular';
 import DocumentationTemplate from './DocumentationTemplate.mdx';
-import CompodocPlugin from './plugins/compodoc.mjs';
-import LocaleIdPlugin from './plugins/locale-id.mjs';
-import MswPlugin from './plugins/msw.mjs';
+import { setCompodocJson } from '@storybook/addon-docs/angular';
+import docJson from './documentation.json';
+import MswPlugin from './plugins/msw';
 
-LocaleIdPlugin.init();
-CompodocPlugin.init();
+setCompodocJson(docJson);
 MswPlugin.init();
 
-export default {
+const preview: Preview = {
 	parameters: {
 		controls: {
 			matchers: {
@@ -46,5 +46,6 @@ export default {
 		},
 	},
 	tags: ['autodocs'],
-	decorators: [LocaleIdPlugin.decorator],
 };
+
+export default preview;

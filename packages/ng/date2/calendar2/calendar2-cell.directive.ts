@@ -2,7 +2,7 @@ import { computed, Directive, ElementRef, HostBinding, HostListener, inject, inp
 import { CALENDAR_TABBABLE_DATE } from './calendar2.tokens';
 import { CalendarMode } from './calendar-mode';
 import { add, addMonths, addYears, endOfWeek, startOfWeek, sub, subMonths, subYears } from 'date-fns';
-import type { Duration } from 'date-fns/types';
+import type { Duration } from 'date-fns';
 import { WEEK_INFO } from '../calendar.token';
 import { comparePeriods, getJSFirstDayOfWeek } from '../utils';
 
