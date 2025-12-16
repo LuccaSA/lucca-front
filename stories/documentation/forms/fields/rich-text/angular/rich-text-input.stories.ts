@@ -1,6 +1,7 @@
 import { LOCALE_ID } from '@angular/core';
 import { FormsModule, ReactiveFormsModule } from '@angular/forms';
 import { BrowserAnimationsModule } from '@angular/platform-browser/animations';
+import { provideRouter } from '@angular/router';
 import { ButtonComponent } from '@lucca-front/ng/button';
 import { DividerComponent } from '@lucca-front/ng/divider';
 import { FormFieldComponent } from '@lucca-front/ng/form-field';
@@ -11,7 +12,6 @@ import { provideLuRichTextPlainTextFormatter } from '@lucca-front/ng/forms/rich-
 import { applicationConfig, Meta, moduleMetadata, StoryObj } from '@storybook/angular';
 import { cleanupTemplate, generateInputs } from 'stories/helpers/stories';
 import { StoryModelDisplayComponent } from 'stories/helpers/story-model-display.component';
-import { provideRouter } from '@angular/router';
 
 export default {
 	title: 'Documentation/Forms/Fields/RichTextInput/Angular',
@@ -23,7 +23,23 @@ export default {
 			providers: [{ provide: LOCALE_ID, useValue: 'fr' }, provideRouter([])],
 		}),
 	],
-	argTypes: {},
+	argTypes: {
+		placeholder: {
+			description: 'Applique un placeholder au champ.',
+		},
+		disabled: {
+			description: 'Désactive le champ.',
+		},
+		required: {
+			description: 'Marque le champ comme obligatoire.',
+		},
+		disableSpellcheck: {
+			description: "Désactive le correcteur d'orthographe.",
+		},
+		autoResize: {
+			description: "Active / désactive l'autoresize du champ.",
+		},
+	},
 } as Meta;
 
 export const Basic: StoryObj<RichTextInputComponent & { value: string; disabled: boolean; required: boolean } & FormFieldComponent> = {
