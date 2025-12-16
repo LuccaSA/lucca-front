@@ -29,7 +29,7 @@ import { LU_DATA_TABLE_INSTANCE } from './data-table.token';
 	host: {
 		class: 'dataTableWrapper',
 		'[class.mod-nested]': 'this.nested()',
-		'[class.mod-noOverlflow]': 'this.noOverlflow()',
+		'[class.mod-noOverflow]': 'this.noOverflow()',
 		'(scroll)': 'scroll()',
 	},
 	providers: [
@@ -50,7 +50,7 @@ export class DataTableComponent implements OnInit {
 	readonly cellBorder = input(false, { transform: booleanAttribute });
 	readonly nested = input(false, { transform: booleanAttribute });
 	readonly drag = input(false, { transform: booleanAttribute });
-	readonly noOverlflow = input(false, { transform: booleanAttribute });
+	readonly noOverflow = input(false, { transform: booleanAttribute });
 
 	readonly responsive = input<ResponsiveConfig<'layoutFixed', true>>({});
 

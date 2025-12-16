@@ -10,8 +10,8 @@
 			@include nested;
 		}
 
-		&.mod-noOverlflow {
-			@include noOverlflow;
+		&.mod-noOverflow {
+			@include noOverflow;
 		}
 	}
 }

@@ -186,6 +186,6 @@
 	--components-dataTable-borderRadius: var(--pr-t-border-radius-default);
 }
 
-@mixin noOverlflow {
+@mixin noOverflow {
 	--components-dataTable-minInlineSize: fit-content;
 }
