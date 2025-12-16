@@ -10,6 +10,10 @@
 		&.mod-AI {
 			@include AI;
 
+			&.mod-invert {
+				@include invertIA;
+			}
+
 			&.is-success {
 				@include successAI;
 			}

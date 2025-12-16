@@ -58,7 +58,7 @@ export class ButtonComponent implements OnChanges {
 	 * '' is the default value when you just set the `luButton` directive without a value attached to it.
 	 * We just make this explicit here.
 	 */
-	luButton: '' | 'outlined' | 'AI' | 'ghost' | 'ghost-invert' | 'text' | 'text-invert' = '';
+	luButton: '' | 'outlined' | 'AI' | 'AI-invert' | 'ghost' | 'ghost-invert' | 'text' | 'text-invert' = '';
 
 	#iconComponentRef?: ElementRef<HTMLElement>;
 
@@ -117,6 +117,9 @@ export class ButtonComponent implements OnChanges {
 		if (this.luButton !== '') {
 			if (this.luButton === 'ghost-invert') {
 				classesConfig['mod-ghost'] = true;
+				classesConfig['mod-invert'] = true;
+			} else if (this.luButton === 'AI-invert') {
+				classesConfig['mod-AI'] = true;
 				classesConfig['mod-invert'] = true;
 			} else {
 				classesConfig[`mod-${this.luButton}`] = true;
