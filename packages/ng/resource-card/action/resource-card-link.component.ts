@@ -11,6 +11,12 @@ import { booleanAttribute, ChangeDetectionStrategy, Component, input, ViewEncaps
 		'[class.is-disabled]': 'disabled()',
 		'[attr.role]': 'disabled() ? "presentation" : null',
 	},
+	// hostDirectives: [
+	// 	{
+	// 		directive: LuTooltipTriggerDirective,
+	// 		inputs: ['luTooltip', 'luTooltipOnlyForDisplay', 'luTooltipWhenEllipsis'],
+	// 	},
+	// ],
 })
 export class ResourceCardLinkComponent {
 	readonly disabled = input(false, { transform: booleanAttribute });

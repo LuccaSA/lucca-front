@@ -5,7 +5,7 @@ import { LinkComponent } from '@lucca-front/ng/link';
 import { ResourceCardButtonComponent, ResourceCardComponent, ResourceCardLinkComponent, ResourceCardWrapperComponent } from '@lucca-front/ng/resource-card';
 import { StatusBadgeComponent } from '@lucca-front/ng/status-badge';
 import { TagComponent } from '@lucca-front/ng/tag';
-import { LuTooltipModule } from '@lucca-front/ng/tooltip';
+import { LuTooltipTriggerDirective } from '@lucca-front/ng/tooltip';
 import { applicationConfig, Meta, moduleMetadata } from '@storybook/angular';
 
 interface ResourceCardAngularBasicStory {
@@ -106,6 +106,7 @@ export default {
 				ResourceCardButtonComponent,
 				ResourceCardLinkComponent,
 				ResourceCardWrapperComponent,
+				LuTooltipTriggerDirective,
 			],
 		}),
 		applicationConfig({
@@ -119,7 +120,9 @@ export default {
 		const gridAttr = args.wrapperGrid ? ` grid` : ``;
 		const disabledAttr = args.disabled ? ` disabled` : ``;
 		const actionTpl =
-			args.actionType === 'a' ? `<a href="#" luResourceCardAction${disabledAttr}>${args.heading}</a>` : `<button type="button" luResourceCardAction${disabledAttr}>${args.heading}</button>`;
+			args.actionType === 'a'
+				? `<a href="#" luResourceCardAction luTooltip luTooltipOnlyForDisplay luTooltipWhenEllipsis${disabledAttr}>${args.heading}</a>`
+				: `<button type="button" luResourceCardAction luTooltip luTooltipOnlyForDisplay luTooltipWhenEllipsis${disabledAttr}>${args.heading}</button>`;
 		const headingLevelAttr = args.headingLevel !== 3 ? ` headingLevel="${args.headingLevel}"` : ``;
 		const headingInfosTpl = args.infos
 			? `
