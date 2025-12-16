@@ -262,15 +262,14 @@
 @mixin invertIA {
 	@include AI;
 	--components-button-AI-background-opacity: 25%;
-
 	--components-button-backgroundColor: transparent !important;
+	--components-button-color: var(--palettes-neutral-0) !important;
+
 	background-image: linear-gradient(
 		-135deg,
 		color-mix(in srgb, var(--palettes-AI-500) var(--components-button-AI-background-opacity), transparent),
 		color-mix(in srgb, var(--palettes-brand-400) var(--components-button-AI-background-opacity), transparent)
 	);
-
-	--components-button-color: var(--palettes-neutral-0);
 
 	&:hover,
 	&:focus-visible {
