@@ -185,3 +185,7 @@
 @mixin nested {
 	--components-dataTable-borderRadius: var(--pr-t-border-radius-default);
 }
+
+@mixin noOverlflow {
+	--components-dataTable-minInlineSize: fit-content;
+}

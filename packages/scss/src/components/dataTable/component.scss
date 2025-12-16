@@ -20,9 +20,10 @@
 			border-radius: var(--components-dataTable-borderRadius);
 			border: 1px solid var(--commons-border-200);
 			overflow: auto;
-			background-color: var(--components-dataTable-cell-background);
 			contain: paint; // Fix overflow on webkit when table has scroll
+			background-color: var(--components-dataTable-cell-background);
 			display: block;
+			min-inline-size: var(--components-dataTable-minInlineSize);
 
 			&:focus-visible {
 				@include a11y.focusVisible;

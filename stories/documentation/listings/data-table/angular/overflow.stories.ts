@@ -53,12 +53,13 @@ export default {
 	],
 
 	render: (args, { argTypes }) => {
-		const { cols, stickyHeader, lines, stickyColsStart, stickyColsEnd, pagination, ...inputArgs } = args;
+		const { cols, stickyHeader, lines, stickyColsStart, stickyColsEnd, pagination, noOverlflow, ...inputArgs } = args;
 
 		const text = 'cell';
 		const textHeader = 'header';
 
 		const stickyHeaderAttr = stickyHeader ? ` sticky` : ``;
+		const overflowingAttr = noOverlflow ? ` noOverflow` : ``;
 
 		const stickyColsStartAttr = stickyColsStart > 0 ? ` stickyColsStart="${stickyColsStart}"` : ``;
 		const stickyColsEndAttr = stickyColsEnd > 0 ? ` stickyColsEnd="${stickyColsEnd}"` : ``;
@@ -91,9 +92,9 @@ export default {
 			: ``;
 
 		return {
-			styles: [`lu-data-table { max-block-size: 15rem; max-inline-size: 30rem; inline-size: fit-content }`],
+			styles: [noOverlflow ? `` : `lu-data-table { max-block-size: 15rem; max-inline-size: 30rem; inline-size: fit-content }`],
 			props: { example: text },
-			template: `<lu-data-table${stickyColsStartAttr}${stickyColsEndAttr}>
+			template: `<lu-data-table${stickyColsStartAttr}${stickyColsEndAttr}${overflowingAttr}>
 	<thead luDataTableHead${stickyHeaderAttr}>
 		<tr luDataTableRow>
 			<th luDataTableCell>${textHeader}</th>${colsHeaderContent}
@@ -109,6 +110,7 @@ export default {
 
 export const Basic: StoryObj = {
 	args: {
+		noOverlflow: false,
 		cols: 8,
 		lines: 2,
 		stickyColsStart: 0,
