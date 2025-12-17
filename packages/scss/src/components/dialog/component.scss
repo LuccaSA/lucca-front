@@ -19,11 +19,12 @@
 	position: fixed !important;
 	max-inline-size: var(--components-dialog-maxWidth) !important;
 	max-block-size: var(--components-dialog-maxHeight) !important;
-	transform: translate(var(--components-dialog-translateX), var(--components-dialog-translateY)) scale(var(--components-dialog-scale));
-	transition-property: transform, inline-size, block-size, inset;
+	transition-property: scale, translate, inline-size, block-size, inset;
 	transition-duration: var(--commons-animations-durations-standard);
-	interpolate-size: allow-keywords;
 	overflow: hidden;
+	translate: var(--components-dialog-translateX) var(--components-dialog-translateY);
+	scale: var(--components-dialog-scale);
+	interpolate-size: allow-keywords;
 
 	@supports not (height: 1dvh) {
 		--components-dialog-maxHeight: var(--components-dialog-maxHeightFallback);
