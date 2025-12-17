@@ -7,7 +7,7 @@
 				<tr class="dataTable-head-row">
 					@for (col of colsNumber(); track col) {
 						<th class="dataTable-head-row-cell" scope="col">
-							<span class="skeleton-item" [style.--components-skeleton-text-width]="randomPercent"></span>
+							<span class="skeleton-item" [style.--components-skeleton-text-width]="getRandomPercent()"></span>
 						</th>
 					}
 				</tr>
@@ -22,7 +22,7 @@
 			<tr class="dataTable-body-row">
 				@for (col of colsNumber(); track col) {
 					<td class="dataTable-body-row-cell">
-						<span class="skeleton-item" [style.--components-skeleton-text-width]="randomPercent"></span>
+						<span class="skeleton-item" [style.--components-skeleton-text-width]="getRandomPercent()"></span>
 					</td>
 				}
 			</tr>

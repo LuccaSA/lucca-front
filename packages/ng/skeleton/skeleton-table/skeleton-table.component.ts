@@ -1,6 +1,5 @@
 import { NgTemplateOutlet } from '@angular/common';
 import { booleanAttribute, ChangeDetectionStrategy, Component, computed, input } from '@angular/core';
-import { getRandomPercent } from '../skeleton.utils';
 
 @Component({
 	selector: 'lu-skeleton-table',
@@ -18,5 +17,5 @@ export class SkeletonTableComponent {
 	readonly rows = input<number>(8);
 	readonly rowsNumber = computed<unknown[]>(() => new Array(this.rows()));
 
-	readonly randomPercent: string = getRandomPercent();
+	readonly randomPercent: string = `${Math.floor(Math.random() * (66 - 33) + 33).toString()}%`;
 }
