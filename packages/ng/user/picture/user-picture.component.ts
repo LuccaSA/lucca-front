@@ -1,6 +1,6 @@
 import { NgStyle } from '@angular/common';
-import { booleanAttribute, ChangeDetectionStrategy, Component, computed, inject, input, ViewEncapsulation } from '@angular/core';
-import { ɵeffectWithDeps } from '@lucca-front/ng/core';
+import { booleanAttribute, ChangeDetectionStrategy, Component, computed, inject, input, linkedSignal, ViewEncapsulation } from '@angular/core';
+import { isNotNilOrEmptyString } from '@lucca-front/ng/core';
 import { LU_DEFAULT_DISPLAY_POLICY, LuDisplayFormat, LuDisplayFullname, LuDisplayHybrid, LuDisplayInitials, luUserDisplay } from '../display';
 
 export interface LuUserPictureUserInput {
@@ -73,37 +73,33 @@ export class LuUserPictureComponent {
 
 	readonly initials = computed(() => luUserDisplay(this.user(), this.displayFormat()));
 	readonly modSize = computed(() => `mod-${this.size()}`);
-
-	hasPicture = false;
-	pictureHref = '';
-	style = {};
-
-	constructor() {
-		ɵeffectWithDeps([this.user], (user) => {
-			if (user) {
-				const pictureHref = user?.picture?.href || user?.pictureHref;
-				this.hasPicture = !!pictureHref;
-				this.pictureHref = pictureHref;
-				if (!this.hasPicture) {
-					const hsl = this.getNameHue();
-					this.style = { 'background-color': `hsl(${hsl}, 60%, 60%)` };
-				}
-			}
-		});
-	}
-
-	pictureError() {
-		this.hasPicture = false;
-		const hsl = this.getNameHue();
-		this.style = { 'background-color': `hsl(${hsl}, 60%, 60%)` };
-	}
-
-	private getNameHue(): number {
+	readonly hasPicture = linkedSignal(() => isNotNilOrEmptyString(this.pictureHref()));
+	readonly pictureHref = computed(() => {
+		const user = this.user();
+		if (user) {
+			return user?.picture?.href || user?.pictureHref;
+		}
+		return null;
+	});
+	readonly style = linkedSignal(() => {
+		if (!this.hasPicture()) {
+			const hsl = this.#getNameHue();
+			return { 'background-color': `hsl(${hsl}, 60%, 60%)` };
+		}
+		return {};
+	});
+	readonly #getNameHue = computed(() => {
 		// we sum the chars in user's firstname + lastname
 		const charSum = luUserDisplay(this.user(), LuDisplayFullname.firstlast)
 			.split('')
 			.reduce((sum, a) => sum + a.charCodeAt(0), 0);
 		// and take a modulo 360 for hue
 		return charSum % 360;
+	});
+
+	pictureError() {
+		this.hasPicture.set(false);
+		const hsl = this.#getNameHue();
+		this.style.set({ 'background-color': `hsl(${hsl}, 60%, 60%)` });
 	}
 }
