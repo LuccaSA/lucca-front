@@ -1,7 +1,7 @@
 @use '@lucca-front/scss/src/commons/utils/overflow';
 @use '@lucca-front/scss/src/commons/utils/media';
 
-@mixin depth($level) {
+@mixin stacked($level) {
   $selector: '';
   $string: '~ .cdk-global-overlay-wrapper';
 
@@ -11,8 +11,10 @@
 
   &:has(#{$selector}) {
       .dialog {
-          --components-dialog-level: #{$level};
-      }
+				&.mod-stacked {
+					--components-dialog-level: #{$level};
+				}
+			}
   }
 }
 
@@ -27,7 +29,7 @@
 	z-index: 1000;
 
 	@for $i from 1 through 3 {
-		@include depth($i);
+		@include stacked($i);
 	}
 }
 

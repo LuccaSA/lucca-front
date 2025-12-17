@@ -14,7 +14,6 @@ import {
 import { FormFieldComponent } from '@lucca-front/ng/form-field';
 import { CheckboxInputComponent, TextInputComponent } from '@lucca-front/ng/forms';
 import { IconComponent } from '@lucca-front/ng/icon';
-import { TestComponent } from '@lucca-front/ng/test';
 import { applicationConfig, Meta, moduleMetadata, StoryObj } from '@storybook/angular';
 import { HiddenArgType } from 'stories/helpers/common-arg-types';
 
@@ -41,7 +40,6 @@ export default {
 				ReactiveFormsModule,
 				IconComponent,
 				DialogHeaderAction,
-				TestComponent,
 			],
 		}),
 	],
@@ -56,7 +54,7 @@ export default {
 <button class="open" luButton="outlined" [luDialogOpen]="dialogTpl1" [luDialogConfig]="config">Open Dialog</button>
 
 <ng-template #dialogTpl1>
-	<lu-dialog #dialog>
+	<lu-dialog #dialog stacked>
 		<lu-dialog-header>
 			<h1>Dialog 1</h1>
 		</lu-dialog-header>
@@ -73,7 +71,7 @@ export default {
 </ng-template>
 
 <ng-template #dialogTpl2>
-	<lu-dialog #dialog>
+	<lu-dialog #dialog stacked>
 		<lu-dialog-header>
 			<h1>Dialog 2</h1>
 		</lu-dialog-header>
@@ -90,7 +88,7 @@ export default {
 </ng-template>
 
 <ng-template #dialogTpl3>
-	<lu-dialog #dialog>
+	<lu-dialog #dialog stacked>
 		<lu-dialog-header>
 			<h1>Dialog 3</h1>
 		</lu-dialog-header>
@@ -107,7 +105,7 @@ export default {
 </ng-template>
 
 <ng-template #dialogTpl4>
-	<lu-dialog #dialog>
+	<lu-dialog #dialog stacked>
 		<lu-dialog-header>
 			<h1>Dialog 4</h1>
 		</lu-dialog-header>
@@ -123,15 +121,15 @@ export default {
 	</lu-dialog>
 </ng-template>
 
-@let test = false;
+
 
 <ng-template #dialogTpl5>
-	<lu-dialog #dialog>
+	<lu-dialog #dialog stacked>
 		<lu-dialog-header>
 			<h1>Dialog 5</h1>
 		</lu-dialog-header>
 		<lu-dialog-content>
-			<lu-test />
+
 		</lu-dialog-content>
 		<lu-dialog-footer>
 			<div class="footer-actions">
