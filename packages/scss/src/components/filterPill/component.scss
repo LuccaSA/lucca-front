@@ -182,9 +182,7 @@
 				font-weight: var(--pr-t-font-fontWeight-regular);
 				font-size: 1rem;
 				direction: ltr;
-
-				// stylelint-disable-next-line font-family-no-missing-generic-family-keyword -- This font is for icons and should not have fallback.
-				font-family: 'Lucca icons';
+				font-family: var(--icon-fontFamily);
 				font-feature-settings: 'liga';
 				font-style: normal;
 				letter-spacing: normal;
