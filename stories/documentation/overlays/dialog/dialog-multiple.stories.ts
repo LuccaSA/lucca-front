@@ -129,7 +129,7 @@ export default {
 			<h1>Dialog 5</h1>
 		</lu-dialog-header>
 		<lu-dialog-content>
-
+			<button class="open" luButton="outlined">This is the end</button>
 		</lu-dialog-content>
 		<lu-dialog-footer>
 			<div class="footer-actions">

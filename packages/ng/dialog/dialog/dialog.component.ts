@@ -26,13 +26,11 @@ export class DialogComponent implements AfterViewInit {
 		this.dialogRef.dismiss();
 	}
 
-	constructor() {
+	ngAfterViewInit(): void {
 		if (this.stacked()) {
 			this.dialogRef.cdkRef.overlayRef.addPanelClass('mod-stacked');
 		}
-	}
 
-	ngAfterViewInit(): void {
 		if (this.dialogRef.config.autoFocus === 'first-input' && !this.dialogRef.config.cdkConfigOverride?.autoFocus) {
 			const focusable: HTMLElement =
 				this.#htmlElement.querySelector('.luDialog-autofocus .luNativeInput') || this.#htmlElement.querySelector('.luDialog-autofocus') || this.#htmlElement.querySelector('.luNativeInput');
