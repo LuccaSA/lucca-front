@@ -75,14 +75,19 @@
 		&:has([selectable]),
 		&.mod-selectable {
 			@include selectable;
-
-			&:has(input:checked) {
-				@include selected;
-			}
 		}
 
 		&.mod-draggable {
 			@include draggable;
+		}
+	}
+
+		:is(.dataTable-body-row, .dataTable-foot-row) {
+		&:has([selectable]),
+		&.mod-selectable {
+			&:has(input:checked) {
+				@include selected;
+			}
 		}
 	}
 
