@@ -3,9 +3,11 @@ import DocumentationTemplate from './DocumentationTemplate.mdx';
 import { setCompodocJson } from '@storybook/addon-docs/angular';
 import docJson from './documentation.json';
 import MswPlugin from './plugins/msw';
+import LocaleId from './plugins/locale-id';
 
 setCompodocJson(docJson);
 MswPlugin.init();
+LocaleId.init();
 
 const preview: Preview = {
 	parameters: {
