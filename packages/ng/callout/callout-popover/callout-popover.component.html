@@ -1,6 +1,15 @@
 @let calloutIcon = state() | luCalloutIcon: icon();
 
-<button type="button" class="calloutPopover" [class]="calloutClasses()" #overlayOriginRef>
+<button
+	type="button"
+	class="calloutPopover"
+	[class]="calloutClasses()"
+	[luPopover2]="overlayContentRef"
+	[luPopoverTrigger]="'click+hover'"
+	[luPopoverOpenDelay]="openDelay()"
+	[luPopoverCloseDelay]="closeDelay()"
+	#overlayOriginRef
+>
 	@if (calloutIcon) {
 		<lu-icon class="calloutPopover-icon" [icon]="calloutIcon" />
 	}
@@ -8,13 +17,7 @@
 	<span class="pr-u-mask">{{ buttonAlt() || buttonLabel() }}</span>
 </button>
 <ng-template #overlayContentRef>
-	<div
-		[@tooltip]="'open'"
-		class="lu-popover-content calloutPopover-overlay"
-		[class]="calloutOverlayClasses()"
-		(mouseenter)="showContent()"
-		(mouseleave)="hideContent($event)"
-	>
+	<div class="lu-popover-content calloutPopover-overlay" [class]="calloutOverlayClasses()">
 		@if (calloutIcon) {
 			<div class="pr-u-flexShrink0">
 				<lu-icon class="calloutPopover-overlay-icon" [class]="calloutOverlayHeadClasses()" [icon]="calloutIcon" />
