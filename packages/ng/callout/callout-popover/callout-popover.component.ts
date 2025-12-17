@@ -1,21 +1,4 @@
-import { Overlay, OverlayRef } from '@angular/cdk/overlay';
-import { TemplatePortal } from '@angular/cdk/portal';
-import {
-	booleanAttribute,
-	ChangeDetectionStrategy,
-	Component,
-	computed,
-	contentChildren,
-	ElementRef,
-	inject,
-	input,
-	numberAttribute,
-	OnDestroy,
-	TemplateRef,
-	viewChild,
-	ViewContainerRef,
-	ViewEncapsulation,
-} from '@angular/core';
+import { booleanAttribute, ChangeDetectionStrategy, Component, computed, contentChildren, input, numberAttribute, ViewEncapsulation } from '@angular/core';
 import { LuccaIcon } from '@lucca-front/icons';
 import { Palette, PortalContent, PortalDirective } from '@lucca-front/ng/core';
 import { IconComponent } from '@lucca-front/ng/icon';
@@ -33,23 +16,7 @@ import { getCalloutPalette } from '../callout.utils';
 	changeDetection: ChangeDetectionStrategy.OnPush,
 	encapsulation: ViewEncapsulation.None,
 })
-export class CalloutPopoverComponent implements OnDestroy {
-	#overlay = inject(Overlay);
-	#viewContainerRef = inject(ViewContainerRef);
-	#elementRef = inject<ElementRef<HTMLElement>>(ElementRef);
-
-	readonly overlayOrigin = viewChild<ElementRef>('overlayOriginRef');
-
-	readonly overlayContent = viewChild<TemplateRef<unknown>>('overlayContentRef');
-
-	#overlayRef: OverlayRef;
-
-	// Using unknown here because it's using Node types for whatever reason but it's a number
-	#hideDelayId: unknown | undefined;
-
-	// Using unknown here because it's using Node types for whatever reason but it's a number
-	#showDelayId: unknown | undefined;
-
+export class CalloutPopoverComponent {
 	/**
 	 * Debounce for the popover to open (mouse will have to be on the element fox openDelay milliseconds for popover to show)
 	 */
@@ -125,64 +92,4 @@ export class CalloutPopoverComponent implements OnDestroy {
 	readonly calloutOverlayHeadClasses = computed(() => ({
 		[`palette-${this.calloutPalette()}`]: !!this.calloutPalette(),
 	}));
-
-	public showContent() {
-		clearTimeout(this.#hideDelayId as number);
-		// Don't open if we still have one opened
-		if (this.#showDelayId) {
-			return;
-		}
-		this.#showDelayId = setTimeout(() => {
-			this.createPanelContent();
-			this.#hideDelayId = undefined;
-		}, this.openDelay());
-	}
-
-	private createPanelContent() {
-		const positionStrategy = this.#overlay
-			.position()
-			.flexibleConnectedTo(this.overlayOrigin())
-			.withPositions([
-				{
-					originX: 'center',
-					originY: 'top',
-					overlayX: 'center',
-					overlayY: 'bottom',
-				},
-				{
-					originX: 'center',
-					originY: 'bottom',
-					overlayX: 'center',
-					overlayY: 'top',
-				},
-			]);
-
-		this.#overlayRef = this.#overlay.create({
-			positionStrategy,
-		});
-
-		const portal = new TemplatePortal(this.overlayContent(), this.#viewContainerRef);
-
-		this.#overlayRef.attach(portal);
-	}
-
-	public hideContent(event: MouseEvent | null) {
-		clearTimeout(this.#showDelayId as number);
-		this.#hideDelayId = setTimeout(() => {
-			const newTarget = event?.relatedTarget as Node | null;
-			// This is to prevent tooltip closing when user puts cursor on tooltip, thus leaving the origin trigger
-			if (!newTarget || !(this.#overlayRef?.overlayElement?.contains(newTarget) || this.#elementRef?.nativeElement?.contains(newTarget))) {
-				// Remove the tooltip if needed.
-				if (this.#overlayRef) {
-					this.#overlayRef.dispose();
-					this.#showDelayId = undefined;
-					this.#hideDelayId = undefined;
-				}
-			}
-		}, this.closeDelay());
-	}
-
-	ngOnDestroy(): void {
-		this.hideContent(null);
-	}
 }
