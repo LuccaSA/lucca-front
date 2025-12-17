@@ -24,8 +24,8 @@ type TextFieldType = 'text' | 'email' | 'password' | 'url';
 	providers: [provideNgxMask()],
 })
 export class TextInputComponent {
-	intl = getIntl(LU_TEXTFIELD_TRANSLATIONS);
-	ngControl = injectNgControl();
+	readonly intl = getIntl(LU_TEXTFIELD_TRANSLATIONS);
+	readonly ngControl = injectNgControl();
 
 	readonly inputElementRef = viewChild<ElementRef<HTMLInputElement>>('inputElement');
 

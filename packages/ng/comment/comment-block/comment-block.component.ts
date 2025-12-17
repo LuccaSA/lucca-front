@@ -9,7 +9,7 @@ import { COMMENT_BLOCK_INSTANCE, COMMENT_CHAT_INSTANCE } from '../token';
 	imports: [NgTemplateOutlet],
 	templateUrl: './comment-block.component.html',
 	host: {
-		'[attr.role]': 'role()',
+		'[attr.role]': 'role',
 	},
 	encapsulation: ViewEncapsulation.None,
 	changeDetection: ChangeDetectionStrategy.OnPush,
