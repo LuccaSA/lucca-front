@@ -23,11 +23,11 @@ export class FancyBoxComponent {
 
 	readonly size = input<null | 'S'>(null);
 
-	readonly foregroundStyle = computed(() => this.buildUrl(this.foreground()));
-	readonly backgroundLeftStyle = computed(() => this.buildUrl(this.backgroundLeft()));
-	readonly backgroundRightStyle = computed(() => this.buildUrl(this.backgroundRight()));
+	readonly foregroundStyle = computed(() => this.#buildUrl(this.foreground()));
+	readonly backgroundLeftStyle = computed(() => this.#buildUrl(this.backgroundLeft()));
+	readonly backgroundRightStyle = computed(() => this.#buildUrl(this.backgroundRight()));
 
-	buildUrl(text: string) {
+	#buildUrl(text: string) {
 		return text ? `url(${text})` : ``;
 	}
 }
