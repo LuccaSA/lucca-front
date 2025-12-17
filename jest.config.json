@@ -3,7 +3,7 @@
   "setupFilesAfterEnv": ["<rootDir>/setup-jest.ts"],
   "collectCoverage": false,
   "testEnvironment": "jsdom",
-  "testPathIgnorePatterns": ["<rootDir>/node_modules/"],
+  "testPathIgnorePatterns": ["<rootDir>/node_modules/", "<rootDir>/packages/ng/schematics/"],
   "watchPathIgnorePatterns": ["/node_modules/"],
   "modulePathIgnorePatterns": ["<rootDir>/packages/ng/dist"],
   "transformIgnorePatterns": ["node_modules/(?!@angular|@angular-devkit|@ngneat|ngx-mask|@testing-library)"],
