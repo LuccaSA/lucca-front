@@ -14,13 +14,13 @@
 		}
 	</ng-template>
 
-	@if (prefix()) {
+	@if (prefix(); as prefix) {
 		<ng-container
 			*ngTemplateOutlet="
 				addon;
 				context: {
 					type: 'prefix',
-					addon: prefix(),
+					addon: prefix,
 				}
 			"
 		/>

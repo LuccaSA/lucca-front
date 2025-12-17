@@ -15,13 +15,13 @@
 		}
 	</ng-template>
 
-	@if (prefix()) {
+	@if (prefix(); as prefix) {
 		<ng-container
 			*ngTemplateOutlet="
 				textfieldAddon;
 				context: {
 					type: 'prefix',
-					addon: prefix(),
+					addon: prefix,
 				}
 			"
 		/>
