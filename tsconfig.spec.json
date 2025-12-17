@@ -2,15 +2,16 @@
 {
 	"extends": "./tsconfig.json",
 	"compilerOptions": {
-		"emitDecoratorMetadata": true,
-		"outDir": "./out-tsc/spec",
+    "isolatedModules": true,
+    "skipLibCheck": true,
+    "outDir": "./out-tsc/spec",
 		"types": [
 			"jest",
 			"node"
 		],
-		/* Angular Zone does not support native async/await we have to stick with ES2016 */
-		"target": "ES2016"
-	},
+		"target": "ES2022",
+    "module": "CommonJS"
+  },
 	"include": [
 		"**/*.spec.ts",
 		"**/*.d.ts"
