@@ -96,5 +96,9 @@
 		&.mod-grid {
 			@include gridWrapper;
 		}
+
+		&:has(> .button) {
+			@include add;
+		}
 	}
 }

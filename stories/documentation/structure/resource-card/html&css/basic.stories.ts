@@ -21,6 +21,7 @@ interface ResourceCardHTMLBasicStory {
 	illustrationTemplateDisabled: string;
 	draggable: boolean;
 	size: string;
+	addResource: boolean;
 }
 
 export default {
@@ -106,6 +107,10 @@ export default {
 						${args.disabled ? args.illustrationTemplateDisabled : args.illustrationTemplate}
 					</div>`
 			: ``;
+		const addResourceTpl = args.addResource
+			? `
+		<button class="button">Button</button>`
+			: ``;
 		const headingTpl =
 			args.actionType === 'a'
 				? args.disabled
@@ -152,7 +157,7 @@ export default {
 		if (args.wrapper) {
 			return {
 				template: `
-	<div class="resourceCardWrapper${wrapperGridClass}">${cards}
+	<div class="resourceCardWrapper${wrapperGridClass}">${cards}${addResourceTpl}
 	</div>
 	`,
 			};
@@ -169,6 +174,7 @@ export const Basic = {
 		wrapper: false,
 		wrapperGrid: false,
 		draggable: false,
+		addResource: false,
 		disabled: false,
 		size: '',
 		heading: 'Lorem ipsum dolor ',

@@ -30,6 +30,7 @@ interface ResourceCardAngularBasicStory {
 	actionTemplateDisabled: string;
 	contentTemplateDisabled: string;
 	size: string;
+	addResource: boolean;
 }
 
 export default {
@@ -65,6 +66,9 @@ export default {
 		illustrationTemplateDisabled: {
 			if: { arg: 'disabled', truthy: true },
 		},
+		addResource: {
+			if: { arg: 'wrapper', truthy: true },
+		},
 		actionType: {
 			options: ['a', 'button'],
 			control: {
@@ -96,7 +100,7 @@ export default {
 	decorators: [
 		moduleMetadata({
 			imports: [
-				LuTooltipModule,
+				LuTooltipTriggerDirective,
 				IconComponent,
 				StatusBadgeComponent,
 				ButtonComponent,
@@ -119,6 +123,10 @@ export default {
 		const draggableAttr = args.draggable ? ` draggable` : ``;
 		const gridAttr = args.wrapperGrid ? ` grid` : ``;
 		const disabledAttr = args.disabled ? ` disabled` : ``;
+		const addResourceTpl = args.addResource
+			? `
+		<button luButton>Button</button>`
+			: ``;
 		const actionTpl =
 			args.actionType === 'a'
 				? `<a href="#" luResourceCardAction luTooltip luTooltipOnlyForDisplay luTooltipWhenEllipsis${disabledAttr}>${args.heading}</a>`
@@ -177,7 +185,7 @@ export default {
 		if (args.wrapper) {
 			return {
 				template: `
-	<lu-resource-card-wrapper${sizeWrapperAttr}${gridAttr}${draggableWrapperAttr}>${cards}
+	<lu-resource-card-wrapper${sizeWrapperAttr}${gridAttr}${draggableWrapperAttr}>${cards}${addResourceTpl}
 	</lu-resource-card-wrapper>
 
 	`,
@@ -196,6 +204,7 @@ export const Basic = {
 		wrapperDraggable: false,
 		wrapperGrid: false,
 		wrapperSize: '',
+		addResource: false,
 		draggable: false,
 		disabled: false,
 		heading: 'Lorem ipsum dolor ',

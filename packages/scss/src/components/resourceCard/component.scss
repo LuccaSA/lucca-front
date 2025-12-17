@@ -6,6 +6,8 @@
 	position: relative;
 	color: var(--components-resourceCard-color);
 	display: block;
+	align-self: stretch;
+	justify-self: stretch;
 
 	&::before {
 		content: '';
@@ -27,8 +29,9 @@
 			background-color: var(--pr-t-elevation-surface-sunken);
 			padding: var(--pr-t-spacings-100);
 			border-radius: var(--components-resourceCardWrapper-borderRadius);
+			align-items: start;
+			justify-items: start;
 		}
-
 
 		.resourceCard-layout {
 			isolation: isolate;
