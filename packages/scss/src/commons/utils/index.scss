@@ -395,15 +395,15 @@
 		@extend %textCenter;
 	}
 
-	.pr-u-textLight {
+	.pr-u-colorTextSubtle {
 		@extend %textLight;
 	}
 
-	.pr-u-textPlaceholder, .pr-u-colorInputTextPlaceholder {
+	.pr-u-colorInputTextPlaceholder, .pr-u-colorInputTextPlaceholder {
 		@extend %textPlaceholder;
 	}
 
-	.pr-u-textDefault {
+	.pr-u-colorText {
 		@extend %textDefault;
 	}
 
