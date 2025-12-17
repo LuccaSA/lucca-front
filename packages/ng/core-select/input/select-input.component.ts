@@ -258,7 +258,7 @@ export abstract class ALuSelectInputComponent<TOption, TValue> implements OnDest
 	}
 
 	@HostListener('click', ['$event'])
-	onClickOpenPanel($event: KeyboardEvent) {
+	onClickOpenPanel($event: Event) {
 		if (!this.isPanelOpen) {
 			this.openPanel();
 			$event.stopPropagation();
@@ -267,7 +267,8 @@ export abstract class ALuSelectInputComponent<TOption, TValue> implements OnDest
 	}
 
 	@HostListener('keydown', ['$event'])
-	onKeyDownNavigation($event: KeyboardEvent): void {
+	onKeyDownNavigation(event: Event): void {
+		const $event = event as KeyboardEvent;
 		switch ($event.key) {
 			case 'Escape':
 				if (this.isPanelOpen) {
