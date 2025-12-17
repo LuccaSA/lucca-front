@@ -15,11 +15,11 @@ export class DialogOpenDirective {
 
 	readonly dialog = input.required<TemplateRef<void>>({ alias: 'luDialogOpen' });
 
-	readonly luDialogConfig = input();
+	readonly luDialogConfig = input<LuDialogConfig<unknown>>();
 
 	click() {
 		this.#dialogService.open({
-			...(this.luDialogConfig() as LuDialogConfig<unknown>),
+			...this.luDialogConfig(),
 			content: this.dialog(),
 		});
 	}
