@@ -43,7 +43,7 @@ export class NumericBadgeComponent {
 	readonly numericBadgeClasses = computed(() => {
 		const palette = this.palette();
 		const size = this.size();
-		return { [`palette-${palette}`]: !!this.palette, [`mod-${size}`]: !!this.size };
+		return { [`palette-${palette}`]: !!this.palette(), [`mod-${size}`]: !!this.size() };
 	});
 
 	readonly displayValue = computed(() => {
