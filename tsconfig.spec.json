@@ -1,19 +1,12 @@
 /* To learn more about this file see: https://angular.io/config/tsconfig. */
 {
-	"extends": "./tsconfig.json",
-	"compilerOptions": {
+  "extends": "./tsconfig.json",
+  "compilerOptions": {
     "isolatedModules": true,
     "skipLibCheck": true,
     "outDir": "./out-tsc/spec",
-		"types": [
-			"jest",
-			"node"
-		],
-		"target": "ES2022",
-    "module": "CommonJS"
+    "types": ["jest", "node"],
+    "target": "es2015"
   },
-	"include": [
-		"**/*.spec.ts",
-		"**/*.d.ts"
-	]
+  "include": ["**/*.spec.ts", "**/*.d.ts"]
 }
