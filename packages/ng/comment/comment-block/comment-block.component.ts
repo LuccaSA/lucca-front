@@ -39,5 +39,5 @@ export class CommentBlockComponent {
 
 	readonly noAvatar = computed(() => !this.avatar());
 	readonly isSingleComment = computed(() => this.comments().length === 1);
-	readonly role = computed(() => (this.#chatBlock ? 'listitem' : null));
+	readonly role = this.#chatBlock ? 'listitem' : null;
 }
