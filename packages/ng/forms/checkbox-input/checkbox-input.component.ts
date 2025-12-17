@@ -1,4 +1,4 @@
-import { booleanAttribute, Component, forwardRef, inject, input, Input, signal, Signal, ViewEncapsulation } from '@angular/core';
+import { booleanAttribute, ChangeDetectionStrategy, Component, forwardRef, inject, input, Input, signal, Signal, ViewEncapsulation } from '@angular/core';
 import { ReactiveFormsModule } from '@angular/forms';
 import { FILTER_PILL_INPUT_COMPONENT, FilterPillInputComponent, FilterPillLabelDirective, FilterPillLayout } from '@lucca-front/ng/filter-pills';
 import { FORM_FIELD_INSTANCE, FormFieldComponent, INPUT_FRAMED_INSTANCE, InputDirective } from '@lucca-front/ng/form-field';
@@ -15,6 +15,7 @@ let nextId = 0;
 	templateUrl: './checkbox-input.component.html',
 	styleUrl: './checkbox-input.component.scss',
 	encapsulation: ViewEncapsulation.None,
+	changeDetection: ChangeDetectionStrategy.OnPush,
 	providers: [
 		{
 			provide: FILTER_PILL_INPUT_COMPONENT,
@@ -30,7 +31,7 @@ export class CheckboxInputComponent implements FilterPillInputComponent {
 	parentInput = inject(FILTER_PILL_INPUT_COMPONENT, { optional: true, skipSelf: true });
 	formField = inject<FormFieldComponent>(FORM_FIELD_INSTANCE, { optional: true });
 
-	isFilterPill = false;
+	isFilterPill = signal<boolean>(false);
 	filterPillInputId = `lu-checkbox-pill-input-${nextId++}`;
 	checklist = input(false, { transform: booleanAttribute });
 
@@ -65,7 +66,7 @@ export class CheckboxInputComponent implements FilterPillInputComponent {
 	}
 
 	enableFilterPillMode?(): void {
-		this.isFilterPill = true;
+		this.isFilterPill.set(true);
 	}
 
 	onFilterPillClick(): void {}

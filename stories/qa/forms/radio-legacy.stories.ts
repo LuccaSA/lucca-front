@@ -8,7 +8,7 @@ import { Meta, StoryFn, moduleMetadata } from '@storybook/angular';
 class RadioLegacyStory {}
 
 export default {
-	title: 'QA/Forms/Radio Legacy',
+	title: 'QA/Forms/RadioLegacy',
 	component: RadioLegacyStory,
 	decorators: [
 		moduleMetadata({
@@ -19,4 +19,4 @@ export default {
 
 const template: StoryFn<RadioLegacyStory> = () => ({});
 
-export const basic = template.bind({});
+export const Basic = template.bind({});

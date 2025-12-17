@@ -28,6 +28,19 @@
 			</td>
 		</tr>
 		<tr>
+			<td>Button / Focusable</td>
+			<td>
+				<div class="demo-QAtable-list">
+					<button type="button" class="chip">John Doe</button>
+				</div>
+			</td>
+			<td>
+				<div class="demo-QAtable-list">
+					<button type="button" luChip unkillable>John Doe</button>
+				</div>
+			</td>
+		</tr>
+		<tr>
 			<td>Product</td>
 			<td>
 				<div class="demo-QAtable-list">
@@ -101,8 +114,62 @@
 			</td>
 			<td>
 				<div class="demo-QAtable-list">
-					<lu-chip class="mod-S">John Doe</lu-chip>
-					<lu-chip class="mod-S" unkillable>John Doe</lu-chip>
+					<lu-chip size="S">John Doe</lu-chip>
+					<lu-chip size="S" unkillable>John Doe</lu-chip>
+				</div>
+			</td>
+		</tr>
+		<tr>
+			<td>Feedback</td>
+			<td>
+				<div class="demo-QAtable-list">
+					<div class="chip palette-warning">
+						<span aria-hidden="true" class="chip-icon lucca-icon icon-signWarning"></span>
+						John Doe
+						<button type="button" class="chip-kill">
+							<span class="pr-u-mask">delete</span>
+						</button>
+					</div>
+					<div class="chip palette-critical">
+						<span aria-hidden="true" class="chip-icon lucca-icon icon-signError"></span>
+						John Doe
+						<button type="button" class="chip-kill">
+							<span class="pr-u-mask">delete</span>
+						</button>
+					</div>
+				</div>
+			</td>
+			<td>
+				<div class="demo-QAtable-list">
+					<lu-chip state="warning">John Doe</lu-chip>
+					<lu-chip state="critical">John Doe</lu-chip>
+				</div>
+			</td>
+		</tr>
+		<tr>
+			<td>Feedback Small</td>
+			<td>
+				<div class="demo-QAtable-list">
+					<div class="chip mod-S palette-warning">
+						<span aria-hidden="true" class="chip-icon lucca-icon icon-signWarning"></span>
+						John Doe
+						<button type="button" class="chip-kill">
+							<span class="pr-u-mask">delete</span>
+						</button>
+					</div>
+					<div class="chip mod-S palette-critical">
+						<span aria-hidden="true" class="chip-icon lucca-icon icon-signError"></span>
+						John Doe
+						<button type="button" class="chip-kill">
+							<span class="pr-u-mask">delete</span>
+						</button>
+					</div>
+				</div>
+			</td>
+			<td>
+				<div class="demo-QAtable-list">
+					<lu-chip size="S" state="warning">John Doe</lu-chip>
+					<lu-chip size="S" state="critical">John Doe</lu-chip>
 				</div>
 			</td>
 		</tr>

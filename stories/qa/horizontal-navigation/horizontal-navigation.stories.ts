@@ -3,8 +3,8 @@ import { HorizontalNavigationComponent, HorizontalNavigationLinkDirective } from
 import { Meta, StoryFn } from '@storybook/angular';
 
 @Component({
-	selector: 'horizontalNavigation-stories',
-	templateUrl: './horizontalNavigation.stories.html',
+	selector: 'horizontal-navigation-stories',
+	templateUrl: './horizontal-navigation.stories.html',
 	imports: [HorizontalNavigationComponent, HorizontalNavigationLinkDirective],
 })
 class HorizontalNavigationStory {}
@@ -16,4 +16,4 @@ export default {
 
 const template: StoryFn<HorizontalNavigationStory> = () => ({});
 
-export const basic = template.bind({});
+export const Basic = template.bind({});

@@ -13,7 +13,7 @@ import { applicationConfig, Meta, StoryFn } from '@storybook/angular';
 class HighlightDataStory {}
 
 export default {
-	title: 'QA/Highlight Data',
+	title: 'QA/HighlightData',
 	component: HighlightDataStory,
 	decorators: [
 		applicationConfig({
@@ -24,4 +24,4 @@ export default {
 
 const template: StoryFn<HighlightDataStory> = () => ({});
 
-export const basic = template.bind({});
+export const Basic = template.bind({});

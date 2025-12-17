@@ -52,8 +52,8 @@ class PopoverStory {
 	trigger = input<LuPopoverTriggerEvent>('click');
 }`;
 
-export const basic = template.bind({});
-basic.parameters = {
+export const Basic = template.bind({});
+Basic.parameters = {
 	// Disable controls as they are not modifiable because of ComponentWrapper
 	controls: { include: [] },
 	docs: {

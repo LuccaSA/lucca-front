@@ -28,5 +28,5 @@ const template: StoryFn<FramedStory> = (args) => ({
 	props: args,
 });
 
-export const basic = template.bind({});
-basic.args = { state: '', disabled: false, isRequired: false };
+export const Basic = template.bind({});
+Basic.args = { state: '', disabled: false, isRequired: false };

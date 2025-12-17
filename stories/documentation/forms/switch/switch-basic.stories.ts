@@ -9,7 +9,7 @@ interface SwitchBasicStory {
 	checked: boolean;
 	invalid: false;
 	help: false;
-	messageState: '';
+	messageState: '' | 'error' | 'warning' | 'success';
 }
 
 export default {
@@ -74,7 +74,7 @@ function getTemplate(args: SwitchBasicStory): string {
 	const checked = args.checked ? ` checked="checked"` : '';
 	const invalid = args.invalid ? ` aria-invalid="true"` : '';
 	const help = args.help;
-	const messageState = args.messageState ? ' is-' + args.messageState : '';
+	const messageState = args.messageState ? ` is-${args.messageState}` : '';
 
 	return `<div class="form-field${s}">
 	<label class="formLabel" for="${id}">

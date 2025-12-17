@@ -18,18 +18,63 @@ export default {
 		}),
 	],
 	argTypes: {
+		disabled: {
+			control: {
+				type: 'boolean',
+			},
+			descripotion: 'Désactive le champ.',
+		},
+		label: {
+			control: {
+				type: 'text',
+			},
+			description: 'Modifie le label du champ.',
+		},
+		required: {
+			control: {
+				type: 'boolean',
+			},
+			description: 'Marque le champ comme obligatoire.',
+		},
 		size: {
 			options: ['M', 'S'],
 			control: {
 				type: 'select',
 			},
+			description: 'Modifie la taille de la checkbox.',
+		},
+		hiddenLabel: {
+			description: "Masque le label en le conservant dans le DOM pour les lecteurs d'écrans",
+		},
+		inlineMessage: {
+			control: {
+				type: 'text',
+			},
+			description: 'Ajoute un texte descriptif (aide, erreur, etc.) sous le champ de formulaire.',
+		},
+		inlineMessageState: {
+			options: ['default', 'success', 'warning', 'error'],
+			control: {
+				type: 'select',
+			},
+			description: "Modifie l'état de l'inline message.",
+		},
+		placeholder: {
+			description: 'Modifie le placeholder au champ.',
+		},
+		tooltip: {
+			if: { arg: 'hiddenLabel', truthy: false },
+			description: 'Affiche une icône (?) associée à une info-bulle.',
+		},
+		openOnFocus: {
+			description: 'Ouvre le panel automatiquement au focus du champ.',
 		},
 		width: {
 			options: [null, 20, 30, 40, 50, 60],
 			control: {
 				type: 'select',
 			},
-			description: '[v19.2]',
+			description: "[v19.2] Applique une largeur fixe au champ. A n'utiliser que lorsque la grille de formulaire n'est pas adaptée.",
 		},
 	},
 } as Meta;

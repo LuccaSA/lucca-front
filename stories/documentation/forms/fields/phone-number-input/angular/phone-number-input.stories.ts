@@ -50,26 +50,63 @@ export const Basic: StoryObj<PhoneNumberInputComponent & FormFieldComponent & { 
 		};
 	},
 	argTypes: {
+		disabled: {
+			control: {
+				type: 'boolean',
+			},
+			description: 'Désactive le champ.',
+		},
+		label: {
+			control: {
+				type: 'text',
+			},
+			description: 'Modifie le label du champ.',
+		},
+		required: {
+			control: {
+				type: 'boolean',
+			},
+			description: 'Marque le champ comme obligatoire.',
+		},
 		size: {
 			options: ['M', 'S'],
 			control: {
 				type: 'select',
 			},
+			description: 'Modifie la taille du champ.',
+		},
+		hiddenLabel: {
+			description: "Masque le label en le conservant dans le DOM pour les lecteurs d'écrans",
+		},
+		inlineMessage: {
+			control: {
+				type: 'text',
+			},
+			description: 'Ajoute un texte descriptif (aide, erreur, etc.) sous le champ de formulaire.',
 		},
 		inlineMessageState: {
 			options: ['default', 'success', 'warning', 'error'],
 			control: {
 				type: 'select',
 			},
+			description: "Modifie l'état de l'inline message.",
+		},
+		errorInlineMessage: {
+			description: "Ajoute un texte d'erreur sous le champ lorsque celui-ci est en erreur.",
 		},
 		autocomplete: {
 			options: ['', 'off', 'tel'],
 			control: {
 				type: 'select',
 			},
+			description: 'Modifie le comportement autocomplete du champ.',
 		},
 		noAutoPlaceholder: {
-			description: '[v19.2]',
+			description: '[v19.2] Désactive le placeholder.',
+		},
+		tooltip: {
+			if: { arg: 'hiddenLabel', truthy: false },
+			description: 'Affiche une icône (?) associée à une info-bulle.',
 		},
 	},
 	args: {

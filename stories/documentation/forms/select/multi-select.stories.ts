@@ -29,6 +29,7 @@ import {
 	LuMultiSelectWithSelectAllDirective,
 } from '@lucca-front/ng/multi-select';
 import { LuTooltipModule } from '@lucca-front/ng/tooltip';
+import { TreeSelectDirective } from '@lucca-front/ng/tree-select';
 import { applicationConfig, Meta, moduleMetadata } from '@storybook/angular';
 import { interval, map } from 'rxjs';
 import { startWith } from 'rxjs/operators';
@@ -36,7 +37,6 @@ import { HiddenArgType } from 'stories/helpers/common-arg-types';
 import { createTestStory, getStoryGenerator } from 'stories/helpers/stories';
 import { StoryModelDisplayComponent } from 'stories/helpers/story-model-display.component';
 import { expect, screen, userEvent, within } from 'storybook/test';
-import { TreeSelectDirective } from '../../../../packages/ng/tree-select/tree-select.directive';
 import { waitForAngular } from '../../../helpers/test';
 import { allLegumes, colorNameByColor, coreSelectStory, FilterLegumesPipe, ILegume, LuCoreSelectInputStoryComponent, SortLegumesPipe } from './select.utils';
 
@@ -66,11 +66,11 @@ const generateStory = getStoryGenerator<LuMultiSelectInputStoryComponent>({
 
 async function checkValues(input: HTMLElement, values: string[]) {
 	if (values.length === 0) {
-		await expect(input.parentElement.getElementsByTagName('lu-numeric-badge').length).toBe(0);
+		await expect(input.parentElement.getElementsByTagName('lu-chip').length).toBe(0);
 	}
 	// If it's a counter displayer
-	if (input.parentElement.getElementsByTagName('lu-numeric-badge').length > 0) {
-		const counter = input.parentElement.getElementsByTagName('lu-numeric-badge')[0];
+	if (input.parentElement.getElementsByTagName('lu-chip').length === 1) {
+		const counter = input.parentElement.getElementsByTagName('lu-chip')[0];
 		await expect(counter).toHaveTextContent(values.length.toString());
 	} else {
 		for (const value of values) {
@@ -696,7 +696,7 @@ export const GroupBySelectAll = generateStory({
 	},
 });
 
-export const testDynamicDisabled = generateStory({
+export const TestDynamicDisabled = generateStory({
 	name: '[test] Dynamic disabled',
 	description: 'technical test to check dynamic disabled',
 	neededImports: {

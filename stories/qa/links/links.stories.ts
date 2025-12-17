@@ -22,4 +22,4 @@ export default {
 
 const template: StoryFn<LinksStory> = () => ({});
 
-export const basic = template.bind({});
+export const Basic = template.bind({});

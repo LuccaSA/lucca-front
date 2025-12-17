@@ -1,5 +1,5 @@
 import { NgTemplateOutlet } from '@angular/common';
-import { AfterViewInit, booleanAttribute, Component, computed, DestroyRef, ElementRef, inject, input, LOCALE_ID, signal, viewChild, ViewEncapsulation } from '@angular/core';
+import { AfterViewInit, booleanAttribute, ChangeDetectionStrategy, Component, computed, DestroyRef, ElementRef, inject, input, LOCALE_ID, signal, viewChild, ViewEncapsulation } from '@angular/core';
 import { takeUntilDestroyed } from '@angular/core/rxjs-interop';
 import { ReactiveFormsModule } from '@angular/forms';
 import { ClearComponent } from '@lucca-front/ng/clear';
@@ -19,6 +19,7 @@ import { LU_NUMBERFORMATFIELD_TRANSLATIONS } from './number-format-input.transla
 	templateUrl: './number-format-input.component.html',
 	hostDirectives: [NoopValueAccessorDirective],
 	encapsulation: ViewEncapsulation.None,
+	changeDetection: ChangeDetectionStrategy.OnPush,
 })
 export class NumberFormatInputComponent implements AfterViewInit {
 	#locale = inject(LOCALE_ID);
@@ -30,38 +31,38 @@ export class NumberFormatInputComponent implements AfterViewInit {
 		this.ngControl?.valueChanges?.pipe(takeUntilDestroyed(this.#destroyRef), startWith(this.ngControl.value)).subscribe((value) => this.#suffixPrefixValue.set(value as number));
 	}
 
-	formatStyle = input<NumberFormatStyle>('decimal');
+	readonly formatStyle = input<NumberFormatStyle>('decimal');
 
-	useAutoPrefixSuffix = input<boolean | undefined>(undefined);
+	readonly useAutoPrefixSuffix = input<boolean | undefined>(undefined);
 
-	prefix = input<TextInputAddon | undefined>(undefined);
+	readonly prefix = input<TextInputAddon | undefined>(undefined);
 
-	suffix = input<TextInputAddon | undefined>(undefined);
+	readonly suffix = input<TextInputAddon | undefined>(undefined);
 
-	currency = input<string | undefined>(undefined);
+	readonly currency = input<string | undefined>(undefined);
 
-	currencyDisplay = input<NumberFormatCurrencyDisplay | undefined>(undefined);
+	readonly currencyDisplay = input<NumberFormatCurrencyDisplay | undefined>(undefined);
 
-	unit = input<NumberFormatUnit | undefined>(undefined);
+	readonly unit = input<NumberFormatUnit | undefined>(undefined);
 
-	unitDisplay = input<NumberFormatUnitDisplay | undefined>(undefined);
+	readonly unitDisplay = input<NumberFormatUnitDisplay | undefined>(undefined);
 
-	min = input<number | undefined>(undefined);
+	readonly min = input<number | undefined>(undefined);
 
-	max = input<number | undefined>(undefined);
+	readonly max = input<number | undefined>(undefined);
 
-	placeholder = input<string>('');
+	readonly placeholder = input<string>('');
 
-	hasClearer = input(false, { transform: booleanAttribute });
+	readonly hasClearer = input(false, { transform: booleanAttribute });
 
-	valueAlignRight = input(false, { transform: booleanAttribute });
+	readonly valueAlignRight = input(false, { transform: booleanAttribute });
 
 	inputElementRef = viewChild<ElementRef<HTMLInputElement>>('inputElement');
 
 	#suffixPrefixValue = signal(1);
 
-	#numberFormat = computed(() => new NumberFormat(this.formatOptions()));
-	prefixAddon = computed(() => {
+	readonly #numberFormat = computed(() => new NumberFormat(this.formatOptions()));
+	readonly prefixAddon = computed(() => {
 		if (this.useAutoPrefixSuffix() === undefined || this.useAutoPrefixSuffix() === false) {
 			return this.prefix();
 		}
@@ -74,7 +75,7 @@ export class NumberFormatInputComponent implements AfterViewInit {
 			ariaLabel: content,
 		} as TextInputAddon;
 	});
-	suffixAddon = computed(() => {
+	readonly suffixAddon = computed(() => {
 		if (this.useAutoPrefixSuffix() === undefined || this.useAutoPrefixSuffix() === false) {
 			return this.suffix();
 		}
@@ -88,7 +89,7 @@ export class NumberFormatInputComponent implements AfterViewInit {
 		} as TextInputAddon;
 	});
 
-	formatOptions = computed(
+	readonly formatOptions = computed(
 		() =>
 			({
 				locale: this.#locale,
@@ -102,7 +103,7 @@ export class NumberFormatInputComponent implements AfterViewInit {
 			}) satisfies NumberFormatOptions,
 	);
 
-	intl = getIntl(LU_NUMBERFORMATFIELD_TRANSLATIONS);
+	readonly intl = getIntl(LU_NUMBERFORMATFIELD_TRANSLATIONS);
 
 	clearValue(): void {
 		this.ngControl.reset();
