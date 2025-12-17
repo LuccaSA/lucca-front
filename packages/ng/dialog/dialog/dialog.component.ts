@@ -1,6 +1,5 @@
-import { AfterViewInit, booleanAttribute, ChangeDetectionStrategy, Component, ElementRef, forwardRef, inject, input, ViewEncapsulation } from '@angular/core';
+import { AfterViewInit, booleanAttribute, ChangeDetectionStrategy, Component, ElementRef, inject, input, ViewEncapsulation } from '@angular/core';
 import { LuDialogRef } from '../model';
-import { LU_DIALOG_INSTANCE } from './dialog.token';
 
 @Component({
 	selector: 'lu-dialog',
@@ -11,12 +10,6 @@ import { LU_DIALOG_INSTANCE } from './dialog.token';
 	host: {
 		class: 'dialog-inside',
 	},
-	providers: [
-		{
-			provide: LU_DIALOG_INSTANCE,
-			useExisting: forwardRef(() => DialogComponent),
-		},
-	],
 })
 export class DialogComponent implements AfterViewInit {
 	public readonly dialogRef = inject<LuDialogRef>(LuDialogRef);
@@ -33,15 +26,17 @@ export class DialogComponent implements AfterViewInit {
 		this.dialogRef.dismiss();
 	}
 
+	constructor() {
+		if (this.stacked()) {
+			this.dialogRef.cdkRef.overlayRef.addPanelClass('mod-stacked');
+		}
+	}
+
 	ngAfterViewInit(): void {
 		if (this.dialogRef.config.autoFocus === 'first-input' && !this.dialogRef.config.cdkConfigOverride?.autoFocus) {
 			const focusable: HTMLElement =
 				this.#htmlElement.querySelector('.luDialog-autofocus .luNativeInput') || this.#htmlElement.querySelector('.luDialog-autofocus') || this.#htmlElement.querySelector('.luNativeInput');
 			focusable?.focus();
-		}
-
-		if (this.stacked()) {
-			this.dialogRef.cdkRef.overlayRef.addPanelClass('mod-stacked');
 		}
 	}
 }
