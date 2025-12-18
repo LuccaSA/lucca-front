@@ -29,11 +29,11 @@ const icons = selection.icons
 	})
 	.flat();
 
-const type = `${generatedWarning}export type LuccaIcon =\n\t| ${icons.map((icon) => `'${icon.camelCase}'`).join('\n\t| ')};\n`;
+const type = `${generatedWarning}export * from './icons-list';\n\nexport type LuccaIcon =\n\t| ${icons.map((icon) => `'${icon.camelCase}'`).join('\n\t| ')};\n`;
 
 writeFileSync(join(__dirname, './index.d.ts'), type);
 
-const list = `${generatedWarning}export const IconsList = [\n\t${icons
+const list = `${generatedWarning}export const ɵIconsList = [\n\t${icons
 	.map((icon) => `{ icon: '${icon.camelCase}', deprecated: ${icon.deprecated} }`)
 	.join(',\n\t')},\n];\n`;
 
@@ -44,6 +44,7 @@ const scssConfig = `${generatedWarning}// to test locally (without the CDN)
 $font-path: '//cdn.lucca.fr/transverse/prisme/icons/font/lucca-icons' !default;
 $font-name: 'Lucca icons' !default;
 $isNamespaced: false !default;
+$layers: 'reset, base, components, mods, product, utils' !default;
 
 $icons: (
 ${icons

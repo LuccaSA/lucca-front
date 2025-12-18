@@ -1,4 +1,4 @@
-import { IconsList } from '@lucca-front/icons/icons-list';
+import { ɵIconsList } from '@lucca-front/icons';
 import { IconComponent } from '@lucca-front/ng/icon';
 import { Meta, StoryObj } from '@storybook/angular';
 
@@ -10,7 +10,7 @@ export default {
 			description: "Information restituée par le lecteur d'écran.",
 		},
 		icon: {
-			options: IconsList.map((i) => i.icon),
+			options: ɵIconsList.map((i) => i.icon),
 			control: 'select',
 			description: "Modifie le glyphe de l'icône.",
 		},

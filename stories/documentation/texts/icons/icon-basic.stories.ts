@@ -1,6 +1,6 @@
 import { Component } from '@angular/core';
 import { FormsModule } from '@angular/forms';
-import { IconsList } from '@lucca-front/icons/icons-list';
+import { ɵIconsList } from '@lucca-front/icons/icons-list';
 import { IconComponent } from '@lucca-front/ng/icon';
 import { Meta, StoryObj } from '@storybook/angular';
 
@@ -11,11 +11,11 @@ import { Meta, StoryObj } from '@storybook/angular';
 	templateUrl: './icon-basic.stories.html',
 })
 class IconStory {
-	icons = IconsList;
+	icons = ɵIconsList;
 	filter = '';
 
 	public updateIcons(filter: string) {
-		this.icons = filter ? IconsList.filter(({ icon }) => icon.toLowerCase().includes(filter.toLowerCase())) : IconsList;
+		this.icons = filter ? ɵIconsList.filter(({ icon }) => icon.toLowerCase().includes(filter.toLowerCase())) : ɵIconsList;
 	}
 
 	public copyIcon(icon: string): void {

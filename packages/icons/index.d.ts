@@ -3,6 +3,8 @@
 // *** The generator is update-icons.js		 ***
 // *******************************************
 
+export * from './icons-list';
+
 export type LuccaIcon =
 	| 'app'
 	| 'apps'

@@ -1,5 +1,5 @@
 import { Component } from '@angular/core';
-import { IconsList } from '@lucca-front/icons/icons-list';
+import { ɵIconsList } from '@lucca-front/icons';
 import { Meta, moduleMetadata, StoryObj } from '@storybook/angular';
 
 @Component({
@@ -8,7 +8,7 @@ import { Meta, moduleMetadata, StoryObj } from '@storybook/angular';
 	templateUrl: './icon.stories.html',
 })
 class IconStory {
-	icons = IconsList;
+	icons = ɵIconsList;
 }
 
 export default {
