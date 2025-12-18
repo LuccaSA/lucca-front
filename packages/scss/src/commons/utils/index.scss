@@ -395,15 +395,18 @@
 		@extend %textCenter;
 	}
 
-	.pr-u-colorTextSubtle {
+	// textLight is deprecated
+	.pr-u-textLight {
 		@extend %textLight;
 	}
 
-	.pr-u-colorInputTextPlaceholder {
+	// textPlaceholder is deprecated
+	.pr-u-textPlaceholder, .pr-u-colorInputTextPlaceholder {
 		@extend %textPlaceholder;
 	}
 
-	.pr-u-colorText {
+	// textDefault is deprecated
+	.pr-u-textDefault {
 		@extend %textDefault;
 	}
 

@@ -108,6 +108,7 @@ $cursor: 'pointer', 'auto', 'default', 'text';
 }
 
 @mixin palettes($suffix: '!important') {
+	// .pr-u-text is deprecated
 	@each $palette in config.$palettesAll {
 		.pr-u-text#{transform.capitalize($palette)}, .pr-u-colorText#{transform.capitalize($palette)} {
 			color: var(--palettes-#{$palette}-700) #{$suffix};
