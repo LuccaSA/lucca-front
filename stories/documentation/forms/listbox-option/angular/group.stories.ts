@@ -14,7 +14,11 @@ export default {
 			imports: [ListboxComponent, OptionComponent, IconComponent],
 		}),
 	],
-	argTypes: {},
+	argTypes: {
+		multiple: {
+			description: "Ajoute une checkbox à l'option.",
+		},
+	},
 	render: (args: OptionBasicStory) => {
 		const multiple = args.multiple ? ` multiple` : ``;
 		const select = args.multiple ? ` selectAll="Tout sélectionner"` : ``;
