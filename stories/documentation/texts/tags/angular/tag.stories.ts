@@ -1,4 +1,4 @@
-import { ɵIconsList } from '@lucca-front/icons/icons-list';
+import { ɵIconsList } from '@lucca-front/icons';
 import { TagComponent } from '@lucca-front/ng/tag';
 import { Meta, StoryObj } from '@storybook/angular';
 import { HiddenArgType, PaletteAllArgType } from 'stories/helpers/common-arg-types';
