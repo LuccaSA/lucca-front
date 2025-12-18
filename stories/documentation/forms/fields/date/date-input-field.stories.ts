@@ -108,6 +108,7 @@ export const BasicTEST = createTestStory(Basic, async ({ canvasElement, args, co
 	const canvas = within(canvasElement);
 	await waitForAngular();
 	// Get input using label text to make sure the label link is properly done, we're adding ? for the tooltip
+	// eslint-disable-next-line @angular-eslint/no-uncalled-signals
 	const input = canvas.getByLabelText(`${args['label']}${args['tooltip'] ? '?' : ''}`, { selector: 'input' });
 	await userEvent.click(input);
 	await waitForAngular();
