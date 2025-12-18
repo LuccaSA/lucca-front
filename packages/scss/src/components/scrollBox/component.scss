@@ -28,6 +28,7 @@
 		flex-shrink: 0;
 		inline-size: var(--components-scrollBox-shadowSize);
 		inset-block: 0;
+		inset-inline: calc(var(--components-scrollBox-paddingInline) * -1);
 		margin-block: calc(var(--components-scrollBox-paddingBlock) * -1);
 		background-repeat: no-repeat;
 		z-index: 10;
@@ -40,8 +41,8 @@
 
 	&::before {
 		opacity: var(--components-scrollBox-beforeOpacity);
-		inset-inline-start: calc(var(--components-scrollBox-paddingInline) * -1);
-		margin-inline-end: calc(var(--components-scrollBox-shadowSize) * -1 - var(--components-scrollBox-gap));
+		margin-inline-start: calc(var(--components-scrollBox-paddingInline) * -1);
+		margin-inline-end: calc(var(--components-scrollBox-paddingInline) - var(--components-scrollBox-shadowSize) - var(--components-scrollBox-gap));
 		background-position: 0% 50%;
 		background-image: radial-gradient(
 				farthest-side at 0% 50%,
@@ -62,8 +63,8 @@
 
 	&::after {
 		opacity: var(--components-scrollBox-afterOpacity);
-		inset-inline-end: calc(var(--components-scrollBox-paddingInline) * -1);
-		margin-inline-start: calc(var(--components-scrollBox-shadowSize) * -1 - var(--components-scrollBox-gap));
+		margin-inline-start: calc(var(--components-scrollBox-paddingInline) - var(--components-scrollBox-shadowSize) - var(--components-scrollBox-gap));
+		margin-inline-end: calc(var(--components-scrollBox-paddingInline) * -1);
 		background-position: 100% 50%;
 		background-image: radial-gradient(
 				farthest-side at 100% 50%,

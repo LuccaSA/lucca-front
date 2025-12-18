@@ -1,71 +1,45 @@
-import { ChangeDetectionStrategy, Component, ElementRef, HostBinding, inject, OnDestroy, OnInit, signal, ViewEncapsulation } from '@angular/core';
+import { afterNextRender, booleanAttribute, Component, ElementRef, inject, input, OnInit, signal, ViewEncapsulation } from '@angular/core';
 
 @Component({
 	selector: 'lu-scroll-box',
 	standalone: true,
 	template: '<ng-content />',
 	styleUrl: './scroll-box.component.scss',
-	changeDetection: ChangeDetectionStrategy.OnPush,
 	encapsulation: ViewEncapsulation.None,
-	imports: [],
 	host: {
 		class: 'scrollBox',
+		'(scroll)': 'scroll()',
+		'[class.is-firstVisible]': 'isFirstVisible()',
+		'[class.is-lastVisible]': 'isLastVisible()',
 	},
 })
-export class ScrollBoxComponent implements OnInit, OnDestroy {
+export class ScrollBoxComponent implements OnInit {
 	#elementRef = inject<ElementRef<HTMLElement>>(ElementRef);
 
-	@HostBinding('class.is-firstVisible')
-	get isFirstVisibleClass() {
-		return this.isFirstVisible();
-	}
-	isFirstVisible = signal(false);
-
-	@HostBinding('class.is-lastVisible')
-	get isLastVisibleClass() {
-		return this.isLastVisible();
-	}
+	isFirstVisible = signal(true);
 	isLastVisible = signal(false);
 
-	initObserver(element: Element, isFirst: boolean) {
-		new IntersectionObserver(
-			(entries) => {
-				entries.forEach((entry) => {
-					if (isFirst) {
-						this.isFirstVisible.set(entry.isIntersecting);
-					} else {
-						this.isLastVisible.set(entry.isIntersecting);
-					}
-				});
-			},
-			{
-				threshold: 1.0,
-			},
-		).observe(element);
+	vertical = input(false, { transform: booleanAttribute });
+
+	scroll() {
+		if (this.vertical()) {
+			this.isFirstVisible.set(this.#elementRef.nativeElement.scrollTop === 0);
+			this.isLastVisible.set(this.#elementRef.nativeElement.scrollTop >= this.#elementRef.nativeElement.scrollHeight - this.#elementRef.nativeElement.clientHeight);
+		} else {
+			this.isFirstVisible.set(this.#elementRef.nativeElement.scrollLeft === 0);
+			this.isLastVisible.set(this.#elementRef.nativeElement.scrollLeft >= this.#elementRef.nativeElement.scrollWidth - this.#elementRef.nativeElement.clientWidth);
+		}
 	}
 
-	observeFirstAndLastElement = () => {
-		const children = this.#elementRef.nativeElement.children;
-
-		[].forEach.call(children, (child, index) => {
-			if (index === 0) {
-				this.initObserver(child as Element, true);
-			}
-
-			if (index === children.length - 1) {
-				this.initObserver(child as Element, false);
-			}
+	constructor() {
+		afterNextRender(() => {
+			this.scroll();
 		});
-	};
-
-	observer = new MutationObserver(this.observeFirstAndLastElement);
-
-	ngOnInit() {
-		this.observeFirstAndLastElement();
-		this.observer.observe(this.#elementRef.nativeElement, { childList: true });
 	}
 
-	ngOnDestroy() {
-		this.observer.disconnect();
+	ngOnInit(): void {
+		new ResizeObserver(() => {
+			this.scroll();
+		}).observe(this.#elementRef.nativeElement);
 	}
 }
