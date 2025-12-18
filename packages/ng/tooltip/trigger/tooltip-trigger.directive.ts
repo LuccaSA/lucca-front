@@ -366,4 +366,12 @@ export class LuTooltipTriggerDirective implements OnDestroy {
 		}
 		return x;
 	}
+
+	requestClose() {
+		this.#action.set('close');
+	}
+
+	requestOpen() {
+		this.#action.set('open');
+	}
 }
