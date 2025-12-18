@@ -3,8 +3,8 @@
 import type { ParsedTemplate, TmplAstBoundAttribute, TmplAstElement, TmplAstNode, TmplAstTextAttribute } from '@angular/compiler';
 import { createSourceFile, ScriptTarget } from 'typescript';
 import { applyUpdates, updateContent } from './file-update.js';
-import { replaceStringLiterals } from './typescript-ast.js';
 import { currentSchematicContext } from './lf-schematic-context';
+import { replaceStringLiterals } from './typescript-ast.js';
 
 // eslint-disable-next-line @typescript-eslint/ban-ts-comment
 // @ts-ignore
@@ -112,6 +112,16 @@ export class HtmlAst extends HtmlAstVisitor<TemplateNode> {
 			}).nodes
 		);
 	}
+}
+
+export function updateComponentPathImports(content: string, oldPathToNewPath: Record<string, string>): string {
+		const root = new HtmlAst(content);
+		const visitedAttributes = new WeakSet<TmplAstNode>();
+		const cssClassesToUpdate = new Set(Object.keys(oldPathToNewPath));
+
+		console.log(root.visitNodes('statements'));
+
+	return '';
 }
 
 export function updateCssClassNames(content: string, oldClassToNewClass: Record<string, string>): string {
