@@ -3,7 +3,7 @@
 // *** The generator is update-icons.js		 ***
 // *******************************************
 
-export const ɵIconsList = [
+export const IconsList = [
 	{ icon: 'app', deprecated: false },
 	{ icon: 'apps', deprecated: true },
 	{ icon: 'nineTiles', deprecated: true },

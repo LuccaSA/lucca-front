@@ -29,15 +29,15 @@ const icons = selection.icons
 	})
 	.flat();
 
-const type = `${generatedWarning}export * from './icons-list';\n\nexport type LuccaIcon =\n\t| ${icons.map((icon) => `'${icon.camelCase}'`).join('\n\t| ')};\n`;
+const type = `${generatedWarning}export type LuccaIcon =\n\t| ${icons.map((icon) => `'${icon.camelCase}'`).join('\n\t| ')};\n`;
 
 writeFileSync(join(__dirname, './index.d.ts'), type);
 
-const list = `${generatedWarning}export const ɵIconsList = [\n\t${icons
+const list = `${generatedWarning}export const IconsList = [\n\t${icons
 	.map((icon) => `{ icon: '${icon.camelCase}', deprecated: ${icon.deprecated} }`)
 	.join(',\n\t')},\n];\n`;
 
-writeFileSync(join(__dirname, './icons-list.ts'), list);
+writeFileSync(join(__dirname, '../../stories/documentation/icons-list.ts'), list);
 
 const scssConfig = `${generatedWarning}// to test locally (without the CDN)
 // $font-path: '../../font/lucca-icons' !default;

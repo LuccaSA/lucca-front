@@ -1,4 +1,4 @@
-import { ɵIconsList } from '@lucca-front/icons';
+import { IconsList } from '@/stories/icons-list';
 import { ListingComponent, ListingItemComponent } from '@lucca-front/ng/listing';
 import { Meta, moduleMetadata, StoryObj } from '@storybook/angular';
 import { PaletteAllArgType } from 'stories/helpers/common-arg-types';
@@ -58,14 +58,14 @@ export const Template: StoryObj<ListingComponent & ListingItemComponent & { type
 			description: 'Modifie le type de liste (ordonnée, checklist, icônes, etc.)',
 		},
 		defaultIcon: {
-			options: ɵIconsList.map((i) => i.icon),
+			options: IconsList.map((i) => i.icon),
 			control: {
 				type: 'select',
 			},
 			description: "Modifie l'icône par défaut de chaque élément lorsque le type <code>icons</code> est sélectionné.",
 		},
 		icon: {
-			options: ɵIconsList.map((i) => i.icon),
+			options: IconsList.map((i) => i.icon),
 			control: {
 				type: 'select',
 			},

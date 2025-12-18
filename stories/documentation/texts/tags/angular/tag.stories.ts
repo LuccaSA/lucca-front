@@ -1,4 +1,4 @@
-import { ɵIconsList } from '@lucca-front/icons';
+import { IconsList } from '@/stories/icons-list';
 import { TagComponent } from '@lucca-front/ng/tag';
 import { Meta, StoryObj } from '@storybook/angular';
 import { HiddenArgType, PaletteAllArgType } from 'stories/helpers/common-arg-types';
@@ -32,7 +32,7 @@ export const Template: StoryObj<TagComponent> = {
 			description: 'Applique un style secondaire au tag.',
 		},
 		icon: {
-			options: ɵIconsList.map((i) => i.icon),
+			options: IconsList.map((i) => i.icon),
 			control: {
 				type: 'select',
 			},
