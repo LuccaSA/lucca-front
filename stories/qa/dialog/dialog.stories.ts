@@ -1,5 +1,5 @@
 import { Component } from '@angular/core';
-import { Meta, moduleMetadata, StoryFn } from '@storybook/angular';
+import { Meta, moduleMetadata, StoryObj } from '@storybook/angular';
 
 @Component({
 	standalone: true,
@@ -18,6 +18,9 @@ export default {
 	],
 } as Meta;
 
-const template: StoryFn<DialogStory> = () => ({});
+const template = () => ({});
 
-export const Basic = template.bind({});
+export const Basic: StoryObj<DialogStory> = {
+	args: {},
+	render: template,
+};

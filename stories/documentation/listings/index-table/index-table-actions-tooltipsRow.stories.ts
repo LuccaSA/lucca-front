@@ -3,7 +3,7 @@ import { provideAnimations } from '@angular/platform-browser/animations';
 import { LuTooltipModule } from '@lucca-front/ng/tooltip';
 import { LuUserDisplayModule, LuUserPictureComponent } from '@lucca-front/ng/user';
 import { LuUserPopoverDirective, provideLuUserPopover } from '@lucca-front/ng/user-popover';
-import { applicationConfig, Meta, moduleMetadata, StoryFn } from '@storybook/angular';
+import { applicationConfig, Meta, moduleMetadata, StoryObj } from '@storybook/angular';
 
 interface IndexTableActionsTooltipsRowStory {}
 
@@ -83,7 +83,7 @@ function getTemplate(args: IndexTableActionsTooltipsRowStory): string {
 `;
 }
 
-const Template: StoryFn<IndexTableActionsTooltipsRowStory> = (args) => ({
+const Template = (args: IndexTableActionsTooltipsRowStory) => ({
 	props: {
 		...args,
 		message: (msg) => {
@@ -93,4 +93,7 @@ const Template: StoryFn<IndexTableActionsTooltipsRowStory> = (args) => ({
 	template: getTemplate(args),
 });
 
-export const TooltipsRow = Template.bind({});
+export const TooltipsRow: StoryObj<IndexTableActionsTooltipsRowStory> = {
+	args: {},
+	render: Template,
+};

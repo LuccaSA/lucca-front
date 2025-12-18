@@ -1,5 +1,5 @@
 import { StatusBadgeComponent } from '@lucca-front/ng/statusBadge';
-import { Meta, moduleMetadata, StoryFn } from '@storybook/angular';
+import { Meta, moduleMetadata, StoryObj } from '@storybook/angular';
 
 interface StatusBadgeBasicStory {
 	label: string;
@@ -49,10 +49,12 @@ function getTemplate(args: StatusBadgeBasicStory): string {
 	return `<lu-status-badge label="${args.label}"${p}${s}${e} />`;
 }
 
-const Template: StoryFn<StatusBadgeBasicStory> = (args) => ({
+const Template = (args: StatusBadgeBasicStory) => ({
 	props: args,
 	template: getTemplate(args),
 });
 
-export const Basic = Template.bind({});
-Basic.args = { label: 'Status', palette: '', size: '', withEllipsis: false };
+export const Basic: StoryObj<StatusBadgeBasicStory> = {
+	args: { label: 'Status', palette: '', size: '', withEllipsis: false },
+	render: Template,
+};

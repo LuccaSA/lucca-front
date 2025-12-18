@@ -4,7 +4,7 @@ import { provideAnimations } from '@angular/platform-browser/animations';
 import { LuInputDisplayerDirective } from '@lucca-front/ng/input';
 import { LuOptionItemComponent, LuOptionPickerComponent } from '@lucca-front/ng/option';
 import { LuSelectInputComponent } from '@lucca-front/ng/select';
-import { Meta, StoryFn, applicationConfig } from '@storybook/angular';
+import { Meta, applicationConfig, StoryObj } from '@storybook/angular';
 
 @Component({
 	selector: 'select-stories',
@@ -84,7 +84,7 @@ export default {
 	decorators: [applicationConfig({ providers: [provideAnimations()] })],
 } as Meta;
 
-const template: StoryFn<SelectStory> = (args) => ({
+const template = (args: SelectStory) => ({
 	props: args,
 });
 
@@ -132,8 +132,11 @@ import { LuInputDisplayerDirective } from '@lucca-front/ng/input';
 })
 class SelectStory { }`;
 
-export const Basic = template.bind({});
-Basic.args = {};
+export const Basic: StoryObj<SelectStory> = {
+	args: {},
+	render: template,
+};
+
 Basic.parameters = {
 	// Disable controls as they are not modifiable because of ComponentWrapper
 	controls: { include: [] },

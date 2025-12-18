@@ -2,7 +2,7 @@ import { provideHttpClient } from '@angular/common/http';
 import { Component, Input } from '@angular/core';
 import { provideAnimations } from '@angular/platform-browser/animations';
 import { LuDepartmentSelectInputComponent } from '@lucca-front/ng/department';
-import { Meta, StoryFn, applicationConfig } from '@storybook/angular';
+import { applicationConfig, Meta, StoryObj } from '@storybook/angular';
 
 @Component({
 	selector: 'department-select-stories',
@@ -50,11 +50,9 @@ export default {
 	decorators: [applicationConfig({ providers: [provideAnimations(), provideHttpClient()] })],
 } as Meta;
 
-const template: StoryFn<DepartmentStory> = (args) => ({
-	props: args,
-});
-
-export const Select = template.bind({});
+export const Select: StoryObj<DepartmentStory> = {
+	args: {},
+};
 
 const code = `
 import { LuDepartmentSelectInputComponent } from '@lucca-front/ng/department';

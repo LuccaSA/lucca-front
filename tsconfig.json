@@ -28,10 +28,10 @@
     },
     "declaration": false,
     "experimentalDecorators": true,
-    "moduleResolution": "node",
+    "moduleResolution": "Bundler",
     "importHelpers": true,
     "target": "ES2022",
-    "module": "ESNext",
+    "module": "preserve",
     "lib": [
       "ES2022",
       "dom"

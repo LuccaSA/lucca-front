@@ -1,4 +1,4 @@
-import { Meta, StoryFn } from '@storybook/angular';
+import { Meta, StoryObj } from '@storybook/angular';
 
 interface IndexTablePaginationStory {}
 
@@ -60,10 +60,12 @@ function getTemplate(args: IndexTablePaginationStory): string {
 </div>`;
 }
 
-const Template: StoryFn<IndexTablePaginationStory> = (args) => ({
+const Template = (args: IndexTablePaginationStory) => ({
 	props: args,
 	template: getTemplate(args),
 });
 
-export const Pagination = Template.bind({});
-Pagination.args = {};
+export const Pagination: StoryObj<IndexTablePaginationStory> = {
+	args: {},
+	render: Template,
+};

@@ -1,4 +1,4 @@
-import { Meta, StoryFn } from '@storybook/angular';
+import { Meta, StoryObj } from '@storybook/angular';
 
 interface LinkDecorationHoverStory {}
 
@@ -12,7 +12,7 @@ function getTemplate(args: LinkDecorationHoverStory): string {
 <a class="link mod-decorationHover mod-icon" href="#" target="_blank">Text link<!-- no text node here --><span aria-hidden="true" class="lucca-icon icon-arrowExternal"></span><span class="pr-u-mask">Open in a new window</span></a>`;
 }
 
-const Template: StoryFn<LinkDecorationHoverStory> = (args) => ({
+const Template = (args: LinkDecorationHoverStory) => ({
 	props: args,
 	template: getTemplate(args),
 	styles: [
@@ -25,5 +25,7 @@ const Template: StoryFn<LinkDecorationHoverStory> = (args) => ({
 	],
 });
 
-export const DecorationHoverLink = Template.bind({});
-DecorationHoverLink.args = {};
+export const DecorationHoverLink: StoryObj<LinkDecorationHoverStory> = {
+	args: {},
+	render: Template,
+};

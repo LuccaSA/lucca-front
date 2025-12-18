@@ -22,9 +22,7 @@ export default {
 			{
 				provide: LOCALE_ID,
 				useFactory: () =>
-					navigator.languages.find((lang) => availableLanguages.includes(lang)) ||
-					navigator.languages.find((lang) => availableLanguages.includes(lang.split('-')[0])) ||
-					availableLanguages[0],
+					navigator.languages.find((lang) => availableLanguages.includes(lang)) || navigator.languages.find((lang) => availableLanguages.includes(lang.split('-')[0])) || availableLanguages[0],
 			},
 		],
 	}),

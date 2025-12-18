@@ -1,7 +1,7 @@
 import { ButtonComponent } from '@lucca-front/ng/button';
 import { DividerComponent } from '@lucca-front/ng/divider';
 import { IconComponent } from '@lucca-front/ng/icon';
-import { Meta, moduleMetadata, StoryFn } from '@storybook/angular';
+import { Meta, moduleMetadata, StoryObj } from '@storybook/angular';
 
 interface DividerBasicStory {
 	size: string;
@@ -73,7 +73,7 @@ function getTemplate(args: DividerBasicStory): string {
 	}
 }
 
-const Template: StoryFn<DividerBasicStory> = (args) => ({
+const Template = (args: DividerBasicStory) => ({
 	props: args,
 	template: getTemplate(args),
 	styles: [
@@ -87,12 +87,14 @@ const Template: StoryFn<DividerBasicStory> = (args) => ({
 	],
 });
 
-export const Basic = Template.bind({});
-Basic.args = {
-	content: 'Text',
-	size: '',
-	separatorRole: false,
-	icon: false,
-	button: false,
-	vertical: false,
+export const Basic: StoryObj<DividerBasicStory> = {
+	args: {
+		content: 'Text',
+		size: '',
+		separatorRole: false,
+		icon: false,
+		button: false,
+		vertical: false,
+	},
+	render: Template,
 };

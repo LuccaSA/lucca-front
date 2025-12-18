@@ -1,4 +1,4 @@
-import { Meta, StoryFn } from '@storybook/angular';
+import { Meta, StoryObj } from '@storybook/angular';
 
 interface VisibilityStory {}
 
@@ -14,10 +14,12 @@ function getTemplate(args: VisibilityStory): string {
 `;
 }
 
-const Template: StoryFn<VisibilityStory> = (args) => ({
+const Template = (args: VisibilityStory) => ({
 	props: args,
 	template: getTemplate(args),
 });
 
-export const Visibility = Template.bind({});
-Visibility.args = {};
+export const Visibility: StoryObj<VisibilityStory> = {
+	args: {},
+	render: Template,
+};

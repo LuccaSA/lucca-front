@@ -1,5 +1,5 @@
 import { Component } from '@angular/core';
-import { Meta, StoryFn } from '@storybook/angular';
+import { Meta, StoryObj } from '@storybook/angular';
 
 @Component({
 	standalone: true,
@@ -13,6 +13,9 @@ export default {
 	component: FilesStory,
 } as Meta;
 
-const template: StoryFn<FilesStory> = () => ({});
+const template = () => ({});
 
-export const Basic = template.bind({});
+export const Basic: StoryObj<FilesStory> = {
+	args: {},
+	render: template,
+};

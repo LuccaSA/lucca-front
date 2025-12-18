@@ -1,4 +1,4 @@
-import { Meta, StoryFn } from '@storybook/angular';
+import { Meta, StoryObj } from '@storybook/angular';
 
 interface IndexTableInputStory {}
 
@@ -34,10 +34,12 @@ function getTemplate(args: IndexTableInputStory): string {
 </table>`;
 }
 
-const Template: StoryFn<IndexTableInputStory> = (args) => ({
+const Template = (args: IndexTableInputStory) => ({
 	props: args,
 	template: getTemplate(args),
 });
 
-export const Input = Template.bind({});
-Input.args = {};
+export const Input: StoryObj<IndexTableInputStory> = {
+	args: {},
+	render: Template,
+};

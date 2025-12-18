@@ -1,4 +1,4 @@
-import { Meta, StoryFn } from '@storybook/angular';
+import { Meta, StoryObj } from '@storybook/angular';
 
 interface IndexTableNestedSelectableStory {}
 
@@ -200,10 +200,12 @@ function getTemplate(args: IndexTableNestedSelectableStory): string {
 	`;
 }
 
-const Template: StoryFn<IndexTableNestedSelectableStory> = (args) => ({
+const Template = (args: IndexTableNestedSelectableStory) => ({
 	props: args,
 	template: getTemplate(args),
 });
 
-export const NestedSelectable = Template.bind({});
-NestedSelectable.args = {};
+export const NestedSelectable: StoryObj<IndexTableNestedSelectableStory> = {
+	args: {},
+	render: Template,
+};

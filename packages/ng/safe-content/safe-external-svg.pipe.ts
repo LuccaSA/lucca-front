@@ -1,7 +1,7 @@
 import { HttpClient } from '@angular/common/http';
 import { ChangeDetectorRef, inject, Pipe, PipeTransform } from '@angular/core';
 import { DomSanitizer, SafeHtml } from '@angular/platform-browser';
-import { sanitize } from 'isomorphic-dompurify';
+import DOMPurify from 'isomorphic-dompurify';
 import { map, Subscription } from 'rxjs';
 
 @Pipe({
@@ -31,7 +31,7 @@ export class LuSafeExternalSvgPipe implements PipeTransform {
 		this.#subscription = this.#httpClient
 			.get(url, { responseType: 'text' })
 			.pipe(
-				map((svg) => sanitize(svg, { USE_PROFILES: { svg: true } })),
+				map((svg) => DOMPurify.sanitize(svg, { USE_PROFILES: { svg: true } })),
 				map((svg) => this.#domSanitizer.bypassSecurityTrustHtml(svg)),
 			)
 			.subscribe((svg) => {

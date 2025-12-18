@@ -1,4 +1,4 @@
-import { Meta, StoryFn } from '@storybook/angular';
+import { Meta, StoryObj } from '@storybook/angular';
 
 interface TimelinesBasicStory {
 	number: boolean;
@@ -51,10 +51,12 @@ function getTemplate(args: TimelinesBasicStory): string {
 	`;
 }
 
-const Template: StoryFn<TimelinesBasicStory> = (args) => ({
+const Template = (args: TimelinesBasicStory) => ({
 	props: args,
 	template: getTemplate(args),
 });
 
-export const Basic = Template.bind({});
-Basic.args = { number: false, size: '' };
+export const Basic: StoryObj<TimelinesBasicStory> = {
+	args: { number: false, size: '' },
+	render: Template,
+};

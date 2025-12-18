@@ -1,4 +1,4 @@
-import { Meta, StoryFn } from '@storybook/angular';
+import { Meta, StoryObj } from '@storybook/angular';
 
 interface IndexTableLayoutFixedResponsiveStory {}
 
@@ -46,10 +46,12 @@ function getTemplate(args: IndexTableLayoutFixedResponsiveStory): string {
 </table>`;
 }
 
-const Template: StoryFn<IndexTableLayoutFixedResponsiveStory> = (args) => ({
+const Template = (args: IndexTableLayoutFixedResponsiveStory) => ({
 	props: args,
 	template: getTemplate(args),
 });
 
-export const LayoutFixedResponsive = Template.bind({});
-LayoutFixedResponsive.args = {};
+export const LayoutFixedResponsive: StoryObj<IndexTableLayoutFixedResponsiveStory> = {
+	args: {},
+	render: Template,
+};

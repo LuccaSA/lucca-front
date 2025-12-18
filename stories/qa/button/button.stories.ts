@@ -2,7 +2,7 @@ import { Component } from '@angular/core';
 import { ButtonComponent } from '@lucca-front/ng/button';
 import { IconComponent } from '@lucca-front/ng/icon';
 import { NumericBadgeComponent } from '@lucca-front/ng/numeric-badge';
-import { Meta, StoryFn } from '@storybook/angular';
+import { Meta, StoryObj } from '@storybook/angular';
 
 @Component({
 	standalone: true,
@@ -18,6 +18,9 @@ export default {
 	component: ButtonStory,
 } as Meta;
 
-const template: StoryFn<ButtonStory> = () => ({});
+const template = () => ({});
 
-export const Basic = template.bind({});
+export const Basic: StoryObj<ButtonStory> = {
+	args: {},
+	render: template,
+};

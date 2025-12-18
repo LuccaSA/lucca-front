@@ -1,6 +1,6 @@
 import { Component, Input } from '@angular/core';
 import { LuNumberPipe } from '@lucca-front/ng/number';
-import { Meta, StoryFn } from '@storybook/angular';
+import { Meta, StoryObj } from '@storybook/angular';
 
 @Component({
 	selector: 'precision-stories',
@@ -22,10 +22,6 @@ export default {
 	},
 } as Meta;
 
-const template: StoryFn<PrecisionStory> = (args) => ({
-	props: args,
-});
-
 const code = `
 /* 1. Importer LuNumberPipe */
 import { LuNumberPipe } from '@lucca-front/ng/number';
@@ -45,10 +41,11 @@ class PrecisionStory {
 	@Input() precision: number;
 }
 `;
-export const Precision = template.bind({});
-Precision.args = {
-	value: Math.PI,
-	precision: 2,
+export const Precision: StoryObj<PrecisionStory> = {
+	args: {
+		value: Math.PI,
+		precision: 2,
+	},
 };
 
 Precision.parameters = {

@@ -1,5 +1,5 @@
 import { Component } from '@angular/core';
-import { Meta, StoryFn } from '@storybook/angular';
+import { Meta, StoryObj } from '@storybook/angular';
 
 @Component({
 	selector: 'lu-index-table-interactive-nested-selectable',
@@ -93,9 +93,11 @@ export default {
 	component: IndexTableInteractiveNestedSelectableStory,
 } as Meta;
 
-const Template: StoryFn<IndexTableInteractiveNestedSelectableStory> = (args) => ({
+const Template = (args: IndexTableInteractiveNestedSelectableStory) => ({
 	props: args,
 });
 
-export const InteractiveNestedSelectable = Template.bind({});
-InteractiveNestedSelectable.args = {};
+export const InteractiveNestedSelectable: StoryObj<IndexTableInteractiveNestedSelectableStory> = {
+	args: {},
+	render: Template,
+};

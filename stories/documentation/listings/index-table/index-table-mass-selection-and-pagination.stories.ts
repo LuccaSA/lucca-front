@@ -1,4 +1,4 @@
-import { Meta, StoryFn } from '@storybook/angular';
+import { Meta, StoryObj } from '@storybook/angular';
 
 interface IndexTableMassSelectionAndPaginationStory {}
 
@@ -93,10 +93,12 @@ function getTemplate(args: IndexTableMassSelectionAndPaginationStory): string {
 </div>`;
 }
 
-const Template: StoryFn<IndexTableMassSelectionAndPaginationStory> = (args) => ({
+const Template = (args: IndexTableMassSelectionAndPaginationStory) => ({
 	props: args,
 	template: getTemplate(args),
 });
 
-export const MassSelectionAndPagination = Template.bind({});
-MassSelectionAndPagination.args = {};
+export const MassSelectionAndPagination: StoryObj<IndexTableMassSelectionAndPaginationStory> = {
+	args: {},
+	render: Template,
+};

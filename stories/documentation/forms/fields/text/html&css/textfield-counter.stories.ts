@@ -1,4 +1,4 @@
-import { Meta, StoryFn } from '@storybook/angular';
+import { Meta, StoryObj } from '@storybook/angular';
 
 interface TextfieldCounterStory {}
 
@@ -34,10 +34,12 @@ function getTemplate(args: TextfieldCounterStory): string {
 `;
 }
 
-const Template: StoryFn<TextfieldCounterStory> = (args: TextfieldCounterStory) => ({
+const Template = (args: TextfieldCounterStory) => ({
 	props: args,
 	template: getTemplate(args),
 });
 
-export const Counter = Template.bind({});
-Counter.args = {};
+export const Counter: StoryObj<TextfieldCounterStory> = {
+	args: {},
+	render: Template,
+};

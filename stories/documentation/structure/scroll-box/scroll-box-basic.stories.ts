@@ -1,5 +1,5 @@
 import { ScrollBoxComponent } from '@lucca-front/ng/scrollBox';
-import { Meta, moduleMetadata, StoryFn } from '@storybook/angular';
+import { Meta, moduleMetadata, StoryObj } from '@storybook/angular';
 
 interface ScrollBoxBasicStory {}
 
@@ -99,7 +99,7 @@ function getTemplate(args: ScrollBoxBasicStory): string {
 `;
 }
 
-const Template: StoryFn<ScrollBoxBasicStory> = (args) => ({
+const Template = (args: ScrollBoxBasicStory) => ({
 	props: args,
 	template: getTemplate(args),
 	styles: [
@@ -119,5 +119,7 @@ const Template: StoryFn<ScrollBoxBasicStory> = (args) => ({
 	],
 });
 
-export const Basic = Template.bind({});
-Basic.args = {};
+export const Basic: StoryObj<ScrollBoxBasicStory> = {
+	args: {},
+	render: Template,
+};

@@ -1,4 +1,4 @@
-import { Meta, StoryFn } from '@storybook/angular';
+import { Meta, StoryObj } from '@storybook/angular';
 
 interface LoadingsBasicStory {
 	label: boolean;
@@ -52,7 +52,7 @@ function getTemplate(args: LoadingsBasicStory): string {
 	`;
 }
 
-const Template: StoryFn<LoadingsBasicStory> = (args) => ({
+const Template = (args: LoadingsBasicStory) => ({
 	props: args,
 	template: getTemplate(args),
 	styles: [
@@ -64,5 +64,7 @@ const Template: StoryFn<LoadingsBasicStory> = (args) => ({
 	],
 });
 
-export const Basic = Template.bind({});
-Basic.args = { label: false, block: false, L: false, invert: false, template: '' };
+export const Basic: StoryObj<LoadingsBasicStory> = {
+	args: { label: false, block: false, L: false, invert: false, template: '' },
+	render: Template,
+};

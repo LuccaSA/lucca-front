@@ -1,4 +1,4 @@
-import { Meta, StoryFn } from '@storybook/angular';
+import { Meta, StoryObj } from '@storybook/angular';
 
 interface LinkNoWrapStory {}
 
@@ -13,7 +13,7 @@ function getTemplate(args: LinkNoWrapStory): string {
 </a>`;
 }
 
-const Template: StoryFn<LinkNoWrapStory> = (args) => ({
+const Template = (args: LinkNoWrapStory) => ({
 	props: args,
 	template: getTemplate(args),
 	styles: [
@@ -25,5 +25,7 @@ const Template: StoryFn<LinkNoWrapStory> = (args) => ({
 	],
 });
 
-export const NoWrapLink = Template.bind({});
-NoWrapLink.args = {};
+export const NoWrapLink: StoryObj<LinkNoWrapStory> = {
+	args: {},
+	render: Template,
+};

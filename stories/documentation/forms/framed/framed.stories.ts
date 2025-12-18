@@ -1,5 +1,5 @@
 import { Component, Input } from '@angular/core';
-import { Meta, StoryFn } from '@storybook/angular';
+import { Meta, StoryObj } from '@storybook/angular';
 
 @Component({
 	selector: 'framed-stories',
@@ -25,9 +25,6 @@ export default {
 	},
 } as Meta;
 
-const template: StoryFn<FramedStory> = (args) => ({
-	props: args,
-});
-
-export const Basic = template.bind({});
-Basic.args = { state: '', disabled: false, isRequired: false };
+export const Basic: StoryObj<FramedStory> = {
+	args: { state: '', disabled: false, isRequired: false },
+};
