@@ -1,6 +1,5 @@
 import { Tree } from '@angular-devkit/schematics';
 import type { TmplAstElement } from '@angular/compiler';
-import { ButtonComponent } from '@lucca-front/ng/button';
 import { applyToUpdateRecorder } from '@schematics/angular/utility/change';
 import { SourceFile } from 'typescript';
 import { insertAngularImportIfNeeded, insertTSImportIfNeeded } from '../lib/angular-component-ast';
@@ -133,7 +132,7 @@ function findCssButtons(sourceFile: SourceFile, basePath: string, tree: Tree): C
 	return buttons;
 }
 
-function getButtonType(classes: string): ButtonComponent['luButton'] {
+function getButtonType(classes: string): string {
 	if(classes.includes('mod-outlined')) {
 		return 'outlined';
 	}

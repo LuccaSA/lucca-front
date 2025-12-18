@@ -1,4 +1,4 @@
-<div class="toasts" aria-live="polite" [class.mod-bottom]="bottom">
+<div class="toasts" aria-live="polite" [class.mod-bottom]="bottom()">
 	@for (toast of toasts$ | async; track toast.id) {
 		<div class="toasts-item" [class]="paletteClassByToastType[toast.type]">
 			@if (toast.type) {

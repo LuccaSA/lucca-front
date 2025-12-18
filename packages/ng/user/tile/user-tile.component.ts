@@ -1,4 +1,4 @@
-import { ChangeDetectionStrategy, ChangeDetectorRef, Component, effect, inject, input, Input, ViewEncapsulation } from '@angular/core';
+import { ChangeDetectionStrategy, Component, computed, effect, inject, input, ViewEncapsulation } from '@angular/core';
 import { LuClass } from '@lucca-front/ng/core';
 import { LU_DEFAULT_DISPLAY_POLICY, LuDisplayFormat, LuUserDisplayPipe } from '../display/index';
 import { displayPictureFormatRecord, LuUserPictureComponent } from '../picture/user-picture.component';
@@ -27,56 +27,29 @@ export interface LuUserTileUserInput {
 export class LuUserTileComponent {
 	#luClass = inject(LuClass);
 	readonly #defaultFormat = inject(LU_DEFAULT_DISPLAY_POLICY);
-	readonly #changeDetector = inject(ChangeDetectorRef);
-	displayPictureFormat = displayPictureFormatRecord[this.#defaultFormat];
 
-	private _user: LuUserTileUserInput;
 	/**
 	 * LuUserTileUserInput to display.
 	 */
-	@Input()
-	set user(user: LuUserTileUserInput) {
-		this._user = user;
-		this.#changeDetector.markForCheck();
-	}
+	readonly user = input<LuUserTileUserInput>();
 
-	get user(): LuUserTileUserInput {
-		return this._user;
-	}
-
-	private _displayFormat: LuDisplayFormat;
 	/**
 	 * User Display format.
 	 * It is set to 'LU_DEFAULT_DISPLAY_POLICY' by default
 	 */
-	@Input()
-	set displayFormat(displayFormat: LuDisplayFormat) {
-		this._displayFormat = displayFormat;
-		this.displayPictureFormat = displayPictureFormatRecord[displayFormat];
-		this.#changeDetector.markForCheck();
-	}
-	get displayFormat(): LuDisplayFormat {
-		return this._displayFormat;
-	}
+	readonly displayFormat = input<LuDisplayFormat>();
 
-	private _role: string;
 	/**
 	 * LuUserTileUserInput role to display
 	 */
-	@Input()
-	set role(role: string) {
-		this._role = role;
-		this.#changeDetector.markForCheck();
-	}
-
-	get role(): string {
-		return this._role;
-	}
+	readonly role = input<string>();
 
 	/**
 	 * Which size should the user tile be? Defaults to medium
 	 */
-	size = input<'L' | 'M' | 'S' | 'XS'>();
+	readonly size = input<'L' | 'M' | 'S' | 'XS'>();
+
+	readonly displayPictureFormat = computed(() => (this.displayFormat() ? displayPictureFormatRecord[this.displayFormat()] : displayPictureFormatRecord[this.#defaultFormat]));
 
 	constructor() {
 		effect(() => {

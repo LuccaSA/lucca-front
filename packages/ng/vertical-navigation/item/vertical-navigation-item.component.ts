@@ -3,7 +3,6 @@ import { LuccaIcon } from '@lucca-front/icons';
 
 @Component({
 	selector: 'lu-vertical-navigation-item',
-	standalone: true,
 	templateUrl: './vertical-navigation-item.component.html',
 	changeDetection: ChangeDetectionStrategy.OnPush,
 	encapsulation: ViewEncapsulation.None,
@@ -14,11 +13,11 @@ import { LuccaIcon } from '@lucca-front/icons';
 	},
 })
 export class VerticalNavigationItemComponent {
-	label = input<string | null>(null);
-	icon = input<LuccaIcon | null>(null);
-	disabled = input(false, { transform: booleanAttribute });
+	readonly label = input<string | null>(null);
+	readonly icon = input<LuccaIcon | null>(null);
+	readonly disabled = input(false, { transform: booleanAttribute });
 
-	expanded = model(true);
+	readonly expanded = model(true);
 
 	toggleExpanded() {
 		this.expanded.set(!this.expanded());

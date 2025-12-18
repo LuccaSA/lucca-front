@@ -26,7 +26,7 @@ import { LU_CHIP_TRANSLATIONS } from './chip.translate';
 export class ChipComponent {
 	intl = getIntl(LU_CHIP_TRANSLATIONS);
 
-	withEllipsis = input(false, { transform: booleanAttribute });
+	readonly withEllipsis = input(false, { transform: booleanAttribute });
 
 	readonly unkillable = input(false, { transform: booleanAttribute });
 

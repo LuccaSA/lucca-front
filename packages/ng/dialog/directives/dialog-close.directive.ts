@@ -1,14 +1,16 @@
-import { Directive, HostListener, inject } from '@angular/core';
+import { Directive, inject } from '@angular/core';
 import { LuDialogRef } from '../model';
 
 @Directive({
 	selector: '[luDialogClose]',
+	host: {
+		'(click)': 'close()',
+	},
 })
 export class DialogCloseDirective {
 	#ref = inject<LuDialogRef>(LuDialogRef);
 
-	@HostListener('click')
-	close(): void {
+	close() {
 		this.#ref.close();
 	}
 }

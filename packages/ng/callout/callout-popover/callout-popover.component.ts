@@ -20,28 +20,24 @@ export class CalloutPopoverComponent {
 	/**
 	 * Debounce for the popover to open (mouse will have to be on the element fox openDelay milliseconds for popover to show)
 	 */
-	readonly openDelay = input(50, {
-		transform: numberAttribute,
-	});
+	readonly openDelay = input(50, { transform: numberAttribute });
 
 	/**
 	 * Debounce for the popover to close (mouse will have to be out of both popover and trigger for closeDelay milliseconds for it to close)
 	 */
-	readonly closeDelay = input(500, {
-		transform: numberAttribute,
-	});
+	readonly closeDelay = input(500, { transform: numberAttribute });
 
 	/**
 	 * Label (visual only) to put inside the button, often used to show just a number
 	 */
-	readonly buttonLabel = input<string>('');
+	readonly buttonLabel = input<string>();
 
 	/**
 	 * Alternative for the button
 	 */
-	buttonAlt = input<string>('');
+	readonly buttonAlt = input<string>('');
 
-	headingHiddenIfSingleItem = input(false, { transform: booleanAttribute });
+	readonly headingHiddenIfSingleItem = input(false, { transform: booleanAttribute });
 
 	/**
 	 * Palette for both the button and the popover content
@@ -72,34 +68,28 @@ export class CalloutPopoverComponent {
 	 */
 	readonly heading = input<PortalContent>();
 
-	feedbackItems = contentChildren(CalloutFeedbackItemComponent, { descendants: true });
+	readonly feedbackItems = contentChildren(CalloutFeedbackItemComponent, { descendants: true });
 
-	contentSize = computed((): 'S' | 'M' | undefined => {
+	readonly contentSize = computed<'S' | 'M' | undefined>(() => {
 		const size = this.size();
-		if (size === 'XS') {
-			return 'S';
-		}
-		return size;
+		return size === 'XS' ? 'S' : size;
 	});
 
-	calloutClasses = computed(() => {
-		const palette = getCalloutPalette(this.state(), this.palette());
+	readonly calloutOverlayClasses = computed(() => ({
+		[`mod-${this.contentSize()}`]: !!this.contentSize(),
+	}));
+
+	readonly calloutPalette = computed(() => getCalloutPalette(this.state(), this.palette()));
+
+	readonly calloutClasses = computed(() => {
+		const palette = this.calloutPalette();
 		return {
 			[`mod-${this.size()}`]: !!this.size(),
 			[`palette-${palette}`]: !!palette,
 		};
 	});
 
-	calloutOverlayClasses = computed(() => {
-		return {
-			[`mod-${this.contentSize()}`]: !!this.contentSize(),
-		};
-	});
-
-	calloutOverlayHeadClasses = computed(() => {
-		const palette = getCalloutPalette(this.state(), this.palette());
-		return {
-			[`palette-${palette}`]: !!palette,
-		};
-	});
+	readonly calloutOverlayHeadClasses = computed(() => ({
+		[`palette-${this.calloutPalette()}`]: !!this.calloutPalette(),
+	}));
 }

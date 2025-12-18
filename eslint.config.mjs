@@ -48,6 +48,11 @@ export default typescript.config(
 			'@typescript-eslint/no-base-to-string': 'off',
 			'@typescript-eslint/no-unsafe-enum-comparison': 'off',
 
+			'@typescript-eslint/no-unnecessary-condition': 'off',
+			'@typescript-eslint/no-unused-expressions': 'error',
+			'no-constant-condition': ['error', { checkLoops: false }],
+			'@angular-eslint/no-uncalled-signals': 'error',
+
 			// This one is from Angular 20, we'll remove it eventually but legacy code makes it hard to do
 			'@angular-eslint/prefer-inject': 'off',
 			'@angular-eslint/prefer-on-push-component-change-detection': 'warn',

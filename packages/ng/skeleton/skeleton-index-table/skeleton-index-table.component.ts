@@ -1,5 +1,5 @@
 import { NgTemplateOutlet } from '@angular/common';
-import { booleanAttribute, ChangeDetectionStrategy, Component, computed, input, Input } from '@angular/core';
+import { booleanAttribute, ChangeDetectionStrategy, Component, computed, input } from '@angular/core';
 
 @Component({
 	selector: 'lu-skeleton-index-table',
@@ -9,14 +9,13 @@ import { booleanAttribute, ChangeDetectionStrategy, Component, computed, input, 
 	imports: [NgTemplateOutlet],
 })
 export class SkeletonIndexTableComponent {
-	@Input({ transform: booleanAttribute })
-	tableBodyOnly = false;
+	readonly tableBodyOnly = input(false, { transform: booleanAttribute });
 
-	cols = input<number>(5);
-	colsNumber = computed<unknown[]>(() => new Array(this.cols()));
+	readonly cols = input<number>(5);
+	readonly colsNumber = computed<unknown[]>(() => new Array(this.cols()));
 
-	rows = input<number>(8);
-	rowsNumber = computed<unknown[]>(() => new Array(this.rows()));
+	readonly rows = input<number>(8);
+	readonly rowsNumber = computed<unknown[]>(() => new Array(this.rows()));
 
-	getRandomPercent = (min: number = 33, max: number = 66): string => `${Math.floor(Math.random() * (max - min) + min).toString()}%`;
+	readonly getRandomPercent = (min: number = 33, max: number = 66): string => `${Math.floor(Math.random() * (max - min) + min).toString()}%`;
 }
