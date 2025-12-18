@@ -1,4 +1,4 @@
-import { booleanAttribute, Component, input, ViewEncapsulation } from '@angular/core';
+import { booleanAttribute, ChangeDetectionStrategy, Component, input, ViewEncapsulation } from '@angular/core';
 
 @Component({
 	selector: 'lu-app-layout',
@@ -9,7 +9,8 @@ import { booleanAttribute, Component, input, ViewEncapsulation } from '@angular/
 		class: 'appLayout',
 		'[class.mod-mobileNavSideBottom]': 'mobileNavSideBottom()',
 	},
+	changeDetection: ChangeDetectionStrategy.OnPush,
 })
 export class AppLayoutComponent {
-	mobileNavSideBottom = input(false, { transform: booleanAttribute });
+	readonly mobileNavSideBottom = input(false, { transform: booleanAttribute });
 }

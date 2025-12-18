@@ -1,13 +1,12 @@
 import { provideHttpClient } from '@angular/common/http';
 import { HttpTestingController, provideHttpClientTesting } from '@angular/common/http/testing';
-import { EventEmitter } from '@angular/core';
 import { TestBed, fakeAsync, tick } from '@angular/core/testing';
 import { ILuApiItem } from '@lucca-front/ng/api';
 import { ALuSelectInputComponent } from '@lucca-front/ng/core-select';
 import { LuSimpleSelectInputComponent } from '@lucca-front/ng/simple-select';
-import { BehaviorSubject, ReplaySubject, first } from 'rxjs';
+import { BehaviorSubject, ReplaySubject, Subject, first } from 'rxjs';
 import { LuCoreSelectApiV3Directive } from './api-v3.directive';
-import { MAGIC_DEBOUNCE_DURATION, LU_SELECT_MAGIC_PAGE_SIZE } from './api.directive';
+import { LU_SELECT_MAGIC_PAGE_SIZE, MAGIC_DEBOUNCE_DURATION } from './api.directive';
 
 const itemsMocks = Array.from({ length: LU_SELECT_MAGIC_PAGE_SIZE * 2 + 5 }, (_, i) => ({ id: i, name: `item ${i}` }));
 
@@ -19,8 +18,8 @@ describe('CoreSelectApiV3Directive', () => {
 	beforeEach(() => {
 		selectMock = {
 			isPanelOpen$: new BehaviorSubject(false),
-			nextPage: new EventEmitter<void>(),
-			clueChange: new EventEmitter<string>(),
+			nextPage$: new Subject<void>(),
+			clueChange$: new Subject<string>(),
 			options$: new ReplaySubject(1),
 			loading$: new BehaviorSubject(false),
 		} as LuSimpleSelectInputComponent<ILuApiItem>;
@@ -82,7 +81,7 @@ describe('CoreSelectApiV3Directive', () => {
 		tick();
 
 		// Act
-		selectMock.nextPage.emit();
+		selectMock.nextPage$.next();
 
 		// Assert
 		httpTestingController.expectOne('/api/v3/axisSections?fields=id,name&orderBy=name,asc&paging=20,20').flush({
@@ -108,13 +107,13 @@ describe('CoreSelectApiV3Directive', () => {
 		});
 		tick();
 
-		selectMock.nextPage.emit();
+		selectMock.nextPage$.next();
 		httpTestingController.expectOne('/api/v3/axisSections?fields=id,name&orderBy=name,asc&paging=20,20').flush({
 			data: { items: itemsMocks.slice(LU_SELECT_MAGIC_PAGE_SIZE, LU_SELECT_MAGIC_PAGE_SIZE * 2) },
 		});
 
 		// Act
-		selectMock.clueChange.emit('bob');
+		selectMock.clueChange$.next('bob');
 		tick(MAGIC_DEBOUNCE_DURATION);
 
 		// Assert

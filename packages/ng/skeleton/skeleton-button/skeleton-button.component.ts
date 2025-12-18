@@ -1,4 +1,4 @@
-import { booleanAttribute, ChangeDetectionStrategy, Component, Input } from '@angular/core';
+import { booleanAttribute, ChangeDetectionStrategy, Component, input } from '@angular/core';
 
 @Component({
 	selector: 'lu-skeleton-button',
@@ -7,9 +7,7 @@ import { booleanAttribute, ChangeDetectionStrategy, Component, Input } from '@an
 	changeDetection: ChangeDetectionStrategy.OnPush,
 })
 export class SkeletonButtonComponent {
-	@Input({ transform: booleanAttribute })
-	dark = false;
+	readonly dark = input(false, { transform: booleanAttribute });
 
-	@Input()
-	size: 'XS' | 'S' | 'M';
+	readonly size = input<'XS' | 'S' | 'M'>();
 }

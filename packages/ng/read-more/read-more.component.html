@@ -8,6 +8,10 @@
 >
 	{{ label() }}
 </button>
-<div class="readMore-content" [class.textFlow]="textFlow()" #content>
-	<ng-content />
-</div>
+@if (isNil(innerContent())) {
+	<div class="readMore-content" [class.textFlow]="textFlow()" #content>
+		<ng-content />
+	</div>
+} @else {
+	<div class="readMore-content" [class.textFlow]="textFlow()" [innerHTML]="innerContent()" #content></div>
+}

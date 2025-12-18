@@ -10,10 +10,10 @@ import { Meta, StoryFn } from '@storybook/angular';
 class FancyBoxStory {}
 
 export default {
-	title: 'QA/Fancy box',
+	title: 'QA/FancyBox',
 	component: FancyBoxStory,
 } as Meta;
 
 const template: StoryFn<FancyBoxStory> = () => ({});
 
-export const basic = template.bind({});
+export const Basic = template.bind({});

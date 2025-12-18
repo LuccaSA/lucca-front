@@ -1,5 +1,5 @@
 import { NgTemplateOutlet } from '@angular/common';
-import { booleanAttribute, Component, computed, contentChildren, HostBinding, input, ViewEncapsulation } from '@angular/core';
+import { booleanAttribute, ChangeDetectionStrategy, Component, computed, contentChildren, input, ViewEncapsulation } from '@angular/core';
 import { getIntl } from '@lucca-front/ng/core';
 import { BreadcrumbsLinkDirective } from './breadcrumbs-link.directive';
 import { LU_BREADCRUMBS_TRANSLATIONS } from './breadcrumbs.translate';
@@ -14,27 +14,20 @@ let nextId = 0;
 	imports: [NgTemplateOutlet],
 	host: {
 		class: 'breadcrumbs',
+		'[attr.role]': 'isCompact() ? "presentation" : "nav"',
+		'[class.mod-compact]': 'isCompact()',
+		'[attr.aria-describedby]': 'id',
 	},
+	changeDetection: ChangeDetectionStrategy.OnPush,
 })
 export class BreadcrumbsComponent {
 	intl = getIntl(LU_BREADCRUMBS_TRANSLATIONS);
 
-	disableCompact = input(false, { transform: booleanAttribute });
+	readonly disableCompact = input(false, { transform: booleanAttribute });
 
-	links = contentChildren(BreadcrumbsLinkDirective);
+	readonly links = contentChildren(BreadcrumbsLinkDirective);
 
-	isCompact = computed(() => this.links().length <= 2 && !this.disableCompact());
+	readonly isCompact = computed(() => this.links().length <= 2 && !this.disableCompact());
 
-	@HostBinding('attr.aria-describedby')
-	id = `breadcrumbs-title-${nextId++}`;
-
-	@HostBinding('class.mod-compact')
-	get classCompact(): boolean {
-		return this.isCompact();
-	}
-
-	@HostBinding('attr.role')
-	get roleAttr(): string {
-		return this.isCompact() ? 'presentation' : 'nav';
-	}
+	readonly id = `breadcrumbs-title-${nextId++}`;
 }

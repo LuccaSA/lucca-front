@@ -1,5 +1,5 @@
 import { AsyncPipe } from '@angular/common';
-import { Component, inject } from '@angular/core';
+import { ChangeDetectionStrategy, Component, inject } from '@angular/core';
 import { getIntl } from '@lucca-front/ng/core';
 import { ILuOptionContext, LU_OPTION_CONTEXT, ɵLuOptionOutletDirective } from '@lucca-front/ng/core-select';
 import { LuUserDisplayPipe } from '@lucca-front/ng/user';
@@ -40,12 +40,13 @@ import { LuCoreSelectUsersDirective } from './users.directive';
 			}
 		`,
 	],
+	changeDetection: ChangeDetectionStrategy.OnPush,
 })
 export class LuUserOptionComponent {
 	protected context = inject<ILuOptionContext<LuCoreSelectWithAdditionnalInformation<LuCoreSelectUser>>>(LU_OPTION_CONTEXT);
 	protected userDirective = inject(LuCoreSelectUsersDirective);
 	protected intl = getIntl(LU_CORE_SELECT_USER_TRANSLATIONS);
-	protected hasEmptyClue$ = this.userDirective.select.clueChange.pipe(
+	protected hasEmptyClue$ = this.userDirective.select.clueChange$.pipe(
 		startWith(this.userDirective.select.clue),
 		map((clue) => !clue),
 	);

@@ -1,6 +1,6 @@
 <fieldset [disabled]="disabled" class="phoneNumber-fieldset">
 	<legend>
-		<span class="pr-u-mask">{{ label }}</span>
+		<span class="pr-u-mask">{{ label() }}</span>
 	</legend>
 	<label>
 		<span class="pr-u-mask">Prefix</span>
@@ -15,7 +15,7 @@
 			noClueIcon
 			#selectRef
 			class="phoneNumber-fieldset-select"
-			[autocomplete]="autocomplete ? (autocomplete === 'off' ? 'off' : 'tel-country-code') : null"
+			[autocomplete]="autocomplete() ? (autocomplete() === 'off' ? 'off' : 'tel-country-code') : null"
 		>
 			<ng-container *luOption="let prefixOption; select: selectRef"
 				><img class="phoneNumber-option-flag" src="https://cdn.lucca.fr/assets/misc/flags/{{ prefixOption.country }}.svg" alt="" />{{
@@ -45,7 +45,7 @@
 				luInput
 				luInputStandalone
 				class="textField-input-value"
-				[attr.autocomplete]="autocomplete ? (autocomplete === 'off' ? 'off' : 'tel-national') : null"
+				[attr.autocomplete]="autocomplete() ? (autocomplete() === 'off' ? 'off' : 'tel-national') : null"
 				[placeholder]="placeholder()"
 			/>
 		</div>

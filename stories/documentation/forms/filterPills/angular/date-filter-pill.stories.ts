@@ -1,10 +1,10 @@
+import { LOCALE_ID } from '@angular/core';
 import { FormsModule } from '@angular/forms';
 import { DateInputComponent, DateRangeInputComponent } from '@lucca-front/ng/date2';
 import { FilterPillComponent } from '@lucca-front/ng/filter-pills';
+import { CheckboxInputComponent } from '@lucca-front/ng/forms';
 import { applicationConfig, Meta, moduleMetadata, StoryObj } from '@storybook/angular';
-import { CheckboxInputComponent } from '../../../../../packages/ng/forms/checkbox-input/checkbox-input.component';
 import { StoryModelDisplayComponent } from '../../../../helpers/story-model-display.component';
-import { LOCALE_ID } from '@angular/core';
 
 export default {
 	title: 'Documentation/Forms/FiltersPills/Date/Angular',

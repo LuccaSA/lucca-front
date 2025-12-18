@@ -1,6 +1,6 @@
 @mixin disabled {
-	--components-chip-backgroundColor: var(--commons-disabled-background);
-	--components-chip-color: var(--pr-t-color-text-disabled);
+	--components-chip-backgroundColor: var(--palettes-neutral-200);
+	--components-chip-color: var(--pr-t-color-text-subtle);
 
 	.chip-kill {
 		display: none;

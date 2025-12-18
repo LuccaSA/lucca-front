@@ -1,5 +1,5 @@
 import { NgTemplateOutlet } from '@angular/common';
-import { booleanAttribute, Component, input, model, ViewEncapsulation } from '@angular/core';
+import { booleanAttribute, ChangeDetectionStrategy, Component, input, model, ViewEncapsulation } from '@angular/core';
 import { PortalContent, PortalDirective } from '@lucca-front/ng/core';
 import { IconComponent } from '@lucca-front/ng/icon';
 
@@ -11,13 +11,16 @@ let nextId = 0;
 	styleUrl: './fieldset.component.scss',
 	encapsulation: ViewEncapsulation.None,
 	imports: [PortalDirective, NgTemplateOutlet, IconComponent],
+	changeDetection: ChangeDetectionStrategy.OnPush,
 })
 export class FieldsetComponent {
-	heading = input<PortalContent | null>(null);
-	helper = input<PortalContent | null>(null);
-	size = input<'S' | null>(null);
-	horizontal = input(false, { transform: booleanAttribute });
-	expandable = input(false, { transform: booleanAttribute });
+	readonly heading = input<PortalContent | null>(null);
+	readonly helper = input<PortalContent | null>(null);
+	readonly action = input<PortalContent | null>(null);
+	readonly size = input<'S' | null>(null);
+	readonly horizontal = input(false, { transform: booleanAttribute });
+	readonly expandable = input(false, { transform: booleanAttribute });
+
 	expanded = model(false);
 
 	id = `fieldsetTitleContent${nextId++}`;

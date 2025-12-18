@@ -10,7 +10,7 @@ import { Meta, StoryFn } from '@storybook/angular';
 class ProgressBarStory {}
 
 export default {
-	title: 'QA/Progress-Bar',
+	title: 'QA/ProgressBar',
 	component: ProgressBarStory,
 } as Meta;
 

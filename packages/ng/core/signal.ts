@@ -1,22 +1,26 @@
-import { CreateEffectOptions, effect, Signal, untracked } from '@angular/core';
+import { CreateEffectOptions, effect, EffectCleanupRegisterFn, EffectRef, Signal, untracked } from '@angular/core';
 
-type EffectWithDepsValues<T> = T extends readonly unknown[] ? TupleOfSignalValues<T> : [RecordOfSignalValues<T>];
+type SignalsValue<T> = T extends readonly unknown[] ? TupleOfSignalValues<T> : [RecordOfSignalValues<T>];
 
 type TupleOfSignalValues<T> = T extends readonly [Signal<infer U>, ...infer R] ? [U, ...TupleOfSignalValues<R>] : [];
 type RecordOfSignalValues<T> = { [K in keyof T]: T[K] extends Signal<infer U> ? U : never };
 
-type EffectWithDepsInput = ReadonlyArray<Signal<unknown>> | Record<string, Signal<unknown>>;
+export type EffectWithDepsInput = ReadonlyArray<Signal<unknown>> | Record<string, Signal<unknown>>;
 
 /**
  * Effect peut être dangereux car l'action accomplie peut elle-même déclencher des écritures dans des signaux.
  * C'est une mauvaise pratique, interdite par défaut par Angular.
- * La plupars du temps, seule la lecture des signaux est intéressante à tracker, pas les actions qui en découlent.
+ * La plupart du temps, seule la lecture des signaux est intéressante à tracker, pas les actions qui en découlent.
  */
-export function ɵeffectWithDeps<const T extends EffectWithDepsInput>(dependencies: T, action: (...values: EffectWithDepsValues<T>) => unknown, options?: CreateEffectOptions): void {
-	effect(() => {
+export function ɵeffectWithDeps<const T extends EffectWithDepsInput>(
+	dependencies: T,
+	action: (...values: [...SignalsValue<T>, EffectCleanupRegisterFn]) => unknown,
+	options?: CreateEffectOptions,
+): EffectRef {
+	return effect((onCleanup) => {
 		const deps = isReadonlyArray(dependencies) ? readTupleOfSignalValues(dependencies) : [readRecordOfSignalValues(dependencies)];
 
-		untracked(() => action(...(deps as EffectWithDepsValues<T>)));
+		untracked(() => action(...(deps as SignalsValue<T>), onCleanup));
 	}, options);
 }
 

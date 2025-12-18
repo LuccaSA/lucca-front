@@ -1,5 +1,5 @@
 import { NgTemplateOutlet } from '@angular/common';
-import { booleanAttribute, Component, ElementRef, forwardRef, inject, input, model, numberAttribute, ViewEncapsulation } from '@angular/core';
+import { booleanAttribute, ChangeDetectionStrategy, Component, ElementRef, forwardRef, inject, input, model, numberAttribute, ViewEncapsulation } from '@angular/core';
 import { FormsModule } from '@angular/forms';
 import { ButtonComponent } from '@lucca-front/ng/button';
 import { IconComponent } from '@lucca-front/ng/icon';
@@ -33,6 +33,7 @@ import { LU_INDEX_TABLE_CELL_INSTANCE } from '../index-table-cell.token';
 			useExisting: forwardRef(() => IndexTableRowCellHeaderComponent),
 		},
 	],
+	changeDetection: ChangeDetectionStrategy.OnPush,
 })
 export class IndexTableRowCellHeaderComponent extends BaseIndexTableCell {
 	elementRef = inject<ElementRef<HTMLTableCellElement>>(ElementRef);

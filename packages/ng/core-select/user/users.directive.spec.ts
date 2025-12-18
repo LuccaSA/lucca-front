@@ -1,6 +1,6 @@
 import { provideHttpClient } from '@angular/common/http';
 import { HttpTestingController, provideHttpClientTesting } from '@angular/common/http/testing';
-import { Component, Directive, forwardRef, viewChild } from '@angular/core';
+import { ChangeDetectionStrategy, Component, Directive, forwardRef, viewChild } from '@angular/core';
 import { ComponentFixture, TestBed, fakeAsync, tick } from '@angular/core/testing';
 import { LuSimpleSelectInputComponent } from '@lucca-front/ng/simple-select';
 import { MAGIC_DEBOUNCE_DURATION } from '../api/api.directive';
@@ -28,6 +28,7 @@ class TestUsersDirective extends LuCoreSelectUsersDirective {
 	selector: 'lu-users-directive-host',
 	imports: [LuSimpleSelectInputComponent, TestUsersDirective],
 	template: `<lu-simple-select luTestUsers />`,
+	changeDetection: ChangeDetectionStrategy.OnPush,
 })
 class LuUsersDirectiveHostComponent {
 	simpleSelect = viewChild.required<LuSimpleSelectInputComponent<LuCoreSelectUser>>(LuSimpleSelectInputComponent);
@@ -143,7 +144,7 @@ describe('LuCoreSelectUsersDirective', () => {
 		expect(options).toEqual([meUser, ...page1]);
 
 		// Act (Page 2)
-		simpleSelect.nextPage.emit();
+		simpleSelect.nextPage$.next();
 		fixture.detectChanges();
 		tick(MAGIC_OPTION_SCROLL_DELAY);
 

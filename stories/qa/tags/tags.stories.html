@@ -26,44 +26,16 @@
 			<td>Palette</td>
 			<td>
 				<div class="demo-QAtable-list">
-					<span class="tag palette-product">Text</span>
-					<span class="tag palette-neutral">Text</span>
-					<span class="tag palette-success">Text</span>
-					<span class="tag palette-warning">Text</span>
-					<span class="tag palette-error">Text</span>
-					<span class="tag palette-kiwi">Text</span>
-					<span class="tag palette-lime">Text</span>
-					<span class="tag palette-cucumber">Text</span>
-					<span class="tag palette-mint">Text</span>
-					<span class="tag palette-glacier">Text</span>
-					<span class="tag palette-lagoon">Text</span>
-					<span class="tag palette-blueberry">Text</span>
-					<span class="tag palette-lavender">Text</span>
-					<span class="tag palette-grape">Text</span>
-					<span class="tag palette-watermelon">Text</span>
-					<span class="tag palette-pumpkin">Text</span>
-					<span class="tag palette-pineapple">Text</span>
+					@for (palette of paletteOptions; track palette) {
+						<span class="tag palette-{{ palette }}">Text</span>
+					}
 				</div>
 			</td>
 			<td>
 				<div class="demo-QAtable-list">
-					<lu-tag label="Text" palette="product" />
-					<lu-tag label="Text" palette="neutral" />
-					<lu-tag label="Text" palette="success" />
-					<lu-tag label="Text" palette="warning" />
-					<lu-tag label="Text" palette="error" />
-					<lu-tag label="Text" palette="kiwi" />
-					<lu-tag label="Text" palette="lime" />
-					<lu-tag label="Text" palette="cucumber" />
-					<lu-tag label="Text" palette="mint" />
-					<lu-tag label="Text" palette="glacier" />
-					<lu-tag label="Text" palette="lagoon" />
-					<lu-tag label="Text" palette="blueberry" />
-					<lu-tag label="Text" palette="lavender" />
-					<lu-tag label="Text" palette="grape" />
-					<lu-tag label="Text" palette="watermelon" />
-					<lu-tag label="Text" palette="pumpkin" />
-					<lu-tag label="Text" palette="pineapple" />
+					@for (palette of paletteOptions; track palette) {
+						<lu-tag label="Text" [palette]="palette" />
+					}
 				</div>
 			</td>
 		</tr>
@@ -124,45 +96,17 @@
 			<td>Outlined</td>
 			<td>
 				<div class="demo-QAtable-list">
-					<span class="tag mod-outlined palette-product">Text</span>
-					<span class="tag mod-outlined palette-neutral">Text</span>
-					<span class="tag mod-outlined palette-success">Text</span>
-					<span class="tag mod-outlined palette-warning">Text</span>
-					<span class="tag mod-outlined palette-error">Text</span>
-					<span class="tag mod-outlined palette-kiwi">Text</span>
-					<span class="tag mod-outlined palette-lime">Text</span>
-					<span class="tag mod-outlined palette-cucumber">Text</span>
-					<span class="tag mod-outlined palette-mint">Text</span>
-					<span class="tag mod-outlined palette-glacier">Text</span>
-					<span class="tag mod-outlined palette-lagoon">Text</span>
-					<span class="tag mod-outlined palette-blueberry">Text</span>
-					<span class="tag mod-outlined palette-lavender">Text</span>
-					<span class="tag mod-outlined palette-grape">Text</span>
-					<span class="tag mod-outlined palette-watermelon">Text</span>
-					<span class="tag mod-outlined palette-pumpkin">Text</span>
-					<span class="tag mod-outlined palette-pineapple">Text</span>
+					@for (palette of paletteOptions; track palette) {
+						<span class="tag mod-outlined palette-{{ palette }}">Text</span>
+					}
 					<span class="tag mod-AI">Text</span>
 				</div>
 			</td>
 			<td>
 				<div class="demo-QAtable-list">
-					<lu-tag label="Text" palette="product" outlined />
-					<lu-tag label="Text" palette="neutral" outlined />
-					<lu-tag label="Text" palette="success" outlined />
-					<lu-tag label="Text" palette="warning" outlined />
-					<lu-tag label="Text" palette="error" outlined />
-					<lu-tag label="Text" palette="kiwi" outlined />
-					<lu-tag label="Text" palette="lime" outlined />
-					<lu-tag label="Text" palette="cucumber" outlined />
-					<lu-tag label="Text" palette="mint" outlined />
-					<lu-tag label="Text" palette="glacier" outlined />
-					<lu-tag label="Text" palette="lagoon" outlined />
-					<lu-tag label="Text" palette="blueberry" outlined />
-					<lu-tag label="Text" palette="lavender" outlined />
-					<lu-tag label="Text" palette="grape" outlined />
-					<lu-tag label="Text" palette="watermelon" outlined />
-					<lu-tag label="Text" palette="pumpkin" outlined />
-					<lu-tag label="Text" palette="pineapple" outlined />
+					@for (palette of paletteOptions; track palette) {
+						<lu-tag label="Text" [palette]="palette" outlined />
+					}
 				</div>
 			</td>
 		</tr>
@@ -170,40 +114,12 @@
 			<td>Clickable</td>
 			<td>
 				<div class="demo-QAtable-list">
-					<a href="#" class="tag mod-clickable palette-product">Text</a>
-					<a href="#" class="tag mod-clickable palette-neutral">Text</a>
-					<a href="#" class="tag mod-clickable palette-success">Text</a>
-					<a href="#" class="tag mod-clickable palette-warning">Text</a>
-					<a href="#" class="tag mod-clickable palette-error">Text</a>
-					<a href="#" class="tag mod-clickable palette-kiwi">Text</a>
-					<a href="#" class="tag mod-clickable palette-lime">Text</a>
-					<a href="#" class="tag mod-clickable palette-cucumber">Text</a>
-					<a href="#" class="tag mod-clickable palette-mint">Text</a>
-					<a href="#" class="tag mod-clickable palette-glacier">Text</a>
-					<a href="#" class="tag mod-clickable palette-lagoon">Text</a>
-					<a href="#" class="tag mod-clickable palette-blueberry">Text</a>
-					<a href="#" class="tag mod-clickable palette-lavender">Text</a>
-					<a href="#" class="tag mod-clickable palette-grape">Text</a>
-					<a href="#" class="tag mod-clickable palette-watermelon">Text</a>
-					<a href="#" class="tag mod-clickable palette-pumpkin">Text</a>
-					<a href="#" class="tag mod-clickable palette-pineapple">Text</a>
-					<button type="button" class="tag mod-outlined mod-clickable palette-product">Text</button>
-					<button type="button" class="tag mod-outlined mod-clickable palette-neutral">Text</button>
-					<button type="button" class="tag mod-outlined mod-clickable palette-success">Text</button>
-					<button type="button" class="tag mod-outlined mod-clickable palette-warning">Text</button>
-					<button type="button" class="tag mod-outlined mod-clickable palette-error">Text</button>
-					<button type="button" class="tag mod-outlined mod-clickable palette-kiwi">Text</button>
-					<button type="button" class="tag mod-outlined mod-clickable palette-lime">Text</button>
-					<button type="button" class="tag mod-outlined mod-clickable palette-cucumber">Text</button>
-					<button type="button" class="tag mod-outlined mod-clickable palette-mint">Text</button>
-					<button type="button" class="tag mod-outlined mod-clickable palette-glacier">Text</button>
-					<button type="button" class="tag mod-outlined mod-clickable palette-lagoon">Text</button>
-					<button type="button" class="tag mod-outlined mod-clickable palette-blueberry">Text</button>
-					<button type="button" class="tag mod-outlined mod-clickable palette-lavender">Text</button>
-					<button type="button" class="tag mod-outlined mod-clickable palette-grape">Text</button>
-					<button type="button" class="tag mod-outlined mod-clickable palette-watermelon">Text</button>
-					<button type="button" class="tag mod-outlined mod-clickable palette-pumpkin">Text</button>
-					<button type="button" class="tag mod-outlined mod-clickable palette-pineapple">Text</button>
+					@for (palette of paletteOptions; track palette) {
+						<a href="#" class="tag mod-clickable palette-{{ palette }}">Text</a>
+					}
+					@for (palette of paletteOptions; track palette) {
+						<button type="button" class="tag mod-outlined mod-clickable palette-{{ palette }}">Text</button>
+					}
 					<button type="button" class="tag mod-AI mod-clickable">Text</button>
 				</div>
 			</td>

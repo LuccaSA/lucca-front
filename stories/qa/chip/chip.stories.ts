@@ -1,11 +1,12 @@
 import { Component } from '@angular/core';
 import { ChipComponent } from '@lucca-front/ng/chip';
+import { IconComponent } from '@lucca-front/ng/icon';
 import { Meta, StoryFn } from '@storybook/angular';
 
 @Component({
 	selector: 'chip-stories',
 	templateUrl: './chip.stories.html',
-	imports: [ChipComponent],
+	imports: [ChipComponent, IconComponent],
 })
 class ChipStory {}
 
@@ -16,4 +17,4 @@ export default {
 
 const template: StoryFn<ChipStory> = () => ({});
 
-export const basic = template.bind({});
+export const Basic = template.bind({});

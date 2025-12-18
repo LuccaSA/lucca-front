@@ -1,5 +1,5 @@
 import { NgClass } from '@angular/common';
-import { booleanAttribute, ChangeDetectionStrategy, Component, input, Input, ViewEncapsulation } from '@angular/core';
+import { booleanAttribute, ChangeDetectionStrategy, Component, computed, input, ViewEncapsulation } from '@angular/core';
 import type { LuccaIcon } from './icons';
 
 @Component({
@@ -11,23 +11,20 @@ import type { LuccaIcon } from './icons';
 	encapsulation: ViewEncapsulation.None,
 })
 export class IconComponent {
-	@Input({ required: true })
-	icon: LuccaIcon;
+	readonly icon = input.required<LuccaIcon>();
 
-	@Input()
-	alt: string;
+	readonly alt = input<string>();
 
-	@Input()
-	size: 'XXS' | 'XS' | 'S' | 'M' | 'L' | 'XL' | 'XXL';
+	readonly size = input<'XXS' | 'XS' | 'S' | 'M' | 'L' | 'XL' | 'XXL'>();
 
-	@Input()
-	color: 'primary' | 'secondary' | 'product' | 'error' | 'warning' | 'success' | 'light' | 'placeholder' | 'inherit' = 'inherit';
+	readonly color = input<'primary' | 'secondary' | 'product' | 'error' | 'warning' | 'success' | 'light' | 'placeholder' | 'inherit'>('inherit');
 
-	AI = input(false, { transform: booleanAttribute });
+	readonly AI = input(false, { transform: booleanAttribute });
 
-	get iconClasses() {
+	readonly iconClasses = computed(() => {
+		const size = this.size();
 		return {
-			[`mod-${this.size}`]: !!this.size,
+			[`mod-${size}`]: !!size,
 		};
-	}
+	});
 }

@@ -11,7 +11,7 @@ export default {
 			imports: [IconComponent],
 		}),
 	],
-	render: (args: PLGPushComponent & { description: string; linkLabel: string; linkURL: string }, context) => {
+	render: (args, context) => {
 		const { description, linkLabel, linkURL, removed, ...inputs } = args;
 		return {
 			template: `<lu-plg-push ${generateInputs(inputs, context.argTypes)}${removed ? ' removed="true"' : ' '}>

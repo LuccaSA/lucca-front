@@ -1,11 +1,12 @@
-import { Component } from '@angular/core';
-import { codeComponent } from '@lucca-front/ng/code';
+import { ChangeDetectionStrategy, Component } from '@angular/core';
+import { CodeComponent } from '@lucca-front/ng/code';
 import { Meta, StoryFn } from '@storybook/angular';
 
 @Component({
 	selector: 'code-stories',
 	templateUrl: './code.stories.html',
-	imports: [codeComponent],
+	imports: [CodeComponent],
+	changeDetection: ChangeDetectionStrategy.OnPush,
 })
 class CodeStory {}
 

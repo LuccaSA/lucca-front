@@ -10,10 +10,10 @@ import { Meta, StoryFn } from '@storybook/angular';
 class PLGPushStory {}
 
 export default {
-	title: 'QA/PLG Push',
+	title: 'QA/PLGPush',
 	component: PLGPushStory,
 } as Meta;
 
 const template: StoryFn<PLGPushStory> = () => ({});
 
-export const basic = template.bind({});
+export const Basic = template.bind({});

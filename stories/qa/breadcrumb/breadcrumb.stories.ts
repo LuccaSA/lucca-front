@@ -16,4 +16,4 @@ export default {
 
 const template: StoryFn<BreadcrumbStory> = () => ({});
 
-export const basic = template.bind({});
+export const Basic = template.bind({});
