@@ -8,7 +8,12 @@
 
 	@layer mods {
 		&.mod-AI {
+			&:not(.invert) {
 			@include AI;
+
+			&.mod-invert {
+				@include invertIA;
+			}
 
 			&.is-success {
 				@include successAI;
@@ -16,6 +21,7 @@
 
 			&.is-loading {
 				@include loadingAI;
+			}
 			}
 		}
 
