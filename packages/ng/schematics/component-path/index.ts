@@ -14,9 +14,9 @@ export default (options: SchematicContextOpts): Rule => {
 			tree,
 			{
 				paths: {
-					"/test": "/new"
+					"@lucca-front/ng/scrollBox": "@lucca-front/ng/scroll-box"
 				}
 			}
-		)
+		).run()
 	}
 }

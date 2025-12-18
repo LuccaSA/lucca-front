@@ -1,7 +1,7 @@
 {
   "$schema": "http://json-schema.org/draft-07/schema",
-  "$id": "LuccaFrontClassPrefix",
-  "title": "Lucca Front Class prefix Schema",
+  "$id": "LuccaFrontComponentPath",
+  "title": "Lucca Front Component Path Schema",
   "type": "object",
   "properties": {
     "dryRun": {
