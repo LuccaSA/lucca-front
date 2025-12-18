@@ -1,8 +1,6 @@
-import { booleanAttribute, ChangeDetectionStrategy, Component, computed, contentChild, ElementRef, inject, Input, input, signal, ViewEncapsulation } from '@angular/core';
-import { Palette, PrClass } from '@lucca/prisme/core';
+import { booleanAttribute, ChangeDetectionStrategy, Component, computed, contentChild, ElementRef, inject, input, signal, ViewEncapsulation } from '@angular/core';
+import { Palette, PrClass, ɵeffectWithDeps } from '@lucca/prisme/core';
 import { IconComponent } from '@lucca/prisme/icon';
-import { Palette, ɵeffectWithDeps } from '@lucca-front/ng/core';
-import { IconComponent } from '@lucca-front/ng/icon';
 
 @Component({
 	// eslint-disable-next-line @angular-eslint/component-selector
@@ -39,18 +37,15 @@ export class ButtonComponent {
 
 	readonly state = input<'default' | 'loading' | 'error' | 'success'>('default');
 
-	@Input({
-		alias: 'luButton',
-	})
-	set luButton(value: this['prButton']) {
-		this.prButton = value;
-	}
+	readonly luButton = input<'' | 'outlined' | 'AI' | 'ghost' | 'ghost-invert' | 'text' | 'text-invert'>('');
 
 	/**
 	 * '' is the default value when you just set the `prButton` directive without a value attached to it.
 	 * We just make this explicit here.
 	 */
 	readonly prButton = input<'' | 'outlined' | 'AI' | 'ghost' | 'ghost-invert' | 'text' | 'text-invert'>('');
+
+	readonly buttonType = computed(() => this.luButton() || this.prButton());
 
 	readonly iconComponentRef = contentChild<IconComponent, ElementRef<HTMLElement>>(IconComponent, { read: ElementRef });
 
@@ -68,12 +63,12 @@ export class ButtonComponent {
 			['mod-disclosure']: this.disclosure(),
 		};
 
-		if (this.luButton() !== '') {
-			if (this.luButton() === 'ghost-invert') {
+		if (this.buttonType() !== '') {
+			if (this.buttonType() === 'ghost-invert') {
 				config['mod-ghost'] = true;
 				config['mod-invert'] = true;
 			} else {
-				config[`mod-${this.luButton()}`] = true;
+				config[`mod-${this.buttonType()}`] = true;
 			}
 		}
 		return config;
@@ -107,7 +102,7 @@ export class ButtonComponent {
 
 		ɵeffectWithDeps([this.classesConfig], (config) => {
 			if (config) {
-				this.#luClass.setState(config);
+				this.#prClass.setState(config);
 			}
 		});
 	}
