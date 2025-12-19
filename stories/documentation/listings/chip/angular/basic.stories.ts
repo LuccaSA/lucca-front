@@ -6,6 +6,8 @@ interface ChipBasicStory {
 	disabled: boolean;
 	product: boolean;
 	withEllipsis: boolean;
+	small: boolean;
+	feedback: string;
 }
 
 export default {
@@ -29,6 +31,22 @@ export default {
 			},
 			description: 'Applique la palette product au composant.',
 		},
+		withEllipsis: {
+			description: '[20.1] Ellipse le texte et ajoute une tooltip lorsque le label est trop long.',
+		},
+		small: {
+			control: {
+				type: 'boolean',
+			},
+			description: 'Modifie la taille du composant.',
+		},
+		feedback: {
+			description: "[20.1] Donne une information sur l'état du composant.",
+			options: ['', 'warning', 'critical'],
+			control: {
+				type: 'select',
+			},
+		},
 	},
 	decorators: [
 		moduleMetadata({
@@ -42,7 +60,9 @@ function getTemplate(args: ChipBasicStory): string {
 	const product = args.product ? ` palette="product"` : ``;
 	const disabled = args.disabled ? ` disabled` : ``;
 	const ellipsis = args.withEllipsis ? ` withEllipsis` : ``;
-	return `<lu-chip${disabled}${unkillable}${product}${ellipsis}>Label</lu-chip>`;
+	const small = args.small ? ` size="S"` : ``;
+	const feedback = args.feedback === 'warning' ? ` state="warning"` : args.feedback === 'critical' ? ` state="critical"` : ``;
+	return `<lu-chip${disabled}${unkillable}${product}${ellipsis}${small}${feedback}>Label</lu-chip>`;
 }
 
 const Template: StoryFn<ChipBasicStory> = (args) => ({
@@ -56,4 +76,5 @@ Basic.args = {
 	disabled: false,
 	product: false,
 	withEllipsis: false,
+	small: false,
 };

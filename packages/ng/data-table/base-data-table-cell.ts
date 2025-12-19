@@ -11,24 +11,24 @@ import { LU_DATA_TABLE_INSTANCE } from './data-table.token';
 	changeDetection: ChangeDetectionStrategy.OnPush,
 })
 export abstract class BaseDataTableCell {
-	tableRef = inject(LU_DATA_TABLE_INSTANCE);
+	tableRef = inject(LU_DATA_TABLE_INSTANCE, { optional: true });
 	bodyRef = inject(LU_DATA_TABLE_BODY_INSTANCE, { optional: true });
 	headRef = inject(LU_DATA_TABLE_HEAD_INSTANCE, { optional: true });
 	footRef = inject(LU_DATA_TABLE_FOOT_INSTANCE, { optional: true });
-	rowRef = inject(LU_DATA_TABLE_ROW_INSTANCE);
+	rowRef = inject(LU_DATA_TABLE_ROW_INSTANCE, { optional: true });
 
 	editable = input(false, { transform: booleanAttribute });
 	align = input<null | 'start' | 'center' | 'end'>(null);
 
 	isStickyStart = computed(() => {
-		return this.position() <= this.tableRef.stickyColsStart() - 1;
+		return this.position() <= this.tableRef?.stickyColsStart() - 1;
 	});
 
 	isStickyEnd = computed(() => {
-		return this.position() >= this.rowRef.cells().length - this.tableRef.stickyColsEnd();
+		return this.position() >= this.rowRef?.cells().length - this.tableRef?.stickyColsEnd();
 	});
 
 	position = computed(() => {
-		return this.rowRef.cells().indexOf(this);
+		return this.rowRef?.cells().indexOf(this);
 	});
 }

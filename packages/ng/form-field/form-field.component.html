@@ -49,7 +49,7 @@
 			<span class="formLabel-tag tag">{{ tag() }}</span>
 		}
 		@if (counter() > 0) {
-			<span class="formLabel-counter" [class.pr-u-textError]="contentLength > counter()" id="{{ id() }}-counter" aria-live="polite">
+			<span class="formLabel-counter" [class.pr-u-colorTextCritical]="contentLength > counter()" id="{{ id() }}-counter" aria-live="polite">
 				<span aria-hidden="true">{{ contentLength }}/{{ counter() }}</span>
 				<span class="pr-u-mask">{{ intl.counter | intlParams: { current: contentLength, max: counter() } }}</span>
 			</span>

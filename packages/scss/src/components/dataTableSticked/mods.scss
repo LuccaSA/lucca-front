@@ -72,7 +72,7 @@
 		}
 
 		&::after {
-			inset-block-end: 0;
+			inset-block-end: var(--components-dataTable-shadow-lastRowInsetBlockEnd);
 			transform: scaleY(-1);
 			opacity: var(--components-dataTable-shadow-lastRowOpacity);
 		}
@@ -170,4 +170,8 @@
 			}
 		}
 	}
+}
+
+@mixin pagination {
+	--components-dataTable-shadow-lastRowInsetBlockEnd: var(--pr-t-spacings-600);
 }

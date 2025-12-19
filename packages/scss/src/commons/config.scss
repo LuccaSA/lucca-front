@@ -628,15 +628,15 @@ $colorInputContrasted: (
 );
 
 $colorText: (
-	'': var(--palettes-neutral-800),
-	heading: var(--palettes-neutral-900),
-	highlight: var(--palettes-neutral-900),
-	subtle: var(--palettes-neutral-600),
-	disabled: var(--palettes-neutral-500),
-	reverse: var(--palettes-neutral-0),
-	success: var(--palettes-success-700),
-	warning: var(--palettes-warning-700),
-	critical: var(--palettes-critical-700),
+	text: var(--palettes-neutral-800),
+	text-heading: var(--palettes-neutral-900),
+	text-highlight: var(--palettes-neutral-900),
+	text-subtle: var(--palettes-neutral-600),
+	text-disabled: var(--palettes-neutral-500),
+	text-reverse: var(--palettes-neutral-0),
+	text-success: var(--palettes-success-700),
+	text-warning: var(--palettes-warning-700),
+	text-critical: var(--palettes-critical-700),
 );
 
 $breakpoints: (

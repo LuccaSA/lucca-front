@@ -1,4 +1,4 @@
-import { codeComponent } from '@lucca-front/ng/code';
+import { CodeComponent } from '@lucca-front/ng/code';
 import { Meta, moduleMetadata } from '@storybook/angular';
 import { cleanupTemplate } from 'stories/helpers/stories';
 
@@ -21,7 +21,7 @@ export default {
 	},
 	decorators: [
 		moduleMetadata({
-			imports: [codeComponent],
+			imports: [CodeComponent],
 		}),
 	],
 	render: (args: CodeBasicStory) => {

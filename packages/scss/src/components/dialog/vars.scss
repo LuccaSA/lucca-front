@@ -15,4 +15,10 @@
 	--components-dialog-insideHeaderLinkDisplay: none;
 	--components-dialog-insideHeaderColumns: 1fr auto auto;
 	--components-dialog-insideContent-background: transparent;
+	--components-dialog-level: 0;
+	--components-dialog-translate-spacing: var(--pr-t-spacings-500);
+	--components-dialog-translate: calc(var(--components-dialog-translate-spacing) * var(--components-dialog-level) * -1);
+	--components-dialog-translateX: 0;
+	--components-dialog-translateY: var(--components-dialog-translate);
+	--components-dialog-scale: calc(1 - (var(--components-dialog-level) * 0.05));
 }

@@ -165,7 +165,7 @@
 
 @mixin overflow {
 	.calendar-table-body-row-cell-action {
-		--components-calendar-table-body-row-cell-actionColor: var(--palettes-neutral-600);
+		--components-calendar-table-body-row-cell-actionColor: var(--pr-t-color-text-subtle);
 	}
 }
 

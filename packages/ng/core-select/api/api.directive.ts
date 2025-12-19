@@ -13,12 +13,12 @@ export abstract class ALuCoreSelectApiDirective<TOption, TParams = Record<string
 
 	public select = inject<ALuSelectInputComponent<TOption, unknown>>(ALuSelectInputComponent);
 
-	protected page$ = this.select.nextPage.pipe(
+	protected page$ = this.select.nextPage$.pipe(
 		scan((page) => page + 1, 0),
 		startWith(0),
 	);
 
-	protected clue$ = this.select.clueChange.pipe(debounceTime(this.debounceDuration), startWith(''));
+	protected clue$ = this.select.clueChange$.pipe(debounceTime(this.debounceDuration), startWith(''));
 
 	/**
 	 * Create an object that will be used as params for the api call
@@ -56,7 +56,7 @@ export abstract class ALuCoreSelectApiDirective<TOption, TParams = Record<string
 
 	protected buildOptions(): Observable<TOption[]> {
 		// Prevent a double call to getOptions when the clue is changed while the panel is closed
-		const clueIsPendingDebounce$ = merge(this.select.clueChange.pipe(map(() => true)), this.clue$.pipe(map(() => false))).pipe(distinctUntilChanged());
+		const clueIsPendingDebounce$ = merge(this.select.clueChange$.pipe(map(() => true)), this.clue$.pipe(map(() => false))).pipe(distinctUntilChanged());
 		const isOpen$ = combineLatest([this.select.isPanelOpen$, clueIsPendingDebounce$]).pipe(
 			debounceTime(0),
 			startWith([false, false]),

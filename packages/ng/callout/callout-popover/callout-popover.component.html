@@ -1,40 +1,34 @@
-@let calloutIcon = state | luCalloutIcon: icon;
+@let calloutIcon = state() | luCalloutIcon: icon();
 
 <button
 	type="button"
 	class="calloutPopover"
-	[class]="calloutClasses"
+	[class]="calloutClasses()"
+	[luPopover2]="overlayContentRef"
+	[luPopoverTrigger]="'click+hover'"
+	[luPopoverOpenDelay]="openDelay()"
+	[luPopoverCloseDelay]="closeDelay()"
 	#overlayOriginRef
-	(mouseenter)="showContent()"
-	(focus)="showContent()"
-	(mouseleave)="hideContent($event)"
-	(blur)="hideContent(null)"
 >
 	@if (calloutIcon) {
 		<lu-icon class="calloutPopover-icon" [icon]="calloutIcon" />
 	}
-	<span class="calloutPopover-content" aria-hidden="true">{{ buttonLabel }}</span>
-	<span class="pr-u-mask">{{ buttonAlt() || buttonLabel }}</span>
+	<span class="calloutPopover-content" aria-hidden="true">{{ buttonLabel() }}</span>
+	<span class="pr-u-mask">{{ buttonAlt() || buttonLabel() }}</span>
 </button>
 <ng-template #overlayContentRef>
-	<div
-		[@tooltip]="'open'"
-		class="lu-popover-content calloutPopover-overlay"
-		[class]="calloutOverlayClasses"
-		(mouseenter)="showContent()"
-		(mouseleave)="hideContent($event)"
-	>
+	<div class="lu-popover-content calloutPopover-overlay" [class]="calloutOverlayClasses()">
 		@if (calloutIcon) {
 			<div class="pr-u-flexShrink0">
-				<lu-icon class="calloutPopover-overlay-icon" [class]="calloutOverlayHeadClasses" [icon]="calloutIcon" />
+				<lu-icon class="calloutPopover-overlay-icon" [class]="calloutOverlayHeadClasses()" [icon]="calloutIcon" />
 			</div>
 		}
 		<div class="pr-u-flexGrow1">
-			@if (heading) {
+			@if (heading()) {
 				@if (!headingHiddenIfSingleItem() || feedbackItems().length !== 1) {
 					<div class="calloutPopover-overlay-head">
 						<strong class="calloutPopover-overlay-head-title">
-							<ng-container *luPortal="heading" />
+							<ng-container *luPortal="heading()" />
 						</strong>
 					</div>
 				}

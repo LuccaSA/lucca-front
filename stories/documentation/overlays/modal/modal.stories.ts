@@ -121,7 +121,7 @@ class ModalStories {
 
 		const ref = this.modal.legacyOpen(cmp, data, options);
 
-		if (this.undismissable) {
+		if (this.undismissable()) {
 			ref.onBackdropClick.subscribe(() => {
 				this.toastsService.addToast({
 					message: 'Backdrop clicked',

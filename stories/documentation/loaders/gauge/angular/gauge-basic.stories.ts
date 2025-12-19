@@ -24,7 +24,7 @@ export default {
 			imports: [GaugeComponent],
 		}),
 	],
-	render: (args: GaugeComponent, { argTypes }) => {
+	render: (args, { argTypes }) => {
 		const { alt, value, palette, ...inputs } = args;
 		const alternative = alt ? ` alt="${alt}"` : ``;
 		const val = value ? ` value="${value}"` : ``;

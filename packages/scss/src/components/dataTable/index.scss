@@ -9,6 +9,10 @@
 		&.mod-nested {
 			@include nested;
 		}
+
+		&.mod-noOverflow {
+			@include noOverflow;
+		}
 	}
 }
 

@@ -5,7 +5,6 @@ import { IconComponent } from '@lucca-front/ng/icon';
 
 @Component({
 	selector: 'lu-vertical-navigation-group',
-	standalone: true,
 	templateUrl: './vertical-navigation-group.component.html',
 	changeDetection: ChangeDetectionStrategy.OnPush,
 	encapsulation: ViewEncapsulation.None,
@@ -17,11 +16,11 @@ import { IconComponent } from '@lucca-front/ng/icon';
 	},
 })
 export class VerticalNavigationGroupComponent {
-	label = input.required<PortalContent>();
-	icon = input<LuccaIcon | null>(null);
-	disabled = input(false, { transform: booleanAttribute });
+	readonly label = input.required<PortalContent>();
+	readonly icon = input<LuccaIcon | null>(null);
+	readonly disabled = input(false, { transform: booleanAttribute });
 
-	expanded = model(true);
+	readonly expanded = model(true);
 
 	toggleExpanded() {
 		this.expanded.set(!this.expanded());
