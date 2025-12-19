@@ -41,9 +41,9 @@
 				.dialog-form {
 					display: grid;
 					grid-template-areas:
-						'header'
+						'header  '
 						'overflow'
-						'footer';
+						'footer  ';
 					grid-template-rows: auto 1fr auto;
 					flex-grow: 1;
 					min-block-size: 0;
@@ -62,9 +62,9 @@
 			&:not(:has(.dialog-inside-formOptional, .dialog-formOptional, .dialog-form)) {
 				display: grid;
 				grid-template-areas:
-					'header'
+					'header  '
 					'overflow'
-					'footer';
+					'footer  ';
 				grid-template-rows: auto 1fr auto;
 				flex-grow: 1;
 				min-block-size: 0;

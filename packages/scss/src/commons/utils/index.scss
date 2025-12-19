@@ -274,8 +274,6 @@
 		}
 	}
 
-
-
 	[data-content-before] {
 		&::before {
 			content: attr(data-content-before);
@@ -704,7 +702,6 @@
 		.u-fontFamilyBrand {
 			@extend %fontFamilyBrand;
 		}
-
 
 		@each $display in core.$displays {
 			@if $display != 'none' {

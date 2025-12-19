@@ -103,7 +103,8 @@
 		}
 
 		// .mod-delete is deprecated
-		&.mod-critical, &.mod-delete {
+		&.mod-critical,
+		&.mod-delete {
 			@include critical;
 
 			// .mod-link is deprecated
@@ -192,7 +193,7 @@
 		// .disabled is deprecated
 		&.is-disabled,
 		&.disabled,
-		&[aria-disabled="true"] {
+		&[aria-disabled='true'] {
 			@include disabled;
 		}
 	}

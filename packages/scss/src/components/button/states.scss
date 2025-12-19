@@ -41,9 +41,12 @@
 @mixin loadingXS {
 	@include loading.spinner(var(--pr-t-font-body-XS-lineHeight));
 
+	// stylelint-disable block-no-redundant-nested-style-rules -- Prevent issues with mixed declarations.
+	// SEE: https://sass-lang.com/documentation/breaking-changes/mixed-decls/
 	& {
 		--commons-loading-borderWidth: 2px;
 	}
+	// stylelint-enable
 }
 
 @mixin loadingOutlined {
@@ -134,7 +137,6 @@
 		color: var(--palettes-700, var(--palettes-product-700));
 	}
 }
-
 
 @mixin error {
 	animation-name: shake;

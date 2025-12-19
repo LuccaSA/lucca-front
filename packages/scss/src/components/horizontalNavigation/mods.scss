@@ -61,12 +61,14 @@
 		--components-horizontalNavigation-listItemActionAlign: left;
 
 		&::before {
-			inset-block: calc(
-				var(--components-horizontalNavigation-listItemActionPaddingBlock) - var(--pr-t-spacings-150) - var(--pr-t-spacings-25)
-			);
-			inset-inline: calc(
-				var(--components-horizontalNavigation-listItemActionPaddingInline) + var(--pr-t-spacings-150) + var(--pr-t-spacings-25)
-			);
+			inset-block:
+				calc(
+					var(--components-horizontalNavigation-listItemActionPaddingBlock) - var(--pr-t-spacings-150) - var(--pr-t-spacings-25)
+				);
+			inset-inline:
+				calc(
+					var(--components-horizontalNavigation-listItemActionPaddingInline) + var(--pr-t-spacings-150) + var(--pr-t-spacings-25)
+				);
 		}
 
 		&::after {
@@ -95,12 +97,14 @@
 		--components-horizontalNavigation-listItemActionPadding: var(--pr-t-spacings-50) var(--pr-t-spacings-150);
 
 		&::before {
-			inset-block: calc(
-				var(--components-horizontalNavigation-listItemActionPaddingBlock) - var(--pr-t-spacings-150) - var(--pr-t-spacings-25)
-			);
-			inset-inline: calc(
-				var(--components-horizontalNavigation-listItemActionPaddingInline) + var(--pr-t-spacings-100) + var(--pr-t-spacings-25)
-			);
+			inset-block:
+				calc(
+					var(--components-horizontalNavigation-listItemActionPaddingBlock) - var(--pr-t-spacings-150) - var(--pr-t-spacings-25)
+				);
+			inset-inline:
+				calc(
+					var(--components-horizontalNavigation-listItemActionPaddingInline) + var(--pr-t-spacings-100) + var(--pr-t-spacings-25)
+				);
 		}
 	}
 }
