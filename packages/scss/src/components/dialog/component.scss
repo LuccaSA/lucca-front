@@ -24,7 +24,6 @@
 	overflow: hidden;
 	translate: var(--components-dialog-translateX) var(--components-dialog-translateY);
 	scale: var(--components-dialog-scale);
-	interpolate-size: allow-keywords;
 
 	@supports not (height: 1dvh) {
 		--components-dialog-maxHeight: var(--components-dialog-maxHeightFallback);
