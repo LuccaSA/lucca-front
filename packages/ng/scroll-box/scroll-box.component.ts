@@ -1,44 +1,45 @@
-import { ChangeDetectionStrategy, Component, ElementRef, OnInit, signal, viewChild, ViewEncapsulation } from '@angular/core';
+import { afterNextRender, booleanAttribute, Component, ElementRef, inject, input, OnInit, signal, ViewEncapsulation } from '@angular/core';
 
 @Component({
 	selector: 'lu-scroll-box',
-	templateUrl: './scroll-box.component.html',
+	standalone: true,
+	template: '<ng-content />',
 	styleUrl: './scroll-box.component.scss',
-	changeDetection: ChangeDetectionStrategy.OnPush,
 	encapsulation: ViewEncapsulation.None,
-	imports: [],
 	host: {
 		class: 'scrollBox',
+		'(scroll)': 'scroll()',
 		'[class.is-firstVisible]': 'isFirstVisible()',
 		'[class.is-lastVisible]': 'isLastVisible()',
 	},
 })
 export class ScrollBoxComponent implements OnInit {
-	first = viewChild<ElementRef<HTMLElement>>('first');
-	last = viewChild<ElementRef<HTMLElement>>('last');
+	#elementRef = inject<ElementRef<HTMLElement>>(ElementRef);
 
-	isFirstVisible = signal(false);
+	isFirstVisible = signal(true);
 	isLastVisible = signal(false);
 
-	initObserver(element: Element, isFirst: boolean) {
-		new IntersectionObserver(
-			(entries) => {
-				entries.forEach((entry) => {
-					if (isFirst) {
-						this.isFirstVisible.set(entry.isIntersecting);
-					} else {
-						this.isLastVisible.set(entry.isIntersecting);
-					}
-				});
-			},
-			{
-				threshold: 1,
-			},
-		).observe(element);
+	vertical = input(false, { transform: booleanAttribute });
+
+	scroll() {
+		if (this.vertical()) {
+			this.isFirstVisible.set(this.#elementRef.nativeElement.scrollTop === 0);
+			this.isLastVisible.set(this.#elementRef.nativeElement.scrollTop >= this.#elementRef.nativeElement.scrollHeight - this.#elementRef.nativeElement.clientHeight);
+		} else {
+			this.isFirstVisible.set(this.#elementRef.nativeElement.scrollLeft === 0);
+			this.isLastVisible.set(this.#elementRef.nativeElement.scrollLeft >= this.#elementRef.nativeElement.scrollWidth - this.#elementRef.nativeElement.clientWidth);
+		}
+	}
+
+	constructor() {
+		afterNextRender(() => {
+			this.scroll();
+		});
 	}
 
 	ngOnInit(): void {
-		this.initObserver(this.first().nativeElement, true);
-		this.initObserver(this.last().nativeElement, false);
+		new ResizeObserver(() => {
+			this.scroll();
+		}).observe(this.#elementRef.nativeElement);
 	}
 }
