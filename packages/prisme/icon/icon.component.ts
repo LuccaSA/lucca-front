@@ -1,9 +1,9 @@
 import { NgClass } from '@angular/common';
 import { booleanAttribute, ChangeDetectionStrategy, Component, computed, input, ViewEncapsulation } from '@angular/core';
-import { LuccaIcon } from '@lucca-front/icons';
+import type { LuccaIcon } from './icons';
 
 @Component({
-	selector: 'lu-icon',
+	selector: 'pr-icon,lu-icon',
 	imports: [NgClass],
 	templateUrl: './icon.component.html',
 	styleUrl: './icon.component.scss',
