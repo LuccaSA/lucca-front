@@ -17,6 +17,6 @@ export default {
 const template = () => ({});
 
 export const basic: StoryObj<ScrollBoxStory> = {
-  args: {},
-  render: template,
-}
+	args: {},
+	render: template,
+};

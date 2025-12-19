@@ -28,6 +28,6 @@ export default {
 const template = () => ({});
 
 export const basic: StoryObj<FormFieldStory> = {
-  args: {},
-  render: template,
-}
+	args: {},
+	render: template,
+};

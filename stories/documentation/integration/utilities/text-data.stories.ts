@@ -26,7 +26,6 @@ const Template = (args: TextDataStory) => ({
 });
 
 export const TextData: StoryObj<TextDataStory> = {
-  args: {},
-  render: Template,
-}
-
+	args: {},
+	render: Template,
+};

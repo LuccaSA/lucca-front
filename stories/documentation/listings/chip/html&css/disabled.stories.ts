@@ -22,7 +22,6 @@ const Template = (args: ChipDisabledStory) => ({
 });
 
 export const Disabled: StoryObj<ChipDisabledStory> = {
-  args: {},
-  render: Template,
-}
-
+	args: {},
+	render: Template,
+};

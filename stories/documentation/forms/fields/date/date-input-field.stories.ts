@@ -108,7 +108,7 @@ export const BasicTEST = createTestStory(Basic, async ({ canvasElement, args, co
 	const canvas = within(canvasElement);
 	await waitForAngular();
 	// Get input using label text to make sure the label link is properly done, we're adding ? for the tooltip
-	const input = canvas.getByLabelText(`${args['label']}${args['tooltip'] ? '?' : ''}`, { selector: 'input' });
+	const input = canvas.getByLabelText(`${args['label']}${args['tooltip']() ? '?' : ''}`, { selector: 'input' });
 	await userEvent.click(input);
 	await waitForAngular();
 	// We have to get table by role using the screen as matcher, as overlay isn't in the canvas itself

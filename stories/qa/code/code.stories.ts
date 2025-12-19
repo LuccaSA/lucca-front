@@ -18,6 +18,6 @@ export default {
 const template = () => ({});
 
 export const Basic: StoryObj<CodeStory> = {
-  args: {},
-  render: template,
-}
+	args: {},
+	render: template,
+};

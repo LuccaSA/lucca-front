@@ -100,7 +100,6 @@ const Template = (args: BasicStory) => ({
 });
 
 export const Basic: StoryObj<BasicStory> = {
-  args: { bob },
-  render: Template,
-}
-
+	args: { bob },
+	render: Template,
+};

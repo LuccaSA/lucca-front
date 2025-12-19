@@ -36,7 +36,6 @@ const Template = (args: ChipFeedbackStory) => ({
 });
 
 export const Feedback: StoryObj<ChipFeedbackStory> = {
-  args: {},
-  render: Template,
-}
-
+	args: {},
+	render: Template,
+};

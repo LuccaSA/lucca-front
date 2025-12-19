@@ -22,7 +22,6 @@ const Template = (args: ChipPalettesStory) => ({
 });
 
 export const Palettes: StoryObj<ChipPalettesStory> = {
-  args: {},
-  render: Template,
-}
-
+	args: {},
+	render: Template,
+};

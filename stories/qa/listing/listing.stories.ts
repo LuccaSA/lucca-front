@@ -20,6 +20,6 @@ export default {
 const template = () => ({});
 
 export const basic: StoryObj<ListingStory> = {
-  args: {},
-  render: template,
-}
+	args: {},
+	render: template,
+};

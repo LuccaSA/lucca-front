@@ -96,7 +96,6 @@ const Template = (args: SortableListBasicStory) => ({
 });
 
 export const Basic: StoryObj<SortableListBasicStory> = {
-  args: { clickable: false, small: false },
-  render: Template,
-}
-
+	args: { clickable: false, small: false },
+	render: Template,
+};

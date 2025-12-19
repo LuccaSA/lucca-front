@@ -17,7 +17,6 @@ const Template = (args: ChipUnkillableStory) => ({
 });
 
 export const Unkillable: StoryObj<ChipUnkillableStory> = {
-  args: {},
-  render: Template,
-}
-
+	args: {},
+	render: Template,
+};

@@ -19,7 +19,6 @@ const Template = (args: ChipFocusableStory) => ({
 });
 
 export const Focusable: StoryObj<ChipFocusableStory> = {
-  args: {},
-  render: Template,
-}
-
+	args: {},
+	render: Template,
+};

@@ -68,15 +68,14 @@ const Template = (args: ClearBasicStory) => ({
 });
 
 export const Basic: StoryObj<ClearBasicStory> = {
-  args: {
-	S: false,
-	disabled: false,
-	link: false,
-	product: false,
-	inverted: false,
-	hidden: false,
-	alt: 'Clear',
-},
-  render: Template,
-}
-
+	args: {
+		S: false,
+		disabled: false,
+		link: false,
+		product: false,
+		inverted: false,
+		hidden: false,
+		alt: 'Clear',
+	},
+	render: Template,
+};

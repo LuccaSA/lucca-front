@@ -22,7 +22,6 @@ const Template = (args: ChipSmallStory) => ({
 });
 
 export const Small: StoryObj<ChipSmallStory> = {
-  args: {},
-  render: Template,
-}
-
+	args: {},
+	render: Template,
+};
