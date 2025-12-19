@@ -10,7 +10,6 @@ import { LU_DATE2_TRANSLATIONS } from './date2.translate';
 import { transformDateInputToDate, transformDateRangeInputToDateRange } from './utils';
 
 @Component({
-	// eslint-disable-next-line @angular-eslint/component-selector
 	selector: '',
 	template: '',
 	changeDetection: ChangeDetectionStrategy.OnPush,

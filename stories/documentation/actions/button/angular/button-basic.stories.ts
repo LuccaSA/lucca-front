@@ -17,6 +17,7 @@ export default {
 		return {
 			template: `<button type="button" luButton${luButton !== '' ? `="${luButton}"` : ''}${generateInputs(inputs, argTypes)}
 >Button${inputs['disclosure'] ? disclosureIcon : ''}</button>`,
+			styles: [luButton === 'AI-invert' || luButton === 'ghost-invert' ? ':host { background-color: var(--palettes-neutral-900); outline: 1rem solid var(--palettes-neutral-900);  }' : ''],
 		};
 	},
 } as Meta;
@@ -24,7 +25,7 @@ export default {
 export const Basic: StoryObj<ButtonComponent> = {
 	argTypes: {
 		luButton: {
-			options: ['', 'outlined', 'ghost', 'ghost-invert', 'AI'],
+			options: ['', 'outlined', 'ghost', 'ghost-invert', 'AI', 'AI-invert'],
 			control: {
 				type: 'select',
 			},

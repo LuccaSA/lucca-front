@@ -17,7 +17,7 @@ import { PaginationComponent } from '@lucca-front/ng/pagination';
 import { StatusBadgeComponent } from '@lucca-front/ng/status-badge';
 import { TagComponent } from '@lucca-front/ng/tag';
 import { LuUserPictureComponent } from '@lucca-front/ng/user';
-import { Meta, StoryFn } from '@storybook/angular';
+import { Meta, StoryObj } from '@storybook/angular';
 
 @Component({
 	selector: 'index-table-stories',
@@ -49,6 +49,9 @@ export default {
 	component: IndexTableStory,
 } as Meta;
 
-const template: StoryFn<IndexTableStory> = () => ({});
+const template = () => ({});
 
-export const Basic = template.bind({});
+export const Basic: StoryObj<IndexTableStory> = {
+	args: {},
+	render: template,
+};

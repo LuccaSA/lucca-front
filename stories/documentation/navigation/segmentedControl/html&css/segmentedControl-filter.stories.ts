@@ -1,7 +1,7 @@
-import { Meta, StoryFn } from '@storybook/angular';
+import { Meta, StoryObj } from '@storybook/angular';
 
 interface segmentedControlFilterStory {
-	S: string;
+	S: boolean;
 	withNumericBadge: boolean;
 	vertical: boolean;
 }
@@ -60,14 +60,16 @@ function getTemplate(args: segmentedControlFilterStory): string {
 `;
 }
 
-const Template: StoryFn<segmentedControlFilterStory> = (args: segmentedControlFilterStory) => ({
+const Template = (args: segmentedControlFilterStory) => ({
 	props: args,
 	template: getTemplate(args),
 });
 
-export const Filter = Template.bind({});
-Filter.args = {
-	S: false,
-	withNumericBadge: false,
-	vertical: false,
+export const Filter: StoryObj<segmentedControlFilterStory> = {
+	args: {
+		S: false,
+		withNumericBadge: false,
+		vertical: false,
+	},
+	render: Template,
 };

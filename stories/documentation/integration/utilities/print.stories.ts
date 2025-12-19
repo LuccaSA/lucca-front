@@ -1,4 +1,4 @@
-import { Meta, StoryFn } from '@storybook/angular';
+import { Meta, StoryObj } from '@storybook/angular';
 
 interface PrintStory {}
 
@@ -22,10 +22,12 @@ function getTemplate(args: PrintStory): string {
 `;
 }
 
-const Template: StoryFn<PrintStory> = (args) => ({
+const Template = (args: PrintStory) => ({
 	props: args,
 	template: getTemplate(args),
 });
 
-export const Print = Template.bind({});
-Print.args = {};
+export const Print: StoryObj<PrintStory> = {
+	args: {},
+	render: Template,
+};

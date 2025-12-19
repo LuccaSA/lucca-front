@@ -14,7 +14,7 @@ export default {
 		}),
 	],
 	render: (args, context) => {
-		const { palette, description, heading, actions, actionsInline, ...inputs } = args;
+		const { palette, heading, actions, actionsInline, ...inputs } = args;
 		const paletteArg = palette !== 'none' && palette !== undefined ? ` palette="${palette}"` : ``;
 		const headingArg = heading ? ` heading="${heading}"` : ``;
 
@@ -28,20 +28,25 @@ export default {
 
 		return {
 			template: `<lu-callout${headingArg}${paletteArg}${generateInputs(inputs, context.argTypes)}>
-	${description}
+	Feedback description
 	${actionsTemplate}
 </lu-callout>`,
 		};
 	},
 	argTypes: {
 		removable: {
-			description: 'Supports two-ways binding',
+			description: 'Ajoute un bouton de suppression au callout.',
+		},
+		removed: {
+			if: { arg: 'removable', truthy: true },
+			description: 'Masque le callout.',
 		},
 		palette: {
 			options: ['none', 'product', 'neutral', 'success', 'warning', 'error'],
 			control: {
 				type: 'select',
 			},
+			description: 'Applique une palette de couleurs au composant.',
 			if: { arg: 'AI', truthy: false },
 		},
 		icon: {
@@ -49,10 +54,16 @@ export default {
 			control: {
 				type: 'select',
 			},
+			description: 'Ajoute une icône au callout.',
 		},
+		iconAlt: {
+			description: "Information de l'icône restituée par le lecteur d'écran.",
+			type: 'string',
+		},
+
 		state: {
 			options: [null, 'success', 'warning', 'error'],
-			description: 'Shortcut to control both icon and palette',
+			description: 'État du composant.',
 			control: {
 				type: 'select',
 			},
@@ -60,36 +71,36 @@ export default {
 		size: {
 			options: ['M', 'S'],
 			control: {
-				type: 'radio',
+				type: 'select',
 			},
+			description: 'Modifie la taille du callout.',
 		},
 		heading: {
 			type: 'string',
-			description: 'Optional',
-		},
-		description: {
-			type: 'string',
-			description: 'Required',
+			description: 'Ajoute un titre au callout.',
 		},
 		removedChange: HiddenArgType,
 		AI: {
-			description: '[v20.3]',
+			description: '[v20.3] Applique les couleurs IA.',
+			control: {
+				type: 'boolean',
+			},
 		},
 		actions: {
-			description: '[v20.3]',
+			description: "[v20.3] Ajoute une liste d'actions sous la description.",
 		},
 		actionsInline: {
-			description: '[v20.3]',
+			if: { arg: 'actions', truthy: true },
+			description: '[v20.3] Déplace les actions sur la droite du callout.',
 		},
 	},
 } as Meta;
 
-export const Template: StoryObj<CalloutComponent & { description: string; actions: boolean; actionsInline: boolean }> = {
+export const Template: StoryObj<CalloutComponent & { actions: boolean; actionsInline: boolean }> = {
 	args: {
 		heading: '',
 		state: null,
 		icon: null,
-		description: `Description with more details`,
 		palette: 'none',
 		removable: false,
 		removed: false,

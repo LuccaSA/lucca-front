@@ -86,7 +86,7 @@ const basePlay = async ({ canvasElement, step }) => {
 	// Context
 	const isBadgeDisplayer = input.parentElement.getElementsByTagName('lu-simple-select-default-option').length > 0;
 	if (buttons.length > 0) {
-		const clearButton = buttons.find((button) => button.className.includes('multipleSelect-clear'));
+		const clearButton = buttons.find((button) => button.className.includes('clear'));
 		if (clearButton) {
 			await userEvent.click(clearButton);
 		}
@@ -261,7 +261,7 @@ export const Basic = generateStory({
 	},
 	storyPartial: {
 		args: {
-			selectedLegumes: allLegumes.slice(0, 15),
+			selectedLegumes: [],
 			keepSearchAfterSelection: false,
 		},
 		argTypes: {

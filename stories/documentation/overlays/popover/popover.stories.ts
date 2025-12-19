@@ -1,7 +1,7 @@
 import { Component, input } from '@angular/core';
 import { provideAnimations } from '@angular/platform-browser/animations';
 import { LuPopoverAlignment, LuPopoverModule, LuPopoverPosition, LuPopoverTriggerEvent } from '@lucca-front/ng/popover';
-import { applicationConfig, Meta, StoryFn } from '@storybook/angular';
+import { applicationConfig, Meta, StoryObj } from '@storybook/angular';
 
 @Component({
 	selector: 'popover-story',
@@ -23,10 +23,6 @@ export default {
 	component: PopoverStory,
 	decorators: [applicationConfig({ providers: [provideAnimations()] })],
 } as Meta;
-
-const template: StoryFn<PopoverStory> = (args) => ({
-	props: args,
-});
 
 const code = `
 /* 1. Importer LuPopoverModule */
@@ -52,7 +48,9 @@ class PopoverStory {
 	trigger = input<LuPopoverTriggerEvent>('click');
 }`;
 
-export const Basic = template.bind({});
+export const Basic: StoryObj<PopoverStory> = {
+	args: {},
+};
 Basic.parameters = {
 	// Disable controls as they are not modifiable because of ComponentWrapper
 	controls: { include: [] },

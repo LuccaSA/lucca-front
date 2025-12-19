@@ -1,11 +1,11 @@
-import { Meta, StoryFn } from '@storybook/angular';
+import { Meta, StoryObj } from '@storybook/angular';
 
 interface SwitchBasicStory {
 	disabled: boolean;
 	s: boolean;
-	id: Text;
-	label: Text;
-	message: Text;
+	id: string;
+	label: string;
+	message: string;
 	checked: boolean;
 	invalid: false;
 	help: false;
@@ -98,10 +98,12 @@ function getTemplate(args: SwitchBasicStory): string {
 </div>`;
 }
 
-const Template: StoryFn<SwitchBasicStory> = (args) => ({
+const Template = (args: SwitchBasicStory) => ({
 	props: args,
 	template: getTemplate(args),
 });
 
-export const Basic = Template.bind({});
-Basic.args = { checked: false, s: false, disabled: false, invalid: false, help: false, messageState: '', id: 'field1', label: 'Label', message: 'Helper text' };
+export const Basic: StoryObj<SwitchBasicStory> = {
+	args: { checked: false, s: false, disabled: false, invalid: false, help: false, messageState: '', id: 'field1', label: 'Label', message: 'Helper text' },
+	render: Template,
+};

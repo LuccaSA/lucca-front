@@ -132,7 +132,7 @@ export abstract class ALuSelectInputComponent<T, TPicker extends ILuPickerPanel<
 
 	@HostListener('keydown.space', ['$event'])
 	@HostListener('keydown.enter', ['$event'])
-	onKeydown($event: KeyboardEvent) {
+	onKeydown($event: Event) {
 		if (!this._popoverOpen) {
 			this.openPopover();
 			$event.stopPropagation();

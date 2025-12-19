@@ -35,7 +35,7 @@ export const Basic: StoryObj<ButtonComponent & { label: string }> = {
 			description: '[Story] Modifie le label du boutton.',
 		},
 		luButton: {
-			options: ['', 'outlined', 'ghost', 'ghost-invert', 'AI'],
+			options: ['', 'outlined', 'ghost', 'ghost-invert', 'AI', 'AI-invert'],
 			control: {
 				type: 'select',
 			},

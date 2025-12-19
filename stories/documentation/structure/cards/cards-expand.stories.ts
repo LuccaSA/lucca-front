@@ -1,4 +1,4 @@
-import { Meta, StoryFn } from '@storybook/angular';
+import { Meta, StoryObj } from '@storybook/angular';
 
 interface CardsExpandStory {}
 
@@ -16,10 +16,12 @@ function getTemplate(args: CardsExpandStory): string {
 </div>`;
 }
 
-const Template: StoryFn<CardsExpandStory> = (args) => ({
+const Template = (args: CardsExpandStory) => ({
 	props: args,
 	template: getTemplate(args),
 });
 
-export const Expand = Template.bind({});
-Expand.args = {};
+export const Expand: StoryObj<CardsExpandStory> = {
+	args: {},
+	render: Template,
+};

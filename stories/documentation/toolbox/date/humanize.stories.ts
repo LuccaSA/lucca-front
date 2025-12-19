@@ -3,7 +3,7 @@ import { Component, Directive, Injector, LOCALE_ID, OnChanges, TemplateRef, View
 import { ButtonComponent } from '@lucca-front/ng/button';
 import { CalloutComponent } from '@lucca-front/ng/callout';
 import { LuHumanizeDateFormatter, LuHumanizeDatePipe, LuRelativeTime, LuRelativeTimeFormatUnit } from '@lucca-front/ng/date';
-import { Meta, StoryFn, StoryObj, applicationConfig } from '@storybook/angular';
+import { Meta, StoryObj, applicationConfig } from '@storybook/angular';
 
 @Directive({
 	selector: '[fakeLocaleId]',
@@ -163,7 +163,7 @@ export const HumanizeCustomFormatter: StoryObj<HumanizeStory> = {
 	],
 };
 
-export const HumanizeAllowedUnits: StoryFn<HumanizeStory> = () => ({
+export const HumanizeAllowedUnits = () => ({
 	props: {
 		allowedUnits: ['second'],
 	},

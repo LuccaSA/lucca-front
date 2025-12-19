@@ -1,4 +1,4 @@
-import { Meta, StoryFn } from '@storybook/angular';
+import { Meta, StoryObj } from '@storybook/angular';
 
 interface TimelinesAddBetweenStory {}
 
@@ -34,10 +34,12 @@ function getTemplate(args: TimelinesAddBetweenStory): string {
 	`;
 }
 
-const Template: StoryFn<TimelinesAddBetweenStory> = (args) => ({
+const Template = (args: TimelinesAddBetweenStory) => ({
 	props: args,
 	template: getTemplate(args),
 });
 
-export const AddBetween = Template.bind({});
-AddBetween.args = {};
+export const AddBetween: StoryObj<TimelinesAddBetweenStory> = {
+	args: {},
+	render: Template,
+};

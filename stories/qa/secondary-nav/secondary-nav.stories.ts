@@ -1,5 +1,5 @@
 import { Component } from '@angular/core';
-import { Meta, StoryFn } from '@storybook/angular';
+import { Meta, StoryObj } from '@storybook/angular';
 
 @Component({
 	selector: 'secondary-nav-stories',
@@ -12,6 +12,9 @@ export default {
 	component: SecondaryNavStory,
 } as Meta;
 
-const template: StoryFn<SecondaryNavStory> = () => ({});
+const template = () => ({});
 
-export const Basic = template.bind({});
+export const Basic: StoryObj<SecondaryNavStory> = {
+	args: {},
+	render: template,
+};

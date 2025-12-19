@@ -1,5 +1,5 @@
+import { IconsList } from '@/stories/icons-list';
 import { Component } from '@angular/core';
-import { IconsList } from '@lucca-front/icons/icons-list';
 import { IconComponent } from '@lucca-front/ng/icon';
 import { Meta, moduleMetadata, StoryObj } from '@storybook/angular';
 

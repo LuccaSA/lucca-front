@@ -1,4 +1,4 @@
-import { Meta, StoryFn } from '@storybook/angular';
+import { Meta, StoryObj } from '@storybook/angular';
 
 interface OverflowBothStory {}
 
@@ -76,7 +76,7 @@ function getTemplate(args: OverflowBothStory): string {
 </div>`;
 }
 
-const Template: StoryFn<OverflowBothStory> = (args) => ({
+const Template = (args: OverflowBothStory) => ({
 	props: args,
 	template: getTemplate(args),
 	styles: [
@@ -88,5 +88,7 @@ const Template: StoryFn<OverflowBothStory> = (args) => ({
 	],
 });
 
-export const OverflowBoth = Template.bind({});
-OverflowBoth.args = {};
+export const OverflowBoth: StoryObj<OverflowBothStory> = {
+	args: {},
+	render: Template,
+};

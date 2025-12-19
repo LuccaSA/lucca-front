@@ -23,7 +23,23 @@ export default {
 			providers: [{ provide: LOCALE_ID, useValue: 'fr' }, provideRouter([])],
 		}),
 	],
-	argTypes: {},
+	argTypes: {
+		placeholder: {
+			description: 'Applique un placeholder au champ.',
+		},
+		disabled: {
+			description: 'Désactive le champ.',
+		},
+		required: {
+			description: 'Marque le champ comme obligatoire.',
+		},
+		disableSpellcheck: {
+			description: "Désactive le correcteur d'orthographe.",
+		},
+		autoResize: {
+			description: "Active / désactive l'autoresize du champ.",
+		},
+	},
 } as Meta;
 
 export const Basic: StoryObj<RichTextInputComponent & { value: string; disabled: boolean; required: boolean } & FormFieldComponent> = {

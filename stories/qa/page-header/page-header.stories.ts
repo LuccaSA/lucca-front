@@ -7,7 +7,7 @@ import { TextInputComponent } from '@lucca-front/ng/forms';
 import { HorizontalNavigationComponent, HorizontalNavigationLinkDirective } from '@lucca-front/ng/horizontal-navigation';
 import { IconComponent } from '@lucca-front/ng/icon';
 import { PageHeaderComponent } from '@lucca-front/ng/page-header';
-import { Meta, StoryFn } from '@storybook/angular';
+import { Meta, StoryObj } from '@storybook/angular';
 
 @Component({
 	selector: 'page-header-stories',
@@ -32,6 +32,9 @@ export default {
 	component: PageHeaderStory,
 } as Meta;
 
-const template: StoryFn<PageHeaderStory> = () => ({});
+const template = () => ({});
 
-export const Basic = template.bind({});
+export const Basic: StoryObj<PageHeaderStory> = {
+	args: {},
+	render: template,
+};

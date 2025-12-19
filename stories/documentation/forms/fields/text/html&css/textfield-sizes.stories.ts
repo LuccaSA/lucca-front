@@ -1,4 +1,4 @@
-import { Meta, StoryFn } from '@storybook/angular';
+import { Meta, StoryObj } from '@storybook/angular';
 
 interface TextfieldSizeStory {}
 
@@ -38,7 +38,7 @@ function getTemplate(args: TextfieldSizeStory): string {
 </div>`;
 }
 
-const Template: StoryFn<TextfieldSizeStory> = (args) => ({
+const Template = (args: TextfieldSizeStory) => ({
 	props: args,
 	template: getTemplate(args),
 	styles: [
@@ -48,5 +48,7 @@ const Template: StoryFn<TextfieldSizeStory> = (args) => ({
 	],
 });
 
-export const Size = Template.bind({});
-Size.args = {};
+export const Size: StoryObj<TextfieldSizeStory> = {
+	args: {},
+	render: Template,
+};

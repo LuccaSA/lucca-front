@@ -1,4 +1,4 @@
-import { Meta, StoryFn } from '@storybook/angular';
+import { Meta, StoryObj } from '@storybook/angular';
 
 interface CalloutBasicStory {}
 
@@ -18,10 +18,12 @@ function getTemplate(args: CalloutBasicStory): string {
 </div>`;
 }
 
-const Template: StoryFn<CalloutBasicStory> = (args) => ({
+const Template = (args: CalloutBasicStory) => ({
 	props: args,
 	template: getTemplate(args),
 });
 
-export const Basic = Template.bind({});
-Basic.args = {};
+export const Basic: StoryObj<CalloutBasicStory> = {
+	args: {},
+	render: Template,
+};

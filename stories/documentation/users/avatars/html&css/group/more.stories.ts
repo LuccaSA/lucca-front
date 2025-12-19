@@ -1,4 +1,4 @@
-import { Meta, StoryFn } from '@storybook/angular';
+import { Meta, StoryObj } from '@storybook/angular';
 
 export default {
 	title: 'Documentation/Users/Avatar/HTML&CSS/Group/More',
@@ -36,8 +36,11 @@ function getTemplate(): string {
 </ul>`;
 }
 
-const Template: StoryFn = () => ({
+const Template = () => ({
 	template: getTemplate(),
 });
 
-export const More = Template.bind({});
+export const More: StoryObj = {
+	args: {},
+	render: Template,
+};

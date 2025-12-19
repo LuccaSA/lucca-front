@@ -13,37 +13,69 @@ export default {
 		}),
 	],
 	argTypes: {
+		label: {
+			control: {
+				type: 'text',
+			},
+			description: "Modifie le label de l'input.",
+		},
+		required: {
+			control: {
+				type: 'boolean',
+			},
+			description: 'Marque le champ comme obligatoire.',
+		},
 		tooltip: {
-			type: 'string',
 			if: { arg: 'hiddenLabel', truthy: false },
+			description: 'Affiche une icône (?) associée à une info-bulle.',
+		},
+		disabled: {
+			description: 'Désactive le champ.',
+		},
+		placeholder: {
+			description: 'Applique un placeholder au champ.',
 		},
 		size: {
 			options: ['M', 'S', 'XS'],
 			control: {
 				type: 'select',
 			},
+			description: 'Modifie la taille du champ.',
+		},
+		inlineMessage: {
+			control: {
+				type: 'text',
+			},
+			description: 'Ajoute un texte descriptif (aide, erreur, etc.) sous le champ de formulaire.',
 		},
 		inlineMessageState: {
 			options: ['default', 'success', 'warning', 'error'],
 			control: {
 				type: 'select',
 			},
+			description: "Modifie l'état de l'inline message.",
 		},
 		rows: {
 			control: { type: 'number' },
-			description: '[v18.1]',
+			description: '[v18.1] Nombre de lignes visibles par défaut.',
 		},
 		autoResize: {
 			type: 'boolean',
-			description: '[v18.3]',
+			description: "[v18.3] Active l'autoresize du champ.",
 		},
 		autoResizeScrollIntoView: {
 			type: 'boolean',
 			if: { arg: 'autoResize', truthy: true },
-			description: '[v18.3]',
+			description: "[v18.3] Assure que le curseur de saisie soit toujours visible à l'écran en appliquant un scroll.",
 		},
 		hiddenLabel: {
 			description: "Masque le label en le conservant dans le DOM pour les lecteurs d'écrans",
+		},
+		counter: {
+			description: 'Indique le nombre de caractères maximum du champ. Cette information n’est présente qu’à titre indicatif. La longueur du champ doit également être limité via formControl.',
+		},
+		disableSpellcheck: {
+			description: "Désactive le correcteur d'orthographe.",
 		},
 	},
 } as Meta;

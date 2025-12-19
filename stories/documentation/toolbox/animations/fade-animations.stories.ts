@@ -1,7 +1,7 @@
 import { Component } from '@angular/core';
 import { provideAnimations } from '@angular/platform-browser/animations';
 import { luFadeAnimationFactory } from '@lucca-front/ng/animations';
-import { applicationConfig, Meta, StoryFn } from '@storybook/angular';
+import { applicationConfig, Meta, StoryObj } from '@storybook/angular';
 
 @Component({
 	selector: 'story-fade-animation',
@@ -29,12 +29,14 @@ export default {
 	decorators: [applicationConfig({ providers: [provideAnimations()] })],
 } as Meta;
 
-const template: StoryFn<FadeAnimationStory> = (args) => ({
+const template = (args: FadeAnimationStory) => ({
 	props: args,
 });
 
-export const Fade = template.bind({});
-Fade.args = {};
+export const Fade: StoryObj<FadeAnimationStory> = {
+	args: {},
+	render: template,
+};
 
 const code = `
 /* 1. Appeler provideAnimations */

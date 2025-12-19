@@ -1,6 +1,6 @@
 import { Component } from '@angular/core';
 import { NewBadgeComponent } from '@lucca-front/ng/new-badge';
-import { Meta, StoryFn, moduleMetadata } from '@storybook/angular';
+import { Meta, StoryObj, moduleMetadata } from '@storybook/angular';
 
 @Component({
 	selector: 'new-badge-stories',
@@ -19,6 +19,9 @@ export default {
 	],
 } as Meta;
 
-const template: StoryFn<NewBadgeStory> = () => ({});
+const template = () => ({});
 
-export const Basic = template.bind({});
+export const Basic: StoryObj<NewBadgeStory> = {
+	args: {},
+	render: template,
+};

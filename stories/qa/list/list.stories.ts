@@ -1,5 +1,5 @@
 import { Component } from '@angular/core';
-import { Meta, StoryFn } from '@storybook/angular';
+import { Meta, StoryObj } from '@storybook/angular';
 
 @Component({
 	selector: 'list-stories',
@@ -12,6 +12,9 @@ export default {
 	component: ListStory,
 } as Meta;
 
-const template: StoryFn<ListStory> = () => ({});
+const template = () => ({});
 
-export const Basic = template.bind({});
+export const Basic: StoryObj<ListStory> = {
+	args: {},
+	render: template,
+};

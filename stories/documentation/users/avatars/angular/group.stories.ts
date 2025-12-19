@@ -1,6 +1,6 @@
 import { Component, input } from '@angular/core';
 import { LuUserPictureModule } from '@lucca-front/ng/user';
-import { Meta, StoryFn } from '@storybook/angular';
+import { Meta, StoryObj } from '@storybook/angular';
 import { squidwards } from '../../user.mocks';
 
 @Component({
@@ -145,13 +145,10 @@ export default {
 	},
 } as Meta;
 
-const template: StoryFn<AvatarStory> = (args) => ({
-	props: args,
-});
-
-export const Basic = template.bind({});
-Basic.args = {
-	sizes: '',
+export const Basic: StoryObj<AvatarStory> = {
+	args: {
+		sizes: '',
+	},
 };
 
 Basic.parameters = {

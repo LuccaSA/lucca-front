@@ -297,7 +297,7 @@ export class PopoverDirective implements OnDestroy {
 	}
 
 	@HostListener('keydown.Shift.Tab', ['$event'])
-	focusOutBefore(): void {
+	focusOutBefore(_event: Event): void {
 		if (this.opened() && this.luPopoverTrigger().includes('focus')) {
 			this.#componentRef.close();
 		}
