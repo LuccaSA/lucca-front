@@ -37,14 +37,14 @@ export class DataTableRowCellComponent extends BaseDataTableCell {
 	});
 
 	alignCol = computed(() => {
-		return this.tableRef.header().cols()[this.position()].align();
+		return this.tableRef?.header().cols()[this.position()].align();
 	});
 
 	insetInlineStart = computed(() => {
-		return this.tableRef.header().cols()[this.position()].insetInlineStart();
+		return this.tableRef?.header().cols()[this.position()].insetInlineStart();
 	});
 
 	insetInlineEnd = computed(() => {
-		return this.tableRef.header().cols()[this.position()].insetInlineEnd();
+		return this.tableRef?.header().cols()[this.position()].insetInlineEnd();
 	});
 }
