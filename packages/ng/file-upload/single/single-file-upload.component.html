@@ -1,5 +1,6 @@
 <div class="fileUpload" [class.is-droppable]="droppable" [class.mod-S]="size() === 'S'" [class.is-hidden]="!!entry()">
 	<input
+		#fileInput
 		class="fileUpload-input"
 		type="file"
 		title=""
@@ -37,7 +38,9 @@
 		[previewUrl]="previewUrl()"
 		[entry]="entry()"
 		[state]="state()"
+		[editable]="editable()"
 		(deleteFile)="deleteFile.emit()"
+		(editFile)="onEditFile(fileInput)"
 		[inlineMessageError]="inlineMessageError()"
 		[displayFileName]="displayFileName()"
 	/>

@@ -33,6 +33,7 @@ export interface LuFileUploadLabel {
 	downloadFile: string;
 	delete: string;
 	deleteFile: string;
+	edit: string;
 	password: string;
 	confirmPassword: string;
 }

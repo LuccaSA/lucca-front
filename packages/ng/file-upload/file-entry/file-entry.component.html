@@ -56,7 +56,7 @@
 			}
 		</div>
 	</dd>
-	@if (downloadURL() || deletable) {
+	@if (downloadURL() || editable() || deletable) {
 		<dd class="fileEntry-toolbar">
 			<div class="fileToolbar" [class.mod-disablePositioning]="!media()" [class.mod-S]="size() === 'S'">
 				<ul class="fileToolbar-list">
@@ -79,6 +79,20 @@
 									[alt]="intl.downloadFile | intlParams: { fileName: fileName() }"
 								/>
 							</a>
+						</li>
+					}
+					@if (editable()) {
+						<li class="fileToolbar-list-item">
+							<button
+								class="fileToolbar-list-item-button"
+								type="button"
+								luButton
+								[luTooltip]="intl.edit"
+								luTooltipOnlyForDisplay
+								(click)="editFile$.next()"
+							>
+								<lu-icon class="fileToolbar-list-item-button-icon" icon="officePen" [alt]="intl.edit" />
+							</button>
 						</li>
 					}
 					@if (deletable) {
