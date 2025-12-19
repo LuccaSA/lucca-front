@@ -11,7 +11,7 @@ import { CheckboxInputComponent, TextInputComponent } from '@lucca-front/ng/form
 import { LuMultiSelectInputComponent } from '@lucca-front/ng/multi-select';
 import { NumericBadgeComponent } from '@lucca-front/ng/numeric-badge';
 import { LuSimpleSelectInputComponent } from '@lucca-front/ng/simple-select';
-import { applicationConfig, Meta, StoryFn } from '@storybook/angular';
+import { applicationConfig, Meta, StoryObj } from '@storybook/angular';
 import { StoryModelDisplayComponent } from 'stories/helpers/story-model-display.component';
 
 @Component({
@@ -47,6 +47,9 @@ export default {
 	decorators: [applicationConfig({ providers: [provideHttpClient(), { provide: LOCALE_ID, useValue: 'fr-FR' }] })],
 } as Meta;
 
-const template: StoryFn<FilterBarStory> = () => ({});
+const template = () => ({});
 
-export const basic = template.bind({});
+export const basic: StoryObj<FilterBarStory> = {
+  args: {},
+  render: template,
+}

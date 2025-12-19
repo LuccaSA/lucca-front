@@ -1,6 +1,6 @@
 import { ChangeDetectionStrategy, Component } from '@angular/core';
 import { CodeComponent } from '@lucca-front/ng/code';
-import { Meta, StoryFn } from '@storybook/angular';
+import { Meta, StoryObj } from '@storybook/angular';
 
 @Component({
 	selector: 'code-stories',
@@ -15,6 +15,9 @@ export default {
 	component: CodeStory,
 } as Meta;
 
-const template: StoryFn<CodeStory> = () => ({});
+const template = () => ({});
 
-export const Basic = template.bind({});
+export const Basic: StoryObj<CodeStory> = {
+  args: {},
+  render: template,
+}

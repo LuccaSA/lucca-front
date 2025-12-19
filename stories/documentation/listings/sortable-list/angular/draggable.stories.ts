@@ -1,7 +1,7 @@
 import { CdkDrag, CdkDragDrop, CdkDropList, moveItemInArray } from '@angular/cdk/drag-drop';
 import { Component, input } from '@angular/core';
 import { SortableListComponent, SortableListItemComponent } from '@lucca-front/ng/sortable-list';
-import { Meta, StoryFn } from '@storybook/angular';
+import { Meta, StoryObj } from '@storybook/angular';
 
 @Component({
 	selector: 'sortable-list-draggable-stories',
@@ -40,15 +40,12 @@ export default {
 	},
 } as Meta;
 
-const template: StoryFn<SortableListDraggableStory> = (args) => ({
-	props: args,
-});
-
-export const Basic = template.bind({});
-Basic.args = {
-	small: false,
-	clickable: false,
-	unclearable: false,
+export const Basic: StoryObj<SortableListDraggableStory> = {
+	args: {
+		small: false,
+		clickable: false,
+		unclearable: false,
+	},
 };
 
 const code = `<lu-sortable-list cdkDropList (cdkDropListDropped)="drop($event)">

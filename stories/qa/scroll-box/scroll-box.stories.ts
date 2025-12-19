@@ -1,6 +1,6 @@
 import { Component } from '@angular/core';
 import { ScrollBoxComponent } from '@lucca-front/ng/scroll-box';
-import { Meta, StoryFn } from '@storybook/angular';
+import { Meta, StoryObj } from '@storybook/angular';
 
 @Component({
 	selector: 'scroll-box-stories',
@@ -14,6 +14,9 @@ export default {
 	component: ScrollBoxStory,
 } as Meta;
 
-const template: StoryFn<ScrollBoxStory> = () => ({});
+const template = () => ({});
 
-export const basic = template.bind({});
+export const basic: StoryObj<ScrollBoxStory> = {
+  args: {},
+  render: template,
+}

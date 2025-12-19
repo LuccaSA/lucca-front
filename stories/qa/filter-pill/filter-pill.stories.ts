@@ -11,7 +11,7 @@ import { CheckboxInputComponent } from '@lucca-front/ng/forms';
 import { LuMultiSelectInputComponent } from '@lucca-front/ng/multi-select';
 import { LuSimpleSelectInputComponent } from '@lucca-front/ng/simple-select';
 import { TreeSelectDirective } from '@lucca-front/ng/tree-select';
-import { applicationConfig, Meta, StoryFn } from '@storybook/angular';
+import { applicationConfig, Meta, StoryObj } from '@storybook/angular';
 
 @Component({
 	selector: 'filter-pill-stories',
@@ -47,6 +47,9 @@ export default {
 	decorators: [applicationConfig({ providers: [{ provide: LOCALE_ID, useValue: 'fr-FR' }, provideAnimations(), provideHttpClient()] })],
 } as Meta;
 
-const template: StoryFn<FilterPillStory> = () => ({});
+const template = () => ({});
 
-export const basic = template.bind({});
+export const basic: StoryObj<FilterPillStory> = {
+  args: {},
+  render: template,
+}

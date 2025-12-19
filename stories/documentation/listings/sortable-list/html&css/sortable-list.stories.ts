@@ -1,5 +1,5 @@
 import { LuTooltipModule } from '@lucca-front/ng/tooltip';
-import { Meta, moduleMetadata, StoryFn } from '@storybook/angular';
+import { Meta, moduleMetadata, StoryObj } from '@storybook/angular';
 
 interface SortableListBasicStory {
 	clickable: boolean;
@@ -89,11 +89,14 @@ function getTemplate(args: SortableListBasicStory): string {
 `;
 }
 
-const Template: StoryFn<SortableListBasicStory> = (args) => ({
+const Template = (args: SortableListBasicStory) => ({
 	props: args,
 	template: getTemplate(args),
 	styles: [`:host > .sortableList-item { margin-block-start: var(--pr-t-spacings-200) }`],
 });
 
-export const Basic = Template.bind({});
-Basic.args = { clickable: false, small: false };
+export const Basic: StoryObj<SortableListBasicStory> = {
+  args: { clickable: false, small: false },
+  render: Template,
+}
+

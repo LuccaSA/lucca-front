@@ -9,7 +9,7 @@ import {
 	DataTableRowCellHeaderComponent,
 	DataTableRowComponent,
 } from '@lucca-front/ng/data-table';
-import { Meta, StoryFn } from '@storybook/angular';
+import { Meta, StoryObj } from '@storybook/angular';
 
 @Component({
 	selector: 'data-table-draggable-stories',
@@ -50,13 +50,10 @@ export default {
 	},
 } as Meta;
 
-const template: StoryFn<DataTableDraggableStory> = (args) => ({
-	props: args,
-});
-
-export const Basic = template.bind({});
-Basic.args = {
-	selectable: false,
+export const Basic: StoryObj<DataTableDraggableStory> = {
+	args: {
+		selectable: false,
+	},
 };
 
 const code = `<lu-data-table drag>

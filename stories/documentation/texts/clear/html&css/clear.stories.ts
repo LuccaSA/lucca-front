@@ -1,4 +1,4 @@
-import { Meta, StoryFn } from '@storybook/angular';
+import { Meta, StoryObj } from '@storybook/angular';
 
 interface ClearBasicStory {
 	S: boolean;
@@ -62,13 +62,13 @@ function getTemplate(args: ClearBasicStory): string {
 	}
 }
 
-const Template: StoryFn<ClearBasicStory> = (args) => ({
+const Template = (args: ClearBasicStory) => ({
 	props: args,
 	template: getTemplate(args),
 });
 
-export const Basic = Template.bind({});
-Basic.args = {
+export const Basic: StoryObj<ClearBasicStory> = {
+  args: {
 	S: false,
 	disabled: false,
 	link: false,
@@ -76,4 +76,7 @@ Basic.args = {
 	inverted: false,
 	hidden: false,
 	alt: 'Clear',
-};
+},
+  render: Template,
+}
+
