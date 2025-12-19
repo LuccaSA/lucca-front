@@ -77,6 +77,8 @@ export class LuTooltipTriggerDirective implements OnDestroy {
 
 	readonly luTooltipAnchor = input<FlexibleConnectedPositionStrategyOrigin>(this.#host);
 
+	readonly id = input<string>(`${this.#host.nativeElement.tagName.toLowerCase()}-tooltip-${nextId++}`);
+
 	readonly resize$ = new Observable<void>((observer) => {
 		const resizeObserver = new ResizeObserver(() => {
 			observer.next();
@@ -144,10 +146,6 @@ export class LuTooltipTriggerDirective implements OnDestroy {
 	onBlur() {
 		this.#action.set('close');
 	}
-
-	readonly #generatedId = `${this.#host.nativeElement.tagName.toLowerCase()}-tooltip-${nextId++}`;
-
-	readonly id = signal<string>(this.#host.nativeElement.id || this.#generatedId);
 
 	readonly ariaDescribedBy = computed(() => {
 		if (this.luTooltipDisabled() || this.luTooltipWhenEllipsis() || this.luTooltipOnlyForDisplay()) {
