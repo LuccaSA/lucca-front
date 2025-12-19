@@ -73,7 +73,7 @@
 									@if (employee.currentWorkLocation) {
 										{{ employee.currentWorkLocation?.name }}
 										@if (employee.currentWorkLocation?.area) {
-											<span class="pr-u-textLight"> – {{ employee.currentWorkLocation?.area?.name }}</span>
+											<span class="pr-u-colorTextSubtle"> – {{ employee.currentWorkLocation?.area?.name }}</span>
 										}
 									}
 									@if (!employee.currentWorkLocation) {
@@ -83,7 +83,9 @@
 									@if (!(employee.dtContractStart | isFuture) && (employee.dtContractEnd | isFutureOrToday)) {
 										{{ intl.EMPLOYEE_CARD_PANEL_ABSENCE_LABEL }}
 										@if (employee.leaveEndsOn) {
-											<span class="pr-u-textLight"> – {{ employee.leaveEndsOn | leaveEndsDisplay: employee.leaveEndIsFirstHalfDay }} </span>
+											<span class="pr-u-colorTextSubtle"
+												> – {{ employee.leaveEndsOn | leaveEndsDisplay: employee.leaveEndIsFirstHalfDay }}
+											</span>
 										}
 									}
 								}
