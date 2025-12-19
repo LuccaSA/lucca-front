@@ -1,9 +1,9 @@
 @use '@lucca-front/scss/src/commons/utils/overflow';
-
-@use '@lucca-front/scss/src/components/divider/exports' as divider;
 @use '@lucca-front/scss/src/components/scrollBox/exports' as scrollBox;
 
-@mixin compact {
+@mixin narrow {
+	--components-filterBar-flexWrap: wrap;
+
 	.filterBar-segmentedControl.segmentedControl {
 		--components-segmentedControl-direction: row;
 		--components-segmentedControl-width: 100%;
@@ -11,16 +11,6 @@
 
 	.filterBar-divider.divider {
 		inline-size: 100%;
-	}
-}
-
-@mixin notCompact {
-	--components-filterBar-flexWrap: nowrap;
-
-	.filterBar-divider.divider {
-		margin-inline: var(--pr-t-spacings-50);
-
-		@include divider.vertical;
 	}
 }
 

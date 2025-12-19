@@ -8,6 +8,7 @@
 @use '@lucca-front/scss/src/components/clear/exports' as clear;
 @use '@lucca-front/scss/src/components/segmentedControl/exports' as segmentedControl;
 @use '@lucca-front/scss/src/components/textField/exports' as textField;
+@use '@lucca-front/scss/src/components/divider/exports' as divider;
 
 @mixin component($atRoot: namespace.$defaultAtRoot) {
 	display: flex;
@@ -21,6 +22,10 @@
 
 	@at-root ($atRoot) {
 		.filterBar-divider.divider {
+			@include divider.vertical;
+
+			margin-inline: var(--pr-t-spacings-50);
+
 			&:last-child {
 				display: none;
 			}
@@ -39,6 +44,7 @@
 			gap: var(--pr-t-spacings-100);
 			flex-wrap: var(--components-filterBar-scrollBox-group-flexWrap);
 			flex-grow: 1;
+			flex-shrink: 1 !important;
 		}
 
 		.filterBar-scrollBox-export {
