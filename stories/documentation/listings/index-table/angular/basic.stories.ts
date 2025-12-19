@@ -64,7 +64,7 @@ export default {
 			control: { type: 'range', min: 1, max: 3 },
 		},
 		sort: {
-			options: ['', 'null', 'ascending', 'descending'],
+			options: ['', 'none', 'ascending', 'descending'],
 			control: {
 				type: 'select',
 			},
