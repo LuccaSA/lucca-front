@@ -5,6 +5,7 @@ import { FormsModule } from '@angular/forms';
 import { ButtonComponent } from '@lucca-front/ng/button';
 import { LuCoreSelectApiV4Directive } from '@lucca-front/ng/core-select/api';
 import { DateInputComponent, DateRangeInputComponent } from '@lucca-front/ng/date2';
+import { DividerComponent } from '@lucca-front/ng/divider';
 import { FilterBarComponent, FilterPillAddonAfterDirective, FilterPillAddonBeforeDirective, FilterPillComponent } from '@lucca-front/ng/filter-pills';
 import { FormFieldComponent } from '@lucca-front/ng/form-field';
 import { CheckboxInputComponent, TextInputComponent } from '@lucca-front/ng/forms';
@@ -36,6 +37,7 @@ export default {
 				NumericBadgeComponent,
 				LuCoreSelectApiV4Directive,
 				LuMultiSelectInputComponent,
+				DividerComponent,
 			],
 		}),
 		applicationConfig({ providers: [provideHttpClient(), { provide: LOCALE_ID, useValue: 'fr-FR' }] }),
@@ -79,7 +81,8 @@ export default {
 		<lu-checkbox-input [ngModel]="false" />
 	</lu-filter-pill>
 	<lu-filter-pill label="Date de début" optional name="startingDate">
-		<lu-date-input [(ngModel)]="example1" /></lu-filter-pill>
+		<lu-date-input [(ngModel)]="example1" />
+	</lu-filter-pill>
 	<lu-filter-pill label="Période">
 		<lu-date-range-input [(ngModel)]="examplePeriod" />
 	</lu-filter-pill>
