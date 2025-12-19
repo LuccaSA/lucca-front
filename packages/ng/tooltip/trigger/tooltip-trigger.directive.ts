@@ -145,9 +145,9 @@ export class LuTooltipTriggerDirective implements OnDestroy {
 		this.#action.set('close');
 	}
 
-	readonly #generatedId = `${this.#host.nativeElement.tagName.toLowerCase()}-tooltip-${nextId++}`;
+	readonly #generatedId = computed(() => `${this.#host.nativeElement.tagName.toLowerCase()}-tooltip-${nextId++}`);
 
-	readonly id = signal<string>(this.#host.nativeElement.id || this.#generatedId);
+	readonly id = computed(() => this.#host.nativeElement.id || this.#generatedId());
 
 	readonly ariaDescribedBy = computed(() => {
 		if (this.luTooltipDisabled() || this.luTooltipWhenEllipsis() || this.luTooltipOnlyForDisplay()) {
