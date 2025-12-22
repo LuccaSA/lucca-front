@@ -39,6 +39,7 @@ import { StoryModelDisplayComponent } from 'stories/helpers/story-model-display.
 import { expect, screen, userEvent, within } from 'storybook/test';
 import { sleep, waitForAngular } from '../../../helpers/test';
 import { allLegumes, colorNameByColor, coreSelectStory, FilterLegumesPipe, ILegume, LuCoreSelectInputStoryComponent, SortLegumesPipe } from './select.utils';
+import { LOCALE_ID } from '@angular/core';
 
 type LuMultiSelectInputStoryComponent = LuCoreSelectInputStoryComponent & {
 	selectedLegumes: ILegume[] | LuMultiSelection<ILegume>;
@@ -52,6 +53,11 @@ type LuMultiSelectInputStoryComponent = LuCoreSelectInputStoryComponent & {
 } & LuMultiSelectInputComponent<ILegume>;
 
 const generateStory = getStoryGenerator<LuMultiSelectInputStoryComponent>({
+	decorators: [
+		applicationConfig({
+			providers: [{ provide: LOCALE_ID, useValue: 'fr-FR' }],
+		}),
+	],
 	...coreSelectStory,
 	argTypes: {
 		...coreSelectStory.argTypes,
