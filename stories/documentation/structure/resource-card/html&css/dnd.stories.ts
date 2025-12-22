@@ -1,5 +1,5 @@
 import { LuTooltipModule } from '@lucca-front/ng/tooltip';
-import { Meta, moduleMetadata } from '@storybook/angular';
+import { Meta, moduleMetadata, StoryObj } from '@storybook/angular';
 
 interface ResourceCardHTMLBasicStory {
 	action: boolean;
@@ -24,34 +24,36 @@ export default {
 			imports: [LuTooltipModule],
 		}),
 	],
-	render: (args: ResourceCardHTMLBasicStory) => {
-		const actionTpl = args.action
-			? `
+} as Meta;
+
+function getTemplate(args: ResourceCardHTMLBasicStory) {
+	const actionTpl = args.action
+		? `
 				<div class="resourceCard-layout-after">
 					<button type="button" class="button">Lorem ipsum</button>
 				</div>`
-			: ``;
-		const beforeTpl = args.illustration
-			? `
+		: ``;
+	const beforeTpl = args.illustration
+		? `
 					<div class="resourceCard-layout-before-illustration">
 						<div class="pr-u-inlineSize100% pr-u-blockSize100% pr-u-borderRadiusDefault" style="background-color: var(--palettes-lavender-100)"></div>
 					</div>`
-			: ``;
-		const descriptionContentTpl = args.content
-			? `
+		: ``;
+	const descriptionContentTpl = args.content
+		? `
 				<div class="resourceCard-layout-content">
 					Lorem <a href="#" class="link">ipsum</a> dolor sit amet, consectetur adipiscing elit, sed do.
 				</div>`
-			: ``;
-		const infosTpl = args.infos
-			? `
+		: ``;
+	const infosTpl = args.infos
+		? `
 					<div class="resourceCard-layout-header-infos">
 						<span class="statusBadge">Status badge</span>
 						<span class="statusBadge">Status badge</span>
 					</div>`
-			: ``;
-		const sizeAttr = args.size ? ` mod-S` : ``;
-		const cards = `
+		: ``;
+	const sizeAttr = args.size ? ` mod-S` : ``;
+	const cards = `
 		<section class="resourceCard${sizeAttr}" #resourceCard1>
 			<div class="resourceCard-layout">
 				<div class="resourceCard-layout-before">
@@ -95,16 +97,15 @@ export default {
 			</div>
 		</section>`;
 
-		return {
-			template: `
-	<div class="resourceCardWrapper">${cards}
-	</div>
-	`,
-		};
-	},
-} as Meta;
+	return `<div class="resourceCardWrapper">${cards}</div>`;
+}
 
-export const Basic = {
+const Template = (args: ResourceCardHTMLBasicStory) => ({
+	props: args,
+	template: getTemplate(args),
+});
+
+export const Basic: StoryObj<ResourceCardHTMLBasicStory> = {
 	args: {
 		size: '',
 		infos: false,
@@ -112,4 +113,5 @@ export const Basic = {
 		illustration: false,
 		action: false,
 	},
+	render: Template,
 };

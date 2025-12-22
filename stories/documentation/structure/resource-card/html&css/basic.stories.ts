@@ -1,5 +1,5 @@
 import { LuTooltipModule } from '@lucca-front/ng/tooltip';
-import { Meta, moduleMetadata } from '@storybook/angular';
+import { Meta, moduleMetadata, StoryObj } from '@storybook/angular';
 
 interface ResourceCardHTMLBasicStory {
 	action: boolean;
@@ -76,8 +76,10 @@ export default {
 			imports: [LuTooltipModule],
 		}),
 	],
-	render: (args: ResourceCardHTMLBasicStory) => {
-		const card = `
+} as Meta;
+
+function getTemplate(args: ResourceCardHTMLBasicStory) {
+	const card = `
 		<div class="resourceCardContainer">
 			<section class="resourceCard">
 				<div class="resourceCard-layout">
@@ -94,57 +96,57 @@ export default {
 				</div>
 			</section>
 		</div>`;
-		const actionTpl = args.action
-			? `
+	const actionTpl = args.action
+		? `
 				<div class="resourceCard-layout-after">
 					${args.disabled ? args.actionTemplateDisabled : args.actionTemplate}
 				</div>`
-			: ``;
-		const wrapperGridClass = args.wrapperGrid ? ` mod-grid` : ``;
-		const beforeTpl = args.illustration
-			? `
+		: ``;
+	const wrapperGridClass = args.wrapperGrid ? ` mod-grid` : ``;
+	const beforeTpl = args.illustration
+		? `
 					<div class="resourceCard-layout-before-illustration">
 						${args.disabled ? args.illustrationTemplateDisabled : args.illustrationTemplate}
 					</div>`
-			: ``;
-		const addResourceTpl = args.addResource
-			? `
+		: ``;
+	const addResourceTpl = args.addResource
+		? `
 		<button class="button">Button</button>`
-			: ``;
-		const headingTpl =
-			args.actionType === 'a'
-				? args.disabled
-					? `<span luTooltip luTooltipOnlyForDisplay luTooltipWhenEllipsis [luTooltipAnchor]="resourceCard1" class="resourceCard-layout-header-title-action is-disabled">${args.heading}</span>`
-					: `<a href="#" luTooltip luTooltipOnlyForDisplay luTooltipWhenEllipsis [luTooltipAnchor]="resourceCard1" class="resourceCard-layout-header-title-action">${args.heading}</a>`
-				: args.disabled
-					? `<button luTooltip luTooltipOnlyForDisplay luTooltipWhenEllipsis [luTooltipAnchor]="resourceCard1" class="resourceCard-layout-header-title-action" disabled="disabled">${args.heading}</button>`
-					: `<button type="button" luTooltip luTooltipOnlyForDisplay luTooltipWhenEllipsis [luTooltipAnchor]="resourceCard1" class="resourceCard-layout-header-title-action">${args.heading}</button>`;
-		const draggableTpl = args.draggable
-			? `
+		: ``;
+	const headingTpl =
+		args.actionType === 'a'
+			? args.disabled
+				? `<span luTooltip luTooltipOnlyForDisplay luTooltipWhenEllipsis [luTooltipAnchor]="resourceCard1" class="resourceCard-layout-header-title-action is-disabled">${args.heading}</span>`
+				: `<a href="#" luTooltip luTooltipOnlyForDisplay luTooltipWhenEllipsis [luTooltipAnchor]="resourceCard1" class="resourceCard-layout-header-title-action">${args.heading}</a>`
+			: args.disabled
+				? `<button luTooltip luTooltipOnlyForDisplay luTooltipWhenEllipsis [luTooltipAnchor]="resourceCard1" class="resourceCard-layout-header-title-action" disabled="disabled">${args.heading}</button>`
+				: `<button type="button" luTooltip luTooltipOnlyForDisplay luTooltipWhenEllipsis [luTooltipAnchor]="resourceCard1" class="resourceCard-layout-header-title-action">${args.heading}</button>`;
+	const draggableTpl = args.draggable
+		? `
 					<div class="button resourceCard-layout-before-button">
 						<span aria-hidden="true" class="lucca-icon icon-dotsDrag"></span>
 					</div>`
-			: ``;
-		const descriptionContentTpl = args.content
-			? `
+		: ``;
+	const descriptionContentTpl = args.content
+		? `
 				<div class="resourceCard-layout-content">
 					${args.disabled ? args.contentTemplateDisabled : args.contentTemplate}
 				</div>`
-			: ``;
-		const infosTpl = args.infos
-			? `
+		: ``;
+	const infosTpl = args.infos
+		? `
 					<div class="resourceCard-layout-header-infos">
 						${args.infosTemplate}
 					</div>`
-			: ``;
-		const beforeContent =
-			args.illustration || args.draggable
-				? `
+		: ``;
+	const beforeContent =
+		args.illustration || args.draggable
+			? `
 				<div class="resourceCard-layout-before">${draggableTpl}${beforeTpl}
 				</div>`
-				: ``;
-		const sizeAttr = args.size ? ` mod-S` : ``;
-		const cards = `
+			: ``;
+	const sizeAttr = args.size ? ` mod-S` : ``;
+	const cards = `
 		<section class="resourceCard${sizeAttr}" #resourceCard1>
 			<div class="resourceCard-layout">${beforeContent}
 				<header class="resourceCard-layout-header">
@@ -154,22 +156,19 @@ export default {
 				</header>${descriptionContentTpl}${actionTpl}
 			</div>
 		</section>${card.repeat(args.wrapper ? 3 : 0)}`;
-		if (args.wrapper) {
-			return {
-				template: `
-	<div class="resourceCardWrapper${wrapperGridClass}">${cards}${addResourceTpl}
-	</div>
-	`,
-			};
-		} else {
-			return {
-				template: `${cards}`,
-			};
-		}
-	},
-} as Meta;
+	if (args.wrapper) {
+		return `<div class="resourceCardWrapper${wrapperGridClass}">${cards}${addResourceTpl}</div>`;
+	} else {
+		return `${cards}`;
+	}
+}
 
-export const Basic = {
+const Template = (args: ResourceCardHTMLBasicStory) => ({
+	props: args,
+	template: getTemplate(args),
+});
+
+export const Basic: StoryObj<ResourceCardHTMLBasicStory> = {
 	args: {
 		wrapper: false,
 		wrapperGrid: false,
@@ -193,4 +192,5 @@ export const Basic = {
 		actionTemplate: `<button type="button" class="button">Lorem ipsum</button>`,
 		actionTemplateDisabled: `<button type="button" class="button" disabled="disabled">Lorem ipsum</button>`,
 	},
+	render: Template,
 };
