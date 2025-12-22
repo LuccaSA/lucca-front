@@ -7,7 +7,7 @@ import { ResourceCardButtonComponent, ResourceCardComponent, ResourceCardLinkCom
 import { StatusBadgeComponent } from '@lucca-front/ng/status-badge';
 import { TagComponent } from '@lucca-front/ng/tag';
 import { LuTooltipModule } from '@lucca-front/ng/tooltip';
-import { applicationConfig, Meta, moduleMetadata } from '@storybook/angular';
+import { applicationConfig, Meta, moduleMetadata, StoryObj } from '@storybook/angular';
 
 interface ResourceCardAngularBasicStory {
 	wrapperDraggable: boolean;
@@ -51,49 +51,49 @@ export default {
 			providers: [provideRouter([{ path: 'iframe.html', redirectTo: '', pathMatch: 'full' }])],
 		}),
 	],
-	render: (args: ResourceCardAngularBasicStory) => {
-		const sizeWrapperAttr = args.wrapperSize === 'S' ? ` size="S"` : ``;
-		const headingInfosTpl = args.infos
-			? `
+} as Meta;
+
+function getTemplate(args: ResourceCardAngularBasicStory) {
+	const sizeWrapperAttr = args.wrapperSize === 'S' ? ` size="S"` : ``;
+	const headingInfosTpl = args.infos
+		? `
 			<ng-container resourceCardInfos>
 				<lu-status-badge label="Status" />
 				<lu-status-badge label="Status" />
 			</ng-container>`
-			: ``;
-		const descriptionTpl = args.content
-			? `
+		: ``;
+	const descriptionTpl = args.content
+		? `
 			<ng-container resourceCardContent>
 				Lorem <a href="#" luLink>ipsum</a> dolor sit amet, consectetur adipiscing elit, sed do.
 			</ng-container>`
-			: ``;
-		const beforeTpl = args.illustration
-			? `
+		: ``;
+	const beforeTpl = args.illustration
+		? `
 			<ng-container resourceCardIllustration>
 				<div class="pr-u-inlineSize100% pr-u-blockSize100% pr-u-borderRadiusDefault" style="background-color: var(--palettes-lavender-100)"></div>
 			</ng-container>`
-			: ``;
-		const afterTpl = args.action
-			? `
+		: ``;
+	const afterTpl = args.action
+		? `
 			<ng-container resourceCardAction>
 				<button type="button" luButton>Lorem ipsum</button>
 			</ng-container>`
-			: ``;
-		const cards = `
+		: ``;
+	const cards = `
 		<lu-resource-card cdkDrag>
 			<a href="#" luResourceCardAction>Lorem ipsum dolor</a>${headingInfosTpl}${beforeTpl}${afterTpl}${descriptionTpl}
 		</lu-resource-card>`.repeat(3);
 
-		return {
-			template: `
-	<lu-resource-card-wrapper cdkDropList draggable${sizeWrapperAttr}>${cards}
-	</lu-resource-card-wrapper>
+	return `<lu-resource-card-wrapper cdkDropList draggable${sizeWrapperAttr}>${cards}</lu-resource-card-wrapper>`;
+}
 
-	`,
-		};
-	},
-} as Meta;
+const Template = (args: ResourceCardAngularBasicStory) => ({
+	props: args,
+	template: getTemplate(args),
+});
 
-export const Basic = {
+export const Basic: StoryObj<ResourceCardAngularBasicStory> = {
 	args: {
 		wrapperSize: '',
 		infos: true,
@@ -101,4 +101,5 @@ export const Basic = {
 		illustration: true,
 		action: true,
 	},
+	render: Template,
 };
