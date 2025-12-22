@@ -37,7 +37,7 @@ import { HiddenArgType } from 'stories/helpers/common-arg-types';
 import { createTestStory, getStoryGenerator } from 'stories/helpers/stories';
 import { StoryModelDisplayComponent } from 'stories/helpers/story-model-display.component';
 import { expect, screen, userEvent, within } from 'storybook/test';
-import { waitForAngular } from '../../../helpers/test';
+import { sleep, waitForAngular } from '../../../helpers/test';
 import { allLegumes, colorNameByColor, coreSelectStory, FilterLegumesPipe, ILegume, LuCoreSelectInputStoryComponent, SortLegumesPipe } from './select.utils';
 
 type LuMultiSelectInputStoryComponent = LuCoreSelectInputStoryComponent & {
@@ -225,7 +225,7 @@ export const SelectAllTEST = createTestStory(SelectAll, async (context) => {
 		}
 	}
 	await userEvent.click(input);
-	await waitForAngular();
+	await sleep(200);
 	const panel = within(screen.getByRole('listbox'));
 	const selectAllCheckbox = panel.getByLabelText('Tout sélectionner');
 	await userEvent.click(selectAllCheckbox);
