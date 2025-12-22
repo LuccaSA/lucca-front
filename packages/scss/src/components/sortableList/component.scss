@@ -1,5 +1,8 @@
 @use '@lucca-front/icons/src/commons/utils/icon';
 @use '@lucca-front/scss/src/commons/utils/namespace';
+@use '@lucca-front/scss/src/commons/utils/reset';
+
+@use '@lucca-front/scss/src/components/button/exports' as button;
 
 @mixin component($atRoot: namespace.$defaultAtRoot) {
 	background-color: var(--pr-t-elevation-surface-raised);
@@ -7,6 +10,7 @@
 	border-radius: var(--pr-t-border-radius-default);
 	list-style: none;
 	padding: 0;
+	overflow: hidden;
 
 	@at-root ($atRoot) {
 		.sortableList-item {
@@ -18,7 +22,9 @@
 			position: relative;
 			text-decoration: none;
 			gap: var(--pr-t-spacings-100);
-			padding: var(--components-sortableList-padding);
+
+			// required to overload the cdk padding reset
+			padding: var(--components-sortableList-padding) !important;
 
 			&:last-child {
 				border: 0;
@@ -51,14 +57,27 @@
 		}
 
 		.sortableList-item-handler {
+			&.button {
+				@include button.S;
+				@include button.onlyIcon;
+				@include button.ghost;
+
+				--components-button-padding: var(--pr-t-spacings-50);
+			}
+
 			color: var(--palettes-neutral-600);
 			font-size: var(--components-sortableList-handler-size);
 			cursor: move;
+			inline-size: auto;
+			border-radius: var(--pr-t-border-radius-small);
+			align-self: center;
 
-			&::before {
-				@include icon.generate('drag');
+			&:not(:has(.lucca-icon)) {
+				&::before {
+					@include icon.generate('drag');
 
-				vertical-align: top;
+					vertical-align: top;
+				}
 			}
 		}
 

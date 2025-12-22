@@ -8,7 +8,6 @@ import { FieldType, FieldTypeConfig, FormlyModule } from '@ngx-formly/core';
 	styleUrl: 'formly-field.common.scss',
 	templateUrl: './textarea.html',
 	changeDetection: ChangeDetectionStrategy.OnPush,
-	standalone: true,
 	imports: [ReactiveFormsModule, FormlyModule, LuInputDirective],
 })
 export class LuFormlyFieldTextarea extends FieldType<FieldTypeConfig> {

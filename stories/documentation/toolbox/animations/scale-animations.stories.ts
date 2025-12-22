@@ -5,7 +5,6 @@ import { applicationConfig, Meta, StoryObj } from '@storybook/angular';
 
 @Component({
 	selector: 'story-scale-animation',
-	standalone: true,
 	template: `
 		<div class="grid mod-auto">
 			<div class="grid-column ng-demo-block">

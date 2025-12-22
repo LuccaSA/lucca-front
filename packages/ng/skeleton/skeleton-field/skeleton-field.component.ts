@@ -2,7 +2,6 @@ import { booleanAttribute, ChangeDetectionStrategy, Component, computed, input, 
 
 @Component({
 	selector: 'lu-skeleton-field',
-	standalone: true,
 	templateUrl: './skeleton-field.component.html',
 	styleUrl: './skeleton-field.component.scss',
 	changeDetection: ChangeDetectionStrategy.OnPush,
@@ -16,5 +15,5 @@ export class SkeletonFieldComponent {
 
 	readonly lines = computed(() => Array.from({ length: this.rows() }));
 
-	readonly getRandomPercent = (min = 33, max = 66) => Math.floor(Math.random() * (max - min) + min);
+	readonly getRandomPercent = (min: number = 33, max: number = 66): string => `${Math.floor(Math.random() * (max - min) + min).toString()}%`;
 }

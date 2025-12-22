@@ -6,7 +6,6 @@ import { applicationConfig, Meta, StoryObj } from '@storybook/angular';
 
 @Component({
 	selector: 'sidepanel-content',
-	standalone: true,
 	template: '<p>General Kenobi</p>',
 })
 class SidepanelContentComponent implements ILuModalContent {
@@ -16,7 +15,6 @@ class SidepanelContentComponent implements ILuModalContent {
 
 @Component({
 	selector: 'sidepanel-stories',
-	standalone: true,
 	imports: [SidepanelContentComponent, LuSidepanelModule],
 	template: `
 		<h1>Sidepanels</h1>

@@ -15,13 +15,12 @@ import {
 	OnDestroy,
 	OnInit,
 	output,
-	Output,
 	signal,
 	TemplateRef,
 	Type,
 	ViewChild,
 } from '@angular/core';
-import { toSignal } from '@angular/core/rxjs-interop';
+import { outputFromObservable, toSignal } from '@angular/core/rxjs-interop';
 import { ControlValueAccessor } from '@angular/forms';
 import { getIntl, PortalContent } from '@lucca-front/ng/core';
 import { FILTER_PILL_HOST_COMPONENT, FILTER_PILL_INPUT_COMPONENT, FilterPillInputComponent } from '@lucca-front/ng/filter-pills';
@@ -66,6 +65,8 @@ export abstract class ALuSelectInputComponent<TOption, TValue> implements OnDest
 	public disabled$ = new BehaviorSubject(false);
 	filterPillDisabled = toSignal(this.disabled$);
 
+	prefix = input<PortalContent | null>(null);
+
 	@Input()
 	set placeholder(value: string) {
 		this.placeholder$.next(value);
@@ -85,7 +86,7 @@ export abstract class ALuSelectInputComponent<TOption, TValue> implements OnDest
 	#defaultClearable = false;
 
 	get searchable(): boolean {
-		return this.clueChange.observed;
+		return this.clueChange$.observed;
 	}
 
 	@Input()
@@ -180,10 +181,12 @@ export abstract class ALuSelectInputComponent<TOption, TValue> implements OnDest
 
 	treeGenerator?: TreeGenerator<TOption, TreeNode<TOption>>;
 
-	@Output() clueChange = new EventEmitter<string>();
-	@Output() nextPage = new EventEmitter<void>();
-	@Output() previousPage = new EventEmitter<void>();
-	@Output() addOption = new EventEmitter<string>();
+	clueChange$ = new Subject<string>();
+	clueChange = outputFromObservable(this.clueChange$);
+	nextPage$ = new Subject<void>();
+	nextPage = outputFromObservable(this.nextPage$);
+	previousPage = output<void>();
+	addOption = output<string>();
 
 	public valueSignal = signal<TValue>(null);
 	isFilterPillEmpty = computed(() => this.valueSignal() === null);
@@ -210,7 +213,7 @@ export abstract class ALuSelectInputComponent<TOption, TValue> implements OnDest
 		if (!skipPanelOpen && !this.isPanelOpen) {
 			this.openPanel(clue);
 		} else if (this.lastEmittedClue !== clue) {
-			this.clueChange.emit(clue);
+			this.clueChange$.next(clue);
 			this.lastEmittedClue = clue;
 		}
 	}
@@ -222,7 +225,7 @@ export abstract class ALuSelectInputComponent<TOption, TValue> implements OnDest
 	clue: string | null = null;
 	// This is the clue stored after we selected an option to know if we should emit an empty clue on open or not
 	lastEmittedClue: string = '';
-	clue$ = defer(() => this.clueChange.pipe(startWith(this.clue)));
+	clue$ = defer(() => this.clueChange$.pipe(startWith(this.clue)));
 
 	addOptionStrategy$ = new BehaviorSubject<CoreSelectAddOptionStrategy>('never');
 	shouldDisplayAddOption$ = this.addOptionStrategy$.pipe(
@@ -397,7 +400,7 @@ export abstract class ALuSelectInputComponent<TOption, TValue> implements OnDest
 
 		this.panelRef.valueChanged.subscribe((value) => this.updateValue(value));
 
-		this.#pageChanged(this.panelRef.nextPage).subscribe(() => this.nextPage.emit());
+		this.#pageChanged(this.panelRef.nextPage).subscribe(() => this.nextPage$.next());
 		this.#pageChanged(this.panelRef.previousPage).subscribe(() => this.previousPage.emit());
 
 		this.panelRef.activeOptionIdChanged.subscribe((optionId) => {

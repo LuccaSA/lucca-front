@@ -1,9 +1,9 @@
 import { FormsModule } from '@angular/forms';
-import { FormFieldComponent, FramedInputComponent } from '@lucca-front/ng/form-field';
+import { FormFieldComponent, InputFramedComponent } from '@lucca-front/ng/form-field';
 import { CheckboxInputComponent, RadioComponent, RadioGroupInputComponent } from '@lucca-front/ng/forms';
+import { GridColumnComponent, GridComponent } from '@lucca-front/ng/grid';
 import { IconComponent } from '@lucca-front/ng/icon';
 import { Meta, moduleMetadata } from '@storybook/angular';
-import { cleanupTemplate } from 'stories/helpers/stories';
 
 interface InputFramedBasicStory {
 	grid: boolean;
@@ -14,6 +14,7 @@ interface InputFramedBasicStory {
 	checkbox: boolean;
 	center: boolean;
 	inlineMessage: string;
+	size: string;
 }
 
 export default {
@@ -30,7 +31,9 @@ export default {
 				RadioGroupInputComponent,
 				CheckboxInputComponent,
 				FormsModule,
-				FramedInputComponent,
+				InputFramedComponent,
+				GridComponent,
+				GridColumnComponent,
 			],
 		}),
 	],
@@ -59,126 +62,171 @@ export default {
 		grid: {
 			if: { arg: 'panel', truthy: false },
 		},
+		size: {
+			options: ['', 'L'],
+			control: {
+				type: 'select',
+			},
+		},
 	},
 	render: (args: InputFramedBasicStory) => {
-		const column = args.grid ? ` class="grid-column" [attr.style]="'--grid-colspanAtMediaMinXS: 1'"` : ``;
+		//const column = args.grid ? ` class="grid-column" [attr.style]="'--grid-colspanAtMediaMinXS: 1'"` : ``;
 		const panelTemplate = args.panel ? ` framedPortal="Lorem ipsum dolor"` : ``;
 		const tagTemplate = args.tag ? ` tag="Tag"` : ``;
-		const infoTemplate = args.info ? `<ng-container info>Lorem ipsum dolor</ng-container>` : ``;
+		const infoTemplate = args.info
+			? `
+				<ng-container info>Lorem ipsum dolor</ng-container>`
+			: ``;
 		const center = args.center ? ` center` : ``;
 		const framedCenter = args.center ? ` framedCenter` : ``;
+		const framedSize = args.size === 'L' ? ` framedSize="L"` : ``;
+		const size = args.size === 'L' ? ` size="L"` : ``;
 		const inlineMessage = args.inlineMessage ? ` inlineMessage="${args.inlineMessage}"` : ``;
 
 		const illustrationTemplate = args.illustration
-			? `<ng-container illustration>
+			? `
+				<ng-container illustration>
 					<div style="background-color: var(--palettes-product-100); color: var(--palettes-product-700)" class="pr-u-padding100 pr-u-borderRadiusXL pr-u-displayFlex">
 						<lu-icon icon="moneyBag" />
 					</div>
 				</ng-container>`
 			: ``;
 		const illustrationTemplateDisabled = args.illustration
-			? `<ng-container illustration>
+			? `
+				<ng-container illustration>
 					<div style="background-color: var(--palettes-neutral-50); color: var(--pr-t-color-input-text-disabled)" class="pr-u-padding100 pr-u-borderRadiusXL pr-u-displayFlex">
 						<lu-icon icon="moneyBag" />
 					</div>
 				</ng-container>`
 			: ``;
-		const templateCheckbox = `<lu-framed-input${column}${panelTemplate}${center}>
+		const templateCheckbox = `
+			<lu-input-framed${panelTemplate}${center}${size}>
 				<lu-form-field label="Option A"${inlineMessage}${tagTemplate}>
 					<lu-checkbox-input [(ngModel)]="exampleA" required />
-				</lu-form-field>
-				${infoTemplate}
-				${illustrationTemplate}
-			</lu-framed-input>
-			<lu-framed-input${column}${panelTemplate}${center}>
+				</lu-form-field>${infoTemplate}${illustrationTemplate}
+			</lu-input-framed>
+			<lu-input-framed${panelTemplate}${center}${size}>
 				<lu-form-field label="Option B"${inlineMessage}${tagTemplate}>
 					<lu-checkbox-input [(ngModel)]="exampleB" required />
-				</lu-form-field>
-				${infoTemplate}
-				${illustrationTemplate}
-			</lu-framed-input>
-			<lu-framed-input${column}${panelTemplate}${center}>
+				</lu-form-field>${infoTemplate}${illustrationTemplate}
+			</lu-input-framed>
+			<lu-input-framed${panelTemplate}${center}${size}>
 				<lu-form-field label="Option C"${inlineMessage}${tagTemplate}>
 					<lu-checkbox-input disabled [(ngModel)]="exampleC" required />
-				</lu-form-field>
-				${infoTemplate}
-				${illustrationTemplateDisabled}
-			</lu-framed-input>
-			<lu-framed-input${column}${panelTemplate}${center}>
+				</lu-form-field>${infoTemplate}${illustrationTemplateDisabled}
+			</lu-input-framed>
+			<lu-input-framed${panelTemplate}${center}${size}>
 				<lu-form-field label="Option D"${inlineMessage}${tagTemplate}>
 					<lu-checkbox-input [(ngModel)]="exampleD" required />
-				</lu-form-field>
-				${infoTemplate}
-				${illustrationTemplate}
-			</lu-framed-input>`;
-		const template = `<lu-radio${column} value="A"${panelTemplate}${tagTemplate}${inlineMessage}>
-				Option A
-				${infoTemplate}
-				${illustrationTemplate}
+				</lu-form-field>${infoTemplate}${illustrationTemplate}
+			</lu-input-framed>
+		`;
+		const templateGridCheckbox = `
+			<lu-grid-column colspan="2" [responsive]="{ colspanAtMediaMinXS: 1 }">
+				<lu-input-framed${panelTemplate}${center}${size}>
+					<lu-form-field label="Option A"${inlineMessage}${tagTemplate}>
+						<lu-checkbox-input [(ngModel)]="exampleA" required />
+					</lu-form-field>${infoTemplate}${illustrationTemplate}
+				</lu-input-framed>
+			</lu-grid-column>
+			<lu-grid-column colspan="2" [responsive]="{ colspanAtMediaMinXS: 1 }">
+				<lu-input-framed${panelTemplate}${center}${size}>
+					<lu-form-field label="Option B"${inlineMessage}${tagTemplate}>
+						<lu-checkbox-input [(ngModel)]="exampleB" required />
+					</lu-form-field>${infoTemplate}${illustrationTemplate}
+				</lu-input-framed>
+			</lu-grid-column>
+			<lu-grid-column colspan="2" [responsive]="{ colspanAtMediaMinXS: 1 }">
+				<lu-input-framed${panelTemplate}${center}${size}>
+					<lu-form-field label="Option C"${inlineMessage}${tagTemplate}>
+						<lu-checkbox-input disabled [(ngModel)]="exampleC" required />
+					</lu-form-field>${infoTemplate}${illustrationTemplateDisabled}
+				</lu-input-framed>
+			</lu-grid-column>
+			<lu-grid-column colspan="2" [responsive]="{ colspanAtMediaMinXS: 1 }">
+				<lu-input-framed${panelTemplate}${center}${size}>
+					<lu-form-field label="Option D"${inlineMessage}${tagTemplate}>
+						<lu-checkbox-input [(ngModel)]="exampleD" required />
+					</lu-form-field>${infoTemplate}${illustrationTemplate}
+				</lu-input-framed>
+			</lu-grid-column>
+		`;
+		const template = `
+			<lu-radio value="A"${panelTemplate}${tagTemplate}${inlineMessage}>
+				Option A${infoTemplate}${illustrationTemplate}
 			</lu-radio>
-			<lu-radio ${column}value="B"${panelTemplate}${tagTemplate}${inlineMessage}>
-				Option B
-				${infoTemplate}
-				${illustrationTemplate}
+			<lu-radio value="B"${panelTemplate}${tagTemplate}${inlineMessage}>
+				Option B${infoTemplate}${illustrationTemplate}
 			</lu-radio>
-			<lu-radio ${column}value="C"${panelTemplate}${tagTemplate}${inlineMessage} disabled>
-				Option C
-				${infoTemplate}
-				${illustrationTemplateDisabled}
+			<lu-radio value="C"${panelTemplate}${tagTemplate}${inlineMessage} disabled>
+				Option C${infoTemplate}${illustrationTemplateDisabled}
 			</lu-radio>
-			<lu-radio ${column}value="D"${panelTemplate}${tagTemplate}${inlineMessage}>
-				Option D
-				${infoTemplate}
-				${illustrationTemplate}
-			</lu-radio>`;
+			<lu-radio value="D"${panelTemplate}${tagTemplate}${inlineMessage}>
+				Option D${infoTemplate}${illustrationTemplate}
+			</lu-radio>
+		`;
+		const templateGrid = `
+			<lu-grid-column colspan="2" [responsive]="{ colspanAtMediaMinXS: 1 }">
+				<lu-radio value="A"${panelTemplate}${tagTemplate}${inlineMessage}>
+					Option A${infoTemplate}${illustrationTemplate}
+				</lu-radio>
+			</lu-grid-column>
+			<lu-grid-column colspan="2" [responsive]="{ colspanAtMediaMinXS: 1 }">
+				<lu-radio value="B"${panelTemplate}${tagTemplate}${inlineMessage}>
+					Option B${infoTemplate}${illustrationTemplate}
+				</lu-radio>
+			</lu-grid-column>
+			<lu-grid-column colspan="2" [responsive]="{ colspanAtMediaMinXS: 1 }">
+				<lu-radio value="C"${panelTemplate}${tagTemplate}${inlineMessage} disabled>
+					Option C${infoTemplate}${illustrationTemplateDisabled}
+				</lu-radio>
+			</lu-grid-column>
+			<lu-grid-column colspan="2" [responsive]="{ colspanAtMediaMinXS: 1 }">
+				<lu-radio value="D"${panelTemplate}${tagTemplate}${inlineMessage}>
+					Option D${infoTemplate}${illustrationTemplate}
+				</lu-radio>
+			</lu-grid-column>
+		`;
 		if (args.checkbox) {
 			if (args.grid) {
 				return {
 					props: { exampleB: true },
-					template: cleanupTemplate(`
+					template: `
 	<lu-form-field label="Label" layout="fieldset">
 		<div class="inputFramedWrapper">
-			<div class="grid" [attr.style]="'--grid-columns: 2; --grid-colspan: 2'">
-				${templateCheckbox}
-			</div>
-	</div>
-	</lu-form-field>`),
+			<lu-grid columns="2">${templateGridCheckbox}</lu-grid>
+		</div>
+	</lu-form-field>`,
 				};
 			} else {
 				return {
 					props: { exampleB: true },
-					template: cleanupTemplate(`
+					template: `
 	<lu-form-field label="Label" layout="fieldset">
-		<div class="inputFramedWrapper">
-			${templateCheckbox}
-		</div>
-	</lu-form-field>`),
+		<div class="inputFramedWrapper">${templateCheckbox}</div>
+	</lu-form-field>`,
 				};
 			}
 		} else {
 			if (args.grid) {
 				return {
 					props: { example: 'B' },
-					template: cleanupTemplate(`
+					template: `
 	<lu-form-field label="Label" errorInlineMessage="Error inline message">
-		<lu-radio-group-input [(ngModel)]="example" framed required${framedCenter}>
-			<div class="grid" [attr.style]="'--grid-columns: 2; --grid-colspan: 2'">
-				${template}
-			</div>
+		<lu-radio-group-input [(ngModel)]="example" framed required${framedCenter}${framedSize}>
+			<lu-grid columns="2">${templateGrid}</lu-grid>
 		</lu-radio-group-input>
 	</lu-form-field>
-	`),
+	`,
 				};
 			} else {
 				return {
 					props: { example: 'B' },
-					template: cleanupTemplate(`
+					template: `
 	<lu-form-field label="Label" errorInlineMessage="Error inline message">
-		<lu-radio-group-input [(ngModel)]="example" framed required${framedCenter}>
-			${template}
-		</lu-radio-group-input>
+		<lu-radio-group-input [(ngModel)]="example" framed required${framedCenter}${framedSize}>${template}</lu-radio-group-input>
 	</lu-form-field>
-	`),
+	`,
 				};
 			}
 		}
@@ -190,10 +238,11 @@ export const Basic = {
 		panel: false,
 		grid: false,
 		illustration: false,
+		center: false,
 		info: false,
 		tag: false,
 		checkbox: false,
-		center: false,
-		inlineMessage: 'Lorem ipsum dolor',
+		inlineMessage: '',
+		size: '',
 	},
 };

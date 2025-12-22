@@ -1,11 +1,11 @@
-@if (!isFilterPill) {
+@if (!isFilterPill()) {
 	<input
 		luInput
 		type="checkbox"
 		class="checkboxField-input"
 		[class.inputFramed-header-input]="framed"
 		[formControl]="ngControl.control"
-		[attr.aria-checked]="mixed ? 'mixed' : null"
+		[attr.aria-checked]="mixed() ? 'mixed' : null"
 	/>
 	<span class="checkboxField-icon" [class.inputFramed-header-icon]="framed" aria-hidden="true"
 		><span class="checkboxField-icon-check"></span
@@ -23,7 +23,7 @@
 			class="filterPill-checkbox-input"
 			luInput
 			[formControl]="ngControl.control"
-			[attr.aria-checked]="mixed ? 'mixed' : null"
+			[attr.aria-checked]="mixed() ? 'mixed' : null"
 			[attr.id]="filterPillInputId"
 		/>
 		<span class="filterPill-checkbox-icon" aria-hidden="true">

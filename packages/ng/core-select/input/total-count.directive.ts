@@ -6,7 +6,6 @@ import { CORE_SELECT_API_TOTAL_COUNT_PROVIDER, CoreSelectApiTotalCountProvider }
 	// The attribute is already prefixed with "lu-simple-select"
 	// eslint-disable-next-line @angular-eslint/directive-selector
 	selector: 'lu-simple-select[totalCount],lu-multi-select[totalCount]',
-	standalone: true,
 	providers: [
 		{
 			provide: CORE_SELECT_API_TOTAL_COUNT_PROVIDER,

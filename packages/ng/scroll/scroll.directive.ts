@@ -1,5 +1,5 @@
 /* eslint-disable @angular-eslint/no-output-on-prefix */
-import { Directive, ElementRef, EventEmitter, HostListener, Input, OnInit, Output } from '@angular/core';
+import { Directive, ElementRef, input, OnInit, output } from '@angular/core';
 import { Subject } from 'rxjs';
 import { debounceTime } from 'rxjs/operators';
 import { ILuScrollable } from './scroll.model';
@@ -10,24 +10,27 @@ import { ILuScrollable } from './scroll.model';
 @Directive({
 	selector: '[luScroll]',
 	exportAs: 'luScroll',
-	standalone: true,
+	host: {
+		'(scroll)': 'scroll($event)',
+	},
 })
 export class LuScrollDirective implements ILuScrollable, OnInit {
-	@Input() debounceTime = 100;
-	@Output() onScroll = new EventEmitter<Event>();
-	@Output() onScrollTop = new EventEmitter<Event>();
-	@Output() onScrollBottom = new EventEmitter<Event>();
-	@Output() onScrollLeft = new EventEmitter<Event>();
-	@Output() onScrollRight = new EventEmitter<Event>();
-	private scrollSubject = new Subject<Event>();
-	private scroll$ = this.scrollSubject.asObservable().pipe(debounceTime(this.debounceTime));
-	@HostListener('scroll', ['$event'])
-	_scroll($event: Event) {
-		this.scrollSubject.next($event);
+	readonly debounceTime = input<number>(100);
+	readonly onScroll = output<Event>();
+	readonly onScrollTop = output<Event>();
+	readonly onScrollBottom = output<Event>();
+	readonly onScrollLeft = output<Event>();
+	readonly onScrollRight = output<Event>();
+
+	#scrollSubject = new Subject<Event>();
+	#scroll$ = this.#scrollSubject.asObservable().pipe(debounceTime(this.debounceTime()));
+
+	scroll(event: Event) {
+		this.#scrollSubject.next(event);
 	}
 
 	ngOnInit(): void {
-		this.scroll$.subscribe((scrollEvent) => this.emitScrollEvents(scrollEvent));
+		this.#scroll$.subscribe((scrollEvent) => this.emitScrollEvents(scrollEvent));
 	}
 	private emitScrollEvents($event: Event) {
 		this.onScroll.emit($event);

@@ -1,10 +1,29 @@
 import { Component } from '@angular/core';
+import { ButtonComponent } from '@lucca-front/ng/button';
+import {
+	CalloutActionsComponent,
+	CalloutComponent,
+	CalloutDisclosureComponent,
+	CalloutFeedbackItemComponent,
+	CalloutFeedbackItemDescriptionDirective,
+	CalloutFeedbackListComponent,
+	CalloutPopoverComponent,
+} from '@lucca-front/ng/callout';
 import { Meta, StoryObj } from '@storybook/angular';
 
 @Component({
-	standalone: true,
 	selector: 'callout-stories',
 	templateUrl: './callout.stories.html',
+	imports: [
+		CalloutComponent,
+		CalloutActionsComponent,
+		ButtonComponent,
+		CalloutDisclosureComponent,
+		CalloutFeedbackItemDescriptionDirective,
+		CalloutFeedbackListComponent,
+		CalloutFeedbackItemComponent,
+		CalloutPopoverComponent,
+	],
 })
 class CalloutStory {}
 

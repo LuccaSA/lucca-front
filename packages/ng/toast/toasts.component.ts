@@ -1,8 +1,7 @@
 import { AsyncPipe } from '@angular/common';
-import { ChangeDetectionStrategy, Component, Input, OnDestroy } from '@angular/core';
-import { getIntl, PortalContent, PortalDirective } from '@lucca-front/ng/core';
-import { merge, Observable, Subject } from 'rxjs';
-import { takeUntil } from 'rxjs/operators';
+import { ChangeDetectionStrategy, Component, inject, input } from '@angular/core';
+import { getIntl, isNotNil, PortalContent, PortalDirective, ɵeffectWithDeps } from '@lucca-front/ng/core';
+import { merge, Observable } from 'rxjs';
 import { LuToast, LuToastInput, LuToastType } from './toasts.model';
 import { LuToastsService } from './toasts.service';
 import { LU_TOAST_TRANSLATIONS } from './toasts.translate';
@@ -12,53 +11,53 @@ import { LU_TOAST_TRANSLATIONS } from './toasts.translate';
 	templateUrl: './toasts.component.html',
 	styleUrl: './toasts.component.scss',
 	changeDetection: ChangeDetectionStrategy.OnPush,
-	standalone: true,
 	imports: [AsyncPipe, PortalDirective],
 })
-export class LuToastsComponent implements OnDestroy {
-	@Input() public bottom = false;
-	@Input() public set sources(sources: Array<Observable<LuToastInput>>) {
-		merge(...sources)
-			.pipe(takeUntil(this.destroy$))
-			.subscribe((toast) => this.toastsService.addToast(toast));
+export class LuToastsComponent {
+	readonly #toastsService = inject(LuToastsService);
+
+	readonly bottom = input(false);
+	readonly sources = input<Array<Observable<LuToastInput>>>();
+
+	constructor() {
+		ɵeffectWithDeps([this.sources], (sources, onCleanup) => {
+			if (isNotNil(sources)) {
+				const sub = merge(...sources).subscribe((toast) => this.#toastsService.addToast(toast));
+
+				onCleanup(() => {
+					sub.unsubscribe();
+				});
+			}
+		});
 	}
 
-	public toasts$ = this.toastsService.toasts$;
+	readonly toasts$ = this.#toastsService.toasts$;
 
-	private destroy$ = new Subject<void>();
+	readonly intl = getIntl(LU_TOAST_TRANSLATIONS);
 
-	public intl = getIntl(LU_TOAST_TRANSLATIONS);
-
-	constructor(private toastsService: LuToastsService) {}
-
-	public ngOnDestroy(): void {
-		this.destroy$.next();
-		this.destroy$.complete();
-	}
-
-	public iconClassByToastType: Record<LuToastType, string> = {
+	readonly iconClassByToastType: Record<LuToastType, string> = {
 		Info: 'icon-signInfo',
 		Success: 'icon-signSuccess',
 		Error: 'icon-signError',
 		Warning: 'icon-signWarning',
 	};
 
-	public paletteClassByToastType: Record<LuToastType, string> = {
+	readonly paletteClassByToastType: Record<LuToastType, string> = {
 		Info: '',
 		Success: 'palette-success',
 		Error: 'palette-error',
 		Warning: 'palette-warning',
 	};
 
-	public isStringPortalContent(message: PortalContent): message is string {
+	isStringPortalContent(message: PortalContent): message is string {
 		return typeof message === 'string';
 	}
 
-	public removeToast(toast: LuToast): void {
-		this.toastsService.removeToast(toast);
+	removeToast(toast: LuToast): void {
+		this.#toastsService.removeToast(toast);
 	}
 
-	public isOnlyDismissibleManually(toast: LuToast): boolean {
-		return this.toastsService.isOnlyDismissibleManually(toast);
+	isOnlyDismissibleManually(toast: LuToast): boolean {
+		return this.#toastsService.isOnlyDismissibleManually(toast);
 	}
 }

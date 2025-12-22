@@ -11,7 +11,6 @@ import { ALuDropdownItem } from './dropdown-item.model';
 			multi: true,
 		},
 	],
-	standalone: true,
 })
 export class LuDropdownItemDirective extends ALuDropdownItem implements OnDestroy {
 	// arreter les ONxxxx

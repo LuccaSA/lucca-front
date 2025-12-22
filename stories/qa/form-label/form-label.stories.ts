@@ -2,14 +2,13 @@ import { Component } from '@angular/core';
 import { Meta, moduleMetadata, StoryObj } from '@storybook/angular';
 
 @Component({
-	standalone: true,
 	selector: 'form-label-stories',
 	templateUrl: './form-label.stories.html',
 })
 class FormLabelStory {}
 
 export default {
-	title: 'QA/Form Label',
+	title: 'QA/FormLabel',
 	component: FormLabelStory,
 	decorators: [
 		moduleMetadata({

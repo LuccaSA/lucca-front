@@ -2,15 +2,15 @@ import { NgPlural, NgPluralCase } from '@angular/common';
 import { ChangeDetectionStrategy, Component } from '@angular/core';
 import { FormsModule } from '@angular/forms';
 import { provideAnimations } from '@angular/platform-browser/animations';
-import { LuInputModule } from '@lucca-front/ng/input';
+import { ClearComponent } from '@lucca-front/ng/clear';
+import { LuInputDirective, LuInputDisplayerDirective } from '@lucca-front/ng/input';
 import { LuOptionModule } from '@lucca-front/ng/option';
 import { LuSelectInputComponent } from '@lucca-front/ng/select';
 import { Meta, applicationConfig, StoryObj } from '@storybook/angular';
 
 @Component({
 	selector: 'select-advanced-stories',
-	standalone: true,
-	imports: [LuSelectInputComponent, LuOptionModule, LuInputModule, NgPlural, NgPluralCase, FormsModule],
+	imports: [LuSelectInputComponent, LuOptionModule, NgPlural, NgPluralCase, FormsModule, ClearComponent, LuInputDirective, LuInputDisplayerDirective],
 	template: `
 		<label class="textfield">
 			<lu-select class="textfield-input" placeholder="Select advanced" [(ngModel)]="model" multiple>
@@ -35,7 +35,7 @@ import { Meta, applicationConfig, StoryObj } from '@storybook/angular';
 						<lu-option *luForOptions="let option" [value]="option">{{ option.name }}</lu-option>
 					</div>
 				</lu-option-picker-advanced>
-				<lu-input-clearer />
+				<lu-clear />
 			</lu-select>
 			<span class="textfield-label">Choisissez une couleur</span>
 		</label>
@@ -73,14 +73,18 @@ const template = (args: SelectAdvancedStory) => ({
 });
 
 const code = `
-import { LuInputModule } from '@lucca-front/ng/input';
+import { ChipComponent } from '@lucca-front/ng/chip';
+import { LuInputDirective } from '@lucca-front/ng/input';
+import { ClearComponent } from '@lucca-front/ng/clear';
+import { FormsModule } from '@angular/forms';
+import { NgPlural, NgPluralCase } from '@angular/common';
 import { LuOptionModule } from '@lucca-front/ng/option';
 import { LuSelectInputComponent } from '@lucca-front/ng/select';
+import { LuInputDisplayerDirective } from './displayer/index';
 
 @Component({
 	selector: 'select-advanced-story',
-	standalone: true,
-	imports: [LuSelectInputComponent, LuOptionModule, LuInputModule, NgPlural, NgPluralCase, FormsModule],
+	imports: [LuSelectInputComponent, LuOptionModule, NgPlural, NgPluralCase, FormsModule, ClearComponent, LuInputDirective, LuInputDisplayerDirective, ChipComponent],
 	template: \`
 	<label class="textfield">
 		<lu-select
@@ -94,7 +98,7 @@ import { LuSelectInputComponent } from '@lucca-front/ng/select';
 					<ng-template ngPluralCase="0" />
 					<ng-template ngPluralCase="one">{{ colors[0].name }}</ng-template>
 					<ng-template ngPluralCase="other">
-						<span class="chip mod-unkillable">{{ colors.length }}</span>
+						<lu-chip withEllipsis unkillable>{{ colors.length }}</lu-chip>
 						couleurs
 					</ng-template>
 				</ng-container>
@@ -108,7 +112,7 @@ import { LuSelectInputComponent } from '@lucca-front/ng/select';
 				</header>
 				<lu-option *luForOptions="let option" [value]="option">{{ option.name }}</lu-option>
 			</lu-option-picker-advanced>
-			<lu-input-clearer />
+			<lu-clear />
 		</lu-select>
 		<span class="textfield-label">Choisissez une couleur</span>
 	</label>

@@ -2,9 +2,22 @@ import { Component } from '@angular/core';
 import { Meta, StoryObj } from '@storybook/angular';
 
 @Component({
-	standalone: true,
 	selector: 'colors-stories',
 	templateUrl: './colors.stories.html',
+	styles: [
+		`
+			.demo {
+				display: flex;
+			}
+			.demo-color {
+				inline-size: 2.5rem;
+				block-size: 2.5rem;
+				display: flex;
+				align-items: center;
+				justify-content: center;
+			}
+		`,
+	],
 })
 class ColorsStory {}
 

@@ -8,7 +8,6 @@ import { BehaviorSubject, combineLatest, map, shareReplay, switchMap, timer } fr
 
 @Component({
 	selector: 'tooltip-stories',
-	standalone: true,
 	imports: [LuTooltipModule, ButtonComponent, AsyncPipe, DecimalPipe],
 	template: `
 		<p>Ellapsed: {{ (timer$ | async) / 10 | number: '1.1-1' }}s</p>

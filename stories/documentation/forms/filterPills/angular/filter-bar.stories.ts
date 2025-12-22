@@ -1,9 +1,11 @@
 import { allLegumes, FilterLegumesPipe } from '@/stories/forms/select/select.utils';
 import { provideHttpClient } from '@angular/common/http';
+import { LOCALE_ID } from '@angular/core';
 import { FormsModule } from '@angular/forms';
 import { ButtonComponent } from '@lucca-front/ng/button';
 import { LuCoreSelectApiV4Directive } from '@lucca-front/ng/core-select/api';
 import { DateInputComponent, DateRangeInputComponent } from '@lucca-front/ng/date2';
+import { DividerComponent } from '@lucca-front/ng/divider';
 import { FilterBarComponent, FilterPillAddonAfterDirective, FilterPillAddonBeforeDirective, FilterPillComponent } from '@lucca-front/ng/filter-pills';
 import { FormFieldComponent } from '@lucca-front/ng/form-field';
 import { CheckboxInputComponent, TextInputComponent } from '@lucca-front/ng/forms';
@@ -35,9 +37,10 @@ export default {
 				NumericBadgeComponent,
 				LuCoreSelectApiV4Directive,
 				LuMultiSelectInputComponent,
+				DividerComponent,
 			],
 		}),
-		applicationConfig({ providers: [provideHttpClient()] }),
+		applicationConfig({ providers: [provideHttpClient(), { provide: LOCALE_ID, useValue: 'fr-FR' }] }),
 	],
 	render: (args, { argTypes }) => {
 		return {
@@ -78,7 +81,8 @@ export default {
 		<lu-checkbox-input [ngModel]="false" />
 	</lu-filter-pill>
 	<lu-filter-pill label="Date de début" optional name="startingDate">
-		<lu-date-input [(ngModel)]="example1" /></lu-filter-pill>
+		<lu-date-input [(ngModel)]="example1" />
+	</lu-filter-pill>
 	<lu-filter-pill label="Période">
 		<lu-date-range-input [(ngModel)]="examplePeriod" />
 	</lu-filter-pill>
@@ -86,7 +90,7 @@ export default {
 		<lu-multi-select [ngModel]="[]" apiV4="/organization/structure/api/establishments" filterPillLabelPlural="établissements" />
 	</lu-filter-pill>
 	<lu-form-field label="Test" hiddenLabel>
-		<lu-text-input [ngModel]="example2" [ngModelOptions]="{standalone: true}" hasSearchIcon hasClearer />
+		<lu-text-input [ngModel]="example2" [ngModelOptions]="{ standalone: true }" hasSearchIcon hasClearer />
 	</lu-form-field>
 	<button  *luFilterPillAddonAfter type="submit" size="S" luButton="outlined">Exporter</button>
 </lu-filter-bar>`,

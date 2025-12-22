@@ -2,7 +2,6 @@ import { Component } from '@angular/core';
 import { Meta, StoryObj } from '@storybook/angular';
 
 @Component({
-	standalone: true,
 	selector: 'forms-radio-buttons-stories',
 	templateUrl: './radio-buttons.stories.html',
 })

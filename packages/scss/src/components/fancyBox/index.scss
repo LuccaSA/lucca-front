@@ -12,4 +12,8 @@
 			@include narrow;
 		}
 	}
+
+	&.mod-S {
+		@include S;
+	}
 }

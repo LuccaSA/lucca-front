@@ -1,10 +1,11 @@
 import { Component } from '@angular/core';
-import { Meta, moduleMetadata, StoryObj } from '@storybook/angular';
+import { InlineMessageComponent } from '@lucca-front/ng/inline-message';
+import { Meta, StoryObj, moduleMetadata } from '@storybook/angular';
 
 @Component({
-	standalone: true,
 	selector: 'inline-message-stories',
 	templateUrl: './inline-message.stories.html',
+	imports: [InlineMessageComponent],
 })
 class InlineMessageStory {}
 

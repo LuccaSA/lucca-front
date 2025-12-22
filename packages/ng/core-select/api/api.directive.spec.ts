@@ -1,4 +1,4 @@
-import { Component, Directive } from '@angular/core';
+import { ChangeDetectionStrategy, Component, Directive } from '@angular/core';
 import { fakeAsync } from '@angular/core/testing';
 import { LuSimpleSelectInputComponent } from '@lucca-front/ng/simple-select';
 import { Spectator, createComponentFactory } from '@ngneat/spectator/jest';
@@ -14,7 +14,6 @@ interface TestEntity {
 @Directive({
 	// eslint-disable-next-line @angular-eslint/directive-selector
 	selector: 'lu-simple-select[testApi]',
-	standalone: true,
 })
 class TestDirective extends ALuCoreSelectApiDirective<TestEntity> {
 	protected override params$ = this.clue$.pipe(
@@ -46,8 +45,8 @@ class TestDirective extends ALuCoreSelectApiDirective<TestEntity> {
 
 @Component({
 	template: ` <lu-simple-select testApi />`,
-	standalone: true,
 	imports: [TestDirective, LuSimpleSelectInputComponent],
+	changeDetection: ChangeDetectionStrategy.OnPush,
 })
 class HostComponent {}
 
@@ -140,19 +139,19 @@ describe('ALuCoreSelectApiDirective', () => {
 				{ id: 4, name: 'test 4' },
 			]),
 		);
-		select.nextPage.emit();
+		select.nextPage$.next();
 		spectator.tick(MAGIC_OPTION_SCROLL_DELAY);
 		spectator.tick();
 
 		// // Act (Page 3)
 		getOptionsSpy.mockReturnValue(of([{ id: 5, name: 'test 5' }]));
-		select.nextPage.emit();
+		select.nextPage$.next();
 		spectator.tick(MAGIC_OPTION_SCROLL_DELAY);
 		spectator.tick();
 
 		// Act (do nothing)
-		select.nextPage.emit();
-		select.nextPage.emit();
+		select.nextPage$.next();
+		select.nextPage$.next();
 
 		// // Assert
 		expect(testApi.getOptions).toHaveBeenCalledTimes(3);
@@ -198,7 +197,7 @@ describe('ALuCoreSelectApiDirective', () => {
 		spectator.tick(MAGIC_OPTION_SCROLL_DELAY);
 
 		// Act (Page 2)
-		select.nextPage.emit();
+		select.nextPage$.next();
 		spectator.tick(MAGIC_OPTION_SCROLL_DELAY);
 
 		// Assert

@@ -1,5 +1,5 @@
 import { AsyncPipe } from '@angular/common';
-import { Component, Directive, Injector, Input, LOCALE_ID, OnChanges, TemplateRef, ViewContainerRef, inject } from '@angular/core';
+import { Component, Directive, Injector, LOCALE_ID, OnChanges, TemplateRef, ViewContainerRef, inject, input } from '@angular/core';
 import { ButtonComponent } from '@lucca-front/ng/button';
 import { CalloutComponent } from '@lucca-front/ng/callout';
 import { LuHumanizeDateFormatter, LuHumanizeDatePipe, LuRelativeTime, LuRelativeTimeFormatUnit } from '@lucca-front/ng/date';
@@ -7,13 +7,12 @@ import { Meta, StoryObj, applicationConfig } from '@storybook/angular';
 
 @Directive({
 	selector: '[fakeLocaleId]',
-	standalone: true,
 })
 class FakeLocaleIdDirective implements OnChanges {
 	#templateRef = inject(TemplateRef);
 	#viewContainerRef = inject(ViewContainerRef);
 
-	@Input() fakeLocaleId = 'fr';
+	fakeLocaleId = input<string>('fr');
 
 	ngOnChanges(): void {
 		this.#viewContainerRef.clear();
@@ -22,7 +21,7 @@ class FakeLocaleIdDirective implements OnChanges {
 			{},
 			{
 				injector: Injector.create({
-					providers: [{ provide: LOCALE_ID, useValue: this.fakeLocaleId }],
+					providers: [{ provide: LOCALE_ID, useValue: this.fakeLocaleId() }],
 				}),
 			},
 		);
@@ -31,7 +30,6 @@ class FakeLocaleIdDirective implements OnChanges {
 
 @Component({
 	selector: 'humanize-stories',
-	standalone: true,
 	imports: [LuHumanizeDatePipe, AsyncPipe, FakeLocaleIdDirective, ButtonComponent, CalloutComponent],
 	template: `
 		<h1>Humanize</h1>

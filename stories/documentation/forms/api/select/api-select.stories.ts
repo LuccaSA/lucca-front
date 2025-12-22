@@ -6,7 +6,6 @@ import { Meta, applicationConfig, StoryObj } from '@storybook/angular';
 
 @Component({
 	selector: 'api-select-story',
-	standalone: true,
 	imports: [LuApiSelectInputComponent],
 	template: `
 		<label class="textfield">
@@ -45,7 +44,6 @@ import { LuApiSelectInputComponent } from '@lucca-front/ng/api';
 
 @Component({
 	selector: 'api-select-story',
-	standalone: true,
 	imports: [LuApiSelectInputComponent],
 	template: \`
 		<label class="textfield">

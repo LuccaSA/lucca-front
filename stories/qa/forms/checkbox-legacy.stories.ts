@@ -2,14 +2,13 @@ import { Component } from '@angular/core';
 import { Meta, moduleMetadata, StoryObj } from '@storybook/angular';
 
 @Component({
-	standalone: true,
 	selector: 'forms-checkbox-legacy-stories',
 	templateUrl: './checkbox-legacy.stories.html',
 })
 class CheckboxLegacyStory {}
 
 export default {
-	title: 'QA/Forms/Checkbox Legacy',
+	title: 'QA/Forms/CheckboxLegacy',
 	component: CheckboxLegacyStory,
 	decorators: [
 		moduleMetadata({

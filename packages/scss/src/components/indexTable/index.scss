@@ -14,6 +14,7 @@
 			@include selectableHoveredRow;
 		}
 
+		&:has(.mod-stack2, .mod-stack3),
 		&.mod-stackable {
 			@include stackable;
 		}
@@ -31,20 +32,36 @@
 			@include massSelection;
 		}
 
-		.indexTable-body-row-cell.mod-actions {
-			@include actions;
+		.indexTable-head-row-cell,
+		.indexTable-body-row-cell {
+			&.mod-actions {
+				@include actions;
+			}
+		}
+
+		.indexTable-body-row-cell,
+		.indexTable-foot-row-cell {
+			&.mod-tfoot {
+				@include tfoot;
+			}
 		}
 
 		.indexTable-head-row-cell,
 		.indexTable-body-row-cell,
 		.indexTable-body-row-transparentCell,
 		.indexTable-foot-row-cell {
+			&.mod-alignEnd,
 			&.mod-alignRight {
-				@include alignRight;
+				@include alignEnd;
 			}
 
 			&.mod-alignCenter {
 				@include alignCenter;
+			}
+
+			&.mod-alignStart,
+			&.mod-alignLeft {
+				@include alignStart;
 			}
 		}
 
@@ -72,5 +89,19 @@
 		}
 
 		@include openClosedRow;
+
+		.indexTable-body-row {
+			&:first-child {
+				&:has(.indexTable-body-row-cellTitle-button.button[aria-expanded='false']) {
+					~ .indexTable-body-row {
+						@include rowsHidden;
+					}
+				}
+			}
+		}
+
+		.indexTable-body-row-cellTitle-button.button {
+			@include groupButton;
+		}
 	}
 }

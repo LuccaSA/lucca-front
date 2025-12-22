@@ -12,7 +12,6 @@ import { ALuPopoverPanel, ILuPopoverPanel, LuPopoverScrollStrategy } from './pop
 	templateUrl: './popover-panel.component.html',
 	changeDetection: ChangeDetectionStrategy.OnPush,
 	animations: [luTransformPopover],
-	standalone: true,
 	imports: [NgTemplateOutlet, OverlayModule, A11yModule],
 	exportAs: 'LuPopoverPanel',
 })

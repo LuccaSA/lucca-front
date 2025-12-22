@@ -5,7 +5,6 @@ import { applicationConfig, Meta, StoryObj } from '@storybook/angular';
 
 @Component({
 	selector: 'tooltip-stories',
-	standalone: true,
 	imports: [LuTooltipModule],
 	template: ` <h1>With ellipsis (should be green)</h1>
 		<div class="test ellipsis width400 fontSize2" luTooltip luTooltipWhenEllipsis>Lorem ipsum dolor sit amet consectetur adipisicing elit.</div>

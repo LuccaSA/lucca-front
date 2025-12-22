@@ -2,7 +2,6 @@ import { Component } from '@angular/core';
 import { Meta, moduleMetadata, StoryObj } from '@storybook/angular';
 
 @Component({
-	standalone: true,
 	selector: 'mobile-navigation-stories',
 	templateUrl: './mobile-navigation.stories.html',
 })

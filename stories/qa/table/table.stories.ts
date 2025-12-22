@@ -2,7 +2,6 @@ import { Component } from '@angular/core';
 import { Meta, StoryObj } from '@storybook/angular';
 
 @Component({
-	standalone: true,
 	selector: 'table-stories',
 	templateUrl: './table.stories.html',
 })

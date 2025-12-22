@@ -2,7 +2,6 @@ import { Component } from '@angular/core';
 import { Meta, moduleMetadata, StoryObj } from '@storybook/angular';
 
 @Component({
-	standalone: true,
 	selector: 'forms-checkbox-stories',
 	templateUrl: './checkbox.stories.html',
 })

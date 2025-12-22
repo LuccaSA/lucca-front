@@ -1,21 +1,20 @@
 import { provideHttpClient } from '@angular/common/http';
-import { Component, Input } from '@angular/core';
+import { Component, input } from '@angular/core';
 import { provideAnimations } from '@angular/platform-browser/animations';
 import { LuDepartmentSelectInputComponent } from '@lucca-front/ng/department';
 import { applicationConfig, Meta, StoryObj } from '@storybook/angular';
 
 @Component({
 	selector: 'department-select-stories',
-	standalone: true,
 	imports: [LuDepartmentSelectInputComponent],
 	template: `
 		<label class="textfield mod-inline">
 			<lu-department-select
 				class="textfield-input"
-				[appInstanceId]="appInstanceId"
-				[operations]="operations"
-				[filters]="filters"
-				[uniqueOperation]="uniqueOpration"
+				[appInstanceId]="appInstanceId()"
+				[operations]="operations()"
+				[filters]="filters()"
+				[uniqueOperation]="uniqueOperation()"
 				placeholder="Select a departement"
 				data-testid="lu-select"
 			/>
@@ -25,10 +24,10 @@ import { applicationConfig, Meta, StoryObj } from '@storybook/angular';
 		<label class="textfield mod-inline">
 			<lu-department-select
 				class="textfield-input"
-				[appInstanceId]="appInstanceId"
-				[operations]="operations"
-				[filters]="filters"
-				[uniqueOperation]="uniqueOpration"
+				[appInstanceId]="appInstanceId()"
+				[operations]="operations()"
+				[filters]="filters()"
+				[uniqueOperation]="uniqueOperation()"
 				placeholder="Select a departement"
 				multiple="true"
 				data-testid="lu-select"
@@ -38,10 +37,10 @@ import { applicationConfig, Meta, StoryObj } from '@storybook/angular';
 	`,
 })
 class DepartmentStory {
-	@Input() appInstanceId: number = null;
-	@Input() operations: number[] = [];
-	@Input() filters: string[] = [];
-	@Input() uniqueOpration: number = null;
+	appInstanceId = input<number>(null);
+	operations = input<number[]>([]);
+	filters = input<string[]>([]);
+	uniqueOperation = input<number>(null);
 }
 
 export default {
@@ -59,33 +58,27 @@ import { LuDepartmentSelectInputComponent } from '@lucca-front/ng/department';
 
 @Component({
 	selector: 'department-select-story',
-	standalone: true,
 	imports: [LuDepartmentSelectInputComponent],
 	template: \`
 	<label class="textfield">
 		<lu-department-select
 			class="textfield-input"
-			[appInstanceId]="appInstanceId"
-			[operations]="operations"
-			[filters]="filters"
-			[uniqueOperation]="uniqueOpration"
+			[appInstanceId]="appInstanceId()"
+			[operations]="operations()"
+			[filters]="filters()"
+			[uniqueOperation]="uniqueOpration()"
 		></lu-department-select>
 	</label>
 	\`,
 })
 class DepartmentStory {
-	@Input() appInstanceId: number = null;
-	@Input() operations: number[] = [];
-	@Input() filters: string[] = [];
-	@Input() uniqueOpration: number = null;
+	appInstanceId = input<number>(null);
+	operations = input<number[]>([]);
+	filters = input<string[]>([]);
+	uniqueOperation = input<number>(null);
 }`;
-// Select.args = {
-// 	appInstanceId: 15,
-// 	operations: [1],
-// 	filters: ['isactive=false'],
-// };
+
 Select.parameters = {
-	// controls: { include: ['appInstanceId', 'operations', 'filters'] },
 	controls: { include: [] },
 	docs: {
 		source: {

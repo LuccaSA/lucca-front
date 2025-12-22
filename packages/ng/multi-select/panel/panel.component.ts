@@ -33,7 +33,6 @@ import { map } from 'rxjs/operators';
 	templateUrl: './panel.component.html',
 	styleUrl: './panel.component.scss',
 	changeDetection: ChangeDetectionStrategy.OnPush,
-	standalone: true,
 	imports: [
 		A11yModule,
 		AsyncPipe,
@@ -152,7 +151,7 @@ export class LuMultiSelectPanelComponent<T> implements AfterViewInit, CoreSelect
 			options$: this.options$,
 			optionComparer: this.optionComparer,
 			activeOptionIdChanged$: this.panelRef.activeOptionIdChanged,
-			clueChange$: this.selectInput.searchable ? this.selectInput.clueChange : EMPTY,
+			clueChange$: this.selectInput.searchable ? this.selectInput.clueChange$ : EMPTY,
 		});
 
 		if (this.selectedOptions?.length) {

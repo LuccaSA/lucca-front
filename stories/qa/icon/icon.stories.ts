@@ -1,11 +1,12 @@
-import { Component } from '@angular/core';
 import { IconsList } from '@/stories/icons-list';
+import { Component } from '@angular/core';
+import { IconComponent } from '@lucca-front/ng/icon';
 import { Meta, moduleMetadata, StoryObj } from '@storybook/angular';
 
 @Component({
-	standalone: true,
 	selector: 'icon-stories',
 	templateUrl: './icon.stories.html',
+	imports: [IconComponent],
 })
 class IconStory {
 	icons = IconsList;

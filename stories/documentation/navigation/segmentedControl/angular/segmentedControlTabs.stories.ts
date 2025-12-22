@@ -1,5 +1,5 @@
 import { NumericBadgeComponent } from '@lucca-front/ng/numeric-badge';
-import { SegmentedControlTabsComponent, SegmentedControlTabsPanelComponent } from '@lucca-front/ng/segmentedControlTabs';
+import { SegmentedControlTabsComponent, SegmentedControlTabsPanelComponent } from '@lucca-front/ng/segmented-control-tabs';
 import { Meta, moduleMetadata, StoryObj } from '@storybook/angular';
 
 interface segmentedControlBasicStory {

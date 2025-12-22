@@ -1,10 +1,11 @@
 import { Component } from '@angular/core';
+import { PaginationComponent } from '@lucca-front/ng/pagination';
 import { Meta, StoryObj } from '@storybook/angular';
 
 @Component({
-	standalone: true,
 	selector: 'pagination-stories',
 	templateUrl: './pagination.stories.html',
+	imports: [PaginationComponent],
 })
 class PaginationStory {}
 

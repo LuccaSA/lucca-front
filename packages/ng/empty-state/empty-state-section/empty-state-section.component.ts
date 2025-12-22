@@ -1,11 +1,10 @@
-import { ChangeDetectionStrategy, Component, Input, ViewEncapsulation, booleanAttribute, numberAttribute } from '@angular/core';
+import { ChangeDetectionStrategy, Component, ViewEncapsulation, booleanAttribute, computed, input, numberAttribute } from '@angular/core';
 import { Palette, PortalContent, PortalDirective } from '@lucca-front/ng/core';
 import { LuSafeExternalSvgPipe } from '@lucca-front/ng/safe-content';
 import { Hx } from '../empty-state.model';
 
 @Component({
 	selector: 'lu-empty-state-section',
-	standalone: true,
 	imports: [LuSafeExternalSvgPipe, PortalDirective],
 	templateUrl: './empty-state-section.component.html',
 	styleUrl: './empty-state-section.component.scss',
@@ -16,31 +15,17 @@ export class EmptyStateSectionComponent {
 	/**
 	 * Icon URL
 	 */
-	@Input()
-	icon = 'https://cdn.lucca.fr/lucca-front/assets/empty-states/icons/iconBanknote.svg';
+	readonly icon = input<string>('https://cdn.lucca.fr/lucca-front/assets/empty-states/icons/iconBanknote.svg');
 
-	@Input()
-	palette: Palette = 'none';
+	readonly palette = input<Palette>('none');
 
-	@Input({
-		transform: booleanAttribute,
-	})
-	center = false;
+	readonly center = input(false, { transform: booleanAttribute });
 
-	@Input()
-	heading: string;
+	readonly heading = input<string>();
 
-	@Input()
-	description: PortalContent;
+	readonly description = input<PortalContent>();
 
-	@Input({
-		transform: numberAttribute as (value: Hx | `${Hx}`) => Hx,
-	})
-	hx: Hx = 3;
+	readonly hx = input(3, { transform: numberAttribute as (value: Hx | `${Hx}`) => Hx });
 
-	get emptyStateClasses() {
-		return {
-			[`palette-${this.palette}`]: !!this.palette,
-		};
-	}
+	readonly emptyStateClasses = computed(() => ({ [`palette-${this.palette()}`]: !!this.palette() }));
 }

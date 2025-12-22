@@ -2,14 +2,13 @@ import { Component } from '@angular/core';
 import { Meta, StoryObj } from '@storybook/angular';
 
 @Component({
-	standalone: true,
 	selector: 'secondary-nav-stories',
 	templateUrl: './secondary-nav.stories.html',
 })
 class SecondaryNavStory {}
 
 export default {
-	title: 'QA/Secondary Nav',
+	title: 'QA/SecondaryNav',
 	component: SecondaryNavStory,
 } as Meta;
 

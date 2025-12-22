@@ -1,13 +1,13 @@
-import { booleanAttribute, Component, effect, inject, input, ViewEncapsulation } from '@angular/core';
+import { booleanAttribute, ChangeDetectionStrategy, Component, effect, inject, input, ViewEncapsulation } from '@angular/core';
 import { LuClass } from '@lucca-front/ng/core';
 
 @Component({
 	selector: 'lu-loading',
-	standalone: true,
 	providers: [LuClass],
 	styleUrl: './loading.component.scss',
 	template: `<ng-content />`,
 	encapsulation: ViewEncapsulation.None,
+	changeDetection: ChangeDetectionStrategy.OnPush,
 	host: {
 		class: 'loading',
 		'[class.mod-block]': 'block()',
@@ -18,10 +18,10 @@ import { LuClass } from '@lucca-front/ng/core';
 export class LoadingComponent {
 	#luClass = inject(LuClass);
 
-	size = input<'L' | null>(null);
-	invert = input(false, { transform: booleanAttribute });
-	block = input(false, { transform: booleanAttribute });
-	template = input<'popin' | 'drawer' | 'fullpage' | null>(null);
+	readonly size = input<'L' | null>(null);
+	readonly invert = input(false, { transform: booleanAttribute });
+	readonly block = input(false, { transform: booleanAttribute });
+	readonly template = input<'popin' | 'drawer' | 'fullpage' | null>(null);
 
 	constructor() {
 		effect(() => {

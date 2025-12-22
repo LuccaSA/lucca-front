@@ -10,7 +10,6 @@ export interface LuCustomEstablishment extends LuCoreSelectEstablishment {
 @Directive({
 	// The attribute is already prefixed with "lu-simple-select" / "lu-multi-select"
 	selector: 'lu-simple-select[customEstablishments],lu-multi-select[customEstablishments]',
-	standalone: true,
 	exportAs: 'luCustomEstablishments',
 })
 export class LuCoreSelectCustomEstablishmentsDirective extends LuCoreSelectEstablishmentsDirective<LuCustomEstablishment> {

@@ -1,10 +1,11 @@
 import { Component } from '@angular/core';
-import { Meta, moduleMetadata, StoryObj } from '@storybook/angular';
+import { NewBadgeComponent } from '@lucca-front/ng/new-badge';
+import { Meta, StoryObj, moduleMetadata } from '@storybook/angular';
 
 @Component({
-	standalone: true,
 	selector: 'new-badge-stories',
 	templateUrl: './new-badge.stories.html',
+	imports: [NewBadgeComponent],
 })
 class NewBadgeStory {}
 

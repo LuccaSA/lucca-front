@@ -4,7 +4,6 @@ import { Meta, StoryObj } from '@storybook/angular';
 
 @Component({
 	selector: 'numbers-stories',
-	standalone: true,
 	imports: [LuNumberPipe],
 	templateUrl: './numbers.stories.html',
 })

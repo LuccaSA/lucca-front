@@ -5,7 +5,6 @@ import { NumericBadgeComponent } from '@lucca-front/ng/numeric-badge';
 import { Meta, StoryObj } from '@storybook/angular';
 
 @Component({
-	standalone: true,
 	selector: 'button-stories',
 	templateUrl: './button.stories.html',
 	styles: ['.button::after { animation-play-state: paused; }'],
