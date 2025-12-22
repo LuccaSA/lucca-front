@@ -1,0 +1,140 @@
+@use '@lucca-front/scss/src/commons/utils/namespace';
+@use '@lucca-front/scss/src/commons/utils/reset';
+
+@mixin component($atRoot: namespace.$defaultAtRoot) {
+	border-radius: var(--components-resourceCard-borderRadius);
+	position: relative;
+	color: var(--components-resourceCard-color);
+	display: block;
+	align-self: stretch;
+	justify-self: stretch;
+
+	&::before {
+		content: '';
+		position: absolute;
+		inset: var(--components-resourceCard-before-inset);
+		background-color: var(--pr-t-elevation-surface-raised);
+		box-shadow: var(--components-resourceCard-before-boxShadow);
+		border-radius: var(--components-resourceCard-borderRadius);
+		transition-duration: var(--commons-animations-durations-fast);
+		transition-property: inset, box-shadow;
+	}
+
+	@at-root ($atRoot) {
+		.resourceCardWrapper {
+			grid-template-columns: repeat(auto-fill, minmax(var(--components-resourceCardWrapper-gridTemplateColumnsMin), 1fr));
+			display: var(--components-resourceCardWrapper-display);
+			flex-direction: column;
+			gap: var(--pr-t-spacings-100);
+			background-color: var(--pr-t-elevation-surface-sunken);
+			padding: var(--pr-t-spacings-100);
+			border-radius: var(--components-resourceCardWrapper-borderRadius);
+			align-items: start;
+			justify-items: start;
+		}
+
+		.resourceCard-layout {
+			isolation: isolate;
+			padding: var(--pr-t-spacings-100);
+			display: grid;
+			grid-template: var(--components-resourceCard-layout-gridTemplate);
+			align-items: var(--components-resourceCard-layout-alignItems);
+		}
+
+		.resourceCard-layout-header {
+			display: flex;
+			align-items: var(--components-resourceCard-layout-header-alignItems);
+			flex-direction: var(--components-resourceCard-layout-header-flexDirection);
+			gap: var(--pr-t-spacings-50) var(--pr-t-spacings-100);
+			grid-area: header;
+			padding-block-start: var(--components-resourceCard-layout-header-paddingBlockStart);
+			padding-block-end: var(--components-resourceCard-layout-header-paddingBlockEnd);
+			padding-inline: var(--pr-t-spacings-100);
+			min-inline-size: 0;
+		}
+
+		.resourceCard-layout-header-infos {
+			display: flex;
+			align-items: center;
+			gap: var(--pr-t-spacings-100);
+
+			&:empty {
+				display: none;
+			}
+		}
+
+		.resourceCard-layout-header-title {
+			font: var(--components-resourceCard-layout-header-title-font);
+			display: flex;
+			gap: var(--pr-t-spacings-100);
+			align-items: center;
+			min-inline-size: 0;
+			max-inline-size: 100%;
+		}
+
+		.resourceCard-layout-header-title-action {
+			@include reset.button;
+
+			color: var(--components-resourceCard-layout-header-title-action-color);
+			text-decoration: none;
+			outline: none;
+			cursor: var(--components-resourceCard-layout-header-title-action-cursor);
+			overflow: hidden;
+			white-space: nowrap;
+			text-overflow: ellipsis;
+
+			&::after {
+				content: '';
+				position: absolute;
+				inset: var(--components-resourceCard-layout-header-title-action-after-inset);
+				border-radius: var(--components-resourceCard-borderRadius);
+				transition-duration: var(--commons-animations-durations-fast);
+				transition-property: inset;
+				z-index: 1;
+			}
+		}
+
+		.resourceCard-layout-before {
+			grid-area: before;
+			display: flex;
+			align-items: center;
+		}
+
+		.resourceCard-layout-before-illustration {
+			&:not(:empty) {
+				min-block-size: var(--components-resourceCard-layout-before-illustration-minSize);
+				min-inline-size: var(--components-resourceCard-layout-before-illustration-minSize);
+				margin: var(--pr-t-spacings-100) var(--pr-t-spacings-50) var(--pr-t-spacings-100) var(--pr-t-spacings-100);
+				display: grid;
+				place-items: center;
+			}
+
+			&:empty {
+				display: none;
+			}
+		}
+
+		.resourceCard-layout-after {
+			grid-area: after;
+			margin-block: var(--components-resourceCard-layout-after-marginBlock);
+		}
+
+		.resourceCard-layout-content {
+			grid-area: content;
+			font: var(--components-resourceCard-layout-content-font);
+
+			&:not(:empty) {
+				padding: var(--components-resourceCard-layout-content-paddingBlockStart) var(--pr-t-spacings-100) var(--pr-t-spacings-50);
+			}
+		}
+
+		.resourceCard-layout-content a,
+		.resourceCard-layout-content button,
+		.resourceCard-layout-content [tabindex],
+		.resourceCard-layout-before-button,
+		.resourceCard-layout-after {
+			position: relative;
+			z-index: 2;
+		}
+	}
+}

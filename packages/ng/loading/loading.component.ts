@@ -5,7 +5,7 @@ import { LuClass } from '@lucca-front/ng/core';
 	selector: 'lu-loading',
 	providers: [LuClass],
 	styleUrl: './loading.component.scss',
-	template: `<ng-content />`,
+	template: '<ng-content />',
 	encapsulation: ViewEncapsulation.None,
 	changeDetection: ChangeDetectionStrategy.OnPush,
 	host: {
