@@ -1,5 +1,6 @@
-import { Args, ArgTypes, StoryObj } from '@storybook/angular';
+import { applicationConfig, Args, ArgTypes, StoryObj } from '@storybook/angular';
 import { PlayFunction, Renderer } from 'storybook/internal/types';
+import { LOCALE_ID } from '@angular/core';
 
 export interface StoryGeneratorArgs<TComponent> {
 	name: string;
@@ -52,6 +53,11 @@ export function getStoryGenerator<TComponent>(globalPartial: StoryObj<TComponent
 		const args = { ...globalPartial.args, ...storyPartial?.args };
 
 		return {
+			decorators: [
+				applicationConfig({
+					providers: [{ provide: LOCALE_ID, useValue: 'fr-FR' }],
+				}),
+			],
 			...globalPartial,
 			...storyPartial,
 			name,
