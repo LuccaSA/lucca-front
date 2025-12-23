@@ -1,6 +1,13 @@
 import { booleanAttribute, ChangeDetectionStrategy, Component, effect, inject, input, ViewEncapsulation } from '@angular/core';
 import { LuClass } from '@lucca-front/ng/core';
 
+type DisplayMode =
+	| 'popin'
+	| 'drawer'
+	| 'fullPage'
+	/** @deprecated use 'fullePage' instead */
+	| 'fullpage';
+
 @Component({
 	selector: 'lu-loading',
 	providers: [LuClass],
@@ -21,7 +28,7 @@ export class LoadingComponent {
 	readonly size = input<'L' | null>(null);
 	readonly invert = input(false, { transform: booleanAttribute });
 	readonly block = input(false, { transform: booleanAttribute });
-	readonly template = input<'popin' | 'drawer' | 'fullpage' | null>(null);
+	readonly template = input<DisplayMode | null>(null);
 
 	constructor() {
 		effect(() => {
