@@ -12,11 +12,7 @@ export default {
 	argTypes: {
 		block: {
 			type: 'boolean',
-		},
-		content: {
-			control: {
-				type: 'text',
-			},
+			description: 'Permet un affichage sur plusieurs lignes.',
 		},
 	},
 	decorators: [
@@ -27,7 +23,7 @@ export default {
 	render: (args: CodeBasicStory) => {
 		const blockParam = args.block ? ` block` : ``;
 		return {
-			template: cleanupTemplate(`<lu-code${blockParam}>${args?.content}</lu-code>`),
+			template: cleanupTemplate(`<lu-code${blockParam}>psum dolor sit</lu-code>`),
 		};
 	},
 } as Meta;
@@ -35,6 +31,5 @@ export default {
 export const Basic = {
 	args: {
 		block: false,
-		content: 'ipsum dolor sit',
 	},
 };
