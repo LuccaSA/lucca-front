@@ -23,7 +23,7 @@ export default {
 	render: (args: CodeBasicStory) => {
 		const blockParam = args.block ? ` block` : ``;
 		return {
-			template: cleanupTemplate(`<lu-code${blockParam}>psum dolor sit</lu-code>`),
+			template: cleanupTemplate(`<lu-code${blockParam}>ipsum dolor sit</lu-code>`),
 		};
 	},
 } as Meta;
