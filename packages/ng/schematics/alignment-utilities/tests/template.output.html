@@ -1,0 +1,11 @@
+<!-- basic class -->
+<div class="pr-u-textAlignStart"></div>
+<div [class]="'pr-u-textAlignCenter'"></div>
+<div [class]="condition ? 'pr-u-textAlignCenter' : 'pr-u-textAlignEnd'"></div>
+
+<!-- NgClass -->
+<span aria-hidden="true" [ngClass]="{ 'pr-u-textAlignCenter': showBillingInfos, 'pr-u-textAlignEnd': !showBillingInfos }"></span>
+<span aria-hidden="true" [ngClass]="event.expanded ? 'pr-u-textAlignEnd' : 'pr-u-textAlignCenter'"></span>
+
+<!-- Class bound attribute -->
+<span [class.pr-u-textAlignStart]="!showDetails"></span>
