@@ -18,7 +18,9 @@ export default (options?: SchematicContextOpts): Rule => {
 					'palette-grey': 'palette-neutral',
 					'palette-primary': 'palette-product',
 					'palette-secondary': 'palette-product',
-					'palette-lucca': 'palette-brand'
+					'palette-lucca': 'palette-brand',
+					'--colors-white-color': '—-palettes-neutral-0',
+					'--colors-black-color': '—-palettes-neutral-900'
 				},
 				variables: {
 					'--palettes-grey-{val}': `--palettes-neutral-{val}`,
