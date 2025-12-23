@@ -53,7 +53,7 @@ export default {
 			description: 'Masque la croix de suppression.',
 		},
 		drop: {
-			description: 'Evénement déclanché au drop.',
+			description: 'Événement déclenché au drop.',
 		},
 		listItem: HiddenArgType,
 	},
