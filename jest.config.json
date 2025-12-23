@@ -3,14 +3,15 @@
   "setupFilesAfterEnv": ["<rootDir>/setup-jest.ts"],
   "collectCoverage": false,
   "testEnvironment": "jsdom",
-  "testPathIgnorePatterns": ["<rootDir>/node_modules/", "<rootDir>/packages/ng/schematics/"],
+  "testPathIgnorePatterns": ["<rootDir>/node_modules/"],
   "watchPathIgnorePatterns": ["/node_modules/"],
   "modulePathIgnorePatterns": ["<rootDir>/packages/ng/dist"],
   "transformIgnorePatterns": ["node_modules/(?!@angular|@angular-devkit|@ngneat|ngx-mask|@testing-library)"],
   "moduleNameMapper": {
     "^@lucca-front/ng/(.*)$": "<rootDir>/packages/ng/$1/public-api.ts",
     "^@/stories/(.*)$": "<rootDir>/stories/documentation/$1",
-    "^(\\.{1,2}/.*)\\.js$": "$1"
+    "^(\\.{1,2}/.*)\\.js$": "$1",
+    "^ora$": "<rootDir>/packages/ng/schematics/mocks/ora.js"
   },
   "roots": ["<rootDir>/packages/ng", "<rootDir>/stories/documentation"],
   "globalSetup": "./jest-global-setup.js"
