@@ -10,7 +10,7 @@ export default (options: SchematicContextOpts): Rule => {
 	return async (tree, context) => {
 		await currentSchematicContext.init(context, options);
 
-		new PathMapper(
+		await new PathMapper(
 			tree,
 			{
 				paths: {

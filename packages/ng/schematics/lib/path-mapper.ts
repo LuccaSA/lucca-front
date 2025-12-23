@@ -23,13 +23,15 @@ export class PathMapper {
 		}
 
 		async run() {
-			console.log(this.mappings.paths);
 			this.tree.visit((path, entry) => {
 						if (path.includes('node_modules') || !entry) {
 							return;
 						}
 						if (path.endsWith('.ts')) {
 							migrateFile(path, entry, this.tree, (content) => this.migrateTsFile(path, content));
+						}
+						else {
+							return;
 						}
 					});
 		}
