@@ -5,7 +5,7 @@ type DisplayMode =
 	| 'popin'
 	| 'drawer'
 	| 'fullPage'
-	/** @deprecated use 'fullePage' instead */
+	/** @deprecated use 'fullPage' instead */
 	| 'fullpage';
 
 @Component({
