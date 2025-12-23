@@ -16,8 +16,9 @@ const config: StorybookConfig = {
 	addons: [getAbsolutePath('@storybook/addon-a11y'), getAbsolutePath('@storybook/addon-docs')],
 	framework: {
 		name: '@storybook/angular',
-		options: { fastRefresh: !process.env.CI },
+		options: { fastRefresh: !process.env['CI'] },
 	},
-	logLevel: process.env.CI ? 'error' : 'info',
+	logLevel: process.env['CI'] ? 'error' : 'info',
+	staticDirs: ['./public'],
 };
 export default config;
