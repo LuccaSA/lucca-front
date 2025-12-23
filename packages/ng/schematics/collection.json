@@ -53,8 +53,8 @@
     },
     "alignment-utilities": {
       "description": "Replace alignment utilities tokens.",
-      "factory": "./color-text/index",
-      "schema": "./color-text/schema.json"
+      "factory": "./alignment-utilities/index",
+      "schema": "./alignment-utilities/schema.json"
     },
     "action-icon": {
       "description": "Replace actionIcon usages with button mod-onlyIcon",
