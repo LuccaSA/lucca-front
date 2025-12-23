@@ -2,6 +2,7 @@ import { CdkDrag, CdkDragDrop, CdkDropList, moveItemInArray } from '@angular/cdk
 import { Component, input } from '@angular/core';
 import { SortableListComponent, SortableListItemComponent } from '@lucca-front/ng/sortable-list';
 import { Meta, StoryObj } from '@storybook/angular';
+import { HiddenArgType } from 'stories/helpers/common-arg-types';
 
 @Component({
 	selector: 'sortable-list-draggable-stories',
@@ -28,15 +29,33 @@ export default {
 	title: 'Documentation/Listings/Sortable List/Angular/Draggable',
 	component: SortableListDraggableStory,
 	argTypes: {
+		label: {
+			control: {
+				type: 'text',
+			},
+			description: "Modifie le texte principal d'un élément de liste.",
+		},
+		helperMessage: {
+			control: {
+				type: 'text',
+			},
+			description: "Ajoute un texte secondaire à l'élément de liste.",
+		},
 		small: {
 			control: 'boolean',
+			description: 'Modifie la taille du composant.',
 		},
 		clickable: {
-			control: 'boolean',
+			description: 'Rend les lignes cliquables.',
 		},
 		unclearable: {
 			control: 'boolean',
+			description: 'Masque la croix de suppression.',
 		},
+		drop: {
+			description: 'Evénement déclanché au drop.',
+		},
+		listItem: HiddenArgType,
 	},
 } as Meta;
 

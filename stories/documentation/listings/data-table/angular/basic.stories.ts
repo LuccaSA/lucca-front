@@ -16,6 +16,7 @@ import { NumericBadgeComponent } from '@lucca-front/ng/numeric-badge';
 import { PaginationComponent } from '@lucca-front/ng/pagination';
 
 import { Meta, moduleMetadata, StoryObj } from '@storybook/angular';
+import { HiddenArgType } from 'stories/helpers/common-arg-types';
 import { StoryModelDisplayComponent } from 'stories/helpers/story-model-display.component';
 
 export default {
@@ -146,9 +147,7 @@ export default {
 			},
 			description: 'Ajoute une pagination au tableau.',
 		},
-		drag: {
-			control: { type: 'boolean' },
-		},
+		drag: HiddenArgType,
 	},
 	decorators: [
 		moduleMetadata({
