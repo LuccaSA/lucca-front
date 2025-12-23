@@ -2,7 +2,7 @@ import { Component, HostBinding } from '@angular/core';
 
 @Component({
 	selector: 'lu-test',
-	template: `I'm an inline template with a class to migrate <span class="pr-u-colorTextBrand"></span>`,
+	template: `I'm an inline template with a class to migrate <span class="pr-u-textAlignCenter"></span>`,
 	host: {
 		class: 'pr-u-textAlignStart',
 	},
