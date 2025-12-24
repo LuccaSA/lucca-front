@@ -1,5 +1,6 @@
 import { FormsModule } from '@angular/forms';
 import { BrowserAnimationsModule } from '@angular/platform-browser/animations';
+import { BoxComponent } from '@lucca-front/ng/box';
 import { FormFieldComponent } from '@lucca-front/ng/form-field';
 import { RadioComponent, RadioGroupInputComponent } from '@lucca-front/ng/forms';
 import { Meta, moduleMetadata, StoryObj } from '@storybook/angular';
@@ -15,7 +16,7 @@ export default {
 	title: 'Documentation/Structure/Box/HTML&CSS/Arrow/Angular',
 	decorators: [
 		moduleMetadata({
-			imports: [RadioGroupInputComponent, RadioComponent, FormFieldComponent, FormsModule, BrowserAnimationsModule],
+			imports: [RadioGroupInputComponent, RadioComponent, FormFieldComponent, FormsModule, BoxComponent, BrowserAnimationsModule],
 		}),
 	],
 	argTypes: {
@@ -47,7 +48,8 @@ export default {
 
 function getTemplate(args: ArrowBasicStory): string {
 	const s = args.s ? ' mod-S' : '';
-	const neutral = args.neutral ? ' mod-neutral' : ' ';
+	const modNeutral = args.neutral ? ' mod-neutral' : ' ';
+	const neutral = args.neutral ? ' neutral' : '';
 	const checked = args.checked ? ' checked' : '';
 
 	if (args.field === 'radio') {
@@ -58,7 +60,7 @@ function getTemplate(args: ArrowBasicStory): string {
 		<lu-radio [value]="3">Option C</lu-radio>
 	</lu-radio-group-input>
 </lu-form-field>
-<div class="box mod-withArrow${neutral}">Lorem ipsum dolor sit amet consectetur adipisicing elit. Nam illo nostrum tenetur expedita. Accusantium cumque nisi excepturi eius corporis, iusto quaerat temporibus dolorum necessitatibus laboriosam quidem quibusdam quae aperiam! Vitae!</div>`;
+<lu-box withArrow${neutral}>Lorem ipsum dolor sit amet consectetur adipisicing elit. Nam illo nostrum tenetur expedita. Accusantium cumque nisi excepturi eius corporis, iusto quaerat temporibus dolorum necessitatibus laboriosam quidem quibusdam quae aperiam! Vitae!</lu-box>`;
 	} else if (args.field === 'checkbox') {
 		return `<div class="form-field mod-withArrow${s}">
 	<label class="formLabel" for="CB">Label</label>
@@ -66,9 +68,9 @@ function getTemplate(args: ArrowBasicStory): string {
 		<input type="checkbox" class="checkboxField-input" id="CB" aria-labelledby="CB-label"${checked} />
 		<span class="checkboxField-icon" aria-hidden="true"><span class="checkboxField-icon-check"></span></span>
 	</span>
-	<div class="form-field-arrow${neutral}"></div>
+	<div class="form-field-arrow${modNeutral}"></div>
 </div>
-<div class="box mod-withArrow${neutral}">Lorem ipsum dolor sit amet consectetur adipisicing elit. Nam illo nostrum tenetur expedita. Accusantium cumque nisi excepturi eius corporis, iusto quaerat temporibus dolorum necessitatibus laboriosam quidem quibusdam quae aperiam! Vitae!</div>`;
+<lu-box withArrow${neutral}>Lorem ipsum dolor sit amet consectetur adipisicing elit. Nam illo nostrum tenetur expedita. Accusantium cumque nisi excepturi eius corporis, iusto quaerat temporibus dolorum necessitatibus laboriosam quidem quibusdam quae aperiam! Vitae!</lu-box>`;
 	} else {
 		return `<div class="form-field mod-withArrow${s}">
 	<label class="formLabel" for="ID">Label</label>
@@ -78,7 +80,7 @@ function getTemplate(args: ArrowBasicStory): string {
 	</span>
 	<div class="form-field-arrow${neutral}"></div>
 </div>
-<div class="box mod-withArrow${neutral}">Lorem ipsum dolor sit amet consectetur adipisicing elit. Nam illo nostrum tenetur expedita. Accusantium cumque nisi excepturi eius corporis, iusto quaerat temporibus dolorum necessitatibus laboriosam quidem quibusdam quae aperiam! Vitae!</div>`;
+<lu-box withArrow${neutral}>Lorem ipsum dolor sit amet consectetur adipisicing elit. Nam illo nostrum tenetur expedita. Accusantium cumque nisi excepturi eius corporis, iusto quaerat temporibus dolorum necessitatibus laboriosam quidem quibusdam quae aperiam! Vitae!</lu-box>`;
 	}
 }
 
