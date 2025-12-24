@@ -114,16 +114,6 @@ export class HtmlAst extends HtmlAstVisitor<TemplateNode> {
 	}
 }
 
-export function updateComponentPathImports(content: string, oldPathToNewPath: Record<string, string>): string {
-		const root = new HtmlAst(content);
-		const visitedAttributes = new WeakSet<TmplAstNode>();
-		const cssClassesToUpdate = new Set(Object.keys(oldPathToNewPath));
-
-		console.log(root.visitNodes('statements'));
-
-	return '';
-}
-
 export function updateCssClassNames(content: string, oldClassToNewClass: Record<string, string>): string {
 	return updateContent(content, (updates) => {
 		const root = new HtmlAst(content);
