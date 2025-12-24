@@ -210,7 +210,7 @@ export abstract class ALuSelectInputComponent<TOption, TValue> implements OnDest
 	public clueChanged(clue: string, skipPanelOpen = false): void {
 		this.clue = clue;
 
-		if (!skipPanelOpen && !this.isPanelOpen) {
+		if (!skipPanelOpen && this.isPanelOpen) {
 			this.openPanel(clue);
 		} else if (this.lastEmittedClue !== clue) {
 			this.clueChange$.next(clue);
