@@ -1,4 +1,4 @@
-import { Meta, StoryFn } from '@storybook/angular';
+import { Meta, StoryObj } from '@storybook/angular';
 
 interface IconBasicStory {}
 
@@ -10,10 +10,12 @@ function getTemplate(args: IconBasicStory): string {
 	return `<span aria-hidden="true" class="lucca-icon icon-heart">`;
 }
 
-const Template: StoryFn<IconBasicStory> = (args) => ({
+const Template = (args: IconBasicStory) => ({
 	props: args,
 	template: getTemplate(args),
 });
 
-export const Basic = Template.bind({});
-Basic.args = {};
+export const Basic: StoryObj<IconBasicStory> = {
+	args: {},
+	render: Template,
+};

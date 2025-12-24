@@ -1,4 +1,4 @@
-import { Meta, StoryFn } from '@storybook/angular';
+import { Meta, StoryObj } from '@storybook/angular';
 
 interface IndexTableResponsiveCardListNestedStory {}
 
@@ -199,10 +199,12 @@ function getTemplate(args: IndexTableResponsiveCardListNestedStory): string {
 </table>`;
 }
 
-const Template: StoryFn<IndexTableResponsiveCardListNestedStory> = (args) => ({
+const Template = (args: IndexTableResponsiveCardListNestedStory) => ({
 	props: args,
 	template: getTemplate(args),
 });
 
-export const ResponsiveCardListNested = Template.bind({});
-ResponsiveCardListNested.args = {};
+export const ResponsiveCardListNested: StoryObj<IndexTableResponsiveCardListNestedStory> = {
+	args: {},
+	render: Template,
+};

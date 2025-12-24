@@ -1,4 +1,4 @@
-import { Meta, StoryFn } from '@storybook/angular';
+import { Meta, StoryObj } from '@storybook/angular';
 
 interface IconColorStory {}
 
@@ -17,10 +17,12 @@ function getTemplate(args: IconColorStory): string {
 <!-- 20.3 --><span aria-hidden="true" class="lucca-icon icon-heart mod-AI"></span>`;
 }
 
-const Template: StoryFn<IconColorStory> = (args) => ({
+const Template = (args: IconColorStory) => ({
 	props: args,
 	template: getTemplate(args),
 });
 
-export const Color = Template.bind({});
-Color.args = {};
+export const Color: StoryObj<IconColorStory> = {
+	args: {},
+	render: Template,
+};

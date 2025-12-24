@@ -1,6 +1,6 @@
 import { Component } from '@angular/core';
 import { ListingComponent, ListingItemComponent } from '@lucca-front/ng/listing';
-import { Meta, StoryFn } from '@storybook/angular';
+import { Meta, StoryObj } from '@storybook/angular';
 import { PaletteAllArgType } from 'stories/helpers/common-arg-types';
 
 @Component({
@@ -17,6 +17,9 @@ export default {
 	component: ListingStory,
 } as Meta;
 
-const template: StoryFn<ListingStory> = () => ({});
+const template = () => ({});
 
-export const basic = template.bind({});
+export const basic: StoryObj<ListingStory> = {
+	args: {},
+	render: template,
+};

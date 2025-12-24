@@ -28,7 +28,7 @@ import {
 	subYears,
 	WeekOptions,
 } from 'date-fns';
-import type { Interval } from 'date-fns/types';
+import type { Interval } from 'date-fns';
 import { WEEK_INFO } from '../calendar.token';
 import { LU_DATE2_TRANSLATIONS } from '../date2.translate';
 import { RepeatTimesDirective } from '../repeat-times.directive';

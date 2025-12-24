@@ -1,6 +1,6 @@
 import { Component } from '@angular/core';
 import { FieldsetComponent } from '@lucca-front/ng/forms';
-import { Meta, StoryFn } from '@storybook/angular';
+import { Meta, StoryObj } from '@storybook/angular';
 
 @Component({
 	selector: 'fieldset-stories',
@@ -14,6 +14,9 @@ export default {
 	component: fieldsetStory,
 } as Meta;
 
-const template: StoryFn<fieldsetStory> = () => ({});
+const template = () => ({});
 
-export const Basic = template.bind({});
+export const Basic: StoryObj<fieldsetStory> = {
+	args: {},
+	render: template,
+};

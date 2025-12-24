@@ -1,4 +1,4 @@
-import { Meta, StoryFn } from '@storybook/angular';
+import { Meta, StoryObj } from '@storybook/angular';
 
 interface FilesDroppableStory {}
 
@@ -47,7 +47,7 @@ function getTemplate(args: FilesDroppableStory): string {
 	`;
 }
 
-const Template: StoryFn<FilesDroppableStory> = (args) => ({
+const Template = (args: FilesDroppableStory) => ({
 	props: args,
 	template: getTemplate(args),
 	styles: [
@@ -57,5 +57,7 @@ const Template: StoryFn<FilesDroppableStory> = (args) => ({
 	],
 });
 
-export const Droppable = Template.bind({});
-Droppable.args = {};
+export const Droppable: StoryObj<FilesDroppableStory> = {
+	args: {},
+	render: Template,
+};

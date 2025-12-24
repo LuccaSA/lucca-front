@@ -1,4 +1,4 @@
-import { Meta, StoryFn } from '@storybook/angular';
+import { Meta, StoryObj } from '@storybook/angular';
 
 interface SampleNestedStory {}
 
@@ -28,10 +28,12 @@ function getTemplate(args: SampleNestedStory): string {
 </div>`;
 }
 
-const Template: StoryFn<SampleNestedStory> = (args) => ({
+const Template = (args: SampleNestedStory) => ({
 	props: args,
 	template: getTemplate(args),
 });
 
-export const Nested = Template.bind({});
-Nested.args = {};
+export const Nested: StoryObj<SampleNestedStory> = {
+	args: {},
+	render: Template,
+};

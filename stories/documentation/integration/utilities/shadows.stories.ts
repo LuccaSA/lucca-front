@@ -1,4 +1,4 @@
-import { Meta, StoryFn } from '@storybook/angular';
+import { Meta, StoryObj } from '@storybook/angular';
 
 interface ShadowsStory {}
 
@@ -17,7 +17,7 @@ function getTemplate(args: ShadowsStory): string {
 </div>`;
 }
 
-const Template: StoryFn<ShadowsStory> = (args) => ({
+const Template = (args: ShadowsStory) => ({
 	props: args,
 	template: getTemplate(args),
 	styles: [
@@ -42,5 +42,7 @@ const Template: StoryFn<ShadowsStory> = (args) => ({
 	],
 });
 
-export const Shadows = Template.bind({});
-Shadows.args = {};
+export const Shadows: StoryObj<ShadowsStory> = {
+	args: {},
+	render: Template,
+};

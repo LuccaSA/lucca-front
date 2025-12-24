@@ -1,4 +1,3 @@
-import { bob } from '@/stories/users/user.mocks';
 import { HttpClientModule, provideHttpClient } from '@angular/common/http';
 import { provideAnimations } from '@angular/platform-browser/animations';
 import { ButtonComponent } from '@lucca-front/ng/button';
@@ -18,7 +17,7 @@ import { NumericBadgeComponent } from '@lucca-front/ng/numeric-badge';
 import { PaginationComponent } from '@lucca-front/ng/pagination';
 import { LuUserDisplayModule } from '@lucca-front/ng/user';
 import { LuUserPopoverComponent, LuUserPopoverDirective, provideLuUserPopover } from '@lucca-front/ng/user-popover';
-import { applicationConfig, Meta, moduleMetadata, StoryFn } from '@storybook/angular';
+import { applicationConfig, Meta, moduleMetadata, StoryObj } from '@storybook/angular';
 import { HiddenArgType } from 'stories/helpers/common-arg-types';
 
 interface BasicStory {
@@ -27,7 +26,6 @@ interface BasicStory {
 	selectable: boolean;
 	stack: number;
 	group: boolean;
-	groupLabel: string;
 	groupButtonAlt: string;
 	expanded: boolean;
 	footer: boolean;
@@ -45,35 +43,68 @@ export default {
 	title: 'Documentation/Listings/Index Table/Angular/Basic',
 	argTypes: {
 		bob: HiddenArgType,
+		empty: {
+			description: 'Affiche un empty state à la place des lignes de tableau.',
+		},
+		layoutFixed: {
+			description: 'Applique une largeur fixe aux colonnes.',
+		},
+		selectable: {
+			description: 'Rend les lignes du tableau sélectionnables via des checkbox.',
+		},
 		action: {
 			options: ['link', 'button', 'user', 'file'],
 			control: {
 				type: 'select',
 			},
+			description: "Modifie le type d'élément HTML cliquable.",
+		},
+		hiddenLabel: {
+			description: "Masque les cellules d'en-tête du tableau.",
 		},
 		expanded: {
 			if: { arg: 'group', truthy: true },
+			description: 'Affiche le groupe dans son état déplié.',
 		},
-		groupLabel: {
-			if: { arg: 'group', truthy: true },
+		group: {
+			description: 'Regroupe des lignes de tableau en les rendant dépliables.',
 		},
 		groupButtonAlt: {
 			if: { arg: 'group', truthy: true },
+			description: 'Texte restitué par le bouton du groupe.',
 		},
 		stack: {
 			control: { type: 'range', min: 1, max: 3 },
+			description: "Affiche une ligne sous la forme d'un empilement d'éléments.",
 		},
 		sort: {
 			options: ['', 'none', 'ascending', 'descending'],
 			control: {
 				type: 'select',
 			},
+			description: "Définit l'état de tri d'une cellule d'en-tête.",
 		},
 		align: {
 			options: ['', 'start', 'center', 'end'],
 			control: {
 				type: 'select',
 			},
+			description: 'Aligne le contenu des cellules horizontalement.',
+		},
+		allowSelection: {
+			description: "Permet de sélectionner le texte d'une cellule. Désactive l'action principal au clic sur la cellule.",
+		},
+		allowAction: {
+			description: "Permet de rendre une cellule cliquable. Désactive l'action principal au clic sur la cellule.",
+		},
+		intermediateFooter: {
+			description: "Présente une ligne de tableau sous la forme d'un footer intermédiaire. Exemple : Sous-total.",
+		},
+		footer: {
+			description: 'Présente le tableau avec un footer.',
+		},
+		pagination: {
+			description: 'Présente le tableau avec une pagination.',
 		},
 	},
 	decorators: [
@@ -183,7 +214,7 @@ function getTemplate(args: BasicStory): string {
 	const samplePortalContentTpl = args.group
 		? `
 <ng-template #samplePortalContent>
-	${args.groupLabel}
+	Group label
 	<lu-numeric-badge [value]="8" />
 </ng-template>`
 		: ``;
@@ -203,34 +234,34 @@ function getTemplate(args: BasicStory): string {
 `;
 }
 
-const Template: StoryFn<BasicStory> = (args) => ({
+const Template = (args: BasicStory) => ({
 	props: args,
 	template: getTemplate(args),
 });
 
-export const Basic = Template.bind({});
-Basic.args = {
-	bob,
-	empty: false,
-	layoutFixed: false,
-	selectable: false,
+export const Basic: StoryObj<BasicStory> = {
+	args: {
+		empty: false,
+		layoutFixed: false,
+		selectable: false,
 
-	sort: '',
-	align: '',
-	hiddenLabel: false,
+		sort: '',
+		align: '',
+		hiddenLabel: false,
 
-	action: 'link',
-	stack: 1,
+		action: 'link',
+		stack: 1,
 
-	group: false,
-	groupLabel: 'Group label',
-	groupButtonAlt: 'Afficher X lignes supplémentaires',
-	expanded: false,
+		group: false,
+		groupButtonAlt: 'Afficher X lignes supplémentaires',
+		expanded: false,
 
-	allowSelection: false,
-	allowAction: false,
+		allowSelection: false,
+		allowAction: false,
 
-	intermediateFooter: false,
-	footer: false,
-	pagination: false,
+		intermediateFooter: false,
+		footer: false,
+		pagination: false,
+	},
+	render: Template,
 };

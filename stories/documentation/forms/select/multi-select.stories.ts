@@ -37,8 +37,9 @@ import { HiddenArgType } from 'stories/helpers/common-arg-types';
 import { createTestStory, getStoryGenerator } from 'stories/helpers/stories';
 import { StoryModelDisplayComponent } from 'stories/helpers/story-model-display.component';
 import { expect, screen, userEvent, within } from 'storybook/test';
-import { waitForAngular } from '../../../helpers/test';
+import { sleep, waitForAngular } from '../../../helpers/test';
 import { allLegumes, colorNameByColor, coreSelectStory, FilterLegumesPipe, ILegume, LuCoreSelectInputStoryComponent, SortLegumesPipe } from './select.utils';
+import { LOCALE_ID } from '@angular/core';
 
 type LuMultiSelectInputStoryComponent = LuCoreSelectInputStoryComponent & {
 	selectedLegumes: ILegume[] | LuMultiSelection<ILegume>;
@@ -52,6 +53,11 @@ type LuMultiSelectInputStoryComponent = LuCoreSelectInputStoryComponent & {
 } & LuMultiSelectInputComponent<ILegume>;
 
 const generateStory = getStoryGenerator<LuMultiSelectInputStoryComponent>({
+	decorators: [
+		applicationConfig({
+			providers: [{ provide: LOCALE_ID, useValue: 'fr-FR' }],
+		}),
+	],
 	...coreSelectStory,
 	argTypes: {
 		...coreSelectStory.argTypes,
@@ -86,7 +92,7 @@ const basePlay = async ({ canvasElement, step }) => {
 	// Context
 	const isBadgeDisplayer = input.parentElement.getElementsByTagName('lu-simple-select-default-option').length > 0;
 	if (buttons.length > 0) {
-		const clearButton = buttons.find((button) => button.className.includes('multipleSelect-clear'));
+		const clearButton = buttons.find((button) => button.className.includes('clear'));
 		if (clearButton) {
 			await userEvent.click(clearButton);
 		}
@@ -225,7 +231,7 @@ export const SelectAllTEST = createTestStory(SelectAll, async (context) => {
 		}
 	}
 	await userEvent.click(input);
-	await waitForAngular();
+	await sleep(200);
 	const panel = within(screen.getByRole('listbox'));
 	const selectAllCheckbox = panel.getByLabelText('Tout sélectionner');
 	await userEvent.click(selectAllCheckbox);
@@ -261,7 +267,7 @@ export const Basic = generateStory({
 	},
 	storyPartial: {
 		args: {
-			selectedLegumes: allLegumes.slice(0, 15),
+			selectedLegumes: [],
 			keepSearchAfterSelection: false,
 		},
 		argTypes: {

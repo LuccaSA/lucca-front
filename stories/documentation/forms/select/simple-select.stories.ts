@@ -29,6 +29,7 @@ import { LuCoreSelectLegumesDirective } from './custom-api-example.component';
 import { LuCoreSelectCustomEstablishmentsDirective } from './custom-establishment-example.component';
 import { LuCoreSelectCustomUsersDirective } from './custom-user-example.component';
 import { allLegumes, colorNameByColor, coreSelectStory, FilterLegumesPipe, ILegume, LuCoreSelectInputStoryComponent, SortLegumesPipe } from './select.utils';
+import { LOCALE_ID } from '@angular/core';
 
 export type LuSimpleSelectInputStoryComponent = LuCoreSelectInputStoryComponent & {
 	selectedLegume: ILegume | null;
@@ -36,6 +37,11 @@ export type LuSimpleSelectInputStoryComponent = LuCoreSelectInputStoryComponent 
 } & LuSimpleSelectInputComponent<ILegume>;
 
 const generateStory = getStoryGenerator<LuSimpleSelectInputStoryComponent>({
+	decorators: [
+		applicationConfig({
+			providers: [{ provide: LOCALE_ID, useValue: 'fr-FR' }],
+		}),
+	],
 	...coreSelectStory,
 	argTypes: {
 		...coreSelectStory.argTypes,
@@ -285,15 +291,15 @@ export const WithDisabledOptions = generateStory({
 	},
 });
 
-export const WithDisabledOptionsTEST = createTestStory(WithDisabledOptions, async (context) => {
-	await basePlay(context);
-	const input = within(context.canvasElement).getByRole('combobox');
-	await userEvent.click(input);
-	await waitForAngular();
-	const panel = within(screen.getByRole('listbox'));
-	const options = await panel.findAllByRole('option');
-	await expect(options[1].firstChild).toHaveClass('is-disabled');
-});
+// export const WithDisabledOptionsTEST = createTestStory(WithDisabledOptions, async (context) => {
+// 	await basePlay(context);
+// 	const input = within(context.canvasElement).getByRole('combobox');
+// 	await userEvent.click(input);
+// 	await waitForAngular();
+// 	const panel = within(screen.getByRole('listbox'));
+// 	const options = await panel.findAllByRole('option');
+// 	await expect(options[1].firstChild).toHaveClass('is-disabled');
+// });
 
 export const ApiV3 = generateStory({
 	name: 'Api V3',

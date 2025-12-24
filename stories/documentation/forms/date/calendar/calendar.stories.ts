@@ -5,7 +5,7 @@ import { FormsModule } from '@angular/forms';
 import { provideAnimations } from '@angular/platform-browser/animations';
 import { ALuDateAdapter, LuNativeDateAdapter } from '@lucca-front/ng/core';
 import { LuCalendarInputComponent, LuDateAdapterPipe } from '@lucca-front/ng/date';
-import { Meta, StoryFn, applicationConfig } from '@storybook/angular';
+import { Meta, applicationConfig, StoryObj } from '@storybook/angular';
 
 registerLocaleData(localesFr);
 
@@ -40,7 +40,7 @@ export default {
 	],
 } as Meta;
 
-const template: StoryFn<CalendarStory> = (args) => ({
+const template = (args: CalendarStory) => ({
 	props: args,
 });
 
@@ -68,7 +68,10 @@ import { LuCalendarInputComponent } from '@lucca-front/ng/date';
 	\`
 })`;
 
-export const Calendar = template.bind({});
+export const Calendar: StoryObj<CalendarStory> = {
+	args: {},
+	render: template,
+};
 Calendar.parameters = {
 	// Disable controls as they are not modifiable because of ComponentWrapper
 	controls: { include: [] },

@@ -12,7 +12,7 @@ import {
 	IndexTableRowComponent,
 } from '@lucca-front/ng/index-table';
 import { LuTooltipModule } from '@lucca-front/ng/tooltip';
-import { Meta, moduleMetadata, StoryFn } from '@storybook/angular';
+import { Meta, moduleMetadata, StoryObj } from '@storybook/angular';
 import { HiddenArgType } from 'stories/helpers/common-arg-types';
 
 interface BasicStory {}
@@ -94,10 +94,12 @@ function getTemplate(args: BasicStory): string {
 `;
 }
 
-const Template: StoryFn<BasicStory> = (args) => ({
+const Template = (args: BasicStory) => ({
 	props: args,
 	template: getTemplate(args),
 });
 
-export const Basic = Template.bind({});
-Basic.args = { bob };
+export const Basic: StoryObj<BasicStory> = {
+	args: { bob },
+	render: Template,
+};

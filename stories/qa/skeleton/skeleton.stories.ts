@@ -1,6 +1,6 @@
 import { Component } from '@angular/core';
 import { SkeletonButtonComponent, SkeletonDataTableComponent, SkeletonFieldComponent, SkeletonHeaderComponent, SkeletonIndexTableComponent, SkeletonTableComponent } from '@lucca-front/ng/skeleton';
-import { Meta, StoryFn } from '@storybook/angular';
+import { Meta, StoryObj } from '@storybook/angular';
 
 @Component({
 	selector: 'skeleton-stories',
@@ -14,6 +14,9 @@ export default {
 	component: SkeletonStory,
 } as Meta;
 
-const template: StoryFn<SkeletonStory> = () => ({});
+const template = () => ({});
 
-export const Basic = template.bind({});
+export const Basic: StoryObj<SkeletonStory> = {
+	args: {},
+	render: template,
+};

@@ -1,6 +1,6 @@
 import { Component } from '@angular/core';
 import { DividerComponent } from '@lucca-front/ng/divider';
-import { Meta, StoryFn } from '@storybook/angular';
+import { Meta, StoryObj } from '@storybook/angular';
 
 @Component({
 	selector: 'divider-stories',
@@ -14,6 +14,9 @@ export default {
 	component: DividerStory,
 } as Meta;
 
-const template: StoryFn<DividerStory> = () => ({});
+const template = () => ({});
 
-export const Basic = template.bind({});
+export const Basic: StoryObj<DividerStory> = {
+	args: {},
+	render: template,
+};

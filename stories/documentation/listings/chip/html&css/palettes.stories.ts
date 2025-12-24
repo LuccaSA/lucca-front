@@ -1,4 +1,4 @@
-import { Meta, StoryFn } from '@storybook/angular';
+import { Meta, StoryObj } from '@storybook/angular';
 
 interface ChipPalettesStory {}
 
@@ -16,10 +16,12 @@ function getTemplate(args: ChipPalettesStory): string {
 </div>`;
 }
 
-const Template: StoryFn<ChipPalettesStory> = (args) => ({
+const Template = (args: ChipPalettesStory) => ({
 	props: args,
 	template: getTemplate(args),
 });
 
-export const Palettes = Template.bind({});
-Palettes.args = {};
+export const Palettes: StoryObj<ChipPalettesStory> = {
+	args: {},
+	render: Template,
+};

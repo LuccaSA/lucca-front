@@ -1,6 +1,6 @@
 import { Component } from '@angular/core';
 import { LuSkipLinksComponent } from '@lucca-front/ng/a11y';
-import { Meta, StoryFn } from '@storybook/angular';
+import { Meta, StoryObj } from '@storybook/angular';
 
 @Component({
 	selector: 'skip-links-story',
@@ -49,7 +49,7 @@ export default {
 	component: SkipLinksStory,
 } as Meta;
 
-const Template: StoryFn<SkipLinksStory> = (props) => ({ props });
+const Template = (props: SkipLinksStory) => ({ props });
 
 const code = `
 import { LuSkipLinksComponent } from '@lucca-front/ng/a11y';
@@ -61,7 +61,10 @@ import { LuSkipLinksComponent } from '@lucca-front/ng/a11y';
 class AppComponent {
 }`;
 
-export const Basic = Template.bind({});
+export const Basic: StoryObj<SkipLinksStory> = {
+	args: {},
+	render: Template,
+};
 Basic.parameters = {
 	// Disable controls as they are not modifiable because of ComponentWrapper
 	controls: { include: [] },

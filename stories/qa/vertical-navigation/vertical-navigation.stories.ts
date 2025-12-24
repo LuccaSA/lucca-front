@@ -1,6 +1,6 @@
 import { Component } from '@angular/core';
 import { VerticalNavigationComponent, VerticalNavigationGroupComponent, VerticalNavigationItemComponent, VerticalNavigationLinkComponent } from '@lucca-front/ng/vertical-navigation';
-import { Meta, StoryFn, moduleMetadata } from '@storybook/angular';
+import { Meta, StoryObj, moduleMetadata } from '@storybook/angular';
 
 @Component({
 	selector: 'vertical-navigation-stories',
@@ -19,6 +19,9 @@ export default {
 	],
 } as Meta;
 
-const template: StoryFn<VerticalNavigationStory> = () => ({});
+const template = () => ({});
 
-export const Basic = template.bind({});
+export const Basic: StoryObj<VerticalNavigationStory> = {
+	args: {},
+	render: template,
+};

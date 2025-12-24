@@ -1,4 +1,4 @@
-import { Meta, StoryFn } from '@storybook/angular';
+import { Meta, StoryObj } from '@storybook/angular';
 
 interface CommentSmallStory {}
 
@@ -25,7 +25,7 @@ function getTemplate(args: CommentSmallStory): string {
 </div>`;
 }
 
-const Template: StoryFn<CommentSmallStory> = (args) => ({
+const Template = (args: CommentSmallStory) => ({
 	props: args,
 	template: getTemplate(args),
 	styles: [
@@ -40,5 +40,7 @@ const Template: StoryFn<CommentSmallStory> = (args) => ({
 	],
 });
 
-export const Small = Template.bind({});
-Small.args = {};
+export const Small: StoryObj<CommentSmallStory> = {
+	args: {},
+	render: Template,
+};

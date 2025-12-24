@@ -1,5 +1,5 @@
 import { Component } from '@angular/core';
-import { Meta, StoryFn } from '@storybook/angular';
+import { Meta, StoryObj } from '@storybook/angular';
 
 @Component({
 	selector: 'tokens-stories',
@@ -70,6 +70,9 @@ export default {
 	component: TokenStory,
 } as Meta;
 
-const template: StoryFn<TokenStory> = () => ({});
+const template = () => ({});
 
-export const Basic = template.bind({});
+export const Basic: StoryObj<TokenStory> = {
+	args: {},
+	render: template,
+};

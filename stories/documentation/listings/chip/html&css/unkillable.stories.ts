@@ -1,4 +1,4 @@
-import { Meta, StoryFn } from '@storybook/angular';
+import { Meta, StoryObj } from '@storybook/angular';
 
 interface ChipUnkillableStory {}
 
@@ -11,10 +11,12 @@ function getTemplate(args: ChipUnkillableStory): string {
 	return `<div class="chip">Label</div>`;
 }
 
-const Template: StoryFn<ChipUnkillableStory> = (args) => ({
+const Template = (args: ChipUnkillableStory) => ({
 	props: args,
 	template: getTemplate(args),
 });
 
-export const Unkillable = Template.bind({});
-Unkillable.args = {};
+export const Unkillable: StoryObj<ChipUnkillableStory> = {
+	args: {},
+	render: Template,
+};

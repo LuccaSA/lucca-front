@@ -1,4 +1,4 @@
-import { Meta, StoryFn } from '@storybook/angular';
+import { Meta, StoryObj } from '@storybook/angular';
 
 interface HeadersNavigationStory {}
 
@@ -18,10 +18,12 @@ function getTemplate(args: HeadersNavigationStory): string {
 	`;
 }
 
-const Template: StoryFn<HeadersNavigationStory> = (args) => ({
+const Template = (args: HeadersNavigationStory) => ({
 	props: args,
 	template: getTemplate(args),
 });
 
-export const Navigation = Template.bind({});
-Navigation.args = {};
+export const Navigation: StoryObj<HeadersNavigationStory> = {
+	args: {},
+	render: Template,
+};

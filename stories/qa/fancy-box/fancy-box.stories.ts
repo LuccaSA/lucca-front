@@ -1,6 +1,6 @@
 import { Component } from '@angular/core';
 import { FancyBoxComponent } from '@lucca-front/ng/fancy-box';
-import { Meta, StoryFn } from '@storybook/angular';
+import { Meta, StoryObj } from '@storybook/angular';
 
 @Component({
 	selector: 'fancy-box-stories',
@@ -14,6 +14,9 @@ export default {
 	component: FancyBoxStory,
 } as Meta;
 
-const template: StoryFn<FancyBoxStory> = () => ({});
+const template = () => ({});
 
-export const Basic = template.bind({});
+export const Basic: StoryObj<FancyBoxStory> = {
+	args: {},
+	render: template,
+};

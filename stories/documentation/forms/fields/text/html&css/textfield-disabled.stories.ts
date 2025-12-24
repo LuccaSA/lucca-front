@@ -1,4 +1,4 @@
-import { Meta, StoryFn } from '@storybook/angular';
+import { Meta, StoryObj } from '@storybook/angular';
 
 interface TextfieldDisabledStory {}
 
@@ -24,10 +24,12 @@ function getTemplate(args: TextfieldDisabledStory): string {
 </div>`;
 }
 
-const Template: StoryFn<TextfieldDisabledStory> = (args) => ({
+const Template = (args: TextfieldDisabledStory) => ({
 	props: args,
 	template: getTemplate(args),
 });
 
-export const Disabled = Template.bind({});
-Disabled.args = {};
+export const Disabled: StoryObj<TextfieldDisabledStory> = {
+	args: {},
+	render: Template,
+};

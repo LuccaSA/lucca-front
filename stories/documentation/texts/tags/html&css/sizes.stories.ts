@@ -1,4 +1,4 @@
-import { Meta, StoryFn } from '@storybook/angular';
+import { Meta, StoryObj } from '@storybook/angular';
 
 export default {
 	title: 'Documentation/Texts/Tags/HTML&CSS/Sizes',
@@ -11,7 +11,7 @@ function getTemplate(): string {
 <!-- 20.3 --><span class="tag mod-S">Text</span>`;
 }
 
-const Template: StoryFn = () => ({
+const Template = () => ({
 	template: getTemplate(),
 	styles: [
 		`:host {
@@ -22,4 +22,7 @@ const Template: StoryFn = () => ({
 	],
 });
 
-export const Sizes = Template.bind({});
+export const Sizes: StoryObj = {
+	args: {},
+	render: Template,
+};

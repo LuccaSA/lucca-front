@@ -2,7 +2,7 @@ import { Component } from '@angular/core';
 import { FormsModule } from '@angular/forms';
 import { FormFieldComponent, InputDirective } from '@lucca-front/ng/form-field';
 import { TextInputComponent } from '@lucca-front/ng/forms';
-import { Meta, StoryFn, moduleMetadata } from '@storybook/angular';
+import { Meta, moduleMetadata, StoryObj } from '@storybook/angular';
 import { stateArgType } from 'stories/helpers/common-arg-types';
 
 @Component({
@@ -25,6 +25,9 @@ export default {
 	],
 } as Meta;
 
-const template: StoryFn<FormFieldStory> = () => ({});
+const template = () => ({});
 
-export const basic = template.bind({});
+export const basic: StoryObj<FormFieldStory> = {
+	args: {},
+	render: template,
+};
