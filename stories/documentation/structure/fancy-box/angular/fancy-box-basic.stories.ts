@@ -2,7 +2,6 @@ import { FancyBoxComponent } from '@lucca-front/ng/fancy-box';
 import { Meta, moduleMetadata, StoryObj } from '@storybook/angular';
 
 interface FancyBoxBasicStory {
-	content: string;
 	backgroundLeft: string;
 	backgroundRight: string;
 	foreground: string;
@@ -17,34 +16,30 @@ export default {
 		}),
 	],
 	argTypes: {
-		content: {
-			control: {
-				type: 'text',
-			},
-		},
 		backgroundLeft: {
 			control: {
 				type: 'text',
 			},
-			description: 'URL',
+			description: "URL de l'image en arrière plan à gauche (200x160).",
 		},
 		backgroundRight: {
 			control: {
 				type: 'text',
 			},
-			description: 'URL',
+			description: "URL de l'image en arrière plan à droite (200x160).",
 		},
 		foreground: {
 			control: {
 				type: 'text',
 			},
-			description: 'URL',
+			description: "URL de l'image au premier plan (200x160).",
 		},
 		size: {
 			options: ['', 'S'],
 			control: {
 				type: 'select',
 			},
+			description: 'Modifie la taille du composant.',
 		},
 	},
 } as Meta;
@@ -66,7 +61,7 @@ function getTemplate(args: FancyBoxBasicStory): string {
 
 	return `
 	<lu-fancy-box${sizeAttr}${bgLeft}${bgRight}${fg}>
-		<div>${args.content}</div>
+		Content
 	</lu-fancy-box>
 	`;
 }
@@ -74,11 +69,18 @@ function getTemplate(args: FancyBoxBasicStory): string {
 const Template = (args: FancyBoxBasicStory) => ({
 	props: args,
 	template: getTemplate(args),
+	styles: [
+		`
+			:host {
+				display: block;
+				padding-block: var(--pr-t-spacings-400);
+			}
+		`,
+	],
 });
 
 export const Basic: StoryObj<FancyBoxBasicStory> = {
 	args: {
-		content: 'Fancy box content',
 		backgroundLeft: 'https://cdn.lucca.fr/transverse/prisme/visuals/fancy-box/background-left-plant.svg',
 		backgroundRight: 'https://cdn.lucca.fr/transverse/prisme/visuals/fancy-box/background-right-candies.svg',
 		foreground: 'https://cdn.lucca.fr/transverse/prisme/visuals/fancy-box/foreground-right-pizza.svg',

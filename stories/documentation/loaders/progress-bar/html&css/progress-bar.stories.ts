@@ -14,11 +14,13 @@ export default {
 			control: {
 				type: 'radio',
 			},
+			description: 'État du composant.',
 		},
 		indeterminate: {
 			control: {
 				type: 'boolean',
 			},
+			description: 'Affiche un état de chargement sans information de progression.',
 		},
 		width: {
 			control: {
@@ -27,6 +29,7 @@ export default {
 				max: 100,
 				step: 1,
 			},
+			description: 'Pourcentage de progression.',
 		},
 	},
 } as Meta;

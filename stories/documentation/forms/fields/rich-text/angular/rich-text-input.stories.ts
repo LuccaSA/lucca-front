@@ -39,6 +39,9 @@ export default {
 		autoResize: {
 			description: "Active / désactive l'autoresize du champ.",
 		},
+		hideToolbar: {
+			description: 'Masque les options de mise en forme.',
+		},
 	},
 } as Meta;
 

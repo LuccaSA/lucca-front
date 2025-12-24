@@ -67,7 +67,7 @@ export const Template: StoryObj<ListingComponent & ListingItemComponent & { type
 			control: {
 				type: 'select',
 			},
-			description: "Modifie l'icône par défaut de chaque élément lorsque le type <code>icons</code> est sélectionné.",
+			description: "Modifie l'icône par défaut.",
 			if: { arg: 'type', eq: 'icons' },
 		},
 		icon: {
@@ -75,14 +75,19 @@ export const Template: StoryObj<ListingComponent & ListingItemComponent & { type
 			control: {
 				type: 'select',
 			},
-			description: "Modifie l'icône par défaut d'un élément lorsque le type <code>icons</code> est sélectionné.",
+			description: "Modifie l'icône d'un élément de la liste.",
 			if: { arg: 'type', eq: 'icons' },
 		},
 		start: {
 			if: { arg: 'type', eq: 'ordered' },
+			control: {
+				type: 'select',
+			},
+			description: 'Modifie la valeur initiale de la liste.',
 		},
 		reversed: {
 			if: { arg: 'type', eq: 'ordered' },
+			description: 'Prédente la liste sous forme décroissante.',
 		},
 		checklist: HiddenArgType,
 		icons: HiddenArgType,
@@ -90,6 +95,7 @@ export const Template: StoryObj<ListingComponent & ListingItemComponent & { type
 		palette: {
 			PaletteAllArgType,
 			if: { arg: 'type', truthy: true },
+			description: 'Modifie la couleur des icônes.',
 		},
 	},
 

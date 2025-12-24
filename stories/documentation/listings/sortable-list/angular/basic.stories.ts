@@ -17,26 +17,24 @@ export default {
 			control: {
 				type: 'text',
 			},
+			description: "Modifie le texte principal d'un élément de liste.",
 		},
 		helperMessage: {
 			control: {
 				type: 'text',
 			},
+			description: "Ajoute un texte secondaire à l'élément de liste.",
 		},
 		small: {
-			control: {
-				type: 'boolean',
-			},
+			control: 'boolean',
+			description: 'Modifie la taille du composant.',
 		},
 		clickable: {
-			control: {
-				type: 'boolean',
-			},
+			description: 'Rend les lignes cliquables.',
 		},
 		unclearable: {
-			control: {
-				type: 'boolean',
-			},
+			control: 'boolean',
+			description: 'Masque la croix de suppression.',
 		},
 	},
 	decorators: [
