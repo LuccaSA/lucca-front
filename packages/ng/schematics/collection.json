@@ -36,6 +36,11 @@
       "factory": "./class-prefix/index",
       "schema": "./class-prefix/schema.json"
     },
+    "component-path": {
+      "description": "Update path component import",
+      "factory": "./component-path/index",
+      "schema": "./component-path/schema.json"
+    },
     "tokens-typo": {
       "description": "Replace typography tokens with new names.",
       "factory": "./tokens-typo/index",

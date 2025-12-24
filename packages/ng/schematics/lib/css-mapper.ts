@@ -1,13 +1,14 @@
-import { migrateFile } from './schematics';
 import { Tree } from '@angular-devkit/schematics';
-import { PostCssScssLib, PostCssSelectorParserLib, updateCSSClassNamesInRules, updateCSSVariableNames, updateMixinNames } from './scss-ast';
 import type { ValueParser } from 'postcss-value-parser';
-import { HtmlAst, HtmlAstVisitor, updateCssClassNames } from './html-ast';
-import { applyUpdates, FileUpdate, updateContent } from './file-update';
 import { createSourceFile, forEachChild, isStringLiteral, ScriptTarget } from 'typescript';
-import { replaceStringLiterals } from './typescript-ast';
 import { createVisitor, extractNgTemplates } from './angular-template';
+import { applyUpdates, FileUpdate, updateContent } from './file-update';
+import { HtmlAst, HtmlAstVisitor, updateCssClassNames } from './html-ast';
 import { currentSchematicContext } from './lf-schematic-context';
+import { expand } from './schematic.utils';
+import { migrateFile } from './schematics';
+import { PostCssScssLib, PostCssSelectorParserLib, updateCSSClassNamesInRules, updateCSSVariableNames, updateMixinNames } from './scss-ast';
+import { replaceStringLiterals } from './typescript-ast';
 
 interface Mappings {
 	classes: Record<string, string>;
@@ -17,9 +18,9 @@ interface Mappings {
 
 export class CssMapper {
 	private mappings: Mappings = {
-		classes: this.expand(this.rawMappings.classes),
-		variables: this.expand(this.rawMappings.variables),
-		mixins: this.expand(this.rawMappings.mixins)
+		classes: expand(this.rawMappings.classes, this.mappingProps),
+		variables: expand(this.rawMappings.variables, this.mappingProps),
+		mixins: expand(this.rawMappings.mixins, this.mappingProps)
 	};
 	private classesToUpdate = new Set(Object.keys(this.mappings.classes));
 	private varsToUpdate = new Set(Object.keys(this.mappings.variables));
@@ -142,40 +143,5 @@ export class CssMapper {
 			return splitWithSpace.map((entry) => this.updateCssText(entry)).join(' ');
 		}
 		return text;
-	}
-
-	private camelize(str: string): string {
-		return str[0].toLowerCase() + str.slice(1);
-	}
-
-	private pascalize(str: string): string {
-		return str[0].toUpperCase() + str.slice(1);
-	}
-
-	private expand(rawMapping: Record<string, string>): Record<string, string> {
-		const props = this.mappingProps || {};
-
-		const replaceValue = (oldValue: string, map: string, newValue: string) => {
-			return oldValue.replace(`{${map}}`, newValue).replace(`{${this.pascalize(map)}}`, this.pascalize(newValue));
-		};
-
-		return Object.fromEntries(
-			Object.entries(rawMapping).flatMap(([oldTemplate, newTemplate]) => {
-				const placeholders = [...oldTemplate.matchAll(/\{(\w*)}/g)].map(([, template]) => template);
-				let values = [[oldTemplate, newTemplate]];
-
-				for (const placeholder of placeholders) {
-					const map = this.camelize(placeholder);
-
-					if (!map || !(map in props)) {
-						throw new Error(`No mapping for ${map} found`);
-					}
-
-					values = values.flatMap(([oldVal, newVal]) => Object.entries(props[map]).map(([key, value]) => [replaceValue(oldVal, map, key), replaceValue(newVal, map, value)]));
-				}
-
-				return values;
-			})
-		) as Record<string, string>;
 	}
 }
