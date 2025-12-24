@@ -14,7 +14,10 @@ export default (options: SchematicContextOpts): Rule => {
 			tree,
 			{
 				paths: {
-					"@lucca-front/ng/scrollBox": "@lucca-front/ng/scroll-box"
+					"@lucca-front/ng/scrollBox": "@lucca-front/ng/scroll-box",
+					"@lucca-front/ng/segmentedControl": "@lucca-front/ng/segmented-control",
+					"@lucca-front/ng/segmentedControlTabs": "@lucca-front/ng/segmented-control-tabs",
+					"@lucca-front/ng/statusBadge": "@lucca-front/ng/status-badge"
 				},
 				components: {},
 				selectors: {}
