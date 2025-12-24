@@ -7,7 +7,7 @@ const collectionPath = path.normalize(path.join(__dirname, '..', 'collection.jso
 const testsRoot = path.join(__dirname, 'tests');
 const files = fs.readdirSync(testsRoot);
 
-describe('Class prefix Migration', () => {
+describe('Component path Migration', () => {
 	it('should update files', async () => {
 		// Arrange
 		const tree = createTreeFromFiles(testsRoot, files, '.input.');
