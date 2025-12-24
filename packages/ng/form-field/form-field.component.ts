@@ -17,6 +17,7 @@ import {
 	OnDestroy,
 	Renderer2,
 	signal,
+	TemplateRef,
 	ViewEncapsulation,
 } from '@angular/core';
 import { AbstractControl, NgControl, ReactiveFormsModule, RequiredValidator, Validators } from '@angular/forms';
@@ -31,6 +32,7 @@ import { FORM_FIELD_INSTANCE } from './form-field.token';
 import { LU_FORM_FIELD_TRANSLATIONS } from './form-field.translate';
 import { InputDirective } from './input.directive';
 import { INPUT_FRAMED_INSTANCE } from './public-api';
+import { ValuePresentationComponent } from './value-presentation/value-presentation.component';
 
 let nextId = 0;
 
@@ -38,7 +40,7 @@ type FormFieldWidth = 20 | 30 | 40 | 50 | 60;
 
 @Component({
 	selector: 'lu-form-field',
-	imports: [NgTemplateOutlet, InlineMessageComponent, LuTooltipModule, ReactiveFormsModule, IconComponent, IntlParamsPipe, PortalDirective],
+	imports: [NgTemplateOutlet, InlineMessageComponent, LuTooltipModule, ReactiveFormsModule, IconComponent, IntlParamsPipe, PortalDirective, ValuePresentationComponent],
 	templateUrl: './form-field.component.html',
 	styleUrl: './form-field.component.scss',
 	providers: [
@@ -127,7 +129,7 @@ export class FormFieldComponent implements OnDestroy, DoCheck {
 	 */
 	readonly extraDescribedBy = input<string>('');
 
-	layout = model<'default' | 'checkable' | 'fieldset'>('default');
+	readonly layout = model<'default' | 'checkable' | 'fieldset'>('default');
 
 	#inputs: InputDirective[] = [];
 
@@ -135,6 +137,10 @@ export class FormFieldComponent implements OnDestroy, DoCheck {
 	 * Max amount of characters allowed, defaults to 0, which means hidden, no maximum
 	 */
 	readonly counter = input<number>(0);
+
+	readonly presentation = input(false, { transform: booleanAttribute });
+
+	readonly presentationDisplayTpl = signal<TemplateRef<unknown> | null>(null);
 
 	get contentLength(): number {
 		return (this.#inputs[0]?.host?.nativeElement as HTMLInputElement)?.value?.length || 0;

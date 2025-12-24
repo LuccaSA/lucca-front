@@ -80,5 +80,9 @@
 }
 
 <ng-template #projectionTpl>
-	<ng-content />
+	@if (presentation() && presentationDisplayTpl()) {
+		<lu-value-presentation [template]="presentationDisplayTpl()"></lu-value-presentation>
+	} @else {
+		<ng-content />
+	}
 </ng-template>
