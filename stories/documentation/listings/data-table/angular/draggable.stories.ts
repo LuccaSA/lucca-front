@@ -1,5 +1,5 @@
 import { CdkDrag, CdkDragDrop, CdkDropList, moveItemInArray } from '@angular/cdk/drag-drop';
-import { Component, input } from '@angular/core';
+import { ChangeDetectionStrategy, Component, input } from '@angular/core';
 import {
 	DataTableBodyComponent,
 	DataTableComponent,
@@ -26,6 +26,7 @@ import { HiddenArgType } from 'stories/helpers/common-arg-types';
 		CdkDrag,
 	],
 	templateUrl: './draggable.stories.html',
+	changeDetection: ChangeDetectionStrategy.OnPush,
 })
 class DataTableDraggableStory {
 	selectable = input<boolean>(false);

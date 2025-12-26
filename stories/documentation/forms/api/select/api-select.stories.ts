@@ -1,8 +1,8 @@
 import { provideHttpClient } from '@angular/common/http';
-import { Component } from '@angular/core';
+import { ChangeDetectionStrategy, Component } from '@angular/core';
 import { provideAnimations } from '@angular/platform-browser/animations';
 import { LuApiSelectInputComponent } from '@lucca-front/ng/api';
-import { Meta, applicationConfig, StoryObj } from '@storybook/angular';
+import { applicationConfig, Meta, StoryObj } from '@storybook/angular';
 
 @Component({
 	selector: 'api-select-story',
@@ -23,6 +23,7 @@ import { Meta, applicationConfig, StoryObj } from '@storybook/angular';
 			<span class="textfield-label">Api V4 Select</span>
 		</label>
 	`,
+	changeDetection: ChangeDetectionStrategy.OnPush,
 })
 class ApiSelectStory {
 	apiV3 = '/api/v3/axisSections';

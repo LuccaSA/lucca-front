@@ -28,7 +28,7 @@ export default {
 
 const template = () => ({});
 
-export const basic: StoryObj<FormFieldStory> = {
+export const Basic: StoryObj<FormFieldStory> = {
 	args: {},
 	render: template,
 };

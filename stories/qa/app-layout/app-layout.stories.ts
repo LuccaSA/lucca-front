@@ -77,7 +77,7 @@ export default {
 
 const template = () => ({});
 
-export const basic: StoryObj<AppLayoutStory> = {
+export const Basic: StoryObj<AppLayoutStory> = {
 	args: {},
 	render: template,
 };
