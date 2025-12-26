@@ -1,4 +1,4 @@
-import { Component } from '@angular/core';
+import { ChangeDetectionStrategy, Component } from '@angular/core';
 import { ButtonComponent } from '@lucca-front/ng/button';
 import {
 	CalloutActionsComponent,
@@ -24,6 +24,7 @@ import { Meta, StoryObj } from '@storybook/angular';
 		CalloutFeedbackItemComponent,
 		CalloutPopoverComponent,
 	],
+	changeDetection: ChangeDetectionStrategy.OnPush,
 })
 class CalloutStory {}
 

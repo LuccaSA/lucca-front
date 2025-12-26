@@ -1,4 +1,4 @@
-import { Component } from '@angular/core';
+import { ChangeDetectionStrategy, Component } from '@angular/core';
 import { provideRouter, RouterLink } from '@angular/router';
 import { LinkComponent } from '@lucca-front/ng/link';
 import { applicationConfig, Meta, StoryObj } from '@storybook/angular';
@@ -7,6 +7,7 @@ import { applicationConfig, Meta, StoryObj } from '@storybook/angular';
 	selector: 'links-stories',
 	templateUrl: './links.stories.html',
 	imports: [LinkComponent, RouterLink],
+	changeDetection: ChangeDetectionStrategy.OnPush,
 })
 class LinksStory {}
 

@@ -1,4 +1,4 @@
-import { Component } from '@angular/core';
+import { ChangeDetectionStrategy, Component } from '@angular/core';
 import { ScrollBoxComponent } from '@lucca-front/ng/scroll-box';
 import { Meta, StoryObj } from '@storybook/angular';
 
@@ -6,6 +6,7 @@ import { Meta, StoryObj } from '@storybook/angular';
 	selector: 'scroll-box-stories',
 	templateUrl: './scroll-box.stories.html',
 	imports: [ScrollBoxComponent],
+	changeDetection: ChangeDetectionStrategy.OnPush,
 })
 class ScrollBoxStory {}
 
@@ -16,7 +17,7 @@ export default {
 
 const template = () => ({});
 
-export const basic: StoryObj<ScrollBoxStory> = {
+export const Basic: StoryObj<ScrollBoxStory> = {
 	args: {},
 	render: template,
 };

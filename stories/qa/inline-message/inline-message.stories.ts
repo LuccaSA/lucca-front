@@ -1,4 +1,4 @@
-import { Component } from '@angular/core';
+import { ChangeDetectionStrategy, Component } from '@angular/core';
 import { InlineMessageComponent } from '@lucca-front/ng/inline-message';
 import { Meta, StoryObj, moduleMetadata } from '@storybook/angular';
 
@@ -6,6 +6,7 @@ import { Meta, StoryObj, moduleMetadata } from '@storybook/angular';
 	selector: 'inline-message-stories',
 	templateUrl: './inline-message.stories.html',
 	imports: [InlineMessageComponent],
+	changeDetection: ChangeDetectionStrategy.OnPush,
 })
 class InlineMessageStory {}
 

@@ -1,4 +1,4 @@
-import { Component } from '@angular/core';
+import { ChangeDetectionStrategy, Component } from '@angular/core';
 import { Meta } from '@storybook/angular';
 //import { SampleComponent } from '@lucca-front/ng/sample';
 
@@ -6,6 +6,7 @@ import { Meta } from '@storybook/angular';
 	selector: 'sample-stories',
 	templateUrl: './sample.stories.html',
 	//imports: [SampleComponent],
+	changeDetection: ChangeDetectionStrategy.OnPush,
 })
 class SampleStory {}
 

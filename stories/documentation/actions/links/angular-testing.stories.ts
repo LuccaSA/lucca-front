@@ -6,12 +6,14 @@ import { applicationConfig, Meta, StoryObj } from '@storybook/angular';
 @Component({
 	selector: 'first-page',
 	template: 'First page it is !',
+	changeDetection: ChangeDetectionStrategy.OnPush,
 })
 class FirstPageComponent {}
 
 @Component({
 	selector: 'second-page',
 	template: 'And this is the second page !',
+	changeDetection: ChangeDetectionStrategy.OnPush,
 })
 class SecondPageComponent {}
 

@@ -1,4 +1,4 @@
-import { Component } from '@angular/core';
+import { ChangeDetectionStrategy, Component } from '@angular/core';
 import { StatusBadgeComponent } from '@lucca-front/ng/status-badge';
 import { Meta, StoryObj } from '@storybook/angular';
 
@@ -6,6 +6,7 @@ import { Meta, StoryObj } from '@storybook/angular';
 	selector: 'status-badge-stories',
 	templateUrl: './status-badge.stories.html',
 	imports: [StatusBadgeComponent],
+	changeDetection: ChangeDetectionStrategy.OnPush,
 })
 class StatusBadgeStory {}
 

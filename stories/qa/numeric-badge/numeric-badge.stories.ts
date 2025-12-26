@@ -1,4 +1,4 @@
-import { Component } from '@angular/core';
+import { ChangeDetectionStrategy, Component } from '@angular/core';
 import { NumericBadgeComponent } from '@lucca-front/ng/numeric-badge';
 import { Meta, StoryObj, moduleMetadata } from '@storybook/angular';
 
@@ -7,6 +7,7 @@ import { Meta, StoryObj, moduleMetadata } from '@storybook/angular';
 	templateUrl: './numeric-badge.stories.html',
 	styles: ['.numericBadge::after { animation-play-state: paused; }'],
 	imports: [NumericBadgeComponent],
+	changeDetection: ChangeDetectionStrategy.OnPush,
 })
 class NumericBadgeStory {}
 

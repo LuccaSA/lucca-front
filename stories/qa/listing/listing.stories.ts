@@ -1,4 +1,4 @@
-import { Component } from '@angular/core';
+import { ChangeDetectionStrategy, Component } from '@angular/core';
 import { ListingComponent, ListingItemComponent } from '@lucca-front/ng/listing';
 import { Meta, StoryObj } from '@storybook/angular';
 import { PaletteAllArgType } from 'stories/helpers/common-arg-types';
@@ -7,6 +7,7 @@ import { PaletteAllArgType } from 'stories/helpers/common-arg-types';
 	selector: 'listing-stories',
 	templateUrl: './listing.stories.html',
 	imports: [ListingComponent, ListingItemComponent],
+	changeDetection: ChangeDetectionStrategy.OnPush,
 })
 class ListingStory {
 	paletteOptions = PaletteAllArgType.options;
@@ -19,7 +20,7 @@ export default {
 
 const template = () => ({});
 
-export const basic: StoryObj<ListingStory> = {
+export const Basic: StoryObj<ListingStory> = {
 	args: {},
 	render: template,
 };

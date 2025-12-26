@@ -1,5 +1,5 @@
 import { JsonPipe } from '@angular/common';
-import { Component, computed, inject, Injectable, signal } from '@angular/core';
+import { ChangeDetectionStrategy, Component, computed, inject, Injectable, signal } from '@angular/core';
 import { toSignal } from '@angular/core/rxjs-interop';
 import { FormsModule } from '@angular/forms';
 import { ActivatedRoute, provideRouter, Router, RouterLink, RouterOutlet, Routes, withComponentInputBinding } from '@angular/router';
@@ -30,18 +30,21 @@ class DataProvider {
 
 @Component({
 	template: `Empty component, no route matched`,
+	changeDetection: ChangeDetectionStrategy.OnPush,
 })
 class EmptyComponent {}
 
 @Component({
 	imports: [CalloutComponent],
 	template: `<lu-callout heading="" size="M" state="success">dialog onClosed() called</lu-callout>`,
+	changeDetection: ChangeDetectionStrategy.OnPush,
 })
 class ClosedComponent {}
 
 @Component({
 	imports: [CalloutComponent],
 	template: `<lu-callout heading="" size="M" state="error">dialog onDismissed() called</lu-callout>`,
+	changeDetection: ChangeDetectionStrategy.OnPush,
 })
 class DismissedComponent {}
 
@@ -88,6 +91,7 @@ class DismissedComponent {}
 			</form>
 		</lu-dialog>
 	`,
+	changeDetection: ChangeDetectionStrategy.OnPush,
 })
 class TestDialogComponent {
 	data = injectDialogData<number>();
@@ -127,6 +131,7 @@ class TestDialogComponent {
 		<router-outlet />
 	`,
 	imports: [RouterOutlet, RouterLink, JsonPipe, ButtonComponent, StoryModelDisplayComponent],
+	changeDetection: ChangeDetectionStrategy.OnPush,
 })
 class DialogRoutingStory {
 	service = inject(DataProvider);

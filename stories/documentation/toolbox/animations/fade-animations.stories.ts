@@ -1,4 +1,4 @@
-import { Component } from '@angular/core';
+import { ChangeDetectionStrategy, Component } from '@angular/core';
 import { provideAnimations } from '@angular/platform-browser/animations';
 import { luFadeAnimationFactory } from '@lucca-front/ng/animations';
 import { applicationConfig, Meta, StoryObj } from '@storybook/angular';
@@ -18,6 +18,7 @@ import { applicationConfig, Meta, StoryObj } from '@storybook/angular';
 	</div>`,
 	styleUrl: './animations.scss',
 	animations: [luFadeAnimationFactory()],
+	changeDetection: ChangeDetectionStrategy.OnPush,
 })
 class FadeAnimationStory {
 	fading = false;

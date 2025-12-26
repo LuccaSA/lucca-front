@@ -1,4 +1,4 @@
-import { Component } from '@angular/core';
+import { ChangeDetectionStrategy, Component } from '@angular/core';
 import { ClearComponent } from '@lucca-front/ng/clear';
 import { Meta } from '@storybook/angular';
 
@@ -6,6 +6,7 @@ import { Meta } from '@storybook/angular';
 	selector: 'clear-stories',
 	templateUrl: './clear.stories.html',
 	imports: [ClearComponent],
+	changeDetection: ChangeDetectionStrategy.OnPush,
 })
 class ClearStory {}
 

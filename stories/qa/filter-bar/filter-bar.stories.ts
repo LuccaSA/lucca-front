@@ -1,6 +1,6 @@
 import { allLegumes, FilterLegumesPipe } from '@/stories/forms/select/select.utils';
 import { provideHttpClient } from '@angular/common/http';
-import { Component, LOCALE_ID } from '@angular/core';
+import { ChangeDetectionStrategy, Component, LOCALE_ID } from '@angular/core';
 import { FormsModule } from '@angular/forms';
 import { ButtonComponent } from '@lucca-front/ng/button';
 import { LuCoreSelectApiV4Directive } from '@lucca-front/ng/core-select/api';
@@ -36,6 +36,7 @@ import { StoryModelDisplayComponent } from 'stories/helpers/story-model-display.
 		LuCoreSelectApiV4Directive,
 		LuMultiSelectInputComponent,
 	],
+	changeDetection: ChangeDetectionStrategy.OnPush,
 })
 class FilterBarStory {
 	legumes = allLegumes;
@@ -49,7 +50,7 @@ export default {
 
 const template = () => ({});
 
-export const basic: StoryObj<FilterBarStory> = {
+export const Basic: StoryObj<FilterBarStory> = {
 	args: {},
 	render: template,
 };

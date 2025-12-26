@@ -1,4 +1,4 @@
-import { Component } from '@angular/core';
+import { ChangeDetectionStrategy, Component } from '@angular/core';
 import { provideAnimations } from '@angular/platform-browser/animations';
 import { LuDropdownModule } from '@lucca-front/ng/dropdown';
 import { applicationConfig, Meta, StoryObj } from '@storybook/angular';
@@ -7,6 +7,7 @@ import { applicationConfig, Meta, StoryObj } from '@storybook/angular';
 	selector: 'dropdown-stories',
 	imports: [LuDropdownModule],
 	templateUrl: './dropdown-basic.stories.html',
+	changeDetection: ChangeDetectionStrategy.OnPush,
 })
 class DropdownBasicStory {
 	constructor() {}
