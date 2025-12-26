@@ -1,6 +1,6 @@
 import { allLegumes, FilterLegumesPipe, ILegume } from '@/stories/forms/select/select.utils';
 import { provideHttpClient } from '@angular/common/http';
-import { Component, LOCALE_ID } from '@angular/core';
+import { ChangeDetectionStrategy, Component, LOCALE_ID } from '@angular/core';
 import { FormsModule } from '@angular/forms';
 import { provideAnimations } from '@angular/platform-browser/animations';
 import { LuCoreSelectDepartmentsDirective } from '@lucca-front/ng/core-select/department'; // v20.2
@@ -29,6 +29,7 @@ import { applicationConfig, Meta, StoryObj } from '@storybook/angular';
 		FormsModule,
 		FilterLegumesPipe,
 	],
+	changeDetection: ChangeDetectionStrategy.OnPush,
 })
 class FilterPillStory {
 	legumes = allLegumes;

@@ -1,4 +1,4 @@
-import { Component } from '@angular/core';
+import { ChangeDetectionStrategy, Component } from '@angular/core';
 import { ContainerComponent } from '@lucca-front/ng/container';
 import { Meta, StoryObj } from '@storybook/angular';
 
@@ -23,6 +23,7 @@ import { Meta, StoryObj } from '@storybook/angular';
 			}
 		`,
 	],
+	changeDetection: ChangeDetectionStrategy.OnPush,
 })
 class ContainerStory {}
 

@@ -1,4 +1,4 @@
-import { Component } from '@angular/core';
+import { ChangeDetectionStrategy, Component } from '@angular/core';
 import { AppLayoutComponent } from '@lucca-front/ng/app-layout';
 import { Meta, StoryObj } from '@storybook/angular';
 
@@ -66,6 +66,7 @@ import { Meta, StoryObj } from '@storybook/angular';
 			}
 		`,
 	],
+	changeDetection: ChangeDetectionStrategy.OnPush,
 })
 class AppLayoutStory {}
 

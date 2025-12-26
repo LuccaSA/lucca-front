@@ -1,4 +1,4 @@
-import { Component, input } from '@angular/core';
+import { ChangeDetectionStrategy, Component, input } from '@angular/core';
 import { ILuUser, LuDisplayFormat, LuDisplayFullname, LuDisplayHybrid, LuDisplayInitials, LuUserDisplayModule } from '@lucca-front/ng/user';
 import { Meta, StoryObj } from '@storybook/angular';
 import { bob, patrick, squidwards } from '../user.mocks';
@@ -13,6 +13,7 @@ const formatters = {
 	selector: 'display-stories',
 	imports: [LuUserDisplayModule],
 	templateUrl: './display.stories.html',
+	changeDetection: ChangeDetectionStrategy.OnPush,
 })
 class DisplayStory {
 	users = input<ILuUser[]>([bob, patrick, squidwards]);

@@ -1,4 +1,4 @@
-import { Component } from '@angular/core';
+import { ChangeDetectionStrategy, Component } from '@angular/core';
 import { ProgressBarComponent } from '@lucca-front/ng/progress-bar';
 import { Meta, StoryObj } from '@storybook/angular';
 
@@ -6,6 +6,7 @@ import { Meta, StoryObj } from '@storybook/angular';
 	selector: 'progress-bar-stories',
 	templateUrl: './progress-bar.stories.html',
 	imports: [ProgressBarComponent],
+	changeDetection: ChangeDetectionStrategy.OnPush,
 })
 class ProgressBarStory {}
 

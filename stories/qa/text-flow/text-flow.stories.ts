@@ -1,9 +1,10 @@
-import { Component } from '@angular/core';
+import { ChangeDetectionStrategy, Component } from '@angular/core';
 import { Meta, StoryObj } from '@storybook/angular';
 
 @Component({
 	selector: 'text-flow-stories',
 	templateUrl: './text-flow.stories.html',
+	changeDetection: ChangeDetectionStrategy.OnPush,
 })
 class TextFlowStory {}
 
