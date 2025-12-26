@@ -1,4 +1,4 @@
-import { Component } from '@angular/core';
+import { ChangeDetectionStrategy, Component } from '@angular/core';
 import { FooterComponent } from '@lucca-front/ng/footer';
 import { Meta, StoryObj, moduleMetadata } from '@storybook/angular';
 
@@ -6,6 +6,7 @@ import { Meta, StoryObj, moduleMetadata } from '@storybook/angular';
 	selector: 'footer-stories',
 	templateUrl: './footer.stories.html',
 	imports: [FooterComponent],
+	changeDetection: ChangeDetectionStrategy.OnPush,
 })
 class FooterStory {}
 

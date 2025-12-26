@@ -17,7 +17,7 @@ export default {
 
 const template = () => ({});
 
-export const basic: StoryObj<ProgressBarStory> = {
+export const Basic: StoryObj<ProgressBarStory> = {
 	args: {},
 	render: template,
 };

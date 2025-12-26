@@ -34,7 +34,7 @@ export default {
 
 const template = () => ({});
 
-export const basic: StoryObj<ContainerStory> = {
+export const Basic: StoryObj<ContainerStory> = {
 	args: {},
 	render: template,
 };

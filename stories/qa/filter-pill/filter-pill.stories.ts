@@ -50,7 +50,7 @@ export default {
 
 const template = () => ({});
 
-export const basic: StoryObj<FilterPillStory> = {
+export const Basic: StoryObj<FilterPillStory> = {
 	args: {},
 	render: template,
 };

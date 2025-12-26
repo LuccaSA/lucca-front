@@ -15,7 +15,7 @@ export default {
 
 const template = () => ({});
 
-export const basic: StoryObj<SkipLinksStory> = {
+export const Basic: StoryObj<SkipLinksStory> = {
 	args: {},
 	render: template,
 };

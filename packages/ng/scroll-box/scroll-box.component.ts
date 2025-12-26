@@ -1,4 +1,4 @@
-import { afterNextRender, booleanAttribute, Component, ElementRef, inject, input, OnInit, signal, ViewEncapsulation } from '@angular/core';
+import { afterNextRender, booleanAttribute, ChangeDetectionStrategy, Component, ElementRef, inject, input, OnInit, signal, ViewEncapsulation } from '@angular/core';
 
 @Component({
 	selector: 'lu-scroll-box',
@@ -12,6 +12,7 @@ import { afterNextRender, booleanAttribute, Component, ElementRef, inject, input
 		'[class.is-firstVisible]': 'isFirstVisible()',
 		'[class.is-lastVisible]': 'isLastVisible()',
 	},
+	changeDetection: ChangeDetectionStrategy.OnPush,
 })
 export class ScrollBoxComponent implements OnInit {
 	#elementRef = inject<ElementRef<HTMLElement>>(ElementRef);
