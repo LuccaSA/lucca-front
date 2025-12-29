@@ -73,10 +73,7 @@ export class ChipComponent {
 	readonly kill = output<Event>();
 
 	readonly stateAlt = computed(() => (this.isWarning() ? this.intl.warning : this.isCritical() ? this.intl.error : ''));
-
 	readonly isWarning = computed<boolean>(() => this.state() === 'warning');
-
 	readonly isCritical = computed<boolean>(() => this.state() === 'critical');
-
 	readonly displayedIcon = computed<LuccaIcon | null>(() => (this.isWarning() ? 'signWarning' : this.isCritical() ? 'signError' : this.icon()));
 }
