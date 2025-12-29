@@ -28,7 +28,6 @@ export class EmptyStatePageComponent {
 	/**
 	 * Top right foreground image (URL)
 	 */
-
 	readonly topRightForeground = input<string>('https://cdn.lucca.fr/lucca-front/assets/empty-states/generic/coffee-01.svg');
 
 	/**
