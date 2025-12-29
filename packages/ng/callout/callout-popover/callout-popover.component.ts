@@ -37,6 +37,9 @@ export class CalloutPopoverComponent {
 	 */
 	readonly buttonAlt = input<string>('');
 
+	/**
+	 * Hide callout popover title if there is only one item
+	 */
 	readonly headingHiddenIfSingleItem = input(false, { transform: booleanAttribute });
 
 	/**
