@@ -43,7 +43,7 @@ export class ChipComponent {
 	readonly palette = input<string>();
 
 	/**
-	 * Disables the chip
+	 * Disabled the chip
 	 */
 	readonly disabled = input(false, { transform: booleanAttribute });
 
