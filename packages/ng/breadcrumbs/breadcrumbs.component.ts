@@ -21,8 +21,11 @@ let nextId = 0;
 	changeDetection: ChangeDetectionStrategy.OnPush,
 })
 export class BreadcrumbsComponent {
-	intl = getIntl(LU_BREADCRUMBS_TRANSLATIONS);
+	readonly intl = getIntl(LU_BREADCRUMBS_TRANSLATIONS);
 
+	/**
+	 * Disabled compact mod
+	 */
 	readonly disableCompact = input(false, { transform: booleanAttribute });
 
 	readonly links = contentChildren(BreadcrumbsLinkDirective);
