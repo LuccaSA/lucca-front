@@ -17,8 +17,23 @@ import { IconComponent } from '@lucca-front/ng/icon';
 	},
 })
 export class BoxComponent {
+	/**
+	 * Is the box has toggle selection
+	 */
 	readonly toggle = input(false, { transform: booleanAttribute });
+
+	/**
+	 * Displayed neutral background
+	 */
 	readonly neutral = input(false, { transform: booleanAttribute });
+
+	/**
+	 * Should we display the killable cross icon?
+	 */
 	readonly killable = input(false, { transform: booleanAttribute });
+
+	/**
+	 * Style the box with a top arrow
+	 */
 	readonly withArrow = input(false, { transform: booleanAttribute });
 }
