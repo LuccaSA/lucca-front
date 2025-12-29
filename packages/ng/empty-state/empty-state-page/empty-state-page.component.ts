@@ -46,11 +46,23 @@ export class EmptyStatePageComponent {
 	 */
 	readonly contentBackgroundColor = input<string>('var(--pr-t-elevation-surface-default)');
 
+	/**
+	 * Add any content on top of empty state page
+	 */
 	readonly slotTop = input<PortalContent>();
 
+	/**
+	 * The title of the empty state page
+	 */
 	readonly heading = input<string>();
 
+	/**
+	 * The description of the empty state page
+	 */
 	readonly description = input<PortalContent>();
 
+	/**
+	 * Define the aria level of the title
+	 */
 	readonly hx = input(1, { transform: numberAttribute as (value: Hx | `${Hx}`) => Hx });
 }
