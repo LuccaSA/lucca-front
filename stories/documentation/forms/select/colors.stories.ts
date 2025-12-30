@@ -41,8 +41,8 @@ class ColorsStory {
 		{ name: 'Ananas', id: 9, background: 'var(--palettes-pineapple-300)' },
 		{ name: 'Citrouille', id: 10, background: 'var(--palettes-pumpkin-300)' },
 		{ name: 'Pastèque', id: 11, background: 'var(--palettes-watermelon-300)' },
-		// { name: 'Blanc', id: 12, background: '#FFF', border: true },
-		// { name: 'Noir', id: 13, background: '#000' },
+		{ name: 'Blanc', id: 12, background: '#FFF', border: true },
+		{ name: 'Noir', id: 13, background: '#000' },
 	];
 }
 

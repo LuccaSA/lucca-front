@@ -49,6 +49,7 @@
 	@at-root ($atRoot) {
 		.colorPicker-item {
 			display: flex;
+			align-items: center;
 			gap: var(--pr-t-spacings-100);
 		}
 	}
