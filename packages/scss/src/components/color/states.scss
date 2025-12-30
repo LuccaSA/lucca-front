@@ -1,0 +1,11 @@
+@mixin selected {
+	--components-color-before-display: grid;
+}
+
+@mixin highlighted {
+	--components-color-scale: 1.2;
+}
+
+@mixin selectedNotFilled {
+	--components-colorPicker-input-paddingInlineStart: var(--pr-t-spacings-400);
+}

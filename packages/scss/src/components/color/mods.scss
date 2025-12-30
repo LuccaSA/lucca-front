@@ -1,0 +1,48 @@
+@use '@lucca-front/scss/src/commons/utils/a11y';
+
+@mixin S {
+	--components-color-inlineSize: var(--pr-t-spacings-300);
+}
+
+@mixin XS {
+	--components-color-inlineSize: calc(var(--pr-t-spacings-200) + var(--pr-t-spacings-50));
+}
+
+@mixin border {
+	--components-color-boxShadowColor: var(--palettes-neutral-200);
+}
+
+@mixin noSearch {
+	--components-colorPicker-inlineSize: 4.625rem;
+
+	.color_name {
+		@include a11y.mask;
+	}
+}
+
+@mixin noSearchS {
+	--components-colorPicker-inlineSize: 3.75rem;
+}
+
+@mixin noSearchClearable {
+	--components-colorPicker-inlineSize: 6.125rem;
+}
+
+@mixin noSearchClearableS {
+	--components-colorPicker-inlineSize: 4.875rem;
+}
+
+@mixin childrenReset {
+	.lu-picker-content {
+		padding: 0;
+	}
+
+	.optionItem-value {
+		padding: 0;
+		background-color: transparent !important;
+
+		&::before {
+			display: none;
+		}
+	}
+}

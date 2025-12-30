@@ -1,0 +1,71 @@
+@use 'exports' as *;
+
+.color {
+	@layer components {
+		@include vars;
+		@include component;
+	}
+
+	@layer mods {
+		&.mod-S {
+			@include S;
+		}
+
+		&.mod-XS {
+			@include XS;
+		}
+
+		&.mod-border {
+			@include border;
+		}
+
+		[aria-selected="true"] & {
+			@include selected;
+		}
+
+		[role="listbox"]:not(:hover) .optionItem.is-highlighted &,
+		[role="listbox"] .optionItem:hover & {
+			@include highlighted;
+		}
+	}
+}
+
+.colorPicker {
+	@layer components {
+		@include varsPicker;
+		@include componentPicker;
+	}
+
+	@layer mods {
+		&.mod-noSearch {
+			@include noSearch;
+
+			.form-field.mod-S & {
+				@include noSearchS;
+			}
+
+			&.is-clearable {
+				@include noSearchClearable;
+
+				.form-field.mod-S & {
+					@include noSearchClearableS;
+				}
+			}
+		}
+
+		&.is-selected:not(.is-searchFilled) {
+			@include selectedNotFilled;
+		}
+	}
+}
+
+.colorPanel {
+	@layer components {
+		@include varsPanel;
+		@include componentPanel;
+	}
+
+	@layer mods {
+		@include childrenReset;
+	}
+}

@@ -35,7 +35,12 @@ import { TreeGenerator } from './tree-generator';
 export const coreSelectDefaultOptionComparer: LuOptionComparer<unknown> = (option1, option2) => JSON.stringify(option1) === JSON.stringify(option2);
 export const coreSelectDefaultOptionKey: (option: unknown) => unknown = (option) => option;
 
-@Directive()
+@Directive({
+	host: {
+		'[class.colorPicker]': 'colorPicker()',
+		'[class.mod-noSearch]': 'noSearch()',
+	},
+})
 export abstract class ALuSelectInputComponent<TOption, TValue> implements OnDestroy, OnInit, ControlValueAccessor, FilterPillInputComponent {
 	public parentInput = inject(FILTER_PILL_INPUT_COMPONENT, { optional: true, skipSelf: true });
 	protected changeDetectorRef = inject(ChangeDetectorRef);
@@ -86,7 +91,7 @@ export abstract class ALuSelectInputComponent<TOption, TValue> implements OnDest
 	#defaultClearable = false;
 
 	get searchable(): boolean {
-		return this.clueChange$.observed;
+		return this.clueChange$.observed && !this.noSearch();
 	}
 
 	@Input()
@@ -152,6 +157,10 @@ export abstract class ALuSelectInputComponent<TOption, TValue> implements OnDest
 
 	noClueIcon = input(false, { transform: booleanAttribute });
 	inputTabindex = input<number>(0);
+
+	noSearch = input(false, { transform: booleanAttribute });
+
+	colorPicker = input(false, { transform: booleanAttribute });
 
 	@HostBinding('class.mod-noClueIcon')
 	protected get isNoClueIconClass(): boolean {

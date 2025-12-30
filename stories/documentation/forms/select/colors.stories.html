@@ -1,0 +1,136 @@
+<lu-form-field label="Couleur">
+	<lu-simple-select clearable #selectRef0 [(ngModel)]="selectedColors0" [options]="colors" noClueIcon noSearch colorPicker>
+		<ng-container *luOption="let color; select: selectRef0">
+			<span class="color" [class.mod-border]="color.border" [attr.style]="`--components-color-backgroundColor: ${color.background}`"></span>
+			<span class="color_name">{{ color.name }}</span>
+		</ng-container>
+		<ng-container *luDisplayer="let color; select: selectRef0">
+			<div class="colorPicker-item">
+				<span
+					class="color mod-S"
+					[class.mod-border]="color.border"
+					[attr.style]="`--components-color-backgroundColor: ${color.background}`"
+				></span>
+				<span class="color_name">{{ color.name }}</span>
+			</div>
+		</ng-container>
+	</lu-simple-select>
+</lu-form-field>
+
+<br />
+
+<lu-form-field label="Couleur">
+	<lu-simple-select #selectRef1 [(ngModel)]="selectedColors1" [options]="colors" noClueIcon noSearch colorPicker>
+		<ng-container *luOption="let color; select: selectRef1">
+			<span class="color" [class.mod-border]="color.border" [attr.style]="`--components-color-backgroundColor: ${color.background}`"></span>
+			<span class="color_name">{{ color.name }}</span>
+		</ng-container>
+		<ng-container *luDisplayer="let color; select: selectRef1">
+			<div class="colorPicker-item">
+				<span
+					class="color mod-S"
+					[class.mod-border]="color.border"
+					[attr.style]="`--components-color-backgroundColor: ${color.background}`"
+				></span>
+				<span class="color_name">{{ color.name }}</span>
+			</div>
+		</ng-container>
+	</lu-simple-select>
+</lu-form-field>
+
+<br />
+
+<lu-form-field label="Couleur">
+	<lu-simple-select
+		clearable
+		#selectRef2
+		[(ngModel)]="selectedColors2"
+		[options]="colors | filterColors: clue"
+		(clueChange)="clue = $event"
+		colorPicker
+	>
+		<ng-container *luOption="let color; select: selectRef2">
+			<span class="color" [class.mod-border]="color.border" [attr.style]="`--components-color-backgroundColor: ${color.background}`"></span>
+			<span class="color_name">{{ color.name }}</span>
+		</ng-container>
+		<ng-container *luDisplayer="let color; select: selectRef2">
+			<div class="colorPicker-item">
+				<span
+					class="color mod-S"
+					[class.mod-border]="color.border"
+					[attr.style]="`--components-color-backgroundColor: ${color.background}`"
+				></span>
+				<span class="color_name">{{ color.name }}</span>
+			</div>
+		</ng-container>
+	</lu-simple-select>
+</lu-form-field>
+
+<br />
+
+<lu-form-field label="Couleur">
+	<lu-simple-select
+		#selectRef3
+		[(ngModel)]="selectedColors3"
+		[options]="colors | filterColors: clue"
+		(clueChange)="clue = $event"
+		colorPicker
+	>
+		<ng-container *luOption="let color; select: selectRef3">
+			<span class="color" [class.mod-border]="color.border" [attr.style]="`--components-color-backgroundColor: ${color.background}`"></span>
+			<span class="color_name">{{ color.name }}</span>
+		</ng-container>
+		<ng-container *luDisplayer="let color; select: selectRef3">
+			<div class="colorPicker-item">
+				<span
+					class="color mod-S"
+					[class.mod-border]="color.border"
+					[attr.style]="`--components-color-backgroundColor: ${color.background}`"
+				></span>
+				<span class="color_name">{{ color.name }}</span>
+			</div>
+		</ng-container>
+	</lu-simple-select>
+</lu-form-field>
+
+<br />
+
+<lu-form-field label="Couleur" size="S">
+	<lu-simple-select clearable #selectRef4 [(ngModel)]="selectedColors4" [options]="colors" noClueIcon noSearch colorPicker>
+		<ng-container *luOption="let color; select: selectRef4">
+			<span class="color" [class.mod-border]="color.border" [attr.style]="`--components-color-backgroundColor: ${color.background}`"></span>
+			<span class="color_name">{{ color.name }}</span>
+		</ng-container>
+		<ng-container *luDisplayer="let color; select: selectRef4">
+			<div class="colorPicker-item">
+				<span
+					class="color mod-S"
+					[class.mod-border]="color.border"
+					[attr.style]="`--components-color-backgroundColor: ${color.background}`"
+				></span>
+				<span class="color_name">{{ color.name }}</span>
+			</div>
+		</ng-container>
+	</lu-simple-select>
+</lu-form-field>
+
+<br />
+
+<lu-form-field label="Couleur" size="S">
+	<lu-simple-select #selectRef5 [(ngModel)]="selectedColors5" [options]="colors" noClueIcon noSearch colorPicker>
+		<ng-container *luOption="let color; select: selectRef5">
+			<span class="color" [class.mod-border]="color.border" [attr.style]="`--components-color-backgroundColor: ${color.background}`"></span>
+			<span class="color_name">{{ color.name }}</span>
+		</ng-container>
+		<ng-container *luDisplayer="let color; select: selectRef5">
+			<div class="colorPicker-item">
+				<span
+					class="color mod-S"
+					[class.mod-border]="color.border"
+					[attr.style]="`--components-color-backgroundColor: ${color.background}`"
+				></span>
+				<span class="color_name">{{ color.name }}</span>
+			</div>
+		</ng-container>
+	</lu-simple-select>
+</lu-form-field>

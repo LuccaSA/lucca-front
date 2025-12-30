@@ -82,7 +82,7 @@
 					background-color: var(--palettes-200, var(--palettes-product-200));
 				}
 
-				:host-context(.is-highlighted) & {
+				:host-context(.lu-picker-content:not(:hover) .is-highlighted) & {
 					background-color: var(--palettes-100, var(--palettes-product-100));
 
 					&:hover {
@@ -95,7 +95,7 @@
 				background-color: var(--palettes-neutral-50);
 			}
 
-			:host-context(.is-highlighted) & {
+			:host-context(.lu-picker-content:not(:hover) .is-highlighted) & {
 				background-color: var(--palettes-neutral-50);
 
 				&:hover {

@@ -1,0 +1,72 @@
+@use '@lucca-front/icons/src/commons/utils/icon';
+@use '@lucca-front/scss/src/commons/utils/namespace';
+@use '@lucca-front/scss/src/commons/utils/a11y';
+@use '@lucca-front/scss/src/commons/utils/text';
+
+@mixin component($atRoot: namespace.$defaultAtRoot) {
+	display: block;
+	inline-size: var(--components-color-inlineSize);
+	aspect-ratio: 1;
+	background: var(--components-color-backgroundColor);
+	color: var(--components-color-color);
+	border-radius: var(--pr-t-border-radius-small);
+	box-shadow: 0 0 0 1px var(--components-color-boxShadowColor);
+	scale: var(--components-color-scale);
+	transition-property: scale;
+	transition-duration: var(--commons-animations-durations-fast);
+	flex-shrink: 0;
+
+	&::before {
+		@include icon.generate('sign_confirm');
+
+		display: var(--components-color-before-display);
+		position: absolute;
+		inset: 0;
+		place-items: center;
+		font-size: 1.5rem;
+	}
+
+	@at-root ($atRoot) {
+		.color_name {
+			@include text.ellipsis;
+		}
+	}
+}
+
+@mixin componentPicker($atRoot: namespace.$defaultAtRoot) {
+	inline-size: var(--components-colorPicker-inlineSize);
+
+	.simpleSelect-field-value {
+		padding: 1px;
+		margin: -1px;
+		min-inline-size: 0;
+	}
+
+	.simpleSelect-field-input {
+		padding-inline-start: var(--components-colorPicker-input-paddingInlineStart);
+	}
+
+	@at-root ($atRoot) {
+		.colorPicker-item {
+			display: flex;
+			gap: var(--pr-t-spacings-100);
+		}
+	}
+}
+
+@mixin componentPanel($atRoot: namespace.$defaultAtRoot) {
+	.lu-picker-content {
+		max-inline-size: 17.5rem;
+	}
+
+	[role="listbox"] {
+		display: flex;
+		flex-wrap: wrap;
+		gap: var(--pr-t-spacings-100);
+		padding: var(--pr-t-spacings-150);
+	}
+
+	.color_name {
+		@include a11y.mask;
+	}
+}

@@ -1,0 +1,23 @@
+@mixin vars {
+	--components-color-color-channel: clamp(0, (((r * .299) + (g * .587) + (b * .114)) - 128) * -1000, 255);
+	--components-color-scale: 1;
+	--components-color-before-display: none;
+	--components-color-inlineSize: calc(var(--pr-t-spacings-50) + var(--pr-t-spacings-400));
+	--components-color-backgroundColor: transparent;
+	--components-color-boxShadowColor: transparent;
+	--components-color-color: rgb(
+		from var(--components-color-backgroundColor)
+		var(--components-color-color-channel)
+		var(--components-color-color-channel)
+		var(--components-color-color-channel)
+	);
+}
+
+@mixin varsPicker {
+	--components-colorPicker-input-paddingInlineStart: 0;
+	--components-colorPicker-inlineSize: auto;
+}
+
+@mixin varsPanel {
+
+}
