@@ -1,4 +1,4 @@
-import { Component } from '@angular/core';
+import { ChangeDetectionStrategy, Component } from '@angular/core';
 import { LuSkipLinksComponent } from '@lucca-front/ng/a11y';
 import { Meta, StoryObj } from '@storybook/angular';
 
@@ -41,6 +41,7 @@ import { Meta, StoryObj } from '@storybook/angular';
 			}
 		`,
 	],
+	changeDetection: ChangeDetectionStrategy.OnPush,
 })
 class SkipLinksStory {}
 

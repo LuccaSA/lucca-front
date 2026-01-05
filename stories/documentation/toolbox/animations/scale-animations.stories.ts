@@ -1,4 +1,4 @@
-import { Component } from '@angular/core';
+import { ChangeDetectionStrategy, Component } from '@angular/core';
 import { provideAnimations } from '@angular/platform-browser/animations';
 import { luScaleAnimationFactory } from '@lucca-front/ng/animations';
 import { applicationConfig, Meta, StoryObj } from '@storybook/angular';
@@ -55,6 +55,7 @@ import { applicationConfig, Meta, StoryObj } from '@storybook/angular';
 	`,
 	styleUrl: './animations.scss',
 	animations: [luScaleAnimationFactory()],
+	changeDetection: ChangeDetectionStrategy.OnPush,
 })
 class ScaleAnimationStory {
 	scalingLeft = false;
