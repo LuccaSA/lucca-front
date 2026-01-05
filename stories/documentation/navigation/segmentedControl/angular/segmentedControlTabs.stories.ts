@@ -14,6 +14,17 @@ export default {
 			imports: [NumericBadgeComponent, SegmentedControlTabsComponent, SegmentedControlTabsPanelComponent],
 		}),
 	],
+	argTypes: {
+		small: {
+			description: 'Modifie la taille du composant.',
+		},
+		withNumericBadge: {
+			description: 'Présente un exemple avec un Numeric Badge.',
+		},
+		vertical: {
+			description: 'Affiche le composant en vue verticale.',
+		},
+	},
 	title: 'Documentation/Navigation/segmentedControl/Angular/Tabs',
 } as Meta;
 

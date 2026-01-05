@@ -12,6 +12,16 @@ export default {
 			control: {
 				type: 'select',
 			},
+			description: 'Modifie la taille du composant.',
+		},
+		noBorder: {
+			description: 'Retire la bordure sous le composant.',
+		},
+		container: {
+			description: 'Applique un container autour des liens pour aligner le composant avec le contenu de la page.',
+		},
+		numericBadge: {
+			description: 'Présente un exemple avec Numeric Badge.',
 		},
 	},
 	decorators: [
