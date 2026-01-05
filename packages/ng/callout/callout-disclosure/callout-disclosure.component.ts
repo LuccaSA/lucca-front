@@ -1,4 +1,4 @@
-import { ChangeDetectionStrategy, Component, ViewEncapsulation, booleanAttribute, output, input, computed } from '@angular/core';
+import { ChangeDetectionStrategy, Component, ViewEncapsulation, booleanAttribute, computed, input, output } from '@angular/core';
 import { LuccaIcon } from '@lucca-front/icons';
 import { Palette, PortalContent, PortalDirective } from '@lucca-front/ng/core';
 import { IconComponent } from '@lucca-front/ng/icon';
@@ -15,12 +15,26 @@ import { getCalloutPalette } from '../callout.utils';
 	encapsulation: ViewEncapsulation.None,
 })
 export class CalloutDisclosureComponent {
+	/**
+	 * The title of the disclosure callout
+	 */
 	readonly heading = input.required<PortalContent>();
 
+	/**
+	 * Which icon should we display in the disclosure callout if any?
+	 * Defaults to no icon.
+	 */
 	readonly icon = input<LuccaIcon>();
 
+	/**
+	 * Which palette should be used for the entire disclosure callout.
+	 * Defaults to none (inherits parent palette)
+	 */
 	readonly palette = input<Palette>('none');
 
+	/**
+	 * Which size should the disclosure callout be? Defaults to medium
+	 */
 	readonly size = input<'M' | 'S'>('M');
 
 	/**
@@ -32,11 +46,17 @@ export class CalloutDisclosureComponent {
 	 */
 	readonly state = input<CalloutState>();
 
+	/**
+	 * Is the disclosure callout is open by default
+	 */
 	readonly open = input(false, { transform: booleanAttribute });
 
-	readonly calloutPalette = computed<string>(() => {
-		return getCalloutPalette(this.state(), this.palette());
-	});
+	/**
+	 * Emit boolean event when toggle disclosure callout opened
+	 */
+	readonly openChange = output<boolean>();
+
+	readonly calloutPalette = computed<string>(() => getCalloutPalette(this.state(), this.palette()));
 
 	readonly calloutClasses = computed(() => {
 		const palette = this.calloutPalette();
@@ -45,8 +65,6 @@ export class CalloutDisclosureComponent {
 			[`palette-${palette}`]: !!palette,
 		};
 	});
-
-	openChange = output<boolean>();
 
 	public onToggle(event: Event) {
 		if (event.target instanceof HTMLDetailsElement) {
