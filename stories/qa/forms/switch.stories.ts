@@ -1,9 +1,10 @@
-import { Component } from '@angular/core';
+import { ChangeDetectionStrategy, Component } from '@angular/core';
 import { Meta, moduleMetadata, StoryObj } from '@storybook/angular';
 
 @Component({
 	selector: 'forms-switch-stories',
 	templateUrl: './switch.stories.html',
+	changeDetection: ChangeDetectionStrategy.OnPush,
 })
 class SwitchStory {}
 

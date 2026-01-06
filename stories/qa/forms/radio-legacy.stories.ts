@@ -1,9 +1,10 @@
-import { Component } from '@angular/core';
+import { ChangeDetectionStrategy, Component } from '@angular/core';
 import { Meta, moduleMetadata, StoryObj } from '@storybook/angular';
 
 @Component({
 	selector: 'forms-radio-legacy-stories',
 	templateUrl: './radio-legacy.stories.html',
+	changeDetection: ChangeDetectionStrategy.OnPush,
 })
 class RadioLegacyStory {}
 

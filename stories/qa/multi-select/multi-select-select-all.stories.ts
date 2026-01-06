@@ -1,6 +1,6 @@
 import { JsonPipe, registerLocaleData } from '@angular/common';
 import localesFr from '@angular/common/locales/fr';
-import { Component } from '@angular/core';
+import { ChangeDetectionStrategy, Component } from '@angular/core';
 import { FormsModule } from '@angular/forms';
 import { LuCoreSelectTotalCountDirective } from '@lucca-front/ng/core-select';
 import { FormFieldComponent } from '@lucca-front/ng/form-field';
@@ -29,6 +29,7 @@ registerLocaleData(localesFr);
 
 		<pre>{{ legumeSelection | json }}</pre>
 	`,
+	changeDetection: ChangeDetectionStrategy.OnPush,
 })
 class MultiSelectWithSelectAllStory {
 	legumes = allLegumes;

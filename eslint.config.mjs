@@ -55,7 +55,7 @@ export default typescript.config(
 
 			// This one is from Angular 20, we'll remove it eventually but legacy code makes it hard to do
 			'@angular-eslint/prefer-inject': 'off',
-			'@angular-eslint/prefer-on-push-component-change-detection': 'warn',
+			'@angular-eslint/prefer-on-push-component-change-detection': 'error',
 
 			'@typescript-eslint/explicit-function-return-type': 'off',
 			'@typescript-eslint/explicit-module-boundary-types': 'off', // on aimerait bien dire oui sauf pour void
