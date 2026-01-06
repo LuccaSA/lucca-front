@@ -4,30 +4,35 @@
 @use '@lucca-front/scss/src/commons/utils/text';
 
 @mixin component($atRoot: namespace.$defaultAtRoot) {
-	display: block;
-	inline-size: var(--components-color-inlineSize);
-	aspect-ratio: 1;
-	background: var(--components-color-backgroundColor);
-	color: var(--components-color-color);
-	border-radius: var(--pr-t-border-radius-small);
-	box-shadow: 0 0 0 1px var(--components-color-boxShadowColor);
-	scale: var(--components-color-scale);
-	transition-property: scale;
-	transition-duration: var(--commons-animations-durations-fast);
-	flex-shrink: 0;
+	display: flex;
+	align-items: center;
+	gap: var(--pr-t-spacings-100);
 
-	&::before {
-		@include icon.generate('sign_confirm');
+	.color-value {
+		inline-size: var(--components-color-value-inlineSize);
+		aspect-ratio: 1;
+		background: var(--components-color-value-backgroundColor);
+		color: rgb(from var(--components-color-value-backgroundColor) var(--components-color-value-channel) var(--components-color-value-channel) var(--components-color-value-channel));
+		border-radius: var(--pr-t-border-radius-small);
+		box-shadow: 0 0 0 1px var(--components-color-value-boxShadowColor);
+		scale: var(--components-color-value-scale);
+		transition-property: scale;
+		transition-duration: var(--commons-animations-durations-fast);
+		flex-shrink: 0;
 
-		display: var(--components-color-before-display);
-		position: absolute;
-		inset: 0;
-		place-items: center;
-		font-size: 1.5rem;
+		&::before {
+			@include icon.generate('sign_confirm');
+
+			display: var(--components-color-value-before-display);
+			position: absolute;
+			inset: 0;
+			place-items: center;
+			font-size: 1.5rem;
+		}
 	}
 
 	@at-root ($atRoot) {
-		.color_name {
+		.color-name {
 			@include text.ellipsis;
 		}
 	}
@@ -45,29 +50,29 @@
 	.simpleSelect-field-input {
 		padding-inline-start: var(--components-colorPicker-input-paddingInlineStart);
 	}
-
-	@at-root ($atRoot) {
-		.colorPicker-item {
-			display: flex;
-			align-items: center;
-			gap: var(--pr-t-spacings-100);
-		}
-	}
 }
 
 @mixin componentPanel($atRoot: namespace.$defaultAtRoot) {
 	.lu-picker-content {
-		max-inline-size: 17.5rem;
+		inline-size: 17.5rem;
 	}
 
 	[role="listbox"] {
 		display: flex;
 		flex-wrap: wrap;
-		gap: var(--pr-t-spacings-100);
-		padding: var(--pr-t-spacings-150);
+		padding: var(--pr-t-spacings-100);
 	}
 
-	.color_name {
-		@include a11y.mask;
+	.color {
+		padding: var(--pr-t-spacings-50);
+	}
+
+	@at-root ($atRoot) {
+		.colorPanel-highlighted {
+			display: flex;
+			padding: var(--pr-t-spacings-50) var(--pr-t-spacings-100);
+			margin: 0 var(--pr-t-spacings-100) var(--pr-t-spacings-100);
+			gap: var(--pr-t-spacings-50);
+		}
 	}
 }

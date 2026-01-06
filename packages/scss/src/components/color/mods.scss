@@ -1,21 +1,25 @@
 @use '@lucca-front/scss/src/commons/utils/a11y';
 
-@mixin S {
-	--components-color-inlineSize: var(--pr-t-spacings-300);
+@mixin M {
+	--components-color-value-inlineSize: calc(var(--pr-t-spacings-200) + var(--pr-t-spacings-50));
 }
 
-@mixin XS {
-	--components-color-inlineSize: calc(var(--pr-t-spacings-200) + var(--pr-t-spacings-50));
+@mixin L {
+	--components-color-value-inlineSize: var(--pr-t-spacings-300);
+}
+
+@mixin XL {
+	--components-color-value-inlineSize: calc(var(--pr-t-spacings-400) + var(--pr-t-spacings-50));
 }
 
 @mixin border {
-	--components-color-boxShadowColor: var(--palettes-neutral-200);
+	--components-color-value-boxShadowColor: var(--palettes-neutral-200);
 }
 
 @mixin noSearch {
 	--components-colorPicker-inlineSize: 4.625rem;
 
-	.color_name {
+	.color-name {
 		@include a11y.mask;
 	}
 }

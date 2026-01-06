@@ -7,12 +7,16 @@
 	}
 
 	@layer mods {
-		&.mod-S {
-			@include S;
+		&.mod-M {
+			@include M;
 		}
 
-		&.mod-XS {
-			@include XS;
+		&.mod-L {
+			@include L;
+		}
+
+		&.mod-XL {
+			@include XL;
 		}
 
 		&.mod-border {
@@ -55,13 +59,16 @@
 
 		&.is-selected:not(.is-searchFilled) {
 			@include selectedNotFilled;
+
+			.form-field.mod-S & {
+				@include selectedNotFilledS;
+			}
 		}
 	}
 }
 
 .colorPanel {
 	@layer components {
-		@include varsPanel;
 		@include componentPanel;
 	}
 

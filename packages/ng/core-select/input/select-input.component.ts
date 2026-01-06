@@ -62,6 +62,8 @@ export abstract class ALuSelectInputComponent<TOption, TValue> implements OnDest
 	public panelClosed = output<void>();
 	public panelOpened = output<void>();
 
+	public highlightedOption = output<TOption>();
+
 	@ViewChild('inputElement')
 	private inputElementRef: ElementRef<HTMLInputElement>;
 
@@ -170,6 +172,7 @@ export abstract class ALuSelectInputComponent<TOption, TValue> implements OnDest
 	optionTpl = model<TemplateRef<LuOptionContext<TOption>> | Type<unknown>>(LuSimpleSelectDefaultOptionComponent);
 	valueTpl = model<TemplateRef<LuOptionContext<TOption>> | Type<unknown> | undefined>();
 	panelHeaderTpl = model<TemplateRef<void> | Type<unknown> | undefined>();
+	panelFooterTpl = model<TemplateRef<void> | Type<unknown> | undefined>();
 
 	displayerTpl = computed(() => this.valueTpl() || this.optionTpl());
 
