@@ -64,7 +64,7 @@ export default {
 				min: min ? new Date(min) : null,
 				max: max ? new Date(max) : null,
 			},
-			template: cleanupTemplate(`<lu-form-field ${generateInputs(
+			template: cleanupTemplate(`<lu-form-field presentation ${generateInputs(
 				{
 					label,
 					hiddenLabel,

@@ -1,5 +1,5 @@
 import { ConnectionPositionPair } from '@angular/cdk/overlay';
-import { NgTemplateOutlet } from '@angular/common';
+import { DatePipe, NgTemplateOutlet } from '@angular/common';
 import {
 	booleanAttribute,
 	ChangeDetectionStrategy,
@@ -23,7 +23,7 @@ import { LuccaIcon } from '@lucca-front/icons';
 import { ClearComponent } from '@lucca-front/ng/clear';
 import { isNil, LuClass, ɵeffectWithDeps } from '@lucca-front/ng/core';
 import { FILTER_PILL_INPUT_COMPONENT, FilterPillDisplayerDirective, FilterPillInputComponent } from '@lucca-front/ng/filter-pills';
-import { InputDirective } from '@lucca-front/ng/form-field';
+import { InputDirective, PresentationDisplayDirective } from '@lucca-front/ng/form-field';
 import { IconComponent } from '@lucca-front/ng/icon';
 import { PopoverDirective } from '@lucca-front/ng/popover2';
 import { isSameDay, parse, startOfDay } from 'date-fns';
@@ -41,7 +41,7 @@ export type DateInputValidatorErrorType = {
 
 @Component({
 	selector: 'lu-date-input',
-	imports: [PopoverDirective, Calendar2Component, IconComponent, InputDirective, NgTemplateOutlet, FilterPillDisplayerDirective, ClearComponent],
+	imports: [PopoverDirective, Calendar2Component, IconComponent, InputDirective, NgTemplateOutlet, FilterPillDisplayerDirective, ClearComponent, PresentationDisplayDirective, DatePipe],
 	templateUrl: './date-input.component.html',
 	styleUrl: './date-input.component.scss',
 	host: {
@@ -70,7 +70,7 @@ export type DateInputValidatorErrorType = {
 export class DateInputComponent extends AbstractDateComponent implements OnInit, ControlValueAccessor, Validator, FilterPillInputComponent {
 	public parentInput = inject(FILTER_PILL_INPUT_COMPONENT, { optional: true, skipSelf: true });
 	#injector = inject(Injector);
-	#ngControl: NgControl; // Initialized in ngOnInit
+	ngControl: NgControl; // Initialized in ngOnInit
 
 	// CVA stuff
 	#onChange?: (value: Date | null) => void;
@@ -253,7 +253,7 @@ export class DateInputComponent extends AbstractDateComponent implements OnInit,
 	}
 
 	ngOnInit() {
-		this.#ngControl = this.#injector.get(NgControl);
+		this.ngControl = this.#injector.get(NgControl);
 	}
 
 	#safeCompareDate(a: Date, b: Date): boolean {
@@ -336,7 +336,7 @@ export class DateInputComponent extends AbstractDateComponent implements OnInit,
 	}
 
 	writeValue(date: Date | string | null): void {
-		if (this.#ngControl instanceof NgModel && isNil(this.#onChange)) {
+		if (this.ngControl instanceof NgModel && isNil(this.#onChange)) {
 			// avoid phantom call for ngModel
 			// https://github.com/angular/angular/issues/14988#issuecomment-1310420293
 			return;
