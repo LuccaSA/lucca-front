@@ -28,7 +28,7 @@ export const Basic: StoryObj<PhoneNumberInputComponent & FormFieldComponent & { 
 				example: '+12125550199',
 				country: '',
 			},
-			template: cleanupTemplate(`<lu-form-field [rolePresentationLabel]="true" ${generateInputs(
+			template: cleanupTemplate(`<lu-form-field presentation [rolePresentationLabel]="true" ${generateInputs(
 				{
 					label,
 					hiddenLabel,
