@@ -3,6 +3,8 @@ import { ReactiveFormsModule } from '@angular/forms';
 import { FORM_FIELD_INSTANCE, FormFieldComponent, InputDirective } from '@lucca-front/ng/form-field';
 import { injectNgControl } from '../inject-ng-control';
 import { NoopValueAccessorDirective } from '../noop-value-accessor.directive';
+import { getIntl } from '../../core/translate';
+import { CHECKBOX_INPUT_TRANSLATIONS } from '../checkbox-input/checkbox-input.translate';
 
 @Component({
 	selector: 'lu-switch-input',
@@ -20,6 +22,8 @@ export class SwitchInputComponent {
 	formField = inject<FormFieldComponent>(FORM_FIELD_INSTANCE, { optional: true });
 
 	ngControl = injectNgControl();
+
+	intl = getIntl(CHECKBOX_INPUT_TRANSLATIONS);
 
 	constructor() {
 		if (this.formField) {

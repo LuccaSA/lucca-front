@@ -87,25 +87,25 @@ export const Basic: StoryObj<
 		}
 > = {
 	render: (args, { argTypes }) => {
-		const { label, hiddenLabel, tooltip, inlineMessage, inlineMessageState, size, width, ...inputArgs } = args;
+		const { label, hiddenLabel, tooltip, inlineMessage, inlineMessageState, size, width, presentation, ...inputArgs } = args;
 		return {
 			props: {
 				example: [
 					{
 						cultureCode: 'invariant',
-						value: '',
+						value: 'Invariant value',
 					},
 					{
 						cultureCode: 'fr-FR',
-						value: '',
+						value: 'Valeur en Français',
 					},
 					{
 						cultureCode: 'en-EN',
-						value: '',
+						value: 'English value',
 					},
 					{
 						cultureCode: 'de-DE',
-						value: '',
+						value: "I don't speak German",
 					},
 				] as MultilanguageTranslation[],
 			},
@@ -118,6 +118,7 @@ export const Basic: StoryObj<
 					inlineMessageState,
 					size,
 					width,
+					presentation,
 				},
 				argTypes,
 			)}>
@@ -136,5 +137,6 @@ export const Basic: StoryObj<
 		placeholder: 'Placeholder',
 		tooltip: 'Je suis un message d’aide',
 		openOnFocus: false,
+		presentation: false,
 	},
 };
