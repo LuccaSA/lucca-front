@@ -1,0 +1,36 @@
+@use '@lucca-front/scss/src/commons/utils/namespace';
+
+@mixin component($atRoot: namespace.$defaultAtRoot) {
+	color: var(--palettes-600, var(--palettes-product-600));
+	width: 2.5rem;
+	height: 2.5rem;
+	display: grid;
+
+	@at-root ($atRoot) {
+		.interactionIcon-icon,
+		.interactionIcon-bubble {
+			grid-column-start: 1;
+			grid-row-start: 1;
+
+		}
+
+		.interactionIcon-bubble {
+			path {
+				fill: var(--palettes-100, var(--palettes-product-100));
+			}
+		}
+
+		.interactionIcon-icon {
+			display: flex;
+
+			lu-icon,
+			.lucca-icon {
+				margin: auto;
+
+				.lucca-icon {
+					margin: 0;
+				}
+			}
+		}
+	}
+}

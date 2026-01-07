@@ -1,0 +1,14 @@
+
+
+@use 'exports' as *;
+
+.interactionIcon {
+	@layer components {
+		@include vars;
+		@include component;
+	}
+
+	@layer mods {
+
+	}
+}
