@@ -26,8 +26,8 @@ export default (options?: SchematicContextOpts): Rule => {
 					'--palettes-secondary-{val}': `--palettes-product-{val}`,
 					'--palettes-lucca-{val}': `--palettes-brand-{val}`,
 					'--colors-grey-{val}': `--palettes-neutral-{val}`,
-					'--colors-white-color': '—-palettes-neutral-0',
-					'--colors-black-color': '—-palettes-neutral-900'
+					'--colors-white-color': '--palettes-neutral-0',
+					'--colors-black-color': '--palettes-neutral-900'
 				},
 				mixins: {}
 			},
