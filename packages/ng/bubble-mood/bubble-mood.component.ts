@@ -1,5 +1,5 @@
 import { ChangeDetectionStrategy, Component, computed, input, ViewEncapsulation } from '@angular/core';
-import { LuSafeExternalSvgPipe } from '../safe-content/safe-external-svg.pipe';
+import { LuSafeExternalSvgPipe } from '@lucca-front/ng/safe-content';
 
 @Component({
 	selector: 'lu-bubble-mood',
