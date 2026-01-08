@@ -121,7 +121,7 @@ export default typescript.config(
 		},
 	},
 	{
-		files: ['**/*.spec.ts'], // POC to test ts-error rule on spec files
+		files: ['**/*.spec.ts', '**/*.stories.ts'], // POC to test ts-error rule on spec and stories files
 		languageOptions: {
 			parser: tsParser,
 			parserOptions: {
