@@ -1,0 +1,8 @@
+<div
+	class="bubbleMood"
+	[class.mod-S]="size() === 'S'"
+	[class.mod-XS]="size() === 'XS'"
+	[class.mod-L]="size() === 'L'"
+	aria-hidden="true"
+	[innerHtml]="moodUrl() | luSafeExternalSvg"
+></div>

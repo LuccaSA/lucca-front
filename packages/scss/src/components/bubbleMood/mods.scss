@@ -1,0 +1,11 @@
+@mixin XS {
+	--components-bubbleMood-size: var(--pr-t-spacings-400);
+}
+
+@mixin S {
+	--components-bubbleMood-size: calc(var(--pr-t-spacings-400) + var(--pr-t-spacings-50));
+}
+
+@mixin L {
+	--components-bubbleMood-size: var(--pr-t-spacings-600);
+}
