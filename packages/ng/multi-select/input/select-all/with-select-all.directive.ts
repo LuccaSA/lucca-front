@@ -65,7 +65,7 @@ export class LuMultiSelectWithSelectAllDirective<TValue> extends ɵIsSelectedStr
 	constructor() {
 		super();
 
-		const clueChange = toSignal(this.select.clueChange);
+		const clueChange = toSignal(this.select.clueChange$);
 		effect(() => {
 			if (clueChange()) {
 				this.select.panelHeaderTpl.set(null);

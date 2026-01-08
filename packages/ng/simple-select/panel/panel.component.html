@@ -80,8 +80,7 @@
 			}
 			@if (ctx.shouldDisplayAddOption) {
 				<div
-					class="addOption palette-product"
-					[class.is-stuck]="true"
+					class="addOption palette-product is-stuck"
 					(click)="selectInput.emitAddOption()"
 					(selected)="selectInput.emitAddOption()"
 					elementId="picker-content-add"

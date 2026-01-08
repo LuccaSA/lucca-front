@@ -20,6 +20,7 @@
 		}
 
 		&.is-stuck {
+			margin-block-start: var(--pr-t-spacings-100);
 			box-shadow:
 				0 0 0 4px var(--pr-t-elevation-surface-raised),
 				0 0 0 1px color-mix(in srgb, var(--palettes-neutral-400) 8%, transparent),
