@@ -13,6 +13,7 @@ import { LuUserDisplayerComponent } from './user-displayer.component';
 import { LuCoreSelectUserHomonymsService } from './user-homonym.service';
 import { LuUserOptionComponent } from './user-option.component';
 import { LuCoreSelectUser, LuCoreSelectWithAdditionnalInformation } from './user-option.model';
+import { LuMultiSelectAllHeaderComponent } from '../../multi-select/input/select-all/multi-select-all-header.component';
 
 export function provideCoreSelectUsersContext<T extends LuCoreSelectUser = LuCoreSelectUser>(directiveFn: () => Type<LuCoreSelectUsersDirective<T>>): Provider[] {
 	return [
@@ -80,8 +81,9 @@ export class LuCoreSelectUsersDirective<T extends LuCoreSelectUser = LuCoreSelec
 
 		effect(() => {
 			const enableFormerEmployees = this.enableFormerEmployees();
-
-			if (enableFormerEmployees) {
+			if (this.clue() || !enableFormerEmployees) {
+				untracked(() => this.select.panelHeaderTpl.set(null));
+			} else {
 				untracked(() => this.select.panelHeaderTpl.set(LuCoreSelectFormerEmployeesComponent));
 			}
 		});
