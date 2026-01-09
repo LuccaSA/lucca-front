@@ -121,7 +121,7 @@ export default typescript.config(
 		},
 	},
 	{
-		files: ['**/*.spec.ts', '**/*.stories.ts'], // POC to test ts-error rule on spec and stories files
+		files: ['**/*.ts'],
 		languageOptions: {
 			parser: tsParser,
 			parserOptions: {
@@ -133,6 +133,10 @@ export default typescript.config(
 		},
 		rules: {
 			'@lucca-front/ts-error': 'warn',
+			'@typescript-eslint/no-unsafe-assignment': 'warn',
+			'@typescript-eslint/no-unsafe-return': 'warn',
+			'@typescript-eslint/no-unsafe-member-access': 'warn',
+			'@typescript-eslint/no-unsafe-call': 'warn',
 		},
 	},
 	{
