@@ -17,18 +17,33 @@ interface MainLayoutAngularInAppLayoutStory {
 export default {
 	title: 'Documentation/Structure/Main Layout/Angular/In AppLayout',
 	argTypes: {
+		header: {
+			description: 'Présente un exemple de structure avec header.',
+		},
+		footer: {
+			description: 'Présente un exemple de structure avec footer.',
+		},
+		sidebar: {
+			description: 'Présente un exemple de structure avec un panneau latéral.',
+		},
 		headerSticky: {
 			if: { arg: 'header', truthy: true },
+			description: 'Fixe le footer en haut du layout.',
 		},
 		footerSticky: {
 			if: { arg: 'footer', truthy: true },
+			description: 'Fixe le footer en bas du layout.',
 		},
 		repeatContent: {
 			control: { type: 'range', min: 1, max: 10 },
+			description: "[Story] Modifie le nombre d'éléments <lu-main-layout-block>",
 		},
 		repeatOverflow: {
 			control: { type: 'range', min: 1, max: 10 },
 			if: { arg: 'contentOverflowing', truthy: true },
+		},
+		contentOverflowing: {
+			description: 'Permet de rendre un élément <lu-main-layout-block> scrollable horizontalement tout en conservant le comportement du reste du layout.',
 		},
 	},
 	decorators: [
