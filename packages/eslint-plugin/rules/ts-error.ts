@@ -43,7 +43,7 @@ export default createRule({
 				for (const error of uniqueErrors.values()) {
 					const errorMessage = typeof error.messageText === 'string' ? error.messageText : error.messageText.messageText;
 
-					// error.start et error.length sont garantis non-undefined par le filtre ci-dessus
+					// error.start and error.length are guaranteed non-undefined by the filter above
 					const errorStart = error.start ?? 0;
 					const errorLength = error.length ?? 0;
 					const errorFile = error.file;
