@@ -12,7 +12,7 @@ type color = {
 	name: string;
 	id: number;
 	background: string;
-	border?: boolean;
+	borderColor?: string;
 };
 
 @Pipe({ name: 'filterColors', standalone: true })
@@ -29,19 +29,34 @@ export class FilterColorsPipe implements PipeTransform {
 	templateUrl: './colors.stories.html',
 })
 class ColorsStory {
-	decoratives300: color[] = [
-		{ name: 'Myrtille', id: 0, background: 'var(--palettes-blueberry-300)' },
-		{ name: 'Concombre', id: 1, background: 'var(--palettes-cucumber-300)' },
-		{ name: 'Glacier', id: 2, background: 'var(--palettes-glacier-300)' },
-		{ name: 'Raisin', id: 3, background: 'var(--palettes-grape-300)' },
-		{ name: 'Kiwi', id: 4, background: 'var(--palettes-kiwi-300)' },
-		{ name: 'Lagon', id: 5, background: 'var(--palettes-lagoon-300)' },
-		{ name: 'Lavande', id: 6, background: 'var(--palettes-lavender-300)' },
-		{ name: 'Citron', id: 7, background: 'var(--palettes-lime-300)' },
-		{ name: 'Menthe', id: 8, background: 'var(--palettes-mint-300)' },
-		{ name: 'Ananas', id: 9, background: 'var(--palettes-pineapple-300)' },
-		{ name: 'Citrouille', id: 10, background: 'var(--palettes-pumpkin-300)' },
-		{ name: 'Pastèque', id: 11, background: 'var(--palettes-watermelon-300)' },
+	decoratives500: color[] = [
+		{ name: 'Myrtille', id: 0, background: 'var(--palettes-blueberry-500)' },
+		{ name: 'Concombre', id: 1, background: 'var(--palettes-cucumber-500)' },
+		{ name: 'Glacier', id: 2, background: 'var(--palettes-glacier-500)' },
+		{ name: 'Raisin', id: 3, background: 'var(--palettes-grape-500)' },
+		{ name: 'Kiwi', id: 4, background: 'var(--palettes-kiwi-500)' },
+		{ name: 'Lagon', id: 5, background: 'var(--palettes-lagoon-500)' },
+		{ name: 'Lavande', id: 6, background: 'var(--palettes-lavender-500)' },
+		{ name: 'Citron', id: 7, background: 'var(--palettes-lime-500)' },
+		{ name: 'Menthe', id: 8, background: 'var(--palettes-mint-500)' },
+		{ name: 'Ananas', id: 9, background: 'var(--palettes-pineapple-500)' },
+		{ name: 'Citrouille', id: 10, background: 'var(--palettes-pumpkin-500)' },
+		{ name: 'Pastèque', id: 11, background: 'var(--palettes-watermelon-500)' },
+	];
+
+	decoratives50: color[] = [
+		{ name: 'Myrtille 50', id: 0, background: 'var(--palettes-blueberry-50)', borderColor: 'var(--palettes-blueberry-500)' },
+		{ name: 'Concombre 50', id: 1, background: 'var(--palettes-cucumber-50)', borderColor: 'var(--palettes-cucumber-500)' },
+		{ name: 'Glacier 50', id: 2, background: 'var(--palettes-glacier-50)', borderColor: 'var(--palettes-glacier-500)' },
+		{ name: 'Raisin 50', id: 3, background: 'var(--palettes-grape-50)', borderColor: 'var(--palettes-grape-500)' },
+		{ name: 'Kiwi 50', id: 4, background: 'var(--palettes-kiwi-50)', borderColor: 'var(--palettes-kiwi-500)' },
+		{ name: 'Lagon 50', id: 5, background: 'var(--palettes-lagoon-50)', borderColor: 'var(--palettes-lagoon-500)' },
+		{ name: 'Lavande 50', id: 6, background: 'var(--palettes-lavender-50)', borderColor: 'var(--palettes-lavender-500)' },
+		{ name: 'Citron 50', id: 7, background: 'var(--palettes-lime-50)', borderColor: 'var(--palettes-lime-500)' },
+		{ name: 'Menthe 50', id: 8, background: 'var(--palettes-mint-50)', borderColor: 'var(--palettes-mint-500)' },
+		{ name: 'Ananas 50', id: 9, background: 'var(--palettes-pineapple-50)', borderColor: 'var(--palettes-pineapple-500)' },
+		{ name: 'Citrouille 50', id: 10, background: 'var(--palettes-pumpkin-50)', borderColor: 'var(--palettes-pumpkin-500)' },
+		{ name: 'Pastèque 50', id: 11, background: 'var(--palettes-watermelon-50)', borderColor: 'var(--palettes-watermelon-500)' },
 	];
 
 	neutral: color[] = [
@@ -51,12 +66,12 @@ class ColorsStory {
 		{ name: 'Neutral 700', id: 3, background: 'var(--palettes-neutral-700)' },
 		{ name: 'Neutral 600', id: 4, background: 'var(--palettes-neutral-600)' },
 		{ name: 'Neutral 500', id: 5, background: 'var(--palettes-neutral-500)' },
-		{ name: 'Neutral 400', id: 6, background: 'var(--palettes-neutral-400)' },
-		{ name: 'Neutral 300', id: 7, background: 'var(--palettes-neutral-300)' },
-		{ name: 'Neutral 200', id: 8, background: 'var(--palettes-neutral-200)' },
-		{ name: 'Neutral 100', id: 9, background: 'var(--palettes-neutral-100)' },
-		{ name: 'Neutral 50', id: 10, background: 'var(--palettes-neutral-50)' },
-		{ name: 'Neutral 0', id: 11, background: 'var(--palettes-neutral-0)', border: true },
+		{ name: 'Neutral 400', id: 6, background: 'var(--palettes-neutral-400)', borderColor: 'var(--palettes-neutral-500)' },
+		{ name: 'Neutral 300', id: 7, background: 'var(--palettes-neutral-300)', borderColor: 'var(--palettes-neutral-500)' },
+		{ name: 'Neutral 200', id: 8, background: 'var(--palettes-neutral-200)', borderColor: 'var(--palettes-neutral-500)' },
+		{ name: 'Neutral 100', id: 9, background: 'var(--palettes-neutral-100)', borderColor: 'var(--palettes-neutral-500)' },
+		{ name: 'Neutral 50', id: 10, background: 'var(--palettes-neutral-50)', borderColor: 'var(--palettes-neutral-500)' },
+		{ name: 'Neutral 0', id: 11, background: 'var(--palettes-neutral-0)', borderColor: 'var(--palettes-neutral-500)' },
 	];
 
 	lucca: color[] = [
@@ -68,20 +83,18 @@ class ColorsStory {
 	];
 }
 
-/*
-'brand': $brand,
-	'cleemy': $cleemy,
-	'timmi': $timmi,
-	'poplee': $poplee,
-	'coreHR': $coreHR,
-	'pagga': $pagga,
-	'cc': $cc,
-*/
-
 export default {
-	title: 'Documentation/Forms/SimpleSelect/Colors',
+	title: 'Documentation/Forms/Colors',
 	component: ColorsStory,
-	argTypes: {},
+	argTypes: {
+		size: {
+			options: ['', 'S'],
+			control: {
+				type: 'select',
+			},
+			description: 'Modifie la taille du composant.',
+		},
+	},
 	decorators: [
 		applicationConfig({
 			providers: [{ provide: LOCALE_ID, useValue: 'fr-FR' }],
@@ -90,5 +103,5 @@ export default {
 } as Meta;
 
 export const Basic = {
-	args: { clearable: false, searchable: false, small: false },
+	args: { clearable: false, noSearch: false, size: '' },
 };

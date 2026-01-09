@@ -14,7 +14,7 @@
 		background: var(--components-color-value-backgroundColor);
 		color: rgb(from var(--components-color-value-backgroundColor) var(--components-color-value-channel) var(--components-color-value-channel) var(--components-color-value-channel));
 		border-radius: var(--pr-t-border-radius-small);
-		box-shadow: 0 0 0 1px var(--components-color-value-boxShadowColor);
+		box-shadow: inset 0 0 0 1px var(--components-color-value-boxShadowColor);
 		scale: var(--components-color-value-scale);
 		transition-property: scale;
 		transition-duration: var(--commons-animations-durations-fast);
@@ -54,7 +54,10 @@
 
 @mixin componentPanel($atRoot: namespace.$defaultAtRoot) {
 	.lu-picker-content {
-		inline-size: 17.5rem;
+		.cdk-overlay-pane:has(&) {
+			min-inline-size: 0 !important;
+			inline-size: 17rem;
+		}
 	}
 
 	[role="listbox"] {

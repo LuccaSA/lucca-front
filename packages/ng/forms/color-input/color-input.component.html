@@ -15,7 +15,7 @@
 			size="XL"
 			hiddenName
 			[value]="color.background"
-			[border]="color.border"
+			[borderColor]="color.borderColor"
 			(mouseenter)="mouseHighlighted.set(color.name)"
 			(mouseleave)="mouseHighlighted.set('')"
 		>
@@ -23,7 +23,7 @@
 		</lu-color>
 	</ng-container>
 	<ng-container *luDisplayer="let color; select: selectRef">
-		<lu-color size="L" [border]="color.border" [value]="color.background">{{ color.name }}</lu-color>
+		<lu-color size="L" [borderColor]="color.borderColor" [value]="color.background">{{ color.name }}</lu-color>
 	</ng-container>
 	<ng-template #footer>
 		<div class="colorPanel-highlighted">

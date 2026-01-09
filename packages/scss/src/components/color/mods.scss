@@ -12,10 +12,6 @@
 	--components-color-value-inlineSize: calc(var(--pr-t-spacings-400) + var(--pr-t-spacings-50));
 }
 
-@mixin border {
-	--components-color-value-boxShadowColor: var(--palettes-neutral-200);
-}
-
 @mixin noSearch {
 	--components-colorPicker-inlineSize: 4.625rem;
 

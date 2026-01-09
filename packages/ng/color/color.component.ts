@@ -8,14 +8,13 @@ import { booleanAttribute, ChangeDetectionStrategy, Component, input, ViewEncaps
 	changeDetection: ChangeDetectionStrategy.OnPush,
 	host: {
 		class: 'color',
-		'[class.mod-border]': 'border()',
 		'[class.mod-L]': 'size() === "L"',
 		'[class.mod-XL]': 'size() === "XL"',
 	},
 })
 export class ColorComponent {
 	readonly value = input<string | null>(null);
-	readonly border = input(false, { transform: booleanAttribute });
+	readonly borderColor = input<string | null>(null);
 	readonly size = input<'L' | 'XL' | null>(null);
 	readonly hiddenName = input(false, { transform: booleanAttribute });
 }

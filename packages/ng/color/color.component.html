@@ -1,2 +1,6 @@
-<span class="color-value" [style.--components-color-value-backgroundColor]="value()"></span>
+<span
+	class="color-value"
+	[style.--components-color-value-backgroundColor]="value()"
+	[style.--components-color-value-boxShadowColor]="borderColor()"
+></span>
 <span class="color-name" [class.pr-u-mask]="hiddenName()"><ng-content /></span>
