@@ -1,0 +1,15 @@
+@mixin XS {
+	--components-bubbleIllustration-size: var(--pr-t-spacings-400);
+}
+
+@mixin S {
+	--components-bubblbubbleIllustrationeMood-size: calc(var(--pr-t-spacings-400) + var(--pr-t-spacings-50));
+}
+
+@mixin L {
+	--components-bubbleIllustration-size: var(--pr-t-spacings-600);
+}
+
+@mixin noAction {
+	--components-bubbleIllustration-action-display: none;
+}
