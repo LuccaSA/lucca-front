@@ -28,11 +28,11 @@ export default {
 		},
 		headerSticky: {
 			if: { arg: 'header', truthy: true },
-			description: 'Fixe le footer en haut du layout.',
+			description: 'Conserve le header visible en haut du layout.',
 		},
 		footerSticky: {
 			if: { arg: 'footer', truthy: true },
-			description: 'Fixe le footer en bas du layout.',
+			description: 'Conserve le footer visible en bas du layout.',
 		},
 		repeatContent: {
 			control: { type: 'range', min: 1, max: 10 },
