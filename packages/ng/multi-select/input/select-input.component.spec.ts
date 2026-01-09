@@ -145,7 +145,7 @@ describe('LuMultiSelectInputComponent', () => {
 				const { componentInstance } = fixture;
 				componentInstance.openPanel();
 				await waitForPanel();
-				componentInstance.panelRef.changeDetectorRef.detectChanges();
+				componentInstance.panelRef?.changeDetectorRef?.detectChanges();
 
 				// Act
 				TestBed.flushEffects();
@@ -159,7 +159,7 @@ describe('LuMultiSelectInputComponent', () => {
 				const { componentInstance } = fixture;
 				componentInstance.openPanel();
 				await waitForPanel();
-				componentInstance.panelRef.changeDetectorRef.detectChanges();
+				componentInstance.panelRef?.changeDetectorRef?.detectChanges();
 
 				// Act
 				selectAllDirective.setSelectAll(true);
@@ -174,12 +174,12 @@ describe('LuMultiSelectInputComponent', () => {
 				const { componentInstance } = fixture;
 				componentInstance.openPanel();
 				await waitForPanel();
-				componentInstance.panelRef.changeDetectorRef.detectChanges();
+				componentInstance.panelRef?.changeDetectorRef?.detectChanges();
 
 				// Act
 				selectAllDirective.setSelectAll(true);
 				TestBed.flushEffects();
-				componentInstance.panelRef.emitValue([options[0]]);
+				componentInstance.panelRef?.emitValue([options[0]]);
 				TestBed.flushEffects();
 
 				// Assert
@@ -191,10 +191,10 @@ describe('LuMultiSelectInputComponent', () => {
 				const { componentInstance } = fixture;
 				componentInstance.openPanel();
 				await waitForPanel();
-				componentInstance.panelRef.changeDetectorRef.detectChanges();
+				componentInstance.panelRef?.changeDetectorRef?.detectChanges();
 
 				// Act
-				componentInstance.panelRef.emitValue([options[0]]);
+				componentInstance.panelRef?.emitValue([options[0]]);
 				TestBed.flushEffects();
 
 				// Assert
@@ -206,10 +206,10 @@ describe('LuMultiSelectInputComponent', () => {
 				const { componentInstance } = fixture;
 				componentInstance.openPanel();
 				await waitForPanel();
-				componentInstance.panelRef.changeDetectorRef.detectChanges();
+				componentInstance.panelRef?.changeDetectorRef?.detectChanges();
 
 				// Act
-				componentInstance.panelRef.emitValue([options[0]]);
+				componentInstance.panelRef?.emitValue([options[0]]);
 				TestBed.flushEffects();
 				selectAllDirective.setSelectAll(true);
 				TestBed.flushEffects();
@@ -223,12 +223,12 @@ describe('LuMultiSelectInputComponent', () => {
 				const { componentInstance } = fixture;
 				componentInstance.openPanel();
 				await waitForPanel();
-				componentInstance.panelRef.changeDetectorRef.detectChanges();
+				componentInstance.panelRef?.changeDetectorRef?.detectChanges();
 
 				// Act
 				selectAllDirective.setSelectAll(true);
 				TestBed.flushEffects();
-				componentInstance.panelRef.emitValue([options[0]]);
+				componentInstance.panelRef?.emitValue([options[0]]);
 				TestBed.flushEffects();
 				selectAllDirective.setSelectAll(false);
 				TestBed.flushEffects();
@@ -248,10 +248,10 @@ describe('LuMultiSelectInputComponent', () => {
 				const { componentInstance } = fixture;
 				componentInstance.openPanel();
 				await waitForPanel();
-				componentInstance.panelRef.changeDetectorRef.detectChanges();
+				componentInstance.panelRef?.changeDetectorRef?.detectChanges();
 
 				// Act
-				componentInstance.panelRef.emitValue(options);
+				componentInstance.panelRef?.emitValue(options);
 				TestBed.flushEffects();
 
 				// Assert
@@ -263,7 +263,7 @@ describe('LuMultiSelectInputComponent', () => {
 				const { componentInstance } = fixture;
 				componentInstance.openPanel();
 				await waitForPanel();
-				componentInstance.panelRef.changeDetectorRef.detectChanges();
+				componentInstance.panelRef?.changeDetectorRef?.detectChanges();
 
 				// Act
 				selectAllDirective.setSelectAll(true);
@@ -282,12 +282,12 @@ describe('LuMultiSelectInputComponent', () => {
 				const { componentInstance } = fixture;
 				componentInstance.openPanel();
 				await waitForPanel();
-				componentInstance.panelRef.changeDetectorRef.detectChanges();
+				componentInstance.panelRef?.changeDetectorRef?.detectChanges();
 
 				// Act
 				selectAllDirective.setSelectAll(true);
 				TestBed.flushEffects();
-				componentInstance.panelRef.emitValue(options);
+				componentInstance.panelRef?.emitValue(options);
 				TestBed.flushEffects();
 
 				// Assert

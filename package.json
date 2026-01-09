@@ -19,13 +19,15 @@
   "private": true,
   "workspaces": [
     "packages/icons",
-    "packages/scss"
+    "packages/scss",
+    "packages/eslint-plugin"
   ],
   "scripts": {
     "build": "npm run build:ng && npm run build:remaining",
     "build:ng": "ng run ng:build",
     "build:remaining": "node build.js",
     "start": "ng run ng:storybook",
+    "test:eslint-plugin": "npm test -w @lucca-front/eslint-plugin",
     "jenkins-test": "jest --no-cache --runInBand",
     "ci-test": "jest --no-cache --runInBand",
     "test": "jest --maxWorkers=4 --isolatedModules=true --detectOpenHandles --watchAll",
@@ -82,6 +84,7 @@
     "@angular/compiler-cli": "^21.0.3",
     "@compodoc/compodoc": "^1.1.32",
     "@jsdevtools/coverage-istanbul-loader": "^3.0.5",
+    "@lucca-front/eslint-plugin": "workspace:*",
     "@lucca/stylelint-config-prisme": "file:packages/stylelint-config",
     "@mdx-js/loader": "^3.1.1",
     "@ngneat/spectator": "^22.1.0",
@@ -98,6 +101,7 @@
     "@types/jest": "^29.5.14",
     "@types/jest-axe": "^3.5.5",
     "@types/node": "^22.14.0",
+    "@typescript-eslint/rule-tester": "^8.52.0",
     "angular-eslint": "^21.1.0",
     "autoprefixer": "^10.4.14",
     "eslint": "^9.28.0",
