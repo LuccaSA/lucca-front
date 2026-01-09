@@ -1,0 +1,38 @@
+@use 'exports' as *;
+
+.bubbleIllustration {
+	@layer components {
+		@include vars;
+		@include component;
+	}
+
+	@layer mods {
+		&.mod-XS {
+			@include XS;
+		}
+
+		&.mod-S {
+			@include S;
+		}
+
+		&.mod-L {
+			@include L;
+		}
+
+		&.is-success {
+			@include success;
+		}
+
+		&.is-critical {
+			@include critical;
+		}
+
+		&.is-warning {
+			@include warning;
+		}
+
+		&:not(.mod-action) {
+			@include noAction;
+		}
+	}
+}
