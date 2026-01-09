@@ -1,5 +1,7 @@
 # ESLint Rule `ts-error`
 
+> ⚠️ **DISCLAIMER**: This plugin is a temporary internal tool. It is **not intended to be maintained long-term** and is **intentionally not published** to npm. It is meant for one-time use during migrations or specific fixes.
+
 Exposes TypeScript errors as ESLint errors and auto-fixes unsafe property access with optional chaining (`?.`).
 
 ## 🎯 Overview
