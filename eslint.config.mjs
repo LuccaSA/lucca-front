@@ -6,11 +6,12 @@ import angular from 'angular-eslint';
 import localRules from './packages/eslint-plugin/index.ts';
 import prettier from 'eslint-plugin-prettier/recommended';
 import typescript from 'typescript-eslint';
+import { defineConfig } from 'eslint/config';
 import tsParser from '@typescript-eslint/parser';
 
-export default typescript.config(
+export default defineConfig(
 	{
-		ignores: ['**/dist/', '.storybook/**', '**/schematics/**/tests/', 'node_modules/', '.angular/'],
+		ignores: ['dist/', '.storybook/**', '**/schematics/**/tests/', 'node_modules/', '.angular/'],
 	},
 	{
 		linterOptions: {

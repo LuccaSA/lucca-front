@@ -1,6 +1,6 @@
 import * as parser from '@typescript-eslint/parser';
 import { RuleTester } from '@typescript-eslint/rule-tester';
-import rule, { RULE_NAME } from './ts-error.ts';
+import rule, { RULE_NAME } from './ts-error';
 
 /**
  * Test suite for TypeScript Error Detection & Auto-Fix rule
