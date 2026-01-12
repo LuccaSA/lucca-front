@@ -68,25 +68,9 @@ export class FileEntryComponent {
 
 	readonly fileSizeDisplay = computed(() => formatSize(this.#locale, this.fileSize()));
 	readonly fileTypeDisplay = computed(() => {
-		let fileType: string;
-		switch (this.fileType()) {
-			case 'application/vnd.ms-excel':
-				fileType = 'XLS';
-				break;
-			case 'application/vnd.openxmlformats-officedocument.spreadsheetml.sheet':
-				fileType = 'XLSX';
-				break;
-			case 'application/msword':
-				fileType = 'DOC';
-				break;
-			case 'application/vnd.openxmlformats-officedocument.wordprocessingml.document':
-				fileType = 'DOCX';
-				break;
-			default:
-				fileType = this.fileType().split('/')[1].toUpperCase();
-		}
+		const fileExtension: string = extractFileExtension(this.fileType());
 
-		return this.intl.file.replace('{{fileTypeLastPart}}', fileType);
+		return this.intl.file.replace('{{fileTypeLastPart}}', fileExtension);
 	});
 
 	readonly previewUrl = input<string>('');
@@ -138,4 +122,25 @@ export class FileEntryComponent {
 		[`is-${this.state()}`]: !!this.state(),
 		[`mod-${this.size()}`]: !!this.size(),
 	}));
+}
+
+function extractFileExtension(type: string): string {
+	let fileType: string;
+	switch (type) {
+		case 'application/vnd.ms-excel':
+			fileType = 'XLS';
+			break;
+		case 'application/vnd.openxmlformats-officedocument.spreadsheetml.sheet':
+			fileType = 'XLSX';
+			break;
+		case 'application/msword':
+			fileType = 'DOC';
+			break;
+		case 'application/vnd.openxmlformats-officedocument.wordprocessingml.document':
+			fileType = 'DOCX';
+			break;
+		default:
+			fileType = type.split('/')[1].toUpperCase();
+	}
+	return fileType;
 }
