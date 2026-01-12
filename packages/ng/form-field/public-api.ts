@@ -6,4 +6,3 @@ export * from './input-framed/input-framed.component';
 export * from './input-framed/input-framed.token';
 export * from './input.directive';
 export * from './value-presentation/presentation-display.directive';
-export * from './value-presentation/value-presentation.component';

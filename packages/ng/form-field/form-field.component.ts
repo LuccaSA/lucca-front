@@ -32,7 +32,6 @@ import { FORM_FIELD_INSTANCE } from './form-field.token';
 import { LU_FORM_FIELD_TRANSLATIONS } from './form-field.translate';
 import { InputDirective } from './input.directive';
 import { INPUT_FRAMED_INSTANCE } from './public-api';
-import { ValuePresentationComponent } from './value-presentation/value-presentation.component';
 
 let nextId = 0;
 
@@ -40,7 +39,7 @@ type FormFieldWidth = 20 | 30 | 40 | 50 | 60;
 
 @Component({
 	selector: 'lu-form-field',
-	imports: [NgTemplateOutlet, InlineMessageComponent, LuTooltipModule, ReactiveFormsModule, IconComponent, IntlParamsPipe, PortalDirective, ValuePresentationComponent],
+	imports: [NgTemplateOutlet, InlineMessageComponent, LuTooltipModule, ReactiveFormsModule, IconComponent, IntlParamsPipe, PortalDirective],
 	templateUrl: './form-field.component.html',
 	styleUrl: './form-field.component.scss',
 	providers: [
@@ -88,6 +87,8 @@ export class FormFieldComponent implements OnDestroy, DoCheck {
 	readonly hiddenLabel = input(false, { transform: booleanAttribute });
 
 	rolePresentationLabel = model(false);
+
+	labelIsPresentation = computed(() => this.rolePresentationLabel() || this.presentation());
 
 	readonly inline = input(false, { transform: booleanAttribute });
 
@@ -179,7 +180,8 @@ export class FormFieldComponent implements OnDestroy, DoCheck {
 			this.#luClass.setState({
 				[`mod-${this.size()}`]: !!this.size(),
 				'mod-checkable': this.layout() === 'checkable',
-				'form-field': this.layout() !== 'fieldset',
+				formPresentation: this.presentation(),
+				'form-field': this.layout() !== 'fieldset' && !this.presentation(),
 				[`mod-width${this.width()}`]: !!this.width(),
 			});
 		});

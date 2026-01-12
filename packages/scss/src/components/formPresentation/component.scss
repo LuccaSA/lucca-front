@@ -1,0 +1,9 @@
+@use '@lucca-front/scss/src/commons/utils/namespace';
+
+@mixin component($atRoot: namespace.$defaultAtRoot) {
+	@at-root ($atRoot) {
+		.formPresentation-definition {
+			display: var(--components-formPresentation-definition-display);
+		}
+	}
+}
