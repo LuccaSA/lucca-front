@@ -1,4 +1,5 @@
 import { ChangeDetectionStrategy, Component, computed, input, ViewEncapsulation } from '@angular/core';
+import { DecorativePalette, Palette } from '@lucca-front/ng/core';
 import { LuSafeExternalSvgPipe } from '@lucca-front/ng/safe-content';
 
 @Component({
@@ -11,6 +12,9 @@ import { LuSafeExternalSvgPipe } from '@lucca-front/ng/safe-content';
 })
 export class BubbleMoodComponent {
 	readonly mood = input<'angry' | 'bored' | 'happy' | 'joyful' | 'moody' | 'sad' | 'shoked' | 'sly' | 'smirking' | 'surprised'>('happy');
+	readonly palette = input<Palette | DecorativePalette>('product');
 	readonly size = input<'XS' | 'S' | 'L' | ''>('');
 	readonly moodUrl = computed(() => `https://cdn.lucca.fr/transverse/prisme/visuals/bubble-mood/${this.mood()}.svg`);
+
+	readonly paletteClass = computed(() => ({ [`palette-${this.palette()}`]: !!this.palette() }));
 }

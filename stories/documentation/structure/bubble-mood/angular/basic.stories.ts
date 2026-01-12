@@ -1,6 +1,6 @@
 import { BubbleMoodComponent } from '@lucca-front/ng/bubble-mood';
 import { Meta, moduleMetadata, StoryObj } from '@storybook/angular';
-import { cleanupTemplate, generateInputs } from 'stories/helpers/stories';
+import { generateInputs } from 'stories/helpers/stories';
 
 export default {
 	title: 'Documentation/Structure/Bubble mood/Angular/Basic',
@@ -57,16 +57,16 @@ export default {
 			imports: [BubbleMoodComponent],
 		}),
 	],
-	render: ({ palette, size, ...args }, { argTypes }) => {
-		const paletteClass = palette !== 'product' ? ` class="palette-${palette}"` : ``;
+	render: ({ size, palette, ...args }, { argTypes }) => {
 		const sizeArg = size !== '' ? ` size="${size}"` : ``;
+		const paletteArg = palette !== 'product' ? ` palette="${palette}"` : ``;
 		return {
-			template: cleanupTemplate(`<lu-bubble-mood${sizeArg}${paletteClass}${generateInputs(args, argTypes)} />`),
+			template: `<lu-bubble-mood${paletteArg}${sizeArg}${generateInputs(args, argTypes)} />`,
 		};
 	},
 } as Meta;
 
-export const Basic: StoryObj<BubbleMoodComponent & { palette: string }> = {
+export const Basic: StoryObj<BubbleMoodComponent> = {
 	args: {
 		mood: 'joyful',
 		palette: 'product',
