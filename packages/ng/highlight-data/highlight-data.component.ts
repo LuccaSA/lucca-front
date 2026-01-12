@@ -7,13 +7,13 @@ import { LuClass, PortalContent, PortalDirective } from '@lucca-front/ng/core';
 	styleUrl: './highlight-data.component.scss',
 	changeDetection: ChangeDetectionStrategy.OnPush,
 	encapsulation: ViewEncapsulation.None,
+	imports: [PortalDirective],
 	providers: [LuClass],
 	host: {
 		class: 'highlightData',
 		'[class.mod-light]': 'lightClass',
 		'[class.mod-dark]': 'darkClass',
 	},
-	imports: [PortalDirective],
 })
 export class HighlightDataComponent {
 	#luClass = inject(LuClass);
