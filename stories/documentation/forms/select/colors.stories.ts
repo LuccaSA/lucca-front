@@ -3,21 +3,14 @@ import { FormsModule } from '@angular/forms';
 import { ColorComponent } from '@lucca-front/ng/color';
 import { LuDisplayerDirective, LuOptionDirective } from '@lucca-front/ng/core-select';
 import { FormFieldComponent } from '@lucca-front/ng/form-field';
-import { ColorInputComponent } from '@lucca-front/ng/forms';
+import { ColorInputComponent, ColorOption } from '@lucca-front/ng/forms';
 import { LuSimpleSelectInputComponent } from '@lucca-front/ng/simple-select';
 import { LuTooltipTriggerDirective } from '@lucca-front/ng/tooltip';
 import { applicationConfig, Meta } from '@storybook/angular';
 
-type color = {
-	name: string;
-	id: number;
-	background: string;
-	borderColor?: string;
-};
-
 @Pipe({ name: 'filterColors', standalone: true })
 export class FilterColorsPipe implements PipeTransform {
-	transform(colors: color[], clue: string): color[] {
+	transform(colors: ColorOption[], clue: string): ColorOption[] {
 		return clue ? colors?.filter((color) => color.name.toLowerCase().includes(clue.toLowerCase())) : colors;
 	}
 }
@@ -29,7 +22,7 @@ export class FilterColorsPipe implements PipeTransform {
 	templateUrl: './colors.stories.html',
 })
 class ColorsStory {
-	decoratives500: color[] = [
+	decoratives500: ColorOption[] = [
 		{ name: 'Myrtille', id: 0, background: 'var(--palettes-blueberry-500)' },
 		{ name: 'Concombre', id: 1, background: 'var(--palettes-cucumber-500)' },
 		{ name: 'Glacier', id: 2, background: 'var(--palettes-glacier-500)' },
@@ -44,7 +37,7 @@ class ColorsStory {
 		{ name: 'Pastèque', id: 11, background: 'var(--palettes-watermelon-500)' },
 	];
 
-	decoratives50: color[] = [
+	decoratives50: ColorOption[] = [
 		{ name: 'Myrtille 50', id: 0, background: 'var(--palettes-blueberry-50)', borderColor: 'var(--palettes-blueberry-500)' },
 		{ name: 'Concombre 50', id: 1, background: 'var(--palettes-cucumber-50)', borderColor: 'var(--palettes-cucumber-500)' },
 		{ name: 'Glacier 50', id: 2, background: 'var(--palettes-glacier-50)', borderColor: 'var(--palettes-glacier-500)' },
@@ -59,7 +52,7 @@ class ColorsStory {
 		{ name: 'Pastèque 50', id: 11, background: 'var(--palettes-watermelon-50)', borderColor: 'var(--palettes-watermelon-500)' },
 	];
 
-	neutral: color[] = [
+	neutral: ColorOption[] = [
 		{ name: 'Neutral 1000', id: 0, background: 'black' },
 		{ name: 'Neutral 900', id: 1, background: 'var(--palettes-neutral-900)' },
 		{ name: 'Neutral 800', id: 2, background: 'var(--palettes-neutral-800)' },
@@ -74,7 +67,7 @@ class ColorsStory {
 		{ name: 'Neutral 0', id: 11, background: 'var(--palettes-neutral-0)', borderColor: 'var(--palettes-neutral-500)' },
 	];
 
-	lucca: color[] = [
+	lucca: ColorOption[] = [
 		{ name: 'Temps et activités', id: 0, background: 'var(--palettes-timmi-700)' },
 		{ name: 'Dépenses professionnelles', id: 0, background: 'var(--palettes-cleemy-700)' },
 		{ name: 'Talent', id: 0, background: 'var(--palettes-poplee-700)' },

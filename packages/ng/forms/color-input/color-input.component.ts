@@ -22,7 +22,7 @@ export class ColorInputComponent {
 	highlighted = computed(() => this.mouseHighlighted() || this.keyboardHighlighted());
 
 	clue = signal<string>('');
-	colors = input<ColorOption[]>();
+	colors = input.required<ColorOption[]>();
 	clearable = input(false, { transform: booleanAttribute });
 	noSearch = input(false, { transform: booleanAttribute });
 
