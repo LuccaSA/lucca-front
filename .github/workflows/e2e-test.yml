@@ -4,7 +4,7 @@ on: [push]
 
 jobs:
   test:
-    runs-on: ubuntu-latest
+    runs-on: lucca-ci-large
     container:
       image: mcr.microsoft.com/playwright:v1.57.0
     steps:

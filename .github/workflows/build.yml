@@ -3,7 +3,12 @@ on:
   - push
 jobs:
   build:
-    runs-on: ubuntu-latest
+    runs-on: lucca-ci-large
+    container:
+      image: "ghcr.io/luccasa/lucca-ci:v3.0.0@sha256:806ed8aa4f4a81ec465524aeba3fe35fd6c90ea74911fbf188f942f1e8cbb72c"
+      credentials:
+        username: ${{ github.actor }}
+        password: ${{ secrets.github_token }}
     steps:
       - uses: actions/checkout@v5
       - name: Use Node.js
