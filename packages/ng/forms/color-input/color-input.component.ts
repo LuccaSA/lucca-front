@@ -1,11 +1,13 @@
 import { booleanAttribute, ChangeDetectionStrategy, Component, computed, input, signal, ViewEncapsulation } from '@angular/core';
 import { ReactiveFormsModule } from '@angular/forms';
 import { ColorComponent } from '@lucca-front/ng/color';
+import { getIntl } from '@lucca-front/ng/core';
 import { LuDisplayerDirective, LuOptionDirective } from '@lucca-front/ng/core-select';
 import { LuSimpleSelectInputComponent } from '@lucca-front/ng/simple-select';
 import { injectNgControl } from '../inject-ng-control';
 import { NoopValueAccessorDirective } from '../noop-value-accessor.directive';
 import { ColorOption } from './color';
+import { LU_COLOR_TRANSLATIONS } from './color.translate';
 
 @Component({
 	selector: 'lu-color-input',
@@ -17,6 +19,8 @@ import { ColorOption } from './color';
 	changeDetection: ChangeDetectionStrategy.OnPush,
 })
 export class ColorInputComponent {
+	intl = getIntl(LU_COLOR_TRANSLATIONS);
+
 	mouseHighlighted = signal<string>('');
 	keyboardHighlighted = signal<string>('');
 	highlighted = computed(() => this.mouseHighlighted() || this.keyboardHighlighted());
