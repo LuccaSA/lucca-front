@@ -1,0 +1,11 @@
+@mixin vars {
+	--components-bubbleIcon-size: var(--pr-t-spacings-500);
+	--components-bubbleIcon-bubble-pathBlock-display: none;
+	--components-bubbleIcon-bubble-pathInline-display: inherit;
+	--components-bubbleIcon-bubble-scale: 1;
+	--components-bubbleIcon-icon-insetOffset: 1px;
+	--components-bubbleIcon-icon-insetBlockStart: auto;
+	--components-bubbleIcon-icon-insetBlockEnd: auto;
+	--components-bubbleIcon-icon-insetInlineStart: auto;
+	--components-bubbleIcon-icon-insetInlineEnd: auto;
+}
