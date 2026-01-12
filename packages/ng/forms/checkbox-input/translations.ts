@@ -1,10 +1,12 @@
 export const Translations = {
 	en: {
-		yes: 'Yes',
-		no: 'No',
+		yes: 'yes',
+		no: 'no',
+		separator: ': ',
 	},
 	fr: {
-		yes: 'Oui',
-		no: 'Non',
+		yes: 'oui',
+		no: 'non',
+		separator: ' : ',
 	},
 };

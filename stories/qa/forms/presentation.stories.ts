@@ -1,14 +1,14 @@
+import { allLegumes } from '@/stories/forms/select/select.utils';
+import { LOCALE_ID } from '@angular/core';
 import { FormsModule } from '@angular/forms';
+import { DateInputComponent } from '@lucca-front/ng/date2';
 import { FormFieldComponent } from '@lucca-front/ng/form-field';
 import { CheckboxInputComponent, MultilanguageInputComponent, MultilanguageTranslation, NumberFormatInputComponent, NumberInputComponent, TextInputComponent } from '@lucca-front/ng/forms';
+import { PhoneNumberInputComponent } from '@lucca-front/ng/forms/phone-number-input';
+import { LuMultiSelectInputComponent } from '@lucca-front/ng/multi-select';
+import { LuSimpleSelectInputComponent } from '@lucca-front/ng/simple-select';
 import { applicationConfig, Meta, moduleMetadata, StoryObj } from '@storybook/angular';
 import { cleanupTemplate, generateInputs } from 'stories/helpers/stories';
-import { DateInputComponent } from '@lucca-front/ng/date2';
-import { LOCALE_ID } from '@angular/core';
-import { allLegumes } from '@/stories/forms/select/select.utils';
-import { PhoneNumberInputComponent } from '@lucca-front/ng/forms/phone-number-input';
-import { LuSimpleSelectInputComponent } from '@lucca-front/ng/simple-select';
-import { LuMultiSelectInputComponent } from '@lucca-front/ng/multi-select';
 
 export default {
 	title: 'QA/Forms/Presentation',
