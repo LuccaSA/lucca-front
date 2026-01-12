@@ -70,7 +70,7 @@ export class GridComponent {
 		return gap;
 	};
 
-	protected gridStyle = computed(() => ({
+	protected readonly gridStyle = computed(() => ({
 		'--grid-columns': this.mode() === null ? this.columns() : null,
 		'--grid-gap': this.#gapTransform(this.gap()),
 		'--grid-column-gap': this.#gapTransform(this.columnGap()),
