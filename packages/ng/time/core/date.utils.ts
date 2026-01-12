@@ -1,3 +1,4 @@
+import { Pipe } from '@angular/core';
 import { ISO8601Time } from './date-primitives';
 
 export const castToIsoTime = (str: string) => str as ISO8601Time;
@@ -65,3 +66,10 @@ export const getMinutesDisplayPartFromIsoTime = (time: ISO8601Time): number | 'â
 	}
 	return Number(minutes);
 };
+
+@Pipe({ name: 'removeComma' })
+export class RemoveCommaPipe {
+	transform(value: string): string {
+		return value?.replace(/,/g, '');
+	}
+}

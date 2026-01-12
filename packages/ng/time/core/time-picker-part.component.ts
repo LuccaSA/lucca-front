@@ -1,6 +1,7 @@
 import { DecimalPipe, formatNumber } from '@angular/common';
 import { ChangeDetectionStrategy, Component, ElementRef, Inject, LOCALE_ID, ModelSignal, ViewChild, booleanAttribute, computed, input, model, numberAttribute, output } from '@angular/core';
 import { InputDirective } from '@lucca-front/ng/form-field';
+import { RemoveCommaPipe } from './date.utils';
 import { PickerControlDirection } from './misc.utils';
 import { RepeatOnHoldDirective } from './repeat-on-hold.directive';
 
@@ -8,7 +9,7 @@ let nextId = 0;
 
 @Component({
 	selector: 'lu-time-picker-part',
-	imports: [RepeatOnHoldDirective, DecimalPipe, InputDirective],
+	imports: [RepeatOnHoldDirective, DecimalPipe, InputDirective, RemoveCommaPipe],
 	templateUrl: './time-picker-part.component.html',
 	changeDetection: ChangeDetectionStrategy.OnPush,
 })
@@ -23,6 +24,10 @@ export class TimePickerPartComponent {
 
 	max = input(0, {
 		transform: numberAttribute,
+	});
+
+	autoWidth = input(false, {
+		transform: booleanAttribute,
 	});
 
 	displayArrows = input(false, {
@@ -45,6 +50,8 @@ export class TimePickerPartComponent {
 		transform: booleanAttribute,
 	});
 
+	digitNumber = input<number>(2);
+
 	prevRequest = output<void>();
 	nextRequest = output<void>();
 	inputControlClick = output<PickerControlDirection>();
@@ -63,7 +70,7 @@ export class TimePickerPartComponent {
 		if (value === '––') {
 			return value;
 		}
-		return formatNumber(value, this.locale, this.decimalConf());
+		return formatNumber(value, this.locale, this.decimalConf()).replace(/,/g, '');
 	});
 
 	protected inputId = `time-picker-part-${nextId++}`;
@@ -161,5 +168,9 @@ export class TimePickerPartComponent {
 		if (this.timePickerInput) {
 			this.timePickerInput.nativeElement.focus();
 		}
+	}
+
+	removeComma(value: number | null) {
+		return value?.toString().replace(/,/g, '');
 	}
 }
