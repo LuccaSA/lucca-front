@@ -1,14 +1,14 @@
 import { booleanAttribute, ChangeDetectionStrategy, ChangeDetectorRef, Component, DestroyRef, ElementRef, inject, input, OnInit, viewChild, ViewEncapsulation } from '@angular/core';
 import { takeUntilDestroyed } from '@angular/core/rxjs-interop';
 import { ReactiveFormsModule } from '@angular/forms';
-import { InputDirective } from '@lucca-front/ng/form-field';
+import { InputDirective, PresentationDisplayDirective } from '@lucca-front/ng/form-field';
 import { startWith } from 'rxjs';
 import { injectNgControl } from '../inject-ng-control';
 import { NoopValueAccessorDirective } from '../noop-value-accessor.directive';
 
 @Component({
 	selector: 'lu-textarea-input',
-	imports: [InputDirective, ReactiveFormsModule],
+	imports: [InputDirective, ReactiveFormsModule, PresentationDisplayDirective],
 	templateUrl: './textarea-input.component.html',
 	hostDirectives: [NoopValueAccessorDirective],
 	encapsulation: ViewEncapsulation.None,

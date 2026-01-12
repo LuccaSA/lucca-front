@@ -43,3 +43,9 @@
 <ng-template #currentValueDisplayerTpl>
 	<ng-container *luOptionOutlet="displayerTpl(); value: value" />
 </ng-template>
+
+@if (!ignorePresentation()) {
+	<ng-container *luPresentationDisplay>
+		<ng-container *ngTemplateOutlet="currentValueDisplayerTpl" />
+	</ng-container>
+}

@@ -3,7 +3,16 @@ import { LOCALE_ID } from '@angular/core';
 import { FormsModule } from '@angular/forms';
 import { DateInputComponent } from '@lucca-front/ng/date2';
 import { FormFieldComponent } from '@lucca-front/ng/form-field';
-import { CheckboxInputComponent, MultilanguageInputComponent, MultilanguageTranslation, NumberFormatInputComponent, NumberInputComponent, TextInputComponent } from '@lucca-front/ng/forms';
+import {
+	CheckboxInputComponent,
+	MultilanguageInputComponent,
+	MultilanguageTranslation,
+	NumberFormatInputComponent,
+	NumberInputComponent,
+	SwitchInputComponent,
+	TextareaInputComponent,
+	TextInputComponent,
+} from '@lucca-front/ng/forms';
 import { PhoneNumberInputComponent } from '@lucca-front/ng/forms/phone-number-input';
 import { LuMultiSelectInputComponent } from '@lucca-front/ng/multi-select';
 import { LuSimpleSelectInputComponent } from '@lucca-front/ng/simple-select';
@@ -27,6 +36,8 @@ export default {
 				PhoneNumberInputComponent,
 				LuSimpleSelectInputComponent,
 				LuMultiSelectInputComponent,
+				SwitchInputComponent,
+				TextareaInputComponent,
 				FormFieldComponent,
 				FormsModule,
 			],
@@ -173,8 +184,8 @@ export const Basic: StoryObj = {
 				},
 				argTypes,
 			)}>
-</lu-form-field>
 	<lu-simple-select [options]="legumes" [(ngModel)]="legume" />
+</lu-form-field>
 <br>
 <br>
 <lu-form-field presentation label="Multiple select input" ${generateInputs(

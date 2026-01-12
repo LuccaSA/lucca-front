@@ -5,6 +5,7 @@
 	<label>
 		<span class="pr-u-mask">Prefix</span>
 		<lu-simple-select
+			ignorePresentation
 			[options]="prefixesDisplay()"
 			[ngModel]="prefixEntry()"
 			(ngModelChange)="updatePrefix($event)"
