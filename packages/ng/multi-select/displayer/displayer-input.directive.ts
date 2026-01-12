@@ -105,7 +105,9 @@ export class LuMultiSelectDisplayerInputDirective<T> implements OnInit {
 	}
 
 	#clearText() {
-		this.elementRef.nativeElement.value = '';
-		this.select.clueChanged('');
+		if (this.elementRef.nativeElement.value) {
+			this.elementRef.nativeElement.value = '';
+			this.select.clueChanged('');
+		}
 	}
 }
