@@ -125,22 +125,16 @@ export class FileEntryComponent {
 }
 
 function extractFileExtension(type: string): string {
-	let fileType: string;
 	switch (type) {
 		case 'application/vnd.ms-excel':
-			fileType = 'XLS';
-			break;
+			return 'XLS';
 		case 'application/vnd.openxmlformats-officedocument.spreadsheetml.sheet':
-			fileType = 'XLSX';
-			break;
+			return 'XLSX';
 		case 'application/msword':
-			fileType = 'DOC';
-			break;
+			return 'DOC';
 		case 'application/vnd.openxmlformats-officedocument.wordprocessingml.document':
-			fileType = 'DOCX';
-			break;
+			return 'DOCX';
 		default:
-			fileType = type.split('/')[1].toUpperCase();
+			return type.split('/')[1].toUpperCase();
 	}
-	return fileType;
 }
