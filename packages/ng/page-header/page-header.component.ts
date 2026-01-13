@@ -11,8 +11,19 @@ import { PortalContent, PortalDirective } from '@lucca-front/ng/core';
 	imports: [PortalDirective, NgTemplateOutlet],
 })
 export class PageHeaderComponent {
+	/**
+	 * Changes the description text displayed in page header
+	 */
 	readonly description = input<PortalContent | null>(null);
+
+	/**
+	 * Changes the title text displayed in page header
+	 */
 	readonly label = input<PortalContent | null>(null);
+
+	/**
+	 * Apply a container around the content
+	 */
 	readonly container = input(false, { transform: booleanAttribute });
 
 	readonly descriptionIsString = computed(() => this.isStringPortalContent(this.description()));
