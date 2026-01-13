@@ -20,8 +20,23 @@ import { LU_RESOURCE_CARD_WRAPPER_INSTANCE } from './wrapper/resource-card-wrapp
 export class ResourceCardComponent {
 	readonly wrapperRef = inject(LU_RESOURCE_CARD_WRAPPER_INSTANCE, { optional: true });
 
+	/**
+	 * Card can be draggable
+	 */
 	readonly draggable = input(false, { transform: booleanAttribute });
+
+	/**
+	 * Applies grid class to resource card
+	 */
 	readonly grid = input(false, { transform: booleanAttribute });
+
+	/**
+	 * Defines heading level for title
+	 */
 	readonly headingLevel = input<'1' | '2' | '3' | '4' | '5' | '6'>('3');
+
+	/**
+	 * 	hanges the size of the resource card
+	 */
 	readonly size = input<'S' | null>(null);
 }
