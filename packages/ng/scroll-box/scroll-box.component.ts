@@ -16,10 +16,13 @@ import { afterNextRender, booleanAttribute, Component, ElementRef, inject, input
 export class ScrollBoxComponent implements OnInit {
 	#elementRef = inject<ElementRef<HTMLElement>>(ElementRef);
 
+	/**
+	 * Scroll box content vertically
+	 */
+	vertical = input(false, { transform: booleanAttribute });
+
 	isFirstVisible = signal(true);
 	isLastVisible = signal(false);
-
-	vertical = input(false, { transform: booleanAttribute });
 
 	scroll() {
 		if (this.vertical()) {

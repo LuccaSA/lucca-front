@@ -7,10 +7,19 @@ import { booleanAttribute, ChangeDetectionStrategy, Component, computed, input, 
 	changeDetection: ChangeDetectionStrategy.OnPush,
 })
 export class SkeletonFieldComponent {
+	/**
+	 * Applies dark color for skeleton
+	 */
 	readonly dark = input<boolean, boolean | `${boolean}`>(false, { transform: booleanAttribute });
 
+	/**
+	 * Hide the field label skeleton
+	 */
 	readonly hiddenLabel = input<boolean, boolean | `${boolean}`>(false, { transform: booleanAttribute });
 
+	/**
+	 * Defines the number of row
+	 */
 	readonly rows = input<number, number | `${number}`>(1, { transform: numberAttribute });
 
 	readonly lines = computed(() => Array.from({ length: this.rows() }));

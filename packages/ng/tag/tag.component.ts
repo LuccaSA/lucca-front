@@ -46,8 +46,14 @@ export class TagComponent {
 	 */
 	readonly icon = input<LuccaIcon | null>(null);
 
+	/**
+	 * Ellipsis tooltip when long content
+	 */
 	readonly withEllipsis = input(false, { transform: booleanAttribute });
 
+	/**
+	 * Applies AI colors
+	 */
 	readonly AI = input(false, { transform: booleanAttribute });
 
 	readonly tagClasses = computed(() => {

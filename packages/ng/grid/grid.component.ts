@@ -18,12 +18,45 @@ import { LU_GRID_INSTANCE } from './grid.token';
 	],
 })
 export class GridComponent {
+	/**
+	 * Display the grid in container mode
+	 */
 	readonly container = input(false, { transform: booleanAttribute });
+
+	/**
+	 * Defines the number of columns in the grid
+	 */
 	readonly columns = input(null, { transform: numberAttribute });
+
+	/**
+	 * Defines the number of columns of a table cell
+	 */
 	readonly colspan = input(null, { transform: numberAttribute });
+
+	/**
+	 * Defines the number of rows of a table cell
+	 */
 	readonly rowspan = input(null, { transform: numberAttribute });
 
+	/**
+	 * Defines grid mode between form or auto
+	 */
 	readonly mode = input<'form' | 'auto' | ResponsiveProperty<'auto'> | null>(null);
+
+	/**
+	 * Defines a specific gap between columns and rows
+	 */
+	readonly gap = input<Gap | null>(null);
+
+	/**
+	 * Defines a specific gap for columns
+	 */
+	readonly columnGap = input<Gap | null>(null);
+
+	/**
+	 * Defines a specific gap for rows
+	 */
+	readonly rowGap = input<Gap | null>(null);
 
 	#gapTransform = (gap: Gap | null): string | null => {
 		const spacingRegexp = /.*(\d)$/g;
@@ -37,11 +70,7 @@ export class GridComponent {
 		return gap;
 	};
 
-	readonly gap = input<Gap | null>(null);
-	readonly columnGap = input<Gap | null>(null);
-	readonly rowGap = input<Gap | null>(null);
-
-	protected gridStyle = computed(() => ({
+	protected readonly gridStyle = computed(() => ({
 		'--grid-columns': this.mode() === null ? this.columns() : null,
 		'--grid-gap': this.#gapTransform(this.gap()),
 		'--grid-column-gap': this.#gapTransform(this.columnGap()),

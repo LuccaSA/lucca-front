@@ -36,15 +36,25 @@ let nextId = 0;
 	],
 })
 export class SegmentedControlTabsComponent<T = unknown> implements AfterContentInit {
+	/**
+	 * Applies small size to segmented control tabs
+	 */
 	readonly small = input(false, { transform: booleanAttribute });
+
+	/**
+	 * Display segmented control tabs vertically
+	 */
 	readonly vertical = input(false, { transform: booleanAttribute });
+
+	/**
+	 * Show or set the active tabs
+	 */
+	active = model<T>(null);
 
 	readonly id = `segmentedControl${nextId++}`;
 
 	readonly tabs = contentChildren<SegmentedControlTabsPanelComponent<T>>(SegmentedControlTabsPanelComponent);
 	readonly tabButtons = viewChildren<ElementRef<HTMLButtonElement>>('tabButton');
-
-	active = model<T>(null);
 
 	readonly currentIndex = computed(() => this.tabs().findIndex((tab) => tab.value() === this.active()));
 

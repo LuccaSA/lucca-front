@@ -19,7 +19,18 @@ import { LU_RESOURCE_CARD_WRAPPER_INSTANCE } from './resource-card-wrapper.token
 	],
 })
 export class ResourceCardWrapperComponent {
+	/**
+	 * Applies grid class to resource card wrapper
+	 */
 	readonly grid = input(false, { transform: booleanAttribute });
+
+	/**
+	 * Card wrapper can be draggable
+	 */
 	readonly draggable = input(false, { transform: booleanAttribute });
+
+	/**
+	 * Changes the size of the resource card wrapper
+	 */
 	readonly size = input<'S' | null>(null);
 }

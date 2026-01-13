@@ -8,7 +8,6 @@ export class CalloutFeedbackItemDescriptionDirective {}
 
 @Component({
 	selector: 'li[lu-callout-feedback-item]',
-	imports: [],
 	templateUrl: './callout-feedback-item.component.html',
 	styleUrl: './callout-feedback-item.component.scss',
 	host: {

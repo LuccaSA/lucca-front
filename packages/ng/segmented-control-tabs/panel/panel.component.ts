@@ -20,7 +20,16 @@ let nextId = 0;
 })
 export class SegmentedControlTabsPanelComponent<T = unknown> {
 	protected segmentedControlTabsRef = inject(LU_SEGMENTEDCONTROLTABS_INSTANCE);
+
+	/**
+	 * Changes the text displayed by the segmented control filter
+	 */
 	readonly label = input<PortalContent>();
+
+	/**
+	 * Defines value used
+	 */
+
 	readonly value = input.required<T>();
 
 	readonly id = nextId++;

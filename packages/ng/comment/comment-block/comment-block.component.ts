@@ -25,16 +25,36 @@ export class CommentBlockComponent {
 
 	readonly comments = contentChildren(CommentComponent, { read: CommentComponent, descendants: true });
 
+	/**
+	 * Display block comment in compact
+	 */
 	readonly compact = input(false, { transform: booleanAttribute });
 
+	/**
+	 * Small is a shorthand to set the size to small
+	 *
+	 * If the size input is filled along with the small input, their values will have the priority
+	 */
 	readonly small = input(false, { transform: booleanAttribute });
 
+	/**
+	 * Set the block comment response
+	 */
 	readonly chatAnswer = input(false, { transform: booleanAttribute });
 
+	/**
+	 * Display author name
+	 */
 	readonly authorName = input<PortalContent>();
 
+	/**
+	 * Display avatar
+	 */
 	readonly avatar = input<TemplateRef<unknown>>();
 
+	/**
+	 * Which size should the block comment be? Defaults or small
+	 */
 	readonly size = input<'S' | 'M'>();
 
 	readonly noAvatar = computed(() => !this.avatar());

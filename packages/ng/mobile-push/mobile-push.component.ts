@@ -14,6 +14,13 @@ import { LU_MOBILE_PUSH_TRANSLATIONS } from './mobile-push.translate';
 export class MobilePushComponent {
 	intl = getIntl(LU_MOBILE_PUSH_TRANSLATIONS);
 
+	/**
+	 * Emit event when appStoreLink is clicked
+	 */
 	appStoreLinkClicked = output<void>();
+
+	/**
+	 * Emit event when googlePlayLink is clicked
+	 */
 	googlePlayLinkClicked = output<void>();
 }

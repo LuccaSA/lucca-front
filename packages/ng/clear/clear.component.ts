@@ -47,13 +47,31 @@ import { LU_CLEAR_TRANSLATIONS } from './clear.translate';
 })
 export class ClearComponent<T> extends ALuClear<T> implements ILuClear<T> {
 	#luClass = inject(LuClass);
-	intl = getIntl(LU_CLEAR_TRANSLATIONS);
+	readonly intl = getIntl(LU_CLEAR_TRANSLATIONS);
 
-	size = input<'S' | null>(null);
-	disabled = input(false, { transform: booleanAttribute });
-	palette = input<Palette>('none');
-	inverted = input(false, { transform: booleanAttribute });
+	/**
+	 * Which size should the clear be? Defaults to small
+	 */
+	readonly size = input<'S' | null>(null);
 
+	/**
+	 * Disabled the chip
+	 */
+	readonly disabled = input(false, { transform: booleanAttribute });
+
+	/**
+	 * Applies a color palette to the clear
+	 */
+	readonly palette = input<Palette>('none');
+
+	/**
+	 * Change the clear colors for use on a dark background
+	 */
+	readonly inverted = input(false, { transform: booleanAttribute });
+
+	/**
+	 * Emit event when button clear is click
+	 */
 	// eslint-disable-next-line @angular-eslint/no-output-on-prefix
 	@Output() override onClear = new EventEmitter<T>();
 
