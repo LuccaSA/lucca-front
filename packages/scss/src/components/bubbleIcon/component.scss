@@ -1,7 +1,7 @@
 @use '@lucca-front/scss/src/commons/utils/namespace';
 
 @mixin component($atRoot: namespace.$defaultAtRoot) {
-	color: var(--palettes-600, var(--palettes-product-600));
+	color: var(--components-bubbleIcon-color);
 	inline-size: var(--components-bubbleIcon-size);
 	block-size: var(--components-bubbleIcon-size);
 	display: inline-grid;
@@ -21,7 +21,7 @@
 
 		.bubbleIcon-bubble-pathBlock,
 		.bubbleIcon-bubble-pathInline {
-			fill: var(--palettes-100, var(--palettes-product-100));
+			fill: var(--components-bubbleIcon-bubble-path-fill);
 		}
 
 		.bubbleIcon-bubble-pathBlock {
