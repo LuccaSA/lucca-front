@@ -1,6 +1,9 @@
 import { DecimalPipe, formatNumber } from '@angular/common';
 import { ChangeDetectionStrategy, Component, ElementRef, Inject, LOCALE_ID, ModelSignal, ViewChild, booleanAttribute, computed, input, model, numberAttribute, output, signal } from '@angular/core';
+import { toObservable } from '@angular/core/rxjs-interop';
+import { ɵeffectWithDeps } from '@lucca-front/ng/core';
 import { InputDirective } from '@lucca-front/ng/form-field';
+import { skip, take, tap } from 'rxjs';
 import { RemoveCommaPipe } from './date.utils';
 import { PickerControlDirection } from './misc.utils';
 import { RepeatOnHoldDirective } from './repeat-on-hold.directive';
@@ -14,45 +17,48 @@ let nextId = 0;
 	changeDetection: ChangeDetectionStrategy.OnPush,
 })
 export class TimePickerPartComponent {
-	label = input('');
+	readonly label = input('');
 
-	decimalConf = input('2.0-0');
+	readonly decimalConf = input('2.0-0');
 
 	value: ModelSignal<number | '––'> = model('––');
 
-	display = input<number | '––'>();
+	readonly display = input<number | '––'>();
 
-	max = input(0, {
+	readonly max = input(0, {
 		transform: numberAttribute,
 	});
 
-	autoWidth = input(false, {
+	readonly autoWidth = input(false, {
 		transform: booleanAttribute,
 	});
 
-	displayArrows = input(false, {
+	readonly displayArrows = input(false, {
 		transform: booleanAttribute,
 	});
 
-	isReadonly = input(false, {
+	readonly isReadonly = input(false, {
 		transform: booleanAttribute,
 	});
 
-	hideValue = input(false, {
+	readonly hideValue = input(false, {
 		transform: booleanAttribute,
 	});
 
-	disabled = input(false, {
+	readonly disabled = input(false, {
 		transform: booleanAttribute,
 	});
 
-	focused = input(false, {
+	readonly focused = input(false, {
 		transform: booleanAttribute,
 	});
 
-	maxDigits = input<number>(2);
+	readonly maxDigits = input<number>(2);
 
-	digitNumber = signal(2);
+	readonly showZero = input(false, { transform: booleanAttribute });
+
+	digitNumber = model(2);
+	isValueSet = signal<boolean>(false);
 
 	prevRequest = output<void>();
 	nextRequest = output<void>();
@@ -72,13 +78,37 @@ export class TimePickerPartComponent {
 		if (value === '––') {
 			return value;
 		}
-		// Remove comma separator && remove leading zero
-		return formatNumber(value, this.locale, this.decimalConf()).replace(/,/g, '').replace(/^0+/, '');
+
+		// remove comma separator for display
+		const formattedNumber = formatNumber(value, this.locale, this.decimalConf()).replace(/,/g, '');
+		const label = this.isValueSet() ? formattedNumber : '';
+
+		// remove trailing 0 when value is not 0 or showZero is false
+		return this.showZero() || value === 0 ? label : label.replace(/^0+/, '');
 	});
 
 	protected inputId = `time-picker-part-${nextId++}`;
 
-	constructor(@Inject(LOCALE_ID) private locale: string) {}
+	constructor(@Inject(LOCALE_ID) private locale: string) {
+		ɵeffectWithDeps([this.valueLabel], (valueLabel) => {
+			if (valueLabel) {
+				if (valueLabel.toString().length > this.digitNumber() || valueLabel.toString().length < this.digitNumber()) {
+					if (valueLabel.toString().length > 1) {
+						this.digitNumber.set(valueLabel.toString().length);
+					} else {
+						this.digitNumber.set(2);
+					}
+				}
+			}
+		});
+		toObservable(this.value)
+			.pipe(
+				skip(1),
+				tap(() => this.isValueSet.set(true)),
+				take(1),
+			)
+			.subscribe();
+	}
 
 	arrowKeyPressed(event: KeyboardEvent, isUpArrow: boolean): void {
 		event.preventDefault();
@@ -102,7 +132,6 @@ export class TimePickerPartComponent {
 		let val = value.slice(-this.digitNumber());
 
 		if (value.length > this.digitNumber() && val.length < this.maxDigits()) {
-			this.digitNumber.set(this.digitNumber() + 1);
 			val = value;
 		}
 
@@ -152,6 +181,7 @@ export class TimePickerPartComponent {
 			case 'Delete':
 			case 'Backspace':
 				this.clearField(event);
+				this.digitNumber.set(2);
 				break;
 			case 'ArrowUp':
 				this.arrowKeyPressed(event, true);
@@ -176,9 +206,5 @@ export class TimePickerPartComponent {
 		if (this.timePickerInput) {
 			this.timePickerInput.nativeElement.focus();
 		}
-	}
-
-	removeComma(value: number | null) {
-		return value?.toString().replace(/,/g, '');
 	}
 }
