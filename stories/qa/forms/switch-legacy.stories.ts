@@ -1,9 +1,10 @@
-import { Component } from '@angular/core';
+import { ChangeDetectionStrategy, Component } from '@angular/core';
 import { Meta, moduleMetadata, StoryObj } from '@storybook/angular';
 
 @Component({
 	selector: 'forms-switch-legacy-stories',
 	templateUrl: './switch-legacy.stories.html',
+	changeDetection: ChangeDetectionStrategy.OnPush,
 })
 class SwitchLegacyStory {}
 

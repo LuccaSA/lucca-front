@@ -46,7 +46,7 @@ export default {
 			control: {
 				type: 'select',
 			},
-			description: 'Applique une palette de couleurs au composant.',
+			description: 'Applique une palette de couleurs au callout.',
 			if: { arg: 'AI', truthy: false },
 		},
 		icon: {
@@ -60,10 +60,9 @@ export default {
 			description: "Information de l'icône restituée par le lecteur d'écran.",
 			type: 'string',
 		},
-
 		state: {
 			options: [null, 'success', 'warning', 'error'],
-			description: 'État du composant.',
+			description: 'État du callout.',
 			control: {
 				type: 'select',
 			},

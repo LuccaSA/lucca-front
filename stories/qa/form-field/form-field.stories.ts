@@ -1,4 +1,4 @@
-import { Component } from '@angular/core';
+import { ChangeDetectionStrategy, Component } from '@angular/core';
 import { FormsModule } from '@angular/forms';
 import { FormFieldComponent, InputDirective } from '@lucca-front/ng/form-field';
 import { TextInputComponent } from '@lucca-front/ng/forms';
@@ -9,6 +9,7 @@ import { stateArgType } from 'stories/helpers/common-arg-types';
 	selector: 'form-field-stories',
 	templateUrl: './form-field.stories.html',
 	imports: [FormFieldComponent, InputDirective, TextInputComponent, FormsModule],
+	changeDetection: ChangeDetectionStrategy.OnPush,
 })
 class FormFieldStory {
 	stateOptions = stateArgType.options;
@@ -27,7 +28,7 @@ export default {
 
 const template = () => ({});
 
-export const basic: StoryObj<FormFieldStory> = {
+export const Basic: StoryObj<FormFieldStory> = {
 	args: {},
 	render: template,
 };

@@ -12,6 +12,7 @@ export default {
 			control: {
 				type: 'boolean',
 			},
+			description: 'Désactive le composant.',
 		},
 	},
 	decorators: [

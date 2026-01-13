@@ -61,6 +61,9 @@ export default {
 		clearable: {
 			description: 'Affiche un bouton pour vider le champ lorsque celui-ci est rempli.',
 		},
+		keepSearchAfterSelection: {
+			description: 'Permet de poursuivre la recherche après une sélection',
+		},
 		loading: {
 			description: "Applique l'état de chargement.",
 		},
@@ -110,5 +113,6 @@ export const Basic: StoryObj<LuMultiSelectInputComponent<unknown> & FormFieldCom
 		inlineMessage: 'Helper text',
 		inlineMessageState: 'default',
 		loading: false,
+		keepSearchAfterSelection: false,
 	},
 };

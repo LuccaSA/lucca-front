@@ -26,19 +26,19 @@ export default {
 			control: {
 				type: 'text',
 			},
-			description: 'URL injectée dans <code>--components-fancyBox-background-left</code>',
+			description: "URL de l'image en arrière plan à gauche (200x160). Via <code>--components-fancyBox-background-left</code>.",
 		},
 		backgroundRight: {
 			control: {
 				type: 'text',
 			},
-			description: 'URL injectée dans <code>--components-fancyBox-background-right</code>',
+			description: "URL de l'image en arrière plan à droite (200x160). Via <code>--components-fancyBox-background-right</code>.",
 		},
 		foreground: {
 			control: {
 				type: 'text',
 			},
-			description: 'URL injectée dans <code>--components-fancyBox-foreground</code>',
+			description: "URL de l'image en premier plan (200x160). Via <code>--components-fancyBox-foreground</code>.",
 		},
 		size: {
 			options: ['', 'S'],
@@ -76,6 +76,14 @@ function getTemplate(args: FancyBoxBasicStory): string {
 const Template = (args: FancyBoxBasicStory) => ({
 	props: args,
 	template: getTemplate(args),
+	styles: [
+		`
+			:host {
+				display: block;
+				padding-block: var(--pr-t-spacings-400);
+			}
+		`,
+	],
 });
 
 export const Basic: StoryObj<FancyBoxBasicStory> = {

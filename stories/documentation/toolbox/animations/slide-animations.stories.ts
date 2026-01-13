@@ -1,4 +1,4 @@
-import { Component } from '@angular/core';
+import { ChangeDetectionStrategy, Component } from '@angular/core';
 import { provideAnimations } from '@angular/platform-browser/animations';
 import { luSlideAnimationFactory } from '@lucca-front/ng/animations';
 import { applicationConfig, Meta, StoryObj } from '@storybook/angular';
@@ -46,6 +46,7 @@ import { applicationConfig, Meta, StoryObj } from '@storybook/angular';
 	`,
 	styleUrl: './animations.scss',
 	animations: [luSlideAnimationFactory()],
+	changeDetection: ChangeDetectionStrategy.OnPush,
 })
 class SlideAnimationStory {
 	slidingLeft = false;

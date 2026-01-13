@@ -1,0 +1,11 @@
+<!-- basic class -->
+<div class="u-textLeft"></div>
+<div [class]="'u-textCenter'"></div>
+<div [class]="condition ? 'u-textCenter' : 'u-textRight'"></div>
+
+<!-- NgClass -->
+<span aria-hidden="true" [ngClass]="{ 'u-textCenter': showBillingInfos, 'u-textRight': !showBillingInfos }"></span>
+<span aria-hidden="true" [ngClass]="event.expanded ? 'u-textRight' : 'u-textCenter'"></span>
+
+<!-- Class bound attribute -->
+<span [class.u-textLeft]="!showDetails"></span>

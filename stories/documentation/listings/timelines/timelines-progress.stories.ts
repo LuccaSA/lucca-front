@@ -14,6 +14,7 @@ export default {
 				max: 100,
 				step: 1,
 			},
+			description: 'Progression en pourcentage entre deux étapes.',
 		},
 	},
 } as Meta;

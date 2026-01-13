@@ -14,7 +14,11 @@ function getAbsolutePath(value: string): any {
 const config: StorybookConfig = {
 	stories: ['../stories/**/*.mdx', '../stories/**/*.stories.@(js|jsx|mjs|ts|tsx)'],
 	addons: [getAbsolutePath('@storybook/addon-a11y'), getAbsolutePath('@storybook/addon-docs')],
-	framework: { name: '@storybook/angular', options: { fastRefresh: !process.env.CI } },
-	logLevel: process.env.CI ? 'error' : 'info',
+	framework: {
+		name: '@storybook/angular',
+		options: { fastRefresh: !process.env['CI'] },
+	},
+	logLevel: process.env['CI'] ? 'error' : 'info',
+	staticDirs: ['./public'],
 };
 export default config;

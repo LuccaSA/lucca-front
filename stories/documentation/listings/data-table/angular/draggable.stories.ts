@@ -1,5 +1,5 @@
 import { CdkDrag, CdkDragDrop, CdkDropList, moveItemInArray } from '@angular/cdk/drag-drop';
-import { Component, input } from '@angular/core';
+import { ChangeDetectionStrategy, Component, input } from '@angular/core';
 import {
 	DataTableBodyComponent,
 	DataTableComponent,
@@ -10,6 +10,7 @@ import {
 	DataTableRowComponent,
 } from '@lucca-front/ng/data-table';
 import { Meta, StoryObj } from '@storybook/angular';
+import { HiddenArgType } from 'stories/helpers/common-arg-types';
 
 @Component({
 	selector: 'data-table-draggable-stories',
@@ -25,6 +26,7 @@ import { Meta, StoryObj } from '@storybook/angular';
 		CdkDrag,
 	],
 	templateUrl: './draggable.stories.html',
+	changeDetection: ChangeDetectionStrategy.OnPush,
 })
 class DataTableDraggableStory {
 	selectable = input<boolean>(false);
@@ -46,7 +48,12 @@ export default {
 	argTypes: {
 		selectable: {
 			control: 'boolean',
+			description: 'Rend les lignes du tableau sélectionnables via des checkbox.',
 		},
+		drop: {
+			description: 'Evénement déclanché au drop.',
+		},
+		listItem: HiddenArgType,
 	},
 } as Meta;
 

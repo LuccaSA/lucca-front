@@ -1,5 +1,5 @@
 import { allLegumes, FilterLegumesPipe } from '@/stories/forms/select/select.utils';
-import { Component, input } from '@angular/core';
+import { ChangeDetectionStrategy, Component, input } from '@angular/core';
 import { FormsModule } from '@angular/forms';
 import { LuDisplayerDirective, LuOptionDirective } from '@lucca-front/ng/core-select';
 import { DateInputComponent, DateRangeInputComponent } from '@lucca-front/ng/date2';
@@ -29,6 +29,7 @@ import { StoryModelDisplayComponent } from '../../../../helpers/story-model-disp
 			</lu-simple-select>
 		}
 	`,
+	changeDetection: ChangeDetectionStrategy.OnPush,
 })
 class MyChildComponent {
 	legumes = allLegumes;

@@ -19,7 +19,7 @@ function getTemplate(args: DraggableStory): string {
 			</tr>
 		</thead>
 		<tbody class="dataTable-body">
-			<tr class="dataTable-body-row mod-draggable cdk-drag-placeholder">
+			<tr class="dataTable-body-row mod-draggable">
 				<td class="dataTable-body-row-cell" aria-hidden="true">
 					<span class="button dataTable-body-row-cell-drag">
 						<span aria-hidden="true" class="lucca-icon icon-dotsDrag"></span>
@@ -51,18 +51,7 @@ function getTemplate(args: DraggableStory): string {
 			</tr>
 		</tbody>
 	</table>
-</div>
-
-<tr class="dataTable-body-row mod-draggable cdk-drag-preview" aria-hidden="true" style="inline-size: 937px; block-size: 44px">
-	<td class="dataTable-body-row-cell" aria-hidden="true">
-		<span class="button dataTable-body-row-cell-drag">
-			<span aria-hidden="true" class="lucca-icon icon-dotsDrag"></span>
-		</span>
-	</td>
-	<td class="dataTable-body-row-cell">Table cell</td>
-	<td class="dataTable-body-row-cell">Table cell</td>
-	<td class="dataTable-body-row-cell">Table cell</td>
-</tr>`;
+</div>`;
 }
 
 const Template = (args: DraggableStory) => ({

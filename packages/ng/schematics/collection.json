@@ -36,6 +36,11 @@
       "factory": "./class-prefix/index",
       "schema": "./class-prefix/schema.json"
     },
+    "component-path": {
+      "description": "Update path component import",
+      "factory": "./component-path/index",
+      "schema": "./component-path/schema.json"
+    },
     "tokens-typo": {
       "description": "Replace typography tokens with new names.",
       "factory": "./tokens-typo/index",
@@ -50,6 +55,11 @@
       "description": "Replace palettes with new names.",
       "factory": "./palettes/index",
       "schema": "./palettes/schema.json"
+    },
+    "alignment-utilities": {
+      "description": "Replace alignment utilities tokens.",
+      "factory": "./alignment-utilities/index",
+      "schema": "./alignment-utilities/schema.json"
     },
     "action-icon": {
       "description": "Replace actionIcon usages with button mod-onlyIcon",

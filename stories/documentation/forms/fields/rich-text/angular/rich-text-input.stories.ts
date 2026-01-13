@@ -5,10 +5,10 @@ import { provideRouter } from '@angular/router';
 import { ButtonComponent } from '@lucca-front/ng/button';
 import { DividerComponent } from '@lucca-front/ng/divider';
 import { FormFieldComponent } from '@lucca-front/ng/form-field';
-import { RichTextInputComponent, RichTextInputToolbarComponent, RichTextPluginTagComponent, TAGS } from '@lucca-front/ng/forms/rich-text-input';
+import { RichTextInputComponent, RichTextInputToolbarComponent, RichTextPluginTagComponent } from '@lucca-front/ng/forms/rich-text-input';
 import { provideLuRichTextHTMLFormatter } from '@lucca-front/ng/forms/rich-text-input/formatters/html';
-import { DEFAULT_MARKDOWN_TRANSFORMERS, provideLuRichTextMarkdownFormatter } from '@lucca-front/ng/forms/rich-text-input/formatters/markdown';
-import { provideLuRichTextPlainTextFormatter } from '@lucca-front/ng/forms/rich-text-input/formatters/plain-text';
+import { DEFAULT_MARKDOWN_TRANSFORMERS, provideLuRichTextMarkdownFormatter, TAGS } from '@lucca-front/ng/forms/rich-text-input/formatters/markdown';
+import { PLAINTEXT_TAGS, provideLuRichTextPlainTextFormatter } from '@lucca-front/ng/forms/rich-text-input/formatters/plain-text';
 import { applicationConfig, Meta, moduleMetadata, StoryObj } from '@storybook/angular';
 import { cleanupTemplate, generateInputs } from 'stories/helpers/stories';
 import { StoryModelDisplayComponent } from 'stories/helpers/story-model-display.component';
@@ -38,6 +38,9 @@ export default {
 		},
 		autoResize: {
 			description: "Active / désactive l'autoresize du champ.",
+		},
+		hideToolbar: {
+			description: 'Masque les options de mise en forme.',
 		},
 	},
 } as Meta;
@@ -248,7 +251,7 @@ export const WithTagPluginPlainText: StoryObj<RichTextInputComponent & { value: 
 <pr-story-model-display>{{ value }}</pr-story-model-display>`),
 			moduleMetadata: {
 				imports: [RichTextInputComponent, RichTextPluginTagComponent, FormFieldComponent, FormsModule, BrowserAnimationsModule],
-				providers: [provideLuRichTextPlainTextFormatter([TAGS])],
+				providers: [provideLuRichTextPlainTextFormatter([PLAINTEXT_TAGS])],
 			},
 		};
 	},

@@ -12,12 +12,14 @@ export default {
 			control: {
 				type: 'boolean',
 			},
+			description: 'Présente la liste sous une forme ordonnée (avec un numéro associé à chaque élément).',
 		},
 		size: {
 			options: ['', 'mod-S', 'mod-L'],
 			control: {
 				type: 'radio',
 			},
+			description: 'Modifie la taille du composant.',
 		},
 	},
 } as Meta;

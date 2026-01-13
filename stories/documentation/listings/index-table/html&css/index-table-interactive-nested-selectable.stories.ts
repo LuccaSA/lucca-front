@@ -1,9 +1,10 @@
-import { Component } from '@angular/core';
+import { ChangeDetectionStrategy, Component } from '@angular/core';
 import { Meta, StoryObj } from '@storybook/angular';
 
 @Component({
 	selector: 'lu-index-table-interactive-nested-selectable',
 	templateUrl: './index-table-interactive-nested-selectable.stories.html',
+	changeDetection: ChangeDetectionStrategy.OnPush,
 })
 class IndexTableInteractiveNestedSelectableStory {
 	toggleRows(event, btnID, eIDs) {
@@ -13,13 +14,13 @@ class IndexTableInteractiveNestedSelectableStory {
 		// Get the button that triggered this
 		const clickedBtn = document.getElementById(btnID);
 		// If the button is not expanded...
-		if (clickedBtn.getAttribute('aria-expanded') == 'false') {
+		if (clickedBtn?.getAttribute('aria-expanded') == 'false') {
 			// Loop through the rows and show them
 			for (let i = 0; i < targetRows.length; i++) {
 				targetRows[i].classList.remove('is-closed');
 			}
 			// Now set the button to expanded
-			clickedBtn.setAttribute('aria-expanded', 'true');
+			clickedBtn?.setAttribute('aria-expanded', 'true');
 			// Otherwise button is not expanded...
 		} else {
 			// Loop through the rows and hide them
@@ -27,7 +28,7 @@ class IndexTableInteractiveNestedSelectableStory {
 				targetRows[i].classList.add('is-closed');
 			}
 			// Now set the button to collapsed
-			clickedBtn.setAttribute('aria-expanded', 'false');
+			clickedBtn?.setAttribute('aria-expanded', 'false');
 		}
 	}
 
@@ -59,10 +60,10 @@ class IndexTableInteractiveNestedSelectableStory {
 				const parentChbx = parentChbxs[i] as HTMLInputElement;
 				parentChbx.removeAttribute('aria-checked');
 				// parse their childs list and sum their states (unchecked = 0 ; checked = 1)
-				const parentChbxChildIds = parentChbx.getAttribute('aria-controls').split(' ');
+				const parentChbxChildIds = parentChbx.getAttribute('aria-controls')?.split(' ');
 				let calculatedState = 0;
-				for (let j = 0; j < parentChbxChildIds.length; j++) {
-					const parentChbxChildId = '#' + parentChbxChildIds[j];
+				for (let j = 0; j < parentChbxChildIds?.length; j++) {
+					const parentChbxChildId = '#' + parentChbxChildIds?.[j];
 					const parentChbxChild = document.querySelectorAll(parentChbxChildId)[0] as HTMLInputElement;
 
 					if (parentChbxChild.checked) {
@@ -74,7 +75,7 @@ class IndexTableInteractiveNestedSelectableStory {
 					parentChbx.checked = false;
 				}
 				// all childs are checked => parent is checked
-				else if (calculatedState == parentChbxChildIds.length) {
+				else if (calculatedState == parentChbxChildIds?.length) {
 					parentChbx.checked = true;
 				}
 				// some childs checked, some unchecked => parent is mixed

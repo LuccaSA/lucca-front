@@ -50,8 +50,8 @@ export const Template: StoryObj<ListingComponent & ListingItemComponent & { type
 			control: {
 				type: 'select',
 			},
+			description: 'Modifie le type de liste (checklist, icônes, etc.)',
 		},
-
 		checklist: HiddenArgType,
 		icons: HiddenArgType,
 		defaultIcon: {
@@ -60,6 +60,7 @@ export const Template: StoryObj<ListingComponent & ListingItemComponent & { type
 				type: 'select',
 			},
 			if: { arg: 'type', eq: 'icons' },
+			description: "Modifie l'icône par défaut.",
 		},
 		icon: {
 			options: IconsList.map((i) => i.icon),
@@ -67,10 +68,18 @@ export const Template: StoryObj<ListingComponent & ListingItemComponent & { type
 				type: 'select',
 			},
 			if: { arg: 'type', eq: 'icons' },
+			description: "Modifie l'icône d'un élément de la liste.",
 		},
 		palette: {
 			PaletteAllArgType,
+			control: {
+				type: 'select',
+			},
 			if: { arg: 'type', truthy: true },
+			description: 'Modifie la couleur des icônes.',
+		},
+		divider: {
+			description: 'Ajoute un séparateur vertical entre les éléments.',
 		},
 	},
 
