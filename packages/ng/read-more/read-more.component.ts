@@ -22,17 +22,35 @@ import { LU_READMORE_TRANSLATIONS } from './read-more.translate';
 export class ReadMoreComponent implements OnInit {
 	intl = getIntl(LU_READMORE_TRANSLATIONS);
 
+	/**
+	 * Change the number of lines displayed when collapsed
+	 */
 	readonly lineClamp = input<number>(5);
+
+	/**
+	 * Prevent the component from closing by hiding the "Read less" button
+	 */
 	readonly openOnly = input(false, { transform: booleanAttribute });
+
+	/**
+	 * Change the background color under the "Read more / less" button
+	 */
 	readonly textFlow = input(false, { transform: booleanAttribute });
+
+	/**
+	 * Apply the spacing of the Text Flow component
+	 */
 	readonly surface = input<null | 'sunken' | 'default' | string>(null);
+
+	/**
+	 * Allow content to be passed via innerHTML
+	 */
+	readonly innerContent = input<null | string>(null);
 
 	labelReadMore = this.intl.readMore;
 	labelReadLess = this.intl.readLess;
 
 	label = signal<string>(this.labelReadMore);
-
-	innerContent = input<null | string>(null);
 
 	readonly contentRef = viewChild<ElementRef<HTMLDivElement>>('content');
 
