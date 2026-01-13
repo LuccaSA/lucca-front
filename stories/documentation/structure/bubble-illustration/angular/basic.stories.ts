@@ -7,6 +7,16 @@ export default {
 	argTypes: {
 		illustration: {
 			options: [
+				'mood-angry',
+				'mood-bored',
+				'mood-happy',
+				'mood-joyful',
+				'mood-moody',
+				'mood-sad',
+				'mood-shoked',
+				'mood-sly',
+				'mood-smirking',
+				'mood-surprised',
 				'absence',
 				'anniversary',
 				'annual-rem',
@@ -105,7 +115,7 @@ export default {
 			},
 		},
 		size: {
-			options: ['XS', 'S', '', 'L'],
+			options: ['S', '', 'L'],
 			control: {
 				type: 'select',
 			},
@@ -151,17 +161,17 @@ export default {
 		}),
 	],
 	render: ({ palette, size, ...args }, { argTypes }) => {
-		const paletteClass = palette !== 'product' ? ` class="palette-${palette}"` : ``;
+		const paletteArg = palette !== 'product' ? ` palette="${palette}"` : ``;
 		const sizeArg = size !== '' ? ` size="${size}"` : ``;
 		return {
-			template: cleanupTemplate(`<lu-bubble-illustration${sizeArg}${paletteClass}${generateInputs(args, argTypes)} />`),
+			template: cleanupTemplate(`<lu-bubble-illustration${sizeArg}${paletteArg}${generateInputs(args, argTypes)} />`),
 		};
 	},
 } as Meta;
 
 export const Basic: StoryObj<BubbleIllustrationComponent & { palette: string }> = {
 	args: {
-		illustration: 'absence',
+		illustration: 'anniversary',
 		palette: 'product',
 		action: false,
 		size: '',
