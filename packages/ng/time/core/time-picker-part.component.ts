@@ -1,5 +1,5 @@
 import { DecimalPipe, formatNumber } from '@angular/common';
-import { ChangeDetectionStrategy, Component, ElementRef, Inject, LOCALE_ID, ModelSignal, ViewChild, booleanAttribute, computed, input, model, numberAttribute, output } from '@angular/core';
+import { ChangeDetectionStrategy, Component, ElementRef, Inject, LOCALE_ID, ModelSignal, ViewChild, booleanAttribute, computed, input, model, numberAttribute, output, signal } from '@angular/core';
 import { InputDirective } from '@lucca-front/ng/form-field';
 import { RemoveCommaPipe } from './date.utils';
 import { PickerControlDirection } from './misc.utils';
@@ -50,7 +50,9 @@ export class TimePickerPartComponent {
 		transform: booleanAttribute,
 	});
 
-	digitNumber = input<number>(2);
+	maxDigits = input<number>(2);
+
+	digitNumber = signal(2);
 
 	prevRequest = output<void>();
 	nextRequest = output<void>();
@@ -70,7 +72,8 @@ export class TimePickerPartComponent {
 		if (value === '––') {
 			return value;
 		}
-		return formatNumber(value, this.locale, this.decimalConf()).replace(/,/g, '');
+		// Remove comma separator && remove leading zero
+		return formatNumber(value, this.locale, this.decimalConf()).replace(/,/g, '').replace(/^0+/, '');
 	});
 
 	protected inputId = `time-picker-part-${nextId++}`;
@@ -96,7 +99,12 @@ export class TimePickerPartComponent {
 
 		const value = event.target.value;
 
-		let val = value.slice(-2) || '00';
+		let val = value.slice(-this.digitNumber());
+
+		if (value.length > this.digitNumber() && val.length < this.maxDigits()) {
+			this.digitNumber.set(this.digitNumber() + 1);
+			val = value;
+		}
 
 		if (this.max() && Number(val) * 10 > this.max()) {
 			this.moveRequest(event, 'next');

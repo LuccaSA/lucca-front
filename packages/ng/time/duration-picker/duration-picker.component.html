@@ -12,10 +12,10 @@
 			[decimalConf]="hoursDecimalConf"
 			[hideValue]="shouldHideValue()"
 			[displayArrows]="displayArrows()"
+			[maxDigits]="maxDigits()"
 			(valueChange)="hoursInputHandler($event)"
 			(nextRequest)="focusPart('minutes')"
 			(inputControlClick)="inputControlClickHandler('hours', $event)"
-			[digitNumber]="digitNumber()"
 		/>
 		<div aria-hidden="true" [class]="fieldsetSuffixClasses()">{{ separator }}</div>
 		<lu-time-picker-part
