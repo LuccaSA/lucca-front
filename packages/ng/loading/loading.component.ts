@@ -25,9 +25,24 @@ type DisplayMode =
 export class LoadingComponent {
 	#luClass = inject(LuClass);
 
+	/**
+	 * Changes the size of the loading (Medium by default or L)
+	 */
 	readonly size = input<'L' | null>(null);
+
+	/**
+	 * Adjusts the colors of the loading for use on a dark background
+	 */
 	readonly invert = input(false, { transform: booleanAttribute });
+
+	/**
+	 * Applies mod block on loading
+	 */
 	readonly block = input(false, { transform: booleanAttribute });
+
+	/**
+	 * Where the loading is diplayed
+	 */
 	readonly template = input<DisplayMode | null>(null);
 
 	constructor() {
