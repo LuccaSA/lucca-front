@@ -11,5 +11,8 @@ import { booleanAttribute, ChangeDetectionStrategy, Component, input, ViewEncaps
 	},
 })
 export class MainLayoutBlockComponent {
+	/**
+	 * Content can overflow out of the layout
+	 */
 	readonly overflow = input(false, { transform: booleanAttribute });
 }
