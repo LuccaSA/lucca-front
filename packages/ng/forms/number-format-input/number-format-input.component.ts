@@ -33,7 +33,7 @@ export class NumberFormatInputComponent implements AfterViewInit {
 
 	readonly formatStyle = input<NumberFormatStyle>('decimal');
 
-	readonly useAutoPrefixSuffix = input<boolean | undefined>(undefined);
+	readonly useAutoPrefixSuffix = input(false, { transform: booleanAttribute });
 
 	readonly prefix = input<TextInputAddon | undefined>(undefined);
 
@@ -63,7 +63,7 @@ export class NumberFormatInputComponent implements AfterViewInit {
 
 	readonly #numberFormat = computed(() => new NumberFormat(this.formatOptions()));
 	readonly prefixAddon = computed(() => {
-		if (this.useAutoPrefixSuffix() === undefined || this.useAutoPrefixSuffix() === false) {
+		if (this.useAutoPrefixSuffix() === false) {
 			return this.prefix();
 		}
 		const content = this.#numberFormat().getPrefix(this.#suffixPrefixValue());
@@ -76,7 +76,7 @@ export class NumberFormatInputComponent implements AfterViewInit {
 		} as TextInputAddon;
 	});
 	readonly suffixAddon = computed(() => {
-		if (this.useAutoPrefixSuffix() === undefined || this.useAutoPrefixSuffix() === false) {
+		if (this.useAutoPrefixSuffix() === false) {
 			return this.suffix();
 		}
 		const content = this.#numberFormat().getSuffix(this.#suffixPrefixValue());
