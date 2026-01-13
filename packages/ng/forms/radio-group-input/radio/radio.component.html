@@ -1,6 +1,6 @@
 <ng-template #radioContent>
 	<label class="formLabel" [class.inputFramed-header-label]="framed()" id="{{ id }}-label" for="{{ id }}-input">
-		<ng-content />
+		<ng-container *ngTemplateOutlet="contentProjection" />
 		@if (tag()) {
 			<span class="formLabel-tag tag">{{ tag() }}</span>
 		}
@@ -40,4 +40,10 @@
 	</lu-input-framed>
 } @else {
 	<ng-container *ngTemplateOutlet="radioContent" />
+}
+
+<ng-template #contentProjection><ng-content /></ng-template>
+
+@if (ngControl.value == value()) {
+	<ng-container *luPresentationDisplay><ng-container *ngTemplateOutlet="contentProjection" /></ng-container>
 }

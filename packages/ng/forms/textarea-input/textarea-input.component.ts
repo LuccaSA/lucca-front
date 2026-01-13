@@ -5,10 +5,11 @@ import { InputDirective, PresentationDisplayDirective } from '@lucca-front/ng/fo
 import { startWith } from 'rxjs';
 import { injectNgControl } from '../inject-ng-control';
 import { NoopValueAccessorDirective } from '../noop-value-accessor.directive';
+import { ReadMoreComponent } from '@lucca-front/ng/read-more';
 
 @Component({
 	selector: 'lu-textarea-input',
-	imports: [InputDirective, ReactiveFormsModule, PresentationDisplayDirective],
+	imports: [InputDirective, ReactiveFormsModule, PresentationDisplayDirective, ReadMoreComponent],
 	templateUrl: './textarea-input.component.html',
 	hostDirectives: [NoopValueAccessorDirective],
 	encapsulation: ViewEncapsulation.None,
