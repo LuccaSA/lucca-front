@@ -16,16 +16,15 @@ import { IconComponent } from '@lucca-front/ng/icon';
 		'[class.mod-top]': 'direction() === 3',
 		'[class.mod-bottom]': 'direction() === 4',
 		'[class.mod-S]': 'size() === "S"',
-		'[class.mod-XS]': 'size() === "XS"',
 		'[class.mod-L]': 'size() === "L"',
 	},
 	imports: [IconComponent],
 	changeDetection: ChangeDetectionStrategy.OnPush,
 })
 export class BubbleIconComponent {
-	readonly icon = input<LuccaIcon | null>(null);
+	readonly icon = input.required<LuccaIcon>();
 	readonly alt = input<string | null>(null);
-	readonly size = input<'XS' | 'S' | 'L' | ''>('');
+	readonly size = input<'S' | 'L' | ''>('');
 
 	readonly palette = input<Palette | DecorativePalette>('product');
 	readonly paletteClass = computed(() => ({ [`palette-${this.palette()}`]: !!this.palette() }));

@@ -14,7 +14,7 @@ export default {
 			},
 		},
 		size: {
-			options: ['XS', 'S', '', 'L'],
+			options: ['S', '', 'L'],
 			control: {
 				type: 'select',
 			},

@@ -1,18 +1,10 @@
 @use '@lucca-front/icons/src/icon/exports' as icon;
 
-@mixin XS {
+@mixin S {
 	--components-bubbleIcon-size: var(--pr-t-spacings-400);
 
 	.lucca-icon {
 		@include icon.XS;
-	}
-}
-
-@mixin S {
-	--components-bubbleIcon-size: calc(var(--pr-t-spacings-400) + var(--pr-t-spacings-50));
-
-	.lucca-icon {
-		@include icon.S;
 	}
 }
 
@@ -30,7 +22,7 @@
 
 @mixin right {
 	--components-bubbleIcon-icon-insetInlineEnd: var(--components-bubbleIcon-icon-insetOffset);
-	--components-bubbleIcon-bubble-scale: -1 1;
+	--components-bubbleIcon-bubble-scale: -1 -1;
 }
 
 @mixin top {
@@ -43,5 +35,5 @@
 	--components-bubbleIcon-icon-insetBlockEnd: var(--components-bubbleIcon-icon-insetOffset);
 	--components-bubbleIcon-bubble-pathBlock-display: inherit;
 	--components-bubbleIcon-bubble-pathInline-display: none;
-	--components-bubbleIcon-bubble-scale: 1 -1;
+	--components-bubbleIcon-bubble-scale: -1 -1;
 }

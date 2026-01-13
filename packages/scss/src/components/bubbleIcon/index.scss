@@ -9,10 +9,6 @@
 	}
 
 	@layer mods {
-		&.mod-XS {
-			@include XS;
-		}
-
 		&.mod-S {
 			@include S;
 		}
