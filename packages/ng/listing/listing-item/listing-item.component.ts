@@ -15,7 +15,10 @@ import { LU_LISTING_INSTANCE } from '../listing.token';
 	},
 })
 export class ListingItemComponent {
-	readonly icon = input<LuccaIcon | null>(null);
-
 	protected listingRef = inject(LU_LISTING_INSTANCE);
+
+	/**
+	 * Adds an icon to the listing item
+	 */
+	readonly icon = input<LuccaIcon | null>(null);
 }
