@@ -5,14 +5,16 @@ import { FormFieldComponent } from '../form-field.component';
 	selector: '[luPresentationDisplay]',
 })
 export class PresentationDisplayDirective implements OnInit {
-	#formFieldRef = inject(FormFieldComponent);
+	#formFieldRef = inject(FormFieldComponent, { optional: true });
 
 	public readonly templateRef: TemplateRef<unknown> = inject(TemplateRef);
 
 	#vcr = inject(ViewContainerRef);
 
 	ngOnInit() {
-		this.#formFieldRef.presentationDisplayTpl.set(this.templateRef);
+		if (this.#formFieldRef) {
+			this.#formFieldRef.presentationDisplayTpl.set(this.templateRef);
+		}
 		this.#vcr.clear();
 	}
 
