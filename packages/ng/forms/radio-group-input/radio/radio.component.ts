@@ -66,8 +66,10 @@ export class RadioComponent<T = unknown> {
 		});
 		// We have to do this for presentation mode because otherwise, form value inits after component and because it's not a signal,
 		// it doesn't trigger an update to show the presentation display
-		this.ngControl.valueChanges.pipe(takeUntilDestroyed()).subscribe(() => {
-			this.#cdr.markForCheck();
-		});
+		if (this.ngControl?.valueChanges) {
+			this.ngControl.valueChanges.pipe(takeUntilDestroyed()).subscribe(() => {
+				this.#cdr.markForCheck();
+			});
+		}
 	}
 }
