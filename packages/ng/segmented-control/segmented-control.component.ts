@@ -29,7 +29,14 @@ let nextId = 0;
 export class SegmentedControlComponent {
 	ngControl = injectNgControl();
 
+	/**
+	 * Applies small size to segmented control
+	 */
 	readonly small = input(false, { transform: booleanAttribute });
+
+	/**
+	 * Display segmented control vertically
+	 */
 	readonly vertical = input(false, { transform: booleanAttribute });
 
 	readonly id = `segmentedControl${nextId++}`;
