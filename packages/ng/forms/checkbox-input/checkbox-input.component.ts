@@ -6,7 +6,7 @@ import { LuTooltipTriggerDirective } from '@lucca-front/ng/tooltip';
 import { injectNgControl } from '../inject-ng-control';
 import { NoopValueAccessorDirective } from '../noop-value-accessor.directive';
 import { CHECKBOX_INPUT_TRANSLATIONS } from './checkbox-input.translate';
-import { getIntl } from '../../core/translate';
+import { getIntl } from '@lucca-front/ng/core';
 
 let nextId = 0;
 

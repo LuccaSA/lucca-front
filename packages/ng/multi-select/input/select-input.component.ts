@@ -32,7 +32,7 @@ import { LuMultiSelectDefaultDisplayerComponent } from '../displayer';
 import { LU_MULTI_SELECT_TRANSLATIONS } from '../select.translate';
 import { LuMultiSelectPanelRefFactory } from './panel-ref.factory';
 import { LuMultiSelectPanelRef } from './panel.model';
-import { PresentationDisplayDirective } from '../../form-field/value-presentation/presentation-display.directive';
+import { PresentationDisplayDirective } from '@lucca-front/ng/form-field';
 
 @Component({
 	selector: 'lu-multi-select',

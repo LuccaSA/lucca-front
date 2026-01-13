@@ -1,5 +1,5 @@
 import { Directive, inject, OnInit, TemplateRef, ViewContainerRef } from '@angular/core';
-import { FormFieldComponent } from '@lucca-front/ng/form-field';
+import { FormFieldComponent } from '../form-field.component';
 
 @Directive({
 	selector: '[luPresentationDisplay]',
