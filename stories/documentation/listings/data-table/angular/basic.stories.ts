@@ -87,12 +87,7 @@ export default {
 			},
 			description: 'Affiche un footer.',
 		},
-		stickyHeader: {
-			control: {
-				type: 'boolean',
-			},
-			description: 'Conserve le header visible en cas de scroll.',
-		},
+		stickyHeader: HiddenArgType,
 		hover: {
 			control: {
 				type: 'boolean',
