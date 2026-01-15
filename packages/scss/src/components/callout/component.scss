@@ -43,8 +43,14 @@
 		.callout-content-description {
 			display: var(--components-callout-content-description-display);
 			justify-content: space-between;
-			gap: var(--pr-t-spacings-150);
+			column-gap: var(--pr-t-spacings-150);
 			align-items: flex-start;
+			grid-template-columns: 1fr auto;
+			grid-auto-flow: row;
+
+			> * {
+				grid-column-start: 1;
+			}
 
 		}
 
@@ -54,6 +60,8 @@
 			margin-block-start: var(--components-callout-content-description-action-marginBlockStart);
 			padding-block: var(--components-callout-content-description-action-paddingBlock);
 			padding-inline: 0;
+			grid-column-start: 2;
+			grid-row-start: 1;
 
 			.button {
 				@include color.palette('neutral');
