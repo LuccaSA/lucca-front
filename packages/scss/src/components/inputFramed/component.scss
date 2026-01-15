@@ -14,17 +14,6 @@
 	flex-direction: column;
 
 	@at-root ($atRoot) {
-		.inputFramed-header-label.formLabel {
-			position: static;
-			font-weight: var(--components-inputFramed-header-label-fontWeight);
-
-			&::after {
-				content: '';
-				position: absolute;
-				inset: calc(var(--pr-t-spacings-50) * -1);
-			}
-		}
-
 		.inputFramed-header-field {
 			flex: 1;
 
@@ -48,6 +37,17 @@
 			align-content: flex-start;
 			gap: var(--pr-t-spacings-100);
 			align-items: var(--components-inputFramed-header-alignItems);
+
+			.inputFramed-header-label.formLabel {
+				position: static;
+				font-weight: var(--components-inputFramed-header-label-fontWeight);
+
+				&::after {
+					content: '';
+					position: absolute;
+					inset: calc(var(--pr-t-spacings-50) * -1);
+				}
+			}
 		}
 
 		.inputFramed-header-illustration {
