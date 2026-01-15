@@ -1,6 +1,6 @@
 import { ChangeDetectionStrategy, Component, inject, ViewEncapsulation } from '@angular/core';
 import { ReactiveFormsModule } from '@angular/forms';
-import { FORM_FIELD_INSTANCE, FormFieldComponent, InputDirective, PresentationDisplayDirective } from '@lucca-front/ng/form-field';
+import { FORM_FIELD_INSTANCE, FormFieldComponent, InputDirective, ɵPresentationDisplayDefaultDirective } from '@lucca-front/ng/form-field';
 import { injectNgControl } from '../inject-ng-control';
 import { NoopValueAccessorDirective } from '../noop-value-accessor.directive';
 import { getIntl } from '@lucca-front/ng/core';
@@ -8,7 +8,7 @@ import { CHECKBOX_INPUT_TRANSLATIONS } from '../checkbox-input/checkbox-input.tr
 
 @Component({
 	selector: 'lu-switch-input',
-	imports: [ReactiveFormsModule, InputDirective, PresentationDisplayDirective],
+	imports: [ReactiveFormsModule, InputDirective, ɵPresentationDisplayDefaultDirective],
 	templateUrl: './switch-input.component.html',
 	styleUrl: './switch-input.component.scss',
 	hostDirectives: [NoopValueAccessorDirective],

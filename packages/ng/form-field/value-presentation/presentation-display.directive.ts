@@ -1,4 +1,4 @@
-import { Directive, inject, OnInit, TemplateRef, ViewContainerRef } from '@angular/core';
+import { Directive, inject, OnInit, signal, TemplateRef, ViewContainerRef } from '@angular/core';
 import { FormFieldComponent } from '../form-field.component';
 
 @Directive({
@@ -11,9 +11,14 @@ export class PresentationDisplayDirective implements OnInit {
 
 	#vcr = inject(ViewContainerRef);
 
+	defaultDisplay = signal(false);
+
 	ngOnInit() {
 		if (this.#formFieldRef) {
-			this.#formFieldRef.presentationDisplayTpl.set(this.templateRef);
+			// If it's default display, we do not override the existing value, this way consumers can override easily without any kind of race condition.
+			if (!this.#formFieldRef.presentationDisplayTpl() || !this.defaultDisplay()) {
+				this.#formFieldRef.presentationDisplayTpl.set(this.templateRef);
+			}
 		}
 		this.#vcr.clear();
 	}

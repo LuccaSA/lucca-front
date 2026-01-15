@@ -4,7 +4,7 @@ import { ReactiveFormsModule } from '@angular/forms';
 import { LuccaIcon } from '@lucca-front/icons';
 import { ClearComponent } from '@lucca-front/ng/clear';
 import { getIntl, ɵeffectWithDeps } from '@lucca-front/ng/core';
-import { InputDirective, PresentationDisplayDirective } from '@lucca-front/ng/form-field';
+import { InputDirective, ɵPresentationDisplayDefaultDirective } from '@lucca-front/ng/form-field';
 import { NgxMaskDirective, provideNgxMask } from 'ngx-mask';
 import { FormFieldIdDirective } from '../form-field-id.directive';
 import { injectNgControl } from '../inject-ng-control';
@@ -16,7 +16,7 @@ type TextFieldType = 'text' | 'email' | 'password' | 'url';
 
 @Component({
 	selector: 'lu-text-input',
-	imports: [InputDirective, ReactiveFormsModule, FormFieldIdDirective, NgTemplateOutlet, NgxMaskDirective, ClearComponent, PresentationDisplayDirective],
+	imports: [InputDirective, ReactiveFormsModule, FormFieldIdDirective, NgTemplateOutlet, NgxMaskDirective, ClearComponent, ɵPresentationDisplayDefaultDirective],
 	templateUrl: './text-input.component.html',
 	hostDirectives: [NoopValueAccessorDirective],
 	encapsulation: ViewEncapsulation.None,
@@ -69,7 +69,7 @@ export class TextInputComponent {
 
 	clearValue(): void {
 		this.ngControl.reset();
-		this.inputElementRef().nativeElement.focus();
+		this.inputElementRef()?.nativeElement.focus();
 	}
 
 	togglePasswordVisibility() {

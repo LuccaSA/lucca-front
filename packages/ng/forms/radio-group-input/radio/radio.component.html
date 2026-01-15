@@ -45,5 +45,5 @@
 <ng-template #contentProjection><ng-content /></ng-template>
 
 @if (ngControl.value === value()) {
-	<ng-container *luPresentationDisplay><ng-container *ngTemplateOutlet="contentProjection" /></ng-container>
+	<ng-container *luPresentationDisplayDefault><ng-container *ngTemplateOutlet="contentProjection" /></ng-container>
 }

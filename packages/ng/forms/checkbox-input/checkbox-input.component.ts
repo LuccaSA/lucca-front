@@ -1,7 +1,7 @@
 import { booleanAttribute, ChangeDetectionStrategy, Component, forwardRef, inject, input, signal, Signal, ViewEncapsulation } from '@angular/core';
 import { ReactiveFormsModule } from '@angular/forms';
 import { FILTER_PILL_INPUT_COMPONENT, FilterPillInputComponent, FilterPillLabelDirective, FilterPillLayout } from '@lucca-front/ng/filter-pills';
-import { FORM_FIELD_INSTANCE, FormFieldComponent, INPUT_FRAMED_INSTANCE, InputDirective, PresentationDisplayDirective } from '@lucca-front/ng/form-field';
+import { FORM_FIELD_INSTANCE, FormFieldComponent, INPUT_FRAMED_INSTANCE, InputDirective, ɵPresentationDisplayDefaultDirective } from '@lucca-front/ng/form-field';
 import { LuTooltipTriggerDirective } from '@lucca-front/ng/tooltip';
 import { injectNgControl } from '../inject-ng-control';
 import { NoopValueAccessorDirective } from '../noop-value-accessor.directive';
@@ -12,7 +12,7 @@ let nextId = 0;
 
 @Component({
 	selector: 'lu-checkbox-input',
-	imports: [ReactiveFormsModule, InputDirective, FilterPillLabelDirective, LuTooltipTriggerDirective, PresentationDisplayDirective],
+	imports: [ReactiveFormsModule, InputDirective, FilterPillLabelDirective, LuTooltipTriggerDirective, ɵPresentationDisplayDefaultDirective],
 	hostDirectives: [NoopValueAccessorDirective],
 	templateUrl: './checkbox-input.component.html',
 	styleUrl: './checkbox-input.component.scss',
