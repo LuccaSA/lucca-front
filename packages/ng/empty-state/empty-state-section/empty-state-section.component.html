@@ -1,13 +1,10 @@
 <section class="emptyState" [class.mod-center]="center()" [attr.role]="heading() ? null : 'presentation'">
 	<div class="emptyState-container">
 		<div class="emptyState-content">
-			@if (icon()) {
-				<div
-					class="emptyState-content-icon"
-					[class]="emptyStateClasses()"
-					aria-hidden="true"
-					[innerHtml]="icon() | luSafeExternalSvg"
-				></div>
+			@if (iconOrIllustration()) {
+				<div class="emptyState-content-icon">
+					<lu-bubble-illustration [action]="actionIllustration()" [illustration]="iconOrIllustration()" size="L" [palette]="palette()" />
+				</div>
 			}
 			<div class="emptyState-content-text">
 				@if (heading()) {

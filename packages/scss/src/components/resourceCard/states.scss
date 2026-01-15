@@ -20,6 +20,11 @@
 	--components-resourceCard-color: var(--palettes-neutral-500);
 	--components-resourceCard-layout-header-title-action-color: var(--palettes-neutral-500);
 	--components-resourceCard-before-boxShadow: 0 0 0 1px var(--palettes-neutral-50);
+
+
+	.bubbleIllustration {
+		--palettes-brand-600: var(--pr-t-color-input-icon-disabled);
+	}
 }
 
 @mixin active {
