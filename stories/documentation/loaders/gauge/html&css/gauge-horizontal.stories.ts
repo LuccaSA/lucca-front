@@ -16,12 +16,17 @@ export default {
 			control: {
 				type: 'select',
 			},
+			description: 'Applique une palette de couleurs à la jauge.',
 		},
-		vertical: {
-			description: 'Deprecated 💀',
+		thin: {
+			description: "Diminue l'épaisseur de la jauge.",
+		},
+		animated: {
+			description: 'Ajoute une animation au chargement ou lorsque la valeur est modifiée.',
 		},
 		value: {
 			control: { type: 'range', min: 0, max: 100, step: 1 },
+			description: 'Valeur en pourcentage.',
 		},
 	},
 } as Meta;

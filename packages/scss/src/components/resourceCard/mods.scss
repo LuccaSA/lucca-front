@@ -2,6 +2,7 @@
 @use '@lucca-front/scss/src/components/button/exports' as button;
 @use '@lucca-front/scss/src/components/numericBadge/exports' as numericBadge;
 @use '@lucca-front/scss/src/components/bubbleIllustration/exports' as bubbleIllustration;
+@use '@lucca-front/scss/src/components/bubbleIcon/exports' as bubbleIcon;
 
 @mixin gridWrapper {
 	--components-resourceCardWrapper-display: grid;
@@ -27,6 +28,10 @@
 
 	.bubbleIllustration {
 		@include bubbleIllustration.S;
+  }
+  
+	.bubbleIcon {
+		@include bubbleIcon.S;
 	}
 }
 

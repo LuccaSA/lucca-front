@@ -67,7 +67,11 @@ export class FileEntryComponent {
 	readonly fileSize = computed(() => this.entry().size);
 
 	readonly fileSizeDisplay = computed(() => formatSize(this.#locale, this.fileSize()));
-	readonly fileTypeDisplay = computed(() => this.intl.file.replace('{{fileTypeLastPart}}', this.fileType().split('/')[1].toUpperCase()));
+	readonly fileTypeDisplay = computed(() => {
+		const fileExtension: string = extractFileExtension(this.fileType());
+
+		return this.intl.file.replace('{{fileTypeLastPart}}', fileExtension);
+	});
 
 	readonly previewUrl = input<string>('');
 
@@ -118,4 +122,19 @@ export class FileEntryComponent {
 		[`is-${this.state()}`]: !!this.state(),
 		[`mod-${this.size()}`]: !!this.size(),
 	}));
+}
+
+function extractFileExtension(type: string): string {
+	switch (type) {
+		case 'application/vnd.ms-excel':
+			return 'XLS';
+		case 'application/vnd.openxmlformats-officedocument.spreadsheetml.sheet':
+			return 'XLSX';
+		case 'application/msword':
+			return 'DOC';
+		case 'application/vnd.openxmlformats-officedocument.wordprocessingml.document':
+			return 'DOCX';
+		default:
+			return type.split('/')[1].toUpperCase();
+	}
 }
