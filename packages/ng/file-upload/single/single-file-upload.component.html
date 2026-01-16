@@ -11,7 +11,9 @@
 		[attr.disabled]="!!entry() ? 'disabled' : null"
 		[attr.aria-describedby]="'fileUpload-instruction-' + idSuffix"
 	/>
-	<div class="fileUpload-status" [innerHtml]="illustrationUrl() | luSafeExternalSvg"></div>
+	<div class="fileUpload-status">
+		<lu-bubble-illustration [illustration]="illus()" action size="L" />
+	</div>
 	<div class="fileUpload-instruction" [attr.id]="'fileUpload-instruction-' + idSuffix">
 		<span class="fileUpload-instruction-action" aria-hidden="true" [innerHTML]="intl.dropOrClick.one"></span>
 		@if (acceptNames().length) {

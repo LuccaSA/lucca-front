@@ -1,7 +1,7 @@
 import { booleanAttribute, ChangeDetectionStrategy, Component, input, output, ViewEncapsulation } from '@angular/core';
+import { BubbleIllustrationComponent } from '@lucca-front/ng/bubble-illustration';
 import { IntlParamsPipe } from '@lucca-front/ng/core';
 import { InputDirective } from '@lucca-front/ng/form-field';
-import { LuSafeExternalSvgPipe } from '@lucca-front/ng/safe-content';
 import { LuTooltipModule } from '@lucca-front/ng/tooltip';
 import { BaseFileUploadComponent } from '../base-file-upload/base-file-upload.component';
 import { FileEntryComponent } from '../file-entry/file-entry.component';
@@ -15,7 +15,7 @@ import { FileEntry } from '../file-upload-entry';
 	host: {
 		'[class.mod-structure]': 'structure()',
 	},
-	imports: [LuSafeExternalSvgPipe, InputDirective, LuTooltipModule, FileEntryComponent, IntlParamsPipe],
+	imports: [InputDirective, LuTooltipModule, FileEntryComponent, IntlParamsPipe, BubbleIllustrationComponent],
 	changeDetection: ChangeDetectionStrategy.OnPush,
 })
 export class SingleFileUploadComponent extends BaseFileUploadComponent {
