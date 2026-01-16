@@ -43,7 +43,7 @@
 }
 
 @mixin actionsInline {
-	--components-callout-content-description-display: grid;
+	--components-callout-content-description-display: flex;
 	--components-callout-content-description-action-marginBlockStart: 0;
 	--components-callout-content-description-action-paddingBlock: 0;
 

@@ -20,8 +20,7 @@ export default {
 
 		const actionsInlineArg = actionsInline ? ` inline` : ``;
 		const actionsTemplate = actions
-			? `
-	<lu-callout-actions${actionsInlineArg}>
+			? `<lu-callout-actions${actionsInlineArg}>
 		<button luButton="outlined">Action</button>
 		<button luButton="ghost">Action</button>
 	</lu-callout-actions>`
@@ -29,7 +28,8 @@ export default {
 
 		return {
 			template: `<lu-callout${headingArg}${paletteArg}${generateInputs(inputs, context.argTypes)}>
-	Feedback description${actionsTemplate}
+	Feedback description
+	${actionsTemplate}
 </lu-callout>`,
 		};
 	},
