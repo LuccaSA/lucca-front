@@ -25,7 +25,7 @@ import { LuccaIcon } from '@lucca-front/icons';
 import { ClearComponent } from '@lucca-front/ng/clear';
 import { isNil, LuClass, PortalContent, PortalDirective, ɵeffectWithDeps } from '@lucca-front/ng/core';
 import { FILTER_PILL_INPUT_COMPONENT, FilterPillDisplayerDirective, FilterPillInputComponent } from '@lucca-front/ng/filter-pills';
-import { FORM_FIELD_INSTANCE, InputDirective } from '@lucca-front/ng/form-field';
+import { FORM_FIELD_INSTANCE, InputDirective, PresentationDisplayDirective } from '@lucca-front/ng/form-field';
 import { IconComponent } from '@lucca-front/ng/icon';
 import { PopoverDirective } from '@lucca-front/ng/popover2';
 import { addMonths, addYears, endOfDecade, endOfMonth, endOfYear, isAfter, isBefore, isSameDay, parse, startOfDay, startOfDecade, startOfMonth, startOfYear, subMonths, subYears } from 'date-fns';
@@ -42,7 +42,18 @@ let nextId = 0;
 
 @Component({
 	selector: 'lu-date-range-input',
-	imports: [PopoverDirective, Calendar2Component, IconComponent, InputDirective, LayoutModule, PortalDirective, NgTemplateOutlet, FilterPillDisplayerDirective, ClearComponent],
+	imports: [
+		PopoverDirective,
+		Calendar2Component,
+		IconComponent,
+		InputDirective,
+		LayoutModule,
+		PortalDirective,
+		NgTemplateOutlet,
+		FilterPillDisplayerDirective,
+		ClearComponent,
+		PresentationDisplayDirective,
+	],
 	templateUrl: './date-range-input.component.html',
 	styleUrl: './date-range-input.component.scss',
 	host: {

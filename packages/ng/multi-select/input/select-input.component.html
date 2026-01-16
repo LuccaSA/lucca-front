@@ -30,3 +30,13 @@
 		}
 	}
 </ng-container>
+@if (!ignorePresentation()) {
+	<ng-container *luPresentationDisplay>
+		@for (v of value; track $index) {
+			<ng-container *luOptionOutlet="displayerTpl(); value: v" />
+			@if (!$last) {
+				<span>, </span>
+			}
+		}
+	</ng-container>
+}

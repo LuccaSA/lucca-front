@@ -111,13 +111,19 @@ export default {
 		counter: {
 			description: 'Indique le nombre de caractères maximum du champ. Cette information n’est présente qu’à titre indicatif. La longueur du champ doit également être limité via formControl.',
 		},
+		presentation: {
+			description: 'Affiche une version présentation, en lecture seule, de la valeur',
+		},
 	},
 } as Meta;
 
 export const Basic: StoryObj<TextInputComponent & { disabled: boolean; required: boolean } & FormFieldComponent> = {
 	render: (args, { argTypes }) => {
-		const { counter, label, hiddenLabel, tooltip, tag, inlineMessage, inlineMessageState, size, width, AI, iconAItooltip, iconAIalt, ...inputArgs } = args;
+		const { counter, label, hiddenLabel, tooltip, tag, inlineMessage, inlineMessageState, size, width, AI, iconAItooltip, iconAIalt, presentation, ...inputArgs } = args;
 		return {
+			props: {
+				example: 'Example value',
+			},
 			template: cleanupTemplate(`<lu-form-field ${generateInputs(
 				{
 					label,
@@ -132,6 +138,7 @@ export const Basic: StoryObj<TextInputComponent & { disabled: boolean; required:
 					AI,
 					iconAItooltip,
 					iconAIalt,
+					presentation,
 				},
 				argTypes,
 			)}>
@@ -164,6 +171,7 @@ export const Basic: StoryObj<TextInputComponent & { disabled: boolean; required:
 		counter: 0,
 		valueAlignRight: false,
 		AI: false,
+		presentation: false,
 		iconAIalt: 'Assistant IA',
 		iconAItooltip: 'Donnée remplie automatiquement',
 	},
