@@ -35,6 +35,7 @@ export type BubbleIllustration =
 	| 'cup'
 	| 'diamond'
 	| 'equity'
+	| 'error'
 	| 'export'
 	| 'file'
 	| 'fish'

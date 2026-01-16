@@ -43,6 +43,7 @@ export default {
 				'cup',
 				'diamond',
 				'equity',
+				'error',
 				'export',
 				'file',
 				'fish',
