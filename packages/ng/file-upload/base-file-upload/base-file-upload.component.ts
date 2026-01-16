@@ -1,8 +1,8 @@
 import { booleanAttribute, computed, Directive, effect, inject, input, LOCALE_ID, output } from '@angular/core';
 import { getIntl } from '@lucca-front/ng/core';
 import { FORM_FIELD_INSTANCE } from '@lucca-front/ng/form-field';
+import { formatSize, MEGA_BYTE } from '../file-size-formatter';
 import { LU_FILE_UPLOAD_TRANSLATIONS } from '../file-upload.translate';
-import { formatSize, MEGA_BYTE } from '../formatter';
 
 let nextId = 0;
 
