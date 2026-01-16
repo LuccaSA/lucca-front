@@ -41,7 +41,7 @@ const ICON_TO_ILLUSTRATION: Record<string, BubbleIllustration> = {
 	encapsulation: ViewEncapsulation.None,
 })
 export class EmptyStateSectionComponent {
-	// @deprecated use illustration and action
+	/** @deprecated use illustration and action */
 	readonly icon = input<string | null>(null);
 	readonly actionIllustration = computed(() => this.action() || this.icon()?.includes('Action.svg'));
 
