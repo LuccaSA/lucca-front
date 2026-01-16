@@ -2,7 +2,7 @@ import { booleanAttribute, computed, Directive, effect, inject, input, LOCALE_ID
 import { getIntl } from '@lucca-front/ng/core';
 import { FORM_FIELD_INSTANCE } from '@lucca-front/ng/form-field';
 import { LU_FILE_UPLOAD_TRANSLATIONS } from '../file-upload.translate';
-import { formatSize, MEGA_BYTE } from '../formatter';
+import { formatFileSize, MEGA_BYTE } from '../formatter';
 
 let nextId = 0;
 
@@ -48,7 +48,7 @@ export abstract class BaseFileUploadComponent {
 
 	fileMaxSize = input<number>(80 * MEGA_BYTE);
 
-	maxSizeDisplay = computed(() => formatSize(this.locale, this.fileMaxSize()));
+	maxSizeDisplay = computed(() => formatFileSize(this.locale, this.fileMaxSize()));
 
 	size = input<'S' | null>(null);
 

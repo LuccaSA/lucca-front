@@ -1,7 +1,7 @@
 export const KILO_BYTE = 1000;
 export const MEGA_BYTE = KILO_BYTE * 1000;
 
-export function formatSize(locale: string, size: number): string {
+export function formatFileSize(locale: string, size: number): string {
 	let unit = 'byte';
 	let value = size;
 
