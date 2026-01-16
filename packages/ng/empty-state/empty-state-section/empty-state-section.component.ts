@@ -53,9 +53,9 @@ export class EmptyStateSectionComponent {
 			if (this.icon().includes('Success')) {
 				return 'thumbUp';
 			}
-			// if (this.icon().includes('Error')) {
-			// 	return 'thumbDown';
-			// }
+			if (this.icon().includes('Error')) {
+				return 'error';
+			}
 			const iconName = this.icon().split('/').pop().replace('.svg', '').replace('ActionError', '').replace('ActionSuccess', '').replace('Action', '').replace('icon', '');
 
 			return ICON_TO_ILLUSTRATION[iconName];
