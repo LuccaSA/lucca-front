@@ -361,6 +361,10 @@
 	}
 }
 
+@mixin hiddenLabel {
+	gap: 0;
+}
+
 %isRequired {
 	@layer mods {
 		color: var(--palettes-error-700);
