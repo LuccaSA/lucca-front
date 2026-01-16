@@ -1,5 +1,6 @@
 import { I18nPluralPipe, SlicePipe } from '@angular/common';
 import { provideHttpClient } from '@angular/common/http';
+import { LOCALE_ID } from '@angular/core';
 import { FormsModule } from '@angular/forms';
 import {
 	LuCoreSelectNoClueDirective,
@@ -29,7 +30,6 @@ import { LuCoreSelectLegumesDirective } from './custom-api-example.component';
 import { LuCoreSelectCustomEstablishmentsDirective } from './custom-establishment-example.component';
 import { LuCoreSelectCustomUsersDirective } from './custom-user-example.component';
 import { allLegumes, colorNameByColor, coreSelectStory, FilterLegumesPipe, ILegume, LuCoreSelectInputStoryComponent, SortLegumesPipe } from './select.utils';
-import { LOCALE_ID } from '@angular/core';
 
 export type LuSimpleSelectInputStoryComponent = LuCoreSelectInputStoryComponent & {
 	selectedLegume: ILegume | null;
@@ -92,6 +92,7 @@ export const Basic = generateStory({
 	[clearable]="clearable"
 	[loading]="loading"
 	[(ngModel)]="selectedLegume"
+	noClue
 >
 	<ng-container *luOption="let legume; select: selectRef">{{ legume.name }}</ng-container>
 </lu-simple-select>`,
@@ -236,6 +237,7 @@ export const WithPagination = generateStory({
 	[(ngModel)]="selectedLegume"
 	[options]="legumes | slice : 0 : page * 10"
 	(nextPage)="page = page + 1"
+	noClue
 >
 	<ng-container *luOption="let legume; select: selectRef">{{ legume.name }}</ng-container>
 </lu-simple-select>`,
