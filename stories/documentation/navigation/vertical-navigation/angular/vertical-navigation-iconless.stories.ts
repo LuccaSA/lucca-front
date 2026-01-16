@@ -12,6 +12,7 @@ export default {
 			control: {
 				type: 'boolean',
 			},
+			description: 'Présente le composant sans icônes.',
 		},
 	},
 	decorators: [

@@ -80,14 +80,16 @@
 			}
 			@if (ctx.shouldDisplayAddOption) {
 				<div
-					class="addOption palette-product"
+					class="addOption palette-product is-stuck"
 					(click)="selectInput.emitAddOption()"
 					(selected)="selectInput.emitAddOption()"
 					elementId="picker-content-add"
 					luCoreSelectPanelElement
 				>
-					<lu-icon icon="mathsPlus" />
-					<ng-container *luPortal="selectInput.addOptionLabel" />
+					<div class="addOption-content">
+						<lu-icon icon="mathsPlus" />
+						<ng-container *luPortal="selectInput.addOptionLabel" />
+					</div>
 				</div>
 			}
 			@if (selectInput.panelFooterTpl(); as tpl) {

@@ -13,7 +13,7 @@ function getTemplate(args: CalloutBasicStory): string {
 		<span aria-hidden="true" class="lucca-icon icon-weatherStars"></span>
 	</div>
 	<div class="callout-content">
-		<div class="callout-content-description">Feedback description</div>
+		<p class="callout-content-description">Feedback description</p>
 	</div>
 </div>`;
 }

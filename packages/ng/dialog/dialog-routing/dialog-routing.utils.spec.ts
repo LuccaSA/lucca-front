@@ -345,8 +345,8 @@ describe('dialog-routing.utils', () => {
 
 			// Assert
 			expect(router.url).toBe('/test/child1');
-			expect(fixture.debugElement.parent.query(By.directive(Child1Component))).toBeTruthy();
-			expect(fixture.debugElement.parent.query(By.directive(Child2Component))).toBeFalsy();
+			expect(fixture.debugElement.parent?.query(By.directive(Child1Component))).toBeTruthy();
+			expect(fixture.debugElement.parent?.query(By.directive(Child2Component))).toBeFalsy();
 			expect(dialogService.open).toHaveBeenCalledTimes(1);
 
 			// Act 2
@@ -356,8 +356,8 @@ describe('dialog-routing.utils', () => {
 
 			// Assert 2
 			expect(router.url).toBe('/test/child2');
-			expect(fixture.debugElement.parent.query(By.directive(Child1Component))).toBeFalsy();
-			expect(fixture.debugElement.parent.query(By.directive(Child2Component))).toBeTruthy();
+			expect(fixture.debugElement.parent?.query(By.directive(Child1Component))).toBeFalsy();
+			expect(fixture.debugElement.parent?.query(By.directive(Child2Component))).toBeTruthy();
 			expect(dialogService.open).toHaveBeenCalledTimes(1); // Still 1, dialog not reopened
 			expect(dialogRef.close).not.toHaveBeenCalled();
 			expect(dialogRef.dismiss).not.toHaveBeenCalled();
@@ -383,7 +383,7 @@ describe('dialog-routing.utils', () => {
 			fixture.detectChanges();
 			await fixture.whenStable();
 
-			const dialogComponent = fixture.debugElement.parent.query(By.directive(DialogRoutingTestWithParentDIComponent)).componentInstance as DialogRoutingTestWithParentDIComponent;
+			const dialogComponent = fixture.debugElement.parent?.query(By.directive(DialogRoutingTestWithParentDIComponent)).componentInstance as DialogRoutingTestWithParentDIComponent;
 
 			// Assert
 			expect(dialogService.open).toHaveBeenCalledTimes(1);
@@ -412,8 +412,8 @@ describe('dialog-routing.utils', () => {
 			fixture.detectChanges();
 			await fixture.whenStable();
 
-			const parentDialog = fixture.debugElement.parent.query(By.directive(ParentComponent));
-			const nestedDialog = fixture.debugElement.parent.query(By.directive(DialogRoutingTestWithParentDIComponent));
+			const parentDialog = fixture.debugElement.parent?.query(By.directive(ParentComponent));
+			const nestedDialog = fixture.debugElement.parent?.query(By.directive(DialogRoutingTestWithParentDIComponent));
 
 			// Assert
 			expect(openDialogs).toBe(2);
