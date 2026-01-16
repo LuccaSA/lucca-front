@@ -11,7 +11,7 @@ function getTemplate(args: CalloutActionsStory): string {
 	return `<div class="callout">
 	<div class="callout-content">
 		<div class="callout-content-description">
-			Feedback description
+			<p>Feedback description</p>
 			<div class="callout-content-description-actions">
 				<button class="button mod-outlined" type="button">Button</button>
 				<button class="button mod-ghost" type="button">Button</button>
