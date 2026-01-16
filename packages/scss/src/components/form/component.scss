@@ -6,7 +6,7 @@
 @mixin component($atRoot: namespace.$defaultAtRoot) {
 	display: block;
 
-	.divider {
+	.divider:not(.mod-vertical) {
 		margin-block: var(--pr-t-spacings-300);
 	}
 
