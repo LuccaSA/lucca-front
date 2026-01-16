@@ -1,9 +1,11 @@
 <lu-simple-select
 	#selectRef
 	noClueIcon
+	noClue
 	colorPicker
+	[placeholder]="compact() ? ' ' : null"
 	[panelFooterTpl]="footer"
-	[noSearch]="noSearch()"
+	[compact]="compact()"
 	[clearable]="clearable()"
 	[formControl]="ngControl.control"
 	[options]="filteredColors()"

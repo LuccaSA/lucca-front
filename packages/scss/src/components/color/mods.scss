@@ -12,7 +12,7 @@
 	--components-color-value-inlineSize: calc(var(--pr-t-spacings-400) + var(--pr-t-spacings-50));
 }
 
-@mixin noSearch {
+@mixin compact {
 	--components-colorPicker-inlineSize: 4.625rem;
 
 	.color-name {
@@ -20,15 +20,15 @@
 	}
 }
 
-@mixin noSearchS {
+@mixin compactS {
 	--components-colorPicker-inlineSize: 3.75rem;
 }
 
-@mixin noSearchClearable {
+@mixin compactClearable {
 	--components-colorPicker-inlineSize: 6.125rem;
 }
 
-@mixin noSearchClearableS {
+@mixin compactClearableS {
 	--components-colorPicker-inlineSize: 4.875rem;
 }
 

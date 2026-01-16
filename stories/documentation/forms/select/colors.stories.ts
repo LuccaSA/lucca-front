@@ -96,5 +96,5 @@ export default {
 } as Meta;
 
 export const Basic = {
-	args: { clearable: false, noSearch: false, size: '' },
+	args: { clearable: false, compact: false, size: '' },
 };

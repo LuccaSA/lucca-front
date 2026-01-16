@@ -38,7 +38,7 @@ export const coreSelectDefaultOptionKey: (option: unknown) => unknown = (option)
 @Directive({
 	host: {
 		'[class.colorPicker]': 'colorPicker()',
-		'[class.mod-noSearch]': 'noSearch()',
+		'[class.mod-compact]': 'compact()',
 	},
 })
 export abstract class ALuSelectInputComponent<TOption, TValue> implements OnDestroy, OnInit, ControlValueAccessor, FilterPillInputComponent {
@@ -93,7 +93,7 @@ export abstract class ALuSelectInputComponent<TOption, TValue> implements OnDest
 	#defaultClearable = false;
 
 	get searchable(): boolean {
-		return this.clueChange$.observed && !this.noSearch();
+		return this.clueChange$.observed;
 	}
 
 	@Input()
@@ -160,7 +160,7 @@ export abstract class ALuSelectInputComponent<TOption, TValue> implements OnDest
 	noClueIcon = input(false, { transform: booleanAttribute });
 	inputTabindex = input<number>(0);
 
-	noSearch = input(false, { transform: booleanAttribute });
+	compact = input(false, { transform: booleanAttribute });
 
 	colorPicker = input(false, { transform: booleanAttribute });
 

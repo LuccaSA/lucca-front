@@ -37,18 +37,18 @@
 	}
 
 	@layer mods {
-		&.mod-noSearch {
-			@include noSearch;
+		&.mod-compact {
+			@include compact;
 
 			.form-field.mod-S & {
-				@include noSearchS;
+				@include compactS;
 			}
 
 			&.is-clearable {
-				@include noSearchClearable;
+				@include compactClearable;
 
 				.form-field.mod-S & {
-					@include noSearchClearableS;
+					@include compactClearableS;
 				}
 			}
 		}
