@@ -74,7 +74,7 @@ export class LuMultiSelectDisplayerInputDirective<T> implements OnInit {
 		this.context.option$.pipe(
 			startWith([]),
 			switchMap((options) => {
-				if ((options || []).length > 0) {
+				if ((options || []).length > 0 || this.selectAllContext?.mode() === 'all') {
 					return of('');
 				}
 				return this.select.placeholder$.pipe(map((placeholder) => ((isNotNil(placeholder) && placeholder.length > 0) || this.contentDisplayer ? placeholder : this.intl.placeholder)));
