@@ -1,5 +1,5 @@
 export interface ColorOption {
-	id: number;
+	index: number;
 	name: string;
 	background: string;
 	borderColor?: string;
