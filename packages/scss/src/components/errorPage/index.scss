@@ -11,5 +11,9 @@
 		@include media.max('S') {
 			@include compact;
 		}
+
+		.appLayout & {
+			@include inAppLayout;
+		}
 	}
 }
