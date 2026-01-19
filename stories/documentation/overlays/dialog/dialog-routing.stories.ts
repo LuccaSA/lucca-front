@@ -20,6 +20,7 @@ import {
 } from '@lucca-front/ng/dialog';
 import { FormFieldComponent } from '@lucca-front/ng/form-field';
 import { CheckboxInputComponent, NumberInputComponent, TextInputComponent } from '@lucca-front/ng/forms';
+import { LinkComponent } from '@lucca-front/ng/link';
 import { applicationConfig, Meta, StoryObj } from '@storybook/angular';
 import { map } from 'rxjs';
 import { StoryModelDisplayComponent } from 'stories/helpers/story-model-display.component';
@@ -37,11 +38,13 @@ class EmptyComponent {}
 
 @Component({
 	template: `Child 1`,
+	changeDetection: ChangeDetectionStrategy.OnPush,
 })
 class Child1Component {}
 
 @Component({
 	template: `Child 2`,
+	changeDetection: ChangeDetectionStrategy.OnPush,
 })
 class Child2Component {}
 
@@ -154,6 +157,7 @@ class TestDialogComponent {
 			</lu-dialog-footer>
 		</lu-dialog>
 	`,
+	changeDetection: ChangeDetectionStrategy.OnPush,
 })
 class TestWithInternalNavigationDialogComponent {
 	id = input.required({ transform: numberAttribute });
