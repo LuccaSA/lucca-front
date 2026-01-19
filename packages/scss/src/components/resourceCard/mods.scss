@@ -1,6 +1,7 @@
 @use '@lucca-front/scss/src/commons/utils/color';
 @use '@lucca-front/scss/src/components/button/exports' as button;
 @use '@lucca-front/scss/src/components/numericBadge/exports' as numericBadge;
+@use '@lucca-front/scss/src/components/bubbleIcon/exports' as bubbleIcon;
 
 @mixin gridWrapper {
 	--components-resourceCardWrapper-display: grid;
@@ -23,6 +24,10 @@
 	--components-resourceCard-layout-content-font: var(--pr-t-font-body-S);
 	--components-resourceCard-layout-header-title-font: var(--pr-t-font-heading-4);
 	--components-resourceCard-layout-before-illustration-minSize: calc(var(--pr-t-spacings-400) + var(--pr-t-spacings-50));
+
+	.bubbleIcon {
+		@include bubbleIcon.S;
+	}
 }
 
 @mixin hasIllustrationGridS {

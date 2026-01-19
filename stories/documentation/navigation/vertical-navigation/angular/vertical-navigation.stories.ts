@@ -12,6 +12,7 @@ export default {
 			control: {
 				type: 'text',
 			},
+			description: 'Titre de la section.',
 		},
 	},
 	decorators: [

@@ -28,7 +28,7 @@ function getTemplate(args: CalloutBasicStory): string {
 	const s = args.s ? ` mod-S` : ``;
 	return `<div class="callout${palette}${s}">
 	<div class="callout-content">
-		<div class="callout-content-description">Feedback description</div>
+		<p class="callout-content-description">Feedback description</p>
 	</div>
 </div>`;
 }

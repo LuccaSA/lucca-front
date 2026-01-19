@@ -374,3 +374,7 @@
 		content: '*' / '';
 	}
 }
+
+@mixin hiddenLabel {
+	gap: 0;
+}

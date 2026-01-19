@@ -83,6 +83,7 @@ export default {
 		return {
 			styles: [
 				`
+@layer components {
 	.appLayout {
 		--components-appLayout-blockSize: 100%;
 		--components-appLayout-inlineSize: 100%;
@@ -172,6 +173,7 @@ export default {
 		font-family: monospace;
 		white-space: nowrap;
 	}
+}
 				`,
 			],
 			template: `
