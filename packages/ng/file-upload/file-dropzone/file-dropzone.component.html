@@ -1,5 +1,7 @@
 <div class="fileUpload mod-dropzone" [class.is-droppable]="droppable" (dragenter)="droppable = true" (dragleave)="droppable = false">
-	<div class="fileUpload-status" [innerHtml]="illustrationUrl() | luSafeExternalSvg"></div>
+	<div class="fileUpload-status">
+		<lu-bubble-illustration [illustration]="illus()" action size="L" />
+	</div>
 	<div class="fileUpload-instruction" [attr.id]="'fileUpload-instruction-' + idSuffix">
 		@if (acceptNames().length) {
 			<span class="fileUpload-instruction-formats">
