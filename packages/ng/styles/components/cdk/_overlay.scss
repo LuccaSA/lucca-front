@@ -30,9 +30,11 @@
 	position: absolute;
 	pointer-events: auto;
 	z-index: 1000;
+	max-inline-size: 35rem !important;
 
 	> * {
 		flex-grow: 1;
+		min-inline-size: 0;
 	}
 
 	&.mod-optionPicker {
