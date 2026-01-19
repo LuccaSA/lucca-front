@@ -24,7 +24,7 @@ import {
 } from '@angular/core';
 import { takeUntilDestroyed, toObservable } from '@angular/core/rxjs-interop';
 import { getIntl } from '@lucca-front/ng/core';
-import { combineLatest, debounce, filter, map, merge, Subject, switchMap, timer } from 'rxjs';
+import { combineLatest, debounce, filter, map, merge, Subject, switchMap, take, timer } from 'rxjs';
 import { PopoverContentComponent } from './content/popover-content/popover-content.component';
 import { POPOVER_CONFIG, PopoverConfig } from './popover-tokens';
 import { LU_POPOVER2_TRANSLATIONS } from './popover2.translate';
@@ -278,7 +278,7 @@ export class PopoverDirective implements OnDestroy {
 			this.#componentRef.mouseLeave$.pipe(takeUntilDestroyed(this.#componentRef.destroyRef), takeUntilDestroyed(this.#destroyRef)).subscribe(() => this.close$.next());
 			// On tooltip enter => trigger open to keep it opened
 			this.#componentRef.mouseEnter$.pipe(takeUntilDestroyed(this.#componentRef.destroyRef), takeUntilDestroyed(this.#destroyRef)).subscribe(() => this.open$.next('hover'));
-			this.#componentRef.closed$.pipe(takeUntilDestroyed(this.#componentRef.destroyRef), takeUntilDestroyed(this.#destroyRef)).subscribe(() => {
+			this.#componentRef.closed$.pipe(take(1), takeUntilDestroyed(this.#componentRef.destroyRef), takeUntilDestroyed(this.#destroyRef)).subscribe(() => {
 				this.opened.set(false);
 				this.#skipNextFocus = false;
 				this.luPopoverClosed.emit();
