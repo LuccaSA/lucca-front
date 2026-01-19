@@ -192,7 +192,7 @@ function getTemplate(args: BasicStory): string {
 			<th luIndexTableCell colspan="3">
 				<lu-empty-state-section
 					hx="3"
-					icon="https://cdn.lucca.fr/lucca-front/assets/empty-states/icons/iconSearch.svg"
+					illustration="magnifyingGlass"
 					heading="Empty State"
 					description="Flatus obsequiorum potest inanes pomerium obsequiorum credi homines vero caelibes orbos potest vile diversitate flatus."
 				/>
