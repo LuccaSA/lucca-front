@@ -83,16 +83,8 @@
 			}
 		}
 
-		&.mod-checkedFutureStep {
-			@include checkedFutureStep;
-
-			&.mod-L {
-				@include checkedFutureStepL;
-			}
-
-			&.mod-vertical:not(.mod-L) {
-				@include checkedFutureStepVerticalNotL;
-			}
+		&.mod-checkedValidStep {
+			@include checkedValidStep;
 		}
 
 		&.mod-addBetweenStep {
