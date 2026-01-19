@@ -35,7 +35,12 @@ import { TreeGenerator } from './tree-generator';
 export const coreSelectDefaultOptionComparer: LuOptionComparer<unknown> = (option1, option2) => JSON.stringify(option1) === JSON.stringify(option2);
 export const coreSelectDefaultOptionKey: (option: unknown) => unknown = (option) => option;
 
-@Directive()
+@Directive({
+	host: {
+		'[class.colorPicker]': 'colorPicker()',
+		'[class.mod-compact]': 'compact()',
+	},
+})
 export abstract class ALuSelectInputComponent<TOption, TValue> implements OnDestroy, OnInit, ControlValueAccessor, FilterPillInputComponent {
 	public parentInput = inject(FILTER_PILL_INPUT_COMPONENT, { optional: true, skipSelf: true });
 	protected changeDetectorRef = inject(ChangeDetectorRef);
@@ -56,6 +61,8 @@ export abstract class ALuSelectInputComponent<TOption, TValue> implements OnDest
 
 	public panelClosed = output<void>();
 	public panelOpened = output<void>();
+
+	public highlightedOption = output<TOption>();
 
 	@ViewChild('inputElement')
 	private inputElementRef: ElementRef<HTMLInputElement>;
@@ -153,6 +160,10 @@ export abstract class ALuSelectInputComponent<TOption, TValue> implements OnDest
 	noClueIcon = input(false, { transform: booleanAttribute });
 	inputTabindex = input<number>(0);
 
+	compact = input(false, { transform: booleanAttribute });
+
+	colorPicker = input(false, { transform: booleanAttribute });
+
 	@HostBinding('class.mod-noClueIcon')
 	protected get isNoClueIconClass(): boolean {
 		return this.noClueIcon();
@@ -161,6 +172,7 @@ export abstract class ALuSelectInputComponent<TOption, TValue> implements OnDest
 	optionTpl = model<TemplateRef<LuOptionContext<TOption>> | Type<unknown>>(LuSimpleSelectDefaultOptionComponent);
 	valueTpl = model<TemplateRef<LuOptionContext<TOption>> | Type<unknown> | undefined>();
 	panelHeaderTpl = model<TemplateRef<void> | Type<unknown> | undefined>();
+	panelFooterTpl = model<TemplateRef<void> | Type<unknown> | undefined>();
 
 	displayerTpl = computed(() => this.valueTpl() || this.optionTpl());
 

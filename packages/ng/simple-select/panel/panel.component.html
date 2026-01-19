@@ -92,6 +92,11 @@
 					</div>
 				</div>
 			}
+			@if (selectInput.panelFooterTpl(); as tpl) {
+				<div>
+					<ng-container *luPortal="tpl" />
+				</div>
+			}
 		</div>
 	</div>
 }
