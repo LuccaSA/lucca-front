@@ -26,6 +26,11 @@ export default {
 			options: ['click', 'click+hover', 'hover+focus'],
 			description: '[v18.2] Hover + focus',
 		},
+		overlayScrollStrategy: {
+			control: 'select',
+			options: ['reposition', 'block', 'close'],
+			description: '[v21.1]',
+		},
 		luPopoverNoCloseButton: {
 			description: '[v18.2]',
 		},
@@ -159,5 +164,6 @@ export const CustomPosition: StoryObj<PopoverDirective> = {
 		luPopoverDisabled: false,
 		luPopoverPosition: 'above',
 		luPopoverNoCloseButton: false,
+		overlayScrollStrategy: 'reposition',
 	},
 };
