@@ -54,13 +54,18 @@ export abstract class BaseFileUploadComponent {
 
 	password = input(false, { transform: booleanAttribute });
 
-	illustration = input<'picture' | 'paper'>('paper');
+	illustration = input<
+		/** @deprecated use 'invoice' instead */
+		'paper' | 'picture' | 'invoice'
+	>('invoice');
 
-	illustrationUrl = computed(() => {
-		if (this.illustration() === 'picture') {
-			return 'https://cdn.lucca.fr/transverse/prisme/visuals/empty-states/icons/iconPictureAction.svg';
-		} else {
-			return 'https://cdn.lucca.fr/transverse/prisme/visuals/empty-states/icons/iconPaperAction.svg';
+	illus = computed(() => {
+		switch (this.illustration()) {
+			case 'paper':
+			case 'invoice':
+				return 'invoice';
+			default:
+				return 'picture';
 		}
 	});
 
