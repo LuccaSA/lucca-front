@@ -64,9 +64,10 @@ export default {
 		const footerContainer = args.footer
 			? `
 		<ng-container mainLayoutFooter>
-			<lu-container>
-				<div class="fakeContent">footer</div>
-			</lu-container>
+			<div class="fakeContent">
+				footer
+				<!-- <lu-footer container /> -->
+			</div>
 		</ng-container>`
 			: ``;
 		const headerStickyParam = args.headerSticky ? ` headerSticky` : ``;
