@@ -1,8 +1,10 @@
 @use '@lucca-front/icons/src/commons/config';
 @use '@lucca-front/icons/src/commons/core';
 
-@mixin component($atRoot: 'without: rule') {
-	font-weight: 400;
+$defaultAtRoot: config.$isNamespaced and 'with: rule' or 'without: rule';
+
+@mixin component($atRoot: $defaultAtRoot) {
+	font-weight: var(--pr-t-font-fontWeight-regular);
 	font-size: var(--icon-size, var(--icon-sizeDefault));
 	direction: ltr;
 	display: inline-block;
@@ -17,21 +19,15 @@
 	white-space: nowrap;
 	word-wrap: normal;
 
+	&::before {
+		content: var(--icon-content) / '';
+	}
+
 	@at-root ($atRoot) {
 		@each $name, $value in config.$icons {
 			.icon-#{core.camelize($name)} {
 				--icon-content: '#{$value}';
 			}
-		}
-	}
-
-	&::before {
-		@supports (content: '*' / '') {
-			content: var(--icon-content) / '';
-		}
-
-		@supports not (content: '*' / '') {
-			content: var(--icon-content);
 		}
 	}
 }

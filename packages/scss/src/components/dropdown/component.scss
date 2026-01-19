@@ -1,0 +1,108 @@
+@use '@lucca-front/icons/src/icon/exports' as icon;
+@use '@lucca-front/scss/src/commons/utils/namespace';
+@use '@lucca-front/scss/src/commons/utils/a11y';
+@use '@lucca-front/scss/src/components/divider/exports' as divider;
+
+@mixin component($atRoot: namespace.$defaultAtRoot) {
+	padding: 0 !important;
+	border-radius: var(--pr-t-border-radius-structure);
+	min-inline-size: var(--components-dropdown-minInlineSize);
+	max-inline-size: var(--components-dropdown-maxInlineSize);
+	max-block-size: var(--components-dropdown-maxBlockSize);
+	overflow-x: hidden;
+	overflow-y: auto;
+
+	@at-root ($atRoot) {
+		// .lu-dropdown-options is deprecated
+		.dropdown-list,
+		.lu-dropdown-options {
+			list-style-type: none;
+			padding-block: var(--pr-t-spacings-50);
+			padding-inline: 0;
+			margin: 0;
+			display: flex;
+			flex-direction: column;
+			gap: var(--pr-t-spacings-25);
+
+			.dropdown-list {
+				padding-block: 0;
+			}
+		}
+
+		// .lu-dropdown-options-item is deprecated
+		.dropdown-list-option,
+		.lu-dropdown-options-item {
+			padding-block: 0;
+
+			&:not(:has(.divider.dropdown-list-option-divider, .dropdown-list-option), &.mod-divider) {
+				padding-inline: var(--pr-t-spacings-50);
+			}
+
+			&:has(> .dropdown-list) {
+				padding-block-start: var(--pr-t-spacings-100);
+				padding-inline: var(--pr-t-spacings-150);
+				color: var(--pr-t-color-text-subtle);
+				font: var(--pr-t-font-body-S);
+				font-weight: var(--pr-t-font-fontWeight-semibold);
+			}
+
+			> .dropdown-list {
+				color: var(--pr-t-color-text);
+				font: var(--pr-t-font-body-M);
+				font-weight: var(--pr-t-font-fontWeight-regular);
+				margin-block-start: var(--pr-t-spacings-50);
+				margin-inline: calc(var(--pr-t-spacings-150) * -1);
+			}
+		}
+
+		// .lu-dropdown-options-item-action is deprecated
+		.dropdown-list-option-action,
+		.lu-dropdown-options-item-action {
+			border: 0;
+			border-radius: var(--pr-t-border-radius-default);
+			background-color: var(--components-dropdown-list-option-action-backgroundColor);
+			display: flex;
+			align-items: flex-start;
+			gap: var(--pr-t-spacings-100);
+			line-height: var(--pr-t-font-body-M-lineHeight);
+			padding: var(--pr-t-spacings-50) var(--pr-t-spacings-100);
+			text-align: left;
+			transition: background-color var(--commons-animations-durations-fast);
+			text-decoration: none;
+			inline-size: 100%;
+			pointer-events: var(--components-dropdown-list-option-action-pointerEvents);
+			cursor: pointer;
+
+			.lucca-icon {
+				@include icon.S;
+
+				margin-block: var(--pr-t-spacings-25);
+			}
+
+			&,
+			&:hover {
+				color: var(--components-dropdown-list-option-action-color);
+			}
+
+			&:hover,
+			&:focus-visible {
+				--components-dropdown-list-option-action-backgroundColor: var(--palettes-neutral-50);
+			}
+
+			&:active {
+				--components-dropdown-list-option-action-backgroundColor: var(--palettes-neutral-100);
+			}
+
+			&:focus-visible {
+				@include a11y.focusVisible($offset: 0);
+
+				z-index: 1;
+				position: relative;
+			}
+		}
+
+		.divider.dropdown-list-option-divider {
+			--components-divider-marginBlock: var(--pr-t-spacings-25);
+		}
+	}
+}

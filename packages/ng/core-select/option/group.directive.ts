@@ -10,7 +10,6 @@ export interface LuOptionGrouping<TOption, TGroup> {
 
 @Directive({
 	selector: '[luOptionGroup]',
-	standalone: true,
 })
 export class LuOptionGroupDirective<TOption, TValue, TGroup> implements LuOptionGrouping<TOption, TGroup>, OnInit {
 	@Input('luOptionGroupSelect') select: ALuSelectInputComponent<TOption, TValue>;
@@ -24,6 +23,6 @@ export class LuOptionGroupDirective<TOption, TValue, TGroup> implements LuOption
 	}
 
 	public ngOnInit(): void {
-		this.select.grouping = this;
+		this.select.groupingSignal.set(this);
 	}
 }

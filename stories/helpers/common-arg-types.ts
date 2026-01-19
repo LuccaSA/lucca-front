@@ -29,6 +29,8 @@ export const PaletteAllArgType = {
 	control: {
 		type: 'select',
 	},
+	if: { arg: 'AI', truthy: false },
+	description: 'Applique une palette de couleurs au composant.',
 } as const;
 
 export const HiddenArgType = {
@@ -36,4 +38,8 @@ export const HiddenArgType = {
 		disable: true,
 	},
 	control: undefined,
+};
+
+export const stateArgType = {
+	options: ['default', 'success', 'warning', 'error'],
 };

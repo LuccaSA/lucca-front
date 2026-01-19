@@ -1,56 +1,50 @@
-import { booleanAttribute, Component, ElementRef, Input, numberAttribute, ViewChild, ViewEncapsulation } from '@angular/core';
+import { NgTemplateOutlet } from '@angular/common';
+import { booleanAttribute, ChangeDetectionStrategy, Component, ElementRef, input, numberAttribute, viewChild, ViewEncapsulation } from '@angular/core';
 import { ReactiveFormsModule } from '@angular/forms';
-import { FormFieldComponent, InputDirective } from '@lucca-front/ng/form-field';
-import { NoopValueAccessorDirective } from '../noop-value-accessor.directive';
-import { NgIf, NgTemplateOutlet } from '@angular/common';
-import { FormFieldIdDirective } from '../form-field-id.directive';
-import { TextInputAddon } from '../text-input/text-input-addon';
+import { ClearComponent } from '@lucca-front/ng/clear';
 import { getIntl } from '@lucca-front/ng/core';
-import { LU_NUMBERFIELD_TRANSLATIONS } from './number-input.translate';
+import { InputDirective } from '@lucca-front/ng/form-field';
+import { FormFieldIdDirective } from '../form-field-id.directive';
 import { injectNgControl } from '../inject-ng-control';
+import { NoopValueAccessorDirective } from '../noop-value-accessor.directive';
+import { TextInputAddon } from '../text-input/text-input-addon';
+import { LU_NUMBERFIELD_TRANSLATIONS } from './number-input.translate';
 
 @Component({
 	selector: 'lu-number-input',
-	standalone: true,
-	imports: [FormFieldComponent, InputDirective, NgIf, ReactiveFormsModule, FormFieldIdDirective, NgTemplateOutlet],
+	imports: [InputDirective, ReactiveFormsModule, FormFieldIdDirective, NgTemplateOutlet, ClearComponent],
 	templateUrl: './number-input.component.html',
 	hostDirectives: [NoopValueAccessorDirective],
 	encapsulation: ViewEncapsulation.None,
+	changeDetection: ChangeDetectionStrategy.OnPush,
 })
 export class NumberInputComponent {
 	ngControl = injectNgControl();
 
-	@Input()
-	placeholder: string = '';
+	readonly placeholder = input<string>('');
 
-	@Input({ transform: numberAttribute })
-	step: number = 1;
+	readonly step = input<number, number>(1, { transform: numberAttribute });
 
-	@Input({ transform: booleanAttribute })
-	noSpinButtons = false;
+	readonly noSpinButtons = input(false, { transform: booleanAttribute });
 
-	@Input({ transform: booleanAttribute })
-	hasClearer = false;
+	readonly hasClearer = input(false, { transform: booleanAttribute });
 
-	@ViewChild('inputElement', { static: true })
-	inputElementRef: ElementRef<HTMLInputElement>;
+	readonly inputElementRef = viewChild.required<ElementRef<HTMLInputElement>>('inputElement');
 
-	@Input()
-	prefix: TextInputAddon;
+	readonly prefix = input<TextInputAddon>();
 
-	@Input()
-	suffix: TextInputAddon;
+	readonly suffix = input<TextInputAddon>();
 
-	@Input()
-	min?: number;
+	readonly min = input<number>();
 
-	@Input()
-	max?: number;
+	readonly max = input<number>();
 
-	intl = getIntl(LU_NUMBERFIELD_TRANSLATIONS);
+	readonly valueAlignRight = input(false, { transform: booleanAttribute });
+
+	readonly intl = getIntl(LU_NUMBERFIELD_TRANSLATIONS);
 
 	clearValue(): void {
 		this.ngControl.reset();
-		this.inputElementRef.nativeElement.focus();
+		this.inputElementRef().nativeElement.focus();
 	}
 }

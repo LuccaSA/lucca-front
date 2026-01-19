@@ -20,7 +20,8 @@ import {
 	ViewContainerRef,
 } from '@angular/core';
 import { ControlValueAccessor, NG_VALUE_ACCESSOR } from '@angular/forms';
-import { ALuClearer, ALuInputDisplayer, ILuClearer, ILuInputDisplayer } from '@lucca-front/ng/input';
+import { ALuClear, ILuClear } from '@lucca-front/ng/clear';
+import { ALuInputDisplayer, ILuInputDisplayer } from '@lucca-front/ng/input';
 import { ALuPickerPanel, ILuPickerPanel } from '@lucca-front/ng/picker';
 import { ALuSelectInput } from './select-input.model';
 
@@ -101,8 +102,8 @@ export abstract class ALuSelectInputComponent<T, TPicker extends ILuPickerPanel<
 	@ViewChild(ALuInputDisplayer, { static: true })
 	vcDisplayer: ILuInputDisplayer<T>;
 
-	@ContentChild(ALuClearer, { static: true }) ccClearer: ILuClearer<T>;
-	@ViewChild(ALuClearer, { static: true }) vcClearer: ILuClearer<T>;
+	@ContentChild(ALuClear, { static: true }) ccClearer: ILuClear<T>;
+	@ViewChild(ALuClear, { static: true }) vcClearer: ILuClear<T>;
 
 	@HostListener('click')
 	override onClick() {
@@ -131,7 +132,7 @@ export abstract class ALuSelectInputComponent<T, TPicker extends ILuPickerPanel<
 
 	@HostListener('keydown.space', ['$event'])
 	@HostListener('keydown.enter', ['$event'])
-	onKeydown($event: KeyboardEvent) {
+	onKeydown($event: Event) {
 		if (!this._popoverOpen) {
 			this.openPopover();
 			$event.stopPropagation();
@@ -193,9 +194,8 @@ export abstract class ALuSelectInputComponent<T, TPicker extends ILuPickerPanel<
 @Component({
 	selector: 'lu-select',
 	templateUrl: './select-input.component.html',
-	styleUrls: ['./select-input.component.scss'],
+	styleUrl: './select-input.component.scss',
 	changeDetection: ChangeDetectionStrategy.OnPush,
-	standalone: true,
 	providers: [
 		{
 			provide: NG_VALUE_ACCESSOR,
@@ -221,7 +221,7 @@ export class LuSelectInputComponent<T> extends ALuSelectInputComponent<T> implem
 	}
 
 	// display clearer
-	@ContentChild(ALuClearer, { read: ElementRef, static: false })
+	@ContentChild(ALuClear, { read: ElementRef, static: false })
 	clearerEltRef: ElementRef<HTMLElement>;
 	@ViewChild('suffix', { read: ElementRef, static: true })
 	suffixEltRef: ElementRef<HTMLElement>;

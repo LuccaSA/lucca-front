@@ -1,34 +1,70 @@
-<h1>Loading</h1>
-
-<section class="contentSection">
-	<h2>Loading basic</h2>
-	<div class="loading"></div>
-</section>
-
-<section class="contentSection">
-	<h2>Loading message</h2>
-	<p>You can add a loading message by adding text inside the markup.</p>
-	<div class="loading">Loading...</div>
-</section>
-
-<section class="contentSection">
-	<h2>Loading block</h2>
-	<p>You can use loading as block element.</p>
-	<div class="loading mod-block">Loading...</div>
-</section>
-
-<section class="contentSection">
-	<h2>Loading Large</h2>
-	<div class="loading mod-L">Loading</div>
-	<em><b>Tip:</b> You can use <code class="code">mod-fullPage</code>, for a complete page with a large loader.</em>
-</section>
-
-<section class="contentSection">
-	<h2>Inverted</h2>
-	<div class="demo-invert">
-		<div class="loading mod-invert">Loading...</div>
-	</div>
-</section>
+<table class="demo-QAtable">
+	<tbody>
+		<tr>
+			<td></td>
+			<td>
+				<div class="demo-QAtable-list">HTML</div>
+			</td>
+			<td>
+				<div class="demo-QAtable-list">Angular</div>
+			</td>
+		</tr>
+		<tr>
+			<td>Default</td>
+			<td>
+				<div class="demo-QAtable-list"><div class="loading"></div></div>
+			</td>
+			<td>
+				<div class="demo-QAtable-list"><lu-loading /></div>
+			</td>
+		</tr>
+		<tr>
+			<td>Label</td>
+			<td>
+				<div class="demo-QAtable-list"><div class="loading">Loading…</div></div>
+			</td>
+			<td>
+				<div class="demo-QAtable-list"><lu-loading>Loading…</lu-loading></div>
+			</td>
+		</tr>
+		<tr>
+			<td>Block</td>
+			<td>
+				<div class="demo-QAtable-list"><div class="loading mod-block">Loading…</div></div>
+			</td>
+			<td>
+				<div class="demo-QAtable-list"><lu-loading block /></div>
+			</td>
+		</tr>
+		<tr>
+			<td>Large</td>
+			<td>
+				<div class="demo-QAtable-list"><div class="loading mod-L">Loading</div></div>
+			</td>
+			<td>
+				<div class="demo-QAtable-list"><lu-loading size="L" /></div>
+			</td>
+		</tr>
+		<tr>
+			<td>Inverted</td>
+			<td>
+				<div class="demo-QAtable-list mod-black"><div class="loading mod-invert">Loading…</div></div>
+			</td>
+			<td>
+				<div class="demo-QAtable-list"><lu-loading invert /></div>
+			</td>
+		</tr>
+		<tr>
+			<td>Template Popin</td>
+			<td></td>
+			<td>
+				<div class="demo-QAtable-list">
+					<lu-loading template="popin" />
+				</div>
+			</td>
+		</tr>
+	</tbody>
+</table>
 
 <!-- To tell the ui-diff tool that the page has finished rendering -->
 <span id="ready"></span>

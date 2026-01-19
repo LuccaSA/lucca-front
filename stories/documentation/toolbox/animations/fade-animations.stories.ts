@@ -1,24 +1,24 @@
-import { CommonModule } from '@angular/common';
-import { Component } from '@angular/core';
+import { ChangeDetectionStrategy, Component } from '@angular/core';
 import { provideAnimations } from '@angular/platform-browser/animations';
 import { luFadeAnimationFactory } from '@lucca-front/ng/animations';
-import { applicationConfig, Meta, StoryFn } from '@storybook/angular';
+import { applicationConfig, Meta, StoryObj } from '@storybook/angular';
 
 @Component({
 	selector: 'story-fade-animation',
-	standalone: true,
-	imports: [CommonModule],
-	template: ` <div class="grid">
+	template: `<div class="grid">
 		<div class="grid-column ng-demo-block" style="--grid-colspan: 3">
 			<h3 class="pr-u-margin0">
 				Fade
 				<button class="button mod-S" (click)="fading = !fading">{{ fading ? 'Show' : 'Hide' }}</button>
 			</h3>
-			<div class="animated-block" [@fadeAnimation] *ngIf="!fading">Fade</div>
+			@if (!fading) {
+				<div class="animated-block" [@fadeAnimation]>Fade</div>
+			}
 		</div>
 	</div>`,
-	styleUrls: ['./animations.scss'],
+	styleUrl: './animations.scss',
 	animations: [luFadeAnimationFactory()],
+	changeDetection: ChangeDetectionStrategy.OnPush,
 })
 class FadeAnimationStory {
 	fading = false;
@@ -30,12 +30,14 @@ export default {
 	decorators: [applicationConfig({ providers: [provideAnimations()] })],
 } as Meta;
 
-const template: StoryFn<FadeAnimationStory> = (args) => ({
+const template = (args: FadeAnimationStory) => ({
 	props: args,
 });
 
-export const Fade = template.bind({});
-Fade.args = {};
+export const Fade: StoryObj<FadeAnimationStory> = {
+	args: {},
+	render: template,
+};
 
 const code = `
 /* 1. Appeler provideAnimations */
@@ -56,10 +58,12 @@ class AppModule {}
 					Fade
 					<button class="button mod-S" (click)="fading = !fading">{{ fading ? 'Show' : 'Hide' }}</button>
 				</h3>
-				<div class="animated-block" [@fadeAnimation] *ngIf="!fading">Fade</div>
+				@if (!fading) {
+					<div class="animated-block" [@fadeAnimation]>Fade</div>
+				}
 			</div>
 		</div>\`,
-	styleUrls: ['./animations.scss'],
+	styleUrl: './animations.scss',
 	animations: [luFadeAnimationFactory()],
 })
 class FadeAnimationStory {

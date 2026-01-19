@@ -1,4 +1,4 @@
-import { Meta, StoryFn } from '@storybook/angular';
+import { Meta, StoryObj } from '@storybook/angular';
 
 interface MenuSecondaryBasicStory {
 	compact: boolean;
@@ -75,9 +75,9 @@ function getTemplate(args: MenuSecondaryBasicStory): string {
 								</a>
 							</li>
 							<li class="navSide-item-subMenu-item">
-								<a href="#" class="navSide-item-subMenu-link is-active">
+								<a href="#" class="navSide-item-subMenu-link">
 									Section 2.3
-									<span class="numericBadge"><span class="u-mask">, </span>9</span>
+									<span class="numericBadge"><span class="pr-u-mask">, </span>9</span>
 								</a>
 							</li>
 							<li class="navSide-item-subMenu-item">
@@ -93,7 +93,7 @@ function getTemplate(args: MenuSecondaryBasicStory): string {
 						</ul>
 					</li>
 					<li class="navSide-item">
-						<a href="#" class="navSide-item-link">
+						<a href="#" class="navSide-item-link is-active">
 							<span aria-hidden="true" class="lucca-icon icon-chartVerticalBar"></span>
 							<span class="navSide-item-link-title">Section 3</span>
 							<span class="newBadge">New</span>
@@ -105,7 +105,7 @@ function getTemplate(args: MenuSecondaryBasicStory): string {
 							<span class="navSide-item-link-title">Section 4</span>
 							<div class="navSide-item-link-badgesOptional">
 								<span class="newBadge">New</span>
-								<span class="numericBadge"><span class="u-mask">, </span>9</span>
+								<span class="numericBadge"><span class="pr-u-mask">, </span>9</span>
 							</div>
 						</a>
 					</li>
@@ -124,7 +124,7 @@ function getTemplate(args: MenuSecondaryBasicStory): string {
 	`;
 }
 
-const Template: StoryFn<MenuSecondaryBasicStory> = (args) => ({
+const Template = (args: MenuSecondaryBasicStory) => ({
 	props: args,
 	template: getTemplate(args),
 	styles: [
@@ -136,5 +136,7 @@ const Template: StoryFn<MenuSecondaryBasicStory> = (args) => ({
 	],
 });
 
-export const Basic = Template.bind({});
-Basic.args = { compact: false, banner: false, open: false };
+export const Basic: StoryObj<MenuSecondaryBasicStory> = {
+	args: { compact: false, banner: false, open: false },
+	render: Template,
+};

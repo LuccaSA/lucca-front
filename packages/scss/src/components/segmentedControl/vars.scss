@@ -1,0 +1,15 @@
+@mixin vars {
+	--components-segmentedControl-borderRadius: var(--pr-t-border-radius-default);
+	--components-segmentedControl-padding: var(--pr-t-spacings-100) var(--pr-t-spacings-200);
+	--components-segmentedControl-font: var(--pr-t-font-body-M);
+	--components-segmentedControl-background: transparent;
+	--components-segmentedControl-shadow: none;
+	--components-segmentedControl-color: var(--pr-t-color-text);
+	--components-segmentedControl-cursor: pointer;
+	--components-segmentedControl-dividerInset: var(--pr-t-spacings-100);
+	--components-segmentedControl-direction: row;
+	--components-segmentedControl-width: fit-content;
+	--components-segmentedControl-zIndex: 0;
+	--components-segmentedControl-wrap: wrap;
+	--components-segmentedControl-whiteSpace: normal;
+}

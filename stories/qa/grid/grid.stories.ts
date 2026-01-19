@@ -1,11 +1,26 @@
-import { Component } from '@angular/core';
-import { Meta, StoryFn } from '@storybook/angular';
+import { ChangeDetectionStrategy, Component } from '@angular/core';
+import { GridColumnComponent, GridComponent } from '@lucca-front/ng/grid';
+import { Meta, StoryObj } from '@storybook/angular';
 
 @Component({
-	standalone: true,
 	selector: 'grid-stories',
 	templateUrl: './grid.stories.html',
-	styles: ['.grid-demo { background: #eee; border-radius: 3px; min-height: 2.7rem; padding: .6rem var(--pr-t-spacings-200);} .grid + .grid { margin-top: var(--pr-t-spacings-200) }'],
+	styles: [
+		`
+			.gridDemo {
+				background-color: var(--pr-t-elevation-surface-sunken);
+				border-radius: var(--pr-t-border-radius-50);
+				min-block-size: 2.7rem;
+				padding-block: 0.6rem;
+				padding-inline: var(--pr-t-spacings-200);
+			}
+			.grid + .grid {
+				margin-block-start: var(--pr-t-spacings-200);
+			}
+		`,
+	],
+	imports: [GridColumnComponent, GridComponent],
+	changeDetection: ChangeDetectionStrategy.OnPush,
 })
 class GridStory {}
 
@@ -14,6 +29,9 @@ export default {
 	component: GridStory,
 } as Meta;
 
-const template: StoryFn<GridStory> = () => ({});
+const template = () => ({});
 
-export const basic = template.bind({});
+export const Basic: StoryObj<GridStory> = {
+	args: {},
+	render: template,
+};

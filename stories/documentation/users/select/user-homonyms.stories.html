@@ -1,4 +1,4 @@
-<div class="u-displayFlex">
+<div class="pr-u-displayFlex">
 	<label class="textfield">
 		<lu-select class="textfield-input">
 			<span *luDisplayer="let user">{{ user | luUserDisplay }}</span>
@@ -13,16 +13,16 @@
 				>
 				</lu-api-paged-searcher>
 				<div class="lu-picker-content-option">
-					<lu-option *luForOptions="let user" [value]="user"> {{ user | luUserDisplay }} </lu-option>
+					<lu-option *luForOptions="let user" [value]="user" translate="no"> {{ user | luUserDisplay }} </lu-option>
 				</div>
 			</lu-option-picker-advanced>
 		</lu-select>
 		<span class="textfield-label">Pas de gestion des homonymes :</span>
 	</label>
 
-	<label class="textfield pr-u-marginLeft400">
+	<label class="textfield pr-u-marginInlineStart400">
 		<lu-select class="textfield-input">
-			<span *luDisplayer="let user">{{ user | luUserDisplay }}</span>
+			<span *luDisplayer="let user" translate="no">{{ user | luUserDisplay }}</span>
 
 			<lu-option-picker-advanced>
 				<lu-api-paged-searcher
@@ -34,12 +34,13 @@
 				>
 				</lu-api-paged-searcher>
 
-				<lu-user-homonyms></lu-user-homonyms>
+				<lu-user-homonyms />
 				<div class="lu-picker-content-option">
 					<lu-option *luForOptions="let user" [value]="user">
-						{{ user | luUserDisplay }}
-
-						<div *ngIf="user.additionalInformation" class="u-fontStyleItalic u-textS">({{ user.additionalInformation }})</div>
+						<span translate="no">{{ user | luUserDisplay }}</span>
+						@if (user.additionalInformation) {
+							<div class="pr-u-fontStyleItalic pr-u-bodyS">({{ user.additionalInformation }})</div>
+						}
 					</lu-option>
 				</div>
 			</lu-option-picker-advanced>

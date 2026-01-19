@@ -1,5 +1,5 @@
-<div class="skeleton is-loading" [class.mod-dark]="dark" inert>
-	<div class="button" [class.mod-dark]="dark">
-		<span class="skeleton-item"></span>
+<div class="skeleton is-loading" [class.mod-dark]="dark()" inert="inert">
+	<div class="button" [class.mod-dark]="dark()" [class]="size() ? `mod-${size()}` : null">
+		<span class="skeleton-item" [class]="size() ? `pr-u-body${size()}` : null"></span>
 	</div>
 </div>

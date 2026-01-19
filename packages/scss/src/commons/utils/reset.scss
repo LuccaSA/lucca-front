@@ -17,10 +17,10 @@
 @mixin button($suffix: '') {
 	padding: 0 #{$suffix};
 	border: 0 #{$suffix};
-	width: 100% #{$suffix};
+	inline-size: 100% #{$suffix};
 	background-color: transparent #{$suffix};
 	color: inherit #{$suffix};
-	text-align: left #{$suffix};
+	text-align: start #{$suffix};
 	display: block #{$suffix};
 	font: inherit #{$suffix};
 	cursor: pointer #{$suffix};
@@ -33,11 +33,20 @@
 @mixin clearfix($suffix: '') {
 	&::before,
 	&::after {
-		content: ' ';
-		display: table;
+		// stylelint-disable-next-line no-irregular-whitespace
+		content: ' ' / '' #{$suffix};
+		display: table #{$suffix};
 	}
 
-	&:after {
-		clear: both;
+	&::after {
+		clear: both #{$suffix};
+	}
+}
+
+@mixin summary($suffix: '') {
+	list-style: none #{$suffix};
+
+	&::-webkit-details-marker {
+		display: none #{$suffix};
 	}
 }

@@ -1,3 +1,5 @@
+@use '@lucca-front/icons/src/icon/exports' as icon;
+
 @mixin clickable {
 	transition-duration: var(--commons-animations-durations-fast);
 	transition-property: background-color;
@@ -11,9 +13,15 @@
 
 @mixin S {
 	--components-sortableList-padding: var(--pr-t-spacings-75) var(--pr-t-spacings-100);
-	--components-sortableList-handler-size: var(--sizes-S-lineHeight);
-	--components-sortableList-description-fontSize: var(--sizes-S-fontSize);
-	--components-sortableList-description-lineHeight: var(--sizes-S-lineHeight);
-	--components-sortableList-helper-fontSize: var(--sizes-XS-fontSize);
-	--components-sortableList-helper-lineHeight: var(--sizes-XS-lineHeight);
+	--components-sortableList-handler-size: var(--pr-t-font-body-S-lineHeight);
+	--components-sortableList-description-font: var(--pr-t-font-body-S);
+	--components-sortableList-helper-font: var(--pr-t-font-body-XS);
+
+	// Deprecated
+	--components-sortableList-description-fontSize: var(--pr-t-font-body-S-fontSize);
+	--components-sortableList-description-lineHeight: var(--pr-t-font-body-S-lineHeight);
+
+	.lucca-icon {
+		@include icon.S;
+	}
 }

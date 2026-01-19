@@ -1,4 +1,4 @@
-import { Meta, StoryFn } from '@storybook/angular';
+import { Meta, StoryObj } from '@storybook/angular';
 
 interface TextfieldPasswordStory {}
 
@@ -15,7 +15,7 @@ function getTemplate(args: TextfieldPasswordStory): string {
 		<a href="#" onClick="event.preventDefault()" role="button" aria-pressed="false" class="textfield-suffix-action">
 	  	<span aria-hidden="true" class="lucca-icon icon-eye"></span>
 	  	<span aria-hidden="true" class="lucca-icon icon-eyeStrikethrough"></span>
-	  	<span class="u-mask">Show password</span>
+	  	<span class="pr-u-mask">Show password</span>
 			</a>
 	</span>
 </label>
@@ -26,23 +26,25 @@ function getTemplate(args: TextfieldPasswordStory): string {
 		<a href="#" onClick="event.preventDefault()" role="button" aria-pressed="true" class="textfield-suffix-action">
 			<span aria-hidden="true" class="lucca-icon icon-eye"></span>
 			<span aria-hidden="true" class="lucca-icon icon-eyeStrikethrough"></span>
-			<span class="u-mask">Show password</span>
+			<span class="pr-u-mask">Show password</span>
 		</a>
 	</span>
 </label>`;
 }
 
-const Template: StoryFn<TextfieldPasswordStory> = (args) => ({
+const Template = (args: TextfieldPasswordStory) => ({
 	props: args,
 	template: getTemplate(args),
 	styles: [
 		`
 		.textfield {
-			float: left;
-			margin-right: 1rem;
+			float: inline-start;
+			margin-inline-end: 1rem;
 		}`,
 	],
 });
 
-export const Password = Template.bind({});
-Password.args = {};
+export const Password: StoryObj<TextfieldPasswordStory> = {
+	args: {},
+	render: Template,
+};

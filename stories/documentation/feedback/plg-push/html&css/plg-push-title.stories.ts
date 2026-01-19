@@ -1,7 +1,6 @@
-import { Meta, StoryFn } from '@storybook/angular';
+import { Meta, StoryObj } from '@storybook/angular';
 
-interface PLGPushTitleStory {
-}
+interface PLGPushTitleStory {}
 
 export default {
 	title: 'Documentation/Feedback/PLG Push/HTML & CSS/Title',
@@ -19,19 +18,20 @@ function getTemplate(args: PLGPushTitleStory): string {
 		<div class="plgPush-content-description">
 			Activez toutes les options liées aux télétravail.
 			<a class="link mod-icon" href="#" target="_blank" rel="noopener noreferrer">
-				<span>Demander un essai gratuit</span>
-				<span aria-hidden="true" class="lucca-icon icon-arrowExternal"></span>
-				<span class="u-mask">Ouvrir dans une nouvelle fenêtre</span>
+				<span class="link-text">Demander un essai gratuit</span><!-- no text node here --><span class="link-icon"><span aria-hidden="true" class="lucca-icon icon-arrowExternal"></span></span>
+				<span class="pr-u-mask">Ouvrir dans une nouvelle fenêtre</span>
 			</a>
 		</div>
 	</div>
 </div>`;
 }
 
-const Template: StoryFn<PLGPushTitleStory> = (args) => ({
+const Template = (args: PLGPushTitleStory) => ({
 	props: args,
 	template: getTemplate(args),
 });
 
-export const Title = Template.bind({});
-Title.args = {};
+export const Title: StoryObj<PLGPushTitleStory> = {
+	args: {},
+	render: Template,
+};

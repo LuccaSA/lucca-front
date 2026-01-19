@@ -1,17 +1,30 @@
 @mixin product {
-	--components-clear-cross-color: var(--palettes-product-700);
-	--components-clear-background: var(--palettes-neutral-0);
+	--components-clear-cross-color: var(--palettes-neutral-0);
+	--components-clear-background: var(--palettes-product-800);
 
 	&:hover {
-		--components-clear-background: var(--palettes-product-50);
+		--components-clear-background: var(--palettes-product-700);
 	}
 
 	&:active {
-		--components-clear-background: var(--palettes-product-50);
+		--components-clear-background: var(--palettes-product-900);
 	}
 }
 
 @mixin S {
 	--components-clear-size: 0.75rem;
 	--icon-size: 0.75rem;
+}
+
+@mixin inverted {
+	--components-clear-cross-color: var(--palettes-800, var(--palettes-neutral-800));
+	--components-clear-background: var(--palettes-0, var(--palettes-neutral-0));
+
+	&:hover {
+		--components-clear-background: var(--palettes-50, var(--palettes-neutral-50));
+	}
+
+	&:active {
+		--components-clear-background: var(--palettes-100, var(--palettes-neutral-100));
+	}
 }

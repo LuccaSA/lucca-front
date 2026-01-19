@@ -1,4 +1,5 @@
 @mixin vars {
+	--commons-loading-frontground: var(--palettes-500, var(--palettes-product-500)); // Allow palette override
 	--components-loading-display: inline-block;
 	--components-loading-size: var(--pr-t-spacings-300);
 	--components-loading-size-big: var(--pr-t-spacings-600);
@@ -7,5 +8,5 @@
 	--components-loading-spinnerMargin: 0;
 	--components-loading-color: currentColor;
 	--components-loading-transform: none;
-	--components-loading-transformFallback: var(--components-loading-transform);
+	--components-loading-textAlign: inherit;
 }

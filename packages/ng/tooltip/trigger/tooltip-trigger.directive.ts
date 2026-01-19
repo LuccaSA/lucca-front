@@ -1,81 +1,85 @@
-import { FlexibleConnectedPositionStrategy, HorizontalConnectionPos, OriginConnectionPosition, Overlay, OverlayConnectionPosition, OverlayRef, VerticalConnectionPos } from '@angular/cdk/overlay';
+import {
+	FlexibleConnectedPositionStrategy,
+	FlexibleConnectedPositionStrategyOrigin,
+	HorizontalConnectionPos,
+	OriginConnectionPosition,
+	Overlay,
+	OverlayConnectionPosition,
+	OverlayRef,
+	VerticalConnectionPos,
+} from '@angular/cdk/overlay';
 import { ComponentPortal } from '@angular/cdk/portal';
 import {
-	AfterContentInit,
-	ChangeDetectorRef,
 	DestroyRef,
 	Directive,
+	EffectRef,
 	ElementRef,
-	HostBinding,
-	HostListener,
-	Input,
+	Injector,
+	NgZone,
 	OnDestroy,
 	Renderer2,
 	booleanAttribute,
+	computed,
+	effect,
 	inject,
+	input,
+	linkedSignal,
 	numberAttribute,
+	signal,
 } from '@angular/core';
-import { takeUntilDestroyed } from '@angular/core/rxjs-interop';
+import { takeUntilDestroyed, toObservable, toSignal } from '@angular/core/rxjs-interop';
 import { SafeHtml } from '@angular/platform-browser';
+import { isNotNil, ɵeffectWithDeps } from '@lucca-front/ng/core';
 import { LuPopoverPosition } from '@lucca-front/ng/popover';
-import { BehaviorSubject, Observable, Subject, combineLatest, merge, startWith, switchMap, timer } from 'rxjs';
-import { debounce, debounceTime, filter, map } from 'rxjs/operators';
+import { Observable, combineLatest, startWith, switchMap, timer } from 'rxjs';
+import { debounce, debounceTime, filter, map, tap } from 'rxjs/operators';
 import { LuTooltipPanelComponent } from '../panel';
+import { EllipsisRuler } from './ellipsis.ruler';
 
 let nextId = 0;
 
 @Directive({
 	selector: '[luTooltip]',
-	standalone: true,
+	exportAs: 'luTooltip',
+	host: {
+		'[attr.aria-describedby]': 'ariaDescribedBy()',
+		'[attr.id]': 'id()',
+		'(mouseenter)': 'onMouseEnter()',
+		'(mouseleave)': 'onMouseLeave()',
+		'(focus)': 'onFocus()',
+		'(blur)': 'onBlur()',
+	},
 })
-export class LuTooltipTriggerDirective implements AfterContentInit, OnDestroy {
-	#overlay = inject(Overlay);
+export class LuTooltipTriggerDirective implements OnDestroy {
+	readonly #overlay = inject(Overlay);
 
-	#host = inject<ElementRef<HTMLElement>>(ElementRef);
+	readonly #host = inject<ElementRef<HTMLElement>>(ElementRef);
 
-	#renderer = inject(Renderer2);
+	readonly #renderer = inject(Renderer2);
+	readonly #ruler = inject(EllipsisRuler);
+	readonly #zone = inject(NgZone, { optional: true });
 
-	#destroyRef = inject(DestroyRef);
+	readonly #injector = inject(Injector);
+	readonly #destroyRef = inject(DestroyRef);
 
-	#cdr = inject(ChangeDetectorRef);
+	readonly luTooltip = input<string | SafeHtml>();
 
-	@Input()
-	luTooltip: string | SafeHtml;
+	readonly luTooltipEnterDelay = input(300, { transform: numberAttribute });
+	readonly luTooltipLeaveDelay = input(100, { transform: numberAttribute });
 
-	#openDelay$ = new BehaviorSubject<number>(300);
+	readonly luTooltipDisabled = input(false, { transform: booleanAttribute });
 
-	@Input({ transform: numberAttribute })
-	set luTooltipEnterDelay(delay: number) {
-		this.#openDelay$.next(delay);
-	}
+	readonly luTooltipOnlyForDisplay = input(false, { transform: booleanAttribute });
 
-	#closeDelay$ = new BehaviorSubject<number>(100);
+	readonly luTooltipPosition = input<LuPopoverPosition>('above');
 
-	@Input({ transform: numberAttribute })
-	set luTooltipLeaveDelay(delay: number) {
-		this.#closeDelay$.next(delay);
-	}
+	readonly luTooltipWhenEllipsis = input(false, { transform: booleanAttribute });
 
-	#disabled = false;
+	readonly luTooltipAnchor = input<FlexibleConnectedPositionStrategyOrigin>(this.#host);
 
-	@Input({ transform: booleanAttribute })
-	set luTooltipDisabled(disabled: boolean) {
-		this.#disabled = disabled;
-		if (disabled) {
-			this.setAccessibilityProperties(null);
-		}
-	}
+	readonly id = input<string>(`${this.#host.nativeElement.tagName.toLowerCase()}-tooltip-${nextId++}`);
 
-	@Input({ transform: booleanAttribute })
-	luTooltipOnlyForDisplay = false;
-
-	@Input()
-	luTooltipPosition: LuPopoverPosition = 'above';
-
-	@Input({ transform: booleanAttribute })
-	luTooltipWhenEllipsis = false;
-
-	resize$ = new Observable((observer) => {
+	readonly resize$ = new Observable<void>((observer) => {
 		const resizeObserver = new ResizeObserver(() => {
 			observer.next();
 		});
@@ -85,84 +89,97 @@ export class LuTooltipTriggerDirective implements AfterContentInit, OnDestroy {
 		};
 	});
 
-	open$ = new Subject<void>();
+	readonly #hasEllipsis$ = combineLatest([
+		toObservable(
+			// 1. Group necessary inputs
+			computed(() => ({ whenEllipsis: this.luTooltipWhenEllipsis(), disabled: this.luTooltipDisabled() })),
+		),
+		// Resend resize events to trigger the check
+		this.resize$.pipe(debounceTime(150)),
+	]).pipe(
+		// 2. Keep only necessary inputs
+		filter(([{ whenEllipsis, disabled }]) => !disabled && whenEllipsis),
+		// 3. Check for ellipsis
+		switchMap(() => this.runOutsideZoneJS(() => this.#ruler.hasEllipsis(this.#host.nativeElement))),
+	);
 
-	close$ = new Subject<void>();
+	readonly #hasEllipsis = toSignal(this.#hasEllipsis$, { initialValue: false });
 
-	@HostListener('mouseenter')
+	readonly #action = signal<'open' | 'close' | null>(null);
+	readonly #realAction = linkedSignal<'open' | 'close' | null, 'open' | 'close' | null>({
+		source: this.#action,
+		computation: (action, previous) => {
+			if (!action || action === 'close') {
+				return action;
+			}
+
+			// We only filter open events because even if it's disabled while opened,
+			// we want the tooltip to be able to close itself no matter what
+			if (this.luTooltipDisabled()) {
+				return previous.value;
+			}
+
+			// If not disabled, let's check for ellipsis if needed
+			if (this.luTooltipWhenEllipsis()) {
+				return this.#hasEllipsis() ? 'open' : previous.value;
+			}
+
+			// If it's not disabled and is not triggered based on ellipsis, just return true
+			return 'open';
+		},
+	});
+
 	onMouseEnter() {
-		this.open$.next();
+		this.#action.set('open');
 	}
 
-	@HostListener('mouseleave')
 	onMouseLeave() {
-		this.close$.next();
+		this.#action.set('close');
 	}
 
-	@HostListener('focus')
 	onFocus() {
-		this.open$.next();
+		if (this.#host.nativeElement.getAttribute('aria-expanded') !== 'true') {
+			this.#action.set('open');
+		}
 	}
 
-	@HostListener('blur')
 	onBlur() {
-		this.close$.next();
+		this.#action.set('close');
 	}
 
-	#generatedId = `${this.#host.nativeElement.tagName.toLowerCase()}-tooltip-${nextId++}`;
-
-	@HostBinding('attr.id')
-	_id: string;
-
-	@HostBinding('attr.aria-describedby')
-	get ariaDescribedBy() {
-		if (this.#disabled || this.luTooltipWhenEllipsis || this.luTooltipOnlyForDisplay) {
+	readonly ariaDescribedBy = computed(() => {
+		if (this.luTooltipDisabled() || this.luTooltipWhenEllipsis() || this.luTooltipOnlyForDisplay()) {
 			return null;
 		}
-		return `${this.#generatedId}-panel`;
-	}
+		return `${this.id()}-panel`;
+	});
 
 	overlayRef?: OverlayRef;
+	#effectRef?: EffectRef;
+	#idEffectRef?: EffectRef;
 
 	constructor() {
-		combineLatest([this.#openDelay$, this.#closeDelay$])
+		toObservable(this.#realAction)
 			.pipe(
-				switchMap(([openDelay, closeDelay]) => {
-					// We only filter open events because even if it's disabled while opened,
-					// 	we want the tooltip to be able to close itself no matter what
-					const openEvents$ = this.open$.pipe(
-						filter(() => {
-							if (this.#disabled) {
-								return false;
-							}
-							// If not disabled, let's check for ellipsis if needed
-							if (this.luTooltipWhenEllipsis) {
-								return this.hasEllipsis();
-							}
-							// If it's not disabled and is not triggered based on ellipsis, just return true
-							return true;
-						}),
-						map(() => 'open'),
-					);
-					return merge(openEvents$, this.close$.pipe(map(() => 'close'))).pipe(
-						debounce((event) => {
-							return timer(event === 'open' ? openDelay : closeDelay);
-						}),
-					);
+				filter(isNotNil),
+				debounce((action) => timer(action === 'open' ? this.luTooltipEnterDelay() : this.luTooltipLeaveDelay())),
+				tap((event) => {
+					if (event === 'open') {
+						this.openTooltip();
+					} else {
+						this.closeTooltip();
+					}
 				}),
-				takeUntilDestroyed(this.#destroyRef),
+				takeUntilDestroyed(),
 			)
-			.subscribe((event) => {
-				if (event === 'open') {
-					this.openTooltip();
-				} else {
-					this.closeTooltip();
-				}
-			});
+			.subscribe();
 
-		this.resize$.pipe(takeUntilDestroyed(this.#destroyRef), debounceTime(150)).subscribe(() => {
-			this.setAccessibilityProperties(0);
-			this.#cdr.markForCheck();
+		effect(() => {
+			if (!this.luTooltipDisabled() && (!this.luTooltipWhenEllipsis() || this.#hasEllipsis())) {
+				this.setAccessibilityProperties(0);
+			} else {
+				this.setAccessibilityProperties(null);
+			}
 		});
 	}
 
@@ -192,16 +209,33 @@ export class LuTooltipTriggerDirective implements AfterContentInit, OnDestroy {
 			.subscribe(({ overlayX, overlayY }) => {
 				ref.instance.setPanelPosition(overlayX, overlayY);
 			});
-		if (this.luTooltip) {
-			ref.instance.content = this.luTooltip;
-		} else if (this.luTooltipWhenEllipsis) {
-			ref.instance.content = this.#host.nativeElement.innerText;
+
+		if (this.luTooltip()) {
+			this.#effectRef = ɵeffectWithDeps(
+				[this.luTooltip],
+				(luTooltip) => {
+					ref.instance.content.set(luTooltip);
+				},
+				{ injector: this.#injector },
+			);
+		} else if (this.luTooltipWhenEllipsis()) {
+			ref.instance.content.set(this.#host.nativeElement.innerText);
+		} else {
+			ref.instance.content.set('');
 		}
-		ref.instance.id = this.ariaDescribedBy;
+
+		this.#idEffectRef = ɵeffectWithDeps(
+			[this.ariaDescribedBy],
+			(ariaDescribedBy) => {
+				ref.instance.id.set(ariaDescribedBy);
+			},
+			{ injector: this.#injector },
+		);
+
 		// On tooltip leave => trigger close
-		ref.instance.mouseLeave$.pipe(takeUntilDestroyed(ref.instance.destroyRef)).subscribe(() => this.close$.next());
+		ref.instance.mouseLeave$.pipe(takeUntilDestroyed(ref.instance.destroyRef)).subscribe(() => this.#action.set('close'));
 		// On tooltip enter => trigger open to keep it opened
-		ref.instance.mouseEnter$.pipe(takeUntilDestroyed(ref.instance.destroyRef)).subscribe(() => this.open$.next());
+		ref.instance.mouseEnter$.pipe(takeUntilDestroyed(ref.instance.destroyRef)).subscribe(() => this.#action.set('open'));
 	}
 
 	private closeTooltip(): void {
@@ -209,71 +243,33 @@ export class LuTooltipTriggerDirective implements AfterContentInit, OnDestroy {
 			this.overlayRef.detach();
 			delete this.overlayRef;
 		}
+		this.#effectRef?.destroy();
+		this.#idEffectRef?.destroy();
 	}
 
 	private setAccessibilityProperties(tabindex: number | null): void {
-		if (this.#disabled || (this.luTooltipWhenEllipsis && !this.hasEllipsis())) {
+		if (tabindex === null) {
 			this.#renderer.removeAttribute(this.#host.nativeElement, 'tabindex');
 			return;
 		}
 
 		const tag = this.#host.nativeElement.tagName.toLowerCase();
 		const nativelyFocusableTags = ['a', 'button', 'input', 'select', 'textarea'];
-		const isNatevelyFocusableTag = nativelyFocusableTags.includes(tag);
+		const isNativelyFocusableTag = nativelyFocusableTags.includes(tag);
 
 		const hasATabIndex = this.#host.nativeElement.getAttribute('tabindex') !== null;
 
-		if (!isNatevelyFocusableTag && !hasATabIndex) {
+		if (!isNativelyFocusableTag && !hasATabIndex) {
 			this.#renderer.setAttribute(this.#host.nativeElement, 'tabindex', tabindex.toString());
 		}
-	}
 
-	/**
-	 * Hacky af but let's explain everything
-	 * This method checks for ellipsis by cloning the node and checking its width against original element.
-	 *
-	 * We used to do this using scrollWidth but the thing is, it's a rounded value. Sometimes,
-	 * you'd get true while it should be false and vice-versa, because of rounding.
-	 *
-	 * We could also use getBoundingClientRect() but it only considers text content, meaning that if ellipsis is caused by
-	 * any margin or padding, it won't be detected
-	 *
-	 * @private
-	 */
-	private hasEllipsis(): boolean {
-		if (window.getComputedStyle(this.#host.nativeElement).textOverflow !== 'ellipsis') {
-			return false;
-		}
-
-		const mask = this.#renderer.createElement('div') as HTMLDivElement;
-		const clone = this.#host.nativeElement.cloneNode(true) as HTMLElement;
-
-		this.#renderer.setStyle(clone, 'position', 'fixed');
-		this.#renderer.setStyle(clone, 'overflow', 'visible');
-		this.#renderer.setStyle(clone, 'white-space', 'nowrap');
-		this.#renderer.setStyle(clone, 'visibility', 'hidden');
-		this.#renderer.setStyle(clone, 'width', 'fit-content');
-
-		this.#renderer.addClass(mask, 'u-mask');
-		this.#renderer.setAttribute(mask, 'aria-hidden', 'true');
-		this.#renderer.appendChild(mask, clone);
-
-		this.#renderer.appendChild(this.#host.nativeElement.parentElement, mask);
-		try {
-			const fullWidth = clone.getBoundingClientRect().width;
-			const displayWidth = this.#host.nativeElement.getBoundingClientRect().width;
-
-			return fullWidth > displayWidth;
-		} catch (e) {
-			return false;
-		} finally {
-			mask.remove();
+		if (!isNativelyFocusableTag && !this.luTooltipWhenEllipsis() && !this.luTooltipOnlyForDisplay()) {
+			this.#renderer.setAttribute(this.#host.nativeElement, 'role', 'button');
 		}
 	}
 
-	ngAfterContentInit(): void {
-		this.setAccessibilityProperties(0);
-		this._id = this.#host.nativeElement.id || this.#generatedId;
+	private runOutsideZoneJS<T>(callback: () => T): T {
+		return this.#zone ? this.#zone.runOutsideAngular(callback) : callback();
 	}
 
 	/**********************
@@ -289,7 +285,7 @@ export class LuTooltipTriggerDirective implements AfterContentInit, OnDestroy {
 		};
 
 		// Position
-		const position = this.luTooltipPosition;
+		const position = this.luTooltipPosition();
 		if (position === 'above') {
 			connectionPosition.originY = 'top';
 		} else if (position === 'below') {
@@ -322,7 +318,7 @@ export class LuTooltipTriggerDirective implements AfterContentInit, OnDestroy {
 
 		return this.#overlay
 			.position()
-			.flexibleConnectedTo(this.#host)
+			.flexibleConnectedTo(this.luTooltipAnchor())
 			.withPositions([
 				{
 					originX: connectionPosition.originX,
@@ -367,5 +363,13 @@ export class LuTooltipTriggerDirective implements AfterContentInit, OnDestroy {
 			return 'end';
 		}
 		return x;
+	}
+
+	requestClose() {
+		this.#action.set('close');
+	}
+
+	requestOpen() {
+		this.#action.set('open');
 	}
 }

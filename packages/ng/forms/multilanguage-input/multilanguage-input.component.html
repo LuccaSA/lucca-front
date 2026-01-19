@@ -1,0 +1,51 @@
+<div class="textField">
+	<div class="textField-input">
+		<input
+			luInput
+			type="text"
+			class="textField-input-value"
+			[placeholder]="placeholder()"
+			[(ngModel)]="invariant().value"
+			(ngModelChange)="valueChange()"
+			[ngModelOptions]="{ standalone: true }"
+			(blur)="onTouched?.()"
+			(focus)="openOnFocus() ? popoverRef.openPopover(true, true, true) : null"
+			[disabled]="disabledInternal()"
+			#inputElement
+		/>
+		<div class="textField-input-affix">
+			<button
+				[luPopover2]="popoverMultilanguage"
+				#popoverRef="luPopover2"
+				luPopoverNoCloseButton
+				[customPositions]="popoverPositions"
+				[luTooltip]="intl.toggleMultilanguage"
+				type="button"
+				class="button mod-onlyIcon mod-ghost textField-input-affix-toggle"
+			>
+				<span aria-hidden="true" class="lucca-icon icon-signTranslation"></span>
+			</button>
+			<ng-template #popoverMultilanguage>
+				<div class="popover-contentOptional multilanguage_popover-content" [style.width.px]="inputElement.clientWidth + 16">
+					<div class="pr-u-displayFlex pr-u-gap100 pr-u-flexDirectionColumn">
+						@for (row of panelInputs(); track row.cultureCode) {
+							<lu-form-field
+								[size]="formFieldSize()"
+								[label]="intl.translateTo | intlParams: { lang: getLocaleDisplayName(row.cultureCode) }"
+								hiddenLabel
+							>
+								<lu-text-input
+									[suffix]="{ content: row.cultureCode, ariaLabel: '' }"
+									[(ngModel)]="row.value"
+									(ngModelChange)="valueChange()"
+									[ngModelOptions]="{ standalone: true }"
+									[disabled]="disabledInternal()"
+								/>
+							</lu-form-field>
+						}
+					</div>
+				</div>
+			</ng-template>
+		</div>
+	</div>
+</div>

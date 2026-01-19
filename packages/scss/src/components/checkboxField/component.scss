@@ -1,25 +1,27 @@
 @use '@lucca-front/icons/src/commons/utils/icon';
 @use '@lucca-front/scss/src/commons/utils/a11y';
+@use '@lucca-front/scss/src/commons/utils/namespace';
 
-@mixin component($atRoot: 'without: rule') {
+@mixin component($atRoot: namespace.$defaultAtRoot) {
 	position: relative;
-	display: block;
-	width: fit-content;
-	height: fit-content;
+	inline-size: fit-content;
+	block-size: fit-content;
+	display: grid;
+	grid-template-areas: 'checkbox';
+	grid-template-columns: var(--component-checkboxField-size);
+	grid-template-rows: var(--component-checkboxField-size);
 
 	@at-root ($atRoot) {
 		.checkboxField-icon {
-			width: var(--component-checkboxField-size);
-			height: var(--component-checkboxField-size);
-			border: 2px solid var(--palettes-neutral-700);
+			border: 2px solid var(--component-checkboxField-borderColor);
 			border-radius: var(--component-checkboxField-borderRadius);
-			position: relative;
-			color: var(--palettes-neutral-0);
+			color: var(--component-checkboxField-icon-color);
 			transition-property: color, border-color, background-color;
 			transition-duration: var(--commons-animations-durations-fast);
-			background-color: var(--palettes-neutral-0);
-			display: block;
+			background-color: var(--component-checkboxField-backgroundColor);
 			cursor: pointer;
+			grid-area: checkbox;
+			display: flex;
 
 			@media (prefers-reduced-motion: reduce) {
 				transition-property: none;
@@ -28,7 +30,7 @@
 			&::after {
 				content: '';
 				position: absolute;
-				inset: -2px;
+				inset: 0;
 				outline-offset: 2px;
 				border-radius: var(--component-checkboxField-borderRadius);
 			}
@@ -38,11 +40,12 @@
 			display: flex;
 			align-items: center;
 			justify-content: center;
-			width: 100%;
-			height: 100%;
-			transform: scale(0);
+			inline-size: 100%;
+			block-size: 100%;
+			transform: scale(var(--component-checkboxField-icon-scale));
 			transition-property: transform;
 			transition-duration: var(--commons-animations-durations-fast);
+			transform-origin: center;
 			transition-timing-function: cubic-bezier(0.5, -0.5, 0.5, 0);
 
 			@media (prefers-reduced-motion: reduce) {
@@ -50,10 +53,10 @@
 			}
 
 			&::before {
-				font-weight: 400;
+				font-weight: var(--pr-t-font-fontWeight-regular);
 				font-size: var(--component-checkboxField-icon-fontSize);
 				direction: ltr;
-				font-family: 'Lucca icons';
+				font-family: var(--icon-fontFamily);
 				font-feature-settings: 'liga';
 				font-style: normal;
 				letter-spacing: normal;
@@ -61,18 +64,17 @@
 				text-transform: none;
 				white-space: nowrap;
 				word-wrap: normal;
-				content: '\e97d'; // Remove when content alternative will have a good support
-				content: '\e97d'/ '';
+				content: '\e97d' / '';
 			}
 		}
 
 		.checkboxField-input {
-			position: absolute;
 			z-index: 1;
-			width: var(--component-checkboxField-size);
-			height: var(--component-checkboxField-size);
-			opacity: 0;
+			opacity: 0.0001;
 			cursor: pointer;
+			grid-area: checkbox;
+			inline-size: 100%;
+			block-size: 100%;
 		}
 	}
 }

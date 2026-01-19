@@ -1,4 +1,7 @@
-:host {
-	display: block;
-	width: 100%;
+@layer components {
+	:host {
+		display: block;
+		inline-size: 100%;
+		min-inline-size: 0;
+	}
 }

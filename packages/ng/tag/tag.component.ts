@@ -1,59 +1,61 @@
-import { NgClass } from '@angular/common';
-import { booleanAttribute, ChangeDetectionStrategy, Component, Input, ViewEncapsulation } from '@angular/core';
+import { booleanAttribute, ChangeDetectionStrategy, Component, computed, input, ViewEncapsulation } from '@angular/core';
 import { RouterLink } from '@angular/router';
 import { LuccaIcon } from '@lucca-front/icons';
-import { Palette } from '@lucca-front/ng/core';
+import { DecorativePalette, Palette } from '@lucca-front/ng/core';
 import { IconComponent } from '@lucca-front/ng/icon';
+import { LuTooltipModule } from '@lucca-front/ng/tooltip';
 
 @Component({
 	selector: 'lu-tag',
-	standalone: true,
 	templateUrl: './tag.component.html',
-	styleUrls: ['./tag.component.scss'],
+	styleUrl: './tag.component.scss',
 	changeDetection: ChangeDetectionStrategy.OnPush,
 	encapsulation: ViewEncapsulation.None,
-	imports: [IconComponent, NgClass, RouterLink],
+	imports: [IconComponent, RouterLink, LuTooltipModule],
 })
 export class TagComponent {
-	@Input({ required: true })
-	label: string;
-
-	@Input()
 	/**
-	 * Which size should the callout be? Defaults to medium
+	 * Which text should the tag be? Defaults to medium
 	 */
-	size: 'M' | 'S' = 'M';
+	readonly label = input.required<string>();
 
-	@Input()
 	/**
-	 * Which palette should be used for the entire callout.
+	 * Which size should the tag be? Defaults to medium
+	 */
+	readonly size = input<'S' | 'M' | 'L'>('M');
+
+	/**
+	 * Which palette should be used for the entire tag.
 	 * Defaults to none (inherits parent palette)
 	 */
-	palette: Palette = 'none';
+	readonly palette = input<Palette | DecorativePalette>('none');
 
-	@Input({ transform: booleanAttribute })
 	/**
 	 * Should display be outlined?
 	 */
-	outlined = false;
+	readonly outlined = input(false, { transform: booleanAttribute });
 
-	@Input()
 	/**
 	 * For routerLink usage
 	 */
-	link: string;
+	readonly link = input<string>();
 
-	@Input()
 	/**
-	 * Which icon should we display in the callout if any?
+	 * Which icon should we display in the tag if any?
 	 * Defaults to no icon.
 	 */
-	icon: LuccaIcon;
+	readonly icon = input<LuccaIcon | null>(null);
 
-	get tagClasses() {
+	readonly withEllipsis = input(false, { transform: booleanAttribute });
+
+	readonly AI = input(false, { transform: booleanAttribute });
+
+	readonly tagClasses = computed(() => {
+		const size = this.size();
+		const palette = this.palette();
 		return {
-			[`mod-${this.size}`]: !!this.size,
-			[`palette-${this.palette}`]: !!this.palette,
+			[`mod-${size}`]: !!size,
+			[`palette-${palette}`]: !this.AI() && !!palette,
 		};
-	}
+	});
 }

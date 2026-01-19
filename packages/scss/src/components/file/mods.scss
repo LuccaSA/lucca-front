@@ -1,13 +1,15 @@
 @use '@lucca-front/scss/src/commons/utils/a11y';
 
 @mixin icon {
-	padding: var(--pr-t-spacings-100) var(--pr-t-spacings-300) var(--pr-t-spacings-100) var(--pr-t-spacings-600);
+	padding-block: var(--pr-t-spacings-100);
+	padding-inline: var(--pr-t-spacings-600) var(--pr-t-spacings-300);
 }
 
 @mixin S {
-	padding: var(--pr-t-spacings-100) var(--pr-t-spacings-200);
-	text-align: left;
-	min-height: 0;
+	padding-block: var(--pr-t-spacings-100);
+	padding-inline: var(--pr-t-spacings-200);
+	text-align: start;
+	min-block-size: 0;
 
 	.file-input {
 		// todo: extract state
@@ -24,14 +26,14 @@
 	}
 
 	.file-name {
-		margin-bottom: 0;
-		font-size: var(--sizes-XS-fontSize);
-		line-height: var(--sizes-XS-lineHeight);
+		margin-block-end: 0;
+		font-size: var(--pr-t-font-body-XS-fontSize);
+		line-height: var(--pr-t-font-body-XS-lineHeight);
 	}
 
 	.file-formats {
-		font-size: var(--sizes-XS-fontSize);
-		line-height: var(--sizes-XS-lineHeight);
+		font-size: var(--pr-t-font-body-XS-fontSize);
+		line-height: var(--pr-t-font-body-XS-lineHeight);
 	}
 
 	.file-or {
@@ -39,7 +41,7 @@
 	}
 
 	.file-button {
-		margin-left: auto;
+		margin-inline-start: auto;
 
 		&::first-letter {
 			text-transform: capitalize;
@@ -47,20 +49,21 @@
 	}
 
 	.file-icon {
-		font-size: var(--sizes-S-lineHeight);
-		line-height: var(--sizes-S-lineHeight);
+		font-size: var(--pr-t-font-body-S-lineHeight);
+		line-height: var(--pr-t-font-body-S-lineHeight);
 		margin: 0;
 		align-self: start;
 	}
 
 	.file-title {
-		font-size: var(--sizes-S-fontSize);
-		line-height: var(--sizes-S-lineHeight);
-		padding-right: var(--pr-t-spacings-100);
+		font-size: var(--pr-t-font-body-S-fontSize);
+		line-height: var(--pr-t-font-body-S-lineHeight);
+		padding-inline-end: var(--pr-t-spacings-100);
 		margin: 0;
 	}
 
 	.file-progress {
-		margin: var(--pr-t-spacings-100) 0;
+		margin-block: var(--pr-t-spacings-100);
+		margin-inline: 0;
 	}
 }

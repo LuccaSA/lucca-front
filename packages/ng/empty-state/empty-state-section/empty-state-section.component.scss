@@ -1,1 +1,7 @@
 @use '@lucca-front/scss/src/components/emptyState';
+
+@layer base {
+	lu-empty-state-section {
+		inline-size: 100%;
+	}
+}

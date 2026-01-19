@@ -1,4 +1,4 @@
-import { Meta, StoryFn } from '@storybook/angular';
+import { Meta, StoryObj } from '@storybook/angular';
 
 interface TextfieldBasicStory {
 	display: string;
@@ -83,7 +83,7 @@ function getTemplate(args: TextfieldBasicStory): string {
 </label>`;
 }
 
-const Template: StoryFn<TextfieldBasicStory> = (args) => ({
+const Template = (args: TextfieldBasicStory) => ({
 	props: args,
 	template: getTemplate(args),
 	styles: [
@@ -91,9 +91,11 @@ const Template: StoryFn<TextfieldBasicStory> = (args) => ({
 		:host {
 			display: block;
 		}`,
-		args.invert === true ? ':host { background-color: #333333; margin: -15px -15px; padding: 15px 15px; }' : '',
+		args.invert === true ? ':host { background-color: #333333; margin: -15px; padding: 15px; }' : '',
 	],
 });
 
-export const Basic = Template.bind({});
-Basic.args = { display: '', style: '', noLabel: false, width: '', size: '', disabled: false, error: false, required: false, invert: false };
+export const Basic: StoryObj<TextfieldBasicStory> = {
+	args: { display: '', style: '', noLabel: false, width: '', size: '', disabled: false, error: false, required: false, invert: false },
+	render: Template,
+};

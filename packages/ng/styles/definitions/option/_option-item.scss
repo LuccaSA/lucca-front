@@ -1,189 +1,226 @@
+@use '@lucca-front/scss/src/commons/utils/namespace';
 @use '@lucca-front/icons/src/commons/utils/icon';
 @use '@lucca-front/scss/src/commons/utils/a11y';
 
-:root {
-	--components-options-item-padding-vertical: var(--pr-t-spacings-50);
-	--components-options-item-padding-horizontal: var(--pr-t-spacings-100);
-	--components-options-item-multiple-padding: 2.25rem;
-	--components-options-item-icon-color: var(--palettes-neutral-800);
-	--components-options-checkbox-size: 1.25rem;
-	--components-options-checkbox-color: var(--palettes-product-700);
-	--components-options-checkbox-border-radius: 6px;
-	--components-options-checkbox-border-color: var(--palettes-neutral-700);
-	--components-options-establishment-multiple-padding: 2rem;
+@include namespace.appendRootVars {
+	@layer base {
+		--components-options-item-padding-vertical: var(--pr-t-spacings-50);
+		--components-options-item-padding-horizontal: var(--pr-t-spacings-100);
+		--components-options-item-multiple-padding: 2.25rem;
+		--components-options-item-icon-color: var(--palettes-neutral-800);
+		--components-options-checkbox-size: 1.25rem;
+		--components-options-checkbox-color: var(--palettes-700, var(--palettes-product-700));
+		--components-options-checkbox-border-radius: var(--pr-t-border-radius-small);
+		--components-options-checkbox-border-color: var(--palettes-neutral-700);
+		--components-options-establishment-multiple-padding: 2rem;
+	}
 }
 
 @mixin optionItemStyle {
 	:host {
-		display: block;
-		scroll-margin: var(--pr-t-spacings-50);
+		@layer components {
+			--components-options-checkbox-color: var(--palettes-700, var(--palettes-product-700)); // Allow palette override
+
+			display: block;
+			scroll-margin: var(--pr-t-spacings-50);
+
+			.lu-picker-content-group & {
+				scroll-margin-block-start: var(--pr-t-spacings-400);
+			}
+		}
+
+		@layer mods {
+			&.withAddOption {
+				scroll-margin-block-end: var(--pr-t-spacings-600);
+			}
+		}
 	}
 
 	.optionItem {
-		position: relative;
+		@layer components {
+			position: relative;
+		}
 	}
 
 	.optionItem-value {
-		position: relative;
-		border-radius: var(--commons-borderRadius-M);
-		display: block;
-		padding: var(--components-options-item-padding-vertical) var(--components-options-item-padding-horizontal);
-		transition: background-color 50ms;
-		cursor: pointer;
+		@layer components {
+			position: relative;
+			border-radius: var(--pr-t-border-radius-default);
+			display: block;
+			padding-block: var(--components-options-item-padding-vertical);
+			padding-inline: var(--components-options-item-padding-horizontal);
+			transition: background-color 50ms;
+			cursor: pointer;
 
-		&.is-selected {
-			background-color: var(--palettes-product-50);
-
-			&:before {
-				content: '';
-				position: absolute;
-				top: 0;
-				bottom: 0;
-				left: calc(var(--pr-t-spacings-50) * -1);
-				width: 2px;
-				background-color: var(--palettes-product-700);
-				border-top-right-radius: var(--commons-borderRadius-M);
-				border-bottom-right-radius: var(--commons-borderRadius-M);
-			}
-
-			&:hover {
-				background-color: var(--palettes-product-100);
-			}
-
-			&:active {
-				background-color: var(--palettes-product-200);
-			}
-
-			&.is-highlighted {
-				background-color: var(--palettes-product-100);
-
-				&:hover {
-					background-color: var(--palettes-product-200);
+			::ng-deep {
+				.avatar {
+					margin-inline-end: var(--pr-t-spacings-75);
 				}
 			}
 		}
 
-		&:hover {
-			background-color: var(--palettes-neutral-50);
-		}
+		@layer mods {
+			&.is-selected, :host-context([aria-selected="true"]) & {
+				background-color: var(--palettes-50, var(--palettes-product-50));
 
-		&.is-highlighted,
-		&.is-focus {
-			background-color: var(--palettes-neutral-50);
+				&::before {
+					content: '';
+					position: absolute;
+					inset-block: 0;
+					inset-inline-start: calc(var(--pr-t-spacings-50) * -1);
+					inline-size: 2px;
+					background-color: var(--palettes-700, var(--palettes-product-700));
+					border-start-end-radius: var(--pr-t-border-radius-default);
+					border-end-end-radius: var(--pr-t-border-radius-default);
+				}
+
+				&:hover {
+					background-color: var(--palettes-100, var(--palettes-product-100));
+				}
+
+				&:active {
+					background-color: var(--palettes-200, var(--palettes-product-200));
+				}
+
+				:host-context(.is-highlighted) & {
+					background-color: var(--palettes-100, var(--palettes-product-100));
+
+					&:hover {
+						background-color: var(--palettes-200, var(--palettes-product-200));
+					}
+				}
+			}
 
 			&:hover {
 				background-color: var(--palettes-neutral-50);
+			}
+
+			:host-context(.is-highlighted) & {
+				background-color: var(--palettes-neutral-50);
+
+				&:hover {
+					background-color: var(--palettes-neutral-50);
+				}
+
+				&:active {
+					background-color: var(--palettes-neutral-100);
+				}
 			}
 
 			&:active {
 				background-color: var(--palettes-neutral-100);
 			}
 		}
-
-		&:active {
-			background-color: var(--palettes-neutral-100);
-		}
 	}
 
 	.optionItem-value-group {
-		color: var(--palettes-neutral-600);
-		font-size: var(--sizes-S-fontSize);
-		line-height: var(--sizes-S-lineHeight);
+		@layer components {
+			color: var(--palettes-neutral-600);
+			font: var(--pr-t-font-body-S);
+		}
 	}
 
 	:host-context(.lu-select-value) {
 		.optionItem-value {
-			padding: 0;
-			overflow: hidden;
-			text-overflow: ellipsis;
+			@layer components {
+				padding: 0;
+				overflow: hidden;
+				text-overflow: ellipsis;
+			}
 
-			&:hover,
-			&.is-focus,
-			&.is-highlighted {
-				background-color: inherit;
+			@layer mods {
+				&:hover,
+				:host-context(.is-highlighted) & {
+					background-color: inherit;
+				}
 			}
 		}
 	}
 
-	:host-context(.mod-multiple) {
+	:host-context(.mod-multiple),
+	.formerEmployeeDisplayer {
 		.optionItem-value {
-			position: relative;
-			padding-left: var(--components-options-item-multiple-padding);
+			@layer mods {
+				position: relative;
+				padding-inline-start: var(--components-options-item-multiple-padding);
 
-			&::after,
-			&::before {
-				display: block;
-				position: absolute;
-				left: var(--pr-t-spacings-100);
-				top: var(--pr-t-spacings-75);
-			}
-
-			&::before {
-				content: '';
-				border-radius: var(--components-options-checkbox-border-radius);
-				box-shadow: inset 0 0 0 2px var(--components-options-checkbox-border-color);
-				display: block;
-				height: var(--components-options-checkbox-size);
-				transition-property: background-color, box-shadow;
-				transition-duration: var(--commons-animations-durations-fast);
-				width: var(--components-options-checkbox-size);
-			}
-
-			&::after {
-				@include icon.generate('sign_confirm');
-
-				color: transparent;
-				font-size: var(--sizes-S-lineHeight);
-				line-height: var(--components-options-checkbox-size);
-				position: absolute;
-				text-align: center;
-				transform: scale(0);
-				transition: all 100ms;
-				width: var(--components-options-checkbox-size);
-			}
-
-			&.is-selected {
+				&::after,
 				&::before {
-					background-color: var(--components-options-checkbox-color);
-					box-shadow: inset 0 0 0 2px var(--components-options-checkbox-color);
+					display: block;
+					position: absolute;
+					inset-inline-start: var(--pr-t-spacings-100);
+					inset-block-start: var(--pr-t-spacings-75);
+				}
+
+				&::before {
+					content: '';
+					background-color: var(--palettes-neutral-0);
+					border-radius: var(--components-options-checkbox-border-radius);
+					box-shadow: inset 0 0 0 2px var(--components-options-checkbox-border-color);
+					display: block;
+					block-size: var(--components-options-checkbox-size);
+					transition-property: background-color, box-shadow;
+					transition-duration: var(--commons-animations-durations-fast);
+					inline-size: var(--components-options-checkbox-size);
 				}
 
 				&::after {
-					color: var(--palettes-neutral-0);
-					transform: scale(1);
+					@include icon.generate('sign_confirm');
+
+					color: transparent;
+					font-size: var(--pr-t-font-body-S-lineHeight);
+					line-height: var(--components-options-checkbox-size);
+					position: absolute;
+					text-align: center;
+					transform: scale(0);
+					transition: all 100ms;
+					inline-size: var(--components-options-checkbox-size);
 				}
-			}
 
-			&.is-disabled {
-				--components-options-checkbox-border-color: var(--palettes-neutral-500); // disabled token candidate
-
-				&.is-selected {
-					--components-options-checkbox-color: var(--commons-disabled-background);
-					background-color: transparent;
+				&.is-selected, :host-context([aria-selected="true"]) & {
+					&::before {
+						background-color: var(--components-options-checkbox-color);
+						box-shadow: inset 0 0 0 2px var(--components-options-checkbox-color);
+					}
 
 					&::after {
-						color: var(--palettes-neutral-500); // disabled token candidate
+						color: var(--palettes-neutral-0);
+						transform: scale(1);
+					}
+
+					&.is-disabled {
+						--components-options-checkbox-color: var(--commons-disabled-background);
+
+						background-color: transparent;
+
+						&::after {
+							color: var(--palettes-neutral-500); // disabled token candidate
+						}
 					}
 				}
-			}
 
-			&:not(.is-disabled):hover {
-				&::before {
-					box-shadow: inset 0 0 0 2px var(--components-options-checkbox-color);
+				&.is-disabled {
+					--components-options-checkbox-border-color: var(--palettes-neutral-500); // disabled token candidate
+				}
+
+				&:not(.is-disabled):hover {
+					&::before {
+						box-shadow: inset 0 0 0 2px var(--components-options-checkbox-color);
+					}
 				}
 			}
 		}
 
 		&.establishmentOption {
-			.optionItem-value {
-				position: relative;
-				padding-left: calc(var(--components-options-checkbox-size) + var(--pr-t-spacings-100) * 2);
-			}
+			@layer components {
+				.optionItem-value {
+					position: relative;
+					padding-inline-start: calc(var(--components-options-checkbox-size) + var(--pr-t-spacings-100) * 2);
 
-			.optionItem-value {
-				&::before,
-				&::after {
-					left: var(--pr-t-spacings-100);
+					&::before,
+					&::after {
+						inset-inline-start: var(--pr-t-spacings-100);
+					}
 				}
 			}
 		}

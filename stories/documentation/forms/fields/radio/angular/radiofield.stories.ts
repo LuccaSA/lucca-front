@@ -1,15 +1,16 @@
-import { RadioComponent, RadioGroupInputComponent } from '@lucca-front/ng/forms';
-import { Meta, moduleMetadata, StoryObj } from '@storybook/angular';
 import { FormsModule } from '@angular/forms';
-import { cleanupTemplate, generateInputs } from 'stories/helpers/stories';
-import { FormFieldComponent } from '@lucca-front/ng/form-field';
 import { BrowserAnimationsModule } from '@angular/platform-browser/animations';
+import { FormFieldComponent } from '@lucca-front/ng/form-field';
+import { RadioComponent, RadioGroupInputComponent } from '@lucca-front/ng/forms';
+import { Meta, StoryObj, moduleMetadata } from '@storybook/angular';
+import { cleanupTemplate, generateInputs } from 'stories/helpers/stories';
+import { StoryModelDisplayComponent } from 'stories/helpers/story-model-display.component';
 
 export default {
 	title: 'Documentation/Forms/Fields/RadioField/Angular',
 	decorators: [
 		moduleMetadata({
-			imports: [RadioGroupInputComponent, RadioComponent, FormFieldComponent, FormsModule, BrowserAnimationsModule],
+			imports: [RadioGroupInputComponent, RadioComponent, FormFieldComponent, FormsModule, BrowserAnimationsModule, StoryModelDisplayComponent],
 		}),
 	],
 	argTypes: {
@@ -18,22 +19,46 @@ export default {
 			control: {
 				type: 'select',
 			},
+			description: 'Modifie la taille du radio.',
 		},
 		inlineMessageState: {
 			options: ['default', 'success', 'warning', 'error'],
 			control: {
 				type: 'select',
 			},
+			description: "Modifie l'état de l'inline message.",
 		},
 		hiddenLabel: {
-			description: 'Masque le label en le conservant dans le DOM pour les lecteurs d\'écrans',
+			description: "Masque le label en le conservant dans le DOM pour les lecteurs d'écrans",
+		},
+		tooltip: {
+			if: { arg: 'hiddenLabel', truthy: false },
+			description: 'Affiche une icône (?) associée à une info-bulle.',
+		},
+		label: {
+			control: {
+				type: 'text',
+			},
+			description: "Modifie le label de l'input.",
+		},
+		required: {
+			control: {
+				type: 'boolean',
+			},
+			description: 'Marque le champ comme obligatoire.',
+		},
+		inlineMessage: {
+			control: {
+				type: 'text',
+			},
+			description: 'Ajoute un texte descriptif (aide, erreur, etc.) sous le champ de formulaire.',
 		},
 	},
 } as Meta;
 
-export const Basic: StoryObj<RadioGroupInputComponent & FormFieldComponent> = {
+export const Basic: StoryObj<RadioGroupInputComponent & FormFieldComponent & { required: boolean }> = {
 	render: (args, { argTypes }) => {
-		const { label, hiddenLabel, tooltip, inlineMessage, inlineMessageState, size, ...inputArgs } = args;
+		const { label, hiddenLabel, tooltip, inlineMessage, inlineMessageState, size, inline, ...inputArgs } = args;
 		return {
 			props: {
 				example: 1,
@@ -46,6 +71,7 @@ export const Basic: StoryObj<RadioGroupInputComponent & FormFieldComponent> = {
 					inlineMessage,
 					inlineMessageState,
 					size,
+					inline,
 				},
 				argTypes,
 			)}>
@@ -53,19 +79,20 @@ export const Basic: StoryObj<RadioGroupInputComponent & FormFieldComponent> = {
 	[(ngModel)]="example">
 		<lu-radio [value]="1" inlineMessage="Option text">Option A</lu-radio>
 		<lu-radio [value]="2" inlineMessage="Option text">Option B</lu-radio>
-		<lu-radio [value]="3" inlineMessage="Option text" disabled>Option C</lu-radio>
+		<lu-radio [value]="3" [inlineMessage]="template" disabled>Option C</lu-radio>
 	</lu-radio-group-input>
 </lu-form-field>
-
-{{example}}`),
+<ng-template #template><strong>Option</strong> text</ng-template>
+<pr-story-model-display>{{ example }}</pr-story-model-display>`),
 		};
 	},
 	args: {
+		hiddenLabel: false,
 		label: 'Label',
 		tooltip: 'Tooltip message',
-		hiddenLabel: false,
 		required: true,
 		inlineMessage: 'Helper message',
 		inlineMessageState: 'default',
+		inline: false,
 	},
 };

@@ -1,59 +1,84 @@
-@if (layout === 'fieldset') {
-<fieldset class="form-fieldset" [class.mod-S]="size === 'S'">
-	<legend class="formLabel" [class.u-mask]="hiddenLabel" attr.aria-hidden="{{hiddenLabel}}">
-		<ng-container *luPortal="label"></ng-container
-		><!--
-	--><sup class="formLabel-required" aria-hidden="true" *ngIf="required">*</sup>
-		<lu-icon
-			class="formLabel-info"
-			icon="signHelp"
-			[alt]="'?'"
-			*ngIf="tooltip"
-			[luTooltip]="tooltip"
-			[color]="invalidStatus ? 'error' : 'inherit'"
-		></lu-icon>
-	</legend>
-	<ng-container *ngTemplateOutlet="projectionTpl"></ng-container>
-	@if (inlineMessage || (invalidStatus ? errorInlineMessage : false)) {
-	<lu-inline-message
-		id="{{id}}-message"
-		[label]="(invalidStatus && errorInlineMessage) ? errorInlineMessage : inlineMessage"
-		[state]="invalidStatus ? 'error' : inlineMessageState"
-	></lu-inline-message>
-	}
-</fieldset>
+@if (layout() === "fieldset") {
+	<fieldset class="form-fieldset" [class.mod-inline]="inline()" [class.mod-S]="size() === 'S'">
+		<legend class="formLabel" [class.pr-u-mask]="hiddenLabel()" attr.aria-hidden="{{ hiddenLabel() }}">
+			<ng-container *luPortal="label()" />
+			@if (isInputRequired()) {
+				<sup class="formLabel-required" aria-hidden="true">*</sup>
+			}
+			@if (tooltip()) {
+				<lu-icon
+					class="formLabel-info"
+					icon="signHelp"
+					[alt]="'?'"
+					[luTooltip]="tooltip()"
+					[color]="invalidStatus() ? 'error' : 'inherit'"
+				/>
+			}
+			@if (tag()) {
+				<span class="tag formLabel-tag">{{ tag() }}</span>
+			}
+		</legend>
+		<ng-container *ngTemplateOutlet="projectionTpl" />
+		@if (inlineMessage() || (invalidStatus() ? errorInlineMessage() : false)) {
+			<lu-inline-message
+				id="{{ id() }}-message"
+				[label]="invalidStatus() && errorInlineMessage() ? errorInlineMessage() : inlineMessage()"
+				[state]="invalidStatus() ? 'error' : inlineMessageState()"
+			/>
+		}
+	</fieldset>
 } @else {
-<label
-	class="formLabel"
-	[class.is-error]="invalidStatus"
-	[class.mod-counter]="counter > 0"
-	id="{{id}}-label"
-	for="{{id}}"
-	[class.u-mask]="hiddenLabel"
-	attr.role="{{rolePresentationLabel ? 'presentation' : null}}"
->
-	<ng-container *luPortal="label"></ng-container
-	><!--
-	--><sup class="formLabel-required" aria-hidden="true" *ngIf="required">*</sup>
-
-	@if (tooltip) {
-	<lu-icon class="formLabel-info" icon="signHelp" [alt]="'?'" [luTooltip]="tooltip" [color]="invalidStatus ? 'error' : 'inherit'"></lu-icon>
-	} @if (counter > 0) {
-	<span class="formLabel-counter" [class.u-textError]="contentLength > counter" id="{{id}}-counter" aria-live="polite">
-		<span aria-hidden="true">{{ contentLength }}/{{ counter }}</span>
-		<span class="u-mask">{{ intl.counter | intlParams: { current: contentLength, max: counter } }}</span>
-	</span>
+	<label
+		class="formLabel"
+		[class.inputFramed-header-label]="framed"
+		[class.is-error]="invalidStatus()"
+		[class.mod-counter]="counter() > 0"
+		id="{{ id() }}-label"
+		for="{{ id() }}"
+		[class.pr-u-mask]="hiddenLabel()"
+		attr.role="{{ rolePresentationLabel() ? 'presentation' : null }}"
+	>
+		<ng-container *luPortal="label()" />
+		@if (isInputRequired()) {
+			<sup class="formLabel-required" aria-hidden="true">*</sup>
+		}
+		@if (tooltip()) {
+			<lu-icon class="formLabel-info" icon="signHelp" [alt]="'?'" [luTooltip]="tooltip()" [color]="invalidStatus() ? 'error' : 'inherit'" />
+		}
+		@if (tag()) {
+			<span class="formLabel-tag tag">{{ tag() }}</span>
+		}
+		@if (counter() > 0) {
+			<span class="formLabel-counter" [class.pr-u-colorTextCritical]="contentLength > counter()" id="{{ id() }}-counter" aria-live="polite">
+				<span aria-hidden="true">{{ contentLength }}/{{ counter() }}</span>
+				<span class="pr-u-mask">{{ intl.counter | intlParams: { current: contentLength, max: counter() } }}</span>
+			</span>
+		}
+	</label>
+	@if (AI()) {
+		<div class="form-field-contentOptional">
+			<ng-container *ngTemplateOutlet="projectionTpl" />
+			<lu-icon
+				class="pr-u-focusVisible pr-u-borderRadiusSmall"
+				[luTooltip]="iconAItooltip()"
+				size="S"
+				AI
+				icon="weatherStars"
+				[alt]="iconAIalt()"
+			/>
+		</div>
+	} @else {
+		<ng-container *ngTemplateOutlet="projectionTpl" />
 	}
-</label>
-<ng-container *ngTemplateOutlet="projectionTpl"></ng-container>
-@if (inlineMessage || (invalidStatus ? errorInlineMessage : false)) {
-<lu-inline-message
-	id="{{id}}-message"
-	[label]="(invalidStatus && errorInlineMessage) ? errorInlineMessage : inlineMessage"
-	[state]="invalidStatus ? 'error' : inlineMessageState"
-></lu-inline-message>
-} }
+	@if (inlineMessage() || (invalidStatus() ? errorInlineMessage() : false)) {
+		<lu-inline-message
+			id="{{ id() }}-message"
+			[label]="invalidStatus() && errorInlineMessage() ? errorInlineMessage() : inlineMessage()"
+			[state]="invalidStatus() ? 'error' : inlineMessageState()"
+		/>
+	}
+}
 
 <ng-template #projectionTpl>
-	<ng-content></ng-content>
+	<ng-content />
 </ng-template>

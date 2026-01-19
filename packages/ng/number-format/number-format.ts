@@ -4,7 +4,7 @@ const VALUE_TYPES: Intl.NumberFormatPartTypes[] = ['integer', 'decimal', 'fracti
 
 const DIGIT_TYPES: Intl.NumberFormatPartTypes[] = ['integer', 'decimal', 'fraction'];
 
-const SUFFIX_PREFIX_TYPES: Intl.NumberFormatPartTypes[] = ['percent', 'percentSign', 'currency', 'code', 'symbol', 'name', 'unit'];
+const SUFFIX_PREFIX_TYPES: Intl.NumberFormatPartTypes[] = ['percent', 'percentSign', 'currency', 'unit'];
 
 export class NumberFormat {
 	readonly locale: string;
@@ -36,16 +36,18 @@ export class NumberFormat {
 		...options
 	}: Intl.NumberFormatOptions): Intl.NumberFormatOptions {
 		style = style ?? 'decimal';
-		// https://developer.mozilla.org/fr/docs/Web/JavaScript/Reference/Global_Objects/Intl/NumberFormat/NumberFormat#minimumfractiondigits
-		minimumFractionDigits = Math.min(Math.max(minimumFractionDigits ?? 0, 0), 20);
-		// https://developer.mozilla.org/fr/docs/Web/JavaScript/Reference/Global_Objects/Intl/NumberFormat/NumberFormat#maximumfractiondigits
-		maximumFractionDigits = Math.min(Math.max(maximumFractionDigits ?? 2, minimumFractionDigits), 20);
-		// https://developer.mozilla.org/fr/docs/Web/JavaScript/Reference/Global_Objects/Intl/NumberFormat/NumberFormat#maximumfractiondigits
-		minimumIntegerDigits = Math.min(Math.max(minimumFractionDigits ?? 1, 1), 21);
-		// https://developer.mozilla.org/fr/docs/Web/JavaScript/Reference/Global_Objects/Intl/NumberFormat/NumberFormat#minimumsignificantdigits
-		minimumSignificantDigits = Math.min(Math.max(minimumSignificantDigits ?? 1, 1), 21);
-		// https://developer.mozilla.org/fr/docs/Web/JavaScript/Reference/Global_Objects/Intl/NumberFormat/NumberFormat#maximumsignificantdigits
-		maximumSignificantDigits = Math.min(Math.max(maximumSignificantDigits ?? 21, minimumSignificantDigits), 21);
+		if (style !== 'currency') {
+			// https://developer.mozilla.org/fr/docs/Web/JavaScript/Reference/Global_Objects/Intl/NumberFormat/NumberFormat#minimumfractiondigits
+			minimumFractionDigits = Math.min(Math.max(minimumFractionDigits ?? 0, 0), 20);
+			// https://developer.mozilla.org/fr/docs/Web/JavaScript/Reference/Global_Objects/Intl/NumberFormat/NumberFormat#maximumfractiondigits
+			maximumFractionDigits = Math.min(Math.max(maximumFractionDigits ?? 2, minimumFractionDigits), 20);
+			// https://developer.mozilla.org/fr/docs/Web/JavaScript/Reference/Global_Objects/Intl/NumberFormat/NumberFormat#maximumfractiondigits
+			minimumIntegerDigits = Math.min(Math.max(minimumFractionDigits ?? 1, 1), 21);
+			// https://developer.mozilla.org/fr/docs/Web/JavaScript/Reference/Global_Objects/Intl/NumberFormat/NumberFormat#minimumsignificantdigits
+			minimumSignificantDigits = Math.min(Math.max(minimumSignificantDigits ?? 1, 1), 21);
+			// https://developer.mozilla.org/fr/docs/Web/JavaScript/Reference/Global_Objects/Intl/NumberFormat/NumberFormat#maximumsignificantdigits
+			maximumSignificantDigits = Math.min(Math.max(maximumSignificantDigits ?? 21, minimumSignificantDigits), 21);
+		}
 		return {
 			...options,
 			style,
@@ -144,7 +146,6 @@ export class NumberFormat {
 				return this.#parseAndSplitInput(this.getFocusFormat(valueInRange));
 			}
 		}
-
 		return splittedInput;
 	}
 

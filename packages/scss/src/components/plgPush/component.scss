@@ -2,17 +2,23 @@
 @use '@lucca-front/scss/src/commons/utils/reset';
 @use '@lucca-front/scss/src/commons/utils/a11y';
 @use '@lucca-front/scss/src/components/link/exports' as link;
+@use '@lucca-front/scss/src/commons/utils/namespace';
 
-@mixin component($atRoot: 'without: rule') {
+@mixin component($atRoot: namespace.$defaultAtRoot) {
 	display: flex;
 	align-items: flex-start;
 	gap: var(--pr-t-spacings-100);
 	padding: var(--pr-t-spacings-100);
-	font-size: var(--sizes-S-fontSize);
-	line-height: var(--sizes-S-lineHeight);
+	font: var(--pr-t-font-body-S);
 	border: var(--commons-divider-width) var(--commons-divider-style) var(--palettes-brand-200);
-	border-radius: var(--commons-borderRadius-L);
+	border-radius: var(--pr-t-border-radius-default);
 	background-color: var(--palettes-brand-50);
+
+	.link {
+		@include link.brand;
+
+		display: inline-block;
+	}
 
 	@at-root ($atRoot) {
 		.plgPush-icons {
@@ -21,8 +27,8 @@
 			flex-shrink: 0;
 			align-items: center;
 			justify-content: center;
-			height: var(--components-plgPush-icon-size);
-			width: var(--components-plgPush-icon-size);
+			block-size: var(--components-plgPush-icon-size);
+			inline-size: var(--components-plgPush-icon-size);
 		}
 
 		.plgPush-icons-front {
@@ -44,7 +50,7 @@
 		}
 
 		.plgPush-content-title {
-			font-weight: 600;
+			font-weight: var(--pr-t-font-fontWeight-semibold);
 		}
 
 		.plgPush-content-link {
@@ -54,9 +60,8 @@
 			padding: var(--pr-t-spacings-0);
 		}
 
-		.link {
-			@include link.brand;
-			display: inline-block;
+		.plgPush-close {
+			margin-inline-start: auto;
 		}
 	}
 }

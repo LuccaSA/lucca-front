@@ -1,6 +1,7 @@
+@use '@lucca-front/icons/src/icon/exports' as icons;
 @use '@lucca-front/scss/src/commons/config';
 @use '@lucca-front/scss/src/commons/core';
-
+@use '@lucca-front/scss/src/commons/utils/keyframe';
 @use '@lucca-front/icons/src/commons/utils/icon';
 @use '@lucca-front/scss/src/commons/utils/loading';
 @use '@lucca-front/scss/src/commons/utils/a11y';
@@ -9,7 +10,7 @@
 
 @mixin disabled {
 	--components-button-cursor: default;
-	--components-button-color: var(--palettes-neutral-500); // disabled token
+	--components-button-color: var(--pr-t-color-text-disabled);
 	--components-button-backgroundColor: var(--commons-disabled-background);
 	--components-button-pointerEvents: none;
 
@@ -19,49 +20,126 @@
 }
 
 @mixin loading {
-	@include loading.spinner(var(--components-button-font-size));
-
-	--components-button-opacity: 0.4;
 	--components-button-pointerEvents: none;
 	--components-button-color: transparent;
 	--components-button-userSelect: none;
+	--components-button-boxShadow: none;
+	--components-button-backgroundColor: var(--palettes-500, var(--palettes-product-500));
+	--commons-loading-frontground: var(--palettes-50, var(--palettes-product-50));
+
+	@include loading.spinner(var(--pr-t-font-body-M-lineHeight));
+
+	.numericBadge {
+		@include numericBadge.state;
+	}
 }
 
 @mixin loadingS {
-	@include loading.spinner(var(--sizes-S-fontSize));
+	@include loading.spinner(var(--pr-t-font-body-S-lineHeight));
 }
 
-@mixin state {
+@mixin loadingXS {
+	@include loading.spinner(var(--pr-t-font-body-XS-lineHeight));
+
+	& {
+		--commons-loading-borderWidth: 2px;
+	}
+}
+
+@mixin loadingOutlined {
+	--components-button-backgroundColor: var(--palettes-neutral-0);
+	--commons-loading-frontground: var(--palettes-neutral-300);
+	--components-button-boxShadow: 0 0 0 var(--commons-divider-width) var(--palettes-neutral-100);
+}
+
+@mixin loadingGhost {
+	--components-button-backgroundColor: var(--palettes-neutral-50);
+	--commons-loading-frontground: var(--palettes-neutral-400);
+}
+
+@mixin success {
+	--components-button-backgroundColor: var(--palettes-500, var(--palettes-product-500));
 	--components-button-color: transparent;
 	--components-button-pointerEvents: none;
 	--components-button-userSelect: none;
 
 	&::after {
+		@include icon.generate('sign_confirm');
+
 		color: var(--palettes-neutral-0);
-		font-size: calc(1.5 * var(--components-button-font-size));
-		height: var(--components-button-line-height);
+		font-size: calc(1.5 * var(--pr-t-font-body-M-fontSize));
+		block-size: var(--pr-t-font-body-M-lineHeight);
 		inset: 0;
 		margin: auto;
 		position: absolute;
 	}
-}
 
-@mixin success {
-	@include core.cssvars('palettes', config.$success);
-
-	@include state;
-
-	&::after {
-		@include icon.generate('sign_confirm');
+	.numericBadge {
+		@include numericBadge.state;
 	}
 }
+
+@mixin loadingAI {
+	.lucca-icon {
+		@include icons.transparent;
+	}
+
+	&::before {
+		content: none;
+	}
+}
+
+@mixin successAI {
+	.lucca-icon {
+		@include icons.transparent;
+	}
+
+	&::before {
+		content: none;
+	}
+
+	&::after {
+		@include icons.AI;
+	}
+}
+
+@mixin successS {
+	&::after {
+		font-size: var(--pr-t-font-body-S-lineHeight);
+		block-size: var(--pr-t-font-body-S-lineHeight);
+	}
+}
+
+@mixin successXS {
+	&::after {
+		font-size: var(--pr-t-font-body-XS-lineHeight);
+		block-size: var(--pr-t-font-body-XS-lineHeight);
+	}
+}
+
+@mixin successOutlined {
+	--components-button-backgroundColor: var(--palettes-neutral-0);
+	--components-button-boxShadow: 0 0 0 var(--commons-divider-width) var(--palettes-neutral-100);
+
+	&::after {
+		color: var(--palettes-700, var(--palettes-product-700));
+	}
+}
+
+@mixin successGhost {
+	--components-button-backgroundColor: var(--palettes-neutral-50);
+	--components-button-boxShadow: none;
+
+	&::after {
+		color: var(--palettes-700, var(--palettes-product-700));
+	}
+}
+
 
 @mixin error {
-	@include core.cssvars('palettes', config.$critical);
+	animation-name: shake;
+	animation-iteration-count: 1;
+	animation-duration: var(--commons-animations-durations-standard);
 
-	@include state;
-
-	&::after {
-		@include icon.generate('sign_close');
-	}
+	@include keyframe.shake;
 }

@@ -1,20 +1,72 @@
-<h1>Status Badge</h1>
-
-<section class="contentSection">
-	<div class="statusBadge">Status</div>
-	<div class="statusBadge palette-neutral">Status</div>
-	<div class="statusBadge palette-success">Status</div>
-	<div class="statusBadge palette-warning">Status</div>
-	<div class="statusBadge palette-error">Status</div>
-</section>
-
-<section class="contentSection">
-	<div class="statusBadge mod-L">Status</div>
-	<div class="statusBadge mod-L palette-neutral">Status</div>
-	<div class="statusBadge mod-L palette-success">Status</div>
-	<div class="statusBadge mod-L palette-warning">Status</div>
-	<div class="statusBadge mod-L palette-error">Status</div>
-</section>
+<table class="demo-QAtable" style="width: 100%">
+	<tbody>
+		<tr>
+			<td></td>
+			<td style="width: 50%">
+				<div class="demo-QAtable-list">HTML</div>
+			</td>
+			<td style="width: 50%; table-layout: fixed">
+				<div class="demo-QAtable-list">Angular</div>
+			</td>
+		</tr>
+		<tr>
+			<td>Default</td>
+			<td>
+				<div class="demo-QAtable-list">
+					<div class="statusBadge">Status</div>
+				</div>
+			</td>
+			<td>
+				<div class="demo-QAtable-list">
+					<lu-status-badge label="Status" />
+				</div>
+			</td>
+		</tr>
+		<tr>
+			<td>Palette</td>
+			<td>
+				<div class="demo-QAtable-list">
+					<div class="statusBadge palette-neutral">Status</div>
+					<div class="statusBadge palette-success">Status</div>
+					<div class="statusBadge palette-warning">Status</div>
+					<div class="statusBadge palette-error">Status</div>
+				</div>
+			</td>
+			<td>
+				<div class="demo-QAtable-list">
+					<lu-status-badge label="Status" palette="product" />
+					<lu-status-badge label="Status" palette="neutral" />
+					<lu-status-badge label="Status" palette="success" />
+					<lu-status-badge label="Status" palette="warning" />
+					<lu-status-badge label="Status" palette="error" />
+				</div>
+			</td>
+		</tr>
+		<tr>
+			<td>Size</td>
+			<td>
+				<div class="demo-QAtable-list">
+					<div class="statusBadge mod-L">Status</div>
+					<div class="statusBadge mod-L palette-neutral">Status</div>
+					<div class="statusBadge mod-L palette-success">Status</div>
+					<div class="statusBadge mod-L palette-warning">Status</div>
+					<div class="statusBadge mod-L palette-error">Status</div>
+				</div>
+			</td>
+			<td>
+				<div class="demo-QAtable-list">
+					<lu-status-badge label="Status" size="M" />
+					<lu-status-badge label="Status" size="L" />
+					<lu-status-badge label="Status" size="L" palette="product" />
+					<lu-status-badge label="Status" size="L" palette="neutral" />
+					<lu-status-badge label="Status" size="L" palette="success" />
+					<lu-status-badge label="Status" size="L" palette="warning" />
+					<lu-status-badge label="Status" size="L" palette="error" />
+				</div>
+			</td>
+		</tr>
+	</tbody>
+</table>
 
 <!-- To tell the ui-diff tool that the page has finished rendering -->
 <span id="ready"></span>

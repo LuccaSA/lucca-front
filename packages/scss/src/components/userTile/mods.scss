@@ -1,0 +1,45 @@
+@use '@lucca-front/scss/src/components/avatar/exports' as avatar;
+
+@mixin XS {
+  --components-userTile-gap: var(--pr-t-spacings-100);
+  --components-userTile-title-fontSize: var(--pr-t-font-body-S-fontSize);
+  --components-userTile-title-lineHeight: var(--pr-t-font-body-S-lineHeight);
+  --components-userTile-info-fontSize: var(--pr-t-font-body-XS-fontSize);
+  --components-userTile-info-lineHeight: var(--pr-t-font-body-XS-lineHeight);
+
+  .avatar {
+    @include avatar.XS;
+  }
+}
+
+@mixin S {
+  --components-userTile-gap: var(--pr-t-spacings-100);
+
+  .avatar {
+    @include avatar.S;
+  }
+}
+
+@mixin L {
+  .avatar {
+    @include avatar.L;
+  }
+}
+
+@mixin XL { // Deprecated
+  .avatar {
+    @include avatar.XL;
+  }
+}
+
+@mixin XXL { // Deprecated
+  .avatar {
+    @include avatar.XXL;
+  }
+}
+
+@mixin XXXL { // Deprecated
+  .avatar {
+    @include avatar.XXXL;
+  }
+}

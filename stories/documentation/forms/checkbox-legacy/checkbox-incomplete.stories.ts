@@ -1,4 +1,4 @@
-import { Meta, StoryFn } from '@storybook/angular';
+import { Meta, StoryObj } from '@storybook/angular';
 
 interface CheckboxIncompleteStory {}
 
@@ -13,7 +13,7 @@ function getTemplate(args: CheckboxIncompleteStory): string {
 			<input class="checkbox-input is-incomplete" type="checkbox" checked="checked" aria-checked="mixed" />
 			<span class="checkbox-label">Checkbox</span>
 		</label>
-		<ul class="u-listReset pr-u-marginLeft300">
+		<ul class="pr-u-listReset pr-u-marginInlineStart300">
 			<li>
 				<label class="checkbox">
 					<input class="checkbox-input" type="checkbox" checked="checked" />
@@ -30,10 +30,12 @@ function getTemplate(args: CheckboxIncompleteStory): string {
 	`;
 }
 
-const Template: StoryFn<CheckboxIncompleteStory> = (args) => ({
+const Template = (args: CheckboxIncompleteStory) => ({
 	props: args,
 	template: getTemplate(args),
 });
 
-export const Incomplete = Template.bind({});
-Incomplete.args = {};
+export const Incomplete: StoryObj<CheckboxIncompleteStory> = {
+	args: {},
+	render: Template,
+};

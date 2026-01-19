@@ -6,12 +6,12 @@
 	@if map.has-key(config.$icons, $name) {
 		--icon-content: '#{map.get(config.$icons, $name)}';
 
-		font-weight: 400;
+		font-weight: var(--pr-t-font-fontWeight-regular);
 		display: inline-block;
 		vertical-align: text-bottom;
 		font-style: normal;
-		font-family: config.$font-name;
-		content: var(--icon-content);
+		font-family: var(--icon-fontFamily);
+		content: var(--icon-content) / '';
 		-webkit-font-smoothing: antialiased;
 		text-transform: none;
 	} @else {

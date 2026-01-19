@@ -1,6 +1,6 @@
 @mixin disabled {
 	~ .radio-label {
-		color: var(--palettes-neutral-500);
+		color: var(--palettes-neutral-600);
 		cursor: default;
 
 		&::before {
@@ -10,7 +10,7 @@
 		}
 
 		.radio-label-helper {
-			color: var(--palettes-neutral-500);
+			color: var(--palettes-neutral-600);
 		}
 	}
 }

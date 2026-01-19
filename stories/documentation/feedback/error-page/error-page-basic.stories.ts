@@ -1,4 +1,4 @@
-import { Meta, StoryFn } from '@storybook/angular';
+import { Meta, StoryObj } from '@storybook/angular';
 
 interface ErrorBasicStory {}
 
@@ -21,15 +21,18 @@ function getTemplate(args: ErrorBasicStory): string {
 	`;
 }
 
-const Template: StoryFn<ErrorBasicStory> = (args) => ({
+const Template = (args: ErrorBasicStory) => ({
 	props: args,
 	template: getTemplate(args),
 	styles: [
 		`
 		.errorPage {
-			height: 30rem;
+			block-size: 30rem;
 		}`,
 	],
 });
 
-export const Basic = Template.bind({});
+export const Basic: StoryObj<ErrorBasicStory> = {
+	args: {},
+	render: Template,
+};

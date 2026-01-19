@@ -1,13 +1,14 @@
 import { ActiveDescendantKeyManager } from '@angular/cdk/a11y';
-import { DestroyRef, EventEmitter, Injectable, QueryList, inject } from '@angular/core';
+import { computed, DestroyRef, EventEmitter, inject, Injectable, Injector, Signal } from '@angular/core';
 import { takeUntilDestroyed } from '@angular/core/rxjs-interop';
-import { Observable, asyncScheduler, debounceTime, filter, map, observeOn, take } from 'rxjs';
-import { ɵLuOptionComponent } from '../option';
+import { asyncScheduler, debounceTime, filter, map, Observable, observeOn, take } from 'rxjs';
+import { LuOptionComparer } from '../select.model';
+import { CoreSelectPanelElement } from './selectable-item';
 
 interface CoreSelectKeyManagerOptions<T> {
-	queryList: QueryList<ɵLuOptionComponent<T>>;
-	options$: Observable<T[]>;
-	optionComparer: (a: T, b: T) => boolean;
+	queryList: Signal<readonly CoreSelectPanelElement<T>[]>;
+	options$: Observable<readonly T[]>;
+	optionComparer: LuOptionComparer<T>;
 	activeOptionIdChanged$: EventEmitter<string>;
 	clueChange$: Observable<string>;
 }
@@ -15,13 +16,28 @@ interface CoreSelectKeyManagerOptions<T> {
 @Injectable()
 export class CoreSelectKeyManager<T> {
 	#destroyRef = inject(DestroyRef);
-	#cdkKeyManager?: ActiveDescendantKeyManager<ɵLuOptionComponent<T>>;
+	#cdkKeyManager?: ActiveDescendantKeyManager<CoreSelectPanelElement<T>>;
 	#hasSearchChanged = false;
 	#options?: CoreSelectKeyManagerOptions<T>;
+	#injector = inject(Injector);
+
+	#queryList: Signal<CoreSelectPanelElement<T>[]>;
 
 	init(options: CoreSelectKeyManagerOptions<T>): void {
 		this.#options = options;
-		this.#cdkKeyManager = new ActiveDescendantKeyManager(options.queryList).withHomeAndEnd();
+		this.#queryList = computed(() => {
+			return [...options.queryList()].sort((a, b) => {
+				const comparison = a.elementRef.nativeElement.compareDocumentPosition(b.elementRef.nativeElement);
+				if (comparison & Node.DOCUMENT_POSITION_FOLLOWING) {
+					return -1;
+				}
+				if (comparison & Node.DOCUMENT_POSITION_PRECEDING) {
+					return 1;
+				}
+				return 0;
+			});
+		});
+		this.#cdkKeyManager = new ActiveDescendantKeyManager(this.#queryList, this.#injector).withHomeAndEnd();
 		this.#bindClueChange(options.clueChange$);
 		this.#bindOptionsChange(options);
 		this.#bindActiveOptionIdChanged(options.activeOptionIdChanged$);
@@ -32,7 +48,7 @@ export class CoreSelectKeyManager<T> {
 		this.#cdkKeyManager?.onKeydown(event);
 	}
 
-	get activeItem(): ɵLuOptionComponent<T> | undefined {
+	get activeItem(): CoreSelectPanelElement<T> | undefined {
 		return this.#cdkKeyManager?.activeItem;
 	}
 
@@ -71,7 +87,7 @@ export class CoreSelectKeyManager<T> {
 	#bindActiveOptionIdChanged(activeOptionIdChanged$: EventEmitter<string>): void {
 		this.#cdkKeyManager.change
 			.pipe(
-				map(() => this.#cdkKeyManager.activeItem?.id),
+				map(() => this.#cdkKeyManager.activeItem?.idAttribute()),
 				takeUntilDestroyed(this.#destroyRef),
 			)
 			.subscribe((activeDescendant) => activeOptionIdChanged$.emit(activeDescendant));
@@ -83,14 +99,14 @@ export class CoreSelectKeyManager<T> {
 	 * 	- set to first item if search has changed
 	 * 	- set to first item if no active item
 	 */
-	#bindOptionsChange({ options$, queryList }: CoreSelectKeyManagerOptions<T>): void {
+	#bindOptionsChange({ options$ }: CoreSelectKeyManagerOptions<T>): void {
 		options$
 			.pipe(
 				debounceTime(0), // Wait until QueryList is updated
 				takeUntilDestroyed(this.#destroyRef),
 			)
 			.subscribe(() => {
-				if (queryList.length === 0) {
+				if (this.#queryList().length === 0) {
 					this.#cdkKeyManager.setActiveItem(-1);
 				} else if (this.#hasSearchChanged) {
 					this.#hasSearchChanged = false;

@@ -1,0 +1,74 @@
+@use '@lucca-front/scss/src/commons/utils/namespace';
+@use '@lucca-front/icons/src/icon/exports' as icon;
+
+@mixin component($atRoot: namespace.$defaultAtRoot) {
+	display: block;
+	max-inline-size: var(--components-dateRangeField-maxWidth);
+
+	@at-root ($atRoot) {
+		.dateRangeField-fieldset {
+			margin: 0;
+			padding: 0;
+			border: 0;
+		}
+
+		.dateRangeField-fieldset-content {
+			position: relative;
+			inline-size: var(--components-dateRangeField-content-width);
+
+			&::before {
+				content: '';
+				position: absolute;
+				background-color: var(--components-dateRangeField-content-background);
+				border-radius: var(--pr-t-border-radius-50);
+				pointer-events: none;
+				inset: var(--pr-t-spacings-50);
+				inset-inline-end: calc(var(--components-dateRangeField-content-inlineEnd) - var(--pr-t-spacings-50));
+			}
+
+			&.is-highlighted {
+				--components-dateRangeField-content-background: var(--palettes-product-100);
+				--components-dateRangeField-content-placeholderColor: var(--palettes-product-400);
+
+				.form-field:has(.dateRangeField-fieldset-input-value[aria-invalid='true']) & {
+					--components-dateRangeField-content-background: var(--palettes-critical-100);
+				}
+			}
+
+			.form-field:has(.dateRangeField-fieldset-input-value[aria-invalid='true']) & {
+				--components-dateRangeField-content-placeholderColor: var(--palettes-critical-400);
+			}
+
+			&.mod-start {
+				--components-dateRangeField-content-width: calc(50% - var(--pr-t-spacings-300) - var(--pr-t-spacings-50));
+				--components-dateRangeField-content-inlineEnd: calc(var(--pr-t-spacings-200) + var(--pr-t-spacings-50));
+			}
+		}
+
+		.dateRangeField-fieldset-input-value {
+			&.textField-input-value {
+				position: relative;
+				padding-inline-start: var(--components-dateRangeField-content-inlineStart);
+				padding-inline-end: var(--components-dateRangeField-content-inlineEnd);
+
+				&::placeholder {
+					color: var(--components-dateRangeField-content-placeholderColor);
+				}
+
+				.form-field.mod-S & {
+					--components-dateRangeField-content-inlineStart: var(--pr-t-spacings-100);
+				}
+			}
+		}
+
+		.dateRangeField-fieldset-arrow {
+			position: absolute;
+			inset-inline-start: calc(50% - calc(var(--pr-t-spacings-400) + var(--pr-t-spacings-150)));
+			color: var(--palettes-neutral-700);
+			pointer-events: none;
+			border-radius: var(--pr-t-border-radius-default);
+
+			@include icon.S;
+		}
+	}
+}

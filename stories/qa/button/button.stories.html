@@ -1,187 +1,354 @@
-<h1>Button</h1>
-<!-- Basics -->
-<section class="contentSection">
-	<h2>Mods</h2>
-	<div class="u-displayFlex pr-u-gap100 u-alignItemsCenter">
-		<button type="button" class="button">Default</button>
-		<button type="button" class="button mod-outlined">Outlined</button>
-		<button type="button" class="button mod-text palette-product">Text</button>
-		<button type="button" class="button mod-text">Text</button>
-		<div style="display: inline-block; background: var(--palettes-neutral-900); padding: 0.5rem; margin-left: 0.5rem">
-			<button type="button" class="button mod-text mod-invert">Text inverted</button>
-		</div>
-	</div>
-</section>
+<table class="demo-QAtable">
+	<tbody>
+		<tr>
+			<td></td>
+			<td>
+				<div class="demo-QAtable-list">HTML</div>
+			</td>
+			<td>
+				<div class="demo-QAtable-list">Angular</div>
+			</td>
+		</tr>
+		<tr>
+			<td>Default</td>
+			<td>
+				<div class="demo-QAtable-list">
+					<button type="button" class="button">Button</button>
+				</div>
+			</td>
+			<td><button type="button" luButton>Button</button></td>
+		</tr>
+		<tr>
+			<td>Style</td>
+			<td>
+				<div class="demo-QAtable-list">
+					<button type="button" class="button mod-outlined">Outlined</button>
+					<button type="button" class="button mod-outlined palette-product">Outlined product</button>
+					<button type="button" class="button mod-ghost">Ghost</button>
+					<button type="button" class="button mod-AI">AI</button>
+					<button type="button" class="button mod-AI mod-onlyIcon">
+						<span aria-hidden="true" class="lucca-icon icon-weatherStars"></span>
+					</button>
+				</div>
+			</td>
+			<td>
+				<div class="demo-QAtable-list">
+					<button type="button" luButton="outlined">Outlined</button>
+					<button type="button" luButton="outlined" palette="product">Outlined product</button>
+					<button type="button" luButton="ghost">Ghost</button>
+					<button type="button" luButton="AI">AI</button>
+					<button type="button" luButton="AI"><lu-icon icon="weatherStars" alt="Alt text" /></button>
+				</div>
+			</td>
+		</tr>
+		<tr>
+			<td>Palettes</td>
+			<td>
+				<div class="demo-QAtable-list">
+					<button type="button" class="button">Default</button>
+					<button type="button" class="button palette-product">Product</button>
+					<button type="button" class="button palette-brand">Brand</button>
+					<button type="button" class="button palette-primary">Primary</button>
+					<button type="button" class="button palette-secondary">Secondary</button>
+					<button type="button" class="button palette-cleemy">Cleemy</button>
+					<button type="button" class="button palette-timmi">Timmi</button>
+					<button type="button" class="button palette-pagga">Pagga</button>
+					<button type="button" class="button palette-coreHR">Core HR</button>
+					<button type="button" class="button palette-cc">CC</button>
+					<button type="button" class="button palette-poplee">Poplee</button>
+					<button type="button" class="button palette-neutral">Neutral</button>
+					<button type="button" class="button palette-grey">Gray</button>
+				</div>
+			</td>
+			<td>
+				<div class="demo-QAtable-list">
+					<button type="button" luButton>Default</button>
+					<button type="button" luButton palette="product">Product</button>
+					<button type="button" luButton palette="brand">Brand</button>
+					<button type="button" luButton palette="primary">Primary</button>
+					<button type="button" luButton palette="secondary">Secondary</button>
+					<button type="button" luButton palette="cleemy">Cleemy</button>
+					<button type="button" luButton palette="timmi">Timmi</button>
+					<button type="button" luButton palette="pagga">Pagga</button>
+					<button type="button" luButton palette="coreHR">Core HR</button>
+					<button type="button" luButton palette="cc">CC</button>
+					<button type="button" luButton palette="poplee">Poplee</button>
+					<button type="button" luButton palette="neutral">Neutral</button>
+					<button type="button" luButton palette="grey">Gray</button>
+				</div>
+			</td>
+		</tr>
+		<tr>
+			<td>Invert</td>
+			<td>
+				<div class="demo-QAtable-list mod-black">
+					<button type="button" class="button mod-ghost mod-invert">Ghost invert</button>
+					<button type="button" class="button mod-AI mod-invert">AI invert</button>
+					<button type="button" class="button mod-AI mod-invert mod-onlyIcon">
+						<span aria-hidden="true" class="lucca-icon icon-weatherStars"></span>
+					</button>
+				</div>
+			</td>
+			<td>
+				<div class="demo-QAtable-list mod-black">
+					<button type="button" luButton="ghost-invert">Ghost invert</button>
+					<button type="button" luButton="AI-invert">AI invert</button>
+					<button type="button" luButton="AI-invert"><lu-icon icon="weatherStars" alt="Alt text" /></button>
+				</div>
+			</td>
+		</tr>
+		<tr>
+			<td>Link</td>
+			<td>
+				<div class="demo-QAtable-list">
+					<a href="#" type="button" class="button">Link</a>
+					<a href="#" type="button" class="button mod-outlined">Link outlined</a>
+				</div>
+			</td>
+			<td>
+				<div class="demo-QAtable-list">
+					<a href="#" type="button" luButton>Link</a>
+					<a href="#" type="button" luButton="outlined">Link outlined</a>
+				</div>
+			</td>
+		</tr>
+		<tr>
+			<td>Critical</td>
+			<td>
+				<div class="demo-QAtable-list">
+					<button type="button" class="button palette-error">Critical</button>
+					<button type="button" class="button palette-error mod-outlined">Critical outlined</button>
+					<button type="button" class="button palette-error mod-ghost">Critical text</button>
+				</div>
+			</td>
+			<td>
+				<div class="demo-QAtable-list">
+					<button type="button" luButton palette="error">Critical</button>
+					<button type="button" luButton="outlined" palette="error">Critical outlined</button>
+					<button type="button" luButton="ghost" palette="error">Critical text</button>
+				</div>
+			</td>
+		</tr>
+		<tr>
+			<td>Size</td>
+			<td>
+				<div class="demo-QAtable-list">
+					<button type="button" class="button mod-M">Size M</button>
+					<button type="button" class="button mod-S">Size S</button>
+					<button type="button" class="button mod-XS">Size XS</button>
+				</div>
+			</td>
+			<td>
+				<div class="demo-QAtable-list">
+					<button type="button" luButton>Size M</button>
+					<button type="button" luButton size="S">Size S</button>
+					<button type="button" luButton size="XS">Size XS</button>
+				</div>
+			</td>
+		</tr>
+		<tr>
+			<td>Counter</td>
+			<td>
+				<div class="demo-QAtable-list">
+					<button type="button" class="button">Counter<span class="numericBadge">7</span></button>
+					<button type="button" class="button mod-S">Counter S<span class="numericBadge">7</span></button>
+					<button type="button" class="button mod-XS">Counter XS<span class="numericBadge">7</span></button>
+				</div>
+			</td>
+			<td>
+				<div class="demo-QAtable-list">
+					<button type="button" luButton>Counter<lu-numeric-badge [value]="7" /></button>
+					<button type="button" luButton size="S">Counter S<lu-numeric-badge [value]="7" /></button>
+					<button type="button" luButton size="XS">Counter XS<lu-numeric-badge [value]="7" /></button>
+				</div>
+			</td>
+		</tr>
+		<tr>
+			<td>With icon</td>
+			<td>
+				<div class="demo-QAtable-list">
+					<button type="button" class="button mod-withIcon mod-iconOnLeft">
+						<span aria-hidden="true" class="lucca-icon icon-mailPaperPlane"></span>With icon
+					</button>
+					<button type="button" class="button mod-withIcon mod-iconOnRight">
+						With icon<span aria-hidden="true" class="lucca-icon icon-mailPaperPlane"></span>
+					</button>
+					<button type="button" class="button mod-withIcon mod-S mod-iconOnLeft">
+						<span aria-hidden="true" class="lucca-icon icon-mailPaperPlane"></span>With icon
+					</button>
+					<button type="button" class="button mod-withIcon mod-S mod-iconOnRight">
+						With icon<span aria-hidden="true" class="lucca-icon icon-mailPaperPlane"></span>
+					</button>
+					<button type="button" class="button mod-withIcon mod-XS mod-iconOnLeft">
+						<span aria-hidden="true" class="lucca-icon icon-mailPaperPlane"></span>With icon
+					</button>
+					<button type="button" class="button mod-withIcon mod-XS mod-iconOnRight">
+						With icon<span aria-hidden="true" class="lucca-icon icon-mailPaperPlane"></span>
+					</button>
+				</div>
+			</td>
+			<td>
+				<div class="demo-QAtable-list">
+					<button type="button" luButton><lu-icon icon="mailPaperPlane" alt="Alt text" />With icon</button>
+					<button type="button" luButton>With icon<lu-icon icon="mailPaperPlane" alt="Alt text" /></button>
+					<button type="button" luButton size="S"><lu-icon icon="mailPaperPlane" alt="Alt text" />With icon</button>
+					<button type="button" luButton size="S">With icon<lu-icon icon="mailPaperPlane" alt="Alt text" /></button>
+					<button type="button" luButton size="XS"><lu-icon icon="mailPaperPlane" alt="Alt text" />With icon</button>
+					<button type="button" luButton size="XS">With icon<lu-icon icon="mailPaperPlane" alt="Alt text" /></button>
+				</div>
+			</td>
+		</tr>
+		<tr>
+			<td>Icon only</td>
+			<td>
+				<div class="demo-QAtable-list">
+					<a href="#" class="button mod-onlyIcon"><span aria-hidden="true" class="lucca-icon icon-heart"></span></a>
+					<a href="#" class="button mod-onlyIcon mod-outlined"><span aria-hidden="true" class="lucca-icon icon-heart"></span></a>
+					<a href class="button mod-onlyIcon mod-ghost"><span aria-hidden="true" class="lucca-icon icon-heart"></span></a>
+					<a href="#" class="button mod-onlyIcon mod-ghost palette-product"
+						><span aria-hidden="true" class="lucca-icon icon-heart"></span
+					></a>
+					<button type="button" class="button mod-onlyIcon mod-outlined">
+						<span aria-hidden="true" class="lucca-icon icon-heart"></span>
+					</button>
+					<button type="button" class="button mod-onlyIcon mod-outlined mod-S">
+						<span aria-hidden="true" class="lucca-icon icon-heart"></span>
+					</button>
+					<button type="button" class="button mod-onlyIcon mod-outlined mod-XS">
+						<span aria-hidden="true" class="lucca-icon icon-heart"></span>
+					</button>
+					<button type="button" class="button mod-onlyIcon mod-outlined mod-critical">
+						<span aria-hidden="true" class="lucca-icon icon-trashDelete"></span>
+					</button>
+					<button type="button" class="button mod-onlyIcon mod-ghost mod-critical">
+						<span aria-hidden="true" class="lucca-icon icon-trashDelete"></span>
+					</button>
+				</div>
+			</td>
+			<td>
+				<div class="demo-QAtable-list">
+					<button type="button" luButton><lu-icon icon="heart" /><span class="pr-u-mask">Alt text</span></button>
+					<button type="button" luButton="outlined"><lu-icon icon="heart" /><span class="pr-u-mask">Alt text</span></button>
+					<button type="button" luButton="ghost"><lu-icon icon="heart" /><span class="pr-u-mask">Alt text</span></button>
+					<button type="button" luButton="ghost" palette="product"><lu-icon icon="heart" /><span class="pr-u-mask">Alt text</span></button>
+					<button type="button" luButton="outlined"><lu-icon icon="heart" /><span class="pr-u-mask">Alt text</span></button>
+					<button type="button" luButton="outlined" size="S"><lu-icon icon="heart" /><span class="pr-u-mask">Alt text</span></button>
+					<button type="button" luButton="outlined" size="XS"><lu-icon icon="heart" /><span class="pr-u-mask">Alt text</span></button>
+					<button type="button" luButton="outlined" delete><lu-icon icon="trash" /><span class="pr-u-mask">Alt text</span></button>
+					<button type="button" luButton="ghost" delete><lu-icon icon="trash" /><span class="pr-u-mask">Alt text</span></button>
+				</div>
+			</td>
+		</tr>
+		<tr>
+			<td>States</td>
+			<td>
+				<div class="demo-QAtable-list">
+					<button type="button" class="button is-loading">Loading</button>
+					<button type="button" class="button mod-outlined is-loading">Loading</button>
+					<button type="button" class="button mod-ghost is-loading">Loading</button>
+					<button type="button" class="button is-success">Success</button>
+					<button type="button" class="button mod-outlined is-success">Success</button>
+					<button type="button" class="button mod-ghost is-success">Success</button>
+					<button type="button" class="button is-error">Error (reset .is-error class)</button>
+					<button type="button" class="button is-loading mod-S">Loading S</button>
+					<button type="button" class="button is-success mod-S">Success S</button>
+					<button type="button" class="button is-loading mod-XS">Loading XS</button>
+					<button type="button" class="button is-success mod-XS">Success XS</button>
+				</div>
+			</td>
+			<td>
+				<div class="demo-QAtable-list">
+					<button type="button" luButton state="loading">Loading</button>
+					<button type="button" luButton="outlined" state="loading">Loading</button>
+					<button type="button" luButton="ghost" state="loading">Loading</button>
+					<button type="button" luButton state="success">Success</button>
+					<button type="button" luButton="outlined" state="success">Success</button>
+					<button type="button" luButton="ghost" state="success">Success</button>
+					<button type="button" luButton state="error">Error (reset .is-error class)</button>
+					<button type="button" luButton state="loading" size="S">Loading S</button>
+					<button type="button" luButton state="success" size="S">Success S</button>
+					<button type="button" luButton state="loading" size="XS">Loading XS</button>
+					<button type="button" luButton state="success" size="XS">Success XS</button>
+				</div>
+			</td>
+		</tr>
+		<tr>
+			<td>Disabled</td>
+			<td>
+				<div class="demo-QAtable-list">
+					<button type="button" class="button" disabled>Disabled</button>
+					<button type="button" class="button" aria-disabled="true">Disabled</button>
+					<button type="button" class="button is-disabled">Disabled</button>
+					<button type="button" class="button palette-product is-disabled">Disabled</button>
+					<button type="button" class="button" disabled>Disabled<span class="numericBadge palette-product">7</span></button>
+					<button type="button" class="button palette-error mod-outlined" disabled>Disabled</button>
+					<button type="button" class="button mod-outlined" disabled>Disabled</button>
+					<button type="button" class="button mod-ghost" disabled>Disabled</button>
+				</div>
+			</td>
+			<td>
+				<div class="demo-QAtable-list">
+					<button type="button" luButton disabled>Disabled</button>
+					<button type="button" luButton aria-disabled="true">Disabled</button>
+					<button type="button" luButton disabled palette="product">Disabled</button>
+					<button type="button" luButton disabled>Disabled<lu-numeric-badge [value]="7" /></button>
+					<button type="button" luButton="outlined" disabled>Disabled</button>
+					<button type="button" luButton="ghost" disabled>Disabled</button>
+				</div>
+			</td>
+		</tr>
+		<tr>
+			<td>Groups</td>
+			<td>
+				<div class="demo-QAtable-list">
+					<ul class="button-group">
+						<li class="button-group-item"><button type="button" class="button">Group</button></li>
+						<li class="button-group-item"><button type="button" class="button">Group</button></li>
+						<li class="button-group-item"><button type="button" class="button">Group</button></li>
+						<li class="button-group-item">
+							<button type="button" class="button mod-more">
+								<span class="lucca-icon icon-arrowChevronBottom" aria-hidden="true"></span>
+								<span class="pr-u-mask">Plus d'actions</span>
+							</button>
+						</li>
+					</ul>
 
-<section class="contentSection">
-	<h2>Link</h2>
-	<div class="u-displayFlex pr-u-gap100 u-alignItemsCenter">
-		<a href="#" type="button" class="button">Link button</a>
-		<a href="#" type="button" class="button mod-outlined">Link outlined button</a>
-	</div>
-</section>
-
-<!-- Palette -->
-<section class="contentSection">
-	<h2>Critical</h2>
-	<div class="u-displayFlex pr-u-gap100 u-alignItemsCenter">
-		<button type="button" class="button palette-error">Critical</button>
-		<button type="button" class="button palette-error mod-outlined">Critical outlined</button>
-		<button type="button" class="button palette-error mod-text">Critical text</button>
-	</div>
-</section>
-
-<!-- Size -->
-<section class="contentSection">
-	<h2>Size</h2>
-	<div class="u-displayFlex pr-u-gap100 u-alignItemsCenter">
-		<button type="button" class="button">M button</button>
-		<button type="button" class="button mod-S">S button</button>
-		<button type="button" class="button mod-XS">XS button</button>
-	</div>
-</section>
-
-<!-- Counter -->
-<section class="contentSection">
-	<h2>Counter</h2>
-	<div class="u-displayFlex pr-u-gap100 u-alignItemsCenter">
-		<button type="button" class="button">Counting button<span class="numericBadge">7</span></button>
-		<button type="button" class="button mod-S">Counting button<span class="numericBadge">7</span></button>
-		<button type="button" class="button mod-XS">Counting button<span class="numericBadge">7</span></button>
-	</div>
-</section>
-
-<!-- Icons -->
-<section class="contentSection">
-	<h2>Icons</h2>
-	<div class="u-displayFlex pr-u-gap100 u-alignItemsCenter pr-u-marginBottom200">
-		<button type="button" class="button mod-withIcon">
-			<span aria-hidden="true" class="lucca-icon icon-floppyDiskSave"></span>Sauvegarder
-		</button>
-		<button type="button" class="button mod-withIcon">
-			<span aria-hidden="true" class="lucca-icon icon-mailPaperPlane"></span>Envoyer
-		</button>
-		<button type="button" class="button mod-withIcon">
-			Envoyer<span aria-hidden="true" class="lucca-icon icon-mailPaperPlane"></span>
-		</button>
-	</div>
-	<div class="u-displayFlex pr-u-gap100 u-alignItemsCenter pr-u-marginBottom200">
-		<button type="button" class="button mod-withIcon mod-S">
-			<span aria-hidden="true" class="lucca-icon icon-floppyDiskSave"></span>Sauvegarder
-		</button>
-		<button type="button" class="button mod-withIcon mod-S">
-			<span aria-hidden="true" class="lucca-icon icon-mailPaperPlane"></span>Envoyer
-		</button>
-		<button type="button" class="button mod-withIcon mod-S">
-			Envoyer<span aria-hidden="true" class="lucca-icon icon-mailPaperPlane"></span>
-		</button>
-	</div>
-	<div class="u-displayFlex pr-u-gap100 u-alignItemsCenter pr-u-marginBottom200">
-		<button type="button" class="button mod-withIcon mod-XS">
-			<span aria-hidden="true" class="lucca-icon icon-arrowSync"></span>Sauvegarder
-		</button>
-		<button type="button" class="button mod-withIcon mod-XS">
-			<span aria-hidden="true" class="lucca-icon icon-floppyDiskSave"></span>Envoyer
-		</button>
-		<button type="button" class="button mod-withIcon mod-XS">
-			Envoyer<span aria-hidden="true" class="lucca-icon icon-floppyDiskSave"></span>
-		</button>
-	</div>
-	<div class="u-displayFlex pr-u-gap100 u-alignItemsCenter pr-u-marginBottom200">
-		<a href="#" class="button mod-onlyIcon"><span aria-hidden="true" class="lucca-icon icon-heart"></span></a>
-		<a href="#" class="button mod-onlyIcon mod-outlined"><span aria-hidden="true" class="lucca-icon icon-heart"></span></a>
-		<a href class="button mod-onlyIcon mod-text"><span aria-hidden="true" class="lucca-icon icon-heart"></span></a>
-		<a href="actionIcon"><span aria-hidden="true" class="lucca-icon icon-heart"></span></a>
-	</div>
-	<div class="u-displayFlex pr-u-gap100 u-alignItemsCenter pr-u-marginBottom200">
-		<button type="button" class="button mod-onlyIcon mod-outlined"><span aria-hidden="true" class="lucca-icon icon-heart"></span></button>
-		<button type="button" class="button mod-onlyIcon mod-outlined mod-S">
-			<span aria-hidden="true" class="lucca-icon icon-heart"></span>
-		</button>
-		<button type="button" class="button mod-onlyIcon mod-outlined mod-XS">
-			<span aria-hidden="true" class="lucca-icon icon-heart"></span>
-		</button>
-	</div>
-	<div class="u-displayFlex pr-u-gap100 u-alignItemsCenter pr-u-marginBottom200">
-		<button type="button" class="button mod-onlyIcon mod-outlined mod-delete">
-			<span aria-hidden="true" class="lucca-icon icon-trashDelete"></span>
-		</button>
-		<button type="button" class="button mod-onlyIcon mod-text mod-delete">
-			<span aria-hidden="true" class="lucca-icon icon-trashDelete"></span>
-		</button>
-	</div>
-</section>
-
-<!-- States -->
-<section class="contentSection">
-	<h2>States</h2>
-	<!-- UI-Diff currently doesn't support css animations -->
-	<div class="u-displayFlex pr-u-gap100 u-alignItemsCenter">
-		<button type="button" class="button is-loading">Loading</button>
-		<button type="button" class="button mod-outlined is-loading">Loading</button>
-		<button type="button" class="button mod-text is-loading">Loading</button>
-		<button type="button" class="button is-success">Success</button>
-		<button type="button" class="button mod-outlined is-success">Success</button>
-		<button type="button" class="button mod-text is-success">Success</button>
-		<button type="button" class="button is-error">Success</button>
-		<button type="button" class="button mod-outlined is-error">Success</button>
-		<button type="button" class="button mod-text is-error">Success</button>
-	</div>
-</section>
-
-<!-- Disabled  -->
-<section class="contentSection">
-	<h2>Disabled</h2>
-	<div class="u-displayFlex pr-u-gap100 u-flexWrapWrap u-alignItemsCenter">
-		<button type="button" class="button" disabled>Disabled button</button>
-		<button type="button" class="button palette-product is-disabled">.is-disabled product button</button>
-		<button type="button" class="button palette-error mod-outlined" disabled>Critical outlined disabled button</button>
-		<button type="button" class="button is-disabled">Disabled button</button>
-		<button type="button" class="button mod-outlined" disabled>Disabled button</button>
-		<button type="button" class="button mod-text" disabled>Disabled button</button>
-		<button type="button" class="button" disabled>Disabled button<span class="numericBadge palette-product">7</span></button>
-	</div>
-</section>
-
-<!-- Groups -->
-<section class="contentSection">
-	<h2>Group of buttons</h2>
-	<div class="pr-u-marginBottom100">
-		<ul class="button-group">
-			<li class="button-group-item"><button type="button" class="button">Bouton</button></li>
-			<li class="button-group-item"><button type="button" class="button">Bouton</button></li>
-			<li class="button-group-item"><button type="button" class="button">Bouton</button></li>
-			<li class="button-group-item">
-				<button type="button" class="button mod-more">
-					<span class="lucca-icon icon-arrowChevronBottom" aria-hidden="true"></span>
-					<span class="u-mask">Plus d'actions</span>
-				</button>
-			</li>
-		</ul>
-	</div>
-	<div>
-		<ul class="button-group mod-outlined">
-			<li class="button-group-item"><button type="button" class="button mod-outlined">Bouton</button></li>
-			<li class="button-group-item"><button type="button" class="button mod-outlined">Bouton</button></li>
-			<li class="button-group-item"><button type="button" class="button mod-outlined">Bouton</button></li>
-			<li class="button-group-item">
-				<button type="button" class="button mod-outlined mod-more">
-					<span class="lucca-icon icon-arrowChevronBottom" aria-hidden="true"></span>
-					<span class="u-mask">Plus d'actions</span>
-				</button>
-			</li>
-		</ul>
-	</div>
-</section>
-
-<!-- Groups -->
-<section class="contentSection">
-	<h2>More button</h2>
-	<div class="button-group mod-more">
-		<button type="button" class="button">Main action</button>
-		<button type="button" class="button mod-more"></button>
-	</div>
-</section>
+					<ul class="button-group mod-outlined">
+						<li class="button-group-item"><button type="button" class="button mod-outlined">Group</button></li>
+						<li class="button-group-item"><button type="button" class="button mod-outlined">Group</button></li>
+						<li class="button-group-item"><button type="button" class="button mod-outlined">Group</button></li>
+						<li class="button-group-item">
+							<button type="button" class="button mod-outlined mod-more">
+								<span class="lucca-icon icon-arrowChevronBottom" aria-hidden="true"></span>
+								<span class="pr-u-mask">Plus d'actions</span>
+							</button>
+						</li>
+					</ul>
+					<div class="button-group mod-more">
+						<button type="button" class="button">Group</button>
+						<button type="button" class="button mod-more"></button>
+					</div>
+				</div>
+			</td>
+			<td></td>
+		</tr>
+		<tr>
+			<td>Deprecated</td>
+			<td>
+				<div class="demo-QAtable-list">
+					<button type="button" class="button mod-text">Text</button>
+					<button type="button" class="button mod-ghost palette-product">Text</button>
+				</div>
+			</td>
+			<td>
+				<div class="demo-QAtable-list">
+					<button type="button" luButton="text">Text</button>
+					<button type="button" luButton="ghost" palette="product">Text</button>
+				</div>
+			</td>
+		</tr>
+	</tbody>
+</table>
 
 <!-- To tell the ui-diff tool that the page has finished rendering -->
 <span id="ready"></span>

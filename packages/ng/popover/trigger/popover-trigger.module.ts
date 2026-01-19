@@ -1,7 +1,10 @@
+import { OverlayModule } from '@angular/cdk/overlay';
 import { NgModule } from '@angular/core';
 import { LuPopoverTriggerDirective } from './popover-trigger.directive';
-import { OverlayModule } from '@angular/cdk/overlay';
 
+/**
+ * @deprecated use `LuPopoverTriggerDirective, OverlayModule` instead
+ */
 @NgModule({
 	imports: [LuPopoverTriggerDirective, OverlayModule],
 	exports: [LuPopoverTriggerDirective],

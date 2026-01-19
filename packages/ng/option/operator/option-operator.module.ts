@@ -5,6 +5,9 @@ import { LuForOptionsDirective } from './for-options/index';
 import { LuOptionPagerComponent } from './pager';
 import { LuOptionSearcherComponent } from './searcher/index';
 
+/**
+ * @deprecated use `LuOptionPagerComponent, LuOptionFeederComponent, LuOptionSearcherComponent, LuForOptionsDirective, LuForGroupsDirective` instead
+ */
 @NgModule({
 	imports: [LuOptionPagerComponent, LuOptionFeederComponent, LuOptionSearcherComponent, LuForOptionsDirective, LuForGroupsDirective],
 	exports: [LuOptionPagerComponent, LuOptionFeederComponent, LuOptionSearcherComponent, LuForOptionsDirective, LuForGroupsDirective],

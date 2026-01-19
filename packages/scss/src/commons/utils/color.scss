@@ -1,6 +1,46 @@
+@use 'sass:map';
+@use 'sass:math';
+@use '@lucca-front/scss/src/commons/core';
+@use '@lucca-front/scss/src/commons/config';
+
+// stylelint-disable-next-line scss/no-global-function-names -- This is a redefinition of a deprecated SCSS function.
 @function transparentize($color, $amount: 50%, $space: var(--commons-colorSpace, srgb)) {
-	@if unit($amount) != '%' {
+	@if math.unit($amount) != '%' {
 		$amount: $amount * 100%;
 	}
+
 	@return color-mix(in $space, $color $amount, transparent);
+}
+
+@mixin palette($name, $shades: config.$palettesShades, $palette: false) {
+	@each $shade in $shades {
+		@if $palette {
+			@if map.get($palette, $shade) {
+				--palettes-#{$shade}: var(--palettes-#{$name}-#{$shade});
+			}
+		} @else {
+			--palettes-#{$shade}: var(--palettes-#{$name}-#{$shade});
+		}
+	}
+}
+
+@mixin contrasted {
+	@include core.cssvars('pr-t-color-input', config.$colorInputContrasted);
+	@include core.rosetta('--palettes-brand', '--palettes-brandContrasted', config.$palettesShades);
+	@include core.rosetta('--palettes-success', '--palettes-successContrasted', config.$palettesShades);
+	@include core.rosetta('--palettes-warning', '--palettes-warningContrasted', config.$palettesShades);
+}
+
+@mixin borderGradient($angle: 0, $color1: var(--palettes-neutral-0) , $color2:  var(--palettes-neutral-900), $radius: var(--pr-t-border-radius-default), $width: var(--commons-divider-width)) {
+	&::before {
+		content: '';
+		pointer-events: none;
+		position: absolute;
+		inset: calc(#{$width} * -1);
+		padding: #{$width};
+		background-image: conic-gradient(from #{$angle}, #{$color1}, #{$color2}, #{$color1});
+		border-radius: calc(#{$radius} + #{$width});
+		mask: linear-gradient(var(--palettes-neutral-0)) content-box, linear-gradient(var(--palettes-neutral-0));
+		mask-composite: exclude;
+	}
 }

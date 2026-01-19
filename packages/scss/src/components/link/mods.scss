@@ -1,13 +1,22 @@
-@mixin icon($atRoot: 'without: rule') {
+@use '@lucca-front/scss/src/commons/utils/namespace';
+
+@mixin icon($atRoot: namespace.$defaultAtRoot) {
+	.lucca-icon {
+		text-decoration: none;
+		font-size: 1em;
+		vertical-align: baseline;
+		position: relative;
+		top: 0.075rem; // magic number
+	}
+
 	&:has(.link-text) {
 		text-decoration: none;
 	}
 
-	.lucca-icon {
-		text-decoration: none;
-		font-size: var(--sizes-M-fontSize);
-		line-height: var(--sizes-XS-lineHeight);
-		margin-left: var(--pr-t-spacings-50);
+	&:not(:has(.link-icon)) {
+		.lucca-icon {
+			margin-inline-start: 0.2em;
+		}
 	}
 
 	@at-root ($atRoot) {
@@ -19,21 +28,35 @@
 			white-space: nowrap;
 
 			&::before {
-				content: '\a0';
+				// stylelint-disable-next-line no-irregular-whitespace
+				content: ' ' / '';
 			}
 		}
 	}
 }
 
 @mixin decorationHover {
-	text-decoration: none;
+	&,
+	.link-text {
+		text-decoration: none;
+	}
 
-	&:hover {
-		text-decoration: underline;
+	&:not(:has(.link-text)) {
+		&:hover {
+			text-decoration: underline;
+		}
+	}
+
+	&:has(.link-text) {
+		&:hover {
+			.link-text {
+				text-decoration: underline;
+			}
+		}
 	}
 }
 
 @mixin brand {
 	--commons-text-link-color: var(--palettes-brand-700);
-	--commons-text-link-hover: var(--palettes-brand-600);
+	--commons-text-link-hover: var(--palettes-brand-800);
 }

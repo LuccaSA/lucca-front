@@ -1,0 +1,16 @@
+@if (displayedIcon()) {
+	<lu-icon [icon]="displayedIcon()" [alt]="stateAlt()" />
+}
+
+<ng-template #content><ng-content /></ng-template>
+
+@if (withEllipsis()) {
+	<span class="chip-content pr-u-ellipsis" luTooltip luTooltipWhenEllipsis><ng-container *ngTemplateOutlet="content" /></span>
+} @else {
+	<ng-container *ngTemplateOutlet="content" />
+}
+@if (!unkillable() && !disabled()) {
+	<button type="button" class="chip-kill" (click)="kill.emit($event)">
+		<span class="pr-u-mask">{{ intl.delete }}</span>
+	</button>
+}

@@ -1,118 +1,194 @@
-<h1>Icons</h1>
-
-<!-- Basics -->
-<section class="contentSection">
-	<h2>Basics</h2>
-	<span aria-hidden="true" class="lucca-icon icon-heart"></span>
-	<span aria-hidden="true" class="lucca-icon icon-heart"></span>
-</section>
-
-<!-- Size -->
-<section class="contentSection">
-	<h2>Icons size</h2>
-	<span aria-hidden="true" class="lucca-icon icon-heart mod-XS"></span>
-	<span aria-hidden="true" class="lucca-icon icon-heart mod-S"></span>
-	<span aria-hidden="true" class="lucca-icon icon-heart mod-M"></span>
-	<span aria-hidden="true" class="lucca-icon icon-heart mod-L"></span>
-	<span aria-hidden="true" class="lucca-icon icon-heart mod-XL"></span>
-	<span aria-hidden="true" class="lucca-icon icon-heart mod-XXL"></span>
-</section>
-
-<!-- Colors -->
-<section class="contentSection">
-	<h2>Icons colors</h2>
-	<span aria-hidden="true" class="lucca-icon icon-heart u-textProduct"></span>
-	<span aria-hidden="true" class="lucca-icon icon-heart u-textError"></span>
-	<span aria-hidden="true" class="lucca-icon icon-heart u-textWarning"></span>
-	<span aria-hidden="true" class="lucca-icon icon-heart u-textSuccess"></span>
-	<span aria-hidden="true" class="lucca-icon icon-heart u-textLight"></span>
-	<span aria-hidden="true" class="lucca-icon icon-heart u-textPlaceholder"></span>
-</section>
-
-<!-- Action buttons  -->
-<section class="contentSection">
-	<h2>Action icons</h2>
-	<button type="button" class="button mod-onlyIcon mod-text">
-		<span aria-hidden="true" class="lucca-icon icon-officePen"></span><span class="u-mask">Edit</span>
-	</button>
-	<button type="button" class="button mod-onlyIcon mod-text">
-		<span aria-hidden="true" class="lucca-icon icon-trashDelete"></span><span class="u-mask">Delete</span>
-	</button>
-	<button type="button" class="button mod-onlyIcon mod-text">
-		<span aria-hidden="true" class="lucca-icon icon-star"></span><span class="u-mask">Bookmark</span>
-	</button>
-	<button type="button" class="button mod-onlyIcon mod-text palette-error">
-		<span aria-hidden="true" class="lucca-icon icon-hearth"></span><span class="u-mask">Like</span>
-	</button>
-</section>
-
-<section class="contentSection">
-	<h2>Disabled</h2>
-	<button type="button" class="button mod-onlyIcon mod-text" disabled>
-		<span aria-hidden="true" class="lucca-icon icon-officePen"></span><span class="u-mask">Edit</span>
-	</button>
-	<button type="button" class="button mod-onlyIcon mod-text" disabled>
-		<span aria-hidden="true" class="lucca-icon icon-trashDelete"></span><span class="u-mask">Delete</span>
-	</button>
-	<button type="button" class="button mod-onlyIcon mod-text" disabled>
-		<span aria-hidden="true" class="lucca-icon icon-star"></span><span class="u-mask">Bookmark</span>
-	</button>
-	<button type="button" class="button mod-onlyIcon mod-text palette-error" disabled>
-		<span aria-hidden="true" class="lucca-icon icon-heart"></span><span class="u-mask"></span>
-	</button>
-</section>
+<table class="demo-QAtable">
+	<tbody>
+		<tr>
+			<td></td>
+			<td style="width: 50%">
+				<div class="demo-QAtable-list">HTML</div>
+			</td>
+			<td style="width: 50%">
+				<div class="demo-QAtable-list">Angular</div>
+			</td>
+		</tr>
+		<tr>
+			<td>Default</td>
+			<td>
+				<div class="demo-QAtable-list">
+					<span aria-hidden="true" class="lucca-icon icon-heart"></span>
+					<span aria-hidden="true" class="lucca-icon icon-heart"></span>
+				</div>
+			</td>
+			<td>
+				<div class="demo-QAtable-list">
+					<lu-icon [icon]="'heart'" />
+					<lu-icon [icon]="'heart'" />
+				</div>
+			</td>
+		</tr>
+		<tr>
+			<td>Sizes</td>
+			<td>
+				<div class="demo-QAtable-list">
+					<span aria-hidden="true" class="lucca-icon icon-heart mod-XXS"></span>
+					<span aria-hidden="true" class="lucca-icon icon-heart mod-XS"></span>
+					<span aria-hidden="true" class="lucca-icon icon-heart mod-S"></span>
+					<span aria-hidden="true" class="lucca-icon icon-heart mod-M"></span>
+					<span aria-hidden="true" class="lucca-icon icon-heart mod-L"></span>
+					<span aria-hidden="true" class="lucca-icon icon-heart mod-XL"></span>
+					<span aria-hidden="true" class="lucca-icon icon-heart mod-XXL"></span>
+				</div>
+			</td>
+			<td>
+				<div class="demo-QAtable-list">
+					<lu-icon [icon]="'heart'" [size]="'XXS'" />
+					<lu-icon [icon]="'heart'" [size]="'XS'" />
+					<lu-icon [icon]="'heart'" [size]="'S'" />
+					<lu-icon [icon]="'heart'" [size]="'M'" />
+					<lu-icon [icon]="'heart'" [size]="'L'" />
+					<lu-icon [icon]="'heart'" [size]="'XL'" />
+					<lu-icon [icon]="'heart'" [size]="'XXL'" />
+				</div>
+			</td>
+		</tr>
+		<tr>
+			<td>Colors</td>
+			<td>
+				<div class="demo-QAtable-list">
+					<span aria-hidden="true" class="lucca-icon icon-heart pr-u-colorTextProduct"></span>
+					<span aria-hidden="true" class="lucca-icon icon-heart pr-u-colorTextCritical"></span>
+					<span aria-hidden="true" class="lucca-icon icon-heart pr-u-colorTextWarning"></span>
+					<span aria-hidden="true" class="lucca-icon icon-heart pr-u-colorTextSuccess"></span>
+					<span aria-hidden="true" class="lucca-icon icon-heart pr-u-colorTextSubtle"></span>
+					<span aria-hidden="true" class="lucca-icon icon-heart pr-u-colorInputTextPlaceholder"></span>
+				</div>
+			</td>
+			<td>
+				<div class="demo-QAtable-list">
+					<lu-icon [icon]="'heart'" [color]="'primary'" />
+					<lu-icon [icon]="'heart'" [color]="'secondary'" />
+					<lu-icon [icon]="'heart'" [color]="'product'" />
+					<lu-icon [icon]="'heart'" [color]="'error'" />
+					<lu-icon [icon]="'heart'" [color]="'warning'" />
+					<lu-icon [icon]="'heart'" [color]="'success'" />
+					<lu-icon [icon]="'heart'" [color]="'light'" />
+					<lu-icon [icon]="'heart'" [color]="'placeholder'" />
+					<lu-icon [icon]="'heart'" [color]="'inherit'" />
+				</div>
+			</td>
+		</tr>
+		<tr>
+			<td>AI</td>
+			<td>
+				<div class="demo-QAtable-list">
+					<span aria-hidden="true" class="lucca-icon icon-heart mod-AI"></span>
+				</div>
+			</td>
+			<td>
+				<div class="demo-QAtable-list">
+					<lu-icon [icon]="'heart'" [AI]="true" />
+				</div>
+			</td>
+		</tr>
+		<tr>
+			<td>Actions</td>
+			<td>
+				<div class="demo-QAtable-list">
+					<button type="button" class="button mod-onlyIcon mod-ghost">
+						<span aria-hidden="true" class="lucca-icon icon-officePen"></span><span class="pr-u-mask">Edit</span>
+					</button>
+					<button type="button" class="button mod-onlyIcon mod-ghost">
+						<span aria-hidden="true" class="lucca-icon icon-trashDelete"></span><span class="pr-u-mask">Delete</span>
+					</button>
+					<button type="button" class="button mod-onlyIcon mod-ghost">
+						<span aria-hidden="true" class="lucca-icon icon-star"></span><span class="pr-u-mask">Bookmark</span>
+					</button>
+					<button type="button" class="button mod-onlyIcon mod-ghost palette-error">
+						<span aria-hidden="true" class="lucca-icon icon-heart"></span><span class="pr-u-mask">Like</span>
+					</button>
+					<button type="button" class="button mod-onlyIcon mod-ghost" disabled>
+						<span aria-hidden="true" class="lucca-icon icon-officePen"></span><span class="pr-u-mask">Edit</span>
+					</button>
+					<button type="button" class="button mod-onlyIcon mod-ghost" disabled>
+						<span aria-hidden="true" class="lucca-icon icon-trashDelete"></span><span class="pr-u-mask">Delete</span>
+					</button>
+					<button type="button" class="button mod-onlyIcon mod-ghost" disabled>
+						<span aria-hidden="true" class="lucca-icon icon-star"></span><span class="pr-u-mask">Bookmark</span>
+					</button>
+					<button type="button" class="button mod-onlyIcon mod-ghost palette-error" disabled>
+						<span aria-hidden="true" class="lucca-icon icon-heart"></span><span class="pr-u-mask"></span>
+					</button>
+				</div>
+			</td>
+		</tr>
+		<tr>
+			<td>Inverted</td>
+			<td>
+				<div class="demo-QAtable-list mod-black">
+					<button type="button" class="button mod-onlyIcon mod-ghost mod-invert">
+						<span aria-hidden="true" class="lucca-icon icon-officePen"></span><span class="pr-u-mask">Edit</span>
+					</button>
+					<button type="button" class="button mod-onlyIcon mod-ghost mod-invert">
+						<span aria-hidden="true" class="lucca-icon icon-trashDelete pr-u-colorTextCritical"></span><span class="pr-u-mask">Delete</span>
+					</button>
+					<button type="button" class="button mod-onlyIcon mod-ghost mod-invert">
+						<span aria-hidden="true" class="lucca-icon icon-star"></span><span class="pr-u-mask">Bookmark</span>
+					</button>
+					<button type="button" class="button mod-onlyIcon mod-ghost mod-invert">
+						<span aria-hidden="true" class="lucca-icon icon-heart"></span><span class="pr-u-mask"></span>
+					</button>
+				</div>
+			</td>
+		</tr>
+		<tr>
+			<td>Palettes</td>
+			<td>
+				<div class="demo-QAtable-list">
+					<button type="button" class="button mod-onlyIcon mod-ghost">
+						<span aria-hidden="true" class="lucca-icon icon-arrowRight"></span><span class="pr-u-mask">Next</span>
+					</button>
+					<button type="button" class="button mod-onlyIcon mod-ghost palette-success">
+						<span aria-hidden="true" class="lucca-icon icon-arrowRight"></span><span class="pr-u-mask">Next</span>
+					</button>
+					<button type="button" class="button mod-onlyIcon mod-ghost palette-warning">
+						<span aria-hidden="true" class="lucca-icon icon-arrowRight"></span><span class="pr-u-mask">Next</span>
+					</button>
+					<button type="button" class="button mod-onlyIcon mod-ghost palette-error">
+						<span aria-hidden="true" class="lucca-icon icon-arrowRight"></span><span class="pr-u-mask">Next</span>
+					</button>
+				</div>
+			</td>
+		</tr>
+		<tr>
+			<td>List</td>
+			<td>
+				<div class="demo-QAtable-list mod-column">
+					@for (icon of icons; track icon.icon) {
+						<div>
+							<span aria-hidden="true" class="lucca-icon icon-{{ icon.icon }}"></span>
+							<code class="code">icon-{{ icon.icon }}</code>
+						</div>
+					}
+				</div>
+			</td>
+			<td>
+				<div class="demo-QAtable-list mod-column">
+					@for (icon of icons; track icon.icon) {
+						<div>
+							<lu-icon [icon]="icon.icon" />
+							<code class="code">icon-{{ icon.icon }}</code>
+						</div>
+					}
+				</div>
+			</td>
+		</tr>
+	</tbody>
+</table>
 
 <!-- LOADING -->
 <!-- UI-Diff currently doesn't support css animations -->
 <!-- <section class="contentSection">
 	<h2>Loading</h2>
-	<button type="button" class="button mod-onlyIcon mod-text is-loading"><span aria-hidden="true" class="lucca-icon icon-trashDelete"></span><span class="u-mask">Delete</span></button>
+	<button type="button" class="button mod-onlyIcon mod-ghost is-loading"><span aria-hidden="true" class="lucca-icon icon-trashDelete"></span><span class="pr-u-mask">Delete</span></button>
 </section> -->
-
-<!-- INVERTED -->
-<section class="contentSection">
-	<h2>Inverted</h2>
-	<div style="background-color: #333">
-		<button type="button" class="button mod-onlyIcon mod-text mod-invert">
-			<span aria-hidden="true" class="lucca-icon icon-officePen"></span><span class="u-mask">Edit</span>
-		</button>
-		<button type="button" class="button mod-onlyIcon mod-text mod-invert">
-			<span aria-hidden="true" class="lucca-icon icon-trashDelete u-textError"></span><span class="u-mask">Delete</span>
-		</button>
-		<button type="button" class="button mod-onlyIcon mod-text mod-invert">
-			<span aria-hidden="true" class="lucca-icon icon-start"></span><span class="u-mask">Bookmark</span>
-		</button>
-		<button type="button" class="button mod-onlyIcon mod-text mod-invert">
-			<span aria-hidden="true" class="lucca-icon icon-heart"></span><span class="u-mask"></span>
-		</button>
-	</div>
-</section>
-
-<!-- Palette -->
-<section class="contentSection">
-	<h2>Palette</h2>
-	<button type="button" class="button mod-onlyIcon mod-text">
-		<span aria-hidden="true" class="lucca-icon icon-arrowRight"></span><span class="u-mask">Next</span>
-	</button>
-	<button type="button" class="button mod-onlyIcon mod-text palette-success">
-		<span aria-hidden="true" class="lucca-icon icon-arrowRight"></span><span class="u-mask">Next</span>
-	</button>
-	<button type="button" class="button mod-onlyIcon mod-text palette-warning">
-		<span aria-hidden="true" class="lucca-icon icon-arrowRight"></span><span class="u-mask">Next</span>
-	</button>
-	<button type="button" class="button mod-onlyIcon mod-text palette-error">
-		<span aria-hidden="true" class="lucca-icon icon-arrowRight"></span><span class="u-mask">Next</span>
-	</button>
-</section>
-
-<!-- List -->
-<section class="contentSection">
-	<h2>List</h2>
-	<div *ngFor="let icon of icons">
-		<span aria-hidden="true" class="lucca-icon icon-{{icon.icon}}"></span>
-		<code class="code">icon-{{icon.icon}}</code>
-	</div>
-</section>
 
 <!-- To tell the ui-diff tool that the page has finished rendering -->
 <span id="ready"></span>

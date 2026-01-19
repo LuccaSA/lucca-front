@@ -1,0 +1,26 @@
+@use 'exports' as *;
+
+// .lu-dropdown-content is deprecated
+.dropdown,
+.lu-dropdown-content.lu-popover-content {
+	@layer components {
+		@include vars;
+		@include component;
+	}
+}
+
+// .lu-dropdown-options-item-action is deprecated
+.dropdown-list-option-action,
+.lu-dropdown-options-item-action {
+	@layer mods {
+		&[disabled],
+		&.is-disabled {
+			@include disabled;
+		}
+
+		&.mod-critical,
+		&.mod-delete {
+			@include critical;
+		}
+	}
+}

@@ -1,10 +1,23 @@
 @use 'exports' as *;
+@use '@lucca-front/scss/src/commons/utils/media';
 
 .filterBar {
-	@include vars;
-	@include component;
+	@layer components {
+		@include vars;
+		@include component;
+	}
 
-	&.mod-neutral {
-		@include neutral;
+	@layer mods {
+		@include media.max(XS) {
+			@include narrow;
+		}
+
+		@include media.pointer(coarse) {
+			@include touch;
+		}
+
+		@include media.pointer(coarse, $reversed: true) {
+			@include notTouch;
+		}
 	}
 }

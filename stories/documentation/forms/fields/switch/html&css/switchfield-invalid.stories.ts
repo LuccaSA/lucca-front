@@ -1,4 +1,4 @@
-import { Meta, StoryFn } from '@storybook/angular';
+import { Meta, StoryObj } from '@storybook/angular';
 
 interface SwitchInvalidStory {}
 
@@ -14,14 +14,18 @@ function getTemplate(args: SwitchInvalidStory): string {
 		<input type="checkbox" class="switchField-input" id="ID" aria-describedby="IDmessage" aria-invalid="true" />
 		<span class="switchField-icon" aria-hidden="true"><span class="switchField-icon-check"></span></span>
 	</span>
-	<div class="inlineMessage" id="IDmessage">Helper text</div>
+	<div class="inlineMessage" id="IDmessage">
+		<p class="inlineMessage-content">Helper text</p>
+	</div>
 </div>`;
 }
 
-const Template: StoryFn<SwitchInvalidStory> = (args) => ({
+const Template = (args: SwitchInvalidStory) => ({
 	props: args,
 	template: getTemplate(args),
 });
 
-export const Invalid = Template.bind({});
-Invalid.args = {};
+export const Invalid: StoryObj<SwitchInvalidStory> = {
+	args: {},
+	render: Template,
+};

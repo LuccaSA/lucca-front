@@ -1,10 +1,10 @@
-import { Component } from '@angular/core';
-import { Meta, StoryFn } from '@storybook/angular';
+import { ChangeDetectionStrategy, Component } from '@angular/core';
+import { Meta, StoryObj } from '@storybook/angular';
 
 @Component({
-	standalone: true,
 	selector: 'forms-files-stories',
 	templateUrl: './files.stories.html',
+	changeDetection: ChangeDetectionStrategy.OnPush,
 })
 class FilesStory {}
 
@@ -13,6 +13,9 @@ export default {
 	component: FilesStory,
 } as Meta;
 
-const template: StoryFn<FilesStory> = () => ({});
+const template = () => ({});
 
-export const basic = template.bind({});
+export const Basic: StoryObj<FilesStory> = {
+	args: {},
+	render: template,
+};

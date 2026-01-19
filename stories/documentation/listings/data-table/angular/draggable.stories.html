@@ -1,0 +1,16 @@
+<lu-data-table [selectable]="selectable()" drag>
+	<thead luDataTableHead>
+		<tr luDataTableRow>
+			<th luDataTableCell>Header</th>
+			<th luDataTableCell>Cell</th>
+		</tr>
+	</thead>
+	<tbody luDataTableBody cdkDropList (cdkDropListDropped)="drop($event)">
+		@for (item of listItem; track $index) {
+			<tr luDataTableRow selectedLabel="selectable" draggable cdkDrag>
+				<th luDataTableCell>{{ item.header }}</th>
+				<td luDataTableCell>{{ item.cell }}</td>
+			</tr>
+		}
+	</tbody>
+</lu-data-table>

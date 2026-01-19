@@ -1,0 +1,27 @@
+@mixin firstColumnVisible {
+	--components-dataTable-shadow-firstColumnOpacity: 0;
+}
+
+@mixin lastColumnVisible {
+	--components-dataTable-shadow-lastColumnOpacity: 0;
+}
+
+@mixin firstRowVisible {
+	--components-dataTable-shadow-firstRowOpacity: 0;
+}
+
+@mixin lastRowVisible {
+	--components-dataTable-shadow-lastRowOpacity: 0;
+}
+
+@mixin firstBodyRowVisible {
+	--components-dataTable-header-shadow-opacity: 0;
+}
+
+@mixin firstColumnVisibleAfterColsStart {
+	--components-dataTable-shadow-colsStart-opacity: 0;
+}
+
+@mixin lastColumnVisibleBeforeColsEnd {
+	--components-dataTable-shadow-colsEnd-opacity: 0;
+}

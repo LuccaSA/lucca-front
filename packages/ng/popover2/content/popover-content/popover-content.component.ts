@@ -1,18 +1,16 @@
-import { AfterViewInit, ChangeDetectionStrategy, Component, DestroyRef, ElementRef, HostBinding, HostListener, inject, TemplateRef, ViewEncapsulation } from '@angular/core';
-import { NgTemplateOutlet } from '@angular/common';
+import { CdkObserveContent } from '@angular/cdk/observers';
+import { AfterViewInit, ChangeDetectionStrategy, Component, DestroyRef, ElementRef, HostBinding, HostListener, inject, ViewEncapsulation } from '@angular/core';
 import { ButtonComponent } from '@lucca-front/ng/button';
+import { getIntl, PortalDirective } from '@lucca-front/ng/core';
 import { IconComponent } from '@lucca-front/ng/icon';
-import { PopoverFocusTrap } from '../../popover-focus-trap';
 import { Subject } from 'rxjs';
+import { PopoverFocusTrap } from '../../popover-focus-trap';
 import { POPOVER_CONFIG } from '../../popover-tokens';
 import { LU_POPOVER2_TRANSLATIONS } from '../../popover.translate';
-import { getIntl } from '@lucca-front/ng/core';
-import { CdkObserveContent } from '@angular/cdk/observers';
 
 @Component({
 	selector: 'lu-popover-content',
-	standalone: true,
-	imports: [NgTemplateOutlet, ButtonComponent, IconComponent, CdkObserveContent],
+	imports: [ButtonComponent, IconComponent, CdkObserveContent, PortalDirective],
 	templateUrl: './popover-content.component.html',
 	styleUrl: './popover-content.component.scss',
 
@@ -24,16 +22,16 @@ export class PopoverContentComponent implements AfterViewInit {
 
 	#elementRef = inject<ElementRef<HTMLElement>>(ElementRef);
 
-	#config = inject(POPOVER_CONFIG);
+	config = inject(POPOVER_CONFIG);
 
 	destroyRef = inject(DestroyRef);
 
 	@HostBinding('attr.id')
-	contentId = this.#config.contentId;
+	contentId = this.config.contentId;
 
-	content: TemplateRef<unknown> = this.#config.content;
+	content = this.config.content;
 
-	#focusManager = new PopoverFocusTrap(this.#elementRef.nativeElement, this.#config.triggerElement);
+	#focusManager = new PopoverFocusTrap(this.#elementRef.nativeElement, this.config.triggerElement);
 
 	closed$ = new Subject<void>();
 
@@ -54,12 +52,12 @@ export class PopoverContentComponent implements AfterViewInit {
 	}
 
 	contentChanged() {
-		this.#config.ref.updatePosition();
+		this.config.ref.updatePosition();
 	}
 
 	ngAfterViewInit(): void {
 		this.#focusManager.attachAnchors();
-		if (!this.#config.disableFocusManipulation) {
+		if (!this.config.disableCloseButtonFocus) {
 			void this.#focusManager.focusInitialElementWhenReady();
 		}
 	}
@@ -70,9 +68,9 @@ export class PopoverContentComponent implements AfterViewInit {
 
 	@HostListener('window:keydown.escape')
 	close(): void {
-		if (!this.#config.disableFocusManipulation) {
+		if (!this.config.disableInitialTriggerFocus) {
 			// Focus initial trigger element
-			this.#config.triggerElement.focus();
+			this.config.triggerElement.focus();
 		}
 		// Tell the directive we're closed now
 		this.closed$.next();
@@ -80,6 +78,6 @@ export class PopoverContentComponent implements AfterViewInit {
 		this.mouseEnter$.complete();
 		this.mouseLeave$.complete();
 		// Detach overlay
-		this.#config.ref.detach();
+		this.config.ref.dispose();
 	}
 }

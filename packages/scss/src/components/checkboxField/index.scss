@@ -1,71 +1,146 @@
 @use 'exports' as *;
 
 .checkboxField {
-	@include vars;
-	@include component;
+	@layer components {
+		@include vars;
+		@include component;
+	}
 
-	&.mod-S {
-		@include S;
+	@layer mods {
+		&.mod-S {
+			@include S;
+		}
+
+		&.mod-checklist {
+			@include checklist;
+
+			.checkboxField-input {
+				&:hover {
+					@include checklistHover;
+				}
+
+				&:active {
+					@include checklistActive;
+				}
+
+				&:disabled {
+					@include checklistDisabled;
+				}
+
+				&:checked {
+					@include checklistChecked;
+
+					&:hover {
+						@include checklistCheckedHover;
+					}
+
+					&:active {
+						@include checklistCheckedActive;
+					}
+
+					&:disabled {
+						@include checklistCheckedDisabled;
+					}
+				}
+			}
+
+			&:has(.checkboxField-input:focus-visible) {
+				.checkboxField-input {
+					@include checklistHover;
+
+					&:checked {
+						@include checklistCheckedHover;
+					}
+				}
+			}
+		}
 	}
 }
 
 .checkboxField-input {
-	&[aria-checked='mixed'] {
-		@include mixed;
-	}
+	@layer mods {
+		&[aria-checked='mixed'] {
+			@include checked;
+			@include mixed;
+		}
 
-	&:focus-visible {
-		@include focusVisible;
-	}
-
-	&:hover {
-		@include hover;
-	}
-
-	&:active {
-		@include active;
-	}
-
-	&:disabled {
-		@include disabled;
-	}
-
-	&[aria-invalid='true'] {
-		@include invalid;
+		&:focus-visible {
+			@include focusVisible;
+		}
 
 		&:hover {
-			@include invalidHover;
+			@include hover;
+
+			&[aria-checked='mixed'] {
+				@include checkedHover;
+			}
 		}
 
 		&:active {
-			@include invalidActive;
-		}
-	}
+			@include active;
 
-	&:checked {
-		@include checked;
-
-		&:hover {
-			@include checkedHover;
-		}
-
-		&:active {
-			@include checkedActive;
+			&[aria-checked='mixed'] {
+				@include checkedActive;
+			}
 		}
 
 		&:disabled {
-			@include checkedDisabled;
+			@include disabled;
+
+			&[aria-checked='mixed'] {
+				@include checkedDisabled;
+			}
 		}
 
 		&[aria-invalid='true'] {
-			@include checkedInvalid;
+			@include invalid;
+
+			&[aria-checked='mixed'] {
+				@include checkedInvalid;
+			}
 
 			&:hover {
-				@include checkedInvalidHover;
+				@include invalidHover;
+
+				&[aria-checked='mixed'] {
+					@include checkedInvalidHover;
+				}
 			}
 
 			&:active {
-				@include checkedInvalidActive;
+				@include invalidActive;
+
+				&[aria-checked='mixed'] {
+					@include checkedInvalidActive;
+				}
+			}
+		}
+
+		&:checked {
+			@include checked;
+
+			&:hover {
+				@include checkedHover;
+			}
+
+			&:active {
+				@include checkedActive;
+			}
+
+			&:disabled {
+				@include checkedDisabled;
+			}
+
+			&[aria-invalid='true'] {
+				@include checkedInvalid;
+
+				&:hover {
+					@include checkedInvalidHover;
+				}
+
+				&:active {
+					@include checkedInvalidActive;
+				}
 			}
 		}
 	}

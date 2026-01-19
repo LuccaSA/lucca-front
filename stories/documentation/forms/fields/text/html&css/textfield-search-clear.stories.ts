@@ -1,4 +1,4 @@
-import { Meta, StoryFn } from '@storybook/angular';
+import { Meta, StoryObj } from '@storybook/angular';
 
 interface TextfieldSearchClearStory {}
 
@@ -15,8 +15,7 @@ function getTemplate(args: TextfieldSearchClearStory): string {
 			<input type="text" id="ID" class="textField-input-value" aria-labelledby="IDlabel" aria-describedby="IDmessage" placeholder="Placeholder" aria-invalid="false" value="Value" />
 			<div class="textField-input-affix">
 				<button class="textField-input-affix-clear clear">
-					<span aria-hidden="true" class="lucca-icon icon-signClose"></span>
-					<span class="u-mask">Vider ce champ</span>
+					<span class="pr-u-mask">Vider ce champ</span>
 				</button>
 				<span aria-hidden="true" class="textField-input-affix-icon lucca-icon icon-searchMagnifyingGlass"></span>
 			</div>
@@ -25,10 +24,12 @@ function getTemplate(args: TextfieldSearchClearStory): string {
 </div>`;
 }
 
-const Template: StoryFn<TextfieldSearchClearStory> = (args) => ({
+const Template = (args: TextfieldSearchClearStory) => ({
 	props: args,
 	template: getTemplate(args),
 });
 
-export const SearchClear = Template.bind({});
-SearchClear.args = {};
+export const SearchClear: StoryObj<TextfieldSearchClearStory> = {
+	args: {},
+	render: Template,
+};

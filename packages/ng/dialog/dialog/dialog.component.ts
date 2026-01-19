@@ -1,10 +1,9 @@
-import { AfterViewInit, ChangeDetectionStrategy, Component, ElementRef, inject, ViewEncapsulation } from '@angular/core';
+import { AfterViewInit, booleanAttribute, ChangeDetectionStrategy, Component, ElementRef, inject, input, ViewEncapsulation } from '@angular/core';
 import { LuDialogRef } from '../model';
 
 @Component({
 	selector: 'lu-dialog',
-	standalone: true,
-	template: '<ng-content></ng-content>',
+	template: '<ng-content />',
 	styleUrl: './dialog.component.scss',
 	changeDetection: ChangeDetectionStrategy.OnPush,
 	encapsulation: ViewEncapsulation.None,
@@ -14,6 +13,8 @@ import { LuDialogRef } from '../model';
 })
 export class DialogComponent implements AfterViewInit {
 	public readonly dialogRef = inject<LuDialogRef>(LuDialogRef);
+
+	readonly stacked = input(false, { transform: booleanAttribute });
 
 	#htmlElement = inject<ElementRef<HTMLElement>>(ElementRef).nativeElement;
 
@@ -26,6 +27,10 @@ export class DialogComponent implements AfterViewInit {
 	}
 
 	ngAfterViewInit(): void {
+		if (this.stacked()) {
+			this.dialogRef.cdkRef.overlayRef.addPanelClass('mod-stacked');
+		}
+
 		if (this.dialogRef.config.autoFocus === 'first-input' && !this.dialogRef.config.cdkConfigOverride?.autoFocus) {
 			const focusable: HTMLElement =
 				this.#htmlElement.querySelector('.luDialog-autofocus .luNativeInput') || this.#htmlElement.querySelector('.luDialog-autofocus') || this.#htmlElement.querySelector('.luNativeInput');

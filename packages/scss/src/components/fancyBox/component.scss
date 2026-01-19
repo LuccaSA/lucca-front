@@ -1,0 +1,70 @@
+@use '@lucca-front/scss/src/commons/utils/namespace';
+
+@mixin component($atRoot: namespace.$defaultAtRoot) {
+	display: flex;
+	flex-direction: column;
+	justify-content: center;
+	align-items: center;
+	padding-inline: var(--components-fancyBox-paddingInline);
+	margin-inline: var(--components-fancyBox-marginInline);
+	contain: layout;
+
+	@at-root ($atRoot) {
+		.fancyBox-content {
+			position: relative;
+			min-block-size: var(--components-fancyBox-contentMinBlockSize);
+			min-inline-size: var(--components-fancyBox-contentMinInlineSize);
+			max-inline-size: 100%;
+			padding-block: var(--components-fancyBox-contentPaddingBlock);
+			padding-inline: var(--components-fancyBox-contentPaddingInline);
+			background-color: var(--pr-t-elevation-surface-raised);
+			border-radius: var(--pr-t-border-radius-structure);
+			flex-grow: 1;
+			display: flex;
+			flex-direction: column;
+			align-items: center;
+			justify-content: center;
+
+			&::before,
+			&::after {
+				content: '';
+				z-index: -1;
+				position: absolute;
+				inline-size: var(--components-fancyBox-imageWidth);
+				block-size: var(--components-fancyBox-imageHeight);
+				background-repeat: no-repeat;
+				background-size: contain;
+				transition-duration: var(--commons-animations-durations-slow);
+				pointer-events: none;
+			}
+
+			&::before {
+				transition-property: width, height, bottom, left;
+				inset-block-end: var(--components-fancyBox-offsetBlock);
+				inset-inline-start: var(--components-fancyBox-offsetInline);
+				background-image: var(--components-fancyBox-background-left);
+			}
+
+			&::after {
+				transition-property: width, height, top, right;
+				inset-block-start: var(--components-fancyBox-offsetBlock);
+				inset-inline-end: var(--components-fancyBox-offsetInline);
+				background-image: var(--components-fancyBox-background-right);
+			}
+		}
+
+		.fancyBox-content-foreground {
+			position: absolute;
+			inline-size: var(--components-fancyBox-imageWidth);
+			block-size: var(--components-fancyBox-imageHeight);
+			background-repeat: no-repeat;
+			inset-block-start: var(--components-fancyBox-offsetBlock);
+			inset-inline-end: var(--components-fancyBox-offsetInline);
+			background-image: var(--components-fancyBox-foreground);
+			background-size: contain;
+			transition-property: width, height, top, right;
+			transition-duration: var(--commons-animations-durations-slow);
+			pointer-events: none;
+		}
+	}
+}

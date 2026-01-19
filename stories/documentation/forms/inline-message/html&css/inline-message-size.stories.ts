@@ -1,4 +1,4 @@
-import { Meta, StoryFn } from '@storybook/angular';
+import { Meta, StoryObj } from '@storybook/angular';
 
 interface InlineMessageSizeStory {}
 
@@ -8,13 +8,19 @@ export default {
 } as Meta;
 
 function getTemplate(args: InlineMessageSizeStory): string {
-	return `<div class="inlineMessage mod-S">Inline message</div>`;
+	return `
+<div class="inlineMessage mod-S">
+	<p class="inlineMessage-content">Inline message</p>
+</div>
+`;
 }
 
-const Template: StoryFn<InlineMessageSizeStory> = (args) => ({
+const Template = (args: InlineMessageSizeStory) => ({
 	props: args,
 	template: getTemplate(args),
 });
 
-export const Size = Template.bind({});
-Size.args = {};
+export const Size: StoryObj<InlineMessageSizeStory> = {
+	args: {},
+	render: Template,
+};

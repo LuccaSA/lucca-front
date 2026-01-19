@@ -8,26 +8,18 @@
 
 			display: flex;
 			background-color: var(--palettes-700, var(--palettes-product-700));
-			padding-left: var(--components-switch-handler-offset);
+			padding-inline-start: var(--components-switch-handler-offset);
 		}
 
 		&::after {
-			left: calc(var(--components-switch-width) - var(--components-switch-slider-size) - var(--components-switch-handler-offset));
+			inset-inline-start: calc(
+				var(--components-switch-width) - var(--components-switch-slider-size) - var(--components-switch-handler-offset)
+			);
 		}
 	}
 }
 
 @mixin checkedHover {
-	&:not([disabled], [readonly]) {
-		~ .switch-label {
-			&::before {
-				background-color: var(--palettes-600, var(--palettes-product-600));
-			}
-		}
-	}
-}
-
-@mixin checkedActive {
 	&:not([disabled], [readonly]) {
 		~ .switch-label {
 			&::before {
@@ -37,10 +29,20 @@
 	}
 }
 
+@mixin checkedActive {
+	&:not([disabled], [readonly]) {
+		~ .switch-label {
+			&::before {
+				background-color: var(--palettes-900, var(--palettes-product-900));
+			}
+		}
+	}
+}
+
 @mixin hover {
 	~ .switch-label {
 		&::before {
-			background-color: var(--palettes-neutral-400);
+			background-color: var(--palettes-neutral-600);
 		}
 	}
 }
@@ -49,7 +51,7 @@
 	&:not([disabled], [readonly]) {
 		~ .switch-label {
 			&::before {
-				background-color: var(--palettes-neutral-600);
+				background-color: var(--palettes-neutral-800);
 			}
 		}
 	}
@@ -67,12 +69,12 @@
 
 @mixin disabled {
 	~ .switch-label {
-		color: var(--palettes-neutral-500); // disabled token candidate
+		color: var(--palettes-neutral-600); // disabled token candidate
 		cursor: default;
 
 		&::before {
 			background-color: var(--commons-disabled-background);
-			color: var(--palettes-neutral-500); // disabled token candidate
+			color: var(--palettes-neutral-600); // disabled token candidate
 		}
 
 		&::after {

@@ -1,0 +1,42 @@
+@use 'exports' as *;
+
+.highlightData {
+	@layer components {
+		@include vars;
+		@include component;
+	}
+
+	@layer mods {
+		&.mod-light {
+			@include light;
+		}
+
+		&.mod-dark {
+			@include dark;
+		}
+
+		&.mod-valueFirst {
+			@include valueFirst;
+		}
+
+		&.mod-S {
+			@include S;
+		}
+
+		&.mod-XS {
+			@include XS;
+		}
+
+		&.mod-nested {
+			@include nested;
+		}
+
+		&:has(.highlightData-illustrations) {
+			@include illustrations;
+
+			&.mod-valueFirst {
+				@include valueFirstIllustrations;
+			}
+		}
+	}
+}

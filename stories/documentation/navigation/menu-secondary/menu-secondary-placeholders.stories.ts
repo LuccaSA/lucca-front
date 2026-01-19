@@ -1,4 +1,4 @@
-import { Meta, StoryFn } from '@storybook/angular';
+import { Meta, StoryObj } from '@storybook/angular';
 
 interface MenuSecondaryPlaceholderStory {
 	compact: boolean;
@@ -35,17 +35,19 @@ function getTemplate(args: MenuSecondaryPlaceholderStory): string {
 	`;
 }
 
-const Template: StoryFn<MenuSecondaryPlaceholderStory> = (args) => ({
+const Template = (args: MenuSecondaryPlaceholderStory) => ({
 	props: args,
 	template: getTemplate(args),
 	styles: [
 		`
 		.navSide {
 			position: relative;
-			max-height: 30rem;
+			max-block-size: 30rem;
 		}`,
 	],
 });
 
-export const Placeholder = Template.bind({});
-Placeholder.args = { compact: false };
+export const Placeholder: StoryObj<MenuSecondaryPlaceholderStory> = {
+	args: { compact: false },
+	render: Template,
+};

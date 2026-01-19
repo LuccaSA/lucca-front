@@ -1,0 +1,47 @@
+import { Meta, StoryObj } from '@storybook/angular';
+
+interface BoxKillableStory {
+	neutral: boolean;
+}
+
+export default {
+	title: 'Documentation/Structure/Box/HTML&CSS/Killable',
+	argTypes: {
+		neutral: {
+			control: {
+				type: 'boolean',
+			},
+		},
+	},
+} as Meta;
+
+function getTemplate(args: BoxKillableStory): string {
+	const neutral = args.neutral ? `mod-neutral` : '';
+
+	return `<div class="box ${neutral}">
+		<div class="box-close">
+				<button type="button" class="button mod-onlyIcon mod-ghost">
+						<span aria-hidden="true" class="lucca-icon icon-signClose"></span>
+						<span class="pr-u-mask">Close</span>
+				</button>
+		</div>
+		Jujubes toppin gvueoat cake cake lemon drops chupa chups sweet roll. Macaroon icing tootsie roll bonbon dragée carrot cake sweet roll. Pie gingerbread jelly beans cotton candy tart lollipop bonbon candy. Bonbon chocolate gingerbread pastry.
+</div>`;
+}
+
+const Template = (args: BoxKillableStory) => ({
+	props: args,
+	template: getTemplate(args),
+	styles: [
+		`
+		:host {
+			display: block;
+		}`,
+		args.neutral === false ? ':host { background-color: var(--palettes-neutral-0); margin: -15px; padding: 15px; }' : '',
+	],
+});
+
+export const Killable: StoryObj<BoxKillableStory> = {
+	args: { neutral: false },
+	render: Template,
+};

@@ -1,4 +1,4 @@
-import { Meta, StoryFn } from '@storybook/angular';
+import { Meta, StoryObj } from '@storybook/angular';
 
 interface SortableListBasicStory {
 	clickable: boolean;
@@ -12,11 +12,13 @@ export default {
 			control: {
 				type: 'boolean',
 			},
+			description: 'Rend un élément de la liste cliquable.',
 		},
 		small: {
 			control: {
 				type: 'boolean',
 			},
+			description: 'Modifie la taille de la liste.',
 		},
 	},
 } as Meta;
@@ -33,7 +35,7 @@ function getTemplate(args: SortableListBasicStory): string {
 		</div>
 		<button class="clear sortableList-clear" type="button">
 		  <span aria-hidden="true" class="lucca-icon icon-signClose"></span>
-			<span class="u-mask">Delete</span>
+			<span class="pr-u-mask">Delete</span>
 		</button>
 	</li>
 	<li class="sortableList-item ${clickable}">
@@ -44,7 +46,7 @@ function getTemplate(args: SortableListBasicStory): string {
 		</div>
 		<button class="clear sortableList-clear" type="button">
 		  <span aria-hidden="true" class="lucca-icon icon-signClose"></span>
-			<span class="u-mask">Delete</span>
+			<span class="pr-u-mask">Delete</span>
 		</button>
 	</li>
 	<li class="sortableList-item ${clickable}">
@@ -55,16 +57,18 @@ function getTemplate(args: SortableListBasicStory): string {
 		</div>
 		<button class="clear sortableList-clear" type="button">
 		  <span aria-hidden="true" class="lucca-icon icon-signClose"></span>
-			<span class="u-mask">Delete</span>
+			<span class="pr-u-mask">Delete</span>
 		</button>
 	</li>
 </ul>`;
 }
 
-const Template: StoryFn<SortableListBasicStory> = (args) => ({
+const Template = (args: SortableListBasicStory) => ({
 	props: args,
 	template: getTemplate(args),
 });
 
-export const Basic = Template.bind({});
-Basic.args = { clickable: false, small: false };
+export const Basic: StoryObj<SortableListBasicStory> = {
+	args: { clickable: false, small: false },
+	render: Template,
+};

@@ -1,4 +1,4 @@
-import { Meta, StoryFn } from '@storybook/angular';
+import { Meta, StoryObj } from '@storybook/angular';
 
 interface SwitchBasicStory {}
 
@@ -14,14 +14,18 @@ function getTemplate(args: SwitchBasicStory): string {
 		<input type="checkbox" class="switchField-input" id="ID" aria-describedby="IDmessage" />
 		<span class="switchField-icon" aria-hidden="true"><span class="switchField-icon-check"></span></span>
 	</span>
-	<div class="inlineMessage" id="IDmessage">Helper text</div>
+	<div class="inlineMessage" id="IDmessage">
+		<p class="inlineMessage-content">Helper text</p>
+	</div>
 </div>`;
 }
 
-const Template: StoryFn<SwitchBasicStory> = (args) => ({
+const Template = (args: SwitchBasicStory) => ({
 	props: args,
 	template: getTemplate(args),
 });
 
-export const Basic = Template.bind({});
-Basic.args = {};
+export const Basic: StoryObj<SwitchBasicStory> = {
+	args: {},
+	render: Template,
+};

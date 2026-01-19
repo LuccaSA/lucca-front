@@ -1,4 +1,4 @@
-import { Meta, StoryFn } from '@storybook/angular';
+import { Meta, StoryObj } from '@storybook/angular';
 
 interface InlineMessageStatesStory {}
 
@@ -8,15 +8,34 @@ export default {
 } as Meta;
 
 function getTemplate(args: InlineMessageStatesStory): string {
-	return `<div class="inlineMessage is-success"><span aria-hidden="true" class="lucca-icon"></span>Inline message</div>
-<div class="inlineMessage is-warning"><span aria-hidden="true" class="lucca-icon"></span>Inline message</div>
-<div class="inlineMessage is-error"><span aria-hidden="true" class="lucca-icon"></span>Inline message</div>`;
+	return `
+<div class="inlineMessage is-success">
+	<span aria-hidden="true" class="lucca-icon inlineMessage-statusIcon"></span>
+	<p class="inlineMessage-content">
+		Inline message
+	</p>
+</div>
+<div class="inlineMessage is-warning">
+	<span aria-hidden="true" class="lucca-icon inlineMessage-statusIcon"></span>
+	<p class="inlineMessage-content">
+		Inline message
+	</p>
+</div>
+<div class="inlineMessage is-error">
+	<span aria-hidden="true" class="lucca-icon inlineMessage-statusIcon"></span>
+	<p class="inlineMessage-content">
+		Inline message
+	</p>
+</div>
+`;
 }
 
-const Template: StoryFn<InlineMessageStatesStory> = (args) => ({
+const Template = (args: InlineMessageStatesStory) => ({
 	props: args,
 	template: getTemplate(args),
 });
 
-export const States = Template.bind({});
-States.args = {};
+export const States: StoryObj<InlineMessageStatesStory> = {
+	args: {},
+	render: Template,
+};

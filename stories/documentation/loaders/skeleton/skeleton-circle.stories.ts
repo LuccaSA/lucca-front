@@ -1,4 +1,4 @@
-import { Meta, StoryFn } from '@storybook/angular';
+import { Meta, StoryObj } from '@storybook/angular';
 
 interface SkeletonCircleStory {}
 
@@ -7,7 +7,7 @@ export default {
 } as Meta;
 
 function getTemplate(args: SkeletonCircleStory): string {
-	return `<div class="skeleton is-loading u-displayFlex pr-u-gap100 u-alignItemsCenter">
+	return `<div class="skeleton is-loading pr-u-displayFlex pr-u-gap100 pr-u-alignItemsCenter">
 	<span class="skeleton-item mod-circle mod-XS"></span>
 	<span class="skeleton-item mod-circle mod-S"></span>
 	<span class="skeleton-item mod-circle"></span>
@@ -17,10 +17,12 @@ function getTemplate(args: SkeletonCircleStory): string {
 </div>`;
 }
 
-const Template: StoryFn<SkeletonCircleStory> = (args) => ({
+const Template = (args: SkeletonCircleStory) => ({
 	props: args,
 	template: getTemplate(args),
 });
 
-export const Circle = Template.bind({});
-Circle.args = {};
+export const Circle: StoryObj<SkeletonCircleStory> = {
+	args: {},
+	render: Template,
+};

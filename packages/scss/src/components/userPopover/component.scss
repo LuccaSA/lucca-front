@@ -1,33 +1,43 @@
-@mixin component($atRoot: 'without: rule') {
-	width: 23.5rem;
-	max-width: calc(100vw - var(--spacings-S) * 2);
-	padding: var(--spacings-S);
+@use '@lucca-front/scss/src/components/avatar/exports' as avatar;
+@use '@lucca-front/scss/src/commons/utils/reset';
+@use '@lucca-front/scss/src/commons/utils/a11y';
+@use '@lucca-front/scss/src/commons/utils/namespace';
+
+@mixin component($atRoot: namespace.$defaultAtRoot) {
+	inline-size: 23.5rem;
+	max-inline-size: calc(100vw - var(--pr-t-spacings-200) * 2);
+	padding: var(--pr-t-spacings-200);
 
 	@at-root ($atRoot) {
-		.userPopover-details {
-			--components-user-picture-image-size: var(--components-userPicture-XXXL-image);
+		.userPopover_trigger {
+			@include reset.button;
 
-			display: flex;
-			align-items: flex-start;
-			gap: var(--spacings-S);
+			inline-size: fit-content;
+
+			&:focus-visible {
+				@include a11y.focusVisible($borderRadius: var(--pr-t-border-radius-default));
+
+				&:has(> .avatar) {
+					@include a11y.focusVisible($borderRadius: var(--pr-t-border-radius-full));
+				}
+			}
 		}
 
-		.userPopover-details-avatar {
-			--components-user-picture-font-size: var(--components-userPicture-XXXL-fontSize);
-
-			margin: var(--spacings-XXS) 0;
+		.userPopover-details {
+			display: flex;
+			align-items: flex-start;
+			gap: var(--pr-t-spacings-200);
 		}
 
 		.userPopover-details-info {
-			min-width: 0;
+			min-inline-size: 0;
+			flex-grow: 1;
 		}
 
 		.userPopover-details-info-name {
 			margin: calc(var(--pr-t-spacings-50) * -1);
 			padding: var(--pr-t-spacings-50);
-			font-size: var(--sizes-L-fontSize);
-			line-height: var(--sizes-L-lineHeight);
-			font-weight: 700;
+			font: var(--pr-t-font-highlight-L);
 			color: currentColor;
 		}
 
@@ -44,15 +54,14 @@
 		}
 
 		.userPopover-details-info-detail {
-			margin-bottom: 0;
-			font-size: var(--sizes-S-fontSize);
-			line-height: var(--sizes-S-lineHeight);
+			margin-block-end: 0;
+			font: var(--pr-t-font-body-S);
 		}
 
 		.userPopover-details-info-detail-workplace {
 			display: flex;
 			align-items: flex-start;
-			gap: var(--spacings-XXS);
+			gap: var(--pr-t-spacings-50);
 			color: currentColor;
 			text-decoration: none;
 
@@ -66,6 +75,18 @@
 					}
 				}
 			}
+		}
+	}
+
+	.userPopover-details-avatar {
+		// :not(.class) is only there to increase specificity when the class isn’t present
+		// but the class should be present, and this code is temporary
+		&.avatar,
+		&:not(.avatar) {
+			@include avatar.XXXL;
+
+			margin-block: var(--pr-t-spacings-50);
+			margin-inline: 0;
 		}
 	}
 }

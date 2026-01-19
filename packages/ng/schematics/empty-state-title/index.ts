@@ -1,29 +1,15 @@
 import type { Rule } from '@angular-devkit/schematics';
-import { spawnSync } from 'child_process';
-import * as path from 'path';
 import { replaceComponentInputName, updateAngularTemplate } from '../lib/angular-template';
 import { migrateFile } from '../lib/schematics';
+import { currentSchematicContext, SchematicContextOpts } from '../lib/lf-schematic-context';
 
-export default (options?: { skipInstallation?: boolean }): Rule => {
-	const skipInstallation = options?.skipInstallation ?? false;
+// Nx need to see "@angular-devkit/schematics" in order to run this migration correctly (see https://github.com/nrwl/nx/blob/d9fed4b832bf01d1b9a44ae9e486a5e5cd2d2253/packages/nx/src/command-line/migrate/migrate.ts#L1729-L1738)
+// eslint-disable-next-line @typescript-eslint/no-require-imports
+require('@angular-devkit/schematics');
 
+export default (options?: SchematicContextOpts): Rule => {
 	return async (tree, context) => {
-		if (!skipInstallation) {
-			context.logger.info('Installing dependencies...');
-
-			try {
-				spawnSync('npm', ['ci'], {
-					cwd: path.join(__dirname, '../lib/local-deps'),
-				});
-				context.logger.info('Installing dependencies... Done!');
-			} catch (e) {
-				// eslint-disable-next-line
-				context.logger.error('Failed to install dependencies', (e as any).toString());
-			}
-		}
-
-		const angularCompiler = await import('@angular/compiler');
-
+		await currentSchematicContext.init(context, options);
 		tree.visit((path, entry) => {
 			if (path.includes('node_modules') || !entry) {
 				return;
@@ -31,10 +17,10 @@ export default (options?: { skipInstallation?: boolean }): Rule => {
 
 			migrateFile(path, entry, tree, (content) =>
 				updateAngularTemplate(path, content, (template) => {
-					template = replaceComponentInputName('lu-empty-state-page', 'title', 'heading', template, angularCompiler);
-					template = replaceComponentInputName('lu-empty-state-section', 'title', 'heading', template, angularCompiler);
+					template = replaceComponentInputName('lu-empty-state-page', 'title', 'heading', template);
+					template = replaceComponentInputName('lu-empty-state-section', 'title', 'heading', template);
 					return template;
-				}),
+				})
 			);
 		});
 	};

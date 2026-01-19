@@ -1,12 +1,11 @@
-import { NgIf } from '@angular/common';
-import { ChangeDetectionStrategy, Component, Input, ViewEncapsulation } from '@angular/core';
+import { ChangeDetectionStrategy, Component, input, numberAttribute, ViewEncapsulation } from '@angular/core';
 import { PortalContent, PortalDirective } from '@lucca-front/ng/core';
 import { LuSafeExternalSvgPipe } from '@lucca-front/ng/safe-content';
+import { Hx } from '../empty-state.model';
 
 @Component({
 	selector: 'lu-empty-state-page',
-	standalone: true,
-	imports: [NgIf, LuSafeExternalSvgPipe, PortalDirective],
+	imports: [LuSafeExternalSvgPipe, PortalDirective],
 	templateUrl: './empty-state-page.component.html',
 	styleUrl: './empty-state-page.component.scss',
 	changeDetection: ChangeDetectionStrategy.OnPush,
@@ -16,49 +15,42 @@ import { LuSafeExternalSvgPipe } from '@lucca-front/ng/safe-content';
 	},
 })
 export class EmptyStatePageComponent {
-	@Input()
-
 	/**
 	 * Icon image (URL)
 	 */
-	icon = null;
+	readonly icon = input<string | null>(null);
 
 	/**
 	 * Top right background image (URL)
 	 */
-	@Input()
-	topRightBackground = 'https://cdn.lucca.fr/lucca-front/assets/empty-states/poplee/bubbles-top-right-01.svg';
+	readonly topRightBackground = input<string>('https://cdn.lucca.fr/lucca-front/assets/empty-states/poplee/bubbles-top-right-01.svg');
 
 	/**
 	 * Top right foreground image (URL)
 	 */
-	@Input()
-	topRightForeground = 'https://cdn.lucca.fr/lucca-front/assets/empty-states/generic/coffee-01.svg';
+
+	readonly topRightForeground = input<string>('https://cdn.lucca.fr/lucca-front/assets/empty-states/generic/coffee-01.svg');
 
 	/**
 	 * Bottom left background image (URL)
 	 */
-	@Input()
-	bottomLeftBackground = 'https://cdn.lucca.fr/lucca-front/assets/empty-states/poplee/bubbles-bottom-left-01.svg';
+	readonly bottomLeftBackground = input<string>('https://cdn.lucca.fr/lucca-front/assets/empty-states/poplee/bubbles-bottom-left-01.svg');
 
 	/**
 	 * Bottom left foreground image (URL)
 	 */
-	@Input()
-	bottomLeftForeground = 'https://cdn.lucca.fr/lucca-front/assets/empty-states/poplee/core-hr-01.svg';
+	readonly bottomLeftForeground = input<string>('https://cdn.lucca.fr/lucca-front/assets/empty-states/poplee/core-hr-01.svg');
 
 	/**
 	 * Background color for content (text)
 	 */
-	@Input()
-	contentBackgroundColor = 'var(--pr-t-elevation-surface-default)';
+	readonly contentBackgroundColor = input<string>('var(--pr-t-elevation-surface-default)');
 
-	@Input()
-	heading: string;
+	readonly slotTop = input<PortalContent>();
 
-	@Input()
-	description: PortalContent;
+	readonly heading = input<string>();
 
-	@Input()
-	hx: 1 | 2 | 3 | 4 | 5 | 6 = 1;
+	readonly description = input<PortalContent>();
+
+	readonly hx = input(1, { transform: numberAttribute as (value: Hx | `${Hx}`) => Hx });
 }

@@ -1,4 +1,4 @@
-import { Meta, StoryFn } from '@storybook/angular';
+import { Meta, StoryObj } from '@storybook/angular';
 
 interface SizesStory {}
 
@@ -8,18 +8,18 @@ export default {
 
 function getTemplate(args: SizesStory): string {
 	return `<div>
-	<div class="u-widthFitContent demo-utility"><code class="code">u-widthFitContent</code></div>
-	<div class="u-width100\% demo-utility"><code class="code">u-width100\\%</code></div>
-	<div class="u-minWidth0 demo-utility"><code class="code">u-minWidth0</code></div>
+	<div class="pr-u-widthFitContent demo-utility"><code class="code">pr-u-widthFitContent</code></div>
+	<div class="pr-u-width100% demo-utility"><code class="code">pr-u-width100%</code></div>
+	<div class="pr-u-minWidth0 demo-utility"><code class="code">pr-u-minWidth0</code></div>
 </div>
 <div>
-	<div class="u-heightFitContent demo-utility"><code class="code">u-heightFitContent</code></div>
-	<div class="u-height100\% demo-utility"><code class="code">u-height100\\%</code></div>
-	<div class="u-minHeight0 demo-utility"><code class="code">u-minHeight0</code></div>
+	<div class="pr-u-heightFitContent demo-utility"><code class="code">pr-u-heightFitContent</code></div>
+	<div class="pr-u-height100% demo-utility"><code class="code">pr-u-height100%</code></div>
+	<div class="pr-u-minHeight0 demo-utility"><code class="code">pr-u-minHeight0</code></div>
 </div>`;
 }
 
-const Template: StoryFn<SizesStory> = (args) => ({
+const Template = (args: SizesStory) => ({
 	props: args,
 	template: getTemplate(args),
 	styles: [
@@ -39,7 +39,7 @@ const Template: StoryFn<SizesStory> = (args) => ({
 
 				&:last-child {
 					grid-template-columns: 1fr 1fr 1fr;
-					height: 10rem;
+					block-size: 10rem;
 				}
 			}
 		}
@@ -47,5 +47,7 @@ const Template: StoryFn<SizesStory> = (args) => ({
 	],
 });
 
-export const Sizes = Template.bind({});
-Sizes.args = {};
+export const Sizes: StoryObj<SizesStory> = {
+	args: {},
+	render: Template,
+};

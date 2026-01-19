@@ -1,5 +1,5 @@
 import { updateContent } from '../lib/file-update.js';
-import { AngularCompilerLib, HtmlAst } from '../lib/html-ast.js';
+import { HtmlAst } from '../lib/html-ast.js';
 import { PostCssScssLib } from '../lib/scss-ast.js';
 
 export function migrateScssFile(content: string, postCssScss: PostCssScssLib): string {
@@ -15,10 +15,10 @@ export function migrateScssFile(content: string, postCssScss: PostCssScssLib): s
 	return root.toResult({ syntax: { stringify: postCssScss.stringify } }).css;
 }
 
-export function migrateHTMLFile(content: string, angularCompiler: AngularCompilerLib): string {
+export function migrateHTMLFile(content: string): string {
 	return updateContent(content, (updates) => {
-		const htmlAst = new HtmlAst(content, angularCompiler);
-		htmlAst.visitElementWithAttribute(/.*/, 'class', (elem, attr) => {
+		const htmlAst = new HtmlAst(content);
+		htmlAst.visitElementWithAttribute(/.*/, 'class', (_elem, attr) => {
 			const classes = attr.value;
 			if (classes.includes('actionIcon') && attr.valueSpan) {
 				let newClasses: string;
@@ -30,7 +30,7 @@ export function migrateHTMLFile(content: string, angularCompiler: AngularCompile
 				updates.push({
 					position: attr.valueSpan.start.offset,
 					oldContent: attr.value,
-					newContent: newClasses,
+					newContent: newClasses
 				});
 			}
 		});

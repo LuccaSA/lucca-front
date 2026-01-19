@@ -1,15 +1,15 @@
-import { Component } from '@angular/core';
-import { Meta, StoryFn, moduleMetadata } from '@storybook/angular';
+import { ChangeDetectionStrategy, Component } from '@angular/core';
+import { Meta, moduleMetadata, StoryObj } from '@storybook/angular';
 
 @Component({
-	standalone: true,
 	selector: 'forms-radio-legacy-stories',
 	templateUrl: './radio-legacy.stories.html',
+	changeDetection: ChangeDetectionStrategy.OnPush,
 })
 class RadioLegacyStory {}
 
 export default {
-	title: 'QA/Forms/Radio Legacy',
+	title: 'QA/Forms/RadioLegacy',
 	component: RadioLegacyStory,
 	decorators: [
 		moduleMetadata({
@@ -18,6 +18,9 @@ export default {
 	],
 } as Meta;
 
-const template: StoryFn<RadioLegacyStory> = () => ({});
+const template = () => ({});
 
-export const basic = template.bind({});
+export const Basic: StoryObj<RadioLegacyStory> = {
+	args: {},
+	render: template,
+};

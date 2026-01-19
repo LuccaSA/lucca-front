@@ -1,45 +1,47 @@
-@use '@lucca-front/scss/src/components/title/exports' as title;
-
 @mixin component {
 	background-color: var(--components-errorPage-background);
-	height: 100vh;
-	width: 100vw;
+	block-size: 100vh;
+	inline-size: 100vw;
 	line-height: 1.2;
 	overflow: hidden;
 
 	.errorPage-section {
-		height: 100%;
-		max-width: 1200px;
-		padding: 0 var(--pr-t-spacings-400);
-		width: 100vw;
-		margin: 0 auto;
+		block-size: 100%;
+		max-inline-size: 1200px;
+		padding-block: 0;
+		padding-inline: var(--pr-t-spacings-400);
+		inline-size: 100vw;
+		margin-block: 0;
+		margin-inline: auto;
 		display: flex;
 		justify-content: space-between;
 		align-items: center;
 	}
 
 	.errorPage-section-info {
-		margin-top: 10vh;
-		max-width: 90vw;
-		width: 450px;
-		padding-right: var(--pr-t-spacings-400);
+		margin-block-start: 10vh;
+		max-inline-size: 90vw;
+		inline-size: 450px;
+		padding-inline-end: var(--pr-t-spacings-400);
 	}
 
 	.errorPage-section-info-title {
-		@include title.component;
-		@include title.XXXL;
+		font: var(--pr-t-font-heading-1);
+		margin-block-end: var(--pr-t-spacings-50);
 	}
 
 	.errorPage-section-info-text {
-		font-size: var(--sizes-L-fontSize);
-		line-height: var(--sizes-L-lineHeight);
+		font-size: var(--pr-t-font-body-1-fontSize);
+		line-height: var(--pr-t-font-body-1-lineHeight);
+		margin-block-end: var(--pr-t-spacings-150);
 	}
 
 	.errorPage-section-image {
-		margin-top: 10vh;
-		width: 50%;
-		max-width: 580px;
-		min-width: 350px;
+		margin-block-start: 10vh;
+		inline-size: 50%;
+		max-inline-size: 580px;
+		min-inline-size: 350px;
+		block-size: auto;
 	}
 }
 
@@ -52,13 +54,13 @@
 	}
 
 	.errorPage-section-info {
-		margin-top: var(--pr-t-spacings-400);
-		margin-bottom: var(--pr-t-spacings-400);
+		margin-block: var(--pr-t-spacings-400);
 		order: 1;
 		padding: 0;
 	}
+
 	.errorPage-section-image {
-		margin-top: var(--pr-t-spacings-400);
+		margin-block-start: var(--pr-t-spacings-400);
 		order: 0;
 	}
 }

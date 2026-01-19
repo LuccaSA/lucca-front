@@ -1,5 +1,5 @@
 @mixin vars {
-	--components-textfield-border-radius: 4px;
+	--components-textfield-border-radius: var(--pr-t-border-radius-input);
 	--components-textfield-input-padding-horizontal: var(--pr-t-spacings-100);
 	--components-textfield-input-padding-vertical: var(--pr-t-spacings-100);
 	--components-textfield-disabled-background: var(--commons-disabled-background);
@@ -18,12 +18,12 @@
 	--components-textfield-material-default-palette-color: var(--palettes-neutral-600);
 	--components-textfield-material-border-color: #ccc;
 	--components-textfield-material-label-color: var(--palettes-neutral-600);
-	--components-textfield-material-label-font-size: var(--sizes-M-fontSize);
+	--components-textfield-material-label-font-size: var(--pr-t-font-body-M-fontSize);
 	--components-textfield-material-suffix-padding-right: var(--pr-t-spacings-200);
 
 	--components-textfield-compact-padding: var(--pr-t-spacings-100);
 	--components-textfield-compact-label-color: #96a6c5;
-	--components-textfield-compact-label-font-size: var(--sizes-M-fontSize);
+	--components-textfield-compact-label-font-size: var(--pr-t-font-body-M-fontSize);
 	--components-textfield-compact-label-right-margin: 0.3rem;
 	--components-textfield-compact-label-sizes-shorter: 3rem;
 	--components-textfield-compact-label-sizes-short: 5rem;

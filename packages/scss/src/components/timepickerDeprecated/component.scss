@@ -1,9 +1,10 @@
 @use '@lucca-front/scss/src/commons/utils/a11y';
+@use '@lucca-front/scss/src/commons/utils/namespace';
 
-@mixin component($atRoot: 'without: rule') {
+@mixin component($atRoot: namespace.$defaultAtRoot) {
 	padding: var(--components-timepicker-padding);
 	border: 0;
-	border-radius: var(--commons-borderRadius-M);
+	border-radius: var(--pr-t-border-radius-input);
 	box-shadow: 0 0 0 1px var(--palettes-neutral-300);
 	display: inline-flex;
 	background-color: var(--pr-t-elevation-surface-raised);
@@ -11,6 +12,7 @@
 
 	&:focus-within {
 		@include a11y.focusVisible($offset: 3px);
+
 		background-color: transparent;
 	}
 
@@ -22,18 +24,18 @@
 
 		.timepicker-field-input {
 			background-color: transparent;
-			border-radius: var(--commons-borderRadius-M);
+			border-radius: var(--pr-t-border-radius-50);
 			text-align: center;
-			color: var(--palettes-neutral-800);
-			width: var(--components-timepicker-input-width);
-			height: var(--components-timepicker-input-height);
+			color: var(--pr-t-color-text);
+			inline-size: var(--components-timepicker-input-width);
+			block-size: var(--components-timepicker-input-height);
 			border: 0;
 			padding: 0;
-			-moz-appearance: textfield;
+			appearance: textfield;
 
 			&::-webkit-outer-spin-button,
 			&::-webkit-inner-spin-button {
-				-webkit-appearance: none;
+				appearance: none;
 				margin: 0;
 			}
 
@@ -48,32 +50,32 @@
 		.timepicker-field-increment {
 			cursor: pointer;
 			position: absolute;
-			bottom: calc(100% + 0.5rem + 1px);
-			left: 0;
+			inset-block-end: calc(100% + 0.5rem + 1px);
+			inset-inline-start: 0;
 			border: 0;
-			height: 1.25rem;
+			block-size: 1.25rem;
 			background-color: transparent;
 			color: var(--palettes-neutral-600);
 			display: inline-flex;
 			justify-content: center;
 			align-items: center;
-			border-radius: var(--commons-borderRadius-M);
-			width: var(--components-timepicker-input-width);
+			border-radius: var(--pr-t-border-radius-50);
+			inline-size: var(--components-timepicker-input-width);
 			padding: 0;
 
 			&:last-child {
-				top: calc(100% + 0.5rem + 1px);
-				bottom: auto;
+				inset-block-start: calc(100% + 0.5rem + 1px);
+				inset-block-end: auto;
 			}
 
 			&:hover {
 				background-color: var(--palettes-neutral-50);
-				color: var(--palettes-neutral-800);
+				color: var(--pr-t-color-text);
 			}
 
 			&:focus {
 				background-color: var(--palettes-neutral-100);
-				color: var(--palettes-neutral-800);
+				color: var(--pr-t-color-text);
 			}
 
 			.lucca-icon {
@@ -82,9 +84,10 @@
 		}
 
 		.timepicker-separator {
-			margin: 0 var(--pr-t-spacings-50);
+			margin-block: 0;
+			margin-inline: var(--pr-t-spacings-50);
 			text-align: center;
-			width: 0.5rem;
+			inline-size: 0.5rem;
 			line-height: var(--components-timepicker-input-height);
 		}
 	}

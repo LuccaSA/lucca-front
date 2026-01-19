@@ -1,26 +1,46 @@
-import { booleanAttribute, Component, ContentChildren, DestroyRef, DoCheck, forwardRef, inject, Input, OnChanges, OnDestroy, QueryList, Renderer2, ViewEncapsulation } from '@angular/core';
-import { NgIf, NgSwitch, NgSwitchCase, NgTemplateOutlet } from '@angular/common';
-import { InputDirective } from './input.directive';
-import { FormFieldSize } from './form-field-size';
-import { BehaviorSubject, map, merge, startWith, Subject, switchMap } from 'rxjs';
-import { InlineMessageComponent, InlineMessageState } from '@lucca-front/ng/inline-message';
-import { AbstractControl, NG_VALIDATORS, NgControl, ReactiveFormsModule, RequiredValidator, Validator, Validators } from '@angular/forms';
+import { NgTemplateOutlet } from '@angular/common';
+import {
+	afterNextRender,
+	booleanAttribute,
+	ChangeDetectionStrategy,
+	Component,
+	computed,
+	contentChildren,
+	DoCheck,
+	effect,
+	forwardRef,
+	inject,
+	Injector,
+	input,
+	model,
+	numberAttribute,
+	OnDestroy,
+	Renderer2,
+	signal,
+	ViewEncapsulation,
+} from '@angular/core';
+import { AbstractControl, NgControl, ReactiveFormsModule, RequiredValidator, Validators } from '@angular/forms';
 import { SafeHtml } from '@angular/platform-browser';
-import { getIntl, IntlParamsPipe, LuClass, PortalContent, PortalDirective } from '@lucca-front/ng/core';
+import { getIntl, IntlParamsPipe, LuClass, PortalContent, PortalDirective, ɵeffectWithDeps } from '@lucca-front/ng/core';
 import { IconComponent } from '@lucca-front/ng/icon';
+import { InlineMessageComponent, InlineMessageState } from '@lucca-front/ng/inline-message';
 import { LuTooltipModule } from '@lucca-front/ng/tooltip';
+import { BehaviorSubject } from 'rxjs';
+import { FormFieldSize } from './form-field-size';
 import { FORM_FIELD_INSTANCE } from './form-field.token';
 import { LU_FORM_FIELD_TRANSLATIONS } from './form-field.translate';
-import { takeUntilDestroyed } from '@angular/core/rxjs-interop';
+import { InputDirective } from './input.directive';
+import { INPUT_FRAMED_INSTANCE } from './public-api';
 
 let nextId = 0;
 
+type FormFieldWidth = 20 | 30 | 40 | 50 | 60;
+
 @Component({
 	selector: 'lu-form-field',
-	standalone: true,
-	imports: [NgIf, NgSwitch, NgSwitchCase, NgTemplateOutlet, InlineMessageComponent, LuTooltipModule, ReactiveFormsModule, IconComponent, IntlParamsPipe, PortalDirective],
+	imports: [NgTemplateOutlet, InlineMessageComponent, LuTooltipModule, ReactiveFormsModule, IconComponent, IntlParamsPipe, PortalDirective],
 	templateUrl: './form-field.component.html',
-	styleUrls: ['./form-field.component.scss'],
+	styleUrl: './form-field.component.scss',
 	providers: [
 		LuClass,
 		{
@@ -28,128 +48,96 @@ let nextId = 0;
 			useExisting: forwardRef(() => FormFieldComponent),
 		},
 	],
+	host: {
+		'[class.inputFramed-header-field]': 'framed',
+	},
 	encapsulation: ViewEncapsulation.None,
+	changeDetection: ChangeDetectionStrategy.OnPush,
 })
-export class FormFieldComponent implements OnChanges, OnDestroy, DoCheck {
-	intl = getIntl(LU_FORM_FIELD_TRANSLATIONS);
+export class FormFieldComponent implements OnDestroy, DoCheck {
+	readonly intl = getIntl(LU_FORM_FIELD_TRANSLATIONS);
 
 	#luClass = inject(LuClass);
-
+	#injector = inject(Injector);
 	#renderer = inject(Renderer2);
 
-	#requiredValidator: RequiredValidator | undefined;
+	framed = inject(INPUT_FRAMED_INSTANCE, { optional: true }) !== null;
 
-	#destroyRef = inject(DestroyRef);
+	readonly formFieldChildren = contentChildren(FormFieldComponent, { descendants: true });
 
-	#doCheck$ = new Subject<void>();
+	readonly requiredValidators = contentChildren(RequiredValidator, { descendants: true });
+	readonly ngControls = contentChildren(NgControl, { descendants: true });
 
-	@ContentChildren(NG_VALIDATORS, { descendants: true })
-	public set validators(validators: QueryList<Validator | undefined>) {
-		this.#requiredValidator = validators.toArray()?.find((v): v is RequiredValidator => v instanceof RequiredValidator);
-	}
+	readonly ignoredRequiredValidators = computed(() => new Set(this.formFieldChildren().flatMap((f) => f.requiredValidators())));
+	readonly ignoredControls = computed(() => new Set(this.formFieldChildren().flatMap((f) => f.ngControls())));
 
-	@ContentChildren(NgControl, { descendants: true })
-	set controls(controls: QueryList<NgControl>) {
-		const controls$ = controls.changes.pipe(
-			takeUntilDestroyed(this.#destroyRef),
-			startWith(controls),
-			map(() => controls.toArray()),
-		);
-		// If a control is added or removed, we want to update status based on the new ones
-		controls$.subscribe((controls) => {
-			this.updateRequiredStatus(controls);
-		});
-		// Upon status change or NgDoCheck trigger, we want to update validity and display
-		controls$
-			.pipe(
-				switchMap((controls) => {
-					// We have to trigger status check on DoCheck too to properly update display when control.touched changes
-					// Because we can't listen to `control.touched` changes, we need to hook on this.
-					// TODO use unified control state change events once we have Angular 18
-					return merge(this.#doCheck$, ...controls.map((control) => control.statusChanges)).pipe(map(() => controls));
-				}),
-			)
-			.subscribe((controls) => {
-				this.updateRequiredStatus(controls);
-				this.updateAria();
-			});
-	}
+	readonly ownRequiredValidators = computed(() => this.requiredValidators().filter((c) => !this.ignoredRequiredValidators().has(c)));
+	readonly ownControls = computed(() => this.ngControls().filter((c) => !this.ignoredControls().has(c)));
 
-	@Input({
-		required: true,
-	})
-	label: PortalContent;
+	#hasInputRequired = signal(false);
+	forceInputRequired = signal(false);
+	readonly isInputRequired = computed(() => this.forceInputRequired() || this.#hasInputRequired());
+
+	readonly label = input.required<PortalContent>();
 
 	/**
 	 * Hide field label, while keeping it in DOM for screen readers
 	 */
-	@Input({
-		transform: booleanAttribute,
-	})
-	hiddenLabel = false;
+	readonly hiddenLabel = input(false, { transform: booleanAttribute });
 
-	@Input({
-		transform: booleanAttribute,
-	})
-	rolePresentationLabel = false;
+	rolePresentationLabel = model(false);
 
-	@Input()
-	statusControl: AbstractControl;
+	readonly inline = input(false, { transform: booleanAttribute });
 
-	@Input()
-	tooltip: string | SafeHtml;
+	readonly statusControl = input<AbstractControl | null>(null);
 
-	/**
-	 * Override from input
-	 * @private
-	 */
-	#invalidStatusOverride = false;
+	readonly tooltip = input<string | SafeHtml | null>(null);
 
-	@Input({ transform: booleanAttribute })
-	set invalid(invalid: boolean) {
-		this.#invalidStatusOverride = invalid !== undefined && invalid !== null;
-		this.invalidStatus = invalid;
-		this.updateAria();
-	}
+	readonly tag = input<string | null>(null);
 
-	/**
-	 * Used to cache previous invalid status and know if we want to update aria stuff or not.
-	 * @private
-	 */
-	protected invalidStatus = false;
+	readonly AI = input(false, { transform: booleanAttribute });
+	readonly iconAItooltip = input<string | null>(null);
+	readonly iconAIalt = input<string | null>(null);
 
-	@Input()
-	inlineMessage: string;
+	readonly width = input<FormFieldWidth, FormFieldWidth | `${FormFieldWidth}`>(null, {
+		transform: numberAttribute as (value: FormFieldWidth | `${FormFieldWidth}`) => FormFieldWidth,
+	});
+
+	#invalidStatus = signal(false);
+	invalidStatus = this.#invalidStatus.asReadonly();
+
+	invalid = input<boolean | null, boolean>(null, { transform: booleanAttribute });
+
+	readonly inlineMessage = input<PortalContent | null>(null);
 
 	/**
 	 * Inline message for when the control is in error state
 	 */
-	@Input()
-	errorInlineMessage: string;
+	readonly errorInlineMessage = input<PortalContent | null>(null);
 
 	/**
 	 * State of the inline message, will be ignored if form state is invalid
 	 */
-	@Input()
-	inlineMessageState: InlineMessageState;
+	readonly inlineMessageState = input<InlineMessageState | null>(null);
 
-	@Input()
-	size: FormFieldSize;
+	readonly size = input<FormFieldSize | null>(null);
 
-	@Input()
-	layout: 'default' | 'checkable' | 'fieldset' = 'default';
+	/**
+	 * Extra aria-describedby attribute
+	 */
+	readonly extraDescribedBy = input<string>('');
+
+	layout = model<'default' | 'checkable' | 'fieldset'>('default');
 
 	#inputs: InputDirective[] = [];
+
 	/**
 	 * Max amount of characters allowed, defaults to 0, which means hidden, no maximum
 	 */
-	@Input()
-	counter = 0;
-
-	required = false;
+	readonly counter = input<number>(0);
 
 	get contentLength(): number {
-		return (this.#inputs[0]?.host?.nativeElement as HTMLInputElement)?.value.length || 0;
+		return (this.#inputs[0]?.host?.nativeElement as HTMLInputElement)?.value?.length || 0;
 	}
 
 	public addInput(input: InputDirective) {
@@ -166,7 +154,7 @@ export class FormFieldComponent implements OnChanges, OnDestroy, DoCheck {
 		return this.#inputs;
 	}
 
-	id: string;
+	id = signal<string>('');
 
 	ready$ = new BehaviorSubject<boolean>(false);
 
@@ -175,6 +163,21 @@ export class FormFieldComponent implements OnChanges, OnDestroy, DoCheck {
 	}
 
 	#ariaLabelledBy: string[] = [];
+
+	constructor() {
+		ɵeffectWithDeps([this.isInputRequired, this.invalidStatus, this.extraDescribedBy], () => {
+			this.updateAria();
+		});
+
+		effect(() => {
+			this.#luClass.setState({
+				[`mod-${this.size()}`]: !!this.size(),
+				'mod-checkable': this.layout() === 'checkable',
+				'form-field': this.layout() !== 'fieldset',
+				[`mod-width${this.width()}`]: !!this.width(),
+			});
+		});
+	}
 
 	addLabelledBy(id: string, prepend = false): void {
 		if (prepend) {
@@ -193,15 +196,6 @@ export class FormFieldComponent implements OnChanges, OnDestroy, DoCheck {
 		this.#ariaLabelledBy = this.#ariaLabelledBy.filter((labelledBy) => labelledBy === id);
 	}
 
-	ngOnChanges(): void {
-		this.#luClass.setState({
-			[`mod-${this.size}`]: !!this.size,
-			'mod-checkable': this.layout === 'checkable',
-			'form-field': this.layout !== 'fieldset',
-		});
-		this.updateAria();
-	}
-
 	prepareInput(): void {
 		if (this.#inputs.length === 0) {
 			throw new Error('Missing input for form field, make sure to set `luInput` to your input inside lu-form-field');
@@ -213,45 +207,26 @@ export class FormFieldComponent implements OnChanges, OnDestroy, DoCheck {
 				this.#renderer.setAttribute(input.host.nativeElement, 'id', inputId);
 			});
 		// We're using the id from the first input available
-		this.id = this.#inputs[0].host.nativeElement.id;
+		this.id.set(this.#inputs[0].host.nativeElement.id);
 		this.updateAria();
 		this.ready$.next(true);
 	}
 
 	private updateAria(): void {
 		this.#inputs.forEach((input) => {
-			this.#renderer.setAttribute(input.host.nativeElement, 'aria-invalid', this.invalidStatus?.toString());
-			this.#renderer.setAttribute(input.host.nativeElement, 'aria-required', this.required?.toString());
+			this.#renderer.setAttribute(input.host.nativeElement, 'aria-invalid', this.invalidStatus()?.toString());
+			this.#renderer.setAttribute(input.host.nativeElement, 'aria-required', this.isInputRequired()?.toString());
 			if (!input.standalone) {
-				this.#renderer.setAttribute(input.host.nativeElement, 'aria-describedby', `${input.host.nativeElement.id}-message`);
+				let ariaDescribedBy = `${input.host.nativeElement.id}-message`;
+				if (this.extraDescribedBy()) {
+					ariaDescribedBy += ` ${this.extraDescribedBy()}`;
+				}
+				this.#renderer.setAttribute(input.host.nativeElement, 'aria-describedby', ariaDescribedBy);
 			}
 		});
-		if (this.id) {
-			this.addLabelledBy(`${this.id}-label`);
+		if (this.id() && !this.#ariaLabelledBy.includes(`${this.id()}-label`)) {
+			this.addLabelledBy(`${this.id()}-label`);
 		}
-	}
-
-	private updateRequiredStatus(controls: NgControl[]): void {
-		// If invalid status is override, just skip updating from control because we don't care
-		if (this.#invalidStatusOverride) {
-			return;
-		}
-		controls.forEach((control) => {
-			// invalid management
-			const previousInvalid = this.invalidStatus;
-			this.invalidStatus = (control.invalid || this.statusControl?.invalid) && control.touched;
-
-			// required management
-			const previousRequired = this.required;
-			this.required = this.#requiredValidator
-				? booleanAttribute(this.#requiredValidator.required)
-				: control.control.hasValidator(Validators.required) || control.control.hasValidator(Validators.requiredTrue);
-
-			// If stuff changed, update aria attributes
-			if (this.invalidStatus !== previousInvalid || this.required !== previousRequired) {
-				this.updateAria();
-			}
-		});
 	}
 
 	ngOnDestroy(): void {
@@ -259,6 +234,32 @@ export class FormFieldComponent implements OnChanges, OnDestroy, DoCheck {
 	}
 
 	ngDoCheck(): void {
-		this.#doCheck$.next();
+		afterNextRender(
+			() => {
+				this.#hasInputRequired.set(this.#isInputRequired());
+				this.#invalidStatus.set(this.#hasInvalidStatus());
+			},
+			{
+				injector: this.#injector,
+			},
+		);
+	}
+
+	#isInputRequired(): boolean {
+		const hasRequiredFormControl = this.ownControls().some((c) => c.control?.hasValidator(Validators.required));
+		const hasRequiredNgModel = this.ownRequiredValidators().some((c) => booleanAttribute(c.required));
+		return hasRequiredNgModel || hasRequiredFormControl;
+	}
+
+	#hasInvalidStatus(): boolean {
+		const isInvalidOverride = this.invalid() !== undefined && this.invalid() !== null;
+		if (isInvalidOverride) {
+			return this.invalid();
+		}
+		const statusControlOverride = this.statusControl();
+		if (statusControlOverride) {
+			return statusControlOverride.invalid && this.ownControls().some((c) => c?.touched);
+		}
+		return this.ownControls().some((c) => c.invalid && c.touched);
 	}
 }

@@ -1,17 +1,40 @@
 @use '@lucca-front/icons/src/icon/exports' as icon;
+@use '@lucca-front/scss/src/commons/utils/namespace';
 
-@mixin component {
+@use '@lucca-front/scss/src/commons/utils/a11y';
+
+@mixin component($atRoot: namespace.$defaultAtRoot) {
 	display: flex;
 	gap: var(--components-inlineMessage-gap);
-	font-size: var(--components-inlineMessage-fontSize);
-	line-height: var(--components-inlineMessage-lineHeight);
-	color: var(--components-inlineMessage-color);
 	grid-column: 2;
+	font: var(--components-inlineMessage-font);
+	color: var(--components-inlineMessage-color);
+	border-radius: var(--pr-t-border-radius-50);
 
-	.lucca-icon {
-		@include icon.XS;
+	&:has(.inlineMessage-content:focus-visible) {
+		@include a11y.focusVisible;
+	}
 
-		color: var(--components-inlineMessage-icon-color);
-		margin-top: 2px;
+	@at-root ($atRoot) {
+		.inlineMessage-content {
+			&:not(p) {
+				display: flex;
+				gap: var(--components-inlineMessage-gap);
+				margin: 0;
+			}
+
+			&:is(p) {
+				outline: none;
+			}
+		}
+
+		// .lucca-icon:first-child is deprecated
+		.inlineMessage-statusIcon,
+		.inlineMessage > .lucca-icon:first-child {
+			@include icon.XS;
+
+			color: var(--components-inlineMessage-icon-color);
+			margin-block-start: 2px;
+		}
 	}
 }

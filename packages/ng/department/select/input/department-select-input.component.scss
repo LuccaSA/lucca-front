@@ -1,13 +1,19 @@
-@import '_definitions';
-@include selectInputStyle;
+@use '../../../styles/definitions';
+
+@include definitions.selectInputStyle;
 
 .lu-picker-header {
-	.option-selector {
-		display: none;
-	}
-	&.mod-multiple {
+	@layer components {
 		.option-selector {
-			display: inherit;
+			display: none;
+		}
+	}
+
+	@layer mods {
+		&.mod-multiple {
+			.option-selector {
+				display: inherit;
+			}
 		}
 	}
 }

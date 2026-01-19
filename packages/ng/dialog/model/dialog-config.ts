@@ -1,7 +1,7 @@
+import { AutoFocusTarget, DialogConfig } from '@angular/cdk/dialog';
+import { ComponentType } from '@angular/cdk/overlay';
 import { TemplateRef } from '@angular/core';
 import { Observable } from 'rxjs';
-import { ComponentType } from '@angular/cdk/overlay';
-import { AutoFocusTarget, DialogConfig } from '@angular/cdk/dialog';
 
 const ɵdialogData = Symbol.for('luDialogData');
 const ɵdialogResult = Symbol.for('luDialogResult');
@@ -16,7 +16,7 @@ export type LuDialogData<T> = {
 type DialogRefProps<C> = { [K in keyof C]: C[K] extends ɵDialogResultFlag<unknown> ? K : never }[keyof C] & keyof C;
 export type LuDialogResult<C> = DialogRefProps<C> extends never ? void : C[DialogRefProps<C>] extends ɵDialogResultFlag<infer T> ? T : void;
 
-interface BaseLuDialogConfig<C> {
+type BaseLuDialogConfig<C, TData = LuDialogData<C>> = {
 	/**
 	 * The component or template to put inside the dialog container
 	 */
@@ -25,7 +25,7 @@ interface BaseLuDialogConfig<C> {
 	/**
 	 * Data to pass to the component, will be required if the component used `injectDialogData` in a field, specifying the data that's needed.
 	 */
-	data: LuDialogData<C>;
+	data: TData;
 
 	/**
 	 * Should we put a backdrop? Defaults to true
@@ -77,7 +77,7 @@ interface BaseLuDialogConfig<C> {
 	/**
 	 * The size of the panel used for the dialog
 	 */
-	size?: 'XS' | 'S' | 'M' | 'L' | 'XL' | 'fitContent' | `maxContent` | 'fullScreen';
+	size?: 'XS' | 'S' | 'M' | 'L' | 'XL' | 'XXL' | 'fitContent' | `maxContent` | 'fullScreen';
 
 	/**
 	 * Should it be a modal (default), a drawer? a drawer from bottom?
@@ -88,6 +88,6 @@ interface BaseLuDialogConfig<C> {
 	 * Classes to add to the panel
 	 */
 	panelClasses?: string[];
-}
+};
 
-export type LuDialogConfig<T> = LuDialogData<T> extends never ? Omit<BaseLuDialogConfig<T>, 'data'> : BaseLuDialogConfig<T>;
+export type LuDialogConfig<T, TData = LuDialogData<T>> = [TData] extends [never] ? Omit<BaseLuDialogConfig<T, TData>, 'data'> : BaseLuDialogConfig<T, TData>;

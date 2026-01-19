@@ -1,53 +1,42 @@
-import { NgClass, NgIf } from '@angular/common';
-import { booleanAttribute, ChangeDetectionStrategy, Component, EventEmitter, HostBinding, Input, Output, ViewEncapsulation } from '@angular/core';
+import { booleanAttribute, ChangeDetectionStrategy, Component, computed, input, linkedSignal, output, ViewEncapsulation } from '@angular/core';
 import { LuccaIcon } from '@lucca-front/icons';
 import { getIntl, Palette, PortalContent, PortalDirective } from '@lucca-front/ng/core';
-import { CalloutState, CalloutStateMap } from '../callout-state';
+import { IconComponent } from '@lucca-front/ng/icon';
+import { CalloutIconPipe } from '../callout-icon.pipe';
+import { CalloutState } from '../callout-state';
 import { LU_CALLOUT_TRANSLATIONS } from '../callout.translate';
+import { getCalloutPalette } from '../callout.utils';
 
 @Component({
 	selector: 'lu-callout',
-	standalone: true,
-	imports: [NgClass, NgIf, PortalDirective],
+	imports: [PortalDirective, CalloutIconPipe, IconComponent],
 	templateUrl: './callout.component.html',
-	styleUrls: ['./callout.component.scss'],
+	styleUrl: './callout.component.scss',
+	host: {
+		'[attr.hidden]': 'removed() ? "hidden" : null',
+	},
 	changeDetection: ChangeDetectionStrategy.OnPush,
 	encapsulation: ViewEncapsulation.None,
 })
 export class CalloutComponent {
-	@Input()
+	public intl = getIntl(LU_CALLOUT_TRANSLATIONS);
+
 	/**
 	 * The title of the callout
 	 */
-	heading: PortalContent;
+	readonly heading = input<PortalContent>();
 
-	@Input()
 	/**
 	 * Which palette should be used for the entire callout.
 	 * Defaults to none (inherits parent palette)
 	 */
-	palette: Palette = 'none';
+	readonly palette = input<Palette>('none');
 
-	@Input()
 	/**
 	 * Which size should the callout be? Defaults to medium
 	 */
-	size: 'M' | 'S';
+	readonly size = input<'M' | 'S'>();
 
-	@Input({ transform: booleanAttribute })
-	/**
-	 * Should we display the remove icon?
-	 */
-	removable = false;
-
-	@Input()
-	/**
-	 * Which icon should we display in the callout if any?
-	 * Defaults to no icon.
-	 */
-	icon: LuccaIcon;
-
-	@Input()
 	/**
 	 * State is a shorthand to set the icon and the palette to the recommended values for the icon and palette based on
 	 * the provided state.
@@ -55,36 +44,49 @@ export class CalloutComponent {
 	 * If one of the icon or palette inputs are filled along with the state input, their values will have the priority over
 	 * state (so setting state to success and palette to warning will make the palette warning)
 	 */
-	set state(state: CalloutState) {
-		const { icon, palette } = CalloutStateMap[state];
-		if (this.palette === 'none') {
-			this.palette = palette;
-		}
-		if (!this.icon) {
-			this.icon = icon;
-		}
-	}
+	readonly state = input<CalloutState>();
 
-	@Input({ transform: booleanAttribute })
+	/**
+	 * Which icon should we display in the callout if any?
+	 * Defaults to no icon.
+	 */
+	readonly icon = input<LuccaIcon>();
+
+	/**
+	 * Should we display the remove icon?
+	 */
+	readonly removable = input(false, { transform: booleanAttribute });
+
 	/**
 	 * Is the callout removed? Works with two way binding too.
 	 */
-	removed = false;
 
-	@HostBinding('attr.hidden')
-	get hiddenAttr(): 'hidden' | null {
-		return this.removed ? 'hidden' : null;
-	}
+	readonly removed = input(false, { transform: booleanAttribute });
 
-	@Output()
-	removedChange: EventEmitter<boolean> = new EventEmitter<boolean>();
+	/**
+	 * Defines the icon’s alt attribute used for accessibility
+	 */
+	readonly iconAlt = input<string | null>(null);
 
-	public intl = getIntl(LU_CALLOUT_TRANSLATIONS);
+	/**
+	 * Displayed in AI mode
+	 */
+	readonly AI = input(false, { transform: booleanAttribute });
 
-	get calloutClasses() {
+	/**
+	 * Emit event when button removed is click
+	 */
+	readonly removedChange = output<boolean>();
+
+	readonly removedRef = linkedSignal(() => this.removed());
+
+	readonly calloutClasses = computed(() => {
+		const palette = getCalloutPalette(this.state(), this.palette());
+		const size = this.size();
+		const AI = this.AI();
 		return {
-			[`mod-${this.size}`]: !!this.size,
-			[`palette-${this.palette}`]: !!this.palette,
+			[`mod-${size}`]: !!size,
+			[`palette-${palette}`]: !AI && !!palette,
 		};
-	}
+	});
 }

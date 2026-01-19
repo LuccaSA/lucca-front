@@ -4,17 +4,19 @@ import { FormFieldComponent } from '@lucca-front/ng/form-field';
 import { NumberInputComponent } from '@lucca-front/ng/forms';
 import { Meta, moduleMetadata, StoryObj } from '@storybook/angular';
 import { cleanupTemplate, generateInputs } from 'stories/helpers/stories';
+import { StoryModelDisplayComponent } from 'stories/helpers/story-model-display.component';
 
 export default {
 	title: 'Documentation/Forms/Fields/NumberField/Angular',
 	decorators: [
 		moduleMetadata({
-			imports: [NumberInputComponent, FormFieldComponent, FormsModule, ReactiveFormsModule, BrowserAnimationsModule],
+			imports: [NumberInputComponent, FormFieldComponent, FormsModule, ReactiveFormsModule, BrowserAnimationsModule, StoryModelDisplayComponent],
 		}),
 	],
 	argTypes: {
 		tooltip: {
 			type: 'string',
+			if: { arg: 'hiddenLabel', truthy: false },
 		},
 		size: {
 			options: ['M', 'S', 'XS'],
@@ -29,15 +31,18 @@ export default {
 			},
 		},
 		hiddenLabel: {
-			description: 'Masque le label en le conservant dans le DOM pour les lecteurs d\'écrans',
+			description: "Masque le label en le conservant dans le DOM pour les lecteurs d'écrans",
 		},
 	},
 } as Meta;
 
-export const Basic: StoryObj<NumberInputComponent & { disabled: boolean } & FormFieldComponent> = {
+export const Basic: StoryObj<NumberInputComponent & { disabled: boolean; required: boolean } & FormFieldComponent> = {
 	render: (args, { argTypes }) => {
 		const { label, hiddenLabel, tooltip, inlineMessage, inlineMessageState, size, ...inputArgs } = args;
 		return {
+			props: {
+				example: 1000,
+			},
 			template: cleanupTemplate(`<lu-form-field ${generateInputs(
 				{
 					label,
@@ -49,27 +54,21 @@ export const Basic: StoryObj<NumberInputComponent & { disabled: boolean } & Form
 				},
 				argTypes,
 			)}>
-
-	<lu-number-input
-	${generateInputs(inputArgs, argTypes)}
-		[(ngModel)]="example">
-	</lu-number-input>
-
+	<lu-number-input [(ngModel)]="example"${generateInputs(inputArgs, argTypes)} />
 </lu-form-field>
-
-{{example}}`),
+<pr-story-model-display>{{ example }}</pr-story-model-display>`),
 			moduleMetadata: {
 				imports: [NumberInputComponent, FormFieldComponent, FormsModule, BrowserAnimationsModule],
 			},
 		};
 	},
 	args: {
+		hiddenLabel: false,
 		label: 'Label',
 		required: true,
-		hiddenLabel: false,
 		hasClearer: true,
 		disabled: false,
-		inlineMessage: 'Helper Text',
+		inlineMessage: 'Helper text',
 		inlineMessageState: 'default',
 		placeholder: 'Placeholder',
 		tooltip: 'Je suis un message d’aide',
@@ -77,10 +76,16 @@ export const Basic: StoryObj<NumberInputComponent & { disabled: boolean } & Form
 		min: 0,
 		max: 999,
 		noSpinButtons: false,
+		valueAlignRight: false,
 	},
 };
 
-export const WithPrefixAndSuffix: StoryObj<NumberInputComponent & { disabled: boolean } & FormFieldComponent> = {
+export const WithPrefixAndSuffix: StoryObj<
+	NumberInputComponent & {
+		disabled: boolean;
+		required: boolean;
+	} & FormFieldComponent
+> = {
 	render: (args, { argTypes }) => {
 		const { label, hiddenLabel, tooltip, inlineMessage, inlineMessageState, size, prefix, suffix, ...inputArgs } = args;
 		return {
@@ -99,43 +104,36 @@ export const WithPrefixAndSuffix: StoryObj<NumberInputComponent & { disabled: bo
 				},
 				argTypes,
 			)}>
-
-	<lu-number-input
-		${generateInputs(inputArgs, argTypes)}
-		[prefix]="prefix"
-		[suffix]="suffix"
-		[(ngModel)]="example">
-	</lu-number-input>
-
+	<lu-number-input [(ngModel)]="example" [prefix]="prefix" [suffix]="suffix"${generateInputs(inputArgs, argTypes)} />
 </lu-form-field>
-
-{{example}}`),
+<pr-story-model-display>{{ example }}</pr-story-model-display>`),
 			moduleMetadata: {
 				imports: [NumberInputComponent, FormFieldComponent, FormsModule, BrowserAnimationsModule],
 			},
 		};
 	},
 	args: {
+		hiddenLabel: false,
 		label: 'Label',
 		tooltip: 'Tooltip message',
-		hiddenLabel: false,
 		required: true,
 		placeholder: 'Placeholder',
 		disabled: false,
 		hasClearer: false,
 		prefix: {
-			icon: 'dollar',
-			ariaLabel: 'Dollar',
+			content: '$',
+			ariaLabel: 'dollars',
 		},
 		suffix: {
 			content: '€/j',
 			ariaLabel: 'euros par jour',
 		},
-		inlineMessage: 'Helper Text',
+		inlineMessage: 'Helper text',
 		inlineMessageState: 'default',
 		step: 1,
 		min: 0,
 		max: 999,
 		noSpinButtons: false,
+		valueAlignRight: false,
 	},
 };

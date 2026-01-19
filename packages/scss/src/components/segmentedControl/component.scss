@@ -1,0 +1,110 @@
+@use '@lucca-front/scss/src/commons/utils/a11y';
+
+@mixin component($atRoot: 'without: rule') {
+	padding: 0;
+	margin: 0;
+	list-style-type: none;
+	display: flex;
+	flex-wrap: var(--components-segmentedControl-wrap);
+	inline-size: var(--components-segmentedControl-width);
+	flex-direction: var(--components-segmentedControl-direction);
+	box-shadow: 0 0 0 var(--commons-divider-width) var(--palettes-neutral-100);
+	border-radius: var(--components-segmentedControl-borderRadius);
+	background-color: var(--palettes-neutral-0);
+	font: var(--components-segmentedControl-font);
+	gap: var(--commons-divider-width);
+	white-space: var(--components-segmentedControl-whiteSpace);
+
+	@at-root ($atRoot) {
+		.segmentedControl-item-input {
+			@include a11y.mask;
+
+			&:focus-visible {
+				+ .segmentedControl-item-action {
+					@include a11y.focusVisible($offset: 3px);
+				}
+			}
+		}
+
+		// .viewTabs-item is deprecated
+		.segmentedControl-item,
+		.viewTabs-item {
+			flex-grow: 1;
+			position: relative;
+			z-index: 1;
+
+			&::before,
+			&::after {
+				content: '';
+				border-width: 0;
+				inset: var(--components-segmentedControl-dividerInset);
+				border-color: var(--palettes-neutral-100);
+				position: absolute;
+				border-style: solid;
+			}
+
+			&::before {
+				inset-inline-end: calc(var(--commons-divider-width) * -1);
+				border-inline-start-width: var(--commons-divider-width);
+				inset-inline-start: auto;
+			}
+
+			&::after {
+				inset-block-end: calc(var(--commons-divider-width) * -1);
+				border-block-start-width: var(--commons-divider-width);
+				inset-block-start: auto;
+			}
+		}
+
+		// .viewTabs-item-tab is deprecated
+		.segmentedControl-item-action,
+		.viewTabs-item-tab {
+			inline-size: 100%;
+			border: 0;
+			margin: 0;
+			padding: var(--components-segmentedControl-padding);
+			background-color: var(--components-segmentedControl-background);
+			box-shadow: var(--components-segmentedControl-shadow);
+			border-radius: var(--components-segmentedControl-borderRadius);
+			gap: var(--pr-t-spacings-100);
+			color: var(--components-segmentedControl-color);
+			text-align: center;
+			justify-content: center;
+			display: flex;
+			align-items: center;
+			position: relative;
+			cursor: var(--components-segmentedControl-cursor);
+			z-index: var(--components-segmentedControl-zIndex);
+			font: inherit;
+			transition-property: box-shadow;
+			transition-duration: var(--commons-animations-durations-fast);
+
+			&:focus-visible {
+				@include a11y.focusVisible($offset: 3px);
+			}
+
+			&:hover {
+				--components-segmentedControl-shadow: 0 0 0 var(--commons-divider-width) var(--palettes-product-400),
+					var(--pr-t-elevation-shadow-raised);
+				--components-segmentedControl-zIndex: 1;
+			}
+
+			&:active {
+				--components-segmentedControl-background: var(--palettes-neutral-0);
+				--components-segmentedControl-shadow: 0 0 0 var(--commons-divider-width) var(--palettes-product-500),
+					var(--pr-t-elevation-shadow-raised);
+			}
+		}
+
+		// .viewTabs_panel is deprecated
+		.segmentedControl_panel,
+		.viewTabs_panel {
+			display: var(--components-segmentedControl-display, block);
+			border-radius: var(--pr-t-border-radius-default);
+
+			&:focus-visible {
+				@include a11y.focusVisible;
+			}
+		}
+	}
+}

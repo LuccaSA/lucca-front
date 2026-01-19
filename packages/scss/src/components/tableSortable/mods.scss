@@ -1,0 +1,13 @@
+@mixin sortAlignEnd {
+	--components-sortable-direction: row-reverse;
+	--components-sortable-offset: var(--pr-t-spacings-50);
+}
+
+@mixin sortAlignStart {
+	--components-sortable-direction: row;
+	--components-sortable-offset: calc(var(--pr-t-spacings-50) * -1);
+}
+
+@mixin sortAlignCenter {
+	--components-sortable-offset: var(--pr-t-spacings-100);
+}

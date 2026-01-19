@@ -1,0 +1,16 @@
+@use '@lucca-front/icons/src/commons/utils/icon';
+@use '@lucca-front/scss/src/commons/utils/a11y';
+
+@mixin sortAscending {
+	.tableSortable-arrows-ascending {
+		--components-sortable-arrowColor: var(--palettes-neutral-700);
+		--components-sortable-arrowScale: 1.25;
+	}
+}
+
+@mixin sortDescending {
+	.tableSortable-arrows-descending {
+		--components-sortable-arrowColor: var(--palettes-neutral-700);
+		--components-sortable-arrowScale: 1.25;
+	}
+}

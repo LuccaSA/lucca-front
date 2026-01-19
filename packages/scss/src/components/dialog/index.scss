@@ -3,46 +3,66 @@
 @use '@lucca-front/scss/src/components/button/exports' as button;
 
 .dialog {
-	@include vars;
-	@include component;
-
-	&.mod-XS {
-		@include XS;
+	@layer components {
+		@include vars;
+		@include component;
 	}
 
-	&.mod-S {
-		@include S;
-	}
-
-	&.mod-fitContent {
-		@include fitContent;
-	}
-
-	&.mod-maxContent {
-		@include maxContent;
-	}
-
-	&.mod-L {
-		@include L;
-	}
-
-	&.mod-XL {
-		@include XL;
-	}
-
-	&:where(.mod-drawer) {
-		@include drawer;
-
-		&:where(.mod-fromBottom) {
-			@include fromBottom;
+	@layer mods {
+		&.mod-XS {
+			@include XS;
 		}
 
-		@include media.max('XXS') {
-			@include fromBottom;
+		&.mod-S {
+			@include S;
 		}
-	}
 
-	&.mod-fullScreen {
-		@include fullScreen;
+		&.mod-fitContent {
+			@include fitContent;
+		}
+
+		&.mod-maxContent {
+			@include maxContent;
+		}
+
+		&.mod-L {
+			@include L;
+		}
+
+		&.mod-XL {
+			@include XL;
+		}
+
+		&.mod-XXL {
+			@include XXL;
+		}
+
+		&.mod-neutralBackground {
+			@include neutralBackground;
+		}
+
+		&:where(.mod-drawer) {
+			@include drawer;
+
+			&:where(.mod-fromBottom) {
+				@include fromBottom;
+			}
+
+			@include media.max('XXS') {
+				@include fromBottom;
+			}
+		}
+
+		&.mod-fullScreen {
+			@include fullScreen;
+		}
+
+		&:has(.dialog-inside-header-button) {
+			@include withCloseButton;
+		}
+
+		&.mod-stacked {
+			@include stacked;
+		}
 	}
 }

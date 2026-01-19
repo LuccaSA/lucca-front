@@ -1,0 +1,10 @@
+@mixin disabled {
+	--components-dropdown-list-option-action-color: var(--pr-t-color-text-disabled);
+	--components-dropdown-list-option-action-backgroundColor: transparent;
+	--components-dropdown-list-option-action-pointerEvents: none;
+
+	&,
+	&:hover {
+		--components-dropdown-list-option-action-backgroundColor: var(--palettes-neutral-0);
+	}
+}

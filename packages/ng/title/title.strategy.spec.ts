@@ -1,13 +1,13 @@
 import { Location } from '@angular/common';
-import { Component, Inject, OnInit } from '@angular/core';
+import { ChangeDetectionStrategy, Component, Inject, OnInit } from '@angular/core';
 import { Title } from '@angular/platform-browser';
-import { ActivatedRouteSnapshot, TitleStrategy } from '@angular/router';
+import { ActivatedRouteSnapshot, RouterLink, RouterOutlet, TitleStrategy } from '@angular/router';
 import { SpectatorRouting, createRoutingFactory, mockProvider } from '@ngneat/spectator/jest';
 import { of, timer } from 'rxjs';
 import { map, skip } from 'rxjs/operators';
-import { ILuTitleTranslateService, LU_TITLE_TRANSLATE_SERVICE } from './title-translate.service';
+import { ILuTitleTranslateService } from './title-translate.service';
 import { TitleSeparator } from './title.model';
-import { APP_TITLE, LuTitleStrategy } from './title.strategy';
+import { LuTitleStrategy, provideLuTitleStrategy } from './title.strategy';
 
 class TranslateService implements ILuTitleTranslateService {
 	translate(key: string, args: Record<string, unknown> = null): string {
@@ -22,7 +22,9 @@ class TranslateService implements ILuTitleTranslateService {
 
 @Component({
 	selector: 'lu-app',
-	template: `<router-outlet></router-outlet>
+	imports: [RouterOutlet, RouterLink],
+	changeDetection: ChangeDetectionStrategy.OnPush,
+	template: `<router-outlet />
 		<a class="link-2" [routerLink]="['/first']">Stub</a>
 		<a class="link-3" [routerLink]="['/first/1']">Stub</a>
 		<a class="link-4" [routerLink]="['/first/1/last']">Stub</a>
@@ -34,12 +36,15 @@ export class AppComponent {}
 
 @Component({
 	selector: 'lu-stub',
-	template: `<router-outlet></router-outlet>`,
+	imports: [RouterOutlet],
+	changeDetection: ChangeDetectionStrategy.OnPush,
+	template: `<router-outlet />`,
 })
 export class StubComponent {}
 
 @Component({
 	selector: 'lu-override-title',
+	changeDetection: ChangeDetectionStrategy.OnPush,
 	template: `<div></div>`,
 })
 export class OverrideTitleComponent implements OnInit {
@@ -51,7 +56,9 @@ export class OverrideTitleComponent implements OnInit {
 
 @Component({
 	selector: 'lu-delayed-override-title',
-	template: `<router-outlet></router-outlet>`,
+	imports: [RouterOutlet],
+	changeDetection: ChangeDetectionStrategy.OnPush,
+	template: `<router-outlet />`,
 })
 export class DelayedOverrideTitleComponent implements OnInit {
 	constructor(@Inject(TitleStrategy) private titleService: LuTitleStrategy) {}
@@ -62,6 +69,7 @@ export class DelayedOverrideTitleComponent implements OnInit {
 
 @Component({
 	selector: 'lu-override-title-part',
+	changeDetection: ChangeDetectionStrategy.OnPush,
 	template: `<div></div>`,
 })
 export class OverrideTitlePartComponent implements OnInit {
@@ -71,7 +79,7 @@ export class OverrideTitlePartComponent implements OnInit {
 	}
 }
 
-describe('TitleService', () => {
+describe('TitleStrategy', () => {
 	let spectator: SpectatorRouting<AppComponent>;
 	let pageTitleService: LuTitleStrategy;
 
@@ -79,20 +87,11 @@ describe('TitleService', () => {
 		component: AppComponent,
 		providers: [
 			mockProvider(Title),
-			{
-				provide: LU_TITLE_TRANSLATE_SERVICE,
-				useClass: TranslateService,
-			},
-			{
-				provide: TitleStrategy,
-				useClass: LuTitleStrategy,
-			},
-			{
-				provide: APP_TITLE,
-				useValue: 'BU',
-			},
+			provideLuTitleStrategy({
+				appTitle: () => 'BU',
+				translateService: () => new TranslateService(),
+			}),
 		],
-		declarations: [StubComponent, OverrideTitleComponent, OverrideTitlePartComponent, DelayedOverrideTitleComponent],
 		stubsEnabled: false,
 		routes: [
 			{
@@ -162,7 +161,7 @@ describe('TitleService', () => {
 
 		await spectator.fixture.whenStable();
 		expect(spectator.inject(Location).path()).toBe('/');
-		expect(resultTitle).toEqual(`Stub${TitleSeparator}BU${TitleSeparator}Lucca`);
+		expect(resultTitle).toEqual(`Stub${TitleSeparator}Lucca BU`);
 	});
 
 	it('should ignore empty or absent titles', async () => {
@@ -171,7 +170,7 @@ describe('TitleService', () => {
 
 		spectator.click('.link-2');
 		await spectator.fixture.whenStable();
-		expect(resultTitle).toEqual(`Stub${TitleSeparator}BU${TitleSeparator}Lucca`);
+		expect(resultTitle).toEqual(`Stub${TitleSeparator}Lucca BU`);
 	});
 
 	it('should include named params in title', async () => {
@@ -180,7 +179,7 @@ describe('TitleService', () => {
 
 		spectator.click('.link-3');
 		await spectator.fixture.whenStable();
-		expect(resultTitle).toEqual(`Stubs' child 1${TitleSeparator}Stub${TitleSeparator}BU${TitleSeparator}Lucca`);
+		expect(resultTitle).toEqual(`Stubs' child 1${TitleSeparator}Stub${TitleSeparator}Lucca BU`);
 	});
 
 	it('should prepend title when a component forces its own title', async () => {
@@ -191,7 +190,7 @@ describe('TitleService', () => {
 
 		spectator.click('.link-4');
 		await spectator.fixture.whenStable();
-		expect(resultTitle).toEqual(`Overridden title${TitleSeparator}Stubs' child 1${TitleSeparator}Stub${TitleSeparator}BU${TitleSeparator}Lucca`);
+		expect(resultTitle).toEqual(`Overridden title${TitleSeparator}Stubs' child 1${TitleSeparator}Stub${TitleSeparator}Lucca BU`);
 	});
 
 	it('should override title part when a component forces its own title part', async () => {
@@ -201,7 +200,7 @@ describe('TitleService', () => {
 
 		spectator.click('.link-5');
 		await spectator.fixture.whenStable();
-		expect(resultTitle).toEqual(`New title part${TitleSeparator}Stubs' child 1${TitleSeparator}Stub${TitleSeparator}BU${TitleSeparator}Lucca`);
+		expect(resultTitle).toEqual(`New title part${TitleSeparator}Stubs' child 1${TitleSeparator}Stub${TitleSeparator}Lucca BU`);
 	});
 
 	it('should handle observable inputs', async () => {
@@ -211,7 +210,7 @@ describe('TitleService', () => {
 
 		spectator.click('.link-6');
 		await spectator.fixture.whenStable();
-		expect(resultTitle).toEqual(`Overridden title${TitleSeparator}Delayed part${TitleSeparator}Stubs' child 1${TitleSeparator}Stub${TitleSeparator}BU${TitleSeparator}Lucca`);
+		expect(resultTitle).toEqual(`Overridden title${TitleSeparator}Delayed part${TitleSeparator}Stubs' child 1${TitleSeparator}Stub${TitleSeparator}Lucca BU`);
 	});
 
 	it('should include named params in title', async () => {
@@ -220,6 +219,6 @@ describe('TitleService', () => {
 
 		spectator.click('.link-7');
 		await spectator.fixture.whenStable();
-		expect(resultTitle).toEqual(`Stubs' child Name 1${TitleSeparator}Stub${TitleSeparator}BU${TitleSeparator}Lucca`);
+		expect(resultTitle).toEqual(`Stubs' child Name 1${TitleSeparator}Stub${TitleSeparator}Lucca BU`);
 	});
 });

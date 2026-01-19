@@ -1,4 +1,4 @@
-import { Meta, StoryFn } from '@storybook/angular';
+import { Meta, StoryObj } from '@storybook/angular';
 
 interface CheckboxMixedStory {}
 
@@ -14,14 +14,18 @@ function getTemplate(args: CheckboxMixedStory): string {
 		<input type="checkbox" class="checkboxField-input" id="ID" aria-describedby="IDmessage" aria-required="true" aria-checked="mixed" checked />
 		<span class="checkboxField-icon" aria-hidden="true"><span class="checkboxField-icon-check"></span></span>
 	</span>
-	<div class="inlineMessage" id="IDmessage">Helper text</div>
+	<div class="inlineMessage" id="IDmessage">
+		<p class="inlineMessage-content">Helper text</p>
+	</div>
 </div>`;
 }
 
-const Template: StoryFn<CheckboxMixedStory> = (args) => ({
+const Template = (args: CheckboxMixedStory) => ({
 	props: args,
 	template: getTemplate(args),
 });
 
-export const Mixed = Template.bind({});
-Mixed.args = {};
+export const Mixed: StoryObj<CheckboxMixedStory> = {
+	args: {},
+	render: Template,
+};

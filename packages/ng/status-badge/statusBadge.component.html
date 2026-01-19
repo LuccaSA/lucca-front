@@ -1,0 +1,5 @@
+@if (withEllipsis()) {
+	<span class="statusBadge-content pr-u-ellipsis" luTooltip luTooltipWhenEllipsis>{{ label() }}</span>
+} @else {
+	{{ label() }}
+}

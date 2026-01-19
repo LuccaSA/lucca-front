@@ -1,15 +1,15 @@
-import { Meta, StoryFn } from '@storybook/angular';
+import { Meta, StoryObj } from '@storybook/angular';
 
 interface SwitchBasicStory {
 	disabled: boolean;
 	s: boolean;
-	id: Text;
-	label: Text;
-	message: Text;
+	id: string;
+	label: string;
+	message: string;
 	checked: boolean;
 	invalid: false;
 	help: false;
-	messageState: '';
+	messageState: '' | 'error' | 'warning' | 'success';
 }
 
 export default {
@@ -74,24 +74,36 @@ function getTemplate(args: SwitchBasicStory): string {
 	const checked = args.checked ? ` checked="checked"` : '';
 	const invalid = args.invalid ? ` aria-invalid="true"` : '';
 	const help = args.help;
-	const messageState = args.messageState ? ' is-' + args.messageState : '';
+	const messageState = args.messageState ? ` is-${args.messageState}` : '';
 
 	return `<div class="form-field${s}">
 	<label class="formLabel" for="${id}">
-		Label<span *ngIf="help" class="formLabel-info"><span aria-hidden="true" class="lucca-icon icon-signHelp"></span><span class="u-mask">?</span></span>
+		Label
+		@if (help) {
+			<span class="formLabel-info">
+				<span aria-hidden="true" class="lucca-icon icon-signHelp"></span>
+				<span class="pr-u-mask">?</span>
+			</span>
+		}
 	</label>
 	<span class="switchField">
 		<input type="checkbox" class="switchField-input" id="${id}" aria-describedby="${id}message"${checked}${disabled}${invalid} />
 		<span class="switchField-icon" aria-hidden="true"><span class="switchField-icon-check"></span></span>
 	</span>
-	<div class="inlineMessage${messageState}" id="${id}message" *ngIf="message">Helper text</div>
+	@if (message) {
+		<div class="inlineMessage ${messageState}" id="${id}message">
+			<p class="inlineMessage-content">Helper text</p>
+		</div>
+	}
 </div>`;
 }
 
-const Template: StoryFn<SwitchBasicStory> = (args) => ({
+const Template = (args: SwitchBasicStory) => ({
 	props: args,
 	template: getTemplate(args),
 });
 
-export const Basic = Template.bind({});
-Basic.args = { checked: false, s: false, disabled: false, invalid: false, help: false, messageState: '', id: 'field1', label: 'Label', message: 'Helper text' };
+export const Basic: StoryObj<SwitchBasicStory> = {
+	args: { checked: false, s: false, disabled: false, invalid: false, help: false, messageState: '', id: 'field1', label: 'Label', message: 'Helper text' },
+	render: Template,
+};

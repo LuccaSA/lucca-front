@@ -1,10 +1,11 @@
 @use '@lucca-front/icons/src/commons/utils/icon';
 @use '@lucca-front/scss/src/commons/utils/a11y';
+@use '@lucca-front/scss/src/commons/utils/namespace';
 
-@mixin component($atRoot: 'without: rule') {
+@mixin component($atRoot: namespace.$defaultAtRoot) {
 	display: block;
 	position: relative;
-	line-height: var(--sizes-M-lineHeight);
+	line-height: var(--pr-t-font-body-M-lineHeight);
 
 	@at-root ($atRoot) {
 		.checkbox-label {
@@ -19,9 +20,9 @@
 				@include icon.generate('sign_confirm');
 
 				background-color: var(--palettes-neutral-0);
-				width: var(--components-checkbox-input-size);
-				height: var(--components-checkbox-input-size);
-				border-radius: 6px;
+				inline-size: var(--components-checkbox-input-size);
+				block-size: var(--components-checkbox-input-size);
+				border-radius: var(--pr-t-border-radius-small);
 				transition-duration: var(--commons-animations-durations-fast);
 				transition-property: border-color, color, background-color;
 				border: var(--components-checkbox-input-border-width) solid var(--palettes-neutral-700);
@@ -33,8 +34,8 @@
 				color: transparent;
 				display: block;
 				text-align: center;
-				margin-top: 2px;
-				margin-right: var(--pr-t-spacings-100);
+				margin-block-start: 2px;
+				margin-inline-end: var(--pr-t-spacings-100);
 				transform: translate3d(0, 0, 0); // Fix box-shadow artifacts
 				text-indent: calc(var(--components-checkbox-input-border-width) * -1);
 			}
@@ -54,8 +55,8 @@
 
 		.checkbox-label-helper {
 			color: var(--palettes-neutral-600);
-			font-size: var(--sizes-S-fontSize);
-			line-height: var(--sizes-S-lineHeight);
+			font-size: var(--pr-t-font-body-S-fontSize);
+			line-height: var(--pr-t-font-body-S-lineHeight);
 		}
 
 		.checkbox-input {
@@ -72,15 +73,15 @@
 			&:not(:disabled):checked ~ .checkbox-label {
 				&:hover {
 					&::before {
-						background-color: var(--palettes-600, var(--palettes-product-600));
-						border-color: var(--palettes-600, var(--palettes-product-600));
+						background-color: var(--palettes-800, var(--palettes-product-800));
+						border-color: var(--palettes-800, var(--palettes-product-800));
 					}
 				}
 
 				&:active {
 					&::before {
-						background-color: var(--palettes-800, var(--palettes-product-800));
-						border-color: var(--palettes-800, var(--palettes-product-800));
+						background-color: var(--palettes-900, var(--palettes-product-900));
+						border-color: var(--palettes-900, var(--palettes-product-900));
 					}
 				}
 			}

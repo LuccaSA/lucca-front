@@ -23,14 +23,59 @@
   ],
   "author": "Guilde Front Lucca <guilde-front@lucca.fr>",
   "peerDependencies": {
-    "@angular/common": "^18.0.0",
-    "@angular/core": "^18.0.0",
-    "@angular/cdk": "^18.0.0",
+    "@angular/common": "^20.0.0 || ^21.0.0",
+    "@angular/core": "^20.0.0 || ^21.0.0",
+    "@angular/cdk": "^20.0.0 || ^21.0.0",
+    "@angular/animations": "^20.0.0 || ^21.0.0",
     "@lucca-front/icons": "*",
     "@lucca-front/scss": "*",
-    "@types/dompurify": "^3.0.0",
-    "isomorphic-dompurify": "^2.11.0",
-    "rxjs": "^7.8.0"
+    "isomorphic-dompurify": "^2.17.0",
+    "date-fns": "^3.6.0",
+    "ngx-mask": "^20.0.3",
+    "rxjs": "^7.8.0",
+    "@lexical/html": "^0.38.2",
+    "@lexical/text": "^0.38.2",
+    "@lexical/markdown": "^0.38.2",
+    "@lexical/history": "^0.38.2",
+    "@lexical/link": "^0.38.2",
+    "@lexical/plain-text": "^0.38.2",
+    "@lexical/rich-text": "^0.38.2",
+    "@lexical/selection": "^0.38.2",
+    "@lexical/utils": "^0.38.2",
+    "lexical": "^0.38.2",
+    "@ngx-formly/core": "^6.3.11"
+  },
+  "peerDependenciesMeta": {
+    "lexical": {
+      "optional": true
+    },
+    "@lexical/html": {
+      "optional": true
+    },
+    "@lexical/markdown": {
+      "optional": true
+    },
+    "@lexical/history": {
+      "optional": true
+    },
+    "@lexical/link": {
+      "optional": true
+    },
+    "@lexical/plain-text": {
+      "optional": true
+    },
+    "@lexical/rich-text": {
+      "optional": true
+    },
+    "@lexical/selection": {
+      "optional": true
+    },
+    "@lexical/utils": {
+      "optional": true
+    },
+    "@ngx-formly/core": {
+      "optional": true
+    }
   },
   "bugs": {
     "url": "https://github.com/LuccaSA/lucca-front/issues"

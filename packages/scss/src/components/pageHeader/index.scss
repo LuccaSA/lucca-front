@@ -1,18 +1,43 @@
 @use 'exports' as *;
+@use '@lucca-front/scss/src/commons/utils/media';
 
 .pageHeader {
-	@include vars;
-	@include component;
-
-	&.mod-withMenu {
-		@include menu;
+	@layer components {
+		@include vars;
+		@include component;
 	}
 
-	&.mod-withBreadcrumbs {
-		@include breadcrumbs;
-	}
+	@layer mods {
+		// .mod-withMenu is deprecated
+		&.mod-withHorizontalNavigation,
+		&:has(.horizontalNavigation),
+		&.mod-withMenu {
+			@include horizontalNavigation;
+		}
 
-	&.mod-sticky {
-		@include sticky;
+		&:has(.breadcrumbs),
+		&.mod-withBreadcrumbs {
+			@include breadcrumbs;
+		}
+
+		&.mod-sticky {
+			@include sticky;
+
+			@include media.min('S') {
+				@include stickyWide;
+			}
+		}
+
+		@include media.min('S') {
+			@include wide;
+		}
+
+		&:has(.pageHeader-containerOptional) {
+			@include withContainer;
+		}
+
+		&:has(.pageHeader-content-title-back:not(:empty)) {
+			@include withBackButton;
+		}
 	}
 }

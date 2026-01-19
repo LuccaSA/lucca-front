@@ -1,0 +1,35 @@
+@use '@lucca-front/scss/src/commons/utils/namespace';
+@use '@lucca-front/scss/src/commons/utils/reset';
+
+@use '@lucca-front/scss/src/components/button/exports' as button;
+
+@use '@lucca-front/icons/src/icon/exports' as icon;
+
+@mixin component($atRoot: namespace.$defaultAtRoot) {
+	border-radius: var(--pr-t-border-radius-default);
+	position: absolute;
+	transform: translateX(-50%);
+	inset-inline-start: 50%;
+	inset-block-end: var(--components-fileToolbar-insetBlockEnd);
+	box-shadow: var(--pr-t-elevation-shadow-overlay);
+	background-color: var(--pr-t-elevation-surface-raised);
+	z-index: 1;
+	display: var(--components-fileToolbar-display);
+
+	@at-root ($atRoot) {
+		.fileToolbar-list {
+			@include reset.list;
+
+			display: flex;
+			gap: var(--pr-t-spacings-50);
+			padding: var(--components-fileToolbar-list-padding);
+		}
+
+		.fileToolbar-list-item-button.button {
+			@include button.ghost;
+			@include button.S;
+
+			--components-button-padding: var(--pr-t-spacings-75) !important;
+		}
+	}
+}

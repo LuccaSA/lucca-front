@@ -1,4 +1,4 @@
-import { Meta, StoryFn } from '@storybook/angular';
+import { Meta, StoryObj } from '@storybook/angular';
 
 interface FloatStory {}
 
@@ -8,20 +8,20 @@ export default {
 
 function getTemplate(args: FloatStory): string {
 	return `<div>
-	<div class="u-floatLeft demo-utility"><code class="code">u-floatLeft</code></div>
-	<div class="u-floatRight demo-utility"><code class="code">u-floatRight</code></div>
-	<div class="u-clearBoth demo-utility"><code class="code">u-clearBoth</code></div>
+	<div class="pr-u-floatInlineStart demo-utility"><code class="code">pr-u-floatInlineStart</code></div>
+	<div class="pr-u-floatInlineEnd demo-utility"><code class="code">pr-u-floatInlineEnd</code></div>
+	<div class="pr-u-clearBoth demo-utility"><code class="code">pr-u-clearBoth</code></div>
 </div>
 <div>
-	<div class="u-clearfix">
-		<div class="u-floatLeft demo-utility"><code class="code">u-floatLeft</code></div>
-		<div class="u-floatRight demo-utility"><code class="code">u-floatRight</code></div>
+	<div class="pr-u-clearfix">
+		<div class="pr-u-floatInlineStart demo-utility"><code class="code">pr-u-floatInlineStart</code></div>
+		<div class="pr-u-floatInlineEnd demo-utility"><code class="code">pr-u-floatInlineEnd</code></div>
 	</div>
-	<div class="demo-utility"><code class="code">u-clearfix</code></div>
+	<div class="demo-utility"><code class="code">pr-u-clearfix</code></div>
 </div>`;
 }
 
-const Template: StoryFn<FloatStory> = (args) => ({
+const Template = (args: FloatStory) => ({
 	props: args,
 	template: getTemplate(args),
 	styles: [
@@ -33,11 +33,13 @@ const Template: StoryFn<FloatStory> = (args) => ({
 		}
 
 		.demo-utility {
-			margin-bottom: var(--pr-t-spacings-100);
+			margin-block-end: var(--pr-t-spacings-100);
 		}
 		`,
 	],
 });
 
-export const Float = Template.bind({});
-Float.args = {};
+export const Float: StoryObj<FloatStory> = {
+	args: {},
+	render: Template,
+};

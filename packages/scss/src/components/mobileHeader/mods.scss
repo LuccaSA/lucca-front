@@ -2,7 +2,7 @@
 	flex-wrap: wrap;
 
 	.mobileHeader-actions {
-		margin-left: auto;
+		margin-inline-start: auto;
 	}
 
 	.mobileHeader-title {
@@ -12,12 +12,10 @@
 	}
 
 	.mobileHeader-title-main {
-		font-size: var(--sizes-XXL-fontSize);
-		line-height: var(--sizes-XXL-lineHeight);
+		font: var(--pr-t-font-heading-1);
 	}
 
 	.mobileHeader-title-sub {
-		font-size: var(--sizes-M-fontSize);
-		line-height: var(--sizes-M-lineHeight);
+		font: var(--pr-t-font-body-M);
 	}
 }

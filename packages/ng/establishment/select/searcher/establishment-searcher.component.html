@@ -4,4 +4,6 @@
 	</div>
 </form>
 
-<lu-option-placeholder *ngIf="displayPlaceholder$ | async" (onClear)="reset()"></lu-option-placeholder>
+@if (displayPlaceholder$ | async) {
+	<lu-option-placeholder (onClear)="reset()" />
+}

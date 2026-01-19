@@ -1,15 +1,13 @@
 {
   "extends": "../tsconfig.json",
   "compilerOptions": {
-    "types": [
-      "node",
-			"@testing-library/jest-dom"
-    ],
-    "allowSyntheticDefaultImports": true
+    "types": ["node", "@testing-library/jest-dom"],
+    "allowSyntheticDefaultImports": true,
+    "resolveJsonModule": true,
+    "skipLibCheck": true,
+    "moduleResolution": "Bundler"
   },
-  "exclude": ["../node_modules/**/*", "../dist/**/*", "../packages/**/*.spec.ts", "../stories/**/*.spec.ts", "../packages/ng/schematics/**/*"],
-  "include": ["../packages/**/*", "../stories/**/*", "./msw/**/*"],
-  "files": [
-    "./typings.d.ts"
-  ]
+  "exclude": ["../packages/**/*.spec.ts"],
+  "include": ["../**/*.stories.*", "./preview.ts", "./msw/**/*", "./plugins/*.ts"],
+  "files": ["./typings.d.ts"]
 }

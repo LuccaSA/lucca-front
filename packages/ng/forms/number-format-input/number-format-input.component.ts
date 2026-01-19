@@ -1,64 +1,72 @@
-import { booleanAttribute, Component, computed, ElementRef, inject, input, LOCALE_ID, viewChild, ViewEncapsulation } from '@angular/core';
+import { NgTemplateOutlet } from '@angular/common';
+import { AfterViewInit, booleanAttribute, ChangeDetectionStrategy, Component, computed, DestroyRef, ElementRef, inject, input, LOCALE_ID, signal, viewChild, ViewEncapsulation } from '@angular/core';
+import { takeUntilDestroyed } from '@angular/core/rxjs-interop';
 import { ReactiveFormsModule } from '@angular/forms';
-import { FormFieldComponent, InputDirective } from '@lucca-front/ng/form-field';
-import { NoopValueAccessorDirective } from '../noop-value-accessor.directive';
-import { NgIf, NgTemplateOutlet } from '@angular/common';
-import { FormFieldIdDirective } from '../form-field-id.directive';
+import { ClearComponent } from '@lucca-front/ng/clear';
 import { getIntl } from '@lucca-front/ng/core';
-import { LU_NUMBERFORMATFIELD_TRANSLATIONS } from './number-format-input.translate';
-import { injectNgControl } from '../inject-ng-control';
+import { FormFieldComponent, InputDirective } from '@lucca-front/ng/form-field';
 import { NumberFormat, NumberFormatCurrencyDisplay, NumberFormatDirective, NumberFormatOptions, NumberFormatStyle, NumberFormatUnit, NumberFormatUnitDisplay } from '@lucca-front/ng/number-format';
-import { toSignal } from '@angular/core/rxjs-interop';
 import { startWith } from 'rxjs/operators';
+import { FormFieldIdDirective } from '../form-field-id.directive';
+import { injectNgControl } from '../inject-ng-control';
+import { NoopValueAccessorDirective } from '../noop-value-accessor.directive';
 import { TextInputAddon } from '../text-input/text-input-addon';
+import { LU_NUMBERFORMATFIELD_TRANSLATIONS } from './number-format-input.translate';
 
 @Component({
 	selector: 'lu-number-format-input',
-	standalone: true,
-	imports: [FormFieldComponent, InputDirective, NgIf, ReactiveFormsModule, FormFieldIdDirective, NumberFormatDirective, NgTemplateOutlet],
+	imports: [FormFieldComponent, InputDirective, ReactiveFormsModule, FormFieldIdDirective, NumberFormatDirective, NgTemplateOutlet, ClearComponent],
 	templateUrl: './number-format-input.component.html',
 	hostDirectives: [NoopValueAccessorDirective],
 	encapsulation: ViewEncapsulation.None,
+	changeDetection: ChangeDetectionStrategy.OnPush,
 })
-export class NumberFormatInputComponent {
+export class NumberFormatInputComponent implements AfterViewInit {
 	#locale = inject(LOCALE_ID);
+	#destroyRef = inject(DestroyRef);
 
 	ngControl = injectNgControl();
 
-	formatStyle = input<NumberFormatStyle>('decimal');
+	ngAfterViewInit(): void {
+		this.ngControl?.valueChanges?.pipe(takeUntilDestroyed(this.#destroyRef), startWith(this.ngControl.value)).subscribe((value) => this.#suffixPrefixValue.set(value as number));
+	}
 
-	useAutoPrefixSuffix = input<boolean | undefined>(undefined);
+	readonly formatStyle = input<NumberFormatStyle>('decimal');
 
-	prefix = input<TextInputAddon | undefined>(undefined);
+	readonly useAutoPrefixSuffix = input<boolean | undefined>(undefined);
 
-	suffix = input<TextInputAddon | undefined>(undefined);
+	readonly prefix = input<TextInputAddon | undefined>(undefined);
 
-	currency = input<string | undefined>(undefined);
+	readonly suffix = input<TextInputAddon | undefined>(undefined);
 
-	currencyDisplay = input<NumberFormatCurrencyDisplay | undefined>(undefined);
+	readonly currency = input<string | undefined>(undefined);
 
-	unit = input<NumberFormatUnit | undefined>(undefined);
+	readonly currencyDisplay = input<NumberFormatCurrencyDisplay | undefined>(undefined);
 
-	unitDisplay = input<NumberFormatUnitDisplay | undefined>(undefined);
+	readonly unit = input<NumberFormatUnit | undefined>(undefined);
 
-	min = input<number | undefined>(undefined);
+	readonly unitDisplay = input<NumberFormatUnitDisplay | undefined>(undefined);
 
-	max = input<number | undefined>(undefined);
+	readonly min = input<number | undefined>(undefined);
 
-	placeholder = input<string>('');
+	readonly max = input<number | undefined>(undefined);
 
-	hasClearer = input(false, { transform: booleanAttribute });
+	readonly placeholder = input<string>('');
+
+	readonly hasClearer = input(false, { transform: booleanAttribute });
+
+	readonly valueAlignRight = input(false, { transform: booleanAttribute });
 
 	inputElementRef = viewChild<ElementRef<HTMLInputElement>>('inputElement');
 
-	#suffixPrefixValue = toSignal(this.ngControl.valueChanges.pipe(startWith(1)));
+	#suffixPrefixValue = signal(1);
 
-	#numberFormat = computed(() => new NumberFormat(this.formatOptions()));
-	prefixAddon = computed(() => {
+	readonly #numberFormat = computed(() => new NumberFormat(this.formatOptions()));
+	readonly prefixAddon = computed(() => {
 		if (this.useAutoPrefixSuffix() === undefined || this.useAutoPrefixSuffix() === false) {
 			return this.prefix();
 		}
-		const content = this.#numberFormat().getPrefix(this.#suffixPrefixValue() as number);
+		const content = this.#numberFormat().getPrefix(this.#suffixPrefixValue());
 		if (content == null || content.trim() === '') {
 			return undefined;
 		}
@@ -67,11 +75,11 @@ export class NumberFormatInputComponent {
 			ariaLabel: content,
 		} as TextInputAddon;
 	});
-	suffixAddon = computed(() => {
+	readonly suffixAddon = computed(() => {
 		if (this.useAutoPrefixSuffix() === undefined || this.useAutoPrefixSuffix() === false) {
 			return this.suffix();
 		}
-		const content = this.#numberFormat().getSuffix(this.#suffixPrefixValue() as number);
+		const content = this.#numberFormat().getSuffix(this.#suffixPrefixValue());
 		if (content == null || content.trim() === '') {
 			return undefined;
 		}
@@ -81,7 +89,7 @@ export class NumberFormatInputComponent {
 		} as TextInputAddon;
 	});
 
-	formatOptions = computed(
+	readonly formatOptions = computed(
 		() =>
 			({
 				locale: this.#locale,
@@ -95,12 +103,10 @@ export class NumberFormatInputComponent {
 			}) satisfies NumberFormatOptions,
 	);
 
-	intl = getIntl(LU_NUMBERFORMATFIELD_TRANSLATIONS);
+	readonly intl = getIntl(LU_NUMBERFORMATFIELD_TRANSLATIONS);
 
 	clearValue(): void {
 		this.ngControl.reset();
 		this.inputElementRef().nativeElement.focus();
 	}
-
-	protected readonly viewChild = viewChild;
 }

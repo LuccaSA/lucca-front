@@ -1,29 +1,29 @@
 import { provideHttpClient } from '@angular/common/http';
-import { Component } from '@angular/core';
+import { ChangeDetectionStrategy, Component } from '@angular/core';
 import { provideAnimations } from '@angular/platform-browser/animations';
 import { LuApiSelectInputComponent } from '@lucca-front/ng/api';
-import { Meta, StoryFn, applicationConfig } from '@storybook/angular';
+import { applicationConfig, Meta, StoryObj } from '@storybook/angular';
 
 @Component({
 	selector: 'api-select-story',
-	standalone: true,
 	imports: [LuApiSelectInputComponent],
 	template: `
 		<label class="textfield">
-			<lu-api-select data-testid="lu-select" class="textfield-input" [api]="apiV3"></lu-api-select>
+			<lu-api-select data-testid="lu-select" class="textfield-input" [api]="apiV3" />
 			<span class="textfield-label">Api V3 Select</span>
 		</label>
 
-		<label class="textfield pr-u-marginTop300">
-			<lu-api-select class="textfield-input" standard="v4" [api]="apiV4" sort="job.name,level.position"> </lu-api-select>
+		<label class="textfield pr-u-marginBlockStart300">
+			<lu-api-select class="textfield-input" standard="v4" [api]="apiV4" sort="job.name,level.position" />
 			<span class="textfield-label">Api V4 Select</span>
 		</label>
 
-		<label class="textfield pr-u-marginTop300">
-			<lu-api-select class="textfield-input" [disabled]="true" standard="v4" [api]="apiV4" sort="job.name,level.position"> </lu-api-select>
+		<label class="textfield pr-u-marginBlockStart300">
+			<lu-api-select class="textfield-input" [disabled]="true" standard="v4" [api]="apiV4" sort="job.name,level.position" />
 			<span class="textfield-label">Api V4 Select</span>
 		</label>
 	`,
+	changeDetection: ChangeDetectionStrategy.OnPush,
 })
 class ApiSelectStory {
 	apiV3 = '/api/v3/axisSections';
@@ -36,7 +36,7 @@ export default {
 	decorators: [applicationConfig({ providers: [provideAnimations(), provideHttpClient()] })],
 } as Meta;
 
-const Template: StoryFn<ApiSelectStory> = (args) => ({
+const Template = (args: ApiSelectStory) => ({
 	props: args,
 });
 
@@ -45,15 +45,14 @@ import { LuApiSelectInputComponent } from '@lucca-front/ng/api';
 
 @Component({
 	selector: 'api-select-story',
-	standalone: true,
 	imports: [LuApiSelectInputComponent],
 	template: \`
 		<label class="textfield">
-			<lu-api-select class="textfield-input" [api]="apiV3"></lu-api-select>
+			<lu-api-select class="textfield-input" [api]="apiV3" />
 			<span class="textfield-label">Api V3 Select</span>
 		</label>
 
-		<label class="textfield pr-u-marginTop300">
+		<label class="textfield pr-u-marginBlockStart300">
 			<lu-api-select class="textfield-input"
 				standard="v4"
 				[api]="apiV4"
@@ -68,7 +67,10 @@ class ApiSelectStory {
 	apiV4 = '/organization/structure/api/job-qualifications'
 }`;
 
-export const Basic = Template.bind({});
+export const Basic: StoryObj<ApiSelectStory> = {
+	args: {},
+	render: Template,
+};
 Basic.parameters = {
 	// Disable controls as they are not modifiable because of ComponentWrapper
 	controls: { include: [] },

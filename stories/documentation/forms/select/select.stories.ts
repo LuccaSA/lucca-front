@@ -1,18 +1,17 @@
-import { Component } from '@angular/core';
+import { ChangeDetectionStrategy, Component } from '@angular/core';
 import { FormsModule } from '@angular/forms';
 import { provideAnimations } from '@angular/platform-browser/animations';
 import { LuInputDisplayerDirective } from '@lucca-front/ng/input';
 import { LuOptionItemComponent, LuOptionPickerComponent } from '@lucca-front/ng/option';
 import { LuSelectInputComponent } from '@lucca-front/ng/select';
-import { Meta, StoryFn, applicationConfig } from '@storybook/angular';
+import { applicationConfig, Meta, StoryObj } from '@storybook/angular';
 
 @Component({
 	selector: 'select-stories',
-	standalone: true,
 	imports: [LuSelectInputComponent, LuOptionItemComponent, LuOptionPickerComponent, LuInputDisplayerDirective, FormsModule],
 	template: `
-		<div class="u-displayFlex">
-			<label class="textfield pr-u-marginRight200">
+		<div class="pr-u-displayFlex">
+			<label class="textfield pr-u-marginInlineEnd200">
 				<lu-select class="textfield-input" placeholder="Select an item">
 					<ng-container *luDisplayer="let value">{{ value }}</ng-container>
 					<lu-option-picker>
@@ -23,7 +22,7 @@ import { Meta, StoryFn, applicationConfig } from '@storybook/angular';
 				</lu-select>
 				<span class="textfield-label">Select</span>
 			</label>
-			<label class="textfield pr-u-marginRight200">
+			<label class="textfield pr-u-marginInlineEnd200">
 				<lu-select class="textfield-input" placeholder="Select an item" [multiple]="true">
 					<ng-container *luDisplayer="let value">{{ value }}</ng-container>
 					<lu-option-picker>
@@ -34,7 +33,7 @@ import { Meta, StoryFn, applicationConfig } from '@storybook/angular';
 				</lu-select>
 				<span class="textfield-label">Multiple Select</span>
 			</label>
-			<label class="textfield pr-u-marginRight200">
+			<label class="textfield pr-u-marginInlineEnd200">
 				<lu-select [(ngModel)]="item" class="textfield-input">
 					<ng-container *luDisplayer="let value">{{ value.name }}</ng-container>
 					<lu-option-picker>
@@ -64,6 +63,7 @@ import { Meta, StoryFn, applicationConfig } from '@storybook/angular';
 			</label>
 		</div>
 	`,
+	changeDetection: ChangeDetectionStrategy.OnPush,
 })
 class SelectStory {
 	green = { id: 1, name: 'Green' };
@@ -84,7 +84,7 @@ export default {
 	decorators: [applicationConfig({ providers: [provideAnimations()] })],
 } as Meta;
 
-const template: StoryFn<SelectStory> = (args) => ({
+const template = (args: SelectStory) => ({
 	props: args,
 });
 
@@ -94,7 +94,6 @@ import { LuOptionItemComponent, LuOptionPickerComponent } from '@lucca-front/ng/
 import { LuInputDisplayerDirective } from '@lucca-front/ng/input';
 @Component({
 	selector: 'select-story',
-	standalone: true,
 	imports: [LuSelectInputComponent, LuOptionItemComponent, LuOptionPickerComponent, LuInputDisplayerDirective],
 	template: \`
 		<label class="textfield">
@@ -132,8 +131,11 @@ import { LuInputDisplayerDirective } from '@lucca-front/ng/input';
 })
 class SelectStory { }`;
 
-export const Basic = template.bind({});
-Basic.args = {};
+export const Basic: StoryObj<SelectStory> = {
+	args: {},
+	render: template,
+};
+
 Basic.parameters = {
 	// Disable controls as they are not modifiable because of ComponentWrapper
 	controls: { include: [] },

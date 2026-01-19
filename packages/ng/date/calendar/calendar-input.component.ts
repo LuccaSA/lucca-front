@@ -1,18 +1,18 @@
-import { CommonModule, FormStyle, getLocaleDayNames, getLocaleFirstDayOfWeek, TranslationWidth } from '@angular/common';
+import { FormStyle, getLocaleDayNames, getLocaleFirstDayOfWeek, TranslationWidth } from '@angular/common';
 import { ChangeDetectionStrategy, ChangeDetectorRef, Component, ElementRef, forwardRef, Inject, Input, LOCALE_ID, OnInit, Renderer2 } from '@angular/core';
 import { AbstractControl, ControlValueAccessor, FormsModule, NG_VALIDATORS, NG_VALUE_ACCESSOR, ValidationErrors, Validator } from '@angular/forms';
-import { ALuDateAdapter, ELuDateGranularity, LuDateGranularity } from '@lucca-front/ng/core';
+import { ALuDateAdapter, ELuDateGranularity, getIntl, LuDateGranularity } from '@lucca-front/ng/core';
 import { ALuInput } from '@lucca-front/ng/input';
+import { LU_CALENDARINPUT_TRANSLATIONS } from './calendar-input.translate';
 import { LuCalendarItemFactory } from './calendar-item.factory';
 import { ICalendarItem } from './calendar-item.interface';
 
 @Component({
 	selector: 'lu-calendar',
 	templateUrl: './calendar-input.component.html',
-	styleUrls: ['./calendar-input.component.scss'],
+	styleUrl: './calendar-input.component.scss',
 	changeDetection: ChangeDetectionStrategy.OnPush,
-	standalone: true,
-	imports: [FormsModule, CommonModule],
+	imports: [FormsModule],
 	providers: [
 		{
 			provide: NG_VALUE_ACCESSOR,
@@ -28,6 +28,8 @@ import { ICalendarItem } from './calendar-item.interface';
 	],
 })
 export class LuCalendarInputComponent<D> extends ALuInput<D> implements ControlValueAccessor, OnInit, Validator {
+	intl = getIntl(LU_CALENDARINPUT_TRANSLATIONS);
+
 	@Input() min?: D;
 	@Input() max?: D;
 	@Input() granularity: LuDateGranularity = ELuDateGranularity.day;
@@ -276,10 +278,6 @@ export class LuCalendarInputComponent<D> extends ALuInput<D> implements ControlV
 				break;
 		}
 		this.render();
-	}
-
-	trackBy(_idx, item: ICalendarItem<D>) {
-		return item.id;
 	}
 
 	increaseGranularity() {

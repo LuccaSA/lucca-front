@@ -9,7 +9,6 @@ import { NumberFormatOptions } from './number-format.models';
 
 @Directive({
 	selector: 'input[luNumberFormatInput]',
-	standalone: true,
 	providers: [
 		{
 			provide: NG_VALUE_ACCESSOR,
@@ -23,7 +22,6 @@ export class NumberFormatDirective implements ControlValueAccessor {
 	readonly #renderer = inject(Renderer2);
 
 	#value = signal<number | undefined | null>(null);
-	#valueAtFocus: number | undefined | null = null;
 	#isFocused = signal<boolean>(false);
 
 	formatOptions = input.required<NumberFormatOptions>();
@@ -53,7 +51,6 @@ export class NumberFormatDirective implements ControlValueAccessor {
 		this.#renderer.setProperty(this.#inputElement, 'disabled', isDisabled);
 	}
 	@HostListener('focus') focus(): void {
-		this.#valueAtFocus = this.#value();
 		this.#isFocused.set(true);
 		this.#inputElement.value = this.#numberFormat().getFocusFormat(this.#value());
 	}
@@ -61,9 +58,7 @@ export class NumberFormatDirective implements ControlValueAccessor {
 	@HostListener('blur') lostFocus(): void {
 		this.#isFocused.set(false);
 		this.#inputElement.value = this.#numberFormat().getBlurFormat(this.#value());
-		if (this.#valueAtFocus !== this.#value()) {
-			this.onTouched();
-		}
+		this.onTouched();
 	}
 
 	@HostListener('input') input(): void {

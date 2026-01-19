@@ -1,0 +1,198 @@
+@use '@lucca-front/scss/src/commons/utils/namespace';
+
+@use '@lucca-front/scss/src/commons/utils/a11y';
+@use '@lucca-front/scss/src/commons/utils/text';
+
+@use '@lucca-front/icons/src/icon/exports' as icon;
+
+@mixin component($atRoot: namespace.$defaultAtRoot) {
+	border: 1px solid var(--components-fileEntry-borderColor);
+	padding: var(--components-fileEntry-padding);
+	margin: 0;
+	border-radius: var(--pr-t-border-radius-default);
+	background-color: var(--pr-t-elevation-surface-raised);
+	gap: 0 var(--components-fileEntry-gapInline);
+	position: relative;
+	grid-column: var(--components-fileEntry-gridColumn);
+	min-block-size: var(--components-fileEntry-minHeight);
+	display: var(--components-fileEntry-display);
+	align-items: center;
+	grid-template-columns: auto 1fr auto;
+	grid-template-areas: var(--components-fileEntry-gridTemplateAreas);
+
+	&:has(.fileEntry-status-content-fileName) {
+		.fileToolbar {
+			--components-fileToolbar-insetBlockEnd: calc(var(--pr-t-spacings-150) + var(--pr-t-spacings-400) + var(--pr-t-spacings-25));
+		}
+	}
+
+	&:has(.fileEntry-filename-tooltip:focus-visible, .fileEntry-status-content:focus-visible) {
+		@include a11y.focusVisible;
+	}
+
+	@at-root ($atRoot) {
+		.fileEntryDisplayWrapper {
+			display: grid;
+			grid-template-columns: repeat(auto-fill, minmax(12rem, 1fr));
+			gap: var(--pr-t-spacings-100);
+
+			&:empty {
+				display: none;
+			}
+
+			.form-field:has(.fileUpload) + & {
+				margin-top: var(--pr-t-spacings-100);
+			}
+		}
+
+		.fileEntry-status {
+			inline-size: var(--components-fileEntry-status-inlineSize);
+			block-size: var(--components-fileEntry-status-blockSize);
+			color: var(--palettes-neutral-700);
+			flex-shrink: 0;
+			aspect-ratio: var(--components-fileEntry-status-aspectRatio);
+			margin: var(--components-fileEntry-status-margin);
+			grid-area: picture;
+			display: flex;
+			flex-direction: column;
+		}
+
+		.fileEntry-status-content {
+			display: flex;
+			flex-direction: column;
+			flex-grow: 1;
+			outline: none;
+			justify-content: center;
+			align-items: center;
+			padding: var(--components-fileEntry-status-content-padding);
+			position: relative;
+		}
+
+		.fileEntry-status-content-fileName {
+			@include text.ellipsis;
+
+			flex-shrink: 0;
+			text-align: center;
+			padding: var(--pr-t-spacings-100);
+			padding-block-end: var(--pr-t-spacings-25);
+			inline-size: 100%;
+		}
+
+		.fileEntry-status-content-inside-icon {
+			color: var(--palettes-critical-700);
+		}
+
+		.fileEntry-status-content-inlineMessage.inlineMessage {
+			flex-direction: column;
+			align-items: center;
+			text-align: center;
+
+			.inlineMessage-statusIcon:first-child {
+				@include icon.M;
+			}
+		}
+
+		.fileEntry-status-content-inside {
+			position: relative;
+			flex-grow: 1;
+			inline-size: 100%;
+			border-radius: var(--pr-t-border-radius-50);
+			overflow: hidden;
+			display: flex;
+			align-items: center;
+			justify-content: center;
+			background-color: var(--components-fileEntry-status-content-inside-backgroundColor);
+
+			& + & {
+				position: absolute;
+				inset-block-start: 0;
+				inset-block-end: var(--components-fileEntry-status-content-inside-insetBlockEnd);
+			}
+		}
+
+		.fileEntry-status-content-inside-svg {
+			inline-size: var(--components-fileEntry-status-content-svg-width);
+			block-size: var(--components-fileEntry-status-content-svg-height);
+			margin: var(--components-fileEntry-status-content-svg-margin);
+		}
+
+		.fileEntry-status-content-inside-img {
+			object-fit: cover;
+			inline-size: 100%;
+			block-size: 100%;
+			position: absolute;
+			inset: 0;
+			opacity: var(--components-fileEntry-status-content-img-opacity);
+		}
+
+		.fileEntry-toolbar {
+			grid-area: toolbar;
+			margin: 0;
+		}
+
+		.fileEntry-filename {
+			grid-area: title;
+			align-self: var(--components-fileEntry-filename-alignSelf);
+			min-inline-size: 0;
+		}
+
+		.fileEntry-filename-tooltip {
+			@include text.ellipsis;
+
+			outline: none;
+		}
+
+		.fileEntry-description {
+			grid-area: description;
+			align-self: start;
+			color: var(--palettes-neutral-600);
+			font: var(--pr-t-font-body-S);
+			display: var(--components-fileEntry-description-display);
+			margin: 0;
+			gap: var(--pr-t-spacings-100);
+			min-inline-size: 0;
+		}
+
+		.fileEntry-description-format {
+			@include text.ellipsis;
+
+			border-radius: var(--pr-t-border-radius-50);
+			max-inline-size: 20ch;
+
+			&:focus-visible {
+				@include a11y.focusVisible;
+			}
+		}
+
+		.fileEntry-inlineMessage {
+			grid-area: description;
+			margin: 0;
+			align-self: start;
+			min-inline-size: 0;
+
+			.inlineMessage-statusIcon {
+				display: none;
+			}
+		}
+
+		.fileEntry_box.box {
+			margin-top: var(--pr-t-spacings-150);
+		}
+
+		.fileEntry_box-field {
+			display: flex;
+			flex-wrap: wrap;
+			gap: var(--pr-t-spacings-100);
+		}
+
+		.fileEntry_box-field-textField {
+			flex-grow: 1;
+		}
+
+		.fileEntry_box-field-button.button {
+			flex-grow: 1;
+			flex-basis: 0;
+			min-inline-size: fit-content;
+		}
+	}
+}

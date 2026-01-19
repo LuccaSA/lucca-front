@@ -1,0 +1,176 @@
+@mixin daysOff {
+	.calendar-table-body-row-cell-action {
+		&:not(:disabled, [aria-disabled='true']) {
+			&:active {
+				--components-calendar-table-body-row-cell-action-stripesColor: var(--palettes-product-900);
+			}
+		}
+	}
+}
+
+@mixin current {
+	.calendar-table-body-row-cell-action {
+		--components-calendar-table-body-row-cell-actionFontWeight: 600;
+		--components-calendar-table-body-row-cell-actionColor: var(--palettes-700, var(--palettes-product-700));
+	}
+}
+
+@mixin selected {
+	&::before {
+		--components-calendar-table-body-row-cellSelectedBeforeContent: '';
+	}
+
+	&.is-daysOff {
+		.calendar-table-body-row-cell-action {
+			--components-calendar-table-body-row-cell-action-stripesColor: var(--palettes-200, var(--palettes-product-200));
+
+			&:active {
+				--components-calendar-table-body-row-cell-action-stripesColor: var(--palettes-900, var(--palettes-product-900));
+			}
+		}
+	}
+}
+
+@mixin unselected {
+	&::before {
+		--components-calendar-table-body-row-cellSelectedBeforeContent: none;
+	}
+
+	&.is-daysOff {
+		.calendar-table-body-row-cell-action {
+			--components-calendar-table-body-row-cell-action-stripesColor: var(--palettes-neutral-200);
+		}
+	}
+}
+
+@mixin extremity {
+	.calendar-table-body-row-cell-action {
+		--components-calendar-table-body-row-cell-actionColor: var(--palettes-0, var(--palettes-product-0));
+		--components-calendar-table-body-row-cell-actionHighlight: var(--palettes-700, var(--palettes-product-700));
+
+		&:hover {
+			--components-calendar-table-body-row-cell-actionHighlight: var(--palettes-600, var(--palettes-product-600));
+			--components-calendar-table-body-row-cell-action-stripesColor: var(--palettes-700, var(--palettes-product-700));
+			--components-calendar-table-body-row-cell-actionOutlineWidth: 0;
+		}
+
+		&:active {
+			--components-calendar-table-body-row-cell-actionHighlight: var(--palettes-800, var(--palettes-product800));
+			--components-calendar-table-body-row-cell-action-stripesColor: var(--palettes-900, var(--palettes-product-900));
+		}
+
+		&:focus-visible {
+			--components-calendar-table-body-row-cell-actionOutlineOffset: 3px;
+		}
+	}
+
+	&.is-selected {
+		.calendar-table-body-row-cell-action {
+			--components-calendar-table-body-row-cell-actionColor: var(--palettes-0, var(--palettes-product-0));
+		}
+	}
+
+	&.is-daysOff {
+		.calendar-table-body-row-cell-action {
+			--components-calendar-table-body-row-cell-action-stripesColor: var(--palettes-800, var(--palettes-product-800));
+		}
+	}
+}
+
+@mixin start {
+	@include extremity;
+
+	&::before {
+		inset-inline-start: var(--pr-t-spacings-75);
+
+		--components-calendar-table-body-row-cellSelectedBeforeBorderRadius: var(--pr-t-border-radius-default) 0 0 var(--pr-t-border-radius-default);
+	}
+}
+
+@mixin end {
+	@include extremity;
+
+	&::before {
+		inset-inline-end: var(--pr-t-spacings-75);
+
+		--components-calendar-table-body-row-cellSelectedBeforeBorderRadius: 0 var(--pr-t-border-radius-default) var(--pr-t-border-radius-default) 0;
+	}
+}
+
+@mixin startInProgress {
+	&:not(:hover) {
+		@include extremity;
+	}
+
+	--components-calendar-table-body-row-cell-action-stripesColor: var(--palettes-200, var(--palettes-product-200));
+
+	&:has(:focus-visible) {
+		&.is-daysOff {
+			.calendar-table-body-row-cell-action {
+				--components-calendar-table-body-row-cell-action-stripesColor: var(--palettes-200, var(--palettes-product-200));
+			}
+		}
+
+		.calendar-table-body-row-cell-action {
+			--components-calendar-table-body-row-cell-actionHighlight: transparent;
+			--components-calendar-table-body-row-cell-actionColor: var(--palettes-neutral-700);
+			--components-calendar-table-body-row-cell-actionOutlineOffset: -1px !important;
+		}
+	}
+
+	&::before {
+		inset-inline-end: 0;
+
+		--components-calendar-table-body-row-cellSelectedBeforeContent: '';
+		--components-calendar-table-body-row-cellSelectedBeforeBorderRadius: var(--pr-t-border-radius-default) 0 0 var(--pr-t-border-radius-default);
+	}
+}
+
+@mixin endInProgress {
+	&:not(:hover) {
+		@include extremity;
+	}
+
+	--components-calendar-table-body-row-cell-action-stripesColor: var(--palettes-200, var(--palettes-product-200));
+
+	&:has(:focus-visible) {
+		&.is-daysOff {
+			.calendar-table-body-row-cell-action {
+				--components-calendar-table-body-row-cell-action-stripesColor: var(--palettes-200, var(--palettes-product-200));
+			}
+		}
+
+		.calendar-table-body-row-cell-action {
+			--components-calendar-table-body-row-cell-actionHighlight: transparent;
+			--components-calendar-table-body-row-cell-actionColor: var(--palettes-neutral-700);
+			--components-calendar-table-body-row-cell-actionOutlineOffset: -1px !important;
+		}
+	}
+
+	&::before {
+		inset-inline-start: 0;
+
+		--components-calendar-table-body-row-cellSelectedBeforeContent: '';
+		--components-calendar-table-body-row-cellSelectedBeforeBorderRadius: 0 var(--pr-t-border-radius-default) var(--pr-t-border-radius-default) 0;
+	}
+}
+
+@mixin startEndInProgress {
+	@include extremity;
+
+	&::before {
+		--components-calendar-table-body-row-cellSelectedBeforeContent: none;
+	}
+}
+
+@mixin overflow {
+	.calendar-table-body-row-cell-action {
+		--components-calendar-table-body-row-cell-actionColor: var(--pr-t-color-text-subtle);
+	}
+}
+
+@mixin disabled {
+	--components-calendar-table-body-row-cell-actionColor: var(--palettes-neutral-500);
+	--components-calendar-table-body-row-cell-actionTextDecoration: line-through;
+	--components-calendar-table-body-row-cell-actionCursor: default;
+}

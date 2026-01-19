@@ -1,13 +1,15 @@
 import { ChangeDetectionStrategy, Component } from '@angular/core';
-import { FieldType, FieldTypeConfig } from '@ngx-formly/core';
+import { ReactiveFormsModule } from '@angular/forms';
+import { LuApiSelectInputComponent } from '@lucca-front/ng/api';
+import { FieldType, FieldTypeConfig, FormlyModule } from '@ngx-formly/core';
 
 @Component({
 	selector: 'lu-formly-field-api',
 	styleUrls: ['formly-field.common.scss', 'select.scss'],
 	templateUrl: './api.html',
 	changeDetection: ChangeDetectionStrategy.OnPush,
+	imports: [ReactiveFormsModule, FormlyModule, LuApiSelectInputComponent],
 })
-// eslint-disable-next-line @angular-eslint/component-class-suffix
 export class LuFormlyFieldApi extends FieldType<FieldTypeConfig> {
 	get _api() {
 		return this.props['api'] as string;

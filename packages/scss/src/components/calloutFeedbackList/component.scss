@@ -1,16 +1,20 @@
 @use '@lucca-front/scss/src/commons/utils/reset';
+@use '@lucca-front/scss/src/commons/utils/namespace';
+@use '@lucca-front/scss/src/commons/utils/color';
 @use '@lucca-front/scss/src/components/button/exports' as button;
 
-@mixin component($atRoot: 'without: rule') {
+@mixin component($atRoot: namespace.$defaultAtRoot) {
 	@include reset.list;
 
 	display: flex;
 	flex-direction: column;
-	font-size: var(--components-calloutFeedbackList-fontSize);
-	line-height: var(--components-calloutFeedbackList-lineHeight);
+	font: var(--components-calloutFeedbackList-font);
+	font-size: var(--components-calloutFeedbackList-fontSize); // Deprecated
+	line-height: var(--components-calloutFeedbackList-lineHeight); // Deprecated
 	gap: var(--components-calloutFeedbackList-gap);
 
 	.button {
+		@include color.palette('neutral');
 		@include button.S;
 	}
 
@@ -24,6 +28,10 @@
 		.calloutFeedbackList-item-actions {
 			display: inline-flex;
 			gap: var(--pr-t-spacings-100);
+
+			&:empty {
+				display: none;
+			}
 		}
 	}
 }

@@ -1,3 +1,19 @@
 @use '@lucca-front/scss/src/components/textField';
 @use '@lucca-front/scss/src/components/formLabel';
 @use '@lucca-front/scss/src/components/form';
+@use '@lucca-front/scss/src/components/inputFramed';
+@use '@lucca-front/scss/src/components/form/exports' as _form;
+
+lu-form-field:has(~ .box) {
+	@layer mods {
+		.form-field {
+			&.mod-withArrow {
+				@include _form.withArrow;
+
+				&.mod-S {
+					@include _form.withArrowS;
+				}
+			}
+		}
+	}
+}

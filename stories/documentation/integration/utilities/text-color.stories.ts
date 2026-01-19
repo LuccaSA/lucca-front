@@ -1,4 +1,4 @@
-import { Meta, StoryFn } from '@storybook/angular';
+import { Meta, StoryObj } from '@storybook/angular';
 
 interface TextColorStory {}
 
@@ -8,36 +8,65 @@ export default {
 
 function getTemplate(args: TextColorStory): string {
 	return `<div class="demo-utilityWrapper">
-	<div class="u-textNeutral demo-utility"><code class="code">u-textNeutral</code> Lorem ipsum</div>
-	<div class="u-textProduct demo-utility"><code class="code">u-textProduct</code> Lorem ipsum</div>
-	<div class="u-textBrand demo-utility"><code class="code">u-textBrand</code> Lorem ipsum</div>
+	<div class="pr-u-colorText demo-utility"><code class="code">pr-u-colorText</code> Lorem ipsum</div>
+	<div class="pr-u-colorTextHeading demo-utility"><code class="code">pr-u-colorTextHeading</code> Lorem ipsum</div>
+	<div class="pr-u-colorTextHighlight demo-utility"><code class="code">pr-u-colorTextHighlight</code> Lorem ipsum</div>
+	<div class="pr-u-colorTextSubtle demo-utility"><code class="code">pr-u-colorTextSubtle</code> Lorem ipsum</div>
+	<div class="pr-u-colorTextDisabled demo-utility"><code class="code">pr-u-colorTextDisabled</code> Lorem ipsum</div>
+	<div class="pr-u-colorTextReverse demo-utility"><code class="code">pr-u-colorTextReverse</code> Lorem ipsum</div>
+	<div class="pr-u-colorTextSuccess demo-utility"><code class="code">pr-u-colorTextSuccess</code> Lorem ipsum</div>
+	<div class="pr-u-colorTextWarning demo-utility"><code class="code">pr-u-colorTextWarning</code> Lorem ipsum</div>
+	<div class="pr-u-colorTextCritical demo-utility"><code class="code">pr-u-colorTextCritical</code> Lorem ipsum</div>
 </div>
 <div class="demo-utilityWrapper">
-	<div class="u-textSuccess demo-utility"><code class="code">u-textSuccess</code> Lorem ipsum</div>
-	<div class="u-textWarning demo-utility"><code class="code">u-textWarning</code> Lorem ipsum</div>
-	<div class="u-textCritical demo-utility"><code class="code">u-textCritical</code> Lorem ipsum</div>
+	<div class="pr-u-colorTextProduct demo-utility"><code class="code">pr-u-colorTextProduct</code> Lorem ipsum</div>
+	<div class="pr-u-colorTextBrand demo-utility"><code class="code">pr-u-colorTextBrand</code> Lorem ipsum</div>
+	<div class="pr-u-colorInputTextPlaceholder demo-utility"><code class="code">pr-u-colorInputTextPlaceholder</code> Lorem ipsum</div>
 </div>
 <div class="demo-utilityWrapper">
-	<div class="u-textKiwi demo-utility"><code class="code">u-textKiwi</code> Lorem ipsum</div>
-	<div class="u-textLime demo-utility"><code class="code">u-textLime</code> Lorem ipsum</div>
-	<div class="u-textCucumber demo-utility"><code class="code">u-textCucumber</code> Lorem ipsum</div>
-	<div class="u-textMint demo-utility"><code class="code">u-textMint</code> Lorem ipsum</div>
-	<div class="u-textGlacier demo-utility"><code class="code">u-textGlacier</code> Lorem ipsum</div>
-	<div class="u-textLagoon demo-utility"><code class="code">u-textLagoon</code> Lorem ipsum</div>
-	<div class="u-textBlueberry demo-utility"><code class="code">u-textBlueberry</code> Lorem ipsum</div>
-	<div class="u-textLavender demo-utility"><code class="code">u-textLavender</code> Lorem ipsum</div>
-	<div class="u-textGrape demo-utility"><code class="code">u-textGrape</code> Lorem ipsum</div>
-	<div class="u-textWatermelon demo-utility"><code class="code">u-textWatermelon</code> Lorem ipsum</div>
-	<div class="u-textPumpkin demo-utility"><code class="code">u-textPumpkin</code> Lorem ipsum</div>
-	<div class="u-textPineapple demo-utility"><code class="code">u-textPineapple</code> Lorem ipsum</div>
+	<div class="pr-u-colorTextKiwi demo-utility"><code class="code">pr-u-colorTextKiwi</code> Lorem ipsum</div>
+	<div class="pr-u-colorTextLime demo-utility"><code class="code">pr-u-colorTextLime</code> Lorem ipsum</div>
+	<div class="pr-u-colorTextCucumber demo-utility"><code class="code">pr-u-colorTextCucumber</code> Lorem ipsum</div>
+	<div class="pr-u-colorTextMint demo-utility"><code class="code">pr-u-colorTextMint</code> Lorem ipsum</div>
+	<div class="pr-u-colorTextGlacier demo-utility"><code class="code">pr-u-colorTextGlacier</code> Lorem ipsum</div>
+	<div class="pr-u-colorTextLagoon demo-utility"><code class="code">pr-u-colorTextLagoon</code> Lorem ipsum</div>
+	<div class="pr-u-colorTextBlueberry demo-utility"><code class="code">pr-u-colorTextBlueberry</code> Lorem ipsum</div>
+	<div class="pr-u-colorTextLavender demo-utility"><code class="code">pr-u-colorTextLavender</code> Lorem ipsum</div>
+	<div class="pr-u-colorTextGrape demo-utility"><code class="code">pr-u-colorTextGrape</code> Lorem ipsum</div>
+	<div class="pr-u-colorTextWatermelon demo-utility"><code class="code">pr-u-colorTextWatermelon</code> Lorem ipsum</div>
+	<div class="pr-u-colorTextPumpkin demo-utility"><code class="code">pr-u-colorTextPumpkin</code> Lorem ipsum</div>
+	<div class="pr-u-colorTextPineapple demo-utility"><code class="code">pr-u-colorTextPineapple</code> Lorem ipsum</div>
+</div>
+<h2>💀 Deprecated</h2>
+<div class="demo-utilityWrapper">
+	<div class="pr-u-textProduct demo-utility"><code class="code">pr-u-textProduct</code> Lorem ipsum</div>
+	<div class="pr-u-textBrand demo-utility"><code class="code">pr-u-textBrand</code> Lorem ipsum</div>
+	<div class="pr-u-textPlaceholder demo-utility"><code class="code">pr-u-textPlaceholder</code> Lorem ipsum</div>
 </div>
 <div class="demo-utilityWrapper">
-	<div class="u-textLight demo-utility"><code class="code">u-textLight</code> Lorem ipsum</div>
-	<div class="u-textPlaceholder demo-utility"><code class="code">u-textPlaceholder</code> Lorem ipsum</div>
+	<div class="pr-u-textNeutral demo-utility"><code class="code">pr-u-textNeutral</code> Lorem ipsum</div>
+	<div class="pr-u-textLight demo-utility"><code class="code">pr-u-textLight</code> Lorem ipsum</div>
+	<div class="pr-u-textSuccess demo-utility"><code class="code">pr-u-textSuccess</code> Lorem ipsum</div>
+	<div class="pr-u-textWarning demo-utility"><code class="code">pr-u-textWarning</code> Lorem ipsum</div>
+	<div class="pr-u-textCritical demo-utility"><code class="code">pr-u-textCritical</code> Lorem ipsum</div>
+</div>
+<div class="demo-utilityWrapper">
+	<div class="pr-u-textKiwi demo-utility"><code class="code">pr-u-textKiwi</code> Lorem ipsum</div>
+	<div class="pr-u-textLime demo-utility"><code class="code">pr-u-textLime</code> Lorem ipsum</div>
+	<div class="pr-u-textCucumber demo-utility"><code class="code">pr-u-textCucumber</code> Lorem ipsum</div>
+	<div class="pr-u-textMint demo-utility"><code class="code">pr-u-textMint</code> Lorem ipsum</div>
+	<div class="pr-u-textGlacier demo-utility"><code class="code">pr-u-textGlacier</code> Lorem ipsum</div>
+	<div class="pr-u-textLagoon demo-utility"><code class="code">pr-u-textLagoon</code> Lorem ipsum</div>
+	<div class="pr-u-textBlueberry demo-utility"><code class="code">pr-u-textBlueberry</code> Lorem ipsum</div>
+	<div class="pr-u-textLavender demo-utility"><code class="code">pr-u-textLavender</code> Lorem ipsum</div>
+	<div class="pr-u-textGrape demo-utility"><code class="code">pr-u-textGrape</code> Lorem ipsum</div>
+	<div class="pr-u-textWatermelon demo-utility"><code class="code">pr-u-textWatermelon</code> Lorem ipsum</div>
+	<div class="pr-u-textPumpkin demo-utility"><code class="code">pr-u-textPumpkin</code> Lorem ipsum</div>
+	<div class="pr-u-textPineapple demo-utility"><code class="code">pr-u-textPineapple</code> Lorem ipsum</div>
 </div>`;
 }
 
-const Template: StoryFn<TextColorStory> = (args) => ({
+const Template = (args: TextColorStory) => ({
 	props: args,
 	template: getTemplate(args),
 	styles: [
@@ -63,5 +92,7 @@ const Template: StoryFn<TextColorStory> = (args) => ({
 	],
 });
 
-export const TextColor = Template.bind({});
-TextColor.args = {};
+export const TextColor: StoryObj<TextColorStory> = {
+	args: {},
+	render: Template,
+};

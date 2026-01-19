@@ -1,6 +1,6 @@
-import { Pipe, PipeTransform } from '@angular/core';
+import { LOCALE_ID, Pipe, PipeTransform } from '@angular/core';
 import { ALuSelectInputComponent } from '@lucca-front/ng/core-select';
-import { StoryObj } from '@storybook/angular';
+import { applicationConfig, StoryObj } from '@storybook/angular';
 import { HiddenArgType } from '../../../helpers/common-arg-types';
 
 export type LegumeColor = 'green' | 'purple' | 'red' | 'orange' | 'white' | 'yellow' | 'brown';
@@ -50,7 +50,7 @@ export const allLegumes: ILegume[] = [
 	{ name: 'Potimarron', index: 28, color: 'orange' },
 	{ name: 'Radis', index: 29, color: 'red' },
 	{ name: 'Tomate', index: 30, color: 'red' },
-	{ name: 'Topinambour', index: 31, color: 'yellow' },
+	{ name: 'Topinambour Topinambour Topinambour Topinambour Topinambour Topinambour', index: 31, color: 'yellow' },
 ];
 
 export const colorNameByColor: Record<LegumeColor, string> = {

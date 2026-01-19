@@ -1,4 +1,4 @@
-import { Meta, StoryFn } from '@storybook/angular';
+import { Meta, StoryObj } from '@storybook/angular';
 
 interface TextfieldSizeStory {}
 
@@ -15,7 +15,12 @@ function getTemplate(args: TextfieldSizeStory): string {
 			<input type="text" id="ID" class="textField-input-value" aria-labelledby="IDlabel" aria-describedby="IDmessage" placeholder="Placeholder" aria-invalid="false" />
 		</div>
 	</div>
-	<div class="inlineMessage" id="IDmessage"><span aria-hidden="true" class="lucca-icon"></span>Helper text</div>
+	<div class="inlineMessage" id="IDmessage">
+		<span aria-hidden="true" class="lucca-icon inlineMessage-statusIcon"></span>
+		<p class="inlineMessage-content">
+			Helper text
+		</p>
+	</div>
 </div>
 <div class="form-field mod-XS">
 	<label class="formLabel" id="IDlabel" for="ID">Label</label>
@@ -24,19 +29,26 @@ function getTemplate(args: TextfieldSizeStory): string {
 			<input type="text" id="ID" class="textField-input-value" aria-labelledby="IDlabel" aria-describedby="IDmessage" placeholder="Placeholder" aria-invalid="false" />
 		</div>
 	</div>
-	<div class="inlineMessage" id="IDmessage"><span aria-hidden="true" class="lucca-icon"></span>Helper text</div>
+	<div class="inlineMessage" id="IDmessage">
+		<span aria-hidden="true" class="lucca-icon inlineMessage-statusIcon"></span>
+		<p class="inlineMessage-content">
+			Helper text
+		</p>
+	</div>
 </div>`;
 }
 
-const Template: StoryFn<TextfieldSizeStory> = (args) => ({
+const Template = (args: TextfieldSizeStory) => ({
 	props: args,
 	template: getTemplate(args),
 	styles: [
 		`.form-field {
-			margin-bottom: var(--pr-t-spacings-200);
+			margin-block-end: var(--pr-t-spacings-200);
 		}`,
 	],
 });
 
-export const Size = Template.bind({});
-Size.args = {};
+export const Size: StoryObj<TextfieldSizeStory> = {
+	args: {},
+	render: Template,
+};

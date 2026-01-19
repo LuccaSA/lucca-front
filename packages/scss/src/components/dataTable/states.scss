@@ -1,0 +1,19 @@
+@mixin collapsed {
+	--components-dataTable-row-display: none;
+}
+
+@mixin expanded {
+	--components-dataTable-expand-rotation: 0deg;
+}
+
+@mixin hover {
+	--components-dataTable-cell-background: var(--palettes-neutral-25);
+}
+
+@mixin selected {
+	--components-dataTable-cell-background: var(--palettes-product-50);
+}
+
+@mixin selectedHover {
+	--components-dataTable-cell-background: var(--palettes-product-100);
+}

@@ -1,19 +1,27 @@
 @use 'exports' as *;
 
 .breadcrumbs {
-	@include vars;
-	@include component;
+	@layer components {
+		@include vars;
+		@include component;
+	}
 
-	&.mod-compact {
-		@include compact;
+	@layer mods {
+		// .mod-compact is deprecated
+		&.mod-compact {
+			@include compact;
+		}
 	}
 }
 
-.breadcrumbs-list-item-action {
-	// &.active is deprecated
-	&.is-active,
-	&.active,
-	&[aria-current='page'] {
-		@include active;
+// Second selector to get rid of breadcrumbs-list-item-action on angular component
+.breadcrumbs-list-item-action, .breadcrumbs-list-item > a {
+	@layer mods {
+		// .active is deprecated
+		&.is-active,
+		&.active,
+		&[aria-current='page'] {
+			@include active;
+		}
 	}
 }

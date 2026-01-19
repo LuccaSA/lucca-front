@@ -1,30 +1,85 @@
 {
-	"$schema": "../../../node_modules/@angular-devkit/schematics/collection-schema.json",
-	"schematics": {
-		"ng-add": {
-			"description": "Add my lucca-front to the project.",
-			"factory": "./ng-add/index#ngAdd",
-			"schema": "./ng-add/schema.json"
-		},
-		"new-icons": {
-			"description": "Replace old icon names with new ones.",
-			"factory": "./new-icons/index",
-			"schema": "./new-icons/schema.json"
-		},
-		"tokens-spacings": {
-			"description": "Replace tokens with new names.",
-			"factory": "./tokens-spacing/index",
-			"schema": "./tokens-spacing/schema.json"
-		},
-		"palettes": {
-			"description": "Replace palettes with new names.",
-			"factory": "./palettes/index",
-			"schema": "./palettes/schema.json"
-		},
-		"action-icon": {
-			"description": "Replace actionIcon usages with button mod-onlyIcon",
-			"factory": "./action-icon/index",
-			"schema": "./action-icon/schema.json"
-		}
-	}
+  "$schema": "../../../node_modules/@angular-devkit/schematics/collection-schema.json",
+  "schematics": {
+    "ng-add": {
+      "description": "Add my lucca-front to the project.",
+      "factory": "./ng-add/index#ngAdd",
+      "schema": "./ng-add/schema.json"
+    },
+    "new-icons": {
+      "description": "Replace old icon names with new ones.",
+      "factory": "./new-icons/index",
+      "schema": "./new-icons/schema.json"
+    },
+    "lu-select": {
+      "description": "Migrate lu-select into lu-simple-select and lu-multiple-select where possible.",
+      "factory": "./lu-select/index",
+      "schema": "./lu-select/schema.json"
+    },
+    "lu-text-input": {
+      "description": "Migrate deprecated textfield into lu-text-input where possible.",
+      "factory": "./lu-text-input/index",
+      "schema": "./lu-text-input/schema.json"
+    },
+    "tokens-spacings": {
+      "description": "Replace spacing tokens with new names.",
+      "factory": "./tokens-spacing/index",
+      "schema": "./tokens-spacing/schema.json"
+    },
+    "tokens-radius": {
+      "description": "Replace radius tokens with new names.",
+      "factory": "./tokens-radius/index",
+      "schema": "./tokens-radius/schema.json"
+    },
+    "class-prefix": {
+      "description": "Add pr- prefix to all utility classes",
+      "factory": "./class-prefix/index",
+      "schema": "./class-prefix/schema.json"
+    },
+    "component-path": {
+      "description": "Update path component import",
+      "factory": "./component-path/index",
+      "schema": "./component-path/schema.json"
+    },
+    "tokens-typo": {
+      "description": "Replace typography tokens with new names.",
+      "factory": "./tokens-typo/index",
+      "schema": "./tokens-typo/schema.json"
+    },
+    "color-text": {
+      "description": "Replace color text tokens.",
+      "factory": "./color-text/index",
+      "schema": "./color-text/schema.json"
+    },
+    "palettes": {
+      "description": "Replace palettes with new names.",
+      "factory": "./palettes/index",
+      "schema": "./palettes/schema.json"
+    },
+    "alignment-utilities": {
+      "description": "Replace alignment utilities tokens.",
+      "factory": "./alignment-utilities/index",
+      "schema": "./alignment-utilities/schema.json"
+    },
+    "action-icon": {
+      "description": "Replace actionIcon usages with button mod-onlyIcon",
+      "factory": "./action-icon/index",
+      "schema": "./action-icon/schema.json"
+    },
+    "cdn-urls": {
+      "description": "Replace cdn urls with their new location",
+      "factory": "./cdn-urls/index",
+      "schema": "./cdn-urls/schema.json"
+    },
+    "lu-icon": {
+      "description": "Migrate HTML icons to the new lu-icon component",
+      "factory": "./lu-icon/index",
+      "schema": "./lu-icon/schema.json"
+    },
+    "lu-button": {
+      "description": "Migrate CSS-only buttons to the new luButton component",
+      "factory": "./lu-button/index",
+      "schema": "./lu-button/schema.json"
+    }
+  }
 }

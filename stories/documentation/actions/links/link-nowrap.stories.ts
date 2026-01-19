@@ -1,21 +1,19 @@
-import { Meta, StoryFn } from '@storybook/angular';
+import { Meta, StoryObj } from '@storybook/angular';
 
-interface LinkNoWrapStory {
-}
+interface LinkNoWrapStory {}
 
 export default {
 	title: 'Documentation/Actions/Link/NoWrap',
-	argTypes: {
-	},
+	argTypes: {},
 } as Meta;
 
 function getTemplate(args: LinkNoWrapStory): string {
 	return `<a class="link mod-icon" href="#" target="_blank">
-	Lien externe sans retour à la ligne possible avant l’icône<span class="link-icon"><span aria-hidden="true" class="lucca-icon icon-arrowExternal"></span></span><span class="u-mask">Ouvrir dans une nouvelle fenêtre</span>
+	<span class="link-text">Text link (without icon wrap)</span><!-- no text node here --><span class="link-icon"><span aria-hidden="true" class="lucca-icon icon-arrowExternal"></span></span><span class="pr-u-mask">Open in a new window</span>
 </a>`;
 }
 
-const Template: StoryFn<LinkNoWrapStory> = (args) => ({
+const Template = (args: LinkNoWrapStory) => ({
 	props: args,
 	template: getTemplate(args),
 	styles: [
@@ -23,12 +21,11 @@ const Template: StoryFn<LinkNoWrapStory> = (args) => ({
 		:host {
 			display: block;
 		}
-		a {
-			margin-right: 1rem;
-		}
 		`,
 	],
 });
 
-export const NoWrapLink = Template.bind({});
-NoWrapLink.args = {};
+export const NoWrapLink: StoryObj<LinkNoWrapStory> = {
+	args: {},
+	render: Template,
+};

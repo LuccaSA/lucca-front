@@ -1,7 +1,16 @@
-import { Meta, StoryFn } from '@storybook/angular';
+import { Meta, StoryObj } from '@storybook/angular';
 
 interface NotchBoxAdvancedStory {
 	direction: string;
+	notchPosition: number;
+	notchWidth: number;
+	notchHeight: number;
+	notchInnerRadius: number;
+	notchOuterRadius: number;
+	badgeWidth: number;
+	badgeHeight: number;
+	badgeRadius: number;
+	badgeOffset: number;
 }
 
 export default {
@@ -106,11 +115,11 @@ function getTemplate(args: NotchBoxAdvancedStory): string {
 		<div class="notchBox-badge"></div>
 		<div class="notchBox-wrapper">
 			<div class="notchBox-wrapper-content">
-				<h2 class="u-h3">Advanced use of notchBox : manual override of default(s) parameter(s)</h2>
-				Lorem ipsum dolor sit amet, consectetur adipiscing elit. Maecenas vehicula lacinia nisl in maximus. 
-				Maecenas nec enim non nulla faucibus posuere.Lorem ipsum dolor sit amet, consectetur adipiscing elit. 
-				Maecenas vehicula lacinia nisl in maximus. Maecenas nec enim non nulla faucibus posuere.Lorem ipsum dolor sit amet, consectetur adipiscing elit. Maecenas vehicula lacinia nisl in maximus. 
-				Maecenas nec enim non nulla faucibus posuere.Lorem ipsum dolor sit amet, consectetur adipiscing elit. 
+				<h2 class="pr-u-h3">Advanced use of notchBox : manual override of default(s) parameter(s)</h2>
+				Lorem ipsum dolor sit amet, consectetur adipiscing elit. Maecenas vehicula lacinia nisl in maximus.
+				Maecenas nec enim non nulla faucibus posuere.Lorem ipsum dolor sit amet, consectetur adipiscing elit.
+				Maecenas vehicula lacinia nisl in maximus. Maecenas nec enim non nulla faucibus posuere.Lorem ipsum dolor sit amet, consectetur adipiscing elit. Maecenas vehicula lacinia nisl in maximus.
+				Maecenas nec enim non nulla faucibus posuere.Lorem ipsum dolor sit amet, consectetur adipiscing elit.
 				Maecenas vehicula lacinia nisl in maximus. Maecenas nec enim non nulla faucibus posuere.
 				Lorem ipsum dolor sit amet, consectetur adipiscing elit. Maecenas vehicula lacinia nisl in maximus.
 				Lorem ipsum dolor sit amet, consectetur adipiscing elit. Maecenas vehicula lacinia nisl in maximus.
@@ -121,7 +130,7 @@ function getTemplate(args: NotchBoxAdvancedStory): string {
 	`;
 }
 
-const Template: StoryFn<NotchBoxAdvancedStory> = (args) => ({
+const Template = (args: NotchBoxAdvancedStory) => ({
 	props: args,
 	template: getTemplate(args),
 	styles: [
@@ -132,16 +141,18 @@ const Template: StoryFn<NotchBoxAdvancedStory> = (args) => ({
 	],
 });
 
-export const Advanced = Template.bind({});
-Advanced.args = {
-	direction: 'mod-notchTop',
-	notchPosition: 50,
-	notchWidth: 56,
-	notchHeight: 24,
-	notchInnerRadius: 18,
-	notchOuterRadius: 8,
-	badgeWidth: 48,
-	badgeHeight: 48,
-	badgeRadius: 14,
-	badgeOffset: 17,
+export const Advanced: StoryObj<NotchBoxAdvancedStory> = {
+	args: {
+		direction: 'mod-notchTop',
+		notchPosition: 50,
+		notchWidth: 56,
+		notchHeight: 24,
+		notchInnerRadius: 18,
+		notchOuterRadius: 8,
+		badgeWidth: 48,
+		badgeHeight: 48,
+		badgeRadius: 14,
+		badgeOffset: 17,
+	},
+	render: Template,
 };

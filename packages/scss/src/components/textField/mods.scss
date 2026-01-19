@@ -2,12 +2,21 @@
 @use '@lucca-front/icons/src/icon/exports' as icon;
 
 @mixin S {
-	--component-textField-fontSize: var(--sizes-S-fontSize);
-	--component-textField-lineHeight: var(--sizes-S-lineHeight);
+	--component-textField-font: var(--pr-t-font-body-S);
 	--component-textField-padding: var(--pr-t-spacings-75);
+	--component-textField-affix-size: 1.5rem;
+
+	.textField-input-affix-toggle {
+		@include icon.S;
+	}
 
 	.textField-input-affix-clear {
-		@include clear.S;
+		// :not(.class) is only there to increase specificity when the class isn’t present
+		// but the class should be present, and this code is temporary
+		&.clear,
+		&:not(.clear) {
+			@include clear.S;
+		}
 	}
 
 	.textField-input-affix-icon {
@@ -16,9 +25,9 @@
 }
 
 @mixin XS {
-	--component-textField-fontSize: var(--sizes-XS-fontSize);
-	--component-textField-lineHeight: var(--sizes-XS-lineHeight);
+	--component-textField-font: var(--pr-t-font-body-XS);
 	--component-textField-padding: var(--pr-t-spacings-50);
+	--component-textField-borderRadius: var(--pr-t-border-radius-small);
 
 	.textField-prefix,
 	.textField-suffix {
@@ -30,12 +39,55 @@
 	}
 
 	.textField-input-affix-clear {
-		@include clear.S;
+		// :not(.class) is only there to increase specificity when the class isn’t present
+		// but the class should be present, and this code is temporary
+		&.clear,
+		&:not(.clear) {
+			@include clear.S;
+		}
 	}
 }
 
 @mixin valueAlignRight {
 	.textField-input-value {
-		text-align: right;
+		text-align: end;
 	}
+}
+
+// on place le textarea et son clone dans une même grille : la hauteur du clone dimentionnera le textarea
+@mixin autoResize {
+	.textField-input {
+		display: grid;
+		align-items: normal;
+		min-inline-size: 0;
+		scroll-margin-block-end: var(--component-textField-scrollMargin);
+	}
+
+	.textField-input-valueClone,
+	.textField-input-value {
+		white-space: pre-wrap;
+		overflow-wrap: break-word;
+		grid-area: 1 / 1 / 2 / 2;
+		resize: none;
+		min-inline-size: 0;
+		overflow: auto;
+	}
+
+	.textField-input-valueClone {
+		visibility: hidden;
+
+		&::after {
+			// stylelint-disable-next-line no-irregular-whitespace
+			content: ' ' / '';
+		}
+	}
+}
+
+@mixin filterPill {
+	--component-textField-borderRadius: var(--pr-t-border-radius-default);
+	--component-textField-border: var(--palettes-neutral-100);
+	--component-textField-borderHover: var(--palettes-product-400);
+	--component-textField-width: 15rem;
+
+	@include S;
 }

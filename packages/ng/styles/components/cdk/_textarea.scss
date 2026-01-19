@@ -1,4 +1,6 @@
-:root {
+@use '@lucca-front/scss/src/commons/utils/namespace';
+
+@include namespace.appendRootVars {
 	--components-cdk-textarea-input-padding-horizontal: var(--pr-t-spacings-100);
 }
 
@@ -6,17 +8,20 @@
 	resize: none;
 	line-height: 1.3;
 	box-sizing: content-box;
-	width: calc(100% - (2 * var(--components-cdk-textarea-input-padding-horizontal)));
+	inline-size: calc(100% - (2 * var(--components-cdk-textarea-input-padding-horizontal)));
 
-	&.textField-input-value { // specificity to override .textField-input-value:is(textarea)
-		height: auto;
-		min-height: 0;
+	// specificity to override .textField-input-value:is(textarea)
+	&.textField-input-value {
+		block-size: auto;
+		min-block-size: 0;
 	}
 }
 
 .cdk-textarea-autosize-measuring {
-	height: auto !important;
+	block-size: auto !important;
 	overflow: hidden !important;
-	padding: 2px 0 !important;
+	padding-block: 2px !important;
+	padding-inline: 0 !important;
 	box-sizing: content-box !important;
 }
+

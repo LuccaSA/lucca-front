@@ -1,6 +1,1 @@
-@import '_definitions';
-
-:host {
-  @include userPictureVars;
-  @include userTileStyle;
-}
+@use '@lucca-front/scss/src/components/userTile';

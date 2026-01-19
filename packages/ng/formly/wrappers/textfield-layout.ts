@@ -4,11 +4,10 @@ import { FieldWrapper } from '@ngx-formly/core';
 // wrapper component
 @Component({
 	selector: 'lu-formly-wrapper-layout',
-	styleUrls: ['flex-layout.scss'],
+	styleUrl: 'flex-layout.scss',
 	templateUrl: './textfield-layout.html',
 	changeDetection: ChangeDetectionStrategy.OnPush,
 })
-// eslint-disable-next-line @angular-eslint/component-class-suffix
 export class LuFormlyWrapperTextfieldLayout extends FieldWrapper {
 	@ViewChild('fieldComponent', { read: ViewContainerRef, static: true })
 	override fieldComponent: ViewContainerRef;

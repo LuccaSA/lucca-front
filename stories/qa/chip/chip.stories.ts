@@ -1,10 +1,13 @@
-import { Component } from '@angular/core';
-import { Meta, StoryFn } from '@storybook/angular';
+import { ChangeDetectionStrategy, Component } from '@angular/core';
+import { ChipComponent } from '@lucca-front/ng/chip';
+import { IconComponent } from '@lucca-front/ng/icon';
+import { Meta, StoryObj } from '@storybook/angular';
 
 @Component({
-	standalone: true,
 	selector: 'chip-stories',
 	templateUrl: './chip.stories.html',
+	imports: [ChipComponent, IconComponent],
+	changeDetection: ChangeDetectionStrategy.OnPush,
 })
 class ChipStory {}
 
@@ -13,6 +16,9 @@ export default {
 	component: ChipStory,
 } as Meta;
 
-const template: StoryFn<ChipStory> = () => ({});
+const template = () => ({});
 
-export const basic = template.bind({});
+export const Basic: StoryObj<ChipStory> = {
+	args: {},
+	render: template,
+};

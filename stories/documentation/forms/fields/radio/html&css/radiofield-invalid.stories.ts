@@ -1,4 +1,4 @@
-import { Meta, StoryFn } from '@storybook/angular';
+import { Meta, StoryObj } from '@storybook/angular';
 
 interface RadioInvalidStory {}
 
@@ -18,7 +18,9 @@ function getTemplate(args: RadioInvalidStory): string {
 			<input aria-invalid="true" type="radio" class="radioField-input" id="IDradioA" name="radioName1" aria-describedby="IDmessageRadioA IDmessageRadioGlobal" checked />
 			<span class="radioField-icon" aria-hidden="true"><span class="radioField-icon-check"></span></span>
 		</span>
-		<div class="inlineMessage" id="IDmessageRadioA">Option text</div>
+		<div class="inlineMessage" id="IDmessageRadioA">
+			<p class="inlineMessage-content">Option text</p>
+		</div>
 	</div>
 	<div class="form-field">
 		<label class="formLabel" for="IDradioB">Option B</label>
@@ -26,16 +28,22 @@ function getTemplate(args: RadioInvalidStory): string {
 			<input aria-invalid="true" type="radio" class="radioField-input" id="IDradioB" name="radioName1" aria-describedby="IDmessageRadioB IDmessageRadioGlobal" />
 			<span class="radioField-icon" aria-hidden="true"><span class="radioField-icon-check"></span></span>
 		</span>
-		<div class="inlineMessage" id="IDmessageRadioB">Option text</div>
+		<div class="inlineMessage" id="IDmessageRadioB">
+			<p class="inlineMessage-content">Option text</p>
+		</div>
 	</div>
-	<div class="inlineMessage is-error" id="IDmessageRadioGlobal">Helper message</div>
+	<div class="inlineMessage is-error" id="IDmessageRadioGlobal">
+		<p class="inlineMessage-content">Helper message</p>
+	</div>
 </fieldset>`;
 }
 
-const Template: StoryFn<RadioInvalidStory> = (args) => ({
+const Template = (args: RadioInvalidStory) => ({
 	props: args,
 	template: getTemplate(args),
 });
 
-export const Invalid = Template.bind({});
-Invalid.args = {};
+export const Invalid: StoryObj<RadioInvalidStory> = {
+	args: {},
+	render: Template,
+};

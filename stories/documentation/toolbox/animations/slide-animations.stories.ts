@@ -1,46 +1,52 @@
-import { CommonModule } from '@angular/common';
-import { Component } from '@angular/core';
+import { ChangeDetectionStrategy, Component } from '@angular/core';
 import { provideAnimations } from '@angular/platform-browser/animations';
 import { luSlideAnimationFactory } from '@lucca-front/ng/animations';
-import { applicationConfig, Meta, StoryFn } from '@storybook/angular';
+import { applicationConfig, Meta, StoryObj } from '@storybook/angular';
 
 @Component({
 	selector: 'story-slide-animation',
-	standalone: true,
-	imports: [CommonModule],
 	template: `
 		<div class="grid mod-auto">
 			<div class="grid-column ng-demo-block">
 				<h3 class="pr-u-margin0">
 					Left <button class="button mod-S" (click)="slidingLeft = !slidingLeft">{{ slidingLeft ? 'Show' : 'Hide' }}</button>
 				</h3>
-				<div class="animated-block" [@slideAnimation]="'left'" *ngIf="!slidingLeft">Slide from left</div>
+				@if (!slidingLeft) {
+					<div class="animated-block" [@slideAnimation]="'left'">Slide from left</div>
+				}
 			</div>
 			<div class="grid-column ng-demo-block">
 				<h3 class="pr-u-margin0">
 					Right
 					<button class="button mod-S" (click)="slidingRight = !slidingRight">{{ slidingRight ? 'Show' : 'Hide' }}</button>
 				</h3>
-				<div class="animated-block" [@slideAnimation]="'right'" *ngIf="!slidingRight">Slide from right</div>
+				@if (!slidingRight) {
+					<div class="animated-block" [@slideAnimation]="'right'">Slide from right</div>
+				}
 			</div>
 			<div class="grid-column ng-demo-block">
 				<h3 class="pr-u-margin0">
 					Top
 					<button class="button mod-S" (click)="slidingTop = !slidingTop">{{ slidingTop ? 'Show' : 'Hide' }}</button>
 				</h3>
-				<div class="animated-block" [@slideAnimation]="'top'" *ngIf="!slidingTop">Slide from top</div>
+				@if (!slidingTop) {
+					<div class="animated-block" [@slideAnimation]="'top'">Slide from top</div>
+				}
 			</div>
 			<div class="grid-column ng-demo-block">
 				<h3 class="pr-u-margin0">
 					Bottom
 					<button class="button mod-S" (click)="slidingBottom = !slidingBottom">{{ slidingBottom ? 'Show' : 'Hide' }}</button>
 				</h3>
-				<div class="animated-block" [@slideAnimation]="'bottom'" *ngIf="!slidingBottom">Slide from bottom</div>
+				@if (!slidingBottom) {
+					<div class="animated-block" [@slideAnimation]="'bottom'">Slide from bottom</div>
+				}
 			</div>
 		</div>
 	`,
-	styleUrls: ['./animations.scss'],
+	styleUrl: './animations.scss',
 	animations: [luSlideAnimationFactory()],
+	changeDetection: ChangeDetectionStrategy.OnPush,
 })
 class SlideAnimationStory {
 	slidingLeft = false;
@@ -55,12 +61,14 @@ export default {
 	decorators: [applicationConfig({ providers: [provideAnimations()] })],
 } as Meta;
 
-const template: StoryFn<SlideAnimationStory> = (args) => ({
+const template = (args: SlideAnimationStory) => ({
 	props: args,
 });
 
-export const Slide = template.bind({});
-Slide.args = {};
+export const Slide: StoryObj<SlideAnimationStory> = {
+	args: {},
+	render: template,
+};
 
 const code = `
 /* 1. Appeler provideAnimations */
@@ -80,32 +88,40 @@ class AppModule {}
 				<h3 class="pr-u-margin0">
 					Left <button class="button mod-S" (click)="slidingLeft = !slidingLeft">{{ slidingLeft ? 'Show' : 'Hide' }}</button>
 				</h3>
-				<div class="animated-block" [@slideAnimation]="'left'" *ngIf="!slidingLeft">Slide from left</div>
+				@if (!slidingLeft) {
+					<div class="animated-block" [@slideAnimation]="'left'">Slide from left</div>
+				}
 			</div>
 			<div class="grid-column ng-demo-block">
 				<h3 class="pr-u-margin0">
 					Right
 					<button class="button mod-S" (click)="slidingRight = !slidingRight">{{ slidingRight ? 'Show' : 'Hide' }}</button>
 				</h3>
-				<div class="animated-block" [@slideAnimation]="'right'" *ngIf="!slidingRight">Slide from right</div>
+				@if (!slidingRight) {
+					<div class="animated-block" [@slideAnimation]="'right'">Slide from right</div>
+				}
 			</div>
 			<div class="grid-column ng-demo-block">
 				<h3 class="pr-u-margin0">
 					Top
 					<button class="button mod-S" (click)="slidingTop = !slidingTop">{{ slidingTop ? 'Show' : 'Hide' }}</button>
 				</h3>
-				<div class="animated-block" [@slideAnimation]="'top'" *ngIf="!slidingTop">Slide from top</div>
+				@if (!slidingTop) {
+					<div class="animated-block" [@slideAnimation]="'top'">Slide from top</div>
+				}
 			</div>
 			<div class="grid-column ng-demo-block">
 				<h3 class="pr-u-margin0">
 					Bottom
 					<button class="button mod-S" (click)="slidingBottom = !slidingBottom">{{ slidingBottom ? 'Show' : 'Hide' }}</button>
 				</h3>
-				<div class="animated-block" [@slideAnimation]="'bottom'" *ngIf="!slidingBottom">Slide from bottom</div>
+				@if (!slidingBottom) {
+					<div class="animated-block" [@slideAnimation]="'bottom'">Slide from bottom</div>
+				}
 			</div>
 		</div>
 	\`,
-	styleUrls: ['./animations.scss'],
+	styleUrl: './animations.scss',
 	animations: [luSlideAnimationFactory()],
 })
 class SlideAnimationStory {

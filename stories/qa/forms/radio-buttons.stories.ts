@@ -1,10 +1,10 @@
-import { Component } from '@angular/core';
-import { Meta, StoryFn } from '@storybook/angular';
+import { ChangeDetectionStrategy, Component } from '@angular/core';
+import { Meta, StoryObj } from '@storybook/angular';
 
 @Component({
-	standalone: true,
 	selector: 'forms-radio-buttons-stories',
 	templateUrl: './radio-buttons.stories.html',
+	changeDetection: ChangeDetectionStrategy.OnPush,
 })
 class RadioButtonsStory {}
 
@@ -13,6 +13,9 @@ export default {
 	component: RadioButtonsStory,
 } as Meta;
 
-const template: StoryFn<RadioButtonsStory> = () => ({});
+const template = () => ({});
 
-export const basic = template.bind({});
+export const Basic: StoryObj<RadioButtonsStory> = {
+	args: {},
+	render: template,
+};

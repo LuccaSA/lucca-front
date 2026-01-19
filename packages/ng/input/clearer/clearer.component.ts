@@ -1,15 +1,17 @@
-import { CommonModule } from '@angular/common';
 import { ChangeDetectionStrategy, Component, EventEmitter, forwardRef, Output } from '@angular/core';
+import { getIntl } from '@lucca-front/ng/core';
 import { ALuClearer, ILuClearer } from './clearer.model';
+import { LU_CLEARER_TRANSLATIONS } from './clearer.translate';
 
+/**
+ * @deprecated use `ClearComponent` instead
+ */
 @Component({
 	selector: 'lu-input-clearer',
 	templateUrl: './clearer.component.html',
-	styleUrls: ['./clearer.component.scss'],
+	styleUrl: './clearer.component.scss',
 	changeDetection: ChangeDetectionStrategy.OnPush,
 	exportAs: 'luClearer',
-	standalone: true,
-	imports: [CommonModule],
 	providers: [
 		{
 			provide: ALuClearer,
@@ -18,6 +20,8 @@ import { ALuClearer, ILuClearer } from './clearer.model';
 	],
 })
 export class LuInputClearerComponent<T> extends ALuClearer<T> implements ILuClearer<T> {
+	intl = getIntl(LU_CLEARER_TRANSLATIONS);
+
 	// eslint-disable-next-line @angular-eslint/no-output-on-prefix
 	@Output() override onClear = new EventEmitter<T>();
 	onClick($event: Event) {

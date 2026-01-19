@@ -1,0 +1,29 @@
+<ng-template #empty>
+  <lu-empty-state-page
+    description=""
+    contentBackgroundColor="var(--pr-t-elevation-surface-default)"
+    topRightBackground="https://cdn.lucca.fr/lucca-front/assets/empty-states/cleemy/bubbles-top-right-01.svg"
+    topRightForeground="https://cdn.lucca.fr/lucca-front/assets/empty-states/generic/plant-01.svg"
+    bottomLeftBackground="https://cdn.lucca.fr/lucca-front/assets/empty-states/cleemy/bubbles-bottom-left-01.svg"
+    bottomLeftForeground="https://cdn.lucca.fr/assets/cleemy/payment/empty-states/procurement-01.svg"
+    [heading]="'Proc_PurchasesAll_EmptyState_Title' | tr"
+  />
+</ng-template>
+
+<ng-template #argumentTemplate let-imgSrc="imgSrc" let-title="title" let-message="message" let-displayPay="displayPay">
+  <div class="grid-column" style="--grid-colspanAtMediaMinS: 4">
+    <img class="pr-u-displayBlock pr-u-marginBottom100" alt="" width="48" height="48" [src]="imgSrc" />
+    <h2 class="pr-u-h3 pr-u-paddingBlock0 pr-u-marginBottom100">{{ title | tr }}</h2>
+    <p class="pr-u-marginBottom0">
+      {{ message | tr }}<br />
+      @if (displayPay) {
+        <img
+          width="91"
+          height="20"
+          src="https://cdn.lucca.fr/assets/cleemy/cards/logo-pay.svg"
+          [alt]="'Core_Google_Pay_Apple_Pay' | tr"
+        />
+      }
+    </p>
+  </div>
+</ng-template>

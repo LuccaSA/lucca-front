@@ -1,0 +1,57 @@
+<table class="demo-QAtable">
+	<tbody>
+		<tr>
+			<td></td>
+			<td>
+				<div class="demo-QAtable-list">Angular</div>
+			</td>
+		</tr>
+		<tr>
+			<td>Simple empty</td>
+			<td>
+				<lu-form-field label="Label" tooltip="Tooltip message" inlineMessage="Helper text" inlineMessageState="default">
+					<lu-simple-select placeholder="Placeholder" clearable [options]="allLegumes" [ngModel]="null" />
+				</lu-form-field>
+			</td>
+		</tr>
+		<tr>
+			<td>Simple filled</td>
+			<td>
+				<lu-form-field label="Label" tooltip="Tooltip message" inlineMessage="Helper text" inlineMessageState="default">
+					<lu-simple-select placeholder="Placeholder" clearable [options]="allLegumes" [(ngModel)]="simpleExample" />
+				</lu-form-field>
+			</td>
+		</tr>
+		<tr>
+			<td>Multi empty</td>
+			<td>
+				<lu-form-field label="Label" tooltip="Tooltip message" inlineMessage="Helper text" inlineMessageState="default">
+					<lu-multi-select placeholder="Placeholder" clearable [options]="allLegumes" [ngModel]="[]" />
+				</lu-form-field>
+			</td>
+		</tr>
+		<tr>
+			<td>Multi filled</td>
+			<td>
+				<lu-form-field label="Label" tooltip="Tooltip message" inlineMessage="Helper text" inlineMessageState="default">
+					<lu-multi-select placeholder="Placeholder" clearable [options]="allLegumes" [(ngModel)]="multiExample" />
+				</lu-form-field>
+			</td>
+		</tr>
+		<tr>
+			<td>Multi counter</td>
+			<td>
+				<lu-form-field label="Label" tooltip="Tooltip message" inlineMessage="Helper text" inlineMessageState="default">
+					<lu-multi-select placeholder="Placeholder" clearable [options]="allLegumes" [(ngModel)]="multiExample" #selectRef>
+						<ng-container *luMultiDisplayer="let values; select: selectRef">
+							<lu-multi-select-counter-displayer [selected]="values" label="légumes sélectionnés" />
+						</ng-container>
+					</lu-multi-select>
+				</lu-form-field>
+			</td>
+		</tr>
+	</tbody>
+</table>
+
+<!-- To tell the ui-diff tool that the page has finished rendering -->
+<span id="ready"></span>

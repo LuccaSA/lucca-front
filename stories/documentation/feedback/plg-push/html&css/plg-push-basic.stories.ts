@@ -1,7 +1,6 @@
-import { Meta, StoryFn } from '@storybook/angular';
+import { Meta, StoryObj } from '@storybook/angular';
 
-interface PLGPushBasicStory {
-}
+interface PLGPushBasicStory {}
 
 export default {
 	title: 'Documentation/Feedback/PLG Push/HTML & CSS/Basic',
@@ -18,19 +17,23 @@ function getTemplate(args: PLGPushBasicStory): string {
 		<div class="plgPush-content-description">
 			Bénéficiez de toutes les options liées au télétravail avec Timmi Office.
 			<a class="link mod-icon" href="#" target="_blank" rel="noopener noreferrer">
-				<span>Demander un essai gratuit</span>
-				<span aria-hidden="true" class="lucca-icon icon-arrowExternal"></span>
-				<span class="u-mask">Ouvrir dans une nouvelle fenêtre</span>
+				<span class="link-text">Demander un essai gratuit</span><!-- no text node here --><span class="link-icon"><span aria-hidden="true" class="lucca-icon icon-arrowExternal"></span></span>
+				<span class="pr-u-mask">Ouvrir dans une nouvelle fenêtre</span>
 			</a>
 		</div>
 	</div>
+	<button type="button" class="plgPush-close button mod-onlyIcon mod-S mod-ghost"><span aria-hidden="true" class="lucca-icon icon-signClose"></span>
+		<span class="pr-u-mask">Fermer</span>
+	</button>
 </div>`;
 }
 
-const Template: StoryFn<PLGPushBasicStory> = (args) => ({
+const Template = (args: PLGPushBasicStory) => ({
 	props: args,
 	template: getTemplate(args),
 });
 
-export const Basic = Template.bind({});
-Basic.args = {};
+export const Basic: StoryObj<PLGPushBasicStory> = {
+	args: {},
+	render: Template,
+};

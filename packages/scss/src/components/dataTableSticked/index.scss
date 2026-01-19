@@ -1,0 +1,66 @@
+@use '@lucca-front/scss/src/commons/config';
+@use '@lucca-front/scss/src/commons/utils/media';
+@use 'exports' as *;
+
+.dataTableWrapper {
+	@layer components {
+		@include vars;
+	}
+
+	@layer mods {
+		&:has(.dataTable.mod-stickyHeader, .dataTable-head.mod-sticky) {
+			@include stickyHeader;
+			@include firstRowVisible;
+		}
+
+		&:has(.dataTableShadows),
+		&:has(.dataTable.mod-columnsOverflow) {
+			@include columnsOverflow;
+		}
+
+		&:has(.dataTableShadows),
+		&:has(.dataTable.mod-rowsOverflow) {
+			@include rowsOverflow;
+		}
+
+		&:has(.dataTable.is-firstColumnVisible) {
+			@include firstColumnVisible;
+		}
+
+		&:has(.dataTable.is-lastColumnVisible) {
+			@include lastColumnVisible;
+		}
+
+		&:has(.dataTable.is-firstRowVisible) {
+			@include firstRowVisible;
+		}
+
+		&:has(.dataTable.is-lastRowVisible) {
+			@include lastRowVisible;
+		}
+
+		&:has(:is(.dataTable-head-row-cell, .dataTable-head-body-cell, .dataTable-foot-row-cell).mod-stickyColumn) {
+			@include stickyColumn;
+
+			&:has(.dataTable.mod-cellBorder) {
+				@include stickyColumnBorder;
+			}
+		}
+
+		&:has(.dataTable.is-firstColumnVisibleAfterColsStart) {
+			@include firstColumnVisibleAfterColsStart;
+		}
+
+		&:has(.dataTable.is-lastColumnVisibleBeforeColsEnd) {
+			@include lastColumnVisibleBeforeColsEnd;
+		}
+
+		&:has(.dataTableWrapper-pagination:not(:empty)) {
+			@include pagination;
+		}
+	}
+
+	&:has(.dataTable-head.is-firstBodyRowVisible) {
+		@include firstBodyRowVisible;
+	}
+}

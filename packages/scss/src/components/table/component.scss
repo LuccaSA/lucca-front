@@ -1,13 +1,14 @@
 @use '@lucca-front/icons/src/commons/utils/icon';
+@use '@lucca-front/scss/src/commons/utils/namespace';
 
-@mixin component($atRoot: 'without: rule') {
+@mixin component($atRoot: namespace.$defaultAtRoot) {
 	font-size: var(--components-table-font-size);
 	line-height: var(--components-table-line-height);
 	border-spacing: 0;
 	display: table;
-	text-align: left;
-	width: 100%;
-	color: var(--palettes-neutral-800);
+	text-align: start;
+	inline-size: 100%;
+	color: var(--pr-t-color-text);
 
 	@at-root ($atRoot) {
 		.table-head {
@@ -25,15 +26,15 @@
 
 		.table-head-row-cell {
 			color: var(--palettes-neutral-600);
-			font-size: var(--sizes-S-fontSize);
-			line-height: var(--sizes-S-lineHeight);
+			font-size: var(--pr-t-font-body-S-fontSize);
+			line-height: var(--pr-t-font-body-S-lineHeight);
 			padding: var(--components-table-padding);
-			border-bottom-width: var(--commons-divider-width);
-			border-bottom-color: var(--commons-divider-color);
-			border-bottom-style: solid;
+			border-block-end-width: var(--commons-divider-width);
+			border-block-end-color: var(--commons-divider-color);
+			border-block-end-style: solid;
 			display: table-cell;
-			text-align: left;
-			font-weight: 600;
+			text-align: start;
+			font-weight: var(--pr-t-font-fontWeight-semibold);
 		}
 
 		.table-body {
@@ -48,16 +49,16 @@
 			&:first-child {
 				.table-body-row-cell,
 				.table-foot-row-cell {
-					border-top: none;
+					border-block-start: none;
 				}
 			}
 
 			&:last-child {
 				.table-body-row-cell,
 				.table-foot-row-cell {
-					border-bottom-width: var(--commons-divider-width);
-					border-bottom-color: var(--commons-divider-color);
-					border-bottom-style: solid;
+					border-block-end-width: var(--commons-divider-width);
+					border-block-end-color: var(--commons-divider-color);
+					border-block-end-style: solid;
 				}
 			}
 		}
@@ -65,11 +66,12 @@
 		.table-body-row-cell,
 		.table-foot-row-cell {
 			padding: var(--components-table-padding);
-			border-top-width: var(--commons-divider-width);
-			border-top-color: var(--commons-divider-color);
-			border-top-style: solid;
+			border-block-start-width: var(--commons-divider-width);
+			border-block-start-color: var(--commons-divider-color);
+			border-block-start-style: solid;
 			display: table-cell;
 			vertical-align: middle;
+			text-align: inherit;
 		}
 	}
 }

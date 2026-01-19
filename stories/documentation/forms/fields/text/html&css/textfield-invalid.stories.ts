@@ -1,4 +1,4 @@
-import { Meta, StoryFn } from '@storybook/angular';
+import { Meta, StoryObj } from '@storybook/angular';
 
 interface TextfieldInvalidStory {}
 
@@ -15,14 +15,21 @@ function getTemplate(args: TextfieldInvalidStory): string {
 			<input type="text" id="ID" class="textField-input-value" aria-labelledby="IDlabel" aria-describedby="IDmessage" placeholder="Placeholder" aria-invalid="true" />
 		</div>
 	</div>
-	<div class="inlineMessage" id="IDmessage"><span aria-hidden="true" class="lucca-icon"></span>Error message</div>
+	<div class="inlineMessage" id="IDmessage">
+		<span aria-hidden="true" class="lucca-icon inlineMessage-statusIcon"></span>
+		<p class="inlineMessage-content">
+			Error message
+		</p>
+	</div>
 </div>`;
 }
 
-const Template: StoryFn<TextfieldInvalidStory> = (args) => ({
+const Template = (args: TextfieldInvalidStory) => ({
 	props: args,
 	template: getTemplate(args),
 });
 
-export const Invalid = Template.bind({});
-Invalid.args = {};
+export const Invalid: StoryObj<TextfieldInvalidStory> = {
+	args: {},
+	render: Template,
+};

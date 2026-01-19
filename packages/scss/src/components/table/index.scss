@@ -1,106 +1,120 @@
 @use 'exports' as *;
 
 .table {
-	@include vars;
-	@include component;
+	@layer components {
+		@include vars;
+		@include component;
 
-	&.mod-zebra {
-		@include zebra;
+		button.tableSortable {
+			--components-sortable-fontWeight: 600;
+			--components-sortable-fontSize: var(--pr-t-font-body-S-fontSize);
+			--components-sortable-lineHeight: var(--pr-t-font-body-S-lineHeight);
+			--components-sortable-arrowsOffset: var(--pr-t-spacings-25);
+		}
 	}
 
-	&.mod-alignTop {
-		@include alignTop;
+	@layer mods {
+		&.mod-zebra {
+			@include zebra;
+		}
+
+		&.mod-alignTop {
+			@include alignTop;
+		}
+
+		&.mod-clickable {
+			@include clickable;
+
+			.table-head-row,
+			.table-body-row,
+			.table-foot-row {
+				&.mod-selectable {
+					@include clickableSelectable;
+				}
+			}
+		}
+
+		&.mod-card {
+			@include card;
+		}
+
+		&.mod-S {
+			@include S;
+		}
+
+		&.mod-noOffset {
+			@include noOffset;
+		}
+
+		&.mod-borderless {
+			@include borderless;
+		}
 	}
+}
 
-	&.mod-clickable {
-		@include clickable;
+@layer mods {
+	.table-body-row,
+	.table-foot-row {
+		&.mod-header {
+			@include header;
+		}
 
-		.table-head-row,
-		.table-body-row,
-		.table-foot-row {
-			&.mod-selectable {
-				@include clickableSelectable;
+		&.mod-child {
+			@include child;
+		}
+
+		&.mod-parent {
+			@include parent;
+
+			&.mod-collapsable {
+				@include collapsable;
 			}
 		}
 	}
 
-	&.mod-card {
-		@include card;
-	}
-
-	&.mod-S {
-		@include S;
-	}
-
-	&.mod-noOffset {
-		@include noOffset;
-	}
-
-	&.mod-borderless {
-		@include borderless;
-	}
-}
-
-.table-body-row,
-.table-foot-row {
-	&.mod-header {
-		@include header;
-	}
-
-	&.mod-child {
-		@include child;
-	}
-
-	&.mod-parent {
-		@include parent;
-
-		&.mod-collapsable {
-			@include collapsable;
+	.table-head-row,
+	.table-body-row,
+	.table-foot-row {
+		&.mod-selectable {
+			@include selectable;
 		}
-	}
-}
 
-.table-head-row,
-.table-body-row,
-.table-foot-row {
-	&.mod-selectable {
-		@include selectable;
-	}
-
-	&.mod-draggable {
-		@include draggable;
-	}
-}
-
-.table-head-row {
-	&.mod-twoLines {
-		@include twoLines;
-	}
-}
-
-.table-body-row-cell,
-.table-foot-row-cell {
-	&.mod-avatar {
-		@include avatar;
-	}
-}
-
-.table-head-row-cell,
-.table-body-row-cell,
-.table-foot-row-cell {
-	&.mod-actions {
-		@include actions;
-
-		&.mod-actionsHidden { // Legacy
-			@include actionsHidden;
+		&.mod-draggable {
+			@include draggable;
 		}
 	}
 
-	&.mod-alignCenter {
-		@include alignCenter;
+	.table-head-row {
+		&.mod-twoLines {
+			@include twoLines;
+		}
 	}
 
-	&.mod-alignRight {
-		@include alignRight;
+	.table-body-row-cell,
+	.table-foot-row-cell {
+		&.mod-avatar {
+			@include avatar;
+		}
+	}
+
+	.table-head-row-cell,
+	.table-body-row-cell,
+	.table-foot-row-cell {
+		&.mod-actions {
+			@include actions;
+
+			// .mod-actionsHidden is deprecated
+			&.mod-actionsHidden {
+				@include actionsHidden;
+			}
+		}
+
+		&.mod-alignCenter {
+			@include alignCenter;
+		}
+
+		&.mod-alignRight {
+			@include alignRight;
+		}
 	}
 }

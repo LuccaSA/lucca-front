@@ -1,0 +1,91 @@
+@if (isFilterPill) {
+	<label for="dateInput" class="pr-u-mask">{{ intl.pickDate }}</label>
+}
+<div class="textField dateField-textField" #popoverAnchor>
+	<div class="textField-input">
+		<input
+			type="text"
+			id="dateInput"
+			#date
+			luInput
+			class="textField-input-value"
+			(input)="userTextInput.set(date.value)"
+			(blur)="inputBlurred()"
+			(focus)="inputFocused.set(true)"
+			aria-haspopup="true"
+			role="combobox"
+			(click)="popoverRef.openPopover(true, true)"
+			(keydown.arrowDown)="arrowDown(popoverRef)"
+			(keydown.escape)="popoverRef.close()"
+			(keydown.space)="spaceDown($event, popoverRef)"
+			[disabled]="disabled()"
+			[attr.placeholder]="placeholder() || dateFormatLocalized()"
+			[attr.autocomplete]="autocomplete()"
+		/>
+
+		<div class="textField-input-affix">
+			@if (clearable() && !disabled() && (clearBehavior() === "clear" ? date.value !== "" : selectedDate() !== initialValue())) {
+				<lu-clear class="textField-input-affix-clear" (onClear)="clear(); date.focus()">{{ intl.clear }}</lu-clear>
+			}
+			@if (isFilterPill && !isFilterPillEmpty()) {
+				<lu-clear class="textField-input-affix-clear" (onClear)="clear(); date.focus()">{{ intl.clear }}</lu-clear>
+			}
+			<button
+				[luPopover2]="calendar"
+				[luPopoverAnchor]="popoverAnchor"
+				[disabled]="disabled()"
+				[luPopoverNoCloseButton]="true"
+				[luPopoverDisabled]="isFilterPill"
+				#popoverRef="luPopover2"
+				[customPositions]="popoverPositions"
+				(luPopoverClosed)="panelClosed.emit()"
+				(luPopoverOpened)="panelOpened.emit()"
+				tabindex="-1"
+				type="button"
+				class="button mod-onlyIcon mod-ghost textField-input-affix-toggle"
+			>
+				<lu-icon [icon]="'calendarDate'" [alt]="intl.pickDate" />
+			</button>
+		</div>
+	</div>
+</div>
+
+@if (isFilterPill) {
+	<ng-container *ngTemplateOutlet="calendar" />
+}
+
+<div *luFilterPillDisplayer>{{ displayValue() }}</div>
+
+<ng-template #calendar>
+	<div class="calendarWrapper">
+		<div class="calendarWrapper-navigation pr-u-left0">
+			<button class="calendarWrapper-navigation-button button" type="button" (click)="prev(calendarMode())" #previousButtonRef>
+				<span aria-hidden="true" class="lucca-icon icon-arrowChevronLeft"></span><span class="pr-u-mask">{{ intl.previous }}</span>
+			</button>
+		</div>
+		<div class="calendarWrapper-navigation pr-u-right0">
+			<button class="calendarWrapper-navigation-button button" type="button" (click)="next(calendarMode())" #nextButtonRef>
+				<span aria-hidden="true" class="lucca-icon icon-arrowChevronRight"></span><span class="pr-u-mask"> {{ intl.next }}</span>
+			</button>
+		</div>
+		<div class="calendarWrapper-content" tabindex="-1">
+			<lu-calendar2
+				[enableOverflow]="!disableOverflow()"
+				[showOverflow]="!hideOverflow()"
+				[hideToday]="hideToday()"
+				[hasTodayButton]="hasTodayButton()"
+				[date]="currentDate()"
+				(dateChange)="currentDateChangeFromCalendar($event)"
+				[(tabbableDate)]="tabbableDate"
+				[getCellInfo]="combinedGetCellInfo"
+				[ranges]="ranges()"
+				(dateClicked)="dateClicked($event, popoverRef)"
+				(nextPage)="move(1, calendarMode())"
+				(previousPage)="move(-1, calendarMode())"
+				[(displayMode)]="calendarMode"
+				[mode]="mode()"
+				[hideWeekend]="hideWeekend()"
+			/>
+		</div>
+	</div>
+</ng-template>

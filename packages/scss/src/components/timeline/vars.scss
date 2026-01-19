@@ -1,3 +1,5 @@
 @mixin vars {
-  --components-timeline-icon-size: var(--sizes-XS-lineHeight);
+	--components-timeline-title-fontSize: var(--pr-t-font-body-M-fontSize);
+	--components-timeline-title-lineHeight: var(--pr-t-font-heading-3-lineHeight);
+	--components-timeline-icon-size: var(--pr-t-font-body-XS-lineHeight);
 }

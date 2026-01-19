@@ -1,67 +1,76 @@
 @use 'exports' as *;
 
 .radioField {
-	@include vars;
-	@include component;
+	@layer components {
+		@include vars;
+		@include component;
+	}
 
-	&.mod-S {
-		@include S;
+	@layer mods {
+		&.mod-S {
+			@include S;
+		}
 	}
 }
 
 .radioField-input {
-	&:focus-visible {
-		@include focusVisible;
-	}
-
-	&:hover {
-		@include hover;
-	}
-
-	&:active {
-		@include active;
-	}
-
-	&:disabled {
-		@include disabled;
-	}
-
-	&[aria-invalid='true'] {
-		@include invalid;
+	@layer mods {
+		&:focus-visible {
+			@include focusVisible;
+		}
 
 		&:hover {
-			@include invalidHover;
+			@include hover;
 		}
 
 		&:active {
-			@include invalidActive;
-		}
-	}
-
-	&:checked {
-		@include checked;
-
-		&:hover {
-			@include checkedHover;
-		}
-
-		&:active {
-			@include checkedActive;
-		}
-
-		&:disabled {
-			@include checkedDisabled;
+			@include active;
 		}
 
 		&[aria-invalid='true'] {
-			@include checkedInvalid;
+			@include invalid;
 
 			&:hover {
-				@include checkedInvalidHover;
+				@include invalidHover;
 			}
 
 			&:active {
-				@include checkedInvalidActive;
+				@include invalidActive;
+			}
+		}
+
+		&:disabled {
+			&,
+			&:hover {
+				@include disabled;
+			}
+		}
+
+		&:checked {
+			@include checked;
+
+			&:hover {
+				@include checkedHover;
+			}
+
+			&:active {
+				@include checkedActive;
+			}
+
+			&:disabled {
+				@include checkedDisabled;
+			}
+
+			&[aria-invalid='true'] {
+				@include checkedInvalid;
+
+				&:hover {
+					@include checkedInvalidHover;
+				}
+
+				&:active {
+					@include checkedInvalidActive;
+				}
 			}
 		}
 	}

@@ -1,0 +1,16 @@
+@mixin narrow {
+	--components-fancyBox-imageWidth: 11.25rem;
+	--components-fancyBox-imageHeight: 9rem;
+	--components-fancyBox-offsetInline: -8.75rem;
+	--components-fancyBox-offsetBlock: -0.5rem;
+}
+
+@mixin S {
+	--components-fancyBox-offsetInline: -9rem;
+	--components-fancyBox-offsetBlock: -0.75rem;
+	--components-fancyBox-imageWidth: 9.375rem;
+	--components-fancyBox-imageHeight: 7.5rem;
+	--components-fancyBox-contentMinInlineSize: min(17rem, 100%);
+	--components-fancyBox-contentPaddingBlock: var(--pr-t-spacings-150);
+	--components-fancyBox-contentPaddingInline: var(--pr-t-spacings-200);
+}

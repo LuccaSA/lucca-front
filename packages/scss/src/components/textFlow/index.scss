@@ -1,0 +1,8 @@
+@use 'exports' as *;
+
+.textFlow {
+	@layer components {
+		@include vars;
+		@include component;
+	}
+}

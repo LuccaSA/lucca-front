@@ -1,4 +1,9 @@
 @use '@lucca-front/scss/src/commons/utils/a11y';
+@use '@lucca-front/scss/src/components/button/exports' as button;
+
+@mixin S {
+	--components-fieldset-title: var(--pr-t-font-heading-4);
+}
 
 @mixin horizontal {
 	grid-template-columns: 1fr auto;
@@ -6,12 +11,21 @@
 
 @mixin expandable {
 	.fieldset-title-content {
-		border-radius: var(--commons-borderRadius-M);
+		border-radius: var(--pr-t-border-radius-default);
 		cursor: pointer;
 		font: inherit;
 
 		&:focus-visible {
 			@include a11y.focusVisible;
+		}
+	}
+}
+
+@mixin withAction {
+	.fieldset-title-content-action {
+		.button {
+			@include button.outlined;
+			@include button.S;
 		}
 	}
 }

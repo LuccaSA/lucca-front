@@ -1,14 +1,19 @@
 <div class="plgPush">
 	<div class="plgPush-icons">
-		<lu-icon class="plgPush-icons-front" icon="transportRocket" size="S"></lu-icon>
-		<img class="plgPush-icons-back" alt="" src="https://cdn.lucca.fr/lucca-front/assets/plg-push/shape.svg" />
+		<lu-icon class="plgPush-icons-front" icon="transportRocket" size="S" />
+		<img class="plgPush-icons-back" alt="" src="https://cdn.lucca.fr/transverse/prisme/visuals/plg-push/shape.svg" />
 	</div>
 	<div class="plgPush-content">
-		@if (heading) {
-		<div class="plgPush-content-title">{{ heading }}</div>
+		@if (heading()) {
+			<div class="plgPush-content-title">{{ heading() }}</div>
 		}
 		<div class="plgPush-content-description">
-			<ng-content></ng-content>
+			<ng-content />
 		</div>
 	</div>
+	@if (removable()) {
+		<button class="plgPush-close" type="button" luButton="ghost" size="S" (click)="removed.set(true)">
+			<lu-icon icon="signClose" [alt]="intl.close" />
+		</button>
+	}
 </div>

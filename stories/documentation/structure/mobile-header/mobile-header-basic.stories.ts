@@ -1,4 +1,4 @@
-import { Meta, StoryFn } from '@storybook/angular';
+import { Meta, StoryObj } from '@storybook/angular';
 
 interface MobileHeaderBasicStory {
 	largeTitle: boolean;
@@ -22,22 +22,24 @@ function getTemplate(args: MobileHeaderBasicStory): string {
 			<div class="mobileHeader-title-sub">Subtitle</div>
 		</div>
 		<div class="mobileHeader-actions">
-			<button type="button" class="button mod-onlyIcon mod-text palette-product" luTooltip="Action">
+			<button type="button" class="button mod-onlyIcon mod-ghost palette-product" luTooltip="Action">
 				<span aria-hidden="true" class="lucca-icon icon-heart"></span>
-				<span class="u-mask">Action</span>
+				<span class="pr-u-mask">Action</span>
 			</button>
-			<button type="button" class="button mod-onlyIcon mod-text palette-product" luTooltip="Action">
+			<button type="button" class="button mod-onlyIcon mod-ghost palette-product" luTooltip="Action">
 			  <span aria-hidden="true" class="lucca-icon icon-heart"></span>
-			  <span class="u-mask">Action</span>
+			  <span class="pr-u-mask">Action</span>
 			</button>
 		</div>
 	</div>`;
 }
 
-const Template: StoryFn<MobileHeaderBasicStory> = (args) => ({
+const Template = (args: MobileHeaderBasicStory) => ({
 	props: args,
 	template: getTemplate(args),
 });
 
-export const Basic = Template.bind({});
-Basic.args = { largeTitle: false };
+export const Basic: StoryObj<MobileHeaderBasicStory> = {
+	args: { largeTitle: false },
+	render: Template,
+};

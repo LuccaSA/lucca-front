@@ -1,0 +1,175 @@
+@use '@lucca-front/scss/src/commons/utils/color';
+
+@mixin stickyHeader {
+	.dataTable-head {
+		position: sticky;
+		inset-block-start: -1px;
+		z-index: 2;
+
+		&::after {
+			content: '';
+			inset-inline: 0;
+			block-size: var(--pr-t-spacings-100);
+			position: absolute;
+			background-image: linear-gradient(#{color.transparentize(var(--palettes-neutral-400), 0.24)}, transparent);
+			pointer-events: none;
+			box-shadow: 0 1px var(--commons-border-200) inset;
+			opacity: var(--components-dataTable-header-shadow-opacity);
+		}
+	}
+}
+
+@mixin columnsOverflow {
+	display: flex;
+
+	&::before,
+	&::after {
+		content: '';
+		position: sticky;
+		inline-size: var(--pr-t-spacings-100);
+		background-image: linear-gradient(to right, #{color.transparentize(var(--palettes-neutral-400), 0.24)}, transparent);
+		flex-shrink: 0;
+		margin-inline-start: calc(var(--pr-t-spacings-100) * -1);
+		inset-block-start: 0;
+		pointer-events: none;
+		z-index: 3;
+	}
+
+	&::before {
+		inset-inline-start: 0;
+		opacity: var(--components-dataTable-shadow-firstColumnOpacity);
+	}
+
+	&::after {
+		inset-inline-end: 0;
+		transform: scaleX(-1);
+		opacity: var(--components-dataTable-shadow-lastColumnOpacity);
+	}
+}
+
+@mixin rowsOverflow {
+	.dataTableShadows {
+		display: flex;
+		flex-direction: column;
+		flex-grow: 1;
+
+		&::before,
+		&::after {
+			content: '';
+			position: sticky;
+			display: block;
+			block-size: var(--pr-t-spacings-100);
+			background-image: linear-gradient(to bottom, #{color.transparentize(var(--palettes-neutral-400), 0.24)}, transparent);
+			margin-block-start: calc(var(--pr-t-spacings-100) * -1);
+			flex-shrink: 0;
+			pointer-events: none;
+			z-index: 2;
+		}
+
+		&::before {
+			inset-block-start: 0;
+			opacity: var(--components-dataTable-shadow-firstRowOpacity);
+		}
+
+		&::after {
+			inset-block-end: var(--components-dataTable-shadow-lastRowInsetBlockEnd);
+			transform: scaleY(-1);
+			opacity: var(--components-dataTable-shadow-lastRowOpacity);
+		}
+	}
+}
+
+@mixin stickyColumn {
+	%addShadow {
+		content: '';
+		position: absolute;
+		inset-block: 0;
+		inset-inline-start: 100%;
+		inline-size: var(--pr-t-spacings-100);
+		pointer-events: none;
+		background-image: linear-gradient(to right, #{color.transparentize(var(--palettes-neutral-400), 0.24)}, transparent);
+	}
+
+	%removeShadow {
+		content: none;
+	}
+
+	.dataTable-head-row-cell {
+		&.mod-stickyColumn {
+			&:first-child {
+				z-index: 2;
+			}
+		}
+	}
+
+	:is(.dataTable-head-row-cell, .dataTable-body-row-cell, .dataTable-foot-row-cell) {
+		&.mod-stickyColumn {
+			position: sticky;
+
+			&:first-child {
+				inset-inline-start: 0;
+			}
+
+			&:last-child {
+				inset-inline-end: 0;
+
+				--components-dataTable-cell-shadow: 0 1px inset var(--commons-border-200), 1px 0 var(--palettes-neutral-0); // white shadow is for Chrome
+			}
+
+			&:has(~ :is(.dataTable-body-row-cell, .dataTable-head-row-cell, .dataTable-foot-row-cell):not(.mod-stickyColumn)) {
+				transform: translateX(-1px);
+				z-index: 1;
+
+				&:not(:has(+ :is(.dataTable-head-row-cell, .dataTable-body-row-cell, .dataTable-foot-row-cell).mod-stickyColumn)) {
+					&::after {
+						@extend %addShadow;
+
+						opacity: var(--components-dataTable-shadow-colsStart-opacity);
+					}
+				}
+			}
+		}
+
+		&:not(.mod-stickyColumn) {
+			~ :is(.dataTable-head-row-cell, .dataTable-body-row-cell, .dataTable-foot-row-cell).mod-stickyColumn {
+				&::after {
+					@extend %addShadow;
+
+					inset-inline-start: auto;
+					inset-inline-end: 100%;
+					transform: scaleX(-1);
+					opacity: var(--components-dataTable-shadow-colsEnd-opacity);
+				}
+
+				& ~ :is(.dataTable-head-row-cell, .dataTable-body-row-cell, .dataTable-foot-row-cell).mod-stickyColumn {
+					&::after {
+						@extend %removeShadow;
+					}
+				}
+			}
+		}
+	}
+}
+
+@mixin stickyColumnBorder {
+	:is(.dataTable-head-row-cell, .dataTable-body-row-cell, .dataTable-foot-row-cell) {
+		&.mod-stickyColumn {
+			&:has(~ :is(.dataTable-body-row-cell, .dataTable-head-row-cell, .dataTable-foot-row-cell):not(.mod-stickyColumn)) {
+				&:not(:has(+ :is(.dataTable-body-row-cell, .dataTable-head-row-cell, .dataTable-foot-row-cell).mod-stickyColumn)) {
+					&::after {
+						--components-dataTable-cell-shadow: 1px 0 var(--commons-border-200) inset;
+					}
+				}
+			}
+
+			&:last-child {
+				--components-dataTable-cell-shadow: 0 1px inset var(--commons-border-200), 1px 0 inset var(--commons-border-200),
+					1px 0 var(--palettes-neutral-0); // white shadow is for Chrome
+			}
+		}
+	}
+}
+
+@mixin pagination {
+	--components-dataTable-shadow-lastRowInsetBlockEnd: var(--pr-t-spacings-600);
+}

@@ -1,23 +1,43 @@
-<label class="formLabel" id="{{id}}-label" for="{{id}}-input">
-	<ng-content></ng-content>
-</label>
-<span class="radioField">
-	<input
-		[formControl]="formControl"
-		[attr.disabled]="(formControl.disabled || disabled) ? 'disabled' : null"
-		type="radio"
-		class="radioField-input"
-		id="{{id}}-input"
-		[attr.name]="name"
-		[name]="name"
-		[value]="value"
-		luInput
-		luInputStandalone
-		attr.aria-labelledby="{{id}}-label"
-		attr.aria-describedby="{{id}}-message"
-	/>
-	<span class="radioField-icon" aria-hidden="true">
-		<span class="radioField-icon-check"></span>
+<ng-template #radioContent>
+	<label class="formLabel" [class.inputFramed-header-label]="framed()" id="{{ id }}-label" for="{{ id }}-input">
+		<ng-content />
+		@if (tag()) {
+			<span class="formLabel-tag tag">{{ tag() }}</span>
+		}
+	</label>
+	<span class="radioField">
+		<input
+			[formControl]="formControl"
+			[attr.disabled]="formControl.disabled || disabled() ? 'disabled' : null"
+			type="radio"
+			class="radioField-input"
+			[class.inputFramed-header-input]="framed()"
+			id="{{ id }}-input"
+			[attr.name]="name"
+			[name]="name"
+			[value]="value()"
+			luInput
+			luInputStandalone
+			attr.aria-labelledby="{{ id }}-label"
+			attr.aria-describedby="{{ id }}-message"
+		/>
+		<span class="radioField-icon" [class.inputFramed-header-icon]="framed()" aria-hidden="true">
+			<span class="radioField-icon-check"></span>
+		</span>
 	</span>
-</span>
-<lu-inline-message *ngIf="inlineMessage" [label]="inlineMessage" id="{{id}}-message"></lu-inline-message>
+	@if (inlineMessage()) {
+		<lu-inline-message [label]="inlineMessage()" id="{{ id }}-message" />
+	}
+	@if (arrow()) {
+		<div class="form-field-arrow{{ arrow() === 'neutral' ? ' mod-neutral' : '' }}"></div>
+	}
+</ng-template>
+@if (framed()) {
+	<lu-input-framed [center]="framedCenter()" [size]="framedSize()" [framedPortal]="framedPortal()">
+		<ng-container *ngTemplateOutlet="radioContent" />
+		<ng-container illustration><ng-content select="[illustration]" /></ng-container>
+		<ng-container info><ng-content select="[info]" /></ng-container>
+	</lu-input-framed>
+} @else {
+	<ng-container *ngTemplateOutlet="radioContent" />
+}

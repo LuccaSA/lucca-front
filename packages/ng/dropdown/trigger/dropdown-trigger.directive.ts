@@ -1,94 +1,154 @@
-/* eslint-disable @angular-eslint/no-output-on-prefix */
-import { Overlay } from '@angular/cdk/overlay';
-import { AfterViewInit, Directive, ElementRef, EventEmitter, HostBinding, HostListener, Input, OnDestroy, Output, ViewContainerRef } from '@angular/core';
-import { ALuPopoverTrigger, ILuPopoverTarget, ILuPopoverTrigger, LuPopoverAlignment, LuPopoverPosition, LuPopoverTarget } from '@lucca-front/ng/popover';
-import { ILuDropdownPanel } from '../panel/index';
+import { ConnectionPositionPair, HorizontalConnectionPos, OriginConnectionPosition, OverlayConnectionPosition, VerticalConnectionPos } from '@angular/cdk/overlay';
+import { DestroyRef, Directive, inject, Input, OnInit, TemplateRef, Type } from '@angular/core';
+import { takeUntilDestroyed } from '@angular/core/rxjs-interop';
+import { ALuPopoverPanel, LuPopoverAlignment } from '@lucca-front/ng/popover';
+import { PopoverDirective } from '@lucca-front/ng/popover2';
 
-/**
- * This directive is intended to be used in conjunction with an lu-dropdown tag.  It is
- * responsible for toggling the display of the provided dropdown instance.
- */
 @Directive({
 	selector: '[luDropdown]',
 	exportAs: 'LuDropdownTrigger',
+	host: {
+		'[attr.aria-expanded]': 'popover2.opened()',
+	},
+	hostDirectives: [
+		{
+			directive: PopoverDirective,
+			inputs: ['luPopoverPosition: luDropdownPosition', 'luPopoverDisabled: luDropdownDisabled', 'customPositions'],
+			outputs: ['luPopoverOpened: luDropdownOnOpen', 'luPopoverClosed: luDropdownOnClose'],
+		},
+	],
 })
-export class LuDropdownTriggerDirective<TPanel extends ILuDropdownPanel = ILuDropdownPanel>
-	extends ALuPopoverTrigger<TPanel, ILuPopoverTarget>
-	implements ILuPopoverTrigger<TPanel, ILuPopoverTarget>, AfterViewInit, OnDestroy
-{
+export class LuDropdownTriggerDirective<_T> implements OnInit {
+	protected popover2 = inject(PopoverDirective);
+	#destroyRef = inject(DestroyRef);
+	// Keeping generic type here just for the sake of backwards compatibility
 	/** References the popover instance that the trigger is associated with. */
-	@Input('luDropdown') set inputPanel(p: TPanel) {
-		this.panel = p;
-	}
-
-	/** how you want to position the panel relative to the target, allowed values: above, below, before, after */
-	@Input('luDropdownPosition') set inputPosition(pos: LuPopoverPosition) {
-		this.target.position = pos;
-	}
-	/** how the panel will be align with the target, allowed values: top, bottom, left, right */
-	@Input('luDropdownAlignment') set inputAlignment(al: LuPopoverAlignment) {
-		this.target.alignment = al;
-	}
-	/** disable popover apparition */
-	@Input('luDropdownDisabled') set inputDisabled(d: boolean) {
-		this.disabled = d;
-	}
-	/** set to true if you want the panel to appear on top of the target */
-	@Input('luDropdownOverlap') set inputOverlap(ov: boolean) {
-		this.target.overlap = ov;
-	}
-
-	/** Event emitted when the associated popover is opened. */
-	@Output('luDropdownOnOpen') onOpen = new EventEmitter<void>();
-	/** Event emitted when the associated popover is closed. */
-	@Output('luDropdownOnClose') onClose = new EventEmitter<void>();
-
-	/** accessibility attribute - dont override */
-	@HostBinding('attr.aria-expanded') get _attrAriaExpanded() {
-		return this._popoverOpen;
-	}
-	/** accessibility attribute - dont override */
-	@HostBinding('attr.id') get _attrId() {
-		return this._triggerId;
-	}
-	/** accessibility attribute - dont override */
-	@HostBinding('attr.aria-controls') get _attrAriaControls() {
-		return this._panelId;
-	}
-
-	constructor(
-		protected override _overlay: Overlay,
-		protected override _elementRef: ElementRef<HTMLElement>,
-		protected override _viewContainerRef: ViewContainerRef,
-	) {
-		super(_overlay, _elementRef, _viewContainerRef);
-		this.target = new LuPopoverTarget();
-		this.target.elementRef = this._elementRef;
-		this._triggerId = this._elementRef.nativeElement.getAttribute('id') || this._triggerId;
-		this.triggerEvent = 'click';
-		this.target.position = 'below';
-		this.target.alignment = 'right';
-	}
-
-	@HostListener('click')
-	override onClick() {
-		super.onClick();
-	}
-	ngAfterViewInit() {
-		this._checkPanel();
-		this._checkTarget();
-	}
-	ngOnDestroy() {
-		this._cleanUpSubscriptions();
-		if (this._popoverOpen) {
-			this.closePopover();
+	@Input('luDropdown') set inputPanel(p: TemplateRef<unknown> | Type<unknown> | ALuPopoverPanel) {
+		if (p instanceof ALuPopoverPanel) {
+			this.popover2.content = p.templateRef;
+			p.close.pipe(takeUntilDestroyed(this.#destroyRef)).subscribe(() => this.popover2.close());
+		} else {
+			this.popover2.content = p;
 		}
-		this.destroyPopover();
 	}
-	protected _emitOpen(): void {
-		this.onOpen.emit();
+
+	constructor() {
+		// We're using constructor here to setup default values before inputs are processed
+		// This way, the value will be changed if any input changes it but we can still have separate default values
+		this.popover2.luPopoverPosition = 'below';
+		this.popover2.luPopoverNoCloseButton = true;
 	}
-	protected _emitClose(): void {
-		this.onClose.emit();
+
+	/** how the panel will be aligned with the target, allowed values: top, bottom, left, right
+	 * @deprecated prefer using customPositions instead
+	 * */
+	luDropdownAlignment: LuPopoverAlignment = 'right';
+
+	ngOnInit(): void {
+		if (!this.popover2.customPositions || this.popover2.customPositions.length === 0) {
+			this.popover2.customPositions = this.legacyPositionBuilder();
+		}
+	}
+
+	/**********************
+	 *
+	 * LEGACY STUFF TO HANDLE EXISTING POSITIONS
+	 *
+	 ***********************/
+	private legacyPositionBuilder(): ConnectionPositionPair[] {
+		const connectionPosition: OriginConnectionPosition = {
+			originX: 'start',
+			originY: 'top',
+		};
+
+		// Position
+		const position = this.popover2.luPopoverPosition;
+		if (position === 'above') {
+			connectionPosition.originY = 'top';
+		} else if (position === 'below') {
+			connectionPosition.originY = 'bottom';
+		} else if (position === 'before') {
+			connectionPosition.originX = 'start';
+		} else if (position === 'after') {
+			connectionPosition.originX = 'end';
+		}
+
+		// Alignment
+		const alignment = this.luDropdownAlignment;
+		if (position === 'below' || position === 'above') {
+			if (alignment === 'left') {
+				connectionPosition.originX = 'start';
+			} else if (alignment === 'right') {
+				connectionPosition.originX = 'end';
+			} else {
+				connectionPosition.originX = 'center';
+			}
+		} else {
+			if (alignment === 'top') {
+				connectionPosition.originY = 'top';
+			} else if (alignment === 'bottom') {
+				connectionPosition.originY = 'bottom';
+			} else {
+				connectionPosition.originY = 'center';
+			}
+		}
+
+		const overlayPosition: OverlayConnectionPosition = {
+			overlayX: 'start',
+			overlayY: 'top',
+		};
+
+		if (position === 'above' || position === 'below') {
+			overlayPosition.overlayX = connectionPosition.originX;
+			overlayPosition.overlayY = position === 'above' ? 'bottom' : 'top';
+		} else {
+			overlayPosition.overlayX = position === 'before' ? 'end' : 'start';
+			overlayPosition.overlayY = connectionPosition.originY;
+		}
+
+		return [
+			{
+				originX: connectionPosition.originX,
+				originY: connectionPosition.originY,
+				overlayX: overlayPosition.overlayX,
+				overlayY: overlayPosition.overlayY,
+			},
+			{
+				originX: connectionPosition.originX,
+				originY: this.invertVerticalPos(connectionPosition.originY),
+				overlayX: overlayPosition.overlayX,
+				overlayY: this.invertVerticalPos(overlayPosition.overlayY),
+			},
+			{
+				originX: this.invertHorizontalPos(connectionPosition.originX),
+				originY: connectionPosition.originY,
+				overlayX: this.invertHorizontalPos(overlayPosition.overlayX),
+				overlayY: overlayPosition.overlayY,
+			},
+			{
+				originX: this.invertHorizontalPos(connectionPosition.originX),
+				originY: this.invertVerticalPos(connectionPosition.originY),
+				overlayX: this.invertHorizontalPos(overlayPosition.overlayX),
+				overlayY: this.invertVerticalPos(overlayPosition.overlayY),
+			},
+		];
+	}
+
+	private invertVerticalPos(y: VerticalConnectionPos): VerticalConnectionPos {
+		if (y === 'top') {
+			return 'bottom';
+		} else if (y === 'bottom') {
+			return 'top';
+		}
+		return y;
+	}
+
+	private invertHorizontalPos(x: HorizontalConnectionPos): HorizontalConnectionPos {
+		if (x === 'end') {
+			return 'start';
+		} else if (x === 'start') {
+			return 'end';
+		}
+		return x;
 	}
 }

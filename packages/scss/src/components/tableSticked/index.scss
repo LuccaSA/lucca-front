@@ -3,39 +3,43 @@
 @use 'exports' as *;
 
 .table {
-	@include vars;
-
-	//For both mod-stickyColumn + responsive variant
-	&[class*='mod-stickyColumn'] {
-		@include stickyColumn;
+	@layer components {
+		@include vars;
 	}
 
-	&.mod-stickyColumn {
-		@include stickyColumnOffset;
-	}
+	@layer mods {
+		// For both mod-stickyColumn + responsive variant
+		&[class*='mod-stickyColumn'] {
+			@include stickyColumn;
+		}
 
-	@each $breakpoint, $value in config.$breakpoints {
-		@include media.min($breakpoint) {
-			&.mod-stickyColumnAtMediaMin#{$breakpoint} {
-				@include stickyColumnOffset;
+		&.mod-stickyColumn {
+			@include stickyColumnOffset;
+		}
+
+		@each $breakpoint, $value in config.$breakpoints {
+			@include media.min($breakpoint) {
+				&.mod-stickyColumnAtMediaMin#{$breakpoint} {
+					@include stickyColumnOffset;
+				}
 			}
 		}
-	}
 
-	//For both stickyHeader + -withBanner variant
-	&[class*='mod-stickyHeader'] {
-		@include stickyHeaderCommon;
+		// For both stickyHeader + -withBanner variant
+		&[class*='mod-stickyHeader'] {
+			@include stickyHeaderCommon;
 
-		.mod-stickyHeader-shadow {
-			@include stickyHeaderShadow;
+			.mod-stickyHeader-shadow {
+				@include stickyHeaderShadow;
+			}
 		}
-	}
 
-	&.mod-stickyHeader {
-		@include stickyHeader;
-	}
+		&.mod-stickyHeader {
+			@include stickyHeader;
+		}
 
-	&.mod-stickyHeader-withBanner {
-		@include stickyHeaderBanner;
+		&.mod-stickyHeader-withBanner {
+			@include stickyHeaderBanner;
+		}
 	}
 }

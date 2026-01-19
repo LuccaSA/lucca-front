@@ -1,27 +1,45 @@
 @use '@lucca-front/scss/src/commons/utils/a11y';
+@use '@lucca-front/scss/src/commons/utils/namespace';
 @use '@lucca-front/scss/src/components/numericBadge/exports' as numericBadge;
 
-@mixin component($atRoot: 'without: rule') {
+@mixin component($atRoot: namespace.$defaultAtRoot) {
 	display: flex;
 
 	@at-root ($atRoot) {
 		.radioButtons-item {
 			position: relative;
-			margin-left: 1px;
+			margin-inline-start: 1px;
 
 			&:first-child {
-				margin-left: 0;
+				margin-inline-start: 0;
 
 				.radioButtons-item-label {
-					border-radius: var(--commons-borderRadius-M) 0 0 var(--commons-borderRadius-M);
+					border-radius: var(--pr-t-border-radius-default) 0 0 var(--pr-t-border-radius-default);
 				}
 			}
 
 			&:last-child {
 				.radioButtons-item-label {
-					border-radius: 0 var(--commons-borderRadius-M) var(--commons-borderRadius-M) 0;
+					border-radius: 0 var(--pr-t-border-radius-default) var(--pr-t-border-radius-default) 0;
 				}
 			}
+		}
+
+		.radioButtons-item-label {
+			display: flex;
+			align-items: center;
+			gap: var(--pr-t-spacings-100);
+			background-color: var(--palettes-neutral-0);
+			padding: var(--components-radioButtons-padding);
+			font: var(--components-radioButtons-font);
+			color: var(--palettes-neutral-700);
+			box-shadow: 0 0 0 var(--commons-divider-width) var(--palettes-neutral-300);
+			transition-duration: var(--commons-animations-durations-fast);
+			transition-property: background-color, color, box-shadow;
+			overflow: hidden;
+			position: relative;
+			block-size: 100%;
+			cursor: pointer;
 		}
 
 		.radioButtons-item-input {
@@ -33,27 +51,7 @@
 					z-index: 2;
 				}
 			}
-		}
 
-		.radioButtons-item-label {
-			display: flex;
-			align-items: center;
-			gap: var(--pr-t-spacings-100);
-			background-color: var(--palettes-neutral-0);
-			padding: var(--components-radioButtons-padding);
-			font-size: var(--components-radioButtons-font-size);
-			line-height: var(--components-radioButtons-line-height);
-			color: var(--palettes-neutral-700);
-			box-shadow: 0 0 0 var(--commons-divider-width) var(--palettes-neutral-300);
-			transition-duration: var(--commons-animations-durations-fast);
-			transition-property: background-color, color, box-shadow;
-			overflow: hidden;
-			position: relative;
-			height: 100%;
-			cursor: pointer;
-		}
-
-		.radioButtons-item-input {
 			&:not(:disabled, .is-disabled) {
 				~ .radioButtons-item-label {
 					&:hover {
@@ -74,7 +72,7 @@
 						color: var(--palettes-product-800);
 
 						.numericBadge {
-							@include numericBadge.product;
+							@include numericBadge.inherit;
 						}
 					}
 				}

@@ -1,10 +1,11 @@
 @use '@lucca-front/icons/src/icon/exports' as icon;
 
 @mixin S {
-	--components-inlineMessage-fontSize: var(--sizes-XS-fontSize);
-	--components-inlineMessage-lineHeight: var(--sizes-XS-lineHeight);
+	--components-inlineMessage-font: var(--pr-t-font-body-XS);
 
-	.lucca-icon {
+	// .lucca-icon:first-child is deprecated
+	.inlineMessage-statusIcon,
+	& > .lucca-icon:first-child {
 		@include icon.XXS;
 	}
 }

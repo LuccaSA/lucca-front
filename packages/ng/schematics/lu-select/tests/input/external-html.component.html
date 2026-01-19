@@ -1,0 +1,22 @@
+<lu-select class="textfield textfield-input" [(ngModel)]="selectedCulture" (ngModelChange)="onCultureChanges()" [disabled]="defaultOnly">
+  <span *luDisplayer="let culture"> {{ culture?.name }} </span>
+  <lu-option-picker>
+    <lu-option *ngFor="let culture of cultures" [value]="culture"> {{ culture?.name }}</lu-option>
+  </lu-option-picker>
+</lu-select>
+
+<lu-select class="textfield textfield-input" [(ngModel)]="selectedCulture" (ngModelChange)="onCultureChanges()" [disabled]="defaultOnly">
+  <span *luDisplayer="let culture">@if (true) {
+    {{ culture?.code }}
+  }</span>
+  <lu-option-picker>
+    <lu-option *ngFor="let culture of cultures" [value]="culture"> {{ culture?.code }}</lu-option>
+  </lu-option-picker>
+</lu-select>
+
+<lu-select class="textfield textfield-input" [(ngModel)]="selectedCulture">
+  <span *luDisplayer="let culture"> {{ culture?.name }} </span>
+  <lu-option-picker [option-comparer]="testComparer">
+    <lu-option *ngFor="let culture of cultures" [value]="culture"> {{ culture?.name }}</lu-option>
+  </lu-option-picker>
+</lu-select>

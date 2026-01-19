@@ -1,96 +1,102 @@
-@mixin component($atRoot: 'without: rule') {
+@use '@lucca-front/scss/src/commons/utils/namespace';
+@use '@lucca-front/scss/src/components/avatar/exports' as avatar;
+@use '@lucca-front/scss/src/commons/utils/reset';
+
+@mixin component($atRoot: namespace.$defaultAtRoot) {
 	container: comment / inline-size;
 	display: flex;
 	flex-direction: column;
-	gap: var(--pr-t-spacings-100);
-	max-width: 40rem;
+	gap: var(--pr-t-spacings-50);
+	max-inline-size: var(--components-comment-max-width);
+	align-items: var(--components-comment-align);
+	margin-inline-start: var(--components-comment-margin);
+
+	.avatar {
+		@include avatar.XS;
+	}
 
 	@at-root ($atRoot) {
-		.comment-infos {
-			display: flex;
-			font-style: normal;
-			gap: var(--pr-t-spacings-100);
-			justify-content: flex-start;
-			align-items: flex-start;
-		}
-
-		.comment-infos-content {
-			flex-direction: column;
-			display: var(--components-comment-info-content-display);
-			font-size: var(--components-comment-info-fontSize);
-			line-height: var(--components-comment-info-lineHeight);
-			margin-top: var(--components-comment-info-content-marginTop);
-		}
-
-		.comment-infos-date {
-			color: var(--palettes-neutral-700);
-		}
-
-		.comment-infos-name {
-			color: var(--palettes-neutral-800);
-
-			& + .comment-infos-date {
-				&::before {
-					content: var(--components-comment-info-separator);
-					color: var(--palettes-neutral-400);
-					padding-inline: 1ch;
-
-					@supports (content: '*' / '') {
-						content: var(--components-comment-info-separator) / '';
-					}
-				}
-			}
-		}
-
-		.comment-content {
-			background: var(--palettes-neutral-50);
-			border-radius: var(--commons-borderRadius-M) var(--commons-borderRadius-L) var(--commons-borderRadius-L);
-			display: flex;
-			flex-direction: column;
-			gap: var(--pr-t-spacings-150);
-			margin: 0 0 0 var(--components-comment-content-margin);
-			max-width: fit-content;
-			padding: var(--pr-t-spacings-100) var(--pr-t-spacings-150);
-		}
-
-		.comment-content-text {
-			margin-bottom: 0;
-		}
-
-		.comment-content-textContainer {
-			display: flex;
-			flex-direction: column;
-			gap: var(--pr-t-spacings-100);
-
-			> * {
-				margin: 0;
-			}
-		}
-
-		.comment-content-text {
-			font-size: var(--components-comment-text-fontSize);
-			line-height: var(--components-comment-text-lineHeight);
-		}
-
-		.comment-content-textContainer {
-			font-size: var(--components-comment-text-fontSize);
-			line-height: var(--components-comment-text-lineHeight);
-		}
-
 		.commentWrapper {
 			display: flex;
 			flex-direction: column;
 			gap: var(--pr-t-spacings-100);
 			margin: 0;
 			padding: 0;
+			list-style-type: none;
 		}
 
-		.commentWrapper-item {
-			list-style: none;
+		.comment-infos {
+			display: flex;
+			font-style: normal;
+			gap: var(--pr-t-spacings-100);
+			justify-content: flex-start;
+			align-items: flex-start;
+			flex-direction: var(--components-comment-info-direction);
+		}
 
-			&.mod-WrapperAvatar ~ &:not(.mod-WrapperAvatar) {
-				padding-left: var(--components-comment-content-margin);
+		.comment-infos-content {
+			flex-direction: column;
+			display: var(--components-comment-info-content-display);
+			font: var(--pr-t-font-body-S);
+			margin-block: var(--pr-t-spacings-25);
+		}
+
+		.comment-infos-date {
+			color: var(--pr-t-color-text-subtle);
+		}
+
+		.comment-infos-name {
+			color: var(--pr-t-color-text);
+
+			& + .comment-infos-date {
+				&::before {
+					color: var(--palettes-neutral-400);
+					padding-inline: 1ch;
+					content: var(--components-comment-info-separator) / '';
+				}
 			}
 		}
+
+		.comment-content {
+			background-color: var(--components-comment-background-color, var(--palettes-neutral-50));
+			border-radius: var(--components-comment-border-radius);
+			display: flex;
+			flex-direction: column;
+			gap: var(--pr-t-spacings-150);
+			margin-block: 0;
+			margin-inline: var(--components-comment-content-margin) 0;
+			max-inline-size: fit-content;
+			padding-block: var(--pr-t-spacings-100);
+			padding-inline: var(--pr-t-spacings-150);
+		}
+
+		.comment-content-text {
+			margin-block-end: 0;
+			overflow-wrap: break-word;
+			font: var(--components-comment-text-font);
+		}
+
+		.comment-content-textContainerOptional {
+			display: flex;
+			flex-direction: column;
+			gap: var(--pr-t-spacings-100);
+			font: var(--components-comment-text-font);
+
+			> * {
+				margin: 0;
+			}
+		}
+	}
+}
+
+@mixin chat {
+	@include reset.list;
+
+	display: flex;
+	flex-direction: column;
+	gap: var(--pr-t-spacings-200);
+
+	.comment {
+		--components-comment-max-width: min(66ch, calc(100% - var(--components-comment-content-margin)));
 	}
 }

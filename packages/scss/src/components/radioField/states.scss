@@ -19,17 +19,10 @@
 	}
 }
 
-@mixin checkedHover {
-	~ .radioField-icon {
-		background-color: var(--palettes-product-600);
-		border-color: var(--palettes-product-600);
-	}
-}
-
 @mixin checkedActive {
 	~ .radioField-icon {
-		background-color: var(--palettes-product-800);
-		border-color: var(--palettes-product-800);
+		background-color: var(--palettes-product-900);
+		border-color: var(--palettes-product-900);
 	}
 }
 
@@ -43,8 +36,8 @@
 
 @mixin checkedHover {
 	~ .radioField-icon {
-		background-color: var(--palettes-product-600);
-		border-color: var(--palettes-product-600);
+		background-color: var(--palettes-product-800);
+		border-color: var(--palettes-product-800);
 	}
 }
 
@@ -72,7 +65,7 @@
 @mixin focusVisible {
 	~ .radioField-icon {
 		&::after {
-			@include a11y.focusVisible();
+			@include a11y.focusVisible;
 		}
 	}
 }
@@ -85,26 +78,26 @@
 
 @mixin invalidHover {
 	~ .radioField-icon {
-		border-color: var(--palettes-error-600);
+		border-color: var(--palettes-error-800);
 	}
 }
 
 @mixin invalidActive {
 	~ .radioField-icon {
-		border-color: var(--palettes-error-800);
+		border-color: var(--palettes-error-900);
 	}
 }
 
 @mixin checkedInvalidHover {
 	~ .radioField-icon {
-		background-color: var(--palettes-error-600);
-		border-color: var(--palettes-error-600);
+		background-color: var(--palettes-error-800);
+		border-color: var(--palettes-error-800);
 	}
 }
 
 @mixin checkedInvalidActive {
 	~ .radioField-icon {
-		background-color: var(--palettes-error-800);
-		border-color: var(--palettes-error-800);
+		background-color: var(--palettes-error-900);
+		border-color: var(--palettes-error-900);
 	}
 }

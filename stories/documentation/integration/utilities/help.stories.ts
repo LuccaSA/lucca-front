@@ -1,4 +1,4 @@
-import { Meta, StoryFn } from '@storybook/angular';
+import { Meta, StoryObj } from '@storybook/angular';
 
 interface HelpStory {}
 
@@ -7,13 +7,15 @@ export default {
 } as Meta;
 
 function getTemplate(args: HelpStory): string {
-	return `<p>J’ai besoin d’aide <span aria-hidden="true" class="lucca-icon icon-signHelp u-help"></span><span class="u-mask">?</span></p>`;
+	return `<p>J’ai besoin d’aide <span aria-hidden="true" class="lucca-icon icon-signHelp pr-u-help"></span><span class="pr-u-mask">?</span></p>`;
 }
 
-const Template: StoryFn<HelpStory> = (args) => ({
+const Template = (args: HelpStory) => ({
 	props: args,
 	template: getTemplate(args),
 });
 
-export const Help = Template.bind({});
-Help.args = {};
+export const Help: StoryObj<HelpStory> = {
+	args: {},
+	render: Template,
+};

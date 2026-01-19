@@ -1,7 +1,8 @@
-import { Meta, StoryFn } from '@storybook/angular';
+import { Meta, StoryObj } from '@storybook/angular';
 
 interface NotchBoxNotchPositioningStory {
 	direction: string;
+	notchPosition: number;
 }
 
 export default {
@@ -35,10 +36,10 @@ function getTemplate(args: NotchBoxNotchPositioningStory): string {
 		<div class="notchBox-wrapper">
 			<div class="notchBox-wrapper-content">
 				<strong>Notch can be positionned by using a finite, fixed unit (px, em, rem...) instead of the default % positionning</strong><br/>
-				Lorem ipsum dolor sit amet, consectetur adipiscing elit. Maecenas vehicula lacinia nisl in maximus. 
-				Maecenas nec enim non nulla faucibus posuere.Lorem ipsum dolor sit amet, consectetur adipiscing elit. 
-				Maecenas vehicula lacinia nisl in maximus. Maecenas nec enim non nulla faucibus posuere.Lorem ipsum dolor sit amet, consectetur adipiscing elit. Maecenas vehicula lacinia nisl in maximus. 
-				Maecenas nec enim non nulla faucibus posuere.Lorem ipsum dolor sit amet, consectetur adipiscing elit. 
+				Lorem ipsum dolor sit amet, consectetur adipiscing elit. Maecenas vehicula lacinia nisl in maximus.
+				Maecenas nec enim non nulla faucibus posuere.Lorem ipsum dolor sit amet, consectetur adipiscing elit.
+				Maecenas vehicula lacinia nisl in maximus. Maecenas nec enim non nulla faucibus posuere.Lorem ipsum dolor sit amet, consectetur adipiscing elit. Maecenas vehicula lacinia nisl in maximus.
+				Maecenas nec enim non nulla faucibus posuere.Lorem ipsum dolor sit amet, consectetur adipiscing elit.
 				Maecenas vehicula lacinia nisl in maximus. Maecenas nec enim non nulla faucibus posuere.
 				Lorem ipsum dolor sit amet, consectetur adipiscing elit. Maecenas vehicula lacinia nisl in maximus.
 				Lorem ipsum dolor sit amet, consectetur adipiscing elit. Maecenas vehicula lacinia nisl in maximus.
@@ -49,7 +50,7 @@ function getTemplate(args: NotchBoxNotchPositioningStory): string {
 	`;
 }
 
-const Template: StoryFn<NotchBoxNotchPositioningStory> = (args) => ({
+const Template = (args: NotchBoxNotchPositioningStory) => ({
 	props: args,
 	template: getTemplate(args),
 	styles: [
@@ -60,5 +61,7 @@ const Template: StoryFn<NotchBoxNotchPositioningStory> = (args) => ({
 	],
 });
 
-export const NotchPositioning = Template.bind({});
-NotchPositioning.args = { direction: 'mod-notchTop', notchPosition: 60 };
+export const NotchPositioning: StoryObj<NotchBoxNotchPositioningStory> = {
+	args: { direction: 'mod-notchTop', notchPosition: 60 },
+	render: Template,
+};

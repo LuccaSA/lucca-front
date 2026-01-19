@@ -1,4 +1,4 @@
-import { Meta, StoryFn } from '@storybook/angular';
+import { Meta, StoryObj } from '@storybook/angular';
 
 interface FramedBasicStory {}
 
@@ -57,7 +57,7 @@ function getTemplate(args: FramedBasicStory): string {
 						<select>
 							<option>Option 1</option>
 						</select>
-						<span class="select-label u-mask">Select label</span>
+						<span class="select-label pr-u-mask">Select label</span>
 					</label>
 				</div>
 			</div>
@@ -77,7 +77,7 @@ function getTemplate(args: FramedBasicStory): string {
 						<select>
 							<option>Option 1</option>
 						</select>
-						<span class="select-label u-mask">Select label</span>
+						<span class="select-label pr-u-mask">Select label</span>
 					</label>
 				</div>
 			</div>
@@ -188,10 +188,12 @@ function getTemplate(args: FramedBasicStory): string {
 	`;
 }
 
-const Template: StoryFn<FramedBasicStory> = (args) => ({
+const Template = (args: FramedBasicStory) => ({
 	props: args,
 	template: getTemplate(args),
 });
 
-export const Basic = Template.bind({});
-Basic.args = {};
+export const Basic: StoryObj<FramedBasicStory> = {
+	args: {},
+	render: Template,
+};

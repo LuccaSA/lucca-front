@@ -1,14 +1,14 @@
 import { provideHttpClient } from '@angular/common/http';
-import { Component } from '@angular/core';
+import { ChangeDetectionStrategy, Component } from '@angular/core';
+import { EmptyStatePageComponent } from '@lucca-front/ng/empty-state';
 import { LuSafeExternalSvgPipe } from '@lucca-front/ng/safe-content';
-import { Meta, StoryFn, applicationConfig } from '@storybook/angular';
+import { applicationConfig, Meta, StoryObj } from '@storybook/angular';
 
 @Component({
-	standalone: true,
 	selector: 'empty-state-page-stories',
-	styleUrls: ['empty-state-page.stories.scss'],
 	templateUrl: './empty-state-page.stories.html',
-	imports: [LuSafeExternalSvgPipe],
+	imports: [LuSafeExternalSvgPipe, EmptyStatePageComponent],
+	changeDetection: ChangeDetectionStrategy.OnPush,
 })
 class EmptyStatePageStory {}
 
@@ -22,6 +22,9 @@ export default {
 	],
 } as Meta;
 
-const template: StoryFn<EmptyStatePageStory> = () => ({});
+const template = () => ({});
 
-export const basic = template.bind({});
+export const Basic: StoryObj<EmptyStatePageStory> = {
+	args: {},
+	render: template,
+};

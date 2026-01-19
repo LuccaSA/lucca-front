@@ -1,4 +1,32 @@
+@use '@lucca-front/scss/src/commons/utils/loading';
+@use '@lucca-front/scss/src/commons/utils/a11y';
+
 @mixin disabled {
-	background-color: var(--palettes-neutral-200); // disabled token candidate
-	color: var(--palettes-neutral-500); // disabled token candidate
+	--components-numericBadge-background: var(--palettes-neutral-200); // disabled token candidate
+	--components-numericBadge-color: var(--palettes-neutral-500); // disabled token candidate
+}
+
+@mixin loading {
+	--commons-loading-frontground: var(--components-numericBadge-loadingColor);
+	--commons-loading-borderWidth: 2px;
+	--components-numericBadge-color: transparent;
+
+	@include loading.spinner(calc(var(--components-numericBadge-size) - var(--pr-t-spacings-100)));
+}
+
+@mixin loadingS {
+	--commons-loading-borderWidth: 1.5px;
+}
+
+@mixin loadingXS {
+	--commons-loading-borderWidth: 1px;
+}
+
+@mixin focusVisible {
+	@include a11y.focusVisible;
+}
+
+@mixin state {
+	--components-numericBadge-background: transparent;
+	--components-numericBadge-color: transparent;
 }

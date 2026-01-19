@@ -1,4 +1,4 @@
-import { Meta, StoryFn } from '@storybook/angular';
+import { Meta, StoryObj } from '@storybook/angular';
 
 interface TableActionsStory {}
 
@@ -23,10 +23,10 @@ function getTemplate(args: TableActionsStory): string {
 			<td class="table-body-row-cell">Contenu</td>
 			<td class="table-body-row-cell">Contenu</td>
 			<td class="table-body-row-cell mod-actions">
-				<button type="button" class="button mod-text mod-onlyIcon mod-S">
+				<button type="button" class="button mod-ghost mod-onlyIcon mod-S">
 					<span aria-hidden="true" class="lucca-icon icon-officePen"></span>
 				</button>
-				<button type="button" class="button mod-text mod-onlyIcon mod-S">
+				<button type="button" class="button mod-ghost mod-onlyIcon mod-S">
 					<span aria-hidden="true" class="lucca-icon icon-trashDelete"></span>
 				</button>
 			</td>
@@ -36,8 +36,8 @@ function getTemplate(args: TableActionsStory): string {
 			<td class="table-body-row-cell">Contenu</td>
 			<td class="table-body-row-cell">Contenu</td>
 			<td class="table-body-row-cell mod-actions">
-				<button type="button" class="button mod-text mod-onlyIcon mod-S"><span aria-hidden="true" class="lucca-icon icon-officePen"></span></button>
-				<button type="button" class="button mod-text mod-onlyIcon mod-S"><span aria-hidden="true" class="lucca-icon icon-trashDelete"></span></button>
+				<button type="button" class="button mod-ghost mod-onlyIcon mod-S"><span aria-hidden="true" class="lucca-icon icon-officePen"></span></button>
+				<button type="button" class="button mod-ghost mod-onlyIcon mod-S"><span aria-hidden="true" class="lucca-icon icon-trashDelete"></span></button>
 			</td>
 		</tr>
 		<tr class="table-body-row">
@@ -45,18 +45,20 @@ function getTemplate(args: TableActionsStory): string {
 			<td class="table-body-row-cell">Contenu</td>
 			<td class="table-body-row-cell">Contenu</td>
 			<td class="table-body-row-cell mod-actions">
-				<button type="button" class="button mod-text mod-onlyIcon mod-S"><span aria-hidden="true" class="lucca-icon icon-officePen"></span></button>
-				<button type="button" class="button mod-text mod-onlyIcon mod-S"><span aria-hidden="true" class="lucca-icon icon-trashDelete"></span></button>
+				<button type="button" class="button mod-ghost mod-onlyIcon mod-S"><span aria-hidden="true" class="lucca-icon icon-officePen"></span></button>
+				<button type="button" class="button mod-ghost mod-onlyIcon mod-S"><span aria-hidden="true" class="lucca-icon icon-trashDelete"></span></button>
 			</td>
 		</tr>
 	</tbody>
 </table>`;
 }
 
-const Template: StoryFn<TableActionsStory> = (args) => ({
+const Template = (args: TableActionsStory) => ({
 	props: args,
 	template: getTemplate(args),
 });
 
-export const Actions = Template.bind({});
-Actions.args = {};
+export const Actions: StoryObj<TableActionsStory> = {
+	args: {},
+	render: Template,
+};

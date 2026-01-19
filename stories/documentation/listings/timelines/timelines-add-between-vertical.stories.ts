@@ -1,4 +1,4 @@
-import { Meta, StoryFn } from '@storybook/angular';
+import { Meta, StoryObj } from '@storybook/angular';
 
 interface TimelinesAddBetweenVerticalStory {}
 
@@ -22,7 +22,7 @@ function getTemplate(args: TimelinesAddBetweenVerticalStory): string {
 			<div class="timeline-step-title">
 				<button type="button" class="timeline-stepAddBetweenStep-title">
 					<span class="timeline-step-title-icon" aria-hidden="true"></span>
-					<span class="u-mask">
+					<span class="pr-u-mask">
 						Ajouter une étape intermédiaire entre l’étape 1 et l’étape 2
 					</span>
 				</button>
@@ -41,10 +41,12 @@ function getTemplate(args: TimelinesAddBetweenVerticalStory): string {
 	`;
 }
 
-const Template: StoryFn<TimelinesAddBetweenVerticalStory> = (args) => ({
+const Template = (args: TimelinesAddBetweenVerticalStory) => ({
 	props: args,
 	template: getTemplate(args),
 });
 
-export const AddBetweenVertical = Template.bind({});
-AddBetweenVertical.args = {};
+export const AddBetweenVertical: StoryObj<TimelinesAddBetweenVerticalStory> = {
+	args: {},
+	render: Template,
+};

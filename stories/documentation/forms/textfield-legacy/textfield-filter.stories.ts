@@ -1,4 +1,4 @@
-import { Meta, StoryFn } from '@storybook/angular';
+import { Meta, StoryObj } from '@storybook/angular';
 
 interface TextfieldFilterStory {}
 
@@ -16,17 +16,19 @@ function getTemplate(args: TextfieldFilterStory): string {
 </div>`;
 }
 
-const Template: StoryFn<TextfieldFilterStory> = (args) => ({
+const Template = (args: TextfieldFilterStory) => ({
 	props: args,
 	template: getTemplate(args),
 	styles: [
 		`
 		.textfield {
 			display: inline-flex;
-			margin-right: 1rem;
+			margin-inline-end: 1rem;
 		}`,
 	],
 });
 
-export const Filter = Template.bind({});
-Filter.args = {};
+export const Filter: StoryObj<TextfieldFilterStory> = {
+	args: {},
+	render: Template,
+};

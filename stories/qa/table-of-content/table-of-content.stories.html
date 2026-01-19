@@ -1,28 +1,74 @@
-<h1>Table of content</h1>
-
-<!-- Basics -->
-<section class="contentSection">
-	<h2>Table of content</h2>
-	<nav class="tableOfContent">
-		<ul class="tableOfContent-list">
-			<li class="tableOfContent-list-item">
-				<a href="#" class="tableOfContent-list-item-action is-active">Section 1</a>
-			</li>
-			<li class="tableOfContent-list-item">
-				<a href="#" class="tableOfContent-list-item-action">Section 2</a>
-			</li>
-			<li class="tableOfContent-list-item">
-				<a href="#" class="tableOfContent-list-item-action">Section 3</a>
-			</li>
-			<li class="tableOfContent-list-item">
-				<a href="#" class="tableOfContent-list-item-action">Section 4</a>
-			</li>
-		</ul>
-	</nav>
-	<em
-		><b>Tip:</b> Table of content is sticky by default. Just add a top value to <code class="code">tableOfContent</code> to activate it.</em
-	>
-</section>
+<table class="demo-QAtable">
+	<tbody>
+		<tr>
+			<td></td>
+			<td>
+				<div class="demo-QAtable-list">HTML</div>
+			</td>
+			<td>
+				<div class="demo-QAtable-list">Angular</div>
+			</td>
+		</tr>
+		<tr>
+			<td>Default</td>
+			<td>
+				<nav class="tableOfContent">
+					<ul class="tableOfContent-list">
+						<li class="tableOfContent-list-item">
+							<a href="#" class="tableOfContent-list-item-action is-active">Section 1</a>
+						</li>
+						<li class="tableOfContent-list-item">
+							<a href="#" class="tableOfContent-list-item-action">Section 2</a>
+						</li>
+						<li class="tableOfContent-list-item">
+							<a href="#" class="tableOfContent-list-item-action">Section 3</a>
+						</li>
+						<li class="tableOfContent-list-item">
+							<a href="#" class="tableOfContent-list-item-action">Section 4</a>
+						</li>
+					</ul>
+				</nav>
+			</td>
+			<td>
+				<lu-table-of-content>
+					<a *luTableOfContentLink class="is-active" href="#">Section 1</a>
+					<a *luTableOfContentLink href="#">Section 2</a>
+					<a *luTableOfContentLink href="#">Section 3</a>
+					<a *luTableOfContentLink href="#">Section 4</a>
+				</lu-table-of-content>
+			</td>
+		</tr>
+		<tr>
+			<td>Disabled</td>
+			<td>
+				<nav class="tableOfContent">
+					<ul class="tableOfContent-list">
+						<li class="tableOfContent-list-item">
+							<a href="#" class="tableOfContent-list-item-action is-active">Section 1</a>
+						</li>
+						<li class="tableOfContent-list-item">
+							<a href="#" class="tableOfContent-list-item-action" disabled>Section 2</a>
+						</li>
+						<li class="tableOfContent-list-item">
+							<a href="#" class="tableOfContent-list-item-action" disabled>Section 3</a>
+						</li>
+						<li class="tableOfContent-list-item">
+							<a href="#" class="tableOfContent-list-item-action" disabled>Section 4</a>
+						</li>
+					</ul>
+				</nav>
+			</td>
+			<td>
+				<lu-table-of-content>
+					<a *luTableOfContentLink class="is-active" href="#">Section 1</a>
+					<a *luTableOfContentLink href="#" disabled>Section 2</a>
+					<a *luTableOfContentLink href="#" disabled>Section 3</a>
+					<a *luTableOfContentLink href="#" disabled>Section 4</a>
+				</lu-table-of-content>
+			</td>
+		</tr>
+	</tbody>
+</table>
 
 <!-- To tell the ui-diff tool that the page has finished rendering -->
 <span id="ready"></span>

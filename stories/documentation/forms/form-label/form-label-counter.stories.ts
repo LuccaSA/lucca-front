@@ -1,4 +1,4 @@
-import { Meta, StoryFn } from '@storybook/angular';
+import { Meta, StoryObj } from '@storybook/angular';
 
 interface FormLabelCounterStory {}
 
@@ -9,20 +9,22 @@ export default {
 
 function getTemplate(args: FormLabelCounterStory): string {
 	return `<label class="formLabel mod-counter" id="IDlabel" for="ID">
-	Label<sup class="formLabel-required" aria-hidden="true">*</sup><span class="formLabel-info"><span aria-hidden="true" class="lucca-icon icon-signHelp"></span><span class="u-mask">?</span></span>
+	Label<sup class="formLabel-required" aria-hidden="true">*</sup><span class="formLabel-info"><span aria-hidden="true" class="lucca-icon icon-signHelp"></span><span class="pr-u-mask">?</span></span>
 	<span class="formLabel-counter" id="IDcounter" aria-live="polite">
 		<span aria-hidden="true">7/77</span>
-		<span class="u-mask">
+		<span class="pr-u-mask">
 			Votre publication fait 7 caractères de long. 77 maximum sont autorisés.
 		</span>
 	</span>
 </label>`;
 }
 
-const Template: StoryFn<FormLabelCounterStory> = (args) => ({
+const Template = (args: FormLabelCounterStory) => ({
 	props: args,
 	template: getTemplate(args),
 });
 
-export const Counter = Template.bind({});
-Counter.args = {};
+export const Counter: StoryObj<FormLabelCounterStory> = {
+	args: {},
+	render: Template,
+};

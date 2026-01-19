@@ -1,22 +1,37 @@
 @use 'exports' as *;
 
 .clear {
-	@include vars;
-	@include component;
-
-	&.mod-S {
-		@include S;
+	@layer components {
+		@include vars;
+		@include component;
 	}
 
-	// .palette-primary is deprecated
-	&.palette-product:not([disabled]),
-	&.palette-primary:not([disabled]) {
-		@include product;
-	}
+	@layer mods {
+		&.mod-S {
+			@include S;
+		}
 
-	&[disabled] {
-		@include disabled;
+		&.mod-inverted {
+			@include inverted;
+		}
 
-		cursor: default;
+		&[disabled] {
+			cursor: default;
+
+			@include disabled;
+		}
+
+		&[hidden],
+		.filterPill[disabled] &,
+		.filterPill:not(.is-filled) &,
+		.textfield-input[disabled] &,
+		.textfield-input:not(.is-filled) &,
+		.textfield-input:not(.is-selected) & {
+			@include hidden;
+		}
+
+		.multiSelect.is-selected:has(.multipleSelect-clear) & {
+			--components-clear-display: grid;
+		}
 	}
 }

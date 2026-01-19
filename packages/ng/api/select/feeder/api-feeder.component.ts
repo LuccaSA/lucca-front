@@ -8,9 +8,7 @@ import { ALuApiOptionFeeder } from './api-feeder.model';
 @Component({
 	selector: 'lu-api-feeder',
 	template: '',
-	styleUrls: [],
 	changeDetection: ChangeDetectionStrategy.OnPush,
-	standalone: true,
 	providers: [
 		{
 			provide: ALuOptionOperator,

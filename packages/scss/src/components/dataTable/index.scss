@@ -1,0 +1,158 @@
+@use 'exports' as *;
+
+.dataTableWrapper {
+	@layer components {
+		@include vars;
+	}
+
+	@layer mods {
+		&.mod-nested {
+			@include nested;
+		}
+
+		&.mod-noOverflow {
+			@include noOverflow;
+		}
+	}
+}
+
+.dataTable {
+	@layer components {
+		@include component;
+	}
+
+	@layer mods {
+		&.mod-cellBorder {
+			@include cellBorder;
+		}
+
+		&.mod-alignTop,
+		&.mod-verticalAlignTop {
+			@include verticalAlignTop;
+		}
+
+		&.mod-verticalAlignBottom {
+			@include verticalAlignBottom;
+		}
+
+		&.mod-verticalAlignMiddle {
+			@includeverticalAlignMiddle;
+		}
+
+		&.mod-layoutFixed {
+			@include layoutFixed;
+		}
+
+		&[class*='mod-layoutFixedAtMediaMin'] {
+			@include layoutFixedWithBreakpoint;
+		}
+
+		// Allow selection of mod-layoutFixed with or without breakpoints like mod-layoutFixedAtMediaMinXS or mod-layoutFixedAtMediaMaxL
+		&[class*='mod-layoutFixed'] {
+			@include layoutFixedCells;
+		}
+
+		&.mod-hover {
+			:is(.mod-selectable, .dataTable-body-row:not(.mod-group)) {
+				&:hover {
+					@include hover;
+				}
+
+				&.mod-selectable {
+					&:has(input:checked) {
+						&:hover {
+							@include selectedHover;
+						}
+					}
+				}
+			}
+		}
+	}
+}
+
+@layer mods {
+	:is(.dataTable-head-row, .dataTable-body-row, .dataTable-foot-row) {
+		&.mod-group {
+			@include group;
+		}
+
+		&:has([selectable]),
+		&.mod-selectable {
+			@include selectable;
+		}
+
+		&.mod-draggable {
+			@include draggable;
+
+			&:has([selectable]),
+			&.mod-selectable {
+				@include selectableDraggable;
+			}
+		}
+	}
+
+		:is(.dataTable-body-row, .dataTable-foot-row) {
+		&:has([selectable]),
+		&.mod-selectable {
+			&:has(input:checked) {
+				@include selected;
+			}
+		}
+	}
+
+	:is(.dataTable-head-row-cell, .dataTable-body-row-cell, .dataTable-foot-row-cell) {
+		&.mod-actions {
+			@include actions;
+		}
+
+		&.mod-alignCenter {
+			@include alignCenter;
+		}
+
+		&.mod-alignRight,
+		&.mod-alignEnd {
+			@include alignEnd;
+		}
+
+		&.mod-alignStart {
+			@include alignStart;
+		}
+
+		&.mod-editable {
+			@include editable;
+		}
+
+		&.mod-tree {
+			@include tree;
+		}
+	}
+
+	.dataTable-body-row {
+		&.is-collapsed {
+			@include collapsed;
+		}
+
+		&:first-child {
+			&:has(.dataTable-body-row-cell-expand-button.button[aria-expanded='false']) {
+				~ .dataTable-body-row {
+					@include collapsed;
+				}
+			}
+		}
+	}
+
+	.dataTable-body-row-cell-expand-button {
+		&[aria-expanded='true'] {
+			@include expanded;
+		}
+	}
+}
+
+// drag and drop preview
+:not(.dataTable-body) {
+	> .dataTable-body-row {
+		@layer components {
+			@include vars;
+		}
+	}
+}

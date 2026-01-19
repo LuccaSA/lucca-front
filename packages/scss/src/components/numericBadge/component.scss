@@ -1,18 +1,35 @@
-@mixin component {
+@use '@lucca-front/scss/src/commons/utils/namespace';
+
+@mixin component($atRoot: namespace.$defaultAtRoot) {
 	display: inline-flex;
 	align-items: center;
 	justify-content: center;
-	height: var(--components-numericBadge-size);
-	min-width: var(--components-numericBadge-size);
+	block-size: var(--components-numericBadge-size);
+	min-inline-size: var(--components-numericBadge-size);
 	padding: var(--pr-t-spacings-50);
-	font-size: var(--components-numericBadge-fontSize);
-	line-height: var(--components-numericBadge-lineHeight);
-	font-weight: 600;
+	font: var(--components-numericBadge-font);
+	font-size: var(--components-numericBadge-fontSize); // Deprecated
+	line-height: var(--components-numericBadge-lineHeight); // Deprecated
+	font-weight: var(--pr-t-font-fontWeight-semibold);
 	background-color: var(--components-numericBadge-background);
 	color: var(--components-numericBadge-color);
 	border-radius: var(--components-numericBadge-borderRadius);
-	transition-property: background-color, color;
-	transition-duration: var(--commons-animations-durations-fast);
 	transition-timing-function: ease;
 	white-space: nowrap;
+	position: relative;
+	transition-duration: var(--commons-animations-durations-fast);
+	transition-property: color;
+
+	&:empty {
+		&::before {
+			// stylelint-disable-next-line no-irregular-whitespace -- Don’t wrap content because of a space.
+			content: ' ' / '';
+		}
+	}
+
+	@at-root ($atRoot) {
+		.numericBadge-value {
+			outline: none;
+		}
+	}
 }

@@ -1,0 +1,24 @@
+<button type="button" class="button" [luDropdown]="dropdown">Dropdown with options</button>
+<lu-dropdown #dropdown>
+	<li class="dropdown-list-option">
+		<span class="dropdown-list-option-action is-disabled" luDropdownItem>
+			<span aria-hidden="true" class="lucca-icon icon-eye"></span>
+			Prévisualiser
+		</span>
+	</li>
+	<li class="dropdown-list-option mod-divider" aria-hidden="true">
+		<hr class="divider" />
+	</li>
+	<li class="dropdown-list-option">
+		<a routerLink="." fragment="link2" class="dropdown-list-option-action" luDropdownItem>
+			<span aria-hidden="true" class="lucca-icon icon-officePen"></span>
+			Éditer
+		</a>
+	</li>
+	<li class="dropdown-list-option">
+		<button type="button" class="dropdown-list-option-action mod-critical" luDropdownItem>
+			<span aria-hidden="true" class="lucca-icon icon-trashDelete"></span>
+			Supprimer
+		</button>
+	</li>
+</lu-dropdown>

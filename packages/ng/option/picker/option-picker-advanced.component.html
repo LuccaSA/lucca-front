@@ -1,8 +1,8 @@
 <ng-template>
 	<div
 		class="lu-picker-panel lu-option-picker-panel"
-		role="dialog"
-		[ngClass]="panelClassesMap"
+		data-testid="dialog-panel"
+		[class]="panelClassesMap"
 		[class.mod-multiple]="multiple"
 		(click)="onClick()"
 		(mouseover)="onMouseOver()"
@@ -12,13 +12,15 @@
 		<div
 			[class.is-loading]="loading$ | async"
 			class="lu-picker-content"
-			[ngClass]="contentClassesMap"
+			[class]="contentClassesMap"
 			[cdkTrapFocus]="trapFocus"
 			luScroll
 			(onScrollBottom)="onScrollBottom()"
 		>
-			<ng-content></ng-content>
-			<div *ngIf="loading$ | async" class="loading lu-picker-loading"></div>
+			<ng-content />
+			@if (loading$ | async) {
+				<div class="loading lu-picker-loading"></div>
+			}
 		</div>
 	</div>
 </ng-template>

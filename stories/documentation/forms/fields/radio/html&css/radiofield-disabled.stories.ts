@@ -1,4 +1,4 @@
-import { Meta, StoryFn } from '@storybook/angular';
+import { Meta, StoryObj } from '@storybook/angular';
 
 interface RadioDisabledStory {}
 
@@ -18,7 +18,9 @@ function getTemplate(args: RadioDisabledStory): string {
 			<input disabled="disabled" type="radio" class="radioField-input" id="IDradioA" name="radioName1" aria-describedby="IDmessageRadioA" checked />
 			<span class="radioField-icon" aria-hidden="true"><span class="radioField-icon-check"></span></span>
 		</span>
-		<div class="inlineMessage" id="IDmessageRadioA">Option text</div>
+		<div class="inlineMessage" id="IDmessageRadioA">
+			<p class="inlineMessage-content">Option text</p>
+		</div>
 	</div>
 	<div class="form-field">
 		<label class="formLabel" for="IDradioB">Option B</label>
@@ -26,15 +28,19 @@ function getTemplate(args: RadioDisabledStory): string {
 			<input disabled="disabled" type="radio" class="radioField-input" id="IDradioB" name="radioName1" aria-describedby="IDmessageRadioB" />
 			<span class="radioField-icon" aria-hidden="true"><span class="radioField-icon-check"></span></span>
 		</span>
-		<div class="inlineMessage" id="IDmessageRadioB">Option text</div>
+		<div class="inlineMessage" id="IDmessageRadioB">
+			<p class="inlineMessage-content">Option text</p>
+		</div>
 	</div>
 </fieldset>`;
 }
 
-const Template: StoryFn<RadioDisabledStory> = (args) => ({
+const Template = (args: RadioDisabledStory) => ({
 	props: args,
 	template: getTemplate(args),
 });
 
-export const Disabled = Template.bind({});
-Disabled.args = {};
+export const Disabled: StoryObj<RadioDisabledStory> = {
+	args: {},
+	render: Template,
+};

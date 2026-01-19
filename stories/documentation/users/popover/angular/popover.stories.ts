@@ -1,22 +1,21 @@
 import { provideHttpClient } from '@angular/common/http';
-import { Component, Input } from '@angular/core';
+import { ChangeDetectionStrategy, Component, input } from '@angular/core';
 import { provideAnimations } from '@angular/platform-browser/animations';
-import { LuUserPopoverDirective, provideLuUserPopover } from '@lucca-front/ng/popup-employee';
-import { Meta, StoryFn, applicationConfig } from '@storybook/angular';
-import { ILuUser } from '../../../../../packages/ng/user/user.model';
+import { ILuUser } from '@lucca-front/ng/user';
+import { LuUserPopoverDirective, provideLuUserPopover } from '@lucca-front/ng/user-popover';
+import { applicationConfig, Meta, StoryObj } from '@storybook/angular';
 
 @Component({
 	selector: 'user-popover-story',
-	standalone: true,
-	template:
-		'<div [luUserPopover]="luUserPopover" [luUserPopoverEnterDelay]="luUserPopoverEnterDelay" [luUserPopoverLeaveDelay]="luUserPopoverLeaveDelay" [luUserPopoverDisabled]="luUserPopoverDisabled">Survolez-moi !</div>',
+	template: '<button type="button" class="userPopover_trigger" [luUserPopover]="luUserPopover()" [luUserPopoverDisabled]="luUserPopoverDisabled()">Survolez-moi !</button>',
 	imports: [LuUserPopoverDirective],
+	changeDetection: ChangeDetectionStrategy.OnPush,
 })
 class UserPopoverStory {
-	@Input() luUserPopover: ILuUser;
-	@Input() luUserPopoverEnterDelay = 300;
-	@Input() luUserPopoverLeaveDelay = 200;
-	@Input() luUserPopoverDisabled = false;
+	luUserPopover = input<ILuUser>();
+	luUserPopoverEnterDelay = input<number>(300);
+	luUserPopoverLeaveDelay = input<number>(200);
+	luUserPopoverDisabled = input<boolean>(false);
 }
 
 export default {
@@ -31,16 +30,13 @@ export default {
 	},
 } as Meta;
 
-const template: StoryFn<UserPopoverStory> = (args) => ({
-	props: args,
-});
-
-export const Basic = template.bind({});
-Basic.args = {
-	luUserPopover: { id: 1, firstName: 'Chloe', lastName: 'Alibert' },
-	luUserPopoverEnterDelay: 300,
-	luUserPopoverLeaveDelay: 200,
-	luUserPopoverDisabled: false,
+export const Basic: StoryObj<UserPopoverStory> = {
+	args: {
+		luUserPopover: { id: 1, firstName: 'Chloe', lastName: 'Alibert' },
+		luUserPopoverEnterDelay: 300,
+		luUserPopoverLeaveDelay: 200,
+		luUserPopoverDisabled: false,
+	},
 };
 
 Basic.parameters = {

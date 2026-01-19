@@ -1,39 +1,45 @@
-import { booleanAttribute, ChangeDetectionStrategy, Component, HostBinding, inject, Input, OnChanges, ViewEncapsulation } from '@angular/core';
+import { NgTemplateOutlet } from '@angular/common';
+import { booleanAttribute, ChangeDetectionStrategy, Component, computed, inject, input, ViewEncapsulation } from '@angular/core';
 import { ReactiveFormsModule } from '@angular/forms';
-import { InputDirective } from '@lucca-front/ng/form-field';
+import { LuClass, PortalContent, ɵeffectWithDeps } from '@lucca-front/ng/core';
+import { InputDirective, InputFramedComponent } from '@lucca-front/ng/form-field';
 import { InlineMessageComponent } from '@lucca-front/ng/inline-message';
-import { NgIf } from '@angular/common';
 import { RADIO_GROUP_INSTANCE } from '../radio-group-token';
-import { LuClass } from '@lucca-front/ng/core';
 
 let nextId = 0;
 
 @Component({
 	selector: 'lu-radio',
-	standalone: true,
-	imports: [ReactiveFormsModule, InputDirective, InlineMessageComponent, NgIf],
+	imports: [ReactiveFormsModule, InlineMessageComponent, NgTemplateOutlet, InputDirective, InputFramedComponent],
 	templateUrl: './radio.component.html',
 	styleUrl: './radio.component.scss',
+	host: {
+		'[class.form-field]': '!framed()',
+		'[id]': 'id',
+	},
 	encapsulation: ViewEncapsulation.None,
 	changeDetection: ChangeDetectionStrategy.OnPush,
-	host: {
-		class: 'form-field',
-	},
 	providers: [LuClass],
 })
-export class RadioComponent<T = unknown> implements OnChanges {
+export class RadioComponent<T = unknown> {
 	#luClass = inject(LuClass);
-
-	@Input({ required: true })
-	value: T;
-
-	@Input({ transform: booleanAttribute })
-	disabled: boolean;
-
-	@Input()
-	inlineMessage: string;
-
 	#parentGroup = inject(RADIO_GROUP_INSTANCE);
+
+	readonly value = input.required<T>();
+
+	readonly disabled = input(false, { transform: booleanAttribute });
+
+	readonly inlineMessage = input<PortalContent>();
+
+	readonly tag = input<string>();
+
+	readonly framedPortal = input<PortalContent>();
+
+	readonly arrow = computed(() => this.#parentGroup.arrow());
+	readonly framed = computed(() => this.#parentGroup.framed());
+	readonly framedCenter = computed(() => this.#parentGroup.framedCenter());
+	readonly framedSize = computed(() => this.#parentGroup.framedSize());
+	readonly size = computed(() => this.#parentGroup.size());
 
 	public get formControl() {
 		return this.#parentGroup.ngControl.control;
@@ -43,12 +49,14 @@ export class RadioComponent<T = unknown> implements OnChanges {
 		return this.#parentGroup.name;
 	}
 
-	@HostBinding('id')
 	id = `radio-${++nextId}`;
 
-	ngOnChanges(): void {
-		this.#luClass.setState({
-			[`mod-${this.#parentGroup.size}`]: !!this.#parentGroup.size,
+	constructor() {
+		ɵeffectWithDeps([this.size, this.arrow], (size, arrow) => {
+			this.#luClass.setState({
+				[`mod-${size}`]: !!size,
+				'mod-withArrow': arrow !== undefined,
+			});
 		});
 	}
 }

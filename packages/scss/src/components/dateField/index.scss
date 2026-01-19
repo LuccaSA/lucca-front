@@ -1,0 +1,40 @@
+@use 'exports' as *;
+
+.dateField {
+	@layer components {
+		@include vars;
+		@include component;
+	}
+
+	@layer mods {
+		&.mod-filterPill {
+			@include filterPill;
+		}
+
+		&:not(.mod-auto, .mod-filterPill) {
+			&.mod-day {
+				@include day;
+
+				.form-field.mod-S & {
+					@include dayS;
+				}
+			}
+
+			&.mod-month {
+				@include month;
+
+				.form-field.mod-S & {
+					@include monthS;
+				}
+			}
+
+			&.mod-year {
+				@include year;
+
+				.form-field.mod-S & {
+					@include yearS;
+				}
+			}
+		}
+	}
+}

@@ -1,6 +1,8 @@
-:host {
-	width: 100%;
-	display: inherit;
-	align-items: inherit;
-	flex-direction: inherit;
+@layer components {
+	:host {
+		inline-size: 100%;
+		display: inherit;
+		align-items: inherit;
+		flex-direction: inherit;
+	}
 }

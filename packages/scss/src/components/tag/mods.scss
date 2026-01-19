@@ -1,4 +1,5 @@
-@use '@lucca-front/icons/src/icon/exports' as icon;
+@use '@lucca-front/icons/src/icon/exports' as icons;
+@use '@lucca-front/scss/src/commons/utils/color';
 
 @mixin clickable {
 	--components-tag-cursor: pointer;
@@ -20,18 +21,52 @@
 	}
 }
 
-@mixin L {
-	--components-tag-fontSize: var(--sizes-M-fontSize);
-	--components-tag-lineHeight: var(--sizes-M-lineHeight);
-	--components-tag-iconBottom: 0;
+@mixin S {
+	--components-tag-font: var(--pr-t-font-body-XS);
+	--components-tag-gap: var(--pr-t-spacings-25);
 
 	.lucca-icon {
-		@include icon.XS;
+		@include icons.XXS;
 	}
+
+	// Deprecated
+	--components-tag-fontSize: var(--pr-t-font-body-XS-fontSize);
+	--components-tag-lineHeight: var(--pr-t-font-body-XS-lineHeight);
+}
+
+@mixin L {
+	--components-tag-font: var(--pr-t-font-body-M);
+
+	.lucca-icon {
+		@include icons.S;
+	}
+
+	// Deprecated
+	--components-tag-fontSize: var(--pr-t-font-body-M-fontSize);
+	--components-tag-lineHeight: var(--pr-t-font-body-M-lineHeight);
 }
 
 @mixin outlined {
-	--components-tag-color: var(--palettes-600, var(--palettes-neutral-600));
 	--components-tag-shadow: var(--palettes-300, var(--palettes-neutral-300));
 	--components-tag-background: transparent;
+}
+
+@mixin product {
+	--components-tag-background: var(--palettes-100, var(--palettes-product-100));
+	--components-tag-color: var(--palettes-800, var(--palettes-product-800));
+}
+
+@mixin AI {
+	@include outlined;
+
+	&:not(:disabled) {
+		--components-tag-boxShadow: none;
+		--components-tag-position: relative;
+
+		@include color.borderGradient(135deg, var(--palettes-brand-400), var(--palettes-AI-500), var(--pr-t-border-radius-small));
+
+		.lucca-icon {
+			@include icons.AI;
+		}
+	}
 }

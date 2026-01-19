@@ -1,30 +1,58 @@
-<h1 class="demo-divider">Breadcrumbs</h1>
-
-<!-- Basics -->
-<section class="contentSection">
-	<h2>Basics</h2>
-	<nav class="breadcrumbs" aria-describedby="breadcrumbs-title">
-		<p id="breadcrumbs-title" class="u-mask">Breadcrumbs</p>
-		<ol class="breadcrumbs-list">
-			<li class="breadcrumbs-list-item"><a href="#" class="breadcrumbs-list-item-action">You</a></li>
-			<li class="breadcrumbs-list-item"><a href="#" class="breadcrumbs-list-item-action">are</a></li>
-			<li class="breadcrumbs-list-item"><span aria-current="page" class="breadcrumbs-list-item-action">here</span></li>
-		</ol>
-	</nav>
-</section>
-
-<!-- Compact -->
-<section class="contentSection">
-	<h2>Compact</h2>
-
-	<nav class="breadcrumbs mod-compact" aria-describedby="breadcrumbs-title">
-		<p id="breadcrumbs-title" class="u-mask">Breadcrumbs</p>
-		<ol class="breadcrumbs-list">
-			<li class="breadcrumbs-list-item"><a href="#" class="breadcrumbs-list-item-action">Previous page</a></li>
-			<li class="breadcrumbs-list-item"><span aria-current="page" class="breadcrumbs-list-item-action">Current page</span></li>
-		</ol>
-	</nav>
-</section>
+<table class="demo-QAtable">
+	<tbody>
+		<tr>
+			<td></td>
+			<td>
+				<div class="demo-QAtable-list">HTML</div>
+			</td>
+			<td>
+				<div class="demo-QAtable-list">Angular</div>
+			</td>
+		</tr>
+		<tr>
+			<td>Default</td>
+			<td>
+				<div class="demo-QAtable-list">
+					<nav class="breadcrumbs" aria-describedby="breadcrumbs-title">
+						<p id="breadcrumbs-title" class="pr-u-mask">Breadcrumbs</p>
+						<ol class="breadcrumbs-list">
+							<li class="breadcrumbs-list-item"><a href="#" class="breadcrumbs-list-item-action">You</a></li>
+							<li class="breadcrumbs-list-item"><a href="#" class="breadcrumbs-list-item-action">are</a></li>
+							<li class="breadcrumbs-list-item"><span aria-current="page" class="breadcrumbs-list-item-action">here</span></li>
+						</ol>
+					</nav>
+				</div>
+			</td>
+			<td>
+				<lu-breadcrumbs>
+					<a *luBreadcrumbsLink routerLink="/" ariaCurrentWhenActive="page">You</a>
+					<a *luBreadcrumbsLink ariaCurrentWhenActive="page" href="#2">are</a>
+					<a *luBreadcrumbsLink aria-current="page">here</a>
+				</lu-breadcrumbs>
+			</td>
+		</tr>
+		<tr>
+			<td>Compact (deprecated)</td>
+			<td>
+				<div class="demo-QAtable-list">
+					<nav class="breadcrumbs mod-compact" aria-describedby="breadcrumbs-title">
+						<p id="breadcrumbs-title" class="pr-u-mask">Breadcrumbs</p>
+						<ol class="breadcrumbs-list">
+							<li class="breadcrumbs-list-item"><a href="#" class="breadcrumbs-list-item-action">Previous page</a></li>
+							<li class="breadcrumbs-list-item"><span aria-current="page" class="breadcrumbs-list-item-action">Current page</span></li>
+						</ol>
+					</nav>
+				</div>
+			</td>
+			<td>
+				<lu-breadcrumbs>
+					<a *luBreadcrumbsLink ariaCurrentWhenActive="page" href="#2">Previous page</a>
+					<a *luBreadcrumbsLink aria-current="page">mode</a>
+				</lu-breadcrumbs>
+			</td>
+		</tr>
+	</tbody>
+</table>
 
 <!-- To tell the ui-diff tool that the page has finished rendering -->
 <span id="ready"></span>

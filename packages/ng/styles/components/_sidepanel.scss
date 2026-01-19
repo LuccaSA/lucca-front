@@ -1,60 +1,75 @@
-:root {
-	--components-sidepanel-XS: 25rem;
-	--components-sidepanel-S: 30rem;
-	--components-sidepanel-M: 40rem;
-	--components-sidepanel-L: 50rem;
-	--components-sidepanel-XL: 60rem;
+@use '@lucca-front/scss/src/commons/utils/namespace';
+
+@include namespace.appendRootVars {
+	@layer components {
+		--components-sidepanel-XS: 25rem;
+		--components-sidepanel-S: 30rem;
+		--components-sidepanel-M: 40rem;
+		--components-sidepanel-L: 50rem;
+		--components-sidepanel-XL: 60rem;
+	}
 }
 
-.lu-popup-panel {
-	&.mod-sidepanel {
-		position: fixed !important;
-		top: 0;
-		right: 0;
-		bottom: 0;
-		width: var(--components-sidepanel-M);
-		max-width: 100%;
-		max-height: 100vh;
-		border-radius: 0;
-		animation-name: sidepanel;
-		transform-origin: center center;
+@layer mods {
+	.lu-popup-panel {
+		&.mod-sidepanel {
+			position: fixed !important;
+			inset-block: 0;
+			inset-inline-end: 0;
+			inline-size: var(--components-sidepanel-M);
+			max-inline-size: 100%;
+			max-block-size: 100vh;
+			border-radius: 0;
+			animation-name: sidepanel;
+			transform-origin: center center;
 
-		&.mod-XS {
-			width: var(--components-sidepanel-XS);
-		}
+			&.mod-XS {
+				inline-size: var(--components-sidepanel-XS);
+			}
 
-		&.mod-S {
-			width: var(--components-sidepanel-S);
-		}
+			&.mod-S {
+				inline-size: var(--components-sidepanel-S);
+			}
 
-		&.mod-L {
-			width: var(--components-sidepanel-L);
-		}
+			&.mod-L {
+				inline-size: var(--components-sidepanel-L);
+			}
 
-		&.mod-XL {
-			width: var(--components-sidepanel-XL);
+			&.mod-XL {
+				inline-size: var(--components-sidepanel-XL);
+			}
 		}
 	}
 }
 
 .lu-sidepanel-panel-inner,
 .lu-sidepanel-container {
-	display: flex;
-	flex-flow: column;
-	flex-grow: 1;
-	height: 100%;
+	@layer components {
+		display: flex;
+		flex-flow: column;
+		flex-grow: 1;
+		block-size: 100%;
+
+		.lu-modal-content {
+			block-size: 100%;
+		}
+	}
 }
 
 .lu-sidepanel-container {
-	overflow: auto;
+	@layer components {
+		overflow: auto;
+	}
 }
 
-@keyframes sidepanel {
-	0% {
-		transform: translate(100%, 0);
-	}
+@layer components {
+	@keyframes sidepanel {
+		0% {
+			transform: translate(100%, 0);
+		}
 
-	100% {
-		transform: translate(0, 0);
+		100% {
+			transform: translate(0, 0);
+		}
 	}
 }

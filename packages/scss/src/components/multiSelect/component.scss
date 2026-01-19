@@ -1,16 +1,23 @@
 @use '@lucca-front/scss/src/commons/utils/reset';
 @use '@lucca-front/scss/src/commons/utils/a11y';
+@use '@lucca-front/scss/src/commons/utils/text';
 @use '@lucca-front/icons/src/icon/exports' as icon;
+@use '@lucca-front/scss/src/commons/utils/namespace';
+@use '@lucca-front/scss/src/commons/utils/color';
 
-@mixin component($atRoot: 'without: rule') {
+@mixin component($atRoot: namespace.$defaultAtRoot) {
 	display: flex;
 	box-shadow: 0 0 0 1px var(--components-multiSelect-border-color);
 	background-color: var(--components-multiSelect-background);
-	border-radius: var(--commons-borderRadius-M);
+	border-radius: var(--pr-t-border-radius-input);
 	padding: var(--components-multiSelect-padding);
 	align-items: flex-end;
 	gap: var(--components-multiSelect-gap);
 	cursor: pointer;
+
+	&:hover {
+		--components-multiSelect-border-color: var(--pr-t-color-input-border-hover);
+	}
 
 	&:has(.multipleSelect-displayer-search:focus-visible) {
 		@include a11y.focusVisible($offset: 3px);
@@ -25,11 +32,13 @@
 		}
 
 		.multipleSelect-displayer-chip {
-			min-width: 0;
+			min-inline-size: 0;
+
+			@include color.palette('product');
 		}
 
 		.multipleSelect-displayer-chip-value {
-			max-width: 8rem;
+			max-inline-size: 8.75rem;
 			white-space: nowrap;
 			overflow: hidden;
 			text-overflow: ellipsis;
@@ -37,36 +46,50 @@
 
 		.multipleSelect-displayer-search {
 			display: block;
-			min-width: 2rem;
-			width: auto;
+			min-inline-size: 2rem;
+			inline-size: auto;
 			flex: 1;
 			order: 1;
 			border: 0;
 			padding: 0;
 			outline: none;
-			color: var(--palettes-neutral-800);
-			font-size: var(--components-multiSelect-fontSize);
-			line-height: var(--components-multiSelect-lineHeight);
+			color: var(--pr-t-color-input-text);
+			font: var(--components-multiSelect-font);
 			background-color: transparent;
 			cursor: pointer;
 
 			&::placeholder {
-				color: var(--palettes-neutral-400);
+				color: var(--components-multiSelect-placeholder);
 			}
 		}
 
 		.multipleSelect-displayer-label {
-			font-size: var(--components-multiSelect-fontSize);
-			line-height: var(--components-multiSelect-lineHeight);
+			font: var(--components-multiSelect-font);
 		}
 
 		.multipleSelect-clear {
-			margin-bottom: var(--pr-t-spacings-50);
+			margin-block-end: var(--pr-t-spacings-50);
 		}
 
-		.multipleSelect-arrow {
+		.multipleSelect-arrow,
+		.multipleSelect-searchIcon {
 			@include icon.M;
+
 			color: var(--components-multiSelect-arrow-color);
+			transition-property: transform;
+			transition-duration: var(--commons-animations-durations-standard);
+		}
+
+		.multipleSelect-searchIcon {
+			display: none;
+		}
+
+		.multipleSelect-pill-displayer-chip {
+			@include text.ellipsis;
+		}
+
+		.multipleSelect-pill-displayer-label {
+			font-weight: var(--pr-t-font-fontWeight-semibold);
 		}
 	}
 }

@@ -1,2 +1,3 @@
-@import '_definitions';
-@include optionPlaceholderStyle;
+@use '../../styles/definitions';
+
+@include definitions.optionPlaceholderStyle;

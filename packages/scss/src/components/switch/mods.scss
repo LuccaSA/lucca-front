@@ -1,15 +1,15 @@
 @mixin inline {
 	display: inline-block;
-	margin-right: var(--pr-t-spacings-300);
+	margin-inline-end: var(--pr-t-spacings-300);
 }
 
 @mixin S {
 	--components-switch-height: 1rem;
 	--components-switch-width: 1.75rem;
-	--components-switch-slider-size: .75rem;
-	--components-switch-icon-size: .75rem;
-	--components-switch-lineHeight: var(--sizes-S-lineHeight);
-	--components-switch-fontSize: var(--sizes-S-fontSize);
-	--components-switch-helper-lineHeight: var(--sizes-XS-lineHeight);
-	--components-switch-helper-fontSize: var(--sizes-XS-fontSize);
+	--components-switch-slider-size: 0.75rem;
+	--components-switch-icon-size: 0.75rem;
+	--components-switch-lineHeight: var(--pr-t-font-body-S-lineHeight);
+	--components-switch-fontSize: var(--pr-t-font-body-S-fontSize);
+	--components-switch-helper-lineHeight: var(--pr-t-font-body-XS-lineHeight);
+	--components-switch-helper-fontSize: var(--pr-t-font-body-XS-fontSize);
 }

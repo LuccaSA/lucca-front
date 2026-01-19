@@ -369,7 +369,11 @@ export abstract class ALuPopoverTrigger<TPanel extends ILuPopoverPanel = ILuPopo
 	protected _setIsPopoverOpen(isOpen: boolean): void {
 		this._popoverOpen = isOpen;
 		// tell the panel it's opening/closing
-		isOpen ? this.panel.onOpen() : this.panel.onClose();
+		if (isOpen) {
+			this.panel.onOpen();
+		} else {
+			this.panel.onClose();
+		}
 	}
 
 	/**
@@ -380,7 +384,7 @@ export abstract class ALuPopoverTrigger<TPanel extends ILuPopoverPanel = ILuPopo
 		if (!this.panel) {
 			throw Error(`lu-popover-trigger: must pass in a lu-popover instance.
       Example:
-      <lu-popover #popover="LuPopover"></lu-popover>
+      <lu-popover #popover="LuPopover" />
       <button type="button" [luPopover]="popover"></button>`);
 		}
 	}

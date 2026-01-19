@@ -1,0 +1,68 @@
+import { Meta, StoryObj } from '@storybook/angular';
+
+interface GridsGapsStory {
+	reverse: boolean;
+}
+
+export default {
+	title: 'Documentation/Structure/Grids/HTML & CSS/Gaps',
+	argTypes: {},
+} as Meta;
+
+function getTemplate(args: GridsGapsStory): string {
+	return `<div class="grid" style="--grid-columns: 2; --grid-column-gap: 0">
+	<div class="grid-column"><div class="demo">1</div></div>
+	<div class="grid-column"><div class="demo">2</div></div>
+	<div class="grid-column"><div class="demo">3</div></div>
+	<div class="grid-column"><div class="demo">4</div></div>
+</div>
+
+<div class="grid" style="--grid-columns: 2; --grid-row-gap: 0">
+	<div class="grid-column"><div class="demo">1</div></div>
+	<div class="grid-column"><div class="demo">2</div></div>
+	<div class="grid-column"><div class="demo">3</div></div>
+	<div class="grid-column"><div class="demo">4</div></div>
+</div>
+
+<div class="grid" style="--grid-columns: 2; --grid-gap: 0">
+	<div class="grid-column"><div class="demo">1</div></div>
+	<div class="grid-column"><div class="demo">2</div></div>
+	<div class="grid-column"><div class="demo">3</div></div>
+	<div class="grid-column"><div class="demo">4</div></div>
+</div>
+
+<div class="grid" style="--grid-columns: 2; --grid-gap: var(--pr-t-spacings-100)">
+	<div class="grid-column"><div class="demo">1</div></div>
+	<div class="grid-column"><div class="demo">2</div></div>
+	<div class="grid-column"><div class="demo">3</div></div>
+	<div class="grid-column"><div class="demo">4</div></div>
+</div>`;
+}
+
+const Template = (args: GridsGapsStory) => ({
+	props: args,
+	template: getTemplate(args),
+	styles: [
+		`
+		.demo {
+			background-color: var(--palettes-neutral-0);
+			padding: var(--pr-t-spacings-200);
+			border-radius: 1rem;
+			text-align: center;
+			block-size: 100%;
+			display: flex;
+			align-items: center;
+			justify-content: center;
+		}
+
+		.grid + .grid {
+			margin-block-start: var(--pr-t-spacings-400);
+		}
+		`,
+	],
+});
+
+export const Basic: StoryObj<GridsGapsStory> = {
+	args: {},
+	render: Template,
+};

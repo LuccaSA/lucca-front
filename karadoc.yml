@@ -1,0 +1,10 @@
+apiVersion: karadoc.lucca.tech/v1
+kind: Component
+metadata:
+  name: lucca-front
+  displayName: lucca-front
+spec:
+  owner: group:design-system
+  system: system:r-d
+  type: Backend
+  repository: LuccaSA/lucca-front

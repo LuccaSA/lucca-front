@@ -1,4 +1,4 @@
-import { Component, inject, Input, Type } from '@angular/core';
+import { ChangeDetectionStrategy, Component, inject, input, Type } from '@angular/core';
 import { provideAnimations } from '@angular/platform-browser/animations';
 import { ButtonComponent } from '@lucca-front/ng/button';
 import { ILuModalContent, LU_MODAL_DATA, LuModal, LuModalConfig, LuModalModule } from '@lucca-front/ng/modal';
@@ -41,7 +41,6 @@ import { ILuModalContent } from '@lucca-front/ng/modal';
 
 @Component({
 	selector: 'modal-content',
-	standalone: true,
 	template: '<p>General Kenobi</p>',
 })
 class ModalContentComponent implements ILuModalContent {
@@ -54,8 +53,8 @@ class ModalContentComponent implements ILuModalContent {
 
 @Component({
 	selector: 'modal-content',
-	standalone: true,
 	template: '<p>{{ message }}</p>',
+	changeDetection: ChangeDetectionStrategy.OnPush,
 })
 class ModalContentComponent implements ILuModalContent {
 	title = 'Hello there';
@@ -65,8 +64,8 @@ class ModalContentComponent implements ILuModalContent {
 
 @Component({
 	selector: 'modal-content',
-	standalone: true,
 	template: '<p>General Kenobi</p>',
+	changeDetection: ChangeDetectionStrategy.OnPush,
 })
 class ModalDynamicContentComponent implements ILuModalContent {
 	counter$ = timer(0, 1000).pipe(shareReplay({ refCount: true, bufferSize: 1 }));
@@ -82,23 +81,22 @@ class ModalDynamicContentComponent implements ILuModalContent {
 
 @Component({
 	selector: 'modal-stories',
-	standalone: true,
 	template: `
-		<lu-toasts [sources]="[]"></lu-toasts>
+		<lu-toasts [sources]="[]" />
 		<button type="button" luButton (click)="openModal()">Open</button>
 	`,
 	imports: [LuToastsModule, ButtonComponent],
+	changeDetection: ChangeDetectionStrategy.OnPush,
 })
 class ModalStories {
-	@Input() mode: 'modal' | 'sidepanel' = 'modal';
-	@Input() position: 'left' | 'right' = 'right';
-	@Input() panelClass: string;
-	@Input() undismissable: boolean;
-	@Input() size: 'XS' | 'S' | 'M' | 'L' | 'XL' = 'M';
-	@Input() noBackdrop: boolean;
-
-	@Input() useDynamicContent: boolean;
-	@Input() message: string;
+	mode = input<'modal' | 'sidepanel'>('modal');
+	position = input<'left' | 'right'>('right');
+	panelClass = input<string>();
+	undismissable = input<boolean>();
+	size = input<'XS' | 'S' | 'M' | 'L' | 'XL'>('M');
+	noBackdrop = input<boolean>();
+	useDynamicContent = input<boolean>();
+	message = input<string>();
 
 	constructor(
 		private modal: LuModal,
@@ -106,26 +104,27 @@ class ModalStories {
 	) {}
 
 	public openModal() {
-		const cmp: Type<ILuModalContent> = this.useDynamicContent ? ModalDynamicContentComponent : ModalContentComponent;
+		const cmp: Type<ILuModalContent> = this.useDynamicContent() ? ModalDynamicContentComponent : ModalContentComponent;
 		const baseOptions = {
-			...(this.panelClass ? { panelClass: this.panelClass } : {}),
-			size: this.size ?? 'M',
-			noBackdrop: this.noBackdrop ?? false,
-			undismissable: this.undismissable ?? false,
+			...(this.panelClass() ? { panelClass: this.panelClass() } : {}),
+			size: this.size() ?? 'M',
+			noBackdrop: this.noBackdrop() ?? false,
+			undismissable: this.undismissable() ?? false,
 		};
+		const mode = this.mode();
 		const options =
-			this.mode === 'sidepanel'
+			mode === 'sidepanel'
 				? {
 						...baseOptions,
-						position: this.position,
-						mode: this.mode,
+						position: this.position(),
+						mode,
 					}
 				: baseOptions;
-		const data = this.message ? { message: this.message } : {};
+		const data = this.message() ? { message: this.message() } : {};
 
-		const ref = this.modal.open(cmp, data, options);
+		const ref = this.modal.legacyOpen(cmp, data, options);
 
-		if (this.undismissable) {
+		if (this.undismissable()) {
 			ref.onBackdropClick.subscribe(() => {
 				this.toastsService.addToast({
 					message: 'Backdrop clicked',
@@ -135,7 +134,7 @@ class ModalStories {
 	}
 }
 
-const template = `<modal-stories [mode]="mode" [position]="position" [panelClass]="panelClass" [undismissable]="undismissable" [size]="size" [noBackdrop]="noBackdrop" [useDynamicContent]="useDynamicContent" [message]="message"></modal-stories>`;
+const template = `<modal-stories [mode]="mode" [position]="position" [panelClass]="panelClass" [undismissable]="undismissable" [size]="size" [noBackdrop]="noBackdrop" [useDynamicContent]="useDynamicContent" [message]="message" />`;
 
 export const Modal = generateStory({
 	name: 'Basic',
@@ -161,7 +160,6 @@ export interface MyModalData {
 
 @Component({
 	selector: 'modal-content',
-	standalone: true,
 	template: '<p>{{data.message}}</p>',
 })
 class MyModalComponent implements ILuModalContent {
@@ -235,7 +233,6 @@ ${generateMarkdownCodeBlock(
 	`
 @Component({
 	selector: 'modal-content',
-	standalone: true,
 	template: '<p>General Kenobi</p>',
 })
 class ModalDynamicContentComponent implements ILuModalContent {

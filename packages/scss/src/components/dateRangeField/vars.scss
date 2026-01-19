@@ -1,0 +1,16 @@
+@mixin vars {
+	--components-dateRangeField-maxWidth: auto;
+	--components-dateRangeField-maxWidthDay: 18rem;
+	--components-dateRangeField-maxWidthMonth: 16rem;
+	--components-dateRangeField-maxWidthYear: 12rem;
+
+	--components-dateRangeField-maxWidthDayS: 16.5rem;
+	--components-dateRangeField-maxWidthMonthS: 13.5rem; // 12.75rem;
+	--components-dateRangeField-maxWidthYearS: 10.25rem; // 9.75rem;
+
+	--components-dateRangeField-content-inlineStart: calc(var(--pr-t-spacings-100) + var(--pr-t-spacings-25));
+	--components-dateRangeField-content-width: calc(50% + var(--pr-t-spacings-300) + var(--pr-t-spacings-50));
+	--components-dateRangeField-content-inlineEnd: calc(var(--pr-t-spacings-800) + var(--pr-t-spacings-150));
+	--components-dateRangeField-content-background: transparent;
+	--components-dateRangeField-content-placeholderColor: var(--palettes-neutral-400);
+}

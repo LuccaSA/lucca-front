@@ -1,4 +1,15 @@
 @mixin vars {
-	--components-divider-fontSize: var(--sizes-M-fontSize);
-	--components-divider-lineHeight: var(--sizes-M-lineHeight);
+	--components-divider-font: var(--pr-t-font-body-M);
+	--components-divider-marginBlock: var(--pr-t-spacings-50);
+	--components-divider-marginInline: 0;
+	--components-divider-margin: var(--components-divider-marginBlock) var(--components-divider-marginInline);
+	--components-divider-minSize: var(--pr-t-spacings-150);
+	--components-divider-direction: row;
+	--components-divider-iconBottom: 0;
+	--components-divider-justify: normal;
+	--components-divider-alignSelf: '';
+
+	// Deprecated
+	--components-divider-fontSize: var(--pr-t-font-body-M-fontSize);
+	--components-divider-lineHeight: var(--pr-t-font-body-M-lineHeight);
 }

@@ -1,4 +1,4 @@
-import { Meta, StoryFn } from '@storybook/angular';
+import { Meta, StoryObj } from '@storybook/angular';
 
 interface ListBasicStory {
 	clickable: boolean;
@@ -25,8 +25,8 @@ function getTemplate(args: ListBasicStory): string {
 				<p class="list-item-content-description">Description</p>
 			</div>
 			<div class="list-item-actions">
-				<button type="button" class="actionIcon mod-S"><span aria-hidden="true" class="lucca-icon icon-edit"></span></button>
-				<button type="button" class="actionIcon mod-S"><span aria-hidden="true" class="lucca-icon icon-trash"></span></button>
+				<button type="button" class="button mod-onlyIcon mod-S"><span aria-hidden="true" class="lucca-icon icon-edit"></span></button>
+				<button type="button" class="button mod-onlyIcon mod-S"><span aria-hidden="true" class="lucca-icon icon-trash"></span></button>
 			</div>
 		</li>
 		<li class="list-item ${clickable}">
@@ -35,18 +35,20 @@ function getTemplate(args: ListBasicStory): string {
 				<p class="list-item-content-description">Description</p>
 			</div>
 			<div class="list-item-actions">
-				<button type="button" class="actionIcon mod-S"><span aria-hidden="true" class="lucca-icon icon-edit"></span></button>
-				<button type="button" class="actionIcon mod-S"><span aria-hidden="true" class="lucca-icon icon-trash"></span></button>
+				<button type="button" class="button mod-onlyIcon mod-S"><span aria-hidden="true" class="lucca-icon icon-edit"></span></button>
+				<button type="button" class="button mod-onlyIcon mod-S"><span aria-hidden="true" class="lucca-icon icon-trash"></span></button>
 			</div>
 		</li>
 	</ul>
 	`;
 }
 
-const Template: StoryFn<ListBasicStory> = (args) => ({
+const Template = (args: ListBasicStory) => ({
 	props: args,
 	template: getTemplate(args),
 });
 
-export const Basic = Template.bind({});
-Basic.args = { clickable: false };
+export const Basic: StoryObj<ListBasicStory> = {
+	args: { clickable: false },
+	render: Template,
+};

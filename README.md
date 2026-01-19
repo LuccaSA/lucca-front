@@ -32,7 +32,6 @@ In your file styles.scss, add imports files and components you want to import to
 @forward '@lucca-front/ng/src/main';
 
 // Import SCSS components
-@forward '@lucca-front/scss/src/components/actionIcon';
 @forward '@lucca-front/scss/src/components/box';
 @forward '@lucca-front/scss/src/components/breadcrumbs';
 @forward '@lucca-front/scss/src/components/button';
@@ -47,7 +46,6 @@ In your file styles.scss, add imports files and components you want to import to
 @forward '@lucca-front/scss/src/components/container';
 @forward '@lucca-front/scss/src/components/contentSection';
 @forward '@lucca-front/scss/src/components/divider';
-@forward '@lucca-front/scss/src/components/emptyState';
 @forward '@lucca-front/scss/src/components/errorPage';
 @forward '@lucca-front/scss/src/components/field';
 @forward '@lucca-front/scss/src/components/file';
@@ -55,7 +53,6 @@ In your file styles.scss, add imports files and components you want to import to
 @forward '@lucca-front/scss/src/components/form';
 @forward '@lucca-front/scss/src/components/formLabel';
 @forward '@lucca-front/scss/src/components/gauge';
-@forward '@lucca-front/scss/src/components/grid';
 @forward '@lucca-front/scss/src/components/grid';
 @forward '@lucca-front/scss/src/components/header';
 @forward '@lucca-front/scss/src/components/label';
@@ -169,6 +166,13 @@ In order to work on Lucca Front, we use Storybook to display components.
 - Install node `volta install node@lts`
 - Run storybook `npm start`
 
-## TODO
+## Translations
 
-- [ ] Gestion de l'espace
+Translations are hosted by Lokalise on `Lucca.Front` project and must be imported by launching the command at project root: `npm run i18n:update`.
+[Full translations documentation] (https://www.notion.so/Lucca-Front-Traductions-Lokalise-173d278ab26e801b8462f90e1a93dd50)
+
+## License
+The source code of this project is distributed under the Apache 2.0 license (see the LICENSE file). 
+
+Please note:
+Assets (including but not limited to images, audio files, fonts, icons, trademarks, logos, brand names and other media files) included in this repository are NOT covered by this license. They remain the property of their respective owners and their use is subject to specific restrictions. Please respect these conditions.

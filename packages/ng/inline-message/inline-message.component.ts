@@ -1,38 +1,41 @@
-import { ChangeDetectionStrategy, Component, inject, Input, OnChanges, ViewEncapsulation } from '@angular/core';
-import { NgIf } from '@angular/common';
+import { booleanAttribute, ChangeDetectionStrategy, Component, inject, input, ViewEncapsulation } from '@angular/core';
+import { LuClass, PortalContent, PortalDirective, ɵeffectWithDeps } from '@lucca-front/ng/core';
+import { LuTooltipModule } from '@lucca-front/ng/tooltip';
 import { InlineMessageState } from './inline-message-state';
-import { LuClass } from '@lucca-front/ng/core';
-import { IconComponent } from '@lucca-front/ng/icon';
 
 @Component({
 	selector: 'lu-inline-message',
-	standalone: true,
-	imports: [NgIf, IconComponent],
+	imports: [PortalDirective, LuTooltipModule],
 	providers: [LuClass],
 	templateUrl: './inline-message.component.html',
-	styleUrls: ['./inline-message.component.scss'],
+	styleUrl: './inline-message.component.scss',
 	changeDetection: ChangeDetectionStrategy.OnPush,
 	encapsulation: ViewEncapsulation.None,
 	host: {
 		class: 'inlineMessage',
 	},
 })
-export class InlineMessageComponent implements OnChanges {
+export class InlineMessageComponent {
 	#luClass = inject(LuClass);
 
-	@Input({ required: true })
-	label: string;
+	readonly label = input.required<PortalContent>();
 
-	@Input()
-	state: InlineMessageState;
+	readonly state = input<InlineMessageState>();
 
-	@Input()
-	size: 'S' | 'M';
+	readonly size = input<'S' | 'M'>();
 
-	ngOnChanges(): void {
-		this.#luClass.setState({
-			[`mod-${this.size}`]: !!this.size,
-			[`is-${this.state}`]: !!this.state,
+	readonly withTooltip = input(false, { transform: booleanAttribute });
+
+	constructor() {
+		ɵeffectWithDeps([this.size, this.state], (size, state) => {
+			this.#luClass.setState({
+				[`mod-${size}`]: !!size,
+				[`is-${state}`]: !!state,
+			});
 		});
+	}
+
+	public isStringPortalContent(message: PortalContent): message is string {
+		return typeof message === 'string';
 	}
 }

@@ -2,34 +2,38 @@
 @use '@lucca-front/scss/src/components/calloutFeedbackList/exports' as calloutFeedbackList;
 
 @mixin S {
-  .calloutDisclosure-summary-title {
-    font-size: var(--sizes-S-fontSize);
-    line-height: var(--sizes-S-lineHeight);
-  }
+	--components-calloutDisclosure-paddingHorizontal: var(--pr-t-spacings-100);
+  --components-calloutDisclosure-paddingVertical: var(--pr-t-spacings-75);
+	--components-calloutDisclosure-gap: var(--pr-t-spacings-100);
 
-  .calloutDisclosure-summary-icon {
-  	@include icon.S;
-  }
+	.calloutDisclosure-summary-title {
+		font: var(--pr-t-font-body-S);
+		font-weight: var(--pr-t-font-fontWeight-semibold);
+	}
 
-  .calloutDisclosure-summary-chevron {
-  	@include icon.S;
-  }
+	.calloutDisclosure-summary-icon {
+		@include icon.S;
+	}
 
-  .calloutDisclosure-details {
-    margin-left: calc(var(--components-calloutDisclosure-paddingHorizontal) + 2rem);
-  }
+	.calloutDisclosure-summary-chevron {
+		@include icon.S;
+	}
 
-  .calloutFeedbackList {
-    @include calloutFeedbackList.S;
-  }
+	.calloutDisclosure-details {
+		margin-inline-start: calc(var(--components-calloutDisclosure-paddingHorizontal) + 2rem);
+	}
+
+	.calloutFeedbackList {
+		@include calloutFeedbackList.S;
+	}
 }
 
 @mixin iconless {
-  .calloutDisclosure-summary-icon {
-    display: none;
-  }
+	.calloutDisclosure-summary-icon {
+		display: none;
+	}
 
-  .calloutDisclosure-details {
-    margin-left: var(--components-calloutDisclosure-paddingHorizontal);
-  }
+	.calloutDisclosure-details {
+		margin-inline-start: var(--components-calloutDisclosure-paddingHorizontal);
+	}
 }

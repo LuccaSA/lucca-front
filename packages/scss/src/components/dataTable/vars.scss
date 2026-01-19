@@ -1,0 +1,17 @@
+@mixin vars {
+	--components-dataTable-cell-padding-inline: var(--pr-t-spacings-150);
+	--components-dataTable-cell-paddingInlineStart: var(--components-dataTable-cell-padding-inline);
+	--components-dataTable-cell-padding-block: var(--pr-t-spacings-100);
+	--components-dataTable-cell-padding: var(--components-dataTable-cell-padding-block) var(--components-dataTable-cell-padding-inline);
+	--components-dataTable-treeLevel: 1;
+	--components-dataTable-cell-verticalAlign: middle;
+	--components-dataTable-cell-shadow: 0 1px inset var(--commons-border-200);
+	--components-dataTable-cell-background: var(--pr-t-elevation-surface-raised);
+	--components-dataTable-cell-textAlign: left;
+	--components-dataTable-tableLayout: auto;
+	--components-dataTable-cellFirst-width: auto;
+	--components-dataTable-row-display: table-row;
+	--components-dataTable-expand-rotation: 180deg;
+	--components-dataTable-borderRadius: var(--pr-t-border-radius-structure);
+	--components-dataTable-minInlineSize: none;
+}

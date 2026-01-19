@@ -6,12 +6,14 @@ import { ALuOptionOperator } from '../../operator/option-operator.model';
 import { ALuOptionSelector, ILuOptionSelector } from '../option-selector.model';
 import { LU_OPTION_SELECT_ALL_TRANSLATIONS } from './select-all.translate';
 
+/**
+ * @deprecated
+ */
 @Component({
 	selector: 'lu-option-select-all',
 	templateUrl: './select-all.component.html',
-	styleUrls: ['select-all.component.scss'],
+	styleUrl: 'select-all.component.scss',
 	changeDetection: ChangeDetectionStrategy.OnPush,
-	standalone: true,
 	providers: [
 		{
 			provide: ALuOptionOperator,
@@ -40,6 +42,9 @@ export class LuOptionSelectAllComponent<T> extends ALuOptionOperator<T> implemen
 	public intl = getIntl(LU_OPTION_SELECT_ALL_TRANSLATIONS);
 
 	selectAll() {
+		if (!this.options) {
+			return;
+		}
 		this.onSelectValue.next([...this.options]);
 	}
 	deselectAll() {

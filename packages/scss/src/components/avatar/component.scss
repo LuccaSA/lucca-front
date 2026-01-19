@@ -1,24 +1,55 @@
 @use '@lucca-front/scss/src/commons/utils/reset';
 @use '@lucca-front/scss/src/commons/utils/a11y';
+@use '@lucca-front/scss/src/commons/utils/namespace';
 
-@mixin component($atRoot: 'without: rule') {
-	box-shadow: 0 0 0 var(--components-avatar-border) var(--components-avatar-background);
-	border-radius: var(--commons-borderRadius-full);
+@mixin component($atRoot: namespace.$defaultAtRoot) {
+	display: inline-block;
+	vertical-align: middle;
+	border-radius: var(--components-avatar-borderRadius);
+	inline-size: var(--components-avatar-size);
+	aspect-ratio: 1;
 
 	@at-root ($atRoot) {
+		.avatar-picture {
+			background-color: var(--components-avatar-picture-background);
+			border-radius: var(--components-avatar-borderRadius);
+			background-position: center;
+			background-size: cover;
+			background-repeat: no-repeat;
+			inline-size: var(--components-avatar-size);
+			object-fit: cover;
+			object-position: center;
+			aspect-ratio: 1;
+			display: flex;
+			justify-content: center;
+			align-items: center;
+		}
+
+		.avatar-picture-initials {
+			font-size: var(--components-avatar-fontSize);
+			font-weight: var(--pr-t-font-fontWeight-bold);
+			font-family: var(--pr-t-font-family-brand);
+			line-height: 1;
+			color: var(--pr-t-color-text-reverse);
+			display: var(--components-avatar-picture-initials-display);
+		}
+
 		.avatarWrapper {
 			@include reset.list;
 
 			display: flex;
 			flex-wrap: wrap;
 			align-content: flex-start;
+			row-gap: var(--components-avatarWrapper-rowGap);
+
+			.avatar {
+				box-shadow: 0 0 0 var(--components-avatar-border) var(--components-avatar-background);
+			}
 		}
 
 		.avatarWrapper-item {
-			margin-block: calc(var(--components-avatarWrapper-overlap) / 2);
-
 			&:not(:last-child) {
-				margin-right: calc(var(--components-avatarWrapper-overlap) * -1);
+				margin-inline-end: calc(var(--components-avatarWrapper-overlap) * -1);
 			}
 		}
 
@@ -27,7 +58,6 @@
 
 			display: flex;
 			text-decoration: none;
-			color: var(--palettes-neutral-800);
 			transition: transform var(--commons-animations-durations-fast);
 			transform: scale(var(--components-avatarWrapper-scale));
 			color: currentColor;
@@ -38,19 +68,19 @@
 			}
 
 			&:focus-visible {
-				@include a11y.focusVisible($borderRadius: var(--commons-borderRadius-full));
+				@include a11y.focusVisible($borderRadius: var(--pr-t-border-radius-full));
 			}
 		}
 
 		.avatarWrapper-item-action-more {
 			box-shadow: 0 0 0 var(--components-avatar-border) var(--components-avatar-background);
-			border-radius: var(--commons-borderRadius-full);
+			border-radius: var(--pr-t-border-radius-full);
 			display: flex;
 			align-items: center;
 			justify-content: center;
 			background-color: var(--palettes-neutral-200);
-			width: var(--components-avatar-size);
-			height: var(--components-avatar-size);
+			inline-size: var(--components-avatar-size);
+			block-size: var(--components-avatar-size);
 			font-size: var(--components-avatarWrapper-fontSize);
 		}
 	}

@@ -1,3 +1,5 @@
-:host {
-	width: 100%;
+@layer components {
+	:host {
+		inline-size: 100%;
+	}
 }

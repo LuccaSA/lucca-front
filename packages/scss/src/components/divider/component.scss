@@ -1,38 +1,53 @@
-@mixin component($atRoot: 'without: rule') {
+@use '@lucca-front/scss/src/commons/utils/namespace';
+@use '@lucca-front/scss/src/components/button/exports' as button;
+
+@mixin component($atRoot: namespace.$defaultAtRoot) {
 	border: 0;
+	display: block;
+	margin: var(--components-divider-margin);
+	align-self: var(--components-divider-alignSelf);
 
 	&:where(:empty) {
-		border-top-color: var(--commons-divider-color);
-		border-top-width: var(--commons-divider-width);
-		border-top: var(--commons-divider-border);
-		margin-top: var(--pr-t-spacings-300);
-		margin-bottom: var(--pr-t-spacings-300);
+		block-size: auto;
+
+		&:not(.mod-vertical) {
+			border-block-start: var(--commons-divider-border);
+		}
 	}
 
 	&:not(:empty) {
 		display: flex;
+		flex-direction: var(--components-divider-direction);
 		align-items: center;
-		gap: var(--pr-t-spacings-100);
-		margin-top: var(--pr-t-spacings-150);
-		margin-bottom: var(--pr-t-spacings-150);
 		text-wrap: balance;
 		text-align: center;
-		font-size: var(--components-divider-fontSize);
-		line-height: var(--components-divider-lineHeight);
+		font: var(--components-divider-font);
 		color: var(--palettes-neutral-600);
+		gap: var(--pr-t-spacings-100);
+		justify-content: var(--components-divider-justify);
 
 		&::before,
 		&::after {
-			border-top-color: var(--commons-divider-color);
-			border-top-width: var(--commons-divider-width);
-			border-top: var(--commons-divider-border);
 			flex-grow: 1;
-			min-width: var(--pr-t-spacings-300);
 			content: '';
 		}
 
 		.lucca-icon {
-			color: var(--palettes-neutral-500);
+			color: var(--palettes-neutral-600);
+			position: relative;
+			inset-block-end: var(--components-divider-iconBottom);
 		}
+
+		&:not(.mod-vertical) {
+			&::before,
+			&::after {
+				border-block-start: var(--commons-divider-border);
+				min-inline-size: var(--components-divider-minSize);
+			}
+		}
+	}
+
+	.button {
+		@include button.outlined;
 	}
 }

@@ -1,10 +1,12 @@
-import { Component } from '@angular/core';
-import { Meta, StoryFn, moduleMetadata } from '@storybook/angular';
+import { ChangeDetectionStrategy, Component } from '@angular/core';
+import { NewBadgeComponent } from '@lucca-front/ng/new-badge';
+import { Meta, StoryObj, moduleMetadata } from '@storybook/angular';
 
 @Component({
-	standalone: true,
 	selector: 'new-badge-stories',
 	templateUrl: './new-badge.stories.html',
+	imports: [NewBadgeComponent],
+	changeDetection: ChangeDetectionStrategy.OnPush,
 })
 class NewBadgeStory {}
 
@@ -18,6 +20,9 @@ export default {
 	],
 } as Meta;
 
-const template: StoryFn<NewBadgeStory> = () => ({});
+const template = () => ({});
 
-export const basic = template.bind({});
+export const Basic: StoryObj<NewBadgeStory> = {
+	args: {},
+	render: template,
+};

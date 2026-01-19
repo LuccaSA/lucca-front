@@ -1,11 +1,19 @@
-@if (link) {
-<a [routerLink]="link" class="tag" [ngClass]="tagClasses" [class.mod-outlined]="outlined">
-	@if (icon) {
-	<lu-icon [icon]="icon"></lu-icon><span class="tag-content">{{ label }}</span> } @else { {{ label }} }</a
->
+@if (link()) {
+	<a [routerLink]="link()" class="tag" [class]="tagClasses()" [class.mod-outlined]="!AI() && outlined()" [class.mod-AI]="AI()">
+		@if (icon()) {
+			<lu-icon [icon]="icon()" />
+		}
+		<span class="tag-content">{{ label() }}</span>
+	</a>
 } @else {
-<span class="tag" [ngClass]="tagClasses" [class.mod-outlined]="outlined">
-	@if (icon) {
-	<lu-icon [icon]="icon"></lu-icon><span class="tag-content">{{ label }}</span> } @else { {{ label }} }</span
->
+	<span class="tag" [class]="tagClasses()" [class.mod-outlined]="!AI() && outlined()" [class.mod-AI]="AI()">
+		@if (icon()) {
+			<lu-icon [icon]="icon()" />
+		}
+		@if (withEllipsis()) {
+			<span class="tag-content pr-u-ellipsis" luTooltip luTooltipWhenEllipsis>{{ label() }}</span>
+		} @else {
+			<span class="tag-content">{{ label() }}</span>
+		}
+	</span>
 }

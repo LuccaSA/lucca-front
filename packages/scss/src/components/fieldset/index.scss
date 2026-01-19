@@ -1,14 +1,30 @@
 @use 'exports' as *;
 
 .fieldset {
-	@include vars;
-	@include component;
-
-	&.mod-horizontal {
-		@include horizontal;
+	@layer components {
+		@include vars;
+		@include component;
 	}
 
-	&.mod-expandable {
-		@include expandable;
+	@layer mods {
+		&.mod-S {
+			@include S;
+		}
+
+		&.mod-horizontal {
+			@include horizontal;
+		}
+
+		&.mod-expandable {
+			@include expandable;
+		}
+
+		&:has(.fieldset-title-content[aria-expanded='true']) {
+			@include expanded;
+		}
+
+		&:has(.fieldset-title-content-action:not(:empty)) {
+			@include withAction;
+		}
 	}
 }

@@ -1,34 +1,43 @@
 @use 'exports' as *;
+@use '@lucca-front/scss/src/commons/utils/media';
 
 .container {
-	@include vars;
-	@include component;
-
-	&.mod-center {
-		@include center;
+	@layer components {
+		@include vars;
+		@include component;
 	}
 
-	&.mod-S {
-		@include S;
-	}
+	@layer mods {
+		&.mod-center {
+			@include center;
+		}
 
-	&.mod-maxM {
-		@include maxM;
-	}
+		&.mod-S {
+			@include S;
+		}
 
-	&.mod-maxL {
-		@include maxL;
-	}
+		&.mod-maxM {
+			@include maxM;
+		}
 
-	&.mod-maxXL {
-		@include maxXL;
-	}
+		&.mod-maxL {
+			@include maxL;
+		}
 
-	&.mod-maxXXL {
-		@include maxXXL;
-	}
+		&.mod-maxXL {
+			@include maxXL;
+		}
 
-	&.mod-maxXXXL {
-		@include maxXXXL;
+		&.mod-maxXXL {
+			@include maxXXL;
+		}
+
+		&.mod-maxXXXL {
+			@include maxXXXL;
+		}
+
+		&.mod-overflow {
+			@include overflow;
+		}
 	}
 }

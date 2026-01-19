@@ -1,4 +1,4 @@
-import { Meta, StoryFn } from '@storybook/angular';
+import { Meta, StoryObj } from '@storybook/angular';
 
 interface TextfieldRequiredStory {}
 
@@ -15,14 +15,21 @@ function getTemplate(args: TextfieldRequiredStory): string {
 			<input type="text" id="ID" class="textField-input-value" aria-labelledby="IDlabel" aria-describedby="IDmessage" placeholder="Placeholder" aria-invalid="false" aria-required="true" />
 		</div>
 	</div>
-	<div class="inlineMessage" id="IDmessage"><span aria-hidden="true" class="lucca-icon"></span>Helper text</div>
+	<div class="inlineMessage" id="IDmessage">
+		<span aria-hidden="true" class="lucca-icon inlineMessage-statusIcon"></span>
+		<p class="inlineMessage-content">
+			Helper text
+		</p>
+	</div>
 </div>`;
 }
 
-const Template: StoryFn<TextfieldRequiredStory> = (args) => ({
+const Template = (args: TextfieldRequiredStory) => ({
 	props: args,
 	template: getTemplate(args),
 });
 
-export const Required = Template.bind({});
-Required.args = {};
+export const Required: StoryObj<TextfieldRequiredStory> = {
+	args: {},
+	render: Template,
+};

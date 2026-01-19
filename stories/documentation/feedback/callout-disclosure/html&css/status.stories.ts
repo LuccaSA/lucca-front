@@ -7,7 +7,7 @@ export default {
 			styles: [
 				`
 				.calloutDisclosure {
-					margin-bottom: var(--pr-t-spacings-100);
+					margin-block-end: var(--pr-t-spacings-100);
 				}
 			`,
 			],
@@ -18,19 +18,19 @@ export default {
 		<span aria-hidden="true" class="calloutDisclosure-summary-chevron lucca-icon icon-arrowChevronBottom"></span>
 	</summary>
 	<div class="calloutDisclosure-details">
-		<ul class="calloutFeedbackList palette-neutral">
+		<ul class="calloutFeedbackList">
 	  	<li class="calloutFeedbackList-item">
 				<span class="calloutFeedbackList-item-description">Feedback description.</span>
 				<div class="calloutFeedbackList-item-actions">
 					<a href class="button mod-outlined">Button</a>
-					<button type="button" class="button mod-text">Button</button>
+					<button type="button" class="button mod-ghost">Button</button>
 				</div>
 			</li>
 			<li class="calloutFeedbackList-item">
 				<span class="calloutFeedbackList-item-description">Feedback description.</span>
 				<div class="calloutFeedbackList-item-actions">
 					<a href class="button mod-outlined">Button</a>
-					<button type="button" class="button mod-text">Button</button>
+					<button type="button" class="button mod-ghost">Button</button>
 				</div>
 			</li>
 		</ul>
@@ -44,19 +44,19 @@ export default {
 		<span aria-hidden="true" class="calloutDisclosure-summary-chevron lucca-icon icon-arrowChevronBottom"></span>
 	</summary>
 	<div class="calloutDisclosure-details">
-		<ul class="calloutFeedbackList palette-neutral">
+		<ul class="calloutFeedbackList">
 	  	<li class="calloutFeedbackList-item">
 				<span class="calloutFeedbackList-item-description">Feedback description.</span>
 				<div class="calloutFeedbackList-item-actions">
 					<a href class="button mod-outlined">Button</a>
-					<button type="button" class="button mod-text">Button</button>
+					<button type="button" class="button mod-ghost">Button</button>
 				</div>
 			</li>
 			<li class="calloutFeedbackList-item">
 				<span class="calloutFeedbackList-item-description">Feedback description.</span>
 				<div class="calloutFeedbackList-item-actions">
 					<a href class="button mod-outlined">Button</a>
-					<button type="button" class="button mod-text">Button</button>
+					<button type="button" class="button mod-ghost">Button</button>
 				</div>
 			</li>
 		</ul>
@@ -70,19 +70,19 @@ export default {
 		<span aria-hidden="true" class="calloutDisclosure-summary-chevron lucca-icon icon-arrowChevronBottom"></span>
 	</summary>
 	<div class="calloutDisclosure-details">
-		<ul class="calloutFeedbackList palette-neutral">
+		<ul class="calloutFeedbackList">
 	  	<li class="calloutFeedbackList-item">
 				<span class="calloutFeedbackList-item-description">Feedback description.</span>
 				<div class="calloutFeedbackList-item-actions">
 					<a href class="button mod-outlined">Button</a>
-					<button type="button" class="button mod-text">Button</button>
+					<button type="button" class="button mod-ghost">Button</button>
 				</div>
 			</li>
 			<li class="calloutFeedbackList-item">
 				<span class="calloutFeedbackList-item-description">Feedback description.</span>
 				<div class="calloutFeedbackList-item-actions">
 					<a href class="button mod-outlined">Button</a>
-					<button type="button" class="button mod-text">Button</button>
+					<button type="button" class="button mod-ghost">Button</button>
 				</div>
 			</li>
 		</ul>

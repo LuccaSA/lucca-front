@@ -1,50 +1,38 @@
 import { HorizontalConnectionPos, VerticalConnectionPos } from '@angular/cdk/overlay';
-import { ChangeDetectionStrategy, Component, DestroyRef, HostBinding, HostListener, inject } from '@angular/core';
+import { ChangeDetectionStrategy, Component, DestroyRef, inject, signal } from '@angular/core';
 import { SafeHtml } from '@angular/platform-browser';
 import { Subject } from 'rxjs';
-import { NgClass } from '@angular/common';
 
 @Component({
 	selector: 'lu-tooltip-panel',
 	templateUrl: './tooltip-panel.component.html',
-	styleUrls: ['./tooltip-panel.component.scss'],
-	standalone: true,
+	styleUrl: './tooltip-panel.component.scss',
 	host: {
 		role: 'tooltip',
+		'[attr.id]': 'id',
+		'(mouseenter)': 'mouseEnter$.next()',
+		'(mouseleave)': 'mouseLeave$.next()',
 	},
 	changeDetection: ChangeDetectionStrategy.OnPush,
-	imports: [NgClass],
 })
 export class LuTooltipPanelComponent {
-	destroyRef = inject(DestroyRef);
+	readonly destroyRef = inject(DestroyRef);
 
-	mouseEnter$ = new Subject<void>();
+	readonly mouseEnter$ = new Subject<void>();
+	readonly mouseLeave$ = new Subject<void>();
 
-	@HostListener('mouseenter')
-	mouseEnter(): void {
-		this.mouseEnter$.next();
-	}
+	readonly content = signal<string | SafeHtml | null>(null);
 
-	mouseLeave$ = new Subject<void>();
+	readonly id = signal<string>(null);
 
-	@HostListener('mouseleave')
-	mouseLeave(): void {
-		this.mouseLeave$.next();
-	}
-
-	content: string | SafeHtml;
-
-	@HostBinding('attr.id')
-	id: string;
-
-	contentPositionClasses: Record<string, boolean> = {};
+	readonly contentPositionClasses = signal<Record<string, boolean>>({});
 
 	setPanelPosition(posX: HorizontalConnectionPos, posY: VerticalConnectionPos): void {
-		this.contentPositionClasses = {
+		this.contentPositionClasses.set({
 			'is-before': posX === 'end',
 			'is-after': posX === 'start',
 			'is-above': posY === 'bottom',
 			'is-below': posY === 'top',
-		};
+		});
 	}
 }

@@ -1,4 +1,4 @@
-import { Meta, StoryFn } from '@storybook/angular';
+import { Meta, StoryObj } from '@storybook/angular';
 
 interface CalloutTitleStory {
 	palette: string;
@@ -13,16 +13,18 @@ export default {
 function getTemplate(args: CalloutTitleStory): string {
 	return `<div class="callout">
 	<div class="callout-content">
-		<strong class="callout-content-title">Lorem ipsum dolor</strong>
-		<div class="callout-content-description">Caesarem fama studio memorabili ut latius abscessere amplam Nebridius equitum. <a href="#">En savoir plus</a></div>
+		<strong class="callout-content-title">Dépense non prise en charge</strong>
+		<div class="callout-content-description">Vous l'avez déclarée comme usage personnel le 29 août 2023.</div>
 	</div>
 </div>`;
 }
 
-const Template: StoryFn<CalloutTitleStory> = (args) => ({
+const Template = (args: CalloutTitleStory) => ({
 	props: args,
 	template: getTemplate(args),
 });
 
-export const Title = Template.bind({});
-Title.args = {};
+export const Title: StoryObj<CalloutTitleStory> = {
+	args: {},
+	render: Template,
+};

@@ -1,24 +1,23 @@
 @use 'exports' as *;
 
 .filters {
-	@include vars;
-	@include component;
+	@layer components {
+		@include vars;
+		@include component;
+	}
 
-	&.mod-sticky {
-		@include sticky;
+	@layer mods {
+		&.mod-sticky {
+			@include sticky;
+		}
 	}
 }
 
-.navSide ~ .main-content,
-.mod-withMenu .main-content {
-	.filters.mod-sticky {
-		@include stickyNavSide;
-	}
-}
-
-.navSide.mod-compact ~ .main-content,
-.mod-withMenuCompact .main-content {
-	.filters.mod-sticky {
-		@include stickyNavSideCompact;
+@layer mods {
+	.navSide ~ .main-content,
+	.mod-withMenu .main-content {
+		.filters.mod-sticky {
+			@include stickyNavSide;
+		}
 	}
 }

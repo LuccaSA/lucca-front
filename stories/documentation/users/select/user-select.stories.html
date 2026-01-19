@@ -1,22 +1,22 @@
-<div class="u-displayFlex u-flexDirectionColumn">
+<div class="pr-u-displayFlex pr-u-flexDirectionColumn">
 	<!-- <label class="textfield">
-		<lu-user-select class="textfield-input" [ngModel]="model"></lu-user-select>
+		<lu-user-select class="textfield-input" [ngModel]="model" />
 		<span class="textfield-label">Utilisateurs basiques</span>
 	</label>
 
-	<label class="textfield pr-u-marginTop300">
-		<lu-user-select class="textfield-input" [ngModel]="model" [enableFormerEmployees]="true"></lu-user-select>
+	<label class="textfield pr-u-marginBlockStart300">
+		<lu-user-select class="textfield-input" [ngModel]="model" [enableFormerEmployees]="true" />
 		<span class="textfield-label">Utilisateurs avec <code class="code">enableFormerEmployees</code></span>
 	</label> -->
 
-	<label class="textfield pr-u-marginTop300">
+	<label class="textfield pr-u-marginBlockStart300">
 		<lu-user-select
 			class="textfield-input"
 			[ngModel]="model"
 			appInstanceId="6"
 			[operations]="[1]"
-			[disablePrincipal]="disablePrincipal"
-		></lu-user-select>
+			[disablePrincipal]="disablePrincipal()"
+		/>
 		<span class="textfield-label">Utilisateurs filtrés par operations/appInstanceId</span>
 	</label>
 </div>

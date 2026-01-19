@@ -9,12 +9,11 @@ export interface Legume {
 
 @Directive({
 	selector: '[luLegumes]',
-	standalone: true,
 	exportAs: 'luLegumes',
 })
 export class LuCoreSelectLegumesDirective extends LuCoreSelectApiV4Directive<Legume> {
 	public constructor() {
 		super();
-		this.apiV4 = '/api/legumes';
+		this.apiV4.set('/api/legumes');
 	}
 }

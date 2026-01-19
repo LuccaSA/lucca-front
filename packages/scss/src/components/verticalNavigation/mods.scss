@@ -3,15 +3,15 @@
 	margin: 0;
 
 	.verticalNavigation-list-item-link {
-		font-weight: 400;
-		padding-left: calc(2rem + var(--components-verticalNavigation-horizontalPadding));
+		font-weight: var(--pr-t-font-fontWeight-regular);
+		padding-inline-start: calc(2rem + var(--components-verticalNavigation-horizontalPadding));
 	}
 }
 
 @mixin iconless {
 	.verticalNavigation-list.mod-child {
 		.verticalNavigation-list-item-link {
-			padding-left: var(--components-verticalNavigation-horizontalPadding);
+			padding-inline-start: var(--components-verticalNavigation-horizontalPadding);
 		}
 	}
 

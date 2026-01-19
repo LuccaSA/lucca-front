@@ -1,6 +1,8 @@
 @use 'exports' as *;
 
 .contentSection {
-	@include vars;
-	@include component;
+	@layer components {
+		@include vars;
+		@include component;
+	}
 }

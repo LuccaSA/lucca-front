@@ -162,12 +162,12 @@
 
 		20%,
 		60% {
-			transform: translate3d(-10px, 0, 0);
+			transform: translate3d(-3px, 0, 0);
 		}
 
 		40%,
 		80% {
-			transform: translate3d(10px, 0, 0);
+			transform: translate3d(3px, 0, 0);
 		}
 	}
 }
@@ -177,6 +177,7 @@
 		0% {
 			transform: rotate(0deg);
 		}
+
 		100% {
 			transform: rotate(360deg);
 		}

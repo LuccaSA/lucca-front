@@ -1,0 +1,46 @@
+@use 'exports' as *;
+
+.tableSortable.button {
+	@layer components {
+		@include vars;
+		@include component;
+	}
+}
+
+.table-head-row-cell,
+.dataTable-head-row-cell,
+.indexTable-head-row-cell {
+	@layer mods {
+		&.mod-alignStart,
+		&.mod-alignLeft {
+			.tableSortable {
+				@include sortAlignStart;
+			}
+		}
+
+		&.mod-alignEnd,
+		&.mod-alignRight {
+			.tableSortable {
+				@include sortAlignEnd;
+			}
+		}
+
+		&.mod-alignCenter {
+			.tableSortable {
+				@include sortAlignCenter;
+			}
+		}
+
+		&[aria-sort='ascending'] {
+			.tableSortable{
+				@include sortAscending;
+			}
+		}
+
+		&[aria-sort='descending'] {
+			.tableSortable {
+				@include sortDescending;
+			}
+		}
+	}
+}

@@ -1,45 +1,51 @@
 @use '@lucca-front/scss/src/commons/utils/a11y';
 @use '@lucca-front/scss/src/commons/utils/reset';
 @use '@lucca-front/scss/src/components/title/exports' as title;
+@use '@lucca-front/scss/src/commons/utils/namespace';
 
-@mixin component($atRoot: 'without: rule') {
+@mixin component($atRoot: namespace.$defaultAtRoot) {
 	@at-root ($atRoot) {
 		.verticalNavigation-sectionTitle {
-			@include title.h5;
+			font: var(--pr-t-font-body-S);
+			font-weight: var(--pr-t-font-fontWeight-semibold);
 			color: var(--palettes-neutral-600);
-			padding: 0 var(--components-verticalNavigation-horizontalPadding);
-			margin-bottom: var(--pr-t-spacings-100);
+			padding-block: 0;
+			padding-inline: var(--components-verticalNavigation-horizontalPadding);
+			margin-block-end: var(--pr-t-spacings-100);
 		}
 
 		.verticalNavigation-list {
 			@include reset.list;
-			background-color: var(--pr-t-elevation-surface-raised);
-			margin-bottom: var(--pr-t-spacings-200);
+
+			margin-block-end: var(--pr-t-spacings-200);
 		}
 
 		.verticalNavigation-list-item-link-icon {
-			font-size: var(--sizes-M-lineHeight);
-			margin-right: var(--pr-t-spacings-100);
+			font-size: var(--pr-t-font-body-M-lineHeight);
+			margin-inline-end: var(--pr-t-spacings-100);
 		}
 
 		.verticalNavigation-list-item-link {
 			@include reset.button;
+
 			display: flex;
-			padding: var(--pr-t-spacings-100) var(--components-verticalNavigation-horizontalPadding);
-			border-radius: var(--commons-borderRadius-M);
+			padding-block: var(--pr-t-spacings-100);
+			padding-inline: var(--components-verticalNavigation-horizontalPadding);
+			border-radius: var(--pr-t-border-radius-default);
 			color: var(--components-verticalNavigation-link-color);
 			text-decoration: none;
 			background-color: var(--components-verticalNavigation-link-background);
 			transition: background-color var(--commons-animations-durations-fast) ease;
-			font-weight: 600;
+			font-weight: var(--pr-t-font-fontWeight-semibold);
 
 			&:hover {
 				--components-verticalNavigation-link-background: var(--palettes-neutral-50);
+
 				color: var(--components-verticalNavigation-link-color);
 			}
 
 			&:focus-visible {
-				@include a11y.focusVisible();
+				@include a11y.focusVisible;
 			}
 
 			&:active {
@@ -48,8 +54,8 @@
 		}
 
 		.verticalNavigation-list-item-link-arrow {
-			font-size: var(--sizes-M-lineHeight);
-			margin-left: auto;
+			font-size: var(--pr-t-font-body-M-lineHeight);
+			margin-inline-start: auto;
 			transition: transform var(--commons-animations-durations-standard) ease;
 		}
 	}

@@ -1,3 +1,36 @@
-@mixin neutral {
-	--components-filterBar-backgroundColor: var(--pr-t-elevation-surface-default);
+@use '@lucca-front/scss/src/commons/utils/overflow';
+@use '@lucca-front/scss/src/components/scrollBox/exports' as scrollBox;
+
+@mixin narrow {
+	--components-filterBar-flexWrap: wrap;
+
+	.filterBar-segmentedControl.segmentedControl {
+		--components-segmentedControl-direction: row;
+		--components-segmentedControl-width: 100%;
+	}
+
+	.filterBar-divider.divider {
+		inline-size: 100%;
+	}
+}
+
+@mixin touch {
+	--components-filterBar-scrollBox-flexGrow: 1;
+	--components-filterBar-scrollBox-group-flexWrap: nowrap;
+
+	.filterBar-segmentedControl.segmentedControl {
+		--components-segmentedControl-whiteSpace: nowrap;
+		--components-segmentedControl-width: auto;
+		--components-segmentedControl-wrap: nowrap;
+	}
+
+	.filterBar-scrollBox.scrollBox {
+		@include overflow.hide;
+	}
+}
+
+@mixin notTouch {
+	.filterBar-scrollBox.scrollBox {
+		@include scrollBox.disabled;
+	}
 }

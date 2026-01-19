@@ -1,11 +1,90 @@
-<section class="contentSection">
-	<span class="numericBadge">7</span>
-	<span class="numericBadge mod-S">7</span>
-	<span class="numericBadge mod-XS">7</span>
-	<span class="numericBadge palette-product">7</span>
-	<span class="numericBadge palette-product mod-S">7</span>
-	<span class="numericBadge palette-product mod-XS">7</span>
-</section>
+<table class="demo-QAtable">
+	<tbody>
+		<tr>
+			<td></td>
+			<td>
+				<div class="demo-QAtable-list">HTML</div>
+			</td>
+			<td>
+				<div class="demo-QAtable-list">Angular</div>
+			</td>
+		</tr>
+		<tr>
+			<td>Default</td>
+			<td>
+				<div class="demo-QAtable-list"><span class="numericBadge">7</span></div>
+			</td>
+			<td>
+				<div class="demo-QAtable-list">
+					<lu-numeric-badge [value]="7" />
+					<lu-numeric-badge [value]="1000" />
+				</div>
+			</td>
+		</tr>
+		<tr>
+			<td>Sizes</td>
+			<td>
+				<div class="demo-QAtable-list">
+					<span class="numericBadge">7</span>
+					<span class="numericBadge mod-S">7</span>
+					<span class="numericBadge mod-XS">7</span>
+				</div>
+			</td>
+			<td>
+				<div class="demo-QAtable-list">
+					<lu-numeric-badge size="M" [value]="7" />
+					<lu-numeric-badge size="S" [value]="7" />
+					<lu-numeric-badge size="XS" [value]="7" />
+				</div>
+			</td>
+		</tr>
+		<tr>
+			<td>Palette</td>
+			<td>
+				<div class="demo-QAtable-list">
+					<span class="numericBadge palette-product">7</span>
+					<span class="numericBadge palette-product mod-S">7</span>
+					<span class="numericBadge palette-product mod-XS">7</span>
+				</div>
+			</td>
+			<td>
+				<div class="demo-QAtable-list">
+					<lu-numeric-badge palette="product" [value]="7" />
+					<lu-numeric-badge palette="neutral" [value]="7" />
+					<lu-numeric-badge palette="success" [value]="7" />
+					<lu-numeric-badge palette="warning" [value]="7" />
+					<lu-numeric-badge palette="error" [value]="7" />
+				</div>
+			</td>
+		</tr>
+		<tr>
+			<td>Loading</td>
+			<td>
+				<div class="demo-QAtable-list">
+					<span class="numericBadge is-loading palette-product"></span>
+					<span class="numericBadge is-loading mod-S palette-product"></span>
+					<span class="numericBadge is-loading mod-XS palette-product"></span>
+					<span class="numericBadge is-loading" aria-hidden="true"></span>
+					<span class="numericBadge is-loading mod-S" aria-hidden="true"></span>
+					<span class="numericBadge is-loading mod-XS" aria-hidden="true"></span>
+				</div>
+			</td>
+			<td>
+				<div class="demo-QAtable-list">
+					<lu-numeric-badge loading [value]="7" />
+					<lu-numeric-badge loading palette="product" [value]="7" />
+					<lu-numeric-badge loading palette="neutral" [value]="7" />
+					<lu-numeric-badge loading palette="success" [value]="7" />
+					<lu-numeric-badge loading palette="warning" [value]="7" />
+					<lu-numeric-badge loading palette="error" [value]="7" />
+					<lu-numeric-badge loading size="M" [value]="7" />
+					<lu-numeric-badge loading size="S" [value]="7" />
+					<lu-numeric-badge loading size="XS" [value]="7" />
+				</div>
+			</td>
+		</tr>
+	</tbody>
+</table>
 
 <!-- To tell the ui-diff tool that the page has finished rendering -->
 <span id="ready"></span>

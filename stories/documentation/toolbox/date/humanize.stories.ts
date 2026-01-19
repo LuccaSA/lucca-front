@@ -1,19 +1,18 @@
 import { AsyncPipe } from '@angular/common';
-import { Component, Directive, Injector, Input, LOCALE_ID, OnChanges, TemplateRef, ViewContainerRef, inject } from '@angular/core';
+import { ChangeDetectionStrategy, Component, Directive, Injector, LOCALE_ID, OnChanges, TemplateRef, ViewContainerRef, inject, input } from '@angular/core';
 import { ButtonComponent } from '@lucca-front/ng/button';
 import { CalloutComponent } from '@lucca-front/ng/callout';
 import { LuHumanizeDateFormatter, LuHumanizeDatePipe, LuRelativeTime, LuRelativeTimeFormatUnit } from '@lucca-front/ng/date';
-import { Meta, StoryFn, StoryObj, applicationConfig } from '@storybook/angular';
+import { Meta, StoryObj, applicationConfig } from '@storybook/angular';
 
 @Directive({
 	selector: '[fakeLocaleId]',
-	standalone: true,
 })
 class FakeLocaleIdDirective implements OnChanges {
 	#templateRef = inject(TemplateRef);
 	#viewContainerRef = inject(ViewContainerRef);
 
-	@Input() fakeLocaleId = 'fr';
+	fakeLocaleId = input<string>('fr');
 
 	ngOnChanges(): void {
 		this.#viewContainerRef.clear();
@@ -22,7 +21,7 @@ class FakeLocaleIdDirective implements OnChanges {
 			{},
 			{
 				injector: Injector.create({
-					providers: [{ provide: LOCALE_ID, useValue: this.fakeLocaleId }],
+					providers: [{ provide: LOCALE_ID, useValue: this.fakeLocaleId() }],
 				}),
 			},
 		);
@@ -31,7 +30,6 @@ class FakeLocaleIdDirective implements OnChanges {
 
 @Component({
 	selector: 'humanize-stories',
-	standalone: true,
 	imports: [LuHumanizeDatePipe, AsyncPipe, FakeLocaleIdDirective, ButtonComponent, CalloutComponent],
 	template: `
 		<h1>Humanize</h1>
@@ -40,7 +38,7 @@ class FakeLocaleIdDirective implements OnChanges {
 
 		<p>Choisissez une langue</p>
 
-		<div class="pr-u-marginBottom300" style="display: flex; gap: var(--pr-t-spacings-100)">
+		<div class="pr-u-marginBlockEnd300" style="display: flex; gap: var(--pr-t-spacings-100)">
 			<button luButton="outline" (click)="locale = 'fr'">FR</button>
 			<button luButton="outline" (click)="locale = 'en'">EN</button>
 			<button luButton="outline" (click)="locale = 'pt'">PT</button>
@@ -48,7 +46,7 @@ class FakeLocaleIdDirective implements OnChanges {
 
 		<h2>Choisir la date</h2>
 
-		<div class="pr-u-marginBottom300" style="display: flex; gap: var(--pr-t-spacings-100)">
+		<div class="pr-u-marginBlockEnd300" style="display: flex; gap: var(--pr-t-spacings-100)">
 			<button luButton="outline" (click)="setDate('one-hour-ago')">Il y a une heure</button>
 			<button luButton="outline" (click)="setDate('one-minute-ago')">Il y a une minute</button>
 			<button luButton="outline" (click)="setDate('now')">Maintenant</button>
@@ -58,7 +56,7 @@ class FakeLocaleIdDirective implements OnChanges {
 
 		<h2>Modifier la date</h2>
 
-		<div class="pr-u-marginBottom300" style="display: flex; gap: var(--pr-t-spacings-100)">
+		<div class="pr-u-marginBlockEnd300" style="display: flex; gap: var(--pr-t-spacings-100)">
 			<button luButton="outline" (click)="updateDate('minus-one-hour')">-1 hour</button>
 			<button luButton="outline" (click)="updateDate('add-one-hour')">+1 hour</button>
 			<button luButton="outline" (click)="updateDate('minus-one-minute')">-1 minute</button>
@@ -69,10 +67,11 @@ class FakeLocaleIdDirective implements OnChanges {
 
 		<h2>Résultat</h2>
 
-		<lu-callout *fakeLocaleId="locale" class="pr-u-marginBottom300">
-			Résultat: <b>{{ date | luHumanizeDate : allowedUnits | async }}</b>
+		<lu-callout *fakeLocaleId="locale" class="pr-u-marginBlockEnd300">
+			Résultat: <b>{{ date | luHumanizeDate: allowedUnits | async }}</b>
 		</lu-callout>
 	`,
+	changeDetection: ChangeDetectionStrategy.OnPush,
 })
 class HumanizeStory {
 	locale = 'fr';
@@ -165,7 +164,7 @@ export const HumanizeCustomFormatter: StoryObj<HumanizeStory> = {
 	],
 };
 
-export const HumanizeAllowedUnits: StoryFn<HumanizeStory> = () => ({
+export const HumanizeAllowedUnits = () => ({
 	props: {
 		allowedUnits: ['second'],
 	},

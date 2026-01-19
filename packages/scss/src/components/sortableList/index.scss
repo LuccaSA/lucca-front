@@ -1,16 +1,35 @@
 @use 'exports' as *;
 
 .sortableList {
-	@include vars;
-	@include component;
+	@layer components {
+		@include vars;
+		@include component;
+	}
 
-	&.mod-S {
-		@include S;
+	@layer mods {
+		&.mod-S {
+			@include S;
+		}
 	}
 }
 
 .sortableList-item {
-	&.mod-clickable {
-		@include clickable;
+	@layer mods {
+		&.mod-clickable {
+			@include clickable;
+		}
+
+		&.mod-S {
+			@include S;
+		}
+	}
+}
+
+// drag and drop preview
+:not(.sortableList) {
+	> .sortableList-item {
+			@layer components {
+				@include vars;
+			}
 	}
 }

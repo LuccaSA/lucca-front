@@ -1,0 +1,49 @@
+@use '@lucca-front/scss/src/commons/utils/media';
+@use 'exports' as *;
+
+.dateRangeField {
+	@layer components {
+		@include vars;
+		@include component;
+	}
+
+	@layer mods {
+		.form-field.mod-S & {
+			@include S;
+		}
+
+		&.mod-filterPill {
+			@include filterPill;
+
+			@include media.max('XS') {
+				@include filterPillCompact;
+			}
+		}
+
+		&:not(.mod-auto, .mod-filterPill) {
+			&.mod-day {
+				@include day;
+
+				.form-field.mod-S & {
+					@include dayS;
+				}
+			}
+
+			&.mod-month {
+				@include month;
+
+				.form-field.mod-S & {
+					@include monthS;
+				}
+			}
+
+			&.mod-year {
+				@include year;
+
+				.form-field.mod-S & {
+					@include yearS;
+				}
+			}
+		}
+	}
+}

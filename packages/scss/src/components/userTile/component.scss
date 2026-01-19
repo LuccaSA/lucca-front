@@ -1,0 +1,52 @@
+@use '@lucca-front/scss/src/commons/utils/namespace';
+
+@mixin component($atRoot: namespace.$defaultAtRoot) {
+	display: flex;
+	align-items: center;
+	gap: var(--components-userTile-gap);
+	overflow-wrap: break-word;
+
+	.avatar {
+		display: flex;
+		align-self: start;
+		align-items: center;
+		min-block-size: var(--components-avatar-size);
+	}
+
+	&:has(.userTile-content-info) {
+		// Apply height to avatar (calculed on title & info height) to avoid img overflow
+		.avatar {
+			block-size: calc(var(--components-userTile-title-lineHeight) + var(--components-userTile-info-lineHeight));
+		}
+	}
+
+	@at-root ($atRoot) {
+		.userTile-content {
+			display: flex;
+			flex-direction: column;
+			margin: 0;
+		}
+
+		.userTile-content-name {
+			font-size: var(--components-userTile-title-fontSize);
+			line-height: var(--components-userTile-title-lineHeight);
+			color: var(--pr-t-color-text);
+			margin: 0;
+		}
+
+		.userTile-content-info {
+			font-size: var(--components-userTile-info-fontSize);
+			line-height: var(--components-userTile-info-lineHeight);
+			color: var(--palettes-neutral-600);
+			margin: 0;
+		}
+
+		.userTile-content-slotBottom {
+			font: var(--pr-t-font-body-S);
+
+			&:empty {
+				display: none;
+			}
+		}
+	}
+}

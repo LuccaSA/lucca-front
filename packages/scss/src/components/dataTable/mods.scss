@@ -1,0 +1,191 @@
+@use '@lucca-front/scss/src/commons/config';
+@use '@lucca-front/scss/src/commons/utils/media';
+@use '@lucca-front/scss/src/components/button/exports' as button;
+
+@mixin cellBorder {
+	--components-dataTable-cell-shadow: 0 1px inset var(--commons-border-200), 1px 0 inset var(--commons-border-200);
+
+	.dataTable-head-row {
+		&:first-child {
+			.dataTable-head-row-cell {
+				--components-dataTable-cell-shadow: 1px 0 inset var(--commons-border-200);
+			}
+		}
+	}
+}
+
+@mixin verticalAlignTop {
+	--components-dataTable-cell-verticalAlign: top;
+}
+
+@mixin verticalAlignBottom {
+	--components-dataTable-cell-verticalAlign: bottom;
+}
+
+@mixin verticalAlignMiddle {
+	--components-dataTable-cell-verticalAlign: middle;
+}
+
+@mixin buttonExpand {
+	--components-dataTable-tree-extraPadding: calc(1.5rem + var(--pr-t-spacings-100));
+
+	&:has(.dataTable-body-row-cell-expand-button.button) {
+		--components-dataTable-tree-extraPadding: 0rem; // unit is mandatory here
+	}
+
+	.dataTable-body-row-cell-expand-button.button {
+		@include button.S;
+		@include button.onlyIconS;
+		@include button.ghost;
+
+		--components-button-padding: var(--pr-t-spacings-25);
+		--components-button-color: var(--palettes-neutral-800);
+	}
+}
+
+@mixin group {
+	@include buttonExpand;
+
+	font: var(--pr-t-font-heading-4);
+
+	&,
+	&:hover {
+		--components-dataTable-cell-background: var(--palettes-neutral-50);
+	}
+}
+
+@mixin selectable {
+	--components-dataTable-cellFirst-width: 2.625rem;
+
+	.dataTable-head-row-cell,
+	.dataTable-body-row-cell,
+	.dataTable-foot-row-cell {
+		&:first-child {
+			inline-size: var(--components-dataTable-cellFirst-width);
+			max-inline-size: var(--components-dataTable-cellFirst-width);
+		}
+	}
+}
+
+@mixin draggable {
+	.dataTable-head-row-cell,
+	.dataTable-body-row-cell,
+	.dataTable-foot-row-cell {
+		&:first-child {
+			--components-dataTable-cellFirst-width: 2.5rem;
+
+			padding-inline: var(--pr-t-spacings-75);
+		}
+	}
+}
+
+@mixin selectableDraggable {
+	.dataTable-head-row-cell,
+	.dataTable-body-row-cell,
+	.dataTable-foot-row-cell {
+		&:nth-child(2) {
+			--components-dataTable-cellFirst-width: 2.625rem;
+
+			inline-size: var(--components-dataTable-cellFirst-width);
+			max-inline-size: var(--components-dataTable-cellFirst-width);
+		}
+	}
+}
+
+@mixin tree {
+	@include buttonExpand;
+
+	--components-dataTable-cell-paddingInlineStart: calc(
+		var(--components-dataTable-cell-padding-inline) + var(--pr-t-spacings-300) * calc(var(--components-dataTable-treeLevel) - 1) +
+			var(--components-dataTable-tree-extraPadding)
+	);
+}
+
+@mixin editable {
+	--components-dataTable-cell-padding: var(--pr-t-spacings-100);
+	--components-dataTable-cell-paddingInlineStart: var(--pr-t-spacings-50);
+}
+
+@mixin actions {
+	padding-block: 0;
+	padding-inline: var(--pr-t-spacings-50);
+	text-align: end;
+	white-space: nowrap;
+
+	.button {
+		@include button.S;
+		@include button.onlyIcon;
+		@include button.onlyIconS;
+		@include button.ghost;
+
+		transition-property: box-shadow, color;
+	}
+
+	&:is(.dataTable-head-row-cell) {
+		.button {
+			position: relative;
+			inset-block-end: var(--pr-t-spacings-50);
+		}
+	}
+}
+
+@mixin alignCenter {
+	--components-dataTable-cell-textAlign: center;
+}
+
+@mixin alignEnd {
+	--components-dataTable-cell-textAlign: end;
+}
+
+@mixin alignStart {
+	--components-dataTable-cell-textAlign: start;
+}
+
+@mixin layoutFixed {
+	--components-dataTable-tableLayout: fixed;
+}
+
+@mixin layoutFixedWithBreakpoint {
+	@each $breakpoint, $value in config.$breakpoints {
+		@include media.min($breakpoint) {
+			&.mod-layoutFixedAtMediaMin#{$breakpoint} {
+				--components-dataTable-tableLayout: fixed;
+			}
+		}
+	}
+}
+
+@mixin cellInlineSize {
+	min-inline-size: var(--dataTable-layoutFixed-width, auto);
+	inline-size: var(--dataTable-layoutFixed-width, auto);
+}
+
+@mixin layoutFixedCells {
+	&.mod-layoutFixed {
+		.dataTable-head-row-cell,
+		.dataTable-body-row-cell,
+		.dataTable-foot-row-cell {
+			@include cellInlineSize;
+		}
+	}
+
+	@each $breakpoint, $value in config.$breakpoints {
+		@include media.min($breakpoint) {
+			&.mod-layoutFixedAtMediaMin#{$breakpoint} {
+				.dataTable-head-row-cell,
+				.dataTable-body-row-cell,
+				.dataTable-foot-row-cell {
+					@include cellInlineSize;
+				}
+			}
+		}
+	}
+}
+
+@mixin nested {
+	--components-dataTable-borderRadius: var(--pr-t-border-radius-default);
+}
+
+@mixin noOverflow {
+	--components-dataTable-minInlineSize: fit-content;
+}

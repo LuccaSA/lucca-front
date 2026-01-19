@@ -1,12 +1,22 @@
-<details class="calloutDisclosure" [ngClass]="calloutClasses" [class.mod-iconless]="!icon" [open]="open" (toggle)="onToggle($event)">
+@let calloutIcon = state() | luCalloutIcon: icon();
+
+<details
+	class="calloutDisclosure"
+	[class]="calloutClasses()"
+	[class.mod-iconless]="!calloutIcon"
+	[open]="open()"
+	(toggle)="onToggle($event)"
+>
 	<summary class="calloutDisclosure-summary">
-		<lu-icon class="calloutDisclosure-summary-icon" *ngIf="icon" [icon]="icon"></lu-icon>
+		@if (calloutIcon) {
+			<lu-icon class="calloutDisclosure-summary-icon" [icon]="calloutIcon" />
+		}
 		<span class="calloutDisclosure-summary-title">
-			<ng-container *luPortal="heading"></ng-container>
+			<ng-container *luPortal="heading()" />
 		</span>
-		<lu-icon class="calloutDisclosure-summary-chevron" icon="arrowChevronBottom"></lu-icon>
+		<lu-icon class="calloutDisclosure-summary-chevron" icon="arrowChevronBottom" />
 	</summary>
 	<div class="calloutDisclosure-details">
-		<ng-content></ng-content>
+		<ng-content />
 	</div>
 </details>

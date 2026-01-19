@@ -1,20 +1,139 @@
-<h1 class="demo-divider">Inline Message</h1>
-
-<!-- Basics -->
-<section class="contentSection">
-	<div class="inlineMessage">Inline message</div>
-	<div class="inlineMessage is-success"><span aria-hidden="true" class="lucca-icon"></span>Inline message</div>
-	<div class="inlineMessage is-warning"><span aria-hidden="true" class="lucca-icon"></span>Inline message</div>
-	<div class="inlineMessage is-error"><span aria-hidden="true" class="lucca-icon"></span>Inline message</div>
-</section>
-
-<!-- Size -->
-<section class="contentSection">
-	<div class="inlineMessage mod-S">Inline message</div>
-	<div class="inlineMessage mod-S is-success"><span aria-hidden="true" class="lucca-icon"></span>Inline message</div>
-	<div class="inlineMessage mod-S is-warning"><span aria-hidden="true" class="lucca-icon"></span>Inline message</div>
-	<div class="inlineMessage mod-S is-error"><span aria-hidden="true" class="lucca-icon"></span>Inline message</div>
-</section>
+<table class="demo-QAtable">
+	<tbody>
+		<tr>
+			<td></td>
+			<td style="width: 50%">
+				<div class="demo-QAtable-list">HTML</div>
+			</td>
+			<td style="width: 50%">
+				<div class="demo-QAtable-list">Angular</div>
+			</td>
+		</tr>
+		<tr>
+			<td>Default</td>
+			<td>
+				<div class="demo-QAtable-list">
+					<div class="inlineMessage">Inline message</div>
+				</div>
+			</td>
+			<td>
+				<div class="demo-QAtable-list">
+					<lu-inline-message [label]="'Inline message'" />
+				</div>
+			</td>
+		</tr>
+		<tr>
+			<td>States</td>
+			<td>
+				<div class="demo-QAtable-list">
+					<div class="inlineMessage">Inline message</div>
+					<div class="inlineMessage is-success">
+						<span aria-hidden="true" class="lucca-icon inlineMessage-statusIcon"></span>
+						<p class="inlineMessage-content">Inline message</p>
+					</div>
+					<div class="inlineMessage is-warning">
+						<span aria-hidden="true" class="lucca-icon inlineMessage-statusIcon"></span>
+						<p class="inlineMessage-content">Inline message</p>
+					</div>
+					<div class="inlineMessage is-error">
+						<span aria-hidden="true" class="lucca-icon inlineMessage-statusIcon"></span>
+						<p class="inlineMessage-content">Inline message</p>
+					</div>
+				</div>
+			</td>
+			<td>
+				<div class="demo-QAtable-list">
+					<lu-inline-message [label]="'Inline message'" [state]="'default'" />
+					<lu-inline-message [label]="'Inline message'" [state]="'success'" />
+					<lu-inline-message [label]="'Inline message'" [state]="'warning'" />
+					<lu-inline-message [label]="'Inline message'" [state]="'error'" />
+				</div>
+			</td>
+		</tr>
+		<tr>
+			<td>Small</td>
+			<td>
+				<div class="demo-QAtable-list">
+					<div class="inlineMessage mod-S">
+						<p class="inlineMessage-content">Inline message</p>
+					</div>
+					<div class="inlineMessage mod-S is-success">
+						<span aria-hidden="true" class="lucca-icon inlineMessage-statusIcon"></span>
+						<p class="inlineMessage-content">Inline message</p>
+					</div>
+					<div class="inlineMessage mod-S is-warning">
+						<span aria-hidden="true" class="lucca-icon inlineMessage-statusIcon"></span>
+						<p class="inlineMessage-content">Inline message</p>
+					</div>
+					<div class="inlineMessage mod-S is-error">
+						<span aria-hidden="true" class="lucca-icon inlineMessage-statusIcon"></span>
+						<p class="inlineMessage-content">Inline message</p>
+					</div>
+				</div>
+			</td>
+			<td>
+				<div class="demo-QAtable-list">
+					<lu-inline-message [label]="'Inline message'" [state]="'default'" [size]="'S'" />
+					<lu-inline-message [label]="'Inline message'" [state]="'success'" [size]="'S'" />
+					<lu-inline-message [label]="'Inline message'" [state]="'warning'" [size]="'S'" />
+					<lu-inline-message [label]="'Inline message'" [state]="'error'" [size]="'S'" />
+				</div>
+			</td>
+		</tr>
+		<tr>
+			<td>PortalContent</td>
+			<td>
+				<div class="demo-QAtable-list">
+					<section class="contentSection">
+						<div class="inlineMessage">
+							<div class="inlineMessage-content">
+								<p>Inline message</p>
+							</div>
+						</div>
+						<div class="inlineMessage is-success">
+							<div class="inlineMessage-content">
+								<span aria-hidden="true" class="lucca-icon inlineMessage-statusIcon"></span>
+								<p>Inline message</p>
+							</div>
+						</div>
+						<div class="inlineMessage is-warning">
+							<div class="inlineMessage-content">
+								<span aria-hidden="true" class="lucca-icon inlineMessage-statusIcon"></span>
+								<p>Inline message</p>
+							</div>
+						</div>
+						<div class="inlineMessage is-error">
+							<div class="inlineMessage-content">
+								<span aria-hidden="true" class="lucca-icon inlineMessage-statusIcon"></span>
+								<p>Inline message</p>
+							</div>
+						</div>
+					</section>
+				</div>
+			</td>
+			<td></td>
+		</tr>
+		<tr>
+			<td>Deprecated</td>
+			<td>
+				<div class="demo-QAtable-list">
+					<div class="demo-QAtable-list">
+						<div class="inlineMessage">Inline message</div>
+						<div class="inlineMessage is-success">
+							<span aria-hidden="true" class="lucca-icon"></span>
+							Inline message
+						</div>
+						<div class="inlineMessage mod-S is-warning">
+							<span aria-hidden="true" class="lucca-icon"></span>
+							Inline message
+						</div>
+					</div>
+				</div>
+			</td>
+			<td></td>
+		</tr>
+	</tbody>
+</table>
 
 <!-- To tell the ui-diff tool that the page has finished rendering -->
 <span id="ready"></span>

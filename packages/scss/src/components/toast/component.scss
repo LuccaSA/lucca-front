@@ -1,7 +1,8 @@
 @use '@lucca-front/scss/src/components/button/exports' as button;
+@use '@lucca-front/scss/src/commons/utils/namespace';
 
-@mixin component($atRoot: 'without: rule') {
-	max-width: var(--components-toasts-maxwidth);
+@mixin component($atRoot: namespace.$defaultAtRoot) {
+	max-inline-size: var(--components-toasts-maxwidth);
 	display: flex;
 	flex-direction: column;
 	align-items: flex-end;
@@ -12,7 +13,7 @@
 	html:has(.main-content .footer.mod-sticky, .dialog.mod-drawer .dialog-inside-footer) & {
 		// Provide extra bottom spacing when a footer is sticked
 		// Will only work on desktop with standard footer layout
-		// Refactor: Position should be calculated dynamically 
+		// Refactor: Position should be calculated dynamically
 		--components-toasts-bottom: calc(var(--components-toasts-footerHeight) + var(--pr-t-spacings-300));
 	}
 
@@ -22,12 +23,12 @@
 			gap: var(--pr-t-spacings-50);
 			color: var(--components-toasts-color);
 			padding: var(--pr-t-spacings-50);
-			margin-bottom: var(--components-toasts-margin-bottom);
+			margin-block-end: var(--components-toasts-margin-bottom);
 			background-color: var(--palettes-neutral-800);
 			animation-name: toastsItem;
 			animation-duration: var(--commons-animations-durations-standard);
 			animation-iteration-count: 1;
-			border-radius: var(--commons-borderRadius-XL);
+			border-radius: var(--pr-t-border-radius-structure);
 			overflow: hidden;
 			position: relative;
 			transform-origin: top;
@@ -53,8 +54,9 @@
 
 		.toast-item-icon {
 			background: var(--palettes-700, var(--palettes-product-700));
-			border-radius: var(--commons-borderRadius-L);
-			padding: var(--pr-t-spacings-100) var(--pr-t-spacings-50);
+			border-radius: var(--pr-t-border-radius-default);
+			padding-block: var(--pr-t-spacings-100);
+			padding-inline: var(--pr-t-spacings-50);
 		}
 
 		.toast-item-content {
@@ -62,24 +64,30 @@
 			flex-grow: 1;
 			flex-direction: column;
 			gap: var(--pr-t-spacings-50);
-			padding: var(--pr-t-spacings-100) 0 var(--pr-t-spacings-100) var(--pr-t-spacings-100);
+			padding-block: var(--pr-t-spacings-100);
+			padding-inline: var(--pr-t-spacings-100) 0;
+		}
+
+		.toast-item-content-description {
+			margin: 0;
 		}
 
 		.toasts-item-kill {
-			// the button class should be added to the component, but in the meantime we initialize the component here
-			@include button.vars;
-			@include button.component;
+			// :not(.class) is only there to increase specificity when the class isn’t present
+			// but the class should be present, and this code is temporary
+			&.button,
+			&:not(.button) {
+				align-self: flex-start;
+				border-radius: var(--pr-t-border-radius-default);
+				animation-name: timer;
 
-			@include button.onlyIcon;
-			@include button.text;
-			@include button.inverted;
+				@include button.onlyIcon;
+				@include button.ghost;
+				@include button.inverted;
 
-			@keyframes timer {
+				@keyframes timer {
+				}
 			}
-
-			align-self: flex-start;
-			border-radius: var(--commons-borderRadius-L);
-			animation-name: timer;
 		}
 	}
 }

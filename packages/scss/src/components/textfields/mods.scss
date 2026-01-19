@@ -8,7 +8,7 @@
 	}
 
 	.textfield-input {
-		padding-right: var(--pr-t-spacings-600) !important;
+		padding-inline-end: var(--pr-t-spacings-600) !important;
 
 		&::-ms-reveal {
 			display: none;
@@ -24,147 +24,147 @@
 
 @mixin clearable {
 	.textfield-input {
-		padding-right: 2rem;
+		padding-inline-end: 2rem;
 	}
 
 	.textfield-clear {
 		position: absolute;
-		bottom: var(--pr-t-spacings-150);
-		right: var(--pr-t-spacings-100);
+		inset-block-end: var(--pr-t-spacings-150);
+		inset-inline-end: var(--pr-t-spacings-100);
 	}
 }
 
 @mixin clearableS {
 	.textfield-clear {
-		bottom: var(--pr-t-spacings-100);
-		right: var(--pr-t-spacings-50);
+		inset-block-end: var(--pr-t-spacings-100);
+		inset-inline-end: var(--pr-t-spacings-50);
 	}
 }
 
 @mixin clearableXS {
 	.textfield-clear {
-		bottom: var(--pr-t-spacings-50);
-		right: var(--pr-t-spacings-50);
+		inset-block-end: var(--pr-t-spacings-50);
+		inset-inline-end: var(--pr-t-spacings-50);
 	}
 }
 
 @mixin suffix {
 	.textfield-input {
-		padding-right: var(--components-textfield-suffix-padding-right);
+		padding-inline-end: var(--components-textfield-suffix-padding-right);
 	}
 }
 
 @mixin noLabel {
 	.textfield-suffix {
-		top: var(--components-textfield-input-padding-vertical);
+		inset-block-start: var(--components-textfield-input-padding-vertical);
 	}
 }
 
 @mixin S {
 	.textfield-label {
-		line-height: var(--sizes-S-lineHeight);
-		font-size: var(--sizes-S-fontSize);
+		line-height: var(--pr-t-font-body-S-lineHeight);
+		font-size: var(--pr-t-font-body-S-fontSize);
 	}
 
 	.textfield-input {
-		line-height: var(--sizes-S-lineHeight);
-		font-size: var(--sizes-S-fontSize);
+		line-height: var(--pr-t-font-body-S-lineHeight);
+		font-size: var(--pr-t-font-body-S-fontSize);
 		padding: var(--pr-t-spacings-75);
 	}
 
 	.textfield-suffix {
-		line-height: calc(var(--sizes-S-fontSize) * 1.25);
-		font-size: var(--sizes-S-fontSize);
+		line-height: calc(var(--pr-t-font-body-S-fontSize) * 1.25);
+		font-size: var(--pr-t-font-body-S-fontSize);
 
 		.lucca-icon {
-			font-size: calc(var(--sizes-S-fontSize) * 1.25);
+			font-size: calc(var(--pr-t-font-body-S-fontSize) * 1.25);
 		}
 	}
 }
 
 @mixin XS {
 	.textfield-label {
-		line-height: var(--sizes-XS-lineHeight);
-		font-size: var(--sizes-XS-fontSize);
+		line-height: var(--pr-t-font-body-XS-lineHeight);
+		font-size: var(--pr-t-font-body-XS-fontSize);
 	}
 
 	.textfield-input {
-		line-height: var(--sizes-XS-lineHeight);
-		font-size: var(--sizes-XS-fontSize);
+		line-height: var(--pr-t-font-body-XS-lineHeight);
+		font-size: var(--pr-t-font-body-XS-fontSize);
 		padding: var(--pr-t-spacings-50);
 	}
 
 	.textfield-suffix {
-		line-height: calc(var(--sizes-XS-fontSize) * 1.25);
-		font-size: var(--sizes-XS-fontSize);
-		top: calc(var(--components-textfield-suffix-top) + var(--pr-t-spacings-50));
+		line-height: calc(var(--pr-t-font-body-XS-fontSize) * 1.25);
+		font-size: var(--pr-t-font-body-XS-fontSize);
+		inset-block-start: calc(var(--components-textfield-suffix-top) + var(--pr-t-spacings-50));
 
 		.lucca-icon {
-			font-size: calc(var(--sizes-XS-fontSize) * 1.25);
+			font-size: calc(var(--pr-t-font-body-XS-fontSize) * 1.25);
 		}
 	}
 
 	.textfield-messages {
-		font-size: var(--sizes-XS-fontSize);
-		line-height: var(--sizes-XS-lineHeight);
+		font-size: var(--pr-t-font-body-XS-fontSize);
+		line-height: var(--pr-t-font-body-XS-lineHeight);
 
 		.lucca-icon {
 			font-size: 0.75rem;
-			line-height: var(--sizes-XS-lineHeight);
+			line-height: var(--pr-t-font-body-XS-lineHeight);
 		}
 	}
 }
 
 @mixin noLabelXS {
 	.textfield-suffix {
-		top: var(--pr-t-spacings-50);
+		inset-block-start: var(--pr-t-spacings-50);
 	}
 }
 
-@mixin SInputIcon {
-	line-height: var(--sizes-XS-lineHeight);
-	font-size: var(--sizes-S-fontSize);
+@mixin inputIconS {
+	line-height: var(--pr-t-font-body-XS-lineHeight);
+	font-size: var(--pr-t-font-body-S-fontSize);
 }
 
-@mixin XSInputIcon {
-	line-height: var(--sizes-XS-lineHeight);
-	font-size: var(--sizes-S-fontSize);
+@mixin inputIconXS {
+	line-height: var(--pr-t-font-body-XS-lineHeight);
+	font-size: var(--pr-t-font-body-S-fontSize);
 }
 
 @mixin size($size) {
-	width: var(--components-textfield-sizes-#{$size});
+	inline-size: var(--components-textfield-sizes-#{$size});
 }
 
 @mixin multiline {
 	.textfield-input {
-		line-height: var(--sizes-M-lineHeight);
-		font-size: var(--sizes-M-fontSize);
-		resize: vertical;
-		height: 5rem;
+		line-height: var(--pr-t-font-body-M-lineHeight);
+		font-size: var(--pr-t-font-body-M-fontSize);
+		resize: block;
+		block-size: 5rem;
 	}
 }
 
 @mixin multilineS {
 	.textfield-input {
-		line-height: var(--sizes-XS-lineHeight);
-		font-size: var(--sizes-S-fontSize);
-		height: 4rem;
+		line-height: var(--pr-t-font-body-XS-lineHeight);
+		font-size: var(--pr-t-font-body-S-fontSize);
+		block-size: 4rem;
 	}
 }
 
 @mixin invert {
 	.textfield-label {
-		color: var(--palettes-neutral-0);
+		color: var(--pr-t-color-text-reverse);
 	}
 }
 
 @mixin materialSearchBlockClearableInput {
 	.textfield-input {
-		padding-right: 3.75rem;
+		padding-inline-end: 3.75rem;
 	}
 
 	.textfield-clear {
-		right: 2rem;
+		inset-inline-end: 2rem;
 	}
 }
 
@@ -175,14 +175,14 @@
 		color: var(--palettes-neutral-600);
 		position: absolute;
 		pointer-events: none;
-		bottom: var(--pr-t-spacings-100);
-		font-size: var(--sizes-M-lineHeight);
-		line-height: var(--sizes-M-lineHeight);
-		right: var(--pr-t-spacings-100);
+		inset-block-end: var(--pr-t-spacings-100);
+		font-size: var(--pr-t-font-body-M-lineHeight);
+		line-height: var(--pr-t-font-body-M-lineHeight);
+		inset-inline-end: var(--pr-t-spacings-100);
 	}
 
 	.textfield-input {
-		padding-right: 2.5rem;
+		padding-inline-end: 2.5rem;
 
 		&[type='search'] {
 			&::-webkit-search-cancel-button {
@@ -194,82 +194,91 @@
 
 @mixin searchClearable {
 	.textfield-input {
-		padding-right: 4rem;
+		padding-inline-end: 4rem;
 	}
 
 	.textfield-clear {
-		right: 2.5rem;
+		inset-inline-end: 2.5rem;
 	}
 }
 
 @mixin searchS {
 	&::after {
-		line-height: var(--sizes-S-lineHeight);
-		font-size: var(--sizes-S-lineHeight);
-		bottom: var(--pr-t-spacings-75);
-		right: var(--pr-t-spacings-75);
+		line-height: var(--pr-t-font-body-S-lineHeight);
+		font-size: var(--pr-t-font-body-S-lineHeight);
+		inset-block-end: var(--pr-t-spacings-75);
+		inset-inline-end: var(--pr-t-spacings-75);
 	}
 
 	.textfield-input {
-		padding-right: 2rem;
+		padding-inline-end: 2rem;
 	}
 }
 
 @mixin searchClearableS {
 	.textfield-input {
-		padding-right: 3.5rem;
+		padding-inline-end: 3.5rem;
 	}
 
 	.textfield-clear {
-		@include clear.S;
+		// :not(.class) is only there to increase specificity when the class isn’t present
+		// but the class should be present, and this code is temporary
+		&.clear,
+		&:not(.clear) {
+			@include clear.S;
 
-		right: 2.125rem;
-		bottom: 0.625rem;
+			inset-inline-end: 2.125rem;
+			inset-block-end: 0.625rem;
+		}
 	}
 }
 
 @mixin searchXS {
 	&::after {
-		line-height: var(--sizes-XS-lineHeight);
-		font-size: var(--sizes-XS-lineHeight);
-		bottom: var(--pr-t-spacings-50);
-		right: var(--pr-t-spacings-50);
+		line-height: var(--pr-t-font-body-XS-lineHeight);
+		font-size: var(--pr-t-font-body-XS-lineHeight);
+		inset-block-end: var(--pr-t-spacings-50);
+		inset-inline-end: var(--pr-t-spacings-50);
 	}
 
 	.textfield-input {
-		padding-right: 1.5rem;
+		padding-inline-end: 1.5rem;
 	}
 }
 
 @mixin searchClearableXS {
 	.textfield-input {
-		padding-right: 3rem;
+		padding-inline-end: 3rem;
 	}
 
 	.textfield-clear {
-		@include clear.S;
+		// :not(.class) is only there to increase specificity when the class isn’t present
+		// but the class should be present, and this code is temporary
+		&.clear,
+		&:not(.clear) {
+			@include clear.S;
 
-		right: 1.75rem;
-		bottom: var(--pr-t-spacings-75);
+			inset-inline-end: 1.75rem;
+			inset-block-end: var(--pr-t-spacings-75);
+		}
 	}
 }
 
 @mixin radio {
 	display: inline-block;
-	margin-left: var(--pr-t-spacings-50);
+	margin-inline-start: var(--pr-t-spacings-50);
 
 	.textfield-input {
-		padding-top: 0;
-		padding-bottom: 0;
+		padding-block: 0;
 	}
 }
 
 @mixin filter {
-	width: var(--components-textfield-filter-width);
-	height: var(--components-filters-height);
-	border-right-color: var(--commons-divider-color);
-	border-right-width: 1px;
-	border-right-style: solid;
+	inline-size: var(--components-textfield-filter-width);
+	block-size: var(--components-filters-height);
+	border-inline-end-color: var(--commons-divider-color);
+	border-inline-end-width: 1px;
+	border-inline-end-style: solid;
 	transition-duration: var(--commons-animations-durations-standard);
 	transition-property: background-color;
 	display: block;
@@ -277,46 +286,50 @@
 
 	.textfield-label {
 		color: var(--palettes-neutral-600);
-		left: var(--pr-t-spacings-200);
-		font-size: var(--sizes-S-fontSize);
-		font-weight: 400;
-		line-height: var(--sizes-S-lineHeight);
+		inset-inline-start: var(--pr-t-spacings-200);
+		font-size: var(--pr-t-font-body-S-fontSize);
+		font-weight: var(--pr-t-font-fontWeight-regular);
+		line-height: var(--pr-t-font-body-S-lineHeight);
 		pointer-events: none;
 		position: absolute;
-		top: var(--pr-t-spacings-100);
+		inset-block-start: var(--pr-t-spacings-100);
 	}
 
 	.textfield-input {
 		background-color: transparent;
-		padding: var(--pr-t-spacings-200) 2.5rem 0 var(--pr-t-spacings-200);
+		padding-block: var(--pr-t-spacings-200) 0;
+		padding-inline: var(--pr-t-spacings-200) 2.5rem;
+
 		// todo: déplacer dans filters ?
-		height: var(--components-filters-height);
+		block-size: var(--components-filters-height);
 		border-radius: 0;
 		box-shadow: none;
 
 		&::after {
-			bottom: var(--pr-t-spacings-100);
+			inset-block-end: var(--pr-t-spacings-100);
 			color: var(--palettes-neutral-600);
-			font-weight: 400;
+			font-weight: var(--pr-t-font-fontWeight-regular);
 		}
 	}
 }
 
 @mixin suffixIcon {
 	color: var(--palettes-neutral-600);
-	line-height: var(--sizes-M-lineHeight);
+	line-height: var(--pr-t-font-body-M-lineHeight);
 }
 
 @mixin compact {
 	.textfield-options {
-		width: calc(100% - var(--components-textfield-compact-label-right-margin) - var(--components-textfield-compact-label-sizes-default));
-		left: auto;
-		right: 0;
+		inline-size: calc(
+			100% - var(--components-textfield-compact-label-right-margin) - var(--components-textfield-compact-label-sizes-default)
+		);
+		inset-inline-start: auto;
+		inset-inline-end: 0;
 	}
 
 	.textfield-suffix {
-		top: var(--components-textfield-compact-padding);
-		right: var(--components-textfield-compact-padding);
+		inset-block-start: var(--components-textfield-compact-padding);
+		inset-inline-end: var(--components-textfield-compact-padding);
 	}
 }
 
@@ -325,29 +338,29 @@
 }
 
 @mixin compactSize($size) {
-	width: calc(
+	inline-size: calc(
 		var(--components-textfield-sizes-#{$size}) + var(--components-textfield-compact-label-right-margin) +
 			var(--components-textfield-compact-label-sizes-default)
 	);
 
 	.textfield-options {
-		// width: $input-width; // todo: récupérer la bonne taille
+		// inline-size: $input-width; // todo: récupérer la bonne taille
 		outline: 2px dashed greenyellow !important;
 	}
 }
 
 @mixin framed {
-	width: 100%;
-	margin-bottom: 0 !important;
+	inline-size: 100%;
+	margin-block-end: 0 !important;
 
 	.textfield.mod-search {
 		@include framedSearch;
 	}
 
 	.textfield-options {
-		width: auto;
-		margin-top: -2px;
-		right: 1px;
+		inline-size: auto;
+		margin-block-start: -2px;
+		inset-inline-end: 1px;
 
 		mark {
 			background-color: transparent;
@@ -357,12 +370,12 @@
 	}
 
 	.textfield-input {
-		width: 100%;
+		inline-size: 100%;
 		border-radius: 0;
 		box-shadow: form.fakeBorderOverlay(var(--components-field-framed-border));
-		padding: var(--components-field-framed-top-padding) var(--components-field-framed-side-padding)
-			var(--components-field-framed-bottom-padding);
-		line-height: var(--sizes-M-lineHeight);
+		padding-block: var(--components-field-framed-top-padding) var(--components-field-framed-bottom-padding);
+		padding-inline: var(--components-field-framed-side-padding);
+		line-height: var(--pr-t-font-body-M-lineHeight);
 		outline: none;
 
 		&:not(:disabled, .is-error, .is-success, .is-valid, .is-warning, .is-invalid) {
@@ -371,14 +384,15 @@
 	}
 
 	.textfield-label {
-		padding: var(--components-field-framed-label-top-offset) var(--components-field-framed-side-padding);
+		padding-block: var(--components-field-framed-label-top-offset);
+		padding-inline: var(--components-field-framed-side-padding);
 		position: absolute;
 		pointer-events: none;
-		left: 0;
-		top: 0;
+		inset-inline-start: 0;
+		inset-block-start: 0;
 		z-index: 10;
-		line-height: var(--sizes-M-lineHeight);
-		font-size: var(--sizes-S-fontSize);
+		line-height: var(--pr-t-font-body-M-lineHeight);
+		font-size: var(--pr-t-font-body-S-fontSize);
 		color: var(--palettes-neutral-600);
 	}
 
@@ -389,9 +403,9 @@
 		transition-property: transform;
 		position: absolute;
 		text-align: center;
-		bottom: 0;
-		left: -1px;
-		right: 0;
+		inset-block-end: 0;
+		inset-inline-start: -1px;
+		inset-inline-end: 0;
 		transform: translateY(0);
 		z-index: 4;
 
@@ -434,15 +448,15 @@
 
 @mixin framedMultiline {
 	.textfield-input {
-		height: var(--components-field-framed-textarea-height);
-		min-height: var(--components-field-framed-textarea-min-height);
-		max-height: var(--components-field-framed-textarea-max-height);
+		block-size: var(--components-field-framed-textarea-height);
+		min-block-size: var(--components-field-framed-textarea-min-height);
+		max-block-size: var(--components-field-framed-textarea-max-height);
 	}
 }
 
 @mixin framedMultilineS {
 	.textfield-input {
-		height: auto;
+		block-size: auto;
 	}
 }
 
@@ -450,30 +464,30 @@
 	&::after {
 		color: var(--palettes-neutral-600);
 		padding: var(--components-field-framed-side-padding);
-		bottom: 0;
-		right: 0;
+		inset-block-end: 0;
+		inset-inline-end: 0;
 		z-index: 4;
 	}
 
 	.textfield {
-		width: 100%;
+		inline-size: 100%;
 	}
 
 	.textfield-input {
-		padding-right: var(--components-field-framed-suffix-padding-right);
+		padding-inline-end: var(--components-field-framed-suffix-padding-right);
 	}
 }
 
 @mixin material {
-	padding-top: var(--components-textfield-material-padding-top);
+	padding-block-start: var(--components-textfield-material-padding-top);
 	vertical-align: baseline;
 
 	.textfield-input {
 		box-shadow: 0 1px 0 0 var(--components-textfield-material-border-color);
 		background-color: transparent;
 		border-radius: 0;
-		padding-left: 0;
-		padding-right: 0;
+		padding-inline-start: 0;
+		padding-inline-end: 0;
 
 		&::placeholder {
 			opacity: 0;
@@ -486,35 +500,35 @@
 		font-size: var(--components-textfield-material-label-font-size);
 		position: absolute;
 		pointer-events: none;
-		font-weight: 400;
-		line-height: var(--sizes-M-lineHeight);
-		width: 100%;
-		top: var(--pr-t-spacings-300);
-		left: 0;
+		font-weight: var(--pr-t-font-fontWeight-regular);
+		line-height: var(--pr-t-font-body-M-lineHeight);
+		inline-size: 100%;
+		inset-block-start: var(--pr-t-spacings-300);
+		inset-inline-start: 0;
 	}
 
 	.textfield-suffix {
-		top: calc(var(--components-textfield-material-padding-top) + var(--components-textfield-input-padding-vertical));
+		inset-block-start: calc(var(--components-textfield-material-padding-top) + var(--components-textfield-input-padding-vertical));
 		position: absolute;
-		right: 0;
+		inset-inline-end: 0;
 	}
 }
 
 @mixin materialS {
 	.textfield-label {
-		line-height: var(--sizes-S-lineHeight);
-		font-size: var(--sizes-S-fontSize);
+		line-height: var(--pr-t-font-body-S-lineHeight);
+		font-size: var(--pr-t-font-body-S-fontSize);
 	}
 }
 
 @mixin materialSuffix {
 	.textfield-input {
-		padding-right: var(--components-textfield-material-suffix-padding-right);
+		padding-inline-end: var(--components-textfield-material-suffix-padding-right);
 	}
 }
 
 @mixin materialNoLabel {
-	padding-top: 0;
+	padding-block-start: 0;
 
 	.textfield-input {
 		&::placeholder {
@@ -527,41 +541,41 @@
 	}
 
 	.textfield-suffix {
-		top: var(--components-textfield-input-padding-vertical);
+		inset-block-start: var(--components-textfield-input-padding-vertical);
 	}
 }
 
 @mixin materialSearch {
 	&::after {
 		color: var(--palettes-neutral-500);
-		bottom: var(--pr-t-spacings-100);
-		right: 0;
+		inset-block-end: var(--pr-t-spacings-100);
+		inset-inline-end: 0;
 	}
 
 	.textfield-input {
-		padding-right: 1.75rem;
+		padding-inline-end: 1.75rem;
 	}
 
 	.textfield-label {
-		padding-right: 0;
+		padding-inline-end: 0;
 	}
 }
 
 @mixin materialRadio {
-	padding-top: 0;
+	padding-block-start: 0;
 }
 
 @mixin materialValid {
 	&::before {
-		bottom: 0.7rem !important;
-		right: 0 !important;
+		inset-block-end: 0.7rem !important;
+		inset-inline-end: 0 !important;
 	}
 
 	.textfield-label {
-		padding-right: var(--pr-t-spacings-300);
+		padding-inline-end: var(--pr-t-spacings-300);
 	}
 
 	.textfield-input {
-		padding-right: var(--pr-t-spacings-300);
+		padding-inline-end: var(--pr-t-spacings-300);
 	}
 }

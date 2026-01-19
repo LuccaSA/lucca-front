@@ -1,4 +1,4 @@
-import { Meta, StoryFn } from '@storybook/angular';
+import { Meta, StoryObj } from '@storybook/angular';
 
 interface TextfieldCounterStory {}
 
@@ -14,7 +14,7 @@ function getTemplate(args: TextfieldCounterStory): string {
 		Label
 		<span class="formLabel-counter" id="IDcounter" aria-live="polite">
 			<span aria-hidden="true">8/88</span>
-			<span class="u-mask">
+			<span class="pr-u-mask">
 				Votre publication fait 8 caractères de long. 88 caractères maximum sont autorisés.
 			</span>
 		</span>
@@ -24,15 +24,22 @@ function getTemplate(args: TextfieldCounterStory): string {
 			<input type="text" id="ID" class="textField-input-value" aria-labelledby="IDlabel" aria-describedby="IDcounter IDmessage" placeholder="Placeholder" aria-invalid="false" />
 		</div>
 	</div>
-	<div class="inlineMessage" id="IDmessage"><span aria-hidden="true" class="lucca-icon"></span>Helper text</div>
+	<div class="inlineMessage" id="IDmessage">
+		<span aria-hidden="true" class="lucca-icon inlineMessage-statusIcon"></span>
+		<p class="inlineMessage-content">
+			Helper text
+		</p>
+	</div>
 </div>
 `;
 }
 
-const Template: StoryFn<TextfieldCounterStory> = (args: TextfieldCounterStory) => ({
+const Template = (args: TextfieldCounterStory) => ({
 	props: args,
 	template: getTemplate(args),
 });
 
-export const Counter = Template.bind({});
-Counter.args = {};
+export const Counter: StoryObj<TextfieldCounterStory> = {
+	args: {},
+	render: Template,
+};

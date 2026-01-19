@@ -1,6 +1,6 @@
-@use '@lucca-front/scss/src/components/title/exports' as title;
+@use '@lucca-front/scss/src/commons/utils/namespace';
 
-@mixin component($atRoot: 'without: rule') {
+@mixin component($atRoot: namespace.$defaultAtRoot) {
 	border: 0;
 	margin: 0;
 	padding: 0;
@@ -10,13 +10,12 @@
 
 	@at-root ($atRoot) {
 		.fieldset-title {
-			@include title.component;
-			@include title.h3;
-
+			font: var(--components-fieldset-title);
+			color: var(--pr-t-color-text-heading);
 			padding: 0;
 			margin: 0;
-			width: 100%;
-			min-height: var(--pr-t-spacings-300);
+			inline-size: 100%;
+			min-block-size: var(--pr-t-spacings-300);
 			display: contents;
 		}
 
@@ -24,25 +23,36 @@
 			border: 0;
 			padding: 0;
 			margin: 0;
-			width: 100%;
+			inline-size: 100%;
 			background-color: transparent;
-			text-align: left;
+			text-align: start;
 			display: flex;
+			align-items: flex-start;
 			justify-content: space-between;
 			gap: var(--components-fieldset-gap);
-			max-width: var(--components-fieldset-contentMaxWidth);
+			max-inline-size: var(--components-fieldset-contentMaxWidth);
+
+			.lucca-icon {
+				transform: rotate(var(--components-fieldset-title-iconRotation));
+				transition-property: transform;
+				transition-duration: var(--commons-animations-durations-fast);
+				color: var(--palettes-neutral-700);
+			}
+		}
+
+		.fieldset-title-content-text {
+			padding-block: var(--pr-t-spacings-50);
 		}
 
 		.fieldset-title-content-text-helper {
-			font-size: var(--sizes-S-fontSize);
-			line-height: var(--sizes-S-lineHeight);
+			font: var(--pr-t-font-body-S);
+			font-weight: var(--pr-t-font-fontWeight-regular);
 			color: var(--palettes-neutral-700);
-			font-weight: 400;
 			display: block;
 		}
 
 		.fieldset-content {
-			min-width: 0;
+			min-inline-size: 0;
 		}
 	}
 }

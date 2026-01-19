@@ -1,29 +1,27 @@
 import { ChangeDetectionStrategy, Component } from '@angular/core';
 import { provideAnimations } from '@angular/platform-browser/animations';
-import { LuModal, LuModalModule } from '@lucca-front/ng/modal';
-import { ILuSidepanelContent, LuSidepanel, LuSidepanelModule } from '@lucca-front/ng/sidepanel';
+import { ILuModalContent, LuModal, LuModalModule } from '@lucca-front/ng/modal';
+import { LuSidepanel, LuSidepanelModule } from '@lucca-front/ng/sidepanel';
 import { LuToastsModule, LuToastsService } from '@lucca-front/ng/toast';
-import { Meta, StoryFn, applicationConfig } from '@storybook/angular';
+import { applicationConfig, Meta, StoryObj } from '@storybook/angular';
 import { map, shareReplay, timer } from 'rxjs';
 
 @Component({
 	selector: 'sidepanel-content',
-	standalone: true,
 	template: '<p>General Kenobi</p>',
 	changeDetection: ChangeDetectionStrategy.OnPush,
 })
-class SidepanelContentComponent implements ILuSidepanelContent {
+class SidepanelContentComponent implements ILuModalContent {
 	title = 'Hello there';
 	submitAction = () => timer(500);
 }
 
 @Component({
 	selector: 'sidepanel-content',
-	standalone: true,
 	template: '<p>General Kenobi</p>',
 	changeDetection: ChangeDetectionStrategy.OnPush,
 })
-class SidepanelDynamicContentComponent implements ILuSidepanelContent {
+class SidepanelDynamicContentComponent implements ILuModalContent {
 	counter$ = timer(0, 1000).pipe(shareReplay({ refCount: true, bufferSize: 1 }));
 
 	title = this.counter$.pipe(map((n) => `Title #${n}`));
@@ -37,11 +35,10 @@ class SidepanelDynamicContentComponent implements ILuSidepanelContent {
 
 @Component({
 	selector: 'sidepanel-stories',
-	standalone: true,
 	imports: [LuSidepanelModule, LuModalModule, LuToastsModule],
 	template: `
-		<lu-toasts [sources]="[]"></lu-toasts>
-		<div class="pr-u-marginBottom200">
+		<lu-toasts [sources]="[]" />
+		<div class="pr-u-marginBlockEnd200">
 			<button type="button" class="button" (click)="openSidepanel()">Open</button>
 			<button type="button" class="button" (click)="openDynamicContentSidepanel()">Open (Dynamic)</button>
 			<button type="button" class="button" (click)="openUndismissableSidepanel()">Open (Backdrop event)</button>
@@ -54,7 +51,11 @@ class SidepanelDynamicContentComponent implements ILuSidepanelContent {
 	changeDetection: ChangeDetectionStrategy.OnPush,
 })
 class SidepanelStory {
-	constructor(private sidepanel: LuSidepanel, private modal: LuModal, private toastsService: LuToastsService) {}
+	constructor(
+		private sidepanel: LuSidepanel,
+		private modal: LuModal,
+		private toastsService: LuToastsService,
+	) {}
 
 	public openSidepanel() {
 		this.modal.open(SidepanelContentComponent, undefined, { mode: 'sidepanel' });
@@ -65,11 +66,11 @@ class SidepanelStory {
 	}
 
 	public openLegacySidepanel() {
-		this.sidepanel.open(SidepanelContentComponent);
+		this.sidepanel.legacyOpen(SidepanelContentComponent);
 	}
 
 	public openLegacyDynamicContentSidepanel() {
-		this.sidepanel.open(SidepanelDynamicContentComponent);
+		this.sidepanel.legacyOpen(SidepanelDynamicContentComponent);
 	}
 
 	public openUndismissableSidepanel() {
@@ -87,12 +88,15 @@ export default {
 	decorators: [applicationConfig({ providers: [provideAnimations()] })],
 } as Meta;
 
-const Template: StoryFn<SidepanelStory> = (args) => ({
+const Template = (args: SidepanelStory) => ({
 	props: args,
 });
 
-export const Basic = Template.bind({});
-Basic.args = {};
+export const Basic: StoryObj<SidepanelStory> = {
+	args: {},
+	render: Template,
+};
+
 Basic.parameters = {
 	docs: {
 		source: {
@@ -112,7 +116,7 @@ class SidepanelStoriesModule {}
 	selector: 'sidepanel-content',
 	template: '<p>General Kenobi</p>'
 })
-class SidepanelContentComponent implements ILuSidepanelContent {
+class SidepanelContentComponent implements ILuModalContent {
 	title = 'Hello there';
 	submitAction = () => {};
 }

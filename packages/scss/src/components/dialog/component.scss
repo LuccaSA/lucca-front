@@ -1,94 +1,123 @@
-@use '@lucca-front/scss/src/components/title/exports' as title;
 @use '@lucca-front/scss/src/components/button/exports' as button;
 @use '@lucca-front/scss/src/components/footer/exports' as footer;
 @use '@lucca-front/scss/src/commons/utils/keyframe';
+@use '@lucca-front/scss/src/commons/utils/namespace';
+@use '@lucca-front/scss/src/commons/utils/a11y';
 
-@mixin component($atRoot: 'without: rule') {
-	@include keyframe.scaleIn;
+@mixin component($atRoot: namespace.$defaultAtRoot) {
+	animation-name: var(--components-dialog-animationOpening);
+	animation-duration: var(--commons-animations-durations-standard);
+	inset: var(--components-dialog-inset);
+	inline-size: var(--components-dialog-width);
+	block-size: var(--components-dialog-height);
+	background-color: var(--palettes-neutral-0);
+	border-radius: var(--components-dialog-borderRadius);
+	box-shadow: var(--pr-t-elevation-shadow-overlay);
+	margin: auto;
+	flex-direction: column;
+	display: flex !important;
+	position: fixed !important;
+	max-inline-size: var(--components-dialog-maxWidth) !important;
+	max-block-size: var(--components-dialog-maxHeight) !important;
+	transition-property: scale, translate, inline-size, block-size, inset;
+	transition-duration: var(--commons-animations-durations-standard);
+	overflow: hidden;
+	translate: var(--components-dialog-translateX) var(--components-dialog-translateY);
+	scale: var(--components-dialog-scale);
 
 	@supports not (height: 1dvh) {
 		--components-dialog-maxHeight: var(--components-dialog-maxHeightFallback);
 	}
 
-	animation-name: var(--components-dialog-animationOpening);
-	animation-duration: var(--commons-animations-durations-standard);
-	inset: var(--components-dialog-inset);
-	width: var(--components-dialog-width);
-	height: var(--components-dialog-height);
-	max-width: var(--components-dialog-maxWidth);
-	max-height: var(--components-dialog-maxHeight);
-	background-color: var(--palettes-neutral-0);
-	border-radius: var(--components-dialog-borderRadius);
-	box-shadow: var(--pr-t-elevation-shadow-overlay);
-	position: fixed !important;
-	margin: auto;
-	overflow: auto;
-	display: flex;
-	flex-direction: column;
+	@include keyframe.scaleIn;
 
-	.dialog-inside-header-button {
-		@include button.text;
-		@include button.S;
-		@include button.onlyIconS;
+	@at-root ($atRoot) {
+		.dialog-inside {
+			&:has(.dialog-inside-formOptional, .dialog-formOptional, .dialog-form) {
+				display: contents;
 
-		align-self: start;
-		justify-self: end;
-		grid-area: close;
-		display: var(--components-dialog-insideHeaderButtonDisplay);
-	}
+				.dialog-inside-formOptional,
+				.dialog-formOptional,
+				.dialog-form {
+					display: grid;
+					grid-template-areas:
+						'header'
+						'overflow'
+						'footer';
+					grid-template-rows: auto 1fr auto;
+					flex-grow: 1;
+					min-block-size: 0;
 
-	.dialog-inside-footer {
-		@include footer.sticky;
+					&:has(.dialog-inside-content:focus-visible) {
+						&::after {
+							@include a11y.focusVisible($offset: -4px);
 
-		// Safari fix to avoid footer to clip while loading
-		@supports (background-image: -webkit-named-image(test)) {
-			@keyframes footerVisibility {
-				from {
-					visibility: visible;
-					opacity: 0;
-				}
-				to {
-					visibility: visible;
-					opacity: 1;
+							content: '';
+							grid-area: overflow;
+						}
+					}
 				}
 			}
 
-			visibility: hidden;
-			animation-delay: var(--commons-animations-durations-standard);
-			animation-name: footerVisibility;
-			animation-duration: var(--commons-animations-durations-standard);
-			animation-fill-mode: both;
-		}
-	}
+			&:not(:has(.dialog-inside-formOptional, .dialog-formOptional, .dialog-form)) {
+				display: grid;
+				grid-template-areas:
+					'header'
+					'overflow'
+					'footer';
+				grid-template-rows: auto 1fr auto;
+				flex-grow: 1;
+				min-block-size: 0;
 
-	@at-root ($atRoot) {
-		// .dialog-form is deprecated
-		.dialog-formOptionnal,
-		.dialog-form,
-		.dialog-inside {
-			display: flex;
-			flex-direction: column;
-			flex-grow: 1;
+				&:has(.dialog-inside-content:focus-visible) {
+					&::after {
+						@include a11y.focusVisible($offset: -4px);
+
+						content: '';
+						grid-area: overflow;
+					}
+				}
+			}
+		}
+
+		.dialog-inside-header-actionOptional {
+			margin-right: calc(var(--pr-t-spacings-100) * -1);
+
+			&:empty {
+				display: none;
+			}
+		}
+
+		.dialog-inside-footer {
+			grid-area: footer;
+
+			&.footer {
+				background-color: transparent;
+				position: relative;
+				overflow: hidden;
+			}
 		}
 
 		.dialog-inside-header {
-			padding: var(--pr-t-spacings-200) var(--pr-t-spacings-300);
-			background-color: var(--palettes-neutral-0);
+			display: grid;
+			padding-block: var(--pr-t-spacings-200);
+			padding-inline: var(--pr-t-spacings-300);
 			grid-template-areas: var(--components-dialog-insideHeaderAreas);
 			grid-template-columns: var(--components-dialog-insideHeaderColumns);
 			box-shadow: 0 1px 0 0 var(--palettes-neutral-100);
 			gap: var(--pr-t-spacings-200);
-			position: sticky;
+			position: relative;
 			z-index: 1;
-			display: grid;
-			top: 0;
+			grid-area: header;
 		}
 
 		.dialog-inside-content {
-			padding: var(--pr-t-spacings-200) var(--pr-t-spacings-300);
-			flex-grow: 1;
-			position: relative;
-			z-index: 0;
+			background-color: var(--components-dialog-insideContent-background);
+			padding-block: var(--pr-t-spacings-200);
+			padding-inline: var(--pr-t-spacings-300);
+			grid-area: overflow;
+			overflow: auto;
+			outline: none;
 		}
 
 		.dialog-inside-header-container {
@@ -96,18 +125,17 @@
 		}
 
 		.dialog-inside-header-container-title {
-			@include title.h2;
-
+			font: var(--pr-t-font-heading-2);
 			padding: var(--components-dialog-insideHeaderTitlePadding);
 			text-align: var(--components-dialog-insideHeaderTitleAlign);
 			margin: 0;
-			overflow-wrap: break-word;
+			overflow-wrap: anywhere;
 		}
 
 		.dialog_backdrop {
 			background-color: var(--palettes-neutral-900);
 			position: fixed;
-			opacity: 0.4;
+			opacity: 0.4 !important; // weird bug with Chrome and its inspector open
 			inset: 0;
 		}
 	}

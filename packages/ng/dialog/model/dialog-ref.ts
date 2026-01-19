@@ -1,7 +1,7 @@
-import { isObservable, Observable, of, take } from 'rxjs';
 import { DialogRef } from '@angular/cdk/dialog';
-import { LuDialogConfig, LuDialogResult } from './dialog-config';
-import { filter, map } from 'rxjs/operators';
+import { isObservable, Observable, of, Subscription, take } from 'rxjs';
+import { filter, map, takeUntil } from 'rxjs/operators';
+import { LuDialogConfig, LuDialogData, LuDialogResult } from './dialog-config';
 
 export const DISMISSED_VALUE = {} as const;
 
@@ -9,13 +9,19 @@ function isDismissed(v: unknown): v is typeof DISMISSED_VALUE {
 	return v === DISMISSED_VALUE;
 }
 
-export class LuDialogRef<C = unknown> {
+export class LuDialogRef<C = unknown, TData = LuDialogData<C>> {
 	/**
 	 * Instance of the component that's inside the dialog
 	 */
 	get instance(): C {
 		return this.cdkRef.componentInstance;
 	}
+
+	/**
+	 * Subscription to the detachments of the dialog
+	 * This is used to close the dialog when it is detached
+	 */
+	detachSubscription: Subscription | null = null;
 
 	/**
 	 * Emits when the dialog is closed
@@ -39,8 +45,15 @@ export class LuDialogRef<C = unknown> {
 
 	constructor(
 		public readonly cdkRef: DialogRef<LuDialogResult<C> | typeof DISMISSED_VALUE, C>,
-		public readonly config: LuDialogConfig<C>,
-	) {}
+		public readonly config: LuDialogConfig<C, TData>,
+	) {
+		this.detachSubscription = cdkRef.overlayRef
+			.detachments()
+			.pipe(takeUntil(this.closed$))
+			.subscribe(() => {
+				cdkRef.close(DISMISSED_VALUE);
+			});
+	}
 
 	dismiss(): void {
 		// If we can't dismiss this dialog box, just ignore the dismiss call.
@@ -51,12 +64,14 @@ export class LuDialogRef<C = unknown> {
 		const canClose$ = isObservable(canClose) ? canClose : of(canClose);
 		canClose$.pipe(take(1)).subscribe((close) => {
 			if (close) {
+				this.detachSubscription?.unsubscribe();
 				this.cdkRef.close(DISMISSED_VALUE);
 			}
 		});
 	}
 
 	close(res: LuDialogResult<C>): void {
+		this.detachSubscription?.unsubscribe();
 		this.cdkRef.close(res);
 	}
 }

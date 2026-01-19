@@ -1,0 +1,17 @@
+<button
+	type="button"
+	aria-hidden="true"
+	[attr.tabindex]="isClamped() ? null : '-1'"
+	[attr.aria-expanded]="expanded()"
+	class="readMore-link link"
+	(click)="toggleExpanded()"
+>
+	{{ label() }}
+</button>
+@if (isNil(innerContent())) {
+	<div class="readMore-content" [class.textFlow]="textFlow()" #content>
+		<ng-content />
+	</div>
+} @else {
+	<div class="readMore-content" [class.textFlow]="textFlow()" [innerHTML]="innerContent()" #content></div>
+}

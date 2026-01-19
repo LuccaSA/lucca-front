@@ -1,83 +1,37 @@
 @use 'sass:map';
-@use 'sass:list';
-
+@use '@lucca-front/scss/src/commons/core';
 @use '@lucca-front/scss/src/commons/config';
 @use '@lucca-front/scss/src/commons/utils/a11y';
+@use '@lucca-front/scss/src/commons/utils/namespace';
+@use '@lucca-front/scss/src/commons/utils/color';
 
-@mixin base($atRoot: 'without: rule') {
+@mixin body {
+	background-color: var(--pr-t-elevation-surface-default);
+	color: var(--pr-t-color-text);
+	font: var(--pr-t-font-body-M);
+	text-rendering: geometricPrecision;
+
+	@supports (-webkit-touch-callout: none) {
+		min-block-size: -webkit-fill-available;
+	}
+}
+
+@mixin html {
+	block-size: -webkit-fill-available;
+}
+
+@mixin base($atRoot: namespace.$defaultAtRoot) {
 	@at-root ($atRoot) {
-		@if config.$fontFamily != 'Source Sans Pro' {
-			@font-face {
-				font-family: '#{config.$fontFamily}';
-				src: url('//cdn.lucca.fr/fonts/#{config.$fontFamily}/regular.woff2') format('woff2'),
-					url('//cdn.lucca.fr/fonts/#{config.$fontFamily}/regular.woff') format('woff');
-				font-weight: 400;
-				font-style: normal;
-				font-display: swap;
-			}
+		@if config.$fontFamily {
+			@include core.fontFace(config.$fontFamily, config.$fontWeights, config.$fontStyles);
+		}
 
-			@font-face {
-				font-family: '#{config.$fontFamily}';
-				src: url('//cdn.lucca.fr/fonts/#{config.$fontFamily}/semibold.woff2') format('woff2'),
-					url('//cdn.lucca.fr/fonts/#{config.$fontFamily}/semibold.woff') format('woff');
-				font-weight: 600;
-				font-style: normal;
-				font-display: swap;
-			}
+		@if config.$fontFamilyBrand {
+			@include core.fontFace(config.$fontFamilyBrand, config.$fontWeightsBrand, config.$fontStylesBrand);
+		}
 
-			@font-face {
-				font-family: '#{config.$fontFamily}';
-				src: url('//cdn.lucca.fr/fonts/#{config.$fontFamily}/bold.woff2') format('woff2'),
-					url('//cdn.lucca.fr/fonts/#{config.$fontFamily}/bold.woff') format('woff');
-				font-weight: 700;
-				font-style: normal;
-				font-display: swap;
-			}
-
-			@font-face {
-				font-family: '#{config.$fontFamily}';
-				src: url('//cdn.lucca.fr/fonts/#{config.$fontFamily}/black.woff2') format('woff2'),
-					url('//cdn.lucca.fr/fonts/#{config.$fontFamily}/black.woff') format('woff');
-				font-weight: 900;
-				font-style: normal;
-				font-display: swap;
-			}
-		} @else {
-			@font-face {
-				font-family: 'Source Sans Pro';
-				src: url('//cdn.lucca.fr/fonts/SourceSans/sourcesanspro-regular.woff2') format('woff2'),
-					url('//cdn.lucca.fr/fonts/SourceSans/sourcesanspro-regular.woff') format('woff');
-				font-weight: 400;
-				font-style: normal;
-				font-display: swap;
-			}
-
-			@font-face {
-				font-family: 'Source Sans Pro';
-				src: url('//cdn.lucca.fr/fonts/SourceSans/sourcesanspro-semibold.woff2') format('woff2'),
-					url('//cdn.lucca.fr/fonts/SourceSans/sourcesanspro-semibold.woff') format('woff');
-				font-weight: 600;
-				font-style: normal;
-				font-display: swap;
-			}
-
-			@font-face {
-				font-family: 'Source Sans Pro';
-				src: url('//cdn.lucca.fr/fonts/SourceSans/sourcesanspro-bold.woff2') format('woff2'),
-					url('//cdn.lucca.fr/fonts/SourceSans/sourcesanspro-bold.woff') format('woff');
-				font-weight: 700;
-				font-style: normal;
-				font-display: swap;
-			}
-
-			@font-face {
-				font-family: 'Source Sans Pro';
-				src: url('//cdn.lucca.fr/fonts/SourceSans/sourcesanspro-black.woff2') format('woff2'),
-					url('//cdn.lucca.fr/fonts/SourceSans/sourcesanspro-black.woff') format('woff');
-				font-weight: 900;
-				font-style: normal;
-				font-display: swap;
-			}
+		@if config.$fontFamilyCursive {
+			@include core.fontFace(config.$fontFamilyCursive, config.$fontWeightsCursive, config.$fontStylesCursive);
 		}
 
 		*,
@@ -88,26 +42,40 @@
 
 		::placeholder {
 			opacity: 1;
+			text-rendering: geometricPrecision;
 		}
 
-		html {
-			height: -webkit-fill-available;
-		}
+		@if config.$isNamespaced {
+			& {
+				@include body;
+				@include html;
+			}
+		} @else {
+			html {
+				@include html;
+			}
 
-		body {
-			background-color: var(--pr-t-elevation-surface-default);
-			color: var(--palettes-neutral-800);
-			font-family: var(--commons-font-family);
-			font-size: var(--sizes-M-fontSize);
-			line-height: var(--sizes-M-lineHeight);
-
-			@supports (-webkit-touch-callout: none) {
-				min-height: -webkit-fill-available;
+			body {
+				@include body;
 			}
 		}
 
 		p {
-			margin: 0 0 var(--pr-t-spacings-200);
+			margin: 0;
+
+			@if config.$deprecatedSpacings {
+				margin-block-end: var(--pr-t-spacings-150);
+			}
+		}
+
+		ul,
+		ol {
+			margin: 0;
+			padding-inline-start: var(--pr-t-spacings-400);
+
+			@if config.$deprecatedSpacings {
+				margin-block-end: var(--pr-t-spacings-150);
+			}
 		}
 
 		abbr {
@@ -127,13 +95,26 @@
 			}
 
 			&:focus-visible {
-				@include a11y.focusVisible($borderRadius: var(--commons-borderRadius-M));
+				@include a11y.focusVisible($borderRadius: var(--pr-t-border-radius-small));
+			}
+		}
+
+		button, button[type] {
+			text-rendering: inherit;
+
+			&:focus-visible {
+				@include a11y.focusVisible;
 			}
 		}
 
 		strong,
 		b {
-			font-weight: 600;
+			font-weight: var(--pr-t-font-fontWeight-semibold);
+		}
+
+		mark {
+			background-color: var(--palettes-100, var(--palettes-product-100));
+			border-radius: var(--pr-t-border-radius-default);
 		}
 
 		@each $palette in config.$palettesAll {
@@ -141,11 +122,7 @@
 
 			@if $paletteExists {
 				.palette-#{$palette} {
-					@each $shade in config.$palettesShades {
-						@if map.get($paletteExists, $shade) {
-							--palettes-#{$shade}: var(--palettes-#{$palette}-#{$shade});
-						}
-					}
+					@include color.palette($name: $palette, $palette: $paletteExists);
 				}
 			}
 		}

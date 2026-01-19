@@ -1,44 +1,68 @@
-<h1>Gauge</h1>
-
-<section class="contentSection">
-	<h2>Gauge</h2>
-	<div class="gauge">
-		<div class="gauge-bar" style="width: 33%"></div>
-	</div>
-</section>
-
-<section class="contentSection">
-	<h2>Thin</h2>
-	<div class="gauge mod-thin">
-		<div class="gauge-bar" style="width: 50%"></div>
-	</div>
-</section>
-
-<section class="contentSection">
-	<h2>Vertical</h2>
-	<div class="u-displayFlex" style="height: 100px">
-		<div class="gauge mod-vertical">
-			<div class="gauge-bar" style="height: 50%"></div>
-		</div>
-		<div class="gauge mod-vertical mod-thin palette-error pr-u-marginLeft200">
-			<div class="gauge-bar" style="height: 75%"></div>
-		</div>
-	</div>
-</section>
-
-<section class="contentSection">
-	<h2>Palette</h2>
-	<div class="gauge palette-success pr-u-marginBottom200">
-		<div class="gauge-bar" style="width: 75%"></div>
-	</div>
-	<div class="gauge palette-warning pr-u-marginBottom200">
-		<div class="gauge-bar" style="width: 50%"></div>
-	</div>
-	<div class="gauge palette-error pr-u-marginBottom200">
-		<div class="gauge-bar" style="width: 25%"></div>
-	</div>
-	<em><b>Tip:</b> It will works with all palette's colors</em>
-</section>
+<table class="demo-QAtable">
+	<tbody>
+		<tr>
+			<td></td>
+			<td style="width: 50%">
+				<div class="demo-QAtable-list">HTML</div>
+			</td>
+			<td style="width: 50%">
+				<div class="demo-QAtable-list">Angular</div>
+			</td>
+		</tr>
+		<tr>
+			<td>Default</td>
+			<td style="width: 50%">
+				<div class="gauge" style="--components-gauge-value: 33%"></div>
+			</td>
+			<td style="width: 50%">
+				<lu-gauge value="33" />
+			</td>
+		</tr>
+		<tr>
+			<td>Thin</td>
+			<td style="width: 50%">
+				<div class="gauge mod-thin" style="--components-gauge-value: 50%"></div>
+			</td>
+			<td style="width: 50%">
+				<lu-gauge thin value="50" />
+			</td>
+		</tr>
+		<tr>
+			<td>Palette</td>
+			<td style="width: 50%">
+				<div class="gauge palette-success pr-u-marginBlockEnd100" style="--components-gauge-value: 75%"></div>
+				<div class="gauge palette-warning pr-u-marginBlockEnd100" style="--components-gauge-value: 50%"></div>
+				<div class="gauge palette-error" style="--components-gauge-value: 25%"></div>
+			</td>
+			<td style="width: 50%">
+				<lu-gauge value="100" palette="success" />
+				<lu-gauge value="90" palette="neutral" />
+				<lu-gauge value="75" palette="product" />
+				<lu-gauge value="50" palette="warning" />
+				<lu-gauge value="25" palette="error" />
+				<lu-gauge value="0" palette="error" />
+			</td>
+		</tr>
+		<tr>
+			<td>Circular</td>
+			<td style="height: 10rem"></td>
+			<td style="width: 50%">
+				<lu-gauge circular size="40" value="100" />
+				<lu-gauge circular size="40" value="75" palette="success" />
+				<lu-gauge circular size="40" value="50" palette="warning" />
+				<lu-gauge circular size="40" value="25" palette="error" />
+				<lu-gauge circular size="40" value="0" palette="error" />
+			</td>
+		</tr>
+		<tr>
+			<td>Vertical (deprecated)</td>
+			<td style="height: 10rem">
+				<div class="gauge mod-vertical" style="--components-gauge-value: 50%"></div>
+			</td>
+			<td></td>
+		</tr>
+	</tbody>
+</table>
 
 <!-- To tell the ui-diff tool that the page has finished rendering -->
 <span id="ready"></span>

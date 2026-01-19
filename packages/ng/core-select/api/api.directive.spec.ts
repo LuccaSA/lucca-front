@@ -1,4 +1,4 @@
-import { Component, Directive } from '@angular/core';
+import { ChangeDetectionStrategy, Component, Directive } from '@angular/core';
 import { fakeAsync } from '@angular/core/testing';
 import { LuSimpleSelectInputComponent } from '@lucca-front/ng/simple-select';
 import { Spectator, createComponentFactory } from '@ngneat/spectator/jest';
@@ -14,7 +14,6 @@ interface TestEntity {
 @Directive({
 	// eslint-disable-next-line @angular-eslint/directive-selector
 	selector: 'lu-simple-select[testApi]',
-	standalone: true,
 })
 class TestDirective extends ALuCoreSelectApiDirective<TestEntity> {
 	protected override params$ = this.clue$.pipe(
@@ -23,7 +22,7 @@ class TestDirective extends ALuCoreSelectApiDirective<TestEntity> {
 		})),
 	);
 
-	protected override optionComparer = (a: TestEntity, b: TestEntity) => a.id === b.id;
+	protected override optionKey = (option: TestEntity) => option.id;
 
 	public override getOptions(): Observable<TestEntity[]> {
 		return of([{ id: 1, name: 'test' }]);
@@ -33,15 +32,21 @@ class TestDirective extends ALuCoreSelectApiDirective<TestEntity> {
 		this.pageSize = size;
 	}
 
-	public override getOptionsPage(params: Record<string, string | number | boolean>, page: number): Observable<{ items: TestEntity[]; isLastPage: boolean }> {
+	public override getOptionsPage(
+		params: Record<string, string | number | boolean>,
+		page: number,
+	): Observable<{
+		items: TestEntity[];
+		isLastPage: boolean;
+	}> {
 		return super.getOptionsPage(params, page);
 	}
 }
 
 @Component({
-	template: ` <lu-simple-select testApi></lu-simple-select> `,
-	standalone: true,
+	template: ` <lu-simple-select testApi />`,
 	imports: [TestDirective, LuSimpleSelectInputComponent],
+	changeDetection: ChangeDetectionStrategy.OnPush,
 })
 class HostComponent {}
 
@@ -72,6 +77,7 @@ describe('ALuCoreSelectApiDirective', () => {
 
 	it('should query options when ArrowDown keydown on the select', fakeAsync(() => {
 		spectator.dispatchKeyboardEvent('lu-simple-select', 'keydown', 'ArrowDown');
+		spectator.tick(10); // Wait for panel to be opened
 		spectator.tick(MAGIC_OPTION_SCROLL_DELAY); // Avoid "1 periodic timer(s) still in the queue." because of the setTimeout in the option component
 
 		expect(testApi.getOptions).toHaveBeenCalledTimes(1);
@@ -81,6 +87,7 @@ describe('ALuCoreSelectApiDirective', () => {
 	it('should query options once when searching while the select is closed', fakeAsync(() => {
 		spectator.tick(); // Component initialization uses a setTimeout :see_no_evil:
 		select.clueChanged('test');
+		spectator.tick(10); // Wait for panel to be opened
 		spectator.tick(MAGIC_DEBOUNCE_DURATION);
 		spectator.tick();
 
@@ -121,6 +128,7 @@ describe('ALuCoreSelectApiDirective', () => {
 		);
 
 		select.clueChanged('test');
+		spectator.tick(10); // Wait for panel to be opened
 		spectator.tick(MAGIC_DEBOUNCE_DURATION);
 		spectator.tick();
 
@@ -131,24 +139,24 @@ describe('ALuCoreSelectApiDirective', () => {
 				{ id: 4, name: 'test 4' },
 			]),
 		);
-		select.nextPage.emit();
+		select.nextPage$.next();
 		spectator.tick(MAGIC_OPTION_SCROLL_DELAY);
 		spectator.tick();
 
 		// // Act (Page 3)
 		getOptionsSpy.mockReturnValue(of([{ id: 5, name: 'test 5' }]));
-		select.nextPage.emit();
+		select.nextPage$.next();
 		spectator.tick(MAGIC_OPTION_SCROLL_DELAY);
 		spectator.tick();
 
 		// Act (do nothing)
-		select.nextPage.emit();
-		select.nextPage.emit();
+		select.nextPage$.next();
+		select.nextPage$.next();
 
 		// // Assert
 		expect(testApi.getOptions).toHaveBeenCalledTimes(3);
 
-		let options: TestEntity[];
+		let options: readonly TestEntity[];
 
 		select.options$.subscribe((o) => (options = o));
 
@@ -167,7 +175,7 @@ describe('ALuCoreSelectApiDirective', () => {
 		testApi.setPageSize(2);
 
 		const getPageSpy = jest.spyOn(testApi, 'getOptionsPage');
-		getPageSpy.mockImplementation((params, page) => {
+		getPageSpy.mockImplementation((_params, page) => {
 			// Emit one list, then the same list with one more item
 			return of(
 				{
@@ -189,11 +197,11 @@ describe('ALuCoreSelectApiDirective', () => {
 		spectator.tick(MAGIC_OPTION_SCROLL_DELAY);
 
 		// Act (Page 2)
-		select.nextPage.emit();
+		select.nextPage$.next();
 		spectator.tick(MAGIC_OPTION_SCROLL_DELAY);
 
 		// Assert
-		let options: TestEntity[];
+		let options: readonly TestEntity[];
 		select.options$.subscribe((o) => (options = o));
 		expect(options).toEqual([
 			{ id: 1, name: 'test 1' },

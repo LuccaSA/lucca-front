@@ -1,6 +1,6 @@
 import { A11yModule } from '@angular/cdk/a11y';
 import { OverlayModule } from '@angular/cdk/overlay';
-import { CommonModule } from '@angular/common';
+import { NgTemplateOutlet } from '@angular/common';
 import { ChangeDetectionStrategy, Component, EventEmitter, Input, OnDestroy, Output, TemplateRef, ViewChild } from '@angular/core';
 import { luTransformPopover } from '../animation/index';
 import { ALuPopoverPanel, ILuPopoverPanel, LuPopoverScrollStrategy } from './popover-panel.model';
@@ -12,8 +12,7 @@ import { ALuPopoverPanel, ILuPopoverPanel, LuPopoverScrollStrategy } from './pop
 	templateUrl: './popover-panel.component.html',
 	changeDetection: ChangeDetectionStrategy.OnPush,
 	animations: [luTransformPopover],
-	standalone: true,
-	imports: [CommonModule, OverlayModule, A11yModule],
+	imports: [NgTemplateOutlet, OverlayModule, A11yModule],
 	exportAs: 'LuPopoverPanel',
 })
 export class LuPopoverPanelComponent extends ALuPopoverPanel implements ILuPopoverPanel, OnDestroy {
@@ -89,7 +88,6 @@ export class LuPopoverPanelComponent extends ALuPopoverPanel implements ILuPopov
 	/** Event emitted when the popover is closed. */
 	// eslint-disable-next-line @angular-eslint/no-output-native
 	@Output() override close = new EventEmitter<void>();
-	// eslint-disable-next-line @angular-eslint/no-output-native
 	@Output() override open = new EventEmitter<void>();
 	@Output() override hovered = new EventEmitter<boolean>();
 

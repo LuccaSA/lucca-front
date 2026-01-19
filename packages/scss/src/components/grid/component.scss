@@ -3,16 +3,17 @@
 @use '@lucca-front/scss/src/commons/utils/media';
 @use '@lucca-front/scss/src/commons/utils/container';
 @use '@lucca-front/scss/src/commons/config';
+@use '@lucca-front/scss/src/commons/utils/namespace';
 
-@mixin component($atRoot: 'without: rule') {
+@mixin component($atRoot: namespace.$defaultAtRoot) {
 	display: grid;
 	grid-template-columns: var(--grid-template-columns);
 	gap: var(--grid-row-gap) var(--grid-column-gap);
 
 	// workaround for Angular replacing CamelCase by kebab-case
-	// max-width: var(--grid-max-width, var(--grid-maxWidth));
-	width: var(--grid-max-width, var(--grid-maxWidth));
-	max-width: 100%;
+	// max-inline-size: var(--grid-max-width, var(--grid-maxWidth));
+	inline-size: var(--grid-max-width, var(--grid-maxWidth));
+	max-inline-size: 100%;
 
 	@at-root ($atRoot) {
 		.grid-containerWrapper {
@@ -23,14 +24,11 @@
 		.grid-column {
 			align-self: var(--grid-align, var(--grid-column-align));
 			justify-self: var(--grid-justify, var(--grid-column-justify));
-
 			grid-column-start: var(--grid-column, var(--grid-column-start));
 			grid-row-start: var(--grid-row, var(--grid-row-start));
-
 			grid-column-end: span var(--grid-colspan, var(--grid-column-end));
 			grid-row-end: span var(--grid-rowspan, var(--grid-row-end));
-
-			min-width: 0;
+			min-inline-size: 0;
 
 			@each $breakpoint, $value in config.$breakpoints {
 				@include media.min($breakpoint) {
@@ -50,6 +48,7 @@
 						grid-row-start: var(--grid-rowAtMediaMin#{$breakpoint});
 					}
 
+					// stylelint-disable custom-property-pattern -- TODO Make PR to Stylelint to take SCSS function within CSS variable into consideration.
 					// workaround for Angular replacing CamelCase by kebab-case
 					&[style*='grid-colspan-at-media-min-#{string.to-lower-case($breakpoint)}'] {
 						grid-column-end: span var(--grid-colspan-at-media-min-#{string.to-lower-case($breakpoint)});
@@ -107,6 +106,7 @@
 					&[style*='grid-row-at-container-min-#{string.to-lower-case($breakpoint)}'] {
 						grid-row-start: var(--grid-row-at-container-min-#{string.to-lower-case($breakpoint)});
 					}
+					// stylelint-enable
 				}
 			}
 		}

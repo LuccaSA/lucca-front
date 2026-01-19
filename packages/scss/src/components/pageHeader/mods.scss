@@ -1,27 +1,50 @@
-@use '@lucca-front/scss/src/commons/utils/media';
+@use "@lucca-front/scss/src/components/button/exports" as button;
 
-@mixin menu {
-	padding-bottom: 0;
+@mixin horizontalNavigation {
+	padding-block-end: 0;
+
+	// .menu is deprecated
+	.horizontalNavigation,
+	.menu {
+		margin-block-start: var(--pr-t-spacings-50);
+	}
 }
 
 @mixin breadcrumbs {
-	padding-top: var(--pr-t-spacings-200);
+	padding-block-start: var(--pr-t-spacings-200);
 
 	.breadcrumbs {
-		margin-bottom: 0;
+		margin-block-end: 0;
 	}
 }
 
 @mixin sticky {
 	background-color: var(--pr-t-elevation-surface-default);
-	top: var(--commons-banner-height);
+	inset-block-start: calc(var(--commons-banner-height) + var(--commons-navSide-mobile-toggle-height));
 	position: sticky;
-	left: 0;
-	right: 0;
+	inset-inline: 0;
 	z-index: 99;
+}
 
-	@include media.max('S') {
-		top: calc(var(--commons-banner-height) + var(--commons-navSide-mobile-toggle-height));
-		left: 0 !important;
+@mixin stickyWide {
+	inset-block-start: var(--commons-banner-height);
+	inset-inline-start: 0 !important;
+}
+
+@mixin withContainer {
+	--components-pageHeader-padding: var(--pr-t-spacings-300) 0;
+}
+
+@mixin wide {
+	--components-pageHeader-padding: var(--pr-t-spacings-300) var(--pr-t-spacings-400);
+}
+
+@mixin withBackButton {
+	.pageHeader-content-title-back {
+		.button {
+			@include button.outlined;
+			@include button.S;
+			@include button.onlyIconS;
+		}
 	}
 }

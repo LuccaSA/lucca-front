@@ -1,11 +1,15 @@
-@mixin component($atRoot: 'without: rule') {
+@use '@lucca-front/scss/src/commons/utils/namespace';
+
+@mixin component($atRoot: namespace.$defaultAtRoot) {
 	display: flex;
 	flex-wrap: wrap;
-	padding: var(--pr-t-spacings-100) var(--pr-t-spacings-150);
+	padding-block: var(--pr-t-spacings-100);
+	padding-inline: var(--pr-t-spacings-150);
 	justify-content: flex-end;
+	color: var(--pr-t-color-text-subtle);
 
 	> *:not(:last-child) {
-		margin-right: var(--pr-t-spacings-100);
+		margin-inline-end: var(--pr-t-spacings-100);
 	}
 
 	@at-root ($atRoot) {
@@ -18,22 +22,22 @@
 		}
 
 		.pagination-count-separator {
-			margin: 0 var(--pr-t-spacings-50);
+			margin-block: 0;
+			margin-inline: var(--pr-t-spacings-50);
 		}
 
 		.pagination-navigation {
 			list-style: none;
 			padding: 0;
-			margin-top: 0;
-			margin-bottom: 0;
+			margin-block: 0;
 
 			> *:not(:last-child) {
-				margin-right: var(--pr-t-spacings-50);
+				margin-inline-end: var(--pr-t-spacings-50);
 			}
 		}
 
 		.pagination-navigation-item {
-			margin-right: var(--pr-t-spacings-50);
+			margin-inline-end: var(--pr-t-spacings-50);
 		}
 	}
 }

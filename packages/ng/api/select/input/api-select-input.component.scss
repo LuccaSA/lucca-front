@@ -1,2 +1,3 @@
-@import '_definitions';
-@include selectInputStyle;
+@use '../../../styles/definitions';
+
+@include definitions.selectInputStyle;

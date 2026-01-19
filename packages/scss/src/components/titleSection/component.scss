@@ -1,33 +1,34 @@
 @use '@lucca-front/scss/src/commons/config';
+@use '@lucca-front/scss/src/commons/utils/namespace';
 
-@mixin component($atRoot: 'without: rule') {
-	margin-bottom: 1.2rem;
+@mixin component($atRoot: namespace.$defaultAtRoot) {
+	margin-block-end: 1.2rem;
 
-	.titleSection-title,
-	h1,
-	h2,
-	h3,
-	h4,
-	h5,
-	h6 {
-		margin-bottom: 0;
+	%marginBlockEnd0important {
+		margin-block-end: 0 !important;
 	}
 
-	.u-h1,
-	.u-h2,
-	.u-h3,
-	.u-h4,
-	.u-h5,
-	.u-h6 {
-		margin-bottom: 0 !important;
+	:is(.titleSection-title, h1, h2, h3, h4, h5, h6) {
+		margin-block-end: 0;
+	}
+
+	:is(.pr-u-h1, .pr-u-h2, .pr-u-h3, .pr-u-h4, .pr-u-h5, .pr-u-h6) {
+		@extend %marginBlockEnd0important
+	}
+
+	// Deprecated .u- utilities
+	@if config.$deprecatedUtilityPrefix {
+		:is(.u-h1, .u-h2, .u-h3, .u-h4, .u-h5, .u-h6) {
+			@extend %marginBlockEnd0important
+		}
 	}
 
 	@at-root ($atRoot) {
 		.titleSection-sub {
 			color: var(--palettes-neutral-600);
-			font-size: var(--sizes-M-fontSize);
-			line-height: var(--sizes-M-lineHeight);
-			font-weight: 400;
+			font-size: var(--pr-t-font-body-M-fontSize);
+			line-height: var(--pr-t-font-body-M-lineHeight);
+			font-weight: var(--pr-t-font-fontWeight-regular);
 			margin: 0;
 		}
 	}

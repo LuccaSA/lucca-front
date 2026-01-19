@@ -19,11 +19,11 @@
 		}
 
 		.sb-main-fullscreen .sb-anchor:not(:last-child) {
-			margin-bottom: 40px;
+			margin-block-end: 40px;
 		}
 
 		.sb-main-fullscreen .sbdocs-title + .sb-anchor {
-			margin-bottom: 0 !important;
+			margin-block-end: 0 !important;
 		}
 
 		.sb-main-fullscreen .sbdocs.sbdocs-wrapper {
@@ -51,17 +51,18 @@
 
 		.sb-main-fullscreen .css-s7utv5 {
 			font-size: 13px;
-			font-weight: 800;
+			font-weight: var(--pr-t-font-fontWeight-black);
 			color: #2e3438;
 			letter-spacing: normal;
 		}
 
 		.sb-main-fullscreen .docblock-argstable {
-			margin: 5px 0 0 !important;
+			margin-block: 5px 0 !important;
+			margin-inline: 0 !important;
 		}
 
 		.sb-main-fullscreen .docblock-argstable-body {
-			border-radius: 4px !important;
+			border-radius: var(--pr-t-border-radius-50) !important;
 			box-shadow: inset 0 0 0 1px rgb(0 0 0 / 0.1) !important;
 		}
 
@@ -82,7 +83,7 @@
 		}
 
 		.sb-main-fullscreen .docblock-argstable-body label {
-			margin-bottom: 0;
+			margin-block-end: 0;
 		}
 
 		.sb-main-fullscreen .docblock-argstable-body td {
@@ -99,7 +100,7 @@
 		}
 
 		.sb-main-fullscreen .docs-story [height] {
-			height: auto !important;
+			block-size: auto !important;
 			transform: none !important;
 			transform-origin: unset !important;
 		}
@@ -122,7 +123,7 @@
 
 		.sb-main-fullscreen div.innerZoomElementWrapper {
 			-webkit-font-smoothing: auto !important;
-			font-family: var(--commons-font-family) !important;
+			font-family: var(--pr-t-font-family) !important;
 		}
 
 		.sb-main-fullscreen div.innerZoomElementWrapper > * {

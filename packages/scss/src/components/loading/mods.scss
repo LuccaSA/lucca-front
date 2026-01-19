@@ -2,26 +2,23 @@
 
 @mixin block {
 	--components-loading-display: block;
-	--components-loading-margin: 0 auto;
+	--components-loading-margin: auto;
 	--components-loading-spinnerMargin: 0 auto;
+	--components-loading-textAlign: center;
 
 	&:not(:empty) {
-		--components-loading-padding: var(--components-loading-size) 0 0;
+		--components-loading-padding: calc(var(--components-loading-size) + var(--pr-t-spacings-50)) 0 0;
 	}
+}
+
+@mixin S {
+	--components-loading-size: calc(var(--pr-t-spacings-200) + var(--pr-t-spacings-50));
 }
 
 @mixin L {
 	@include block;
 
 	--components-loading-size: var(--components-loading-size-big);
-}
-
-@mixin fullPage {
-	@include block;
-	@include L;
-
-	--components-loading-transform: translateY(30vh);
-	--components-loading-padding: 0;
 }
 
 @mixin invert {
@@ -33,21 +30,20 @@
 }
 
 @mixin popin {
-	@include block;
 	@include L;
-
-	&,
-	&:not(:empty) {
-		--components-loading-padding: 8rem 0 0;
-	}
-
-	--components-loading-margin: 0 var(--pr-t-spacings-400) var(--pr-t-spacings-400);
-	--components-loading-spinnerMargin: auto;
 }
 
 @mixin drawer {
-	@include fullPage;
 	@include popin;
 
+	// legacy, approximate centering
+	--components-loading-transform: translateY(35vh);
+}
+
+@mixin fullPage {
+	@include L;
+
+	// legacy, approximate centering
+	--components-loading-margin: 0 auto;
 	--components-loading-transform: translateY(35vh);
 }

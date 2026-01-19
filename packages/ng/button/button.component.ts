@@ -1,57 +1,77 @@
-import { booleanAttribute, ChangeDetectionStrategy, Component, ContentChild, ElementRef, inject, Input, OnChanges, ViewEncapsulation } from '@angular/core';
-import { LuClass, Palette } from '@lucca-front/ng/core';
+import { booleanAttribute, ChangeDetectionStrategy, Component, computed, contentChild, ElementRef, inject, input, signal, ViewEncapsulation } from '@angular/core';
+import { LuClass, Palette, ɵeffectWithDeps } from '@lucca-front/ng/core';
 import { IconComponent } from '@lucca-front/ng/icon';
 
 @Component({
 	// eslint-disable-next-line @angular-eslint/component-selector
 	selector: 'button[luButton],a[luButton]',
-	standalone: true,
 	providers: [LuClass],
-	template: '<ng-content></ng-content>',
-	styleUrls: ['./button.component.scss'],
+	template: '<ng-content />',
+	styleUrl: './button.component.scss',
 	changeDetection: ChangeDetectionStrategy.OnPush,
 	encapsulation: ViewEncapsulation.None,
 	host: {
 		class: 'button',
+		'[class.is-error]': 'notifyError()',
+		'(click)': 'triggerErrorIfNeeded()',
+		'(animationend)': 'notifyError.set(false)',
 	},
 })
-export class ButtonComponent implements OnChanges {
+export class ButtonComponent {
 	#luClass = inject(LuClass);
 	#elementRef = inject<ElementRef<HTMLButtonElement>>(ElementRef);
 
-	@Input()
-	size: 'M' | 'S' | 'XS';
+	readonly notifyError = signal(false);
 
-	@Input({
-		transform: booleanAttribute,
-	})
-	block = false;
+	readonly size = input<'M' | 'S' | 'XS'>();
 
-	@Input({
-		transform: booleanAttribute,
-	})
-	delete = false;
+	readonly block = input(false, { transform: booleanAttribute });
 
-	@Input()
-	palette: Palette = 'none';
+	readonly critical = input(false, { transform: booleanAttribute });
 
-	@Input()
-	state: 'default' | 'loading' | 'error' | 'success' = 'default';
+	readonly delete = input(false, { transform: booleanAttribute });
 
-	@Input()
+	readonly disclosure = input(false, { transform: booleanAttribute });
+
+	readonly palette = input<Palette>('none');
+
+	readonly state = input<'default' | 'loading' | 'error' | 'success'>('default');
+
 	/**
 	 * '' is the default value when you just set the `luButton` directive without a value attached to it.
 	 * We just make this explicit here.
 	 */
-	luButton: '' | 'outlined' | 'text' | 'text-invert' = '';
+	readonly luButton = input<'' | 'outlined' | 'AI' | 'AI-invert' | 'ghost' | 'ghost-invert' | 'text' | 'text-invert'>('');
 
-	#iconComponentRef?: ElementRef<HTMLElement>;
+	readonly iconComponentRef = contentChild<IconComponent, ElementRef<HTMLElement>>(IconComponent, { read: ElementRef });
 
-	@ContentChild(IconComponent, { read: ElementRef<HTMLElement> })
-	set iconComponentRef(ref: ElementRef<HTMLElement>) {
-		this.#iconComponentRef = ref;
-		this.updateClasses();
-	}
+	readonly classesConfig = computed(() => {
+		const config = {
+			[`mod-${this.size()}`]: !!this.size(),
+			[`mod-block`]: this.block(),
+			[`palette-${this.palette()}`]: !!this.palette(),
+			[`is-${this.state()}`]: !!this.state() && this.state() !== 'error',
+			['mod-onlyIcon']: this.iconOnly,
+			['mod-iconOnLeft']: this.iconOnLeft,
+			['mod-iconOnRight']: this.iconOnRight,
+			['mod-withIcon']: this.iconComponentRef() !== undefined && !this.disclosure() && !this.iconOnly,
+			['mod-critical']: this.critical() || this.delete(),
+			['mod-disclosure']: this.disclosure(),
+		};
+
+		if (this.luButton() !== '') {
+			if (this.luButton() === 'ghost-invert') {
+				config['mod-ghost'] = true;
+				config['mod-invert'] = true;
+			} else if (this.luButton() === 'AI-invert') {
+				config['mod-AI'] = true;
+				config['mod-invert'] = true;
+			} else {
+				config[`mod-${this.luButton()}`] = true;
+			}
+		}
+		return config;
+	});
 
 	private get iconOnly(): boolean {
 		const childNodes = Array.from(this.#elementRef?.nativeElement?.childNodes || []);
@@ -59,34 +79,36 @@ export class ButtonComponent implements OnChanges {
 		// ignore icon and comment
 		const noSpan =
 			childNodes.filter((node: HTMLElement) => {
-				return node.nodeName !== '#comment' && node.nodeName.toLowerCase() !== 'lu-icon' && !node?.className?.includes('u-mask');
+				return node.nodeName !== '#comment' && node.nodeName.toLowerCase() !== 'lu-icon' && !node?.className?.includes('mask');
 			}).length == 0;
-		return !!this.#iconComponentRef && noSpan && noText;
+		return !!this.iconComponentRef() && noSpan && noText;
 	}
 
-	ngOnChanges(): void {
-		this.updateClasses();
+	private get iconOnLeft(): boolean {
+		return this.iconComponentRef()?.nativeElement === this.#elementRef?.nativeElement?.firstChild;
 	}
 
-	updateClasses(): void {
-		const ngClassConfig = {
-			[`mod-${this.size}`]: !!this.size,
-			[`mod-block`]: this.block,
-			[`palette-${this.palette}`]: !!this.palette,
-			[`is-${this.state}`]: !!this.state,
-			['mod-onlyIcon']: this.iconOnly,
-			['mod-withIcon']: this.#iconComponentRef !== undefined,
-			['mod-delete']: this.delete,
-		};
+	private get iconOnRight(): boolean {
+		return this.iconComponentRef()?.nativeElement === this.#elementRef?.nativeElement?.lastChild;
+	}
 
-		if (this.luButton !== '') {
-			if (this.luButton === 'text-invert') {
-				ngClassConfig['mod-text'] = true;
-				ngClassConfig['mod-invert'] = true;
-			} else {
-				ngClassConfig[`mod-${this.luButton}`] = true;
+	constructor() {
+		ɵeffectWithDeps([this.state], (state) => {
+			if (state) {
+				this.triggerErrorIfNeeded();
 			}
+		});
+
+		ɵeffectWithDeps([this.classesConfig], (config) => {
+			if (config) {
+				this.#luClass.setState(config);
+			}
+		});
+	}
+
+	triggerErrorIfNeeded(): void {
+		if (this.state() === 'error') {
+			this.notifyError.set(true);
 		}
-		this.#luClass.setState(ngClassConfig);
 	}
 }

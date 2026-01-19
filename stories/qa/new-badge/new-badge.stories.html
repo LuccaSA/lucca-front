@@ -1,6 +1,29 @@
-<h1 class="demo-divider">New Badge</h1>
+<table class="demo-QAtable">
+	<tbody>
+		<tr>
+			<td></td>
+			<td>
+				<div class="demo-QAtable-list">HTML</div>
+			</td>
+			<td>
+				<div class="demo-QAtable-list">Angular</div>
+			</td>
+		</tr>
+		<tr>
+			<td>Default</td>
+			<td>
+				<div class="demo-QAtable-list">
+					<span class="newBadge">New</span>
+				</div>
+			</td>
+			<td>
+				<div class="demo-QAtable-list">
+					<lu-new-badge [label]="'New'" />
+				</div>
+			</td>
+		</tr>
+	</tbody>
+</table>
 
-<!-- Basics -->
-<section class="contentSection">
-	<span class="newBadge">New</span>
-</section>
+<!-- To tell the ui-diff tool that the page has finished rendering -->
+<span id="ready"></span>

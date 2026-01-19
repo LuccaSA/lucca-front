@@ -38,7 +38,7 @@ export abstract class ALuPopoverTarget implements ILuPopoverTarget {
 	set position(position: LuPopoverPosition | string) {
 		if (position !== 'above' && position !== 'below' && position !== 'after' && position !== 'before') {
 			throw Error(`LuPopoverPosition value must be 'above', 'below', 'before' or 'after'. Got "${position}".
-      Example: <lu-popover [position]="'before'" #popover="LuPopover"></lu-popover>`);
+      Example: <lu-popover [position]="'before'" #popover="LuPopover" />`);
 		}
 		this._position = position;
 		// this.setPositionClasses(this._position, this._alignment);
@@ -52,7 +52,7 @@ export abstract class ALuPopoverTarget implements ILuPopoverTarget {
 	set alignment(alignment: LuPopoverAlignment | string) {
 		if (alignment !== 'center' && alignment !== 'top' && alignment !== 'bottom' && alignment !== 'right' && alignment !== 'left') {
 			throw Error(`LuPopoverAlignment value must be 'top', 'bottom', 'right' or 'left'. Got "${alignment}".
-      Example: <lu-popover [position]="above" [alignment]="left" #popover="LuPopover"></lu-popover>`);
+      Example: <lu-popover [position]="above" [alignment]="left" #popover="LuPopover" />`);
 		}
 		this._alignment = alignment;
 		// this.setPositionClasses(this._position, this._alignment);

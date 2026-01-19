@@ -1,11 +1,8 @@
-@mixin vars($atRoot: 'without: rule') {
-	@at-root ($atRoot) {
-		:root {
-			--commons-navSide-width: 15rem;
-			--commons-navSide-compact-width: 7.5rem;
-			--commons-navSide-mobile-toggle-height: 3.5rem;
-		}
-	}
+@use '@lucca-front/scss/src/commons/utils/namespace';
+@use '@lucca-front/scss/src/commons/utils/media';
+
+@mixin vars($atRoot: namespace.$defaultAtRoot) {
+	// for this component some variables are placed in common
 
 	--components-navSide-offset-top: 0;
 	--components-navSide-padding-top: 0;
@@ -42,7 +39,7 @@
 	--components-navSide-bottom-section-palette-text: var(--palettes-neutral-0);
 	--components-navSide-bottom-section-palette-selected-bg: #9299b0;
 	--components-navSide-bottom-section-palette-selected-text: var(--palettes-neutral-0);
-	--components-navSide-bottom-section-palette-hovered-bg: #31395e;
+	--components-navSide-bottom-section-palette-hovered-bg: var(--palettes-navigation-700);
 	--components-navSide-bottom-section-palette-hovered-text: var(--palettes-neutral-0);
 	--components-navSide-bottom-section-palette-alert-color: #9299b0;
 	--components-navSide-bottom-section-palette-alert-text: var(--palettes-neutral-0);

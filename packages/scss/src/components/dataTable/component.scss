@@ -1,0 +1,170 @@
+@use '@lucca-front/icons/src/commons/utils/icon';
+
+@use '@lucca-front/scss/src/commons/utils/namespace';
+@use '@lucca-front/scss/src/commons/utils/a11y';
+
+@use '@lucca-front/scss/src/components/button/exports' as button;
+
+@mixin component($atRoot: namespace.$defaultAtRoot) {
+	display: table;
+	text-align: start;
+	inline-size: calc(100% + 1px);
+	block-size: calc(100% + 1px);
+	border-spacing: 0;
+	margin-inline-start: -1px;
+	margin-block-start: -1px;
+	table-layout: var(--components-dataTable-tableLayout);
+
+	@at-root ($atRoot) {
+		.dataTableWrapper {
+			border-radius: var(--components-dataTable-borderRadius);
+			border: 1px solid var(--commons-border-200);
+			overflow: auto;
+			contain: paint; // Fix overflow on webkit when table has scroll
+			background-color: var(--components-dataTable-cell-background);
+			display: block;
+			min-inline-size: var(--components-dataTable-minInlineSize);
+
+			&:focus-visible {
+				@include a11y.focusVisible;
+			}
+		}
+
+		.dataTableWrapper-pagination {
+			border-block-start: 1px solid var(--commons-border-200);
+			background-color: var(--components-dataTable-cell-background);
+			display: flex;
+			justify-content: flex-end;
+			position: sticky;
+			inset-block-end: 0;
+			z-index: 4;
+
+			> * {
+				position: sticky;
+				inset-inline-end: 0;
+			}
+
+			&:empty {
+				display: none;
+			}
+		}
+
+		.dataTable-head-row-cell {
+			color: var(--pr-t-color-text-subtle);
+			padding: var(--components-dataTable-cell-padding);
+			display: table-cell;
+			font-weight: var(--pr-t-font-fontWeight-regular);
+
+			.checkboxField {
+				margin-block-end: 0.125rem;
+			}
+		}
+
+		.dataTable-head {
+			display: table-header-group;
+			vertical-align: bottom;
+		}
+
+		.dataTable-body {
+			display: table-row-group;
+		}
+
+		.dataTable-foot {
+			display: table-footer-group;
+		}
+
+		.dataTable-head-row,
+		.dataTable-body-row,
+		.dataTable-foot-row {
+			display: var(--components-dataTable-row-display);
+		}
+
+		.dataTable-head-row-cell,
+		.dataTable-body-row-cell,
+		.dataTable-foot-row-cell {
+			display: table-cell;
+			box-shadow: var(--components-dataTable-cell-shadow);
+			background-color: var(--components-dataTable-cell-background);
+			text-align: var(--components-dataTable-cell-textAlign);
+			transition-property: background-color;
+			transition-duration: var(--commons-animations-durations-fast);
+			font-weight: var(--pr-t-font-fontWeight-regular);
+
+			&:first-child {
+				inline-size: var(--components-dataTable-cellFirst-width);
+
+				.checkboxField {
+					--component-checkboxField-top: 0;
+				}
+			}
+		}
+
+		.dataTable-body-row-cell,
+		.dataTable-foot-row-cell {
+			padding: var(--components-dataTable-cell-padding);
+			padding-inline-start: var(--components-dataTable-cell-paddingInlineStart);
+			vertical-align: middle;
+		}
+
+		.dataTable-head-row {
+			&:first-child {
+				.dataTable-head-row-cell {
+					--components-dataTable-cell-shadow: none;
+				}
+			}
+		}
+
+		.dataTable-body-row-cell {
+			vertical-align: var(--components-dataTable-cell-verticalAlign);
+		}
+
+		.dataTable-foot-row-cell {
+			font-weight: var(--pr-t-font-fontWeight-semibold);
+		}
+
+		.dataTable-body-row-cell-expand {
+			display: flex;
+			gap: var(--pr-t-spacings-100);
+			align-items: flex-start;
+			font-weight: var(--pr-t-font-fontWeight-semibold);
+		}
+
+		.dataTable-body-row-cell-expand-button.button {
+			vertical-align: top;
+			margin-left: calc(var(--pr-t-spacings-25) * -1);
+
+			.lucca-icon {
+				transform: rotate(var(--components-dataTable-expand-rotation));
+				transition-property: transform;
+				transition-duration: var(--commons-animations-durations-fast);
+			}
+		}
+
+		.dataTable-body-row-cell-drag.button {
+			@include button.S;
+			@include button.onlyIcon;
+			@include button.ghost;
+
+			--components-button-padding: var(--pr-t-spacings-50);
+			--components-button-color: var(--palettes-neutral-700);
+
+			cursor: move;
+			vertical-align: top;
+		}
+	}
+
+	.statusBadge,
+	.tag,
+	.avatar {
+		vertical-align: top;
+	}
+
+	.statusBadge,
+	.tag {
+		margin-block-start: var(--pr-t-spacings-25);
+	}
+
+	.avatarWrapper {
+		display: inline-flex;
+	}
+}

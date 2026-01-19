@@ -10,13 +10,14 @@
 			}
 
 			&:first-child {
-				.breadcrumbs-list-item-action {
+				// Second selector to get rid of breadcrumbs-list-item-action on angular component
+				.breadcrumbs-list-item-action, .breadcrumbs-list-item > a {
 					&::before {
 						@include icon.generate('arrow_left');
 
-						padding-right: var(--pr-t-spacings-50);
-						font-size: var(--sizes-XS-lineHeight);
-						line-height: var(--sizes-S-lineHeight);
+						padding-inline-end: var(--pr-t-spacings-50);
+						font-size: var(--pr-t-font-body-XS-lineHeight);
+						line-height: var(--pr-t-font-body-S-lineHeight);
 						text-decoration: none;
 						vertical-align: top;
 					}

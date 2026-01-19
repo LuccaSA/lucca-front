@@ -5,15 +5,15 @@
 @mixin component {
 	@include reset.button;
 
-	display: grid;
+	display: var(--components-clear-display);
 	grid-template-columns: 1fr;
 	grid-template-rows: 1fr;
 	grid-template-areas: 'main';
 	align-items: normal;
 	flex-shrink: 0;
-	width: var(--components-clear-size);
-	height: var(--components-clear-size);
-	border-radius: var(--commons-borderRadius-full);
+	inline-size: var(--components-clear-size);
+	block-size: var(--components-clear-size);
+	border-radius: var(--pr-t-border-radius-full);
 
 	&::before,
 	&::after {
@@ -22,7 +22,7 @@
 	}
 
 	&::before {
-		border-radius: var(--commons-borderRadius-full);
+		border-radius: var(--pr-t-border-radius-full);
 		background-color: var(--components-clear-background);
 	}
 
@@ -34,8 +34,8 @@
 	}
 
 	&:hover {
-		--components-clear-cross-color: var(--palettes-neutral-0);
-		--components-clear-background: var(--palettes-neutral-600);
+		--components-clear-cross-color: var(--palettes-0, var(--palettes-neutral-0));
+		--components-clear-background: var(--palettes-700, var(--palettes-neutral-700));
 	}
 
 	&:focus-visible {
@@ -43,10 +43,10 @@
 	}
 
 	&:active {
-		--components-clear-background: var(--palettes-neutral-800);
+		--components-clear-background: var(--palettes-900, var(--palettes-neutral-900));
 	}
 
-	//to prevent breaking change. lucca-icon is no longer needed.
+	// to prevent breaking change. lucca-icon is no longer needed.
 	.lucca-icon {
 		display: none;
 	}

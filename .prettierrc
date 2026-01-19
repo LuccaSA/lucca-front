@@ -5,7 +5,7 @@
 	"endOfLine": "auto",
 	"overrides": [
 		{
-			"files": [".component.html", ".page.html"],
+			"files": ["packages/ng/formly/**/*.html", "*.component.html", "*.page.html", "*.stories.html"],
 			"options": {
 				"parser": "angular"
 			}
@@ -13,7 +13,6 @@
 		{
 			"files": ["*.html"],
 			"options": {
-				"parser": "html",
 				"singleQuote": false
 			}
 		},
@@ -21,7 +20,8 @@
 			"files": ["*.ts"],
 			"options": {
 				"parser": "typescript",
-				"printWidth": 200
+				"printWidth": 200,
+				"singleQuote": true
 			}
 		}
 	]

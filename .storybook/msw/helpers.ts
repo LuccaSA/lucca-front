@@ -16,13 +16,13 @@ export function genericHandler<T, TRawParams extends Record<string, (param: stri
 		await delay(300);
 		const url = new URL(request.url);
 		let entities = baseResponse;
-		let allParams: Record<string, unknown> = {};
+		const allParams: Record<string, unknown> = {};
 
 		for (const [paramKey, parserFn] of Object.entries(parserByQueryParam)) {
 			if (!url.searchParams.has(paramKey)) {
 				continue;
 			}
-			allParams[paramKey] = parserFn(url.searchParams.get(paramKey)!);
+			allParams[paramKey] = parserFn(url.searchParams.get(paramKey));
 		}
 
 		for (const paramName of Object.keys(allParams)) {
@@ -71,4 +71,20 @@ export function applyFilter<T, TParam>(predicate: (item: T, filterValue: TParam)
 
 export function handleFieldsRoot<T>(count: number): (items: T[], params: { 'fields.root'?: string }) => { items: T[]; count?: number } {
 	return (items, { 'fields.root': fieldsRoot }) => ({ items, ...(fieldsRoot?.includes('count') ? { count } : {}) });
+}
+
+export function applyV3Fields<T>(count: number): (items: T[], params: { fields?: string }) => { data: { items: T[]; count?: number } } {
+	return (items, params) => {
+		const fields = params['fields']?.split(',') ?? [];
+		const needCount = fields.includes('collection.count');
+		const regularFields = fields.filter((f) => f !== 'collection.count');
+
+		return {
+			data: {
+				// eslint-disable-next-line @typescript-eslint/no-unsafe-assignment
+				items: regularFields.length ? items.map((item) => regularFields.reduce((acc, field) => ({ ...acc, [field]: item[field] }), {} as T)) : needCount ? [] : items,
+				...(needCount ? { count } : {}),
+			},
+		};
+	};
 }

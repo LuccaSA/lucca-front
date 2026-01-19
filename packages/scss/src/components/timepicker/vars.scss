@@ -1,9 +1,8 @@
 @mixin vars {
-	--components-timepicker-border: var(--palettes-neutral-300);
-	--components-timepicker-background: var(--palettes-neutral-0);
-	--components-timepicker-color: var(--palettes-neutral-800);
-	--components-timepicker-fontSize: var(--sizes-M-fontSize);
-	--components-timepicker-lineHeight: var(--sizes-M-lineHeight);
+	--components-timepicker-border: var(--pr-t-color-input-border);
+	--components-timepicker-background: var(--pr-t-color-input-background);
+	--components-timepicker-color: var(--pr-t-color-input-text);
+	--components-timepicker-font: var(--pr-t-font-body-M);
 	--components-timepicker-input-height: 2rem;
 	--components-timepicker-input-width: 1.5rem;
 	--components-timepicker-padding: 0;

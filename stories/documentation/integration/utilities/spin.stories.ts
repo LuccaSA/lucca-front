@@ -1,4 +1,4 @@
-import { Meta, StoryFn } from '@storybook/angular';
+import { Meta, StoryObj } from '@storybook/angular';
 
 interface SpinStory {}
 
@@ -11,22 +11,24 @@ function getTemplate(args: SpinStory): string {
 	<input class="textfield-input" type="number" placeholder="Avec spin" />
 </label>
 <label class="textfield">
-	<input class="textfield-input u-noSpinButtons" type="number" placeholder="Sans spin" />
+	<input class="textfield-input pr-u-noSpinButtons" type="number" placeholder="Sans spin" />
 </label>`;
 }
 
-const Template: StoryFn<SpinStory> = (args) => ({
+const Template = (args: SpinStory) => ({
 	props: args,
 	template: getTemplate(args),
 	styles: [
 		`
 		.textfield {
-			float: left;
-			margin-right: 1rem;
+			float: inline-start;
+			margin-inline-end: 1rem;
 		}
 		}`,
 	],
 });
 
-export const Spin = Template.bind({});
-Spin.args = {};
+export const Spin: StoryObj<SpinStory> = {
+	args: {},
+	render: Template,
+};

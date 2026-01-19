@@ -7,30 +7,30 @@
 
 	background-color: var(--components-button-backgroundColor);
 	box-shadow: var(--components-button-boxShadow);
-	border-radius: var(--commons-borderRadius-M);
-	line-height: var(--components-button-line-height);
+	border-radius: var(--components-button-borderRadius);
 	padding: var(--components-button-padding);
 	transition-property: background-color, color, border-color, box-shadow;
 	transition-duration: var(--commons-animations-durations-fast);
-	width: var(--components-button-width);
-	min-width: var(--components-button-minWidth);
-	font-size: var(--components-button-font-size);
+	inline-size: var(--components-button-width);
+	min-inline-size: var(--components-button-minWidth);
+	font: var(--components-button-font);
+	font-size: var(--components-button-font-size); // Deprecated
+	line-height: var(--components-button-line-height); // Deprecated
+	font-weight: var(--pr-t-font-fontWeight-semibold);
 	gap: var(--components-button-gap);
 	pointer-events: var(--components-button-pointerEvents);
 	user-select: var(--components-button-userSelect);
 	opacity: var(--components-button-opacity);
 	cursor: var(--components-button-cursor);
 	transition-timing-function: ease;
-	font-family: inherit;
 	display: inline-flex;
 	align-items: center;
 	justify-content: center;
 	position: relative;
 	text-decoration: none;
 	vertical-align: middle;
-	white-space: nowrap;
+	text-wrap: balance;
 	text-align: center;
-	font-weight: 600;
 	border: 0;
 
 	&,
@@ -50,21 +50,22 @@
 	// .mod-outline is deprecated
 	&:not(.mod-outlined, .mod-outline) {
 		.numericBadge {
-			@include numericBadge.product;
+			@include numericBadge.inherit;
 		}
 	}
 
 	&:hover {
 		--components-button-color: var(--palettes-0, var(--palettes-text, var(--palettes-product-0)));
-		--components-button-backgroundColor: var(--palettes-600, var(--palettes-product-600));
+		--components-button-backgroundColor: var(--palettes-800, var(--palettes-product-800));
 	}
 
 	&:focus-visible {
-		@include a11y.focusVisible;
+		// Radius needed to override focused link / a
+		@include a11y.focusVisible($borderRadius: var(--components-button-borderRadius));
 	}
 
 	&:active {
-		--components-button-backgroundColor: var(--palettes-800, var(--palettes-product-800));
+		--components-button-backgroundColor: var(--palettes-900, var(--palettes-product-900));
 	}
 
 	&:disabled {

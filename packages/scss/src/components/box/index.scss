@@ -1,21 +1,31 @@
 @use 'exports' as *;
 
 .box {
-	@include vars;
-	@include component;
-
-	// .mod-grey is deprecated
-	&.mod-neutral,
-	&.mod-grey {
-		@include neutral;
+	@layer components {
+		@include vars;
+		@include component;
 	}
 
-	&.mod-withArrow {
-		@include withArrow;
-	}
+	@layer mods {
+		// .mod-grey is deprecated
+		&.mod-neutral,
+		&.mod-grey {
+			@include neutral;
+		}
 
-	// legacy
-	&.mod-toggle {
-		@include toggle;
+		&.mod-withArrow {
+			@include withArrow;
+		}
+
+		// .mod-toggle is deprecated
+		&.mod-toggle {
+			@include toggle;
+		}
+	}
+}
+
+.box-arrow {
+	@layer components {
+		@include arrow;
 	}
 }

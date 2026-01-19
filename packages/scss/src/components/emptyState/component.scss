@@ -1,6 +1,8 @@
-@use '@lucca-front/scss/src/components/title/exports' as title;
+@use '@lucca-front/scss/src/commons/config';
+@use '@lucca-front/scss/src/commons/utils/media';
+@use '@lucca-front/scss/src/commons/utils/namespace';
 
-@mixin component($atRoot: 'without: rule') {
+@mixin component($atRoot: namespace.$defaultAtRoot) {
 	display: flex;
 	flex-direction: column;
 	flex-grow: 1;
@@ -12,32 +14,44 @@
 			display: flex;
 			flex-grow: 1;
 			justify-content: center;
-			max-width: var(--components-emptyState-max-width);
+			max-inline-size: var(--components-emptyState-container-maxWidth);
+			inset-inline-start: var(--components-emptyState-container-left);
 			padding: 0;
-			width: 100%;
+			inline-size: 100%;
+			position: sticky;
+
+			.container & {
+				--components-emptyState-container-maxWidth: none;
+				--components-emptyState-container-left: auto;
+			}
 		}
 
 		.emptyState-content {
-			border-radius: var(--commons-borderRadius-L);
-			max-width: 100%;
+			border-radius: var(--pr-t-border-radius-structure);
+			max-inline-size: 100%;
 			padding: var(--pr-t-spacings-50);
-			width: calc(25rem + var(--pr-t-spacings-50) * 2); // content max width
+			inline-size: calc(25rem + var(--pr-t-spacings-50) * 2); // content max width
 		}
 
 		.emptyState-content-icon {
 			--components-emptyState-icon-background-color: var(--palettes-100, var(--palettes-product-100));
 			--components-emptyState-icon-action-color: var(--palettes-600, var(--palettes-brand-600));
+
+			display: inline-flex;
+			margin-block-end: var(--pr-t-spacings-200);
 		}
 
 		.emptyState-content-text {
-			padding: 0 var(--pr-t-spacings-50);
+			padding-inline: var(--pr-t-spacings-50);
 		}
 
 		.emptyState-content-heading {
-			@include title.component;
-			@include title.h3;
+			font: var(--pr-t-font-heading-3);
+			margin-block-end: var(--pr-t-spacings-50);
 
-			margin-bottom: 0;
+			@if config.$deprecatedSpacings {
+				margin-block-end: 0;
+			}
 		}
 
 		.emptyState-content-description {
@@ -47,11 +61,16 @@
 		.emptyState-actions {
 			display: flex;
 			flex-wrap: wrap;
-			margin-top: var(--pr-t-spacings-200);
-			gap: var(--pr-t-spacings-100);
+			align-items: center;
+			margin-block-start: var(--pr-t-spacings-200);
+			gap: var(--pr-t-spacings-200);
 
 			.button {
 				margin: 0;
+			}
+
+			&:empty {
+				display: none;
 			}
 		}
 	}

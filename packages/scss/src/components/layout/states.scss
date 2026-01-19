@@ -1,26 +1,17 @@
 @use '@lucca-front/scss/src/commons/utils/media';
+@use '@lucca-front/scss/src/commons/utils/overflow';
 
 @mixin overlay {
-	&,
-	body {
-		touch-action: none;
-		overscroll-behavior: none;
-		-webkit-overflow-scrolling: auto;
-	}
-
-	body {
-		overflow: hidden !important;
-	}
+	@include overflow.scrollblock;
 }
 
 @mixin active {
 	@include media.max('S') {
-		top: var(--commons-banner-height);
-		height: calc(100vh - var(--commons-banner-height));
+		inset-block-start: var(--commons-banner-height);
+		block-size: calc(100vh - var(--commons-banner-height));
 		background-color: var(--pr-t-elevation-surface-raised);
 		position: fixed;
 		overflow: auto;
-		left: 0;
-		right: 0;
+		inset-inline: 0;
 	}
 }

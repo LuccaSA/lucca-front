@@ -1,4 +1,4 @@
-import { Meta, StoryFn } from '@storybook/angular';
+import { Meta, StoryObj } from '@storybook/angular';
 
 interface NotchBoxBasicStory {
 	direction: string;
@@ -24,10 +24,10 @@ function getTemplate(args: NotchBoxBasicStory): string {
 		<div class="notchBox-wrapper">
 			<div class="notchBox-wrapper-content">
 				<strong>Basic use of notchBox</strong><br/>
-				Lorem ipsum dolor sit amet, consectetur adipiscing elit. Maecenas vehicula lacinia nisl in maximus. 
-				Maecenas nec enim non nulla faucibus posuere.Lorem ipsum dolor sit amet, consectetur adipiscing elit. 
-				Maecenas vehicula lacinia nisl in maximus. Maecenas nec enim non nulla faucibus posuere.Lorem ipsum dolor sit amet, consectetur adipiscing elit. Maecenas vehicula lacinia nisl in maximus. 
-				Maecenas nec enim non nulla faucibus posuere.Lorem ipsum dolor sit amet, consectetur adipiscing elit. 
+				Lorem ipsum dolor sit amet, consectetur adipiscing elit. Maecenas vehicula lacinia nisl in maximus.
+				Maecenas nec enim non nulla faucibus posuere.Lorem ipsum dolor sit amet, consectetur adipiscing elit.
+				Maecenas vehicula lacinia nisl in maximus. Maecenas nec enim non nulla faucibus posuere.Lorem ipsum dolor sit amet, consectetur adipiscing elit. Maecenas vehicula lacinia nisl in maximus.
+				Maecenas nec enim non nulla faucibus posuere.Lorem ipsum dolor sit amet, consectetur adipiscing elit.
 				Maecenas vehicula lacinia nisl in maximus. Maecenas nec enim non nulla faucibus posuere.
 				Lorem ipsum dolor sit amet, consectetur adipiscing elit. Maecenas vehicula lacinia nisl in maximus.
 				Lorem ipsum dolor sit amet, consectetur adipiscing elit. Maecenas vehicula lacinia nisl in maximus.
@@ -38,7 +38,7 @@ function getTemplate(args: NotchBoxBasicStory): string {
 	`;
 }
 
-const Template: StoryFn<NotchBoxBasicStory> = (args) => ({
+const Template = (args: NotchBoxBasicStory) => ({
 	props: args,
 	template: getTemplate(args),
 	styles: [
@@ -49,5 +49,7 @@ const Template: StoryFn<NotchBoxBasicStory> = (args) => ({
 	],
 });
 
-export const Basic = Template.bind({});
-Basic.args = { direction: 'mod-notchTop' };
+export const Basic: StoryObj<NotchBoxBasicStory> = {
+	args: { direction: 'mod-notchTop' },
+	render: Template,
+};

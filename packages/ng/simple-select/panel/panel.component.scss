@@ -1,3 +1,25 @@
-@import '_definitions';
-@include optionSearcherStyle;
-@include optionPlaceholderStyle;
+@use "@lucca-front/scss/src/components/button/exports" as button;
+@use '../../styles/definitions';
+
+@include definitions.optionSearcherStyle;
+@include definitions.optionPlaceholderStyle;
+
+.addOption {
+	@layer components {
+		@include button.vars;
+		@include button.component;
+		@include button.block;
+		@include button.ghost;
+
+		& {
+			justify-content: left;
+		}
+	}
+
+	@layer mods {
+		&.is-highlighted {
+			--components-button-color: var(--palettes-700, var(--palettes-neutral-700));
+			--components-button-backgroundColor: var(--palettes-100, var(--palettes-neutral-100));
+		}
+	}
+}

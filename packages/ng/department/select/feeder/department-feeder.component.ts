@@ -3,14 +3,15 @@ import { ALuOnOpenSubscriber, ILuOnOpenSubscriber, ILuTree } from '@lucca-front/
 import { ALuTreeOptionOperator, ILuTreeOptionOperator } from '@lucca-front/ng/option';
 import { Observable, Subject } from 'rxjs';
 import { ILuDepartment } from '../../department.model';
-import { ALuDepartmentService, LuDepartmentV3Service } from '../../service/index';
+import { ALuDepartmentService, LuDepartmentV4Service } from '../../service/index';
 
+/**
+ * @deprecated
+ */
 @Component({
 	selector: 'lu-department-feeder',
 	template: '',
-	styleUrls: [],
 	changeDetection: ChangeDetectionStrategy.OnPush,
-	standalone: true,
 	providers: [
 		{
 			provide: ALuTreeOptionOperator,
@@ -19,7 +20,7 @@ import { ALuDepartmentService, LuDepartmentV3Service } from '../../service/index
 		},
 		{
 			provide: ALuDepartmentService,
-			useClass: LuDepartmentV3Service,
+			useClass: LuDepartmentV4Service,
 		},
 		{
 			provide: ALuOnOpenSubscriber,
@@ -32,7 +33,7 @@ export class LuDepartmentFeederComponent extends ALuTreeOptionOperator<ILuDepart
 	inOptions$: Observable<ILuTree<ILuDepartment>[]>;
 	outOptions$: Observable<ILuTree<ILuDepartment>[]>;
 	protected _out$ = new Subject<ILuTree<ILuDepartment>[]>();
-	protected _service: LuDepartmentV3Service;
+	protected _service: LuDepartmentV4Service;
 	@Input() set appInstanceId(appInstanceId: number | string) {
 		this._service.appInstanceId = appInstanceId;
 	}
@@ -41,15 +42,19 @@ export class LuDepartmentFeederComponent extends ALuTreeOptionOperator<ILuDepart
 	}
 
 	@Input() set filters(filters: string[]) {
-		this._service.filters = filters;
+		this._service.filters = filters ?? [];
+	}
+
+	@Input() set uniqueOperation(uniqueOperation: number) {
+		this._service.uniqueOperation = uniqueOperation;
 	}
 
 	constructor(
 		@Inject(ALuDepartmentService)
 		@Optional()
 		@SkipSelf()
-		hostService: LuDepartmentV3Service,
-		@Inject(ALuDepartmentService) @Self() selfService: LuDepartmentV3Service,
+		hostService: LuDepartmentV4Service,
+		@Inject(ALuDepartmentService) @Self() selfService: LuDepartmentV4Service,
 	) {
 		super();
 		this._service = hostService || selfService;

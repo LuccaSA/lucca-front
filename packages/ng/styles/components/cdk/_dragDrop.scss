@@ -3,13 +3,32 @@
 .cdk-drag-placeholder {
 	box-shadow: form.fakeBorderOverlay(var(--palettes-neutral-200));
 	background-color: var(--palettes-neutral-100);
+
+	&.sortableList-item {
+		box-shadow: none;
+	}
+
+	&.dataTable-body-row {
+		box-shadow: none;
+
+		> .dataTable-body-row-cell {
+			visibility: visible;
+			background-color: var(--palettes-neutral-100);
+
+			* {
+				visibility: hidden;
+				color: transparent;
+			}
+		}
+	}
+
 	* {
-		opacity: 0;
+		visibility: hidden;
+		color: transparent;
 	}
 }
 
-.cdk-drag-handle,
-.cdk-drag-placeholder {
+.cdk-drag-handle {
 	cursor: move;
 }
 
@@ -18,25 +37,29 @@
 }
 
 .dragDrop-list {
-	border-radius: var(--commons-borderRadius-M);
+	border-radius: var(--pr-t-border-radius-default);
 }
 
 .dragDrop-item {
 	cursor: grab;
+
 	&:not(.cdk-drag-placeholder) {
 		&:first-of-type {
-			border-top-left-radius: var(--commons-borderRadius-M);
-			border-top-right-radius: var(--commons-borderRadius-M);
+			border-start-start-radius: var(--pr-t-border-radius-default);
+			border-start-end-radius: var(--pr-t-border-radius-default);
 		}
+
 		&:last-of-type {
-			border-bottom-left-radius: var(--commons-borderRadius-M);
-			border-bottom-right-radius: var(--commons-borderRadius-M);
+			border-end-start-radius: var(--pr-t-border-radius-default);
+			border-end-end-radius: var(--pr-t-border-radius-default);
 		}
 	}
+
 	&:active {
 		cursor: grabbing;
 	}
 }
+
 .dragDrop-item-content {
 	padding: var(--pr-t-spacings-100);
 }
@@ -44,17 +67,29 @@
 .cdk-drag-preview {
 	z-index: 9999 !important;
 	box-sizing: border-box;
-	box-shadow: form.fakeBorderOverlay(var(--palettes-product-200));
+	box-shadow: 0 0 0 1px var(--palettes-product-200);
 	background-color: var(--palettes-product-50);
-	border-radius: var(--commons-borderRadius-M);
+	border-radius: var(--pr-t-border-radius-default);
+	rotate: 1deg;
 	cursor: grabbing;
+
+	&.dataTable-body-row {
+		display: table;
+
+		.dataTable-body-row-cell {
+			--components-dataTable-cell-background: transparent;
+			--components-dataTable-cell-shadow: none;
+		}
+	}
 }
 
 .cdk-drop-list-dragging {
 	.dragDrop-item {
 		cursor: grabbing;
 	}
+
 	.cdk-drag:not(.cdk-drag-placeholder) {
 		transition: transform 250ms cubic-bezier(0, 0, 0.2, 1);
 	}
 }
+

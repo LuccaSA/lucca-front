@@ -1,526 +1,731 @@
-<section class="contentSection">
-	<h2>Sizes</h2>
-
-	<div class="form-field pr-u-marginBottom100">
-		<label class="formLabel" id="fieldSizelabel" for="fieldSize">
-			Label<sup class="formLabel-required" aria-hidden="true">*</sup>
-			<span class="formLabel-info">
-				<span aria-hidden="true" class="lucca-icon icon-signHelp"></span>
-				<span class="u-mask">?</span>
-			</span>
-		</label>
-		<div class="textField">
-			<div class="textField-input">
-				<input
-					type="text"
-					id="fieldSize"
-					class="textField-input-value"
-					aria-labelledby="fieldSizelabel"
-					aria-describedby="fieldSizeMessage"
-					placeholder="Placeholder"
-					aria-invalid="false"
-				/>
-			</div>
-		</div>
-		<div class="inlineMessage" id="fieldSizeMessage"><span aria-hidden="true" class="lucca-icon"></span>Helper text</div>
-	</div>
-
-	<div class="form-field mod-S pr-u-marginBottom100">
-		<label class="formLabel" id="fieldSlabel" for="fieldS">
-			Label<sup class="formLabel-required" aria-hidden="true">*</sup
-			><span class="formLabel-info"><span aria-hidden="true" class="lucca-icon icon-signHelp"></span><span class="u-mask">?</span></span>
-		</label>
-		<div class="textField">
-			<div class="textField-input">
-				<input
-					type="text"
-					id="fieldS"
-					class="textField-input-value"
-					aria-labelledby="fieldSlabel"
-					aria-describedby="fieldSmessage"
-					placeholder="Placeholder"
-					aria-invalid="false"
-				/>
-			</div>
-		</div>
-		<div class="inlineMessage" id="fieldSmessage"><span aria-hidden="true" class="lucca-icon"></span>Helper text</div>
-	</div>
-
-	<div class="form-field mod-XS pr-u-marginBottom100">
-		<label class="formLabel" id="fieldXSlabel" for="fieldXS">
-			Label<sup class="formLabel-required" aria-hidden="true">*</sup
-			><span class="formLabel-info"><span aria-hidden="true" class="lucca-icon icon-signHelp"></span><span class="u-mask">?</span></span>
-		</label>
-		<div class="textField">
-			<div class="textField-input">
-				<input
-					type="text"
-					id="fieldXS"
-					class="textField-input-value"
-					aria-labelledby="fieldXSlabel"
-					aria-describedby="fieldXSmessage"
-					placeholder="Placeholder"
-					aria-invalid="false"
-				/>
-			</div>
-		</div>
-		<div class="inlineMessage" id="fieldXSmessage"><span aria-hidden="true" class="lucca-icon"></span>Helper text</div>
-	</div>
-
-	<h2>Search / Affix</h2>
-
-	<div class="form-field pr-u-marginBottom300">
-		<label class="formLabel" id="fieldSearchlabel" for="fieldSearch">
-			Label<sup class="formLabel-required" aria-hidden="true">*</sup
-			><span class="formLabel-info"><span aria-hidden="true" class="lucca-icon icon-signHelp"></span><span class="u-mask">?</span></span>
-		</label>
-		<div class="textField">
-			<div class="textField-input">
-				<input
-					type="text"
-					id="fieldSearch"
-					class="textField-input-value"
-					aria-labelledby="fieldSearchlabel"
-					placeholder="Placeholder"
-					aria-invalid="false"
-					value="Value"
-				/>
-				<div class="textField-input-affix">
-					<button type="button" class="textField-input-affix-clear clear">
-						<span class="u-mask">Vider ce champ</span>
-					</button>
-					<span aria-hidden="true" class="textField-input-affix-icon lucca-icon icon-searchMagnifyingGlass"></span>
+<table class="demo-QAtable">
+	<tbody>
+		<tr>
+			<td>Default</td>
+			<td>
+				<div class="demo-QAtable-list">
+					<div class="form-field">
+						<label class="formLabel" id="fieldlabel" for="field">
+							Label<sup class="formLabel-required" aria-hidden="true">*</sup>
+							<span class="formLabel-info">
+								<span aria-hidden="true" class="lucca-icon icon-signHelp"></span>
+								<span class="pr-u-mask">?</span>
+							</span>
+						</label>
+						<div class="textField">
+							<div class="textField-input">
+								<input
+									type="text"
+									id="field"
+									class="textField-input-value"
+									aria-labelledby="fieldlabel"
+									aria-describedby="fieldMessage"
+									placeholder="Placeholder"
+									aria-invalid="false"
+								/>
+							</div>
+						</div>
+						<div class="inlineMessage" id="fieldMessage">
+							<span aria-hidden="true" class="lucca-icon inlineMessage-statusIcon"></span>
+							<p class="inlineMessage-content">Helper text</p>
+						</div>
+					</div>
 				</div>
-			</div>
-		</div>
-	</div>
+			</td>
+		</tr>
+		<tr>
+			<td>Sizes</td>
+			<td>
+				<div class="demo-QAtable-list">
+					<div class="form-field">
+						<label class="formLabel" id="fieldSizelabel" for="fieldSize">
+							Label<sup class="formLabel-required" aria-hidden="true">*</sup>
+							<span class="formLabel-info">
+								<span aria-hidden="true" class="lucca-icon icon-signHelp"></span>
+								<span class="pr-u-mask">?</span>
+							</span>
+						</label>
+						<div class="textField">
+							<div class="textField-input">
+								<input
+									type="text"
+									id="fieldSize"
+									class="textField-input-value"
+									aria-labelledby="fieldSizelabel"
+									aria-describedby="fieldSizeMessage"
+									placeholder="Placeholder"
+									aria-invalid="false"
+								/>
+							</div>
+						</div>
+						<div class="inlineMessage" id="fieldSizeMessage">
+							<span aria-hidden="true" class="lucca-icon inlineMessage-statusIcon"></span>
+							<p class="inlineMessage-content">Helper text</p>
+						</div>
+					</div>
 
-	<div class="form-field mod-S pr-u-marginBottom300">
-		<label class="formLabel" id="fieldSearchXSlabel" for="fieldSearchXS">
-			Label<sup class="formLabel-required" aria-hidden="true">*</sup
-			><span class="formLabel-info"><span aria-hidden="true" class="lucca-icon icon-signHelp"></span><span class="u-mask">?</span></span>
-		</label>
-		<div class="textField">
-			<div class="textField-input">
-				<input
-					type="text"
-					id="fieldSearchXS"
-					class="textField-input-value"
-					aria-labelledby="fieldSearchXSlabel"
-					placeholder="Placeholder"
-					aria-invalid="false"
-					value="Value"
-				/>
-				<div class="textField-input-affix">
-					<button type="button" class="textField-input-affix-clear clear">
-						<span class="u-mask">Vider ce champ</span>
-					</button>
-					<span aria-hidden="true" class="textField-input-affix-icon lucca-icon icon-searchMagnifyingGlass"></span>
+					<div class="form-field mod-S">
+						<label class="formLabel" id="fieldSlabel" for="fieldS">
+							Label<sup class="formLabel-required" aria-hidden="true">*</sup
+							><span class="formLabel-info"
+								><span aria-hidden="true" class="lucca-icon icon-signHelp"></span><span class="pr-u-mask">?</span></span
+							>
+						</label>
+						<div class="textField">
+							<div class="textField-input">
+								<input
+									type="text"
+									id="fieldS"
+									class="textField-input-value"
+									aria-labelledby="fieldSlabel"
+									aria-describedby="fieldSmessage"
+									placeholder="Placeholder"
+									aria-invalid="false"
+								/>
+							</div>
+						</div>
+						<div class="inlineMessage" id="fieldSmessage">
+							<span aria-hidden="true" class="lucca-icon inlineMessage-statusIcon"></span>
+							<p class="inlineMessage-content">Helper text</p>
+						</div>
+					</div>
+
+					<div class="form-field mod-XS">
+						<label class="formLabel" id="fieldXSlabel" for="fieldXS">
+							Label<sup class="formLabel-required" aria-hidden="true">*</sup
+							><span class="formLabel-info"
+								><span aria-hidden="true" class="lucca-icon icon-signHelp"></span><span class="pr-u-mask">?</span></span
+							>
+						</label>
+						<div class="textField">
+							<div class="textField-input">
+								<input
+									type="text"
+									id="fieldXS"
+									class="textField-input-value"
+									aria-labelledby="fieldXSlabel"
+									aria-describedby="fieldXSmessage"
+									placeholder="Placeholder"
+									aria-invalid="false"
+								/>
+							</div>
+						</div>
+						<div class="inlineMessage" id="fieldXSmessage">
+							<span aria-hidden="true" class="lucca-icon inlineMessage-statusIcon"></span>
+							<p class="inlineMessage-content">Helper text</p>
+						</div>
+					</div>
 				</div>
-			</div>
-		</div>
-	</div>
+			</td>
+		</tr>
+		<tr>
+			<td>Search / Affix</td>
+			<td>
+				<div class="demo-QAtable-list">
+					<div class="form-field">
+						<label class="formLabel" id="fieldSearchlabel" for="fieldSearch">
+							Label<sup class="formLabel-required" aria-hidden="true">*</sup
+							><span class="formLabel-info"
+								><span aria-hidden="true" class="lucca-icon icon-signHelp"></span><span class="pr-u-mask">?</span></span
+							>
+						</label>
+						<div class="textField">
+							<div class="textField-input">
+								<input
+									type="text"
+									id="fieldSearch"
+									class="textField-input-value"
+									aria-labelledby="fieldSearchlabel"
+									placeholder="Placeholder"
+									aria-invalid="false"
+									value="Value"
+								/>
+								<div class="textField-input-affix">
+									<button type="button" class="textField-input-affix-clear clear">
+										<span class="pr-u-mask">Vider ce champ</span>
+									</button>
+									<span aria-hidden="true" class="textField-input-affix-icon lucca-icon icon-searchMagnifyingGlass"></span>
+								</div>
+							</div>
+						</div>
+					</div>
 
-	<div class="form-field mod-XS pr-u-marginBottom300">
-		<label class="formLabel" id="fieldSearchXSlabel" for="fieldSearchXS">
-			Label<sup class="formLabel-required" aria-hidden="true">*</sup
-			><span class="formLabel-info"><span aria-hidden="true" class="lucca-icon icon-signHelp"></span><span class="u-mask">?</span></span>
-		</label>
-		<div class="textField">
-			<div class="textField-input">
-				<input
-					type="text"
-					id="fieldSearchXS"
-					class="textField-input-value"
-					aria-labelledby="fieldSearchXSlabel"
-					placeholder="Placeholder"
-					aria-invalid="false"
-					value="Value"
-				/>
-				<div class="textField-input-affix">
-					<button type="button" class="textField-input-affix-clear clear">
-						<span class="u-mask">Vider ce champ</span>
-					</button>
-					<span aria-hidden="true" class="textField-input-affix-icon lucca-icon icon-searchMagnifyingGlass"></span>
+					<div class="form-field mod-S">
+						<label class="formLabel" id="fieldSearchXSlabel" for="fieldSearchXS">
+							Label<sup class="formLabel-required" aria-hidden="true">*</sup
+							><span class="formLabel-info"
+								><span aria-hidden="true" class="lucca-icon icon-signHelp"></span><span class="pr-u-mask">?</span></span
+							>
+						</label>
+						<div class="textField">
+							<div class="textField-input">
+								<input
+									type="text"
+									id="fieldSearchXS"
+									class="textField-input-value"
+									aria-labelledby="fieldSearchXSlabel"
+									placeholder="Placeholder"
+									aria-invalid="false"
+									value="Value"
+								/>
+								<div class="textField-input-affix">
+									<button type="button" class="textField-input-affix-clear clear">
+										<span class="pr-u-mask">Vider ce champ</span>
+									</button>
+									<span aria-hidden="true" class="textField-input-affix-icon lucca-icon icon-searchMagnifyingGlass"></span>
+								</div>
+							</div>
+						</div>
+					</div>
+
+					<div class="form-field mod-XS">
+						<label class="formLabel" id="fieldSearchXSlabel" for="fieldSearchXS">
+							Label<sup class="formLabel-required" aria-hidden="true">*</sup
+							><span class="formLabel-info"
+								><span aria-hidden="true" class="lucca-icon icon-signHelp"></span><span class="pr-u-mask">?</span></span
+							>
+						</label>
+						<div class="textField">
+							<div class="textField-input">
+								<input
+									type="text"
+									id="fieldSearchXS"
+									class="textField-input-value"
+									aria-labelledby="fieldSearchXSlabel"
+									placeholder="Placeholder"
+									aria-invalid="false"
+									value="Value"
+								/>
+								<div class="textField-input-affix">
+									<button type="button" class="textField-input-affix-clear clear">
+										<span class="pr-u-mask">Vider ce champ</span>
+									</button>
+									<span aria-hidden="true" class="textField-input-affix-icon lucca-icon icon-searchMagnifyingGlass"></span>
+								</div>
+							</div>
+						</div>
+					</div>
 				</div>
-			</div>
-		</div>
-	</div>
+			</td>
+		</tr>
+		<tr>
+			<td>Clear</td>
+			<td>
+				<div class="demo-QAtable-list">
+					<div class="form-field">
+						<label class="formLabel" id="fieldClearlabel" for="fieldClear">
+							Label<sup class="formLabel-required" aria-hidden="true">*</sup
+							><span class="formLabel-info"
+								><span aria-hidden="true" class="lucca-icon icon-signHelp"></span><span class="pr-u-mask">?</span></span
+							>
+						</label>
+						<div class="textField">
+							<div class="textField-input">
+								<input
+									type="text"
+									id="fieldClear"
+									class="textField-input-value"
+									aria-labelledby="fieldClearlabel"
+									placeholder="Placeholder"
+									aria-invalid="false"
+									value="Value"
+								/>
+								<div class="textField-input-affix">
+									<button type="button" class="textField-input-affix-clear clear">
+										<span class="pr-u-mask">Vider ce champ</span>
+									</button>
+								</div>
+							</div>
+						</div>
+					</div>
 
-	<h2>Clear</h2>
+					<div class="form-field mod-S">
+						<label class="formLabel" id="fieldClearSlabel" for="fieldClearS">
+							Label<sup class="formLabel-required" aria-hidden="true">*</sup
+							><span class="formLabel-info"
+								><span aria-hidden="true" class="lucca-icon icon-signHelp"></span><span class="pr-u-mask">?</span></span
+							>
+						</label>
+						<div class="textField">
+							<div class="textField-input">
+								<input
+									type="text"
+									id="fieldClearS"
+									class="textField-input-value"
+									aria-labelledby="fieldClearSlabel"
+									placeholder="Placeholder"
+									aria-invalid="false"
+									value="Value"
+								/>
+								<div class="textField-input-affix">
+									<button type="button" class="textField-input-affix-clear clear">
+										<span class="pr-u-mask">Vider ce champ</span>
+									</button>
+								</div>
+							</div>
+						</div>
+					</div>
 
-	<div class="form-field pr-u-marginBottom300">
-		<label class="formLabel" id="fieldClearlabel" for="fieldClear">
-			Label<sup class="formLabel-required" aria-hidden="true">*</sup
-			><span class="formLabel-info"><span aria-hidden="true" class="lucca-icon icon-signHelp"></span><span class="u-mask">?</span></span>
-		</label>
-		<div class="textField">
-			<div class="textField-input">
-				<input
-					type="text"
-					id="fieldClear"
-					class="textField-input-value"
-					aria-labelledby="fieldClearlabel"
-					placeholder="Placeholder"
-					aria-invalid="false"
-					value="Value"
-				/>
-				<div class="textField-input-affix">
-					<button type="button" class="textField-input-affix-clear clear">
-						<span class="u-mask">Vider ce champ</span>
-					</button>
+					<div class="form-field mod-XS">
+						<label class="formLabel" id="fieldClearXSlabel" for="fieldClear">
+							Label<sup class="formLabel-required" aria-hidden="true">*</sup
+							><span class="formLabel-info"
+								><span aria-hidden="true" class="lucca-icon icon-signHelp"></span><span class="pr-u-mask">?</span></span
+							>
+						</label>
+						<div class="textField">
+							<div class="textField-input">
+								<input
+									type="text"
+									id="fieldClearXS"
+									class="textField-input-value"
+									aria-labelledby="fieldClearXSlabel"
+									placeholder="Placeholder"
+									aria-invalid="false"
+									value="Value"
+								/>
+								<div class="textField-input-affix">
+									<button type="button" class="textField-input-affix-clear clear">
+										<span class="pr-u-mask">Vider ce champ</span>
+									</button>
+								</div>
+							</div>
+						</div>
+					</div>
 				</div>
-			</div>
-		</div>
-	</div>
+			</td>
+		</tr>
+		<tr>
+			<td>Prefix / Suffixe</td>
+			<td>
+				<div class="demo-QAtable-list">
+					<div class="form-field">
+						<label class="formLabel" id="fieldPrefixSlabel" for="fieldPrefixS">
+							Label<sup class="formLabel-required" aria-hidden="true">*</sup
+							><span class="formLabel-info"
+								><span aria-hidden="true" class="lucca-icon icon-signHelp"></span><span class="pr-u-mask">?</span></span
+							>
+						</label>
+						<div class="textField">
+							<span class="textField-prefix" id="fieldPrefixSprefix">
+								<span class="textField-label-prefix-item">$</span>
+							</span>
+							<div class="textField-input">
+								<input
+									type="text"
+									id="fieldPrefixS"
+									class="textField-input-value"
+									aria-labelledby="fieldPrefixSprefix fieldPrefixSlabel fieldPrefixSsuffix"
+									placeholder="Placeholder"
+									aria-invalid="false"
+									value="Value"
+								/>
+							</div>
+							<span class="textField-suffix" id="fieldPrefixSsuffix">
+								<span class="textField-label-suffix-item" aria-label="euros par jour">€/j</span>
+							</span>
+						</div>
+					</div>
 
-	<div class="form-field mod-S pr-u-marginBottom300">
-		<label class="formLabel" id="fieldClearSlabel" for="fieldClearS">
-			Label<sup class="formLabel-required" aria-hidden="true">*</sup
-			><span class="formLabel-info"><span aria-hidden="true" class="lucca-icon icon-signHelp"></span><span class="u-mask">?</span></span>
-		</label>
-		<div class="textField">
-			<div class="textField-input">
-				<input
-					type="text"
-					id="fieldClearS"
-					class="textField-input-value"
-					aria-labelledby="fieldClearSlabel"
-					placeholder="Placeholder"
-					aria-invalid="false"
-					value="Value"
-				/>
-				<div class="textField-input-affix">
-					<button type="button" class="textField-input-affix-clear clear">
-						<span class="u-mask">Vider ce champ</span>
-					</button>
+					<div class="form-field mod-S">
+						<label class="formLabel" id="fieldPrefixXSlabel" for="fieldPrefixXS">
+							Label<sup class="formLabel-required" aria-hidden="true">*</sup
+							><span class="formLabel-info"
+								><span aria-hidden="true" class="lucca-icon icon-signHelp"></span><span class="pr-u-mask">?</span></span
+							>
+						</label>
+						<div class="textField">
+							<span class="textField-prefix" id="fieldPrefixXSprefix">
+								<span class="textField-label-prefix-item">$</span>
+							</span>
+							<div class="textField-input">
+								<input
+									type="text"
+									id="fieldPrefixXS"
+									class="textField-input-value"
+									aria-labelledby="fieldPrefixXSprefix fieldPrefixXSlabel fieldPrefixXSsuffix"
+									placeholder="Placeholder"
+									aria-invalid="false"
+									value="Value"
+								/>
+							</div>
+							<span class="textField-suffix" id="fieldPrefixXSsuffix">
+								<span class="textField-label-suffix-item" aria-label="euros par jour">€/j</span>
+							</span>
+						</div>
+					</div>
+
+					<div class="form-field mod-XS">
+						<label class="formLabel" id="fieldPrefixlabel" for="fieldPrefix">
+							Label<sup class="formLabel-required" aria-hidden="true">*</sup
+							><span class="formLabel-info"
+								><span aria-hidden="true" class="lucca-icon icon-signHelp"></span><span class="pr-u-mask">?</span></span
+							>
+						</label>
+						<div class="textField">
+							<span class="textField-prefix" id="fieldPrefixprefix">
+								<span class="textField-label-prefix-item">$</span>
+							</span>
+							<div class="textField-input">
+								<input
+									type="text"
+									id="fieldPrefix"
+									class="textField-input-value"
+									aria-labelledby="fieldPrefixprefix fieldPrefixlabel fieldPrefixsuffix"
+									aria-describedby="fieldPrefixmessage"
+									placeholder="Placeholder"
+									aria-invalid="false"
+									value="Value"
+								/>
+							</div>
+							<span class="textField-suffix" id="fieldPrefixsuffix">
+								<span class="textField-label-suffix-item" aria-label="euros par jour">€/j</span>
+							</span>
+						</div>
+					</div>
 				</div>
-			</div>
-		</div>
-	</div>
+			</td>
+		</tr>
+		<tr>
+			<td>Align right</td>
+			<td>
+				<div class="demo-QAtable-list">
+					<div class="form-field">
+						<label class="formLabel" id="fieldAlignRightlabel" for="fieldAlignRight">
+							Label<sup class="formLabel-required" aria-hidden="true">*</sup
+							><span aria-hidden="true" class="lucca-icon icon-signHelp"></span>
+						</label>
+						<div class="textField mod-valueAlignRight">
+							<div class="textField-input">
+								<input
+									type="text"
+									id="fieldAlignRight"
+									class="textField-input-value"
+									aria-labelledby="fieldAlignRightlabel"
+									aria-describedby="fieldAlignRightmessage"
+									placeholder="Placeholder"
+									aria-invalid="false"
+									value="Value"
+								/>
+							</div>
+						</div>
+					</div>
 
-	<div class="form-field mod-XS pr-u-marginBottom300">
-		<label class="formLabel" id="fieldClearXSlabel" for="fieldClear">
-			Label<sup class="formLabel-required" aria-hidden="true">*</sup
-			><span class="formLabel-info"><span aria-hidden="true" class="lucca-icon icon-signHelp"></span><span class="u-mask">?</span></span>
-		</label>
-		<div class="textField">
-			<div class="textField-input">
-				<input
-					type="text"
-					id="fieldClearXS"
-					class="textField-input-value"
-					aria-labelledby="fieldClearXSlabel"
-					placeholder="Placeholder"
-					aria-invalid="false"
-					value="Value"
-				/>
-				<div class="textField-input-affix">
-					<button type="button" class="textField-input-affix-clear clear">
-						<span class="u-mask">Vider ce champ</span>
-					</button>
+					<div class="form-field">
+						<label class="formLabel" id="fieldAlignRightlabel" for="fieldAlignRight">
+							Label<sup class="formLabel-required" aria-hidden="true">*</sup
+							><span aria-hidden="true" class="lucca-icon icon-signHelp"></span>
+						</label>
+						<div class="textField mod-valueAlignRight">
+							<span class="textField-prefix" id="fieldAlignRightprefix">
+								<span class="textField-label-prefix-item">$</span>
+							</span>
+							<div class="textField-input">
+								<input
+									type="text"
+									id="fieldAlignRight"
+									class="textField-input-value"
+									aria-labelledby="fieldAlignRightprefix fieldAlignRightlabel fieldAlignRightsuffix"
+									aria-describedby="fieldAlignRightmessage"
+									placeholder="Placeholder"
+									aria-invalid="false"
+									value="Value"
+								/>
+							</div>
+							<span class="textField-suffix" id="fieldAlignRightsuffix">
+								<span class="textField-label-suffix-item" aria-label="euros par jour">€/j</span>
+							</span>
+						</div>
+					</div>
+
+					<div class="form-field">
+						<label class="formLabel" id="fieldAlignRightAffixlabel" for="fieldAlignRightAffix">
+							Label<sup class="formLabel-required" aria-hidden="true">*</sup
+							><span aria-hidden="true" class="lucca-icon icon-signHelp"></span>
+						</label>
+						<div class="textField mod-valueAlignRight">
+							<div class="textField-input">
+								<input
+									type="text"
+									id="fieldAlignRightAffix"
+									class="textField-input-value"
+									aria-labelledby="fieldAlignRightAffixlabel"
+									aria-describedby="fieldAlignRightAffixmessage"
+									placeholder="Placeholder"
+									aria-invalid="false"
+									value="Value"
+								/>
+								<div class="textField-input-affix">
+									<button type="button" class="textField-input-affix-clear clear">
+										<span class="pr-u-mask">Vider ce champ</span>
+									</button>
+									<span aria-hidden="true" class="textField-input-affix-icon lucca-icon icon-searchMagnifyingGlass"></span>
+								</div>
+							</div>
+						</div>
+					</div>
 				</div>
-			</div>
-		</div>
-	</div>
+			</td>
+		</tr>
+		<tr>
+			<td>States</td>
+			<td>
+				<div class="demo-QAtable-list">
+					<div class="form-field">
+						<label class="formLabel" id="fieldErrorEmptylabel" for="fieldErrorEmpty">
+							Label<sup class="formLabel-required" aria-hidden="true">*</sup
+							><span class="formLabel-info"
+								><span aria-hidden="true" class="lucca-icon icon-signHelp"></span><span class="pr-u-mask">?</span></span
+							>
+						</label>
+						<div class="textField">
+							<div class="textField-input">
+								<input
+									type="text"
+									id="fieldErrorEmpty"
+									class="textField-input-value"
+									aria-labelledby="fieldErrorEmptylabel"
+									aria-describedby="fieldErrorEmptyMessage"
+									placeholder="Placeholder"
+									aria-invalid="true"
+								/>
+							</div>
+						</div>
+						<div class="inlineMessage" id="fieldErrorEmptyMessage">
+							<span aria-hidden="true" class="lucca-icon inlineMessage-statusIcon"></span>
+							<p class="inlineMessage-content">Helper text</p>
+						</div>
+					</div>
 
-	<h2>Prefix / Suffix</h2>
+					<div class="form-field">
+						<label class="formLabel" id="fieldErrorFilledlabel" for="fieldErrorFilled">
+							Label<sup class="formLabel-required" aria-hidden="true">*</sup
+							><span class="formLabel-info"
+								><span aria-hidden="true" class="lucca-icon icon-signHelp"></span><span class="pr-u-mask">?</span></span
+							>
+						</label>
+						<div class="textField">
+							<span class="textField-prefix" id="fieldErrorFilledprefix">
+								<span class="textField-label-prefix-item">$</span>
+							</span>
+							<div class="textField-input">
+								<input
+									type="text"
+									id="fieldErrorFilled"
+									class="textField-input-value"
+									aria-labelledby="fieldErrorFilledprefix fieldErrorFilledlabel fieldErrorFilledsuffix"
+									aria-describedby="fieldErrorFilledMessage"
+									placeholder="Placeholder"
+									aria-invalid="true"
+									value="Value"
+								/>
+								<div class="textField-input-affix">
+									<button type="button" class="textField-input-affix-clear clear">
+										<span class="pr-u-mask">Vider ce champ</span>
+									</button>
+								</div>
+							</div>
+							<span class="textField-suffix" id="fieldErrorFilledsuffix">
+								<span class="textField-label-suffix-item" aria-label="euros par jour">€/j</span>
+							</span>
+						</div>
+						<div class="inlineMessage" id="fieldErrorFilledMessage">
+							<span aria-hidden="true" class="lucca-icon inlineMessage-statusIcon"></span>
+							<p class="inlineMessage-content">Helper text</p>
+						</div>
+					</div>
 
-	<div class="form-field pr-u-marginBottom300">
-		<label class="formLabel" id="fieldPrefixSlabel" for="fieldPrefixS">
-			Label<sup class="formLabel-required" aria-hidden="true">*</sup
-			><span class="formLabel-info"><span aria-hidden="true" class="lucca-icon icon-signHelp"></span><span class="u-mask">?</span></span>
-		</label>
-		<div class="textField">
-			<span class="textField-prefix" id="fieldPrefixSprefix">
-				<span class="textField-label-prefix-item">$</span>
-			</span>
-			<span class="textField-suffix" id="fieldPrefixSsuffix">
-				<span class="textField-label-suffix-item" aria-label="euros par jour">€/j</span>
-			</span>
-			<div class="textField-input">
-				<input
-					type="text"
-					id="fieldPrefixS"
-					class="textField-input-value"
-					aria-labelledby="fieldPrefixSprefix fieldPrefixSlabel fieldPrefixSsuffix"
-					placeholder="Placeholder"
-					aria-invalid="false"
-					value="Value"
-				/>
-			</div>
-		</div>
-	</div>
+					<div class="form-field">
+						<label class="formLabel" id="fieldDisabledEmptylabel" for="fieldDisabledEmpty">
+							Label<sup class="formLabel-required" aria-hidden="true">*</sup
+							><span class="formLabel-info"
+								><span aria-hidden="true" class="lucca-icon icon-signHelp"></span><span class="pr-u-mask">?</span></span
+							>
+						</label>
+						<div class="textField">
+							<div class="textField-input">
+								<input
+									type="text"
+									id="fieldDisabledEmpty"
+									class="textField-input-value"
+									aria-labelledby="fieldDisabledEmptylabel"
+									aria-describedby="fieldDisabledEmptyMessage"
+									placeholder="Placeholder"
+									aria-invalid="false"
+									disabled
+								/>
+							</div>
+						</div>
+						<div class="inlineMessage" id="fieldDisabledEmptyMessage">
+							<span aria-hidden="true" class="lucca-icon inlineMessage-statusIcon"></span>
+							<p class="inlineMessage-content">Helper text</p>
+						</div>
+					</div>
 
-	<div class="form-field mod-S pr-u-marginBottom300">
-		<label class="formLabel" id="fieldPrefixXSlabel" for="fieldPrefixXS">
-			Label<sup class="formLabel-required" aria-hidden="true">*</sup
-			><span class="formLabel-info"><span aria-hidden="true" class="lucca-icon icon-signHelp"></span><span class="u-mask">?</span></span>
-		</label>
-		<div class="textField">
-			<span class="textField-prefix" id="fieldPrefixXSprefix">
-				<span class="textField-label-prefix-item">$</span>
-			</span>
-			<span class="textField-suffix" id="fieldPrefixXSsuffix">
-				<span class="textField-label-suffix-item" aria-label="euros par jour">€/j</span>
-			</span>
-			<div class="textField-input">
-				<input
-					type="text"
-					id="fieldPrefixXS"
-					class="textField-input-value"
-					aria-labelledby="fieldPrefixXSprefix fieldPrefixXSlabel fieldPrefixXSsuffix"
-					placeholder="Placeholder"
-					aria-invalid="false"
-					value="Value"
-				/>
-			</div>
-		</div>
-	</div>
-
-	<div class="form-field mod-XS pr-u-marginBottom300">
-		<label class="formLabel" id="fieldPrefixlabel" for="fieldPrefix">
-			Label<sup class="formLabel-required" aria-hidden="true">*</sup
-			><span class="formLabel-info"><span aria-hidden="true" class="lucca-icon icon-signHelp"></span><span class="u-mask">?</span></span>
-		</label>
-		<div class="textField">
-			<span class="textField-prefix" id="fieldPrefixprefix">
-				<span class="textField-label-prefix-item">$</span>
-			</span>
-			<span class="textField-suffix" id="fieldPrefixsuffix">
-				<span class="textField-label-suffix-item" aria-label="euros par jour">€/j</span>
-			</span>
-			<div class="textField-input">
-				<input
-					type="text"
-					id="fieldPrefix"
-					class="textField-input-value"
-					aria-labelledby="fieldPrefixprefix fieldPrefixlabel fieldPrefixsuffix"
-					aria-describedby="fieldPrefixmessage"
-					placeholder="Placeholder"
-					aria-invalid="false"
-					value="Value"
-				/>
-			</div>
-		</div>
-	</div>
-
-	<h2>Align right</h2>
-	<div class="form-field pr-u-marginBottom300">
-		<label class="formLabel" id="fieldAlignRightlabel" for="fieldAlignRight">
-			Label<sup class="formLabel-required" aria-hidden="true">*</sup><span aria-hidden="true" class="lucca-icon icon-signHelp"></span>
-		</label>
-		<div class="textField mod-valueAlignRight">
-			<div class="textField-input">
-				<input
-					type="text"
-					id="fieldAlignRight"
-					class="textField-input-value"
-					aria-labelledby="fieldAlignRightlabel"
-					aria-describedby="fieldAlignRightmessage"
-					placeholder="Placeholder"
-					aria-invalid="false"
-					value="Value"
-				/>
-			</div>
-		</div>
-	</div>
-
-	<div class="form-field pr-u-marginBottom300">
-		<label class="formLabel" id="fieldAlignRightlabel" for="fieldAlignRight">
-			Label<sup class="formLabel-required" aria-hidden="true">*</sup><span aria-hidden="true" class="lucca-icon icon-signHelp"></span>
-		</label>
-		<div class="textField mod-valueAlignRight">
-			<span class="textField-prefix" id="fieldAlignRightprefix">
-				<span class="textField-label-prefix-item">$</span>
-			</span>
-			<span class="textField-suffix" id="fieldAlignRightsuffix">
-				<span class="textField-label-suffix-item" aria-label="euros par jour">€/j</span>
-			</span>
-			<div class="textField-input">
-				<input
-					type="text"
-					id="fieldAlignRight"
-					class="textField-input-value"
-					aria-labelledby="fieldAlignRightprefix fieldAlignRightlabel fieldAlignRightsuffix"
-					aria-describedby="fieldAlignRightmessage"
-					placeholder="Placeholder"
-					aria-invalid="false"
-					value="Value"
-				/>
-			</div>
-		</div>
-	</div>
-
-	<div class="form-field pr-u-marginBottom300">
-		<label class="formLabel" id="fieldAlignRightAffixlabel" for="fieldAlignRightAffix">
-			Label<sup class="formLabel-required" aria-hidden="true">*</sup><span aria-hidden="true" class="lucca-icon icon-signHelp"></span>
-		</label>
-		<div class="textField mod-valueAlignRight">
-			<div class="textField-input">
-				<input
-					type="text"
-					id="fieldAlignRightAffix"
-					class="textField-input-value"
-					aria-labelledby="fieldAlignRightAffixlabel"
-					aria-describedby="fieldAlignRightAffixmessage"
-					placeholder="Placeholder"
-					aria-invalid="false"
-					value="Value"
-				/>
-				<div class="textField-input-affix">
-					<button type="button" class="textField-input-affix-clear clear">
-						<span class="u-mask">Vider ce champ</span>
-					</button>
-					<span aria-hidden="true" class="textField-input-affix-icon lucca-icon icon-searchMagnifyingGlass"></span>
+					<div class="form-field">
+						<label class="formLabel" id="fieldDisabledFilledlabel" for="fieldDisabledFilled">
+							Label<sup class="formLabel-required" aria-hidden="true">*</sup
+							><span class="formLabel-info"
+								><span aria-hidden="true" class="lucca-icon icon-signHelp"></span><span class="pr-u-mask">?</span></span
+							>
+						</label>
+						<div class="textField">
+							<span class="textField-prefix" id="fieldDisabledFilledprefix">
+								<span class="textField-label-prefix-item">$</span>
+							</span>
+							<div class="textField-input">
+								<input
+									type="text"
+									id="fieldDisabledFilled"
+									class="textField-input-value"
+									aria-labelledby="fieldDisabledFilledprefix fieldDisabledFilledlabel fieldDisabledFilledsuffix"
+									aria-describedby="fieldDisabledFilledMessage"
+									placeholder="Placeholder"
+									aria-invalid="false"
+									value="Value"
+									disabled
+								/>
+							</div>
+							<span class="textField-suffix" id="fieldDisabledFilledsuffix">
+								<span class="textField-label-suffix-item" aria-label="euros par jour">€/j</span>
+							</span>
+						</div>
+						<div class="inlineMessage" id="fieldDisabledFilledMessage">
+							<span aria-hidden="true" class="lucca-icon inlineMessage-statusIcon"></span>
+							<p class="inlineMessage-content">Helper text</p>
+						</div>
+					</div>
 				</div>
-			</div>
-		</div>
-	</div>
-
-	<h2>States</h2>
-
-	<div class="form-field pr-u-marginBottom300">
-		<label class="formLabel" id="fieldErrorEmptylabel" for="fieldErrorEmpty">
-			Label<sup class="formLabel-required" aria-hidden="true">*</sup
-			><span class="formLabel-info"><span aria-hidden="true" class="lucca-icon icon-signHelp"></span><span class="u-mask">?</span></span>
-		</label>
-		<div class="textField">
-			<div class="textField-input">
-				<input
-					type="text"
-					id="fieldErrorEmpty"
-					class="textField-input-value"
-					aria-labelledby="fieldErrorEmptylabel"
-					aria-describedby="fieldErrorEmptyMessage"
-					placeholder="Placeholder"
-					aria-invalid="true"
-				/>
-			</div>
-		</div>
-		<div class="inlineMessage" id="fieldErrorEmptyMessage"><span aria-hidden="true" class="lucca-icon"></span>Helper text</div>
-	</div>
-
-	<div class="form-field pr-u-marginBottom300">
-		<label class="formLabel" id="fieldErrorFilledlabel" for="fieldErrorFilled">
-			Label<sup class="formLabel-required" aria-hidden="true">*</sup
-			><span class="formLabel-info"><span aria-hidden="true" class="lucca-icon icon-signHelp"></span><span class="u-mask">?</span></span>
-		</label>
-		<div class="textField">
-			<span class="textField-prefix" id="fieldErrorFilledprefix">
-				<span class="textField-label-prefix-item">$</span>
-			</span>
-			<span class="textField-suffix" id="fieldErrorFilledsuffix">
-				<span class="textField-label-suffix-item" aria-label="euros par jour">€/j</span>
-			</span>
-			<div class="textField-input">
-				<input
-					type="text"
-					id="fieldErrorFilled"
-					class="textField-input-value"
-					aria-labelledby="fieldErrorFilledprefix fieldErrorFilledlabel fieldErrorFilledsuffix"
-					aria-describedby="fieldErrorFilledMessage"
-					placeholder="Placeholder"
-					aria-invalid="true"
-					value="Value"
-				/>
-				<div class="textField-input-affix">
-					<button type="button" class="textField-input-affix-clear clear">
-						<span class="u-mask">Vider ce champ</span>
-					</button>
+			</td>
+		</tr>
+		<tr>
+			<td>Everything</td>
+			<td>
+				<div class="demo-QAtable-list">
+					<div class="form-field">
+						<label class="formLabel" id="fieldAlllabel" for="fieldAll">
+							Label<sup class="formLabel-required" aria-hidden="true">*</sup
+							><span class="formLabel-info"
+								><span aria-hidden="true" class="lucca-icon icon-signHelp"></span><span class="pr-u-mask">?</span></span
+							>
+						</label>
+						<div class="textField">
+							<span class="textField-prefix" id="fieldAllprefix">
+								<span class="textField-label-prefix-item">$</span>
+							</span>
+							<div class="textField-input">
+								<input
+									type="text"
+									id="fieldAll"
+									class="textField-input-value"
+									aria-labelledby="fieldAllprefix fieldAlllabel fieldAllsuffix"
+									aria-describedby="fieldAllMessage"
+									placeholder="Placeholder"
+									aria-invalid="false"
+									value="Value"
+								/>
+								<div class="textField-input-affix">
+									<button type="button" class="textField-input-affix-clear clear">
+										<span class="pr-u-mask">Vider ce champ</span>
+									</button>
+									<span aria-hidden="true" class="textField-input-affix-icon lucca-icon icon-searchMagnifyingGlass"></span>
+								</div>
+							</div>
+							<span class="textField-suffix" id="fieldAllsuffix">
+								<span class="textField-label-suffix-item" aria-label="euros par jour">€/j</span>
+							</span>
+						</div>
+						<div class="inlineMessage" id="fieldAllMessage">
+							<span aria-hidden="true" class="lucca-icon inlineMessage-statusIcon"></span>
+							<p class="inlineMessage-content">Helper text</p>
+						</div>
+					</div>
 				</div>
-			</div>
-		</div>
-		<div class="inlineMessage" id="fieldErrorFilledMessage"><span aria-hidden="true" class="lucca-icon"></span>Helper text</div>
-	</div>
+			</td>
+		</tr>
+		<tr>
+			<td>Width</td>
+			<td>
+				<div class="demo-QAtable-list">
+					<div class="form-field mod-width20">
+						<label class="formLabel" id="fieldWidth20Label" for="fieldWidth20">20 (160px)</label>
+						<div class="textField">
+							<div class="textField-input">
+								<input
+									type="text"
+									id="fieldWidth20"
+									class="textField-input-value"
+									aria-labelledby="fieldWidth20label"
+									aria-invalid="false"
+								/>
+							</div>
+						</div>
+					</div>
 
-	<div class="form-field pr-u-marginBottom300">
-		<label class="formLabel" id="fieldDisabledEmptylabel" for="fieldDisabledEmpty">
-			Label<sup class="formLabel-required" aria-hidden="true">*</sup
-			><span class="formLabel-info"><span aria-hidden="true" class="lucca-icon icon-signHelp"></span><span class="u-mask">?</span></span>
-		</label>
-		<div class="textField">
-			<div class="textField-input">
-				<input
-					type="text"
-					id="fieldDisabledEmpty"
-					class="textField-input-value"
-					aria-labelledby="fieldDisabledEmptylabel"
-					aria-describedby="fieldDisabledEmptyMessage"
-					placeholder="Placeholder"
-					aria-invalid="false"
-					disabled
-				/>
-			</div>
-		</div>
-		<div class="inlineMessage" id="fieldDisabledEmptyMessage"><span aria-hidden="true" class="lucca-icon"></span>Helper text</div>
-	</div>
+					<div class="form-field mod-width30">
+						<label class="formLabel" id="fieldWidth30Label" for="fieldWidth30">30 (240px)</label>
+						<div class="textField">
+							<div class="textField-input">
+								<input
+									type="text"
+									id="fieldWidth30"
+									class="textField-input-value"
+									aria-labelledby="fieldWidth30label"
+									aria-invalid="false"
+								/>
+							</div>
+						</div>
+					</div>
 
-	<div class="form-field pr-u-marginBottom300">
-		<label class="formLabel" id="fieldDisabledFilledlabel" for="fieldDisabledFilled">
-			Label<sup class="formLabel-required" aria-hidden="true">*</sup
-			><span class="formLabel-info"><span aria-hidden="true" class="lucca-icon icon-signHelp"></span><span class="u-mask">?</span></span>
-		</label>
-		<div class="textField">
-			<span class="textField-prefix" id="fieldDisabledFilledprefix">
-				<span class="textField-label-prefix-item">$</span>
-			</span>
-			<span class="textField-suffix" id="fieldDisabledFilledsuffix">
-				<span class="textField-label-suffix-item" aria-label="euros par jour">€/j</span>
-			</span>
-			<div class="textField-input">
-				<input
-					type="text"
-					id="fieldDisabledFilled"
-					class="textField-input-value"
-					aria-labelledby="fieldDisabledFilledprefix fieldDisabledFilledlabel fieldDisabledFilledsuffix"
-					aria-describedby="fieldDisabledFilledMessage"
-					placeholder="Placeholder"
-					aria-invalid="false"
-					value="Value"
-					disabled
-				/>
-			</div>
-		</div>
-		<div class="inlineMessage" id="fieldDisabledFilledMessage"><span aria-hidden="true" class="lucca-icon"></span>Helper text</div>
-	</div>
+					<div class="form-field mod-width40">
+						<label class="formLabel" id="fieldWidth40Label" for="fieldWidth40">40 (320px)</label>
+						<div class="textField">
+							<div class="textField-input">
+								<input
+									type="text"
+									id="fieldWidth40"
+									class="textField-input-value"
+									aria-labelledby="fieldWidth40label"
+									aria-invalid="false"
+								/>
+							</div>
+						</div>
+					</div>
 
-	<h2>Everything</h2>
+					<div class="form-field mod-width50">
+						<label class="formLabel" id="fieldWidth50Label" for="fieldWidth50">50 (400px)</label>
+						<div class="textField">
+							<div class="textField-input">
+								<input
+									type="text"
+									id="fieldWidth50"
+									class="textField-input-value"
+									aria-labelledby="fieldWidth50label"
+									aria-invalid="false"
+								/>
+							</div>
+						</div>
+					</div>
 
-	<div class="form-field pr-u-marginBottom300">
-		<label class="formLabel" id="fieldAlllabel" for="fieldAll">
-			Label<sup class="formLabel-required" aria-hidden="true">*</sup
-			><span class="formLabel-info"><span aria-hidden="true" class="lucca-icon icon-signHelp"></span><span class="u-mask">?</span></span>
-		</label>
-		<div class="textField">
-			<span class="textField-prefix" id="fieldAllprefix">
-				<span class="textField-label-prefix-item">$</span>
-			</span>
-			<span class="textField-suffix" id="fieldAllsuffix">
-				<span class="textField-label-suffix-item" aria-label="euros par jour">€/j</span>
-			</span>
-			<div class="textField-input">
-				<input
-					type="text"
-					id="fieldAll"
-					class="textField-input-value"
-					aria-labelledby="fieldAllprefix fieldAlllabel fieldAllsuffix"
-					aria-describedby="fieldAllMessage"
-					placeholder="Placeholder"
-					aria-invalid="false"
-					value="Value"
-				/>
-				<div class="textField-input-affix">
-					<button type="button" class="textField-input-affix-clear clear">
-						<span class="u-mask">Vider ce champ</span>
-					</button>
-					<span aria-hidden="true" class="textField-input-affix-icon lucca-icon icon-searchMagnifyingGlass"></span>
+					<div class="form-field mod-width60">
+						<label class="formLabel" id="fieldWidth60Label" for="fieldWidth60">60 (480px)</label>
+						<div class="textField">
+							<div class="textField-input">
+								<input
+									type="text"
+									id="fieldWidth60"
+									class="textField-input-value"
+									aria-labelledby="fieldWidth60label"
+									aria-invalid="false"
+								/>
+							</div>
+						</div>
+					</div>
 				</div>
-			</div>
-		</div>
-		<div class="inlineMessage" id="fieldAllMessage"><span aria-hidden="true" class="lucca-icon"></span>Helper text</div>
-	</div>
-</section>
+			</td>
+		</tr>
+	</tbody>
+</table>
 
 <!-- To tell the ui-diff tool that the page has finished rendering -->
 <span id="ready"></span>

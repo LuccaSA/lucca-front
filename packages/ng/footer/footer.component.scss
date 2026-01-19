@@ -1,0 +1,12 @@
+@use '@lucca-front/scss/src/components/footer';
+
+lu-footer:has(.footer.mod-sticky) {
+	@layer mods {
+		inset-block-end: 0;
+		position: sticky;
+
+		.footer.mod-sticky {
+			--components-footer-position: static;
+		}
+	}
+}

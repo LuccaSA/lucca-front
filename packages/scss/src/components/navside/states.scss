@@ -1,3 +1,6 @@
+@use '@lucca-front/scss/src/commons/utils/overflow';
+@use '@lucca-front/scss/src/components/newBadge/exports' as newBadge;
+
 @mixin active {
 	background-color: var(--components-navSide-fullwidth-palette-selected-bg);
 	color: var(--components-navSide-fullwidth-palette-selected-text);
@@ -27,17 +30,17 @@
 }
 
 @mixin mobileOpen {
-	height: 100vh;
+	block-size: 100vh;
 	overflow-x: hidden;
 	overflow-y: auto;
 
-	.navSide-scrollWrapper {
+	.navSide-bottomSection, .navSide-scrollWrapper {
 		padding: 0.5em;
 	}
 }
 
 @mixin mobileOpenBanner {
-	height: calc(100vh - var(--commons-banner-height));
+	block-size: calc(100vh - var(--commons-banner-height));
 }
 
 @mixin mobileHidden {
@@ -45,14 +48,5 @@
 }
 
 @mixin overlay {
-	&,
-	body {
-		touch-action: none;
-		overscroll-behavior: none;
-		-webkit-overflow-scrolling: auto;
-	}
-
-	body {
-		overflow: hidden !important;
-	}
+	@include overflow.scrollblock;
 }

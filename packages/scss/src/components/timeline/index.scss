@@ -1,110 +1,126 @@
 @use 'exports' as *;
 
 .timeline-step {
-	&:is([aria-current='step']) {
-		@include current;
+	@layer mods {
+		&:is([aria-current='step']) {
+			@include current;
+		}
 	}
 }
 
 .timeline {
-	@include vars;
-	@include component;
-
-	&.mod-number {
-		@include number;
-
-		&.mod-L {
-			@include numberL;
-		}
+	@layer components {
+		@include vars;
+		@include component;
 	}
 
-	&.mod-S {
-		@include S;
-	}
+	@layer mods {
+		&.mod-number {
+			@include number;
 
-	&.mod-L {
-		@include L;
-	}
-
-	&.mod-vertical {
-		@include vertical;
-		&:not(.mod-S):not(.mod-L) {
-			@include verticalNotSNotL();
-		}
-		&.mod-S {
-			@include verticalS;
-		}
-		&.mod-L {
-			@include verticalL;
-		}
-		&.mod-progress {
-			@include verticalProgress;
-		}
-	}
-
-	&.mod-addStep {
-		@include addStep;
-		&.mod-L {
-			@include addStepL;
-		}
-		&.mod-vertical {
-			@include addStepVertical;
-			&:not(.mod-L) {
-				@include addStepVerticalNotL;
-			}
 			&.mod-L {
-				@include addStepVerticalL;
+				@include numberL;
 			}
 		}
-	}
 
-	&.mod-checkedPastStep {
-		@include checkedPastStep;
+		&.mod-S {
+			@include S;
+		}
 
 		&.mod-L {
-			@include checkedPastStepL;
+			@include L;
 		}
-
-		&.mod-vertical:not(.mod-L) {
-			@include checkedPastStepVerticalNotL;
-		}
-	}
-
-	&.mod-checkedFutureStep {
-		@include checkedFutureStep;
-
-		&.mod-L {
-			@include checkedFutureStepL;
-		}
-
-		&.mod-vertical:not(.mod-L) {
-			@include checkedFutureStepVerticalNotL;
-		}
-	}
-
-	&.mod-addBetweenStep {
-		@include addBetweenStep;
-		&.mod-vertical:not(.mod-L) {
-			@include addBetweenStepVerticalNotL();
-		}
-		&.mod-L {
-			@include addBetweenStepL;
-		}
-	}
-
-	&.mod-progress {
-		@include progress;
-	}
-
-	&.mod-dashed {
-		@include dashed;
 
 		&.mod-vertical {
-			@include dashedVertical;
-		}
-	}
+			@include vertical;
 
-	&:not(.mod-checkedPastStep) {
-		@include notPastChecked;
+			&:not(.mod-S, .mod-L) {
+				@include verticalNotSNotL;
+			}
+
+			&.mod-S {
+				@include verticalS;
+			}
+
+			&.mod-L {
+				@include verticalL;
+			}
+
+			&.mod-progress {
+				@include verticalProgress;
+			}
+		}
+
+		&.mod-addStep {
+			@include addStep;
+
+			&.mod-L {
+				@include addStepL;
+			}
+
+			&.mod-vertical {
+				@include addStepVertical;
+
+				&:not(.mod-L) {
+					@include addStepVerticalNotL;
+				}
+
+				&.mod-L {
+					@include addStepVerticalL;
+				}
+			}
+		}
+
+		&.mod-checkedPastStep {
+			@include checkedPastStep;
+
+			&.mod-L {
+				@include checkedPastStepL;
+			}
+
+			&.mod-vertical:not(.mod-L) {
+				@include checkedPastStepVerticalNotL;
+			}
+		}
+
+		&.mod-checkedFutureStep {
+			@include checkedFutureStep;
+
+			&.mod-L {
+				@include checkedFutureStepL;
+			}
+
+			&.mod-vertical:not(.mod-L) {
+				@include checkedFutureStepVerticalNotL;
+			}
+		}
+
+		&.mod-addBetweenStep {
+			@include addBetweenStep;
+
+			&.mod-vertical:not(.mod-L) {
+				@include addBetweenStepVerticalNotL;
+			}
+
+			&.mod-L {
+				@include addBetweenStepL;
+			}
+		}
+
+		&.mod-progress {
+			@include progress;
+		}
+
+		&.mod-dashed {
+			@include dashed;
+
+			&.mod-vertical {
+				@include dashedVertical;
+			}
+		}
+
+		&:not(.mod-checkedPastStep) {
+			@include notPastChecked;
+		}
 	}
 }

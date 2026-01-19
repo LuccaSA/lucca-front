@@ -1,10 +1,10 @@
-import { Component } from '@angular/core';
-import { Meta, StoryFn, moduleMetadata } from '@storybook/angular';
+import { ChangeDetectionStrategy, Component } from '@angular/core';
+import { Meta, moduleMetadata, StoryObj } from '@storybook/angular';
 
 @Component({
-	standalone: true,
 	selector: 'dialog-stories',
 	templateUrl: './dialog.stories.html',
+	changeDetection: ChangeDetectionStrategy.OnPush,
 })
 class DialogStory {}
 
@@ -18,6 +18,9 @@ export default {
 	],
 } as Meta;
 
-const template: StoryFn<DialogStory> = () => ({});
+const template = () => ({});
 
-export const basic = template.bind({});
+export const Basic: StoryObj<DialogStory> = {
+	args: {},
+	render: template,
+};

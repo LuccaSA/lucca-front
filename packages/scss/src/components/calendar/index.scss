@@ -1,0 +1,96 @@
+@use 'exports' as *;
+@use '@lucca-front/scss/src/commons/utils/media';
+
+.calendarWrapper {
+	@layer components {
+		@include wrapperVars;
+	}
+
+	@layer mods {
+		&.mod-daysOffHidden {
+			@include daysOffHidden;
+		}
+
+		&.mod-daysOverflowingHidden {
+			@include daysOverflowingHidden;
+		}
+	}
+}
+
+.calendar {
+	@layer components {
+		@include vars;
+		@include component;
+	}
+
+	@layer mods {
+		// if rows have three columns (display for months and years)
+		&:has(.calendar-table-body-row-cell:nth-child(3):last-child) {
+			@include third;
+		}
+	}
+}
+
+.calendarShortcuts {
+	@layer components {
+		@include media.max('S') {
+			display: none;
+		}
+	}
+}
+
+.calendar-table-body-row-cell {
+	@layer mods {
+		&.is-daysOff {
+			@include daysOff;
+		}
+
+		&.is-overflow {
+			@include overflow;
+		}
+
+		&.is-current {
+			@include current;
+		}
+
+		&.is-selected,
+		&.is-selectionInProgress {
+			&:not(.is-overflow) {
+				@include selected;
+			}
+		}
+
+		&.is-singleDayInProgress,
+		&.is-start {
+			@include start;
+		}
+
+		&.is-end {
+			@include end;
+		}
+
+		&.is-startInProgress {
+			&:not(.is-endInProgress) {
+				@include startInProgress;
+			}
+
+			&.is-endInProgress {
+				@include startEndInProgress;
+			}
+		}
+
+		&.is-endInProgress {
+			&:not(.is-startInProgress) {
+				@include endInProgress;
+			}
+		}
+
+		.calendar-table-body-row-cell-action {
+			&:disabled,
+			&[aria-disabled='true'] {
+				@include disabled;
+			}
+		}
+	}
+}
+

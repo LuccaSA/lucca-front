@@ -1,13 +1,11 @@
-# Popover2
-
 Popover2 est la nouvelle version de LuPopover, il a été choisi de partir sur une implémentation différente et donc, afin d'éviter les impacts d'un breaking change,
 une nouvelle directive a vu le jour `luPopover2`, dans un nouveau point d'entrée, `@lucca-front/ng/popover2`.
 
-## Mise en place
+### Mise en place
 
 Popover2 est fait pour être simple à utiliser, il suffit de l'importer dans votre environement avec `configureLuPopover()` (à placer dans les providers de votre `AppModule` ou lors du bootstrap de `AppComponent` si vous êtes en full standalone).
 
-## Utilisation
+### Utilisation
 
 Pour utiliser `Popover2` dans un template, il suffit d'appliquer la directive `[luPopover2]` en renseignant en input une référence à un `ng-template`, exemple:
 
@@ -20,10 +18,14 @@ Pour utiliser `Popover2` dans un template, il suffit d'appliquer la directive `[
 </ng-template>
 ```
 
-## Paramètres et position
+### Paramètres et position
 
 Seule la référence au `ng-template` est obligatoire, mais la directive propose des paramètres pour divers usages:
 
+- `luPopoverTrigger` permet de définir les évènements déclencheurs d’ouverture du popover :
+  - `click` est le cas par défaut, c’est le cas le plus proche d’un comportement natif navigateur et le moins intrusif.
+  - `click+hover` ajoute au click l’ouverture au survol. Le popover s’ouvre alors plus facilement (mais peut l’être aussi de manière involontaire).
+  - `hover+focus` désactive l’ouverture au click, ce qui permet de le réserver pour une navigation vers une autre page. Il faut cependant bien noter que dans cette configuration le popover n’est plus accessible : il convient donc de s’assurer que les informations contenues dans le popover soient reprises dans la page liée.
 - `luPopoverPosition` par défaut à `above`, permet de régler la position voulue du popover, en cas d'espace manquant dans le rendu, le composant tentera de se positionner d'abord à l'opposé de la position demandée, puis les deux autres à tour de rôle.
 - `luPopoverDisabled` permet de désactiver totalement le popover.
 - `customPositions` à utiliser avec précaution, permet de renseigner des `ConnectionPositionPair` pour totalement remplacer la logique de positionnement, très utile pour les menus qui doivent être `below` mais alignés sur un côté plutôt que l'autre.
@@ -39,13 +41,13 @@ export class ExampleComponent {
   protected positions: ConnectionPositionPair[] = [
     // En dessous, aligné à gauche
     new ConnectionPositionPair(
-      { originX: "left", originY: "bottom" },
-      { overlayX: "left", overlayY: "top" }
+      { originX: "start", originY: "bottom" },
+      { overlayX: "start", overlayY: "top" }
     ),
     // Au dessus, aligné à gauche
     new ConnectionPositionPair(
-      { originX: "left", originY: "top" },
-      { overlayX: "left", overlayY: "bottom" }
+      { originX: "start", originY: "top" },
+      { overlayX: "start", overlayY: "bottom" }
     )
   ]
 }

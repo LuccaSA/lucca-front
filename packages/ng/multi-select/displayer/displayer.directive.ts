@@ -4,11 +4,10 @@ import { LuMultiSelectInputComponent } from '../input';
 
 @Directive({
 	selector: '[luMultiDisplayer]',
-	standalone: true,
 })
 export class LuMultiDisplayerDirective<T> {
 	@Input('luMultiDisplayerSelect') set select(select: LuMultiSelectInputComponent<T>) {
-		select.valuesTpl = this.templateRef;
+		select.valuesTpl.set(this.templateRef);
 	}
 
 	public constructor(private templateRef: TemplateRef<LuOptionContext<T[]>>) {}

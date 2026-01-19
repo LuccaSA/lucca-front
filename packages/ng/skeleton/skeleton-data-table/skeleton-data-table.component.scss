@@ -1,0 +1,8 @@
+@use '@lucca-front/scss/src/components/dataTable';
+@use '@lucca-front/scss/src/components/skeleton';
+
+@layer components {
+	:host {
+		display: contents;
+	}
+}

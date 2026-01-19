@@ -1,0 +1,39 @@
+@mixin vars {
+	--components-listboxOption-display: flex;
+	--components-listboxOption-position: static;
+	--components-listboxOption-scrollMarginBlock: var(--pr-t-spacings-50);
+}
+
+@mixin varsContent {
+	--components-listboxOption-content-paddingBlock: var(--pr-t-spacings-50);
+	--components-listboxOption-content-paddingInline: var(--pr-t-spacings-100);
+	--components-listboxOption-content-marginBlockStart: 0;
+	--components-listboxOption-content-paddingBlockStart: var(--components-listboxOption-content-paddingBlock);
+	--components-listboxOption-content-paddingBlockEnd: var(--components-listboxOption-content-paddingBlock);
+	--components-listboxOption-content-paddingInlineStart: var(--components-listboxOptionWrapper-childrenPaddingInlineStart, var(--components-listboxOption-content-paddingInline));
+	--components-listboxOption-content-paddingInlineEnd: var(--components-listboxOption-content-paddingInline);
+	--components-listboxOption-content-padding: var(--components-listboxOption-content-paddingBlockStart) var(--components-listboxOption-content-paddingInlineEnd) var(--components-listboxOption-content-paddingBlockEnd) var(--components-listboxOption-content-paddingInlineStart);
+	--components-listboxOption-content-checkboxField-display: var(--components-listboxOptionWrapper-childrenCheckboxField-display, none);
+	--components-listboxOption-content-backgroundColor: var(--pr-t-elevation-surface-raised);
+	--components-listboxOption-content-color: inherit;
+	--components-listboxOption-content-cursor: pointer;
+	--components-listboxOption-content-before-backgroundColor: transparent;
+	--components-listboxOption-content-fontWeight: var(--pr-t-font-fontWeight-regular);
+	--components-listboxOption-content-font: var(--pr-t-font-body-M);
+	--components-listboxOption-content-position: relative;
+	--components-listboxOption-content-before-content: var(--components-listboxOptionWrapper-childrenBefore-content, '');
+	--components-listboxOption-content-after-content: none;
+	--components-listboxOption-content-opacity: 1;
+	--components-listboxOption-content-boxShadow: none;
+	--components-listboxOption-content-flexWrap: nowrap;
+	--components-listboxOption-content-justifyContent: normal;
+}
+
+@mixin varsWrapper {
+	--components-listboxOptionWrapper-padding: var(--pr-t-spacings-50);
+	--components-listboxOptionWrapper-level: 0;
+	--components-listboxOptionWrapper-childrenPaddingInlineStart: var(--pr-t-spacings-100);
+	--components-listboxOptionWrapper-childrenCheckboxField-display: none;
+	--components-listboxOptionWrapper-childrenBefore-content: '';
+	--components-listboxOptionWrapper-overflow: auto;
+}

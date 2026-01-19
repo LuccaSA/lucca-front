@@ -1,16 +1,16 @@
-import { Component, OnDestroy, OnInit, TemplateRef } from '@angular/core';
+import { ChangeDetectionStrategy, Component, OnDestroy, OnInit, TemplateRef } from '@angular/core';
 import { FormsModule } from '@angular/forms';
 import { provideAnimations } from '@angular/platform-browser/animations';
 import { LuToastInput, LuToastType, LuToastsComponent, LuToastsService, defaultToastDuration } from '@lucca-front/ng/toast';
-import { Meta, StoryFn, applicationConfig } from '@storybook/angular';
+import { Meta, StoryObj, applicationConfig } from '@storybook/angular';
 import { Observable, ReplaySubject, Subject } from 'rxjs';
 import { map } from 'rxjs/operators';
 
 @Component({
 	selector: 'toasts-stories',
-	standalone: true,
 	imports: [FormsModule, LuToastsComponent],
 	templateUrl: './toasts.stories.html',
+	changeDetection: ChangeDetectionStrategy.OnPush,
 })
 class ToastsStory implements OnInit, OnDestroy {
 	public isBottom = false;
@@ -76,13 +76,13 @@ export default {
 	decorators: [applicationConfig({ providers: [provideAnimations()] })],
 } as Meta;
 
-const template: StoryFn<ToastsStory> = (args) => ({
+const template = (args: ToastsStory) => ({
 	props: args,
 });
 
 const code = `
-/* Ajouter l'encre <lu-toasts></lu-toasts> dans le app.component.html */
-<lu-toasts [bottom]="true" [sources]="[]"></lu-toasts>
+/* Ajouter l'encre <lu-toasts /> dans le app.component.html */
+<lu-toasts [bottom]="true" [sources]="[]" />
 
 /* Ajouter un toast avec la méthode addToast(..) du LuToastsService */
 @Component({
@@ -109,9 +109,12 @@ class ToastsStory implements OnInit, OnDestroy {
 
 `;
 
-export const basic = template.bind({});
-basic.args = {};
-basic.parameters = {
+export const Basic: StoryObj<ToastsStory> = {
+	args: {},
+	render: template,
+};
+
+Basic.parameters = {
 	docs: {
 		source: {
 			language: 'ts',

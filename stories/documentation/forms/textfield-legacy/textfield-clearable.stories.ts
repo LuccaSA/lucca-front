@@ -1,4 +1,4 @@
-import { Meta, StoryFn } from '@storybook/angular';
+import { Meta, StoryObj } from '@storybook/angular';
 
 interface TextfieldClearableStory {}
 
@@ -13,22 +13,24 @@ function getTemplate(args: TextfieldClearableStory): string {
 	<span class="textfield-label">Label</span>
 	<div class="clear textfield-clear" role="button" tabindex="0">
 	  <span aria-hidden="true" class="lucca-icon icon-signClose"></span>
-		<span class="u-mask">Clear</span>
+		<span class="pr-u-mask">Clear</span>
 	</div>
 </label>`;
 }
 
-const Template: StoryFn<TextfieldClearableStory> = (args) => ({
+const Template = (args: TextfieldClearableStory) => ({
 	props: args,
 	template: getTemplate(args),
 	styles: [
 		`
 		.textfield {
 			display: inline-flex;
-			margin-right: 1rem;
+			margin-inline-end: 1rem;
 		}`,
 	],
 });
 
-export const Clearable = Template.bind({});
-Clearable.args = {};
+export const Clearable: StoryObj<TextfieldClearableStory> = {
+	args: {},
+	render: Template,
+};

@@ -1,23 +1,30 @@
 @use '@lucca-front/icons/src/commons/utils/icon';
+@use '@lucca-front/scss/src/commons/utils/namespace';
+@use '@lucca-front/scss/src/commons/utils/reset';
 
-@mixin component($atRoot: 'without: rule') {
+@use '@lucca-front/scss/src/components/button/exports' as button;
+
+@mixin component($atRoot: namespace.$defaultAtRoot) {
 	background-color: var(--pr-t-elevation-surface-raised);
 	border: var(--commons-divider-width) solid var(--commons-divider-color);
-	border-radius: var(--commons-borderRadius-M);
+	border-radius: var(--pr-t-border-radius-default);
 	list-style: none;
 	padding: 0;
+	overflow: hidden;
 
 	@at-root ($atRoot) {
 		.sortableList-item {
-			border-bottom-width: var(--commons-divider-width);
-			border-bottom-color: var(--commons-divider-color);
-			border-bottom-style: solid;
-			color: var(--palettes-neutral-800);
+			border-block-end-width: var(--commons-divider-width);
+			border-block-end-color: var(--commons-divider-color);
+			border-block-end-style: solid;
+			color: var(--pr-t-color-text);
 			display: flex;
 			position: relative;
 			text-decoration: none;
 			gap: var(--pr-t-spacings-100);
-			padding: var(--components-sortableList-padding);
+
+			// required to overload the cdk padding reset
+			padding: var(--components-sortableList-padding) !important;
 
 			&:last-child {
 				border: 0;
@@ -25,43 +32,57 @@
 		}
 
 		.sortableList-item-content {
-			color: var(--palettes-neutral-800);
+			color: var(--pr-t-color-text);
 			text-decoration: none;
-			width: 100%;
+			inline-size: 100%;
 		}
 
 		.sortableList-item-content-description {
 			margin: 0;
-			font-size: var(--components-sortableList-description-fontSize);
-			line-height: var(--components-sortableList-description-lineHeight);
+			font: var(--components-sortableList-description-font);
+			font-size: var(--components-sortableList-description-fontSize); // Deprecated
+			line-height: var(--components-sortableList-description-lineHeight); // Deprecated
 		}
 
 		.sortableList-item-content-helper {
 			margin: 0;
 			color: var(--palettes-neutral-600);
-			font-size: var(--components-sortableList-helper-fontSize);
-			line-height: var(--components-sortableList-helper-lineHeight);
+			font: var(--components-sortableList-helper-font);
 		}
 
 		.sortableList-item-actions {
-			margin-left: auto;
+			margin-inline-start: auto;
 			white-space: nowrap;
-			padding-left: 0;
+			padding-inline-start: 0;
 		}
 
 		.sortableList-item-handler {
+			&.button {
+				@include button.S;
+				@include button.onlyIcon;
+				@include button.ghost;
+
+				--components-button-padding: var(--pr-t-spacings-50);
+			}
+
 			color: var(--palettes-neutral-600);
 			font-size: var(--components-sortableList-handler-size);
 			cursor: move;
+			inline-size: auto;
+			border-radius: var(--pr-t-border-radius-small);
+			align-self: center;
 
-			&::before {
-				@include icon.generate('drag');
-				vertical-align: top;
+			&:not(:has(.lucca-icon)) {
+				&::before {
+					@include icon.generate('drag');
+
+					vertical-align: top;
+				}
 			}
 		}
 
 		.sortableList-clear {
-			margin-top: var(--pr-t-spacings-50);
+			margin-block-start: var(--pr-t-spacings-50);
 		}
 	}
 }

@@ -1,0 +1,16 @@
+@use '@lucca-front/scss/src/commons/utils/a11y';
+
+.multilanguage_popover-content.popover-contentOptional {
+	@layer components {
+		max-block-size: 20rem;
+		overflow: auto;
+	}
+
+	@layer mods {
+		&:focus-visible {
+			@include a11y.focusVisible;
+
+			border-radius: var(--pr-t-border-radius-structure);
+		}
+	}
+}

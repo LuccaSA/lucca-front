@@ -1,0 +1,51 @@
+@use 'exports' as *;
+
+.listing {
+	@layer components {
+		@include vars;
+		@include component;
+	}
+
+	@layer mods {
+		&.mod-ordered,
+		&:is(ol) {
+			@include ordered;
+		}
+
+		&.mod-inline {
+			@include inline;
+			@include hideFirstItems;
+			@include nestedInline;
+
+			&.mod-divider {
+				@include divider;
+			}
+		}
+
+		.listing {
+			@include nested;
+
+			&.mod-ordered,
+			&:is(ol) {
+				@include nestedOrdered;
+			}
+
+			.listing {
+				@include nested(2);
+
+				&.mod-ordered,
+				&:is(ol) {
+					@include nestedOrdered(2);
+				}
+			}
+		}
+
+		&.mod-icons {
+			@include icons;
+		}
+
+		&.mod-checklist {
+			@include checklist;
+		}
+	}
+}

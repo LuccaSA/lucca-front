@@ -1,6 +1,6 @@
 import { Directive, inject, OnDestroy, OnInit } from '@angular/core';
-import { ALuSelectInputComponent } from '@lucca-front/ng/core-select';
-import { catchError, combineLatest, concatMap, debounceTime, distinctUntilChanged, map, merge, Observable, of, pairwise, scan, startWith, Subject, switchMap, takeUntil, takeWhile, tap } from 'rxjs';
+import { ALuSelectInputComponent, coreSelectDefaultOptionComparer, coreSelectDefaultOptionKey, LuOptionComparer } from '@lucca-front/ng/core-select';
+import { catchError, combineLatest, concatMap, debounceTime, distinctUntilChanged, map, merge, Observable, of, pairwise, scan, startWith, Subject, switchMap, takeUntil, tap } from 'rxjs';
 
 export const LU_SELECT_MAGIC_PAGE_SIZE = 20;
 export const MAGIC_DEBOUNCE_DURATION = 250;
@@ -13,12 +13,12 @@ export abstract class ALuCoreSelectApiDirective<TOption, TParams = Record<string
 
 	public select = inject<ALuSelectInputComponent<TOption, unknown>>(ALuSelectInputComponent);
 
-	protected page$ = this.select.nextPage.pipe(
+	protected page$ = this.select.nextPage$.pipe(
 		scan((page) => page + 1, 0),
 		startWith(0),
 	);
 
-	protected clue$ = this.select.clueChange.pipe(debounceTime(this.debounceDuration), startWith(''));
+	protected clue$ = this.select.clueChange$.pipe(debounceTime(this.debounceDuration), startWith(''));
 
 	/**
 	 * Create an object that will be used as params for the api call
@@ -28,12 +28,12 @@ export abstract class ALuCoreSelectApiDirective<TOption, TParams = Record<string
 	/**
 	 * Compare two options to know if they are the same. For example, compare by id or by JSON
 	 */
-	protected abstract optionComparer: (a: TOption, b: TOption) => boolean;
+	protected optionComparer: LuOptionComparer<TOption> = (a, b) => this.optionKey(a) === this.optionKey(b);
 
 	/**
-	 * Return a key to identify the option in for-of loops
+	 * Return a unique key to identify the option in for-of loops
 	 */
-	protected optionKey?: (option: TOption) => unknown;
+	protected abstract optionKey: (option: TOption) => unknown;
 
 	/**
 	 * Return the options for the given params and page
@@ -41,9 +41,11 @@ export abstract class ALuCoreSelectApiDirective<TOption, TParams = Record<string
 	protected abstract getOptions(params: TParams, page: number): Observable<TOption[]>;
 
 	public ngOnInit(): void {
-		this.select.optionComparer = this.optionComparer;
+		if (this.select.optionComparer === coreSelectDefaultOptionComparer) {
+			this.select.optionComparer = this.optionComparer;
+		}
 
-		if (this.optionKey) {
+		if (this.select.optionKey === coreSelectDefaultOptionKey) {
 			this.select.optionKey = this.optionKey;
 		}
 
@@ -54,7 +56,7 @@ export abstract class ALuCoreSelectApiDirective<TOption, TParams = Record<string
 
 	protected buildOptions(): Observable<TOption[]> {
 		// Prevent a double call to getOptions when the clue is changed while the panel is closed
-		const clueIsPendingDebounce$ = merge(this.select.clueChange.pipe(map(() => true)), this.clue$.pipe(map(() => false))).pipe(distinctUntilChanged());
+		const clueIsPendingDebounce$ = merge(this.select.clueChange$.pipe(map(() => true)), this.clue$.pipe(map(() => false))).pipe(distinctUntilChanged());
 		const isOpen$ = combineLatest([this.select.isPanelOpen$, clueIsPendingDebounce$]).pipe(
 			debounceTime(0),
 			startWith([false, false]),
@@ -70,11 +72,21 @@ export abstract class ALuCoreSelectApiDirective<TOption, TParams = Record<string
 		);
 
 		return combineLatest([this.params$, isOpen$]).pipe(
-			switchMap(([params, isOpened]) =>
-				isOpened
+			switchMap(([params, isOpened]) => {
+				const hasNextPage$ = new Subject<void>();
+
+				return isOpened
 					? this.page$.pipe(
+							takeUntil(hasNextPage$),
 							concatMap((page) => this.getOptionsPage(params, page).pipe(map(({ items, isLastPage }) => ({ items, isLastPage, page })))),
-							takeWhile(({ isLastPage }) => !isLastPage, true),
+							tap(({ isLastPage }) => {
+								if (isLastPage) {
+									// `getOptionsPage` can emit multiple times (for example, when adding homonyms additional information),
+									// so we cannot use takeWhile here.
+									hasNextPage$.next();
+									hasNextPage$.complete();
+								}
+							}),
 							scan(
 								(acc, { items, page }) => {
 									acc[page] = items;
@@ -84,8 +96,8 @@ export abstract class ALuCoreSelectApiDirective<TOption, TParams = Record<string
 							),
 							map((pages) => Object.values(pages).flat()),
 						)
-					: of([] as TOption[]),
-			),
+					: of([] as TOption[]);
+			}),
 		);
 	}
 

@@ -1,26 +1,68 @@
 @use 'exports' as *;
 
-.avatar {
-	@include vars;
-	@include component;
+// lu-user-picture is deprecated
+.avatar,
+.lu-user-picture {
+	@layer components {
+		@include vars;
+		@include component;
+	}
+
+	@layer mods {
+		&.mod-XS {
+			@include XS;
+		}
+
+		&.mod-S {
+			@include S;
+		}
+
+		&.mod-L {
+			@include L;
+		}
+
+		&.mod-XL {
+			@include XL;
+		}
+
+		&.mod-XXL {
+			@include XXL;
+		}
+
+		&.mod-XXXL {
+			@include XXXL;
+		}
+
+		&.mod-placeholder {
+			@include placeholder;
+		}
+	}
+
+	&.mod-AI {
+		@include AI;
+	}
 }
 
 .avatarWrapper {
-	@include varsWrapper;
-
-	&.mod-XL {
-		@include XL;
+	@layer components {
+		@include varsWrapper;
 	}
 
-	&.mod-L {
-		@include L;
-	}
+	@layer mods {
+		&.mod-XL {
+			@include wrapperXL;
+		}
 
-	&.mod-S {
-		@include S;
-	}
+		&.mod-L {
+			@include wrapperL;
+		}
 
-	&.mod-XS {
-		@include XS;
+		&.mod-S {
+			@include wrapperS;
+		}
+
+		&.mod-XS {
+			@include wrapperXS;
+		}
 	}
 }

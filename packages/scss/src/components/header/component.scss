@@ -1,9 +1,10 @@
 @use '@lucca-front/icons/src/commons/utils/icon';
+@use '@lucca-front/scss/src/commons/utils/namespace';
 
-@mixin component($atRoot: 'without: rule') {
+@mixin component($atRoot: namespace.$defaultAtRoot) {
 	box-shadow: var(--pr-t-elevation-shadow-overflow);
 	background-color: var(--components-header-background);
-	min-height: var(--components-header-height);
+	min-block-size: var(--components-header-height);
 	padding: var(--components-header-padding);
 	position: relative;
 	display: flex;
@@ -17,12 +18,12 @@
 
 		.header-contentRight {
 			display: flex;
-			margin-left: auto;
+			margin-inline-start: auto;
 		}
 
 		.header-nav {
-			height: var(--components-header-height);
-			padding-left: calc(var(--components-header-height) + var(--pr-t-spacings-200));
+			block-size: var(--components-header-height);
+			padding-inline-start: calc(var(--components-header-height) + var(--pr-t-spacings-200));
 			align-items: flex-start;
 			display: flex;
 			flex-direction: column;
@@ -33,16 +34,16 @@
 		.header-nav-back {
 			transition-duration: var(--commons-animations-durations-fast);
 			transition-property: all;
-			border-right-color: var(--commons-divider-color);
-			border-right-width: var(--commons-divider-width);
-			border-right-style: solid;
+			border-inline-end-color: var(--commons-divider-color);
+			border-inline-end-width: var(--commons-divider-width);
+			border-inline-end-style: solid;
 			color: var(--palettes-neutral-500);
-			height: var(--components-header-height);
-			width: var(--components-header-height);
+			block-size: var(--components-header-height);
+			inline-size: var(--components-header-height);
 			line-height: var(--components-header-height);
 			font-size: 1.3rem;
-			left: 0;
-			top: 0;
+			inset-inline-start: 0;
+			inset-block-start: 0;
 			position: absolute;
 			display: block;
 			text-align: center;
@@ -60,12 +61,12 @@
 
 		.header-nav-category {
 			color: var(--palettes-neutral-500);
-			font-size: var(--sizes-S-fontSize);
+			font-size: var(--pr-t-font-body-S-fontSize);
 		}
 
 		.header-nav-title {
 			color: var(--palettes-product-700);
-			line-height: var(--sizes-XS-lineHeight);
+			line-height: var(--pr-t-font-body-XS-lineHeight);
 			margin: 0;
 		}
 	}

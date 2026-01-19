@@ -1,0 +1,30 @@
+@use '@lucca-front/scss/src/commons/utils/a11y';
+
+@mixin checkbox {
+	--components-filterPill-gap: var(--pr-t-spacings-100);
+	--components-filterPill-padding: var(--pr-t-spacings-75) var(--pr-t-spacings-150);
+	--components-filterPill-label-maxInlineSize: 15rem;
+}
+
+@mixin compact {
+	.filterBar-segmentedControl.segmentedControl {
+		--components-segmentedControl-direction: row;
+		--components-segmentedControl-width: 100%;
+	}
+
+	.filterBar-divider.divider {
+		inline-size: 100%;
+	}
+}
+
+@mixin button {
+	--components-filterPill-backgroundColor: var(--pr-t-elevation-surface-raised);
+
+	border: 0;
+	padding: var(--pr-t-spacings-75);
+	cursor: pointer;
+
+	&:focus-visible {
+		@include a11y.focusVisible($offset: 3px);
+	}
+}
