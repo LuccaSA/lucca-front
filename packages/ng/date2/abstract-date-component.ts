@@ -17,7 +17,7 @@ import { transformDateInputToDate, transformDateRangeInputToDateRange } from './
 export abstract class AbstractDateComponent {
 	protected locale = inject(LOCALE_ID);
 	// Contains the current date format (like dd/mm/yy etc) based on current locale
-	protected dateFormat = getDateFormat(this.locale);
+	protected dateFormat = computed(() => getDateFormat(this.locale, this.mode()));
 	protected separator = getSeparator(this.locale);
 	intlDateTimeFormat = new Intl.DateTimeFormat(this.locale);
 

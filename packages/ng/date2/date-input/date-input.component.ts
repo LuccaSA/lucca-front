@@ -114,7 +114,7 @@ export class DateInputComponent extends AbstractDateComponent implements OnInit,
 	displayValue = computed(() => {
 		const textInput = this.userTextInput();
 		if (textInput !== 'ɵ') {
-			const parsedInput = parse(textInput, this.dateFormat, startOfDay(new Date()));
+			const parsedInput = parse(textInput, this.dateFormat(), startOfDay(new Date()));
 			if (this.isValidDate(parsedInput) && this.inputFocused()) {
 				return textInput;
 			}
@@ -201,7 +201,7 @@ export class DateInputComponent extends AbstractDateComponent implements OnInit,
 			if (inputValue.length > 0) {
 				let parsed: Date;
 				try {
-					parsed = parse(inputValue, this.dateFormat, startOfDay(new Date()));
+					parsed = parse(inputValue, this.dateFormat(), startOfDay(new Date()));
 				} catch {
 					/* not a correct date */
 				}
@@ -316,7 +316,7 @@ export class DateInputComponent extends AbstractDateComponent implements OnInit,
 		const date = transformDateInputToDate(control.value);
 		// try to parse the display value cause formControl.value is undefined if date is not parsable
 		try {
-			parse(this.displayValue(), this.dateFormat, startOfDay(new Date()));
+			parse(this.displayValue(), this.dateFormat(), startOfDay(new Date()));
 		} catch {
 			/* not a correct date */
 			return { date: true };
