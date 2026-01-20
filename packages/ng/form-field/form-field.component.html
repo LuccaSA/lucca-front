@@ -1,4 +1,4 @@
-@if (presentation()) {
+@if (presentationMode()) {
 	<dl class="formPresentation-description">
 		<ng-container *ngTemplateOutlet="inputLayoutTpl" />
 	</dl>
@@ -7,7 +7,7 @@
 }
 
 <ng-template #inputLayoutTpl>
-	@if (layout() === "fieldset") {
+	@if (layout() === "fieldset" && !presentationMode()) {
 		<fieldset class="form-fieldset" [class.mod-inline]="inline()" [class.mod-S]="size() === 'S'">
 			<legend class="formLabel" [class.pr-u-mask]="hiddenLabel()" attr.aria-hidden="{{ hiddenLabel() }}">
 				<ng-container *luPortal="label()" />
@@ -37,7 +37,7 @@
 			}
 		</fieldset>
 	} @else {
-		@if (presentation()) {
+		@if (presentationMode()) {
 			<dt class="formPresentation-description-term">
 				<ng-container *luPortal="label()" />
 				@if (tooltip()) {
@@ -51,7 +51,7 @@
 			<ng-container *ngTemplateOutlet="projectionTpl" />
 		} @else {
 			<label
-				[class.formLabel]="!presentation()"
+				class="formLabel"
 				[class.inputFramed-header-label]="framed"
 				[class.is-error]="invalidStatus()"
 				[class.mod-counter]="counter() > 0"
@@ -61,7 +61,7 @@
 				attr.role="{{ labelIsPresentation() ? 'presentation' : null }}"
 			>
 				<ng-container *luPortal="label()" />
-				@if (!presentation() && isInputRequired()) {
+				@if (isInputRequired()) {
 					<sup class="formLabel-required" aria-hidden="true">*</sup>
 				}
 				@if (tooltip()) {
@@ -76,7 +76,7 @@
 				@if (tag()) {
 					<span class="formLabel-tag tag">{{ tag() }}</span>
 				}
-				@if (!presentation() && counter() > 0) {
+				@if (counter() > 0) {
 					<span
 						class="formLabel-counter"
 						[class.pr-u-colorTextCritical]="contentLength > counter()"
@@ -115,7 +115,7 @@
 </ng-template>
 
 <ng-template #projectionTpl>
-	@if (presentation() && presentationDisplayTpl()) {
+	@if (presentationMode() && presentationDisplayTpl()) {
 		<dd class="formPresentation-description-definition">
 			<ng-container *ngTemplateOutlet="presentationDisplayTpl()" />
 		</dd>

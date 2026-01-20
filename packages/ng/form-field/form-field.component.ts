@@ -32,6 +32,7 @@ import { FORM_FIELD_INSTANCE } from './form-field.token';
 import { LU_FORM_FIELD_TRANSLATIONS } from './form-field.translate';
 import { InputDirective } from './input.directive';
 import { INPUT_FRAMED_INSTANCE } from './public-api';
+import { LU_FORM_INSTANCE } from '../form/form-instance';
 
 let nextId = 0;
 
@@ -61,6 +62,7 @@ export class FormFieldComponent implements OnDestroy, DoCheck {
 	#luClass = inject(LuClass);
 	#injector = inject(Injector);
 	#renderer = inject(Renderer2);
+	protected parentForm = inject(LU_FORM_INSTANCE, { optional: true });
 
 	framed = inject(INPUT_FRAMED_INSTANCE, { optional: true }) !== null;
 
@@ -141,6 +143,8 @@ export class FormFieldComponent implements OnDestroy, DoCheck {
 
 	readonly presentation = input(false, { transform: booleanAttribute });
 
+	readonly presentationMode = computed(() => this.parentForm?.presentation() || this.presentation());
+
 	readonly presentationDisplayTpl = signal<TemplateRef<unknown> | null>(null);
 
 	get contentLength(): number {
@@ -180,8 +184,8 @@ export class FormFieldComponent implements OnDestroy, DoCheck {
 			this.#luClass.setState({
 				[`mod-${this.size()}`]: !!this.size(),
 				'mod-checkable': this.layout() === 'checkable',
-				formPresentation: this.presentation(),
-				'form-field': this.layout() !== 'fieldset' && !this.presentation(),
+				formPresentation: this.presentationMode(),
+				'form-field': this.layout() !== 'fieldset' && !this.presentationMode(),
 				[`mod-width${this.width()}`]: !!this.width(),
 			});
 		});

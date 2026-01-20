@@ -7,6 +7,8 @@
 		}
 
 		.formPresentation-description-term {
+			font: var(--pr-t-font-body-S);
+			color: var(--pr-t-color-text-subtle);
 			display: var(--components-formPresentation-description-term-display);
 		}
 
