@@ -3,7 +3,7 @@ import { AsyncPipe, NgTemplateOutlet } from '@angular/common';
 import { AfterViewInit, ChangeDetectionStrategy, Component, computed, forwardRef, inject, signal, TrackByFunction } from '@angular/core';
 import { toObservable } from '@angular/core/rxjs-interop';
 import { FormsModule } from '@angular/forms';
-import { getIntl, PortalDirective } from '@lucca-front/ng/core';
+import { PortalDirective } from '@lucca-front/ng/core';
 import {
 	CoreSelectKeyManager,
 	CoreSelectPanelInstance,
@@ -24,7 +24,6 @@ import { EMPTY } from 'rxjs';
 import { map } from 'rxjs/operators';
 import { LuSimpleSelectInputComponent } from '../input/select-input.component';
 import { SIMPLE_SELECT_INPUT } from '../select.model';
-import { LU_SIMPLE_SELECT_TRANSLATIONS } from '../select.translate';
 import { LuIsOptionSelectedPipe } from './option-selected.pipe';
 
 @Component({
@@ -61,7 +60,7 @@ export class LuSelectPanelComponent<T> implements AfterViewInit, CoreSelectPanel
 	public selectInput = inject<LuSimpleSelectInputComponent<T>>(SIMPLE_SELECT_INPUT);
 	public panelRef = inject<LuSelectPanelRef<T, T>>(LuSelectPanelRef);
 	public selectId = inject(SELECT_ID);
-	public intl = getIntl(LU_SIMPLE_SELECT_TRANSLATIONS);
+	public intl = this.selectInput.intl;
 
 	options$ = this.selectInput.options$;
 	grouping = this.selectInput.groupingSignal;

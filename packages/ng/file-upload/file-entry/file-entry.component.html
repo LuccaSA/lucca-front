@@ -70,13 +70,13 @@
 								class="fileToolbar-list-item-button"
 								type="button"
 								luButton
-								[luTooltip]="intl.download"
+								[luTooltip]="intl().download"
 								luTooltipOnlyForDisplay
 							>
 								<lu-icon
 									class="fileToolbar-list-item-button-icon"
 									icon="arrowDownload"
-									[alt]="intl.downloadFile | intlParams: { fileName: fileName() }"
+									[alt]="intl().downloadFile | intlParams: { fileName: fileName() }"
 								/>
 							</a>
 						</li>
@@ -88,14 +88,14 @@
 								[class.palette-critical]="state() === 'error'"
 								type="button"
 								luButton
-								[luTooltip]="intl.delete"
+								[luTooltip]="intl().delete"
 								luTooltipOnlyForDisplay
 								(click)="deleteFile$.next()"
 							>
 								<lu-icon
 									class="fileToolbar-list-item-button-icon"
 									icon="trashDelete"
-									[alt]="intl.deleteFile | intlParams: { fileName: fileName() }"
+									[alt]="intl().deleteFile | intlParams: { fileName: fileName() }"
 								/>
 							</button>
 						</li>
@@ -108,7 +108,7 @@
 @if (withPassword) {
 	<div class="fileEntry_box box mod-withArrow mod-neutral">
 		<div class="box-arrow mod-neutral"></div>
-		<lu-form-field [label]="intl.password">
+		<lu-form-field [label]="intl().password">
 			<div class="fileEntry_box-field">
 				<lu-text-input
 					class="fileEntry_box-field-textField"
@@ -119,7 +119,7 @@
 					[ngModel]="password()"
 					(ngModelChange)="passwordChange$.next($event)"
 				/>
-				<button class="fileEntry_box-field-button" luButton type="button">{{ intl.confirmPassword }}</button>
+				<button class="fileEntry_box-field-button" luButton type="button">{{ intl().confirmPassword }}</button>
 			</div>
 		</lu-form-field>
 	</div>

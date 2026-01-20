@@ -1,6 +1,5 @@
-/* eslint-disable @angular-eslint/no-output-on-prefix */
-import { ChangeDetectionStrategy, ChangeDetectorRef, Component, ContentChild, ElementRef, EventEmitter, forwardRef, Input, Output, ViewChild, ViewContainerRef } from '@angular/core';
-import { getIntl, ILuTree } from '@lucca-front/ng/core';
+import { ChangeDetectionStrategy, ChangeDetectorRef, Component, ContentChild, ElementRef, EventEmitter, forwardRef, input, Input, Output, ViewChild, ViewContainerRef } from '@angular/core';
+import { intlInputOptions, ILuTree } from '@lucca-front/ng/core';
 import { ALuInputDisplayer, ILuInputDisplayer } from '@lucca-front/ng/input';
 import { LuTooltipTriggerDirective } from '@lucca-front/ng/tooltip';
 import { ALuTreeOptionItem, ILuTreeOptionItem } from './tree-option-item.model';
@@ -98,7 +97,7 @@ export class LuTreeOptionItemComponent<T> extends ALuTreeOptionItem<T> implement
 		this._displayer = displayer;
 	}
 
-	public intl = getIntl(LU_TREE_OPTION_ITEM_TRANSLATIONS);
+	public intl = input(...intlInputOptions(LU_TREE_OPTION_ITEM_TRANSLATIONS));
 
 	constructor(private _cdr: ChangeDetectorRef) {
 		super();

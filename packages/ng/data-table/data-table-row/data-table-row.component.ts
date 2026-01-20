@@ -2,7 +2,7 @@ import { CdkDragHandle } from '@angular/cdk/drag-drop';
 import { NgTemplateOutlet } from '@angular/common';
 import { booleanAttribute, ChangeDetectionStrategy, Component, contentChildren, ElementRef, forwardRef, inject, input, model, ViewEncapsulation } from '@angular/core';
 import { FormsModule } from '@angular/forms';
-import { getIntl } from '@lucca-front/ng/core';
+import { intlInputOptions } from '@lucca-front/ng/core';
 import { FormFieldComponent } from '@lucca-front/ng/form-field';
 import { CheckboxInputComponent } from '@lucca-front/ng/forms';
 import { IconComponent } from '@lucca-front/ng/icon';
@@ -36,7 +36,7 @@ import { LU_DATA_TABLE_ROW_INSTANCE } from './data-table-row.token';
 	changeDetection: ChangeDetectionStrategy.OnPush,
 })
 export class DataTableRowComponent {
-	intl = getIntl(LU_DATA_TABLE_TRANSLATIONS);
+	intl = input(...intlInputOptions(LU_DATA_TABLE_TRANSLATIONS));
 	bodyRef = inject(LU_DATA_TABLE_BODY_INSTANCE, { optional: true });
 	headRef = inject(LU_DATA_TABLE_HEAD_INSTANCE, { optional: true });
 	footRef = inject(LU_DATA_TABLE_FOOT_INSTANCE, { optional: true });

@@ -1,6 +1,6 @@
 import { booleanAttribute, ChangeDetectionStrategy, Component, computed, input, linkedSignal, output, ViewEncapsulation } from '@angular/core';
 import { LuccaIcon } from '@lucca-front/icons';
-import { getIntl, Palette, PortalContent, PortalDirective } from '@lucca-front/ng/core';
+import { intlInputOptions, Palette, PortalContent, PortalDirective } from '@lucca-front/ng/core';
 import { IconComponent } from '@lucca-front/ng/icon';
 import { CalloutIconPipe } from '../callout-icon.pipe';
 import { CalloutState } from '../callout-state';
@@ -19,7 +19,7 @@ import { getCalloutPalette } from '../callout.utils';
 	encapsulation: ViewEncapsulation.None,
 })
 export class CalloutComponent {
-	public intl = getIntl(LU_CALLOUT_TRANSLATIONS);
+	public intl = input(...intlInputOptions(LU_CALLOUT_TRANSLATIONS));
 
 	/**
 	 * The title of the callout

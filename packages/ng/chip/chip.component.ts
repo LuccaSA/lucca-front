@@ -1,6 +1,6 @@
 import { NgTemplateOutlet } from '@angular/common';
 import { booleanAttribute, ChangeDetectionStrategy, Component, computed, input, output, ViewEncapsulation } from '@angular/core';
-import { getIntl } from '@lucca-front/ng/core';
+import { intlInputOptions } from '@lucca-front/ng/core';
 
 import { LuccaIcon } from '@lucca-front/icons';
 import { IconComponent } from '@lucca-front/ng/icon';
@@ -24,7 +24,7 @@ import { LU_CHIP_TRANSLATIONS } from './chip.translate';
 	changeDetection: ChangeDetectionStrategy.OnPush,
 })
 export class ChipComponent {
-	intl = getIntl(LU_CHIP_TRANSLATIONS);
+	intl = input(...intlInputOptions(LU_CHIP_TRANSLATIONS));
 
 	readonly withEllipsis = input(false, { transform: booleanAttribute });
 
@@ -38,7 +38,7 @@ export class ChipComponent {
 
 	readonly state = input<'warning' | 'critical' | null>(null);
 
-	readonly stateAlt = computed(() => (this.isWarning() ? this.intl.warning : this.isCritical() ? this.intl.error : ''));
+	readonly stateAlt = computed(() => (this.isWarning() ? this.intl().warning : this.isCritical() ? this.intl().error : ''));
 
 	readonly icon = input<LuccaIcon | null>(null);
 

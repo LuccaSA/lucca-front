@@ -7,7 +7,7 @@
 			#hoursPart
 			class="timePicker-fieldset-group"
 			[disabled]="disabled()"
-			[label]="intl.timePickerHours"
+			[label]="intl().timePickerHours"
 			[value]="hours()"
 			[decimalConf]="hoursDecimalConf"
 			[hideValue]="shouldHideValue()"
@@ -16,11 +16,11 @@
 			(nextRequest)="focusPart('minutes')"
 			(inputControlClick)="inputControlClickHandler('hours', $event)"
 		/>
-		<div aria-hidden="true" [class]="fieldsetSuffixClasses()">{{ separator }}</div>
+		<div aria-hidden="true" [class]="fieldsetSuffixClasses()">{{ separator() }}</div>
 		<lu-time-picker-part
 			#minutesPart
 			class="timePicker-fieldset-group"
-			[label]="intl.timePickerMinutes"
+			[label]="intl().timePickerMinutes"
 			[value]="minutes()"
 			[max]="59"
 			[hideValue]="shouldHideValue()"
