@@ -1,5 +1,5 @@
 import { ChangeDetectionStrategy, ChangeDetectorRef, Component, ContentChild, ElementRef, EventEmitter, forwardRef, input, Input, Output, ViewChild, ViewContainerRef } from '@angular/core';
-import { intlInputOptions, ILuTree } from '@lucca-front/ng/core';
+import { ILuTree, intlInputOptions } from '@lucca-front/ng/core';
 import { ALuInputDisplayer, ILuInputDisplayer } from '@lucca-front/ng/input';
 import { LuTooltipTriggerDirective } from '@lucca-front/ng/tooltip';
 import { ALuTreeOptionItem, ILuTreeOptionItem } from './tree-option-item.model';
@@ -32,8 +32,11 @@ export class LuTreeOptionItemComponent<T> extends ALuTreeOptionItem<T> implement
 	protected _childrenVCR: ViewContainerRef;
 	@ViewChild('element', { read: ElementRef, static: true }) element: ElementRef;
 
+	// eslint-disable-next-line @angular-eslint/no-output-on-prefix
 	@Output() onSelect = new EventEmitter<this>();
+	// eslint-disable-next-line @angular-eslint/no-output-on-prefix
 	@Output() onSelectSelf = new EventEmitter<this>();
+	// eslint-disable-next-line @angular-eslint/no-output-on-prefix
 	@Output() onSelectChildren = new EventEmitter<this>();
 	select() {
 		if (this.disabled) {
