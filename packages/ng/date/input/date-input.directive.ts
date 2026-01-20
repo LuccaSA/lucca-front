@@ -28,7 +28,7 @@ export class LuDateInputDirective<D> extends ALuInput<D, HTMLInputElement> imple
 	@Input() override set placeholder(p: string) {
 		this._elementRef.nativeElement.placeholder = p;
 	}
-	private _intl = input(...intlInputOptions(LU_DATE_INPUT_TRANSLATIONS));
+	public intl = input(...intlInputOptions(LU_DATE_INPUT_TRANSLATIONS));
 	constructor(
 		_changeDetectorRef: ChangeDetectorRef,
 		_elementRef: ElementRef<HTMLInputElement>,
@@ -40,14 +40,14 @@ export class LuDateInputDirective<D> extends ALuInput<D, HTMLInputElement> imple
 	ngOnInit() {
 		switch (this.granularity) {
 			case ELuDateGranularity.year:
-				this.placeholder = this._intl().placeholderYear;
+				this.placeholder = this.intl().placeholderYear;
 				break;
 			case ELuDateGranularity.month:
-				this.placeholder = this._intl().placeholderMonth;
+				this.placeholder = this.intl().placeholderMonth;
 				break;
 			case ELuDateGranularity.day:
 			default:
-				this.placeholder = this._intl().placeholderDay;
+				this.placeholder = this.intl().placeholderDay;
 				break;
 		}
 	}
