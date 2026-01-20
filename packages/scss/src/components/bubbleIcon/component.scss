@@ -1,0 +1,54 @@
+@use '@lucca-front/scss/src/commons/utils/namespace';
+
+@mixin component($atRoot: namespace.$defaultAtRoot) {
+	color: var(--components-bubbleIcon-color);
+	inline-size: var(--components-bubbleIcon-size);
+	block-size: var(--components-bubbleIcon-size);
+	display: inline-grid;
+
+	@at-root ($atRoot) {
+		.bubbleIcon-icon,
+		.bubbleIcon-bubble {
+			grid-column-start: 1;
+			grid-row-start: 1;
+		}
+
+		.bubbleIcon-bubble {
+			scale: var(--components-bubbleIcon-bubble-scale);
+			inline-size: 100%;
+			block-size: 100%;
+		}
+
+		.bubbleIcon-bubble-pathBlock,
+		.bubbleIcon-bubble-pathInline {
+			fill: var(--components-bubbleIcon-bubble-path-fill);
+		}
+
+		.bubbleIcon-bubble-pathBlock {
+			display: var(--components-bubbleIcon-bubble-pathBlock-display);
+		}
+
+		.bubbleIcon-bubble-pathInline {
+			display: var(--components-bubbleIcon-bubble-pathInline-display);
+		}
+
+		.bubbleIcon-icon {
+			display: flex;
+			isolation: isolate;
+			position: relative;
+			inset-block-start: var(--components-bubbleIcon-icon-insetBlockStart);
+			inset-block-end: var(--components-bubbleIcon-icon-insetBlockEnd);
+			inset-inline-start: var(--components-bubbleIcon-icon-insetInlineStart);
+			inset-inline-end: var(--components-bubbleIcon-icon-insetInlineEnd);
+
+			lu-icon,
+			.lucca-icon {
+				margin: auto;
+
+				.lucca-icon {
+					margin: 0;
+				}
+			}
+		}
+	}
+}

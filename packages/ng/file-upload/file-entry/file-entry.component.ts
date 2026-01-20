@@ -12,7 +12,7 @@ import { LuTooltipModule } from '@lucca-front/ng/tooltip';
 import { Subject } from 'rxjs';
 import { FileEntry } from '../file-upload-entry';
 import { LU_FILE_UPLOAD_TRANSLATIONS } from '../file-upload.translate';
-import { formatSize } from '../formatter';
+import { formatFileSize } from '../formatter';
 
 @Component({
 	selector: 'lu-file-entry',
@@ -66,7 +66,7 @@ export class FileEntryComponent {
 	readonly fileType = computed(() => this.entry().type);
 	readonly fileSize = computed(() => this.entry().size);
 
-	readonly fileSizeDisplay = computed(() => formatSize(this.#locale, this.fileSize()));
+	readonly fileSizeDisplay = computed(() => formatFileSize(this.#locale, this.fileSize()));
 	readonly fileTypeDisplay = computed(() => {
 		const fileExtension: string = extractFileExtension(this.fileType());
 
