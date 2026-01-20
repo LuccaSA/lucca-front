@@ -1,6 +1,6 @@
 import { CalendarMode } from './public-api';
 
-export function getDateFormat(locale: string, mode: CalendarMode | null): string {
+export function getDateFormat(locale: string, mode: CalendarMode): string {
 	return new Intl.DateTimeFormat(locale).formatToParts(new Date('01/01/2024')).reduce((acc, part) => {
 		if (part.type === 'day' && mode === 'day') {
 			return `${acc}${'d'.repeat(part.value.length)}`;
