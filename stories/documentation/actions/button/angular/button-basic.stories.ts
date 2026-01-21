@@ -40,6 +40,7 @@ export const Basic: StoryObj<ButtonComponent> = {
 		},
 		state: {
 			description: "Modifie l'état du bouton.",
+			options: ['default', 'loading', 'error', 'success'],
 			control: {
 				type: 'select',
 			},
@@ -55,6 +56,7 @@ export const Basic: StoryObj<ButtonComponent> = {
 		},
 		size: {
 			description: 'Modifie la taille du composant.',
+			options: ['M', 'S', 'XS'],
 			control: {
 				type: 'select',
 			},
