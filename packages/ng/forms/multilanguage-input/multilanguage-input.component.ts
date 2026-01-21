@@ -6,7 +6,7 @@ import { FORM_FIELD_INSTANCE, FormFieldComponent, InputDirective } from '@lucca-
 import { PopoverDirective } from '@lucca-front/ng/popover2';
 import { LuTooltipTriggerDirective } from '@lucca-front/ng/tooltip';
 import { TextInputComponent } from '../text-input/text-input.component';
-import { MultilanguageTranslation } from './model/multilanguage-translation';
+import { INVARIANT_CULTURE_CODE, MultilanguageTranslation } from './model/multilanguage-translation';
 import { LU_MULTILANGUAGE_INPUT_TRANSLATIONS } from './multilanguage-input.translate';
 
 @Component({
@@ -49,11 +49,11 @@ export class MultilanguageInputComponent implements ControlValueAccessor {
 	model: WritableSignal<MultilanguageTranslation[]> = signal([] as MultilanguageTranslation[]);
 
 	invariant = computed(() => {
-		return this.model().find((row) => row.cultureCode === 'invariant') || { value: '' };
+		return this.model().find((row) => row.cultureCode === INVARIANT_CULTURE_CODE) || { value: '' };
 	});
 
 	panelInputs = computed(() => {
-		return this.model().filter((row) => row.cultureCode !== 'invariant');
+		return this.model().filter((row) => row.cultureCode !== INVARIANT_CULTURE_CODE);
 	});
 
 	popoverPositions: ConnectionPositionPair[] = [
@@ -70,7 +70,7 @@ export class MultilanguageInputComponent implements ControlValueAccessor {
 			value = [];
 		}
 		if (value.length > 0) {
-			if (!value.some((row) => row.cultureCode === 'invariant')) {
+			if (!value.some((row) => row.cultureCode === INVARIANT_CULTURE_CODE)) {
 				throw new Error('Please provide an invariant translation in translation array');
 			}
 			this.model.set(value);
