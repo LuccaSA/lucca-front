@@ -17,7 +17,7 @@
     "postcss-value-parser": "4.2.0"
   },
   "volta": {
-    "node": "14.18.1",
+    "node": "24.13.0",
     "npm": "7.24.2"
   }
 }
