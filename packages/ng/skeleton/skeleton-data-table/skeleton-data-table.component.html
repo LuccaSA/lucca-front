@@ -5,9 +5,14 @@
 		<table class="dataTable mod-layoutFixed skeleton is-loading" inert="inert">
 			<thead class="dataTable-head">
 				<tr class="dataTable-head-row">
-					@for (col of colsNumber(); track col) {
+					@for (col of colsNumber(); track col; let i = $index) {
 						<th class="dataTable-head-row-cell" scope="col">
-							<span class="skeleton-item" [style.--components-skeleton-text-width]="getRandomPercent()"></span>
+							<span
+								class="skeleton-item"
+								[class.mod-alignRight]="colsAlign()[i] === 'end'"
+								[class.mod-alignCenter]="colsAlign()[i] === 'center'"
+								[style.--components-skeleton-text-width]="getRandomPercent()"
+							></span>
 						</th>
 					}
 				</tr>
@@ -20,9 +25,14 @@
 	<tbody class="dataTable-body">
 		@for (row of rowsNumber(); track row) {
 			<tr class="dataTable-body-row">
-				@for (col of colsNumber(); track col) {
+				@for (col of colsNumber(); track col; let i = $index) {
 					<td class="dataTable-body-row-cell">
-						<span class="skeleton-item" [style.--components-skeleton-text-width]="getRandomPercent()"></span>
+						<span
+							class="skeleton-item"
+							[class.mod-alignRight]="colsAlign()[i] === 'end'"
+							[class.mod-alignCenter]="colsAlign()[i] === 'center'"
+							[style.--components-skeleton-text-width]="getRandomPercent()"
+						></span>
 					</td>
 				}
 			</tr>
