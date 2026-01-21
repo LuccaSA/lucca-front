@@ -76,6 +76,12 @@ export default {
 			},
 			description: "[v19.2] Applique une largeur fixe au champ. A n'utiliser que lorsque la grille de formulaire n'est pas adaptée.",
 		},
+		autocomplete: {
+			control: {
+				type: 'text',
+			},
+			description: 'Modifie l’attribut autocomplete des champs input.',
+		},
 	},
 } as Meta;
 
@@ -121,7 +127,7 @@ export const Basic: StoryObj<
 				},
 				argTypes,
 			)}>
-	<lu-multilanguage-input [(ngModel)]="example"${generateInputs(inputArgs, argTypes)} />
+	<lu-multilanguage-input [(ngModel)]="example" ${generateInputs(inputArgs, argTypes)} />
 </lu-form-field>
 <pr-story-model-display>{{ example | json }}</pr-story-model-display>`),
 		};
@@ -136,5 +142,6 @@ export const Basic: StoryObj<
 		placeholder: 'Placeholder',
 		tooltip: 'Je suis un message d’aide',
 		openOnFocus: false,
+		autocomplete: 'off',
 	},
 };

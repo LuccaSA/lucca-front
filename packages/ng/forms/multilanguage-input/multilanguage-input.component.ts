@@ -43,6 +43,8 @@ export class MultilanguageInputComponent implements ControlValueAccessor {
 
 	openOnFocus = input(false, { transform: booleanAttribute });
 
+	autocomplete = input<AutoFill>('off');
+
 	// Suffixed with Internal to avoid conflict with NgModel's disabled attribute
 	disabledInternal = signal(false);
 
