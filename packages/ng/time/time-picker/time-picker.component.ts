@@ -1,7 +1,7 @@
 import { NgClass } from '@angular/common';
 import { booleanAttribute, ChangeDetectionStrategy, Component, computed, ElementRef, forwardRef, inject, input, LOCALE_ID, model, output, viewChild, ViewEncapsulation } from '@angular/core';
 import { FormsModule, NG_VALUE_ACCESSOR } from '@angular/forms';
-import { getIntl, isNil, isNotNil } from '@lucca-front/ng/core';
+import { intlInputOptions, isNil, isNotNil } from '@lucca-front/ng/core';
 import { BasePickerComponent } from '../core/base-picker.component';
 import { ISO8601Time } from '../core/date-primitives';
 import {
@@ -41,7 +41,7 @@ let nextId = 0;
 	],
 })
 export class TimePickerComponent extends BasePickerComponent {
-	protected intl = getIntl(LU_TIME_PICKER_TRANSLATIONS);
+	protected intl = input(...intlInputOptions(LU_TIME_PICKER_TRANSLATIONS));
 	protected localeId = inject(LOCALE_ID);
 
 	readonly idSuffix = nextId++;
@@ -87,7 +87,7 @@ export class TimePickerComponent extends BasePickerComponent {
 			[`mod-${this.size()}`]: Boolean(this.size()),
 		};
 	});
-	protected separator = this.intl.timePickerTimeSeparator;
+	protected separator = computed(() => this.intl().timePickerTimeSeparator);
 
 	protected hoursDecimalConf = DEFAULT_TIME_DECIMAL_PIPE_FORMAT;
 

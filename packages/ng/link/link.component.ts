@@ -1,6 +1,6 @@
 import { afterNextRender, booleanAttribute, ChangeDetectionStrategy, Component, effect, inject, Injector, input, ViewEncapsulation } from '@angular/core';
 import { Router, UrlTree } from '@angular/router';
-import { getIntl } from '@lucca-front/ng/core';
+import { intlInputOptions } from '@lucca-front/ng/core';
 import { LU_LINK_TRANSLATIONS } from './link.translate';
 import { LuRouterLink } from './lu-router-link';
 
@@ -31,7 +31,7 @@ import { LuRouterLink } from './lu-router-link';
 	changeDetection: ChangeDetectionStrategy.OnPush,
 })
 export class LinkComponent {
-	intl = getIntl(LU_LINK_TRANSLATIONS);
+	intl = input(...intlInputOptions(LU_LINK_TRANSLATIONS));
 	routerLink = inject(LuRouterLink);
 	#injector = inject(Injector);
 	router = inject(Router);

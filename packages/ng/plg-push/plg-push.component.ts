@@ -1,6 +1,6 @@
 import { booleanAttribute, ChangeDetectionStrategy, Component, input, model, ViewEncapsulation } from '@angular/core';
 import { ButtonComponent } from '@lucca-front/ng/button';
-import { getIntl } from '@lucca-front/ng/core';
+import { intlInputOptions } from '@lucca-front/ng/core';
 import { IconComponent } from '@lucca-front/ng/icon';
 import { LU_PLG_PUSH_TRANSLATIONS } from './plg-push.translate';
 
@@ -16,7 +16,7 @@ import { LU_PLG_PUSH_TRANSLATIONS } from './plg-push.translate';
 	encapsulation: ViewEncapsulation.None,
 })
 export class PLGPushComponent {
-	protected intl = getIntl(LU_PLG_PUSH_TRANSLATIONS);
+	protected intl = input(...intlInputOptions(LU_PLG_PUSH_TRANSLATIONS));
 
 	readonly heading = input<string>('');
 

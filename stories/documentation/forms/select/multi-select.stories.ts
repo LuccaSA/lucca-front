@@ -795,6 +795,40 @@ export const CustomPanelHeader = generateStory({
 	},
 });
 
+export const IntlOverride = generateStory({
+	name: 'Intl Override',
+	description: `Il est possible de personnaliser les traductions du composant en utilisant l'input \`[intl]\`. Cela permet de surcharger les labels par défaut (placeholder, search, clear, emptyResults, selectAll, etc.).`,
+	template: `<lu-multi-select
+	#selectRef
+	[options]="legumes | filterLegumes:clue"
+	(clueChange)="clue = $event"
+	[(ngModel)]="selectedLegumes"
+	[intl]="{
+		placeholder: 'Choose vegetables...',
+		search: 'Search for vegetables',
+		clear: 'Remove all',
+		clearSearch: 'Clear the search field',
+		emptyResults: 'No vegetables found matching your search.',
+		emptyOptions: 'No vegetables available.',
+		emptySelection: 'No vegetables selected.',
+		expand: 'Show more',
+		reduce: 'Show less',
+		selectAll: 'Select all vegetables',
+		unselectAll: 'Unselect all vegetables',
+		loading: 'Fetching vegetables...'
+	}"
+	clearable
+/>`,
+	neededImports: {
+		'@lucca-front/ng/multi-select': ['LuMultiSelectInputComponent'],
+	},
+	storyPartial: {
+		args: {
+			selectedLegumes: [],
+		},
+	},
+});
+
 const meta: Meta<LuMultiSelectInputStoryComponent> = {
 	title: 'Documentation/Forms/MultiSelect',
 	component: LuMultiSelectInputComponent,
