@@ -1,4 +1,4 @@
-import { isNil } from '../core/misc';
+import { isNil } from '@lucca-front/ng/core';
 import { CalendarMode } from './public-api';
 
 export function getDateFormat(locale: string, mode?: CalendarMode): string {
