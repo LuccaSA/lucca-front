@@ -34,7 +34,7 @@ export class ButtonComponent {
 	readonly block = input(false, { transform: booleanAttribute });
 
 	/**
-	 * Marks an action with significant consequences
+	 * Indicates an action with significant or irreversible consequences on hover and focus. Only compatible with outlined and ghost
 	 */
 	readonly critical = input(false, { transform: booleanAttribute });
 
@@ -54,7 +54,7 @@ export class ButtonComponent {
 	readonly palette = input<Palette>('none');
 
 	/**
-	 * Button state
+	 * Modifies the state of the Button
 	 */
 	readonly state = input<'default' | 'loading' | 'error' | 'success'>('default');
 

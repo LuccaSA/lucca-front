@@ -33,44 +33,20 @@ export class OptionComponent {
 	#listboxRef = inject(LISTBOX_INSTANCE);
 	#parentOptionRef = inject(OPTION_INSTANCE, { skipSelf: true, optional: true });
 
-	/**
-	 * Checked option
-	 */
 	readonly checked = input(false, { transform: booleanAttribute });
 
-	/**
-	 * Applies a mixed (indeterminate) selection state (-) to the checkbox
-	 */
 	readonly mixed = input(false, { transform: booleanAttribute });
 
-	/**
-	 * Disabled the option
-	 */
 	readonly disabled = input(false, { transform: booleanAttribute });
 
-	/**
-	 * Apply a hovered class by default
-	 */
 	readonly hovered = input(false, { transform: booleanAttribute });
 
-	/**
-	 * Add option line
-	 */
 	readonly add = input(false, { transform: booleanAttribute });
 
-	/**
-	 * Belongs to a group of options
-	 */
 	readonly group = input(false, { transform: booleanAttribute });
 
-	/**
-	 * Is option selected
-	 */
 	readonly select = input(false, { transform: booleanAttribute });
 
-	/**
-	 * SelectAll option with text
-	 */
 	readonly selectAll = input<'string' | null>();
 
 	readonly multiple = computed(() => this.#listboxRef.multiple());

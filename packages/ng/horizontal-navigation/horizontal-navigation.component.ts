@@ -19,19 +19,10 @@ import { HorizontalNavigationLinkDirective } from './horizontal-navigation-link.
 export class HorizontalNavigationComponent {
 	readonly links = contentChildren(HorizontalNavigationLinkDirective);
 
-	/**
-	 * Removes the separator border on horizontal navigation
-	 */
 	readonly noBorder = input(false, { transform: booleanAttribute });
 
-	/**
-	 * Display horizontal navigation in container
-	 */
 	readonly container = input(false, { transform: booleanAttribute });
 
-	/**
-	 * Display horizontal navigation in vertical (horizontal by default)
-	 */
 	readonly vertical = input(false, { transform: booleanAttribute });
 
 	/**

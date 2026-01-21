@@ -23,9 +23,6 @@ export class EmptyStateSectionComponent {
 	 */
 	readonly palette = input<Palette>('none');
 
-	/**
-	 * Display empty state section in center
-	 */
 	readonly center = input(false, { transform: booleanAttribute });
 
 	/**
