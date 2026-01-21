@@ -25,9 +25,6 @@ export class CommentBlockComponent {
 
 	readonly comments = contentChildren(CommentComponent, { read: CommentComponent, descendants: true });
 
-	/**
-	 * Display block comment in compact
-	 */
 	readonly compact = input(false, { transform: booleanAttribute });
 
 	/**
@@ -37,19 +34,10 @@ export class CommentBlockComponent {
 	 */
 	readonly small = input(false, { transform: booleanAttribute });
 
-	/**
-	 * Set the block comment response
-	 */
 	readonly chatAnswer = input(false, { transform: booleanAttribute });
 
-	/**
-	 * Display author name
-	 */
 	readonly authorName = input<PortalContent>();
 
-	/**
-	 * Display avatar
-	 */
 	readonly avatar = input<TemplateRef<unknown>>();
 
 	/**

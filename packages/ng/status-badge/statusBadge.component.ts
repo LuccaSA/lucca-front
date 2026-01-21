@@ -18,7 +18,7 @@ export class StatusBadgeComponent implements OnChanges {
 	readonly #luClass = inject(LuClass);
 
 	/**
-	 * Ellipsis tooltip when long content
+	 * Truncates the text with an ellipsis and adds a tooltip when the label is too long
 	 */
 	readonly withEllipsis = input(false, { transform: booleanAttribute });
 

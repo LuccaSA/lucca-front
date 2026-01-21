@@ -55,12 +55,12 @@ export class ClearComponent<T> extends ALuClear<T> implements ILuClear<T> {
 	readonly size = input<'S' | null>(null);
 
 	/**
-	 * Disabled the chip
+	 * Disabled the clear
 	 */
 	readonly disabled = input(false, { transform: booleanAttribute });
 
 	/**
-	 * Applies a color palette to the clear
+	 * Which palette should be used for the entire clear
 	 */
 	readonly palette = input<Palette>('none');
 

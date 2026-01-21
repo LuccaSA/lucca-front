@@ -17,7 +17,7 @@ import { IconComponent } from '@lucca-front/ng/icon';
 })
 export class VerticalNavigationLinkComponent {
 	/**
-	 * dds an icon to the vertical navigation link
+	 * adds an icon to the vertical navigation link
 	 */
 	readonly icon = input<LuccaIcon | null>(null);
 

@@ -13,8 +13,5 @@ import { booleanAttribute, ChangeDetectionStrategy, Component, input, ViewEncaps
 	changeDetection: ChangeDetectionStrategy.OnPush,
 })
 export class FormComponent {
-	/**
-	 * Take up as much space as possible
-	 */
 	readonly maxWidth = input(false, { transform: booleanAttribute });
 }

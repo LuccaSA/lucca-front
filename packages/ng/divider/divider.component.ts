@@ -25,9 +25,6 @@ export class DividerComponent implements OnChanges {
 	 */
 	readonly separatorRole = input(false, { transform: booleanAttribute });
 
-	/**
-	 * Display the divider vertically.
-	 */
 	readonly vertical = input(false, { transform: booleanAttribute });
 
 	/**

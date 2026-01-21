@@ -12,19 +12,10 @@ import { booleanAttribute, ChangeDetectionStrategy, Component, computed, input, 
 	changeDetection: ChangeDetectionStrategy.OnPush,
 })
 export class ContainerComponent {
-	/**
-	 * Place the content in the center
-	 */
 	readonly center = input(false, { transform: booleanAttribute });
 
-	/**
-	 * The content can overflow the maximum size set
-	 */
 	readonly overflow = input(false, { transform: booleanAttribute });
 
-	/**
-	 * Set the maximum size of the content
-	 */
 	readonly max = input<null | 'M' | 'L' | 'XL' | 'XXL' | 'XXXL'>(null);
 
 	readonly classesConfig = computed(() => ({

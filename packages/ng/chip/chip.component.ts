@@ -32,7 +32,7 @@ export class ChipComponent {
 	readonly withEllipsis = input(false, { transform: booleanAttribute });
 
 	/**
-	 * Removed kill button
+	 * Makes the chip non-removable
 	 */
 	readonly unkillable = input(false, { transform: booleanAttribute });
 

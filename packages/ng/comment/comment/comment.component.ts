@@ -29,14 +29,8 @@ export class CommentComponent {
 
 	#parentBlock = inject(COMMENT_BLOCK_INSTANCE);
 
-	/**
-	 * Comment content
-	 */
 	readonly content = input<string>();
 
-	/**
-	 * Add a date to the comment
-	 */
 	readonly date = input<Date>();
 
 	/**

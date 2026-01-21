@@ -23,9 +23,6 @@ let nextId = 0;
 export class BreadcrumbsComponent {
 	readonly intl = getIntl(LU_BREADCRUMBS_TRANSLATIONS);
 
-	/**
-	 * Disabled compact mod
-	 */
 	readonly disableCompact = input(false, { transform: booleanAttribute });
 
 	readonly links = contentChildren(BreadcrumbsLinkDirective);

@@ -46,9 +46,6 @@ export class SegmentedControlTabsComponent<T = unknown> implements AfterContentI
 	 */
 	readonly vertical = input(false, { transform: booleanAttribute });
 
-	/**
-	 * Show or set the active tabs
-	 */
 	active = model<T>(null);
 
 	readonly id = `segmentedControl${nextId++}`;
