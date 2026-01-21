@@ -12,7 +12,7 @@
 		[attr.aria-activedescendant]="activeDescendant$ | async"
 		[attr.aria-expanded]="isPanelOpen"
 		[attr.aria-controls]="ariaControls"
-		placeholder="{{ inputPlaceholder ? inputPlaceholder : intl.placeholder }}"
+		placeholder="{{ inputPlaceholder ? inputPlaceholder : intl().placeholder }}"
 		[ngModel]="clue"
 		(ngModelChange)="clueChanged($event)"
 		[ngModelOptions]="{ standalone: true }"
@@ -29,7 +29,7 @@
 	</div>
 	@if (!filterPillMode) {
 		@if (clearable && hasValue() && (disabled$ | async) === false) {
-			<lu-clear class="simpleSelect-field-clear" (onClear)="clearValue($event); inputElement.focus()">{{ intl.clear }}</lu-clear>
+			<lu-clear class="simpleSelect-field-clear" (onClear)="clearValue($event); inputElement.focus()">{{ intl().clear }}</lu-clear>
 		}
 		<lu-icon icon="arrowChevronBottom" class="simpleSelect-field-icon" />
 		<lu-icon icon="searchMagnifyingGlass" class="simpleSelect-field-icon mod-search" />

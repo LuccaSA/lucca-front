@@ -2,7 +2,7 @@ import { booleanAttribute, ChangeDetectionStrategy, Component, computed, inject,
 import { outputFromObservable } from '@angular/core/rxjs-interop';
 import { FormsModule } from '@angular/forms';
 import { ButtonComponent } from '@lucca-front/ng/button';
-import { getIntl, IntlParamsPipe } from '@lucca-front/ng/core';
+import { intlInputOptions, IntlParamsPipe } from '@lucca-front/ng/core';
 import { DividerComponent } from '@lucca-front/ng/divider';
 import { FormFieldComponent } from '@lucca-front/ng/form-field';
 import { TextInputComponent } from '@lucca-front/ng/forms';
@@ -28,7 +28,7 @@ import { formatFileSize } from '../formatter';
 export class FileEntryComponent {
 	#locale = inject(LOCALE_ID);
 
-	readonly intl = getIntl(LU_FILE_UPLOAD_TRANSLATIONS);
+	readonly intl = input(...intlInputOptions(LU_FILE_UPLOAD_TRANSLATIONS));
 
 	readonly state = input<'success' | 'loading' | 'error' | 'default'>('default');
 
@@ -70,7 +70,7 @@ export class FileEntryComponent {
 	readonly fileTypeDisplay = computed(() => {
 		const fileExtension: string = extractFileExtension(this.fileType());
 
-		return this.intl.file.replace('{{fileTypeLastPart}}', fileExtension);
+		return this.intl().file.replace('{{fileTypeLastPart}}', fileExtension);
 	});
 
 	readonly previewUrl = input<string>('');

@@ -69,13 +69,13 @@
 				</ng-template>
 				@if (ctx.options.length === 0 && (loading$ | async) === false) {
 					<div class="lu-picker-content-option-emptyState">
-						{{ ctx.clueChange.length ? intl.emptyResults : intl.emptyOptions }}
+						{{ ctx.clueChange.length ? intl().emptyResults : intl().emptyOptions }}
 					</div>
 				}
 			</div>
 			@if (loading$ | async) {
 				<div class="lu-picker-content-loading">
-					<div class="loading">{{ intl.loading }}</div>
+					<div class="loading">{{ intl().loading }}</div>
 				</div>
 			}
 			@if (ctx.shouldDisplayAddOption) {
