@@ -30,7 +30,6 @@
 	position: absolute;
 	pointer-events: auto;
 	z-index: 1000;
-	max-inline-size: 35rem !important;
 
 	> * {
 		flex-grow: 1;
@@ -40,6 +39,10 @@
 	&.mod-optionPicker {
 		min-inline-size: 13rem;
 		max-inline-size: 30rem;
+	}
+
+	&:has(> lu-select-panel) {
+		max-inline-size: 35rem !important;
 	}
 }
 
