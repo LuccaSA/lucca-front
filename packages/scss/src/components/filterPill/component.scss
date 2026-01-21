@@ -8,7 +8,6 @@
 @use '@lucca-front/scss/src/components/clear/exports' as clear;
 @use '@lucca-front/scss/src/components/segmentedControl/exports' as segmentedControl;
 @use '@lucca-front/scss/src/components/textField/exports' as textField;
-@use '@lucca-front/scss/src/components/formLabel/exports' as formLabel;
 
 @mixin component($atRoot: namespace.$defaultAtRoot) {
 	display: var(--components-filterPill-display);
@@ -42,9 +41,16 @@
 		.filterPill_popover-content-option {
 			padding: var(--pr-t-spacings-50) var(--pr-t-spacings-100);
 			border-radius: var(--pr-t-border-radius-default);
+			position: relative;
 
 			.formLabel {
-				@include formLabel.widthAuto;
+				position: static;
+
+				&::before {
+					content: '';
+					position: absolute;
+					inset: 0;
+				}
 			}
 
 			&:hover {
