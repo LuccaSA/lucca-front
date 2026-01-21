@@ -1,6 +1,7 @@
-import { LOCALE_ID, Pipe, PipeTransform } from '@angular/core';
+import { Pipe, PipeTransform } from '@angular/core';
 import { ALuSelectInputComponent } from '@lucca-front/ng/core-select';
-import { applicationConfig, StoryObj } from '@storybook/angular';
+import { ColorInputComponent, ColorOption } from '@lucca-front/ng/forms';
+import { StoryObj } from '@storybook/angular';
 import { HiddenArgType } from '../../../helpers/common-arg-types';
 
 export type LegumeColor = 'green' | 'purple' | 'red' | 'orange' | 'white' | 'yellow' | 'brown';
@@ -18,6 +19,13 @@ export type LuCoreSelectInputStoryComponent = {
 	colorNameByColor: Record<LegumeColor, string>;
 	addLegume: (name: string, existing: ILegume[]) => ILegume[];
 } & ALuSelectInputComponent<ILegume, ILegume | ILegume[]>;
+
+export type LuCoreColorPickerInputStoryComponent = {
+	colors: ColorOption[];
+	size: string;
+	noSearch: boolean;
+} & ColorInputComponent &
+	ALuSelectInputComponent<ColorOption, ColorOption | ColorOption[]>;
 
 export const allLegumes: ILegume[] = [
 	{ name: 'Artichaut', index: 1, color: 'green' },
@@ -53,6 +61,59 @@ export const allLegumes: ILegume[] = [
 	{ name: 'Topinambour Topinambour Topinambour Topinambour Topinambour Topinambour', index: 31, color: 'yellow' },
 ];
 
+export const colorDecoratives500: ColorOption[] = [
+	{ name: 'Myrtille', index: 0, background: 'var(--palettes-blueberry-500)' },
+	{ name: 'Concombre', index: 1, background: 'var(--palettes-cucumber-500)' },
+	{ name: 'Glacier', index: 2, background: 'var(--palettes-glacier-500)' },
+	{ name: 'Raisin', index: 3, background: 'var(--palettes-grape-500)' },
+	{ name: 'Kiwi', index: 4, background: 'var(--palettes-kiwi-500)' },
+	{ name: 'Lagon', index: 5, background: 'var(--palettes-lagoon-500)' },
+	{ name: 'Lavande', index: 6, background: 'var(--palettes-lavender-500)' },
+	{ name: 'Citron', index: 7, background: 'var(--palettes-lime-500)' },
+	{ name: 'Menthe', index: 8, background: 'var(--palettes-mint-500)' },
+	{ name: 'Ananas', index: 9, background: 'var(--palettes-pineapple-500)' },
+	{ name: 'Citrouille', index: 10, background: 'var(--palettes-pumpkin-500)' },
+	{ name: 'Pastèque', index: 11, background: 'var(--palettes-watermelon-500)' },
+];
+
+export const colorDecoratives50: ColorOption[] = [
+	{ name: 'Myrtille 50', index: 0, background: 'var(--palettes-blueberry-50)', borderColor: 'var(--palettes-blueberry-500)' },
+	{ name: 'Concombre 50', index: 1, background: 'var(--palettes-cucumber-50)', borderColor: 'var(--palettes-cucumber-500)' },
+	{ name: 'Glacier 50', index: 2, background: 'var(--palettes-glacier-50)', borderColor: 'var(--palettes-glacier-500)' },
+	{ name: 'Raisin 50', index: 3, background: 'var(--palettes-grape-50)', borderColor: 'var(--palettes-grape-500)' },
+	{ name: 'Kiwi 50', index: 4, background: 'var(--palettes-kiwi-50)', borderColor: 'var(--palettes-kiwi-500)' },
+	{ name: 'Lagon 50', index: 5, background: 'var(--palettes-lagoon-50)', borderColor: 'var(--palettes-lagoon-500)' },
+	{ name: 'Lavande 50', index: 6, background: 'var(--palettes-lavender-50)', borderColor: 'var(--palettes-lavender-500)' },
+	{ name: 'Citron 50', index: 7, background: 'var(--palettes-lime-50)', borderColor: 'var(--palettes-lime-500)' },
+	{ name: 'Menthe 50', index: 8, background: 'var(--palettes-mint-50)', borderColor: 'var(--palettes-mint-500)' },
+	{ name: 'Ananas 50', index: 9, background: 'var(--palettes-pineapple-50)', borderColor: 'var(--palettes-pineapple-500)' },
+	{ name: 'Citrouille 50', index: 10, background: 'var(--palettes-pumpkin-50)', borderColor: 'var(--palettes-pumpkin-500)' },
+	{ name: 'Pastèque 50', index: 11, background: 'var(--palettes-watermelon-50)', borderColor: 'var(--palettes-watermelon-500)' },
+];
+
+export const colorNeutral: ColorOption[] = [
+	{ name: 'Neutral 1000', index: 0, background: 'black' },
+	{ name: 'Neutral 900', index: 1, background: 'var(--palettes-neutral-900)' },
+	{ name: 'Neutral 800', index: 2, background: 'var(--palettes-neutral-800)' },
+	{ name: 'Neutral 700', index: 3, background: 'var(--palettes-neutral-700)' },
+	{ name: 'Neutral 600', index: 4, background: 'var(--palettes-neutral-600)' },
+	{ name: 'Neutral 500', index: 5, background: 'var(--palettes-neutral-500)' },
+	{ name: 'Neutral 400', index: 6, background: 'var(--palettes-neutral-400)', borderColor: 'var(--palettes-neutral-500)' },
+	{ name: 'Neutral 300', index: 7, background: 'var(--palettes-neutral-300)', borderColor: 'var(--palettes-neutral-500)' },
+	{ name: 'Neutral 200', index: 8, background: 'var(--palettes-neutral-200)', borderColor: 'var(--palettes-neutral-500)' },
+	{ name: 'Neutral 100', index: 9, background: 'var(--palettes-neutral-100)', borderColor: 'var(--palettes-neutral-500)' },
+	{ name: 'Neutral 50', index: 10, background: 'var(--palettes-neutral-50)', borderColor: 'var(--palettes-neutral-500)' },
+	{ name: 'Neutral 0', index: 11, background: 'var(--palettes-neutral-0)', borderColor: 'var(--palettes-neutral-500)' },
+];
+
+export const colorLucca: ColorOption[] = [
+	{ name: 'Temps et activités', index: 0, background: 'var(--palettes-timmi-700)' },
+	{ name: 'Dépenses professionnelles', index: 1, background: 'var(--palettes-cleemy-700)' },
+	{ name: 'Talent', index: 2, background: 'var(--palettes-poplee-700)' },
+	{ name: 'Rémunérations et avantages', index: 3, background: 'var(--palettes-pagga-700)' },
+	{ name: 'Gestion administrative', index: 4, background: 'var(--palettes-coreHR-700)' },
+];
+
 export const colorNameByColor: Record<LegumeColor, string> = {
 	green: 'vert',
 	purple: 'violet',
@@ -62,6 +123,25 @@ export const colorNameByColor: Record<LegumeColor, string> = {
 	yellow: 'jaune',
 	brown: 'marron',
 };
+
+export const colorPickerStory = {
+	argTypes: {
+		size: {
+			options: ['', 'S'],
+			control: {
+				type: 'select',
+			},
+			description: 'Modifie la taille du form field.',
+		},
+		compact: {
+			description: 'Modifie la taille du composant.',
+		},
+		clearable: {
+			description: "Ajoute un bouton de suppression lorsqu'une couleur est sélectionnée",
+		},
+		colors: HiddenArgType,
+	},
+} satisfies StoryObj<LuCoreColorPickerInputStoryComponent>;
 
 export const coreSelectStory = {
 	argTypes: {
@@ -102,5 +182,12 @@ export class SortLegumesPipe implements PipeTransform {
 			.map((legume) => ({ legume, key: by.map((key) => (typeof key === 'string' ? legume[key] : key(legume))).join('') }))
 			.sort((a, b) => a.key.localeCompare(b.key))
 			.map((a) => a.legume);
+	}
+}
+
+@Pipe({ name: 'filterColors', standalone: true })
+export class FilterColorsPipe implements PipeTransform {
+	transform(colors: ColorOption[], clue: string): ColorOption[] {
+		return clue ? colors?.filter((color) => color.name.toLowerCase().includes(clue.toLowerCase())) : colors;
 	}
 }

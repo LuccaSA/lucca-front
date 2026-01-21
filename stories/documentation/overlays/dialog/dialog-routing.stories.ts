@@ -1,11 +1,12 @@
 import { JsonPipe } from '@angular/common';
-import { ChangeDetectionStrategy, Component, computed, inject, Injectable, signal } from '@angular/core';
+import { ChangeDetectionStrategy, Component, computed, inject, Injectable, input, numberAttribute, signal } from '@angular/core';
 import { toSignal } from '@angular/core/rxjs-interop';
 import { FormsModule } from '@angular/forms';
 import { ActivatedRoute, provideRouter, Router, RouterLink, RouterOutlet, Routes, withComponentInputBinding } from '@angular/router';
 import { ButtonComponent } from '@lucca-front/ng/button';
 import { CalloutComponent } from '@lucca-front/ng/callout';
 import {
+	DIALOG_ROUTE_DISMISS_TRIGGER,
 	DialogCloseDirective,
 	DialogComponent,
 	DialogContentComponent,
@@ -15,13 +16,14 @@ import {
 	dialogRouteFactory,
 	injectDialogData,
 	injectDialogRef,
+	provideDialogRoutingReuseStrategy,
 } from '@lucca-front/ng/dialog';
 import { FormFieldComponent } from '@lucca-front/ng/form-field';
 import { CheckboxInputComponent, NumberInputComponent, TextInputComponent } from '@lucca-front/ng/forms';
+import { LinkComponent } from '@lucca-front/ng/link';
 import { applicationConfig, Meta, StoryObj } from '@storybook/angular';
 import { map } from 'rxjs';
 import { StoryModelDisplayComponent } from 'stories/helpers/story-model-display.component';
-
 @Injectable()
 class DataProvider {
 	dummy = signal(42);
@@ -33,6 +35,18 @@ class DataProvider {
 	changeDetection: ChangeDetectionStrategy.OnPush,
 })
 class EmptyComponent {}
+
+@Component({
+	template: `Child 1`,
+	changeDetection: ChangeDetectionStrategy.OnPush,
+})
+class Child1Component {}
+
+@Component({
+	template: `Child 2`,
+	changeDetection: ChangeDetectionStrategy.OnPush,
+})
+class Child2Component {}
 
 @Component({
 	imports: [CalloutComponent],
@@ -115,13 +129,55 @@ class TestDialogComponent {
 }
 
 @Component({
+	standalone: true,
+	imports: [DialogComponent, DialogHeaderComponent, DialogContentComponent, DialogFooterComponent, ButtonComponent, LinkComponent, DialogDismissDirective, RouterOutlet],
+	template: `
+		<lu-dialog>
+			<lu-dialog-header>
+				<h1>Dialog opened by route ({{ id() }})</h1>
+			</lu-dialog-header>
+			<lu-dialog-content>
+				<nav>
+					<ul>
+						<li>
+							<a [luLink]="['./', 'child-1']">Child 1</a>
+						</li>
+						<li>
+							<a [luLink]="['./', 'child-2']">Child 2</a>
+						</li>
+					</ul>
+				</nav>
+				<router-outlet />
+			</lu-dialog-content>
+			<lu-dialog-footer>
+				<div class="footer-actions">
+					<button luButton type="submit" (click)="openNext()">Go to next ID</button>
+					<button luButton="outline" type="button" luDialogDismiss>Dismiss</button>
+				</div>
+			</lu-dialog-footer>
+		</lu-dialog>
+	`,
+	changeDetection: ChangeDetectionStrategy.OnPush,
+})
+class TestWithInternalNavigationDialogComponent {
+	id = input.required({ transform: numberAttribute });
+
+	router = inject(Router);
+
+	async openNext() {
+		await this.router.navigateByUrl(`/dialog-with-redirect/${this.id() + 1}`);
+	}
+}
+
+@Component({
 	selector: 'dialog-routing-stories',
 	template: `
 		<div class="pr-u-marginBlockEnd200">
 			<p>
 				Current URL: <strong>{{ url() }}</strong>
 			</p>
-			<button luButton type="button" routerLink="/dialog" [queryParams]="{ lol: 12 }">Navigate to /dialog</button>
+			<button luButton type="button" routerLink="/dialog/12" [queryParams]="{ lol: 12 }">Navigate to /dialog/12</button>
+			<button luButton type="button" class="pr-u-marginInlineStart100" routerLink="/dialog-with-redirect/12">Navigate to /dialog-with-redirect/12</button>
 		</div>
 
 		<p class="pr-u-marginBlockStart200">Dialog data out</p>
@@ -155,9 +211,21 @@ const dialogRoute = dialogRouteFactory(TestDialogComponent, {
 	},
 });
 
+const dialogWithRedirectRoute = dialogRouteFactory(TestWithInternalNavigationDialogComponent, {
+	dialogRouteConfig: {
+		onDismissed: () => {
+			if (inject(DIALOG_ROUTE_DISMISS_TRIGGER) === 'navigation') {
+				return;
+			}
+
+			void inject(Router).navigate(['dismissed']);
+		},
+	},
+});
+
 const routes: Routes = [
 	dialogRoute({
-		path: 'dialog',
+		path: 'dialog/:id',
 		dataFactory: () => inject(DataProvider).dummy(),
 		dialogRouteConfig: {
 			// Can be overridden here
@@ -165,15 +233,34 @@ const routes: Routes = [
 			canDeactivate: [(c) => c.allowThisDialogToClose()],
 		},
 	}),
+	dialogWithRedirectRoute({
+		path: 'dialog-with-redirect/:id',
+		dialogRouteConfig: {
+			children: [
+				{
+					path: 'child-1',
+					component: Child1Component,
+				},
+				{
+					path: 'child-2',
+					component: Child2Component,
+				},
+				{
+					path: '',
+					pathMatch: 'full',
+					redirectTo: 'child-1',
+				},
+			],
+		},
+	}),
 	{ path: 'closed', component: ClosedComponent },
 	{ path: 'dismissed', component: DismissedComponent },
 	{ path: '**', component: EmptyComponent },
 ];
-
 export default {
 	title: 'Documentation/Overlays/Dialog/Routing',
 	component: DialogRoutingStory,
-	decorators: [applicationConfig({ providers: [provideRouter(routes, withComponentInputBinding()), DataProvider] })],
+	decorators: [applicationConfig({ providers: [provideDialogRoutingReuseStrategy(), provideRouter(routes, withComponentInputBinding()), DataProvider] })],
 } as Meta;
 
 const Template = (args: DialogRoutingStory) => ({
@@ -245,6 +332,13 @@ class DismissedComponent {}
 class DialogRoutingStory {
 	service = inject(DataProvider);
 }
+
+// (Optional) Add \`provideDialogRoutingReuseStrategy()\` in application config providers to handle route reuse strategy for dialogs
+const appConfig = [
+	// ...
+	provideDialogRoutingReuseStrategy(),
+	// ...
+]
 `;
 
 export const Basic: StoryObj<DialogRoutingStory> = {

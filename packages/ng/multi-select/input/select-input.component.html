@@ -2,7 +2,7 @@
 
 @if (!filterPillMode) {
 	@if (hasValue() && clearable && (disabled$ | async) === false) {
-		<lu-clear class="multipleSelect-clear" (onClear)="clearValue($event)">{{ intl.clear }}</lu-clear>
+		<lu-clear class="multipleSelect-clear" (onClear)="clearValue($event)">{{ intl().clear }}</lu-clear>
 	}
 
 	<span aria-hidden="true" class="multipleSelect-arrow lucca-icon icon-arrowChevronBottom"></span>

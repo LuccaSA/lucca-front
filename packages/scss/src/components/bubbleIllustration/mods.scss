@@ -1,0 +1,11 @@
+@mixin S {
+	--components-bubbleIllustration-size: var(--pr-t-spacings-400);
+}
+
+@mixin L {
+	--components-bubbleIllustration-size: var(--pr-t-spacings-600);
+}
+
+@mixin noAction {
+	--components-bubbleIllustration-action-display: none;
+}

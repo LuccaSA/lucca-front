@@ -1,7 +1,7 @@
 import { AsyncPipe, DatePipe, NgTemplateOutlet } from '@angular/common';
-import { ChangeDetectionStrategy, Component, inject, Signal } from '@angular/core';
+import { ChangeDetectionStrategy, Component, inject, input, Signal } from '@angular/core';
 import { toObservable } from '@angular/core/rxjs-interop';
-import { getIntl, IntlParamsPipe } from '@lucca-front/ng/core';
+import { intlInputOptions, IntlParamsPipe } from '@lucca-front/ng/core';
 import { IconComponent } from '@lucca-front/ng/icon';
 import { POPOVER_CONFIG } from '@lucca-front/ng/popover2';
 import { ILuUser } from '@lucca-front/ng/user';
@@ -28,7 +28,7 @@ export class LuUserPopoverComponent {
 
 	#service = inject(LuUserPopoverStore);
 
-	intl = getIntl(LU_POPUP_EMPLOYEE_TRANSLATIONS);
+	intl = input(...intlInputOptions(LU_POPUP_EMPLOYEE_TRANSLATIONS));
 
 	#errorImage$ = new BehaviorSubject<boolean>(false);
 

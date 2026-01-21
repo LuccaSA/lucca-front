@@ -19,9 +19,9 @@ function getTemplate(args: EmptyStateSectionBasicStory): string {
 	<div class="emptyState-container">
 		<div class="emptyState-content">
 			<div
-				class="emptyState-content-icon"
+				class="emptyState-content-icon bubbleIllustration mod-action mod-L"
 				aria-hidden="true"
-				[innerHtml]="'https://cdn.lucca.fr/lucca-front/assets/empty-states/icons/iconCalendarAction.svg' | luSafeExternalSvg"
+				[innerHtml]="'https://cdn.lucca.fr/transverse/prisme/visuals/bubble-illustration/calendar.svg' | luSafeExternalSvg"
 			></div>
 			<div class="emptyState-content-text">
 				<h3 class="emptyState-content-heading">Empty State</h3>
