@@ -13,6 +13,11 @@
 	display: flex;
 	flex-direction: column;
 
+	.formLabel-info {
+		position: relative;
+		z-index: 1;
+	}
+
 	@at-root ($atRoot) {
 		.inputFramed-header-field {
 			flex: 1;
