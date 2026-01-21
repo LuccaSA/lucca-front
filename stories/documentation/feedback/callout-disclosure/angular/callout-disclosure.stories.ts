@@ -37,7 +37,7 @@ export default {
 	},
 	argTypes: {
 		icon: {
-			options: [null, 'info', 'success', 'warning', 'error', 'help'],
+			options: [null, 'signInfo', 'signSuccess', 'signWarning', 'signError', 'signHelp'],
 			control: {
 				type: 'select',
 			},
