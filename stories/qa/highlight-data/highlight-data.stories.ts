@@ -3,10 +3,9 @@ import { provideRouter } from '@angular/router';
 import { ButtonComponent } from '@lucca-front/ng/button';
 import { HighlightDataComponent } from '@lucca-front/ng/highlight-data';
 import { LinkComponent } from '@lucca-front/ng/link';
-import { applicationConfig, Meta, StoryFn } from '@storybook/angular';
+import { applicationConfig, Meta, StoryObj } from '@storybook/angular';
 
 @Component({
-	standalone: true,
 	selector: 'highlight-data-stories',
 	templateUrl: './highlight-data.stories.html',
 	imports: [HighlightDataComponent, ButtonComponent, LinkComponent],
@@ -14,7 +13,7 @@ import { applicationConfig, Meta, StoryFn } from '@storybook/angular';
 class HighlightDataStory {}
 
 export default {
-	title: 'QA/Highlight Data',
+	title: 'QA/HighlightData',
 	component: HighlightDataStory,
 	decorators: [
 		applicationConfig({
@@ -23,6 +22,9 @@ export default {
 	],
 } as Meta;
 
-const template: StoryFn<HighlightDataStory> = () => ({});
+const template = () => ({});
 
-export const basic = template.bind({});
+export const Basic: StoryObj<HighlightDataStory> = {
+	args: {},
+	render: template,
+};

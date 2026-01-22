@@ -1,4 +1,4 @@
-import { Meta, StoryFn } from '@storybook/angular';
+import { Meta, StoryObj } from '@storybook/angular';
 
 interface CalloutBasicStory {}
 
@@ -13,15 +13,19 @@ function getTemplate(args: CalloutBasicStory): string {
 		<span aria-hidden="true" class="lucca-icon icon-weatherStars"></span>
 	</div>
 	<div class="callout-content">
-		<div class="callout-content-description">Feedback description</div>
+		<div class="callout-content-description">
+			<p>Feedback description</p>
+		</div>
 	</div>
 </div>`;
 }
 
-const Template: StoryFn<CalloutBasicStory> = (args) => ({
+const Template = (args: CalloutBasicStory) => ({
 	props: args,
 	template: getTemplate(args),
 });
 
-export const Basic = Template.bind({});
-Basic.args = {};
+export const Basic: StoryObj<CalloutBasicStory> = {
+	args: {},
+	render: Template,
+};

@@ -338,7 +338,6 @@ export abstract class ALuOptionPickerComponent<T, O extends import('../item/opti
 	changeDetection: ChangeDetectionStrategy.OnPush,
 	animations: [luTransformPopover],
 	exportAs: 'LuOptionPicker',
-	standalone: true,
 	imports: [OverlayModule, A11yModule],
 	providers: [
 		{

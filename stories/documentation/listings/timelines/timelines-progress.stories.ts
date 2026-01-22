@@ -1,7 +1,7 @@
-import { Meta, StoryFn } from '@storybook/angular';
+import { Meta, StoryObj } from '@storybook/angular';
 
 interface TimelinesProgressStory {
-	width: number;
+	progress: number;
 }
 
 export default {
@@ -14,6 +14,7 @@ export default {
 				max: 100,
 				step: 1,
 			},
+			description: 'Progression en pourcentage entre deux étapes.',
 		},
 	},
 } as Meta;
@@ -40,10 +41,12 @@ function getTemplate(args: TimelinesProgressStory): string {
 	`;
 }
 
-const Template: StoryFn<TimelinesProgressStory> = (args) => ({
+const Template = (args: TimelinesProgressStory) => ({
 	props: args,
 	template: getTemplate(args),
 });
 
-export const Progress = Template.bind({});
-Progress.args = { progress: 50 };
+export const Progress: StoryObj<TimelinesProgressStory> = {
+	args: { progress: 50 },
+	render: Template,
+};

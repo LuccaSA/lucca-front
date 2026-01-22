@@ -35,5 +35,9 @@
 		&:has(.pageHeader-containerOptional) {
 			@include withContainer;
 		}
+
+		&:has(.pageHeader-content-title-back:not(:empty)) {
+			@include withBackButton;
+		}
 	}
 }

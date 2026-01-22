@@ -11,7 +11,6 @@ import { LU_MULTILANGUAGE_INPUT_TRANSLATIONS } from './multilanguage-input.trans
 
 @Component({
 	selector: 'lu-multilanguage-input',
-	standalone: true,
 	imports: [FormFieldComponent, ReactiveFormsModule, PopoverDirective, TextInputComponent, FormFieldComponent, FormsModule, InputDirective, IntlParamsPipe, LuTooltipTriggerDirective],
 	templateUrl: './multilanguage-input.component.html',
 	styleUrl: './multilanguage-input.component.scss',
@@ -43,6 +42,8 @@ export class MultilanguageInputComponent implements ControlValueAccessor {
 	placeholder = input('');
 
 	openOnFocus = input(false, { transform: booleanAttribute });
+
+	autocomplete = input<AutoFill>('off');
 
 	// Suffixed with Internal to avoid conflict with NgModel's disabled attribute
 	disabledInternal = signal(false);

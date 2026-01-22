@@ -1,11 +1,10 @@
-import { booleanAttribute, ChangeDetectionStrategy, Component, inject, Input, OnChanges, ViewEncapsulation } from '@angular/core';
-import { LuClass, PortalContent, PortalDirective } from '@lucca-front/ng/core';
+import { booleanAttribute, ChangeDetectionStrategy, Component, inject, input, ViewEncapsulation } from '@angular/core';
+import { LuClass, PortalContent, PortalDirective, ɵeffectWithDeps } from '@lucca-front/ng/core';
 import { LuTooltipModule } from '@lucca-front/ng/tooltip';
 import { InlineMessageState } from './inline-message-state';
 
 @Component({
 	selector: 'lu-inline-message',
-	standalone: true,
 	imports: [PortalDirective, LuTooltipModule],
 	providers: [LuClass],
 	templateUrl: './inline-message.component.html',
@@ -16,25 +15,35 @@ import { InlineMessageState } from './inline-message-state';
 		class: 'inlineMessage',
 	},
 })
-export class InlineMessageComponent implements OnChanges {
+export class InlineMessageComponent {
 	#luClass = inject(LuClass);
 
-	@Input({ required: true })
-	label: PortalContent;
+	/**
+	 * The title of the inline message
+	 */
+	readonly label = input.required<PortalContent>();
 
-	@Input()
-	state: InlineMessageState;
+	/**
+	 * Inline message state
+	 */
+	readonly state = input<InlineMessageState>();
 
-	@Input()
-	size: 'S' | 'M';
+	/**
+	 * Which size should the inline message be? Default, medium or small
+	 */
+	readonly size = input<'S' | 'M'>();
 
-	@Input({ transform: booleanAttribute })
-	withTooltip = false;
+	/**
+	 * Defines whether a tooltip is used in the inline message component
+	 */
+	readonly withTooltip = input(false, { transform: booleanAttribute });
 
-	ngOnChanges(): void {
-		this.#luClass.setState({
-			[`mod-${this.size}`]: !!this.size,
-			[`is-${this.state}`]: !!this.state,
+	constructor() {
+		ɵeffectWithDeps([this.size, this.state], (size, state) => {
+			this.#luClass.setState({
+				[`mod-${size}`]: !!size,
+				[`is-${state}`]: !!state,
+			});
 		});
 	}
 

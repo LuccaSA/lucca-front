@@ -1,4 +1,4 @@
-import { Meta, StoryFn } from '@storybook/angular';
+import { Meta, StoryObj } from '@storybook/angular';
 
 interface GaugeBasicStory {
 	palette: string;
@@ -16,12 +16,21 @@ export default {
 			control: {
 				type: 'select',
 			},
+			description: 'Applique une palette de couleurs à la jauge.',
 		},
-		value: {
-			control: { type: 'range', min: 0, max: 100, step: 1 },
+		thin: {
+			description: "Diminue l'épaisseur de la jauge.",
+		},
+		animated: {
+			description: 'Ajoute une animation au chargement ou lorsque la valeur est modifiée.',
 		},
 		size: {
 			control: { type: 'range', min: 32, max: 160, step: 8 },
+			description: 'Taille du composant pour sa forme circulaire.',
+		},
+		value: {
+			control: { type: 'range', min: 0, max: 100, step: 1 },
+			description: 'Valeur en pourcentage.',
 		},
 	},
 } as Meta;
@@ -39,10 +48,12 @@ function getTemplate(args: GaugeBasicStory): string {
 	`;
 }
 
-const Template: StoryFn<GaugeBasicStory> = (args) => ({
+const Template = (args: GaugeBasicStory) => ({
 	props: args,
 	template: getTemplate(args),
 });
 
-export const Basic = Template.bind({});
-Basic.args = { palette: '', thin: false, animated: false, value: 33, size: 40 };
+export const Basic: StoryObj<GaugeBasicStory> = {
+	args: { palette: '', thin: false, animated: false, value: 33, size: 40 },
+	render: Template,
+};

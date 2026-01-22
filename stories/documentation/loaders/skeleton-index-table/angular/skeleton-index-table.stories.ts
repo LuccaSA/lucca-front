@@ -21,9 +21,9 @@ export const Template: StoryObj<SkeletonIndexTableComponent> = {
 			},
 		},
 	},
-
 	args: {
 		cols: 5,
 		rows: 8,
+		colsAlign: { 3: 'center', 4: 'end' },
 	},
 };

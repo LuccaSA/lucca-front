@@ -1,4 +1,4 @@
-import { Meta, StoryFn } from '@storybook/angular';
+import { Meta, StoryObj } from '@storybook/angular';
 
 interface ButtonGroupStory {
 	outlined: boolean;
@@ -10,18 +10,20 @@ export default {
 	title: 'Documentation/Actions/Button/HTML&CSS/Group',
 	argTypes: {
 		outlined: {
+			description: 'Applique le style outlined (ghost) au bouton.',
 			control: {
 				type: 'boolean',
 			},
 		},
 		size: {
+			description: 'Modifie la taille du composant.',
 			options: ['', 'mod-S', 'mod-XS'],
 			control: {
 				type: 'select',
 			},
 		},
 		noFlexWrap: {
-			description: 'Désactive la réorganisation des butons en cas de manque de place.',
+			description: 'Désactive la réorganisation des boutons en cas de manque de place.',
 			control: {
 				type: 'boolean',
 			},
@@ -47,10 +49,12 @@ function getTemplate(args: ButtonGroupStory): string {
 </ul>`;
 }
 
-const Template: StoryFn<ButtonGroupStory> = (args) => ({
+const Template = (args: ButtonGroupStory) => ({
 	props: args,
 	template: getTemplate(args),
 });
 
-export const GroupButton = Template.bind({});
-GroupButton.args = { noFlexWrap: false, outlined: false, size: '' };
+export const GroupButton: StoryObj<ButtonGroupStory> = {
+	args: { noFlexWrap: false, outlined: false, size: '' },
+	render: Template,
+};

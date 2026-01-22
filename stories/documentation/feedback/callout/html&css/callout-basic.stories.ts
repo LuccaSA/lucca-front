@@ -1,4 +1,4 @@
-import { Meta, StoryFn } from '@storybook/angular';
+import { Meta, StoryObj } from '@storybook/angular';
 
 interface CalloutBasicStory {
 	palette: string;
@@ -24,19 +24,23 @@ export default {
 } as Meta;
 
 function getTemplate(args: CalloutBasicStory): string {
-	let palette = args.palette ? ` palette-${args.palette}` : ``;
+	const palette = args.palette ? ` palette-${args.palette}` : ``;
 	const s = args.s ? ` mod-S` : ``;
 	return `<div class="callout${palette}${s}">
 	<div class="callout-content">
-		<div class="callout-content-description">Feedback description</div>
+		<div class="callout-content-description">
+			<p>Feedback description</p>
+		</div>
 	</div>
 </div>`;
 }
 
-const Template: StoryFn<CalloutBasicStory> = (args) => ({
+const Template = (args: CalloutBasicStory) => ({
 	props: args,
 	template: getTemplate(args),
 });
 
-export const Basic = Template.bind({});
-Basic.args = { palette: '', s: false };
+export const Basic: StoryObj<CalloutBasicStory> = {
+	args: { palette: '', s: false },
+	render: Template,
+};

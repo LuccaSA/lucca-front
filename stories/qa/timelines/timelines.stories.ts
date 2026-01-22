@@ -1,8 +1,7 @@
 import { Component } from '@angular/core';
-import { Meta, StoryFn } from '@storybook/angular';
+import { Meta, StoryObj } from '@storybook/angular';
 
 @Component({
-	standalone: true,
 	selector: 'timelines-stories',
 	templateUrl: './timelines.stories.html',
 })
@@ -13,6 +12,9 @@ export default {
 	component: TimelinesStory,
 } as Meta;
 
-const template: StoryFn<TimelinesStory> = () => ({});
+const template = () => ({});
 
-export const basic = template.bind({});
+export const Basic: StoryObj<TimelinesStory> = {
+	args: {},
+	render: template,
+};

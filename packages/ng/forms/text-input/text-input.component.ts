@@ -1,8 +1,9 @@
 import { NgTemplateOutlet } from '@angular/common';
-import { booleanAttribute, Component, ElementRef, EventEmitter, input, Input, Output, ViewChild, ViewEncapsulation } from '@angular/core';
+import { booleanAttribute, ChangeDetectionStrategy, Component, ElementRef, input, linkedSignal, output, signal, viewChild, ViewEncapsulation } from '@angular/core';
 import { ReactiveFormsModule } from '@angular/forms';
 import { LuccaIcon } from '@lucca-front/icons';
-import { getIntl } from '@lucca-front/ng/core';
+import { ClearComponent } from '@lucca-front/ng/clear';
+import { getIntl, ɵeffectWithDeps } from '@lucca-front/ng/core';
 import { InputDirective } from '@lucca-front/ng/form-field';
 import { NgxMaskDirective, provideNgxMask } from 'ngx-mask';
 import { FormFieldIdDirective } from '../form-field-id.directive';
@@ -15,77 +16,64 @@ type TextFieldType = 'text' | 'email' | 'password' | 'url';
 
 @Component({
 	selector: 'lu-text-input',
-	standalone: true,
-	imports: [InputDirective, ReactiveFormsModule, FormFieldIdDirective, NgTemplateOutlet, NgxMaskDirective],
+	imports: [InputDirective, ReactiveFormsModule, FormFieldIdDirective, NgTemplateOutlet, NgxMaskDirective, ClearComponent],
 	templateUrl: './text-input.component.html',
 	hostDirectives: [NoopValueAccessorDirective],
 	encapsulation: ViewEncapsulation.None,
+	changeDetection: ChangeDetectionStrategy.OnPush,
 	providers: [provideNgxMask()],
 })
 export class TextInputComponent {
-	ngControl = injectNgControl();
+	readonly intl = getIntl(LU_TEXTFIELD_TRANSLATIONS);
+	readonly ngControl = injectNgControl();
 
-	mask = input<string | null>(null);
+	readonly inputElementRef = viewChild<ElementRef<HTMLInputElement>>('inputElement');
 
-	@Input()
-	placeholder: string = '';
+	readonly mask = input<string | null>(null);
 
-	@Input()
-	autocomplete: AutoFill = 'off';
+	readonly placeholder = input<string>('');
 
-	@Input({ transform: booleanAttribute })
-	hasClearer = false;
+	readonly autocomplete = input<AutoFill>('off');
 
-	@Input({ transform: booleanAttribute })
-	hasSearchIcon = false;
+	readonly hasClearer = input(false, { transform: booleanAttribute });
 
-	@Input({ transform: booleanAttribute })
-	valueAlignRight = false;
+	readonly hasSearchIcon = input(false, { transform: booleanAttribute });
 
-	@ViewChild('inputElement', { static: true })
-	inputElementRef: ElementRef<HTMLInputElement>;
+	readonly valueAlignRight = input(false, { transform: booleanAttribute });
 
-	@Input()
-	prefix: TextInputAddon;
+	readonly prefix = input<TextInputAddon>();
 
-	@Input()
-	suffix: TextInputAddon;
+	readonly suffix = input<TextInputAddon>();
 
-	@Output()
-	// eslint-disable-next-line @angular-eslint/no-output-native
-	blur = new EventEmitter<FocusEvent>();
-
-	@Input()
-	get type(): TextFieldType {
-		return this.showPassword ? 'text' : this._type;
-	}
-
-	set type(type: TextFieldType) {
-		this._type = type;
-	}
-
-	@Input()
 	/**
 	 * Search icon to use for when `hasSearchIcon` is true, defaults to 'search'
 	 */
-	searchIcon: LuccaIcon = 'searchMagnifyingGlass';
+	readonly searchIcon = input<LuccaIcon>('searchMagnifyingGlass');
 
-	showPassword: boolean = false;
+	readonly type = input<TextFieldType>('text');
 
-	private _type: TextFieldType = 'text';
+	readonly typeRef = linkedSignal(() => this.type());
+
+	// eslint-disable-next-line @angular-eslint/no-output-native
+	readonly blur = output<FocusEvent>();
+
+	protected showPassword = signal<boolean>(false);
 
 	protected hasTogglePasswordVisibilityIcon() {
-		return this._type === 'password';
+		return this.typeRef() === 'password';
 	}
 
-	intl = getIntl(LU_TEXTFIELD_TRANSLATIONS);
+	constructor() {
+		ɵeffectWithDeps([this.showPassword], (showPassword) => this.typeRef.set(showPassword ? 'text' : this.type()));
+	}
 
 	clearValue(): void {
 		this.ngControl.reset();
-		this.inputElementRef.nativeElement.focus();
+		this.inputElementRef().nativeElement.focus();
 	}
 
 	togglePasswordVisibility() {
-		this.showPassword = !this.showPassword;
+		const _showPassword = this.showPassword();
+		this.showPassword.set(!_showPassword);
 	}
 }

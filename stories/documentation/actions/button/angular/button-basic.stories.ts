@@ -17,6 +17,7 @@ export default {
 		return {
 			template: `<button type="button" luButton${luButton !== '' ? `="${luButton}"` : ''}${generateInputs(inputs, argTypes)}
 >Button${inputs['disclosure'] ? disclosureIcon : ''}</button>`,
+			styles: [luButton === 'AI-invert' || luButton === 'ghost-invert' ? ':host { background-color: var(--palettes-neutral-900); outline: 1rem solid var(--palettes-neutral-900);  }' : ''],
 		};
 	},
 } as Meta;
@@ -24,34 +25,49 @@ export default {
 export const Basic: StoryObj<ButtonComponent> = {
 	argTypes: {
 		luButton: {
-			options: ['', 'outlined', 'ghost', 'ghost-invert', 'AI'],
+			options: ['', 'outlined', 'ghost', 'ghost-invert', 'AI', 'AI-invert'],
 			control: {
 				type: 'select',
 			},
-			description: '[v20.3] AI',
+			description: 'Modifie la hierarchie ou le style du bouton.<br>[v20.3] AI',
+		},
+		block: {
+			description: 'Applique <code>display: block</code>.',
 		},
 		palette: {
 			if: { arg: 'luButton', neq: 'AI' },
+			description: 'Applique une palette de couleurs au bouton.',
 		},
-		critical: {
-			description: '[v20.2] Couleur critical au hover / focus',
-		},
-		size: {
+		state: {
+			description: "Modifie l'état du bouton.",
 			control: {
 				type: 'select',
 			},
 		},
+		critical: {
+			description: '[v20.2] Marque une action aux conséquences importantes ou irréversibles au survol et focus. Seulement compatible avec <code>outlined</code> et <code>ghost</code>.',
+		},
+		disclosure: {
+			description: "Indique le présence d'un menu.",
+		},
 		delete: {
-			description: 'Deprecated 💀, use critical instead',
+			description: '[Deprecated] Remplacé par <code>critical</code>.',
+		},
+		size: {
+			description: 'Modifie la taille du composant.',
+			control: {
+				type: 'select',
+			},
 		},
 	},
 	args: {
-		block: false,
-		palette: 'none',
-		state: 'default',
 		luButton: '',
+		state: 'default',
 		critical: false,
 		disclosure: false,
+		palette: 'none',
+		block: false,
+		delete: false,
 	},
 };
 

@@ -4,11 +4,16 @@
 		<img class="plgPush-icons-back" alt="" src="https://cdn.lucca.fr/transverse/prisme/visuals/plg-push/shape.svg" />
 	</div>
 	<div class="plgPush-content">
-		@if (heading) {
-			<div class="plgPush-content-title">{{ heading }}</div>
+		@if (heading()) {
+			<div class="plgPush-content-title">{{ heading() }}</div>
 		}
 		<div class="plgPush-content-description">
 			<ng-content />
 		</div>
 	</div>
+	@if (removable()) {
+		<button class="plgPush-close" type="button" luButton="ghost" size="S" (click)="removed.set(true)">
+			<lu-icon icon="signClose" [alt]="intl.close" />
+		</button>
+	}
 </div>

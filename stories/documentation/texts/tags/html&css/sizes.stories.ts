@@ -1,21 +1,18 @@
-import { Meta, StoryFn } from '@storybook/angular';
-
-interface TagsSizesStory {}
+import { Meta, StoryObj } from '@storybook/angular';
 
 export default {
 	title: 'Documentation/Texts/Tags/HTML&CSS/Sizes',
 	argTypes: {},
 } as Meta;
 
-function getTemplate(args: TagsSizesStory): string {
+function getTemplate(): string {
 	return `<span class="tag mod-L">Text</span>
 <span class="tag mod-M">Text</span>
 <!-- 20.3 --><span class="tag mod-S">Text</span>`;
 }
 
-const Template: StoryFn<TagsSizesStory> = (args) => ({
-	props: args,
-	template: getTemplate(args),
+const Template = () => ({
+	template: getTemplate(),
 	styles: [
 		`:host {
 			display: flex;
@@ -25,5 +22,7 @@ const Template: StoryFn<TagsSizesStory> = (args) => ({
 	],
 });
 
-export const Sizes = Template.bind({});
-Sizes.args = {};
+export const Sizes: StoryObj = {
+	args: {},
+	render: Template,
+};

@@ -1,10 +1,11 @@
 import { Component } from '@angular/core';
-import { Meta, StoryFn, moduleMetadata } from '@storybook/angular';
+import { InlineMessageComponent } from '@lucca-front/ng/inline-message';
+import { Meta, StoryObj, moduleMetadata } from '@storybook/angular';
 
 @Component({
-	standalone: true,
 	selector: 'inline-message-stories',
 	templateUrl: './inline-message.stories.html',
+	imports: [InlineMessageComponent],
 })
 class InlineMessageStory {}
 
@@ -18,6 +19,9 @@ export default {
 	],
 } as Meta;
 
-const template: StoryFn<InlineMessageStory> = () => ({});
+const template = () => ({});
 
-export const basic = template.bind({});
+export const Basic: StoryObj<InlineMessageStory> = {
+	args: {},
+	render: template,
+};

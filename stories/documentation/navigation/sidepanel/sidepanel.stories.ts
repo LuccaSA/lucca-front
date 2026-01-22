@@ -2,11 +2,10 @@ import { Component } from '@angular/core';
 import { provideAnimations } from '@angular/platform-browser/animations';
 import { ILuModalContent } from '@lucca-front/ng/modal';
 import { LuSidepanel, LuSidepanelModule } from '@lucca-front/ng/sidepanel';
-import { applicationConfig, Meta, StoryFn } from '@storybook/angular';
+import { applicationConfig, Meta, StoryObj } from '@storybook/angular';
 
 @Component({
 	selector: 'sidepanel-content',
-	standalone: true,
 	template: '<p>General Kenobi</p>',
 })
 class SidepanelContentComponent implements ILuModalContent {
@@ -16,7 +15,6 @@ class SidepanelContentComponent implements ILuModalContent {
 
 @Component({
 	selector: 'sidepanel-stories',
-	standalone: true,
 	imports: [SidepanelContentComponent, LuSidepanelModule],
 	template: `
 		<h1>Sidepanels</h1>
@@ -38,12 +36,14 @@ export default {
 	decorators: [applicationConfig({ providers: [provideAnimations()] })],
 } as Meta;
 
-const template: StoryFn<SidePanelStory> = (args) => ({
+const template = (args: SidePanelStory) => ({
 	props: args,
 });
 
-export const basic = template.bind({});
-basic.args = {};
+export const Basic: StoryObj<SidePanelStory> = {
+	args: {},
+	render: template,
+};
 
 const code = `
 /* 1. Importer ILuSidePanelContent, LuSidepanel, LuSidepanelModule */
@@ -77,7 +77,7 @@ class SidePanelStories {
 	}
 }`;
 
-basic.parameters = {
+Basic.parameters = {
 	docs: {
 		source: {
 			language: 'ts',

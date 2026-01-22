@@ -1,5 +1,5 @@
 import { SkeletonIndexTableComponent } from '@lucca-front/ng/skeleton';
-import { Meta, moduleMetadata, StoryFn } from '@storybook/angular';
+import { Meta, moduleMetadata, StoryObj } from '@storybook/angular';
 
 interface SkeletonIndexTableStory {}
 
@@ -18,16 +18,16 @@ function getTemplate(args: SkeletonIndexTableStory): string {
 	<thead class="indexTable-head">
 		<tr class="indexTable-head-row">
 			<th class="indexTable-head-row-cell">Lorem</th>
-			<th class="indexTable-head-row-cell">Ipsum</th>
-			<th class="indexTable-head-row-cell">Dolor</th>
+			<th class="indexTable-head-row-cell mod-alignCenter">Ipsum</th>
+			<th class="indexTable-head-row-cell mod-alignEnd">Dolor</th>
 		</tr>
 	</thead>
-	<lu-skeleton-index-table tableBodyOnly [cols]="3" />
+	<lu-skeleton-index-table tableBodyOnly [cols]="3" [rows]="8" [colsAlign]="{ '1': 'center', '2': 'end' }" />
 </table>
 	`;
 }
 
-const Template: StoryFn<SkeletonIndexTableStory> = (args) => ({
+const Template = (args: SkeletonIndexTableStory) => ({
 	props: args,
 	template: getTemplate(args),
 	styles: [
@@ -39,5 +39,7 @@ const Template: StoryFn<SkeletonIndexTableStory> = (args) => ({
 	],
 });
 
-export const TableBodyOnly = Template.bind({});
-TableBodyOnly.args = {};
+export const TableBodyOnly: StoryObj<SkeletonIndexTableStory> = {
+	args: {},
+	render: Template,
+};

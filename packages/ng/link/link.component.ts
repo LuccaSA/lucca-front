@@ -1,4 +1,5 @@
-import { booleanAttribute, Component, effect, HostBinding, inject, input, Input, ViewEncapsulation } from '@angular/core';
+import { afterNextRender, booleanAttribute, ChangeDetectionStrategy, Component, effect, inject, Injector, input, ViewEncapsulation } from '@angular/core';
+import { Router } from '@angular/router';
 import { getIntl } from '@lucca-front/ng/core';
 import { LU_LINK_TRANSLATIONS } from './link.translate';
 import { LuRouterLink } from './lu-router-link';
@@ -13,6 +14,13 @@ import { LuRouterLink } from './lu-router-link';
 	host: {
 		class: 'link',
 		'[attr.href]': 'routerLink.publicReactiveHref()',
+		'[class.mod-decorationHover]': 'decorationHover()',
+		'[class.mod-icon]': 'external()',
+		'[class.is-disabled]': 'this.disabled()',
+		'[attr.rel]': 'external() && !disabled() ? "noopener noreferrer" : null',
+		'[attr.target]': 'external() && !disabled() ? "_blank" : null',
+		'[attr.role]': 'disabled() ? "presentation" : null',
+		'(click)': 'redirect()',
 	},
 	hostDirectives: [
 		{
@@ -20,48 +28,38 @@ import { LuRouterLink } from './lu-router-link';
 			inputs: ['preserveFragment', 'skipLocationChange', 'replaceUrl', 'queryParams', 'fragment', 'queryParamsHandling', 'state', 'info', 'relativeTo'],
 		},
 	],
+	changeDetection: ChangeDetectionStrategy.OnPush,
 })
 export class LinkComponent {
 	intl = getIntl(LU_LINK_TRANSLATIONS);
 	routerLink = inject(LuRouterLink);
+	#injector = inject(Injector);
+	router = inject(Router);
 
-	luHref = input('', { alias: 'href' });
+	/**
+	 * Target page address. Use only for external links or pages not recognized by the router.
+	 */
+	readonly luHref = input('', { alias: 'href' });
 
-	routerLinkCommands = input<LuRouterLink['routerLink'] | null>(null, { alias: 'luLink' });
+	/**
+	 * Target page address
+	 */
+	readonly routerLinkCommands = input<LuRouterLink['routerLink'] | null>(null, { alias: 'luLink' });
 
-	disabled = input(false, { transform: booleanAttribute });
+	/**
+	 * Disables the link
+	 */
+	readonly disabled = input(false, { transform: booleanAttribute });
 
-	@Input({
-		transform: booleanAttribute,
-	})
-	@HostBinding('class.mod-decorationHover')
-	decorationHover = false;
+	/**
+	 * Underlines the link only on hover
+	 */
+	readonly decorationHover = input(false, { transform: booleanAttribute });
 
-	@Input({
-		transform: booleanAttribute,
-	})
-	@HostBinding('class.mod-icon')
-	external = false;
-
-	@HostBinding('attr.rel')
-	get relAttr() {
-		return this.external && !this.disabled() ? 'noopener noreferrer' : null;
-	}
-
-	@HostBinding('attr.target')
-	get targetAttr() {
-		return this.external && !this.disabled() ? '_blank' : null;
-	}
-
-	@HostBinding('attr.role')
-	get roleAttr() {
-		return this.disabled() ? 'presentation' : null;
-	}
-
-	@HostBinding('class.is-disabled')
-	get disabledClass() {
-		return this.disabled();
-	}
+	/**
+	 * Indicates that the link will open in a new tab
+	 */
+	readonly external = input(false, { transform: booleanAttribute });
 
 	hrefBackup: string;
 
@@ -78,7 +76,7 @@ export class LinkComponent {
 					this.routerLink.routerLink = null;
 				}
 				this.routerLink.publicReactiveHref.set(null);
-			} else if (this.routerLinkCommands()) {
+			} else if (this.routerLinkCommands() && !this.external()) {
 				this.routerLink.routerLink = this.routerLinkCommands();
 				// We need to do this in order to have `routerLink` update the value for `href`:
 				// See https://github.com/angular/angular/blob/main/packages/router/src/directives/router_link.ts#L281
@@ -87,5 +85,14 @@ export class LinkComponent {
 				this.routerLink.publicReactiveHref.set(this.hrefBackup);
 			}
 		});
+	}
+
+	redirect(): void {
+		const routerLinkCommands = this.routerLinkCommands();
+		if (!this.disabled() && routerLinkCommands && this.external()) {
+			afterNextRender(() => window.open(this.router.serializeUrl(this.router.createUrlTree(Array.isArray(routerLinkCommands) ? routerLinkCommands : [routerLinkCommands])), '_blank'), {
+				injector: this.#injector,
+			});
+		}
 	}
 }

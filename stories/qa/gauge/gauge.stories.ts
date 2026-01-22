@@ -1,10 +1,11 @@
 import { Component } from '@angular/core';
-import { Meta, StoryFn } from '@storybook/angular';
+import { GaugeComponent } from '@lucca-front/ng/gauge';
+import { Meta, StoryObj } from '@storybook/angular';
 
 @Component({
-	standalone: true,
 	selector: 'gauge-stories',
 	templateUrl: './gauge.stories.html',
+	imports: [GaugeComponent],
 })
 class GaugeStory {}
 
@@ -13,6 +14,9 @@ export default {
 	component: GaugeStory,
 } as Meta;
 
-const template: StoryFn<GaugeStory> = () => ({});
+const template = () => ({});
 
-export const basic = template.bind({});
+export const Basic: StoryObj<GaugeStory> = {
+	args: {},
+	render: template,
+};

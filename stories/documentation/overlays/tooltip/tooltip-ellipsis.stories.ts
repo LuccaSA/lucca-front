@@ -1,11 +1,10 @@
 import { Component } from '@angular/core';
 import { provideAnimations } from '@angular/platform-browser/animations';
 import { LuTooltipModule } from '@lucca-front/ng/tooltip';
-import { applicationConfig, Meta, StoryFn } from '@storybook/angular';
+import { applicationConfig, Meta, StoryObj } from '@storybook/angular';
 
 @Component({
 	selector: 'tooltip-stories',
-	standalone: true,
 	imports: [LuTooltipModule],
 	template: ` <h1>With ellipsis (should be green)</h1>
 		<div class="test ellipsis width400 fontSize2" luTooltip luTooltipWhenEllipsis>Lorem ipsum dolor sit amet consectetur adipisicing elit.</div>
@@ -103,8 +102,11 @@ export default {
 	decorators: [applicationConfig({ providers: [provideAnimations()] })],
 } as Meta;
 
-const template: StoryFn<TooltipStory> = (args) => ({
+const template = (args: TooltipStory) => ({
 	props: args,
 });
 
-export const Basic = template.bind({});
+export const Basic: StoryObj<TooltipStory> = {
+	args: {},
+	render: template,
+};

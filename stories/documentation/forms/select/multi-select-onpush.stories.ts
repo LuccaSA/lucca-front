@@ -27,7 +27,7 @@ import { FormFieldComponent } from '@lucca-front/ng/form-field';
 	template: `
 		<div class="scroll-test">
 			<lu-form-field label="Inside an OnPush Component">
-				<lu-multi-select apiV4="/organization/structure/api/establishments"></lu-multi-select>
+				<lu-multi-select apiV4="/organization/structure/api/establishments" />
 			</lu-form-field>
 		</div>
 	`,

@@ -1,17 +1,17 @@
-import { Meta, StoryFn } from '@storybook/angular';
+import { Meta, StoryObj } from '@storybook/angular';
 
 interface CheckboxBasicStory {
 	disabled: boolean;
 	s: boolean;
 	required: boolean;
-	id: Text;
-	label: Text;
-	message: Text;
+	id: string;
+	label: string;
+	message: string;
 	checked: boolean;
 	mixed: false;
 	invalid: false;
 	help: false;
-	messageState: '';
+	messageState: '' | 'error' | 'warning' | 'success';
 	checklist: boolean;
 }
 
@@ -94,7 +94,7 @@ function getTemplate(args: CheckboxBasicStory): string {
 	const mixed = args.mixed ? ` aria-checked="mixed"` : '';
 	const invalid = args.invalid ? ` aria-invalid="true"` : '';
 	const help = args.help;
-	const messageState = args.messageState ? ' is-' + args.messageState : '';
+	const messageState = args.messageState ? ` is-${args.messageState}` : '';
 	const checklist = args.checklist ? ' mod-checklist' : '';
 
 	return `<div class="form-field${s} pr-u-marginBlockEnd200">
@@ -125,23 +125,25 @@ function getTemplate(args: CheckboxBasicStory): string {
 </div>`;
 }
 
-const Template: StoryFn<CheckboxBasicStory> = (args) => ({
+const Template = (args: CheckboxBasicStory) => ({
 	props: args,
 	template: getTemplate(args),
 });
 
-export const Basic = Template.bind({});
-Basic.args = {
-	checked: false,
-	s: false,
-	disabled: false,
-	required: false,
-	mixed: false,
-	invalid: false,
-	help: false,
-	messageState: '',
-	id: 'field1',
-	label: 'Label',
-	message: 'Helper text',
-	checklist: false,
+export const Basic: StoryObj<CheckboxBasicStory> = {
+	args: {
+		checked: false,
+		s: false,
+		disabled: false,
+		required: false,
+		mixed: false,
+		invalid: false,
+		help: false,
+		messageState: '',
+		id: 'field1',
+		label: 'Label',
+		message: 'Helper text',
+		checklist: false,
+	},
+	render: Template,
 };

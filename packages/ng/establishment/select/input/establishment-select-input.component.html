@@ -5,7 +5,7 @@
 	</div>
 </div>
 <div class="lu-select-suffix">
-	<lu-input-clearer />
+	<lu-clear />
 </div>
 
 <ng-template luDisplayer [luDisplayerMultiple]="true" let-values>
@@ -63,7 +63,7 @@
 						@if (isSearching) {
 							<span class="pr-u-displayBlock" translate="no">{{ establishment.name }}</span>
 							@if (groupByLu) {
-								<span class="pr-u-displayBlock pr-u-textLight pr-u-bodyS">{{ group.key.name }}</span>
+								<span class="pr-u-displayBlock pr-u-colorTextSubtle pr-u-bodyS">{{ group.key.name }}</span>
 							}
 						} @else {
 							<span translate="no">{{ establishment.name }}</span>

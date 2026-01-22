@@ -1,4 +1,4 @@
-import { Meta, StoryFn } from '@storybook/angular';
+import { Meta, StoryObj } from '@storybook/angular';
 
 interface HorizontalNavigationBasicStory {
 	noBorder: boolean;
@@ -86,10 +86,12 @@ function getTemplate(args: HorizontalNavigationBasicStory): string {
 </div>`;
 }
 
-const Template: StoryFn<HorizontalNavigationBasicStory> = (args) => ({
+const Template = (args: HorizontalNavigationBasicStory) => ({
 	props: args,
 	template: getTemplate(args),
 });
 
-export const Basic = Template.bind({});
-Basic.args = { noBorder: false, header: false, s: false, disabled: false, vertical: false };
+export const Basic: StoryObj<HorizontalNavigationBasicStory> = {
+	args: { noBorder: false, header: false, s: false, disabled: false, vertical: false },
+	render: Template,
+};

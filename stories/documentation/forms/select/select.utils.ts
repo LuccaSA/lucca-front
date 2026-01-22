@@ -50,7 +50,7 @@ export const allLegumes: ILegume[] = [
 	{ name: 'Potimarron', index: 28, color: 'orange' },
 	{ name: 'Radis', index: 29, color: 'red' },
 	{ name: 'Tomate', index: 30, color: 'red' },
-	{ name: 'Topinambour Topinambour Topinambour Topinambour Topinambour Topinambour', index: 31, color: 'yellow' },
+	{ name: 'TopinambourTopinambourTopinambourTopinambourTopinambourTopinambour Topinambour Topinambour Topinambour Topinambour Topinambour', index: 31, color: 'yellow' },
 ];
 
 export const colorNameByColor: Record<LegumeColor, string> = {

@@ -1,6 +1,7 @@
 import { Pipe, PipeTransform } from '@angular/core';
 import { DomSanitizer, SafeHtml } from '@angular/platform-browser';
-import { Config, sanitize } from 'isomorphic-dompurify';
+import DOMPurify from 'isomorphic-dompurify';
+import type { Config } from 'isomorphic-dompurify';
 
 type SanitizerConfig = Config & { RETURN_DOM_FRAGMENT?: false | undefined; RETURN_DOM?: false | undefined };
 
@@ -9,6 +10,6 @@ export class LuSafeHtmlPipe implements PipeTransform {
 	constructor(protected sanitizer: DomSanitizer) {}
 
 	public transform(value: string, config?: SanitizerConfig): SafeHtml {
-		return this.sanitizer.bypassSecurityTrustHtml(sanitize(value, config));
+		return this.sanitizer.bypassSecurityTrustHtml(DOMPurify.sanitize(value, config));
 	}
 }

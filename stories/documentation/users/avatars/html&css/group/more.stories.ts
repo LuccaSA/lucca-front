@@ -1,13 +1,11 @@
-import { Meta, StoryFn } from '@storybook/angular';
-
-interface UserAvatarGroupMoreStory {}
+import { Meta, StoryObj } from '@storybook/angular';
 
 export default {
 	title: 'Documentation/Users/Avatar/HTML&CSS/Group/More',
 	argTypes: {},
 } as Meta;
 
-function getTemplate(args: UserAvatarGroupMoreStory): string {
+function getTemplate(): string {
 	return `<ul class="avatarWrapper">
 	<li class="avatarWrapper-item" translate="no">
 		<span class="avatar">
@@ -38,10 +36,11 @@ function getTemplate(args: UserAvatarGroupMoreStory): string {
 </ul>`;
 }
 
-const Template: StoryFn<UserAvatarGroupMoreStory> = (args) => ({
-	props: args,
-	template: getTemplate(args),
+const Template = () => ({
+	template: getTemplate(),
 });
 
-export const More = Template.bind({});
-More.args = {};
+export const More: StoryObj = {
+	args: {},
+	render: Template,
+};

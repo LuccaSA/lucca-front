@@ -1,0 +1,57 @@
+<table class="demo-QAtable">
+	<tbody>
+		<tr>
+			<td></td>
+			<td>
+				<div class="demo-QAtable-list">Angular</div>
+			</td>
+		</tr>
+		<tr>
+			<td>Default</td>
+			<td>
+				<div class="demo-QAtable-list">
+					<lu-filter-pill label="Inclure les collaborateurs partis">
+						<lu-checkbox-input [ngModel]="false" />
+					</lu-filter-pill>
+					<lu-filter-pill label="With Select all" name="legume">
+						<lu-multi-select
+							[ngModel]="{ mode: 'none' }"
+							clearable="false"
+							[options]="legumes | filterLegumes: clue"
+							[totalCount]="legumes.length"
+							(clueChange)="clue = $event"
+							filterPillLabelPlural="légumes"
+						/>
+					</lu-filter-pill>
+					<lu-filter-pill label="Département" name="department">
+						<lu-simple-select [ngModel]="null" clearable="false" departments />
+					</lu-filter-pill>
+					<lu-filter-pill label="Départements" name="departments">
+						<lu-multi-select [ngModel]="[]" clearable="false" filterPillLabelPlural="départements" departments />
+					</lu-filter-pill>
+					<lu-filter-pill label="Tree simple">
+						<lu-simple-select [ngModel]="null" clearable="false" [treeSelect]="groupingFn" [options]="legumes" />
+					</lu-filter-pill>
+					<lu-filter-pill label="Tree multi">
+						<lu-multi-select
+							[ngModel]="[]"
+							clearable="false"
+							filterPillLabelPlural="légumes"
+							[treeSelect]="groupingFn"
+							[options]="legumes"
+						/>
+					</lu-filter-pill>
+					<lu-filter-pill label="Date de début">
+						<lu-date-input [ngModel]="null" clearable="false" />
+					</lu-filter-pill>
+					<lu-filter-pill label="Période">
+						<lu-date-range-input [ngModel]="null" clearable="false" [(ngModel)]="dateRange" />
+					</lu-filter-pill>
+				</div>
+			</td>
+		</tr>
+	</tbody>
+</table>
+
+<!-- To tell the ui-diff tool that the page has finished rendering -->
+<span id="ready"></span>

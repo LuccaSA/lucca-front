@@ -3,7 +3,7 @@
 @use '@lucca-front/scss/src/commons/utils/a11y';
 
 @include namespace.appendRootVars {
-	@layer components {
+	@layer base {
 		--components-options-item-padding-vertical: var(--pr-t-spacings-50);
 		--components-options-item-padding-horizontal: var(--pr-t-spacings-100);
 		--components-options-item-multiple-padding: 2.25rem;
@@ -51,6 +51,13 @@
 			padding-inline: var(--components-options-item-padding-horizontal);
 			transition: background-color 50ms;
 			cursor: pointer;
+			overflow-wrap: anywhere;
+
+			::ng-deep {
+				.avatar {
+					margin-inline-end: var(--pr-t-spacings-75);
+				}
+			}
 		}
 
 		@layer mods {

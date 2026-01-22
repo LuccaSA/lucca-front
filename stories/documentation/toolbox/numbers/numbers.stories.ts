@@ -1,10 +1,9 @@
 import { Component } from '@angular/core';
 import { LuNumberPipe } from '@lucca-front/ng/number';
-import { Meta, StoryFn } from '@storybook/angular';
+import { Meta, StoryObj } from '@storybook/angular';
 
 @Component({
 	selector: 'numbers-stories',
-	standalone: true,
 	imports: [LuNumberPipe],
 	templateUrl: './numbers.stories.html',
 })
@@ -20,7 +19,7 @@ export default {
 	component: NumbersStory,
 } as Meta;
 
-const template: StoryFn<NumbersStory> = (args) => ({
+const template = (args: NumbersStory) => ({
 	props: args,
 });
 
@@ -78,8 +77,10 @@ class NumbersStory {
 	public thousands = 12345;
 }
 `;
-export const Basic = template.bind({});
-Basic.args = {};
+export const Basic: StoryObj<NumbersStory> = {
+	args: {},
+	render: template,
+};
 
 Basic.parameters = {
 	// Disable controls as they are not modifiable because of ComponentWrapper

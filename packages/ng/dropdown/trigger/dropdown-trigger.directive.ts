@@ -1,7 +1,8 @@
-import { Directive, inject, Input, OnInit, TemplateRef, Type } from '@angular/core';
+import { ConnectionPositionPair, HorizontalConnectionPos, OriginConnectionPosition, OverlayConnectionPosition, VerticalConnectionPos } from '@angular/cdk/overlay';
+import { DestroyRef, Directive, inject, Input, OnInit, TemplateRef, Type } from '@angular/core';
+import { takeUntilDestroyed } from '@angular/core/rxjs-interop';
 import { ALuPopoverPanel, LuPopoverAlignment } from '@lucca-front/ng/popover';
 import { PopoverDirective } from '@lucca-front/ng/popover2';
-import { ConnectionPositionPair, HorizontalConnectionPos, OriginConnectionPosition, OverlayConnectionPosition, VerticalConnectionPos } from '@angular/cdk/overlay';
 
 @Directive({
 	selector: '[luDropdown]',
@@ -16,15 +17,16 @@ import { ConnectionPositionPair, HorizontalConnectionPos, OriginConnectionPositi
 			outputs: ['luPopoverOpened: luDropdownOnOpen', 'luPopoverClosed: luDropdownOnClose'],
 		},
 	],
-	standalone: true,
 })
 export class LuDropdownTriggerDirective<_T> implements OnInit {
 	protected popover2 = inject(PopoverDirective);
+	#destroyRef = inject(DestroyRef);
 	// Keeping generic type here just for the sake of backwards compatibility
 	/** References the popover instance that the trigger is associated with. */
 	@Input('luDropdown') set inputPanel(p: TemplateRef<unknown> | Type<unknown> | ALuPopoverPanel) {
 		if (p instanceof ALuPopoverPanel) {
 			this.popover2.content = p.templateRef;
+			p.close.pipe(takeUntilDestroyed(this.#destroyRef)).subscribe(() => this.popover2.close());
 		} else {
 			this.popover2.content = p;
 		}

@@ -75,11 +75,11 @@
 				--components-mainLayout-content-inside-block-firstLastOfType-marginBlock: var(--pr-t-spacings-300);
 			}
 
-			&:first-of-type {
+			&:not(& + &) {
 				margin-block-start: var(--components-mainLayout-content-inside-block-firstLastOfType-marginBlock);
 			}
 
-			&:last-of-type {
+			&:not(:has(+ &)) {
 				margin-block-end: var(--components-mainLayout-content-inside-block-firstLastOfType-marginBlock);
 			}
 

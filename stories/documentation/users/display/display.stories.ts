@@ -1,6 +1,6 @@
-import { Component, Input } from '@angular/core';
+import { Component, input } from '@angular/core';
 import { ILuUser, LuDisplayFormat, LuDisplayFullname, LuDisplayHybrid, LuDisplayInitials, LuUserDisplayModule } from '@lucca-front/ng/user';
-import { Meta, StoryFn } from '@storybook/angular';
+import { Meta, StoryObj } from '@storybook/angular';
 import { bob, patrick, squidwards } from '../user.mocks';
 
 const formatters = {
@@ -11,15 +11,14 @@ const formatters = {
 
 @Component({
 	selector: 'display-stories',
-	standalone: true,
 	imports: [LuUserDisplayModule],
 	templateUrl: './display.stories.html',
 })
 class DisplayStory {
-	@Input() users: ILuUser[] = [bob, patrick, squidwards];
-	@Input() displayFormat: LuDisplayFormat = LuDisplayFullname.lastfirst;
-	@Input() separator = ', ';
-	@Input() formatter = formatters.enLongConjFormatter;
+	users = input<ILuUser[]>([bob, patrick, squidwards]);
+	displayFormat = input<LuDisplayFormat>(LuDisplayFullname.lastfirst);
+	separator = input<string>(', ');
+	formatter = input<Intl.ListFormat>(formatters.enLongConjFormatter);
 }
 
 export default {
@@ -48,15 +47,12 @@ export default {
 	},
 } as Meta;
 
-const template: StoryFn<DisplayStory> = (args: DisplayStory) => ({
-	props: args,
-});
-
-export const Basic = template.bind({});
-Basic.args = {
-	displayFormat: LuDisplayFullname.lastfirst,
-	separator: ', ',
-	formatter: formatters.enLongConjFormatter,
+export const Basic: StoryObj<DisplayStory> = {
+	args: {
+		displayFormat: LuDisplayFullname.lastfirst,
+		separator: ', ',
+		formatter: formatters.enLongConjFormatter,
+	},
 };
 
 const code = `

@@ -2,11 +2,10 @@ import { provideHttpClient } from '@angular/common/http';
 import { Component } from '@angular/core';
 import { provideAnimations } from '@angular/platform-browser/animations';
 import { LuApiSelectInputComponent } from '@lucca-front/ng/api';
-import { Meta, StoryFn, applicationConfig } from '@storybook/angular';
+import { Meta, applicationConfig, StoryObj } from '@storybook/angular';
 
 @Component({
 	selector: 'api-select-story',
-	standalone: true,
 	imports: [LuApiSelectInputComponent],
 	template: `
 		<label class="textfield">
@@ -36,7 +35,7 @@ export default {
 	decorators: [applicationConfig({ providers: [provideAnimations(), provideHttpClient()] })],
 } as Meta;
 
-const Template: StoryFn<ApiSelectStory> = (args) => ({
+const Template = (args: ApiSelectStory) => ({
 	props: args,
 });
 
@@ -45,7 +44,6 @@ import { LuApiSelectInputComponent } from '@lucca-front/ng/api';
 
 @Component({
 	selector: 'api-select-story',
-	standalone: true,
 	imports: [LuApiSelectInputComponent],
 	template: \`
 		<label class="textfield">
@@ -68,7 +66,10 @@ class ApiSelectStory {
 	apiV4 = '/organization/structure/api/job-qualifications'
 }`;
 
-export const Basic = Template.bind({});
+export const Basic: StoryObj<ApiSelectStory> = {
+	args: {},
+	render: Template,
+};
 Basic.parameters = {
 	// Disable controls as they are not modifiable because of ComponentWrapper
 	controls: { include: [] },

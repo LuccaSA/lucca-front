@@ -2,13 +2,12 @@ import { Component, OnDestroy, OnInit, TemplateRef } from '@angular/core';
 import { FormsModule } from '@angular/forms';
 import { provideAnimations } from '@angular/platform-browser/animations';
 import { LuToastInput, LuToastType, LuToastsComponent, LuToastsService, defaultToastDuration } from '@lucca-front/ng/toast';
-import { Meta, StoryFn, applicationConfig } from '@storybook/angular';
+import { Meta, applicationConfig, StoryObj } from '@storybook/angular';
 import { Observable, ReplaySubject, Subject } from 'rxjs';
 import { map } from 'rxjs/operators';
 
 @Component({
 	selector: 'toasts-stories',
-	standalone: true,
 	imports: [FormsModule, LuToastsComponent],
 	templateUrl: './toasts.stories.html',
 })
@@ -76,7 +75,7 @@ export default {
 	decorators: [applicationConfig({ providers: [provideAnimations()] })],
 } as Meta;
 
-const template: StoryFn<ToastsStory> = (args) => ({
+const template = (args: ToastsStory) => ({
 	props: args,
 });
 
@@ -109,9 +108,12 @@ class ToastsStory implements OnInit, OnDestroy {
 
 `;
 
-export const basic = template.bind({});
-basic.args = {};
-basic.parameters = {
+export const Basic: StoryObj<ToastsStory> = {
+	args: {},
+	render: template,
+};
+
+Basic.parameters = {
 	docs: {
 		source: {
 			language: 'ts',

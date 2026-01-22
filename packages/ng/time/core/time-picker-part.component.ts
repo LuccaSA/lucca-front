@@ -1,20 +1,5 @@
 import { DecimalPipe, formatNumber } from '@angular/common';
-import {
-	ChangeDetectionStrategy,
-	Component,
-	ElementRef,
-	EventEmitter,
-	Inject,
-	LOCALE_ID,
-	ModelSignal,
-	Output,
-	ViewChild,
-	booleanAttribute,
-	computed,
-	input,
-	model,
-	numberAttribute,
-} from '@angular/core';
+import { ChangeDetectionStrategy, Component, ElementRef, Inject, LOCALE_ID, ModelSignal, ViewChild, booleanAttribute, computed, input, model, numberAttribute, output } from '@angular/core';
 import { InputDirective } from '@lucca-front/ng/form-field';
 import { PickerControlDirection } from './misc.utils';
 import { RepeatOnHoldDirective } from './repeat-on-hold.directive';
@@ -23,7 +8,6 @@ let nextId = 0;
 
 @Component({
 	selector: 'lu-time-picker-part',
-	standalone: true,
 	imports: [RepeatOnHoldDirective, DecimalPipe, InputDirective],
 	templateUrl: './time-picker-part.component.html',
 	changeDetection: ChangeDetectionStrategy.OnPush,
@@ -61,10 +45,10 @@ export class TimePickerPartComponent {
 		transform: booleanAttribute,
 	});
 
-	@Output() prevRequest = new EventEmitter<void>();
-	@Output() nextRequest = new EventEmitter<void>();
-	@Output() inputControlClick = new EventEmitter<PickerControlDirection>();
-	@Output() touched = new EventEmitter<void>();
+	prevRequest = output<void>();
+	nextRequest = output<void>();
+	inputControlClick = output<PickerControlDirection>();
+	touched = output<void>();
 
 	@ViewChild('timePickerInput') timePickerInput?: ElementRef<HTMLInputElement>;
 

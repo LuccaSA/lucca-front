@@ -1,18 +1,22 @@
 import { Component } from '@angular/core';
-import { Meta, StoryFn } from '@storybook/angular';
+import { PLGPushComponent } from '@lucca-front/ng/plg-push';
+import { Meta, StoryObj } from '@storybook/angular';
 
 @Component({
-	standalone: true,
 	selector: 'plg-push-stories',
 	templateUrl: './plg-push.stories.html',
+	imports: [PLGPushComponent],
 })
 class PLGPushStory {}
 
 export default {
-	title: 'QA/PLG Push',
+	title: 'QA/PLGPush',
 	component: PLGPushStory,
 } as Meta;
 
-const template: StoryFn<PLGPushStory> = () => ({});
+const template = () => ({});
 
-export const basic = template.bind({});
+export const Basic: StoryObj<PLGPushStory> = {
+	args: {},
+	render: template,
+};

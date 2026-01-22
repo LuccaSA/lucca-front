@@ -1,4 +1,4 @@
-import { Meta, StoryFn } from '@storybook/angular';
+import { Meta, StoryObj } from '@storybook/angular';
 
 interface PageHeaderBreadcrumbStory {
 	sticky: boolean;
@@ -68,10 +68,12 @@ function getTemplate(args: PageHeaderBreadcrumbStory): string {
 </header>`;
 }
 
-const Template: StoryFn<PageHeaderBreadcrumbStory> = (args) => ({
+const Template = (args: PageHeaderBreadcrumbStory) => ({
 	props: args,
 	template: getTemplate(args),
 });
 
-export const BreadcrumbPageHeader = Template.bind({});
-BreadcrumbPageHeader.args = { sticky: false };
+export const BreadcrumbPageHeader: StoryObj<PageHeaderBreadcrumbStory> = {
+	args: { sticky: false },
+	render: Template,
+};

@@ -1,4 +1,4 @@
-import { Meta, StoryFn } from '@storybook/angular';
+import { Meta, StoryObj } from '@storybook/angular';
 
 interface RadioLegacyHelperStory {
 	row: boolean;
@@ -51,10 +51,12 @@ function getTemplate(args: RadioLegacyHelperStory): string {
 </fieldset>`;
 }
 
-const Template: StoryFn<RadioLegacyHelperStory> = (args) => ({
+const Template = (args: RadioLegacyHelperStory) => ({
 	props: args,
 	template: getTemplate(args),
 });
 
-export const Helper = Template.bind({});
-Helper.args = { row: false, disabled: false, s: false };
+export const Helper: StoryObj<RadioLegacyHelperStory> = {
+	args: { row: false, disabled: false, s: false },
+	render: Template,
+};

@@ -1,8 +1,9 @@
 import { Overlay, OverlayModule } from '@angular/cdk/overlay';
-import { AfterViewInit, ChangeDetectionStrategy, ChangeDetectorRef, Component, ElementRef, Inject, Input, OnInit, Optional, Renderer2, Self, ViewContainerRef, forwardRef } from '@angular/core';
+import { AfterViewInit, ChangeDetectionStrategy, ChangeDetectorRef, Component, ElementRef, forwardRef, Inject, Input, OnInit, Optional, Renderer2, Self, ViewContainerRef } from '@angular/core';
 import { ControlValueAccessor, NG_VALUE_ACCESSOR } from '@angular/forms';
+import { ClearComponent } from '@lucca-front/ng/clear';
 import { getIntl } from '@lucca-front/ng/core';
-import { LuInputClearerComponent, LuInputDisplayerDirective } from '@lucca-front/ng/input';
+import { LuInputDisplayerDirective } from '@lucca-front/ng/input';
 import { ILuOptionPickerPanel, LuOptionComparer, LuOptionItemComponent, LuOptionPickerAdvancedComponent } from '@lucca-front/ng/option';
 import { ILuInputWithPicker } from '@lucca-front/ng/picker';
 import { ALuSelectInputComponent } from '@lucca-front/ng/select';
@@ -23,10 +24,9 @@ import { LU_ESTABLISHMENT_SELECT_INPUT_TRANSLATIONS } from './establishment-sele
 	templateUrl: './establishment-select-input.component.html',
 	styleUrl: './establishment-select-input.component.scss',
 	changeDetection: ChangeDetectionStrategy.OnPush,
-	standalone: true,
 	imports: [
 		OverlayModule,
-		LuInputClearerComponent,
+		ClearComponent,
 		LuOptionPickerAdvancedComponent,
 		LuEstablishmentSearcherComponent,
 		LuEstablishmentSelectAllComponent,
@@ -52,9 +52,9 @@ import { LU_ESTABLISHMENT_SELECT_INPUT_TRANSLATIONS } from './establishment-sele
 	],
 })
 export class LuEstablishmentSelectInputComponent<
-		D extends import('../../establishment.model').ILuEstablishment = import('../../establishment.model').ILuEstablishment,
-		P extends ILuOptionPickerPanel<D> = ILuOptionPickerPanel<D>,
-	>
+	D extends import('../../establishment.model').ILuEstablishment = import('../../establishment.model').ILuEstablishment,
+	P extends ILuOptionPickerPanel<D> = ILuOptionPickerPanel<D>,
+>
 	extends ALuSelectInputComponent<D, P>
 	implements ControlValueAccessor, ILuInputWithPicker<D>, OnInit, AfterViewInit
 {

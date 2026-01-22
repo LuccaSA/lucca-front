@@ -1,5 +1,5 @@
 import { ButtonComponent } from '@lucca-front/ng/button';
-import { CalloutDisclosureComponent, CalloutFeedbackItemComponent, CalloutFeedbackListComponent } from '@lucca-front/ng/callout';
+import { CalloutDisclosureComponent, CalloutFeedbackItemComponent, CalloutFeedbackItemDescriptionDirective, CalloutFeedbackListComponent } from '@lucca-front/ng/callout';
 import { Meta, StoryObj, moduleMetadata } from '@storybook/angular';
 import { generateInputs } from 'stories/helpers/stories';
 
@@ -8,7 +8,7 @@ export default {
 	component: CalloutDisclosureComponent,
 	decorators: [
 		moduleMetadata({
-			imports: [CalloutFeedbackItemComponent, CalloutFeedbackListComponent, ButtonComponent],
+			imports: [CalloutFeedbackItemComponent, CalloutFeedbackListComponent, CalloutFeedbackItemDescriptionDirective, ButtonComponent],
 		}),
 	],
 	render: (args, { argTypes }) => {
@@ -38,17 +38,29 @@ export default {
 			control: {
 				type: 'select',
 			},
+			description: 'Ajoute une icône au callout.',
 		},
 		state: {
 			options: [null, 'success', 'warning', 'error'],
 			control: {
 				type: 'select',
 			},
+			description: 'État du callout.',
 		},
 		size: {
 			control: {
 				type: 'select',
 			},
+			description: 'Modifie la taille du callout.',
+		},
+		heading: {
+			description: 'Titre du callout.',
+		},
+		palette: {
+			description: 'Applique une palette de couleurs au callout.',
+		},
+		open: {
+			description: 'Place le callout dans son état déplié.',
 		},
 	},
 } as Meta;

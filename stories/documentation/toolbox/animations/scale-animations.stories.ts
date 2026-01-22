@@ -1,11 +1,10 @@
 import { Component } from '@angular/core';
 import { provideAnimations } from '@angular/platform-browser/animations';
 import { luScaleAnimationFactory } from '@lucca-front/ng/animations';
-import { applicationConfig, Meta, StoryFn } from '@storybook/angular';
+import { applicationConfig, Meta, StoryObj } from '@storybook/angular';
 
 @Component({
 	selector: 'story-scale-animation',
-	standalone: true,
 	template: `
 		<div class="grid mod-auto">
 			<div class="grid-column ng-demo-block">
@@ -71,12 +70,14 @@ export default {
 	decorators: [applicationConfig({ providers: [provideAnimations()] })],
 } as Meta;
 
-const template: StoryFn<ScaleAnimationStory> = (args) => ({
+const template = (args: ScaleAnimationStory) => ({
 	props: args,
 });
 
-export const Scale = template.bind({});
-Scale.args = {};
+export const Scale: StoryObj<ScaleAnimationStory> = {
+	args: {},
+	render: template,
+};
 
 const code = `
 /* 1. Appeler provideAnimations */

@@ -108,6 +108,7 @@ export const BasicTEST = createTestStory(Basic, async ({ canvasElement, args, co
 	const canvas = within(canvasElement);
 	await waitForAngular();
 	// Get input using label text to make sure the label link is properly done, we're adding ? for the tooltip
+	// eslint-disable-next-line @angular-eslint/no-uncalled-signals
 	const input = canvas.getByLabelText(`${args['label']}${args['tooltip'] ? '?' : ''}`, { selector: 'input' });
 	await userEvent.click(input);
 	await waitForAngular();
@@ -134,16 +135,21 @@ export const BasicTEST = createTestStory(Basic, async ({ canvasElement, args, co
 		await expectNgModelDisplay(canvasElement, 'Invalid Date');
 		await expect(input).toHaveAttribute('aria-invalid', 'true');
 	});
+	await waitForAngular();
 
 	await context.step('Select today after another date', async () => {
 		await userEvent.clear(input);
-		const yesterday = today.getDate() <= 1 ? 2 : today.getDate() - 1;
+		// We pick 15 because it should show only once
+		// Fallback if we're the 15th, pick 16
+		const targetDay = today.getDate() === 15 ? 16 : 15;
+		const yesterday = targetDay - 1;
 		await pickDay(input, yesterday);
 		await expectNgModelDisplay(canvasElement, new Date(today.getFullYear(), today.getMonth(), yesterday).toString());
 
-		await pickDay(input, today.getDate());
-		await expectNgModelDisplay(canvasElement, new Date(today.getFullYear(), today.getMonth(), today.getDate()).toString());
+		await pickDay(input, targetDay);
+		await expectNgModelDisplay(canvasElement, new Date(today.getFullYear(), today.getMonth(), targetDay).toString());
 	});
+	await waitForAngular();
 });
 
 async function pickDay(input: HTMLElement, targetDay: number) {

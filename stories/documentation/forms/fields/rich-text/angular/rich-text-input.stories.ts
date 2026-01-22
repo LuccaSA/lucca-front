@@ -1,17 +1,17 @@
 import { LOCALE_ID } from '@angular/core';
 import { FormsModule, ReactiveFormsModule } from '@angular/forms';
 import { BrowserAnimationsModule } from '@angular/platform-browser/animations';
+import { provideRouter } from '@angular/router';
 import { ButtonComponent } from '@lucca-front/ng/button';
 import { DividerComponent } from '@lucca-front/ng/divider';
 import { FormFieldComponent } from '@lucca-front/ng/form-field';
-import { RichTextInputComponent, RichTextInputToolbarComponent, RichTextPluginTagComponent, TAGS } from '@lucca-front/ng/forms/rich-text-input';
+import { RichTextInputComponent, RichTextInputToolbarComponent, RichTextPluginTagComponent } from '@lucca-front/ng/forms/rich-text-input';
 import { provideLuRichTextHTMLFormatter } from '@lucca-front/ng/forms/rich-text-input/formatters/html';
-import { DEFAULT_MARKDOWN_TRANSFORMERS, provideLuRichTextMarkdownFormatter } from '@lucca-front/ng/forms/rich-text-input/formatters/markdown';
-import { provideLuRichTextPlainTextFormatter } from '@lucca-front/ng/forms/rich-text-input/formatters/plain-text';
+import { DEFAULT_MARKDOWN_TRANSFORMERS, provideLuRichTextMarkdownFormatter, TAGS } from '@lucca-front/ng/forms/rich-text-input/formatters/markdown';
+import { PLAINTEXT_TAGS, provideLuRichTextPlainTextFormatter } from '@lucca-front/ng/forms/rich-text-input/formatters/plain-text';
 import { applicationConfig, Meta, moduleMetadata, StoryObj } from '@storybook/angular';
 import { cleanupTemplate, generateInputs } from 'stories/helpers/stories';
 import { StoryModelDisplayComponent } from 'stories/helpers/story-model-display.component';
-import { provideRouter } from '@angular/router';
 
 export default {
 	title: 'Documentation/Forms/Fields/RichTextInput/Angular',
@@ -23,7 +23,26 @@ export default {
 			providers: [{ provide: LOCALE_ID, useValue: 'fr' }, provideRouter([])],
 		}),
 	],
-	argTypes: {},
+	argTypes: {
+		placeholder: {
+			description: 'Applique un placeholder au champ.',
+		},
+		disabled: {
+			description: 'Désactive le champ.',
+		},
+		required: {
+			description: 'Marque le champ comme obligatoire.',
+		},
+		disableSpellcheck: {
+			description: "Désactive le correcteur d'orthographe.",
+		},
+		autoResize: {
+			description: "Active / désactive l'autoresize du champ.",
+		},
+		hideToolbar: {
+			description: 'Masque les options de mise en forme.',
+		},
+	},
 } as Meta;
 
 export const Basic: StoryObj<RichTextInputComponent & { value: string; disabled: boolean; required: boolean } & FormFieldComponent> = {
@@ -52,6 +71,7 @@ export const Basic: StoryObj<RichTextInputComponent & { value: string; disabled:
 		required: false,
 		disableSpellcheck: false,
 		autoResize: true,
+		hideToolbar: false,
 	},
 };
 
@@ -81,6 +101,7 @@ export const WithNoInitialValue: StoryObj<RichTextInputComponent & { value: stri
 		required: false,
 		disableSpellcheck: false,
 		autoResize: true,
+		hideToolbar: false,
 	},
 };
 
@@ -110,6 +131,7 @@ export const WithHtmlFormatter: StoryObj<RichTextInputComponent & { value: strin
 		required: false,
 		disableSpellcheck: false,
 		autoResize: true,
+		hideToolbar: false,
 	},
 };
 
@@ -153,6 +175,7 @@ export const WithTagPlugin: StoryObj<RichTextInputComponent & { value: string; d
 		required: false,
 		disableSpellcheck: false,
 		autoResize: true,
+		hideToolbar: false,
 	},
 };
 
@@ -196,6 +219,7 @@ export const WithTagPluginMarkdown: StoryObj<RichTextInputComponent & { value: s
 		required: false,
 		disableSpellcheck: false,
 		autoResize: true,
+		hideToolbar: false,
 	},
 };
 
@@ -227,7 +251,7 @@ export const WithTagPluginPlainText: StoryObj<RichTextInputComponent & { value: 
 <pr-story-model-display>{{ value }}</pr-story-model-display>`),
 			moduleMetadata: {
 				imports: [RichTextInputComponent, RichTextPluginTagComponent, FormFieldComponent, FormsModule, BrowserAnimationsModule],
-				providers: [provideLuRichTextPlainTextFormatter([TAGS])],
+				providers: [provideLuRichTextPlainTextFormatter([PLAINTEXT_TAGS])],
 			},
 		};
 	},
@@ -238,6 +262,7 @@ export const WithTagPluginPlainText: StoryObj<RichTextInputComponent & { value: 
 		required: false,
 		disableSpellcheck: false,
 		autoResize: true,
+		hideToolbar: false,
 	},
 };
 
@@ -285,5 +310,6 @@ export const WithTagPluginMarkdownContentChange: StoryObj<RichTextInputComponent
 		required: false,
 		disableSpellcheck: false,
 		autoResize: true,
+		hideToolbar: false,
 	},
 };

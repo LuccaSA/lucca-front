@@ -1,17 +1,16 @@
 import { registerLocaleData } from '@angular/common';
 import localesFr from '@angular/common/locales/fr';
-import { Component, LOCALE_ID, OnInit } from '@angular/core';
+import { Component, LOCALE_ID } from '@angular/core';
 import { FormsModule } from '@angular/forms';
 import { provideAnimations } from '@angular/platform-browser/animations';
 import { ALuDateAdapter, LuNativeDateAdapter } from '@lucca-front/ng/core';
 import { LuCalendarInputComponent, LuDateAdapterPipe } from '@lucca-front/ng/date';
-import { Meta, StoryFn, applicationConfig } from '@storybook/angular';
+import { Meta, applicationConfig, StoryObj } from '@storybook/angular';
 
 registerLocaleData(localesFr);
 
 @Component({
 	selector: 'date-calendar-stories',
-	standalone: true,
 	imports: [LuCalendarInputComponent, LuDateAdapterPipe, FormsModule],
 	providers: [{ provide: ALuDateAdapter, useClass: LuNativeDateAdapter }],
 	template: `
@@ -22,9 +21,9 @@ registerLocaleData(localesFr);
 		{{ date | luDate: 'full' }}
 	`,
 })
-class CalendarStory implements OnInit {
+class CalendarStory {
 	date = new Date();
-	ngOnInit() {}
+
 	random() {
 		this.date = new Date(this.date);
 		this.date.setDate(Math.ceil(Math.random() * 30));
@@ -41,7 +40,7 @@ export default {
 	],
 } as Meta;
 
-const template: StoryFn<CalendarStory> = (args) => ({
+const template = (args: CalendarStory) => ({
 	props: args,
 });
 
@@ -62,7 +61,6 @@ import { LuCalendarInputComponent } from '@lucca-front/ng/date';
 
 @Component({
 	selector: 'calendar-story',
-	standalone: true,
 	imports: [LuCalendarInputComponent],
 	providers: [{ provide: ALuDateAdapter, useClass: LuNativeDateAdapter }],
 	template: \`
@@ -70,7 +68,10 @@ import { LuCalendarInputComponent } from '@lucca-front/ng/date';
 	\`
 })`;
 
-export const Calendar = template.bind({});
+export const Calendar: StoryObj<CalendarStory> = {
+	args: {},
+	render: template,
+};
 Calendar.parameters = {
 	// Disable controls as they are not modifiable because of ComponentWrapper
 	controls: { include: [] },

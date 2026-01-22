@@ -1,10 +1,11 @@
 import { Component } from '@angular/core';
-import { Meta, StoryFn, moduleMetadata } from '@storybook/angular';
+import { FooterComponent } from '@lucca-front/ng/footer';
+import { Meta, StoryObj, moduleMetadata } from '@storybook/angular';
 
 @Component({
-	standalone: true,
 	selector: 'footer-stories',
 	templateUrl: './footer.stories.html',
+	imports: [FooterComponent],
 })
 class FooterStory {}
 
@@ -18,6 +19,9 @@ export default {
 	],
 } as Meta;
 
-const template: StoryFn<FooterStory> = () => ({});
+const template = () => ({});
 
-export const basic = template.bind({});
+export const Basic: StoryObj<FooterStory> = {
+	args: {},
+	render: template,
+};

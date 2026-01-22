@@ -1,6 +1,10 @@
 @use "sass:meta";
 @use '@lucca-front/scss/src/commons/utils/namespace';
+@use '@lucca-front/scss/src/commons/config';
 @use 'exports' as *;
+
+/* stylelint-disable-next-line layer-name-pattern */
+@layer #{config.$layers};
 
 @layer reset {
 	@include meta.load-css('normalize.css/normalize');

@@ -17,7 +17,6 @@
 		.verticalNavigation-list {
 			@include reset.list;
 
-			background-color: var(--pr-t-elevation-surface-raised);
 			margin-block-end: var(--pr-t-spacings-200);
 		}
 

@@ -1,4 +1,4 @@
-import { Meta, StoryFn } from '@storybook/angular';
+import { Meta, StoryObj } from '@storybook/angular';
 
 interface BoxToggleStory {
 	neutral: boolean;
@@ -27,7 +27,7 @@ function getTemplate(args: BoxToggleStory): string {
 </div>`;
 }
 
-const Template: StoryFn<BoxToggleStory> = (args) => ({
+const Template = (args: BoxToggleStory) => ({
 	props: args,
 	template: getTemplate(args),
 	styles: [
@@ -39,5 +39,7 @@ const Template: StoryFn<BoxToggleStory> = (args) => ({
 	],
 });
 
-export const Toggle = Template.bind({});
-Toggle.args = { neutral: false };
+export const Toggle: StoryObj<BoxToggleStory> = {
+	args: { neutral: false },
+	render: Template,
+};

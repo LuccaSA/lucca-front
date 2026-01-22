@@ -7,10 +7,9 @@ import { LuInputDisplayerDirective } from '@lucca-front/ng/input';
 import { LuForOptionsDirective, LuOptionItemComponent, LuOptionPickerAdvancedComponent, LuOptionPickerComponent } from '@lucca-front/ng/option';
 import { LuSelectInputComponent } from '@lucca-front/ng/select';
 import { LuUserDisplayPipe, LuUserHomonymsComponent, LuUserMeOptionDirective } from '@lucca-front/ng/user';
-import { Meta, StoryFn, applicationConfig } from '@storybook/angular';
+import { Meta, applicationConfig, StoryObj } from '@storybook/angular';
 
 @Component({
-	standalone: true,
 	selector: 'user-select-stories',
 	templateUrl: './user-homonyms.stories.html',
 	imports: [
@@ -35,7 +34,7 @@ export default {
 	decorators: [applicationConfig({ providers: [provideAnimations(), provideHttpClient()] })],
 } as Meta;
 
-const template: StoryFn<UserHomonymsStory> = (args) => ({
+const template = (args: UserHomonymsStory) => ({
 	props: args,
 });
 
@@ -74,10 +73,12 @@ const code = `
 </label>
 `;
 
-export const homonyms = template.bind({});
-homonyms.args = {};
+export const Homonyms: StoryObj<UserHomonymsStory> = {
+	args: {},
+	render: template,
+};
 
-homonyms.parameters = {
+Homonyms.parameters = {
 	controls: { include: [] },
 	docs: {
 		source: {

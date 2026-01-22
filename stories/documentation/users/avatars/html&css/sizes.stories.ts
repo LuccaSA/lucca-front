@@ -1,13 +1,11 @@
-import { Meta, StoryFn } from '@storybook/angular';
-
-interface UserAvatarSizesStory {}
+import { Meta, StoryObj } from '@storybook/angular';
 
 export default {
 	title: 'Documentation/Users/Avatar/HTML&CSS/Sizes',
 	argTypes: {},
 } as Meta;
 
-function getTemplate(args: UserAvatarSizesStory): string {
+function getTemplate(): string {
 	return `<span class="avatar mod-XS">
 	<img alt="" class="avatar-picture" loading="lazy" src="https://cdn.lucca.fr/lucca-front/avatars/finn.png" />
 </span>
@@ -31,10 +29,11 @@ function getTemplate(args: UserAvatarSizesStory): string {
 </span>`;
 }
 
-const Template: StoryFn<UserAvatarSizesStory> = (args) => ({
-	props: args,
-	template: getTemplate(args),
+const Template = () => ({
+	template: getTemplate(),
 });
 
-export const Sizes = Template.bind({});
-Sizes.args = {};
+export const Sizes: StoryObj = {
+	args: {},
+	render: Template,
+};

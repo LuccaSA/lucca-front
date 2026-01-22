@@ -1,5 +1,5 @@
-import { ScrollBoxComponent } from '@lucca-front/ng/scrollBox';
-import { Meta, moduleMetadata, StoryFn } from '@storybook/angular';
+import { ScrollBoxComponent } from '@lucca-front/ng/scroll-box';
+import { Meta, moduleMetadata, StoryObj } from '@storybook/angular';
 
 interface HorizontalNavigationScrollboxStory {
 	noBorder: boolean;
@@ -75,10 +75,12 @@ function getTemplate(args: HorizontalNavigationScrollboxStory): string {
 </lu-scroll-box>`;
 }
 
-const Template: StoryFn<HorizontalNavigationScrollboxStory> = (args) => ({
+const Template = (args: HorizontalNavigationScrollboxStory) => ({
 	props: args,
 	template: getTemplate(args),
 });
 
-export const Scrollbox = Template.bind({});
-Scrollbox.args = { noBorder: false, header: false, s: false };
+export const Scrollbox: StoryObj<HorizontalNavigationScrollboxStory> = {
+	args: { noBorder: false, header: false, s: false },
+	render: Template,
+};

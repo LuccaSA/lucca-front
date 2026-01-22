@@ -1,20 +1,19 @@
-import { Meta, StoryFn } from '@storybook/angular';
-
-interface StatusBadgeBasicStory {}
+import { Meta, StoryObj } from '@storybook/angular';
 
 export default {
 	title: 'Documentation/Texts/StatusBadge/HTML & CSS/Basic',
 	argTypes: {},
 } as Meta;
 
-function getTemplate(args: StatusBadgeBasicStory): string {
+function getTemplate(): string {
 	return `<div class="statusBadge">Status</div>`;
 }
 
-const Template: StoryFn<StatusBadgeBasicStory> = (args) => ({
-	props: args,
-	template: getTemplate(args),
+const Template = () => ({
+	template: getTemplate(),
 });
 
-export const Basic = Template.bind({});
-Basic.args = {};
+export const Basic: StoryObj = {
+	args: {},
+	render: Template,
+};

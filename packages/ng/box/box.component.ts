@@ -4,7 +4,6 @@ import { IconComponent } from '@lucca-front/ng/icon';
 
 @Component({
 	selector: 'lu-box',
-	standalone: true,
 	templateUrl: './box.component.html',
 	styleUrl: './box.component.scss',
 	changeDetection: ChangeDetectionStrategy.OnPush,
@@ -14,10 +13,15 @@ import { IconComponent } from '@lucca-front/ng/icon';
 		class: 'box',
 		'[class.mod-toggle]': 'toggle()',
 		'[class.mod-neutral]': 'neutral()',
+		'[class.mod-withArrow]': 'withArrow()',
 	},
 })
 export class BoxComponent {
-	toggle = input(false, { transform: booleanAttribute });
-	neutral = input(false, { transform: booleanAttribute });
-	killable = input(false, { transform: booleanAttribute });
+	readonly toggle = input(false, { transform: booleanAttribute });
+
+	readonly neutral = input(false, { transform: booleanAttribute });
+
+	readonly killable = input(false, { transform: booleanAttribute });
+
+	readonly withArrow = input(false, { transform: booleanAttribute });
 }

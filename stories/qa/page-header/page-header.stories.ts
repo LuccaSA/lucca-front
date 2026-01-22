@@ -1,18 +1,40 @@
 import { Component } from '@angular/core';
-import { Meta, StoryFn } from '@storybook/angular';
+import { FormsModule } from '@angular/forms';
+import { BreadcrumbsComponent, BreadcrumbsLinkDirective } from '@lucca-front/ng/breadcrumbs';
+import { ButtonComponent } from '@lucca-front/ng/button';
+import { FormFieldComponent } from '@lucca-front/ng/form-field';
+import { TextInputComponent } from '@lucca-front/ng/forms';
+import { HorizontalNavigationComponent, HorizontalNavigationLinkDirective } from '@lucca-front/ng/horizontal-navigation';
+import { IconComponent } from '@lucca-front/ng/icon';
+import { PageHeaderComponent } from '@lucca-front/ng/page-header';
+import { Meta, StoryObj } from '@storybook/angular';
 
 @Component({
-	standalone: true,
 	selector: 'page-header-stories',
 	templateUrl: './page-header.stories.html',
+	imports: [
+		PageHeaderComponent,
+		BreadcrumbsComponent,
+		BreadcrumbsLinkDirective,
+		HorizontalNavigationComponent,
+		HorizontalNavigationLinkDirective,
+		FormFieldComponent,
+		TextInputComponent,
+		ButtonComponent,
+		IconComponent,
+		FormsModule,
+	],
 })
 class PageHeaderStory {}
 
 export default {
-	title: 'QA/Page-Header',
+	title: 'QA/PageHeader',
 	component: PageHeaderStory,
 } as Meta;
 
-const template: StoryFn<PageHeaderStory> = () => ({});
+const template = () => ({});
 
-export const basic = template.bind({});
+export const Basic: StoryObj<PageHeaderStory> = {
+	args: {},
+	render: template,
+};

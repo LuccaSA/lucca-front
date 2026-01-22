@@ -18,7 +18,7 @@ import {
 } from '@lucca-front/ng/dialog';
 import { FormFieldComponent } from '@lucca-front/ng/form-field';
 import { CheckboxInputComponent, NumberInputComponent, TextInputComponent } from '@lucca-front/ng/forms';
-import { applicationConfig, Meta, StoryFn } from '@storybook/angular';
+import { applicationConfig, Meta, StoryObj } from '@storybook/angular';
 import { map } from 'rxjs';
 import { StoryModelDisplayComponent } from 'stories/helpers/story-model-display.component';
 
@@ -29,27 +29,23 @@ class DataProvider {
 }
 
 @Component({
-	standalone: true,
 	template: `Empty component, no route matched`,
 })
 class EmptyComponent {}
 
 @Component({
-	standalone: true,
 	imports: [CalloutComponent],
 	template: `<lu-callout heading="" size="M" state="success">dialog onClosed() called</lu-callout>`,
 })
 class ClosedComponent {}
 
 @Component({
-	standalone: true,
 	imports: [CalloutComponent],
 	template: `<lu-callout heading="" size="M" state="error">dialog onDismissed() called</lu-callout>`,
 })
 class DismissedComponent {}
 
 @Component({
-	standalone: true,
 	imports: [
 		DialogComponent,
 		DialogHeaderComponent,
@@ -116,7 +112,6 @@ class TestDialogComponent {
 
 @Component({
 	selector: 'dialog-routing-stories',
-	standalone: true,
 	template: `
 		<div class="pr-u-marginBlockEnd200">
 			<p>
@@ -129,7 +124,7 @@ class TestDialogComponent {
 		<pr-story-model-display class="pr-u-marginBlockStart0">{{ service.dialogOut() | json }}</pr-story-model-display>
 
 		<p class="pr-u-marginBlockStart200">Outlet</p>
-		<router-outlet></router-outlet>
+		<router-outlet />
 	`,
 	imports: [RouterOutlet, RouterLink, JsonPipe, ButtonComponent, StoryModelDisplayComponent],
 })
@@ -161,6 +156,7 @@ const routes: Routes = [
 		dataFactory: () => inject(DataProvider).dummy(),
 		dialogRouteConfig: {
 			// Can be overridden here
+			// eslint-disable-next-line @typescript-eslint/no-unsafe-return
 			canDeactivate: [(c) => c.allowThisDialogToClose()],
 		},
 	}),
@@ -175,7 +171,7 @@ export default {
 	decorators: [applicationConfig({ providers: [provideRouter(routes, withComponentInputBinding()), DataProvider] })],
 } as Meta;
 
-const Template: StoryFn<DialogRoutingStory> = (args) => ({
+const Template = (args: DialogRoutingStory) => ({
 	props: args,
 });
 
@@ -222,14 +218,12 @@ class DataProvider {
 
 // Components in sub routes
 @Component({
-	standalone: true,
 	imports: [CalloutComponent],
 	template: \`<lu-callout heading="" size="M" state="success">dialog onClosed() called</lu-callout>\`,
 })
 class ClosedComponent {}
 
 @Component({
-	standalone: true,
 	imports: [CalloutComponent],
 	template: \`<lu-callout heading="" size="M" state="error">dialog onDismissed() called</lu-callout>\`,
 })
@@ -238,7 +232,6 @@ class DismissedComponent {}
 // Story
 @Component({
 	selector: 'dialog-routing-stories',
-	standalone: true,
 	template: \`
 	<button luButton type="button" routerLink="/dialog">Navigate to /dialog</button>
 \`,
@@ -249,7 +242,10 @@ class DialogRoutingStory {
 }
 `;
 
-export const Basic = Template.bind({});
+export const Basic: StoryObj<DialogRoutingStory> = {
+	args: {},
+	render: Template,
+};
 Basic.parameters = {
 	// Disable controls as they are not modifiable because of ComponentWrapper
 	controls: { include: [] },

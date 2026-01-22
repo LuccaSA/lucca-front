@@ -8,7 +8,12 @@
 
 	@layer mods {
 		&.mod-AI {
+			&:not(.invert) {
 			@include AI;
+
+			&.mod-invert {
+				@include invertIA;
+			}
 
 			&.is-success {
 				@include successAI;
@@ -16,6 +21,7 @@
 
 			&.is-loading {
 				@include loadingAI;
+			}
 			}
 		}
 
@@ -192,7 +198,7 @@
 		// .disabled is deprecated
 		&.is-disabled,
 		&.disabled,
-		&[aria-disabled] {
+		&[aria-disabled="true"] {
 			@include disabled;
 		}
 	}

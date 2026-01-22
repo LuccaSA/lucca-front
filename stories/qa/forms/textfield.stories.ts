@@ -1,8 +1,7 @@
 import { Component } from '@angular/core';
-import { Meta, StoryFn, moduleMetadata } from '@storybook/angular';
+import { Meta, moduleMetadata, StoryObj } from '@storybook/angular';
 
 @Component({
-	standalone: true,
 	selector: 'forms-textfield-stories',
 	templateUrl: './textfield.stories.html',
 })
@@ -18,6 +17,9 @@ export default {
 	],
 } as Meta;
 
-const template: StoryFn<TextfieldStory> = () => ({});
+const template = () => ({});
 
-export const basic = template.bind({});
+export const Basic: StoryObj<TextfieldStory> = {
+	args: {},
+	render: template,
+};

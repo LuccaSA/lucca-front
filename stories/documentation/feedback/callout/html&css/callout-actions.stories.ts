@@ -1,4 +1,4 @@
-import { Meta, StoryFn } from '@storybook/angular';
+import { Meta, StoryObj } from '@storybook/angular';
 
 interface CalloutActionsStory {}
 
@@ -11,7 +11,7 @@ function getTemplate(args: CalloutActionsStory): string {
 	return `<div class="callout">
 	<div class="callout-content">
 		<div class="callout-content-description">
-			Feedback description
+			<p>Feedback description</p>
 			<div class="callout-content-description-actions">
 				<button class="button mod-outlined" type="button">Button</button>
 				<button class="button mod-ghost" type="button">Button</button>
@@ -21,10 +21,12 @@ function getTemplate(args: CalloutActionsStory): string {
 </div>`;
 }
 
-const Template: StoryFn<CalloutActionsStory> = (args) => ({
+const Template = (args: CalloutActionsStory) => ({
 	props: args,
 	template: getTemplate(args),
 });
 
-export const Actions = Template.bind({});
-Actions.args = {};
+export const Actions: StoryObj<CalloutActionsStory> = {
+	args: {},
+	render: Template,
+};

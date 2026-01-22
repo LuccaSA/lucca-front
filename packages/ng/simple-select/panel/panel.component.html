@@ -1,6 +1,7 @@
 @if (
 	{
 		options: (options$ | async) || [],
+		clueChange: (clueChange$ | async) || "",
 		groupTemplateLocation: groupTemplateLocation$ | async,
 		shouldDisplayAddOption: shouldDisplayAddOption$ | async,
 	};
@@ -14,11 +15,15 @@
 				</div>
 			}
 			<div role="listbox">
-				@if (grouping && ctx.groupTemplateLocation === "group-header") {
-					@for (group of ctx.options | luOptionGroup: grouping.selector; track trackGroupsBy(groupIndex, group); let groupIndex = $index) {
+				@if (grouping() && ctx.groupTemplateLocation === "group-header") {
+					@for (
+						group of ctx.options | luOptionGroup: grouping().selector;
+						track trackGroupsBy(groupIndex, group);
+						let groupIndex = $index
+					) {
 						<div class="lu-picker-content-option-group" role="group" [attr.aria-labelledby]="selectId + '-group-' + group.key">
 							<span class="lu-picker-content-option-group-title" role="presentation" [id]="selectId + '-group-' + group.key">
-								<ng-container *luPortal="grouping.content; context: { $implicit: group }" />
+								<ng-container *luPortal="grouping().content; context: { $implicit: group }" />
 							</span>
 							<ng-template
 								[ngTemplateOutlet]="optionsList"
@@ -27,7 +32,7 @@
 						</div>
 					}
 				}
-				@if (!grouping || ctx.groupTemplateLocation !== "group-header") {
+				@if (!grouping() || ctx.groupTemplateLocation !== "group-header") {
 					<ng-template [ngTemplateOutlet]="optionsList" [ngTemplateOutletContext]="{ $implicit: ctx.options }" />
 				}
 				<ng-template #optionsList let-options let-groupIndex="groupIndex">
@@ -52,7 +57,7 @@
 								[optionIndex]="index"
 								[groupTemplateLocation]="ctx.groupTemplateLocation"
 								[groupIndex]="groupIndex"
-								[grouping]="grouping"
+								[grouping]="grouping()"
 								[scrollIntoViewOptions]="{ block: 'center' }"
 								[isSelected]="option | luIsOptionSelected: optionComparer : selected()"
 								[class.withAddOption]="ctx.shouldDisplayAddOption"
@@ -64,7 +69,7 @@
 				</ng-template>
 				@if (ctx.options.length === 0 && (loading$ | async) === false) {
 					<div class="lu-picker-content-option-emptyState">
-						{{ intl.emptyResults }}
+						{{ ctx.clueChange.length ? intl.emptyResults : intl.emptyOptions }}
 					</div>
 				}
 			</div>
@@ -75,14 +80,16 @@
 			}
 			@if (ctx.shouldDisplayAddOption) {
 				<div
-					class="addOption palette-product"
+					class="addOption palette-product is-stuck"
 					(click)="selectInput.emitAddOption()"
 					(selected)="selectInput.emitAddOption()"
 					elementId="picker-content-add"
 					luCoreSelectPanelElement
 				>
-					<lu-icon icon="mathsPlus" />
-					<ng-container *luPortal="selectInput.addOptionLabel" />
+					<div class="addOption-content">
+						<lu-icon icon="mathsPlus" />
+						<ng-container *luPortal="selectInput.addOptionLabel" />
+					</div>
 				</div>
 			}
 		</div>

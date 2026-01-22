@@ -22,6 +22,8 @@
 
 		&:has(.inputFramed-header-input:focus-visible) {
 			@include a11y.focusVisible;
+
+			@include focusVisible;
 		}
 
 		&:has(.inputFramed-header-input[aria-invalid="true"]) {
@@ -38,10 +40,14 @@
 				@include disabled;
 			}
 		}
-	}
 
-	&.mod-center {
-		@include center;
+		&.mod-center {
+			@include center;
+		}
+
+		&.mod-L {
+			@include L;
+		}
 	}
 }
 
@@ -49,5 +55,11 @@
 	@layer components {
 		@include vars;
 		@include wrapper;
+	}
+
+	@layer mods {
+		&:has(.inputFramed.mod-L) {
+			@include wrapperL;
+		}
 	}
 }

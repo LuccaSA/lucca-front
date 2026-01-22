@@ -9,6 +9,10 @@
 		&.mod-nested {
 			@include nested;
 		}
+
+		&.mod-noOverflow {
+			@include noOverflow;
+		}
 	}
 }
 
@@ -75,14 +79,24 @@
 		&:has([selectable]),
 		&.mod-selectable {
 			@include selectable;
-
-			&:has(input:checked) {
-				@include selected;
-			}
 		}
 
 		&.mod-draggable {
 			@include draggable;
+
+			&:has([selectable]),
+			&.mod-selectable {
+				@include selectableDraggable;
+			}
+		}
+	}
+
+		:is(.dataTable-body-row, .dataTable-foot-row) {
+		&:has([selectable]),
+		&.mod-selectable {
+			&:has(input:checked) {
+				@include selected;
+			}
 		}
 	}
 
@@ -130,6 +144,15 @@
 	.dataTable-body-row-cell-expand-button {
 		&[aria-expanded='true'] {
 			@include expanded;
+		}
+	}
+}
+
+// drag and drop preview
+:not(.dataTable-body) {
+	> .dataTable-body-row {
+		@layer components {
+			@include vars;
 		}
 	}
 }

@@ -26,6 +26,11 @@ export default {
 			options: ['click', 'click+hover', 'hover+focus'],
 			description: '[v18.2] Hover + focus',
 		},
+		overlayScrollStrategy: {
+			control: 'select',
+			options: ['reposition', 'block', 'close'],
+			description: '[v21.1]',
+		},
 		luPopoverNoCloseButton: {
 			description: '[v18.2]',
 		},
@@ -40,21 +45,21 @@ export const Basic: StoryObj<PopoverDirective> = {
 			openDelay = ' ' + args.luPopoverOpenDelay + 'ms';
 		}
 		return {
-			template: cleanupTemplate(`<div class="demo">
+			template: `<div class="demo">
 	<button luButton [luPopover2]="contentRef" ${generateInputs(args, argTypes)}>${action}${openDelay} !</button>
 	<ng-template #contentRef>
 		<div class="popover-contentOptional">
-			<h3>Titre</h3>
+			<h3>Title</h3>
 			<lu-divider />
 			<lu-listing checklist palette="success">
-				<lu-listing-item>Élement de liste</lu-listing-item>
-				<lu-listing-item>Élement de liste</lu-listing-item>
-				<lu-listing-item>Élement de liste</lu-listing-item>
+				<lu-listing-item>item item item item item item item item item item item</lu-listing-item>
+				<lu-listing-item>item</lu-listing-item>
+				<lu-listing-item>item</lu-listing-item>
 			</lu-listing>
 		</div>
 	</ng-template>
 </div>
-`),
+`,
 			styles: [
 				`
 	.demo {
@@ -159,5 +164,6 @@ export const CustomPosition: StoryObj<PopoverDirective> = {
 		luPopoverDisabled: false,
 		luPopoverPosition: 'above',
 		luPopoverNoCloseButton: false,
+		overlayScrollStrategy: 'reposition',
 	},
 };

@@ -8,7 +8,6 @@ import { ALuApiOptionPager } from './api-pager.model';
 @Component({
 	selector: 'lu-api-pager',
 	template: '',
-	standalone: true,
 	changeDetection: ChangeDetectionStrategy.OnPush,
 	providers: [
 		{

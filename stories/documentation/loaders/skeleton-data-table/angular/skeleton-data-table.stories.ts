@@ -25,5 +25,6 @@ export const Template: StoryObj<SkeletonDataTableComponent> = {
 	args: {
 		cols: 5,
 		rows: 8,
+		colsAlign: { 3: 'center', 4: 'end' },
 	},
 };

@@ -35,6 +35,7 @@
 		}
 
 		.highlightData-content-subText {
+			grid-area: subtext;
 			font: var(--pr-t-font-body-XS);
 			color: var(--pr-t-color-text-subtle);
 			margin-block-start: var(--pr-t-spacings-100) !important; // Override list reset

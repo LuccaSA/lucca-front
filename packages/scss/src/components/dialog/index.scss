@@ -56,5 +56,17 @@
 		&.mod-fullScreen {
 			@include fullScreen;
 		}
+
+		&:has(.dialog-inside-header-button) {
+			@include withCloseButton;
+		}
+
+		&:has(.dialog-inside-header-actionOptional:not(:empty)) {
+			@include withAction;
+		}
+
+		&.mod-stacked {
+			@include stacked;
+		}
 	}
 }

@@ -1,8 +1,8 @@
 import { FormsModule } from '@angular/forms';
 import { DateInputComponent, DateRangeInputComponent } from '@lucca-front/ng/date2';
 import { FilterPillComponent } from '@lucca-front/ng/filter-pills';
+import { CheckboxInputComponent } from '@lucca-front/ng/forms';
 import { Meta, moduleMetadata, StoryObj } from '@storybook/angular';
-import { CheckboxInputComponent } from '../../../../../packages/ng/forms/checkbox-input/checkbox-input.component';
 import { StoryModelDisplayComponent } from '../../../../helpers/story-model-display.component';
 
 export default {

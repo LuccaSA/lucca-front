@@ -1,46 +1,27 @@
-import { Meta, StoryFn } from '@storybook/angular';
+import { Meta, StoryObj } from '@storybook/angular';
 
-interface ChipBasicStory {
-	product: boolean;
-	disabled: boolean;
-}
+interface ChipBasicStory {}
 
 export default {
 	title: 'Documentation/Listings/Chip/HTML&CSS/Basic',
-	argTypes: {
-		product: {
-			control: {
-				type: 'boolean',
-			},
-		},
-		disabled: {
-			control: {
-				type: 'boolean',
-			},
-		},
-	},
+	argTypes: {},
 } as Meta;
 
 function getTemplate(args: ChipBasicStory): string {
-	const product = args.product ? `palette-product` : '';
-	const disabled = args.disabled ? `is-disabled` : '';
-	return `
-	<div class="chip ${product} ${disabled}">
-		Label
-		<button type="button" class="chip-kill">
-			<span class="pr-u-mask">delete</span>
-		</button>
-	</div>
-	<div class="chip ${product} ${disabled}">
-		Label
-	</div>
-	`;
+	return `<div class="chip">
+	Label
+	<button type="button" class="chip-kill">
+		<span class="pr-u-mask">delete</span>
+	</button>
+</div>`;
 }
 
-const Template: StoryFn<ChipBasicStory> = (args) => ({
+const Template = (args: ChipBasicStory) => ({
 	props: args,
 	template: getTemplate(args),
 });
 
-export const Basic = Template.bind({});
-Basic.args = { product: false, disabled: false };
+export const Basic: StoryObj<ChipBasicStory> = {
+	args: {},
+	render: Template,
+};

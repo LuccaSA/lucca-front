@@ -1,5 +1,4 @@
 import { Meta } from '@storybook/angular';
-import { cleanupTemplate } from 'stories/helpers/stories';
 
 interface InputFramedBasicStory {}
 
@@ -8,7 +7,7 @@ export default {
 	argTypes: {},
 	render: (args: InputFramedBasicStory) => {
 		return {
-			template: cleanupTemplate(`<div class="inputFramedWrapper">
+			template: `<div class="inputFramedWrapper">
 	<div class="grid mod-autoAtMediaMinXXS">
 		<div class="grid-column">
 			<div class="inputFramed">
@@ -119,7 +118,7 @@ export default {
 			</div>
 		</div>
 	</div>
-</div>`),
+</div>`,
 		};
 	},
 } as Meta;

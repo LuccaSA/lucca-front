@@ -1,4 +1,4 @@
-import { Meta, StoryFn } from '@storybook/angular';
+import { Meta, StoryObj } from '@storybook/angular';
 
 interface SwitchLegacyHelperStory {
 	disabled: boolean;
@@ -42,10 +42,12 @@ function getTemplate(args: SwitchLegacyHelperStory): string {
 </label>`;
 }
 
-const Template: StoryFn<SwitchLegacyHelperStory> = (args) => ({
+const Template = (args: SwitchLegacyHelperStory) => ({
 	props: args,
 	template: getTemplate(args),
 });
 
-export const Helper = Template.bind({});
-Helper.args = { inline: false, disabled: false, s: false };
+export const Helper: StoryObj<SwitchLegacyHelperStory> = {
+	args: { inline: false, disabled: false, s: false },
+	render: Template,
+};

@@ -1,10 +1,11 @@
 import { Component } from '@angular/core';
-import { Meta, StoryFn } from '@storybook/angular';
+import { BoxComponent } from '@lucca-front/ng/box';
+import { Meta, StoryObj } from '@storybook/angular';
 
 @Component({
-	standalone: true,
 	selector: 'box-stories',
 	templateUrl: './box.stories.html',
+	imports: [BoxComponent],
 })
 class BoxStory {}
 
@@ -13,6 +14,9 @@ export default {
 	component: BoxStory,
 } as Meta;
 
-const template: StoryFn<BoxStory> = () => ({});
+const template = () => ({});
 
-export const basic = template.bind({});
+export const Basic: StoryObj<BoxStory> = {
+	args: {},
+	render: template,
+};

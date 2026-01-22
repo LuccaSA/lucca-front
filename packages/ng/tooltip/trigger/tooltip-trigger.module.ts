@@ -1,7 +1,10 @@
+import { OverlayModule } from '@angular/cdk/overlay';
 import { NgModule } from '@angular/core';
 import { LuTooltipTriggerDirective } from './tooltip-trigger.directive';
-import { OverlayModule } from '@angular/cdk/overlay';
 
+/**
+ * @deprecated use `LuTooltipTriggerDirective, OverlayModule` instead
+ */
 @NgModule({
 	imports: [LuTooltipTriggerDirective, OverlayModule],
 	exports: [LuTooltipTriggerDirective],

@@ -24,7 +24,7 @@ import {
 } from '@angular/core';
 import { takeUntilDestroyed, toObservable } from '@angular/core/rxjs-interop';
 import { getIntl } from '@lucca-front/ng/core';
-import { combineLatest, debounce, filter, map, merge, Subject, switchMap, timer } from 'rxjs';
+import { combineLatest, debounce, filter, map, merge, Subject, switchMap, take, timer } from 'rxjs';
 import { PopoverContentComponent } from './content/popover-content/popover-content.component';
 import { POPOVER_CONFIG, PopoverConfig } from './popover-tokens';
 import { LU_POPOVER2_TRANSLATIONS } from './popover2.translate';
@@ -70,7 +70,6 @@ const defaultPositionPairs: Record<PopoverPosition, ConnectionPositionPair> = {
 		'[attr.aria-expanded]': 'opened()',
 	},
 	exportAs: 'luPopover2',
-	standalone: true,
 })
 export class PopoverDirective implements OnDestroy {
 	overlay = inject(Overlay);
@@ -92,6 +91,9 @@ export class PopoverDirective implements OnDestroy {
 
 	@Input()
 	luPopoverPosition: PopoverPosition = 'above';
+
+	@Input()
+	overlayScrollStrategy: 'reposition' | 'block' | 'close' = 'reposition';
 
 	@Input({
 		transform: booleanAttribute,
@@ -241,7 +243,7 @@ export class PopoverDirective implements OnDestroy {
 					.position()
 					.flexibleConnectedTo(this.luPopoverAnchor())
 					.withPositions(this.customPositions || this.#buildPositions()),
-				scrollStrategy: this.overlay.scrollStrategies.reposition(),
+				scrollStrategy: this.overlay.scrollStrategies[this.overlayScrollStrategy ?? 'reposition'](),
 				hasBackdrop: withBackdrop,
 				backdropClass: '',
 				disposeOnNavigation: true,
@@ -268,7 +270,7 @@ export class PopoverDirective implements OnDestroy {
 					PopoverContentComponent,
 					this.#vcr,
 					Injector.create({
-						providers: [{ provide: POPOVER_CONFIG, useValue: config }, ...this.additionalProviders],
+						providers: [{ provide: POPOVER_CONFIG, useValue: config }, { provide: PopoverContentComponent, useValue: this.#componentRef }, ...this.additionalProviders],
 					}),
 				),
 			).instance;
@@ -276,7 +278,7 @@ export class PopoverDirective implements OnDestroy {
 			this.#componentRef.mouseLeave$.pipe(takeUntilDestroyed(this.#componentRef.destroyRef), takeUntilDestroyed(this.#destroyRef)).subscribe(() => this.close$.next());
 			// On tooltip enter => trigger open to keep it opened
 			this.#componentRef.mouseEnter$.pipe(takeUntilDestroyed(this.#componentRef.destroyRef), takeUntilDestroyed(this.#destroyRef)).subscribe(() => this.open$.next('hover'));
-			this.#componentRef.closed$.pipe(takeUntilDestroyed(this.#componentRef.destroyRef), takeUntilDestroyed(this.#destroyRef)).subscribe(() => {
+			this.#componentRef.closed$.pipe(take(1), takeUntilDestroyed(this.#componentRef.destroyRef), takeUntilDestroyed(this.#destroyRef)).subscribe(() => {
 				this.opened.set(false);
 				this.#skipNextFocus = false;
 				this.luPopoverClosed.emit();
@@ -297,7 +299,7 @@ export class PopoverDirective implements OnDestroy {
 		}
 	}
 
-	@HostListener('keydown.Shift.Tab', ['$event'])
+	@HostListener('keydown.Shift.Tab')
 	focusOutBefore(): void {
 		if (this.opened() && this.luPopoverTrigger().includes('focus')) {
 			this.#componentRef.close();

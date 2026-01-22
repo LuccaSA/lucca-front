@@ -1,14 +1,13 @@
-import { Component, Input, Optional } from '@angular/core';
+import { Component, input } from '@angular/core';
 import { LuUserPictureModule } from '@lucca-front/ng/user';
-import { Meta, StoryFn } from '@storybook/angular';
+import { Meta, StoryObj } from '@storybook/angular';
 import { squidwards } from '../../user.mocks';
 
 @Component({
 	selector: 'avatar-stories',
-	standalone: true,
 	imports: [LuUserPictureModule],
 	template: `
-		<ul class="avatarWrapper" [class]="sizes">
+		<ul class="avatarWrapper" [class]="sizes()">
 			<li class="avatarWrapper-item" translate="no">
 				<lu-user-picture aria-hidden="true" class="avatar" [user]="user" />
 				<span class="pr-u-mask">{{ user.firstName }} {{ user.lastName }}</span>
@@ -31,7 +30,7 @@ import { squidwards } from '../../user.mocks';
 			</li>
 		</ul>
 
-		<ul class="avatarWrapper" [class]="sizes">
+		<ul class="avatarWrapper" [class]="sizes()">
 			<li class="avatarWrapper-item" translate="no">
 				<lu-user-picture aria-hidden="true" class="avatar" [user]="user" />
 				<span class="pr-u-mask">{{ user.firstName }} {{ user.lastName }}</span>
@@ -58,7 +57,7 @@ import { squidwards } from '../../user.mocks';
 			</li>
 		</ul>
 
-		<ul class="avatarWrapper" [class]="sizes">
+		<ul class="avatarWrapper" [class]="sizes()">
 			<li class="avatarWrapper-item" translate="no">
 				<a href="#" class="avatarWrapper-item-action">
 					<lu-user-picture aria-hidden="true" class="avatar" [user]="user" />
@@ -91,7 +90,7 @@ import { squidwards } from '../../user.mocks';
 			</li>
 		</ul>
 
-		<ul class="avatarWrapper" [class]="sizes">
+		<ul class="avatarWrapper" [class]="sizes()">
 			<li class="avatarWrapper-item" translate="no">
 				<a href="#" class="avatarWrapper-item-action">
 					<lu-user-picture aria-hidden="true" class="avatar" [user]="user" />
@@ -128,7 +127,7 @@ import { squidwards } from '../../user.mocks';
 	`,
 })
 class AvatarStory {
-	@Input() @Optional() sizes: string;
+	sizes = input<string>();
 
 	user = squidwards;
 }
@@ -146,13 +145,10 @@ export default {
 	},
 } as Meta;
 
-const template: StoryFn<AvatarStory> = (args: AvatarStory) => ({
-	props: args,
-});
-
-export const Basic = template.bind({});
-Basic.args = {
-	sizes: '',
+export const Basic: StoryObj<AvatarStory> = {
+	args: {
+		sizes: '',
+	},
 };
 
 Basic.parameters = {

@@ -1,16 +1,15 @@
-import { AfterViewInit, ChangeDetectionStrategy, Component, DestroyRef, ElementRef, HostBinding, HostListener, inject, ViewEncapsulation } from '@angular/core';
+import { CdkObserveContent } from '@angular/cdk/observers';
+import { AfterViewInit, ChangeDetectionStrategy, Component, DestroyRef, ElementRef, HostBinding, HostListener, inject, OnDestroy, ViewEncapsulation } from '@angular/core';
 import { ButtonComponent } from '@lucca-front/ng/button';
+import { getIntl, PortalDirective } from '@lucca-front/ng/core';
 import { IconComponent } from '@lucca-front/ng/icon';
-import { PopoverFocusTrap } from '../../popover-focus-trap';
 import { Subject } from 'rxjs';
+import { PopoverFocusTrap } from '../../popover-focus-trap';
 import { POPOVER_CONFIG } from '../../popover-tokens';
 import { LU_POPOVER2_TRANSLATIONS } from '../../popover.translate';
-import { getIntl, PortalDirective } from '@lucca-front/ng/core';
-import { CdkObserveContent } from '@angular/cdk/observers';
 
 @Component({
 	selector: 'lu-popover-content',
-	standalone: true,
 	imports: [ButtonComponent, IconComponent, CdkObserveContent, PortalDirective],
 	templateUrl: './popover-content.component.html',
 	styleUrl: './popover-content.component.scss',
@@ -18,7 +17,7 @@ import { CdkObserveContent } from '@angular/cdk/observers';
 	encapsulation: ViewEncapsulation.None,
 	changeDetection: ChangeDetectionStrategy.OnPush,
 })
-export class PopoverContentComponent implements AfterViewInit {
+export class PopoverContentComponent implements AfterViewInit, OnDestroy {
 	intl = getIntl(LU_POPOVER2_TRANSLATIONS);
 
 	#elementRef = inject<ElementRef<HTMLElement>>(ElementRef);
@@ -56,6 +55,11 @@ export class PopoverContentComponent implements AfterViewInit {
 		this.config.ref.updatePosition();
 	}
 
+	ngOnDestroy(): void {
+		this.#destroyEvents();
+		this.#focusManager.destroy();
+	}
+
 	ngAfterViewInit(): void {
 		this.#focusManager.attachAnchors();
 		if (!this.config.disableCloseButtonFocus) {
@@ -74,11 +78,15 @@ export class PopoverContentComponent implements AfterViewInit {
 			this.config.triggerElement.focus();
 		}
 		// Tell the directive we're closed now
+		this.#destroyEvents();
+		// Detach overlay
+		this.config.ref.dispose();
+	}
+
+	#destroyEvents(): void {
 		this.closed$.next();
 		this.closed$.complete();
 		this.mouseEnter$.complete();
 		this.mouseLeave$.complete();
-		// Detach overlay
-		this.config.ref.dispose();
 	}
 }

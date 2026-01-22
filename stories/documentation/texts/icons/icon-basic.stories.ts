@@ -1,12 +1,11 @@
 import { Component } from '@angular/core';
 import { FormsModule } from '@angular/forms';
-import { IconsList } from '@lucca-front/icons/icons-list';
+import { IconsList } from '@/stories/icons-list';
 import { IconComponent } from '@lucca-front/ng/icon';
 import { Meta, StoryObj } from '@storybook/angular';
 
 @Component({
 	selector: 'icon-basic-stories',
-	standalone: true,
 	imports: [FormsModule, IconComponent],
 	templateUrl: './icon-basic.stories.html',
 })

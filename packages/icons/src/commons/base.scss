@@ -1,15 +1,22 @@
 @use '@lucca-front/icons/src/commons/config';
 
+/* stylelint-disable-next-line layer-name-pattern */
+@layer #{config.$layers};
+
 @if config.$isNamespaced {
 	@layer base {
 		& {
 			-moz-osx-font-smoothing: grayscale;
+
+			--icon-fontFamily: '#{config.$font-name}';
 		}
 	}
 } @else {
 	@layer base {
 		body {
 			-moz-osx-font-smoothing: grayscale;
+
+			--icon-fontFamily: '#{config.$font-name}';
 		}
 	}
 }
