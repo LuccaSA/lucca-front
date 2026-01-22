@@ -36,7 +36,7 @@ export class HighlightDataComponent {
 	/**
 	 * Define a bubble style based on the CDN image bubble number
 	 */
-	readonly bubble = input<1 | 2 | 3 | 4 | number, string>(undefined, { transform: numberAttribute })
+	readonly bubble = input<1 | 2 | 3 | 4 | number, string>(undefined, { transform: numberAttribute });
 
 	/**
 	 * Define a specific them white light or dark. (White by default)
