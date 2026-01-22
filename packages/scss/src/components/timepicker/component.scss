@@ -60,7 +60,7 @@
 			justify-content: center;
 			border: 0;
 			block-size: var(--components-timepicker-input-height);
-			inline-size: calc(var(--components-timepicker-input-width) + var(--components-timepicker-input-digits, 2) * 1ch);
+			inline-size: var(--components-timepicker-input-width);
 			outline: none;
 			color: inherit;
 			background-color: transparent;
