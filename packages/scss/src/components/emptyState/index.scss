@@ -14,5 +14,15 @@
 		&.mod-center {
 			@include center;
 		}
+
+		.table &,
+		.indexTable &
+		.dataTable & {
+			@include insideTable;
+		}
+
+		.container & {
+			@include insideContainer;
+		}
 	}
 }
