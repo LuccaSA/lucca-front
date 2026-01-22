@@ -83,7 +83,7 @@ export class TimePickerPartComponent {
 		const label = this.isValueSet() ? formattedNumber : '';
 
 		// remove trailing 0 when value is not 0 or showZero is false
-		return this.showZero() || value === 0 ? label : label.replace(/^0+/, '');
+		return this.showZero() ? label : label.replace(/^0/, '');
 	});
 
 	protected inputId = `time-picker-part-${nextId++}`;
