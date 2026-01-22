@@ -4,6 +4,7 @@
 	--component-checkboxField-icon-fontSize: var(--pr-t-font-body-XS-lineHeight);
 	--component-checkboxField-label-fontSize: var(--pr-t-font-body-S-fontSize);
 	--component-checkboxField-label-lineHeight: var(--pr-t-font-body-S-lineHeight);
+	--component-checkboxField-top: calc(var(--pr-t-spacings-25) / 2);
 }
 
 @mixin checklist {
