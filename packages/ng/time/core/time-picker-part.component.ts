@@ -4,7 +4,6 @@ import { toObservable } from '@angular/core/rxjs-interop';
 import { ɵeffectWithDeps } from '@lucca-front/ng/core';
 import { InputDirective } from '@lucca-front/ng/form-field';
 import { skip, take, tap } from 'rxjs';
-import { RemoveCommaPipe } from './date.utils';
 import { PickerControlDirection } from './misc.utils';
 import { RepeatOnHoldDirective } from './repeat-on-hold.directive';
 
@@ -12,7 +11,7 @@ let nextId = 0;
 
 @Component({
 	selector: 'lu-time-picker-part',
-	imports: [RepeatOnHoldDirective, DecimalPipe, InputDirective, RemoveCommaPipe],
+	imports: [RepeatOnHoldDirective, DecimalPipe, InputDirective],
 	templateUrl: './time-picker-part.component.html',
 	changeDetection: ChangeDetectionStrategy.OnPush,
 })
