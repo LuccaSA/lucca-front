@@ -79,6 +79,7 @@ export class DurationPickerComponent extends BasePickerComponent {
 	}
 
 	protected hoursInputHandler(value: number | '––'): void {
+		this.minutesPart().isValueSet.set(true);
 		this.setTime({
 			previousValue: this.value(),
 			value: createDurationFromHoursAndMinutes(+value, this.minutes()),
@@ -87,6 +88,7 @@ export class DurationPickerComponent extends BasePickerComponent {
 	}
 
 	protected minutesInputHandler(value: number | '––'): void {
+		this.hoursPart().isValueSet.set(true);
 		this.setTime({
 			previousValue: this.value(),
 			value: createDurationFromHoursAndMinutes(this.hours(), +value),

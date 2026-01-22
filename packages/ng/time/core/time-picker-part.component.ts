@@ -1,5 +1,5 @@
 import { DecimalPipe, formatNumber } from '@angular/common';
-import { ChangeDetectionStrategy, Component, ElementRef, Inject, LOCALE_ID, ModelSignal, ViewChild, booleanAttribute, computed, input, model, numberAttribute, output, signal } from '@angular/core';
+import { ChangeDetectionStrategy, Component, ElementRef, Inject, LOCALE_ID, ModelSignal, ViewChild, booleanAttribute, computed, input, model, numberAttribute, output } from '@angular/core';
 import { toObservable } from '@angular/core/rxjs-interop';
 import { ɵeffectWithDeps } from '@lucca-front/ng/core';
 import { InputDirective } from '@lucca-front/ng/form-field';
@@ -57,7 +57,7 @@ export class TimePickerPartComponent {
 	readonly showZero = input(false, { transform: booleanAttribute });
 
 	digitNumber = model(2);
-	isValueSet = signal<boolean>(false);
+	isValueSet = model<boolean>(false);
 
 	prevRequest = output<void>();
 	nextRequest = output<void>();
