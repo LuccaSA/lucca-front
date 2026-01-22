@@ -1,6 +1,6 @@
 import { BrowserAnimationsModule } from '@angular/platform-browser/animations';
 import { ButtonComponent } from '@lucca-front/ng/button';
-import { CalloutFeedbackItemComponent, CalloutFeedbackListComponent, CalloutPopoverComponent } from '@lucca-front/ng/callout';
+import { CalloutFeedbackItemComponent, CalloutFeedbackItemDescriptionDirective, CalloutFeedbackListComponent, CalloutPopoverComponent } from '@lucca-front/ng/callout';
 import { Meta, moduleMetadata, StoryObj } from '@storybook/angular';
 import { generateInputs } from 'stories/helpers/stories';
 
@@ -9,7 +9,7 @@ export default {
 	component: CalloutPopoverComponent,
 	decorators: [
 		moduleMetadata({
-			imports: [CalloutFeedbackItemComponent, CalloutFeedbackListComponent, CalloutFeedbackItemComponent, ButtonComponent, BrowserAnimationsModule],
+			imports: [CalloutFeedbackItemComponent, CalloutFeedbackListComponent, CalloutFeedbackItemComponent, CalloutFeedbackItemDescriptionDirective, ButtonComponent, BrowserAnimationsModule],
 		}),
 	],
 	render: ({ items, ...args }, { argTypes }) => {
@@ -32,23 +32,45 @@ export default {
 				type: 'number',
 				min: 1,
 			},
+			description: "Nombre d'éléments présentés dans la story.",
+		},
+		buttonLabel: {
+			description: 'Label du bouton.',
+		},
+		buttonAlt: {
+			description: 'Information restituée par le bouton.',
 		},
 		icon: {
 			options: [null, 'info', 'success', 'warning', 'error', 'help'],
 			control: {
 				type: 'select',
 			},
+			description: 'Ajoute une icône au callout.',
 		},
 		state: {
 			options: [null, 'success', 'warning', 'error'],
 			control: {
 				type: 'select',
 			},
+			description: 'État du callout.',
+		},
+		heading: {
+			description: 'Ajoute un titre au popover.',
 		},
 		headingHiddenIfSingleItem: {
 			control: {
 				type: 'boolean',
 			},
+			description: "Masque le titre si le popover ne contient qu'un élément.",
+		},
+		palette: {
+			description: 'Applique une palette de couleurs au callout.',
+		},
+		closeDelay: {
+			description: 'Délai nécessaire à la fermeture du popover.',
+		},
+		openDelay: {
+			description: "Délai nécessaire à l'ouverture du popover.",
 		},
 	},
 } as Meta;

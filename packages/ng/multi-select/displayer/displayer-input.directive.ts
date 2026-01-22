@@ -1,12 +1,12 @@
 import { DestroyRef, Directive, ElementRef, HostBinding, HostListener, inject, OnInit } from '@angular/core';
 import { takeUntilDestroyed, toSignal } from '@angular/core/rxjs-interop';
-import { getIntl, isNotNil } from '@lucca-front/ng/core';
+import { isNotNil, ɵeffectWithDeps } from '@lucca-front/ng/core';
 import { ILuOptionContext, LU_OPTION_CONTEXT } from '@lucca-front/ng/core-select';
 import { InputDirective } from '@lucca-front/ng/form-field';
 import { of } from 'rxjs';
 import { map, startWith, switchMap } from 'rxjs/operators';
 import { LuMultiSelectInputComponent } from '../input';
-import { LU_MULTI_SELECT_TRANSLATIONS } from '../select.translate';
+import { MULTI_SELECT_WITH_SELECT_ALL_CONTEXT } from '../input/select-all/select-all.models';
 import { LuMultiSelectContentDisplayerComponent } from './content-displayer/content-displayer.component';
 
 @Directive({
@@ -20,8 +20,8 @@ import { LuMultiSelectContentDisplayerComponent } from './content-displayer/cont
 	hostDirectives: [InputDirective],
 })
 export class LuMultiSelectDisplayerInputDirective<T> implements OnInit {
-	intl = getIntl(LU_MULTI_SELECT_TRANSLATIONS);
 	select = inject<LuMultiSelectInputComponent<T>>(LuMultiSelectInputComponent);
+	readonly selectAllContext = inject(MULTI_SELECT_WITH_SELECT_ALL_CONTEXT, { optional: true });
 	contentDisplayer = inject(LuMultiSelectContentDisplayerComponent, { optional: true });
 
 	context = inject<ILuOptionContext<T[]>>(LU_OPTION_CONTEXT);
@@ -75,21 +75,37 @@ export class LuMultiSelectDisplayerInputDirective<T> implements OnInit {
 				if ((options || []).length > 0) {
 					return of('');
 				}
-				return this.select.placeholder$.pipe(map((placeholder) => ((isNotNil(placeholder) && placeholder.length > 0) || this.contentDisplayer ? placeholder : this.intl.placeholder)));
+				return this.select.placeholder$.pipe(map((placeholder) => ((isNotNil(placeholder) && placeholder.length > 0) || this.contentDisplayer ? placeholder : this.select.intl().placeholder)));
 			}),
 		),
 	);
 
+	constructor() {
+		if (this.selectAllContext) {
+			ɵeffectWithDeps([this.selectAllContext.mode], (mode) => {
+				if (mode === 'all') {
+					this.#clearText();
+				}
+			});
+		}
+	}
+
 	ngOnInit(): void {
 		this.select.focusInput$.pipe(takeUntilDestroyed(this.destroyRef)).subscribe((data?: { keepClue: boolean }) => {
 			if (!data?.keepClue) {
-				this.elementRef.nativeElement.value = '';
-				this.select.clueChanged('');
+				this.#clearText();
 			}
 			this.elementRef.nativeElement.focus();
 		});
 		this.select.emptyClue$.pipe(takeUntilDestroyed(this.destroyRef)).subscribe(() => {
 			this.elementRef.nativeElement.value = '';
 		});
+	}
+
+	#clearText() {
+		if (this.elementRef.nativeElement.value) {
+			this.elementRef.nativeElement.value = '';
+			this.select.clueChanged('');
+		}
 	}
 }

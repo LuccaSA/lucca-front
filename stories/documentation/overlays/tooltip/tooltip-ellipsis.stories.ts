@@ -1,7 +1,7 @@
-import { Component } from '@angular/core';
+import { ChangeDetectionStrategy, Component } from '@angular/core';
 import { provideAnimations } from '@angular/platform-browser/animations';
 import { LuTooltipModule } from '@lucca-front/ng/tooltip';
-import { applicationConfig, Meta, StoryFn } from '@storybook/angular';
+import { applicationConfig, Meta, StoryObj } from '@storybook/angular';
 
 @Component({
 	selector: 'tooltip-stories',
@@ -93,6 +93,7 @@ import { applicationConfig, Meta, StoryFn } from '@storybook/angular';
 			}
 		`,
 	],
+	changeDetection: ChangeDetectionStrategy.OnPush,
 })
 class TooltipStory {}
 
@@ -102,8 +103,11 @@ export default {
 	decorators: [applicationConfig({ providers: [provideAnimations()] })],
 } as Meta;
 
-const template: StoryFn<TooltipStory> = (args) => ({
+const template = (args: TooltipStory) => ({
 	props: args,
 });
 
-export const Basic = template.bind({});
+export const Basic: StoryObj<TooltipStory> = {
+	args: {},
+	render: template,
+};

@@ -1,4 +1,4 @@
-import { Meta, StoryFn } from '@storybook/angular';
+import { Meta, StoryObj } from '@storybook/angular';
 
 interface ResetStory {}
 
@@ -13,10 +13,12 @@ function getTemplate(args: ResetStory): string {
 </div>`;
 }
 
-const Template: StoryFn<ResetStory> = (args) => ({
+const Template = (args: ResetStory) => ({
 	props: args,
 	template: getTemplate(args),
 });
 
-export const Content = Template.bind({});
-Content.args = {};
+export const Content: StoryObj<ResetStory> = {
+	args: {},
+	render: Template,
+};

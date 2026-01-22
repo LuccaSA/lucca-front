@@ -13,7 +13,33 @@
 }
 
 .addOption {
+	@layer components {
+		position: sticky;
+		inset-block-end: 0;
+		background-color: var(--pr-t-elevation-surface-raised);
+	}
+
 	@layer mods {
+		&.is-highlighted {
+			.addOption-content {
+				--components-button-color: var(--palettes-700, var(--palettes-neutral-700));
+				--components-button-backgroundColor: var(--palettes-100, var(--palettes-neutral-100));
+			}
+		}
+
+		&.is-stuck {
+			margin-block-start: var(--pr-t-spacings-100);
+			box-shadow:
+				0 0 0 4px var(--pr-t-elevation-surface-raised),
+				0 0 0 1px color-mix(in srgb, var(--palettes-neutral-400) 8%, transparent),
+				0 0 4px 4px color-mix(in srgb, var(--palettes-neutral-400) 32%, transparent),
+				0 0 8px 4px color-mix(in srgb, var(--palettes-neutral-400) 24%, transparent);
+		}
+	}
+}
+
+.addOption-content {
+	@layer components {
 		@include button.vars;
 		@include button.component;
 		@include button.block;
@@ -21,11 +47,8 @@
 
 		& {
 			justify-content: left;
-		}
 
-		&.is-highlighted {
-			--components-button-color: var(--palettes-700, var(--palettes-neutral-700));
-			--components-button-backgroundColor: var(--palettes-100, var(--palettes-neutral-100));
+			--components-button-padding: var(--pr-t-spacings-50);
 		}
 	}
 }

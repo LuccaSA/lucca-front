@@ -1,10 +1,10 @@
-import { DateRangeInputComponent } from './date-range-input.component';
-import { createHostFactory, SpectatorHost } from '@ngneat/spectator/jest';
-import { FormControl, FormsModule, ReactiveFormsModule } from '@angular/forms';
-import { DateRange } from '../calendar2/date-range';
-import { addMonths } from 'date-fns/';
-import { fakeAsync } from '@angular/core/testing';
 import { LOCALE_ID } from '@angular/core';
+import { fakeAsync } from '@angular/core/testing';
+import { FormControl, FormsModule, ReactiveFormsModule } from '@angular/forms';
+import { createHostFactory, SpectatorHost } from '@ngneat/spectator/jest';
+import { addMonths } from 'date-fns';
+import { DateRange } from '../calendar2/date-range';
+import { DateRangeInputComponent } from './date-range-input.component';
 
 describe('DateRangeInputComponent', () => {
 	let spectator: SpectatorHost<DateRangeInputComponent>;
@@ -25,7 +25,7 @@ describe('DateRangeInputComponent', () => {
 			},
 		});
 
-		expect(ngModelChangeCallback).toBeCalledTimes(0);
+		expect(ngModelChangeCallback).toHaveBeenCalledTimes(0);
 	});
 
 	it('should not called ngModelChange at init if there is a value', fakeAsync(() => {
@@ -46,7 +46,7 @@ describe('DateRangeInputComponent', () => {
 		});
 
 		spectator.tick();
-		expect(ngModelChangeCallback).toBeCalledTimes(0);
+		expect(ngModelChangeCallback).toHaveBeenCalledTimes(0);
 	}));
 
 	it('should called ngModelChange when the user enter a date with a keyboard', () => {
@@ -64,7 +64,7 @@ describe('DateRangeInputComponent', () => {
 
 		spectator.typeInElement('18/06/2025', input);
 
-		expect(ngModelChangeCallback).toBeCalledTimes(1);
+		expect(ngModelChangeCallback).toHaveBeenCalledTimes(1);
 		expect(ngModelChangeCallback).toHaveBeenCalledWith({
 			start: new Date('2025-06-18T00:00:00.000Z'),
 			scope: 'day',
@@ -86,7 +86,7 @@ describe('DateRangeInputComponent', () => {
 		});
 
 		spectator.tick();
-		expect(valueChanges).toBeCalledTimes(0);
+		expect(valueChanges).toHaveBeenCalledTimes(0);
 	}));
 
 	it('should not emit value at init if there is a value with reactive forms', fakeAsync(() => {
@@ -111,7 +111,7 @@ describe('DateRangeInputComponent', () => {
 		});
 
 		spectator.tick();
-		expect(valueChanges).toBeCalledTimes(0);
+		expect(valueChanges).toHaveBeenCalledTimes(0);
 	}));
 
 	it('should emit value when the user enter a date with a keyboard with reactive forms', () => {
@@ -133,7 +133,7 @@ describe('DateRangeInputComponent', () => {
 
 		spectator.typeInElement('18/06/2025', input);
 
-		expect(valueChanges).toBeCalledTimes(1);
+		expect(valueChanges).toHaveBeenCalledTimes(1);
 		expect(valueChanges).toHaveBeenCalledWith({
 			start: new Date('2025-06-18T00:00:00.000Z'),
 			scope: 'day',

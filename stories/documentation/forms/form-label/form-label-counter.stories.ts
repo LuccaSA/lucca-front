@@ -1,4 +1,4 @@
-import { Meta, StoryFn } from '@storybook/angular';
+import { Meta, StoryObj } from '@storybook/angular';
 
 interface FormLabelCounterStory {}
 
@@ -19,10 +19,12 @@ function getTemplate(args: FormLabelCounterStory): string {
 </label>`;
 }
 
-const Template: StoryFn<FormLabelCounterStory> = (args) => ({
+const Template = (args: FormLabelCounterStory) => ({
 	props: args,
 	template: getTemplate(args),
 });
 
-export const Counter = Template.bind({});
-Counter.args = {};
+export const Counter: StoryObj<FormLabelCounterStory> = {
+	args: {},
+	render: Template,
+};

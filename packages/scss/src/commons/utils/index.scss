@@ -274,6 +274,10 @@
 		}
 	}
 
+	%placeItemsCenter {
+		place-items: center;
+	}
+
 
 
 	[data-content-before] {
@@ -395,14 +399,17 @@
 		@extend %textCenter;
 	}
 
+	// textLight is deprecated
 	.pr-u-textLight {
 		@extend %textLight;
 	}
 
-	.pr-u-textPlaceholder {
+	// textPlaceholder is deprecated
+	.pr-u-textPlaceholder, .pr-u-colorInputTextPlaceholder {
 		@extend %textPlaceholder;
 	}
 
+	// textDefault is deprecated
 	.pr-u-textDefault {
 		@extend %textDefault;
 	}
@@ -433,6 +440,10 @@
 
 	.pr-u-focusVisible {
 		@extend %focusVisible;
+	}
+
+	.pr-u-placeItemsCenter {
+		@extend %placeItemsCenter;
 	}
 
 	@include core.classes('float', core.$float);
@@ -513,6 +524,12 @@
 			.pr-u-displayNoneAtContainerMax#{$breakpoint} {
 				display: none !important;
 			}
+		}
+	}
+
+	@each $colorText, $value in config.$colorText {
+		.pr-u-color#{transform.capitalize(transform.camelize($colorText))} {
+			color: var(--pr-t-color-#{$colorText}) !important
 		}
 	}
 

@@ -16,9 +16,11 @@ let nextId = 0;
 export class FieldsetComponent {
 	readonly heading = input<PortalContent | null>(null);
 	readonly helper = input<PortalContent | null>(null);
+	readonly action = input<PortalContent | null>(null);
 	readonly size = input<'S' | null>(null);
 	readonly horizontal = input(false, { transform: booleanAttribute });
 	readonly expandable = input(false, { transform: booleanAttribute });
+
 	expanded = model(false);
 
 	id = `fieldsetTitleContent${nextId++}`;

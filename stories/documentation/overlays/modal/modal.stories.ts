@@ -1,4 +1,4 @@
-import { Component, inject, input, Type } from '@angular/core';
+import { ChangeDetectionStrategy, Component, inject, input, Type } from '@angular/core';
 import { provideAnimations } from '@angular/platform-browser/animations';
 import { ButtonComponent } from '@lucca-front/ng/button';
 import { ILuModalContent, LU_MODAL_DATA, LuModal, LuModalConfig, LuModalModule } from '@lucca-front/ng/modal';
@@ -54,6 +54,7 @@ class ModalContentComponent implements ILuModalContent {
 @Component({
 	selector: 'modal-content',
 	template: '<p>{{ message }}</p>',
+	changeDetection: ChangeDetectionStrategy.OnPush,
 })
 class ModalContentComponent implements ILuModalContent {
 	title = 'Hello there';
@@ -64,6 +65,7 @@ class ModalContentComponent implements ILuModalContent {
 @Component({
 	selector: 'modal-content',
 	template: '<p>General Kenobi</p>',
+	changeDetection: ChangeDetectionStrategy.OnPush,
 })
 class ModalDynamicContentComponent implements ILuModalContent {
 	counter$ = timer(0, 1000).pipe(shareReplay({ refCount: true, bufferSize: 1 }));
@@ -84,6 +86,7 @@ class ModalDynamicContentComponent implements ILuModalContent {
 		<button type="button" luButton (click)="openModal()">Open</button>
 	`,
 	imports: [LuToastsModule, ButtonComponent],
+	changeDetection: ChangeDetectionStrategy.OnPush,
 })
 class ModalStories {
 	mode = input<'modal' | 'sidepanel'>('modal');
@@ -121,7 +124,7 @@ class ModalStories {
 
 		const ref = this.modal.legacyOpen(cmp, data, options);
 
-		if (this.undismissable) {
+		if (this.undismissable()) {
 			ref.onBackdropClick.subscribe(() => {
 				this.toastsService.addToast({
 					message: 'Backdrop clicked',

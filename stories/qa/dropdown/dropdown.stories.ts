@@ -1,14 +1,15 @@
-import { Component } from '@angular/core';
+import { ChangeDetectionStrategy, Component } from '@angular/core';
 import { ButtonComponent } from '@lucca-front/ng/button';
 import { DividerComponent } from '@lucca-front/ng/divider';
 import { DropdownActionComponent, DropdownGroupComponent, DropdownItemComponent, DropdownMenuComponent } from '@lucca-front/ng/dropdown';
 import { IconComponent } from '@lucca-front/ng/icon';
-import { Meta, moduleMetadata, StoryFn } from '@storybook/angular';
+import { Meta, moduleMetadata, StoryObj } from '@storybook/angular';
 
 @Component({
 	selector: 'dropdown-stories',
 	templateUrl: './dropdown.stories.html',
 	imports: [IconComponent, ButtonComponent, DividerComponent, DropdownMenuComponent, DropdownItemComponent, DropdownActionComponent, DropdownGroupComponent],
+	changeDetection: ChangeDetectionStrategy.OnPush,
 })
 class DropdownStory {}
 
@@ -22,6 +23,9 @@ export default {
 	],
 } as Meta;
 
-const template: StoryFn<DropdownStory> = () => ({});
+const template = () => ({});
 
-export const basic = template.bind({});
+export const Basic: StoryObj<DropdownStory> = {
+	args: {},
+	render: template,
+};

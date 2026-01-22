@@ -32,7 +32,7 @@ export class DataTableBodyComponent {
 		this.expanded.set(!this.expanded());
 	}
 
-	protected tableRef = inject(LU_DATA_TABLE_INSTANCE);
+	protected tableRef = inject(LU_DATA_TABLE_INSTANCE, { optional: true });
 
-	colspan = computed(() => this.tableRef.cols().length + (this.tableRef.selectable() ? 1 : 0));
+	colspan = computed(() => this.tableRef?.cols().length + (this.tableRef?.selectable() ? 1 : 0));
 }

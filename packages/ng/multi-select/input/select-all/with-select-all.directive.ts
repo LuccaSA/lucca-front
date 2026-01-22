@@ -1,4 +1,4 @@
-import { computed, Directive, forwardRef, inject, input, signal } from '@angular/core';
+import { computed, Directive, effect, forwardRef, inject, input, signal } from '@angular/core';
 import { toSignal } from '@angular/core/rxjs-interop';
 import { CORE_SELECT_API_TOTAL_COUNT_PROVIDER, ɵIsSelectedStrategy } from '@lucca-front/ng/core-select';
 import { LuOptionComparer } from '@lucca-front/ng/option';
@@ -23,7 +23,8 @@ import { LuMultiSelectWithSelectAllContext, MULTI_SELECT_WITH_SELECT_ALL_CONTEXT
 	],
 })
 export class LuMultiSelectWithSelectAllDirective<TValue> extends ɵIsSelectedStrategy<TValue> implements LuMultiSelectWithSelectAllContext {
-	readonly #select = inject<LuMultiSelectInputComponent<TValue>>(LuMultiSelectInputComponent);
+	readonly select = inject<LuMultiSelectInputComponent<TValue>>(LuMultiSelectInputComponent);
+	readonly intl = this.select.intl;
 
 	readonly displayerLabel = input.required<string>({ alias: 'withSelectAllDisplayerLabel' });
 
@@ -56,25 +57,34 @@ export class LuMultiSelectWithSelectAllDirective<TValue> extends ɵIsSelectedStr
 	});
 
 	// Keep the original registerOnChange / writeValue / clearValye methods
-	readonly #selectRegisterOnChange = this.#select.registerOnChange.bind(this.#select) as LuMultiSelectInputComponent<TValue>['registerOnChange'];
-	readonly #selectWriteValue = this.#select.writeValue.bind(this.#select) as LuMultiSelectInputComponent<TValue>['writeValue'];
-	readonly #selectClearValue = this.#select.clearValue.bind(this.#select) as LuMultiSelectInputComponent<TValue>['clearValue'];
+	readonly #selectRegisterOnChange = this.select.registerOnChange.bind(this.select) as LuMultiSelectInputComponent<TValue>['registerOnChange'];
+	readonly #selectWriteValue = this.select.writeValue.bind(this.select) as LuMultiSelectInputComponent<TValue>['writeValue'];
+	readonly #selectClearValue = this.select.clearValue.bind(this.select) as LuMultiSelectInputComponent<TValue>['clearValue'];
 
 	#onChange?: (values: LuMultiSelection<TValue>) => void;
 
 	constructor() {
 		super();
 
-		this.#select.registerOnChange = (fn) => this.registerOnChange(fn);
-		this.#select.writeValue = (value) => this.writeValue(value);
-		this.#select.clearValue = ($event) => this.clearValue($event);
+		const clueChange = toSignal(this.select.clueChange$);
+		effect(() => {
+			if (clueChange()) {
+				this.select.panelHeaderTpl.set(null);
+			} else {
+				this.select.panelHeaderTpl.set(LuMultiSelectAllHeaderComponent);
+			}
+		});
 
-		this.#select.panelHeaderTpl.set(LuMultiSelectAllHeaderComponent);
-		this.#select.valuesTpl.set(LuMultiSelectAllDisplayerComponent);
-		this.#select.hasValue = () => this.#hasValue();
-		this.#select.isFilterPillEmpty = computed(() => !this.#hasValue());
-		this.#select.useSingleOptionDisplayer = computed(() => this.#mode() === 'include');
-		this.#select.valueLength = this.displayerCount;
+		this.select.registerOnChange = (fn) => this.registerOnChange(fn);
+		this.select.writeValue = (value) => this.writeValue(value);
+		this.select.clearValue = ($event) => this.clearValue($event);
+
+		this.select.panelHeaderTpl.set(LuMultiSelectAllHeaderComponent);
+		this.select.valuesTpl.set(LuMultiSelectAllDisplayerComponent);
+		this.select.hasValue = () => this.#hasValue();
+		this.select.isFilterPillEmpty = computed(() => !this.#hasValue());
+		this.select.useSingleOptionDisplayer = computed(() => this.#mode() === 'include');
+		this.select.valueLength = this.displayerCount;
 	}
 
 	setSelectAll(selectAll: boolean): void {

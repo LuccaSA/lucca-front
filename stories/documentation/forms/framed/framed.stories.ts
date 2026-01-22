@@ -1,9 +1,10 @@
-import { Component, input } from '@angular/core';
-import { Meta, StoryFn } from '@storybook/angular';
+import { ChangeDetectionStrategy, Component, input } from '@angular/core';
+import { Meta, StoryObj } from '@storybook/angular';
 
 @Component({
 	selector: 'framed-stories',
 	templateUrl: './framed.stories.html',
+	changeDetection: ChangeDetectionStrategy.OnPush,
 })
 class FramedStory {
 	state = input<string>('');
@@ -24,9 +25,6 @@ export default {
 	},
 } as Meta;
 
-const template: StoryFn<FramedStory> = (args) => ({
-	props: args,
-});
-
-export const basic = template.bind({});
-basic.args = { state: '', disabled: false, isRequired: false };
+export const Basic: StoryObj<FramedStory> = {
+	args: { state: '', disabled: false, isRequired: false },
+};

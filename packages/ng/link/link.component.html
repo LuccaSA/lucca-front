@@ -1,7 +1,7 @@
 <span class="link-text"><ng-content /></span>
-@if (external) {
+@if (external()) {
 	<span class="link-icon">
 		<span aria-hidden="true" class="lucca-icon icon-arrowExternal"></span>
 	</span>
-	<span class="pr-u-mask">{{ intl.external }}</span>
+	<span class="pr-u-mask">{{ intl().external }}</span>
 }

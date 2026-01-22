@@ -1,14 +1,15 @@
-import { Component } from '@angular/core';
+import { ChangeDetectionStrategy, Component } from '@angular/core';
 import { ButtonComponent } from '@lucca-front/ng/button';
 import { IconComponent } from '@lucca-front/ng/icon';
 import { NumericBadgeComponent } from '@lucca-front/ng/numeric-badge';
-import { Meta, StoryFn } from '@storybook/angular';
+import { Meta, StoryObj } from '@storybook/angular';
 
 @Component({
 	selector: 'button-stories',
 	templateUrl: './button.stories.html',
 	styles: ['.button::after { animation-play-state: paused; }'],
 	imports: [ButtonComponent, NumericBadgeComponent, IconComponent],
+	changeDetection: ChangeDetectionStrategy.OnPush,
 })
 class ButtonStory {}
 
@@ -17,6 +18,9 @@ export default {
 	component: ButtonStory,
 } as Meta;
 
-const template: StoryFn<ButtonStory> = () => ({});
+const template = () => ({});
 
-export const basic = template.bind({});
+export const Basic: StoryObj<ButtonStory> = {
+	args: {},
+	render: template,
+};

@@ -1,45 +1,78 @@
-import { ChangeDetectionStrategy, Component, Input, ViewEncapsulation, booleanAttribute, numberAttribute } from '@angular/core';
+import { ChangeDetectionStrategy, Component, ViewEncapsulation, booleanAttribute, computed, input, numberAttribute } from '@angular/core';
+import { BubbleIllustration, BubbleIllustrationComponent } from '@lucca-front/ng/bubble-illustration';
 import { Palette, PortalContent, PortalDirective } from '@lucca-front/ng/core';
 import { LuSafeExternalSvgPipe } from '@lucca-front/ng/safe-content';
 import { Hx } from '../empty-state.model';
 
+const ICON_TO_ILLUSTRATION: Record<string, BubbleIllustration> = {
+	Banknote: 'banknote',
+	Bell: 'bell',
+	Bulb: 'bulb',
+	Calendar: 'calendar',
+	Chat: 'chat',
+	Clock: 'clock',
+	Coffee: 'coffee',
+	CreditCard: 'paymentCards',
+	Folder: 'folder',
+	Gift: 'gift',
+	Graduate: 'graduate',
+	IDCard: 'polaroid',
+	Lock: 'lock',
+	Mail: 'mail',
+	Megaphone: 'megaphone',
+	Paint: 'paint',
+	Paper: 'invoice',
+	Party: 'party',
+	Picture: 'picture',
+	Poc: 'banknote',
+	Rocket: 'rocket',
+	Search: 'magnifyingGlass',
+	Temperature: 'temperature',
+	Thumb: 'thumbUp',
+	Warning: 'warning',
+};
+
 @Component({
 	selector: 'lu-empty-state-section',
-	imports: [LuSafeExternalSvgPipe, PortalDirective],
+	imports: [LuSafeExternalSvgPipe, PortalDirective, BubbleIllustrationComponent],
 	templateUrl: './empty-state-section.component.html',
 	styleUrl: './empty-state-section.component.scss',
 	changeDetection: ChangeDetectionStrategy.OnPush,
 	encapsulation: ViewEncapsulation.None,
 })
 export class EmptyStateSectionComponent {
-	/**
-	 * Icon URL
-	 */
-	@Input()
-	icon = 'https://cdn.lucca.fr/lucca-front/assets/empty-states/icons/iconBanknote.svg';
+	/** @deprecated use illustration and action */
+	readonly icon = input<string | null>(null);
+	readonly actionIllustration = computed(() => this.action() || this.icon()?.includes('Action.svg'));
 
-	@Input()
-	palette: Palette = 'none';
+	readonly illustration = input<BubbleIllustration | null>(null);
+	readonly action = input(false, { transform: booleanAttribute });
 
-	@Input({
-		transform: booleanAttribute,
-	})
-	center = false;
+	readonly iconOrIllustration = computed(() => {
+		if (this.icon()) {
+			if (this.icon().includes('Success')) {
+				return 'thumbUp';
+			}
+			if (this.icon().includes('Error')) {
+				return 'error';
+			}
+			const iconName = this.icon().split('/').pop().replace('.svg', '').replace('ActionError', '').replace('ActionSuccess', '').replace('Action', '').replace('icon', '');
 
-	@Input()
-	heading: string;
+			return ICON_TO_ILLUSTRATION[iconName];
+		}
 
-	@Input()
-	description: PortalContent;
+		return this.illustration();
+	});
 
-	@Input({
-		transform: numberAttribute as (value: Hx | `${Hx}`) => Hx,
-	})
-	hx: Hx = 3;
+	readonly palette = input<Palette>('none');
 
-	get emptyStateClasses() {
-		return {
-			[`palette-${this.palette}`]: !!this.palette,
-		};
-	}
+	readonly center = input(false, { transform: booleanAttribute });
+
+	readonly heading = input<string>();
+
+	readonly description = input<PortalContent>();
+
+	readonly hx = input(3, { transform: numberAttribute as (value: Hx | `${Hx}`) => Hx });
+
+	readonly emptyStateClasses = computed(() => ({ [`palette-${this.palette()}`]: !!this.palette() }));
 }

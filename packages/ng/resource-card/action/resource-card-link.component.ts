@@ -1,0 +1,23 @@
+import { booleanAttribute, ChangeDetectionStrategy, Component, input, ViewEncapsulation } from '@angular/core';
+
+@Component({
+	// eslint-disable-next-line @angular-eslint/component-selector
+	selector: 'a[luResourceCardAction]',
+	template: '<ng-content />',
+	changeDetection: ChangeDetectionStrategy.OnPush,
+	encapsulation: ViewEncapsulation.None,
+	host: {
+		class: 'resourceCard-layout-header-title-action',
+		'[class.is-disabled]': 'disabled()',
+		'[attr.role]': 'disabled() ? "presentation" : null',
+	},
+	// hostDirectives: [
+	// 	{
+	// 		directive: LuTooltipTriggerDirective,
+	// 		inputs: ['luTooltip', 'luTooltipOnlyForDisplay', 'luTooltipWhenEllipsis'],
+	// 	},
+	// ],
+})
+export class ResourceCardLinkComponent {
+	readonly disabled = input(false, { transform: booleanAttribute });
+}

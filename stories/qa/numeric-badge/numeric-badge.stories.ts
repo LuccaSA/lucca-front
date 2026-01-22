@@ -1,12 +1,13 @@
-import { Component } from '@angular/core';
+import { ChangeDetectionStrategy, Component } from '@angular/core';
 import { NumericBadgeComponent } from '@lucca-front/ng/numeric-badge';
-import { Meta, StoryFn, moduleMetadata } from '@storybook/angular';
+import { Meta, StoryObj, moduleMetadata } from '@storybook/angular';
 
 @Component({
 	selector: 'numeric-badge-stories',
 	templateUrl: './numeric-badge.stories.html',
 	styles: ['.numericBadge::after { animation-play-state: paused; }'],
 	imports: [NumericBadgeComponent],
+	changeDetection: ChangeDetectionStrategy.OnPush,
 })
 class NumericBadgeStory {}
 
@@ -20,6 +21,9 @@ export default {
 	],
 } as Meta;
 
-const template: StoryFn<NumericBadgeStory> = () => ({});
+const template = () => ({});
 
-export const basic = template.bind({});
+export const Basic: StoryObj<NumericBadgeStory> = {
+	args: {},
+	render: template,
+};

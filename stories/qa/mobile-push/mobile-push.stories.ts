@@ -1,17 +1,21 @@
-import { Component } from '@angular/core';
-import { Meta, StoryFn } from '@storybook/angular';
+import { ChangeDetectionStrategy, Component } from '@angular/core';
+import { Meta, StoryObj } from '@storybook/angular';
 
 @Component({
 	selector: 'mobile-push-stories',
 	templateUrl: './mobile-push.stories.html',
+	changeDetection: ChangeDetectionStrategy.OnPush,
 })
 class MobilePushStory {}
 
 export default {
-	title: 'QA/Mobile Push',
+	title: 'QA/MobilePush',
 	component: MobilePushStory,
 } as Meta;
 
-const template: StoryFn<MobilePushStory> = () => ({});
+const template = () => ({});
 
-export const basic = template.bind({});
+export const Basic: StoryObj<MobilePushStory> = {
+	args: {},
+	render: template,
+};

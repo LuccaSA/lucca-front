@@ -1,5 +1,5 @@
 import { booleanAttribute, ChangeDetectionStrategy, Component, effect, input, output, ViewEncapsulation } from '@angular/core';
-import { getIntl, IntlParamsPipe } from '@lucca-front/ng/core';
+import { intlInputOptions, IntlParamsPipe } from '@lucca-front/ng/core';
 import { IconComponent } from '@lucca-front/ng/icon';
 import { LU_PAGINATION_TRANSLATIONS } from './pagination.translate';
 
@@ -12,7 +12,7 @@ import { LU_PAGINATION_TRANSLATIONS } from './pagination.translate';
 	encapsulation: ViewEncapsulation.None,
 })
 export class PaginationComponent {
-	protected intl = getIntl(LU_PAGINATION_TRANSLATIONS);
+	protected intl = input(...intlInputOptions(LU_PAGINATION_TRANSLATIONS));
 
 	readonly isFirstPage = input(false, { transform: booleanAttribute });
 	readonly isLastPage = input(false, { transform: booleanAttribute });
@@ -27,7 +27,7 @@ export class PaginationComponent {
 
 	constructor() {
 		effect(() => {
-			if (this.mod() === 'default' && (!this.from() || !this.to() || !this.itemsCount())) {
+			if (this.mod() === 'default' && (this.from() === null || this.to() === null || this.itemsCount() === null)) {
 				throw new Error('Pagination in "default" mode requires "from", "to", and "itemsCount" inputs.');
 			}
 		});

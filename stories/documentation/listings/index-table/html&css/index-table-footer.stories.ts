@@ -1,4 +1,4 @@
-import { Meta, StoryFn } from '@storybook/angular';
+import { Meta, StoryObj } from '@storybook/angular';
 
 interface IndexTableFooterStory {}
 
@@ -79,7 +79,7 @@ function getTemplate(args: IndexTableFooterStory): string {
 </table>`;
 }
 
-const Template: StoryFn<IndexTableFooterStory> = (args) => ({
+const Template = (args: IndexTableFooterStory) => ({
 	props: args,
 	template: getTemplate(args),
 	styles: [
@@ -89,5 +89,7 @@ const Template: StoryFn<IndexTableFooterStory> = (args) => ({
 	],
 });
 
-export const Footer = Template.bind({});
-Footer.args = {};
+export const Footer: StoryObj<IndexTableFooterStory> = {
+	args: {},
+	render: Template,
+};

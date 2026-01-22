@@ -9,11 +9,14 @@ export default {
 			control: {
 				type: 'boolean',
 			},
+			description: 'Applique un style foncé pour un usage sur fond gris.',
 		},
 		size: {
+			options: ['', 'S', 'XS'],
 			control: {
 				type: 'select',
 			},
+			description: 'Modifie la taille du composant.',
 		},
 	},
 } as Meta;

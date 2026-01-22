@@ -15,28 +15,33 @@ import {
 	OnDestroy,
 	OnInit,
 	output,
-	Output,
+	Signal,
 	signal,
 	TemplateRef,
 	Type,
 	ViewChild,
 } from '@angular/core';
-import { toSignal } from '@angular/core/rxjs-interop';
+import { outputFromObservable, toSignal } from '@angular/core/rxjs-interop';
 import { ControlValueAccessor } from '@angular/forms';
-import { getIntl, PortalContent } from '@lucca-front/ng/core';
+import { PortalContent } from '@lucca-front/ng/core';
 import { FILTER_PILL_HOST_COMPONENT, FILTER_PILL_INPUT_COMPONENT, FilterPillInputComponent } from '@lucca-front/ng/filter-pills';
 import { BehaviorSubject, defer, map, Observable, of, ReplaySubject, startWith, Subject, switchMap, take } from 'rxjs';
 import { LuOptionGrouping, LuSimpleSelectDefaultOptionComponent } from '../option';
 import { LuSelectPanelRef } from '../panel';
 import { CoreSelectAddOptionStrategy, LuOptionComparer, LuOptionContext, SELECT_LABEL, SELECT_LABEL_ID } from '../select.model';
-import { LU_CORE_SELECT_TRANSLATIONS } from '../select.translate';
+import { LuCoreSelectLabel } from '../select.translate';
 import { TreeNode } from './model';
 import { TreeGenerator } from './tree-generator';
 
 export const coreSelectDefaultOptionComparer: LuOptionComparer<unknown> = (option1, option2) => JSON.stringify(option1) === JSON.stringify(option2);
 export const coreSelectDefaultOptionKey: (option: unknown) => unknown = (option) => option;
 
-@Directive()
+@Directive({
+	host: {
+		'[class.colorPicker]': 'colorPicker()',
+		'[class.mod-compact]': 'compact()',
+	},
+})
 export abstract class ALuSelectInputComponent<TOption, TValue> implements OnDestroy, OnInit, ControlValueAccessor, FilterPillInputComponent {
 	public parentInput = inject(FILTER_PILL_INPUT_COMPONENT, { optional: true, skipSelf: true });
 	protected changeDetectorRef = inject(ChangeDetectorRef);
@@ -45,7 +50,7 @@ export abstract class ALuSelectInputComponent<TOption, TValue> implements OnDest
 	protected labelElement: HTMLElement | undefined = inject(SELECT_LABEL);
 	protected labelId: string = inject(SELECT_LABEL_ID);
 
-	protected coreIntl = getIntl(LU_CORE_SELECT_TRANSLATIONS);
+	protected abstract intl: Signal<LuCoreSelectLabel>;
 
 	protected filterPillHost = inject(FILTER_PILL_HOST_COMPONENT, { optional: true });
 	protected afterCloseFn?: () => void;
@@ -57,6 +62,8 @@ export abstract class ALuSelectInputComponent<TOption, TValue> implements OnDest
 
 	public panelClosed = output<void>();
 	public panelOpened = output<void>();
+
+	public highlightedOption = output<TOption>();
 
 	@ViewChild('inputElement')
 	private inputElementRef: ElementRef<HTMLInputElement>;
@@ -87,11 +94,20 @@ export abstract class ALuSelectInputComponent<TOption, TValue> implements OnDest
 	#defaultClearable = false;
 
 	get searchable(): boolean {
-		return this.clueChange.observed;
+		return this.clueChange$.observed;
 	}
 
+	#addOptionLabelInput = signal<PortalContent | null>(null);
+	protected computedAddOptionLabel = computed(() => this.#addOptionLabelInput() ?? this.intl().addOption);
+
 	@Input()
-	addOptionLabel: PortalContent = this.coreIntl.addOption;
+	set addOptionLabel(label: PortalContent) {
+		this.#addOptionLabelInput.set(label);
+	}
+
+	get addOptionLabel(): PortalContent {
+		return this.computedAddOptionLabel();
+	}
 
 	@Input()
 	set addOptionStrategy(strategy: CoreSelectAddOptionStrategy) {
@@ -154,6 +170,10 @@ export abstract class ALuSelectInputComponent<TOption, TValue> implements OnDest
 	noClueIcon = input(false, { transform: booleanAttribute });
 	inputTabindex = input<number>(0);
 
+	compact = input(false, { transform: booleanAttribute });
+
+	colorPicker = input(false, { transform: booleanAttribute });
+
 	@HostBinding('class.mod-noClueIcon')
 	protected get isNoClueIconClass(): boolean {
 		return this.noClueIcon();
@@ -162,6 +182,7 @@ export abstract class ALuSelectInputComponent<TOption, TValue> implements OnDest
 	optionTpl = model<TemplateRef<LuOptionContext<TOption>> | Type<unknown>>(LuSimpleSelectDefaultOptionComponent);
 	valueTpl = model<TemplateRef<LuOptionContext<TOption>> | Type<unknown> | undefined>();
 	panelHeaderTpl = model<TemplateRef<void> | Type<unknown> | undefined>();
+	panelFooterTpl = model<TemplateRef<void> | Type<unknown> | undefined>();
 
 	displayerTpl = computed(() => this.valueTpl() || this.optionTpl());
 
@@ -182,10 +203,12 @@ export abstract class ALuSelectInputComponent<TOption, TValue> implements OnDest
 
 	treeGenerator?: TreeGenerator<TOption, TreeNode<TOption>>;
 
-	@Output() clueChange = new EventEmitter<string>();
-	@Output() nextPage = new EventEmitter<void>();
-	@Output() previousPage = new EventEmitter<void>();
-	@Output() addOption = new EventEmitter<string>();
+	clueChange$ = new Subject<string>();
+	clueChange = outputFromObservable(this.clueChange$);
+	nextPage$ = new Subject<void>();
+	nextPage = outputFromObservable(this.nextPage$);
+	previousPage = output<void>();
+	addOption = output<string>();
 
 	public valueSignal = signal<TValue>(null);
 	isFilterPillEmpty = computed(() => this.valueSignal() === null);
@@ -212,7 +235,7 @@ export abstract class ALuSelectInputComponent<TOption, TValue> implements OnDest
 		if (!skipPanelOpen && !this.isPanelOpen) {
 			this.openPanel(clue);
 		} else if (this.lastEmittedClue !== clue) {
-			this.clueChange.emit(clue);
+			this.clueChange$.next(clue);
 			this.lastEmittedClue = clue;
 		}
 	}
@@ -224,7 +247,7 @@ export abstract class ALuSelectInputComponent<TOption, TValue> implements OnDest
 	clue: string | null = null;
 	// This is the clue stored after we selected an option to know if we should emit an empty clue on open or not
 	lastEmittedClue: string = '';
-	clue$ = defer(() => this.clueChange.pipe(startWith(this.clue)));
+	clue$ = defer(() => this.clueChange$.pipe(startWith(this.clue)));
 
 	addOptionStrategy$ = new BehaviorSubject<CoreSelectAddOptionStrategy>('never');
 	shouldDisplayAddOption$ = this.addOptionStrategy$.pipe(
@@ -260,7 +283,7 @@ export abstract class ALuSelectInputComponent<TOption, TValue> implements OnDest
 	}
 
 	@HostListener('click', ['$event'])
-	onClickOpenPanel($event: KeyboardEvent) {
+	onClickOpenPanel($event: Event) {
 		if (!this.isPanelOpen) {
 			this.openPanel();
 			$event.stopPropagation();
@@ -269,7 +292,8 @@ export abstract class ALuSelectInputComponent<TOption, TValue> implements OnDest
 	}
 
 	@HostListener('keydown', ['$event'])
-	onKeyDownNavigation($event: KeyboardEvent): void {
+	onKeyDownNavigation(event: Event): void {
+		const $event = event as KeyboardEvent;
 		switch ($event.key) {
 			case 'Escape':
 				if (this.isPanelOpen) {
@@ -289,7 +313,7 @@ export abstract class ALuSelectInputComponent<TOption, TValue> implements OnDest
 				if (this.isPanelOpen) {
 					// Prevent form submission when selecting a value with Enter
 					$event.preventDefault();
-					this.panelRef.selectCurrentlyHighlightedValue();
+					this.panelRef?.selectCurrentlyHighlightedValue();
 				} else {
 					this.panelRef?.handleKeyManagerEvent($event);
 				}
@@ -398,7 +422,7 @@ export abstract class ALuSelectInputComponent<TOption, TValue> implements OnDest
 
 		this.panelRef.valueChanged.subscribe((value) => this.updateValue(value));
 
-		this.#pageChanged(this.panelRef.nextPage).subscribe(() => this.nextPage.emit());
+		this.#pageChanged(this.panelRef.nextPage).subscribe(() => this.nextPage$.next());
 		this.#pageChanged(this.panelRef.previousPage).subscribe(() => this.previousPage.emit());
 
 		this.panelRef.activeOptionIdChanged.subscribe((optionId) => {
@@ -432,7 +456,7 @@ export abstract class ALuSelectInputComponent<TOption, TValue> implements OnDest
 		this.onTouched?.();
 		if (!this.filterPillMode) {
 			this.isPanelOpen$.next(false);
-			this.panelRef.close();
+			this.panelRef?.close();
 			this._panelRef = undefined;
 			this.focusInput();
 		}
@@ -474,7 +498,7 @@ export abstract class ALuSelectInputComponent<TOption, TValue> implements OnDest
 	enableFilterPillMode() {
 		this.filterPillMode = true;
 		this.#defaultFilterPillClearable.set(true);
-		this._panelRef.closed.subscribe(this.afterCloseFn);
+		this._panelRef?.closed.subscribe(this.afterCloseFn);
 		this.bindInputToPanelRefEvents();
 	}
 

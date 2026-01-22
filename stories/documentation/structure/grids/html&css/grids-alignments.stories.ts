@@ -1,4 +1,4 @@
-import { Meta, StoryFn } from '@storybook/angular';
+import { Meta, StoryObj } from '@storybook/angular';
 
 interface GridsAlignmentsStory {
 	reverse: boolean;
@@ -6,10 +6,9 @@ interface GridsAlignmentsStory {
 
 export default {
 	title: 'Documentation/Structure/Grids/HTML & CSS/Alignments',
-	argTypes: {},
 } as Meta;
 
-function getTemplate(args: GridsAlignmentsStory): string {
+function getTemplate(): string {
 	return `<div class="grid">
 	<div class="grid-column" style="--grid-align: start"><div class="demo">start</div></div>
 	<div class="grid-column" style="--grid-align: center"><div class="demo">center</div></div>
@@ -27,9 +26,8 @@ function getTemplate(args: GridsAlignmentsStory): string {
 </div>`;
 }
 
-const Template: StoryFn<GridsAlignmentsStory> = (args) => ({
-	props: args,
-	template: getTemplate(args),
+const Template = () => ({
+	template: getTemplate(),
 	styles: [
 		`
 		.demo {
@@ -50,5 +48,7 @@ const Template: StoryFn<GridsAlignmentsStory> = (args) => ({
 	],
 });
 
-export const Basic = Template.bind({});
-Basic.args = {};
+export const Basic: StoryObj = {
+	args: {},
+	render: Template,
+};

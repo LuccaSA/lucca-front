@@ -1,5 +1,5 @@
-import { Component } from '@angular/core';
-import { IconsList } from '@lucca-front/icons/icons-list';
+import { IconsList } from '@/stories/icons-list';
+import { ChangeDetectionStrategy, Component } from '@angular/core';
 import { IconComponent } from '@lucca-front/ng/icon';
 import { Meta, moduleMetadata, StoryObj } from '@storybook/angular';
 
@@ -7,6 +7,7 @@ import { Meta, moduleMetadata, StoryObj } from '@storybook/angular';
 	selector: 'icon-stories',
 	templateUrl: './icon.stories.html',
 	imports: [IconComponent],
+	changeDetection: ChangeDetectionStrategy.OnPush,
 })
 class IconStory {
 	icons = IconsList;

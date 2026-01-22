@@ -1,9 +1,8 @@
-import { Meta, moduleMetadata, StoryFn } from '@storybook/angular';
+import { HttpClientModule } from '@angular/common/http';
 import { LuSafeExternalSvgPipe } from '@lucca-front/ng/safe-content';
-import { HttpClientModule } from "@angular/common/http";
+import { Meta, moduleMetadata, StoryObj } from '@storybook/angular';
 
-interface EmptyStateSectionCenterStory {
-}
+interface EmptyStateSectionCenterStory {}
 
 export default {
 	title: 'Documentation/Feedback/Empty State/HTML&CSS/Section Center',
@@ -12,8 +11,7 @@ export default {
 			imports: [LuSafeExternalSvgPipe, HttpClientModule],
 		}),
 	],
-	argTypes: {
-	},
+	argTypes: {},
 } as Meta;
 
 function getTemplate(args: EmptyStateSectionCenterStory): string {
@@ -21,9 +19,9 @@ function getTemplate(args: EmptyStateSectionCenterStory): string {
 	<div class="emptyState-container">
 		<div class="emptyState-content">
 			<div
-				class="emptyState-content-icon"
+				class="emptyState-content-icon bubbleIllustration mod-action mod-L"
 				aria-hidden="true"
-				[innerHtml]="'https://cdn.lucca.fr/lucca-front/assets/empty-states/icons/iconCalendarAction.svg' | luSafeExternalSvg"
+				[innerHtml]="'https://cdn.lucca.fr/transverse/prisme/visuals/bubble-illustration/calendar.svg' | luSafeExternalSvg"
 			></div>
 			<div class="emptyState-content-text">
 				<h3 class="emptyState-content-heading">Empty State</h3>
@@ -38,10 +36,12 @@ function getTemplate(args: EmptyStateSectionCenterStory): string {
 </section>`;
 }
 
-const Template: StoryFn<EmptyStateSectionCenterStory> = (args: EmptyStateSectionCenterStory) => ({
+const Template = (args: EmptyStateSectionCenterStory) => ({
 	props: args,
 	template: getTemplate(args),
 });
 
-export const SectionCenter = Template.bind({});
-SectionCenter.args = { };
+export const SectionCenter: StoryObj<EmptyStateSectionCenterStory> = {
+	args: {},
+	render: Template,
+};

@@ -1,9 +1,12 @@
-import { Component } from '@angular/core';
-import { Meta, StoryFn } from '@storybook/angular';
+import { ChangeDetectionStrategy, Component } from '@angular/core';
+import { FieldsetComponent } from '@lucca-front/ng/forms';
+import { Meta, StoryObj } from '@storybook/angular';
 
 @Component({
 	selector: 'fieldset-stories',
 	templateUrl: './fieldset.stories.html',
+	imports: [FieldsetComponent],
+	changeDetection: ChangeDetectionStrategy.OnPush,
 })
 class fieldsetStory {}
 
@@ -12,6 +15,9 @@ export default {
 	component: fieldsetStory,
 } as Meta;
 
-const template: StoryFn<fieldsetStory> = () => ({});
+const template = () => ({});
 
-export const basic = template.bind({});
+export const Basic: StoryObj<fieldsetStory> = {
+	args: {},
+	render: template,
+};

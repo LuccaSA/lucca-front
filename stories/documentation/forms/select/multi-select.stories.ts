@@ -29,6 +29,7 @@ import {
 	LuMultiSelectWithSelectAllDirective,
 } from '@lucca-front/ng/multi-select';
 import { LuTooltipModule } from '@lucca-front/ng/tooltip';
+import { TreeSelectDirective } from '@lucca-front/ng/tree-select';
 import { applicationConfig, Meta, moduleMetadata } from '@storybook/angular';
 import { interval, map } from 'rxjs';
 import { startWith } from 'rxjs/operators';
@@ -36,9 +37,9 @@ import { HiddenArgType } from 'stories/helpers/common-arg-types';
 import { createTestStory, getStoryGenerator } from 'stories/helpers/stories';
 import { StoryModelDisplayComponent } from 'stories/helpers/story-model-display.component';
 import { expect, screen, userEvent, within } from 'storybook/test';
-import { TreeSelectDirective } from '../../../../packages/ng/tree-select/tree-select.directive';
-import { waitForAngular } from '../../../helpers/test';
+import { sleep, waitForAngular } from '../../../helpers/test';
 import { allLegumes, colorNameByColor, coreSelectStory, FilterLegumesPipe, ILegume, LuCoreSelectInputStoryComponent, SortLegumesPipe } from './select.utils';
+import { LOCALE_ID } from '@angular/core';
 
 type LuMultiSelectInputStoryComponent = LuCoreSelectInputStoryComponent & {
 	selectedLegumes: ILegume[] | LuMultiSelection<ILegume>;
@@ -52,6 +53,11 @@ type LuMultiSelectInputStoryComponent = LuCoreSelectInputStoryComponent & {
 } & LuMultiSelectInputComponent<ILegume>;
 
 const generateStory = getStoryGenerator<LuMultiSelectInputStoryComponent>({
+	decorators: [
+		applicationConfig({
+			providers: [{ provide: LOCALE_ID, useValue: 'fr-FR' }],
+		}),
+	],
 	...coreSelectStory,
 	argTypes: {
 		...coreSelectStory.argTypes,
@@ -66,11 +72,11 @@ const generateStory = getStoryGenerator<LuMultiSelectInputStoryComponent>({
 
 async function checkValues(input: HTMLElement, values: string[]) {
 	if (values.length === 0) {
-		await expect(input.parentElement.getElementsByTagName('lu-numeric-badge').length).toBe(0);
+		await expect(input.parentElement?.getElementsByTagName('lu-chip').length).toBe(0);
 	}
 	// If it's a counter displayer
-	if (input.parentElement.getElementsByTagName('lu-numeric-badge').length > 0) {
-		const counter = input.parentElement.getElementsByTagName('lu-numeric-badge')[0];
+	if (input.parentElement?.getElementsByTagName('lu-chip').length === 1) {
+		const counter = input.parentElement?.getElementsByTagName('lu-chip')[0];
 		await expect(counter).toHaveTextContent(values.length.toString());
 	} else {
 		for (const value of values) {
@@ -84,9 +90,9 @@ const basePlay = async ({ canvasElement, step }) => {
 	const input = within(canvasElement).getByRole('combobox');
 	const buttons = within(canvasElement).queryAllByRole('button');
 	// Context
-	const isBadgeDisplayer = input.parentElement.getElementsByTagName('lu-simple-select-default-option').length > 0;
+	const isBadgeDisplayer = input.parentElement?.getElementsByTagName('lu-simple-select-default-option').length > 0;
 	if (buttons.length > 0) {
-		const clearButton = buttons.find((button) => button.className.includes('multipleSelect-clear'));
+		const clearButton = buttons.find((button) => button.className.includes('clear'));
 		if (clearButton) {
 			await userEvent.click(clearButton);
 		}
@@ -225,7 +231,7 @@ export const SelectAllTEST = createTestStory(SelectAll, async (context) => {
 		}
 	}
 	await userEvent.click(input);
-	await waitForAngular();
+	await sleep(200);
 	const panel = within(screen.getByRole('listbox'));
 	const selectAllCheckbox = panel.getByLabelText('Tout sélectionner');
 	await userEvent.click(selectAllCheckbox);
@@ -261,7 +267,7 @@ export const Basic = generateStory({
 	},
 	storyPartial: {
 		args: {
-			selectedLegumes: allLegumes.slice(0, 15),
+			selectedLegumes: [],
 			keepSearchAfterSelection: false,
 		},
 		argTypes: {
@@ -696,7 +702,7 @@ export const GroupBySelectAll = generateStory({
 	},
 });
 
-export const testDynamicDisabled = generateStory({
+export const TestDynamicDisabled = generateStory({
 	name: '[test] Dynamic disabled',
 	description: 'technical test to check dynamic disabled',
 	neededImports: {
@@ -789,6 +795,40 @@ export const CustomPanelHeader = generateStory({
 	},
 });
 
+export const IntlOverride = generateStory({
+	name: 'Intl Override',
+	description: `Il est possible de personnaliser les traductions du composant en utilisant l'input \`[intl]\`. Cela permet de surcharger les labels par défaut (placeholder, search, clear, emptyResults, selectAll, etc.).`,
+	template: `<lu-multi-select
+	#selectRef
+	[options]="legumes | filterLegumes:clue"
+	(clueChange)="clue = $event"
+	[(ngModel)]="selectedLegumes"
+	[intl]="{
+		placeholder: 'Choose vegetables...',
+		search: 'Search for vegetables',
+		clear: 'Remove all',
+		clearSearch: 'Clear the search field',
+		emptyResults: 'No vegetables found matching your search.',
+		emptyOptions: 'No vegetables available.',
+		emptySelection: 'No vegetables selected.',
+		expand: 'Show more',
+		reduce: 'Show less',
+		selectAll: 'Select all vegetables',
+		unselectAll: 'Unselect all vegetables',
+		loading: 'Fetching vegetables...'
+	}"
+	clearable
+/>`,
+	neededImports: {
+		'@lucca-front/ng/multi-select': ['LuMultiSelectInputComponent'],
+	},
+	storyPartial: {
+		args: {
+			selectedLegumes: [],
+		},
+	},
+});
+
 const meta: Meta<LuMultiSelectInputStoryComponent> = {
 	title: 'Documentation/Forms/MultiSelect',
 	component: LuMultiSelectInputComponent,
@@ -841,7 +881,7 @@ const meta: Meta<LuMultiSelectInputStoryComponent> = {
 	parameters: {
 		docs: {
 			description: {
-				component: Basic.parameters['docs'].description.story,
+				component: Basic.parameters?.['docs'].description.story,
 			},
 		},
 	},

@@ -1,13 +1,14 @@
-import { Component } from '@angular/core';
+import { ChangeDetectionStrategy, Component } from '@angular/core';
 import { provideAnimations } from '@angular/platform-browser/animations';
 import { LuUserDisplayModule, LuUserPictureModule, LuUserTileComponent, LuUserTileModule } from '@lucca-front/ng/user';
-import { Meta, StoryFn, applicationConfig } from '@storybook/angular';
+import { applicationConfig, Meta, StoryObj } from '@storybook/angular';
 import { bob, patrick, squidwards } from '../../user.mocks';
 
 @Component({
 	selector: 'user-tile-format-stories',
 	templateUrl: './user-tile-format.stories.html',
 	imports: [LuUserTileModule, LuUserPictureModule, LuUserDisplayModule],
+	changeDetection: ChangeDetectionStrategy.OnPush,
 })
 class UserTileFormatStory {
 	public bob = bob;
@@ -25,14 +26,9 @@ export default {
 	],
 } as Meta;
 
-const template: StoryFn<LuUserTileComponent> = (args) => ({
-	props: args,
-});
+export const Format: StoryObj<LuUserTileComponent> = {};
 
-export const format = template.bind({});
-format.args = {};
-
-format.parameters = {
+Format.parameters = {
 	controls: { include: [] },
 	docs: {
 		source: {

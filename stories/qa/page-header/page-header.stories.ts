@@ -1,4 +1,4 @@
-import { Component } from '@angular/core';
+import { ChangeDetectionStrategy, Component } from '@angular/core';
 import { FormsModule } from '@angular/forms';
 import { BreadcrumbsComponent, BreadcrumbsLinkDirective } from '@lucca-front/ng/breadcrumbs';
 import { ButtonComponent } from '@lucca-front/ng/button';
@@ -7,7 +7,7 @@ import { TextInputComponent } from '@lucca-front/ng/forms';
 import { HorizontalNavigationComponent, HorizontalNavigationLinkDirective } from '@lucca-front/ng/horizontal-navigation';
 import { IconComponent } from '@lucca-front/ng/icon';
 import { PageHeaderComponent } from '@lucca-front/ng/page-header';
-import { Meta, StoryFn } from '@storybook/angular';
+import { Meta, StoryObj } from '@storybook/angular';
 
 @Component({
 	selector: 'page-header-stories',
@@ -24,6 +24,7 @@ import { Meta, StoryFn } from '@storybook/angular';
 		IconComponent,
 		FormsModule,
 	],
+	changeDetection: ChangeDetectionStrategy.OnPush,
 })
 class PageHeaderStory {}
 
@@ -32,6 +33,9 @@ export default {
 	component: PageHeaderStory,
 } as Meta;
 
-const template: StoryFn<PageHeaderStory> = () => ({});
+const template = () => ({});
 
-export const basic = template.bind({});
+export const Basic: StoryObj<PageHeaderStory> = {
+	args: {},
+	render: template,
+};

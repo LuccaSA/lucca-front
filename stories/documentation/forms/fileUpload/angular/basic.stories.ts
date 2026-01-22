@@ -115,17 +115,28 @@ export default {
 		size: {
 			options: ['S', null],
 			control: {
-				type: 'radio',
+				type: 'select',
 			},
+			description: 'Modifie la taille du composant.',
 		},
 		fileMaxSize: {
-			description: 'In bytes',
+			description: 'Limite le poids des fichiers importables (en octets).',
 		},
 		illustration: {
-			options: ['paper', 'picture'],
+			options: ['invoice', 'picture'],
 			control: {
 				type: 'select',
 			},
+			description: "Modifie l'illustration de l'icône dans la zone de drop.",
+		},
+		media: {
+			description: 'Affiche les fichiers importés avec une mise en forme adaptée aux visuels.',
+		},
+		displayFileName: {
+			description: "Affiche le nom des fichiers importés sous l'image en vue <code>media</code>.",
+		},
+		structure: {
+			description: "Augmente le border-radius du champ pour l'utiliser en élément de structure.",
 		},
 	},
 	decorators: [
@@ -242,7 +253,7 @@ export const Single = {
 			},
 		],
 		fileMaxSize: 5000000,
-		illustration: 'paper',
+		illustration: 'invoice',
 		displayFileName: false,
 		structure: false,
 	},

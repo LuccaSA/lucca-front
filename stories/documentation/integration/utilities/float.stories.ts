@@ -1,4 +1,4 @@
-import { Meta, StoryFn } from '@storybook/angular';
+import { Meta, StoryObj } from '@storybook/angular';
 
 interface FloatStory {}
 
@@ -21,7 +21,7 @@ function getTemplate(args: FloatStory): string {
 </div>`;
 }
 
-const Template: StoryFn<FloatStory> = (args) => ({
+const Template = (args: FloatStory) => ({
 	props: args,
 	template: getTemplate(args),
 	styles: [
@@ -39,5 +39,7 @@ const Template: StoryFn<FloatStory> = (args) => ({
 	],
 });
 
-export const Float = Template.bind({});
-Float.args = {};
+export const Float: StoryObj<FloatStory> = {
+	args: {},
+	render: Template,
+};

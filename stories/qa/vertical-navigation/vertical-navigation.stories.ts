@@ -1,11 +1,12 @@
-import { Component } from '@angular/core';
+import { ChangeDetectionStrategy, Component } from '@angular/core';
 import { VerticalNavigationComponent, VerticalNavigationGroupComponent, VerticalNavigationItemComponent, VerticalNavigationLinkComponent } from '@lucca-front/ng/vertical-navigation';
-import { Meta, StoryFn, moduleMetadata } from '@storybook/angular';
+import { Meta, StoryObj, moduleMetadata } from '@storybook/angular';
 
 @Component({
 	selector: 'vertical-navigation-stories',
 	templateUrl: './vertical-navigation.stories.html',
 	imports: [VerticalNavigationComponent, VerticalNavigationLinkComponent, VerticalNavigationItemComponent, VerticalNavigationGroupComponent],
+	changeDetection: ChangeDetectionStrategy.OnPush,
 })
 class VerticalNavigationStory {}
 
@@ -19,6 +20,9 @@ export default {
 	],
 } as Meta;
 
-const template: StoryFn<VerticalNavigationStory> = () => ({});
+const template = () => ({});
 
-export const basic = template.bind({});
+export const Basic: StoryObj<VerticalNavigationStory> = {
+	args: {},
+	render: template,
+};

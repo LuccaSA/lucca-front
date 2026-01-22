@@ -57,7 +57,7 @@ export default {
 			: ``;
 		const backActionContainer = backAction
 			? `<ng-container pageHeaderBackAction>
-	<a href="#" luButton="ghost">
+	<a href="#" luButton>
 		<lu-icon icon="arrowLeft" alt="Retour" />
 	</a>
 </ng-container>`

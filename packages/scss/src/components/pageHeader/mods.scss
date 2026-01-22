@@ -1,3 +1,5 @@
+@use "@lucca-front/scss/src/components/button/exports" as button;
+
 @mixin horizontalNavigation {
 	padding-block-end: 0;
 
@@ -35,4 +37,14 @@
 
 @mixin wide {
 	--components-pageHeader-padding: var(--pr-t-spacings-300) var(--pr-t-spacings-400);
+}
+
+@mixin withBackButton {
+	.pageHeader-content-title-back {
+		.button {
+			@include button.outlined;
+			@include button.S;
+			@include button.onlyIconS;
+		}
+	}
 }

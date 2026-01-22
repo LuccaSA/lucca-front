@@ -1,4 +1,4 @@
-<div class="textField" [class.mod-valueAlignRight]="valueAlignRight">
+<div class="textField" [class.mod-valueAlignRight]="valueAlignRight()">
 	<ng-template #textfieldAddon let-addon="addon" let-type="type">
 		@if (addon.content) {
 			<span class="textField-{{ type }}" luFormFieldId="{{ type }}">
@@ -15,7 +15,7 @@
 		}
 	</ng-template>
 
-	@if (prefix) {
+	@if (prefix(); as prefix) {
 		<ng-container
 			*ngTemplateOutlet="
 				textfieldAddon;
@@ -30,21 +30,21 @@
 	<div class="textField-input">
 		<input
 			luInput
-			[type]="type"
-			[attr.autocomplete]="autocomplete ? autocomplete : null"
+			[type]="type()"
+			[attr.autocomplete]="autocomplete() ? autocomplete() : null"
 			class="textField-input-value"
-			[placeholder]="placeholder"
+			[placeholder]="placeholder()"
 			[formControl]="ngControl.control"
 			(blur)="blur.emit($event)"
 			[mask]="mask()"
 			#inputElement
 		/>
 		<div class="textField-input-affix">
-			@if (hasClearer && inputElement.value) {
-				<lu-clear (click)="clearValue()" class="textField-input-affix-clear">{{ intl.clear }}</lu-clear>
+			@if (hasClearer() && inputElement.value) {
+				<lu-clear (click)="clearValue()" class="textField-input-affix-clear">{{ intl().clear }}</lu-clear>
 			}
-			@if (hasSearchIcon) {
-				<span aria-hidden="true" class="textField-input-affix-icon lucca-icon icon-{{ searchIcon }}"></span>
+			@if (hasSearchIcon()) {
+				<span aria-hidden="true" class="textField-input-affix-icon lucca-icon icon-{{ searchIcon() }}"></span>
 			}
 			@if (hasTogglePasswordVisibilityIcon()) {
 				<button
@@ -53,19 +53,19 @@
 					class="button mod-onlyIcon mod-ghost textField-input-affix-toggle"
 					(click)="togglePasswordVisibility()"
 				>
-					<span aria-hidden="true" [class]="`lucca-icon icon-${ showPassword() ? 'unwatch' : 'watch' }`"></span>
-					<span class="pr-u-mask">{{ intl.togglePasswordVisibility }}</span>
+					<span aria-hidden="true" [class]="`lucca-icon icon-${showPassword() ? 'unwatch' : 'watch'}`"></span>
+					<span class="pr-u-mask">{{ intl().togglePasswordVisibility }}</span>
 				</button>
 			}
 		</div>
 	</div>
-	@if (suffix) {
+	@if (suffix()) {
 		<ng-container
 			*ngTemplateOutlet="
 				textfieldAddon;
 				context: {
 					type: 'suffix',
-					addon: suffix,
+					addon: suffix(),
 				}
 			"
 		/>

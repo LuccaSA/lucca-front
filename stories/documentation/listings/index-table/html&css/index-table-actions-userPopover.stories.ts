@@ -3,7 +3,7 @@ import { provideHttpClient } from '@angular/common/http';
 import { provideAnimations } from '@angular/platform-browser/animations';
 import { LuUserDisplayModule, LuUserPictureComponent } from '@lucca-front/ng/user';
 import { LuUserPopoverDirective, provideLuUserPopover } from '@lucca-front/ng/user-popover';
-import { applicationConfig, Meta, moduleMetadata, StoryFn } from '@storybook/angular';
+import { applicationConfig, Meta, moduleMetadata, StoryObj } from '@storybook/angular';
 
 interface IndexTableActionsUserPopoverCellStory {}
 
@@ -47,10 +47,12 @@ function getTemplate(args: IndexTableActionsUserPopoverCellStory): string {
 </table>`;
 }
 
-const Template: StoryFn<IndexTableActionsUserPopoverCellStory> = (args) => ({
+const Template = (args: IndexTableActionsUserPopoverCellStory) => ({
 	props: args,
 	template: getTemplate(args),
 });
 
-export const UserPopover = Template.bind({});
-UserPopover.args = { bob };
+export const UserPopover: StoryObj<IndexTableActionsUserPopoverCellStory> = {
+	args: { bob },
+	render: Template,
+};

@@ -1,4 +1,4 @@
-import { Meta, StoryFn } from '@storybook/angular';
+import { Meta, StoryObj } from '@storybook/angular';
 
 interface TextareaBasicStory {
 	autoResize: boolean;
@@ -50,13 +50,15 @@ function getTemplate(args: TextareaBasicStory): string {
 	</div>`;
 }
 
-const Template: StoryFn<TextareaBasicStory> = (args) => ({
+const Template = (args: TextareaBasicStory) => ({
 	props: args,
 	template: getTemplate(args),
 });
 
-export const Basic = Template.bind({});
-Basic.args = {
-	autoResize: false,
-	autoResizeScrollIntoView: false,
+export const Basic: StoryObj<TextareaBasicStory> = {
+	args: {
+		autoResize: false,
+		autoResizeScrollIntoView: false,
+	},
+	render: Template,
 };

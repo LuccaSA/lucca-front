@@ -1,9 +1,10 @@
-import { Component } from '@angular/core';
-import { Meta, StoryFn } from '@storybook/angular';
+import { ChangeDetectionStrategy, Component } from '@angular/core';
+import { Meta, StoryObj } from '@storybook/angular';
 
 @Component({
 	selector: 'collapse-stories',
 	templateUrl: './collapse.stories.html',
+	changeDetection: ChangeDetectionStrategy.OnPush,
 })
 class CollapseStory {}
 
@@ -12,6 +13,9 @@ export default {
 	component: CollapseStory,
 } as Meta;
 
-const template: StoryFn<CollapseStory> = () => ({});
+const template = () => ({});
 
-export const basic = template.bind({});
+export const Basic: StoryObj<CollapseStory> = {
+	args: {},
+	render: template,
+};

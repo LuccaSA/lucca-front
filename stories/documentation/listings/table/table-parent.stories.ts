@@ -1,12 +1,10 @@
-import { Meta, StoryFn } from '@storybook/angular';
+import { Meta, StoryObj } from '@storybook/angular';
 
-interface TableParentStory {
-}
+interface TableParentStory {}
 
 export default {
 	title: 'Documentation/Listings/Table/Parent',
-	argTypes: {
-	},
+	argTypes: {},
 } as Meta;
 
 function getTemplate(args: TableParentStory): string {
@@ -68,10 +66,12 @@ function getTemplate(args: TableParentStory): string {
 	`;
 }
 
-const Template: StoryFn<TableParentStory> = (args) => ({
+const Template = (args: TableParentStory) => ({
 	props: args,
 	template: getTemplate(args),
 });
 
-export const Parent = Template.bind({});
-Parent.args = { };
+export const Parent: StoryObj<TableParentStory> = {
+	args: {},
+	render: Template,
+};

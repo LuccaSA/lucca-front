@@ -1,9 +1,9 @@
 import { AsyncPipe } from '@angular/common';
-import { ChangeDetectionStrategy, Component, DestroyRef, ElementRef, inject, OnInit, ViewChild } from '@angular/core';
+import { ChangeDetectionStrategy, Component, DestroyRef, ElementRef, inject, input, OnInit, ViewChild } from '@angular/core';
 import { takeUntilDestroyed } from '@angular/core/rxjs-interop';
 import { FormsModule } from '@angular/forms';
 import { ChipComponent } from '@lucca-front/ng/chip';
-import { getIntl } from '@lucca-front/ng/core';
+import { intlInputOptions } from '@lucca-front/ng/core';
 import { ILuOptionContext, LU_OPTION_CONTEXT, ɵLuOptionOutletDirective } from '@lucca-front/ng/core-select';
 import { LuTooltipModule } from '@lucca-front/ng/tooltip';
 import { map } from 'rxjs/operators';
@@ -18,12 +18,12 @@ import { LuMultiSelectDisplayerInputDirective } from './displayer-input.directiv
 		<div class="multipleSelect-displayer">
 			<input autocomplete="off" #inputElement (keydown.backspace)="inputBackspace()" (keydown.space)="inputSpace($event)" luMultiSelectDisplayerInput />
 			@for (option of displayedOptions$ | async; track option; let index = $index) {
-				<lu-chip withEllipsis (kill)="unselectOption(option, $event)" [unkillable]="select.disabled$ | async">
+				<lu-chip class="multipleSelect-displayer-chip" withEllipsis (kill)="unselectOption(option, $event)" [unkillable]="select.disabled$ | async">
 					<ng-container *luOptionOutlet="select.displayerTpl(); value: option" />
 				</lu-chip>
 			}
 			@if (overflowOptions$ | async; as overflow) {
-				<lu-chip unkillable>+ {{ overflow }}</lu-chip>
+				<lu-chip class="multipleSelect-displayer-chip" unkillable>+ {{ overflow }}</lu-chip>
 			}
 		</div>
 	`,
@@ -32,7 +32,7 @@ import { LuMultiSelectDisplayerInputDirective } from './displayer-input.directiv
 })
 export class LuMultiSelectDefaultDisplayerComponent<T> implements OnInit {
 	select = inject<LuMultiSelectInputComponent<T>>(LuMultiSelectInputComponent);
-	intl = getIntl(LU_MULTI_SELECT_DISPLAYER_TRANSLATIONS);
+	intl = input(...intlInputOptions(LU_MULTI_SELECT_DISPLAYER_TRANSLATIONS));
 
 	protected destroyRef = inject(DestroyRef);
 

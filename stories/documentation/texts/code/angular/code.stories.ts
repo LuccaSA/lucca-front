@@ -1,4 +1,4 @@
-import { codeComponent } from '@lucca-front/ng/code';
+import { CodeComponent } from '@lucca-front/ng/code';
 import { Meta, moduleMetadata } from '@storybook/angular';
 import { cleanupTemplate } from 'stories/helpers/stories';
 
@@ -12,22 +12,18 @@ export default {
 	argTypes: {
 		block: {
 			type: 'boolean',
-		},
-		content: {
-			control: {
-				type: 'text',
-			},
+			description: 'Permet un affichage sur plusieurs lignes.',
 		},
 	},
 	decorators: [
 		moduleMetadata({
-			imports: [codeComponent],
+			imports: [CodeComponent],
 		}),
 	],
 	render: (args: CodeBasicStory) => {
 		const blockParam = args.block ? ` block` : ``;
 		return {
-			template: cleanupTemplate(`<lu-code${blockParam}>${args?.content}</lu-code>`),
+			template: cleanupTemplate(`<lu-code${blockParam}>ipsum dolor sit</lu-code>`),
 		};
 	},
 } as Meta;
@@ -35,6 +31,5 @@ export default {
 export const Basic = {
 	args: {
 		block: false,
-		content: 'ipsum dolor sit',
 	},
 };

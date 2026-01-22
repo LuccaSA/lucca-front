@@ -3,7 +3,7 @@ import { ChangeDetectionStrategy, Component } from '@angular/core';
 import { provideAnimations } from '@angular/platform-browser/animations';
 import { ButtonComponent } from '@lucca-front/ng/button';
 import { LuTooltipModule } from '@lucca-front/ng/tooltip';
-import { applicationConfig, Meta, StoryFn } from '@storybook/angular';
+import { applicationConfig, Meta, StoryObj } from '@storybook/angular';
 import { BehaviorSubject, combineLatest, map, shareReplay, switchMap, timer } from 'rxjs';
 
 @Component({
@@ -13,7 +13,7 @@ import { BehaviorSubject, combineLatest, map, shareReplay, switchMap, timer } fr
 		<p>Ellapsed: {{ (timer$ | async) / 10 | number: '1.1-1' }}s</p>
 		<p>Blocked time: {{ (diff$ | async) / 1000 | number: '1.1-1' }}s</p>
 
-		<button luButton (click)="toggleDisplay()">Toggle dislay</button>
+		<button luButton type="button" (click)="toggleDisplay()">Toggle dislay</button>
 
 		@if (displayed) {
 			@for (cell of cells; track $index) {
@@ -69,8 +69,11 @@ export default {
 	decorators: [applicationConfig({ providers: [provideAnimations()] })],
 } as Meta;
 
-const template: StoryFn<TooltipStory> = (args) => ({
+const template = (args: TooltipStory) => ({
 	props: args,
 });
 
-export const Basic = template.bind({});
+export const Basic: StoryObj<TooltipStory> = {
+	args: {},
+	render: template,
+};

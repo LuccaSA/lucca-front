@@ -26,4 +26,4 @@ export default {
 	},
 } as Meta;
 
-export const optionOverflowDisabled: StoryObj<Calendar2Component> = {};
+export const OptionOverflowDisabled: StoryObj<Calendar2Component> = {};

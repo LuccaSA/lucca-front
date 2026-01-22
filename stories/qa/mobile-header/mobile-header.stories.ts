@@ -1,9 +1,10 @@
-import { Component } from '@angular/core';
-import { Meta, StoryFn, moduleMetadata } from '@storybook/angular';
+import { ChangeDetectionStrategy, Component } from '@angular/core';
+import { Meta, moduleMetadata, StoryObj } from '@storybook/angular';
 
 @Component({
 	selector: 'mobile-header-stories',
 	templateUrl: './mobile-header.stories.html',
+	changeDetection: ChangeDetectionStrategy.OnPush,
 })
 class MobileHeaderStory {}
 
@@ -17,6 +18,9 @@ export default {
 	],
 } as Meta;
 
-const template: StoryFn<MobileHeaderStory> = () => ({});
+const template = () => ({});
 
-export const basic = template.bind({});
+export const Basic: StoryObj<MobileHeaderStory> = {
+	args: {},
+	render: template,
+};

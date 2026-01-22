@@ -1,6 +1,7 @@
 import { CdkDialogContainer } from '@angular/cdk/dialog';
-import { ChangeDetectionStrategy, Component, contentChild, Directive, ElementRef, inject, OnInit, Renderer2, ViewEncapsulation } from '@angular/core';
-import { getIntl } from '@lucca-front/ng/core';
+import { ChangeDetectionStrategy, Component, contentChild, Directive, ElementRef, inject, input, OnInit, Renderer2, ViewEncapsulation } from '@angular/core';
+import { ButtonComponent } from '@lucca-front/ng/button';
+import { intlInputOptions } from '@lucca-front/ng/core';
 import { IconComponent } from '@lucca-front/ng/icon';
 import { LuDialogRef } from '../model';
 import { LU_DIALOG_HEADER_TRANSLATIONS } from './dialog-header.translate';
@@ -15,7 +16,8 @@ export class DialogHeaderAction {}
 
 @Component({
 	selector: 'lu-dialog-header',
-	imports: [IconComponent],
+	standalone: true,
+	imports: [IconComponent, ButtonComponent],
 	templateUrl: './dialog-header.component.html',
 	changeDetection: ChangeDetectionStrategy.OnPush,
 	encapsulation: ViewEncapsulation.None,
@@ -26,7 +28,7 @@ export class DialogHeaderAction {}
 export class DialogHeaderComponent implements OnInit {
 	#ref = inject(LuDialogRef);
 
-	intl = getIntl(LU_DIALOG_HEADER_TRANSLATIONS);
+	intl = input(...intlInputOptions(LU_DIALOG_HEADER_TRANSLATIONS));
 
 	dismissible = !this.#ref.config.alert;
 

@@ -1,5 +1,5 @@
 import { booleanAttribute, ChangeDetectionStrategy, Component, computed, effect, ElementRef, inject, input, LOCALE_ID, model, OnInit, output, viewChildren, ViewEncapsulation } from '@angular/core';
-import { getIntl } from '@lucca-front/ng/core';
+import { intlInputOptions } from '@lucca-front/ng/core';
 import { LuTooltipTriggerDirective } from '@lucca-front/ng/tooltip';
 import {
 	addHours,
@@ -28,7 +28,7 @@ import {
 	subYears,
 	WeekOptions,
 } from 'date-fns';
-import type { Interval } from 'date-fns/types';
+import type { Interval } from 'date-fns';
 import { WEEK_INFO } from '../calendar.token';
 import { LU_DATE2_TRANSLATIONS } from '../date2.translate';
 import { RepeatTimesDirective } from '../repeat-times.directive';
@@ -77,7 +77,7 @@ export class Calendar2Component implements OnInit {
 
 	#weekOptions: WeekOptions = { weekStartsOn: getJSFirstDayOfWeek(this.#weekInfo) };
 
-	intl = getIntl(LU_DATE2_TRANSLATIONS);
+	intl = input(...intlInputOptions(LU_DATE2_TRANSLATIONS));
 
 	showOverflow = input(false, { transform: booleanAttribute });
 
@@ -242,7 +242,6 @@ export class Calendar2Component implements OnInit {
 	});
 
 	currentDecadeLabel = computed(() => {
-		// eslint-disable-next-line no-irregular-whitespace
 		return `${this.#intlDateYear.format(startOfDecade(this.decade()))} – ${this.#intlDateYear.format(endOfDecade(this.decade()))}`;
 	});
 

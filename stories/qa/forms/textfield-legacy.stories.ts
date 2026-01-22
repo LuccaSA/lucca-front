@@ -1,5 +1,5 @@
-import { Component } from '@angular/core';
-import { Meta, moduleMetadata, StoryFn } from '@storybook/angular';
+import { ChangeDetectionStrategy, Component } from '@angular/core';
+import { Meta, moduleMetadata, StoryObj } from '@storybook/angular';
 
 @Component({
 	selector: 'forms-textfield-legacy-stories',
@@ -8,11 +8,12 @@ import { Meta, moduleMetadata, StoryFn } from '@storybook/angular';
 		'.demo-white { background: #F5F5F5; display: inline-block; padding-block: var(--pr-t-spacings-100); padding-inline: var(--pr-t-spacings-200); border-radius: var(--pr-t-border-radius-50);}',
 		'.demo-invert { background: #444; display: inline-block; padding-block: var(--pr-t-spacings-100); padding-inline: var(--pr-t-spacings-200); margin-block: 0; margin-inline: var(--pr-t-spacings-100); border-radius: var(--pr-t-border-radius-50); }',
 	],
+	changeDetection: ChangeDetectionStrategy.OnPush,
 })
 class TextfieldLegacyStory {}
 
 export default {
-	title: 'QA/Forms/Textfield Legacy',
+	title: 'QA/Forms/TextfieldLegacy',
 	component: TextfieldLegacyStory,
 	decorators: [
 		moduleMetadata({
@@ -21,6 +22,9 @@ export default {
 	],
 } as Meta;
 
-const template: StoryFn<TextfieldLegacyStory> = () => ({});
+const template = () => ({});
 
-export const basic = template.bind({});
+export const Basic: StoryObj<TextfieldLegacyStory> = {
+	args: {},
+	render: template,
+};

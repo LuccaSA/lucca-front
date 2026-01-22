@@ -11,6 +11,7 @@ import {
 	inject,
 	input,
 	numberAttribute,
+	OnInit,
 	signal,
 	viewChild,
 	ViewEncapsulation,
@@ -28,6 +29,7 @@ import { LU_DATA_TABLE_INSTANCE } from './data-table.token';
 	host: {
 		class: 'dataTableWrapper',
 		'[class.mod-nested]': 'this.nested()',
+		'[class.mod-noOverflow]': 'this.noOverflow()',
 		'(scroll)': 'scroll()',
 	},
 	providers: [
@@ -38,7 +40,7 @@ import { LU_DATA_TABLE_INSTANCE } from './data-table.token';
 	],
 	changeDetection: ChangeDetectionStrategy.OnPush,
 })
-export class DataTableComponent {
+export class DataTableComponent implements OnInit {
 	#elementRef = inject<ElementRef<Element>>(ElementRef);
 	tableRef = viewChild<ElementRef<Element>>('tableRef');
 
@@ -47,6 +49,8 @@ export class DataTableComponent {
 	readonly layoutFixed = input(false, { transform: booleanAttribute });
 	readonly cellBorder = input(false, { transform: booleanAttribute });
 	readonly nested = input(false, { transform: booleanAttribute });
+	readonly drag = input(false, { transform: booleanAttribute });
+	readonly noOverflow = input(false, { transform: booleanAttribute });
 
 	readonly responsive = input<ResponsiveConfig<'layoutFixed', true>>({});
 
@@ -98,7 +102,7 @@ export class DataTableComponent {
 	});
 
 	scroll() {
-		this.header().isFirstVisible.set(this.#elementRef.nativeElement.scrollTop === 0);
+		this.header()?.isFirstVisible.set(this.#elementRef.nativeElement.scrollTop === 0);
 
 		this.firstRowVisible.set(this.#elementRef.nativeElement.scrollTop === 0);
 		this.lastRowVisible.set(this.#elementRef.nativeElement.scrollTop >= this.#elementRef.nativeElement.scrollHeight - this.#elementRef.nativeElement.clientHeight);
@@ -116,5 +120,11 @@ export class DataTableComponent {
 		afterNextRender(() => {
 			this.scroll();
 		});
+	}
+
+	ngOnInit(): void {
+		new ResizeObserver(() => {
+			this.scroll();
+		}).observe(this.tableRef().nativeElement);
 	}
 }

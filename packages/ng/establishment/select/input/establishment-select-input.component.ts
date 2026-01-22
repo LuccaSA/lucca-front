@@ -1,8 +1,8 @@
 import { Overlay, OverlayModule } from '@angular/cdk/overlay';
-import { AfterViewInit, ChangeDetectionStrategy, ChangeDetectorRef, Component, ElementRef, Inject, Input, OnInit, Optional, Renderer2, Self, ViewContainerRef, forwardRef } from '@angular/core';
+import { AfterViewInit, ChangeDetectionStrategy, ChangeDetectorRef, Component, ElementRef, forwardRef, Inject, input, Input, OnInit, Optional, Renderer2, Self, ViewContainerRef } from '@angular/core';
 import { ControlValueAccessor, NG_VALUE_ACCESSOR } from '@angular/forms';
 import { ClearComponent } from '@lucca-front/ng/clear';
-import { getIntl } from '@lucca-front/ng/core';
+import { intlInputOptions } from '@lucca-front/ng/core';
 import { LuInputDisplayerDirective } from '@lucca-front/ng/input';
 import { ILuOptionPickerPanel, LuOptionComparer, LuOptionItemComponent, LuOptionPickerAdvancedComponent } from '@lucca-front/ng/option';
 import { ILuInputWithPicker } from '@lucca-front/ng/picker';
@@ -52,9 +52,9 @@ import { LU_ESTABLISHMENT_SELECT_INPUT_TRANSLATIONS } from './establishment-sele
 	],
 })
 export class LuEstablishmentSelectInputComponent<
-		D extends import('../../establishment.model').ILuEstablishment = import('../../establishment.model').ILuEstablishment,
-		P extends ILuOptionPickerPanel<D> = ILuOptionPickerPanel<D>,
-	>
+	D extends import('../../establishment.model').ILuEstablishment = import('../../establishment.model').ILuEstablishment,
+	P extends ILuOptionPickerPanel<D> = ILuOptionPickerPanel<D>,
+>
 	extends ALuSelectInputComponent<D, P>
 	implements ControlValueAccessor, ILuInputWithPicker<D>, OnInit, AfterViewInit
 {
@@ -74,7 +74,7 @@ export class LuEstablishmentSelectInputComponent<
 		return this.isSearching ? 'name' : 'legalunit.name,name';
 	}
 
-	public intl = getIntl(LU_ESTABLISHMENT_SELECT_INPUT_TRANSLATIONS);
+	public intl = input(...intlInputOptions(LU_ESTABLISHMENT_SELECT_INPUT_TRANSLATIONS));
 
 	constructor(
 		protected override _changeDetectorRef: ChangeDetectorRef,

@@ -1,6 +1,6 @@
 import { NgTemplateOutlet } from '@angular/common';
 import { booleanAttribute, ChangeDetectionStrategy, Component, computed, contentChildren, input, ViewEncapsulation } from '@angular/core';
-import { getIntl } from '@lucca-front/ng/core';
+import { intlInputOptions } from '@lucca-front/ng/core';
 import { BreadcrumbsLinkDirective } from './breadcrumbs-link.directive';
 import { LU_BREADCRUMBS_TRANSLATIONS } from './breadcrumbs.translate';
 
@@ -21,13 +21,13 @@ let nextId = 0;
 	changeDetection: ChangeDetectionStrategy.OnPush,
 })
 export class BreadcrumbsComponent {
-	intl = getIntl(LU_BREADCRUMBS_TRANSLATIONS);
+	intl = input(...intlInputOptions(LU_BREADCRUMBS_TRANSLATIONS));
 
-	disableCompact = input(false, { transform: booleanAttribute });
+	readonly disableCompact = input(false, { transform: booleanAttribute });
 
-	links = contentChildren(BreadcrumbsLinkDirective);
+	readonly links = contentChildren(BreadcrumbsLinkDirective);
 
-	isCompact = computed(() => this.links().length <= 2 && !this.disableCompact());
+	readonly isCompact = computed(() => this.links().length <= 2 && !this.disableCompact());
 
 	readonly id = `breadcrumbs-title-${nextId++}`;
 }

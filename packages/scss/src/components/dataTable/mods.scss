@@ -79,6 +79,19 @@
 	}
 }
 
+@mixin selectableDraggable {
+	.dataTable-head-row-cell,
+	.dataTable-body-row-cell,
+	.dataTable-foot-row-cell {
+		&:nth-child(2) {
+			--components-dataTable-cellFirst-width: 2.625rem;
+
+			inline-size: var(--components-dataTable-cellFirst-width);
+			max-inline-size: var(--components-dataTable-cellFirst-width);
+		}
+	}
+}
+
 @mixin tree {
 	@include buttonExpand;
 
@@ -171,4 +184,8 @@
 
 @mixin nested {
 	--components-dataTable-borderRadius: var(--pr-t-border-radius-default);
+}
+
+@mixin noOverflow {
+	--components-dataTable-minInlineSize: fit-content;
 }

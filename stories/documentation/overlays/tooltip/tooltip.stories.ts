@@ -1,8 +1,9 @@
+import { OverlayModule } from '@angular/cdk/overlay';
 import { provideAnimations } from '@angular/platform-browser/animations';
+import { ButtonComponent } from '@lucca-front/ng/button';
 import { IconComponent } from '@lucca-front/ng/icon';
-import { LuTooltipModule, LuTooltipTriggerDirective } from '@lucca-front/ng/tooltip';
+import { LuTooltipPanelComponent, LuTooltipTriggerDirective } from '@lucca-front/ng/tooltip';
 import { applicationConfig, Meta, moduleMetadata, StoryObj } from '@storybook/angular';
-import { ButtonComponent } from '../../../../packages/ng/button/button.component';
 import { generateInputs } from '../../../helpers/stories';
 
 export default {
@@ -11,18 +12,21 @@ export default {
 		luTooltipEnterDelay: {
 			control: { type: 'number' },
 			table: {
+				category: 'inputs',
 				defaultValue: { summary: '300' },
 			},
 		},
 		luTooltipLeaveDelay: {
 			control: { type: 'number' },
 			table: {
+				category: 'inputs',
 				defaultValue: { summary: '100' },
 			},
 		},
 		luTooltipDisabled: {
 			control: { type: 'boolean' },
 			table: {
+				category: 'inputs',
 				defaultValue: { summary: 'false' },
 			},
 		},
@@ -30,12 +34,14 @@ export default {
 			control: 'inline-radio',
 			options: ['above', 'below', 'before', 'after'],
 			table: {
+				category: 'inputs',
 				defaultValue: { summary: 'above' },
 			},
 		},
 		luTooltipWhenEllipsis: {
 			control: { type: 'boolean' },
 			table: {
+				category: 'inputs',
 				defaultValue: { summary: 'false' },
 			},
 		},
@@ -46,10 +52,11 @@ export default {
 	decorators: [
 		applicationConfig({ providers: [provideAnimations()] }),
 		moduleMetadata({
-			imports: [LuTooltipModule, IconComponent, ButtonComponent],
+			imports: [LuTooltipTriggerDirective, OverlayModule, LuTooltipPanelComponent, IconComponent, ButtonComponent],
 		}),
 	],
 	render: (args, { argTypes }) => {
+		const inputs = generateInputs(args, argTypes);
 		return {
 			styles: [
 				`
@@ -64,16 +71,17 @@ export default {
 			],
 			template: `<h3>Tooltip simple</h3>
 <button
+	id="random-story-id"
 	type="button"
 	luButton
 	luTooltip="👋 Hello"
-	${generateInputs(args, argTypes)}
+	${inputs}
 >Tooltip au survol</button>
 <h3>Tooltip sur un texte</h3>
 <span
 
 	luTooltip="👋 Hello"
-	${generateInputs(args, argTypes)}
+	${inputs}
 >Tooltip au survol</span>
 <h3>Tooltip et ellipse</h3>
 <div
@@ -81,13 +89,13 @@ export default {
 	style="width: 10rem;"
 	luTooltip="Ce texte est trop long pour être affiché entièrement. Le tooltip apparait au survol."
 	${generateInputs(args, argTypes)}
-	luTooltipWhenEllipsis
+	[luTooltipWhenEllipsis]="true"
 >Ce texte est trop long pour être affiché entièrement. Le tooltip apparait au survol.</div>
 <div
 	class="pr-u-ellipsis"
 	luTooltip="Ce texte est affiché entièrement. Le tooltip n'apparait pas au survol."
 	${generateInputs(args, argTypes)}
-	luTooltipWhenEllipsis
+	[luTooltipWhenEllipsis]="true"
 >Ce texte est affiché entièrement. Le tooltip n'apparait pas au survol.</div>
 <h3>Tooltip et icône (avec alternative)</h3>
 <lu-icon icon="star" alt="Favoris" luTooltip="Favoris" luTooltipOnlyForDisplay="true" />
@@ -105,6 +113,5 @@ export const Basic: StoryObj<LuTooltipTriggerDirective> = {
 		luTooltipLeaveDelay: 100,
 		luTooltipDisabled: false,
 		luTooltipPosition: 'above',
-		luTooltipWhenEllipsis: false,
 	},
 };

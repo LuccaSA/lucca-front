@@ -20,10 +20,10 @@ import {
 } from '@angular/core';
 import { ControlValueAccessor, NG_VALUE_ACCESSOR } from '@angular/forms';
 import { createEmptyHistoryState, registerHistory } from '@lexical/history';
-import { $canShowPlaceholderCurry } from '@lexical/text';
+import { $canShowPlaceholderCurry, $isRootTextContentEmpty } from '@lexical/text';
 import { mergeRegister } from '@lexical/utils';
 import { FormFieldComponent, InputDirective } from '@lucca-front/ng/form-field';
-import { $getRoot, createEditor, Klass, LexicalEditor, LexicalNode, LexicalNodeReplacement } from 'lexical';
+import { $getRoot, createEditor, Klass, LexicalEditor, LexicalNode, LexicalNodeReplacement, UpdateListenerPayload } from 'lexical';
 import { RICH_TEXT_FORMATTER, RichTextFormatter } from './formatters';
 
 export const INITIAL_UPDATE_TAG = 'initial-update';
@@ -110,15 +110,7 @@ export class RichTextInputComponent implements OnInit, OnDestroy, ControlValueAc
 		this.#cleanup = mergeRegister(
 			this.#richTextFormatter.registerTextPlugin(this.#editor),
 			registerHistory(this.#editor, createEmptyHistoryState(), 300),
-			this.#editor.registerUpdateListener(({ tags, dirtyElements }) => {
-				if (!tags.has(INITIAL_UPDATE_TAG) && dirtyElements.size) {
-					const result = this.#richTextFormatter.format(this.#editor);
-					this.touch();
-					this.#onChange?.(result);
-				}
-				const currentCanShowPlaceholder = this.#editor.getEditorState().read($canShowPlaceholderCurry(this.#editor.isComposing()));
-				this.currentCanShowPlaceholder.set(currentCanShowPlaceholder);
-			}),
+			this.#editor.registerUpdateListener((payload) => this.#onEditorUpdate(payload)),
 		);
 		this.#editor.setRootElement(this.content().nativeElement);
 
@@ -172,7 +164,7 @@ export class RichTextInputComponent implements OnInit, OnDestroy, ControlValueAc
 		const plugins = this.#allPlugins();
 
 		const nextFocusedPlugin = this.#focusedPlugin + direction < 0 ? plugins.length - 1 : (this.#focusedPlugin + direction) % plugins.length;
-		if (plugins[nextFocusedPlugin].tabindex) {
+		if (plugins[nextFocusedPlugin].tabindex()) {
 			plugins[this.#focusedPlugin].tabindex?.set(-1);
 			plugins[nextFocusedPlugin].tabindex.set(0);
 		}
@@ -197,5 +189,22 @@ export class RichTextInputComponent implements OnInit, OnDestroy, ControlValueAc
 				return p;
 			}
 		});
+	}
+
+	#onEditorUpdate({ tags, dirtyElements }: UpdateListenerPayload) {
+		const isComposing = this.#editor.isComposing();
+		if (!tags.has(INITIAL_UPDATE_TAG) && dirtyElements.size) {
+			this.#editor.read(() => {
+				let result = '';
+				// ignore empty nodes
+				if (!$isRootTextContentEmpty(isComposing, false)) {
+					result = this.#richTextFormatter.format(this.#editor);
+				}
+				this.touch();
+				this.#onChange?.(result);
+			});
+		}
+		const currentCanShowPlaceholder = this.#editor.getEditorState().read($canShowPlaceholderCurry(isComposing));
+		this.currentCanShowPlaceholder.set(currentCanShowPlaceholder);
 	}
 }

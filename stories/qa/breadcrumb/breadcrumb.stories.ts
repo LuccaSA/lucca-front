@@ -1,11 +1,12 @@
-import { Component } from '@angular/core';
+import { ChangeDetectionStrategy, Component } from '@angular/core';
 import { BreadcrumbsComponent, BreadcrumbsLinkDirective } from '@lucca-front/ng/breadcrumbs';
-import { Meta, StoryFn } from '@storybook/angular';
+import { Meta, StoryObj } from '@storybook/angular';
 
 @Component({
 	selector: 'breadcrumb-stories',
 	templateUrl: './breadcrumb.stories.html',
 	imports: [BreadcrumbsComponent, BreadcrumbsLinkDirective],
+	changeDetection: ChangeDetectionStrategy.OnPush,
 })
 class BreadcrumbStory {}
 
@@ -14,6 +15,9 @@ export default {
 	component: BreadcrumbStory,
 } as Meta;
 
-const template: StoryFn<BreadcrumbStory> = () => ({});
+const template = () => ({});
 
-export const basic = template.bind({});
+export const Basic: StoryObj<BreadcrumbStory> = {
+	args: {},
+	render: template,
+};

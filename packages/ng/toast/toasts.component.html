@@ -1,4 +1,4 @@
-<div class="toasts" aria-live="polite" [class.mod-bottom]="bottom">
+<div class="toasts" aria-live="polite" [class.mod-bottom]="bottom()">
 	@for (toast of toasts$ | async; track toast.id) {
 		<div class="toasts-item" [class]="paletteClassByToastType[toast.type]">
 			@if (toast.type) {
@@ -24,7 +24,7 @@
 				[style.animation-duration]="!isOnlyDismissibleManually(toast) && toast.duration > 0 ? toast.duration + 'ms' : null"
 			>
 				<span class="lucca-icon icon-signClose" aria-hidden="true"></span>
-				<span class="pr-u-mask">{{ intl.close }}</span>
+				<span class="pr-u-mask">{{ intl().close }}</span>
 			</button>
 		</div>
 	}

@@ -3,15 +3,11 @@
   "compilerOptions": {
     "types": ["node", "@testing-library/jest-dom"],
     "allowSyntheticDefaultImports": true,
-    "skipLibCheck": true
+    "resolveJsonModule": true,
+    "skipLibCheck": true,
+    "moduleResolution": "Bundler"
   },
-  "exclude": [
-    "../node_modules/**/*",
-    "../dist/**/*",
-    "../packages/**/*.spec.ts",
-    "../stories/**/*.spec.ts",
-    "../packages/ng/schematics/**/*"
-  ],
-  "include": ["../packages/**/*", "../stories/**/*", "./msw/**/*"],
+  "exclude": ["../packages/**/*.spec.ts"],
+  "include": ["../**/*.stories.*", "./preview.ts", "./msw/**/*", "./plugins/*.ts"],
   "files": ["./typings.d.ts"]
 }

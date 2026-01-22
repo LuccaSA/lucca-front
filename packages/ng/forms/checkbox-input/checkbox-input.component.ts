@@ -1,4 +1,4 @@
-import { booleanAttribute, ChangeDetectionStrategy, Component, forwardRef, inject, input, Input, signal, Signal, ViewEncapsulation } from '@angular/core';
+import { booleanAttribute, ChangeDetectionStrategy, Component, forwardRef, inject, input, signal, Signal, ViewEncapsulation } from '@angular/core';
 import { ReactiveFormsModule } from '@angular/forms';
 import { FILTER_PILL_INPUT_COMPONENT, FilterPillInputComponent, FilterPillLabelDirective, FilterPillLayout } from '@lucca-front/ng/filter-pills';
 import { FORM_FIELD_INSTANCE, FormFieldComponent, INPUT_FRAMED_INSTANCE, InputDirective } from '@lucca-front/ng/form-field';
@@ -28,12 +28,19 @@ let nextId = 0;
 	},
 })
 export class CheckboxInputComponent implements FilterPillInputComponent {
+	framed = inject(INPUT_FRAMED_INSTANCE, { optional: true }) !== null;
 	parentInput = inject(FILTER_PILL_INPUT_COMPONENT, { optional: true, skipSelf: true });
 	formField = inject<FormFieldComponent>(FORM_FIELD_INSTANCE, { optional: true });
 
+	readonly checklist = input(false, { transform: booleanAttribute });
+
+	/**
+	 * Should set aria-checked='mixed' attribute ?
+	 */
+	readonly mixed = input(false, { transform: booleanAttribute });
+
 	isFilterPill = signal<boolean>(false);
 	filterPillInputId = `lu-checkbox-pill-input-${nextId++}`;
-	checklist = input(false, { transform: booleanAttribute });
 
 	filterPillLayout: Signal<FilterPillLayout> = signal('checkable');
 	isFilterPillEmpty: Signal<boolean> = signal(true);
@@ -42,14 +49,6 @@ export class CheckboxInputComponent implements FilterPillInputComponent {
 	showColon: Signal<boolean> = signal(false);
 
 	ngControl = injectNgControl();
-
-	@Input({ transform: booleanAttribute })
-	/**
-	 * Should set aria-checked='mixed' attribute ?
-	 */
-	mixed = false;
-
-	framed = inject(INPUT_FRAMED_INSTANCE, { optional: true }) !== null;
 
 	constructor() {
 		if (this.formField) {

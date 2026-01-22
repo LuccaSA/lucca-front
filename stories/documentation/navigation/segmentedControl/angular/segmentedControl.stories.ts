@@ -1,11 +1,11 @@
 import { FormsModule } from '@angular/forms';
 import { NumericBadgeComponent } from '@lucca-front/ng/numeric-badge';
 import { SegmentedControlComponent, SegmentedControlFilterComponent } from '@lucca-front/ng/segmented-control';
-import { Meta, moduleMetadata, StoryFn } from '@storybook/angular';
+import { Meta, moduleMetadata, StoryObj } from '@storybook/angular';
 import { StoryModelDisplayComponent } from 'stories/helpers/story-model-display.component';
 
 interface segmentedControlBasicStory {
-	S: string;
+	small: boolean;
 	withNumericBadge: boolean;
 	vertical: boolean;
 }
@@ -16,11 +16,22 @@ export default {
 			imports: [NumericBadgeComponent, SegmentedControlComponent, SegmentedControlFilterComponent, FormsModule, StoryModelDisplayComponent],
 		}),
 	],
+	argTypes: {
+		small: {
+			description: 'Modifie la taille du composant.',
+		},
+		withNumericBadge: {
+			description: 'Présente un exemple avec un Numeric Badge.',
+		},
+		vertical: {
+			description: 'Affiche le composant en vue verticale.',
+		},
+	},
 	title: 'Documentation/Navigation/segmentedControl/Angular/Basic',
 } as Meta;
 
 function getTemplate(args: segmentedControlBasicStory): string {
-	const size = args.S ? ` small` : ``;
+	const size = args.small ? ` small` : ``;
 	const vertical = args.vertical ? ` vertical` : ``;
 	const numericBadgeComponent = args.withNumericBadge ? ` <lu-numeric-badge value="8" />` : ``;
 
@@ -37,14 +48,16 @@ function getTemplate(args: segmentedControlBasicStory): string {
 `;
 }
 
-const Template: StoryFn<segmentedControlBasicStory> = (args: segmentedControlBasicStory) => ({
+const Template = (args: segmentedControlBasicStory) => ({
 	props: args,
 	template: getTemplate(args),
 });
 
-export const Basic = Template.bind({});
-Basic.args = {
-	S: false,
-	withNumericBadge: false,
-	vertical: false,
+export const Basic: StoryObj<segmentedControlBasicStory> = {
+	args: {
+		small: false,
+		withNumericBadge: false,
+		vertical: false,
+	},
+	render: Template,
 };

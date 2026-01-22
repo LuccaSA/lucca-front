@@ -14,13 +14,13 @@
 		}
 	</ng-template>
 
-	@if (prefix()) {
+	@if (prefix(); as prefix) {
 		<ng-container
 			*ngTemplateOutlet="
 				addon;
 				context: {
 					type: 'prefix',
-					addon: prefix(),
+					addon: prefix,
 				}
 			"
 		/>
@@ -53,7 +53,7 @@
 		/>
 		<div class="textField-input-affix">
 			@if (hasClearer() && inputElement.value) {
-				<lu-clear class="textField-input-affix-clear" (onClear)="clearValue(); inputElement.focus()">{{ intl.clear }}</lu-clear>
+				<lu-clear class="textField-input-affix-clear" (onClear)="clearValue(); inputElement.focus()">{{ intl().clear }}</lu-clear>
 			}
 		</div>
 	</div>
