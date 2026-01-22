@@ -88,9 +88,7 @@
 			border-radius: var(--pr-t-border-radius-50);
 			pointer-events: none;
 			display: grid;
-			//place-items: center;
-			align-items: center;
-			justify-content: end;
+			place-items: center;
 		}
 
 		.timePicker-fieldset-group-stepper {
