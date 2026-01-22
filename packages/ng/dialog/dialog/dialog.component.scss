@@ -9,7 +9,8 @@
 		flex-direction: column;
 		min-block-size: 0;
 
-		ng-component {
+		// to target open Angular components when opening a dialog via a route
+		> router-outlet + * {
 			display: contents;
 		}
 	}
