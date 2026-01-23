@@ -19,7 +19,6 @@
 	&::before {
 		background-color: var(--palettes-700, var(--palettes-product-700));
 		border-radius: var(--pr-t-border-radius-full);
-		/* stylelint-disable-next-line no-irregular-whitespace */
 		content: ' ' / ''; // Unbreakable space to avoid vertical alignement issues with inline-flex in some contexts like tables
 		display: block;
 		block-size: var(--components-statusBadge-dot-size);

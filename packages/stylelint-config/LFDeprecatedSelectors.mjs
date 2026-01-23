@@ -115,4 +115,7 @@ export default [
 		versionDeprecated: '20.2.0',
 		versionDeleted: '22.1.0',
 	},
+	{
+		objectPattern: ['.label', '.active', '.disabled', '[disabled]'],
+	},
 ];

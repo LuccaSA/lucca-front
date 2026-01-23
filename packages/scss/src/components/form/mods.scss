@@ -51,12 +51,10 @@
 		}
 
 		&:has(
-			// stylelint-disable @stylistic/indentation
 			.checkboxField-input:checked,
 			.checkboxField-input.is-checked,
 			.checkboxField-input[aria-checked='mixed'],
 			.checkboxField-input.is-mixed
-			// stylelint-enable
 		) {
 			background-color: var(--palettes-product-50);
 
@@ -71,12 +69,10 @@
 			}
 
 			&:has(
-				// stylelint-disable @stylistic/indentation
 				.checkboxField-input:checked,
 				.checkboxField-input.is-checked,
 				.checkboxField-input[aria-checked='mixed'],
 				.checkboxField-input.is-mixed
-				// stylelint-enable
 			) {
 				background-color: var(--palettes-error-50);
 
@@ -290,7 +286,6 @@
 
 	&::before,
 	&::after {
-		// stylelint-disable-next-line no-irregular-whitespace
 		content: ' ' / '';
 		display: table;
 	}

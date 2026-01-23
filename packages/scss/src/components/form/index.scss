@@ -69,12 +69,10 @@
 
 		&:not(lu-form-field) {
 			&:has(
-				// stylelint-disable @stylistic/indentation
 				.textField-input-value[aria-invalid='true'],
 				.timePicker-fieldset-group-textfield-input[aria-invalid='true'],
 				.simpleSelect-field-input[aria-invalid='true'],
 				.multipleSelect-displayer-search[aria-invalid='true']
-				// stylelint-enable
 			) {
 				@include invalid;
 			}

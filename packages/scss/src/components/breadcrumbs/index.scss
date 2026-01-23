@@ -19,8 +19,8 @@
 .breadcrumbs-list-item > a {
 	@layer mods {
 		// .active is deprecated
-		&.is-active,
 		&.active,
+		&.is-active,
 		&[aria-current='page'] {
 			@include active;
 		}
