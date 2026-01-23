@@ -1,5 +1,21 @@
 export default [
 	{
+		// TODO: Unspecified selectors.
+		objectPattern: [
+			'.active',
+			'.disabled',
+			'.error',
+			'.label',
+			'.mod-delete',
+			'.mod-invert',
+			'.mod-link',
+			'.mod-outline',
+			'.success',
+			'.u-textLight',
+			'[disabled]',
+		],
+	},
+	{
 		// Any combination of .button and .mod-counter, with any non-whitespace character between
 		// SEE https://regex101.com/r/9WOlXc.
 		objectPattern: /(?=\S*\.\bbutton\b)(?=\S*\.\bmod-counter\b)\S*/,
@@ -38,7 +54,7 @@ export default [
 	{
 		objectPattern: /\.palette-(grey|primary|secondary|lucca)/,
 		versionDeprecated: '17.3.0',
-		versionDeleted: '21.1.0',
+		versionDeleted: '22.0.0',
 	},
 	{
 		objectPattern: /\.u-(padding|margin|gap)X*(S|M|L)/,
@@ -48,7 +64,7 @@ export default [
 	{
 		objectPattern: ['.u-textLeft', '.u-textCenter', '.u-textRight'],
 		versionDeprecated: '18.1.0',
-		versionDeleted: '21.1.0',
+		versionDeleted: '22.0.0',
 	},
 	{
 		objectPattern: '.mod-columnSticky',
@@ -79,7 +95,7 @@ export default [
 	{
 		objectPattern: ['.dialog-form', '.dialog-formOptional'],
 		versionDeprecated: '18.3.0',
-		versionDeleted: '21.1.0',
+		versionDeleted: '22.0.0',
 	},
 	{
 		objectPattern: /\.u-elevate.*/,
@@ -89,7 +105,7 @@ export default [
 	{
 		objectPattern: /\.lu-dropdown-(content|options|options-item|options-item-action)/,
 		versionDeprecated: '19.2.0',
-		versionDeleted: '21.1.0',
+		versionDeleted: '22.0.0',
 	},
 	{
 		// SEE https://regex101.com/r/VqPdDw.
@@ -100,34 +116,69 @@ export default [
 	{
 		objectPattern: /\.menu-?/,
 		versionDeprecated: '19.3.0',
-		versionDeleted: '21.1.0',
+		versionDeleted: '22.0.0',
 	},
 	{
 		// SEE https://regex101.com/r/rOqMxE.
 		objectPattern: /\.u-text(X?S|M|X{0,3}L)/,
 		versionDeprecated: '20.1.0',
-		versionDeleted: '22.1.0',
+		versionDeleted: '22.0.0',
 	},
 	{
-		// Any combination of .button and .mod-text or .mod-deleted, with any non-whitespace character between
+		// Any combination of .button and .mod-text, .mod-deleted or .loading, with any non-whitespace character between
 		// SEE https://regex101.com/r/5qB2gm.
-		objectPattern: /(?=\S*\.\bbutton\b)(?=\S*\.\b(mod-text|mod-deleted)\b)\S*/,
+		objectPattern: /(?=\S*\.\bbutton\b)(?=\S*\.\b(mod-text|mod-deleted|loading)\b)\S*/,
 		versionDeprecated: '20.2.0',
-		versionDeleted: '22.1.0',
+		versionDeleted: '22.0.0',
 	},
 	{
+		// Utilitaires renommés très utilisés
 		objectPattern: [
-			'.active',
-			'.disabled',
-			'.error',
-			'.label',
-			'.mod-delete',
-			'.mod-invert',
-			'.mod-link',
-			'.mod-outline',
-			'.success',
-			'[disabled]',
-			'button.loading',
+			'pr-u-textPrimary',
+			'pr-u-textProduct',
+			'pr-u-textSecondary',
+			'pr-u-textBrand',
+			'pr-u-textCritical',
+			'pr-u-textDefault',
+			'pr-u-textError',
+			'pr-u-textGrey',
+			'pr-u-textLight',
+			'pr-u-textLucca',
+			'pr-u-textNeutral',
+			'pr-u-textPlaceholder',
+			'pr-u-textSuccess',
+			'pr-u-textWarning',
 		],
+		versionDeprecated: '21.0.0',
+	},
+	{
+		// Utilitaires renommés peu ou pas utilisés
+		objectPattern: [
+			'pr-u-textSuccessContrasted',
+			'pr-u-textWarningContrasted',
+			'pr-u-textBrandContrasted',
+			'pr-u-textNavigation',
+			'pr-u-textAI',
+			'pr-u-textProduct',
+			'pr-u-textPagga',
+			'pr-u-textPoplee',
+			'pr-u-textCoreHR',
+			'pr-u-textTimmi',
+			'pr-u-textCleemy',
+			'pr-u-textCc',
+			'pr-u-textKiwi',
+			'pr-u-textLime',
+			'pr-u-textCucumber',
+			'pr-u-textMint',
+			'pr-u-textGlacier',
+			'pr-u-textLagoon',
+			'pr-u-textBlueberry',
+			'pr-u-textLavender',
+			'pr-u-textGrape',
+			'pr-u-textWatermelon',
+			'pr-u-textPumpkin',
+			'pr-u-textPineapple',
+		],
+		versionDeprecated: '21.0.0',
 	},
 ];
