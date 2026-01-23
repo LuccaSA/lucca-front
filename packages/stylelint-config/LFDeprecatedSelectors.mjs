@@ -116,6 +116,18 @@ export default [
 		versionDeleted: '22.1.0',
 	},
 	{
-		objectPattern: ['.label', '.active', '.disabled', '[disabled]'],
+		objectPattern: [
+			'.active',
+			'.disabled',
+			'.error',
+			'.label',
+			'.mod-delete',
+			'.mod-invert',
+			'.mod-link',
+			'.mod-outline',
+			'.success',
+			'[disabled]',
+			'button.loading',
+		],
 	},
 ];
