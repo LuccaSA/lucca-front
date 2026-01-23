@@ -16,7 +16,7 @@
 		}
 
 		.table &,
-		.indexTable &
+		.indexTable &,
 		.dataTable & {
 			@include insideTable;
 		}

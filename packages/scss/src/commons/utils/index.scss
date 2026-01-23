@@ -403,7 +403,8 @@
 	}
 
 	// textPlaceholder is deprecated
-	.pr-u-textPlaceholder, .pr-u-colorInputTextPlaceholder {
+	.pr-u-textPlaceholder,
+	.pr-u-colorInputTextPlaceholder {
 		@extend %textPlaceholder;
 	}
 
@@ -527,7 +528,7 @@
 
 	@each $colorText, $value in config.$colorText {
 		.pr-u-color#{transform.capitalize(transform.camelize($colorText))} {
-			color: var(--pr-t-color-#{$colorText}) !important
+			color: var(--pr-t-color-#{$colorText}) !important;
 		}
 	}
 
