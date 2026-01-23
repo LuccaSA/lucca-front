@@ -123,6 +123,7 @@
     "postcss-value-parser": "^4.2.0",
     "prettier": "^3.5.1",
     "sass": "^1.62.1",
+    "storybook": "^10.2.0",
     "stylelint": "^17.0.0",
     "ts-node": "~10.9.1",
     "typescript": "5.9.3",
