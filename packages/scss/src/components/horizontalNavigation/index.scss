@@ -44,15 +44,15 @@
 .menu-list-item-action, // stylelint-disable-line selector-disallowed-list -- .menu-list-item-action is deprecated
 .horizontalNavigation-list-item-action {
 	@layer mods {
-		// stylelint-disable-next-line selector-disallowed-list -- .active is deprecated
+		// .active is deprecated
 		&.active,
 		&[aria-current='page'],
 		&.is-active {
 			@include active;
 		}
 
-		&.disabled, // stylelint-disable-line selector-disallowed-list -- .disabled is deprecated
-		&[disabled], // stylelint-disable-line selector-disallowed-list -- [disabled] is deprecated
+		&.disabled, // .disabled is deprecated
+		&[disabled], // [disabled] is deprecated
 		&.is-disabled {
 			@include disabled;
 		}
