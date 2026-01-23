@@ -661,21 +661,22 @@
 			@extend %bodyXS;
 		}
 
-		// textLeft is deprecated
+		// stylelint-disable-next-line selector-disallowed-list -- textLeft is deprecated
 		.u-textLeft {
 			@extend %textLeft;
 		}
 
-		// textRight is deprecated
+		// stylelint-disable-next-line selector-disallowed-list -- textRight is deprecated
 		.u-textRight {
 			@extend %textRight;
 		}
 
-		// textCenter is deprecated
+		// stylelint-disable-next-line selector-disallowed-list -- textCenter is deprecated
 		.u-textCenter {
 			@extend %textCenter;
 		}
 
+		// stylelint-disable-next-line selector-disallowed-list -- textLight is deprecated
 		.u-textLight {
 			@extend %textLight;
 		}

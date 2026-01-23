@@ -1,8 +1,8 @@
 @use 'exports' as *;
 
-// .menu is deprecated
-.horizontalNavigation,
-.menu {
+// stylelint-disable-next-line selector-disallowed-list -- .menu is deprecated
+.menu,
+.horizontalNavigation {
 	@layer components {
 		@include vars;
 		@include component;
@@ -24,9 +24,9 @@
 		&.mod-vertical {
 			@include vertical;
 
-			// .menu-list-item-action is deprecated
-			.horizontalNavigation-list-item-action,
-			.menu-list-item-action {
+			// stylelint-disable-next-line selector-disallowed-list -- .menu-list-item-action is deprecated
+			.menu-list-item-action,
+			.horizontalNavigation-list-item-action {
 				&[aria-current='page'],
 				&.is-active {
 					@include activeVertical;
@@ -40,24 +40,20 @@
 	}
 }
 
-// .menu-link is deprecated
-// .menu-list-item-action is deprecated
-.horizontalNavigation-list-item-action,
-.menu-link,
-.menu-list-item-action {
+.menu-link, // stylelint-disable-line selector-disallowed-list -- .menu-link is deprecated
+.menu-list-item-action, // stylelint-disable-line selector-disallowed-list -- .menu-list-item-action is deprecated
+.horizontalNavigation-list-item-action {
 	@layer mods {
-		// .active is deprecated
+		// stylelint-disable-next-line selector-disallowed-list -- .active is deprecated
+		&.active,
 		&[aria-current='page'],
-		&.is-active,
-		&.active {
+		&.is-active {
 			@include active;
 		}
 
-		// .disabled is deprecated
-		// [disabled] is deprecated
-		&.is-disabled,
-		&.disabled,
-		&[disabled] {
+		&.disabled, // stylelint-disable-line selector-disallowed-list -- .disabled is deprecated
+		&[disabled], // stylelint-disable-line selector-disallowed-list -- [disabled] is deprecated
+		&.is-disabled {
 			@include disabled;
 		}
 	}

@@ -36,9 +36,9 @@
 			&:has(.dialog-inside-formOptional, .dialog-formOptional, .dialog-form) {
 				display: contents;
 
-				.dialog-inside-formOptional,
-				.dialog-formOptional,
-				.dialog-form {
+				.dialog-formOptional, // stylelint-disable-line selector-disallowed-list -- .dialog-formOptional is deprecated
+				.dialog-form, // stylelint-disable-line selector-disallowed-list -- .dialog-form is deprecated
+				.dialog-inside-formOptional {
 					display: grid;
 					grid-template-areas:
 						'header  '

@@ -113,8 +113,6 @@
 }
 
 // deprecated
-
-// stylelint-disable no-duplicate-selectors -- deprecated
 .form {
 	@layer components {
 		@include vars;
@@ -191,4 +189,3 @@
 		}
 	}
 }
-// stylelint-enable
