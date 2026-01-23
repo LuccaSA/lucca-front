@@ -5,11 +5,9 @@
 }
 
 @mixin S {
-	// .menu-link is deprecated
-	// .menu-list-item-action is deprecated
-	.horizontalNavigation-list-item-action,
-	.menu-list-item-action,
-	.menu-link {
+	.menu-list-item-action, // stylelint-disable-line selector-disallowed-list -- .menu-list-item-action is deprecated
+	.menu-link, // stylelint-disable-line selector-disallowed-list -- .menu-link is deprecated
+	.horizontalNavigation-list-item-action {
 		--components-horizontalNavigation-listItemActionFont: var(--pr-t-font-body-S);
 		--components-horizontalNavigation-listItemActionPadding: var(--pr-t-spacings-150) 0;
 
@@ -19,12 +17,12 @@
 		}
 	}
 
-	// .menu-link is deprecated
+	// stylelint-disable-next-line selector-disallowed-list -- .menu-link is deprecated
 	.menu-link {
 		margin-inline-end: var(--pr-t-spacings-300);
 	}
 
-	// .label is deprecated
+	// stylelint-disable-next-line selector-disallowed-list -- .label is deprecated
 	.label {
 		block-size: var(--pr-t-font-body-S-lineHeight);
 		min-inline-size: var(--pr-t-font-body-S-lineHeight);
@@ -46,17 +44,17 @@
 @mixin vertical {
 	@include noBorder;
 
-	// .menu-list is deprecated
-	.horizontalNavigation-list,
-	.menu-list {
+	// stylelint-disable-next-line selector-disallowed-list -- .menu-list is deprecated
+	.menu-list,
+	.horizontalNavigation-list {
 		--components-horizontalNavigation-listDirection: column;
 		--components-horizontalNavigation-listGap: 0;
 		--components-horizontalNavigation-listAlign: stretch;
 	}
 
-	// .menu-list-item-action is deprecated
-	.horizontalNavigation-list-item-action,
-	.menu-list-item-action {
+	// stylelint-disable-next-line selector-disallowed-list -- .menu-list-item-action is deprecated
+	.menu-list-item-action,
+	.horizontalNavigation-list-item-action {
 		--components-horizontalNavigation-listItemActionPadding: var(--pr-t-spacings-50) var(--pr-t-spacings-200);
 		--components-horizontalNavigation-listItemActionAlign: left;
 
@@ -91,9 +89,9 @@
 }
 
 @mixin verticalS {
-	// .menu-list-item-action is deprecated
-	.horizontalNavigation-list-item-action,
-	.menu-list-item-action {
+	// stylelint-disable-next-line selector-disallowed-list -- .menu-list-item-action is deprecated
+	.menu-list-item-action,
+	.horizontalNavigation-list-item-action {
 		--components-horizontalNavigation-listItemActionPadding: var(--pr-t-spacings-50) var(--pr-t-spacings-150);
 
 		&::before {
