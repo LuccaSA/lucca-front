@@ -1,7 +1,7 @@
-import { FormsModule, ReactiveFormsModule } from '@angular/forms';
+import { FormControl, ReactiveFormsModule } from '@angular/forms';
 import { BrowserAnimationsModule } from '@angular/platform-browser/animations';
 import { FormFieldComponent } from '@lucca-front/ng/form-field';
-import { MultilanguageInputComponent, MultilanguageTranslation } from '@lucca-front/ng/forms';
+import { MultilanguageInputComponent, MultiLanguageInputValidators, MultilanguageTranslation } from '@lucca-front/ng/forms';
 import { applicationConfig, Meta, moduleMetadata, StoryObj } from '@storybook/angular';
 import { cleanupTemplate, generateInputs } from 'stories/helpers/stories';
 import { StoryModelDisplayComponent } from 'stories/helpers/story-model-display.component';
@@ -11,7 +11,7 @@ export default {
 	title: 'Documentation/Forms/Fields/MultilanguageField/Angular',
 	decorators: [
 		moduleMetadata({
-			imports: [MultilanguageInputComponent, FormFieldComponent, FormsModule, ReactiveFormsModule, BrowserAnimationsModule, StoryModelDisplayComponent],
+			imports: [MultilanguageInputComponent, FormFieldComponent, ReactiveFormsModule, BrowserAnimationsModule, StoryModelDisplayComponent],
 		}),
 		applicationConfig({
 			providers: [{ provide: LOCALE_ID, useValue: 'fr-FR' }],
@@ -35,6 +35,18 @@ export default {
 				type: 'boolean',
 			},
 			description: 'Marque le champ comme obligatoire.',
+		},
+		allLanguagesFilled: {
+			control: {
+				type: 'boolean',
+			},
+			description: 'Ajoute le validateur marquant toutes les traductions comme obligatoires.',
+		},
+		invariantFilled: {
+			control: {
+				type: 'boolean',
+			},
+			description: `Ajoute le validateur marquant l'invariant comme obligatoire.`,
 		},
 		size: {
 			options: ['M', 'S'],
@@ -84,30 +96,35 @@ export const Basic: StoryObj<
 		FormFieldComponent & {
 			disabled: boolean;
 			required: boolean;
+			allLanguagesFilled: boolean;
+			invariantFilled: boolean;
 		}
 > = {
 	render: (args, { argTypes }) => {
-		const { label, hiddenLabel, tooltip, inlineMessage, inlineMessageState, size, width, ...inputArgs } = args;
+		const { label, hiddenLabel, tooltip, inlineMessage, inlineMessageState, size, width, allLanguagesFilled, invariantFilled, ...inputArgs } = args;
 		return {
 			props: {
-				example: [
-					{
-						cultureCode: 'invariant',
-						value: '',
-					},
-					{
-						cultureCode: 'fr-FR',
-						value: '',
-					},
-					{
-						cultureCode: 'en-EN',
-						value: '',
-					},
-					{
-						cultureCode: 'de-DE',
-						value: '',
-					},
-				] as MultilanguageTranslation[],
+				formControl: new FormControl<MultilanguageTranslation[]>(
+					[
+						{
+							cultureCode: 'invariant',
+							value: '',
+						},
+						{
+							cultureCode: 'fr-FR',
+							value: '',
+						},
+						{
+							cultureCode: 'en-EN',
+							value: '',
+						},
+						{
+							cultureCode: 'de-DE',
+							value: '',
+						},
+					],
+					allLanguagesFilled ? MultiLanguageInputValidators.allLanguagesFilled : invariantFilled ? MultiLanguageInputValidators.invariantFilled : undefined,
+				),
 			},
 			template: cleanupTemplate(`<lu-form-field ${generateInputs(
 				{
@@ -121,9 +138,9 @@ export const Basic: StoryObj<
 				},
 				argTypes,
 			)}>
-	<lu-multilanguage-input [(ngModel)]="example"${generateInputs(inputArgs, argTypes)} />
+	<lu-multilanguage-input [formControl]="formControl" ${generateInputs(inputArgs, argTypes)} />
 </lu-form-field>
-<pr-story-model-display>{{ example | json }}</pr-story-model-display>`),
+<pr-story-model-display>{{ formControl.value | json }}</pr-story-model-display>`),
 		};
 	},
 	args: {
@@ -136,5 +153,7 @@ export const Basic: StoryObj<
 		placeholder: 'Placeholder',
 		tooltip: 'Je suis un message d’aide',
 		openOnFocus: false,
+		allLanguagesFilled: false,
+		invariantFilled: false,
 	},
 };

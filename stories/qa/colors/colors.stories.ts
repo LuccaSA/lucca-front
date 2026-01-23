@@ -1,5 +1,5 @@
-import { Component } from '@angular/core';
-import { Meta, StoryFn } from '@storybook/angular';
+import { ChangeDetectionStrategy, Component } from '@angular/core';
+import { Meta, StoryObj } from '@storybook/angular';
 
 @Component({
 	selector: 'colors-stories',
@@ -18,6 +18,7 @@ import { Meta, StoryFn } from '@storybook/angular';
 			}
 		`,
 	],
+	changeDetection: ChangeDetectionStrategy.OnPush,
 })
 class ColorsStory {}
 
@@ -26,6 +27,9 @@ export default {
 	component: ColorsStory,
 } as Meta;
 
-const template: StoryFn<ColorsStory> = () => ({});
+const template = () => ({});
 
-export const Basic = template.bind({});
+export const Basic: StoryObj<ColorsStory> = {
+	args: {},
+	render: template,
+};

@@ -253,8 +253,29 @@
 	&:not(:disabled) {
 		@include color.borderGradient(135deg, var(--palettes-brand-400), var(--palettes-AI-500));
 
-		.lucca-icon {
+		&:not(.mod-invert) .lucca-icon {
 			@include icons.AI;
 		}
+	}
+}
+
+@mixin invertIA {
+	--components-button-backgroundColor: transparent;
+	--components-button-color: var(--palettes-neutral-0);
+
+	background-image: linear-gradient(
+		-135deg,
+		color-mix(in srgb, var(--palettes-AI-500) var(--components-button-AI-background-opacity), transparent),
+		color-mix(in srgb, var(--palettes-brand-400) var(--components-button-AI-background-opacity), transparent)
+	);
+
+	&:hover,
+	&:focus-visible {
+		--components-button-AI-background-opacity: 15%;
+		--components-button-color: var(--palettes-neutral-0);
+	}
+
+	&:active {
+		--components-button-AI-background-opacity: 5%;
 	}
 }

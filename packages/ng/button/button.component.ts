@@ -41,7 +41,7 @@ export class ButtonComponent {
 	 * '' is the default value when you just set the `luButton` directive without a value attached to it.
 	 * We just make this explicit here.
 	 */
-	readonly luButton = input<'' | 'outlined' | 'AI' | 'ghost' | 'ghost-invert' | 'text' | 'text-invert'>('');
+	readonly luButton = input<'' | 'outlined' | 'AI' | 'AI-invert' | 'ghost' | 'ghost-invert' | 'text' | 'text-invert'>('');
 
 	readonly iconComponentRef = contentChild<IconComponent, ElementRef<HTMLElement>>(IconComponent, { read: ElementRef });
 
@@ -62,6 +62,9 @@ export class ButtonComponent {
 		if (this.luButton() !== '') {
 			if (this.luButton() === 'ghost-invert') {
 				config['mod-ghost'] = true;
+				config['mod-invert'] = true;
+			} else if (this.luButton() === 'AI-invert') {
+				config['mod-AI'] = true;
 				config['mod-invert'] = true;
 			} else {
 				config[`mod-${this.luButton()}`] = true;

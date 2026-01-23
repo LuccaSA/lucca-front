@@ -14,13 +14,15 @@ export default {
 		state: {
 			options: ['', 'success', 'error'],
 			control: {
-				type: 'radio',
+				type: 'select',
 			},
+			description: 'État du composant.',
 		},
 		indeterminate: {
 			control: {
 				type: 'boolean',
 			},
+			description: 'Affiche un état de chargement sans information de progression.',
 		},
 		value: {
 			control: {
@@ -29,6 +31,7 @@ export default {
 				max: 100,
 				step: 1,
 			},
+			description: 'Pourcentage de progression.',
 		},
 	},
 	decorators: [

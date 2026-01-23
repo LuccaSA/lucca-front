@@ -1,4 +1,4 @@
-import { Meta, StoryFn } from '@storybook/angular';
+import { Meta, StoryObj } from '@storybook/angular';
 
 interface IndexTableStackableStory {}
 
@@ -75,10 +75,12 @@ function getTemplate(args: IndexTableStackableStory): string {
 </table>`;
 }
 
-const Template: StoryFn<IndexTableStackableStory> = (args) => ({
+const Template = (args: IndexTableStackableStory) => ({
 	props: args,
 	template: getTemplate(args),
 });
 
-export const Stackable = Template.bind({});
-Stackable.args = {};
+export const Stackable: StoryObj<IndexTableStackableStory> = {
+	args: {},
+	render: Template,
+};

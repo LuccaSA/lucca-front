@@ -2,13 +2,12 @@ import { Overlay, OverlayModule } from '@angular/cdk/overlay';
 import { AfterViewInit, ChangeDetectionStrategy, ChangeDetectorRef, Component, ElementRef, Input, Renderer2, ViewContainerRef, forwardRef } from '@angular/core';
 import { AbstractControl, ControlValueAccessor, NG_VALIDATORS, NG_VALUE_ACCESSOR, ValidationErrors, Validator } from '@angular/forms';
 import { ClearComponent } from '@lucca-front/ng/clear';
-import { ALuDateAdapter, ELuDateGranularity, LuDateGranularity, getIntl } from '@lucca-front/ng/core';
+import { ALuDateAdapter, ELuDateGranularity, LuDateGranularity } from '@lucca-front/ng/core';
 import { LuInputDirective, LuInputDisplayerDirective } from '@lucca-front/ng/input';
 import { ILuInputWithPicker } from '@lucca-front/ng/picker';
 import { ALuSelectInputComponent } from '@lucca-front/ng/select';
 import { LuDateAdapterPipe } from '../adapter';
 import { LuDatePickerComponent } from '../picker';
-import { LU_DATE_SELECT_INPUT_TRANSLATIONS } from './date-select-input.translate';
 
 @Component({
 	selector: 'lu-date-select',
@@ -56,7 +55,6 @@ export class LuDateSelectInputComponent<D> extends ALuSelectInputComponent<D> im
 				return 'shortDate';
 		}
 	}
-	private _intl = getIntl(LU_DATE_SELECT_INPUT_TRANSLATIONS);
 	constructor(
 		protected override _changeDetectorRef: ChangeDetectorRef,
 		protected override _overlay: Overlay,

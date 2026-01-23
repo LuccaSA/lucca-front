@@ -1,9 +1,10 @@
-import { Component } from '@angular/core';
-import { Meta, StoryFn, moduleMetadata } from '@storybook/angular';
+import { ChangeDetectionStrategy, Component } from '@angular/core';
+import { Meta, moduleMetadata, StoryObj } from '@storybook/angular';
 
 @Component({
 	selector: 'forms-checkbox-legacy-stories',
 	templateUrl: './checkbox-legacy.stories.html',
+	changeDetection: ChangeDetectionStrategy.OnPush,
 })
 class CheckboxLegacyStory {}
 
@@ -17,6 +18,9 @@ export default {
 	],
 } as Meta;
 
-const template: StoryFn<CheckboxLegacyStory> = () => ({});
+const template = () => ({});
 
-export const Basic = template.bind({});
+export const Basic: StoryObj<CheckboxLegacyStory> = {
+	args: {},
+	render: template,
+};

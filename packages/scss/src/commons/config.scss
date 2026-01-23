@@ -522,16 +522,16 @@ $pumpkin: (
 ) !default;
 
 $pineapple: (
-	50: #fdf8e3,
-	100: #faf2c6,
-	200: #f8eaa5,
+	50: #fef7d7,
+	100: #fbf1b6,
+	200: #fae999,
 	300: #f9e16c,
 	400: #f8dc4f,
 	500: #e7c623,
 	600: #d6b300,
-	700: #c29e00,
-	800: #9e8100,
-	900: #7a6400,
+	700: #b89600,
+	800: #8a7000,
+	900: #665400,
 ) !default;
 
 // https://sass-lang.com/documentation/variables/#advanced-variable-functions
@@ -609,7 +609,7 @@ $colorInput: (
 	icon-disabled: var(--palettes-neutral-500),
 	background: var(--palettes-neutral-0),
 	background-critical: var(--palettes-critical-50),
-	background-disabled: var(--palettes-neutral-100),
+	background-disabled: var(--palettes-neutral-50),
 	border: var(--palettes-neutral-300),
 	border-hover: var(--palettes-neutral-400),
 	border-checked: var(--palettes-product-400),

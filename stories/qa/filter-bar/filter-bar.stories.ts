@@ -1,6 +1,6 @@
 import { allLegumes, FilterLegumesPipe } from '@/stories/forms/select/select.utils';
 import { provideHttpClient } from '@angular/common/http';
-import { Component, LOCALE_ID } from '@angular/core';
+import { ChangeDetectionStrategy, Component, LOCALE_ID } from '@angular/core';
 import { FormsModule } from '@angular/forms';
 import { ButtonComponent } from '@lucca-front/ng/button';
 import { LuCoreSelectApiV4Directive } from '@lucca-front/ng/core-select/api';
@@ -11,7 +11,7 @@ import { CheckboxInputComponent, TextInputComponent } from '@lucca-front/ng/form
 import { LuMultiSelectInputComponent } from '@lucca-front/ng/multi-select';
 import { NumericBadgeComponent } from '@lucca-front/ng/numeric-badge';
 import { LuSimpleSelectInputComponent } from '@lucca-front/ng/simple-select';
-import { applicationConfig, Meta, StoryFn } from '@storybook/angular';
+import { applicationConfig, Meta, StoryObj } from '@storybook/angular';
 import { StoryModelDisplayComponent } from 'stories/helpers/story-model-display.component';
 
 @Component({
@@ -36,6 +36,7 @@ import { StoryModelDisplayComponent } from 'stories/helpers/story-model-display.
 		LuCoreSelectApiV4Directive,
 		LuMultiSelectInputComponent,
 	],
+	changeDetection: ChangeDetectionStrategy.OnPush,
 })
 class FilterBarStory {
 	legumes = allLegumes;
@@ -47,6 +48,9 @@ export default {
 	decorators: [applicationConfig({ providers: [provideHttpClient(), { provide: LOCALE_ID, useValue: 'fr-FR' }] })],
 } as Meta;
 
-const template: StoryFn<FilterBarStory> = () => ({});
+const template = () => ({});
 
-export const basic = template.bind({});
+export const Basic: StoryObj<FilterBarStory> = {
+	args: {},
+	render: template,
+};

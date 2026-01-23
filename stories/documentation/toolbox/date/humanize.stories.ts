@@ -1,9 +1,9 @@
 import { AsyncPipe } from '@angular/common';
-import { Component, Directive, Injector, LOCALE_ID, OnChanges, TemplateRef, ViewContainerRef, inject, input } from '@angular/core';
+import { ChangeDetectionStrategy, Component, Directive, Injector, LOCALE_ID, OnChanges, TemplateRef, ViewContainerRef, inject, input } from '@angular/core';
 import { ButtonComponent } from '@lucca-front/ng/button';
 import { CalloutComponent } from '@lucca-front/ng/callout';
 import { LuHumanizeDateFormatter, LuHumanizeDatePipe, LuRelativeTime, LuRelativeTimeFormatUnit } from '@lucca-front/ng/date';
-import { Meta, StoryFn, StoryObj, applicationConfig } from '@storybook/angular';
+import { Meta, StoryObj, applicationConfig } from '@storybook/angular';
 
 @Directive({
 	selector: '[fakeLocaleId]',
@@ -71,6 +71,7 @@ class FakeLocaleIdDirective implements OnChanges {
 			Résultat: <b>{{ date | luHumanizeDate: allowedUnits | async }}</b>
 		</lu-callout>
 	`,
+	changeDetection: ChangeDetectionStrategy.OnPush,
 })
 class HumanizeStory {
 	locale = 'fr';
@@ -163,7 +164,7 @@ export const HumanizeCustomFormatter: StoryObj<HumanizeStory> = {
 	],
 };
 
-export const HumanizeAllowedUnits: StoryFn<HumanizeStory> = () => ({
+export const HumanizeAllowedUnits = () => ({
 	props: {
 		allowedUnits: ['second'],
 	},

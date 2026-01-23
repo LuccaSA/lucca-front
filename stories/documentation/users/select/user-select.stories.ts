@@ -1,14 +1,15 @@
 import { provideHttpClient } from '@angular/common/http';
-import { Component, input } from '@angular/core';
+import { ChangeDetectionStrategy, Component, input } from '@angular/core';
 import { FormsModule } from '@angular/forms';
 import { provideAnimations } from '@angular/platform-browser/animations';
 import { ILuUser, LuUserSelectModule } from '@lucca-front/ng/user';
-import { applicationConfig, Meta, StoryFn } from '@storybook/angular';
+import { applicationConfig, Meta, StoryObj } from '@storybook/angular';
 
 @Component({
 	selector: 'user-select-stories',
 	templateUrl: './user-select.stories.html',
 	imports: [LuUserSelectModule, FormsModule],
+	changeDetection: ChangeDetectionStrategy.OnPush,
 })
 class UserSelectStory {
 	model: ILuUser;
@@ -20,10 +21,6 @@ export default {
 	component: UserSelectStory,
 	decorators: [applicationConfig({ providers: [provideAnimations(), provideHttpClient()] })],
 } as Meta;
-
-const template: StoryFn<UserSelectStory> = (args) => ({
-	props: args,
-});
 
 const code = `
 /* 1. Importer le LuUserModule */
@@ -55,9 +52,10 @@ class UserSelectStoriesModule {}
 </label>
 `;
 
-export const Basic = template.bind({});
-Basic.args = {
-	disablePrincipal: false,
+export const Basic: StoryObj<UserSelectStory> = {
+	args: {
+		disablePrincipal: false,
+	},
 };
 
 Basic.parameters = {

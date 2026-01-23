@@ -1,12 +1,14 @@
 import { CdkDrag, CdkDragDrop, CdkDropList, moveItemInArray } from '@angular/cdk/drag-drop';
-import { Component, input } from '@angular/core';
+import { ChangeDetectionStrategy, Component, input } from '@angular/core';
 import { SortableListComponent, SortableListItemComponent } from '@lucca-front/ng/sortable-list';
-import { Meta, StoryFn } from '@storybook/angular';
+import { Meta, StoryObj } from '@storybook/angular';
+import { HiddenArgType } from 'stories/helpers/common-arg-types';
 
 @Component({
 	selector: 'sortable-list-draggable-stories',
 	imports: [SortableListComponent, SortableListItemComponent, CdkDropList, CdkDrag],
 	templateUrl: './draggable.stories.html',
+	changeDetection: ChangeDetectionStrategy.OnPush,
 })
 class SortableListDraggableStory {
 	small = input<boolean>(false);
@@ -28,27 +30,42 @@ export default {
 	title: 'Documentation/Listings/Sortable List/Angular/Draggable',
 	component: SortableListDraggableStory,
 	argTypes: {
+		label: {
+			control: {
+				type: 'text',
+			},
+			description: "Modifie le texte principal d'un élément de liste.",
+		},
+		helperMessage: {
+			control: {
+				type: 'text',
+			},
+			description: "Ajoute un texte secondaire à l'élément de liste.",
+		},
 		small: {
 			control: 'boolean',
+			description: 'Modifie la taille du composant.',
 		},
 		clickable: {
-			control: 'boolean',
+			description: 'Rend les lignes cliquables.',
 		},
 		unclearable: {
 			control: 'boolean',
+			description: 'Masque la croix de suppression.',
 		},
+		drop: {
+			description: 'Événement déclenché au drop.',
+		},
+		listItem: HiddenArgType,
 	},
 } as Meta;
 
-const template: StoryFn<SortableListDraggableStory> = (args) => ({
-	props: args,
-});
-
-export const Basic = template.bind({});
-Basic.args = {
-	small: false,
-	clickable: false,
-	unclearable: false,
+export const Basic: StoryObj<SortableListDraggableStory> = {
+	args: {
+		small: false,
+		clickable: false,
+		unclearable: false,
+	},
 };
 
 const code = `<lu-sortable-list cdkDropList (cdkDropListDropped)="drop($event)">

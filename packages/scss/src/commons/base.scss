@@ -6,7 +6,7 @@
 @use '@lucca-front/scss/src/commons/utils/color';
 
 @mixin body {
-	background-color: var(--pr-t-elevation-surface-default);
+	background-color: var(--commons-background-base);
 	color: var(--pr-t-color-text);
 	font: var(--pr-t-font-body-M);
 	text-rendering: geometricPrecision;

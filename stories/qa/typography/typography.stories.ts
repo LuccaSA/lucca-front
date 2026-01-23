@@ -1,9 +1,10 @@
-import { Component } from '@angular/core';
-import { Meta, StoryFn } from '@storybook/angular';
+import { ChangeDetectionStrategy, Component } from '@angular/core';
+import { Meta, StoryObj } from '@storybook/angular';
 
 @Component({
 	selector: 'typography-stories',
 	templateUrl: './typography.stories.html',
+	changeDetection: ChangeDetectionStrategy.OnPush,
 })
 class TypographyStory {}
 
@@ -12,6 +13,9 @@ export default {
 	component: TypographyStory,
 } as Meta;
 
-const template: StoryFn<TypographyStory> = () => ({});
+const template = () => ({});
 
-export const Basic = template.bind({});
+export const Basic: StoryObj<TypographyStory> = {
+	args: {},
+	render: template,
+};

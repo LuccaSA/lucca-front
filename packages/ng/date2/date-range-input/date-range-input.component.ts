@@ -422,8 +422,8 @@ export class DateRangeInputComponent extends AbstractDateComponent implements On
 		}
 		const _dateRange = transformDateRangeInputToDateRange(dateRange);
 
-		if (this.initialValue() === undefined) {
-			this.initialValue.set(_dateRange);
+		if (isNil(this.initialValue())) {
+			this.selectedRange.set(this.clearBehavior() === 'reset' ? this.initialValue() : _dateRange);
 		}
 
 		if (dateRange != null) {

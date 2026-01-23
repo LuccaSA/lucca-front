@@ -35,7 +35,7 @@ describe('FormFieldComponent', () => {
 		fixture = TestBed.createComponent(FormFieldComponentTestComponent);
 	});
 
-	const isInputRequired = () => fixture.componentInstance.formField().isInputRequired();
+	const isInputRequired = () => fixture.componentInstance.formField()?.isInputRequired();
 
 	it('should not detect required validator', () => {
 		// Act

@@ -1,6 +1,6 @@
-import { Component } from '@angular/core';
+import { ChangeDetectionStrategy, Component } from '@angular/core';
 import { AppLayoutComponent } from '@lucca-front/ng/app-layout';
-import { Meta, StoryFn } from '@storybook/angular';
+import { Meta, StoryObj } from '@storybook/angular';
 
 @Component({
 	selector: 'app-layout-stories',
@@ -66,6 +66,7 @@ import { Meta, StoryFn } from '@storybook/angular';
 			}
 		`,
 	],
+	changeDetection: ChangeDetectionStrategy.OnPush,
 })
 class AppLayoutStory {}
 
@@ -74,6 +75,9 @@ export default {
 	component: AppLayoutStory,
 } as Meta;
 
-const template: StoryFn<AppLayoutStory> = () => ({});
+const template = () => ({});
 
-export const basic = template.bind({});
+export const Basic: StoryObj<AppLayoutStory> = {
+	args: {},
+	render: template,
+};

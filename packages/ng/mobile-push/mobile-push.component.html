@@ -7,16 +7,21 @@
 		<div class="mobilePush-content">
 			<div class="mobilePush-content-description"><ng-content /></div>
 			<div class="mobilePush-content-downloadApps">
-				<a target="_blank" [attr.href]="intl.urlAppStore" class="mobilePush-content-downloadApps-link" (click)="appStoreLinkClicked.emit()">
-					<img class="mobilePush-content-downloadApps-link-badge" [attr.alt]="intl.altAppStore" [attr.src]="intl.srcAppStore" />
+				<a
+					target="_blank"
+					[attr.href]="intl().urlAppStore"
+					class="mobilePush-content-downloadApps-link"
+					(click)="appStoreLinkClicked.emit()"
+				>
+					<img class="mobilePush-content-downloadApps-link-badge" [attr.alt]="intl().altAppStore" [attr.src]="intl().srcAppStore" />
 				</a>
 				<a
 					target="_blank"
-					[attr.href]="intl.urlGooglePlay"
+					[attr.href]="intl().urlGooglePlay"
 					class="mobilePush-content-downloadApps-link"
 					(click)="googlePlayLinkClicked.emit()"
 				>
-					<img class="mobilePush-content-downloadApps-link-badge" [attr.alt]="intl.altGooglePlay" [attr.src]="intl.srcGooglePlay" />
+					<img class="mobilePush-content-downloadApps-link-badge" [attr.alt]="intl().altGooglePlay" [attr.src]="intl().srcGooglePlay" />
 				</a>
 			</div>
 		</div>

@@ -1,9 +1,10 @@
-import { Meta, StoryFn } from '@storybook/angular';
+import { Meta, StoryObj } from '@storybook/angular';
 
 interface segmentedControlTabsStory {
-	S: string;
+	S: boolean;
 	withNumericBadge: boolean;
 	vertical: boolean;
+	tabActive: number;
 }
 
 export default {
@@ -76,15 +77,17 @@ function getTemplate(args: segmentedControlTabsStory): string {
 	`;
 }
 
-const Template: StoryFn<segmentedControlTabsStory> = (args: segmentedControlTabsStory) => ({
+const Template = (args: segmentedControlTabsStory) => ({
 	props: args,
 	template: getTemplate(args),
 });
 
-export const Tabs = Template.bind({});
-Tabs.args = {
-	S: false,
-	withNumericBadge: false,
-	vertical: false,
-	tabActive: 1,
+export const Tabs: StoryObj<segmentedControlTabsStory> = {
+	args: {
+		S: false,
+		withNumericBadge: false,
+		vertical: false,
+		tabActive: 1,
+	},
+	render: Template,
 };

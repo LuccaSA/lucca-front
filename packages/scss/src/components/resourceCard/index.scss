@@ -1,0 +1,104 @@
+@use 'exports' as *;
+
+.resourceCard {
+	@layer components {
+		@include vars;
+		@include component;
+	}
+
+	@layer mods {
+		&:hover {
+			@include hover;
+		}
+
+		&:has(.resourceCard-layout-header-title-action:focus-visible) {
+			@include focusVisible;
+		}
+
+		&:has(.resourceCard-layout-header-title-action:active) {
+			@include active;
+		}
+
+		&:has(.resourceCard-layout-header-title-action.is-disabled),
+		&:has(.resourceCard-layout-header-title-action:disabled) {
+			@include disabled;
+		}
+
+		&:has(.resourceCard-layout-before-button) {
+			@include hasDrag;
+		}
+
+		&:has(.resourceCard-layout-header-title .numericBadge) {
+			@include hasNumericBadge;
+		}
+
+		&:has(.resourceCard-layout-content:not(:empty)) {
+			&:not(.mod-grid),
+			&:not(.resourceCardWrapper.mod-grid &) {
+				@include hasContentNoGrid;
+
+				&:has(.resourceCard-layout-before-illustration:not(:empty)) {
+					@include hasContentNoGridHasIllustration;
+
+					&.mod-S {
+						@include hasContentNoGridHasIllustrationS;
+					}
+				}
+			}
+		}
+
+		&:has(.resourceCard-layout-content:empty),
+		&:not(:has(.resourceCard-layout-content)) {
+			&:has(.resourceCard-layout-before-illustration:not(:empty)) {
+				&:not(.mod-grid),
+				.resourceCardWrapper.mod-grid & {
+					@include hasNoContentHasIllustrationNoGrid;
+				}
+			}
+		}
+
+		&:has(.resourceCard-layout-after:not(:empty)) {
+			@include hasAction;
+		}
+
+		&:has(.resourceCard-layout-before-illustration:not(:empty)) {
+			&.mod-grid,
+			.resourceCardWrapper.mod-grid & {
+				@include hasIllustrationGrid;
+
+				&.mod-S {
+					@include hasIllustrationGridS;
+				}
+			}
+		}
+
+		&.mod-S {
+			@include S;
+		}
+
+		&.mod-grid,
+		.resourceCardWrapper.mod-grid & {
+			@include grid;
+		}
+	}
+}
+
+.resourceCardWrapper {
+	@layer components {
+		@include varsWrapper;
+	}
+
+	@layer mods {
+		.resourceCard {
+			@include wrapped;
+		}
+
+		&.mod-grid {
+			@include gridWrapper;
+		}
+
+		&:has(> .button) {
+			@include add;
+		}
+	}
+}

@@ -33,6 +33,8 @@ import { LuUserPopoverDirective } from '@lucca-front/ng/user-popover';
 export class MyComponent { }
 ```
 
+Note : l'import du composant se fait seulement à son utilisation. Le style lié à `userPopover_trigger` peut donc ne pas être chargé à l'initialisation de la page. Dans ce cas, il est possible de remplacer cette classe par les utilitaires `pr-u-buttonReset pr-u-inlineSizeFitContent pr-u-borderRadiusDefault` ou `pr-u-buttonReset pr-u-inlineSizeFitContent pr-u-borderRadiusFull`.
+
 ### Inputs
 
 #### luEmployeeCard

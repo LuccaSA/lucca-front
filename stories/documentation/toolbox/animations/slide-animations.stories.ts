@@ -1,7 +1,7 @@
-import { Component } from '@angular/core';
+import { ChangeDetectionStrategy, Component } from '@angular/core';
 import { provideAnimations } from '@angular/platform-browser/animations';
 import { luSlideAnimationFactory } from '@lucca-front/ng/animations';
-import { applicationConfig, Meta, StoryFn } from '@storybook/angular';
+import { applicationConfig, Meta, StoryObj } from '@storybook/angular';
 
 @Component({
 	selector: 'story-slide-animation',
@@ -46,6 +46,7 @@ import { applicationConfig, Meta, StoryFn } from '@storybook/angular';
 	`,
 	styleUrl: './animations.scss',
 	animations: [luSlideAnimationFactory()],
+	changeDetection: ChangeDetectionStrategy.OnPush,
 })
 class SlideAnimationStory {
 	slidingLeft = false;
@@ -60,12 +61,14 @@ export default {
 	decorators: [applicationConfig({ providers: [provideAnimations()] })],
 } as Meta;
 
-const template: StoryFn<SlideAnimationStory> = (args) => ({
+const template = (args: SlideAnimationStory) => ({
 	props: args,
 });
 
-export const Slide = template.bind({});
-Slide.args = {};
+export const Slide: StoryObj<SlideAnimationStory> = {
+	args: {},
+	render: template,
+};
 
 const code = `
 /* 1. Appeler provideAnimations */

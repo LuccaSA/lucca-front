@@ -12,6 +12,7 @@
 @use '@lucca-front/scss/src/components/multiSelect/exports' as multiSelect;
 @use '@lucca-front/scss/src/components/timepicker/exports' as timepicker;
 @use '@lucca-front/scss/src/components/box/exports' as box;
+@use '@lucca-front/scss/src/components/color/exports' as color;
 
 @mixin maxWidth {
 	max-inline-size: var(--components-form-maxWidth);
@@ -118,6 +119,10 @@
 
 	.timePicker {
 		@include timepicker.S;
+	}
+
+	.color {
+		@include color.M;
 	}
 }
 
@@ -372,4 +377,8 @@
 		margin-inline-start: 0.2em;
 		content: '*' / '';
 	}
+}
+
+@mixin hiddenLabel {
+	gap: 0;
 }

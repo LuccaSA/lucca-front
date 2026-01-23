@@ -1,11 +1,12 @@
-import { Component } from '@angular/core';
+import { ChangeDetectionStrategy, Component } from '@angular/core';
 import { SortableListComponent, SortableListItemComponent } from '@lucca-front/ng/sortable-list';
-import { Meta, StoryFn, moduleMetadata } from '@storybook/angular';
+import { Meta, StoryObj, moduleMetadata } from '@storybook/angular';
 
 @Component({
 	selector: 'sortable-list-stories',
 	templateUrl: './sortable-list.stories.html',
 	imports: [SortableListComponent, SortableListItemComponent],
+	changeDetection: ChangeDetectionStrategy.OnPush,
 })
 class SortableListStory {}
 
@@ -19,6 +20,9 @@ export default {
 	],
 } as Meta;
 
-const template: StoryFn<SortableListStory> = () => ({});
+const template = () => ({});
 
-export const Basic = template.bind({});
+export const Basic: StoryObj<SortableListStory> = {
+	args: {},
+	render: template,
+};

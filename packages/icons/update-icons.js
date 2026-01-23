@@ -37,13 +37,14 @@ const list = `${generatedWarning}export const IconsList = [\n\t${icons
 	.map((icon) => `{ icon: '${icon.camelCase}', deprecated: ${icon.deprecated} }`)
 	.join(',\n\t')},\n];\n`;
 
-writeFileSync(join(__dirname, './icons-list.ts'), list);
+writeFileSync(join(__dirname, '../../stories/documentation/icons-list.ts'), list);
 
 const scssConfig = `${generatedWarning}// to test locally (without the CDN)
 // $font-path: '../../font/lucca-icons' !default;
 $font-path: '//cdn.lucca.fr/transverse/prisme/icons/font/lucca-icons' !default;
 $font-name: 'Lucca icons' !default;
 $isNamespaced: false !default;
+$layers: 'reset, base, components, mods, product, utils' !default;
 
 $icons: (
 ${icons

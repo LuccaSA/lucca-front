@@ -1,6 +1,7 @@
 @mixin vars {
 	--components-emptyState-container-maxWidth: calc(100vw - var(--commons-navSide-width) - 7rem);
-	--components-emptyState-container-left: calc(var(--commons-navSide-width) + 3.5rem);
+	--components-emptyState-container-left: calc(var(--commons-navSide-width) + var(--pr-t-spacings-400));
+	--components-emptyState-container-position: static;
 
 	--components-emptyState-background-color: var(--pr-t-elevation-surface-default);
 	--components-emptyState-illustration-top-right-offset-left:

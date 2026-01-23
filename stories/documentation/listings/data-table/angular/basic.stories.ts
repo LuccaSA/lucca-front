@@ -16,6 +16,7 @@ import { NumericBadgeComponent } from '@lucca-front/ng/numeric-badge';
 import { PaginationComponent } from '@lucca-front/ng/pagination';
 
 import { Meta, moduleMetadata, StoryObj } from '@storybook/angular';
+import { HiddenArgType } from 'stories/helpers/common-arg-types';
 import { StoryModelDisplayComponent } from 'stories/helpers/story-model-display.component';
 
 export default {
@@ -26,7 +27,7 @@ export default {
 			control: {
 				type: 'select',
 			},
-			description: "Définit l'état de tri d'une cellule head.",
+			description: "Définit l'état de tri d'une cellule d'en-tête.",
 		},
 		align: {
 			options: ['', 'start', 'center', 'end'],
@@ -108,7 +109,7 @@ export default {
 			control: {
 				type: 'boolean',
 			},
-			description: 'Applique une largeur fixe à une colonne. La largeur peut être redéfinie via <code>fixedWidth</code>.',
+			description: "Applique une largeur fixe aux colonnes. La largeur d'une colonne peut être redéfinie via <code>fixedWidth</code>.",
 		},
 		selectable: {
 			control: {
@@ -146,9 +147,7 @@ export default {
 			},
 			description: 'Ajoute une pagination au tableau.',
 		},
-		drag: {
-			control: { type: 'boolean' },
-		},
+		drag: HiddenArgType,
 	},
 	decorators: [
 		moduleMetadata({

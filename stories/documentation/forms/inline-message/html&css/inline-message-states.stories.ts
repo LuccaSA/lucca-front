@@ -1,4 +1,4 @@
-import { Meta, StoryFn } from '@storybook/angular';
+import { Meta, StoryObj } from '@storybook/angular';
 
 interface InlineMessageStatesStory {}
 
@@ -30,10 +30,12 @@ function getTemplate(args: InlineMessageStatesStory): string {
 `;
 }
 
-const Template: StoryFn<InlineMessageStatesStory> = (args) => ({
+const Template = (args: InlineMessageStatesStory) => ({
 	props: args,
 	template: getTemplate(args),
 });
 
-export const States = Template.bind({});
-States.args = {};
+export const States: StoryObj<InlineMessageStatesStory> = {
+	args: {},
+	render: Template,
+};

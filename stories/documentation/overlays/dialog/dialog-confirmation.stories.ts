@@ -10,12 +10,13 @@ import {
 	DialogHeaderAction,
 	DialogHeaderComponent,
 	DialogOpenDirective,
+	LuDialogConfig,
 	LuDialogService,
 } from '@lucca-front/ng/dialog';
 import { FormFieldComponent } from '@lucca-front/ng/form-field';
 import { CheckboxInputComponent, TextInputComponent } from '@lucca-front/ng/forms';
 import { IconComponent } from '@lucca-front/ng/icon';
-import { Meta, StoryFn } from '@storybook/angular';
+import { Meta, StoryObj } from '@storybook/angular';
 
 import { HiddenArgType } from 'stories/helpers/common-arg-types';
 
@@ -43,10 +44,14 @@ import { HiddenArgType } from 'stories/helpers/common-arg-types';
 	templateUrl: './dialog-confirmation.stories.html',
 })
 class DialogConfirmationStory {
+	mode?: LuDialogConfig<unknown>['mode'];
+	autoFocus?: LuDialogConfig<unknown>['autoFocus'];
 	dialog = inject(LuDialogService);
 
 	dismiss() {
 		this.dialog.open({
+			mode: this.mode,
+			autoFocus: this.autoFocus,
 			content: DialogConfirmationStoryConfirmation,
 		});
 	}
@@ -88,10 +93,12 @@ class DialogConfirmationStory {
 })
 class DialogConfirmationStoryConfirmation {
 	dialog = inject(LuDialogService);
+	autoFocus?: LuDialogConfig<unknown>['autoFocus'];
 
 	dismiss() {
 		this.dialog.open({
 			content: DialogConfirmationStory,
+			autoFocus: this.autoFocus,
 		});
 	}
 }
@@ -118,13 +125,14 @@ export default {
 	},
 } as Meta;
 
-const template: StoryFn<DialogConfirmationStory> = (args) => ({
+const template = (args: DialogConfirmationStory) => ({
 	props: args,
 });
 
-export const Basic = template.bind({});
-
-Basic.args = {
-	mode: 'drawer',
-	autoFocus: '.open',
+export const Basic: StoryObj<DialogConfirmationStory> = {
+	args: {
+		mode: 'drawer',
+		autoFocus: '.open',
+	},
+	render: template,
 };

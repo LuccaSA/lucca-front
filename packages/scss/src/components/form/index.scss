@@ -103,6 +103,12 @@
 				@include withArrowS;
 			}
 		}
+
+		&:has(.formLabel.pr-u-mask) {
+			&:not(:has(.inlineMessage)) {
+				@include hiddenLabel;
+			}
+		}
 	}
 }
 

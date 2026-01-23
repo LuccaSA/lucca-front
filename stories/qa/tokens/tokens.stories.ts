@@ -1,5 +1,5 @@
-import { Component } from '@angular/core';
-import { Meta, StoryFn } from '@storybook/angular';
+import { ChangeDetectionStrategy, Component } from '@angular/core';
+import { Meta, StoryObj } from '@storybook/angular';
 
 @Component({
 	selector: 'tokens-stories',
@@ -62,6 +62,7 @@ import { Meta, StoryFn } from '@storybook/angular';
 			}
 		`,
 	],
+	changeDetection: ChangeDetectionStrategy.OnPush,
 })
 class TokenStory {}
 
@@ -70,6 +71,9 @@ export default {
 	component: TokenStory,
 } as Meta;
 
-const template: StoryFn<TokenStory> = () => ({});
+const template = () => ({});
 
-export const Basic = template.bind({});
+export const Basic: StoryObj<TokenStory> = {
+	args: {},
+	render: template,
+};

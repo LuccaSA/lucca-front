@@ -1,9 +1,11 @@
 import { ButtonComponent } from '@lucca-front/ng/button';
 import { EmptyStateSectionComponent } from '@lucca-front/ng/empty-state';
-import { Meta, moduleMetadata, StoryFn } from '@storybook/angular';
+import { Meta, moduleMetadata, StoryObj } from '@storybook/angular';
 
 interface TableBasicStory {
 	withOverflow: boolean;
+	navSide: boolean;
+	navSideCompact: boolean;
 }
 
 export default {
@@ -14,21 +16,23 @@ export default {
 		}),
 	],
 	argTypes: {
-		withOverflow: {
-			control: {
-				type: 'boolean',
-			},
+		navSideCompact: {
+			if: { arg: 'navSide', truthy: true },
 		},
 	},
 } as Meta;
 
 function getTemplate(args: TableBasicStory): string {
-	const style = args.withOverflow ? `style="width: 200vw"` : '';
+	const style = args.withOverflow ? ` style="width: 200vw"` : '';
+	const compact = args.navSideCompact ? ` mod-compact` : '';
+	const navsideTpl = args.navSide
+		? `<div class="navSide mod-withBanner${compact}"></div>
+		`
+		: ``;
 
 	return `
-		<div class="navSide mod-withBanner"></div>
-		<div class="main-content">
-			<table class="table" role="presentation" ${style}>
+		${navsideTpl}<div class="main-content">
+			<table class="table" role="presentation"${style}>
 				<thead class="table-head" inert="inert">
 					<tr class="table-head-row">
 						<th class="table-head-row-cell">Label</th>
@@ -42,7 +46,7 @@ function getTemplate(args: TableBasicStory): string {
 				<tbody class="table-body">
 					<tr class="table-body-row">
 						<td colspan="6" class="table-body-row-cell">
-							<lu-empty-state-section hx="3" icon="https://cdn.lucca.fr/lucca-front/assets/empty-states/icons/iconRocket.svg" heading="Empty state section" description="Description can be a string or a ng-template Description can be a string or a ng-template Description can be a string or a ng-template">
+							<lu-empty-state-section hx="3" illustration="rocket" heading="Empty state section" description="Description can be a string or a ng-template Description can be a string or a ng-template Description can be a string or a ng-template">
 								<button luButton type="button" palette="product">Button</button>
 							</lu-empty-state-section>
 						</td>
@@ -53,7 +57,7 @@ function getTemplate(args: TableBasicStory): string {
 	`;
 }
 
-const Template: StoryFn<TableBasicStory> = (args) => ({
+const Template = (args: TableBasicStory) => ({
 	props: args,
 	template: getTemplate(args),
 	styles: [
@@ -66,7 +70,11 @@ const Template: StoryFn<TableBasicStory> = (args) => ({
 	],
 });
 
-export const Basic = Template.bind({});
-Basic.args = {
-	withOverflow: false,
+export const Basic: StoryObj<TableBasicStory> = {
+	args: {
+		withOverflow: false,
+		navSide: true,
+		navSideCompact: false,
+	},
+	render: Template,
 };

@@ -1,4 +1,4 @@
-import { Meta, StoryFn } from '@storybook/angular';
+import { Meta, StoryObj } from '@storybook/angular';
 
 interface ProgressionBasicStory {
 	status: string;
@@ -14,11 +14,13 @@ export default {
 			control: {
 				type: 'radio',
 			},
+			description: 'État du composant.',
 		},
 		indeterminate: {
 			control: {
 				type: 'boolean',
 			},
+			description: 'Affiche un état de chargement sans information de progression.',
 		},
 		width: {
 			control: {
@@ -27,6 +29,7 @@ export default {
 				max: 100,
 				step: 1,
 			},
+			description: 'Pourcentage de progression.',
 		},
 	},
 } as Meta;
@@ -41,10 +44,12 @@ function getTemplate(args: ProgressionBasicStory): string {
 	`;
 }
 
-const Template: StoryFn<ProgressionBasicStory> = (args) => ({
+const Template = (args: ProgressionBasicStory) => ({
 	props: args,
 	template: getTemplate(args),
 });
 
-export const Basic = Template.bind({});
-Basic.args = { status: '', indeterminate: false, width: 50 };
+export const Basic: StoryObj<ProgressionBasicStory> = {
+	args: { status: '', indeterminate: false, width: 50 },
+	render: Template,
+};

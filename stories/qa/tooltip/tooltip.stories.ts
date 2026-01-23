@@ -3,7 +3,7 @@ import { ChangeDetectionStrategy, Component } from '@angular/core';
 import { provideAnimations } from '@angular/platform-browser/animations';
 import { ButtonComponent } from '@lucca-front/ng/button';
 import { LuTooltipModule } from '@lucca-front/ng/tooltip';
-import { applicationConfig, Meta, StoryFn } from '@storybook/angular';
+import { applicationConfig, Meta, StoryObj } from '@storybook/angular';
 import { BehaviorSubject, combineLatest, map, shareReplay, switchMap, timer } from 'rxjs';
 
 @Component({
@@ -69,8 +69,11 @@ export default {
 	decorators: [applicationConfig({ providers: [provideAnimations()] })],
 } as Meta;
 
-const template: StoryFn<TooltipStory> = (args) => ({
+const template = (args: TooltipStory) => ({
 	props: args,
 });
 
-export const Basic = template.bind({});
+export const Basic: StoryObj<TooltipStory> = {
+	args: {},
+	render: template,
+};
