@@ -1,22 +1,24 @@
-import { isNil } from '@lucca-front/ng/core';
 import { CalendarMode } from './public-api';
 
-export function getDateFormat(locale: string, mode?: CalendarMode): string {
-	return new Intl.DateTimeFormat(locale).formatToParts(new Date('01/01/2024')).reduce((acc, part) => {
-		if (part.type === 'day' && (isNil(mode) || mode === 'day')) {
-			return `${acc}${'d'.repeat(part.value.length)}`;
-		}
-		if (part.type === 'month' && (isNil(mode) || mode !== 'year')) {
-			return `${isNil(mode) || mode === 'day' ? acc : ''}${'M'.repeat(part.value.length)}`;
-		}
-		if (part.type === 'year') {
-			return `${isNil(mode) || mode === 'month' ? acc : ''}${'y'.repeat(part.value.length)}`;
-		}
-		if (part.type === 'literal') {
-			return `${acc}${part.value}`;
-		}
-		return acc;
-	}, '');
+export function getDateFormat(locale: string, mode: CalendarMode = 'day'): string {
+	return new Intl.DateTimeFormat(locale)
+		.formatToParts(new Date('01/01/2024'))
+		.reduce((acc, part) => {
+			if (part.type === 'day' && mode === 'day') {
+				return `${acc}${'d'.repeat(part.value.length)}`;
+			}
+			if (part.type === 'month' && mode !== 'year') {
+				return `${acc}${'M'.repeat(part.value.length)}`;
+			}
+			if (part.type === 'year') {
+				return `${acc}${'y'.repeat(part.value.length)}`;
+			}
+			if (part.type === 'literal') {
+				return `${acc}${part.value}`;
+			}
+			return acc;
+		}, '')
+		.replace(/^\/+/, '');
 }
 
 export function getSeparator(locale: string): string {
