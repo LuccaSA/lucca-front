@@ -22,9 +22,10 @@
 	--components-resourceCard-layout-header-paddingBlockStart: var(--pr-t-spacings-50);
 	--components-resourceCard-layout-header-paddingBlockEnd: var(--pr-t-spacings-50);
 
-	--components-resourceCard-layout-gridTemplate: "before header  after" auto
-																								 "before content after" 1fr
-																								/ auto   1fr     auto;
+	--components-resourceCard-layout-gridTemplate:
+		'before header  after' auto
+		'before content after' 1fr
+		/ auto   1fr     auto;
 }
 
 @mixin varsWrapper {
