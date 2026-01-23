@@ -42,16 +42,16 @@
 		}
 
 		// .mod-outline is deprecated
-		&.mod-outlined,
-		&.mod-outline {
+		&.mod-outline,
+		&.mod-outlined {
 			&:where(:not(.is-success, .is-error)) {
 				@include outlined;
 			}
 		}
 
 		// .mod-link .mod-text deprecated
-		&.mod-text,
 		&.mod-link,
+		&.mod-text,
 		&.mod-ghost {
 			&:where(:not(.is-success, .is-error)) {
 				@include ghost;
@@ -109,26 +109,26 @@
 		}
 
 		// .mod-delete is deprecated
-		&.mod-critical,
-		&.mod-delete {
+		&.mod-delete,
+		&.mod-critical {
 			@include critical;
 
 			// .mod-link is deprecated
-			&.mod-text,
-			&.mod-link {
+			&.mod-link,
+			&.mod-text {
 				@include criticalGhost;
 			}
 
 			// .mod-outline is deprecated
-			&.mod-outlined,
-			&.mod-outline {
+			&.mod-outline,
+			&.mod-outlined {
 				@include criticalOutlined;
 			}
 		}
 
 		// .mod-invert is deprecated
-		&.mod-inverted,
-		&.mod-invert {
+		&.mod-invert,
+		&.mod-inverted {
 			@include inverted;
 		}
 
@@ -145,8 +145,8 @@
 		}
 
 		// .loading is deprecated
-		&.is-loading,
-		&.loading {
+		&.loading,
+		&.is-loading {
 			@include loading;
 
 			&.mod-S {
@@ -168,14 +168,14 @@
 		}
 
 		// .error is deprecated
-		&.is-error,
-		&.error {
+		&.error,
+		&.is-error {
 			@include error;
 		}
 
 		// .success is deprecated
-		&.is-success,
-		&.success {
+		&.success,
+		&.is-success {
 			@include success;
 
 			&.mod-AI,
@@ -197,8 +197,8 @@
 		}
 
 		// .disabled is deprecated
-		&.is-disabled,
 		&.disabled,
+		&.is-disabled,
 		&[aria-disabled='true'] {
 			@include disabled;
 		}
