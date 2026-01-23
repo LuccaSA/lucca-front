@@ -39,7 +39,7 @@
     "test-storybook": "test-storybook --url http://localhost:6006",
     "test-storybook:coverage": "test-storybook --url http://localhost:6006 --coverage",
     "nglint": "ng lint",
-    "stylelint": "stylelint \"./packages/**/*.scss\" --report-needless-disables",
+    "stylelint": "stylelint \"./packages/**/*.scss\" --report-needless-disables --report-unscoped-disables --report-invalid-scope-disables",
     "lint": "npm run nglint && npm run stylelint",
     "lint:fix": "npm run nglint:fix && npm run stylelint:fix",
     "nglint:fix": "npm run nglint -- --fix",
