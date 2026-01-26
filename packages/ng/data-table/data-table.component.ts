@@ -102,7 +102,7 @@ export class DataTableComponent implements OnInit {
 	});
 
 	scroll() {
-		this.header().isFirstVisible.set(this.#elementRef.nativeElement.scrollTop === 0);
+		this.header()?.isFirstVisible.set(this.#elementRef.nativeElement.scrollTop === 0);
 
 		this.firstRowVisible.set(this.#elementRef.nativeElement.scrollTop === 0);
 		this.lastRowVisible.set(this.#elementRef.nativeElement.scrollTop >= this.#elementRef.nativeElement.scrollHeight - this.#elementRef.nativeElement.clientHeight);

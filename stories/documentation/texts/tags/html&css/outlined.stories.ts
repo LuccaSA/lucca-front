@@ -1,4 +1,4 @@
-import { Meta, StoryFn } from '@storybook/angular';
+import { Meta, StoryObj } from '@storybook/angular';
 
 export default {
 	title: 'Documentation/Texts/Tags/HTML&CSS/Outlined',
@@ -8,8 +8,11 @@ function getTemplate(): string {
 	return '<span class="tag mod-outlined">Text</span>';
 }
 
-const Template: StoryFn = () => ({
+const Template = () => ({
 	template: getTemplate(),
 });
 
-export const Outlined = Template.bind({});
+export const Outlined: StoryObj = {
+	args: {},
+	render: Template,
+};

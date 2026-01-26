@@ -16,6 +16,11 @@
       "factory": "./lu-select/index",
       "schema": "./lu-select/schema.json"
     },
+    "lu-text-input": {
+      "description": "Migrate deprecated textfield into lu-text-input where possible.",
+      "factory": "./lu-text-input/index",
+      "schema": "./lu-text-input/schema.json"
+    },
     "tokens-spacings": {
       "description": "Replace spacing tokens with new names.",
       "factory": "./tokens-spacing/index",
@@ -31,15 +36,30 @@
       "factory": "./class-prefix/index",
       "schema": "./class-prefix/schema.json"
     },
+    "component-path": {
+      "description": "Update path component import",
+      "factory": "./component-path/index",
+      "schema": "./component-path/schema.json"
+    },
     "tokens-typo": {
       "description": "Replace typography tokens with new names.",
       "factory": "./tokens-typo/index",
       "schema": "./tokens-typo/schema.json"
     },
+    "color-text": {
+      "description": "Replace color text tokens.",
+      "factory": "./color-text/index",
+      "schema": "./color-text/schema.json"
+    },
     "palettes": {
       "description": "Replace palettes with new names.",
       "factory": "./palettes/index",
       "schema": "./palettes/schema.json"
+    },
+    "alignment-utilities": {
+      "description": "Replace alignment utilities tokens.",
+      "factory": "./alignment-utilities/index",
+      "schema": "./alignment-utilities/schema.json"
     },
     "action-icon": {
       "description": "Replace actionIcon usages with button mod-onlyIcon",

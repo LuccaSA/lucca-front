@@ -1,6 +1,6 @@
-import { Component } from '@angular/core';
+import { ChangeDetectionStrategy, Component } from '@angular/core';
 import { GridColumnComponent, GridComponent } from '@lucca-front/ng/grid';
-import { Meta, StoryFn } from '@storybook/angular';
+import { Meta, StoryObj } from '@storybook/angular';
 
 @Component({
 	selector: 'grid-stories',
@@ -20,6 +20,7 @@ import { Meta, StoryFn } from '@storybook/angular';
 		`,
 	],
 	imports: [GridColumnComponent, GridComponent],
+	changeDetection: ChangeDetectionStrategy.OnPush,
 })
 class GridStory {}
 
@@ -28,6 +29,9 @@ export default {
 	component: GridStory,
 } as Meta;
 
-const template: StoryFn<GridStory> = () => ({});
+const template = () => ({});
 
-export const Basic = template.bind({});
+export const Basic: StoryObj<GridStory> = {
+	args: {},
+	render: template,
+};

@@ -1,5 +1,5 @@
 import { booleanAttribute, ChangeDetectionStrategy, Component, computed, effect, inject, input, LOCALE_ID, model, output, signal } from '@angular/core';
-import { getIntl } from '@lucca-front/ng/core';
+import { intlInputOptions } from '@lucca-front/ng/core';
 import { addMonths, addYears, isAfter, isBefore, isSameMonth, startOfDay, startOfMonth } from 'date-fns';
 import { CalendarMode } from './calendar2/calendar-mode';
 import { CellStatus } from './calendar2/cell-status';
@@ -10,7 +10,6 @@ import { LU_DATE2_TRANSLATIONS } from './date2.translate';
 import { transformDateInputToDate, transformDateRangeInputToDateRange } from './utils';
 
 @Component({
-	// eslint-disable-next-line @angular-eslint/component-selector
 	selector: '',
 	template: '',
 	changeDetection: ChangeDetectionStrategy.OnPush,
@@ -20,12 +19,13 @@ export abstract class AbstractDateComponent {
 	// Contains the current date format (like dd/mm/yy etc) based on current locale
 	protected dateFormat = getDateFormat(this.locale);
 	protected separator = getSeparator(this.locale);
+	protected dateFormatWithMode = computed(() => getDateFormat(this.locale, this.mode()));
 	intlDateTimeFormat = new Intl.DateTimeFormat(this.locale);
 
 	intlDateTimeFormatMonth = new Intl.DateTimeFormat(this.locale, { month: 'numeric', year: 'numeric' });
 	intlDateTimeFormatYear = new Intl.DateTimeFormat(this.locale, { year: 'numeric' });
 
-	intl = getIntl(LU_DATE2_TRANSLATIONS);
+	intl = input(...intlInputOptions(LU_DATE2_TRANSLATIONS));
 
 	onTouched?: () => void;
 	disabled = signal<boolean>(false);

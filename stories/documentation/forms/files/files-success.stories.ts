@@ -1,4 +1,4 @@
-import { Meta, StoryFn } from '@storybook/angular';
+import { Meta, StoryObj } from '@storybook/angular';
 
 interface FilesSuccessStory {}
 
@@ -48,7 +48,7 @@ function getTemplate(args: FilesSuccessStory): string {
 	`;
 }
 
-const Template: StoryFn<FilesSuccessStory> = (args) => ({
+const Template = (args: FilesSuccessStory) => ({
 	props: args,
 	template: getTemplate(args),
 	styles: [
@@ -58,5 +58,7 @@ const Template: StoryFn<FilesSuccessStory> = (args) => ({
 	],
 });
 
-export const Success = Template.bind({});
-Success.args = {};
+export const Success: StoryObj<FilesSuccessStory> = {
+	args: {},
+	render: Template,
+};

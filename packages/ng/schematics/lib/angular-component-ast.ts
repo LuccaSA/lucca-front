@@ -2,10 +2,18 @@ import { Change, InsertChange, NoopChange, RemoveChange } from '@schematics/angu
 import { getEOL } from '@schematics/angular/utility/eol';
 import { forEachChild, isArrayLiteralExpression, isCallExpression, isDecorator, isIdentifier, isImportDeclaration, isNamedImports, isObjectLiteralExpression, isPropertyAssignment, isStringLiteralLike, NamedImports, SourceFile } from 'typescript';
 import { createVisitor } from './angular-template';
+import  { TmplAstBoundEvent,TmplAstElement } from '@angular/compiler';
+import { currentSchematicContext } from './lf-schematic-context';
 
 export interface ProviderEntry {
 	provide: string;
 	type: string;
+	value: string;
+}
+
+export interface InputValue {
+	isBinding?: boolean;
+	twoWayBinding?: boolean;
 	value: string;
 }
 
@@ -94,6 +102,35 @@ export function extractComponentImports(sourceFile: SourceFile): string[] {
 		})
 	);
 	return imports;
+}
+
+export function inputValueToHTML(name: string, value: InputValue | undefined): string{
+	if(!value) {
+		return ""
+	}
+	return `${value.isBinding ? '[' : ''}${value.twoWayBinding ? '(' : ''}${name}${value.twoWayBinding ? ')' : ''}${value.isBinding ? ']' : ''}="${value.value}"`
+}
+
+export function getInputValue(node: TmplAstElement, inputName: string): InputValue | undefined {
+	const input = node.inputs.find((i) => i.name === inputName);
+	if (input) {
+		const output: TmplAstBoundEvent = node.outputs.find((o) => o.name === `${inputName}Change`);
+		const value = input?.value instanceof currentSchematicContext.angularCompiler.ASTWithSource ? input.value.source	: null
+		return {
+			isBinding: true,
+			value,
+			twoWayBinding: output?.handler instanceof currentSchematicContext.angularCompiler.ASTWithSource ? output.handler.source === value : false
+		}
+	}
+
+	const attr = node.attributes.find((a) => a.name === inputName);
+	if (attr) {
+		return {
+			isBinding: false,
+			value: attr.value
+		}
+	}
+	return undefined;
 }
 
 // Simplified version of https://github.com/angular/angular-cli/blob/main/packages/schematics/angular/utility/ast-utils.ts#L24 for our use case

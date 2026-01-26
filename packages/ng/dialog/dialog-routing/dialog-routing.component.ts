@@ -14,6 +14,7 @@ import {
 	DialogRouteDialogConfig,
 	DialogRouteDismissTrigger,
 } from './dialog-routing.models';
+import { noRouteReuseFlag } from './dialog-routing.reuse-strategy';
 import { deferrableToObservable, deferrableToPromise, DialogResolveFn, toCanDeactivateFn } from './dialog-routing.utils';
 
 /**
@@ -91,6 +92,8 @@ export class DialogRoutingContainerComponent<C> implements OnDestroy, OnInit {
 	#closeTrigger?: DialogRouteCloseTrigger | DialogRouteDismissTrigger;
 
 	#ref?: LuDialogRef<C>;
+
+	static [noRouteReuseFlag] = true;
 
 	get #routeData(): DialogRouteData<C> {
 		return this.#route.snapshot.data as DialogRouteData<C>;

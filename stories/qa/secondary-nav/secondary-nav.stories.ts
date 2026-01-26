@@ -1,9 +1,10 @@
-import { Component } from '@angular/core';
-import { Meta, StoryFn } from '@storybook/angular';
+import { ChangeDetectionStrategy, Component } from '@angular/core';
+import { Meta, StoryObj } from '@storybook/angular';
 
 @Component({
 	selector: 'secondary-nav-stories',
 	templateUrl: './secondary-nav.stories.html',
+	changeDetection: ChangeDetectionStrategy.OnPush,
 })
 class SecondaryNavStory {}
 
@@ -12,6 +13,9 @@ export default {
 	component: SecondaryNavStory,
 } as Meta;
 
-const template: StoryFn<SecondaryNavStory> = () => ({});
+const template = () => ({});
 
-export const Basic = template.bind({});
+export const Basic: StoryObj<SecondaryNavStory> = {
+	args: {},
+	render: template,
+};

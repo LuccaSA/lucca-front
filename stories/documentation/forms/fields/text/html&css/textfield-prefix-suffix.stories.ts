@@ -1,4 +1,4 @@
-import { Meta, StoryFn } from '@storybook/angular';
+import { Meta, StoryObj } from '@storybook/angular';
 
 interface TextfieldPrefixSuffixStory {}
 
@@ -24,10 +24,12 @@ function getTemplate(args: TextfieldPrefixSuffixStory): string {
 </div>`;
 }
 
-const Template: StoryFn<TextfieldPrefixSuffixStory> = (args) => ({
+const Template = (args: TextfieldPrefixSuffixStory) => ({
 	props: args,
 	template: getTemplate(args),
 });
 
-export const PrefixSuffix = Template.bind({});
-PrefixSuffix.args = {};
+export const PrefixSuffix: StoryObj<TextfieldPrefixSuffixStory> = {
+	args: {},
+	render: Template,
+};

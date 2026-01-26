@@ -1,5 +1,6 @@
 import { Highlightable } from '@angular/cdk/a11y';
 import { computed, Directive, ElementRef, inject, Input, input, model, OnDestroy, output, signal } from '@angular/core';
+import { ALuSelectInputComponent } from '../input/select-input.component';
 import { CoreSelectPanelInstance, SELECT_PANEL_INSTANCE } from './panel.instance';
 
 @Directive({
@@ -16,6 +17,8 @@ export class CoreSelectPanelElement<T> implements Highlightable, OnDestroy {
 	readonly elementRef = inject<ElementRef<HTMLElement>>(ElementRef);
 
 	readonly #panelRef = inject<CoreSelectPanelInstance<T>>(SELECT_PANEL_INSTANCE);
+
+	readonly #selectRef = inject<ALuSelectInputComponent<T, T>>(ALuSelectInputComponent);
 
 	id = signal<string>('');
 
@@ -45,6 +48,7 @@ export class CoreSelectPanelElement<T> implements Highlightable, OnDestroy {
 
 	setActiveStyles(): void {
 		this.isHighlighted.set(true);
+		this.#selectRef.highlightedOption.emit(this.option());
 	}
 
 	setInactiveStyles(): void {

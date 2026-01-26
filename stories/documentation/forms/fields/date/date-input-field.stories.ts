@@ -115,12 +115,12 @@ export const BasicTEST = createTestStory(Basic, async ({ canvasElement, args, co
 	// We have to get table by role using the screen as matcher, as overlay isn't in the canvas itself
 	const table = screen.getByRole('grid');
 	// Not ideal but we need to do this until we have a better way to get the calendar component
-	const calendarComponent = table.parentElement.parentElement;
+	const calendarComponent = table.parentElement?.parentElement;
 	const today = new Date();
 	const calendar = within(calendarComponent);
 	// We can at least check for this year, checking for the month would be harder due to locale considerations
 	await expect(calendar.getByText(today.getFullYear())).toBeInTheDocument();
-	await expect(calendar.getAllByText(today.getDate()).find((el) => !el.parentElement.className.includes('is-overflow')).parentElement).toHaveAttribute('aria-selected', 'true');
+	await expect(calendar.getAllByText(today.getDate()).find((el) => !el.parentElement?.className.includes('is-overflow'))?.parentElement).toHaveAttribute('aria-selected', 'true');
 	// We pick 15 because it should show only once
 	// Fallback if we're the 15th, pick 16
 	const targetDay = today.getDate() === 15 ? 16 : 15;
@@ -135,6 +135,7 @@ export const BasicTEST = createTestStory(Basic, async ({ canvasElement, args, co
 		await expectNgModelDisplay(canvasElement, 'Invalid Date');
 		await expect(input).toHaveAttribute('aria-invalid', 'true');
 	});
+	await waitForAngular();
 
 	await context.step('Select today after another date', async () => {
 		await userEvent.clear(input);
@@ -148,13 +149,14 @@ export const BasicTEST = createTestStory(Basic, async ({ canvasElement, args, co
 		await pickDay(input, targetDay);
 		await expectNgModelDisplay(canvasElement, new Date(today.getFullYear(), today.getMonth(), targetDay).toString());
 	});
+	await waitForAngular();
 });
 
 async function pickDay(input: HTMLElement, targetDay: number) {
 	await userEvent.click(input);
 	await waitForAngular();
 	const table = screen.getByRole('grid');
-	const calendarComponent = table.parentElement.parentElement;
+	const calendarComponent = table.parentElement?.parentElement;
 	const calendar = within(calendarComponent);
 	await userEvent.click(calendar.getByText(targetDay.toString()));
 }

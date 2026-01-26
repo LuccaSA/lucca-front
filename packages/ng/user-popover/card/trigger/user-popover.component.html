@@ -47,7 +47,7 @@
 						<span class="userPopover-details-info-detail-workplace">
 							<lu-icon icon="calendarPlanning" size="S" />
 							<span class="userPopover-details-info-detail-link-state">
-								{{ intl.EMPLOYEE_CARD_PANEL_COMING_ON_LABEL | intlParams: { date: (employee.dtContractStart | date: "shortDate") } }}
+								{{ intl().EMPLOYEE_CARD_PANEL_COMING_ON_LABEL | intlParams: { date: (employee.dtContractStart | date: "shortDate") } }}
 							</span>
 						</span>
 					}
@@ -55,7 +55,7 @@
 					@if (!(employee.dtContractStart | isFuture) && !(employee.dtContractEnd | isFutureOrToday)) {
 						<span class="userPopover-details-info-detail-workplace">
 							<lu-icon icon="calendarStrikethrough" size="S" />
-							<span class="userPopover-details-info-detail-link-state"> {{ intl.EMPLOYEE_CARD_PANEL_EMPLOYEE_HAS_LEAVED_LABEL }} </span>
+							<span class="userPopover-details-info-detail-link-state"> {{ intl().EMPLOYEE_CARD_PANEL_EMPLOYEE_HAS_LEAVED_LABEL }} </span>
 						</span>
 					}
 
@@ -73,17 +73,19 @@
 									@if (employee.currentWorkLocation) {
 										{{ employee.currentWorkLocation?.name }}
 										@if (employee.currentWorkLocation?.area) {
-											<span class="pr-u-textLight"> – {{ employee.currentWorkLocation?.area?.name }}</span>
+											<span class="pr-u-colorTextSubtle"> – {{ employee.currentWorkLocation?.area?.name }}</span>
 										}
 									}
 									@if (!employee.currentWorkLocation) {
-										{{ intl.EMPLOYEE_CARD_PANEL_PRESENT_LABEL }}
+										{{ intl().EMPLOYEE_CARD_PANEL_PRESENT_LABEL }}
 									}
 								} @else {
 									@if (!(employee.dtContractStart | isFuture) && (employee.dtContractEnd | isFutureOrToday)) {
-										{{ intl.EMPLOYEE_CARD_PANEL_ABSENCE_LABEL }}
+										{{ intl().EMPLOYEE_CARD_PANEL_ABSENCE_LABEL }}
 										@if (employee.leaveEndsOn) {
-											<span class="pr-u-textLight"> – {{ employee.leaveEndsOn | leaveEndsDisplay: employee.leaveEndIsFirstHalfDay }} </span>
+											<span class="pr-u-colorTextSubtle"
+												> – {{ employee.leaveEndsOn | leaveEndsDisplay: employee.leaveEndIsFirstHalfDay }}
+											</span>
 										}
 									}
 								}

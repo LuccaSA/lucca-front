@@ -1,4 +1,4 @@
-import { Component } from '@angular/core';
+import { ChangeDetectionStrategy, Component } from '@angular/core';
 import { FormsModule } from '@angular/forms';
 import { ButtonComponent } from '@lucca-front/ng/button';
 import {
@@ -18,7 +18,7 @@ import { PaginationComponent } from '@lucca-front/ng/pagination';
 import { StatusBadgeComponent } from '@lucca-front/ng/status-badge';
 import { TagComponent } from '@lucca-front/ng/tag';
 import { LuUserPictureComponent } from '@lucca-front/ng/user';
-import { Meta, StoryFn } from '@storybook/angular';
+import { Meta, StoryObj } from '@storybook/angular';
 
 @Component({
 	selector: 'data-table-stories',
@@ -53,6 +53,7 @@ import { Meta, StoryFn } from '@storybook/angular';
 			}
 		`,
 	],
+	changeDetection: ChangeDetectionStrategy.OnPush,
 })
 class DataTableStory {}
 
@@ -61,6 +62,9 @@ export default {
 	component: DataTableStory,
 } as Meta;
 
-const template: StoryFn<DataTableStory> = () => ({});
+const template = () => ({});
 
-export const Basic = template.bind({});
+export const Basic: StoryObj<DataTableStory> = {
+	args: {},
+	render: template,
+};

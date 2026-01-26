@@ -1,4 +1,4 @@
-import { IconsList } from '@lucca-front/icons/icons-list';
+import { IconsList } from '@/stories/icons-list';
 import { IconComponent } from '@lucca-front/ng/icon';
 import { Meta, StoryObj } from '@storybook/angular';
 

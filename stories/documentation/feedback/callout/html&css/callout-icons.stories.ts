@@ -1,4 +1,4 @@
-import { Meta, StoryFn } from '@storybook/angular';
+import { Meta, StoryObj } from '@storybook/angular';
 
 interface CalloutIconStory {
 	s: boolean;
@@ -39,15 +39,17 @@ function getTemplate(args: CalloutIconStory): string {
 		<span aria-hidden="true" class="lucca-icon${icon}"></span>
 	</div>
 	<div class="callout-content">
-		<div class="callout-content-description">Feedback description</div>
+		<p class="callout-content-description">Feedback description</p>
 	</div>
 </div>`;
 }
 
-const Template: StoryFn<CalloutIconStory> = (args) => ({
+const Template = (args: CalloutIconStory) => ({
 	props: args,
 	template: getTemplate(args),
 });
 
-export const Icon = Template.bind({});
-Icon.args = { s: false, icon: 'signHelp', palette: '' };
+export const Icon: StoryObj<CalloutIconStory> = {
+	args: { s: false, icon: 'signHelp', palette: '' },
+	render: Template,
+};

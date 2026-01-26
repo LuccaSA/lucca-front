@@ -37,7 +37,7 @@ export class ButtonComponent {
 
 	readonly state = input<'default' | 'loading' | 'error' | 'success'>('default');
 
-	readonly luButton = input<'' | 'outlined' | 'AI' | 'ghost' | 'ghost-invert' | 'text' | 'text-invert'>('');
+	readonly luButton = input<'' | 'outlined' | 'AI' | 'AI-invert' | 'ghost' | 'ghost-invert' | 'text' | 'text-invert'>('');
 
 	/**
 	 * '' is the default value when you just set the `prButton` directive without a value attached to it.
@@ -66,6 +66,9 @@ export class ButtonComponent {
 		if (this.buttonType() !== '') {
 			if (this.buttonType() === 'ghost-invert') {
 				config['mod-ghost'] = true;
+				config['mod-invert'] = true;
+			} else if (this.luButton() === 'AI-invert') {
+				config['mod-AI'] = true;
 				config['mod-invert'] = true;
 			} else {
 				config[`mod-${this.buttonType()}`] = true;

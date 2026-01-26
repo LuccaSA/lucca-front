@@ -8,12 +8,8 @@
 	}
 
 	@layer mods {
-		@include media.max(XXS) {
-			@include compact;
-		}
-
-		@include media.min(XXS) {
-			@include notCompact;
+		@include media.max(XS) {
+			@include narrow;
 		}
 
 		@include media.pointer(coarse) {

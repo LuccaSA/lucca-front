@@ -1,5 +1,5 @@
 import { SkeletonTableComponent } from '@lucca-front/ng/skeleton';
-import { Meta, moduleMetadata, StoryFn } from '@storybook/angular';
+import { Meta, moduleMetadata, StoryObj } from '@storybook/angular';
 
 interface SkeletonTableStory {}
 
@@ -27,7 +27,7 @@ function getTemplate(args: SkeletonTableStory): string {
 	`;
 }
 
-const Template: StoryFn<SkeletonTableStory> = (args) => ({
+const Template = (args: SkeletonTableStory) => ({
 	props: args,
 	template: getTemplate(args),
 	styles: [
@@ -39,5 +39,7 @@ const Template: StoryFn<SkeletonTableStory> = (args) => ({
 	],
 });
 
-export const TableBodyOnly = Template.bind({});
-TableBodyOnly.args = {};
+export const TableBodyOnly: StoryObj<SkeletonTableStory> = {
+	args: {},
+	render: Template,
+};

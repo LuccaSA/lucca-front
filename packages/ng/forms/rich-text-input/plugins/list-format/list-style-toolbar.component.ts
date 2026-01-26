@@ -1,11 +1,11 @@
-import { ChangeDetectionStrategy, Component, forwardRef, OnDestroy, viewChildren } from '@angular/core';
+import { ChangeDetectionStrategy, Component, forwardRef, input, OnDestroy, viewChildren } from '@angular/core';
 import { mergeRegister } from '@lexical/utils';
 import { Klass, LexicalEditor, LexicalNode } from 'lexical';
 import { RICH_TEXT_PLUGIN_COMPONENT, RichTextPluginComponent } from '../../rich-text-input.component';
 import { registerListsGlobal } from './list-format.command';
 
 import { ListItemNode, ListNode } from '@lexical/list';
-import { getIntl } from '@lucca-front/ng/core';
+import { intlInputOptions } from '@lucca-front/ng/core';
 import { LU_RICH_TEXT_INPUT_TRANSLATIONS } from '../../rich-text-input.translate';
 import { ListFormatComponent } from './list-format.component';
 
@@ -30,7 +30,7 @@ export class ListStyleToolbarComponent implements OnDestroy, RichTextPluginCompo
 
 	pluginComponents = viewChildren(RICH_TEXT_PLUGIN_COMPONENT);
 
-	intl = getIntl(LU_RICH_TEXT_INPUT_TRANSLATIONS);
+	intl = input(...intlInputOptions(LU_RICH_TEXT_INPUT_TRANSLATIONS));
 
 	setEditorInstance(editor: LexicalEditor): void {
 		this.pluginComponents().forEach((plugin) => plugin.setEditorInstance(editor));

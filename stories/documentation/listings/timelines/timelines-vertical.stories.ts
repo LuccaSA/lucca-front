@@ -1,4 +1,4 @@
-import { Meta, StoryFn } from '@storybook/angular';
+import { Meta, StoryObj } from '@storybook/angular';
 
 interface TimelinesVerticalStory {
 	number: boolean;
@@ -12,12 +12,14 @@ export default {
 			control: {
 				type: 'boolean',
 			},
+			description: 'Présente la liste sous une forme ordonnée (avec un numéro associé à chaque élément).',
 		},
 		size: {
 			options: ['', 'mod-S', 'mod-L'],
 			control: {
 				type: 'radio',
 			},
+			description: 'Modifie la taille du composant.',
 		},
 	},
 } as Meta;
@@ -64,10 +66,12 @@ function getTemplate(args: TimelinesVerticalStory): string {
 	`;
 }
 
-const Template: StoryFn<TimelinesVerticalStory> = (args) => ({
+const Template = (args: TimelinesVerticalStory) => ({
 	props: args,
 	template: getTemplate(args),
 });
 
-export const Vertical = Template.bind({});
-Vertical.args = { number: false, size: '' };
+export const Vertical: StoryObj<TimelinesVerticalStory> = {
+	args: { number: false, size: '' },
+	render: Template,
+};

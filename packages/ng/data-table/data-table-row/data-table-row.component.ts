@@ -2,7 +2,7 @@ import { CdkDragHandle } from '@angular/cdk/drag-drop';
 import { NgTemplateOutlet } from '@angular/common';
 import { booleanAttribute, ChangeDetectionStrategy, Component, contentChildren, ElementRef, forwardRef, inject, input, model, ViewEncapsulation } from '@angular/core';
 import { FormsModule } from '@angular/forms';
-import { getIntl } from '@lucca-front/ng/core';
+import { intlInputOptions } from '@lucca-front/ng/core';
 import { FormFieldComponent } from '@lucca-front/ng/form-field';
 import { CheckboxInputComponent } from '@lucca-front/ng/forms';
 import { IconComponent } from '@lucca-front/ng/icon';
@@ -23,8 +23,8 @@ import { LU_DATA_TABLE_ROW_INSTANCE } from './data-table-row.token';
 		'[class.dataTable-body-row]': 'bodyRef !== null',
 		'[class.dataTable-head-row]': 'headRef !== null',
 		'[class.dataTable-foot-row]': 'footRef !== null',
-		'[class.mod-selectable]': 'tableRef.selectable()',
-		'[class.mod-draggable]': 'tableRef.drag()',
+		'[class.mod-selectable]': 'tableRef.selectable() ?? false',
+		'[class.mod-draggable]': 'tableRef.drag() ?? false',
 	},
 	imports: [CheckboxInputComponent, FormFieldComponent, FormsModule, NgTemplateOutlet, IconComponent, CdkDragHandle],
 	providers: [
@@ -36,7 +36,7 @@ import { LU_DATA_TABLE_ROW_INSTANCE } from './data-table-row.token';
 	changeDetection: ChangeDetectionStrategy.OnPush,
 })
 export class DataTableRowComponent {
-	intl = getIntl(LU_DATA_TABLE_TRANSLATIONS);
+	intl = input(...intlInputOptions(LU_DATA_TABLE_TRANSLATIONS));
 	bodyRef = inject(LU_DATA_TABLE_BODY_INSTANCE, { optional: true });
 	headRef = inject(LU_DATA_TABLE_HEAD_INSTANCE, { optional: true });
 	footRef = inject(LU_DATA_TABLE_FOOT_INSTANCE, { optional: true });
@@ -45,7 +45,7 @@ export class DataTableRowComponent {
 
 	public readonly cells = contentChildren(LU_DATA_TABLE_CELL_INSTANCE);
 
-	protected tableRef = inject(LU_DATA_TABLE_INSTANCE);
+	protected tableRef = inject(LU_DATA_TABLE_INSTANCE, { optional: true });
 
 	selected = model<boolean>(false);
 	readonly selectedLabel = input<string | null>(null);

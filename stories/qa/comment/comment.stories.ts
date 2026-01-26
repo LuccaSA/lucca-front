@@ -1,7 +1,7 @@
-import { Component, LOCALE_ID } from '@angular/core';
+import { ChangeDetectionStrategy, Component, LOCALE_ID } from '@angular/core';
 import { CommentBlockComponent, CommentComponent } from '@lucca-front/ng/comment';
 import { LuUserPictureComponent } from '@lucca-front/ng/user';
-import { applicationConfig, Meta, StoryFn } from '@storybook/angular';
+import { applicationConfig, Meta, StoryObj } from '@storybook/angular';
 
 @Component({
 	selector: 'comment-stories',
@@ -22,6 +22,7 @@ import { applicationConfig, Meta, StoryFn } from '@storybook/angular';
 			}
 		`,
 	],
+	changeDetection: ChangeDetectionStrategy.OnPush,
 })
 class CommentStory {
 	date = new Date();
@@ -37,6 +38,9 @@ export default {
 	],
 } as Meta;
 
-const template: StoryFn<CommentStory> = () => ({});
+const template = () => ({});
 
-export const Basic = template.bind({});
+export const Basic: StoryObj<CommentStory> = {
+	args: {},
+	render: template,
+};

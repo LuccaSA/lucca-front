@@ -1,11 +1,12 @@
-import { Component } from '@angular/core';
+import { ChangeDetectionStrategy, Component } from '@angular/core';
 import { PaginationComponent } from '@lucca-front/ng/pagination';
-import { Meta, StoryFn } from '@storybook/angular';
+import { Meta, StoryObj } from '@storybook/angular';
 
 @Component({
 	selector: 'pagination-stories',
 	templateUrl: './pagination.stories.html',
 	imports: [PaginationComponent],
+	changeDetection: ChangeDetectionStrategy.OnPush,
 })
 class PaginationStory {}
 
@@ -14,6 +15,9 @@ export default {
 	component: PaginationStory,
 } as Meta;
 
-const template: StoryFn<PaginationStory> = () => ({});
+const template = () => ({});
 
-export const Basic = template.bind({});
+export const Basic: StoryObj<PaginationStory> = {
+	args: {},
+	render: template,
+};

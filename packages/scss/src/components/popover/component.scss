@@ -10,7 +10,6 @@
 	position: relative;
 	min-block-size: var(--pr-t-spacings-500);
 	min-inline-size: var(--pr-t-spacings-500);
-	max-inline-size:  var(--components-popover-maxInlineSize);
 	animation: popup var(--commons-animations-durations-fast) ease 1 forwards;
 
 	// need of a higher specificity

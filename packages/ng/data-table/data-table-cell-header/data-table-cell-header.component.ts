@@ -41,7 +41,7 @@ import { LU_DATA_TABLE_CELL_INSTANCE } from '../data-table-cell.token';
 export class DataTableRowCellHeaderComponent extends BaseDataTableCell implements AfterContentInit {
 	elementRef = inject<ElementRef<HTMLTableCellElement>>(ElementRef);
 
-	sort = model<undefined | null | 'ascending' | 'descending'>(undefined);
+	sort = model<null | 'none' | 'ascending' | 'descending'>(null);
 	fixedWidth = input<string | null>(null);
 	inlineSize = input<string | null>(null);
 

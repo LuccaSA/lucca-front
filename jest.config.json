@@ -17,6 +17,7 @@
     "^@lucca-front/ng/(.*)$": "<rootDir>/packages/ng/$1/public-api.ts",
     "^@lucca/prisme/(.*)$": "<rootDir>/packages/prisme/$1/public-api.ts",
     "^@/stories/(.*)$": "<rootDir>/stories/documentation/$1",
+    "^ora$": "<rootDir>/packages/ng/schematics/mocks/ora.js",
     "^(\\.{1,2}/.*)\\.js$": "$1"
   },
   "roots": [
@@ -24,5 +25,8 @@
     "<rootDir>/packages/prisme",
     "<rootDir>/stories/documentation"
   ],
+  "testEnvironment": "jsdom",
+
+  "transformIgnorePatterns": ["node_modules/(?!@angular|@angular-devkit|@ngneat|ngx-mask|@testing-library)"],
   "globalSetup": "./jest-global-setup.js"
 }

@@ -7,12 +7,16 @@
 	@layer base {
 		& {
 			-moz-osx-font-smoothing: grayscale;
+
+			--icon-fontFamily: '#{config.$font-name}';
 		}
 	}
 } @else {
 	@layer base {
 		body {
 			-moz-osx-font-smoothing: grayscale;
+
+			--icon-fontFamily: '#{config.$font-name}';
 		}
 	}
 }

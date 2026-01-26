@@ -1,12 +1,13 @@
-import { Component } from '@angular/core';
+import { ChangeDetectionStrategy, Component } from '@angular/core';
 import { TagComponent } from '@lucca-front/ng/tag';
-import { Meta, StoryFn } from '@storybook/angular';
+import { Meta, StoryObj } from '@storybook/angular';
 import { PaletteAllArgType } from 'stories/helpers/common-arg-types';
 
 @Component({
 	selector: 'tags-stories',
 	templateUrl: './tags.stories.html',
 	imports: [TagComponent],
+	changeDetection: ChangeDetectionStrategy.OnPush,
 })
 class TagsStory {
 	paletteOptions = PaletteAllArgType.options;
@@ -17,6 +18,9 @@ export default {
 	component: TagsStory,
 } as Meta;
 
-const template: StoryFn<TagsStory> = () => ({});
+const template = () => ({});
 
-export const Basic = template.bind({});
+export const Basic: StoryObj<TagsStory> = {
+	args: {},
+	render: template,
+};

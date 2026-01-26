@@ -1,9 +1,10 @@
-import { Component } from '@angular/core';
-import { Meta, StoryFn } from '@storybook/angular';
+import { ChangeDetectionStrategy, Component } from '@angular/core';
+import { Meta, StoryObj } from '@storybook/angular';
 
 @Component({
 	selector: 'list-stories',
 	templateUrl: './list.stories.html',
+	changeDetection: ChangeDetectionStrategy.OnPush,
 })
 class ListStory {}
 
@@ -12,6 +13,9 @@ export default {
 	component: ListStory,
 } as Meta;
 
-const template: StoryFn<ListStory> = () => ({});
+const template = () => ({});
 
-export const Basic = template.bind({});
+export const Basic: StoryObj<ListStory> = {
+	args: {},
+	render: template,
+};

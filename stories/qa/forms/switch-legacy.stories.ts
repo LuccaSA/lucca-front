@@ -1,9 +1,10 @@
-import { Component } from '@angular/core';
-import { Meta, StoryFn, moduleMetadata } from '@storybook/angular';
+import { ChangeDetectionStrategy, Component } from '@angular/core';
+import { Meta, moduleMetadata, StoryObj } from '@storybook/angular';
 
 @Component({
 	selector: 'forms-switch-legacy-stories',
 	templateUrl: './switch-legacy.stories.html',
+	changeDetection: ChangeDetectionStrategy.OnPush,
 })
 class SwitchLegacyStory {}
 
@@ -17,6 +18,9 @@ export default {
 	],
 } as Meta;
 
-const template: StoryFn<SwitchLegacyStory> = () => ({});
+const template = () => ({});
 
-export const Basic = template.bind({});
+export const Basic: StoryObj<SwitchLegacyStory> = {
+	args: {},
+	render: template,
+};

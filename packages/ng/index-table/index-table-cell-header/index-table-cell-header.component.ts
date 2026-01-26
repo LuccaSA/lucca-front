@@ -38,7 +38,7 @@ import { LU_INDEX_TABLE_CELL_INSTANCE } from '../index-table-cell.token';
 export class IndexTableRowCellHeaderComponent extends BaseIndexTableCell {
 	elementRef = inject<ElementRef<HTMLTableCellElement>>(ElementRef);
 
-	sort = model<undefined | null | 'ascending' | 'descending'>(undefined);
+	sort = model<null | 'none' | 'ascending' | 'descending'>(null);
 	selectable = input(false, { transform: booleanAttribute });
 	hiddenLabel = input(false, { transform: booleanAttribute });
 	actions = input(false, { transform: booleanAttribute });

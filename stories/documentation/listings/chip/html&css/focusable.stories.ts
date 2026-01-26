@@ -1,4 +1,4 @@
-import { Meta, StoryFn } from '@storybook/angular';
+import { Meta, StoryObj } from '@storybook/angular';
 
 interface ChipFocusableStory {}
 
@@ -13,10 +13,12 @@ function getTemplate(args: ChipFocusableStory): string {
 </button>`;
 }
 
-const Template: StoryFn<ChipFocusableStory> = (args) => ({
+const Template = (args: ChipFocusableStory) => ({
 	props: args,
 	template: getTemplate(args),
 });
 
-export const Focusable = Template.bind({});
-Focusable.args = {};
+export const Focusable: StoryObj<ChipFocusableStory> = {
+	args: {},
+	render: Template,
+};

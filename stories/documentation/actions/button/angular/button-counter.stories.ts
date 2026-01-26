@@ -23,7 +23,7 @@ export default {
 export const Basic: StoryObj<ButtonComponent> = {
 	argTypes: {
 		luButton: {
-			options: ['', 'outlined', 'ghost', 'ghost-invert', 'AI'],
+			options: ['', 'outlined', 'ghost', 'ghost-invert', 'AI', 'AI-invert'],
 			control: {
 				type: 'select',
 			},
@@ -35,6 +35,10 @@ export const Basic: StoryObj<ButtonComponent> = {
 		palette: {
 			if: { arg: 'luButton', neq: 'AI' },
 			description: 'Applique une palette de couleurs au bouton.',
+			options: ['', 'product', 'neutral', 'success', 'warning', 'critical'],
+			control: {
+				type: 'select',
+			},
 		},
 		state: {
 			description: "Modifie l'état du bouton.",

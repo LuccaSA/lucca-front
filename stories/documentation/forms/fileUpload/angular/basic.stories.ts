@@ -123,7 +123,7 @@ export default {
 			description: 'Limite le poids des fichiers importables (en octets).',
 		},
 		illustration: {
-			options: ['paper', 'picture'],
+			options: ['invoice', 'picture'],
 			control: {
 				type: 'select',
 			},
@@ -253,7 +253,7 @@ export const Single = {
 			},
 		],
 		fileMaxSize: 5000000,
-		illustration: 'paper',
+		illustration: 'invoice',
 		displayFileName: false,
 		structure: false,
 	},

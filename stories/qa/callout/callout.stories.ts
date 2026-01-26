@@ -1,4 +1,4 @@
-import { Component } from '@angular/core';
+import { ChangeDetectionStrategy, Component } from '@angular/core';
 import { ButtonComponent } from '@lucca-front/ng/button';
 import {
 	CalloutActionsComponent,
@@ -9,7 +9,7 @@ import {
 	CalloutFeedbackListComponent,
 	CalloutPopoverComponent,
 } from '@lucca-front/ng/callout';
-import { Meta, StoryFn } from '@storybook/angular';
+import { Meta, StoryObj } from '@storybook/angular';
 
 @Component({
 	selector: 'callout-stories',
@@ -24,6 +24,7 @@ import { Meta, StoryFn } from '@storybook/angular';
 		CalloutFeedbackItemComponent,
 		CalloutPopoverComponent,
 	],
+	changeDetection: ChangeDetectionStrategy.OnPush,
 })
 class CalloutStory {}
 
@@ -32,6 +33,9 @@ export default {
 	component: CalloutStory,
 } as Meta;
 
-const template: StoryFn<CalloutStory> = () => ({});
+const template = () => ({});
 
-export const Basic = template.bind({});
+export const Basic: StoryObj<CalloutStory> = {
+	args: {},
+	render: template,
+};

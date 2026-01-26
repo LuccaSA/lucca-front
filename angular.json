@@ -65,11 +65,11 @@
         "storybook": {
           "builder": "@storybook/angular:start-storybook",
           "options": {
+            "configDir": ".storybook",
             "browserTarget": "ng:build",
             "compodoc": true,
             "compodocArgs": [
-              "-p",
-              "./tsconfig.compodoc-json.json",
+
               "-e",
               "json",
               "-d",
@@ -89,17 +89,16 @@
         },
         "build-storybook": {
           "builder": "@storybook/angular:build-storybook",
-          "options": {
+          "options": {"configDir": ".storybook",
             "browserTarget": "ng:build",
             "compodoc": true,
             "compodocArgs": [
-              "-p",
-              "./tsconfig.compodoc-json.json",
+
               "-e",
               "json",
               "-d",
               ".storybook"
-            ],
+            ],"outputDir": "storybook-static",
             "styles": [
               ".storybook/styles.scss"
             ],

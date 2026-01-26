@@ -1,4 +1,4 @@
-import { Meta, StoryFn } from '@storybook/angular';
+import { Meta, StoryObj } from '@storybook/angular';
 
 interface BorderRadiusDeprecatedStory {}
 
@@ -37,7 +37,7 @@ function getTemplate(args: BorderRadiusDeprecatedStory): string {
 </div>`;
 }
 
-const Template: StoryFn<BorderRadiusDeprecatedStory> = (args) => ({
+const Template = (args: BorderRadiusDeprecatedStory) => ({
 	props: args,
 	template: getTemplate(args),
 	styles: [
@@ -51,5 +51,7 @@ const Template: StoryFn<BorderRadiusDeprecatedStory> = (args) => ({
 	],
 });
 
-export const BorderRadius = Template.bind({});
-BorderRadius.args = {};
+export const BorderRadius: StoryObj<BorderRadiusDeprecatedStory> = {
+	args: {},
+	render: Template,
+};

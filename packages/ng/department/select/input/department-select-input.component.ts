@@ -1,9 +1,9 @@
 import { A11yModule } from '@angular/cdk/a11y';
 import { Overlay, OverlayModule } from '@angular/cdk/overlay';
-import { AfterViewInit, ChangeDetectionStrategy, ChangeDetectorRef, Component, ElementRef, forwardRef, Input, Renderer2, ViewContainerRef } from '@angular/core';
+import { AfterViewInit, ChangeDetectionStrategy, ChangeDetectorRef, Component, ElementRef, forwardRef, input, Input, Renderer2, ViewContainerRef } from '@angular/core';
 import { ControlValueAccessor, NG_VALUE_ACCESSOR } from '@angular/forms';
 import { ClearComponent } from '@lucca-front/ng/clear';
-import { getIntl } from '@lucca-front/ng/core';
+import { intlInputOptions } from '@lucca-front/ng/core';
 import { LuInputDisplayerDirective } from '@lucca-front/ng/input';
 import {
 	ILuTreeOptionPickerPanel,
@@ -48,9 +48,9 @@ import { LU_DEPARTMENT_SELECT_INPUT_TRANSLATIONS } from './department-select-inp
 	],
 })
 export class LuDepartmentSelectInputComponent<
-		D extends import('../../department.model').ILuDepartment = import('../../department.model').ILuDepartment,
-		P extends ILuTreeOptionPickerPanel<D> = ILuTreeOptionPickerPanel<D>,
-	>
+	D extends import('../../department.model').ILuDepartment = import('../../department.model').ILuDepartment,
+	P extends ILuTreeOptionPickerPanel<D> = ILuTreeOptionPickerPanel<D>,
+>
 	extends ALuSelectInputComponent<D, P>
 	implements ControlValueAccessor, ILuInputWithPicker<D>, AfterViewInit
 {
@@ -61,7 +61,7 @@ export class LuDepartmentSelectInputComponent<
 	@Input() filters: string[] = [];
 	@Input() uniqueOperation: number;
 
-	public intl = getIntl(LU_DEPARTMENT_SELECT_INPUT_TRANSLATIONS);
+	public intl = input(...intlInputOptions(LU_DEPARTMENT_SELECT_INPUT_TRANSLATIONS));
 
 	constructor(
 		protected override _changeDetectorRef: ChangeDetectorRef,

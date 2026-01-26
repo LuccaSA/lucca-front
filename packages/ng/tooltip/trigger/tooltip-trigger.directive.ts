@@ -10,28 +10,28 @@ import {
 } from '@angular/cdk/overlay';
 import { ComponentPortal } from '@angular/cdk/portal';
 import {
-	DestroyRef,
-	Directive,
-	EffectRef,
-	ElementRef,
-	Injector,
-	NgZone,
-	OnDestroy,
-	Renderer2,
 	booleanAttribute,
 	computed,
+	DestroyRef,
+	Directive,
 	effect,
+	EffectRef,
+	ElementRef,
 	inject,
+	Injector,
 	input,
 	linkedSignal,
+	NgZone,
 	numberAttribute,
+	OnDestroy,
+	Renderer2,
 	signal,
 } from '@angular/core';
 import { takeUntilDestroyed, toObservable, toSignal } from '@angular/core/rxjs-interop';
 import { SafeHtml } from '@angular/platform-browser';
 import { isNotNil, ɵeffectWithDeps } from '@lucca-front/ng/core';
 import { LuPopoverPosition } from '@lucca-front/ng/popover';
-import { Observable, combineLatest, startWith, switchMap, timer } from 'rxjs';
+import { combineLatest, Observable, startWith, switchMap, timer } from 'rxjs';
 import { debounce, debounceTime, filter, map, tap } from 'rxjs/operators';
 import { LuTooltipPanelComponent } from '../panel';
 import { EllipsisRuler } from './ellipsis.ruler';
@@ -62,7 +62,9 @@ export class LuTooltipTriggerDirective implements OnDestroy {
 	readonly #injector = inject(Injector);
 	readonly #destroyRef = inject(DestroyRef);
 
-	readonly luTooltip = input<string | SafeHtml>();
+	readonly luTooltipInput = input<string | SafeHtml>('', { alias: 'luTooltip' });
+
+	readonly luTooltip = linkedSignal<string | SafeHtml>(() => this.luTooltipInput());
 
 	readonly luTooltipEnterDelay = input(300, { transform: numberAttribute });
 	readonly luTooltipLeaveDelay = input(100, { transform: numberAttribute });
@@ -73,9 +75,13 @@ export class LuTooltipTriggerDirective implements OnDestroy {
 
 	readonly luTooltipPosition = input<LuPopoverPosition>('above');
 
-	readonly luTooltipWhenEllipsis = input(false, { transform: booleanAttribute });
+	readonly luTooltipWhenEllipsisInput = input(false, { alias: 'luTooltipWhenEllipsis', transform: booleanAttribute });
+
+	readonly luTooltipWhenEllipsis = linkedSignal(() => this.luTooltipWhenEllipsisInput());
 
 	readonly luTooltipAnchor = input<FlexibleConnectedPositionStrategyOrigin>(this.#host);
+
+	readonly id = input<string>(`${this.#host.nativeElement.tagName.toLowerCase()}-tooltip-${nextId++}`);
 
 	readonly resize$ = new Observable<void>((observer) => {
 		const resizeObserver = new ResizeObserver(() => {
@@ -114,7 +120,7 @@ export class LuTooltipTriggerDirective implements OnDestroy {
 			// We only filter open events because even if it's disabled while opened,
 			// we want the tooltip to be able to close itself no matter what
 			if (this.luTooltipDisabled()) {
-				return previous.value;
+				return previous?.value;
 			}
 
 			// If not disabled, let's check for ellipsis if needed
@@ -144,10 +150,6 @@ export class LuTooltipTriggerDirective implements OnDestroy {
 	onBlur() {
 		this.#action.set('close');
 	}
-
-	readonly #generatedId = `${this.#host.nativeElement.tagName.toLowerCase()}-tooltip-${nextId++}`;
-
-	readonly id = signal<string>(this.#host.nativeElement.id || this.#generatedId);
 
 	readonly ariaDescribedBy = computed(() => {
 		if (this.luTooltipDisabled() || this.luTooltipWhenEllipsis() || this.luTooltipOnlyForDisplay()) {

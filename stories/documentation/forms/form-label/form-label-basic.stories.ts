@@ -1,4 +1,4 @@
-import { Meta, StoryFn } from '@storybook/angular';
+import { Meta, StoryObj } from '@storybook/angular';
 
 interface FormLabelBasicStory {}
 
@@ -18,10 +18,12 @@ function getTemplate(args: FormLabelBasicStory): string {
 </label>`;
 }
 
-const Template: StoryFn<FormLabelBasicStory> = (args) => ({
+const Template = (args: FormLabelBasicStory) => ({
 	props: args,
 	template: getTemplate(args),
 });
 
-export const Basic = Template.bind({});
-Basic.args = {};
+export const Basic: StoryObj<FormLabelBasicStory> = {
+	args: {},
+	render: Template,
+};

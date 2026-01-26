@@ -83,6 +83,7 @@ export default {
 		return {
 			styles: [
 				`
+@layer components {
 	.appLayout {
 		--components-appLayout-blockSize: 100%;
 		--components-appLayout-inlineSize: 100%;
@@ -143,13 +144,16 @@ export default {
 
 	.mainLayout-sidebar {
 		background-color: var(--palettes-neutral-50);
-		padding: var(--pr-t-spacings-150);
 		align-items: center;
 		justify-content: center;
 		display: flex;
 		flex-direction: column;
 		color: var(--palettes-brand-700);
 		font-family: monospace;
+
+		&:not(:empty) {
+			padding: var(--pr-t-spacings-150);
+		}
 	}
 
 	.mainLayout-content-inside {
@@ -172,6 +176,7 @@ export default {
 		font-family: monospace;
 		white-space: nowrap;
 	}
+}
 				`,
 			],
 			template: `

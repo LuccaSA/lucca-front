@@ -1,6 +1,6 @@
-import { Component } from '@angular/core';
+import { ChangeDetectionStrategy, Component } from '@angular/core';
 import { LoadingComponent } from '@lucca-front/ng/loading';
-import { Meta, StoryFn } from '@storybook/angular';
+import { Meta, StoryObj } from '@storybook/angular';
 
 @Component({
 	selector: 'loadings-stories',
@@ -9,6 +9,7 @@ import { Meta, StoryFn } from '@storybook/angular';
 		'.loading::after { animation-play-state: paused; } .demo-invert { background: #444; display: inline-block; padding-block: var(--pr-t-spacings-100); padding-inline: var(--pr-t-spacings-200); margin-block: 0; margin-inline: var(--pr-t-spacings-100); border-radius: var(--pr-t-border-radius-50); }',
 	],
 	imports: [LoadingComponent],
+	changeDetection: ChangeDetectionStrategy.OnPush,
 })
 class LoadingsStory {}
 
@@ -17,6 +18,9 @@ export default {
 	component: LoadingsStory,
 } as Meta;
 
-const template: StoryFn<LoadingsStory> = () => ({});
+const template = () => ({});
 
-export const Basic = template.bind({});
+export const Basic: StoryObj<LoadingsStory> = {
+	args: {},
+	render: template,
+};
