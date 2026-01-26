@@ -167,8 +167,8 @@
 </ng-container>
 
 <ng-container *luPresentationDisplay>
-	<span class="pr-u-mask">{{ intl.from }}</span>
+	<span class="pr-u-mask">{{ intl().from }}</span>
 	{{ startLabel() }}
-	<lu-icon [icon]="'arrowRight'" size="XS" [alt]="intl.to" />
+	<lu-icon [icon]="'arrowRight'" size="XS" [alt]="intl().to" />
 	{{ endLabel() }}
 </ng-container>
