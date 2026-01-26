@@ -32,7 +32,7 @@ import { FORM_FIELD_INSTANCE } from './form-field.token';
 import { LU_FORM_FIELD_TRANSLATIONS } from './form-field.translate';
 import { InputDirective } from './input.directive';
 import { INPUT_FRAMED_INSTANCE } from './public-api';
-import { LU_FORM_INSTANCE } from '../form/form-instance';
+import { LU_FORM_INSTANCE } from '@lucca-front/ng/form';
 
 let nextId = 0;
 
@@ -104,7 +104,7 @@ export class FormFieldComponent implements OnDestroy, DoCheck {
 	readonly iconAItooltip = input<string | null>(null);
 	readonly iconAIalt = input<string | null>(null);
 
-	readonly width = input<FormFieldWidth, FormFieldWidth | `${FormFieldWidth}`>(null, {
+	readonly width = input<FormFieldWidth, FormFieldWidth | `${FormFieldWidth}` | null>(null, {
 		transform: numberAttribute as (value: FormFieldWidth | `${FormFieldWidth}`) => FormFieldWidth,
 	});
 
