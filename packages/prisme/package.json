@@ -15,11 +15,13 @@
   ],
   "author": "Guilde Front Lucca <guilde-front@lucca.fr>",
   "peerDependencies": {
-    "@angular/cdk": "^20.0.3",
-    "@angular/common": "^20.0.7",
-    "@angular/core": "^20.0.2",
-    "@lucca-front/icons": "*",
+    "@angular/common": "^21.0.0",
+    "@angular/core": "^21.0.0",
+    "@angular/cdk": "^21.0.0",
+    "@angular/animations": "^21.0.0",
     "@types/dompurify": "^3.0.0",
+    "@lucca-front/icons": "*",
+    "@lucca-front/scss": "*",
     "isomorphic-dompurify": "^2.11.0",
     "date-fns": "^3.6.0",
     "rxjs": "^7.8.0"
