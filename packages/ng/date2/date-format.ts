@@ -1,17 +1,24 @@
-export function getDateFormat(locale: string): string {
-	return new Intl.DateTimeFormat(locale).formatToParts(new Date('01/01/2024')).reduce((acc, part) => {
-		switch (part.type) {
-			case 'day':
+import { CalendarMode } from './public-api';
+
+export function getDateFormat(locale: string, mode: CalendarMode = 'day'): string {
+	return new Intl.DateTimeFormat(locale)
+		.formatToParts(new Date('01/01/2024'))
+		.reduce((acc, part) => {
+			if (part.type === 'day' && mode === 'day') {
 				return `${acc}${'d'.repeat(part.value.length)}`;
-			case 'month':
+			}
+			if (part.type === 'month' && mode !== 'year') {
 				return `${acc}${'M'.repeat(part.value.length)}`;
-			case 'year':
+			}
+			if (part.type === 'year') {
 				return `${acc}${'y'.repeat(part.value.length)}`;
-			case 'literal':
+			}
+			if (part.type === 'literal') {
 				return `${acc}${part.value}`;
-		}
-		return acc;
-	}, '');
+			}
+			return acc;
+		}, '')
+		.replace(/^\/+/, '');
 }
 
 export function getSeparator(locale: string): string {
