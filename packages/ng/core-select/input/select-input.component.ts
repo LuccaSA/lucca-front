@@ -15,6 +15,7 @@ import {
 	OnDestroy,
 	OnInit,
 	output,
+	Signal,
 	signal,
 	TemplateRef,
 	Type,
@@ -22,13 +23,13 @@ import {
 } from '@angular/core';
 import { outputFromObservable, toSignal } from '@angular/core/rxjs-interop';
 import { ControlValueAccessor } from '@angular/forms';
-import { getIntl, PortalContent } from '@lucca-front/ng/core';
+import { PortalContent } from '@lucca-front/ng/core';
 import { FILTER_PILL_HOST_COMPONENT, FILTER_PILL_INPUT_COMPONENT, FilterPillInputComponent } from '@lucca-front/ng/filter-pills';
 import { BehaviorSubject, defer, map, Observable, of, ReplaySubject, startWith, Subject, switchMap, take } from 'rxjs';
 import { LuOptionGrouping, LuSimpleSelectDefaultOptionComponent } from '../option';
 import { LuSelectPanelRef } from '../panel';
 import { CoreSelectAddOptionStrategy, LuOptionComparer, LuOptionContext, SELECT_LABEL, SELECT_LABEL_ID } from '../select.model';
-import { LU_CORE_SELECT_TRANSLATIONS } from '../select.translate';
+import { LuCoreSelectLabel } from '../select.translate';
 import { TreeNode } from './model';
 import { TreeGenerator } from './tree-generator';
 
@@ -49,7 +50,7 @@ export abstract class ALuSelectInputComponent<TOption, TValue> implements OnDest
 	protected labelElement: HTMLElement | undefined = inject(SELECT_LABEL);
 	protected labelId: string = inject(SELECT_LABEL_ID);
 
-	protected coreIntl = getIntl(LU_CORE_SELECT_TRANSLATIONS);
+	protected abstract intl: Signal<LuCoreSelectLabel>;
 
 	protected filterPillHost = inject(FILTER_PILL_HOST_COMPONENT, { optional: true });
 	protected afterCloseFn?: () => void;
@@ -98,8 +99,17 @@ export abstract class ALuSelectInputComponent<TOption, TValue> implements OnDest
 		return this.clueChange$.observed;
 	}
 
+	#addOptionLabelInput = signal<PortalContent | null>(null);
+	protected computedAddOptionLabel = computed(() => this.#addOptionLabelInput() ?? this.intl().addOption);
+
 	@Input()
-	addOptionLabel: PortalContent = this.coreIntl.addOption;
+	set addOptionLabel(label: PortalContent) {
+		this.#addOptionLabelInput.set(label);
+	}
+
+	get addOptionLabel(): PortalContent {
+		return this.computedAddOptionLabel();
+	}
 
 	@Input()
 	set addOptionStrategy(strategy: CoreSelectAddOptionStrategy) {
@@ -305,7 +315,7 @@ export abstract class ALuSelectInputComponent<TOption, TValue> implements OnDest
 				if (this.isPanelOpen) {
 					// Prevent form submission when selecting a value with Enter
 					$event.preventDefault();
-					this.panelRef.selectCurrentlyHighlightedValue();
+					this.panelRef?.selectCurrentlyHighlightedValue();
 				} else {
 					this.panelRef?.handleKeyManagerEvent($event);
 				}
@@ -448,7 +458,7 @@ export abstract class ALuSelectInputComponent<TOption, TValue> implements OnDest
 		this.onTouched?.();
 		if (!this.filterPillMode) {
 			this.isPanelOpen$.next(false);
-			this.panelRef.close();
+			this.panelRef?.close();
 			this._panelRef = undefined;
 			this.focusInput();
 		}
@@ -490,7 +500,7 @@ export abstract class ALuSelectInputComponent<TOption, TValue> implements OnDest
 	enableFilterPillMode() {
 		this.filterPillMode = true;
 		this.#defaultFilterPillClearable.set(true);
-		this._panelRef.closed.subscribe(this.afterCloseFn);
+		this._panelRef?.closed.subscribe(this.afterCloseFn);
 		this.bindInputToPanelRefEvents();
 	}
 

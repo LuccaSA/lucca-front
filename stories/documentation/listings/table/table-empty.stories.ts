@@ -4,6 +4,8 @@ import { Meta, moduleMetadata, StoryObj } from '@storybook/angular';
 
 interface TableBasicStory {
 	withOverflow: boolean;
+	navSide: boolean;
+	navSideCompact: boolean;
 }
 
 export default {
@@ -14,21 +16,23 @@ export default {
 		}),
 	],
 	argTypes: {
-		withOverflow: {
-			control: {
-				type: 'boolean',
-			},
+		navSideCompact: {
+			if: { arg: 'navSide', truthy: true },
 		},
 	},
 } as Meta;
 
 function getTemplate(args: TableBasicStory): string {
-	const style = args.withOverflow ? `style="width: 200vw"` : '';
+	const style = args.withOverflow ? ` style="width: 200vw"` : '';
+	const compact = args.navSideCompact ? ` mod-compact` : '';
+	const navsideTpl = args.navSide
+		? `<div class="navSide mod-withBanner${compact}"></div>
+		`
+		: ``;
 
 	return `
-		<div class="navSide mod-withBanner"></div>
-		<div class="main-content">
-			<table class="table" role="presentation" ${style}>
+		${navsideTpl}<div class="main-content">
+			<table class="table" role="presentation"${style}>
 				<thead class="table-head" inert="inert">
 					<tr class="table-head-row">
 						<th class="table-head-row-cell">Label</th>
@@ -69,6 +73,8 @@ const Template = (args: TableBasicStory) => ({
 export const Basic: StoryObj<TableBasicStory> = {
 	args: {
 		withOverflow: false,
+		navSide: true,
+		navSideCompact: false,
 	},
 	render: Template,
 };

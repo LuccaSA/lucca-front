@@ -1,5 +1,5 @@
 import { booleanAttribute, computed, Directive, effect, inject, input, LOCALE_ID, output } from '@angular/core';
-import { getIntl } from '@lucca-front/ng/core';
+import { intlInputOptions } from '@lucca-front/ng/core';
 import { FORM_FIELD_INSTANCE } from '@lucca-front/ng/form-field';
 import { LU_FILE_UPLOAD_TRANSLATIONS } from '../file-upload.translate';
 import { formatFileSize, MEGA_BYTE } from '../formatter';
@@ -14,7 +14,7 @@ export abstract class BaseFileUploadComponent {
 
 	protected droppable = false;
 
-	intl = getIntl(LU_FILE_UPLOAD_TRANSLATIONS);
+	intl = input(...intlInputOptions(LU_FILE_UPLOAD_TRANSLATIONS));
 
 	protected formFieldRef = inject(FORM_FIELD_INSTANCE, { optional: true });
 
@@ -25,20 +25,27 @@ export abstract class BaseFileUploadComponent {
 			format: string;
 			name?: string;
 		}>
-	>([
+	>([]);
+
+	protected defaultAccept = computed(() => [
 		{
 			format: '*',
-			name: this.intl.all,
+			name: this.intl().all,
 		},
 	]);
 
+	protected resolvedAccept = computed(() => {
+		const acceptValue = this.accept();
+		return acceptValue.length > 0 ? acceptValue : this.defaultAccept();
+	});
+
 	acceptNames = computed(() =>
-		this.accept()
+		this.resolvedAccept()
 			.filter((e) => e.name)
 			.map((e) => e.name),
 	);
 
-	acceptAttribute = computed(() => this.accept().map((e) => e.format));
+	acceptAttribute = computed(() => this.resolvedAccept().map((e) => e.format));
 
 	acceptAll = computed(() => {
 		return this.acceptAttribute().some((str) => str.includes('*'));

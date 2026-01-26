@@ -19,7 +19,7 @@
 				#popoverRef="luPopover2"
 				luPopoverNoCloseButton
 				[customPositions]="popoverPositions"
-				[luTooltip]="intl.toggleMultilanguage"
+				[luTooltip]="intl().toggleMultilanguage"
 				type="button"
 				class="button mod-onlyIcon mod-ghost textField-input-affix-toggle"
 			>
@@ -31,7 +31,7 @@
 						@for (row of panelInputs(); track row.cultureCode) {
 							<lu-form-field
 								[size]="formFieldSize()"
-								[label]="intl.translateTo | intlParams: { lang: getLocaleDisplayName(row.cultureCode) }"
+								[label]="intl().translateTo | intlParams: { lang: getLocaleDisplayName(row.cultureCode) }"
 								hiddenLabel
 							>
 								<lu-text-input

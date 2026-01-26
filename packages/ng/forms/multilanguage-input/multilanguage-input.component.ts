@@ -1,12 +1,12 @@
 import { ConnectionPositionPair } from '@angular/cdk/overlay';
 import { booleanAttribute, ChangeDetectionStrategy, Component, computed, forwardRef, inject, input, LOCALE_ID, signal, ViewEncapsulation, WritableSignal } from '@angular/core';
 import { ControlValueAccessor, FormsModule, NG_VALUE_ACCESSOR, ReactiveFormsModule } from '@angular/forms';
-import { getIntl, IntlParamsPipe } from '@lucca-front/ng/core';
+import { intlInputOptions, IntlParamsPipe } from '@lucca-front/ng/core';
 import { FORM_FIELD_INSTANCE, FormFieldComponent, InputDirective, ɵPresentationDisplayDefaultDirective } from '@lucca-front/ng/form-field';
 import { PopoverDirective } from '@lucca-front/ng/popover2';
 import { LuTooltipTriggerDirective } from '@lucca-front/ng/tooltip';
 import { TextInputComponent } from '../text-input/text-input.component';
-import { MultilanguageTranslation } from './model/multilanguage-translation';
+import { INVARIANT_CULTURE_CODE, MultilanguageTranslation } from './model/multilanguage-translation';
 import { LU_MULTILANGUAGE_INPUT_TRANSLATIONS } from './multilanguage-input.translate';
 
 @Component({
@@ -40,7 +40,7 @@ export class MultilanguageInputComponent implements ControlValueAccessor {
 
 	#intlDisplay = new Intl.DisplayNames([this.#localeId], { type: 'language' });
 
-	intl = getIntl(LU_MULTILANGUAGE_INPUT_TRANSLATIONS);
+	intl = input(...intlInputOptions(LU_MULTILANGUAGE_INPUT_TRANSLATIONS));
 
 	#formFieldRef = inject(FORM_FIELD_INSTANCE);
 
@@ -60,11 +60,11 @@ export class MultilanguageInputComponent implements ControlValueAccessor {
 	model: WritableSignal<MultilanguageTranslation[]> = signal([] as MultilanguageTranslation[]);
 
 	invariant = computed(() => {
-		return this.model().find((row) => row.cultureCode === 'invariant') || { value: '' };
+		return this.model().find((row) => row.cultureCode === INVARIANT_CULTURE_CODE) || { value: '' };
 	});
 
 	panelInputs = computed(() => {
-		return this.model().filter((row) => row.cultureCode !== 'invariant');
+		return this.model().filter((row) => row.cultureCode !== INVARIANT_CULTURE_CODE);
 	});
 
 	presentationValue = computed(() => {
@@ -85,7 +85,7 @@ export class MultilanguageInputComponent implements ControlValueAccessor {
 			value = [];
 		}
 		if (value.length > 0) {
-			if (!value.some((row) => row.cultureCode === 'invariant')) {
+			if (!value.some((row) => row.cultureCode === INVARIANT_CULTURE_CODE)) {
 				throw new Error('Please provide an invariant translation in translation array');
 			}
 			this.model.set(value);

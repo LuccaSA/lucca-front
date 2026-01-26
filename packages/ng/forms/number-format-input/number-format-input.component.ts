@@ -3,7 +3,7 @@ import { AfterViewInit, booleanAttribute, ChangeDetectionStrategy, Component, co
 import { takeUntilDestroyed } from '@angular/core/rxjs-interop';
 import { ReactiveFormsModule } from '@angular/forms';
 import { ClearComponent } from '@lucca-front/ng/clear';
-import { getIntl } from '@lucca-front/ng/core';
+import { intlInputOptions } from '@lucca-front/ng/core';
 import { InputDirective, ɵPresentationDisplayDefaultDirective } from '@lucca-front/ng/form-field';
 import { NumberFormat, NumberFormatCurrencyDisplay, NumberFormatDirective, NumberFormatOptions, NumberFormatStyle, NumberFormatUnit, NumberFormatUnitDisplay } from '@lucca-front/ng/number-format';
 import { startWith } from 'rxjs/operators';
@@ -105,7 +105,7 @@ export class NumberFormatInputComponent implements AfterViewInit {
 
 	formattedValue = computed(() => this.#numberFormat().getBlurFormat(this.#suffixPrefixValue()));
 
-	readonly intl = getIntl(LU_NUMBERFORMATFIELD_TRANSLATIONS);
+	readonly intl = input(...intlInputOptions(LU_NUMBERFORMATFIELD_TRANSLATIONS));
 
 	clearValue(): void {
 		this.ngControl.reset();

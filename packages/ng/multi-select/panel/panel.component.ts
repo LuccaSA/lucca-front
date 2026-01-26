@@ -1,8 +1,9 @@
 import { A11yModule } from '@angular/cdk/a11y';
 import { AsyncPipe, NgTemplateOutlet } from '@angular/common';
 import { AfterViewInit, ChangeDetectionStrategy, Component, computed, forwardRef, inject, signal, TrackByFunction } from '@angular/core';
+import { toObservable } from '@angular/core/rxjs-interop';
 import { FormsModule } from '@angular/forms';
-import { getIntl, PortalDirective } from '@lucca-front/ng/core';
+import { PortalDirective } from '@lucca-front/ng/core';
 import {
 	CoreSelectKeyManager,
 	CoreSelectPanelInstance,
@@ -20,13 +21,11 @@ import {
 import { IconComponent } from '@lucca-front/ng/icon';
 import { TreeBranchComponent } from '@lucca-front/ng/tree-select';
 import { EMPTY } from 'rxjs';
+import { map } from 'rxjs/operators';
 import { LuMultiSelectInputComponent } from '../input';
 import { LuMultiSelectPanelRef } from '../input/panel.model';
 import { MULTI_SELECT_INPUT } from '../select.model';
-import { LU_MULTI_SELECT_TRANSLATIONS } from '../select.translate';
 import { LuOptionsGroupContextPipe } from './option-group-context.pipe';
-import { toObservable } from '@angular/core/rxjs-interop';
-import { map } from 'rxjs/operators';
 
 @Component({
 	selector: 'lu-select-panel',
@@ -60,7 +59,6 @@ export class LuMultiSelectPanelComponent<T> implements AfterViewInit, CoreSelect
 	protected selectInput = inject<LuMultiSelectInputComponent<T>>(MULTI_SELECT_INPUT);
 	panelRef = inject<LuMultiSelectPanelRef<T>>(LuMultiSelectPanelRef);
 	selectId = inject(SELECT_ID);
-	intl = getIntl(LU_MULTI_SELECT_TRANSLATIONS);
 
 	options$ = this.selectInput.options$;
 	grouping = this.selectInput.groupingSignal;
@@ -69,6 +67,7 @@ export class LuMultiSelectPanelComponent<T> implements AfterViewInit, CoreSelect
 	searchable = this.selectInput.searchable;
 	optionComparer = this.selectInput.optionComparer;
 	optionKey = this.selectInput.optionKey;
+	intl = this.selectInput.intl;
 
 	trackOptionsBy: TrackByFunction<T> = (_, option) => this.optionKey(option);
 	trackGroupsBy: TrackByFunction<LuOptionGroup<T, unknown>> = (_, group) => group.key;
