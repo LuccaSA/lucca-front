@@ -10,7 +10,7 @@ import { LU_FORM_INSTANCE } from './form-instance';
 	host: {
 		class: 'form',
 		'[class.mod-maxWidth]': 'maxWidth()',
-		'[role]': 'presentation() ? "presentation" : null',
+		'[attr.role]': 'presentation() ? "presentation" : null',
 	},
 	changeDetection: ChangeDetectionStrategy.OnPush,
 	providers: [
