@@ -1,10 +1,10 @@
 import { NgTemplateOutlet } from '@angular/common';
 import { booleanAttribute, ChangeDetectionStrategy, Component, computed, input, ViewEncapsulation } from '@angular/core';
 import { SafeHtml } from '@angular/platform-browser';
+import { DecorativePalette, Palette } from '@lucca-front/ng/core';
 import { IconComponent } from '@lucca-front/ng/icon';
 import { TagComponent } from '@lucca-front/ng/tag';
-import { DecorativePalette, Palette } from '../core/type';
-import { LuTooltipTriggerDirective } from '../tooltip/trigger';
+import { LuTooltipTriggerDirective } from '@lucca-front/ng/tooltip';
 
 @Component({
 	selector: 'lu-form-label',
