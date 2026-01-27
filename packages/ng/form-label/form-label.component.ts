@@ -1,0 +1,33 @@
+import { NgTemplateOutlet } from '@angular/common';
+import { booleanAttribute, ChangeDetectionStrategy, Component, computed, input, ViewEncapsulation } from '@angular/core';
+import { SafeHtml } from '@angular/platform-browser';
+import { IconComponent } from '@lucca-front/ng/icon';
+import { TagComponent } from '@lucca-front/ng/tag';
+import { DecorativePalette, Palette } from '../core/type';
+import { LuTooltipTriggerDirective } from '../tooltip/trigger';
+
+@Component({
+	selector: 'lu-form-label',
+	styleUrl: './form-label.component.scss',
+	templateUrl: './form-label.component.html',
+	encapsulation: ViewEncapsulation.None,
+	changeDetection: ChangeDetectionStrategy.OnPush,
+	imports: [NgTemplateOutlet, LuTooltipTriggerDirective, LuTooltipTriggerDirective, TagComponent, IconComponent],
+})
+export class FormLabelComponent {
+	readonly required = input(false, { transform: booleanAttribute });
+	readonly presentation = input(false, { transform: booleanAttribute });
+	readonly error = input(false, { transform: booleanAttribute });
+	readonly tooltip = input<string | SafeHtml | null>(null);
+	readonly tag = input<string | null>(null);
+	readonly tagPalette = input<Palette | DecorativePalette | null>(null);
+	readonly size = input<'XS' | 'S' | null>(null);
+	readonly for = input.required<string>();
+	readonly labelId = input<string | null>(null);
+	readonly counterStatus = input<number>(0);
+	readonly counterMax = input<number>(0);
+	readonly counterId = input<string | null>(null);
+	readonly counterAlt = computed(() => {
+		return `Votre publication fait ${this.counterStatus()} caractères de long. ${this.counterMax()} maximum sont autorisés. `;
+	});
+}
