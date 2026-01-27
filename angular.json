@@ -15,7 +15,7 @@
       "skipTests": true,
       "standalone": true,
       "style": "scss",
-      "type": "component"
+    "type": "component"
     },
     "@schematics/angular:directive": {
       "type": "directive"
@@ -36,8 +36,7 @@
       "typeSeparator": "."
     },
     "@schematics/angular:resolver": {
-      "typeSeparator": "."
-    }
+      "typeSeparator": "."}
   },
   "newProjectRoot": "packages/ng",
   "projects": {
@@ -56,10 +55,10 @@
           "builder": "@angular-eslint/builder:lint",
           "options": {
             "lintFilePatterns": [
-              "packages/**/*.ts",
+              "packages/ng/**/*.ts",
               "stories/**/*.ts",
-              "packages/**/*.html",
-              "stories/**/*.html"
+							"packages/ng/**/*.html",
+							"stories/**/*.html"
             ]
           }
         },
@@ -70,6 +69,7 @@
             "browserTarget": "ng:build",
             "compodoc": true,
             "compodocArgs": [
+
               "-e",
               "json",
               "-d",
@@ -89,17 +89,16 @@
         },
         "build-storybook": {
           "builder": "@storybook/angular:build-storybook",
-          "options": {
-            "configDir": ".storybook",
+          "options": {"configDir": ".storybook",
             "browserTarget": "ng:build",
             "compodoc": true,
             "compodocArgs": [
+
               "-e",
               "json",
               "-d",
               ".storybook"
-            ],
-            "outputDir": "storybook-static",
+            ],"outputDir": "storybook-static",
             "styles": [
               ".storybook/styles.scss"
             ],
@@ -109,6 +108,28 @@
                 "node_modules"
               ]
             }
+          }
+        }
+      }
+    },
+    "prisme": {
+      "root": "./packages/prisme/",
+      "projectType": "library",
+      "architect": {
+        "build": {
+          "builder": "@angular-devkit/build-angular:ng-packagr",
+          "options": {
+            "project": "packages/prisme/ng-package.json",
+            "tsConfig": "packages/prisme/tsconfig.lib.prod.json"
+          }
+        },
+        "lint": {
+          "builder": "@angular-eslint/builder:lint",
+          "options": {
+            "lintFilePatterns": [
+              "packages/prisme/**/*.ts",
+              "packages/prisme/**/*.html"
+            ]
           }
         }
       }
