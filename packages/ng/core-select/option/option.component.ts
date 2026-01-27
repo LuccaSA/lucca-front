@@ -1,3 +1,4 @@
+import { JsonPipe } from '@angular/common';
 import {
 	AfterViewInit,
 	booleanAttribute,
@@ -36,7 +37,7 @@ export const MAGIC_OPTION_SCROLL_DELAY = 15;
 	templateUrl: './option.component.html',
 	styleUrl: './option.component.scss',
 	changeDetection: ChangeDetectionStrategy.OnPush,
-	imports: [LuOptionOutletDirective, PortalDirective, LuOptionGroupPipe, LuTooltipTriggerDirective],
+	imports: [LuOptionOutletDirective, PortalDirective, LuOptionGroupPipe, LuTooltipTriggerDirective, JsonPipe],
 })
 export class LuOptionComponent<T> implements AfterViewInit, OnDestroy, OnInit {
 	protected selectableItem = inject(CoreSelectPanelElement);
