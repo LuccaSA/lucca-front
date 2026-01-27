@@ -13,7 +13,7 @@ interface HtmlLoading {
 		size?: string;
 		invert?: boolean;
 		block?: boolean;
-		template: 'popin' | 'drawer' | 'fullPage' | 'fullpage' | '';
+		template?: 'popin' | 'drawer' | 'fullPage' | 'fullpage';
 	},
 	nodeOffset: number;
 	filePath: string;
@@ -29,52 +29,68 @@ export function migrateComponent(sourceFile: SourceFile, path: string, tree: Tre
 		const templateUpdate = isInlineTemplate ? tsUpdate : tree.beginUpdate(htmlLoadings[0].filePath);
 
 		htmlLoadings.forEach((loading) => {
-			const endSpanOffset = loading.node.endSourceSpan?.start.offset || -1;
-			templateUpdate.remove(loading.nodeOffset + loading.node.startSourceSpan.end.offset, endSpanOffset - loading.node.startSourceSpan.end.offset);
-			// Remove icon classes
-			templateUpdate.remove(loading.nodeOffset + loading.node.startSourceSpan.start.offset + 1, loading.node.name.length);
-			// Remove closing tag
-			if(loading.node.endSourceSpan?.start?.offset) {
-				templateUpdate.remove(loading.nodeOffset + loading.node.endSourceSpan?.start?.offset, loading.node.endSourceSpan?.toString().length);
-			}
+			const classesNode = loading.node.attributes.find(attr => attr.name === 'class');
+			const loadingNodeLength = loading.node.name.length;
+			// remove element name attribute
+			templateUpdate.remove(loading.nodeOffset + loading.node.startSourceSpan.start.offset + 1, loadingNodeLength);
 
-			/**
-			 * Add stuff
-			 */
-			// First of all, add opening tag, icon name and alt if it's here
-			let openingTag = `lu-loading`;
-			if (loading.inputs.block) {
-				openingTag += ` block`;
-			}
-			if (loading.inputs.invert) {
-				openingTag += ` invert`;
-			}
-			if (loading.inputs.size) {
-				openingTag += ` size="${loading.inputs.size}"`;
-			}
-			if (loading.inputs.template.length > 0) {
-				openingTag += ` template="${loading.inputs.template}"`;
-			}
+			if(classesNode && classesNode.keySpan) {
+				/**
+				 * Add stuff
+				 */
+				let thingsToAdd = `lu-loading `;
+				if (loading.inputs.block) {
+					thingsToAdd += thingsToAdd.at(thingsToAdd.length) !== ' ' ? '' : ' ';
+					thingsToAdd += `block`;
+					thingsToAdd += thingsToAdd.endsWith(' ') ? '' : ' ';
+				}
+				if (loading.inputs.invert) {
+					thingsToAdd += thingsToAdd.at(thingsToAdd.length) !== ' ' ? '' : ' ';
+					thingsToAdd += `invert`;
+					thingsToAdd += thingsToAdd.endsWith(' ') ? '' : ' ';
+				}
+				if (loading.inputs.size) {
+					thingsToAdd += thingsToAdd.at(thingsToAdd.length) !== ' ' ? '' : ' ';
+					thingsToAdd += `size="L"`;
+					thingsToAdd += thingsToAdd.endsWith(' ') || thingsToAdd.endsWith('>') ? '' : ' ';
+				}
+				if (loading.inputs.template) {
+					thingsToAdd += thingsToAdd.at(thingsToAdd.length) !== ' ' ? '' : ' ';
+					thingsToAdd += `template="${loading.inputs.template}"`;
+					thingsToAdd += thingsToAdd.endsWith(' ') ? '' : ' ';
+				}
 
-			templateUpdate.insertRight(loading.nodeOffset + loading.node.startSourceSpan.start.offset + 1, openingTag);
-			// Self close this tag
-			templateUpdate.insertRight(loading.nodeOffset + loading.node.startSourceSpan.end.offset - 1, '/');
 
+				if (loading.node.children.length > 0 && loading.node.endSourceSpan) {
+					templateUpdate.remove(loading.nodeOffset + loading.node.endSourceSpan.start.offset + 1, loadingNodeLength + 1);
+					templateUpdate.insertRight(loading.nodeOffset + loading.node.startSourceSpan.start.offset + 1, thingsToAdd);
+					templateUpdate.insertLeft(loading.nodeOffset + loading.node.endSourceSpan.start.offset + 1, '/lu-loading');
+				} else {
+					const endSpanOffset = loading.node.endSourceSpan?.start.offset || -1;
+					templateUpdate.remove(loading.nodeOffset + loading.node.startSourceSpan.end.offset, endSpanOffset - loading.node.startSourceSpan.end.offset);
+					// Remove closing tag
+					if(loading.node.endSourceSpan?.start?.offset) {
+						templateUpdate.remove(loading.nodeOffset + loading.node.endSourceSpan?.start?.offset, loading.node.endSourceSpan?.toString().length);
+					}
+					templateUpdate.insertRight(loading.nodeOffset + loading.node.startSourceSpan.start.offset + 1, thingsToAdd);
+					// Self close this tag
+					templateUpdate.insertRight(loading.nodeOffset + loading.node.startSourceSpan.end.offset - 1, '/');
+				}
 
-			/**
-			 * Modify classes
-			 */
-			// const classesNode = icon.node.attributes.find(attr => attr.name === 'class');
-			// if(classesNode && classesNode.keySpan){
-			// 	const classes = classesNode.value;
-			// 	const cleanedClasses = classes.split(' ').filter(c => {
-			// 		return !['lucca-icon', `icon-${icon.icon}`, `mod-${icon.size}`].includes(c);
-			// 	}).join(' ');
-			// 	templateUpdate.remove(icon.nodeOffset + classesNode.keySpan.start.offset - 1, classesNode.sourceSpan.toString().length + 1);
-			// 	if(cleanedClasses) {
-			// 		templateUpdate.insertRight(icon.nodeOffset + classesNode.keySpan.start.offset, `class="${cleanedClasses}"`);
-			// 	}
-			// }
+				/**
+				 * Modify classes
+				 */
+				if(classesNode && classesNode.keySpan){
+					const classes = classesNode.value;
+					const cleanedClasses = classes.split(' ').filter(c => {
+						return ![`mod-L`, `mod-block`, `mod-invert`, `loading`, `mod-invert`, `mod-popin`, `mod-drawer`, `mod-fullPage`, `mod-fullpage`].includes(c);
+					}).join(' ');
+					templateUpdate.remove(loading.nodeOffset + classesNode.keySpan.start.offset - 1, classesNode.sourceSpan.toString().length + 1);
+					if(cleanedClasses) {
+						templateUpdate.insertRight(loading.nodeOffset + classesNode.keySpan.start.offset, `class="${cleanedClasses}"${loading.node.children.length > 0 && loading.node.endSourceSpan ? '' : ' '}`);
+					}
+				}
+			}
 
 		});
 		// Add import if needed
@@ -101,8 +117,8 @@ function findHTMLLoadings(sourceFile: SourceFile, basePath: string, tree: Tree):
 					if (loading) {
 						const inputs = {
 							size: classes.split(' ').find(c => /mod-L/.test(c)),
-							block: classes.includes('mod-block'),
-							invert: classes.includes('mod-invert'),
+							block: classes.includes('mod-block') ? true : undefined,
+							invert: classes.includes('mod-invert') ? true : undefined,
 							template: getLoadingTemplate(classes),
 						}
 						const loading: HtmlLoading = {
@@ -124,7 +140,7 @@ function findHTMLLoadings(sourceFile: SourceFile, basePath: string, tree: Tree):
 	return htmlLoadings;
 }
 
-function getLoadingTemplate(classes: string): 'popin' | 'drawer' | 'fullPage' | '' {
+function getLoadingTemplate(classes: string): 'popin' | 'drawer' | 'fullPage' | undefined {
 	if (classes.includes('mod-popin')) {
 		return 'popin';
 	}
@@ -134,7 +150,7 @@ function getLoadingTemplate(classes: string): 'popin' | 'drawer' | 'fullPage' | 
 	if (classes.includes('mod-fullPage') || classes.includes('mod-fullpage')) {
 		return 'fullPage';
 	}
-	return '';
+	return undefined;
 }
 
 function isInterestingNode(node: unknown): node is TmplAstElement {

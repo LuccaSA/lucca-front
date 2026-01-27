@@ -1,13 +1,13 @@
 import { Component } from '@angular/core';
-import { IconComponent } from '@lucca-front/ng/icon';
+import { LoadingComponent } from '@lucca-front/ng/loading';
 
 @Component({
 	selector: 'lu-test',
 	standalone: true,
 	template: `
-		<lu-icon icon="signClose" />
+		<lu-loading />
 	`,
-	imports: [IconComponent]
+	imports: [LoadingComponent]
 })
 export class EmptyImportsComponent {
 }
