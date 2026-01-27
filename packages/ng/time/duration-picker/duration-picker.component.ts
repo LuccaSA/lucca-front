@@ -160,7 +160,9 @@ export class DurationPickerComponent extends BasePickerComponent {
 		const minutesPart = getMinutesPartFromDuration(protoEvent.value);
 
 		if (hoursPart < 0) {
-			hoursPart = getHoursPartFromDuration(this.max());
+			if (hoursPart === -1) {
+				hoursPart = getHoursPartFromDuration(this.max());
+			}
 			if (isoDurationToSeconds(createDurationFromHoursAndMinutes(hoursPart, minutesPart)) > isoDurationToSeconds(this.max())) {
 				// If current value with minutes is > max, decrement hours again
 				hoursPart--;
@@ -175,10 +177,9 @@ export class DurationPickerComponent extends BasePickerComponent {
 
 		const seconds = roundToNearest(circularize(candidateTimeAsSeconds, max), 60);
 
-		const hours = Math.floor(seconds / 3600);
 		const minutes = Math.floor((seconds % 3600) / 60);
 
-		const result = createDurationFromHoursAndMinutes(hours, minutes);
+		const result = createDurationFromHoursAndMinutes(hoursPart, minutes);
 
 		this.value.set(result);
 		this.onChange?.(result);
