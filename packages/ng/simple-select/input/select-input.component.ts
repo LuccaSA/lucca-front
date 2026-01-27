@@ -6,7 +6,7 @@ import { ClearComponent } from '@lucca-front/ng/clear';
 import { intlInputOptions, PortalDirective } from '@lucca-front/ng/core';
 import { ALuSelectInputComponent, LU_CORE_SELECT_TRANSLATIONS, LuSelectPanelRef, provideLuSelectLabelsAndIds, ɵLuOptionOutletDirective } from '@lucca-front/ng/core-select';
 import { FILTER_PILL_INPUT_COMPONENT, FilterPillDisplayerDirective } from '@lucca-front/ng/filter-pills';
-import { InputDirective } from '@lucca-front/ng/form-field';
+import { InputDirective, PresentationDisplayDirective } from '@lucca-front/ng/form-field';
 import { IconComponent } from '@lucca-front/ng/icon';
 import { LU_SIMPLE_SELECT_TRANSLATIONS } from '../select.translate';
 import { LuSimpleSelectPanelRefFactory } from './panel-ref.factory';
@@ -17,7 +17,19 @@ import { LuSimpleSelectPanelRefFactory } from './panel-ref.factory';
 	styleUrl: './select-input.component.scss',
 	host: { class: 'simpleSelect' },
 	changeDetection: ChangeDetectionStrategy.OnPush,
-	imports: [AsyncPipe, ɵLuOptionOutletDirective, OverlayModule, FormsModule, InputDirective, FilterPillDisplayerDirective, NgTemplateOutlet, IconComponent, ClearComponent, PortalDirective],
+	imports: [
+		AsyncPipe,
+		ɵLuOptionOutletDirective,
+		OverlayModule,
+		FormsModule,
+		InputDirective,
+		FilterPillDisplayerDirective,
+		NgTemplateOutlet,
+		IconComponent,
+		ClearComponent,
+		PortalDirective,
+		PresentationDisplayDirective,
+	],
 	providers: [
 		{
 			provide: NG_VALUE_ACCESSOR,

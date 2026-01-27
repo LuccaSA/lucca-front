@@ -1,8 +1,7 @@
 import { ChangeDetectionStrategy, Component, computed, forwardRef, inject, input, LOCALE_ID, output, signal, ViewEncapsulation } from '@angular/core';
 import { AbstractControl, ControlValueAccessor, FormsModule, NG_VALIDATORS, NG_VALUE_ACCESSOR, ValidationErrors, Validator } from '@angular/forms';
 import { LuDisplayerDirective, LuOptionDirective } from '@lucca-front/ng/core-select';
-import { FormFieldComponent, InputDirective } from '@lucca-front/ng/form-field';
-import { TextInputComponent } from '@lucca-front/ng/forms';
+import { InputDirective, ɵPresentationDisplayDefaultDirective } from '@lucca-front/ng/form-field';
 import { LuSimpleSelectInputComponent } from '@lucca-front/ng/simple-select';
 import { type CountryCallingCode, formatIncompletePhoneNumber, getCountries, getCountryCallingCode, getExampleNumber, parsePhoneNumber } from 'libphonenumber-js';
 import examples from 'libphonenumber-js/mobile/examples';
@@ -42,7 +41,7 @@ function tryParsePhoneNumber(phoneNumber: string, countryCode?: CountryCode): Pa
 
 @Component({
 	selector: 'lu-phone-number-input',
-	imports: [LuSimpleSelectInputComponent, TextInputComponent, FormsModule, LuDisplayerDirective, LuOptionDirective, InputDirective, FormFieldComponent],
+	imports: [LuSimpleSelectInputComponent, FormsModule, LuDisplayerDirective, LuOptionDirective, InputDirective, ɵPresentationDisplayDefaultDirective],
 	templateUrl: './phone-number-input.component.html',
 	styleUrl: './phone-number-input.component.scss',
 	encapsulation: ViewEncapsulation.None,
@@ -80,6 +79,8 @@ export class PhoneNumberInputComponent implements ControlValueAccessor, Validato
 
 	readonly countryChange = output<CountryCode>();
 
+	readonly currentValue = signal<string>('');
+
 	#onChange?: (value: E164Number) => void;
 
 	#onTouched?: () => void;
@@ -94,7 +95,7 @@ export class PhoneNumberInputComponent implements ControlValueAccessor, Validato
 			prefix: getCountryCallingCode(country),
 			name: this.#displayNames.of(country),
 		}))
-		.sort((a, b) => a.name.localeCompare(b.name));
+		.sort((a, b) => a.name?.localeCompare(b.name));
 
 	readonly #prefixEntries = computed(() => {
 		const whitelist = this.allowedCountries();
@@ -112,7 +113,7 @@ export class PhoneNumberInputComponent implements ControlValueAccessor, Validato
 			return this.#prefixEntries();
 		}
 		return this.#prefixEntries().filter((entry) => {
-			return entry.country.toLowerCase().includes(query.toLowerCase()) || `+${entry.prefix}`.includes(query) || entry.name.toLowerCase().includes(query.toLowerCase());
+			return entry.country.toLowerCase().includes(query.toLowerCase()) || `+${entry.prefix}`.includes(query) || entry.name?.toLowerCase().includes(query.toLowerCase());
 		});
 	});
 
@@ -148,6 +149,7 @@ export class PhoneNumberInputComponent implements ControlValueAccessor, Validato
 		} catch {
 			this.displayedNumber.set(value);
 		}
+		this.currentValue.set(value);
 		this.formatNationalNumber();
 	}
 
