@@ -19,7 +19,9 @@
 			@if (isLoading()) {
 				<lu-skeleton-index-table class="pr-u-displayBlock pr-u-marginBlock100" [cols]="4" [rows]="5" />
 			} @else if (isEmpty()) {
-				<lu-empty-state-section description="Aucune tâche. C'est les vacances !" />
+				<lu-empty-state-section description="Aucune tâche. C'est les vacances !">
+					<button type="button" luButton (click)="createNewTask()">Créer une tâche</button>
+				</lu-empty-state-section>
 			} @else {
 				<table class="indexTable pr-u-marginBlock100">
 					<thead class="indexTable-head">

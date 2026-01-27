@@ -1,7 +1,8 @@
 import { DatePipe } from '@angular/common';
-import { ChangeDetectionStrategy, Component, computed, Pipe, PipeTransform, signal } from '@angular/core';
+import { ChangeDetectionStrategy, Component, computed, inject, Pipe, PipeTransform, signal } from '@angular/core';
 import { ButtonComponent } from '@lucca-front/ng/button';
 import { Palette } from '@lucca-front/ng/core';
+import { LuDialogService, provideLuDialog } from '@lucca-front/ng/dialog';
 import { EmptyStateSectionComponent } from '@lucca-front/ng/empty-state';
 import { IconComponent } from '@lucca-front/ng/icon';
 import { MainLayoutComponent } from '@lucca-front/ng/main-layout';
@@ -9,22 +10,8 @@ import { NumericBadgeComponent } from '@lucca-front/ng/numeric-badge';
 import { SkeletonIndexTableComponent } from '@lucca-front/ng/skeleton';
 import { StatusBadgeComponent } from '@lucca-front/ng/status-badge';
 import { LuUserModule, LuUserTileComponent } from '@lucca-front/ng/user';
-
-interface Task {
-	id: number;
-	name: string;
-	status: TaskStatus;
-	user: { firstName: string; lastName: string };
-	dueDate: Date;
-}
-
-type TaskStatus = 'Completed' | 'InProgress' | 'Late';
-
-interface TaskGroup {
-	groupName: string;
-	isExpanded: boolean;
-	tasks: Task[];
-}
+import { TaskFormDialog } from './components/task-form-dialog.component';
+import { TaskGroup, TaskStatus } from './models';
 
 @Pipe({
 	name: 'ariaControls',
@@ -116,8 +103,10 @@ const groupsMock: TaskGroup[] = [
 	],
 	changeDetection: ChangeDetectionStrategy.OnPush,
 	templateUrl: './data-table.component.html',
+	providers: [provideLuDialog()], // 1. On provide
 })
 export class DataTableComponent {
+	private dialog = inject(LuDialogService); // 2. On injecte
 	groups = signal<TaskGroup[]>([]);
 
 	isLoading = signal(true);
@@ -186,4 +175,16 @@ export class DataTableComponent {
 	toggleLoadingState(): void {
 		this.isLoading.set(!this.isLoading());
 	}
+}
+}
+
+	createNewTask(): void {
+		const ref = this.dialog.open({
+			content: TaskFormDialog,
+			size: 'XL',
+		});
+
+		ref.result$.subscribe((task) => {
+			console.log({ task });
+		});
 }

@@ -1,0 +1,30 @@
+<lu-dialog>
+	<form #ngForm="ngForm" class="dialog-inside-formOptional">
+		<lu-dialog-header>
+			<h1>Créer une tâche</h1>
+		</lu-dialog-header>
+
+		<lu-dialog-content>
+			<lu-grid mode="form">
+				<lu-grid-column colspan="4">
+					<lu-form-field label="Nom">
+						<lu-text-input [(ngModel)]="name" name="name" required />
+					</lu-form-field>
+				</lu-grid-column>
+				<lu-grid-column colspan="4">
+					<lu-form-field label="Date d'échéance">
+						<lu-date-input [(ngModel)]="dueDate" name="dueDate" required />
+					</lu-form-field>
+				</lu-grid-column>
+			</lu-grid>
+		</lu-dialog-content>
+		<lu-dialog-footer>
+			<div class="footer-actions">
+				<button type="submit" luButton (click)="submitForm(ngForm)">Confirm</button>
+				<button type="button" luButton="ghost" luDialogDismiss>Cancel</button>
+			</div>
+		</lu-dialog-footer>
+	</form>
+</lu-dialog>
+
+<div #truc></div>
