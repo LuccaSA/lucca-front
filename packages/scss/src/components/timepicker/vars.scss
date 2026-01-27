@@ -4,9 +4,9 @@
 	--components-timepicker-color: var(--pr-t-color-input-text);
 	--components-timepicker-font: var(--pr-t-font-body-M);
 	--components-timepicker-input-height: 2rem;
-	--components-timepicker-input-width: 0.5rem;
+	--components-timepicker-input-minInlineSize: 0.5rem;
 	--components-timepicker-padding: 0;
-	--components-timepicker-paddingInput-inline: var(--pr-t-spacings-50);
-	--components-timepicker-paddingInput-block: var(--pr-t-spacings-100);
+	--components-timepicker-display-padding-inline: var(--pr-t-spacings-50);
+	--components-timepicker-display-padding-block: var(--pr-t-spacings-100);
 	--components-timepicker-separator-left: 2.375rem;
 }
