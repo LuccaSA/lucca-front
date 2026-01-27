@@ -7,98 +7,78 @@ import { extractNgTemplatesIncludingHtml } from '../lib/angular-template';
 import { HtmlAst } from '../lib/html-ast.js';
 import { currentSchematicContext } from '../lib/lf-schematic-context';
 
-
-interface HtmlIcon {
+interface HtmlLoading {
 	node: TmplAstElement;
-node: TmplAstElement;
-	icon: string;
-	size?: string;
-	alt?: string;
-	altSpan?: TmplAstElement;
-	nodeOffset: number;
-	filePath: string;
-	componentTS: SourceFile;
-	icon: string;
-	alt?: string;
-	altSpan?: string;
-
-	size?: string;
-	invert?: boolean;
-	block?: boolean;
-	template: 'popin' | 'drawer' | 'fullPage' | 'fullpage';
+	inputs: {
+		size?: string;
+		invert?: boolean;
+		block?: boolean;
+		template: 'popin' | 'drawer' | 'fullPage' | 'fullpage' | '';
+	},
 	nodeOffset: number;
 	filePath: string;
 	componentTS: SourceFile;
 }
 
 export function migrateComponent(sourceFile: SourceFile, path: string, tree: Tree): string {
-	const htmlIcons = findHTMLIcons(sourceFile, path, tree);
-	if(htmlIcons.length > 0){
+	const htmlLoadings = findHTMLLoadings(sourceFile, path, tree);
+
+	if (htmlLoadings.length > 0) {
 		const tsUpdate = tree.beginUpdate(path);
-		const isInlineTemplate = htmlIcons[0].filePath === path;
-		const templateUpdate = isInlineTemplate ? tsUpdate : tree.beginUpdate(htmlIcons[0].filePath);
-		htmlIcons.forEach((icon) => {
-			/**
-			 * Remove stuff
-			 */
-			const endSpanOffset = icon.node.endSourceSpan?.start.offset || -1;
-			// Remove content if there's any (content in icon, wtf?)
-			templateUpdate.remove(icon.nodeOffset + icon.node.startSourceSpan.end.offset, endSpanOffset - icon.node.startSourceSpan.end.offset);
+		const isInlineTemplate = htmlLoadings[0].filePath === path;
+		const templateUpdate = isInlineTemplate ? tsUpdate : tree.beginUpdate(htmlLoadings[0].filePath);
+
+		htmlLoadings.forEach((loading) => {
+			const endSpanOffset = loading.node.endSourceSpan?.start.offset || -1;
+			templateUpdate.remove(loading.nodeOffset + loading.node.startSourceSpan.end.offset, endSpanOffset - loading.node.startSourceSpan.end.offset);
 			// Remove icon classes
-			templateUpdate.remove(icon.nodeOffset + icon.node.startSourceSpan.start.offset + 1, icon.node.name.length);
+			templateUpdate.remove(loading.nodeOffset + loading.node.startSourceSpan.start.offset + 1, loading.node.name.length);
 			// Remove closing tag
-			if(icon.node.endSourceSpan?.start?.offset) {
-				templateUpdate.remove(icon.nodeOffset + icon.node.endSourceSpan?.start?.offset, icon.node.endSourceSpan?.toString().length);
-			}
-			// If there's an aria-hidden, remove it
-			const ariaHidden = icon.node.attributes.find(attr => attr.name === 'aria-hidden');
-			if(ariaHidden) {
-				const attrLength = (ariaHidden.valueSpan?.end?.offset || 0) - (ariaHidden.keySpan?.start?.offset || 0);
-				templateUpdate.remove(icon.nodeOffset + (ariaHidden.keySpan?.start?.offset || 0), attrLength + 1);
-			}
-			// If there's an alt span, remove it
-			if(icon.altSpan) {
-				let previousEndSpanOffset = 0;
-				while([' ', '\n', '\t'].includes(sourceFile.text.charAt(icon.nodeOffset - previousEndSpanOffset + icon.altSpan.startSourceSpan.start.offset - 1))) {
-					previousEndSpanOffset++;
-				}
-				templateUpdate.remove(icon.nodeOffset - previousEndSpanOffset + icon.altSpan.startSourceSpan.start.offset, icon.altSpan.sourceSpan.toString().length + previousEndSpanOffset);
+			if(loading.node.endSourceSpan?.start?.offset) {
+				templateUpdate.remove(loading.nodeOffset + loading.node.endSourceSpan?.start?.offset, loading.node.endSourceSpan?.toString().length);
 			}
 
 			/**
 			 * Add stuff
 			 */
 			// First of all, add opening tag, icon name and alt if it's here
-			let openingTag = `lu-icon icon="${icon.icon}"${ariaHidden ? '' : ' '}`;
-			if (icon.alt) {
-				openingTag += ` alt="${icon.alt}"`;
+			let openingTag = `lu-loading`;
+			if (loading.inputs.block) {
+				openingTag += ` block`;
 			}
-			if(icon.size) {
-				openingTag += ` size="${icon.size}"`;
+			if (loading.inputs.invert) {
+				openingTag += ` invert`;
 			}
-			templateUpdate.insertRight(icon.nodeOffset + icon.node.startSourceSpan.start.offset + 1, openingTag);
+			if (loading.inputs.size) {
+				openingTag += ` size="${loading.inputs.size}"`;
+			}
+			if (loading.inputs.template.length > 0) {
+				openingTag += ` template="${loading.inputs.template}"`;
+			}
+
+			templateUpdate.insertRight(loading.nodeOffset + loading.node.startSourceSpan.start.offset + 1, openingTag);
 			// Self close this tag
-			templateUpdate.insertRight(icon.nodeOffset + icon.node.startSourceSpan.end.offset - 1, '/');
+			templateUpdate.insertRight(loading.nodeOffset + loading.node.startSourceSpan.end.offset - 1, '/');
 
 
 			/**
 			 * Modify classes
 			 */
-			const classesNode = icon.node.attributes.find(attr => attr.name === 'class');
-			if(classesNode && classesNode.keySpan){
-				const classes = classesNode.value;
-				const cleanedClasses = classes.split(' ').filter(c => {
-					return !['lucca-icon', `icon-${icon.icon}`, `mod-${icon.size}`].includes(c);
-				}).join(' ');
-				templateUpdate.remove(icon.nodeOffset + classesNode.keySpan.start.offset - 1, classesNode.sourceSpan.toString().length + 1);
-				if(cleanedClasses) {
-					templateUpdate.insertRight(icon.nodeOffset + classesNode.keySpan.start.offset, `class="${cleanedClasses}"`);
-				}
-			}
+			// const classesNode = icon.node.attributes.find(attr => attr.name === 'class');
+			// if(classesNode && classesNode.keySpan){
+			// 	const classes = classesNode.value;
+			// 	const cleanedClasses = classes.split(' ').filter(c => {
+			// 		return !['lucca-icon', `icon-${icon.icon}`, `mod-${icon.size}`].includes(c);
+			// 	}).join(' ');
+			// 	templateUpdate.remove(icon.nodeOffset + classesNode.keySpan.start.offset - 1, classesNode.sourceSpan.toString().length + 1);
+			// 	if(cleanedClasses) {
+			// 		templateUpdate.insertRight(icon.nodeOffset + classesNode.keySpan.start.offset, `class="${cleanedClasses}"`);
+			// 	}
+			// }
 
 		});
 		// Add import if needed
-		applyToUpdateRecorder(tsUpdate, [insertTSImportIfNeeded(sourceFile, path, 'IconComponent', '@lucca-front/ng/icon'), insertAngularImportIfNeeded(sourceFile, path, 'IconComponent')]);
+		applyToUpdateRecorder(tsUpdate, [insertTSImportIfNeeded(sourceFile, path, 'LoadingComponent', '@lucca-front/ng/loading'), insertAngularImportIfNeeded(sourceFile, path, 'LoadingComponent')]);
 		tree.commitUpdate(tsUpdate);
 		if (!isInlineTemplate) {
 			tree.commitUpdate(templateUpdate);
@@ -107,43 +87,33 @@ export function migrateComponent(sourceFile: SourceFile, path: string, tree: Tre
 	return tree.readText(path);
 }
 
-function findHTMLIcons(sourceFile: SourceFile, basePath: string, tree: Tree): HtmlIcon[] {
-	const htmlIcons: HtmlIcon[] = [];
+function findHTMLLoadings(sourceFile: SourceFile, basePath: string, tree: Tree): HtmlLoading[] {
+	const htmlLoadings: HtmlLoading[] = [];
 	const ngTemplates = extractNgTemplatesIncludingHtml(sourceFile, tree, basePath);
 
 	ngTemplates.forEach((template) => {
 		const htmlAst = new HtmlAst(template.content);
-		htmlAst.visitNodes((node, parent) => {
+		htmlAst.visitNodes((node) => {
 			if (isInterestingNode(node)) {
 				const classes = node.attributes.find(attr => attr.name === 'class')?.value;
-				if (classes?.includes("lucca-icon")){
-					const iconClass = classes.split(' ').find(c => c.startsWith('icon-'));
-					if (iconClass) {
-						const iconSize = classes.split(' ').find(c => /mod-(XS|S|M|L|XL|XXL)/.test(c));
-						const iconName = iconClass.replace('icon-', '');
-						const icon: HtmlIcon = {
+				if (classes?.includes("loading")){
+					const loading = classes.split(' ').find(c => c.startsWith('loading'));
+					if (loading) {
+						const inputs = {
+							size: classes.split(' ').find(c => /mod-L/.test(c)),
+							block: classes.includes('mod-block'),
+							invert: classes.includes('mod-invert'),
+							template: getLoadingTemplate(classes),
+						}
+						const loading: HtmlLoading = {
 							node: node,
-							icon: iconName,
-							size: iconSize?.replace('mod-', ''),
+							inputs,
 							nodeOffset: template.offsetStart,
 							filePath: template.filePath,
-							componentTS: sourceFile
+							componentTS: sourceFile,
 						}
-						const siblings = isInterestingNode(parent) ? parent?.children : htmlAst.nodes;
-						if(siblings.length > 0) {
-							const possibleAltSpan= siblings.find(child => {
-								return isInterestingNode(child) && child !== node;
-							});
-							if (possibleAltSpan && isInterestingNode(possibleAltSpan)) {
-								const childClasses = possibleAltSpan.attributes.find(attr => attr.name === 'class')?.value;
-								// We know it's one of these types but TS doesn't find that info from the above call so here we go again
-								if (childClasses === 'pr-u-mask') {
-									icon.alt = template.content.slice(possibleAltSpan.startSourceSpan.end.offset, possibleAltSpan.endSourceSpan?.start?.offset)
-									icon.altSpan = possibleAltSpan;
-								}
-							}
-						}
-						htmlIcons.push(icon);
+
+						htmlLoadings.push(loading);
 					}
 
 				}
@@ -151,7 +121,20 @@ function findHTMLIcons(sourceFile: SourceFile, basePath: string, tree: Tree): Ht
 		});
 	});
 
-	return htmlIcons;
+	return htmlLoadings;
+}
+
+function getLoadingTemplate(classes: string): 'popin' | 'drawer' | 'fullPage' | '' {
+	if (classes.includes('mod-popin')) {
+		return 'popin';
+	}
+	if (classes.includes('mod-drawer')) {
+		return 'drawer';
+	}
+	if (classes.includes('mod-fullPage') || classes.includes('mod-fullpage')) {
+		return 'fullPage';
+	}
+	return '';
 }
 
 function isInterestingNode(node: unknown): node is TmplAstElement {
