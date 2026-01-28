@@ -1,4 +1,3 @@
-{{ option | json }}
 <div class="optionItem-value" [class.is-disabled]="selectableItem.disabled" (click)="selectOption($event)">
 	<ng-container *luOptionOutlet="optionTpl; value: selectableItem.option()" />
 

@@ -6,7 +6,7 @@ import { ChipComponent } from '@lucca-front/ng/chip';
 import { intlInputOptions } from '@lucca-front/ng/core';
 import { ILuOptionContext, LU_OPTION_CONTEXT, ɵLuOptionOutletDirective } from '@lucca-front/ng/core-select';
 import { LuTooltipModule } from '@lucca-front/ng/tooltip';
-import { map, tap } from 'rxjs/operators';
+import { map } from 'rxjs/operators';
 import { LuMultiSelectInputComponent } from '../input/select-input.component';
 import { LU_MULTI_SELECT_DISPLAYER_TRANSLATIONS } from './default-displayer.translate';
 import { LuMultiSelectDisplayerInputDirective } from './displayer-input.directive';
@@ -44,8 +44,6 @@ export class LuMultiSelectDefaultDisplayerComponent<T> implements OnInit {
 	}
 
 	context = inject<ILuOptionContext<T[]>>(LU_OPTION_CONTEXT);
-
-	disabledOptions$ = this.context.isDisabled$.pipe(tap((val) => console.log(val)));
 
 	displayedOptions$ = this.context.option$.pipe(
 		map((options) => {
