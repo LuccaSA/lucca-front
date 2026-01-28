@@ -34,6 +34,8 @@
 
 		.formLabel-info {
 			vertical-align: top;
+			display: inline-block;
+			block-size: 1lh;
 
 			&:focus-visible {
 				outline: none;
@@ -61,7 +63,10 @@
 			inset-block-start: calc(var(--pr-t-spacings-25) / -2);
 			position: relative;
 
-			@include tag.product;
+			&,
+			.tag {
+				@include tag.product;
+			}
 		}
 	}
 }

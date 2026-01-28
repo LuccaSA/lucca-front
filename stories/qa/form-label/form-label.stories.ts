@@ -1,9 +1,11 @@
 import { ChangeDetectionStrategy, Component } from '@angular/core';
+import { FormLabelComponent } from '@lucca-front/ng/form-label';
 import { Meta, moduleMetadata, StoryObj } from '@storybook/angular';
 
 @Component({
 	selector: 'form-label-stories',
 	templateUrl: './form-label.stories.html',
+	imports: [FormLabelComponent],
 	changeDetection: ChangeDetectionStrategy.OnPush,
 })
 class FormLabelStory {}
