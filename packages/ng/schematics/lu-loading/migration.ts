@@ -7,14 +7,15 @@ import { extractNgTemplatesIncludingHtml } from '../lib/angular-template';
 import { HtmlAst } from '../lib/html-ast.js';
 import { currentSchematicContext } from '../lib/lf-schematic-context';
 
+interface LoadingInputs {
+	size?: string;
+	invert?: boolean;
+	block?: boolean;
+	template?: 'popin' | 'drawer' | 'fullPage' | 'fullpage';
+}
 interface HtmlLoading {
 	node: TmplAstElement;
-	inputs: {
-		size?: string;
-		invert?: boolean;
-		block?: boolean;
-		template?: 'popin' | 'drawer' | 'fullPage' | 'fullpage';
-	},
+	inputs: LoadingInputs;
 	nodeOffset: number;
 	filePath: string;
 	componentTS: SourceFile;
@@ -38,26 +39,18 @@ export function migrateComponent(sourceFile: SourceFile, path: string, tree: Tre
 				/**
 				 * Add stuff
 				 */
-				let thingsToAdd = `lu-loading `;
+				let thingsToAdd = `lu-loading${hasThingsToAdd(loading.inputs) ? '' : ' '}`;
 				if (loading.inputs.block) {
-					thingsToAdd += thingsToAdd.at(thingsToAdd.length) !== ' ' ? '' : ' ';
-					thingsToAdd += `block`;
-					thingsToAdd += thingsToAdd.endsWith(' ') ? '' : ' ';
+					thingsToAdd += ` block`;
 				}
 				if (loading.inputs.invert) {
-					thingsToAdd += thingsToAdd.at(thingsToAdd.length) !== ' ' ? '' : ' ';
-					thingsToAdd += `invert`;
-					thingsToAdd += thingsToAdd.endsWith(' ') ? '' : ' ';
+					thingsToAdd += ` invert`;
 				}
 				if (loading.inputs.size) {
-					thingsToAdd += thingsToAdd.at(thingsToAdd.length) !== ' ' ? '' : ' ';
-					thingsToAdd += `size="L"`;
-					thingsToAdd += thingsToAdd.endsWith(' ') || thingsToAdd.endsWith('>') ? '' : ' ';
+					thingsToAdd += ` size="L"`;
 				}
 				if (loading.inputs.template) {
-					thingsToAdd += thingsToAdd.at(thingsToAdd.length) !== ' ' ? '' : ' ';
-					thingsToAdd += `template="${loading.inputs.template}"`;
-					thingsToAdd += thingsToAdd.endsWith(' ') ? '' : ' ';
+					thingsToAdd += ` template="${loading.inputs.template}"`;
 				}
 
 
@@ -74,7 +67,7 @@ export function migrateComponent(sourceFile: SourceFile, path: string, tree: Tre
 					}
 					templateUpdate.insertRight(loading.nodeOffset + loading.node.startSourceSpan.start.offset + 1, thingsToAdd);
 					// Self close this tag
-					templateUpdate.insertRight(loading.nodeOffset + loading.node.startSourceSpan.end.offset - 1, '/');
+					templateUpdate.insertRight(loading.nodeOffset + loading.node.startSourceSpan.end.offset - 1, `${hasThingsToAdd(loading.inputs) ? ' ' : ''}/`);
 				}
 
 				/**
@@ -87,7 +80,7 @@ export function migrateComponent(sourceFile: SourceFile, path: string, tree: Tre
 					}).join(' ');
 					templateUpdate.remove(loading.nodeOffset + classesNode.keySpan.start.offset - 1, classesNode.sourceSpan.toString().length + 1);
 					if(cleanedClasses) {
-						templateUpdate.insertRight(loading.nodeOffset + classesNode.keySpan.start.offset, `class="${cleanedClasses}"${loading.node.children.length > 0 && loading.node.endSourceSpan ? '' : ' '}`);
+						templateUpdate.insertRight(loading.nodeOffset + classesNode.keySpan.start.offset, `${hasThingsToAdd(loading.inputs) ? ' ' : ''}class="${cleanedClasses}"`);
 					}
 				}
 			}
@@ -138,6 +131,22 @@ function findHTMLLoadings(sourceFile: SourceFile, basePath: string, tree: Tree):
 	});
 
 	return htmlLoadings;
+}
+
+function hasThingsToAdd(inputs: LoadingInputs): boolean {
+	if (inputs?.block) {
+		return true;
+	}
+	if (inputs?.invert) {
+		return true;
+	}
+	if (inputs?.size) {
+		return true;
+	}
+	if (inputs?.template) {
+		return true;
+	}
+	return false;
 }
 
 function getLoadingTemplate(classes: string): 'popin' | 'drawer' | 'fullPage' | undefined {
