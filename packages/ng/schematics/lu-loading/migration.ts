@@ -106,7 +106,8 @@ function findHTMLLoadings(sourceFile: SourceFile, basePath: string, tree: Tree):
 		htmlAst.visitNodes((node) => {
 			if (isInterestingNode(node)) {
 				const classes = node.attributes.find(attr => attr.name === 'class')?.value;
-				if (classes?.includes("loading")){
+				// match check if it's only "loading" not loading-custom ...
+				if (classes?.includes("loading") && classes?.match(/(^|\s)loading(\s|$)/)){
 					const loading = classes.split(' ').find(c => c.startsWith('loading'));
 					if (loading) {
 						const inputs = {
