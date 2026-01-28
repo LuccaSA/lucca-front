@@ -32,6 +32,8 @@ export function migrateComponent(sourceFile: SourceFile, path: string, tree: Tre
 		htmlLoadings.forEach((loading) => {
 			const classesNode = loading.node.attributes.find(attr => attr.name === 'class');
 			const loadingNodeLength = loading.node.name.length;
+			const hasAriaHidden = loading.node.attributes.find(attr => attr.name === 'aria-hidden');
+			const hasStyle = loading.node.attributes.find(attr => attr.name === 'style');
 			// remove element name attribute
 			templateUpdate.remove(loading.nodeOffset + loading.node.startSourceSpan.start.offset + 1, loadingNodeLength);
 
@@ -39,7 +41,7 @@ export function migrateComponent(sourceFile: SourceFile, path: string, tree: Tre
 				/**
 				 * Add stuff
 				 */
-				let thingsToAdd = `lu-loading${hasThingsToAdd(loading.inputs) ? '' : ' '}`;
+				let thingsToAdd = `lu-loading${hasThingsToAdd(loading.inputs) || hasAriaHidden || hasStyle ? '' : ' '}`;
 				if (loading.inputs.block) {
 					thingsToAdd += ` block`;
 				}
@@ -68,7 +70,7 @@ export function migrateComponent(sourceFile: SourceFile, path: string, tree: Tre
 						templateUpdate.remove(loading.nodeOffset + loading.node.endSourceSpan?.start?.offset, loading.node.endSourceSpan?.toString().length);
 					}
 					templateUpdate.insertRight(loading.nodeOffset + loading.node.startSourceSpan.start.offset + 1, thingsToAdd);
-					templateUpdate.insertRight(loading.nodeOffset + loading.node.startSourceSpan.end.offset - 1, `${hasThingsToAdd(loading.inputs) ? ' ' : ''}/`);
+					templateUpdate.insertRight(loading.nodeOffset + loading.node.startSourceSpan.end.offset - 1, `${hasThingsToAdd(loading.inputs) || hasAriaHidden || hasStyle ? ' ' : ''}/`);
 				}
 
 				/**
@@ -81,7 +83,7 @@ export function migrateComponent(sourceFile: SourceFile, path: string, tree: Tre
 					}).join(' ');
 					templateUpdate.remove(loading.nodeOffset + classesNode.keySpan.start.offset - 1, classesNode.sourceSpan.toString().length + 1);
 					if(cleanedClasses) {
-						templateUpdate.insertRight(loading.nodeOffset + classesNode.keySpan.start.offset, `${hasThingsToAdd(loading.inputs) ? ' ' : ''}class="${cleanedClasses}"`);
+						templateUpdate.insertRight(loading.nodeOffset + classesNode.keySpan.start.offset, `${hasThingsToAdd(loading.inputs) || hasAriaHidden || hasStyle ? ' ' : ''}class="${cleanedClasses}"`);
 					}
 				}
 			}
