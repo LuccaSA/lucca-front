@@ -54,19 +54,20 @@ export function migrateComponent(sourceFile: SourceFile, path: string, tree: Tre
 				}
 
 
+				// with content
 				if (loading.node.children.length > 0 && loading.node.endSourceSpan) {
 					templateUpdate.remove(loading.nodeOffset + loading.node.endSourceSpan.start.offset + 1, loadingNodeLength + 1);
 					templateUpdate.insertRight(loading.nodeOffset + loading.node.startSourceSpan.start.offset + 1, thingsToAdd);
 					templateUpdate.insertLeft(loading.nodeOffset + loading.node.endSourceSpan.start.offset + 1, '/lu-loading');
-				} else {
+				}
+				// self closing
+				else {
 					const endSpanOffset = loading.node.endSourceSpan?.start.offset || -1;
 					templateUpdate.remove(loading.nodeOffset + loading.node.startSourceSpan.end.offset, endSpanOffset - loading.node.startSourceSpan.end.offset);
-					// Remove closing tag
-					if(loading.node.endSourceSpan?.start?.offset) {
+					if (loading.node.endSourceSpan?.start?.offset) {
 						templateUpdate.remove(loading.nodeOffset + loading.node.endSourceSpan?.start?.offset, loading.node.endSourceSpan?.toString().length);
 					}
 					templateUpdate.insertRight(loading.nodeOffset + loading.node.startSourceSpan.start.offset + 1, thingsToAdd);
-					// Self close this tag
 					templateUpdate.insertRight(loading.nodeOffset + loading.node.startSourceSpan.end.offset - 1, `${hasThingsToAdd(loading.inputs) ? ' ' : ''}/`);
 				}
 
@@ -156,6 +157,7 @@ function getLoadingTemplate(classes: string): 'popin' | 'drawer' | 'fullPage' | 
 	if (classes.includes('mod-drawer')) {
 		return 'drawer';
 	}
+	// fullpage is deprecated so we always use fullPage here
 	if (classes.includes('mod-fullPage') || classes.includes('mod-fullpage')) {
 		return 'fullPage';
 	}
