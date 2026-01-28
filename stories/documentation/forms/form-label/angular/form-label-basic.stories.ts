@@ -1,5 +1,6 @@
+import { LOCALE_ID } from '@angular/core';
 import { FormLabelComponent } from '@lucca-front/ng/form-label';
-import { Meta, moduleMetadata, StoryObj } from '@storybook/angular';
+import { applicationConfig, Meta, moduleMetadata, StoryObj } from '@storybook/angular';
 
 interface FormLabelBasicStory {
 	for: string;
@@ -21,6 +22,9 @@ export default {
 	decorators: [
 		moduleMetadata({
 			imports: [FormLabelComponent],
+		}),
+		applicationConfig({
+			providers: [{ provide: LOCALE_ID, useValue: 'fr-FR' }],
 		}),
 	],
 	argTypes: {
@@ -58,12 +62,22 @@ export default {
 		},
 		counterStatus: {
 			if: { arg: 'counterMax', truthy: true },
+			control: {
+				min: 0,
+				step: 1,
+			},
 		},
 		counterId: {
 			if: { arg: 'counterMax', truthy: true },
 		},
 		labelId: {
 			if: { arg: 'counterMax', truthy: true },
+		},
+		counterMax: {
+			control: {
+				min: 0,
+				step: 1,
+			},
 		},
 	},
 } as Meta;
@@ -90,7 +104,7 @@ const Template = (args: FormLabelBasicStory) => ({
 
 export const Basic: StoryObj<FormLabelBasicStory> = {
 	args: {
-		for: 'ID',
+		for: 'inputID',
 		label: 'Label',
 		tooltip: '',
 		tag: '',

@@ -1,10 +1,11 @@
 import { NgTemplateOutlet } from '@angular/common';
-import { booleanAttribute, ChangeDetectionStrategy, Component, computed, input, ViewEncapsulation } from '@angular/core';
+import { booleanAttribute, ChangeDetectionStrategy, Component, input, ViewEncapsulation } from '@angular/core';
 import { SafeHtml } from '@angular/platform-browser';
-import { DecorativePalette, Palette } from '@lucca-front/ng/core';
+import { DecorativePalette, intlInputOptions, IntlParamsPipe, Palette } from '@lucca-front/ng/core';
 import { IconComponent } from '@lucca-front/ng/icon';
 import { TagComponent } from '@lucca-front/ng/tag';
 import { LuTooltipTriggerDirective } from '@lucca-front/ng/tooltip';
+import { LU_FORM_LABEL_TRANSLATIONS } from './form-label.translate';
 
 @Component({
 	selector: 'lu-form-label',
@@ -12,7 +13,7 @@ import { LuTooltipTriggerDirective } from '@lucca-front/ng/tooltip';
 	templateUrl: './form-label.component.html',
 	encapsulation: ViewEncapsulation.None,
 	changeDetection: ChangeDetectionStrategy.OnPush,
-	imports: [NgTemplateOutlet, LuTooltipTriggerDirective, LuTooltipTriggerDirective, TagComponent, IconComponent],
+	imports: [NgTemplateOutlet, LuTooltipTriggerDirective, LuTooltipTriggerDirective, TagComponent, IconComponent, IntlParamsPipe],
 })
 export class FormLabelComponent {
 	readonly required = input(false, { transform: booleanAttribute });
@@ -27,7 +28,6 @@ export class FormLabelComponent {
 	readonly counterStatus = input<number>(0);
 	readonly counterMax = input<number>(0);
 	readonly counterId = input<string | null>(null);
-	readonly counterAlt = computed(() => {
-		return `Votre publication fait ${this.counterStatus()} caractères de long. ${this.counterMax()} maximum sont autorisés. `;
-	});
+
+	protected readonly intl = input(...intlInputOptions(LU_FORM_LABEL_TRANSLATIONS));
 }
