@@ -77,9 +77,14 @@
       "schema": "./lu-icon/schema.json"
     },
     "lu-loading": {
-      "description": "Migrate HTML icons to the new lu-loading component",
+      "description": "Migrate HTML loading to the new lu-loading component",
       "factory": "./lu-loading/index",
       "schema": "./lu-loading/schema.json"
+    },
+    "lu-container": {
+      "description": "Migrate HTML container to the new lu-container component",
+      "factory": "./lu-container/index",
+      "schema": "./lu-container/schema.json"
     },
     "lu-button": {
       "description": "Migrate CSS-only buttons to the new luButton component",
