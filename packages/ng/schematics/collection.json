@@ -76,6 +76,11 @@
       "factory": "./lu-icon/index",
       "schema": "./lu-icon/schema.json"
     },
+    "lu-loading": {
+      "description": "Migrate HTML icons to the new lu-loading component",
+      "factory": "./lu-loading/index",
+      "schema": "./lu-loading/schema.json"
+    },
     "lu-button": {
       "description": "Migrate CSS-only buttons to the new luButton component",
       "factory": "./lu-button/index",
