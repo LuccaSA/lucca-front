@@ -22,11 +22,11 @@ import {
 import { AbstractControl, NgControl, ReactiveFormsModule, RequiredValidator, Validators } from '@angular/forms';
 import { SafeHtml } from '@angular/platform-browser';
 import { intlInputOptions, IntlParamsPipe, LuClass, PortalContent, PortalDirective, ɵeffectWithDeps } from '@lucca-front/ng/core';
+import { FormLabelComponent } from '@lucca-front/ng/form-label';
 import { IconComponent } from '@lucca-front/ng/icon';
 import { InlineMessageComponent, InlineMessageState } from '@lucca-front/ng/inline-message';
 import { LuTooltipModule } from '@lucca-front/ng/tooltip';
 import { BehaviorSubject } from 'rxjs';
-import { FormLabelComponent } from '../form-label/form-label.component';
 import { FormFieldSize } from './form-field-size';
 import { FORM_FIELD_INSTANCE } from './form-field.token';
 import { LU_FORM_FIELD_TRANSLATIONS } from './form-field.translate';
