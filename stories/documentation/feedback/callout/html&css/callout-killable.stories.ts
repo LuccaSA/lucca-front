@@ -3,7 +3,7 @@ import { Meta, StoryObj } from '@storybook/angular';
 interface CalloutKillableStory {}
 
 export default {
-	title: 'Documentation/Feedback/Callout/HTML & CSS/Killable',
+	title: 'Documentation/Feedback/Callout/HTML&CSS/Killable',
 	argTypes: {},
 } as Meta;
 

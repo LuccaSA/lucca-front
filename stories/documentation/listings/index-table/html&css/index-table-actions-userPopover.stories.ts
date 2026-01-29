@@ -8,7 +8,7 @@ import { applicationConfig, Meta, moduleMetadata, StoryObj } from '@storybook/an
 interface IndexTableActionsUserPopoverCellStory {}
 
 export default {
-	title: 'Documentation/Listings/Index Table/HTML & CSS/Actions/User popover',
+	title: 'Documentation/Listings/Index Table/HTML&CSS/Actions/User popover',
 	argTypes: {},
 	decorators: [
 		moduleMetadata({
