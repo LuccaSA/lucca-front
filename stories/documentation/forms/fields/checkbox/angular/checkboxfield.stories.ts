@@ -75,7 +75,7 @@ export const Basic: StoryObj<CheckboxInputComponent & FormFieldComponent & { req
 			props: {
 				example: false,
 			},
-			template: cleanupTemplate(`<lu-form-field ${generateInputs(
+			template: cleanupTemplate(`<lu-form-field${generateInputs(
 				{
 					label,
 					hiddenLabel,

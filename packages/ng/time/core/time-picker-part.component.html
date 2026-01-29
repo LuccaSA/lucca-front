@@ -1,5 +1,5 @@
 <div class="timePicker-fieldset-group-textfield">
-	<label class="formLabel pr-u-mask" [attr.id]="inputId + '-label'" [attr.for]="inputId + '-input'">{{ label() }}</label>
+	<label luFormLabel class="pr-u-mask" [attr.id]="`${inputId}-label`" [attr.for]="`${inputId}-input`">{{ label() }}</label>
 	<div class="timePicker-fieldset-group-textfield">
 		<input
 			#timePickerInput

@@ -22,6 +22,7 @@ import {
 import { AbstractControl, NgControl, ReactiveFormsModule, RequiredValidator, Validators } from '@angular/forms';
 import { SafeHtml } from '@angular/platform-browser';
 import { intlInputOptions, IntlParamsPipe, LuClass, PortalContent, PortalDirective, ɵeffectWithDeps } from '@lucca-front/ng/core';
+import { FormLabelComponent } from '@lucca-front/ng/form-label';
 import { IconComponent } from '@lucca-front/ng/icon';
 import { InlineMessageComponent, InlineMessageState } from '@lucca-front/ng/inline-message';
 import { LuTooltipModule } from '@lucca-front/ng/tooltip';
@@ -38,7 +39,7 @@ type FormFieldWidth = 20 | 30 | 40 | 50 | 60;
 
 @Component({
 	selector: 'lu-form-field',
-	imports: [NgTemplateOutlet, InlineMessageComponent, LuTooltipModule, ReactiveFormsModule, IconComponent, IntlParamsPipe, PortalDirective],
+	imports: [NgTemplateOutlet, InlineMessageComponent, LuTooltipModule, ReactiveFormsModule, IconComponent, IntlParamsPipe, PortalDirective, FormLabelComponent],
 	templateUrl: './form-field.component.html',
 	styleUrl: './form-field.component.scss',
 	providers: [
