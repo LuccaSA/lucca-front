@@ -75,8 +75,9 @@ export const Basic: StoryObj<CheckboxInputComponent & FormFieldComponent & { req
 			props: {
 				example: false,
 			},
-			template: cleanupTemplate(`<ng-template #test>lorem <strong>ipsum</strong></ng-template><lu-form-field [label]="test" ${generateInputs(
+			template: cleanupTemplate(`<lu-form-field${generateInputs(
 				{
+					label,
 					hiddenLabel,
 					tooltip,
 					inlineMessage,

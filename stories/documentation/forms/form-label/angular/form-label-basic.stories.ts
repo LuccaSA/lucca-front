@@ -8,7 +8,6 @@ interface FormLabelBasicStory {
 	label: string;
 	tooltip: string;
 	tag: string;
-	tagPalette: string;
 	size: string;
 	counterMax: number;
 	counterStatus: number;
@@ -33,32 +32,6 @@ export default {
 			control: {
 				type: 'select',
 			},
-		},
-		tagPalette: {
-			options: [
-				'none',
-				'product',
-				'neutral',
-				'success',
-				'warning',
-				'error',
-				'kiwi',
-				'lime',
-				'cucumber',
-				'mint',
-				'glacier',
-				'lagoon',
-				'blueberry',
-				'lavender',
-				'grape',
-				'watermelon',
-				'pumpkin',
-				'pineapple',
-			],
-			control: {
-				type: 'select',
-			},
-			if: { arg: 'tag', truthy: true },
 		},
 		counterStatus: {
 			if: { arg: 'counterMax', truthy: true },
@@ -86,7 +59,6 @@ function getTemplate(args: FormLabelBasicStory): string {
 	const requiredAttr = args.required ? ` required` : ``;
 	const tooltipAttr = args.tooltip ? ` tooltip="${args.tooltip}"` : ``;
 	const tagAttr = args.tag ? ` tag="${args.tag}"` : ``;
-	const tagPaletteAttr = args.tag && args.tagPalette !== 'none' ? ` tagPalette="${args.tagPalette}"` : ``;
 	const sizeAttr = args.size ? ` size="${args.size}"` : ``;
 	const counterMaxAttr = args.counterMax > 0 ? ` counterMax="${args.counterMax}"` : ``;
 	const counterStatusAttr = args.counterMax > 0 ? ` counterStatus="${args.counterStatus}"` : ``;
@@ -94,7 +66,7 @@ function getTemplate(args: FormLabelBasicStory): string {
 	const labelIdAttr = args.counterMax > 0 ? ` labelId="${args.labelId}"` : ``;
 	const errorAttr = args.error ? ` error` : ``;
 
-	return `<lu-form-label for="${args.for}"${tooltipAttr}${tagAttr}${tagPaletteAttr}${sizeAttr}${counterMaxAttr}${counterStatusAttr}${counterIdAttr}${labelIdAttr}${requiredAttr}${errorAttr}>${args.label}</lu-form-label>`;
+	return `<label luFormLabel for="${args.for}"${tooltipAttr}${tagAttr}${sizeAttr}${counterMaxAttr}${counterStatusAttr}${counterIdAttr}${labelIdAttr}${requiredAttr}${errorAttr}>${args.label}</label>`;
 }
 
 const Template = (args: FormLabelBasicStory) => ({
@@ -108,7 +80,6 @@ export const Basic: StoryObj<FormLabelBasicStory> = {
 		label: 'Label',
 		tooltip: '',
 		tag: '',
-		tagPalette: 'none',
 		required: false,
 		size: '',
 		counterMax: 0,

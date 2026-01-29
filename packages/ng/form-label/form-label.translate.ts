@@ -8,6 +8,7 @@ export const LU_FORM_LABEL_TRANSLATIONS = new InjectionToken('LuFormLabelTransla
 
 export interface LuFormLabelTranslations {
 	counterAlt: { one: string; other: string };
+	tooltipAlt: string;
 }
 
 export const luFormLabelTranslations: LuTranslation<LuFormLabelTranslations> = Translations;

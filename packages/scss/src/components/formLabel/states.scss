@@ -1,5 +1,6 @@
 @mixin error {
 	--components-formLabel-color: var(--palettes-error-700);
+	--components-formLabel-info-color: inherit;
 }
 
 @mixin disabled {
