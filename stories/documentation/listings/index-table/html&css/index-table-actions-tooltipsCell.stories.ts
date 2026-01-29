@@ -4,7 +4,7 @@ import { Meta, moduleMetadata, StoryObj } from '@storybook/angular';
 interface IndexTableActionsTooltipsCellStory {}
 
 export default {
-	title: 'Documentation/Listings/Index Table/HTML & CSS/Actions/Tooltips/Cell',
+	title: 'Documentation/Listings/Index Table/HTML&CSS/Actions/Tooltips/Cell',
 	argTypes: {},
 	decorators: [
 		moduleMetadata({

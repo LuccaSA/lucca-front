@@ -3,7 +3,7 @@ import { Meta, StoryObj } from '@storybook/angular';
 interface IndexTableEmptyStateStory {}
 
 export default {
-	title: 'Documentation/Listings/Index Table/HTML & CSS/Empty State',
+	title: 'Documentation/Listings/Index Table/HTML&CSS/Empty State',
 	argTypes: {},
 } as Meta;
 

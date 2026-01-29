@@ -8,7 +8,7 @@ interface OptionBasicStory {
 }
 
 export default {
-	title: 'Documentation/Forms/Listbox Option/HTML & CSS/Add option',
+	title: 'Documentation/Forms/Listbox Option/HTML&CSS/Add option',
 	argTypes: {},
 	decorators: [
 		moduleMetadata({
