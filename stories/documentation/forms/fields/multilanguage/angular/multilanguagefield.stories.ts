@@ -36,13 +36,13 @@ export default {
 			},
 			description: 'Marque le champ comme obligatoire.',
 		},
-		allLanguagesFilled: {
+		allLanguagesRequired: {
 			control: {
 				type: 'boolean',
 			},
 			description: 'Ajoute le validateur marquant toutes les traductions comme obligatoires.',
 		},
-		invariantFilled: {
+		invariantRequired: {
 			control: {
 				type: 'boolean',
 			},
@@ -96,12 +96,12 @@ export const Basic: StoryObj<
 		FormFieldComponent & {
 			disabled: boolean;
 			required: boolean;
-			allLanguagesFilled: boolean;
-			invariantFilled: boolean;
+			allLanguagesRequired: boolean;
+			invariantRequired: boolean;
 		}
 > = {
 	render: (args, { argTypes }) => {
-		const { label, hiddenLabel, tooltip, inlineMessage, inlineMessageState, size, width, allLanguagesFilled, invariantFilled, ...inputArgs } = args;
+		const { label, hiddenLabel, tooltip, inlineMessage, inlineMessageState, size, width, allLanguagesRequired, invariantRequired, ...inputArgs } = args;
 		return {
 			props: {
 				formControl: new FormControl<MultilanguageTranslation[]>(
@@ -123,7 +123,7 @@ export const Basic: StoryObj<
 							value: '',
 						},
 					],
-					allLanguagesFilled ? MultiLanguageInputValidators.allLanguagesFilled : invariantFilled ? MultiLanguageInputValidators.invariantFilled : undefined,
+					allLanguagesRequired ? MultiLanguageInputValidators.allLanguagesRequired : invariantRequired ? MultiLanguageInputValidators.invariantRequired : undefined,
 				),
 			},
 			template: cleanupTemplate(`<lu-form-field ${generateInputs(
@@ -153,7 +153,7 @@ export const Basic: StoryObj<
 		placeholder: 'Placeholder',
 		tooltip: 'Je suis un message d’aide',
 		openOnFocus: false,
-		allLanguagesFilled: false,
-		invariantFilled: false,
+		allLanguagesRequired: false,
+		invariantRequired: false,
 	},
 };
