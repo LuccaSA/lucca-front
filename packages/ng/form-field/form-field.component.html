@@ -1,22 +1,14 @@
 @if (layout() === "fieldset") {
 	<fieldset class="form-fieldset" [class.mod-inline]="inline()" [class.mod-S]="size() === 'S'">
-		<legend class="formLabel" [class.pr-u-mask]="hiddenLabel()" attr.aria-hidden="{{ hiddenLabel() }}">
+		<legend
+			luFormLabel
+			[tooltip]="tooltip()"
+			[tag]="tag()"
+			[required]="isInputRequired()"
+			[class.pr-u-mask]="hiddenLabel()"
+			[attr.aria-hidden]="hiddenLabel()"
+		>
 			<ng-container *luPortal="label()" />
-			@if (isInputRequired()) {
-				<sup class="formLabel-required" aria-hidden="true">*</sup>
-			}
-			@if (tooltip()) {
-				<lu-icon
-					class="formLabel-info"
-					icon="signHelp"
-					[alt]="'?'"
-					[luTooltip]="tooltip()"
-					[color]="invalidStatus() ? 'error' : 'inherit'"
-				/>
-			}
-			@if (tag()) {
-				<span class="tag formLabel-tag">{{ tag() }}</span>
-			}
 		</legend>
 		<ng-container *ngTemplateOutlet="projectionTpl" />
 		@if (inlineMessage() || (invalidStatus() ? errorInlineMessage() : false)) {

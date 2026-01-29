@@ -1,10 +1,7 @@
 <ng-template #radioContent>
-	<label class="formLabel" [class.inputFramed-header-label]="framed()" id="{{ id }}-label" for="{{ id }}-input">
-		<ng-content />
-		@if (tag()) {
-			<span class="formLabel-tag tag">{{ tag() }}</span>
-		}
-	</label>
+	<label luFormLabel [tag]="tag()" [class.inputFramed-header-label]="framed()" [attr.id]="`${id}-label`" [attr.for]="`${id}-input`"
+		><ng-content
+	/></label>
 	<span class="radioField">
 		<input
 			[formControl]="formControl"

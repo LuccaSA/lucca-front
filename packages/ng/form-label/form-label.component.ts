@@ -9,7 +9,7 @@ import { LU_FORM_LABEL_TRANSLATIONS } from './form-label.translate';
 
 @Component({
 	// eslint-disable-next-line @angular-eslint/component-selector
-	selector: 'label[luFormLabel]',
+	selector: 'label[luFormLabel], legend[luFormLabel]',
 	styleUrl: './form-label.component.scss',
 	templateUrl: './form-label.component.html',
 	encapsulation: ViewEncapsulation.None,
