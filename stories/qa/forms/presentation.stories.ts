@@ -21,6 +21,10 @@ import { LuMultiSelectInputComponent } from '@lucca-front/ng/multi-select';
 import { LuSimpleSelectInputComponent } from '@lucca-front/ng/simple-select';
 import { applicationConfig, Meta, moduleMetadata, StoryObj } from '@storybook/angular';
 import { cleanupTemplate, generateInputs } from 'stories/helpers/stories';
+import { RichTextInputComponent } from '@lucca-front/ng/forms/rich-text-input/rich-text-input.component';
+import { RichTextPluginTagComponent } from '@lucca-front/ng/forms/rich-text-input/plugins/tag';
+import { RichTextInputToolbarComponent } from '@lucca-front/ng/forms/rich-text-input/plugins/toolbar';
+import { provideLuRichTextMarkdownFormatter } from '@lucca-front/ng/forms/rich-text-input/formatters/markdown/markdown-formatter';
 
 export default {
 	title: 'QA/Forms/Presentation',
@@ -47,14 +51,18 @@ export default {
 				FormsModule,
 				FormComponent,
 				DataPresentationComponent,
+				RichTextInputComponent,
+				RichTextPluginTagComponent,
+				RichTextInputToolbarComponent,
 			],
+			providers: [provideLuRichTextMarkdownFormatter()],
 		}),
 	],
 } as Meta;
 
 export const Basic: StoryObj = {
 	render: (args, { argTypes }) => {
-		const { tooltip, size, booleanValue, stringValue, dateValue, numberValue, phoneNumberValue, textAreaValue } = args;
+		const { tooltip, size, booleanValue, stringValue, dateValue, numberValue, phoneNumberValue, textAreaValue, richTextContent } = args;
 		return {
 			props: {
 				boolean: booleanValue,
@@ -83,6 +91,7 @@ export const Basic: StoryObj = {
 				textAreaValue,
 				legumes: allLegumes,
 				legume: allLegumes[2],
+				richTextContent,
 			},
 			template: cleanupTemplate(`
 <lu-form-field presentation label="Checkbox input" ${generateInputs(
@@ -219,6 +228,13 @@ export const Basic: StoryObj = {
 		<lu-radio [value]="3" [inlineMessage]="template" disabled>Option C</lu-radio>
 	</lu-radio-group-input>
 </lu-form-field>
+<br>
+<br>
+<lu-form-field presentation label="Rich Text Editor">
+	<lu-rich-text-input placeholder="Placeholder…" autoResize	[(ngModel)]="richTextContent">
+		<lu-rich-text-input-toolbar />
+	</lu-rich-text-input>
+</lu-form-field>
 `),
 		};
 	},
@@ -227,6 +243,7 @@ export const Basic: StoryObj = {
 		size: '',
 		booleanValue: false,
 		stringValue: 'example string value',
+		richTextContent: 'Lorem **ipsum** dolor {{tag1}} *italic* {{unregisteredTag}} and regular {{tag2}} trailing text\nLine 2\n\nParagraph 2\n\n\n\nParagraph 3',
 		dateValue: new Date(),
 		numberValue: 123456789,
 		phoneNumberValue: '+33700000000',
