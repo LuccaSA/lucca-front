@@ -3,7 +3,7 @@ import { Meta, StoryObj } from '@storybook/angular';
 interface PLGPushTitleStory {}
 
 export default {
-	title: 'Documentation/Feedback/PLG Push/HTML & CSS/Title',
+	title: 'Documentation/Feedback/PLG Push/HTML&CSS/Title',
 	argTypes: {},
 } as Meta;
 

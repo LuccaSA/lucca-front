@@ -5,7 +5,7 @@ interface GridsPositionStory {
 }
 
 export default {
-	title: 'Documentation/Structure/Grids/HTML & CSS/Position',
+	title: 'Documentation/Structure/Grids/HTML&CSS/Position',
 	argTypes: {},
 } as Meta;
 

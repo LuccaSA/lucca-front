@@ -6,7 +6,7 @@ interface CalloutTitleStory {
 }
 
 export default {
-	title: 'Documentation/Feedback/Callout/HTML & CSS/Title',
+	title: 'Documentation/Feedback/Callout/HTML&CSS/Title',
 	argTypes: {},
 } as Meta;
 

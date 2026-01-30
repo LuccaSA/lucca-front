@@ -93,6 +93,11 @@ export class LuMultiSelectWithSelectAllDirective<TValue> extends ɵIsSelectedStr
 		if (this.#values().length) {
 			this.#values.set([]);
 		}
+
+		if (selectAll) {
+			this.select.focusInput$.next({ keepClue: true });
+		}
+
 		this.#mode.set(selectAll ? 'all' : 'none');
 		this.#onChange?.(this.#selectAllValue());
 	}

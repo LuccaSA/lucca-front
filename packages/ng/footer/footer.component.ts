@@ -11,9 +11,16 @@ import { booleanAttribute, ChangeDetectionStrategy, Component, computed, input, 
 })
 export class FooterComponent {
 	readonly sticky = input(false, { transform: booleanAttribute });
+
+	/**
+	 * Applies a container around the Page Header content
+	 */
 	readonly container = input(false, { transform: booleanAttribute });
+
 	readonly forceNarrow = input(false, { transform: booleanAttribute });
+
 	readonly dialog = input(false, { transform: booleanAttribute });
+
 	readonly narrowAtMediaMax = input<'XXS' | 'XS' | 'S' | 'M'>('XXS');
 
 	readonly breakpointClass = computed(() => (this.forceNarrow() ? 'mod-narrow' : { [`mod-narrowAtMediaMax${this.narrowAtMediaMax()}`]: !!this.narrowAtMediaMax() }));

@@ -34,16 +34,25 @@ export class NumericBadgeComponent {
 	 */
 	readonly palette = input<Palette>('none');
 
+	/**
+	 * Applies the loading state
+	 */
 	readonly loading = input(false, { transform: booleanAttribute });
 
+	/**
+	 * Indicates the maximum value of number for the numeric badge
+	 */
 	readonly maxValue = input<number>(999);
 
+	/**
+	 * Disabled tooltip on numeric badge
+	 */
 	readonly disableTooltip = input(false, { transform: booleanAttribute });
 
 	readonly numericBadgeClasses = computed(() => {
 		const palette = this.palette();
 		const size = this.size();
-		return { [`palette-${palette}`]: !!this.palette(), [`mod-${size}`]: !!this.size() };
+		return { [`palette-${palette}`]: !!palette, [`mod-${size}`]: !!size };
 	});
 
 	readonly displayValue = computed(() => {

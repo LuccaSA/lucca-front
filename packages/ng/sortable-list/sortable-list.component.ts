@@ -10,6 +10,9 @@ import { SortableListItemComponent } from './sortable-list-item';
 	encapsulation: ViewEncapsulation.None,
 })
 export class SortableListComponent {
+	/**
+	 * Applies small size to sortable list
+	 */
 	small = input(false, { transform: booleanAttribute });
 
 	sortableListItems = contentChildren(SortableListItemComponent, { descendants: true });

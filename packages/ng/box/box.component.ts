@@ -18,7 +18,10 @@ import { IconComponent } from '@lucca-front/ng/icon';
 })
 export class BoxComponent {
 	readonly toggle = input(false, { transform: booleanAttribute });
+
 	readonly neutral = input(false, { transform: booleanAttribute });
+
 	readonly killable = input(false, { transform: booleanAttribute });
+
 	readonly withArrow = input(false, { transform: booleanAttribute });
 }

@@ -7,7 +7,7 @@ interface CalloutIconStory {
 }
 
 export default {
-	title: 'Documentation/Feedback/Callout/HTML & CSS/Icon',
+	title: 'Documentation/Feedback/Callout/HTML&CSS/Icon',
 	argTypes: {
 		s: {
 			control: {

@@ -3,7 +3,7 @@ import { Meta, StoryObj } from '@storybook/angular';
 interface IndexTableResponsiveCardListNestedStory {}
 
 export default {
-	title: 'Documentation/Listings/Index Table/HTML & CSS/Responsive Card List Nested',
+	title: 'Documentation/Listings/Index Table/HTML&CSS/Responsive Card List Nested',
 	argTypes: {},
 } as Meta;
 

@@ -3,7 +3,7 @@ import { Meta, StoryObj } from '@storybook/angular';
 interface InlineMessageSizeStory {}
 
 export default {
-	title: 'Documentation/Forms/InlineMessage/HTML & CSS/Size',
+	title: 'Documentation/Forms/InlineMessage/HTML&CSS/Size',
 	argTypes: {},
 } as Meta;
 

@@ -18,12 +18,24 @@ import { InlineMessageState } from './inline-message-state';
 export class InlineMessageComponent {
 	#luClass = inject(LuClass);
 
+	/**
+	 * The title of the inline message
+	 */
 	readonly label = input.required<PortalContent>();
 
+	/**
+	 * Inline message state
+	 */
 	readonly state = input<InlineMessageState>();
 
+	/**
+	 * Which size should the inline message be? Default, medium or small
+	 */
 	readonly size = input<'S' | 'M'>();
 
+	/**
+	 * Defines whether a tooltip is used in the inline message component
+	 */
 	readonly withTooltip = input(false, { transform: booleanAttribute });
 
 	constructor() {

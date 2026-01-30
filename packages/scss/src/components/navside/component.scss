@@ -116,6 +116,10 @@
 			font-weight: var(--pr-t-font-fontWeight-semibold);
 		}
 
+		.navSide-item-link-title {
+			overflow-wrap: anywhere;
+		}
+
 		.navSide-item-link-badgesOptional {
 			display: flex;
 			column-gap: var(--pr-t-spacings-150);

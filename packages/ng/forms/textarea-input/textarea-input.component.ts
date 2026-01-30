@@ -38,7 +38,7 @@ export class TextareaInputComponent implements OnInit {
 		this.cloneValue = value;
 		this.#cdr.detectChanges(); // Needed to apply cloneValue to autoresize HTML clone
 
-		if (this.autoResizeScrollIntoView && this.parent) {
+		if (this.autoResizeScrollIntoView() && this.parent()) {
 			this.parent().nativeElement.scrollIntoView({
 				behavior: 'instant',
 				block: 'end',

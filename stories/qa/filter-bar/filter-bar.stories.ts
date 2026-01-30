@@ -1,4 +1,3 @@
-import { allLegumes, FilterLegumesPipe } from '@/stories/forms/select/select.utils';
 import { provideHttpClient } from '@angular/common/http';
 import { ChangeDetectionStrategy, Component, LOCALE_ID } from '@angular/core';
 import { FormsModule } from '@angular/forms';
@@ -10,6 +9,7 @@ import { FormFieldComponent } from '@lucca-front/ng/form-field';
 import { CheckboxInputComponent, TextInputComponent } from '@lucca-front/ng/forms';
 import { LuMultiSelectInputComponent } from '@lucca-front/ng/multi-select';
 import { NumericBadgeComponent } from '@lucca-front/ng/numeric-badge';
+import { SegmentedControlComponent, SegmentedControlFilterComponent } from '@lucca-front/ng/segmented-control';
 import { LuSimpleSelectInputComponent } from '@lucca-front/ng/simple-select';
 import { applicationConfig, Meta, StoryObj } from '@storybook/angular';
 import { StoryModelDisplayComponent } from 'stories/helpers/story-model-display.component';
@@ -27,7 +27,6 @@ import { StoryModelDisplayComponent } from 'stories/helpers/story-model-display.
 		StoryModelDisplayComponent,
 		ButtonComponent,
 		LuSimpleSelectInputComponent,
-		FilterLegumesPipe,
 		FilterPillAddonAfterDirective,
 		FilterPillAddonBeforeDirective,
 		FormFieldComponent,
@@ -35,12 +34,12 @@ import { StoryModelDisplayComponent } from 'stories/helpers/story-model-display.
 		NumericBadgeComponent,
 		LuCoreSelectApiV4Directive,
 		LuMultiSelectInputComponent,
+		SegmentedControlComponent,
+		SegmentedControlFilterComponent,
 	],
 	changeDetection: ChangeDetectionStrategy.OnPush,
 })
-class FilterBarStory {
-	legumes = allLegumes;
-}
+class FilterBarStory {}
 
 export default {
 	title: 'QA/FilterBar',

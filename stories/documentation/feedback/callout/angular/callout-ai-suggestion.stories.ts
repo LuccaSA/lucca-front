@@ -35,7 +35,9 @@ export default {
 		<lu-text-input required type="text" [(ngModel)]="example" />
 	</lu-form-field>
 	<lu-callout AI iconAlt="${iconAlt}"${generateInputs(inputs, context.argTypes)} class="suggestion-callout">
-		<div class="suggestion-callout-text">${description}</div>
+		<div class="suggestion-callout-text">
+			<p>${description}</p>
+		</div>
 		<lu-callout-actions inline>
 			<button luButton="outlined" class="suggestion-callout-accept"><lu-icon icon="signConfirm" alt="Accepter" /></button>
 			<button luButton="outlined" class="suggestion-callout-reject"><lu-icon icon="signClose" alt="Refuser" /></button>

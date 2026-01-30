@@ -3,7 +3,7 @@ import { Meta, StoryObj } from '@storybook/angular';
 interface MobilePushBasicStory {}
 
 export default {
-	title: 'Documentation/Feedback/Mobile Push/HTML & CSS/Basic',
+	title: 'Documentation/Feedback/Mobile Push/HTML&CSS/Basic',
 	argTypes: {},
 } as Meta;
 

@@ -20,7 +20,13 @@ export class HorizontalNavigationComponent {
 	readonly links = contentChildren(HorizontalNavigationLinkDirective);
 
 	readonly noBorder = input(false, { transform: booleanAttribute });
+
 	readonly container = input(false, { transform: booleanAttribute });
+
 	readonly vertical = input(false, { transform: booleanAttribute });
+
+	/**
+	 * Which size should the horizontal navigation be? Defaults and small
+	 */
 	readonly size = input<null | 'S'>(null);
 }

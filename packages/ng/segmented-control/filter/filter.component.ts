@@ -19,14 +19,23 @@ let nextId = 0;
 export class SegmentedControlFilterComponent<T = unknown> {
 	protected segmentedControlRef = inject(LU_SEGMENTEDCONTROL_INSTANCE);
 
+	/**
+	 * Disabled the segmented control filter
+	 */
 	readonly disabled = input(false, { transform: booleanAttribute });
 
+	/**
+	 * Defines filtered value used
+	 */
 	readonly value = input.required<T>();
+
+	/**
+	 * Changes the text displayed by the segmented control filter
+	 */
+	readonly label = input<PortalContent>();
 
 	readonly id = `${this.segmentedControlRef.id}item${nextId++}`;
 	readonly name = this.segmentedControlRef.id;
-
-	readonly label = input<PortalContent>();
 
 	public get formControl() {
 		return this.segmentedControlRef.ngControl.control;

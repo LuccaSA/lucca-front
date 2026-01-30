@@ -205,7 +205,7 @@ export const WithAction: StoryObj = {
 		<lu-dialog-header>
 			Template driven header
 			<ng-container dialogHeaderAction>
-				<button luButton="text" size="S"><lu-icon icon="menuDots" alt="More options" /></button>
+				<button luButton="ghost" size="S"><lu-icon icon="menuDots" alt="More options" /></button>
 			</ng-container>
 		</lu-dialog-header>
 
@@ -215,7 +215,7 @@ export const WithAction: StoryObj = {
 			<div class="footer-content">Optional footer text</div>
 			<div class="footer-actions">
 				<button type="button" luButton luDialogClose>Confirm</button>
-				<button type="button" luButton="text" luDialogDismiss>Cancel</button>
+				<button type="button" luButton="ghost" luDialogDismiss>Cancel</button>
 			</div>
 		</lu-dialog-footer>
 	</lu-dialog>

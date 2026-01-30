@@ -90,6 +90,10 @@
 	}
 }
 
+@mixin withAction {
+	--components-dialog-insideHeaderAreas: 'container action close';
+}
+
 @mixin stacked {
 
 }
