@@ -3,7 +3,7 @@ import { AfterViewInit, ChangeDetectionStrategy, ChangeDetectorRef, Component, E
 import { AbstractControl, ControlValueAccessor, NG_VALIDATORS, NG_VALUE_ACCESSOR, ValidationErrors, Validator } from '@angular/forms';
 import { ClearComponent } from '@lucca-front/ng/clear';
 import { ALuDateAdapter, ELuDateGranularity, LuDateGranularity, getIntl } from '@lucca-front/ng/core';
-import { LuInputDirective, LuInputDisplayerDirective } from '@lucca-front/ng/input';
+import { LuInputDisplayerDirective } from '@lucca-front/ng/input';
 import { ILuInputWithPicker } from '@lucca-front/ng/picker';
 import { ALuSelectInputComponent } from '@lucca-front/ng/select';
 import { LuDateAdapterPipe } from '../adapter';
@@ -15,7 +15,7 @@ import { LU_DATE_SELECT_INPUT_TRANSLATIONS } from './date-select-input.translate
 	templateUrl: './date-select-input.component.html',
 	styleUrl: './date-select-input.component.scss',
 	changeDetection: ChangeDetectionStrategy.OnPush,
-	imports: [LuDateAdapterPipe, LuDatePickerComponent, LuInputDirective, OverlayModule, ClearComponent, LuInputDisplayerDirective],
+	imports: [LuDateAdapterPipe, LuDatePickerComponent, OverlayModule, ClearComponent, LuInputDisplayerDirective],
 	providers: [
 		{
 			provide: NG_VALUE_ACCESSOR,

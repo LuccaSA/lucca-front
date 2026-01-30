@@ -1,4 +1,3 @@
-import { NgClass } from '@angular/common';
 import { booleanAttribute, ChangeDetectionStrategy, Component, computed, ElementRef, forwardRef, inject, input, LOCALE_ID, model, output, viewChild, ViewEncapsulation } from '@angular/core';
 import { FormsModule, NG_VALUE_ACCESSOR } from '@angular/forms';
 import { getIntl, isNil, isNotNil } from '@lucca-front/ng/core';
@@ -17,7 +16,6 @@ import {
 import { isoDurationToDateFnsDuration } from '../core/duration.utils';
 import { ceilToNearest, circularize, floorToNearest, roundToNearest } from '../core/math.utils';
 import { PickerControlDirection } from '../core/misc.utils';
-import { RepeatOnHoldDirective } from '../core/repeat-on-hold.directive';
 import { TimePickerPartComponent } from '../core/time-picker-part.component';
 import { DEFAULT_MIN_TIME, DEFAULT_TIME_DECIMAL_PIPE_FORMAT, TimeChangeEvent } from './time-picker.model';
 import { LU_TIME_PICKER_TRANSLATIONS } from './time-picker.translate';
@@ -27,7 +25,7 @@ let nextId = 0;
 
 @Component({
 	selector: 'lu-time-picker',
-	imports: [TimePickerPartComponent, NgClass, FormsModule, RepeatOnHoldDirective],
+	imports: [TimePickerPartComponent, FormsModule],
 	templateUrl: './time-picker.component.html',
 	styleUrl: './time-picker.component.scss',
 	changeDetection: ChangeDetectionStrategy.OnPush,
