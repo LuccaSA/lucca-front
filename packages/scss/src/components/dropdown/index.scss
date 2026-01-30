@@ -1,17 +1,17 @@
 @use 'exports' as *;
 
-// .lu-dropdown-content is deprecated
-.dropdown,
-.lu-dropdown-content.lu-popover-content {
+// stylelint-disable-next-line selector-disallowed-list -- .lu-dropdown-content is deprecated
+.lu-dropdown-content.lu-popover-content,
+.dropdown {
 	@layer components {
 		@include vars;
 		@include component;
 	}
 }
 
-// .lu-dropdown-options-item-action is deprecated
-.dropdown-list-option-action,
-.lu-dropdown-options-item-action {
+// stylelint-disable-next-line selector-disallowed-list -- .lu-dropdown-options-item-action is deprecated
+.lu-dropdown-options-item-action,
+.dropdown-list-option-action {
 	@layer mods {
 		&[disabled],
 		&.is-disabled {

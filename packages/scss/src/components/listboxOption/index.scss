@@ -27,7 +27,7 @@
 			}
 		}
 
-		&[role="group"] {
+		&[role='group'] {
 			@include group;
 
 			&:hover,
@@ -48,12 +48,12 @@
 			}
 		}
 
-		&[aria-hidden="true"] {
+		&[aria-hidden='true'] {
 			@include empty;
 		}
 
-		&[aria-selected="true"],
-		&[aria-checked="true"] {
+		&[aria-selected='true'],
+		&[aria-checked='true'] {
 			> .listboxOption-content {
 				@include selected;
 
@@ -68,7 +68,7 @@
 			}
 		}
 
-		&[aria-disabled="true"] {
+		&[aria-disabled='true'] {
 			> .listboxOption-content {
 				@include disabled;
 
@@ -77,8 +77,8 @@
 				}
 			}
 
-			&[aria-selected="true"],
-			&[aria-checked="true"] {
+			&[aria-selected='true'],
+			&[aria-checked='true'] {
 				> .listboxOption-content {
 					@include selectedDisabled;
 				}
@@ -119,7 +119,7 @@
 	}
 
 	@layer mods {
-		&[aria-busy="true"] {
+		&[aria-busy='true'] {
 			@include busy;
 		}
 
@@ -142,8 +142,8 @@
 						@include multipleActive;
 					}
 
-					&[aria-selected="true"],
-					&[aria-checked="true"] {
+					&[aria-selected='true'],
+					&[aria-checked='true'] {
 						> .listboxOption-content {
 							@include multipleSelected;
 
@@ -158,7 +158,7 @@
 						}
 					}
 
-					&[aria-checked="mixed"] {
+					&[aria-checked='mixed'] {
 						> .listboxOption-content {
 							@include multipleMixed;
 
@@ -173,19 +173,19 @@
 						}
 					}
 
-					&[aria-disabled="true"], {
+					&[aria-disabled='true'], {
 						> .listboxOption-content {
 							@include multipleDisabled;
 						}
 
-						&[aria-selected="true"],
-						&[aria-checked="true"] {
+						&[aria-selected='true'],
+						&[aria-checked='true'] {
 							> .listboxOption-content {
 								@include multipleSelectedDisabled;
 							}
 						}
 
-						&[aria-checked="mixed"] {
+						&[aria-checked='mixed'] {
 							> .listboxOption-content {
 								@include multipleMixedDisabled;
 							}

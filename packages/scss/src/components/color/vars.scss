@@ -4,7 +4,7 @@
 	--components-color-value-inlineSize: calc(var(--pr-t-spacings-200) + var(--pr-t-spacings-50));
 	--components-color-value-boxShadowColor: transparent;
 	--components-color-value-backgroundColor: transparent;
-	--components-color-value-channel: clamp(0, (((r * .299) + (g * .587) + (b * .114)) - 128) * -1000, 255);
+	--components-color-value-channel: clamp(0, (((r * 0.299) + (g * 0.587) + (b * 0.114)) - 128) * -1000, 255);
 }
 
 @mixin varsPicker {
