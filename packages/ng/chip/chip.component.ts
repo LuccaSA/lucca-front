@@ -65,7 +65,6 @@ export class ChipComponent {
 	 * Which icon should we display in the chip if any?
 	 * Defaults to no icon.
 	 */
-	readonly stateAlt = computed(() => (this.isWarning() ? this.intl().warning : this.isCritical() ? this.intl().error : ''));
 
 	readonly icon = input<LuccaIcon | null>(null);
 
@@ -73,8 +72,7 @@ export class ChipComponent {
 	 * Emit event when button kill is click
 	 */
 	readonly kill = output<Event>();
-
-	readonly stateAlt = computed(() => (this.isWarning() ? this.intl.warning : this.isCritical() ? this.intl.error : ''));
+	readonly stateAlt = computed(() => (this.isWarning() ? this.intl().warning : this.isCritical() ? this.intl().error : ''));
 	readonly isWarning = computed<boolean>(() => this.state() === 'warning');
 	readonly isCritical = computed<boolean>(() => this.state() === 'critical');
 	readonly displayedIcon = computed<LuccaIcon | null>(() => (this.isWarning() ? 'signWarning' : this.isCritical() ? 'signError' : this.icon()));
