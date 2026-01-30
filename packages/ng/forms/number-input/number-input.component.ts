@@ -2,7 +2,7 @@ import { NgTemplateOutlet } from '@angular/common';
 import { booleanAttribute, ChangeDetectionStrategy, Component, ElementRef, input, numberAttribute, viewChild, ViewEncapsulation } from '@angular/core';
 import { ReactiveFormsModule } from '@angular/forms';
 import { ClearComponent } from '@lucca-front/ng/clear';
-import { getIntl } from '@lucca-front/ng/core';
+import { intlInputOptions } from '@lucca-front/ng/core';
 import { InputDirective } from '@lucca-front/ng/form-field';
 import { FormFieldIdDirective } from '../form-field-id.directive';
 import { injectNgControl } from '../inject-ng-control';
@@ -41,7 +41,7 @@ export class NumberInputComponent {
 
 	readonly valueAlignRight = input(false, { transform: booleanAttribute });
 
-	readonly intl = getIntl(LU_NUMBERFIELD_TRANSLATIONS);
+	readonly intl = input(...intlInputOptions(LU_NUMBERFIELD_TRANSLATIONS));
 
 	clearValue(): void {
 		this.ngControl.reset();

@@ -53,7 +53,7 @@
 		/>
 		<div class="textField-input-affix">
 			@if (hasClearer() && inputElement.value) {
-				<lu-clear class="textField-input-affix-clear" (onClear)="clearValue(); inputElement.focus()">{{ intl.clear }}</lu-clear>
+				<lu-clear class="textField-input-affix-clear" (onClear)="clearValue(); inputElement.focus()">{{ intl().clear }}</lu-clear>
 			}
 		</div>
 	</div>

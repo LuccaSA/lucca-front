@@ -1,7 +1,7 @@
 import { CdkObserveContent } from '@angular/cdk/observers';
-import { AfterViewInit, ChangeDetectionStrategy, Component, DestroyRef, ElementRef, HostBinding, HostListener, inject, OnDestroy, ViewEncapsulation } from '@angular/core';
+import { AfterViewInit, ChangeDetectionStrategy, Component, DestroyRef, ElementRef, HostBinding, HostListener, inject, input, OnDestroy, ViewEncapsulation } from '@angular/core';
 import { ButtonComponent } from '@lucca-front/ng/button';
-import { getIntl, PortalDirective } from '@lucca-front/ng/core';
+import { intlInputOptions, PortalDirective } from '@lucca-front/ng/core';
 import { IconComponent } from '@lucca-front/ng/icon';
 import { Subject } from 'rxjs';
 import { PopoverFocusTrap } from '../../popover-focus-trap';
@@ -18,7 +18,7 @@ import { LU_POPOVER2_TRANSLATIONS } from '../../popover.translate';
 	changeDetection: ChangeDetectionStrategy.OnPush,
 })
 export class PopoverContentComponent implements AfterViewInit, OnDestroy {
-	intl = getIntl(LU_POPOVER2_TRANSLATIONS);
+	intl = input(...intlInputOptions(LU_POPOVER2_TRANSLATIONS));
 
 	#elementRef = inject<ElementRef<HTMLElement>>(ElementRef);
 

@@ -1,6 +1,6 @@
 import { afterNextRender, booleanAttribute, ChangeDetectionStrategy, Component, effect, inject, Injector, input, ViewEncapsulation } from '@angular/core';
-import { Router } from '@angular/router';
-import { getIntl } from '@lucca-front/ng/core';
+import { Router, UrlTree } from '@angular/router';
+import { intlInputOptions } from '@lucca-front/ng/core';
 import { LU_LINK_TRANSLATIONS } from './link.translate';
 import { LuRouterLink } from './lu-router-link';
 
@@ -31,7 +31,7 @@ import { LuRouterLink } from './lu-router-link';
 	changeDetection: ChangeDetectionStrategy.OnPush,
 })
 export class LinkComponent {
-	intl = getIntl(LU_LINK_TRANSLATIONS);
+	intl = input(...intlInputOptions(LU_LINK_TRANSLATIONS));
 	routerLink = inject(LuRouterLink);
 	#injector = inject(Injector);
 	router = inject(Router);
@@ -90,9 +90,16 @@ export class LinkComponent {
 	redirect(): void {
 		const routerLinkCommands = this.routerLinkCommands();
 		if (!this.disabled() && routerLinkCommands && this.external()) {
-			afterNextRender(() => window.open(this.router.serializeUrl(this.router.createUrlTree(Array.isArray(routerLinkCommands) ? routerLinkCommands : [routerLinkCommands])), '_blank'), {
-				injector: this.#injector,
-			});
+			const urlTree =
+				routerLinkCommands instanceof UrlTree
+					? routerLinkCommands
+					: this.router.createUrlTree(Array.isArray(routerLinkCommands) ? routerLinkCommands : [routerLinkCommands], {
+							queryParams: this.routerLink.queryParams,
+							fragment: this.routerLink.fragment,
+							queryParamsHandling: this.routerLink.queryParamsHandling,
+							preserveFragment: this.routerLink.preserveFragment,
+						});
+			afterNextRender(() => window.open(this.router.serializeUrl(urlTree), '_blank'), { injector: this.#injector });
 		}
 	}
 }

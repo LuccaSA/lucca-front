@@ -1,9 +1,10 @@
-import { Component } from '@angular/core';
+import { ChangeDetectionStrategy, Component } from '@angular/core';
 import { Meta, moduleMetadata, StoryObj } from '@storybook/angular';
 
 @Component({
 	selector: 'form-label-stories',
 	templateUrl: './form-label.stories.html',
+	changeDetection: ChangeDetectionStrategy.OnPush,
 })
 class FormLabelStory {}
 

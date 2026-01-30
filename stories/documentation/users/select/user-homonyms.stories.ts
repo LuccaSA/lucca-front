@@ -1,5 +1,5 @@
 import { provideHttpClient } from '@angular/common/http';
-import { Component } from '@angular/core';
+import { ChangeDetectionStrategy, Component } from '@angular/core';
 import { FormsModule } from '@angular/forms';
 import { provideAnimations } from '@angular/platform-browser/animations';
 import { LuApiPagedSearcherComponent } from '@lucca-front/ng/api';
@@ -7,7 +7,7 @@ import { LuInputDisplayerDirective } from '@lucca-front/ng/input';
 import { LuForOptionsDirective, LuOptionItemComponent, LuOptionPickerAdvancedComponent, LuOptionPickerComponent } from '@lucca-front/ng/option';
 import { LuSelectInputComponent } from '@lucca-front/ng/select';
 import { LuUserDisplayPipe, LuUserHomonymsComponent, LuUserMeOptionDirective } from '@lucca-front/ng/user';
-import { Meta, applicationConfig, StoryObj } from '@storybook/angular';
+import { applicationConfig, Meta, StoryObj } from '@storybook/angular';
 
 @Component({
 	selector: 'user-select-stories',
@@ -25,6 +25,7 @@ import { Meta, applicationConfig, StoryObj } from '@storybook/angular';
 		FormsModule,
 		LuForOptionsDirective,
 	],
+	changeDetection: ChangeDetectionStrategy.OnPush,
 })
 class UserHomonymsStory {}
 

@@ -15,6 +15,7 @@ import {
 	OnDestroy,
 	OnInit,
 	output,
+	Signal,
 	signal,
 	TemplateRef,
 	Type,
@@ -22,20 +23,25 @@ import {
 } from '@angular/core';
 import { outputFromObservable, toSignal } from '@angular/core/rxjs-interop';
 import { ControlValueAccessor } from '@angular/forms';
-import { getIntl, PortalContent } from '@lucca-front/ng/core';
+import { PortalContent } from '@lucca-front/ng/core';
 import { FILTER_PILL_HOST_COMPONENT, FILTER_PILL_INPUT_COMPONENT, FilterPillInputComponent } from '@lucca-front/ng/filter-pills';
 import { BehaviorSubject, defer, map, Observable, of, ReplaySubject, startWith, Subject, switchMap, take } from 'rxjs';
 import { LuOptionGrouping, LuSimpleSelectDefaultOptionComponent } from '../option';
 import { LuSelectPanelRef } from '../panel';
 import { CoreSelectAddOptionStrategy, LuOptionComparer, LuOptionContext, SELECT_LABEL, SELECT_LABEL_ID } from '../select.model';
-import { LU_CORE_SELECT_TRANSLATIONS } from '../select.translate';
+import { LuCoreSelectLabel } from '../select.translate';
 import { TreeNode } from './model';
 import { TreeGenerator } from './tree-generator';
 
 export const coreSelectDefaultOptionComparer: LuOptionComparer<unknown> = (option1, option2) => JSON.stringify(option1) === JSON.stringify(option2);
 export const coreSelectDefaultOptionKey: (option: unknown) => unknown = (option) => option;
 
-@Directive()
+@Directive({
+	host: {
+		'[class.colorPicker]': 'colorPicker()',
+		'[class.mod-compact]': 'compact()',
+	},
+})
 export abstract class ALuSelectInputComponent<TOption, TValue> implements OnDestroy, OnInit, ControlValueAccessor, FilterPillInputComponent {
 	public parentInput = inject(FILTER_PILL_INPUT_COMPONENT, { optional: true, skipSelf: true });
 	protected changeDetectorRef = inject(ChangeDetectorRef);
@@ -44,7 +50,7 @@ export abstract class ALuSelectInputComponent<TOption, TValue> implements OnDest
 	protected labelElement: HTMLElement | undefined = inject(SELECT_LABEL);
 	protected labelId: string = inject(SELECT_LABEL_ID);
 
-	protected coreIntl = getIntl(LU_CORE_SELECT_TRANSLATIONS);
+	protected abstract intl: Signal<LuCoreSelectLabel>;
 
 	protected filterPillHost = inject(FILTER_PILL_HOST_COMPONENT, { optional: true });
 	protected afterCloseFn?: () => void;
@@ -56,6 +62,8 @@ export abstract class ALuSelectInputComponent<TOption, TValue> implements OnDest
 
 	public panelClosed = output<void>();
 	public panelOpened = output<void>();
+
+	public highlightedOption = output<TOption>();
 
 	@ViewChild('inputElement')
 	private inputElementRef: ElementRef<HTMLInputElement>;
@@ -89,8 +97,17 @@ export abstract class ALuSelectInputComponent<TOption, TValue> implements OnDest
 		return this.clueChange$.observed;
 	}
 
+	#addOptionLabelInput = signal<PortalContent | null>(null);
+	protected computedAddOptionLabel = computed(() => this.#addOptionLabelInput() ?? this.intl().addOption);
+
 	@Input()
-	addOptionLabel: PortalContent = this.coreIntl.addOption;
+	set addOptionLabel(label: PortalContent) {
+		this.#addOptionLabelInput.set(label);
+	}
+
+	get addOptionLabel(): PortalContent {
+		return this.computedAddOptionLabel();
+	}
 
 	@Input()
 	set addOptionStrategy(strategy: CoreSelectAddOptionStrategy) {
@@ -153,6 +170,10 @@ export abstract class ALuSelectInputComponent<TOption, TValue> implements OnDest
 	noClueIcon = input(false, { transform: booleanAttribute });
 	inputTabindex = input<number>(0);
 
+	compact = input(false, { transform: booleanAttribute });
+
+	colorPicker = input(false, { transform: booleanAttribute });
+
 	@HostBinding('class.mod-noClueIcon')
 	protected get isNoClueIconClass(): boolean {
 		return this.noClueIcon();
@@ -161,6 +182,7 @@ export abstract class ALuSelectInputComponent<TOption, TValue> implements OnDest
 	optionTpl = model<TemplateRef<LuOptionContext<TOption>> | Type<unknown>>(LuSimpleSelectDefaultOptionComponent);
 	valueTpl = model<TemplateRef<LuOptionContext<TOption>> | Type<unknown> | undefined>();
 	panelHeaderTpl = model<TemplateRef<void> | Type<unknown> | undefined>();
+	panelFooterTpl = model<TemplateRef<void> | Type<unknown> | undefined>();
 
 	displayerTpl = computed(() => this.valueTpl() || this.optionTpl());
 
@@ -291,7 +313,7 @@ export abstract class ALuSelectInputComponent<TOption, TValue> implements OnDest
 				if (this.isPanelOpen) {
 					// Prevent form submission when selecting a value with Enter
 					$event.preventDefault();
-					this.panelRef.selectCurrentlyHighlightedValue();
+					this.panelRef?.selectCurrentlyHighlightedValue();
 				} else {
 					this.panelRef?.handleKeyManagerEvent($event);
 				}
@@ -434,7 +456,7 @@ export abstract class ALuSelectInputComponent<TOption, TValue> implements OnDest
 		this.onTouched?.();
 		if (!this.filterPillMode) {
 			this.isPanelOpen$.next(false);
-			this.panelRef.close();
+			this.panelRef?.close();
 			this._panelRef = undefined;
 			this.focusInput();
 		}
@@ -476,7 +498,7 @@ export abstract class ALuSelectInputComponent<TOption, TValue> implements OnDest
 	enableFilterPillMode() {
 		this.filterPillMode = true;
 		this.#defaultFilterPillClearable.set(true);
-		this._panelRef.closed.subscribe(this.afterCloseFn);
+		this._panelRef?.closed.subscribe(this.afterCloseFn);
 		this.bindInputToPanelRefEvents();
 	}
 

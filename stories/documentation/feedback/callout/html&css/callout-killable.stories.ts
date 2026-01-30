@@ -10,9 +10,7 @@ export default {
 function getTemplate(args: CalloutKillableStory): string {
 	return `<div class="callout">
 	<div class="callout-content">
-		<div class="callout-content-description">
-			<p>Feedback description</p>
-		</div>
+		<p class="callout-content-description">Feedback description</p>
 	</div>
 	<button type="button" class="callout-kill"></button>
 </div>`;

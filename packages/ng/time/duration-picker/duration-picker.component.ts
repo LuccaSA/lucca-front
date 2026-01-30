@@ -1,6 +1,6 @@
 import { booleanAttribute, ChangeDetectionStrategy, Component, computed, forwardRef, input, model, output, ViewEncapsulation } from '@angular/core';
 import { NG_VALUE_ACCESSOR } from '@angular/forms';
-import { getIntl, isNil, isNotNil } from '@lucca-front/ng/core';
+import { intlInputOptions, isNil, isNotNil } from '@lucca-front/ng/core';
 import { BasePickerComponent } from '../core/base-picker.component';
 import { ISO8601Duration } from '../core/date-primitives';
 import { createDurationFromHoursAndMinutes, getHoursPartFromDuration, getMinutesPartFromDuration, isISO8601Duration, isoDurationToDateFnsDuration, isoDurationToSeconds } from '../core/duration.utils';
@@ -27,7 +27,7 @@ import { LU_DURATION_PICKER_TRANSLATIONS } from './duration-picker.translate';
 	],
 })
 export class DurationPickerComponent extends BasePickerComponent {
-	protected intl = getIntl(LU_DURATION_PICKER_TRANSLATIONS);
+	protected intl = input(...intlInputOptions(LU_DURATION_PICKER_TRANSLATIONS));
 
 	value = model<ISO8601Duration>('PT0S');
 	readonly max = input<ISO8601Duration>('PT99H');
@@ -58,7 +58,7 @@ export class DurationPickerComponent extends BasePickerComponent {
 			'pr-u-visibilityHidden': this.shouldHideValue(),
 		};
 	});
-	protected separator = this.intl.timePickerTimeSeparator;
+	protected separator = computed(() => this.intl().timePickerTimeSeparator);
 
 	protected hoursDecimalConf = DEFAULT_TIME_DECIMAL_PIPE_FORMAT;
 
@@ -159,7 +159,9 @@ export class DurationPickerComponent extends BasePickerComponent {
 		const minutesPart = getMinutesPartFromDuration(protoEvent.value);
 
 		if (hoursPart < 0) {
-			hoursPart = getHoursPartFromDuration(this.max());
+			if (hoursPart === -1) {
+				hoursPart = getHoursPartFromDuration(this.max());
+			}
 			if (isoDurationToSeconds(createDurationFromHoursAndMinutes(hoursPart, minutesPart)) > isoDurationToSeconds(this.max())) {
 				// If current value with minutes is > max, decrement hours again
 				hoursPart--;
@@ -174,10 +176,9 @@ export class DurationPickerComponent extends BasePickerComponent {
 
 		const seconds = roundToNearest(circularize(candidateTimeAsSeconds, max), 60);
 
-		const hours = Math.floor(seconds / 3600);
 		const minutes = Math.floor((seconds % 3600) / 60);
 
-		const result = createDurationFromHoursAndMinutes(hours, minutes);
+		const result = createDurationFromHoursAndMinutes(hoursPart, minutes);
 
 		this.value.set(result);
 		this.onChange?.(result);

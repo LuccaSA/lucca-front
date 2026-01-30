@@ -1,9 +1,10 @@
-import { Component } from '@angular/core';
+import { ChangeDetectionStrategy, Component } from '@angular/core';
 import { Meta, StoryObj } from '@storybook/angular';
 
 @Component({
 	selector: 'skip-links-stories',
 	templateUrl: './skip-links.stories.html',
+	changeDetection: ChangeDetectionStrategy.OnPush,
 })
 class SkipLinksStory {}
 
@@ -14,7 +15,7 @@ export default {
 
 const template = () => ({});
 
-export const basic: StoryObj<SkipLinksStory> = {
+export const Basic: StoryObj<SkipLinksStory> = {
 	args: {},
 	render: template,
 };

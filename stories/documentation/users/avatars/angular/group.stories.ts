@@ -1,4 +1,4 @@
-import { Component, input } from '@angular/core';
+import { ChangeDetectionStrategy, Component, input } from '@angular/core';
 import { LuUserPictureModule } from '@lucca-front/ng/user';
 import { Meta, StoryObj } from '@storybook/angular';
 import { squidwards } from '../../user.mocks';
@@ -125,6 +125,7 @@ import { squidwards } from '../../user.mocks';
 			</li>
 		</ul>
 	`,
+	changeDetection: ChangeDetectionStrategy.OnPush,
 })
 class AvatarStory {
 	sizes = input<string>();
