@@ -3,7 +3,7 @@ import { Meta, StoryObj } from '@storybook/angular';
 interface IndexTableNestedSelectableStory {}
 
 export default {
-	title: 'Documentation/Listings/Index Table/HTML & CSS/Nested Selectable',
+	title: 'Documentation/Listings/Index Table/HTML&CSS/Nested Selectable',
 	argTypes: {},
 } as Meta;
 

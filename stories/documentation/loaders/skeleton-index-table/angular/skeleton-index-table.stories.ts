@@ -20,13 +20,10 @@ export const Template: StoryObj<SkeletonIndexTableComponent> = {
 				min: 1,
 			},
 		},
-		tableBodyOnly: {
-			control: false,
-		},
 	},
-
 	args: {
 		cols: 5,
 		rows: 8,
+		colsAlign: { 3: 'center', 4: 'end' },
 	},
 };

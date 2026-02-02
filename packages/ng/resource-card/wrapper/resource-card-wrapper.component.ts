@@ -20,6 +20,8 @@ import { LU_RESOURCE_CARD_WRAPPER_INSTANCE } from './resource-card-wrapper.token
 })
 export class ResourceCardWrapperComponent {
 	readonly grid = input(false, { transform: booleanAttribute });
+
 	readonly draggable = input(false, { transform: booleanAttribute });
+
 	readonly size = input<'S' | null>(null);
 }

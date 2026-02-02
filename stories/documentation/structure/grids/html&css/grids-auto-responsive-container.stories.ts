@@ -5,7 +5,7 @@ interface GridsPositionStory {
 }
 
 export default {
-	title: 'Documentation/Structure/Grids/HTML & CSS/ResponsiveAutoContainer',
+	title: 'Documentation/Structure/Grids/HTML&CSS/ResponsiveAutoContainer',
 	argTypes: {},
 } as Meta;
 

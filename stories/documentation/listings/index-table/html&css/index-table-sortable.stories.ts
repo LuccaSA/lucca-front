@@ -5,7 +5,7 @@ interface IndexTableSortableStory {
 }
 
 export default {
-	title: 'Documentation/Listings/Index Table/HTML & CSS/Sortable',
+	title: 'Documentation/Listings/Index Table/HTML&CSS/Sortable',
 	argTypes: {
 		align: {
 			options: ['', 'mod-alignRight', 'mod-alignCenter'],

@@ -13,3 +13,7 @@
 	--components-appLayout-navSide-overflowX: visible;
 	--components-appLayout-navSide-overflowY: visible;
 }
+
+@mixin withNoBanner {
+	--commons-banner-height: 0px;
+}

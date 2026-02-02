@@ -3,6 +3,7 @@
 .multilanguage_popover-content.popover-contentOptional {
 	@layer components {
 		max-block-size: 20rem;
+		max-inline-size: 100%;
 		overflow: auto;
 	}
 

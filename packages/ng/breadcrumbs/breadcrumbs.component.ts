@@ -21,7 +21,7 @@ let nextId = 0;
 	changeDetection: ChangeDetectionStrategy.OnPush,
 })
 export class BreadcrumbsComponent {
-	intl = input(...intlInputOptions(LU_BREADCRUMBS_TRANSLATIONS));
+	readonly intl = input(...intlInputOptions(LU_BREADCRUMBS_TRANSLATIONS));
 
 	readonly disableCompact = input(false, { transform: booleanAttribute });
 

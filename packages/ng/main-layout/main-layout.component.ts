@@ -13,6 +13,13 @@ import { booleanAttribute, ChangeDetectionStrategy, Component, input, ViewEncaps
 	},
 })
 export class MainLayoutComponent {
+	/**
+	 * Sticks header on the screen
+	 */
 	readonly headerSticky = input(false, { transform: booleanAttribute });
+
+	/**
+	 * Sticks footer on the screen
+	 */
 	readonly footerSticky = input(false, { transform: booleanAttribute });
 }

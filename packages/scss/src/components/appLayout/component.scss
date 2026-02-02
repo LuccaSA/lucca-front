@@ -18,6 +18,7 @@
 		}
 
 		.appLayout-navSide {
+			min-inline-size: 0;
 			grid-area: navSide;
 			overflow-y: var(--components-appLayout-navSide-overflowX);
 			overflow-x: var(--components-appLayout-navSide-overflowY);

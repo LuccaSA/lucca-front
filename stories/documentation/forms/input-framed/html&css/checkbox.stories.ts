@@ -3,7 +3,7 @@ import { Meta } from '@storybook/angular';
 interface InputFramedCheckboxStory {}
 
 export default {
-	title: 'Documentation/Forms/Input Framed/HTML & CSS/Checkbox',
+	title: 'Documentation/Forms/Input Framed/HTML&CSS/Checkbox',
 	argTypes: {},
 	render: (args: InputFramedCheckboxStory) => {
 		return {

@@ -19,7 +19,7 @@ import { getCalloutPalette } from '../callout.utils';
 	encapsulation: ViewEncapsulation.None,
 })
 export class CalloutComponent {
-	public intl = input(...intlInputOptions(LU_CALLOUT_TRANSLATIONS));
+	readonly intl = input(...intlInputOptions(LU_CALLOUT_TRANSLATIONS));
 
 	/**
 	 * The title of the callout
@@ -60,7 +60,6 @@ export class CalloutComponent {
 	/**
 	 * Is the callout removed? Works with two way binding too.
 	 */
-
 	readonly removed = input(false, { transform: booleanAttribute });
 
 	/**

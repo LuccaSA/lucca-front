@@ -11,7 +11,7 @@ interface ClearBasicStory {
 }
 
 export default {
-	title: 'Documentation/Texts/Clear/HTML & CSS/Basic',
+	title: 'Documentation/Texts/Clear/HTML&CSS/Basic',
 	argTypes: {
 		S: {
 			control: {

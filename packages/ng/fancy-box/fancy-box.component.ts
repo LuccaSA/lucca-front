@@ -15,12 +15,24 @@ import { ChangeDetectionStrategy, Component, computed, input, ViewEncapsulation 
 	},
 })
 export class FancyBoxComponent {
+	/**
+	 * foreground image (URL)
+	 */
 	readonly foreground = input<string>();
 
+	/**
+	 * Background left image (URL)
+	 */
 	readonly backgroundLeft = input.required<string>();
 
+	/**
+	 * Background right image (URL)
+	 */
 	readonly backgroundRight = input.required<string>();
 
+	/**
+	 * Which size should the callout be? Defaults to small
+	 */
 	readonly size = input<null | 'S'>(null);
 
 	readonly foregroundStyle = computed(() => this.#buildUrl(this.foreground()));

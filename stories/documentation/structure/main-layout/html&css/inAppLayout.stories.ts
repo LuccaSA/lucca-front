@@ -40,16 +40,18 @@ export default {
 		const headerContainer = args.header
 			? `
 					<div class="mainLayout-content-inside-header${headerStickyParam}">
-						<div class="container">
-							<div class="fakeContent">header</div>
+						<div class="fakeContent">
+							header
+							<!-- .pageHeader container -->
 						</div>
 					</div>`
 			: ``;
 		const footerContainer = args.footer
 			? `
 					<div class="mainLayout-content-inside-footer${footerStickyParam}">
-						<div class="container">
-							<div class="fakeContent">footer</div>
+						<div class="fakeContent">
+							header
+							<!-- .footer container -->
 						</div>
 					</div>`
 			: ``;

@@ -51,6 +51,7 @@
 			padding-inline: var(--components-options-item-padding-horizontal);
 			transition: background-color 50ms;
 			cursor: pointer;
+			overflow-wrap: anywhere;
 
 			::ng-deep {
 				.avatar {
