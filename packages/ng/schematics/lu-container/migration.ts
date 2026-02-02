@@ -10,7 +10,7 @@ import { currentSchematicContext } from '../lib/lf-schematic-context';
 interface ContainerInputs {
 	center?: boolean;
 	overflow?: boolean;
-	max?: 'M' | 'L' | 'XL' | 'XXL' | 'XXXL';
+	max?: string;
 }
 interface HTMLContainer {
 	node: TmplAstElement;
@@ -108,14 +108,13 @@ function findHTMLContainers(sourceFile: SourceFile, basePath: string, tree: Tree
 			if (isInterestingNode(node)) {
 				const classes = node.attributes.find(attr => attr.name === 'class')?.value;
 				// match check if it's only "loading" not loading-custom ...
-				if (classes?.includes("loading") && classes?.match(/(^|\s)loading(\s|$)/)){
-					const loading = classes.split(' ').find(c => c.startsWith('loading'));
-					if (loading) {
+				if (classes?.includes("container") && classes?.match(/(^|\s)container(\s|$)/)){
+					const container = classes.split(' ').find(c => c.startsWith('container'));
+					if (container) {
 						const inputs: ContainerInputs = {
-							size: classes.split(' ').find(c => /mod-L/.test(c)),
-							block: classes.includes('mod-block') ? true : undefined,
-							invert: classes.includes('mod-invert') ? true : undefined,
-							template: getLoadingTemplate(classes),
+							max: classes.split(' ').find(c => /mod-max(M|L|XL|XXL|XXXL)/.test(c))?.replace('mod-max', ''),
+							center: classes.includes('mod-center') ? true : undefined,
+							overflow: classes.includes('mod-overflow') ? true : undefined,
 						}
 						const loading: HTMLContainer = {
 							node: node,
@@ -136,34 +135,17 @@ function findHTMLContainers(sourceFile: SourceFile, basePath: string, tree: Tree
 	return htmlLoadings;
 }
 
-function hasThingsToAdd(inputs: LoadingInputs): boolean {
-	if (inputs?.block) {
+function hasThingsToAdd(inputs: ContainerInputs): boolean {
+	if (inputs?.max) {
 		return true;
 	}
-	if (inputs?.invert) {
+	if (inputs?.overflow) {
 		return true;
 	}
-	if (inputs?.size) {
-		return true;
-	}
-	if (inputs?.template) {
+	if (inputs?.center) {
 		return true;
 	}
 	return false;
-}
-
-function getLoadingTemplate(classes: string): 'popin' | 'drawer' | 'fullPage' | undefined {
-	if (classes.includes('mod-popin')) {
-		return 'popin';
-	}
-	if (classes.includes('mod-drawer')) {
-		return 'drawer';
-	}
-	// fullpage is deprecated so we always use fullPage here
-	if (classes.includes('mod-fullPage') || classes.includes('mod-fullpage')) {
-		return 'fullPage';
-	}
-	return undefined;
 }
 
 function isInterestingNode(node: unknown): node is TmplAstElement {
