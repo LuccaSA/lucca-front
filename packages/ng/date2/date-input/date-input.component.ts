@@ -1,5 +1,5 @@
 import { ConnectionPositionPair } from '@angular/cdk/overlay';
-import { DatePipe, NgTemplateOutlet } from '@angular/common';
+import { NgTemplateOutlet } from '@angular/common';
 import {
 	booleanAttribute,
 	ChangeDetectionStrategy,
@@ -41,7 +41,7 @@ export type DateInputValidatorErrorType = {
 
 @Component({
 	selector: 'lu-date-input',
-	imports: [PopoverDirective, Calendar2Component, IconComponent, InputDirective, NgTemplateOutlet, FilterPillDisplayerDirective, ClearComponent, PresentationDisplayDirective, DatePipe],
+	imports: [PopoverDirective, Calendar2Component, IconComponent, InputDirective, NgTemplateOutlet, FilterPillDisplayerDirective, ClearComponent, PresentationDisplayDirective],
 	templateUrl: './date-input.component.html',
 	styleUrl: './date-input.component.scss',
 	host: {
@@ -181,14 +181,16 @@ export class DateInputComponent extends AbstractDateComponent implements OnInit,
 		super();
 
 		effect(() => {
-			const nativeElement = this.inputRef().nativeElement;
-			const cursorPositionBefore = nativeElement.selectionStart;
-			const displayValue = this.displayValue();
-			nativeElement.value = this.displayValue();
-			if (displayValue.endsWith(this.separator)) {
-				nativeElement.setSelectionRange(cursorPositionBefore + 1, cursorPositionBefore + 1);
-			} else {
-				nativeElement.setSelectionRange(cursorPositionBefore, cursorPositionBefore);
+			const nativeElement = this.inputRef()?.nativeElement;
+			if (nativeElement) {
+				const cursorPositionBefore = nativeElement.selectionStart ?? 0;
+				const displayValue = this.displayValue();
+				nativeElement.value = this.displayValue();
+				if (displayValue.endsWith(this.separator)) {
+					nativeElement.setSelectionRange(cursorPositionBefore + 1, cursorPositionBefore + 1);
+				} else {
+					nativeElement.setSelectionRange(cursorPositionBefore, cursorPositionBefore);
+				}
 			}
 		});
 
@@ -393,7 +395,7 @@ export class DateInputComponent extends AbstractDateComponent implements OnInit,
 		this.tabbableDate.set(date);
 		if (!this.isFilterPill) {
 			popoverRef.close();
-			this.inputRef().nativeElement.focus();
+			this.inputRef()?.nativeElement.focus();
 		}
 		this.filterPillPopoverCloseFn?.();
 	}
