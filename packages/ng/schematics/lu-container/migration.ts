@@ -21,55 +21,51 @@ interface HTMLContainer {
 }
 
 export function migrateComponent(sourceFile: SourceFile, path: string, tree: Tree): string {
-	const htmlLoadings = findHTMLLoadings(sourceFile, path, tree);
+	const htmlContainers = findHTMLContainers(sourceFile, path, tree);
 
-	if (htmlLoadings.length > 0) {
+	if (htmlContainers.length > 0) {
 		const tsUpdate = tree.beginUpdate(path);
-		const isInlineTemplate = htmlLoadings[0].filePath === path;
-		const templateUpdate = isInlineTemplate ? tsUpdate : tree.beginUpdate(htmlLoadings[0].filePath);
+		const isInlineTemplate = htmlContainers[0].filePath === path;
+		const templateUpdate = isInlineTemplate ? tsUpdate : tree.beginUpdate(htmlContainers[0].filePath);
 
-		htmlLoadings.forEach((loading) => {
-			const classesNode = loading.node.attributes.find(attr => attr.name === 'class');
-			const loadingNodeLength = loading.node.name.length;
-			const hasAriaHidden = loading.node.attributes.find(attr => attr.name === 'aria-hidden');
-			const hasStyle = loading.node.attributes.find(attr => attr.name === 'style');
+		htmlContainers.forEach((container) => {
+			const classesNode = container.node.attributes.find(attr => attr.name === 'class');
+			const containerNodeLength = container.node.name.length;
+			const hasAriaHidden = container.node.attributes.find(attr => attr.name === 'aria-hidden');
+			const hasStyle = container.node.attributes.find(attr => attr.name === 'style');
 			// remove element name attribute
-			templateUpdate.remove(loading.nodeOffset + loading.node.startSourceSpan.start.offset + 1, loadingNodeLength);
+			templateUpdate.remove(container.nodeOffset + container.node.startSourceSpan.start.offset + 1, containerNodeLength);
 
 			if(classesNode && classesNode.keySpan) {
 				/**
 				 * Add stuff
 				 */
-				let thingsToAdd = `lu-loading${hasThingsToAdd(loading.inputs) || hasAriaHidden || hasStyle ? '' : ' '}`;
-				if (loading.inputs.block) {
-					thingsToAdd += ` block`;
+				let thingsToAdd = `lu-container${hasThingsToAdd(container.inputs) || hasAriaHidden || hasStyle ? '' : ' '}`;
+				if (container.inputs.center) {
+					thingsToAdd += ` center`;
 				}
-				if (loading.inputs.invert) {
-					thingsToAdd += ` invert`;
+				if (container.inputs.overflow) {
+					thingsToAdd += ` overflow`;
 				}
-				if (loading.inputs.size) {
-					thingsToAdd += ` size="L"`;
+				if (container.inputs.max) {
+					thingsToAdd += ` max="${container.inputs.max}"`;
 				}
-				if (loading.inputs.template) {
-					thingsToAdd += ` template="${loading.inputs.template}"`;
-				}
-
 
 				// with content
-				if (loading.node.children.length > 0 && loading.node.endSourceSpan) {
-					templateUpdate.remove(loading.nodeOffset + loading.node.endSourceSpan.start.offset + 1, loadingNodeLength + 1);
-					templateUpdate.insertRight(loading.nodeOffset + loading.node.startSourceSpan.start.offset + 1, thingsToAdd);
-					templateUpdate.insertLeft(loading.nodeOffset + loading.node.endSourceSpan.start.offset + 1, '/lu-loading');
+				if (container.node.children.length > 0 && container.node.endSourceSpan) {
+					templateUpdate.remove(container.nodeOffset + container.node.endSourceSpan.start.offset + 1, containerNodeLength + 1);
+					templateUpdate.insertRight(container.nodeOffset + container.node.startSourceSpan.start.offset + 1, thingsToAdd);
+					templateUpdate.insertLeft(container.nodeOffset + container.node.endSourceSpan.start.offset + 1, '/lu-container');
 				}
 				// self closing
 				else {
-					const endSpanOffset = loading.node.endSourceSpan?.start.offset || -1;
-					templateUpdate.remove(loading.nodeOffset + loading.node.startSourceSpan.end.offset, endSpanOffset - loading.node.startSourceSpan.end.offset);
-					if (loading.node.endSourceSpan?.start?.offset) {
-						templateUpdate.remove(loading.nodeOffset + loading.node.endSourceSpan?.start?.offset, loading.node.endSourceSpan?.toString().length);
+					const endSpanOffset = container.node.endSourceSpan?.start.offset || -1;
+					templateUpdate.remove(container.nodeOffset + container.node.startSourceSpan.end.offset, endSpanOffset - container.node.startSourceSpan.end.offset);
+					if (container.node.endSourceSpan?.start?.offset) {
+						templateUpdate.remove(container.nodeOffset + container.node.endSourceSpan?.start?.offset, container.node.endSourceSpan?.toString().length);
 					}
-					templateUpdate.insertRight(loading.nodeOffset + loading.node.startSourceSpan.start.offset + 1, thingsToAdd);
-					templateUpdate.insertRight(loading.nodeOffset + loading.node.startSourceSpan.end.offset - 1, `${hasThingsToAdd(loading.inputs) || hasAriaHidden || hasStyle ? ' ' : ''}/`);
+					templateUpdate.insertRight(container.nodeOffset + container.node.startSourceSpan.start.offset + 1, thingsToAdd);
+					templateUpdate.insertRight(container.nodeOffset + container.node.startSourceSpan.end.offset - 1, `${hasThingsToAdd(container.inputs) || hasAriaHidden || hasStyle ? ' ' : ''}/`);
 				}
 
 				/**
@@ -78,18 +74,18 @@ export function migrateComponent(sourceFile: SourceFile, path: string, tree: Tre
 				if(classesNode && classesNode.keySpan){
 					const classes = classesNode.value;
 					const cleanedClasses = classes.split(' ').filter(c => {
-						return ![`mod-L`, `mod-block`, `mod-invert`, `loading`, `mod-invert`, `mod-popin`, `mod-drawer`, `mod-fullPage`, `mod-fullpage`].includes(c);
+						return ![`mod-max${container.inputs.max}`, `mod-overflow`, `mod-center`, `container`].includes(c);
 					}).join(' ');
-					templateUpdate.remove(loading.nodeOffset + classesNode.keySpan.start.offset - 1, classesNode.sourceSpan.toString().length + 1);
+					templateUpdate.remove(container.nodeOffset + classesNode.keySpan.start.offset - 1, classesNode.sourceSpan.toString().length + 1);
 					if(cleanedClasses) {
-						templateUpdate.insertRight(loading.nodeOffset + classesNode.keySpan.start.offset, `${hasThingsToAdd(loading.inputs) || hasAriaHidden || hasStyle ? ' ' : ''}class="${cleanedClasses}"`);
+						templateUpdate.insertRight(container.nodeOffset + classesNode.keySpan.start.offset, `${hasThingsToAdd(container.inputs) || hasAriaHidden || hasStyle ? ' ' : ''}class="${cleanedClasses}"`);
 					}
 				}
 			}
 
 		});
 		// Add import if needed
-		applyToUpdateRecorder(tsUpdate, [insertTSImportIfNeeded(sourceFile, path, 'LoadingComponent', '@lucca-front/ng/loading'), insertAngularImportIfNeeded(sourceFile, path, 'LoadingComponent')]);
+		applyToUpdateRecorder(tsUpdate, [insertTSImportIfNeeded(sourceFile, path, 'ContainerComponent', '@lucca-front/ng/container'), insertAngularImportIfNeeded(sourceFile, path, 'ContainerComponent')]);
 		tree.commitUpdate(tsUpdate);
 		if (!isInlineTemplate) {
 			tree.commitUpdate(templateUpdate);
@@ -99,7 +95,7 @@ export function migrateComponent(sourceFile: SourceFile, path: string, tree: Tre
 }
 
 function findHTMLContainers(sourceFile: SourceFile, basePath: string, tree: Tree): HTMLContainer[] {
-	const htmlLoadings: HTMLContainer[] = [];
+	const htmlContainer: HTMLContainer[] = [];
 	const ngTemplates = extractNgTemplatesIncludingHtml(sourceFile, tree, basePath);
 
 	ngTemplates.forEach((template) => {
@@ -107,7 +103,7 @@ function findHTMLContainers(sourceFile: SourceFile, basePath: string, tree: Tree
 		htmlAst.visitNodes((node) => {
 			if (isInterestingNode(node)) {
 				const classes = node.attributes.find(attr => attr.name === 'class')?.value;
-				// match check if it's only "loading" not loading-custom ...
+				// match check if it's only "container" not container-custom ...
 				if (classes?.includes("container") && classes?.match(/(^|\s)container(\s|$)/)){
 					const container = classes.split(' ').find(c => c.startsWith('container'));
 					if (container) {
@@ -116,7 +112,7 @@ function findHTMLContainers(sourceFile: SourceFile, basePath: string, tree: Tree
 							center: classes.includes('mod-center') ? true : undefined,
 							overflow: classes.includes('mod-overflow') ? true : undefined,
 						}
-						const loading: HTMLContainer = {
+						const container: HTMLContainer = {
 							node: node,
 							inputs,
 							nodeOffset: template.offsetStart,
@@ -124,7 +120,7 @@ function findHTMLContainers(sourceFile: SourceFile, basePath: string, tree: Tree
 							componentTS: sourceFile,
 						}
 
-						htmlLoadings.push(loading);
+						htmlContainer.push(container);
 					}
 
 				}
@@ -132,7 +128,7 @@ function findHTMLContainers(sourceFile: SourceFile, basePath: string, tree: Tree
 		});
 	});
 
-	return htmlLoadings;
+	return htmlContainer;
 }
 
 function hasThingsToAdd(inputs: ContainerInputs): boolean {
