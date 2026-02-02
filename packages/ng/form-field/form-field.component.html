@@ -1,5 +1,5 @@
 @if (presentationMode()) {
-	<dl class="formPresentation-description">
+	<dl class="presentation-description">
 		<ng-container *ngTemplateOutlet="inputLayoutTpl" />
 	</dl>
 } @else {
@@ -38,7 +38,7 @@
 		</fieldset>
 	} @else {
 		@if (presentationMode()) {
-			<dt class="formPresentation-description-term">
+			<dt class="presentation-description-term">
 				<ng-container *luPortal="label()" />
 				@if (tooltip()) {
 					<lu-icon class="formLabel-info" icon="signHelp" [alt]="'?'" [luTooltip]="tooltip()" />
@@ -116,7 +116,7 @@
 
 <ng-template #projectionTpl>
 	@if (presentationMode() && presentationDisplayTpl()) {
-		<dd class="formPresentation-description-definition">
+		<dd class="presentation-description-definition">
 			<ng-container *ngTemplateOutlet="presentationDisplayTpl()" />
 		</dd>
 	} @else {

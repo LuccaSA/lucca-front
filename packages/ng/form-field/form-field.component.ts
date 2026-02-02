@@ -23,6 +23,7 @@ import {
 import { AbstractControl, NgControl, ReactiveFormsModule, RequiredValidator, Validators } from '@angular/forms';
 import { SafeHtml } from '@angular/platform-browser';
 import { intlInputOptions, IntlParamsPipe, LuClass, PortalContent, PortalDirective, ɵeffectWithDeps } from '@lucca-front/ng/core';
+import { LU_FORM_INSTANCE } from '@lucca-front/ng/form';
 import { IconComponent } from '@lucca-front/ng/icon';
 import { InlineMessageComponent, InlineMessageState } from '@lucca-front/ng/inline-message';
 import { LuTooltipModule } from '@lucca-front/ng/tooltip';
@@ -32,7 +33,6 @@ import { FORM_FIELD_INSTANCE } from './form-field.token';
 import { LU_FORM_FIELD_TRANSLATIONS } from './form-field.translate';
 import { InputDirective } from './input.directive';
 import { INPUT_FRAMED_INSTANCE } from './public-api';
-import { LU_FORM_INSTANCE } from '@lucca-front/ng/form';
 
 let nextId = 0;
 
@@ -184,7 +184,7 @@ export class FormFieldComponent implements OnDestroy, DoCheck {
 			this.#luClass.setState({
 				[`mod-${this.size()}`]: !!this.size(),
 				'mod-checkable': this.layout() === 'checkable',
-				formPresentation: this.presentationMode(),
+				presentation: this.presentationMode(),
 				'form-field': this.layout() !== 'fieldset' && !this.presentationMode(),
 				[`mod-width${this.width()}`]: !!this.width(),
 			});

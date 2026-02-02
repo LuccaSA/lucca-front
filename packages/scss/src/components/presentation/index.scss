@@ -1,6 +1,6 @@
 @use 'exports' as *;
 
-.formPresentation {
+.presentation {
 	@layer components {
 		@include vars;
 		@include component;
