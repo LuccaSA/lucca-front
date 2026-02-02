@@ -112,7 +112,7 @@ function findHTMLLoadings(sourceFile: SourceFile, basePath: string, tree: Tree):
 				if (classes?.includes("loading") && classes?.match(/(^|\s)loading(\s|$)/)){
 					const loading = classes.split(' ').find(c => c.startsWith('loading'));
 					if (loading) {
-						const inputs = {
+						const inputs: LoadingInputs = {
 							size: classes.split(' ').find(c => /mod-L/.test(c)),
 							block: classes.includes('mod-block') ? true : undefined,
 							invert: classes.includes('mod-invert') ? true : undefined,
