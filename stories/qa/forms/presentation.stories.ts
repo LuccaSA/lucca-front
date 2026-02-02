@@ -21,10 +21,8 @@ import { LuMultiSelectInputComponent } from '@lucca-front/ng/multi-select';
 import { LuSimpleSelectInputComponent } from '@lucca-front/ng/simple-select';
 import { applicationConfig, Meta, moduleMetadata, StoryObj } from '@storybook/angular';
 import { cleanupTemplate, generateInputs } from 'stories/helpers/stories';
-import { RichTextInputComponent } from '@lucca-front/ng/forms/rich-text-input/rich-text-input.component';
-import { RichTextPluginTagComponent } from '@lucca-front/ng/forms/rich-text-input/plugins/tag';
-import { RichTextInputToolbarComponent } from '@lucca-front/ng/forms/rich-text-input/plugins/toolbar';
-import { provideLuRichTextMarkdownFormatter } from '@lucca-front/ng/forms/rich-text-input/formatters/markdown/markdown-formatter';
+import { RichTextInputComponent, RichTextInputToolbarComponent, RichTextPluginTagComponent } from '@lucca-front/ng/forms/rich-text-input';
+import { provideLuRichTextMarkdownFormatter } from '@lucca-front/ng/forms/rich-text-input/formatters/markdown';
 
 export default {
 	title: 'QA/Forms/Presentation',
