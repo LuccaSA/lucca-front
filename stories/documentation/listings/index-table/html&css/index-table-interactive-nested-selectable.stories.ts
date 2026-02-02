@@ -89,7 +89,7 @@ class IndexTableInteractiveNestedSelectableStory {
 }
 
 export default {
-	title: 'Documentation/Listings/Index Table/HTML & CSS/Interactive Nested Selectable',
+	title: 'Documentation/Listings/Index Table/HTML&CSS/Interactive Nested Selectable',
 	component: IndexTableInteractiveNestedSelectableStory,
 } as Meta;
 

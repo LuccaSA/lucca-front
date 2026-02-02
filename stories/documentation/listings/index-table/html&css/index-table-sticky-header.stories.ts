@@ -3,7 +3,7 @@ import { Meta, StoryObj } from '@storybook/angular';
 interface IndexTableStickyHeaderStory {}
 
 export default {
-	title: 'Documentation/Listings/Index Table/HTML & CSS/Sticky Header',
+	title: 'Documentation/Listings/Index Table/HTML&CSS/Sticky Header',
 	argTypes: {},
 } as Meta;
 

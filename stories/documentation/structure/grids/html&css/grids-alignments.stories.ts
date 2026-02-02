@@ -5,7 +5,7 @@ interface GridsAlignmentsStory {
 }
 
 export default {
-	title: 'Documentation/Structure/Grids/HTML & CSS/Alignments',
+	title: 'Documentation/Structure/Grids/HTML&CSS/Alignments',
 } as Meta;
 
 function getTemplate(): string {

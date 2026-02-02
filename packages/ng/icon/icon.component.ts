@@ -11,14 +11,29 @@ import { LuccaIcon } from '@lucca-front/icons';
 	encapsulation: ViewEncapsulation.None,
 })
 export class IconComponent {
+	/**
+	 * Defines icon to display
+	 */
 	readonly icon = input.required<LuccaIcon>();
 
+	/**
+	 * Information conveyed by the screen reader
+	 */
 	readonly alt = input<string>();
 
+	/**
+	 * Which size should the icon be? XXS to XXL
+	 */
 	readonly size = input<'XXS' | 'XS' | 'S' | 'M' | 'L' | 'XL' | 'XXL'>();
 
+	/**
+	 * Changes the color of the icon (inherit by default)
+	 */
 	readonly color = input<'primary' | 'secondary' | 'product' | 'error' | 'warning' | 'success' | 'light' | 'placeholder' | 'inherit'>('inherit');
 
+	/**
+	 * Display icon in AI mode
+	 */
 	readonly AI = input(false, { transform: booleanAttribute });
 
 	readonly iconClasses = computed(() => {

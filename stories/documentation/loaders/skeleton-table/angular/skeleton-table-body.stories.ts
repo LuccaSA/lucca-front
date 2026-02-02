@@ -18,11 +18,11 @@ function getTemplate(args: SkeletonTableStory): string {
 	<thead class="table-head">
 		<tr class="table-head-row">
 			<th class="table-head-row-cell">Lorem</th>
-			<th class="table-head-row-cell">Ipsum</th>
-			<th class="table-head-row-cell">Dolor</th>
+			<th class="table-head-row-cell mod-alignCenter">Ipsum</th>
+			<th class="table-head-row-cell mod-alignRight">Dolor</th>
 		</tr>
 	</thead>
-	<lu-skeleton-table tableBodyOnly [cols]="3" />
+	<lu-skeleton-table tableBodyOnly [cols]="3" [colsAlign]="{ '1': 'center', '2': 'end' }" />
 </table>
 	`;
 }

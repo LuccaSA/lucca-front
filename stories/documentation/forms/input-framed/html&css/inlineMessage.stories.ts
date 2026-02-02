@@ -3,7 +3,7 @@ import { Meta } from '@storybook/angular';
 interface InputFramedBasicStory {}
 
 export default {
-	title: 'Documentation/Forms/Input Framed/HTML & CSS/Inline message',
+	title: 'Documentation/Forms/Input Framed/HTML&CSS/Inline message',
 	argTypes: {},
 	render: (args: InputFramedBasicStory) => {
 		return {

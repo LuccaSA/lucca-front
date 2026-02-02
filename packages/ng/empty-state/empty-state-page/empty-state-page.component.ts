@@ -28,7 +28,6 @@ export class EmptyStatePageComponent {
 	/**
 	 * Top right foreground image (URL)
 	 */
-
 	readonly topRightForeground = input<string>('https://cdn.lucca.fr/lucca-front/assets/empty-states/generic/coffee-01.svg');
 
 	/**
@@ -46,6 +45,9 @@ export class EmptyStatePageComponent {
 	 */
 	readonly contentBackgroundColor = input<string>('var(--pr-t-elevation-surface-default)');
 
+	/**
+	 * Add content above heading
+	 */
 	readonly slotTop = input<PortalContent>();
 
 	readonly heading = input<string>();

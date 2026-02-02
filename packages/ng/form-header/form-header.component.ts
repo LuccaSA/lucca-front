@@ -10,5 +10,8 @@ import { ChangeDetectionStrategy, Component, input, ViewEncapsulation } from '@a
 	changeDetection: ChangeDetectionStrategy.OnPush,
 })
 export class FormHeaderComponent {
+	/**
+	 * Define the aria level of the title
+	 */
 	readonly headingLevel = input<1 | 2 | 3 | 4 | 5 | 6>(1);
 }

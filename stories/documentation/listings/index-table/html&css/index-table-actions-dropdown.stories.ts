@@ -3,7 +3,7 @@ import { Meta, StoryObj } from '@storybook/angular';
 interface IndexTableActionsDropdownStory {}
 
 export default {
-	title: 'Documentation/Listings/Index Table/HTML & CSS/Actions/Dropdown',
+	title: 'Documentation/Listings/Index Table/HTML&CSS/Actions/Dropdown',
 } as Meta;
 
 function getTemplate(args: IndexTableActionsDropdownStory): string {

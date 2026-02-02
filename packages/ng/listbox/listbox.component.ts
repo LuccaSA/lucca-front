@@ -22,9 +22,24 @@ let nextId = 0;
 	providers: [{ provide: LISTBOX_INSTANCE, useExisting: forwardRef(() => ListboxComponent) }],
 })
 export class ListboxComponent {
+	/**
+	 * Applies multiple mod to the listbox
+	 */
 	readonly multiple = input(false, { transform: booleanAttribute });
+
+	/**
+	 * Defines listbox role tree or listbox by default
+	 */
 	readonly tree = input(false, { transform: booleanAttribute });
+
+	/**
+	 * Listbox state
+	 */
 	readonly state = input<'loading' | 'empty' | null>(null);
+
+	/**
+	 * Add message when listbox state loading or empty
+	 */
 	readonly statusMsg = input<string | null>(null);
 
 	readonly listboxId = `listbox${nextId++}`;

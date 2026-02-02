@@ -1,3 +1,4 @@
+import { LOCALE_ID } from '@angular/core';
 import { FormControl, ReactiveFormsModule } from '@angular/forms';
 import { BrowserAnimationsModule } from '@angular/platform-browser/animations';
 import { FormFieldComponent } from '@lucca-front/ng/form-field';
@@ -5,7 +6,6 @@ import { MultilanguageInputComponent, MultiLanguageInputValidators, Multilanguag
 import { applicationConfig, Meta, moduleMetadata, StoryObj } from '@storybook/angular';
 import { cleanupTemplate, generateInputs } from 'stories/helpers/stories';
 import { StoryModelDisplayComponent } from 'stories/helpers/story-model-display.component';
-import { LOCALE_ID } from '@angular/core';
 
 export default {
 	title: 'Documentation/Forms/Fields/MultilanguageField/Angular',
@@ -36,13 +36,13 @@ export default {
 			},
 			description: 'Marque le champ comme obligatoire.',
 		},
-		allLanguagesFilled: {
+		allLanguagesRequired: {
 			control: {
 				type: 'boolean',
 			},
 			description: 'Ajoute le validateur marquant toutes les traductions comme obligatoires.',
 		},
-		invariantFilled: {
+		invariantRequired: {
 			control: {
 				type: 'boolean',
 			},
@@ -88,6 +88,12 @@ export default {
 			},
 			description: "[v19.2] Applique une largeur fixe au champ. A n'utiliser que lorsque la grille de formulaire n'est pas adaptée.",
 		},
+		autocomplete: {
+			control: {
+				type: 'text',
+			},
+			description: 'Modifie l’attribut autocomplete des champs input.',
+		},
 	},
 } as Meta;
 
@@ -96,12 +102,12 @@ export const Basic: StoryObj<
 		FormFieldComponent & {
 			disabled: boolean;
 			required: boolean;
-			allLanguagesFilled: boolean;
-			invariantFilled: boolean;
+			allLanguagesRequired: boolean;
+			invariantRequired: boolean;
 		}
 > = {
 	render: (args, { argTypes }) => {
-		const { label, hiddenLabel, tooltip, inlineMessage, inlineMessageState, size, width, allLanguagesFilled, invariantFilled, presentation, ...inputArgs } = args;
+		const { label, hiddenLabel, tooltip, inlineMessage, inlineMessageState, size, width, allLanguagesRequired, invariantRequired, presentation, ...inputArgs } = args;
 		return {
 			props: {
 				formControl: new FormControl<MultilanguageTranslation[]>(
@@ -123,7 +129,7 @@ export const Basic: StoryObj<
 							value: "I don't speak German",
 						},
 					],
-					allLanguagesFilled ? MultiLanguageInputValidators.allLanguagesFilled : invariantFilled ? MultiLanguageInputValidators.invariantFilled : undefined,
+					allLanguagesRequired ? MultiLanguageInputValidators.allLanguagesRequired : invariantRequired ? MultiLanguageInputValidators.invariantRequired : undefined,
 				),
 			},
 			template: cleanupTemplate(`<lu-form-field ${generateInputs(
@@ -154,8 +160,9 @@ export const Basic: StoryObj<
 		placeholder: 'Placeholder',
 		tooltip: 'Je suis un message d’aide',
 		openOnFocus: false,
-		allLanguagesFilled: false,
-		invariantFilled: false,
 		presentation: false,
+		autocomplete: 'off',
+		allLanguagesRequired: false,
+		invariantRequired: false,
 	},
 };

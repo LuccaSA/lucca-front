@@ -3,7 +3,7 @@ import { Meta, StoryObj } from '@storybook/angular';
 interface IndexTableLayoutFixedStory {}
 
 export default {
-	title: 'Documentation/Listings/Index Table/HTML & CSS/Layout Fixed',
+	title: 'Documentation/Listings/Index Table/HTML&CSS/Layout Fixed',
 	argTypes: {},
 } as Meta;
 

@@ -3,7 +3,7 @@ import { Meta, StoryObj } from '@storybook/angular';
 interface CalloutActionsInlineStory {}
 
 export default {
-	title: 'Documentation/Feedback/Callout/HTML & CSS/Actions inline',
+	title: 'Documentation/Feedback/Callout/HTML&CSS/Actions inline',
 	argTypes: {},
 } as Meta;
 

@@ -3,7 +3,7 @@ import { Meta, StoryObj } from '@storybook/angular';
 interface IndexTableResponsiveCardListLabelStory {}
 
 export default {
-	title: 'Documentation/Listings/Index Table/HTML & CSS/Responsive Card List Labels',
+	title: 'Documentation/Listings/Index Table/HTML&CSS/Responsive Card List Labels',
 	argTypes: {},
 } as Meta;
 

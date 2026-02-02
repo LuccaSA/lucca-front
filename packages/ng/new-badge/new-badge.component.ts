@@ -11,5 +11,8 @@ import { ChangeDetectionStrategy, Component, input, ViewEncapsulation } from '@a
 	},
 })
 export class NewBadgeComponent {
+	/**
+	 * Changes the text displayed by the newBadge
+	 */
 	readonly label = input.required<string>();
 }

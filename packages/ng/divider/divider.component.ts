@@ -19,11 +19,22 @@ export class DividerComponent implements OnChanges {
 
 	@ViewChild('content') content: ElementRef;
 
+	/**
+	 * Allows rendering the Divider as a native separator
+	 * (Any text content it may have will no longer be rendered)
+	 */
 	readonly separatorRole = input(false, { transform: booleanAttribute });
+
 	readonly vertical = input(false, { transform: booleanAttribute });
+
+	/**
+	 * Which size should the chip be? Defaults or small
+	 */
 	readonly size = input<'M' | 'S' | null>(null);
 
-	// deprecated
+	/**
+	 * @deprecated
+	 */
 	readonly withRole = input(false, { transform: booleanAttribute });
 
 	readonly classesConfig = computed(() => ({ [`mod-${this.size()}`]: !!this.size() }));

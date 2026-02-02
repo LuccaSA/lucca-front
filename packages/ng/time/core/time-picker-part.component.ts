@@ -1,4 +1,4 @@
-import { DecimalPipe, formatNumber } from '@angular/common';
+import { formatNumber } from '@angular/common';
 import { ChangeDetectionStrategy, Component, ElementRef, Inject, LOCALE_ID, ModelSignal, ViewChild, booleanAttribute, computed, input, model, numberAttribute, output } from '@angular/core';
 import { InputDirective } from '@lucca-front/ng/form-field';
 import { PickerControlDirection } from './misc.utils';
@@ -8,7 +8,7 @@ let nextId = 0;
 
 @Component({
 	selector: 'lu-time-picker-part',
-	imports: [RepeatOnHoldDirective, DecimalPipe, InputDirective],
+	imports: [RepeatOnHoldDirective, InputDirective],
 	templateUrl: './time-picker-part.component.html',
 	changeDetection: ChangeDetectionStrategy.OnPush,
 })
