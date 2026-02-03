@@ -21,7 +21,7 @@ import {
 } from '@angular/core';
 import { AbstractControl, NgControl, ReactiveFormsModule, RequiredValidator, Validators } from '@angular/forms';
 import { SafeHtml } from '@angular/platform-browser';
-import { intlInputOptions, IntlParamsPipe, LuClass, PortalContent, PortalDirective, ɵeffectWithDeps } from '@lucca-front/ng/core';
+import { intlInputOptions, LuClass, PortalContent, PortalDirective, ɵeffectWithDeps } from '@lucca-front/ng/core';
 import { FormLabelComponent } from '@lucca-front/ng/form-label';
 import { IconComponent } from '@lucca-front/ng/icon';
 import { InlineMessageComponent, InlineMessageState } from '@lucca-front/ng/inline-message';
@@ -39,7 +39,7 @@ type FormFieldWidth = 20 | 30 | 40 | 50 | 60;
 
 @Component({
 	selector: 'lu-form-field',
-	imports: [NgTemplateOutlet, InlineMessageComponent, LuTooltipModule, ReactiveFormsModule, IconComponent, IntlParamsPipe, PortalDirective, FormLabelComponent],
+	imports: [NgTemplateOutlet, InlineMessageComponent, LuTooltipModule, ReactiveFormsModule, IconComponent, PortalDirective, FormLabelComponent],
 	templateUrl: './form-field.component.html',
 	styleUrl: './form-field.component.scss',
 	providers: [
@@ -137,9 +137,9 @@ export class FormFieldComponent implements OnDestroy, DoCheck {
 	 */
 	readonly counter = input<number>(0);
 
-	get contentLength(): number {
-		return (this.#inputs[0]?.host?.nativeElement as HTMLInputElement)?.value?.length || 0;
-	}
+	readonly contentLength = signal<number>(0);
+
+	readonly counterVisibleOnlyJustBeforeError = input(false, { transform: booleanAttribute });
 
 	public addInput(input: InputDirective) {
 		this.#inputs.push(input);
@@ -239,6 +239,7 @@ export class FormFieldComponent implements OnDestroy, DoCheck {
 			() => {
 				this.#hasInputRequired.set(this.#isInputRequired());
 				this.#invalidStatus.set(this.#hasInvalidStatus());
+				this.contentLength.set((this.#inputs[0]?.host?.nativeElement as HTMLInputElement)?.value?.length ?? 0);
 			},
 			{
 				injector: this.#injector,

@@ -14,6 +14,7 @@ interface FormLabelBasicStory {
 	counterId: string;
 	labelId: string;
 	error: boolean;
+	counterVisibleOnlyJustBeforeError: boolean;
 }
 
 export default {
@@ -43,6 +44,9 @@ export default {
 		counterId: {
 			if: { arg: 'counterMax', truthy: true },
 		},
+		counterVisibleOnlyJustBeforeError: {
+			if: { arg: 'counterMax', truthy: true },
+		},
 		labelId: {
 			if: { arg: 'counterMax', truthy: true },
 		},
@@ -65,8 +69,9 @@ function getTemplate(args: FormLabelBasicStory): string {
 	const counterIdAttr = args.counterMax > 0 ? ` counterId="${args.counterId}"` : ``;
 	const labelIdAttr = args.counterMax > 0 ? ` labelId="${args.labelId}"` : ``;
 	const errorAttr = args.error ? ` error` : ``;
+	const counterVisibleOnlyJustBeforeErrorAttr = args.counterVisibleOnlyJustBeforeError ? ` counterVisibleOnlyJustBeforeError` : ``;
 
-	return `<label luFormLabel for="${args.for}"${tooltipAttr}${tagAttr}${sizeAttr}${counterMaxAttr}${counterStatusAttr}${counterIdAttr}${labelIdAttr}${requiredAttr}${errorAttr}>${args.label}</label>`;
+	return `<label luFormLabel for="${args.for}"${tooltipAttr}${tagAttr}${sizeAttr}${counterMaxAttr}${counterStatusAttr}${counterVisibleOnlyJustBeforeErrorAttr}${counterIdAttr}${labelIdAttr}${requiredAttr}${errorAttr}>${args.label}</label>`;
 }
 
 const Template = (args: FormLabelBasicStory) => ({
@@ -84,6 +89,7 @@ export const Basic: StoryObj<FormLabelBasicStory> = {
 		size: '',
 		counterMax: 0,
 		counterStatus: 0,
+		counterVisibleOnlyJustBeforeError: false,
 		counterId: 'counterID',
 		labelId: 'labelID',
 		error: false,

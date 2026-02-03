@@ -22,7 +22,7 @@
 } @else {
 	<label
 		luFormLabel
-		[counterStatus]="contentLength"
+		[counterStatus]="contentLength()"
 		[counterMax]="counter()"
 		[error]="invalidStatus()"
 		[tag]="tag()"
@@ -34,6 +34,7 @@
 		[attr.role]="rolePresentationLabel() ? 'presentation' : null"
 		[class.pr-u-mask]="hiddenLabel()"
 		[class.inputFramed-header-label]="framed"
+		[counterVisibleOnlyJustBeforeError]="counterVisibleOnlyJustBeforeError()"
 	>
 		<span><ng-container *luPortal="label()" /></span>
 	</label>

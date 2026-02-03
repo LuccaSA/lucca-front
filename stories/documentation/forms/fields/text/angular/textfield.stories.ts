@@ -1,4 +1,5 @@
 import { AsyncPipe } from '@angular/common';
+import { LOCALE_ID } from '@angular/core';
 import { FormsModule, ReactiveFormsModule } from '@angular/forms';
 import { BrowserAnimationsModule } from '@angular/platform-browser/animations';
 import { FormFieldComponent } from '@lucca-front/ng/form-field';
@@ -7,7 +8,6 @@ import { applicationConfig, Meta, moduleMetadata, StoryObj } from '@storybook/an
 import { HiddenArgType } from 'stories/helpers/common-arg-types';
 import { cleanupTemplate, generateInputs } from 'stories/helpers/stories';
 import { StoryModelDisplayComponent } from 'stories/helpers/story-model-display.component';
-import { LOCALE_ID } from '@angular/core';
 
 export default {
 	title: 'Documentation/Forms/Fields/TextField/Angular',
@@ -116,7 +116,7 @@ export default {
 
 export const Basic: StoryObj<TextInputComponent & { disabled: boolean; required: boolean } & FormFieldComponent> = {
 	render: (args, { argTypes }) => {
-		const { counter, label, hiddenLabel, tooltip, tag, inlineMessage, inlineMessageState, size, width, AI, iconAItooltip, iconAIalt, ...inputArgs } = args;
+		const { counter, label, hiddenLabel, tooltip, tag, inlineMessage, inlineMessageState, size, width, AI, iconAItooltip, iconAIalt, counterVisibleOnlyJustBeforeError, ...inputArgs } = args;
 		return {
 			template: cleanupTemplate(`<lu-form-field ${generateInputs(
 				{
@@ -132,6 +132,7 @@ export const Basic: StoryObj<TextInputComponent & { disabled: boolean; required:
 					AI,
 					iconAItooltip,
 					iconAIalt,
+					counterVisibleOnlyJustBeforeError,
 				},
 				argTypes,
 			)}>
@@ -162,6 +163,7 @@ export const Basic: StoryObj<TextInputComponent & { disabled: boolean; required:
 		tooltip: 'Je suis un message d’aide',
 		tag: '',
 		counter: 0,
+		counterVisibleOnlyJustBeforeError: false,
 		valueAlignRight: false,
 		AI: false,
 		iconAIalt: 'Assistant IA',
