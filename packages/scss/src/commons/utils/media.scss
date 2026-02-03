@@ -127,7 +127,7 @@
 
 @mixin pointer($query, $any: false, $reversed: false) {
 	// stylelint-disable-next-line scss/at-rule-no-unknown
-	@#{if($reversed, 'media not', 'media')} (#{if($any, 'any-', '')}pointer: #{$query}) {
+	@#{if(sass($reversed): 'media not'; else: 'media')} (#{if(sass($any): 'any-'; else: '')}pointer: #{$query}) {
 		@content;
 	}
 }
