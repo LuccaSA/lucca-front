@@ -1,7 +1,6 @@
 import { ChangeDetectionStrategy, Component, ViewEncapsulation, booleanAttribute, computed, input, numberAttribute } from '@angular/core';
 import { BubbleIllustration, BubbleIllustrationComponent } from '@lucca-front/ng/bubble-illustration';
 import { Palette, PortalContent, PortalDirective } from '@lucca-front/ng/core';
-import { LuSafeExternalSvgPipe } from '@lucca-front/ng/safe-content';
 import { Hx } from '../empty-state.model';
 
 const ICON_TO_ILLUSTRATION: Record<string, BubbleIllustration> = {
@@ -34,7 +33,7 @@ const ICON_TO_ILLUSTRATION: Record<string, BubbleIllustration> = {
 
 @Component({
 	selector: 'lu-empty-state-section',
-	imports: [LuSafeExternalSvgPipe, PortalDirective, BubbleIllustrationComponent],
+	imports: [PortalDirective, BubbleIllustrationComponent],
 	templateUrl: './empty-state-section.component.html',
 	styleUrl: './empty-state-section.component.scss',
 	changeDetection: ChangeDetectionStrategy.OnPush,
@@ -64,14 +63,27 @@ export class EmptyStateSectionComponent {
 		return this.illustration();
 	});
 
+	/**
+	 * Which palette should be used for the empty state section.
+	 * Defaults to none (inherits parent palette)
+	 */
 	readonly palette = input<Palette>('none');
 
 	readonly center = input(false, { transform: booleanAttribute });
 
+	/**
+	 * The title of the empty state section
+	 */
 	readonly heading = input<string>();
 
+	/**
+	 * The description of the empty state section
+	 */
 	readonly description = input<PortalContent>();
 
+	/**
+	 * Define the aria level of the title
+	 */
 	readonly hx = input(3, { transform: numberAttribute as (value: Hx | `${Hx}`) => Hx });
 
 	readonly emptyStateClasses = computed(() => ({ [`palette-${this.palette()}`]: !!this.palette() }));

@@ -33,19 +33,26 @@ export class OptionComponent {
 	#listboxRef = inject(LISTBOX_INSTANCE);
 	#parentOptionRef = inject(OPTION_INSTANCE, { skipSelf: true, optional: true });
 
+	readonly checked = input(false, { transform: booleanAttribute });
+
+	readonly mixed = input(false, { transform: booleanAttribute });
+
+	readonly disabled = input(false, { transform: booleanAttribute });
+
+	readonly hovered = input(false, { transform: booleanAttribute });
+
+	readonly add = input(false, { transform: booleanAttribute });
+
+	readonly group = input(false, { transform: booleanAttribute });
+
+	readonly select = input(false, { transform: booleanAttribute });
+
+	readonly selectAll = input<'string' | null>();
+
 	readonly multiple = computed(() => this.#listboxRef.multiple());
 	readonly tree = computed(() => this.#listboxRef.tree());
 	readonly empty = computed(() => this.#listboxRef.state() === 'empty');
 	readonly id = computed(() => this.#listboxRef.listboxId);
-
-	readonly checked = input(false, { transform: booleanAttribute });
-	readonly mixed = input(false, { transform: booleanAttribute });
-	readonly disabled = input(false, { transform: booleanAttribute });
-	readonly hovered = input(false, { transform: booleanAttribute });
-	readonly add = input(false, { transform: booleanAttribute });
-	readonly group = input(false, { transform: booleanAttribute });
-	readonly select = input(false, { transform: booleanAttribute });
-	readonly selectAll = input<'string' | null>();
 
 	readonly groupId = `group${nextId++}`;
 

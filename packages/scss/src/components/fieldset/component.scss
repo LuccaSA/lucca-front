@@ -17,6 +17,10 @@
 			inline-size: 100%;
 			min-block-size: var(--pr-t-spacings-300);
 			display: contents;
+
+			&:has(.fieldset-title-content-text:empty) {
+				display: none;
+			}
 		}
 
 		.fieldset-title-content {

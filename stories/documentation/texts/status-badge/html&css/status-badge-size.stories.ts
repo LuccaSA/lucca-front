@@ -1,7 +1,7 @@
 import { Meta, StoryObj } from '@storybook/angular';
 
 export default {
-	title: 'Documentation/Texts/StatusBadge/HTML & CSS/Sizes',
+	title: 'Documentation/Texts/StatusBadge/HTML&CSS/Sizes',
 	argTypes: {},
 } as Meta;
 

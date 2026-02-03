@@ -25,8 +25,7 @@
 		.filterPill[disabled] &,
 		.filterPill:not(.is-filled) &,
 		.textfield-input[disabled] &,
-		.textfield-input:not(.is-filled) &,
-		.textfield-input:not(.is-selected) & {
+		.textfield-input:not(.is-filled) & {
 			@include hidden;
 		}
 

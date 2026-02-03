@@ -7,5 +7,8 @@ import { booleanAttribute, ChangeDetectionStrategy, Component, input } from '@an
 	changeDetection: ChangeDetectionStrategy.OnPush,
 })
 export class SkeletonHeaderComponent {
+	/**
+	 * Applies dark color for skeleton
+	 */
 	readonly dark = input(false, { transform: booleanAttribute });
 }

@@ -1,4 +1,3 @@
-import { NgClass } from '@angular/common';
 import { booleanAttribute, ChangeDetectionStrategy, Component, computed, forwardRef, input, model, output, ViewEncapsulation } from '@angular/core';
 import { NG_VALUE_ACCESSOR } from '@angular/forms';
 import { intlInputOptions, isNil, isNotNil } from '@lucca-front/ng/core';
@@ -14,7 +13,7 @@ import { LU_DURATION_PICKER_TRANSLATIONS } from './duration-picker.translate';
 
 @Component({
 	selector: 'lu-duration-picker',
-	imports: [TimePickerPartComponent, NgClass],
+	imports: [TimePickerPartComponent],
 	templateUrl: './duration-picker.component.html',
 	styleUrl: './duration-picker.component.scss',
 	changeDetection: ChangeDetectionStrategy.OnPush,

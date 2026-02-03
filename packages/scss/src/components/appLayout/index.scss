@@ -17,5 +17,10 @@
 				@include mobileNavSideBottom;
 			}
 		}
+
+		&:has(.appLayout-banner:empty),
+		&:not(:has(.appLayout-banner)) {
+			@include withNoBanner;
+		}
 	}
 }

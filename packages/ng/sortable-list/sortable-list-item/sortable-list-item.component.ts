@@ -20,12 +20,38 @@ import { LuTooltipModule } from '@lucca-front/ng/tooltip';
 	},
 })
 export class SortableListItemComponent {
+	/**
+	 * Changes the text displayed by the sortable list item
+	 */
 	label = input.required<string>();
+
+	/**
+	 * Adds descriptive help text below the label
+	 */
 	helperMessage = input<string>();
+
+	/**
+	 * Sortable list item can be clickable
+	 */
 	clickable = input(false, { transform: booleanAttribute });
+
+	/**
+	 * Disabled the possibility to clear the sortable list item
+	 */
 	unclearable = input(false, { transform: booleanAttribute });
+
+	/**
+	 * Sortable list item can be draggable
+	 */
 	drag = input(false, { transform: booleanAttribute });
+
+	/**
+	 * Applies small size to segmented control tabs
+	 */
 	small = input(false, { transform: booleanAttribute });
 
+	/**
+	 * Emit event when click on clear
+	 */
 	delete = output<void>();
 }

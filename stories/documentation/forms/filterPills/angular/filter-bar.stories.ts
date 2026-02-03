@@ -1,4 +1,3 @@
-import { allLegumes, FilterLegumesPipe } from '@/stories/forms/select/select.utils';
 import { provideHttpClient } from '@angular/common/http';
 import { LOCALE_ID } from '@angular/core';
 import { FormsModule } from '@angular/forms';
@@ -11,9 +10,9 @@ import { FormFieldComponent } from '@lucca-front/ng/form-field';
 import { CheckboxInputComponent, TextInputComponent } from '@lucca-front/ng/forms';
 import { LuMultiSelectInputComponent } from '@lucca-front/ng/multi-select';
 import { NumericBadgeComponent } from '@lucca-front/ng/numeric-badge';
+import { SegmentedControlComponent, SegmentedControlFilterComponent } from '@lucca-front/ng/segmented-control';
 import { LuSimpleSelectInputComponent } from '@lucca-front/ng/simple-select';
 import { applicationConfig, Meta, moduleMetadata, StoryObj } from '@storybook/angular';
-import { StoryModelDisplayComponent } from '../../../../helpers/story-model-display.component';
 
 export default {
 	title: 'Documentation/Forms/FiltersPills/FilterBar/Angular',
@@ -26,10 +25,8 @@ export default {
 				FormsModule,
 				DateRangeInputComponent,
 				DateInputComponent,
-				StoryModelDisplayComponent,
 				ButtonComponent,
 				LuSimpleSelectInputComponent,
-				FilterLegumesPipe,
 				FilterPillAddonAfterDirective,
 				FilterPillAddonBeforeDirective,
 				FormFieldComponent,
@@ -38,6 +35,8 @@ export default {
 				LuCoreSelectApiV4Directive,
 				LuMultiSelectInputComponent,
 				DividerComponent,
+				SegmentedControlComponent,
+				SegmentedControlFilterComponent,
 			],
 		}),
 		applicationConfig({ providers: [provideHttpClient(), { provide: LOCALE_ID, useValue: 'fr-FR' }] }),
@@ -47,36 +46,18 @@ export default {
 			props: {
 				example1: new Date(),
 				examplePeriod: null,
-				legumes: allLegumes,
 			},
-
 			template: `<lu-filter-bar>
-	<ul *luFilterPillAddonBefore class="segmentedControl filterBar-segmentedControl" role="presentation">
-		<li class="segmentedControl-item">
-			<input type="radio" class="segmentedControl-item-input" name="tab" id="tab1" checked="checked" />
-			<label for="tab1" class="segmentedControl-item-action">
-				Tous <lu-numeric-badge [value]="12" />
-			</label>
-		</li>
-		<li class="segmentedControl-item">
-			<input type="radio" class="segmentedControl-item-input" name="tab" id="tab2" />
-			<label for="tab2" class="segmentedControl-item-action">
-				En cours d’approbation <lu-numeric-badge [value]="5" />
-			</label>
-		</li>
-		<li class="segmentedControl-item">
-			<input type="radio" class="segmentedControl-item-input" name="tab" id="tab3" />
-			<label for="tab3" class="segmentedControl-item-action">
-				Approuvés <lu-numeric-badge [value]="3" />
-			</label>
-		</li>
-		<li class="segmentedControl-item">
-			<input type="radio" class="segmentedControl-item-input" name="tab" id="tab4" />
-			<label for="tab4" class="segmentedControl-item-action">
-				Clos <lu-numeric-badge [value]="4" />
-			</label>
-		</li>
-	</ul>
+	<lu-segmented-control class="filterBar-segmentedControl" *luFilterPillAddonBefore [(ngModel)]="example">
+		<ng-template #label0>Tous <lu-numeric-badge [value]="12" /></ng-template>
+		<ng-template #label1>En cours d’approbation <lu-numeric-badge [value]="5" /></ng-template>
+		<ng-template #label2>Approuvés <lu-numeric-badge [value]="3" /></ng-template>
+		<ng-template #label3>Clos <lu-numeric-badge [value]="4" /></ng-template>
+		<lu-segmented-control-filter [label]="label0" value="0" />
+		<lu-segmented-control-filter [label]="label1" value="1" />
+		<lu-segmented-control-filter [label]="label2" value="2" />
+		<lu-segmented-control-filter [label]="label3" value="3" />
+	</lu-segmented-control>
 	<lu-filter-pill label="Inclure les collaborateurs partis" optional name="includeFormerEmployees">
 		<lu-checkbox-input [ngModel]="false" />
 	</lu-filter-pill>

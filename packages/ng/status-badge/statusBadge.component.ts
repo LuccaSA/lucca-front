@@ -17,12 +17,24 @@ import { LuTooltipModule } from '@lucca-front/ng/tooltip';
 export class StatusBadgeComponent implements OnChanges {
 	readonly #luClass = inject(LuClass);
 
+	/**
+	 * Truncates the text with an ellipsis and adds a tooltip when the label is too long
+	 */
 	readonly withEllipsis = input(false, { transform: booleanAttribute });
 
+	/**
+	 * Changes the text displayed by the status badge
+	 */
 	readonly label = input.required<string>();
 
+	/**
+	 * Changes the size of the status badge (Medium by default or L)
+	 */
 	readonly size = input<'L' | 'M'>('M');
 
+	/**
+	 * Applies a color palette to the status badge
+	 */
 	readonly palette = input<Palette | null>(null);
 
 	ngOnChanges(): void {

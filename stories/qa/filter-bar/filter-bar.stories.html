@@ -10,24 +10,16 @@
 			<td>Default</td>
 			<td>
 				<lu-filter-bar>
-					<ul *luFilterPillAddonBefore class="segmentedControl filterBar-segmentedControl" role="presentation">
-						<li class="segmentedControl-item">
-							<input type="radio" class="segmentedControl-item-input" name="tab" id="tab1" checked="checked" />
-							<label for="tab1" class="segmentedControl-item-action"> Tous <lu-numeric-badge [value]="12" /> </label>
-						</li>
-						<li class="segmentedControl-item">
-							<input type="radio" class="segmentedControl-item-input" name="tab" id="tab2" />
-							<label for="tab2" class="segmentedControl-item-action"> En cours d’approbation <lu-numeric-badge [value]="5" /> </label>
-						</li>
-						<li class="segmentedControl-item">
-							<input type="radio" class="segmentedControl-item-input" name="tab" id="tab3" />
-							<label for="tab3" class="segmentedControl-item-action"> Approuvés <lu-numeric-badge [value]="3" /> </label>
-						</li>
-						<li class="segmentedControl-item">
-							<input type="radio" class="segmentedControl-item-input" name="tab" id="tab4" />
-							<label for="tab4" class="segmentedControl-item-action"> Clos <lu-numeric-badge [value]="4" /> </label>
-						</li>
-					</ul>
+					<lu-segmented-control class="filterBar-segmentedControl" *luFilterPillAddonBefore [(ngModel)]="example">
+						<ng-template #label0>Tous <lu-numeric-badge [value]="12" /></ng-template>
+						<ng-template #label1>En cours d’approbation <lu-numeric-badge [value]="5" /></ng-template>
+						<ng-template #label2>Approuvés <lu-numeric-badge [value]="3" /></ng-template>
+						<ng-template #label3>Clos <lu-numeric-badge [value]="4" /></ng-template>
+						<lu-segmented-control-filter [label]="label0" value="0" />
+						<lu-segmented-control-filter [label]="label1" value="1" />
+						<lu-segmented-control-filter [label]="label2" value="2" />
+						<lu-segmented-control-filter [label]="label3" value="3" />
+					</lu-segmented-control>
 					<lu-filter-pill label="Inclure les collaborateurs partis" optional name="includeFormerEmployees">
 						<lu-checkbox-input [ngModel]="false" />
 					</lu-filter-pill>
