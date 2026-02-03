@@ -34,9 +34,15 @@ $cursor: 'pointer', 'auto', 'default', 'text';
 // Tokens
 
 @mixin spacing($boxModel, $boxDirection, $key, $value, $suffix: '!important') {
+	$boxDirectionString: '-';
+
+	@if $boxDirection == '' {
+		$boxDirectionString: '';
+	}
+
 	@if $boxModel != 'inset' or ($boxDirection != 'top' and $boxDirection != 'bottom' and $boxDirection != 'left' and $boxDirection != 'right') {
 		.pr-u-#{transform.camelize($boxModel)}#{transform.capitalize(transform.camelize($boxDirection))}#{transform.capitalize($key)} {
-			#{$boxModel}#{if($boxDirection == '', '', '-')}#{$boxDirection}: var(--pr-t-spacings-#{$key}) #{$suffix};
+			#{$boxModel}#{$boxDirectionString}#{$boxDirection}: var(--pr-t-spacings-#{$key}) #{$suffix};
 		}
 	}
 }
@@ -75,31 +81,43 @@ $cursor: 'pointer', 'auto', 'default', 'text';
 
 @mixin cssvars($name, $properties, $after: '') {
 	@each $key, $value in $properties {
-		--#{$name}#{if($key == '', '', '-')}#{$key}#{$after}: #{$value};
+		$keyString: '-';
+
+		@if $key == '' {
+			$keyString: '';
+		}
+
+		--#{$name}#{$keyString}#{$key}#{$after}: #{$value};
 	}
 }
 
 @mixin classes($name, $properties, $suffix: '!important', $prefix: '') {
 	@each $property in $properties {
+		$minusString: '';
+
+		@if string.slice($property, 1, 1) == '-' {
+			$minusString: 'Minus';
+		}
+
 		@if $prefix == '' {
-			.pr-u-#{transform.camelize($name)}#{if(string.slice($property, 1, 1) == '-', 'Minus', '')}#{transform.capitalize(transform.camelize($property))} {
+			.pr-u-#{transform.camelize($name)}#{$minusString}#{transform.capitalize(transform.camelize($property))} {
 				#{$name}: #{transform.replace($property, '\\', '')} #{$suffix};
 			}
 
 			// Deprecated .u- utilities
 			@if config.$deprecatedUtilityPrefix {
-				.u-#{transform.camelize($name)}#{if(string.slice($property, 1, 1) == '-', 'Minus', '')}#{transform.capitalize(transform.camelize($property))} {
+				.u-#{transform.camelize($name)}#{$minusString}#{transform.capitalize(transform.camelize($property))} {
 					#{$name}: #{transform.replace($property, '\\', '')} #{$suffix};
 				}
 			}
 		} @else {
-			.pr-u-#{$prefix}#{transform.capitalize(transform.camelize($name))}#{if(string.slice($property, 1, 1) == '-', 'Minus', '')}#{transform.capitalize(transform.camelize($property))} {
+			.pr-u-#{$prefix}#{transform.capitalize(transform.camelize($name))}#{$minusString}#{transform.capitalize(transform.camelize($property))} {
 				#{$name}: #{transform.replace($property, '\\', '')} #{$suffix};
 			}
 
 			// Deprecated .u- utilities
 			@if config.$deprecatedUtilityPrefix {
-				.u-#{$prefix}#{transform.capitalize(transform.camelize($name))}#{if(string.slice($property, 1, 1) == '-', 'Minus', '')}#{transform.capitalize(transform.camelize($property))} {
+				.u-#{$prefix}#{transform.capitalize(transform.camelize($name))}#{$minusString}#{transform.capitalize(transform.camelize($property))} {
 					#{$name}: #{transform.replace($property, '\\', '')} #{$suffix};
 				}
 			}
