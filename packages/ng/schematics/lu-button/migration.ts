@@ -2,7 +2,7 @@ import { Tree } from '@angular-devkit/schematics';
 import type { TmplAstElement } from '@angular/compiler';
 import { applyToUpdateRecorder } from '@schematics/angular/utility/change';
 import { SourceFile } from 'typescript';
-import { insertAngularImportIfNeeded, insertTSImportIfNeeded, isInterestingNode } from '../lib';
+import { extractNgTemplatesIncludingHtml, HtmlAst, insertAngularImportIfNeeded, insertTSImportIfNeeded, isInterestingNode } from '../lib';
 
 interface CssButton {
 	node: TmplAstElement;
