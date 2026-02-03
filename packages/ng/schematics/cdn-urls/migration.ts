@@ -49,6 +49,7 @@ export function migrateHTMLFile(content: string): string {
 			if (node instanceof currentSchematicContext.angularCompiler.TmplAstElement) {
 				node.attributes.forEach((attr) => {
 					const match = findURLMatch(attr.value);
+					console.log('match :', match);
 					if (match && attr.valueSpan) {
 						currentSchematicContext.logSuccess(`Replacing ${match} with ${attr.value.replace(match, REPLACE_MAP[match])}`);
 						updates.push({
@@ -60,7 +61,7 @@ export function migrateHTMLFile(content: string): string {
 				});
 				node.inputs.forEach((input) => {
 					if (input.value instanceof currentSchematicContext.angularCompiler.ASTWithSource) {
-						const match = findURLMatch(input.value?.source || '');
+						const match = findURLMatch(input.value?.source?.replace('\'', '') || '');
 						if (input.value?.source && match) {
 							currentSchematicContext.logSuccess(`Replacing ${input.value.source} with ${input.value.source.replace(match, REPLACE_MAP[match])}`);
 							updates.push({
