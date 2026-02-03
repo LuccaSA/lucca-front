@@ -27,6 +27,7 @@ demo/ng
 
 # storybook
 .storybook/documentation.json
+.storybook/public/mockServiceWorker.js
 storybook-static
 
 # compodoc
