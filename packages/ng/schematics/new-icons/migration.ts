@@ -1,12 +1,17 @@
 import { ScriptTarget, createSourceFile } from 'typescript';
-import { extractNgTemplates, replaceComponentInput } from '../lib/angular-template.js';
-import { updateContent } from '../lib/file-update.js';
-import { HtmlAst, updateCssClassNames } from '../lib/html-ast.js';
+import {
+	HtmlAst,
+	PostCssScssLib,
+	currentSchematicContext,
+	extractNgTemplates,
+	replaceComponentInput,
+	replaceStringLiterals,
+	updateCSSClassNamesInRules,
+	updateContent,
+	updateCssClassNames
+} from '../lib';
 import { PostCssSelectorParserLib } from '../lib/local-deps/postcss-selector-parser.js';
-import { PostCssScssLib, updateCSSClassNamesInRules } from '../lib/scss-ast.js';
-import { replaceStringLiterals } from '../lib/typescript-ast.js';
 import { oldIconClassToNewIconClass, oldIconToNewIcon, oldIcons } from './mapping.js';
-import { currentSchematicContext } from '../lib/lf-schematic-context';
 
 export function migrateScssFile(content: string, postCssScss: PostCssScssLib, postcssSelectorParser: PostCssSelectorParserLib): string {
 	const root = postCssScss.parse(content);

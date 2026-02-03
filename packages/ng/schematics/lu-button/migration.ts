@@ -2,11 +2,7 @@ import { Tree } from '@angular-devkit/schematics';
 import type { TmplAstElement } from '@angular/compiler';
 import { applyToUpdateRecorder } from '@schematics/angular/utility/change';
 import { SourceFile } from 'typescript';
-import { insertAngularImportIfNeeded, insertTSImportIfNeeded } from '../lib/angular-component-ast';
-import { extractNgTemplatesIncludingHtml } from '../lib/angular-template';
-import { HtmlAst } from '../lib/html-ast.js';
-import { currentSchematicContext } from '../lib/lf-schematic-context';
-
+import { insertAngularImportIfNeeded, insertTSImportIfNeeded, isInterestingNode } from '../lib';
 
 interface CssButton {
 	node: TmplAstElement;
@@ -146,8 +142,4 @@ function getButtonType(classes: string): string {
 		return 'ghost';
 	}
 	return '';
-}
-
-function isInterestingNode(node: unknown): node is TmplAstElement {
-	return node instanceof currentSchematicContext.angularCompiler.TmplAstElement;
 }
