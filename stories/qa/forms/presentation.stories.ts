@@ -440,7 +440,7 @@ export const StandaloneDataDisplay: StoryObj = {
 		return {
 			template: cleanupTemplate(`
 			<lu-data-presentation label="Data presentation">
-				Valeur à afficher
+				Valeur à afficher.
 			</lu-data-presentation>
 			`),
 		};
