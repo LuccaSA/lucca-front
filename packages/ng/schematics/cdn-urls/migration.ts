@@ -49,7 +49,6 @@ export function migrateHTMLFile(content: string): string {
 			if (node instanceof currentSchematicContext.angularCompiler.TmplAstElement) {
 				node.attributes.forEach((attr) => {
 					const match = findURLMatch(attr.value);
-					console.log('match :', match);
 					if (match && attr.valueSpan) {
 						currentSchematicContext.logSuccess(`Replacing ${match} with ${attr.value.replace(match, REPLACE_MAP[match])}`);
 						updates.push({
