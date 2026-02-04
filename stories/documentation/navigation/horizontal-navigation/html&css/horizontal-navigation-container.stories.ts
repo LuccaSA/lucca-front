@@ -3,7 +3,7 @@ import { Meta, StoryObj } from '@storybook/angular';
 interface HorizontalNavigationContainerStory {}
 
 export default {
-	title: 'Documentation/Navigation/HorizontalNavigation/Container',
+	title: 'Documentation/Navigation/HorizontalNavigation/HTML&CSS/Container',
 	argTypes: {},
 } as Meta;
 

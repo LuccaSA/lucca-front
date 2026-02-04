@@ -1,6 +1,6 @@
 import { Meta, StoryObj } from '@storybook/angular';
 
-interface HorizontalNavigationBasicStory {
+interface HorizontalNavigationCountStory {
 	noBorder: boolean;
 	header: boolean;
 	s: boolean;
@@ -9,7 +9,7 @@ interface HorizontalNavigationBasicStory {
 }
 
 export default {
-	title: 'Documentation/Navigation/HorizontalNavigation/Basic',
+	title: 'Documentation/Navigation/HorizontalNavigation/HTML&CSS/Count',
 	argTypes: {
 		noBorder: {
 			control: {
@@ -25,6 +25,7 @@ export default {
 			control: {
 				type: 'boolean',
 			},
+			description: 'Taille : Small',
 		},
 		disabled: {
 			control: {
@@ -39,7 +40,7 @@ export default {
 	},
 } as Meta;
 
-function getTemplate(args: HorizontalNavigationBasicStory): string {
+function getTemplate(args: HorizontalNavigationCountStory): string {
 	const noBorder = args.noBorder ? ` mod-noBorder` : '';
 	const header = args.header ? ` mod-header` : '';
 	const s = args.s ? ` mod-S` : '';
@@ -49,49 +50,56 @@ function getTemplate(args: HorizontalNavigationBasicStory): string {
 	<ul class="horizontalNavigation-list">
 		<li class="horizontalNavigation-list-item">
 			<a href="#" class="horizontalNavigation-list-item-action" aria-current="page">
-				Page 1
+				Page
+				<span class="numericBadge">9</span>
 			</a>
 		</li>
 		<li class="horizontalNavigation-list-item">
 			<a href="#" class="horizontalNavigation-list-item-action">
-				Page 2
+				Page
+				<span class="numericBadge">9</span>
 			</a>
 		</li>
 		<li class="horizontalNavigation-list-item">
 			<a class="horizontalNavigation-list-item-action is-disabled">
-				Page 3
+				Page
+				<span class="numericBadge">9</span>
 			</a>
 		</li>
 	</ul>
 </div>`;
-	else
+	else {
 		return `<div class="horizontalNavigation${s}${noBorder}${header}${vertical}">
 	<ul class="horizontalNavigation-list">
 		<li class="horizontalNavigation-list-item">
 			<a href="#" class="horizontalNavigation-list-item-action" aria-current="page">
-				Page 1
+				Page
+				<span class="numericBadge">9</span>
 			</a>
 		</li>
 		<li class="horizontalNavigation-list-item">
 			<a href="#" class="horizontalNavigation-list-item-action">
-				Page 2
+				Page
+				<span class="numericBadge">9</span>
 			</a>
 		</li>
 		<li class="horizontalNavigation-list-item">
 			<a href="#" class="horizontalNavigation-list-item-action">
-				Page 3
+				Page
+				<span class="numericBadge">9</span>
 			</a>
 		</li>
 	</ul>
 </div>`;
+	}
 }
 
-const Template = (args: HorizontalNavigationBasicStory) => ({
+const Template = (args: HorizontalNavigationCountStory) => ({
 	props: args,
 	template: getTemplate(args),
 });
 
-export const Basic: StoryObj<HorizontalNavigationBasicStory> = {
+export const Count: StoryObj<HorizontalNavigationCountStory> = {
 	args: { noBorder: false, header: false, s: false, disabled: false, vertical: false },
 	render: Template,
 };

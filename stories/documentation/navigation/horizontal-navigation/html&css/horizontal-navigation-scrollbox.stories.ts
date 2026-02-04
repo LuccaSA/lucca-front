@@ -8,7 +8,7 @@ interface HorizontalNavigationScrollboxStory {
 }
 
 export default {
-	title: 'Documentation/Navigation/HorizontalNavigation/Scrollbox',
+	title: 'Documentation/Navigation/HorizontalNavigation/HTML&CSS/Scrollbox',
 	decorators: [
 		moduleMetadata({
 			imports: [ScrollBoxComponent],
