@@ -12,6 +12,7 @@
 			[decimalConf]="hoursDecimalConf"
 			[hideValue]="shouldHideValue()"
 			[displayArrows]="displayArrows()"
+			[maxDigits]="maxDigits()"
 			(valueChange)="hoursInputHandler($event)"
 			(nextRequest)="focusPart('minutes')"
 			(inputControlClick)="inputControlClickHandler('hours', $event)"
@@ -26,6 +27,7 @@
 			[hideValue]="shouldHideValue()"
 			[displayArrows]="displayArrows()"
 			[disabled]="disabled() || !minutesIncrement()"
+			showZero
 			(valueChange)="minutesInputHandler($event)"
 			(prevRequest)="focusPart('hours')"
 			(inputControlClick)="inputControlClickHandler('minutes', $event)"
