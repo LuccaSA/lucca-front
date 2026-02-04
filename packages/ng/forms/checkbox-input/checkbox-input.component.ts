@@ -1,16 +1,18 @@
 import { booleanAttribute, ChangeDetectionStrategy, Component, forwardRef, inject, input, signal, Signal, ViewEncapsulation } from '@angular/core';
 import { ReactiveFormsModule } from '@angular/forms';
 import { FILTER_PILL_INPUT_COMPONENT, FilterPillInputComponent, FilterPillLabelDirective, FilterPillLayout } from '@lucca-front/ng/filter-pills';
-import { FORM_FIELD_INSTANCE, FormFieldComponent, INPUT_FRAMED_INSTANCE, InputDirective } from '@lucca-front/ng/form-field';
+import { FORM_FIELD_INSTANCE, FormFieldComponent, INPUT_FRAMED_INSTANCE, InputDirective, ɵPresentationDisplayDefaultDirective } from '@lucca-front/ng/form-field';
 import { LuTooltipTriggerDirective } from '@lucca-front/ng/tooltip';
 import { injectNgControl } from '../inject-ng-control';
 import { NoopValueAccessorDirective } from '../noop-value-accessor.directive';
+import { CHECKBOX_INPUT_TRANSLATIONS } from './checkbox-input.translate';
+import { getIntl } from '@lucca-front/ng/core';
 
 let nextId = 0;
 
 @Component({
 	selector: 'lu-checkbox-input',
-	imports: [ReactiveFormsModule, InputDirective, FilterPillLabelDirective, LuTooltipTriggerDirective],
+	imports: [ReactiveFormsModule, InputDirective, FilterPillLabelDirective, LuTooltipTriggerDirective, ɵPresentationDisplayDefaultDirective],
 	hostDirectives: [NoopValueAccessorDirective],
 	templateUrl: './checkbox-input.component.html',
 	styleUrl: './checkbox-input.component.scss',
@@ -31,6 +33,7 @@ export class CheckboxInputComponent implements FilterPillInputComponent {
 	framed = inject(INPUT_FRAMED_INSTANCE, { optional: true }) !== null;
 	parentInput = inject(FILTER_PILL_INPUT_COMPONENT, { optional: true, skipSelf: true });
 	formField = inject<FormFieldComponent>(FORM_FIELD_INSTANCE, { optional: true });
+	intl = getIntl(CHECKBOX_INPUT_TRANSLATIONS);
 
 	readonly checklist = input(false, { transform: booleanAttribute });
 

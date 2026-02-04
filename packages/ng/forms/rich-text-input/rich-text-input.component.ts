@@ -5,6 +5,7 @@ import {
 	Component,
 	computed,
 	contentChildren,
+	effect,
 	ElementRef,
 	forwardRef,
 	inject,
@@ -22,7 +23,7 @@ import { ControlValueAccessor, NG_VALUE_ACCESSOR } from '@angular/forms';
 import { createEmptyHistoryState, registerHistory } from '@lexical/history';
 import { $canShowPlaceholderCurry, $isRootTextContentEmpty } from '@lexical/text';
 import { mergeRegister } from '@lexical/utils';
-import { FormFieldComponent, InputDirective } from '@lucca-front/ng/form-field';
+import { FormFieldComponent, InputDirective, ɵPresentationDisplayDefaultDirective } from '@lucca-front/ng/form-field';
 import { $getRoot, createEditor, Klass, LexicalEditor, LexicalNode, LexicalNodeReplacement, UpdateListenerPayload } from 'lexical';
 import { RICH_TEXT_FORMATTER, RichTextFormatter } from './formatters';
 
@@ -49,7 +50,7 @@ export const RICH_TEXT_PLUGIN_COMPONENT = new InjectionToken<RichTextPluginCompo
 
 @Component({
 	selector: 'lu-rich-text-input',
-	imports: [InputDirective, CommonModule],
+	imports: [InputDirective, CommonModule, ɵPresentationDisplayDefaultDirective],
 	templateUrl: './rich-text-input.component.html',
 	styleUrl: './rich-text-input.component.scss',
 	encapsulation: ViewEncapsulation.None,
@@ -71,7 +72,10 @@ export class RichTextInputComponent implements OnInit, OnDestroy, ControlValueAc
 	readonly autoResize = input(false, { transform: booleanAttribute });
 	readonly hideToolbar = input(false, { transform: booleanAttribute });
 
-	readonly content = viewChild.required<string, ElementRef<HTMLElement>>('content', {
+	readonly content = viewChild<string, ElementRef<HTMLElement>>('content', {
+		read: ElementRef,
+	});
+	readonly contentPresentation = viewChild<string, ElementRef<HTMLElement>>('contentPresentation', {
 		read: ElementRef,
 	});
 	readonly pluginComponents = contentChildren(RICH_TEXT_PLUGIN_COMPONENT, { descendants: true });
@@ -94,6 +98,18 @@ export class RichTextInputComponent implements OnInit, OnDestroy, ControlValueAc
 	#focusedPlugin: number = 0;
 	#editor?: LexicalEditor;
 
+	constructor() {
+		effect(() => {
+			if (this.#formField?.presentation() && this.contentPresentation()) {
+				this.#editor?.setRootElement(this.contentPresentation()?.nativeElement);
+				this.#editor?.setEditable(false);
+			} else if (this.content()) {
+				this.#editor?.setRootElement(this.content()?.nativeElement);
+				this.#editor?.setEditable(true);
+			}
+		});
+	}
+
 	ngOnInit(): void {
 		this.#editor = createEditor({
 			theme: {
@@ -112,7 +128,6 @@ export class RichTextInputComponent implements OnInit, OnDestroy, ControlValueAc
 			registerHistory(this.#editor, createEmptyHistoryState(), 300),
 			this.#editor.registerUpdateListener((payload) => this.#onEditorUpdate(payload)),
 		);
-		this.#editor.setRootElement(this.content().nativeElement);
 
 		this.pluginComponents().forEach((plugin) => plugin.setEditorInstance(this.#editor));
 
@@ -135,7 +150,7 @@ export class RichTextInputComponent implements OnInit, OnDestroy, ControlValueAc
 				{ tag: updateTags },
 			);
 		} else if (!this.#editor?.getEditorState().isEmpty()) {
-			this.#editor.update(
+			this.#editor?.update(
 				() => {
 					const root = $getRoot();
 					root.clear();
@@ -166,14 +181,14 @@ export class RichTextInputComponent implements OnInit, OnDestroy, ControlValueAc
 		const nextFocusedPlugin = this.#focusedPlugin + direction < 0 ? plugins.length - 1 : (this.#focusedPlugin + direction) % plugins.length;
 		if (plugins[nextFocusedPlugin].tabindex()) {
 			plugins[this.#focusedPlugin].tabindex?.set(-1);
-			plugins[nextFocusedPlugin].tabindex.set(0);
+			plugins[nextFocusedPlugin].tabindex?.set(0);
 		}
 		this.#focusedPlugin = nextFocusedPlugin;
 		plugins[this.#focusedPlugin].focus();
 	}
 
 	focus() {
-		this.content().nativeElement.focus();
+		this.content()?.nativeElement.focus();
 	}
 
 	touch() {
@@ -192,9 +207,9 @@ export class RichTextInputComponent implements OnInit, OnDestroy, ControlValueAc
 	}
 
 	#onEditorUpdate({ tags, dirtyElements }: UpdateListenerPayload) {
-		const isComposing = this.#editor.isComposing();
+		const isComposing = this.#editor?.isComposing();
 		if (!tags.has(INITIAL_UPDATE_TAG) && dirtyElements.size) {
-			this.#editor.read(() => {
+			this.#editor?.read(() => {
 				let result = '';
 				// ignore empty nodes
 				if (!$isRootTextContentEmpty(isComposing, false)) {
@@ -204,7 +219,7 @@ export class RichTextInputComponent implements OnInit, OnDestroy, ControlValueAc
 				this.#onChange?.(result);
 			});
 		}
-		const currentCanShowPlaceholder = this.#editor.getEditorState().read($canShowPlaceholderCurry(isComposing));
+		const currentCanShowPlaceholder = this.#editor?.getEditorState().read($canShowPlaceholderCurry(isComposing));
 		this.currentCanShowPlaceholder.set(currentCanShowPlaceholder);
 	}
 }
