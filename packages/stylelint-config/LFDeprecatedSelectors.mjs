@@ -1,19 +1,6 @@
 export default [
 	{
-		// TODO: Unspecified selectors.
-		objectPattern: [
-			'.active',
-			'.disabled',
-			'.error',
-			'.label',
-			'.mod-delete',
-			'.mod-invert',
-			'.mod-link',
-			'.mod-outline',
-			'.success',
-			'.u-textLight',
-			'[disabled]',
-		],
+		objectPattern: ['.active', '.disabled', '.error', '.label', '.mod-delete', '.mod-link', '.mod-outline', '.success', '.u-textLight'],
 	},
 	{
 		// Any combination of .button and .mod-counter, with any non-whitespace character between
