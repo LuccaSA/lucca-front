@@ -1,7 +1,7 @@
 import * as fs from 'fs';
 import * as glob from 'glob';
 import * as path from 'path';
-import { createTreeFromFiles, expectTree, runSchematic } from '../lib/migration-test.js';
+import { createTreeFromFiles, expectTree, runSchematic } from '../lib';
 
 const collectionPath = path.normalize(path.join(__dirname, '..', 'collection.json'));
 const testsRoot = path.join(__dirname, 'tests');
