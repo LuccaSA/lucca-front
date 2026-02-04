@@ -4,7 +4,7 @@ import { takeUntilDestroyed } from '@angular/core/rxjs-interop';
 import { ReactiveFormsModule } from '@angular/forms';
 import { ClearComponent } from '@lucca-front/ng/clear';
 import { intlInputOptions } from '@lucca-front/ng/core';
-import { InputDirective } from '@lucca-front/ng/form-field';
+import { InputDirective, ɵPresentationDisplayDefaultDirective } from '@lucca-front/ng/form-field';
 import { NumberFormat, NumberFormatCurrencyDisplay, NumberFormatDirective, NumberFormatOptions, NumberFormatStyle, NumberFormatUnit, NumberFormatUnitDisplay } from '@lucca-front/ng/number-format';
 import { startWith } from 'rxjs/operators';
 import { FormFieldIdDirective } from '../form-field-id.directive';
@@ -15,7 +15,7 @@ import { LU_NUMBERFORMATFIELD_TRANSLATIONS } from './number-format-input.transla
 
 @Component({
 	selector: 'lu-number-format-input',
-	imports: [InputDirective, ReactiveFormsModule, FormFieldIdDirective, NumberFormatDirective, NgTemplateOutlet, ClearComponent],
+	imports: [InputDirective, ReactiveFormsModule, FormFieldIdDirective, NumberFormatDirective, NgTemplateOutlet, ClearComponent, ɵPresentationDisplayDefaultDirective],
 	templateUrl: './number-format-input.component.html',
 	hostDirectives: [NoopValueAccessorDirective],
 	encapsulation: ViewEncapsulation.None,
@@ -103,10 +103,12 @@ export class NumberFormatInputComponent implements AfterViewInit {
 			}) satisfies NumberFormatOptions,
 	);
 
+	formattedValue = computed(() => this.#numberFormat().getBlurFormat(this.#suffixPrefixValue()));
+
 	readonly intl = input(...intlInputOptions(LU_NUMBERFORMATFIELD_TRANSLATIONS));
 
 	clearValue(): void {
 		this.ngControl.reset();
-		this.inputElementRef().nativeElement.focus();
+		this.inputElementRef()?.nativeElement.focus();
 	}
 }

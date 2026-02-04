@@ -107,26 +107,26 @@ export const Basic: StoryObj<
 		}
 > = {
 	render: (args, { argTypes }) => {
-		const { label, hiddenLabel, tooltip, inlineMessage, inlineMessageState, size, width, allLanguagesRequired, invariantRequired, ...inputArgs } = args;
+		const { label, hiddenLabel, tooltip, inlineMessage, inlineMessageState, size, width, allLanguagesRequired, invariantRequired, presentation, ...inputArgs } = args;
 		return {
 			props: {
 				formControl: new FormControl<MultilanguageTranslation[]>(
 					[
 						{
 							cultureCode: 'invariant',
-							value: '',
+							value: 'Invariant value',
 						},
 						{
 							cultureCode: 'fr-FR',
-							value: '',
+							value: 'Valeur en Français',
 						},
 						{
 							cultureCode: 'en-EN',
-							value: '',
+							value: 'English value',
 						},
 						{
 							cultureCode: 'de-DE',
-							value: '',
+							value: "I don't speak German",
 						},
 					],
 					allLanguagesRequired ? MultiLanguageInputValidators.allLanguagesRequired : invariantRequired ? MultiLanguageInputValidators.invariantRequired : undefined,
@@ -141,6 +141,7 @@ export const Basic: StoryObj<
 					inlineMessageState,
 					size,
 					width,
+					presentation,
 				},
 				argTypes,
 			)}>
@@ -159,6 +160,7 @@ export const Basic: StoryObj<
 		placeholder: 'Placeholder',
 		tooltip: 'Je suis un message d’aide',
 		openOnFocus: false,
+		presentation: false,
 		autocomplete: 'off',
 		allLanguagesRequired: false,
 		invariantRequired: false,

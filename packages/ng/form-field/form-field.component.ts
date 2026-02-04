@@ -17,11 +17,13 @@ import {
 	OnDestroy,
 	Renderer2,
 	signal,
+	TemplateRef,
 	ViewEncapsulation,
 } from '@angular/core';
 import { AbstractControl, NgControl, ReactiveFormsModule, RequiredValidator, Validators } from '@angular/forms';
 import { SafeHtml } from '@angular/platform-browser';
 import { intlInputOptions, IntlParamsPipe, LuClass, PortalContent, PortalDirective, ɵeffectWithDeps } from '@lucca-front/ng/core';
+import { LU_FORM_INSTANCE } from '@lucca-front/ng/form';
 import { IconComponent } from '@lucca-front/ng/icon';
 import { InlineMessageComponent, InlineMessageState } from '@lucca-front/ng/inline-message';
 import { LuTooltipModule } from '@lucca-front/ng/tooltip';
@@ -60,6 +62,7 @@ export class FormFieldComponent implements OnDestroy, DoCheck {
 	#luClass = inject(LuClass);
 	#injector = inject(Injector);
 	#renderer = inject(Renderer2);
+	protected parentForm = inject(LU_FORM_INSTANCE, { optional: true });
 
 	framed = inject(INPUT_FRAMED_INSTANCE, { optional: true }) !== null;
 
@@ -87,6 +90,8 @@ export class FormFieldComponent implements OnDestroy, DoCheck {
 
 	rolePresentationLabel = model(false);
 
+	labelIsPresentation = computed(() => this.rolePresentationLabel() || this.presentation());
+
 	readonly inline = input(false, { transform: booleanAttribute });
 
 	readonly statusControl = input<AbstractControl | null>(null);
@@ -99,7 +104,7 @@ export class FormFieldComponent implements OnDestroy, DoCheck {
 	readonly iconAItooltip = input<string | null>(null);
 	readonly iconAIalt = input<string | null>(null);
 
-	readonly width = input<FormFieldWidth, FormFieldWidth | `${FormFieldWidth}`>(null, {
+	readonly width = input<FormFieldWidth, FormFieldWidth | `${FormFieldWidth}` | null>(null, {
 		transform: numberAttribute as (value: FormFieldWidth | `${FormFieldWidth}`) => FormFieldWidth,
 	});
 
@@ -127,7 +132,7 @@ export class FormFieldComponent implements OnDestroy, DoCheck {
 	 */
 	readonly extraDescribedBy = input<string>('');
 
-	layout = model<'default' | 'checkable' | 'fieldset'>('default');
+	readonly layout = model<'default' | 'checkable' | 'fieldset'>('default');
 
 	#inputs: InputDirective[] = [];
 
@@ -135,6 +140,12 @@ export class FormFieldComponent implements OnDestroy, DoCheck {
 	 * Max amount of characters allowed, defaults to 0, which means hidden, no maximum
 	 */
 	readonly counter = input<number>(0);
+
+	readonly presentation = input(false, { transform: booleanAttribute });
+
+	readonly presentationMode = computed(() => this.parentForm?.presentation() || this.presentation());
+
+	readonly presentationDisplayTpl = signal<TemplateRef<unknown> | null>(null);
 
 	get contentLength(): number {
 		return (this.#inputs[0]?.host?.nativeElement as HTMLInputElement)?.value?.length || 0;
@@ -173,7 +184,8 @@ export class FormFieldComponent implements OnDestroy, DoCheck {
 			this.#luClass.setState({
 				[`mod-${this.size()}`]: !!this.size(),
 				'mod-checkable': this.layout() === 'checkable',
-				'form-field': this.layout() !== 'fieldset',
+				presentation: this.presentationMode(),
+				'form-field': this.layout() !== 'fieldset' && !this.presentationMode(),
 				[`mod-width${this.width()}`]: !!this.width(),
 			});
 		});

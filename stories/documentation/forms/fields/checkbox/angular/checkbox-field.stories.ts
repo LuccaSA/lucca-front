@@ -70,7 +70,7 @@ export default {
 
 export const Basic: StoryObj<CheckboxInputComponent & FormFieldComponent & { required: boolean }> = {
 	render: (args, { argTypes }) => {
-		const { label, hiddenLabel, tooltip, inlineMessage, inlineMessageState, size, ...inputArgs } = args;
+		const { label, hiddenLabel, tooltip, inlineMessage, inlineMessageState, size, presentation, ...inputArgs } = args;
 		return {
 			props: {
 				example: false,
@@ -83,6 +83,7 @@ export const Basic: StoryObj<CheckboxInputComponent & FormFieldComponent & { req
 					inlineMessage,
 					inlineMessageState,
 					size,
+					presentation,
 				},
 				argTypes,
 			)}>
@@ -103,5 +104,6 @@ export const Basic: StoryObj<CheckboxInputComponent & FormFieldComponent & { req
 		inlineMessage: 'Helper text',
 		inlineMessageState: 'default',
 		checklist: false,
+		presentation: false,
 	},
 };

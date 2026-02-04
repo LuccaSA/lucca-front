@@ -2,10 +2,7 @@ import { Tree } from '@angular-devkit/schematics';
 import type { TmplAstElement } from '@angular/compiler';
 import { applyToUpdateRecorder } from '@schematics/angular/utility/change';
 import { SourceFile } from 'typescript';
-import { insertAngularImportIfNeeded, insertTSImportIfNeeded } from '../lib/angular-component-ast';
-import { extractNgTemplatesIncludingHtml } from '../lib/angular-template';
-import { HtmlAst } from '../lib/html-ast.js';
-import { currentSchematicContext } from '../lib/lf-schematic-context';
+import { HtmlAst, extractNgTemplatesIncludingHtml, insertAngularImportIfNeeded, insertTSImportIfNeeded, isInterestingNode } from '../lib';
 
 interface LoadingInputs {
 	size?: string;
@@ -112,7 +109,7 @@ function findHTMLLoadings(sourceFile: SourceFile, basePath: string, tree: Tree):
 				if (classes?.includes("loading") && classes?.match(/(^|\s)loading(\s|$)/)){
 					const loading = classes.split(' ').find(c => c.startsWith('loading'));
 					if (loading) {
-						const inputs = {
+						const inputs: LoadingInputs = {
 							size: classes.split(' ').find(c => /mod-L/.test(c)),
 							block: classes.includes('mod-block') ? true : undefined,
 							invert: classes.includes('mod-invert') ? true : undefined,
@@ -165,8 +162,4 @@ function getLoadingTemplate(classes: string): 'popin' | 'drawer' | 'fullPage' | 
 		return 'fullPage';
 	}
 	return undefined;
-}
-
-function isInterestingNode(node: unknown): node is TmplAstElement {
-	return node instanceof currentSchematicContext.angularCompiler.TmplAstElement;
 }

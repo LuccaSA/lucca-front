@@ -2,7 +2,7 @@ import { ConnectionPositionPair } from '@angular/cdk/overlay';
 import { booleanAttribute, ChangeDetectionStrategy, Component, computed, forwardRef, inject, input, LOCALE_ID, signal, ViewEncapsulation, WritableSignal } from '@angular/core';
 import { ControlValueAccessor, FormsModule, NG_VALUE_ACCESSOR, ReactiveFormsModule } from '@angular/forms';
 import { intlInputOptions, IntlParamsPipe } from '@lucca-front/ng/core';
-import { FORM_FIELD_INSTANCE, FormFieldComponent, InputDirective } from '@lucca-front/ng/form-field';
+import { FORM_FIELD_INSTANCE, FormFieldComponent, InputDirective, ɵPresentationDisplayDefaultDirective } from '@lucca-front/ng/form-field';
 import { PopoverDirective } from '@lucca-front/ng/popover2';
 import { LuTooltipTriggerDirective } from '@lucca-front/ng/tooltip';
 import { TextInputComponent } from '../text-input/text-input.component';
@@ -11,7 +11,18 @@ import { LU_MULTILANGUAGE_INPUT_TRANSLATIONS } from './multilanguage-input.trans
 
 @Component({
 	selector: 'lu-multilanguage-input',
-	imports: [FormFieldComponent, ReactiveFormsModule, PopoverDirective, TextInputComponent, FormFieldComponent, FormsModule, InputDirective, IntlParamsPipe, LuTooltipTriggerDirective],
+	imports: [
+		FormFieldComponent,
+		ReactiveFormsModule,
+		PopoverDirective,
+		TextInputComponent,
+		FormFieldComponent,
+		FormsModule,
+		InputDirective,
+		IntlParamsPipe,
+		LuTooltipTriggerDirective,
+		ɵPresentationDisplayDefaultDirective,
+	],
 	templateUrl: './multilanguage-input.component.html',
 	styleUrl: './multilanguage-input.component.scss',
 	providers: [
@@ -56,6 +67,10 @@ export class MultilanguageInputComponent implements ControlValueAccessor {
 
 	panelInputs = computed(() => {
 		return this.model().filter((row) => row.cultureCode !== INVARIANT_CULTURE_CODE);
+	});
+
+	presentationValue = computed(() => {
+		return this.model().find((row) => row.cultureCode === this.#localeId)?.value || this.invariant()?.value;
 	});
 
 	popoverPositions: ConnectionPositionPair[] = [
