@@ -1,8 +1,6 @@
-import { LuSelectInputContext, SelectContext } from './model/select-context';
-import { HtmlAstVisitor } from '../lib/html-ast';
-import { extractProviders } from '../lib/angular-component-ast';
-import { currentSchematicContext } from '../lib/lf-schematic-context';
 import { SourceFile } from 'typescript';
+import { HtmlAstVisitor, currentSchematicContext, extractProviders } from '../lib';
+import { LuSelectInputContext, SelectContext } from './model/select-context';
 
 export enum RejectionReason {
 	UNSUPPORTED_ATTRIBUTE,
