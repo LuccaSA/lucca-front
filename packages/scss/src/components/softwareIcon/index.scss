@@ -1,0 +1,26 @@
+@use 'exports' as *;
+
+.softwareIcon {
+	@layer components {
+		@include vars;
+		@include component;
+	}
+
+	@layer mods {
+		&.mod-XXS {
+			@include XXS;
+		}
+
+		&.mod-XS {
+			@include XS;
+		}
+
+		&.mod-S {
+			@include S;
+		}
+
+		&.mod-L {
+			@include L;
+		}
+	}
+}

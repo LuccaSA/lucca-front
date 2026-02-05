@@ -1,0 +1,10 @@
+<div
+	class="softwareIcon"
+	[class]="paletteClass()"
+	[class.mod-XXS]="size() === 'XXS'"
+	[class.mod-XS]="size() === 'XS'"
+	[class.mod-S]="size() === 'S'"
+	[class.mod-L]="size() === 'L'"
+	aria-hidden="true"
+	[innerHtml]="iconUrl() | luSafeExternalSvg"
+></div>
