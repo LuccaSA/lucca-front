@@ -136,9 +136,7 @@ export class FormFieldComponent implements OnDestroy, DoCheck {
 	 */
 	readonly counter = input<number>(0);
 
-	get contentLength(): number {
-		return (this.#inputs[0]?.host?.nativeElement as HTMLInputElement)?.value?.length || 0;
-	}
+	readonly contentLength = signal<number>(0);
 
 	public addInput(input: InputDirective) {
 		this.#inputs.push(input);
@@ -238,6 +236,7 @@ export class FormFieldComponent implements OnDestroy, DoCheck {
 			() => {
 				this.#hasInputRequired.set(this.#isInputRequired());
 				this.#invalidStatus.set(this.#hasInvalidStatus());
+				this.contentLength.set((this.#inputs[0]?.host?.nativeElement as HTMLInputElement)?.value?.length ?? 0);
 			},
 			{
 				injector: this.#injector,
