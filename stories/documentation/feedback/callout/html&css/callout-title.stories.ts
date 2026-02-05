@@ -13,10 +13,8 @@ export default {
 function getTemplate(args: CalloutTitleStory): string {
 	return `<div class="callout">
 	<div class="callout-content">
-		<p class="callout-content-title">Dépense non prise en charge</p>
-		<div class="callout-content-description">
-			<p>Vous l’avez déclarée comme usage personnel le 29 août 2023.</p>
-		</div>
+		<strong class="callout-content-title">Dépense non prise en charge</strong>
+		<p class="callout-content-description">Vous l'avez déclarée comme usage personnel le 29 août 2023.</p>
 	</div>
 </div>`;
 }

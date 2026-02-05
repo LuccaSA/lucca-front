@@ -3,12 +3,15 @@ import storybook from 'eslint-plugin-storybook';
 
 import eslint from '@eslint/js';
 import angular from 'angular-eslint';
+import localRules from './packages/eslint-plugin/index.ts';
 import prettier from 'eslint-plugin-prettier/recommended';
 import typescript from 'typescript-eslint';
+import { defineConfig } from 'eslint/config';
+import tsParser from '@typescript-eslint/parser';
 
-export default typescript.config(
+export default defineConfig(
 	{
-		ignores: ['dist/', '.storybook/**', '**/schematics/**/tests/'],
+		ignores: ['dist/', '.storybook/**', '**/schematics/**/tests/', 'node_modules/', '.angular/'],
 	},
 	{
 		linterOptions: {
@@ -55,7 +58,7 @@ export default typescript.config(
 
 			// This one is from Angular 20, we'll remove it eventually but legacy code makes it hard to do
 			'@angular-eslint/prefer-inject': 'off',
-			'@angular-eslint/prefer-on-push-component-change-detection': 'warn',
+			'@angular-eslint/prefer-on-push-component-change-detection': 'error',
 
 			'@typescript-eslint/explicit-function-return-type': 'off',
 			'@typescript-eslint/explicit-module-boundary-types': 'off', // on aimerait bien dire oui sauf pour void
@@ -116,6 +119,25 @@ export default typescript.config(
 			],
 			'@angular-eslint/no-host-metadata-property': 'off',
 			'@angular-eslint/no-input-rename': 'off',
+		},
+	},
+	{
+		files: ['**/*.ts'],
+		languageOptions: {
+			parser: tsParser,
+			parserOptions: {
+				project: ['tsconfig.lint.json', 'packages/ng/tsconfig.lint.json', '.storybook/tsconfig.lint.json'],
+			},
+		},
+		plugins: {
+			'@lucca-front': localRules,
+		},
+		rules: {
+			'@lucca-front/ts-error': 'warn',
+			'@typescript-eslint/no-unsafe-assignment': 'warn',
+			'@typescript-eslint/no-unsafe-return': 'warn',
+			'@typescript-eslint/no-unsafe-member-access': 'warn',
+			'@typescript-eslint/no-unsafe-call': 'warn',
 		},
 	},
 	{

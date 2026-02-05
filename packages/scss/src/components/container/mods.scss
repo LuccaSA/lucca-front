@@ -2,8 +2,9 @@
 	--commons-container-marginInline: auto;
 }
 
+// deprecated
 @mixin S {
-	--commons-container-padding: var(--pr-t-spacings-200);
+	--commons-container-padding: 0 var(--pr-t-spacings-200);
 }
 
 @mixin maxM {

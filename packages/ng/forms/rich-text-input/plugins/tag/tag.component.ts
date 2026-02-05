@@ -1,6 +1,6 @@
 import { ChangeDetectionStrategy, Component, effect, ElementRef, forwardRef, inject, input, OnDestroy, signal, viewChildren, ViewContainerRef } from '@angular/core';
 import { ChipComponent } from '@lucca-front/ng/chip';
-import { getIntl } from '@lucca-front/ng/core';
+import { intlInputOptions } from '@lucca-front/ng/core';
 import { $getNodeByKey, $getRoot, $getSelection, type Klass, type LexicalEditor, type LexicalNode, type NodeKey } from 'lexical';
 import { INITIAL_UPDATE_TAG, RICH_TEXT_PLUGIN_COMPONENT, RichTextPluginComponent, SKIP_DOM_SELECTION_TAG } from '../../rich-text-input.component';
 import { LU_RICH_TEXT_INPUT_TRANSLATIONS } from '../../rich-text-input.translate';
@@ -24,7 +24,7 @@ const areSetsEqual = (a: Set<string>, b: Set<string>): boolean => a.size === b.s
 })
 export class RichTextPluginTagComponent implements RichTextPluginComponent, OnDestroy {
 	readonly #viewContainerRef = inject(ViewContainerRef);
-	readonly intl = getIntl(LU_RICH_TEXT_INPUT_TRANSLATIONS);
+	readonly intl = input(...intlInputOptions(LU_RICH_TEXT_INPUT_TRANSLATIONS));
 
 	readonly tags = input.required<Tag[]>();
 	readonly isDisabled = signal(false);

@@ -8,7 +8,7 @@
 					<button type="button" class="calendar-name-button" (click)="displayMode.set('month')">{{ currentMonthLabel() }}</button>&ngsp;
 					<button type="button" class="calendar-name-button" (click)="displayMode.set('year')">{{ currentYearLabel() }}</button>
 				}
-				<span class="pr-u-mask">{{ intl.directionKeysTip }} </span>
+				<span class="pr-u-mask">{{ intl().directionKeysTip }} </span>
 			</div>
 			<table class="calendar-table" role="grid" aria-labelledby="calendar-name">
 				<thead class="calendar-table-head">
@@ -100,7 +100,7 @@
 				} @else {
 					<button type="button" class="calendar-name-button" (click)="displayMode.set('year')">{{ currentYearLabel() }}</button>
 				}
-				<span class="pr-u-mask">{{ intl.directionKeysTip }} </span>
+				<span class="pr-u-mask">{{ intl().directionKeysTip }} </span>
 			</div>
 			<table class="calendar-table" role="grid" aria-labelledby="calendar-year-name">
 				<tbody class="calendar-table-body">
@@ -142,7 +142,7 @@
 		@case ("year") {
 			<div class="calendar-name" id="calendar-decade-name">
 				{{ currentDecadeLabel() }}
-				<span class="pr-u-mask">{{ intl.directionKeysTip }} </span>
+				<span class="pr-u-mask">{{ intl().directionKeysTip }} </span>
 			</div>
 			<table class="calendar-table" role="grid" aria-labelledby="calendar-decade-name">
 				<tbody class="calendar-table-body">

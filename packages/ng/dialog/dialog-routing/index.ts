@@ -8,4 +8,5 @@ export {
 	DialogRouteDialogConfig,
 	DialogRouteDismissTrigger,
 } from './dialog-routing.models';
+export { LuccaDialogRoutingReuseStrategy, provideDialogRoutingReuseStrategy } from './dialog-routing.reuse-strategy';
 export { createDialogRoute, DialogFactoryConfig, DialogFactoryResult, DialogFactoryResultOptions, dialogLazyRouteFactory, dialogRouteFactory } from './dialog-routing.utils';

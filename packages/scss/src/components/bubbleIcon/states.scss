@@ -1,0 +1,13 @@
+@use '@lucca-front/scss/src/commons/utils/color';
+
+@mixin success {
+	@include color.palette('success');
+}
+
+@mixin critical {
+	@include color.palette('critical');
+}
+
+@mixin warning {
+	@include color.palette('warning');
+}

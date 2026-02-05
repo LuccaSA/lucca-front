@@ -3,8 +3,8 @@ import { booleanAttribute, ChangeDetectionStrategy, Component, ElementRef, input
 import { ReactiveFormsModule } from '@angular/forms';
 import { LuccaIcon } from '@lucca-front/icons';
 import { ClearComponent } from '@lucca-front/ng/clear';
-import { getIntl, ɵeffectWithDeps } from '@lucca-front/ng/core';
-import { InputDirective } from '@lucca-front/ng/form-field';
+import { intlInputOptions, ɵeffectWithDeps } from '@lucca-front/ng/core';
+import { InputDirective, ɵPresentationDisplayDefaultDirective } from '@lucca-front/ng/form-field';
 import { NgxMaskDirective, provideNgxMask } from 'ngx-mask';
 import { FormFieldIdDirective } from '../form-field-id.directive';
 import { injectNgControl } from '../inject-ng-control';
@@ -16,7 +16,7 @@ type TextFieldType = 'text' | 'email' | 'password' | 'url';
 
 @Component({
 	selector: 'lu-text-input',
-	imports: [InputDirective, ReactiveFormsModule, FormFieldIdDirective, NgTemplateOutlet, NgxMaskDirective, ClearComponent],
+	imports: [InputDirective, ReactiveFormsModule, FormFieldIdDirective, NgTemplateOutlet, NgxMaskDirective, ClearComponent, ɵPresentationDisplayDefaultDirective],
 	templateUrl: './text-input.component.html',
 	hostDirectives: [NoopValueAccessorDirective],
 	encapsulation: ViewEncapsulation.None,
@@ -24,7 +24,7 @@ type TextFieldType = 'text' | 'email' | 'password' | 'url';
 	providers: [provideNgxMask()],
 })
 export class TextInputComponent {
-	readonly intl = getIntl(LU_TEXTFIELD_TRANSLATIONS);
+	readonly intl = input(...intlInputOptions(LU_TEXTFIELD_TRANSLATIONS));
 	readonly ngControl = injectNgControl();
 
 	readonly inputElementRef = viewChild<ElementRef<HTMLInputElement>>('inputElement');
@@ -69,7 +69,7 @@ export class TextInputComponent {
 
 	clearValue(): void {
 		this.ngControl.reset();
-		this.inputElementRef().nativeElement.focus();
+		this.inputElementRef()?.nativeElement.focus();
 	}
 
 	togglePasswordVisibility() {

@@ -1,0 +1,13 @@
+@mixin vars {
+	--components-bubbleIcon-size: var(--pr-t-spacings-500);
+	--components-bubbleIcon-color: var(--palettes-600, var(--palettes-product-600));
+	--components-bubbleIcon-bubble-path-fill: var(--palettes-100, var(--palettes-product-100));
+	--components-bubbleIcon-bubble-pathBlock-display: none;
+	--components-bubbleIcon-bubble-pathInline-display: inherit;
+	--components-bubbleIcon-bubble-scale: 1;
+	--components-bubbleIcon-icon-insetOffset: 1px;
+	--components-bubbleIcon-icon-insetBlockStart: auto;
+	--components-bubbleIcon-icon-insetBlockEnd: auto;
+	--components-bubbleIcon-icon-insetInlineStart: auto;
+	--components-bubbleIcon-icon-insetInlineEnd: auto;
+}

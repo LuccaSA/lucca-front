@@ -713,6 +713,32 @@ export const CustomPanelHeaderTEST = createTestStory(CustomPanelHeader, async (c
 	await expect(panel.getByTestId('custom-header')).toBeInTheDocument();
 });
 
+export const IntlOverride = generateStory({
+	name: 'Intl Override',
+	description: `Il est possible de personnaliser les traductions du composant en utilisant l'input \`[intl]\`. Cela permet de surcharger les labels par défaut (placeholder, clear, emptyResults, etc.).`,
+	template: `<lu-simple-select
+	#selectRef
+	[options]="legumes | filterLegumes:clue"
+	(clueChange)="clue = $event"
+	[(ngModel)]="selectedLegume"
+	[intl]="{
+		placeholder: 'Choose a vegetable...',
+		clear: 'Remove selection',
+		clearSearch: 'Clear the search field',
+		emptyResults: 'No vegetables found matching your search.',
+		emptyOptions: 'No vegetables available.',
+		loading: 'Fetching vegetables...'
+	}"
+	clearable
+>
+	<ng-container *luOption="let legume; select: selectRef">{{ legume.name }}</ng-container>
+</lu-simple-select>`,
+	neededImports: {
+		'@lucca-front/ng/core-select': ['LuOptionDirective'],
+		'@lucca-front/ng/simple-select': ['LuSimpleSelectInputComponent'],
+	},
+});
+
 const meta: Meta<LuSimpleSelectInputStoryComponent> = {
 	title: 'Documentation/Forms/SimpleSelect',
 	component: LuSimpleSelectInputComponent,

@@ -1,5 +1,5 @@
 import { provideHttpClient } from '@angular/common/http';
-import { Component, input } from '@angular/core';
+import { ChangeDetectionStrategy, Component, input } from '@angular/core';
 import { provideAnimations } from '@angular/platform-browser/animations';
 import { LuDepartmentSelectInputComponent } from '@lucca-front/ng/department';
 import { applicationConfig, Meta, StoryObj } from '@storybook/angular';
@@ -35,6 +35,7 @@ import { applicationConfig, Meta, StoryObj } from '@storybook/angular';
 			<div class="textfield-label">Departement multiple</div>
 		</label>
 	`,
+	changeDetection: ChangeDetectionStrategy.OnPush,
 })
 class DepartmentStory {
 	appInstanceId = input<number>(null);

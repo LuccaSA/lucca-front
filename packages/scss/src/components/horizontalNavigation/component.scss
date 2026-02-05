@@ -32,7 +32,7 @@
 		.horizontalNavigation-containerOptional,
 		.menu-containerOptional {
 			max-inline-size: var(--commons-container-maxWidth);
-			padding-inline: var(--commons-container-padding);
+			padding: var(--commons-container-padding);
 		}
 
 		// .menu-list is deprecated

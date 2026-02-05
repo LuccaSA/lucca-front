@@ -1,5 +1,5 @@
-import { booleanAttribute, ChangeDetectionStrategy, Component, computed, ElementRef, input, OnInit, signal, viewChild, ViewEncapsulation } from '@angular/core';
-import { getIntl, isNil } from '@lucca-front/ng/core';
+import { afterNextRender, booleanAttribute, ChangeDetectionStrategy, Component, computed, DestroyRef, ElementRef, inject, input, signal, viewChild, ViewEncapsulation } from '@angular/core';
+import { intlInputOptions, isNil } from '@lucca-front/ng/core';
 import { LU_READMORE_TRANSLATIONS } from './read-more.translate';
 
 @Component({
@@ -19,8 +19,8 @@ import { LU_READMORE_TRANSLATIONS } from './read-more.translate';
 		'[style.--components-readMore-link-backgroudColor]': 'backgroundColor()',
 	},
 })
-export class ReadMoreComponent implements OnInit {
-	intl = getIntl(LU_READMORE_TRANSLATIONS);
+export class ReadMoreComponent {
+	intl = input(...intlInputOptions(LU_READMORE_TRANSLATIONS));
 
 	/**
 	 * Change the number of lines displayed when collapsed
@@ -47,10 +47,10 @@ export class ReadMoreComponent implements OnInit {
 	 */
 	readonly innerContent = input<null | string>(null);
 
-	labelReadMore = this.intl.readMore;
-	labelReadLess = this.intl.readLess;
+	labelReadMore = computed(() => this.intl().readMore);
+	labelReadLess = computed(() => this.intl().readLess);
 
-	label = signal<string>(this.labelReadMore);
+	label = computed(() => (this.expanded() ? this.labelReadLess() : this.labelReadMore()));
 
 	readonly contentRef = viewChild<ElementRef<HTMLDivElement>>('content');
 
@@ -64,30 +64,40 @@ export class ReadMoreComponent implements OnInit {
 		return `${this.surface()}`;
 	});
 
-	isNil = isNil;
+	readonly isInnerContentNil = computed(() => isNil(this.innerContent()));
 
-	ngOnInit(): void {
-		setTimeout(() => {
-			new ResizeObserver(() => {
+	constructor() {
+		const destroyRef = inject(DestroyRef);
+
+		afterNextRender(() => {
+			const content = this.contentRef();
+
+			if (!content) {
+				return;
+			}
+			const observer = new ResizeObserver(() => {
 				const contentElement = this.contentRef()?.nativeElement;
+
+				if (!contentElement) {
+					return;
+				}
+
 				const lineHeight = parseFloat(window.getComputedStyle(contentElement).lineHeight);
 				const totalLines = Math.round(contentElement.scrollHeight / lineHeight);
 
 				this.isClamped.set(contentElement.scrollHeight > contentElement.clientHeight);
+
 				if (!this.isClamped() && totalLines <= this.lineClamp()) {
 					this.expanded.set(false);
 				}
-			}).observe(this.contentRef().nativeElement, { box: 'border-box' });
+			});
+
+			observer.observe(content.nativeElement);
+			destroyRef.onDestroy(() => observer.disconnect());
 		});
 	}
 
 	toggleExpanded() {
 		this.expanded.set(!this.expanded());
-
-		if (this.expanded()) {
-			this.label.set(this.labelReadLess);
-		} else {
-			this.label.set(this.labelReadMore);
-		}
 	}
 }

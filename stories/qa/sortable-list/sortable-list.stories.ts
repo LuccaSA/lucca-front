@@ -1,4 +1,4 @@
-import { Component } from '@angular/core';
+import { ChangeDetectionStrategy, Component } from '@angular/core';
 import { SortableListComponent, SortableListItemComponent } from '@lucca-front/ng/sortable-list';
 import { Meta, StoryObj, moduleMetadata } from '@storybook/angular';
 
@@ -6,6 +6,7 @@ import { Meta, StoryObj, moduleMetadata } from '@storybook/angular';
 	selector: 'sortable-list-stories',
 	templateUrl: './sortable-list.stories.html',
 	imports: [SortableListComponent, SortableListItemComponent],
+	changeDetection: ChangeDetectionStrategy.OnPush,
 })
 class SortableListStory {}
 

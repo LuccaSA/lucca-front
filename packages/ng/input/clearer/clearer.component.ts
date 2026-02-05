@@ -1,5 +1,5 @@
-import { ChangeDetectionStrategy, Component, EventEmitter, forwardRef, Output } from '@angular/core';
-import { getIntl } from '@lucca-front/ng/core';
+import { ChangeDetectionStrategy, Component, EventEmitter, forwardRef, input, Output } from '@angular/core';
+import { intlInputOptions } from '@lucca-front/ng/core';
 import { ALuClearer, ILuClearer } from './clearer.model';
 import { LU_CLEARER_TRANSLATIONS } from './clearer.translate';
 
@@ -20,7 +20,7 @@ import { LU_CLEARER_TRANSLATIONS } from './clearer.translate';
 	],
 })
 export class LuInputClearerComponent<T> extends ALuClearer<T> implements ILuClearer<T> {
-	intl = getIntl(LU_CLEARER_TRANSLATIONS);
+	intl = input(...intlInputOptions(LU_CLEARER_TRANSLATIONS));
 
 	// eslint-disable-next-line @angular-eslint/no-output-on-prefix
 	@Output() override onClear = new EventEmitter<T>();

@@ -1,9 +1,12 @@
-import { Component } from '@angular/core';
+import { ChangeDetectionStrategy, Component } from '@angular/core';
+import { TextFlowComponent } from '@lucca-front/ng/text-flow';
 import { Meta, StoryObj } from '@storybook/angular';
 
 @Component({
 	selector: 'text-flow-stories',
 	templateUrl: './text-flow.stories.html',
+	imports: [TextFlowComponent],
+	changeDetection: ChangeDetectionStrategy.OnPush,
 })
 class TextFlowStory {}
 

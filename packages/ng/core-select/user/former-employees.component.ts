@@ -1,7 +1,7 @@
-import { ChangeDetectionStrategy, Component, inject, InjectionToken, WritableSignal } from '@angular/core';
+import { ChangeDetectionStrategy, Component, inject, InjectionToken, input, WritableSignal } from '@angular/core';
 import { outputToObservable, takeUntilDestroyed } from '@angular/core/rxjs-interop';
 import { FormsModule } from '@angular/forms';
-import { getIntl } from '@lucca-front/ng/core';
+import { intlInputOptions } from '@lucca-front/ng/core';
 import { ɵCoreSelectPanelElement } from '@lucca-front/ng/core-select';
 import { LU_CORE_SELECT_USER_TRANSLATIONS } from './user.translate';
 
@@ -19,14 +19,14 @@ export const FORMER_EMPLOYEES_CONTEXT = new InjectionToken<FormerEmployeesContex
 	template: `
 		<div class="formerEmployeeDisplayer optionItem">
 			<div class="optionItem-value" [class.is-selected]="context.includeFormerEmployees()" (click)="context.includeFormerEmployees.set(!context.includeFormerEmployees())">
-				{{ intl.includeFormerEmployees }}
+				{{ intl().includeFormerEmployees }}
 			</div>
 		</div>
 	`,
 	changeDetection: ChangeDetectionStrategy.OnPush,
 })
 export class LuCoreSelectFormerEmployeesComponent {
-	readonly intl = getIntl(LU_CORE_SELECT_USER_TRANSLATIONS);
+	readonly intl = input(...intlInputOptions(LU_CORE_SELECT_USER_TRANSLATIONS));
 	readonly context = inject(FORMER_EMPLOYEES_CONTEXT);
 	readonly #selectableItem = inject(ɵCoreSelectPanelElement);
 

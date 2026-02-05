@@ -1,6 +1,6 @@
 import { NgTemplateOutlet } from '@angular/common';
 import { booleanAttribute, ChangeDetectionStrategy, Component, computed, input, output, ViewEncapsulation } from '@angular/core';
-import { getIntl } from '@lucca-front/ng/core';
+import { intlInputOptions } from '@lucca-front/ng/core';
 
 import { LuccaIcon } from '@lucca-front/icons';
 import { IconComponent } from '@lucca-front/ng/icon';
@@ -24,7 +24,7 @@ import { LU_CHIP_TRANSLATIONS } from './chip.translate';
 	changeDetection: ChangeDetectionStrategy.OnPush,
 })
 export class ChipComponent {
-	readonly intl = getIntl(LU_CHIP_TRANSLATIONS);
+	readonly intl = input(...intlInputOptions(LU_CHIP_TRANSLATIONS));
 
 	/**
 	 * Add an ellipsis if the text is too long
@@ -65,14 +65,14 @@ export class ChipComponent {
 	 * Which icon should we display in the chip if any?
 	 * Defaults to no icon.
 	 */
+
 	readonly icon = input<LuccaIcon | null>(null);
 
 	/**
 	 * Emit event when button kill is click
 	 */
 	readonly kill = output<Event>();
-
-	readonly stateAlt = computed(() => (this.isWarning() ? this.intl.warning : this.isCritical() ? this.intl.error : ''));
+	readonly stateAlt = computed(() => (this.isWarning() ? this.intl().warning : this.isCritical() ? this.intl().error : ''));
 	readonly isWarning = computed<boolean>(() => this.state() === 'warning');
 	readonly isCritical = computed<boolean>(() => this.state() === 'critical');
 	readonly displayedIcon = computed<LuccaIcon | null>(() => (this.isWarning() ? 'signWarning' : this.isCritical() ? 'signError' : this.icon()));

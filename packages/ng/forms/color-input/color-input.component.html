@@ -1,0 +1,36 @@
+<lu-simple-select
+	#selectRef
+	noClueIcon
+	noClue
+	colorPicker
+	[placeholder]="compact() ? ' ' : null"
+	[panelFooterTpl]="footer"
+	[compact]="compact()"
+	[clearable]="clearable()"
+	[formControl]="ngControl.control"
+	[options]="filteredColors()"
+	(clueChange)="clue.set($event)"
+	(highlightedOption)="keyboardHighlighted.set($event.name)"
+>
+	<ng-container *luOption="let color; select: selectRef">
+		<lu-color
+			size="XL"
+			hiddenName
+			[value]="color.background"
+			[borderColor]="color.borderColor"
+			(mouseenter)="mouseHighlighted.set(color.name)"
+			(mouseleave)="mouseHighlighted.set('')"
+		>
+			{{ color.name }}
+		</lu-color>
+	</ng-container>
+	<ng-container *luDisplayer="let color; select: selectRef">
+		<lu-color size="L" [borderColor]="color.borderColor" [value]="color.background">{{ color.name }}</lu-color>
+	</ng-container>
+	<ng-template #footer>
+		<div class="colorPanel-highlighted">
+			<span class="pr-u-colorTextSubtle">{{ intl().color }}</span>
+			<span class="pr-u-ellipsis">{{ highlighted() }}</span>
+		</div>
+	</ng-template>
+</lu-simple-select>

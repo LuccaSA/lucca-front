@@ -1,4 +1,4 @@
-import { Component, input } from '@angular/core';
+import { ChangeDetectionStrategy, Component, input } from '@angular/core';
 import { provideAnimations } from '@angular/platform-browser/animations';
 import { LuPopoverAlignment, LuPopoverModule, LuPopoverPosition, LuPopoverTriggerEvent } from '@lucca-front/ng/popover';
 import { applicationConfig, Meta, StoryObj } from '@storybook/angular';
@@ -10,6 +10,7 @@ import { applicationConfig, Meta, StoryObj } from '@storybook/angular';
 		<button type="button" class="button" [luPopover]="popover" [luPopoverPosition]="position()" [luPopoverAlignment]="alignment()" [luPopoverTrigger]="trigger()">{{ trigger() }} me</button>
 		<lu-popover #popover>{{ popoverContent() }}</lu-popover>
 	`,
+	changeDetection: ChangeDetectionStrategy.OnPush,
 })
 class PopoverStory {
 	popoverContent = input<string>('🎉 popover content 🏖️');

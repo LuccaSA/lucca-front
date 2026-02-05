@@ -1,7 +1,7 @@
-import { ChangeDetectionStrategy, Component, computed, ElementRef, inject, viewChild } from '@angular/core';
+import { ChangeDetectionStrategy, Component, computed, ElementRef, inject, input, viewChild } from '@angular/core';
 import { toSignal } from '@angular/core/rxjs-interop';
 import { ChipComponent } from '@lucca-front/ng/chip';
-import { getIntl } from '@lucca-front/ng/core';
+import { intlInputOptions } from '@lucca-front/ng/core';
 import { ɵLuOptionOutletDirective } from '@lucca-front/ng/core-select';
 import { LU_MULTI_SELECT_DISPLAYER_TRANSLATIONS } from '../../displayer/default-displayer.translate';
 import { LuMultiSelectDisplayerInputDirective } from '../../displayer/displayer-input.directive';
@@ -45,7 +45,7 @@ export class LuMultiSelectAllDisplayerComponent<TValue> {
 	readonly displayerLabel = this.selectAllContext.displayerLabel;
 	readonly displayerCount = this.selectAllContext.displayerCount;
 
-	readonly intl = getIntl(LU_MULTI_SELECT_DISPLAYER_TRANSLATIONS);
+	readonly intl = input(...intlInputOptions(LU_MULTI_SELECT_DISPLAYER_TRANSLATIONS));
 	readonly disabled = toSignal(this.select.disabled$);
 
 	readonly inputElementRef = viewChild.required<LuMultiSelectDisplayerInputDirective<TValue>, ElementRef<HTMLInputElement>>(LuMultiSelectDisplayerInputDirective, { read: ElementRef });

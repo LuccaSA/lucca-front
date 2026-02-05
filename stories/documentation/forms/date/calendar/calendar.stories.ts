@@ -1,11 +1,11 @@
 import { registerLocaleData } from '@angular/common';
 import localesFr from '@angular/common/locales/fr';
-import { Component, LOCALE_ID } from '@angular/core';
+import { ChangeDetectionStrategy, Component, LOCALE_ID } from '@angular/core';
 import { FormsModule } from '@angular/forms';
 import { provideAnimations } from '@angular/platform-browser/animations';
 import { ALuDateAdapter, LuNativeDateAdapter } from '@lucca-front/ng/core';
 import { LuCalendarInputComponent, LuDateAdapterPipe } from '@lucca-front/ng/date';
-import { Meta, applicationConfig, StoryObj } from '@storybook/angular';
+import { applicationConfig, Meta, StoryObj } from '@storybook/angular';
 
 registerLocaleData(localesFr);
 
@@ -20,6 +20,7 @@ registerLocaleData(localesFr);
 
 		{{ date | luDate: 'full' }}
 	`,
+	changeDetection: ChangeDetectionStrategy.OnPush,
 })
 class CalendarStory {
 	date = new Date();

@@ -37,6 +37,10 @@ export const Basic: StoryObj<ButtonComponent> = {
 		palette: {
 			if: { arg: 'luButton', neq: 'AI' },
 			description: 'Applique une palette de couleurs au bouton.',
+			options: ['', 'product', 'neutral', 'success', 'warning', 'critical'],
+			control: {
+				type: 'select',
+			},
 		},
 		state: {
 			description: "Modifie l'état du bouton.",
@@ -45,7 +49,8 @@ export const Basic: StoryObj<ButtonComponent> = {
 			},
 		},
 		critical: {
-			description: '[v20.2] Marque une action aux conséquences importantes ou irréversibles au survol et focus. Seulement compatible avec <code>outlined</code> et <code>ghost</code>.',
+			description:
+				"[v20.2] Marque une action aux conséquences importantes ou irréversibles au survol et focus. Seulement compatible avec <code>outlined</code> et <code>ghost</code>. Dans le cas d'un bouton toujours affiché en rouge, préférez l'usage de <code>palette='critical'</code>.",
 		},
 		disclosure: {
 			description: "Indique le présence d'un menu.",

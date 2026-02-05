@@ -1,6 +1,6 @@
-import { ChangeDetectionStrategy, Component, ElementRef, forwardRef, OnDestroy, signal, viewChild } from '@angular/core';
+import { ChangeDetectionStrategy, Component, ElementRef, forwardRef, input, OnDestroy, signal, viewChild } from '@angular/core';
 import { ButtonComponent } from '@lucca-front/ng/button';
-import { getIntl } from '@lucca-front/ng/core';
+import { intlInputOptions } from '@lucca-front/ng/core';
 import { IconComponent } from '@lucca-front/ng/icon';
 import { LuTooltipTriggerDirective } from '@lucca-front/ng/tooltip';
 import { LexicalEditor } from 'lexical';
@@ -27,7 +27,7 @@ export class ClearFormatComponent implements RichTextPluginComponent, OnDestroy 
 	#editor?: LexicalEditor;
 	#registeredCommands: () => void = () => {};
 
-	readonly intl = getIntl(LU_RICH_TEXT_INPUT_TRANSLATIONS);
+	readonly intl = input(...intlInputOptions(LU_RICH_TEXT_INPUT_TRANSLATIONS));
 
 	readonly element = viewChild('element', { read: ElementRef<HTMLButtonElement> });
 

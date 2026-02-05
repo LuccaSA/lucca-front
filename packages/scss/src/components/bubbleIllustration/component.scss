@@ -1,0 +1,20 @@
+
+@use '@lucca-front/scss/src/commons/utils/namespace';
+
+@mixin component($atRoot: namespace.$defaultAtRoot) {
+	display: inline-block;
+	inline-size: var(--components-bubbleIllustration-size);
+	block-size: var(--components-bubbleIllustration-size);
+
+	svg {
+		display: block;
+		inline-size: 100%;
+		block-size: 100%;
+	}
+
+	@at-root ($atRoot) {
+		.bubbleIllustration-action {
+			display: var(--components-bubbleIllustration-action-display);
+		}
+	}
+}

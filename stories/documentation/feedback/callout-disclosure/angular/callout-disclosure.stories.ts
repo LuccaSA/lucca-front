@@ -12,8 +12,11 @@ export default {
 		}),
 	],
 	render: (args, { argTypes }) => {
+		const { palette, ...inputs } = args;
+		const paletteArg = palette !== 'none' && palette !== undefined ? ` palette="${palette}"` : ``;
+
 		return {
-			template: `<lu-callout-disclosure ${generateInputs(args, argTypes)}>
+			template: `<lu-callout-disclosure ${paletteArg}${generateInputs(args, argTypes)}>
 		<ul lu-callout-feedback-list palette="neutral">
 			<li lu-callout-feedback-item>
 				<lu-feedback-item-description>
@@ -34,7 +37,7 @@ export default {
 	},
 	argTypes: {
 		icon: {
-			options: [null, 'info', 'success', 'warning', 'error', 'help'],
+			options: [null, 'signInfo', 'signSuccess', 'signWarning', 'signError', 'signHelp'],
 			control: {
 				type: 'select',
 			},
@@ -57,6 +60,10 @@ export default {
 			description: 'Titre du callout.',
 		},
 		palette: {
+			options: ['none', 'product', 'neutral', 'success', 'warning', 'error'],
+			control: {
+				type: 'select',
+			},
 			description: 'Applique une palette de couleurs au callout.',
 		},
 		open: {
@@ -69,7 +76,7 @@ export const Template: StoryObj<CalloutDisclosureComponent> = {
 	args: {
 		state: null,
 		heading: 'List title',
-		icon: 'signInfo',
+		icon: null,
 		palette: 'none',
 		open: false,
 	},

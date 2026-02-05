@@ -1,6 +1,6 @@
 import { AsyncPipe } from '@angular/common';
 import { ChangeDetectionStrategy, Component, inject, input } from '@angular/core';
-import { getIntl, isNotNil, PortalContent, PortalDirective, ɵeffectWithDeps } from '@lucca-front/ng/core';
+import { intlInputOptions, isNotNil, PortalContent, PortalDirective, ɵeffectWithDeps } from '@lucca-front/ng/core';
 import { merge, Observable } from 'rxjs';
 import { LuToast, LuToastInput, LuToastType } from './toasts.model';
 import { LuToastsService } from './toasts.service';
@@ -33,7 +33,7 @@ export class LuToastsComponent {
 
 	readonly toasts$ = this.#toastsService.toasts$;
 
-	readonly intl = getIntl(LU_TOAST_TRANSLATIONS);
+	readonly intl = input(...intlInputOptions(LU_TOAST_TRANSLATIONS));
 
 	readonly iconClassByToastType: Record<LuToastType, string> = {
 		Info: 'icon-signInfo',

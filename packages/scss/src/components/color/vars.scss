@@ -1,0 +1,13 @@
+@mixin vars {
+	--components-color-value-before-display: none;
+	--components-color-value-scale: 1;
+	--components-color-value-inlineSize: calc(var(--pr-t-spacings-200) + var(--pr-t-spacings-50));
+	--components-color-value-boxShadowColor: transparent;
+	--components-color-value-backgroundColor: transparent;
+	--components-color-value-channel: clamp(0, (((r * .299) + (g * .587) + (b * .114)) - 128) * -1000, 255);
+}
+
+@mixin varsPicker {
+	--components-colorPicker-input-paddingInlineStart: 0;
+	--components-colorPicker-inlineSize: auto;
+}

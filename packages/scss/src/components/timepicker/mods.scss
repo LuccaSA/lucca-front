@@ -2,10 +2,11 @@
 
 @mixin S {
 	--components-timepicker-font: var(--pr-t-font-body-S);
-	--components-timepicker-paddingInput-inline: var(--pr-t-spacings-25);
-	--components-timepicker-paddingInput-block: var(--pr-t-spacings-75);
+	--components-timepicker-display-padding-inline: var(--pr-t-spacings-25);
+	--components-timepicker-display-padding-block: var(--pr-t-spacings-75);
+	--components-timepicker-input-padding-inline: var(--pr-t-spacings-75);
+	--components-timepicker-input-padding-block: var(--pr-t-spacings-25);
 	--components-timepicker-input-height: 1.75rem;
-	--components-timepicker-input-width: 1.25rem;
 	--components-timepicker-separator-left: 1.875rem;
 }
 

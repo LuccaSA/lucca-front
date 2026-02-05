@@ -72,11 +72,11 @@ const generateStory = getStoryGenerator<LuMultiSelectInputStoryComponent>({
 
 async function checkValues(input: HTMLElement, values: string[]) {
 	if (values.length === 0) {
-		await expect(input.parentElement.getElementsByTagName('lu-chip').length).toBe(0);
+		await expect(input.parentElement?.getElementsByTagName('lu-chip').length).toBe(0);
 	}
 	// If it's a counter displayer
-	if (input.parentElement.getElementsByTagName('lu-chip').length === 1) {
-		const counter = input.parentElement.getElementsByTagName('lu-chip')[0];
+	if (input.parentElement?.getElementsByTagName('lu-chip').length === 1) {
+		const counter = input.parentElement?.getElementsByTagName('lu-chip')[0];
 		await expect(counter).toHaveTextContent(values.length.toString());
 	} else {
 		for (const value of values) {
@@ -90,7 +90,7 @@ const basePlay = async ({ canvasElement, step }) => {
 	const input = within(canvasElement).getByRole('combobox');
 	const buttons = within(canvasElement).queryAllByRole('button');
 	// Context
-	const isBadgeDisplayer = input.parentElement.getElementsByTagName('lu-simple-select-default-option').length > 0;
+	const isBadgeDisplayer = input.parentElement?.getElementsByTagName('lu-simple-select-default-option').length > 0;
 	if (buttons.length > 0) {
 		const clearButton = buttons.find((button) => button.className.includes('clear'));
 		if (clearButton) {
@@ -795,6 +795,40 @@ export const CustomPanelHeader = generateStory({
 	},
 });
 
+export const IntlOverride = generateStory({
+	name: 'Intl Override',
+	description: `Il est possible de personnaliser les traductions du composant en utilisant l'input \`[intl]\`. Cela permet de surcharger les labels par défaut (placeholder, search, clear, emptyResults, selectAll, etc.).`,
+	template: `<lu-multi-select
+	#selectRef
+	[options]="legumes | filterLegumes:clue"
+	(clueChange)="clue = $event"
+	[(ngModel)]="selectedLegumes"
+	[intl]="{
+		placeholder: 'Choose vegetables...',
+		search: 'Search for vegetables',
+		clear: 'Remove all',
+		clearSearch: 'Clear the search field',
+		emptyResults: 'No vegetables found matching your search.',
+		emptyOptions: 'No vegetables available.',
+		emptySelection: 'No vegetables selected.',
+		expand: 'Show more',
+		reduce: 'Show less',
+		selectAll: 'Select all vegetables',
+		unselectAll: 'Unselect all vegetables',
+		loading: 'Fetching vegetables...'
+	}"
+	clearable
+/>`,
+	neededImports: {
+		'@lucca-front/ng/multi-select': ['LuMultiSelectInputComponent'],
+	},
+	storyPartial: {
+		args: {
+			selectedLegumes: [],
+		},
+	},
+});
+
 const meta: Meta<LuMultiSelectInputStoryComponent> = {
 	title: 'Documentation/Forms/MultiSelect',
 	component: LuMultiSelectInputComponent,
@@ -847,7 +881,7 @@ const meta: Meta<LuMultiSelectInputStoryComponent> = {
 	parameters: {
 		docs: {
 			description: {
-				component: Basic.parameters['docs'].description.story,
+				component: Basic.parameters?.['docs'].description.story,
 			},
 		},
 	},

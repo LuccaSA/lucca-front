@@ -4,11 +4,11 @@
 	type="button"
 	size="S"
 	(click)="dispatchCommand()"
-	[luTooltip]="intl.clearFormat"
+	[luTooltip]="intl().clearFormat"
 	luTooltipOnlyForDisplay
 	[attr.tabindex]="tabindex()"
 	[disabled]="isDisabled()"
 	class="richTextField-toolbar-button"
 >
-	<lu-icon icon="formatClear" [alt]="intl.clearFormat" />
+	<lu-icon icon="formatClear" [alt]="intl().clearFormat" />
 </button>

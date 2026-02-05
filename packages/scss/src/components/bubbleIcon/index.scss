@@ -1,0 +1,48 @@
+
+
+@use 'exports' as *;
+
+.bubbleIcon {
+	@layer components {
+		@include vars;
+		@include component;
+	}
+
+	@layer mods {
+		&.mod-S {
+			@include S;
+		}
+
+		&.mod-L {
+			@include L;
+		}
+
+		&.is-success {
+			@include success;
+		}
+
+		&.is-critical {
+			@include critical;
+		}
+
+		&.is-warning {
+			@include warning;
+		}
+
+		&.mod-top {
+			@include top ;
+		}
+
+		&.mod-bottom {
+			@include bottom;
+		}
+
+		&.mod-left {
+			@include left;
+		}
+
+		&.mod-right {
+			@include right;
+		}
+	}
+}

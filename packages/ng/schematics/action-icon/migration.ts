@@ -1,6 +1,4 @@
-import { updateContent } from '../lib/file-update.js';
-import { HtmlAst } from '../lib/html-ast.js';
-import { PostCssScssLib } from '../lib/scss-ast.js';
+import { HtmlAst, PostCssScssLib, updateContent } from '../lib';
 
 export function migrateScssFile(content: string, postCssScss: PostCssScssLib): string {
 	const root = postCssScss.parse(content);

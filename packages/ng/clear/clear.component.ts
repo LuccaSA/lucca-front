@@ -13,7 +13,7 @@ import {
 	untracked,
 	ViewEncapsulation,
 } from '@angular/core';
-import { getIntl, LuClass, Palette } from '@lucca-front/ng/core';
+import { intlInputOptions, LuClass, Palette } from '@lucca-front/ng/core';
 import { ALuClear, ILuClear } from './clear.model';
 import { LU_CLEAR_TRANSLATIONS } from './clear.translate';
 
@@ -47,7 +47,7 @@ import { LU_CLEAR_TRANSLATIONS } from './clear.translate';
 })
 export class ClearComponent<T> extends ALuClear<T> implements ILuClear<T> {
 	#luClass = inject(LuClass);
-	readonly intl = getIntl(LU_CLEAR_TRANSLATIONS);
+	readonly intl = input(...intlInputOptions(LU_CLEAR_TRANSLATIONS));
 
 	/**
 	 * Which size should the clear be? Defaults to small

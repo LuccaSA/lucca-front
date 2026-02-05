@@ -2,8 +2,8 @@ import { NgTemplateOutlet } from '@angular/common';
 import { booleanAttribute, ChangeDetectionStrategy, Component, ElementRef, input, numberAttribute, viewChild, ViewEncapsulation } from '@angular/core';
 import { ReactiveFormsModule } from '@angular/forms';
 import { ClearComponent } from '@lucca-front/ng/clear';
-import { getIntl } from '@lucca-front/ng/core';
-import { InputDirective } from '@lucca-front/ng/form-field';
+import { intlInputOptions } from '@lucca-front/ng/core';
+import { InputDirective, ɵPresentationDisplayDefaultDirective } from '@lucca-front/ng/form-field';
 import { FormFieldIdDirective } from '../form-field-id.directive';
 import { injectNgControl } from '../inject-ng-control';
 import { NoopValueAccessorDirective } from '../noop-value-accessor.directive';
@@ -12,7 +12,7 @@ import { LU_NUMBERFIELD_TRANSLATIONS } from './number-input.translate';
 
 @Component({
 	selector: 'lu-number-input',
-	imports: [InputDirective, ReactiveFormsModule, FormFieldIdDirective, NgTemplateOutlet, ClearComponent],
+	imports: [InputDirective, ReactiveFormsModule, FormFieldIdDirective, NgTemplateOutlet, ClearComponent, ɵPresentationDisplayDefaultDirective],
 	templateUrl: './number-input.component.html',
 	hostDirectives: [NoopValueAccessorDirective],
 	encapsulation: ViewEncapsulation.None,
@@ -41,7 +41,7 @@ export class NumberInputComponent {
 
 	readonly valueAlignRight = input(false, { transform: booleanAttribute });
 
-	readonly intl = getIntl(LU_NUMBERFIELD_TRANSLATIONS);
+	readonly intl = input(...intlInputOptions(LU_NUMBERFIELD_TRANSLATIONS));
 
 	clearValue(): void {
 		this.ngControl.reset();

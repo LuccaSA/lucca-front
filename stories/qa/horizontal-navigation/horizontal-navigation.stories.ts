@@ -1,4 +1,4 @@
-import { Component } from '@angular/core';
+import { ChangeDetectionStrategy, Component } from '@angular/core';
 import { HorizontalNavigationComponent, HorizontalNavigationLinkDirective } from '@lucca-front/ng/horizontal-navigation';
 import { Meta, StoryObj } from '@storybook/angular';
 
@@ -6,6 +6,7 @@ import { Meta, StoryObj } from '@storybook/angular';
 	selector: 'horizontal-navigation-stories',
 	templateUrl: './horizontal-navigation.stories.html',
 	imports: [HorizontalNavigationComponent, HorizontalNavigationLinkDirective],
+	changeDetection: ChangeDetectionStrategy.OnPush,
 })
 class HorizontalNavigationStory {}
 

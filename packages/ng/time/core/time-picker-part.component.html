@@ -17,6 +17,7 @@
 			(keydown)="keydownHandler($event)"
 			(blur)="touched.emit()"
 			(focus)="timePickerInput.select()"
+			[style]="'--components-timepicker-input-digits:' + digitNumber()"
 		/>
 		<span aria-hidden="true" class="timePicker-fieldset-group-textfield-display">{{ valueLabel() }}</span>
 	</div>
