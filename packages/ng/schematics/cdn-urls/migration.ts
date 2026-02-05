@@ -60,7 +60,7 @@ export function migrateHTMLFile(content: string): string {
 				});
 				node.inputs.forEach((input) => {
 					if (input.value instanceof currentSchematicContext.angularCompiler.ASTWithSource) {
-						const match = findURLMatch(input.value?.source || '');
+						const match = findURLMatch(input.value?.source?.replace('\'', '') || '');
 						if (input.value?.source && match) {
 							currentSchematicContext.logSuccess(`Replacing ${input.value.source} with ${input.value.source.replace(match, REPLACE_MAP[match])}`);
 							updates.push({
