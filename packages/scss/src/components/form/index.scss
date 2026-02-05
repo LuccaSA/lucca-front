@@ -102,9 +102,11 @@
 			}
 		}
 
-		&:has(.formLabel.pr-u-mask) {
-			&:not(:has(.inlineMessage)) {
-				@include hiddenLabel;
+		&:has(.checkboxField-input) {
+			&:has(.formLabel.pr-u-mask) {
+				&:not(:has(.inlineMessage)) {
+					@include hiddenLabel;
+				}
 			}
 		}
 	}
