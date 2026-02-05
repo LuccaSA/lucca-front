@@ -20,12 +20,12 @@ import {
 	ViewEncapsulation,
 } from '@angular/core';
 import { toSignal } from '@angular/core/rxjs-interop';
-import { AbstractControl, ControlValueAccessor, NG_VALIDATORS, NG_VALUE_ACCESSOR, NgControl, NgModel, ValidationErrors, Validator } from '@angular/forms';
+import { AbstractControl, ControlValueAccessor, FormsModule, NG_VALIDATORS, NG_VALUE_ACCESSOR, NgControl, NgModel, ValidationErrors, Validator } from '@angular/forms';
 import { LuccaIcon } from '@lucca-front/icons';
 import { ClearComponent } from '@lucca-front/ng/clear';
 import { isNil, LuClass, PortalContent, PortalDirective, ɵeffectWithDeps } from '@lucca-front/ng/core';
 import { FILTER_PILL_INPUT_COMPONENT, FilterPillDisplayerDirective, FilterPillInputComponent } from '@lucca-front/ng/filter-pills';
-import { FORM_FIELD_INSTANCE, InputDirective, PresentationDisplayDirective } from '@lucca-front/ng/form-field';
+import { FORM_FIELD_INSTANCE, InputDirective, ɵPresentationDisplayDefaultDirective } from '@lucca-front/ng/form-field';
 import { IconComponent } from '@lucca-front/ng/icon';
 import { PopoverDirective } from '@lucca-front/ng/popover2';
 import { addMonths, addYears, endOfDecade, endOfMonth, endOfYear, isAfter, isBefore, isSameDay, parse, startOfDay, startOfDecade, startOfMonth, startOfYear, subMonths, subYears } from 'date-fns';
@@ -52,7 +52,8 @@ let nextId = 0;
 		NgTemplateOutlet,
 		FilterPillDisplayerDirective,
 		ClearComponent,
-		PresentationDisplayDirective,
+		ɵPresentationDisplayDefaultDirective,
+		FormsModule,
 	],
 	templateUrl: './date-range-input.component.html',
 	styleUrl: './date-range-input.component.scss',
@@ -94,8 +95,10 @@ export class DateRangeInputComponent extends AbstractDateComponent implements On
 	idSuffix = nextId++;
 
 	startTextInputRef = viewChild<ElementRef<HTMLInputElement>>('start');
+	startUserTextInput = signal('ɵ');
 
 	endTextInputRef = viewChild<ElementRef<HTMLInputElement>>('end');
+	endUserTextInput = signal('ɵ');
 
 	// CVA stuff
 	#onChange?: (value: DateRange) => void;
@@ -180,6 +183,10 @@ export class DateRangeInputComponent extends AbstractDateComponent implements On
 	});
 
 	startLabel = computed(() => {
+		const inputValue = this.startUserTextInput();
+		if (inputValue !== 'ɵ') {
+			return inputValue;
+		}
 		if (this.selectedRange()?.start && this.isValidDate(this.selectedRange()?.start)) {
 			return this.getDateLabelForInput(this.selectedRange()?.start);
 		}
@@ -187,6 +194,10 @@ export class DateRangeInputComponent extends AbstractDateComponent implements On
 	});
 
 	endLabel = computed(() => {
+		const inputValue = this.endUserTextInput();
+		if (inputValue !== 'ɵ') {
+			return inputValue;
+		}
 		if (this.selectedRange()?.end && this.isValidDate(this.selectedRange()?.end)) {
 			return this.getDateLabelForInput(this.selectedRange()?.end);
 		}
@@ -294,16 +305,19 @@ export class DateRangeInputComponent extends AbstractDateComponent implements On
 	popoverClosed(): void {
 		this.panelClosed.emit();
 		if (this.editedField() === 1) {
-			this.endTextInputRef().nativeElement.focus();
+			this.endTextInputRef()?.nativeElement.focus();
 		} else if (this.editedField() === 0) {
-			this.startTextInputRef().nativeElement.focus();
+			this.startTextInputRef()?.nativeElement.focus();
 		}
 	}
 
 	inputBlur(): void {
 		this.onTouched?.();
 		this.inputFocused.set(false);
+		this.startUserTextInput.set('ɵ');
+		this.endUserTextInput.set('ɵ');
 		this.highlightedField.set(-1);
+		this.fixOrderIfNeeded();
 	}
 
 	fixOrderIfNeeded(): void {
@@ -365,7 +379,7 @@ export class DateRangeInputComponent extends AbstractDateComponent implements On
 			// If we're editing end field
 			if (this.editedField() === 1) {
 				// If end is before start, invert them
-				if (isBefore(date, this.selectedRange().start)) {
+				if (isBefore(date, this.selectedRange()?.start)) {
 					this.selectedRange.set({
 						start: date,
 						scope: this.mode(),
@@ -380,13 +394,13 @@ export class DateRangeInputComponent extends AbstractDateComponent implements On
 				}
 				popoverRef?.close();
 				this.filterPillPopoverCloseFn?.();
-				this.endTextInputRef().nativeElement.focus();
+				this.endTextInputRef()?.nativeElement.focus();
 				this.editedField.set(-1);
 				this.dateHovered.set(null);
 			} else {
 				// Else, we're editing start field
 				// If start is after end, invert them
-				if (isAfter(date, this.selectedRange().end)) {
+				if (isAfter(date, this.selectedRange()?.end)) {
 					this.selectedRange.set({
 						start: date,
 						scope: this.mode(),
@@ -422,7 +436,7 @@ export class DateRangeInputComponent extends AbstractDateComponent implements On
 		}
 		const dateRange = transformDateRangeInputToDateRange(control.value);
 
-		return this.isValidDate(dateRange.start) ? null : { date: true };
+		return this.isValidDate(dateRange?.start) ? null : { date: true };
 	}
 
 	writeValue(dateRange: DateRange | DateRangeInput | null): void {
@@ -459,7 +473,7 @@ export class DateRangeInputComponent extends AbstractDateComponent implements On
 		this.selectedRange.set(newValue);
 		this.#onChange?.(this.selectedRange());
 		this.onTouched?.();
-		this.startTextInputRef().nativeElement.focus();
+		this.startTextInputRef()?.nativeElement.focus();
 	}
 
 	currentDateChangeFromCalendar(date: Date): void {
@@ -468,6 +482,9 @@ export class DateRangeInputComponent extends AbstractDateComponent implements On
 	}
 
 	getDateLabelForInput(date: Date): string {
+		if (!date?.getTime()) {
+			return '';
+		}
 		switch (this.mode()) {
 			case 'day':
 				return this.intlDateTimeFormat.format(date);
@@ -503,6 +520,14 @@ export class DateRangeInputComponent extends AbstractDateComponent implements On
 	}
 
 	textInputChange(inputValue: string, rangeProperty: 'start' | 'end'): void {
+		switch (rangeProperty) {
+			case 'start':
+				this.startUserTextInput.set(inputValue);
+				break;
+			case 'end':
+				this.endUserTextInput.set(inputValue);
+				break;
+		}
 		let currentRange: DateRange = this.selectedRange() || ({} as DateRange);
 		if (inputValue?.length > 0) {
 			const parsed = parse(inputValue, this.dateFormat, startOfDay(new Date()));
