@@ -15,6 +15,10 @@ import { FormFieldComponent } from '@lucca-front/ng/form-field';
 import { CheckboxInputComponent, TextInputComponent } from '@lucca-front/ng/forms';
 import { IconComponent } from '@lucca-front/ng/icon';
 import { applicationConfig, Meta, moduleMetadata, StoryObj } from '@storybook/angular';
+import userEvent from '@testing-library/user-event';
+import { createTestStory } from 'stories/helpers/stories';
+import { waitForAngular } from 'stories/helpers/test';
+import { expect, screen, within } from 'storybook/test';
 
 export default {
 	title: 'Documentation/Overlays/Dialog/Angular',
@@ -228,3 +232,24 @@ export const WithAction: StoryObj = {
 		mode: 'default',
 	},
 };
+
+export const BasicTEST = createTestStory(Basic, async ({ canvasElement, step }) => {
+	const canvas = within(canvasElement);
+	const button = await canvas.findByRole('button');
+
+	await step('Keyboard interactions', async () => {
+		button.focus();
+		await expect(button).toHaveFocus();
+		await userEvent.keyboard('{Enter}');
+		await waitForAngular();
+		await expect(screen.getByRole('dialog')).toBeVisible();
+		await userEvent.keyboard('{Escape}');
+		await expect(screen.queryByText('dialog')).toBeNull();
+	});
+
+	await step('Mouse interaction', async () => {
+		await userEvent.click(button);
+		await waitForAngular();
+		await expect(await screen.findByRole('dialog')).toBeDefined();
+	});
+});
