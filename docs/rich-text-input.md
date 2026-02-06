@@ -1,6 +1,4 @@
-### Configuration
-
-#### Dépendances
+### Dépendances
 
 Avant toute utilisation de `lu-rich-text-input`, il est nécessaire d'ajouter les `peerDependencies` suivantes à votre projet :
 
@@ -28,51 +26,58 @@ npm i @lexical/markdown
 npm i @lexical/plain-text
 ```
 
-#### Formats d'entrée/sortie
+### Formats d'entrée/sortie
 Avant toute utilisation du composant, il est nécessaire de définir le formateur à utiliser.
-Trois formateurs par défaut sont disponibles, à provide au niveau du composant parent de l'input :
 
-- HTML
+Trois formateurs par défaut sont disponibles : sous forme de directives ou de services à provide au niveau du composant parent.
+
+#### HTML
+
+```angular2html
+<lu-rich-text-input luWithHtmlFormatter></lu-rich-text-input>
+```
 
 ```ts
 import { provideLuRichTextHTMLFormatter } from '@lucca-front/ng/forms/rich-text-input/formatters/html';
 provideLuRichTextHTMLFormatter();
 ```
 
-- Markdown
+#### Markdown
 
-Ce formateur accepte en paramètres une liste optionnelle de `Transformer` markdown pour les noeuds custom
+* Directives disponibles :
+  * `luWithMarkdownFormatter` : formateur markdown classique, avec les balises markdown standards.
+  * `luWithMarkdownTagsFormatter` : formateur markdown avec support des [tags personnalisés](#TagTool).
+```angular2html
+<lu-rich-text-input luWithMarkdownFormatter></lu-rich-text-input>
+<lu-rich-text-input luWithMarkdownTagsFormatter></lu-rich-text-input>
+```
 
+* Providers
 ```ts
 import { provideLuRichTextMarkdownFormatter } from '@lucca-front/ng/forms/rich-text-input/formatters/markdown';
 provideLuRichTextMarkdownFormatter(transformers);
 ```
 
-- Plain Text
+#### Plain Text
 
 Ce formateur accepte en paramètres une liste optionnelle de `PlainTextTransformer` pour les noeuds custom.
 
-Il peut être utilisé dans des contextes où le formatage riche n'est pas désiré, mais où l'on souhaite tout de même bénéficier d'un outil en particulier (l'outil "Tags" par exemple).
+Il peut être utilisé dans des contextes où le formatage riche n'est pas désiré, mais où l'on souhaite tout de même bénéficier d'un outil en particulier (l'outil [Tags](#TagTool) par exemple).
 
 En conséquent:
 - La plupart des outils n'auront aucun effet sur le contenu de l'éditeur.
 - Il n'intègre pas les raccourcis clavier de formatage de texte (gras, italique, listes, etc...).
 - La récupération du contenu se fait en texte brut lors du copier/coller.
 
+```angular2html
+<lu-rich-text-input luWithPlainTextTagsFormatter></lu-rich-text-input>
+```
+
 ```ts
 import { provideLuRichTextPlainTextFormatter } from '@lucca-front/ng/forms/rich-text-input/formatters/plain-text';
 provideLuRichTextPlainTextFormatter(transformers);
 ```
 
-#### Exemple d'utilisation
-
-```angular2html
-<lu-form-field label="Rich Text">
-  <lu-rich-text-input [(ngModel)]="example" placeholder="Placeholder">
-    <!-- tools -->
-  </lu-rich-text-input>
-</lu-form-field>
-```
 
 ### Barre d'outils
 
@@ -81,7 +86,9 @@ La barre d'outils du `lu-rich-text-input` est configuré directement depuis le t
 Pour plus de simplicité, une barre d'outil par défaut est mise à disposition.
 
 ```angular2html
-<lu-rich-text-input placeholder="Enter some text..." [(ngModel)]="example">
+<lu-rich-text-input luWithMarkdownFormatter 
+                    placeholder="Enter some text..." 
+                    [(ngModel)]="example">
   <lu-rich-text-input-toolbar />
 </lu-rich-text-input>
 ```
@@ -89,7 +96,9 @@ Pour plus de simplicité, une barre d'outil par défaut est mise à disposition.
 Il est aussi possible de créer une barre d'outil personnalisée en assemblant les outils existant et en y ajoutant de nouvelles fonctionnalités.
 
 ```angular2html
-<lu-rich-text-input placeholder="Enter some text..." [(ngModel)]="example">
+<lu-rich-text-input luWithMarkdownFormatter
+                    placeholder="Enter some text..." 
+                    [(ngModel)]="example">
   <div class="richTextField-toolbar-formatting">
     <div class="richTextField-toolbar-col">
       <div class="richTextField-toolbar-col-group">
@@ -119,6 +128,7 @@ Pour cacher la barre d'outil tout en gardant les fonctionnalités, il est possib
 
 ```angular2html
 <lu-rich-text-input
+  luWithMarkdownFormatter
   placeholder="Enter some text..."
   [(ngModel)]="example"
   hideToolbar
@@ -173,7 +183,7 @@ Pour cacher la barre d'outil tout en gardant les fonctionnalités, il est possib
 <lu-rich-text-plugin-clear-format />
 ```
 
-#### Tag
+#### <a id="TagTool"></a>Tag
 
 - Outil individuel
 
