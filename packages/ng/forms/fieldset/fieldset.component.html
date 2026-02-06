@@ -18,8 +18,10 @@
 				<lu-icon icon="arrowChevronBottom" />
 			</button>
 		} @else if (action()) {
-			<span class="fieldset-title-content" [attr.id]="id">
-				<ng-container *ngTemplateOutlet="titleContent" />
+			<span class="fieldset-title-content">
+				<span class="pr-u-displayFlex" [attr.id]="id">
+					<ng-container *ngTemplateOutlet="titleContent" />
+				</span>
 				<div class="fieldset-title-content-action">
 					<ng-container *luPortal="action()" />
 				</div>
