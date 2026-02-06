@@ -29,3 +29,7 @@
 		}
 	}
 }
+
+@mixin narrow {
+	--components-fieldset-title-content-flexWrap: wrap;
+}
