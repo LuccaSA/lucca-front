@@ -88,7 +88,7 @@ export class HtmlAstVisitor<TNode extends TemplateNode> {
 					this.visit(cb, node.empty.children, node);
 				}
 			} else if (node instanceof currentSchematicContext.angularCompiler.TmplAstSwitchBlock) {
-				node.cases.forEach((caseNode) => {
+				node.groups.forEach((caseNode) => {
 					this.visit(cb, caseNode.children, node);
 				});
 			} else if (node instanceof currentSchematicContext.angularCompiler.TmplAstDeferredBlock || node instanceof currentSchematicContext.angularCompiler.TmplAstElement || node instanceof currentSchematicContext.angularCompiler.TmplAstTemplate) {

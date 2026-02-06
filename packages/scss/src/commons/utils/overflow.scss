@@ -4,12 +4,12 @@
 
 	&::-webkit-scrollbar {
 		display: none #{$suffix};
-  }
+	}
 }
 
 @mixin scrollblock($suffix: '') {
 	overflow: hidden #{$suffix};
-	
+
 	&,
 	body {
 		touch-action: none #{$suffix};

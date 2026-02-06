@@ -1,4 +1,4 @@
-@use "@lucca-front/scss/src/components/button/exports" as button;
+@use '@lucca-front/scss/src/components/button/exports' as button;
 
 .optionItem-groupKey {
 	@layer components {
@@ -45,10 +45,13 @@
 		@include button.block;
 		@include button.ghost;
 
+		// stylelint-disable block-no-redundant-nested-style-rules -- Prevent issues with mixed declarations.
+		// SEE: https://sass-lang.com/documentation/breaking-changes/mixed-decls/
 		& {
 			justify-content: left;
 
 			--components-button-padding: var(--pr-t-spacings-50);
 		}
+		// stylelint-enable
 	}
 }
