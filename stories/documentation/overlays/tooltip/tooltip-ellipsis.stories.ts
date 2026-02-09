@@ -2,11 +2,16 @@ import { Component } from '@angular/core';
 import { provideAnimations } from '@angular/platform-browser/animations';
 import { LuTooltipModule } from '@lucca-front/ng/tooltip';
 import { applicationConfig, Meta, StoryObj } from '@storybook/angular';
+import { interval, map } from 'rxjs';
+import { AsyncPipe } from '@angular/common';
 
 @Component({
 	selector: 'tooltip-stories',
-	imports: [LuTooltipModule],
-	template: ` <h1>With ellipsis (should be green)</h1>
+	imports: [LuTooltipModule, AsyncPipe],
+	template: ` <h1>With ellipsis after few seconds</h1>
+		<div class="test ellipsis width400 fontSize2" luTooltip luTooltipWhenEllipsis>{{ dynamicContent$ | async }}</div>
+
+		<h1>With ellipsis (should be green)</h1>
 		<div class="test ellipsis width400 fontSize2" luTooltip luTooltipWhenEllipsis>Lorem ipsum dolor sit amet consectetur adipisicing elit.</div>
 		<div class="test ellipsis width400 paddingRight" luTooltip luTooltipWhenEllipsis>Lorem ipsum dolor sit amet consectetur adipisicing elit.</div>
 		<div class="test ellipsis width400 paddingLeft" luTooltip luTooltipWhenEllipsis>Lorem ipsum dolor sit amet consectetur adipisicing elit.</div>
@@ -94,7 +99,13 @@ import { applicationConfig, Meta, StoryObj } from '@storybook/angular';
 		`,
 	],
 })
-class TooltipStory {}
+class TooltipStory {
+	dynamicContent$ = interval(1000).pipe(
+		map((i) => {
+			return 'lorem '.repeat(i);
+		}),
+	);
+}
 
 export default {
 	title: 'Documentation/Overlays/Tooltip/Ellipsis tests',
