@@ -1,10 +1,10 @@
 import { OverlayModule } from '@angular/cdk/overlay';
 import { provideAnimations } from '@angular/platform-browser/animations';
-import { ButtonComponent } from '@lucca-front/ng/button';
 import { IconComponent } from '@lucca-front/ng/icon';
 import { LuTooltipPanelComponent, LuTooltipTriggerDirective } from '@lucca-front/ng/tooltip';
 import { applicationConfig, Meta, moduleMetadata, StoryObj } from '@storybook/angular';
 import { generateInputs } from '../../../helpers/stories';
+import { ButtonComponent } from '@lucca/prisme/button';
 
 export default {
 	title: 'Documentation/Overlays/Tooltip/Basic',

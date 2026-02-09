@@ -1,6 +1,6 @@
 {
   "name": "lucca-front",
-  "description": "a library of useful components for web developpement",
+  "description": "a library of useful components for web development",
   "repository": {
     "type": "git",
     "url": "git+https://github.com/LuccaSA/lucca-front.git"
@@ -20,11 +20,14 @@
   "workspaces": [
     "packages/icons",
     "packages/scss",
+    "packages/prisme",
+    "packages/ng",
     "packages/eslint-plugin"
   ],
   "scripts": {
     "build": "npm run build:ng && npm run build:remaining",
-    "build:ng": "ng run ng:build",
+    "build:ng": "npm run build:prisme && ng run ng:build",
+    "build:prisme": "ng run prisme:build",
     "build:remaining": "node build.js",
     "start": "ng run ng:storybook",
     "test:eslint-plugin": "npm test -w @lucca-front/eslint-plugin",
@@ -103,12 +106,17 @@
     "@types/node": "^22.14.0",
     "@typescript-eslint/rule-tester": "^8.52.0",
     "angular-eslint": "^21.1.0",
+    "@typescript-eslint/eslint-plugin": "^8.26.1",
+    "@typescript-eslint/parser": "^8.26.1",
+    "@typescript-eslint/utils": "^8.26.1",
     "autoprefixer": "^10.4.14",
     "eslint": "^9.28.0",
     "eslint-config-prettier": "^10.1.1",
     "eslint-plugin-prettier": "^5.2.3",
+    "eslint-import-resolver-typescript": "^4.4.4",
+    "eslint-plugin-boundaries": "^5.3.1",
+    "eslint-plugin-import": "^2.32.0",
     "eslint-plugin-storybook": "10.1.9",
-    "glob": "^10.4.1",
     "jest": "^30.2.0",
     "jest-axe": "^10.0.0",
     "jest-environment-jsdom": "^30.2.0",
