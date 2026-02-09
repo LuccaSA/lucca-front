@@ -6,7 +6,7 @@ import { injectDialogData, LuDialogRef } from '../model';
 import { By } from '@angular/platform-browser';
 import { Subject } from 'rxjs';
 import type { LuDialogService } from '../dialog.service';
-import { dialogRouteFactory } from './dialog-routing.utils';
+import { dialogLazyRouteFactory, dialogRouteFactory } from './dialog-routing.utils';
 
 let dialogService: LuDialogService;
 let dialogRef: LuDialogRef<unknown, unknown>;
@@ -473,6 +473,57 @@ describe('dialog-routing.utils', () => {
 			expect(openDialogs).toBe(2);
 		});
 
+		it('should retain outlet configuration when passed in dialogRouteConfig at factory creation', async () => {
+			// Arrange
+			const addTestRouteWithOutlet = dialogRouteFactory(DialogRoutingTestComponent, {
+				dialogRouteConfig: {
+					outlet: 'myOutlet',
+				},
+			});
+
+			const route = addTestRouteWithOutlet({
+				path: 'test/:name',
+				dataFactory: () => ({ foo: 'bar' }),
+			});
+
+			// Assert
+			expect(route.outlet).toBe('myOutlet');
+		});
+
+		it('should retain outlet configuration when passed in dialogRouteConfig at factory call', async () => {
+			// Arrange
+			const route = addTestRoute({
+				path: 'test/:name',
+				dataFactory: () => ({ foo: 'bar' }),
+				dialogRouteConfig: {
+					outlet: 'callOutlet',
+				},
+			});
+
+			// Assert
+			expect(route.outlet).toBe('callOutlet');
+		});
+
+		it('should prioritize outlet configuration from factory call over factory creation', async () => {
+			// Arrange
+			const addTestRouteWithOutlet = dialogRouteFactory(DialogRoutingTestComponent, {
+				dialogRouteConfig: {
+					outlet: 'factoryOutlet',
+				},
+			});
+
+			const route = addTestRouteWithOutlet({
+				path: 'test/:name',
+				dataFactory: () => ({ foo: 'bar' }),
+				dialogRouteConfig: {
+					outlet: 'callOutlet',
+				},
+			});
+
+			// Assert
+			expect(route.outlet).toBe('callOutlet');
+		});
+
 		function initTest(route: Route | Route[], features: RouterFeatures[] = []) {
 			TestBed.configureTestingModule({
 				imports: [AppTestComponent],
@@ -484,6 +535,61 @@ describe('dialog-routing.utils', () => {
 				fixture: TestBed.createComponent(AppTestComponent),
 			};
 		}
+	});
+
+	describe('dialogLazyRouteFactory', () => {
+		it('should retain outlet configuration when passed in dialogRouteConfig at factory creation', async () => {
+			// Arrange
+			const addTestRouteWithOutlet = dialogLazyRouteFactory(() => Promise.resolve(DialogRoutingTestComponent), {
+				dialogRouteConfig: {
+					outlet: 'myLazyOutlet',
+				},
+			});
+
+			const route = addTestRouteWithOutlet({
+				path: 'test/:name',
+				dataFactory: () => ({ foo: 'bar' }),
+			});
+
+			// Assert
+			expect(route.outlet).toBe('myLazyOutlet');
+		});
+
+		it('should retain outlet configuration when passed in dialogRouteConfig at factory call', async () => {
+			// Arrange
+			const addTestRoute = dialogLazyRouteFactory(() => Promise.resolve(DialogRoutingTestComponent));
+
+			const route = addTestRoute({
+				path: 'test/:name',
+				dataFactory: () => ({ foo: 'bar' }),
+				dialogRouteConfig: {
+					outlet: 'callLazyOutlet',
+				},
+			});
+
+			// Assert
+			expect(route.outlet).toBe('callLazyOutlet');
+		});
+
+		it('should prioritize outlet configuration from factory call over factory creation', async () => {
+			// Arrange
+			const addTestRouteWithOutlet = dialogLazyRouteFactory(() => Promise.resolve(DialogRoutingTestComponent), {
+				dialogRouteConfig: {
+					outlet: 'factoryLazyOutlet',
+				},
+			});
+
+			const route = addTestRouteWithOutlet({
+				path: 'test/:name',
+				dataFactory: () => ({ foo: 'bar' }),
+				dialogRouteConfig: {
+					outlet: 'callLazyOutlet',
+				},
+			});
+
+			// Assert
+			expect(route.outlet).toBe('callLazyOutlet');
+		});
 	});
 });
 
