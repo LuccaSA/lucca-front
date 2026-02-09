@@ -244,13 +244,31 @@ export const BasicTEST = createTestStory(Basic, async ({ canvasElement, step }) 
 		await expect(screen.getByRole('dialog')).toBeVisible();
 		await userEvent.keyboard('{Escape}');
 		await expect(screen.queryByText('dialog')).toBeNull();
+		await userEvent.keyboard('{Enter}');
+		await waitForAngular();
+		await expect(screen.getByRole('dialog')).toBeVisible();
+		await userEvent.keyboard('{Enter}');
+		await expect(screen.queryByText('dialog')).toBeNull();
 	});
 
 	await step('Mouse interaction', async () => {
 		await userEvent.click(button);
 		await waitForAngular();
 		await expect(screen.getByRole('dialog')).toBeVisible();
-		await userEvent.keyboard('{Enter}');
+		// close with dialog cross
+		await userEvent.click(screen.getAllByRole('button')[0]);
+		await expect(screen.queryByText('dialog')).toBeNull();
+		await userEvent.click(button);
+		await waitForAngular();
+		await expect(screen.getByRole('dialog')).toBeVisible();
+		// close with confirm button
+		await userEvent.click(screen.getAllByRole('button')[1]);
+		await expect(screen.queryByText('dialog')).toBeNull();
+		await userEvent.click(button);
+		await waitForAngular();
+		await expect(screen.getByRole('dialog')).toBeVisible();
+		// close with cancel button
+		await userEvent.click(screen.getAllByRole('button')[2]);
 		await expect(screen.queryByText('dialog')).toBeNull();
 	});
 });
