@@ -1,4 +1,4 @@
-import { SoftwareIconComponent } from '@lucca-front/ng/software-icon';
+import { SoftwareIconComponent, SoftwareIconList } from '@lucca-front/ng/software-icon';
 import { Meta, moduleMetadata, StoryObj } from '@storybook/angular';
 import { cleanupTemplate, generateInputs } from 'stories/helpers/stories';
 
@@ -6,7 +6,7 @@ export default {
 	title: 'Documentation/Structure/Software icon/Angular/Basic',
 	argTypes: {
 		icon: {
-			options: ['compensation'],
+			options: SoftwareIconList,
 			control: {
 				type: 'select',
 			},
@@ -17,31 +17,25 @@ export default {
 				type: 'select',
 			},
 		},
-		palette: {
-			options: ['', 'neutral'],
-			control: {
-				type: 'select',
-			},
-		},
 	},
 	decorators: [
 		moduleMetadata({
 			imports: [SoftwareIconComponent],
 		}),
 	],
-	render: ({ palette, size, ...args }, { argTypes }) => {
-		const paletteArg = palette !== '' ? ` palette="${palette}"` : ``;
+	render: ({ disabled, size, ...args }, { argTypes }) => {
+		const disabledArg = disabled ? ` disabled` : ``;
 		const sizeArg = size !== '' ? ` size="${size}"` : ``;
 		return {
-			template: cleanupTemplate(`<lu-software-icon${sizeArg}${paletteArg}${generateInputs(args, argTypes)} />`),
+			template: cleanupTemplate(`<lu-software-icon${sizeArg}${disabledArg}${generateInputs(args, argTypes)} />`),
 		};
 	},
 } as Meta;
 
-export const Basic: StoryObj<SoftwareIconComponent & { palette: string }> = {
+export const Basic: StoryObj<SoftwareIconComponent> = {
 	args: {
-		icon: 'compensation',
-		palette: '',
+		icon: 'absences',
+		disabled: false,
 		size: '',
 	},
 };

@@ -4,7 +4,7 @@ import { Meta, moduleMetadata, StoryObj } from '@storybook/angular';
 
 interface SoftwareIconBasicStory {
 	icon: string;
-	palette: string;
+	disabled: boolean;
 	size: string;
 }
 
@@ -17,7 +17,39 @@ export default {
 	],
 	argTypes: {
 		icon: {
-			options: ['compensation'],
+			options: [
+				// Time and Activities
+				'absences',
+				'timesheet',
+				'office',
+				'projects',
+				'planning',
+				// Talent Management
+				'perfomance',
+				'engagement',
+				'training',
+				'recruitment',
+				// Employee Administration
+				'analytics',
+				'employee-administration',
+				'shared-documents',
+				// Spend Management
+				'business-expenses',
+				'invoices',
+				'payment-methods',
+				'accounting-assistant',
+				// Compensation and Benefits
+				'compensation',
+				'payslip',
+				'benefits',
+				'payroll-assistant',
+				// Lucca
+				'mood',
+				'faces',
+				'administration',
+				'cloud-control',
+				'lucca',
+			],
 			control: {
 				type: 'select',
 			},
@@ -28,22 +60,16 @@ export default {
 				type: 'select',
 			},
 		},
-		palette: {
-			options: ['', 'neutral'],
-			control: {
-				type: 'select',
-			},
-		},
 	},
 } as Meta;
 
 function getTemplate(args: SoftwareIconBasicStory): string {
-	const palette = args.palette === '' ? `` : ` palette-${args.palette}`;
+	const disabled = args.disabled ? ` is-disabled` : ``;
 	const size = args.size === '' ? `` : ` mod-${args.size}`;
-	const domain = 'https://tmp.vincent-valentin.name';
-	const path = '/lucca/software-icon/';
+	const domain = 'https://cdn.lucca.fr';
+	const path = '/transverse/prisme/visuals/software-icon/';
 	const extension = '.svg';
-	return `<div class="softwareIcon${palette}${size}" aria-hidden="true" [innerHtml]="'${domain}${path}${args.icon}${extension}' | luSafeExternalSvg"></div>`;
+	return `<div class="softwareIcon${disabled}${size}" aria-hidden="true" [innerHtml]="'${domain}${path}${args.icon}${extension}' | luSafeExternalSvg"></div>`;
 }
 
 const Template = (args: SoftwareIconBasicStory) => ({
@@ -53,8 +79,8 @@ const Template = (args: SoftwareIconBasicStory) => ({
 
 export const Basic: StoryObj<SoftwareIconBasicStory> = {
 	args: {
-		icon: 'compensation',
-		palette: '',
+		icon: 'absences',
+		disabled: false,
 		size: '',
 	},
 	render: Template,

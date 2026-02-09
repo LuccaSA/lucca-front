@@ -1,4 +1,4 @@
-import { ChangeDetectionStrategy, Component, computed, input, ViewEncapsulation } from '@angular/core';
+import { booleanAttribute, ChangeDetectionStrategy, Component, computed, input, ViewEncapsulation } from '@angular/core';
 import { LuSafeExternalSvgPipe } from '@lucca-front/ng/safe-content';
 import { SoftwareIcon } from './software-icon';
 
@@ -11,16 +11,14 @@ import { SoftwareIcon } from './software-icon';
 	imports: [LuSafeExternalSvgPipe],
 })
 export class SoftwareIconComponent {
-	readonly domain = 'https://tmp.vincent-valentin.name';
-	readonly path = '/lucca/software-icon/';
+	readonly domain = 'https://cdn.lucca.fr';
+	readonly path = '/transverse/prisme/visuals/software-icon/';
 	readonly extension = '.svg';
 
 	readonly icon = input.required<SoftwareIcon>();
 
-	readonly palette = input<'neutral' | ''>('');
+	readonly disabled = input(false, { transform: booleanAttribute });
 	readonly size = input<'XXS' | 'XS' | 'S' | 'L' | ''>('');
 
 	readonly iconUrl = computed(() => `${this.domain}${this.path}${this.icon()}${this.extension}`);
-
-	readonly paletteClass = computed(() => ({ [`palette-${this.palette()}`]: !!this.palette() }));
 }
