@@ -12,6 +12,7 @@
 					[attr.href]="intl().urlAppStore"
 					class="mobilePush-content-downloadApps-link"
 					(click)="appStoreLinkClicked.emit()"
+					[luTooltip]="intl().newTab"
 				>
 					<img class="mobilePush-content-downloadApps-link-badge" [attr.alt]="intl().altAppStore" [attr.src]="intl().srcAppStore" />
 				</a>
@@ -20,6 +21,7 @@
 					[attr.href]="intl().urlGooglePlay"
 					class="mobilePush-content-downloadApps-link"
 					(click)="googlePlayLinkClicked.emit()"
+					[luTooltip]="intl().newTab"
 				>
 					<img class="mobilePush-content-downloadApps-link-badge" [attr.alt]="intl().altGooglePlay" [attr.src]="intl().srcGooglePlay" />
 				</a>

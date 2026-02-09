@@ -20,13 +20,11 @@ export const Template: StoryObj<SkeletonDataTableComponent> = {
 				min: 1,
 			},
 		},
-		dataTableBodyOnly: {
-			control: false,
-		},
 	},
 
 	args: {
 		cols: 5,
 		rows: 8,
+		colsAlign: { 3: 'center', 4: 'end' },
 	},
 };

@@ -71,3 +71,28 @@
 		/>
 	}
 </div>
+<ng-container *luPresentationDisplayDefault>
+	@if (prefix(); as prefix) {
+		<ng-container
+			*ngTemplateOutlet="
+				textfieldAddon;
+				context: {
+					type: 'prefix',
+					addon: prefix,
+				}
+			"
+		/>
+	}
+	{{ ngControl.value }}
+	@if (suffix()) {
+		<ng-container
+			*ngTemplateOutlet="
+				textfieldAddon;
+				context: {
+					type: 'suffix',
+					addon: suffix(),
+				}
+			"
+		/>
+	}
+</ng-container>

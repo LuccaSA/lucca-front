@@ -26,8 +26,11 @@ export class LoadingComponent {
 	#luClass = inject(LuClass);
 
 	readonly size = input<'L' | null>(null);
+
 	readonly invert = input(false, { transform: booleanAttribute });
+
 	readonly block = input(false, { transform: booleanAttribute });
+
 	readonly template = input<DisplayMode | null>(null);
 
 	constructor() {

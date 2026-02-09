@@ -3,7 +3,7 @@ import { Meta, StoryObj } from '@storybook/angular';
 interface IndexTableBasicStory {}
 
 export default {
-	title: 'Documentation/Listings/Index Table/HTML & CSS/Basic',
+	title: 'Documentation/Listings/Index Table/HTML&CSS/Basic',
 } as Meta;
 
 function getTemplate(args: IndexTableBasicStory): string {

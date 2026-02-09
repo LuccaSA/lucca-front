@@ -102,6 +102,19 @@
 	}
 
 	@layer mods {
+		&.is-disabled,
+		&[disabled] {
+			color: var(--palettes-neutral-500);
+			text-decoration: line-through;
+			cursor: default;
+
+			&:hover, &:active {
+				.calendar-grid-item-content {
+					background-color: transparent
+				}
+			}
+		}
+
 		&.is-previousMonth,
 		&.is-nextMonth {
 			color: var(--palettes-neutral-500);

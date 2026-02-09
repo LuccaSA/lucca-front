@@ -16,7 +16,14 @@ import { VerticalNavigationLinkComponent } from './link/vertical-navigation-link
 	},
 })
 export class VerticalNavigationComponent {
+	/**
+	 * Changes the heading title displayed by the vertical navigation
+	 */
 	readonly heading = input.required<PortalContent>();
+
+	/**
+	 * Defines aria level for heading title
+	 */
 	readonly level = input<number>(3);
 
 	readonly verticalNavigationGroup = contentChildren(VerticalNavigationGroupComponent, { descendants: true });

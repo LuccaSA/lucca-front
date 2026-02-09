@@ -1,5 +1,5 @@
 import { DatePipe, NgTemplateOutlet } from '@angular/common';
-import { ChangeDetectionStrategy, Component, computed, HostBinding, inject, input, LOCALE_ID, ViewEncapsulation } from '@angular/core';
+import { ChangeDetectionStrategy, Component, computed, inject, input, LOCALE_ID, ViewEncapsulation } from '@angular/core';
 import { PortalDirective } from '@lucca-front/ng/core';
 import { LuUserPictureModule } from '@lucca-front/ng/user';
 import { COMMENT_BLOCK_INSTANCE } from '../token';
@@ -13,6 +13,7 @@ import { COMMENT_BLOCK_INSTANCE } from '../token';
 	changeDetection: ChangeDetectionStrategy.OnPush,
 	host: {
 		class: 'commentWrapper-item',
+		'[attr.role]': 'role()',
 	},
 })
 export class CommentComponent {
@@ -28,39 +29,34 @@ export class CommentComponent {
 
 	#parentBlock = inject(COMMENT_BLOCK_INSTANCE);
 
-	noAvatar = computed(() => this.#parentBlock.noAvatar());
+	readonly content = input<string>();
 
-	avatar = computed(() => this.#parentBlock.avatar());
-
-	authorName = computed(() => this.#parentBlock.authorName());
-
-	size = computed(() => this.#parentBlock.size());
-
-	date = input<Date>();
+	readonly date = input<Date>();
 
 	/**
 	 * format given to the date pipe for display.
 	 *
 	 * See https://angular.dev/api/common/DatePipe#custom-format-options
 	 */
-	datePipeFormat = input<string | undefined>(undefined);
+	readonly datePipeFormat = input<string | undefined>(undefined);
 
-	content = input<string>();
+	readonly noAvatar = computed(() => this.#parentBlock.noAvatar());
 
-	contentIsHTML = computed(() => {
-		return /<\/?[a-z][\s\S]*>/i.test(this.content());
-	});
+	readonly avatar = computed(() => this.#parentBlock.avatar());
 
-	dateDisplay = computed(() => {
+	readonly authorName = computed(() => this.#parentBlock.authorName());
+
+	readonly size = computed(() => this.#parentBlock.size());
+
+	readonly contentIsHTML = computed(() => /<\/?[a-z][\s\S]*>/i.test(this.content()));
+
+	readonly dateDisplay = computed(() => {
 		const formatted = this.#intlDateTimeFormat.format(this.date());
 		return `${formatted[0].toUpperCase()}${formatted.slice(1)}`;
 	});
 
-	role = computed(() => {
-		return this.#parentBlock.isSingleComment() ? null : 'listitem';
-	});
+	readonly role = computed(() => (this.#parentBlock.isSingleComment() ? null : 'listitem'));
 
-	@HostBinding('attr.role')
 	get roleAttr(): string {
 		return this.role();
 	}

@@ -8,7 +8,7 @@ import { applicationConfig, Meta, moduleMetadata, StoryObj } from '@storybook/an
 interface IndexTableActionsTooltipsRowStory {}
 
 export default {
-	title: 'Documentation/Listings/Index Table/HTML & CSS/Actions/Tooltips/Row',
+	title: 'Documentation/Listings/Index Table/HTML&CSS/Actions/Tooltips/Row',
 	argTypes: {},
 	decorators: [
 		moduleMetadata({

@@ -16,8 +16,19 @@ import { IconComponent } from '@lucca-front/ng/icon';
 	},
 })
 export class VerticalNavigationGroupComponent {
+	/**
+	 * Changes the text displayed by the vertical navigation group
+	 */
 	readonly label = input.required<PortalContent>();
+
+	/**
+	 * Adds an icon to the vertical navigation group
+	 */
 	readonly icon = input<LuccaIcon | null>(null);
+
+	/**
+	 * Disabled the vertical navigation group
+	 */
 	readonly disabled = input(false, { transform: booleanAttribute });
 
 	readonly expanded = model(true);

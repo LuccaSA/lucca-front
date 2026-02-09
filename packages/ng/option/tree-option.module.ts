@@ -2,13 +2,13 @@ import { NgModule } from '@angular/core';
 import { LuTreeOptionItemModule } from './item/index';
 import { LuTreeOptionOperatorModule } from './operator/index';
 import { LuTreeOptionPickerModule } from './picker/index';
-import { LuTreeOptionSelectorModule } from './selector/index';
+import { LuTreeOptionSelectAllComponent } from './selector/index';
 
 /**
- * @deprecated
+ * @deprecated use `LuTreeOptionSelectAllComponent` instead
  */
 @NgModule({
-	imports: [LuTreeOptionItemModule, LuTreeOptionPickerModule, LuTreeOptionOperatorModule, LuTreeOptionSelectorModule],
-	exports: [LuTreeOptionItemModule, LuTreeOptionPickerModule, LuTreeOptionOperatorModule, LuTreeOptionSelectorModule],
+	imports: [LuTreeOptionItemModule, LuTreeOptionPickerModule, LuTreeOptionOperatorModule, LuTreeOptionSelectAllComponent],
+	exports: [LuTreeOptionItemModule, LuTreeOptionPickerModule, LuTreeOptionOperatorModule, LuTreeOptionSelectAllComponent],
 })
 export class LuTreeOptionModule {}

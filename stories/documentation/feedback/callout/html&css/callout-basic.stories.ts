@@ -6,7 +6,7 @@ interface CalloutBasicStory {
 }
 
 export default {
-	title: 'Documentation/Feedback/Callout/HTML & CSS/Basic',
+	title: 'Documentation/Feedback/Callout/HTML&CSS/Basic',
 	argTypes: {
 		palette: {
 			options: ['', 'product', 'neutral', 'success', 'warning', 'error'],

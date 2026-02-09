@@ -8,7 +8,6 @@ import { ILuOptionContext, LU_OPTION_CONTEXT } from './option.token';
 	template: `@if (context.option$ | async; as option) {
 		{{ option?.name ?? option }}
 	}`,
-	host: { class: 'pr-u-ellipsis' },
 	changeDetection: ChangeDetectionStrategy.OnPush,
 })
 export class LuSimpleSelectDefaultOptionComponent {

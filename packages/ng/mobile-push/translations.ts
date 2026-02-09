@@ -6,7 +6,7 @@
 		altAppStore: 'Download from the App Store',
 		srcAppStore: 'https://cdn.lucca.fr/transverse/prisme/visuals/mobile-push/badge-app-store-fr.svg',
 		srcGooglePlay: 'https://cdn.lucca.fr/transverse/prisme/visuals/mobile-push/badge-google-play-store-fr.svg',
-		newTab: 'New tab',
+		newTab: 'Open in a new tab',
 	},
 	de: {
 		urlAppStore: 'https://apps.apple.com/de/app/lucca/id1575212411',
@@ -15,7 +15,7 @@
 		altAppStore: 'Aus dem App Store herunterladen',
 		srcAppStore: 'https://cdn.lucca.fr/transverse/prisme/visuals/mobile-push/badge-app-store-de.svg',
 		srcGooglePlay: 'https://cdn.lucca.fr/transverse/prisme/visuals/mobile-push/badge-google-play-store-de.svg',
-		newTab: 'Neuer Tab',
+		newTab: 'In einem neuen Tab öffnen',
 	},
 	fr: {
 		urlAppStore: 'https://apps.apple.com/fr/app/lucca/id1575212411',
@@ -24,7 +24,7 @@
 		altAppStore: 'Télécharger dans l’App Store',
 		srcAppStore: 'https://cdn.lucca.fr/transverse/prisme/visuals/mobile-push/badge-app-store-fr.svg',
 		srcGooglePlay: 'https://cdn.lucca.fr/transverse/prisme/visuals/mobile-push/badge-google-play-store-fr.svg',
-		newTab: 'Nouvel onglet',
+		newTab: 'Ouvrir dans un nouvel onglet',
 	},
 	it: {
 		urlAppStore: 'https://apps.apple.com/fr/app/lucca/id1575212411',
@@ -33,7 +33,7 @@
 		altAppStore: "Scaricare nell'App Store",
 		srcAppStore: 'https://cdn.lucca.fr/transverse/prisme/visuals/mobile-push/badge-app-store-fr.svg',
 		srcGooglePlay: 'https://cdn.lucca.fr/transverse/prisme/visuals/mobile-push/badge-google-play-store-fr.svg',
-		newTab: 'Nuova scheda',
+		newTab: 'Aprire in una nuova scheda',
 	},
 	nl: {
 		urlAppStore: 'https://apps.apple.com/fr/app/lucca/id1575212411',
@@ -42,7 +42,7 @@
 		altAppStore: 'Downloaden in de App Store',
 		srcAppStore: 'https://cdn.lucca.fr/transverse/prisme/visuals/mobile-push/badge-app-store-fr.svg',
 		srcGooglePlay: 'https://cdn.lucca.fr/transverse/prisme/visuals/mobile-push/badge-google-play-store-fr.svg',
-		newTab: 'Nieuw tabblad',
+		newTab: 'Openen in een nieuw tabblad',
 	},
 	'nl-BE': {
 		urlAppStore: 'https://apps.apple.com/nl/app/lucca-hr/id1575212411',
@@ -51,7 +51,7 @@
 		altAppStore: 'Download in de App Store',
 		srcAppStore: 'https://cdn.lucca.fr/transverse/prisme/visuals/mobile-push/badge-app-store-nl.svg',
 		srcGooglePlay: 'https://cdn.lucca.fr/transverse/prisme/visuals/mobile-push/badge-google-play-store-nl.svg',
-		newTab: 'Nieuw tabblad',
+		newTab: 'Openen in een nieuw tabblad',
 	},
 	es: {
 		urlAppStore: 'https://apps.apple.com/es/app/lucca/id1575212411',
@@ -60,7 +60,7 @@
 		altAppStore: 'Descargar en App Store',
 		srcAppStore: 'https://cdn.lucca.fr/transverse/prisme/visuals/mobile-push/badge-app-store-fr.svg',
 		srcGooglePlay: 'https://cdn.lucca.fr/transverse/prisme/visuals/mobile-push/badge-google-play-store-fr.svg',
-		newTab: 'Nueva pestaña',
+		newTab: 'Abrir en una pestaña nueva',
 	},
 	pt: {
 		urlAppStore: 'https://apps.apple.com/pt/app/lucca/id1575212411',
@@ -69,6 +69,6 @@
 		altAppStore: 'Descarregar na App Store',
 		srcAppStore: 'https://cdn.lucca.fr/transverse/prisme/visuals/mobile-push/badge-app-store-pt.svg',
 		srcGooglePlay: 'https://cdn.lucca.fr/transverse/prisme/visuals/mobile-push/badge-google-play-store-pt.svg',
-		newTab: 'Novo separador',
+		newTab: 'Abrir num novo separador',
 	},
 };

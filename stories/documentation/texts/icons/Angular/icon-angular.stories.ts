@@ -25,7 +25,11 @@ export default {
 			},
 		},
 		size: {
+			options: ['XXS', 'XS', 'S', 'M', 'L', 'XL', 'XXL'],
 			description: "Modifie la taille de l'icône.",
+			control: {
+				type: 'select',
+			},
 		},
 	},
 } as Meta;

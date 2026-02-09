@@ -3,7 +3,7 @@ import { Meta, StoryObj } from '@storybook/angular';
 interface NumericBadgeSizeStory {}
 
 export default {
-	title: 'Documentation/Texts/NumericBadge/HTML & CSS/Size',
+	title: 'Documentation/Texts/NumericBadge/HTML&CSS/Size',
 	argTypes: {},
 } as Meta;
 

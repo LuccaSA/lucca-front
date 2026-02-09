@@ -57,6 +57,8 @@ export abstract class ALuSelectInputComponent<TOption, TValue> implements OnDest
 	protected updatePositionFn?: () => void;
 	protected filterPillMode = false;
 
+	public ignorePresentation = input(false, { transform: booleanAttribute });
+
 	public selectParent$?: Subject<void>;
 	public selectChildren$?: Subject<void>;
 

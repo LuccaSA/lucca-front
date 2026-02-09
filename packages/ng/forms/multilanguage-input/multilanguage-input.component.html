@@ -11,6 +11,7 @@
 			(blur)="onTouched?.()"
 			(focus)="openOnFocus() ? popoverRef.openPopover(true, true, true) : null"
 			[disabled]="disabledInternal()"
+			[autocomplete]="autocomplete()"
 			#inputElement
 		/>
 		<div class="textField-input-affix">
@@ -40,6 +41,7 @@
 									(ngModelChange)="valueChange()"
 									[ngModelOptions]="{ standalone: true }"
 									[disabled]="disabledInternal()"
+									[autocomplete]="autocomplete()"
 								/>
 							</lu-form-field>
 						}
@@ -49,3 +51,4 @@
 		</div>
 	</div>
 </div>
+<ng-container *luPresentationDisplayDefault>{{ presentationValue() }}</ng-container>

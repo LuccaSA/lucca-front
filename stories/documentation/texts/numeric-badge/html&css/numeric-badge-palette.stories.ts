@@ -3,7 +3,7 @@ import { Meta, StoryObj } from '@storybook/angular';
 interface NumericBadgeLoadingStory {}
 
 export default {
-	title: 'Documentation/Texts/NumericBadge/HTML & CSS/Palettes',
+	title: 'Documentation/Texts/NumericBadge/HTML&CSS/Palettes',
 	argTypes: {},
 } as Meta;
 

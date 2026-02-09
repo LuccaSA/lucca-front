@@ -61,6 +61,10 @@
 			@include withCloseButton;
 		}
 
+		&:has(.dialog-inside-header-actionOptional:not(:empty)) {
+			@include withAction;
+		}
+
 		&.mod-stacked {
 			@include stacked;
 		}

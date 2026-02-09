@@ -3,7 +3,7 @@ import { Meta, StoryObj } from '@storybook/angular';
 interface IndexTableActionsSubActionStory {}
 
 export default {
-	title: 'Documentation/Listings/Index Table/HTML & CSS/Actions/SubAction',
+	title: 'Documentation/Listings/Index Table/HTML&CSS/Actions/SubAction',
 } as Meta;
 
 function getTemplate(args: IndexTableActionsSubActionStory): string {

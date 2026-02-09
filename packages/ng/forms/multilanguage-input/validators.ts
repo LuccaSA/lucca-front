@@ -10,7 +10,7 @@ export function isInvariantFilled(model: MultilanguageTranslation[]): boolean {
 	return invariantTranslation && invariantTranslation.value?.length > 0;
 }
 
-export const MultiLanguageInputValidators: Record<'allLanguagesFilled' | 'invariantFilled', ValidatorFn> = {
-	allLanguagesFilled: (control: AbstractControl<MultilanguageTranslation[]>) => (areAllLanguagesFilled(control.value) ? null : { missingLang: true }),
-	invariantFilled: (control: AbstractControl<MultilanguageTranslation[]>) => (isInvariantFilled(control.value) ? null : { missingInvariant: true }),
+export const MultiLanguageInputValidators: Record<'allLanguagesRequired' | 'invariantRequired', ValidatorFn> = {
+	allLanguagesRequired: (control: AbstractControl<MultilanguageTranslation[]>) => (areAllLanguagesFilled(control.value) ? null : { missingLang: true }),
+	invariantRequired: (control: AbstractControl<MultilanguageTranslation[]>) => (isInvariantFilled(control.value) ? null : { missingInvariant: true }),
 };

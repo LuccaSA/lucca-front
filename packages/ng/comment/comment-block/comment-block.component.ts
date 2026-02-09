@@ -27,6 +27,11 @@ export class CommentBlockComponent {
 
 	readonly compact = input(false, { transform: booleanAttribute });
 
+	/**
+	 * Small is a shorthand to set the size to small
+	 *
+	 * If the size input is filled along with the small input, their values will have the priority
+	 */
 	readonly small = input(false, { transform: booleanAttribute });
 
 	readonly chatAnswer = input(false, { transform: booleanAttribute });
@@ -35,6 +40,9 @@ export class CommentBlockComponent {
 
 	readonly avatar = input<TemplateRef<unknown>>();
 
+	/**
+	 * Which size should the block comment be? Defaults or small
+	 */
 	readonly size = input<'S' | 'M'>();
 
 	readonly noAvatar = computed(() => !this.avatar());

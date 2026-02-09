@@ -58,3 +58,28 @@
 		</div>
 	</div>
 </div>
+<ng-container *luPresentationDisplayDefault>
+	@if (prefix(); as prefix) {
+		<ng-container
+			*ngTemplateOutlet="
+				addon;
+				context: {
+					type: 'prefix',
+					addon: prefix,
+				}
+			"
+		/>
+	}
+	{{ formattedValue() }}
+	@if (suffix()) {
+		<ng-container
+			*ngTemplateOutlet="
+				addon;
+				context: {
+					type: 'suffix',
+					addon: suffix(),
+				}
+			"
+		/>
+	}
+</ng-container>

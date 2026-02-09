@@ -1,12 +1,12 @@
 import { ConnectedPosition, Overlay, OverlayConfig, OverlayPositionBuilder, OverlayRef, PositionStrategy, ScrollStrategyOptions } from '@angular/cdk/overlay';
 import { ComponentPortal } from '@angular/cdk/portal';
 import { ChangeDetectorRef, ComponentRef, ElementRef, inject, Injectable, Injector, ViewContainerRef } from '@angular/core';
+import { addAttributesOnCdkContainer, SELECT_ID, SELECT_LABEL_ID } from '@lucca-front/ng/core-select';
 import { takeUntil } from 'rxjs';
 import { LuMultiSelectPanelComponent } from '../panel';
 import { MULTI_SELECT_INPUT } from '../select.model';
 import { LuMultiSelectPanelRef } from './panel.model';
 import { LuMultiSelectInputComponent } from './select-input.component';
-import { addAttributesOnCdkContainer, SELECT_ID, SELECT_LABEL_ID } from '@lucca-front/ng/core-select';
 
 abstract class BaseMultiSelectPanelRef<T> extends LuMultiSelectPanelRef<T> {
 	protected readonly portalRef: ComponentPortal<LuMultiSelectPanelComponent<T>>;
@@ -141,7 +141,7 @@ export class LuMultiSelectPanelRefFactory {
 			.flexibleConnectedTo(this.elementRef)
 			.withGrowAfterOpen(true)
 			.withLockedPosition(false)
-			.withViewportMargin(10)
+			.withViewportMargin(8)
 			.withPositions([
 				this.buildPosition('bottom', 'right', config),
 				this.buildPosition('bottom', 'left', config),

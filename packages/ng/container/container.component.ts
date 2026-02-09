@@ -12,15 +12,15 @@ import { booleanAttribute, ChangeDetectionStrategy, Component, computed, input, 
 	changeDetection: ChangeDetectionStrategy.OnPush,
 })
 export class ContainerComponent {
-	center = input(false, { transform: booleanAttribute });
-	overflow = input(false, { transform: booleanAttribute });
-	max = input<null | 'M' | 'L' | 'XL' | 'XXL' | 'XXXL'>(null);
+	readonly center = input(false, { transform: booleanAttribute });
 
-	classesConfig = computed(() => {
-		return {
-			['mod-center']: this.center(),
-			['mod-overflow']: this.overflow(),
-			[`mod-max${this.max()}`]: !!this.max(),
-		};
-	});
+	readonly overflow = input(false, { transform: booleanAttribute });
+
+	readonly max = input<null | 'M' | 'L' | 'XL' | 'XXL' | 'XXXL'>(null);
+
+	readonly classesConfig = computed(() => ({
+		['mod-center']: this.center(),
+		['mod-overflow']: this.overflow(),
+		[`mod-max${this.max()}`]: !!this.max(),
+	}));
 }
