@@ -249,6 +249,8 @@ export const BasicTEST = createTestStory(Basic, async ({ canvasElement, step }) 
 	await step('Mouse interaction', async () => {
 		await userEvent.click(button);
 		await waitForAngular();
-		await expect(await screen.findByRole('dialog')).toBeDefined();
+		await expect(screen.getByRole('dialog')).toBeVisible();
+		await userEvent.keyboard('{Enter}');
+		await expect(screen.queryByText('dialog')).toBeNull();
 	});
 });
