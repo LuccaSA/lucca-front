@@ -118,32 +118,35 @@ export class LuSimpleSelectPanelRefFactory {
 
 	protected buildOverlayConfig(overlayConfigOverride: OverlayConfig = {}): OverlayConfig {
 		const overlayConfig: OverlayConfig = overlayConfigOverride || {};
-		overlayConfig.positionStrategy = this.positionBuilder.flexibleConnectedTo(this.elementRef).withPositions([
-			{
-				originX: 'start',
-				originY: 'bottom',
-				overlayX: 'start',
-				overlayY: 'top',
-			},
-			{
-				originX: 'end',
-				originY: 'bottom',
-				overlayX: 'end',
-				overlayY: 'top',
-			},
-			{
-				originX: 'start',
-				originY: 'top',
-				overlayX: 'start',
-				overlayY: 'bottom',
-			},
-			{
-				originX: 'end',
-				originY: 'top',
-				overlayX: 'end',
-				overlayY: 'bottom',
-			},
-		]);
+		overlayConfig.positionStrategy = this.positionBuilder
+			.flexibleConnectedTo(this.elementRef)
+			.withViewportMargin(8)
+			.withPositions([
+				{
+					originX: 'start',
+					originY: 'bottom',
+					overlayX: 'start',
+					overlayY: 'top',
+				},
+				{
+					originX: 'end',
+					originY: 'bottom',
+					overlayX: 'end',
+					overlayY: 'top',
+				},
+				{
+					originX: 'start',
+					originY: 'top',
+					overlayX: 'start',
+					overlayY: 'bottom',
+				},
+				{
+					originX: 'end',
+					originY: 'top',
+					overlayX: 'end',
+					overlayY: 'bottom',
+				},
+			]);
 		overlayConfig.scrollStrategy = this.scrollStrategies.reposition();
 		overlayConfig.minWidth = this.elementRef.nativeElement.clientWidth;
 		overlayConfig.maxHeight = '100vh';

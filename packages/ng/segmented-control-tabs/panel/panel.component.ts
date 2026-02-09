@@ -20,7 +20,9 @@ let nextId = 0;
 })
 export class SegmentedControlTabsPanelComponent<T = unknown> {
 	protected segmentedControlTabsRef = inject(LU_SEGMENTEDCONTROLTABS_INSTANCE);
+
 	readonly label = input<PortalContent>();
+
 	readonly value = input.required<T>();
 
 	readonly id = nextId++;

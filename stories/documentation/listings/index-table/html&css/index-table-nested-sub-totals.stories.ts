@@ -3,7 +3,7 @@ import { Meta, StoryObj } from '@storybook/angular';
 interface IndexTableNestedSubTotalsStory {}
 
 export default {
-	title: 'Documentation/Listings/Index Table/HTML & CSS/Nested Sub Totals',
+	title: 'Documentation/Listings/Index Table/HTML&CSS/Nested Sub Totals',
 	argTypes: {},
 } as Meta;
 

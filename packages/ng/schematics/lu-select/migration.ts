@@ -1,8 +1,17 @@
-import { HtmlAst, HtmlAstVisitor } from '../lib/html-ast.js';
+import { Tree, UpdateRecorder } from '@angular-devkit/schematics';
+import { applyToUpdateRecorder } from '@schematics/angular/utility/change';
+import { getEOL } from '@schematics/angular/utility/eol';
 import { createSourceFile, isImportDeclaration, isNamedImports, ScriptTarget, SourceFile } from 'typescript';
-import { extractComponentImports, insertAngularImportIfNeeded, insertTSImportIfNeeded, removeAngularImport, removeTSImport } from '../lib/angular-component-ast';
-import { extractNgTemplatesIncludingHtml } from '../lib/angular-template';
-import { getCommonMigrationRejectionReason, getDataSource, getDisplayer, isRejection, RejectionReason } from './util';
+import {
+	currentSchematicContext,
+	extractComponentImports,
+	extractNgTemplatesIncludingHtml,
+	HtmlAst, HtmlAstVisitor,
+	insertAngularImportIfNeeded,
+	insertTSImportIfNeeded,
+	removeAngularImport,
+	removeTSImport
+} from '../lib';
 import {
 	LuApiSelectInputComponentContext,
 	LuSelectInputContext,
@@ -13,10 +22,7 @@ import {
 	selectorToComponentName,
 	selectorToSelectComponentName
 } from './model/select-context';
-import { Tree, UpdateRecorder } from '@angular-devkit/schematics';
-import { applyToUpdateRecorder } from '@schematics/angular/utility/change';
-import { getEOL } from '@schematics/angular/utility/eol';
-import { currentSchematicContext } from '../lib/lf-schematic-context';
+import { getCommonMigrationRejectionReason, getDataSource, getDisplayer, isRejection, RejectionReason } from './util';
 
 const importSource: Record<string, string> = {
 	LuSimpleSelectInputComponent: '@lucca-front/ng/simple-select',

@@ -3,7 +3,7 @@ import { Meta, StoryObj } from '@storybook/angular';
 interface IndexTableActionsSelectableStory {}
 
 export default {
-	title: 'Documentation/Listings/Index Table/HTML & CSS/Actions/Selectable',
+	title: 'Documentation/Listings/Index Table/HTML&CSS/Actions/Selectable',
 } as Meta;
 
 function getTemplate(args: IndexTableActionsSelectableStory): string {

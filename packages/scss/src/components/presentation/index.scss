@@ -1,0 +1,14 @@
+@use 'exports' as *;
+
+.presentation {
+	@layer components {
+		@include vars;
+		@include component;
+	}
+
+	@layer mods {
+		&.mod-checkable{
+			@include checkable;
+		}
+	}
+}

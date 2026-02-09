@@ -3,7 +3,7 @@ import { Meta, StoryObj } from '@storybook/angular';
 interface CalloutBasicStory {}
 
 export default {
-	title: 'Documentation/Feedback/Callout/HTML & CSS/AI',
+	title: 'Documentation/Feedback/Callout/HTML&CSS/AI',
 	argTypes: {},
 } as Meta;
 

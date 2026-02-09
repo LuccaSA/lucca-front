@@ -1,5 +1,5 @@
 import { A11yModule } from '@angular/cdk/a11y';
-import { AsyncPipe, DOCUMENT } from '@angular/common';
+import { DOCUMENT } from '@angular/common';
 import { AfterViewInit, ChangeDetectionStrategy, ChangeDetectorRef, Component, ContentChildren, Directive, forwardRef, Inject, QueryList } from '@angular/core';
 import { ALuOnCloseSubscriber, ALuOnOpenSubscriber, ALuOnScrollBottomSubscriber, ILuOnCloseSubscriber, ILuOnOpenSubscriber, ILuOnScrollBottomSubscriber, ILuTree } from '@lucca-front/ng/core';
 import { ALuPickerPanel } from '@lucca-front/ng/picker';
@@ -122,7 +122,7 @@ export abstract class ALuTreeOptionPickerAdvancedComponent<T, O extends import('
 	changeDetection: ChangeDetectionStrategy.OnPush,
 	animations: [luTransformPopover],
 	exportAs: 'LuOptionPicker',
-	imports: [AsyncPipe, LuScrollDirective, A11yModule],
+	imports: [LuScrollDirective, A11yModule],
 	providers: [
 		{
 			provide: ALuPickerPanel,

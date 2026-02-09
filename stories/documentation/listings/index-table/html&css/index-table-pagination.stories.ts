@@ -3,7 +3,7 @@ import { Meta, StoryObj } from '@storybook/angular';
 interface IndexTablePaginationStory {}
 
 export default {
-	title: 'Documentation/Listings/Index Table/HTML & CSS/Pagination',
+	title: 'Documentation/Listings/Index Table/HTML&CSS/Pagination',
 	argTypes: {},
 } as Meta;
 

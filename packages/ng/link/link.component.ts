@@ -36,14 +36,29 @@ export class LinkComponent {
 	#injector = inject(Injector);
 	router = inject(Router);
 
+	/**
+	 * Target page address. Use only for external links or pages not recognized by the router.
+	 */
 	readonly luHref = input('', { alias: 'href' });
 
+	/**
+	 * Target page address
+	 */
 	readonly routerLinkCommands = input<LuRouterLink['routerLink'] | null>(null, { alias: 'luLink' });
 
+	/**
+	 * Disables the link
+	 */
 	readonly disabled = input(false, { transform: booleanAttribute });
 
+	/**
+	 * Underlines the link only on hover
+	 */
 	readonly decorationHover = input(false, { transform: booleanAttribute });
 
+	/**
+	 * Indicates that the link will open in a new tab
+	 */
 	readonly external = input(false, { transform: booleanAttribute });
 
 	hrefBackup: string;

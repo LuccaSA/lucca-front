@@ -3,7 +3,7 @@ import { Meta, StoryObj } from '@storybook/angular';
 interface IndexTableStackableStory {}
 
 export default {
-	title: 'Documentation/Listings/Index Table/HTML & CSS/Stackable',
+	title: 'Documentation/Listings/Index Table/HTML&CSS/Stackable',
 	argTypes: {},
 } as Meta;
 

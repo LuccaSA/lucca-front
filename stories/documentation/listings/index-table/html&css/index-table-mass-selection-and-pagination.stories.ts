@@ -3,7 +3,7 @@ import { Meta, StoryObj } from '@storybook/angular';
 interface IndexTableMassSelectionAndPaginationStory {}
 
 export default {
-	title: 'Documentation/Listings/Index Table/HTML & CSS/Mass Selection And Pagination',
+	title: 'Documentation/Listings/Index Table/HTML&CSS/Mass Selection And Pagination',
 	argTypes: {},
 } as Meta;
 

@@ -19,11 +19,19 @@ import { LU_GRID_INSTANCE } from './grid.token';
 })
 export class GridComponent {
 	readonly container = input(false, { transform: booleanAttribute });
+
 	readonly columns = input(null, { transform: numberAttribute });
+
 	readonly colspan = input(null, { transform: numberAttribute });
+
 	readonly rowspan = input(null, { transform: numberAttribute });
 
 	readonly mode = input<'form' | 'auto' | ResponsiveProperty<'auto'> | null>(null);
+
+	readonly gap = input<Gap | null>(null);
+	readonly columnGap = input<Gap | null>(null);
+
+	readonly rowGap = input<Gap | null>(null);
 
 	#gapTransform = (gap: Gap | null): string | null => {
 		const spacingRegexp = /.*(\d)$/g;
@@ -37,11 +45,7 @@ export class GridComponent {
 		return gap;
 	};
 
-	readonly gap = input<Gap | null>(null);
-	readonly columnGap = input<Gap | null>(null);
-	readonly rowGap = input<Gap | null>(null);
-
-	protected gridStyle = computed(() => ({
+	protected readonly gridStyle = computed(() => ({
 		'--grid-columns': this.mode() === null ? this.columns() : null,
 		'--grid-gap': this.#gapTransform(this.gap()),
 		'--grid-column-gap': this.#gapTransform(this.columnGap()),

@@ -21,7 +21,10 @@ export class ResourceCardComponent {
 	readonly wrapperRef = inject(LU_RESOURCE_CARD_WRAPPER_INSTANCE, { optional: true });
 
 	readonly draggable = input(false, { transform: booleanAttribute });
+
 	readonly grid = input(false, { transform: booleanAttribute });
+
 	readonly headingLevel = input<'1' | '2' | '3' | '4' | '5' | '6'>('3');
+
 	readonly size = input<'S' | null>(null);
 }

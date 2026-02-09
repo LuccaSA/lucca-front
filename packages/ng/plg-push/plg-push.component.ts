@@ -18,8 +18,14 @@ import { LU_PLG_PUSH_TRANSLATIONS } from './plg-push.translate';
 export class PLGPushComponent {
 	protected intl = input(...intlInputOptions(LU_PLG_PUSH_TRANSLATIONS));
 
+	/**
+	 * Changes the title displayed in plg
+	 */
 	readonly heading = input<string>('');
 
+	/**
+	 * Display sign close button
+	 */
 	readonly removable = input(false, { transform: booleanAttribute });
 
 	/**

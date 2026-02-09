@@ -17,6 +17,10 @@
 			inline-size: 100%;
 			min-block-size: var(--pr-t-spacings-300);
 			display: contents;
+
+			&:has(.fieldset-title-content-text:empty) {
+				display: none;
+			}
 		}
 
 		.fieldset-title-content {
@@ -27,6 +31,7 @@
 			background-color: transparent;
 			text-align: start;
 			display: flex;
+			flex-wrap: var(--components-fieldset-title-content-flexWrap);
 			align-items: flex-start;
 			justify-content: space-between;
 			gap: var(--components-fieldset-gap);

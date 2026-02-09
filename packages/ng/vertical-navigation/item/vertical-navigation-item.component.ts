@@ -13,8 +13,19 @@ import { LuccaIcon } from '@lucca-front/icons';
 	},
 })
 export class VerticalNavigationItemComponent {
+	/**
+	 * Changes the text displayed by the vertical navigation item
+	 */
 	readonly label = input<string | null>(null);
+
+	/**
+	 * Adds an icon to the vertical navigation item
+	 */
 	readonly icon = input<LuccaIcon | null>(null);
+
+	/**
+	 * Disabled the vertical navigation item
+	 */
 	readonly disabled = input(false, { transform: booleanAttribute });
 
 	readonly expanded = model(true);

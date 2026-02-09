@@ -3,7 +3,7 @@ import { Meta, StoryObj } from '@storybook/angular';
 interface InlineMessageStatesStory {}
 
 export default {
-	title: 'Documentation/Forms/InlineMessage/HTML & CSS/States',
+	title: 'Documentation/Forms/InlineMessage/HTML&CSS/States',
 	argTypes: {},
 } as Meta;
 

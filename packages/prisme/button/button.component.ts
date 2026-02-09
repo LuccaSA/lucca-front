@@ -23,18 +23,39 @@ export class ButtonComponent {
 
 	readonly notifyError = signal(false);
 
+	/**
+	 * Change the size of the Button
+	 */
 	readonly size = input<'M' | 'S' | 'XS'>();
 
+	/**
+	 * Apply block display
+	 */
 	readonly block = input(false, { transform: booleanAttribute });
 
+	/**
+	 * Indicates an action with significant or irreversible consequences on hover and focus. Only compatible with outlined and ghost
+	 */
 	readonly critical = input(false, { transform: booleanAttribute });
 
+	/**
+	 * @deprecated use `critical` input instead
+	 */
 	readonly delete = input(false, { transform: booleanAttribute });
 
+	/**
+	 * Indicates the presence of a menu
+	 */
 	readonly disclosure = input(false, { transform: booleanAttribute });
 
+	/**
+	 * Applies a color palette to the Button
+	 */
 	readonly palette = input<Palette>('none');
 
+	/**
+	 * Modifies the state of the Button
+	 */
 	readonly state = input<'default' | 'loading' | 'error' | 'success'>('default');
 
 	readonly luButton = input<'' | 'outlined' | 'AI' | 'AI-invert' | 'ghost' | 'ghost-invert' | 'text' | 'text-invert'>('');
