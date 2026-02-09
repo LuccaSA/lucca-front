@@ -16,6 +16,9 @@ import { CheckboxInputComponent, TextInputComponent } from '@lucca-front/ng/form
 import { IconComponent } from '@lucca-front/ng/icon';
 import { applicationConfig, Meta, moduleMetadata, StoryObj } from '@storybook/angular';
 import { HiddenArgType } from 'stories/helpers/common-arg-types';
+import { createTestStory } from 'stories/helpers/stories';
+import { waitForAngular } from 'stories/helpers/test';
+import { expect, screen, userEvent, within } from 'storybook/test';
 
 export default {
 	title: 'Documentation/Overlays/Dialog/Angular/Multiple',
@@ -166,3 +169,43 @@ export const Basic: StoryObj = {
 		autoFocus: '.open',
 	},
 };
+
+export const BasicTEST = createTestStory(Basic, async ({ canvasElement, step }) => {
+	const canvas = within(canvasElement);
+	const button = await canvas.findByRole('button');
+
+	await step('Keyboard interactions', async () => {
+		button.focus();
+		await expect(button).toHaveFocus();
+		await userEvent.keyboard('{Enter}');
+		await waitForAngular();
+		await expect(screen.getByRole('dialog')).toBeVisible();
+		await userEvent.keyboard('{Enter}');
+		await waitForAngular();
+		await expect(screen.getAllByRole('dialog').length).toEqual(2);
+		await userEvent.keyboard('{Escape}');
+		await waitForAngular();
+		await expect(screen.getAllByRole('dialog').length).toEqual(1);
+		await userEvent.keyboard('{Escape}');
+		await waitForAngular();
+		await expect(screen.queryByText('dialog')).toBeNull();
+	});
+
+	await step('Mouse interaction', async () => {
+		await userEvent.click(button);
+		await waitForAngular();
+		await expect(screen.getByRole('dialog')).toBeVisible();
+		// open other dialog
+		await userEvent.click(screen.getAllByRole('button')[1]);
+		await waitForAngular();
+		// close with confirm button
+		await expect(screen.getAllByRole('dialog').length).toEqual(2);
+		await userEvent.click(screen.getAllByRole('button')[4]);
+		await waitForAngular();
+		await expect(screen.getAllByRole('dialog').length).toEqual(1);
+		// close with dialog cross
+		await userEvent.click(screen.getAllByRole('button')[2]);
+		await waitForAngular();
+		await expect(screen.queryByText('dialog')).toBeNull();
+	});
+});
