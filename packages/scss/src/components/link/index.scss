@@ -7,16 +7,32 @@
 	}
 
 	@layer mods {
-		&.mod-icon {
-			@include icon;
-		}
-
 		&.mod-decorationHover {
 			@include decorationHover;
+
+			&:hover {
+				@include decorationHoverHovered;
+
+				&:not(:has(.link-text)) {
+					@include decorationHoverHoveredLegacy;
+				}
+			}
+		}
+
+		&.mod-discreet {
+			@include discreet;
 		}
 
 		&:is(:disabled, .is-disabled) {
 			@include disabled;
+		}
+
+		&:has(.link-text) {
+			@include hasLinkText;
+		}
+
+		&:not(:has(.link-icon)) {
+			@include legacyIcon;
 		}
 	}
 }

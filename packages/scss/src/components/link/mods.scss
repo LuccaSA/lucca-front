@@ -1,62 +1,24 @@
-@use '@lucca-front/scss/src/commons/utils/namespace';
-
-@mixin icon($atRoot: namespace.$defaultAtRoot) {
-	.lucca-icon {
-		text-decoration: none;
-		font-size: 1em;
-		vertical-align: baseline;
-		position: relative;
-		top: 0.075rem; // magic number
-	}
-
-	&:has(.link-text) {
-		text-decoration: none;
-	}
-
-	&:not(:has(.link-icon)) {
-		.lucca-icon {
-			margin-inline-start: 0.2em;
-		}
-	}
-
-	@at-root ($atRoot) {
-		.link-text {
-			text-decoration: underline;
-		}
-
-		.link-icon {
-			white-space: nowrap;
-
-			&::before {
-				// stylelint-disable-next-line no-irregular-whitespace
-				content: ' ' / '';
-			}
-		}
-	}
-}
-
 @mixin decorationHover {
-	&,
-	.link-text {
-		text-decoration: none;
-	}
-
-	&:not(:has(.link-text)) {
-		&:hover {
-			text-decoration: underline;
-		}
-	}
-
-	&:has(.link-text) {
-		&:hover {
-			.link-text {
-				text-decoration: underline;
-			}
-		}
-	}
+	--components-link-textDecoration: none;
+	--components-link-text-textDecoration: none;
 }
 
 @mixin brand {
-	--commons-text-link-color: var(--palettes-brand-700);
-	--commons-text-link-hover: var(--palettes-brand-800);
+	--components-link-color: var(--palettes-brand-700);
+	--components-link-color-hover: var(--palettes-brand-800);
+}
+
+@mixin discreet {
+	--components-link-color: currentColor;
+	--components-link-color-hover: currentColor;
+	--components-link-textDecoration: none;
+	--components-link-text-textDecoration: none;
+}
+
+@mixin hasLinkText {
+	--components-link-textDecoration: none;
+}
+
+@mixin legacyIcon {
+	--components-link-icon-marginInlineStart: 0.2em;
 }
