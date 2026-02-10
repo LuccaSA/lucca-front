@@ -15,7 +15,6 @@ import {
 	linkedSignal,
 	model,
 	OnDestroy,
-	OnInit,
 	output,
 	Provider,
 	Renderer2,
@@ -25,7 +24,7 @@ import {
 	ViewContainerRef,
 } from '@angular/core';
 import { takeUntilDestroyed, toObservable } from '@angular/core/rxjs-interop';
-import { getIntl, isNil } from '@lucca-front/ng/core';
+import { getIntl } from '@lucca-front/ng/core';
 import { combineLatest, debounce, filter, map, merge, Subject, switchMap, take, timer } from 'rxjs';
 import { PopoverContentComponent } from './content/popover-content/popover-content.component';
 import { POPOVER_CONFIG, PopoverConfig } from './popover-tokens';
@@ -73,7 +72,7 @@ const defaultPositionPairs: Record<PopoverPosition, ConnectionPositionPair> = {
 	},
 	exportAs: 'luPopover2',
 })
-export class PopoverDirective implements OnDestroy, OnInit {
+export class PopoverDirective implements OnDestroy {
 	overlay = inject(Overlay);
 
 	elementRef = inject<ElementRef<HTMLElement>>(ElementRef);
@@ -91,7 +90,7 @@ export class PopoverDirective implements OnDestroy, OnInit {
 	})
 	content: TemplateRef<unknown> | Type<unknown>;
 
-	luPopoverPosition = input<PopoverPosition>();
+	luPopoverPosition = input<PopoverPosition>('above');
 
 	@Input()
 	overlayScrollStrategy: 'reposition' | 'block' | 'close' = 'reposition';
@@ -183,12 +182,6 @@ export class PopoverDirective implements OnDestroy, OnInit {
 					this.#listenToMouseEnter = true;
 				}
 			});
-	}
-
-	ngOnInit(): void {
-		if (isNil(this.luPopoverPosition())) {
-			this.luPopoverPositionRef.set('above');
-		}
 	}
 
 	ngOnDestroy(): void {
