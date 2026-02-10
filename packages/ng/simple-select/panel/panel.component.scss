@@ -1,5 +1,5 @@
 @use '@lucca-front/scss/src/components/button/exports' as button;
-@use 'definitions';
+@use '../../styles/definitions';
 
 @include definitions.optionSearcherStyle;
 @include definitions.optionPlaceholderStyle;
@@ -41,11 +41,9 @@
 		// SEE: https://sass-lang.com/documentation/breaking-changes/mixed-decls/
 		& {
 			justify-content: left;
-		}
-		// stylelint-enable
-	}
 
 			--components-button-padding: var(--pr-t-spacings-50);
 		}
+		// stylelint-enable
 	}
 }
