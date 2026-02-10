@@ -19,10 +19,6 @@
 			}
 		}
 
-		&.mod-discreet {
-			@include discreet;
-		}
-
 		&:is(:disabled, .is-disabled) {
 			@include disabled;
 		}

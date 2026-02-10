@@ -8,13 +8,6 @@
 	--components-link-color-hover: var(--palettes-brand-800);
 }
 
-@mixin discreet {
-	--components-link-color: currentColor;
-	--components-link-color-hover: currentColor;
-	--components-link-textDecoration: none;
-	--components-link-text-textDecoration: none;
-}
-
 @mixin hasLinkText {
 	--components-link-textDecoration: none;
 }

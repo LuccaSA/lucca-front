@@ -16,7 +16,6 @@ import { LuRouterLink } from './lu-router-link';
 		'[attr.href]': 'routerLink.publicReactiveHref()',
 		'[class.mod-decorationHover]': 'decorationHover()',
 		'[class.mod-icon]': 'external()',
-		'[class.mod-discreet]': 'discreet()',
 		'[class.is-disabled]': 'this.disabled()',
 		'[attr.rel]': 'external() && !disabled() ? "noopener noreferrer" : null',
 		'[attr.target]': 'external() && !disabled() ? "_blank" : null',
@@ -61,8 +60,6 @@ export class LinkComponent {
 	 * Indicates that the link will open in a new tab
 	 */
 	readonly external = input(false, { transform: booleanAttribute });
-
-	readonly discreet = input(false, { transform: booleanAttribute });
 
 	hrefBackup: string;
 
