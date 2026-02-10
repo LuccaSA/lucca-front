@@ -14,6 +14,7 @@ import {
 	InputSignal,
 	model,
 	OnDestroy,
+	OnInit,
 	output,
 	Provider,
 	Renderer2,
@@ -23,7 +24,7 @@ import {
 	ViewContainerRef,
 } from '@angular/core';
 import { takeUntilDestroyed, toObservable } from '@angular/core/rxjs-interop';
-import { getIntl } from '@lucca-front/ng/core';
+import { getIntl, isNil } from '@lucca-front/ng/core';
 import { combineLatest, debounce, filter, map, merge, Subject, switchMap, take, timer } from 'rxjs';
 import { PopoverContentComponent } from './content/popover-content/popover-content.component';
 import { POPOVER_CONFIG, PopoverConfig } from './popover-tokens';
@@ -71,7 +72,7 @@ const defaultPositionPairs: Record<PopoverPosition, ConnectionPositionPair> = {
 	},
 	exportAs: 'luPopover2',
 })
-export class PopoverDirective implements OnDestroy {
+export class PopoverDirective implements OnDestroy, OnInit {
 	overlay = inject(Overlay);
 
 	elementRef = inject<ElementRef<HTMLElement>>(ElementRef);
@@ -90,7 +91,7 @@ export class PopoverDirective implements OnDestroy {
 	content: TemplateRef<unknown> | Type<unknown>;
 
 	@Input()
-	luPopoverPosition: PopoverPosition = 'above';
+	luPopoverPosition: PopoverPosition;
 
 	@Input()
 	overlayScrollStrategy: 'reposition' | 'block' | 'close' = 'reposition';
@@ -121,6 +122,8 @@ export class PopoverDirective implements OnDestroy {
 	luPopoverOpenDelay: InputSignal<number> = input<number>(300);
 
 	luPopoverCloseDelay: InputSignal<number> = input<number>(100);
+
+	isDropdown = model<boolean>(false);
 
 	open$ = new Subject<'focus' | 'click' | 'hover'>();
 
@@ -180,6 +183,16 @@ export class PopoverDirective implements OnDestroy {
 					this.#listenToMouseEnter = true;
 				}
 			});
+	}
+
+	ngOnInit(): void {
+		if (isNil(this.luPopoverPosition)) {
+			if (this.isDropdown()) {
+				this.luPopoverPosition = 'below';
+			} else {
+				this.luPopoverPosition = 'above';
+			}
+		}
 	}
 
 	ngOnDestroy(): void {
