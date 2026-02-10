@@ -473,7 +473,7 @@ describe('dialog-routing.utils', () => {
 			expect(openDialogs).toBe(2);
 		});
 
-		it('should retain outlet configuration when passed in dialogRouteConfig at factory creation', async () => {
+		it('should retain outlet configuration when passed in dialogRouteConfig at factory creation', () => {
 			// Arrange
 			const addTestRouteWithOutlet = dialogRouteFactory(DialogRoutingTestComponent, {
 				dialogRouteConfig: {
@@ -490,7 +490,7 @@ describe('dialog-routing.utils', () => {
 			expect(route.outlet).toBe('myOutlet');
 		});
 
-		it('should retain outlet configuration when passed in dialogRouteConfig at factory call', async () => {
+		it('should retain outlet configuration when passed in dialogRouteConfig at factory call', () => {
 			// Arrange
 			const route = addTestRoute({
 				path: 'test/:name',
@@ -504,7 +504,7 @@ describe('dialog-routing.utils', () => {
 			expect(route.outlet).toBe('callOutlet');
 		});
 
-		it('should prioritize outlet configuration from factory call over factory creation', async () => {
+		it('should prioritize outlet configuration from factory call over factory creation', () => {
 			// Arrange
 			const addTestRouteWithOutlet = dialogRouteFactory(DialogRoutingTestComponent, {
 				dialogRouteConfig: {
@@ -538,7 +538,7 @@ describe('dialog-routing.utils', () => {
 	});
 
 	describe('dialogLazyRouteFactory', () => {
-		it('should retain outlet configuration when passed in dialogRouteConfig at factory creation', async () => {
+		it('should retain outlet configuration when passed in dialogRouteConfig at factory creation', () => {
 			// Arrange
 			const addTestRouteWithOutlet = dialogLazyRouteFactory(() => Promise.resolve(DialogRoutingTestComponent), {
 				dialogRouteConfig: {
@@ -555,7 +555,7 @@ describe('dialog-routing.utils', () => {
 			expect(route.outlet).toBe('myLazyOutlet');
 		});
 
-		it('should retain outlet configuration when passed in dialogRouteConfig at factory call', async () => {
+		it('should retain outlet configuration when passed in dialogRouteConfig at factory call', () => {
 			// Arrange
 			const addTestRoute = dialogLazyRouteFactory(() => Promise.resolve(DialogRoutingTestComponent));
 
@@ -571,7 +571,7 @@ describe('dialog-routing.utils', () => {
 			expect(route.outlet).toBe('callLazyOutlet');
 		});
 
-		it('should prioritize outlet configuration from factory call over factory creation', async () => {
+		it('should prioritize outlet configuration from factory call over factory creation', () => {
 			// Arrange
 			const addTestRouteWithOutlet = dialogLazyRouteFactory(() => Promise.resolve(DialogRoutingTestComponent), {
 				dialogRouteConfig: {
