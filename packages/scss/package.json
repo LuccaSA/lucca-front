@@ -23,6 +23,7 @@
     "normalize.css": "^8.0.0"
   },
   "peerDependencies": {
-    "@lucca-front/icons": "*"
+    "@lucca-front/icons": "*",
+    "@lucca/prisme": "*"
   }
 }

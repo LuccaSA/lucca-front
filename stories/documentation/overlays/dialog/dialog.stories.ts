@@ -15,6 +15,9 @@ import { FormFieldComponent } from '@lucca-front/ng/form-field';
 import { CheckboxInputComponent, TextInputComponent } from '@lucca-front/ng/forms';
 import { IconComponent } from '@lucca-front/ng/icon';
 import { applicationConfig, Meta, moduleMetadata, StoryObj } from '@storybook/angular';
+import { createTestStory } from 'stories/helpers/stories';
+import { waitForAngular } from 'stories/helpers/test';
+import { expect, screen, userEvent, within } from 'storybook/test';
 
 export default {
 	title: 'Documentation/Overlays/Dialog/Angular',
@@ -228,3 +231,44 @@ export const WithAction: StoryObj = {
 		mode: 'default',
 	},
 };
+
+export const BasicTEST = createTestStory(Basic, async ({ canvasElement, step }) => {
+	const canvas = within(canvasElement);
+	const button = await canvas.findByRole('button');
+
+	await step('Keyboard interactions', async () => {
+		button.focus();
+		await expect(button).toHaveFocus();
+		await userEvent.keyboard('{Enter}');
+		await waitForAngular();
+		await expect(screen.getByRole('dialog')).toBeVisible();
+		await userEvent.keyboard('{Escape}');
+		await expect(screen.queryByText('dialog')).toBeNull();
+		await userEvent.keyboard('{Enter}');
+		await waitForAngular();
+		await expect(screen.getByRole('dialog')).toBeVisible();
+		await userEvent.keyboard('{Enter}');
+		await expect(screen.queryByText('dialog')).toBeNull();
+	});
+
+	await step('Mouse interaction', async () => {
+		await userEvent.click(button);
+		await waitForAngular();
+		await expect(screen.getByRole('dialog')).toBeVisible();
+		// close with dialog cross
+		await userEvent.click(screen.getAllByRole('button')[0]);
+		await expect(screen.queryByText('dialog')).toBeNull();
+		await userEvent.click(button);
+		await waitForAngular();
+		await expect(screen.getByRole('dialog')).toBeVisible();
+		// close with confirm button
+		await userEvent.click(screen.getAllByRole('button')[1]);
+		await expect(screen.queryByText('dialog')).toBeNull();
+		await userEvent.click(button);
+		await waitForAngular();
+		await expect(screen.getByRole('dialog')).toBeVisible();
+		// close with cancel button
+		await userEvent.click(screen.getAllByRole('button')[2]);
+		await expect(screen.queryByText('dialog')).toBeNull();
+	});
+});
