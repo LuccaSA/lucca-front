@@ -49,10 +49,9 @@
 		// SEE: https://sass-lang.com/documentation/breaking-changes/mixed-decls/
 		& {
 			justify-content: left;
-		}
-		// stylelint-enable
 
 			--components-button-padding: var(--pr-t-spacings-50);
 		}
+		// stylelint-enable
 	}
 }
