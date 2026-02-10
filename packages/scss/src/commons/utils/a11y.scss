@@ -1,6 +1,6 @@
 @mixin mask($suffix: '') {
 	border: 0 #{$suffix};
-	clip-path: rect(1px, 1px, 1px, 1px) #{$suffix};
+	clip-path: rect(1px 1px 1px 1px) #{$suffix};
 	margin: -1px #{$suffix};
 	overflow: hidden #{$suffix};
 	padding: 0 #{$suffix};
