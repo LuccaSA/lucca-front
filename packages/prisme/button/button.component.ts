@@ -1,11 +1,11 @@
 import { booleanAttribute, ChangeDetectionStrategy, Component, computed, contentChild, ElementRef, inject, input, signal, ViewEncapsulation } from '@angular/core';
-import { LuClass, Palette, ɵeffectWithDeps } from '@lucca-front/ng/core';
-import { IconComponent } from '@lucca-front/ng/icon';
+import { Palette, PrClass, ɵeffectWithDeps } from '@lucca/prisme/core';
+import { IconComponent } from '@lucca/prisme/icon';
 
 @Component({
 	// eslint-disable-next-line @angular-eslint/component-selector
-	selector: 'button[luButton],a[luButton]',
-	providers: [LuClass],
+	selector: 'button[prButton],a[prButton],button[luButton],a[luButton]',
+	providers: [PrClass],
 	template: '<ng-content />',
 	styleUrl: './button.component.scss',
 	changeDetection: ChangeDetectionStrategy.OnPush,
@@ -18,7 +18,7 @@ import { IconComponent } from '@lucca-front/ng/icon';
 	},
 })
 export class ButtonComponent {
-	#luClass = inject(LuClass);
+	#prClass = inject(PrClass);
 	#elementRef = inject<ElementRef<HTMLButtonElement>>(ElementRef);
 
 	readonly notifyError = signal(false);
@@ -58,11 +58,15 @@ export class ButtonComponent {
 	 */
 	readonly state = input<'default' | 'loading' | 'error' | 'success'>('default');
 
+	readonly luButton = input<'' | 'outlined' | 'AI' | 'AI-invert' | 'ghost' | 'ghost-invert' | 'text' | 'text-invert'>('');
+
 	/**
-	 * '' is the default value when you just set the `luButton` directive without a value attached to it.
+	 * '' is the default value when you just set the `prButton` directive without a value attached to it.
 	 * We just make this explicit here.
 	 */
-	readonly luButton = input<'' | 'outlined' | 'AI' | 'AI-invert' | 'ghost' | 'ghost-invert' | 'text' | 'text-invert'>('');
+	readonly prButton = input<'' | 'outlined' | 'AI' | 'ghost' | 'ghost-invert' | 'text' | 'text-invert'>('');
+
+	readonly buttonType = computed(() => this.luButton() || this.prButton());
 
 	readonly iconComponentRef = contentChild<IconComponent, ElementRef<HTMLElement>>(IconComponent, { read: ElementRef });
 
@@ -80,15 +84,15 @@ export class ButtonComponent {
 			['mod-disclosure']: this.disclosure(),
 		};
 
-		if (this.luButton() !== '') {
-			if (this.luButton() === 'ghost-invert') {
+		if (this.buttonType() !== '') {
+			if (this.buttonType() === 'ghost-invert') {
 				config['mod-ghost'] = true;
 				config['mod-invert'] = true;
 			} else if (this.luButton() === 'AI-invert') {
 				config['mod-AI'] = true;
 				config['mod-invert'] = true;
 			} else {
-				config[`mod-${this.luButton()}`] = true;
+				config[`mod-${this.buttonType()}`] = true;
 			}
 		}
 		return config;
@@ -122,7 +126,7 @@ export class ButtonComponent {
 
 		ɵeffectWithDeps([this.classesConfig], (config) => {
 			if (config) {
-				this.#luClass.setState(config);
+				this.#prClass.setState(config);
 			}
 		});
 	}
