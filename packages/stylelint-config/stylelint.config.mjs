@@ -5,7 +5,7 @@ import LFDeprecatedSelectors from './LFDeprecatedSelectors.mjs';
 import { getDisallowedObjects, getDisallowedData } from './stylelintForLF.mjs';
 
 export default {
-	extends: ['stylelint-config-standard-scss', 'stylelint-config-prettier-scss'],
+	extends: ['@stylistic/stylelint-config', 'stylelint-config-standard-scss'],
 	overrides: [
 		{
 			files: ['**/*.scss'],
