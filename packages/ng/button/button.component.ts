@@ -4,7 +4,7 @@ import { IconComponent } from '@lucca-front/ng/icon';
 
 @Component({
 	// eslint-disable-next-line @angular-eslint/component-selector
-	selector: 'button[luButton],a[luButton]',
+	selector: 'button[luButton],a[luButton],span[luButton]',
 	providers: [LuClass],
 	template: '<ng-content />',
 	styleUrl: './button.component.scss',
