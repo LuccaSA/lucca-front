@@ -41,8 +41,9 @@
 			<dt class="presentation-description-term">
 				<ng-container *luPortal="label()" />
 				@if (tooltip()) {
-					<lu-icon class="formLabel-info" icon="signHelp" [alt]="'?'" [luTooltip]="tooltip()" />
+					<lu-icon class="presentation-description-term-info" icon="signHelp" [alt]="'?'" [luTooltip]="tooltip()" />
 				}
+
 				@if (tag()) {
 					<span class="formLabel-tag tag">{{ tag() }}</span>
 				}

@@ -1,4 +1,4 @@
-import { AsyncPipe } from '@angular/common';
+import { AsyncPipe, CommonModule } from '@angular/common';
 import {
 	booleanAttribute,
 	ChangeDetectionStrategy,
@@ -27,20 +27,20 @@ import { ClearComponent } from '@lucca-front/ng/clear';
 import { intlInputOptions } from '@lucca-front/ng/core';
 import { ALuSelectInputComponent, LU_CORE_SELECT_TRANSLATIONS, LuOptionContext, provideLuSelectLabelsAndIds, ɵLuOptionOutletDirective } from '@lucca-front/ng/core-select';
 import { FILTER_PILL_INPUT_COMPONENT, FilterPillDisplayerDirective, FilterPillLabelDirective } from '@lucca-front/ng/filter-pills';
+import { PresentationDisplayDirective } from '@lucca-front/ng/form-field';
 import { LuTooltipModule } from '@lucca-front/ng/tooltip';
 import { Subject } from 'rxjs';
 import { LuMultiSelectDefaultDisplayerComponent } from '../displayer';
 import { LU_MULTI_SELECT_TRANSLATIONS } from '../select.translate';
 import { LuMultiSelectPanelRefFactory } from './panel-ref.factory';
 import { LuMultiSelectPanelRef } from './panel.model';
-import { PresentationDisplayDirective } from '@lucca-front/ng/form-field';
 
 @Component({
 	selector: 'lu-multi-select',
 	templateUrl: './select-input.component.html',
 	styleUrl: './select-input.component.scss',
 	changeDetection: ChangeDetectionStrategy.OnPush,
-	imports: [AsyncPipe, LuTooltipModule, ɵLuOptionOutletDirective, FilterPillDisplayerDirective, FilterPillLabelDirective, ClearComponent, PresentationDisplayDirective],
+	imports: [AsyncPipe, LuTooltipModule, ɵLuOptionOutletDirective, FilterPillDisplayerDirective, FilterPillLabelDirective, ClearComponent, PresentationDisplayDirective, CommonModule],
 	providers: [
 		{
 			provide: NG_VALUE_ACCESSOR,
