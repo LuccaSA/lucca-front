@@ -1,0 +1,18 @@
+@use '@lucca-front/icons/src/icon/exports' as icon;
+
+@mixin S {
+	--components-bubbleIcon-size: var(--pr-t-spacings-400);
+
+	.lucca-icon {
+		@include icon.XS;
+	}
+}
+
+@mixin L {
+	--components-bubbleIcon-size: var(--pr-t-spacings-600);
+
+	.lucca-icon {
+		@include icon.L;
+	}
+}
+
