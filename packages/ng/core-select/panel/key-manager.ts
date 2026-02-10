@@ -1,6 +1,6 @@
 import { ActiveDescendantKeyManager } from '@angular/cdk/a11y';
 import { computed, DestroyRef, EventEmitter, inject, Injectable, Injector, Signal } from '@angular/core';
-import { takeUntilDestroyed } from '@angular/core/rxjs-interop';
+import { takeUntilDestroyed, toObservable } from '@angular/core/rxjs-interop';
 import { asyncScheduler, debounceTime, filter, map, Observable, observeOn, take } from 'rxjs';
 import { LuOptionComparer } from '../select.model';
 import { CoreSelectPanelElement } from './selectable-item';
@@ -22,6 +22,7 @@ export class CoreSelectKeyManager<T> {
 	#injector = inject(Injector);
 
 	#queryList: Signal<CoreSelectPanelElement<T>[]>;
+	#queryList$: Observable<CoreSelectPanelElement<T>[]>;
 
 	init(options: CoreSelectKeyManagerOptions<T>): void {
 		this.#options = options;
@@ -37,6 +38,7 @@ export class CoreSelectKeyManager<T> {
 				return 0;
 			});
 		});
+		this.#queryList$ = toObservable(this.#queryList, { injector: this.#injector });
 		this.#cdkKeyManager = new ActiveDescendantKeyManager(this.#queryList, this.#injector).withHomeAndEnd();
 		this.#bindClueChange(options.clueChange$);
 		this.#bindOptionsChange(options);
@@ -65,12 +67,12 @@ export class CoreSelectKeyManager<T> {
 			return;
 		}
 
-		const { options$, optionComparer } = this.#options;
+		const { optionComparer } = this.#options;
 
-		options$
+		this.#queryList$
 			.pipe(
 				observeOn(asyncScheduler),
-				map((options) => options.findIndex((o) => optionComparer(o, option))),
+				map((options) => options.findIndex((el) => optionComparer(el.option(), option))),
 				filter((index) => index !== -1),
 				take(1),
 				takeUntilDestroyed(this.#destroyRef),
