@@ -47,13 +47,15 @@
 			}
 		}
 
-		&:has(.dataTable.is-firstColumnVisibleAfterColsStart) {
-			@include firstColumnVisibleAfterColsStart;
-		}
+		// UI CHECK
+		// &:has(.dataTable.is-firstColumnVisibleAfterColsStart) {
+		// 	@include firstColumnVisibleAfterColsStart;
+		// }
 
-		&:has(.dataTable.is-lastColumnVisibleBeforeColsEnd) {
-			@include lastColumnVisibleBeforeColsEnd;
-		}
+		// UI CHECK
+		// &:has(.dataTable.is-lastColumnVisibleBeforeColsEnd) {
+		// 	@include lastColumnVisibleBeforeColsEnd;
+		// }
 
 		&:has(.dataTableWrapper-pagination:not(:empty)) {
 			@include pagination;

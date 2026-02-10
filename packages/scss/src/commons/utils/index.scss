@@ -437,9 +437,10 @@
 		@extend %focusVisible;
 	}
 
-	.pr-u-placeItemsCenter {
-		@extend %placeItemsCenter;
-	}
+	// UI CHECK
+	// .pr-u-placeItemsCenter {
+	// 	@extend %placeItemsCenter;
+	// }
 
 	@include core.classes('float', core.$float);
 	@include core.classes('vertical-align', core.$verticalAlign);
