@@ -7,7 +7,7 @@
 	}
 
 	@layer mods {
-		&.mod-checkable{
+		&.mod-checkable {
 			@include checkable;
 		}
 	}

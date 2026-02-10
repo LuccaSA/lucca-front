@@ -29,7 +29,6 @@
 			@include withAction;
 		}
 
-
 		@include media.max('XXS') {
 			@include narrow;
 		}
