@@ -116,7 +116,7 @@ export default {
 
 export const Basic: StoryObj<TextInputComponent & { disabled: boolean; required: boolean } & FormFieldComponent> = {
 	render: (args, { argTypes }) => {
-		const { counter, label, hiddenLabel, tooltip, tag, inlineMessage, inlineMessageState, size, width, AI, iconAItooltip, iconAIalt, counterVisibleOnlyJustBeforeError, ...inputArgs } = args;
+		const { counter, label, hiddenLabel, tooltip, tag, inlineMessage, inlineMessageState, size, width, AI, iconAItooltip, iconAIalt, ...inputArgs } = args;
 		return {
 			template: cleanupTemplate(`<lu-form-field ${generateInputs(
 				{
@@ -132,7 +132,6 @@ export const Basic: StoryObj<TextInputComponent & { disabled: boolean; required:
 					AI,
 					iconAItooltip,
 					iconAIalt,
-					counterVisibleOnlyJustBeforeError,
 				},
 				argTypes,
 			)}>
@@ -163,7 +162,6 @@ export const Basic: StoryObj<TextInputComponent & { disabled: boolean; required:
 		tooltip: 'Je suis un message d’aide',
 		tag: '',
 		counter: 0,
-		counterVisibleOnlyJustBeforeError: false,
 		valueAlignRight: false,
 		AI: false,
 		iconAIalt: 'Assistant IA',

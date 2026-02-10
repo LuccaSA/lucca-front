@@ -139,8 +139,6 @@ export class FormFieldComponent implements OnDestroy, DoCheck {
 
 	readonly contentLength = signal<number>(0);
 
-	readonly counterVisibleOnlyJustBeforeError = input(false, { transform: booleanAttribute });
-
 	public addInput(input: InputDirective) {
 		this.#inputs.push(input);
 		/* We have to put this in the next cycle to make sure it'll be applied properly

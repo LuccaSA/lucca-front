@@ -18,7 +18,6 @@ import { LU_FORM_LABEL_TRANSLATIONS } from './form-label.translate';
 	host: {
 		class: 'formLabel',
 		'[class.mod-counter]': 'counterMax() > 0',
-		'[class.mod-counterHidden]': 'counterMax() > 0 && counterVisibleOnlyJustBeforeError() && counterStatus() < counterMax() - 100',
 		'[class.mod-XS]': "size() === 'XS'",
 		'[class.mod-S]': "size() === 'S'",
 		'[class.is-error]': 'error() || (counterMax() > 0 ? counterStatus() > counterMax() : null)',
@@ -34,6 +33,5 @@ export class FormLabelComponent {
 	readonly size = input<'XS' | 'S' | null>(null);
 	readonly counterStatus = input(0, { transform: numberAttribute });
 	readonly counterMax = input(0, { transform: numberAttribute });
-	readonly counterVisibleOnlyJustBeforeError = input(false, { transform: booleanAttribute });
 	readonly counterId = input<string | null>(null);
 }
