@@ -12,6 +12,7 @@ import {
 	input,
 	Input,
 	InputSignal,
+	linkedSignal,
 	model,
 	OnDestroy,
 	OnInit,
@@ -90,8 +91,7 @@ export class PopoverDirective implements OnDestroy, OnInit {
 	})
 	content: TemplateRef<unknown> | Type<unknown>;
 
-	@Input()
-	luPopoverPosition: PopoverPosition;
+	luPopoverPosition = input<PopoverPosition>();
 
 	@Input()
 	overlayScrollStrategy: 'reposition' | 'block' | 'close' = 'reposition';
@@ -123,7 +123,7 @@ export class PopoverDirective implements OnDestroy, OnInit {
 
 	luPopoverCloseDelay: InputSignal<number> = input<number>(100);
 
-	isDropdown = model<boolean>(false);
+	luPopoverPositionRef = linkedSignal(() => this.luPopoverPosition());
 
 	open$ = new Subject<'focus' | 'click' | 'hover'>();
 
@@ -186,12 +186,8 @@ export class PopoverDirective implements OnDestroy, OnInit {
 	}
 
 	ngOnInit(): void {
-		if (isNil(this.luPopoverPosition)) {
-			if (this.isDropdown()) {
-				this.luPopoverPosition = 'below';
-			} else {
-				this.luPopoverPosition = 'above';
-			}
+		if (isNil(this.luPopoverPosition())) {
+			this.luPopoverPositionRef.set('above');
 		}
 	}
 
@@ -337,6 +333,6 @@ export class PopoverDirective implements OnDestroy, OnInit {
 			above: ['before', 'after'],
 			below: ['before', 'after'],
 		};
-		return [this.positionPairs[this.luPopoverPosition], this.positionPairs[opposite[this.luPopoverPosition]], ...remaining[this.luPopoverPosition].map((r) => this.positionPairs[r])];
+		return [this.positionPairs[this.luPopoverPositionRef()], this.positionPairs[opposite[this.luPopoverPositionRef()]], ...remaining[this.luPopoverPositionRef()].map((r) => this.positionPairs[r])];
 	}
 }

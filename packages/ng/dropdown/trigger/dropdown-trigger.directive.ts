@@ -1,6 +1,7 @@
 import { ConnectionPositionPair, HorizontalConnectionPos, OriginConnectionPosition, OverlayConnectionPosition, VerticalConnectionPos } from '@angular/cdk/overlay';
 import { DestroyRef, Directive, inject, Input, OnInit, TemplateRef, Type } from '@angular/core';
 import { takeUntilDestroyed } from '@angular/core/rxjs-interop';
+import { isNil } from '@lucca-front/ng/core';
 import { ALuPopoverPanel, LuPopoverAlignment } from '@lucca-front/ng/popover';
 import { PopoverDirective } from '@lucca-front/ng/popover2';
 
@@ -33,7 +34,6 @@ export class LuDropdownTriggerDirective<_T> implements OnInit {
 	}
 
 	constructor() {
-		this.popover2.isDropdown.set(true);
 		this.popover2.luPopoverNoCloseButton = true;
 	}
 
@@ -43,6 +43,9 @@ export class LuDropdownTriggerDirective<_T> implements OnInit {
 	luDropdownAlignment: LuPopoverAlignment = 'right';
 
 	ngOnInit(): void {
+		if (isNil(this.popover2.luPopoverPosition())) {
+			this.popover2.luPopoverPositionRef.set('below');
+		}
 		if (!this.popover2.customPositions || this.popover2.customPositions.length === 0) {
 			this.popover2.customPositions = this.legacyPositionBuilder();
 		}
@@ -60,7 +63,7 @@ export class LuDropdownTriggerDirective<_T> implements OnInit {
 		};
 
 		// Position
-		const position = this.popover2.luPopoverPosition;
+		const position = this.popover2.luPopoverPositionRef();
 		if (position === 'above') {
 			connectionPosition.originY = 'top';
 		} else if (position === 'below') {
