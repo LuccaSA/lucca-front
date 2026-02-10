@@ -1,0 +1,15 @@
+@mixin XXS {
+	--components-softwareIcon-size: var(--pr-t-spacings-200);
+}
+
+@mixin XS {
+	--components-softwareIcon-size: var(--pr-t-spacings-300);
+}
+
+@mixin S {
+	--components-softwareIcon-size: var(--pr-t-spacings-400);
+}
+
+@mixin L {
+	--components-softwareIcon-size: var(--pr-t-spacings-600);
+}
