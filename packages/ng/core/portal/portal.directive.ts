@@ -1,11 +1,10 @@
 import { ComponentRef, Directive, effect, EmbeddedViewRef, inject, Injector, input, OnDestroy, Renderer2, TemplateRef, untracked, ViewContainerRef } from '@angular/core';
-import { isNotNil } from '../misc';
 import { PORTAL_CONTEXT, PortalContent } from './portal-content';
 
 @Directive({
 	selector: '[luPortal]',
 })
-export class PortalDirective<T = unknown> implements OnDestroy {
+export class PortalDirective<T extends object = object> implements OnDestroy {
 	private viewContainerRef = inject(ViewContainerRef);
 	private renderer = inject(Renderer2);
 	private templateRef = inject(TemplateRef);
@@ -101,21 +100,19 @@ export class PortalDirective<T = unknown> implements OnDestroy {
 	 * @see https://github.com/angular/angular/pull/51887
 	 */
 	private updateEmbeddedViewContext(context: T): void {
-		if (this.embeddedViewRef && typeof context === 'object' && !Array.isArray(context) && isNotNil(context)) {
+		if (this.embeddedViewRef) {
 			const props = Object.keys(context);
 
 			for (const prop of props) {
 				delete this.embeddedViewRef.context[prop];
 			}
 
-			if (typeof this.embeddedViewRef.context === 'object' && !Array.isArray(this.embeddedViewRef.context) && isNotNil(this.embeddedViewRef.context)) {
-				Object.assign(this.embeddedViewRef.context, context);
-			}
+			Object.assign(this.embeddedViewRef.context, context);
 			this.embeddedViewRef.detectChanges();
 		}
 	}
 
-	public static ngTemplateContextGuard<T>(_dir: PortalDirective<T>, ctx: unknown): ctx is void {
+	public static ngTemplateContextGuard<T extends object>(_dir: PortalDirective<T>, ctx: unknown): ctx is void {
 		return true;
 	}
 }
