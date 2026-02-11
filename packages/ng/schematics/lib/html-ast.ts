@@ -93,7 +93,7 @@ export class HtmlAstVisitor<TNode extends TemplateNode> {
 						this.visit(cb, (groupNode as { children: TemplateNode[]}).children , node);
 					});
 				}
-				// TODO Remove this cases in next breaking
+				// TODO Remove when Angular 21 is no longer supported
 				if ('cases' in node) {
 					(node.cases as unknown[]).forEach((caseNode) => {
 						this.visit(cb, (caseNode as { children: TemplateNode[]}).children , node);
