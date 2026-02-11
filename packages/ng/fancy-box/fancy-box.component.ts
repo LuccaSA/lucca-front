@@ -39,7 +39,7 @@ export class FancyBoxComponent {
 	readonly backgroundLeftStyle = computed(() => this.#buildUrl(this.backgroundLeft()));
 	readonly backgroundRightStyle = computed(() => this.#buildUrl(this.backgroundRight()));
 
-	#buildUrl(text: string) {
+	#buildUrl(text: string | undefined) {
 		return text ? `url(${text})` : ``;
 	}
 }
