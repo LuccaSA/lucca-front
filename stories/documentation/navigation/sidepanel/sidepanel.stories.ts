@@ -1,4 +1,4 @@
-import { Component } from '@angular/core';
+import { ChangeDetectionStrategy, Component } from '@angular/core';
 import { provideAnimations } from '@angular/platform-browser/animations';
 import { ILuModalContent } from '@lucca-front/ng/modal';
 import { LuSidepanel, LuSidepanelModule } from '@lucca-front/ng/sidepanel';
@@ -7,6 +7,7 @@ import { applicationConfig, Meta, StoryObj } from '@storybook/angular';
 @Component({
 	selector: 'sidepanel-content',
 	template: '<p>General Kenobi</p>',
+	changeDetection: ChangeDetectionStrategy.OnPush,
 })
 class SidepanelContentComponent implements ILuModalContent {
 	title = 'Hello there';
@@ -21,6 +22,7 @@ class SidepanelContentComponent implements ILuModalContent {
 
 		<button type="button" class="button" (click)="openSidepanel()">Open sidepanel</button>
 	`,
+	changeDetection: ChangeDetectionStrategy.OnPush,
 })
 class SidePanelStory {
 	constructor(private sidepanelFactory: LuSidepanel) {}

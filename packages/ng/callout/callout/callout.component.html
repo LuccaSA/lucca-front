@@ -17,7 +17,7 @@
 		</div>
 		@if (removable()) {
 			<button type="button" class="callout-kill" (click)="removedRef.set(true); removedChange.emit(true)">
-				<span class="pr-u-mask">{{ intl.close }}</span>
+				<span class="pr-u-mask">{{ intl().close }}</span>
 			</button>
 		}
 	</div>

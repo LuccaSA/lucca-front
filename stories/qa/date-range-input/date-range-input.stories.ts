@@ -1,4 +1,4 @@
-import { Component, LOCALE_ID } from '@angular/core';
+import { ChangeDetectionStrategy, Component, LOCALE_ID } from '@angular/core';
 import { DateRangeInputComponent } from '@lucca-front/ng/date2';
 import { FormFieldComponent } from '@lucca-front/ng/form-field';
 import { applicationConfig, Meta } from '@storybook/angular';
@@ -7,6 +7,7 @@ import { applicationConfig, Meta } from '@storybook/angular';
 	selector: 'date-range-input-stories',
 	templateUrl: './date-range-input.stories.html',
 	imports: [FormFieldComponent, DateRangeInputComponent],
+	changeDetection: ChangeDetectionStrategy.OnPush,
 })
 class DateRangeInputStory {}
 

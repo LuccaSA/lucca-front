@@ -90,14 +90,17 @@ node(label: CI.getSelectedLinuxNode(script:this)) {
 				def iconsPackageJson = readFile(file: 'dist/icons/package.json');
 				def scssPackageJson = readFile(file: 'dist/scss/package.json');
 				def ngPackageJson = readFile(file: 'dist/ng/package.json');
+				def prismePackageJson = readFile(file: 'dist/prisme/package.json');
 
 				writeFile(file: 'dist/icons/package.json', text: iconsPackageJson.replaceAll('"\\*"', "\"${version}\""));
 				writeFile(file: 'dist/scss/package.json', text: scssPackageJson.replaceAll('"\\*"', "\"${version}\""));
 				writeFile(file: 'dist/ng/package.json', text: ngPackageJson.replaceAll('"\\*"', "\"${version}\""));
+				writeFile(file: 'dist/prisme/package.json', text: prismePackageJson.replaceAll('"\\*"', "\"${version}\""));
 
 				publishNpmOnReleaseTag(publishFolder: 'dist/icons')
 				publishNpmOnReleaseTag(publishFolder: 'dist/scss')
 				publishNpmOnReleaseTag(publishFolder: 'dist/ng')
+				publishNpmOnReleaseTag(publishFolder: 'dist/prisme')
 
 				publishNpmOnReleaseTag(publishFolder: 'packages/stylelint-config'); // No need for * replacements for this package, it does not depend directly on LF
 			}

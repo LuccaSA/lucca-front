@@ -1,4 +1,4 @@
-import { Component } from '@angular/core';
+import { ChangeDetectionStrategy, Component } from '@angular/core';
 import { FormsModule } from '@angular/forms';
 import { BreadcrumbsComponent, BreadcrumbsLinkDirective } from '@lucca-front/ng/breadcrumbs';
 import { ButtonComponent } from '@lucca-front/ng/button';
@@ -24,6 +24,7 @@ import { Meta, StoryObj } from '@storybook/angular';
 		IconComponent,
 		FormsModule,
 	],
+	changeDetection: ChangeDetectionStrategy.OnPush,
 })
 class PageHeaderStory {}
 

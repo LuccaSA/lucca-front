@@ -1,8 +1,8 @@
-import { Component, OnDestroy, OnInit, TemplateRef } from '@angular/core';
+import { ChangeDetectionStrategy, Component, OnDestroy, OnInit, TemplateRef } from '@angular/core';
 import { FormsModule } from '@angular/forms';
 import { provideAnimations } from '@angular/platform-browser/animations';
 import { LuToastInput, LuToastType, LuToastsComponent, LuToastsService, defaultToastDuration } from '@lucca-front/ng/toast';
-import { Meta, applicationConfig, StoryObj } from '@storybook/angular';
+import { Meta, StoryObj, applicationConfig } from '@storybook/angular';
 import { Observable, ReplaySubject, Subject } from 'rxjs';
 import { map } from 'rxjs/operators';
 
@@ -10,6 +10,7 @@ import { map } from 'rxjs/operators';
 	selector: 'toasts-stories',
 	imports: [FormsModule, LuToastsComponent],
 	templateUrl: './toasts.stories.html',
+	changeDetection: ChangeDetectionStrategy.OnPush,
 })
 class ToastsStory implements OnInit, OnDestroy {
 	public isBottom = false;

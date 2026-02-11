@@ -8,7 +8,7 @@
 >
 	{{ label() }}
 </button>
-@if (isNil(innerContent())) {
+@if (isInnerContentNil()) {
 	<div class="readMore-content" [class.textFlow]="textFlow()" #content>
 		<ng-content />
 	</div>

@@ -1,0 +1,15 @@
+@mixin selected {
+	--components-color-value-before-display: grid;
+}
+
+@mixin highlighted {
+	--components-color-value-scale: calc(7/6);
+}
+
+@mixin selectedNotFilled {
+	--components-colorPicker-input-paddingInlineStart: var(--pr-t-spacings-400);
+}
+
+@mixin selectedNotFilledS {
+	--components-colorPicker-input-paddingInlineStart: calc(var(--pr-t-spacings-300) + var(--pr-t-spacings-50));
+}

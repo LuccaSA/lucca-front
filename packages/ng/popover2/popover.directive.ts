@@ -24,7 +24,7 @@ import {
 	ViewContainerRef,
 } from '@angular/core';
 import { takeUntilDestroyed, toObservable } from '@angular/core/rxjs-interop';
-import { getIntl } from '@lucca-front/ng/core';
+import { intlInputOptions } from '@lucca-front/ng/core';
 import { combineLatest, debounce, filter, map, merge, Subject, switchMap, take, timer } from 'rxjs';
 import { PopoverContentComponent } from './content/popover-content/popover-content.component';
 import { POPOVER_CONFIG, PopoverConfig } from './popover-tokens';
@@ -83,7 +83,7 @@ export class PopoverDirective implements OnDestroy {
 
 	#renderer = inject(Renderer2);
 
-	intl = getIntl(LU_POPOVER2_TRANSLATIONS);
+	intl = input(...intlInputOptions(LU_POPOVER2_TRANSLATIONS));
 
 	@Input({
 		alias: 'luPopover2',
@@ -173,7 +173,7 @@ export class PopoverDirective implements OnDestroy {
 					this.#listenToMouseLeave = type !== 'click';
 					if (type === 'focus' && !this.#screenReaderDescription) {
 						this.#screenReaderDescription = this.#renderer.createElement('span') as HTMLSpanElement;
-						this.#screenReaderDescription.innerText = this.intl.screenReaderDescription;
+						this.#screenReaderDescription.innerText = this.intl().screenReaderDescription;
 						this.#renderer.addClass(this.#screenReaderDescription, 'pr-u-mask');
 						this.#renderer.appendChild(this.elementRef.nativeElement, this.#screenReaderDescription);
 					}
@@ -255,7 +255,7 @@ export class PopoverDirective implements OnDestroy {
 				.backdropClick()
 				.pipe(takeUntilDestroyed(this.#destroyRef))
 				.subscribe(() => {
-					this.#componentRef.close();
+					this.#componentRef?.close();
 					this.#listenToMouseLeave = true;
 				});
 			const config: PopoverConfig = {
@@ -297,14 +297,14 @@ export class PopoverDirective implements OnDestroy {
 	focusBackToContent(event: Event): void {
 		if (this.opened()) {
 			event.preventDefault();
-			this.#componentRef.grabFocus();
+			this.#componentRef?.grabFocus();
 		}
 	}
 
 	@HostListener('keydown.Shift.Tab')
 	focusOutBefore(): void {
 		if (this.opened() && this.luPopoverTrigger().includes('focus')) {
-			this.#componentRef.close();
+			this.#componentRef?.close();
 		}
 	}
 

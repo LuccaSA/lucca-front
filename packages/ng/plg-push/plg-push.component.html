@@ -13,7 +13,7 @@
 	</div>
 	@if (removable()) {
 		<button class="plgPush-close" type="button" luButton="ghost" size="S" (click)="removed.set(true)">
-			<lu-icon icon="signClose" [alt]="intl.close" />
+			<lu-icon icon="signClose" [alt]="intl().close" />
 		</button>
 	}
 </div>

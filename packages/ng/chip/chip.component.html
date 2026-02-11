@@ -11,6 +11,6 @@
 }
 @if (!unkillable() && !disabled()) {
 	<button type="button" class="chip-kill" (click)="kill.emit($event)">
-		<span class="pr-u-mask">{{ intl.delete }}</span>
+		<span class="pr-u-mask">{{ intl().delete }}</span>
 	</button>
 }

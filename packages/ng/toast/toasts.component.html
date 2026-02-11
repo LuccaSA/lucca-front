@@ -24,7 +24,7 @@
 				[style.animation-duration]="!isOnlyDismissibleManually(toast) && toast.duration > 0 ? toast.duration + 'ms' : null"
 			>
 				<span class="lucca-icon icon-signClose" aria-hidden="true"></span>
-				<span class="pr-u-mask">{{ intl.close }}</span>
+				<span class="pr-u-mask">{{ intl().close }}</span>
 			</button>
 		</div>
 	}

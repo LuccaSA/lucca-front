@@ -110,11 +110,11 @@ export const Basic: StoryObj = {};
 // Same as for the multi-select
 async function checkValues(input: HTMLElement, values: string[]) {
 	if (values.length === 0) {
-		await expect(input.parentElement.getElementsByTagName('lu-numeric-badge').length).toBe(0);
+		await expect(input.parentElement?.getElementsByTagName('lu-numeric-badge').length).toBe(0);
 	}
 	// If it's a counter displayer
-	if (input.parentElement.getElementsByTagName('lu-numeric-badge').length > 0) {
-		const counter = input.parentElement.getElementsByTagName('lu-numeric-badge')[0];
+	if (input.parentElement?.getElementsByTagName('lu-numeric-badge').length > 0) {
+		const counter = input.parentElement?.getElementsByTagName('lu-numeric-badge')[0];
 		await expect(counter).toHaveTextContent(values.length.toString());
 	} else {
 		for (const value of values) {
@@ -128,7 +128,7 @@ export const BasicTEST = createTestStory(Basic, async ({ canvasElement, step }) 
 	const input = within(canvasElement).getByRole('combobox');
 	const buttons = within(canvasElement).queryAllByRole('button');
 	// Context
-	const isBadgeDisplayer = input.parentElement.getElementsByTagName('lu-simple-select-default-option').length > 0;
+	const isBadgeDisplayer = input.parentElement?.getElementsByTagName('lu-simple-select-default-option').length > 0;
 	if (buttons.length > 0) {
 		const clearButton = buttons.find((button) => button.className.includes('multipleSelect-clear'));
 		if (clearButton) {

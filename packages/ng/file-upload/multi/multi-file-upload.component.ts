@@ -1,7 +1,7 @@
 import { ChangeDetectionStrategy, Component, ViewEncapsulation } from '@angular/core';
+import { BubbleIllustrationComponent } from '@lucca-front/ng/bubble-illustration';
 import { IntlParamsPipe } from '@lucca-front/ng/core';
 import { InputDirective } from '@lucca-front/ng/form-field';
-import { LuSafeExternalSvgPipe } from '@lucca-front/ng/safe-content';
 import { LuTooltipModule } from '@lucca-front/ng/tooltip';
 import { BaseFileUploadComponent } from '../base-file-upload/base-file-upload.component';
 
@@ -13,7 +13,7 @@ import { BaseFileUploadComponent } from '../base-file-upload/base-file-upload.co
 	host: {
 		'[class.mod-structure]': 'structure()',
 	},
-	imports: [LuSafeExternalSvgPipe, InputDirective, LuTooltipModule, IntlParamsPipe],
+	imports: [InputDirective, LuTooltipModule, IntlParamsPipe, BubbleIllustrationComponent],
 	changeDetection: ChangeDetectionStrategy.OnPush,
 })
 export class MultiFileUploadComponent extends BaseFileUploadComponent {}

@@ -65,9 +65,12 @@ export class LuTooltipTriggerDirective implements OnDestroy, AfterContentChecked
 
 	#previousTickContent: string = this.#host.nativeElement.innerText;
 
-	readonly luTooltip = input<string | SafeHtml>();
+	readonly luTooltipInput = input<string | SafeHtml>('', { alias: 'luTooltip' });
+
+	readonly luTooltip = linkedSignal<string | SafeHtml>(() => this.luTooltipInput());
 
 	readonly luTooltipEnterDelay = input(300, { transform: numberAttribute });
+
 	readonly luTooltipLeaveDelay = input(100, { transform: numberAttribute });
 
 	readonly luTooltipDisabled = input(false, { transform: booleanAttribute });
@@ -76,7 +79,9 @@ export class LuTooltipTriggerDirective implements OnDestroy, AfterContentChecked
 
 	readonly luTooltipPosition = input<LuPopoverPosition>('above');
 
-	readonly luTooltipWhenEllipsis = input(false, { transform: booleanAttribute });
+	readonly luTooltipWhenEllipsisInput = input(false, { alias: 'luTooltipWhenEllipsis', transform: booleanAttribute });
+
+	readonly luTooltipWhenEllipsis = linkedSignal(() => this.luTooltipWhenEllipsisInput());
 
 	readonly luTooltipAnchor = input<FlexibleConnectedPositionStrategyOrigin>(this.#host);
 
@@ -123,7 +128,7 @@ export class LuTooltipTriggerDirective implements OnDestroy, AfterContentChecked
 			// We only filter open events because even if it's disabled while opened,
 			// we want the tooltip to be able to close itself no matter what
 			if (this.luTooltipDisabled()) {
-				return previous.value;
+				return previous?.value;
 			}
 
 			// If not disabled, let's check for ellipsis if needed

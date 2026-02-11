@@ -1,4 +1,4 @@
-import { Component } from '@angular/core';
+import { ChangeDetectionStrategy, Component } from '@angular/core';
 import { ChipComponent } from '@lucca-front/ng/chip';
 import { IconComponent } from '@lucca-front/ng/icon';
 import { Meta, StoryObj } from '@storybook/angular';
@@ -7,6 +7,7 @@ import { Meta, StoryObj } from '@storybook/angular';
 	selector: 'chip-stories',
 	templateUrl: './chip.stories.html',
 	imports: [ChipComponent, IconComponent],
+	changeDetection: ChangeDetectionStrategy.OnPush,
 })
 class ChipStory {}
 

@@ -1,0 +1,4 @@
+@mixin vars {
+	--components-presentation-description-child-display: block;
+	--components-presentation-description-term-display: var(--components-presentation-description-child-display);
+}

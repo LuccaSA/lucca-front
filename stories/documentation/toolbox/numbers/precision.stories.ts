@@ -1,4 +1,4 @@
-import { Component, input } from '@angular/core';
+import { ChangeDetectionStrategy, Component, input } from '@angular/core';
 import { LuNumberPipe } from '@lucca-front/ng/number';
 import { Meta, StoryObj } from '@storybook/angular';
 
@@ -6,6 +6,7 @@ import { Meta, StoryObj } from '@storybook/angular';
 	selector: 'precision-stories',
 	imports: [LuNumberPipe],
 	template: `<code [innerHTML]="value() | luNumber: precision()"></code>`,
+	changeDetection: ChangeDetectionStrategy.OnPush,
 })
 class PrecisionStory {
 	value = input<number>();

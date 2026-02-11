@@ -2,7 +2,7 @@
 
 @if (!filterPillMode) {
 	@if (hasValue() && clearable && (disabled$ | async) === false) {
-		<lu-clear class="multipleSelect-clear" (onClear)="clearValue($event)">{{ intl.clear }}</lu-clear>
+		<lu-clear class="multipleSelect-clear" (onClear)="clearValue($event)">{{ intl().clear }}</lu-clear>
 	}
 
 	<span aria-hidden="true" class="multipleSelect-arrow lucca-icon icon-arrowChevronBottom"></span>
@@ -30,3 +30,20 @@
 		}
 	}
 </ng-container>
+@if (!ignorePresentation()) {
+	<ng-container *luPresentationDisplay>
+		@for (v of value; track $index) {
+			@if ($last) {
+				<ng-container *ngTemplateOutlet="noComma; context: { $implicit: v }" />
+			} @else {
+				<ng-container *ngTemplateOutlet="comma; context: { $implicit: v }" />
+			}
+		}
+	</ng-container>
+}
+
+<ng-template #comma let-value><ng-container *luOptionOutlet="displayerTpl(); value: value" />, </ng-template>
+
+<ng-template #noComma let-value>
+	<ng-container *luOptionOutlet="displayerTpl(); value: value" />
+</ng-template>

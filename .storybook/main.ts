@@ -2,6 +2,8 @@ import type { StorybookConfig } from '@storybook/angular';
 
 import { dirname } from 'path';
 
+import MiniCssExtractPlugin from 'mini-css-extract-plugin';
+
 import { fileURLToPath } from 'url';
 
 /**
@@ -20,5 +22,13 @@ const config: StorybookConfig = {
 	},
 	logLevel: process.env['CI'] ? 'error' : 'info',
 	staticDirs: ['./public'],
+	webpackFinal: async (config) => {
+		config.plugins?.push(
+			new MiniCssExtractPlugin({
+				filename: 'main.css',
+			}),
+		);
+		return config;
+	},
 };
 export default config;

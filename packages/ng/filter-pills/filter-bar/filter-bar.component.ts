@@ -1,8 +1,8 @@
 import { ConnectionPositionPair } from '@angular/cdk/overlay';
 import { NgTemplateOutlet } from '@angular/common';
-import { ChangeDetectionStrategy, Component, computed, contentChildren, signal, TemplateRef, ViewEncapsulation } from '@angular/core';
+import { ChangeDetectionStrategy, Component, computed, contentChildren, input, signal, TemplateRef, ViewEncapsulation } from '@angular/core';
 import { FormsModule } from '@angular/forms';
-import { getIntl } from '@lucca-front/ng/core';
+import { intlInputOptions } from '@lucca-front/ng/core';
 import { DividerComponent } from '@lucca-front/ng/divider';
 import { IconComponent } from '@lucca-front/ng/icon';
 import { PopoverDirective } from '@lucca-front/ng/popover2';
@@ -23,7 +23,7 @@ import { LU_FILTER_PILLS_TRANSLATIONS } from '../filter-pills.translate';
 	},
 })
 export class FilterBarComponent {
-	intl = getIntl(LU_FILTER_PILLS_TRANSLATIONS);
+	intl = input(...intlInputOptions(LU_FILTER_PILLS_TRANSLATIONS));
 
 	addonBefore = signal<TemplateRef<unknown> | null>(null);
 	addonAfter = signal<TemplateRef<unknown> | null>(null);

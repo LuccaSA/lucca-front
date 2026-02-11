@@ -1,4 +1,4 @@
-import { Component } from '@angular/core';
+import { ChangeDetectionStrategy, Component } from '@angular/core';
 import { PaginationComponent } from '@lucca-front/ng/pagination';
 import { Meta, StoryObj } from '@storybook/angular';
 
@@ -6,6 +6,7 @@ import { Meta, StoryObj } from '@storybook/angular';
 	selector: 'pagination-stories',
 	templateUrl: './pagination.stories.html',
 	imports: [PaginationComponent],
+	changeDetection: ChangeDetectionStrategy.OnPush,
 })
 class PaginationStory {}
 

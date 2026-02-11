@@ -1,5 +1,5 @@
-import { ChangeDetectionStrategy, Component, forwardRef, HostBinding } from '@angular/core';
-import { getIntl, ILuTree } from '@lucca-front/ng/core';
+import { ChangeDetectionStrategy, Component, forwardRef, HostBinding, input } from '@angular/core';
+import { intlInputOptions, ILuTree } from '@lucca-front/ng/core';
 import { Observable, Subject } from 'rxjs';
 import { tap } from 'rxjs/operators';
 import { ALuTreeOptionOperator } from '../../operator/index';
@@ -39,7 +39,7 @@ export class LuTreeOptionSelectAllComponent<T> extends ALuTreeOptionOperator<T> 
 		this.outOptions$ = in$.pipe(tap((options) => (this.flatOptions = this.flattenTree(options))));
 	}
 
-	public intl = getIntl(LU_OPTION_SELECT_ALL_TRANSLATIONS);
+	public intl = input(...intlInputOptions(LU_OPTION_SELECT_ALL_TRANSLATIONS));
 
 	selectAll() {
 		if (!this.flatOptions) {

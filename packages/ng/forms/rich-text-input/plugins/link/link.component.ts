@@ -1,8 +1,8 @@
-import { AfterViewInit, ChangeDetectionStrategy, Component, ElementRef, forwardRef, inject, OnDestroy, signal, TemplateRef, viewChild, ViewContainerRef } from '@angular/core';
+import { AfterViewInit, ChangeDetectionStrategy, Component, ElementRef, forwardRef, inject, input, OnDestroy, signal, TemplateRef, viewChild, ViewContainerRef } from '@angular/core';
 import { AutoLinkNode, createLinkMatcherWithRegExp, LinkNode, registerAutoLink } from '@lexical/link';
 import { $getNearestNodeOfType, mergeRegister } from '@lexical/utils';
 import { ButtonComponent } from '@lucca-front/ng/button';
-import { getIntl } from '@lucca-front/ng/core';
+import { intlInputOptions } from '@lucca-front/ng/core';
 import { LuDialogService, provideLuDialog } from '@lucca-front/ng/dialog';
 import { IconComponent } from '@lucca-front/ng/icon';
 import { LinkComponent as LuLinkComponent } from '@lucca-front/ng/link';
@@ -49,7 +49,7 @@ export class LinkComponent implements OnDestroy, AfterViewInit, RichTextPluginCo
 	readonly isDisabled = signal(false);
 
 	#editor?: LexicalEditor;
-	intl = getIntl(LU_RICH_TEXT_INPUT_TRANSLATIONS);
+	intl = input(...intlInputOptions(LU_RICH_TEXT_INPUT_TRANSLATIONS));
 
 	#registeredCommands: () => void = () => {};
 

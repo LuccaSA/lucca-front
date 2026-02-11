@@ -5,6 +5,7 @@
 	<label>
 		<span class="pr-u-mask">Prefix</span>
 		<lu-simple-select
+			ignorePresentation
 			[options]="prefixesDisplay()"
 			[ngModel]="prefixEntry()"
 			(ngModelChange)="updatePrefix($event)"
@@ -51,3 +52,7 @@
 		</div>
 	</div>
 </fieldset>
+
+<ng-container *luPresentationDisplayDefault>
+	<a class="presentation-description-definition-link" href="tel:{{ currentValue() }}">{{ currentValue() }}</a>
+</ng-container>

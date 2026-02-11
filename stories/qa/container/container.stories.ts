@@ -1,4 +1,4 @@
-import { Component } from '@angular/core';
+import { ChangeDetectionStrategy, Component } from '@angular/core';
 import { ContainerComponent } from '@lucca-front/ng/container';
 import { Meta, StoryObj } from '@storybook/angular';
 
@@ -23,6 +23,7 @@ import { Meta, StoryObj } from '@storybook/angular';
 			}
 		`,
 	],
+	changeDetection: ChangeDetectionStrategy.OnPush,
 })
 class ContainerStory {}
 
@@ -33,7 +34,7 @@ export default {
 
 const template = () => ({});
 
-export const basic: StoryObj<ContainerStory> = {
+export const Basic: StoryObj<ContainerStory> = {
 	args: {},
 	render: template,
 };

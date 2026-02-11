@@ -1,4 +1,4 @@
-import { Component } from '@angular/core';
+import { ChangeDetectionStrategy, Component } from '@angular/core';
 import { DividerComponent } from '@lucca-front/ng/divider';
 import { Meta, StoryObj } from '@storybook/angular';
 
@@ -6,6 +6,7 @@ import { Meta, StoryObj } from '@storybook/angular';
 	selector: 'divider-stories',
 	templateUrl: './divider.stories.html',
 	imports: [DividerComponent],
+	changeDetection: ChangeDetectionStrategy.OnPush,
 })
 class DividerStory {}
 

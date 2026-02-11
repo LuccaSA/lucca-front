@@ -1,4 +1,4 @@
-import { Component } from '@angular/core';
+import { ChangeDetectionStrategy, Component } from '@angular/core';
 import { PLGPushComponent } from '@lucca-front/ng/plg-push';
 import { Meta, StoryObj } from '@storybook/angular';
 
@@ -6,6 +6,7 @@ import { Meta, StoryObj } from '@storybook/angular';
 	selector: 'plg-push-stories',
 	templateUrl: './plg-push.stories.html',
 	imports: [PLGPushComponent],
+	changeDetection: ChangeDetectionStrategy.OnPush,
 })
 class PLGPushStory {}
 

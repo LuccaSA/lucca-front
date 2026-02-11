@@ -18,12 +18,7 @@
 			inset-inline-start: var(--components-emptyState-container-left);
 			padding: 0;
 			inline-size: 100%;
-			position: sticky;
-
-			.container & {
-				--components-emptyState-container-maxWidth: none;
-				--components-emptyState-container-left: auto;
-			}
+			position: var(--components-emptyState-container-position);
 		}
 
 		.emptyState-content {

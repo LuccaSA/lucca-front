@@ -1,9 +1,10 @@
 import { AsyncPipe, DatePipe, NgTemplateOutlet } from '@angular/common';
-import { ChangeDetectionStrategy, Component, inject } from '@angular/core';
+import { ChangeDetectionStrategy, Component, inject, input, Signal } from '@angular/core';
 import { toObservable } from '@angular/core/rxjs-interop';
-import { getIntl, IntlParamsPipe } from '@lucca-front/ng/core';
+import { intlInputOptions, IntlParamsPipe } from '@lucca-front/ng/core';
 import { IconComponent } from '@lucca-front/ng/icon';
 import { POPOVER_CONFIG } from '@lucca-front/ng/popover2';
+import { ILuUser } from '@lucca-front/ng/user';
 import { BehaviorSubject, catchError, combineLatest, Observable, of, switchMap, tap } from 'rxjs';
 import { map, shareReplay } from 'rxjs/operators';
 import { LU_POPUP_EMPLOYEE_TRANSLATIONS } from '../../popup-employee.translate';
@@ -21,13 +22,13 @@ import { LeaveEndsDisplayPipe } from '../pipe/leave-ends-display.pipe';
 	changeDetection: ChangeDetectionStrategy.OnPush,
 })
 export class LuUserPopoverComponent {
-	luUser = inject(LU_USER_POPOVER_USER);
+	luUser = inject<Signal<ILuUser>>(LU_USER_POPOVER_USER);
 
 	#popoverRef = inject(POPOVER_CONFIG).ref;
 
 	#service = inject(LuUserPopoverStore);
 
-	intl = getIntl(LU_POPUP_EMPLOYEE_TRANSLATIONS);
+	intl = input(...intlInputOptions(LU_POPUP_EMPLOYEE_TRANSLATIONS));
 
 	#errorImage$ = new BehaviorSubject<boolean>(false);
 
