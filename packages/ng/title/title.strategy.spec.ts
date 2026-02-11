@@ -10,7 +10,7 @@ import { TitleSeparator } from './title.model';
 import { LuTitleStrategy, provideLuTitleStrategy } from './title.strategy';
 
 class TranslateService implements ILuTitleTranslateService {
-	translate(key: string, args: Record<string, unknown> = null): string {
+	translate(key: string, args: Record<string, unknown> | null = null): string {
 		if (args !== null) {
 			Object.entries(args).forEach(([argKey, value]) => {
 				key = key.replace(`{{${argKey}}}`, value as string);
