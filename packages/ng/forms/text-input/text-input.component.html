@@ -83,7 +83,11 @@
 			"
 		/>
 	}
-	{{ ngControl.value }}
+	@if (ngControl.value) {
+		{{ ngControl.value }}
+	} @else {
+		<div aria-hidden="true" data-content-before="–"></div>
+	}
 	@if (suffix()) {
 		<ng-container
 			*ngTemplateOutlet="

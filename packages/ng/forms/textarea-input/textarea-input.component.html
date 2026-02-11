@@ -17,7 +17,11 @@
 </div>
 
 <ng-container *luPresentationDisplayDefault>
-	<lu-read-more>
-		{{ ngControl.value }}
-	</lu-read-more>
+	@if (ngControl.value) {
+		<lu-read-more>
+			{{ ngControl.value }}
+		</lu-read-more>
+	} @else {
+		<div aria-hidden="true" data-content-before="–"></div>
+	}
 </ng-container>
