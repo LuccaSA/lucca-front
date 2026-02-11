@@ -34,3 +34,8 @@
 		</div>
 	</ng-template>
 </lu-simple-select>
+
+<ng-container *luPresentationDisplayDefault>
+	@let color = currentColorPresentation();
+	<lu-color [borderColor]="color.borderColor" [value]="color.background">{{ color.name }}</lu-color>
+</ng-container>
