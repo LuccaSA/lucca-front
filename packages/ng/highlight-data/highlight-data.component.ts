@@ -96,7 +96,7 @@ export class HighlightDataComponent {
 	}
 
 	readonly illustrationSrc = computed(() =>
-		this.illustration().includes('/') ? this.illustration() : `https://cdn.lucca.fr/transverse/prisme/visuals/highlight-data/generic/${this.illustration()}.svg`,
+		this.illustration()?.includes('/') ? this.illustration() : `https://cdn.lucca.fr/transverse/prisme/visuals/highlight-data/generic/${this.illustration()}.svg`,
 	);
 
 	readonly bubbleSrc = computed(() => `https://cdn.lucca.fr/transverse/prisme/visuals/highlight-data/${this.palette()}/bubbles-${this.bubbleTheme()}-${this.bubble()}.svg`);
