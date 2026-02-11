@@ -77,10 +77,6 @@
 	--components-dialog-insideContent-background: var(--pr-t-elevation-surface-default);
 }
 
-@mixin resizeAnimated {
-	transition: inline-size var(--commons-animations-durations-fast);
-}
-
 @mixin withCloseButton {
 	.dialog-inside-header-button.button {
 		@include button.ghost;

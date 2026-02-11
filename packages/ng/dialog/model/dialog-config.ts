@@ -88,11 +88,6 @@ type BaseLuDialogConfig<C, TData = LuDialogData<C>> = {
 	 * Classes to add to the panel
 	 */
 	panelClasses?: string[];
-
-	/**
-	 * Should we animate the width of the dialog when resizing?
-	 */
-	resizeAnimated?: boolean;
 };
 
 export type LuDialogConfig<T, TData = LuDialogData<T>> = [TData] extends [never] ? Omit<BaseLuDialogConfig<T, TData>, 'data'> : BaseLuDialogConfig<T, TData>;

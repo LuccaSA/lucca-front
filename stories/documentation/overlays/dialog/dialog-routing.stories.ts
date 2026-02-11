@@ -214,7 +214,6 @@ const dialogRoute = dialogRouteFactory(TestDialogComponent, {
 	dialogConfig: {
 		modal: true,
 		size: 'M',
-		resizeAnimated: true,
 	},
 	dialogRouteConfig: {
 		onClosed: (onClosedData) => {

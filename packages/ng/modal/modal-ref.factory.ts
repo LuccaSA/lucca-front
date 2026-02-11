@@ -52,10 +52,6 @@ class LuModalRef<T extends ILuModalContent = ILuModalContent, D = unknown, R = u
 			classes.push(this.modalClasses.overlayPane);
 		}
 
-		if (this._config.resizeAnimated) {
-			classes.push('mod-resizeAnimated');
-		}
-
 		return classes;
 	}
 }

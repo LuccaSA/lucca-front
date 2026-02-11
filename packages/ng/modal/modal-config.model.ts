@@ -20,6 +20,4 @@ type LuModalModeWithPosition = { mode?: 'modal'; position: undefined | 'center' 
 export type LuModalConfig = ILuPopupConfig &
 	LuModalModeWithPosition & {
 		changeDetection: ChangeDetectionStrategy;
-	} & {
-		resizeAnimated?: boolean;
 	};
