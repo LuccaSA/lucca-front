@@ -15,7 +15,7 @@
 	box-shadow: var(--pr-t-elevation-shadow-overlay);
 	margin: auto;
 	flex-direction: column;
-	display: flex !important;
+	display: flex;
 	position: fixed !important;
 	max-inline-size: var(--components-dialog-maxWidth) !important;
 	max-block-size: var(--components-dialog-maxHeight) !important;

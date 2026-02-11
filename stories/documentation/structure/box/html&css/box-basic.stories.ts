@@ -8,9 +8,7 @@ export default {
 	title: 'Documentation/Structure/Box/HTML&CSS/Basic',
 	argTypes: {
 		neutral: {
-			control: {
-				type: 'boolean',
-			},
+			description: 'Applique un fond gris.',
 		},
 	},
 } as Meta;

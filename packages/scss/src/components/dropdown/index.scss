@@ -13,14 +13,14 @@
 .lu-dropdown-options-item-action,
 .dropdown-list-option-action {
 	@layer mods {
-		&[disabled],
-		&.is-disabled {
-			@include disabled;
-		}
-
 		&.mod-critical,
 		&.mod-delete {
 			@include critical;
+		}
+
+		&[disabled],
+		&.is-disabled {
+			@include disabled;
 		}
 	}
 }

@@ -40,7 +40,7 @@
 @mixin selected {
 	.simpleSelect-field-input {
 		&::placeholder {
-			color: transparent;
+			opacity: 0;
 		}
 	}
 }
@@ -48,7 +48,7 @@
 @mixin selectedSearchFilled {
 	.simpleSelect-field-input {
 		&::placeholder {
-			color: transparent;
+			opacity: 0;
 		}
 	}
 
