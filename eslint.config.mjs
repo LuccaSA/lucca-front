@@ -9,7 +9,7 @@ import typescript from 'typescript-eslint';
 import { defineConfig } from 'eslint/config';
 import tsParser from '@typescript-eslint/parser';
 
-const STRICTIFIED_NG_ENTRIES = ['packages/ng/tree-select/**/*.ts', 'packages/ng/user/**/*.ts'];
+const STRICTIFIED_NG_ENTRIES = ['packages/ng/tree-select/**/*.ts', 'packages/ng/user/**/*.ts', 'packages/ng/user-popover/**/*.ts'];
 
 export default defineConfig(
 	{
