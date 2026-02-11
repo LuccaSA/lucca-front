@@ -93,6 +93,12 @@ export class TagNode extends DecoratorNode<string> {
 
 	override createDOM(_config: EditorConfig, editor: LexicalEditor): HTMLElement {
 		if (TagNode.#viewContainerRef) {
+			if (!editor.isEditable()) {
+				this.#componentRef?.destroy();
+				const span = document.createElement('span');
+				span.textContent = this.#tagDescription ?? this.#tagKey;
+				return span;
+			}
 			// Create the component
 			this.#componentRef = TagNode.#viewContainerRef.createComponent(ChipComponent);
 
@@ -103,7 +109,6 @@ export class TagNode extends DecoratorNode<string> {
 
 			// Get the component's DOM element
 			const componentElement = this.#componentRef.location.nativeElement as HTMLElement;
-
 			const textNode = document.createTextNode(this.#tagDescription ?? this.#tagKey);
 			componentElement.insertBefore(textNode, componentElement.firstChild);
 			componentElement.classList.add('mod-S');
@@ -123,7 +128,7 @@ export class TagNode extends DecoratorNode<string> {
 	}
 
 	override updateDOM(prevNode: TagNode, _dom: HTMLElement, _config: EditorConfig): boolean {
-		return this.#tagDescription !== prevNode.#tagDescription || this.#tagKey !== prevNode.#tagKey || this.#disabled !== prevNode.#disabled;
+		return this.#tagDescription !== prevNode.#tagDescription || this.#tagKey !== prevNode.#tagKey || this.#disabled !== prevNode.#disabled || this.#componentRef !== prevNode.#componentRef;
 	}
 
 	override remove(preserveEmptyParent?: boolean): void {

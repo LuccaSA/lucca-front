@@ -44,6 +44,13 @@ export class DurationPickerComponent extends BasePickerComponent {
 	protected readonly minutes = computed(() => getMinutesPartFromDuration(this.value()));
 	protected readonly shouldHideValue = computed(() => this.hideZeroValue() && this.hours() === 0 && this.minutes() === 0);
 
+	protected readonly maxDigits = computed(() => {
+		const maxISO = isoDurationToSeconds(this.max());
+		const maxHour = maxISO / 3600;
+		const maxHourDigits = maxHour.toString().length;
+		return maxHourDigits;
+	});
+
 	protected readonly pickerClasses = computed(() => {
 		return {
 			timePicker: true,
@@ -157,6 +164,9 @@ export class DurationPickerComponent extends BasePickerComponent {
 	private setTime(protoEvent: DurationChangeEvent): void {
 		let hoursPart = getHoursPartFromDuration(protoEvent.value);
 		const minutesPart = getMinutesPartFromDuration(protoEvent.value);
+
+		this.hoursPart().isValueSet.set(true);
+		this.minutesPart().isValueSet.set(true);
 
 		if (hoursPart < 0) {
 			if (hoursPart === -1) {

@@ -1,67 +1,96 @@
-@if (layout() === "fieldset") {
-	<fieldset class="form-fieldset" [class.mod-inline]="inline()" [class.mod-S]="size() === 'S'">
-		<legend
-			luFormLabel
-			[tooltip]="tooltip()"
-			[tag]="tag()"
-			[required]="isInputRequired()"
-			[class.pr-u-mask]="hiddenLabel()"
-			[attr.aria-hidden]="hiddenLabel()"
-		>
-			<ng-container *luPortal="label()" />
-		</legend>
-		<ng-container *ngTemplateOutlet="projectionTpl" />
-		@if (inlineMessage() || (invalidStatus() ? errorInlineMessage() : false)) {
-			<lu-inline-message
-				id="{{ id() }}-message"
-				[label]="invalidStatus() && errorInlineMessage() ? errorInlineMessage() : inlineMessage()"
-				[state]="invalidStatus() ? 'error' : inlineMessageState()"
-			/>
-		}
-	</fieldset>
+@if (presentationMode()) {
+	<dl class="presentation-description">
+		<ng-container *ngTemplateOutlet="inputLayoutTpl" />
+	</dl>
 } @else {
-	<label
-		luFormLabel
-		[counterStatus]="contentLength()"
-		[counterMax]="counter()"
-		[error]="invalidStatus()"
-		[tag]="tag()"
-		[tooltip]="tooltip()"
-		[required]="isInputRequired()"
-		[counterId]="`${id()}-counter`"
-		[attr.id]="`${id()}-label`"
-		[attr.for]="id()"
-		[attr.role]="rolePresentationLabel() ? 'presentation' : null"
-		[class.pr-u-mask]="hiddenLabel()"
-		[class.inputFramed-header-label]="framed"
-		[counterVisibleOnlyJustBeforeError]="counterVisibleOnlyJustBeforeError()"
-	>
-		<span><ng-container *luPortal="label()" /></span>
-	</label>
-	@if (AI()) {
-		<div class="form-field-contentOptional">
-			<ng-container *ngTemplateOutlet="projectionTpl" />
-			<lu-icon
-				class="pr-u-focusVisible pr-u-borderRadiusSmall"
-				[luTooltip]="iconAItooltip()"
-				size="S"
-				AI
-				icon="weatherStars"
-				[alt]="iconAIalt()"
-			/>
-		</div>
-	} @else {
-		<ng-container *ngTemplateOutlet="projectionTpl" />
-	}
-	@if (inlineMessage() || (invalidStatus() ? errorInlineMessage() : false)) {
-		<lu-inline-message
-			id="{{ id() }}-message"
-			[label]="invalidStatus() && errorInlineMessage() ? errorInlineMessage() : inlineMessage()"
-			[state]="invalidStatus() ? 'error' : inlineMessageState()"
-		/>
-	}
+	<ng-container *ngTemplateOutlet="inputLayoutTpl" />
 }
 
+<ng-template #inputLayoutTpl>
+	@if (layout() === "fieldset" && !presentationMode()) {
+		<fieldset class="form-fieldset" [class.mod-inline]="inline()" [class.mod-S]="size() === 'S'">
+			<legend
+				luFormLabel
+				[tooltip]="tooltip()"
+				[tag]="tag()"
+				[required]="isInputRequired()"
+				[class.pr-u-mask]="hiddenLabel()"
+				[attr.aria-hidden]="hiddenLabel()"
+			>
+				<ng-container *luPortal="label()" />
+			</legend>
+			<ng-container *ngTemplateOutlet="projectionTpl" />
+			@if (inlineMessage() || (invalidStatus() ? errorInlineMessage() : false)) {
+				<lu-inline-message
+					id="{{ id() }}-message"
+					[label]="invalidStatus() && errorInlineMessage() ? errorInlineMessage() : inlineMessage()"
+					[state]="invalidStatus() ? 'error' : inlineMessageState()"
+				/>
+			}
+		</fieldset>
+	} @else {
+		@if (presentationMode()) {
+			<dt class="presentation-description-term">
+				<ng-container *luPortal="label()" />
+				@if (tooltip()) {
+					<lu-icon class="formLabel-info" icon="signHelp" [alt]="'?'" [luTooltip]="tooltip()" />
+				}
+				@if (tag()) {
+					<span class="formLabel-tag tag">{{ tag() }}</span>
+				}
+			</dt>
+
+			<ng-container *ngTemplateOutlet="projectionTpl" />
+		} @else {
+			<label
+				luFormLabel
+				[counterStatus]="contentLength()"
+				[counterMax]="counter()"
+				[error]="invalidStatus()"
+				[tag]="tag()"
+				[tooltip]="tooltip()"
+				[required]="isInputRequired()"
+				[counterId]="`${id()}-counter`"
+				[attr.id]="`${id()}-label`"
+				[attr.for]="id()"
+				[attr.role]="rolePresentationLabel() ? 'presentation' : null"
+				[class.pr-u-mask]="hiddenLabel()"
+				[class.inputFramed-header-label]="framed"
+			>
+				<span><ng-container *luPortal="label()" /></span>
+			</label>
+			@if (AI()) {
+				<div class="form-field-contentOptional">
+					<ng-container *ngTemplateOutlet="projectionTpl" />
+					<lu-icon
+						class="pr-u-focusVisible pr-u-borderRadiusSmall"
+						[luTooltip]="iconAItooltip()"
+						size="S"
+						AI
+						icon="weatherStars"
+						[alt]="iconAIalt()"
+					/>
+				</div>
+			} @else {
+				<ng-container *ngTemplateOutlet="projectionTpl" />
+			}
+			@if (inlineMessage() || (invalidStatus() ? errorInlineMessage() : false)) {
+				<lu-inline-message
+					id="{{ id() }}-message"
+					[label]="invalidStatus() && errorInlineMessage() ? errorInlineMessage() : inlineMessage()"
+					[state]="invalidStatus() ? 'error' : inlineMessageState()"
+				/>
+			}
+		}
+	}
+</ng-template>
+
 <ng-template #projectionTpl>
-	<ng-content />
+	@if (presentationMode() && presentationDisplayTpl()) {
+		<dd class="presentation-description-definition">
+			<ng-container *ngTemplateOutlet="presentationDisplayTpl()" />
+		</dd>
+	} @else {
+		<ng-content />
+	}
 </ng-template>

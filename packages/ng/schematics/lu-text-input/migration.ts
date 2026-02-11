@@ -1,11 +1,19 @@
 import { Tree } from '@angular-devkit/schematics';
-import  { TmplAstDeferredBlock,TmplAstElement,TmplAstForLoopBlock,TmplAstIfBlock,TmplAstSwitchBlock } from '@angular/compiler';
-import { SourceFile } from 'typescript';
-import { extractNgTemplatesIncludingHtml } from '../lib/angular-template';
-import { HtmlAst,HtmlAstVisitor } from '../lib/html-ast.js';
-import { currentSchematicContext } from '../lib/lf-schematic-context';
-import { getInputValue,InputValue,inputValueToHTML,insertAngularImportIfNeeded,insertTSImportIfNeeded } from '../lib/angular-component-ast';
+import { TmplAstDeferredBlock, TmplAstElement, TmplAstForLoopBlock, TmplAstIfBlock, TmplAstSwitchBlock } from '@angular/compiler';
 import { applyToUpdateRecorder } from '@schematics/angular/utility/change';
+import { SourceFile } from 'typescript';
+import {
+	currentSchematicContext,
+	extractNgTemplatesIncludingHtml,
+	getInputValue,
+	HtmlAst,
+	HtmlAstVisitor,
+	InputValue,
+	inputValueToHTML,
+	insertAngularImportIfNeeded,
+	insertTSImportIfNeeded,
+	isInterestingNode
+} from '../lib';
 
 
 interface TextField {
@@ -131,12 +139,6 @@ function findTextfields(sourceFile: SourceFile, basePath: string, tree: Tree): T
 function getNodeClasses(node: TmplAstElement) {
 	return (node.attributes.find(attr => attr.name === 'class')?.value || "").split(" ");
 }
-
-
-function isInterestingNode(node: unknown): node is TmplAstElement {
-	return node instanceof currentSchematicContext.angularCompiler.TmplAstElement;
-}
-
 
 function isControlFlowNode(node: unknown): node is TmplAstIfBlock | TmplAstForLoopBlock | TmplAstSwitchBlock | TmplAstDeferredBlock {
 	return node instanceof currentSchematicContext.angularCompiler.TmplAstIfBlock ||

@@ -28,6 +28,7 @@
 			[displayArrows]="displayArrows()"
 			(touched)="onTouched?.()"
 			[disabled]="disabled() || !minutesIncrement()"
+			showZero
 			(valueChange)="minutesInputHandler($event)"
 			(prevRequest)="focusPart('hours')"
 			(nextRequest)="focusPart('meridiem')"

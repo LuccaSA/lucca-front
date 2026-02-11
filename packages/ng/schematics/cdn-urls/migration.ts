@@ -1,6 +1,4 @@
-import { updateContent } from '../lib/file-update.js';
-import { HtmlAst } from '../lib/html-ast.js';
-import { currentSchematicContext } from '../lib/lf-schematic-context';
+import { HtmlAst, currentSchematicContext, updateContent } from '../lib';
 
 const REPLACE_MAP: Record<string, string> = {
 	'https://cdn.lucca.fr/development': 'https://cdn.lucca.fr/archives/development',

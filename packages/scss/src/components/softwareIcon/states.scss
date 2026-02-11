@@ -1,0 +1,8 @@
+@mixin disabled {
+	--components-softwareIcon-disabled-100: var(--palettes-neutral-100);
+	--components-softwareIcon-disabled-200: var(--palettes-neutral-200);
+	--components-softwareIcon-disabled-300: var(--palettes-neutral-300);
+	--components-softwareIcon-disabled-400: var(--palettes-neutral-400);
+	--components-softwareIcon-disabled-500: var(--palettes-neutral-500);
+	--components-softwareIcon-disabled-600: var(--palettes-neutral-600);
+}
