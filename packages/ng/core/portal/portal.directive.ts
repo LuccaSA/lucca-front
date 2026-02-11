@@ -1,4 +1,5 @@
 import { ComponentRef, Directive, effect, EmbeddedViewRef, inject, Injector, input, OnDestroy, Renderer2, TemplateRef, untracked, ViewContainerRef } from '@angular/core';
+import { isNotNil } from '@lucca-front/ng/core';
 import { PORTAL_CONTEXT, PortalContent } from './portal-content';
 
 @Directive({
@@ -100,14 +101,16 @@ export class PortalDirective<T = unknown> implements OnDestroy {
 	 * @see https://github.com/angular/angular/pull/51887
 	 */
 	private updateEmbeddedViewContext(context: T): void {
-		if (this.embeddedViewRef) {
+		if (this.embeddedViewRef && typeof context === 'object' && !Array.isArray(context) && isNotNil(context)) {
 			const props = Object.keys(context);
 
 			for (const prop of props) {
 				delete this.embeddedViewRef.context[prop];
 			}
 
-			Object.assign(this.embeddedViewRef.context, context);
+			if (typeof this.embeddedViewRef.context === 'object' && !Array.isArray(this.embeddedViewRef.context) && isNotNil(this.embeddedViewRef.context)) {
+				Object.assign(this.embeddedViewRef.context, context);
+			}
 			this.embeddedViewRef.detectChanges();
 		}
 	}
