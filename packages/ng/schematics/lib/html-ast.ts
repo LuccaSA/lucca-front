@@ -89,7 +89,7 @@ export class HtmlAstVisitor<TNode extends TemplateNode> {
 				}
 			} else if (node instanceof currentSchematicContext.angularCompiler.TmplAstSwitchBlock) {
 				if ('groups' in node) {
-					(node.groups as unknown[]).forEach((groupNode) => {
+					(node.groups as unknown[]).forEach((groupNode) => {
 						this.visit(cb, (groupNode as { children: TemplateNode[]}).children , node);
 					});
 				}
