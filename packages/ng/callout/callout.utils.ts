@@ -12,7 +12,7 @@ export function getCalloutIcon(state: CalloutState | undefined, icon: LuccaIcon 
 		const stateMap = CalloutStateMap[state] ?? { icon };
 		return icon ?? stateMap.icon;
 	}
-	return undefined;
+	return icon;
 }
 
 /**
