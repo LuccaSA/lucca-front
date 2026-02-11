@@ -26,7 +26,7 @@ export const displayPictureFormatRecord: Record<LuDisplayFormat, LuDisplayInitia
 	[LuDisplayInitials.firstlast]: LuDisplayInitials.firstlast,
 	[LuDisplayHybrid.firstIlastFull]: LuDisplayInitials.firstlast,
 	[LuDisplayHybrid.firstFulllastI]: LuDisplayInitials.firstlast,
-};
+} as const satisfies Record<LuDisplayFormat, LuDisplayInitials>;
 
 /**
  * Displays user's picture or a placeholder with his/her initials and random bg color'
