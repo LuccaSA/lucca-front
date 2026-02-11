@@ -25,5 +25,5 @@ export function getCalloutPalette(state: CalloutState | undefined, palette: Pale
 		const stateMap = CalloutStateMap[state] ?? { palette };
 		return palette !== 'none' ? palette : stateMap.palette;
 	}
-	return 'none';
+	return palette;
 }
