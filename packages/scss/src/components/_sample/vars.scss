@@ -1,6 +1,13 @@
-// All component CSS variables are defined in this file, which contains one mixin.
-// The mixin can be empty, but not the file.
+// All component CSS variables are defined in this file, which contains twos mixins.
+// The mixins can be empty, but not the file.
 // CSS variables begin with `--components-componentName-`.
+
+@mixin properties {
+	@at-root {
+
+	}
+}
+
 
 @mixin vars {
 	--components-sample-property1: value;
