@@ -69,7 +69,7 @@ export class LuCalendarInputComponent<D> extends ALuInput<D> implements ControlV
 	override writeValue(value?: D) {
 		const date = value && this._adapter.isValid(value) ? this._adapter.clone(value) : this.startOn;
 		this.header = this._factory.forgeMonth(date);
-		super.writeValue(value as D); // FIXME: this is a workaround to allow writing undefined value, should be fixed in ALuInput
+		super.writeValue(value);
 	}
 	initDayLabels() {
 		this.labels = [...getLocaleDayNames(this._locale, FormStyle.Standalone, TranslationWidth.Abbreviated)];
