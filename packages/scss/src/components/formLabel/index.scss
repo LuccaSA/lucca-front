@@ -17,10 +17,6 @@
 
 		&.mod-counter {
 			@include counter;
-
-			&.mod-counterHidden {
-				@include counterHidden;
-			}
 		}
 
 		&.is-error {
