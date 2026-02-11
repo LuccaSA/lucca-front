@@ -165,5 +165,14 @@ describe(LuUserDisplayPipe.name, () => {
 			});
 			expect(spectator.element).toHaveText('John D., Michael S., and Dwight S.');
 		});
+
+		it(`should return the right multiple value with default separator when formatter is undefined`, () => {
+			spectator = createPipe(`{{ users | luUserDisplay:{ format: 'fL', formatter: undefined } }}`, {
+				hostProps: {
+					users,
+				},
+			});
+			expect(spectator.element).toHaveText('John D., Michael S., Dwight S.');
+		});
 	});
 });
