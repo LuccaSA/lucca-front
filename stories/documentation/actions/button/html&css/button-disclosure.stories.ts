@@ -1,4 +1,4 @@
-import { Meta, StoryFn } from '@storybook/angular';
+import { Meta, StoryObj } from '@storybook/angular';
 
 interface ButtonDisclosureStory {}
 
@@ -10,11 +10,13 @@ function getTemplate(args: ButtonDisclosureStory): string {
 	return `<button type="button" class="button mod-disclosure">Button<span aria-hidden="true" class="lucca-icon icon-arrowChevronBottom"></span></button>`;
 }
 
-const Template: StoryFn<ButtonDisclosureStory> = (args) => ({
+const Template = (args: ButtonDisclosureStory) => ({
 	props: args,
 	template: getTemplate(args),
 	styles: [],
 });
 
-export const DisclosureButton = Template.bind({});
-DisclosureButton.args = {};
+export const DisclosureButton: StoryObj<ButtonDisclosureStory> = {
+	args: {},
+	render: Template,
+};

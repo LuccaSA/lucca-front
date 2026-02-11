@@ -1,10 +1,12 @@
-import { Component } from '@angular/core';
-import { Meta, StoryFn } from '@storybook/angular';
+import { ChangeDetectionStrategy, Component } from '@angular/core';
+import { TextFlowComponent } from '@lucca-front/ng/text-flow';
+import { Meta, StoryObj } from '@storybook/angular';
 
 @Component({
-	standalone: true,
 	selector: 'text-flow-stories',
 	templateUrl: './text-flow.stories.html',
+	imports: [TextFlowComponent],
+	changeDetection: ChangeDetectionStrategy.OnPush,
 })
 class TextFlowStory {}
 
@@ -13,6 +15,9 @@ export default {
 	component: TextFlowStory,
 } as Meta;
 
-const template: StoryFn<TextFlowStory> = () => ({});
+const template = () => ({});
 
-export const basic = template.bind({});
+export const Basic: StoryObj<TextFlowStory> = {
+	args: {},
+	render: template,
+};

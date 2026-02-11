@@ -1,9 +1,16 @@
 @mixin vars {
+	--components-inputFramed-wrapper-gap: var(--pr-t-spacings-100);
 	--components-inputFramed-content-display: none;
 	--components-inputFramed-borderColor: var(--palettes-neutral-300);
 	--components-inputFramed-header-info-borderColor: var(--palettes-neutral-200);
-	--components-inputFramed-padding: var(--pr-t-spacings-150);
+	--components-inputFramed-padding: var(--pr-t-spacings-25);
+	--components-inputFramed-header-padding: var(--pr-t-spacings-75);
+	--components-inputFramed-content-padding: var(--pr-t-spacings-75);
+	--components-inputFramed-content-marginBlockStart: var(--pr-t-spacings-25);
 	--components-inputFramed-header-backgroundColor: transparent;
-	--components-inputFramed-header-info-color: inherit;
 	--components-inputFramed-header-alignItems: normal;
+	--components-inputFramed-header-label-fontWeight: var(--pr-t-font-fontWeight-regular);
+	--components-inputFramed-header-info-color: inherit;
+	--components-inputFramed-header-info-marginBlockStart: 0;
+	--components-inputFramed-header-info-paddingBlockStart: var(--pr-t-spacings-100);
 }

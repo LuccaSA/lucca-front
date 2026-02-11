@@ -1,10 +1,12 @@
-import { Component } from '@angular/core';
-import { Meta, StoryFn } from '@storybook/angular';
+import { ChangeDetectionStrategy, Component } from '@angular/core';
+import { DividerComponent } from '@lucca-front/ng/divider';
+import { Meta, StoryObj } from '@storybook/angular';
 
 @Component({
-	standalone: true,
 	selector: 'divider-stories',
 	templateUrl: './divider.stories.html',
+	imports: [DividerComponent],
+	changeDetection: ChangeDetectionStrategy.OnPush,
 })
 class DividerStory {}
 
@@ -13,6 +15,9 @@ export default {
 	component: DividerStory,
 } as Meta;
 
-const template: StoryFn<DividerStory> = () => ({});
+const template = () => ({});
 
-export const basic = template.bind({});
+export const Basic: StoryObj<DividerStory> = {
+	args: {},
+	render: template,
+};

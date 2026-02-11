@@ -1,12 +1,18 @@
-@let calloutIcon = state | luCalloutIcon: icon;
+@let calloutIcon = state() | luCalloutIcon: icon();
 
-<details class="calloutDisclosure" [class]="calloutClasses" [class.mod-iconless]="!calloutIcon" [open]="open" (toggle)="onToggle($event)">
+<details
+	class="calloutDisclosure"
+	[class]="calloutClasses()"
+	[class.mod-iconless]="!calloutIcon"
+	[open]="open()"
+	(toggle)="onToggle($event)"
+>
 	<summary class="calloutDisclosure-summary">
 		@if (calloutIcon) {
 			<lu-icon class="calloutDisclosure-summary-icon" [icon]="calloutIcon" />
 		}
 		<span class="calloutDisclosure-summary-title">
-			<ng-container *luPortal="heading" />
+			<ng-container *luPortal="heading()" />
 		</span>
 		<lu-icon class="calloutDisclosure-summary-chevron" icon="arrowChevronBottom" />
 	</summary>

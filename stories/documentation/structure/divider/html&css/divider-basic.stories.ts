@@ -1,4 +1,4 @@
-import { Meta, StoryFn } from '@storybook/angular';
+import { Meta, StoryObj } from '@storybook/angular';
 
 interface DividerBasicStory {
 	size: string;
@@ -27,7 +27,7 @@ export default {
 			control: {
 				type: 'boolean',
 			},
-			description: 'À préciser que si le divider n’a pas de contenu (le contenu ne sera pas restitué)',
+			description: 'Permet de restituer Divider comme un séparateur natif (hr). Son éventuel contenu textuel ne sera alors plus restitué.',
 		},
 		button: {
 			control: {
@@ -65,7 +65,7 @@ function getTemplate(args: DividerBasicStory): string {
 	}
 }
 
-const Template: StoryFn<DividerBasicStory> = (args) => ({
+const Template = (args: DividerBasicStory) => ({
 	props: args,
 	template: getTemplate(args),
 	styles: [
@@ -79,12 +79,14 @@ const Template: StoryFn<DividerBasicStory> = (args) => ({
 	],
 });
 
-export const Basic = Template.bind({});
-Basic.args = {
-	content: 'Text',
-	size: '',
-	role: false,
-	icon: false,
-	button: false,
-	vertical: false,
+export const Basic: StoryObj<DividerBasicStory> = {
+	args: {
+		content: 'Text',
+		size: '',
+		role: false,
+		icon: false,
+		button: false,
+		vertical: false,
+	},
+	render: Template,
 };

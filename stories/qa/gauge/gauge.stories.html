@@ -1,33 +1,65 @@
 <table class="demo-QAtable">
 	<tbody>
 		<tr>
+			<td></td>
+			<td style="width: 50%">
+				<div class="demo-QAtable-list">HTML</div>
+			</td>
+			<td style="width: 50%">
+				<div class="demo-QAtable-list">Angular</div>
+			</td>
+		</tr>
+		<tr>
 			<td>Default</td>
-			<td style="width: 100%">
+			<td style="width: 50%">
 				<div class="gauge" style="--components-gauge-value: 33%"></div>
+			</td>
+			<td style="width: 50%">
+				<lu-gauge value="33" />
 			</td>
 		</tr>
 		<tr>
 			<td>Thin</td>
-			<td>
+			<td style="width: 50%">
 				<div class="gauge mod-thin" style="--components-gauge-value: 50%"></div>
+			</td>
+			<td style="width: 50%">
+				<lu-gauge thin value="50" />
 			</td>
 		</tr>
 		<tr>
-			<td>Default</td>
-			<td>
+			<td>Palette</td>
+			<td style="width: 50%">
 				<div class="gauge palette-success pr-u-marginBlockEnd100" style="--components-gauge-value: 75%"></div>
 				<div class="gauge palette-warning pr-u-marginBlockEnd100" style="--components-gauge-value: 50%"></div>
 				<div class="gauge palette-error" style="--components-gauge-value: 25%"></div>
 			</td>
+			<td style="width: 50%">
+				<lu-gauge value="100" palette="success" />
+				<lu-gauge value="90" palette="neutral" />
+				<lu-gauge value="75" palette="product" />
+				<lu-gauge value="50" palette="warning" />
+				<lu-gauge value="25" palette="error" />
+				<lu-gauge value="0" palette="error" />
+			</td>
+		</tr>
+		<tr>
+			<td>Circular</td>
+			<td style="height: 10rem"></td>
+			<td style="width: 50%">
+				<lu-gauge circular size="40" value="100" />
+				<lu-gauge circular size="40" value="75" palette="success" />
+				<lu-gauge circular size="40" value="50" palette="warning" />
+				<lu-gauge circular size="40" value="25" palette="error" />
+				<lu-gauge circular size="40" value="0" palette="error" />
+			</td>
 		</tr>
 		<tr>
 			<td>Vertical (deprecated)</td>
-			<td>
-				<div class="demo-QAtable-list" style="height: 100px">
-					<div class="gauge mod-vertical" style="--components-gauge-value: 50%"></div>
-					<div class="gauge mod-vertical mod-thin palette-error" style="--components-gauge-value: 75%"></div>
-				</div>
+			<td style="height: 10rem">
+				<div class="gauge mod-vertical" style="--components-gauge-value: 50%"></div>
 			</td>
+			<td></td>
 		</tr>
 	</tbody>
 </table>

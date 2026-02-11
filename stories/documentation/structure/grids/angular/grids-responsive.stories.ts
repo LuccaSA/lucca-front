@@ -74,6 +74,7 @@ export default {
 		const modeArg = container ? (modeContainer === null ? `` : ` mode="${modeContainer}"`) : modeMedia === null ? `` : ` mode="${modeMedia}"`;
 		const containerArg = container ? ` container` : ``;
 		const responsiveConfig = container ? responsiveContainerConfig : responsiveMediaConfig;
+		const responsiveInline = container ? `{ columnAtContainerMinS: 1, rowAtContainerMinS: 1 }` : `{ columnAtMediaMinS: 1, rowAtMediaMinS: 1 }`;
 
 		return {
 			styles: [
@@ -109,7 +110,7 @@ export default {
 			template: cleanupTemplate(`${responsiveConfig}
 <lu-grid${containerArg}${modeArg}${generateInputs(args, argTypes)}>
 	<lu-grid-column [responsive]="responsiveSample">rwd</lu-grid-column>
-	<lu-grid-column [responsive]="{ columnAtContainerMinS: 1, rowAtContainerMinS: 1 }">rwd</lu-grid-column>${cols}
+	<lu-grid-column [responsive]="${responsiveInline}">rwd</lu-grid-column>${cols}
 </lu-grid>`),
 		};
 	},
@@ -126,13 +127,13 @@ export const Basic: StoryObj<
 		modeContainer: null,
 		responsiveMediaConfig: `@let responsiveSample = {
 	colspanAtMediaMinXXS: 3,
-	rowAtMediaMinXXS: 1,
+	rowAtMediaMinXXS: 2,
 	rowspanAtMediaMinXS: 2,
 	columnAtMediaMinS: 2,
 };`,
 		responsiveContainerConfig: `@let responsiveSample = {
 	colspanAtContainerMinXXS: 3,
-	rowAtContainerMinXXS: 1,
+	rowAtContainerMinXXS: 2,
 	rowspanAtContainerMinXS: 2,
 	columnAtContainerMinS: 2,
 };`,

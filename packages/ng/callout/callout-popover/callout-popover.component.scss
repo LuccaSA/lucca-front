@@ -1,5 +1,7 @@
 @use '@lucca-front/scss/src/components/calloutPopover';
 
-lu-callout-popover {
-  display: inline-flex;
+@layer base {
+	lu-callout-popover {
+		display: inline-flex;
+	}
 }

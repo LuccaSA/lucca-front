@@ -1,15 +1,27 @@
-import { booleanAttribute, Component, input, ViewEncapsulation } from '@angular/core';
+import { booleanAttribute, ChangeDetectionStrategy, Component, inject, input, ViewEncapsulation } from '@angular/core';
+import { PopoverContentComponent } from '@lucca-front/ng/popover2';
 
 @Component({
 	selector: '[lu-dropdown-action]',
-	standalone: true,
 	template: '<ng-content />',
 	encapsulation: ViewEncapsulation.None,
 	host: {
 		class: 'dropdown-list-option-action',
 		'[class.is-disabled]': 'disabled()',
+		'[class.mod-critical]': 'critical()',
+		'(click)': 'closePanel()',
 	},
+	changeDetection: ChangeDetectionStrategy.OnPush,
 })
 export class DropdownActionComponent {
-	disabled = input(false, { transform: booleanAttribute });
+	#popoverContentRef = inject(PopoverContentComponent, { optional: true });
+
+	readonly disabled = input(false, { transform: booleanAttribute });
+	readonly critical = input(false, { transform: booleanAttribute });
+
+	closePanel() {
+		if (this.#popoverContentRef) {
+			this.#popoverContentRef.close();
+		}
+	}
 }

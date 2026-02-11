@@ -1,5 +1,4 @@
 import { Meta } from '@storybook/angular';
-import { cleanupTemplate } from 'stories/helpers/stories';
 
 interface InputFramedPanelsStory {}
 
@@ -8,7 +7,7 @@ export default {
 	argTypes: {},
 	render: (args: InputFramedPanelsStory) => {
 		return {
-			template: cleanupTemplate(`<div class="inputFramedWrapper">
+			template: `<div class="inputFramedWrapper">
 	<div class="inputFramed">
 		<div class="inputFramed-header">
 			<div class="form-field inputFramed-header-field">
@@ -41,7 +40,7 @@ export default {
 		</div>
 		<div class="inputFramed-content">Lorem <strong>ipsum</strong> dolor</div>
 	</div>
-</div>`),
+</div>`,
 		};
 	},
 } as Meta;

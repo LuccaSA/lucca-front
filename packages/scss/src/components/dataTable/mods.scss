@@ -14,8 +14,16 @@
 	}
 }
 
-@mixin alignTop {
+@mixin verticalAlignTop {
 	--components-dataTable-cell-verticalAlign: top;
+}
+
+@mixin verticalAlignBottom {
+	--components-dataTable-cell-verticalAlign: bottom;
+}
+
+@mixin verticalAlignMiddle {
+	--components-dataTable-cell-verticalAlign: middle;
 }
 
 @mixin buttonExpand {
@@ -47,7 +55,16 @@
 }
 
 @mixin selectable {
-	--components-dataTable-cellFirst-width: 2.5rem;
+	--components-dataTable-cellFirst-width: 2.625rem;
+
+	.dataTable-head-row-cell,
+	.dataTable-body-row-cell,
+	.dataTable-foot-row-cell {
+		&:first-child {
+			inline-size: var(--components-dataTable-cellFirst-width);
+			max-inline-size: var(--components-dataTable-cellFirst-width);
+		}
+	}
 }
 
 @mixin draggable {
@@ -58,6 +75,19 @@
 			--components-dataTable-cellFirst-width: 2.5rem;
 
 			padding-inline: var(--pr-t-spacings-75);
+		}
+	}
+}
+
+@mixin selectableDraggable {
+	.dataTable-head-row-cell,
+	.dataTable-body-row-cell,
+	.dataTable-foot-row-cell {
+		&:nth-child(2) {
+			--components-dataTable-cellFirst-width: 2.625rem;
+
+			inline-size: var(--components-dataTable-cellFirst-width);
+			max-inline-size: var(--components-dataTable-cellFirst-width);
 		}
 	}
 }
@@ -73,12 +103,12 @@
 
 @mixin editable {
 	--components-dataTable-cell-padding: var(--pr-t-spacings-100);
-	--components-dataTable-cell-paddingInlineStart: var(--components-dataTable-cell-padding);
+	--components-dataTable-cell-paddingInlineStart: var(--pr-t-spacings-50);
 }
 
 @mixin actions {
 	padding-block: 0;
-	padding-inline: 0 var(--pr-t-spacings-50);
+	padding-inline: var(--pr-t-spacings-50);
 	text-align: end;
 	white-space: nowrap;
 
@@ -87,6 +117,8 @@
 		@include button.onlyIcon;
 		@include button.onlyIconS;
 		@include button.ghost;
+
+		transition-property: box-shadow, color;
 	}
 
 	&:is(.dataTable-head-row-cell) {
@@ -101,8 +133,12 @@
 	--components-dataTable-cell-textAlign: center;
 }
 
-@mixin alignRight {
-	--components-dataTable-cell-textAlign: right;
+@mixin alignEnd {
+	--components-dataTable-cell-textAlign: end;
+}
+
+@mixin alignStart {
+	--components-dataTable-cell-textAlign: start;
 }
 
 @mixin layoutFixed {
@@ -119,7 +155,7 @@
 	}
 }
 
-@mixin cellFixedWidth {
+@mixin cellInlineSize {
 	min-inline-size: var(--dataTable-layoutFixed-width, auto);
 	inline-size: var(--dataTable-layoutFixed-width, auto);
 }
@@ -129,7 +165,7 @@
 		.dataTable-head-row-cell,
 		.dataTable-body-row-cell,
 		.dataTable-foot-row-cell {
-			@include cellFixedWidth;
+			@include cellInlineSize;
 		}
 	}
 
@@ -139,7 +175,7 @@
 				.dataTable-head-row-cell,
 				.dataTable-body-row-cell,
 				.dataTable-foot-row-cell {
-					@include cellFixedWidth;
+					@include cellInlineSize;
 				}
 			}
 		}
@@ -148,4 +184,8 @@
 
 @mixin nested {
 	--components-dataTable-borderRadius: var(--pr-t-border-radius-default);
+}
+
+@mixin noOverflow {
+	--components-dataTable-minInlineSize: fit-content;
 }

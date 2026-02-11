@@ -1,6 +1,6 @@
+import { PaginationComponent } from '@lucca-front/ng/pagination';
 import { Meta, moduleMetadata, StoryObj } from '@storybook/angular';
 import { cleanupTemplate, generateInputs } from 'stories/helpers/stories';
-import { PaginationComponent } from '@lucca-front/ng/pagination';
 
 export default {
 	title: 'Documentation/Navigation/Pagination/Angular',
@@ -10,12 +10,33 @@ export default {
 		}),
 	],
 	argTypes: {
-		isFirstPage: { type: 'boolean' },
-		isLastPage: { type: 'boolean' },
-		from: { type: 'number' },
-		to: { type: 'number' },
-		itemsCount: { type: 'number' },
-		mod: { options: ['default', 'compact'], control: { type: 'select' } },
+		isFirstPage: {
+			type: 'boolean',
+			description: 'Désactive le bouton précédent.',
+		},
+		isLastPage: {
+			type: 'boolean',
+			description: 'Désactive le bouton suivant.',
+		},
+		from: {
+			type: 'number',
+			description: 'Numéro du dernier élément affiché.',
+		},
+		to: {
+			type: 'number',
+			description: 'Numéro du dernier élément affiché.',
+		},
+		itemsCount: {
+			type: 'number',
+			description: "Nombre total d'éléments.",
+		},
+		mod: {
+			options: ['default', 'compact'],
+			control: {
+				type: 'select',
+			},
+			description: 'Affiche la pagination en vue compacte (seulement avec les boutons précédent et suivant).',
+		},
 	},
 } as Meta;
 

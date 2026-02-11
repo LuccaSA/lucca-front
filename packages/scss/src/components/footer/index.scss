@@ -2,53 +2,57 @@
 @use '@lucca-front/scss/src/commons/utils/media';
 
 .footer {
-	@include vars;
-	@include component;
-
-	&.mod-sticky {
-		@include sticky;
+	@layer components {
+		@include vars;
+		@include component;
 	}
 
-	&.mod-narrow {
-		@include narrow;
-	}
+	@layer mods {
+		&.mod-sticky {
+			@include sticky;
+		}
 
-	// default mod
-	&:not([class*='mod-narrow']),
-	&.mod-narrowAtMediaMaxXXS {
-		@include media.max('XXS') {
+		&.mod-narrow {
 			@include narrow;
 		}
-	}
 
-	&.mod-narrowAtMediaMaxXS {
-		@include media.max('XS') {
-			@include narrow;
+		// default mod
+		&:not([class*='mod-narrow']),
+		&.mod-narrowAtMediaMaxXXS {
+			@include media.max('XXS') {
+				@include narrow;
+			}
 		}
-	}
 
-	&.mod-narrowAtMediaMaxS {
-		@include media.max('S') {
-			@include narrow;
+		&.mod-narrowAtMediaMaxXS {
+			@include media.max('XS') {
+				@include narrow;
+			}
 		}
-	}
 
-	&.mod-narrowAtMediaMaxM {
-		@include media.max('M') {
-			@include narrow;
+		&.mod-narrowAtMediaMaxS {
+			@include media.max('S') {
+				@include narrow;
+			}
 		}
-	}
 
-	@include media.min('S') {
-		@include wide;
-	}
+		&.mod-narrowAtMediaMaxM {
+			@include media.max('M') {
+				@include narrow;
+			}
+		}
 
-	.dialog &,
-	.lu-modal-panel & {
-		@include insideDialog;
-	}
+		@include media.min('S') {
+			@include wide;
+		}
 
-	&:has(.footer-containerOptional) {
-		@include withContainer;
+		.dialog &,
+		.lu-modal-panel & {
+			@include insideDialog;
+		}
+
+		&:has(.footer-containerOptional) {
+			@include withContainer;
+		}
 	}
 }

@@ -1,0 +1,99 @@
+@use '@lucca-front/scss/src/commons/utils/color';
+@use '@lucca-front/scss/src/components/button/exports' as button;
+@use '@lucca-front/scss/src/components/numericBadge/exports' as numericBadge;
+@use '@lucca-front/scss/src/components/bubbleIllustration/exports' as bubbleIllustration;
+@use '@lucca-front/scss/src/components/bubbleIcon/exports' as bubbleIcon;
+
+@mixin gridWrapper {
+	--components-resourceCardWrapper-display: grid;
+}
+
+@mixin grid {
+	--components-resourceCard-layout-content-paddingBlockStart: var(--pr-t-spacings-50);
+	--components-resourceCard-layout-header-alignItems: start;
+	--components-resourceCard-layout-header-flexDirection: column;
+	--components-resourceCard-layout-gridTemplate: "before  header  after"   auto
+																								 "content content content" auto
+																								 /auto    1fr     auto;
+}
+
+@mixin wrapped {
+	--components-resourceCard-borderRadius: var(--pr-t-border-radius-default);
+}
+
+@mixin S {
+	--components-resourceCard-layout-content-font: var(--pr-t-font-body-S);
+	--components-resourceCard-layout-header-title-font: var(--pr-t-font-heading-4);
+	--components-resourceCard-layout-before-illustration-minSize: calc(var(--pr-t-spacings-400) + var(--pr-t-spacings-50));
+
+	.bubbleIllustration {
+		@include bubbleIllustration.S;
+  }
+  
+	.bubbleIcon {
+		@include bubbleIcon.S;
+	}
+}
+
+@mixin hasIllustrationGridS {
+	--components-resourceCard-layout-header-paddingBlockStart: 0;
+	--components-resourceCard-layout-header-paddingBlockEnd: 0;
+}
+
+@mixin hasNoContentHasIllustrationNoGrid {
+	--components-resourceCard-layout-alignItems: center;
+	--components-resourceCard-layout-gridTemplate: "before  header  after"  1fr
+																								 /auto    1fr     auto;
+}
+
+@mixin hasContentNoGridHasIllustration {
+	--components-resourceCard-layout-after-marginBlock: var(--pr-t-spacings-150);
+}
+
+@mixin hasIllustrationGrid {
+	--components-resourceCard-layout-alignItems: center;
+}
+
+@mixin hasContentNoGridHasIllustrationS {
+	--components-resourceCard-layout-after-marginBlock: 0.625rem;
+}
+
+@mixin hasContentNoGrid {
+	--components-resourceCard-layout-header-paddingBlockEnd: 0;
+}
+
+@mixin hasAction {
+	.resourceCard-layout-after .button {
+			@include button.S;
+			@include button.ghost;
+
+			&:has(> lu-icon:only-child, > .lucca-icon:only-child, > .lucca-icon:first-child + .pr-u-mask:last-child) {
+				@include button.onlyIcon;
+				@include button.onlyIconS;
+			}
+		}
+}
+
+@mixin hasDrag {
+	.resourceCard-layout-before-button.button {
+			@include button.S;
+			@include button.ghost;
+			@include button.onlyIcon;
+			@include button.onlyIconS;
+		}
+}
+
+@mixin hasNumericBadge {
+	.resourceCard-layout-header-title {
+		.numericBadge {
+			@include numericBadge.S;
+		}
+	}
+}
+
+@mixin add {
+	> .button {
+		@include button.outlined;
+		@include color.palette('product');
+	}
+}

@@ -1,5 +1,4 @@
 import { Meta } from '@storybook/angular';
-import { cleanupTemplate } from 'stories/helpers/stories';
 
 interface ListingChecklistStory {}
 
@@ -8,7 +7,7 @@ export default {
 	argTypes: {},
 	render: (args: ListingChecklistStory) => {
 		return {
-			template: cleanupTemplate(`<ul class="listing mod-checklist">
+			template: `<ul class="listing mod-checklist">
 	<li class="listing-item">
 		<span class="listing-item-icon lucca-icon" aria-hidden="true"></span>
 		<div class="listing-item-content">
@@ -47,7 +46,7 @@ export default {
 			</ul>
 		</div>
 	</li>
-</ul>`),
+</ul>`,
 		};
 	},
 } as Meta;

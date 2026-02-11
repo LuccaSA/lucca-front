@@ -1,66 +1,50 @@
-@mixin component {
+@use '@lucca-front/scss/src/commons/utils/namespace';
+
+@mixin component($atRoot: namespace.$defaultAtRoot) {
 	background-color: var(--components-errorPage-background);
 	block-size: 100vh;
 	inline-size: 100vw;
 	line-height: 1.2;
 	overflow: hidden;
 
-	.errorPage-section {
-		block-size: 100%;
-		max-inline-size: 1200px;
-		padding-block: 0;
-		padding-inline: var(--pr-t-spacings-400);
-		inline-size: 100vw;
-		margin-block: 0;
-		margin-inline: auto;
-		display: flex;
-		justify-content: space-between;
-		align-items: center;
-	}
+	@at-root ($atRoot) {
+		.errorPage-section {
+			block-size: 100%;
+			max-inline-size: 1200px;
+			padding-block: 0;
+			padding-inline: var(--pr-t-spacings-400);
+			inline-size: 100vw;
+			margin-block: 0;
+			margin-inline: auto;
+			display: flex;
+			justify-content: space-between;
+			align-items: center;
+		}
 
-	.errorPage-section-info {
-		margin-block-start: 10vh;
-		max-inline-size: 90vw;
-		inline-size: 450px;
-		padding-inline-end: var(--pr-t-spacings-400);
-	}
+		.errorPage-section-info {
+			margin-block-start: 10vh;
+			max-inline-size: 90vw;
+			inline-size: 450px;
+			padding-inline-end: var(--pr-t-spacings-400);
+		}
 
-	.errorPage-section-info-title {
-		font: var(--pr-t-font-heading-1);
-		margin-block-end: var(--pr-t-spacings-50);
-	}
+		.errorPage-section-info-title {
+			font: var(--pr-t-font-heading-1);
+			margin-block-end: var(--pr-t-spacings-50);
+		}
 
-	.errorPage-section-info-text {
-		font-size: var(--pr-t-font-body-1-fontSize);
-		line-height: var(--pr-t-font-body-1-lineHeight);
-		margin-block-end: var(--pr-t-spacings-150);
-	}
+		.errorPage-section-info-text {
+			font-size: var(--pr-t-font-body-1-fontSize);
+			line-height: var(--pr-t-font-body-1-lineHeight);
+			margin-block-end: var(--pr-t-spacings-150);
+		}
 
-	.errorPage-section-image {
-		margin-block-start: 10vh;
-		inline-size: 50%;
-		max-inline-size: 580px;
-		min-inline-size: 350px;
-		block-size: auto;
-	}
-}
-
-@mixin compact {
-	overflow-y: auto;
-
-	.errorPage-section {
-		flex-direction: column;
-		justify-content: center;
-	}
-
-	.errorPage-section-info {
-		margin-block: var(--pr-t-spacings-400);
-		order: 1;
-		padding: 0;
-	}
-
-	.errorPage-section-image {
-		margin-block-start: var(--pr-t-spacings-400);
-		order: 0;
+		.errorPage-section-image {
+			margin-block-start: 10vh;
+			inline-size: 50%;
+			max-inline-size: 580px;
+			min-inline-size: 350px;
+			block-size: auto;
+		}
 	}
 }

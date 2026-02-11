@@ -1,55 +1,59 @@
 @use 'exports' as *;
 
 .simpleSelect {
-	@include vars;
-	@include component;
-
-	&:has(.simpleSelect-field-input:focus-visible) {
-		@include focused;
-
-		&:has(.simpleSelect-field-input[aria-expanded='true']) {
-			@include focusedExpanded;
-		}
+	@layer components {
+		@include vars;
+		@include component;
 	}
 
-	&:not(.mod-noClueIcon) {
-		&:has(.simpleSelect-field-input:focus-visible),
-		&:has(.simpleSelect-field-input[aria-expanded='true']) {
-			&:not(:has(.simpleSelect-field-input:read-only)) {
-				@include searchable;
+	@layer mods {
+		&:has(.simpleSelect-field-input:focus-visible) {
+			@include focused;
+
+			&:has(.simpleSelect-field-input[aria-expanded='true']) {
+				@include focusedExpanded;
 			}
 		}
-	}
 
-	&:has(.simpleSelect-field-input[aria-invalid='true']) {
-		@include invalid;
-	}
+		&:not(.mod-noClueIcon) {
+			&:has(.simpleSelect-field-input:focus-visible),
+			&:has(.simpleSelect-field-input[aria-expanded='true']) {
+				&:not(:has(.simpleSelect-field-input:read-only)) {
+					@include searchable;
+				}
+			}
+		}
 
-	&:has(.simpleSelect-field-input:disabled) {
-		@include disabled;
-	}
+		&:has(.simpleSelect-field-input[aria-invalid='true']) {
+			@include invalid;
+		}
 
-	&.mod-S {
-		@include S;
-	}
+		&:has(.simpleSelect-field-input:disabled) {
+			@include disabled;
+		}
 
-	&.mod-XS {
-		@include XS;
-	}
+		&.mod-S {
+			@include S;
+		}
 
-	&.mod-filterPill {
-		@include filterPill;
-	}
+		&.mod-XS {
+			@include XS;
+		}
 
-	&.is-searchFilled {
-		@include searchFilled;
-	}
-
-	&.is-selected {
-		@include selected;
+		&.mod-filterPill {
+			@include filterPill;
+		}
 
 		&.is-searchFilled {
-			@include selectedSearchFilled;
+			@include searchFilled;
+		}
+
+		&.is-selected {
+			@include selected;
+
+			&.is-searchFilled {
+				@include selectedSearchFilled;
+			}
 		}
 	}
 }

@@ -17,10 +17,9 @@ export default {
 		}),
 	],
 	render: (args, { argTypes }) => {
-
 		return {
 			props: {
-				txt$: timer(0, 1000).pipe(map((value) => value % 2 ? "✨Updated" : "👋 Hello")),
+				txt$: timer(0, 1000).pipe(map((value) => (value % 2 ? '✨Updated' : '👋 Hello'))),
 			},
 			template: `
 <button
@@ -34,5 +33,4 @@ export default {
 	},
 } as Meta;
 
-export const Basic: StoryObj<LuTooltipTriggerDirective> = {
-};
+export const Basic: StoryObj<LuTooltipTriggerDirective> = {};

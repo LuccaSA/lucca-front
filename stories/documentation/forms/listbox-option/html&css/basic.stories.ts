@@ -6,7 +6,7 @@ interface OptionBasicStory {
 }
 
 export default {
-	title: 'Documentation/Forms/Listbox Option/HTML & CSS/Basic',
+	title: 'Documentation/Forms/Listbox Option/HTML&CSS/Basic',
 	argTypes: {},
 	render: (args: OptionBasicStory) => {
 		const modMultiple = args.multiple ? ` mod-multiple` : ``;

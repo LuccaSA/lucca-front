@@ -1,12 +1,10 @@
-import { Meta, StoryFn } from '@storybook/angular';
-
-interface UserPopoverStory {}
+import { Meta, StoryObj } from '@storybook/angular';
 
 export default {
 	title: 'Documentation/Users/Popover/HTML&CSS',
 } as Meta;
 
-function getTemplate(args: UserPopoverStory): string {
+function getTemplate(): string {
 	return `
 	<section class="lu-popover-content userPopover skeleton is-loading" aria-busy="true">
 		<div class="userPopover-details">
@@ -22,10 +20,11 @@ function getTemplate(args: UserPopoverStory): string {
 	`;
 }
 
-const Template: StoryFn<UserPopoverStory> = (args) => ({
-	props: args,
-	template: getTemplate(args),
+const Template = () => ({
+	template: getTemplate(),
 });
 
-export const Skeleton = Template.bind({});
-Skeleton.args = {};
+export const Skeleton: StoryObj = {
+	args: {},
+	render: Template,
+};

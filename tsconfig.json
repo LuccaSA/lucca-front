@@ -1,7 +1,7 @@
 /* To learn more about this file see: https://angular.io/config/tsconfig. */
 {
-	"compileOnSave": false,
-	"compilerOptions": {
+  "compileOnSave": false,
+  "compilerOptions": {
     "baseUrl": "./",
     "outDir": "./dist/out-tsc",
     "forceConsistentCasingInFileNames": true,
@@ -22,26 +22,33 @@
       "@lucca-front/ng/*": [
         "packages/ng/*/public-api.ts"
       ],
+      "@lucca/prisme/*": [
+        "packages/prisme/*/public-api.ts"
+      ],
       "@/stories/*": [
         "stories/documentation/*"
       ]
     },
     "declaration": false,
     "experimentalDecorators": true,
-    "moduleResolution": "node",
+    "moduleResolution": "Bundler",
     "importHelpers": true,
     "target": "ES2022",
-    "module": "ESNext",
+    "module": "preserve",
     "lib": [
       "ES2022",
       "dom"
-    ],
-    "useDefineForClassFields": false
+
+    ],"useDefineForClassFields": false
   },
-	"angularCompilerOptions": {
-		"enableI18nLegacyMessageIdFormat": false,
-		"strictInjectionParameters": true,
-		"strictInputAccessModifiers": true,
-		"strictTemplates": true
+  "angularCompilerOptions": {
+    "enableI18nLegacyMessageIdFormat": false,
+    "strictInjectionParameters": true,
+    "strictInputAccessModifiers": true,
+    "strictTemplates": true,
+    "strictStandalone": true,
+    "extendedDiagnostics": {
+      "defaultCategory": "error"
+    }
 	}
 }

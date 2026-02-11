@@ -26,7 +26,7 @@
 		.table-head-row-cell,
 		.table-body-row-cell,
 		.table-foot-row-cell {
-			@include cellFixedWidth;
+			@include cellInlineSize;
 		}
 	}
 
@@ -36,14 +36,14 @@
 				.table-head-row-cell,
 				.table-body-row-cell,
 				.table-foot-row-cell {
-					@include cellFixedWidth;
+					@include cellInlineSize;
 				}
 			}
 		}
 	}
 }
 
-@mixin cellFixedWidth {
+@mixin cellInlineSize {
 	min-inline-size: var(--cell-width, auto);
 	inline-size: var(--cell-width, auto);
 }

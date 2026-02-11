@@ -1,11 +1,12 @@
 import { FancyBoxComponent } from '@lucca-front/ng/fancy-box';
-import { Meta, moduleMetadata, StoryFn } from '@storybook/angular';
+import { Meta, moduleMetadata, StoryObj } from '@storybook/angular';
 
 interface FancyBoxBasicStory {
 	content: string;
 	backgroundLeft: string;
 	backgroundRight: string;
 	foreground: string;
+	size: string;
 }
 
 export default {
@@ -25,48 +26,73 @@ export default {
 			control: {
 				type: 'text',
 			},
-			description: 'URL injectée dans <code>--components-fancyBox-background-left</code>',
+			description: "URL de l'image en arrière plan à gauche (200x160). Via <code>--components-fancyBox-background-left</code>.",
 		},
 		backgroundRight: {
 			control: {
 				type: 'text',
 			},
-			description: 'URL injectée dans <code>--components-fancyBox-background-right</code>',
+			description: "URL de l'image en arrière plan à droite (200x160). Via <code>--components-fancyBox-background-right</code>.",
 		},
 		foreground: {
 			control: {
 				type: 'text',
 			},
-			description: 'URL injectée dans <code>--components-fancyBox-foreground</code>',
+			description: "URL de l'image en premier plan (200x160). Via <code>--components-fancyBox-foreground</code>.",
+		},
+		size: {
+			options: ['', 'S'],
+			control: {
+				type: 'select',
+			},
 		},
 	},
 } as Meta;
 
 function getTemplate(args: FancyBoxBasicStory): string {
-	const bgLeft = args.backgroundLeft ? `\n--components-fancyBox-background-left: url(${args.backgroundLeft});` : ``;
-	const bgRight = args.backgroundRight ? `\n--components-fancyBox-background-right: url(${args.backgroundRight});` : ``;
-	const fg = args.foreground ? `\n--components-fancyBox-foreground: url(${args.foreground});` : ``;
-	const style = args.backgroundLeft || args.backgroundRight || args.foreground ? `[attr.style]="'${bgLeft}${bgRight}${fg}'"` : ``;
+	const bgLeft = args.backgroundLeft
+		? `
+	--components-fancyBox-background-left: url(${args.backgroundLeft});`
+		: ``;
+	const bgRight = args.backgroundRight
+		? `
+	--components-fancyBox-background-right: url(${args.backgroundRight});`
+		: ``;
+	const fg = args.foreground
+		? `
+	--components-fancyBox-foreground: url(${args.foreground});`
+		: ``;
+	const style = args.backgroundLeft || args.backgroundRight || args.foreground ? ` [attr.style]="'${bgLeft}${bgRight}${fg}'"` : ``;
+	const sizeAttr = args.size === 'S' ? ` mod-S` : ``;
 
-	return `<div class="fancyBox" ${style}>
+	return `<div class="fancyBox${sizeAttr}"${style}>
 	<div class="fancyBox-content">
-		<div class="fancyBox-content-box">
-			${args.content}
-			<div class="fancyBox-content-box-foreground"></div>
-		</div>
+		${args.content}
+		<div class="fancyBox-content-foreground"></div>
 	</div>
 </div>`;
 }
 
-const Template: StoryFn<FancyBoxBasicStory> = (args) => ({
+const Template = (args: FancyBoxBasicStory) => ({
 	props: args,
 	template: getTemplate(args),
+	styles: [
+		`
+			:host {
+				display: block;
+				padding-block: var(--pr-t-spacings-400);
+			}
+		`,
+	],
 });
 
-export const Basic = Template.bind({});
-Basic.args = {
-	content: 'Fancy box content',
-	backgroundLeft: 'https://cdn.lucca.fr/transverse/prisme/visuals/fancy-box/background-left-bubbles.svg',
-	backgroundRight: 'https://cdn.lucca.fr/transverse/prisme/visuals/fancy-box/background-right-candies.svg',
-	foreground: 'https://cdn.lucca.fr/transverse/prisme/visuals/fancy-box/foreground-right-pizza.svg',
+export const Basic: StoryObj<FancyBoxBasicStory> = {
+	args: {
+		content: 'Fancy box content',
+		backgroundLeft: 'https://cdn.lucca.fr/transverse/prisme/visuals/fancy-box/background-left-plant.svg',
+		backgroundRight: 'https://cdn.lucca.fr/transverse/prisme/visuals/fancy-box/background-right-candies.svg',
+		foreground: 'https://cdn.lucca.fr/transverse/prisme/visuals/fancy-box/foreground-right-pizza.svg',
+		size: null,
+	},
+	render: Template,
 };

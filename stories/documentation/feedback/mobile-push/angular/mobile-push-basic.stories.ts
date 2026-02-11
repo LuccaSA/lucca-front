@@ -15,19 +15,26 @@ export default {
 		const { description, ...inputs } = args;
 		return {
 			template: `<lu-mobile-push ${generateInputs(inputs, context.argTypes)}>
-	${description}
+	Posez une absence depuis n’importe où avec l’application Lucca.
 </lu-mobile-push>`,
 		};
 	},
 	argTypes: {
-		description: {
-			type: 'string',
+		appStoreLinkClicked: {
+			control: {
+				type: null,
+			},
+			description: 'Clic sur le bouton App Store.',
+		},
+		googlePlayLinkClicked: {
+			control: {
+				type: null,
+			},
+			description: 'Clic sur le bouton Google Play.',
 		},
 	},
 } as Meta;
 
 export const Template: StoryObj<MobilePushComponent & { description: string }> = {
-	args: {
-		description: `Posez une absence depuis n’importe où avec l’application Lucca.`,
-	},
+	args: {},
 };

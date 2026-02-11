@@ -1,4 +1,5 @@
 @use '@lucca-front/scss/src/commons/utils/a11y';
+@use '@lucca-front/scss/src/commons/utils/media';
 @use '@lucca-front/scss/src/commons/utils/namespace';
 @use '@lucca-front/scss/src/components/container/exports' as container;
 
@@ -6,6 +7,20 @@
 	display: flex;
 	flex-direction: var(--components-mainLayout-flexDirection);
 	block-size: 100%;
+
+	&:target {
+		position: relative;
+
+		&::after {
+			content: '';
+			position: absolute;
+			inset: 0;
+			z-index: 5;
+			pointer-events: none;
+
+			@include a11y.focusVisible($offset: -4px, $borderRadius: var(--pr-t-border-radius-default));
+		}
+	}
 
 	@at-root ($atRoot) {
 		.mainLayout-sidebar {
@@ -56,6 +71,18 @@
 			inset-inline-start: 0;
 			position: var(--components-mainLayout-content-inside-block-position);
 
+			@include media.min(XS) {
+				--components-mainLayout-content-inside-block-firstLastOfType-marginBlock: var(--pr-t-spacings-300);
+			}
+
+			&:not(& + &) {
+				margin-block-start: var(--components-mainLayout-content-inside-block-firstLastOfType-marginBlock);
+			}
+
+			&:not(:has(+ &)) {
+				margin-block-end: var(--components-mainLayout-content-inside-block-firstLastOfType-marginBlock);
+			}
+
 			&.mod-overflow {
 				.container {
 					@include container.overflow;
@@ -68,6 +95,7 @@
 			z-index: 1;
 			inset-block-start: var(--components-mainLayout-content-inside-header-insetBlockStart);
 			inset-inline-start: 0;
+			background-color: var(--components-mainLayout-content-inside-header-backgroundColor);
 
 			&:empty {
 				display: none;
@@ -79,6 +107,7 @@
 			inset-block-end: var(--components-mainLayout-content-inside-footer-insetBlockEnd);
 			inset-inline-start: 0;
 			margin-block-start: auto;
+			background-color: var(--components-mainLayout-content-inside-footer-backgroundColor);
 
 			&:empty {
 				display: none;

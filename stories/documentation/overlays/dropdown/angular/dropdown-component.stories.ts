@@ -1,12 +1,11 @@
 import { Component as AngularComponent } from '@angular/core';
 import { provideAnimations } from '@angular/platform-browser/animations';
 import { LuDropdownModule } from '@lucca-front/ng/dropdown';
-import { applicationConfig, Meta, StoryFn } from '@storybook/angular';
+import { applicationConfig, Meta, StoryObj } from '@storybook/angular';
 
 @AngularComponent({
 	selector: 'dropdown-component-stories',
 	templateUrl: './dropdown-basic.stories.html',
-	standalone: true,
 	imports: [LuDropdownModule],
 })
 class DropdownComponentStories {
@@ -19,7 +18,7 @@ export default {
 	decorators: [applicationConfig({ providers: [provideAnimations()] })],
 } as Meta;
 
-const Template: StoryFn<DropdownComponentStories> = (args) => ({
+const Template = (args: DropdownComponentStories) => ({
 	props: args,
 });
 
@@ -28,7 +27,8 @@ const code = `
 
   /* Ajouter la directive luDropdownItem pour lier le parent luDropdown à ses enfants */
   <li class="dropdown-list-option">
-    <a luDropdownItem routerLink="." fragment="link2" class="dropdown-list-option-action">Link 2</a>
+		/* Mettre un relativeTo afin de conserver la navigation relative au chemin courant */
+    <a luDropdownItem routerLink="." [relativeTo]="activatedRoute" fragment="link2" class="dropdown-list-option-action">Link 2</a>
   </li>
 
   /* Vous pouvez disable un enfant avec 'is-disabled' */
@@ -44,8 +44,11 @@ const code = `
 </lu-dropdown>
 `;
 
-export const Component = Template.bind({});
-Component.args = {};
+export const Component: StoryObj<DropdownComponentStories> = {
+	args: {},
+	render: Template,
+};
+
 Component.parameters = {
 	controls: { include: [] },
 	docs: {

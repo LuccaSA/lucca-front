@@ -1,5 +1,6 @@
 import { ComponentType } from '@angular/cdk/overlay';
-import { CanDeactivateFn, Route } from '@angular/router';
+import { inject } from '@angular/core';
+import { CanActivate, CanDeactivateFn, DeprecatedGuard, Route } from '@angular/router';
 import { firstValueFrom, from, isObservable, Observable, of } from 'rxjs';
 import { LuDialogData } from '../model';
 import { DialogRoutingContainerComponent } from './dialog-routing.component';
@@ -17,7 +18,7 @@ export function deferrableToObservable<T>(deferrable: Promise<T> | Observable<T>
 }
 
 export function createDialogRoute<C>(dialogRouteConfig: DialogRouteConfig<C>): Route {
-	const { dialogConfigFactory, dataFactory, ...baseRoute } = dialogRouteConfig;
+	const { dialogConfigFactory, dataFactory, canMatch, ...baseRoute } = dialogRouteConfig;
 
 	const data: DialogRouteData<C> = { dialogRouteConfig };
 
@@ -25,21 +26,24 @@ export function createDialogRoute<C>(dialogRouteConfig: DialogRouteConfig<C>): R
 		path: dialogRouteConfig.path,
 		component: DialogRoutingContainerComponent,
 		data,
+		canMatch,
 		children: [
 			{
 				...baseRoute,
 				path: '',
-				canDeactivate: dialogRouteConfig.canDeactivate?.map(
-					(guard): CanDeactivateFn<C> =>
-						(dialogComponentInstance, route, state, nextState) => {
-							// If dialogComponentInstance is null, it means the dialog is already closed. We allow deactivation in this case.
-							if (!dialogComponentInstance) {
-								return true;
-							}
+				canDeactivate: dialogRouteConfig.canDeactivate
+					?.map((fn) => toCanDeactivateFn(fn))
+					?.map(
+						(guard): CanDeactivateFn<C> =>
+							(dialogComponentInstance, route, state, nextState) => {
+								// If dialogComponentInstance is null, it means the dialog is already closed. We allow deactivation in this case.
+								if (!dialogComponentInstance) {
+									return true;
+								}
 
-							return guard(dialogComponentInstance, route, state, nextState);
-						},
-				),
+								return guard(dialogComponentInstance, route, state, nextState);
+							},
+					),
 			},
 		],
 	};
@@ -115,4 +119,17 @@ function mergeRouteConfig<C>(config1: Partial<DialogRouteConfig<C>>, config2: Pa
 	}
 
 	return result;
+}
+
+export function toCanDeactivateFn<C>(guard: DeprecatedGuard | CanDeactivateFn<C>): CanDeactivateFn<C> {
+	if (typeof guard === 'string') {
+		throw new Error('String guards are not supported in dialog routes');
+	}
+
+	try {
+		const deprectedGuard = inject(guard) as CanActivate;
+		return (_component, currentRoute, _currentState, nextState) => deprectedGuard.canActivate(currentRoute, nextState);
+	} catch {
+		return guard as CanDeactivateFn<C>;
+	}
 }

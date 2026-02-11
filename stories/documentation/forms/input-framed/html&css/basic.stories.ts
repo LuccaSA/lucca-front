@@ -1,14 +1,13 @@
 import { Meta } from '@storybook/angular';
-import { cleanupTemplate } from 'stories/helpers/stories';
 
 interface InputFramedBasicStory {}
 
 export default {
-	title: 'Documentation/Forms/Input Framed/HTML & CSS/Basic',
+	title: 'Documentation/Forms/Input Framed/HTML&CSS/Basic',
 	argTypes: {},
 	render: (args: InputFramedBasicStory) => {
 		return {
-			template: cleanupTemplate(`<div class="inputFramedWrapper">
+			template: `<div class="inputFramedWrapper">
 	<div class="inputFramed">
 		<div class="inputFramed-header">
 			<div class="form-field inputFramed-header-field">
@@ -21,9 +20,6 @@ export default {
 						<span class="radioField-icon-check"></span>
 					</span>
 				</span>
-				<div class="inlineMessage">
-					<p class="inlineMessage-content">Lorem ipsum dolor</p>
-				</div>
 			</div>
 		</div>
 	</div>
@@ -39,13 +35,10 @@ export default {
 						<span class="radioField-icon-check"></span>
 					</span>
 				</span>
-				<div class="inlineMessage">
-					<p class="inlineMessage-content">Lorem ipsum dolor</p>
-				</div>
 			</div>
 		</div>
 	</div>
-</div>`),
+</div>`,
 		};
 	},
 } as Meta;

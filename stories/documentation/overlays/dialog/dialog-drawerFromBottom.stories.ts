@@ -1,4 +1,4 @@
-import { Meta, StoryFn } from '@storybook/angular';
+import { Meta, StoryObj } from '@storybook/angular';
 
 interface DialogDrawerFromBottomStory {
 	size: string;
@@ -32,7 +32,7 @@ function getTemplate(args: DialogDrawerFromBottomStory): string {
 	`;
 }
 
-const Template: StoryFn<DialogDrawerFromBottomStory> = (args: DialogDrawerFromBottomStory) => ({
+const Template = (args: DialogDrawerFromBottomStory) => ({
 	props: args,
 	template: getTemplate(args),
 	styles: [
@@ -60,5 +60,7 @@ export default {
 	},
 } as Meta;
 
-export const DrawerFromBottom = Template.bind({});
-DrawerFromBottom.args = { size: '' };
+export const DrawerFromBottom: StoryObj<DialogDrawerFromBottomStory> = {
+	args: { size: '' },
+	render: Template,
+};

@@ -1,9 +1,9 @@
-import { Meta, StoryFn } from '@storybook/angular';
+import { Meta, StoryObj } from '@storybook/angular';
 
 interface MobilePushBasicStory {}
 
 export default {
-	title: 'Documentation/Feedback/Mobile Push/HTML & CSS/Basic',
+	title: 'Documentation/Feedback/Mobile Push/HTML&CSS/Basic',
 	argTypes: {},
 } as Meta;
 
@@ -29,10 +29,12 @@ function getTemplate(args: MobilePushBasicStory): string {
 	</div>`;
 }
 
-const Template: StoryFn<MobilePushBasicStory> = (args) => ({
+const Template = (args: MobilePushBasicStory) => ({
 	props: args,
 	template: getTemplate(args),
 });
 
-export const Basic = Template.bind({});
-Basic.args = {};
+export const Basic: StoryObj<MobilePushBasicStory> = {
+	args: {},
+	render: Template,
+};

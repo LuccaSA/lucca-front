@@ -7,6 +7,7 @@
 	inline-size: var(--components-appLayout-inlineSize);
 	grid-template: var(--components-appLayout-gridTemplate);
 	display: grid;
+	isolation: isolate;
 
 	@at-root ($atRoot) {
 		.appLayout-banner {
@@ -18,6 +19,7 @@
 		}
 
 		.appLayout-navSide {
+			min-inline-size: 0;
 			grid-area: navSide;
 			overflow-y: var(--components-appLayout-navSide-overflowX);
 			overflow-x: var(--components-appLayout-navSide-overflowY);

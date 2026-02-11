@@ -1,4 +1,4 @@
-import { Meta, StoryFn } from '@storybook/angular';
+import { Meta, StoryObj } from '@storybook/angular';
 
 interface FixedColumnsResponsiveStory {}
 
@@ -33,10 +33,12 @@ function getTemplate(args: FixedColumnsResponsiveStory): string {
 </div>`;
 }
 
-const Template: StoryFn<FixedColumnsResponsiveStory> = (args) => ({
+const Template = (args: FixedColumnsResponsiveStory) => ({
 	props: args,
 	template: getTemplate(args),
 });
 
-export const FixedColumnsResponsive = Template.bind({});
-FixedColumnsResponsive.args = {};
+export const FixedColumnsResponsive: StoryObj<FixedColumnsResponsiveStory> = {
+	args: {},
+	render: Template,
+};

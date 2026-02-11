@@ -1,9 +1,8 @@
-import { NgClass } from '@angular/common';
-import { booleanAttribute, Component, computed, inject, input, LOCALE_ID, ViewEncapsulation } from '@angular/core';
+import { booleanAttribute, ChangeDetectionStrategy, Component, computed, inject, input, LOCALE_ID, ViewEncapsulation } from '@angular/core';
 import { outputFromObservable } from '@angular/core/rxjs-interop';
 import { FormsModule } from '@angular/forms';
 import { ButtonComponent } from '@lucca-front/ng/button';
-import { getIntl, IntlParamsPipe } from '@lucca-front/ng/core';
+import { intlInputOptions, IntlParamsPipe } from '@lucca-front/ng/core';
 import { DividerComponent } from '@lucca-front/ng/divider';
 import { FormFieldComponent } from '@lucca-front/ng/form-field';
 import { TextInputComponent } from '@lucca-front/ng/forms';
@@ -13,39 +12,39 @@ import { LuTooltipModule } from '@lucca-front/ng/tooltip';
 import { Subject } from 'rxjs';
 import { FileEntry } from '../file-upload-entry';
 import { LU_FILE_UPLOAD_TRANSLATIONS } from '../file-upload.translate';
-import { formatSize } from '../formatter';
+import { formatFileSize } from '../formatter';
 
 @Component({
 	selector: 'lu-file-entry',
-	standalone: true,
 	templateUrl: './file-entry.component.html',
 	styleUrl: './file-entry.component.scss',
 	encapsulation: ViewEncapsulation.None,
-	imports: [IconComponent, LuTooltipModule, ButtonComponent, InlineMessageComponent, DividerComponent, NgClass, FormFieldComponent, TextInputComponent, FormsModule, IntlParamsPipe],
+	imports: [IconComponent, LuTooltipModule, ButtonComponent, InlineMessageComponent, DividerComponent, FormFieldComponent, TextInputComponent, FormsModule, IntlParamsPipe],
 	host: {
 		class: 'pr-u-displayContents',
 	},
+	changeDetection: ChangeDetectionStrategy.OnPush,
 })
 export class FileEntryComponent {
 	#locale = inject(LOCALE_ID);
 
-	intl = getIntl(LU_FILE_UPLOAD_TRANSLATIONS);
+	readonly intl = input(...intlInputOptions(LU_FILE_UPLOAD_TRANSLATIONS));
 
-	state = input<'success' | 'loading' | 'error' | null>(null);
+	readonly state = input<'success' | 'loading' | 'error' | 'default'>('default');
 
-	displayFileName = input(false, { transform: booleanAttribute });
+	readonly displayFileName = input(false, { transform: booleanAttribute });
 
-	inlineMessageError = input<string | null>(null);
+	readonly inlineMessageError = input<string | null>(null);
 
-	entry = input.required<FileEntry>();
+	readonly entry = input.required<FileEntry>();
 
-	size = input<'S' | null>(null);
+	readonly size = input<'S' | null>(null);
 
-	iconOverride = input('');
+	readonly iconOverride = input('');
 
-	downloadURL = input('');
+	readonly downloadURL = input('');
 
-	password = input('');
+	readonly password = input('');
 	passwordChange$ = new Subject<string>();
 	passwordChange = outputFromObservable(this.passwordChange$);
 
@@ -53,7 +52,7 @@ export class FileEntryComponent {
 		return this.passwordChange$.observed;
 	}
 
-	media = input(false, { transform: booleanAttribute });
+	readonly media = input(false, { transform: booleanAttribute });
 
 	deleteFile$ = new Subject<void>();
 
@@ -63,16 +62,20 @@ export class FileEntryComponent {
 		return this.deleteFile$.observed;
 	}
 
-	fileName = computed(() => this.entry().name);
-	fileType = computed(() => this.entry().type);
-	fileSize = computed(() => this.entry().size);
+	readonly fileName = computed(() => this.entry().name);
+	readonly fileType = computed(() => this.entry().type);
+	readonly fileSize = computed(() => this.entry().size);
 
-	fileSizeDisplay = computed(() => formatSize(this.#locale, this.fileSize()));
-	fileTypeDisplay = computed(() => this.intl.file.replace('{{fileTypeLastPart}}', this.fileType().split('/')[1].toUpperCase()));
+	readonly fileSizeDisplay = computed(() => formatFileSize(this.#locale, this.fileSize()));
+	readonly fileTypeDisplay = computed(() => {
+		const fileExtension: string = extractFileExtension(this.fileType());
 
-	previewUrl = input<string>('');
+		return this.intl().file.replace('{{fileTypeLastPart}}', fileExtension);
+	});
 
-	fileEntryIconSrc = computed(() => {
+	readonly previewUrl = input<string>('');
+
+	readonly fileEntryIconSrc = computed(() => {
 		const fileExtension = this.fileName().split('.').pop();
 		const fileEntryIconRoot = 'https://cdn.lucca.fr/transverse/prisme/visuals/file-entry/';
 		const fileEntryIconExtension = '.svg';
@@ -95,7 +98,7 @@ export class FileEntryComponent {
 		}
 	});
 
-	tooltip = computed(() => {
+	readonly tooltip = computed(() => {
 		if (this.state() === 'error') {
 			if (!this.media()) {
 				return null;
@@ -115,8 +118,23 @@ export class FileEntryComponent {
 		return this.fileName() + ' – ' + this.fileTypeDisplay() + ' – ' + this.fileSizeDisplay();
 	});
 
-	dlClasses = computed(() => ({
+	readonly dlClasses = computed(() => ({
 		[`is-${this.state()}`]: !!this.state(),
 		[`mod-${this.size()}`]: !!this.size(),
 	}));
+}
+
+function extractFileExtension(type: string): string {
+	switch (type) {
+		case 'application/vnd.ms-excel':
+			return 'XLS';
+		case 'application/vnd.openxmlformats-officedocument.spreadsheetml.sheet':
+			return 'XLSX';
+		case 'application/msword':
+			return 'DOC';
+		case 'application/vnd.openxmlformats-officedocument.wordprocessingml.document':
+			return 'DOCX';
+		default:
+			return type.split('/')[1].toUpperCase();
+	}
 }

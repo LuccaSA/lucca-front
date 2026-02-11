@@ -4,13 +4,12 @@ import { Meta, moduleMetadata } from '@storybook/angular';
 
 export default {
 	title: 'Documentation/Texts/ReadMore/Angular/AI',
-	argTypes: {},
 	decorators: [
 		moduleMetadata({
 			imports: [ReadMoreComponent, TagComponent],
 		}),
 	],
-	render: (args, { argTypes }) => {
+	render: () => {
 		return {
 			template: `<div class="box">
 	<h3 class="mod-elementAfterText pr-u-marginBlockEnd150">
@@ -26,6 +25,4 @@ export default {
 	},
 } as Meta;
 
-export const Basic = {
-	args: {},
-};
+export const Basic = {};

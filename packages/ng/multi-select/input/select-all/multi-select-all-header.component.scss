@@ -1,40 +1,48 @@
-:host {
-	display: block;
-	background-color: var(--palettes-neutral-0);
-	border-block-end: 1px solid var(--commons-border-200);
-	padding-block: 0 var(--pr-t-spacings-50);
-	padding-inline: var(--components-options-item-padding-vertical);
-	margin-block: 0 var(--components-options-item-padding-vertical);
-	margin-inline: calc(-1 * var(--pr-t-spacings-50));
-	scroll-margin-block-start: var(--pr-t-spacings-50);
+@layer components {
+	:host {
+		display: block;
+		background-color: var(--palettes-neutral-0);
+		border-block-end: 1px solid var(--commons-border-200);
+		padding-block: 0 var(--pr-t-spacings-50);
+		padding-inline: var(--components-options-item-padding-vertical);
+		margin-block: 0 var(--components-options-item-padding-vertical);
+		margin-inline: calc(-1 * var(--pr-t-spacings-50));
+		scroll-margin-block-start: var(--pr-t-spacings-50);
+	}
 }
 
 .multiSelectAllDisplayer {
-	border-radius: var(--pr-t-border-radius-default);
-	cursor: pointer;
+	@layer components {
+		border-radius: var(--pr-t-border-radius-default);
+		cursor: pointer;
 
-	&:hover, :host-context(.is-highlighted) & {
-		background-color: var(--palettes-neutral-50);
-	}
-
-	&:has(.checkboxField-input:checked) {
-		background-color: var(--palettes-50, var(--palettes-product-50));
-
-		&:hover, :host-context(.is-highlighted) & {
-			background-color: var(--palettes-100, var(--palettes-product-100));
+		::ng-deep {
+			.formLabel {
+				inline-size: 100%;
+				padding-block: var(--components-options-item-padding-vertical);
+				padding-inline: 0;
+			}
 		}
 	}
 
-	::ng-deep {
-		.formLabel {
-			inline-size: 100%;
-			padding-block: var(--components-options-item-padding-vertical);
-			padding-inline: 0;
+	@layer mods {
+		&:hover, :host-context(.is-highlighted) & {
+			background-color: var(--palettes-neutral-50);
+		}
+
+		&:has(.checkboxField-input:checked) {
+			background-color: var(--palettes-50, var(--palettes-product-50));
+
+			&:hover, :host-context(.is-highlighted) & {
+				background-color: var(--palettes-100, var(--palettes-product-100));
+			}
 		}
 	}
 }
 
 .multiSelectAllDisplayer-checkbox {
-	margin-block: var(--components-options-item-padding-vertical) 0;
-	margin-inline: var(--components-options-item-padding-horizontal) 0;
+	@layer components {
+		margin-block: var(--components-options-item-padding-vertical) 0;
+		margin-inline: var(--components-options-item-padding-horizontal) 0;
+	}
 }

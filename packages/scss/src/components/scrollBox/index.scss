@@ -1,18 +1,22 @@
 @use 'exports' as *;
 
 .scrollBox {
-	@include vars;
-	@include component;
-
-	&.is-firstVisible {
-		@include firstVisible;
+	@layer components {
+		@include vars;
+		@include component;
 	}
 
-	&.is-lastVisible {
-		@include lastVisible;
-	}
+	@layer mods {
+		&.is-firstVisible {
+			@include firstVisible;
+		}
 
-	&.is-disabled {
-		@include disabled;
+		&.is-lastVisible {
+			@include lastVisible;
+		}
+
+		&.is-disabled {
+			@include disabled;
+		}
 	}
 }

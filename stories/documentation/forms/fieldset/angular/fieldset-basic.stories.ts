@@ -1,6 +1,10 @@
-import { FieldsetComponent } from '@lucca-front/ng/forms';
+import { FormsModule } from '@angular/forms';
+import { ButtonComponent } from '@lucca-front/ng/button';
+import { FormFieldComponent } from '@lucca-front/ng/form-field';
+import { FieldsetComponent, TextInputComponent } from '@lucca-front/ng/forms';
+import { GridColumnComponent, GridComponent } from '@lucca-front/ng/grid';
 import { Meta, moduleMetadata, StoryObj } from '@storybook/angular';
-import { cleanupTemplate, generateInputs } from 'stories/helpers/stories';
+import { generateInputs } from 'stories/helpers/stories';
 
 export default {
 	title: 'Documentation/Forms/Fieldset/Angular/Basic',
@@ -10,52 +14,85 @@ export default {
 				type: 'boolean',
 			},
 			if: { arg: 'expandable', truthy: false },
+			description: 'Place le titre du fieldset à gauche des champs.',
 		},
 		expandable: {
 			control: {
 				type: 'boolean',
 			},
 			if: { arg: 'horizontal', truthy: false },
+			description: 'Permet au fieldset de se replier.',
+		},
+		withAction: {
+			if: { arg: 'expandable', eq: false },
+			description: "Ajoute un bouton d'action à droite du titre.",
 		},
 		expanded: {
 			control: {
 				type: 'boolean',
 			},
 			if: { arg: 'expandable', truthy: true },
+			description: 'Affiche le fieldset en vue dépliée.',
 		},
 		size: {
 			options: ['', 'S'],
 			control: {
 				type: 'select',
 			},
+			description: 'Modifie la taille du fieldset.',
+		},
+		heading: {
+			control: {
+				type: 'text',
+			},
+			description: 'Titre du fieldset.',
+		},
+		helper: {
+			control: {
+				type: 'text',
+			},
+			description: 'Ajoute un sous-titre au fieldset.',
 		},
 	},
 	decorators: [
 		moduleMetadata({
-			imports: [FieldsetComponent],
+			imports: [FieldsetComponent, GridComponent, GridColumnComponent, FormFieldComponent, TextInputComponent, FormsModule, ButtonComponent],
 		}),
 	],
-	render: ({ expanded, size, helper, ...args }, { argTypes }) => {
+	render: ({ expanded, size, helper, action, withAction, ...args }, { argTypes }) => {
 		const expandedParam = expanded ? ` [expanded]="true"` : ``;
 		const helperParam = helper ? ` helper="${helper}"` : ``;
 		const sizeParam = size ? ` size="S"` : ``;
+		const actionParam = withAction ? ` [action]="portalSample"` : ``;
+		const portalSample = withAction
+			? `
+<ng-template #portalSample>
+	<button luButton>button</button>
+</ng-template>
+`
+			: ``;
 		return {
-			template: cleanupTemplate(`
-<lu-fieldset${helperParam}${expandedParam}${sizeParam}${generateInputs(args, argTypes)}>
-	<div class="grid mod-form">
-		<div class="grid-column" style="--grid-colspanAtMediaMinXXS: 2">
-			<div class="form-field"><label class="formLabel" id="IDlabel1" for="ID1">Label</label><div class="textField"><div class="textField-input"><input type="text" id="ID1" class="textField-input-value" aria-labelledby="IDlabel1" /></div></div></div>
-		</div>
-		<div class="grid-column" style="--grid-colspanAtMediaMinXXS: 2">
-			<div class="form-field"><label class="formLabel" id="IDlabel2" for="ID2">Label</label><div class="textField"><div class="textField-input"><input type="text" id="ID2" class="textField-input-value" aria-labelledby="IDlabel2" /></div></div></div>
-		</div>
-	</div>
-</lu-fieldset>`),
+			template: `@let column = { colspanAtMediaMinXXS: 2 };
+${portalSample}
+<lu-fieldset${helperParam}${expandedParam}${sizeParam}${actionParam}${generateInputs(args, argTypes)}>
+	<lu-grid mode="form">
+		<lu-grid-column colspan="4" [responsive]="column">
+			<lu-form-field label="Label">
+				<lu-text-input type="text" [(ngModel)]="example1" />
+			</lu-form-field>
+		</lu-grid-column>
+		<lu-grid-column colspan="4" [responsive]="column">
+			<lu-form-field label="Label">
+				<lu-text-input type="text" [(ngModel)]="example2" />
+			</lu-form-field>
+		</lu-grid-column>
+	</lu-grid>
+</lu-fieldset>`,
 		};
 	},
 } as Meta;
 
-export const Basic: StoryObj<FieldsetComponent & { content: string }> = {
+export const Basic: StoryObj<FieldsetComponent & { content: string; withAction: boolean }> = {
 	args: {
 		heading: 'Title',
 		helper: '',
@@ -63,5 +100,6 @@ export const Basic: StoryObj<FieldsetComponent & { content: string }> = {
 		expandable: false,
 		expanded: false,
 		horizontal: false,
+		withAction: false,
 	},
 };

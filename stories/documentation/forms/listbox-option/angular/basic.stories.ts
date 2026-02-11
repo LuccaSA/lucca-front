@@ -16,13 +16,18 @@ export default {
 		}),
 	],
 	argTypes: {
+		multiple: {
+			description: "Ajoute une checkbox à l'option.",
+		},
 		state: {
 			control: 'select',
 			options: [null, 'loading', 'empty'],
+			description: "Modifie l'état de l'option.",
 		},
 		withOption: {
 			type: 'boolean',
 			if: { arg: 'state', truthy: true },
+			description: "Conserve l'affichage des options déjà chargées.",
 		},
 	},
 	render: (args: OptionBasicStory) => {

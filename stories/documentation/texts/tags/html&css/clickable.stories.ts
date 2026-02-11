@@ -1,22 +1,18 @@
-import { Meta, StoryFn } from '@storybook/angular';
-
-interface TagsClickableStory {
-}
+import { Meta, StoryObj } from '@storybook/angular';
 
 export default {
 	title: 'Documentation/Texts/Tags/HTML&CSS/Clickable',
-	argTypes: {
-	},
 } as Meta;
 
-function getTemplate(args: TagsClickableStory): string {
+function getTemplate(): string {
 	return '<a href="#" class="tag">Text</a>';
 }
 
-const Template: StoryFn<TagsClickableStory> = (args) => ({
-	props: args,
-	template: getTemplate(args),
+const Template = () => ({
+	template: getTemplate(),
 });
 
-export const Clickable = Template.bind({});
-Clickable.args = { };
+export const Clickable: StoryObj = {
+	args: {},
+	render: Template,
+};

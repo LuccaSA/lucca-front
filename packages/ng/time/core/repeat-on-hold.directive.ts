@@ -1,13 +1,12 @@
-import { Directive, ElementRef, EventEmitter, OnDestroy, OnInit, Output } from '@angular/core';
+import { Directive, ElementRef, OnDestroy, OnInit, output } from '@angular/core';
 
 const INITIAL_INTERVAL = 500;
 
 @Directive({
 	selector: '[luRepeatOnHold]',
-	standalone: true,
 })
 export class RepeatOnHoldDirective implements OnDestroy, OnInit {
-	@Output() hold = new EventEmitter<void>();
+	hold = output<void>();
 
 	onMouseDown = () => {
 		if (this.startTime !== undefined) {

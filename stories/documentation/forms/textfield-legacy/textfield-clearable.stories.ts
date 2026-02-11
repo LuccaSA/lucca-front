@@ -1,4 +1,4 @@
-import { Meta, StoryFn } from '@storybook/angular';
+import { Meta, StoryObj } from '@storybook/angular';
 
 interface TextfieldClearableStory {}
 
@@ -18,7 +18,7 @@ function getTemplate(args: TextfieldClearableStory): string {
 </label>`;
 }
 
-const Template: StoryFn<TextfieldClearableStory> = (args) => ({
+const Template = (args: TextfieldClearableStory) => ({
 	props: args,
 	template: getTemplate(args),
 	styles: [
@@ -30,5 +30,7 @@ const Template: StoryFn<TextfieldClearableStory> = (args) => ({
 	],
 });
 
-export const Clearable = Template.bind({});
-Clearable.args = {};
+export const Clearable: StoryObj<TextfieldClearableStory> = {
+	args: {},
+	render: Template,
+};

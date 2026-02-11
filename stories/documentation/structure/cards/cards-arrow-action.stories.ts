@@ -1,4 +1,4 @@
-import { Meta, StoryFn } from '@storybook/angular';
+import { Meta, StoryObj } from '@storybook/angular';
 
 interface CardsArrowActionStory {}
 
@@ -21,10 +21,12 @@ function getTemplate(args: CardsArrowActionStory): string {
 </div>`;
 }
 
-const Template: StoryFn<CardsArrowActionStory> = (args) => ({
+const Template = (args: CardsArrowActionStory) => ({
 	props: args,
 	template: getTemplate(args),
 });
 
-export const ArrowAction = Template.bind({});
-ArrowAction.args = {};
+export const ArrowAction: StoryObj<CardsArrowActionStory> = {
+	args: {},
+	render: Template,
+};

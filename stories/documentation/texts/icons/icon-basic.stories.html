@@ -7,10 +7,12 @@
 <label for="showDeprecatedIcons"> Afficher les icônes dépréciées</label>
 
 <div class="icons">
-	<div class="demo-icon" *ngFor="let icon of icons" (click)="copyIcon(icon.icon)">
-		<span aria-hidden="true" class="lucca-icon icon-{{ icon.icon }}" [class.deprecated]="icon.deprecated"></span>
-		<code class="code">icon-{{ icon.icon }}</code>
-	</div>
+	@for (icon of icons; track icon.icon) {
+		<div class="demo-icon" (click)="copyIcon(icon.icon)">
+			<span aria-hidden="true" class="lucca-icon icon-{{ icon.icon }}" [class.deprecated]="icon.deprecated"></span>
+			<code class="code">icon-{{ icon.icon }}</code>
+		</div>
+	}
 </div>
 
 <style>

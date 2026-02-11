@@ -1,11 +1,11 @@
-import { Meta, StoryFn } from '@storybook/angular';
+import { Meta, StoryObj } from '@storybook/angular';
 
 interface GridsPositionStory {
 	reverse: boolean;
 }
 
 export default {
-	title: 'Documentation/Structure/Grids/HTML & CSS/Position',
+	title: 'Documentation/Structure/Grids/HTML&CSS/Position',
 	argTypes: {},
 } as Meta;
 
@@ -31,7 +31,7 @@ function getTemplate(args: GridsPositionStory): string {
 </div>`;
 }
 
-const Template: StoryFn<GridsPositionStory> = (args) => ({
+const Template = (args: GridsPositionStory) => ({
 	props: args,
 	template: getTemplate(args),
 	styles: [
@@ -54,5 +54,7 @@ const Template: StoryFn<GridsPositionStory> = (args) => ({
 	],
 });
 
-export const Basic = Template.bind({});
-Basic.args = {};
+export const Basic: StoryObj<GridsPositionStory> = {
+	args: {},
+	render: Template,
+};

@@ -1,7 +1,8 @@
 import { Overlay, OverlayConfig } from '@angular/cdk/overlay';
 import { ChangeDetectorRef, ElementRef, Renderer2, ViewContainerRef, ViewRef } from '@angular/core';
 import { ControlValueAccessor } from '@angular/forms';
-import { ILuClearer, ILuInput, ILuInputDisplayer } from '@lucca-front/ng/input';
+import { ILuClear } from '@lucca-front/ng/clear';
+import { ILuInput, ILuInputDisplayer } from '@lucca-front/ng/input';
 import { ILuInputWithPicker, ILuPickerPanel } from '@lucca-front/ng/picker';
 import { ALuPopoverTrigger, LuPopoverTarget } from '@lucca-front/ng/popover';
 import { Subscription } from 'rxjs';
@@ -99,7 +100,7 @@ export abstract class ALuSelectInput<T, TPicker extends ILuPickerPanel<T> = ILuP
 	protected get _picker() {
 		return this.panel;
 	}
-	protected set _clearer(clearer: ILuClearer<T>) {
+	protected set _clearer(clearer: ILuClear<T>) {
 		if (!!clearer && !!clearer.onClear) {
 			this._subs.add(clearer.onClear.subscribe(() => this.setValue(this._multiple ? [] : undefined)));
 		}

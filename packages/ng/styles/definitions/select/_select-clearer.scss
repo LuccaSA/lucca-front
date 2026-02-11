@@ -1,14 +1,17 @@
 @mixin selectClearerStyle {
-	:host {
-		display: none;
+	@layer components {
+		:host {
+			display: none;
+		}
 	}
 
-	:host-context(.textfield-input.is-filled) {
-		display: block;
-	}
+	@layer mods {
+		:host-context(.textfield-input.is-filled) {
+			display: block;
+		}
 
-	// Disabled
-	:host-context(.textfield-input.is-disabled, .textfield-input[disabled]) {
-		display: none;
+		:host-context(.textfield-input.is-disabled, .textfield-input[disabled]) {
+			display: none;
+		}
 	}
 }

@@ -10,7 +10,7 @@
 		display: inline-block;
 		vertical-align: text-bottom;
 		font-style: normal;
-		font-family: config.$font-name;
+		font-family: var(--icon-fontFamily);
 		content: var(--icon-content) / '';
 		-webkit-font-smoothing: antialiased;
 		text-transform: none;

@@ -1,14 +1,18 @@
 @use 'exports' as *;
 
 .divider {
-	@include vars;
-	@include component;
-
-	&.mod-S {
-		@include S;
+	@layer components {
+		@include vars;
+		@include component;
 	}
 
-	&.mod-vertical {
-		@include vertical;
+	@layer mods {
+		&.mod-S {
+			@include S;
+		}
+
+		&.mod-vertical {
+			@include vertical;
+		}
 	}
 }

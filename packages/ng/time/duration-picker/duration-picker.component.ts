@@ -1,7 +1,6 @@
-import { NgClass } from '@angular/common';
-import { booleanAttribute, ChangeDetectionStrategy, Component, computed, forwardRef, Input, input, model, output, ViewEncapsulation } from '@angular/core';
+import { booleanAttribute, ChangeDetectionStrategy, Component, computed, forwardRef, input, model, output, ViewEncapsulation } from '@angular/core';
 import { NG_VALUE_ACCESSOR } from '@angular/forms';
-import { getIntl, isNil, isNotNil } from '@lucca-front/ng/core';
+import { intlInputOptions, isNil, isNotNil } from '@lucca-front/ng/core';
 import { BasePickerComponent } from '../core/base-picker.component';
 import { ISO8601Duration } from '../core/date-primitives';
 import { createDurationFromHoursAndMinutes, getHoursPartFromDuration, getMinutesPartFromDuration, isISO8601Duration, isoDurationToDateFnsDuration, isoDurationToSeconds } from '../core/duration.utils';
@@ -14,8 +13,7 @@ import { LU_DURATION_PICKER_TRANSLATIONS } from './duration-picker.translate';
 
 @Component({
 	selector: 'lu-duration-picker',
-	standalone: true,
-	imports: [TimePickerPartComponent, NgClass],
+	imports: [TimePickerPartComponent],
 	templateUrl: './duration-picker.component.html',
 	styleUrl: './duration-picker.component.scss',
 	changeDetection: ChangeDetectionStrategy.OnPush,
@@ -29,24 +27,31 @@ import { LU_DURATION_PICKER_TRANSLATIONS } from './duration-picker.translate';
 	],
 })
 export class DurationPickerComponent extends BasePickerComponent {
-	protected intl = getIntl(LU_DURATION_PICKER_TRANSLATIONS);
+	protected intl = input(...intlInputOptions(LU_DURATION_PICKER_TRANSLATIONS));
 
 	value = model<ISO8601Duration>('PT0S');
-	max = input<ISO8601Duration>('PT99H');
+	readonly max = input<ISO8601Duration>('PT99H');
 
-	displayArrows = input(false, { transform: booleanAttribute });
+	readonly displayArrows = input(false, { transform: booleanAttribute });
 
-	@Input() label: string;
+	readonly label = input<string>();
 
-	hideZeroValue = input(false, { transform: booleanAttribute });
+	readonly hideZeroValue = input(false, { transform: booleanAttribute });
 
-	durationChange = output<DurationChangeEvent>();
+	readonly durationChange = output<DurationChangeEvent>();
 
-	protected hours = computed(() => getHoursPartFromDuration(this.value()));
-	protected minutes = computed(() => getMinutesPartFromDuration(this.value()));
-	protected shouldHideValue = computed(() => this.hideZeroValue() && this.hours() === 0 && this.minutes() === 0);
+	protected readonly hours = computed(() => getHoursPartFromDuration(this.value()));
+	protected readonly minutes = computed(() => getMinutesPartFromDuration(this.value()));
+	protected readonly shouldHideValue = computed(() => this.hideZeroValue() && this.hours() === 0 && this.minutes() === 0);
 
-	protected pickerClasses = computed(() => {
+	protected readonly maxDigits = computed(() => {
+		const maxISO = isoDurationToSeconds(this.max());
+		const maxHour = maxISO / 3600;
+		const maxHourDigits = maxHour.toString().length;
+		return maxHourDigits;
+	});
+
+	protected readonly pickerClasses = computed(() => {
 		return {
 			timePicker: true,
 			'mod-stepper': this.displayArrows(),
@@ -54,13 +59,13 @@ export class DurationPickerComponent extends BasePickerComponent {
 			[`mod-${this.size()}`]: Boolean(this.size()),
 		};
 	});
-	protected fieldsetSuffixClasses = computed(() => {
+	protected readonly fieldsetSuffixClasses = computed(() => {
 		return {
 			'timePicker-fieldset-groupSeparator': true,
 			'pr-u-visibilityHidden': this.shouldHideValue(),
 		};
 	});
-	protected separator = this.intl.timePickerTimeSeparator;
+	protected separator = computed(() => this.intl().timePickerTimeSeparator);
 
 	protected hoursDecimalConf = DEFAULT_TIME_DECIMAL_PIPE_FORMAT;
 
@@ -160,8 +165,13 @@ export class DurationPickerComponent extends BasePickerComponent {
 		let hoursPart = getHoursPartFromDuration(protoEvent.value);
 		const minutesPart = getMinutesPartFromDuration(protoEvent.value);
 
+		this.hoursPart().isValueSet.set(true);
+		this.minutesPart().isValueSet.set(true);
+
 		if (hoursPart < 0) {
-			hoursPart = getHoursPartFromDuration(this.max());
+			if (hoursPart === -1) {
+				hoursPart = getHoursPartFromDuration(this.max());
+			}
 			if (isoDurationToSeconds(createDurationFromHoursAndMinutes(hoursPart, minutesPart)) > isoDurationToSeconds(this.max())) {
 				// If current value with minutes is > max, decrement hours again
 				hoursPart--;
@@ -176,10 +186,9 @@ export class DurationPickerComponent extends BasePickerComponent {
 
 		const seconds = roundToNearest(circularize(candidateTimeAsSeconds, max), 60);
 
-		const hours = Math.floor(seconds / 3600);
 		const minutes = Math.floor((seconds % 3600) / 60);
 
-		const result = createDurationFromHoursAndMinutes(hours, minutes);
+		const result = createDurationFromHoursAndMinutes(hoursPart, minutes);
 
 		this.value.set(result);
 		this.onChange?.(result);

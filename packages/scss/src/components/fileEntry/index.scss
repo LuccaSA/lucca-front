@@ -1,34 +1,38 @@
 @use 'exports' as *;
 
 .fileEntry {
-	@include vars;
-	@include component;
-
-	&.mod-S {
-		@include S;
+	@layer components {
+		@include vars;
+		@include component;
 	}
 
-	&.mod-media {
-		@include media;
-
+	@layer mods {
 		&.mod-S {
-			@include mediaS;
+			@include S;
 		}
-	}
 
-	&.is-error {
-		@include error;
+		&.mod-media {
+			@include media;
 
-		&.mod-S {
-			@include errorS;
+			&.mod-S {
+				@include mediaS;
+			}
 		}
-	}
 
-	&.is-loading {
-		@include loading;
+		&.is-error {
+			@include error;
 
-		&.mod-S {
-			@include loadingS;
+			&.mod-S {
+				@include errorS;
+			}
+		}
+
+		&.is-loading {
+			@include loading;
+
+			&.mod-S {
+				@include loadingS;
+			}
 		}
 	}
 }

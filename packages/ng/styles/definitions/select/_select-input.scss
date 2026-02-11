@@ -4,298 +4,306 @@
 
 @mixin selectInputStyle {
 	:host {
-		--components-select-input-padding-horizontal: var(--pr-t-spacings-100);
-		--components-select-input-padding-vertical: var(--pr-t-spacings-100);
-		--components-select-framed-color: var(--palettes-neutral-500);
-		--components-select-framed-color50: var(--palettes-neutral-50);
-		--components-select-framed-see-through: var(--palettes-neutral-50);
-		--components-select-framed-text: var(--pr-t-color-text);
-		--components-select-framed-placeholder: #cccccc;
-		--components-select-framed-side-padding: var(--pr-t-spacings-200);
-		--components-select-framed-top-padding: var(--pr-t-spacings-400);
-		--components-select-framed-bottom-padding: var(--pr-t-spacings-200);
-		--components-select-framed-label-top-offset: var(--pr-t-spacings-100);
+		@layer components {
+			--components-select-input-padding-horizontal: var(--pr-t-spacings-100);
+			--components-select-input-padding-vertical: var(--pr-t-spacings-100);
+			--components-select-framed-color: var(--palettes-neutral-500);
+			--components-select-framed-color50: var(--palettes-neutral-50);
+			--components-select-framed-see-through: var(--palettes-neutral-50);
+			--components-select-framed-text: var(--pr-t-color-text);
+			--components-select-framed-placeholder: #cccccc;
+			--components-select-framed-side-padding: var(--pr-t-spacings-200);
+			--components-select-framed-top-padding: var(--pr-t-spacings-400);
+			--components-select-framed-bottom-padding: var(--pr-t-spacings-200);
+			--components-select-framed-label-top-offset: var(--pr-t-spacings-100);
 
-		cursor: pointer;
-		outline: none;
-		padding: 0;
-		gap: 0;
+			cursor: pointer;
+			outline: none;
+			padding: 0;
+			gap: 0;
 
-		&::after {
-			@include icon.generate('arrow_chevron_bottom');
+			&::after {
+				@include icon.generate('arrow_chevron_bottom');
 
-			color: var(--palettes-neutral-600);
-			inset-block-end: var(--components-select-input-padding-vertical);
-			font-size: var(--pr-t-font-body-M-lineHeight);
-			line-height: var(--pr-t-font-body-M-lineHeight);
-			pointer-events: none;
-			position: absolute;
-			inset-inline-end: var(--components-select-input-padding-horizontal);
-			transition: transform var(--commons-animations-durations-standard) ease;
+				color: var(--palettes-neutral-600);
+				inset-block-end: var(--components-select-input-padding-vertical);
+				font-size: var(--pr-t-font-body-M-lineHeight);
+				line-height: var(--pr-t-font-body-M-lineHeight);
+				pointer-events: none;
+				position: absolute;
+				inset-inline-end: var(--components-select-input-padding-horizontal);
+				transition: transform var(--commons-animations-durations-standard) ease;
+			}
 		}
 
-		&[disabled],
-		&.is-disabled {
-			cursor: not-allowed; // disabled token candidate
-			pointer-events: all;
+		@layer mods {
+			&[disabled],
+			&.is-disabled {
+				cursor: not-allowed; // disabled token candidate
+				pointer-events: all;
+			}
 		}
 	}
 
-	.lu-select-display-wrapper {
-		display: block;
-		inline-size: 100%;
-		text-overflow: ellipsis;
-		white-space: nowrap;
-		overflow: hidden;
-	}
-
-	.lu-select-value {
-		line-height: var(--pr-t-font-body-M-lineHeight);
-		min-block-size: calc(var(--components-select-framed-bottom-padding) + var(--pr-t-font-body-M-lineHeight));
-		padding-block: var(--components-select-input-padding-vertical);
-		padding-inline: var(--components-select-input-padding-horizontal) 3.5rem;
-		transition: all var(--commons-animations-durations-standard);
-		display: none;
-	}
-
-	.lu-select-placeholder {
-		color: var(--palettes-neutral-400);
-		line-height: var(--pr-t-font-body-M-lineHeight);
-		min-block-size: calc(var(--components-select-framed-bottom-padding) + var(--pr-t-font-body-M-lineHeight));
-		padding-block: var(--components-select-input-padding-vertical);
-		padding-inline: var(--components-select-input-padding-horizontal) 3.5rem;
-		transition: all var(--commons-animations-durations-standard);
-		overflow: hidden;
-		text-overflow: ellipsis;
-		white-space: nowrap;
-	}
-
-	.lu-select-suffix,
-	.lu-select-clearer {
-		position: absolute;
-		inset-block-end: var(--pr-t-spacings-150);
-		inset-inline-end: 2.5rem;
-	}
-
-	::ng-deep .lu-select-value {
-		.chip {
-			display: inline-flex;
-			max-inline-size: 100%;
-			margin-block: 0 var(--pr-t-spacings-50);
-			margin-inline: 0 var(--pr-t-spacings-50);
+	@layer components {
+		.lu-select-display-wrapper {
+			display: block;
+			inline-size: 100%;
 			text-overflow: ellipsis;
-			overflow: hidden;
 			white-space: nowrap;
+			overflow: hidden;
+		}
+
+		.lu-select-value {
+			font: var(--pr-t-font-body-M);
+			min-block-size: calc(var(--components-select-framed-bottom-padding) + var(--pr-t-font-body-M-lineHeight));
+			padding-block: var(--components-select-input-padding-vertical);
+			padding-inline: var(--components-select-input-padding-horizontal) 3.5rem;
+			transition: all var(--commons-animations-durations-standard);
+			display: none;
+		}
+
+		.lu-select-placeholder {
+			color: var(--palettes-neutral-400);
+			font: var(--pr-t-font-body-M);
+			min-block-size: calc(var(--components-select-framed-bottom-padding) + var(--pr-t-font-body-M-lineHeight));
+			padding-block: var(--components-select-input-padding-vertical);
+			padding-inline: var(--components-select-input-padding-horizontal) 3.5rem;
+			transition: all var(--commons-animations-durations-standard);
+			overflow: hidden;
+			text-overflow: ellipsis;
+			white-space: nowrap;
+		}
+
+		.lu-select-suffix,
+		.lu-select-clearer {
+			position: absolute;
+			inset-block-end: var(--pr-t-spacings-150);
+			inset-inline-end: 2.5rem;
+		}
+
+		::ng-deep .lu-select-value {
+			.chip {
+				display: inline-flex;
+				max-inline-size: 100%;
+				margin-block: 0 var(--pr-t-spacings-50);
+				margin-inline: 0 var(--pr-t-spacings-50);
+				text-overflow: ellipsis;
+				overflow: hidden;
+				white-space: nowrap;
+			}
 		}
 	}
 
 	// MODS
 	// ▒▒▒▒▒▒▒▒▒▒▒▒▒▒▒▒▒▒▒▒▒▒▒▒▒▒▒▒▒▒▒▒▒▒▒▒▒▒▒▒▒▒▒▒▒▒▒▒▒▒▒▒▒▒▒▒
 
+	@layer mods {
 	// Small
-	:host-context(.textfield.mod-S) {
-		padding: 0;
+		:host-context(.textfield.mod-S) {
+			padding: 0;
 
-		.lu-select-value,
-		.lu-select-placeholder {
-			font-size: var(--pr-t-font-body-S-fontSize);
-			line-height: var(--pr-t-font-body-XS-lineHeight);
-			min-block-size: calc(var(--components-select-framed-bottom-padding) + var(--pr-t-font-body-XS-lineHeight));
-		}
-
-		.lu-select-clearer {
-			inset-block-end: var(--pr-t-spacings-100);
-		}
-
-		&::after {
-			line-height: var(--pr-t-font-body-XS-lineHeight);
-			font-size: var(--pr-t-font-body-S-lineHeight);
-		}
-
-		.lu-select-suffix {
-			inset-block-end: 0.5rem;
-			inset-inline-end: 2rem;
-		}
-
-		::ng-deep .lu-select-value {
-			.chip {
-				block-size: var(--pr-t-font-body-XS-lineHeight);
+			.lu-select-value,
+			.lu-select-placeholder {
+				font-size: var(--pr-t-font-body-S-fontSize);
 				line-height: var(--pr-t-font-body-XS-lineHeight);
-				font-size: var(--pr-t-font-body-XS-fontSize);
-				padding-inline: var(--pr-t-spacings-50);
-				gap: var(--pr-t-spacings-50);
+				min-block-size: calc(var(--components-select-framed-bottom-padding) + var(--pr-t-font-body-XS-lineHeight));
 			}
 
-			.numericBadge {
-				@include numericBadge.S;
+			.lu-select-clearer {
+				inset-block-end: var(--pr-t-spacings-100);
 			}
-		}
-	}
-
-	// Framed
-	:host-context(.textfield.mod-framed),
-	:host-context(.form.mod-framed) {
-		&.textfield-input {
-			padding-block: var(--components-select-framed-top-padding) 0;
-			padding-inline: 0;
 
 			&::after {
-				color: var(--palettes-neutral-500);
-				inset-block-end: var(--components-select-framed-bottom-padding);
-				inset-inline-end: var(--pr-t-spacings-100);
-			}
-
-			.lu-select-value {
-				padding-block: 0 var(--components-select-framed-bottom-padding);
-				padding-inline: var(--components-select-framed-side-padding) calc(var(--components-select-framed-side-padding) * 3);
-			}
-
-			.lu-select-placeholder {
-				color: var(--palettes-neutral-400);
-				padding-block: 0 var(--components-select-framed-bottom-padding);
-				padding-inline: var(--components-select-framed-side-padding) calc(var(--components-select-framed-side-padding) * 3);
+				line-height: var(--pr-t-font-body-XS-lineHeight);
+				font-size: var(--pr-t-font-body-S-lineHeight);
 			}
 
 			.lu-select-suffix {
-				inset-block-end: var(--components-select-framed-bottom-padding);
-				inset-inline-end: 1.7rem;
+				inset-block-end: 0.5rem;
+				inset-inline-end: 2rem;
+			}
+
+			::ng-deep .lu-select-value {
+				.chip {
+					block-size: var(--pr-t-font-body-XS-lineHeight);
+					line-height: var(--pr-t-font-body-XS-lineHeight);
+					font-size: var(--pr-t-font-body-XS-fontSize);
+					padding-inline: var(--pr-t-spacings-50);
+					gap: var(--pr-t-spacings-50);
+				}
+
+				.numericBadge {
+					@include numericBadge.S;
+				}
 			}
 		}
-	}
 
-	// Filter
-	:host-context(.textfield.mod-filter) {
-		.lu-select-value,
-		.lu-select-placeholder {
-			padding: 0;
-			block-size: auto;
-			padding-block-start: var(--pr-t-spacings-200);
-			color: var(--pr-t-color-text);
+		// Framed
+		:host-context(.textfield.mod-framed),
+		:host-context(.form.mod-framed) {
+			&.textfield-input {
+				padding-block: var(--components-select-framed-top-padding) 0;
+				padding-inline: 0;
+
+				&::after {
+					color: var(--palettes-neutral-500);
+					inset-block-end: var(--components-select-framed-bottom-padding);
+					inset-inline-end: var(--pr-t-spacings-100);
+				}
+
+				.lu-select-value {
+					padding-block: 0 var(--components-select-framed-bottom-padding);
+					padding-inline: var(--components-select-framed-side-padding) calc(var(--components-select-framed-side-padding) * 3);
+				}
+
+				.lu-select-placeholder {
+					color: var(--palettes-neutral-400);
+					padding-block: 0 var(--components-select-framed-bottom-padding);
+					padding-inline: var(--components-select-framed-side-padding) calc(var(--components-select-framed-side-padding) * 3);
+				}
+
+				.lu-select-suffix {
+					inset-block-end: var(--components-select-framed-bottom-padding);
+					inset-inline-end: 1.7rem;
+				}
+			}
 		}
-	}
 
-	// Material
-	:host-context(.textfield.mod-material) {
-		&::after {
-			color: var(--palettes-neutral-500);
-			inset-block-end: 0.6rem;
-			inset-inline-end: 0;
+		// Filter
+		:host-context(.textfield.mod-filter) {
+			.lu-select-value,
+			.lu-select-placeholder {
+				padding: 0;
+				block-size: auto;
+				padding-block-start: var(--pr-t-spacings-200);
+				color: var(--pr-t-color-text);
+			}
 		}
 
-		.lu-select-value,
-		.lu-select-placeholder {
-			padding-inline: 0 0.8rem;
+		// Material
+		:host-context(.textfield.mod-material) {
+			&::after {
+				color: var(--palettes-neutral-500);
+				inset-block-end: 0.6rem;
+				inset-inline-end: 0;
+			}
+
+			.lu-select-value,
+			.lu-select-placeholder {
+				padding-inline: 0 0.8rem;
+			}
+
+			.lu-select-suffix {
+				inset-inline-end: calc(2 * var(--components-select-input-padding-horizontal));
+			}
+
+			&.is-select {
+				.lu-select-placeholder {
+					display: none;
+				}
+			}
+
+			&.mod-search {
+				&::after {
+					inset-block-end: 0;
+				}
+
+				.lu-select-suffix {
+					inset-inline-end: calc(2.75 * var(--components-select-input-padding-horizontal));
+				}
+			}
 		}
 
-		.lu-select-suffix {
-			inset-inline-end: calc(2 * var(--components-select-input-padding-horizontal));
-		}
-
-		&.is-select {
+		:host-context(.textfield.mod-material .textfield-input.is-focused) {
 			.lu-select-placeholder {
 				display: none;
 			}
 		}
 
-		&.mod-search {
-			&::after {
-				inset-block-end: 0;
+		// Multiple
+		:host(.mod-multiple) {
+			.lu-select-value {
+				block-size: auto;
+				align-items: center;
 			}
 
-			.lu-select-suffix {
-				inset-inline-end: calc(2.75 * var(--components-select-input-padding-horizontal));
+			.lu-select-display-wrapper {
+				overflow: visible;
+				white-space: normal;
+				margin-block-end: calc(var(--pr-t-spacings-50) * -1);
 			}
 		}
-	}
 
-	:host-context(.textfield.mod-material .textfield-input.is-focused) {
-		.lu-select-placeholder {
-			display: none;
-		}
-	}
+		// Outlined
+		:host-context(.textfield.mod-outlined) {
+			&.textfield-input {
+				&::after {
+					color: var(--palettes-neutral-600);
+				}
 
-	// Multiple
-	:host(.mod-multiple) {
-		.lu-select-value {
-			block-size: auto;
-			align-items: center;
-		}
-
-		.lu-select-display-wrapper {
-			overflow: visible;
-			white-space: normal;
-			margin-block-end: calc(var(--pr-t-spacings-50) * -1);
-		}
-	}
-
-	// Outlined
-	:host-context(.textfield.mod-outlined) {
-		&.textfield-input {
-			&::after {
-				color: var(--palettes-neutral-600);
+				.lu-select-placeholder {
+					color: var(--palettes-neutral-400);
+				}
 			}
 
+			// Error
+			:host-context(.textfield-input.is-error) {
+				&::after {
+					color: var(--palettes-error-600);
+				}
+
+				.lu-select-placeholder {
+					color: var(--palettes-error-400);
+				}
+			}
+		}
+
+		// STATES
+		// ▒▒▒▒▒▒▒▒▒▒▒▒▒▒▒▒▒▒▒▒▒▒▒▒▒▒▒▒▒▒▒▒▒▒▒▒▒▒▒▒▒▒▒▒▒▒▒▒▒▒▒▒▒▒▒▒
+
+		// Filled
+		:host-context(.textfield-input.is-filled) {
 			.lu-select-placeholder {
-				color: var(--palettes-neutral-400);
+				display: none;
+			}
+
+			.lu-select-value {
+				display: flex;
+				align-items: flex-start;
+			}
+		}
+
+		// Focused
+		:host-context(.textfield .textfield-input.is-focused) {
+			&::after {
+				transform: rotate(-180deg);
+			}
+		}
+
+		// Clearable
+		:host-context(.textfield-input.is-clearable) {
+			.lu-select-value {
+				padding-inline-end: 3.5rem;
 			}
 		}
 
 		// Error
-		:host-context(.textfield-input.is-error) {
-			&::after {
-				color: var(--palettes-error-600);
-			}
-
+		:host-context(.textfield-input.is-error, .textfield-input.is-invalid, .textfield-input.ng-invalid.ng-touched) {
 			.lu-select-placeholder {
 				color: var(--palettes-error-400);
 			}
 		}
-	}
 
-	// STATES
-	// ▒▒▒▒▒▒▒▒▒▒▒▒▒▒▒▒▒▒▒▒▒▒▒▒▒▒▒▒▒▒▒▒▒▒▒▒▒▒▒▒▒▒▒▒▒▒▒▒▒▒▒▒▒▒▒▒
+		// Disabled
+		:host-context(.textfield-input.is-disabled, .textfield-input[disabled]) {
+			&::after {
+				color: var(--commons-disabled-color);
+			}
 
-	// Filled
-	:host-context(.textfield-input.is-filled) {
-		.lu-select-placeholder {
-			display: none;
-		}
-
-		.lu-select-value {
-			display: flex;
-			align-items: flex-start;
-		}
-	}
-
-	// Focused
-	:host-context(.textfield .textfield-input.is-focused) {
-		&::after {
-			transform: rotate(-180deg);
-		}
-	}
-
-	// Clearable
-	:host-context(.textfield-input.is-clearable) {
-		.lu-select-value {
-			padding-inline-end: 3.5rem;
-		}
-	}
-
-	// Error
-	:host-context(.textfield-input.is-error, .textfield-input.is-invalid, .textfield-input.ng-invalid.ng-touched) {
-		.lu-select-placeholder {
-			color: var(--palettes-error-400);
-		}
-	}
-
-	// Disabled
-	:host-context(.textfield-input.is-disabled, .textfield-input[disabled]) {
-		&::after {
-			color: var(--commons-disabled-color);
-		}
-
-		.lu-select-placeholder {
-			color: var(--commons-disabled-placeholder);
+			.lu-select-placeholder {
+				color: var(--commons-disabled-placeholder);
+			}
 		}
 	}
 }

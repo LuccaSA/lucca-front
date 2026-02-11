@@ -1,11 +1,11 @@
-import { Meta, StoryFn } from '@storybook/angular';
+import { Meta, StoryObj } from '@storybook/angular';
 
 interface GridsSpanStory {
 	reverse: boolean;
 }
 
 export default {
-	title: 'Documentation/Structure/Grids/HTML & CSS/ResponsiveSpan',
+	title: 'Documentation/Structure/Grids/HTML&CSS/ResponsiveSpan',
 	argTypes: {},
 } as Meta;
 
@@ -18,7 +18,7 @@ function getTemplate(args: GridsSpanStory): string {
 </div>`;
 }
 
-const Template: StoryFn<GridsSpanStory> = (args) => ({
+const Template = (args: GridsSpanStory) => ({
 	props: args,
 	template: getTemplate(args),
 	styles: [
@@ -37,5 +37,7 @@ const Template: StoryFn<GridsSpanStory> = (args) => ({
 	],
 });
 
-export const Basic = Template.bind({});
-Basic.args = {};
+export const Basic: StoryObj<GridsSpanStory> = {
+	args: {},
+	render: Template,
+};

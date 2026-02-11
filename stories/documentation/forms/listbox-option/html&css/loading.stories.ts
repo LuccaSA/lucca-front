@@ -8,7 +8,7 @@ interface OptionBasicStory {
 }
 
 export default {
-	title: 'Documentation/Forms/Listbox Option/HTML & CSS/Loading',
+	title: 'Documentation/Forms/Listbox Option/HTML&CSS/Loading',
 	decorators: [
 		moduleMetadata({
 			imports: [LoadingComponent],

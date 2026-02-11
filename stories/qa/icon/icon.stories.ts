@@ -1,13 +1,13 @@
-import { NgForOf } from '@angular/common';
-import { Component } from '@angular/core';
+import { IconsList } from '@/stories/icons-list';
+import { ChangeDetectionStrategy, Component } from '@angular/core';
+import { IconComponent } from '@lucca-front/ng/icon';
 import { Meta, moduleMetadata, StoryObj } from '@storybook/angular';
-import { IconsList } from '@lucca-front/icons/icons-list';
 
 @Component({
-	standalone: true,
 	selector: 'icon-stories',
 	templateUrl: './icon.stories.html',
-	imports: [NgForOf],
+	imports: [IconComponent],
+	changeDetection: ChangeDetectionStrategy.OnPush,
 })
 class IconStory {
 	icons = IconsList;

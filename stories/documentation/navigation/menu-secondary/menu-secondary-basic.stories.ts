@@ -1,4 +1,4 @@
-import { Meta, StoryFn } from '@storybook/angular';
+import { Meta, StoryObj } from '@storybook/angular';
 
 interface MenuSecondaryBasicStory {
 	compact: boolean;
@@ -12,16 +12,19 @@ export default {
 		compact: {
 			control: {
 				type: 'boolean',
+				description: 'Affiche la navigation en vue compacte.',
 			},
 		},
 		banner: {
 			control: {
 				type: 'boolean',
+				description: 'Ajoute une marge pour positionner la navigation sous la bannière Lucca.',
 			},
 		},
 		open: {
 			control: {
 				type: 'boolean',
+				description: 'Affiche un sous-menu en vue dépliée.',
 			},
 		},
 	},
@@ -124,7 +127,7 @@ function getTemplate(args: MenuSecondaryBasicStory): string {
 	`;
 }
 
-const Template: StoryFn<MenuSecondaryBasicStory> = (args) => ({
+const Template = (args: MenuSecondaryBasicStory) => ({
 	props: args,
 	template: getTemplate(args),
 	styles: [
@@ -136,5 +139,7 @@ const Template: StoryFn<MenuSecondaryBasicStory> = (args) => ({
 	],
 });
 
-export const Basic = Template.bind({});
-Basic.args = { compact: false, banner: false, open: false };
+export const Basic: StoryObj<MenuSecondaryBasicStory> = {
+	args: { compact: false, banner: false, open: false },
+	render: Template,
+};

@@ -1,0 +1,185 @@
+<table class="demo-QAtable">
+	<tbody>
+		<tr>
+			<td></td>
+			<td style="width: 100%">
+				<div class="demo-QAtable-list">Angular</div>
+			</td>
+		</tr>
+		<tr>
+			<td>Default</td>
+			<td>
+				<lu-form-field extraDescribedBy="extra-message" label="Label">
+					<lu-text-input autocomplete="" searchIcon="searchMagnifyingGlass" type="text" placeholder="Placeholder" [(ngModel)]="example" />
+				</lu-form-field>
+			</td>
+		</tr>
+		<tr>
+			<td>Required</td>
+			<td>
+				<lu-form-field extraDescribedBy="extra-message" label="Label">
+					<lu-text-input
+						required
+						autocomplete=""
+						searchIcon="searchMagnifyingGlass"
+						type="text"
+						placeholder="Placeholder"
+						[(ngModel)]="example"
+					/>
+				</lu-form-field>
+			</td>
+		</tr>
+		<tr>
+			<td>HiddenLabel</td>
+			<td>
+				<lu-form-field hiddenLabel extraDescribedBy="extra-message" label="Label">
+					<lu-text-input
+						required
+						autocomplete=""
+						searchIcon="searchMagnifyingGlass"
+						type="text"
+						placeholder="Placeholder"
+						[(ngModel)]="example"
+					/>
+				</lu-form-field>
+			</td>
+		</tr>
+		<tr>
+			<td>Invalid</td>
+			<td>
+				<lu-form-field invalid extraDescribedBy="extra-message" label="Label">
+					<lu-text-input
+						required
+						autocomplete=""
+						searchIcon="searchMagnifyingGlass"
+						type="text"
+						placeholder="Placeholder"
+						[(ngModel)]="example"
+					/>
+				</lu-form-field>
+				<lu-form-field invalid hiddenLabel extraDescribedBy="extra-message" label="Label">
+					<lu-text-input
+						required
+						autocomplete=""
+						searchIcon="searchMagnifyingGlass"
+						type="text"
+						placeholder="Placeholder"
+						[(ngModel)]="example"
+					/>
+				</lu-form-field>
+			</td>
+		</tr>
+		<tr>
+			<td>InlineMessage</td>
+			<td>
+				@for (state of stateOptions; track state) {
+					<lu-form-field
+						extraDescribedBy="extra-message"
+						label="Label"
+						inlineMessage="Helper text"
+						errorInlineMessage="Error helper text"
+						[inlineMessageState]="state"
+					>
+						<lu-text-input
+							required
+							autocomplete=""
+							searchIcon="searchMagnifyingGlass"
+							type="text"
+							placeholder="Placeholder"
+							[(ngModel)]="example"
+						/>
+					</lu-form-field>
+				}
+			</td>
+		</tr>
+		<tr>
+			<td>Counter</td>
+			<td>
+				<lu-form-field
+					extraDescribedBy="extra-message"
+					label="Label"
+					inlineMessage="Helper text"
+					errorInlineMessage="Error helper text"
+					counter="10"
+				>
+					<lu-text-input
+						required
+						autocomplete=""
+						searchIcon="searchMagnifyingGlass"
+						type="text"
+						placeholder="Placeholder"
+						[(ngModel)]="example"
+					/>
+				</lu-form-field>
+			</td>
+		</tr>
+		<tr>
+			<td>Width</td>
+			<td>
+				@for (width of widthOptions; track width) {
+					<lu-form-field
+						extraDescribedBy="extra-message"
+						label="Label"
+						inlineMessage="Helper text"
+						errorInlineMessage="Error helper text"
+						[width]="width"
+					>
+						<lu-text-input
+							required
+							autocomplete=""
+							searchIcon="searchMagnifyingGlass"
+							type="text"
+							placeholder="Placeholder"
+							[(ngModel)]="example"
+						/>
+					</lu-form-field>
+				}
+			</td>
+		</tr>
+		<tr>
+			<td>AI</td>
+			<td>
+				<lu-form-field
+					extraDescribedBy="extra-message"
+					label="Label"
+					inlineMessage="Helper text"
+					errorInlineMessage="Error helper text"
+					AI="true"
+				>
+					<lu-text-input
+						required
+						autocomplete=""
+						searchIcon="searchMagnifyingGlass"
+						type="text"
+						placeholder="Placeholder"
+						[(ngModel)]="example"
+					/>
+				</lu-form-field>
+			</td>
+		</tr>
+		<tr>
+			<td>Alt</td>
+			<td>
+				<lu-form-field
+					extraDescribedBy="extra-message"
+					label="Label"
+					inlineMessage="Helper text"
+					errorInlineMessage="Error helper text"
+					tag="tag"
+				>
+					<lu-text-input
+						required
+						autocomplete=""
+						searchIcon="searchMagnifyingGlass"
+						type="text"
+						placeholder="Placeholder"
+						[(ngModel)]="example"
+					/>
+				</lu-form-field>
+			</td>
+		</tr>
+	</tbody>
+</table>
+
+<!-- To tell the ui-diff tool that the page has finished rendering -->
+<span id="ready"></span>

@@ -23,5 +23,6 @@ export const Basic: StoryObj<BoxComponent & { content: string }> = {
 		toggle: false,
 		neutral: false,
 		killable: false,
+		withArrow: false,
 	},
 };

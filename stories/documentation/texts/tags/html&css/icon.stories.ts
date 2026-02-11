@@ -1,24 +1,20 @@
-import { Meta, StoryFn } from '@storybook/angular';
-
-interface TagsIconStory {
-}
+import { Meta, StoryObj } from '@storybook/angular';
 
 export default {
 	title: 'Documentation/Texts/Tags/HTML&CSS/Icon',
-	argTypes: {
-	},
 } as Meta;
 
-function getTemplate(args: TagsIconStory): string {
+function getTemplate(): string {
 	return `<span class="tag">
 	<span class="lucca-icon icon-heart" aria-hidden="true"></span> <span class="tag-content">Text</span>
 </span>`;
 }
 
-const Template: StoryFn<TagsIconStory> = (args) => ({
-	props: args,
-	template: getTemplate(args),
+const Template = () => ({
+	template: getTemplate(),
 });
 
-export const Icon = Template.bind({});
-Icon.args = { };
+export const Icon: StoryObj = {
+	args: {},
+	render: Template,
+};

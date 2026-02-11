@@ -1,14 +1,28 @@
 @use 'exports' as *;
 
 .emptyState {
-	@include vars;
-	@include component;
-
-	&.mod-page {
-		@include page;
+	@layer components {
+		@include vars;
+		@include component;
 	}
 
-	&.mod-center {
-		@include center;
+	@layer mods {
+		&.mod-page {
+			@include page;
+		}
+
+		&.mod-center {
+			@include center;
+		}
+
+		.table &,
+		.indexTable &,
+		.dataTable & {
+			@include insideTable;
+		}
+
+		.container & {
+			@include insideContainer;
+		}
 	}
 }

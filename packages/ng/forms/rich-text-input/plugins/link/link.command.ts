@@ -1,6 +1,6 @@
-import { $getSelection, $isRangeSelection, COMMAND_PRIORITY_NORMAL, createCommand, LexicalEditor, SELECTION_CHANGE_COMMAND } from 'lexical';
 import { $createLinkNode, $isLinkNode, $toggleLink, AutoLinkNode, LinkNode } from '@lexical/link';
 import { $getNearestNodeOfType } from '@lexical/utils';
+import { $getSelection, $isRangeSelection, COMMAND_PRIORITY_NORMAL, createCommand, LexicalEditor, SELECTION_CHANGE_COMMAND } from 'lexical';
 import { getSelectedNode } from '../../utils';
 
 export const FORMAT_LINK = createCommand<string | undefined>('FORMAT_LINK');

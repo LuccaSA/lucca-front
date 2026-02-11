@@ -1,4 +1,4 @@
-import { Meta, StoryFn } from '@storybook/angular';
+import { Meta, StoryObj } from '@storybook/angular';
 
 interface BasicStory {
 	content: string;
@@ -35,10 +35,12 @@ function getTemplate(args: BasicStory): string {
 	return `<div class="tooltip${inline}${block}">{{ content }}</div>`;
 }
 
-const Template: StoryFn<BasicStory> = (args) => ({
+const Template = (args: BasicStory) => ({
 	props: args,
 	template: getTemplate(args),
 });
 
-export const Basic = Template.bind({});
-Basic.args = { content: 'Lorem ipsum dolor sit amet', inline: '', block: '' };
+export const Basic: StoryObj<BasicStory> = {
+	args: { content: 'Lorem ipsum dolor sit amet', inline: '', block: '' },
+	render: Template,
+};

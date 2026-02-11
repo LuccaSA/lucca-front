@@ -1,4 +1,4 @@
-import { Meta, StoryFn } from '@storybook/angular';
+import { Meta, StoryObj } from '@storybook/angular';
 
 interface TextfieldPasswordStory {}
 
@@ -32,7 +32,7 @@ function getTemplate(args: TextfieldPasswordStory): string {
 </label>`;
 }
 
-const Template: StoryFn<TextfieldPasswordStory> = (args) => ({
+const Template = (args: TextfieldPasswordStory) => ({
 	props: args,
 	template: getTemplate(args),
 	styles: [
@@ -44,5 +44,7 @@ const Template: StoryFn<TextfieldPasswordStory> = (args) => ({
 	],
 });
 
-export const Password = Template.bind({});
-Password.args = {};
+export const Password: StoryObj<TextfieldPasswordStory> = {
+	args: {},
+	render: Template,
+};

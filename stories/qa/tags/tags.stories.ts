@@ -1,18 +1,26 @@
-import { Component } from '@angular/core';
-import { Meta, StoryFn } from '@storybook/angular';
+import { ChangeDetectionStrategy, Component } from '@angular/core';
+import { TagComponent } from '@lucca-front/ng/tag';
+import { Meta, StoryObj } from '@storybook/angular';
+import { PaletteAllArgType } from 'stories/helpers/common-arg-types';
 
 @Component({
-	standalone: true,
 	selector: 'tags-stories',
 	templateUrl: './tags.stories.html',
+	imports: [TagComponent],
+	changeDetection: ChangeDetectionStrategy.OnPush,
 })
-class TagsStory {}
+class TagsStory {
+	paletteOptions = PaletteAllArgType.options;
+}
 
 export default {
 	title: 'QA/Tags',
 	component: TagsStory,
 } as Meta;
 
-const template: StoryFn<TagsStory> = () => ({});
+const template = () => ({});
 
-export const basic = template.bind({});
+export const Basic: StoryObj<TagsStory> = {
+	args: {},
+	render: template,
+};

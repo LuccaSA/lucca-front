@@ -1,6 +1,15 @@
 ﻿export const Translations = {
-	en: {
-		departments: 'departments',
+	pt: {
+		departments: 'departamentos',
+	},
+	'nl-BE': {
+		departments: 'afdelingen',
+	},
+	nl: {
+		departments: 'afdelingen',
+	},
+	it: {
+		departments: 'dipartimenti',
 	},
 	de: {
 		departments: 'Abteilungen',
@@ -8,19 +17,10 @@
 	fr: {
 		departments: 'départements',
 	},
-	it: {
-		departments: 'dipartimenti',
-	},
-	nl: {
-		departments: 'afdelingen',
-	},
-	'nl-BE': {
-		departments: 'afdelingen',
-	},
 	es: {
 		departments: 'departamentos',
 	},
-	pt: {
-		departments: 'departamentos',
+	en: {
+		departments: 'departments',
 	},
 };

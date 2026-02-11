@@ -4,7 +4,6 @@ import { ALuSelectInputComponent, TreeGenerator, TreeGroupingFn, TreeNode } from
 @Directive({
 	// eslint-disable-next-line @angular-eslint/directive-selector
 	selector: 'lu-simple-select[treeSelect],lu-multi-select[treeSelect]',
-	standalone: true,
 })
 export class TreeSelectDirective<T, V> implements TreeGenerator<T, TreeNode<T>> {
 	#select = inject<ALuSelectInputComponent<T, V>>(ALuSelectInputComponent);
@@ -41,8 +40,8 @@ export class TreeSelectDirective<T, V> implements TreeGenerator<T, TreeNode<T>> 
 					node: item,
 					children: [],
 				};
-				// Parent null means it's a root element
-				if (parent === null) {
+				// Parent null or undefined means it's a root element
+				if (!parent) {
 					res.push(itemNode);
 					itemToNode.set(item, itemNode);
 					handled.push(item);

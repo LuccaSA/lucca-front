@@ -33,11 +33,16 @@
 
 	> * {
 		flex-grow: 1;
+		min-inline-size: 0;
 	}
 
 	&.mod-optionPicker {
 		min-inline-size: 13rem;
 		max-inline-size: 30rem;
+	}
+
+	&:has(> lu-select-panel) {
+		max-inline-size: 35rem !important;
 	}
 }
 

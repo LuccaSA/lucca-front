@@ -3,8 +3,8 @@
 import type { ParsedTemplate, TmplAstBoundAttribute, TmplAstElement, TmplAstNode, TmplAstTextAttribute } from '@angular/compiler';
 import { createSourceFile, ScriptTarget } from 'typescript';
 import { applyUpdates, updateContent } from './file-update.js';
-import { replaceStringLiterals } from './typescript-ast.js';
 import { currentSchematicContext } from './lf-schematic-context';
+import { replaceStringLiterals } from './typescript-ast.js';
 
 // eslint-disable-next-line @typescript-eslint/ban-ts-comment
 // @ts-ignore

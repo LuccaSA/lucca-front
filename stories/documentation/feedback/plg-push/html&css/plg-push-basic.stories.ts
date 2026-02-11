@@ -1,9 +1,9 @@
-import { Meta, StoryFn } from '@storybook/angular';
+import { Meta, StoryObj } from '@storybook/angular';
 
 interface PLGPushBasicStory {}
 
 export default {
-	title: 'Documentation/Feedback/PLG Push/HTML & CSS/Basic',
+	title: 'Documentation/Feedback/PLG Push/HTML&CSS/Basic',
 	argTypes: {},
 } as Meta;
 
@@ -22,13 +22,18 @@ function getTemplate(args: PLGPushBasicStory): string {
 			</a>
 		</div>
 	</div>
+	<button type="button" class="plgPush-close button mod-onlyIcon mod-S mod-ghost"><span aria-hidden="true" class="lucca-icon icon-signClose"></span>
+		<span class="pr-u-mask">Fermer</span>
+	</button>
 </div>`;
 }
 
-const Template: StoryFn<PLGPushBasicStory> = (args) => ({
+const Template = (args: PLGPushBasicStory) => ({
 	props: args,
 	template: getTemplate(args),
 });
 
-export const Basic = Template.bind({});
-Basic.args = {};
+export const Basic: StoryObj<PLGPushBasicStory> = {
+	args: {},
+	render: Template,
+};

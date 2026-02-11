@@ -1,4 +1,4 @@
-import { CommonModule } from '@angular/common';
+import { AsyncPipe } from '@angular/common';
 import { ChangeDetectionStrategy, Component, ElementRef, forwardRef, Inject, Input, OnInit, Optional, Self, SkipSelf, ViewChild } from '@angular/core';
 import { FormControl, ReactiveFormsModule } from '@angular/forms';
 import { ALuOnCloseSubscriber, ALuOnOpenSubscriber, ALuOnScrollBottomSubscriber } from '@lucca-front/ng/core';
@@ -10,11 +10,10 @@ import { ALuApiOptionPagedSearcher, ALuApiOptionSearcher } from './api-searcher.
 
 @Component({
 	selector: 'lu-api-searcher',
-	templateUrl: 'api-searcher.component.html',
-	styleUrl: 'api-searcher.component.scss',
+	templateUrl: './api-searcher.component.html',
+	styleUrl: './api-searcher.component.scss',
 	changeDetection: ChangeDetectionStrategy.OnPush,
-	standalone: true,
-	imports: [ReactiveFormsModule, CommonModule, LuOptionPlaceholderComponent],
+	imports: [AsyncPipe, ReactiveFormsModule, LuOptionPlaceholderComponent],
 	providers: [
 		{
 			provide: ALuOptionOperator,
@@ -83,11 +82,10 @@ export class LuApiSearcherComponent<T extends import('../../api.model').ILuApiIt
 
 @Component({
 	selector: 'lu-api-paged-searcher',
-	templateUrl: 'api-searcher.component.html',
-	styleUrl: 'api-searcher.component.scss',
+	templateUrl: './api-searcher.component.html',
+	styleUrl: './api-searcher.component.scss',
 	changeDetection: ChangeDetectionStrategy.OnPush,
-	standalone: true,
-	imports: [ReactiveFormsModule, CommonModule, LuOptionPlaceholderComponent],
+	imports: [AsyncPipe, ReactiveFormsModule, LuOptionPlaceholderComponent],
 	providers: [
 		{
 			provide: ALuOptionOperator,

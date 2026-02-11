@@ -1,8 +1,28 @@
 ﻿export const Translations = {
-	en: {
-		timePickerHours: 'hours',
+	pt: {
+		timePickerHours: 'horas',
 		timePickerTimeSeparator: ':',
-		timePickerMinutes: 'minutes',
+		timePickerMinutes: 'minutos',
+	},
+	es: {
+		timePickerHours: 'horas',
+		timePickerTimeSeparator: ':',
+		timePickerMinutes: 'minutos',
+	},
+	'nl-BE': {
+		timePickerHours: 'uren',
+		timePickerTimeSeparator: ':',
+		timePickerMinutes: 'minuten',
+	},
+	nl: {
+		timePickerHours: 'uren',
+		timePickerTimeSeparator: ':',
+		timePickerMinutes: 'minuten',
+	},
+	it: {
+		timePickerHours: 'ore',
+		timePickerTimeSeparator: ':',
+		timePickerMinutes: 'minuti',
 	},
 	de: {
 		timePickerHours: 'Stunden',
@@ -14,29 +34,9 @@
 		timePickerTimeSeparator: ':',
 		timePickerMinutes: 'minutes',
 	},
-	it: {
-		timePickerHours: 'ore',
+	en: {
+		timePickerHours: 'hours',
 		timePickerTimeSeparator: ':',
-		timePickerMinutes: 'minuti',
-	},
-	nl: {
-		timePickerHours: 'uren',
-		timePickerTimeSeparator: ':',
-		timePickerMinutes: 'minuten',
-	},
-	'nl-BE': {
-		timePickerHours: 'uren',
-		timePickerTimeSeparator: ':',
-		timePickerMinutes: 'minuten',
-	},
-	es: {
-		timePickerHours: 'horas',
-		timePickerTimeSeparator: ':',
-		timePickerMinutes: 'minutos',
-	},
-	pt: {
-		timePickerHours: 'horas',
-		timePickerTimeSeparator: ':',
-		timePickerMinutes: 'minutos',
+		timePickerMinutes: 'minutes',
 	},
 };

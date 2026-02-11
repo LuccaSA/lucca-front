@@ -1,11 +1,11 @@
-import { Meta, StoryFn } from '@storybook/angular';
+import { Meta, StoryObj } from '@storybook/angular';
 
 interface GridsGapsStory {
 	reverse: boolean;
 }
 
 export default {
-	title: 'Documentation/Structure/Grids/HTML & CSS/Gaps',
+	title: 'Documentation/Structure/Grids/HTML&CSS/Gaps',
 	argTypes: {},
 } as Meta;
 
@@ -39,7 +39,7 @@ function getTemplate(args: GridsGapsStory): string {
 </div>`;
 }
 
-const Template: StoryFn<GridsGapsStory> = (args) => ({
+const Template = (args: GridsGapsStory) => ({
 	props: args,
 	template: getTemplate(args),
 	styles: [
@@ -62,5 +62,7 @@ const Template: StoryFn<GridsGapsStory> = (args) => ({
 	],
 });
 
-export const Basic = Template.bind({});
-Basic.args = {};
+export const Basic: StoryObj<GridsGapsStory> = {
+	args: {},
+	render: Template,
+};

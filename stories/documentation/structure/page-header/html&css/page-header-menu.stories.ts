@@ -1,4 +1,4 @@
-import { Meta, StoryFn } from '@storybook/angular';
+import { Meta, StoryObj } from '@storybook/angular';
 
 interface PageHeaderHorizontalNavigationStory {
 	sticky: boolean;
@@ -89,10 +89,12 @@ function getTemplate(args: PageHeaderHorizontalNavigationStory): string {
 </header>`;
 }
 
-const Template: StoryFn<PageHeaderHorizontalNavigationStory> = (args) => ({
+const Template = (args: PageHeaderHorizontalNavigationStory) => ({
 	props: args,
 	template: getTemplate(args),
 });
 
-export const HorizontalNavigationPageHeader = Template.bind({});
-HorizontalNavigationPageHeader.args = { sticky: false };
+export const HorizontalNavigationPageHeader: StoryObj<PageHeaderHorizontalNavigationStory> = {
+	args: { sticky: false },
+	render: Template,
+};

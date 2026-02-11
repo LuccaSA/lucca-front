@@ -4,7 +4,6 @@ import { ALuPopoverTarget, LuPopoverAlignment, LuPopoverPosition } from './popov
 @Directive({
 	selector: '[luPopoverTarget]',
 	exportAs: 'LuPopoverTarget',
-	standalone: true,
 })
 export class LuPopoverTargetDirective extends ALuPopoverTarget {
 	constructor(ref: ElementRef) {

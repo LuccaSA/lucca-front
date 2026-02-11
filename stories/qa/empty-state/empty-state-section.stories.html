@@ -1,6 +1,15 @@
 <table class="demo-QAtable">
 	<tbody>
 		<tr>
+			<td></td>
+			<td style="width: 50%">
+				<div class="demo-QAtable-list">HTML</div>
+			</td>
+			<td style="width: 50%">
+				<div class="demo-QAtable-list">Angular</div>
+			</td>
+		</tr>
+		<tr>
 			<td>Default</td>
 			<td>
 				<div class="demo-QAtable-list">
@@ -8,9 +17,9 @@
 						<div class="emptyState-container">
 							<div class="emptyState-content">
 								<div
-									class="emptyState-content-icon"
+									class="emptyState-content-icon bubbleIllustration mod-action mod-L"
 									aria-hidden="true"
-									[innerHtml]="'https://cdn.lucca.fr/lucca-front/assets/empty-states/icons/iconCalendarAction.svg' | luSafeExternalSvg"
+									[innerHtml]="'https://cdn.lucca.fr/transverse/prisme/visuals/bubble-illustration/calendar.svg' | luSafeExternalSvg"
 								></div>
 								<div class="emptyState-content-text">
 									<h3 class="emptyState-content-heading">Empty State</h3>
@@ -25,6 +34,19 @@
 							</div>
 						</div>
 					</section>
+				</div>
+			</td>
+			<td>
+				<div class="demo-QAtable-list">
+					<lu-empty-state-section
+						illustration="calendar"
+						action
+						heading="Empty State"
+						description="Flatus obsequiorum potest inanes pomerium obsequiorum credi homines vero caelibes orbos potest vile diversitate flatus."
+					>
+						<button type="button" class="button">Button</button>
+						<button type="button" class="button mod-outlined">Button</button>
+					</lu-empty-state-section>
 				</div>
 			</td>
 		</tr>
@@ -36,9 +58,9 @@
 						<div class="emptyState-container">
 							<div class="emptyState-content">
 								<div
-									class="emptyState-content-icon palette-error"
+									class="emptyState-content-icon bubbleIllustration mod-L"
 									aria-hidden="true"
-									[innerHtml]="'https://cdn.lucca.fr/lucca-front/assets/empty-states/icons/iconBanknote.svg' | luSafeExternalSvg"
+									[innerHtml]="'https://cdn.lucca.fr/transverse/prisme/visuals/bubble-illustration/banknote.svg' | luSafeExternalSvg"
 								></div>
 								<div class="emptyState-content-text">
 									<h3 class="emptyState-content-heading">Empty State</h3>
@@ -55,6 +77,179 @@
 					</section>
 				</div>
 			</td>
+			<td>
+				<div class="demo-QAtable-list">
+					<lu-empty-state-section
+						illustration="banknote"
+						heading="Empty State"
+						description="Flatus obsequiorum potest inanes pomerium obsequiorum credi homines vero caelibes orbos potest vile diversitate flatus."
+						center
+					>
+						<button type="button" class="button">Button</button>
+						<button type="button" class="button mod-outlined">Button</button>
+					</lu-empty-state-section>
+				</div>
+			</td>
+		</tr>
+		<tr>
+			<td>Palette</td>
+			<td>
+				<section class="emptyState">
+					<div class="emptyState-container">
+						<div class="emptyState-content">
+							<div
+								class="emptyState-content-icon bubbleIllustration mod-L"
+								aria-hidden="true"
+								[innerHtml]="'https://cdn.lucca.fr/transverse/prisme/visuals/bubble-illustration/chat.svg' | luSafeExternalSvg"
+							></div>
+							<div class="emptyState-content-text">
+								<h3 class="emptyState-content-heading">Empty State</h3>
+								<p class="emptyState-content-description">
+									Flatus obsequiorum potest inanes pomerium obsequiorum credi homines vero caelibes orbos potest vile diversitate flatus.
+								</p>
+								<div class="emptyState-actions">
+									<button type="button" class="button">Button</button>
+									<button type="button" class="button mod-outlined">Button</button>
+								</div>
+							</div>
+						</div>
+					</div>
+				</section>
+				<section class="emptyState">
+					<div class="emptyState-container">
+						<div class="emptyState-content">
+							<div
+								class="emptyState-content-icon bubbleIllustration mod-L palette-neutral"
+								aria-hidden="true"
+								[innerHtml]="'https://cdn.lucca.fr/transverse/prisme/visuals/bubble-illustration/chat.svg' | luSafeExternalSvg"
+							></div>
+							<div class="emptyState-content-text">
+								<h3 class="emptyState-content-heading">Empty State</h3>
+								<p class="emptyState-content-description">
+									Flatus obsequiorum potest inanes pomerium obsequiorum credi homines vero caelibes orbos potest vile diversitate flatus.
+								</p>
+								<div class="emptyState-actions">
+									<button type="button" class="button">Button</button>
+									<button type="button" class="button mod-outlined">Button</button>
+								</div>
+							</div>
+						</div>
+					</div>
+				</section>
+				<section class="emptyState">
+					<div class="emptyState-container">
+						<div class="emptyState-content">
+							<div
+								class="emptyState-content-icon bubbleIllustration mod-L palette-success"
+								aria-hidden="true"
+								[innerHtml]="'https://cdn.lucca.fr/transverse/prisme/visuals/bubble-illustration/thumbUp.svg' | luSafeExternalSvg"
+							></div>
+							<div class="emptyState-content-text">
+								<h3 class="emptyState-content-heading">Empty State</h3>
+								<p class="emptyState-content-description">
+									Flatus obsequiorum potest inanes pomerium obsequiorum credi homines vero caelibes orbos potest vile diversitate flatus.
+								</p>
+								<div class="emptyState-actions">
+									<button type="button" class="button">Button</button>
+									<button type="button" class="button mod-outlined">Button</button>
+								</div>
+							</div>
+						</div>
+					</div>
+				</section>
+				<section class="emptyState">
+					<div class="emptyState-container">
+						<div class="emptyState-content">
+							<div
+								class="emptyState-content-icon bubbleIllustration mod-L palette-warning"
+								aria-hidden="true"
+								[innerHtml]="'https://cdn.lucca.fr/transverse/prisme/visuals/bubble-illustration/warning.svg' | luSafeExternalSvg"
+							></div>
+							<div class="emptyState-content-text">
+								<h3 class="emptyState-content-heading">Empty State</h3>
+								<p class="emptyState-content-description">
+									Flatus obsequiorum potest inanes pomerium obsequiorum credi homines vero caelibes orbos potest vile diversitate flatus.
+								</p>
+								<div class="emptyState-actions">
+									<button type="button" class="button">Button</button>
+									<button type="button" class="button mod-outlined">Button</button>
+								</div>
+							</div>
+						</div>
+					</div>
+				</section>
+				<section class="emptyState">
+					<div class="emptyState-container">
+						<div class="emptyState-content">
+							<div
+								class="emptyState-content-icon bubbleIllustration mod-L palette-critical"
+								aria-hidden="true"
+								[innerHtml]="'https://cdn.lucca.fr/transverse/prisme/visuals/bubble-illustration/chat.svg' | luSafeExternalSvg"
+							></div>
+							<div class="emptyState-content-text">
+								<h3 class="emptyState-content-heading">Empty State</h3>
+								<p class="emptyState-content-description">
+									Flatus obsequiorum potest inanes pomerium obsequiorum credi homines vero caelibes orbos potest vile diversitate flatus.
+								</p>
+								<div class="emptyState-actions">
+									<button type="button" class="button">Button</button>
+									<button type="button" class="button mod-outlined">Button</button>
+								</div>
+							</div>
+						</div>
+					</div>
+				</section>
+			</td>
+			<td>
+				<lu-empty-state-section
+					illustration="chat"
+					heading="Empty State"
+					description="Flatus obsequiorum potest inanes pomerium obsequiorum credi homines vero caelibes orbos potest vile diversitate flatus."
+					palette="product"
+				>
+					<button type="button" class="button">Button</button>
+					<button type="button" class="button mod-outlined">Button</button>
+				</lu-empty-state-section>
+				<lu-empty-state-section
+					illustration="chat"
+					heading="Empty State"
+					description="Flatus obsequiorum potest inanes pomerium obsequiorum credi homines vero caelibes orbos potest vile diversitate flatus."
+					palette="neutral"
+				>
+					<button type="button" class="button">Button</button>
+					<button type="button" class="button mod-outlined">Button</button>
+				</lu-empty-state-section>
+				<lu-empty-state-section
+					illustration="thumbUp"
+					heading="Empty State"
+					description="Flatus obsequiorum potest inanes pomerium obsequiorum credi homines vero caelibes orbos potest vile diversitate flatus."
+					palette="success"
+				>
+					<button type="button" class="button">Button</button>
+					<button type="button" class="button mod-outlined">Button</button>
+				</lu-empty-state-section>
+				<lu-empty-state-section
+					illustration="warning"
+					heading="Empty State"
+					description="Flatus obsequiorum potest inanes pomerium obsequiorum credi homines vero caelibes orbos potest vile diversitate flatus."
+					palette="warning"
+				>
+					<button type="button" class="button">Button</button>
+					<button type="button" class="button mod-outlined">Button</button>
+				</lu-empty-state-section>
+				<lu-empty-state-section
+					illustration="chat"
+					heading="Empty State"
+					description="Flatus obsequiorum potest inanes pomerium obsequiorum credi homines vero caelibes orbos potest vile diversitate flatus."
+					palette="error"
+				>
+					<button type="button" class="button">Button</button>
+					<button type="button" class="button mod-outlined">Button</button>
+				</lu-empty-state-section>
+			</td>
 		</tr>
 	</tbody>
 </table>
+
+<!-- To tell the ui-diff tool that the page has finished rendering -->
+<span id="ready"></span>

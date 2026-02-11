@@ -3,7 +3,6 @@ import { ɵIsSelectedStrategy } from '@lucca-front/ng/core-select';
 
 @Pipe({
 	name: 'luOptionsGroupContext',
-	standalone: true,
 	pure: true,
 })
 export class LuOptionsGroupContextPipe<T> implements PipeTransform {

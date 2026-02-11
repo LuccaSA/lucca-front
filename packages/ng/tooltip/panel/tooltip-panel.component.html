@@ -1,1 +1,3 @@
-<div class="tooltip" [class]="contentPositionClasses" [innerHtml]="content()"></div>
+@if (content(); as content) {
+	<div class="tooltip" [class]="contentPositionClasses()" [innerHtml]="content"></div>
+}

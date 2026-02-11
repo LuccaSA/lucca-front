@@ -1,0 +1,18 @@
+<button class="open" luButton="outlined" [luDialogOpen]="dialogTpl1" [luDialogConfig]="{ mode: 'drawer' }">
+	Open Dialog with confirmation on dismiss
+</button>
+
+<ng-template #dialogTpl1>
+	<lu-dialog #dialog>
+		<lu-dialog-header>
+			<h1>Dialog</h1>
+		</lu-dialog-header>
+		<lu-dialog-content></lu-dialog-content>
+		<lu-dialog-footer>
+			<div class="footer-actions">
+				<button type="button" luButton luDialogClose>Confirm</button>
+				<button type="button" luButton="ghost" (click)="dismiss()">Cancel with confirmation</button>
+			</div>
+		</lu-dialog-footer>
+	</lu-dialog>
+</ng-template>

@@ -1,5 +1,5 @@
 import { allLegumes } from '@/stories/forms/select/select.utils';
-import { Component, inject, input } from '@angular/core';
+import { ChangeDetectionStrategy, Component, inject, input } from '@angular/core';
 import { FormsModule } from '@angular/forms';
 import { ButtonComponent } from '@lucca-front/ng/button';
 import {
@@ -60,7 +60,7 @@ import { Meta, StoryObj, applicationConfig } from '@storybook/angular';
 		LuSimpleSelectInputComponent,
 		FormsModule,
 	],
-	standalone: true,
+	changeDetection: ChangeDetectionStrategy.OnPush,
 })
 export class DialogContentStoryComponent {
 	ref = injectDialogRef<string>();
@@ -75,10 +75,10 @@ export class DialogContentStoryComponent {
 
 @Component({
 	selector: 'lu-dialog-story',
-	standalone: true,
 	template: ` <button luButton (click)="openDialog()">Open dialog</button>`,
 	imports: [ButtonComponent],
 	providers: [provideLuDialog()],
+	changeDetection: ChangeDetectionStrategy.OnPush,
 })
 export class DialogStory {
 	dialog = inject(LuDialogService);

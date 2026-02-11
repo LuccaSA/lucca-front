@@ -3,7 +3,7 @@ import { LuDepartmentFeederComponent } from './feeder';
 import { LuDepartmentSelectInputComponent } from './input';
 
 /**
- * @deprecated
+ * @deprecated use `LuDepartmentFeederComponent, LuDepartmentSelectInputComponent` instead
  */
 @NgModule({
 	imports: [LuDepartmentFeederComponent, LuDepartmentSelectInputComponent],

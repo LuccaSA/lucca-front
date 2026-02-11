@@ -9,7 +9,6 @@ export interface Legume {
 
 @Directive({
 	selector: '[luLegumes]',
-	standalone: true,
 	exportAs: 'luLegumes',
 })
 export class LuCoreSelectLegumesDirective extends LuCoreSelectApiV4Directive<Legume> {

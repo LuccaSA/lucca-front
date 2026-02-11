@@ -31,7 +31,7 @@ $decoration: 'underline', 'line-through', 'none';
 $overflow: 'hidden', 'auto', 'visible', 'scroll';
 $cursor: 'pointer', 'auto', 'default', 'text';
 
-/* Tokens */
+// Tokens
 
 @mixin spacing($boxModel, $boxDirection, $key, $value, $suffix: '!important') {
 	@if $boxModel != 'inset' or ($boxDirection != 'top' and $boxDirection != 'bottom' and $boxDirection != 'left' and $boxDirection != 'right') {
@@ -71,7 +71,7 @@ $cursor: 'pointer', 'auto', 'default', 'text';
 	}
 }
 
-/* Variables */
+// Variables
 
 @mixin cssvars($name, $properties, $after: '') {
 	@each $key, $value in $properties {
@@ -108,8 +108,9 @@ $cursor: 'pointer', 'auto', 'default', 'text';
 }
 
 @mixin palettes($suffix: '!important') {
+	// .pr-u-text is deprecated
 	@each $palette in config.$palettesAll {
-		.pr-u-text#{transform.capitalize($palette)} {
+		.pr-u-text#{transform.capitalize($palette)}, .pr-u-colorText#{transform.capitalize($palette)} {
 			color: var(--palettes-#{$palette}-700) #{$suffix};
 		}
 
@@ -166,7 +167,7 @@ $cursor: 'pointer', 'auto', 'default', 'text';
 	}
 }
 
-/* DEPRECATED */
+// DEPRECATED
 
 @mixin sizes($suffix: '!important') {
 	@each $key, $value in config.$sizes {

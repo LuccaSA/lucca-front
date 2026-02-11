@@ -20,15 +20,19 @@ export default {
 	argTypes: {
 		min: {
 			control: 'date',
+			description: 'Définit une date minimum de sélection.',
 		},
 		max: {
 			control: 'date',
+			description: 'Définit une date maximum de sélection.',
 		},
 		hideToday: {
 			control: 'boolean',
+			description: 'Retire la mise en valeur de la date du jour.',
 		},
 		clearable: {
 			control: 'boolean',
+			description: "Ajoute un bouton de suppression lorsqu'une date est sélectionnée.",
 		},
 		clearBehavior: {
 			control: 'select',
@@ -38,16 +42,41 @@ export default {
 		format: {
 			control: 'select',
 			options: ['date', 'date-iso'],
+			description: 'Modifie le format de date.',
 		},
 		mode: {
 			control: 'select',
 			options: ['day', 'month', 'year'],
+			description: "Modifie le mode de sélection au mois ou à l'année.",
 		},
 		focusedDate: {
 			control: 'date',
+			description: '',
 		},
 		widthAuto: {
 			control: 'boolean',
+			description: 'Applique une pleine largeur au composant.',
+		},
+		selected: {
+			description: 'Définit une période sélectionnée.',
+		},
+		hideWeekend: {
+			description: "Retire l'effet grisé visible sur les jours du isWeekend.",
+		},
+		autocomplete: {
+			control: 'select',
+			options: ['', 'on'],
+			description: "Applique une valeur d'autocomplete au champ.",
+		},
+		placeholder: {
+			control: 'text',
+			description: 'Modifie le placeholder au champ.',
+		},
+		shortcuts: {
+			description: 'Définit une liste de sélection rapide de périodes',
+		},
+		hasTodayButton: {
+			description: 'Ajoute un bouton pour sélectionner la date du jour.',
 		},
 	},
 	render: (args, { argTypes }) => {

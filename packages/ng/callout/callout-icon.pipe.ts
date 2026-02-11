@@ -10,7 +10,6 @@ import { getCalloutIcon } from './callout.utils';
  */
 @Pipe({
 	name: 'luCalloutIcon',
-	standalone: true,
 })
 export class CalloutIconPipe implements PipeTransform {
 	transform(state: CalloutState, icon: LuccaIcon): LuccaIcon | undefined {

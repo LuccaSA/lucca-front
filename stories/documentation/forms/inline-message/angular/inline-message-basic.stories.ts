@@ -10,15 +10,17 @@ export default {
 			control: {
 				type: 'select',
 			},
+			description: "Modifie l'état de l'inline message.",
 		},
 		size: {
 			options: ['S', 'M'],
 			control: {
 				type: 'select',
 			},
+			description: 'Modifie la taille du composant.',
 		},
 		label: {
-			description: '[v18.2] PortalContent',
+			description: '[v18.2] Modifie le texte affiché par le composant. PortalContent. ',
 		},
 	},
 } as Meta;

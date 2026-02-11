@@ -1,0 +1,37 @@
+<table class="demo-QAtable">
+	<tbody>
+		<tr>
+			<td></td>
+			<td style="width: 50%">
+				<div class="demo-QAtable-list">HTML</div>
+			</td>
+			<td style="width: 50%">
+				<div class="demo-QAtable-list">Angular</div>
+			</td>
+		</tr>
+		<tr>
+			<td>Default</td>
+			<td>
+				<div class="demo-QAtable-list">
+					<div class="appLayout">
+						<div class="appLayout-banner">banner</div>
+						<div class="appLayout-navSide">navSide</div>
+						<div class="appLayout-main">main</div>
+					</div>
+				</div>
+			</td>
+			<td>
+				<div class="demo-QAtable-list">
+					<lu-app-layout>
+						<ng-container appLayoutBanner>banner</ng-container>
+						<ng-container appLayoutNavSide>navSide</ng-container>
+						main
+					</lu-app-layout>
+				</div>
+			</td>
+		</tr>
+	</tbody>
+</table>
+
+<!-- To tell the ui-diff tool that the page has finished rendering -->
+<span id="ready"></span>

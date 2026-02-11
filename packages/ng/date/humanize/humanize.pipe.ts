@@ -6,7 +6,6 @@ import { relativeTimeTimer } from './humanize.utils';
 
 @Pipe({
 	name: 'luHumanizeDate',
-	standalone: true,
 })
 export class LuHumanizeDatePipe implements PipeTransform {
 	#formatter = inject(LuHumanizeDateFormatter, { optional: true }) ?? new LuHumanizeDateFormatter();

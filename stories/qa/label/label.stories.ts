@@ -1,10 +1,10 @@
-import { Component } from '@angular/core';
-import { Meta, StoryFn } from '@storybook/angular';
+import { ChangeDetectionStrategy, Component } from '@angular/core';
+import { Meta, StoryObj } from '@storybook/angular';
 
 @Component({
-	standalone: true,
 	selector: 'label-stories',
 	templateUrl: './label.stories.html',
+	changeDetection: ChangeDetectionStrategy.OnPush,
 })
 class LabelStory {}
 
@@ -13,6 +13,9 @@ export default {
 	component: LabelStory,
 } as Meta;
 
-const template: StoryFn<LabelStory> = () => ({});
+const template = () => ({});
 
-export const basic = template.bind({});
+export const Basic: StoryObj<LabelStory> = {
+	args: {},
+	render: template,
+};

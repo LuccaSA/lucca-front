@@ -1,16 +1,22 @@
 @use 'exports' as *;
 
 .pagination {
-	@include vars;
-	@include component;
+	@layer components {
+		@include vars;
+		@include component;
+	}
 
-	&.mod-compact {
-		@include compact;
+	@layer components {
+		&.mod-mods {
+			@include compact;
+		}
 	}
 }
 
 .pagination-navigation-item {
-	&:is(.is-ellipsis, .ellipsis) {
-		@include ellipsis;
+	@layer mods {
+		&:is(.is-ellipsis, .ellipsis) {
+			@include ellipsis;
+		}
 	}
 }

@@ -19,16 +19,6 @@
 	inline-size: var(--commons-navSide-width);
 	scroll-margin-block-start: var(--commons-banner-height);
 
-	.appLayout-navSide & {
-		position: relative;
-		padding-block-start: 0;
-		block-size: var(--commons-navSide-mobile-toggle-height);
-
-		@include media.min('S') {
-			block-size: 100%;
-		}
-	}
-
 	.numericBadge {
 		@include numericBadge.S;
 		@include numericBadge.brand;
@@ -124,6 +114,10 @@
 			padding-block: var(--pr-t-spacings-150);
 			padding-inline: var(--pr-t-spacings-200);
 			font-weight: var(--pr-t-font-fontWeight-semibold);
+		}
+
+		.navSide-item-link-title {
+			overflow-wrap: anywhere;
 		}
 
 		.navSide-item-link-badgesOptional {

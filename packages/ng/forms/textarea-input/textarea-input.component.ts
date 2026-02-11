@@ -1,46 +1,37 @@
-import { booleanAttribute, ChangeDetectionStrategy, ChangeDetectorRef, Component, DestroyRef, ElementRef, inject, input, Input, OnInit, ViewChild, ViewEncapsulation } from '@angular/core';
+import { booleanAttribute, ChangeDetectionStrategy, ChangeDetectorRef, Component, DestroyRef, ElementRef, inject, input, OnInit, viewChild, ViewEncapsulation } from '@angular/core';
 import { takeUntilDestroyed } from '@angular/core/rxjs-interop';
 import { ReactiveFormsModule } from '@angular/forms';
-import { InputDirective } from '@lucca-front/ng/form-field';
+import { InputDirective, ɵPresentationDisplayDefaultDirective } from '@lucca-front/ng/form-field';
 import { startWith } from 'rxjs';
 import { injectNgControl } from '../inject-ng-control';
 import { NoopValueAccessorDirective } from '../noop-value-accessor.directive';
+import { ReadMoreComponent } from '@lucca-front/ng/read-more';
 
 @Component({
 	selector: 'lu-textarea-input',
-	standalone: true,
-	imports: [InputDirective, ReactiveFormsModule],
+	imports: [InputDirective, ReactiveFormsModule, ReadMoreComponent, ɵPresentationDisplayDefaultDirective],
 	templateUrl: './textarea-input.component.html',
 	hostDirectives: [NoopValueAccessorDirective],
 	encapsulation: ViewEncapsulation.None,
 	changeDetection: ChangeDetectionStrategy.OnPush,
 })
 export class TextareaInputComponent implements OnInit {
-	@ViewChild('parent')
-	parent?: ElementRef<HTMLElement>;
-
-	ngControl = injectNgControl();
-
 	#cdr = inject(ChangeDetectorRef);
 	#destroyRef = inject(DestroyRef);
 
-	@Input()
-	placeholder: string = '';
+	ngControl = injectNgControl();
 
-	@Input()
-	rows?: number = 3;
+	readonly parent = viewChild<ElementRef<HTMLElement>>('parent');
 
-	@Input({
-		transform: booleanAttribute,
-	})
-	autoResize = false;
+	readonly placeholder = input<string>('');
 
-	@Input({
-		transform: booleanAttribute,
-	})
-	autoResizeScrollIntoView = false;
+	readonly rows = input<number>(3);
 
-	disableSpeelcheck = input(false, { transform: booleanAttribute });
+	readonly autoResize = input(false, { transform: booleanAttribute });
+
+	readonly autoResizeScrollIntoView = input(false, { transform: booleanAttribute });
+
+	readonly disableSpellcheck = input(false, { transform: booleanAttribute });
 
 	cloneValue = '';
 
@@ -48,8 +39,8 @@ export class TextareaInputComponent implements OnInit {
 		this.cloneValue = value;
 		this.#cdr.detectChanges(); // Needed to apply cloneValue to autoresize HTML clone
 
-		if (this.autoResizeScrollIntoView && this.parent) {
-			this.parent.nativeElement.scrollIntoView({
+		if (this.autoResizeScrollIntoView() && this.parent()) {
+			this.parent()?.nativeElement.scrollIntoView({
 				behavior: 'instant',
 				block: 'end',
 			});
@@ -57,6 +48,6 @@ export class TextareaInputComponent implements OnInit {
 	}
 
 	ngOnInit(): void {
-		this.ngControl.valueChanges.pipe(takeUntilDestroyed(this.#destroyRef), startWith(this.ngControl.value)).subscribe((value) => this.updateScroll(value as string));
+		this.ngControl.valueChanges?.pipe(takeUntilDestroyed(this.#destroyRef), startWith(this.ngControl.value)).subscribe((value) => this.updateScroll(value as string));
 	}
 }

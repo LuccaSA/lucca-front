@@ -1,4 +1,4 @@
-import { Meta, StoryFn } from '@storybook/angular';
+import { Meta, StoryObj } from '@storybook/angular';
 
 interface SortStory {}
 
@@ -57,10 +57,12 @@ function getTemplate(args: SortStory): string {
 </div>`;
 }
 
-const Template: StoryFn<SortStory> = (args) => ({
+const Template = (args: SortStory) => ({
 	props: args,
 	template: getTemplate(args),
 });
 
-export const Sort = Template.bind({});
-Sort.args = {};
+export const Sort: StoryObj<SortStory> = {
+	args: {},
+	render: Template,
+};

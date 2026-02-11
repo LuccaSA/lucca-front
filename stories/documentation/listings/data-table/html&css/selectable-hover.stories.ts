@@ -1,4 +1,4 @@
-import { Meta, StoryFn } from '@storybook/angular';
+import { Meta, StoryObj } from '@storybook/angular';
 
 interface SelectableStory {}
 
@@ -63,15 +63,31 @@ function getTemplate(args: SelectableStory): string {
 					<td class="dataTable-body-row-cell">Text</td>
 				</tr>
 			</tbody>
+			<tfoot class="dataTable-foot">
+				<tr class="dataTable-foot-row mod-selectable">
+					<th class="dataTable-foot-row-cell">
+						<span class="checkboxField">
+							<input type="checkbox" class="checkboxField-input" id="CBfooter" />
+							<span class="checkboxField-icon" aria-hidden="true"><span class="checkboxField-icon-check"></span></span>
+						</span>
+						<label class="pr-u-mask" for="CBfooter">Text</label>
+					</th>
+					<th class="dataTable-foot-row-cell">Text</th>
+					<th class="dataTable-foot-row-cell">Text</th>
+					<th class="dataTable-foot-row-cell">Text</th>
+				</tr>
+			</tfoot>
 		</table>
 	</div>
 </form>`;
 }
 
-const Template: StoryFn<SelectableStory> = (args) => ({
+const Template = (args: SelectableStory) => ({
 	props: args,
 	template: getTemplate(args),
 });
 
-export const Selectable = Template.bind({});
-Selectable.args = {};
+export const Selectable: StoryObj<SelectableStory> = {
+	args: {},
+	render: Template,
+};

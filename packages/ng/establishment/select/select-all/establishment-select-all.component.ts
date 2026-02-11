@@ -10,7 +10,6 @@ import { DEFAULT_ESTABLISHMENT_SERVICE } from '../establishment-select.token';
 	templateUrl: './establishment-select-all.component.html',
 	styleUrl: 'establishment-select-all.component.scss',
 	changeDetection: ChangeDetectionStrategy.OnPush,
-	standalone: true,
 	providers: [
 		{
 			provide: ALuOptionOperator,

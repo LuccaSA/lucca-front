@@ -1,4 +1,4 @@
-import { Meta, StoryFn } from '@storybook/angular';
+import { Meta, StoryObj } from '@storybook/angular';
 
 interface TimelinesAddStepStory {}
 
@@ -37,10 +37,12 @@ function getTemplate(args: TimelinesAddStepStory): string {
 	`;
 }
 
-const Template: StoryFn<TimelinesAddStepStory> = (args) => ({
+const Template = (args: TimelinesAddStepStory) => ({
 	props: args,
 	template: getTemplate(args),
 });
 
-export const AddStep = Template.bind({});
-AddStep.args = {};
+export const AddStep: StoryObj<TimelinesAddStepStory> = {
+	args: {},
+	render: Template,
+};

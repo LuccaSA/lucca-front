@@ -1,4 +1,4 @@
-import { Meta, StoryFn } from '@storybook/angular';
+import { Meta, StoryObj } from '@storybook/angular';
 
 interface OnlyBubbleStory {}
 
@@ -23,10 +23,12 @@ function getTemplate(args: OnlyBubbleStory): string {
 </div>`;
 }
 
-const Template: StoryFn<OnlyBubbleStory> = (args) => ({
+const Template = (args: OnlyBubbleStory) => ({
 	props: args,
 	template: getTemplate(args),
 });
 
-export const OnlyBubble = Template.bind({});
-OnlyBubble.args = {};
+export const OnlyBubble: StoryObj<OnlyBubbleStory> = {
+	args: {},
+	render: Template,
+};

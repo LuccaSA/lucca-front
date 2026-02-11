@@ -1,19 +1,24 @@
-import { Component } from '@angular/core';
+import { ChangeDetectionStrategy, Component, LOCALE_ID } from '@angular/core';
 import { DateInputComponent } from '@lucca-front/ng/date2';
 import { FormFieldComponent } from '@lucca-front/ng/form-field';
-import { Meta } from '@storybook/angular';
+import { applicationConfig, Meta } from '@storybook/angular';
 
 @Component({
-	standalone: true,
 	selector: 'date-input-stories',
 	templateUrl: './date-input.stories.html',
 	imports: [FormFieldComponent, DateInputComponent],
+	changeDetection: ChangeDetectionStrategy.OnPush,
 })
 class DateInputStory {}
 
 export default {
-	title: 'QA/Date Input',
+	title: 'QA/DateInput',
 	component: DateInputStory,
+	decorators: [
+		applicationConfig({
+			providers: [{ provide: LOCALE_ID, useValue: 'fr-FR' }],
+		}),
+	],
 } as Meta;
 
 export const Basic = {};

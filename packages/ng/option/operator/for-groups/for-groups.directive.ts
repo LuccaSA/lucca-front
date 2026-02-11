@@ -29,7 +29,6 @@ export class LuForGroupContext<T> {
 
 @Directive({
 	selector: '[luForGroups]',
-	standalone: true,
 	providers: [
 		{
 			provide: ALuOptionOperator,

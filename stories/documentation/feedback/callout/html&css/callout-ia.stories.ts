@@ -1,35 +1,29 @@
-import { Meta, StoryFn } from '@storybook/angular';
+import { Meta, StoryObj } from '@storybook/angular';
 
-interface CalloutBasicStory {
-	palette: string;
-	s: boolean;
-}
+interface CalloutBasicStory {}
 
 export default {
-	title: 'Documentation/Feedback/Callout/HTML & CSS/AI',
-	argTypes: {
-		s: {
-			control: {
-				type: 'boolean',
-			},
-			description: 'Taille : Small',
-		},
-	},
+	title: 'Documentation/Feedback/Callout/HTML&CSS/AI',
+	argTypes: {},
 } as Meta;
 
 function getTemplate(args: CalloutBasicStory): string {
-	const s = args.s ? ` mod-S` : ``;
-	return `<div class="callout mod-AI${s}">
+	return `<div class="callout mod-AI">
+	<div class="callout-icon">
+		<span aria-hidden="true" class="lucca-icon icon-weatherStars"></span>
+	</div>
 	<div class="callout-content">
-		<div class="callout-content-description">Feedback description</div>
+		<p class="callout-content-description">Feedback description</p>
 	</div>
 </div>`;
 }
 
-const Template: StoryFn<CalloutBasicStory> = (args) => ({
+const Template = (args: CalloutBasicStory) => ({
 	props: args,
 	template: getTemplate(args),
 });
 
-export const Basic = Template.bind({});
-Basic.args = { s: false };
+export const Basic: StoryObj<CalloutBasicStory> = {
+	args: {},
+	render: Template,
+};

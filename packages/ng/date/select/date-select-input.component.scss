@@ -1,12 +1,14 @@
 @use '@lucca-front/icons/src/commons/utils/icon';
-@use 'definitions';
+@use '../../styles/definitions';
 
 @include definitions.selectInputStyle;
 
-:host {
-	&::after {
-		@include icon.generate('calendar_date');
+@layer components {
+	:host {
+		&::after {
+			@include icon.generate('calendar_date');
 
-		transform: none !important;
+			transform: none !important;
+		}
 	}
 }

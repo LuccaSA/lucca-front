@@ -1,5 +1,5 @@
 import { Location } from '@angular/common';
-import { Component, Inject, OnInit } from '@angular/core';
+import { ChangeDetectionStrategy, Component, Inject, OnInit } from '@angular/core';
 import { Title } from '@angular/platform-browser';
 import { ActivatedRouteSnapshot, RouterLink, RouterOutlet, TitleStrategy } from '@angular/router';
 import { SpectatorRouting, createRoutingFactory, mockProvider } from '@ngneat/spectator/jest';
@@ -23,6 +23,7 @@ class TranslateService implements ILuTitleTranslateService {
 @Component({
 	selector: 'lu-app',
 	imports: [RouterOutlet, RouterLink],
+	changeDetection: ChangeDetectionStrategy.OnPush,
 	template: `<router-outlet />
 		<a class="link-2" [routerLink]="['/first']">Stub</a>
 		<a class="link-3" [routerLink]="['/first/1']">Stub</a>
@@ -36,12 +37,14 @@ export class AppComponent {}
 @Component({
 	selector: 'lu-stub',
 	imports: [RouterOutlet],
+	changeDetection: ChangeDetectionStrategy.OnPush,
 	template: `<router-outlet />`,
 })
 export class StubComponent {}
 
 @Component({
 	selector: 'lu-override-title',
+	changeDetection: ChangeDetectionStrategy.OnPush,
 	template: `<div></div>`,
 })
 export class OverrideTitleComponent implements OnInit {
@@ -54,6 +57,7 @@ export class OverrideTitleComponent implements OnInit {
 @Component({
 	selector: 'lu-delayed-override-title',
 	imports: [RouterOutlet],
+	changeDetection: ChangeDetectionStrategy.OnPush,
 	template: `<router-outlet />`,
 })
 export class DelayedOverrideTitleComponent implements OnInit {
@@ -65,6 +69,7 @@ export class DelayedOverrideTitleComponent implements OnInit {
 
 @Component({
 	selector: 'lu-override-title-part',
+	changeDetection: ChangeDetectionStrategy.OnPush,
 	template: `<div></div>`,
 })
 export class OverrideTitlePartComponent implements OnInit {

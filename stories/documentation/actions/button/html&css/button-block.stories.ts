@@ -1,4 +1,4 @@
-import { Meta, StoryFn } from '@storybook/angular';
+import { Meta, StoryObj } from '@storybook/angular';
 
 interface ButtonBlockStory {}
 
@@ -10,10 +10,12 @@ function getTemplate(args: ButtonBlockStory): string {
 	return `<button type="button" class="button mod-block">Button</button>`;
 }
 
-const Template: StoryFn<ButtonBlockStory> = (args) => ({
+const Template = (args: ButtonBlockStory) => ({
 	props: args,
 	template: getTemplate(args),
 });
 
-export const BlockButton = Template.bind({});
-BlockButton.args = {};
+export const BlockButton: StoryObj<ButtonBlockStory> = {
+	args: {},
+	render: Template,
+};

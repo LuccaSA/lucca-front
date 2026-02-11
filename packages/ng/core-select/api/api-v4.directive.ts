@@ -10,7 +10,6 @@ import { ALuCoreSelectApiDirective } from './api.directive';
 	// The attribute is already prefixed with "lu-simple-select"
 	// eslint-disable-next-line @angular-eslint/directive-selector
 	selector: 'lu-simple-select[apiV4],lu-multi-select[apiV4]',
-	standalone: true,
 	providers: [
 		{
 			provide: CORE_SELECT_API_TOTAL_COUNT_PROVIDER,

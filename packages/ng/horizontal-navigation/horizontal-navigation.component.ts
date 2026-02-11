@@ -1,38 +1,32 @@
 import { NgTemplateOutlet } from '@angular/common';
-import { booleanAttribute, Component, contentChildren, HostBinding, input, ViewEncapsulation } from '@angular/core';
+import { booleanAttribute, ChangeDetectionStrategy, Component, contentChildren, input, ViewEncapsulation } from '@angular/core';
 import { HorizontalNavigationLinkDirective } from './horizontal-navigation-link.directive';
 
 @Component({
 	selector: 'lu-horizontal-navigation',
-	standalone: true,
 	templateUrl: './horizontal-navigation.component.html',
 	styleUrl: './horizontal-navigation.component.scss',
 	encapsulation: ViewEncapsulation.None,
+	changeDetection: ChangeDetectionStrategy.OnPush,
 	imports: [NgTemplateOutlet],
 	host: {
 		class: 'horizontalNavigation',
+		'[class.mod-noBorder]': 'noBorder()',
+		'[class.mod-S]': 'size() === `S`',
+		'[class.mod-vertical]': 'vertical()',
 	},
 })
 export class HorizontalNavigationComponent {
-	links = contentChildren(HorizontalNavigationLinkDirective);
+	readonly links = contentChildren(HorizontalNavigationLinkDirective);
 
-	noBorder = input(false, { transform: booleanAttribute });
-	container = input(false, { transform: booleanAttribute });
-	vertical = input(false, { transform: booleanAttribute });
-	size = input<null | 'S'>(null);
+	readonly noBorder = input(false, { transform: booleanAttribute });
 
-	@HostBinding('class.mod-noBorder')
-	get hasNoBorder() {
-		return this.noBorder();
-	}
+	readonly container = input(false, { transform: booleanAttribute });
 
-	@HostBinding('class.mod-S')
-	get isSizeS() {
-		return this.size() === 'S';
-	}
+	readonly vertical = input(false, { transform: booleanAttribute });
 
-	@HostBinding('class.mod-vertical')
-	get isVertical() {
-		return this.vertical();
-	}
+	/**
+	 * Which size should the horizontal navigation be? Defaults and small
+	 */
+	readonly size = input<null | 'S'>(null);
 }

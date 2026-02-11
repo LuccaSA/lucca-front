@@ -1,22 +1,17 @@
+import { Meta, StoryObj } from '@storybook/angular';
 import { ButtonComponent } from '@lucca-front/ng/button';
-import { IconComponent } from '@lucca-front/ng/icon';
-import { Meta, moduleMetadata, StoryObj } from '@storybook/angular';
 import { createTestStory, generateInputs } from 'stories/helpers/stories';
 import { expect, within } from 'storybook/test';
 
 export default {
 	title: 'Documentation/Actions/Button/Angular/Basic',
 	component: ButtonComponent,
-	decorators: [
-		moduleMetadata({
-			imports: [IconComponent],
-		}),
-	],
 	render: ({ luButton, ...inputs }, { argTypes }) => {
 		const disclosureIcon = '<lu-icon icon="arrowChevronBottom" />';
 		return {
-			template: `<button type="button" luButton${luButton !== '' ? `="${luButton}"` : ''}${generateInputs(inputs, argTypes)}
->Button${inputs['disclosure'] ? disclosureIcon : ''}</button>`,
+			template: `<button type="button" prButton${luButton !== '' ? `="${luButton}"` : ''}${generateInputs(inputs, argTypes)}
+>Button</button>`,
+			styles: [luButton === 'AI-invert' || luButton === 'ghost-invert' ? ':host { background-color: var(--palettes-neutral-900); outline: 1rem solid var(--palettes-neutral-900);  }' : ''],
 		};
 	},
 } as Meta;
@@ -24,33 +19,54 @@ export default {
 export const Basic: StoryObj<ButtonComponent> = {
 	argTypes: {
 		luButton: {
-			options: ['', 'outlined', 'ghost', 'ghost-invert', 'AI'],
+			options: ['', 'outlined', 'ghost', 'ghost-invert', 'AI', 'AI-invert'],
 			control: {
 				type: 'select',
 			},
+			description: 'Modifie la hierarchie ou le style du bouton.<br>[v20.3] AI',
+		},
+		block: {
+			description: 'Applique <code>display: block</code>.',
 		},
 		palette: {
 			if: { arg: 'luButton', neq: 'AI' },
-		},
-		critical: {
-			description: '[v20.2] Couleur critical au hover / focus',
-		},
-		size: {
+			description: 'Applique une palette de couleurs au bouton.',
+			options: ['', 'product', 'neutral', 'success', 'warning', 'critical'],
 			control: {
 				type: 'select',
 			},
 		},
+		state: {
+			description: "Modifie l'état du bouton.",
+			control: {
+				type: 'select',
+			},
+		},
+		critical: {
+			description:
+				"[v20.2] Marque une action aux conséquences importantes ou irréversibles au survol et focus. Seulement compatible avec <code>outlined</code> et <code>ghost</code>. Dans le cas d'un bouton toujours affiché en rouge, préférez l'usage de <code>palette='critical'</code>.",
+		},
+		disclosure: {
+			description: "Indique le présence d'un menu.",
+		},
 		delete: {
-			description: 'Deprecated 💀, use critical instead',
+			description: '[Deprecated] Remplacé par <code>critical</code>.',
+		},
+		size: {
+			description: 'Modifie la taille du composant.',
+			control: {
+				type: 'select',
+			},
 		},
 	},
 	args: {
-		block: false,
-		palette: 'none',
-		state: 'default',
 		luButton: '',
+		delete: false,
+		state: 'default',
 		critical: false,
 		disclosure: false,
+		palette: 'none',
+		block: false,
 	},
 };
 

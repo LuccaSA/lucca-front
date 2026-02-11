@@ -1,0 +1,40 @@
+<table class="demo-QAtable">
+	<tbody>
+		<tr>
+			<td></td>
+			<td>
+				<div class="demo-QAtable-list">HTML</div>
+			</td>
+			<td>
+				<div class="demo-QAtable-list">Angular</div>
+			</td>
+		</tr>
+		<tr>
+			<td>Default</td>
+			<td>
+				<div class="demo-QAtable-list">
+					<code class="code">ipsum dolor sit</code>
+				</div>
+			</td>
+			<div class="demo-QAtable-list">
+				<lu-code>ipsum dolor sit</lu-code>
+			</div>
+		</tr>
+		<tr>
+			<td>Block</td>
+			<td>
+				<div class="demo-QAtable-list">
+					<code class="code mod-block">ipsum dolor sit</code>
+				</div>
+			</td>
+			<td>
+				<div class="demo-QAtable-list">
+					<lu-code [block]="true">ipsum dolor sit</lu-code>
+				</div>
+			</td>
+		</tr>
+	</tbody>
+</table>
+
+<!-- To tell the ui-diff tool that the page has finished rendering -->
+<span id="ready"></span>

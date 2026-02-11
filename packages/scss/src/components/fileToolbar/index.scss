@@ -1,14 +1,18 @@
 @use 'exports' as *;
 
 .fileToolbar {
-	@include vars;
-	@include component;
+	@layer components {
+		@include vars;
+		@include component;
+	}
 
-	&.mod-disablePositioning {
-		@include disablePositioning;
+	@layer mods {
+		&.mod-disablePositioning {
+			@include disablePositioning;
 
-		&.mod-S {
-			@include disablePositioningS;
+			&.mod-S {
+				@include disablePositioningS;
+			}
 		}
 	}
 }

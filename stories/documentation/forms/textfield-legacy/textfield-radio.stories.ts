@@ -1,4 +1,4 @@
-import { Meta, StoryFn } from '@storybook/angular';
+import { Meta, StoryObj } from '@storybook/angular';
 
 interface TextfieldRadioStory {}
 
@@ -24,10 +24,12 @@ function getTemplate(args: TextfieldRadioStory): string {
 </span>`;
 }
 
-const Template: StoryFn<TextfieldRadioStory> = (args) => ({
+const Template = (args: TextfieldRadioStory) => ({
 	props: args,
 	template: getTemplate(args),
 });
 
-export const Radio = Template.bind({});
-Radio.args = {};
+export const Radio: StoryObj<TextfieldRadioStory> = {
+	args: {},
+	render: Template,
+};

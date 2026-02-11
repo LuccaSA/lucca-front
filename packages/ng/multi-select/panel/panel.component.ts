@@ -1,8 +1,9 @@
 import { A11yModule } from '@angular/cdk/a11y';
 import { AsyncPipe, NgTemplateOutlet } from '@angular/common';
 import { AfterViewInit, ChangeDetectionStrategy, Component, computed, forwardRef, inject, signal, TrackByFunction } from '@angular/core';
+import { toObservable } from '@angular/core/rxjs-interop';
 import { FormsModule } from '@angular/forms';
-import { getIntl, PortalDirective } from '@lucca-front/ng/core';
+import { PortalDirective } from '@lucca-front/ng/core';
 import {
 	CoreSelectKeyManager,
 	CoreSelectPanelInstance,
@@ -20,10 +21,10 @@ import {
 import { IconComponent } from '@lucca-front/ng/icon';
 import { TreeBranchComponent } from '@lucca-front/ng/tree-select';
 import { EMPTY } from 'rxjs';
+import { map } from 'rxjs/operators';
 import { LuMultiSelectInputComponent } from '../input';
 import { LuMultiSelectPanelRef } from '../input/panel.model';
 import { MULTI_SELECT_INPUT } from '../select.model';
-import { LU_MULTI_SELECT_TRANSLATIONS } from '../select.translate';
 import { LuOptionsGroupContextPipe } from './option-group-context.pipe';
 
 @Component({
@@ -31,7 +32,6 @@ import { LuOptionsGroupContextPipe } from './option-group-context.pipe';
 	templateUrl: './panel.component.html',
 	styleUrl: './panel.component.scss',
 	changeDetection: ChangeDetectionStrategy.OnPush,
-	standalone: true,
 	imports: [
 		A11yModule,
 		AsyncPipe,
@@ -59,15 +59,15 @@ export class LuMultiSelectPanelComponent<T> implements AfterViewInit, CoreSelect
 	protected selectInput = inject<LuMultiSelectInputComponent<T>>(MULTI_SELECT_INPUT);
 	panelRef = inject<LuMultiSelectPanelRef<T>>(LuMultiSelectPanelRef);
 	selectId = inject(SELECT_ID);
-	intl = getIntl(LU_MULTI_SELECT_TRANSLATIONS);
 
 	options$ = this.selectInput.options$;
-	grouping = this.selectInput.grouping;
+	grouping = this.selectInput.groupingSignal;
 	treeGenerator = this.selectInput.treeGenerator;
 	loading$ = this.selectInput.loading$;
 	searchable = this.selectInput.searchable;
 	optionComparer = this.selectInput.optionComparer;
 	optionKey = this.selectInput.optionKey;
+	intl = this.selectInput.intl;
 
 	trackOptionsBy: TrackByFunction<T> = (_, option) => this.optionKey(option);
 	trackGroupsBy: TrackByFunction<LuOptionGroup<T, unknown>> = (_, group) => group.key;
@@ -88,10 +88,11 @@ export class LuMultiSelectPanelComponent<T> implements AfterViewInit, CoreSelect
 		};
 	});
 
+	hasGrouping$ = toObservable(this.grouping).pipe(map((grouping) => !!grouping));
 	public clueChange$ = this.selectInput.clue$;
 	public shouldDisplayAddOption$ = this.selectInput.shouldDisplayAddOption$;
 
-	groupTemplateLocation$ = ɵgetGroupTemplateLocation(!!this.grouping, this.clueChange$, this.options$, this.searchable);
+	groupTemplateLocation$ = ɵgetGroupTemplateLocation(this.hasGrouping$, this.clueChange$, this.options$, this.searchable);
 
 	onScroll(evt: Event): void {
 		if (!(evt.target instanceof HTMLElement)) {
@@ -149,7 +150,7 @@ export class LuMultiSelectPanelComponent<T> implements AfterViewInit, CoreSelect
 			options$: this.options$,
 			optionComparer: this.optionComparer,
 			activeOptionIdChanged$: this.panelRef.activeOptionIdChanged,
-			clueChange$: this.selectInput.searchable ? this.selectInput.clueChange : EMPTY,
+			clueChange$: this.selectInput.searchable ? this.selectInput.clueChange$ : EMPTY,
 		});
 
 		if (this.selectedOptions?.length) {

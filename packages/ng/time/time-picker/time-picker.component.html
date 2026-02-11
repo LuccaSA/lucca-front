@@ -1,13 +1,13 @@
 <div [class]="pickerClasses()" (copy)="copyHandler($event)" (paste)="pasteHandler($event)">
 	<fieldset class="timePicker-fieldset" [disabled]="disabled()">
 		<legend>
-			<span class="pr-u-mask">{{ label }}</span>
+			<span class="pr-u-mask">{{ label() }}</span>
 		</legend>
 		<lu-time-picker-part
 			#hoursPart
 			class="timePicker-fieldset-group"
 			[disabled]="disabled()"
-			[label]="intl.timePickerHours"
+			[label]="intl().timePickerHours"
 			[value]="hours()"
 			[display]="hoursDisplay()"
 			[max]="maxHours()"
@@ -18,16 +18,17 @@
 			(nextRequest)="focusPart('minutes')"
 			(inputControlClick)="inputControlClickHandler('hours', $event)"
 		/>
-		<div aria-hidden="true" class="timePicker-fieldset-groupSeparator">{{ separator }}</div>
+		<div aria-hidden="true" class="timePicker-fieldset-groupSeparator">{{ separator() }}</div>
 		<lu-time-picker-part
 			#minutesPart
 			class="timePicker-fieldset-group"
-			[label]="intl.timePickerMinutes"
+			[label]="intl().timePickerMinutes"
 			[value]="minutesDisplay()"
 			[max]="59"
 			[displayArrows]="displayArrows()"
 			(touched)="onTouched?.()"
 			[disabled]="disabled() || !minutesIncrement()"
+			showZero
 			(valueChange)="minutesInputHandler($event)"
 			(prevRequest)="focusPart('hours')"
 			(nextRequest)="focusPart('meridiem')"

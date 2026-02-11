@@ -1,34 +1,34 @@
 ﻿export const Translations = {
-	en: {
-		select: 'Select all',
-		deselect: 'Deselect all',
-	},
-	de: {
-		select: 'Alles auswählen',
-		deselect: 'Alles abwählen',
-	},
-	fr: {
-		select: 'Tout sélectionner',
-		deselect: 'Tout déselectionner',
-	},
-	it: {
-		select: 'Selezionare tutto',
-		deselect: 'Deselezionare tutto',
+	'nl-BE': {
+		select: 'Alles selecteren',
+		deselect: 'Alles deselecteren',
 	},
 	nl: {
 		select: 'Alles selecteren',
 		deselect: 'Alles deselecteren',
 	},
-	'nl-BE': {
-		select: 'Alles selecteren',
-		deselect: 'Alles deselecteren',
+	it: {
+		select: 'Selezionare tutto',
+		deselect: 'Deselezionare tutto',
+	},
+	fr: {
+		select: 'Tout sélectionner',
+		deselect: 'Tout déselectionner',
+	},
+	pt: {
+		select: 'Selecionar tudo',
+		deselect: 'Desselecionar tudo',
 	},
 	es: {
 		select: 'Seleccionar todo',
 		deselect: 'Desmarcar todo',
 	},
-	pt: {
-		select: 'Selecionar tudo',
-		deselect: 'Desselecionar tudo',
+	de: {
+		select: 'Alles auswählen',
+		deselect: 'Alles abwählen',
+	},
+	en: {
+		select: 'Select all',
+		deselect: 'Deselect all',
 	},
 };

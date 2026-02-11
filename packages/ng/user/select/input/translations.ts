@@ -1,34 +1,34 @@
 ﻿export const Translations = {
-	en: {
-		users: 'users',
-		me: 'Me:',
-	},
-	de: {
-		users: 'Benutzer',
-		me: 'Ich:',
-	},
-	fr: {
-		users: 'utilisateurs',
-		me: 'Moi :',
-	},
-	it: {
-		users: 'utenti',
-		me: 'Io:',
-	},
-	nl: {
-		users: 'gebruikers',
-		me: 'Ik:',
+	pt: {
+		users: 'utilizadores',
+		me: 'Eu:',
 	},
 	'nl-BE': {
 		users: 'gebruikers',
 		me: 'Ik:',
 	},
+	nl: {
+		users: 'gebruikers',
+		me: 'Ik:',
+	},
+	it: {
+		users: 'utenti',
+		me: 'Io:',
+	},
+	fr: {
+		users: 'utilisateurs',
+		me: 'Moi :',
+	},
 	es: {
 		users: 'usuarios',
 		me: 'Yo:',
 	},
-	pt: {
-		users: 'utilizadores',
-		me: 'Eu:',
+	de: {
+		users: 'Benutzer',
+		me: 'Ich:',
+	},
+	en: {
+		users: 'users',
+		me: 'Me:',
 	},
 };

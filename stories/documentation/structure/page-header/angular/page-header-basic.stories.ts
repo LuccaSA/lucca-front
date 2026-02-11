@@ -57,7 +57,7 @@ export default {
 			: ``;
 		const backActionContainer = backAction
 			? `<ng-container pageHeaderBackAction>
-	<a href="#" luButton="ghost">
+	<a href="#" luButton>
 		<lu-icon icon="arrowLeft" alt="Retour" />
 	</a>
 </ng-container>`
@@ -82,7 +82,7 @@ export default {
 		></lu-text-input>
 	</lu-form-field>
 	<button type="button" luButton>Button</button>
-	<button type="button" luButton="outline">Button</button>
+	<button type="button" luButton="outlined">Button</button>
 	<button type="button" luButton="ghost"><lu-icon icon="menuDots" alt="Voir plus d’options" /></button>
 </ng-container>`
 			: ``;
@@ -96,7 +96,7 @@ export default {
 </ng-container>`
 			: ``;
 		const leadingContainer = leading ? `<ng-container pageHeaderLeading>${leading}</ng-container>` : ``;
-		const trailingContainer = trailing ? `<ng-container pageHeaderTrainling>${trailing}</ng-container>` : ``;
+		const trailingContainer = trailing ? `<ng-container pageHeaderTrailing>${trailing}</ng-container>` : ``;
 		return {
 			template: `<lu-page-header ${generateInputs(otherArgs, argTypes)}>
 ${breadcrumbsContainer}${backActionContainer}${leadingContainer}${titleActionsContainer}${trailingContainer}${actionsContainer}${navigationContainer}

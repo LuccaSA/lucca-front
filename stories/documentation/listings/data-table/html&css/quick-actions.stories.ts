@@ -1,4 +1,4 @@
-import { Meta, StoryFn } from '@storybook/angular';
+import { Meta, StoryObj } from '@storybook/angular';
 
 interface QuickActionsStory {}
 
@@ -47,10 +47,12 @@ function getTemplate(args: QuickActionsStory): string {
 </div>`;
 }
 
-const Template: StoryFn<QuickActionsStory> = (args) => ({
+const Template = (args: QuickActionsStory) => ({
 	props: args,
 	template: getTemplate(args),
 });
 
-export const QuickActions = Template.bind({});
-QuickActions.args = {};
+export const QuickActions: StoryObj<QuickActionsStory> = {
+	args: {},
+	render: Template,
+};

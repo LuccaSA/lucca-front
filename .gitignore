@@ -49,3 +49,5 @@ compodoc-static
 /blob-report/
 /playwright/.cache/
 /coverage/
+
+*storybook.log

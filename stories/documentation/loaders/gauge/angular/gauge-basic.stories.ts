@@ -10,13 +10,31 @@ export default {
 			control: {
 				type: 'select',
 			},
+			description: 'Applique une palette de couleurs à la jauge.',
 		},
-		value: {
-			control: { type: 'range', min: 0, max: 100, step: 1 },
+		thin: {
+			description: "Diminue l'épaisseur de la jauge.",
+		},
+		animated: {
+			description: 'Ajoute une animation au chargement ou lorsque la valeur est modifiée.',
+		},
+		circular: {
+			description: 'Affiche la jauge sous une forme circulaire.',
 		},
 		size: {
 			control: { type: 'range', min: 32, max: 160, step: 8 },
 			if: { arg: 'circular', truthy: true },
+			description: 'Taille du composant pour sa forme circulaire.',
+		},
+		value: {
+			control: { type: 'range', min: 0, max: 100, step: 1 },
+			description: 'Valeur en pourcentage.',
+		},
+		alt: {
+			description: "Information restituée par le lecteur d'écran.",
+		},
+		noAlt: {
+			description: "Empêche la restitution par le lecteur d'écran. À n'utiliser que si l'information est déjà présente.",
 		},
 	},
 	decorators: [
@@ -24,7 +42,7 @@ export default {
 			imports: [GaugeComponent],
 		}),
 	],
-	render: (args: GaugeComponent, { argTypes }) => {
+	render: (args, { argTypes }) => {
 		const { alt, value, palette, ...inputs } = args;
 		const alternative = alt ? ` alt="${alt}"` : ``;
 		const val = value ? ` value="${value}"` : ``;
@@ -38,12 +56,12 @@ export default {
 
 export const Basic: StoryObj<GaugeComponent> = {
 	args: {
-		thin: false,
-		animated: false,
-		circular: false,
 		value: 33,
+		circular: false,
+		size: 40,
 		alt: '',
 		noAlt: false,
-		size: 40,
+		animated: false,
+		thin: false,
 	},
 };

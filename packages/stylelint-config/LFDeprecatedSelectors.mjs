@@ -1,8 +1,8 @@
 export default [
 	{
-		// Any combination of .button and .mod-counter with any non-whitespace character between
+		// Any combination of .button and .mod-counter, with any non-whitespace character between
 		// SEE https://regex101.com/r/9WOlXc.
-		objectPattern: /(\.button|\.mod-counter)[\S]*(\.button|\.mod-counter)/,
+		objectPattern: /(?=\S*\.\bbutton\b)(?=\S*\.\bmod-counter\b)\S*/,
 		versionDeleted: '18.1.0',
 	},
 	{
@@ -10,9 +10,9 @@ export default [
 		versionDeleted: '18.1.0',
 	},
 	{
-		// Any combination of .callout and .mod-tiny with any non-whitespace character between
+		// Any combination of .callout and .mod-tiny, with any non-whitespace character between
 		// SEE https://regex101.com/r/rW039S.
-		objectPattern: /(\.callout|\.mod-tiny)[\S]*(\.callout|\.mod-tiny)/,
+		objectPattern: /(?=\S*\.\bcallout\b)(?=\S*\.\bmod-tiny\b)\S*/,
 		versionDeleted: '18.1.0',
 	},
 	{
@@ -24,7 +24,7 @@ export default [
 		versionDeleted: '20.1.0',
 	},
 	{
-		// Any combination of .button and .mod-icon with any non-whitespace character between
+		// Any combination of .button and .mod-icon, with any non-whitespace character between
 		// SEE https://regex101.com/r/6yQzje.
 		objectPattern: /(\.button|\.mod-icon)[\S]*(\.button|\.mod-icon)/,
 		versionDeprecated: '17.2.0',
@@ -61,10 +61,9 @@ export default [
 		versionDeleted: '20.1.0',
 	},
 	{
-		// Any combination of .table-head-row-cell, .mod-sortable, .sortedAscending or .sortedAscending with any non-whitespace character between
+		// Any combination of .table-head-row-cell and .mod-sortable, .sortedAscending or .sortedAscending, with any non-whitespace character between
 		// SEE https://regex101.com/r/NFrjBF.
-		objectPattern:
-			/(\.table-head-row-cell|\.mod-sortable|\.sortedAscending|\.sortedDescending)[\S]*(\.table-head-row-cell|\.mod-sortable|\.sortedAscending|\.sortedDescending)/,
+		objectPattern: /(?=\S*\.\btable-head-row-cell\b)(?=\S*\.\b(mod-sortable|sortedAscending|sortedDescending)\b)\S*/,
 		versionDeprecated: '18.2.0',
 		versionDeleted: '20.1.0',
 	},
@@ -110,9 +109,10 @@ export default [
 		versionDeleted: '22.1.0',
 	},
 	{
-		// Any combination of .button, .mod-text or .mod-deleted with any non-whitespace character between
+		// Any combination of .button and .mod-text or .mod-deleted, with any non-whitespace character between
 		// SEE https://regex101.com/r/5qB2gm.
-		objectPattern: /(\.button|\.mod-text|\.mod-deleted)[\S]*(\.button|\.mod-text|\.mod-deleted)/,
+		objectPattern: /(?=\S*\.\bbutton\b)(?=\S*\.\b(mod-text|mod-deleted)\b)\S*/,
 		versionDeprecated: '20.2.0',
+		versionDeleted: '22.1.0',
 	},
 ];

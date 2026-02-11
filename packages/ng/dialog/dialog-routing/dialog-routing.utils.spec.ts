@@ -41,6 +41,7 @@ interface DialogRoutingTestDialogData {
 @Component({
 	selector: 'lu-dialog-routing-test',
 	template: '',
+	changeDetection: ChangeDetectionStrategy.OnPush,
 })
 class DialogRoutingTestComponent {
 	dialogData = injectDialogData<DialogRoutingTestDialogData>();
@@ -61,12 +62,14 @@ class ProvidedInParentRouteService {
 	imports: [RouterOutlet],
 	providers: [ProvidedInParentComponentService],
 	template: '<router-outlet />',
+	changeDetection: ChangeDetectionStrategy.OnPush,
 })
 class ParentComponent {}
 
 @Component({
 	selector: 'lu-dialog-routing-test',
 	template: '',
+	changeDetection: ChangeDetectionStrategy.OnPush,
 })
 class DialogRoutingTestWithParentDIComponent {
 	parentService = inject(ProvidedInParentComponentService);
@@ -77,14 +80,15 @@ class DialogRoutingTestWithParentDIComponent {
 	selector: 'lu-dialog-routing-with-router-outlet-test',
 	imports: [RouterOutlet],
 	template: '<router-outlet />',
+	changeDetection: ChangeDetectionStrategy.OnPush,
 })
 class DialogRoutingWithRouterOutletTestComponent {}
 
 @Component({
 	selector: 'lu-app-test',
-	standalone: true,
 	imports: [RouterOutlet],
 	template: '<router-outlet />',
+	changeDetection: ChangeDetectionStrategy.OnPush,
 })
 class AppTestComponent {}
 
@@ -225,6 +229,62 @@ describe('dialog-routing.utils', () => {
 			expect(dialogRef.dismiss).toHaveBeenCalledTimes(1);
 		});
 
+		it('should call canDeactivate once when dialog is dismissed', async () => {
+			// Arrange
+			const canDeactivateGuard = jest.fn(() => true);
+
+			const route = addTestRoute({
+				path: 'test/:name',
+				dataFactory: () => ({ foo: 'bar' }),
+				dialogRouteConfig: {
+					canDeactivate: [canDeactivateGuard],
+				},
+			});
+			const { router, fixture } = initTest(route);
+
+			// Act
+			await router.navigateByUrl('/test/bar');
+			fixture.detectChanges();
+			await fixture.whenStable();
+
+			// Navigate away to trigger canDeactivate
+			dialogRef.dismiss();
+			fixture.detectChanges();
+			await fixture.whenStable();
+
+			// Assert
+			expect(canDeactivateGuard).toHaveBeenCalledTimes(1);
+			expect(dialogRef.dismiss).toHaveBeenCalledTimes(1);
+		});
+
+		it('should not call canDeactivate when dialog is closed', async () => {
+			// Arrange
+			const canDeactivateGuard = jest.fn(() => true);
+
+			const route = addTestRoute({
+				path: 'test/:name',
+				dataFactory: () => ({ foo: 'bar' }),
+				dialogRouteConfig: {
+					canDeactivate: [canDeactivateGuard],
+				},
+			});
+			const { router, fixture } = initTest(route);
+
+			// Act
+			await router.navigateByUrl('/test/bar');
+			fixture.detectChanges();
+			await fixture.whenStable();
+
+			// Navigate away to trigger canDeactivate
+			dialogRef.close();
+			fixture.detectChanges();
+			await fixture.whenStable();
+
+			// Assert
+			expect(canDeactivateGuard).toHaveBeenCalledTimes(0);
+			expect(dialogRef.close).toHaveBeenCalledTimes(1);
+		});
+
 		it('should keep dialog opened when canDeactivate return false', async () => {
 			// Arrange
 			const canDeactivateGuard = jest.fn(() => false);
@@ -285,8 +345,8 @@ describe('dialog-routing.utils', () => {
 
 			// Assert
 			expect(router.url).toBe('/test/child1');
-			expect(fixture.debugElement.parent.query(By.directive(Child1Component))).toBeTruthy();
-			expect(fixture.debugElement.parent.query(By.directive(Child2Component))).toBeFalsy();
+			expect(fixture.debugElement.parent?.query(By.directive(Child1Component))).toBeTruthy();
+			expect(fixture.debugElement.parent?.query(By.directive(Child2Component))).toBeFalsy();
 			expect(dialogService.open).toHaveBeenCalledTimes(1);
 
 			// Act 2
@@ -296,8 +356,8 @@ describe('dialog-routing.utils', () => {
 
 			// Assert 2
 			expect(router.url).toBe('/test/child2');
-			expect(fixture.debugElement.parent.query(By.directive(Child1Component))).toBeFalsy();
-			expect(fixture.debugElement.parent.query(By.directive(Child2Component))).toBeTruthy();
+			expect(fixture.debugElement.parent?.query(By.directive(Child1Component))).toBeFalsy();
+			expect(fixture.debugElement.parent?.query(By.directive(Child2Component))).toBeTruthy();
 			expect(dialogService.open).toHaveBeenCalledTimes(1); // Still 1, dialog not reopened
 			expect(dialogRef.close).not.toHaveBeenCalled();
 			expect(dialogRef.dismiss).not.toHaveBeenCalled();
@@ -323,7 +383,7 @@ describe('dialog-routing.utils', () => {
 			fixture.detectChanges();
 			await fixture.whenStable();
 
-			const dialogComponent = fixture.debugElement.parent.query(By.directive(DialogRoutingTestWithParentDIComponent)).componentInstance as DialogRoutingTestWithParentDIComponent;
+			const dialogComponent = fixture.debugElement.parent?.query(By.directive(DialogRoutingTestWithParentDIComponent)).componentInstance as DialogRoutingTestWithParentDIComponent;
 
 			// Assert
 			expect(dialogService.open).toHaveBeenCalledTimes(1);
@@ -352,8 +412,8 @@ describe('dialog-routing.utils', () => {
 			fixture.detectChanges();
 			await fixture.whenStable();
 
-			const parentDialog = fixture.debugElement.parent.query(By.directive(ParentComponent));
-			const nestedDialog = fixture.debugElement.parent.query(By.directive(DialogRoutingTestWithParentDIComponent));
+			const parentDialog = fixture.debugElement.parent?.query(By.directive(ParentComponent));
+			const nestedDialog = fixture.debugElement.parent?.query(By.directive(DialogRoutingTestWithParentDIComponent));
 
 			// Assert
 			expect(openDialogs).toBe(2);

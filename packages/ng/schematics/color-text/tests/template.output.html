@@ -1,0 +1,11 @@
+<!-- basic class -->
+<div class="pr-u-colorTextProduct"></div>
+<div [class]="'pr-u-colorInputTextPlaceholder'"></div>
+<div [class]="condition ? 'pr-u-colorTextCleemy' : 'pr-u-colorTextTimmi'"></div>
+
+<!-- NgClass -->
+<span aria-hidden="true" [ngClass]="{ 'pr-u-colorTextWatermelon': showBillingInfos, 'pr-u-colorTextPumpkin': !showBillingInfos }"></span>
+<span aria-hidden="true" [ngClass]="event.expanded ? 'pr-u-colorTextSuccessContrasted' : 'pr-u-colorTextWarningContrasted'"></span>
+
+<!-- Class bound attribute -->
+<span [class.pr-u-colorTextPagga]="!showDetails"></span>

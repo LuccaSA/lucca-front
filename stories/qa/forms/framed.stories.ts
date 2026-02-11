@@ -1,12 +1,12 @@
-import { Component } from '@angular/core';
+import { ChangeDetectionStrategy, Component } from '@angular/core';
 import { FormlyModule } from '@ngx-formly/core';
-import { Meta, StoryFn } from '@storybook/angular';
+import { Meta, StoryObj } from '@storybook/angular';
 
 @Component({
-	standalone: true,
 	selector: 'forms-framed-stories',
 	templateUrl: './framed.stories.html',
 	imports: [FormlyModule],
+	changeDetection: ChangeDetectionStrategy.OnPush,
 })
 class FramedStory {}
 
@@ -15,6 +15,9 @@ export default {
 	component: FramedStory,
 } as Meta;
 
-const template: StoryFn<FramedStory> = () => ({});
+const template = () => ({});
 
-export const basic = template.bind({});
+export const Basic: StoryObj<FramedStory> = {
+	args: {},
+	render: template,
+};

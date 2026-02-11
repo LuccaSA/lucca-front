@@ -1,10 +1,14 @@
 @use 'exports' as *;
 
 .filterBarDeprecated {
-	@include vars;
-	@include component;
+	@layer components {
+		@include vars;
+		@include component;
+	}
 
-	&.mod-neutral {
-		@include neutral;
+	@layer mods {
+		&.mod-neutral {
+			@include neutral;
+		}
 	}
 }

@@ -1,9 +1,9 @@
-import { Meta, StoryFn } from '@storybook/angular';
+import { Meta, StoryObj } from '@storybook/angular';
 
 interface PLGPushTitleStory {}
 
 export default {
-	title: 'Documentation/Feedback/PLG Push/HTML & CSS/Title',
+	title: 'Documentation/Feedback/PLG Push/HTML&CSS/Title',
 	argTypes: {},
 } as Meta;
 
@@ -26,10 +26,12 @@ function getTemplate(args: PLGPushTitleStory): string {
 </div>`;
 }
 
-const Template: StoryFn<PLGPushTitleStory> = (args) => ({
+const Template = (args: PLGPushTitleStory) => ({
 	props: args,
 	template: getTemplate(args),
 });
 
-export const Title = Template.bind({});
-Title.args = {};
+export const Title: StoryObj<PLGPushTitleStory> = {
+	args: {},
+	render: Template,
+};

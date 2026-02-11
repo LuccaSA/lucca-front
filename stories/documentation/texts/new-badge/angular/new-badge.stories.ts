@@ -1,9 +1,14 @@
+import { NewBadgeComponent } from '@lucca-front/ng/new-badge';
 import { Meta, StoryObj } from '@storybook/angular';
-import { NewBadgeComponent } from "@lucca-front/ng/new-badge";
 
 export default {
 	title: 'Documentation/Texts/NewBadge/Angular/Basic',
-	component: NewBadgeComponent
+	component: NewBadgeComponent,
+	argTypes: {
+		label: {
+			description: 'Modifie le texte affiché par le composant.',
+		},
+	},
 } as Meta;
 
 export const Template: StoryObj<NewBadgeComponent> = {

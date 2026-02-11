@@ -1,4 +1,4 @@
-import { Meta, StoryFn } from '@storybook/angular';
+import { Meta, StoryObj } from '@storybook/angular';
 
 interface StickyHeaderStory {}
 
@@ -43,10 +43,12 @@ function getTemplate(args: StickyHeaderStory): string {
 </div>`;
 }
 
-const Template: StoryFn<StickyHeaderStory> = (args) => ({
+const Template = (args: StickyHeaderStory) => ({
 	props: args,
 	template: getTemplate(args),
 });
 
-export const StickyHeader = Template.bind({});
-StickyHeader.args = {};
+export const StickyHeader: StoryObj<StickyHeaderStory> = {
+	args: {},
+	render: Template,
+};

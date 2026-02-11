@@ -31,7 +31,8 @@
 			}
 		}
 
-		.breadcrumbs-list-item-action {
+		// Second selector to get rid of breadcrumbs-list-item-action on angular component
+		.breadcrumbs-list-item-action, .breadcrumbs-list-item > a  {
 			color: var(--pr-t-color-text-subtle);
 			transition-duration: var(--commons-animations-durations-fast);
 			transition-property: color;

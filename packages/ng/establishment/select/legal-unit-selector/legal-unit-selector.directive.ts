@@ -7,7 +7,6 @@ import { DEFAULT_ESTABLISHMENT_SERVICE } from '../establishment-select.token';
 
 @Directive({
 	selector: '[luLegalUnitSelector]',
-	standalone: true,
 	providers: [
 		{
 			provide: ALuOptionSelector,

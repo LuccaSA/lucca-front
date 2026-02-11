@@ -1,7 +1,7 @@
 @if (circular()) {
 	<svg
 		class="gauge"
-		[class]="paletteClass"
+		[class]="paletteClass()"
 		[class.mod-thin]="thin()"
 		[class.is-animated]="animated()"
 		[class.is-zero]="value() === 0"
@@ -18,7 +18,7 @@
 		class="gauge"
 		[attr.style]="`--components-gauge-value: ${value()}%`"
 		[class.mod-thin]="thin()"
-		[class]="paletteClass"
+		[class]="paletteClass()"
 		[class.is-animated]="animated()"
 	></div>
 }

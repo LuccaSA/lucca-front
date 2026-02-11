@@ -4,6 +4,7 @@ import { LuccaIcon } from '@lucca-front/icons';
 export type FilterPillLayout = 'checkable';
 
 export interface FilterPillInputComponent {
+	parentInput?: FilterPillInputComponent | null;
 	isFilterPillEmpty: Signal<boolean>;
 	isFilterPillClearable: Signal<boolean>;
 	// If this is not here, we'll consider it's using default layout

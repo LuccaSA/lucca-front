@@ -61,6 +61,7 @@
 
 	&:not(:disabled) {
 		--components-tag-boxShadow: none;
+		--components-tag-position: relative;
 
 		@include color.borderGradient(135deg, var(--palettes-brand-400), var(--palettes-AI-500), var(--pr-t-border-radius-small));
 

@@ -11,6 +11,7 @@ export interface ILuSimpleSelectLabel {
 	clear: string;
 	clearSearch: string;
 	emptyResults: string;
+	emptyOptions: string;
 	loading: string;
 }
 

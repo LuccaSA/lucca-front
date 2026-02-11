@@ -1,4 +1,4 @@
-import { Meta, StoryFn } from '@storybook/angular';
+import { Meta, StoryObj } from '@storybook/angular';
 
 interface TableStickyColumnsAndHeaderWithBreakpointsStory {}
 
@@ -59,48 +59,52 @@ function getTemplate(args: TableStickyColumnsAndHeaderWithBreakpointsStory): str
 						<div class="stickyHeader-shadow-wrapper"></div>
 					</td>
 				</tr>
-				<tr class="table-body-row" *ngFor="let _ of [].constructor(5)">
-					<td class="table-body-row-cell mod-stickyColumn-left">
-						Body cell
-					</td>
-					<td class="table-body-row-cell mod-stickyColumn-left" [attr.style]="'--table-stickyColumn-offset: 8rem'">
-						Body cell
-					</td>
-					<td class="table-body-row-cell mod-stickyColumn-left" [attr.style]="'--table-stickyColumn-offset: calc(8rem + 7rem)'">
-						Body cell
-					</td>
-					<!-- col containing the left shadow -->
-					<td class="table-body-row-cell mod-stickyColumn-left mod-stickyColumn-shadow" [attr.style]="'--table-stickyColumn-offset: calc(8rem + 7rem + 5.5rem)'" aria-hidden="true">
-						<div class="stickyColumn-shadow-wrapper"></div>
-					</td>
-					<td class="table-body-row-cell">Body cell</td>
-					<td class="table-body-row-cell">Body cell</td>
-					<td class="table-body-row-cell">Body cell</td>
-					<td class="table-body-row-cell">Body cell</td>
-					<td class="table-body-row-cell">Body cell</td>
-					<td class="table-body-row-cell">Body cell</td>
-					<td class="table-body-row-cell">Body cell</td>
-					<td class="table-body-row-cell">Body cell</td>
-					<td class="table-body-row-cell">Body cell</td>
-					<td class="table-body-row-cell">Body cell</td>
-					<!-- col containing the right shadow -->
-					<td class="table-body-row-cell mod-stickyColumn-right mod-stickyColumn-shadow" [attr.style]="'--table-stickyColumn-offset: 6rem'" aria-hidden="true">
-						<div class="stickyColumn-shadow-wrapper"></div>
-					</td>
-					<td class="table-body-row-cell mod-stickyColumn-right">
-						Body cell
-					</td>
-				</tr>
+				@for (_ of [].constructor(5); track $index) {
+					<tr class="table-body-row">
+						<td class="table-body-row-cell mod-stickyColumn-left">
+							Body cell
+						</td>
+						<td class="table-body-row-cell mod-stickyColumn-left" [attr.style]="'--table-stickyColumn-offset: 8rem'">
+							Body cell
+						</td>
+						<td class="table-body-row-cell mod-stickyColumn-left" [attr.style]="'--table-stickyColumn-offset: calc(8rem + 7rem)'">
+							Body cell
+						</td>
+						<!-- col containing the left shadow -->
+						<td class="table-body-row-cell mod-stickyColumn-left mod-stickyColumn-shadow" [attr.style]="'--table-stickyColumn-offset: calc(8rem + 7rem + 5.5rem)'" aria-hidden="true">
+							<div class="stickyColumn-shadow-wrapper"></div>
+						</td>
+						<td class="table-body-row-cell">Body cell</td>
+						<td class="table-body-row-cell">Body cell</td>
+						<td class="table-body-row-cell">Body cell</td>
+						<td class="table-body-row-cell">Body cell</td>
+						<td class="table-body-row-cell">Body cell</td>
+						<td class="table-body-row-cell">Body cell</td>
+						<td class="table-body-row-cell">Body cell</td>
+						<td class="table-body-row-cell">Body cell</td>
+						<td class="table-body-row-cell">Body cell</td>
+						<td class="table-body-row-cell">Body cell</td>
+						<!-- col containing the right shadow -->
+						<td class="table-body-row-cell mod-stickyColumn-right mod-stickyColumn-shadow" [attr.style]="'--table-stickyColumn-offset: 6rem'" aria-hidden="true">
+							<div class="stickyColumn-shadow-wrapper"></div>
+						</td>
+						<td class="table-body-row-cell mod-stickyColumn-right">
+							Body cell
+						</td>
+					</tr>
+				}
 			</tbody>
 		</table>
 	`;
 }
 
-const Template: StoryFn<TableStickyColumnsAndHeaderWithBreakpointsStory> = (args: TableStickyColumnsAndHeaderWithBreakpointsStory) => ({
+const Template = (args: TableStickyColumnsAndHeaderWithBreakpointsStory) => ({
 	props: args,
 	template: getTemplate(args),
 	styles: [`:host {display: block; overflow: auto; height: 10rem; white-space: nowrap}`],
 });
 
-export const StickyColumnsAndHeaderWithBreakpoints = Template.bind({});
-StickyColumnsAndHeaderWithBreakpoints.args = {};
+export const StickyColumnsAndHeaderWithBreakpoints: StoryObj<TableStickyColumnsAndHeaderWithBreakpointsStory> = {
+	args: {},
+	render: Template,
+};

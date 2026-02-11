@@ -1,4 +1,4 @@
-import { Meta, StoryFn } from '@storybook/angular';
+import { Meta, StoryObj } from '@storybook/angular';
 
 interface FilterBarDeprecatedBasicStory {}
 
@@ -107,10 +107,12 @@ function getTemplate(args: FilterBarDeprecatedBasicStory): string {
 </form>`;
 }
 
-const Template: StoryFn<FilterBarDeprecatedBasicStory> = (args) => ({
+const Template = (args: FilterBarDeprecatedBasicStory) => ({
 	props: args,
 	template: getTemplate(args),
 });
 
-export const Basic = Template.bind({});
-Basic.args = {};
+export const Basic: StoryObj<FilterBarDeprecatedBasicStory> = {
+	args: {},
+	render: Template,
+};

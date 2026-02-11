@@ -2,7 +2,6 @@ import { Highlightable } from '@angular/cdk/a11y';
 import { Directive, ElementRef, Input, inject } from '@angular/core';
 
 @Directive({
-	standalone: true,
 	selector: '[luMultiSelectSelectedChip]',
 })
 export class ɵLuMultiSelectSelectedChipDirective<T> implements Highlightable {

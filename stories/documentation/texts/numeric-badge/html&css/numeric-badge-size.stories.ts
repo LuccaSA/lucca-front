@@ -1,9 +1,9 @@
-import { Meta, StoryFn } from '@storybook/angular';
+import { Meta, StoryObj } from '@storybook/angular';
 
 interface NumericBadgeSizeStory {}
 
 export default {
-	title: 'Documentation/Texts/NumericBadge/HTML & CSS/Size',
+	title: 'Documentation/Texts/NumericBadge/HTML&CSS/Size',
 	argTypes: {},
 } as Meta;
 
@@ -13,7 +13,7 @@ function getTemplate(args: NumericBadgeSizeStory): string {
 <span class="numericBadge mod-XS">7</span>`;
 }
 
-const Template: StoryFn<NumericBadgeSizeStory> = (args) => ({
+const Template = (args: NumericBadgeSizeStory) => ({
 	props: args,
 	template: getTemplate(args),
 	styles: [
@@ -25,5 +25,7 @@ const Template: StoryFn<NumericBadgeSizeStory> = (args) => ({
 	],
 });
 
-export const Size = Template.bind({});
-Size.args = {};
+export const Size: StoryObj<NumericBadgeSizeStory> = {
+	args: {},
+	render: Template,
+};

@@ -14,19 +14,18 @@ import {
 	Injector,
 	input,
 	OnInit,
-	Signal,
 	signal,
-	untracked,
 	viewChild,
 	viewChildren,
 	ViewEncapsulation,
 } from '@angular/core';
 import { toSignal } from '@angular/core/rxjs-interop';
-import { AbstractControl, ControlValueAccessor, NG_VALIDATORS, NG_VALUE_ACCESSOR, NgControl, NgModel, ValidationErrors, Validator } from '@angular/forms';
+import { AbstractControl, ControlValueAccessor, FormsModule, NG_VALIDATORS, NG_VALUE_ACCESSOR, NgControl, NgModel, ValidationErrors, Validator } from '@angular/forms';
 import { LuccaIcon } from '@lucca-front/icons';
+import { ClearComponent } from '@lucca-front/ng/clear';
 import { isNil, LuClass, PortalContent, PortalDirective, ɵeffectWithDeps } from '@lucca-front/ng/core';
 import { FILTER_PILL_INPUT_COMPONENT, FilterPillDisplayerDirective, FilterPillInputComponent } from '@lucca-front/ng/filter-pills';
-import { FORM_FIELD_INSTANCE, InputDirective } from '@lucca-front/ng/form-field';
+import { FORM_FIELD_INSTANCE, InputDirective, ɵPresentationDisplayDefaultDirective } from '@lucca-front/ng/form-field';
 import { IconComponent } from '@lucca-front/ng/icon';
 import { PopoverDirective } from '@lucca-front/ng/popover2';
 import { addMonths, addYears, endOfDecade, endOfMonth, endOfYear, isAfter, isBefore, isSameDay, parse, startOfDay, startOfDecade, startOfMonth, startOfYear, subMonths, subYears } from 'date-fns';
@@ -43,8 +42,19 @@ let nextId = 0;
 
 @Component({
 	selector: 'lu-date-range-input',
-	standalone: true,
-	imports: [PopoverDirective, Calendar2Component, IconComponent, InputDirective, LayoutModule, PortalDirective, NgTemplateOutlet, FilterPillDisplayerDirective],
+	imports: [
+		PopoverDirective,
+		Calendar2Component,
+		IconComponent,
+		InputDirective,
+		LayoutModule,
+		PortalDirective,
+		NgTemplateOutlet,
+		FilterPillDisplayerDirective,
+		ClearComponent,
+		ɵPresentationDisplayDefaultDirective,
+		FormsModule,
+	],
 	templateUrl: './date-range-input.component.html',
 	styleUrl: './date-range-input.component.scss',
 	host: {
@@ -71,6 +81,7 @@ let nextId = 0;
 	],
 })
 export class DateRangeInputComponent extends AbstractDateComponent implements OnInit, ControlValueAccessor, Validator, FilterPillInputComponent {
+	public parentInput = inject(FILTER_PILL_INPUT_COMPONENT, { optional: true, skipSelf: true });
 	#injector = inject(Injector);
 	#ngControl: NgControl; // Initialized in ngOnInit
 	#luClass = inject(LuClass);
@@ -84,8 +95,10 @@ export class DateRangeInputComponent extends AbstractDateComponent implements On
 	idSuffix = nextId++;
 
 	startTextInputRef = viewChild<ElementRef<HTMLInputElement>>('start');
+	startUserTextInput = signal('ɵ');
 
 	endTextInputRef = viewChild<ElementRef<HTMLInputElement>>('end');
+	endUserTextInput = signal('ɵ');
 
 	// CVA stuff
 	#onChange?: (value: DateRange) => void;
@@ -170,22 +183,26 @@ export class DateRangeInputComponent extends AbstractDateComponent implements On
 	});
 
 	startLabel = computed(() => {
+		const inputValue = this.startUserTextInput();
+		if (inputValue !== 'ɵ') {
+			return inputValue;
+		}
 		if (this.selectedRange()?.start && this.isValidDate(this.selectedRange()?.start)) {
 			return this.getDateLabelForInput(this.selectedRange()?.start);
 		}
 		return '';
 	});
 
-	startTextInput = signal<string | null>(null);
-
 	endLabel = computed(() => {
+		const inputValue = this.endUserTextInput();
+		if (inputValue !== 'ɵ') {
+			return inputValue;
+		}
 		if (this.selectedRange()?.end && this.isValidDate(this.selectedRange()?.end)) {
 			return this.getDateLabelForInput(this.selectedRange()?.end);
 		}
 		return '';
 	});
-
-	endTextInput = signal<string | null>(null);
 
 	previousButton = viewChild<ElementRef<Element>>('previousButtonRef');
 
@@ -224,13 +241,6 @@ export class DateRangeInputComponent extends AbstractDateComponent implements On
 			this.#formFieldRef.rolePresentationLabel.set(true);
 			this.label = this.#formFieldRef.label();
 		}
-
-		this.setupInputEffect(this.startTextInput, 'start');
-		this.setupInputEffect(this.endTextInput, 'end');
-
-		effect(() => {
-			this.#onChange?.(this.selectedRange());
-		});
 
 		effect(() => {
 			this.#luClass.setState({
@@ -295,52 +305,19 @@ export class DateRangeInputComponent extends AbstractDateComponent implements On
 	popoverClosed(): void {
 		this.panelClosed.emit();
 		if (this.editedField() === 1) {
-			this.endTextInputRef().nativeElement.focus();
+			this.endTextInputRef()?.nativeElement.focus();
 		} else if (this.editedField() === 0) {
-			this.startTextInputRef().nativeElement.focus();
+			this.startTextInputRef()?.nativeElement.focus();
 		}
-	}
-
-	setupInputEffect(inputSignal: Signal<string | null>, rangeProperty: 'start' | 'end'): void {
-		effect(() => {
-			const inputValue = inputSignal();
-			let currentRange: DateRange = untracked(this.selectedRange) || ({} as DateRange);
-			if (inputValue?.length > 0) {
-				const parsed = parse(inputValue, this.dateFormat, startOfDay(new Date()));
-				if (parsed.getFullYear() > 999) {
-					currentRange = {
-						...currentRange,
-						scope: this.mode(),
-						[rangeProperty]: parsed,
-					};
-					this.currentDate.set(startOfDay(parsed));
-					this.tabbableDate.set(startOfDay(parsed));
-				} else if (this.isValidDate(parsed)) {
-					currentRange = {
-						...currentRange,
-						scope: this.mode(),
-						[rangeProperty]: parsed,
-					};
-				}
-			} else if (inputValue !== null) {
-				currentRange = {
-					...currentRange,
-					scope: this.mode(),
-					[rangeProperty]: undefined,
-				};
-			}
-			if (!currentRange.start && !currentRange.end) {
-				this.selectedRange.set(null);
-			} else {
-				this.selectedRange.set(currentRange);
-			}
-		});
 	}
 
 	inputBlur(): void {
 		this.onTouched?.();
 		this.inputFocused.set(false);
+		this.startUserTextInput.set('ɵ');
+		this.endUserTextInput.set('ɵ');
 		this.highlightedField.set(-1);
+		this.fixOrderIfNeeded();
 	}
 
 	fixOrderIfNeeded(): void {
@@ -351,6 +328,7 @@ export class DateRangeInputComponent extends AbstractDateComponent implements On
 				end: range.start,
 				start: range.end,
 			});
+			this.#onChange?.(this.selectedRange());
 		}
 	}
 
@@ -401,7 +379,7 @@ export class DateRangeInputComponent extends AbstractDateComponent implements On
 			// If we're editing end field
 			if (this.editedField() === 1) {
 				// If end is before start, invert them
-				if (isBefore(date, this.selectedRange().start)) {
+				if (isBefore(date, this.selectedRange()?.start)) {
 					this.selectedRange.set({
 						start: date,
 						scope: this.mode(),
@@ -416,13 +394,13 @@ export class DateRangeInputComponent extends AbstractDateComponent implements On
 				}
 				popoverRef?.close();
 				this.filterPillPopoverCloseFn?.();
-				this.endTextInputRef().nativeElement.focus();
+				this.endTextInputRef()?.nativeElement.focus();
 				this.editedField.set(-1);
 				this.dateHovered.set(null);
 			} else {
 				// Else, we're editing start field
 				// If start is after end, invert them
-				if (isAfter(date, this.selectedRange().end)) {
+				if (isAfter(date, this.selectedRange()?.end)) {
 					this.selectedRange.set({
 						start: date,
 						scope: this.mode(),
@@ -439,6 +417,8 @@ export class DateRangeInputComponent extends AbstractDateComponent implements On
 				this.dateHovered.set(null);
 			}
 		}
+
+		this.#onChange?.(this.selectedRange());
 	}
 
 	arrowDown(popoverRef: PopoverDirective, fieldToFocus: 'start' | 'end'): void {
@@ -456,7 +436,7 @@ export class DateRangeInputComponent extends AbstractDateComponent implements On
 		}
 		const dateRange = transformDateRangeInputToDateRange(control.value);
 
-		return this.isValidDate(dateRange.start) ? null : { date: true };
+		return this.isValidDate(dateRange?.start) ? null : { date: true };
 	}
 
 	writeValue(dateRange: DateRange | DateRangeInput | null): void {
@@ -467,15 +447,13 @@ export class DateRangeInputComponent extends AbstractDateComponent implements On
 		}
 		const _dateRange = transformDateRangeInputToDateRange(dateRange);
 
-		if (this.initialValue() === undefined) {
-			this.initialValue.set(_dateRange);
+		if (isNil(this.initialValue())) {
+			this.selectedRange.set(this.clearBehavior() === 'reset' ? this.initialValue() : _dateRange);
 		}
 
 		if (dateRange != null) {
 			this.selectedRange.set(_dateRange);
 			this.currentDate.set(startOfDay(dateRange.start));
-		} else {
-			this.clear();
 		}
 	}
 
@@ -493,8 +471,9 @@ export class DateRangeInputComponent extends AbstractDateComponent implements On
 	clear() {
 		const newValue = this.clearBehavior() === 'reset' ? this.initialValue() : null;
 		this.selectedRange.set(newValue);
+		this.#onChange?.(this.selectedRange());
 		this.onTouched?.();
-		this.startTextInputRef().nativeElement.focus();
+		this.startTextInputRef()?.nativeElement.focus();
 	}
 
 	currentDateChangeFromCalendar(date: Date): void {
@@ -503,6 +482,9 @@ export class DateRangeInputComponent extends AbstractDateComponent implements On
 	}
 
 	getDateLabelForInput(date: Date): string {
+		if (!date?.getTime()) {
+			return '';
+		}
 		switch (this.mode()) {
 			case 'day':
 				return this.intlDateTimeFormat.format(date);
@@ -515,6 +497,7 @@ export class DateRangeInputComponent extends AbstractDateComponent implements On
 
 	selectShortcut(shortcut: CalendarShortcut, popover: PopoverDirective): void {
 		this.selectedRange.set(shortcut.range);
+		this.#onChange?.(this.selectedRange());
 		popover?.close();
 		this.filterPillPopoverCloseFn?.();
 	}
@@ -534,5 +517,47 @@ export class DateRangeInputComponent extends AbstractDateComponent implements On
 
 	getDefaultFilterPillIcon(): LuccaIcon {
 		return 'calendarPlanning';
+	}
+
+	textInputChange(inputValue: string, rangeProperty: 'start' | 'end'): void {
+		switch (rangeProperty) {
+			case 'start':
+				this.startUserTextInput.set(inputValue);
+				break;
+			case 'end':
+				this.endUserTextInput.set(inputValue);
+				break;
+		}
+		let currentRange: DateRange = this.selectedRange() || ({} as DateRange);
+		if (inputValue?.length > 0) {
+			const parsed = parse(inputValue, this.dateFormat, startOfDay(new Date()));
+			if (parsed.getFullYear() > 999) {
+				currentRange = {
+					...currentRange,
+					scope: this.mode(),
+					[rangeProperty]: parsed,
+				};
+				this.currentDate.set(startOfDay(parsed));
+				this.tabbableDate.set(startOfDay(parsed));
+			} else if (this.isValidDate(parsed)) {
+				currentRange = {
+					...currentRange,
+					scope: this.mode(),
+					[rangeProperty]: parsed,
+				};
+			}
+		} else if (inputValue !== null) {
+			currentRange = {
+				...currentRange,
+				scope: this.mode(),
+				[rangeProperty]: undefined,
+			};
+		}
+		if (!currentRange.start && !currentRange.end) {
+			this.selectedRange.set(null);
+		} else {
+			this.selectedRange.set(currentRange);
+		}
+		this.#onChange?.(this.selectedRange());
 	}
 }

@@ -1,30 +1,26 @@
-import { Directive, HostListener, inject, Input, TemplateRef } from '@angular/core';
+import { Directive, inject, input, TemplateRef } from '@angular/core';
+import { provideLuDialog } from '../dialog.providers';
 import { LuDialogService } from '../dialog.service';
 import { LuDialogConfig } from '../model';
-import { provideLuDialog } from '../dialog.providers';
 
 @Directive({
 	selector: '[luDialogOpen]',
-	standalone: true,
 	providers: [provideLuDialog()],
+	host: {
+		'(click)': 'click()',
+	},
 })
 export class DialogOpenDirective {
 	#dialogService = inject(LuDialogService);
 
-	@Input({
-		required: true,
-		alias: 'luDialogOpen',
-	})
-	dialog: TemplateRef<void>;
+	readonly dialog = input.required<TemplateRef<void>>({ alias: 'luDialogOpen' });
 
-	@Input()
-	luDialogConfig: LuDialogConfig<unknown>;
+	readonly luDialogConfig = input<LuDialogConfig<unknown>>();
 
-	@HostListener('click')
-	click(): void {
+	click() {
 		this.#dialogService.open({
-			...this.luDialogConfig,
-			content: this.dialog,
+			...this.luDialogConfig(),
+			content: this.dialog(),
 		});
 	}
 }

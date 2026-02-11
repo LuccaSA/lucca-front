@@ -1,4 +1,4 @@
-import { Meta, StoryFn } from '@storybook/angular';
+import { Meta, StoryObj } from '@storybook/angular';
 
 interface TableSortableStory {
 	align: string;
@@ -80,12 +80,14 @@ function getTemplate(args: TableSortableStory): string {
 </table>`;
 }
 
-const Template: StoryFn<TableSortableStory> = (args) => ({
+const Template = (args: TableSortableStory) => ({
 	props: args,
 	template: getTemplate(args),
 });
 
-export const Sortable = Template.bind({});
-Sortable.args = {
-	align: '',
+export const Sortable: StoryObj<TableSortableStory> = {
+	args: {
+		align: '',
+	},
+	render: Template,
 };

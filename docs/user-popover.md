@@ -33,6 +33,8 @@ import { LuUserPopoverDirective } from '@lucca-front/ng/user-popover';
 export class MyComponent { }
 ```
 
+Note : l'import du composant se fait seulement à son utilisation. Le style lié à `userPopover_trigger` peut donc ne pas être chargé à l'initialisation de la page. Dans ce cas, il est possible de remplacer cette classe par les utilitaires `pr-u-buttonReset pr-u-inlineSizeFitContent pr-u-borderRadiusDefault` ou `pr-u-buttonReset pr-u-inlineSizeFitContent pr-u-borderRadiusFull`.
+
 ### Inputs
 
 #### luEmployeeCard
@@ -66,24 +68,6 @@ Permet de définir le délai avant la disparition du UserPopover en milliseconde
 ```
 
 Permet de désactiver le UserPopover
-
-### Feature Flag
-
-Au moment où sont écrites ces lignes, la UserPopover est branché sur un feature flag de la librairie `Lucca.Core.FeatureFlags`.
-Il est donc nécessaire de l'activer dans votre application pour pouvoir l'utiliser.
-
-Si vous souhaitez override ce feature flag, vous pouvez le faire écrasant vous-même l'InjectionToken `USER_POPOVER_IS_ACTIVATED`
-
-```typescript
-import { USER_POPOVER_IS_ACTIVATED } from '@lucca-front/ng/user-popover';
-
-@NgModule({
-  providers: [...{ provide: USER_POPOVER_IS_ACTIVATED, useValue: of(true) }],
-})
-export class AppModule {}
-```
-
-Ce feature flag est temporaire et sera supprimé dans une prochaine version.
 
 ### Store et Services
 

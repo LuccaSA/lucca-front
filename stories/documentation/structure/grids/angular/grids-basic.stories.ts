@@ -92,7 +92,7 @@ export default {
 			imports: [GridComponent, GridColumnComponent],
 		}),
 	],
-	render: ({ colspan, rowspan, column, row, align, justify, repeatCols, container, ...args }, { argTypes }) => {
+	render: ({ colspan, rowspan, column, row, align, justify, repeatCols, container, semantic, ...args }, { argTypes }) => {
 		const content = `col`;
 		const columnArgs = {
 			colspan: colspan === 1 ? null : colspan,
@@ -103,10 +103,10 @@ export default {
 			justify,
 		};
 		const cols = `\n <lu-grid-column>${content}</lu-grid-column>`.repeat(repeatCols);
+		const colsSemantic = `\n <dd lu-grid-column>${content}</dd>`.repeat(repeatCols);
 
-		return {
-			styles: [
-				`
+		const style = [
+			`
 		.grid-column {
 			background-color: var(--palettes-neutral-100);
 			padding: var(--pr-t-spacings-50);
@@ -129,16 +129,29 @@ export default {
 			min-inline-size: 25rem;
 		}
 		`,
-			],
-			template: cleanupTemplate(`<lu-grid${generateInputs(args, argTypes)}>
+		];
+
+		if (semantic) {
+			return {
+				styles: style,
+				template: cleanupTemplate(`<dl class="pr-u-descriptionListReset" lu-grid${generateInputs(args, argTypes)}>
+	<dt lu-grid-column${generateInputs(columnArgs, argTypes)}>story</dt>${colsSemantic}
+</dl>`),
+			};
+		} else {
+			return {
+				styles: style,
+				template: cleanupTemplate(`<lu-grid${generateInputs(args, argTypes)}>
 	<lu-grid-column${generateInputs(columnArgs, argTypes)}>story</lu-grid-column>${cols}
 </lu-grid>`),
-		};
+			};
+		}
 	},
 } as Meta;
 
-export const Basic: StoryObj<GridComponent & GridColumnComponent & { repeatCols: number }> = {
+export const Basic: StoryObj<GridComponent & GridColumnComponent & { repeatCols: number; semantic: boolean }> = {
 	args: {
+		semantic: false,
 		columns: 6,
 		repeatCols: 10,
 		mode: null,

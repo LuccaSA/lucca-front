@@ -5,8 +5,10 @@ import { IconComponent } from '@lucca-front/ng/icon';
 import { ListingComponent, ListingItemComponent } from '@lucca-front/ng/listing';
 import { configureLuPopover, PopoverDirective } from '@lucca-front/ng/popover2';
 import { applicationConfig, Meta, moduleMetadata, StoryObj } from '@storybook/angular';
+import { waitForAngular } from 'stories/helpers/test';
+import { expect, screen, userEvent, within } from 'storybook/test';
 import { HiddenArgType } from '../../../helpers/common-arg-types';
-import { cleanupTemplate, generateInputs } from '../../../helpers/stories';
+import { cleanupTemplate, createTestStory, generateInputs } from '../../../helpers/stories';
 
 export default {
 	title: 'Documentation/Overlays/Popover2/Angular',
@@ -26,6 +28,11 @@ export default {
 			options: ['click', 'click+hover', 'hover+focus'],
 			description: '[v18.2] Hover + focus',
 		},
+		overlayScrollStrategy: {
+			control: 'select',
+			options: ['reposition', 'block', 'close'],
+			description: '[v21.1]',
+		},
 		luPopoverNoCloseButton: {
 			description: '[v18.2]',
 		},
@@ -40,21 +47,21 @@ export const Basic: StoryObj<PopoverDirective> = {
 			openDelay = ' ' + args.luPopoverOpenDelay + 'ms';
 		}
 		return {
-			template: cleanupTemplate(`<div class="demo">
+			template: `<div class="demo">
 	<button luButton [luPopover2]="contentRef" ${generateInputs(args, argTypes)}>${action}${openDelay} !</button>
 	<ng-template #contentRef>
 		<div class="popover-contentOptional">
-			<h3>Titre</h3>
+			<h3>Title</h3>
 			<lu-divider />
 			<lu-listing checklist palette="success">
-				<lu-listing-item>Élement de liste</lu-listing-item>
-				<lu-listing-item>Élement de liste</lu-listing-item>
-				<lu-listing-item>Élement de liste</lu-listing-item>
+				<lu-listing-item>item item item item item item item item item item item</lu-listing-item>
+				<lu-listing-item>item</lu-listing-item>
+				<lu-listing-item>item</lu-listing-item>
 			</lu-listing>
 		</div>
 	</ng-template>
 </div>
-`),
+`,
 			styles: [
 				`
 	.demo {
@@ -159,5 +166,30 @@ export const CustomPosition: StoryObj<PopoverDirective> = {
 		luPopoverDisabled: false,
 		luPopoverPosition: 'above',
 		luPopoverNoCloseButton: false,
+		overlayScrollStrategy: 'reposition',
 	},
 };
+
+export const BasicTEST = createTestStory(Basic, async ({ canvasElement, step }) => {
+	const canvas = within(canvasElement);
+	const button = await canvas.findByRole('button');
+
+	await step('Mouse interaction', async () => {
+		await userEvent.click(button);
+		await waitForAngular();
+		await expect(screen.getByRole('list')).toBeVisible();
+		await userEvent.click(button);
+		await expect(screen.queryByText('list')).toBeNull();
+		await waitForAngular();
+	});
+
+	await step('Keyboard interactions', async () => {
+		button.focus();
+		await expect(button).toHaveFocus();
+		await userEvent.keyboard('{Enter}');
+		await waitForAngular();
+		await expect(screen.getByRole('list')).toBeVisible();
+		await userEvent.keyboard('{Escape}');
+		await expect(screen.queryByText('list')).toBeNull();
+	});
+});

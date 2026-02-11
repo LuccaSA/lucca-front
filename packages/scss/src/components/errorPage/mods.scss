@@ -1,0 +1,38 @@
+@mixin compact {
+	overflow-y: auto;
+
+	.errorPage-section {
+		flex-direction: column;
+		justify-content: center;
+	}
+
+	.errorPage-section-info {
+		margin-block: var(--pr-t-spacings-400);
+		order: 1;
+		padding: 0;
+	}
+
+	.errorPage-section-image {
+		margin-block-start: var(--pr-t-spacings-400);
+		order: 0;
+	}
+}
+
+@mixin inAppLayout {
+	&,
+	.errorPage-section {
+		block-size: 100%;
+		inline-size: 100%;
+	}
+
+	.errorPage-section {
+		gap: var(--pr-t-spacings-400);
+	}
+
+	.errorPage-section-image,
+	.errorPage-section-info {
+		margin-block-start: 0;
+		padding: 0;
+		max-inline-size: 100%;
+	}
+}

@@ -1,9 +1,23 @@
 @if (ordered()) {
-	<ol class="listing" [class.mod-icons]="icons()" [class.mod-checklist]="checklist()" [class]="paletteClass">
+	<ol
+		class="listing"
+		[class.mod-icons]="icons()"
+		[class.mod-checklist]="checklist()"
+		[class]="paletteClass()"
+		[attr.start]="start() !== 1 ? start() : null"
+		[attr.reversed]="reversed() ? 'reversed' : null"
+	>
 		<ng-container *ngTemplateOutlet="content" />
 	</ol>
 } @else {
-	<ul class="listing" [class.mod-icons]="icons()" [class.mod-checklist]="checklist()" [class]="paletteClass">
+	<ul
+		class="listing"
+		[class.mod-icons]="icons()"
+		[class.mod-checklist]="checklist()"
+		[class.mod-inline]="inline()"
+		[class.mod-divider]="divider()"
+		[class]="paletteClass()"
+	>
 		<ng-container *ngTemplateOutlet="content" />
 	</ul>
 }

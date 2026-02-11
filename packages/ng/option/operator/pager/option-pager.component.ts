@@ -8,7 +8,6 @@ const MAGIC_STEP = 10;
 	selector: 'lu-option-pager',
 	template: '',
 	changeDetection: ChangeDetectionStrategy.OnPush,
-	standalone: true,
 	providers: [
 		{
 			provide: ALuOptionOperator,

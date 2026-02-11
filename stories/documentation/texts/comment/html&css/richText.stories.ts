@@ -1,4 +1,4 @@
-import { Meta, StoryFn } from '@storybook/angular';
+import { Meta, StoryObj } from '@storybook/angular';
 
 interface CommentRichTextStory {}
 
@@ -29,7 +29,7 @@ function getTemplate(args: CommentRichTextStory): string {
 </div>`;
 }
 
-const Template: StoryFn<CommentRichTextStory> = (args) => ({
+const Template = (args: CommentRichTextStory) => ({
 	props: args,
 	template: getTemplate(args),
 	styles: [
@@ -44,5 +44,7 @@ const Template: StoryFn<CommentRichTextStory> = (args) => ({
 	],
 });
 
-export const RichText = Template.bind({});
-RichText.args = {};
+export const RichText: StoryObj<CommentRichTextStory> = {
+	args: {},
+	render: Template,
+};

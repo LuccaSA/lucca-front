@@ -1,10 +1,14 @@
 @use 'exports' as *;
 
 .calloutFeedbackList {
-	@include vars;
-	@include component;
+	@layer components {
+		@include vars;
+		@include component;
+	}
 
-	&.mod-S {
-		@include S;
+	@layer mods {
+		&.mod-S {
+			@include S;
+		}
 	}
 }

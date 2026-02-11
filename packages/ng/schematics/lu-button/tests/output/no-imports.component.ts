@@ -14,7 +14,7 @@ import { ButtonComponent } from '@lucca-front/ng/button';
 		>
 			{{ 'Cla_Expense_Create_From_Form' | tr }}
 		</button>
-		<a luButton="text"  [routerLink]="['.']">
+		<a luButton="ghost"  [routerLink]="['.']">
 			<span class="pr-u-mask">{{ 'dependencies.GO_BACK_TO_LIST' | transloco }}</span>
 		</a>
 		<button luButton palette="primary"  type="button" [class.is-loading]="saving$ | async" (click)="save()">

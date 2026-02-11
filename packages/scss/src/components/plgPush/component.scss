@@ -59,5 +59,9 @@
 			gap: var(--pr-t-spacings-25);
 			padding: var(--pr-t-spacings-0);
 		}
+
+		.plgPush-close {
+			margin-inline-start: auto;
+		}
 	}
 }

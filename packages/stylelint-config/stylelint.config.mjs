@@ -137,7 +137,6 @@ export default {
 			getDisallowedObjects(LFDeprecatedSelectors),
 			{
 				splitList: true,
-				reportDisables: true,
 				url: 'https://prisme.lucca.io/94310e217/p/40c515-cycle-de-vie-des-composants/b/95175f',
 				message: (selector) => getDisallowedData(LFDeprecatedSelectors, selector).message,
 				severity: (selector) => getDisallowedData(LFDeprecatedSelectors, selector).severity,

@@ -171,6 +171,8 @@ In order to work on Lucca Front, we use Storybook to display components.
 Translations are hosted by Lokalise on `Lucca.Front` project and must be imported by launching the command at project root: `npm run i18n:update`.
 [Full translations documentation] (https://www.notion.so/Lucca-Front-Traductions-Lokalise-173d278ab26e801b8462f90e1a93dd50)
 
-## TODO
+## License
+The source code of this project is distributed under the Apache 2.0 license (see the LICENSE file). 
 
-- [ ] Gestion de l’espace
+Please note:
+Assets (including but not limited to images, audio files, fonts, icons, trademarks, logos, brand names and other media files) included in this repository are NOT covered by this license. They remain the property of their respective owners and their use is subject to specific restrictions. Please respect these conditions.

@@ -1,4 +1,4 @@
-import { Meta, StoryFn } from '@storybook/angular';
+import { Meta, StoryObj } from '@storybook/angular';
 
 interface SkeletonWidthStory {}
 
@@ -14,10 +14,12 @@ function getTemplate(args: SkeletonWidthStory): string {
 </div>`;
 }
 
-const Template: StoryFn<SkeletonWidthStory> = (args) => ({
+const Template = (args: SkeletonWidthStory) => ({
 	props: args,
 	template: getTemplate(args),
 });
 
-export const Width = Template.bind({});
-Width.args = {};
+export const Width: StoryObj<SkeletonWidthStory> = {
+	args: {},
+	render: Template,
+};

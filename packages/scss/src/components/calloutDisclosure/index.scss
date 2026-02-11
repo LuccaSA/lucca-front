@@ -1,18 +1,22 @@
 @use 'exports' as *;
 
 .calloutDisclosure {
-	@include vars;
-	@include component;
-
-	&[open] {
-		@include open;
+	@layer components {
+		@include vars;
+		@include component;
 	}
 
-	&.mod-S {
-		@include S;
-	}
+	@layer mods {
+		&[open] {
+			@include open;
+		}
 
-	&.mod-iconless {
-		@include iconless;
+		&.mod-S {
+			@include S;
+		}
+
+		&.mod-iconless {
+			@include iconless;
+		}
 	}
 }

@@ -1,12 +1,11 @@
-import { inject, LOCALE_ID, Pipe, PipeTransform } from '@angular/core';
-import { isToday, isTomorrow } from 'date-fns';
-import { getIntl } from '@lucca-front/ng/core';
-import { LU_POPUP_EMPLOYEE_TRANSLATIONS } from '../../popup-employee.translate';
 import { formatDate } from '@angular/common';
+import { inject, LOCALE_ID, Pipe, PipeTransform } from '@angular/core';
+import { getIntl } from '@lucca-front/ng/core';
+import { isToday, isTomorrow } from 'date-fns';
+import { LU_POPUP_EMPLOYEE_TRANSLATIONS } from '../../popup-employee.translate';
 
 @Pipe({
 	name: 'leaveEndsDisplay',
-	standalone: true,
 })
 export class LeaveEndsDisplayPipe implements PipeTransform {
 	intl = getIntl(LU_POPUP_EMPLOYEE_TRANSLATIONS);

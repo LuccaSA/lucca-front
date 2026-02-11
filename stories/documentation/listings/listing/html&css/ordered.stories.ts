@@ -1,5 +1,4 @@
 import { Meta } from '@storybook/angular';
-import { cleanupTemplate } from 'stories/helpers/stories';
 
 interface ListingOrderedStory {}
 
@@ -8,7 +7,7 @@ export default {
 	argTypes: {},
 	render: (args: ListingOrderedStory) => {
 		return {
-			template: cleanupTemplate(`<ol class="listing">
+			template: `<ol class="listing">
 	<li class="listing-item">
 		<div class="listing-item-content">item</div>
 	</li>
@@ -31,7 +30,7 @@ export default {
 			</ol>
 		</div>
 	</li>
-</ol>`),
+</ol>`,
 		};
 	},
 } as Meta;

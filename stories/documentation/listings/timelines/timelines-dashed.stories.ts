@@ -1,4 +1,4 @@
-import { Meta, StoryFn } from '@storybook/angular';
+import { Meta, StoryObj } from '@storybook/angular';
 
 interface TimelinesDashedStory {
 	number: boolean;
@@ -7,8 +7,7 @@ interface TimelinesDashedStory {
 
 export default {
 	title: 'Documentation/Listings/Timelines/Dashed',
-	argTypes: {
-	},
+	argTypes: {},
 } as Meta;
 
 function getTemplate(args: TimelinesDashedStory): string {
@@ -38,10 +37,12 @@ function getTemplate(args: TimelinesDashedStory): string {
 	`;
 }
 
-const Template: StoryFn<TimelinesDashedStory> = (args) => ({
+const Template = (args: TimelinesDashedStory) => ({
 	props: args,
 	template: getTemplate(args),
 });
 
-export const Dashed = Template.bind({});
-Dashed.args = { };
+export const Dashed: StoryObj<TimelinesDashedStory> = {
+	args: {},
+	render: Template,
+};

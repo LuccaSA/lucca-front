@@ -16,7 +16,7 @@ export default {
 
 		return {
 			template: `<lu-callout AI iconAlt="${iconAlt}"${generateInputs(inputs, context.argTypes)}>
-	${description}
+	<p>${description}</p>
 	<lu-callout-actions>
 		<button luButton="outlined">Associer</button>
 		<button luButton="outlined">Refuser</button>

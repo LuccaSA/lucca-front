@@ -1,6 +1,6 @@
 import { HttpClientModule } from '@angular/common/http';
 import { LuSafeExternalSvgPipe } from '@lucca-front/ng/safe-content';
-import { Meta, moduleMetadata, StoryFn } from '@storybook/angular';
+import { Meta, moduleMetadata, StoryObj } from '@storybook/angular';
 
 interface EmptyStatePageStory {}
 
@@ -36,10 +36,12 @@ function getTemplate(args: EmptyStatePageStory): string {
 </section>`;
 }
 
-const Template: StoryFn<EmptyStatePageStory> = (args: EmptyStatePageStory) => ({
+const Template = (args: EmptyStatePageStory) => ({
 	props: args,
 	template: getTemplate(args),
 });
 
-export const Page = Template.bind({});
-Page.args = {};
+export const Page: StoryObj<EmptyStatePageStory> = {
+	args: {},
+	render: Template,
+};

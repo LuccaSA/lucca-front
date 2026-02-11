@@ -1,4 +1,4 @@
-import { Meta, StoryFn } from '@storybook/angular';
+import { Meta, StoryObj } from '@storybook/angular';
 
 interface NoIllustrationStory {}
 
@@ -16,10 +16,12 @@ function getTemplate(args: NoIllustrationStory): string {
 </div>`;
 }
 
-const Template: StoryFn<NoIllustrationStory> = (args) => ({
+const Template = (args: NoIllustrationStory) => ({
 	props: args,
 	template: getTemplate(args),
 });
 
-export const NoIllustration = Template.bind({});
-NoIllustration.args = {};
+export const NoIllustration: StoryObj<NoIllustrationStory> = {
+	args: {},
+	render: Template,
+};

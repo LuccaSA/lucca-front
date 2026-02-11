@@ -9,7 +9,6 @@ import { ALuTreeOptionOperator, ILuTreeOptionOperator } from '../tree-option-ope
 	selector: 'lu-tree-option-feeder',
 	template: '',
 	changeDetection: ChangeDetectionStrategy.OnPush,
-	standalone: true,
 	providers: [
 		{
 			provide: ALuTreeOptionOperator,

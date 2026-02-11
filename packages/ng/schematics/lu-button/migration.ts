@@ -1,13 +1,8 @@
 import { Tree } from '@angular-devkit/schematics';
 import type { TmplAstElement } from '@angular/compiler';
-import { ButtonComponent } from '@lucca-front/ng/button';
 import { applyToUpdateRecorder } from '@schematics/angular/utility/change';
 import { SourceFile } from 'typescript';
-import { insertAngularImportIfNeeded, insertTSImportIfNeeded } from '../lib/angular-component-ast';
-import { extractNgTemplatesIncludingHtml } from '../lib/angular-template';
-import { HtmlAst } from '../lib/html-ast.js';
-import { currentSchematicContext } from '../lib/lf-schematic-context';
-
+import { extractNgTemplatesIncludingHtml, HtmlAst, insertAngularImportIfNeeded, insertTSImportIfNeeded, isInterestingNode } from '../lib';
 
 interface CssButton {
 	node: TmplAstElement;
@@ -72,6 +67,7 @@ export function migrateComponent(sourceFile: SourceFile, path: string, tree: Tre
 							`mod-disclosure`,
 							`palette-${button.inputs.palette}`,
 							`mod-text`,
+							`mod-ghost`,
 							`mod-outlined`,
 							`mod-inverted`,
 							`mod-onlyIcon`,
@@ -132,19 +128,18 @@ function findCssButtons(sourceFile: SourceFile, basePath: string, tree: Tree): C
 	return buttons;
 }
 
-function getButtonType(classes: string): ButtonComponent['luButton'] {
+function getButtonType(classes: string): string {
 	if(classes.includes('mod-outlined')) {
 		return 'outlined';
 	}
+	if(classes.includes('mod-ghost')) {
+		return 'ghost';
+	}
 	if(classes.includes('mod-text')) {
 		if(classes.includes('mod-invert')) {
-			return 'text-invert';
+			return 'ghost-invert';
 		}
-		return 'text';
+		return 'ghost';
 	}
 	return '';
-}
-
-function isInterestingNode(node: unknown): node is TmplAstElement {
-	return node instanceof currentSchematicContext.angularCompiler.TmplAstElement;
 }

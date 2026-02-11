@@ -1,5 +1,4 @@
 import { Meta } from '@storybook/angular';
-import { cleanupTemplate } from 'stories/helpers/stories';
 
 interface MainLayoutHTMLBasicStory {
 	header: boolean;
@@ -30,30 +29,47 @@ export default {
 		},
 	},
 	render: (args: MainLayoutHTMLBasicStory) => {
-		const sidebarContainer = args.sidebar ? `<div class="mainLayout-sidebar">sidebar</div>` : ``;
-		const headerStickyParam = args.headerSticky ? `mod-sticky` : ``;
-		const footerStickyParam = args.footerSticky ? `mod-sticky` : ``;
-		const headerContainer = args.header ? `<div class="mainLayout-content-inside-header ${headerStickyParam}"><div class="container"><div class="fakeContent">header</div></div></div>` : ``;
-		const footerContainer = args.footer ? `<div class="mainLayout-content-inside-footer ${footerStickyParam}"><div class="container"><div class="fakeContent">footer</div></div></div>` : ``;
-		const template = `<div class="mainLayout-content-inside-block">
-	<div class="container">
-		<div class="fakeContent">
-			content
-		</div>
-	</div>
-</div>`;
-		const contentOverflow = ` content overflowing`;
+		const sidebarContainer = args.sidebar
+			? `
+			<div class="mainLayout-sidebar">sidebar</div>`
+			: ``;
+		const headerStickyParam = args.headerSticky ? ` mod-sticky` : ``;
+		const footerStickyParam = args.footerSticky ? ` mod-sticky` : ``;
+		const headerContainer = args.header
+			? `
+					<div class="mainLayout-content-inside-header${headerStickyParam}">
+						<div class="container">
+							<div class="fakeContent">header</div>
+						</div>
+					</div>`
+			: ``;
+		const footerContainer = args.footer
+			? `
+					<div class="mainLayout-content-inside-footer${footerStickyParam}">
+						<div class="container">
+							<div class="fakeContent">footer</div>
+						</div>
+					</div>`
+			: ``;
+		const template = `
+					<div class="mainLayout-content-inside-block">
+						<div class="container">
+							<div class="fakeContent">content</div>
+						</div>
+					</div>`;
+		const contentOverflow = `
+								content overflowing`;
 		let overflow = ``;
 		for (let i = 1; i <= args.repeatOverflow; i++) {
 			overflow = overflow + contentOverflow;
 		}
-		const templateOverflow = `<div class="mainLayout-content-inside-block mod-overflow">
-			<div class="container">
-				<div class="fakeContent">
-					${overflow}
-				</div>
-			</div>
-		</div>`;
+		const templateOverflow = `
+					<div class="mainLayout-content-inside-block mod-overflow">
+						<div class="container">
+							<div class="fakeContent">${overflow}
+							</div>
+						</div>
+					</div>`;
 		let content = ``;
 		for (let i = 1; i <= args.repeatContent; i++) {
 			if (i === args.repeatContent && args.contentOverflowing) {
@@ -66,59 +82,59 @@ export default {
 		return {
 			styles: [
 				`
-.mainLayout {
-		resize: vertical;
-		overflow: hidden;
-		min-block-size: 296px;
-	}
+@layer components {
+	.mainLayout {
+			resize: vertical;
+			overflow: hidden;
+			min-block-size: 296px;
+		}
 
-	.mainLayout-sidebar {
-		background-color: var(--palettes-neutral-50);
-		padding: var(--pr-t-spacings-150);
-		align-items: center;
-		justify-content: center;
-		display: flex;
-		flex-direction: column;
-		color: var(--palettes-brand-700);
-		font-family: monospace;
-	}
+		.mainLayout-sidebar {
+			background-color: var(--palettes-neutral-50);
+			align-items: center;
+			justify-content: center;
+			display: flex;
+			flex-direction: column;
+			color: var(--palettes-brand-700);
+			font-family: monospace;
 
-	.mainLayout-content-inside {
-		gap: var(--pr-t-spacings-300);
-		padding-block: var(--pr-t-spacings-300);
-	}
+			&:not(:empty) {
+				padding: var(--pr-t-spacings-150);
+			}
+		}
 
-	.container {
-		--commons-container-maxWidth: 50rem;
-	}
+		.mainLayout-content-inside {
+			gap: var(--pr-t-spacings-100);
+		}
 
-	.fakeContent {
-		background-color: var(--pr-t-elevation-surface-raised);
-		border: 1px solid var(--palettes-neutral-50);
-		padding: var(--pr-t-spacings-150);
-		align-items: center;
-		justify-content: center;
-		display: flex;
-		flex-direction: column;
-		color: var(--palettes-brand-700);
-		font-family: monospace;
-		white-space: nowrap;
+		.container {
+			--commons-container-maxWidth: 50rem;
+		}
+
+		.fakeContent {
+			background-color: var(--pr-t-elevation-surface-raised);
+			border: 1px solid var(--palettes-neutral-50);
+			padding: var(--pr-t-spacings-150);
+			align-items: center;
+			justify-content: center;
+			display: flex;
+			flex-direction: column;
+			color: var(--palettes-brand-700);
+			font-family: monospace;
+			white-space: nowrap;
+		}
 	}
 }
 				`,
 			],
-			template: cleanupTemplate(`
-		<main role="main" class="mainLayout">
-			${sidebarContainer}
+			template: `
+		<main role="main" class="mainLayout">${sidebarContainer}
 			<div class="mainLayout-content">
-				<div class="mainLayout-content-inside">
-					${headerContainer}
-					${content}
-					${footerContainer}
+				<div class="mainLayout-content-inside">${headerContainer}${content}${footerContainer}
 				</div>
 			</div>
 		</main>
-`),
+`,
 		};
 	},
 } as Meta;

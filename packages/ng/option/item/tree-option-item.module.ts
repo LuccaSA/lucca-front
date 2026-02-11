@@ -2,7 +2,7 @@ import { NgModule } from '@angular/core';
 import { LuTreeOptionItemComponent } from './tree-option-item.component';
 
 /**
- * @deprecated
+ * @deprecated use `LuTreeOptionItemComponent` instead
  */
 @NgModule({
 	imports: [LuTreeOptionItemComponent],

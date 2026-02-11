@@ -1,4 +1,4 @@
-import { Meta, StoryFn } from '@storybook/angular';
+import { Meta, StoryObj } from '@storybook/angular';
 
 interface VerticalAlignStory {}
 
@@ -18,7 +18,7 @@ function getTemplate(args: VerticalAlignStory): string {
 	</div>`;
 }
 
-const Template: StoryFn<VerticalAlignStory> = (args) => ({
+const Template = (args: VerticalAlignStory) => ({
 	props: args,
 	template: getTemplate(args),
 	styles: [
@@ -36,5 +36,7 @@ const Template: StoryFn<VerticalAlignStory> = (args) => ({
 	],
 });
 
-export const VerticalAlign = Template.bind({});
-VerticalAlign.args = {};
+export const VerticalAlign: StoryObj<VerticalAlignStory> = {
+	args: {},
+	render: Template,
+};
