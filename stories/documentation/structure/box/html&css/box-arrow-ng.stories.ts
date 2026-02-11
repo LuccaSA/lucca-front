@@ -6,10 +6,8 @@ import { RadioComponent, RadioGroupInputComponent } from '@lucca-front/ng/forms'
 import { Meta, moduleMetadata, StoryObj } from '@storybook/angular';
 
 interface ArrowBasicStory {
-	s: boolean;
 	neutral: boolean;
 	field: string;
-	checked: boolean;
 }
 
 export default {
@@ -20,24 +18,11 @@ export default {
 		}),
 	],
 	argTypes: {
-		checked: {
-			control: {
-				type: 'boolean',
-			},
-		},
-		s: {
-			description: 'Taille : Small',
-			control: {
-				type: 'boolean',
-			},
-		},
 		neutral: {
-			control: {
-				type: 'boolean',
-			},
+			description: 'Applique un fond gris.',
 		},
 		field: {
-			description: 'field',
+			description: '[Story] Modifie le type du champ.',
 			options: ['radio', 'checkbox', 'switch'],
 			control: {
 				type: 'select',
@@ -47,10 +32,8 @@ export default {
 } as Meta;
 
 function getTemplate(args: ArrowBasicStory): string {
-	const s = args.s ? ' mod-S' : '';
 	const modNeutral = args.neutral ? ' mod-neutral' : ' ';
 	const neutral = args.neutral ? ' neutral' : '';
-	const checked = args.checked ? ' checked' : '';
 
 	if (args.field === 'radio') {
 		return `<lu-form-field label="Légende" hiddenLabel inline>
@@ -62,20 +45,20 @@ function getTemplate(args: ArrowBasicStory): string {
 </lu-form-field>
 <lu-box withArrow${neutral}>Lorem ipsum dolor sit amet consectetur adipisicing elit. Nam illo nostrum tenetur expedita. Accusantium cumque nisi excepturi eius corporis, iusto quaerat temporibus dolorum necessitatibus laboriosam quidem quibusdam quae aperiam! Vitae!</lu-box>`;
 	} else if (args.field === 'checkbox') {
-		return `<div class="form-field mod-withArrow${s}">
+		return `<div class="form-field mod-withArrow">
 	<label class="formLabel" for="CB">Label</label>
 	<span class="checkboxField">
-		<input type="checkbox" class="checkboxField-input" id="CB" aria-labelledby="CB-label"${checked} />
+		<input type="checkbox" class="checkboxField-input" id="CB" aria-labelledby="CB-label" />
 		<span class="checkboxField-icon" aria-hidden="true"><span class="checkboxField-icon-check"></span></span>
 	</span>
 	<div class="form-field-arrow${modNeutral}"></div>
 </div>
 <lu-box withArrow${neutral}>Lorem ipsum dolor sit amet consectetur adipisicing elit. Nam illo nostrum tenetur expedita. Accusantium cumque nisi excepturi eius corporis, iusto quaerat temporibus dolorum necessitatibus laboriosam quidem quibusdam quae aperiam! Vitae!</lu-box>`;
 	} else {
-		return `<div class="form-field mod-withArrow${s}">
+		return `<div class="form-field mod-withArrow">
 	<label class="formLabel" for="ID">Label</label>
 	<span class="switchField">
-		<input type="checkbox" class="switchField-input" id="ID"${checked} />
+		<input type="checkbox" class="switchField-input" id="ID" />
 		<span class="switchField-icon" aria-hidden="true"><span class="switchField-icon-check"></span></span>
 	</span>
 	<div class="form-field-arrow${neutral}"></div>
@@ -97,6 +80,6 @@ const Template = (args: ArrowBasicStory) => ({
 });
 
 export const Basic: StoryObj<ArrowBasicStory> = {
-	args: { s: false, neutral: true, field: 'radio', checked: true },
+	args: { neutral: true, field: 'radio' },
 	render: Template,
 };

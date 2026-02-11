@@ -10,6 +10,7 @@ import {
 } from '@angular/cdk/overlay';
 import { ComponentPortal } from '@angular/cdk/portal';
 import {
+	AfterContentChecked,
 	booleanAttribute,
 	computed,
 	DestroyRef,
@@ -31,7 +32,7 @@ import { takeUntilDestroyed, toObservable, toSignal } from '@angular/core/rxjs-i
 import { SafeHtml } from '@angular/platform-browser';
 import { isNotNil, ɵeffectWithDeps } from '@lucca-front/ng/core';
 import { LuPopoverPosition } from '@lucca-front/ng/popover';
-import { combineLatest, Observable, startWith, switchMap, timer } from 'rxjs';
+import { combineLatest, Observable, startWith, Subject, switchMap, timer } from 'rxjs';
 import { debounce, debounceTime, filter, map, tap } from 'rxjs/operators';
 import { LuTooltipPanelComponent } from '../panel';
 import { EllipsisRuler } from './ellipsis.ruler';
@@ -50,7 +51,7 @@ let nextId = 0;
 		'(blur)': 'onBlur()',
 	},
 })
-export class LuTooltipTriggerDirective implements OnDestroy {
+export class LuTooltipTriggerDirective implements OnDestroy, AfterContentChecked {
 	readonly #overlay = inject(Overlay);
 
 	readonly #host = inject<ElementRef<HTMLElement>>(ElementRef);
@@ -62,11 +63,14 @@ export class LuTooltipTriggerDirective implements OnDestroy {
 	readonly #injector = inject(Injector);
 	readonly #destroyRef = inject(DestroyRef);
 
+	#previousTickContent: string = this.#host.nativeElement.innerText;
+
 	readonly luTooltipInput = input<string | SafeHtml>('', { alias: 'luTooltip' });
 
 	readonly luTooltip = linkedSignal<string | SafeHtml>(() => this.luTooltipInput());
 
 	readonly luTooltipEnterDelay = input(300, { transform: numberAttribute });
+
 	readonly luTooltipLeaveDelay = input(100, { transform: numberAttribute });
 
 	readonly luTooltipDisabled = input(false, { transform: booleanAttribute });
@@ -93,6 +97,8 @@ export class LuTooltipTriggerDirective implements OnDestroy {
 		};
 	});
 
+	readonly #innerTextChange$ = new Subject<void>();
+
 	readonly #hasEllipsis$ = combineLatest([
 		toObservable(
 			// 1. Group necessary inputs
@@ -100,6 +106,8 @@ export class LuTooltipTriggerDirective implements OnDestroy {
 		),
 		// Resend resize events to trigger the check
 		this.resize$.pipe(debounceTime(150)),
+		// Include content changes
+		this.#innerTextChange$,
 	]).pipe(
 		// 2. Keep only necessary inputs
 		filter(([{ whenEllipsis, disabled }]) => !disabled && whenEllipsis),
@@ -185,6 +193,13 @@ export class LuTooltipTriggerDirective implements OnDestroy {
 				this.setAccessibilityProperties(null);
 			}
 		});
+	}
+
+	ngAfterContentChecked(): void {
+		if (this.#previousTickContent != this.#host.nativeElement.innerText) {
+			this.#innerTextChange$.next();
+			this.#previousTickContent = this.#host.nativeElement.innerText;
+		}
 	}
 
 	ngOnDestroy(): void {

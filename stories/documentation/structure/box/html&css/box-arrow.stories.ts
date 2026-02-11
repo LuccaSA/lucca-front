@@ -10,27 +10,20 @@ interface ArrowBasicStory {
 export default {
 	title: 'Documentation/Structure/Box/HTML&CSS/Arrow',
 	argTypes: {
-		checked: {
-			control: {
-				type: 'boolean',
-			},
-		},
-		s: {
-			description: 'Taille : Small',
-			control: {
-				type: 'boolean',
-			},
-		},
 		neutral: {
-			control: {
-				type: 'boolean',
-			},
+			description: 'Applique un fond gris.',
 		},
 		field: {
-			description: 'field',
+			description: '[Story] Modifie le type du champ.',
 			options: ['radio', 'checkbox', 'switch'],
 			control: {
 				type: 'select',
+			},
+		},
+		s: {
+			description: '[Story] Modifie la taille du champ.',
+			control: {
+				type: 'boolean',
 			},
 		},
 	},
@@ -85,7 +78,7 @@ function getTemplate(args: ArrowBasicStory): string {
 		return `<div class="form-field mod-withArrow${s}">
 	<label class="formLabel" for="CB">Label</label>
 	<span class="checkboxField">
-		<input type="checkbox" class="checkboxField-input" id="CB" aria-labelledby="CB-label"${checked} />
+		<input type="checkbox" class="checkboxField-input" id="CB" aria-labelledby="CB-label" />
 		<span class="checkboxField-icon" aria-hidden="true"><span class="checkboxField-icon-check"></span></span>
 	</span>
 	<div class="form-field-arrow${neutral}"></div>
@@ -95,7 +88,7 @@ function getTemplate(args: ArrowBasicStory): string {
 		return `<div class="form-field mod-withArrow${s}">
 	<label class="formLabel" for="ID">Label</label>
 	<span class="switchField">
-		<input type="checkbox" class="switchField-input" id="ID"${checked} />
+		<input type="checkbox" class="switchField-input" id="ID" />
 		<span class="switchField-icon" aria-hidden="true"><span class="switchField-icon-check"></span></span>
 	</span>
 	<div class="form-field-arrow${neutral}"></div>
@@ -117,6 +110,6 @@ const Template = (args: ArrowBasicStory) => ({
 });
 
 export const Basic: StoryObj<ArrowBasicStory> = {
-	args: { s: false, neutral: true, field: 'radio', checked: true },
+	args: { s: false, neutral: true, field: 'radio' },
 	render: Template,
 };

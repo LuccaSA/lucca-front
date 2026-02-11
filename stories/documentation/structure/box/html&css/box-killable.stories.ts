@@ -8,9 +8,7 @@ export default {
 	title: 'Documentation/Structure/Box/HTML&CSS/Killable',
 	argTypes: {
 		neutral: {
-			control: {
-				type: 'boolean',
-			},
+			description: 'Applique un fond gris.',
 		},
 	},
 } as Meta;

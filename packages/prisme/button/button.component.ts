@@ -4,7 +4,7 @@ import { IconComponent } from '@lucca/prisme/icon';
 
 @Component({
 	// eslint-disable-next-line @angular-eslint/component-selector
-	selector: 'button[prButton],a[prButton],button[luButton],a[luButton]',
+	selector: 'button[prButton], a[prButton], span[prButton], button[luButton], a[luButton], span[luButton]',
 	providers: [PrClass],
 	template: '<ng-content />',
 	styleUrl: './button.component.scss',
