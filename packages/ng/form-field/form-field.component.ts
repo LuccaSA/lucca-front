@@ -183,7 +183,6 @@ export class FormFieldComponent implements OnDestroy, DoCheck {
 		effect(() => {
 			this.#luClass.setState({
 				[`mod-${this.size()}`]: !!this.size(),
-				'mod-checkable': this.layout() === 'checkable',
 				presentation: this.presentationMode(),
 				'form-field': this.layout() !== 'fieldset' && !this.presentationMode(),
 				[`mod-width${this.width()}`]: !!this.width(),

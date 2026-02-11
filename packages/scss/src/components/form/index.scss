@@ -102,9 +102,12 @@
 			}
 		}
 
-		&:has(.formLabel.pr-u-mask) {
-			&:not(:has(.inlineMessage)) {
-				@include hiddenLabel;
+		// no gap for checkboxes in tables in particular
+		&:has(.checkboxField-input) {
+			&:has(.formLabel.pr-u-mask) {
+				&:not(:has(.inlineMessage)) {
+					@include hiddenLabel;
+				}
 			}
 		}
 	}

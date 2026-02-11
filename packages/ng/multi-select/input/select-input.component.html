@@ -33,10 +33,17 @@
 @if (!ignorePresentation()) {
 	<ng-container *luPresentationDisplay>
 		@for (v of value; track $index) {
-			<ng-container *luOptionOutlet="displayerTpl(); value: v" />
-			@if (!$last) {
-				<span>, </span>
+			@if ($last) {
+				<ng-container *ngTemplateOutlet="noComma; context: { $implicit: v }" />
+			} @else {
+				<ng-container *ngTemplateOutlet="comma; context: { $implicit: v }" />
 			}
 		}
 	</ng-container>
 }
+
+<ng-template #comma let-value><ng-container *luOptionOutlet="displayerTpl(); value: value" />, </ng-template>
+
+<ng-template #noComma let-value>
+	<ng-container *luOptionOutlet="displayerTpl(); value: value" />
+</ng-template>

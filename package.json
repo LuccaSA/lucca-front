@@ -123,6 +123,7 @@
     "jest-preset-angular": "^16.0.0",
     "jsdom": "^27.3.0",
     "mdx-loader": "^3.0.2",
+    "mini-css-extract-plugin": "^2.10.0",
     "msw": "^2.3.0",
     "ng-packagr": "^21.0.0",
     "postcss": "8.5.3",
