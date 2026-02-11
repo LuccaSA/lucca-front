@@ -103,10 +103,10 @@ export class DurationPickerComponent extends BasePickerComponent {
 	}
 
 	protected pasteHandler(event: ClipboardEvent): void {
+		let value: ISO8601Duration | null = null;
 		event.preventDefault();
 		const pastedValue = event.clipboardData?.getData('text/plain');
 		if (isNotNil(pastedValue)) {
-			let value: ISO8601Duration;
 			// If it's an iso duration, handle as-is
 			if (isISO8601Duration(pastedValue)) {
 				value = pastedValue;
@@ -165,8 +165,8 @@ export class DurationPickerComponent extends BasePickerComponent {
 		let hoursPart = getHoursPartFromDuration(protoEvent.value);
 		const minutesPart = getMinutesPartFromDuration(protoEvent.value);
 
-		this.hoursPart().isValueSet.set(true);
-		this.minutesPart().isValueSet.set(true);
+		this.hoursPart()?.isValueSet.set(true);
+		this.minutesPart()?.isValueSet.set(true);
 
 		if (hoursPart < 0) {
 			if (hoursPart === -1) {

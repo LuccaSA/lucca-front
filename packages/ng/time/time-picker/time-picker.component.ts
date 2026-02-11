@@ -72,7 +72,7 @@ export class TimePickerComponent extends BasePickerComponent {
 
 	readonly timeChange = output<TimeChangeEvent>();
 
-	protected readonly hoursDisplay = computed(() => getHoursDisplayPartFromIsoTime(this.value(), this.enableMeridiemDisplay()));
+	protected readonly hoursDisplay = computed(() => getHoursDisplayPartFromIsoTime(this.value(), this.enableMeridiemDisplay() ?? false));
 	protected readonly minutesDisplay = computed(() => getMinutesDisplayPartFromIsoTime(this.value()));
 
 	protected readonly hours = computed(() => getHoursPartFromIsoTime(this.value()));
