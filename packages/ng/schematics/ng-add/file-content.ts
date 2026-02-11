@@ -1,13 +1,11 @@
 export const stylesScss = `
-$noCssVar: true;
+// Import styles
+@forward '@lucca-front/icons/src/main';
+@forward '@lucca-front/scss/src/main';
+@forward '@lucca-front/ng/src/main';
 
-@import '~@lucca-front/scss/src/main.overridable'
-	, '~@lucca-front/ng/src/main.overridable.scss'
-	, 'scss/shame';
-
-:root {
-	@include generateCSSVarsFromTheme($theme);
-}
+// Import SCSS components
+// @forward '@lucca-front/scss/src/components/button';
 `;
 
 export const shameScss = `// 'My room is not messy; it is an obstable course designed to keep me fit'
