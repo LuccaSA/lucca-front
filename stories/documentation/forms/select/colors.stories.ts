@@ -67,7 +67,7 @@ const basePlay = async ({ canvasElement, step }) => {
 export const Basic = generateStory({
 	name: 'Basic',
 	description: '',
-	template: `<lu-form-field presentation label="Décoratives 500" [size]="size === '' ? null : size">
+	template: `<lu-form-field label="Décoratives 500" [size]="size === '' ? null : size">
 	<lu-color-input [colors]="colors" [(ngModel)]="selectedColor" [clearable]="clearable" [compact]="compact" />
 </lu-form-field>
 <pr-story-model-display>{{selectedColor | json}}</pr-story-model-display>
@@ -75,7 +75,6 @@ export const Basic = generateStory({
 	storyPartial: {
 		args: {
 			colors: colorDecoratives500,
-			selectedColor: colorDecoratives500[2],
 		},
 	},
 });
