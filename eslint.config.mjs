@@ -9,6 +9,8 @@ import typescript from 'typescript-eslint';
 import { defineConfig } from 'eslint/config';
 import tsParser from '@typescript-eslint/parser';
 
+const STRICTIFIED_NG_ENTRIES = ['packages/ng/tree-select/**/*.ts'];
+
 export default defineConfig(
 	{
 		ignores: ['dist/', '.storybook/**', '**/schematics/**/tests/', 'node_modules/', '.angular/'],
@@ -138,6 +140,21 @@ export default defineConfig(
 			'@typescript-eslint/no-unsafe-return': 'warn',
 			'@typescript-eslint/no-unsafe-member-access': 'warn',
 			'@typescript-eslint/no-unsafe-call': 'warn',
+		},
+	},
+	{
+		files: STRICTIFIED_NG_ENTRIES,
+		languageOptions: {
+			parser: tsParser,
+			parserOptions: {
+				project: ['tsconfig.lint.json', 'packages/ng/tsconfig.lint.json', '.storybook/tsconfig.lint.json'],
+			},
+		},
+		plugins: {
+			'@lucca-front': localRules,
+		},
+		rules: {
+			'@lucca-front/ts-error': 'error',
 		},
 	},
 	{
