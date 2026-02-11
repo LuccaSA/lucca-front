@@ -119,7 +119,7 @@ export default {
 
 export const Basic: StoryObj<TextInputComponent & { disabled: boolean; required: boolean } & FormFieldComponent> = {
 	render: (args, { argTypes }) => {
-		const { counter, label, hiddenLabel, tooltip, tag, inlineMessage, inlineMessageState, size, width, AI, iconAItooltip, iconAIalt, counterVisibleOnlyJustBeforeError, presentation, ...inputArgs } = args;
+		const { counter, label, hiddenLabel, tooltip, tag, inlineMessage, inlineMessageState, size, width, AI, iconAItooltip, iconAIalt, presentation, ...inputArgs } = args;
 		return {
 			props: {
 				example: 'Example value',
@@ -138,7 +138,6 @@ export const Basic: StoryObj<TextInputComponent & { disabled: boolean; required:
 					AI,
 					iconAItooltip,
 					iconAIalt,
-					counterVisibleOnlyJustBeforeError,
 					presentation,
 				},
 				argTypes,
@@ -170,7 +169,6 @@ export const Basic: StoryObj<TextInputComponent & { disabled: boolean; required:
 		tooltip: 'Je suis un message d’aide',
 		tag: '',
 		counter: 0,
-		counterVisibleOnlyJustBeforeError: false,
 		valueAlignRight: false,
 		AI: false,
 		presentation: false,
