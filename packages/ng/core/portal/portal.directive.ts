@@ -1,5 +1,5 @@
 import { ComponentRef, Directive, effect, EmbeddedViewRef, inject, Injector, input, OnDestroy, Renderer2, TemplateRef, untracked, ViewContainerRef } from '@angular/core';
-import { isNotNil } from '@lucca-front/ng/core';
+import { isNotNil } from '../misc';
 import { PORTAL_CONTEXT, PortalContent } from './portal-content';
 
 @Directive({
