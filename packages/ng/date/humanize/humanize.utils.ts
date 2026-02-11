@@ -2,7 +2,7 @@ import { differenceInDays, differenceInHours, differenceInMinutes, differenceInM
 import { Observable } from 'rxjs';
 import { LuRelativeTime, LuRelativeTimeFormatUnit, luRelativeTimeFormatUnit } from './humanize.model';
 
-const getDifferenceByUnit: Record<LuRelativeTimeFormatUnit, (date: number | Date, reference: number | Date) => number> = {
+const getDifferenceByUnit = {
 	second: differenceInSeconds,
 	minute: differenceInMinutes,
 	hour: differenceInHours,
@@ -10,7 +10,7 @@ const getDifferenceByUnit: Record<LuRelativeTimeFormatUnit, (date: number | Date
 	week: differenceInWeeks,
 	month: differenceInMonths,
 	year: differenceInYears,
-};
+} as const satisfies Record<LuRelativeTimeFormatUnit, (date: number | Date, reference: number | Date) => number>;
 
 export function getRelativeTime(date: number | Date, reference: number | Date, allowedUnits: readonly LuRelativeTimeFormatUnit[] = luRelativeTimeFormatUnit): LuRelativeTime {
 	if (!allowedUnits.length) {
@@ -37,7 +37,7 @@ export function getRelativeTime(date: number | Date, reference: number | Date, a
 	throw new Error('[getRelativeTime] No unit found for the given date');
 }
 
-const nextRelativeTimeTickInMsByUnit: Record<LuRelativeTimeFormatUnit, number> = {
+const nextRelativeTimeTickInMsByUnit = {
 	second: 1_000,
 	minute: 60_000,
 	hour: 60 * 60_000,
@@ -45,9 +45,9 @@ const nextRelativeTimeTickInMsByUnit: Record<LuRelativeTimeFormatUnit, number> =
 	week: 24 * 60 * 60_000,
 	month: 24 * 60 * 60_000,
 	year: 24 * 60 * 60_000,
-};
+} as const satisfies Record<LuRelativeTimeFormatUnit, number>;
 
-const previousRelativeTimeUnitByUnit: Record<LuRelativeTimeFormatUnit, LuRelativeTimeFormatUnit | null> = {
+const previousRelativeTimeUnitByUnit = {
 	second: null,
 	minute: 'second',
 	hour: 'minute',
@@ -55,7 +55,7 @@ const previousRelativeTimeUnitByUnit: Record<LuRelativeTimeFormatUnit, LuRelativ
 	week: 'day',
 	month: 'week',
 	year: 'month',
-};
+} as const satisfies Record<LuRelativeTimeFormatUnit, LuRelativeTimeFormatUnit | null>;
 
 export function relativeTimeTimer(date: Date | number, allowedUnits?: readonly LuRelativeTimeFormatUnit[]): Observable<LuRelativeTime> {
 	return new Observable<LuRelativeTime>((subscriber) => {
