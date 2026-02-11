@@ -91,7 +91,7 @@ export class HtmlAstVisitor<TNode extends TemplateNode> {
 				if ('groups' in node) {
 					(node.groups as unknown[]).forEach((groupNode) => {
 						this.visit(cb, (groupNode as { children: TemplateNode[]}).children , node);
-					})
+					});
 				}
 				// TODO Remove this cases in next breaking
 				if ('cases' in node) {
