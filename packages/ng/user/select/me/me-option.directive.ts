@@ -67,7 +67,7 @@ export class LuUserMeOptionDirective<U extends ILuUser = ILuUser> implements ILu
 		this._service = hostService || selfService;
 	}
 
-	me: ILuUser = undefined;
+	me: ILuUser | undefined = undefined;
 	private meDisplayed$ = new BehaviorSubject(false);
 	onOpen() {
 		this._service.getMe().subscribe((me) => {
