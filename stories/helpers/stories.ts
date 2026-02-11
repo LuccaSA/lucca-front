@@ -1,6 +1,6 @@
+import { LOCALE_ID } from '@angular/core';
 import { applicationConfig, Args, ArgTypes, StoryObj } from '@storybook/angular';
 import { PlayFunction, Renderer } from 'storybook/internal/types';
-import { LOCALE_ID } from '@angular/core';
 
 export interface StoryGeneratorArgs<TComponent> {
 	name: string;
@@ -98,7 +98,7 @@ export function generateInputs(inputs: Record<string, unknown>, argTypes: ArgTyp
 		}
 
 		const defaultValue: unknown = argType['table']?.defaultValue?.summary;
-		if (value === defaultValue || value === null || value === undefined) {
+		if (value === defaultValue || value === null || value === undefined || (typeof value === 'string' && !value.length)) {
 			return acc;
 		}
 		// Let's treat boolean inputs as booleanAttributes for stories
