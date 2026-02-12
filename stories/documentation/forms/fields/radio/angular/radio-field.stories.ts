@@ -53,12 +53,15 @@ export default {
 			},
 			description: 'Ajoute un texte descriptif (aide, erreur, etc.) sous le champ de formulaire.',
 		},
+		presentation: {
+			description: '[v21.1] Transforme le champ de formulaire en donnée textuelle non éditable.',
+		},
 	},
 } as Meta;
 
-export const Basic: StoryObj<RadioGroupInputComponent & FormFieldComponent & { required: boolean }> = {
+export const Basic: StoryObj<RadioGroupInputComponent & FormFieldComponent & { required: boolean; presentation: boolean }> = {
 	render: (args, { argTypes }) => {
-		const { label, hiddenLabel, tooltip, inlineMessage, inlineMessageState, size, inline, ...inputArgs } = args;
+		const { label, hiddenLabel, tooltip, inlineMessage, inlineMessageState, size, inline, presentation, ...inputArgs } = args;
 		return {
 			props: {
 				example: 1,
@@ -72,6 +75,7 @@ export const Basic: StoryObj<RadioGroupInputComponent & FormFieldComponent & { r
 					inlineMessageState,
 					size,
 					inline,
+					presentation,
 				},
 				argTypes,
 			)}>
@@ -94,5 +98,6 @@ export const Basic: StoryObj<RadioGroupInputComponent & FormFieldComponent & { r
 		inlineMessage: 'Helper message',
 		inlineMessageState: 'default',
 		inline: false,
+		presentation: false,
 	},
 };
