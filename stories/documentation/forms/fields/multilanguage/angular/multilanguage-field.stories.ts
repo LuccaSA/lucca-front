@@ -46,7 +46,7 @@ export default {
 			control: {
 				type: 'boolean',
 			},
-			description: `Ajoute le validateur marquant l'invariant comme obligatoire.`,
+			description: `[v21.1] Ajoute le validateur marquant l'invariant comme obligatoire.`,
 		},
 		size: {
 			options: ['M', 'S'],
