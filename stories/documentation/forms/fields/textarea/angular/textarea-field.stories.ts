@@ -77,12 +77,15 @@ export default {
 		disableSpellcheck: {
 			description: "Désactive le correcteur d'orthographe.",
 		},
+		presentation: {
+			description: '[v21.1] Transforme le champ de formulaire en donnée textuelle non éditable.',
+		},
 	},
 } as Meta;
 
 export const Basic: StoryObj<TextareaInputComponent & { disabled: boolean; required: boolean; value: string } & FormFieldComponent> = {
 	render: (args, { argTypes }) => {
-		const { label, hiddenLabel, tooltip, inlineMessage, inlineMessageState, size, counter, autoResize, autoResizeScrollIntoView, value, ...inputArgs } = args;
+		const { label, hiddenLabel, tooltip, inlineMessage, inlineMessageState, size, counter, autoResize, autoResizeScrollIntoView, value, presentation, ...inputArgs } = args;
 		return {
 			props: { example: value },
 			template: cleanupTemplate(`<lu-form-field ${generateInputs(
@@ -94,6 +97,7 @@ export const Basic: StoryObj<TextareaInputComponent & { disabled: boolean; requi
 					inlineMessageState,
 					size,
 					counter,
+					presentation,
 				},
 				argTypes,
 			)}>
@@ -122,5 +126,6 @@ export const Basic: StoryObj<TextareaInputComponent & { disabled: boolean; requi
 		rows: 3,
 		value: '',
 		disableSpellcheck: false,
+		presentation: false,
 	},
 };

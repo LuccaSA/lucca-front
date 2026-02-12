@@ -19,9 +19,9 @@ export default {
 	],
 } as Meta;
 
-export const Basic: StoryObj<PhoneNumberInputComponent & FormFieldComponent & { required: boolean }> = {
+export const Basic: StoryObj<PhoneNumberInputComponent & FormFieldComponent & { required: boolean; presentation: boolean }> = {
 	render: (args, { argTypes }) => {
-		const { label, hiddenLabel, tooltip, inlineMessage, inlineMessageState, errorInlineMessage, size, ...inputArgs } = args;
+		const { label, hiddenLabel, tooltip, inlineMessage, inlineMessageState, errorInlineMessage, size, presentation, ...inputArgs } = args;
 
 		return {
 			props: {
@@ -37,6 +37,7 @@ export const Basic: StoryObj<PhoneNumberInputComponent & FormFieldComponent & { 
 					inlineMessageState,
 					errorInlineMessage,
 					size,
+					presentation,
 				},
 				argTypes,
 			)}>
@@ -108,6 +109,9 @@ export const Basic: StoryObj<PhoneNumberInputComponent & FormFieldComponent & { 
 			if: { arg: 'hiddenLabel', truthy: false },
 			description: 'Affiche une icône (?) associée à une info-bulle.',
 		},
+		presentation: {
+			description: '[v21.1] Transforme le champ de formulaire en donnée textuelle non éditable.',
+		},
 	},
 	args: {
 		label: 'Phone',
@@ -119,5 +123,6 @@ export const Basic: StoryObj<PhoneNumberInputComponent & FormFieldComponent & { 
 		inlineMessageState: 'default',
 		disabled: false,
 		noAutoPlaceholder: false,
+		presentation: false,
 	},
 };

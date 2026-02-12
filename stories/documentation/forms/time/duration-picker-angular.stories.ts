@@ -83,12 +83,15 @@ export default {
 			},
 			description: '[v21.1] Définit une valeur maximale.',
 		},
+		presentation: {
+			description: '[v21.1] Transforme le champ de formulaire en donnée textuelle non éditable.',
+		},
 	},
 } as Meta;
 
-export const Basic: StoryObj<DurationPickerComponent & FormFieldComponent & { required: boolean }> = {
+export const Basic: StoryObj<DurationPickerComponent & FormFieldComponent & { required: boolean; presentation: boolean }> = {
 	render: (args, { argTypes }) => {
-		const { label, hiddenLabel, tooltip, inlineMessage, inlineMessageState, size, ...inputArgs } = args;
+		const { label, hiddenLabel, tooltip, inlineMessage, inlineMessageState, size, presentation, ...inputArgs } = args;
 		return {
 			template: cleanupTemplate(`<lu-form-field [rolePresentationLabel]="true" ${generateInputs(
 				{
@@ -98,6 +101,7 @@ export const Basic: StoryObj<DurationPickerComponent & FormFieldComponent & { re
 					inlineMessage,
 					inlineMessageState,
 					size,
+					presentation,
 				},
 				argTypes,
 			)}>
@@ -117,6 +121,7 @@ export const Basic: StoryObj<DurationPickerComponent & FormFieldComponent & { re
 		hideZeroValue: false,
 		displayArrows: false,
 		disabled: false,
+		presentation: false,
 		step: 'PT1M',
 		max: 'PT99H',
 	},

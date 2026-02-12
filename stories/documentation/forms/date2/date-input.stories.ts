@@ -70,9 +70,12 @@ export default {
 		hideWeekend: {
 			description: "Retire l'effet grisé visible sur les jours du isWeekend.",
 		},
+		presentation: {
+			description: '[v21.1] Transforme le champ de formulaire en donnée textuelle non éditable.',
+		},
 	},
 	render: (args, { argTypes }) => {
-		const { min, max, focusedDate, ...flags } = args;
+		const { min, max, focusedDate, presentation, ...flags } = args;
 		const selected = args['selected'] ? new Date(args['selected']) : null;
 		const defaultDate = args['format'] === 'date' ? selected : selected?.toISOString().substring(0, 10);
 		const minValue = args['format'] === 'date' ? new Date(args['min']) : new Date(args['min'] ?? 0)?.toISOString().substring(0, 10);
@@ -86,7 +89,7 @@ export default {
 				focusedDate: args['focusedDate'] ? focusedDateValue : null,
 			},
 			template: `
-			<lu-form-field label="Date input example" inlineMessage="Inline message example">
+			<lu-form-field label="Date input example" inlineMessage="Inline message example" ${generateInputs({ presentation }, argTypes)}>
 				<lu-date-input [(ngModel)]="selected" [min]="min" [max]="max" [focusedDate]="focusedDate" autocomplete="off" ${generateInputs(flags, argTypes)} />
 			</lu-form-field>
 
@@ -96,7 +99,7 @@ export default {
 	},
 } as Meta;
 
-export const Basic: StoryObj<DateInputComponent & { selected: Date }> = {
+export const Basic: StoryObj<DateInputComponent & { selected: Date; presentation: boolean }> = {
 	args: {
 		disableOverflow: false,
 		hideOverflow: false,
@@ -107,12 +110,13 @@ export const Basic: StoryObj<DateInputComponent & { selected: Date }> = {
 		widthAuto: false,
 		mode: 'day',
 		format: 'date',
+		presentation: false,
 		// Underlying ngModel
 		selected: new Date(),
 	},
 };
 
-export const StartFromYear: StoryObj<DateInputComponent & { selected: Date }> = {
+export const StartFromYear: StoryObj<DateInputComponent & { selected: Date; presentation: boolean }> = {
 	args: {
 		disableOverflow: false,
 		hideOverflow: false,
@@ -124,6 +128,7 @@ export const StartFromYear: StoryObj<DateInputComponent & { selected: Date }> = 
 		mode: 'day',
 		calendarMode: 'year',
 		format: 'date',
+		presentation: false,
 		// Underlying ngModel
 		selected: null,
 	},
