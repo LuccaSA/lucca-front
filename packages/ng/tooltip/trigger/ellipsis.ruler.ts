@@ -38,8 +38,8 @@ export class EllipsisRuler {
 	 * This way, we have 2 reflows per check, no matter how many elements are checked in a row.
 	 */
 	async hasEllipsis(element: HTMLElement): Promise<boolean> {
-		let elementStyle: CSSStyleDeclaration;
-		let bodyStyle: CSSStyleDeclaration;
+		let elementStyle!: CSSStyleDeclaration;
+		let bodyStyle!: CSSStyleDeclaration;
 
 		await this.#readOperation(() => {
 			elementStyle = getComputedStyle(element);
@@ -82,8 +82,8 @@ export class EllipsisRuler {
 		// To avoid multiple reflows, we wait for the next microtask before calculating the width
 
 		try {
-			let clonedElementWidth: number;
-			let elementWidth: number;
+			let clonedElementWidth!: number;
+			let elementWidth!: number;
 
 			await this.#readOperation(() => {
 				clonedElementWidth = elementCloned.getBoundingClientRect().width;
