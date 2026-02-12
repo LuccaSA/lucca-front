@@ -24,6 +24,20 @@ export default {
 		displayFileName: {
 			if: { arg: 'media', truthy: true },
 		},
+		withFileType: {
+			control: 'boolean',
+		},
+		fileType: {
+			control: 'text',
+			if: { arg: 'withFileType' },
+		},
+		withFileSize: {
+			control: 'boolean',
+		},
+		fileSize: {
+			control: 'number',
+			if: { arg: 'withFileSize' },
+		},
 	},
 	decorators: [
 		moduleMetadata({
@@ -41,7 +55,7 @@ export default {
 			template: `<lu-file-entry ${deletableParam} ${withPasswordParam} [entry]="{
 			name: '${fileName}',
 			size: ${fileSize},
-			type: '${fileType}',
+			type: ${fileType && `'${fileType}'`},
 		}"  ${generateInputs(otherArgs, argTypes)} />`,
 		};
 	},
@@ -53,7 +67,9 @@ export const Basic = {
 		displayFileName: false,
 		size: null,
 		fileSize: 28420,
+		withFileSize: true,
 		fileType: 'image/png',
+		withFileType: true,
 		fileName: 'dummyimage.png',
 		iconOverride: '',
 		previewUrl: 'https://dummyimage.com/500',
