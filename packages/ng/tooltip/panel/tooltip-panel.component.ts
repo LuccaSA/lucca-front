@@ -23,7 +23,7 @@ export class LuTooltipPanelComponent {
 
 	readonly content = signal<string | SafeHtml | null>(null);
 
-	readonly id = signal<string>(null);
+	readonly id = signal<string>('');
 
 	readonly contentPositionClasses = signal<Record<string, boolean>>({});
 
