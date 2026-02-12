@@ -16,7 +16,7 @@ export class ProgressBarComponent {
 	/**
 	 * Progress bar state
 	 */
-	readonly state = input<'success' | 'error' | 'null'>(null);
+	readonly state = input<'success' | 'error' | null>(null);
 
 	/**
 	 * Displays a loading state without progress information

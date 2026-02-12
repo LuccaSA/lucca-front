@@ -81,7 +81,7 @@ export class LuUserDisplayPipe implements PipeTransform {
 		const format = options.format ?? this.defaultFormat;
 
 		if (Array.isArray(userOrUsers)) {
-			if ('formatter' in options) {
+			if ('formatter' in options && options.formatter) {
 				return luUsersDisplay(userOrUsers, { format, formatter: options.formatter });
 			}
 			const separator = ('separator' in options ? options.separator : undefined) ?? ', ';
