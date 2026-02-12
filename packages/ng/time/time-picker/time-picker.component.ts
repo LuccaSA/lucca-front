@@ -39,7 +39,7 @@ let nextId = 0;
 	],
 })
 export class TimePickerComponent extends BasePickerComponent {
-	protected intl = input(...intlInputOptions(LU_TIME_PICKER_TRANSLATIONS));
+	readonly intl = input(...intlInputOptions(LU_TIME_PICKER_TRANSLATIONS));
 	protected localeId = inject(LOCALE_ID);
 
 	readonly idSuffix = nextId++;
