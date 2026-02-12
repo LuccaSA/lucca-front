@@ -64,6 +64,9 @@ export default {
 		disabled: {
 			description: 'Désactive le champ.',
 		},
+		presentation: {
+			description: '[v21.1] Transforme le champ de formulaire en donnée textuelle non éditable.',
+		},
 		optionComparer: HiddenArgType,
 		options: HiddenArgType,
 		optionTpl: HiddenArgType,
@@ -82,7 +85,7 @@ export const Basic: StoryObj<
 		}
 > = {
 	render: (args, { argTypes }) => {
-		const { label, hiddenLabel, tooltip, inlineMessage, inlineMessageState, size, width, ...inputArgs } = args;
+		const { label, hiddenLabel, tooltip, inlineMessage, inlineMessageState, size, width, presentation, ...inputArgs } = args;
 		return {
 			props: { legumes: allLegumes, example: allLegumes[0] },
 			template: `<lu-form-field ${generateInputs(
@@ -94,6 +97,7 @@ export const Basic: StoryObj<
 					inlineMessageState,
 					size,
 					width,
+					presentation,
 				},
 				argTypes,
 			)}>
@@ -119,5 +123,6 @@ export const Basic: StoryObj<
 		inlineMessageState: 'default',
 		loading: false,
 		disabled: false,
+		presentation: false,
 	},
 };

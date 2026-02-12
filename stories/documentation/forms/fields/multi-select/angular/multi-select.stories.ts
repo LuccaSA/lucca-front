@@ -67,6 +67,9 @@ export default {
 		loading: {
 			description: "Applique l'état de chargement.",
 		},
+		presentation: {
+			description: '[v21.1] Transforme le champ de formulaire en donnée textuelle non éditable.',
+		},
 		clueChange: HiddenArgType,
 		nextPage: HiddenArgType,
 		previousPage: HiddenArgType,
@@ -80,7 +83,7 @@ export default {
 
 export const Basic: StoryObj<LuMultiSelectInputComponent<unknown> & FormFieldComponent & { required: boolean }> = {
 	render: (args, { argTypes }) => {
-		const { label, hiddenLabel, tooltip, inlineMessage, inlineMessageState, size, width, ...inputArgs } = args;
+		const { label, hiddenLabel, tooltip, inlineMessage, inlineMessageState, size, width, presentation, ...inputArgs } = args;
 		return {
 			props: { legumes: allLegumes, example: [] },
 			template: `<lu-form-field ${generateInputs(
@@ -92,6 +95,7 @@ export const Basic: StoryObj<LuMultiSelectInputComponent<unknown> & FormFieldCom
 					inlineMessageState,
 					size,
 					width,
+					presentation,
 				},
 				argTypes,
 			)}>
@@ -114,5 +118,6 @@ export const Basic: StoryObj<LuMultiSelectInputComponent<unknown> & FormFieldCom
 		inlineMessageState: 'default',
 		loading: false,
 		keepSearchAfterSelection: false,
+		presentation: false,
 	},
 };
