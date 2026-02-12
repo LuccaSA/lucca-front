@@ -11,6 +11,7 @@
 	[options]="filteredColors()"
 	(clueChange)="clue.set($event)"
 	(highlightedOption)="keyboardHighlighted.set($event.name)"
+	ignorePresentation
 >
 	<ng-container *luOption="let color; select: selectRef">
 		<lu-color
@@ -36,8 +37,8 @@
 </lu-simple-select>
 
 <ng-container *luPresentationDisplayDefault>
-	@let color = currentColorPresentation();
-	@if (color) {
+	@if (ngControl?.control?.value) {
+		@let color = currentColorPresentation();
 		<lu-color [borderColor]="color.borderColor" [value]="color.background">{{ color.name }}</lu-color>
 	} @else {
 		<div aria-hidden="true" data-content-before="–"></div>

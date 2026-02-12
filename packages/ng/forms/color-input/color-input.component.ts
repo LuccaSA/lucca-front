@@ -11,10 +11,11 @@ import { LU_COLOR_TRANSLATIONS } from './color.translate';
 import { ɵPresentationDisplayDefaultDirective } from '@lucca-front/ng/form-field';
 import { toSignal } from '@angular/core/rxjs-interop';
 import { startWith } from 'rxjs';
+import { JsonPipe } from '@angular/common';
 
 @Component({
 	selector: 'lu-color-input',
-	imports: [ReactiveFormsModule, LuSimpleSelectInputComponent, LuDisplayerDirective, LuOptionDirective, ColorComponent, LuCoreSelectNoClueDirective, ɵPresentationDisplayDefaultDirective],
+	imports: [ReactiveFormsModule, LuSimpleSelectInputComponent, LuDisplayerDirective, LuOptionDirective, ColorComponent, LuCoreSelectNoClueDirective, ɵPresentationDisplayDefaultDirective, JsonPipe],
 	hostDirectives: [NoopValueAccessorDirective],
 	templateUrl: './color-input.component.html',
 	styleUrl: './color-input.component.scss',
@@ -35,7 +36,7 @@ export class ColorInputComponent {
 
 	ngControl = injectNgControl();
 
-	currentColorPresentation: Signal<ColorOption | null> = signal(null);
+	currentColorPresentation: Signal<ColorOption | null>;
 
 	constructor() {
 		if (this.ngControl) {

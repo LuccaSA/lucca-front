@@ -111,7 +111,7 @@ export const Neutral = generateStory({
 export const Lucca = generateStory({
 	name: 'Lucca Color',
 	description: '',
-	template: `<lu-form-field [presentation]="presentation" label="lucca" [size]="size === '' ? null : size">
+	template: `<lu-form-field [presentation]="presentation" label="lucca" [size]="size">
 	<lu-color-input [colors]="colors" [(ngModel)]="selectedColor" [clearable]="clearable" [compact]="compact" />
 </lu-form-field>`,
 	storyPartial: {
