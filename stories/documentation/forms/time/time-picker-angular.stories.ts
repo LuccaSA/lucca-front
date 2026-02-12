@@ -75,7 +75,7 @@ export default {
 			control: {
 				type: 'text',
 			},
-			description: 'Définie une valeur maximale.',
+			description: 'Définit une valeur maximale.',
 		},
 		forceMeridiemDisplay: {
 			options: [null, false, true],

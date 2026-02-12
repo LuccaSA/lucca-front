@@ -81,7 +81,7 @@ export default {
 			control: {
 				type: 'text',
 			},
-			description: 'Définie une valeur maximale.',
+			description: '[v21.1] Définit une valeur maximale.',
 		},
 	},
 } as Meta;
