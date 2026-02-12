@@ -4,7 +4,7 @@ import { PORTAL_CONTEXT, PortalContent } from './portal-content';
 @Directive({
 	selector: '[luPortal]',
 })
-export class PortalDirective<T = unknown> implements OnDestroy {
+export class PortalDirective<T extends object = object> implements OnDestroy {
 	private viewContainerRef = inject(ViewContainerRef);
 	private renderer = inject(Renderer2);
 	private templateRef = inject(TemplateRef);
@@ -112,7 +112,7 @@ export class PortalDirective<T = unknown> implements OnDestroy {
 		}
 	}
 
-	public static ngTemplateContextGuard<T>(_dir: PortalDirective<T>, ctx: unknown): ctx is void {
+	public static ngTemplateContextGuard<T extends object>(_dir: PortalDirective<T>, ctx: unknown): ctx is void {
 		return true;
 	}
 }
