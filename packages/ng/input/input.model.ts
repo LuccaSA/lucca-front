@@ -8,35 +8,35 @@ export abstract class ALuInput<T, U extends HTMLElement = HTMLElement> implement
 	get placeholder() {
 		return this._placeholder;
 	}
-	protected _value: T;
+	protected _value: T | null = null;
 	constructor(
 		protected _changeDetectorRef: ChangeDetectorRef,
 		protected _elementRef: ElementRef<U>,
 		protected _renderer: Renderer2,
 	) {}
-	setValue(value: T) {
+	setValue(value: T | null) {
 		this.value = value;
 		this._cvaOnChange(value);
 		this._onTouched();
 	}
-	get value(): T {
+	get value(): T | null {
 		return this._value;
 	}
-	set value(value: T) {
+	set value(value: T | null) {
 		this._value = value;
 		this.render();
 		this.applyClasses();
 		this._changeDetectorRef.markForCheck();
 	}
 	// From ControlValueAccessor interface
-	writeValue(value: T) {
-		this.value = value;
+	writeValue(value?: T) {
+		this.value = value ?? null;
 	}
 	// From ControlValueAccessor interface
-	protected _cvaOnChange: (value: T) => void = () => {
+	protected _cvaOnChange: (value: T | null) => void = () => {
 		return;
 	};
-	registerOnChange(fn: (value: T) => void) {
+	registerOnChange(fn: (value: T | null) => void) {
 		this._cvaOnChange = fn;
 	}
 	// From ControlValueAccessor interface
