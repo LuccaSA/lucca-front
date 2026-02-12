@@ -94,6 +94,9 @@ export default {
 			},
 			description: 'Modifie l’attribut autocomplete des champs input.',
 		},
+		presentation: {
+			description: '[v21.1] Transforme le champ de formulaire en donnée textuelle non éditable.',
+		},
 	},
 } as Meta;
 
