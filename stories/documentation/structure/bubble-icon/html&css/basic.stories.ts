@@ -24,7 +24,7 @@ export default {
 			control: {
 				type: 'select',
 			},
-			description: 'Modifie la taille du composant',
+			description: 'Modifie la taille du composant.',
 		},
 		palette: {
 			options: [
