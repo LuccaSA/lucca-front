@@ -1,5 +1,4 @@
 @mixin hide($suffix: '') {
-	-ms-overflow-style: none #{$suffix};
 	scrollbar-width: none #{$suffix};
 
 	&::-webkit-scrollbar {
@@ -9,7 +8,7 @@
 
 @mixin scrollblock($suffix: '') {
 	overflow: hidden #{$suffix};
-	
+
 	&,
 	body {
 		touch-action: none #{$suffix};
