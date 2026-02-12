@@ -1,5 +1,4 @@
 @mixin hide($suffix: '') {
-	-ms-overflow-style: none #{$suffix};
 	scrollbar-width: none #{$suffix};
 
 	&::-webkit-scrollbar {
