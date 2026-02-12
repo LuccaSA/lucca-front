@@ -19,6 +19,8 @@ import { debounce, debounceTime, filter, map, tap } from 'rxjs/operators';
 import { LuTooltipPanelComponent } from '../panel';
 import { EllipsisRuler } from './ellipsis.ruler';
 
+type TooltipAction = 'open' | 'close';
+
 let nextId = 0;
 
 @Directive({
