@@ -74,7 +74,10 @@ export class LuCalendarInputComponent<D> extends ALuInput<D> implements ControlV
 	initDayLabels() {
 		this.labels = [...getLocaleDayNames(this._locale, FormStyle.Standalone, TranslationWidth.Abbreviated)];
 		if (getLocaleFirstDayOfWeek(this._locale) === 1) {
-			this.labels.push(this.labels.shift());
+			const firstLabel = this.labels.shift();
+			if (firstLabel !== undefined) {
+				this.labels.push(firstLabel);
+			}
 		}
 	}
 	protected render() {
