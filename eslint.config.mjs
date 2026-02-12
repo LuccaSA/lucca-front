@@ -31,6 +31,7 @@ const STRICTIFIED_NG_EXCLUDE_ENTRIES = [
 	'packages/ng/schematics/**/*.ts',
 	'packages/ng/select/**/*.ts',
 	'packages/ng/simple-select/**/*.ts',
+	'stories/**/*.ts',
 ];
 
 export default defineConfig(
@@ -165,7 +166,7 @@ export default defineConfig(
 		},
 	},
 	{
-		files: ['packages/ng/**/*.ts'],
+		files: ['**/*.ts'],
 		languageOptions: {
 			parser: tsParser,
 			parserOptions: {
