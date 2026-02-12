@@ -9,11 +9,33 @@ import typescript from 'typescript-eslint';
 import { defineConfig } from 'eslint/config';
 import tsParser from '@typescript-eslint/parser';
 
-const STRICTIFIED_NG_ENTRIES = ['packages/ng/tree-select/**/*.ts', 'packages/ng/user/**/*.ts', 'packages/ng/date/**/*.ts', 'packages/ng/user-popover/**/*.ts'];
+const STRICTIFIED_NG_EXCLUDE_ENTRIES = [
+	'packages/ng/core/**/*.ts',
+	'packages/ng/core-select/**/*.ts',
+	'packages/ng/data-table/**/*.ts',
+	'packages/ng/date2/**/*.ts',
+	'packages/ng/dialog/**/*.ts',
+	'packages/ng/establishment/**/*.ts',
+	'packages/ng/file-upload/**/*.ts',
+	'packages/ng/filter-pills/**/*.ts',
+	'packages/ng/form-field/**/*.ts',
+	'packages/ng/formly/**/*.ts',
+	'packages/ng/forms/**/*.ts',
+	'packages/ng/index-table/**/*.ts',
+	'packages/ng/input/**/*.ts',
+	'packages/ng/modal/**/*.ts',
+	'packages/ng/multi-select/**/*.ts',
+	'packages/ng/option/**/*.ts',
+	'packages/ng/popover/**/*.ts',
+	'packages/ng/popup/**/*.ts',
+	'packages/ng/schematics/**/*.ts',
+	'packages/ng/select/**/*.ts',
+	'packages/ng/simple-select/**/*.ts',
+];
 
 export default defineConfig(
 	{
-		ignores: ['dist/', '.storybook/**', '**/schematics/**/tests/', 'node_modules/', '.angular/'],
+		ignores: ['dist/', '.storybook/**', '**/schematics/**/tests/', 'node_modules/', '.angular/', ...STRICTIFIED_NG_EXCLUDE_ENTRIES],
 	},
 	{
 		linterOptions: {
@@ -143,7 +165,7 @@ export default defineConfig(
 		},
 	},
 	{
-		files: STRICTIFIED_NG_ENTRIES,
+		files: ['packages/ng/**/*.ts'],
 		languageOptions: {
 			parser: tsParser,
 			parserOptions: {
