@@ -1,22 +1,16 @@
+import { Meta, StoryObj } from '@storybook/angular';
 import { ButtonComponent } from '@lucca-front/ng/button';
-import { IconComponent } from '@lucca-front/ng/icon';
-import { Meta, moduleMetadata, StoryObj } from '@storybook/angular';
 import { createTestStory, generateInputs } from 'stories/helpers/stories';
 import { expect, within } from 'storybook/test';
 
 export default {
 	title: 'Documentation/Actions/Button/Angular/Basic',
 	component: ButtonComponent,
-	decorators: [
-		moduleMetadata({
-			imports: [IconComponent],
-		}),
-	],
 	render: ({ luButton, ...inputs }, { argTypes }) => {
 		const disclosureIcon = '<lu-icon icon="arrowChevronBottom" />';
 		return {
-			template: `<button type="button" luButton${luButton !== '' ? `="${luButton}"` : ''}${generateInputs(inputs, argTypes)}
->Button${inputs['disclosure'] ? disclosureIcon : ''}</button>`,
+			template: `<button type="button" prButton${luButton !== '' ? `="${luButton}"` : ''}${generateInputs(inputs, argTypes)}
+>Button</button>`,
 			styles: [luButton === 'AI-invert' || luButton === 'ghost-invert' ? ':host { background-color: var(--palettes-neutral-900); outline: 1rem solid var(--palettes-neutral-900);  }' : ''],
 		};
 	},
@@ -37,6 +31,10 @@ export const Basic: StoryObj<ButtonComponent> = {
 		palette: {
 			if: { arg: 'luButton', neq: 'AI' },
 			description: 'Applique une palette de couleurs au bouton.',
+			options: ['', 'product', 'neutral', 'success', 'warning', 'critical'],
+			control: {
+				type: 'select',
+			},
 		},
 		state: {
 			description: "Modifie l'état du bouton.",
@@ -45,7 +43,8 @@ export const Basic: StoryObj<ButtonComponent> = {
 			},
 		},
 		critical: {
-			description: '[v20.2] Marque une action aux conséquences importantes ou irréversibles au survol et focus. Seulement compatible avec <code>outlined</code> et <code>ghost</code>.',
+			description:
+				"[v20.2] Marque une action aux conséquences importantes ou irréversibles au survol et focus. Seulement compatible avec <code>outlined</code> et <code>ghost</code>. Dans le cas d'un bouton toujours affiché en rouge, préférez l'usage de <code>palette='critical'</code>.",
 		},
 		disclosure: {
 			description: "Indique le présence d'un menu.",
@@ -62,12 +61,12 @@ export const Basic: StoryObj<ButtonComponent> = {
 	},
 	args: {
 		luButton: '',
+		delete: false,
 		state: 'default',
 		critical: false,
 		disclosure: false,
 		palette: 'none',
 		block: false,
-		delete: false,
 	},
 };
 

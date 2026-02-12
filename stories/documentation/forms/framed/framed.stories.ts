@@ -1,9 +1,10 @@
-import { Component, input } from '@angular/core';
+import { ChangeDetectionStrategy, Component, input } from '@angular/core';
 import { Meta, StoryObj } from '@storybook/angular';
 
 @Component({
 	selector: 'framed-stories',
 	templateUrl: './framed.stories.html',
+	changeDetection: ChangeDetectionStrategy.OnPush,
 })
 class FramedStory {
 	state = input<string>('');

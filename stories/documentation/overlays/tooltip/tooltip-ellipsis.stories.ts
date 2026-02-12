@@ -1,4 +1,4 @@
-import { Component } from '@angular/core';
+import { ChangeDetectionStrategy, Component } from '@angular/core';
 import { provideAnimations } from '@angular/platform-browser/animations';
 import { LuTooltipModule } from '@lucca-front/ng/tooltip';
 import { applicationConfig, Meta, StoryObj } from '@storybook/angular';
@@ -98,6 +98,7 @@ import { AsyncPipe } from '@angular/common';
 			}
 		`,
 	],
+	changeDetection: ChangeDetectionStrategy.OnPush,
 })
 class TooltipStory {
 	dynamicContent$ = interval(1000).pipe(

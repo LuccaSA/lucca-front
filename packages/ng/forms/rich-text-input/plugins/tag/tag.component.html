@@ -1,5 +1,5 @@
 <div class="richTextField-toolbar-chips" (keydown.arrowleft)="focusTag($event, -1)" (keydown.arrowRight)="focusTag($event, 1)">
-	<span aria-hidden="true">{{ intl.insertTag }}</span>
+	<span aria-hidden="true">{{ intl().insertTag }}</span>
 	@for (tag of tags(); track tag) {
 		<lu-chip
 			[attr.tabindex]="isDisabled() ? null : $first ? 0 : -1"
@@ -12,7 +12,7 @@
 			#tagButton
 			unkillable
 		>
-			<span class="pr-u-mask">{{ intl.insertTag }}</span>
+			<span class="pr-u-mask">{{ intl().insertTag }}</span>
 			{{ tag.description }}
 		</lu-chip>
 	}

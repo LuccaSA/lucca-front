@@ -1,0 +1,25 @@
+{
+  "name": "@lucca-front/eslint-plugin",
+  "version": "1.0.0",
+  "type": "module",
+  "description": "Custom ESLint rules for Lucca Front",
+  "exports": "./index.ts",
+  "scripts": {
+    "test": "jest --config jest.config.js",
+    "test:watch": "jest --config jest.config.js --watch"
+  },
+  "keywords": [
+    "eslint",
+    "eslintplugin",
+    "eslint-plugin",
+    "lucca",
+    "typescript"
+  ],
+  "author": "Guilde Front Lucca <guilde-front@lucca.fr>",
+  "license": "MIT",
+  "peerDependencies": {
+    "@typescript-eslint/utils": ">=8.0.0",
+    "eslint": ">=9.0.0",
+    "typescript": ">=5.0.0"
+  }
+}

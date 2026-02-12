@@ -1,5 +1,5 @@
 import { provideHttpClient } from '@angular/common/http';
-import { Component, input } from '@angular/core';
+import { ChangeDetectionStrategy, Component, input } from '@angular/core';
 import { provideAnimations } from '@angular/platform-browser/animations';
 import { ILuUser } from '@lucca-front/ng/user';
 import { LuUserPopoverDirective, provideLuUserPopover } from '@lucca-front/ng/user-popover';
@@ -9,6 +9,7 @@ import { applicationConfig, Meta, StoryObj } from '@storybook/angular';
 	selector: 'user-popover-story',
 	template: '<button type="button" class="userPopover_trigger" [luUserPopover]="luUserPopover()" [luUserPopoverDisabled]="luUserPopoverDisabled()">Survolez-moi !</button>',
 	imports: [LuUserPopoverDirective],
+	changeDetection: ChangeDetectionStrategy.OnPush,
 })
 class UserPopoverStory {
 	luUserPopover = input<ILuUser>();

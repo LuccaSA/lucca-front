@@ -1,4 +1,4 @@
-import { Component } from '@angular/core';
+import { ChangeDetectionStrategy, Component } from '@angular/core';
 import { LuNumberPipe } from '@lucca-front/ng/number';
 import { Meta, StoryObj } from '@storybook/angular';
 
@@ -6,6 +6,7 @@ import { Meta, StoryObj } from '@storybook/angular';
 	selector: 'numbers-stories',
 	imports: [LuNumberPipe],
 	templateUrl: './numbers.stories.html',
+	changeDetection: ChangeDetectionStrategy.OnPush,
 })
 class NumbersStory {
 	public pi = 3.141592;

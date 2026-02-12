@@ -10,7 +10,7 @@
 <ng-template luDisplayer [luDisplayerMultiple]="true" let-values>
 	@if (multiple && values?.length > 1) {
 		<span
-			><span class="numericBadge">{{ values.length }}</span> {{ intl.users }}</span
+			><span class="numericBadge">{{ values.length }}</span> {{ intl().users }}</span
 		>
 	} @else {
 		{{ values[0] || values | luUserDisplay }}
@@ -43,7 +43,7 @@
 			[value]="user"
 		>
 			<div>
-				<b>{{ intl.me }} {{ user | luUserDisplay: searchFormat }}</b>
+				<b>{{ intl().me }} {{ user | luUserDisplay: searchFormat }}</b>
 			</div>
 			@if (user.additionalInformation) {
 				<div class="lu-select-additionalInformation">({{ user.additionalInformation }})</div>

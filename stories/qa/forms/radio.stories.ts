@@ -1,9 +1,10 @@
-import { Component } from '@angular/core';
+import { ChangeDetectionStrategy, Component } from '@angular/core';
 import { Meta, moduleMetadata, StoryObj } from '@storybook/angular';
 
 @Component({
 	selector: 'forms-radio-stories',
 	templateUrl: './radio.stories.html',
+	changeDetection: ChangeDetectionStrategy.OnPush,
 })
 class RadioStory {}
 

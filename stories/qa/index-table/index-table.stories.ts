@@ -1,4 +1,4 @@
-import { Component } from '@angular/core';
+import { ChangeDetectionStrategy, Component } from '@angular/core';
 import { ButtonComponent } from '@lucca-front/ng/button';
 import { IconComponent } from '@lucca-front/ng/icon';
 import {
@@ -41,6 +41,7 @@ import { Meta, StoryObj } from '@storybook/angular';
 		PaginationComponent,
 		ButtonComponent,
 	],
+	changeDetection: ChangeDetectionStrategy.OnPush,
 })
 class IndexTableStory {}
 

@@ -1,6 +1,6 @@
 import { JsonPipe } from '@angular/common';
 import { provideHttpClient } from '@angular/common/http';
-import { Component } from '@angular/core';
+import { ChangeDetectionStrategy, Component } from '@angular/core';
 import { AbstractControl, FormGroup, ReactiveFormsModule } from '@angular/forms';
 import { ALuDateAdapter, LuNativeDateAdapter } from '@lucca-front/ng/core';
 import { provideLuFormly } from '@lucca-front/ng/formly';
@@ -17,6 +17,7 @@ import { Meta, StoryObj, applicationConfig } from '@storybook/angular';
 
 		<pr-story-model-display>{{ model | json }}</pr-story-model-display>
 	`,
+	changeDetection: ChangeDetectionStrategy.OnPush,
 })
 class FormlyStory {
 	form = new FormGroup({});

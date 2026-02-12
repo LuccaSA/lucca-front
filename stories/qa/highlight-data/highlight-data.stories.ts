@@ -1,4 +1,4 @@
-import { Component } from '@angular/core';
+import { ChangeDetectionStrategy, Component } from '@angular/core';
 import { provideRouter } from '@angular/router';
 import { ButtonComponent } from '@lucca-front/ng/button';
 import { HighlightDataComponent } from '@lucca-front/ng/highlight-data';
@@ -9,6 +9,7 @@ import { applicationConfig, Meta, StoryObj } from '@storybook/angular';
 	selector: 'highlight-data-stories',
 	templateUrl: './highlight-data.stories.html',
 	imports: [HighlightDataComponent, ButtonComponent, LinkComponent],
+	changeDetection: ChangeDetectionStrategy.OnPush,
 })
 class HighlightDataStory {}
 

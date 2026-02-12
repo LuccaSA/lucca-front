@@ -1,5 +1,5 @@
 import { InjectionToken } from '@angular/core';
-import { ILuTranslation } from '@lucca-front/ng/core';
+import { LuTranslation } from '@lucca-front/ng/core';
 
 export const LU_POPOVER2_TRANSLATIONS = new InjectionToken('LuPopover2Translations', {
 	factory: () => luPopover2Translations,
@@ -9,7 +9,7 @@ export interface LuCalloutLabel {
 	screenReaderDescription: string;
 }
 
-export const luPopover2Translations: ILuTranslation<LuCalloutLabel> = {
+export const luPopover2Translations: LuTranslation<LuCalloutLabel> = {
 	en: {
 		screenReaderDescription: '(Tab key to enter panel.)',
 	},

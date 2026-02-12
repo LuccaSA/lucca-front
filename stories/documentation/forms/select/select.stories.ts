@@ -1,10 +1,10 @@
-import { Component } from '@angular/core';
+import { ChangeDetectionStrategy, Component } from '@angular/core';
 import { FormsModule } from '@angular/forms';
 import { provideAnimations } from '@angular/platform-browser/animations';
 import { LuInputDisplayerDirective } from '@lucca-front/ng/input';
 import { LuOptionItemComponent, LuOptionPickerComponent } from '@lucca-front/ng/option';
 import { LuSelectInputComponent } from '@lucca-front/ng/select';
-import { Meta, applicationConfig, StoryObj } from '@storybook/angular';
+import { applicationConfig, Meta, StoryObj } from '@storybook/angular';
 
 @Component({
 	selector: 'select-stories',
@@ -63,6 +63,7 @@ import { Meta, applicationConfig, StoryObj } from '@storybook/angular';
 			</label>
 		</div>
 	`,
+	changeDetection: ChangeDetectionStrategy.OnPush,
 })
 class SelectStory {
 	green = { id: 1, name: 'Green' };

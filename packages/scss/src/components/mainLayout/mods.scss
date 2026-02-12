@@ -4,10 +4,12 @@
 
 @mixin stickyHeader {
 	--components-mainLayout-content-inside-header-position: sticky;
+	--components-mainLayout-content-inside-header-backgroundColor: var(--commons-background-base);
 }
 
 @mixin stickyFooter {
 	--components-mainLayout-content-inside-footer-position: sticky;
+	--components-mainLayout-content-inside-footer-backgroundColor: var(--commons-background-base);
 }
 
 @mixin stickyBlock {

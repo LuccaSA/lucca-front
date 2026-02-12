@@ -1,3 +1,6 @@
+import { TmplAstElement } from "@angular/compiler";
+import { currentSchematicContext } from "./lf-schematic-context";
+
 export function camelize(str: string): string {
 	return str[0].toLowerCase() + str.slice(1);
 }
@@ -32,3 +35,7 @@ export function expand(rawMapping: Record<string, string>, mappingProps?: Record
 			})
 		) as Record<string, string>;
 	}
+
+export function isInterestingNode(node: unknown): node is TmplAstElement {
+	return node instanceof currentSchematicContext.angularCompiler.TmplAstElement;
+}

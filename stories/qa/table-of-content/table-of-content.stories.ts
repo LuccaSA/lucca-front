@@ -1,4 +1,4 @@
-import { Component } from '@angular/core';
+import { ChangeDetectionStrategy, Component } from '@angular/core';
 import { TableOfContentComponent, TableOfContentLinkDirective } from '@lucca-front/ng/table-of-content';
 import { Meta, StoryObj } from '@storybook/angular';
 
@@ -6,6 +6,7 @@ import { Meta, StoryObj } from '@storybook/angular';
 	selector: 'table-of-content-stories',
 	templateUrl: './table-of-content.stories.html',
 	imports: [TableOfContentComponent, TableOfContentLinkDirective],
+	changeDetection: ChangeDetectionStrategy.OnPush,
 })
 class TableOfContentStory {}
 

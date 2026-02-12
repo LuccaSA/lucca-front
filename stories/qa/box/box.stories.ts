@@ -1,4 +1,4 @@
-import { Component } from '@angular/core';
+import { ChangeDetectionStrategy, Component } from '@angular/core';
 import { BoxComponent } from '@lucca-front/ng/box';
 import { Meta, StoryObj } from '@storybook/angular';
 
@@ -6,6 +6,7 @@ import { Meta, StoryObj } from '@storybook/angular';
 	selector: 'box-stories',
 	templateUrl: './box.stories.html',
 	imports: [BoxComponent],
+	changeDetection: ChangeDetectionStrategy.OnPush,
 })
 class BoxStory {}
 

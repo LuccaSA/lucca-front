@@ -55,3 +55,12 @@
 		justify-content: center;
 	}
 }
+
+@mixin insideTable {
+	--components-emptyState-container-position: sticky;
+}
+
+@mixin insideContainer {
+	--components-emptyState-container-maxWidth: none;
+	--components-emptyState-container-left: auto;
+}

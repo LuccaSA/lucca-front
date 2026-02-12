@@ -1,0 +1,66 @@
+<table class="demo-QAtable">
+	<tbody>
+		<tr>
+			<td></td>
+			<td>
+				<div class="demo-QAtable-list">Angular</div>
+			</td>
+		</tr>
+		<tr>
+			<td>Default</td>
+			<td>
+				<div class="demo-QAtable-list">
+					<lu-bubble-illustration [illustration]="'warning'" />
+					<lu-bubble-illustration [illustration]="'bookmark'" />
+					<lu-bubble-illustration [illustration]="'outside'" />
+				</div>
+			</td>
+		</tr>
+		<tr>
+			<td>Palette</td>
+			<td>
+				<div class="demo-QAtable-list">
+					@for (palette of paletteOptions; track palette) {
+						<lu-bubble-illustration [illustration]="'mail'" [palette]="palette" />
+					}
+				</div>
+			</td>
+		</tr>
+		<tr>
+			<td>Size</td>
+			<td>
+				<div class="demo-QAtable-list">
+					<lu-bubble-illustration [illustration]="'warning'" />
+					<lu-bubble-illustration [illustration]="'warning'" size="S" />
+					<lu-bubble-illustration [illustration]="'warning'" size="L" />
+				</div>
+			</td>
+		</tr>
+		<tr>
+			<td>Action</td>
+			<td>
+				<div class="demo-QAtable-list">
+					<lu-bubble-illustration [illustration]="'warning'" action />
+					<lu-bubble-illustration [illustration]="'warning'" size="S" action />
+					<lu-bubble-illustration [illustration]="'warning'" size="L" action />
+					@for (palette of paletteOptions; track palette) {
+						<lu-bubble-illustration [illustration]="'warning'" action [palette]="palette" />
+					}
+				</div>
+			</td>
+		</tr>
+		<tr>
+			<td>Illustration</td>
+			<td>
+				<div class="demo-QAtable-list">
+					@for (bubbleIllustration of bubbleIllustrationsList; track bubbleIllustration) {
+						<lu-bubble-illustration [illustration]="bubbleIllustration" />
+					}
+				</div>
+			</td>
+		</tr>
+	</tbody>
+</table>
+
+<!-- To tell the ui-diff tool that the page has finished rendering -->
+<span id="ready"></span>

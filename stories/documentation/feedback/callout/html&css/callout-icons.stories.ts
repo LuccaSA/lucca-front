@@ -39,9 +39,7 @@ function getTemplate(args: CalloutIconStory): string {
 		<span aria-hidden="true" class="lucca-icon${icon}"></span>
 	</div>
 	<div class="callout-content">
-		<div class="callout-content-description">
-			<p>Feedback description</p>
-		</div>
+		<p class="callout-content-description">Feedback description</p>
 	</div>
 </div>`;
 }

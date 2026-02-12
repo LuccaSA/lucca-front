@@ -2,7 +2,7 @@ import { booleanAttribute, ChangeDetectionStrategy, Component, computed, inject,
 import { outputFromObservable } from '@angular/core/rxjs-interop';
 import { FormsModule } from '@angular/forms';
 import { ButtonComponent } from '@lucca-front/ng/button';
-import { getIntl, IntlParamsPipe } from '@lucca-front/ng/core';
+import { intlInputOptions, IntlParamsPipe } from '@lucca-front/ng/core';
 import { DividerComponent } from '@lucca-front/ng/divider';
 import { FormFieldComponent } from '@lucca-front/ng/form-field';
 import { TextInputComponent } from '@lucca-front/ng/forms';
@@ -12,7 +12,7 @@ import { LuTooltipModule } from '@lucca-front/ng/tooltip';
 import { Subject } from 'rxjs';
 import { FileEntry } from '../file-upload-entry';
 import { LU_FILE_UPLOAD_TRANSLATIONS } from '../file-upload.translate';
-import { formatSize } from '../formatter';
+import { formatFileSize } from '../formatter';
 
 @Component({
 	selector: 'lu-file-entry',
@@ -28,7 +28,7 @@ import { formatSize } from '../formatter';
 export class FileEntryComponent {
 	#locale = inject(LOCALE_ID);
 
-	readonly intl = getIntl(LU_FILE_UPLOAD_TRANSLATIONS);
+	readonly intl = input(...intlInputOptions(LU_FILE_UPLOAD_TRANSLATIONS));
 
 	readonly state = input<'success' | 'loading' | 'error' | 'default'>('default');
 
@@ -66,8 +66,12 @@ export class FileEntryComponent {
 	readonly fileType = computed(() => this.entry().type);
 	readonly fileSize = computed(() => this.entry().size);
 
-	readonly fileSizeDisplay = computed(() => formatSize(this.#locale, this.fileSize()));
-	readonly fileTypeDisplay = computed(() => this.intl.file.replace('{{fileTypeLastPart}}', this.fileType().split('/')[1].toUpperCase()));
+	readonly fileSizeDisplay = computed(() => formatFileSize(this.#locale, this.fileSize()));
+	readonly fileTypeDisplay = computed(() => {
+		const fileExtension: string = extractFileExtension(this.fileType());
+
+		return this.intl().file.replace('{{fileTypeLastPart}}', fileExtension);
+	});
 
 	readonly previewUrl = input<string>('');
 
@@ -118,4 +122,19 @@ export class FileEntryComponent {
 		[`is-${this.state()}`]: !!this.state(),
 		[`mod-${this.size()}`]: !!this.size(),
 	}));
+}
+
+function extractFileExtension(type: string): string {
+	switch (type) {
+		case 'application/vnd.ms-excel':
+			return 'XLS';
+		case 'application/vnd.openxmlformats-officedocument.spreadsheetml.sheet':
+			return 'XLSX';
+		case 'application/msword':
+			return 'DOC';
+		case 'application/vnd.openxmlformats-officedocument.wordprocessingml.document':
+			return 'DOCX';
+		default:
+			return type.split('/')[1].toUpperCase();
+	}
 }

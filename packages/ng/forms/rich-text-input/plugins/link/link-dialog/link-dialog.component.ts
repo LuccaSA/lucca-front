@@ -1,7 +1,7 @@
-import { ChangeDetectionStrategy, Component } from '@angular/core';
+import { ChangeDetectionStrategy, Component, input } from '@angular/core';
 import { FormControl, FormGroup, ReactiveFormsModule, Validators } from '@angular/forms';
 import { ButtonComponent } from '@lucca-front/ng/button';
-import { getIntl } from '@lucca-front/ng/core';
+import { intlInputOptions } from '@lucca-front/ng/core';
 import { DialogComponent, DialogContentComponent, DialogDismissDirective, DialogFooterComponent, injectDialogData, injectDialogRef } from '@lucca-front/ng/dialog';
 import { FormFieldComponent } from '@lucca-front/ng/form-field';
 import { TextInputComponent } from '@lucca-front/ng/forms';
@@ -17,7 +17,7 @@ export class LinkDialogComponent {
 	public readonly dialogData = injectDialogData<string>();
 	public readonly dialogRef = injectDialogRef<string | undefined>();
 
-	intl = getIntl(LU_RICH_TEXT_INPUT_TRANSLATIONS);
+	intl = input(...intlInputOptions(LU_RICH_TEXT_INPUT_TRANSLATIONS));
 
 	public readonly formGroup = new FormGroup({
 		href: new FormControl<string>(this.dialogData, Validators.required),

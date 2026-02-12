@@ -1,5 +1,5 @@
 import { provideHttpClient } from '@angular/common/http';
-import { Component, input } from '@angular/core';
+import { ChangeDetectionStrategy, Component, input } from '@angular/core';
 import { provideAnimations } from '@angular/platform-browser/animations';
 import { LuEstablishmentSelectInputComponent } from '@lucca-front/ng/establishment';
 import { applicationConfig, Meta, StoryObj } from '@storybook/angular';
@@ -16,6 +16,7 @@ import { applicationConfig, Meta, StoryObj } from '@storybook/angular';
 			<span class="textfield-label">Establishment Multiple Select</span>
 		</label>
 	`,
+	changeDetection: ChangeDetectionStrategy.OnPush,
 })
 class EstablishmentSelectStory {
 	multiple = input<boolean>(true);

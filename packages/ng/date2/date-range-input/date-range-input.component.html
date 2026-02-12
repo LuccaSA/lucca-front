@@ -16,7 +16,7 @@
 					luInput
 					luInputStandalone
 					class="textField-input-value dateRangeField-fieldset-input-value"
-					[value]="startLabel()"
+					[ngModel]="startLabel()"
 					(input)="textInputChange(start.value, 'start')"
 					(blur)="inputBlur()"
 					(focus)="inputFocused.set(true); editedField.set(0); highlightedField.set(0)"
@@ -40,9 +40,9 @@
 					luInput
 					luInputStandalone
 					class="textField-input-value dateRangeField-fieldset-input-value"
-					[value]="endLabel()"
+					[ngModel]="endLabel()"
 					(input)="textInputChange(start.value, 'end')"
-					(blur)="inputBlur(); fixOrderIfNeeded()"
+					(blur)="inputBlur()"
 					(focus)="inputFocused.set(true); editedField.set(1); highlightedField.set(1)"
 					aria-haspopup="true"
 					role="combobox"
@@ -58,7 +58,7 @@
 			<div class="textField-input-affix">
 				@if (!isFilterPill) {
 					@if (clearable() && (start.value !== "" || end.value !== "")) {
-						<lu-clear class="textField-input-affix-clear" (onClear)="clear(); start.focus()">{{ intl.clear }}</lu-clear>
+						<lu-clear class="textField-input-affix-clear" (onClear)="clear(); start.focus()">{{ intl().clear }}</lu-clear>
 					}
 				}
 				<button
@@ -75,7 +75,7 @@
 					class="button mod-onlyIcon mod-ghost textField-input-affix-toggle"
 					(click)="editedField.set(0)"
 				>
-					<lu-icon [icon]="'calendarPlanning'" [alt]="intl.pickDate" />
+					<lu-icon [icon]="'calendarPlanning'" [alt]="intl().pickDate" />
 				</button>
 			</div>
 		</div>
@@ -103,12 +103,12 @@
 		<div class="calendarWrapper">
 			<div class="calendarWrapper-navigation pr-u-left0">
 				<button class="calendarWrapper-navigation-button button" type="button" (click)="prev(mode())" #previousButtonRef>
-					<span aria-hidden="true" class="lucca-icon icon-arrowChevronLeft"></span><span class="pr-u-mask">{{ intl.previous }}</span>
+					<span aria-hidden="true" class="lucca-icon icon-arrowChevronLeft"></span><span class="pr-u-mask">{{ intl().previous }}</span>
 				</button>
 			</div>
 			<div class="calendarWrapper-navigation pr-u-right0">
 				<button class="calendarWrapper-navigation-button button" type="button" (click)="next(mode())" #nextButtonRef>
-					<span aria-hidden="true" class="lucca-icon icon-arrowChevronRight"></span><span class="pr-u-mask"> {{ intl.next }}</span>
+					<span aria-hidden="true" class="lucca-icon icon-arrowChevronRight"></span><span class="pr-u-mask"> {{ intl().next }}</span>
 				</button>
 			</div>
 			<div class="calendarWrapper-content" tabindex="-1">
@@ -159,9 +159,24 @@
 
 <ng-container *luFilterPillDisplayer="let empty = isEmpty">
 	@if (!empty) {
-		<span class="pr-u-mask">{{ intl.from }}</span>
+		<span class="pr-u-mask">{{ intl().from }}</span>
 		{{ startLabel() }}
-		<lu-icon [icon]="'arrowRight'" size="XS" [alt]="intl.to" />
+		<lu-icon [icon]="'arrowRight'" size="XS" [alt]="intl().to" />
 		{{ endLabel() }}
+	}
+</ng-container>
+
+<ng-container *luPresentationDisplayDefault>
+	<span class="pr-u-mask">{{ intl().from }}</span>
+	@if (startLabel()) {
+		{{ startLabel() }}
+	} @else {
+		<div aria-hidden="true" data-content-before="–"></div>
+	}
+	<lu-icon [icon]="'arrowRight'" size="XS" [alt]="intl().to" />
+	@if (endLabel()) {
+		{{ endLabel() }}
+	} @else {
+		<div aria-hidden="true" data-content-before="–"></div>
 	}
 </ng-container>

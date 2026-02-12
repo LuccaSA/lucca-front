@@ -1,0 +1,11 @@
+<dl class="presentation">
+	<dt class="presentation-description-term">
+		<ng-container *luPortal="label()" />
+	</dt>
+	<dd class="presentation-description-definition">
+		@if (noValue()) {
+			<div aria-hidden="true" data-content-before="–"></div>
+		}
+		<ng-content />
+	</dd>
+</dl>

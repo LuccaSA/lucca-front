@@ -95,6 +95,7 @@
 			z-index: 1;
 			inset-block-start: var(--components-mainLayout-content-inside-header-insetBlockStart);
 			inset-inline-start: 0;
+			background-color: var(--components-mainLayout-content-inside-header-backgroundColor);
 
 			&:empty {
 				display: none;
@@ -106,6 +107,7 @@
 			inset-block-end: var(--components-mainLayout-content-inside-footer-insetBlockEnd);
 			inset-inline-start: 0;
 			margin-block-start: auto;
+			background-color: var(--components-mainLayout-content-inside-footer-backgroundColor);
 
 			&:empty {
 				display: none;

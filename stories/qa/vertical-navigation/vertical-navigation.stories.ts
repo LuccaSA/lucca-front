@@ -1,4 +1,4 @@
-import { Component } from '@angular/core';
+import { ChangeDetectionStrategy, Component } from '@angular/core';
 import { VerticalNavigationComponent, VerticalNavigationGroupComponent, VerticalNavigationItemComponent, VerticalNavigationLinkComponent } from '@lucca-front/ng/vertical-navigation';
 import { Meta, StoryObj, moduleMetadata } from '@storybook/angular';
 
@@ -6,6 +6,7 @@ import { Meta, StoryObj, moduleMetadata } from '@storybook/angular';
 	selector: 'vertical-navigation-stories',
 	templateUrl: './vertical-navigation.stories.html',
 	imports: [VerticalNavigationComponent, VerticalNavigationLinkComponent, VerticalNavigationItemComponent, VerticalNavigationGroupComponent],
+	changeDetection: ChangeDetectionStrategy.OnPush,
 })
 class VerticalNavigationStory {}
 

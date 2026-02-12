@@ -4,14 +4,14 @@
 	type="button"
 	size="S"
 	(click)="dispatchCommand()"
-	[luTooltip]="intl.linksLabel"
+	[luTooltip]="intl().linksLabel"
 	[attr.aria-pressed]="active()"
 	luTooltipOnlyForDisplay
 	[attr.tabindex]="tabindex()"
 	[disabled]="isDisabled()"
 	class="richTextField-toolbar-button"
 >
-	<lu-icon icon="formatLink" [alt]="intl.linksLabel" />
+	<lu-icon icon="formatLink" [alt]="intl().linksLabel" />
 </button>
 
 <ng-template #linkNodeTemplate let-href="href" let-title="title" let-target="target">
@@ -24,20 +24,20 @@
 				luButton="ghost"
 				size="XS"
 				(click)="trigger.close(); dispatchCommand()"
-				[luTooltip]="intl.linksLabel"
+				[luTooltip]="intl().linksLabel"
 				luTooltipOnlyForDisplay
 			>
-				<lu-icon icon="officePen" [alt]="intl.linksLabel" />
+				<lu-icon icon="officePen" [alt]="intl().linksLabel" />
 			</button>
 			<button
 				type="button"
 				luButton="ghost"
 				size="XS"
 				(click)="trigger.close(); deleteLink()"
-				[luTooltip]="intl.linksDelete"
+				[luTooltip]="intl().linksDelete"
 				luTooltipOnlyForDisplay
 			>
-				<lu-icon icon="trashDelete" [alt]="intl.linksDelete" />
+				<lu-icon icon="trashDelete" [alt]="intl().linksDelete" />
 			</button>
 		</div>
 	</ng-template>

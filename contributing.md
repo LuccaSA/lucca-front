@@ -1,55 +1,54 @@
 # Contributing to Lucca Front
 
-We use english.
+English is the main language used to debate, provide feedback and discuss features, please use it by default.
 
- - [Questions or Problem](#qop)
- - [Issues and Bugs](#issue)
- - [Coding Rules](#rules)
- - [Submission Guidelines](#submit)
+ - [Naming](#naming)
+ - [Architecture](#architecture)
+ - [Developer eXperience](#dx)
 
-## <a name="qop"></a> Questions or Problems?
+## <a name="naming"></a> Naming
 
-Post a message on [slack](https://lucca.slack.com/archives/C3W78FWUU).
+We're using Angular's standard for naming, which includes:
 
-## <a name="issue"></a> Issues or Bugs
+- Classes, interfaces, types and enums must use `PascalCase` for their name.
+- Static constants must use `UPPER_CASE` for their name.
+- Variables, functions and class fields must use `camelCase` for their name.
+- Variable and fields must be named in a way that makes it easy to understand what they do, naming an important variable `a` is not accepted for instance.
+- Component inputs must never collide with an existing native input on their host.
 
-Create an issue on [Github](https://github.com/LuccaSA/lucca-front/issues).
+You can read a very detailed version of that here: https://google.github.io/styleguide/tsguide.html
 
-You can also post a message on [slack](https://lucca.slack.com/archives/C3W78FWUU).
 
-## <a name="rules"></a> Coding Rules
+## <a name="architecture"></a> Architecture
 
-### Icons
+### Files organization:
 
-Follow our [tutorial on Notion](https://www.notion.so/Mise-jour-de-la-font-36363b23cdf0470a920f68d2c5f436a7) (🇫🇷)
+When creating new components, they should be placed in the right folder, as each folder is its own library entrypoint, and thus bundle.
 
-### SCSS files
+If you're not sure about where to put a given feature, don't hesitate to reach to the team to ask using an issue.
 
-Follow our [tutorial on Prisme](https://prisme.lucca.io/94310e217/p/929c63-intgration) (🇫🇷)
+### Code architecture
 
-🚧 TODO directory structure
+It's hard to properly describe how things are organized but let's try.
 
-### Angular
+Overall, you should always avoid heavily coupling business code from "dumb" design system components, a good example of that being simple-select and multi-select providing the base,
+dumb version of what a select should be. Then, directives are here to provide them everything they need to connect to Lucca's APIs.
 
-🚧 TODO with the frontend guild
+Keep things simple as much as possible and make sure everything is working fine when being used with a keyboard, because accessibility is a priority.
 
-## <a name="submit"></a> Submission Guidelines
+🖊️ WIP
 
-### Submitting a Pull Request (PR)
+## <a name="dx"></a> Developer eXperience
 
-1. Prefix the PR title with the name of the component:
-    _**\[{ComponentName}\]** A short description_
-2. When a component, an icon or an scss class is added or modified, check the following:
-        - Stories are updated or created: Check the documentation in the stories and update if necessary.
-        - Unit tests are updated or created for ng components.
-        - 🚧 UiDiff.
-3. Add a label "Technical", "Feature"  or "Issue".
-4. Add a label "Documentation changes" when a stories is added or modified.
-5. Check the build before posting the PR on [slack](https://lucca.slack.com/archives/C0308N9RPF0).
+For a component to be used, it must be easy to use. Always prefer keeping the hard, complex part on our end so developers can enjoy using components.
 
-### Submitting an issue or a feature
+This includes, but not only:
 
-1. Add a [Github issue](https://github.com/LuccaSA/lucca-front/issues).
-2. Add a label "Feature" or "FIX".
-3. Add the appropriate labels ("Front", "Design sync"…).
-4. Create a branch from the "rc" branch for the current milestone, or from the tag version when a bug target a specific version. For a bug, specify all versions impacted.
+- Using `booleanAttribute` transform, it makes components easier to use overall.
+- Using meaningful input names, common names such as `config`, `param`, etc must be avoided and they're too generic, consumers need to know what your input does!
+- Properly typings inputs, using union strings when necessary, to provide code completion, this can also be done with a trailing `| string` that will make it become a list of suggestions instead.
+- Always use `numberAttribute` transform when creating an input that should take numbers, to make it easier to use for everyone.
+
+Overall, ask yourself: would I want to use this component, that input? Before deciding on it, because if you don't want to use it due to how it's exposed, neither will the consumers.
+
+Finally, make sure you provide the right inputs and outputs for your component before releasing it, because once it's released, any change to its interface contract will result in a breaking change and nobody likes breaking changes.

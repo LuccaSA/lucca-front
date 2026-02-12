@@ -53,8 +53,16 @@
 		/>
 		<div class="textField-input-affix">
 			@if (hasClearer() && inputElement.value) {
-				<lu-clear class="textField-input-affix-clear" (onClear)="clearValue(); inputElement.focus()">{{ intl.clear }}</lu-clear>
+				<lu-clear class="textField-input-affix-clear" (onClear)="clearValue(); inputElement.focus()">{{ intl().clear }}</lu-clear>
 			}
 		</div>
 	</div>
 </div>
+
+<ng-container *luPresentationDisplayDefault>
+	@if (ngControl.value) {
+		{{ ngControl.value }}
+	} @else {
+		<div aria-hidden="true" data-content-before="–"></div>
+	}
+</ng-container>

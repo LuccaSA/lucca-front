@@ -1,4 +1,4 @@
-import { Component } from '@angular/core';
+import { ChangeDetectionStrategy, Component } from '@angular/core';
 import { LuUserPictureComponent } from '@lucca-front/ng/user';
 import { Meta, StoryObj } from '@storybook/angular';
 
@@ -13,6 +13,7 @@ import { Meta, StoryObj } from '@storybook/angular';
 		`,
 	],
 	imports: [LuUserPictureComponent],
+	changeDetection: ChangeDetectionStrategy.OnPush,
 })
 class AvatarStory {}
 

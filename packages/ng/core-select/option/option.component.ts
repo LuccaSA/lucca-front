@@ -17,7 +17,7 @@ import {
 	Type,
 	ViewChild,
 } from '@angular/core';
-import { getIntl, PortalDirective } from '@lucca-front/ng/core';
+import { intlInputOptions, PortalDirective } from '@lucca-front/ng/core';
 import { LuTooltipTriggerDirective } from '@lucca-front/ng/tooltip';
 import { asyncScheduler, observeOn, Subscription } from 'rxjs';
 import { GroupTemplateLocation } from '../panel/panel.utils';
@@ -40,7 +40,7 @@ export const MAGIC_OPTION_SCROLL_DELAY = 15;
 })
 export class LuOptionComponent<T> implements AfterViewInit, OnDestroy, OnInit {
 	protected selectableItem = inject(CoreSelectPanelElement);
-	protected intl = getIntl(LU_OPTION_TRANSLATIONS);
+	protected intl = input(...intlInputOptions(LU_OPTION_TRANSLATIONS));
 
 	@HostBinding('class.optionItem')
 	public hasOptionItemClass = true;

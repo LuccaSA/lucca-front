@@ -1,6 +1,6 @@
 import { AsyncPipe } from '@angular/common';
-import { ChangeDetectionStrategy, Component, inject } from '@angular/core';
-import { getIntl } from '@lucca-front/ng/core';
+import { ChangeDetectionStrategy, Component, inject, input } from '@angular/core';
+import { intlInputOptions } from '@lucca-front/ng/core';
 import { ILuOptionContext, LU_OPTION_CONTEXT, ɵLuOptionOutletDirective } from '@lucca-front/ng/core-select';
 import { LuUserDisplayPipe } from '@lucca-front/ng/user';
 import { map, startWith } from 'rxjs';
@@ -15,7 +15,7 @@ import { LuCoreSelectUsersDirective } from './users.directive';
 		@if (context.option$ | async; as user) {
 			@if (userDirective.displayMeOption() && user.id === userDirective.currentUserId && hasEmptyClue$ | async) {
 				<div>
-					<strong>{{ intl.me }}</strong
+					<strong>{{ intl().me }}</strong
 					>&ngsp;
 					<strong translate="no"><ng-container *luOptionOutlet="customUserOptionTpl() || defaultUserTpl; value: user" /></strong>
 				</div>
@@ -45,7 +45,7 @@ import { LuCoreSelectUsersDirective } from './users.directive';
 export class LuUserOptionComponent {
 	protected context = inject<ILuOptionContext<LuCoreSelectWithAdditionnalInformation<LuCoreSelectUser>>>(LU_OPTION_CONTEXT);
 	protected userDirective = inject(LuCoreSelectUsersDirective);
-	protected intl = getIntl(LU_CORE_SELECT_USER_TRANSLATIONS);
+	protected intl = input(...intlInputOptions(LU_CORE_SELECT_USER_TRANSLATIONS));
 	protected hasEmptyClue$ = this.userDirective.select.clueChange$.pipe(
 		startWith(this.userDirective.select.clue),
 		map((clue) => !clue),

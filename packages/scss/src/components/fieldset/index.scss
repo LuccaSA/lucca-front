@@ -1,3 +1,5 @@
+@use '@lucca-front/scss/src/commons/utils/media';
+
 @use 'exports' as *;
 
 .fieldset {
@@ -25,6 +27,11 @@
 
 		&:has(.fieldset-title-content-action:not(:empty)) {
 			@include withAction;
+		}
+
+
+		@include media.max('XXS') {
+			@include narrow;
 		}
 	}
 }
