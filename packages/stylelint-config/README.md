@@ -58,7 +58,7 @@ npx stylelint "./**/*.scss" showCachePath
 
 You can [apply specific rules with overrides](https://stylelint.io/user-guide/configure/#overrides) as needed.
 
-Rules can be disabled while incrementally fixing your code. Set them to `null`. The following example will ignore the `no-descending-specificity` rule in all SCSS files within `*some-path* :
+Rules can be disabled while incrementally fixing your code. Set them to `null`. The following example will ignore the `no-empty-source` rule in all SCSS files within `*some-path* :
 
 ```js
 module.exports = {
@@ -67,7 +67,7 @@ module.exports = {
   {
    files: ['some-path/**/*.scss'],
    rules: {
-    'no-descending-specificity': null,
+    'no-empty-source': null,
    }
   },
  ],

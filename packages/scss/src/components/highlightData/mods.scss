@@ -7,9 +7,10 @@
 }
 
 @mixin valueFirst {
-	--components-highlightData-grid : 'value   action'
-	                                  'title   action'
-																		'subtext action';
+	--components-highlightData-grid:
+		'value   action'
+		'title   action'
+		'subtext action';
 }
 
 @mixin valueFirstIllustrations {
