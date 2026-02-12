@@ -35,7 +35,7 @@ export class ColorInputComponent {
 
 	ngControl = injectNgControl();
 
-	currentColorPresentation: Signal<ColorOption | null> = signal(null);
+	currentColorPresentation: Signal<ColorOption | null>;
 
 	constructor() {
 		if (this.ngControl) {

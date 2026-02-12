@@ -70,7 +70,11 @@
 			"
 		/>
 	}
-	{{ formattedValue() }}
+	@if (formattedValue()) {
+		{{ formattedValue() }}
+	} @else {
+		<div aria-hidden="true" data-content-before="–"></div>
+	}
 	@if (suffix()) {
 		<ng-container
 			*ngTemplateOutlet="
