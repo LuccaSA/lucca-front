@@ -27,7 +27,7 @@ import { LU_DURATION_PICKER_TRANSLATIONS } from './duration-picker.translate';
 	],
 })
 export class DurationPickerComponent extends BasePickerComponent {
-	protected intl = input(...intlInputOptions(LU_DURATION_PICKER_TRANSLATIONS));
+	readonly intl = input(...intlInputOptions(LU_DURATION_PICKER_TRANSLATIONS));
 
 	value = model<ISO8601Duration>('PT0S');
 	readonly max = input<ISO8601Duration>('PT99H');
