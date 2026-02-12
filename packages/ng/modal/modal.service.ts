@@ -1,12 +1,12 @@
 import { ComponentType } from '@angular/cdk/portal';
 import { inject, Injectable } from '@angular/core';
+import { LuDialogConfig, LuDialogService } from '@lucca-front/ng/dialog';
+import { DialogContentAdapterComponent } from './dialog-adapter/dialog-content-adapter/dialog-content-adapter.component';
+import { DialogRefAdapter } from './dialog-adapter/dialog-ref-adapter';
 import { LuModalConfig } from './modal-config.model';
 import { ILuModalRef } from './modal-ref.model';
 import { ILuModalContent, LuModalContentResult } from './modal.model';
 import { LU_MODAL_CONFIG, LU_MODAL_REF_FACTORY } from './modal.token';
-import { LuDialogConfig, LuDialogService } from '@lucca-front/ng/dialog';
-import { DialogRefAdapter } from './dialog-adapter/dialog-ref-adapter';
-import { DialogContentAdapterComponent } from './dialog-adapter/dialog-content-adapter/dialog-content-adapter.component';
 
 @Injectable()
 export class LuModal {

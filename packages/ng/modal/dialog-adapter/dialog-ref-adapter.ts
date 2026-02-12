@@ -2,7 +2,7 @@ import { Observable, of } from 'rxjs';
 import { LuModalClasses, LuModalMode } from '../modal-config.model';
 import { ILuModalRef } from '../modal-ref.model';
 import { ILuModalContent, LuModalContentResult } from '../modal.model';
-import { LuDialogRef } from '@lucca-front/ng/dialog';
+import { LuDialogRef, LuDialogSize } from '@lucca-front/ng/dialog';
 import { map } from 'rxjs/operators';
 import { DialogContentAdapterComponent } from './dialog-content-adapter/dialog-content-adapter.component';
 
@@ -25,5 +25,9 @@ export class DialogRefAdapter<D, T extends ILuModalContent> implements ILuModalR
 
 	dismiss(): void {
 		this.dialogRef.dismiss();
+	}
+
+	resize(size: LuDialogSize): void {
+		this.dialogRef.resize(size);
 	}
 }

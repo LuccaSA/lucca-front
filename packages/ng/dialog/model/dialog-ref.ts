@@ -1,7 +1,7 @@
 import { DialogRef } from '@angular/cdk/dialog';
 import { isObservable, Observable, of, Subscription, take } from 'rxjs';
 import { filter, map, takeUntil } from 'rxjs/operators';
-import { LuDialogConfig, LuDialogData, LuDialogResult } from './dialog-config';
+import { LuDialogConfig, LuDialogData, LuDialogResult, LuDialogSize } from './dialog-config';
 
 export const DISMISSED_VALUE = {} as const;
 
@@ -74,6 +74,16 @@ export class LuDialogRef<C = unknown, TData = LuDialogData<C>> {
 		this.detachSubscription?.unsubscribe();
 		this.cdkRef.close(res);
 	}
+
+	resize(size: LuDialogSize): void {
+		if (this.config.size === size) {
+			return;
+		}
+
+		this.cdkRef.removePanelClass(`mod-${this.config.size || 'M'}`);
+		this.cdkRef.addPanelClass(`mod-${size}`);
+		this.config.size = size;
+	}
 }
 
-export type LuDialogSelfRef<R> = { dismiss(): void; close(res: R): void };
+export type LuDialogSelfRef<R> = { dismiss(): void; close(res: R): void; resize(size: LuDialogSize): void };
