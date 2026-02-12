@@ -12,6 +12,7 @@ import {
 	input,
 	Input,
 	InputSignal,
+	linkedSignal,
 	model,
 	OnDestroy,
 	output,
@@ -89,8 +90,7 @@ export class PopoverDirective implements OnDestroy {
 	})
 	content: TemplateRef<unknown> | Type<unknown>;
 
-	@Input()
-	luPopoverPosition: PopoverPosition = 'above';
+	luPopoverPosition = input<PopoverPosition>('above');
 
 	@Input()
 	overlayScrollStrategy: 'reposition' | 'block' | 'close' = 'reposition';
@@ -121,6 +121,8 @@ export class PopoverDirective implements OnDestroy {
 	luPopoverOpenDelay: InputSignal<number> = input<number>(300);
 
 	luPopoverCloseDelay: InputSignal<number> = input<number>(100);
+
+	luPopoverPositionRef = linkedSignal(() => this.luPopoverPosition());
 
 	open$ = new Subject<'focus' | 'click' | 'hover'>();
 
@@ -324,6 +326,6 @@ export class PopoverDirective implements OnDestroy {
 			above: ['before', 'after'],
 			below: ['before', 'after'],
 		};
-		return [this.positionPairs[this.luPopoverPosition], this.positionPairs[opposite[this.luPopoverPosition]], ...remaining[this.luPopoverPosition].map((r) => this.positionPairs[r])];
+		return [this.positionPairs[this.luPopoverPositionRef()], this.positionPairs[opposite[this.luPopoverPositionRef()]], ...remaining[this.luPopoverPositionRef()].map((r) => this.positionPairs[r])];
 	}
 }

@@ -60,5 +60,9 @@
 </div>
 
 <ng-container *luPresentationDisplayDefault>
-	{{ ngControl.value }}
+	@if (ngControl.value) {
+		{{ ngControl.value }}
+	} @else {
+		<div aria-hidden="true" data-content-before="–"></div>
+	}
 </ng-container>

@@ -1,3 +1,39 @@
+@use '@lucca-front/scss/src/commons/utils/namespace';
+
+@mixin icon($atRoot: namespace.$defaultAtRoot) {
+	.lucca-icon {
+		text-decoration: none;
+		font-size: 1em;
+		vertical-align: baseline;
+		position: relative;
+		top: 0.075rem; // magic number
+	}
+
+	&:has(.link-text) {
+		text-decoration: none;
+	}
+
+	&:not(:has(.link-icon)) {
+		.lucca-icon {
+			margin-inline-start: 0.2em;
+		}
+	}
+
+	@at-root ($atRoot) {
+		.link-text {
+			text-decoration: underline;
+		}
+
+		.link-icon {
+			white-space: nowrap;
+
+			&::before {
+				content: ' ' / '';
+			}
+		}
+	}
+}
+
 @mixin decorationHover {
 	--components-link-textDecoration: none;
 	--components-link-text-textDecoration: none;

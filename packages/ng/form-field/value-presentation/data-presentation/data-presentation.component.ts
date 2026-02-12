@@ -1,4 +1,4 @@
-import { ChangeDetectionStrategy, Component, input, ViewEncapsulation } from '@angular/core';
+import { booleanAttribute, ChangeDetectionStrategy, Component, input, ViewEncapsulation } from '@angular/core';
 import { PortalContent, PortalDirective } from '@lucca-front/ng/core';
 
 @Component({
@@ -11,4 +11,5 @@ import { PortalContent, PortalDirective } from '@lucca-front/ng/core';
 })
 export class DataPresentationComponent {
 	readonly label = input.required<PortalContent>();
+	readonly noValue = input(false, { transform: booleanAttribute });
 }

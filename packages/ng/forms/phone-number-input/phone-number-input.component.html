@@ -54,5 +54,9 @@
 </fieldset>
 
 <ng-container *luPresentationDisplayDefault>
-	<a class="presentation-description-definition-link" href="tel:{{ currentValue() }}">{{ currentValue() }}</a>
+	@if (currentValue()) {
+		<a class="presentation-description-definition-link" href="tel:{{ currentValue() }}">{{ currentValue() }}</a>
+	} @else {
+		<div aria-hidden="true" data-content-before="–"></div>
+	}
 </ng-container>

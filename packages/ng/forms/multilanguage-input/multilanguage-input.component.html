@@ -51,4 +51,10 @@
 		</div>
 	</div>
 </div>
-<ng-container *luPresentationDisplayDefault>{{ presentationValue() }}</ng-container>
+<ng-container *luPresentationDisplayDefault>
+	@if (presentationValue()) {
+		{{ presentationValue() }}
+	} @else {
+		<div aria-hidden="true" data-content-before="–"></div>
+	}
+</ng-container>

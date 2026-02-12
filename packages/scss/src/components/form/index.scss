@@ -69,11 +69,11 @@
 
 		&:not(lu-form-field) {
 			&:has(
-					.textField-input-value[aria-invalid='true'],
-					.timePicker-fieldset-group-textfield-input[aria-invalid='true'],
-					.simpleSelect-field-input[aria-invalid='true'],
-					.multipleSelect-displayer-search[aria-invalid='true']
-				) {
+				.textField-input-value[aria-invalid='true'],
+				.timePicker-fieldset-group-textfield-input[aria-invalid='true'],
+				.simpleSelect-field-input[aria-invalid='true'],
+				.multipleSelect-displayer-search[aria-invalid='true']
+			) {
 				@include invalid;
 			}
 		}
@@ -102,17 +102,18 @@
 			}
 		}
 
-		&:has(.formLabel.pr-u-mask) {
-			&:not(:has(.inlineMessage)) {
-				@include hiddenLabel;
+		// no gap for checkboxes in tables in particular
+		&:has(.checkboxField-input) {
+			&:has(.formLabel.pr-u-mask) {
+				&:not(:has(.inlineMessage)) {
+					@include hiddenLabel;
+				}
 			}
 		}
 	}
 }
 
 // deprecated
-
-// stylelint-disable no-duplicate-selectors -- deprecated
 .form {
 	@layer components {
 		@include vars;
@@ -189,4 +190,3 @@
 		}
 	}
 }
-// stylelint-enable

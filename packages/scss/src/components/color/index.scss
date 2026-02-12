@@ -19,12 +19,12 @@
 			@include XL;
 		}
 
-		[aria-selected="true"] & {
+		[aria-selected='true'] & {
 			@include selected;
 		}
 
 		.optionItem.is-highlighted &,
-		[role="listbox"] .optionItem:hover & {
+		[role='listbox'] .optionItem:hover & {
 			@include highlighted;
 		}
 	}

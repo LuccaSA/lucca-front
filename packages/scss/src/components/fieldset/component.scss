@@ -31,6 +31,7 @@
 			background-color: transparent;
 			text-align: start;
 			display: flex;
+			flex-wrap: var(--components-fieldset-title-content-flexWrap);
 			align-items: flex-start;
 			justify-content: space-between;
 			gap: var(--components-fieldset-gap);

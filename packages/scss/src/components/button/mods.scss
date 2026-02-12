@@ -63,7 +63,7 @@
 	&:hover {
 		--components-button-boxShadow: var(--pr-t-elevation-shadow-button), 0 0 0 var(--commons-divider-width) var(--palettes-300, var(--palettes-neutral-300));
 		--components-button-color: var(--palettes-700, var(--palettes-neutral-700));
-		--components-button-backgroundColor: var(--palettes-50, var(--palettes-neutral-50))
+		--components-button-backgroundColor: var(--palettes-50, var(--palettes-neutral-50));
 	}
 
 	&:active {
@@ -263,11 +263,12 @@
 	--components-button-backgroundColor: transparent;
 	--components-button-color: var(--palettes-neutral-0);
 
-	background-image: linear-gradient(
-		-135deg,
-		color-mix(in srgb, var(--palettes-AI-500) var(--components-button-AI-background-opacity), transparent),
-		color-mix(in srgb, var(--palettes-brand-400) var(--components-button-AI-background-opacity), transparent)
-	);
+	background-image:
+		linear-gradient(
+			-135deg,
+			color-mix(in srgb, var(--palettes-AI-500) var(--components-button-AI-background-opacity), transparent),
+			color-mix(in srgb, var(--palettes-brand-400) var(--components-button-AI-background-opacity), transparent)
+		);
 
 	&:hover,
 	&:focus-visible {

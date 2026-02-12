@@ -17,12 +17,12 @@ import {
 	TextInputComponent,
 } from '@lucca-front/ng/forms';
 import { PhoneNumberInputComponent } from '@lucca-front/ng/forms/phone-number-input';
+import { RichTextInputComponent, RichTextInputToolbarComponent, RichTextPluginTagComponent } from '@lucca-front/ng/forms/rich-text-input';
+import { provideLuRichTextMarkdownFormatter } from '@lucca-front/ng/forms/rich-text-input/formatters/markdown';
 import { LuMultiSelectInputComponent } from '@lucca-front/ng/multi-select';
 import { LuSimpleSelectInputComponent } from '@lucca-front/ng/simple-select';
 import { applicationConfig, Meta, moduleMetadata, StoryObj } from '@storybook/angular';
 import { cleanupTemplate, generateInputs } from 'stories/helpers/stories';
-import { RichTextInputComponent, RichTextInputToolbarComponent, RichTextPluginTagComponent } from '@lucca-front/ng/forms/rich-text-input';
-import { provideLuRichTextMarkdownFormatter } from '@lucca-front/ng/forms/rich-text-input/formatters/markdown';
 
 export default {
 	title: 'QA/Forms/Presentation',
@@ -73,7 +73,7 @@ export const Basic: StoryObj = {
 					},
 					{
 						cultureCode: 'fr-FR',
-						value: 'Valeur en Français',
+						value: 'Valeur en français',
 					},
 					{
 						cultureCode: 'en-EN',
@@ -240,7 +240,7 @@ export const Basic: StoryObj = {
 		tooltip: '',
 		size: '',
 		booleanValue: false,
-		stringValue: 'example string value',
+		stringValue: 'Example string value',
 		richTextContent: 'Lorem **ipsum** dolor {{tag1}} *italic* {{unregisteredTag}} and regular {{tag2}} trailing text\nLine 2\n\nParagraph 2\n\n\n\nParagraph 3',
 		dateValue: new Date(),
 		numberValue: 123456789,
@@ -265,7 +265,7 @@ export const GlobalToForm: StoryObj = {
 					},
 					{
 						cultureCode: 'fr-FR',
-						value: 'Valeur en Français',
+						value: 'Valeur en français',
 					},
 					{
 						cultureCode: 'en-EN',
@@ -426,7 +426,7 @@ export const GlobalToForm: StoryObj = {
 		tooltip: '',
 		size: '',
 		booleanValue: false,
-		stringValue: 'example string value',
+		stringValue: 'Example string value',
 		dateValue: new Date(),
 		numberValue: 123456789,
 		phoneNumberValue: '+33700000000',

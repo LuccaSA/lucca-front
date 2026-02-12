@@ -16,7 +16,7 @@
 					luInput
 					luInputStandalone
 					class="textField-input-value dateRangeField-fieldset-input-value"
-					[value]="startLabel()"
+					[ngModel]="startLabel()"
 					(input)="textInputChange(start.value, 'start')"
 					(blur)="inputBlur()"
 					(focus)="inputFocused.set(true); editedField.set(0); highlightedField.set(0)"
@@ -40,9 +40,9 @@
 					luInput
 					luInputStandalone
 					class="textField-input-value dateRangeField-fieldset-input-value"
-					[value]="endLabel()"
+					[ngModel]="endLabel()"
 					(input)="textInputChange(start.value, 'end')"
-					(blur)="inputBlur(); fixOrderIfNeeded()"
+					(blur)="inputBlur()"
 					(focus)="inputFocused.set(true); editedField.set(1); highlightedField.set(1)"
 					aria-haspopup="true"
 					role="combobox"
@@ -166,9 +166,17 @@
 	}
 </ng-container>
 
-<ng-container *luPresentationDisplay>
+<ng-container *luPresentationDisplayDefault>
 	<span class="pr-u-mask">{{ intl().from }}</span>
-	{{ startLabel() }}
+	@if (startLabel()) {
+		{{ startLabel() }}
+	} @else {
+		<div aria-hidden="true" data-content-before="–"></div>
+	}
 	<lu-icon [icon]="'arrowRight'" size="XS" [alt]="intl().to" />
-	{{ endLabel() }}
+	@if (endLabel()) {
+		{{ endLabel() }}
+	} @else {
+		<div aria-hidden="true" data-content-before="–"></div>
+	}
 </ng-container>

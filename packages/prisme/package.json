@@ -1,0 +1,32 @@
+{
+  "name": "@lucca/prisme",
+  "version": "0.0.0",
+  "description": "Design system made by @lucca",
+  "repository": {
+    "type": "git",
+    "url": "git+https://github.com/LuccaSA/lucca-front.git"
+  },
+  "license": "MIT",
+  "public": true,
+  "keywords": [
+    "lucca",
+    "angular",
+    "prisme"
+  ],
+  "author": "Guilde Front Lucca <guilde-front@lucca.fr>",
+  "peerDependencies": {
+    "@angular/common": "^21.0.0",
+    "@angular/core": "^21.0.0",
+    "@angular/cdk": "^21.0.0",
+    "@angular/animations": "^21.0.0",
+    "@types/dompurify": "^3.0.0",
+    "@lucca-front/icons": "*",
+    "@lucca-front/scss": "*",
+    "isomorphic-dompurify": "^2.11.0",
+    "date-fns": "^3.6.0",
+    "rxjs": "^7.8.0"
+  },
+  "bugs": {
+    "url": "https://github.com/LuccaSA/lucca-front/issues"
+  }
+}

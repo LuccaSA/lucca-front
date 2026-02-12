@@ -15,7 +15,7 @@
 	box-shadow: var(--pr-t-elevation-shadow-overlay);
 	margin: auto;
 	flex-direction: column;
-	display: flex !important;
+	display: flex;
 	position: fixed !important;
 	max-inline-size: var(--components-dialog-maxWidth) !important;
 	max-block-size: var(--components-dialog-maxHeight) !important;
@@ -36,14 +36,14 @@
 			&:has(.dialog-inside-formOptional, .dialog-formOptional, .dialog-form) {
 				display: contents;
 
-				.dialog-inside-formOptional,
-				.dialog-formOptional,
-				.dialog-form {
+				.dialog-formOptional, // stylelint-disable-line selector-disallowed-list -- .dialog-formOptional is deprecated
+				.dialog-form, // stylelint-disable-line selector-disallowed-list -- .dialog-form is deprecated
+				.dialog-inside-formOptional {
 					display: grid;
 					grid-template-areas:
-						'header'
+						'header  '
 						'overflow'
-						'footer';
+						'footer  ';
 					grid-template-rows: auto 1fr auto;
 					flex-grow: 1;
 					min-block-size: 0;
@@ -62,9 +62,9 @@
 			&:not(:has(.dialog-inside-formOptional, .dialog-formOptional, .dialog-form)) {
 				display: grid;
 				grid-template-areas:
-					'header'
+					'header  '
 					'overflow'
-					'footer';
+					'footer  ';
 				grid-template-rows: auto 1fr auto;
 				flex-grow: 1;
 				min-block-size: 0;
