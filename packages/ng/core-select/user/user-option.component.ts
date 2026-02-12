@@ -45,7 +45,7 @@ import { LuCoreSelectUsersDirective } from './users.directive';
 export class LuUserOptionComponent {
 	protected context = inject<ILuOptionContext<LuCoreSelectWithAdditionnalInformation<LuCoreSelectUser>>>(LU_OPTION_CONTEXT);
 	protected userDirective = inject(LuCoreSelectUsersDirective);
-	protected intl = input(...intlInputOptions(LU_CORE_SELECT_USER_TRANSLATIONS));
+	readonly intl = input(...intlInputOptions(LU_CORE_SELECT_USER_TRANSLATIONS));
 	protected hasEmptyClue$ = this.userDirective.select.clueChange$.pipe(
 		startWith(this.userDirective.select.clue),
 		map((clue) => !clue),

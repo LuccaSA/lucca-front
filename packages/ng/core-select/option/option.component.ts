@@ -40,7 +40,7 @@ export const MAGIC_OPTION_SCROLL_DELAY = 15;
 })
 export class LuOptionComponent<T> implements AfterViewInit, OnDestroy, OnInit {
 	protected selectableItem = inject(CoreSelectPanelElement);
-	protected intl = input(...intlInputOptions(LU_OPTION_TRANSLATIONS));
+	readonly intl = input(...intlInputOptions(LU_OPTION_TRANSLATIONS));
 
 	@HostBinding('class.optionItem')
 	public hasOptionItemClass = true;
