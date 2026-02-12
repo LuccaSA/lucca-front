@@ -11,7 +11,7 @@ export abstract class BasePickerComponent implements ControlValueAccessor {
 	onChange: (value: ISO8601Time | ISO8601Duration) => void;
 	onTouched: () => void;
 
-	step = input<ISO8601Duration>(null);
+	step = input<ISO8601Duration | null>(null);
 
 	disabled = model(false);
 
@@ -36,7 +36,7 @@ export abstract class BasePickerComponent implements ControlValueAccessor {
 
 	abstract getHoursIncrement(): number;
 
-	abstract getMinutesIncrement(): number;
+	abstract getMinutesIncrement(): number | null;
 
 	protected focusPart(type: 'hours' | 'minutes') {
 		this.onTouched?.();
