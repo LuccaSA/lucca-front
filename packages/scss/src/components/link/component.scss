@@ -1,22 +1,47 @@
+@use '@lucca-front/scss/src/commons/utils/namespace';
 @use '@lucca-front/scss/src/commons/utils/a11y';
 
-@mixin component {
+@mixin component($atRoot: namespace.$defaultAtRoot) {
 	background-color: transparent;
-	border: 0;
-	color: var(--commons-text-link-color);
-	cursor: pointer;
+	color: var(--components-link-color);
+	cursor: var(--components-link-cursor);
 	font-family: inherit;
+	border: 0;
 	margin: 0;
 	padding: 0;
-	text-decoration: underline;
+	text-decoration: var(--components-link-textDecoration);
 
 	&:not(:disabled, .is-disabled) {
 		&:hover {
-			color: var(--commons-text-link-hover);
+			color: var(--components-link-color-hover);
 		}
 
 		&:focus-visible {
 			@include a11y.focusVisible($borderRadius: var(--pr-t-border-radius-small));
+		}
+	}
+
+	.lucca-icon {
+		text-decoration: none;
+		font-size: 1em;
+		vertical-align: baseline;
+		position: relative;
+		top: 0.075rem;
+		margin-inline-start: var(--components-link-icon-marginInlineStart);
+	}
+
+	.link-text {
+		text-decoration: var(--components-link-text-textDecoration);
+	}
+
+	@at-root ($atRoot) {
+		.link-icon {
+			white-space: nowrap;
+
+			&::before {
+				// stylelint-disable-next-line no-irregular-whitespace
+				content: ' ' / '';
+			}
 		}
 	}
 }
