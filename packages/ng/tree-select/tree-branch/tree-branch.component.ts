@@ -1,6 +1,6 @@
 import { booleanAttribute, ChangeDetectionStrategy, Component, inject, input, output, TemplateRef, Type, viewChild, ViewEncapsulation } from '@angular/core';
-import { ALuSelectInputComponent, LuIsOptionSelectedPipe, LuOptionComparer, LuOptionContext, TreeNode, ɵCoreSelectPanelElement, ɵLuOptionComponent } from '@lucca-front/ng/core-select';
 import { takeUntilDestroyed } from '@angular/core/rxjs-interop';
+import { ALuSelectInputComponent, LuIsOptionSelectedPipe, LuOptionComparer, LuOptionContext, TreeNode, ɵCoreSelectPanelElement, ɵLuOptionComponent } from '@lucca-front/ng/core-select';
 
 @Component({
 	selector: 'lu-tree-branch',
@@ -37,13 +37,13 @@ export class TreeBranchComponent<T> {
 
 	constructor() {
 		if (this.selectInputComponent.selectChildren$) {
-			this.selectInputComponent.selectChildren$.pipe(takeUntilDestroyed()).subscribe(() => {
-				if (this.rootOptionRef().isHighlighted()) {
+			this.selectInputComponent.selectChildren$?.pipe(takeUntilDestroyed()).subscribe(() => {
+				if (this.rootOptionRef()?.isHighlighted()) {
 					this.selectOnlyChildren(this.branch());
 				}
 			});
-			this.selectInputComponent.selectParent$.pipe(takeUntilDestroyed()).subscribe(() => {
-				if (this.rootOptionRef().isHighlighted()) {
+			this.selectInputComponent.selectParent$?.pipe(takeUntilDestroyed()).subscribe(() => {
+				if (this.rootOptionRef()?.isHighlighted()) {
 					this.toggleOne.emit(this.branch().node);
 				}
 			});
@@ -51,7 +51,7 @@ export class TreeBranchComponent<T> {
 	}
 
 	toggle(branchData: TreeNode<T>): void {
-		if (this.simpleMode() || branchData.children.length === 0) {
+		if (this.simpleMode() || !branchData.children?.length) {
 			this.toggleOne.emit(branchData.node);
 		} else {
 			const flatOptions = this.flattenTree(branchData);
@@ -76,7 +76,7 @@ export class TreeBranchComponent<T> {
 
 	flattenTree(branch: TreeNode<T>, excludeRoot = false): T[] {
 		const result: T[] = excludeRoot ? [] : [branch.node];
-		if (branch.children.length > 0) {
+		if (branch.children?.length) {
 			result.push(...branch.children.map((child) => this.flattenTree(child)).flat());
 		}
 		return result;

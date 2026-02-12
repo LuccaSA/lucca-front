@@ -1,6 +1,6 @@
 import { ChangeDetectorRef, Directive, ElementRef, forwardRef, HostListener, input, Input, OnInit, Renderer2 } from '@angular/core';
 import { AbstractControl, NG_VALIDATORS, NG_VALUE_ACCESSOR, ValidationErrors, Validator } from '@angular/forms';
-import { ALuDateAdapter, ELuDateGranularity, intlInputOptions, LuDateGranularity } from '@lucca-front/ng/core';
+import { ALuDateAdapter, ELuDateGranularity, intlInputOptions, isNotNil, LuDateGranularity } from '@lucca-front/ng/core';
 import { ALuInput } from '@lucca-front/ng/input';
 import { LU_DATE_INPUT_TRANSLATIONS } from './date-input.translate';
 
@@ -77,11 +77,12 @@ export class LuDateInputDirective<D> extends ALuInput<D, HTMLInputElement> imple
 		// eslint-disable-next-line @typescript-eslint/no-unsafe-member-access
 		const text = event.target.value as string;
 		const value = this.parse(text);
-		this.setValue(value);
+		if (isNotNil(value)) {
+			this.setValue(value);
+		}
 	}
-	private parse(text: string): D {
-		const date = this._adapter.parse(text, this.granularity);
-		return date;
+	private parse(text: string): D | undefined {
+		return this._adapter.parse(text, this.granularity);
 	}
 	@HostListener('focus')
 	onFocus() {

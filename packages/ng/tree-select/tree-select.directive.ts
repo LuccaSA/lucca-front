@@ -29,9 +29,9 @@ export class TreeSelectDirective<T, V> implements TreeGenerator<T, TreeNode<T>> 
 					// item already in resultset
 					continue;
 				}
-				let parent: T | null;
+				let parent: T | null = null;
 				if (parentCache.has(item)) {
-					parent = parentCache.get(item);
+					parent = parentCache.get(item) ?? null;
 				} else {
 					parent = this.groupingFn()(item, items);
 					parentCache.set(item, parent);
@@ -48,7 +48,7 @@ export class TreeSelectDirective<T, V> implements TreeGenerator<T, TreeNode<T>> 
 				} else {
 					// If the parent is already in the resultset, we can add this
 					if (itemToNode.has(parent)) {
-						itemToNode.get(parent).children.push(itemNode);
+						itemToNode.get(parent)!.children?.push(itemNode);
 						itemToNode.set(item, itemNode);
 						handled.push(item);
 					}

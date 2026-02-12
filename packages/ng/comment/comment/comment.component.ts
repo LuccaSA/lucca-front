@@ -48,7 +48,7 @@ export class CommentComponent {
 
 	readonly size = computed(() => this.#parentBlock.size());
 
-	readonly contentIsHTML = computed(() => /<\/?[a-z][\s\S]*>/i.test(this.content()));
+	readonly contentIsHTML = computed(() => /<\/?[a-z][\s\S]*>/i.test(this.content() ?? ''));
 
 	readonly dateDisplay = computed(() => {
 		const formatted = this.#intlDateTimeFormat.format(this.date());
@@ -57,7 +57,7 @@ export class CommentComponent {
 
 	readonly role = computed(() => (this.#parentBlock.isSingleComment() ? null : 'listitem'));
 
-	get roleAttr(): string {
+	get roleAttr(): string | null {
 		return this.role();
 	}
 }

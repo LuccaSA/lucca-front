@@ -29,7 +29,7 @@ export class PageHeaderComponent {
 	readonly descriptionIsString = computed(() => this.isStringPortalContent(this.description()));
 	readonly labelIsString = computed(() => this.isStringPortalContent(this.label()));
 
-	public isStringPortalContent(message: PortalContent): message is string {
+	public isStringPortalContent(message: PortalContent | null): message is string {
 		return typeof message === 'string';
 	}
 }

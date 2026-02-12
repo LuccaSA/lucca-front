@@ -56,7 +56,7 @@ export class LuUserMeOptionDirective<U extends ILuUser = ILuUser> implements ILu
 	outOptions$: Observable<U[]>;
 
 	private _service: LuUserV3Service<U>;
-	private _viewRef: EmbeddedViewRef<{ $implicit: ILuUser }>;
+	private _viewRef: EmbeddedViewRef<{ $implicit: U }>;
 
 	constructor(
 		@Inject(ALuUserService) @Optional() @SkipSelf() hostService: LuUserV3Service<U>,
@@ -67,7 +67,7 @@ export class LuUserMeOptionDirective<U extends ILuUser = ILuUser> implements ILu
 		this._service = hostService || selfService;
 	}
 
-	me: ILuUser = undefined;
+	me: U | undefined = undefined;
 	private meDisplayed$ = new BehaviorSubject(false);
 	onOpen() {
 		this._service.getMe().subscribe((me) => {

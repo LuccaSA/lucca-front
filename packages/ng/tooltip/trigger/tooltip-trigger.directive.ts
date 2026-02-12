@@ -37,6 +37,8 @@ import { debounce, debounceTime, filter, map, tap } from 'rxjs/operators';
 import { LuTooltipPanelComponent } from '../panel';
 import { EllipsisRuler } from './ellipsis.ruler';
 
+type TooltipAction = 'open' | 'close';
+
 let nextId = 0;
 
 @Directive({
@@ -117,10 +119,10 @@ export class LuTooltipTriggerDirective implements OnDestroy, AfterContentChecked
 
 	readonly #hasEllipsis = toSignal(this.#hasEllipsis$, { initialValue: false });
 
-	readonly #action = signal<'open' | 'close' | null>(null);
-	readonly #realAction = linkedSignal<'open' | 'close' | null, 'open' | 'close' | null>({
+	readonly #action = signal<TooltipAction | null>(null);
+	readonly #realAction = linkedSignal<TooltipAction | null, TooltipAction | null>({
 		source: this.#action,
-		computation: (action, previous) => {
+		computation: (action, previous): TooltipAction | null => {
 			if (!action || action === 'close') {
 				return action;
 			}
@@ -128,12 +130,12 @@ export class LuTooltipTriggerDirective implements OnDestroy, AfterContentChecked
 			// We only filter open events because even if it's disabled while opened,
 			// we want the tooltip to be able to close itself no matter what
 			if (this.luTooltipDisabled()) {
-				return previous?.value;
+				return previous?.value ?? null;
 			}
 
 			// If not disabled, let's check for ellipsis if needed
 			if (this.luTooltipWhenEllipsis()) {
-				return this.#hasEllipsis() ? 'open' : previous.value;
+				return this.#hasEllipsis() ? 'open' : (previous?.value ?? null);
 			}
 
 			// If it's not disabled and is not triggered based on ellipsis, just return true
@@ -246,7 +248,7 @@ export class LuTooltipTriggerDirective implements OnDestroy, AfterContentChecked
 		this.#idEffectRef = ɵeffectWithDeps(
 			[this.ariaDescribedBy],
 			(ariaDescribedBy) => {
-				ref.instance.id.set(ariaDescribedBy);
+				ref.instance.id.set(ariaDescribedBy ?? '');
 			},
 			{ injector: this.#injector },
 		);
