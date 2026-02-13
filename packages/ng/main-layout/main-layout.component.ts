@@ -10,6 +10,7 @@ import { booleanAttribute, ChangeDetectionStrategy, Component, input, ViewEncaps
 		class: 'mainLayout',
 		role: 'main',
 		id: 'main-content',
+		tabindex: '-1',
 	},
 })
 export class MainLayoutComponent {
