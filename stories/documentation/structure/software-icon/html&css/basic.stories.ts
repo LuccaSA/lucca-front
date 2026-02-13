@@ -29,10 +29,12 @@ export default {
 				'engagement',
 				'training',
 				'recruitment',
+				'mood',
 				// Employee Administration
 				'analytics',
 				'employee-administration',
 				'shared-documents',
+				'faces',
 				// Spend Management
 				'business-expenses',
 				'invoices',
@@ -44,8 +46,6 @@ export default {
 				'benefits',
 				'payroll-assistant',
 				// Lucca
-				'mood',
-				'faces',
 				'administration',
 				'cloud-control',
 				'lucca',
