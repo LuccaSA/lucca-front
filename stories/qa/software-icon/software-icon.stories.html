@@ -1,0 +1,65 @@
+<table class="demo-QAtable">
+	<tbody>
+		<tr>
+			<td></td>
+			<td>
+				<div class="demo-QAtable-list">HTML</div>
+			</td>
+			<td>
+				<div class="demo-QAtable-list">Angular</div>
+			</td>
+		</tr>
+		<tr>
+			<td>Default</td>
+			<td>
+				<div class="demo-QAtable-list">
+					@for (softwareIcon of softwareIconList; track softwareIcon) {
+						<div
+							class="softwareIcon"
+							aria-hidden="true"
+							[innerHtml]="'https://cdn.lucca.fr/transverse/prisme/visuals/software-icon/' + softwareIcon + '.svg' | luSafeExternalSvg"
+						></div>
+					}
+				</div>
+			</td>
+			<td>
+				<div class="demo-QAtable-list">
+					@for (softwareIcon of softwareIconList; track softwareIcon) {
+						<lu-software-icon [icon]="softwareIcon" />
+					}
+				</div>
+			</td>
+		</tr>
+		<tr>
+			<td>Disabled</td>
+			<td>
+				<div class="demo-QAtable-list"></div>
+			</td>
+			<td>
+				<div class="demo-QAtable-list">
+					@for (softwareIcon of softwareIconList; track softwareIcon) {
+						<lu-software-icon [icon]="softwareIcon" disabled />
+					}
+				</div>
+			</td>
+		</tr>
+		<tr>
+			<td>Size</td>
+			<td>
+				<div class="demo-QAtable-list"></div>
+			</td>
+			<td>
+				<div class="demo-QAtable-list">
+					<lu-software-icon [icon]="'invoices'" size="XXS" />
+					<lu-software-icon [icon]="'absences'" size="XS" />
+					<lu-software-icon [icon]="'payslip'" size="S" />
+					<lu-software-icon [icon]="'benefits'" />
+					<lu-software-icon [icon]="'office'" size="L" />
+				</div>
+			</td>
+		</tr>
+	</tbody>
+</table>
+
+<!-- To tell the ui-diff tool that the page has finished rendering -->
+<span id="ready"></span>
