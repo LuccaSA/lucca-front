@@ -63,20 +63,20 @@ export default {
 			template: `<lu-filter-pill label="Inclure les collaborateurs partis">
 	<lu-checkbox-input [ngModel]="false"></lu-checkbox-input>
 </lu-filter-pill>
-<lu-filter-pill label="With Select all" name="legume">
-	<lu-multi-select [ngModel]="{ mode: 'none' }" ${clearableProperty}	[options]="legumes | filterLegumes:clue" [totalCount]="legumes.length" (clueChange)="clue = $event" filterPillLabelPlural="légumes" withSelectAll withSelectAllDisplayerLabel="légumes" />
+<lu-filter-pill label="Legumes" name="legume">
+	<lu-multi-select [ngModel]="[]" ${clearableProperty}	[options]="legumes | filterLegumes:clue" [totalCount]="legumes.length" (clueChange)="clue = $event" filterPillLabelPlural="légumes" />
 </lu-filter-pill>
-<lu-filter-pill label="Département" name="department">
-	<lu-simple-select [ngModel]="null" ${clearableProperty} departments></lu-simple-select>
+<lu-filter-pill label="Legume" name="department">
+	<lu-simple-select [ngModel]="null" ${clearableProperty} [options]="legumes | filterLegumes:clue" />
 </lu-filter-pill>
 <lu-filter-pill label="Départements" name="departments">
 	<lu-multi-select [ngModel]="[]" ${clearableProperty}filterPillLabelPlural="départements" departments />
 </lu-filter-pill>
 <lu-filter-pill label="Tree simple">
-	<lu-simple-select [ngModel]="null" ${clearableProperty}[treeSelect]="groupingFn" [options]="legumes"></lu-simple-select>
+	<lu-simple-select [ngModel]="null" ${clearableProperty}[treeSelect]="groupingFn" [options]="legumes" />
 </lu-filter-pill>
 <lu-filter-pill label="Tree multi">
-	<lu-multi-select [ngModel]="[]" ${clearableProperty}filterPillLabelPlural="légumes" [treeSelect]="groupingFn" [options]="legumes" ></lu-multi-select>
+	<lu-multi-select [ngModel]="[]" ${clearableProperty}filterPillLabelPlural="légumes" [treeSelect]="groupingFn" [options]="legumes" />
 </lu-filter-pill>
 <lu-filter-pill label="Date de début">
 	<lu-date-input [ngModel]="null" ${clearableProperty}/>
