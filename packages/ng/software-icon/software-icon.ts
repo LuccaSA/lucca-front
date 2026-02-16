@@ -10,10 +10,12 @@ export const SoftwareIconList = [
 	'engagement',
 	'training',
 	'recruitment',
+	'mood',
 	// Employee Administration
 	'analytics',
 	'employee-administration',
 	'shared-documents',
+	'faces',
 	// Spend Management
 	'business-expenses',
 	'invoices',
@@ -25,8 +27,7 @@ export const SoftwareIconList = [
 	'benefits',
 	'payroll-assistant',
 	// Lucca
-	'mood',
-	'faces',
+
 	'administration',
 	'cloud-control',
 	'lucca',
