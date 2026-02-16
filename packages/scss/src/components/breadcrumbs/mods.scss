@@ -11,7 +11,8 @@
 
 			&:first-child {
 				// Second selector to get rid of breadcrumbs-list-item-action on angular component
-				.breadcrumbs-list-item-action, .breadcrumbs-list-item > a {
+				.breadcrumbs-list-item-action,
+				.breadcrumbs-list-item > a {
 					&::before {
 						@include icon.generate('arrow_left');
 

@@ -15,6 +15,6 @@
 		-webkit-font-smoothing: antialiased;
 		text-transform: none;
 	} @else {
-		@error "“#{$name}” wasn’t found in “@lucca-front/icons config.$icons” map.";
+		@error '“#{$name}” wasn’t found in “@lucca-front/icons config.$icons” map.';
 	}
 }

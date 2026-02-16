@@ -36,7 +36,7 @@
 		}
 
 		&.mod-verticalAlignMiddle {
-			@includeverticalAlignMiddle;
+			@include verticalAlignMiddle;
 		}
 
 		&.mod-layoutFixed {
@@ -91,7 +91,7 @@
 		}
 	}
 
-		:is(.dataTable-body-row, .dataTable-foot-row) {
+	:is(.dataTable-body-row, .dataTable-foot-row) {
 		&:has([selectable]),
 		&.mod-selectable {
 			&:has(input:checked) {

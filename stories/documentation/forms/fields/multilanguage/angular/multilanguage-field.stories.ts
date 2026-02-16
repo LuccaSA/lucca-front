@@ -118,7 +118,7 @@ export const Basic: StoryObj<
 						},
 						{
 							cultureCode: 'fr-FR',
-							value: 'Valeur en Français',
+							value: 'Valeur en français',
 						},
 						{
 							cultureCode: 'en-EN',

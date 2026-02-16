@@ -12,15 +12,20 @@ import { createTestStory, getStoryGenerator, useDocumentationStory } from 'stori
 import { expect, screen, userEvent, within } from 'storybook/test';
 import { waitForAngular } from '../../../helpers/test';
 import { colorDecoratives50, colorDecoratives500, colorLucca, colorNeutral, colorPickerStory, FilterColorsPipe, LuCoreColorPickerInputStoryComponent } from './select.utils';
+import { StoryModelDisplayComponent } from '../../../helpers/story-model-display.component';
 
 export type LuColorPickerInputStoryComponent = LuCoreColorPickerInputStoryComponent & {
 	selectedColor: ColorOption | null;
+	presentation: boolean;
 } & LuSimpleSelectInputComponent<ColorOption>;
 
 const generateStory = getStoryGenerator<LuColorPickerInputStoryComponent>({
 	decorators: [
 		applicationConfig({
 			providers: [{ provide: LOCALE_ID, useValue: 'fr-FR' }],
+		}),
+		moduleMetadata({
+			imports: [StoryModelDisplayComponent],
 		}),
 	],
 	...colorPickerStory,
@@ -63,9 +68,11 @@ const basePlay = async ({ canvasElement, step }) => {
 export const Basic = generateStory({
 	name: 'Basic',
 	description: '',
-	template: `<lu-form-field label="Décoratives 500" [size]="size === '' ? null : size">
+	template: `<lu-form-field [presentation]="presentation" label="Décoratives 500" [size]="size === '' ? null : size">
 	<lu-color-input [colors]="colors" [(ngModel)]="selectedColor" [clearable]="clearable" [compact]="compact" />
-</lu-form-field>`,
+</lu-form-field>
+<pr-story-model-display>{{selectedColor | json}}</pr-story-model-display>
+`,
 	storyPartial: {
 		args: {
 			colors: colorDecoratives500,
@@ -78,7 +85,7 @@ export const BasicTEST = createTestStory(Basic, basePlay);
 export const Decorative = generateStory({
 	name: 'Decorative Color',
 	description: '',
-	template: `<lu-form-field label="Décoratives 50" [size]="size === '' ? null : size">
+	template: `<lu-form-field [presentation]="presentation" label="Décoratives 50" [size]="size === '' ? null : size">
 	<lu-color-input [colors]="colors" [(ngModel)]="selectedColor" [clearable]="clearable" [compact]="compact" />
 </lu-form-field>`,
 	storyPartial: {
@@ -91,7 +98,7 @@ export const Decorative = generateStory({
 export const Neutral = generateStory({
 	name: 'Neutral Color',
 	description: '',
-	template: `<lu-form-field label="Neutrales" [size]="size === '' ? null : size">
+	template: `<lu-form-field [presentation]="presentation" label="Neutrales" [size]="size === '' ? null : size">
 	<lu-color-input [colors]="colors" [(ngModel)]="selectedColor" [clearable]="clearable" [compact]="compact" />
 </lu-form-field>`,
 	storyPartial: {
@@ -104,7 +111,7 @@ export const Neutral = generateStory({
 export const Lucca = generateStory({
 	name: 'Lucca Color',
 	description: '',
-	template: `<lu-form-field label="lucca" [size]="size === '' ? null : size">
+	template: `<lu-form-field [presentation]="presentation" label="lucca" [size]="size">
 	<lu-color-input [colors]="colors" [(ngModel)]="selectedColor" [clearable]="clearable" [compact]="compact" />
 </lu-form-field>`,
 	storyPartial: {
@@ -136,6 +143,7 @@ const meta: Meta<LuColorPickerInputStoryComponent> = {
 		colors: [],
 		compact: false,
 		clearable: true,
+		presentation: false,
 	},
 	parameters: {
 		docs: useDocumentationStory(Basic),

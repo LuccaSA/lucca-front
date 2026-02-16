@@ -77,7 +77,7 @@ type BaseLuDialogConfig<C, TData = LuDialogData<C>> = {
 	/**
 	 * The size of the panel used for the dialog
 	 */
-	size?: 'XS' | 'S' | 'M' | 'L' | 'XL' | 'XXL' | 'fitContent' | `maxContent` | 'fullScreen';
+	size?: LuDialogSize;
 
 	/**
 	 * Should it be a modal (default), a drawer? a drawer from bottom?
@@ -91,3 +91,5 @@ type BaseLuDialogConfig<C, TData = LuDialogData<C>> = {
 };
 
 export type LuDialogConfig<T, TData = LuDialogData<T>> = [TData] extends [never] ? Omit<BaseLuDialogConfig<T, TData>, 'data'> : BaseLuDialogConfig<T, TData>;
+
+export type LuDialogSize = 'XS' | 'S' | 'M' | 'L' | 'XL' | 'XXL' | 'fitContent' | `maxContent` | 'fullScreen';

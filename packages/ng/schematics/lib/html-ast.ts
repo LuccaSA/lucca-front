@@ -88,9 +88,18 @@ export class HtmlAstVisitor<TNode extends TemplateNode> {
 					this.visit(cb, node.empty.children, node);
 				}
 			} else if (node instanceof currentSchematicContext.angularCompiler.TmplAstSwitchBlock) {
-				node.cases.forEach((caseNode) => {
-					this.visit(cb, caseNode.children, node);
-				});
+				if ('groups' in node) {
+					(node.groups as unknown[]).forEach((groupNode) => {
+						this.visit(cb, (groupNode as { children: TemplateNode[]}).children , node);
+					});
+				}
+				// TODO Remove when Angular 21 is no longer supported
+				if ('cases' in node) {
+					(node.cases as unknown[]).forEach((caseNode) => {
+						this.visit(cb, (caseNode as { children: TemplateNode[]}).children , node);
+					});
+				}
+
 			} else if (node instanceof currentSchematicContext.angularCompiler.TmplAstDeferredBlock || node instanceof currentSchematicContext.angularCompiler.TmplAstElement || node instanceof currentSchematicContext.angularCompiler.TmplAstTemplate) {
 				// Visit @defer and classic AST elements
 				this.visit(cb, node.children, node);

@@ -92,6 +92,7 @@
 
 @mixin withAction {
 	--components-dialog-insideHeaderAreas: 'container action close';
+	--components-dialog-insideHeaderColumns: 1fr auto auto;
 }
 
 @mixin stacked {

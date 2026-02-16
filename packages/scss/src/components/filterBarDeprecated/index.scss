@@ -1,5 +1,6 @@
 @use 'exports' as *;
 
+// stylelint-disable selector-disallowed-list -- Selectors are all deprecated.
 .filterBarDeprecated {
 	@layer components {
 		@include vars;

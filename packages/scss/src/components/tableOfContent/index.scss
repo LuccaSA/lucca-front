@@ -8,7 +8,8 @@
 }
 
 // Second selector to get rid of tableOfContent-list-item-action on angular component
-.tableOfContent-list-item-action, .tableOfContent-list-item > a  {
+.tableOfContent-list-item-action,
+.tableOfContent-list-item > a {
 	@layer mods {
 		&:not(.disabled, .is-disabled, [disabled]) {
 			&:is(:hover) {
