@@ -75,7 +75,7 @@ export default {
 			control: {
 				type: 'text',
 			},
-			description: 'Définie une valeur maximale.',
+			description: 'Définit une valeur maximale.',
 		},
 		forceMeridiemDisplay: {
 			options: [null, false, true],
@@ -84,15 +84,18 @@ export default {
 			},
 			description: '[v18.2]',
 		},
+		presentation: {
+			description: '[v21.1] Transforme le champ de formulaire en donnée textuelle non éditable.',
+		},
 	},
 } as Meta;
 
-export const Basic: StoryObj<TimePickerComponent & FormFieldComponent & { required: boolean }> = {
+export const Basic: StoryObj<TimePickerComponent & FormFieldComponent & { required: boolean; presentation: boolean }> = {
 	render: (args, { argTypes }) => {
-		const { label, hiddenLabel, tooltip, inlineMessage, inlineMessageState, size, forceMeridiemDisplay, ...inputArgs } = args;
+		const { label, hiddenLabel, tooltip, inlineMessage, inlineMessageState, size, forceMeridiemDisplay, presentation, ...inputArgs } = args;
 		return {
 			template: cleanupTemplate(`
-<lu-form-field [label]="labelID" [rolePresentationLabel]="true" ${generateInputs({ hiddenLabel, tooltip, inlineMessage, inlineMessageState, size }, argTypes)}>
+<lu-form-field [label]="labelID" [rolePresentationLabel]="true" ${generateInputs({ hiddenLabel, tooltip, inlineMessage, inlineMessageState, size, presentation }, argTypes)}>
 <lu-time-picker label="${label}" ${generateInputs(inputArgs, argTypes)} ${forceMeridiemDisplay !== null ? `[forceMeridiemDisplay]="${forceMeridiemDisplay}"` : ''} [(ngModel)]="example" />
 	<ng-template #labelID>
 			<span aria-hidden="true">${label}</span>
@@ -114,5 +117,6 @@ export const Basic: StoryObj<TimePickerComponent & FormFieldComponent & { requir
 		step: 'PT1M',
 		max: '23:59:59',
 		forceMeridiemDisplay: null,
+		presentation: false,
 	},
 };

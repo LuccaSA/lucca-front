@@ -13,16 +13,18 @@ export default {
 	title: 'Documentation/Structure/Bubble icon/HTML&CSS/Basic',
 	argTypes: {
 		direction: {
-			options: ['left', 'right', 'top', 'bottom'],
+			options: ['', 'left', 'right', 'top', 'bottom'],
 			control: {
 				type: 'select',
 			},
+			description: 'Définit une direction de la bulle. Aléatoire par défaut.',
 		},
 		size: {
 			options: ['S', '', 'L'],
 			control: {
 				type: 'select',
 			},
+			description: 'Modifie la taille du composant.',
 		},
 		palette: {
 			options: [
@@ -57,12 +59,17 @@ export default {
 			control: {
 				type: 'select',
 			},
+			description: 'Applique une palette de couleurs au composant.',
 		},
 		icon: {
 			options: IconsList.filter((i) => !i.deprecated).map((i) => i.icon),
 			control: {
 				type: 'select',
 			},
+			description: "Modifie le glyphe de l'icône.",
+		},
+		alt: {
+			description: "Information restituée par le lecteur d'écran.",
 		},
 	},
 } as Meta;

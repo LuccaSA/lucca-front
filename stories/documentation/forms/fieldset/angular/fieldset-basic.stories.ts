@@ -53,13 +53,16 @@ export default {
 			},
 			description: 'Ajoute un sous-titre au fieldset.',
 		},
+		presentation: {
+			description: '[v21.1] Transforme le champ de formulaire en donnée textuelle non éditable.',
+		},
 	},
 	decorators: [
 		moduleMetadata({
 			imports: [FieldsetComponent, GridComponent, GridColumnComponent, FormFieldComponent, TextInputComponent, FormsModule, ButtonComponent],
 		}),
 	],
-	render: ({ expanded, size, helper, action, withAction, ...args }, { argTypes }) => {
+	render: ({ expanded, size, helper, action, withAction, presentation, ...args }, { argTypes }) => {
 		const expandedParam = expanded ? ` [expanded]="true"` : ``;
 		const helperParam = helper ? ` helper="${helper}"` : ``;
 		const sizeParam = size ? ` size="S"` : ``;
@@ -77,12 +80,12 @@ ${portalSample}
 <lu-fieldset${helperParam}${expandedParam}${sizeParam}${actionParam}${generateInputs(args, argTypes)}>
 	<lu-grid mode="form">
 		<lu-grid-column colspan="4" [responsive]="column">
-			<lu-form-field label="Label">
+			<lu-form-field label="Label"${generateInputs({ presentation }, argTypes)}>
 				<lu-text-input type="text" [(ngModel)]="example1" />
 			</lu-form-field>
 		</lu-grid-column>
 		<lu-grid-column colspan="4" [responsive]="column">
-			<lu-form-field label="Label">
+			<lu-form-field label="Label"${generateInputs({ presentation }, argTypes)}>
 				<lu-text-input type="text" [(ngModel)]="example2" />
 			</lu-form-field>
 		</lu-grid-column>
@@ -92,7 +95,7 @@ ${portalSample}
 	},
 } as Meta;
 
-export const Basic: StoryObj<FieldsetComponent & { content: string; withAction: boolean }> = {
+export const Basic: StoryObj<FieldsetComponent & { content: string; withAction: boolean; presentation: boolean }> = {
 	args: {
 		heading: 'Title',
 		helper: '',
@@ -101,5 +104,6 @@ export const Basic: StoryObj<FieldsetComponent & { content: string; withAction: 
 		expanded: false,
 		horizontal: false,
 		withAction: false,
+		presentation: false,
 	},
 };

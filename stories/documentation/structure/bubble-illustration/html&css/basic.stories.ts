@@ -125,12 +125,14 @@ export default {
 			control: {
 				type: 'select',
 			},
+			description: "Modifie l'illustration.",
 		},
 		size: {
 			options: ['S', '', 'L'],
 			control: {
 				type: 'select',
 			},
+			description: 'Modifie la taille du composant.',
 		},
 		palette: {
 			options: [
@@ -165,6 +167,10 @@ export default {
 			control: {
 				type: 'select',
 			},
+			description: 'Applique une palette de couleurs au composant.',
+		},
+		action: {
+			description: "Ajoute une icône d'action (+) à l'illustration.",
 		},
 	},
 } as Meta;

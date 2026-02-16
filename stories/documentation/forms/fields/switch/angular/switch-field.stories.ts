@@ -53,12 +53,15 @@ export default {
 			},
 			description: 'Marque le champ comme obligatoire.',
 		},
+		presentation: {
+			description: '[v21.1] Transforme le champ de formulaire en donnée textuelle non éditable.',
+		},
 	},
 } as Meta;
 
 export const Basic: StoryObj<SwitchInputComponent & FormFieldComponent & { required: boolean }> = {
 	render: (args, { argTypes }) => {
-		const { label, hiddenLabel, tooltip, inlineMessage, inlineMessageState, size, ...inputArgs } = args;
+		const { label, hiddenLabel, tooltip, inlineMessage, inlineMessageState, size, presentation, ...inputArgs } = args;
 		return {
 			props: {
 				example: false,
@@ -71,6 +74,7 @@ export const Basic: StoryObj<SwitchInputComponent & FormFieldComponent & { requi
 					inlineMessage,
 					inlineMessageState,
 					size,
+					presentation,
 				},
 				argTypes,
 			)}>
@@ -89,5 +93,6 @@ export const Basic: StoryObj<SwitchInputComponent & FormFieldComponent & { requi
 		required: true,
 		inlineMessage: 'Helper text',
 		inlineMessageState: 'default',
+		presentation: false,
 	},
 };
