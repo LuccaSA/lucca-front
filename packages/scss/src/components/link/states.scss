@@ -1,4 +1,12 @@
 @mixin disabled {
-	color: var(--pr-t-color-text-disabled);
-	cursor: not-allowed;
+	--components-link-color: var(--pr-t-color-text-disabled);
+	--components-link-cursor: not-allowed;
+}
+
+@mixin decorationHoverHovered {
+	--components-link-text-textDecoration: underline;
+}
+
+@mixin decorationHoverHoveredLegacy {
+	--components-link-textDecoration: underline;
 }
