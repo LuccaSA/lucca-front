@@ -1,6 +1,7 @@
 <ng-template #radioContent>
 	<label luFormLabel [tag]="tag()" [class.inputFramed-header-label]="framed()" attr.id="{{ id }}-label" attr.for="{{ id }}-input"
-		><ng-container *ngTemplateOutlet="contentProjection" /></label>
+		><ng-container *ngTemplateOutlet="contentProjection"
+	/></label>
 	<span class="radioField">
 		<input
 			[formControl]="formControl"
