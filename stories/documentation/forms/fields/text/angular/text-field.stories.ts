@@ -1,4 +1,5 @@
 import { AsyncPipe } from '@angular/common';
+import { LOCALE_ID } from '@angular/core';
 import { FormsModule, ReactiveFormsModule } from '@angular/forms';
 import { BrowserAnimationsModule } from '@angular/platform-browser/animations';
 import { FormFieldComponent } from '@lucca-front/ng/form-field';
@@ -7,7 +8,6 @@ import { applicationConfig, Meta, moduleMetadata, StoryObj } from '@storybook/an
 import { HiddenArgType } from 'stories/helpers/common-arg-types';
 import { cleanupTemplate, generateInputs } from 'stories/helpers/stories';
 import { StoryModelDisplayComponent } from 'stories/helpers/story-model-display.component';
-import { LOCALE_ID } from '@angular/core';
 
 export default {
 	title: 'Documentation/Forms/Fields/TextField/Angular',

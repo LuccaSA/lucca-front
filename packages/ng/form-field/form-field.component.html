@@ -9,23 +9,15 @@
 <ng-template #inputLayoutTpl>
 	@if (layout() === "fieldset" && !presentationMode()) {
 		<fieldset class="form-fieldset" [class.mod-inline]="inline()" [class.mod-S]="size() === 'S'">
-			<legend class="formLabel" [class.pr-u-mask]="hiddenLabel()" attr.aria-hidden="{{ hiddenLabel() }}">
+			<legend
+				luFormLabel
+				[tooltip]="tooltip()"
+				[tag]="tag()"
+				[required]="isInputRequired()"
+				[class.pr-u-mask]="hiddenLabel()"
+				[attr.aria-hidden]="hiddenLabel()"
+			>
 				<ng-container *luPortal="label()" />
-				@if (isInputRequired()) {
-					<sup class="formLabel-required" aria-hidden="true">*</sup>
-				}
-				@if (tooltip()) {
-					<lu-icon
-						class="formLabel-info"
-						icon="signHelp"
-						[alt]="'?'"
-						[luTooltip]="tooltip()"
-						[color]="invalidStatus() ? 'error' : 'inherit'"
-					/>
-				}
-				@if (tag()) {
-					<span class="tag formLabel-tag">{{ tag() }}</span>
-				}
 			</legend>
 			<ng-container *ngTemplateOutlet="projectionTpl" />
 			@if (inlineMessage() || (invalidStatus() ? errorInlineMessage() : false)) {
@@ -52,42 +44,21 @@
 			<ng-container *ngTemplateOutlet="projectionTpl" />
 		} @else {
 			<label
-				class="formLabel"
-				[class.inputFramed-header-label]="framed"
-				[class.is-error]="invalidStatus()"
-				[class.mod-counter]="counter() > 0"
-				id="{{ id() }}-label"
-				for="{{ id() }}"
+				luFormLabel
+				[counterStatus]="contentLength()"
+				[counterMax]="counter()"
+				[error]="invalidStatus()"
+				[tag]="tag()"
+				[tooltip]="tooltip()"
+				[required]="isInputRequired()"
+				[counterId]="`${id()}-counter`"
+				[attr.id]="`${id()}-label`"
+				[attr.for]="id()"
+				[attr.role]="rolePresentationLabel() ? 'presentation' : null"
 				[class.pr-u-mask]="hiddenLabel()"
-				attr.role="{{ labelIsPresentation() ? 'presentation' : null }}"
+				[class.inputFramed-header-label]="framed"
 			>
-				<ng-container *luPortal="label()" />
-				@if (isInputRequired()) {
-					<sup class="formLabel-required" aria-hidden="true">*</sup>
-				}
-				@if (tooltip()) {
-					<lu-icon
-						class="formLabel-info"
-						icon="signHelp"
-						[alt]="'?'"
-						[luTooltip]="tooltip()"
-						[color]="invalidStatus() ? 'error' : 'inherit'"
-					/>
-				}
-				@if (tag()) {
-					<span class="formLabel-tag tag">{{ tag() }}</span>
-				}
-				@if (counter() > 0) {
-					<span
-						class="formLabel-counter"
-						[class.pr-u-colorTextCritical]="contentLength() > counter()"
-						id="{{ id() }}-counter"
-						aria-live="polite"
-					>
-						<span aria-hidden="true">{{ contentLength() }}/{{ counter() }}</span>
-						<span class="pr-u-mask">{{ intl().counter | intlParams: { current: contentLength(), max: counter() } }}</span>
-					</span>
-				}
+				<span><ng-container *luPortal="label()" /></span>
 			</label>
 			@if (AI()) {
 				<div class="form-field-contentOptional">
