@@ -54,13 +54,13 @@ export class MarkdownFormatter extends RichTextFormatter {
 
 	override parse(editor: LexicalEditor, markdown?: string | null): void {
 		editor.update(() => {
-			$convertFromMarkdownString(DOMPurify.sanitize(markdown ?? ''), this.#transformers, null, true);
+			$convertFromMarkdownString(DOMPurify.sanitize(markdown ?? ''), this.#transformers, undefined, true);
 		});
 	}
 
 	override format(editor: LexicalEditor): string {
 		let result = '';
-		editor.getEditorState().read(() => (result = $convertToMarkdownString(this.#transformers, null, true)));
+		editor.getEditorState().read(() => (result = $convertToMarkdownString(this.#transformers, undefined, true)));
 		return DOMPurify.sanitize(result);
 	}
 }
