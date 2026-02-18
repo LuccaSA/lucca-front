@@ -13,11 +13,41 @@ export default {
 	],
 	render: (args) => {
 		const { heading, description, slotTop, hx } = args;
-		const paramIcon = args['icon'] === '' ? '' : 'icon="https://cdn.lucca.fr/lucca-front/assets/empty-states/message/' + args['icon'] + '.svg"';
-		const paramTopRightBackground = args['topRightBackground'] === '' ? '' : 'topRightBackground="https://cdn.lucca.fr/lucca-front/assets/empty-states/' + args['topRightBackground'] + '.svg"';
-		const paramTopRightForeground = args['topRightForeground'] === '' ? '' : 'topRightForeground="https://cdn.lucca.fr/lucca-front/assets/empty-states/' + args['topRightForeground'] + '.svg"';
-		const paramBottomLeftBackground = args['bottomLeftBackground'] === '' ? '' : 'bottomLeftBackground="https://cdn.lucca.fr/lucca-front/assets/empty-states/' + args['bottomLeftBackground'] + '.svg"';
-		const paramBottomLeftForeground = args['bottomLeftForeground'] === '' ? '' : 'bottomLeftForeground="https://cdn.lucca.fr/lucca-front/assets/empty-states/' + args['bottomLeftForeground'] + '.svg"';
+		const paramIllustrationAlt =
+			args['illustrationAlt'] === ''
+				? ``
+				: `
+	illustrationAlt="${args['illustrationAlt']}"`;
+		const paramIllustrationUrl =
+			args['illustrationUrl'] === ''
+				? ``
+				: `
+	illustrationUrl="${args['illustrationUrl']}"`;
+		const paramIcon =
+			args['icon'] === ''
+				? ``
+				: `
+	icon="https://cdn.lucca.fr/lucca-front/assets/empty-states/message/${args['icon']}.svg"`;
+		const paramTopRightBackground =
+			args['topRightBackground'] === ''
+				? ``
+				: `
+	topRightBackground="https://cdn.lucca.fr/lucca-front/assets/empty-states/${args['topRightBackground']}.svg"`;
+		const paramTopRightForeground =
+			args['topRightForeground'] === ''
+				? ``
+				: `
+	topRightForeground="https://cdn.lucca.fr/lucca-front/assets/empty-states/${args['topRightForeground']}.svg"`;
+		const paramBottomLeftBackground =
+			args['bottomLeftBackground'] === ''
+				? ``
+				: `
+	bottomLeftBackground="https://cdn.lucca.fr/lucca-front/assets/empty-states/${args['bottomLeftBackground']}.svg"`;
+		const paramBottomLeftForeground =
+			args['bottomLeftForeground'] === ''
+				? ``
+				: `
+	bottomLeftForeground="https://cdn.lucca.fr/lucca-front/assets/empty-states/${args['bottomLeftForeground']}.svg"`;
 		return {
 			styles: [
 				`
@@ -30,13 +60,8 @@ export default {
 			],
 			template: `<lu-empty-state-page
 	heading="${heading}"
-	slotTop="${slotTop}"
-	description="${description}"
-	${paramIcon}
-	${paramTopRightBackground}
-	${paramTopRightForeground}
-	${paramBottomLeftBackground}
-	${paramBottomLeftForeground}
+	slotTop="${slotTop}"${paramIllustrationUrl}${paramIllustrationAlt}
+	description="${description}"${paramIcon}${paramTopRightBackground}${paramTopRightForeground}${paramBottomLeftBackground}${paramBottomLeftForeground}
 	hx="${hx}"
 >
 	<button luButton type="button" palette="product">Button</button>

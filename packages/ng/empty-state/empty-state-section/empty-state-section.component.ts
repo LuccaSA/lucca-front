@@ -87,4 +87,8 @@ export class EmptyStateSectionComponent {
 	readonly hx = input(3, { transform: numberAttribute as (value: Hx | `${Hx}`) => Hx });
 
 	readonly emptyStateClasses = computed(() => ({ [`palette-${this.palette()}`]: !!this.palette() }));
+
+	public isStringPortalContent(message: PortalContent): message is string {
+		return typeof message === 'string';
+	}
 }

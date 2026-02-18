@@ -12,6 +12,7 @@
 		.emptyState-container {
 			align-items: center;
 			display: flex;
+			flex-direction: var(--components-emptyState-container-flexDirection);
 			flex-grow: 1;
 			justify-content: center;
 			max-inline-size: var(--components-emptyState-container-maxWidth);
@@ -19,9 +20,26 @@
 			padding: 0;
 			inline-size: 100%;
 			position: var(--components-emptyState-container-position);
+			gap: var(--pr-t-spacings-700);
+		}
+
+		.emptyState-illustration {
+			max-inline-size: min(360px, 100%);
+			place-items: center;
+			display: var(--components-emptyState-illustration-display);
+
+			&:empty {
+				display: none;
+			}
+		}
+
+		.emptyState-illustration-img {
+			max-inline-size: 100%;
+			block-size: auto;
 		}
 
 		.emptyState-content {
+			flex-shrink: 0;
 			border-radius: var(--pr-t-border-radius-structure);
 			max-inline-size: 100%;
 			padding: var(--pr-t-spacings-50);
@@ -38,15 +56,13 @@
 
 		.emptyState-content-text {
 			padding-inline: var(--pr-t-spacings-50);
+			display: flex;
+			flex-direction: column;
+			gap: var(--pr-t-spacings-200);
 		}
 
 		.emptyState-content-heading {
 			font: var(--pr-t-font-heading-3);
-			margin-block-end: var(--pr-t-spacings-50);
-
-			@if config.$deprecatedSpacings {
-				margin-block-end: 0;
-			}
 		}
 
 		.emptyState-content-description {
@@ -57,7 +73,6 @@
 			display: flex;
 			flex-wrap: wrap;
 			align-items: center;
-			margin-block-start: var(--pr-t-spacings-200);
 			gap: var(--pr-t-spacings-200);
 
 			.button {

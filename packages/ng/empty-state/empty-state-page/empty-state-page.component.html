@@ -2,10 +2,10 @@
 	class="emptyState mod-page"
 	[attr.role]="heading() ? null : 'presentation'"
 	[style.--components-emptyState-background-color]="contentBackgroundColor()"
-	style.--components-emptyState-illustration-background-bottom-left="url({{ bottomLeftBackground() }})"
-	style.--components-emptyState-illustration-foreground-bottom-left="url({{ bottomLeftForeground() }})"
-	style.--components-emptyState-illustration-background-top-right="url({{ topRightBackground() }})"
-	style.--components-emptyState-illustration-foreground-top-right="url({{ topRightForeground() }})"
+	[style.--components-emptyState-illustration-background-bottom-left]="bottomLeftBackground() ? `url(${bottomLeftBackground()}` : null"
+	[style.--components-emptyState-illustration-foreground-bottom-left]="bottomLeftForeground() ? `url(${bottomLeftForeground()}` : null"
+	[style.--components-emptyState-illustration-background-top-right]="topRightBackground() ? `url(${topRightBackground()}` : null"
+	[style.--components-emptyState-illustration-foreground-top-right]="topRightForeground() ? `url(${topRightForeground()}` : null"
 >
 	<div class="emptyState-container">
 		<div class="emptyState-content">
@@ -22,14 +22,23 @@
 					<div role="heading" [attr.aria-level]="hx()" class="emptyState-content-heading">{{ heading() }}</div>
 				}
 				@if (description()) {
-					<p class="emptyState-content-description">
-						<ng-container *luPortal="description()" />
-					</p>
+					@if (isStringPortalContent(description())) {
+						<p class="emptyState-content-description">
+							<ng-container *luPortal="description()" />
+						</p>
+					} @else {
+						<div class="emptyState-content-description">
+							<ng-container *luPortal="description()" />
+						</div>
+					}
 				}
 				<div class="emptyState-actions">
 					<ng-content />
 				</div>
 			</div>
 		</div>
+		@if (illustration()) {
+			<div class="emptyState-illustration"><ng-container *luPortal="illustration()" /></div>
+		}
 	</div>
 </section>
