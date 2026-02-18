@@ -10,6 +10,24 @@
 		&.mod-ordered,
 		&:is(ol) {
 			@include ordered;
+
+			&.mod-fancy {
+				@include fancy;
+
+				&[reversed] {
+					@include fancyReversed;
+				}
+
+				@for $start from 2 through 10 {
+					&[start='#{$start}'] {
+						@include fancyStart($start);
+
+						&[reversed] {
+							@include fancyStartReversed($start);
+						}
+					}
+				}
+			}
 		}
 
 		&.mod-inline {

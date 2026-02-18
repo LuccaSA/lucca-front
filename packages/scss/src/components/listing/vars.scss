@@ -10,7 +10,6 @@
 	--components-listing-listStyleType: disc;
 
 	--components-listing-item-display: list-item;
-	--components-listing-item-icon-backgroundColor: transparent;
 	--components-listing-item-icon-before-content: none;
 	--components-listing-item-before-content: unset;
 
@@ -18,4 +17,7 @@
 	--components-listing-item-content-flexWrap: nowrap;
 	--components-listing-item-content-rowGap: 0;
 	--components-listing-item-content-columnGap: 0;
+
+	--components-listing-item-number-display: none;
+	--components-listing-item-counterIncrement: listing;
 }

@@ -22,9 +22,8 @@
 @mixin checklist {
 	--components-listing-paddingInlineStart: 0;
 	--components-listing-item-display: flex;
-	--components-listing-item-icon-backgroundColor: var(--palettes-100, var(--palettes-neutral-100));
 
-	.listing-item-icon.lucca-icon {
+	.listing-item-icon.lucca-icon:not(.icon-signClose) {
 		@include icon.generate('sign_confirm');
 	}
 }
@@ -97,4 +96,23 @@
 @mixin divider {
 	--components-listing-item-before-content: '';
 	--components-listing-inlineFirst: calc(var(--pr-t-spacings-100) + var(--pr-t-spacings-25) - var(--commons-divider-width));
+}
+
+@mixin fancy {
+	counter-reset: listing;
+
+	--components-listing-listStyleType: '' !important;
+	--components-listing-item-number-display: grid;
+}
+
+@mixin fancyReversed {
+	--components-listing-item-counterIncrement: listing -1;
+}
+
+@mixin fancyStart($start) {
+	counter-reset: listing #{$start - 1};
+}
+
+@mixin fancyStartReversed($start) {
+	counter-reset: listing #{$start + 1};
 }

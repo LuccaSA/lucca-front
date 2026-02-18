@@ -38,7 +38,7 @@ export default {
 					</div>
 				</li>
 				<li class="listing-item">
-					<span class="listing-item-icon lucca-icon" aria-hidden="true"></span>
+					<span class="listing-item-icon lucca-icon icon-signClose palette-critical" aria-hidden="true"></span>
 					<div class="listing-item-content">
 						item
 					</div>
