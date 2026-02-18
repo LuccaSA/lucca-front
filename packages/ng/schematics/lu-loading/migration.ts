@@ -59,8 +59,8 @@ export function migrateComponent(sourceFile: SourceFile, path: string, tree: Tre
 					templateUpdate.insertRight(loading.nodeOffset + loading.node.startSourceSpan.start.offset + 1, thingsToAdd);
 					templateUpdate.insertLeft(loading.nodeOffset + loading.node.endSourceSpan.start.offset + 1, '/lu-loading');
 				}
-				// self closing
-				else {
+				// without closing
+				else if(!loading.node.isSelfClosing) {
 					const endSpanOffset = loading.node.endSourceSpan?.start.offset || -1;
 					templateUpdate.remove(loading.nodeOffset + loading.node.startSourceSpan.end.offset, endSpanOffset - loading.node.startSourceSpan.end.offset);
 					if (loading.node.endSourceSpan?.start?.offset) {
