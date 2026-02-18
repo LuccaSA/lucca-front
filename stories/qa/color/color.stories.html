@@ -1,0 +1,148 @@
+<table class="demo-QAtable">
+	<tbody>
+		<tr>
+			<td></td>
+			<td style="width: 50%">
+				<div class="demo-QAtable-list">HTML</div>
+			</td>
+			<td style="width: 50%">
+				<div class="demo-QAtable-list">Angular</div>
+			</td>
+		</tr>
+		<tr>
+			<td>Default</td>
+			<td>
+				<div class="demo-QAtable-list">
+					<div class="color">
+						<span class="color-value" [style.--components-color-value-backgroundColor]="'red'"></span>
+						<span class="color-name">red</span>
+					</div>
+				</div>
+			</td>
+			<td>
+				<div class="demo-QAtable-list">
+					<lu-color value="red">red</lu-color>
+				</div>
+			</td>
+		</tr>
+		<tr>
+			<td>Highlighted</td>
+			<td>
+				<div class="demo-QAtable-list optionItem is-highlighted">
+					<div class="color">
+						<span class="color-value" [style.--components-color-value-backgroundColor]="'red'"></span>
+						<span class="color-name">red</span>
+					</div>
+				</div>
+			</td>
+			<td>
+				<div class="demo-QAtable-list optionItem is-highlighted">
+					<lu-color value="red">red</lu-color>
+				</div>
+			</td>
+		</tr>
+		<tr>
+			<td>Selected</td>
+			<td>
+				<div class="demo-QAtable-list" aria-selected="true">
+					<div class="color mod-L">
+						<span class="color-value" [style.--components-color-value-backgroundColor]="'red'"></span>
+						<span class="color-name">red</span>
+					</div>
+				</div>
+			</td>
+			<td>
+				<div class="demo-QAtable-list" aria-selected="true">
+					<lu-color value="red" size="L">red</lu-color>
+				</div>
+			</td>
+		</tr>
+		<tr>
+			<td>Selected inverted</td>
+			<td>
+				<div class="demo-QAtable-list" aria-selected="true">
+					<div class="color mod-L">
+						<span class="color-value" [style.--components-color-value-backgroundColor]="'lightgrey'"></span>
+						<span class="color-name">lightgrey</span>
+					</div>
+				</div>
+			</td>
+			<td>
+				<div class="demo-QAtable-list" aria-selected="true">
+					<lu-color value="lightgrey" size="L">lightgrey</lu-color>
+				</div>
+			</td>
+		</tr>
+		<tr>
+			<td>Hidden name</td>
+			<td>
+				<div class="demo-QAtable-list">
+					<div class="color">
+						<span class="color-value" [style.--components-color-value-backgroundColor]="'red'"></span>
+						<span class="color-name pr-u-mask">red</span>
+					</div>
+				</div>
+			</td>
+			<td>
+				<div class="demo-QAtable-list">
+					<lu-color value="red" hiddenName>red</lu-color>
+				</div>
+			</td>
+		</tr>
+		<tr>
+			<td>Size L</td>
+			<td>
+				<div class="demo-QAtable-list">
+					<div class="color mod-L">
+						<span class="color-value" [style.--components-color-value-backgroundColor]="'red'"></span>
+						<span class="color-name">red</span>
+					</div>
+				</div>
+			</td>
+			<td>
+				<div class="demo-QAtable-list">
+					<lu-color value="red" size="L">red</lu-color>
+				</div>
+			</td>
+		</tr>
+		<tr>
+			<td>Size XL</td>
+			<td>
+				<div class="demo-QAtable-list">
+					<div class="color mod-XL">
+						<span class="color-value" [style.--components-color-value-backgroundColor]="'red'"></span>
+						<span class="color-name">red</span>
+					</div>
+				</div>
+			</td>
+			<td>
+				<div class="demo-QAtable-list">
+					<lu-color value="red" size="XL">red</lu-color>
+				</div>
+			</td>
+		</tr>
+		<tr>
+			<td>Border</td>
+			<td>
+				<div class="demo-QAtable-list">
+					<div class="color">
+						<span
+							class="color-value"
+							[style.--components-color-value-backgroundColor]="'lightgrey'"
+							[style.--components-color-value-boxShadowColor]="'red'"
+						></span>
+						<span class="color-name">lightgrey</span>
+					</div>
+				</div>
+			</td>
+			<td>
+				<div class="demo-QAtable-list">
+					<lu-color value="lightgrey" borderColor="red">lightgrey</lu-color>
+				</div>
+			</td>
+		</tr>
+	</tbody>
+</table>
+
+<!-- To tell the ui-diff tool that the page has finished rendering -->
+<span id="ready"></span>

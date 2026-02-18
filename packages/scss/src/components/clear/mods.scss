@@ -12,8 +12,8 @@
 }
 
 @mixin S {
-	--components-clear-size: 0.75rem;
-	--icon-size: 0.75rem;
+	--components-clear-size: var(--pr-t-spacings-150);
+	--icon-size: var(--pr-t-font-fontSize-150);
 }
 
 @mixin inverted {
