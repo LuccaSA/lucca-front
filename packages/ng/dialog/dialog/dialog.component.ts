@@ -9,12 +9,14 @@ import { LuDialogRef } from '../model';
 	encapsulation: ViewEncapsulation.None,
 	host: {
 		class: 'dialog-inside',
+		'[style.--components-dialog-inside-backgroundImageForeground]': "`url('https://cdn.lucca.fr/transverse/prisme/visuals/fancy-dialog/foreground-${fancyIllustration()}.svg')`",
 	},
 })
 export class DialogComponent implements AfterViewInit {
 	public readonly dialogRef = inject<LuDialogRef>(LuDialogRef);
 
 	readonly stacked = input(false, { transform: booleanAttribute });
+	readonly fancyIllustration = input<'approval' | 'calc' | 'checklist' | 'email' | 'install' | 'mapping' | 'save' | 'users' | 'welcome'>('welcome');
 
 	#htmlElement = inject<ElementRef<HTMLElement>>(ElementRef).nativeElement;
 

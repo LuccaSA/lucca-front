@@ -24,3 +24,8 @@
 		inset-block-start: var(--commons-navSide-mobile-toggle-height);
 	}
 }
+
+@mixin fancy {
+	--components-header-position: static;
+	--components-header-padding: var(--pr-t-spacings-100) var(--pr-t-spacings-200) 0;
+}
