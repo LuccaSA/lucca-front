@@ -10,7 +10,7 @@
 	--components-listing-paddingInlineStart: 0;
 	--components-listing-item-display: flex;
 
-	.listing-item-icon.lucca-icon {
+	.listing-item-icon {
 		&:not([class*='icon-']) {
 			&::before {
 				--icon-content: var(--components-listing-item-icon-before-content);
@@ -23,8 +23,12 @@
 	--components-listing-paddingInlineStart: 0;
 	--components-listing-item-display: flex;
 
-	.listing-item-icon.lucca-icon:not(.icon-signClose) {
-		@include icon.generate('sign_confirm');
+	.listing-item-icon {
+		--components-listing-item-icon-backgroundColor: var(--palettes-100, var(--palettes-neutral-100));
+
+		&:not(.icon-signClose) {
+			@include icon.generate('sign_confirm');
+		}
 	}
 }
 
