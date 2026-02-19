@@ -1,0 +1,7 @@
+@mixin vars {
+	--components-activityFeed-font: var(--pr-t-font-body-M);
+	--components-activityFeed-step-description-time-font: var(--pr-t-font-body-S);
+	--components-activityFeed-step-before-insetBlockStart: calc(var(--pr-t-spacings-500) + var(--pr-t-spacings-50));
+	--components-activityFeed-step-before-insetInlineStart: calc(var(--pr-t-spacings-200) - var(--pr-t-spacings-25) / 2);
+	--components-activityFeed-step-paddingBlockEnd: var(--pr-t-spacings-200);
+}

@@ -1,0 +1,45 @@
+@use '@lucca-front/scss/src/commons/utils/namespace';
+@use '@lucca-front/scss/src/components/avatar/exports' as avatar;
+
+@mixin component($atRoot: namespace.$defaultAtRoot) {
+	list-style-type: '';
+	padding: 0;
+	font: var(--components-activityFeed-font);
+	color: var(--pr-t-color-text);
+
+	@at-root ($atRoot) {
+		.activityFeed-step {
+			position: relative;
+			display: flex;
+			gap: var(--pr-t-spacings-100);
+
+			&:not(:last-child) {
+				padding-block-end: var(--components-activityFeed-step-paddingBlockEnd);
+
+				&::before {
+					content: '';
+					inline-size: var(--pr-t-spacings-25);
+					background-color: var(--palettes-neutral-100);
+					position: absolute;
+					inset-block-end: 0;
+					border-radius: var(--pr-t-border-radius-full);
+					inset-block-start: var(--components-activityFeed-step-before-insetBlockStart);
+					inset-inline-start: var(--components-activityFeed-step-before-insetInlineStart);
+				}
+			}
+		}
+
+		.activityFeed-step-avatar {
+			margin-block: var(--pr-t-spacings-75);
+
+			@include avatar.S;
+		}
+
+		.activityFeed-step-description-time {
+			font: var(--components-activityFeed-step-description-time-font);
+			color: var(--pr-t-color-text-subtle);
+			display: block;
+			text-transform: lowercase;
+		}
+	}
+}

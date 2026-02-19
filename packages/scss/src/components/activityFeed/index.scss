@@ -1,0 +1,14 @@
+@use 'exports' as *;
+
+.activityFeed {
+	@layer components {
+		@include vars;
+		@include component;
+	}
+
+	@layer mods {
+		&.mod-S {
+			@include S;
+		}
+	}
+}
