@@ -1,0 +1,15 @@
+@use 'exports' as *;
+
+.highlight {
+	@layer components {
+		@include vars;
+		@include component;
+	}
+
+	@layer mods {
+		&.mod-flipped,
+		~ .highlight {
+			@include flipped;
+		}
+	}
+}

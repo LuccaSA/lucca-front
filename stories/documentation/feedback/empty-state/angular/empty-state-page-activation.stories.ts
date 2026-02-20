@@ -37,7 +37,7 @@ export default {
 	<button luButton type="button">Créer une campagne</button>
 </lu-empty-state-page>
 
-<ng-template #slotTop><lu-tag label="Inclus dans votre abonnement" /></ng-template>
+<ng-template #slotTop><span class="highlight">Inclus dans votre abonnement</span></ng-template>
 <ng-template #description>
 	<lu-listing ordered fancy>
 		<lu-listing-item>Les responsables proposent les augmentations.</lu-listing-item>
