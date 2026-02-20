@@ -1,0 +1,23 @@
+@use '@lucca-front/scss/src/commons/utils/namespace';
+
+@mixin component($atRoot: namespace.$defaultAtRoot) {
+	position: relative;
+	white-space: nowrap;
+	display: inline-block;
+	color: var(--palettes-800, var(--palettes-brand-800));
+
+	&::before {
+		content: '';
+		position: absolute;
+		inset: auto -0.25em 0;
+		block-size: 0.325lh;
+		mix-blend-mode: multiply;
+		background-color: var(--palettes-100, var(--palettes-brand-100));
+		rotate: var(--components-highlight-before-rotate);
+		border-radius: var(--pr-t-border-radius-default);
+	}
+
+	@at-root ($atRoot) {
+
+	}
+}

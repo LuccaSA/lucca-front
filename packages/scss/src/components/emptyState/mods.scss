@@ -66,3 +66,19 @@
 	--components-emptyState-container-maxWidth: none;
 	--components-emptyState-container-left: auto;
 }
+
+@mixin hasIllustration {
+	--components-emptyState-background-color: transparent !important;
+	--components-emptyState-illustration-background-bottom-left: none !important;
+	--components-emptyState-illustration-foreground-bottom-left: none !important;
+	--components-emptyState-illustration-background-top-right: none !important;
+	--components-emptyState-illustration-foreground-top-right: none !important;
+}
+
+@mixin hasIllustrationNarrow {
+	--components-emptyState-container-flexDirection: column;
+}
+
+@mixin hasIllustrationImgNarrow {
+	--components-emptyState-illustration-display: none;
+}
