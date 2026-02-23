@@ -1,5 +1,15 @@
 @use '@lucca-front/scss/src/commons/config';
 
+@mixin M {
+	--components-numericBadge-size: 1.5rem;
+	--components-numericBadge-borderRadius: var(--pr-t-border-radius-default);
+	--components-numericBadge-font: var(--pr-t-font-body-S);
+
+	// Deprecated
+	--components-numericBadge-fontSize: var(--pr-t-font-body-S-fontSize);
+	--components-numericBadge-lineHeight: var(--pr-t-font-body-S-lineHeight);
+}
+
 @mixin S {
 	--components-numericBadge-size: 1.25rem;
 	--components-numericBadge-borderRadius: var(--pr-t-border-radius-small);

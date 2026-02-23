@@ -10,6 +10,7 @@
 	inset: var(--components-dialog-inset);
 	inline-size: var(--components-dialog-width);
 	block-size: var(--components-dialog-height);
+	min-block-size: var(--components-dialog-minBlockSize);
 	background-color: var(--palettes-neutral-0);
 	border-radius: var(--components-dialog-borderRadius);
 	box-shadow: var(--pr-t-elevation-shadow-overlay);
@@ -39,12 +40,14 @@
 				.dialog-formOptional, // stylelint-disable-line selector-disallowed-list -- .dialog-formOptional is deprecated
 				.dialog-form, // stylelint-disable-line selector-disallowed-list -- .dialog-form is deprecated
 				.dialog-inside-formOptional {
+					padding-inline-end: var(--components-dialog-inside-paddingInlineEnd);
 					display: grid;
 					grid-template-areas:
 						'header  '
 						'overflow'
 						'footer  ';
-					grid-template-rows: auto 1fr auto;
+					align-content: var(--components-dialog-inside-alignContent);
+					grid-template-rows: var(--components-dialog-inside-gridTemplateRows);
 					flex-grow: 1;
 					min-block-size: 0;
 
@@ -65,9 +68,11 @@
 					'header  '
 					'overflow'
 					'footer  ';
-				grid-template-rows: auto 1fr auto;
+				align-content: var(--components-dialog-inside-alignContent);
+				grid-template-rows: var(--components-dialog-inside-gridTemplateRows);
 				flex-grow: 1;
 				min-block-size: 0;
+				padding-inline-end: var(--components-dialog-inside-paddingInlineEnd);
 
 				&:has(.dialog-inside-content:focus-visible) {
 					&::after {
@@ -77,6 +82,26 @@
 						grid-area: overflow;
 					}
 				}
+			}
+		}
+
+		.dialog-inside-fancyIllustrations {
+			position: absolute;
+			inset-block-start: 0;
+			inset-inline-end: 0;
+			inline-size: var(--components-dialog-inside-fancyIllustrations-inlineSize);
+
+			> * {
+				inline-size: 100%;
+				block-size: auto;
+			}
+
+			&::after {
+				content: '';
+				position: absolute;
+				inset: 0;
+				background-image: var(--components-dialog-inside-backgroundImage);
+				background-size: cover;
 			}
 		}
 
@@ -100,20 +125,26 @@
 
 		.dialog-inside-header {
 			display: grid;
-			padding-block: var(--pr-t-spacings-200);
-			padding-inline: var(--pr-t-spacings-300);
+			padding-block: var(--components-dialog-inside-header-paddingBlock);
+			padding-inline: var(--components-dialog-inside-header-paddingInline);
 			grid-template-areas: var(--components-dialog-insideHeaderAreas);
 			grid-template-columns: var(--components-dialog-insideHeaderColumns);
-			box-shadow: 0 1px 0 0 var(--palettes-neutral-100);
+			box-shadow: var(--components-dialog-inside-header-boxShadow);
 			gap: var(--pr-t-spacings-200);
-			position: relative;
+			position: var(--components-dialog-inside-header-position);
 			z-index: 1;
 			grid-area: header;
 		}
 
+		.dialog-inside-header-button {
+			position: var(--components-dialog-inside-header-button-position);
+			inset-block-start: var(--pr-t-spacings-200);
+			inset-inline-end: var(--pr-t-spacings-300);
+		}
+
 		.dialog-inside-content {
 			background-color: var(--components-dialog-insideContent-background);
-			padding-block: var(--pr-t-spacings-200);
+			padding-block: var(--components-dialog-insideContent-paddingBlock);
 			padding-inline: var(--pr-t-spacings-300);
 			grid-area: overflow;
 			overflow: auto;

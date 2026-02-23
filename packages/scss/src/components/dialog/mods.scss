@@ -1,6 +1,8 @@
 @use '@lucca-front/scss/src/components/button/exports' as button;
-@use '@lucca-front/scss/src/commons/utils/a11y';
 @use '@lucca-front/scss/src/components/title/exports' as title;
+@use '@lucca-front/scss/src/components/header/exports' as header;
+@use '@lucca-front/scss/src/components/footer/exports' as footer;
+@use '@lucca-front/scss/src/commons/utils/a11y';
 @use '@lucca-front/scss/src/commons/utils/keyframe';
 
 @mixin XS {
@@ -78,7 +80,7 @@
 }
 
 @mixin withCloseButton {
-	.dialog-inside-header-button.button {
+	.dialog-inside-header-button {
 		@include button.ghost;
 		@include button.S;
 		@include button.onlyIconS;
@@ -95,6 +97,39 @@
 	--components-dialog-insideHeaderColumns: 1fr auto auto;
 }
 
-@mixin stacked {
+@mixin fancy {
+	--components-dialog-inside-gridTemplateRows: auto auto auto;
+	--components-dialog-inside-alignContent: center;
+	--components-dialog-inside-paddingInlineEnd: 220px;
+	--components-dialog-minBlockSize: 304px;
+	--components-dialog-inside-header-boxShadow: none;
+	--components-dialog-inside-header-position: static;
+	--components-dialog-inside-header-paddingBlock: var(--pr-t-spacings-200) 0;
+	--components-dialog-insideContent-paddingBlock: var(--pr-t-spacings-50) var(--pr-t-spacings-200);
+	--components-dialog-inside-header-button-position: absolute;
 
+	.dialog-inside-footer {
+		@include footer.fancy;
+	}
+
+	.dialog-inside-header {
+		@include header.fancy;
+	}
+
+	.dialog-inside-header-button.button {
+		@include button.outlined;
+		@include button.M;
+	}
+}
+
+@mixin fancySmall {
+	--components-dialog-inside-paddingInlineEnd: 140px;
+	--components-dialog-minBlockSize: 194px;
+}
+
+@mixin fancyNarrow {
+	--components-dialog-inside-header-paddingBlock: var(--pr-t-spacings-200);
+	--components-dialog-inside-header-paddingInline: var(--pr-t-spacings-300) calc(var(--pr-t-spacings-800) + var(--pr-t-spacings-200) + var(--pr-t-spacings-50));
+	--components-dialog-inside-paddingInlineEnd: 0px;
+	--components-dialog-minBlockSize: 0px;
 }

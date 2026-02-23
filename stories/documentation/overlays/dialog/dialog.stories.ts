@@ -46,6 +46,7 @@ export default {
 		}),
 	],
 	render: (args) => {
+		const fancyIllustrationParam = args['fancyIllustration'] ? ` fancyIllustration="${args['fancyIllustration']}"` : ``;
 		return {
 			props: {
 				config: args,
@@ -55,7 +56,7 @@ export default {
 <button luButton [luDialogOpen]="dialogTpl" [luDialogConfig]="config">Open Template-driven Dialog</button>
 
 <ng-template #dialogTpl>
-	<lu-dialog #dialog>
+	<lu-dialog #dialog${fancyIllustrationParam}>
 		<lu-dialog-header>
 			<h1>Template driven header</h1> You can also add more content in header
 		</lu-dialog-header>
@@ -75,7 +76,7 @@ export default {
 	},
 	argTypes: {
 		mode: {
-			options: ['default', 'drawer', 'drawer-from-bottom'],
+			options: ['default', 'drawer', 'drawer-from-bottom', 'fancy'],
 			control: {
 				type: 'select',
 			},
@@ -96,15 +97,23 @@ export default {
 		panelClasses: {
 			description: '[v18.3] mod-neutralBackground',
 		},
+		fancyIllustration: {
+			options: ['approval', 'checklist', 'email', 'install', 'mapping', 'save', 'users', 'welcome'],
+			control: {
+				type: 'select',
+			},
+			if: { arg: 'mode', eq: 'fancy' },
+		},
 	},
 } as Meta;
 
 export const Basic: StoryObj = {
 	args: {
-		size: 'S',
+		size: 'M',
 		alert: false,
 		mode: 'default',
-		panelClasses: ['mod-neutralBackground'],
+		fancyIllustration: 'welcome',
+		panelClasses: [],
 	},
 };
 
@@ -229,6 +238,39 @@ export const WithAction: StoryObj = {
 		size: 'S',
 		alert: false,
 		mode: 'default',
+	},
+};
+
+export const Fancy: StoryObj = {
+	render: (args) => {
+		const fancyIllustrationParam = args['fancyIllustration'] ? ` fancyIllustration="${args['fancyIllustration']}"` : ``;
+		return {
+			props: {
+				config: args,
+			},
+			template: `
+<button luButton [luDialogOpen]="dialogTpl" [luDialogConfig]="config">Open Template-driven Fancy Dialog</button>
+
+<ng-template #dialogTpl>
+	<lu-dialog #dialog${fancyIllustrationParam}>
+		<lu-dialog-header>
+			<h1>Header</h1>
+		</lu-dialog-header>
+		<lu-dialog-content>Content</lu-dialog-content>
+		<lu-dialog-footer>
+			<div class="footer-actions">
+				<button type="button" luButton luDialogClose>Confirm</button>
+			</div>
+		</lu-dialog-footer>
+	</lu-dialog>
+</ng-template>`,
+		};
+	},
+	args: {
+		size: 'M',
+		alert: false,
+		mode: 'fancy',
+		fancyIllustration: 'welcome',
 	},
 };
 

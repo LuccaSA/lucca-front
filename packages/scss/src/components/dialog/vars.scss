@@ -21,4 +21,16 @@
 	--components-dialog-translateX: 0;
 	--components-dialog-translateY: var(--components-dialog-translate);
 	--components-dialog-scale: calc(1 - (var(--components-dialog-level) * 0.05));
+	--components-dialog-inside-header-boxShadow: 0 1px 0 0 var(--palettes-neutral-100);
+	--components-dialog-inside-header-position: relative;
+	--components-dialog-inside-header-paddingBlock: var(--pr-t-spacings-200);
+	--components-dialog-inside-header-paddingInline: var(--pr-t-spacings-300);
+	--components-dialog-insideContent-paddingBlock: var(--pr-t-spacings-200);
+	--components-dialog-inside-header-button-position: static;
+	--components-dialog-inside-backgroundImage: none;
+	--components-dialog-minBlockSize: 0px;
+	--components-dialog-inside-paddingInlineEnd: 0px;
+	--components-dialog-inside-gridTemplateRows: auto 1fr auto;
+	--components-dialog-inside-alignContent: normal;
+	--components-dialog-inside-fancyIllustrations-inlineSize: var(--components-dialog-inside-paddingInlineEnd);
 }
