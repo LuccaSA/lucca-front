@@ -116,8 +116,10 @@ $palettesStates: 'critical', 'error', 'warning', 'success', 'successContrasted',
 $palettesDefault: 'brand', 'brandContrasted', 'neutral', 'navigation', 'AI';
 $palettesProduct: 'product';
 $palettesOtherProduct: () !default;
-$palettesDecorative: 'kiwi', 'lime', 'cucumber', 'mint', 'glacier', 'lagoon', 'blueberry', 'lavender', 'grape', 'watermelon', 'pumpkin',
-	'pineapple' !default;
+$palettesDecorative: 'kiwi', 'cucumber', 'mint', 'lagoon', 'blueberry', 'lavender', 'watermelon', 'pumpkin' !default;
+$palettesDecorativeMandatory: 'pineapple', 'lime', 'grape', 'glacier';
+
+// pineapple, lime, grape, glacier
 $palettesDeprecated: ('lucca', 'grey', 'primary', 'secondary') !default;
 
 @if $palettesOtherProduct == 'all' {
@@ -130,6 +132,7 @@ $palettesAll: function.flatMap(
 	$palettesProduct,
 	$palettesOtherProduct,
 	$palettesDecorative,
+	$palettesDecorativeMandatory,
 	$palettesDeprecated
 );
 
