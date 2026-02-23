@@ -68,7 +68,7 @@
 		@include core.cssvars('palettes-#{$palette}', map.get(config.$palettesInterpolation, $palette));
 	}
 
-	/* stylelint-disable custom-property-pattern */
+	// stylelint-disable custom-property-pattern
 	--palettes-assets-primary-50: var(--palettes-#{map.get(config.$palettesAssetsPrimary, config.$product)}product-50);
 	--palettes-assets-primary-100: var(--palettes-#{map.get(config.$palettesAssetsPrimary, config.$product)}product-100);
 	--palettes-assets-primary-200: var(--palettes-#{map.get(config.$palettesAssetsPrimary, config.$product)}product-200);
@@ -77,7 +77,7 @@
 	--palettes-assets-brand-50: var(--palettes-#{map.get(config.$palettesAssetsBrand, config.$product)}-50);
 	--palettes-assets-brand-100: var(--palettes-#{map.get(config.$palettesAssetsBrand, config.$product)}-100);
 	--palettes-assets-brand-200: var(--palettes-#{map.get(config.$palettesAssetsBrand, config.$product)}-200);
-	/* stylelint-enable custom-property-pattern */
+	// stylelint-enable custom-property-pattern
 
 	@include core.cssvars('colors', config.$colors, '-color');
 	@include core.cssvars('colors', config.$colorsRgb, '-rgb');
