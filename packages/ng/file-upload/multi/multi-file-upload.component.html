@@ -9,6 +9,7 @@
 		(dragenter)="droppable = true"
 		(dragleave)="droppable = false"
 		(change)="filesChange($event)"
+		[attr.disabled]="disabled()"
 		multiple="multiple"
 		#inputRef
 	/>
