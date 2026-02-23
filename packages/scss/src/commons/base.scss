@@ -126,5 +126,29 @@
 				}
 			}
 		}
+
+		@each $product, $decorative in config.$palettesAssetsBrand {
+			.palette-#{$product} {
+				@include core.rosetta('--palettes-assets-brand', '--palettes-#{$decorative}', (50, 100, 200));
+			}
+		}
+
+		@each $product, $decorative in config.$palettesAssetsPrimary {
+			$dashString: '-';
+
+			@if $decorative == '' {
+				$dashString: '';
+			}
+
+			.palette-#{$product} {
+				@include core.rosetta('--palettes-assets-primary', '--palettes#{$dashString}#{$decorative}', (50, 100, 200));
+			}
+		}
+
+		@each $product, $decorative in config.$palettesAssetsSecondary {
+			.palette-#{$product} {
+				@include core.rosetta('--palettes-assets-secondary', '--palettes-#{$decorative}', (50, 100));
+			}
+		}
 	}
 }
