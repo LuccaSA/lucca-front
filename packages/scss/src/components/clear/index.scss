@@ -2,6 +2,7 @@
 
 .clear {
 	@layer components {
+		@include properties;
 		@include vars;
 		@include component;
 	}
