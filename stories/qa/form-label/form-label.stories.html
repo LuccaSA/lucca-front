@@ -1,33 +1,44 @@
 <table class="demo-QAtable">
 	<tbody>
 		<tr>
+			<td></td>
+			<td style="width: 50%">
+				<div class="demo-QAtable-list">HTML</div>
+			</td>
+			<td style="width: 50%">
+				<div class="demo-QAtable-list">Angular</div>
+			</td>
+		</tr>
+		<tr>
 			<td>Default</td>
 			<td>
-				<div class="demo-QAtable-list">
-					<label class="formLabel"
-						>Text<sup class="formLabel-required" aria-hidden="true">*</sup
-						><span class="formLabel-info"
-							><span aria-hidden="true" class="lucca-icon icon-signHelp"></span><span class="pr-u-mask">?</span></span
-						></label
-					>
-				</div>
+				<label class="formLabel"
+					>Text<sup class="formLabel-required" aria-hidden="true">*</sup
+					><span class="formLabel-info"
+						><span aria-hidden="true" class="lucca-icon icon-signHelp"></span><span class="pr-u-mask">?</span></span
+					></label
+				>
+			</td>
+			<td>
+				<lu-form-label for="ID" required [tooltip]="'Tooltip'">Text</lu-form-label>
 			</td>
 		</tr>
 		<tr>
 			<td>Error</td>
 			<td>
-				<div class="demo-QAtable-list">
-					<label class="formLabel is-error"
-						>Text<sup class="formLabel-required" aria-hidden="true">*</sup
-						><span class="formLabel-info"
-							><span aria-hidden="true" class="lucca-icon icon-signHelp"></span><span class="pr-u-mask">?</span></span
-						></label
-					>
-				</div>
+				<label class="formLabel is-error"
+					>Text<sup class="formLabel-required" aria-hidden="true">*</sup
+					><span class="formLabel-info"
+						><span aria-hidden="true" class="lucca-icon icon-signHelp"></span><span class="pr-u-mask">?</span></span
+					></label
+				>
+			</td>
+			<td>
+				<lu-form-label for="ID" required [tooltip]="'Tooltip'" error>Text</lu-form-label>
 			</td>
 		</tr>
 		<tr>
-			<td>Sizes</td>
+			<td>Size S</td>
 			<td>
 				<label class="formLabel mod-S"
 					>Text<sup class="formLabel-required" aria-hidden="true">*</sup
@@ -35,13 +46,23 @@
 						><span aria-hidden="true" class="lucca-icon icon-signHelp"></span><span class="pr-u-mask">?</span></span
 					></label
 				>
-
+			</td>
+			<td>
+				<lu-form-label for="ID" required [tooltip]="'Tooltip'" size="S">Text</lu-form-label>
+			</td>
+		</tr>
+		<tr>
+			<td>Size XS</td>
+			<td>
 				<label class="formLabel mod-XS"
 					>Text<sup class="formLabel-required" aria-hidden="true">*</sup
 					><span class="formLabel-info"
 						><span aria-hidden="true" class="lucca-icon icon-signHelp"></span><span class="pr-u-mask">?</span></span
 					></label
 				>
+			</td>
+			<td>
+				<lu-form-label for="ID" required [tooltip]="'Tooltip'" size="XS">Text</lu-form-label>
 			</td>
 		</tr>
 	</tbody>

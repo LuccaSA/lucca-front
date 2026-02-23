@@ -33,7 +33,7 @@
 	<form class="filterPill_popover-content popover-contentOptional">
 		@for (pill of optionalPills(); track pill.name(); let index = $index) {
 			<div class="form-field mod-selectOption filterPill_popover-content-option">
-				<label class="formLabel" [attr.for]="'filterPillOptions' + index">{{ pill.label() }}</label>
+				<label luFormLabel [attr.for]="`filterPillOptions${index}`">{{ pill.label() }}</label>
 				<span class="checkboxField">
 					<input
 						type="checkbox"

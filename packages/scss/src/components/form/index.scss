@@ -90,7 +90,10 @@
 			}
 
 			.formLabel-tag {
-				@include tag.disabled;
+				&,
+				.tag {
+					@include tag.disabled;
+				}
 			}
 		}
 
