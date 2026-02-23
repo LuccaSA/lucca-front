@@ -30,6 +30,11 @@ export class ListingComponent {
 	readonly checklist = input(false, { transform: booleanAttribute });
 
 	/**
+	 * Applies fancy mod to the listing
+	 */
+	readonly fancy = input(false, { transform: booleanAttribute });
+
+	/**
 	 * Adds an icon to the listing
 	 */
 	readonly icons = input(false, { transform: booleanAttribute });

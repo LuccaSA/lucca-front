@@ -14,6 +14,7 @@ interface ListingBasicStory {
 	icon: string;
 	start: number;
 	reversed: boolean;
+	fancy: boolean;
 }
 
 export default {
@@ -27,7 +28,7 @@ export default {
 	],
 
 	render: (args: ListingBasicStory, context) => {
-		const { type, checklist, ordered, icons, defaultIcon, icon, start, reversed, palette, ...inputs } = args;
+		const { type, checklist, ordered, icons, defaultIcon, icon, start, reversed, palette, fancy, ...inputs } = args;
 		const checklistParam = args.type === 'checklist' ? ` checklist` : ``;
 		const orderedParam = args.type === 'ordered' ? ` ordered` : ``;
 		const iconsParam = args.type === 'icons' ? ` icons` : ``;
@@ -36,18 +37,20 @@ export default {
 		const startParam = args.start !== 1 && args.start !== undefined ? ` start="${start}"` : ``;
 		const reversedParam = args.reversed ? ` reversed` : ``;
 		const paletteParam = args.palette !== 'none' ? ` palette="${palette}"` : ``;
+		const fancyParam = args.fancy ? ` fancy` : ``;
 		return {
-			template: `<lu-listing${checklistParam}${orderedParam}${startParam}${reversedParam}${iconsParam}${defaultIconParam}${paletteParam}${generateInputs(inputs, context.argTypes)}>
+			template: `<lu-listing${checklistParam}${orderedParam}${fancyParam}${startParam}${reversedParam}${iconsParam}${defaultIconParam}${paletteParam}${generateInputs(inputs, context.argTypes)}>
 	<lu-listing-item>item</lu-listing-item>
 	<lu-listing-item${iconParam}>item</lu-listing-item>
 	<lu-listing-item>
 		item
-		<lu-listing${checklistParam}${orderedParam}${startParam}${iconsParam}${defaultIconParam}${paletteParam}${generateInputs(inputs, context.argTypes)}>
+		<lu-listing${checklistParam}${orderedParam}${fancyParam}${startParam}${reversedParam}${iconsParam}${defaultIconParam}${paletteParam}${generateInputs(inputs, context.argTypes)}>
 			<lu-listing-item>item</lu-listing-item>
 			<lu-listing-item>item</lu-listing-item>
-			<lu-listing-item>item</lu-listing-item>
+			<lu-listing-item critical>item</lu-listing-item>
 		</lu-listing>
 	</lu-listing-item>
+	<lu-listing-item>item</lu-listing-item>
 </lu-listing>`,
 		};
 	},
@@ -80,23 +83,20 @@ export const Template: StoryObj<ListingComponent & ListingItemComponent & { type
 		},
 		start: {
 			if: { arg: 'type', eq: 'ordered' },
-			control: {
-				type: 'select',
-			},
 			description: 'Modifie la valeur initiale de la liste.',
 		},
 		reversed: {
 			if: { arg: 'type', eq: 'ordered' },
 			description: 'Prédente la liste sous forme décroissante.',
 		},
+		fancy: {
+			if: { arg: 'type', eq: 'ordered' },
+			description: 'Mets en forme les chiffres. (Incompatible avec les lettres.)',
+		},
 		checklist: HiddenArgType,
 		icons: HiddenArgType,
 		ordered: HiddenArgType,
-		palette: {
-			PaletteAllArgType,
-			if: { arg: 'type', truthy: true },
-			description: 'Modifie la couleur des icônes.',
-		},
+		palette: PaletteAllArgType,
 	},
 
 	args: {
@@ -106,5 +106,6 @@ export const Template: StoryObj<ListingComponent & ListingItemComponent & { type
 		icon: 'foodCroissant',
 		start: 1,
 		reversed: false,
+		fancy: false,
 	},
 };
