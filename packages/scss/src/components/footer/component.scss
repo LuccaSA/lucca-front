@@ -2,13 +2,13 @@
 
 @mixin component($atRoot: namespace.$defaultAtRoot) {
 	background-color: var(--pr-t-elevation-surface-raised);
-	padding-block: var(--pr-t-spacings-150);
+	padding-block: var(--components-footer-paddingBlock);
 	padding-inline: var(--components-footer-paddingInline);
 	display: flex;
 	justify-content: space-between;
 	gap: var(--pr-t-spacings-200);
 	align-items: var(--components-footer-alignItems);
-	box-shadow: var(--pr-t-elevation-shadow-overflow);
+	box-shadow: var(--components-footer-boxShadow);
 	inset-block-end: 0;
 	position: var(--components-footer-position);
 	flex-direction: var(--components-footer-direction);
