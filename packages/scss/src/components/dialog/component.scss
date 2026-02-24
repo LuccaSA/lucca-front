@@ -90,6 +90,7 @@
 			inset-block-start: 0;
 			inset-inline-end: 0;
 			inline-size: var(--components-dialog-inside-fancyIllustrations-inlineSize);
+			display: flex;
 
 			> * {
 				inline-size: 100%;
