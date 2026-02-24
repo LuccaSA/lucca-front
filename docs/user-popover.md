@@ -1,16 +1,3 @@
-### Mise en place
-
-Afin de pouvoir installer la UserPopover, vous devez appeler la fonction `provideLuUserPopover` dans votre module racine.
-
-```typescript
-import { provideLuUserPopover } from '@lucca-front/ng/user-popover';
-
-@NgModule({
-  providers: [...provideLuUserPopover()],
-})
-export class AppModule {}
-```
-
 ### Utilisation
 
 Pour utiliser la UserPopover, il vous suffit d'utiliser la directive `[luUserPopover]` et de lui fournir un LuUser

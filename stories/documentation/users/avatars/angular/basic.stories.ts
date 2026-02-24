@@ -1,7 +1,7 @@
 import { provideHttpClient } from '@angular/common/http';
 import { provideAnimations } from '@angular/platform-browser/animations';
 import { LuDisplayInitials, LuUserPictureComponent } from '@lucca-front/ng/user';
-import { LuUserPopoverDirective, provideLuUserPopover } from '@lucca-front/ng/user-popover';
+import { LuUserPopoverDirective } from '@lucca-front/ng/user-popover';
 import { applicationConfig, Meta, moduleMetadata, StoryObj } from '@storybook/angular';
 import { bob, georges, squidwards } from '../../user.mocks';
 
@@ -12,7 +12,7 @@ export default {
 			imports: [LuUserPictureComponent, LuUserPopoverDirective],
 		}),
 		applicationConfig({
-			providers: [provideAnimations(), provideHttpClient(), provideLuUserPopover()],
+			providers: [provideAnimations(), provideHttpClient()],
 		}),
 	],
 	render: ({ user, sizes, placeholder, displayFormat, AI }) => {

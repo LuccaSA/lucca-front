@@ -1,8 +1,7 @@
-import { Directive, inject, Input, input } from '@angular/core';
-import { takeUntilDestroyed } from '@angular/core/rxjs-interop';
+import { Directive, Input, input } from '@angular/core';
 import { PopoverDirective } from '@lucca-front/ng/popover2';
 import { ILuUser } from '@lucca-front/ng/user';
-import { LU_USER_POPOVER_USER, USER_POPOVER_IS_ACTIVATED } from '../../user-popover.providers';
+import { LU_USER_POPOVER_USER } from '../../user-popover.providers';
 import { LuUserPopoverComponent } from './user-popover.component';
 
 @Directive({
@@ -24,13 +23,7 @@ export class LuUserPopoverDirective extends PopoverDirective {
 
 	constructor() {
 		super();
-		// Default to disabled to avoid having it flicker or something
 		this.luPopoverDisabled = false;
-		inject(USER_POPOVER_IS_ACTIVATED)
-			.pipe(takeUntilDestroyed())
-			.subscribe((isActivated) => {
-				this.luPopoverDisabled = !isActivated;
-			});
 		this.customPositions = [
 			{ overlayX: 'start', overlayY: 'bottom', originX: 'start', originY: 'top' },
 			{ overlayX: 'start', overlayY: 'top', originX: 'start', originY: 'bottom' },

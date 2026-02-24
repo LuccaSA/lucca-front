@@ -1,23 +1,19 @@
 import { Observable, of } from 'rxjs';
-import { importProvidersFrom, inject, InjectionToken, makeEnvironmentProviders, Signal } from '@angular/core';
-import { HttpClient } from '@angular/common/http';
-import { catchError, map, shareReplay } from 'rxjs/operators';
-import { OverlayModule } from '@angular/cdk/overlay';
+import { InjectionToken, makeEnvironmentProviders, Signal } from '@angular/core';
 import { ILuUser } from '@lucca-front/ng/user';
 
 export const LU_USER_POPOVER_USER = new InjectionToken<Signal<ILuUser>>('user-popover-user');
 
+/**
+ * @deprecated no longer needed as popover is always activated
+ */
 export const USER_POPOVER_IS_ACTIVATED = new InjectionToken<Observable<boolean>>('user-popover-is-activated', {
-	factory: () =>
-		inject(HttpClient)
-			.get<{ key: string; status: string }>('/lucca-banner/meta/api/feature-flag-statuses/user-popover-is-activated')
-			.pipe(
-				map((flag) => flag.status === 'Enabled'),
-				catchError(() => of(false)),
-				shareReplay(1),
-			),
+	factory: () => of(true),
 });
 
+/**
+ * @deprecated no longer needed as user popover uses `luPopover2`
+ */
 export function provideLuUserPopover() {
-	return makeEnvironmentProviders([importProvidersFrom(OverlayModule)]);
+	return makeEnvironmentProviders([]);
 }

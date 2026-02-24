@@ -3,7 +3,7 @@ import { provideHttpClient } from '@angular/common/http';
 import { provideAnimations } from '@angular/platform-browser/animations';
 import { ButtonComponent } from '@lucca-front/ng/button';
 import { LuUserDisplayModule } from '@lucca-front/ng/user';
-import { LuUserPopoverDirective, provideLuUserPopover } from '@lucca-front/ng/user-popover';
+import { LuUserPopoverDirective } from '@lucca-front/ng/user-popover';
 import { applicationConfig, Meta, moduleMetadata, StoryObj } from '@storybook/angular';
 
 export default {
@@ -13,7 +13,7 @@ export default {
 			imports: [LuUserPopoverDirective, LuUserDisplayModule, ButtonComponent],
 		}),
 		applicationConfig({
-			providers: [provideAnimations(), provideHttpClient(), provideLuUserPopover()],
+			providers: [provideAnimations(), provideHttpClient()],
 		}),
 	],
 	render: () => {
