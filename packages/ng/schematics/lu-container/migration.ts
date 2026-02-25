@@ -2,7 +2,7 @@ import { Tree } from '@angular-devkit/schematics';
 import type { TmplAstElement } from '@angular/compiler';
 import { applyToUpdateRecorder } from '@schematics/angular/utility/change';
 import { SourceFile } from 'typescript';
-import { extractNgTemplatesIncludingHtml, HtmlAst, insertAngularImportIfNeeded, insertTSImportIfNeeded, isInterestingNode } from '../lib';
+import { extractNgTemplatesIncludingHtml,HtmlAst,insertAngularImportIfNeeded,insertTSImportIfNeeded,isInterestingNode } from '../lib';
 
 interface ContainerInputs {
 	center?: boolean;
@@ -54,8 +54,8 @@ export function migrateComponent(sourceFile: SourceFile, path: string, tree: Tre
 					templateUpdate.insertRight(container.nodeOffset + container.node.startSourceSpan.start.offset + 1, thingsToAdd);
 					templateUpdate.insertLeft(container.nodeOffset + container.node.endSourceSpan.start.offset + 1, '/lu-container');
 				}
-				// self closing
-				else {
+				// without content
+				else if (!container.node.isSelfClosing) {
 					const endSpanOffset = container.node.endSourceSpan?.start.offset || -1;
 					templateUpdate.remove(container.nodeOffset + container.node.startSourceSpan.end.offset, endSpanOffset - container.node.startSourceSpan.end.offset);
 					if (container.node.endSourceSpan?.start?.offset) {
