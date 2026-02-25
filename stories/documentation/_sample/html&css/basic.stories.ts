@@ -1,5 +1,4 @@
 import { Meta } from '@storybook/angular';
-import { cleanupTemplate } from 'stories/helpers/stories';
 
 interface SampleBasicStory {}
 
@@ -8,14 +7,9 @@ export default {
 	argTypes: {},
 	render: (args: SampleBasicStory) => {
 		return {
-			template: cleanupTemplate(`
-
-	<div class="sample  ">
-		sample
-
-		</div>
-
-`),
+			template: `<div class="sample">
+	sample
+</div>`,
 		};
 	},
 } as Meta;

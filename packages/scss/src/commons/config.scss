@@ -116,8 +116,10 @@ $palettesStates: 'critical', 'error', 'warning', 'success', 'successContrasted',
 $palettesDefault: 'brand', 'brandContrasted', 'neutral', 'navigation', 'AI';
 $palettesProduct: 'product';
 $palettesOtherProduct: () !default;
-$palettesDecorative: 'kiwi', 'lime', 'cucumber', 'mint', 'glacier', 'lagoon', 'blueberry', 'lavender', 'grape', 'watermelon', 'pumpkin',
-	'pineapple' !default;
+$palettesDecorative: 'kiwi', 'cucumber', 'mint', 'lagoon', 'blueberry', 'lavender', 'watermelon', 'pumpkin' !default;
+$palettesDecorativeMandatory: 'pineapple', 'lime', 'grape', 'glacier';
+
+// pineapple, lime, grape, glacier
 $palettesDeprecated: ('lucca', 'grey', 'primary', 'secondary') !default;
 
 @if $palettesOtherProduct == 'all' {
@@ -130,8 +132,39 @@ $palettesAll: function.flatMap(
 	$palettesProduct,
 	$palettesOtherProduct,
 	$palettesDecorative,
+	$palettesDecorativeMandatory,
 	$palettesDeprecated
 );
+
+$palettesAssetsBrand: (
+	'brand': 'pineapple',
+	'cc': 'brand',
+	'pagga': 'brand',
+	'poplee': 'brand',
+	'coreHR': 'brand',
+	'cleemy': 'brand',
+	'timmi': 'brand',
+) !default;
+
+$palettesAssetsPrimary: (
+	'brand': '',
+	'cc': '',
+	'pagga': '',
+	'poplee': '',
+	'coreHR': '',
+	'cleemy': '',
+	'timmi': '',
+) !default;
+
+$palettesAssetsSecondary: (
+	'brand': 'lime',
+	'cc': 'lime',
+	'pagga': 'lime',
+	'poplee': 'pineapple',
+	'coreHR': 'pineapple',
+	'cleemy': 'grape',
+	'timmi': 'glacier',
+) !default;
 
 $fieldsWidth: 20, 30, 40, 50, 60 !default;
 
@@ -183,7 +216,7 @@ $cleemy: (
 	200: #a4e0da,
 	300: #7acdc6,
 	400: #54bbb2,
-	500: #00ada5,
+	500: #00a39c,
 	600: #009491,
 	700: #007a78,
 	800: #00545c,
@@ -231,8 +264,8 @@ $poplee: (
 	200: #b1def6,
 	300: #98d2f1,
 	400: #7bc3ea,
-	500: #62b7e4,
-	600: #3a9ed4,
+	500: #48abe0,
+	600: #2b8fc5,
 	700: #0b77b1,
 	800: #005685,
 	900: #003c5c
