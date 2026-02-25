@@ -48,8 +48,9 @@
 				@include fromBottom;
 			}
 
-			@include media.max('XXS') {
+			@include media.max('S') {
 				@include fromBottom;
+				@include maxContent;
 			}
 		}
 
