@@ -1,5 +1,5 @@
 import { DatePipe, NgTemplateOutlet } from '@angular/common';
-import { ChangeDetectionStrategy, Component, computed, inject, input, LOCALE_ID, ViewEncapsulation } from '@angular/core';
+import { booleanAttribute, ChangeDetectionStrategy, Component, computed, inject, input, LOCALE_ID, ViewEncapsulation } from '@angular/core';
 import { PortalDirective } from '@lucca-front/ng/core';
 import { LuUserPictureModule } from '@lucca-front/ng/user';
 import { COMMENT_BLOCK_INSTANCE } from '../token';
@@ -27,7 +27,7 @@ export class CommentComponent {
 		minute: 'numeric',
 	});
 
-	#parentBlock = inject(COMMENT_BLOCK_INSTANCE);
+	#parentBlock = inject(COMMENT_BLOCK_INSTANCE, { optional: true });
 
 	readonly content = input<string>();
 
@@ -40,22 +40,24 @@ export class CommentComponent {
 	 */
 	readonly datePipeFormat = input<string | undefined>(undefined);
 
-	readonly noAvatar = computed(() => this.#parentBlock.noAvatar());
+	readonly noAvatar = computed(() => this.#parentBlock?.noAvatar());
 
-	readonly avatar = computed(() => this.#parentBlock.avatar());
+	readonly avatar = computed(() => this.#parentBlock?.avatar());
 
-	readonly authorName = computed(() => this.#parentBlock.authorName());
+	readonly authorName = computed(() => this.#parentBlock?.authorName());
 
-	readonly size = computed(() => this.#parentBlock.size());
+	readonly size = computed(() => this.#parentBlock?.size());
 
-	readonly contentIsHTML = computed(() => /<\/?[a-z][\s\S]*>/i.test(this.content()));
+	readonly contentIsHTML = computed(() => /<\/?[a-z][\s\S]*>/i.test(this?.content()));
+
+	readonly noInfos = input(false, { transform: booleanAttribute });
 
 	readonly dateDisplay = computed(() => {
 		const formatted = this.#intlDateTimeFormat.format(this.date());
 		return `${formatted[0].toUpperCase()}${formatted.slice(1)}`;
 	});
 
-	readonly role = computed(() => (this.#parentBlock.isSingleComment() ? null : 'listitem'));
+	readonly role = computed(() => (this.#parentBlock?.isSingleComment() ? null : 'listitem'));
 
 	get roleAttr(): string {
 		return this.role();

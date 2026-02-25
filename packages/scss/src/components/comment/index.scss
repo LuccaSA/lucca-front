@@ -17,8 +17,10 @@
 			@include noAvatar;
 		}
 
-		@include container.max(25rem, $name: 'comment') {
-			@include narrow;
+		&:has(.comment-infos) {
+			@include container.max(25rem, $name: 'comment') {
+				@include narrow;
+			}
 		}
 	}
 }

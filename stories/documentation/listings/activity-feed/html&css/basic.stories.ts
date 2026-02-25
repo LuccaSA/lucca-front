@@ -8,7 +8,7 @@ export default {
 } as Meta;
 
 function getTemplate(args: ActivityFeedBasicStory): string {
-	return `<ol class="activityFeed -mod-S">
+	return `<ol class="activityFeed">
 	<li class="activityFeed-step">
 		<div class="activityFeed-step-avatar avatar mod-placeholder" translate="no">
 			<span class="avatar-picture"></span>

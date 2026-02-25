@@ -1,0 +1,11 @@
+@if (strikethrough()) {
+	<s><ng-container *ngTemplateOutlet="content" /></s>
+} @else {
+	<ng-container *ngTemplateOutlet="content" />
+}
+<lu-icon size="XS" icon="arrowRight" alt="à été remplacé par" />
+<ng-content select="[after]" />
+
+<ng-template #content>
+	<ng-content select="[before]" />
+</ng-template>

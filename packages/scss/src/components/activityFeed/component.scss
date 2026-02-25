@@ -35,11 +35,32 @@
 			@include avatar.S;
 		}
 
+		.activityFeed-step-description {
+			flex-grow: 1;
+		}
+
 		.activityFeed-step-description-time {
 			font: var(--components-activityFeed-step-description-time-font);
 			color: var(--pr-t-color-text-subtle);
 			display: block;
-			text-transform: lowercase;
+		}
+
+		.activityFeed-content-update {
+			display: flex;
+			align-items: center;
+			gap: var(--pr-t-spacings-100);
+		}
+
+		.activityFeed-content {
+			margin-block-start: var(--pr-t-spacings-100);
+			display: flex;
+			flex-direction: column;
+			gap: var(--pr-t-spacings-100);
+			align-items: flex-start;
+
+			&:empty {
+				display: none;
+			}
 		}
 	}
 }
