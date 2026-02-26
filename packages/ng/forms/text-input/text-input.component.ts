@@ -1,9 +1,9 @@
 import { NgTemplateOutlet } from '@angular/common';
-import { booleanAttribute, ChangeDetectionStrategy, Component, ElementRef, input, linkedSignal, output, signal, viewChild, ViewEncapsulation } from '@angular/core';
+import { booleanAttribute, ChangeDetectionStrategy, Component, computed, ElementRef, input, output, signal, viewChild, ViewEncapsulation } from '@angular/core';
 import { ReactiveFormsModule } from '@angular/forms';
 import { LuccaIcon } from '@lucca-front/icons';
 import { ClearComponent } from '@lucca-front/ng/clear';
-import { intlInputOptions, ɵeffectWithDeps } from '@lucca-front/ng/core';
+import { intlInputOptions } from '@lucca-front/ng/core';
 import { InputDirective, ɵPresentationDisplayDefaultDirective } from '@lucca-front/ng/form-field';
 import { NgxMaskDirective, provideNgxMask } from 'ngx-mask';
 import { FormFieldIdDirective } from '../form-field-id.directive';
@@ -52,20 +52,14 @@ export class TextInputComponent {
 
 	readonly type = input<TextFieldType>('text');
 
-	readonly typeRef = linkedSignal(() => this.type());
-
 	// eslint-disable-next-line @angular-eslint/no-output-native
 	readonly blur = output<FocusEvent>();
 
 	protected showPassword = signal<boolean>(false);
 
-	protected hasTogglePasswordVisibilityIcon() {
-		return this.typeRef() === 'password';
-	}
+	protected typeRef = computed(() => (this.showPassword() ? 'text' : this.type()));
 
-	constructor() {
-		ɵeffectWithDeps([this.showPassword], (showPassword) => this.typeRef.set(showPassword ? 'text' : this.type()));
-	}
+	protected hasTogglePasswordVisibilityIcon = computed(() => this.type() === 'password');
 
 	clearValue(): void {
 		this.ngControl.reset();
