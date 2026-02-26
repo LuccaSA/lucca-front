@@ -261,37 +261,6 @@ export const Basic = generateStory({
 	[options]="legumes | filterLegumes:clue"
 	(clueChange)="clue = $event"
 	[maxValuesShown]="maxValuesShown"
-/><lu-multi-select
-	class="palette-pagga"
-	#selectRef
-	[clearable]="clearable"
-	[loading]="loading"
-	[keepSearchAfterSelection]="keepSearchAfterSelection"
-	[(ngModel)]="selectedLegumes"
-	[options]="legumes | filterLegumes:clue"
-	(clueChange)="clue = $event"
-	[maxValuesShown]="maxValuesShown"
-/>
-<lu-multi-select
-	class="palette-cleemy"
-	#selectRef
-	[clearable]="clearable"
-	[loading]="loading"
-	[keepSearchAfterSelection]="keepSearchAfterSelection"
-	[(ngModel)]="selectedLegumes"
-	[options]="legumes | filterLegumes:clue"
-	(clueChange)="clue = $event"
-	[maxValuesShown]="maxValuesShown"
-/><lu-multi-select
-	class="palette-coreHR"
-	#selectRef
-	[clearable]="clearable"
-	[loading]="loading"
-	[keepSearchAfterSelection]="keepSearchAfterSelection"
-	[(ngModel)]="selectedLegumes"
-	[options]="legumes | filterLegumes:clue"
-	(clueChange)="clue = $event"
-	[maxValuesShown]="maxValuesShown"
 />`,
 	neededImports: {
 		'@lucca-front/ng/multi-select': ['LuMultiSelectInputComponent'],
