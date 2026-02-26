@@ -24,3 +24,9 @@
 @mixin focusVisible {
 	@include a11y.focusVisible;
 }
+
+@mixin product {
+	--components-chip-backgroundColor: var(--palettes-100, var(--palettes-product-100));
+	--components-chip-kill-disk-color: var(--palettes-800, var(--palettes-product-800));
+	--components-chip-color: var(--palettes-800, var(--palettes-product-800));
+}
