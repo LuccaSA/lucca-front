@@ -1,0 +1,9 @@
+@mixin narrow {
+	.progressStepper-list {
+		flex-direction: column;
+	}
+
+	.progressStepper-list-step-title {
+		position: static;
+	}
+}

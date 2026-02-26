@@ -1,4 +1,5 @@
 @use 'exports' as *;
+@use '@lucca-front/scss/src/commons/utils/container';
 
 .progressStepper {
 	@layer components {
@@ -7,6 +8,12 @@
 	}
 
 	@layer mods {
-
+		@for $step from 3 through 6 {
+			&:has(.progressStepper-list-step:nth-child(#{$step}):last-child) {
+				@include container.max(#{$step * 8rem}, $name: 'progressStepper') {
+					@include narrow;
+				}
+			}
+		}
 	}
 }

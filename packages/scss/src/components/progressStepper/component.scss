@@ -2,20 +2,25 @@
 @use '@lucca-front/icons/src/commons/utils/icon';
 
 @mixin component($atRoot: namespace.$defaultAtRoot) {
-	margin: 0;
-	padding: 0;
-	list-style-type: '';
-	display: flex;
-	counter-reset: progressStepper;
-	color: var(--pr-t-color-text-subtle);
+	container-type: inline-size;
+	container-name: progressStepper;
 
 	@at-root ($atRoot) {
-		.progressStepper-step {
+		.progressStepper-list {
+			margin: 0;
+			padding: 0;
+			list-style-type: '';
+			display: flex;
+			counter-reset: progressStepper;
+			color: var(--pr-t-color-text-subtle);
+			padding-block-end: calc(var(--pr-t-spacings-200) + var(--pr-t-spacings-50));
+		}
+
+		.progressStepper-list-step {
 			flex-basis: 0;
 			flex-grow: 1;
 			counter-increment: progressStepper;
-
-			// outline: 1px solid red;
+			position: relative;
 			display: flex;
 			align-items: center;
 			gap: 0.5rem;
@@ -35,7 +40,7 @@
 					content: none;
 				}
 
-				.progressStepper-step-title {
+				.progressStepper-list-step-title {
 					text-align: start;
 					left: 0;
 				}
@@ -46,7 +51,7 @@
 					content: none;
 				}
 
-				.progressStepper-step-title {
+				.progressStepper-list-step-title {
 					text-align: end;
 					right: 0;
 				}
@@ -55,28 +60,23 @@
 			&:has(~ [aria-current='step']) {
 				&::before {
 					block-size: 2px;
-					background-color: var(--palettes-product-500);
+					background-color: var(--palettes-500, var(--palettes-product-500));
 					border-radius: 0 9999px 9999px 0;
 				}
 
 				&::after {
 					block-size: 2px;
-					background-color: var(--palettes-product-500);
+					background-color: var(--palettes-500, var(--palettes-product-500));
 					border-radius: 9999px 0 0 9999px;
+				}
+
+				.progressStepper-list-step-title {
+					color: var(--palettes-700, var(--palettes-product-700));
 				}
 			}
 
-			&.is-completed {
-				.progressStepper-step-number {
-					display: grid;
-					align-items: center;
-					justify-items: center;
-
-					&::before,
-					&::after {
-						grid-area: 1/1;
-					}
-
+			&.is-success {
+				.progressStepper-list-step-number {
 					&::before {
 						content: '';
 					}
@@ -85,7 +85,7 @@
 						@include icon.generate('sign_confirm');
 
 						font-size: 1.25rem;
-						color: var(--palettes-product-700);
+						color: var(--palettes-700, var(--palettes-product-700));
 					}
 				}
 			}
@@ -93,28 +93,35 @@
 			&[aria-current='step'] {
 				&::before {
 					block-size: 2px;
-					background-color: var(--palettes-product-500);
+					background-color: var(--palettes-500, var(--palettes-product-500));
 					border-radius: 0 9999px 9999px 0;
 				}
 
-				.progressStepper-step-title {
-					color: var(--palettes-product-700);
+				.progressStepper-list-step-title {
+					color: var(--palettes-700, var(--palettes-product-700));
 				}
 
-				.progressStepper-step-number {
+				.progressStepper-list-step-number {
 					&::before {
-						background-color: var(--palettes-product-100);
-						color: var(--palettes-product-800);
-						box-shadow: 0 0 0 1px var(--palettes-product-400);
+						background-color: var(--palettes-100, var(--palettes-product-100));
+						color: var(--palettes-800, var(--palettes-product-800));
+						box-shadow: 0 0 0 1px var(--palettes-400, var(--palettes-product-400));
 					}
 				}
 			}
 		}
 
-		.progressStepper-step-number {
-			display: flex;
+		.progressStepper-list-step-number {
 			font: var(--pr-t-font-body-XS);
 			font-weight: var(--pr-t-font-fontWeight-semibold);
+			display: grid;
+			align-items: center;
+			justify-items: center;
+
+			&::before,
+			&::after {
+				grid-area: 1/1;
+			}
 
 			&::before {
 				content: counter(progressStepper);
@@ -127,7 +134,7 @@
 			}
 		}
 
-		.progressStepper-step-title {
+		.progressStepper-list-step-title {
 			text-align: center;
 			position: absolute;
 			top: 100%;
@@ -137,8 +144,15 @@
 			overflow: hidden;
 			text-overflow: ellipsis;
 			font: var(--pr-t-font-body-S);
+		}
 
-			// background-color: gold;
+		.progressStepper-list-step-linkOptional {
+			text-decoration: none;
+			color: inherit;
+
+			.progressStepper-list-step-title {
+				text-decoration: underline;
+			}
 		}
 	}
 }

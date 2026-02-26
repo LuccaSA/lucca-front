@@ -7,28 +7,94 @@ export default {
 	argTypes: {},
 	render: (args: Story) => {
 		return {
-			template: `<ol class="progressStepper">
-	<li class="progressStepper-step">
-		<span class="progressStepper-step-number" aria-hidden="true"></span>
-		<span class="progressStepper-step-title">Lorem ipsum dolor</span>
-	</li>
-	<li class="progressStepper-step is-completed">
-		<span class="progressStepper-step-number" aria-hidden="true"></span>
-		<span class="progressStepper-step-title">Lorem ipsum dolor</span>
-	</li>
-	<li class="progressStepper-step" aria-current="step">
-		<span class="progressStepper-step-number" aria-hidden="true"></span>
-		<span class="progressStepper-step-title">Lorem ipsum dolor</span>
-	</li>
-	<li class="progressStepper-step">
-		<span class="progressStepper-step-number" aria-hidden="true"></span>
-		<span class="progressStepper-step-title">Lorem ipsum dolor</span>
-	</li>
-	<li class="progressStepper-step">
-		<span class="progressStepper-step-number" aria-hidden="true"></span>
-		<span class="progressStepper-step-title">Lorem ipsum dolor</span>
-	</li>
-</ol>`,
+			template: `<div class="progressStepper">
+	<ol class="progressStepper-list palette-coreHR">
+		<li class="progressStepper-list-step">
+			<span class="progressStepper-list-step-number" aria-hidden="true"></span>
+			<span class="progressStepper-list-step-title">Lorem ipsum dolor</span>
+		</li>
+		<li class="progressStepper-list-step">
+			<span class="progressStepper-list-step-number" aria-hidden="true"></span>
+			<span class="progressStepper-list-step-title">Lorem ipsum dolor</span>
+		</li>
+		<li class="progressStepper-list-step">
+			<span class="progressStepper-list-step-number" aria-hidden="true"></span>
+			<span class="progressStepper-list-step-title">Lorem ipsum dolor</span>
+		</li>
+		<li class="progressStepper-list-step">
+			<span class="progressStepper-list-step-number" aria-hidden="true"></span>
+			<span class="progressStepper-list-step-title">Lorem ipsum dolor</span>
+		</li>
+		<li class="progressStepper-list-step">
+			<span class="progressStepper-list-step-number" aria-hidden="true"></span>
+			<span class="progressStepper-list-step-title">Lorem ipsum dolor</span>
+		</li>
+		<li class="progressStepper-list-step">
+			<span class="progressStepper-list-step-number" aria-hidden="true"></span>
+			<span class="progressStepper-list-step-title">Lorem ipsum dolor</span>
+		</li>
+	</ol>
+</div>
+<div class="progressStepper">
+	<ol class="progressStepper-list palette-coreHR">
+		<li class="progressStepper-list-step">
+			<span class="progressStepper-list-step-number" aria-hidden="true"></span>
+			<span class="progressStepper-list-step-title">Lorem ipsum dolor</span>
+		</li>
+		<li class="progressStepper-list-step">
+			<span class="progressStepper-list-step-number" aria-hidden="true"></span>
+			<span class="progressStepper-list-step-title">Lorem ipsum dolor</span>
+		</li>
+		<li class="progressStepper-list-step">
+			<span class="progressStepper-list-step-number" aria-hidden="true"></span>
+			<span class="progressStepper-list-step-title">Lorem ipsum dolor</span>
+		</li>
+		<li class="progressStepper-list-step">
+			<span class="progressStepper-list-step-number" aria-hidden="true"></span>
+			<span class="progressStepper-list-step-title">Lorem ipsum dolor</span>
+		</li>
+		<li class="progressStepper-list-step">
+			<span class="progressStepper-list-step-number" aria-hidden="true"></span>
+			<span class="progressStepper-list-step-title">Lorem ipsum dolor</span>
+		</li>
+	</ol>
+</div>
+<div class="progressStepper">
+	<ol class="progressStepper-list palette-coreHR">
+		<li class="progressStepper-list-step">
+			<span class="progressStepper-list-step-number" aria-hidden="true"></span>
+			<span class="progressStepper-list-step-title">Lorem ipsum dolor</span>
+		</li>
+		<li class="progressStepper-list-step">
+			<span class="progressStepper-list-step-number" aria-hidden="true"></span>
+			<span class="progressStepper-list-step-title">Lorem ipsum dolor</span>
+		</li>
+		<li class="progressStepper-list-step">
+			<span class="progressStepper-list-step-number" aria-hidden="true"></span>
+			<span class="progressStepper-list-step-title">Lorem ipsum dolor</span>
+		</li>
+		<li class="progressStepper-list-step">
+			<span class="progressStepper-list-step-number" aria-hidden="true"></span>
+			<span class="progressStepper-list-step-title">Lorem ipsum dolor</span>
+		</li>
+	</ol>
+</div>
+<div class="progressStepper">
+	<ol class="progressStepper-list palette-coreHR">
+		<li class="progressStepper-list-step">
+			<span class="progressStepper-list-step-number" aria-hidden="true"></span>
+			<span class="progressStepper-list-step-title">Lorem ipsum dolor</span>
+		</li>
+		<li class="progressStepper-list-step">
+			<span class="progressStepper-list-step-number" aria-hidden="true"></span>
+			<span class="progressStepper-list-step-title">Lorem ipsum dolor</span>
+		</li>
+		<li class="progressStepper-list-step">
+			<span class="progressStepper-list-step-number" aria-hidden="true"></span>
+			<span class="progressStepper-list-step-title">Lorem ipsum dolor</span>
+		</li>
+	</ol>
+</div>`,
 		};
 	},
 } as Meta;
