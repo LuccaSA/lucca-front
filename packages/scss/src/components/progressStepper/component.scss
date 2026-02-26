@@ -1,0 +1,144 @@
+@use '@lucca-front/scss/src/commons/utils/namespace';
+@use '@lucca-front/icons/src/commons/utils/icon';
+
+@mixin component($atRoot: namespace.$defaultAtRoot) {
+	margin: 0;
+	padding: 0;
+	list-style-type: '';
+	display: flex;
+	counter-reset: progressStepper;
+	color: var(--pr-t-color-text-subtle);
+
+	@at-root ($atRoot) {
+		.progressStepper-step {
+			flex-basis: 0;
+			flex-grow: 1;
+			counter-increment: progressStepper;
+
+			// outline: 1px solid red;
+			display: flex;
+			align-items: center;
+			gap: 0.5rem;
+
+			&::before,
+			&::after {
+				content: '';
+				background-color: var(--palettes-neutral-200);
+				block-size: 1px;
+				left: 0;
+				right: 0;
+				flex-grow: 1;
+			}
+
+			&:first-child {
+				&::before {
+					content: none;
+				}
+
+				.progressStepper-step-title {
+					text-align: start;
+					left: 0;
+				}
+			}
+
+			&:last-child {
+				&::after {
+					content: none;
+				}
+
+				.progressStepper-step-title {
+					text-align: end;
+					right: 0;
+				}
+			}
+
+			&:has(~ [aria-current='step']) {
+				&::before {
+					block-size: 2px;
+					background-color: var(--palettes-product-500);
+					border-radius: 0 9999px 9999px 0;
+				}
+
+				&::after {
+					block-size: 2px;
+					background-color: var(--palettes-product-500);
+					border-radius: 9999px 0 0 9999px;
+				}
+			}
+
+			&.is-completed {
+				.progressStepper-step-number {
+					display: grid;
+					align-items: center;
+					justify-items: center;
+
+					&::before,
+					&::after {
+						grid-area: 1/1;
+					}
+
+					&::before {
+						content: '';
+					}
+
+					&::after {
+						@include icon.generate('sign_confirm');
+
+						font-size: 1.25rem;
+						color: var(--palettes-product-700);
+					}
+				}
+			}
+
+			&[aria-current='step'] {
+				&::before {
+					block-size: 2px;
+					background-color: var(--palettes-product-500);
+					border-radius: 0 9999px 9999px 0;
+				}
+
+				.progressStepper-step-title {
+					color: var(--palettes-product-700);
+				}
+
+				.progressStepper-step-number {
+					&::before {
+						background-color: var(--palettes-product-100);
+						color: var(--palettes-product-800);
+						box-shadow: 0 0 0 1px var(--palettes-product-400);
+					}
+				}
+			}
+		}
+
+		.progressStepper-step-number {
+			display: flex;
+			font: var(--pr-t-font-body-XS);
+			font-weight: var(--pr-t-font-fontWeight-semibold);
+
+			&::before {
+				content: counter(progressStepper);
+				background-color: white;
+				inline-size: 20px;
+				block-size: 20px;
+				line-height: 20px;
+				text-align: center;
+				border-radius: var(--pr-t-border-radius-default);
+			}
+		}
+
+		.progressStepper-step-title {
+			text-align: center;
+			position: absolute;
+			top: 100%;
+			left: 0.5rem;
+			right: 0.5rem;
+			white-space: nowrap;
+			overflow: hidden;
+			text-overflow: ellipsis;
+			font: var(--pr-t-font-body-S);
+
+			// background-color: gold;
+		}
+	}
+}
