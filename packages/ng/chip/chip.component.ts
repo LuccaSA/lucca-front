@@ -16,7 +16,7 @@ import { LU_CHIP_TRANSLATIONS } from './chip.translate';
 	host: {
 		class: 'chip',
 		'[class.is-disabled]': 'disabled()',
-		'[class.palette-product]': 'palette() === "product"',
+		'[class.mod-product]': 'palette() === "product"',
 		'[class.mod-S]': 'size() === "S"',
 		'[class.palette-warning]': 'isWarning()',
 		'[class.palette-critical]': 'isCritical()',
