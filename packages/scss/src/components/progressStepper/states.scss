@@ -1,0 +1,44 @@
+@use '@lucca-front/icons/src/commons/utils/icon';
+
+@mixin currentAndBefore {
+	--components-progressStepper-list-step-before-blockSize: calc(var(--commons-divider-width) * 2);
+	--components-progressStepper-list-step-before-backgroundColor: var(--palettes-500, var(--palettes-product-500));
+	--components-progressStepper-list-step-title-color: var(--palettes-700, var(--palettes-product-700));
+}
+
+@mixin current {
+	@include currentAndBefore;
+
+	--components-progressStepper-list-step-number-before-boxShadowColor: var(--palettes-400, var(--palettes-product-400));
+	--components-progressStepper-list-step-number-before-color: var(--palettes-800, var(--palettes-product-800));
+	--components-progressStepper-list-step-number-before-backgroundColor: var(--palettes-100, var(--palettes-product-100));
+}
+
+@mixin beforeCurrent {
+	@include currentAndBefore;
+
+	--components-progressStepper-list-step-after-blockSize: calc(var(--commons-divider-width) * 2);
+	--components-progressStepper-list-step-after-backgroundColor: var(--palettes-500, var(--palettes-product-500));
+}
+
+@mixin hover {
+	--components-progressStepper-list-step-title-textDecoration: underline;
+}
+
+@mixin state($icon) {
+	--components-progressStepper-list-step-number-before-content: '';
+
+	.progressStepper-list-step-number {
+		&::after {
+			@include icon.generate(#{$icon});
+		}
+	}
+}
+
+@mixin success {
+	@include state('sign_confirm');
+}
+
+@mixin critical {
+	@include state('sign_close');
+}

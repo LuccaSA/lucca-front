@@ -1,0 +1,26 @@
+@mixin narrow {
+	.progressStepper-list {
+		--components-progressStepper-list-flexDirection: column;
+		--components-progressStepper-list-gap: 1rem;
+		--components-progressStepper-list-step-title-position: static;
+		--components-progressStepper-list-step-before-content: none;
+		--components-progressStepper-list-step-after-position: absolute;
+		--components-progressStepper-list-step-after-inset: var(--pr-t-spacings-300) auto calc(var(--pr-t-spacings-150) * -1) calc(var(--pr-t-spacings-100) + var(--pr-t-spacings-25));
+	}
+
+	.progressStepper-list-step {
+		--components-progressStepper-list-step-after-blockSize: auto;
+	}
+}
+
+@mixin first {
+	--components-progressStepper-list-step-title-textAlign: start;
+	--components-progressStepper-list-step-title-insetInlineStart: 0;
+	--components-progressStepper-list-step-before-content: none;
+}
+
+@mixin last {
+	--components-progressStepper-list-step-title-textAlign: end;
+	--components-progressStepper-list-step-title-insetInlineEnd: 0;
+	--components-progressStepper-list-step-after-content: none;
+}

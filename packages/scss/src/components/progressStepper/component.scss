@@ -1,0 +1,117 @@
+@use '@lucca-front/scss/src/commons/utils/namespace';
+@use '@lucca-front/scss/src/commons/utils/text';
+@use '@lucca-front/scss/src/commons/utils/a11y';
+
+@mixin component($atRoot: namespace.$defaultAtRoot) {
+	container-type: inline-size;
+	container-name: progressStepper;
+
+	@at-root ($atRoot) {
+		.progressStepper-list {
+			margin: 0;
+			padding: 0;
+			list-style-type: '';
+			display: flex;
+			counter-reset: progressStepper;
+			color: var(--pr-t-color-text-subtle);
+			padding-block-end: calc(var(--pr-t-spacings-200) + var(--pr-t-spacings-50));
+			flex-direction: var(--components-progressStepper-list-flexDirection);
+			gap: var(--components-progressStepper-list-gap);
+		}
+
+		.progressStepper-list-step {
+			flex-basis: 0;
+			flex-grow: 1;
+			counter-increment: progressStepper;
+			position: relative;
+			display: flex;
+			align-items: center;
+			gap: var(--pr-t-spacings-100);
+
+			&::before {
+				content: var(--components-progressStepper-list-step-before-content);
+				block-size: var(--components-progressStepper-list-step-before-blockSize);
+				border-radius: 0 var(--pr-t-border-radius-full) var(--pr-t-border-radius-full) 0;
+				background-color: var(--components-progressStepper-list-step-before-backgroundColor);
+			}
+
+			&::after {
+				content: var(--components-progressStepper-list-step-after-content);
+				block-size: var(--components-progressStepper-list-step-after-blockSize);
+				position: var(--components-progressStepper-list-step-after-position);
+				border-radius: var(--pr-t-border-radius-full) 0 0 var(--pr-t-border-radius-full);
+				inset: var(--components-progressStepper-list-step-after-inset);
+				background-color: var(--components-progressStepper-list-step-after-backgroundColor);
+			}
+
+			&::before,
+			&::after {
+				inline-size: var(--commons-divider-width);
+				flex-grow: 1;
+			}
+		}
+
+		.progressStepper-list-step-number {
+			font: var(--pr-t-font-body-XS);
+			font-weight: var(--pr-t-font-fontWeight-semibold);
+			display: grid;
+			align-items: center;
+			justify-items: center;
+			text-align: center;
+
+			&::before,
+			&::after {
+				grid-area: 1/1;
+			}
+
+			&::before {
+				content: var(--components-progressStepper-list-step-number-before-content);
+				color: var(--components-progressStepper-list-step-number-before-color);
+				background-color: var(--components-progressStepper-list-step-number-before-backgroundColor);
+				inline-size: calc(var(--pr-t-spacings-200) + var(--pr-t-spacings-50));
+				block-size: calc(var(--pr-t-spacings-200) + var(--pr-t-spacings-50));
+				line-height: calc(var(--pr-t-spacings-200) + var(--pr-t-spacings-50));
+				border-radius: var(--pr-t-border-radius-default);
+				box-shadow: 0 0 0 var(--commons-divider-width) var(--components-progressStepper-list-step-number-before-boxShadowColor);
+			}
+
+			&::after {
+				font-size: var(--pr-t-font-fontSize-250);
+				color: var(--palettes-700, var(--palettes-product-700));
+			}
+		}
+
+		.progressStepper-list-step-title {
+			font: var(--pr-t-font-body-S);
+			text-align: var(--components-progressStepper-list-step-title-textAlign);
+			position: var(--components-progressStepper-list-step-title-position);
+			inset-block-start: 100%;
+			inset-inline-start: var(--components-progressStepper-list-step-title-insetInlineStart);
+			inset-inline-end: var(--components-progressStepper-list-step-title-insetInlineEnd);
+			text-decoration: var(--components-progressStepper-list-step-title-textDecoration);
+			color: var(--components-progressStepper-list-step-title-color);
+			pointer-events: none;
+			min-inline-size: 0;
+		}
+
+		.progressStepper-list-step-title-content {
+			@include text.ellipsis;
+
+			pointer-events: auto;
+			display: block;
+			border-radius: var(--pr-t-border-radius-small);
+
+			&:focus-visible {
+				@include a11y.focusVisible;
+			}
+		}
+
+		.progressStepper-list-step-linkOptional {
+			text-decoration: none;
+			color: inherit;
+			display: flex;
+			gap: var(--pr-t-spacings-100);
+			min-inline-size: 0;
+		}
+	}
+}
