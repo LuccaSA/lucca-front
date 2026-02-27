@@ -1,7 +1,7 @@
 import { ChangeDetectionStrategy, Component, effect, ElementRef, forwardRef, inject, input, OnDestroy, signal, viewChildren, ViewContainerRef } from '@angular/core';
 import { ChipComponent } from '@lucca-front/ng/chip';
 import { intlInputOptions } from '@lucca-front/ng/core';
-import { $getNodeByKey, $getRoot, $getSelection, type Klass, type LexicalEditor, type LexicalNode, type NodeKey } from 'lexical';
+import { $createTextNode, $getNodeByKey, $getRoot, $getSelection, type Klass, type LexicalEditor, type LexicalNode, type NodeKey } from 'lexical';
 import { INITIAL_UPDATE_TAG, RICH_TEXT_PLUGIN_COMPONENT, RichTextPluginComponent, SKIP_DOM_SELECTION_TAG } from '../../rich-text-input.component';
 import { LU_RICH_TEXT_INPUT_TRANSLATIONS } from '../../rich-text-input.translate';
 import { $createTagNode, TagNode } from './tag-node';
@@ -105,6 +105,11 @@ export class RichTextPluginTagComponent implements RichTextPluginComponent, OnDe
 			}
 			const node = $createTagNode(tag.key, tag.description);
 			selection.insertNodes([node]);
+
+			// Insert a zero-width space after the decorator node so the cursor has a text anchor to land on
+			const spacer = $createTextNode(' ');
+			node.insertAfter(spacer);
+			spacer.select(1, 1);
 		});
 	}
 
