@@ -1,3 +1,23 @@
 @mixin vars {
-
+	--components-progressStepper-list-step-title-textDecoration: none;
+	--components-progressStepper-list-step-title-textAlign: center;
+	--components-progressStepper-list-step-title-insetInlineStart: var(--pr-t-spacings-100);
+	--components-progressStepper-list-step-title-insetInlineEnd: var(--pr-t-spacings-100);
+	--components-progressStepper-list-step-before-content: '';
+	--components-progressStepper-list-step-after-content: '';
+	--components-progressStepper-list-step-number-before-boxShadowColor: var(--palettes-neutral-50);
+	--components-progressStepper-list-step-title-position: absolute;
+	--components-progressStepper-list-flexDirection: row;
+	--components-progressStepper-list-gap: 0;
+	--components-progressStepper-list-step-after-position: static;
+	--components-progressStepper-list-step-before-blockSize: var(--commons-divider-width);
+	--components-progressStepper-list-step-after-blockSize: var(--commons-divider-width);
+	--components-progressStepper-list-step-after-inset: auto;
+	--components-progressStepper-list-step-before-backgroundColor: var(--palettes-neutral-200);
+	--components-progressStepper-list-step-after-backgroundColor: var(--palettes-neutral-200);
+	--components-progressStepper-list-step-title-color: inherit;
+	--components-progressStepper-list-step-number-before-color: inherit;
+	--components-progressStepper-list-step-number-before-backgroundColor: var(--palettes-neutral-0);
+	--components-progressStepper-list-step-number-before-content: counter(progressStepper);
+	--components-progressStepper-list-step-number-after-content: none;
 }

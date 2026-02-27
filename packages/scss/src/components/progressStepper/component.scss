@@ -1,5 +1,6 @@
 @use '@lucca-front/scss/src/commons/utils/namespace';
-@use '@lucca-front/icons/src/commons/utils/icon';
+@use '@lucca-front/scss/src/commons/utils/text';
+@use '@lucca-front/scss/src/commons/utils/a11y';
 
 @mixin component($atRoot: namespace.$defaultAtRoot) {
 	container-type: inline-size;
@@ -14,6 +15,8 @@
 			counter-reset: progressStepper;
 			color: var(--pr-t-color-text-subtle);
 			padding-block-end: calc(var(--pr-t-spacings-200) + var(--pr-t-spacings-50));
+			flex-direction: var(--components-progressStepper-list-flexDirection);
+			gap: var(--components-progressStepper-list-gap);
 		}
 
 		.progressStepper-list-step {
@@ -23,91 +26,28 @@
 			position: relative;
 			display: flex;
 			align-items: center;
-			gap: 0.5rem;
+			gap: var(--pr-t-spacings-100);
+
+			&::before {
+				content: var(--components-progressStepper-list-step-before-content);
+				block-size: var(--components-progressStepper-list-step-before-blockSize);
+				border-radius: 0 var(--pr-t-border-radius-full) var(--pr-t-border-radius-full) 0;
+				background-color: var(--components-progressStepper-list-step-before-backgroundColor);
+			}
+
+			&::after {
+				content: var(--components-progressStepper-list-step-after-content);
+				block-size: var(--components-progressStepper-list-step-after-blockSize);
+				position: var(--components-progressStepper-list-step-after-position);
+				border-radius: var(--pr-t-border-radius-full) 0 0 var(--pr-t-border-radius-full);
+				inset: var(--components-progressStepper-list-step-after-inset);
+				background-color: var(--components-progressStepper-list-step-after-backgroundColor);
+			}
 
 			&::before,
 			&::after {
-				content: '';
-				background-color: var(--palettes-neutral-200);
-				block-size: 1px;
-				left: 0;
-				right: 0;
+				inline-size: var(--commons-divider-width);
 				flex-grow: 1;
-			}
-
-			&:first-child {
-				&::before {
-					content: none;
-				}
-
-				.progressStepper-list-step-title {
-					text-align: start;
-					left: 0;
-				}
-			}
-
-			&:last-child {
-				&::after {
-					content: none;
-				}
-
-				.progressStepper-list-step-title {
-					text-align: end;
-					right: 0;
-				}
-			}
-
-			&:has(~ [aria-current='step']) {
-				&::before {
-					block-size: 2px;
-					background-color: var(--palettes-500, var(--palettes-product-500));
-					border-radius: 0 9999px 9999px 0;
-				}
-
-				&::after {
-					block-size: 2px;
-					background-color: var(--palettes-500, var(--palettes-product-500));
-					border-radius: 9999px 0 0 9999px;
-				}
-
-				.progressStepper-list-step-title {
-					color: var(--palettes-700, var(--palettes-product-700));
-				}
-			}
-
-			&.is-success {
-				.progressStepper-list-step-number {
-					&::before {
-						content: '';
-					}
-
-					&::after {
-						@include icon.generate('sign_confirm');
-
-						font-size: 1.25rem;
-						color: var(--palettes-700, var(--palettes-product-700));
-					}
-				}
-			}
-
-			&[aria-current='step'] {
-				&::before {
-					block-size: 2px;
-					background-color: var(--palettes-500, var(--palettes-product-500));
-					border-radius: 0 9999px 9999px 0;
-				}
-
-				.progressStepper-list-step-title {
-					color: var(--palettes-700, var(--palettes-product-700));
-				}
-
-				.progressStepper-list-step-number {
-					&::before {
-						background-color: var(--palettes-100, var(--palettes-product-100));
-						color: var(--palettes-800, var(--palettes-product-800));
-						box-shadow: 0 0 0 1px var(--palettes-400, var(--palettes-product-400));
-					}
-				}
 			}
 		}
 
@@ -117,6 +57,7 @@
 			display: grid;
 			align-items: center;
 			justify-items: center;
+			text-align: center;
 
 			&::before,
 			&::after {
@@ -124,35 +65,53 @@
 			}
 
 			&::before {
-				content: counter(progressStepper);
-				background-color: white;
-				inline-size: 20px;
-				block-size: 20px;
-				line-height: 20px;
-				text-align: center;
+				content: var(--components-progressStepper-list-step-number-before-content);
+				color: var(--components-progressStepper-list-step-number-before-color);
+				background-color: var(--components-progressStepper-list-step-number-before-backgroundColor);
+				inline-size: calc(var(--pr-t-spacings-200) + var(--pr-t-spacings-50));
+				block-size: calc(var(--pr-t-spacings-200) + var(--pr-t-spacings-50));
+				line-height: calc(var(--pr-t-spacings-200) + var(--pr-t-spacings-50));
 				border-radius: var(--pr-t-border-radius-default);
+				box-shadow: 0 0 0 var(--commons-divider-width) var(--components-progressStepper-list-step-number-before-boxShadowColor);
+			}
+
+			&::after {
+				font-size: var(--pr-t-font-fontSize-250);
+				color: var(--palettes-700, var(--palettes-product-700));
 			}
 		}
 
 		.progressStepper-list-step-title {
-			text-align: center;
-			position: absolute;
-			top: 100%;
-			left: 0.5rem;
-			right: 0.5rem;
-			white-space: nowrap;
-			overflow: hidden;
-			text-overflow: ellipsis;
 			font: var(--pr-t-font-body-S);
+			text-align: var(--components-progressStepper-list-step-title-textAlign);
+			position: var(--components-progressStepper-list-step-title-position);
+			inset-block-start: 100%;
+			inset-inline-start: var(--components-progressStepper-list-step-title-insetInlineStart);
+			inset-inline-end: var(--components-progressStepper-list-step-title-insetInlineEnd);
+			text-decoration: var(--components-progressStepper-list-step-title-textDecoration);
+			color: var(--components-progressStepper-list-step-title-color);
+			pointer-events: none;
+			min-inline-size: 0;
+		}
+
+		.progressStepper-list-step-title-content {
+			@include text.ellipsis;
+
+			pointer-events: auto;
+			display: block;
+			border-radius: var(--pr-t-border-radius-small);
+
+			&:focus-visible {
+				@include a11y.focusVisible;
+			}
 		}
 
 		.progressStepper-list-step-linkOptional {
 			text-decoration: none;
 			color: inherit;
-
-			.progressStepper-list-step-title {
-				text-decoration: underline;
-			}
+			display: flex;
+			gap: var(--pr-t-spacings-100);
+			min-inline-size: 0;
 		}
 	}
 }

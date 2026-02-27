@@ -8,12 +8,48 @@
 	}
 
 	@layer mods {
-		@for $step from 3 through 6 {
+		@for $step from 2 through 9 {
 			&:has(.progressStepper-list-step:nth-child(#{$step}):last-child) {
 				@include container.max(#{$step * 8rem}, $name: 'progressStepper') {
 					@include narrow;
 				}
 			}
+		}
+	}
+}
+
+.progressStepper-list-step {
+	@layer mods {
+		&:first-child {
+			@include first;
+		}
+
+		&:last-child {
+			@include last;
+		}
+
+		&:has(~ [aria-current='step']) {
+			@include beforeCurrent;
+		}
+
+		&[aria-current='step'] {
+			@include current;
+		}
+
+		&.is-success {
+			@include success;
+		}
+
+		&.is-critical {
+			@include critical;
+		}
+	}
+}
+
+.progressStepper-list-step-linkOptional {
+	@layer mods {
+		&:hover {
+			@include hover;
 		}
 	}
 }

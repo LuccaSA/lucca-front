@@ -57,7 +57,7 @@
 }
 
 @mixin hasContentNoGridHasIllustrationS {
-	--components-resourceCard-layout-after-marginBlock: 0.625rem;
+	--components-resourceCard-layout-after-marginBlock: calc(var(--pr-t-spacings-100) + var(--pr-t-spacings-25));
 }
 
 @mixin hasContentNoGrid {
