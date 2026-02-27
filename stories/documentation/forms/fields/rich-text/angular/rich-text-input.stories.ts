@@ -78,7 +78,7 @@ export const Basic: StoryObj<RichTextInputComponent & { value: string; disabled:
 	},
 };
 
-export const WithNoInitialValue: StoryObj<RichTextInputComponent & { value: string; disabled: boolean; required: boolean } & FormFieldComponent> = {
+export const RequiredWithNoInitialValue: StoryObj<RichTextInputComponent & { value: string; disabled: boolean; required: boolean } & FormFieldComponent> = {
 	render: (args, { argTypes }) => {
 		const { value, disabled, required, presentation, ...inputArgs } = args;
 		return {
@@ -100,7 +100,7 @@ export const WithNoInitialValue: StoryObj<RichTextInputComponent & { value: stri
 		value: '',
 		placeholder: 'Placeholder…',
 		disabled: false,
-		required: false,
+		required: true,
 		disableSpellcheck: false,
 		autoResize: true,
 		hideToolbar: false,
