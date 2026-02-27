@@ -32,6 +32,7 @@
 			justify-content: center;
 
 			--components-emptyState-icon-action-color: var(--palettes-600, var(--palettes-brand-600));
+			--components-emptyState-icon-background-color: var(--palettes-100, var(--palettes-brand-100));
 		}
 
 		.fileUpload-status-preview {
