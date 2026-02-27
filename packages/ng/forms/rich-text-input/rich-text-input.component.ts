@@ -1,11 +1,11 @@
 import { CommonModule } from '@angular/common';
 import {
+	afterRenderEffect,
 	booleanAttribute,
 	ChangeDetectionStrategy,
 	Component,
 	computed,
 	contentChildren,
-	afterRenderEffect,
 	ElementRef,
 	forwardRef,
 	inject,
@@ -97,9 +97,11 @@ export class RichTextInputComponent implements OnInit, OnDestroy, ControlValueAc
 	#cleanup?: () => void;
 	#focusedPlugin: number = 0;
 	#editor?: LexicalEditor;
+	#isRootElementBeingSet = false;
 
 	constructor() {
 		afterRenderEffect(() => {
+			this.#isRootElementBeingSet = true;
 			if (this.#formField?.presentation() && this.contentPresentation()) {
 				this.#editor?.setRootElement(this.contentPresentation()?.nativeElement ?? null);
 				this.#editor?.setEditable(false);
@@ -107,6 +109,7 @@ export class RichTextInputComponent implements OnInit, OnDestroy, ControlValueAc
 				this.#editor?.setRootElement(this.content()?.nativeElement ?? null);
 				this.#editor?.setEditable(true);
 			}
+			this.#isRootElementBeingSet = false;
 		});
 	}
 
@@ -179,12 +182,12 @@ export class RichTextInputComponent implements OnInit, OnDestroy, ControlValueAc
 		const plugins = this.#allPlugins();
 
 		const nextFocusedPlugin = this.#focusedPlugin + direction < 0 ? plugins.length - 1 : (this.#focusedPlugin + direction) % plugins.length;
-		if (plugins[nextFocusedPlugin].tabindex()) {
+		if (plugins[nextFocusedPlugin]?.tabindex?.()) {
 			plugins[this.#focusedPlugin].tabindex?.set(-1);
 			plugins[nextFocusedPlugin].tabindex?.set(0);
 		}
 		this.#focusedPlugin = nextFocusedPlugin;
-		plugins[this.#focusedPlugin].focus();
+		plugins[this.#focusedPlugin]?.focus?.();
 	}
 
 	focus() {
@@ -215,8 +218,10 @@ export class RichTextInputComponent implements OnInit, OnDestroy, ControlValueAc
 				if (!$isRootTextContentEmpty(isComposing, false)) {
 					result = this.#richTextFormatter.format(this.#editor);
 				}
-				this.touch();
 				this.#onChange?.(result);
+				if (!this.#isRootElementBeingSet) {
+					this.touch();
+				}
 			});
 		}
 		const currentCanShowPlaceholder = this.#editor?.getEditorState().read($canShowPlaceholderCurry(isComposing));
