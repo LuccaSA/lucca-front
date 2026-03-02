@@ -1,5 +1,5 @@
 import { DatePipe } from '@angular/common';
-import { ChangeDetectionStrategy, Component, computed, inject, Pipe, PipeTransform, signal } from '@angular/core';
+import { ChangeDetectionStrategy, Component, computed, effect, inject, Pipe, PipeTransform, signal } from '@angular/core';
 import { ButtonComponent } from '@lucca-front/ng/button';
 import { Palette } from '@lucca-front/ng/core';
 import { LuDialogService, provideLuDialog } from '@lucca-front/ng/dialog';
@@ -10,6 +10,14 @@ import { NumericBadgeComponent } from '@lucca-front/ng/numeric-badge';
 import { SkeletonIndexTableComponent } from '@lucca-front/ng/skeleton';
 import { StatusBadgeComponent } from '@lucca-front/ng/status-badge';
 import { LuUserModule, LuUserTileComponent } from '@lucca-front/ng/user';
+import { FilterBarComponent } from '../../../../../packages/ng/filter-pills/filter-bar/filter-bar.component';
+import { SegmentedControlComponent } from '../../../../../packages/ng/segmented-control/segmented-control.component';
+import { SegmentedControlFilterComponent } from '../../../../../packages/ng/segmented-control/filter/filter.component';
+import { CheckboxInputComponent } from '../../../../../packages/ng/forms/checkbox-input/checkbox-input.component';
+import { FilterPillComponent } from '../../../../../packages/ng/filter-pills/filter-pill/filter-pill.component';
+import { DateInputComponent } from '../../../../../packages/ng/date2/date-input/date-input.component';
+import { FilterPillAddonBeforeDirective } from '../../../../../packages/ng/filter-pills/filter-bar/filter-pill-addon.directive';
+import { FormsModule } from '@angular/forms';
 import { TaskFormDialog } from './components/task-form-dialog.component';
 import { TaskGroup, TaskStatus } from './models';
 
@@ -86,6 +94,8 @@ const groupsMock: TaskGroup[] = [
 	},
 ];
 
+type StateFilter = 'ALL' | 'TODO' | 'DONE';
+
 @Component({
 	selector: 'app-data-table-page',
 	imports: [
@@ -100,6 +110,14 @@ const groupsMock: TaskGroup[] = [
 		EmptyStateSectionComponent,
 		NumericBadgeComponent,
 		IconComponent,
+		FilterBarComponent,
+		SegmentedControlComponent,
+		SegmentedControlFilterComponent,
+		CheckboxInputComponent,
+		FilterPillComponent,
+		DateInputComponent,
+		FilterPillAddonBeforeDirective,
+		FormsModule,
 	],
 	changeDetection: ChangeDetectionStrategy.OnPush,
 	templateUrl: './data-table.component.html',
@@ -107,9 +125,11 @@ const groupsMock: TaskGroup[] = [
 })
 export class DataTableComponent {
 	private dialog = inject(LuDialogService); // 2. On injecte
+	stateFilter = signal<StateFilter>('ALL');
+
 	groups = signal<TaskGroup[]>([]);
 
-	isLoading = signal(true);
+	isLoading = signal(false);
 	isEmpty = computed(() => this.groups().length === 0);
 
 	// Complètement équivalent à isEmpty
@@ -148,6 +168,11 @@ export class DataTableComponent {
 		setTimeout(() => {
 			this.isLoading.set(false);
 		}, 1000);
+		// TODO DEV : A SUPPRIMER
+		this.useGroupMocks();
+		effect(() => {
+			this.filterGroups(this.stateFilter());
+		});
 	}
 
 	toggleGroup(groupToUpdate: TaskGroup): void {
@@ -164,6 +189,30 @@ export class DataTableComponent {
 		this.groups.set(updatedGroups);
 	}
 
+	filterGroups(stateFilter: StateFilter) {
+		if (stateFilter === 'ALL') {
+			this.groups.set(groupsMock);
+			return;
+		}
+		const groups = groupsMock
+			.map((group) => {
+				return {
+					...group,
+					tasks: group.tasks.filter((task) => {
+						if (stateFilter === 'TODO') {
+							return task.status === 'InProgress';
+						} else if (stateFilter === 'DONE') {
+							return task.status === 'Completed';
+						}
+						return true;
+					}),
+				};
+			})
+			.filter((group) => group.tasks.length > 0);
+
+		this.groups.set(groups);
+	}
+
 	useGroupMocks(): void {
 		this.groups.set(groupsMock);
 	}
@@ -175,8 +224,6 @@ export class DataTableComponent {
 	toggleLoadingState(): void {
 		this.isLoading.set(!this.isLoading());
 	}
-}
-}
 
 	createNewTask(): void {
 		const ref = this.dialog.open({
@@ -187,4 +234,5 @@ export class DataTableComponent {
 		ref.result$.subscribe((task) => {
 			console.log({ task });
 		});
+	}
 }

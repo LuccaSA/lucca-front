@@ -1,7 +1,20 @@
 <lu-main-layout>
-	<ng-container mainLayoutHeader
-		><div class="container"><div class="fakeContent">header</div></div></ng-container
-	>
+	<ng-container mainLayoutHeader>
+		<div class="container">
+			<div class="fakeContent">header {{ stateFilter() }}</div>
+			<lu-filter-bar>
+				<lu-segmented-control class="filterBar-segmentedControl" *luFilterPillAddonBefore [(ngModel)]="stateFilter">
+					<ng-template #label0>Toutes les tâches <lu-numeric-badge [value]="12" /></ng-template>
+					<ng-template #label1>A réaliser<lu-numeric-badge [value]="5" /></ng-template>
+					<ng-template #label2>Terminées <lu-numeric-badge [value]="3" /></ng-template>
+					<lu-segmented-control-filter [label]="label0" value="ALL" />
+					<lu-segmented-control-filter [label]="label1" value="TODO" />
+					<lu-segmented-control-filter [label]="label2" value="DONE" />
+					<lu-segmented-control-filter label="plop" value="ALL AGAIN" />
+				</lu-segmented-control>
+			</lu-filter-bar>
+		</div>
+	</ng-container>
 	<ng-container mainLayoutMain>
 		<div class="container">
 			<button luButton type="button" (click)="useEmptyGroup()">Go Empty</button>
