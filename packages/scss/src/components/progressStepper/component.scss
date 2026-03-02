@@ -5,6 +5,7 @@
 @mixin component($atRoot: namespace.$defaultAtRoot) {
 	container-type: inline-size;
 	container-name: progressStepper;
+	display: block;
 
 	@at-root ($atRoot) {
 		.progressStepper-list {
@@ -77,7 +78,7 @@
 
 			&::after {
 				font-size: var(--pr-t-font-fontSize-250);
-				color: var(--palettes-700, var(--palettes-product-700));
+				color: var(--components-progressStepper-list-step-number-after-color);
 			}
 		}
 

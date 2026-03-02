@@ -1,0 +1,16 @@
+<ng-template #content>
+	<span class="progressStepper-list-step-number" aria-hidden="true"></span>
+	<span class="progressStepper-list-step-title">
+		<span luTooltip luTooltipWhenEllipsis class="progressStepper-list-step-title-content">
+			{{ label() }}
+		</span>
+	</span>
+</ng-template>
+
+@if (false) {
+	<ng-container *ngTemplateOutlet="content" />
+} @else {
+	<a href="#" class="progressStepper-list-step-linkOptional">
+		<ng-container *ngTemplateOutlet="content" />
+	</a>
+}

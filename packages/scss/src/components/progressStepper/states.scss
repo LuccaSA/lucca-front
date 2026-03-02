@@ -41,4 +41,6 @@
 
 @mixin critical {
 	@include state('sign_close');
+
+	--components-progressStepper-list-step-number-after-color: var(--palettes-critical-700);
 }
