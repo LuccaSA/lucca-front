@@ -3,9 +3,6 @@ import { ICalendarItem } from './calendar-item.interface';
 
 export abstract class ACalendarItem<D> implements ICalendarItem<D> {
 	get id() {
-		if (this.date instanceof Object) {
-			return `${this.granularity}-${this.date.toString()}`;
-		}
 		return `${this.granularity}-${String(this.date)}`;
 	}
 	date: D;
