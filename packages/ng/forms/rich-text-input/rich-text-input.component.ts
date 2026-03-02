@@ -210,18 +210,16 @@ export class RichTextInputComponent implements OnInit, OnDestroy, ControlValueAc
 
 	#onEditorUpdate({ tags, dirtyElements }: UpdateListenerPayload) {
 		const isComposing = this.#editor?.isComposing();
-		if (this.#isRootElementInitialized) {
-			if (!tags.has(INITIAL_UPDATE_TAG) && dirtyElements.size) {
-				this.#editor?.read(() => {
-					let result = '';
-					// ignore empty nodes
-					if (!$isRootTextContentEmpty(isComposing, false)) {
-						result = this.#richTextFormatter.format(this.#editor);
-					}
-					this.touch();
-					this.#onChange?.(result);
-				});
-			}
+		if (this.#isRootElementInitialized && !tags.has(INITIAL_UPDATE_TAG) && dirtyElements.size) {
+			this.#editor?.read(() => {
+				let result = '';
+				// ignore empty nodes
+				if (!$isRootTextContentEmpty(isComposing, false)) {
+					result = this.#richTextFormatter.format(this.#editor);
+				}
+				this.touch();
+				this.#onChange?.(result);
+			});
 		}
 		const currentCanShowPlaceholder = this.#editor?.getEditorState().read($canShowPlaceholderCurry(isComposing));
 		this.currentCanShowPlaceholder.set(currentCanShowPlaceholder);
