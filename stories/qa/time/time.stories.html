@@ -1,0 +1,96 @@
+<table class="demo-QAtable">
+	<tbody>
+		<tr>
+			<td></td>
+			<td>
+				<div class="demo-QAtable-list">lu-duration-picker</div>
+			</td>
+		</tr>
+		<tr>
+			<td>ngModel empty</td>
+			<td>
+				<lu-form-field label="Label" tooltip="Tooltip message" inlineMessage="Helper text" inlineMessageState="default">
+					<lu-duration-picker [(ngModel)]="emptyDuration" />
+				</lu-form-field>
+			</td>
+		</tr>
+		<tr>
+			<td>ngModel filled</td>
+			<td>
+				<lu-form-field label="Label" tooltip="Tooltip message" inlineMessage="Helper text" inlineMessageState="default">
+					<lu-duration-picker [(ngModel)]="filledDuration" />
+				</lu-form-field>
+			</td>
+		</tr>
+		<tr>
+			<td>formControl empty</td>
+			<td>
+				<lu-form-field label="Label" tooltip="Tooltip message" inlineMessage="Helper text" inlineMessageState="default">
+					<lu-duration-picker [formControl]="emptyDurationControl" />
+				</lu-form-field>
+			</td>
+		</tr>
+		<tr>
+			<td>formControl filled</td>
+			<td>
+				<lu-form-field label="Label" tooltip="Tooltip message" inlineMessage="Helper text" inlineMessageState="default">
+					<lu-duration-picker [formControl]="filledDurationControl" />
+				</lu-form-field>
+			</td>
+		</tr>
+		<tr>
+			<td>formControl filled 1000h</td>
+			<td>
+				<lu-form-field label="Label" tooltip="Tooltip message" inlineMessage="Helper text" inlineMessageState="default">
+					<lu-duration-picker [formControl]="filledDuration1000hControl" max="PT9999H" />
+				</lu-form-field>
+			</td>
+		</tr>
+	</tbody>
+</table>
+
+<table class="demo-QAtable">
+	<tbody>
+		<tr>
+			<td></td>
+			<td>
+				<div class="demo-QAtable-list">lu-time-picker</div>
+			</td>
+		</tr>
+		<tr>
+			<td>ngModel empty</td>
+			<td>
+				<lu-form-field label="Label" tooltip="Tooltip message" inlineMessage="Helper text" inlineMessageState="default">
+					<lu-time-picker [(ngModel)]="emptyTime" />
+				</lu-form-field>
+			</td>
+		</tr>
+		<tr>
+			<td>ngModel filled</td>
+			<td>
+				<lu-form-field label="Label" tooltip="Tooltip message" inlineMessage="Helper text" inlineMessageState="default">
+					<lu-time-picker [(ngModel)]="filledTime" />
+				</lu-form-field>
+			</td>
+		</tr>
+		<tr>
+			<td>formControl empty</td>
+			<td>
+				<lu-form-field label="Label" tooltip="Tooltip message" inlineMessage="Helper text" inlineMessageState="default">
+					<lu-time-picker [formControl]="emptyTimeControl" />
+				</lu-form-field>
+			</td>
+		</tr>
+		<tr>
+			<td>formControl filled</td>
+			<td>
+				<lu-form-field label="Label" tooltip="Tooltip message" inlineMessage="Helper text" inlineMessageState="default">
+					<lu-time-picker [formControl]="filledTimeControl" />
+				</lu-form-field>
+			</td>
+		</tr>
+	</tbody>
+</table>
+
+<!-- To tell the ui-diff tool that the page has finished rendering -->
+<span id="ready"></span>

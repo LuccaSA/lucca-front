@@ -111,6 +111,10 @@ export class TimePickerComponent extends BasePickerComponent {
 
 	writeValue(value: ISO8601Time): void {
 		this.value.set(value || '––:––:––');
+		if (value) {
+			this.hoursPart()?.isValueSet.set(true);
+			this.minutesPart()?.isValueSet.set(true);
+		}
 	}
 
 	setDisabledState?(isDisabled: boolean): void {
@@ -196,6 +200,9 @@ export class TimePickerComponent extends BasePickerComponent {
 	private setTime(protoEvent: TimeChangeEvent): void {
 		const hoursPart = getHoursPartFromIsoTime(protoEvent.value);
 		const minutesPart = getMinutesPartFromIsoTime(protoEvent.value);
+
+		this.hoursPart()?.isValueSet.set(true);
+		this.minutesPart()?.isValueSet.set(true);
 
 		const max = isoTimeToSeconds(this.max());
 
