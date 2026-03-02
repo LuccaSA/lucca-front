@@ -4,9 +4,9 @@ export const SoftwareIconList = [
 	'timesheet',
 	'office',
 	'projects',
-	'planning',
+	'shifts',
 	// Talent Management
-	'perfomance',
+	'performance',
 	'engagement',
 	'training',
 	'recruitment',
