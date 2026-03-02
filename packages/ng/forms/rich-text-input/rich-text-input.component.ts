@@ -5,7 +5,7 @@ import {
 	Component,
 	computed,
 	contentChildren,
-	effect,
+	afterRenderEffect,
 	ElementRef,
 	forwardRef,
 	inject,
@@ -99,12 +99,12 @@ export class RichTextInputComponent implements OnInit, OnDestroy, ControlValueAc
 	#editor?: LexicalEditor;
 
 	constructor() {
-		effect(() => {
+		afterRenderEffect(() => {
 			if (this.#formField?.presentation() && this.contentPresentation()) {
-				this.#editor?.setRootElement(this.contentPresentation()?.nativeElement);
+				this.#editor?.setRootElement(this.contentPresentation()?.nativeElement ?? null);
 				this.#editor?.setEditable(false);
 			} else if (this.content()) {
-				this.#editor?.setRootElement(this.content()?.nativeElement);
+				this.#editor?.setRootElement(this.content()?.nativeElement ?? null);
 				this.#editor?.setEditable(true);
 			}
 		});
