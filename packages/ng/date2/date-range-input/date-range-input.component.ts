@@ -14,6 +14,7 @@ import {
 	Injector,
 	input,
 	OnInit,
+	Signal,
 	signal,
 	viewChild,
 	viewChildren,
@@ -112,7 +113,7 @@ export class DateRangeInputComponent extends AbstractDateComponent implements On
 
 	widthAuto = input(false, { transform: booleanAttribute });
 
-	label: PortalContent;
+	label: Signal<PortalContent | undefined> = signal('');
 
 	popoverPositions: ConnectionPositionPair[] = [
 		new ConnectionPositionPair({ originX: 'start', originY: 'bottom' }, { overlayX: 'start', overlayY: 'top' }, -8, 0),
@@ -239,7 +240,7 @@ export class DateRangeInputComponent extends AbstractDateComponent implements On
 
 		if (this.#formFieldRef) {
 			this.#formFieldRef.rolePresentationLabel.set(true);
-			this.label = this.#formFieldRef.label();
+			this.label = computed(() => this.#formFieldRef?.label());
 		}
 
 		effect(() => {
