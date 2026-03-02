@@ -211,17 +211,33 @@ export class LuTooltipTriggerDirective implements OnDestroy {
 		this.closeTooltip();
 	}
 
-	private openTooltip(): void {
-		// If tooltip is already opened, don't do anything
-		if (this.overlayRef) {
-			return;
-		}
-		const position = this.legacyPositionBuilder();
+	private prepareOverlay(): void {
 		this.overlayRef = this.#overlay.create({
-			positionStrategy: position,
 			scrollStrategy: this.#overlay.scrollStrategies.close(),
 			disposeOnNavigation: true,
 		});
+		const describedBy = this.ariaDescribedBy();
+		if (describedBy !== null) {
+			this.overlayRef.overlayElement.id = describedBy;
+		}
+	}
+
+	private openTooltip(): void {
+		// If tooltip is already opened, don't do anything
+		if (this.overlayRef?.hasAttached()) {
+			return;
+		}
+		const position = this.legacyPositionBuilder();
+		// If we don't already have an overlay ref, create it.
+		if (!this.overlayRef) {
+			this.overlayRef = this.#overlay.create({
+				positionStrategy: position,
+				scrollStrategy: this.#overlay.scrollStrategies.close(),
+				disposeOnNavigation: true,
+			});
+		} else {
+			this.overlayRef.updatePositionStrategy(position);
+		}
 		const portal = new ComponentPortal(LuTooltipPanelComponent);
 		const ref = this.overlayRef.attach(portal);
 		position.positionChanges
@@ -248,14 +264,6 @@ export class LuTooltipTriggerDirective implements OnDestroy {
 			ref.instance.content.set('');
 		}
 
-		this.#idEffectRef = ɵeffectWithDeps(
-			[this.ariaDescribedBy],
-			(ariaDescribedBy) => {
-				ref.instance.id.set(ariaDescribedBy);
-			},
-			{ injector: this.#injector },
-		);
-
 		// On tooltip leave => trigger close
 		ref.instance.mouseLeave$.pipe(takeUntilDestroyed(ref.instance.destroyRef)).subscribe(() => this.#action.set('close'));
 		// On tooltip enter => trigger open to keep it opened
@@ -265,16 +273,19 @@ export class LuTooltipTriggerDirective implements OnDestroy {
 	private closeTooltip(): void {
 		if (this.overlayRef) {
 			this.overlayRef.detach();
-			delete this.overlayRef;
 		}
 		this.#effectRef?.destroy();
-		this.#idEffectRef?.destroy();
 	}
 
 	private setAccessibilityProperties(tabindex: number | null): void {
 		if (tabindex === null) {
 			this.#renderer.removeAttribute(this.#host.nativeElement, 'tabindex');
 			return;
+		}
+
+		if (!this.luTooltipWhenEllipsis() && !this.luTooltipOnlyForDisplay()) {
+			// if it's shown to keyboard readers, prepare overlay container beforehand.
+			this.prepareOverlay();
 		}
 
 		const tag = this.#host.nativeElement.tagName.toLowerCase();
