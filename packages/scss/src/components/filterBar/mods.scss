@@ -26,6 +26,7 @@
 
 	.filterBar-scrollBox.scrollBox {
 		@include overflow.hide;
+		@include scrollBox.noBackground;
 	}
 }
 
