@@ -97,11 +97,10 @@ export class RichTextInputComponent implements OnInit, OnDestroy, ControlValueAc
 	#cleanup?: () => void;
 	#focusedPlugin: number = 0;
 	#editor?: LexicalEditor;
-	#isRootElementBeingSet = false;
+	#isRootElementInitialized = false;
 
 	constructor() {
 		afterRenderEffect(() => {
-			this.#isRootElementBeingSet = true;
 			if (this.#formField?.presentation() && this.contentPresentation()) {
 				this.#editor?.setRootElement(this.contentPresentation()?.nativeElement ?? null);
 				this.#editor?.setEditable(false);
@@ -109,7 +108,7 @@ export class RichTextInputComponent implements OnInit, OnDestroy, ControlValueAc
 				this.#editor?.setRootElement(this.content()?.nativeElement ?? null);
 				this.#editor?.setEditable(true);
 			}
-			this.#isRootElementBeingSet = false;
+			this.#isRootElementInitialized = true;
 		});
 	}
 
@@ -211,18 +210,18 @@ export class RichTextInputComponent implements OnInit, OnDestroy, ControlValueAc
 
 	#onEditorUpdate({ tags, dirtyElements }: UpdateListenerPayload) {
 		const isComposing = this.#editor?.isComposing();
-		if (!tags.has(INITIAL_UPDATE_TAG) && dirtyElements.size) {
-			this.#editor?.read(() => {
-				let result = '';
-				// ignore empty nodes
-				if (!$isRootTextContentEmpty(isComposing, false)) {
-					result = this.#richTextFormatter.format(this.#editor);
-				}
-				this.#onChange?.(result);
-				if (!this.#isRootElementBeingSet) {
+		if (this.#isRootElementInitialized) {
+			if (!tags.has(INITIAL_UPDATE_TAG) && dirtyElements.size) {
+				this.#editor?.read(() => {
+					let result = '';
+					// ignore empty nodes
+					if (!$isRootTextContentEmpty(isComposing, false)) {
+						result = this.#richTextFormatter.format(this.#editor);
+					}
 					this.touch();
-				}
-			});
+					this.#onChange?.(result);
+				});
+			}
 		}
 		const currentCanShowPlaceholder = this.#editor?.getEditorState().read($canShowPlaceholderCurry(isComposing));
 		this.currentCanShowPlaceholder.set(currentCanShowPlaceholder);
