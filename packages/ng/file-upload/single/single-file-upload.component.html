@@ -8,7 +8,7 @@
 		(dragenter)="droppable = true"
 		(dragleave)="droppable = false"
 		(change)="filesChange($event)"
-		[attr.disabled]="disabled()"
+		[attr.disabled]="disabled() ? 'disabled' : null"
 		[attr.aria-describedby]="'fileUpload-instruction-' + idSuffix"
 	/>
 	<div class="fileUpload-status">
