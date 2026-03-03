@@ -168,7 +168,6 @@ export class LuTooltipTriggerDirective implements OnDestroy {
 
 	overlayRef?: OverlayRef;
 	#effectRef?: EffectRef;
-	#idEffectRef?: EffectRef;
 
 	constructor() {
 		afterEveryRender({
