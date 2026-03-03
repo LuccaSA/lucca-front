@@ -1,4 +1,4 @@
-import { AfterViewInit, ChangeDetectionStrategy, Component, ElementRef, forwardRef, inject, input, OnDestroy, signal, TemplateRef, viewChild, ViewContainerRef } from '@angular/core';
+import { ChangeDetectionStrategy, Component, ElementRef, forwardRef, inject, input, OnDestroy, signal, TemplateRef, viewChild, ViewContainerRef } from '@angular/core';
 import { AutoLinkNode, createLinkMatcherWithRegExp, LinkNode, registerAutoLink } from '@lexical/link';
 import { $getNearestNodeOfType, mergeRegister } from '@lexical/utils';
 import { ButtonComponent } from '@lucca-front/ng/button';
@@ -14,8 +14,8 @@ import { LU_RICH_TEXT_INPUT_TRANSLATIONS } from '../../rich-text-input.translate
 import { getSelectedNode } from '../../utils';
 import { LinkDialogComponent } from './link-dialog';
 import { FORMAT_LINK, registerLink, registerLinkSelectionChange } from './link.command';
-import { PopoverAutoLinkNode } from './popover-autolink-node';
-import { PopoverLinkNode } from './popover-link-node';
+import { $createPopoverLinkNode, PopoverLinkNode } from './popover-link-node';
+import { $createPopoverAutoLinkNode, PopoverAutoLinkNode } from './popover-autolink-node';
 
 const URL_REGEX = /https?:\/\/(?:www\.)?[-a-zA-Z0-9@:%._+~#=]{1,256}\.[a-zA-Z0-9()]{1,6}\b(?:[-a-zA-Z0-9()@:%_+.~#?&/=;,[\]]*)/;
 const EMAIL_REGEX = /(([^<>()[\]\\.,;:\s@"]+(\.[^<>()[\]\\.,;:\s@"]+)*)|(".+"))@((\[[0-9]{1,3}\.[0-9]{1,3}\.[0-9]{1,3}\.[0-9]{1,3}\])|(([a-zA-Z\-0-9]+\.)+[a-zA-Z]{2,}))/;
@@ -37,7 +37,7 @@ const EMAIL_REGEX = /(([^<>()[\]\\.,;:\s@"]+(\.[^<>()[\]\\.,;:\s@"]+)*)|(".+"))@
 		},
 	],
 })
-export class LinkComponent implements OnDestroy, AfterViewInit, RichTextPluginComponent {
+export class LinkComponent implements OnDestroy, RichTextPluginComponent {
 	readonly #luDialogService = inject(LuDialogService);
 	readonly #viewContainerRef = inject(ViewContainerRef);
 
@@ -47,21 +47,11 @@ export class LinkComponent implements OnDestroy, AfterViewInit, RichTextPluginCo
 	readonly tabindex = signal<number>(-1);
 	readonly active = signal(false);
 	readonly isDisabled = signal(false);
+	readonly intl = input(...intlInputOptions(LU_RICH_TEXT_INPUT_TRANSLATIONS));
 
 	#editor?: LexicalEditor;
-	intl = input(...intlInputOptions(LU_RICH_TEXT_INPUT_TRANSLATIONS));
 
 	#registeredCommands: () => void = () => {};
-
-	constructor() {
-		PopoverLinkNode.setViewContainerRef(this.#viewContainerRef);
-		PopoverAutoLinkNode.setViewContainerRef(this.#viewContainerRef);
-	}
-
-	ngAfterViewInit() {
-		PopoverLinkNode.setTemplateRef(this.linkNodeTemplate());
-		PopoverAutoLinkNode.setTemplateRef(this.linkNodeTemplate());
-	}
 
 	setEditorInstance(editor: LexicalEditor) {
 		this.#editor = editor;
@@ -82,20 +72,24 @@ export class LinkComponent implements OnDestroy, AfterViewInit, RichTextPluginCo
 			{
 				replace: LinkNode,
 				with: (node: LinkNode) =>
-					new PopoverLinkNode(node.getURL(), {
+					$createPopoverLinkNode(node.getURL(), {
 						rel: node.getRel(),
 						target: node.getTarget(),
 						title: node.getTitle(),
+						viewContainerRef: this.#viewContainerRef,
+						templateRef: this.linkNodeTemplate(),
 					}),
 				withKlass: PopoverLinkNode,
 			},
 			{
 				replace: AutoLinkNode,
 				with: (node: AutoLinkNode) =>
-					new PopoverAutoLinkNode(node.getURL(), {
+					$createPopoverAutoLinkNode(node.getURL(), {
 						rel: node.getRel(),
 						target: node.getTarget(),
 						title: node.getTitle(),
+						viewContainerRef: this.#viewContainerRef,
+						templateRef: this.linkNodeTemplate(),
 					}),
 				withKlass: PopoverAutoLinkNode,
 			},
