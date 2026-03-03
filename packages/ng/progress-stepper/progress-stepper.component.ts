@@ -1,4 +1,3 @@
-import { JsonPipe } from '@angular/common';
 import { ChangeDetectionStrategy, Component, contentChildren, forwardRef, input, numberAttribute, ViewEncapsulation } from '@angular/core';
 import { ProgressStepperStepComponent } from './progress-stepper-step/progress-stepper-step.component';
 import { LU_PROGRESS_STEPPER_INSTANCE } from './progress-stepper.token';
@@ -9,7 +8,6 @@ import { LU_PROGRESS_STEPPER_INSTANCE } from './progress-stepper.token';
 	styleUrl: './progress-stepper.component.scss',
 	encapsulation: ViewEncapsulation.None,
 	changeDetection: ChangeDetectionStrategy.OnPush,
-	imports: [JsonPipe],
 	host: {
 		class: 'progressStepper',
 	},
