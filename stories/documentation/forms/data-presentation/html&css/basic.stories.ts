@@ -6,8 +6,8 @@ export default {
 
 function getTemplate(): string {
 	return `<dl class="presentation">
-	<dt class="presentation-description-term">label</dt>
-	<dd class="presentation-description-definition">Value</dd>
+	<dt class="presentation-term">label</dt>
+	<dd class="presentation-definition">Value</dd>
 </dl>`;
 }
 

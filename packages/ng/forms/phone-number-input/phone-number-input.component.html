@@ -55,7 +55,7 @@
 
 <ng-container *luPresentationDisplayDefault>
 	@if (currentValue()) {
-		<a class="presentation-description-definition-link" href="tel:{{ currentValue() }}">{{ currentValue() }}</a>
+		<a class="presentation-definition-link" href="tel:{{ currentValue() }}">{{ currentValue() }}</a>
 	} @else {
 		<div aria-hidden="true" data-content-before="–"></div>
 	}
