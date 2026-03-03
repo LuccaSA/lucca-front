@@ -7,10 +7,28 @@
 	</span>
 </ng-template>
 
-@if (routerLinkParam()) {
-	<a [routerLink]="routerLinkParam()" class="progressStepper-list-step-linkOptional">
-		<ng-container *ngTemplateOutlet="content" />
-	</a>
+@let typedRouterLinkParam = routerLinkParam();
+
+@if (typedRouterLinkParam) {
+	@if (typedRouterLinkParam | luTypeGuard: isRouterLinkParam) {
+		<a
+			[routerLink]="typedRouterLinkParam.commands"
+			[queryParams]="typedRouterLinkParam?.queryParams"
+			[fragment]="typedRouterLinkParam?.fragment"
+			[target]="typedRouterLinkParam?.target"
+			[relativeTo]="typedRouterLinkParam?.relativeTo"
+			[preserveFragment]="typedRouterLinkParam?.preserveFragment"
+			[skipLocationChange]="typedRouterLinkParam?.skipLocationChange"
+			[replaceUrl]="typedRouterLinkParam?.replaceUrl"
+			class="progressStepper-list-step-linkOptional"
+		>
+			<ng-container *ngTemplateOutlet="content" />
+		</a>
+	} @else {
+		<a [routerLink]="typedRouterLinkParam" class="progressStepper-list-step-linkOptional">
+			<ng-container *ngTemplateOutlet="content" />
+		</a>
+	}
 } @else {
 	<ng-container *ngTemplateOutlet="content" />
 }

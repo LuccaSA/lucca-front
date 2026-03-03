@@ -1,6 +1,7 @@
 import { NgTemplateOutlet } from '@angular/common';
 import { ChangeDetectionStrategy, Component, computed, inject, input, ViewEncapsulation } from '@angular/core';
 import { RouterLink, RouterModule, UrlTree } from '@angular/router';
+import { isRouterLinkParam, LuTypeGuardPipe, RouterLinkParam } from '@lucca-front/ng/core';
 import { LuTooltipTriggerDirective } from '@lucca-front/ng/tooltip';
 import { LU_PROGRESS_STEPPER_INSTANCE } from '../progress-stepper.token';
 
@@ -9,7 +10,7 @@ import { LU_PROGRESS_STEPPER_INSTANCE } from '../progress-stepper.token';
 	templateUrl: './progress-stepper-step.component.html',
 	encapsulation: ViewEncapsulation.None,
 	changeDetection: ChangeDetectionStrategy.OnPush,
-	imports: [NgTemplateOutlet, LuTooltipTriggerDirective, RouterModule, RouterLink],
+	imports: [NgTemplateOutlet, LuTooltipTriggerDirective, RouterModule, RouterLink, LuTypeGuardPipe],
 	host: {
 		class: 'progressStepper-list-step',
 		role: 'listitem',
@@ -19,15 +20,14 @@ import { LU_PROGRESS_STEPPER_INSTANCE } from '../progress-stepper.token';
 	},
 })
 export class ProgressStepperStepComponent {
-	protected progressStepperRef = inject(LU_PROGRESS_STEPPER_INSTANCE);
+	protected readonly progressStepperRef = inject(LU_PROGRESS_STEPPER_INSTANCE);
 
 	readonly label = input.required<string>();
 	readonly state = input<'success' | 'critical' | null>(null);
 
-	readonly routerLinkParam = input<string | readonly string[] | UrlTree | null | undefined>(null);
-	// TODO: add others params
+	readonly routerLinkParam = input<RouterLinkParam | string | readonly string[] | UrlTree | null | undefined>(null);
 
-	position = computed(() => {
-		return this.progressStepperRef.steps().indexOf(this) + 1;
-	});
+	protected readonly position = computed(() => this.progressStepperRef.steps().indexOf(this) + 1);
+
+	protected readonly isRouterLinkParam = isRouterLinkParam;
 }
