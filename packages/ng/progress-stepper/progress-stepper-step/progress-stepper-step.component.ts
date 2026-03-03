@@ -23,6 +23,7 @@ export class ProgressStepperStepComponent {
 	protected readonly progressStepperRef = inject(LU_PROGRESS_STEPPER_INSTANCE);
 
 	readonly label = input.required<string>();
+
 	readonly state = input<'success' | 'critical' | null>(null);
 
 	readonly routerLinkParam = input<RouterLinkParam | string | readonly string[] | UrlTree | null | undefined>(null);

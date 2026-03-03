@@ -19,6 +19,7 @@ import { LU_PROGRESS_STEPPER_INSTANCE } from './progress-stepper.token';
 	],
 })
 export class ProgressStepperComponent {
-	readonly current = input(1, { transform: numberAttribute });
 	public readonly steps = contentChildren(ProgressStepperStepComponent);
+
+	readonly current = input(1, { transform: numberAttribute });
 }
