@@ -1,5 +1,6 @@
+import { provideRouter, RouterLink } from '@angular/router';
 import { ProgressStepperComponent, ProgressStepperStepComponent } from '@lucca-front/ng/progress-stepper';
-import { Meta, moduleMetadata } from '@storybook/angular';
+import { applicationConfig, Meta, moduleMetadata } from '@storybook/angular';
 import { cleanupTemplate } from 'stories/helpers/stories';
 
 interface Story {
@@ -22,7 +23,10 @@ export default {
 	},
 	decorators: [
 		moduleMetadata({
-			imports: [ProgressStepperComponent, ProgressStepperStepComponent],
+			imports: [ProgressStepperComponent, ProgressStepperStepComponent, RouterLink],
+		}),
+		applicationConfig({
+			providers: [provideRouter([{ path: 'iframe.html', redirectTo: '', pathMatch: 'full' }])],
 		}),
 	],
 	render: (args: Story) => {
@@ -32,8 +36,8 @@ export default {
 	<lu-progress-stepper-step label="Lorem ipsum dolor" />`;
 		return {
 			template: cleanupTemplate(`<lu-progress-stepper class="palette-cleemy" current="${args.current}">
-	<lu-progress-stepper-step label="${args.label}"${critical} />
-	<lu-progress-stepper-step label="Lorem ipsum dolor"${success} />${step.repeat(args.steps - 2)}
+	<lu-progress-stepper-step [routerLinkParam]="'./route/step-1/'" label="${args.label}"${critical} />
+	<lu-progress-stepper-step [routerLinkParam]="'./route/step-2/'" label="Lorem ipsum dolor"${success} />${step.repeat(args.steps - 2)}
 </lu-progress-stepper>`),
 		};
 	},

@@ -1,5 +1,6 @@
 import { NgTemplateOutlet } from '@angular/common';
 import { ChangeDetectionStrategy, Component, computed, inject, input, ViewEncapsulation } from '@angular/core';
+import { RouterLink, RouterModule, UrlTree } from '@angular/router';
 import { LuTooltipTriggerDirective } from '@lucca-front/ng/tooltip';
 import { LU_PROGRESS_STEPPER_INSTANCE } from '../progress-stepper.token';
 
@@ -8,7 +9,7 @@ import { LU_PROGRESS_STEPPER_INSTANCE } from '../progress-stepper.token';
 	templateUrl: './progress-stepper-step.component.html',
 	encapsulation: ViewEncapsulation.None,
 	changeDetection: ChangeDetectionStrategy.OnPush,
-	imports: [NgTemplateOutlet, LuTooltipTriggerDirective],
+	imports: [NgTemplateOutlet, LuTooltipTriggerDirective, RouterModule, RouterLink],
 	host: {
 		class: 'progressStepper-list-step',
 		role: 'listitem',
@@ -22,6 +23,9 @@ export class ProgressStepperStepComponent {
 
 	readonly label = input.required<string>();
 	readonly state = input<'success' | 'critical' | null>(null);
+
+	readonly routerLinkParam = input<string | readonly string[] | UrlTree | null | undefined>(null);
+	// TODO: add others params
 
 	position = computed(() => {
 		return this.progressStepperRef.steps().indexOf(this) + 1;

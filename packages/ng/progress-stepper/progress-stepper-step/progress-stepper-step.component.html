@@ -7,10 +7,10 @@
 	</span>
 </ng-template>
 
-@if (false) {
-	<ng-container *ngTemplateOutlet="content" />
-} @else {
-	<a href="#" class="progressStepper-list-step-linkOptional">
+@if (routerLinkParam()) {
+	<a [routerLink]="routerLinkParam()" class="progressStepper-list-step-linkOptional">
 		<ng-container *ngTemplateOutlet="content" />
 	</a>
+} @else {
+	<ng-container *ngTemplateOutlet="content" />
 }
