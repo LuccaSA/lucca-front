@@ -35,7 +35,7 @@ export default {
 		const step = `
 	<lu-progress-stepper-step label="Lorem ipsum dolor" />`;
 		return {
-			template: cleanupTemplate(`<lu-progress-stepper class="palette-cleemy" current="${args.current}">
+			template: cleanupTemplate(`<lu-progress-stepper current="${args.current}">
 	<lu-progress-stepper-step [routerLinkParam]="'./route/step-1/'" label="${args.label}"${critical} />
 	<lu-progress-stepper-step [routerLinkParam]="'./route/step-2/'" label="Lorem ipsum dolor"${success} />${step.repeat(args.steps - 2)}
 </lu-progress-stepper>`),
