@@ -8,9 +8,6 @@ import { PortalContent, PortalDirective } from '@lucca-front/ng/core';
 	styleUrl: './data-presentation.component.scss',
 	encapsulation: ViewEncapsulation.None,
 	changeDetection: ChangeDetectionStrategy.OnPush,
-	host: {
-		class: 'presentation',
-	},
 })
 export class DataPresentationComponent {
 	readonly label = input.required<PortalContent>();
