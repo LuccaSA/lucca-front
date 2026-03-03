@@ -250,6 +250,9 @@
 					<button type="button" class="button mod-outlined is-success">Success</button>
 					<button type="button" class="button mod-ghost is-success">Success</button>
 					<button type="button" class="button is-error">Error (reset .is-error class)</button>
+					<button type="button" class="button is-loading mod-AI mod-withIcon">
+						<span aria-hidden="true" class="lucca-icon icon-heart"></span>Loading
+					</button>
 					<button type="button" class="button is-loading mod-S">Loading S</button>
 					<button type="button" class="button is-success mod-S">Success S</button>
 					<button type="button" class="button is-loading mod-XS">Loading XS</button>
@@ -265,6 +268,7 @@
 					<button type="button" luButton="outlined" state="success">Success</button>
 					<button type="button" luButton="ghost" state="success">Success</button>
 					<button type="button" luButton state="error">Error (reset .is-error class)</button>
+					<button type="button" luButton="AI" state="loading"><lu-icon icon="heart" alt="AI" />Loading</button>
 					<button type="button" luButton state="loading" size="S">Loading S</button>
 					<button type="button" luButton state="success" size="S">Success S</button>
 					<button type="button" luButton state="loading" size="XS">Loading XS</button>
@@ -281,6 +285,9 @@
 					<button type="button" class="button is-disabled">Disabled</button>
 					<button type="button" class="button palette-product is-disabled">Disabled</button>
 					<button type="button" class="button" disabled>Disabled<span class="numericBadge palette-product">7</span></button>
+					<button type="button" class="button mod-AI mod-withIcon" disabled>
+						<span aria-hidden="true" class="lucca-icon icon-heart"></span>Disabled
+					</button>
 					<button type="button" class="button palette-error mod-outlined" disabled>Disabled</button>
 					<button type="button" class="button mod-outlined" disabled>Disabled</button>
 					<button type="button" class="button mod-ghost" disabled>Disabled</button>
@@ -292,6 +299,7 @@
 					<button type="button" luButton aria-disabled="true">Disabled</button>
 					<button type="button" luButton disabled palette="product">Disabled</button>
 					<button type="button" luButton disabled>Disabled<lu-numeric-badge [value]="7" /></button>
+					<button type="button" luButton="AI" disabled><lu-icon icon="heart" alt="AI" />Loading</button>
 					<button type="button" luButton="outlined" disabled>Disabled</button>
 					<button type="button" luButton="ghost" disabled>Disabled</button>
 				</div>
