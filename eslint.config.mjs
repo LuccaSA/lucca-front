@@ -23,7 +23,6 @@ const STRICTIFIED_NG_EXCLUDE_ENTRIES = [
 	'packages/ng/forms/**/*.ts',
 	'packages/ng/index-table/**/*.ts',
 	'packages/ng/input/**/*.ts',
-	'packages/ng/modal/**/*.ts',
 	'packages/ng/multi-select/**/*.ts',
 	'packages/ng/option/**/*.ts',
 	'packages/ng/popover/**/*.ts',
