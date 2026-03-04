@@ -2,24 +2,26 @@
 	--components-mainLayout-flexDirection: row;
 }
 
-@mixin stickyHeader {
+@mixin stickyHeaderHorizontal {
 	--components-mainLayout-content-inside-header-position: sticky;
+}
+
+@mixin stickyFooterHorizontal {
+	--components-mainLayout-content-inside-footer-position: sticky;
+}
+
+@mixin stickyHeaderVertical {
+	--components-mainLayout-content-inside-header-position: sticky;
+	--components-mainLayout-content-inside-header-insetBlockStart: 0;
 	--components-mainLayout-content-inside-header-backgroundColor: var(--commons-background-base);
 }
 
-@mixin stickyFooter {
+@mixin stickyFooterVertical {
 	--components-mainLayout-content-inside-footer-position: sticky;
+	--components-mainLayout-content-inside-footer-insetBlockEnd: 0;
 	--components-mainLayout-content-inside-footer-backgroundColor: var(--commons-background-base);
 }
 
 @mixin stickyBlock {
 	--components-mainLayout-content-inside-block-position: sticky;
-}
-
-@mixin stickyTop {
-	--components-mainLayout-content-inside-header-insetBlockStart: 0;
-}
-
-@mixin stickyBottom {
-	--components-mainLayout-content-inside-footer-insetBlockEnd: 0;
 }
