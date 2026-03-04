@@ -14,28 +14,28 @@ export class LuModal {
 	protected _config = inject(LU_MODAL_CONFIG);
 	protected luDialogService = inject(LuDialogService);
 
-	open<T extends ILuModalContent, D>(component: ComponentType<T>, data: D = undefined, config: Partial<LuModalConfig> = {}): ILuModalRef<D, LuModalContentResult<T>> {
+	open<T extends ILuModalContent, D>(component: ComponentType<T>, data: D | undefined = undefined, config: Partial<LuModalConfig> = {}): ILuModalRef<D, LuModalContentResult<T>> {
 		const extendedConfig = { ...this._config, ...config } as LuModalConfig;
 		const mode = extendedConfig.mode === 'sidepanel' ? 'drawer' : 'default';
 		const dialogRef = this.luDialogService.open({
 			content: DialogContentAdapterComponent<D, T>,
 			data: {
 				component: component,
-				data,
+				data: data as D,
 			},
 			modal: !extendedConfig.noBackdrop,
 			alert: extendedConfig.undismissable,
 			size: extendedConfig.size as LuDialogConfig<unknown>['size'],
 			mode,
-			panelClasses: Array.isArray(extendedConfig.panelClass) ? extendedConfig.panelClass : [extendedConfig.panelClass],
+			panelClasses: Array.isArray(extendedConfig.panelClass) ? extendedConfig.panelClass : extendedConfig.panelClass ? [extendedConfig.panelClass] : [],
 		});
 		return new DialogRefAdapter<D, T>(dialogRef);
 	}
 
-	legacyOpen<T extends ILuModalContent, D>(component: ComponentType<T>, data: D = undefined, config: Partial<LuModalConfig> = {}): ILuModalRef<D, LuModalContentResult<T>> {
+	legacyOpen<T extends ILuModalContent, D>(component: ComponentType<T>, data: D | undefined = undefined, config: Partial<LuModalConfig> = {}): ILuModalRef<D, LuModalContentResult<T>> {
 		const extendedConfig = { ...this._config, ...config } as LuModalConfig;
 		const ref = this._factory.forge<T, LuModalConfig, D>(component, extendedConfig);
-		ref.open(data);
+		ref.open(data as D);
 		return ref;
 	}
 }
