@@ -12,7 +12,6 @@ import tsParser from '@typescript-eslint/parser';
 const STRICTIFIED_NG_EXCLUDE_ENTRIES = [
 	'packages/ng/core/**/*.ts',
 	'packages/ng/core-select/**/*.ts',
-	'packages/ng/data-table/**/*.ts',
 	'packages/ng/date2/**/*.ts',
 	'packages/ng/dialog/**/*.ts',
 	'packages/ng/establishment/**/*.ts',
