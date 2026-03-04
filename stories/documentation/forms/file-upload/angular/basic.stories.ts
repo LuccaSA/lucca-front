@@ -121,6 +121,9 @@ export default {
 		},
 		fileMaxSize: {
 			description: 'Limite le poids des fichiers importables (en octets).',
+			control: {
+				type: null,
+			},
 		},
 		illustration: {
 			options: ['invoice', 'picture'],

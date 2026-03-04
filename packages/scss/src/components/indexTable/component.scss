@@ -49,6 +49,12 @@
 			display: table-cell;
 			text-align: start;
 			font-weight: var(--pr-t-font-fontWeight-regular);
+
+			&:first-child {
+				.checkboxField {
+					--component-checkboxField-top: 0;
+				}
+			}
 		}
 
 		.indexTable-head-row-transparentCell,

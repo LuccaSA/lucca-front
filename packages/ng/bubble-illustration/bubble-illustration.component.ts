@@ -16,13 +16,18 @@ export class BubbleIllustrationComponent {
 	readonly path = '/transverse/prisme/visuals/bubble-illustration/';
 	readonly extension = '.svg';
 
-	readonly illustration = input.required<BubbleIllustration>();
+	readonly illustration = input.required<BubbleIllustration | string>();
 
 	readonly palette = input<Palette | DecorativePalette>('product');
 	readonly size = input<'S' | 'L' | ''>('');
 	readonly action = input(false, { transform: booleanAttribute });
 
-	readonly illustrationUrl = computed(() => `${this.domain}${this.path}${this.illustration()}${this.extension}`);
+	readonly illustrationUrl = computed(() => {
+		if (this.illustration().startsWith('https://')) {
+			return this.illustration();
+		}
+		return `${this.domain}${this.path}${this.illustration()}${this.extension}`;
+	});
 
 	readonly paletteClass = computed(() => ({ [`palette-${this.palette()}`]: !!this.palette() }));
 }

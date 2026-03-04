@@ -8,7 +8,7 @@
 	flex-direction: var(--components-mainLayout-flexDirection);
 	block-size: 100%;
 
-	&:target {
+	&:focus-visible {
 		position: relative;
 
 		&::after {

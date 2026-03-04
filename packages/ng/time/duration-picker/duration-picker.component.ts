@@ -27,7 +27,7 @@ import { LU_DURATION_PICKER_TRANSLATIONS } from './duration-picker.translate';
 	],
 })
 export class DurationPickerComponent extends BasePickerComponent {
-	protected intl = input(...intlInputOptions(LU_DURATION_PICKER_TRANSLATIONS));
+	readonly intl = input(...intlInputOptions(LU_DURATION_PICKER_TRANSLATIONS));
 
 	value = model<ISO8601Duration>('PT0S');
 	readonly max = input<ISO8601Duration>('PT99H');
@@ -71,6 +71,10 @@ export class DurationPickerComponent extends BasePickerComponent {
 
 	writeValue(value: ISO8601Duration): void {
 		this.value.set(value || 'PT0S');
+		if (value) {
+			this.hoursPart()?.isValueSet.set(true);
+			this.minutesPart()?.isValueSet.set(true);
+		}
 	}
 
 	setDisabledState?(isDisabled: boolean): void {
@@ -165,8 +169,8 @@ export class DurationPickerComponent extends BasePickerComponent {
 		let hoursPart = getHoursPartFromDuration(protoEvent.value);
 		const minutesPart = getMinutesPartFromDuration(protoEvent.value);
 
-		this.hoursPart().isValueSet.set(true);
-		this.minutesPart().isValueSet.set(true);
+		this.hoursPart()?.isValueSet.set(true);
+		this.minutesPart()?.isValueSet.set(true);
 
 		if (hoursPart < 0) {
 			if (hoursPart === -1) {

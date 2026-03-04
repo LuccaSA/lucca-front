@@ -1,11 +1,11 @@
 import { CommonModule } from '@angular/common';
 import {
+	afterRenderEffect,
 	booleanAttribute,
 	ChangeDetectionStrategy,
 	Component,
 	computed,
 	contentChildren,
-	effect,
 	ElementRef,
 	forwardRef,
 	inject,
@@ -97,16 +97,18 @@ export class RichTextInputComponent implements OnInit, OnDestroy, ControlValueAc
 	#cleanup?: () => void;
 	#focusedPlugin: number = 0;
 	#editor?: LexicalEditor;
+	#isRootElementInitialized = false;
 
 	constructor() {
-		effect(() => {
+		afterRenderEffect(() => {
 			if (this.#formField?.presentation() && this.contentPresentation()) {
-				this.#editor?.setRootElement(this.contentPresentation()?.nativeElement);
+				this.#editor?.setRootElement(this.contentPresentation()?.nativeElement ?? null);
 				this.#editor?.setEditable(false);
 			} else if (this.content()) {
-				this.#editor?.setRootElement(this.content()?.nativeElement);
+				this.#editor?.setRootElement(this.content()?.nativeElement ?? null);
 				this.#editor?.setEditable(true);
 			}
+			this.#isRootElementInitialized = true;
 		});
 	}
 
@@ -179,12 +181,12 @@ export class RichTextInputComponent implements OnInit, OnDestroy, ControlValueAc
 		const plugins = this.#allPlugins();
 
 		const nextFocusedPlugin = this.#focusedPlugin + direction < 0 ? plugins.length - 1 : (this.#focusedPlugin + direction) % plugins.length;
-		if (plugins[nextFocusedPlugin].tabindex()) {
+		if (plugins[nextFocusedPlugin]?.tabindex?.()) {
 			plugins[this.#focusedPlugin].tabindex?.set(-1);
 			plugins[nextFocusedPlugin].tabindex?.set(0);
 		}
 		this.#focusedPlugin = nextFocusedPlugin;
-		plugins[this.#focusedPlugin].focus();
+		plugins[this.#focusedPlugin]?.focus?.();
 	}
 
 	focus() {
@@ -208,7 +210,7 @@ export class RichTextInputComponent implements OnInit, OnDestroy, ControlValueAc
 
 	#onEditorUpdate({ tags, dirtyElements }: UpdateListenerPayload) {
 		const isComposing = this.#editor?.isComposing();
-		if (!tags.has(INITIAL_UPDATE_TAG) && dirtyElements.size) {
+		if (this.#isRootElementInitialized && !tags.has(INITIAL_UPDATE_TAG) && dirtyElements.size) {
 			this.#editor?.read(() => {
 				let result = '';
 				// ignore empty nodes

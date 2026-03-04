@@ -4,6 +4,7 @@
 @use '@lucca-front/icons/src/icon/exports' as icon;
 @use '@lucca-front/scss/src/commons/utils/namespace';
 @use '@lucca-front/scss/src/commons/utils/color';
+@use '@lucca-front/scss/src/components/chip/exports' as chip;
 
 @mixin component($atRoot: namespace.$defaultAtRoot) {
 	display: flex;
@@ -31,10 +32,10 @@
 			flex: 1;
 		}
 
-		.multipleSelect-displayer-chip {
+		.multipleSelect-displayer-chip.chip {
 			min-inline-size: 0;
 
-			@include color.palette('product');
+			@include chip.product;
 		}
 
 		.multipleSelect-displayer-chip-value {

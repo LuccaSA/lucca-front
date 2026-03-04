@@ -8,7 +8,7 @@ export default {
 } as Meta;
 
 function getTemplate(args: ChipPalettesStory): string {
-	return `<div class="chip palette-product">
+	return `<div class="chip mod-product">
 	Label
 	<button type="button" class="chip-kill">
 		<span class="pr-u-mask">delete</span>
