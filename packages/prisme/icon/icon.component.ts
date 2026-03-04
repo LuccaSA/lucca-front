@@ -3,7 +3,7 @@ import { booleanAttribute, ChangeDetectionStrategy, Component, computed, input, 
 import type { LuccaIcon } from './icons';
 
 @Component({
-	selector: 'lu-icon,pr-icon',
+	selector: 'lu-icon, pr-icon',
 	imports: [NgClass],
 	templateUrl: './icon.component.html',
 	styleUrl: './icon.component.scss',
