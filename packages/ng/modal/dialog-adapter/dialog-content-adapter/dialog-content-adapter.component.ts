@@ -94,7 +94,7 @@ export class DialogContentAdapterComponent<D, C extends ILuModalContent> impleme
 				this.ref.close(result$ as LuModalContentResult<C>);
 			}
 		} else {
-			this.ref.close(undefined);
+			this.ref.close(undefined as LuModalContentResult<C>);
 		}
 	}
 

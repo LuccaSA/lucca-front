@@ -70,7 +70,7 @@ export abstract class ALuModalPanelComponent<T extends ILuModalContent> implemen
 	submit() {
 		this.error$.next(undefined);
 		this.submitClass$.next('is-loading');
-		const result$ = this._componentInstance.submitAction();
+		const result$ = this._componentInstance.submitAction?.();
 		if (result$ instanceof Observable) {
 			this._subs.add(
 				result$
