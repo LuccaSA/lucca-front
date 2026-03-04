@@ -43,11 +43,15 @@ export abstract class ALuPopupRef<T = unknown, D = unknown, R = unknown, C exten
 
 		this._subToCloseEvents();
 
-		this.onOpen.next(data);
+		if (data) {
+			this.onOpen.next(data);
+		}
 		this.onOpen.complete();
 	}
 	close(result?: R) {
-		this.onClose.next(result);
+		if (result) {
+			this.onClose.next(result);
+		}
 		this._destroy();
 	}
 	dismiss() {
@@ -109,7 +113,7 @@ export abstract class ALuPopupRef<T = unknown, D = unknown, R = unknown, C exten
 		const panelClasses: string[] = [];
 		if (Array.isArray(this._config.panelClass)) {
 			panelClasses.push(...this._config.panelClass);
-		} else {
+		} else if (typeof this._config.panelClass === 'string') {
 			panelClasses.push(this._config.panelClass);
 		}
 		panelClasses.push(`mod-${this._config.size}`);
