@@ -3,8 +3,7 @@
 } @else {
 	<ng-container *ngTemplateOutlet="content" />
 }
-<!-- TODO Trad -->
-<lu-icon size="XS" icon="arrowRight" alt="à été remplacé par" />
+<lu-icon size="XS" icon="arrowRight" [alt]="intl().replaceByAlt" />
 <ng-content select="[after]" />
 
 <ng-template #content>
