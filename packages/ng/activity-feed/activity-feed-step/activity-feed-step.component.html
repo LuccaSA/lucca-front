@@ -1,12 +1,18 @@
 <div class="activityFeed-step-avatar">
-	<lu-user-picture size="S" [user]="" />
+	<lu-user-picture size="S" [user]="user()" />
 </div>
 <div class="activityFeed-step-description">
 	<p class="activityFeed-step-description-content">{{ label() }}</p>
 	<!-- TODO datetime with correct format -->
 	<!-- TODO trad -->
-	<time [attr.datetime]="date() | date: 'short'" class="activityFeed-step-description-time">
-		{{ date() | date: "fullDate" }} à {{ date() | date: "shortTime" }}
+	<time class="comment-infos-date" [attr.datetime]="date().toISOString()" class="activityFeed-step-description-time">
+		@if (datePipeFormat()) {
+			{{ date() | date: datePipeFormat() }}
+		} @else if (dateDisplay()) {
+			<ng-container *luPortal="dateDisplay()" />
+		} @else {
+			{{ date() | date: "fullDate" }} à {{ date() | date: "shortTime" }}
+		}
 	</time>
 	<div class="activityFeed-content">
 		<ng-content />
