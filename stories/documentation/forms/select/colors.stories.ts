@@ -10,13 +10,12 @@ import { applicationConfig, Meta, moduleMetadata } from '@storybook/angular';
 import { HiddenArgType } from 'stories/helpers/common-arg-types';
 import { createTestStory, getStoryGenerator, useDocumentationStory } from 'stories/helpers/stories';
 import { expect, screen, userEvent, within } from 'storybook/test';
+import { StoryModelDisplayComponent } from '../../../helpers/story-model-display.component';
 import { waitForAngular } from '../../../helpers/test';
 import { colorDecoratives50, colorDecoratives500, colorLucca, colorNeutral, colorPickerStory, FilterColorsPipe, LuCoreColorPickerInputStoryComponent } from './select.utils';
-import { StoryModelDisplayComponent } from '../../../helpers/story-model-display.component';
 
 export type LuColorPickerInputStoryComponent = LuCoreColorPickerInputStoryComponent & {
 	selectedColor: ColorOption | null;
-	presentation: boolean;
 } & LuSimpleSelectInputComponent<ColorOption>;
 
 const generateStory = getStoryGenerator<LuColorPickerInputStoryComponent>({
@@ -68,11 +67,8 @@ const basePlay = async ({ canvasElement, step }) => {
 export const Basic = generateStory({
 	name: 'Basic',
 	description: '',
-	template: `<lu-form-field [presentation]="presentation" label="Décoratives 500" [size]="size === '' ? null : size">
-	<lu-color-input [colors]="colors" [(ngModel)]="selectedColor" [clearable]="clearable" [compact]="compact" />
-</lu-form-field>
-<pr-story-model-display>{{selectedColor | json}}</pr-story-model-display>
-`,
+	template: `<lu-color-input [colors]="colors" [(ngModel)]="selectedColor" [clearable]="clearable" [compact]="compact" />
+<pr-story-model-display>{{selectedColor | json}}</pr-story-model-display>`,
 	storyPartial: {
 		args: {
 			colors: colorDecoratives500,
@@ -85,9 +81,7 @@ export const BasicTEST = createTestStory(Basic, basePlay);
 export const Decorative = generateStory({
 	name: 'Decorative Color',
 	description: '',
-	template: `<lu-form-field [presentation]="presentation" label="Décoratives 50" [size]="size === '' ? null : size">
-	<lu-color-input [colors]="colors" [(ngModel)]="selectedColor" [clearable]="clearable" [compact]="compact" />
-</lu-form-field>`,
+	template: `<lu-color-input [colors]="colors" [(ngModel)]="selectedColor" clearable />`,
 	storyPartial: {
 		args: {
 			colors: colorDecoratives50,
@@ -98,9 +92,7 @@ export const Decorative = generateStory({
 export const Neutral = generateStory({
 	name: 'Neutral Color',
 	description: '',
-	template: `<lu-form-field [presentation]="presentation" label="Neutrales" [size]="size === '' ? null : size">
-	<lu-color-input [colors]="colors" [(ngModel)]="selectedColor" [clearable]="clearable" [compact]="compact" />
-</lu-form-field>`,
+	template: `<lu-color-input [colors]="colors" [(ngModel)]="selectedColor" clearable />`,
 	storyPartial: {
 		args: {
 			colors: colorNeutral,
@@ -111,9 +103,7 @@ export const Neutral = generateStory({
 export const Lucca = generateStory({
 	name: 'Lucca Color',
 	description: '',
-	template: `<lu-form-field [presentation]="presentation" label="lucca" [size]="size">
-	<lu-color-input [colors]="colors" [(ngModel)]="selectedColor" [clearable]="clearable" [compact]="compact" />
-</lu-form-field>`,
+	template: `<lu-color-input [colors]="colors" [(ngModel)]="selectedColor" clearable />`,
 	storyPartial: {
 		args: {
 			colors: colorLucca,
@@ -143,7 +133,6 @@ const meta: Meta<LuColorPickerInputStoryComponent> = {
 		colors: [],
 		compact: false,
 		clearable: true,
-		presentation: false,
 	},
 	parameters: {
 		docs: useDocumentationStory(Basic),
