@@ -1,5 +1,5 @@
-import { Meta, StoryObj } from '@storybook/angular';
 import { ButtonComponent } from '@lucca-front/ng/button';
+import { Meta, StoryObj } from '@storybook/angular';
 import { createTestStory, generateInputs } from 'stories/helpers/stories';
 import { expect, within } from 'storybook/test';
 
@@ -9,7 +9,7 @@ export default {
 	render: ({ luButton, ...inputs }, { argTypes }) => {
 		const disclosureIcon = '<lu-icon icon="arrowChevronBottom" />';
 		return {
-			template: `<button type="button" prButton${luButton !== '' ? `="${luButton}"` : ''}${generateInputs(inputs, argTypes)}
+			template: `<button type="button" luButton${luButton !== '' ? `="${luButton}"` : ''}${generateInputs(inputs, argTypes)}
 >Button</button>`,
 			styles: [luButton === 'AI-invert' || luButton === 'ghost-invert' ? ':host { background-color: var(--palettes-neutral-900); outline: 1rem solid var(--palettes-neutral-900);  }' : ''],
 		};
