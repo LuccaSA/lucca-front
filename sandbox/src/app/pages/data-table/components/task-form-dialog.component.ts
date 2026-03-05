@@ -1,12 +1,26 @@
-import { ChangeDetectionStrategy, Component, computed, signal } from '@angular/core';
+import { ChangeDetectionStrategy, Component, computed, Signal, signal } from '@angular/core';
 import { FormsModule, NgForm } from '@angular/forms';
 import { ButtonComponent } from '@lucca-front/ng/button';
 import { DateInputComponent } from '@lucca-front/ng/date2';
-import { DialogCloseDirective, DialogComponent, DialogContentComponent, DialogDismissDirective, DialogFooterComponent, DialogHeaderComponent, injectDialogRef } from '@lucca-front/ng/dialog';
+import {
+	DialogCloseDirective,
+	DialogComponent,
+	DialogContentComponent,
+	DialogDismissDirective,
+	DialogFooterComponent,
+	DialogHeaderComponent,
+	injectDialogData,
+	injectDialogRef,
+} from '@lucca-front/ng/dialog';
 import { FormFieldComponent } from '@lucca-front/ng/form-field';
 import { TextInputComponent } from '@lucca-front/ng/forms';
 import { GridColumnComponent, GridComponent } from '@lucca-front/ng/grid';
 import { Task } from '../models';
+
+interface TaskFormData {
+	task: Task;
+	state: Signal<'default' | 'loading' | 'error' | 'success'>;
+}
 
 @Component({
 	selector: 'app-task-form-dialog',
@@ -31,9 +45,12 @@ import { Task } from '../models';
 })
 export class TaskFormDialog {
 	ref = injectDialogRef<Task>();
+	data = injectDialogData<TaskFormData | null>();
 
-	name = signal('');
-	dueDate = signal(new Date());
+	name = signal(this.data?.task?.name ?? '');
+	dueDate = signal(this.data?.task?.dueDate ?? new Date());
+
+	disabled = computed(() => this.name() === this.data?.task?.name && this.dueDate() === this.data?.task?.dueDate);
 
 	formValue = computed<Task>(() => ({
 		id: 12,

@@ -1,7 +1,13 @@
 <lu-dialog>
 	<form #ngForm="ngForm" class="dialog-inside-formOptional">
 		<lu-dialog-header>
-			<h1>Créer une tâche</h1>
+			<h1>
+				@if (data) {
+					Modifier la tâche
+				} @else {
+					Créer une tâche
+				}
+			</h1>
 		</lu-dialog-header>
 
 		<lu-dialog-content>
@@ -20,7 +26,7 @@
 		</lu-dialog-content>
 		<lu-dialog-footer>
 			<div class="footer-actions">
-				<button type="submit" luButton (click)="submitForm(ngForm)">Confirm</button>
+				<button type="submit" luButton [state]="data?.state()" [disabled]="disabled()" (click)="submitForm(ngForm)">Confirm</button>
 				<button type="button" luButton="ghost" luDialogDismiss>Cancel</button>
 			</div>
 		</lu-dialog-footer>

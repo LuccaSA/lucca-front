@@ -11,7 +11,7 @@ import { SkeletonIndexTableComponent } from '@lucca-front/ng/skeleton';
 import { StatusBadgeComponent } from '@lucca-front/ng/status-badge';
 import { LuUserModule, LuUserTileComponent } from '@lucca-front/ng/user';
 import { TaskFormDialog } from './components/task-form-dialog.component';
-import { TaskGroup, TaskStatus } from './models';
+import { Task, TaskGroup, TaskStatus } from './models';
 
 @Pipe({
 	name: 'ariaControls',
@@ -175,16 +175,37 @@ export class DataTableComponent {
 	toggleLoadingState(): void {
 		this.isLoading.set(!this.isLoading());
 	}
-}
-}
+
+	openTask(task: Task): void {
+		const state = signal<'default' | 'loading' | 'error' | 'success'>('default');
+		const ref = this.dialog.open({
+			content: TaskFormDialog,
+			size: 'XL',
+			mode: 'drawer',
+			data: { task, state: state },
+		});
+		ref.result$.subscribe((task) => {
+			console.log({ task });
+		});
+	}
 
 	createNewTask(): void {
 		const ref = this.dialog.open({
 			content: TaskFormDialog,
 			size: 'XL',
+			data: null,
 		});
 
 		ref.result$.subscribe((task) => {
-			console.log({ task });
+			// const group = this.groups()[0];
+			// const tasks = [...group.tasks, task];
+			// this.groups.set([{ ...group, tasks }, ...this.groups().slice(1)]);
+			const group = {
+				groupName: 'test 2025',
+				isExpanded: true,
+				tasks: [task],
+			};
+			this.groups.set([group, ...this.groups()]);
 		});
+	}
 }

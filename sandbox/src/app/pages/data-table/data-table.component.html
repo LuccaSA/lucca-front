@@ -57,7 +57,7 @@
 								@let rowId = groupId + "-row-" + $index;
 								<tr class="indexTable-body-row" [id]="rowId" [class.is-closed]="!group.isExpanded">
 									<td class="indexTable-body-row-cell" [headers]="groupId">
-										<a href="#" class="indexTable-body-row-cell-link">{{ task.name }}</a>
+										<button type="button" class="indexTable-body-row-cell-link" (click)="openTask(task)">{{ task.name }}</button>
 									</td>
 									<td class="indexTable-body-row-cell" [headers]="groupId">
 										<lu-status-badge [label]="labelByStatus[task.status]" [palette]="paletteByStatus[task.status]" />
