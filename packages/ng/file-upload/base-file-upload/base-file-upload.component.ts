@@ -87,9 +87,11 @@ export abstract class BaseFileUploadComponent {
 	filesChange(event: Event) {
 		const host = event.target as HTMLInputElement;
 		this.droppable = false;
-		for (const file of Array.from(host.files)) {
-			this.filePicked.emit(file);
+		if (host.files) {
+			for (const file of Array.from(host.files)) {
+				this.filePicked.emit(file);
+			}
 		}
-		host.value = null;
+		host.value = '';
 	}
 }
