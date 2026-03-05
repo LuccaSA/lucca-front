@@ -23,6 +23,19 @@
 					<button type="button" luButton (click)="createNewTask()">Créer une tâche</button>
 				</lu-empty-state-section>
 			} @else {
+				<lu-filter-bar>
+					<lu-segmented-control
+						class="filterBar-segmentedControl"
+						*luFilterPillAddonBefore
+						[ngModel]="statusFilter()"
+						(ngModelChange)="statusFilter.set($event)"
+					>
+						<lu-segmented-control-filter label="Toutes les tâches" [value]="null" />
+						<lu-segmented-control-filter label="À réaliser" value="InProgress" />
+						<lu-segmented-control-filter label="Terminées" value="Completed" />
+					</lu-segmented-control>
+				</lu-filter-bar>
+
 				<table class="indexTable pr-u-marginBlock100">
 					<thead class="indexTable-head">
 						<tr class="indexTable-head-row">

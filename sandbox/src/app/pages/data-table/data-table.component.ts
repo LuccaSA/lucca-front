@@ -1,12 +1,15 @@
 import { DatePipe } from '@angular/common';
 import { ChangeDetectionStrategy, Component, computed, inject, Pipe, PipeTransform, signal } from '@angular/core';
+import { FormsModule } from '@angular/forms';
 import { ButtonComponent } from '@lucca-front/ng/button';
 import { Palette } from '@lucca-front/ng/core';
 import { LuDialogService, provideLuDialog } from '@lucca-front/ng/dialog';
 import { EmptyStateSectionComponent } from '@lucca-front/ng/empty-state';
+import { FilterBarComponent, FilterPillAddonBeforeDirective } from '@lucca-front/ng/filter-pills';
 import { IconComponent } from '@lucca-front/ng/icon';
 import { MainLayoutComponent } from '@lucca-front/ng/main-layout';
 import { NumericBadgeComponent } from '@lucca-front/ng/numeric-badge';
+import { SegmentedControlComponent, SegmentedControlFilterComponent } from '@lucca-front/ng/segmented-control';
 import { SkeletonIndexTableComponent } from '@lucca-front/ng/skeleton';
 import { StatusBadgeComponent } from '@lucca-front/ng/status-badge';
 import { LuUserModule, LuUserTileComponent } from '@lucca-front/ng/user';
@@ -100,6 +103,11 @@ const groupsMock: TaskGroup[] = [
 		EmptyStateSectionComponent,
 		NumericBadgeComponent,
 		IconComponent,
+		FilterBarComponent,
+		SegmentedControlComponent,
+		SegmentedControlFilterComponent,
+		FilterPillAddonBeforeDirective,
+		FormsModule,
 	],
 	changeDetection: ChangeDetectionStrategy.OnPush,
 	templateUrl: './data-table.component.html',
@@ -107,7 +115,12 @@ const groupsMock: TaskGroup[] = [
 })
 export class DataTableComponent {
 	private dialog = inject(LuDialogService); // 2. On injecte
-	groups = signal<TaskGroup[]>([]);
+	private baseGroups = signal(groupsMock);
+	groups = computed<TaskGroup[]>(() => {
+		const statusFilter = this.statusFilter();
+		const groups = this.filterGroups(this.baseGroups(), statusFilter);
+		return groups;
+	});
 
 	isLoading = signal(true);
 	isEmpty = computed(() => this.groups().length === 0);
@@ -132,6 +145,8 @@ export class DataTableComponent {
 	// 	return count;
 	// });
 
+	statusFilter = signal<TaskStatus | null>(null);
+
 	paletteByStatus: Record<TaskStatus, Palette> = {
 		Late: 'error',
 		InProgress: 'product',
@@ -150,8 +165,25 @@ export class DataTableComponent {
 		}, 1000);
 	}
 
+	private filterGroups(groups: TaskGroup[], statusFilter: TaskStatus | null) {
+		if (statusFilter === null) {
+			return groups;
+		}
+
+		return groups
+			.map((group) => {
+				const tasks = group.tasks.filter((task) => {
+					return task.status === statusFilter;
+				});
+				return { ...group, tasks };
+			})
+			.filter((group) => {
+				return group.tasks.length > 0;
+			});
+	}
+
 	toggleGroup(groupToUpdate: TaskGroup): void {
-		const updatedGroups = this.groups().map((group) => {
+		const updatedGroups = this.baseGroups().map((group) => {
 			if (group === groupToUpdate) {
 				return { ...group, isExpanded: !group.isExpanded };
 			} else {
@@ -161,15 +193,15 @@ export class DataTableComponent {
 
 		// const updatedGroups2 = this.groups().map((group) => (group === groupToUpdate ? { ...group, isExpanded: !group.isExpanded } : group));
 
-		this.groups.set(updatedGroups);
+		this.baseGroups.set(updatedGroups);
 	}
 
 	useGroupMocks(): void {
-		this.groups.set(groupsMock);
+		this.baseGroups.set(groupsMock);
 	}
 
 	useEmptyGroup(): void {
-		this.groups.set([]);
+		this.baseGroups.set([]);
 	}
 
 	toggleLoadingState(): void {
