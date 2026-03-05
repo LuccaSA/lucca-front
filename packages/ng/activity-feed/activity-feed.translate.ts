@@ -8,6 +8,7 @@ export const LU_ACTIVITY_FEED_TRANSLATIONS = new InjectionToken('luActivityFeedT
 
 export interface ActivityFeedTranslate {
 	replaceByAlt: string;
+	at: string;
 }
 
 export const luActivityFeedTranslations: LuTranslation<ActivityFeedTranslate> = Translations;

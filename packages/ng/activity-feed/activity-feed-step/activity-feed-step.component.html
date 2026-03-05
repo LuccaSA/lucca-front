@@ -3,15 +3,13 @@
 </div>
 <div class="activityFeed-step-description">
 	<p class="activityFeed-step-description-content">{{ label() }}</p>
-	<!-- TODO datetime with correct format -->
-	<!-- TODO trad -->
-	<time class="comment-infos-date" [attr.datetime]="date().toISOString()" class="activityFeed-step-description-time">
+	<time class="comment-infos-date" [attr.datetime]="date()" class="activityFeed-step-description-time">
 		@if (datePipeFormat()) {
 			{{ date() | date: datePipeFormat() }}
 		} @else if (dateDisplay()) {
 			<ng-container *luPortal="dateDisplay()" />
 		} @else {
-			{{ date() | date: "fullDate" }} à {{ date() | date: "shortTime" }}
+			{{ date() | date: "fullDate" }} {{ intl().at }} {{ date() | date: "shortTime" }}
 		}
 	</time>
 	<div class="activityFeed-content">

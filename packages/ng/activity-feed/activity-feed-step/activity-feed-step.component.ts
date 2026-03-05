@@ -1,7 +1,8 @@
 import { DatePipe } from '@angular/common';
 import { ChangeDetectionStrategy, Component, computed, inject, input, LOCALE_ID, ViewEncapsulation } from '@angular/core';
-import { PortalDirective } from '@lucca-front/ng/core';
+import { intlInputOptions, PortalDirective } from '@lucca-front/ng/core';
 import { ILuUser, LuUserPictureComponent } from '@lucca-front/ng/user';
+import { LU_ACTIVITY_FEED_TRANSLATIONS } from '../activity-feed.translate';
 
 @Component({
 	selector: 'lu-activity-feed-step',
@@ -15,6 +16,7 @@ import { ILuUser, LuUserPictureComponent } from '@lucca-front/ng/user';
 	},
 })
 export class ActivityFeedStepComponent {
+	readonly intl = input(...intlInputOptions(LU_ACTIVITY_FEED_TRANSLATIONS));
 	#locale = inject(LOCALE_ID);
 	#intlDateTimeFormat = new Intl.DateTimeFormat(this.#locale, {
 		weekday: 'long',
@@ -40,6 +42,7 @@ export class ActivityFeedStepComponent {
 
 	protected readonly dateDisplay = computed<string>(() => {
 		const formatted = this.#intlDateTimeFormat.format(this.date());
-		return `${formatted[0].toUpperCase()}${formatted.slice(1)}`;
+		const parts = formatted.split(', ');
+		return `${parts[0].charAt(0).toUpperCase() + parts[0].slice(1)} ${this.intl().at} ${parts[1]}`;
 	});
 }
