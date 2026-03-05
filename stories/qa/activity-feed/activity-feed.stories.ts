@@ -13,6 +13,7 @@ import { Meta, StoryObj } from '@storybook/angular';
 })
 class ActivityFeedStory {
 	user = bob;
+	date = new Date();
 }
 
 export default {

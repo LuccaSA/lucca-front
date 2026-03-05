@@ -53,22 +53,10 @@
 			<td>
 				<div class="demo-QAtable-list">
 					<lu-activity-feed>
-						<lu-activity-feed-step
-							[user]="user"
-							[date]="'1772720389613'"
-							label="Daniel Hernandez a transmis la facture au service comptabilité."
-						/>
-						<lu-activity-feed-step
-							[user]="user"
-							[date]="'1772720389613'"
-							label="Daniel Hernandez a transmis la facture au service comptabilité."
-						/>
-						<lu-activity-feed-step
-							[user]="user"
-							[date]="'1772720389613'"
-							label="Daniel Hernandez a transmis la facture au service comptabilité."
-						/>
-						<lu-activity-feed-step [user]="user" [date]="'1772720512047'" label="Daniel Hernandez a modifié un statut.">
+						<lu-activity-feed-step [user]="user" [date]="date" label="Daniel Hernandez a transmis la facture au service comptabilité." />
+						<lu-activity-feed-step [user]="user" [date]="date" label="Daniel Hernandez a transmis la facture au service comptabilité." />
+						<lu-activity-feed-step [user]="user" [date]="date" label="Daniel Hernandez a transmis la facture au service comptabilité." />
+						<lu-activity-feed-step [user]="user" [date]="date" label="Daniel Hernandez a modifié un statut.">
 							<lu-activity-feed-update>
 								<ng-container before><lu-status-badge palette="critical" label="Refusé" /></ng-container>
 								<ng-container after><lu-status-badge palette="success" label="Approuvé" /></ng-container>
@@ -77,13 +65,13 @@
 							<ng-template #after><lu-status-badge palette="success" label="Accepté" /></ng-template>
 							<lu-comment noInfos content="Lorem ipsum dolor sit amet, consectetur adipiscing elit. Sed vestibulum velit nec leo tempor." />
 						</lu-activity-feed-step>
-						<lu-activity-feed-step [user]="user" [date]="'1772720512047'" label="Daniel Hernandez a modifié le budget.">
+						<lu-activity-feed-step [user]="user" [date]="date" label="Daniel Hernandez a modifié le budget.">
 							<lu-activity-feed-update strikethrough>
 								<ng-container before>1000 €</ng-container>
 								<ng-container after>800 €</ng-container>
 							</lu-activity-feed-update>
 						</lu-activity-feed-step>
-						<lu-activity-feed-step [user]="user" [date]="'1772720512047'" label="Daniel Hernandez a modifié le budget.">
+						<lu-activity-feed-step [user]="user" [date]="date" label="Daniel Hernandez a modifié le budget.">
 							<lu-activity-feed-update>
 								<ng-container before>1000 €</ng-container>
 								<ng-container after>800 €</ng-container>

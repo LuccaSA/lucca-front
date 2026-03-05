@@ -3,7 +3,7 @@
 </div>
 <div class="activityFeed-step-description">
 	<p class="activityFeed-step-description-content">{{ label() }}</p>
-	<time class="comment-infos-date" [attr.datetime]="date()" class="activityFeed-step-description-time">
+	<time class="comment-infos-date" [attr.datetime]="date().toISOString()" class="activityFeed-step-description-time">
 		@if (datePipeFormat()) {
 			{{ date() | date: datePipeFormat() }}
 		} @else if (dateDisplay()) {

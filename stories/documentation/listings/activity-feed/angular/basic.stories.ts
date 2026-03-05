@@ -22,10 +22,9 @@ export default {
 } as Meta;
 
 function getTemplate(args: ActivityFeedBasicStory): string {
-	const now = Date.now();
 	return `<lu-activity-feed>
-	<lu-activity-feed-step [user]="user" [date]="'${now}'" label="Lorem ipsum dolor." />
-	<lu-activity-feed-step [user]="user" [date]="'${now}'" label="Daniel Hernandez a modifié un statut.">
+	<lu-activity-feed-step [user]="user" [date]="date" label="Lorem ipsum dolor." />
+	<lu-activity-feed-step [user]="user" [date]="date" label="Daniel Hernandez a modifié un statut.">
 		<lu-activity-feed-update>
 			<ng-container before><lu-status-badge palette="critical" label="Refusé" /></ng-container>
 			<ng-container after><lu-status-badge palette="success" label="Approuvé" /></ng-container>
@@ -34,7 +33,7 @@ function getTemplate(args: ActivityFeedBasicStory): string {
 		<ng-template #after><lu-status-badge palette="success" label="Accepté" /></ng-template>
 		<lu-comment noInfos content="Lorem ipsum dolor sit amet, consectetur adipiscing elit. Sed vestibulum velit nec leo tempor." />
 	</lu-activity-feed-step>
-	<lu-activity-feed-step [user]="user" [date]="'${now}'" label="Daniel Hernandez a modifié le budget.">
+	<lu-activity-feed-step [user]="user" [date]="date" label="Daniel Hernandez a modifié le budget.">
 		<lu-activity-feed-update strikethrough>
 			<ng-container before>1000 €</ng-container>
 			<ng-container after>800 €</ng-container>
@@ -45,7 +44,7 @@ function getTemplate(args: ActivityFeedBasicStory): string {
 }
 
 const Template = (args: ActivityFeedBasicStory) => ({
-	props: args,
+	props: { ...args, date: new Date() },
 	template: getTemplate(args),
 });
 
