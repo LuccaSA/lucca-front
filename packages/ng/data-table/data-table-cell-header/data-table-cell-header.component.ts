@@ -54,7 +54,7 @@ export class DataTableRowCellHeaderComponent extends BaseDataTableCell implement
 				.cols()
 				.slice(0, this.position())
 				.reduce((acc, col) => {
-					return acc + col.inlineSizePx();
+					return acc + (col.inlineSizePx() ?? 0);
 				}, 0) + 'px'
 		);
 	});
@@ -66,9 +66,9 @@ export class DataTableRowCellHeaderComponent extends BaseDataTableCell implement
 		return (
 			this.headRef
 				.cols()
-				.slice(this.position() + 1)
+				.slice((this.position() ?? 0) + 1)
 				.reduce((acc, col) => {
-					return acc + col.inlineSizePx();
+					return acc + (col.inlineSizePx() ?? 0);
 				}, 0) + 'px'
 		);
 	});
