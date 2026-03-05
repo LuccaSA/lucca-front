@@ -105,7 +105,7 @@ export class FormFieldComponent implements OnDestroy, DoCheck {
 	readonly iconAItooltip = input<string | null>(null);
 	readonly iconAIalt = input<string | null>(null);
 
-	readonly width = input<FormFieldWidth, FormFieldWidth | `${FormFieldWidth}` | null>(null, {
+	readonly width = input<FormFieldWidth | null, FormFieldWidth | `${FormFieldWidth}` | null>(null, {
 		transform: numberAttribute as (value: FormFieldWidth | `${FormFieldWidth}`) => FormFieldWidth,
 	});
 
@@ -264,7 +264,7 @@ export class FormFieldComponent implements OnDestroy, DoCheck {
 	#hasInvalidStatus(): boolean {
 		const isInvalidOverride = this.invalid() !== undefined && this.invalid() !== null;
 		if (isInvalidOverride) {
-			return this.invalid();
+			return this.invalid() ?? false;
 		}
 		const statusControlOverride = this.statusControl();
 		if (statusControlOverride) {

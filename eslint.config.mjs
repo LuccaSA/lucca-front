@@ -17,7 +17,6 @@ const STRICTIFIED_NG_EXCLUDE_ENTRIES = [
 	'packages/ng/dialog/**/*.ts',
 	'packages/ng/establishment/**/*.ts',
 	'packages/ng/filter-pills/**/*.ts',
-	'packages/ng/form-field/**/*.ts',
 	'packages/ng/formly/**/*.ts',
 	'packages/ng/forms/**/*.ts',
 	'packages/ng/index-table/**/*.ts',
