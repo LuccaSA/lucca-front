@@ -1,0 +1,141 @@
+.pr-u-highlightPrisme {
+	// Actions
+	.button,
+	.buttonGroup,
+	.link,
+
+	// Icons
+	.bubbleIllustration,
+	.bubbleIcon,
+	.softwareIcon,
+	.lucc-icon,
+
+	// Texts
+	.code,
+	.comment,
+	.newBadge,
+	.numericBadge,
+	.plgPush,
+	.readMore,
+	.statusBadge,
+	.tag,
+	.textFlow,
+	.mobilePush,
+	.presentation,
+
+	// Lists
+	.chip,
+	.dataTable,
+	.indexTable,
+	.sortableList,
+	.listing,
+
+	// Forms
+	.calendar,
+	.color,
+	.textField,
+	.checkboxField,
+	.switchField,
+	.radioField,
+	.clear,
+	.dateField,
+	.dateRangeField,
+	.timepicker,
+	.form,
+	.fieldset,
+	.fileUpload,
+	.fileEntry,
+	.fileToolbar,
+	.formLabel,
+	.inlineMessage,
+	.inputFramed,
+	.richText,
+	.simpleSelect,
+	.multiSelect,
+	.listboxOption,
+
+	// Feedback
+	.callout,
+	.calloutDisclosure,
+	.calloutPopover,
+	.calloutFeedbackList,
+	.errorPage,
+	.gauge,
+	.toast,
+
+	// Navigation
+	.breadcrumbs,
+	.mobileNavigation,
+	.navside,
+	.pagination,
+	.segmentedControl,
+	.skipLinks,
+	.horizontalNavigation,
+	.timeline,
+	.tableOfContent,
+	.verticalNavigation,
+
+	// Overlays
+	.popover,
+	.dropdown,
+	.dialog,
+	.tooltip,
+
+	// Structure
+	.box,
+	.card,
+	.container,
+	.divider,
+	.emptyState,
+	.fancyBox,
+	.filterPill,
+	.filterBar,
+	.footer,
+	.grid,
+	.highlightData,
+	.mobileHeader,
+	.pageHeader,
+	.resourceCard,
+	.appLayout,
+	.mainLayout,
+
+	// Users
+	.avatar,
+	.userPopover,
+	.userTile,
+
+	// Loaders
+	.loading,
+	.progress,
+	.skeleton,
+
+	// Misc & oldies
+	.scrollBox,
+	.suggestion,
+	.section,
+	.collapse,
+	.titleSection,
+	.contentSection {
+		outline: 2px solid springgreen;
+		outline-offset: 3px;
+	}
+
+	.checkbox,
+	.switch,
+	.radio,
+	.file,
+	.list,
+	.label,
+	.radioButtons,
+	.textfield,
+	.table,
+	.main,
+	.filters,
+	.notchBox,
+	.layout,
+	.header,
+	.filterBarDeprecated {
+		outline: 2px solid red;
+		outline-offset: 3px;
+	}
+}
