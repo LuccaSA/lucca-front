@@ -59,7 +59,7 @@ export class DataTableComponent implements OnInit {
 	readonly rows = contentChildren(DataTableRowComponent, { descendants: true });
 	readonly header = contentChild(DataTableHeadComponent, { descendants: true });
 
-	readonly stickyHeader = computed(() => this.header().sticky());
+	readonly stickyHeader = computed(() => this.header()?.sticky());
 
 	readonly stickyColsStart = input(0, { transform: numberAttribute });
 	readonly stickyColsEnd = input(0, { transform: numberAttribute });
@@ -73,7 +73,7 @@ export class DataTableComponent implements OnInit {
 	firstRowVisible = signal(true);
 	lastRowVisible = signal(false);
 
-	readonly cols = computed(() => this.header().cols());
+	readonly cols = computed(() => this.header()?.cols());
 
 	readonly classMods = computed(() => {
 		return {
@@ -123,8 +123,11 @@ export class DataTableComponent implements OnInit {
 	}
 
 	ngOnInit(): void {
-		new ResizeObserver(() => {
-			this.scroll();
-		}).observe(this.tableRef().nativeElement);
+		const tableElement = this.tableRef()?.nativeElement;
+		if (tableElement) {
+			new ResizeObserver(() => {
+				this.scroll();
+			}).observe(tableElement);
+		}
 	}
 }
