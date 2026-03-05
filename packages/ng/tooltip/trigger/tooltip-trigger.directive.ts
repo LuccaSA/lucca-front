@@ -173,7 +173,7 @@ export class LuTooltipTriggerDirective implements OnDestroy {
 	constructor() {
 		afterEveryRender({
 			read: () => {
-				if (this.luTooltipDisabled() || this.luTooltipWhenEllipsis() || this.luTooltipOnlyForDisplay()) {
+				if (this.luTooltipDisabled()) {
 					return;
 				}
 				if (this.#previousTickContent != this.#host.nativeElement.innerText) {
