@@ -279,7 +279,9 @@ export abstract class ALuPopoverTrigger<TPanel extends ILuPopoverPanel = ILuPopo
 	}
 
 	protected _attachPortalToOverlay(): void {
-		this._overlayRef.attach(this._portal);
+		if (this._overlayRef) {
+			this._overlayRef.attach(this._portal);
+		}
 	}
 
 	protected _getPanelScrollStrategy(): LuPopoverScrollStrategy {
@@ -346,7 +348,9 @@ export abstract class ALuPopoverTrigger<TPanel extends ILuPopoverPanel = ILuPopo
 		this._setIsPopoverOpen(true);
 		this.panel.panelId = this._panelId;
 		this.panel.triggerId = this._triggerId;
-		this.panel.keydownEvents$ = this._overlayRef.keydownEvents();
+		if (this._overlayRef) {
+			this.panel.keydownEvents$ = this._overlayRef.keydownEvents();
+		}
 		this._subscribeToPanelEvents();
 	}
 
@@ -401,7 +405,7 @@ export abstract class ALuPopoverTrigger<TPanel extends ILuPopoverPanel = ILuPopo
 	 */
 	protected _createOverlay(): OverlayRef {
 		if (!this._overlayRef) {
-			this._portal = new TemplatePortal(this.panel.templateRef, this._viewContainerRef);
+			this._portal = new TemplatePortal(this.panel.templateRef!, this._viewContainerRef);
 			const config = this._getOverlayConfig();
 			this._subscribeToPositions(config.positionStrategy as FlexibleConnectedPositionStrategy);
 			this._overlayRef = this._overlay.create(config);
