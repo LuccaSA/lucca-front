@@ -175,8 +175,6 @@ export class DataTableComponent {
 	toggleLoadingState(): void {
 		this.isLoading.set(!this.isLoading());
 	}
-}
-}
 
 	createNewTask(): void {
 		const ref = this.dialog.open({
@@ -187,4 +185,5 @@ export class DataTableComponent {
 		ref.result$.subscribe((task) => {
 			console.log({ task });
 		});
+	}
 }
