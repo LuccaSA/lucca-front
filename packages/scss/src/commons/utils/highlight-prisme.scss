@@ -8,7 +8,7 @@
 	.bubbleIllustration,
 	.bubbleIcon,
 	.softwareIcon,
-	.lucc-icon,
+	.lucca-icon,
 
 	// Texts
 	.code,
@@ -116,6 +116,123 @@
 	.collapse,
 	.titleSection,
 	.contentSection {
+		outline: 2px dashed springgreen;
+		outline-offset: 3px;
+	}
+
+	[luButton],
+	[luLink],
+
+	// Icons
+	lu-bubble-illustration,
+	lu-bubble-icon,
+	lu-software-icon,
+	lu-icon,
+
+	// Texts
+	lu-code,
+	lu-comment,
+	lu-new-badge,
+	lu-numeric-badge,
+	lu-plg-push,
+	lu-read-more,
+	lu-status-nadge,
+	lu-tag,
+	lu-text-flow,
+	lu-mobile-push,
+	lu-data-presentation,
+
+	// Lists
+	lu-chip,
+	lu-data-table,
+	lu-index-table,
+	lu-sortable-list,
+	lu-listing,
+
+	// Forms
+	lu-form-field,
+	lu-color-input,
+	lu-text-input,
+	lu-checkbox-input,
+	lu-switch-input,
+	lu-radio-input,
+	lu-clear,
+	lu-date-input,
+	lu-date-range-input,
+	lu-time-picker,
+	lu-duration-picker,
+	[luForm],
+	lu-fieldset,
+	lu-single-file-upload,
+	lu-multi-file-upload,
+	lu-file-entry,
+	lu-inline-message,
+	lu-input-framed,
+	lu-rich-text-input,
+	lu-simple-select,
+	lu-multi-select,
+	lu-listbox-option,
+
+	// Feedback
+	lu-callout,
+	lu-callout-disclosure,
+	lu-callout-popover,
+	lu-callout-feedback-list,
+	lu-gauge,
+	lu-toasts,
+
+	// Navigation
+	lu-breadcrumbs,
+	lu-mobile-navigation,
+	lu-pagination,
+	lu-segmented-control,
+	lu-skip-links,
+	lu-horizontal-navigation,
+	lu-table-of-content,
+	lu-vertical-navigation,
+
+	// Overlays
+	lu-popover-content,
+	lu-dropdown-item,
+	lu-dialog,
+	lu-dialog-header,
+	lu-dialog-content,
+	lu-dialog-footer,
+	lu-tooltip-panel,
+
+	// Structure
+	lu-box,
+	lu-container,
+	lu-divider,
+	lu-empty-state-page,
+	lu-empty-state-section,
+	lu-fancy-nox,
+	lu-filter-pill,
+	lu-filter-bar,
+	lu-footer,
+	lu-grid,
+	lu-highlight-data,
+	lu-mobile-header,
+	lu-page-header,
+	lu-resource-card,
+	lu-app-layout,
+	lu-main-layout,
+
+	// Users
+	lu-user-picture,
+	lu-user-tile,
+
+	// Loaders
+	lu-loading,
+	lu-progress,
+	lu-skeleton-button,
+	lu-skeleton-field,
+	lu-skeleton-header,
+	lu-skeleton-index-table,
+	lu-skeleton-data-table,
+
+	// Misc & oldies
+	lu-scroll-box {
 		outline: 2px solid springgreen;
 		outline-offset: 3px;
 	}
@@ -134,7 +251,8 @@
 	.notchBox,
 	.layout,
 	.header,
-	.filterBarDeprecated {
+	.filterBarDeprecated,
+	lu-skeleton-table {
 		outline: 2px solid red;
 		outline-offset: 3px;
 	}
