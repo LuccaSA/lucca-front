@@ -1,4 +1,6 @@
 .pr-u-highlightPrisme {
+	// HTML COMPONENTS OUTSIDE
+
 	// Actions
 	.button,
 	.buttonGroup,
@@ -25,7 +27,6 @@
 
 	// Lists
 	.chip,
-	.dataTable,
 	.indexTable,
 	.sortableList,
 	.listing,
@@ -121,6 +122,15 @@
 		outline-offset: 3px;
 	}
 
+	// HTML COMPONENTS INSIDE
+
+	.dataTable {
+		outline: 2px dashed springgreen;
+		outline-offset: -3px;
+	}
+
+	// ANGULAR COMPONENTS
+
 	[luButton],
 	[luLink],
 
@@ -144,8 +154,8 @@
 	lu-data-presentation,
 
 	// Lists
-	lu-chip,
-	lu-data-table,
+	lu-chip, [luChip]
+	lu-data-table .dataTable,
 	lu-index-table,
 	lu-sortable-list .sortableList,
 	lu-listing-item,
@@ -175,7 +185,7 @@
 	lu-listbox-option,
 
 	// Feedback
-	lu-callout,
+	lu-callout .callout,
 	lu-callout-disclosure,
 	lu-callout-popover,
 	lu-callout-feedback-list,
@@ -237,6 +247,8 @@
 		outline: 2px solid springgreen !important;
 		outline-offset: 3px;
 	}
+
+	// DEPRECATED COMPONENTS
 
 	.checkbox,
 	.switch,
