@@ -34,5 +34,11 @@ export class DataTableBodyComponent {
 
 	protected tableRef = inject(LU_DATA_TABLE_INSTANCE, { optional: true });
 
-	colspan = computed(() => this.tableRef?.cols().length + (this.tableRef?.selectable() ? 1 : 0));
+	colspan = computed(() => {
+		if (!this.tableRef) {
+			return 0;
+		}
+
+		return (this.tableRef.cols()?.length ?? 0) + (this.tableRef?.selectable() ? 1 : 0);
+	});
 }
