@@ -58,6 +58,7 @@
 	.callout,
 	.calloutDisclosure,
 	.calloutPopover,
+	.calloutPopover-overlay,
 	.calloutFeedbackList,
 	.errorPage,
 	.gauge,
@@ -126,18 +127,18 @@
 	// Icons
 	lu-bubble-illustration,
 	lu-bubble-icon,
-	lu-software-icon,
-	lu-icon,
+	lu-software-icon .softwareIcon,
+	lu-icon .lucca-icon,
 
 	// Texts
-	lu-code,
+	lu-code .code,
 	lu-comment,
 	lu-new-badge,
 	lu-numeric-badge,
 	lu-plg-push,
 	lu-read-more,
-	lu-status-nadge,
-	lu-tag,
+	lu-status-badge,
+	lu-tag .tag,
 	lu-text-flow,
 	lu-mobile-push,
 	lu-data-presentation,
@@ -146,8 +147,8 @@
 	lu-chip,
 	lu-data-table,
 	lu-index-table,
-	lu-sortable-list,
-	lu-listing,
+	lu-sortable-list .sortableList,
+	lu-listing-item,
 
 	// Forms
 	lu-form-field,
@@ -178,7 +179,7 @@
 	lu-callout-disclosure,
 	lu-callout-popover,
 	lu-callout-feedback-list,
-	lu-gauge,
+	lu-gauge .gauge,
 	lu-toasts,
 
 	// Navigation
@@ -206,7 +207,7 @@
 	lu-divider,
 	lu-empty-state-page,
 	lu-empty-state-section,
-	lu-fancy-nox,
+	lu-fancy-box,
 	lu-filter-pill,
 	lu-filter-bar,
 	lu-footer,
@@ -224,7 +225,7 @@
 
 	// Loaders
 	lu-loading,
-	lu-progress,
+	lu-progress-bar .progress,
 	lu-skeleton-button,
 	lu-skeleton-field,
 	lu-skeleton-header,
@@ -233,7 +234,7 @@
 
 	// Misc & oldies
 	lu-scroll-box {
-		outline: 2px solid springgreen;
+		outline: 2px solid springgreen !important;
 		outline-offset: 3px;
 	}
 
