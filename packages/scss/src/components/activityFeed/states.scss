@@ -1,0 +1,7 @@
+@mixin empty {
+	--components-activityFeed-content-update-display: none;
+}
+
+@mixin single {
+	--components-activityFeed-content-update-icon-display: none;
+}
