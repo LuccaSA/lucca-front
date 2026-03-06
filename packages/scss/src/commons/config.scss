@@ -135,35 +135,15 @@ $palettesAll: function.flatMap(
 	$palettesDeprecated
 );
 
-$palettesAssetsBrand: (
-	'brand': 'pineapple',
-	'cc': 'brand',
-	'pagga': 'brand',
-	'poplee': 'brand',
-	'coreHR': 'brand',
-	'cleemy': 'brand',
-	'timmi': 'brand',
-) !default;
-
-$palettesAssetsPrimary: (
-	'brand': '',
-	'cc': '',
-	'pagga': '',
-	'poplee': '',
-	'coreHR': '',
-	'cleemy': '',
-	'timmi': '',
-) !default;
-
-$palettesAssetsSecondary: (
-	'brand': 'lime',
-	'cc': 'lime',
-	'pagga': 'lime',
-	'poplee': 'pineapple',
-	'coreHR': 'pineapple',
-	'cleemy': 'grape',
-	'timmi': 'glacier',
-) !default;
+$palettesAssets: (
+	'brand': ('brand': 'pineapple', 'secondary': 'lime'),
+	'cc': ('brand': 'brand', 'secondary': 'lime'),
+	'pagga': ('brand': 'brand', 'secondary': 'lime'),
+	'poplee': ('brand': 'brand', 'secondary': 'pineapple'),
+	'coreHR': ('brand': 'brand', 'secondary': 'pineapple'),
+	'cleemy': ('brand': 'brand', 'secondary': 'grape'),
+	'timmi': ('brand': 'brand', 'secondary': 'glacier')
+);
 
 $fieldsWidth: 20, 30, 40, 50, 60 !default;
 

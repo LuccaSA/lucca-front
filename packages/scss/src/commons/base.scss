@@ -129,27 +129,24 @@
 			}
 		}
 
-		@each $product, $decorative in config.$palettesAssetsBrand {
-			.palette-#{$product} {
-				@include core.rosetta('--palettes-assets-brand', '--palettes-#{$decorative}', (50, 100, 200));
-			}
-		}
+		@each $productName, $productMap in config.$palettesAssets {
+			.palette-#{$productName} {
+				--palettes-assets-primary-lighter: var(--palettes-#{$productName}-50);
+				--palettes-assets-primary-light: var(--palettes-#{$productName}-100);
+				--palettes-assets-primary-dark: var(--palettes-#{$productName}-200);
 
-		@each $product, $decorative in config.$palettesAssetsPrimary {
-			$dashString: '-';
+				@each $level, $palette in $productMap {
+					@if $level == 'secondary' {
+						--palettes-assets-secondary-lighter: var(--palettes-#{$palette}-50);
+						--palettes-assets-secondary-light: var(--palettes-#{$palette}-100);
+					}
 
-			@if $decorative == '' {
-				$dashString: '';
-			}
-
-			.palette-#{$product} {
-				@include core.rosetta('--palettes-assets-primary', '--palettes#{$dashString}#{$decorative}', (50, 100, 200));
-			}
-		}
-
-		@each $product, $decorative in config.$palettesAssetsSecondary {
-			.palette-#{$product} {
-				@include core.rosetta('--palettes-assets-secondary', '--palettes-#{$decorative}', (50, 100));
+					@if $level == 'brand' {
+						--palettes-assets-brand-lighter: var(--palettes-#{$palette}-50);
+						--palettes-assets-brand-light: var(--palettes-#{$palette}-100);
+						--palettes-assets-brand-dark: var(--palettes-#{$palette}-200);
+					}
+				}
 			}
 		}
 	}
