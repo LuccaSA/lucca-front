@@ -1,5 +1,4 @@
 @use '@lucca-front/scss/src/commons/utils/namespace';
-@use '@lucca-front/scss/src/components/avatar/exports' as avatar;
 
 @mixin component($atRoot: namespace.$defaultAtRoot) {
 	list-style-type: '';
@@ -31,8 +30,6 @@
 
 		.activityFeed-step-avatar {
 			margin-block: var(--pr-t-spacings-75);
-
-			@include avatar.S;
 		}
 
 		.activityFeed-step-description {
@@ -45,10 +42,23 @@
 			display: block;
 		}
 
+		.activityFeed-content-update-icon {
+			display: var(--components-activityFeed-content-update-icon-display);
+		}
+
 		.activityFeed-content-update {
-			display: flex;
+			display: var(--components-activityFeed-content-update-display);
 			align-items: center;
 			gap: var(--pr-t-spacings-100);
+		}
+
+		.activityFeed-content-update-before,
+		.activityFeed-content-update-after {
+			display: flex;
+
+			&:empty {
+				display: none;
+			}
 		}
 
 		.activityFeed-content {

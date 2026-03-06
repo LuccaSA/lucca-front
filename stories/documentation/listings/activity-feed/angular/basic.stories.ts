@@ -26,19 +26,17 @@ function getTemplate(args: ActivityFeedBasicStory): string {
 	<lu-activity-feed-step [user]="user" [date]="date" label="Lorem ipsum dolor." />
 	<lu-activity-feed-step [user]="user" [date]="date" label="Daniel Hernandez a modifié un statut.">
 		<lu-activity-feed-update>
-			<ng-container before><lu-status-badge palette="critical" label="Refusé" /></ng-container>
-			<ng-container after><lu-status-badge palette="success" label="Approuvé" /></ng-container>
+			<lu-status-badge activityFeedUpdateBefore palette="critical" label="Refusé" />
+			<lu-status-badge activityFeedUpdateAfter palette="success" label="Approuvé" />
 		</lu-activity-feed-update>
-		<ng-template #before><lu-status-badge palette="error" label="Refusé" /></ng-template>
-		<ng-template #after><lu-status-badge palette="success" label="Accepté" /></ng-template>
 		<lu-comment noInfos content="Lorem ipsum dolor sit amet, consectetur adipiscing elit. Sed vestibulum velit nec leo tempor." />
 	</lu-activity-feed-step>
 	<lu-activity-feed-step [user]="user" [date]="date" label="Daniel Hernandez a modifié le budget.">
 		<lu-activity-feed-update strikethrough>
-			<ng-container before>1000 €</ng-container>
-			<ng-container after>800 €</ng-container>
+			<ng-container activityFeedUpdateBefore>1000 €</ng-container>
+			<ng-container activityFeedUpdateAfter>800 €</ng-container>
 		</lu-activity-feed-update>
-		<lu-file-entry [entry]="{ name: 'facture.pdf', size: 28420, type: 'application/pdf' }" size="S" />
+		<lu-file-entry [entry]="{ name: 'facture.pdf', size: 28420, type: 'application/pdf' }" size="S" downloadURL="https://example.com/" />
 	</lu-activity-feed-step>
 </lu-activity-feed>`;
 }
