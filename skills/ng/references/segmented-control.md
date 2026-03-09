@@ -4,6 +4,11 @@ Toggle component for switching between options.
 
 **Storybook:** [Documentation/Navigation/SegmentedControl/Angular](https://storybook.lucca-front.com)
 
+## Figma Design
+
+**Component:** [Segmented Control - Lucca Components v21.1](https://www.figma.com/design/PQEOcUF9CYfKNqaejAGLWP/%F0%9F%A7%A9-Lucca-components-v21.1?node-id=17121-6916)  
+**Node ID:** `17121-6916`
+
 ## Import
 
 ```typescript
@@ -88,4 +93,3 @@ chartTypes = [
 - Radio group semantics
 - Keyboard navigation with arrow keys
 - Selected option announced
-

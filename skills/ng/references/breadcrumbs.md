@@ -4,6 +4,14 @@ Navigation component showing the current location hierarchy.
 
 **Storybook:** [Documentation/Navigation/Breadcrumbs/Angular](https://storybook.lucca-front.com)
 
+## Figma Design
+
+**Component:** [Breadcrumbs - Lucca Components v21.1](https://www.figma.com/design/PQEOcUF9CYfKNqaejAGLWP/%F0%9F%A7%A9-Lucca-components-v21.1?node-id=3104-299)  
+**Node ID:** `3104-299`  
+**Documentation:** [Prisme Design System - Breadcrumb](https://prisme.lucca.io/94310e217/p/691d7f-breadcrumb)
+
+Le Breadcrumbs permet de se localiser dans l'application et propose un accès rapide aux différents niveaux du chemin emprunté.
+
 ## Import
 
 ```typescript

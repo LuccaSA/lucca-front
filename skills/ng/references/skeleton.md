@@ -4,6 +4,11 @@ Loading placeholder components for better perceived performance.
 
 **Storybook:** [Documentation/Loaders/Skeleton/Angular](https://storybook.lucca-front.com)
 
+## Figma Design
+
+**Component:** [Skeleton - Lucca Components v21.1](https://www.figma.com/design/PQEOcUF9CYfKNqaejAGLWP/%F0%9F%A7%A9-Lucca-components-v21.1?node-id=19475-8986)  
+**Node ID:** `19475-8986`
+
 ## Import
 
 ```typescript

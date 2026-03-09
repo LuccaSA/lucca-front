@@ -4,6 +4,11 @@ Multi-line text input component.
 
 **Storybook:** [Documentation/Forms/Fields/Textarea/Angular](https://storybook.lucca-front.com)
 
+## Figma Design
+
+**Component:** [Textarea - Lucca Components v21.1](https://www.figma.com/design/PQEOcUF9CYfKNqaejAGLWP/%F0%9F%A7%A9-Lucca-components-v21.1?node-id=6119-39816)  
+**Node ID:** `6119-39816`
+
 ## Import
 
 ```typescript
@@ -118,4 +123,3 @@ feedbackControl = new FormControl('', [Validators.required, Validators.maxLength
 - Always use with `<lu-form-field>` for label association
 - Use `[counter]` on form-field to communicate max length
 - Supports standard keyboard navigation
-

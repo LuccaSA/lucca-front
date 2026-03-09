@@ -4,6 +4,11 @@ Navigation component for paginated data.
 
 **Storybook:** [Documentation/Navigation/Pagination/Angular](https://storybook.lucca-front.com)
 
+## Figma Design
+
+**Component:** [Numeric Pagination - Lucca Components v21.1](https://www.figma.com/design/PQEOcUF9CYfKNqaejAGLWP/%F0%9F%A7%A9-Lucca-components-v21.1?node-id=6671-42932)  
+**Node ID:** `6671-42932`
+
 ## Import
 
 ```typescript
@@ -153,3 +158,11 @@ export class MyComponent {
 - Previous/next buttons are keyboard accessible
 - Buttons announce their state to screen readers
 - Disabled state is properly communicated
+
+## Docs Highlights
+
+### Mode `default`
+Requires `from`, `to`, `itemsCount`, `isFirstPage`, `isLastPage`.
+
+### Mode `compact`
+Only needs `isFirstPage` and `isLastPage` and keeps navigation arrows only.

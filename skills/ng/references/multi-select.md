@@ -4,6 +4,11 @@ Multiple selection dropdown component.
 
 **Storybook:** [Documentation/Forms/Fields/Multi Select/Angular](https://storybook.lucca-front.com)
 
+## Figma Design
+
+**Component:** [Select (Simple/Multi) - Lucca Components v21.1](https://www.figma.com/design/PQEOcUF9CYfKNqaejAGLWP/%F0%9F%A7%A9-Lucca-components-v21.1?node-id=16134-2827)  
+**Node ID:** `16134-2827`
+
 ## Import
 
 ```typescript
@@ -152,6 +157,22 @@ searchProducts(query: string) {
   });
 }
 ```
+
+## Docs Highlights (Select All)
+
+Use `LuMultiSelectWithSelectAllDirective` and `withSelectAll` to enable global selection.
+
+```html
+<lu-multi-select users withSelectAll [withSelectAllDisplayerLabel]="'POTATOES' | transloco" />
+```
+
+For custom display with counts, add `LuCoreSelectTotalCountDirective` and `totalCount`.
+
+```html
+<lu-multi-select withSelectAll [withSelectAllDisplayerLabel]="'POTATOES' | transloco" [totalCount]="123" />
+```
+
+Output becomes `LuMultiSelection<T>` instead of an array.
 
 ## Accessibility
 

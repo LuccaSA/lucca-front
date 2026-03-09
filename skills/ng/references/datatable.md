@@ -4,6 +4,14 @@ Component for displaying tabular data with sorting, sticky columns, and selectio
 
 **Storybook:** [Documentation/Listings/DataTable/Angular](https://storybook.lucca-front.com)
 
+## Figma Design
+
+**Component:** [Data Table - Lucca Components v21.1](https://www.figma.com/design/PQEOcUF9CYfKNqaejAGLWP/%F0%9F%A7%A9-Lucca-components-v21.1?node-id=23373-9022)  
+**Node ID:** `23373-9022`
+
+**Index Table:** [Index Table - Lucca Components v21.1](https://www.figma.com/design/PQEOcUF9CYfKNqaejAGLWP/%F0%9F%A7%A9-Lucca-components-v21.1?node-id=19393-3904)  
+**Node ID:** `19393-3904`
+
 ## Import
 
 ```typescript

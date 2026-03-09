@@ -4,6 +4,11 @@ Styled anchor component for navigation.
 
 **Storybook:** [Documentation/Actions/Links/Angular](https://storybook.lucca-front.com)
 
+## Figma Design
+
+**Component:** [Link - Lucca Components v21.1](https://www.figma.com/design/PQEOcUF9CYfKNqaejAGLWP/%F0%9F%A7%A9-Lucca-components-v21.1?node-id=3082-283)  
+**Node ID:** `3082-283`
+
 ## Import
 
 ```typescript
@@ -86,4 +91,3 @@ Disables the link (prevents navigation).
 - Use `<a>` for navigation, `<button>` for actions
 - External links should indicate they open in new tab
 - Use `rel="noopener noreferrer"` for external links with `target="_blank"`
-

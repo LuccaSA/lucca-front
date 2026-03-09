@@ -4,6 +4,11 @@ Component to display icons from the Lucca icon library.
 
 **Storybook:** [Documentation/Texts/Icons/Angular](https://storybook.lucca-front.com)
 
+## Figma Design
+
+**Component:** [Icon - Lucca Components v21.1](https://www.figma.com/design/PQEOcUF9CYfKNqaejAGLWP/%F0%9F%A7%A9-Lucca-components-v21.1?node-id=34358-9707)  
+**Node ID:** `34358-9707`
+
 ## Import
 
 ```typescript

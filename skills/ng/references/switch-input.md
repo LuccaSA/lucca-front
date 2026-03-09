@@ -4,6 +4,11 @@ Toggle switch component for binary on/off states.
 
 **Storybook:** [Documentation/Forms/Fields/Switch/Angular](https://storybook.lucca-front.com)
 
+## Figma Design
+
+**Component:** [Switch - Lucca Components v21.1](https://www.figma.com/design/PQEOcUF9CYfKNqaejAGLWP/%F0%9F%A7%A9-Lucca-components-v21.1?node-id=20183-78344)  
+**Node ID:** `20183-78344`
+
 ## Import
 
 ```typescript

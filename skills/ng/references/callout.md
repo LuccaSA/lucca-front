@@ -1,8 +1,19 @@
 # Callout
 
-Alert and notification component to communicate important information to users.
+Alert and notification component for displaying important messages.
 
 **Storybook:** [Documentation/Feedback/Callout/Angular](https://storybook.lucca-front.com)
+
+## Figma Design
+
+**Component:** [Callout - Lucca Components v21.1](https://www.figma.com/design/PQEOcUF9CYfKNqaejAGLWP/%F0%9F%A7%A9-Lucca-components-v21.1?node-id=5882-32057)  
+**Node ID:** `5882-32057`
+
+**Callout Disclosure:** [Callout Disclosure - Lucca Components v21.1](https://www.figma.com/design/PQEOcUF9CYfKNqaejAGLWP/%F0%9F%A7%A9-Lucca-components-v21.1?node-id=14686-61370)  
+**Node ID:** `14686-61370`
+
+**Callout Popover:** [Callout Popover - Lucca Components v21.1](https://www.figma.com/design/PQEOcUF9CYfKNqaejAGLWP/%F0%9F%A9-Lucca-components-v21.1?node-id=14695-2444)  
+**Node ID:** `14695-2444`
 
 ## Import
 

@@ -4,6 +4,11 @@ Dropdown menu component for contextual actions and options.
 
 **Storybook:** [Documentation/Overlays/Dropdown/Angular](https://storybook.lucca-front.com)
 
+## Figma Design
+
+**Component:** [Dropdown - Lucca Components v21.1](https://www.figma.com/design/PQEOcUF9CYfKNqaejAGLWP/%F0%9F%A7%A9-Lucca-components-v21.1?node-id=26837-32810)  
+**Node ID:** `26837-32810`
+
 ## Import
 
 ```typescript

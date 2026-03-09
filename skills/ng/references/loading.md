@@ -4,6 +4,11 @@ Loading indicator component.
 
 **Storybook:** [Documentation/Loaders/Loading/Angular](https://storybook.lucca-front.com)
 
+## Figma Design
+
+**Component:** [Loading - Lucca Components v21.1](https://www.figma.com/design/PQEOcUF9CYfKNqaejAGLWP/%F0%9F%A7%A9-Lucca-components-v21.1?node-id=6311-39280)  
+**Node ID:** `6311-39280`
+
 ## Import
 
 ```typescript

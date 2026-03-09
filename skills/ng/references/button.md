@@ -1,13 +1,21 @@
 # Button
 
-Interactive component to trigger user actions.
+Button directive for interactive actions.
 
-**Storybook:** [Documentation/Actions/Button/Angular](https://storybook.lucca-front.com)
+**Storybook:** [Documentation/Actions/Buttons/Angular](https://storybook.lucca-front.com)
+
+## Figma Design
+
+**Component:** [Button - Lucca Components v21.1](https://www.figma.com/design/PQEOcUF9CYfKNqaejAGLWP/%F0%9F%A7%A9-Lucca-components-v21.1?node-id=6053-35130)  
+**Node ID:** `6053-35130`
+
+**Button Group:** [Button Group - Lucca Components v21.1](https://www.figma.com/design/PQEOcUF9CYfKNqaejAGLWP/%F0%9F%A7%A9-Lucca-components-v21.1?node-id=32845-165556)  
+**Node ID:** `32845-165556`
 
 ## Import
 
 ```typescript
-import { ButtonComponent } from '@lucca-front/ng/button';
+import { ButtonDirective } from '@lucca-front/ng/button';
 ```
 
 ## Basic Usage

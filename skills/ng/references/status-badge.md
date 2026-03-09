@@ -4,6 +4,11 @@ Badge component for displaying status/state.
 
 **Storybook:** [Documentation/Texts/StatusBadge/Angular](https://storybook.lucca-front.com)
 
+## Figma Design
+
+**Component:** [Status Badge - Lucca Components v21.1](https://www.figma.com/design/PQEOcUF9CYfKNqaejAGLWP/%F0%9F%A7%A9-Lucca-components-v21.1?node-id=6141-36860)  
+**Node ID:** `6141-36860`
+
 ## Import
 
 ```typescript
@@ -80,4 +85,3 @@ getOrderState(status: string): 'success' | 'warning' | 'error' {
 
 - Status is announced to screen readers
 - Color is not the only indicator (includes text)
-

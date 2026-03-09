@@ -4,6 +4,12 @@ Component for uploading files with drag-and-drop support.
 
 **Storybook:** [Documentation/Forms/FileUpload/Angular](https://storybook.lucca-front.com)
 
+
+## Figma Design
+
+**Component:** [File Upload - Lucca Components v21.1](https://www.figma.com/design/PQEOcUF9CYfKNqaejAGLWP/%F0%9F%A7%A9-Lucca-components-v21.1?node-id=28445-192983)  
+**Node ID:** `28445-192983`
+
 ## Import
 
 ```typescript
@@ -115,6 +121,31 @@ onFileError(error: FileUploadError) {
   <lu-file-entry [file]="file" (remove)="removeFile(file)" />
 }
 ```
+
+## Docs Highlights
+
+### Single vs Multiple upload
+
+- `lu-single-file-upload` for one file at a time
+- `lu-multi-file-upload` for multiple files
+
+Both emit a `filePicked` event per selected file.
+
+```html
+<lu-form-field label="Label">
+  <lu-multi-file-upload [accept]="accept" (filePicked)="upload([$event])" />
+</lu-form-field>
+```
+
+```html
+<lu-form-field label="Label">
+  <lu-single-file-upload [accept]="accept" (filePicked)="upload([$event])" />
+</lu-form-field>
+```
+
+### Accepted formats
+
+Use `accept` for UX only; the browser does not enforce formats.
 
 ## Accessibility
 

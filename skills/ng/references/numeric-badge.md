@@ -4,6 +4,11 @@ Badge component for displaying counts and numbers.
 
 **Storybook:** [Documentation/Texts/NumericBadge/Angular](https://storybook.lucca-front.com)
 
+## Figma Design
+
+**Component:** [Numeric Badge - Lucca Components v21.1](https://www.figma.com/design/PQEOcUF9CYfKNqaejAGLWP/%F0%9F%A7%A9-Lucca-components-v21.1?node-id=3200-26461)  
+**Node ID:** `3200-26461`
+
 ## Import
 
 ```typescript
@@ -73,4 +78,3 @@ Type: `Palette` - Color palette.
 
 - Badge value announced to screen readers
 - Hidden when value is 0
-

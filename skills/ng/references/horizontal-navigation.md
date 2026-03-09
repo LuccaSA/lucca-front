@@ -4,6 +4,11 @@ Top horizontal navigation bar component.
 
 **Storybook:** [Documentation/Navigation/HorizontalNavigation/Angular](https://storybook.lucca-front.com)
 
+## Figma Design
+
+**Component:** [Horizontal Navigation - Lucca Components v21.1](https://www.figma.com/design/PQEOcUF9CYfKNqaejAGLWP/%F0%9F%A7%A9-Lucca-components-v21.1?node-id=3104-226)  
+**Node ID:** `3104-226`
+
 ## Import
 
 ```typescript
@@ -74,4 +79,3 @@ import {
 - Uses semantic nav element
 - Active links are properly announced
 - Keyboard navigation supported
-

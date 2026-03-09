@@ -4,6 +4,11 @@ Single-selection dropdown component with search and filtering capabilities.
 
 **Storybook:** [Documentation/Forms/Fields/Simple Select/Angular](https://storybook.lucca-front.com)
 
+## Figma Design
+
+**Component:** [Select (Simple/Multi) - Lucca Components v21.1](https://www.figma.com/design/PQEOcUF9CYfKNqaejAGLWP/%F0%9F%A7%A9-Lucca-components-v21.1?node-id=16134-2827)  
+**Node ID:** `16134-2827`
+
 ## Import
 
 ```typescript
@@ -277,3 +282,24 @@ searchCustomers(query: string) {
 - Search input is accessible
 - Options are announced by screen readers
 - Proper ARIA attributes are applied automatically
+
+## Docs Highlights (Core Select Directives)
+
+### API directives
+
+```html
+<lu-simple-select apiV3="/api/v3/axisSections" />
+<lu-simple-select apiV4="/api/legumes" />
+```
+
+For custom option display, extend `LuCoreSelectApiV4Directive` and use `*luDisplayer` / `*luOption` with the exposed select.
+
+### Users directive
+
+Provide current user id:
+
+```typescript
+providers: [provideCoreSelectCurrentUserId(() => inject(PRINCIPAL).id)]
+```
+
+Customize rendering with `*luDisplayer` and `*luOption` on a `luUsers` select.

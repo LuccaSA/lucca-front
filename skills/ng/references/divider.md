@@ -4,6 +4,15 @@ Visual separator component.
 
 **Storybook:** [Documentation/Structure/Divider/Angular](https://storybook.lucca-front.com)
 
+## Figma Design
+
+**Component:** [Divider - Lucca Components v21.1](https://www.figma.com/design/PQEOcUF9CYfKNqaejAGLWP/%F0%9F%A7%A9-Lucca-components-v21.1?node-id=8487-40717)  
+**Node ID:** `8487-40717`
+
+Un Divider est un élément graphique utilisé pour délimiter ou séparer différentes sections ou contenus dans une interface. Les Dividers sont souvent employés pour améliorer la lisibilité, l'organisation et la hiérarchie visuelle d'une interface.
+
+**Documentation:** [Prisme Design System - Divider](https://prisme.lucca.io/94310e217/p/22632c-divider)
+
 ## Import
 
 ```typescript

@@ -52,21 +52,22 @@ export const appConfig: ApplicationConfig = {
 
 This skill is organized by package:
 
-1. **For Angular components** → See [ng/SKILL.md](ng/SKILL.md) with 40 component references
+1. **For Angular components** → Start with [ng/SKILL.md](ng/SKILL.md)
 2. **For SCSS/styling** → See [scss/SKILL.md](scss/SKILL.md) for utilities, mixins, and tokens
 
 **Don't load everything at once.** Read only the specific reference file needed.
 
 ## Angular Components Overview
 
-See [ng/SKILL.md](ng/SKILL.md) for complete documentation of:
-- Forms (10 components)
-- Overlays (6 components)
-- Navigation (6 components)
-- Data Display (7 components)
-- Layout & Structure (4 components)
-- Feedback & Status (5 components)
-- Actions & Buttons (2 components)
+See [ng/SKILL.md](ng/SKILL.md) for complete documentation of **54 components** across:
+- Forms (14): form-field, text-input, textarea-input, number-input, checkbox-input, switch-input, radio-group, date-input, time-picker, phone-number-input, color-input, rich-text-input, simple select, multi select
+- Overlays (7): dialog, dropdown, popover, tooltip, toasts, sidepanel, user-popover
+- Navigation (6): vertical-navigation, horizontal-navigation, breadcrumbs, pagination, segmented-control, link
+- Data Display (8): datatable, chip, empty-state, loading, skeleton, gauge, progress-bar, data-presentation
+- Layout & Structure (6): app-layout, box, container, pageheader, divider, fancy-box
+- Feedback & Status (6): callout, inline-message, status-badge, numeric-badge, plg-push, tag
+- Content & Text (5): icon, comment, read-more, text-flow, user-tile
+- Users (2): avatar, avatar-wrapper
 
 ## SCSS Utilities Overview
 
@@ -159,8 +160,8 @@ var(--radii-m)         // Medium border radius
 
 ## All References
 
-### Angular Components (40 total)
-See [ng/references/](ng/references/) for individual component documentation.
+### Angular Components (54 total)
+See [ng/SKILL.md](ng/SKILL.md) for the full index and component documentation.
 
 ### SCSS Utilities
 See [scss/references/utilities.md](scss/references/utilities.md) for complete SCSS documentation.

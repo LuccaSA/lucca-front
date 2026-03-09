@@ -4,6 +4,14 @@ Checkbox component for boolean or multiple selection.
 
 **Storybook:** [Documentation/Forms/Fields/Checkbox/Angular](https://storybook.lucca-front.com)
 
+## Figma Design
+
+**Component:** [Checkbox - Lucca Components v21.1](https://www.figma.com/design/PQEOcUF9CYfKNqaejAGLWP/%F0%9F%A7%A9-Lucca-components-v21.1?node-id=20037-372)  
+**Node ID:** `20037-372`
+
+**Checkbox Fieldset:** [Checkbox Fieldset - Lucca Components v21.1](https://www.figma.com/design/PQEOcUF9CYfKNqaejAGLWP/%F0%9F%A7%A9-Lucca-components-v21.1?node-id=20185-80419)  
+**Node ID:** `20185-80419`
+
 ## Import
 
 ```typescript
@@ -79,4 +87,3 @@ Sets indeterminate state (aria-checked="mixed"). Used for "select all" scenarios
 - Always use with `<lu-form-field>` for label association
 - Keyboard accessible with Space key
 - Use `mixed` state for partially selected groups
-

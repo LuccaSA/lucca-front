@@ -4,6 +4,11 @@ Directive for displaying informational tooltips on hover/focus.
 
 **Storybook:** [Documentation/Overlays/Tooltip/Angular](https://storybook.lucca-front.com)
 
+## Figma Design
+
+**Component:** [Tooltip - Lucca Components v21.1](https://www.figma.com/design/PQEOcUF9CYfKNqaejAGLWP/%F0%9F%A7%A9-Lucca-components-v21.1?node-id=5639-31388)  
+**Node ID:** `5639-31388`
+
 ## Import
 
 ```typescript

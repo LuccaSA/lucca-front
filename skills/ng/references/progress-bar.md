@@ -4,6 +4,11 @@ Linear progress indicator.
 
 **Storybook:** [Documentation/Loaders/ProgressBar/Angular](https://storybook.lucca-front.com)
 
+## Figma Design
+
+**Component:** [Progress Bar - Lucca Components v21.1](https://www.figma.com/design/PQEOcUF9CYfKNqaejAGLWP/%F0%9F%A7%A9-Lucca-components-v21.1?node-id=16861-21023)  
+**Node ID:** `16861-21023`
+
 ## Import
 
 ```typescript
@@ -63,4 +68,3 @@ Type: `Palette` - Color palette.
 
 - Progress announced to screen readers
 - Use with descriptive text
-

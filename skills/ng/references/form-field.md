@@ -4,6 +4,11 @@ Wrapper component that provides label, validation messages, and accessibility fo
 
 **Storybook:** [Documentation/Forms/Form Field/Angular](https://storybook.lucca-front.com)
 
+## Figma Design
+
+**Component:** [Form Field - Lucca Components v21.1](https://www.figma.com/design/PQEOcUF9CYfKNqaejAGLWP/%F0%9F%A7%A9-Lucca-components-v21.1?node-id=28461-196506)  
+**Node ID:** `28461-196506`
+
 ## Import
 
 ```typescript

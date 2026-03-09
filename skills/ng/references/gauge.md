@@ -4,6 +4,11 @@ Progress indicator component (circular or linear).
 
 **Storybook:** [Documentation/Loaders/Gauge/Angular](https://storybook.lucca-front.com)
 
+## Figma Design
+
+**Component:** [Gauge - Lucca Components v21.1](https://www.figma.com/design/PQEOcUF9CYfKNqaejAGLWP/%F0%9F%A7%A9-Lucca-components-v21.1?node-id=16861-2802)  
+**Node ID:** `16861-2802`
+
 ## Import
 
 ```typescript
@@ -114,4 +119,3 @@ Type: `boolean` (default: `false`) - Disables default alt text.
 - Automatically generates percentage alt text
 - Use `alt` for custom descriptions
 - Progress is announced to screen readers
-

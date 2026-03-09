@@ -4,6 +4,11 @@ Component for displaying empty or no-data states.
 
 **Storybook:** [Documentation/Feedback/EmptyState/Angular](https://storybook.lucca-front.com)
 
+## Figma Design
+
+**Component:** [Empty State - Lucca Components v21.1](https://www.figma.com/design/PQEOcUF9CYfKNqaejAGLWP/%F0%9F%A7%A9-Lucca-components-v21.1?node-id=21818-68812)  
+**Node ID:** `21818-68812`
+
 ## Import
 
 ```typescript
@@ -120,4 +125,3 @@ Project action buttons into the empty state.
   <a luLink routerLink="/home">Go to Home</a>
 </lu-empty-state>
 ```
-

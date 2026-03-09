@@ -1,8 +1,13 @@
 # Chip
 
-Removable tag component for displaying selected items, filters, or labels.
+Compact component for tags, filters, and selections.
 
-**Storybook:** [Documentation/Listings/Chip/Angular](https://storybook.lucca-front.com)
+**Storybook:** [Documentation/Data/Chip/Angular](https://storybook.lucca-front.com)
+
+## Figma Design
+
+**Component:** [Chip - Lucca Components v21.1](https://www.figma.com/design/PQEOcUF9CYfKNqaejAGLWP/%F0%9F%A7%A9-Lucca-components-v21.1?node-id=3098-3077)  
+**Node ID:** `3098-3077`
 
 ## Import
 

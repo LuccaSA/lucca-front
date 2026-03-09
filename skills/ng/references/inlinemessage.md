@@ -4,6 +4,11 @@ Component for displaying contextual messages within forms or content.
 
 **Storybook:** [Documentation/Feedback/InlineMessage/Angular](https://storybook.lucca-front.com)
 
+## Figma Design
+
+**Component:** [Inline Message - Lucca Components v21.1](https://www.figma.com/design/PQEOcUF9CYfKNqaejAGLWP/%F0%9F%A7%A9-Lucca-components-v21.1?node-id=5743-32741)  
+**Node ID:** `5743-32741`
+
 ## Import
 
 ```typescript

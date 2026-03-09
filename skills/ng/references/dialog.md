@@ -1,25 +1,23 @@
 # Dialog
 
-Modal or drawer component displayed above the main content.
+Modal and drawer component for overlays.
 
 **Storybook:** [Documentation/Overlays/Dialog/Angular](https://storybook.lucca-front.com)
 
-## Imports
+## Figma Design
+
+**Component:** [Dialog - Lucca Components v21.1](https://www.figma.com/design/PQEOcUF9CYfKNqaejAGLWP/%F0%9F%A9-Lucca-components-v21.1?node-id=5640-31604)  
+**Node ID:** `5640-31604`
+
+## Import
 
 ```typescript
-import {
+import { 
   DialogComponent,
   DialogHeaderComponent,
   DialogContentComponent,
   DialogFooterComponent,
-  DialogOpenDirective,
-  DialogCloseDirective,
-  DialogDismissDirective,
-  LuDialogService,
-  provideLuDialog,
-  configureLuDialog,
-  injectDialogData,
-  injectDialogRef
+  provideLuDialog 
 } from '@lucca-front/ng/dialog';
 ```
 
@@ -267,6 +265,8 @@ Dismisses the dialog without a result (equivalent to clicking backdrop/Escape).
 
 ### Observables
 - `closed$` - Emits when dialog closes (with result or `undefined` if dismissed)
+- `result$` - Emits when `close()` is called
+- `dismissed$` - Emits when `dismiss()` is used (backdrop / escape / close)
 
 ## Common Patterns
 
@@ -319,3 +319,26 @@ this.dialogService.open({
 - Uses `role="dialog"` or `role="alertdialog"`
 - Header `<h1>` is used for `aria-labelledby`
 - Restore focus to trigger element on close
+
+## Docs Highlights
+
+### Service vs Directives
+
+You can open dialogs using `LuDialogService.open(...)` **or** the `luDialogOpen` directive with an `ng-template`.
+
+### Typed data + result
+
+Use `injectDialogData` and `injectDialogRef` in the dialog component for strong typing.
+
+```typescript
+export class MyDialogComponent {
+  data = injectDialogData<{ name: string }>();
+  ref = injectDialogRef<boolean>();
+}
+```
+
+### Result streams
+
+- `result$` emits only when `close()` is called
+- `dismissed$` emits when `dismiss()` is used (backdrop / escape / close)
+- `closed$` merges both and emits `undefined` on dismiss
