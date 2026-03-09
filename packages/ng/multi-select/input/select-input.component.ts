@@ -87,7 +87,7 @@ export class LuMultiSelectInputComponent<T> extends ALuSelectInputComponent<T, T
 		return this.filterPillMode;
 	}
 
-	hideCombobox = computed(() => this.valueSignal()?.length > 1);
+	hideCombobox = computed(() => (this.valueSignal()?.length ?? 0) > 1);
 
 	filterPillPanelAnchorRef = viewChild('filterPillPanelAnchor', { read: ViewContainerRef });
 
@@ -164,7 +164,10 @@ export class LuMultiSelectInputComponent<T> extends ALuSelectInputComponent<T, T
 	}
 
 	override enableFilterPillMode() {
-		this._panelRef = this.panelRefFactory.buildAndAttachPanelRef(this, this.filterPillPanelAnchorRef());
+		const host = this.filterPillPanelAnchorRef();
+		if (host) {
+			this._panelRef = this.panelRefFactory.buildAndAttachPanelRef(this, host);
+		}
 		super.enableFilterPillMode();
 	}
 
