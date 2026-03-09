@@ -2,6 +2,10 @@ import { ComponentRef, Directive, EmbeddedViewRef, inject, Injector, Input, OnCh
 import { LuOptionContext } from '../select.model';
 import { LU_OPTION_CONTEXT, provideOptionContext } from './option.token';
 
+function hasRenderableValue<T>(value: T | undefined): value is T {
+	return value !== null && value !== undefined;
+}
+
 @Directive({
 	selector: '[luOptionOutlet]',
 	providers: [provideOptionContext()],
@@ -17,23 +21,19 @@ export class LuOptionOutletDirective<T> implements OnChanges, OnDestroy {
 	private componentRef?: ComponentRef<unknown>;
 	private optionContext = inject(LU_OPTION_CONTEXT);
 
-	#hasRenderableValue(value: T | undefined): value is T {
-		return value !== null && value !== undefined;
-	}
-
 	ngOnChanges(changes: SimpleChanges): void {
-		if (changes['luOptionOutlet'] || !this.#hasRenderableValue(this.luOptionOutletValue)) {
+		if (changes['luOptionOutlet'] || !hasRenderableValue(this.luOptionOutletValue)) {
 			this.clearContainer();
 		}
 
 		const hasRef = this.embeddedViewRef || this.componentRef;
 
-		if (changes['luOptionOutlet'] || (this.#hasRenderableValue(changes['luOptionOutletValue'].currentValue as T | undefined) && !hasRef)) {
+		if (changes['luOptionOutlet'] || (hasRenderableValue(changes['luOptionOutletValue'].currentValue as T | undefined) && !hasRef)) {
 			const newValue = changes['luOptionOutletValue'].currentValue as T | undefined;
-			if (this.#hasRenderableValue(newValue)) {
+			if (hasRenderableValue(newValue)) {
 				this.createComponent();
 			}
-		} else if (changes['luOptionOutletValue'] && this.#hasRenderableValue(this.luOptionOutletValue)) {
+		} else if (changes['luOptionOutletValue'] && hasRenderableValue(this.luOptionOutletValue)) {
 			this.updateRefValue();
 		}
 	}
@@ -51,7 +51,7 @@ export class LuOptionOutletDirective<T> implements OnChanges, OnDestroy {
 	}
 
 	private createComponent(): void {
-		if (!this.luOptionOutlet || !this.#hasRenderableValue(this.luOptionOutletValue)) {
+		if (!this.luOptionOutlet || !hasRenderableValue(this.luOptionOutletValue)) {
 			return;
 		}
 
@@ -64,7 +64,7 @@ export class LuOptionOutletDirective<T> implements OnChanges, OnDestroy {
 	}
 
 	private updateRefValue(): void {
-		if (!this.#hasRenderableValue(this.luOptionOutletValue)) {
+		if (!hasRenderableValue(this.luOptionOutletValue)) {
 			this.clearContainer();
 			return;
 		}

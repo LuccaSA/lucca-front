@@ -1,7 +1,7 @@
-import { Injectable } from '@angular/core';
-import { ILuEstablishment } from '../establishment.model';
 import { HttpClient } from '@angular/common/http';
+import { Injectable } from '@angular/core';
 import { LuApiV4Service } from '@lucca-front/ng/api';
+import { ILuEstablishment } from '../establishment.model';
 
 @Injectable()
 export class LuEstablishmentService extends LuApiV4Service<ILuEstablishment> {
