@@ -5,6 +5,9 @@ import { ChangeDetectionStrategy, Component, input, ViewEncapsulation } from '@a
 	templateUrl: './empty-state-page-illustration.component.html',
 	changeDetection: ChangeDetectionStrategy.OnPush,
 	encapsulation: ViewEncapsulation.None,
+	host: {
+		class: 'pr-u-displayFlex',
+	},
 })
 export class EmptyStatePageIllustration {
 	readonly src = input<string | null>(null);
