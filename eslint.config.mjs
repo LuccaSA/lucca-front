@@ -22,7 +22,6 @@ const STRICTIFIED_NG_EXCLUDE_ENTRIES = [
 	'packages/ng/modal/**/*.ts',
 	'packages/ng/multi-select/**/*.ts',
 	'packages/ng/option/**/*.ts',
-	'packages/ng/popup/**/*.ts',
 	'packages/ng/schematics/**/*.ts',
 	'packages/ng/select/**/*.ts',
 	'packages/ng/simple-select/**/*.ts',
