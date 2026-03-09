@@ -138,7 +138,7 @@ describe('LuCoreSelectUsersDirective', () => {
 		tick(MAGIC_OPTION_SCROLL_DELAY);
 
 		// Assert (Page 1)
-		let options: readonly LuCoreSelectUser[];
+		let options: readonly LuCoreSelectUser[] = [];
 		simpleSelect.options$.subscribe((o) => (options = o));
 
 		expect(options).toEqual([meUser, ...page1]);
@@ -209,7 +209,7 @@ describe('LuCoreSelectUsersDirective', () => {
 });
 
 function createUser(id: number, lastName = 'test ' + id, firstName = 'test ' + id): LuCoreSelectUser {
-	return { id, firstName, lastName, picture: null };
+	return { id, firstName, lastName };
 }
 
 function usersResponse(users: LuCoreSelectUser[]) {
