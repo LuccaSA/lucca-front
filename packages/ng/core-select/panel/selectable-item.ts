@@ -48,7 +48,10 @@ export class CoreSelectPanelElement<T> implements Highlightable, OnDestroy {
 
 	setActiveStyles(): void {
 		this.isHighlighted.set(true);
-		this.#selectRef.highlightedOption.emit(this.option());
+		const option = this.option();
+		if (option !== undefined) {
+			this.#selectRef.highlightedOption.emit(option);
+		}
 	}
 
 	setInactiveStyles(): void {
