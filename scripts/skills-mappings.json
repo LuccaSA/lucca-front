@@ -1,0 +1,2691 @@
+{
+  "generatedAt": "2026-03-09T13:27:52.628Z",
+  "totalComponents": 140,
+  "linkedComponents": 0,
+  "mappings": [
+    {
+      "componentName": "Button",
+      "skillPath": "actions\\button\\skills.md",
+      "triggers": [
+        "button",
+        "icon",
+        "numeric-badge",
+        "numericbadge",
+        "click",
+        "action",
+        "interactive"
+      ],
+      "figma": {
+        "nodeId": null,
+        "fileKey": null
+      },
+      "linked": false
+    },
+    {
+      "componentName": "Links",
+      "skillPath": "actions\\links\\skills.md",
+      "triggers": [
+        "links",
+        "link",
+        "click",
+        "action",
+        "interactive"
+      ],
+      "figma": {
+        "nodeId": null,
+        "fileKey": null
+      },
+      "linked": false
+    },
+    {
+      "componentName": "Callout",
+      "skillPath": "feedback\\callout\\skills.md",
+      "triggers": [
+        "callout",
+        "button",
+        "calloutactions",
+        "calloutfeedbackitem",
+        "calloutfeedbacklist",
+        "icon",
+        "form-field",
+        "formfield",
+        "forms",
+        "textinput",
+        "notification",
+        "message",
+        "alert"
+      ],
+      "figma": {
+        "nodeId": null,
+        "fileKey": null
+      },
+      "linked": false
+    },
+    {
+      "componentName": "Callout disclosure",
+      "skillPath": "feedback\\callout-disclosure\\skills.md",
+      "triggers": [
+        "callout-disclosure",
+        "calloutdisclosure",
+        "button",
+        "callout",
+        "calloutfeedbackitem",
+        "calloutfeedbackitemdescription",
+        "calloutfeedbacklist",
+        "notification",
+        "message",
+        "alert"
+      ],
+      "figma": {
+        "nodeId": null,
+        "fileKey": null
+      },
+      "linked": false
+    },
+    {
+      "componentName": "Callout feedback list",
+      "skillPath": "feedback\\callout-feedback-list\\skills.md",
+      "triggers": [
+        "callout-feedback-list",
+        "calloutfeedbacklist",
+        "notification",
+        "message",
+        "alert"
+      ],
+      "figma": {
+        "nodeId": null,
+        "fileKey": null
+      },
+      "linked": false
+    },
+    {
+      "componentName": "Callout popover",
+      "skillPath": "feedback\\callout-popover\\skills.md",
+      "triggers": [
+        "callout-popover",
+        "calloutpopover",
+        "button",
+        "callout",
+        "calloutfeedbackitem",
+        "calloutfeedbackitemdescription",
+        "calloutfeedbacklist",
+        "notification",
+        "message",
+        "alert"
+      ],
+      "figma": {
+        "nodeId": null,
+        "fileKey": null
+      },
+      "linked": false
+    },
+    {
+      "componentName": "Empty state",
+      "skillPath": "feedback\\empty-state\\skills.md",
+      "triggers": [
+        "empty-state",
+        "emptystate",
+        "button",
+        "emptystatepage",
+        "emptystatesection",
+        "safe-content",
+        "lusafeexternalsvgpipe",
+        "notification",
+        "message",
+        "alert"
+      ],
+      "figma": {
+        "nodeId": null,
+        "fileKey": null
+      },
+      "linked": false
+    },
+    {
+      "componentName": "Error page",
+      "skillPath": "feedback\\error-page\\skills.md",
+      "triggers": [
+        "error-page",
+        "errorpage",
+        "notification",
+        "message",
+        "alert"
+      ],
+      "figma": {
+        "nodeId": null,
+        "fileKey": null
+      },
+      "linked": false
+    },
+    {
+      "componentName": "Mobile push",
+      "skillPath": "feedback\\mobile-push\\skills.md",
+      "triggers": [
+        "mobile-push",
+        "mobilepush",
+        "icon",
+        "notification",
+        "message",
+        "alert"
+      ],
+      "figma": {
+        "nodeId": null,
+        "fileKey": null
+      },
+      "linked": false
+    },
+    {
+      "componentName": "Plg push",
+      "skillPath": "feedback\\plg-push\\skills.md",
+      "triggers": [
+        "plg-push",
+        "plgpush",
+        "icon",
+        "notification",
+        "message",
+        "alert"
+      ],
+      "figma": {
+        "nodeId": null,
+        "fileKey": null
+      },
+      "linked": false
+    },
+    {
+      "componentName": "Select",
+      "skillPath": "forms\\api\\select\\skills.md",
+      "triggers": [
+        "select",
+        "api",
+        "luapiselectinput",
+        "input",
+        "form",
+        "field",
+        "control"
+      ],
+      "figma": {
+        "nodeId": null,
+        "fileKey": null
+      },
+      "linked": false
+    },
+    {
+      "componentName": "Checkbox",
+      "skillPath": "forms\\checkbox\\skills.md",
+      "triggers": [
+        "checkbox",
+        "input",
+        "form",
+        "field",
+        "control"
+      ],
+      "figma": {
+        "nodeId": null,
+        "fileKey": null
+      },
+      "linked": false
+    },
+    {
+      "componentName": "Checkbox legacy",
+      "skillPath": "forms\\checkbox-legacy\\skills.md",
+      "triggers": [
+        "checkbox-legacy",
+        "checkboxlegacy",
+        "input",
+        "form",
+        "field",
+        "control"
+      ],
+      "figma": {
+        "nodeId": null,
+        "fileKey": null
+      },
+      "linked": false
+    },
+    {
+      "componentName": "Data presentation",
+      "skillPath": "forms\\data-presentation\\skills.md",
+      "triggers": [
+        "data-presentation",
+        "datapresentation",
+        "form-field",
+        "input",
+        "form",
+        "field",
+        "control"
+      ],
+      "figma": {
+        "nodeId": null,
+        "fileKey": null
+      },
+      "linked": false
+    },
+    {
+      "componentName": "Calendar",
+      "skillPath": "forms\\date\\calendar\\skills.md",
+      "triggers": [
+        "calendar",
+        "core",
+        "aludateadapter",
+        "lunativedateadapter",
+        "date",
+        "lucalendarinput",
+        "ludateadapterpipe",
+        "input",
+        "form",
+        "field",
+        "control"
+      ],
+      "figma": {
+        "nodeId": null,
+        "fileKey": null
+      },
+      "linked": false
+    },
+    {
+      "componentName": "Select",
+      "skillPath": "forms\\date\\select\\skills.md",
+      "triggers": [
+        "select",
+        "core",
+        "aludateadapter",
+        "eludategranularity",
+        "lustringdateadapter",
+        "date",
+        "ludateselectinput",
+        "input",
+        "luinputdisplayer",
+        "form",
+        "field",
+        "control"
+      ],
+      "figma": {
+        "nodeId": null,
+        "fileKey": null
+      },
+      "linked": false
+    },
+    {
+      "componentName": "Date2",
+      "skillPath": "forms\\date2\\skills.md",
+      "triggers": [
+        "date2",
+        "calendar2",
+        "dateinput",
+        "calendarshortcut",
+        "daterange",
+        "daterangeinput",
+        "premadeshortcuts",
+        "calendarmode",
+        "form-field",
+        "formfield",
+        "icon",
+        "input",
+        "form",
+        "field",
+        "control"
+      ],
+      "figma": {
+        "nodeId": null,
+        "fileKey": null
+      },
+      "linked": false
+    },
+    {
+      "componentName": "Department",
+      "skillPath": "forms\\department\\skills.md",
+      "triggers": [
+        "department",
+        "ludepartmentselectinput",
+        "input",
+        "form",
+        "field",
+        "control"
+      ],
+      "figma": {
+        "nodeId": null,
+        "fileKey": null
+      },
+      "linked": false
+    },
+    {
+      "componentName": "Establishment select",
+      "skillPath": "forms\\establishment-select\\skills.md",
+      "triggers": [
+        "establishment-select",
+        "establishmentselect",
+        "establishment",
+        "luestablishmentselectinput",
+        "input",
+        "form",
+        "field",
+        "control"
+      ],
+      "figma": {
+        "nodeId": null,
+        "fileKey": null
+      },
+      "linked": false
+    },
+    {
+      "componentName": "Examples",
+      "skillPath": "forms\\examples\\skills.md",
+      "triggers": [
+        "examples",
+        "divider",
+        "form",
+        "form-field",
+        "formfield",
+        "form-header",
+        "formheader",
+        "forms",
+        "fieldset",
+        "textinput",
+        "grid",
+        "gridcolumn",
+        "input",
+        "field",
+        "control"
+      ],
+      "figma": {
+        "nodeId": null,
+        "fileKey": null
+      },
+      "linked": false
+    },
+    {
+      "componentName": "Checkbox",
+      "skillPath": "forms\\fields\\checkbox\\skills.md",
+      "triggers": [
+        "checkbox",
+        "form-field",
+        "formfield",
+        "forms",
+        "checkboxinput",
+        "input",
+        "form",
+        "field",
+        "control"
+      ],
+      "figma": {
+        "nodeId": null,
+        "fileKey": null
+      },
+      "linked": false
+    },
+    {
+      "componentName": "Color input",
+      "skillPath": "forms\\fields\\color-input\\skills.md",
+      "triggers": [
+        "color-input",
+        "colorinput",
+        "core-select",
+        "luoption",
+        "form-field",
+        "formfield",
+        "forms",
+        "input",
+        "form",
+        "field",
+        "control"
+      ],
+      "figma": {
+        "nodeId": null,
+        "fileKey": null
+      },
+      "linked": false
+    },
+    {
+      "componentName": "Date",
+      "skillPath": "forms\\fields\\date\\skills.md",
+      "triggers": [
+        "date",
+        "date2",
+        "dateinput",
+        "form-field",
+        "formfield",
+        "input",
+        "form",
+        "field",
+        "control"
+      ],
+      "figma": {
+        "nodeId": null,
+        "fileKey": null
+      },
+      "linked": false
+    },
+    {
+      "componentName": "Multi select",
+      "skillPath": "forms\\fields\\multi-select\\skills.md",
+      "triggers": [
+        "multi-select",
+        "multiselect",
+        "core-select",
+        "luoption",
+        "form-field",
+        "formfield",
+        "lumultiselectinput",
+        "input",
+        "form",
+        "field",
+        "control"
+      ],
+      "figma": {
+        "nodeId": null,
+        "fileKey": null
+      },
+      "linked": false
+    },
+    {
+      "componentName": "Multilanguage",
+      "skillPath": "forms\\fields\\multilanguage\\skills.md",
+      "triggers": [
+        "multilanguage",
+        "form-field",
+        "formfield",
+        "forms",
+        "multilanguageinput",
+        "multilanguageinputvalidators",
+        "multilanguagetranslation",
+        "input",
+        "form",
+        "field",
+        "control"
+      ],
+      "figma": {
+        "nodeId": null,
+        "fileKey": null
+      },
+      "linked": false
+    },
+    {
+      "componentName": "Number",
+      "skillPath": "forms\\fields\\number\\skills.md",
+      "triggers": [
+        "number",
+        "form-field",
+        "formfield",
+        "forms",
+        "numberinput",
+        "input",
+        "form",
+        "field",
+        "control"
+      ],
+      "figma": {
+        "nodeId": null,
+        "fileKey": null
+      },
+      "linked": false
+    },
+    {
+      "componentName": "Number format",
+      "skillPath": "forms\\fields\\number-format\\skills.md",
+      "triggers": [
+        "number-format",
+        "numberformat",
+        "form-field",
+        "formfield",
+        "forms",
+        "numberformatinput",
+        "input",
+        "form",
+        "field",
+        "control"
+      ],
+      "figma": {
+        "nodeId": null,
+        "fileKey": null
+      },
+      "linked": false
+    },
+    {
+      "componentName": "Phone number input",
+      "skillPath": "forms\\fields\\phone-number-input\\skills.md",
+      "triggers": [
+        "phone-number-input",
+        "phonenumberinput",
+        "form-field",
+        "formfield",
+        "forms/phone-number-input",
+        "input",
+        "form",
+        "field",
+        "control"
+      ],
+      "figma": {
+        "nodeId": null,
+        "fileKey": null
+      },
+      "linked": false
+    },
+    {
+      "componentName": "Radio",
+      "skillPath": "forms\\fields\\radio\\skills.md",
+      "triggers": [
+        "radio",
+        "form-field",
+        "formfield",
+        "forms",
+        "radiogroupinput",
+        "input",
+        "form",
+        "field",
+        "control"
+      ],
+      "figma": {
+        "nodeId": null,
+        "fileKey": null
+      },
+      "linked": false
+    },
+    {
+      "componentName": "Rich text",
+      "skillPath": "forms\\fields\\rich-text\\skills.md",
+      "triggers": [
+        "rich-text",
+        "richtext",
+        "button",
+        "divider",
+        "form-field",
+        "formfield",
+        "forms/rich-text-input",
+        "richtextinput",
+        "richtextinputtoolbar",
+        "richtextplugintag",
+        "forms/rich-text-input/formatters/html",
+        "htmlformatter",
+        "forms/rich-text-input/formatters/markdown",
+        "default_markdown_transformers",
+        "markdownformatter",
+        "markdownformatterwithtags",
+        "tags",
+        "forms/rich-text-input/formatters/plain-text",
+        "plaintext_tags",
+        "plaintextformatterwithtags",
+        "input",
+        "form",
+        "field",
+        "control"
+      ],
+      "figma": {
+        "nodeId": null,
+        "fileKey": null
+      },
+      "linked": false
+    },
+    {
+      "componentName": "Simple select",
+      "skillPath": "forms\\fields\\simple-select\\skills.md",
+      "triggers": [
+        "simple-select",
+        "simpleselect",
+        "core-select",
+        "luoption",
+        "form-field",
+        "formfield",
+        "lusimpleselectinput",
+        "input",
+        "form",
+        "field",
+        "control"
+      ],
+      "figma": {
+        "nodeId": null,
+        "fileKey": null
+      },
+      "linked": false
+    },
+    {
+      "componentName": "Fields",
+      "skillPath": "forms\\fields\\skills.md",
+      "triggers": [
+        "fields",
+        "form-field",
+        "formfield",
+        "input",
+        "forms",
+        "radio",
+        "radiogroupinput",
+        "textinput",
+        "form",
+        "field",
+        "control"
+      ],
+      "figma": {
+        "nodeId": null,
+        "fileKey": null
+      },
+      "linked": false
+    },
+    {
+      "componentName": "Switch",
+      "skillPath": "forms\\fields\\switch\\skills.md",
+      "triggers": [
+        "switch",
+        "form-field",
+        "formfield",
+        "forms",
+        "checkboxinput",
+        "switchinput",
+        "input",
+        "form",
+        "field",
+        "control"
+      ],
+      "figma": {
+        "nodeId": null,
+        "fileKey": null
+      },
+      "linked": false
+    },
+    {
+      "componentName": "Text",
+      "skillPath": "forms\\fields\\text\\skills.md",
+      "triggers": [
+        "text",
+        "form-field",
+        "formfield",
+        "forms",
+        "textinput",
+        "input",
+        "form",
+        "field",
+        "control"
+      ],
+      "figma": {
+        "nodeId": null,
+        "fileKey": null
+      },
+      "linked": false
+    },
+    {
+      "componentName": "Textarea",
+      "skillPath": "forms\\fields\\textarea\\skills.md",
+      "triggers": [
+        "textarea",
+        "form-field",
+        "formfield",
+        "forms",
+        "textareainput",
+        "input",
+        "form",
+        "field",
+        "control"
+      ],
+      "figma": {
+        "nodeId": null,
+        "fileKey": null
+      },
+      "linked": false
+    },
+    {
+      "componentName": "Fieldset",
+      "skillPath": "forms\\fieldset\\skills.md",
+      "triggers": [
+        "fieldset",
+        "button",
+        "form-field",
+        "formfield",
+        "forms",
+        "textinput",
+        "grid",
+        "gridcolumn",
+        "input",
+        "form",
+        "field",
+        "control"
+      ],
+      "figma": {
+        "nodeId": null,
+        "fileKey": null
+      },
+      "linked": false
+    },
+    {
+      "componentName": "File dropzone",
+      "skillPath": "forms\\file-dropzone\\skills.md",
+      "triggers": [
+        "file-dropzone",
+        "filedropzone",
+        "file-upload",
+        "input",
+        "form",
+        "field",
+        "control"
+      ],
+      "figma": {
+        "nodeId": null,
+        "fileKey": null
+      },
+      "linked": false
+    },
+    {
+      "componentName": "File entry",
+      "skillPath": "forms\\file-entry\\skills.md",
+      "triggers": [
+        "file-entry",
+        "fileentry",
+        "file-upload",
+        "input",
+        "form",
+        "field",
+        "control"
+      ],
+      "figma": {
+        "nodeId": null,
+        "fileKey": null
+      },
+      "linked": false
+    },
+    {
+      "componentName": "File toolbar",
+      "skillPath": "forms\\file-toolbar\\skills.md",
+      "triggers": [
+        "file-toolbar",
+        "filetoolbar",
+        "button",
+        "icon",
+        "tooltip",
+        "lutooltip",
+        "input",
+        "form",
+        "field",
+        "control"
+      ],
+      "figma": {
+        "nodeId": null,
+        "fileKey": null
+      },
+      "linked": false
+    },
+    {
+      "componentName": "File upload",
+      "skillPath": "forms\\file-upload\\skills.md",
+      "triggers": [
+        "file-upload",
+        "fileupload",
+        "button",
+        "fileentry",
+        "multifileupload",
+        "singlefileupload",
+        "form-field",
+        "formfield",
+        "forms",
+        "textinput",
+        "input",
+        "luinput",
+        "form",
+        "field",
+        "control"
+      ],
+      "figma": {
+        "nodeId": null,
+        "fileKey": null
+      },
+      "linked": false
+    },
+    {
+      "componentName": "Files",
+      "skillPath": "forms\\files\\skills.md",
+      "triggers": [
+        "files",
+        "input",
+        "form",
+        "field",
+        "control"
+      ],
+      "figma": {
+        "nodeId": null,
+        "fileKey": null
+      },
+      "linked": false
+    },
+    {
+      "componentName": "Filter pills",
+      "skillPath": "forms\\filter-pills\\skills.md",
+      "triggers": [
+        "filter-pills",
+        "filterpills",
+        "date2",
+        "dateinput",
+        "daterangeinput",
+        "filterpill",
+        "filterbar",
+        "filterpilladdonafter",
+        "filterpilladdonbefore",
+        "forms",
+        "checkboxinput",
+        "textinput",
+        "button",
+        "core-select/api",
+        "lucoreselectapiv4",
+        "divider",
+        "form-field",
+        "formfield",
+        "multi-select",
+        "lumultiselectinput",
+        "lumultidisplayer",
+        "lumultiselectcounterdisplayer",
+        "lumultiselectwithselectall",
+        "numeric-badge",
+        "numericbadge",
+        "segmented-control",
+        "segmentedcontrol",
+        "segmentedcontrolfilter",
+        "simple-select",
+        "lusimpleselectinput",
+        "core-select",
+        "ludisplayer",
+        "luoption",
+        "lucoreselecttotalcount",
+        "core-select/department",
+        "lucoreselectdepartments",
+        "tree-select",
+        "treeselect",
+        "core-select/user",
+        "lucoreselectusers",
+        "providecoreselectcurrentuserid",
+        "tooltip",
+        "lutooltip",
+        "icon",
+        "popover2",
+        "popover",
+        "scroll-box",
+        "scrollbox",
+        "input",
+        "form",
+        "field",
+        "control"
+      ],
+      "figma": {
+        "nodeId": null,
+        "fileKey": null
+      },
+      "linked": false
+    },
+    {
+      "componentName": "Form label",
+      "skillPath": "forms\\form-label\\skills.md",
+      "triggers": [
+        "form-label",
+        "formlabel",
+        "input",
+        "form",
+        "field",
+        "control"
+      ],
+      "figma": {
+        "nodeId": null,
+        "fileKey": null
+      },
+      "linked": false
+    },
+    {
+      "componentName": "Framed",
+      "skillPath": "forms\\framed\\skills.md",
+      "triggers": [
+        "framed",
+        "input",
+        "form",
+        "field",
+        "control"
+      ],
+      "figma": {
+        "nodeId": null,
+        "fileKey": null
+      },
+      "linked": false
+    },
+    {
+      "componentName": "Inline message",
+      "skillPath": "forms\\inline-message\\skills.md",
+      "triggers": [
+        "inline-message",
+        "inlinemessage",
+        "input",
+        "form",
+        "field",
+        "control"
+      ],
+      "figma": {
+        "nodeId": null,
+        "fileKey": null
+      },
+      "linked": false
+    },
+    {
+      "componentName": "Input framed",
+      "skillPath": "forms\\input-framed\\skills.md",
+      "triggers": [
+        "input-framed",
+        "inputframed",
+        "form-field",
+        "formfield",
+        "forms",
+        "checkboxinput",
+        "radio",
+        "radiogroupinput",
+        "grid",
+        "gridcolumn",
+        "icon",
+        "input",
+        "form",
+        "field",
+        "control"
+      ],
+      "figma": {
+        "nodeId": null,
+        "fileKey": null
+      },
+      "linked": false
+    },
+    {
+      "componentName": "Listbox option",
+      "skillPath": "forms\\listbox-option\\skills.md",
+      "triggers": [
+        "listbox-option",
+        "listboxoption",
+        "icon",
+        "listbox",
+        "option",
+        "treeitem",
+        "loading",
+        "input",
+        "form",
+        "field",
+        "control"
+      ],
+      "figma": {
+        "nodeId": null,
+        "fileKey": null
+      },
+      "linked": false
+    },
+    {
+      "componentName": "Radio button",
+      "skillPath": "forms\\radio-button\\skills.md",
+      "triggers": [
+        "radio-button",
+        "radiobutton",
+        "input",
+        "form",
+        "field",
+        "control"
+      ],
+      "figma": {
+        "nodeId": null,
+        "fileKey": null
+      },
+      "linked": false
+    },
+    {
+      "componentName": "Radio legacy",
+      "skillPath": "forms\\radio-legacy\\skills.md",
+      "triggers": [
+        "radio-legacy",
+        "radiolegacy",
+        "input",
+        "form",
+        "field",
+        "control"
+      ],
+      "figma": {
+        "nodeId": null,
+        "fileKey": null
+      },
+      "linked": false
+    },
+    {
+      "componentName": "Select",
+      "skillPath": "forms\\select\\skills.md",
+      "triggers": [
+        "select",
+        "color",
+        "core-select",
+        "ludisplayer",
+        "luoption",
+        "lucoreselectpanelheader",
+        "lucoreselecttotalcount",
+        "ludisabledoption",
+        "luoptiongroup",
+        "treegroupingfn",
+        "ɵluoptionoutlet",
+        "lucoreselectnoclue",
+        "form-field",
+        "formfield",
+        "forms",
+        "colorinput",
+        "coloroption",
+        "simple-select",
+        "lusimpleselectinput",
+        "tooltip",
+        "lutooltiptrigger",
+        "lutooltip",
+        "multi-select",
+        "lumultiselectinput",
+        "lumultidisplayer",
+        "lumultiselectcontentdisplayer",
+        "lumultiselectcounterdisplayer",
+        "lumultiselectdefaultdisplayer",
+        "lumultiselectdisplayerinput",
+        "lumultiselection",
+        "lumultiselectwithselectall",
+        "core-select/api",
+        "lucoreselectapiv4",
+        "lucoreselectapiv3",
+        "core-select/department",
+        "lucoreselectdepartments",
+        "core-select/establishment",
+        "lucoreselectestablishments",
+        "core-select/job-qualification",
+        "lucoreselectjobqualifications",
+        "core-select/occupation-category",
+        "lucoreselectoccupationcategories",
+        "core-select/user",
+        "lucoreselectusers",
+        "providecoreselectcurrentuserid",
+        "lucoreselectuseroption",
+        "tree-select",
+        "treeselect",
+        "clear",
+        "input",
+        "luinput",
+        "luinputdisplayer",
+        "option",
+        "luoptionitem",
+        "luoptionpicker",
+        "luselectinput",
+        "chip",
+        "icon",
+        "user",
+        "luuserdisplaypipe",
+        "luuserpicture",
+        "divider",
+        "filter-pills",
+        "filterbar",
+        "filterpill",
+        "form",
+        "field",
+        "control"
+      ],
+      "figma": {
+        "nodeId": null,
+        "fileKey": null
+      },
+      "linked": false
+    },
+    {
+      "componentName": "Switch",
+      "skillPath": "forms\\switch\\skills.md",
+      "triggers": [
+        "switch",
+        "input",
+        "form",
+        "field",
+        "control"
+      ],
+      "figma": {
+        "nodeId": null,
+        "fileKey": null
+      },
+      "linked": false
+    },
+    {
+      "componentName": "Switch legacy",
+      "skillPath": "forms\\switch-legacy\\skills.md",
+      "triggers": [
+        "switch-legacy",
+        "switchlegacy",
+        "input",
+        "form",
+        "field",
+        "control"
+      ],
+      "figma": {
+        "nodeId": null,
+        "fileKey": null
+      },
+      "linked": false
+    },
+    {
+      "componentName": "Textfield legacy",
+      "skillPath": "forms\\textfield-legacy\\skills.md",
+      "triggers": [
+        "textfield-legacy",
+        "textfieldlegacy",
+        "input",
+        "form",
+        "field",
+        "control"
+      ],
+      "figma": {
+        "nodeId": null,
+        "fileKey": null
+      },
+      "linked": false
+    },
+    {
+      "componentName": "Time",
+      "skillPath": "forms\\time\\skills.md",
+      "triggers": [
+        "time",
+        "form-field",
+        "formfield",
+        "durationpicker",
+        "timepicker",
+        "input",
+        "form",
+        "field",
+        "control"
+      ],
+      "figma": {
+        "nodeId": null,
+        "fileKey": null
+      },
+      "linked": false
+    },
+    {
+      "componentName": "Utilities",
+      "skillPath": "integration\\utilities\\skills.md",
+      "triggers": [
+        "utilities"
+      ],
+      "figma": {
+        "nodeId": null,
+        "fileKey": null
+      },
+      "linked": false
+    },
+    {
+      "componentName": "Intl",
+      "skillPath": "intl\\skills.md",
+      "triggers": [
+        "intl",
+        "pagination"
+      ],
+      "figma": {
+        "nodeId": null,
+        "fileKey": null
+      },
+      "linked": false
+    },
+    {
+      "componentName": "Chip",
+      "skillPath": "listings\\chip\\skills.md",
+      "triggers": [
+        "chip",
+        "list",
+        "table",
+        "data",
+        "grid"
+      ],
+      "figma": {
+        "nodeId": null,
+        "fileKey": null
+      },
+      "linked": false
+    },
+    {
+      "componentName": "Data table",
+      "skillPath": "listings\\data-table\\skills.md",
+      "triggers": [
+        "data-table",
+        "datatable",
+        "button",
+        "datatablebody",
+        "datatablefoot",
+        "datatablehead",
+        "datatablerowcell",
+        "datatablerowcellheader",
+        "datatablerow",
+        "form-field",
+        "formfield",
+        "forms",
+        "textinput",
+        "icon",
+        "numeric-badge",
+        "numericbadge",
+        "pagination",
+        "list",
+        "table",
+        "data",
+        "grid"
+      ],
+      "figma": {
+        "nodeId": null,
+        "fileKey": null
+      },
+      "linked": false
+    },
+    {
+      "componentName": "Index table",
+      "skillPath": "listings\\index-table\\skills.md",
+      "triggers": [
+        "index-table",
+        "indextable",
+        "button",
+        "dropdown",
+        "dropdownaction",
+        "dropdowngroup",
+        "dropdownitem",
+        "dropdownmenu",
+        "ludropdowntrigger",
+        "icon",
+        "indextableaction",
+        "indextablebody",
+        "indextablefoot",
+        "indextablehead",
+        "indextablerowcell",
+        "indextablerowcellheader",
+        "indextablerow",
+        "indextableactionfile",
+        "pagination",
+        "tooltip",
+        "lutooltip",
+        "user",
+        "luuserdisplay",
+        "luuserpicture",
+        "user-popover",
+        "luuserpopover",
+        "empty-state",
+        "emptystatesection",
+        "numeric-badge",
+        "numericbadge",
+        "safe-content",
+        "lusafeexternalsvgpipe",
+        "list",
+        "table",
+        "data",
+        "grid"
+      ],
+      "figma": {
+        "nodeId": null,
+        "fileKey": null
+      },
+      "linked": false
+    },
+    {
+      "componentName": "List",
+      "skillPath": "listings\\list\\skills.md",
+      "triggers": [
+        "list",
+        "table",
+        "data",
+        "grid"
+      ],
+      "figma": {
+        "nodeId": null,
+        "fileKey": null
+      },
+      "linked": false
+    },
+    {
+      "componentName": "Listing",
+      "skillPath": "listings\\listing\\skills.md",
+      "triggers": [
+        "listing",
+        "listingitem",
+        "list",
+        "table",
+        "data",
+        "grid"
+      ],
+      "figma": {
+        "nodeId": null,
+        "fileKey": null
+      },
+      "linked": false
+    },
+    {
+      "componentName": "Sortable list",
+      "skillPath": "listings\\sortable-list\\skills.md",
+      "triggers": [
+        "sortable-list",
+        "sortablelist",
+        "sortablelistitem",
+        "tooltip",
+        "lutooltip",
+        "list",
+        "table",
+        "data",
+        "grid"
+      ],
+      "figma": {
+        "nodeId": null,
+        "fileKey": null
+      },
+      "linked": false
+    },
+    {
+      "componentName": "Table",
+      "skillPath": "listings\\table\\skills.md",
+      "triggers": [
+        "table",
+        "empty-state",
+        "emptystatesection",
+        "button",
+        "list",
+        "data",
+        "grid"
+      ],
+      "figma": {
+        "nodeId": null,
+        "fileKey": null
+      },
+      "linked": false
+    },
+    {
+      "componentName": "Table legacy",
+      "skillPath": "listings\\table-legacy\\skills.md",
+      "triggers": [
+        "table-legacy",
+        "tablelegacy",
+        "list",
+        "table",
+        "data",
+        "grid"
+      ],
+      "figma": {
+        "nodeId": null,
+        "fileKey": null
+      },
+      "linked": false
+    },
+    {
+      "componentName": "Timelines",
+      "skillPath": "listings\\timelines\\skills.md",
+      "triggers": [
+        "timelines",
+        "list",
+        "table",
+        "data",
+        "grid"
+      ],
+      "figma": {
+        "nodeId": null,
+        "fileKey": null
+      },
+      "linked": false
+    },
+    {
+      "componentName": "Gauge",
+      "skillPath": "loaders\\gauge\\skills.md",
+      "triggers": [
+        "gauge",
+        "loading",
+        "spinner",
+        "progress"
+      ],
+      "figma": {
+        "nodeId": null,
+        "fileKey": null
+      },
+      "linked": false
+    },
+    {
+      "componentName": "Loading",
+      "skillPath": "loaders\\loading\\skills.md",
+      "triggers": [
+        "loading",
+        "spinner",
+        "progress"
+      ],
+      "figma": {
+        "nodeId": null,
+        "fileKey": null
+      },
+      "linked": false
+    },
+    {
+      "componentName": "Progress bar",
+      "skillPath": "loaders\\progress-bar\\skills.md",
+      "triggers": [
+        "progress-bar",
+        "progressbar",
+        "loading",
+        "spinner",
+        "progress"
+      ],
+      "figma": {
+        "nodeId": null,
+        "fileKey": null
+      },
+      "linked": false
+    },
+    {
+      "componentName": "Skeleton",
+      "skillPath": "loaders\\skeleton\\skills.md",
+      "triggers": [
+        "skeleton",
+        "loading",
+        "spinner",
+        "progress"
+      ],
+      "figma": {
+        "nodeId": null,
+        "fileKey": null
+      },
+      "linked": false
+    },
+    {
+      "componentName": "Skeleton button",
+      "skillPath": "loaders\\skeleton-button\\skills.md",
+      "triggers": [
+        "skeleton-button",
+        "skeletonbutton",
+        "skeleton",
+        "loading",
+        "spinner",
+        "progress"
+      ],
+      "figma": {
+        "nodeId": null,
+        "fileKey": null
+      },
+      "linked": false
+    },
+    {
+      "componentName": "Skeleton data table",
+      "skillPath": "loaders\\skeleton-data-table\\skills.md",
+      "triggers": [
+        "skeleton-data-table",
+        "skeletondatatable",
+        "skeleton",
+        "loading",
+        "spinner",
+        "progress"
+      ],
+      "figma": {
+        "nodeId": null,
+        "fileKey": null
+      },
+      "linked": false
+    },
+    {
+      "componentName": "Skeleton field",
+      "skillPath": "loaders\\skeleton-field\\skills.md",
+      "triggers": [
+        "skeleton-field",
+        "skeletonfield",
+        "skeleton",
+        "loading",
+        "spinner",
+        "progress"
+      ],
+      "figma": {
+        "nodeId": null,
+        "fileKey": null
+      },
+      "linked": false
+    },
+    {
+      "componentName": "Skeleton header",
+      "skillPath": "loaders\\skeleton-header\\skills.md",
+      "triggers": [
+        "skeleton-header",
+        "skeletonheader",
+        "skeleton",
+        "loading",
+        "spinner",
+        "progress"
+      ],
+      "figma": {
+        "nodeId": null,
+        "fileKey": null
+      },
+      "linked": false
+    },
+    {
+      "componentName": "Skeleton index table",
+      "skillPath": "loaders\\skeleton-index-table\\skills.md",
+      "triggers": [
+        "skeleton-index-table",
+        "skeletonindextable",
+        "skeleton",
+        "loading",
+        "spinner",
+        "progress"
+      ],
+      "figma": {
+        "nodeId": null,
+        "fileKey": null
+      },
+      "linked": false
+    },
+    {
+      "componentName": "Skeleton resource card",
+      "skillPath": "loaders\\skeleton-resource-card\\skills.md",
+      "triggers": [
+        "skeleton-resource-card",
+        "skeletonresourcecard",
+        "skeleton",
+        "loading",
+        "spinner",
+        "progress"
+      ],
+      "figma": {
+        "nodeId": null,
+        "fileKey": null
+      },
+      "linked": false
+    },
+    {
+      "componentName": "Skeleton table",
+      "skillPath": "loaders\\skeleton-table\\skills.md",
+      "triggers": [
+        "skeleton-table",
+        "skeletontable",
+        "skeleton",
+        "loading",
+        "spinner",
+        "progress"
+      ],
+      "figma": {
+        "nodeId": null,
+        "fileKey": null
+      },
+      "linked": false
+    },
+    {
+      "componentName": "Breadcrumbs",
+      "skillPath": "navigation\\breadcrumbs\\skills.md",
+      "triggers": [
+        "breadcrumbs",
+        "breadcrumbslink",
+        "nav",
+        "menu",
+        "navigate"
+      ],
+      "figma": {
+        "nodeId": null,
+        "fileKey": null
+      },
+      "linked": false
+    },
+    {
+      "componentName": "Horizontal navigation",
+      "skillPath": "navigation\\horizontal-navigation\\skills.md",
+      "triggers": [
+        "horizontal-navigation",
+        "horizontalnavigation",
+        "horizontalnavigationlink",
+        "numeric-badge",
+        "numericbadge",
+        "scroll-box",
+        "scrollbox",
+        "nav",
+        "menu",
+        "navigate"
+      ],
+      "figma": {
+        "nodeId": null,
+        "fileKey": null
+      },
+      "linked": false
+    },
+    {
+      "componentName": "Menu secondary",
+      "skillPath": "navigation\\menu-secondary\\skills.md",
+      "triggers": [
+        "menu-secondary",
+        "menusecondary",
+        "nav",
+        "menu",
+        "navigate"
+      ],
+      "figma": {
+        "nodeId": null,
+        "fileKey": null
+      },
+      "linked": false
+    },
+    {
+      "componentName": "Mobile navigation",
+      "skillPath": "navigation\\mobile-navigation\\skills.md",
+      "triggers": [
+        "mobile-navigation",
+        "mobilenavigation",
+        "nav",
+        "menu",
+        "navigate"
+      ],
+      "figma": {
+        "nodeId": null,
+        "fileKey": null
+      },
+      "linked": false
+    },
+    {
+      "componentName": "Pagination",
+      "skillPath": "navigation\\pagination\\skills.md",
+      "triggers": [
+        "pagination",
+        "nav",
+        "menu",
+        "navigate"
+      ],
+      "figma": {
+        "nodeId": null,
+        "fileKey": null
+      },
+      "linked": false
+    },
+    {
+      "componentName": "Segmented control",
+      "skillPath": "navigation\\segmented-control\\skills.md",
+      "triggers": [
+        "segmented-control",
+        "segmentedcontrol",
+        "numeric-badge",
+        "numericbadge",
+        "segmented-control-tabs",
+        "segmentedcontroltabs",
+        "segmentedcontroltabspanel",
+        "segmentedcontrolfilter",
+        "nav",
+        "menu",
+        "navigate"
+      ],
+      "figma": {
+        "nodeId": null,
+        "fileKey": null
+      },
+      "linked": false
+    },
+    {
+      "componentName": "Sidepanel",
+      "skillPath": "navigation\\sidepanel\\skills.md",
+      "triggers": [
+        "sidepanel",
+        "modal",
+        "ilumodalcontent",
+        "lusidepanel",
+        "ilusidepanelcontent",
+        "nav",
+        "menu",
+        "navigate"
+      ],
+      "figma": {
+        "nodeId": null,
+        "fileKey": null
+      },
+      "linked": false
+    },
+    {
+      "componentName": "Skip links",
+      "skillPath": "navigation\\skip-links\\skills.md",
+      "triggers": [
+        "skip-links",
+        "skiplinks",
+        "a11y",
+        "luskiplinks",
+        "nav",
+        "menu",
+        "navigate"
+      ],
+      "figma": {
+        "nodeId": null,
+        "fileKey": null
+      },
+      "linked": false
+    },
+    {
+      "componentName": "Table of content",
+      "skillPath": "navigation\\table-of-content\\skills.md",
+      "triggers": [
+        "table-of-content",
+        "tableofcontent",
+        "tableofcontentlink",
+        "nav",
+        "menu",
+        "navigate"
+      ],
+      "figma": {
+        "nodeId": null,
+        "fileKey": null
+      },
+      "linked": false
+    },
+    {
+      "componentName": "Vertical navigation",
+      "skillPath": "navigation\\vertical-navigation\\skills.md",
+      "triggers": [
+        "vertical-navigation",
+        "verticalnavigation",
+        "verticalnavigationgroup",
+        "verticalnavigationitem",
+        "verticalnavigationlink",
+        "nav",
+        "menu",
+        "navigate"
+      ],
+      "figma": {
+        "nodeId": null,
+        "fileKey": null
+      },
+      "linked": false
+    },
+    {
+      "componentName": "Dialog",
+      "skillPath": "overlays\\dialog\\skills.md",
+      "triggers": [
+        "dialog",
+        "button",
+        "dialogcontent",
+        "dialogdismiss",
+        "dialogfooter",
+        "dialogheader",
+        "ludialogref",
+        "ludialogservice",
+        "configureludialog",
+        "injectdialogdata",
+        "injectdialogref",
+        "provideludialog",
+        "dialogclose",
+        "dialogheaderaction",
+        "dialogopen",
+        "ludialogconfig",
+        "dialog_route_dismiss_trigger",
+        "dialogroutefactory",
+        "providedialogroutingreusestrategy",
+        "form-field",
+        "formfield",
+        "simple-select",
+        "lusimpleselectinput",
+        "forms",
+        "checkboxinput",
+        "textinput",
+        "numberinput",
+        "icon",
+        "callout",
+        "link",
+        "modal",
+        "popup",
+        "overlay",
+        "layer"
+      ],
+      "figma": {
+        "nodeId": null,
+        "fileKey": null
+      },
+      "linked": false
+    },
+    {
+      "componentName": "Dropdown",
+      "skillPath": "overlays\\dropdown\\skills.md",
+      "triggers": [
+        "dropdown",
+        "ludropdown",
+        "ludropdowntrigger",
+        "dropdownaction",
+        "dropdowndivider",
+        "dropdowngroup",
+        "dropdownitem",
+        "dropdownmenu",
+        "button",
+        "icon",
+        "popover2",
+        "popoverposition",
+        "modal",
+        "popup",
+        "overlay",
+        "layer"
+      ],
+      "figma": {
+        "nodeId": null,
+        "fileKey": null
+      },
+      "linked": false
+    },
+    {
+      "componentName": "Modal",
+      "skillPath": "overlays\\modal\\skills.md",
+      "triggers": [
+        "modal",
+        "button",
+        "ilumodalcontent",
+        "lu_modal_data",
+        "lumodal",
+        "lumodalconfig",
+        "toast",
+        "lutoasts",
+        "lutoastsservice",
+        "popup",
+        "overlay",
+        "layer"
+      ],
+      "figma": {
+        "nodeId": null,
+        "fileKey": null
+      },
+      "linked": false
+    },
+    {
+      "componentName": "Popover",
+      "skillPath": "overlays\\popover\\skills.md",
+      "triggers": [
+        "popover",
+        "lupopoveralignment",
+        "lupopover",
+        "lupopoverposition",
+        "lupopovertriggerevent",
+        "modal",
+        "popup",
+        "overlay",
+        "layer"
+      ],
+      "figma": {
+        "nodeId": null,
+        "fileKey": null
+      },
+      "linked": false
+    },
+    {
+      "componentName": "Popover2",
+      "skillPath": "overlays\\popover2\\skills.md",
+      "triggers": [
+        "popover2",
+        "button",
+        "divider",
+        "icon",
+        "listing",
+        "listingitem",
+        "configurelupopover",
+        "popover",
+        "modal",
+        "popup",
+        "overlay",
+        "layer"
+      ],
+      "figma": {
+        "nodeId": null,
+        "fileKey": null
+      },
+      "linked": false
+    },
+    {
+      "componentName": "Sidepanel",
+      "skillPath": "overlays\\sidepanel\\skills.md",
+      "triggers": [
+        "sidepanel",
+        "modal",
+        "ilumodalcontent",
+        "lumodal",
+        "lusidepanel",
+        "toast",
+        "lutoasts",
+        "lutoastsservice",
+        "popup",
+        "overlay",
+        "layer"
+      ],
+      "figma": {
+        "nodeId": null,
+        "fileKey": null
+      },
+      "linked": false
+    },
+    {
+      "componentName": "Toasts",
+      "skillPath": "overlays\\toasts\\skills.md",
+      "triggers": [
+        "toasts",
+        "toast",
+        "lutoastinput",
+        "lutoasttype",
+        "lutoasts",
+        "lutoastsservice",
+        "defaulttoastduration",
+        "modal",
+        "popup",
+        "overlay",
+        "layer"
+      ],
+      "figma": {
+        "nodeId": null,
+        "fileKey": null
+      },
+      "linked": false
+    },
+    {
+      "componentName": "Tooltip",
+      "skillPath": "overlays\\tooltip\\skills.md",
+      "triggers": [
+        "tooltip",
+        "lutooltip",
+        "lutooltiptrigger",
+        "lutooltippanel",
+        "icon",
+        "modal",
+        "popup",
+        "overlay",
+        "layer"
+      ],
+      "figma": {
+        "nodeId": null,
+        "fileKey": null
+      },
+      "linked": false
+    },
+    {
+      "componentName": "App layout",
+      "skillPath": "structure\\app-layout\\skills.md",
+      "triggers": [
+        "app-layout",
+        "applayout"
+      ],
+      "figma": {
+        "nodeId": null,
+        "fileKey": null
+      },
+      "linked": false
+    },
+    {
+      "componentName": "Box",
+      "skillPath": "structure\\box\\skills.md",
+      "triggers": [
+        "box",
+        "form-field",
+        "formfield",
+        "forms",
+        "radio",
+        "radiogroupinput"
+      ],
+      "figma": {
+        "nodeId": null,
+        "fileKey": null
+      },
+      "linked": false
+    },
+    {
+      "componentName": "Bubble icon",
+      "skillPath": "structure\\bubble-icon\\skills.md",
+      "triggers": [
+        "bubble-icon",
+        "bubbleicon"
+      ],
+      "figma": {
+        "nodeId": null,
+        "fileKey": null
+      },
+      "linked": false
+    },
+    {
+      "componentName": "Bubble illustration",
+      "skillPath": "structure\\bubble-illustration\\skills.md",
+      "triggers": [
+        "bubble-illustration",
+        "bubbleillustration",
+        "safe-content",
+        "lusafeexternalsvgpipe"
+      ],
+      "figma": {
+        "nodeId": null,
+        "fileKey": null
+      },
+      "linked": false
+    },
+    {
+      "componentName": "Cards",
+      "skillPath": "structure\\cards\\skills.md",
+      "triggers": [
+        "cards"
+      ],
+      "figma": {
+        "nodeId": null,
+        "fileKey": null
+      },
+      "linked": false
+    },
+    {
+      "componentName": "Container",
+      "skillPath": "structure\\container\\skills.md",
+      "triggers": [
+        "container"
+      ],
+      "figma": {
+        "nodeId": null,
+        "fileKey": null
+      },
+      "linked": false
+    },
+    {
+      "componentName": "Divider",
+      "skillPath": "structure\\divider\\skills.md",
+      "triggers": [
+        "divider",
+        "button",
+        "icon"
+      ],
+      "figma": {
+        "nodeId": null,
+        "fileKey": null
+      },
+      "linked": false
+    },
+    {
+      "componentName": "Fancy box",
+      "skillPath": "structure\\fancy-box\\skills.md",
+      "triggers": [
+        "fancy-box",
+        "fancybox"
+      ],
+      "figma": {
+        "nodeId": null,
+        "fileKey": null
+      },
+      "linked": false
+    },
+    {
+      "componentName": "Filter bar deprecated",
+      "skillPath": "structure\\filter-bar-deprecated\\skills.md",
+      "triggers": [
+        "filter-bar-deprecated",
+        "filterbardeprecated"
+      ],
+      "figma": {
+        "nodeId": null,
+        "fileKey": null
+      },
+      "linked": false
+    },
+    {
+      "componentName": "Filters",
+      "skillPath": "structure\\filters\\skills.md",
+      "triggers": [
+        "filters"
+      ],
+      "figma": {
+        "nodeId": null,
+        "fileKey": null
+      },
+      "linked": false
+    },
+    {
+      "componentName": "Footer",
+      "skillPath": "structure\\footer\\skills.md",
+      "triggers": [
+        "footer",
+        "button"
+      ],
+      "figma": {
+        "nodeId": null,
+        "fileKey": null
+      },
+      "linked": false
+    },
+    {
+      "componentName": "Grids",
+      "skillPath": "structure\\grids\\skills.md",
+      "triggers": [
+        "grids",
+        "grid",
+        "gridcolumn"
+      ],
+      "figma": {
+        "nodeId": null,
+        "fileKey": null
+      },
+      "linked": false
+    },
+    {
+      "componentName": "Headers",
+      "skillPath": "structure\\headers\\skills.md",
+      "triggers": [
+        "headers"
+      ],
+      "figma": {
+        "nodeId": null,
+        "fileKey": null
+      },
+      "linked": false
+    },
+    {
+      "componentName": "Highlight data",
+      "skillPath": "structure\\highlight-data\\skills.md",
+      "triggers": [
+        "highlight-data",
+        "highlightdata",
+        "button",
+        "link"
+      ],
+      "figma": {
+        "nodeId": null,
+        "fileKey": null
+      },
+      "linked": false
+    },
+    {
+      "componentName": "Main layout",
+      "skillPath": "structure\\main-layout\\skills.md",
+      "triggers": [
+        "main-layout",
+        "mainlayout",
+        "app-layout",
+        "applayout",
+        "container",
+        "mainlayoutblock"
+      ],
+      "figma": {
+        "nodeId": null,
+        "fileKey": null
+      },
+      "linked": false
+    },
+    {
+      "componentName": "Mobile header",
+      "skillPath": "structure\\mobile-header\\skills.md",
+      "triggers": [
+        "mobile-header",
+        "mobileheader"
+      ],
+      "figma": {
+        "nodeId": null,
+        "fileKey": null
+      },
+      "linked": false
+    },
+    {
+      "componentName": "Notch box",
+      "skillPath": "structure\\notch-box\\skills.md",
+      "triggers": [
+        "notch-box",
+        "notchbox"
+      ],
+      "figma": {
+        "nodeId": null,
+        "fileKey": null
+      },
+      "linked": false
+    },
+    {
+      "componentName": "Page header",
+      "skillPath": "structure\\page-header\\skills.md",
+      "triggers": [
+        "page-header",
+        "pageheader",
+        "breadcrumbs",
+        "breadcrumbslink",
+        "button",
+        "form-field",
+        "formfield",
+        "forms",
+        "textinput",
+        "horizontal-navigation",
+        "horizontalnavigation",
+        "horizontalnavigationlink",
+        "icon",
+        "link",
+        "tooltip",
+        "lutooltip"
+      ],
+      "figma": {
+        "nodeId": null,
+        "fileKey": null
+      },
+      "linked": false
+    },
+    {
+      "componentName": "Resource card",
+      "skillPath": "structure\\resource-card\\skills.md",
+      "triggers": [
+        "resource-card",
+        "resourcecard",
+        "button",
+        "icon",
+        "link",
+        "resourcecardbutton",
+        "resourcecardlink",
+        "resourcecardwrapper",
+        "status-badge",
+        "statusbadge",
+        "tag",
+        "tooltip",
+        "lutooltiptrigger",
+        "lutooltip"
+      ],
+      "figma": {
+        "nodeId": null,
+        "fileKey": null
+      },
+      "linked": false
+    },
+    {
+      "componentName": "Scroll box",
+      "skillPath": "structure\\scroll-box\\skills.md",
+      "triggers": [
+        "scroll-box",
+        "scrollbox"
+      ],
+      "figma": {
+        "nodeId": null,
+        "fileKey": null
+      },
+      "linked": false
+    },
+    {
+      "componentName": "Sections",
+      "skillPath": "structure\\sections\\skills.md",
+      "triggers": [
+        "sections"
+      ],
+      "figma": {
+        "nodeId": null,
+        "fileKey": null
+      },
+      "linked": false
+    },
+    {
+      "componentName": "Software icon",
+      "skillPath": "structure\\software-icon\\skills.md",
+      "triggers": [
+        "software-icon",
+        "softwareicon",
+        "softwareiconlist",
+        "safe-content",
+        "lusafeexternalsvgpipe"
+      ],
+      "figma": {
+        "nodeId": null,
+        "fileKey": null
+      },
+      "linked": false
+    },
+    {
+      "componentName": "Clear",
+      "skillPath": "texts\\clear\\skills.md",
+      "triggers": [
+        "clear",
+        "text",
+        "typography",
+        "content"
+      ],
+      "figma": {
+        "nodeId": null,
+        "fileKey": null
+      },
+      "linked": false
+    },
+    {
+      "componentName": "Code",
+      "skillPath": "texts\\code\\skills.md",
+      "triggers": [
+        "code",
+        "text",
+        "typography",
+        "content"
+      ],
+      "figma": {
+        "nodeId": null,
+        "fileKey": null
+      },
+      "linked": false
+    },
+    {
+      "componentName": "Comment",
+      "skillPath": "texts\\comment\\skills.md",
+      "triggers": [
+        "comment",
+        "commentblock",
+        "commentchat",
+        "user",
+        "luuserpicture",
+        "text",
+        "typography",
+        "content"
+      ],
+      "figma": {
+        "nodeId": null,
+        "fileKey": null
+      },
+      "linked": false
+    },
+    {
+      "componentName": "Angular",
+      "skillPath": "texts\\icons\\Angular\\skills.md",
+      "triggers": [
+        "angular",
+        "icon",
+        "text",
+        "typography",
+        "content"
+      ],
+      "figma": {
+        "nodeId": null,
+        "fileKey": null
+      },
+      "linked": false
+    },
+    {
+      "componentName": "HTML&CSS",
+      "skillPath": "texts\\icons\\HTML&CSS\\skills.md",
+      "triggers": [
+        "html&css",
+        "text",
+        "typography",
+        "content"
+      ],
+      "figma": {
+        "nodeId": null,
+        "fileKey": null
+      },
+      "linked": false
+    },
+    {
+      "componentName": "Icons",
+      "skillPath": "texts\\icons\\skills.md",
+      "triggers": [
+        "icons",
+        "icon",
+        "text",
+        "typography",
+        "content"
+      ],
+      "figma": {
+        "nodeId": null,
+        "fileKey": null
+      },
+      "linked": false
+    },
+    {
+      "componentName": "Labels",
+      "skillPath": "texts\\labels\\skills.md",
+      "triggers": [
+        "labels",
+        "text",
+        "typography",
+        "content"
+      ],
+      "figma": {
+        "nodeId": null,
+        "fileKey": null
+      },
+      "linked": false
+    },
+    {
+      "componentName": "New badge",
+      "skillPath": "texts\\new-badge\\skills.md",
+      "triggers": [
+        "new-badge",
+        "newbadge",
+        "text",
+        "typography",
+        "content"
+      ],
+      "figma": {
+        "nodeId": null,
+        "fileKey": null
+      },
+      "linked": false
+    },
+    {
+      "componentName": "Numeric badge",
+      "skillPath": "texts\\numeric-badge\\skills.md",
+      "triggers": [
+        "numeric-badge",
+        "numericbadge",
+        "text",
+        "typography",
+        "content"
+      ],
+      "figma": {
+        "nodeId": null,
+        "fileKey": null
+      },
+      "linked": false
+    },
+    {
+      "componentName": "Read more",
+      "skillPath": "texts\\read-more\\skills.md",
+      "triggers": [
+        "read-more",
+        "readmore",
+        "tag",
+        "text",
+        "typography",
+        "content"
+      ],
+      "figma": {
+        "nodeId": null,
+        "fileKey": null
+      },
+      "linked": false
+    },
+    {
+      "componentName": "Status badge",
+      "skillPath": "texts\\status-badge\\skills.md",
+      "triggers": [
+        "status-badge",
+        "statusbadge",
+        "text",
+        "typography",
+        "content"
+      ],
+      "figma": {
+        "nodeId": null,
+        "fileKey": null
+      },
+      "linked": false
+    },
+    {
+      "componentName": "Tags",
+      "skillPath": "texts\\tags\\skills.md",
+      "triggers": [
+        "tags",
+        "tag",
+        "text",
+        "typography",
+        "content"
+      ],
+      "figma": {
+        "nodeId": null,
+        "fileKey": null
+      },
+      "linked": false
+    },
+    {
+      "componentName": "Text",
+      "skillPath": "texts\\text\\skills.md",
+      "triggers": [
+        "text",
+        "typography",
+        "content"
+      ],
+      "figma": {
+        "nodeId": null,
+        "fileKey": null
+      },
+      "linked": false
+    },
+    {
+      "componentName": "Text flow",
+      "skillPath": "texts\\text-flow\\skills.md",
+      "triggers": [
+        "text-flow",
+        "textflow",
+        "text",
+        "typography",
+        "content"
+      ],
+      "figma": {
+        "nodeId": null,
+        "fileKey": null
+      },
+      "linked": false
+    },
+    {
+      "componentName": "Animations",
+      "skillPath": "toolbox\\animations\\skills.md",
+      "triggers": [
+        "animations",
+        "lufadeanimationfactory",
+        "luscaleanimationfactory",
+        "luslideanimationfactory"
+      ],
+      "figma": {
+        "nodeId": null,
+        "fileKey": null
+      },
+      "linked": false
+    },
+    {
+      "componentName": "Date",
+      "skillPath": "toolbox\\date\\skills.md",
+      "triggers": [
+        "date",
+        "button",
+        "callout",
+        "luhumanizedateformatter",
+        "luhumanizedatepipe",
+        "lurelativetime",
+        "lurelativetimeformatunit"
+      ],
+      "figma": {
+        "nodeId": null,
+        "fileKey": null
+      },
+      "linked": false
+    },
+    {
+      "componentName": "Numbers",
+      "skillPath": "toolbox\\numbers\\skills.md",
+      "triggers": [
+        "numbers",
+        "number",
+        "lunumberpipe"
+      ],
+      "figma": {
+        "nodeId": null,
+        "fileKey": null
+      },
+      "linked": false
+    },
+    {
+      "componentName": "Group",
+      "skillPath": "users\\avatars\\html&css\\group\\skills.md",
+      "triggers": [
+        "group"
+      ],
+      "figma": {
+        "nodeId": null,
+        "fileKey": null
+      },
+      "linked": false
+    },
+    {
+      "componentName": "Avatars",
+      "skillPath": "users\\avatars\\skills.md",
+      "triggers": [
+        "avatars",
+        "user",
+        "ludisplayinitials",
+        "luuserpicture",
+        "user-popover",
+        "luuserpopover"
+      ],
+      "figma": {
+        "nodeId": null,
+        "fileKey": null
+      },
+      "linked": false
+    },
+    {
+      "componentName": "Display",
+      "skillPath": "users\\display\\skills.md",
+      "triggers": [
+        "display",
+        "user",
+        "iluuser",
+        "ludisplayformat",
+        "ludisplayfullname",
+        "ludisplayhybrid",
+        "ludisplayinitials",
+        "luuserdisplay",
+        "button",
+        "user-popover",
+        "luuserpopover"
+      ],
+      "figma": {
+        "nodeId": null,
+        "fileKey": null
+      },
+      "linked": false
+    },
+    {
+      "componentName": "Popover",
+      "skillPath": "users\\popover\\skills.md",
+      "triggers": [
+        "popover",
+        "user",
+        "iluuser",
+        "user-popover",
+        "luuserpopover"
+      ],
+      "figma": {
+        "nodeId": null,
+        "fileKey": null
+      },
+      "linked": false
+    },
+    {
+      "componentName": "Select",
+      "skillPath": "users\\select\\skills.md",
+      "triggers": [
+        "select",
+        "api",
+        "luapipagedsearcher",
+        "input",
+        "luinputdisplayer",
+        "option",
+        "luforoptions",
+        "luoptionitem",
+        "luoptionpickeradvanced",
+        "luoptionpicker",
+        "luselectinput",
+        "user",
+        "luuserdisplaypipe",
+        "luuserhomonyms",
+        "luusermeoption",
+        "iluuser",
+        "luuserselect",
+        "luuser"
+      ],
+      "figma": {
+        "nodeId": null,
+        "fileKey": null
+      },
+      "linked": false
+    },
+    {
+      "componentName": "Tile",
+      "skillPath": "users\\tile\\skills.md",
+      "triggers": [
+        "tile",
+        "user",
+        "luuserdisplay",
+        "luuserpicture",
+        "luusertile",
+        "user-popover",
+        "luuserpopover"
+      ],
+      "figma": {
+        "nodeId": null,
+        "fileKey": null
+      },
+      "linked": false
+    },
+    {
+      "componentName": "_sample",
+      "skillPath": "_sample\\skills.md",
+      "triggers": [
+        "_sample"
+      ],
+      "figma": {
+        "nodeId": null,
+        "fileKey": null
+      },
+      "linked": false
+    }
+  ]
+}

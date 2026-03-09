@@ -1,0 +1,68 @@
+---
+description: Status badge component from Lucca Front design system
+triggers:
+  - status-badge
+  - statusbadge
+  - text
+  - typography
+  - content
+figma:
+  nodeId: null
+  fileKey: null
+globs:
+  - "**/*.ts"
+  - "**/*.html"
+alwaysApply: false
+---
+
+# Status badge
+
+## Description
+
+Status badge est un composant de la catégorie **Texts** du design system Lucca Front.
+
+**Story path:** `Documentation/Texts/StatusBadge/Angular`
+
+
+## Imports
+
+```typescript
+import { StatusBadgeComponent } from '@lucca-front/ng/status-badge';
+```
+
+
+## Utilisation
+
+### Quand utiliser Status badge
+
+<!-- TODO: Décrire les cas d'usage appropriés -->
+
+### Quand ne pas utiliser
+
+<!-- TODO: Décrire les cas où un autre composant serait plus approprié -->
+
+## Exemples
+
+### Exemple basique
+
+```html
+<!-- TODO: Ajouter un exemple de code basique -->
+```
+
+### Exemple avancé
+
+```typescript
+<!-- TODO: Ajouter un exemple de code avancé -->
+```
+
+## Accessibilité
+
+<!-- TODO: Documenter les considérations d'accessibilité -->
+
+## Figma
+
+⚠️ Ce composant n'est pas encore lié à un node Figma. Utilisez Code Connect pour créer le lien.
+
+## Voir aussi
+
+<!-- TODO: Lister les composants liés -->
