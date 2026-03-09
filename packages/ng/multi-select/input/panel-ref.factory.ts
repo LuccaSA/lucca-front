@@ -86,9 +86,10 @@ class MultiSelectPanelDOMHostRef<T> extends BaseMultiSelectPanelRef<T> {
 
 	constructor(host: ViewContainerRef, parentInjector: Injector, selectInput: LuMultiSelectInputComponent<T>) {
 		super(parentInjector, selectInput);
-		this.panelRef = host.createComponent(this.portalRef.component, {
-			injector: this.portalRef.injector,
-			projectableNodes: this.portalRef.projectableNodes,
+		const createPanelComponent = host.createComponent as (component: typeof LuMultiSelectPanelComponent, options: { injector?: Injector }) => ComponentRef<LuMultiSelectPanelComponent<T>>;
+
+		this.panelRef = createPanelComponent(this.portalRef.component as unknown as typeof LuMultiSelectPanelComponent, {
+			injector: this.portalRef.injector ?? undefined,
 		});
 		this.instance = this.panelRef.instance;
 	}
@@ -126,7 +127,7 @@ export class LuMultiSelectPanelRefFactory {
 
 		addAttributesOnCdkContainer(overlayRef, this.selectLabelId, this.selectId);
 
-		return new MultiSelectPanelRef(overlayRef, this.parentInjector, selectInput, defaultOverlayConfig.positionStrategy);
+		return new MultiSelectPanelRef(overlayRef, this.parentInjector, selectInput, defaultOverlayConfig.positionStrategy ?? defaultOverlayConfig.positionStrategy!);
 	}
 
 	buildAndAttachPanelRef<T>(selectInput: LuMultiSelectInputComponent<T>, host: ViewContainerRef): LuMultiSelectPanelRef<T> {
