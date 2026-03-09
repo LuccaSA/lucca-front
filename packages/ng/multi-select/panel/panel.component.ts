@@ -3,7 +3,7 @@ import { AsyncPipe, NgTemplateOutlet } from '@angular/common';
 import { AfterViewInit, ChangeDetectionStrategy, Component, computed, forwardRef, inject, signal, TrackByFunction } from '@angular/core';
 import { toObservable } from '@angular/core/rxjs-interop';
 import { FormsModule } from '@angular/forms';
-import { PortalDirective } from '@lucca-front/ng/core';
+import { isNotNil, PortalDirective } from '@lucca-front/ng/core';
 import {
 	CoreSelectKeyManager,
 	CoreSelectPanelInstance,
@@ -84,7 +84,7 @@ export class LuMultiSelectPanelComponent<T> implements AfterViewInit, CoreSelect
 			const disabledOptionIds = this.options()
 				.filter((o) => o.disabled)
 				.map((o) => o.option())
-				.filter((option): option is T => option !== undefined)
+				.filter(isNotNil)
 				.map((option) => this.optionKey(option));
 			return groupOptions.some((option) => !disabledOptionIds.includes(this.optionKey(option)));
 		};
@@ -131,7 +131,7 @@ export class LuMultiSelectPanelComponent<T> implements AfterViewInit, CoreSelect
 		const disabledOptionIds = this.options()
 			.filter((o) => o.disabled)
 			.map((o) => o.option())
-			.filter((option): option is T => option !== undefined)
+			.filter(isNotNil)
 			.map((option) => this.optionKey(option));
 		const enabledNotSelectedOptions = notSelectedOptions.filter((o) => !disabledOptionIds.includes(this.optionKey(o)));
 		const enabledGroupOptions = groupOptions.filter((o) => !disabledOptionIds.includes(this.optionKey(o)));
