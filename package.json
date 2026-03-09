@@ -47,10 +47,7 @@
     "icons:update": "node ./packages/icons/update-icons.js",
     "i18n:update": "lucca translate && prettier --write 'packages/ng/**/translations.ts'",
     "skills:generate": "node scripts/generate-skills.js",
-    "skills:update": "node scripts/generate-skills.js --update",
-    "skills:dry-run": "node scripts/generate-skills.js --dry-run",
-    "skills:figma-list": "node scripts/link-figma-skills.js --list",
-    "skills:figma-export": "node scripts/link-figma-skills.js --export"
+    "skills:dry-run": "node scripts/generate-skills.js --dry-run"
   },
   "dependencies": {
     "@angular/animations": "^21.0.5",

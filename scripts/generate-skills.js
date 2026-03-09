@@ -1,210 +1,198 @@
 #!/usr/bin/env node
 
 /**
- * Script de génération/mise à jour des fichiers skills.md pour chaque story
+ * Skills Generation Script for Lucca Front Design System
  *
- * Génère des skills.md riches avec :
- * - Description détaillée extraite des stories et du code source
- * - Propriétés complètes avec types et valeurs par défaut
- * - Exemples de code extraits des templates des stories
- * - Classes CSS documentées
- * - Guide d'utilisation et d'accessibilité
- *
- * Basé sur les spécifications :
+ * Generates structured skills documentation following the Agent Skills specification:
  * - https://agentskills.io/specification
  * - https://platform.claude.com/docs/en/agents-and-tools/agent-skills/best-practices
- * - https://github.com/anthropics/skills/tree/main/skills/skill-creator
  *
- * Usage: node scripts/generate-skills.js [--update] [--dry-run] [--component <name>]
+ * Structure:
+ * skills/
+ * ├── SKILL.md                    # Main skill file with routing guide
+ * ├── ng/
+ * │   └── references/             # Auto-generated Angular component skills
+ * ├── icons/
+ * │   └── references/             # Auto-generated icon skills
+ * ├── scss/
+ * │   └── references/             # Auto-generated SCSS skills
+ * └── prisme/
+ *     └── references/             # Auto-generated Prisme skills
+ *
+ * Usage: node scripts/generate-skills.js [--dry-run] [--package <name>]
  */
 
 const fs = require('fs');
 const path = require('path');
 
 // Configuration
-const STORIES_ROOT = path.join(__dirname, '..', 'stories', 'documentation');
-const PACKAGES_NG_ROOT = path.join(__dirname, '..', 'packages', 'ng');
-const PACKAGES_PRISME_ROOT = path.join(__dirname, '..', 'packages', 'prisme');
+const ROOT_DIR = path.join(__dirname, '..');
+const SKILLS_ROOT = path.join(ROOT_DIR, 'skills');
+const STORIES_ROOT = path.join(ROOT_DIR, 'stories', 'documentation');
+const PACKAGES = {
+  ng: {
+    root: path.join(ROOT_DIR, 'packages', 'ng'),
+    storiesRoot: STORIES_ROOT,
+    description: 'Angular components and directives for Lucca Front design system',
+  },
+  icons: {
+    root: path.join(ROOT_DIR, 'packages', 'icons'),
+    description: 'Icon library for Lucca Front design system',
+  },
+  scss: {
+    root: path.join(ROOT_DIR, 'packages', 'scss'),
+    description: 'SCSS utilities, mixins, and variables for Lucca Front design system',
+  },
+  prisme: {
+    root: path.join(ROOT_DIR, 'packages', 'prisme'),
+    description: 'Core Prisme components shared across Lucca Front',
+  },
+};
 
-// Arguments CLI
+// CLI Arguments
 const args = process.argv.slice(2);
 const DRY_RUN = args.includes('--dry-run');
-const UPDATE_ONLY = args.includes('--update');
-const COMPONENT_FILTER = args.includes('--component')
-  ? args[args.indexOf('--component') + 1]
+const PACKAGE_FILTER = args.includes('--package')
+  ? args[args.indexOf('--package') + 1]
   : null;
 
-// Descriptions et triggers enrichis par catégorie
+// Category configurations for contextual documentation
 const CATEGORY_CONFIG = {
-  'Actions': {
-    description: 'Composants interactifs pour déclencher des actions utilisateur',
-    triggers: ['click', 'action', 'interactive', 'cta'],
+  actions: {
+    description: 'Interactive components to trigger user actions',
+    triggers: ['click', 'action', 'interactive', 'cta', 'button'],
     usage: {
-      when: ['Actions utilisateur', 'Déclenchement d\'événements', 'Soumission de formulaires'],
-      whenNot: ['Navigation simple (utiliser Link)', 'Affichage d\'informations statiques'],
+      when: ['User actions', 'Event triggering', 'Form submissions'],
+      whenNot: ['Simple navigation (use Link)', 'Static information display'],
     },
     a11y: [
-      'Utiliser des éléments sémantiques appropriés (<button>, <a>)',
-      'Fournir un texte alternatif pour les éléments visuels',
-      'Assurer un contraste suffisant',
+      'Use appropriate semantic elements (<button>, <a>)',
+      'Provide alternative text for visual elements',
+      'Ensure sufficient contrast',
     ],
   },
-  'Forms': {
-    description: 'Composants pour la saisie et validation de données utilisateur',
-    triggers: ['input', 'form', 'field', 'control', 'validation', 'saisie'],
+  forms: {
+    description: 'Components for user data input and validation',
+    triggers: ['input', 'form', 'field', 'control', 'validation'],
     usage: {
-      when: ['Saisie de données', 'Formulaires', 'Configuration', 'Filtres'],
-      whenNot: ['Affichage de données en lecture seule', 'Navigation'],
+      when: ['Data entry', 'Forms', 'Configuration', 'Filters'],
+      whenNot: ['Read-only data display', 'Navigation'],
     },
     a11y: [
-      'Associer chaque champ à un label avec for/id',
-      'Fournir des messages d\'erreur explicites',
-      'Supporter la navigation au clavier',
-      'Indiquer les champs obligatoires',
+      'Associate each field with a label using for/id',
+      'Provide explicit error messages',
+      'Support keyboard navigation',
+      'Indicate required fields',
     ],
   },
-  'Overlays': {
-    description: 'Composants affichés par-dessus le contenu principal',
+  overlays: {
+    description: 'Components displayed above the main content',
     triggers: ['modal', 'popup', 'overlay', 'layer', 'dialog', 'floating'],
     usage: {
-      when: ['Confirmations importantes', 'Formulaires contextuels', 'Informations complémentaires'],
-      whenNot: ['Contenu principal de la page', 'Navigation fréquente'],
+      when: ['Important confirmations', 'Contextual forms', 'Additional information'],
+      whenNot: ['Main page content', 'Frequent navigation'],
     },
     a11y: [
-      'Gérer le focus trap dans les modales',
-      'Permettre la fermeture avec Escape',
-      'Annoncer l\'ouverture aux lecteurs d\'écran',
-      'Utiliser aria-modal et role="dialog"',
+      'Manage focus trap in modals',
+      'Allow closing with Escape',
+      'Announce opening to screen readers',
+      'Use aria-modal and role="dialog"',
     ],
   },
-  'Feedback': {
-    description: 'Composants pour communiquer des informations et états à l\'utilisateur',
+  feedback: {
+    description: 'Components to communicate information and states to the user',
     triggers: ['notification', 'message', 'alert', 'status', 'feedback', 'info'],
     usage: {
-      when: ['Messages de succès/erreur', 'Alertes importantes', 'Informations contextuelles'],
-      whenNot: ['Contenu principal', 'Actions utilisateur'],
+      when: ['Success/error messages', 'Important alerts', 'Contextual information'],
+      whenNot: ['Main content', 'User actions'],
     },
     a11y: [
-      'Utiliser aria-live pour les messages dynamiques',
-      'Associer le rôle approprié (alert, status)',
-      'Ne pas reposer uniquement sur la couleur',
+      'Use aria-live for dynamic messages',
+      'Associate appropriate role (alert, status)',
+      'Do not rely solely on color',
     ],
   },
-  'Navigation': {
-    description: 'Composants pour la navigation dans l\'application',
+  navigation: {
+    description: 'Components for application navigation',
     triggers: ['nav', 'menu', 'navigate', 'route', 'link', 'breadcrumb'],
     usage: {
-      when: ['Navigation entre pages', 'Menus', 'Fil d\'Ariane', 'Pagination'],
-      whenNot: ['Actions (utiliser Button)', 'Affichage de données'],
+      when: ['Page navigation', 'Menus', 'Breadcrumbs', 'Pagination'],
+      whenNot: ['Actions (use Button)', 'Data display'],
     },
     a11y: [
-      'Utiliser des landmarks nav appropriés',
-      'Indiquer la page courante avec aria-current',
-      'Supporter la navigation au clavier',
+      'Use appropriate nav landmarks',
+      'Indicate current page with aria-current',
+      'Support keyboard navigation',
     ],
   },
-  'Listings': {
-    description: 'Composants pour afficher des listes et collections de données',
+  listings: {
+    description: 'Components to display lists and data collections',
     triggers: ['list', 'table', 'data', 'grid', 'collection', 'items'],
     usage: {
-      when: ['Affichage de collections', 'Tableaux de données', 'Listes d\'éléments'],
-      whenNot: ['Élément unique', 'Formulaires'],
+      when: ['Collection display', 'Data tables', 'Item lists'],
+      whenNot: ['Single element', 'Forms'],
     },
     a11y: [
-      'Utiliser des structures sémantiques (table, ul, ol)',
-      'Fournir des en-têtes pour les tableaux',
-      'Supporter le tri et la pagination accessibles',
+      'Use semantic structures (table, ul, ol)',
+      'Provide headers for tables',
+      'Support accessible sorting and pagination',
     ],
   },
-  'Loaders': {
-    description: 'Composants pour indiquer un chargement ou une progression',
+  loaders: {
+    description: 'Components to indicate loading or progress',
     triggers: ['loading', 'spinner', 'progress', 'wait', 'skeleton'],
     usage: {
-      when: ['Chargement de données', 'Actions asynchrones', 'Progression'],
-      whenNot: ['Contenu disponible immédiatement'],
+      when: ['Data loading', 'Async actions', 'Progress indication'],
+      whenNot: ['Immediately available content'],
     },
     a11y: [
-      'Annoncer le chargement avec aria-busy',
-      'Fournir un texte alternatif descriptif',
-      'Informer de la fin du chargement',
+      'Announce loading with aria-busy',
+      'Provide descriptive alternative text',
+      'Inform when loading completes',
     ],
   },
-  'Texts': {
-    description: 'Composants pour la typographie et le contenu textuel',
+  texts: {
+    description: 'Components for typography and textual content',
     triggers: ['text', 'typography', 'content', 'label', 'badge', 'tag'],
     usage: {
-      when: ['Mise en forme de texte', 'Labels', 'Badges', 'Tags'],
-      whenNot: ['Actions interactives', 'Formulaires'],
+      when: ['Text formatting', 'Labels', 'Badges', 'Tags'],
+      whenNot: ['Interactive actions', 'Forms'],
     },
     a11y: [
-      'Utiliser une hiérarchie de titres logique',
-      'Assurer un contraste de texte suffisant',
-      'Éviter le texte dans les images',
+      'Use logical heading hierarchy',
+      'Ensure sufficient text contrast',
+      'Avoid text in images',
     ],
   },
-  'Structure': {
-    description: 'Composants pour structurer la mise en page',
+  structure: {
+    description: 'Components for layout structuring',
     triggers: ['layout', 'container', 'structure', 'grid', 'box', 'card'],
     usage: {
-      when: ['Organisation du contenu', 'Mise en page', 'Conteneurs'],
-      whenNot: ['Composants interactifs'],
+      when: ['Content organization', 'Layout', 'Containers'],
+      whenNot: ['Interactive components'],
     },
     a11y: [
-      'Utiliser des landmarks appropriés',
-      'Maintenir un ordre de lecture logique',
-      'Structurer le contenu de manière sémantique',
+      'Use appropriate landmarks',
+      'Maintain logical reading order',
+      'Structure content semantically',
     ],
   },
-  'Users': {
-    description: 'Composants pour afficher des informations utilisateur',
+  users: {
+    description: 'Components to display user information',
     triggers: ['user', 'avatar', 'profile', 'person', 'employee'],
     usage: {
-      when: ['Affichage d\'utilisateurs', 'Avatars', 'Profils'],
-      whenNot: ['Données non liées aux utilisateurs'],
+      when: ['User display', 'Avatars', 'Profiles'],
+      whenNot: ['Non-user related data'],
     },
     a11y: [
-      'Fournir un texte alternatif pour les avatars',
-      'Ne pas reposer uniquement sur les images',
-    ],
-  },
-  'Toolbox': {
-    description: 'Utilitaires et fonctions helpers',
-    triggers: ['utility', 'helper', 'tool', 'format', 'pipe'],
-    usage: {
-      when: ['Formatage de données', 'Utilitaires réutilisables'],
-      whenNot: ['Composants visuels'],
-    },
-    a11y: [
-      'S\'assurer que les données formatées restent accessibles',
-    ],
-  },
-  'Integration': {
-    description: 'Composants d\'intégration et utilitaires',
-    triggers: ['integration', 'utility', 'helper'],
-    usage: {
-      when: ['Intégration de services', 'Utilitaires'],
-      whenNot: ['Composants visuels autonomes'],
-    },
-    a11y: [
-      'Vérifier l\'accessibilité des composants intégrés',
-    ],
-  },
-  'Intl': {
-    description: 'Composants d\'internationalisation',
-    triggers: ['intl', 'i18n', 'translation', 'locale', 'language'],
-    usage: {
-      when: ['Traductions', 'Formatage localisé', 'Pluralisation'],
-      whenNot: ['Contenu non internationalisé'],
-    },
-    a11y: [
-      'Utiliser lang pour indiquer la langue',
-      'S\'assurer que les traductions sont complètes',
+      'Provide alternative text for avatars',
+      'Do not rely solely on images',
     ],
   },
 };
 
 /**
- * Parse un fichier story TypeScript pour extraire les métadonnées enrichies
+ * Parse a TypeScript story file to extract metadata
  */
 function parseStoryFile(filePath) {
   const content = fs.readFileSync(filePath, 'utf-8');
@@ -218,13 +206,13 @@ function parseStoryFile(filePath) {
     storyName: path.basename(filePath, '.stories.ts'),
   };
 
-  // Extraire le title
+  // Extract title
   const titleMatch = content.match(/title:\s*['"`]([^'"`]+)['"`]/);
   if (titleMatch) {
     metadata.title = titleMatch[1];
   }
 
-  // Extraire les imports @lucca-front
+  // Extract @lucca-front imports
   const importMatches = content.matchAll(/import\s*{([^}]+)}\s*from\s*['"]@lucca-front\/ng\/([^'"]+)['"]/g);
   for (const match of importMatches) {
     const components = match[1].split(',').map(c => c.trim()).filter(c => c);
@@ -232,7 +220,7 @@ function parseStoryFile(filePath) {
     metadata.imports.push({ components, package: packageName });
   }
 
-  // Extraire les imports @lucca/prisme
+  // Extract @lucca/prisme imports
   const prismeImportMatches = content.matchAll(/import\s*{([^}]+)}\s*from\s*['"]@lucca\/prisme\/([^'"]+)['"]/g);
   for (const match of prismeImportMatches) {
     const components = match[1].split(',').map(c => c.trim()).filter(c => c);
@@ -240,19 +228,19 @@ function parseStoryFile(filePath) {
     metadata.imports.push({ components, package: packageName, isPrisme: true });
   }
 
-  // Extraire le component principal
+  // Extract main component
   const componentMatch = content.match(/component:\s*(\w+)/);
   if (componentMatch) {
     metadata.component = componentMatch[1];
   }
 
-  // Extraire les templates HTML
+  // Extract HTML templates
   const templateMatches = content.matchAll(/template:\s*[`'"]([^`'"]+)[`'"]/gs);
   for (const match of templateMatches) {
     metadata.templates.push(match[1].trim());
   }
 
-  // Extraire les templates de getTemplate
+  // Extract templates from getTemplate functions
   const getTemplateMatches = content.matchAll(/return\s*[`'"]([^`'"]*(?:<[^>]+>[^`'"]*)*)[`'"]/gs);
   for (const match of getTemplateMatches) {
     const template = match[1].trim();
@@ -261,7 +249,7 @@ function parseStoryFile(filePath) {
     }
   }
 
-  // Extraire les classes CSS utilisées
+  // Extract CSS classes
   const classMatches = content.matchAll(/class="([^"]+)"/g);
   for (const match of classMatches) {
     const classes = match[1].split(/\s+/);
@@ -272,12 +260,10 @@ function parseStoryFile(filePath) {
     }
   }
 
-  // Extraire les argTypes avec descriptions
+  // Extract argTypes with descriptions
   const argTypesMatch = content.match(/argTypes:\s*{([\s\S]*?)(?=\n\s*}\s*(?:as Meta|,|\n))/);
   if (argTypesMatch) {
     const argTypesContent = argTypesMatch[1];
-
-    // Parser chaque argType
     const argRegex = /(\w+):\s*{([^}]*(?:{[^}]*}[^}]*)*)}/g;
     let argMatch;
     while ((argMatch = argRegex.exec(argTypesContent)) !== null) {
@@ -287,28 +273,12 @@ function parseStoryFile(filePath) {
       const descMatch = argContent.match(/description:\s*['"`]([^'"`]+)['"`]/);
       const optionsMatch = argContent.match(/options:\s*\[([^\]]+)\]/);
       const typeMatch = argContent.match(/type:\s*['"`]([^'"`]+)['"`]/);
-      const defaultMatch = argContent.match(/defaultValue:\s*['"`]?([^'"`\n,}]+)['"`]?/);
 
       metadata.argTypes[argName] = {
         description: descMatch ? descMatch[1].replace(/<[^>]+>/g, '').trim() : null,
         options: optionsMatch ? optionsMatch[1].split(',').map(o => o.trim().replace(/['"]/g, '')).filter(o => o) : null,
         type: typeMatch ? typeMatch[1] : null,
-        default: defaultMatch ? defaultMatch[1].trim() : null,
       };
-    }
-  }
-
-  // Extraire les args par défaut
-  const argsMatch = content.match(/args:\s*{([^}]+)}/);
-  if (argsMatch) {
-    const argsContent = argsMatch[1];
-    const argDefaults = argsContent.matchAll(/(\w+):\s*(['"`]?[^,\n}]+['"`]?)/g);
-    for (const match of argDefaults) {
-      const argName = match[1];
-      let argValue = match[2].trim().replace(/['"]/g, '');
-      if (metadata.argTypes[argName] && !metadata.argTypes[argName].default) {
-        metadata.argTypes[argName].default = argValue;
-      }
     }
   }
 
@@ -316,27 +286,27 @@ function parseStoryFile(filePath) {
 }
 
 /**
- * Parse le code source du composant Angular pour extraire les inputs
+ * Parse Angular component source to extract inputs
  */
-function parseComponentSource(packageName) {
-  const possiblePaths = [
-    path.join(PACKAGES_NG_ROOT, packageName),
-    path.join(PACKAGES_PRISME_ROOT, packageName),
-  ];
+function parseComponentSource(pkgPath) {
+  if (!fs.existsSync(pkgPath)) return [];
 
-  for (const pkgPath of possiblePaths) {
-    if (!fs.existsSync(pkgPath)) continue;
+  const inputs = [];
 
-    // Chercher les fichiers .component.ts
-    const files = fs.readdirSync(pkgPath);
-    for (const file of files) {
-      if (file.endsWith('.component.ts')) {
-        const filePath = path.join(pkgPath, file);
-        const content = fs.readFileSync(filePath, 'utf-8');
+  function walkDir(dir) {
+    if (!fs.existsSync(dir)) return;
+    const items = fs.readdirSync(dir);
 
-        const inputs = [];
+    for (const item of items) {
+      const fullPath = path.join(dir, item);
+      const stat = fs.statSync(fullPath);
 
-        // Extraire les inputs avec input()
+      if (stat.isDirectory() && !item.startsWith('.') && item !== 'node_modules') {
+        walkDir(fullPath);
+      } else if (item.endsWith('.component.ts')) {
+        const content = fs.readFileSync(fullPath, 'utf-8');
+
+        // Extract inputs with input() signal
         const inputMatches = content.matchAll(/\/\*\*\s*\n\s*\*\s*([^*]+)\s*\*\/\s*\n\s*readonly\s+(\w+)\s*=\s*input<([^>]+)>\(([^)]*)\)/gs);
         for (const match of inputMatches) {
           inputs.push({
@@ -344,10 +314,11 @@ function parseComponentSource(packageName) {
             type: match[3].trim(),
             description: match[1].trim(),
             default: match[4] ? match[4].split(',')[0].trim().replace(/['"]/g, '') : null,
+            file: path.relative(pkgPath, fullPath),
           });
         }
 
-        // Extraire les inputs avec @Input()
+        // Extract inputs with @Input() decorator
         const decoratorMatches = content.matchAll(/@Input\(\)\s+(?:set\s+)?(\w+)[\s:]/g);
         for (const match of decoratorMatches) {
           if (!inputs.find(i => i.name === match[1])) {
@@ -356,20 +327,20 @@ function parseComponentSource(packageName) {
               type: 'any',
               description: null,
               default: null,
+              file: path.relative(pkgPath, fullPath),
             });
           }
         }
-
-        return inputs;
       }
     }
   }
 
-  return [];
+  walkDir(pkgPath);
+  return inputs;
 }
 
 /**
- * Trouve tous les fichiers story dans un dossier
+ * Find all story files in a directory
  */
 function findStoryFiles(dir) {
   const stories = [];
@@ -395,7 +366,7 @@ function findStoryFiles(dir) {
 }
 
 /**
- * Détermine le nom du composant à partir du chemin
+ * Get component name from path
  */
 function getComponentNameFromPath(storyPath) {
   const relativePath = path.relative(STORIES_ROOT, storyPath);
@@ -403,92 +374,54 @@ function getComponentNameFromPath(storyPath) {
 
   for (let i = parts.length - 2; i >= 0; i--) {
     const part = parts[i];
-    if (part !== 'angular' && part !== 'html&css' && part !== 'HTML&CSS' && part !== 'Angular') {
-      return capitalize(part.replace(/-/g, ' '));
+    if (!['angular', 'html&css', 'HTML&CSS', 'Angular'].includes(part)) {
+      return kebabToPascal(part);
     }
   }
 
-  return path.basename(storyPath, '.stories.ts');
+  return kebabToPascal(path.basename(storyPath, '.stories.ts'));
 }
 
 /**
- * Extrait la catégorie du chemin de la story
+ * Get category from path
  */
 function getCategoryFromPath(storyPath) {
   const relativePath = path.relative(STORIES_ROOT, storyPath);
   const parts = relativePath.split(path.sep);
-  return parts[0] ? capitalize(parts[0]) : 'General';
+  return parts[0] ? parts[0].toLowerCase() : 'general';
 }
 
 /**
- * Génère les triggers pour un composant
+ * Convert kebab-case to PascalCase
+ */
+function kebabToPascal(str) {
+  return str
+    .split('-')
+    .map(part => part.charAt(0).toUpperCase() + part.slice(1))
+    .join('');
+}
+
+/**
+ * Convert kebab-case to Title Case
+ */
+function kebabToTitle(str) {
+  return str
+    .split('-')
+    .map(part => part.charAt(0).toUpperCase() + part.slice(1))
+    .join(' ');
+}
+
+/**
+ * Generate triggers for a component
  */
 function generateTriggers(componentName, metadata, category) {
   const triggers = new Set();
+  const baseName = componentName.toLowerCase();
 
-  // Nom du composant et variantes
-  const baseName = componentName.toLowerCase().replace(/\s+/g, '-');
   triggers.add(baseName);
-  triggers.add(componentName.toLowerCase().replace(/\s+/g, ''));
+  triggers.add(baseName.replace(/\s+/g, '-'));
 
-  // Version française si applicable
-  const frenchNames = {
-    'button': 'bouton',
-    'link': 'lien',
-    'dialog': 'dialogue',
-    'table': 'tableau',
-    'list': 'liste',
-    'form': 'formulaire',
-    'input': 'saisie',
-    'checkbox': 'case-a-cocher',
-    'radio': 'bouton-radio',
-    'select': 'selection',
-    'dropdown': 'menu-deroulant',
-    'loading': 'chargement',
-    'progress': 'progression',
-    'alert': 'alerte',
-    'notification': 'notification',
-    'avatar': 'avatar',
-    'card': 'carte',
-    'badge': 'badge',
-    'chip': 'etiquette',
-    'tooltip': 'infobulle',
-    'popover': 'popover',
-    'modal': 'modale',
-    'sidebar': 'barre-laterale',
-    'header': 'en-tete',
-    'footer': 'pied-de-page',
-    'breadcrumb': 'fil-d-ariane',
-    'pagination': 'pagination',
-    'tab': 'onglet',
-    'accordion': 'accordeon',
-    'menu': 'menu',
-    'navigation': 'navigation',
-    'search': 'recherche',
-    'filter': 'filtre',
-    'sort': 'tri',
-    'date': 'date',
-    'time': 'heure',
-    'calendar': 'calendrier',
-    'file': 'fichier',
-    'upload': 'telechargement',
-    'download': 'telechargement',
-    'image': 'image',
-    'icon': 'icone',
-    'text': 'texte',
-    'label': 'libelle',
-    'title': 'titre',
-    'user': 'utilisateur',
-    'profile': 'profil',
-    'settings': 'parametres',
-    'switch': 'interrupteur',
-  };
-
-  if (frenchNames[baseName]) {
-    triggers.add(frenchNames[baseName]);
-  }
-
-  // Ajouter les imports comme triggers
+  // Add imports as triggers
   for (const imp of metadata.imports) {
     triggers.add(imp.package);
     for (const comp of imp.components) {
@@ -499,53 +432,50 @@ function generateTriggers(componentName, metadata, category) {
     }
   }
 
-  // Triggers basés sur la catégorie
+  // Category-based triggers
   const categoryConfig = CATEGORY_CONFIG[category];
-  if (categoryConfig && categoryConfig.triggers) {
-    for (const t of categoryConfig.triggers) {
-      triggers.add(t);
-    }
+  if (categoryConfig?.triggers) {
+    categoryConfig.triggers.forEach(t => triggers.add(t));
   }
 
-  return Array.from(triggers).filter(t => t && t.length > 1).slice(0, 20);
+  return Array.from(triggers).filter(t => t && t.length > 1).slice(0, 15);
 }
 
 /**
- * Nettoie et formate un template HTML pour l'affichage
+ * Clean and format HTML template
  */
 function cleanTemplate(template) {
   return template
-    .replace(/\$\{[^}]+\}/g, '...') // Remplacer les interpolations
-    .replace(/\s+/g, ' ') // Normaliser les espaces
-    .replace(/>\s+</g, '>\n<') // Retours à la ligne entre balises
+    .replace(/\$\{[^}]+\}/g, '...')
+    .replace(/\s+/g, ' ')
+    .replace(/>\s+</g, '>\n<')
     .trim();
 }
 
 /**
- * Extrait les exemples de code des templates
+ * Extract code examples from templates
  */
-function extractExamples(metadata, componentName) {
+function extractExamples(metadata) {
   const examples = [];
-  const seenTemplates = new Set();
+  const seen = new Set();
 
   for (const template of metadata.templates) {
     const cleaned = cleanTemplate(template);
-    if (cleaned.length > 20 && cleaned.length < 500 && !seenTemplates.has(cleaned)) {
-      seenTemplates.add(cleaned);
+    if (cleaned.length > 20 && cleaned.length < 500 && !seen.has(cleaned)) {
+      seen.add(cleaned);
       examples.push(cleaned);
     }
   }
 
-  return examples.slice(0, 5); // Limiter à 5 exemples
+  return examples.slice(0, 3);
 }
 
 /**
- * Génère la table des propriétés
+ * Generate properties table
  */
 function generatePropertiesTable(metadata, componentInputs) {
   const properties = new Map();
 
-  // Ajouter les propriétés du code source
   for (const input of componentInputs) {
     properties.set(input.name, {
       type: input.type,
@@ -554,23 +484,22 @@ function generatePropertiesTable(metadata, componentInputs) {
     });
   }
 
-  // Enrichir/ajouter avec les argTypes des stories
   for (const [name, info] of Object.entries(metadata.argTypes)) {
     const existing = properties.get(name) || {};
     properties.set(name, {
-      type: info.options ? info.options.map(o => `'${o}'`).join(' \\| ') : (existing.type || info.type || 'any'),
-      default: info.default || existing.default || '-',
+      type: info.options ? info.options.map(o => `'${o}'`).join(' | ') : (existing.type || info.type || 'any'),
+      default: existing.default || '-',
       description: info.description || existing.description || '-',
     });
   }
 
   if (properties.size === 0) return '';
 
-  let table = '\n## Propriétés\n\n| Propriété | Type | Défaut | Description |\n|-----------|------|--------|-------------|\n';
+  let table = '| Property | Type | Default | Description |\n|----------|------|---------|-------------|\n';
 
   for (const [name, info] of properties) {
-    const type = info.type.length > 50 ? info.type.substring(0, 47) + '...' : info.type;
-    const desc = info.description.replace(/\|/g, '\\|').substring(0, 100);
+    const type = info.type.length > 40 ? info.type.substring(0, 37) + '...' : info.type;
+    const desc = info.description.replace(/\|/g, '\\|').substring(0, 80);
     table += `| \`${name}\` | \`${type}\` | \`${info.default}\` | ${desc} |\n`;
   }
 
@@ -578,153 +507,83 @@ function generatePropertiesTable(metadata, componentInputs) {
 }
 
 /**
- * Génère la section des classes CSS
+ * Generate CSS classes section
  */
 function generateCssClassesSection(cssClasses) {
   if (cssClasses.length === 0) return '';
 
-  // Grouper les classes par type
   const modClasses = cssClasses.filter(c => c.startsWith('mod-'));
   const isClasses = cssClasses.filter(c => c.startsWith('is-'));
-  const paletteClasses = cssClasses.filter(c => c.startsWith('palette-'));
   const baseClasses = cssClasses.filter(c => !c.startsWith('mod-') && !c.startsWith('is-') && !c.startsWith('palette-') && !c.startsWith('pr-'));
 
-  let section = '\n## Classes CSS\n\n| Classe | Description |\n|--------|-------------|\n';
+  let section = '### CSS Classes\n\n| Class | Type |\n|-------|------|\n';
 
-  for (const cls of baseClasses.slice(0, 5)) {
-    section += `| \`.${cls}\` | Classe de base |\n`;
+  for (const cls of baseClasses.slice(0, 3)) {
+    section += `| \`.${cls}\` | Base |\n`;
   }
-  for (const cls of modClasses.slice(0, 10)) {
-    const name = cls.replace('mod-', '');
-    section += `| \`.${cls}\` | Modificateur ${name} |\n`;
+  for (const cls of modClasses.slice(0, 5)) {
+    section += `| \`.${cls}\` | Modifier |\n`;
   }
-  for (const cls of isClasses.slice(0, 5)) {
-    const name = cls.replace('is-', '');
-    section += `| \`.${cls}\` | État ${name} |\n`;
-  }
-  for (const cls of paletteClasses.slice(0, 5)) {
-    const name = cls.replace('palette-', '');
-    section += `| \`.${cls}\` | Palette ${name} |\n`;
+  for (const cls of isClasses.slice(0, 3)) {
+    section += `| \`.${cls}\` | State |\n`;
   }
 
   return section;
 }
 
 /**
- * Génère le contenu complet du skills.md
+ * Generate a single component reference file
  */
-function generateSkillContent(componentName, category, metadata, storyDir, existingSkill = null) {
+function generateComponentReference(componentName, category, metadata, componentInputs) {
+  const categoryConfig = CATEGORY_CONFIG[category] || CATEGORY_CONFIG.structure;
   const triggers = generateTriggers(componentName, metadata, category);
-  const categoryConfig = CATEGORY_CONFIG[category] || CATEGORY_CONFIG['Structure'];
-
-  // Préserver les données Figma existantes si présentes
-  let figmaNodeId = null;
-  let figmaFileKey = null;
-
-  if (existingSkill) {
-    const nodeIdMatch = existingSkill.match(/nodeId:\s*["']?([^"'\n]+)["']?/);
-    const fileKeyMatch = existingSkill.match(/fileKey:\s*["']?([^"'\n]+)["']?/);
-    if (nodeIdMatch && nodeIdMatch[1] !== 'null') figmaNodeId = nodeIdMatch[1].trim();
-    if (fileKeyMatch && fileKeyMatch[1] !== 'null') figmaFileKey = fileKeyMatch[1].trim();
-  }
-
-  // Extraire le package principal pour chercher le code source
-  const mainPackage = metadata.imports.length > 0 ? metadata.imports[0].package : null;
-  const componentInputs = mainPackage ? parseComponentSource(mainPackage) : [];
-
-  // Générer les sections
   const propertiesTable = generatePropertiesTable(metadata, componentInputs);
-  const cssClassesSection = generateCssClassesSection(metadata.cssClasses);
-  const examples = extractExamples(metadata, componentName);
+  const cssSection = generateCssClassesSection(metadata.cssClasses);
+  const examples = extractExamples(metadata);
 
-  // Générer les imports
+  // Generate imports section
   let importsSection = '';
   if (metadata.imports.length > 0) {
     const ngImports = metadata.imports.filter(i => !i.isPrisme);
     if (ngImports.length > 0) {
-      importsSection = '\n## Imports\n\n```typescript\n';
+      importsSection = '### Imports\n\n```typescript\n';
       for (const imp of ngImports) {
         importsSection += `import { ${imp.components.join(', ')} } from '@lucca-front/ng/${imp.package}';\n`;
       }
-      importsSection += '```\n';
+      importsSection += '```\n\n';
     }
   }
 
-  // Générer les exemples de code
-  let examplesSection = '\n## Exemples\n';
+  // Generate examples section
+  let examplesSection = '';
   if (examples.length > 0) {
-    examplesSection += '\n### Exemple basique\n\n```html\n' + examples[0] + '\n```\n';
-    if (examples.length > 1) {
-      examplesSection += '\n### Autres exemples\n\n```html\n' + examples.slice(1, 3).join('\n\n') + '\n```\n';
-    }
-  } else {
-    examplesSection += '\n### Exemple basique\n\n```html\n<!-- Voir les stories pour des exemples détaillés -->\n```\n';
+    examplesSection = '### Examples\n\n```html\n' + examples[0] + '\n```\n';
   }
 
-  // Générer la description enrichie
-  const description = `Composant ${componentName} - ${categoryConfig.description.toLowerCase()}`;
-
-  // Construire le contenu final
-  const content = `---
-description: ${description}
-triggers:
-${triggers.map(t => `  - ${t}`).join('\n')}
-figma:
-  nodeId: ${figmaNodeId || 'null'}
-  fileKey: ${figmaFileKey || 'null'}
-globs:
-  - "**/*.ts"
-  - "**/*.html"
-alwaysApply: false
----
-
-# ${componentName}
-
-## Description
-
-Le composant **${componentName}** fait partie de la catégorie **${category}** du design system Lucca Front.
+  const content = `# ${componentName}
 
 ${categoryConfig.description}.
 
-${metadata.title ? `**Story path:** \`${metadata.title}\`\n` : ''}${metadata.component ? `**Component:** \`${metadata.component}\`\n` : ''}
-${importsSection}
-${propertiesTable}
-## Utilisation
-
-### Quand utiliser ${componentName}
+${metadata.title ? `**Storybook:** \`${metadata.title}\`\n` : ''}
+${importsSection}${propertiesTable ? `### Properties\n\n${propertiesTable}\n` : ''}${examplesSection}${cssSection}
+### When to use
 
 ${categoryConfig.usage.when.map(u => `- ${u}`).join('\n')}
 
-### Quand ne pas utiliser
+### When not to use
 
 ${categoryConfig.usage.whenNot.map(u => `- ${u}`).join('\n')}
-${examplesSection}
-${cssClassesSection}
-## Accessibilité
+
+### Accessibility
 
 ${categoryConfig.a11y.map(a => `- ${a}`).join('\n')}
-
-## Figma
-
-${figmaNodeId ? `Ce composant est lié au node Figma \`${figmaNodeId}\`.` : '⚠️ Ce composant n\'est pas encore lié à un node Figma. Utilisez Code Connect pour créer le lien.'}
-
-## Voir aussi
-
-<!-- Composants liés à documenter -->
 `;
 
-  return content;
+  return { content, triggers, category };
 }
 
 /**
- * Capitalise la première lettre
- */
-function capitalize(str) {
-  return str.charAt(0).toUpperCase() + str.slice(1);
-}
-
-/**
- * Groupe les stories par composant/dossier
+ * Group stories by component
  */
 function groupStoriesByComponent(storyFiles) {
   const groups = new Map();
@@ -733,61 +592,44 @@ function groupStoriesByComponent(storyFiles) {
     const dir = path.dirname(storyPath);
     const componentName = getComponentNameFromPath(storyPath);
 
-    // Trouver le dossier parent du composant (pas angular ou html&css)
     let componentDir = dir;
     const dirName = path.basename(dir).toLowerCase();
-    if (dirName === 'angular' || dirName === 'html&css') {
+    if (['angular', 'html&css'].includes(dirName)) {
       componentDir = path.dirname(dir);
     }
 
-    if (!groups.has(componentDir)) {
-      groups.set(componentDir, {
+    const key = componentDir;
+    if (!groups.has(key)) {
+      groups.set(key, {
         name: componentName,
         stories: [],
         dir: componentDir,
       });
     }
 
-    groups.get(componentDir).stories.push(storyPath);
+    groups.get(key).stories.push(storyPath);
   }
 
   return groups;
 }
 
 /**
- * Point d'entrée principal
+ * Generate all references for ng package
  */
-async function main() {
-  console.log('🔍 Recherche des fichiers story...\n');
+function generateNgReferences() {
+  console.log('📦 Generating @lucca-front/ng references...\n');
 
   const storyFiles = findStoryFiles(STORIES_ROOT);
-  console.log(`📚 ${storyFiles.length} fichiers story trouvés\n`);
-
   const groups = groupStoriesByComponent(storyFiles);
-  console.log(`📦 ${groups.size} composants identifiés\n`);
-
-  let created = 0;
-  let updated = 0;
-  let skipped = 0;
+  const references = [];
 
   for (const [componentDir, group] of groups) {
     const componentName = group.name;
 
-    // Filtrer si demandé
-    if (COMPONENT_FILTER && !componentName.toLowerCase().includes(COMPONENT_FILTER.toLowerCase())) {
-      continue;
-    }
+    // Skip sample
+    if (componentName.toLowerCase().includes('sample')) continue;
 
-    const skillPath = path.join(componentDir, 'skills.md');
-    const skillExists = fs.existsSync(skillPath);
-
-    // Si --update et le fichier n'existe pas, skip
-    if (UPDATE_ONLY && !skillExists) {
-      skipped++;
-      continue;
-    }
-
-    // Parser toutes les stories du composant pour collecter les métadonnées
+    // Merge metadata from all stories
     let combinedMetadata = {
       title: null,
       component: null,
@@ -808,64 +650,510 @@ async function main() {
           combinedMetadata.component = metadata.component;
         }
 
-        // Merger les imports
         for (const imp of metadata.imports) {
           const existing = combinedMetadata.imports.find(i => i.package === imp.package);
           if (existing) {
-            for (const comp of imp.components) {
-              if (!existing.components.includes(comp)) {
-                existing.components.push(comp);
-              }
-            }
+            imp.components.forEach(c => {
+              if (!existing.components.includes(c)) existing.components.push(c);
+            });
           } else {
             combinedMetadata.imports.push({ ...imp });
           }
         }
 
-        // Merger les argTypes
         combinedMetadata.argTypes = { ...combinedMetadata.argTypes, ...metadata.argTypes };
-
-        // Merger les templates
         combinedMetadata.templates.push(...metadata.templates);
-
-        // Merger les classes CSS
-        for (const cls of metadata.cssClasses) {
+        metadata.cssClasses.forEach(cls => {
           if (!combinedMetadata.cssClasses.includes(cls)) {
             combinedMetadata.cssClasses.push(cls);
           }
-        }
+        });
       } catch (e) {
-        console.warn(`⚠️  Erreur parsing ${storyPath}: ${e.message}`);
+        console.warn(`  ⚠️  Error parsing ${storyPath}: ${e.message}`);
       }
     }
 
     const category = getCategoryFromPath(group.stories[0]);
-    const existingSkill = skillExists ? fs.readFileSync(skillPath, 'utf-8') : null;
-    const content = generateSkillContent(componentName, category, combinedMetadata, componentDir, existingSkill);
+    const mainPackage = combinedMetadata.imports.length > 0 ? combinedMetadata.imports[0].package : null;
+    const pkgPath = mainPackage ? path.join(PACKAGES.ng.root, mainPackage) : null;
+    const componentInputs = pkgPath ? parseComponentSource(pkgPath) : [];
 
-    if (DRY_RUN) {
-      console.log(`[DRY-RUN] ${skillExists ? 'Mise à jour' : 'Création'}: ${path.relative(STORIES_ROOT, skillPath)}`);
+    const { content, triggers } = generateComponentReference(
+      componentName,
+      category,
+      combinedMetadata,
+      componentInputs
+    );
+
+    const fileName = componentName.toLowerCase().replace(/\s+/g, '-') + '.md';
+    const filePath = path.join(SKILLS_ROOT, 'ng', 'references', fileName);
+
+    references.push({
+      name: componentName,
+      file: fileName,
+      category,
+      triggers,
+      description: CATEGORY_CONFIG[category]?.description || 'Component',
+    });
+
+    if (!DRY_RUN) {
+      fs.writeFileSync(filePath, content, 'utf-8');
+      console.log(`  ✅ ${fileName}`);
     } else {
-      fs.writeFileSync(skillPath, content, 'utf-8');
+      console.log(`  [DRY-RUN] ${fileName}`);
+    }
+  }
 
-      if (skillExists) {
-        console.log(`✏️  Mis à jour: ${path.relative(STORIES_ROOT, skillPath)}`);
-        updated++;
-      } else {
-        console.log(`✨ Créé: ${path.relative(STORIES_ROOT, skillPath)}`);
-        created++;
+  return references;
+}
+
+/**
+ * Generate icons references
+ */
+function generateIconsReferences() {
+  console.log('📦 Generating @lucca-front/icons references...\n');
+
+  const iconsRoot = PACKAGES.icons.root;
+  const selectionPath = path.join(iconsRoot, 'selection.json');
+
+  if (!fs.existsSync(selectionPath)) {
+    console.log('  ⚠️  No selection.json found');
+    return [];
+  }
+
+  const selection = JSON.parse(fs.readFileSync(selectionPath, 'utf-8'));
+  const icons = selection.icons || [];
+
+  const content = `# Icons Reference
+
+Lucca Front icon library with ${icons.length} icons.
+
+## Usage
+
+### Angular
+
+\`\`\`html
+<lu-icon icon="iconName" alt="Description" />
+\`\`\`
+
+### HTML/CSS
+
+\`\`\`html
+<span class="lucca-icon icon-iconName" aria-hidden="true"></span>
+\`\`\`
+
+## Available Icons
+
+| Icon Name | Tags |
+|-----------|------|
+${icons.slice(0, 50).map(icon => {
+  const name = icon.properties?.name || icon.icon?.tags?.[0] || 'unknown';
+  const tags = icon.icon?.tags?.join(', ') || '';
+  return `| \`${name}\` | ${tags} |`;
+}).join('\n')}
+${icons.length > 50 ? `\n*... and ${icons.length - 50} more icons*` : ''}
+
+## Accessibility
+
+- Always provide \`alt\` text for meaningful icons
+- Use \`aria-hidden="true"\` for decorative icons
+- Pair icons with visible text when possible
+`;
+
+  const filePath = path.join(SKILLS_ROOT, 'icons', 'references', 'icons.md');
+
+  if (!DRY_RUN) {
+    fs.writeFileSync(filePath, content, 'utf-8');
+    console.log(`  ✅ icons.md`);
+  } else {
+    console.log(`  [DRY-RUN] icons.md`);
+  }
+
+  return [{
+    name: 'Icons',
+    file: 'icons.md',
+    category: 'icons',
+    triggers: ['icon', 'lucca-icon', 'lu-icon', 'pictogram', 'symbol'],
+    description: 'Icon library',
+  }];
+}
+
+/**
+ * Generate SCSS references
+ */
+function generateScssReferences() {
+  console.log('📦 Generating @lucca-front/scss references...\n');
+
+  const content = `# SCSS Utilities Reference
+
+Lucca Front SCSS utilities, mixins, and variables.
+
+## Import
+
+\`\`\`scss
+@use '@lucca-front/scss/src/theming' as theming;
+@use '@lucca-front/scss/src/commons' as commons;
+\`\`\`
+
+## Utilities
+
+### Spacing
+
+\`\`\`scss
+// Padding utilities: pr-u-padding{100-800}
+// Margin utilities: pr-u-margin{100-800}
+// Gap utilities: pr-u-gap{100-800}
+\`\`\`
+
+### Display
+
+\`\`\`scss
+// pr-u-displayNone
+// pr-u-displayFlex
+// pr-u-displayGrid
+// pr-u-displayBlock
+// pr-u-displayInline
+\`\`\`
+
+### Flexbox
+
+\`\`\`scss
+// pr-u-flexWrapNowrap
+// pr-u-alignItemsCenter
+// pr-u-justifyContentCenter
+// pr-u-flexDirectionColumn
+\`\`\`
+
+### Text
+
+\`\`\`scss
+// pr-u-textAlignCenter
+// pr-u-textAlignLeft
+// pr-u-textAlignRight
+\`\`\`
+
+### Visibility
+
+\`\`\`scss
+// pr-u-mask (visually hidden but accessible)
+\`\`\`
+
+## Mixins
+
+### Media Queries
+
+\`\`\`scss
+@include commons.media('S') { ... }
+@include commons.media('M') { ... }
+@include commons.media('L') { ... }
+\`\`\`
+
+### Theming
+
+\`\`\`scss
+@include theming.palette('primary') { ... }
+@include theming.mode('dark') { ... }
+\`\`\`
+
+## CSS Custom Properties
+
+| Property | Description |
+|----------|-------------|
+| \`--palettes-*\` | Color palette tokens |
+| \`--sizes-*\` | Size tokens |
+| \`--spacings-*\` | Spacing tokens |
+| \`--radii-*\` | Border radius tokens |
+`;
+
+  const filePath = path.join(SKILLS_ROOT, 'scss', 'references', 'utilities.md');
+
+  if (!DRY_RUN) {
+    fs.writeFileSync(filePath, content, 'utf-8');
+    console.log(`  ✅ utilities.md`);
+  } else {
+    console.log(`  [DRY-RUN] utilities.md`);
+  }
+
+  return [{
+    name: 'SCSS Utilities',
+    file: 'utilities.md',
+    category: 'scss',
+    triggers: ['scss', 'css', 'style', 'utility', 'mixin', 'variable', 'theming'],
+    description: 'SCSS utilities and mixins',
+  }];
+}
+
+/**
+ * Generate Prisme references
+ */
+function generatePrismeReferences() {
+  console.log('📦 Generating @lucca/prisme references...\n');
+
+  const prismeRoot = PACKAGES.prisme.root;
+  const references = [];
+
+  if (!fs.existsSync(prismeRoot)) {
+    console.log('  ⚠️  Prisme package not found');
+    return [];
+  }
+
+  // Find components in prisme
+  const items = fs.readdirSync(prismeRoot);
+  const components = items.filter(item => {
+    const fullPath = path.join(prismeRoot, item);
+    return fs.statSync(fullPath).isDirectory() && !item.startsWith('.') && item !== 'node_modules';
+  });
+
+  for (const component of components) {
+    const componentPath = path.join(prismeRoot, component);
+    const inputs = parseComponentSource(componentPath);
+
+    const content = `# ${kebabToTitle(component)}
+
+Core Prisme component shared across Lucca Front.
+
+## Import
+
+\`\`\`typescript
+import { ${kebabToPascal(component)}Component } from '@lucca/prisme/${component}';
+\`\`\`
+
+${inputs.length > 0 ? `## Properties
+
+| Property | Type | Description |
+|----------|------|-------------|
+${inputs.slice(0, 10).map(i => `| \`${i.name}\` | \`${i.type}\` | ${i.description || '-'} |`).join('\n')}
+` : ''}
+`;
+
+    const fileName = component + '.md';
+    const filePath = path.join(SKILLS_ROOT, 'prisme', 'references', fileName);
+
+    references.push({
+      name: kebabToTitle(component),
+      file: fileName,
+      category: 'prisme',
+      triggers: [component, kebabToPascal(component).toLowerCase()],
+      description: 'Core Prisme component',
+    });
+
+    if (!DRY_RUN) {
+      fs.writeFileSync(filePath, content, 'utf-8');
+      console.log(`  ✅ ${fileName}`);
+    } else {
+      console.log(`  [DRY-RUN] ${fileName}`);
+    }
+  }
+
+  return references;
+}
+
+/**
+ * Generate the main SKILL.md file
+ */
+function generateMainSkillFile(allReferences) {
+  console.log('\n📝 Generating main SKILL.md...\n');
+
+  // Group references by package
+  const ngRefs = allReferences.filter(r => !['icons', 'scss', 'prisme'].includes(r.category));
+  const iconRefs = allReferences.filter(r => r.category === 'icons');
+  const scssRefs = allReferences.filter(r => r.category === 'scss');
+  const prismeRefs = allReferences.filter(r => r.category === 'prisme');
+
+  // Group ng refs by category
+  const ngByCategory = {};
+  for (const ref of ngRefs) {
+    const cat = ref.category;
+    if (!ngByCategory[cat]) ngByCategory[cat] = [];
+    ngByCategory[cat].push(ref);
+  }
+
+  const content = `---
+name: lucca-front
+description: "Helps developers use the @lucca-front design system library. Covers Angular components (@lucca-front/ng), icons (@lucca-front/icons), SCSS utilities (@lucca-front/scss), and core Prisme components (@lucca/prisme). Use this skill when a developer asks about Lucca UI components, forms, overlays, navigation, data tables, buttons, dialogs, or any front-end design system question — even if they don't mention @lucca-front explicitly."
+---
+
+# @lucca-front — Lucca Front Design System
+
+## Import paths
+
+| Package | Import |
+|---------|--------|
+| Angular Components | \`@lucca-front/ng/{component}\` |
+| Icons | \`@lucca-front/icons\` |
+| SCSS Utilities | \`@lucca-front/scss\` |
+| Prisme Core | \`@lucca/prisme/{component}\` |
+
+## How to use this skill
+
+Read only the reference file(s) relevant to the question. Use the routing guide below to pick the right one — don't load everything at once.
+
+## Routing guide
+
+### Angular Components (@lucca-front/ng)
+
+| If the question is about… | Read |
+|---------------------------|------|
+${Object.entries(ngByCategory).map(([category, refs]) => {
+  const categoryTitle = kebabToTitle(category);
+  const refList = refs.slice(0, 5).map(r => r.name).join(', ');
+  const firstRef = refs[0];
+  return `| **${categoryTitle}** (${refList}${refs.length > 5 ? '...' : ''}) | [ng/references/${firstRef.file}](ng/references/${firstRef.file}) |`;
+}).join('\n')}
+
+### By component
+
+| Component | Reference |
+|-----------|-----------|
+${ngRefs.slice(0, 30).map(ref => `| ${ref.name} | [${ref.file}](ng/references/${ref.file}) |`).join('\n')}
+${ngRefs.length > 30 ? `\n*... and ${ngRefs.length - 30} more components in ng/references/*` : ''}
+
+### Icons
+
+| If the question is about… | Read |
+|---------------------------|------|
+| Icons, pictograms, lu-icon, lucca-icon | [icons/references/icons.md](icons/references/icons.md) |
+
+### SCSS
+
+| If the question is about… | Read |
+|---------------------------|------|
+| CSS utilities, mixins, theming, spacing, display | [scss/references/utilities.md](scss/references/utilities.md) |
+
+### Prisme Core
+
+| If the question is about… | Read |
+|---------------------------|------|
+${prismeRefs.map(ref => `| ${ref.name} | [prisme/references/${ref.file}](prisme/references/${ref.file}) |`).join('\n')}
+
+## Quick examples
+
+### Button
+
+\`\`\`html
+<button type="button" luButton>Primary action</button>
+<button type="button" luButton="outlined">Secondary action</button>
+<button type="button" luButton="ghost">Tertiary action</button>
+\`\`\`
+
+### Dialog
+
+\`\`\`html
+<lu-dialog>
+  <lu-dialog-header>Title</lu-dialog-header>
+  <lu-dialog-content>Content</lu-dialog-content>
+  <lu-dialog-footer>
+    <button luButton>Confirm</button>
+  </lu-dialog-footer>
+</lu-dialog>
+\`\`\`
+
+### Form Field
+
+\`\`\`html
+<lu-form-field label="Email">
+  <lu-text-input [(ngModel)]="email" />
+</lu-form-field>
+\`\`\`
+
+### Icon
+
+\`\`\`html
+<lu-icon icon="heart" alt="Favorite" />
+\`\`\`
+`;
+
+  const filePath = path.join(SKILLS_ROOT, 'SKILL.md');
+
+  if (!DRY_RUN) {
+    fs.writeFileSync(filePath, content, 'utf-8');
+    console.log(`  ✅ SKILL.md`);
+  } else {
+    console.log(`  [DRY-RUN] SKILL.md`);
+  }
+}
+
+/**
+ * Clean old skills.md from stories folders
+ */
+function cleanOldSkillsFiles() {
+  console.log('🧹 Cleaning old skills.md files from stories...\n');
+
+  function walk(dir) {
+    if (!fs.existsSync(dir)) return;
+
+    const items = fs.readdirSync(dir);
+    for (const item of items) {
+      const fullPath = path.join(dir, item);
+      const stat = fs.statSync(fullPath);
+
+      if (stat.isDirectory()) {
+        walk(fullPath);
+      } else if (item === 'skills.md') {
+        if (!DRY_RUN) {
+          fs.unlinkSync(fullPath);
+          console.log(`  🗑️  Removed ${path.relative(ROOT_DIR, fullPath)}`);
+        } else {
+          console.log(`  [DRY-RUN] Would remove ${path.relative(ROOT_DIR, fullPath)}`);
+        }
       }
     }
   }
 
-  console.log('\n📊 Résumé:');
-  console.log(`   ✨ Créés: ${created}`);
-  console.log(`   ✏️  Mis à jour: ${updated}`);
-  console.log(`   ⏭️  Ignorés: ${skipped}`);
+  walk(STORIES_ROOT);
+}
+
+/**
+ * Main entry point
+ */
+async function main() {
+  console.log('🚀 Lucca Front Skills Generator\n');
+  console.log('================================\n');
+
+  // Ensure directories exist
+  for (const pkg of Object.keys(PACKAGES)) {
+    const refDir = path.join(SKILLS_ROOT, pkg, 'references');
+    if (!fs.existsSync(refDir)) {
+      fs.mkdirSync(refDir, { recursive: true });
+    }
+  }
+
+  // Clean old files
+  cleanOldSkillsFiles();
+  console.log('');
+
+  let allReferences = [];
+
+  // Generate references for each package
+  if (!PACKAGE_FILTER || PACKAGE_FILTER === 'ng') {
+    allReferences = allReferences.concat(generateNgReferences());
+    console.log('');
+  }
+
+  if (!PACKAGE_FILTER || PACKAGE_FILTER === 'icons') {
+    allReferences = allReferences.concat(generateIconsReferences());
+    console.log('');
+  }
+
+  if (!PACKAGE_FILTER || PACKAGE_FILTER === 'scss') {
+    allReferences = allReferences.concat(generateScssReferences());
+    console.log('');
+  }
+
+  if (!PACKAGE_FILTER || PACKAGE_FILTER === 'prisme') {
+    allReferences = allReferences.concat(generatePrismeReferences());
+    console.log('');
+  }
+
+  // Generate main SKILL.md
+  generateMainSkillFile(allReferences);
+
+  console.log('\n================================');
+  console.log(`📊 Summary: ${allReferences.length} references generated`);
 
   if (DRY_RUN) {
-    console.log('\n💡 Mode dry-run actif. Aucun fichier n\'a été modifié.');
-    console.log('   Relancez sans --dry-run pour appliquer les changements.');
+    console.log('\n💡 Dry-run mode. No files were modified.');
+    console.log('   Run without --dry-run to apply changes.');
   }
 }
 
