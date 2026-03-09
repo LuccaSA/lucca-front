@@ -69,7 +69,7 @@ export class LuSimpleSelectInputComponent<T> extends ALuSelectInputComponent<T, 
 
 	inputSpace(event: Event): void {
 		if (this.filterPillMode) {
-			if (this.clue.length === 0) {
+			if ((this.clue?.length ?? 0) === 0) {
 				event.preventDefault();
 				this.panelRef?.selectCurrentlyHighlightedValue();
 			}
@@ -81,7 +81,10 @@ export class LuSimpleSelectInputComponent<T> extends ALuSelectInputComponent<T, 
 	}
 
 	override enableFilterPillMode() {
-		this._panelRef = this.panelRefFactory.buildAndAttachPanelRef(this, this.filterPillPanelAnchorRef());
+		const host = this.filterPillPanelAnchorRef();
+		if (host) {
+			this._panelRef = this.panelRefFactory.buildAndAttachPanelRef(this, host);
+		}
 		super.enableFilterPillMode();
 	}
 }
