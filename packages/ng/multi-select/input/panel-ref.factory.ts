@@ -1,6 +1,6 @@
 import { ConnectedPosition, Overlay, OverlayConfig, OverlayPositionBuilder, OverlayRef, PositionStrategy, ScrollStrategyOptions } from '@angular/cdk/overlay';
 import { ComponentPortal } from '@angular/cdk/portal';
-import { ChangeDetectorRef, ComponentRef, ElementRef, inject, Injectable, Injector, ViewContainerRef } from '@angular/core';
+import { ChangeDetectorRef, ComponentRef, ElementRef, inject, Injectable, Injector, Type, ViewContainerRef } from '@angular/core';
 import { addAttributesOnCdkContainer, SELECT_ID, SELECT_LABEL_ID } from '@lucca-front/ng/core-select';
 import { takeUntil } from 'rxjs';
 import { LuMultiSelectPanelComponent } from '../panel';
@@ -86,9 +86,9 @@ class MultiSelectPanelDOMHostRef<T> extends BaseMultiSelectPanelRef<T> {
 
 	constructor(host: ViewContainerRef, parentInjector: Injector, selectInput: LuMultiSelectInputComponent<T>) {
 		super(parentInjector, selectInput);
-		const createPanelComponent = host.createComponent as (component: typeof LuMultiSelectPanelComponent, options: { injector?: Injector }) => ComponentRef<LuMultiSelectPanelComponent<T>>;
+		const panelComponent = this.portalRef.component as Type<LuMultiSelectPanelComponent<T>>;
 
-		this.panelRef = createPanelComponent(this.portalRef.component as unknown as typeof LuMultiSelectPanelComponent, {
+		this.panelRef = host.createComponent(panelComponent, {
 			injector: this.portalRef.injector ?? undefined,
 		});
 		this.instance = this.panelRef.instance;
@@ -127,7 +127,7 @@ export class LuMultiSelectPanelRefFactory {
 
 		addAttributesOnCdkContainer(overlayRef, this.selectLabelId, this.selectId);
 
-		return new MultiSelectPanelRef(overlayRef, this.parentInjector, selectInput, defaultOverlayConfig.positionStrategy ?? defaultOverlayConfig.positionStrategy!);
+		return new MultiSelectPanelRef(overlayRef, this.parentInjector, selectInput, defaultOverlayConfig.positionStrategy!);
 	}
 
 	buildAndAttachPanelRef<T>(selectInput: LuMultiSelectInputComponent<T>, host: ViewContainerRef): LuMultiSelectPanelRef<T> {
