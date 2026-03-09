@@ -92,6 +92,7 @@
 			inline-size: var(--components-dialog-inside-fancyIllustrations-inlineSize);
 			display: flex;
 
+			// to target the SVG injected into the page
 			> * {
 				inline-size: 100%;
 				block-size: auto;
@@ -139,8 +140,8 @@
 
 		.dialog-inside-header-button {
 			position: var(--components-dialog-inside-header-button-position);
-			inset-block-start: var(--pr-t-spacings-200);
-			inset-inline-end: var(--pr-t-spacings-300);
+			inset-block-start: var(--components-dialog-inside-header-button-insetBlockStart);
+			inset-inline-end: var(--components-dialog-inside-header-button-insetBlockEnd);
 		}
 
 		.dialog-inside-content {
