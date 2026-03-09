@@ -1,42 +1,74 @@
 # Divider
 
-Components for layout structuring.
+Visual separator component.
 
-**Storybook:** `Documentation/Structure/Divider/Angular`
+**Storybook:** [Documentation/Structure/Divider/Angular](https://storybook.lucca-front.com)
 
-### Imports
+## Import
 
 ```typescript
-import { ButtonComponent } from '@lucca-front/ng/button';
 import { DividerComponent } from '@lucca-front/ng/divider';
-import { IconComponent } from '@lucca-front/ng/icon';
 ```
 
-### Examples
+## Basic Usage
 
 ```html
-<lu-divider ${args.vertical ?
+<div>Section 1</div>
+<lu-divider />
+<div>Section 2</div>
 ```
-### CSS Classes
 
-| Class | Type |
-|-------|------|
-| `.divider` | Base |
-| `.button` | Base |
-| `.lucca-icon` | Base |
+## Inputs
 
-### When to use
+### `vertical`
+Type: `boolean` (default: `false`) - Creates a vertical divider.
 
-- Content organization
-- Layout
-- Containers
+```html
+<div class="flex">
+  <span>Item 1</span>
+  <lu-divider vertical />
+  <span>Item 2</span>
+</div>
+```
 
-### When not to use
+### `label`
+Type: `string` - Adds label text in the middle of the divider.
 
-- Interactive components
+```html
+<lu-divider label="OR" />
+```
 
-### Accessibility
+## Common Patterns
 
-- Use appropriate landmarks
-- Maintain logical reading order
-- Structure content semantically
+### Section Separator
+```html
+<section>
+  <h2>Personal Information</h2>
+  <!-- form fields -->
+</section>
+
+<lu-divider />
+
+<section>
+  <h2>Contact Information</h2>
+  <!-- form fields -->
+</section>
+```
+
+### With Label
+```html
+<button luButton>Sign in</button>
+<lu-divider label="OR" />
+<button luButton="outlined">Sign up</button>
+```
+
+### In Toolbar
+```html
+<div class="toolbar">
+  <button luButton="ghost">Edit</button>
+  <lu-divider vertical />
+  <button luButton="ghost">Delete</button>
+  <lu-divider vertical />
+  <button luButton="ghost">Share</button>
+</div>
+```

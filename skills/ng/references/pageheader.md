@@ -1,53 +1,83 @@
-# PageHeader
+# Page Header
 
-Components for layout structuring.
+Header component for page titles and actions.
 
-**Storybook:** `Documentation/Structure/PageHeader/Angular/Basic`
+**Storybook:** [Documentation/Structure/PageHeader/Angular](https://storybook.lucca-front.com)
 
-### Imports
+## Import
 
 ```typescript
-import { BreadcrumbsComponent, BreadcrumbsLinkDirective } from '@lucca-front/ng/breadcrumbs';
-import { ButtonComponent } from '@lucca-front/ng/button';
-import { FormFieldComponent } from '@lucca-front/ng/form-field';
-import { TextInputComponent } from '@lucca-front/ng/forms';
-import { HorizontalNavigationComponent, HorizontalNavigationLinkDirective } from '@lucca-front/ng/horizontal-navigation';
-import { IconComponent } from '@lucca-front/ng/icon';
-import { LinkComponent } from '@lucca-front/ng/link';
 import { PageHeaderComponent } from '@lucca-front/ng/page-header';
-import { LuTooltipModule } from '@lucca-front/ng/tooltip';
 ```
 
-### Examples
+## Basic Usage
 
 ```html
-<lu-page-header ...> ..................... </lu-page-header>
+<lu-page-header>
+  <h1>Page Title</h1>
+</lu-page-header>
 ```
-### CSS Classes
 
-| Class | Type |
-|-------|------|
-| `.horizontalNavigation-list-item-action` | Base |
-| `.breadcrumbs-list-item-action` | Base |
-| `.pageHeader` | Base |
-| `.mod-onlyIcon` | Modifier |
-| `.mod-ghost` | Modifier |
-| `.mod-search` | Modifier |
-| `.mod-outline` | Modifier |
-| `.mod-XS` | Modifier |
+## With Breadcrumbs
 
-### When to use
+```html
+<lu-page-header>
+  <lu-breadcrumbs slot="breadcrumbs">
+    <lu-breadcrumb routerLink="/">Home</lu-breadcrumb>
+    <lu-breadcrumb>Users</lu-breadcrumb>
+  </lu-breadcrumbs>
+  <h1>Users</h1>
+</lu-page-header>
+```
 
-- Content organization
-- Layout
-- Containers
+## With Actions
 
-### When not to use
+```html
+<lu-page-header>
+  <h1>Projects</h1>
+  <div slot="actions">
+    <button luButton (click)="createProject()">
+      <lu-icon icon="plusSign" alt="" />
+      New Project
+    </button>
+  </div>
+</lu-page-header>
+```
 
-- Interactive components
+## With Description
 
-### Accessibility
+```html
+<lu-page-header>
+  <h1>Settings</h1>
+  <p slot="description">Manage your account preferences and configuration.</p>
+</lu-page-header>
+```
 
-- Use appropriate landmarks
-- Maintain logical reading order
-- Structure content semantically
+## Complete Example
+
+```html
+<lu-page-header>
+  <lu-breadcrumbs slot="breadcrumbs">
+    <lu-breadcrumb routerLink="/">Home</lu-breadcrumb>
+    <lu-breadcrumb routerLink="/users">Users</lu-breadcrumb>
+    <lu-breadcrumb>John Doe</lu-breadcrumb>
+  </lu-breadcrumbs>
+  
+  <h1>John Doe</h1>
+  <p slot="description">User profile and settings</p>
+  
+  <div slot="actions">
+    <button luButton="outlined" (click)="edit()">Edit</button>
+    <button luButton (click)="save()">Save</button>
+  </div>
+</lu-page-header>
+```
+
+## Slots
+
+| Slot | Purpose |
+|------|---------|
+| (default) | Page title (`<h1>`) |
+| `breadcrumbs` | Breadcrumb navigation |
+| `description` | Subtitle/description text |
+| `actions` | Action buttons |

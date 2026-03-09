@@ -1,43 +1,86 @@
 # Sidepanel
 
-Components displayed above the main content.
+Sliding panel component from the side of the screen.
 
-**Storybook:** `Documentation/Overlays/Sidepanel`
+**Storybook:** [Documentation/Overlays/Sidepanel/Angular](https://storybook.lucca-front.com)
 
-### Imports
+## Import
 
 ```typescript
-import { ILuModalContent, LuModal, LuModalModule } from '@lucca-front/ng/modal';
-import { LuSidepanel, LuSidepanelModule } from '@lucca-front/ng/sidepanel';
-import { LuToastsModule, LuToastsService } from '@lucca-front/ng/toast';
+import { 
+  SidepanelComponent,
+  SidepanelService,
+  provideSidepanel 
+} from '@lucca-front/ng/sidepanel';
 ```
 
-### Examples
+## Basic Usage
 
+Similar to dialog but slides from the side.
+
+```typescript
+@Component({...})
+export class MyComponent {
+  private sidepanelService = inject(SidepanelService);
+
+  openPanel() {
+    this.sidepanelService.open({
+      content: FilterPanelComponent,
+      position: 'end' // or 'start'
+    });
+  }
+}
+```
+
+## Configuration
+
+### `position`
+Type: `'start' | 'end'` (default: `'end'`) - Side from which panel slides.
+
+### `size`
+Type: `'S' | 'M' | 'L'` - Panel width.
+
+### `backdrop`
+Type: `boolean` (default: `true`) - Show backdrop.
+
+## Common Patterns
+
+### Filter Panel
+```typescript
+openFilters() {
+  const ref = this.sidepanelService.open({
+    content: FiltersPanelComponent,
+    position: 'end',
+    size: 'M'
+  });
+
+  ref.closed$.subscribe(filters => {
+    if (filters) {
+      this.applyFilters(filters);
+    }
+  });
+}
+```
+
+### Details Panel
 ```html
-<p>General Kenobi</p>
+<button luButton (click)="showDetails(item)">View Details</button>
 ```
-### CSS Classes
 
-| Class | Type |
-|-------|------|
-| `.button` | Base |
-| `.mod-outlined` | Modifier |
+```typescript
+showDetails(item: Item) {
+  this.sidepanelService.open({
+    content: ItemDetailsPanelComponent,
+    data: { item },
+    position: 'end',
+    size: 'L'
+  });
+}
+```
 
-### When to use
+## Accessibility
 
-- Important confirmations
-- Contextual forms
-- Additional information
+- Focus trapped within panel
+- Escape closes panel
+- Backdrop click closes panel (configurable)
 
-### When not to use
-
-- Main page content
-- Frequent navigation
-
-### Accessibility
-
-- Manage focus trap in modals
-- Allow closing with Escape
-- Announce opening to screen readers
-- Use aria-modal and role="dialog"

@@ -1,39 +1,64 @@
 # Loading
 
-Components to indicate loading or progress.
+Loading indicator component.
 
-**Storybook:** `Documentation/Loaders/Loading/Angular/Basic`
+**Storybook:** [Documentation/Loaders/Loading/Angular](https://storybook.lucca-front.com)
 
-### Imports
+## Import
 
 ```typescript
 import { LoadingComponent } from '@lucca-front/ng/loading';
 ```
 
-### Properties
+## Basic Usage
 
-| Property | Type | Default | Description |
-|----------|------|---------|-------------|
-| `block` | `any` | `-` | - |
+```html
+<lu-loading />
+```
 
-### CSS Classes
+## Inputs
 
-| Class | Type |
-|-------|------|
-| `.loading` | Base |
+### `size`
+Type: `'XS' | 'S' | 'M' | 'L'` (default: `'M'`)
 
-### When to use
+```html
+<lu-loading size="S" />
+<lu-loading size="L" />
+```
 
-- Data loading
-- Async actions
-- Progress indication
+### `label`
+Type: `string` - Accessible label for screen readers.
 
-### When not to use
+```html
+<lu-loading label="Loading data..." />
+```
 
-- Immediately available content
+## Common Patterns
 
-### Accessibility
+### Page Loading
+```html
+@if (isLoading) {
+  <lu-loading size="L" label="Loading..." />
+} @else {
+  <div>Content</div>
+}
+```
 
-- Announce loading with aria-busy
-- Provide descriptive alternative text
-- Inform when loading completes
+### Button Loading State
+Use `state="loading"` on buttons instead:
+```html
+<button luButton [state]="isLoading ? 'loading' : 'default'">Save</button>
+```
+
+### With Skeleton (preferred)
+```html
+@if (isLoading) {
+  <lu-skeleton-table [rows]="5" [columns]="3" />
+} @else {
+  <lu-data-table>...</lu-data-table>
+}
+```
+
+## Accessibility
+
+- Always provide `label` for context

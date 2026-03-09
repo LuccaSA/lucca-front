@@ -1,54 +1,77 @@
 # Popover
 
-Components to display user information.
+Floating content panel triggered by user interaction.
 
-**Storybook:** `Documentation/Users/Popover/Angular`
+**Storybook:** [Documentation/Overlays/Popover/Angular](https://storybook.lucca-front.com)
 
-### Imports
+## Import
 
 ```typescript
-import { ILuUser } from '@lucca-front/ng/user';
-import { LuUserPopoverDirective } from '@lucca-front/ng/user-popover';
+import { PopoverDirective } from '@lucca-front/ng/popover2';
 ```
 
-### Properties
+## Basic Usage
 
-| Property | Type | Default | Description |
-|----------|------|---------|-------------|
-| `fields` | `any` | `-` | - |
-| `filters` | `any` | `-` | - |
-| `orderBy` | `any` | `-` | - |
-| `appInstanceId` | `any` | `-` | - |
-| `operations` | `any` | `-` | - |
-| `enableFormerEmployees` | `any` | `-` | - |
-| `disablePrincipal` | `any` | `-` | - |
-| `set` | `any` | `-` | - |
-| `user` | `LuUserTileUserInput` | `-` | LuUserTileUserInput to display. |
-| `role` | `string` | `-` | LuUserTileUserInput role to display |
-| `size` | `'L' | 'M' | 'S' | 'XS'` | `-` | Which size should the user tile be? Defaults to medium |
+```html
+<button luButton [luPopover]="popoverContent">
+  Show Info
+</button>
 
-### CSS Classes
+<ng-template #popoverContent>
+  <p>This is popover content.</p>
+</ng-template>
+```
 
-| Class | Type |
-|-------|------|
-| `.userPopover_trigger` | Base |
-| `.lu-popover-content` | Base |
-| `.userPopover` | Base |
-| `.mod-S` | Modifier |
-| `.mod-circle` | Modifier |
-| `.is-loading` | State |
+## Inputs
 
-### When to use
+### `luPopover`
+Type: `TemplateRef` - Content template.
 
-- User display
-- Avatars
-- Profiles
+### `luPopoverPosition`
+Type: `'above' | 'below' | 'before' | 'after'` (default: `'above'`)
 
-### When not to use
+```html
+<button [luPopover]="content" luPopoverPosition="below">Below</button>
+```
 
-- Non-user related data
+### `luPopoverDisabled`
+Type: `boolean` - Disables the popover.
 
-### Accessibility
+### `luPopoverNoCloseButton`
+Type: `boolean` (default: `false`) - Hides the close button.
 
-- Provide alternative text for avatars
-- Do not rely solely on images
+## Outputs
+
+- `luPopoverOpened` - Emitted when popover opens
+- `luPopoverClosed` - Emitted when popover closes
+
+## Common Patterns
+
+### Info Popover
+```html
+<button luButton="ghost" [luPopover]="helpContent">
+  <lu-icon icon="infoCircle" alt="Help" />
+</button>
+
+<ng-template #helpContent>
+  <h4>How it works</h4>
+  <p>Detailed explanation here...</p>
+</ng-template>
+```
+
+### User Card Popover
+```html
+<span [luPopover]="userCard" luPopoverPosition="below">
+  {{ user.name }}
+</span>
+
+<ng-template #userCard>
+  <lu-user-tile [user]="user" />
+</ng-template>
+```
+
+## Accessibility
+
+- Escape closes the popover
+- Focus is managed within popover
+- Trigger is linked via aria attributes

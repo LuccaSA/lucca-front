@@ -1,49 +1,50 @@
-# InlineMessage
+# Inline Message
 
-Components for user data input and validation.
+Component for displaying contextual messages within forms or content.
 
-**Storybook:** `Documentation/Forms/InlineMessage/Angular/Basic`
+**Storybook:** [Documentation/Feedback/InlineMessage/Angular](https://storybook.lucca-front.com)
 
-### Imports
+## Import
 
 ```typescript
 import { InlineMessageComponent } from '@lucca-front/ng/inline-message';
 ```
 
-### Properties
+## Basic Usage
 
-| Property | Type | Default | Description |
-|----------|------|---------|-------------|
-| `state` | `InlineMessageState` | `-` | Inline message state |
-| `size` | `'S' | 'M'` | `-` | Which size should the inline message be? Default, medium or small |
+```html
+<lu-inline-message state="warning">Please review your input.</lu-inline-message>
+```
 
-### CSS Classes
+## Inputs
 
-| Class | Type |
-|-------|------|
-| `.inlineMessage` | Base |
-| `.inlineMessage-content` | Base |
-| `.lucca-icon` | Base |
-| `.mod-S` | Modifier |
-| `.is-success` | State |
-| `.is-warning` | State |
-| `.is-error` | State |
+### `state`
+Type: `'default' | 'success' | 'warning' | 'error'`
 
-### When to use
+```html
+<lu-inline-message state="success">Valid email address.</lu-inline-message>
+<lu-inline-message state="warning">Password is weak.</lu-inline-message>
+<lu-inline-message state="error">This field is required.</lu-inline-message>
+```
 
-- Data entry
-- Forms
-- Configuration
-- Filters
+## With Form Field
 
-### When not to use
+Usually used automatically via `inlineMessage` and `errorInlineMessage` inputs on `lu-form-field`:
 
-- Read-only data display
-- Navigation
+```html
+<lu-form-field 
+  label="Email" 
+  inlineMessage="We'll never share your email"
+  errorInlineMessage="Please enter a valid email">
+  <lu-text-input [(ngModel)]="email" required email />
+</lu-form-field>
+```
 
-### Accessibility
+## Standalone Usage
 
-- Associate each field with a label using for/id
-- Provide explicit error messages
-- Support keyboard navigation
-- Indicate required fields
+```html
+<lu-inline-message state="warning">
+  <lu-icon icon="signWarning" alt="" />
+  Your session will expire in 5 minutes.
+</lu-inline-message>
+```

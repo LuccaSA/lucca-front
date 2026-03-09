@@ -1,132 +1,166 @@
 ---
 name: lucca-front
-description: "Helps developers use the @lucca-front design system library. Covers Angular components (@lucca-front/ng), icons (@lucca-front/icons), SCSS utilities (@lucca-front/scss), and core Prisme components (@lucca/prisme). Use this skill when a developer asks about Lucca UI components, forms, overlays, navigation, data tables, buttons, dialogs, or any front-end design system question — even if they don't mention @lucca-front explicitly."
+description: "Helps Angular developers use the @lucca-front design system library. Covers all Angular components, forms, overlays, navigation, data display, layout, and SCSS utilities. Use this skill when a developer asks about Lucca UI components, forms, dialogs, tables, buttons, responsive design, spacing, or any front-end design system question — even if they don't mention @lucca-front explicitly."
 ---
 
 # @lucca-front — Lucca Front Design System
 
-## Import paths
+## Packages
 
-| Package | Import |
-|---------|--------|
-| Angular Components | `@lucca-front/ng/{component}` |
-| Icons | `@lucca-front/icons` |
-| SCSS Utilities | `@lucca-front/scss` |
-| Prisme Core | `@lucca/prisme/{component}` |
+| Package | Purpose | Skill Reference |
+|---------|---------|-----------------|
+| `@lucca-front/ng/*` | Angular components | [ng/SKILL.md](ng/SKILL.md) |
+| `@lucca-front/scss` | SCSS utilities & tokens | [scss/SKILL.md](scss/SKILL.md) |
+| `@lucca-front/icons` | Icon library | See icon.md |
 
-## How to use this skill
+## Quick Start
 
-Read only the reference file(s) relevant to the question. Use the routing guide below to pick the right one — don't load everything at once.
+### Angular Components
 
-## Routing guide
+```typescript
+// app.config.ts
+import { configureLuDialog } from '@lucca-front/ng/dialog';
 
-### Angular Components (@lucca-front/ng)
-
-| If the question is about… | Read |
-|---------------------------|------|
-| **Actions** (Button, Links) | [ng/references/button.md](ng/references/button.md) |
-| **Feedback** (Callout, CalloutDisclosure, CalloutFeedbackList, CalloutPopover, EmptyState...) | [ng/references/callout.md](ng/references/callout.md) |
-| **Forms** (Select, Checkbox, CheckboxLegacy, DataPresentation, Calendar...) | [ng/references/select.md](ng/references/select.md) |
-| **Integration** (Utilities) | [ng/references/utilities.md](ng/references/utilities.md) |
-| **Intl** (Intl) | [ng/references/intl.md](ng/references/intl.md) |
-| **Listings** (Chip, DataTable, IndexTable, List, Listing...) | [ng/references/chip.md](ng/references/chip.md) |
-| **Loaders** (Gauge, Loading, ProgressBar, Skeleton, SkeletonButton...) | [ng/references/gauge.md](ng/references/gauge.md) |
-| **Navigation** (Breadcrumbs, HorizontalNavigation, MenuSecondary, MobileNavigation, Pagination...) | [ng/references/breadcrumbs.md](ng/references/breadcrumbs.md) |
-| **Overlays** (Dialog, Dropdown, Modal, Popover, Popover2...) | [ng/references/dialog.md](ng/references/dialog.md) |
-| **Structure** (AppLayout, Box, BubbleIcon, BubbleIllustration, Cards...) | [ng/references/applayout.md](ng/references/applayout.md) |
-| **Texts** (Clear, Code, Comment, Icons, Labels...) | [ng/references/clear.md](ng/references/clear.md) |
-| **Toolbox** (Animations, Date, Numbers) | [ng/references/animations.md](ng/references/animations.md) |
-| **Users** (Avatars, Group, Display, Popover, Select...) | [ng/references/avatars.md](ng/references/avatars.md) |
-
-### By component
-
-| Component | Reference |
-|-----------|-----------|
-| Button | [button.md](ng/references/button.md) |
-| Links | [links.md](ng/references/links.md) |
-| Callout | [callout.md](ng/references/callout.md) |
-| CalloutDisclosure | [calloutdisclosure.md](ng/references/calloutdisclosure.md) |
-| CalloutFeedbackList | [calloutfeedbacklist.md](ng/references/calloutfeedbacklist.md) |
-| CalloutPopover | [calloutpopover.md](ng/references/calloutpopover.md) |
-| EmptyState | [emptystate.md](ng/references/emptystate.md) |
-| ErrorPage | [errorpage.md](ng/references/errorpage.md) |
-| MobilePush | [mobilepush.md](ng/references/mobilepush.md) |
-| PlgPush | [plgpush.md](ng/references/plgpush.md) |
-| Select | [select.md](ng/references/select.md) |
-| Checkbox | [checkbox.md](ng/references/checkbox.md) |
-| CheckboxLegacy | [checkboxlegacy.md](ng/references/checkboxlegacy.md) |
-| DataPresentation | [datapresentation.md](ng/references/datapresentation.md) |
-| Calendar | [calendar.md](ng/references/calendar.md) |
-| Select | [select.md](ng/references/select.md) |
-| Date2 | [date2.md](ng/references/date2.md) |
-| Department | [department.md](ng/references/department.md) |
-| EstablishmentSelect | [establishmentselect.md](ng/references/establishmentselect.md) |
-| Examples | [examples.md](ng/references/examples.md) |
-| Checkbox | [checkbox.md](ng/references/checkbox.md) |
-| ColorInput | [colorinput.md](ng/references/colorinput.md) |
-| Date | [date.md](ng/references/date.md) |
-| Fields | [fields.md](ng/references/fields.md) |
-| MultiSelect | [multiselect.md](ng/references/multiselect.md) |
-| Multilanguage | [multilanguage.md](ng/references/multilanguage.md) |
-| Number | [number.md](ng/references/number.md) |
-| NumberFormat | [numberformat.md](ng/references/numberformat.md) |
-| PhoneNumberInput | [phonenumberinput.md](ng/references/phonenumberinput.md) |
-| Radio | [radio.md](ng/references/radio.md) |
-
-*... and 107 more components in ng/references/*
-
-### Icons
-
-| If the question is about… | Read |
-|---------------------------|------|
-| Icons, pictograms, lu-icon, lucca-icon | [icons/references/icons.md](icons/references/icons.md) |
-
-### SCSS
-
-| If the question is about… | Read |
-|---------------------------|------|
-| CSS utilities, mixins, theming, spacing, display | [scss/references/utilities.md](scss/references/utilities.md) |
-
-### Prisme Core
-
-| If the question is about… | Read |
-|---------------------------|------|
-| Button | [prisme/references/button.md](prisme/references/button.md) |
-| Core | [prisme/references/core.md](prisme/references/core.md) |
-| Icon | [prisme/references/icon.md](prisme/references/icon.md) |
-
-## Quick examples
-
-### Button
-
-```html
-<button type="button" luButton>Primary action</button>
-<button type="button" luButton="outlined">Secondary action</button>
-<button type="button" luButton="ghost">Tertiary action</button>
+export const appConfig: ApplicationConfig = {
+  providers: [
+    configureLuDialog(), // Required for dialogs
+  ],
+};
 ```
 
-### Dialog
-
 ```html
-<lu-dialog>
-  <lu-dialog-header>Title</lu-dialog-header>
-  <lu-dialog-content>Content</lu-dialog-content>
-  <lu-dialog-footer>
-    <button luButton>Confirm</button>
-  </lu-dialog-footer>
-</lu-dialog>
+<!-- app.component.html -->
+<router-outlet />
+<lu-toasts /> <!-- Required for toast notifications -->
 ```
 
-### Form Field
+### SCSS Utilities
+
+```scss
+// styles.scss
+@use '@lucca-front/scss/src/main.scss';
+```
 
 ```html
-<lu-form-field label="Email">
-  <lu-text-input [(ngModel)]="email" />
+<!-- Use utility classes -->
+<div class="pr-u-displayFlex pr-u-gap400 pr-u-padding500">
+  ...
+</div>
+```
+
+## How to Use This Skill
+
+This skill is organized by package:
+
+1. **For Angular components** → See [ng/SKILL.md](ng/SKILL.md) with 40 component references
+2. **For SCSS/styling** → See [scss/SKILL.md](scss/SKILL.md) for utilities, mixins, and tokens
+
+**Don't load everything at once.** Read only the specific reference file needed.
+
+## Angular Components Overview
+
+See [ng/SKILL.md](ng/SKILL.md) for complete documentation of:
+- Forms (10 components)
+- Overlays (6 components)
+- Navigation (6 components)
+- Data Display (7 components)
+- Layout & Structure (4 components)
+- Feedback & Status (5 components)
+- Actions & Buttons (2 components)
+
+## SCSS Utilities Overview
+
+See [scss/SKILL.md](scss/SKILL.md) for complete documentation of:
+- Media query mixins (responsive breakpoints)
+- Utility classes (spacing, display, flexbox, grid, text)
+- Design tokens (CSS custom properties)
+- Configuration options
+
+## Quick Examples
+
+### Complete Form
+```html
+<lu-form-field 
+  label="Email" 
+  errorInlineMessage="Please enter a valid email">
+  <lu-text-input [(ngModel)]="email" required email />
 </lu-form-field>
 ```
 
-### Icon
-
-```html
-<lu-icon icon="heart" alt="Favorite" />
+### Responsive Layout with SCSS
+```scss
+.container {
+  padding: var(--spacings-400);
+  
+  @include media.minWidth('M') {
+    padding: var(--spacings-600);
+    max-width: 1200px;
+  }
+}
 ```
+
+### Dialog with Button
+```html
+<button luButton [luDialogOpen]="dialog">Open</button>
+
+<ng-template #dialog>
+  <lu-dialog>
+    <lu-dialog-header><h1>Title</h1></lu-dialog-header>
+    <lu-dialog-content>Content...</lu-dialog-content>
+    <lu-dialog-footer>
+      <button luButton>Confirm</button>
+    </lu-dialog-footer>
+  </lu-dialog>
+</ng-template>
+```
+
+### Data Table with Utilities
+```html
+<div class="pr-u-padding500">
+  <lu-data-table hover>
+    <lu-data-table-head>
+      <lu-data-table-cell-header>Name</lu-data-table-cell-header>
+    </lu-data-table-head>
+    <lu-data-table-body>
+      @for (item of items; track item.id) {
+        <lu-data-table-row>
+          <lu-data-table-cell>{{ item.name }}</lu-data-table-cell>
+        </lu-data-table-row>
+      }
+    </lu-data-table-body>
+  </lu-data-table>
+</div>
+```
+
+## Key Concepts
+
+### Palettes
+Most components support `palette` input:
+- `'none'` - Default/inherit
+- `'product'` - Brand colors
+- `'success'`, `'warning'`, `'critical'` - Semantic colors
+
+### Sizes
+Common size values: `'XS'`, `'S'`, `'M'` (default), `'L'`, `'XL'`
+
+### Responsive Breakpoints
+- `XS`: 0px (mobile)
+- `S`: 480px
+- `M`: 768px (tablet)
+- `L`: 1024px (desktop)
+- `XL`: 1280px
+
+### Design Tokens
+```scss
+var(--spacings-400)    // 1rem spacing
+var(--palettes-primary-500)  // Primary color
+var(--radii-m)         // Medium border radius
+```
+
+## All References
+
+### Angular Components (40 total)
+See [ng/references/](ng/references/) for individual component documentation.
+
+### SCSS Utilities
+See [scss/references/utilities.md](scss/references/utilities.md) for complete SCSS documentation.

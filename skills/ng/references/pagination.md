@@ -1,52 +1,155 @@
 # Pagination
 
-Components for application navigation.
+Navigation component for paginated data.
 
-**Storybook:** `Documentation/Navigation/Pagination/Angular`
+**Storybook:** [Documentation/Navigation/Pagination/Angular](https://storybook.lucca-front.com)
 
-### Imports
+## Import
 
 ```typescript
 import { PaginationComponent } from '@lucca-front/ng/pagination';
 ```
 
-### Properties
+## Basic Usage
 
-| Property | Type | Default | Description |
-|----------|------|---------|-------------|
-| `from` | `number | null` | `-` | Where the pagination start |
-| `to` | `number | null` | `-` | Where the pagination end |
-| `itemsCount` | `number | null` | `-` | Total number of items in the pagination |
-| `mod` | `'default' | 'compact'` | `default` | Pagination mod (default or compact) |
+```html
+<lu-pagination
+  [from]="from"
+  [to]="to"
+  [itemsCount]="total"
+  [isFirstPage]="page === 1"
+  [isLastPage]="page === lastPage"
+  (previousPage)="goToPrevious()"
+  (nextPage)="goToNext()" />
+```
 
-### CSS Classes
+## Inputs
 
-| Class | Type |
-|-------|------|
-| `.pagination` | Base |
-| `.pagination-count` | Base |
-| `.pagination-count-current` | Base |
-| `.mod-onlyIcon` | Modifier |
-| `.mod-ghost` | Modifier |
-| `.mod-S` | Modifier |
-| `.mod-compact` | Modifier |
-| `.is-active` | State |
-| `.is-ellipsis` | State |
+### `from`
+Type: `number | null`
 
-### When to use
+Starting index of current page items (1-based).
 
-- Page navigation
-- Menus
-- Breadcrumbs
-- Pagination
+### `to`
+Type: `number | null`
 
-### When not to use
+Ending index of current page items.
 
-- Actions (use Button)
-- Data display
+### `itemsCount`
+Type: `number | null`
 
-### Accessibility
+Total number of items across all pages.
 
-- Use appropriate nav landmarks
-- Indicate current page with aria-current
-- Support keyboard navigation
+### `isFirstPage`
+Type: `boolean` (default: `false`)
+
+Disables the previous page button.
+
+### `isLastPage`
+Type: `boolean` (default: `false`)
+
+Disables the next page button.
+
+### `mod`
+Type: `'default' | 'compact'` (default: `'default'`)
+
+Display mode. Compact mode doesn't show item counts.
+
+```html
+<!-- Compact mode (no counts) -->
+<lu-pagination
+  mod="compact"
+  [isFirstPage]="page === 1"
+  [isLastPage]="page === lastPage"
+  (previousPage)="goToPrevious()"
+  (nextPage)="goToNext()" />
+```
+
+## Outputs
+
+### `previousPage`
+Type: `EventEmitter<void>`
+
+Emitted when previous button is clicked.
+
+### `nextPage`
+Type: `EventEmitter<void>`
+
+Emitted when next button is clicked.
+
+## Common Patterns
+
+### With Data Table
+```typescript
+@Component({...})
+export class MyComponent {
+  page = 1;
+  pageSize = 10;
+  total = 0;
+  items: Item[] = [];
+
+  get from(): number {
+    return (this.page - 1) * this.pageSize + 1;
+  }
+
+  get to(): number {
+    return Math.min(this.page * this.pageSize, this.total);
+  }
+
+  get lastPage(): number {
+    return Math.ceil(this.total / this.pageSize);
+  }
+
+  goToPrevious(): void {
+    if (this.page > 1) {
+      this.page--;
+      this.loadData();
+    }
+  }
+
+  goToNext(): void {
+    if (this.page < this.lastPage) {
+      this.page++;
+      this.loadData();
+    }
+  }
+
+  loadData(): void {
+    this.service.getItems(this.page, this.pageSize).subscribe(result => {
+      this.items = result.items;
+      this.total = result.total;
+    });
+  }
+}
+```
+
+```html
+<lu-data-table [data]="items">
+  <!-- columns -->
+</lu-data-table>
+
+<lu-pagination
+  [from]="from"
+  [to]="to"
+  [itemsCount]="total"
+  [isFirstPage]="page === 1"
+  [isLastPage]="page === lastPage"
+  (previousPage)="goToPrevious()"
+  (nextPage)="goToNext()" />
+```
+
+### Compact Mode for Small Spaces
+```html
+<lu-pagination
+  mod="compact"
+  [isFirstPage]="currentIndex === 0"
+  [isLastPage]="currentIndex === items.length - 1"
+  (previousPage)="currentIndex = currentIndex - 1"
+  (nextPage)="currentIndex = currentIndex + 1" />
+```
+
+## Accessibility
+
+- Previous/next buttons are keyboard accessible
+- Buttons announce their state to screen readers
+- Disabled state is properly communicated
