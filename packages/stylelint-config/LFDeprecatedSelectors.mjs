@@ -68,8 +68,9 @@ export default [
 		versionDeprecated: '18.2.0',
 		versionDeleted: '20.1.0',
 	},
+	// SEE https://regex101.com/r/1EfDam
 	{
-		objectPattern: [/\.table-head-row-cell-sortableButton/, /\.indexTable-head-row-cell-sortableButton/],
+		objectPattern: [/\.(indexT|t)able-head-row-cell-sortableButton/],
 		versionDeprecated: '18.2.0',
 		versionDeleted: '20.1.0',
 	},
