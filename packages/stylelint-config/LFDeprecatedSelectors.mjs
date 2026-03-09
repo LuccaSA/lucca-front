@@ -33,7 +33,7 @@ export default [
 	// Any occurrence of one of these selectors in any part of a selector
 	// SEE https://regex101.com/r/VHfdte.
 	{
-		objectPattern: [/\.user-info/, /\.user-tile-(title|label|footnote)/, /\.picture/],
+		objectPattern: [/\.user-info/, /\.user-tile(-(title|label|footnote))?/, /\.picture/],
 		versionDeleted: '20.1.0',
 	},
 	{
