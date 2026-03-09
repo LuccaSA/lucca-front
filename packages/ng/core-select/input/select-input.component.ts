@@ -21,7 +21,7 @@ import {
 	Type,
 	ViewChild,
 } from '@angular/core';
-import { outputFromObservable } from '@angular/core/rxjs-interop';
+import { outputFromObservable, toSignal } from '@angular/core/rxjs-interop';
 import { ControlValueAccessor } from '@angular/forms';
 import { PortalContent } from '@lucca-front/ng/core';
 import { FILTER_PILL_HOST_COMPONENT, FILTER_PILL_INPUT_COMPONENT, FilterPillInputComponent } from '@lucca-front/ng/filter-pills';
@@ -73,7 +73,7 @@ export abstract class ALuSelectInputComponent<TOption, TValue> implements OnDest
 	public placeholder$ = new BehaviorSubject('');
 
 	public disabled$ = new BehaviorSubject(false);
-	filterPillDisabled = computed(() => this.disabled$.value);
+	filterPillDisabled = toSignal(this.disabled$, { initialValue: false });
 
 	prefix = input<PortalContent | null>(null);
 

@@ -115,4 +115,15 @@ export function runALuSelectInputComponentTestSuite<TValue>(config: LuSelectInpu
 		expect(component.isPanelOpen).toBe(false);
 		expect(clueChangeSpy).not.toHaveBeenCalled();
 	});
+
+	it('should update filter pill disabled signal when disabled state changes', () => {
+		// Assert initial state
+		expect(component.filterPillDisabled?.()).toBe(false);
+
+		// Act
+		component.setDisabledState(true);
+
+		// Assert
+		expect(component.filterPillDisabled?.()).toBe(true);
+	});
 }
