@@ -45,12 +45,12 @@ export class LuCoreSelectDepartmentsDirective<T extends ILuDepartment = ILuDepar
 
 	protected override getOptions(params: Record<string, string | number | boolean> | null): Observable<TreeNode<T>[]> {
 		return this.httpClient
-			.get<TreeNode<T>>(this.url(), {
-				params,
+			.get<{ children?: TreeNode<T>[] }>(this.url(), {
+				params: params ?? {},
 			})
 			.pipe(
 				map((data) => {
-					return data.children;
+					return data.children ?? [];
 				}),
 			);
 	}
@@ -67,7 +67,7 @@ export class LuCoreSelectDepartmentsDirective<T extends ILuDepartment = ILuDepar
 				}
 				return undefined;
 			})
-			.filter((o) => !!o);
+			.filter((option): option is TreeNode<T> => option !== undefined);
 	}
 
 	protected override params$: Observable<Record<string, string | number | boolean>> = toObservable(
@@ -93,8 +93,9 @@ export class LuCoreSelectDepartmentsDirective<T extends ILuDepartment = ILuDepar
 
 	protected flattenTree(branch: TreeNode<T>): T[] {
 		const result: T[] = [branch.node];
-		if (branch.children.length > 0) {
-			result.push(...branch.children.map((child) => this.flattenTree(child)).flat());
+		const children = branch.children ?? [];
+		if (children.length > 0) {
+			result.push(...children.map((child) => this.flattenTree(child)).flat());
 		}
 		return result;
 	}
