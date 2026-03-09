@@ -77,6 +77,35 @@ describe('LuCoreSelectUsersDirective', () => {
 		httpTestingController.verify();
 	}));
 
+	it('should still load first page when the me request fails', fakeAsync(() => {
+		// Arrange
+		usersDirective.setPageSize(3);
+		simpleSelect.openPanel();
+		fixture.detectChanges();
+
+		const page1 = [createUser(1), createUser(2), createUser(3)];
+
+		tick(MAGIC_OPTION_SCROLL_DELAY);
+
+		// Act
+		const meReq = httpTestingController.expectOne(`/api/v3/users/search?fields=${fields}&id=${CURRENT_USER_ID}`);
+		meReq.flush(null, { status: 500, statusText: 'Server Error' });
+		fixture.detectChanges();
+		tick(MAGIC_OPTION_SCROLL_DELAY);
+
+		const page1Req = httpTestingController.expectOne(`/api/v3/users/search?fields=${fields}&paging=0,3`);
+		page1Req.flush(usersResponse(page1));
+		fixture.detectChanges();
+		tick(MAGIC_OPTION_SCROLL_DELAY);
+
+		// Assert
+		let options: readonly LuCoreSelectUser[] = [];
+		simpleSelect.options$.subscribe((o) => (options = o));
+
+		expect(options).toEqual(page1);
+		httpTestingController.verify();
+	}));
+
 	it('should call search with clue when panel is opened', fakeAsync(() => {
 		// Arrange
 		const clue = 'test';
