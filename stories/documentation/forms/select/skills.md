@@ -1,7 +1,8 @@
 ---
-description: Select component from Lucca Front design system
+description: Composant Select - composants pour la saisie et validation de données utilisateur
 triggers:
   - select
+  - selection
   - color
   - core-select
   - ludisplayer
@@ -20,55 +21,6 @@ triggers:
   - coloroption
   - simple-select
   - lusimpleselectinput
-  - tooltip
-  - lutooltiptrigger
-  - lutooltip
-  - multi-select
-  - lumultiselectinput
-  - lumultidisplayer
-  - lumultiselectcontentdisplayer
-  - lumultiselectcounterdisplayer
-  - lumultiselectdefaultdisplayer
-  - lumultiselectdisplayerinput
-  - lumultiselection
-  - lumultiselectwithselectall
-  - core-select/api
-  - lucoreselectapiv4
-  - lucoreselectapiv3
-  - core-select/department
-  - lucoreselectdepartments
-  - core-select/establishment
-  - lucoreselectestablishments
-  - core-select/job-qualification
-  - lucoreselectjobqualifications
-  - core-select/occupation-category
-  - lucoreselectoccupationcategories
-  - core-select/user
-  - lucoreselectusers
-  - providecoreselectcurrentuserid
-  - lucoreselectuseroption
-  - tree-select
-  - treeselect
-  - clear
-  - input
-  - luinput
-  - luinputdisplayer
-  - option
-  - luoptionitem
-  - luoptionpicker
-  - luselectinput
-  - chip
-  - icon
-  - user
-  - luuserdisplaypipe
-  - luuserpicture
-  - divider
-  - filter-pills
-  - filterbar
-  - filterpill
-  - form
-  - field
-  - control
 figma:
   nodeId: null
   fileKey: null
@@ -82,22 +34,24 @@ alwaysApply: false
 
 ## Description
 
-Select est un composant de la catégorie **Forms** du design system Lucca Front.
+Le composant **Select** fait partie de la catégorie **Forms** du design system Lucca Front.
+
+Composants pour la saisie et validation de données utilisateur.
 
 **Story path:** `Documentation/Forms/ColorPicker`
-
 **Component:** `LuSimpleSelectInputComponent`
+
 
 ## Imports
 
 ```typescript
 import { ColorComponent } from '@lucca-front/ng/color';
-import { LuDisplayerDirective, LuOptionDirective, LuCoreSelectPanelHeaderDirective, LuCoreSelectTotalCountDirective, LuDisabledOptionDirective, LuOptionGroupDirective, TreeGroupingFn, ɵLuOptionOutletDirective, , LuCoreSelectNoClueDirective } from '@lucca-front/ng/core-select';
+import { LuDisplayerDirective, LuOptionDirective, LuCoreSelectPanelHeaderDirective, LuCoreSelectTotalCountDirective, LuDisabledOptionDirective, LuOptionGroupDirective, TreeGroupingFn, ɵLuOptionOutletDirective, LuCoreSelectNoClueDirective } from '@lucca-front/ng/core-select';
 import { FormFieldComponent } from '@lucca-front/ng/form-field';
 import { ColorInputComponent, ColorOption } from '@lucca-front/ng/forms';
 import { LuSimpleSelectInputComponent } from '@lucca-front/ng/simple-select';
 import { LuTooltipTriggerDirective, LuTooltipModule } from '@lucca-front/ng/tooltip';
-import { LuMultiSelectInputComponent, LuMultiDisplayerDirective, LuMultiSelectContentDisplayerComponent, LuMultiSelectCounterDisplayerComponent, LuMultiSelectDefaultDisplayerComponent, LuMultiSelectDisplayerInputDirective, LuMultiSelection, LuMultiSelectWithSelectAllDirective,  } from '@lucca-front/ng/multi-select';
+import { LuMultiSelectInputComponent, LuMultiDisplayerDirective, LuMultiSelectContentDisplayerComponent, LuMultiSelectCounterDisplayerComponent, LuMultiSelectDefaultDisplayerComponent, LuMultiSelectDisplayerInputDirective, LuMultiSelection, LuMultiSelectWithSelectAllDirective } from '@lucca-front/ng/multi-select';
 import { LuCoreSelectApiV4Directive, LuCoreSelectApiV3Directive } from '@lucca-front/ng/core-select/api';
 import { LuCoreSelectDepartmentsDirective } from '@lucca-front/ng/core-select/department';
 import { LuCoreSelectEstablishmentsDirective } from '@lucca-front/ng/core-select/establishment';
@@ -121,29 +75,49 @@ import { FilterBarComponent, FilterPillComponent } from '@lucca-front/ng/filter-
 
 ### Quand utiliser Select
 
-<!-- TODO: Décrire les cas d'usage appropriés -->
+- Saisie de données
+- Formulaires
+- Configuration
+- Filtres
 
 ### Quand ne pas utiliser
 
-<!-- TODO: Décrire les cas où un autre composant serait plus approprié -->
+- Affichage de données en lecture seule
+- Navigation
 
 ## Exemples
 
 ### Exemple basique
 
 ```html
-<!-- TODO: Ajouter un exemple de code basique -->
+<lu-color-input [colors]=
 ```
 
-### Exemple avancé
+### Autres exemples
 
-```typescript
-<!-- TODO: Ajouter un exemple de code avancé -->
+```html
+<lu-multi-select withSelectAll [totalCount]=
+
+<lu-multi-select #selectRef [clearable]=
 ```
+
+
+## Classes CSS
+
+| Classe | Description |
+|--------|-------------|
+| `.scroll-test` | Classe de base |
+| `.textfield-input` | Classe de base |
+| `.textfield` | Classe de base |
+| `.numericBadge` | Classe de base |
+| `.lu-picker-header` | Classe de base |
 
 ## Accessibilité
 
-<!-- TODO: Documenter les considérations d'accessibilité -->
+- Associer chaque champ à un label avec for/id
+- Fournir des messages d'erreur explicites
+- Supporter la navigation au clavier
+- Indiquer les champs obligatoires
 
 ## Figma
 
@@ -151,4 +125,4 @@ import { FilterBarComponent, FilterPillComponent } from '@lucca-front/ng/filter-
 
 ## Voir aussi
 
-<!-- TODO: Lister les composants liés -->
+<!-- Composants liés à documenter -->

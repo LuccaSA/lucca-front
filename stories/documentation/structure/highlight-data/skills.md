@@ -1,10 +1,16 @@
 ---
-description: Highlight data component from Lucca Front design system
+description: Composant Highlight data - composants pour structurer la mise en page
 triggers:
   - highlight-data
   - highlightdata
   - button
   - link
+  - layout
+  - container
+  - structure
+  - grid
+  - box
+  - card
 figma:
   nodeId: null
   fileKey: null
@@ -18,11 +24,13 @@ alwaysApply: false
 
 ## Description
 
-Highlight data est un composant de la catégorie **Structure** du design system Lucca Front.
+Le composant **Highlight data** fait partie de la catégorie **Structure** du design system Lucca Front.
+
+Composants pour structurer la mise en page.
 
 **Story path:** `Documentation/Structure/Highlight data/Angular/Basic`
-
 **Component:** `HighlightDataComponent`
+
 
 ## Imports
 
@@ -33,33 +41,57 @@ import { LinkComponent } from '@lucca-front/ng/link';
 ```
 
 
+## Propriétés
+
+| Propriété | Type | Défaut | Description |
+|-----------|------|--------|-------------|
+| `size` | `'M' | 'S' | 'XS'` | `-` | Change the size of the Button |
+| `palette` | `Palette` | `none` | Applies a color palette to the Button |
+| `state` | `'default' | 'loading' | 'error' | 'success'` | `default` | Modifies the state of the Button |
+
 ## Utilisation
 
 ### Quand utiliser Highlight data
 
-<!-- TODO: Décrire les cas d'usage appropriés -->
+- Organisation du contenu
+- Mise en page
+- Conteneurs
 
 ### Quand ne pas utiliser
 
-<!-- TODO: Décrire les cas où un autre composant serait plus approprié -->
+- Composants interactifs
 
 ## Exemples
 
 ### Exemple basique
 
 ```html
-<!-- TODO: Ajouter un exemple de code basique -->
+<lu-highlight-data ...>...</lu-highlight-data>
 ```
 
-### Exemple avancé
 
-```typescript
-<!-- TODO: Ajouter un exemple de code avancé -->
-```
+## Classes CSS
+
+| Classe | Description |
+|--------|-------------|
+| `.highlightData` | Classe de base |
+| `.highlightData-content` | Classe de base |
+| `.highlightData-content-title` | Classe de base |
+| `.highlightData-content-value` | Classe de base |
+| `.highlightData-content-action` | Classe de base |
+| `.mod-outlined` | Modificateur outlined |
+| `.mod-valueFirst` | Modificateur valueFirst |
+| `.mod-nested` | Modificateur nested |
+| `.mod-S` | Modificateur S |
+| `.mod-XS` | Modificateur XS |
+| `.mod-light` | Modificateur light |
+| `.mod-dark` | Modificateur dark |
 
 ## Accessibilité
 
-<!-- TODO: Documenter les considérations d'accessibilité -->
+- Utiliser des landmarks appropriés
+- Maintenir un ordre de lecture logique
+- Structurer le contenu de manière sémantique
 
 ## Figma
 
@@ -67,4 +99,4 @@ import { LinkComponent } from '@lucca-front/ng/link';
 
 ## Voir aussi
 
-<!-- TODO: Lister les composants liés -->
+<!-- Composants liés à documenter -->

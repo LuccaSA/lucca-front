@@ -1,5 +1,5 @@
 ---
-description: Sidepanel component from Lucca Front design system
+description: Composant Sidepanel - composants affichés par-dessus le contenu principal
 triggers:
   - sidepanel
   - modal
@@ -8,10 +8,11 @@ triggers:
   - lusidepanel
   - toast
   - lutoasts
-  - lutoastsservice
   - popup
   - overlay
   - layer
+  - dialog
+  - floating
 figma:
   nodeId: null
   fileKey: null
@@ -25,11 +26,13 @@ alwaysApply: false
 
 ## Description
 
-Sidepanel est un composant de la catégorie **Overlays** du design system Lucca Front.
+Le composant **Sidepanel** fait partie de la catégorie **Overlays** du design system Lucca Front.
+
+Composants affichés par-dessus le contenu principal.
 
 **Story path:** `Documentation/Overlays/Sidepanel`
-
 **Component:** `SidepanelStory`
+
 
 ## Imports
 
@@ -44,29 +47,43 @@ import { LuToastsModule, LuToastsService } from '@lucca-front/ng/toast';
 
 ### Quand utiliser Sidepanel
 
-<!-- TODO: Décrire les cas d'usage appropriés -->
+- Confirmations importantes
+- Formulaires contextuels
+- Informations complémentaires
 
 ### Quand ne pas utiliser
 
-<!-- TODO: Décrire les cas où un autre composant serait plus approprié -->
+- Contenu principal de la page
+- Navigation fréquente
 
 ## Exemples
 
 ### Exemple basique
 
 ```html
-<!-- TODO: Ajouter un exemple de code basique -->
+<p>General Kenobi</p>
 ```
 
-### Exemple avancé
+### Autres exemples
 
-```typescript
-<!-- TODO: Ajouter un exemple de code avancé -->
+```html
+<lu-toasts [sources]=
 ```
+
+
+## Classes CSS
+
+| Classe | Description |
+|--------|-------------|
+| `.button` | Classe de base |
+| `.mod-outlined` | Modificateur outlined |
 
 ## Accessibilité
 
-<!-- TODO: Documenter les considérations d'accessibilité -->
+- Gérer le focus trap dans les modales
+- Permettre la fermeture avec Escape
+- Annoncer l'ouverture aux lecteurs d'écran
+- Utiliser aria-modal et role="dialog"
 
 ## Figma
 
@@ -74,4 +91,4 @@ import { LuToastsModule, LuToastsService } from '@lucca-front/ng/toast';
 
 ## Voir aussi
 
-<!-- TODO: Lister les composants liés -->
+<!-- Composants liés à documenter -->

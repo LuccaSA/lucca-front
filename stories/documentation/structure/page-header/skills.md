@@ -1,5 +1,5 @@
 ---
-description: Page header component from Lucca Front design system
+description: Composant Page header - composants pour structurer la mise en page
 triggers:
   - page-header
   - pageheader
@@ -17,6 +17,10 @@ triggers:
   - link
   - tooltip
   - lutooltip
+  - layout
+  - container
+  - structure
+  - grid
 figma:
   nodeId: null
   fileKey: null
@@ -30,7 +34,9 @@ alwaysApply: false
 
 ## Description
 
-Page header est un composant de la catégorie **Structure** du design system Lucca Front.
+Le composant **Page header** fait partie de la catégorie **Structure** du design system Lucca Front.
+
+Composants pour structurer la mise en page.
 
 **Story path:** `Documentation/Structure/PageHeader/Angular/Basic`
 
@@ -54,29 +60,45 @@ import { LuTooltipModule } from '@lucca-front/ng/tooltip';
 
 ### Quand utiliser Page header
 
-<!-- TODO: Décrire les cas d'usage appropriés -->
+- Organisation du contenu
+- Mise en page
+- Conteneurs
 
 ### Quand ne pas utiliser
 
-<!-- TODO: Décrire les cas où un autre composant serait plus approprié -->
+- Composants interactifs
 
 ## Exemples
 
 ### Exemple basique
 
 ```html
-<!-- TODO: Ajouter un exemple de code basique -->
+<lu-page-header ...> ..................... </lu-page-header>
 ```
 
-### Exemple avancé
 
-```typescript
-<!-- TODO: Ajouter un exemple de code avancé -->
-```
+## Classes CSS
+
+| Classe | Description |
+|--------|-------------|
+| `.horizontalNavigation-list-item-action` | Classe de base |
+| `.breadcrumbs-list-item-action` | Classe de base |
+| `.pageHeader` | Classe de base |
+| `.pageHeader-content` | Classe de base |
+| `.pageHeader-content-title` | Classe de base |
+| `.mod-onlyIcon` | Modificateur onlyIcon |
+| `.mod-ghost` | Modificateur ghost |
+| `.mod-search` | Modificateur search |
+| `.mod-outline` | Modificateur outline |
+| `.mod-XS` | Modificateur XS |
+| `.mod-withBreadcrumbs` | Modificateur withBreadcrumbs |
+| `.mod-withHorizontalNavigation` | Modificateur withHorizontalNavigation |
 
 ## Accessibilité
 
-<!-- TODO: Documenter les considérations d'accessibilité -->
+- Utiliser des landmarks appropriés
+- Maintenir un ordre de lecture logique
+- Structurer le contenu de manière sémantique
 
 ## Figma
 
@@ -84,4 +106,4 @@ import { LuTooltipModule } from '@lucca-front/ng/tooltip';
 
 ## Voir aussi
 
-<!-- TODO: Lister les composants liés -->
+<!-- Composants liés à documenter -->

@@ -1,5 +1,5 @@
 ---
-description: Callout component from Lucca Front design system
+description: Composant Callout - composants pour communiquer des informations et états à l'utilisateur
 triggers:
   - callout
   - button
@@ -14,6 +14,9 @@ triggers:
   - notification
   - message
   - alert
+  - status
+  - feedback
+  - info
 figma:
   nodeId: null
   fileKey: null
@@ -27,11 +30,13 @@ alwaysApply: false
 
 ## Description
 
-Callout est un composant de la catégorie **Feedback** du design system Lucca Front.
+Le composant **Callout** fait partie de la catégorie **Feedback** du design system Lucca Front.
+
+Composants pour communiquer des informations et états à l'utilisateur.
 
 **Story path:** `Documentation/Feedback/Callout/Angular/AI`
-
 **Component:** `CalloutComponent`
+
 
 ## Imports
 
@@ -44,33 +49,62 @@ import { TextInputComponent } from '@lucca-front/ng/forms';
 ```
 
 
+## Propriétés
+
+| Propriété | Type | Défaut | Description |
+|-----------|------|--------|-------------|
+| `size` | `'M' | 'S' | 'XS'` | `-` | Change the size of the Button |
+| `palette` | `Palette` | `none` | Applies a color palette to the Button |
+| `state` | `'default' | 'loading' | 'error' | 'success'` | `default` | Modifies the state of the Button |
+
 ## Utilisation
 
 ### Quand utiliser Callout
 
-<!-- TODO: Décrire les cas d'usage appropriés -->
+- Messages de succès/erreur
+- Alertes importantes
+- Informations contextuelles
 
 ### Quand ne pas utiliser
 
-<!-- TODO: Décrire les cas où un autre composant serait plus approprié -->
+- Contenu principal
+- Actions utilisateur
 
 ## Exemples
 
 ### Exemple basique
 
 ```html
-<!-- TODO: Ajouter un exemple de code basique -->
+<lu-callout AI iconAlt=
 ```
 
-### Exemple avancé
+### Autres exemples
 
-```typescript
-<!-- TODO: Ajouter un exemple de code avancé -->
+```html
+<lu-callout.........>
+<p>Feedback description</p>... </lu-callout>
 ```
+
+
+## Classes CSS
+
+| Classe | Description |
+|--------|-------------|
+| `.suggestion` | Classe de base |
+| `.suggestion-form-field` | Classe de base |
+| `.suggestion-callout` | Classe de base |
+| `.suggestion-callout-text` | Classe de base |
+| `.suggestion-callout-accept` | Classe de base |
+| `.mod-outlined` | Modificateur outlined |
+| `.mod-ghost` | Modificateur ghost |
+| `.mod-inline` | Modificateur inline |
+| `.mod-AI` | Modificateur AI |
 
 ## Accessibilité
 
-<!-- TODO: Documenter les considérations d'accessibilité -->
+- Utiliser aria-live pour les messages dynamiques
+- Associer le rôle approprié (alert, status)
+- Ne pas reposer uniquement sur la couleur
 
 ## Figma
 
@@ -78,4 +112,4 @@ import { TextInputComponent } from '@lucca-front/ng/forms';
 
 ## Voir aussi
 
-<!-- TODO: Lister les composants liés -->
+<!-- Composants liés à documenter -->

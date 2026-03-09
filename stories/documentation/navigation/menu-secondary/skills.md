@@ -1,11 +1,14 @@
 ---
-description: Menu secondary component from Lucca Front design system
+description: Composant Menu secondary - composants pour la navigation dans l'application
 triggers:
   - menu-secondary
   - menusecondary
   - nav
   - menu
   - navigate
+  - route
+  - link
+  - breadcrumb
 figma:
   nodeId: null
   fileKey: null
@@ -19,7 +22,9 @@ alwaysApply: false
 
 ## Description
 
-Menu secondary est un composant de la catégorie **Navigation** du design system Lucca Front.
+Le composant **Menu secondary** fait partie de la catégorie **Navigation** du design system Lucca Front.
+
+Composants pour la navigation dans l'application.
 
 **Story path:** `Documentation/Navigation/Menu Secondary/Basic`
 
@@ -29,29 +34,42 @@ Menu secondary est un composant de la catégorie **Navigation** du design system
 
 ### Quand utiliser Menu secondary
 
-<!-- TODO: Décrire les cas d'usage appropriés -->
+- Navigation entre pages
+- Menus
+- Fil d'Ariane
+- Pagination
 
 ### Quand ne pas utiliser
 
-<!-- TODO: Décrire les cas où un autre composant serait plus approprié -->
+- Actions (utiliser Button)
+- Affichage de données
 
 ## Exemples
 
 ### Exemple basique
 
 ```html
-<!-- TODO: Ajouter un exemple de code basique -->
+<!-- Voir les stories pour des exemples détaillés -->
 ```
 
-### Exemple avancé
 
-```typescript
-<!-- TODO: Ajouter un exemple de code avancé -->
-```
+## Classes CSS
+
+| Classe | Description |
+|--------|-------------|
+| `.navSide` | Classe de base |
+| `.navSide-wrapper` | Classe de base |
+| `.navSide-mainSection` | Classe de base |
+| `.navSide-item` | Classe de base |
+| `.navSide-item-link` | Classe de base |
+| `.mod-mobileToggle` | Modificateur mobileToggle |
+| `.is-active` | État active |
 
 ## Accessibilité
 
-<!-- TODO: Documenter les considérations d'accessibilité -->
+- Utiliser des landmarks nav appropriés
+- Indiquer la page courante avec aria-current
+- Supporter la navigation au clavier
 
 ## Figma
 
@@ -59,4 +77,4 @@ Menu secondary est un composant de la catégorie **Navigation** du design system
 
 ## Voir aussi
 
-<!-- TODO: Lister les composants liés -->
+<!-- Composants liés à documenter -->

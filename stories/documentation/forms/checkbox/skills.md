@@ -1,11 +1,14 @@
 ---
-description: Checkbox component from Lucca Front design system
+description: Composant Checkbox - composants pour la saisie et validation de données utilisateur
 triggers:
   - checkbox
+  - case-a-cocher
   - input
   - form
   - field
   - control
+  - validation
+  - saisie
 figma:
   nodeId: null
   fileKey: null
@@ -19,7 +22,9 @@ alwaysApply: false
 
 ## Description
 
-Checkbox est un composant de la catégorie **Forms** du design system Lucca Front.
+Le composant **Checkbox** fait partie de la catégorie **Forms** du design system Lucca Front.
+
+Composants pour la saisie et validation de données utilisateur.
 
 **Story path:** `Documentation/Forms/Checkbox/Basic`
 
@@ -29,29 +34,41 @@ Checkbox est un composant de la catégorie **Forms** du design system Lucca Fron
 
 ### Quand utiliser Checkbox
 
-<!-- TODO: Décrire les cas d'usage appropriés -->
+- Saisie de données
+- Formulaires
+- Configuration
+- Filtres
 
 ### Quand ne pas utiliser
 
-<!-- TODO: Décrire les cas où un autre composant serait plus approprié -->
+- Affichage de données en lecture seule
+- Navigation
 
 ## Exemples
 
 ### Exemple basique
 
 ```html
-<!-- TODO: Ajouter un exemple de code basique -->
+<!-- Voir les stories pour des exemples détaillés -->
 ```
 
-### Exemple avancé
 
-```typescript
-<!-- TODO: Ajouter un exemple de code avancé -->
-```
+## Classes CSS
+
+| Classe | Description |
+|--------|-------------|
+| `.formLabel` | Classe de base |
+| `.formLabel-required` | Classe de base |
+| `.formLabel-info` | Classe de base |
+| `.lucca-icon` | Classe de base |
+| `.icon-signHelp` | Classe de base |
 
 ## Accessibilité
 
-<!-- TODO: Documenter les considérations d'accessibilité -->
+- Associer chaque champ à un label avec for/id
+- Fournir des messages d'erreur explicites
+- Supporter la navigation au clavier
+- Indiquer les champs obligatoires
 
 ## Figma
 
@@ -59,4 +76,4 @@ Checkbox est un composant de la catégorie **Forms** du design system Lucca Fron
 
 ## Voir aussi
 
-<!-- TODO: Lister les composants liés -->
+<!-- Composants liés à documenter -->

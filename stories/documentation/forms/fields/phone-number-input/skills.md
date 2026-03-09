@@ -1,5 +1,5 @@
 ---
-description: Phone number input component from Lucca Front design system
+description: Composant Phone number input - composants pour la saisie et validation de données utilisateur
 triggers:
   - phone-number-input
   - phonenumberinput
@@ -10,6 +10,8 @@ triggers:
   - form
   - field
   - control
+  - validation
+  - saisie
 figma:
   nodeId: null
   fileKey: null
@@ -23,7 +25,9 @@ alwaysApply: false
 
 ## Description
 
-Phone number input est un composant de la catégorie **Forms** du design system Lucca Front.
+Le composant **Phone number input** fait partie de la catégorie **Forms** du design system Lucca Front.
+
+Composants pour la saisie et validation de données utilisateur.
 
 **Story path:** `Documentation/Forms/Fields/PhoneNumberField/Angular`
 
@@ -36,33 +40,44 @@ import { PhoneNumberInputComponent } from '@lucca-front/ng/forms/phone-number-in
 ```
 
 
+## Propriétés
+
+| Propriété | Type | Défaut | Description |
+|-----------|------|--------|-------------|
+| `errorInlineMessage` | `PortalContent | null` | `null` | Inline message for when the control is in error state |
+| `inlineMessageState` | `InlineMessageState | null` | `null` | State of the inline message, will be ignored if form state is invalid |
+| `extraDescribedBy` | `string` | `-` | Extra aria-describedby attribute |
+| `counter` | `number` | `0` | Max amount of characters allowed, defaults to 0, which means hidden, no maximum |
+
 ## Utilisation
 
 ### Quand utiliser Phone number input
 
-<!-- TODO: Décrire les cas d'usage appropriés -->
+- Saisie de données
+- Formulaires
+- Configuration
+- Filtres
 
 ### Quand ne pas utiliser
 
-<!-- TODO: Décrire les cas où un autre composant serait plus approprié -->
+- Affichage de données en lecture seule
+- Navigation
 
 ## Exemples
 
 ### Exemple basique
 
 ```html
-<!-- TODO: Ajouter un exemple de code basique -->
+<!-- Voir les stories pour des exemples détaillés -->
 ```
 
-### Exemple avancé
-
-```typescript
-<!-- TODO: Ajouter un exemple de code avancé -->
-```
 
 ## Accessibilité
 
-<!-- TODO: Documenter les considérations d'accessibilité -->
+- Associer chaque champ à un label avec for/id
+- Fournir des messages d'erreur explicites
+- Supporter la navigation au clavier
+- Indiquer les champs obligatoires
 
 ## Figma
 
@@ -70,4 +85,4 @@ import { PhoneNumberInputComponent } from '@lucca-front/ng/forms/phone-number-in
 
 ## Voir aussi
 
-<!-- TODO: Lister les composants liés -->
+<!-- Composants liés à documenter -->

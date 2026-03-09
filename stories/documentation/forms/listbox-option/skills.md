@@ -1,5 +1,5 @@
 ---
-description: Listbox option component from Lucca Front design system
+description: Composant Listbox option - composants pour la saisie et validation de données utilisateur
 triggers:
   - listbox-option
   - listboxoption
@@ -12,6 +12,8 @@ triggers:
   - form
   - field
   - control
+  - validation
+  - saisie
 figma:
   nodeId: null
   fileKey: null
@@ -25,7 +27,9 @@ alwaysApply: false
 
 ## Description
 
-Listbox option est un composant de la catégorie **Forms** du design system Lucca Front.
+Le composant **Listbox option** fait partie de la catégorie **Forms** du design system Lucca Front.
+
+Composants pour la saisie et validation de données utilisateur.
 
 **Story path:** `Documentation/Forms/Listbox Option/Angular/Add option`
 
@@ -39,33 +43,56 @@ import { LoadingComponent } from '@lucca-front/ng/loading';
 ```
 
 
+## Propriétés
+
+| Propriété | Type | Défaut | Description |
+|-----------|------|--------|-------------|
+| `alt` | `string` | `-` | Information conveyed by the screen reader |
+| `size` | `'XXS' | 'XS' | 'S' | 'M' | 'L' | 'XL' | 'XXL'` | `-` | Which size should the icon be? XXS to XXL |
+| `color` | `'primary' | 'secondary' | 'product' | 'error' |...` | `inherit` | Changes the color of the icon (inherit by default) |
+
 ## Utilisation
 
 ### Quand utiliser Listbox option
 
-<!-- TODO: Décrire les cas d'usage appropriés -->
+- Saisie de données
+- Formulaires
+- Configuration
+- Filtres
 
 ### Quand ne pas utiliser
 
-<!-- TODO: Décrire les cas où un autre composant serait plus approprié -->
+- Affichage de données en lecture seule
+- Navigation
 
 ## Exemples
 
 ### Exemple basique
 
 ```html
-<!-- TODO: Ajouter un exemple de code basique -->
+<!-- Voir les stories pour des exemples détaillés -->
 ```
 
-### Exemple avancé
 
-```typescript
-<!-- TODO: Ajouter un exemple de code avancé -->
-```
+## Classes CSS
+
+| Classe | Description |
+|--------|-------------|
+| `.listboxOption` | Classe de base |
+| `.listboxOption-content` | Classe de base |
+| `.listboxOption-content-checkboxField` | Classe de base |
+| `.checkboxField` | Classe de base |
+| `.listboxOption-content-checkboxField-input` | Classe de base |
+| `.mod-add` | Modificateur add |
+| `.mod-select` | Modificateur select |
+| `.is-hovered` | État hovered |
 
 ## Accessibilité
 
-<!-- TODO: Documenter les considérations d'accessibilité -->
+- Associer chaque champ à un label avec for/id
+- Fournir des messages d'erreur explicites
+- Supporter la navigation au clavier
+- Indiquer les champs obligatoires
 
 ## Figma
 
@@ -73,4 +100,4 @@ import { LoadingComponent } from '@lucca-front/ng/loading';
 
 ## Voir aussi
 
-<!-- TODO: Lister les composants liés -->
+<!-- Composants liés à documenter -->

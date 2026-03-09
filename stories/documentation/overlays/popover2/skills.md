@@ -1,5 +1,5 @@
 ---
-description: Popover2 component from Lucca Front design system
+description: Composant Popover2 - composants affichés par-dessus le contenu principal
 triggers:
   - popover2
   - button
@@ -13,6 +13,8 @@ triggers:
   - popup
   - overlay
   - layer
+  - dialog
+  - floating
 figma:
   nodeId: null
   fileKey: null
@@ -26,11 +28,13 @@ alwaysApply: false
 
 ## Description
 
-Popover2 est un composant de la catégorie **Overlays** du design system Lucca Front.
+Le composant **Popover2** fait partie de la catégorie **Overlays** du design system Lucca Front.
+
+Composants affichés par-dessus le contenu principal.
 
 **Story path:** `Documentation/Overlays/Popover2/Angular`
-
 **Component:** `PopoverDirective`
+
 
 ## Imports
 
@@ -43,33 +47,53 @@ import { configureLuPopover, PopoverDirective } from '@lucca-front/ng/popover2';
 ```
 
 
+## Propriétés
+
+| Propriété | Type | Défaut | Description |
+|-----------|------|--------|-------------|
+| `size` | `'M' | 'S' | 'XS'` | `-` | Change the size of the Button |
+| `palette` | `Palette` | `none` | Applies a color palette to the Button |
+| `state` | `'default' | 'loading' | 'error' | 'success'` | `default` | Modifies the state of the Button |
+
 ## Utilisation
 
 ### Quand utiliser Popover2
 
-<!-- TODO: Décrire les cas d'usage appropriés -->
+- Confirmations importantes
+- Formulaires contextuels
+- Informations complémentaires
 
 ### Quand ne pas utiliser
 
-<!-- TODO: Décrire les cas où un autre composant serait plus approprié -->
+- Contenu principal de la page
+- Navigation fréquente
 
 ## Exemples
 
 ### Exemple basique
 
 ```html
-<!-- TODO: Ajouter un exemple de code basique -->
+<!-- Voir les stories pour des exemples détaillés -->
 ```
 
-### Exemple avancé
 
-```typescript
-<!-- TODO: Ajouter un exemple de code avancé -->
-```
+## Classes CSS
+
+| Classe | Description |
+|--------|-------------|
+| `.demo` | Classe de base |
+| `.popover-contentOptional` | Classe de base |
+| `.verticalNavigation` | Classe de base |
+| `.verticalNavigation-list` | Classe de base |
+| `.verticalNavigation-list-item` | Classe de base |
+| `.mod-iconless` | Modificateur iconless |
 
 ## Accessibilité
 
-<!-- TODO: Documenter les considérations d'accessibilité -->
+- Gérer le focus trap dans les modales
+- Permettre la fermeture avec Escape
+- Annoncer l'ouverture aux lecteurs d'écran
+- Utiliser aria-modal et role="dialog"
 
 ## Figma
 
@@ -77,4 +101,4 @@ import { configureLuPopover, PopoverDirective } from '@lucca-front/ng/popover2';
 
 ## Voir aussi
 
-<!-- TODO: Lister les composants liés -->
+<!-- Composants liés à documenter -->

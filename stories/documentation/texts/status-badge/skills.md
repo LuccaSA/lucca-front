@@ -1,11 +1,14 @@
 ---
-description: Status badge component from Lucca Front design system
+description: Composant Status badge - composants pour la typographie et le contenu textuel
 triggers:
   - status-badge
   - statusbadge
   - text
   - typography
   - content
+  - label
+  - badge
+  - tag
 figma:
   nodeId: null
   fileKey: null
@@ -19,7 +22,9 @@ alwaysApply: false
 
 ## Description
 
-Status badge est un composant de la catégorie **Texts** du design system Lucca Front.
+Le composant **Status badge** fait partie de la catégorie **Texts** du design system Lucca Front.
+
+Composants pour la typographie et le contenu textuel.
 
 **Story path:** `Documentation/Texts/StatusBadge/Angular`
 
@@ -31,33 +36,53 @@ import { StatusBadgeComponent } from '@lucca-front/ng/status-badge';
 ```
 
 
+## Propriétés
+
+| Propriété | Type | Défaut | Description |
+|-----------|------|--------|-------------|
+| `size` | `'L' | 'M'` | `M` | Changes the size of the status badge (Medium by default or L) |
+| `palette` | `Palette | null` | `null` | Applies a color palette to the status badge |
+
 ## Utilisation
 
 ### Quand utiliser Status badge
 
-<!-- TODO: Décrire les cas d'usage appropriés -->
+- Mise en forme de texte
+- Labels
+- Badges
+- Tags
 
 ### Quand ne pas utiliser
 
-<!-- TODO: Décrire les cas où un autre composant serait plus approprié -->
+- Actions interactives
+- Formulaires
 
 ## Exemples
 
 ### Exemple basique
 
 ```html
-<!-- TODO: Ajouter un exemple de code basique -->
+<lu-status-badge label=
 ```
 
-### Exemple avancé
 
-```typescript
-<!-- TODO: Ajouter un exemple de code avancé -->
-```
+## Classes CSS
+
+| Classe | Description |
+|--------|-------------|
+| `.statusBadge` | Classe de base |
+| `.mod-L` | Modificateur L |
+| `.palette-product` | Palette product |
+| `.palette-neutral` | Palette neutral |
+| `.palette-success` | Palette success |
+| `.palette-warning` | Palette warning |
+| `.palette-error` | Palette error |
 
 ## Accessibilité
 
-<!-- TODO: Documenter les considérations d'accessibilité -->
+- Utiliser une hiérarchie de titres logique
+- Assurer un contraste de texte suffisant
+- Éviter le texte dans les images
 
 ## Figma
 
@@ -65,4 +90,4 @@ import { StatusBadgeComponent } from '@lucca-front/ng/status-badge';
 
 ## Voir aussi
 
-<!-- TODO: Lister les composants liés -->
+<!-- Composants liés à documenter -->

@@ -1,5 +1,5 @@
 ---
-description: Form label component from Lucca Front design system
+description: Composant Form label - composants pour la saisie et validation de données utilisateur
 triggers:
   - form-label
   - formlabel
@@ -7,6 +7,8 @@ triggers:
   - form
   - field
   - control
+  - validation
+  - saisie
 figma:
   nodeId: null
   fileKey: null
@@ -20,7 +22,9 @@ alwaysApply: false
 
 ## Description
 
-Form label est un composant de la catégorie **Forms** du design system Lucca Front.
+Le composant **Form label** fait partie de la catégorie **Forms** du design system Lucca Front.
+
+Composants pour la saisie et validation de données utilisateur.
 
 **Story path:** `Documentation/Forms/Form Label Basic`
 
@@ -30,29 +34,45 @@ Form label est un composant de la catégorie **Forms** du design system Lucca Fr
 
 ### Quand utiliser Form label
 
-<!-- TODO: Décrire les cas d'usage appropriés -->
+- Saisie de données
+- Formulaires
+- Configuration
+- Filtres
 
 ### Quand ne pas utiliser
 
-<!-- TODO: Décrire les cas où un autre composant serait plus approprié -->
+- Affichage de données en lecture seule
+- Navigation
 
 ## Exemples
 
 ### Exemple basique
 
 ```html
-<!-- TODO: Ajouter un exemple de code basique -->
+<!-- Voir les stories pour des exemples détaillés -->
 ```
 
-### Exemple avancé
 
-```typescript
-<!-- TODO: Ajouter un exemple de code avancé -->
-```
+## Classes CSS
+
+| Classe | Description |
+|--------|-------------|
+| `.formLabel` | Classe de base |
+| `.formLabel-required` | Classe de base |
+| `.formLabel-info` | Classe de base |
+| `.lucca-icon` | Classe de base |
+| `.icon-signHelp` | Classe de base |
+| `.mod-counter` | Modificateur counter |
+| `.mod-S` | Modificateur S |
+| `.mod-XS` | Modificateur XS |
+| `.is-error` | État error |
 
 ## Accessibilité
 
-<!-- TODO: Documenter les considérations d'accessibilité -->
+- Associer chaque champ à un label avec for/id
+- Fournir des messages d'erreur explicites
+- Supporter la navigation au clavier
+- Indiquer les champs obligatoires
 
 ## Figma
 
@@ -60,4 +80,4 @@ Form label est un composant de la catégorie **Forms** du design system Lucca Fr
 
 ## Voir aussi
 
-<!-- TODO: Lister les composants liés -->
+<!-- Composants liés à documenter -->

@@ -1,5 +1,5 @@
 ---
-description: Table of content component from Lucca Front design system
+description: Composant Table of content - composants pour la navigation dans l'application
 triggers:
   - table-of-content
   - tableofcontent
@@ -7,6 +7,9 @@ triggers:
   - nav
   - menu
   - navigate
+  - route
+  - link
+  - breadcrumb
 figma:
   nodeId: null
   fileKey: null
@@ -20,7 +23,9 @@ alwaysApply: false
 
 ## Description
 
-Table of content est un composant de la catégorie **Navigation** du design system Lucca Front.
+Le composant **Table of content** fait partie de la catégorie **Navigation** du design system Lucca Front.
+
+Composants pour la navigation dans l'application.
 
 **Story path:** `Documentation/Navigation/TableOfContent/Angular/Basic`
 
@@ -36,29 +41,40 @@ import { TableOfContentComponent, TableOfContentLinkDirective } from '@lucca-fro
 
 ### Quand utiliser Table of content
 
-<!-- TODO: Décrire les cas d'usage appropriés -->
+- Navigation entre pages
+- Menus
+- Fil d'Ariane
+- Pagination
 
 ### Quand ne pas utiliser
 
-<!-- TODO: Décrire les cas où un autre composant serait plus approprié -->
+- Actions (utiliser Button)
+- Affichage de données
 
 ## Exemples
 
 ### Exemple basique
 
 ```html
-<!-- TODO: Ajouter un exemple de code basique -->
+<!-- Voir les stories pour des exemples détaillés -->
 ```
 
-### Exemple avancé
 
-```typescript
-<!-- TODO: Ajouter un exemple de code avancé -->
-```
+## Classes CSS
+
+| Classe | Description |
+|--------|-------------|
+| `.tableOfContent` | Classe de base |
+| `.tableOfContent-list` | Classe de base |
+| `.tableOfContent-list-item` | Classe de base |
+| `.tableOfContent-list-item-action` | Classe de base |
+| `.is-active` | État active |
 
 ## Accessibilité
 
-<!-- TODO: Documenter les considérations d'accessibilité -->
+- Utiliser des landmarks nav appropriés
+- Indiquer la page courante avec aria-current
+- Supporter la navigation au clavier
 
 ## Figma
 
@@ -66,4 +82,4 @@ import { TableOfContentComponent, TableOfContentLinkDirective } from '@lucca-fro
 
 ## Voir aussi
 
-<!-- TODO: Lister les composants liés -->
+<!-- Composants liés à documenter -->

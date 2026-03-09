@@ -1,5 +1,5 @@
 ---
-description: Department component from Lucca Front design system
+description: Composant Department - composants pour la saisie et validation de données utilisateur
 triggers:
   - department
   - ludepartmentselectinput
@@ -7,6 +7,8 @@ triggers:
   - form
   - field
   - control
+  - validation
+  - saisie
 figma:
   nodeId: null
   fileKey: null
@@ -20,11 +22,13 @@ alwaysApply: false
 
 ## Description
 
-Department est un composant de la catégorie **Forms** du design system Lucca Front.
+Le composant **Department** fait partie de la catégorie **Forms** du design system Lucca Front.
+
+Composants pour la saisie et validation de données utilisateur.
 
 **Story path:** `Documentation/Forms/DepartmentSelect`
-
 **Component:** `DepartmentStory`
+
 
 ## Imports
 
@@ -37,29 +41,40 @@ import { LuDepartmentSelectInputComponent } from '@lucca-front/ng/department';
 
 ### Quand utiliser Department
 
-<!-- TODO: Décrire les cas d'usage appropriés -->
+- Saisie de données
+- Formulaires
+- Configuration
+- Filtres
 
 ### Quand ne pas utiliser
 
-<!-- TODO: Décrire les cas où un autre composant serait plus approprié -->
+- Affichage de données en lecture seule
+- Navigation
 
 ## Exemples
 
 ### Exemple basique
 
 ```html
-<!-- TODO: Ajouter un exemple de code basique -->
+<!-- Voir les stories pour des exemples détaillés -->
 ```
 
-### Exemple avancé
 
-```typescript
-<!-- TODO: Ajouter un exemple de code avancé -->
-```
+## Classes CSS
+
+| Classe | Description |
+|--------|-------------|
+| `.textfield` | Classe de base |
+| `.textfield-input` | Classe de base |
+| `.textfield-label` | Classe de base |
+| `.mod-inline` | Modificateur inline |
 
 ## Accessibilité
 
-<!-- TODO: Documenter les considérations d'accessibilité -->
+- Associer chaque champ à un label avec for/id
+- Fournir des messages d'erreur explicites
+- Supporter la navigation au clavier
+- Indiquer les champs obligatoires
 
 ## Figma
 
@@ -67,4 +82,4 @@ import { LuDepartmentSelectInputComponent } from '@lucca-front/ng/department';
 
 ## Voir aussi
 
-<!-- TODO: Lister les composants liés -->
+<!-- Composants liés à documenter -->

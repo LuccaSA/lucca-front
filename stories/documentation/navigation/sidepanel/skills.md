@@ -1,5 +1,5 @@
 ---
-description: Sidepanel component from Lucca Front design system
+description: Composant Sidepanel - composants pour la navigation dans l'application
 triggers:
   - sidepanel
   - modal
@@ -9,6 +9,9 @@ triggers:
   - nav
   - menu
   - navigate
+  - route
+  - link
+  - breadcrumb
 figma:
   nodeId: null
   fileKey: null
@@ -22,11 +25,13 @@ alwaysApply: false
 
 ## Description
 
-Sidepanel est un composant de la catégorie **Navigation** du design system Lucca Front.
+Le composant **Sidepanel** fait partie de la catégorie **Navigation** du design system Lucca Front.
+
+Composants pour la navigation dans l'application.
 
 **Story path:** `Documentation/Navigation/Sidepanel`
-
 **Component:** `SidePanelStory`
+
 
 ## Imports
 
@@ -40,29 +45,43 @@ import { LuSidepanel, LuSidepanelModule, ILuSidepanelContent } from '@lucca-fron
 
 ### Quand utiliser Sidepanel
 
-<!-- TODO: Décrire les cas d'usage appropriés -->
+- Navigation entre pages
+- Menus
+- Fil d'Ariane
+- Pagination
 
 ### Quand ne pas utiliser
 
-<!-- TODO: Décrire les cas où un autre composant serait plus approprié -->
+- Actions (utiliser Button)
+- Affichage de données
 
 ## Exemples
 
 ### Exemple basique
 
 ```html
-<!-- TODO: Ajouter un exemple de code basique -->
+<p>General Kenobi</p>
 ```
 
-### Exemple avancé
+### Autres exemples
 
-```typescript
-<!-- TODO: Ajouter un exemple de code avancé -->
+```html
+<h1>Sidepanels</h1>
+<button type=
 ```
+
+
+## Classes CSS
+
+| Classe | Description |
+|--------|-------------|
+| `.button` | Classe de base |
 
 ## Accessibilité
 
-<!-- TODO: Documenter les considérations d'accessibilité -->
+- Utiliser des landmarks nav appropriés
+- Indiquer la page courante avec aria-current
+- Supporter la navigation au clavier
 
 ## Figma
 
@@ -70,4 +89,4 @@ import { LuSidepanel, LuSidepanelModule, ILuSidepanelContent } from '@lucca-fron
 
 ## Voir aussi
 
-<!-- TODO: Lister les composants liés -->
+<!-- Composants liés à documenter -->

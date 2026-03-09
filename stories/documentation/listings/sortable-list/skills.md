@@ -1,5 +1,5 @@
 ---
-description: Sortable list component from Lucca Front design system
+description: Composant Sortable list - composants pour afficher des listes et collections de données
 triggers:
   - sortable-list
   - sortablelist
@@ -10,6 +10,8 @@ triggers:
   - table
   - data
   - grid
+  - collection
+  - items
 figma:
   nodeId: null
   fileKey: null
@@ -23,11 +25,13 @@ alwaysApply: false
 
 ## Description
 
-Sortable list est un composant de la catégorie **Listings** du design system Lucca Front.
+Le composant **Sortable list** fait partie de la catégorie **Listings** du design system Lucca Front.
+
+Composants pour afficher des listes et collections de données.
 
 **Story path:** `Documentation/Listings/Sortable List/Angular/Basic`
-
 **Component:** `SortableListDraggableStory`
+
 
 ## Imports
 
@@ -41,29 +45,39 @@ import { LuTooltipModule } from '@lucca-front/ng/tooltip';
 
 ### Quand utiliser Sortable list
 
-<!-- TODO: Décrire les cas d'usage appropriés -->
+- Affichage de collections
+- Tableaux de données
+- Listes d'éléments
 
 ### Quand ne pas utiliser
 
-<!-- TODO: Décrire les cas où un autre composant serait plus approprié -->
+- Élément unique
+- Formulaires
 
 ## Exemples
 
 ### Exemple basique
 
 ```html
-<!-- TODO: Ajouter un exemple de code basique -->
+<!-- Voir les stories pour des exemples détaillés -->
 ```
 
-### Exemple avancé
 
-```typescript
-<!-- TODO: Ajouter un exemple de code avancé -->
-```
+## Classes CSS
+
+| Classe | Description |
+|--------|-------------|
+| `.sortableList-item-handler` | Classe de base |
+| `.button` | Classe de base |
+| `.lucca-icon` | Classe de base |
+| `.icon-drag` | Classe de base |
+| `.sortableList-item-content` | Classe de base |
 
 ## Accessibilité
 
-<!-- TODO: Documenter les considérations d'accessibilité -->
+- Utiliser des structures sémantiques (table, ul, ol)
+- Fournir des en-têtes pour les tableaux
+- Supporter le tri et la pagination accessibles
 
 ## Figma
 
@@ -71,4 +85,4 @@ import { LuTooltipModule } from '@lucca-front/ng/tooltip';
 
 ## Voir aussi
 
-<!-- TODO: Lister les composants liés -->
+<!-- Composants liés à documenter -->

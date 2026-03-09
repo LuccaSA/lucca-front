@@ -1,5 +1,5 @@
 ---
-description: File toolbar component from Lucca Front design system
+description: Composant File toolbar - composants pour la saisie et validation de données utilisateur
 triggers:
   - file-toolbar
   - filetoolbar
@@ -11,6 +11,8 @@ triggers:
   - form
   - field
   - control
+  - validation
+  - saisie
 figma:
   nodeId: null
   fileKey: null
@@ -24,7 +26,9 @@ alwaysApply: false
 
 ## Description
 
-File toolbar est un composant de la catégorie **Forms** du design system Lucca Front.
+Le composant **File toolbar** fait partie de la catégorie **Forms** du design system Lucca Front.
+
+Composants pour la saisie et validation de données utilisateur.
 
 **Story path:** `Documentation/File/FileToolbar/HTML&CSS/Basic`
 
@@ -38,33 +42,53 @@ import { LuTooltipModule } from '@lucca-front/ng/tooltip';
 ```
 
 
+## Propriétés
+
+| Propriété | Type | Défaut | Description |
+|-----------|------|--------|-------------|
+| `size` | `'M' | 'S' | 'XS'` | `-` | Change the size of the Button |
+| `palette` | `Palette` | `none` | Applies a color palette to the Button |
+| `state` | `'default' | 'loading' | 'error' | 'success'` | `default` | Modifies the state of the Button |
+
 ## Utilisation
 
 ### Quand utiliser File toolbar
 
-<!-- TODO: Décrire les cas d'usage appropriés -->
+- Saisie de données
+- Formulaires
+- Configuration
+- Filtres
 
 ### Quand ne pas utiliser
 
-<!-- TODO: Décrire les cas où un autre composant serait plus approprié -->
+- Affichage de données en lecture seule
+- Navigation
 
 ## Exemples
 
 ### Exemple basique
 
 ```html
-<!-- TODO: Ajouter un exemple de code basique -->
+<!-- Voir les stories pour des exemples détaillés -->
 ```
 
-### Exemple avancé
 
-```typescript
-<!-- TODO: Ajouter un exemple de code avancé -->
-```
+## Classes CSS
+
+| Classe | Description |
+|--------|-------------|
+| `.fileToolbar-list-item` | Classe de base |
+| `.fileToolbar-list-item-button` | Classe de base |
+| `.fileToolbar-list-item-button-icon` | Classe de base |
+| `.fileToolbar` | Classe de base |
+| `.fileToolbar-list` | Classe de base |
 
 ## Accessibilité
 
-<!-- TODO: Documenter les considérations d'accessibilité -->
+- Associer chaque champ à un label avec for/id
+- Fournir des messages d'erreur explicites
+- Supporter la navigation au clavier
+- Indiquer les champs obligatoires
 
 ## Figma
 
@@ -72,4 +96,4 @@ import { LuTooltipModule } from '@lucca-front/ng/tooltip';
 
 ## Voir aussi
 
-<!-- TODO: Lister les composants liés -->
+<!-- Composants liés à documenter -->

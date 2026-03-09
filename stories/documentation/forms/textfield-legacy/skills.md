@@ -1,5 +1,5 @@
 ---
-description: Textfield legacy component from Lucca Front design system
+description: Composant Textfield legacy - composants pour la saisie et validation de données utilisateur
 triggers:
   - textfield-legacy
   - textfieldlegacy
@@ -7,6 +7,8 @@ triggers:
   - form
   - field
   - control
+  - validation
+  - saisie
 figma:
   nodeId: null
   fileKey: null
@@ -20,7 +22,9 @@ alwaysApply: false
 
 ## Description
 
-Textfield legacy est un composant de la catégorie **Forms** du design system Lucca Front.
+Le composant **Textfield legacy** fait partie de la catégorie **Forms** du design system Lucca Front.
+
+Composants pour la saisie et validation de données utilisateur.
 
 **Story path:** `Documentation/Forms/Textfield Legacy/Basic`
 
@@ -30,29 +34,52 @@ Textfield legacy est un composant de la catégorie **Forms** du design system Lu
 
 ### Quand utiliser Textfield legacy
 
-<!-- TODO: Décrire les cas d'usage appropriés -->
+- Saisie de données
+- Formulaires
+- Configuration
+- Filtres
 
 ### Quand ne pas utiliser
 
-<!-- TODO: Décrire les cas où un autre composant serait plus approprié -->
+- Affichage de données en lecture seule
+- Navigation
 
 ## Exemples
 
 ### Exemple basique
 
 ```html
-<!-- TODO: Ajouter un exemple de code basique -->
+<!-- Voir les stories pour des exemples détaillés -->
 ```
 
-### Exemple avancé
 
-```typescript
-<!-- TODO: Ajouter un exemple de code avancé -->
-```
+## Classes CSS
+
+| Classe | Description |
+|--------|-------------|
+| `.textfield-label` | Classe de base |
+| `.textfield` | Classe de base |
+| `.textfield-input` | Classe de base |
+| `.clear` | Classe de base |
+| `.textfield-clear` | Classe de base |
+| `.mod-clearable` | Modificateur clearable |
+| `.mod-filter` | Modificateur filter |
+| `.mod-multiline` | Modificateur multiline |
+| `.mod-password` | Modificateur password |
+| `.mod-radio` | Modificateur radio |
+| `.mod-search` | Modificateur search |
+| `.mod-withSuffix` | Modificateur withSuffix |
+| `.is-loading` | État loading |
+| `.is-valid` | État valid |
+| `.is-invalid` | État invalid |
+| `.is-error` | État error |
 
 ## Accessibilité
 
-<!-- TODO: Documenter les considérations d'accessibilité -->
+- Associer chaque champ à un label avec for/id
+- Fournir des messages d'erreur explicites
+- Supporter la navigation au clavier
+- Indiquer les champs obligatoires
 
 ## Figma
 
@@ -60,4 +87,4 @@ Textfield legacy est un composant de la catégorie **Forms** du design system Lu
 
 ## Voir aussi
 
-<!-- TODO: Lister les composants liés -->
+<!-- Composants liés à documenter -->

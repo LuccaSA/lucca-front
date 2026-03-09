@@ -1,5 +1,5 @@
 ---
-description: Multi select component from Lucca Front design system
+description: Composant Multi select - composants pour la saisie et validation de données utilisateur
 triggers:
   - multi-select
   - multiselect
@@ -12,6 +12,8 @@ triggers:
   - form
   - field
   - control
+  - validation
+  - saisie
 figma:
   nodeId: null
   fileKey: null
@@ -25,7 +27,9 @@ alwaysApply: false
 
 ## Description
 
-Multi select est un composant de la catégorie **Forms** du design system Lucca Front.
+Le composant **Multi select** fait partie de la catégorie **Forms** du design system Lucca Front.
+
+Composants pour la saisie et validation de données utilisateur.
 
 **Story path:** `Documentation/Forms/Fields/Multi Select/Angular`
 
@@ -39,33 +43,42 @@ import { LuMultiSelectInputComponent } from '@lucca-front/ng/multi-select';
 ```
 
 
+## Propriétés
+
+| Propriété | Type | Défaut | Description |
+|-----------|------|--------|-------------|
+| `tooltip` | `string` | `Tooltip message` | - |
+
 ## Utilisation
 
 ### Quand utiliser Multi select
 
-<!-- TODO: Décrire les cas d'usage appropriés -->
+- Saisie de données
+- Formulaires
+- Configuration
+- Filtres
 
 ### Quand ne pas utiliser
 
-<!-- TODO: Décrire les cas où un autre composant serait plus approprié -->
+- Affichage de données en lecture seule
+- Navigation
 
 ## Exemples
 
 ### Exemple basique
 
 ```html
-<!-- TODO: Ajouter un exemple de code basique -->
+<lu-form-field ..., argTypes, )}>
+<lu-multi-select [(ngModel)]=
 ```
 
-### Exemple avancé
-
-```typescript
-<!-- TODO: Ajouter un exemple de code avancé -->
-```
 
 ## Accessibilité
 
-<!-- TODO: Documenter les considérations d'accessibilité -->
+- Associer chaque champ à un label avec for/id
+- Fournir des messages d'erreur explicites
+- Supporter la navigation au clavier
+- Indiquer les champs obligatoires
 
 ## Figma
 
@@ -73,4 +86,4 @@ import { LuMultiSelectInputComponent } from '@lucca-front/ng/multi-select';
 
 ## Voir aussi
 
-<!-- TODO: Lister les composants liés -->
+<!-- Composants liés à documenter -->

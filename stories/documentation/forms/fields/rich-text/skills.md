@@ -1,5 +1,5 @@
 ---
-description: Rich text component from Lucca Front design system
+description: Composant Rich text - composants pour la saisie et validation de données utilisateur
 triggers:
   - rich-text
   - richtext
@@ -21,10 +21,6 @@ triggers:
   - forms/rich-text-input/formatters/plain-text
   - plaintext_tags
   - plaintextformatterwithtags
-  - input
-  - form
-  - field
-  - control
 figma:
   nodeId: null
   fileKey: null
@@ -38,7 +34,9 @@ alwaysApply: false
 
 ## Description
 
-Rich text est un composant de la catégorie **Forms** du design system Lucca Front.
+Le composant **Rich text** fait partie de la catégorie **Forms** du design system Lucca Front.
+
+Composants pour la saisie et validation de données utilisateur.
 
 **Story path:** `Documentation/Forms/Fields/RichTextInput/Angular`
 
@@ -56,33 +54,43 @@ import { PLAINTEXT_TAGS, PlainTextFormatterWithTagsDirective } from '@lucca-fron
 ```
 
 
+## Propriétés
+
+| Propriété | Type | Défaut | Description |
+|-----------|------|--------|-------------|
+| `size` | `'M' | 'S' | 'XS'` | `-` | Change the size of the Button |
+| `palette` | `Palette` | `none` | Applies a color palette to the Button |
+| `state` | `'default' | 'loading' | 'error' | 'success'` | `default` | Modifies the state of the Button |
+
 ## Utilisation
 
 ### Quand utiliser Rich text
 
-<!-- TODO: Décrire les cas d'usage appropriés -->
+- Saisie de données
+- Formulaires
+- Configuration
+- Filtres
 
 ### Quand ne pas utiliser
 
-<!-- TODO: Décrire les cas où un autre composant serait plus approprié -->
+- Affichage de données en lecture seule
+- Navigation
 
 ## Exemples
 
 ### Exemple basique
 
 ```html
-<!-- TODO: Ajouter un exemple de code basique -->
+<!-- Voir les stories pour des exemples détaillés -->
 ```
 
-### Exemple avancé
-
-```typescript
-<!-- TODO: Ajouter un exemple de code avancé -->
-```
 
 ## Accessibilité
 
-<!-- TODO: Documenter les considérations d'accessibilité -->
+- Associer chaque champ à un label avec for/id
+- Fournir des messages d'erreur explicites
+- Supporter la navigation au clavier
+- Indiquer les champs obligatoires
 
 ## Figma
 
@@ -90,4 +98,4 @@ import { PLAINTEXT_TAGS, PlainTextFormatterWithTagsDirective } from '@lucca-fron
 
 ## Voir aussi
 
-<!-- TODO: Lister les composants liés -->
+<!-- Composants liés à documenter -->

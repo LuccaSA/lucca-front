@@ -1,7 +1,13 @@
 ---
-description: Headers component from Lucca Front design system
+description: Composant Headers - composants pour structurer la mise en page
 triggers:
   - headers
+  - layout
+  - container
+  - structure
+  - grid
+  - box
+  - card
 figma:
   nodeId: null
   fileKey: null
@@ -15,7 +21,9 @@ alwaysApply: false
 
 ## Description
 
-Headers est un composant de la catégorie **Structure** du design system Lucca Front.
+Le composant **Headers** fait partie de la catégorie **Structure** du design system Lucca Front.
+
+Composants pour structurer la mise en page.
 
 **Story path:** `Documentation/Structure/Headers/Navigation`
 
@@ -25,29 +33,39 @@ Headers est un composant de la catégorie **Structure** du design system Lucca F
 
 ### Quand utiliser Headers
 
-<!-- TODO: Décrire les cas d'usage appropriés -->
+- Organisation du contenu
+- Mise en page
+- Conteneurs
 
 ### Quand ne pas utiliser
 
-<!-- TODO: Décrire les cas où un autre composant serait plus approprié -->
+- Composants interactifs
 
 ## Exemples
 
 ### Exemple basique
 
 ```html
-<!-- TODO: Ajouter un exemple de code basique -->
+<!-- Voir les stories pour des exemples détaillés -->
 ```
 
-### Exemple avancé
 
-```typescript
-<!-- TODO: Ajouter un exemple de code avancé -->
-```
+## Classes CSS
+
+| Classe | Description |
+|--------|-------------|
+| `.header` | Classe de base |
+| `.header-nav` | Classe de base |
+| `.header-nav-back` | Classe de base |
+| `.header-nav-category` | Classe de base |
+| `.header-nav-title` | Classe de base |
+| `.mod-nav` | Modificateur nav |
 
 ## Accessibilité
 
-<!-- TODO: Documenter les considérations d'accessibilité -->
+- Utiliser des landmarks appropriés
+- Maintenir un ordre de lecture logique
+- Structurer le contenu de manière sémantique
 
 ## Figma
 
@@ -55,4 +73,4 @@ Headers est un composant de la catégorie **Structure** du design system Lucca F
 
 ## Voir aussi
 
-<!-- TODO: Lister les composants liés -->
+<!-- Composants liés à documenter -->

@@ -1,7 +1,8 @@
 ---
-description: Dropdown component from Lucca Front design system
+description: Composant Dropdown - composants affichés par-dessus le contenu principal
 triggers:
   - dropdown
+  - menu-deroulant
   - ludropdown
   - ludropdowntrigger
   - dropdownaction
@@ -17,6 +18,8 @@ triggers:
   - popup
   - overlay
   - layer
+  - dialog
+  - floating
 figma:
   nodeId: null
   fileKey: null
@@ -30,11 +33,13 @@ alwaysApply: false
 
 ## Description
 
-Dropdown est un composant de la catégorie **Overlays** du design system Lucca Front.
+Le composant **Dropdown** fait partie de la catégorie **Overlays** du design system Lucca Front.
+
+Composants affichés par-dessus le contenu principal.
 
 **Story path:** `Documentation/Overlays/Dropdown/Angular/Basic`
-
 **Component:** `DropdownBasicStory`
+
 
 ## Imports
 
@@ -50,29 +55,42 @@ import { PopoverPosition } from '@lucca-front/ng/popover2';
 
 ### Quand utiliser Dropdown
 
-<!-- TODO: Décrire les cas d'usage appropriés -->
+- Confirmations importantes
+- Formulaires contextuels
+- Informations complémentaires
 
 ### Quand ne pas utiliser
 
-<!-- TODO: Décrire les cas où un autre composant serait plus approprié -->
+- Contenu principal de la page
+- Navigation fréquente
 
 ## Exemples
 
 ### Exemple basique
 
 ```html
-<!-- TODO: Ajouter un exemple de code basique -->
+<!-- Voir les stories pour des exemples détaillés -->
 ```
 
-### Exemple avancé
 
-```typescript
-<!-- TODO: Ajouter un exemple de code avancé -->
-```
+## Classes CSS
+
+| Classe | Description |
+|--------|-------------|
+| `.button` | Classe de base |
+| `.dropdown-list-option` | Classe de base |
+| `.dropdown-list-option-action` | Classe de base |
+| `.lucca-icon` | Classe de base |
+| `.icon-eye` | Classe de base |
+| `.mod-critical` | Modificateur critical |
+| `.is-disabled` | État disabled |
 
 ## Accessibilité
 
-<!-- TODO: Documenter les considérations d'accessibilité -->
+- Gérer le focus trap dans les modales
+- Permettre la fermeture avec Escape
+- Annoncer l'ouverture aux lecteurs d'écran
+- Utiliser aria-modal et role="dialog"
 
 ## Figma
 
@@ -80,4 +98,4 @@ import { PopoverPosition } from '@lucca-front/ng/popover2';
 
 ## Voir aussi
 
-<!-- TODO: Lister les composants liés -->
+<!-- Composants liés à documenter -->

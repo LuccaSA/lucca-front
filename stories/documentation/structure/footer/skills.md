@@ -1,8 +1,15 @@
 ---
-description: Footer component from Lucca Front design system
+description: Composant Footer - composants pour structurer la mise en page
 triggers:
   - footer
+  - pied-de-page
   - button
+  - layout
+  - container
+  - structure
+  - grid
+  - box
+  - card
 figma:
   nodeId: null
   fileKey: null
@@ -16,7 +23,9 @@ alwaysApply: false
 
 ## Description
 
-Footer est un composant de la catégorie **Structure** du design system Lucca Front.
+Le composant **Footer** fait partie de la catégorie **Structure** du design system Lucca Front.
+
+Composants pour structurer la mise en page.
 
 **Story path:** `Documentation/Structure/Footer/Angular/Basic`
 
@@ -29,33 +38,52 @@ import { FooterComponent } from '@lucca-front/ng/footer';
 ```
 
 
+## Propriétés
+
+| Propriété | Type | Défaut | Description |
+|-----------|------|--------|-------------|
+| `size` | `'M' | 'S' | 'XS'` | `-` | Change the size of the Button |
+| `palette` | `Palette` | `none` | Applies a color palette to the Button |
+| `state` | `'default' | 'loading' | 'error' | 'success'` | `default` | Modifies the state of the Button |
+
 ## Utilisation
 
 ### Quand utiliser Footer
 
-<!-- TODO: Décrire les cas d'usage appropriés -->
+- Organisation du contenu
+- Mise en page
+- Conteneurs
 
 ### Quand ne pas utiliser
 
-<!-- TODO: Décrire les cas où un autre composant serait plus approprié -->
+- Composants interactifs
 
 ## Exemples
 
 ### Exemple basique
 
 ```html
-<!-- TODO: Ajouter un exemple de code basique -->
+<lu-footer.........>
+<ng-container footerContent> Content </ng-container>
+<button type=
 ```
 
-### Exemple avancé
 
-```typescript
-<!-- TODO: Ajouter un exemple de code avancé -->
-```
+## Classes CSS
+
+| Classe | Description |
+|--------|-------------|
+| `.footer-containerOptional` | Classe de base |
+| `.footer-content` | Classe de base |
+| `.footer-actions` | Classe de base |
+| `.button` | Classe de base |
+| `.mod-outlined` | Modificateur outlined |
 
 ## Accessibilité
 
-<!-- TODO: Documenter les considérations d'accessibilité -->
+- Utiliser des landmarks appropriés
+- Maintenir un ordre de lecture logique
+- Structurer le contenu de manière sémantique
 
 ## Figma
 
@@ -63,4 +91,4 @@ import { FooterComponent } from '@lucca-front/ng/footer';
 
 ## Voir aussi
 
-<!-- TODO: Lister les composants liés -->
+<!-- Composants liés à documenter -->

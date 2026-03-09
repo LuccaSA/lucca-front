@@ -1,5 +1,5 @@
 ---
-description: Horizontal navigation component from Lucca Front design system
+description: Composant Horizontal navigation - composants pour la navigation dans l'application
 triggers:
   - horizontal-navigation
   - horizontalnavigation
@@ -11,6 +11,9 @@ triggers:
   - nav
   - menu
   - navigate
+  - route
+  - link
+  - breadcrumb
 figma:
   nodeId: null
   fileKey: null
@@ -24,7 +27,9 @@ alwaysApply: false
 
 ## Description
 
-Horizontal navigation est un composant de la catégorie **Navigation** du design system Lucca Front.
+Le composant **Horizontal navigation** fait partie de la catégorie **Navigation** du design system Lucca Front.
+
+Composants pour la navigation dans l'application.
 
 **Story path:** `Documentation/Navigation/HorizontalNavigation/Angular`
 
@@ -38,33 +43,58 @@ import { ScrollBoxComponent } from '@lucca-front/ng/scroll-box';
 ```
 
 
+## Propriétés
+
+| Propriété | Type | Défaut | Description |
+|-----------|------|--------|-------------|
+| `size` | `null | 'S'` | `null` | Which size should the horizontal navigation be? Defaults and small |
+
 ## Utilisation
 
 ### Quand utiliser Horizontal navigation
 
-<!-- TODO: Décrire les cas d'usage appropriés -->
+- Navigation entre pages
+- Menus
+- Fil d'Ariane
+- Pagination
 
 ### Quand ne pas utiliser
 
-<!-- TODO: Décrire les cas où un autre composant serait plus approprié -->
+- Actions (utiliser Button)
+- Affichage de données
 
 ## Exemples
 
 ### Exemple basique
 
 ```html
-<!-- TODO: Ajouter un exemple de code basique -->
+<lu-horizontal-navigation...>
+<a *luHorizontalNavigationLink class=
 ```
 
-### Exemple avancé
+### Autres exemples
 
-```typescript
-<!-- TODO: Ajouter un exemple de code avancé -->
+```html
+<lu-scroll-box [attr.style]=
 ```
+
+
+## Classes CSS
+
+| Classe | Description |
+|--------|-------------|
+| `.horizontalNavigation-list-item-action` | Classe de base |
+| `.horizontalNavigation-list` | Classe de base |
+| `.horizontalNavigation-list-item` | Classe de base |
+| `.horizontalNavigation` | Classe de base |
+| `.horizontalNavigation-containerOptional` | Classe de base |
+| `.is-disabled` | État disabled |
 
 ## Accessibilité
 
-<!-- TODO: Documenter les considérations d'accessibilité -->
+- Utiliser des landmarks nav appropriés
+- Indiquer la page courante avec aria-current
+- Supporter la navigation au clavier
 
 ## Figma
 
@@ -72,4 +102,4 @@ import { ScrollBoxComponent } from '@lucca-front/ng/scroll-box';
 
 ## Voir aussi
 
-<!-- TODO: Lister les composants liés -->
+<!-- Composants liés à documenter -->

@@ -1,11 +1,13 @@
 ---
-description: Progress bar component from Lucca Front design system
+description: Composant Progress bar - composants pour indiquer un chargement ou une progression
 triggers:
   - progress-bar
   - progressbar
   - loading
   - spinner
   - progress
+  - wait
+  - skeleton
 figma:
   nodeId: null
   fileKey: null
@@ -19,7 +21,9 @@ alwaysApply: false
 
 ## Description
 
-Progress bar est un composant de la catégorie **Loaders** du design system Lucca Front.
+Le composant **Progress bar** fait partie de la catégorie **Loaders** du design system Lucca Front.
+
+Composants pour indiquer un chargement ou une progression.
 
 **Story path:** `Documentation/Loaders/Progress Bar/Angular/Basic`
 
@@ -31,33 +35,44 @@ import { ProgressBarComponent } from '@lucca-front/ng/progress-bar';
 ```
 
 
+## Propriétés
+
+| Propriété | Type | Défaut | Description |
+|-----------|------|--------|-------------|
+| `state` | `'success' | 'error' | 'null'` | `null` | Progress bar state |
+
 ## Utilisation
 
 ### Quand utiliser Progress bar
 
-<!-- TODO: Décrire les cas d'usage appropriés -->
+- Chargement de données
+- Actions asynchrones
+- Progression
 
 ### Quand ne pas utiliser
 
-<!-- TODO: Décrire les cas où un autre composant serait plus approprié -->
+- Contenu disponible immédiatement
 
 ## Exemples
 
 ### Exemple basique
 
 ```html
-<!-- TODO: Ajouter un exemple de code basique -->
+<!-- Voir les stories pour des exemples détaillés -->
 ```
 
-### Exemple avancé
 
-```typescript
-<!-- TODO: Ajouter un exemple de code avancé -->
-```
+## Classes CSS
+
+| Classe | Description |
+|--------|-------------|
+| `.progress-bar` | Classe de base |
 
 ## Accessibilité
 
-<!-- TODO: Documenter les considérations d'accessibilité -->
+- Annoncer le chargement avec aria-busy
+- Fournir un texte alternatif descriptif
+- Informer de la fin du chargement
 
 ## Figma
 
@@ -65,4 +80,4 @@ import { ProgressBarComponent } from '@lucca-front/ng/progress-bar';
 
 ## Voir aussi
 
-<!-- TODO: Lister les composants liés -->
+<!-- Composants liés à documenter -->

@@ -1,5 +1,5 @@
 ---
-description: Comment component from Lucca Front design system
+description: Composant Comment - composants pour la typographie et le contenu textuel
 triggers:
   - comment
   - commentblock
@@ -9,6 +9,9 @@ triggers:
   - text
   - typography
   - content
+  - label
+  - badge
+  - tag
 figma:
   nodeId: null
   fileKey: null
@@ -22,7 +25,9 @@ alwaysApply: false
 
 ## Description
 
-Comment est un composant de la catégorie **Texts** du design system Lucca Front.
+Le composant **Comment** fait partie de la catégorie **Texts** du design system Lucca Front.
+
+Composants pour la typographie et le contenu textuel.
 
 **Story path:** `Documentation/Texts/Comment/Angular/AI`
 
@@ -39,29 +44,54 @@ import { LuUserPictureModule } from '@lucca-front/ng/user';
 
 ### Quand utiliser Comment
 
-<!-- TODO: Décrire les cas d'usage appropriés -->
+- Mise en forme de texte
+- Labels
+- Badges
+- Tags
 
 ### Quand ne pas utiliser
 
-<!-- TODO: Décrire les cas où un autre composant serait plus approprié -->
+- Actions interactives
+- Formulaires
 
 ## Exemples
 
 ### Exemple basique
 
 ```html
-<!-- TODO: Ajouter un exemple de code basique -->
+<lu-comment-chat>
+<lu-comment-block compact [avatar]=
 ```
 
-### Exemple avancé
+### Autres exemples
 
-```typescript
-<!-- TODO: Ajouter un exemple de code avancé -->
+```html
+<lu-comment-block ... ..., argTypes, )} authorName=
+
+<lu-comment-chat>
+<lu-comment-block ... ..., argTypes, )} authorName=
 ```
+
+
+## Classes CSS
+
+| Classe | Description |
+|--------|-------------|
+| `.comment` | Classe de base |
+| `.comment-infos` | Classe de base |
+| `.avatar` | Classe de base |
+| `.comment-infos-content` | Classe de base |
+| `.comment-infos-name` | Classe de base |
+| `.mod-chatAnswer` | Modificateur chatAnswer |
+| `.mod-noAvatar` | Modificateur noAvatar |
+| `.mod-S` | Modificateur S |
+| `.mod-compact` | Modificateur compact |
 
 ## Accessibilité
 
-<!-- TODO: Documenter les considérations d'accessibilité -->
+- Utiliser une hiérarchie de titres logique
+- Assurer un contraste de texte suffisant
+- Éviter le texte dans les images
 
 ## Figma
 
@@ -69,4 +99,4 @@ import { LuUserPictureModule } from '@lucca-front/ng/user';
 
 ## Voir aussi
 
-<!-- TODO: Lister les composants liés -->
+<!-- Composants liés à documenter -->

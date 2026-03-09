@@ -1,8 +1,14 @@
 ---
-description: App layout component from Lucca Front design system
+description: Composant App layout - composants pour structurer la mise en page
 triggers:
   - app-layout
   - applayout
+  - layout
+  - container
+  - structure
+  - grid
+  - box
+  - card
 figma:
   nodeId: null
   fileKey: null
@@ -16,7 +22,9 @@ alwaysApply: false
 
 ## Description
 
-App layout est un composant de la catégorie **Structure** du design system Lucca Front.
+Le composant **App layout** fait partie de la catégorie **Structure** du design system Lucca Front.
+
+Composants pour structurer la mise en page.
 
 **Story path:** `Documentation/Structure/App Layout/Angular/Basic`
 
@@ -32,29 +40,36 @@ import { AppLayoutComponent } from '@lucca-front/ng/app-layout';
 
 ### Quand utiliser App layout
 
-<!-- TODO: Décrire les cas d'usage appropriés -->
+- Organisation du contenu
+- Mise en page
+- Conteneurs
 
 ### Quand ne pas utiliser
 
-<!-- TODO: Décrire les cas où un autre composant serait plus approprié -->
+- Composants interactifs
 
 ## Exemples
 
 ### Exemple basique
 
 ```html
-<!-- TODO: Ajouter un exemple de code basique -->
+<!-- Voir les stories pour des exemples détaillés -->
 ```
 
-### Exemple avancé
 
-```typescript
-<!-- TODO: Ajouter un exemple de code avancé -->
-```
+## Classes CSS
+
+| Classe | Description |
+|--------|-------------|
+| `.appLayout-banner` | Classe de base |
+| `.appLayout-navSide` | Classe de base |
+| `.appLayout-main` | Classe de base |
 
 ## Accessibilité
 
-<!-- TODO: Documenter les considérations d'accessibilité -->
+- Utiliser des landmarks appropriés
+- Maintenir un ordre de lecture logique
+- Structurer le contenu de manière sémantique
 
 ## Figma
 
@@ -62,4 +77,4 @@ import { AppLayoutComponent } from '@lucca-front/ng/app-layout';
 
 ## Voir aussi
 
-<!-- TODO: Lister les composants liés -->
+<!-- Composants liés à documenter -->

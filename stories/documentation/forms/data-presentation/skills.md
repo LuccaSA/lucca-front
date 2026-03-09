@@ -1,5 +1,5 @@
 ---
-description: Data presentation component from Lucca Front design system
+description: Composant Data presentation - composants pour la saisie et validation de données utilisateur
 triggers:
   - data-presentation
   - datapresentation
@@ -8,6 +8,8 @@ triggers:
   - form
   - field
   - control
+  - validation
+  - saisie
 figma:
   nodeId: null
   fileKey: null
@@ -21,11 +23,13 @@ alwaysApply: false
 
 ## Description
 
-Data presentation est un composant de la catégorie **Forms** du design system Lucca Front.
+Le composant **Data presentation** fait partie de la catégorie **Forms** du design system Lucca Front.
+
+Composants pour la saisie et validation de données utilisateur.
 
 **Story path:** `Documentation/Forms/Data Presentation/Angular/Basic`
-
 **Component:** `DataPresentationComponent`
+
 
 ## Imports
 
@@ -34,33 +38,52 @@ import { DataPresentationComponent } from '@lucca-front/ng/form-field';
 ```
 
 
+## Propriétés
+
+| Propriété | Type | Défaut | Description |
+|-----------|------|--------|-------------|
+| `errorInlineMessage` | `PortalContent | null` | `null` | Inline message for when the control is in error state |
+| `inlineMessageState` | `InlineMessageState | null` | `null` | State of the inline message, will be ignored if form state is invalid |
+| `extraDescribedBy` | `string` | `-` | Extra aria-describedby attribute |
+| `counter` | `number` | `0` | Max amount of characters allowed, defaults to 0, which means hidden, no maximum |
+
 ## Utilisation
 
 ### Quand utiliser Data presentation
 
-<!-- TODO: Décrire les cas d'usage appropriés -->
+- Saisie de données
+- Formulaires
+- Configuration
+- Filtres
 
 ### Quand ne pas utiliser
 
-<!-- TODO: Décrire les cas où un autre composant serait plus approprié -->
+- Affichage de données en lecture seule
+- Navigation
 
 ## Exemples
 
 ### Exemple basique
 
 ```html
-<!-- TODO: Ajouter un exemple de code basique -->
+<lu-data-presentation label=
 ```
 
-### Exemple avancé
 
-```typescript
-<!-- TODO: Ajouter un exemple de code avancé -->
-```
+## Classes CSS
+
+| Classe | Description |
+|--------|-------------|
+| `.presentation` | Classe de base |
+| `.presentation-term` | Classe de base |
+| `.presentation-definition` | Classe de base |
 
 ## Accessibilité
 
-<!-- TODO: Documenter les considérations d'accessibilité -->
+- Associer chaque champ à un label avec for/id
+- Fournir des messages d'erreur explicites
+- Supporter la navigation au clavier
+- Indiquer les champs obligatoires
 
 ## Figma
 
@@ -68,4 +91,4 @@ import { DataPresentationComponent } from '@lucca-front/ng/form-field';
 
 ## Voir aussi
 
-<!-- TODO: Lister les composants liés -->
+<!-- Composants liés à documenter -->

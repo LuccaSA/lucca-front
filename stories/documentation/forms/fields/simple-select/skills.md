@@ -1,5 +1,5 @@
 ---
-description: Simple select component from Lucca Front design system
+description: Composant Simple select - composants pour la saisie et validation de données utilisateur
 triggers:
   - simple-select
   - simpleselect
@@ -12,6 +12,8 @@ triggers:
   - form
   - field
   - control
+  - validation
+  - saisie
 figma:
   nodeId: null
   fileKey: null
@@ -25,7 +27,9 @@ alwaysApply: false
 
 ## Description
 
-Simple select est un composant de la catégorie **Forms** du design system Lucca Front.
+Le composant **Simple select** fait partie de la catégorie **Forms** du design system Lucca Front.
+
+Composants pour la saisie et validation de données utilisateur.
 
 **Story path:** `Documentation/Forms/Fields/Simple Select/Angular`
 
@@ -39,33 +43,42 @@ import { LuSimpleSelectInputComponent } from '@lucca-front/ng/simple-select';
 ```
 
 
+## Propriétés
+
+| Propriété | Type | Défaut | Description |
+|-----------|------|--------|-------------|
+| `tooltip` | `string` | `Tooltip message` | - |
+
 ## Utilisation
 
 ### Quand utiliser Simple select
 
-<!-- TODO: Décrire les cas d'usage appropriés -->
+- Saisie de données
+- Formulaires
+- Configuration
+- Filtres
 
 ### Quand ne pas utiliser
 
-<!-- TODO: Décrire les cas où un autre composant serait plus approprié -->
+- Affichage de données en lecture seule
+- Navigation
 
 ## Exemples
 
 ### Exemple basique
 
 ```html
-<!-- TODO: Ajouter un exemple de code basique -->
+<lu-form-field ..., argTypes, )}>
+<lu-simple-select ... [options]=
 ```
 
-### Exemple avancé
-
-```typescript
-<!-- TODO: Ajouter un exemple de code avancé -->
-```
 
 ## Accessibilité
 
-<!-- TODO: Documenter les considérations d'accessibilité -->
+- Associer chaque champ à un label avec for/id
+- Fournir des messages d'erreur explicites
+- Supporter la navigation au clavier
+- Indiquer les champs obligatoires
 
 ## Figma
 
@@ -73,4 +86,4 @@ import { LuSimpleSelectInputComponent } from '@lucca-front/ng/simple-select';
 
 ## Voir aussi
 
-<!-- TODO: Lister les composants liés -->
+<!-- Composants liés à documenter -->

@@ -1,9 +1,12 @@
 ---
-description: Loading component from Lucca Front design system
+description: Composant Loading - composants pour indiquer un chargement ou une progression
 triggers:
   - loading
+  - chargement
   - spinner
   - progress
+  - wait
+  - skeleton
 figma:
   nodeId: null
   fileKey: null
@@ -17,7 +20,9 @@ alwaysApply: false
 
 ## Description
 
-Loading est un composant de la catégorie **Loaders** du design system Lucca Front.
+Le composant **Loading** fait partie de la catégorie **Loaders** du design system Lucca Front.
+
+Composants pour indiquer un chargement ou une progression.
 
 **Story path:** `Documentation/Loaders/Loading/Angular/Basic`
 
@@ -29,33 +34,44 @@ import { LoadingComponent } from '@lucca-front/ng/loading';
 ```
 
 
+## Propriétés
+
+| Propriété | Type | Défaut | Description |
+|-----------|------|--------|-------------|
+| `block` | `any` | `false` | - |
+
 ## Utilisation
 
 ### Quand utiliser Loading
 
-<!-- TODO: Décrire les cas d'usage appropriés -->
+- Chargement de données
+- Actions asynchrones
+- Progression
 
 ### Quand ne pas utiliser
 
-<!-- TODO: Décrire les cas où un autre composant serait plus approprié -->
+- Contenu disponible immédiatement
 
 ## Exemples
 
 ### Exemple basique
 
 ```html
-<!-- TODO: Ajouter un exemple de code basique -->
+<!-- Voir les stories pour des exemples détaillés -->
 ```
 
-### Exemple avancé
 
-```typescript
-<!-- TODO: Ajouter un exemple de code avancé -->
-```
+## Classes CSS
+
+| Classe | Description |
+|--------|-------------|
+| `.loading` | Classe de base |
 
 ## Accessibilité
 
-<!-- TODO: Documenter les considérations d'accessibilité -->
+- Annoncer le chargement avec aria-busy
+- Fournir un texte alternatif descriptif
+- Informer de la fin du chargement
 
 ## Figma
 
@@ -63,4 +79,4 @@ import { LoadingComponent } from '@lucca-front/ng/loading';
 
 ## Voir aussi
 
-<!-- TODO: Lister les composants liés -->
+<!-- Composants liés à documenter -->

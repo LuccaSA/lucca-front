@@ -1,5 +1,5 @@
 ---
-description: Date component from Lucca Front design system
+description: Composant Date - utilitaires et fonctions helpers
 triggers:
   - date
   - button
@@ -8,6 +8,11 @@ triggers:
   - luhumanizedatepipe
   - lurelativetime
   - lurelativetimeformatunit
+  - utility
+  - helper
+  - tool
+  - format
+  - pipe
 figma:
   nodeId: null
   fileKey: null
@@ -21,11 +26,13 @@ alwaysApply: false
 
 ## Description
 
-Date est un composant de la catégorie **Toolbox** du design system Lucca Front.
+Le composant **Date** fait partie de la catégorie **Toolbox** du design system Lucca Front.
+
+Utilitaires et fonctions helpers.
 
 **Story path:** `Documentation/Toolbox/Dates/Humanize`
-
 **Component:** `HumanizeStory`
+
 
 ## Imports
 
@@ -36,33 +43,45 @@ import { LuHumanizeDateFormatter, LuHumanizeDatePipe, LuRelativeTime, LuRelative
 ```
 
 
+## Propriétés
+
+| Propriété | Type | Défaut | Description |
+|-----------|------|--------|-------------|
+| `size` | `'M' | 'S' | 'XS'` | `-` | Change the size of the Button |
+| `palette` | `Palette` | `none` | Applies a color palette to the Button |
+| `state` | `'default' | 'loading' | 'error' | 'success'` | `default` | Modifies the state of the Button |
+
 ## Utilisation
 
 ### Quand utiliser Date
 
-<!-- TODO: Décrire les cas d'usage appropriés -->
+- Formatage de données
+- Utilitaires réutilisables
 
 ### Quand ne pas utiliser
 
-<!-- TODO: Décrire les cas où un autre composant serait plus approprié -->
+- Composants visuels
 
 ## Exemples
 
 ### Exemple basique
 
 ```html
-<!-- TODO: Ajouter un exemple de code basique -->
+<h1>Humanize</h1>
+<h2>Langues</h2>
+<p>Choisissez une langue</p>
+<div class=
 ```
 
-### Exemple avancé
 
-```typescript
-<!-- TODO: Ajouter un exemple de code avancé -->
-```
+## Classes CSS
+
+| Classe | Description |
+|--------|-------------|
 
 ## Accessibilité
 
-<!-- TODO: Documenter les considérations d'accessibilité -->
+- S'assurer que les données formatées restent accessibles
 
 ## Figma
 
@@ -70,4 +89,4 @@ import { LuHumanizeDateFormatter, LuHumanizeDatePipe, LuRelativeTime, LuRelative
 
 ## Voir aussi
 
-<!-- TODO: Lister les composants liés -->
+<!-- Composants liés à documenter -->

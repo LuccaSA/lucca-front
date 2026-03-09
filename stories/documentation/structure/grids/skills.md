@@ -1,9 +1,14 @@
 ---
-description: Grids component from Lucca Front design system
+description: Composant Grids - composants pour structurer la mise en page
 triggers:
   - grids
   - grid
   - gridcolumn
+  - layout
+  - container
+  - structure
+  - box
+  - card
 figma:
   nodeId: null
   fileKey: null
@@ -17,7 +22,9 @@ alwaysApply: false
 
 ## Description
 
-Grids est un composant de la catégorie **Structure** du design system Lucca Front.
+Le composant **Grids** fait partie de la catégorie **Structure** du design system Lucca Front.
+
+Composants pour structurer la mise en page.
 
 **Story path:** `Documentation/Structure/Grids/Angular/Basic`
 
@@ -33,29 +40,42 @@ import { GridColumnComponent, GridComponent } from '@lucca-front/ng/grid';
 
 ### Quand utiliser Grids
 
-<!-- TODO: Décrire les cas d'usage appropriés -->
+- Organisation du contenu
+- Mise en page
+- Conteneurs
 
 ### Quand ne pas utiliser
 
-<!-- TODO: Décrire les cas où un autre composant serait plus approprié -->
+- Composants interactifs
 
 ## Exemples
 
 ### Exemple basique
 
 ```html
-<!-- TODO: Ajouter un exemple de code basique -->
+<!-- Voir les stories pour des exemples détaillés -->
 ```
 
-### Exemple avancé
 
-```typescript
-<!-- TODO: Ajouter un exemple de code avancé -->
-```
+## Classes CSS
+
+| Classe | Description |
+|--------|-------------|
+| `.grid` | Classe de base |
+| `.grid-column` | Classe de base |
+| `.demo` | Classe de base |
+| `.grid-containerWrapper` | Classe de base |
+| `.mod-autoAtContainerMinS` | Modificateur autoAtContainerMinS |
+| `.mod-autoAtMediaMinS` | Modificateur autoAtMediaMinS |
+| `.mod-auto` | Modificateur auto |
+| `.mod-form` | Modificateur form |
+| `.mod-dense` | Modificateur dense |
 
 ## Accessibilité
 
-<!-- TODO: Documenter les considérations d'accessibilité -->
+- Utiliser des landmarks appropriés
+- Maintenir un ordre de lecture logique
+- Structurer le contenu de manière sémantique
 
 ## Figma
 
@@ -63,4 +83,4 @@ import { GridColumnComponent, GridComponent } from '@lucca-front/ng/grid';
 
 ## Voir aussi
 
-<!-- TODO: Lister les composants liés -->
+<!-- Composants liés à documenter -->

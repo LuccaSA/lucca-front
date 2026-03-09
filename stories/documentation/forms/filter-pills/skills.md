@@ -1,5 +1,5 @@
 ---
-description: Filter pills component from Lucca Front design system
+description: Composant Filter pills - composants pour la saisie et validation de données utilisateur
 triggers:
   - filter-pills
   - filterpills
@@ -21,38 +21,6 @@ triggers:
   - formfield
   - multi-select
   - lumultiselectinput
-  - lumultidisplayer
-  - lumultiselectcounterdisplayer
-  - lumultiselectwithselectall
-  - numeric-badge
-  - numericbadge
-  - segmented-control
-  - segmentedcontrol
-  - segmentedcontrolfilter
-  - simple-select
-  - lusimpleselectinput
-  - core-select
-  - ludisplayer
-  - luoption
-  - lucoreselecttotalcount
-  - core-select/department
-  - lucoreselectdepartments
-  - tree-select
-  - treeselect
-  - core-select/user
-  - lucoreselectusers
-  - providecoreselectcurrentuserid
-  - tooltip
-  - lutooltip
-  - icon
-  - popover2
-  - popover
-  - scroll-box
-  - scrollbox
-  - input
-  - form
-  - field
-  - control
 figma:
   nodeId: null
   fileKey: null
@@ -66,7 +34,9 @@ alwaysApply: false
 
 ## Description
 
-Filter pills est un composant de la catégorie **Forms** du design system Lucca Front.
+Le composant **Filter pills** fait partie de la catégorie **Forms** du design system Lucca Front.
+
+Composants pour la saisie et validation de données utilisateur.
 
 **Story path:** `Documentation/Forms/FiltersPills/Checkbox/Angular`
 
@@ -100,29 +70,54 @@ import { ScrollBoxComponent } from '@lucca-front/ng/scroll-box';
 
 ### Quand utiliser Filter pills
 
-<!-- TODO: Décrire les cas d'usage appropriés -->
+- Saisie de données
+- Formulaires
+- Configuration
+- Filtres
 
 ### Quand ne pas utiliser
 
-<!-- TODO: Décrire les cas où un autre composant serait plus approprié -->
+- Affichage de données en lecture seule
+- Navigation
 
 ## Exemples
 
 ### Exemple basique
 
 ```html
-<!-- TODO: Ajouter un exemple de code basique -->
+<lu-filter-pill label=
 ```
 
-### Exemple avancé
+### Autres exemples
 
-```typescript
-<!-- TODO: Ajouter un exemple de code avancé -->
+```html
+<lu-filter-bar>
+<lu-segmented-control class=
+
+@if (multiple()) { <lu-multi-select #selectRef data-qa=
 ```
+
+
+## Classes CSS
+
+| Classe | Description |
+|--------|-------------|
+| `.divider` | Classe de base |
+| `.filterBar-segmentedControl` | Classe de base |
+| `.filterPill` | Classe de base |
+| `.filterPill-label` | Classe de base |
+| `.filterPill-label-placeholder` | Classe de base |
+| `.mod-button` | Modificateur button |
+| `.mod-selectOption` | Modificateur selectOption |
+| `.is-filled` | État filled |
+| `.is-empty` | État empty |
 
 ## Accessibilité
 
-<!-- TODO: Documenter les considérations d'accessibilité -->
+- Associer chaque champ à un label avec for/id
+- Fournir des messages d'erreur explicites
+- Supporter la navigation au clavier
+- Indiquer les champs obligatoires
 
 ## Figma
 
@@ -130,4 +125,4 @@ import { ScrollBoxComponent } from '@lucca-front/ng/scroll-box';
 
 ## Voir aussi
 
-<!-- TODO: Lister les composants liés -->
+<!-- Composants liés à documenter -->

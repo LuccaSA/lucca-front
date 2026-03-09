@@ -1,11 +1,15 @@
 ---
-description: Popover component from Lucca Front design system
+description: Composant Popover - composants pour afficher des informations utilisateur
 triggers:
   - popover
   - user
   - iluuser
   - user-popover
   - luuserpopover
+  - avatar
+  - profile
+  - person
+  - employee
 figma:
   nodeId: null
   fileKey: null
@@ -19,11 +23,13 @@ alwaysApply: false
 
 ## Description
 
-Popover est un composant de la catégorie **Users** du design system Lucca Front.
+Le composant **Popover** fait partie de la catégorie **Users** du design system Lucca Front.
+
+Composants pour afficher des informations utilisateur.
 
 **Story path:** `Documentation/Users/Popover/Angular`
-
 **Component:** `UserPopoverStory`
+
 
 ## Imports
 
@@ -37,29 +43,40 @@ import { LuUserPopoverDirective } from '@lucca-front/ng/user-popover';
 
 ### Quand utiliser Popover
 
-<!-- TODO: Décrire les cas d'usage appropriés -->
+- Affichage d'utilisateurs
+- Avatars
+- Profils
 
 ### Quand ne pas utiliser
 
-<!-- TODO: Décrire les cas où un autre composant serait plus approprié -->
+- Données non liées aux utilisateurs
 
 ## Exemples
 
 ### Exemple basique
 
 ```html
-<!-- TODO: Ajouter un exemple de code basique -->
+<!-- Voir les stories pour des exemples détaillés -->
 ```
 
-### Exemple avancé
 
-```typescript
-<!-- TODO: Ajouter un exemple de code avancé -->
-```
+## Classes CSS
+
+| Classe | Description |
+|--------|-------------|
+| `.userPopover_trigger` | Classe de base |
+| `.lu-popover-content` | Classe de base |
+| `.userPopover` | Classe de base |
+| `.userPopover-details` | Classe de base |
+| `.userPopover-details-avatar` | Classe de base |
+| `.mod-S` | Modificateur S |
+| `.mod-circle` | Modificateur circle |
+| `.is-loading` | État loading |
 
 ## Accessibilité
 
-<!-- TODO: Documenter les considérations d'accessibilité -->
+- Fournir un texte alternatif pour les avatars
+- Ne pas reposer uniquement sur les images
 
 ## Figma
 
@@ -67,4 +84,4 @@ import { LuUserPopoverDirective } from '@lucca-front/ng/user-popover';
 
 ## Voir aussi
 
-<!-- TODO: Lister les composants liés -->
+<!-- Composants liés à documenter -->

@@ -1,8 +1,14 @@
 ---
-description: Fancy box component from Lucca Front design system
+description: Composant Fancy box - composants pour structurer la mise en page
 triggers:
   - fancy-box
   - fancybox
+  - layout
+  - container
+  - structure
+  - grid
+  - box
+  - card
 figma:
   nodeId: null
   fileKey: null
@@ -16,7 +22,9 @@ alwaysApply: false
 
 ## Description
 
-Fancy box est un composant de la catégorie **Structure** du design system Lucca Front.
+Le composant **Fancy box** fait partie de la catégorie **Structure** du design system Lucca Front.
+
+Composants pour structurer la mise en page.
 
 **Story path:** `Documentation/Structure/FancyBox/Angular/Basic`
 
@@ -28,33 +36,46 @@ import { FancyBoxComponent } from '@lucca-front/ng/fancy-box';
 ```
 
 
+## Propriétés
+
+| Propriété | Type | Défaut | Description |
+|-----------|------|--------|-------------|
+| `foreground` | `string` | `-` | foreground image (URL) |
+| `size` | `null | 'S'` | `null` | Which size should the callout be? Defaults to small |
+
 ## Utilisation
 
 ### Quand utiliser Fancy box
 
-<!-- TODO: Décrire les cas d'usage appropriés -->
+- Organisation du contenu
+- Mise en page
+- Conteneurs
 
 ### Quand ne pas utiliser
 
-<!-- TODO: Décrire les cas où un autre composant serait plus approprié -->
+- Composants interactifs
 
 ## Exemples
 
 ### Exemple basique
 
 ```html
-<!-- TODO: Ajouter un exemple de code basique -->
+<lu-fancy-box............> Content </lu-fancy-box>
 ```
 
-### Exemple avancé
 
-```typescript
-<!-- TODO: Ajouter un exemple de code avancé -->
-```
+## Classes CSS
+
+| Classe | Description |
+|--------|-------------|
+| `.fancyBox-content` | Classe de base |
+| `.fancyBox-content-foreground` | Classe de base |
 
 ## Accessibilité
 
-<!-- TODO: Documenter les considérations d'accessibilité -->
+- Utiliser des landmarks appropriés
+- Maintenir un ordre de lecture logique
+- Structurer le contenu de manière sémantique
 
 ## Figma
 
@@ -62,4 +83,4 @@ import { FancyBoxComponent } from '@lucca-front/ng/fancy-box';
 
 ## Voir aussi
 
-<!-- TODO: Lister les composants liés -->
+<!-- Composants liés à documenter -->

@@ -1,10 +1,15 @@
 ---
-description: Animations component from Lucca Front design system
+description: Composant Animations - utilitaires et fonctions helpers
 triggers:
   - animations
   - lufadeanimationfactory
   - luscaleanimationfactory
   - luslideanimationfactory
+  - utility
+  - helper
+  - tool
+  - format
+  - pipe
 figma:
   nodeId: null
   fileKey: null
@@ -18,11 +23,13 @@ alwaysApply: false
 
 ## Description
 
-Animations est un composant de la catégorie **Toolbox** du design system Lucca Front.
+Le composant **Animations** fait partie de la catégorie **Toolbox** du design system Lucca Front.
+
+Utilitaires et fonctions helpers.
 
 **Story path:** `Documentation/Toolbox/Animations/Fade`
-
 **Component:** `FadeAnimationStory`
+
 
 ## Imports
 
@@ -35,29 +42,37 @@ import { luFadeAnimationFactory, luScaleAnimationFactory, luSlideAnimationFactor
 
 ### Quand utiliser Animations
 
-<!-- TODO: Décrire les cas d'usage appropriés -->
+- Formatage de données
+- Utilitaires réutilisables
 
 ### Quand ne pas utiliser
 
-<!-- TODO: Décrire les cas où un autre composant serait plus approprié -->
+- Composants visuels
 
 ## Exemples
 
 ### Exemple basique
 
 ```html
-<!-- TODO: Ajouter un exemple de code basique -->
+<!-- Voir les stories pour des exemples détaillés -->
 ```
 
-### Exemple avancé
 
-```typescript
-<!-- TODO: Ajouter un exemple de code avancé -->
-```
+## Classes CSS
+
+| Classe | Description |
+|--------|-------------|
+| `.grid` | Classe de base |
+| `.grid-column` | Classe de base |
+| `.ng-demo-block` | Classe de base |
+| `.button` | Classe de base |
+| `.animated-block` | Classe de base |
+| `.mod-S` | Modificateur S |
+| `.mod-auto` | Modificateur auto |
 
 ## Accessibilité
 
-<!-- TODO: Documenter les considérations d'accessibilité -->
+- S'assurer que les données formatées restent accessibles
 
 ## Figma
 
@@ -65,4 +80,4 @@ import { luFadeAnimationFactory, luScaleAnimationFactory, luSlideAnimationFactor
 
 ## Voir aussi
 
-<!-- TODO: Lister les composants liés -->
+<!-- Composants liés à documenter -->

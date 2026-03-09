@@ -1,11 +1,14 @@
 ---
-description: Mobile navigation component from Lucca Front design system
+description: Composant Mobile navigation - composants pour la navigation dans l'application
 triggers:
   - mobile-navigation
   - mobilenavigation
   - nav
   - menu
   - navigate
+  - route
+  - link
+  - breadcrumb
 figma:
   nodeId: null
   fileKey: null
@@ -19,7 +22,9 @@ alwaysApply: false
 
 ## Description
 
-Mobile navigation est un composant de la catégorie **Navigation** du design system Lucca Front.
+Le composant **Mobile navigation** fait partie de la catégorie **Navigation** du design system Lucca Front.
+
+Composants pour la navigation dans l'application.
 
 **Story path:** `Documentation/Navigation/MobileNavigation/Basic`
 
@@ -29,29 +34,41 @@ Mobile navigation est un composant de la catégorie **Navigation** du design sys
 
 ### Quand utiliser Mobile navigation
 
-<!-- TODO: Décrire les cas d'usage appropriés -->
+- Navigation entre pages
+- Menus
+- Fil d'Ariane
+- Pagination
 
 ### Quand ne pas utiliser
 
-<!-- TODO: Décrire les cas où un autre composant serait plus approprié -->
+- Actions (utiliser Button)
+- Affichage de données
 
 ## Exemples
 
 ### Exemple basique
 
 ```html
-<!-- TODO: Ajouter un exemple de code basique -->
+<!-- Voir les stories pour des exemples détaillés -->
 ```
 
-### Exemple avancé
 
-```typescript
-<!-- TODO: Ajouter un exemple de code avancé -->
-```
+## Classes CSS
+
+| Classe | Description |
+|--------|-------------|
+| `.mobileNavigation` | Classe de base |
+| `.mobileNavigation-list` | Classe de base |
+| `.mobileNavigation-list-item` | Classe de base |
+| `.mobileNavigation-list-item-link` | Classe de base |
+| `.lucca-icon` | Classe de base |
+| `.mod-XS` | Modificateur XS |
 
 ## Accessibilité
 
-<!-- TODO: Documenter les considérations d'accessibilité -->
+- Utiliser des landmarks nav appropriés
+- Indiquer la page courante avec aria-current
+- Supporter la navigation au clavier
 
 ## Figma
 
@@ -59,4 +76,4 @@ Mobile navigation est un composant de la catégorie **Navigation** du design sys
 
 ## Voir aussi
 
-<!-- TODO: Lister les composants liés -->
+<!-- Composants liés à documenter -->

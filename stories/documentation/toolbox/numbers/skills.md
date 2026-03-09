@@ -1,9 +1,14 @@
 ---
-description: Numbers component from Lucca Front design system
+description: Composant Numbers - utilitaires et fonctions helpers
 triggers:
   - numbers
   - number
   - lunumberpipe
+  - utility
+  - helper
+  - tool
+  - format
+  - pipe
 figma:
   nodeId: null
   fileKey: null
@@ -17,11 +22,13 @@ alwaysApply: false
 
 ## Description
 
-Numbers est un composant de la catégorie **Toolbox** du design system Lucca Front.
+Le composant **Numbers** fait partie de la catégorie **Toolbox** du design system Lucca Front.
+
+Utilitaires et fonctions helpers.
 
 **Story path:** `Documentation/Toolbox/Numbers/Basic`
-
 **Component:** `NumbersStory`
+
 
 ## Imports
 
@@ -30,33 +37,47 @@ import { LuNumberPipe } from '@lucca-front/ng/number';
 ```
 
 
+## Propriétés
+
+| Propriété | Type | Défaut | Description |
+|-----------|------|--------|-------------|
+| `value` | `number` | `Math.PI` | - |
+| `precision` | `range` | `2` | - |
+
 ## Utilisation
 
 ### Quand utiliser Numbers
 
-<!-- TODO: Décrire les cas d'usage appropriés -->
+- Formatage de données
+- Utilitaires réutilisables
 
 ### Quand ne pas utiliser
 
-<!-- TODO: Décrire les cas où un autre composant serait plus approprié -->
+- Composants visuels
 
 ## Exemples
 
 ### Exemple basique
 
 ```html
-<!-- TODO: Ajouter un exemple de code basique -->
+<!-- Voir les stories pour des exemples détaillés -->
 ```
 
-### Exemple avancé
 
-```typescript
-<!-- TODO: Ajouter un exemple de code avancé -->
-```
+## Classes CSS
+
+| Classe | Description |
+|--------|-------------|
+| `.table` | Classe de base |
+| `.table-head` | Classe de base |
+| `.table-head-row` | Classe de base |
+| `.table-head-row-cell` | Classe de base |
+| `.table-body` | Classe de base |
+| `.mod-alignRight` | Modificateur alignRight |
 
 ## Accessibilité
 
-<!-- TODO: Documenter les considérations d'accessibilité -->
+- S'assurer que les données formatées restent accessibles
 
 ## Figma
 
@@ -64,4 +85,4 @@ import { LuNumberPipe } from '@lucca-front/ng/number';
 
 ## Voir aussi
 
-<!-- TODO: Lister les composants liés -->
+<!-- Composants liés à documenter -->

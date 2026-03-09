@@ -1,5 +1,5 @@
 ---
-description: Skip links component from Lucca Front design system
+description: Composant Skip links - composants pour la navigation dans l'application
 triggers:
   - skip-links
   - skiplinks
@@ -8,6 +8,9 @@ triggers:
   - nav
   - menu
   - navigate
+  - route
+  - link
+  - breadcrumb
 figma:
   nodeId: null
   fileKey: null
@@ -21,11 +24,13 @@ alwaysApply: false
 
 ## Description
 
-Skip links est un composant de la catégorie **Navigation** du design system Lucca Front.
+Le composant **Skip links** fait partie de la catégorie **Navigation** du design system Lucca Front.
+
+Composants pour la navigation dans l'application.
 
 **Story path:** `Documentation/Navigation/SkipLinks/Basic`
-
 **Component:** `SkipLinksStory`
+
 
 ## Imports
 
@@ -38,29 +43,45 @@ import { LuSkipLinksComponent } from '@lucca-front/ng/a11y';
 
 ### Quand utiliser Skip links
 
-<!-- TODO: Décrire les cas d'usage appropriés -->
+- Navigation entre pages
+- Menus
+- Fil d'Ariane
+- Pagination
 
 ### Quand ne pas utiliser
 
-<!-- TODO: Décrire les cas où un autre composant serait plus approprié -->
+- Actions (utiliser Button)
+- Affichage de données
 
 ## Exemples
 
 ### Exemple basique
 
 ```html
-<!-- TODO: Ajouter un exemple de code basique -->
+<lu-skip-links />
+<div id=
 ```
 
-### Exemple avancé
 
-```typescript
-<!-- TODO: Ajouter un exemple de code avancé -->
-```
+## Classes CSS
+
+| Classe | Description |
+|--------|-------------|
+| `.button` | Classe de base |
+| `.lucca-icon` | Classe de base |
+| `.icon-app` | Classe de base |
+| `.icon-peopleGroup` | Classe de base |
+| `.icon-transportRocket` | Classe de base |
+| `.mod-onlyIcon` | Modificateur onlyIcon |
+| `.mod-ghost` | Modificateur ghost |
+| `.mod-withIcon` | Modificateur withIcon |
+| `.palette-product` | Palette product |
 
 ## Accessibilité
 
-<!-- TODO: Documenter les considérations d'accessibilité -->
+- Utiliser des landmarks nav appropriés
+- Indiquer la page courante avec aria-current
+- Supporter la navigation au clavier
 
 ## Figma
 
@@ -68,4 +89,4 @@ import { LuSkipLinksComponent } from '@lucca-front/ng/a11y';
 
 ## Voir aussi
 
-<!-- TODO: Lister les composants liés -->
+<!-- Composants liés à documenter -->

@@ -1,5 +1,5 @@
 ---
-description: Radio button component from Lucca Front design system
+description: Composant Radio button - composants pour la saisie et validation de données utilisateur
 triggers:
   - radio-button
   - radiobutton
@@ -7,6 +7,8 @@ triggers:
   - form
   - field
   - control
+  - validation
+  - saisie
 figma:
   nodeId: null
   fileKey: null
@@ -20,7 +22,9 @@ alwaysApply: false
 
 ## Description
 
-Radio button est un composant de la catégorie **Forms** du design system Lucca Front.
+Le composant **Radio button** fait partie de la catégorie **Forms** du design system Lucca Front.
+
+Composants pour la saisie et validation de données utilisateur.
 
 **Story path:** `Documentation/Forms/Radio Buttons/Basic`
 
@@ -30,29 +34,40 @@ Radio button est un composant de la catégorie **Forms** du design system Lucca 
 
 ### Quand utiliser Radio button
 
-<!-- TODO: Décrire les cas d'usage appropriés -->
+- Saisie de données
+- Formulaires
+- Configuration
+- Filtres
 
 ### Quand ne pas utiliser
 
-<!-- TODO: Décrire les cas où un autre composant serait plus approprié -->
+- Affichage de données en lecture seule
+- Navigation
 
 ## Exemples
 
 ### Exemple basique
 
 ```html
-<!-- TODO: Ajouter un exemple de code basique -->
+<!-- Voir les stories pour des exemples détaillés -->
 ```
 
-### Exemple avancé
 
-```typescript
-<!-- TODO: Ajouter un exemple de code avancé -->
-```
+## Classes CSS
+
+| Classe | Description |
+|--------|-------------|
+| `.radioButtons` | Classe de base |
+| `.radioButtons-item` | Classe de base |
+| `.radioButtons-item-input` | Classe de base |
+| `.radioButtons-item-label` | Classe de base |
 
 ## Accessibilité
 
-<!-- TODO: Documenter les considérations d'accessibilité -->
+- Associer chaque champ à un label avec for/id
+- Fournir des messages d'erreur explicites
+- Supporter la navigation au clavier
+- Indiquer les champs obligatoires
 
 ## Figma
 
@@ -60,4 +75,4 @@ Radio button est un composant de la catégorie **Forms** du design system Lucca 
 
 ## Voir aussi
 
-<!-- TODO: Lister les composants liés -->
+<!-- Composants liés à documenter -->

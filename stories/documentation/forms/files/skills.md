@@ -1,11 +1,13 @@
 ---
-description: Files component from Lucca Front design system
+description: Composant Files - composants pour la saisie et validation de données utilisateur
 triggers:
   - files
   - input
   - form
   - field
   - control
+  - validation
+  - saisie
 figma:
   nodeId: null
   fileKey: null
@@ -19,7 +21,9 @@ alwaysApply: false
 
 ## Description
 
-Files est un composant de la catégorie **Forms** du design system Lucca Front.
+Le composant **Files** fait partie de la catégorie **Forms** du design system Lucca Front.
+
+Composants pour la saisie et validation de données utilisateur.
 
 **Story path:** `Documentation/Forms/Files/Basic`
 
@@ -29,29 +33,46 @@ Files est un composant de la catégorie **Forms** du design system Lucca Front.
 
 ### Quand utiliser Files
 
-<!-- TODO: Décrire les cas d'usage appropriés -->
+- Saisie de données
+- Formulaires
+- Configuration
+- Filtres
 
 ### Quand ne pas utiliser
 
-<!-- TODO: Décrire les cas où un autre composant serait plus approprié -->
+- Affichage de données en lecture seule
+- Navigation
 
 ## Exemples
 
 ### Exemple basique
 
 ```html
-<!-- TODO: Ajouter un exemple de code basique -->
+<!-- Voir les stories pour des exemples détaillés -->
 ```
 
-### Exemple avancé
 
-```typescript
-<!-- TODO: Ajouter un exemple de code avancé -->
-```
+## Classes CSS
+
+| Classe | Description |
+|--------|-------------|
+| `.file` | Classe de base |
+| `.file-input` | Classe de base |
+| `.file-content` | Classe de base |
+| `.file-icon` | Classe de base |
+| `.lucca-icon` | Classe de base |
+| `.mod-outlined` | Modificateur outlined |
+| `.mod-S` | Modificateur S |
+| `.is-droppable` | État droppable |
+| `.is-uploaded` | État uploaded |
+| `.is-uploading` | État uploading |
 
 ## Accessibilité
 
-<!-- TODO: Documenter les considérations d'accessibilité -->
+- Associer chaque champ à un label avec for/id
+- Fournir des messages d'erreur explicites
+- Supporter la navigation au clavier
+- Indiquer les champs obligatoires
 
 ## Figma
 
@@ -59,4 +80,4 @@ Files est un composant de la catégorie **Forms** du design system Lucca Front.
 
 ## Voir aussi
 
-<!-- TODO: Lister les composants liés -->
+<!-- Composants liés à documenter -->

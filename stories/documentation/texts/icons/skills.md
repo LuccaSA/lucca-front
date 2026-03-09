@@ -1,11 +1,14 @@
 ---
-description: Icons component from Lucca Front design system
+description: Composant Icons - composants pour la typographie et le contenu textuel
 triggers:
   - icons
   - icon
   - text
   - typography
   - content
+  - label
+  - badge
+  - tag
 figma:
   nodeId: null
   fileKey: null
@@ -19,11 +22,13 @@ alwaysApply: false
 
 ## Description
 
-Icons est un composant de la catégorie **Texts** du design system Lucca Front.
+Le composant **Icons** fait partie de la catégorie **Texts** du design system Lucca Front.
 
-**Story path:** `Documentation/Texts/Icons/List`
+Composants pour la typographie et le contenu textuel.
 
-**Component:** `IconStory`
+**Story path:** `Documentation/Texts/Icons/Angular`
+**Component:** `IconComponent`
+
 
 ## Imports
 
@@ -32,33 +37,57 @@ import { IconComponent } from '@lucca-front/ng/icon';
 ```
 
 
+## Propriétés
+
+| Propriété | Type | Défaut | Description |
+|-----------|------|--------|-------------|
+| `alt` | `string` | `-` | Information conveyed by the screen reader |
+| `size` | `'XXS' | 'XS' | 'S' | 'M' | 'L' | 'XL' | 'XXL'` | `-` | Which size should the icon be? XXS to XXL |
+| `color` | `'primary' | 'secondary' | 'product' | 'error' |...` | `inherit` | Changes the color of the icon (inherit by default) |
+
 ## Utilisation
 
 ### Quand utiliser Icons
 
-<!-- TODO: Décrire les cas d'usage appropriés -->
+- Mise en forme de texte
+- Labels
+- Badges
+- Tags
 
 ### Quand ne pas utiliser
 
-<!-- TODO: Décrire les cas où un autre composant serait plus approprié -->
+- Actions interactives
+- Formulaires
 
 ## Exemples
 
 ### Exemple basique
 
 ```html
-<!-- TODO: Ajouter un exemple de code basique -->
+<!-- Voir les stories pour des exemples détaillés -->
 ```
 
-### Exemple avancé
 
-```typescript
-<!-- TODO: Ajouter un exemple de code avancé -->
-```
+## Classes CSS
+
+| Classe | Description |
+|--------|-------------|
+| `.lucca-icon` | Classe de base |
+| `.icon-heart` | Classe de base |
+| `.mod-AI` | Modificateur AI |
+| `.mod-XXS` | Modificateur XXS |
+| `.mod-XS` | Modificateur XS |
+| `.mod-S` | Modificateur S |
+| `.mod-M` | Modificateur M |
+| `.mod-L` | Modificateur L |
+| `.mod-XL` | Modificateur XL |
+| `.mod-XXL` | Modificateur XXL |
 
 ## Accessibilité
 
-<!-- TODO: Documenter les considérations d'accessibilité -->
+- Utiliser une hiérarchie de titres logique
+- Assurer un contraste de texte suffisant
+- Éviter le texte dans les images
 
 ## Figma
 
@@ -66,4 +95,4 @@ import { IconComponent } from '@lucca-front/ng/icon';
 
 ## Voir aussi
 
-<!-- TODO: Lister les composants liés -->
+<!-- Composants liés à documenter -->

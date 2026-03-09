@@ -1,7 +1,13 @@
 ---
-description: Sections component from Lucca Front design system
+description: Composant Sections - composants pour structurer la mise en page
 triggers:
   - sections
+  - layout
+  - container
+  - structure
+  - grid
+  - box
+  - card
 figma:
   nodeId: null
   fileKey: null
@@ -15,7 +21,9 @@ alwaysApply: false
 
 ## Description
 
-Sections est un composant de la catégorie **Structure** du design system Lucca Front.
+Le composant **Sections** fait partie de la catégorie **Structure** du design system Lucca Front.
+
+Composants pour structurer la mise en page.
 
 **Story path:** `Documentation/Structure/Sections/Basic`
 
@@ -25,29 +33,37 @@ Sections est un composant de la catégorie **Structure** du design system Lucca 
 
 ### Quand utiliser Sections
 
-<!-- TODO: Décrire les cas d'usage appropriés -->
+- Organisation du contenu
+- Mise en page
+- Conteneurs
 
 ### Quand ne pas utiliser
 
-<!-- TODO: Décrire les cas où un autre composant serait plus approprié -->
+- Composants interactifs
 
 ## Exemples
 
 ### Exemple basique
 
 ```html
-<!-- TODO: Ajouter un exemple de code basique -->
+<section>
+<header class=
 ```
 
-### Exemple avancé
 
-```typescript
-<!-- TODO: Ajouter un exemple de code avancé -->
-```
+## Classes CSS
+
+| Classe | Description |
+|--------|-------------|
+| `.titleSection` | Classe de base |
+| `.titleSection-sub` | Classe de base |
+| `.contentSection` | Classe de base |
 
 ## Accessibilité
 
-<!-- TODO: Documenter les considérations d'accessibilité -->
+- Utiliser des landmarks appropriés
+- Maintenir un ordre de lecture logique
+- Structurer le contenu de manière sémantique
 
 ## Figma
 
@@ -55,4 +71,4 @@ Sections est un composant de la catégorie **Structure** du design system Lucca 
 
 ## Voir aussi
 
-<!-- TODO: Lister les composants liés -->
+<!-- Composants liés à documenter -->

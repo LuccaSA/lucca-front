@@ -1,5 +1,5 @@
 ---
-description: Textarea component from Lucca Front design system
+description: Composant Textarea - composants pour la saisie et validation de données utilisateur
 triggers:
   - textarea
   - form-field
@@ -10,6 +10,8 @@ triggers:
   - form
   - field
   - control
+  - validation
+  - saisie
 figma:
   nodeId: null
   fileKey: null
@@ -23,7 +25,9 @@ alwaysApply: false
 
 ## Description
 
-Textarea est un composant de la catégorie **Forms** du design system Lucca Front.
+Le composant **Textarea** fait partie de la catégorie **Forms** du design system Lucca Front.
+
+Composants pour la saisie et validation de données utilisateur.
 
 **Story path:** `Documentation/Forms/Fields/TextAreaField/Angular`
 
@@ -36,33 +40,54 @@ import { TextareaInputComponent } from '@lucca-front/ng/forms';
 ```
 
 
+## Propriétés
+
+| Propriété | Type | Défaut | Description |
+|-----------|------|--------|-------------|
+| `errorInlineMessage` | `PortalContent | null` | `null` | Inline message for when the control is in error state |
+| `inlineMessageState` | `InlineMessageState | null` | `null` | State of the inline message, will be ignored if form state is invalid |
+| `extraDescribedBy` | `string` | `-` | Extra aria-describedby attribute |
+| `counter` | `number` | `0` | Max amount of characters allowed, defaults to 0, which means hidden, no maximum |
+
 ## Utilisation
 
 ### Quand utiliser Textarea
 
-<!-- TODO: Décrire les cas d'usage appropriés -->
+- Saisie de données
+- Formulaires
+- Configuration
+- Filtres
 
 ### Quand ne pas utiliser
 
-<!-- TODO: Décrire les cas où un autre composant serait plus approprié -->
+- Affichage de données en lecture seule
+- Navigation
 
 ## Exemples
 
 ### Exemple basique
 
 ```html
-<!-- TODO: Ajouter un exemple de code basique -->
+<!-- Voir les stories pour des exemples détaillés -->
 ```
 
-### Exemple avancé
 
-```typescript
-<!-- TODO: Ajouter un exemple de code avancé -->
-```
+## Classes CSS
+
+| Classe | Description |
+|--------|-------------|
+| `.textField-input-valueClone` | Classe de base |
+| `.form-field` | Classe de base |
+| `.formLabel` | Classe de base |
+| `.textField` | Classe de base |
+| `.textField-input` | Classe de base |
 
 ## Accessibilité
 
-<!-- TODO: Documenter les considérations d'accessibilité -->
+- Associer chaque champ à un label avec for/id
+- Fournir des messages d'erreur explicites
+- Supporter la navigation au clavier
+- Indiquer les champs obligatoires
 
 ## Figma
 
@@ -70,4 +95,4 @@ import { TextareaInputComponent } from '@lucca-front/ng/forms';
 
 ## Voir aussi
 
-<!-- TODO: Lister les composants liés -->
+<!-- Composants liés à documenter -->

@@ -1,7 +1,8 @@
 ---
-description: Modal component from Lucca Front design system
+description: Composant Modal - composants affichés par-dessus le contenu principal
 triggers:
   - modal
+  - modale
   - button
   - ilumodalcontent
   - lu_modal_data
@@ -9,10 +10,11 @@ triggers:
   - lumodalconfig
   - toast
   - lutoasts
-  - lutoastsservice
   - popup
   - overlay
   - layer
+  - dialog
+  - floating
 figma:
   nodeId: null
   fileKey: null
@@ -26,11 +28,13 @@ alwaysApply: false
 
 ## Description
 
-Modal est un composant de la catégorie **Overlays** du design system Lucca Front.
+Le composant **Modal** fait partie de la catégorie **Overlays** du design system Lucca Front.
+
+Composants affichés par-dessus le contenu principal.
 
 **Story path:** `Documentation/Overlays/Modal`
-
 **Component:** `ModalStories`
+
 
 ## Imports
 
@@ -41,33 +45,51 @@ import { LuToastsModule, LuToastsService } from '@lucca-front/ng/toast';
 ```
 
 
+## Propriétés
+
+| Propriété | Type | Défaut | Description |
+|-----------|------|--------|-------------|
+| `size` | `'M' | 'S' | 'XS'` | `-` | Change the size of the Button |
+| `palette` | `Palette` | `none` | Applies a color palette to the Button |
+| `state` | `'default' | 'loading' | 'error' | 'success'` | `default` | Modifies the state of the Button |
+| `mode` | `any` | `-` | - |
+
 ## Utilisation
 
 ### Quand utiliser Modal
 
-<!-- TODO: Décrire les cas d'usage appropriés -->
+- Confirmations importantes
+- Formulaires contextuels
+- Informations complémentaires
 
 ### Quand ne pas utiliser
 
-<!-- TODO: Décrire les cas où un autre composant serait plus approprié -->
+- Contenu principal de la page
+- Navigation fréquente
 
 ## Exemples
 
 ### Exemple basique
 
 ```html
-<!-- TODO: Ajouter un exemple de code basique -->
+<p>General Kenobi</p>
 ```
 
-### Exemple avancé
+### Autres exemples
 
-```typescript
-<!-- TODO: Ajouter un exemple de code avancé -->
+```html
+<lu-toasts [sources]=
+
+<p>{{data.message}}</p>
 ```
+
 
 ## Accessibilité
 
-<!-- TODO: Documenter les considérations d'accessibilité -->
+- Gérer le focus trap dans les modales
+- Permettre la fermeture avec Escape
+- Annoncer l'ouverture aux lecteurs d'écran
+- Utiliser aria-modal et role="dialog"
 
 ## Figma
 
@@ -75,4 +97,4 @@ import { LuToastsModule, LuToastsService } from '@lucca-front/ng/toast';
 
 ## Voir aussi
 
-<!-- TODO: Lister les composants liés -->
+<!-- Composants liés à documenter -->

@@ -1,7 +1,8 @@
 ---
-description: Select component from Lucca Front design system
+description: Composant Select - composants pour afficher des informations utilisateur
 triggers:
   - select
+  - selection
   - api
   - luapipagedsearcher
   - input
@@ -19,6 +20,7 @@ triggers:
   - iluuser
   - luuserselect
   - luuser
+  - avatar
 figma:
   nodeId: null
   fileKey: null
@@ -32,11 +34,13 @@ alwaysApply: false
 
 ## Description
 
-Select est un composant de la catégorie **Users** du design system Lucca Front.
+Le composant **Select** fait partie de la catégorie **Users** du design system Lucca Front.
+
+Composants pour afficher des informations utilisateur.
 
 **Story path:** `Documentation/Users/Select/Homonymes`
-
 **Component:** `UserHomonymsStory`
+
 
 ## Imports
 
@@ -53,29 +57,38 @@ import { LuUserDisplayPipe, LuUserHomonymsComponent, LuUserMeOptionDirective, IL
 
 ### Quand utiliser Select
 
-<!-- TODO: Décrire les cas d'usage appropriés -->
+- Affichage d'utilisateurs
+- Avatars
+- Profils
 
 ### Quand ne pas utiliser
 
-<!-- TODO: Décrire les cas où un autre composant serait plus approprié -->
+- Données non liées aux utilisateurs
 
 ## Exemples
 
 ### Exemple basique
 
 ```html
-<!-- TODO: Ajouter un exemple de code basique -->
+<!-- Voir les stories pour des exemples détaillés -->
 ```
 
-### Exemple avancé
 
-```typescript
-<!-- TODO: Ajouter un exemple de code avancé -->
-```
+## Classes CSS
+
+| Classe | Description |
+|--------|-------------|
+| `.textfield` | Classe de base |
+| `.textfield-input` | Classe de base |
+| `.lu-picker-content-option` | Classe de base |
+| `.textfield-label` | Classe de base |
+| `.code` | Classe de base |
+| `.mod-block` | Modificateur block |
 
 ## Accessibilité
 
-<!-- TODO: Documenter les considérations d'accessibilité -->
+- Fournir un texte alternatif pour les avatars
+- Ne pas reposer uniquement sur les images
 
 ## Figma
 
@@ -83,4 +96,4 @@ import { LuUserDisplayPipe, LuUserHomonymsComponent, LuUserMeOptionDirective, IL
 
 ## Voir aussi
 
-<!-- TODO: Lister les composants liés -->
+<!-- Composants liés à documenter -->

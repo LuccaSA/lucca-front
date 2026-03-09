@@ -1,13 +1,15 @@
 ---
-description: Button component from Lucca Front design system
+description: Composant Button - composants interactifs pour déclencher des actions utilisateur
 triggers:
   - button
+  - bouton
   - icon
   - numeric-badge
   - numericbadge
   - click
   - action
   - interactive
+  - cta
 figma:
   nodeId: null
   fileKey: null
@@ -21,11 +23,13 @@ alwaysApply: false
 
 ## Description
 
-Button est un composant de la catégorie **Actions** du design system Lucca Front.
+Le composant **Button** fait partie de la catégorie **Actions** du design system Lucca Front.
+
+Composants interactifs pour déclencher des actions utilisateur.
 
 **Story path:** `Documentation/Actions/Button/Angular/AI`
-
 **Component:** `ButtonComponent`
+
 
 ## Imports
 
@@ -36,33 +40,68 @@ import { NumericBadgeComponent } from '@lucca-front/ng/numeric-badge';
 ```
 
 
+## Propriétés
+
+| Propriété | Type | Défaut | Description |
+|-----------|------|--------|-------------|
+| `size` | `'M' | 'S' | 'XS'` | `-` | Change the size of the Button |
+| `palette` | `Palette` | `none` | Applies a color palette to the Button |
+| `state` | `'default' | 'loading' | 'error' | 'success'` | `default` | Modifies the state of the Button |
+
 ## Utilisation
 
 ### Quand utiliser Button
 
-<!-- TODO: Décrire les cas d'usage appropriés -->
+- Actions utilisateur
+- Déclenchement d'événements
+- Soumission de formulaires
 
 ### Quand ne pas utiliser
 
-<!-- TODO: Décrire les cas où un autre composant serait plus approprié -->
+- Navigation simple (utiliser Link)
+- Affichage d'informations statiques
 
 ## Exemples
 
 ### Exemple basique
 
 ```html
-<!-- TODO: Ajouter un exemple de code basique -->
+<button aria-expanded=
 ```
 
-### Exemple avancé
 
-```typescript
-<!-- TODO: Ajouter un exemple de code avancé -->
-```
+## Classes CSS
+
+| Classe | Description |
+|--------|-------------|
+| `.button` | Classe de base |
+| `.numericBadge` | Classe de base |
+| `.lucca-icon` | Classe de base |
+| `.icon-arrowChevronBottom` | Classe de base |
+| `.button-group` | Classe de base |
+| `.mod-block` | Modificateur block |
+| `.mod-disclosure` | Modificateur disclosure |
+| `.mod-more` | Modificateur more |
+| `.mod-outlined` | Modificateur outlined |
+| `.mod-onlyIcon` | Modificateur onlyIcon |
+| `.mod-ghost` | Modificateur ghost |
+| `.mod-critical` | Modificateur critical |
+| `.mod-S` | Modificateur S |
+| `.mod-XS` | Modificateur XS |
+| `.mod-AI` | Modificateur AI |
+| `.is-loading` | État loading |
+| `.is-success` | État success |
+| `.is-error` | État error |
+| `.palette-warning` | Palette warning |
+| `.palette-mint` | Palette mint |
+| `.palette-success` | Palette success |
+| `.palette-error` | Palette error |
 
 ## Accessibilité
 
-<!-- TODO: Documenter les considérations d'accessibilité -->
+- Utiliser des éléments sémantiques appropriés (<button>, <a>)
+- Fournir un texte alternatif pour les éléments visuels
+- Assurer un contraste suffisant
 
 ## Figma
 
@@ -70,4 +109,4 @@ import { NumericBadgeComponent } from '@lucca-front/ng/numeric-badge';
 
 ## Voir aussi
 
-<!-- TODO: Lister les composants liés -->
+<!-- Composants liés à documenter -->

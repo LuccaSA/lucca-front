@@ -1,13 +1,16 @@
 ---
-description: Table component from Lucca Front design system
+description: Composant Table - composants pour afficher des listes et collections de données
 triggers:
   - table
+  - tableau
   - empty-state
   - emptystatesection
   - button
   - list
   - data
   - grid
+  - collection
+  - items
 figma:
   nodeId: null
   fileKey: null
@@ -21,7 +24,9 @@ alwaysApply: false
 
 ## Description
 
-Table est un composant de la catégorie **Listings** du design system Lucca Front.
+Le composant **Table** fait partie de la catégorie **Listings** du design system Lucca Front.
+
+Composants pour afficher des listes et collections de données.
 
 **Story path:** `Documentation/Listings/Table/Actions`
 
@@ -34,33 +39,61 @@ import { ButtonComponent } from '@lucca-front/ng/button';
 ```
 
 
+## Propriétés
+
+| Propriété | Type | Défaut | Description |
+|-----------|------|--------|-------------|
+| `navSideCompact` | `any` | `false` | - |
+
 ## Utilisation
 
 ### Quand utiliser Table
 
-<!-- TODO: Décrire les cas d'usage appropriés -->
+- Affichage de collections
+- Tableaux de données
+- Listes d'éléments
 
 ### Quand ne pas utiliser
 
-<!-- TODO: Décrire les cas où un autre composant serait plus approprié -->
+- Élément unique
+- Formulaires
 
 ## Exemples
 
 ### Exemple basique
 
 ```html
-<!-- TODO: Ajouter un exemple de code basique -->
+<!-- header height passed with CSS var -->
+<table class=
 ```
 
-### Exemple avancé
 
-```typescript
-<!-- TODO: Ajouter un exemple de code avancé -->
-```
+## Classes CSS
+
+| Classe | Description |
+|--------|-------------|
+| `.table` | Classe de base |
+| `.table-head` | Classe de base |
+| `.table-head-row` | Classe de base |
+| `.table-head-row-cell` | Classe de base |
+| `.table-body` | Classe de base |
+| `.mod-actions` | Modificateur actions |
+| `.mod-ghost` | Modificateur ghost |
+| `.mod-onlyIcon` | Modificateur onlyIcon |
+| `.mod-S` | Modificateur S |
+| `.mod-card` | Modificateur card |
+| `.mod-clickable` | Modificateur clickable |
+| `.mod-draggable` | Modificateur draggable |
+| `.mod-filters` | Modificateur filters |
+| `.mod-search` | Modificateur search |
+| `.mod-block` | Modificateur block |
+| `.is-collapsed` | État collapsed |
 
 ## Accessibilité
 
-<!-- TODO: Documenter les considérations d'accessibilité -->
+- Utiliser des structures sémantiques (table, ul, ol)
+- Fournir des en-têtes pour les tableaux
+- Supporter le tri et la pagination accessibles
 
 ## Figma
 
@@ -68,4 +101,4 @@ import { ButtonComponent } from '@lucca-front/ng/button';
 
 ## Voir aussi
 
-<!-- TODO: Lister les composants liés -->
+<!-- Composants liés à documenter -->

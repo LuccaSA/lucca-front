@@ -1,5 +1,5 @@
 ---
-description: Tile component from Lucca Front design system
+description: Composant Tile - composants pour afficher des informations utilisateur
 triggers:
   - tile
   - user
@@ -8,6 +8,10 @@ triggers:
   - luusertile
   - user-popover
   - luuserpopover
+  - avatar
+  - profile
+  - person
+  - employee
 figma:
   nodeId: null
   fileKey: null
@@ -21,11 +25,13 @@ alwaysApply: false
 
 ## Description
 
-Tile est un composant de la catégorie **Users** du design system Lucca Front.
+Le composant **Tile** fait partie de la catégorie **Users** du design system Lucca Front.
+
+Composants pour afficher des informations utilisateur.
 
 **Story path:** `Documentation/Users/Tile/Angular/Format`
-
 **Component:** `UserTileFormatStory`
+
 
 ## Imports
 
@@ -39,29 +45,40 @@ import { LuUserPopoverDirective } from '@lucca-front/ng/user-popover';
 
 ### Quand utiliser Tile
 
-<!-- TODO: Décrire les cas d'usage appropriés -->
+- Affichage d'utilisateurs
+- Avatars
+- Profils
 
 ### Quand ne pas utiliser
 
-<!-- TODO: Décrire les cas où un autre composant serait plus approprié -->
+- Données non liées aux utilisateurs
 
 ## Exemples
 
 ### Exemple basique
 
 ```html
-<!-- TODO: Ajouter un exemple de code basique -->
+<!-- Voir les stories pour des exemples détaillés -->
 ```
 
-### Exemple avancé
 
-```typescript
-<!-- TODO: Ajouter un exemple de code avancé -->
-```
+## Classes CSS
+
+| Classe | Description |
+|--------|-------------|
+| `.userPopover_trigger` | Classe de base |
+| `.userTile` | Classe de base |
+| `.avatar` | Classe de base |
+| `.avatar-picture` | Classe de base |
+| `.userTile-content` | Classe de base |
+| `.mod-XS` | Modificateur XS |
+| `.mod-S` | Modificateur S |
+| `.mod-L` | Modificateur L |
 
 ## Accessibilité
 
-<!-- TODO: Documenter les considérations d'accessibilité -->
+- Fournir un texte alternatif pour les avatars
+- Ne pas reposer uniquement sur les images
 
 ## Figma
 
@@ -69,4 +86,4 @@ import { LuUserPopoverDirective } from '@lucca-front/ng/user-popover';
 
 ## Voir aussi
 
-<!-- TODO: Lister les composants liés -->
+<!-- Composants liés à documenter -->

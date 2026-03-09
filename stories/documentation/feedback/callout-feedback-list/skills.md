@@ -1,11 +1,14 @@
 ---
-description: Callout feedback list component from Lucca Front design system
+description: Composant Callout feedback list - composants pour communiquer des informations et états à l'utilisateur
 triggers:
   - callout-feedback-list
   - calloutfeedbacklist
   - notification
   - message
   - alert
+  - status
+  - feedback
+  - info
 figma:
   nodeId: null
   fileKey: null
@@ -19,7 +22,9 @@ alwaysApply: false
 
 ## Description
 
-Callout feedback list est un composant de la catégorie **Feedback** du design system Lucca Front.
+Le composant **Callout feedback list** fait partie de la catégorie **Feedback** du design system Lucca Front.
+
+Composants pour communiquer des informations et états à l'utilisateur.
 
 **Story path:** `Documentation/Feedback/Callout Feedback List/HTML&CSS`
 
@@ -29,29 +34,42 @@ Callout feedback list est un composant de la catégorie **Feedback** du design s
 
 ### Quand utiliser Callout feedback list
 
-<!-- TODO: Décrire les cas d'usage appropriés -->
+- Messages de succès/erreur
+- Alertes importantes
+- Informations contextuelles
 
 ### Quand ne pas utiliser
 
-<!-- TODO: Décrire les cas où un autre composant serait plus approprié -->
+- Contenu principal
+- Actions utilisateur
 
 ## Exemples
 
 ### Exemple basique
 
 ```html
-<!-- TODO: Ajouter un exemple de code basique -->
+<!-- Voir les stories pour des exemples détaillés -->
 ```
 
-### Exemple avancé
 
-```typescript
-<!-- TODO: Ajouter un exemple de code avancé -->
-```
+## Classes CSS
+
+| Classe | Description |
+|--------|-------------|
+| `.calloutFeedbackList` | Classe de base |
+| `.calloutFeedbackList-item` | Classe de base |
+| `.calloutFeedbackList-item-description` | Classe de base |
+| `.calloutFeedbackList-item-actions` | Classe de base |
+| `.button` | Classe de base |
+| `.mod-outlined` | Modificateur outlined |
+| `.mod-ghost` | Modificateur ghost |
+| `.mod-S` | Modificateur S |
 
 ## Accessibilité
 
-<!-- TODO: Documenter les considérations d'accessibilité -->
+- Utiliser aria-live pour les messages dynamiques
+- Associer le rôle approprié (alert, status)
+- Ne pas reposer uniquement sur la couleur
 
 ## Figma
 
@@ -59,4 +77,4 @@ Callout feedback list est un composant de la catégorie **Feedback** du design s
 
 ## Voir aussi
 
-<!-- TODO: Lister les composants liés -->
+<!-- Composants liés à documenter -->

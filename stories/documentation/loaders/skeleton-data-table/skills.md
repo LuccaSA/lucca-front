@@ -1,5 +1,5 @@
 ---
-description: Skeleton data table component from Lucca Front design system
+description: Composant Skeleton data table - composants pour indiquer un chargement ou une progression
 triggers:
   - skeleton-data-table
   - skeletondatatable
@@ -7,6 +7,7 @@ triggers:
   - loading
   - spinner
   - progress
+  - wait
 figma:
   nodeId: null
   fileKey: null
@@ -20,11 +21,13 @@ alwaysApply: false
 
 ## Description
 
-Skeleton data table est un composant de la catégorie **Loaders** du design system Lucca Front.
+Le composant **Skeleton data table** fait partie de la catégorie **Loaders** du design system Lucca Front.
+
+Composants pour indiquer un chargement ou une progression.
 
 **Story path:** `Documentation/Loaders/Skeleton/Skeleton DataTable`
-
 **Component:** `SkeletonDataTableComponent`
+
 
 ## Imports
 
@@ -37,29 +40,41 @@ import { SkeletonDataTableComponent } from '@lucca-front/ng/skeleton';
 
 ### Quand utiliser Skeleton data table
 
-<!-- TODO: Décrire les cas d'usage appropriés -->
+- Chargement de données
+- Actions asynchrones
+- Progression
 
 ### Quand ne pas utiliser
 
-<!-- TODO: Décrire les cas où un autre composant serait plus approprié -->
+- Contenu disponible immédiatement
 
 ## Exemples
 
 ### Exemple basique
 
 ```html
-<!-- TODO: Ajouter un exemple de code basique -->
+<!-- Voir les stories pour des exemples détaillés -->
 ```
 
-### Exemple avancé
 
-```typescript
-<!-- TODO: Ajouter un exemple de code avancé -->
-```
+## Classes CSS
+
+| Classe | Description |
+|--------|-------------|
+| `.dataTableWrapper` | Classe de base |
+| `.dataTable` | Classe de base |
+| `.skeleton` | Classe de base |
+| `.dataTable-head` | Classe de base |
+| `.dataTable-head-row` | Classe de base |
+| `.mod-alignCenter` | Modificateur alignCenter |
+| `.mod-alignEnd` | Modificateur alignEnd |
+| `.is-loading` | État loading |
 
 ## Accessibilité
 
-<!-- TODO: Documenter les considérations d'accessibilité -->
+- Annoncer le chargement avec aria-busy
+- Fournir un texte alternatif descriptif
+- Informer de la fin du chargement
 
 ## Figma
 
@@ -67,4 +82,4 @@ import { SkeletonDataTableComponent } from '@lucca-front/ng/skeleton';
 
 ## Voir aussi
 
-<!-- TODO: Lister les composants liés -->
+<!-- Composants liés à documenter -->

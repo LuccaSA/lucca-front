@@ -1,5 +1,5 @@
 ---
-description: Establishment select component from Lucca Front design system
+description: Composant Establishment select - composants pour la saisie et validation de données utilisateur
 triggers:
   - establishment-select
   - establishmentselect
@@ -9,6 +9,8 @@ triggers:
   - form
   - field
   - control
+  - validation
+  - saisie
 figma:
   nodeId: null
   fileKey: null
@@ -22,11 +24,13 @@ alwaysApply: false
 
 ## Description
 
-Establishment select est un composant de la catégorie **Forms** du design system Lucca Front.
+Le composant **Establishment select** fait partie de la catégorie **Forms** du design system Lucca Front.
+
+Composants pour la saisie et validation de données utilisateur.
 
 **Story path:** `Documentation/Forms/EstablishmentSelect`
-
 **Component:** `EstablishmentSelectStory`
+
 
 ## Imports
 
@@ -39,29 +43,40 @@ import { LuEstablishmentSelectInputComponent } from '@lucca-front/ng/establishme
 
 ### Quand utiliser Establishment select
 
-<!-- TODO: Décrire les cas d'usage appropriés -->
+- Saisie de données
+- Formulaires
+- Configuration
+- Filtres
 
 ### Quand ne pas utiliser
 
-<!-- TODO: Décrire les cas où un autre composant serait plus approprié -->
+- Affichage de données en lecture seule
+- Navigation
 
 ## Exemples
 
 ### Exemple basique
 
 ```html
-<!-- TODO: Ajouter un exemple de code basique -->
+<!-- Voir les stories pour des exemples détaillés -->
 ```
 
-### Exemple avancé
 
-```typescript
-<!-- TODO: Ajouter un exemple de code avancé -->
-```
+## Classes CSS
+
+| Classe | Description |
+|--------|-------------|
+| `.textfield` | Classe de base |
+| `.textfield-input` | Classe de base |
+| `.textfield-label` | Classe de base |
+| `.mod-inline` | Modificateur inline |
 
 ## Accessibilité
 
-<!-- TODO: Documenter les considérations d'accessibilité -->
+- Associer chaque champ à un label avec for/id
+- Fournir des messages d'erreur explicites
+- Supporter la navigation au clavier
+- Indiquer les champs obligatoires
 
 ## Figma
 
@@ -69,4 +84,4 @@ import { LuEstablishmentSelectInputComponent } from '@lucca-front/ng/establishme
 
 ## Voir aussi
 
-<!-- TODO: Lister les composants liés -->
+<!-- Composants liés à documenter -->

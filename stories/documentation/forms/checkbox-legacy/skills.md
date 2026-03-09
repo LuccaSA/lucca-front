@@ -1,5 +1,5 @@
 ---
-description: Checkbox legacy component from Lucca Front design system
+description: Composant Checkbox legacy - composants pour la saisie et validation de données utilisateur
 triggers:
   - checkbox-legacy
   - checkboxlegacy
@@ -7,6 +7,8 @@ triggers:
   - form
   - field
   - control
+  - validation
+  - saisie
 figma:
   nodeId: null
   fileKey: null
@@ -20,7 +22,9 @@ alwaysApply: false
 
 ## Description
 
-Checkbox legacy est un composant de la catégorie **Forms** du design system Lucca Front.
+Le composant **Checkbox legacy** fait partie de la catégorie **Forms** du design system Lucca Front.
+
+Composants pour la saisie et validation de données utilisateur.
 
 **Story path:** `Documentation/Forms/Checkbox Legacy/Basic`
 
@@ -30,29 +34,42 @@ Checkbox legacy est un composant de la catégorie **Forms** du design system Luc
 
 ### Quand utiliser Checkbox legacy
 
-<!-- TODO: Décrire les cas d'usage appropriés -->
+- Saisie de données
+- Formulaires
+- Configuration
+- Filtres
 
 ### Quand ne pas utiliser
 
-<!-- TODO: Décrire les cas où un autre composant serait plus approprié -->
+- Affichage de données en lecture seule
+- Navigation
 
 ## Exemples
 
 ### Exemple basique
 
 ```html
-<!-- TODO: Ajouter un exemple de code basique -->
+<!-- Voir les stories pour des exemples détaillés -->
 ```
 
-### Exemple avancé
 
-```typescript
-<!-- TODO: Ajouter un exemple de code avancé -->
-```
+## Classes CSS
+
+| Classe | Description |
+|--------|-------------|
+| `.checkboxesfield` | Classe de base |
+| `.checkboxesfield-label` | Classe de base |
+| `.checkbox-input` | Classe de base |
+| `.checkbox-label` | Classe de base |
+| `.checkbox` | Classe de base |
+| `.is-incomplete` | État incomplete |
 
 ## Accessibilité
 
-<!-- TODO: Documenter les considérations d'accessibilité -->
+- Associer chaque champ à un label avec for/id
+- Fournir des messages d'erreur explicites
+- Supporter la navigation au clavier
+- Indiquer les champs obligatoires
 
 ## Figma
 
@@ -60,4 +77,4 @@ Checkbox legacy est un composant de la catégorie **Forms** du design system Luc
 
 ## Voir aussi
 
-<!-- TODO: Lister les composants liés -->
+<!-- Composants liés à documenter -->

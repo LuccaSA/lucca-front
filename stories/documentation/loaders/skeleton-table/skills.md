@@ -1,5 +1,5 @@
 ---
-description: Skeleton table component from Lucca Front design system
+description: Composant Skeleton table - composants pour indiquer un chargement ou une progression
 triggers:
   - skeleton-table
   - skeletontable
@@ -7,6 +7,7 @@ triggers:
   - loading
   - spinner
   - progress
+  - wait
 figma:
   nodeId: null
   fileKey: null
@@ -20,11 +21,13 @@ alwaysApply: false
 
 ## Description
 
-Skeleton table est un composant de la catégorie **Loaders** du design system Lucca Front.
+Le composant **Skeleton table** fait partie de la catégorie **Loaders** du design system Lucca Front.
+
+Composants pour indiquer un chargement ou une progression.
 
 **Story path:** `Documentation/Loaders/Skeleton/Skeleton Table`
-
 **Component:** `SkeletonTableComponent`
+
 
 ## Imports
 
@@ -37,29 +40,41 @@ import { SkeletonTableComponent } from '@lucca-front/ng/skeleton';
 
 ### Quand utiliser Skeleton table
 
-<!-- TODO: Décrire les cas d'usage appropriés -->
+- Chargement de données
+- Actions asynchrones
+- Progression
 
 ### Quand ne pas utiliser
 
-<!-- TODO: Décrire les cas où un autre composant serait plus approprié -->
+- Contenu disponible immédiatement
 
 ## Exemples
 
 ### Exemple basique
 
 ```html
-<!-- TODO: Ajouter un exemple de code basique -->
+<!-- Voir les stories pour des exemples détaillés -->
 ```
 
-### Exemple avancé
 
-```typescript
-<!-- TODO: Ajouter un exemple de code avancé -->
-```
+## Classes CSS
+
+| Classe | Description |
+|--------|-------------|
+| `.table` | Classe de base |
+| `.skeleton` | Classe de base |
+| `.table-head` | Classe de base |
+| `.table-head-row` | Classe de base |
+| `.table-head-row-cell` | Classe de base |
+| `.mod-alignCenter` | Modificateur alignCenter |
+| `.mod-alignRight` | Modificateur alignRight |
+| `.is-loading` | État loading |
 
 ## Accessibilité
 
-<!-- TODO: Documenter les considérations d'accessibilité -->
+- Annoncer le chargement avec aria-busy
+- Fournir un texte alternatif descriptif
+- Informer de la fin du chargement
 
 ## Figma
 
@@ -67,4 +82,4 @@ import { SkeletonTableComponent } from '@lucca-front/ng/skeleton';
 
 ## Voir aussi
 
-<!-- TODO: Lister les composants liés -->
+<!-- Composants liés à documenter -->

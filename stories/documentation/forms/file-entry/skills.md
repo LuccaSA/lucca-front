@@ -1,5 +1,5 @@
 ---
-description: File entry component from Lucca Front design system
+description: Composant File entry - composants pour la saisie et validation de données utilisateur
 triggers:
   - file-entry
   - fileentry
@@ -8,6 +8,8 @@ triggers:
   - form
   - field
   - control
+  - validation
+  - saisie
 figma:
   nodeId: null
   fileKey: null
@@ -21,7 +23,9 @@ alwaysApply: false
 
 ## Description
 
-File entry est un composant de la catégorie **Forms** du design system Lucca Front.
+Le composant **File entry** fait partie de la catégorie **Forms** du design system Lucca Front.
+
+Composants pour la saisie et validation de données utilisateur.
 
 **Story path:** `Documentation/File/FileEntry/Angular/Basic`
 
@@ -37,29 +41,31 @@ import { FileEntryComponent } from '@lucca-front/ng/file-upload';
 
 ### Quand utiliser File entry
 
-<!-- TODO: Décrire les cas d'usage appropriés -->
+- Saisie de données
+- Formulaires
+- Configuration
+- Filtres
 
 ### Quand ne pas utiliser
 
-<!-- TODO: Décrire les cas où un autre composant serait plus approprié -->
+- Affichage de données en lecture seule
+- Navigation
 
 ## Exemples
 
 ### Exemple basique
 
 ```html
-<!-- TODO: Ajouter un exemple de code basique -->
+<lu-file-entry ... ... [entry]=
 ```
 
-### Exemple avancé
-
-```typescript
-<!-- TODO: Ajouter un exemple de code avancé -->
-```
 
 ## Accessibilité
 
-<!-- TODO: Documenter les considérations d'accessibilité -->
+- Associer chaque champ à un label avec for/id
+- Fournir des messages d'erreur explicites
+- Supporter la navigation au clavier
+- Indiquer les champs obligatoires
 
 ## Figma
 
@@ -67,4 +73,4 @@ import { FileEntryComponent } from '@lucca-front/ng/file-upload';
 
 ## Voir aussi
 
-<!-- TODO: Lister les composants liés -->
+<!-- Composants liés à documenter -->

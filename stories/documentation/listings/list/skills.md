@@ -1,10 +1,13 @@
 ---
-description: List component from Lucca Front design system
+description: Composant List - composants pour afficher des listes et collections de données
 triggers:
   - list
+  - liste
   - table
   - data
   - grid
+  - collection
+  - items
 figma:
   nodeId: null
   fileKey: null
@@ -18,7 +21,9 @@ alwaysApply: false
 
 ## Description
 
-List est un composant de la catégorie **Listings** du design system Lucca Front.
+Le composant **List** fait partie de la catégorie **Listings** du design system Lucca Front.
+
+Composants pour afficher des listes et collections de données.
 
 **Story path:** `Documentation/Listings/List/Basic`
 
@@ -28,29 +33,42 @@ List est un composant de la catégorie **Listings** du design system Lucca Front
 
 ### Quand utiliser List
 
-<!-- TODO: Décrire les cas d'usage appropriés -->
+- Affichage de collections
+- Tableaux de données
+- Listes d'éléments
 
 ### Quand ne pas utiliser
 
-<!-- TODO: Décrire les cas où un autre composant serait plus approprié -->
+- Élément unique
+- Formulaires
 
 ## Exemples
 
 ### Exemple basique
 
 ```html
-<!-- TODO: Ajouter un exemple de code basique -->
+<!-- Voir les stories pour des exemples détaillés -->
 ```
 
-### Exemple avancé
 
-```typescript
-<!-- TODO: Ajouter un exemple de code avancé -->
-```
+## Classes CSS
+
+| Classe | Description |
+|--------|-------------|
+| `.list` | Classe de base |
+| `.list-item` | Classe de base |
+| `.list-item-content` | Classe de base |
+| `.list-item-content-title` | Classe de base |
+| `.list-item-content-description` | Classe de base |
+| `.mod-onlyIcon` | Modificateur onlyIcon |
+| `.mod-S` | Modificateur S |
+| `.mod-draggable` | Modificateur draggable |
 
 ## Accessibilité
 
-<!-- TODO: Documenter les considérations d'accessibilité -->
+- Utiliser des structures sémantiques (table, ul, ol)
+- Fournir des en-têtes pour les tableaux
+- Supporter le tri et la pagination accessibles
 
 ## Figma
 
@@ -58,4 +76,4 @@ List est un composant de la catégorie **Listings** du design system Lucca Front
 
 ## Voir aussi
 
-<!-- TODO: Lister les composants liés -->
+<!-- Composants liés à documenter -->

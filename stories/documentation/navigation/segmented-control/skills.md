@@ -1,5 +1,5 @@
 ---
-description: Segmented control component from Lucca Front design system
+description: Composant Segmented control - composants pour la navigation dans l'application
 triggers:
   - segmented-control
   - segmentedcontrol
@@ -12,6 +12,9 @@ triggers:
   - nav
   - menu
   - navigate
+  - route
+  - link
+  - breadcrumb
 figma:
   nodeId: null
   fileKey: null
@@ -25,7 +28,9 @@ alwaysApply: false
 
 ## Description
 
-Segmented control est un composant de la catégorie **Navigation** du design system Lucca Front.
+Le composant **Segmented control** fait partie de la catégorie **Navigation** du design system Lucca Front.
+
+Composants pour la navigation dans l'application.
 
 **Story path:** `Documentation/Navigation/segmentedControl/Angular/Tabs`
 
@@ -39,33 +44,61 @@ import { SegmentedControlComponent, SegmentedControlFilterComponent } from '@luc
 ```
 
 
+## Propriétés
+
+| Propriété | Type | Défaut | Description |
+|-----------|------|--------|-------------|
+| `size` | `'XS' | 'S' | 'M'` | `-` | The size of the badge |
+| `palette` | `Palette` | `none` | The palette to use for this badge. Defaults to 'none' (inherits parent palette) |
+| `maxValue` | `number` | `999` | Indicates the maximum value of number for the numeric badge |
+
 ## Utilisation
 
 ### Quand utiliser Segmented control
 
-<!-- TODO: Décrire les cas d'usage appropriés -->
+- Navigation entre pages
+- Menus
+- Fil d'Ariane
+- Pagination
 
 ### Quand ne pas utiliser
 
-<!-- TODO: Décrire les cas où un autre composant serait plus approprié -->
+- Actions (utiliser Button)
+- Affichage de données
 
 ## Exemples
 
 ### Exemple basique
 
 ```html
-<!-- TODO: Ajouter un exemple de code basique -->
+<ng-template #label> Lorem... </ng-template>
+<lu-segmented-control-tabs......>
+<lu-segmented-control-tabs-panel [label]=
 ```
 
-### Exemple avancé
+### Autres exemples
 
-```typescript
-<!-- TODO: Ajouter un exemple de code avancé -->
+```html
+<ng-template #label> Lorem... </ng-template>
+<lu-segmented-control...... [(ngModel)]=
 ```
+
+
+## Classes CSS
+
+| Classe | Description |
+|--------|-------------|
+| `.demo` | Classe de base |
+| `.numericBadge` | Classe de base |
+| `.segmentedControl-item` | Classe de base |
+| `.segmentedControl-item-input` | Classe de base |
+| `.segmentedControl-item-action` | Classe de base |
 
 ## Accessibilité
 
-<!-- TODO: Documenter les considérations d'accessibilité -->
+- Utiliser des landmarks nav appropriés
+- Indiquer la page courante avec aria-current
+- Supporter la navigation au clavier
 
 ## Figma
 
@@ -73,4 +106,4 @@ import { SegmentedControlComponent, SegmentedControlFilterComponent } from '@luc
 
 ## Voir aussi
 
-<!-- TODO: Lister les composants liés -->
+<!-- Composants liés à documenter -->

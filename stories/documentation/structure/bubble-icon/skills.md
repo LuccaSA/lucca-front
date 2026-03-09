@@ -1,8 +1,14 @@
 ---
-description: Bubble icon component from Lucca Front design system
+description: Composant Bubble icon - composants pour structurer la mise en page
 triggers:
   - bubble-icon
   - bubbleicon
+  - layout
+  - container
+  - structure
+  - grid
+  - box
+  - card
 figma:
   nodeId: null
   fileKey: null
@@ -16,7 +22,9 @@ alwaysApply: false
 
 ## Description
 
-Bubble icon est un composant de la catégorie **Structure** du design system Lucca Front.
+Le composant **Bubble icon** fait partie de la catégorie **Structure** du design system Lucca Front.
+
+Composants pour structurer la mise en page.
 
 **Story path:** `Documentation/Structure/Bubble icon/Angular/Basic`
 
@@ -32,29 +40,38 @@ import { BubbleIconComponent } from '@lucca-front/ng/bubble-icon';
 
 ### Quand utiliser Bubble icon
 
-<!-- TODO: Décrire les cas d'usage appropriés -->
+- Organisation du contenu
+- Mise en page
+- Conteneurs
 
 ### Quand ne pas utiliser
 
-<!-- TODO: Décrire les cas où un autre composant serait plus approprié -->
+- Composants interactifs
 
 ## Exemples
 
 ### Exemple basique
 
 ```html
-<!-- TODO: Ajouter un exemple de code basique -->
+<lu-bubble-icon............... />\n
 ```
 
-### Exemple avancé
 
-```typescript
-<!-- TODO: Ajouter un exemple de code avancé -->
-```
+## Classes CSS
+
+| Classe | Description |
+|--------|-------------|
+| `.bubbleIcon-bubble` | Classe de base |
+| `.bubbleIcon-bubble-pathInline` | Classe de base |
+| `.bubbleIcon-bubble-pathBlock` | Classe de base |
+| `.bubbleIcon-icon` | Classe de base |
+| `.lucca-icon` | Classe de base |
 
 ## Accessibilité
 
-<!-- TODO: Documenter les considérations d'accessibilité -->
+- Utiliser des landmarks appropriés
+- Maintenir un ordre de lecture logique
+- Structurer le contenu de manière sémantique
 
 ## Figma
 
@@ -62,4 +79,4 @@ import { BubbleIconComponent } from '@lucca-front/ng/bubble-icon';
 
 ## Voir aussi
 
-<!-- TODO: Lister les composants liés -->
+<!-- Composants liés à documenter -->

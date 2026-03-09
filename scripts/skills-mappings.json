@@ -1,5 +1,5 @@
 {
-  "generatedAt": "2026-03-09T13:27:52.628Z",
+  "generatedAt": "2026-03-09T13:41:10.810Z",
   "totalComponents": 140,
   "linkedComponents": 0,
   "mappings": [
@@ -8,12 +8,14 @@
       "skillPath": "actions\\button\\skills.md",
       "triggers": [
         "button",
+        "bouton",
         "icon",
         "numeric-badge",
         "numericbadge",
         "click",
         "action",
-        "interactive"
+        "interactive",
+        "cta"
       ],
       "figma": {
         "nodeId": null,
@@ -29,7 +31,8 @@
         "link",
         "click",
         "action",
-        "interactive"
+        "interactive",
+        "cta"
       ],
       "figma": {
         "nodeId": null,
@@ -53,7 +56,10 @@
         "textinput",
         "notification",
         "message",
-        "alert"
+        "alert",
+        "status",
+        "feedback",
+        "info"
       ],
       "figma": {
         "nodeId": null,
@@ -74,7 +80,10 @@
         "calloutfeedbacklist",
         "notification",
         "message",
-        "alert"
+        "alert",
+        "status",
+        "feedback",
+        "info"
       ],
       "figma": {
         "nodeId": null,
@@ -90,7 +99,10 @@
         "calloutfeedbacklist",
         "notification",
         "message",
-        "alert"
+        "alert",
+        "status",
+        "feedback",
+        "info"
       ],
       "figma": {
         "nodeId": null,
@@ -111,7 +123,10 @@
         "calloutfeedbacklist",
         "notification",
         "message",
-        "alert"
+        "alert",
+        "status",
+        "feedback",
+        "info"
       ],
       "figma": {
         "nodeId": null,
@@ -132,7 +147,10 @@
         "lusafeexternalsvgpipe",
         "notification",
         "message",
-        "alert"
+        "alert",
+        "status",
+        "feedback",
+        "info"
       ],
       "figma": {
         "nodeId": null,
@@ -148,7 +166,10 @@
         "errorpage",
         "notification",
         "message",
-        "alert"
+        "alert",
+        "status",
+        "feedback",
+        "info"
       ],
       "figma": {
         "nodeId": null,
@@ -165,7 +186,10 @@
         "icon",
         "notification",
         "message",
-        "alert"
+        "alert",
+        "status",
+        "feedback",
+        "info"
       ],
       "figma": {
         "nodeId": null,
@@ -182,7 +206,10 @@
         "icon",
         "notification",
         "message",
-        "alert"
+        "alert",
+        "status",
+        "feedback",
+        "info"
       ],
       "figma": {
         "nodeId": null,
@@ -195,12 +222,15 @@
       "skillPath": "forms\\api\\select\\skills.md",
       "triggers": [
         "select",
+        "selection",
         "api",
         "luapiselectinput",
         "input",
         "form",
         "field",
-        "control"
+        "control",
+        "validation",
+        "saisie"
       ],
       "figma": {
         "nodeId": null,
@@ -213,10 +243,13 @@
       "skillPath": "forms\\checkbox\\skills.md",
       "triggers": [
         "checkbox",
+        "case-a-cocher",
         "input",
         "form",
         "field",
-        "control"
+        "control",
+        "validation",
+        "saisie"
       ],
       "figma": {
         "nodeId": null,
@@ -233,7 +266,9 @@
         "input",
         "form",
         "field",
-        "control"
+        "control",
+        "validation",
+        "saisie"
       ],
       "figma": {
         "nodeId": null,
@@ -251,7 +286,9 @@
         "input",
         "form",
         "field",
-        "control"
+        "control",
+        "validation",
+        "saisie"
       ],
       "figma": {
         "nodeId": null,
@@ -264,6 +301,7 @@
       "skillPath": "forms\\date\\calendar\\skills.md",
       "triggers": [
         "calendar",
+        "calendrier",
         "core",
         "aludateadapter",
         "lunativedateadapter",
@@ -273,7 +311,9 @@
         "input",
         "form",
         "field",
-        "control"
+        "control",
+        "validation",
+        "saisie"
       ],
       "figma": {
         "nodeId": null,
@@ -286,6 +326,7 @@
       "skillPath": "forms\\date\\select\\skills.md",
       "triggers": [
         "select",
+        "selection",
         "core",
         "aludateadapter",
         "eludategranularity",
@@ -296,7 +337,9 @@
         "luinputdisplayer",
         "form",
         "field",
-        "control"
+        "control",
+        "validation",
+        "saisie"
       ],
       "figma": {
         "nodeId": null,
@@ -322,7 +365,9 @@
         "input",
         "form",
         "field",
-        "control"
+        "control",
+        "validation",
+        "saisie"
       ],
       "figma": {
         "nodeId": null,
@@ -339,7 +384,9 @@
         "input",
         "form",
         "field",
-        "control"
+        "control",
+        "validation",
+        "saisie"
       ],
       "figma": {
         "nodeId": null,
@@ -358,7 +405,9 @@
         "input",
         "form",
         "field",
-        "control"
+        "control",
+        "validation",
+        "saisie"
       ],
       "figma": {
         "nodeId": null,
@@ -384,7 +433,9 @@
         "gridcolumn",
         "input",
         "field",
-        "control"
+        "control",
+        "validation",
+        "saisie"
       ],
       "figma": {
         "nodeId": null,
@@ -397,6 +448,7 @@
       "skillPath": "forms\\fields\\checkbox\\skills.md",
       "triggers": [
         "checkbox",
+        "case-a-cocher",
         "form-field",
         "formfield",
         "forms",
@@ -404,7 +456,9 @@
         "input",
         "form",
         "field",
-        "control"
+        "control",
+        "validation",
+        "saisie"
       ],
       "figma": {
         "nodeId": null,
@@ -426,7 +480,9 @@
         "input",
         "form",
         "field",
-        "control"
+        "control",
+        "validation",
+        "saisie"
       ],
       "figma": {
         "nodeId": null,
@@ -446,7 +502,9 @@
         "input",
         "form",
         "field",
-        "control"
+        "control",
+        "validation",
+        "saisie"
       ],
       "figma": {
         "nodeId": null,
@@ -468,7 +526,9 @@
         "input",
         "form",
         "field",
-        "control"
+        "control",
+        "validation",
+        "saisie"
       ],
       "figma": {
         "nodeId": null,
@@ -490,7 +550,9 @@
         "input",
         "form",
         "field",
-        "control"
+        "control",
+        "validation",
+        "saisie"
       ],
       "figma": {
         "nodeId": null,
@@ -510,7 +572,9 @@
         "input",
         "form",
         "field",
-        "control"
+        "control",
+        "validation",
+        "saisie"
       ],
       "figma": {
         "nodeId": null,
@@ -531,7 +595,9 @@
         "input",
         "form",
         "field",
-        "control"
+        "control",
+        "validation",
+        "saisie"
       ],
       "figma": {
         "nodeId": null,
@@ -551,7 +617,9 @@
         "input",
         "form",
         "field",
-        "control"
+        "control",
+        "validation",
+        "saisie"
       ],
       "figma": {
         "nodeId": null,
@@ -564,6 +632,7 @@
       "skillPath": "forms\\fields\\radio\\skills.md",
       "triggers": [
         "radio",
+        "bouton-radio",
         "form-field",
         "formfield",
         "forms",
@@ -571,7 +640,9 @@
         "input",
         "form",
         "field",
-        "control"
+        "control",
+        "validation",
+        "saisie"
       ],
       "figma": {
         "nodeId": null,
@@ -602,11 +673,7 @@
         "tags",
         "forms/rich-text-input/formatters/plain-text",
         "plaintext_tags",
-        "plaintextformatterwithtags",
-        "input",
-        "form",
-        "field",
-        "control"
+        "plaintextformatterwithtags"
       ],
       "figma": {
         "nodeId": null,
@@ -628,7 +695,9 @@
         "input",
         "form",
         "field",
-        "control"
+        "control",
+        "validation",
+        "saisie"
       ],
       "figma": {
         "nodeId": null,
@@ -650,7 +719,9 @@
         "textinput",
         "form",
         "field",
-        "control"
+        "control",
+        "validation",
+        "saisie"
       ],
       "figma": {
         "nodeId": null,
@@ -663,6 +734,7 @@
       "skillPath": "forms\\fields\\switch\\skills.md",
       "triggers": [
         "switch",
+        "interrupteur",
         "form-field",
         "formfield",
         "forms",
@@ -671,7 +743,9 @@
         "input",
         "form",
         "field",
-        "control"
+        "control",
+        "validation",
+        "saisie"
       ],
       "figma": {
         "nodeId": null,
@@ -684,6 +758,7 @@
       "skillPath": "forms\\fields\\text\\skills.md",
       "triggers": [
         "text",
+        "texte",
         "form-field",
         "formfield",
         "forms",
@@ -691,7 +766,9 @@
         "input",
         "form",
         "field",
-        "control"
+        "control",
+        "validation",
+        "saisie"
       ],
       "figma": {
         "nodeId": null,
@@ -711,7 +788,9 @@
         "input",
         "form",
         "field",
-        "control"
+        "control",
+        "validation",
+        "saisie"
       ],
       "figma": {
         "nodeId": null,
@@ -734,7 +813,9 @@
         "input",
         "form",
         "field",
-        "control"
+        "control",
+        "validation",
+        "saisie"
       ],
       "figma": {
         "nodeId": null,
@@ -752,7 +833,9 @@
         "input",
         "form",
         "field",
-        "control"
+        "control",
+        "validation",
+        "saisie"
       ],
       "figma": {
         "nodeId": null,
@@ -770,7 +853,9 @@
         "input",
         "form",
         "field",
-        "control"
+        "control",
+        "validation",
+        "saisie"
       ],
       "figma": {
         "nodeId": null,
@@ -791,7 +876,9 @@
         "input",
         "form",
         "field",
-        "control"
+        "control",
+        "validation",
+        "saisie"
       ],
       "figma": {
         "nodeId": null,
@@ -817,7 +904,9 @@
         "luinput",
         "form",
         "field",
-        "control"
+        "control",
+        "validation",
+        "saisie"
       ],
       "figma": {
         "nodeId": null,
@@ -833,7 +922,9 @@
         "input",
         "form",
         "field",
-        "control"
+        "control",
+        "validation",
+        "saisie"
       ],
       "figma": {
         "nodeId": null,
@@ -864,39 +955,7 @@
         "form-field",
         "formfield",
         "multi-select",
-        "lumultiselectinput",
-        "lumultidisplayer",
-        "lumultiselectcounterdisplayer",
-        "lumultiselectwithselectall",
-        "numeric-badge",
-        "numericbadge",
-        "segmented-control",
-        "segmentedcontrol",
-        "segmentedcontrolfilter",
-        "simple-select",
-        "lusimpleselectinput",
-        "core-select",
-        "ludisplayer",
-        "luoption",
-        "lucoreselecttotalcount",
-        "core-select/department",
-        "lucoreselectdepartments",
-        "tree-select",
-        "treeselect",
-        "core-select/user",
-        "lucoreselectusers",
-        "providecoreselectcurrentuserid",
-        "tooltip",
-        "lutooltip",
-        "icon",
-        "popover2",
-        "popover",
-        "scroll-box",
-        "scrollbox",
-        "input",
-        "form",
-        "field",
-        "control"
+        "lumultiselectinput"
       ],
       "figma": {
         "nodeId": null,
@@ -913,7 +972,9 @@
         "input",
         "form",
         "field",
-        "control"
+        "control",
+        "validation",
+        "saisie"
       ],
       "figma": {
         "nodeId": null,
@@ -929,7 +990,9 @@
         "input",
         "form",
         "field",
-        "control"
+        "control",
+        "validation",
+        "saisie"
       ],
       "figma": {
         "nodeId": null,
@@ -946,7 +1009,9 @@
         "input",
         "form",
         "field",
-        "control"
+        "control",
+        "validation",
+        "saisie"
       ],
       "figma": {
         "nodeId": null,
@@ -972,7 +1037,9 @@
         "input",
         "form",
         "field",
-        "control"
+        "control",
+        "validation",
+        "saisie"
       ],
       "figma": {
         "nodeId": null,
@@ -994,7 +1061,9 @@
         "input",
         "form",
         "field",
-        "control"
+        "control",
+        "validation",
+        "saisie"
       ],
       "figma": {
         "nodeId": null,
@@ -1011,7 +1080,9 @@
         "input",
         "form",
         "field",
-        "control"
+        "control",
+        "validation",
+        "saisie"
       ],
       "figma": {
         "nodeId": null,
@@ -1028,7 +1099,9 @@
         "input",
         "form",
         "field",
-        "control"
+        "control",
+        "validation",
+        "saisie"
       ],
       "figma": {
         "nodeId": null,
@@ -1041,6 +1114,7 @@
       "skillPath": "forms\\select\\skills.md",
       "triggers": [
         "select",
+        "selection",
         "color",
         "core-select",
         "ludisplayer",
@@ -1058,56 +1132,7 @@
         "colorinput",
         "coloroption",
         "simple-select",
-        "lusimpleselectinput",
-        "tooltip",
-        "lutooltiptrigger",
-        "lutooltip",
-        "multi-select",
-        "lumultiselectinput",
-        "lumultidisplayer",
-        "lumultiselectcontentdisplayer",
-        "lumultiselectcounterdisplayer",
-        "lumultiselectdefaultdisplayer",
-        "lumultiselectdisplayerinput",
-        "lumultiselection",
-        "lumultiselectwithselectall",
-        "core-select/api",
-        "lucoreselectapiv4",
-        "lucoreselectapiv3",
-        "core-select/department",
-        "lucoreselectdepartments",
-        "core-select/establishment",
-        "lucoreselectestablishments",
-        "core-select/job-qualification",
-        "lucoreselectjobqualifications",
-        "core-select/occupation-category",
-        "lucoreselectoccupationcategories",
-        "core-select/user",
-        "lucoreselectusers",
-        "providecoreselectcurrentuserid",
-        "lucoreselectuseroption",
-        "tree-select",
-        "treeselect",
-        "clear",
-        "input",
-        "luinput",
-        "luinputdisplayer",
-        "option",
-        "luoptionitem",
-        "luoptionpicker",
-        "luselectinput",
-        "chip",
-        "icon",
-        "user",
-        "luuserdisplaypipe",
-        "luuserpicture",
-        "divider",
-        "filter-pills",
-        "filterbar",
-        "filterpill",
-        "form",
-        "field",
-        "control"
+        "lusimpleselectinput"
       ],
       "figma": {
         "nodeId": null,
@@ -1120,10 +1145,13 @@
       "skillPath": "forms\\switch\\skills.md",
       "triggers": [
         "switch",
+        "interrupteur",
         "input",
         "form",
         "field",
-        "control"
+        "control",
+        "validation",
+        "saisie"
       ],
       "figma": {
         "nodeId": null,
@@ -1140,7 +1168,9 @@
         "input",
         "form",
         "field",
-        "control"
+        "control",
+        "validation",
+        "saisie"
       ],
       "figma": {
         "nodeId": null,
@@ -1157,7 +1187,9 @@
         "input",
         "form",
         "field",
-        "control"
+        "control",
+        "validation",
+        "saisie"
       ],
       "figma": {
         "nodeId": null,
@@ -1170,6 +1202,7 @@
       "skillPath": "forms\\time\\skills.md",
       "triggers": [
         "time",
+        "heure",
         "form-field",
         "formfield",
         "durationpicker",
@@ -1177,7 +1210,9 @@
         "input",
         "form",
         "field",
-        "control"
+        "control",
+        "validation",
+        "saisie"
       ],
       "figma": {
         "nodeId": null,
@@ -1189,7 +1224,10 @@
       "componentName": "Utilities",
       "skillPath": "integration\\utilities\\skills.md",
       "triggers": [
-        "utilities"
+        "utilities",
+        "integration",
+        "utility",
+        "helper"
       ],
       "figma": {
         "nodeId": null,
@@ -1202,7 +1240,11 @@
       "skillPath": "intl\\skills.md",
       "triggers": [
         "intl",
-        "pagination"
+        "pagination",
+        "i18n",
+        "translation",
+        "locale",
+        "language"
       ],
       "figma": {
         "nodeId": null,
@@ -1215,10 +1257,13 @@
       "skillPath": "listings\\chip\\skills.md",
       "triggers": [
         "chip",
+        "etiquette",
         "list",
         "table",
         "data",
-        "grid"
+        "grid",
+        "collection",
+        "items"
       ],
       "figma": {
         "nodeId": null,
@@ -1249,8 +1294,7 @@
         "pagination",
         "list",
         "table",
-        "data",
-        "grid"
+        "data"
       ],
       "figma": {
         "nodeId": null,
@@ -1281,23 +1325,7 @@
         "indextablerow",
         "indextableactionfile",
         "pagination",
-        "tooltip",
-        "lutooltip",
-        "user",
-        "luuserdisplay",
-        "luuserpicture",
-        "user-popover",
-        "luuserpopover",
-        "empty-state",
-        "emptystatesection",
-        "numeric-badge",
-        "numericbadge",
-        "safe-content",
-        "lusafeexternalsvgpipe",
-        "list",
-        "table",
-        "data",
-        "grid"
+        "tooltip"
       ],
       "figma": {
         "nodeId": null,
@@ -1310,9 +1338,12 @@
       "skillPath": "listings\\list\\skills.md",
       "triggers": [
         "list",
+        "liste",
         "table",
         "data",
-        "grid"
+        "grid",
+        "collection",
+        "items"
       ],
       "figma": {
         "nodeId": null,
@@ -1329,7 +1360,9 @@
         "list",
         "table",
         "data",
-        "grid"
+        "grid",
+        "collection",
+        "items"
       ],
       "figma": {
         "nodeId": null,
@@ -1349,7 +1382,9 @@
         "list",
         "table",
         "data",
-        "grid"
+        "grid",
+        "collection",
+        "items"
       ],
       "figma": {
         "nodeId": null,
@@ -1362,12 +1397,15 @@
       "skillPath": "listings\\table\\skills.md",
       "triggers": [
         "table",
+        "tableau",
         "empty-state",
         "emptystatesection",
         "button",
         "list",
         "data",
-        "grid"
+        "grid",
+        "collection",
+        "items"
       ],
       "figma": {
         "nodeId": null,
@@ -1384,7 +1422,9 @@
         "list",
         "table",
         "data",
-        "grid"
+        "grid",
+        "collection",
+        "items"
       ],
       "figma": {
         "nodeId": null,
@@ -1400,7 +1440,9 @@
         "list",
         "table",
         "data",
-        "grid"
+        "grid",
+        "collection",
+        "items"
       ],
       "figma": {
         "nodeId": null,
@@ -1415,7 +1457,9 @@
         "gauge",
         "loading",
         "spinner",
-        "progress"
+        "progress",
+        "wait",
+        "skeleton"
       ],
       "figma": {
         "nodeId": null,
@@ -1428,8 +1472,11 @@
       "skillPath": "loaders\\loading\\skills.md",
       "triggers": [
         "loading",
+        "chargement",
         "spinner",
-        "progress"
+        "progress",
+        "wait",
+        "skeleton"
       ],
       "figma": {
         "nodeId": null,
@@ -1445,7 +1492,9 @@
         "progressbar",
         "loading",
         "spinner",
-        "progress"
+        "progress",
+        "wait",
+        "skeleton"
       ],
       "figma": {
         "nodeId": null,
@@ -1460,7 +1509,8 @@
         "skeleton",
         "loading",
         "spinner",
-        "progress"
+        "progress",
+        "wait"
       ],
       "figma": {
         "nodeId": null,
@@ -1477,7 +1527,8 @@
         "skeleton",
         "loading",
         "spinner",
-        "progress"
+        "progress",
+        "wait"
       ],
       "figma": {
         "nodeId": null,
@@ -1494,7 +1545,8 @@
         "skeleton",
         "loading",
         "spinner",
-        "progress"
+        "progress",
+        "wait"
       ],
       "figma": {
         "nodeId": null,
@@ -1511,7 +1563,8 @@
         "skeleton",
         "loading",
         "spinner",
-        "progress"
+        "progress",
+        "wait"
       ],
       "figma": {
         "nodeId": null,
@@ -1528,7 +1581,8 @@
         "skeleton",
         "loading",
         "spinner",
-        "progress"
+        "progress",
+        "wait"
       ],
       "figma": {
         "nodeId": null,
@@ -1545,7 +1599,8 @@
         "skeleton",
         "loading",
         "spinner",
-        "progress"
+        "progress",
+        "wait"
       ],
       "figma": {
         "nodeId": null,
@@ -1562,7 +1617,8 @@
         "skeleton",
         "loading",
         "spinner",
-        "progress"
+        "progress",
+        "wait"
       ],
       "figma": {
         "nodeId": null,
@@ -1579,7 +1635,8 @@
         "skeleton",
         "loading",
         "spinner",
-        "progress"
+        "progress",
+        "wait"
       ],
       "figma": {
         "nodeId": null,
@@ -1595,7 +1652,10 @@
         "breadcrumbslink",
         "nav",
         "menu",
-        "navigate"
+        "navigate",
+        "route",
+        "link",
+        "breadcrumb"
       ],
       "figma": {
         "nodeId": null,
@@ -1616,7 +1676,10 @@
         "scrollbox",
         "nav",
         "menu",
-        "navigate"
+        "navigate",
+        "route",
+        "link",
+        "breadcrumb"
       ],
       "figma": {
         "nodeId": null,
@@ -1632,7 +1695,10 @@
         "menusecondary",
         "nav",
         "menu",
-        "navigate"
+        "navigate",
+        "route",
+        "link",
+        "breadcrumb"
       ],
       "figma": {
         "nodeId": null,
@@ -1648,7 +1714,10 @@
         "mobilenavigation",
         "nav",
         "menu",
-        "navigate"
+        "navigate",
+        "route",
+        "link",
+        "breadcrumb"
       ],
       "figma": {
         "nodeId": null,
@@ -1663,7 +1732,10 @@
         "pagination",
         "nav",
         "menu",
-        "navigate"
+        "navigate",
+        "route",
+        "link",
+        "breadcrumb"
       ],
       "figma": {
         "nodeId": null,
@@ -1685,7 +1757,10 @@
         "segmentedcontrolfilter",
         "nav",
         "menu",
-        "navigate"
+        "navigate",
+        "route",
+        "link",
+        "breadcrumb"
       ],
       "figma": {
         "nodeId": null,
@@ -1704,7 +1779,10 @@
         "ilusidepanelcontent",
         "nav",
         "menu",
-        "navigate"
+        "navigate",
+        "route",
+        "link",
+        "breadcrumb"
       ],
       "figma": {
         "nodeId": null,
@@ -1722,7 +1800,10 @@
         "luskiplinks",
         "nav",
         "menu",
-        "navigate"
+        "navigate",
+        "route",
+        "link",
+        "breadcrumb"
       ],
       "figma": {
         "nodeId": null,
@@ -1739,7 +1820,10 @@
         "tableofcontentlink",
         "nav",
         "menu",
-        "navigate"
+        "navigate",
+        "route",
+        "link",
+        "breadcrumb"
       ],
       "figma": {
         "nodeId": null,
@@ -1758,7 +1842,10 @@
         "verticalnavigationlink",
         "nav",
         "menu",
-        "navigate"
+        "navigate",
+        "route",
+        "link",
+        "breadcrumb"
       ],
       "figma": {
         "nodeId": null,
@@ -1771,13 +1858,14 @@
       "skillPath": "overlays\\dialog\\skills.md",
       "triggers": [
         "dialog",
+        "dialogue",
         "button",
         "dialogcontent",
         "dialogdismiss",
         "dialogfooter",
         "dialogheader",
         "ludialogref",
-        "ludialogservice",
+        "ludialog",
         "configureludialog",
         "injectdialogdata",
         "injectdialogref",
@@ -1788,22 +1876,7 @@
         "ludialogconfig",
         "dialog_route_dismiss_trigger",
         "dialogroutefactory",
-        "providedialogroutingreusestrategy",
-        "form-field",
-        "formfield",
-        "simple-select",
-        "lusimpleselectinput",
-        "forms",
-        "checkboxinput",
-        "textinput",
-        "numberinput",
-        "icon",
-        "callout",
-        "link",
-        "modal",
-        "popup",
-        "overlay",
-        "layer"
+        "providedialogroutingreusestrategy"
       ],
       "figma": {
         "nodeId": null,
@@ -1816,6 +1889,7 @@
       "skillPath": "overlays\\dropdown\\skills.md",
       "triggers": [
         "dropdown",
+        "menu-deroulant",
         "ludropdown",
         "ludropdowntrigger",
         "dropdownaction",
@@ -1830,7 +1904,9 @@
         "modal",
         "popup",
         "overlay",
-        "layer"
+        "layer",
+        "dialog",
+        "floating"
       ],
       "figma": {
         "nodeId": null,
@@ -1843,6 +1919,7 @@
       "skillPath": "overlays\\modal\\skills.md",
       "triggers": [
         "modal",
+        "modale",
         "button",
         "ilumodalcontent",
         "lu_modal_data",
@@ -1850,10 +1927,11 @@
         "lumodalconfig",
         "toast",
         "lutoasts",
-        "lutoastsservice",
         "popup",
         "overlay",
-        "layer"
+        "layer",
+        "dialog",
+        "floating"
       ],
       "figma": {
         "nodeId": null,
@@ -1873,7 +1951,9 @@
         "modal",
         "popup",
         "overlay",
-        "layer"
+        "layer",
+        "dialog",
+        "floating"
       ],
       "figma": {
         "nodeId": null,
@@ -1896,7 +1976,9 @@
         "modal",
         "popup",
         "overlay",
-        "layer"
+        "layer",
+        "dialog",
+        "floating"
       ],
       "figma": {
         "nodeId": null,
@@ -1915,10 +1997,11 @@
         "lusidepanel",
         "toast",
         "lutoasts",
-        "lutoastsservice",
         "popup",
         "overlay",
-        "layer"
+        "layer",
+        "dialog",
+        "floating"
       ],
       "figma": {
         "nodeId": null,
@@ -1935,12 +2018,13 @@
         "lutoastinput",
         "lutoasttype",
         "lutoasts",
-        "lutoastsservice",
         "defaulttoastduration",
         "modal",
         "popup",
         "overlay",
-        "layer"
+        "layer",
+        "dialog",
+        "floating"
       ],
       "figma": {
         "nodeId": null,
@@ -1953,14 +2037,18 @@
       "skillPath": "overlays\\tooltip\\skills.md",
       "triggers": [
         "tooltip",
+        "infobulle",
         "lutooltip",
         "lutooltiptrigger",
         "lutooltippanel",
         "icon",
+        "button",
         "modal",
         "popup",
         "overlay",
-        "layer"
+        "layer",
+        "dialog",
+        "floating"
       ],
       "figma": {
         "nodeId": null,
@@ -1973,7 +2061,13 @@
       "skillPath": "structure\\app-layout\\skills.md",
       "triggers": [
         "app-layout",
-        "applayout"
+        "applayout",
+        "layout",
+        "container",
+        "structure",
+        "grid",
+        "box",
+        "card"
       ],
       "figma": {
         "nodeId": null,
@@ -1990,7 +2084,12 @@
         "formfield",
         "forms",
         "radio",
-        "radiogroupinput"
+        "radiogroupinput",
+        "layout",
+        "container",
+        "structure",
+        "grid",
+        "card"
       ],
       "figma": {
         "nodeId": null,
@@ -2003,7 +2102,13 @@
       "skillPath": "structure\\bubble-icon\\skills.md",
       "triggers": [
         "bubble-icon",
-        "bubbleicon"
+        "bubbleicon",
+        "layout",
+        "container",
+        "structure",
+        "grid",
+        "box",
+        "card"
       ],
       "figma": {
         "nodeId": null,
@@ -2018,7 +2123,13 @@
         "bubble-illustration",
         "bubbleillustration",
         "safe-content",
-        "lusafeexternalsvgpipe"
+        "lusafeexternalsvgpipe",
+        "layout",
+        "container",
+        "structure",
+        "grid",
+        "box",
+        "card"
       ],
       "figma": {
         "nodeId": null,
@@ -2030,7 +2141,13 @@
       "componentName": "Cards",
       "skillPath": "structure\\cards\\skills.md",
       "triggers": [
-        "cards"
+        "cards",
+        "layout",
+        "container",
+        "structure",
+        "grid",
+        "box",
+        "card"
       ],
       "figma": {
         "nodeId": null,
@@ -2042,7 +2159,12 @@
       "componentName": "Container",
       "skillPath": "structure\\container\\skills.md",
       "triggers": [
-        "container"
+        "container",
+        "layout",
+        "structure",
+        "grid",
+        "box",
+        "card"
       ],
       "figma": {
         "nodeId": null,
@@ -2056,7 +2178,13 @@
       "triggers": [
         "divider",
         "button",
-        "icon"
+        "icon",
+        "layout",
+        "container",
+        "structure",
+        "grid",
+        "box",
+        "card"
       ],
       "figma": {
         "nodeId": null,
@@ -2069,7 +2197,13 @@
       "skillPath": "structure\\fancy-box\\skills.md",
       "triggers": [
         "fancy-box",
-        "fancybox"
+        "fancybox",
+        "layout",
+        "container",
+        "structure",
+        "grid",
+        "box",
+        "card"
       ],
       "figma": {
         "nodeId": null,
@@ -2082,7 +2216,13 @@
       "skillPath": "structure\\filter-bar-deprecated\\skills.md",
       "triggers": [
         "filter-bar-deprecated",
-        "filterbardeprecated"
+        "filterbardeprecated",
+        "layout",
+        "container",
+        "structure",
+        "grid",
+        "box",
+        "card"
       ],
       "figma": {
         "nodeId": null,
@@ -2094,7 +2234,13 @@
       "componentName": "Filters",
       "skillPath": "structure\\filters\\skills.md",
       "triggers": [
-        "filters"
+        "filters",
+        "layout",
+        "container",
+        "structure",
+        "grid",
+        "box",
+        "card"
       ],
       "figma": {
         "nodeId": null,
@@ -2107,7 +2253,14 @@
       "skillPath": "structure\\footer\\skills.md",
       "triggers": [
         "footer",
-        "button"
+        "pied-de-page",
+        "button",
+        "layout",
+        "container",
+        "structure",
+        "grid",
+        "box",
+        "card"
       ],
       "figma": {
         "nodeId": null,
@@ -2121,7 +2274,12 @@
       "triggers": [
         "grids",
         "grid",
-        "gridcolumn"
+        "gridcolumn",
+        "layout",
+        "container",
+        "structure",
+        "box",
+        "card"
       ],
       "figma": {
         "nodeId": null,
@@ -2133,7 +2291,13 @@
       "componentName": "Headers",
       "skillPath": "structure\\headers\\skills.md",
       "triggers": [
-        "headers"
+        "headers",
+        "layout",
+        "container",
+        "structure",
+        "grid",
+        "box",
+        "card"
       ],
       "figma": {
         "nodeId": null,
@@ -2148,7 +2312,13 @@
         "highlight-data",
         "highlightdata",
         "button",
-        "link"
+        "link",
+        "layout",
+        "container",
+        "structure",
+        "grid",
+        "box",
+        "card"
       ],
       "figma": {
         "nodeId": null,
@@ -2165,7 +2335,12 @@
         "app-layout",
         "applayout",
         "container",
-        "mainlayoutblock"
+        "mainlayoutblock",
+        "layout",
+        "structure",
+        "grid",
+        "box",
+        "card"
       ],
       "figma": {
         "nodeId": null,
@@ -2178,7 +2353,13 @@
       "skillPath": "structure\\mobile-header\\skills.md",
       "triggers": [
         "mobile-header",
-        "mobileheader"
+        "mobileheader",
+        "layout",
+        "container",
+        "structure",
+        "grid",
+        "box",
+        "card"
       ],
       "figma": {
         "nodeId": null,
@@ -2191,7 +2372,13 @@
       "skillPath": "structure\\notch-box\\skills.md",
       "triggers": [
         "notch-box",
-        "notchbox"
+        "notchbox",
+        "layout",
+        "container",
+        "structure",
+        "grid",
+        "box",
+        "card"
       ],
       "figma": {
         "nodeId": null,
@@ -2218,7 +2405,11 @@
         "icon",
         "link",
         "tooltip",
-        "lutooltip"
+        "lutooltip",
+        "layout",
+        "container",
+        "structure",
+        "grid"
       ],
       "figma": {
         "nodeId": null,
@@ -2243,7 +2434,13 @@
         "tag",
         "tooltip",
         "lutooltiptrigger",
-        "lutooltip"
+        "lutooltip",
+        "layout",
+        "container",
+        "structure",
+        "grid",
+        "box",
+        "card"
       ],
       "figma": {
         "nodeId": null,
@@ -2256,7 +2453,13 @@
       "skillPath": "structure\\scroll-box\\skills.md",
       "triggers": [
         "scroll-box",
-        "scrollbox"
+        "scrollbox",
+        "layout",
+        "container",
+        "structure",
+        "grid",
+        "box",
+        "card"
       ],
       "figma": {
         "nodeId": null,
@@ -2268,7 +2471,13 @@
       "componentName": "Sections",
       "skillPath": "structure\\sections\\skills.md",
       "triggers": [
-        "sections"
+        "sections",
+        "layout",
+        "container",
+        "structure",
+        "grid",
+        "box",
+        "card"
       ],
       "figma": {
         "nodeId": null,
@@ -2284,7 +2493,13 @@
         "softwareicon",
         "softwareiconlist",
         "safe-content",
-        "lusafeexternalsvgpipe"
+        "lusafeexternalsvgpipe",
+        "layout",
+        "container",
+        "structure",
+        "grid",
+        "box",
+        "card"
       ],
       "figma": {
         "nodeId": null,
@@ -2299,7 +2514,10 @@
         "clear",
         "text",
         "typography",
-        "content"
+        "content",
+        "label",
+        "badge",
+        "tag"
       ],
       "figma": {
         "nodeId": null,
@@ -2314,7 +2532,10 @@
         "code",
         "text",
         "typography",
-        "content"
+        "content",
+        "label",
+        "badge",
+        "tag"
       ],
       "figma": {
         "nodeId": null,
@@ -2333,7 +2554,10 @@
         "luuserpicture",
         "text",
         "typography",
-        "content"
+        "content",
+        "label",
+        "badge",
+        "tag"
       ],
       "figma": {
         "nodeId": null,
@@ -2380,7 +2604,10 @@
         "icon",
         "text",
         "typography",
-        "content"
+        "content",
+        "label",
+        "badge",
+        "tag"
       ],
       "figma": {
         "nodeId": null,
@@ -2395,7 +2622,10 @@
         "labels",
         "text",
         "typography",
-        "content"
+        "content",
+        "label",
+        "badge",
+        "tag"
       ],
       "figma": {
         "nodeId": null,
@@ -2411,7 +2641,10 @@
         "newbadge",
         "text",
         "typography",
-        "content"
+        "content",
+        "label",
+        "badge",
+        "tag"
       ],
       "figma": {
         "nodeId": null,
@@ -2427,7 +2660,10 @@
         "numericbadge",
         "text",
         "typography",
-        "content"
+        "content",
+        "label",
+        "badge",
+        "tag"
       ],
       "figma": {
         "nodeId": null,
@@ -2444,7 +2680,9 @@
         "tag",
         "text",
         "typography",
-        "content"
+        "content",
+        "label",
+        "badge"
       ],
       "figma": {
         "nodeId": null,
@@ -2460,7 +2698,10 @@
         "statusbadge",
         "text",
         "typography",
-        "content"
+        "content",
+        "label",
+        "badge",
+        "tag"
       ],
       "figma": {
         "nodeId": null,
@@ -2476,7 +2717,9 @@
         "tag",
         "text",
         "typography",
-        "content"
+        "content",
+        "label",
+        "badge"
       ],
       "figma": {
         "nodeId": null,
@@ -2489,8 +2732,12 @@
       "skillPath": "texts\\text\\skills.md",
       "triggers": [
         "text",
+        "texte",
         "typography",
-        "content"
+        "content",
+        "label",
+        "badge",
+        "tag"
       ],
       "figma": {
         "nodeId": null,
@@ -2506,7 +2753,10 @@
         "textflow",
         "text",
         "typography",
-        "content"
+        "content",
+        "label",
+        "badge",
+        "tag"
       ],
       "figma": {
         "nodeId": null,
@@ -2521,7 +2771,12 @@
         "animations",
         "lufadeanimationfactory",
         "luscaleanimationfactory",
-        "luslideanimationfactory"
+        "luslideanimationfactory",
+        "utility",
+        "helper",
+        "tool",
+        "format",
+        "pipe"
       ],
       "figma": {
         "nodeId": null,
@@ -2539,7 +2794,12 @@
         "luhumanizedateformatter",
         "luhumanizedatepipe",
         "lurelativetime",
-        "lurelativetimeformatunit"
+        "lurelativetimeformatunit",
+        "utility",
+        "helper",
+        "tool",
+        "format",
+        "pipe"
       ],
       "figma": {
         "nodeId": null,
@@ -2553,7 +2813,12 @@
       "triggers": [
         "numbers",
         "number",
-        "lunumberpipe"
+        "lunumberpipe",
+        "utility",
+        "helper",
+        "tool",
+        "format",
+        "pipe"
       ],
       "figma": {
         "nodeId": null,
@@ -2565,7 +2830,12 @@
       "componentName": "Group",
       "skillPath": "users\\avatars\\html&css\\group\\skills.md",
       "triggers": [
-        "group"
+        "group",
+        "user",
+        "avatar",
+        "profile",
+        "person",
+        "employee"
       ],
       "figma": {
         "nodeId": null,
@@ -2582,7 +2852,11 @@
         "ludisplayinitials",
         "luuserpicture",
         "user-popover",
-        "luuserpopover"
+        "luuserpopover",
+        "avatar",
+        "profile",
+        "person",
+        "employee"
       ],
       "figma": {
         "nodeId": null,
@@ -2604,7 +2878,11 @@
         "luuserdisplay",
         "button",
         "user-popover",
-        "luuserpopover"
+        "luuserpopover",
+        "avatar",
+        "profile",
+        "person",
+        "employee"
       ],
       "figma": {
         "nodeId": null,
@@ -2620,7 +2898,11 @@
         "user",
         "iluuser",
         "user-popover",
-        "luuserpopover"
+        "luuserpopover",
+        "avatar",
+        "profile",
+        "person",
+        "employee"
       ],
       "figma": {
         "nodeId": null,
@@ -2633,6 +2915,7 @@
       "skillPath": "users\\select\\skills.md",
       "triggers": [
         "select",
+        "selection",
         "api",
         "luapipagedsearcher",
         "input",
@@ -2649,7 +2932,8 @@
         "luusermeoption",
         "iluuser",
         "luuserselect",
-        "luuser"
+        "luuser",
+        "avatar"
       ],
       "figma": {
         "nodeId": null,
@@ -2667,7 +2951,11 @@
         "luuserpicture",
         "luusertile",
         "user-popover",
-        "luuserpopover"
+        "luuserpopover",
+        "avatar",
+        "profile",
+        "person",
+        "employee"
       ],
       "figma": {
         "nodeId": null,

@@ -1,15 +1,19 @@
 ---
-description: Tooltip component from Lucca Front design system
+description: Composant Tooltip - composants affichés par-dessus le contenu principal
 triggers:
   - tooltip
+  - infobulle
   - lutooltip
   - lutooltiptrigger
   - lutooltippanel
   - icon
+  - button
   - modal
   - popup
   - overlay
   - layer
+  - dialog
+  - floating
 figma:
   nodeId: null
   fileKey: null
@@ -23,11 +27,13 @@ alwaysApply: false
 
 ## Description
 
-Tooltip est un composant de la catégorie **Overlays** du design system Lucca Front.
+Le composant **Tooltip** fait partie de la catégorie **Overlays** du design system Lucca Front.
+
+Composants affichés par-dessus le contenu principal.
 
 **Story path:** `Documentation/Overlays/Tooltip/Ellipsis tests`
-
 **Component:** `TooltipStory`
+
 
 ## Imports
 
@@ -37,33 +43,59 @@ import { IconComponent } from '@lucca-front/ng/icon';
 ```
 
 
+## Propriétés
+
+| Propriété | Type | Défaut | Description |
+|-----------|------|--------|-------------|
+| `luTooltipEnterDelay` | `number` | `300` | - |
+| `table` | `any` | `{ summary:` | - |
+
 ## Utilisation
 
 ### Quand utiliser Tooltip
 
-<!-- TODO: Décrire les cas d'usage appropriés -->
+- Confirmations importantes
+- Formulaires contextuels
+- Informations complémentaires
 
 ### Quand ne pas utiliser
 
-<!-- TODO: Décrire les cas où un autre composant serait plus approprié -->
+- Contenu principal de la page
+- Navigation fréquente
 
 ## Exemples
 
 ### Exemple basique
 
 ```html
-<!-- TODO: Ajouter un exemple de code basique -->
+<h1>With ellipsis after few seconds</h1>
+<div class=
 ```
 
-### Exemple avancé
+### Autres exemples
 
-```typescript
-<!-- TODO: Ajouter un exemple de code avancé -->
+```html
+<h3>Tooltip simple</h3>
+<button id=
 ```
+
+
+## Classes CSS
+
+| Classe | Description |
+|--------|-------------|
+| `.test` | Classe de base |
+| `.ellipsis` | Classe de base |
+| `.width400` | Classe de base |
+| `.fontSize2` | Classe de base |
+| `.paddingRight` | Classe de base |
 
 ## Accessibilité
 
-<!-- TODO: Documenter les considérations d'accessibilité -->
+- Gérer le focus trap dans les modales
+- Permettre la fermeture avec Escape
+- Annoncer l'ouverture aux lecteurs d'écran
+- Utiliser aria-modal et role="dialog"
 
 ## Figma
 
@@ -71,4 +103,4 @@ import { IconComponent } from '@lucca-front/ng/icon';
 
 ## Voir aussi
 
-<!-- TODO: Lister les composants liés -->
+<!-- Composants liés à documenter -->

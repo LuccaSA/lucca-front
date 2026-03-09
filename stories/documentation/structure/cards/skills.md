@@ -1,7 +1,13 @@
 ---
-description: Cards component from Lucca Front design system
+description: Composant Cards - composants pour structurer la mise en page
 triggers:
   - cards
+  - layout
+  - container
+  - structure
+  - grid
+  - box
+  - card
 figma:
   nodeId: null
   fileKey: null
@@ -15,7 +21,9 @@ alwaysApply: false
 
 ## Description
 
-Cards est un composant de la catégorie **Structure** du design system Lucca Front.
+Le composant **Cards** fait partie de la catégorie **Structure** du design system Lucca Front.
+
+Composants pour structurer la mise en page.
 
 **Story path:** `Documentation/Structure/Cards/Arrow Action`
 
@@ -25,29 +33,45 @@ Cards est un composant de la catégorie **Structure** du design system Lucca Fro
 
 ### Quand utiliser Cards
 
-<!-- TODO: Décrire les cas d'usage appropriés -->
+- Organisation du contenu
+- Mise en page
+- Conteneurs
 
 ### Quand ne pas utiliser
 
-<!-- TODO: Décrire les cas où un autre composant serait plus approprié -->
+- Composants interactifs
 
 ## Exemples
 
 ### Exemple basique
 
 ```html
-<!-- TODO: Ajouter un exemple de code basique -->
+<!-- Voir les stories pour des exemples détaillés -->
 ```
 
-### Exemple avancé
 
-```typescript
-<!-- TODO: Ajouter un exemple de code avancé -->
-```
+## Classes CSS
+
+| Classe | Description |
+|--------|-------------|
+| `.card` | Classe de base |
+| `.card-content` | Classe de base |
+| `.card-title` | Classe de base |
+| `.card-action` | Classe de base |
+| `.button` | Classe de base |
+| `.mod-action` | Modificateur action |
+| `.mod-onlyIcon` | Modificateur onlyIcon |
+| `.mod-ghost` | Modificateur ghost |
+| `.mod-clickable` | Modificateur clickable |
+| `.mod-expand` | Modificateur expand |
+| `.mod-nested` | Modificateur nested |
+| `.palette-product` | Palette product |
 
 ## Accessibilité
 
-<!-- TODO: Documenter les considérations d'accessibilité -->
+- Utiliser des landmarks appropriés
+- Maintenir un ordre de lecture logique
+- Structurer le contenu de manière sémantique
 
 ## Figma
 
@@ -55,4 +79,4 @@ Cards est un composant de la catégorie **Structure** du design system Lucca Fro
 
 ## Voir aussi
 
-<!-- TODO: Lister les composants liés -->
+<!-- Composants liés à documenter -->

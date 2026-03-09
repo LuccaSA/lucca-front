@@ -1,11 +1,14 @@
 ---
-description: Chip component from Lucca Front design system
+description: Composant Chip - composants pour afficher des listes et collections de données
 triggers:
   - chip
+  - etiquette
   - list
   - table
   - data
   - grid
+  - collection
+  - items
 figma:
   nodeId: null
   fileKey: null
@@ -19,7 +22,9 @@ alwaysApply: false
 
 ## Description
 
-Chip est un composant de la catégorie **Listings** du design system Lucca Front.
+Le composant **Chip** fait partie de la catégorie **Listings** du design system Lucca Front.
+
+Composants pour afficher des listes et collections de données.
 
 **Story path:** `Documentation/Listings/Chip/Angular/Basic`
 
@@ -31,33 +36,54 @@ import { ChipComponent } from '@lucca-front/ng/chip';
 ```
 
 
+## Propriétés
+
+| Propriété | Type | Défaut | Description |
+|-----------|------|--------|-------------|
+| `size` | `'S' | null` | `null` | Which size should the chip be? Defaults or small |
+
 ## Utilisation
 
 ### Quand utiliser Chip
 
-<!-- TODO: Décrire les cas d'usage appropriés -->
+- Affichage de collections
+- Tableaux de données
+- Listes d'éléments
 
 ### Quand ne pas utiliser
 
-<!-- TODO: Décrire les cas où un autre composant serait plus approprié -->
+- Élément unique
+- Formulaires
 
 ## Exemples
 
 ### Exemple basique
 
 ```html
-<!-- TODO: Ajouter un exemple de code basique -->
+<lu-chip..................>Label</lu-chip>
 ```
 
-### Exemple avancé
 
-```typescript
-<!-- TODO: Ajouter un exemple de code avancé -->
-```
+## Classes CSS
+
+| Classe | Description |
+|--------|-------------|
+| `.chip` | Classe de base |
+| `.chip-kill` | Classe de base |
+| `.chip-icon` | Classe de base |
+| `.lucca-icon` | Classe de base |
+| `.icon-signWarning` | Classe de base |
+| `.mod-product` | Modificateur product |
+| `.mod-S` | Modificateur S |
+| `.is-disabled` | État disabled |
+| `.palette-warning` | Palette warning |
+| `.palette-critical` | Palette critical |
 
 ## Accessibilité
 
-<!-- TODO: Documenter les considérations d'accessibilité -->
+- Utiliser des structures sémantiques (table, ul, ol)
+- Fournir des en-têtes pour les tableaux
+- Supporter le tri et la pagination accessibles
 
 ## Figma
 
@@ -65,4 +91,4 @@ import { ChipComponent } from '@lucca-front/ng/chip';
 
 ## Voir aussi
 
-<!-- TODO: Lister les composants liés -->
+<!-- Composants liés à documenter -->

@@ -1,5 +1,5 @@
 ---
-description: Main layout component from Lucca Front design system
+description: Composant Main layout - composants pour structurer la mise en page
 triggers:
   - main-layout
   - mainlayout
@@ -7,6 +7,11 @@ triggers:
   - applayout
   - container
   - mainlayoutblock
+  - layout
+  - structure
+  - grid
+  - box
+  - card
 figma:
   nodeId: null
   fileKey: null
@@ -20,7 +25,9 @@ alwaysApply: false
 
 ## Description
 
-Main layout est un composant de la catégorie **Structure** du design system Lucca Front.
+Le composant **Main layout** fait partie de la catégorie **Structure** du design system Lucca Front.
+
+Composants pour structurer la mise en page.
 
 **Story path:** `Documentation/Structure/Main Layout/Angular/Basic`
 
@@ -34,33 +41,59 @@ import { MainLayoutBlockComponent, MainLayoutComponent } from '@lucca-front/ng/m
 ```
 
 
+## Propriétés
+
+| Propriété | Type | Défaut | Description |
+|-----------|------|--------|-------------|
+| `headerSticky` | `any` | `false` | - |
+
 ## Utilisation
 
 ### Quand utiliser Main layout
 
-<!-- TODO: Décrire les cas d'usage appropriés -->
+- Organisation du contenu
+- Mise en page
+- Conteneurs
 
 ### Quand ne pas utiliser
 
-<!-- TODO: Décrire les cas où un autre composant serait plus approprié -->
+- Composants interactifs
 
 ## Exemples
 
 ### Exemple basique
 
 ```html
-<!-- TODO: Ajouter un exemple de code basique -->
+<lu-main-layout......>...... ... ... </lu-main-layout>
 ```
 
-### Exemple avancé
+### Autres exemples
 
-```typescript
-<!-- TODO: Ajouter un exemple de code avancé -->
+```html
+<lu-app-layout>
+<ng-container appLayoutBanner>banner</ng-container>
+<ng-container appLayoutNavSide> navSide </ng-container>
+<lu-main-layout......>...... ... ... </lu-main-layout>
+</lu-app-layout>
 ```
+
+
+## Classes CSS
+
+| Classe | Description |
+|--------|-------------|
+| `.fakeContent` | Classe de base |
+| `.mainLayout-sidebar` | Classe de base |
+| `.container` | Classe de base |
+| `.mainLayout-content-inside-block` | Classe de base |
+| `.mainLayout` | Classe de base |
+| `.mod-overflow` | Modificateur overflow |
 
 ## Accessibilité
 
-<!-- TODO: Documenter les considérations d'accessibilité -->
+- Utiliser des landmarks appropriés
+- Maintenir un ordre de lecture logique
+- Structurer le contenu de manière sémantique
 
 ## Figma
 
@@ -68,4 +101,4 @@ import { MainLayoutBlockComponent, MainLayoutComponent } from '@lucca-front/ng/m
 
 ## Voir aussi
 
-<!-- TODO: Lister les composants liés -->
+<!-- Composants liés à documenter -->

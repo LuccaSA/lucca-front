@@ -1,5 +1,5 @@
 ---
-description: Date2 component from Lucca Front design system
+description: Composant Date2 - composants pour la saisie et validation de données utilisateur
 triggers:
   - date2
   - calendar2
@@ -16,6 +16,8 @@ triggers:
   - form
   - field
   - control
+  - validation
+  - saisie
 figma:
   nodeId: null
   fileKey: null
@@ -29,11 +31,13 @@ alwaysApply: false
 
 ## Description
 
-Date2 est un composant de la catégorie **Forms** du design system Lucca Front.
+Le composant **Date2** fait partie de la catégorie **Forms** du design system Lucca Front.
+
+Composants pour la saisie et validation de données utilisateur.
 
 **Story path:** `Documentation/Forms/Date2/Calendar`
-
 **Component:** `DateRangeInputComponent`
+
 
 ## Imports
 
@@ -44,33 +48,63 @@ import { IconComponent } from '@lucca-front/ng/icon';
 ```
 
 
+## Propriétés
+
+| Propriété | Type | Défaut | Description |
+|-----------|------|--------|-------------|
+| `props` | `any` | `-` | - |
+
 ## Utilisation
 
 ### Quand utiliser Date2
 
-<!-- TODO: Décrire les cas d'usage appropriés -->
+- Saisie de données
+- Formulaires
+- Configuration
+- Filtres
 
 ### Quand ne pas utiliser
 
-<!-- TODO: Décrire les cas où un autre composant serait plus approprié -->
+- Affichage de données en lecture seule
+- Navigation
 
 ## Exemples
 
 ### Exemple basique
 
 ```html
-<!-- TODO: Ajouter un exemple de code basique -->
+<lu-calendar2 [hideToday]=
 ```
 
-### Exemple avancé
+### Autres exemples
 
-```typescript
-<!-- TODO: Ajouter un exemple de code avancé -->
+```html
+<lu-form-field label=
+
+<lu-calendar2 [hideWeekend]=
 ```
+
+
+## Classes CSS
+
+| Classe | Description |
+|--------|-------------|
+| `.calendar` | Classe de base |
+| `.calendar-name` | Classe de base |
+| `.calendar-name-button` | Classe de base |
+| `.calendar-table` | Classe de base |
+| `.calendar-table-head` | Classe de base |
+| `.is-overflow` | État overflow |
+| `.is-daysOff` | État daysOff |
+| `.is-current` | État current |
+| `.palette-watermelon` | Palette watermelon |
 
 ## Accessibilité
 
-<!-- TODO: Documenter les considérations d'accessibilité -->
+- Associer chaque champ à un label avec for/id
+- Fournir des messages d'erreur explicites
+- Supporter la navigation au clavier
+- Indiquer les champs obligatoires
 
 ## Figma
 
@@ -78,4 +112,4 @@ import { IconComponent } from '@lucca-front/ng/icon';
 
 ## Voir aussi
 
-<!-- TODO: Lister les composants liés -->
+<!-- Composants liés à documenter -->

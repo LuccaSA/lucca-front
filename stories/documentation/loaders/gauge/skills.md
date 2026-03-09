@@ -1,10 +1,12 @@
 ---
-description: Gauge component from Lucca Front design system
+description: Composant Gauge - composants pour indiquer un chargement ou une progression
 triggers:
   - gauge
   - loading
   - spinner
   - progress
+  - wait
+  - skeleton
 figma:
   nodeId: null
   fileKey: null
@@ -18,7 +20,9 @@ alwaysApply: false
 
 ## Description
 
-Gauge est un composant de la catégorie **Loaders** du design system Lucca Front.
+Le composant **Gauge** fait partie de la catégorie **Loaders** du design system Lucca Front.
+
+Composants pour indiquer un chargement ou une progression.
 
 **Story path:** `Documentation/Loaders/Gauge/Angular/Basic`
 
@@ -30,33 +34,45 @@ import { GaugeComponent } from '@lucca-front/ng/gauge';
 ```
 
 
+## Propriétés
+
+| Propriété | Type | Défaut | Description |
+|-----------|------|--------|-------------|
+| `alt` | `string` | `-` | Defines the text alt attribute used for accessibility |
+
 ## Utilisation
 
 ### Quand utiliser Gauge
 
-<!-- TODO: Décrire les cas d'usage appropriés -->
+- Chargement de données
+- Actions asynchrones
+- Progression
 
 ### Quand ne pas utiliser
 
-<!-- TODO: Décrire les cas où un autre composant serait plus approprié -->
+- Contenu disponible immédiatement
 
 ## Exemples
 
 ### Exemple basique
 
 ```html
-<!-- TODO: Ajouter un exemple de code basique -->
+<lu-gauge............ />
 ```
 
-### Exemple avancé
 
-```typescript
-<!-- TODO: Ajouter un exemple de code avancé -->
-```
+## Classes CSS
+
+| Classe | Description |
+|--------|-------------|
+| `.gauge-circleBackground` | Classe de base |
+| `.gauge-circleBar` | Classe de base |
 
 ## Accessibilité
 
-<!-- TODO: Documenter les considérations d'accessibilité -->
+- Annoncer le chargement avec aria-busy
+- Fournir un texte alternatif descriptif
+- Informer de la fin du chargement
 
 ## Figma
 
@@ -64,4 +80,4 @@ import { GaugeComponent } from '@lucca-front/ng/gauge';
 
 ## Voir aussi
 
-<!-- TODO: Lister les composants liés -->
+<!-- Composants liés à documenter -->

@@ -1,5 +1,5 @@
 ---
-description: Read more component from Lucca Front design system
+description: Composant Read more - composants pour la typographie et le contenu textuel
 triggers:
   - read-more
   - readmore
@@ -7,6 +7,8 @@ triggers:
   - text
   - typography
   - content
+  - label
+  - badge
 figma:
   nodeId: null
   fileKey: null
@@ -20,7 +22,9 @@ alwaysApply: false
 
 ## Description
 
-Read more est un composant de la catégorie **Texts** du design system Lucca Front.
+Le composant **Read more** fait partie de la catégorie **Texts** du design system Lucca Front.
+
+Composants pour la typographie et le contenu textuel.
 
 **Story path:** `Documentation/Texts/ReadMore/Angular/AI`
 
@@ -33,33 +37,55 @@ import { TagComponent } from '@lucca-front/ng/tag';
 ```
 
 
+## Propriétés
+
+| Propriété | Type | Défaut | Description |
+|-----------|------|--------|-------------|
+| `lineClamp` | `number` | `5` | Change the number of lines displayed when collapsed |
+| `surface` | `null | 'sunken' | 'default' | string` | `null` | Apply the spacing of the Text Flow component |
+| `innerContent` | `null | string` | `null` | Allow content to be passed via innerHTML |
+
 ## Utilisation
 
 ### Quand utiliser Read more
 
-<!-- TODO: Décrire les cas d'usage appropriés -->
+- Mise en forme de texte
+- Labels
+- Badges
+- Tags
 
 ### Quand ne pas utiliser
 
-<!-- TODO: Décrire les cas où un autre composant serait plus approprié -->
+- Actions interactives
+- Formulaires
 
 ## Exemples
 
 ### Exemple basique
 
 ```html
-<!-- TODO: Ajouter un exemple de code basique -->
+<lu-read-more...... />
 ```
 
-### Exemple avancé
+### Autres exemples
 
-```typescript
-<!-- TODO: Ajouter un exemple de code avancé -->
+```html
+<lu-read-more......> ... </lu-read-more>
 ```
+
+
+## Classes CSS
+
+| Classe | Description |
+|--------|-------------|
+| `.box` | Classe de base |
+| `.mod-elementAfterText` | Modificateur elementAfterText |
 
 ## Accessibilité
 
-<!-- TODO: Documenter les considérations d'accessibilité -->
+- Utiliser une hiérarchie de titres logique
+- Assurer un contraste de texte suffisant
+- Éviter le texte dans les images
 
 ## Figma
 
@@ -67,4 +93,4 @@ import { TagComponent } from '@lucca-front/ng/tag';
 
 ## Voir aussi
 
-<!-- TODO: Lister les composants liés -->
+<!-- Composants liés à documenter -->

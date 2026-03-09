@@ -1,5 +1,5 @@
 ---
-description: Callout popover component from Lucca Front design system
+description: Composant Callout popover - composants pour communiquer des informations et états à l'utilisateur
 triggers:
   - callout-popover
   - calloutpopover
@@ -11,6 +11,9 @@ triggers:
   - notification
   - message
   - alert
+  - status
+  - feedback
+  - info
 figma:
   nodeId: null
   fileKey: null
@@ -24,11 +27,13 @@ alwaysApply: false
 
 ## Description
 
-Callout popover est un composant de la catégorie **Feedback** du design system Lucca Front.
+Le composant **Callout popover** fait partie de la catégorie **Feedback** du design system Lucca Front.
+
+Composants pour communiquer des informations et états à l'utilisateur.
 
 **Story path:** `Documentation/Feedback/Callout Popover/Angular`
-
 **Component:** `CalloutPopoverComponent`
+
 
 ## Imports
 
@@ -38,33 +43,59 @@ import { CalloutFeedbackItemComponent, CalloutFeedbackItemDescriptionDirective, 
 ```
 
 
+## Propriétés
+
+| Propriété | Type | Défaut | Description |
+|-----------|------|--------|-------------|
+| `size` | `'M' | 'S' | 'XS'` | `-` | Change the size of the Button |
+| `palette` | `Palette` | `none` | Applies a color palette to the Button |
+| `state` | `'default' | 'loading' | 'error' | 'success'` | `default` | Modifies the state of the Button |
+
 ## Utilisation
 
 ### Quand utiliser Callout popover
 
-<!-- TODO: Décrire les cas d'usage appropriés -->
+- Messages de succès/erreur
+- Alertes importantes
+- Informations contextuelles
 
 ### Quand ne pas utiliser
 
-<!-- TODO: Décrire les cas où un autre composant serait plus approprié -->
+- Contenu principal
+- Actions utilisateur
 
 ## Exemples
 
 ### Exemple basique
 
 ```html
-<!-- TODO: Ajouter un exemple de code basique -->
+<lu-callout-popover...>
+<ul lu-callout-feedback-list palette=
 ```
 
-### Exemple avancé
 
-```typescript
-<!-- TODO: Ajouter un exemple de code avancé -->
-```
+## Classes CSS
+
+| Classe | Description |
+|--------|-------------|
+| `.calloutPopover` | Classe de base |
+| `.calloutPopover-icon` | Classe de base |
+| `.lucca-icon` | Classe de base |
+| `.icon-signInfo` | Classe de base |
+| `.lu-popover-content` | Classe de base |
+| `.mod-outlined` | Modificateur outlined |
+| `.mod-ghost` | Modificateur ghost |
+| `.mod-S` | Modificateur S |
+| `.mod-XS` | Modificateur XS |
+| `.palette-success` | Palette success |
+| `.palette-warning` | Palette warning |
+| `.palette-error` | Palette error |
 
 ## Accessibilité
 
-<!-- TODO: Documenter les considérations d'accessibilité -->
+- Utiliser aria-live pour les messages dynamiques
+- Associer le rôle approprié (alert, status)
+- Ne pas reposer uniquement sur la couleur
 
 ## Figma
 
@@ -72,4 +103,4 @@ import { CalloutFeedbackItemComponent, CalloutFeedbackItemDescriptionDirective, 
 
 ## Voir aussi
 
-<!-- TODO: Lister les composants liés -->
+<!-- Composants liés à documenter -->

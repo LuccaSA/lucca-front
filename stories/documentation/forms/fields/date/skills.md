@@ -1,5 +1,5 @@
 ---
-description: Date component from Lucca Front design system
+description: Composant Date - composants pour la saisie et validation de données utilisateur
 triggers:
   - date
   - date2
@@ -10,6 +10,8 @@ triggers:
   - form
   - field
   - control
+  - validation
+  - saisie
 figma:
   nodeId: null
   fileKey: null
@@ -23,7 +25,9 @@ alwaysApply: false
 
 ## Description
 
-Date est un composant de la catégorie **Forms** du design system Lucca Front.
+Le composant **Date** fait partie de la catégorie **Forms** du design system Lucca Front.
+
+Composants pour la saisie et validation de données utilisateur.
 
 **Story path:** `Documentation/Forms/Fields/DateInput/Angular`
 
@@ -40,29 +44,31 @@ import { FormFieldComponent } from '@lucca-front/ng/form-field';
 
 ### Quand utiliser Date
 
-<!-- TODO: Décrire les cas d'usage appropriés -->
+- Saisie de données
+- Formulaires
+- Configuration
+- Filtres
 
 ### Quand ne pas utiliser
 
-<!-- TODO: Décrire les cas où un autre composant serait plus approprié -->
+- Affichage de données en lecture seule
+- Navigation
 
 ## Exemples
 
 ### Exemple basique
 
 ```html
-<!-- TODO: Ajouter un exemple de code basique -->
+<!-- Voir les stories pour des exemples détaillés -->
 ```
 
-### Exemple avancé
-
-```typescript
-<!-- TODO: Ajouter un exemple de code avancé -->
-```
 
 ## Accessibilité
 
-<!-- TODO: Documenter les considérations d'accessibilité -->
+- Associer chaque champ à un label avec for/id
+- Fournir des messages d'erreur explicites
+- Supporter la navigation au clavier
+- Indiquer les champs obligatoires
 
 ## Figma
 
@@ -70,4 +76,4 @@ import { FormFieldComponent } from '@lucca-front/ng/form-field';
 
 ## Voir aussi
 
-<!-- TODO: Lister les composants liés -->
+<!-- Composants liés à documenter -->

@@ -1,5 +1,5 @@
 ---
-description: Fieldset component from Lucca Front design system
+description: Composant Fieldset - composants pour la saisie et validation de données utilisateur
 triggers:
   - fieldset
   - button
@@ -13,6 +13,8 @@ triggers:
   - form
   - field
   - control
+  - validation
+  - saisie
 figma:
   nodeId: null
   fileKey: null
@@ -26,7 +28,9 @@ alwaysApply: false
 
 ## Description
 
-Fieldset est un composant de la catégorie **Forms** du design system Lucca Front.
+Le composant **Fieldset** fait partie de la catégorie **Forms** du design system Lucca Front.
+
+Composants pour la saisie et validation de données utilisateur.
 
 **Story path:** `Documentation/Forms/Fieldset/Angular/Basic`
 
@@ -41,33 +45,55 @@ import { GridColumnComponent, GridComponent } from '@lucca-front/ng/grid';
 ```
 
 
+## Propriétés
+
+| Propriété | Type | Défaut | Description |
+|-----------|------|--------|-------------|
+| `size` | `'M' | 'S' | 'XS'` | `-` | Change the size of the Button |
+| `palette` | `Palette` | `none` | Applies a color palette to the Button |
+| `state` | `'default' | 'loading' | 'error' | 'success'` | `default` | Modifies the state of the Button |
+
 ## Utilisation
 
 ### Quand utiliser Fieldset
 
-<!-- TODO: Décrire les cas d'usage appropriés -->
+- Saisie de données
+- Formulaires
+- Configuration
+- Filtres
 
 ### Quand ne pas utiliser
 
-<!-- TODO: Décrire les cas où un autre composant serait plus approprié -->
+- Affichage de données en lecture seule
+- Navigation
 
 ## Exemples
 
 ### Exemple basique
 
 ```html
-<!-- TODO: Ajouter un exemple de code basique -->
+@let column = { colspanAtMediaMinXXS: 2 }; ... <lu-fieldset...............>
+<lu-grid mode=
 ```
 
-### Exemple avancé
 
-```typescript
-<!-- TODO: Ajouter un exemple de code avancé -->
-```
+## Classes CSS
+
+| Classe | Description |
+|--------|-------------|
+| `.fieldset-title-content-text-helper` | Classe de base |
+| `.grid` | Classe de base |
+| `.grid-column` | Classe de base |
+| `.form-field` | Classe de base |
+| `.formLabel` | Classe de base |
+| `.mod-form` | Modificateur form |
 
 ## Accessibilité
 
-<!-- TODO: Documenter les considérations d'accessibilité -->
+- Associer chaque champ à un label avec for/id
+- Fournir des messages d'erreur explicites
+- Supporter la navigation au clavier
+- Indiquer les champs obligatoires
 
 ## Figma
 
@@ -75,4 +101,4 @@ import { GridColumnComponent, GridComponent } from '@lucca-front/ng/grid';
 
 ## Voir aussi
 
-<!-- TODO: Lister les composants liés -->
+<!-- Composants liés à documenter -->

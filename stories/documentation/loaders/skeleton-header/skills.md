@@ -1,5 +1,5 @@
 ---
-description: Skeleton header component from Lucca Front design system
+description: Composant Skeleton header - composants pour indiquer un chargement ou une progression
 triggers:
   - skeleton-header
   - skeletonheader
@@ -7,6 +7,7 @@ triggers:
   - loading
   - spinner
   - progress
+  - wait
 figma:
   nodeId: null
   fileKey: null
@@ -20,11 +21,13 @@ alwaysApply: false
 
 ## Description
 
-Skeleton header est un composant de la catégorie **Loaders** du design system Lucca Front.
+Le composant **Skeleton header** fait partie de la catégorie **Loaders** du design system Lucca Front.
+
+Composants pour indiquer un chargement ou une progression.
 
 **Story path:** `Documentation/Loaders/Skeleton/Skeleton Header`
-
 **Component:** `SkeletonHeaderComponent`
+
 
 ## Imports
 
@@ -37,29 +40,28 @@ import { SkeletonHeaderComponent } from '@lucca-front/ng/skeleton';
 
 ### Quand utiliser Skeleton header
 
-<!-- TODO: Décrire les cas d'usage appropriés -->
+- Chargement de données
+- Actions asynchrones
+- Progression
 
 ### Quand ne pas utiliser
 
-<!-- TODO: Décrire les cas où un autre composant serait plus approprié -->
+- Contenu disponible immédiatement
 
 ## Exemples
 
 ### Exemple basique
 
 ```html
-<!-- TODO: Ajouter un exemple de code basique -->
+<!-- Voir les stories pour des exemples détaillés -->
 ```
 
-### Exemple avancé
-
-```typescript
-<!-- TODO: Ajouter un exemple de code avancé -->
-```
 
 ## Accessibilité
 
-<!-- TODO: Documenter les considérations d'accessibilité -->
+- Annoncer le chargement avec aria-busy
+- Fournir un texte alternatif descriptif
+- Informer de la fin du chargement
 
 ## Figma
 
@@ -67,4 +69,4 @@ import { SkeletonHeaderComponent } from '@lucca-front/ng/skeleton';
 
 ## Voir aussi
 
-<!-- TODO: Lister les composants liés -->
+<!-- Composants liés à documenter -->

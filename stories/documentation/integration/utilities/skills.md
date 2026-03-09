@@ -1,7 +1,10 @@
 ---
-description: Utilities component from Lucca Front design system
+description: Composant Utilities - composants d'intégration et utilitaires
 triggers:
   - utilities
+  - integration
+  - utility
+  - helper
 figma:
   nodeId: null
   fileKey: null
@@ -15,7 +18,9 @@ alwaysApply: false
 
 ## Description
 
-Utilities est un composant de la catégorie **Integration** du design system Lucca Front.
+Le composant **Utilities** fait partie de la catégorie **Integration** du design system Lucca Front.
+
+Composants d'intégration et utilitaires.
 
 **Story path:** `Documentation/Integration/Utilities/BorderRadiusDeprecated`
 
@@ -25,29 +30,35 @@ Utilities est un composant de la catégorie **Integration** du design system Luc
 
 ### Quand utiliser Utilities
 
-<!-- TODO: Décrire les cas d'usage appropriés -->
+- Intégration de services
+- Utilitaires
 
 ### Quand ne pas utiliser
 
-<!-- TODO: Décrire les cas où un autre composant serait plus approprié -->
+- Composants visuels autonomes
 
 ## Exemples
 
 ### Exemple basique
 
 ```html
-<!-- TODO: Ajouter un exemple de code basique -->
+<p>J’ai besoin d’aide <span aria-hidden=
 ```
 
-### Exemple avancé
 
-```typescript
-<!-- TODO: Ajouter un exemple de code avancé -->
-```
+## Classes CSS
+
+| Classe | Description |
+|--------|-------------|
+| `.demo-utilityWrapper` | Classe de base |
+| `.u-borderRadiusM` | Classe de base |
+| `.demo-utility` | Classe de base |
+| `.code` | Classe de base |
+| `.u-borderTopLeftRadiusM` | Classe de base |
 
 ## Accessibilité
 
-<!-- TODO: Documenter les considérations d'accessibilité -->
+- Vérifier l'accessibilité des composants intégrés
 
 ## Figma
 
@@ -55,4 +66,4 @@ Utilities est un composant de la catégorie **Integration** du design system Luc
 
 ## Voir aussi
 
-<!-- TODO: Lister les composants liés -->
+<!-- Composants liés à documenter -->

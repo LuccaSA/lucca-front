@@ -1,11 +1,12 @@
 ---
-description: Links component from Lucca Front design system
+description: Composant Links - composants interactifs pour déclencher des actions utilisateur
 triggers:
   - links
   - link
   - click
   - action
   - interactive
+  - cta
 figma:
   nodeId: null
   fileKey: null
@@ -19,11 +20,13 @@ alwaysApply: false
 
 ## Description
 
-Links est un composant de la catégorie **Actions** du design system Lucca Front.
+Le composant **Links** fait partie de la catégorie **Actions** du design system Lucca Front.
+
+Composants interactifs pour déclencher des actions utilisateur.
 
 **Story path:** `Documentation/Actions/Link/Angular/TEST`
-
 **Component:** `FirstPageComponent`
+
 
 ## Imports
 
@@ -32,33 +35,58 @@ import { LinkComponent } from '@lucca-front/ng/link';
 ```
 
 
+## Propriétés
+
+| Propriété | Type | Défaut | Description |
+|-----------|------|--------|-------------|
+| `routerLinkCommands` | `LuRouterLink['routerLink'] | null` | `null` | Target page address |
+
 ## Utilisation
 
 ### Quand utiliser Links
 
-<!-- TODO: Décrire les cas d'usage appropriés -->
+- Actions utilisateur
+- Déclenchement d'événements
+- Soumission de formulaires
 
 ### Quand ne pas utiliser
 
-<!-- TODO: Décrire les cas où un autre composant serait plus approprié -->
+- Navigation simple (utiliser Link)
+- Affichage d'informations statiques
 
 ## Exemples
 
 ### Exemple basique
 
 ```html
-<!-- TODO: Ajouter un exemple de code basique -->
+And this is the second page !
 ```
 
-### Exemple avancé
+### Autres exemples
 
-```typescript
-<!-- TODO: Ajouter un exemple de code avancé -->
+```html
+Angular Navigation side: <a luLink=
 ```
+
+
+## Classes CSS
+
+| Classe | Description |
+|--------|-------------|
+| `.link` | Classe de base |
+| `.lucca-icon` | Classe de base |
+| `.icon-arrowExternal` | Classe de base |
+| `.link-text` | Classe de base |
+| `.link-icon` | Classe de base |
+| `.mod-icon` | Modificateur icon |
+| `.mod-decorationHover` | Modificateur decorationHover |
+| `.is-disabled` | État disabled |
 
 ## Accessibilité
 
-<!-- TODO: Documenter les considérations d'accessibilité -->
+- Utiliser des éléments sémantiques appropriés (<button>, <a>)
+- Fournir un texte alternatif pour les éléments visuels
+- Assurer un contraste suffisant
 
 ## Figma
 
@@ -66,4 +94,4 @@ import { LinkComponent } from '@lucca-front/ng/link';
 
 ## Voir aussi
 
-<!-- TODO: Lister les composants liés -->
+<!-- Composants liés à documenter -->

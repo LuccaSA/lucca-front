@@ -1,11 +1,14 @@
 ---
-description: Error page component from Lucca Front design system
+description: Composant Error page - composants pour communiquer des informations et états à l'utilisateur
 triggers:
   - error-page
   - errorpage
   - notification
   - message
   - alert
+  - status
+  - feedback
+  - info
 figma:
   nodeId: null
   fileKey: null
@@ -19,7 +22,9 @@ alwaysApply: false
 
 ## Description
 
-Error page est un composant de la catégorie **Feedback** du design system Lucca Front.
+Le composant **Error page** fait partie de la catégorie **Feedback** du design system Lucca Front.
+
+Composants pour communiquer des informations et états à l'utilisateur.
 
 **Story path:** `Documentation/Feedback/Error/Basic`
 
@@ -29,29 +34,39 @@ Error page est un composant de la catégorie **Feedback** du design system Lucca
 
 ### Quand utiliser Error page
 
-<!-- TODO: Décrire les cas d'usage appropriés -->
+- Messages de succès/erreur
+- Alertes importantes
+- Informations contextuelles
 
 ### Quand ne pas utiliser
 
-<!-- TODO: Décrire les cas où un autre composant serait plus approprié -->
+- Contenu principal
+- Actions utilisateur
 
 ## Exemples
 
 ### Exemple basique
 
 ```html
-<!-- TODO: Ajouter un exemple de code basique -->
+<!-- Voir les stories pour des exemples détaillés -->
 ```
 
-### Exemple avancé
 
-```typescript
-<!-- TODO: Ajouter un exemple de code avancé -->
-```
+## Classes CSS
+
+| Classe | Description |
+|--------|-------------|
+| `.errorPage` | Classe de base |
+| `.errorPage-section` | Classe de base |
+| `.errorPage-section-info` | Classe de base |
+| `.errorPage-section-info-title` | Classe de base |
+| `.errorPage-section-info-text` | Classe de base |
 
 ## Accessibilité
 
-<!-- TODO: Documenter les considérations d'accessibilité -->
+- Utiliser aria-live pour les messages dynamiques
+- Associer le rôle approprié (alert, status)
+- Ne pas reposer uniquement sur la couleur
 
 ## Figma
 
@@ -59,4 +74,4 @@ Error page est un composant de la catégorie **Feedback** du design system Lucca
 
 ## Voir aussi
 
-<!-- TODO: Lister les composants liés -->
+<!-- Composants liés à documenter -->

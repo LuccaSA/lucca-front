@@ -1,14 +1,15 @@
 ---
-description: Dialog component from Lucca Front design system
+description: Composant Dialog - composants affichés par-dessus le contenu principal
 triggers:
   - dialog
+  - dialogue
   - button
   - dialogcontent
   - dialogdismiss
   - dialogfooter
   - dialogheader
   - ludialogref
-  - ludialogservice
+  - ludialog
   - configureludialog
   - injectdialogdata
   - injectdialogref
@@ -20,21 +21,6 @@ triggers:
   - dialog_route_dismiss_trigger
   - dialogroutefactory
   - providedialogroutingreusestrategy
-  - form-field
-  - formfield
-  - simple-select
-  - lusimpleselectinput
-  - forms
-  - checkboxinput
-  - textinput
-  - numberinput
-  - icon
-  - callout
-  - link
-  - modal
-  - popup
-  - overlay
-  - layer
 figma:
   nodeId: null
   fileKey: null
@@ -48,17 +34,19 @@ alwaysApply: false
 
 ## Description
 
-Dialog est un composant de la catégorie **Overlays** du design system Lucca Front.
+Le composant **Dialog** fait partie de la catégorie **Overlays** du design system Lucca Front.
+
+Composants affichés par-dessus le contenu principal.
 
 **Story path:** `Documentation/Overlays/Dialog/Basic`
-
 **Component:** `DialogBasicStory`
+
 
 ## Imports
 
 ```typescript
 import { ButtonComponent } from '@lucca-front/ng/button';
-import { DialogComponent, DialogContentComponent, DialogDismissDirective, DialogFooterComponent, DialogHeaderComponent, LuDialogRef, LuDialogService, configureLuDialog, injectDialogData, injectDialogRef, provideLuDialog, , DialogCloseDirective, DialogHeaderAction, DialogOpenDirective, LuDialogConfig, DIALOG_ROUTE_DISMISS_TRIGGER, dialogRouteFactory, provideDialogRoutingReuseStrategy } from '@lucca-front/ng/dialog';
+import { DialogComponent, DialogContentComponent, DialogDismissDirective, DialogFooterComponent, DialogHeaderComponent, LuDialogRef, LuDialogService, configureLuDialog, injectDialogData, injectDialogRef, provideLuDialog, DialogCloseDirective, DialogHeaderAction, DialogOpenDirective, LuDialogConfig, DIALOG_ROUTE_DISMISS_TRIGGER, dialogRouteFactory, provideDialogRoutingReuseStrategy } from '@lucca-front/ng/dialog';
 import { FormFieldComponent } from '@lucca-front/ng/form-field';
 import { LuSimpleSelectInputComponent } from '@lucca-front/ng/simple-select';
 import { CheckboxInputComponent, TextInputComponent, NumberInputComponent } from '@lucca-front/ng/forms';
@@ -68,33 +56,72 @@ import { LinkComponent } from '@lucca-front/ng/link';
 ```
 
 
+## Propriétés
+
+| Propriété | Type | Défaut | Description |
+|-----------|------|--------|-------------|
+| `size` | `'M' | 'S' | 'XS'` | `-` | Change the size of the Button |
+| `palette` | `Palette` | `none` | Applies a color palette to the Button |
+| `state` | `'default' | 'loading' | 'error' | 'success'` | `default` | Modifies the state of the Button |
+
 ## Utilisation
 
 ### Quand utiliser Dialog
 
-<!-- TODO: Décrire les cas d'usage appropriés -->
+- Confirmations importantes
+- Formulaires contextuels
+- Informations complémentaires
 
 ### Quand ne pas utiliser
 
-<!-- TODO: Décrire les cas où un autre composant serait plus approprié -->
+- Contenu principal de la page
+- Navigation fréquente
 
 ## Exemples
 
 ### Exemple basique
 
 ```html
-<!-- TODO: Ajouter un exemple de code basique -->
+<lu-dialog>
+<lu-dialog-header>Header</lu-dialog-header>
+<lu-dialog-content>
+<lu-form-field label=
 ```
 
-### Exemple avancé
+### Autres exemples
 
-```typescript
-<!-- TODO: Ajouter un exemple de code avancé -->
+```html
+<button luButton (click)=
+
+<lu-dialog #dialog>
+<lu-dialog-header>
+<h1>Confirmation</h1>
+</lu-dialog-header>
+<lu-dialog-content>Lorem ipsum dolor</lu-dialog-content>
+<lu-dialog-footer>
+<div class=
 ```
+
+
+## Classes CSS
+
+| Classe | Description |
+|--------|-------------|
+| `.dialog_backdrop` | Classe de base |
+| `.dialog-inside` | Classe de base |
+| `.dialog-inside-formOptional` | Classe de base |
+| `.dialog-inside-header` | Classe de base |
+| `.dialog-inside-header-button` | Classe de base |
+| `.mod-ghost` | Modificateur ghost |
+| `.mod-drawer` | Modificateur drawer |
+| `.mod-fromBottom` | Modificateur fromBottom |
 
 ## Accessibilité
 
-<!-- TODO: Documenter les considérations d'accessibilité -->
+- Gérer le focus trap dans les modales
+- Permettre la fermeture avec Escape
+- Annoncer l'ouverture aux lecteurs d'écran
+- Utiliser aria-modal et role="dialog"
 
 ## Figma
 
@@ -102,4 +129,4 @@ import { LinkComponent } from '@lucca-front/ng/link';
 
 ## Voir aussi
 
-<!-- TODO: Lister les composants liés -->
+<!-- Composants liés à documenter -->

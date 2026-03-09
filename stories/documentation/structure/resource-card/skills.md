@@ -1,5 +1,5 @@
 ---
-description: Resource card component from Lucca Front design system
+description: Composant Resource card - composants pour structurer la mise en page
 triggers:
   - resource-card
   - resourcecard
@@ -15,6 +15,12 @@ triggers:
   - tooltip
   - lutooltiptrigger
   - lutooltip
+  - layout
+  - container
+  - structure
+  - grid
+  - box
+  - card
 figma:
   nodeId: null
   fileKey: null
@@ -28,7 +34,9 @@ alwaysApply: false
 
 ## Description
 
-Resource card est un composant de la catégorie **Structure** du design system Lucca Front.
+Le composant **Resource card** fait partie de la catégorie **Structure** du design system Lucca Front.
+
+Composants pour structurer la mise en page.
 
 **Story path:** `Documentation/Structure/Resource Card/Angular/Basic`
 
@@ -46,33 +54,59 @@ import { LuTooltipTriggerDirective, LuTooltipModule } from '@lucca-front/ng/tool
 ```
 
 
+## Propriétés
+
+| Propriété | Type | Défaut | Description |
+|-----------|------|--------|-------------|
+| `size` | `'M' | 'S' | 'XS'` | `-` | Change the size of the Button |
+| `palette` | `Palette` | `none` | Applies a color palette to the Button |
+| `state` | `'default' | 'loading' | 'error' | 'success'` | `default` | Modifies the state of the Button |
+| `wrapperDraggable` | `any` | `false` | - |
+| `wrapperGrid` | `any` | `false` | - |
+
 ## Utilisation
 
 ### Quand utiliser Resource card
 
-<!-- TODO: Décrire les cas d'usage appropriés -->
+- Organisation du contenu
+- Mise en page
+- Conteneurs
 
 ### Quand ne pas utiliser
 
-<!-- TODO: Décrire les cas où un autre composant serait plus approprié -->
+- Composants interactifs
 
 ## Exemples
 
 ### Exemple basique
 
 ```html
-<!-- TODO: Ajouter un exemple de code basique -->
+<lu-resource-card-wrapper.........>......</lu-resource-card-wrapper>
 ```
 
-### Exemple avancé
+### Autres exemples
 
-```typescript
-<!-- TODO: Ajouter un exemple de code avancé -->
+```html
+<lu-resource-card-wrapper cdkDropList draggable...>...</lu-resource-card-wrapper>
 ```
+
+
+## Classes CSS
+
+| Classe | Description |
+|--------|-------------|
+| `.resourceCardContainer` | Classe de base |
+| `.resourceCard` | Classe de base |
+| `.resourceCard-layout` | Classe de base |
+| `.resourceCard-layout-header` | Classe de base |
+| `.resourceCard-layout-header-title` | Classe de base |
+| `.is-disabled` | État disabled |
 
 ## Accessibilité
 
-<!-- TODO: Documenter les considérations d'accessibilité -->
+- Utiliser des landmarks appropriés
+- Maintenir un ordre de lecture logique
+- Structurer le contenu de manière sémantique
 
 ## Figma
 
@@ -80,4 +114,4 @@ import { LuTooltipTriggerDirective, LuTooltipModule } from '@lucca-front/ng/tool
 
 ## Voir aussi
 
-<!-- TODO: Lister les composants liés -->
+<!-- Composants liés à documenter -->

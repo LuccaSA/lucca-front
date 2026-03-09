@@ -1,5 +1,5 @@
 ---
-description: Inline message component from Lucca Front design system
+description: Composant Inline message - composants pour la saisie et validation de données utilisateur
 triggers:
   - inline-message
   - inlinemessage
@@ -7,6 +7,8 @@ triggers:
   - form
   - field
   - control
+  - validation
+  - saisie
 figma:
   nodeId: null
   fileKey: null
@@ -20,11 +22,13 @@ alwaysApply: false
 
 ## Description
 
-Inline message est un composant de la catégorie **Forms** du design system Lucca Front.
+Le composant **Inline message** fait partie de la catégorie **Forms** du design system Lucca Front.
+
+Composants pour la saisie et validation de données utilisateur.
 
 **Story path:** `Documentation/Forms/InlineMessage/Angular/Basic`
-
 **Component:** `InlineMessageComponent`
+
 
 ## Imports
 
@@ -33,33 +37,55 @@ import { InlineMessageComponent } from '@lucca-front/ng/inline-message';
 ```
 
 
+## Propriétés
+
+| Propriété | Type | Défaut | Description |
+|-----------|------|--------|-------------|
+| `state` | `InlineMessageState` | `-` | Inline message state |
+| `size` | `'S' | 'M'` | `-` | Which size should the inline message be? Default, medium or small |
+
 ## Utilisation
 
 ### Quand utiliser Inline message
 
-<!-- TODO: Décrire les cas d'usage appropriés -->
+- Saisie de données
+- Formulaires
+- Configuration
+- Filtres
 
 ### Quand ne pas utiliser
 
-<!-- TODO: Décrire les cas où un autre composant serait plus approprié -->
+- Affichage de données en lecture seule
+- Navigation
 
 ## Exemples
 
 ### Exemple basique
 
 ```html
-<!-- TODO: Ajouter un exemple de code basique -->
+<!-- Voir les stories pour des exemples détaillés -->
 ```
 
-### Exemple avancé
 
-```typescript
-<!-- TODO: Ajouter un exemple de code avancé -->
-```
+## Classes CSS
+
+| Classe | Description |
+|--------|-------------|
+| `.inlineMessage` | Classe de base |
+| `.inlineMessage-content` | Classe de base |
+| `.lucca-icon` | Classe de base |
+| `.inlineMessage-statusIcon` | Classe de base |
+| `.mod-S` | Modificateur S |
+| `.is-success` | État success |
+| `.is-warning` | État warning |
+| `.is-error` | État error |
 
 ## Accessibilité
 
-<!-- TODO: Documenter les considérations d'accessibilité -->
+- Associer chaque champ à un label avec for/id
+- Fournir des messages d'erreur explicites
+- Supporter la navigation au clavier
+- Indiquer les champs obligatoires
 
 ## Figma
 
@@ -67,4 +93,4 @@ import { InlineMessageComponent } from '@lucca-front/ng/inline-message';
 
 ## Voir aussi
 
-<!-- TODO: Lister les composants liés -->
+<!-- Composants liés à documenter -->

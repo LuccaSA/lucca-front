@@ -1,5 +1,5 @@
 ---
-description: Popover component from Lucca Front design system
+description: Composant Popover - composants affichés par-dessus le contenu principal
 triggers:
   - popover
   - lupopoveralignment
@@ -10,6 +10,8 @@ triggers:
   - popup
   - overlay
   - layer
+  - dialog
+  - floating
 figma:
   nodeId: null
   fileKey: null
@@ -23,11 +25,13 @@ alwaysApply: false
 
 ## Description
 
-Popover est un composant de la catégorie **Overlays** du design system Lucca Front.
+Le composant **Popover** fait partie de la catégorie **Overlays** du design system Lucca Front.
+
+Composants affichés par-dessus le contenu principal.
 
 **Story path:** `Documentation/Overlays/Popover`
-
 **Component:** `PopoverStory`
+
 
 ## Imports
 
@@ -40,29 +44,36 @@ import { LuPopoverAlignment, LuPopoverModule, LuPopoverPosition, LuPopoverTrigge
 
 ### Quand utiliser Popover
 
-<!-- TODO: Décrire les cas d'usage appropriés -->
+- Confirmations importantes
+- Formulaires contextuels
+- Informations complémentaires
 
 ### Quand ne pas utiliser
 
-<!-- TODO: Décrire les cas où un autre composant serait plus approprié -->
+- Contenu principal de la page
+- Navigation fréquente
 
 ## Exemples
 
 ### Exemple basique
 
 ```html
-<!-- TODO: Ajouter un exemple de code basique -->
+<!-- Voir les stories pour des exemples détaillés -->
 ```
 
-### Exemple avancé
 
-```typescript
-<!-- TODO: Ajouter un exemple de code avancé -->
-```
+## Classes CSS
+
+| Classe | Description |
+|--------|-------------|
+| `.button` | Classe de base |
 
 ## Accessibilité
 
-<!-- TODO: Documenter les considérations d'accessibilité -->
+- Gérer le focus trap dans les modales
+- Permettre la fermeture avec Escape
+- Annoncer l'ouverture aux lecteurs d'écran
+- Utiliser aria-modal et role="dialog"
 
 ## Figma
 
@@ -70,4 +81,4 @@ import { LuPopoverAlignment, LuPopoverModule, LuPopoverPosition, LuPopoverTrigge
 
 ## Voir aussi
 
-<!-- TODO: Lister les composants liés -->
+<!-- Composants liés à documenter -->

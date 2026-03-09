@@ -1,11 +1,13 @@
 ---
-description: Framed component from Lucca Front design system
+description: Composant Framed - composants pour la saisie et validation de données utilisateur
 triggers:
   - framed
   - input
   - form
   - field
   - control
+  - validation
+  - saisie
 figma:
   nodeId: null
   fileKey: null
@@ -19,40 +21,70 @@ alwaysApply: false
 
 ## Description
 
-Framed est un composant de la catégorie **Forms** du design system Lucca Front.
+Le composant **Framed** fait partie de la catégorie **Forms** du design system Lucca Front.
+
+Composants pour la saisie et validation de données utilisateur.
 
 **Story path:** `Documentation/Forms/Framed/Basic`
-
 **Component:** `FramedStory`
+
 
 
 ## Utilisation
 
 ### Quand utiliser Framed
 
-<!-- TODO: Décrire les cas d'usage appropriés -->
+- Saisie de données
+- Formulaires
+- Configuration
+- Filtres
 
 ### Quand ne pas utiliser
 
-<!-- TODO: Décrire les cas où un autre composant serait plus approprié -->
+- Affichage de données en lecture seule
+- Navigation
 
 ## Exemples
 
 ### Exemple basique
 
 ```html
-<!-- TODO: Ajouter un exemple de code basique -->
+<!-- Voir les stories pour des exemples détaillés -->
 ```
 
-### Exemple avancé
 
-```typescript
-<!-- TODO: Ajouter un exemple de code avancé -->
-```
+## Classes CSS
+
+| Classe | Description |
+|--------|-------------|
+| `.form` | Classe de base |
+| `.form-group` | Classe de base |
+| `.form-group-legend` | Classe de base |
+| `.form-group-line` | Classe de base |
+| `.form-group-line-col` | Classe de base |
+| `.mod-framed` | Modificateur framed |
+| `.mod-withSuffix` | Modificateur withSuffix |
+| `.mod-overlay-top` | Modificateur overlay-top |
+| `.mod-multiline` | Modificateur multiline |
+| `.mod-search` | Modificateur search |
+| `.mod-select` | Modificateur select |
+| `.mod-XS6` | Modificateur XS6 |
+| `.mod-selection` | Modificateur selection |
+| `.mod-field` | Modificateur field |
+| `.mod-XS8` | Modificateur XS8 |
+| `.is-required` | État required |
+| `.is-error` | État error |
+| `.is-focus` | État focus |
+| `.is-offset` | État offset |
+| `.palette-success` | Palette success |
+| `.palette-product` | Palette product |
 
 ## Accessibilité
 
-<!-- TODO: Documenter les considérations d'accessibilité -->
+- Associer chaque champ à un label avec for/id
+- Fournir des messages d'erreur explicites
+- Supporter la navigation au clavier
+- Indiquer les champs obligatoires
 
 ## Figma
 
@@ -60,4 +92,4 @@ Framed est un composant de la catégorie **Forms** du design system Lucca Front.
 
 ## Voir aussi
 
-<!-- TODO: Lister les composants liés -->
+<!-- Composants liés à documenter -->

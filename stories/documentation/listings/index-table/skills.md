@@ -1,5 +1,5 @@
 ---
-description: Index table component from Lucca Front design system
+description: Composant Index table - composants pour afficher des listes et collections de données
 triggers:
   - index-table
   - indextable
@@ -21,22 +21,6 @@ triggers:
   - indextableactionfile
   - pagination
   - tooltip
-  - lutooltip
-  - user
-  - luuserdisplay
-  - luuserpicture
-  - user-popover
-  - luuserpopover
-  - empty-state
-  - emptystatesection
-  - numeric-badge
-  - numericbadge
-  - safe-content
-  - lusafeexternalsvgpipe
-  - list
-  - table
-  - data
-  - grid
 figma:
   nodeId: null
   fileKey: null
@@ -50,11 +34,13 @@ alwaysApply: false
 
 ## Description
 
-Index table est un composant de la catégorie **Listings** du design system Lucca Front.
+Le composant **Index table** fait partie de la catégorie **Listings** du design system Lucca Front.
+
+Composants pour afficher des listes et collections de données.
 
 **Story path:** `Documentation/Listings/Index Table/Angular/Actions`
-
 **Component:** `IndexTableInteractiveNestedSelectableStory`
+
 
 ## Imports
 
@@ -62,7 +48,7 @@ Index table est un composant de la catégorie **Listings** du design system Lucc
 import { ButtonComponent } from '@lucca-front/ng/button';
 import { DropdownActionComponent, DropdownGroupComponent, DropdownItemComponent, DropdownMenuComponent, LuDropdownTriggerDirective } from '@lucca-front/ng/dropdown';
 import { IconComponent } from '@lucca-front/ng/icon';
-import { IndexTableActionComponent, IndexTableBodyComponent, IndexTableComponent, IndexTableFootComponent, IndexTableHeadComponent, IndexTableRowCellComponent, IndexTableRowCellHeaderComponent, IndexTableRowComponent, , IndexTableActionFileComponent } from '@lucca-front/ng/index-table';
+import { IndexTableActionComponent, IndexTableBodyComponent, IndexTableComponent, IndexTableFootComponent, IndexTableHeadComponent, IndexTableRowCellComponent, IndexTableRowCellHeaderComponent, IndexTableRowComponent, IndexTableActionFileComponent } from '@lucca-front/ng/index-table';
 import { PaginationComponent } from '@lucca-front/ng/pagination';
 import { LuTooltipModule } from '@lucca-front/ng/tooltip';
 import { LuUserDisplayModule, LuUserPictureComponent } from '@lucca-front/ng/user';
@@ -73,33 +59,103 @@ import { LuSafeExternalSvgPipe } from '@lucca-front/ng/safe-content';
 ```
 
 
+## Propriétés
+
+| Propriété | Type | Défaut | Description |
+|-----------|------|--------|-------------|
+| `size` | `'M' | 'S' | 'XS'` | `-` | Change the size of the Button |
+| `palette` | `Palette` | `none` | Applies a color palette to the Button |
+| `state` | `'default' | 'loading' | 'error' | 'success'` | `default` | Modifies the state of the Button |
+
 ## Utilisation
 
 ### Quand utiliser Index table
 
-<!-- TODO: Décrire les cas d'usage appropriés -->
+- Affichage de collections
+- Tableaux de données
+- Listes d'éléments
 
 ### Quand ne pas utiliser
 
-<!-- TODO: Décrire les cas où un autre composant serait plus approprié -->
+- Élément unique
+- Formulaires
 
 ## Exemples
 
 ### Exemple basique
 
 ```html
-<!-- TODO: Ajouter un exemple de code basique -->
+<lu-index-table...>
+<thead luIndexTableHead>
+<tr luIndexTableRow>
+<th luIndexTableCell>Label</th>
+<th luIndexTableCell>Label</th>
+<th luIndexTableCell actions...>Label</th>
+</tr>
+</thead>
+<tbody luIndexTableBody>
+<tr luIndexTableRow>
+<th luIndexTableCell><a href=
 ```
 
-### Exemple avancé
+### Autres exemples
 
-```typescript
-<!-- TODO: Ajouter un exemple de code avancé -->
+```html
+<lu-index-table.........>
+<thead luIndexTableHead>
+<tr luIndexTableRow...>
+<th luIndexTableCell>Label</th>
+<th luIndexTableCell...>Label</th>
+<th luIndexTableCell......>Label</th>
+</tr>
+</thead>
+<tbody luIndexTableBody.........> ... </tbody>...... </lu-index-table>...
+
+<lu-index-table layoutFixed>
+<thead luIndexTableHead>
+<tr luIndexTableRow>
+<th luIndexTableCell>Action</th>
+<th luIndexTableCell>Content</th>
+<th luIndexTableCell>Content</th>
+<th luIndexTableCell>Content</th>
+<th luIndexTableCell>Content</th>
+<th luIndexTableCell actions>Secondary action</th>
+</tr>
+</thead>
+<tbody luIndexTableBody>
+<tr luIndexTableRow #line1>
+<th luIndexTableCell>
+<a href=
 ```
+
+
+## Classes CSS
+
+| Classe | Description |
+|--------|-------------|
+| `.userPopover_trigger` | Classe de base |
+| `.code` | Classe de base |
+| `.indexTable-body-row-cell-subAction` | Classe de base |
+| `.indexTable` | Classe de base |
+| `.indexTable-head` | Classe de base |
+| `.mod-actions` | Modificateur actions |
+| `.mod-ghost` | Modificateur ghost |
+| `.mod-onlyIcon` | Modificateur onlyIcon |
+| `.mod-S` | Modificateur S |
+| `.mod-allowTextSelection` | Modificateur allowTextSelection |
+| `.mod-critical` | Modificateur critical |
+| `.mod-layoutFixed` | Modificateur layoutFixed |
+| `.mod-alignRight` | Modificateur alignRight |
+| `.mod-L` | Modificateur L |
+| `.mod-selectable` | Modificateur selectable |
+| `.is-closed` | État closed |
+| `.palette-product` | Palette product |
 
 ## Accessibilité
 
-<!-- TODO: Documenter les considérations d'accessibilité -->
+- Utiliser des structures sémantiques (table, ul, ol)
+- Fournir des en-têtes pour les tableaux
+- Supporter le tri et la pagination accessibles
 
 ## Figma
 
@@ -107,4 +163,4 @@ import { LuSafeExternalSvgPipe } from '@lucca-front/ng/safe-content';
 
 ## Voir aussi
 
-<!-- TODO: Lister les composants liés -->
+<!-- Composants liés à documenter -->

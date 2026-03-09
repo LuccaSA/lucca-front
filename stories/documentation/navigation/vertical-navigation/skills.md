@@ -1,5 +1,5 @@
 ---
-description: Vertical navigation component from Lucca Front design system
+description: Composant Vertical navigation - composants pour la navigation dans l'application
 triggers:
   - vertical-navigation
   - verticalnavigation
@@ -9,6 +9,9 @@ triggers:
   - nav
   - menu
   - navigate
+  - route
+  - link
+  - breadcrumb
 figma:
   nodeId: null
   fileKey: null
@@ -22,7 +25,9 @@ alwaysApply: false
 
 ## Description
 
-Vertical navigation est un composant de la catégorie **Navigation** du design system Lucca Front.
+Le composant **Vertical navigation** fait partie de la catégorie **Navigation** du design system Lucca Front.
+
+Composants pour la navigation dans l'application.
 
 **Story path:** `Documentation/Navigation/VerticalNavigation/Angular/Disabled`
 
@@ -34,33 +39,59 @@ import { VerticalNavigationComponent, VerticalNavigationGroupComponent, Vertical
 ```
 
 
+## Propriétés
+
+| Propriété | Type | Défaut | Description |
+|-----------|------|--------|-------------|
+| `level` | `number` | `3` | Defines aria level for heading title |
+
 ## Utilisation
 
 ### Quand utiliser Vertical navigation
 
-<!-- TODO: Décrire les cas d'usage appropriés -->
+- Navigation entre pages
+- Menus
+- Fil d'Ariane
+- Pagination
 
 ### Quand ne pas utiliser
 
-<!-- TODO: Décrire les cas où un autre composant serait plus approprié -->
+- Actions (utiliser Button)
+- Affichage de données
 
 ## Exemples
 
 ### Exemple basique
 
 ```html
-<!-- TODO: Ajouter un exemple de code basique -->
+<lu-vertical-navigation heading=
 ```
 
-### Exemple avancé
+### Autres exemples
 
-```typescript
-<!-- TODO: Ajouter un exemple de code avancé -->
+```html
+<lu-vertical-navigation...>
+<lu-vertical-navigation-group label=
 ```
+
+
+## Classes CSS
+
+| Classe | Description |
+|--------|-------------|
+| `.verticalNavigation` | Classe de base |
+| `.verticalNavigation-sectionTitle` | Classe de base |
+| `.verticalNavigation-list` | Classe de base |
+| `.verticalNavigation-list-item` | Classe de base |
+| `.verticalNavigation-list-item-link` | Classe de base |
+| `.mod-child` | Modificateur child |
+| `.mod-iconless` | Modificateur iconless |
 
 ## Accessibilité
 
-<!-- TODO: Documenter les considérations d'accessibilité -->
+- Utiliser des landmarks nav appropriés
+- Indiquer la page courante avec aria-current
+- Supporter la navigation au clavier
 
 ## Figma
 
@@ -68,4 +99,4 @@ import { VerticalNavigationComponent, VerticalNavigationGroupComponent, Vertical
 
 ## Voir aussi
 
-<!-- TODO: Lister les composants liés -->
+<!-- Composants liés à documenter -->

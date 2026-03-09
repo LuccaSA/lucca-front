@@ -1,11 +1,13 @@
 ---
-description: Tags component from Lucca Front design system
+description: Composant Tags - composants pour la typographie et le contenu textuel
 triggers:
   - tags
   - tag
   - text
   - typography
   - content
+  - label
+  - badge
 figma:
   nodeId: null
   fileKey: null
@@ -19,11 +21,13 @@ alwaysApply: false
 
 ## Description
 
-Tags est un composant de la catégorie **Texts** du design system Lucca Front.
+Le composant **Tags** fait partie de la catégorie **Texts** du design system Lucca Front.
+
+Composants pour la typographie et le contenu textuel.
 
 **Story path:** `Documentation/Texts/Tags/Angular/Basic`
-
 **Component:** `TagComponent`
+
 
 ## Imports
 
@@ -32,33 +36,60 @@ import { TagComponent } from '@lucca-front/ng/tag';
 ```
 
 
+## Propriétés
+
+| Propriété | Type | Défaut | Description |
+|-----------|------|--------|-------------|
+| `size` | `'S' | 'M' | 'L'` | `M` | Which size should the tag be? Defaults to medium |
+| `link` | `string` | `-` | For routerLink usage |
+
 ## Utilisation
 
 ### Quand utiliser Tags
 
-<!-- TODO: Décrire les cas d'usage appropriés -->
+- Mise en forme de texte
+- Labels
+- Badges
+- Tags
 
 ### Quand ne pas utiliser
 
-<!-- TODO: Décrire les cas où un autre composant serait plus approprié -->
+- Actions interactives
+- Formulaires
 
 ## Exemples
 
 ### Exemple basique
 
 ```html
-<!-- TODO: Ajouter un exemple de code basique -->
+<!-- Voir les stories pour des exemples détaillés -->
 ```
 
-### Exemple avancé
 
-```typescript
-<!-- TODO: Ajouter un exemple de code avancé -->
-```
+## Classes CSS
+
+| Classe | Description |
+|--------|-------------|
+| `.tag` | Classe de base |
+| `.lucca-icon` | Classe de base |
+| `.icon-heart` | Classe de base |
+| `.tag-content` | Classe de base |
+| `.mod-AI` | Modificateur AI |
+| `.mod-outlined` | Modificateur outlined |
+| `.mod-L` | Modificateur L |
+| `.mod-M` | Modificateur M |
+| `.mod-S` | Modificateur S |
+| `.palette-product` | Palette product |
+| `.palette-success` | Palette success |
+| `.palette-warning` | Palette warning |
+| `.palette-error` | Palette error |
+| `.palette-kiwi` | Palette kiwi |
 
 ## Accessibilité
 
-<!-- TODO: Documenter les considérations d'accessibilité -->
+- Utiliser une hiérarchie de titres logique
+- Assurer un contraste de texte suffisant
+- Éviter le texte dans les images
 
 ## Figma
 
@@ -66,4 +97,4 @@ import { TagComponent } from '@lucca-front/ng/tag';
 
 ## Voir aussi
 
-<!-- TODO: Lister les composants liés -->
+<!-- Composants liés à documenter -->

@@ -1,5 +1,5 @@
 ---
-description: Plg push component from Lucca Front design system
+description: Composant Plg push - composants pour communiquer des informations et états à l'utilisateur
 triggers:
   - plg-push
   - plgpush
@@ -7,6 +7,9 @@ triggers:
   - notification
   - message
   - alert
+  - status
+  - feedback
+  - info
 figma:
   nodeId: null
   fileKey: null
@@ -20,11 +23,13 @@ alwaysApply: false
 
 ## Description
 
-Plg push est un composant de la catégorie **Feedback** du design system Lucca Front.
+Le composant **Plg push** fait partie de la catégorie **Feedback** du design system Lucca Front.
+
+Composants pour communiquer des informations et états à l'utilisateur.
 
 **Story path:** `Documentation/Feedback/PLG Push/Angular/Basic`
-
 **Component:** `PLGPushComponent`
+
 
 ## Imports
 
@@ -34,33 +39,55 @@ import { PLGPushComponent } from '@lucca-front/ng/plg-push';
 ```
 
 
+## Propriétés
+
+| Propriété | Type | Défaut | Description |
+|-----------|------|--------|-------------|
+| `alt` | `string` | `-` | Information conveyed by the screen reader |
+| `size` | `'XXS' | 'XS' | 'S' | 'M' | 'L' | 'XL' | 'XXL'` | `-` | Which size should the icon be? XXS to XXL |
+| `color` | `'primary' | 'secondary' | 'product' | 'error' |...` | `inherit` | Changes the color of the icon (inherit by default) |
+
 ## Utilisation
 
 ### Quand utiliser Plg push
 
-<!-- TODO: Décrire les cas d'usage appropriés -->
+- Messages de succès/erreur
+- Alertes importantes
+- Informations contextuelles
 
 ### Quand ne pas utiliser
 
-<!-- TODO: Décrire les cas où un autre composant serait plus approprié -->
+- Contenu principal
+- Actions utilisateur
 
 ## Exemples
 
 ### Exemple basique
 
 ```html
-<!-- TODO: Ajouter un exemple de code basique -->
+<lu-plg-push ...${removed ?
 ```
 
-### Exemple avancé
 
-```typescript
-<!-- TODO: Ajouter un exemple de code avancé -->
-```
+## Classes CSS
+
+| Classe | Description |
+|--------|-------------|
+| `.link` | Classe de base |
+| `.link-text` | Classe de base |
+| `.link-icon` | Classe de base |
+| `.plgPush` | Classe de base |
+| `.plgPush-icons` | Classe de base |
+| `.mod-icon` | Modificateur icon |
+| `.mod-S` | Modificateur S |
+| `.mod-onlyIcon` | Modificateur onlyIcon |
+| `.mod-ghost` | Modificateur ghost |
 
 ## Accessibilité
 
-<!-- TODO: Documenter les considérations d'accessibilité -->
+- Utiliser aria-live pour les messages dynamiques
+- Associer le rôle approprié (alert, status)
+- Ne pas reposer uniquement sur la couleur
 
 ## Figma
 
@@ -68,4 +95,4 @@ import { PLGPushComponent } from '@lucca-front/ng/plg-push';
 
 ## Voir aussi
 
-<!-- TODO: Lister les composants liés -->
+<!-- Composants liés à documenter -->

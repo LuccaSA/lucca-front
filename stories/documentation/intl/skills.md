@@ -1,8 +1,12 @@
 ---
-description: Intl component from Lucca Front design system
+description: Composant Intl - composants d'internationalisation
 triggers:
   - intl
   - pagination
+  - i18n
+  - translation
+  - locale
+  - language
 figma:
   nodeId: null
   fileKey: null
@@ -16,11 +20,13 @@ alwaysApply: false
 
 ## Description
 
-Intl est un composant de la catégorie **Intl** du design system Lucca Front.
+Le composant **Intl** fait partie de la catégorie **Intl** du design system Lucca Front.
+
+Composants d'internationalisation.
 
 **Story path:** `Documentation/Intl/Basic`
-
 **Component:** `IntlStory`
+
 
 ## Imports
 
@@ -29,33 +35,40 @@ import { PaginationComponent } from '@lucca-front/ng/pagination';
 ```
 
 
+## Propriétés
+
+| Propriété | Type | Défaut | Description |
+|-----------|------|--------|-------------|
+| `from` | `number | null` | `-` | Where the pagination start |
+| `to` | `number | null` | `-` | Where the pagination end |
+| `itemsCount` | `number | null` | `-` | Total number of items in the pagination |
+| `mod` | `'default' | 'compact'` | `default` | Pagination mod (default or compact) |
+
 ## Utilisation
 
 ### Quand utiliser Intl
 
-<!-- TODO: Décrire les cas d'usage appropriés -->
+- Traductions
+- Formatage localisé
+- Pluralisation
 
 ### Quand ne pas utiliser
 
-<!-- TODO: Décrire les cas où un autre composant serait plus approprié -->
+- Contenu non internationalisé
 
 ## Exemples
 
 ### Exemple basique
 
 ```html
-<!-- TODO: Ajouter un exemple de code basique -->
+<lu-pagination [from]=
 ```
 
-### Exemple avancé
-
-```typescript
-<!-- TODO: Ajouter un exemple de code avancé -->
-```
 
 ## Accessibilité
 
-<!-- TODO: Documenter les considérations d'accessibilité -->
+- Utiliser lang pour indiquer la langue
+- S'assurer que les traductions sont complètes
 
 ## Figma
 
@@ -63,4 +76,4 @@ import { PaginationComponent } from '@lucca-front/ng/pagination';
 
 ## Voir aussi
 
-<!-- TODO: Lister les composants liés -->
+<!-- Composants liés à documenter -->

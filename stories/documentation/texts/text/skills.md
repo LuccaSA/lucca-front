@@ -1,9 +1,13 @@
 ---
-description: Text component from Lucca Front design system
+description: Composant Text - composants pour la typographie et le contenu textuel
 triggers:
   - text
+  - texte
   - typography
   - content
+  - label
+  - badge
+  - tag
 figma:
   nodeId: null
   fileKey: null
@@ -17,7 +21,9 @@ alwaysApply: false
 
 ## Description
 
-Text est un composant de la catégorie **Texts** du design system Lucca Front.
+Le composant **Text** fait partie de la catégorie **Texts** du design system Lucca Front.
+
+Composants pour la typographie et le contenu textuel.
 
 **Story path:** `Documentation/Texts/Text/Basic`
 
@@ -27,29 +33,35 @@ Text est un composant de la catégorie **Texts** du design system Lucca Front.
 
 ### Quand utiliser Text
 
-<!-- TODO: Décrire les cas d'usage appropriés -->
+- Mise en forme de texte
+- Labels
+- Badges
+- Tags
 
 ### Quand ne pas utiliser
 
-<!-- TODO: Décrire les cas où un autre composant serait plus approprié -->
+- Actions interactives
+- Formulaires
 
 ## Exemples
 
 ### Exemple basique
 
 ```html
-<!-- TODO: Ajouter un exemple de code basique -->
+<!-- Voir les stories pour des exemples détaillés -->
 ```
 
-### Exemple avancé
 
-```typescript
-<!-- TODO: Ajouter un exemple de code avancé -->
-```
+## Classes CSS
+
+| Classe | Description |
+|--------|-------------|
 
 ## Accessibilité
 
-<!-- TODO: Documenter les considérations d'accessibilité -->
+- Utiliser une hiérarchie de titres logique
+- Assurer un contraste de texte suffisant
+- Éviter le texte dans les images
 
 ## Figma
 
@@ -57,4 +69,4 @@ Text est un composant de la catégorie **Texts** du design system Lucca Front.
 
 ## Voir aussi
 
-<!-- TODO: Lister les composants liés -->
+<!-- Composants liés à documenter -->

@@ -1,5 +1,5 @@
 ---
-description: Examples component from Lucca Front design system
+description: Composant Examples - composants pour la saisie et validation de données utilisateur
 triggers:
   - examples
   - divider
@@ -16,6 +16,8 @@ triggers:
   - input
   - field
   - control
+  - validation
+  - saisie
 figma:
   nodeId: null
   fileKey: null
@@ -29,7 +31,9 @@ alwaysApply: false
 
 ## Description
 
-Examples est un composant de la catégorie **Forms** du design system Lucca Front.
+Le composant **Examples** fait partie de la catégorie **Forms** du design system Lucca Front.
+
+Composants pour la saisie et validation de données utilisateur.
 
 **Story path:** `Documentation/Forms/Examples/Angular`
 
@@ -46,33 +50,55 @@ import { GridColumnComponent, GridComponent } from '@lucca-front/ng/grid';
 ```
 
 
+## Propriétés
+
+| Propriété | Type | Défaut | Description |
+|-----------|------|--------|-------------|
+| `size` | `'M' | 'S' | null` | `null` | Which size should the chip be? Defaults or small |
+
 ## Utilisation
 
 ### Quand utiliser Examples
 
-<!-- TODO: Décrire les cas d'usage appropriés -->
+- Saisie de données
+- Formulaires
+- Configuration
+- Filtres
 
 ### Quand ne pas utiliser
 
-<!-- TODO: Décrire les cas où un autre composant serait plus approprié -->
+- Affichage de données en lecture seule
+- Navigation
 
 ## Exemples
 
 ### Exemple basique
 
 ```html
-<!-- TODO: Ajouter un exemple de code basique -->
+<form luForm maxWidth>
+<lu-form-header>Form title</lu-form-header>
+<lu-fieldset heading=
 ```
 
-### Exemple avancé
 
-```typescript
-<!-- TODO: Ajouter un exemple de code avancé -->
-```
+## Classes CSS
+
+| Classe | Description |
+|--------|-------------|
+| `.form` | Classe de base |
+| `.form-header` | Classe de base |
+| `.form-header-title` | Classe de base |
+| `.form-header-mandatory` | Classe de base |
+| `.form-header-mandatory-asterisk` | Classe de base |
+| `.mod-maxWidth` | Modificateur maxWidth |
+| `.mod-form` | Modificateur form |
 
 ## Accessibilité
 
-<!-- TODO: Documenter les considérations d'accessibilité -->
+- Associer chaque champ à un label avec for/id
+- Fournir des messages d'erreur explicites
+- Supporter la navigation au clavier
+- Indiquer les champs obligatoires
 
 ## Figma
 
@@ -80,4 +106,4 @@ import { GridColumnComponent, GridComponent } from '@lucca-front/ng/grid';
 
 ## Voir aussi
 
-<!-- TODO: Lister les composants liés -->
+<!-- Composants liés à documenter -->

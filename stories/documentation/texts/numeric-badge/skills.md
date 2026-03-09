@@ -1,11 +1,14 @@
 ---
-description: Numeric badge component from Lucca Front design system
+description: Composant Numeric badge - composants pour la typographie et le contenu textuel
 triggers:
   - numeric-badge
   - numericbadge
   - text
   - typography
   - content
+  - label
+  - badge
+  - tag
 figma:
   nodeId: null
   fileKey: null
@@ -19,11 +22,13 @@ alwaysApply: false
 
 ## Description
 
-Numeric badge est un composant de la catégorie **Texts** du design system Lucca Front.
+Le composant **Numeric badge** fait partie de la catégorie **Texts** du design system Lucca Front.
+
+Composants pour la typographie et le contenu textuel.
 
 **Story path:** `Documentation/Texts/NumericBadge/Angular/Basic`
-
 **Component:** `NumericBadgeComponent`
+
 
 ## Imports
 
@@ -32,33 +37,52 @@ import { NumericBadgeComponent } from '@lucca-front/ng/numeric-badge';
 ```
 
 
+## Propriétés
+
+| Propriété | Type | Défaut | Description |
+|-----------|------|--------|-------------|
+| `size` | `'XS' | 'S' | 'M'` | `-` | The size of the badge |
+| `palette` | `Palette` | `none` | The palette to use for this badge. Defaults to 'none' (inherits parent palette) |
+| `maxValue` | `number` | `999` | Indicates the maximum value of number for the numeric badge |
+
 ## Utilisation
 
 ### Quand utiliser Numeric badge
 
-<!-- TODO: Décrire les cas d'usage appropriés -->
+- Mise en forme de texte
+- Labels
+- Badges
+- Tags
 
 ### Quand ne pas utiliser
 
-<!-- TODO: Décrire les cas où un autre composant serait plus approprié -->
+- Actions interactives
+- Formulaires
 
 ## Exemples
 
 ### Exemple basique
 
 ```html
-<!-- TODO: Ajouter un exemple de code basique -->
+<lu-numeric-badge ... [value]=
 ```
 
-### Exemple avancé
 
-```typescript
-<!-- TODO: Ajouter un exemple de code avancé -->
-```
+## Classes CSS
+
+| Classe | Description |
+|--------|-------------|
+| `.numericBadge` | Classe de base |
+| `.mod-S` | Modificateur S |
+| `.mod-XS` | Modificateur XS |
+| `.is-loading` | État loading |
+| `.palette-product` | Palette product |
 
 ## Accessibilité
 
-<!-- TODO: Documenter les considérations d'accessibilité -->
+- Utiliser une hiérarchie de titres logique
+- Assurer un contraste de texte suffisant
+- Éviter le texte dans les images
 
 ## Figma
 
@@ -66,4 +90,4 @@ import { NumericBadgeComponent } from '@lucca-front/ng/numeric-badge';
 
 ## Voir aussi
 
-<!-- TODO: Lister les composants liés -->
+<!-- Composants liés à documenter -->

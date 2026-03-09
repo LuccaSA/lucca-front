@@ -1,5 +1,5 @@
 ---
-description: Input framed component from Lucca Front design system
+description: Composant Input framed - composants pour la saisie et validation de données utilisateur
 triggers:
   - input-framed
   - inputframed
@@ -16,6 +16,8 @@ triggers:
   - form
   - field
   - control
+  - validation
+  - saisie
 figma:
   nodeId: null
   fileKey: null
@@ -29,7 +31,9 @@ alwaysApply: false
 
 ## Description
 
-Input framed est un composant de la catégorie **Forms** du design system Lucca Front.
+Le composant **Input framed** fait partie de la catégorie **Forms** du design system Lucca Front.
+
+Composants pour la saisie et validation de données utilisateur.
 
 **Story path:** `Documentation/Forms/Input Framed/Angular/Basic`
 
@@ -44,33 +48,57 @@ import { IconComponent } from '@lucca-front/ng/icon';
 ```
 
 
+## Propriétés
+
+| Propriété | Type | Défaut | Description |
+|-----------|------|--------|-------------|
+| `errorInlineMessage` | `PortalContent | null` | `null` | Inline message for when the control is in error state |
+| `inlineMessageState` | `InlineMessageState | null` | `null` | State of the inline message, will be ignored if form state is invalid |
+| `extraDescribedBy` | `string` | `-` | Extra aria-describedby attribute |
+| `counter` | `number` | `0` | Max amount of characters allowed, defaults to 0, which means hidden, no maximum |
+
 ## Utilisation
 
 ### Quand utiliser Input framed
 
-<!-- TODO: Décrire les cas d'usage appropriés -->
+- Saisie de données
+- Formulaires
+- Configuration
+- Filtres
 
 ### Quand ne pas utiliser
 
-<!-- TODO: Décrire les cas où un autre composant serait plus approprié -->
+- Affichage de données en lecture seule
+- Navigation
 
 ## Exemples
 
 ### Exemple basique
 
 ```html
-<!-- TODO: Ajouter un exemple de code basique -->
+<lu-form-field label=
 ```
 
-### Exemple avancé
 
-```typescript
-<!-- TODO: Ajouter un exemple de code avancé -->
-```
+## Classes CSS
+
+| Classe | Description |
+|--------|-------------|
+| `.grid-column` | Classe de base |
+| `.inputFramedWrapper` | Classe de base |
+| `.inputFramed` | Classe de base |
+| `.inputFramed-header` | Classe de base |
+| `.form-field` | Classe de base |
+| `.mod-alignCenter` | Modificateur alignCenter |
+| `.mod-autoAtMediaMinXXS` | Modificateur autoAtMediaMinXXS |
+| `.mod-L` | Modificateur L |
 
 ## Accessibilité
 
-<!-- TODO: Documenter les considérations d'accessibilité -->
+- Associer chaque champ à un label avec for/id
+- Fournir des messages d'erreur explicites
+- Supporter la navigation au clavier
+- Indiquer les champs obligatoires
 
 ## Figma
 
@@ -78,4 +106,4 @@ import { IconComponent } from '@lucca-front/ng/icon';
 
 ## Voir aussi
 
-<!-- TODO: Lister les composants liés -->
+<!-- Composants liés à documenter -->

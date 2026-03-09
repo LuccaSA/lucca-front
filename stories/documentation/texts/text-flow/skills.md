@@ -1,11 +1,14 @@
 ---
-description: Text flow component from Lucca Front design system
+description: Composant Text flow - composants pour la typographie et le contenu textuel
 triggers:
   - text-flow
   - textflow
   - text
   - typography
   - content
+  - label
+  - badge
+  - tag
 figma:
   nodeId: null
   fileKey: null
@@ -19,7 +22,9 @@ alwaysApply: false
 
 ## Description
 
-Text flow est un composant de la catégorie **Texts** du design system Lucca Front.
+Le composant **Text flow** fait partie de la catégorie **Texts** du design system Lucca Front.
+
+Composants pour la typographie et le contenu textuel.
 
 **Story path:** `Documentation/Texts/Text flow/Angular/Basic`
 
@@ -35,29 +40,56 @@ import { TextFlowComponent } from '@lucca-front/ng/text-flow';
 
 ### Quand utiliser Text flow
 
-<!-- TODO: Décrire les cas d'usage appropriés -->
+- Mise en forme de texte
+- Labels
+- Badges
+- Tags
 
 ### Quand ne pas utiliser
 
-<!-- TODO: Décrire les cas où un autre composant serait plus approprié -->
+- Actions interactives
+- Formulaires
 
 ## Exemples
 
 ### Exemple basique
 
 ```html
-<!-- TODO: Ajouter un exemple de code basique -->
+<lu-text-flow>
+<h1>Heading 1</h1>
+<h2>Heading 2</h2>
+<p>Paragraph</p>
+<p>Paragraph</p>
+<h2>Heading 2</h2>
+<p>Paragraph</p>
+<ul>
+<li>List item</li>
+<li>List item</li>
+<li>List item</li>
+</ul>
+<h3>Heading 3</h3>
+<p>Paragraph</p>
+<h4>Heading 4</h4>
+<ol>
+<li>List item</li>
+<li>List item</li>
+<li>List item</li>
+</ol>
+</lu-text-flow>
 ```
 
-### Exemple avancé
 
-```typescript
-<!-- TODO: Ajouter un exemple de code avancé -->
-```
+## Classes CSS
+
+| Classe | Description |
+|--------|-------------|
+| `.textFlow` | Classe de base |
 
 ## Accessibilité
 
-<!-- TODO: Documenter les considérations d'accessibilité -->
+- Utiliser une hiérarchie de titres logique
+- Assurer un contraste de texte suffisant
+- Éviter le texte dans les images
 
 ## Figma
 
@@ -65,4 +97,4 @@ import { TextFlowComponent } from '@lucca-front/ng/text-flow';
 
 ## Voir aussi
 
-<!-- TODO: Lister les composants liés -->
+<!-- Composants liés à documenter -->

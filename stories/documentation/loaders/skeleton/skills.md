@@ -1,10 +1,11 @@
 ---
-description: Skeleton component from Lucca Front design system
+description: Composant Skeleton - composants pour indiquer un chargement ou une progression
 triggers:
   - skeleton
   - loading
   - spinner
   - progress
+  - wait
 figma:
   nodeId: null
   fileKey: null
@@ -18,7 +19,9 @@ alwaysApply: false
 
 ## Description
 
-Skeleton est un composant de la catégorie **Loaders** du design system Lucca Front.
+Le composant **Skeleton** fait partie de la catégorie **Loaders** du design system Lucca Front.
+
+Composants pour indiquer un chargement ou une progression.
 
 **Story path:** `Documentation/Loaders/Skeleton`
 
@@ -28,29 +31,46 @@ Skeleton est un composant de la catégorie **Loaders** du design system Lucca Fr
 
 ### Quand utiliser Skeleton
 
-<!-- TODO: Décrire les cas d'usage appropriés -->
+- Chargement de données
+- Actions asynchrones
+- Progression
 
 ### Quand ne pas utiliser
 
-<!-- TODO: Décrire les cas où un autre composant serait plus approprié -->
+- Contenu disponible immédiatement
 
 ## Exemples
 
 ### Exemple basique
 
 ```html
-<!-- TODO: Ajouter un exemple de code basique -->
+<!-- Voir les stories pour des exemples détaillés -->
 ```
 
-### Exemple avancé
 
-```typescript
-<!-- TODO: Ajouter un exemple de code avancé -->
-```
+## Classes CSS
+
+| Classe | Description |
+|--------|-------------|
+| `.skeleton` | Classe de base |
+| `.skeleton-item` | Classe de base |
+| `.mod-alignCenter` | Modificateur alignCenter |
+| `.mod-alignRight` | Modificateur alignRight |
+| `.mod-circle` | Modificateur circle |
+| `.mod-XS` | Modificateur XS |
+| `.mod-S` | Modificateur S |
+| `.mod-L` | Modificateur L |
+| `.mod-XL` | Modificateur XL |
+| `.mod-XXL` | Modificateur XXL |
+| `.mod-dark` | Modificateur dark |
+| `.mod-square` | Modificateur square |
+| `.is-loading` | État loading |
 
 ## Accessibilité
 
-<!-- TODO: Documenter les considérations d'accessibilité -->
+- Annoncer le chargement avec aria-busy
+- Fournir un texte alternatif descriptif
+- Informer de la fin du chargement
 
 ## Figma
 
@@ -58,4 +78,4 @@ Skeleton est un composant de la catégorie **Loaders** du design system Lucca Fr
 
 ## Voir aussi
 
-<!-- TODO: Lister les composants liés -->
+<!-- Composants liés à documenter -->

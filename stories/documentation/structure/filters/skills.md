@@ -1,7 +1,13 @@
 ---
-description: Filters component from Lucca Front design system
+description: Composant Filters - composants pour structurer la mise en page
 triggers:
   - filters
+  - layout
+  - container
+  - structure
+  - grid
+  - box
+  - card
 figma:
   nodeId: null
   fileKey: null
@@ -15,7 +21,9 @@ alwaysApply: false
 
 ## Description
 
-Filters est un composant de la catégorie **Structure** du design system Lucca Front.
+Le composant **Filters** fait partie de la catégorie **Structure** du design system Lucca Front.
+
+Composants pour structurer la mise en page.
 
 **Story path:** `Documentation/Structure/Filters/Basic`
 
@@ -25,29 +33,40 @@ Filters est un composant de la catégorie **Structure** du design system Lucca F
 
 ### Quand utiliser Filters
 
-<!-- TODO: Décrire les cas d'usage appropriés -->
+- Organisation du contenu
+- Mise en page
+- Conteneurs
 
 ### Quand ne pas utiliser
 
-<!-- TODO: Décrire les cas où un autre composant serait plus approprié -->
+- Composants interactifs
 
 ## Exemples
 
 ### Exemple basique
 
 ```html
-<!-- TODO: Ajouter un exemple de code basique -->
+<!-- Voir les stories pour des exemples détaillés -->
 ```
 
-### Exemple avancé
 
-```typescript
-<!-- TODO: Ajouter un exemple de code avancé -->
-```
+## Classes CSS
+
+| Classe | Description |
+|--------|-------------|
+| `.filters` | Classe de base |
+| `.filters-sectionLeft` | Classe de base |
+| `.filters-item` | Classe de base |
+| `.textfield` | Classe de base |
+| `.textfield-input` | Classe de base |
+| `.mod-framed` | Modificateur framed |
+| `.mod-inline` | Modificateur inline |
 
 ## Accessibilité
 
-<!-- TODO: Documenter les considérations d'accessibilité -->
+- Utiliser des landmarks appropriés
+- Maintenir un ordre de lecture logique
+- Structurer le contenu de manière sémantique
 
 ## Figma
 
@@ -55,4 +74,4 @@ Filters est un composant de la catégorie **Structure** du design system Lucca F
 
 ## Voir aussi
 
-<!-- TODO: Lister les composants liés -->
+<!-- Composants liés à documenter -->

@@ -1,11 +1,14 @@
 ---
-description: New badge component from Lucca Front design system
+description: Composant New badge - composants pour la typographie et le contenu textuel
 triggers:
   - new-badge
   - newbadge
   - text
   - typography
   - content
+  - label
+  - badge
+  - tag
 figma:
   nodeId: null
   fileKey: null
@@ -19,11 +22,13 @@ alwaysApply: false
 
 ## Description
 
-New badge est un composant de la catégorie **Texts** du design system Lucca Front.
+Le composant **New badge** fait partie de la catégorie **Texts** du design system Lucca Front.
+
+Composants pour la typographie et le contenu textuel.
 
 **Story path:** `Documentation/Texts/NewBadge/Angular/Basic`
-
 **Component:** `NewBadgeComponent`
+
 
 ## Imports
 
@@ -36,29 +41,36 @@ import { NewBadgeComponent } from '@lucca-front/ng/new-badge';
 
 ### Quand utiliser New badge
 
-<!-- TODO: Décrire les cas d'usage appropriés -->
+- Mise en forme de texte
+- Labels
+- Badges
+- Tags
 
 ### Quand ne pas utiliser
 
-<!-- TODO: Décrire les cas où un autre composant serait plus approprié -->
+- Actions interactives
+- Formulaires
 
 ## Exemples
 
 ### Exemple basique
 
 ```html
-<!-- TODO: Ajouter un exemple de code basique -->
+<!-- Voir les stories pour des exemples détaillés -->
 ```
 
-### Exemple avancé
 
-```typescript
-<!-- TODO: Ajouter un exemple de code avancé -->
-```
+## Classes CSS
+
+| Classe | Description |
+|--------|-------------|
+| `.newBadge` | Classe de base |
 
 ## Accessibilité
 
-<!-- TODO: Documenter les considérations d'accessibilité -->
+- Utiliser une hiérarchie de titres logique
+- Assurer un contraste de texte suffisant
+- Éviter le texte dans les images
 
 ## Figma
 
@@ -66,4 +78,4 @@ import { NewBadgeComponent } from '@lucca-front/ng/new-badge';
 
 ## Voir aussi
 
-<!-- TODO: Lister les composants liés -->
+<!-- Composants liés à documenter -->
