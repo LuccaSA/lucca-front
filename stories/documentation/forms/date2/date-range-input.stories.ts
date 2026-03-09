@@ -78,9 +78,12 @@ export default {
 		hasTodayButton: {
 			description: 'Ajoute un bouton pour sélectionner la date du jour.',
 		},
+		presentation: {
+			description: '[v21.1] Transforme le champ de formulaire en donnée textuelle non éditable.',
+		},
 	},
 	render: (args, { argTypes }) => {
-		const { selected, min, max, focusedDate, ...flags } = args;
+		const { selected, min, max, focusedDate, presentation, ...flags } = args;
 		const minValue = args['format'] === 'date' ? new Date(args['min']) : new Date(args['min'] ?? 0)?.toISOString().substring(0, 10);
 		const maxValue = args['format'] === 'date' ? new Date(args['max']) : new Date(args['max'] ?? 0)?.toISOString().substring(0, 10);
 		const focusedDateValue = args['format'] === 'date' ? new Date(args['focusedDate']) : new Date(args['focusedDate'] ?? 0)?.toISOString().substring(0, 10);
@@ -91,7 +94,7 @@ export default {
 				max: args['max'] ? maxValue : null,
 				focusedDate: args['focusedDate'] ? focusedDateValue : null,
 			},
-			template: cleanupTemplate(`<lu-form-field label="Date range input example" inlineMessage="Inline message example">
+			template: cleanupTemplate(`<lu-form-field label="Date range input example" inlineMessage="Inline message example" ${generateInputs({ presentation }, argTypes)}>
 				<lu-date-range-input [(ngModel)]="selected" [min]="min" [max]="max" [focusedDate]="focusedDate" ${generateInputs(flags, argTypes)} />
 			</lu-form-field>
 
@@ -100,7 +103,7 @@ export default {
 	},
 } as Meta;
 
-export const Basic: StoryObj<DateRangeInputComponent & { selected: DateRange }> = {
+export const Basic: StoryObj<DateRangeInputComponent & { selected: DateRange; presentation: boolean }> = {
 	args: {
 		hideToday: false,
 		hideWeekend: false,
@@ -109,6 +112,7 @@ export const Basic: StoryObj<DateRangeInputComponent & { selected: DateRange }> 
 		widthAuto: false,
 		mode: 'day',
 		format: 'date',
+		presentation: false,
 		selected: { start: new Date(), end: null },
 	},
 };
@@ -116,9 +120,9 @@ export const Basic: StoryObj<DateRangeInputComponent & { selected: DateRange }> 
 const shortcutsStr =
 	"[\n	{\n		label: 'Since start of week',\n		range: PremadeShortcuts['SinceStartOfWeek']('fr'),\n	},\n	{\n		label: 'Last week',\n		range: PremadeShortcuts['LastWeek']('fr'),\n	},\n	{\n		label: 'Last month',\n		range: PremadeShortcuts['LastMonth']('fr'),\n	},\n]";
 
-export const WithShortcuts: StoryObj<DateRangeInputComponent & { selected: DateRange }> = {
+export const WithShortcuts: StoryObj<DateRangeInputComponent & { selected: DateRange; presentation: boolean }> = {
 	render: (args: any, { argTypes }) => {
-		const { min, max, selected, ...flags } = args;
+		const { min, max, selected, presentation, ...flags } = args;
 		return {
 			props: {
 				selected,
@@ -142,7 +146,7 @@ export const WithShortcuts: StoryObj<DateRangeInputComponent & { selected: DateR
 			},
 
 			template: cleanupTemplate(`
-			<lu-form-field label="Date range input example" inlineMessage="Inline message example">
+			<lu-form-field label="Date range input example" inlineMessage="Inline message example" ${generateInputs({ presentation }, argTypes)}>
 				<lu-date-range-input [(ngModel)]="selected" [min]="min" [max]="max" [shortcuts]="shortcuts" ${generateInputs(flags, argTypes)} />
 			</lu-form-field>
 
@@ -156,6 +160,7 @@ export const WithShortcuts: StoryObj<DateRangeInputComponent & { selected: DateR
 		clearBehavior: 'clear',
 		widthAuto: false,
 		mode: 'day',
+		presentation: false,
 		selected: { start: new Date(), end: null },
 	},
 };

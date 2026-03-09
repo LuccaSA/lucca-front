@@ -10,12 +10,16 @@ export default {
 			control: {
 				type: 'select',
 			},
+			description: "Modifie l'icône produit.",
 		},
 		size: {
 			options: ['XXS', 'XS', 'S', '', 'L'],
 			control: {
 				type: 'select',
 			},
+		},
+		disabled: {
+			description: 'Marque le produit comme inactif.',
 		},
 	},
 	decorators: [

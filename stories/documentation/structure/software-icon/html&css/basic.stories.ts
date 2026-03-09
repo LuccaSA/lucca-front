@@ -23,16 +23,18 @@ export default {
 				'timesheet',
 				'office',
 				'projects',
-				'planning',
+				'shifts',
 				// Talent Management
-				'perfomance',
+				'performance',
 				'engagement',
 				'training',
 				'recruitment',
+				'mood',
 				// Employee Administration
 				'analytics',
 				'employee-administration',
 				'shared-documents',
+				'faces',
 				// Spend Management
 				'business-expenses',
 				'invoices',
@@ -44,8 +46,6 @@ export default {
 				'benefits',
 				'payroll-assistant',
 				// Lucca
-				'mood',
-				'faces',
 				'administration',
 				'cloud-control',
 				'lucca',
@@ -53,12 +53,16 @@ export default {
 			control: {
 				type: 'select',
 			},
+			description: "Modifie l'icône produit.",
 		},
 		size: {
 			options: ['XXS', 'XS', 'S', '', 'L'],
 			control: {
 				type: 'select',
 			},
+		},
+		disabled: {
+			description: 'Marque le produit comme inactif.',
 		},
 	},
 } as Meta;

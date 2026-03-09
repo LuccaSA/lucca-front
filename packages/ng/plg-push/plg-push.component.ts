@@ -16,7 +16,7 @@ import { LU_PLG_PUSH_TRANSLATIONS } from './plg-push.translate';
 	encapsulation: ViewEncapsulation.None,
 })
 export class PLGPushComponent {
-	protected intl = input(...intlInputOptions(LU_PLG_PUSH_TRANSLATIONS));
+	readonly intl = input(...intlInputOptions(LU_PLG_PUSH_TRANSLATIONS));
 
 	/**
 	 * Changes the title displayed in plg

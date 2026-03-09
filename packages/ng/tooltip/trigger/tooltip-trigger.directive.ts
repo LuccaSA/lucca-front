@@ -10,7 +10,7 @@ import {
 } from '@angular/cdk/overlay';
 import { ComponentPortal } from '@angular/cdk/portal';
 import {
-	AfterContentChecked,
+	afterEveryRender,
 	booleanAttribute,
 	computed,
 	DestroyRef,
@@ -51,7 +51,7 @@ let nextId = 0;
 		'(blur)': 'onBlur()',
 	},
 })
-export class LuTooltipTriggerDirective implements OnDestroy, AfterContentChecked {
+export class LuTooltipTriggerDirective implements OnDestroy {
 	readonly #overlay = inject(Overlay);
 
 	readonly #host = inject<ElementRef<HTMLElement>>(ElementRef);
@@ -171,6 +171,18 @@ export class LuTooltipTriggerDirective implements OnDestroy, AfterContentChecked
 	#idEffectRef?: EffectRef;
 
 	constructor() {
+		afterEveryRender({
+			read: () => {
+				if (this.luTooltipDisabled() || this.luTooltipWhenEllipsis() || this.luTooltipOnlyForDisplay()) {
+					return;
+				}
+				if (this.#previousTickContent != this.#host.nativeElement.innerText) {
+					this.#innerTextChange$.next();
+					this.#previousTickContent = this.#host.nativeElement.innerText;
+				}
+			},
+		});
+
 		toObservable(this.#realAction)
 			.pipe(
 				filter(isNotNil),
@@ -193,13 +205,6 @@ export class LuTooltipTriggerDirective implements OnDestroy, AfterContentChecked
 				this.setAccessibilityProperties(null);
 			}
 		});
-	}
-
-	ngAfterContentChecked(): void {
-		if (this.#previousTickContent != this.#host.nativeElement.innerText) {
-			this.#innerTextChange$.next();
-			this.#previousTickContent = this.#host.nativeElement.innerText;
-		}
 	}
 
 	ngOnDestroy(): void {
