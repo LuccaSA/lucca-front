@@ -83,13 +83,15 @@ export class LuMultiSelectPanelComponent<T> implements AfterViewInit, CoreSelect
 		return (groupOptions: T[]) => {
 			const disabledOptionIds = this.options()
 				.filter((o) => o.disabled)
-				.map((o) => this.optionKey(o.option()));
+				.map((o) => o.option())
+				.filter((option): option is T => option !== undefined)
+				.map((option) => this.optionKey(option));
 			return groupOptions.some((option) => !disabledOptionIds.includes(this.optionKey(option)));
 		};
 	});
 
 	hasGrouping$ = toObservable(this.grouping).pipe(map((grouping) => !!grouping));
-	public clueChange$ = this.selectInput.clue$;
+	public clueChange$ = this.selectInput.clue$.pipe(map((clue) => clue ?? ''));
 	public shouldDisplayAddOption$ = this.selectInput.shouldDisplayAddOption$;
 
 	groupTemplateLocation$ = ɵgetGroupTemplateLocation(this.hasGrouping$, this.clueChange$, this.options$, this.searchable);
@@ -128,7 +130,9 @@ export class LuMultiSelectPanelComponent<T> implements AfterViewInit, CoreSelect
 		// Filter out disabled options
 		const disabledOptionIds = this.options()
 			.filter((o) => o.disabled)
-			.map((o) => this.optionKey(o.option()));
+			.map((o) => o.option())
+			.filter((option): option is T => option !== undefined)
+			.map((option) => this.optionKey(option));
 		const enabledNotSelectedOptions = notSelectedOptions.filter((o) => !disabledOptionIds.includes(this.optionKey(o)));
 		const enabledGroupOptions = groupOptions.filter((o) => !disabledOptionIds.includes(this.optionKey(o)));
 
@@ -154,7 +158,10 @@ export class LuMultiSelectPanelComponent<T> implements AfterViewInit, CoreSelect
 		});
 
 		if (this.selectedOptions?.length) {
-			this.keyManager.highlightOption(this.selectedOptions[0]);
+			const firstSelectedOption = this.selectedOptions[0];
+			if (firstSelectedOption !== undefined) {
+				this.keyManager.highlightOption(firstSelectedOption);
+			}
 		}
 	}
 }
