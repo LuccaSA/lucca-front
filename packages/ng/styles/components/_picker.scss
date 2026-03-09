@@ -37,7 +37,7 @@
 		margin-block-end: var(--pr-t-spacings-50);
 
 		.optionItem-value {
-			--components-options-item-padding-horizontal: calc( var(--pr-t-spacings-200) + var(--pr-t-spacings-50) ) var(--pr-t-spacings-100);
+			--components-options-item-padding-horizontal: var(--pr-t-spacings-250) var(--pr-t-spacings-100);
 		}
 	}
 
