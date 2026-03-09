@@ -77,9 +77,10 @@ class SelectPanelRef<T> extends BaseSelectPanelRef<T> {
 class SelectPanelDOMHostRef<T> extends BaseSelectPanelRef<T> {
 	constructor(host: ViewContainerRef, parentInjector: Injector, selectInput: LuSimpleSelectInputComponent<T>) {
 		super(parentInjector, selectInput);
-		this.panelRef = host.createComponent(this.portalRef.component, {
-			injector: this.portalRef.injector,
-			projectableNodes: this.portalRef.projectableNodes,
+		const createPanelComponent = host.createComponent as (component: typeof LuSelectPanelComponent, options: { injector?: Injector }) => ComponentRef<LuSelectPanelComponent<T>>;
+
+		this.panelRef = createPanelComponent(this.portalRef.component as unknown as typeof LuSelectPanelComponent, {
+			injector: this.portalRef.injector ?? undefined,
 		});
 		this.instance = this.panelRef.instance;
 	}
