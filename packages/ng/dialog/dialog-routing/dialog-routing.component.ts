@@ -119,11 +119,12 @@ export class DialogRoutingContainerComponent<C> implements OnDestroy, OnInit {
 	async #openDialog(): Promise<void> {
 		const [data, dialogConfig] = await Promise.all([this.#resolve(this.config.dataFactory), this.#resolve(this.config.dialogConfigFactory)]);
 
-		this.#ref = this.#dialog.open<C>(
-			dialogConfig
-				? { ...dialogConfig, content: this.dialogTemplate(), ...(data !== undefined ? { data } : {}), canClose: this.#getCanCloseFn(dialogConfig) }
-				: { content: this.dialogTemplate(), ...(data !== undefined ? { data } : {}) },
-		);
+		this.#ref = this.#dialog.open<C>({
+			...dialogConfig,
+			content: this.dialogTemplate(),
+			data,
+			canClose: this.#getCanCloseFn(dialogConfig),
+		});
 
 		this.#ref?.result$.pipe(takeUntilDestroyed(this.#destroyRef)).subscribe((result) => this.#onDialogClosed(result));
 		this.#ref?.dismissed$.pipe(takeUntilDestroyed(this.#destroyRef)).subscribe(() => this.#onDialogDismissed());
