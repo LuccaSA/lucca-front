@@ -42,8 +42,31 @@ export default {
 			providers: [{ provide: LOCALE_ID, useValue: 'fr-FR' }, provideAnimations(), provideHttpClient()],
 		}),
 	],
+	argTypes: {
+		clearable: {
+			description: 'Affiche une croix pour réinitialiser le filtre si celui-ci est renseigné.',
+		},
+		label: {
+			description: 'Modifie le label du filtre.',
+		},
+		filterPillLabelPlural: {
+			description: "Dans le cas d'un multi select, permet de définir le label lorsque plusieurs éléments sont sélectionnés.",
+		},
+		optional: {
+			description:
+				"Rend disponible le filtre via le bouton d'ajout de filtre. Celui-ci est désactivé par défaut. Lorsque qu'un filtre est optionnel, celui-ci doit obligatoirement porter un attribut `name`.",
+		},
+		name: {
+			description: "Dans le cas d'un filtre optionnel, permet de faire le lien entre la liste de filtres disponible et l'affichage du filtre.",
+		},
+		disabled: {
+			description: 'Désactive le filtre.',
+		},
+	},
 	render: (args, { argTypes }) => {
 		const clearableProperty = args['clearable'] ? '' : 'clearable="false" ';
+		const label = args['label'];
+		const disabled = args['disabled'];
 		return {
 			props: {
 				simpleSelect: null,
@@ -63,8 +86,8 @@ export default {
 			template: `<lu-filter-pill label="Inclure les collaborateurs partis">
 	<lu-checkbox-input [ngModel]="false"></lu-checkbox-input>
 </lu-filter-pill>
-<lu-filter-pill label="Legumes" name="legume">
-	<lu-multi-select [ngModel]="[]" ${clearableProperty}	[options]="legumes | filterLegumes:clue" [totalCount]="legumes.length" (clueChange)="clue = $event" filterPillLabelPlural="légumes" />
+<lu-filter-pill label="${label}" name="legume" ${disabled}>
+	<lu-multi-select [ngModel]="[]" ${clearableProperty}	[options]="legumes | filterLegumes:clue" [totalCount]="legumes.length" (clueChange)="clue = $event" filterPillLabelPlural="Légumes" />
 </lu-filter-pill>
 <lu-filter-pill label="Legume" name="department">
 	<lu-simple-select [ngModel]="null" ${clearableProperty} [options]="legumes | filterLegumes:clue" />
@@ -99,5 +122,6 @@ export default {
 export const Basic: StoryObj<FilterPillComponent & { clearable: boolean }> = {
 	args: {
 		clearable: true,
+		label: 'Légume',
 	},
 };
