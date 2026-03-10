@@ -73,7 +73,7 @@ export class TagNode extends DecoratorNode<string> {
 		return self;
 	}
 
-	getTagDescription(): string {
+	getTagDescription(): string | undefined {
 		return this.#tagDescription;
 	}
 
