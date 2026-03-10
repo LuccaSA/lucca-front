@@ -92,8 +92,8 @@ export class LuTreeOptionItemComponent<T> extends ALuTreeOptionItem<T> implement
 			this._cdr.markForCheck();
 		}
 	}
-	get treeDisabled() {
-		return this._tree.disabled;
+	get disabled() {
+		return this._tree.disabled ?? false;
 	}
 
 	@ContentChild(ALuInputDisplayer, { static: true }) set _contentChildDisplayer(displayer: ILuInputDisplayer<T>) {
