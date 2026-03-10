@@ -92,7 +92,7 @@ export class LuTreeOptionItemComponent<T> extends ALuTreeOptionItem<T> implement
 			this._cdr.markForCheck();
 		}
 	}
-	get disabled() {
+	get treeDisabled() {
 		return this._tree.disabled;
 	}
 
