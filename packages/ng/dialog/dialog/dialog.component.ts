@@ -54,7 +54,7 @@ export class DialogComponent implements AfterViewInit {
 		}
 
 		if (this.dialogRef.config.autoFocus === 'first-input' && !this.dialogRef.config.cdkConfigOverride?.autoFocus) {
-			const focusable: HTMLElement =
+			const focusable: HTMLElement | null =
 				this.#htmlElement.querySelector('.luDialog-autofocus .luNativeInput') || this.#htmlElement.querySelector('.luDialog-autofocus') || this.#htmlElement.querySelector('.luNativeInput');
 			focusable?.focus();
 		}

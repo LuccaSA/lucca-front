@@ -11,8 +11,8 @@ export class LuDialogService {
 
 	#injector = inject(Injector);
 
-	open<C, TData = LuDialogData<C>>(config: LuDialogConfig<C, NoInfer<TData>>): LuDialogRef<C, TData> {
-		let luDialogRef: LuDialogRef<C, TData>;
+	open<C, TData = LuDialogData<C>>(config: LuDialogConfig<C, NoInfer<TData>>): LuDialogRef<C, TData> | undefined {
+		let luDialogRef: LuDialogRef<C, TData> | undefined = undefined;
 		let modeClasses: string[] = [];
 		switch (config.mode) {
 			case 'drawer':
@@ -60,21 +60,21 @@ export class LuDialogService {
 			renderer.setStyle(cdkRef.componentRef.location.nativeElement, 'display', 'contents');
 		}
 
-		if (!config.alert) {
+		if (!config.alert && luDialogRef) {
 			// Setup close listeners on backdrop click and escape key by ourselves so we can hook the `canClose` method to it.
 			merge(cdkRef.backdropClick, cdkRef.keydownEvents.pipe(filter((e) => e.key === 'Escape' && !e.defaultPrevented)))
 				.pipe(
 					filter(() => config.canCloseWithBackdrop ?? true),
 					switchMap(() => {
-						const canClose = config.canClose?.(cdkRef.componentInstance) ?? true;
+						const canClose = cdkRef.componentInstance ? (config.canClose?.(cdkRef.componentInstance) ?? true) : false;
 						const canClose$ = isObservable(canClose) ? canClose : of(canClose);
 						return canClose$.pipe(take(1));
 					}),
-					takeUntil(luDialogRef.closed$),
+					takeUntil(closed),
 				)
 				.subscribe((canClose) => {
 					if (canClose) {
-						luDialogRef.detachSubscription?.unsubscribe();
+						luDialogRef!.detachSubscription?.unsubscribe();
 						cdkRef.close(DISMISSED_VALUE);
 					}
 				});

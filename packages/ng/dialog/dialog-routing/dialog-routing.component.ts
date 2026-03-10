@@ -46,9 +46,11 @@ export function defaultOnClosedFn<C>(): void {
 	const route = inject(ActivatedRoute);
 	const routeData = route.snapshot.data as DialogRouteData<C>;
 	const next = routeData.dialogRouteConfig.path
-		.split('/')
-		.map(() => '..')
-		.join('/');
+		? routeData.dialogRouteConfig.path
+				.split('/')
+				.map(() => '..')
+				.join('/')
+		: '';
 
 	return void router.navigate([next], {
 		relativeTo: route.children[0],
@@ -117,22 +119,21 @@ export class DialogRoutingContainerComponent<C> implements OnDestroy, OnInit {
 	async #openDialog(): Promise<void> {
 		const [data, dialogConfig] = await Promise.all([this.#resolve(this.config.dataFactory), this.#resolve(this.config.dialogConfigFactory)]);
 
-		this.#ref = this.#dialog.open<C>({
-			...dialogConfig,
-			content: this.dialogTemplate(),
-			data,
-			canClose: this.#getCanCloseFn(dialogConfig),
-		});
+		this.#ref = this.#dialog.open<C>(
+			dialogConfig
+				? { ...dialogConfig, content: this.dialogTemplate(), ...(data !== undefined ? { data } : {}), canClose: this.#getCanCloseFn(dialogConfig) }
+				: { content: this.dialogTemplate(), ...(data !== undefined ? { data } : {}) },
+		);
 
-		this.#ref.result$.pipe(takeUntilDestroyed(this.#destroyRef)).subscribe((result) => this.#onDialogClosed(result));
-		this.#ref.dismissed$.pipe(takeUntilDestroyed(this.#destroyRef)).subscribe(() => this.#onDialogDismissed());
+		this.#ref?.result$.pipe(takeUntilDestroyed(this.#destroyRef)).subscribe((result) => this.#onDialogClosed(result));
+		this.#ref?.dismissed$.pipe(takeUntilDestroyed(this.#destroyRef)).subscribe(() => this.#onDialogDismissed());
 	}
 
 	#getCanCloseFn(config: DialogRouteDialogConfig<C>): ((c: C) => Observable<boolean>) | undefined {
 		const canCloseFns: ((c: C) => Observable<boolean>)[] = [];
 
 		if (config.canClose) {
-			canCloseFns.push((c: C) => deferrableToObservable(config.canClose(c)));
+			canCloseFns.push((c: C) => deferrableToObservable(config.canClose!(c)));
 		}
 
 		if (this.config.canDeactivate) {
@@ -219,7 +220,7 @@ export class DialogRoutingContainerComponent<C> implements OnDestroy, OnInit {
 		this.#ref = undefined;
 	}
 
-	async #resolve<T>(resolveFn: DialogResolveFn<T>): Promise<T | undefined> {
+	async #resolve<T>(resolveFn: DialogResolveFn<T> | undefined): Promise<T | undefined> {
 		if (!resolveFn) {
 			return undefined;
 		}
