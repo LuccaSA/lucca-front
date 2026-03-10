@@ -64,7 +64,6 @@ export default {
 		<lu-dialog-content>Template-driven content</lu-dialog-content>
 
 		<lu-dialog-footer>
-			<div class="footer-content">Optional footer text</div>
 			<div class="footer-actions">
 				<button type="button" luButton luDialogClose>Confirm</button>
 				<button type="button" luButton="ghost" luDialogDismiss>Cancel</button>
@@ -138,7 +137,6 @@ export const Focus: StoryObj = {
 		</lu-dialog-content>
 
 		<lu-dialog-footer>
-			<div class="footer-content">Optional footer text</div>
 			<div class="footer-actions">
 				<button type="button" luButton luDialogClose>Confirm</button>
 				<button type="button" luButton="ghost" luDialogDismiss>Cancel</button>
@@ -184,7 +182,6 @@ export const WithForm: StoryObj = {
 			</lu-dialog-content>
 
 			<lu-dialog-footer>
-				<div class="footer-content">Optional footer text</div>
 				<div class="footer-actions">
 					<button type="submit" luButton [disabled]="!form.valid" luDialogClose>Submit</button>
 					<button type="button" luButton="ghost" luDialogDismiss>Cancel</button>
@@ -224,7 +221,6 @@ export const WithAction: StoryObj = {
 		<lu-dialog-content>Template-driven content</lu-dialog-content>
 
 		<lu-dialog-footer>
-			<div class="footer-content">Optional footer text</div>
 			<div class="footer-actions">
 				<button type="button" luButton luDialogClose>Confirm</button>
 				<button type="button" luButton="ghost" luDialogDismiss>Cancel</button>

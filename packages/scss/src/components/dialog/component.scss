@@ -119,9 +119,7 @@
 			grid-area: footer;
 
 			&.footer {
-				background-color: transparent;
-				position: relative;
-				overflow: hidden;
+				@include footer.insideDialog;
 			}
 		}
 
