@@ -12,6 +12,7 @@ export class LuDialogService {
 	#injector = inject(Injector);
 
 	open<C, TData = LuDialogData<C>>(config: LuDialogConfig<C, NoInfer<TData>>): LuDialogRef<C, TData> {
+		// Assigned synchronously inside the `providers` callback below, which CDK calls during `Dialog.open()`.
 		let luDialogRef!: LuDialogRef<C, TData>;
 		let modeClasses: string[] = [];
 		switch (config.mode) {
