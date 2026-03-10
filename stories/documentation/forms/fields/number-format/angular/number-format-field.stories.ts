@@ -1,3 +1,4 @@
+import { LOCALE_ID } from '@angular/core';
 import { FormsModule, ReactiveFormsModule } from '@angular/forms';
 import { BrowserAnimationsModule } from '@angular/platform-browser/animations';
 import { FormFieldComponent } from '@lucca-front/ng/form-field';
@@ -5,7 +6,6 @@ import { NumberFormatInputComponent } from '@lucca-front/ng/forms';
 import { applicationConfig, Meta, moduleMetadata, StoryObj } from '@storybook/angular';
 import { cleanupTemplate, generateInputs } from 'stories/helpers/stories';
 import { StoryModelDisplayComponent } from 'stories/helpers/story-model-display.component';
-import { LOCALE_ID } from '@angular/core';
 
 export default {
 	title: 'Documentation/Forms/Fields/NumberFormatField/Angular',
@@ -20,18 +20,46 @@ export default {
 	argTypes: {
 		tooltip: {
 			type: 'string',
+			description: 'Affiche une icône (?) associée à une info-bulle. ',
+			if: { arg: 'hiddenLabel', truthy: false },
 		},
 		size: {
-			options: ['M', 'S'],
+			options: ['M', 'S', 'XS'],
 			control: {
-				type: 'radio',
+				type: 'select',
 			},
+			description: 'Modifie la taille du champ.',
+		},
+		inlineMessage: {
+			description: 'Ajoute un texte descriptif (aide, erreur, etc.) sous le champ de formulaire.',
 		},
 		inlineMessageState: {
 			options: ['default', 'success', 'warning', 'error'],
 			control: {
 				type: 'select',
 			},
+			description: "Modifie l'état de l'inline message.",
+		},
+		label: {
+			description: 'Modifie le label de l’input.',
+		},
+		hiddenLabel: {
+			description: "Masque le label en le conservant dans le DOM pour les lecteurs d'écrans",
+		},
+		required: {
+			description: 'Marque le champ comme obligatoire.',
+		},
+		hasClearer: {
+			description: 'Affiche un bouton pour vider le champ lorsque celui-ci est rempli.',
+		},
+		disabled: {
+			description: 'Désactive le champ.',
+		},
+		placeholder: {
+			description: 'Modifie le placeholder au champ.',
+		},
+		valueAlignRight: {
+			description: 'Aligne la valeur du champ à droite.',
 		},
 		useAutoPrefixSuffix: {
 			type: 'boolean',
@@ -39,9 +67,11 @@ export default {
 		},
 		min: {
 			type: 'number',
+			description: 'Définit une valeur minimale.',
 		},
 		max: {
 			type: 'number',
+			description: 'Définit une valeur maximale.',
 		},
 		formatStyle: {
 			options: ['decimal', 'percent', 'currency', 'unit'],
