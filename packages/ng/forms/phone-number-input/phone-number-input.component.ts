@@ -95,7 +95,7 @@ export class PhoneNumberInputComponent implements ControlValueAccessor, Validato
 			prefix: getCountryCallingCode(country),
 			name: this.#displayNames.of(country),
 		}))
-		.sort((a, b) => a.name?.localeCompare(b.name));
+		.sort((a, b) => (a.name && b.name ? a.name.localeCompare(b.name) : 0));
 
 	readonly #prefixEntries = computed(() => {
 		const whitelist = this.allowedCountries();
@@ -122,7 +122,8 @@ export class PhoneNumberInputComponent implements ControlValueAccessor, Validato
 	countryCode = computed(() => this.countryCodeSelected() ?? this.defaultCountryCode());
 
 	placeholder = computed(() => {
-		const exampleNumber = this.noAutoPlaceholder() === false ? getExampleNumber(this.countryCode(), examples) : undefined;
+		const countryCode = this.countryCode();
+		const exampleNumber = this.noAutoPlaceholder() === false && countryCode ? getExampleNumber(countryCode, examples) : undefined;
 		return exampleNumber?.formatNational() ?? '';
 	});
 
@@ -183,7 +184,7 @@ export class PhoneNumberInputComponent implements ControlValueAccessor, Validato
 		const countryCode = this.countryCode();
 
 		try {
-			const { country, number } = tryParsePhoneNumber(displayedNumber, countryCode);
+			const { country, number } = tryParsePhoneNumber(displayedNumber ?? '', countryCode);
 			if (country && country !== countryCode) {
 				this.countryCodeSelected.set(country);
 				this.countryChange.emit(country);
@@ -203,18 +204,18 @@ export class PhoneNumberInputComponent implements ControlValueAccessor, Validato
 		const countryCode = this.countryCode();
 		const displayedNumber = this.displayedNumber();
 		try {
-			const { isValid, nationalNumber } = tryParsePhoneNumber(displayedNumber, countryCode);
+			const { isValid, nationalNumber } = tryParsePhoneNumber(displayedNumber ?? '', countryCode);
 			if (isValid) {
 				this.displayedNumber.set(nationalNumber);
 			} else if (countryCode) {
-				this.displayedNumber.set(formatIncompletePhoneNumber(displayedNumber, countryCode));
+				this.displayedNumber.set(formatIncompletePhoneNumber(displayedNumber ?? '', countryCode));
 			}
 		} catch {
 			// do nothing
 		}
 	}
 
-	validate(control: AbstractControl<string, string>): ValidationErrors {
+	validate(control: AbstractControl<string, string>): ValidationErrors | null {
 		return PhoneNumberValidators.validPhoneNumber(control, this.countryCode());
 	}
 }

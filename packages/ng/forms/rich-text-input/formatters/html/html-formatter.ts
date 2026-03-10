@@ -13,7 +13,7 @@ export class HtmlFormatter extends RichTextFormatter {
 	override parse(editor: LexicalEditor, htmlString?: string | null): void {
 		const parser = new DOMParser();
 		const dom = parser.parseFromString(
-			DOMPurify.sanitize(htmlString, {
+			DOMPurify.sanitize(htmlString ?? '', {
 				FORBID_ATTR: ['style', 'class'],
 			}),
 			'text/html',
