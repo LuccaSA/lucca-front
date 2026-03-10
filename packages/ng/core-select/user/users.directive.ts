@@ -134,7 +134,7 @@ export class LuCoreSelectUsersDirective<T extends LuCoreSelectUser = LuCoreSelec
 					ILuApiCollectionResponse<{
 						item: T;
 					}>
-				>(this.urlOrDefault(), { params })
+				>(this.urlOrDefault(), { ...params, responseType: 'json' })
 				.pipe(catchError(() => EMPTY)),
 		),
 		map((res) => res.data.items.map(({ item }) => item)[0] ?? null),

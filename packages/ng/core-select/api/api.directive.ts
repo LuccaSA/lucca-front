@@ -1,6 +1,7 @@
 import { Directive, inject, OnDestroy, OnInit } from '@angular/core';
+import { isNotNil } from '@lucca-front/ng/core';
 import { ALuSelectInputComponent, coreSelectDefaultOptionComparer, coreSelectDefaultOptionKey, LuOptionComparer } from '@lucca-front/ng/core-select';
-import { catchError, combineLatest, concatMap, debounceTime, distinctUntilChanged, map, merge, Observable, of, pairwise, scan, startWith, Subject, switchMap, takeUntil, tap } from 'rxjs';
+import { catchError, combineLatest, concatMap, debounceTime, distinctUntilChanged, filter, map, merge, Observable, of, pairwise, scan, startWith, Subject, switchMap, takeUntil, tap } from 'rxjs';
 
 export const LU_SELECT_MAGIC_PAGE_SIZE = 20;
 export const MAGIC_DEBOUNCE_DURATION = 250;
@@ -107,6 +108,7 @@ export abstract class ALuCoreSelectApiDirective<TOption, TParams = Record<string
 		return this.getOptions(params, page).pipe(
 			catchError(() => of([] as TOption[])),
 			tap(() => (this.select.loading = false)),
+			filter(isNotNil),
 			map((items) => ({ items, isLastPage: items.length < this.pageSize })),
 		);
 	}

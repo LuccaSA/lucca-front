@@ -43,7 +43,7 @@ export class LuCoreSelectDepartmentsDirective<T extends ILuDepartment = ILuDepar
 		);
 	}
 
-	protected override getOptions(params: Record<string, string | number | boolean> | null): Observable<TreeNode<T>[]> {
+	protected override getOptions(params: Record<string, string | number | boolean>): Observable<TreeNode<T>[]> {
 		return this.httpClient
 			.get<TreeNode<T>>(this.url(), {
 				params,
@@ -52,7 +52,7 @@ export class LuCoreSelectDepartmentsDirective<T extends ILuDepartment = ILuDepar
 				map((data) => {
 					return data.children;
 				}),
-			);
+			) as Observable<TreeNode<T>[]>;
 	}
 
 	trim(options: TreeNode<T>[], clue: string): TreeNode<T>[] {
