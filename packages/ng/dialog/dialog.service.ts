@@ -1,6 +1,5 @@
 import { Dialog, DialogRef } from '@angular/cdk/dialog';
 import { inject, Injectable, Injector, Renderer2 } from '@angular/core';
-import { assertNotNil } from '@lucca-front/ng/core';
 import { isObservable, merge, of, take } from 'rxjs';
 import { filter, switchMap, takeUntil } from 'rxjs/operators';
 import { LuDialogConfig, LuDialogData, LuDialogRef, LuDialogResult } from './model';
@@ -13,7 +12,7 @@ export class LuDialogService {
 	#injector = inject(Injector);
 
 	open<C, TData = LuDialogData<C>>(config: LuDialogConfig<C, NoInfer<TData>>): LuDialogRef<C, TData> {
-		let luDialogRef: LuDialogRef<C, TData> | undefined = undefined;
+		let luDialogRef!: LuDialogRef<C, TData>;
 		let modeClasses: string[] = [];
 		switch (config.mode) {
 			case 'drawer':
@@ -56,8 +55,6 @@ export class LuDialogService {
 			...(config.cdkConfigOverride || {}),
 		});
 
-		assertNotNil(luDialogRef);
-
 		if (cdkRef.componentRef) {
 			const renderer = cdkRef.componentRef.injector.get(Renderer2);
 			renderer.setStyle(cdkRef.componentRef.location.nativeElement, 'display', 'contents');
@@ -73,7 +70,7 @@ export class LuDialogService {
 						const canClose$ = isObservable(canClose) ? canClose : of(canClose);
 						return canClose$.pipe(take(1));
 					}),
-					takeUntil(luDialogRef!.closed$),
+					takeUntil(luDialogRef.closed$),
 				)
 				.subscribe((canClose) => {
 					if (canClose) {
