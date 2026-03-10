@@ -56,7 +56,7 @@ export default {
 export const Page: StoryObj<EmptyStatePageComponent & { src: string; alt: string }> = {
 	args: {
 		heading: 'Augmentez vos collaborateurs en 3 étapes',
-		src: 'https://dummyimage.com/720x640',
+		src: 'https://cdn.lucca.fr/transverse/prisme/visuals/empty-states/pagga/mealvoucher-icecream.svg',
 		alt: '',
 		hx: 1,
 	},
