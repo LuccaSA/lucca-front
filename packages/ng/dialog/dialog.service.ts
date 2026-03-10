@@ -1,5 +1,6 @@
 import { Dialog, DialogRef } from '@angular/cdk/dialog';
 import { inject, Injectable, Injector, Renderer2 } from '@angular/core';
+import { assertNotNil } from '@lucca-front/ng/core';
 import { isObservable, merge, of, take } from 'rxjs';
 import { filter, switchMap, takeUntil } from 'rxjs/operators';
 import { LuDialogConfig, LuDialogData, LuDialogRef, LuDialogResult } from './model';
@@ -11,7 +12,7 @@ export class LuDialogService {
 
 	#injector = inject(Injector);
 
-	open<C, TData = LuDialogData<C>>(config: LuDialogConfig<C, NoInfer<TData>>): LuDialogRef<C, TData> | undefined {
+	open<C, TData = LuDialogData<C>>(config: LuDialogConfig<C, NoInfer<TData>>): LuDialogRef<C, TData> {
 		let luDialogRef: LuDialogRef<C, TData> | undefined = undefined;
 		let modeClasses: string[] = [];
 		switch (config.mode) {
@@ -55,12 +56,14 @@ export class LuDialogService {
 			...(config.cdkConfigOverride || {}),
 		});
 
+		assertNotNil(luDialogRef);
+
 		if (cdkRef.componentRef) {
 			const renderer = cdkRef.componentRef.injector.get(Renderer2);
 			renderer.setStyle(cdkRef.componentRef.location.nativeElement, 'display', 'contents');
 		}
 
-		if (!config.alert && luDialogRef) {
+		if (!config.alert) {
 			// Setup close listeners on backdrop click and escape key by ourselves so we can hook the `canClose` method to it.
 			merge(cdkRef.backdropClick, cdkRef.keydownEvents.pipe(filter((e) => e.key === 'Escape' && !e.defaultPrevented)))
 				.pipe(
@@ -70,11 +73,11 @@ export class LuDialogService {
 						const canClose$ = isObservable(canClose) ? canClose : of(canClose);
 						return canClose$.pipe(take(1));
 					}),
-					takeUntil(closed),
+					takeUntil(luDialogRef!.closed$),
 				)
 				.subscribe((canClose) => {
 					if (canClose) {
-						luDialogRef!.detachSubscription?.unsubscribe();
+						luDialogRef.detachSubscription?.unsubscribe();
 						cdkRef.close(DISMISSED_VALUE);
 					}
 				});
