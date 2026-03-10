@@ -78,7 +78,7 @@ export class MultilanguageInputComponent implements ControlValueAccessor {
 		new ConnectionPositionPair({ originX: 'end', originY: 'top' }, { overlayX: 'end', overlayY: 'bottom' }, 16, -6),
 	];
 
-	getLocaleDisplayName(locale: string): string {
+	getLocaleDisplayName(locale: string): string | undefined {
 		return this.#intlDisplay.of(locale);
 	}
 
