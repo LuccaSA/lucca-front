@@ -89,6 +89,10 @@
 		.fileUpload-button.button {
 			visibility: var(--components-fileUpload-button-visibility);
 			display: var(--components-fileUpload-button-display);
+
+			&:not(.mod-filled) {
+				@include button.outlined;
+			}
 		}
 
 		.fileUpload-instruction-filename {
