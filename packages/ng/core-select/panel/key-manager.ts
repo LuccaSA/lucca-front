@@ -50,7 +50,7 @@ export class CoreSelectKeyManager<T> {
 		this.#cdkKeyManager?.onKeydown(event);
 	}
 
-	get activeItem(): CoreSelectPanelElement<T> | undefined {
+	get activeItem(): CoreSelectPanelElement<T> | null | undefined {
 		return this.#cdkKeyManager?.activeItem;
 	}
 
@@ -72,7 +72,12 @@ export class CoreSelectKeyManager<T> {
 		this.#queryList$
 			.pipe(
 				observeOn(asyncScheduler),
-				map((options) => options.findIndex((el) => optionComparer(el.option(), option))),
+				map((options) =>
+					options.findIndex((el) => {
+						const elOption = el.option();
+						return elOption ? optionComparer(elOption, option) : false;
+					}),
+				),
 				filter((index) => index !== -1),
 				take(1),
 				takeUntilDestroyed(this.#destroyRef),
@@ -87,9 +92,9 @@ export class CoreSelectKeyManager<T> {
 	}
 
 	#bindActiveOptionIdChanged(activeOptionIdChanged$: EventEmitter<string>): void {
-		this.#cdkKeyManager.change
+		this.#cdkKeyManager?.change
 			.pipe(
-				map(() => this.#cdkKeyManager.activeItem?.idAttribute()),
+				map(() => this.#cdkKeyManager?.activeItem?.idAttribute()),
 				takeUntilDestroyed(this.#destroyRef),
 			)
 			.subscribe((activeDescendant) => activeOptionIdChanged$.emit(activeDescendant));
@@ -109,12 +114,12 @@ export class CoreSelectKeyManager<T> {
 			)
 			.subscribe(() => {
 				if (this.#queryList().length === 0) {
-					this.#cdkKeyManager.setActiveItem(-1);
+					this.#cdkKeyManager?.setActiveItem(-1);
 				} else if (this.#hasSearchChanged) {
 					this.#hasSearchChanged = false;
-					this.#cdkKeyManager.setFirstItemActive();
-				} else if (!this.#cdkKeyManager.activeItem) {
-					this.#cdkKeyManager.setFirstItemActive();
+					this.#cdkKeyManager?.setFirstItemActive();
+				} else if (!this.#cdkKeyManager?.activeItem) {
+					this.#cdkKeyManager?.setFirstItemActive();
 				}
 			});
 	}

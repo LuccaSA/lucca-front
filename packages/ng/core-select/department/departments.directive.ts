@@ -93,7 +93,7 @@ export class LuCoreSelectDepartmentsDirective<T extends ILuDepartment = ILuDepar
 
 	protected flattenTree(branch: TreeNode<T>): T[] {
 		const result: T[] = [branch.node];
-		if (branch.children.length > 0) {
+		if (branch.children && branch.children.length > 0) {
 			result.push(...branch.children.map((child) => this.flattenTree(child)).flat());
 		}
 		return result;

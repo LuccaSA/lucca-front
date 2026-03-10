@@ -120,8 +120,8 @@ export class LuCoreSelectUsersDirective<T extends LuCoreSelectUser = LuCoreSelec
 		computed(() => ({
 			fields: this.#userFields,
 			...this.filters(),
-			...(this.uniqueOperationIds() ? { uniqueOperations: this.uniqueOperationIds().join(',') } : {}),
-			...(this.operationIds() ? { operations: this.operationIds().join(',') } : {}),
+			...(this.uniqueOperationIds() ? { uniqueOperations: this.uniqueOperationIds()?.join(',') } : {}),
+			...(this.operationIds() ? { operations: this.operationIds()?.join(',') } : {}),
 			...(this.appInstanceId() ? { appInstanceId: this.appInstanceId() } : {}),
 			id: this.currentUserId,
 		})),
@@ -219,7 +219,7 @@ export class LuCoreSelectUsersDirective<T extends LuCoreSelectUser = LuCoreSelec
 export class LuCoreSelectUserOptionDirective<T extends LuCoreSelectUser = LuCoreSelectUser> {
 	#templateRef = inject(TemplateRef<LuOptionContext<T>>);
 
-	readonly usersDirective = input<LuCoreSelectUsersDirective<T>>(null, { alias: 'luUserOptionUsersRef' });
+	readonly usersDirective = input<LuCoreSelectUsersDirective<T> | null>(null, { alias: 'luUserOptionUsersRef' });
 
 	constructor() {
 		ɵeffectWithDeps([this.usersDirective], (usersDirective) => {

@@ -98,7 +98,7 @@ export class LuOptionComponent<T> implements AfterViewInit, OnDestroy, OnInit {
 	}
 
 	ngAfterViewInit(): void {
-		this.subscription = this.optionContext.isDisabled$.pipe(observeOn(asyncScheduler)).subscribe((isDisabled) => {
+		this.subscription = this.optionContext?.isDisabled$.pipe(observeOn(asyncScheduler)).subscribe((isDisabled) => {
 			this.selectableItem.disabled = isDisabled;
 			this.cdr.markForCheck();
 		});
