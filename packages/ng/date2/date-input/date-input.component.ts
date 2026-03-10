@@ -355,6 +355,7 @@ export class DateInputComponent extends AbstractDateComponent implements OnInit,
 			this.dateFromWriteValue.set(start);
 			this.selectedDate.set(start);
 			this.currentDate.set(start);
+			this.tabbableDate.set(start);
 		} else {
 			this.reset();
 		}
@@ -375,6 +376,7 @@ export class DateInputComponent extends AbstractDateComponent implements OnInit,
 		const newValue = this.clearBehavior() === 'reset' ? this.initialValue() : null;
 		this.dateFromWriteValue.set(newValue);
 		this.selectedDate.set(newValue);
+		this.tabbableDate.set(newValue);
 		return newValue;
 	}
 
