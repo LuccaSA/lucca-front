@@ -14,7 +14,6 @@ interface ListingBasicStory {
 	icon: string;
 	start: number;
 	reversed: boolean;
-	fancy: boolean;
 }
 
 export default {
@@ -28,23 +27,23 @@ export default {
 	],
 
 	render: (args: ListingBasicStory, context) => {
-		const { type, checklist, ordered, icons, defaultIcon, icon, start, reversed, palette, fancy, ...inputs } = args;
+		const { type, checklist, ordered, icons, defaultIcon, icon, start, reversed, palette, ...inputs } = args;
 		const checklistParam = args.type === 'checklist' ? ` checklist` : ``;
 		const orderedParam = args.type === 'ordered' ? ` ordered` : ``;
+		const orderedFancyParam = args.type === 'orderedFancy' ? ` orderedFancy` : ``;
 		const iconsParam = args.type === 'icons' ? ` icons` : ``;
 		const iconParam = args.type === 'icons' ? ` icon="${args.icon}"` : ``;
 		const defaultIconParam = args.type === 'icons' ? ` defaultIcon="${defaultIcon}"` : ``;
 		const startParam = args.start !== 1 && args.start !== undefined ? ` start="${start}"` : ``;
 		const reversedParam = args.reversed ? ` reversed` : ``;
 		const paletteParam = args.palette !== 'none' ? ` palette="${palette}"` : ``;
-		const fancyParam = args.fancy ? ` fancy` : ``;
 		return {
-			template: `<lu-listing${checklistParam}${orderedParam}${fancyParam}${startParam}${reversedParam}${iconsParam}${defaultIconParam}${paletteParam}${generateInputs(inputs, context.argTypes)}>
+			template: `<lu-listing${checklistParam}${orderedParam}${orderedFancyParam}${startParam}${reversedParam}${iconsParam}${defaultIconParam}${paletteParam}${generateInputs(inputs, context.argTypes)}>
 	<lu-listing-item>item</lu-listing-item>
 	<lu-listing-item${iconParam}>item</lu-listing-item>
 	<lu-listing-item>
 		item
-		<lu-listing${checklistParam}${orderedParam}${fancyParam}${startParam}${reversedParam}${iconsParam}${defaultIconParam}${paletteParam}${generateInputs(inputs, context.argTypes)}>
+		<lu-listing${checklistParam}${orderedParam}${orderedFancyParam}${startParam}${reversedParam}${iconsParam}${defaultIconParam}${paletteParam}${generateInputs(inputs, context.argTypes)}>
 			<lu-listing-item>item</lu-listing-item>
 			<lu-listing-item>item</lu-listing-item>
 			<lu-listing-item critical>item</lu-listing-item>
@@ -59,7 +58,7 @@ export default {
 export const Template: StoryObj<ListingComponent & ListingItemComponent & { type: string }> = {
 	argTypes: {
 		type: {
-			options: ['', 'checklist', 'ordered', 'icons'],
+			options: ['', 'checklist', 'ordered', 'orderedFancy', 'icons'],
 			control: {
 				type: 'select',
 			},
@@ -89,10 +88,6 @@ export const Template: StoryObj<ListingComponent & ListingItemComponent & { type
 			if: { arg: 'type', eq: 'ordered' },
 			description: 'Prédente la liste sous forme décroissante.',
 		},
-		fancy: {
-			if: { arg: 'type', eq: 'ordered' },
-			description: 'Mets en forme les chiffres. (Incompatible avec les lettres.)',
-		},
 		checklist: HiddenArgType,
 		icons: HiddenArgType,
 		ordered: HiddenArgType,
@@ -106,6 +101,5 @@ export const Template: StoryObj<ListingComponent & ListingItemComponent & { type
 		icon: 'foodCroissant',
 		start: 1,
 		reversed: false,
-		fancy: false,
 	},
 };

@@ -108,15 +108,3 @@
 	--components-listing-listStyleType: '' !important;
 	--components-listing-item-number-display: grid;
 }
-
-@mixin fancyReversed {
-	--components-listing-item-counterIncrement: listing -1;
-}
-
-@mixin fancyStart($start) {
-	counter-reset: listing #{$start - 1};
-}
-
-@mixin fancyStartReversed($start) {
-	counter-reset: listing #{$start + 1};
-}
