@@ -80,7 +80,7 @@ export class CalloutPopoverComponent {
 	/**
 	 * Defines custom callout popover open position override popoverPosition
 	 */
-	readonly customPositions = input<ConnectionPositionPair[]>();
+	readonly customPopoverPositions = input<ConnectionPositionPair[]>();
 
 	readonly feedbackItems = contentChildren(CalloutFeedbackItemComponent, { descendants: true });
 
