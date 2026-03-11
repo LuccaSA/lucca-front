@@ -1,13 +1,14 @@
-import { booleanAttribute, computed, Directive, effect, inject, input, LOCALE_ID, output } from '@angular/core';
+import { booleanAttribute, computed, Directive, effect, inject, input, LOCALE_ID, output, signal } from '@angular/core';
 import { intlInputOptions } from '@lucca-front/ng/core';
 import { FORM_FIELD_INSTANCE } from '@lucca-front/ng/form-field';
 import { LU_FILE_UPLOAD_TRANSLATIONS } from '../file-upload.translate';
 import { formatFileSize, MEGA_BYTE } from '../formatter';
+import { ControlValueAccessor } from '@angular/forms';
 
 let nextId = 0;
 
 @Directive()
-export abstract class BaseFileUploadComponent {
+export abstract class BaseFileUploadComponent implements ControlValueAccessor {
 	protected locale = inject(LOCALE_ID);
 
 	protected idSuffix = nextId++;
@@ -78,6 +79,8 @@ export abstract class BaseFileUploadComponent {
 
 	required = input(false, { transform: booleanAttribute });
 
+	disabled = signal(false);
+
 	constructor() {
 		effect(() => {
 			this.formFieldRef?.forceInputRequired.set(this.required());
@@ -91,5 +94,25 @@ export abstract class BaseFileUploadComponent {
 			this.filePicked.emit(file);
 		}
 		host.value = null;
+	}
+
+	/**
+	 * CVA stuff so we can connect validators on it
+	 */
+
+	writeValue(_value: null): void {
+		// We don't care
+	}
+
+	registerOnChange(): void {
+		// We don't care
+	}
+
+	registerOnTouched(): void {
+		// We don't care
+	}
+
+	setDisabledState?(isDisabled: boolean): void {
+		this.disabled.set(isDisabled);
 	}
 }

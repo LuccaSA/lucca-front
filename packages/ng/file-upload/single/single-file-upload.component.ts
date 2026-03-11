@@ -1,10 +1,9 @@
-import { booleanAttribute, ChangeDetectionStrategy, Component, input, output, ViewEncapsulation } from '@angular/core';
+import { ChangeDetectionStrategy, Component, ViewEncapsulation } from '@angular/core';
 import { BubbleIllustrationComponent } from '@lucca-front/ng/bubble-illustration';
 import { IntlParamsPipe } from '@lucca-front/ng/core';
 import { InputDirective } from '@lucca-front/ng/form-field';
 import { BaseFileUploadComponent } from '../base-file-upload/base-file-upload.component';
-import { FileEntryComponent } from '../file-entry/file-entry.component';
-import { FileEntry } from '../file-upload-entry';
+import { NG_VALUE_ACCESSOR } from '@angular/forms';
 
 @Component({
 	selector: 'lu-single-file-upload',
@@ -14,19 +13,14 @@ import { FileEntry } from '../file-upload-entry';
 	host: {
 		'[class.mod-structure]': 'structure()',
 	},
-	imports: [InputDirective, FileEntryComponent, IntlParamsPipe, BubbleIllustrationComponent],
+	imports: [InputDirective, IntlParamsPipe, BubbleIllustrationComponent],
+	providers: [
+		{
+			provide: NG_VALUE_ACCESSOR,
+			useExisting: SingleFileUploadComponent,
+			multi: true,
+		},
+	],
 	changeDetection: ChangeDetectionStrategy.OnPush,
 })
-export class SingleFileUploadComponent extends BaseFileUploadComponent {
-	readonly entry = input<FileEntry | null>(null);
-
-	readonly state = input<'loading' | 'success' | 'error' | 'default'>('default');
-
-	readonly inlineMessageError = input<string | null>(null);
-
-	readonly previewUrl = input<string | null>(null);
-
-	readonly deleteFile = output<void>();
-
-	readonly displayFileName = input(false, { transform: booleanAttribute });
-}
+export class SingleFileUploadComponent extends BaseFileUploadComponent {}
