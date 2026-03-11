@@ -10,7 +10,7 @@ export type TestEntity = { id: number; name: string };
 type LuSelectInputComponentTestSuiteConfig<TValue> = {
 	getFixture: () => ComponentFixture<ALuSelectInputComponent<TestEntity, TValue>>;
 	exampleValue: TValue;
-	emptyValue: TValue;
+	emptyValue: TValue | null;
 	clearerSelector: string;
 };
 

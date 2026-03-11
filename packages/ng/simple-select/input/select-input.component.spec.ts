@@ -19,7 +19,7 @@ describe('LuSimpleSelectInputComponent', () => {
 	runALuSelectInputComponentTestSuite<Entity>({
 		getFixture: () => fixture,
 		exampleValue: { id: 1, name: 'test' },
-		emptyValue: null as unknown as Entity,
+		emptyValue: null,
 		clearerSelector: '.simpleSelect-field-clear',
 	});
 });
