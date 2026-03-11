@@ -54,19 +54,23 @@ export default {
 		},
 		optional: {
 			description:
-				"Rend disponible le filtre via le bouton d'ajout de filtre. Celui-ci est désactivé par défaut. Lorsque qu'un filtre est optionnel, celui-ci doit obligatoirement porter un attribut `name`.",
+				"Rend disponible le filtre via le bouton d'ajout de filtre. Celui-ci est désactivé par défaut. Lorsque qu'un filtre est optionnel, celui-ci doit obligatoirement porter un attribut `name`. (Voir Filter bar)",
 		},
 		name: {
 			description: "Dans le cas d'un filtre optionnel, permet de faire le lien entre la liste de filtres disponible et l'affichage du filtre.",
 		},
 		disabled: {
 			description: 'Désactive le filtre.',
+			control: {
+				type: 'boolean',
+			},
 		},
 	},
 	render: (args, { argTypes }) => {
 		const clearableProperty = args['clearable'] ? '' : 'clearable="false" ';
+		const disabledPill = args['disabled'] ? 'disabled' : '';
 		const label = args['label'];
-		const disabled = args['disabled'];
+		const filterPillLabelPlural = args['filterPillLabelPlural'];
 		return {
 			props: {
 				simpleSelect: null,
@@ -86,19 +90,19 @@ export default {
 			template: `<lu-filter-pill label="Inclure les collaborateurs partis">
 	<lu-checkbox-input [ngModel]="false"></lu-checkbox-input>
 </lu-filter-pill>
-<lu-filter-pill label="${label}" name="legume" ${disabled}>
-	<lu-multi-select [ngModel]="[]" ${clearableProperty}	[options]="legumes | filterLegumes:clue" [totalCount]="legumes.length" (clueChange)="clue = $event" filterPillLabelPlural="Légumes" />
+<lu-filter-pill label="${label} (multi)" name="legume">
+	<lu-multi-select [ngModel]="[]" ${clearableProperty}[options]="legumes | filterLegumes:clue" [totalCount]="legumes.length" (clueChange)="clue = $event" filterPillLabelPlural="${filterPillLabelPlural}" ${disabledPill} />
 </lu-filter-pill>
-<lu-filter-pill label="Legume" name="department">
-	<lu-simple-select [ngModel]="null" ${clearableProperty} [options]="legumes | filterLegumes:clue" />
+<lu-filter-pill label="Legume (simple)" name="department">
+	<lu-simple-select [ngModel]="null" ${clearableProperty}[options]="legumes | filterLegumes:clue" />
 </lu-filter-pill>
 <lu-filter-pill label="Départements" name="departments">
 	<lu-multi-select [ngModel]="[]" ${clearableProperty}filterPillLabelPlural="départements" departments />
 </lu-filter-pill>
-<lu-filter-pill label="Tree simple">
+<lu-filter-pill label="Tree (simple)">
 	<lu-simple-select [ngModel]="null" ${clearableProperty}[treeSelect]="groupingFn" [options]="legumes" />
 </lu-filter-pill>
-<lu-filter-pill label="Tree multi">
+<lu-filter-pill label="Tree (multi)">
 	<lu-multi-select [ngModel]="[]" ${clearableProperty}filterPillLabelPlural="légumes" [treeSelect]="groupingFn" [options]="legumes" />
 </lu-filter-pill>
 <lu-filter-pill label="Date de début">
@@ -119,9 +123,10 @@ export default {
 	},
 } as Meta;
 
-export const Basic: StoryObj<FilterPillComponent & { clearable: boolean }> = {
+export const Basic: StoryObj<FilterPillComponent & { clearable: boolean; filterPillLabelPlural: string }> = {
 	args: {
 		clearable: true,
 		label: 'Légume',
+		filterPillLabelPlural: 'Légumes',
 	},
 };
