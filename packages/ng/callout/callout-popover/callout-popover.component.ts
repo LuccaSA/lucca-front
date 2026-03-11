@@ -1,3 +1,4 @@
+import { ConnectionPositionPair } from '@angular/cdk/overlay';
 import { booleanAttribute, ChangeDetectionStrategy, Component, computed, contentChildren, input, numberAttribute, ViewEncapsulation } from '@angular/core';
 import { LuccaIcon } from '@lucca-front/icons';
 import { Palette, PortalContent, PortalDirective } from '@lucca-front/ng/core';
@@ -75,6 +76,11 @@ export class CalloutPopoverComponent {
 	 * Defines callout popover open position above by default
 	 */
 	readonly popoverPosition = input<PopoverPosition>('above');
+
+	/**
+	 * Defines custom callout popover open position override popoverPosition
+	 */
+	readonly customPositions = input<ConnectionPositionPair[]>();
 
 	readonly feedbackItems = contentChildren(CalloutFeedbackItemComponent, { descendants: true });
 
