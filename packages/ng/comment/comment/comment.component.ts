@@ -1,6 +1,6 @@
 import { DatePipe, NgTemplateOutlet } from '@angular/common';
 import { booleanAttribute, ChangeDetectionStrategy, Component, computed, inject, input, LOCALE_ID, ViewEncapsulation } from '@angular/core';
-import { PortalDirective } from '@lucca-front/ng/core';
+import { PortalContent, PortalDirective } from '@lucca-front/ng/core';
 import { LuUserPictureModule } from '@lucca-front/ng/user';
 import { COMMENT_BLOCK_INSTANCE } from '../token';
 
@@ -31,10 +31,18 @@ export class CommentComponent {
 
 	readonly content = input<string>();
 
+	/**
+	 * Custom template for the heading of the comment.
+	 */
+	readonly heading = input<PortalContent>();
+
+	/**
+	 * Date of the comment. Ignored if heading is specified.
+	 */
 	readonly date = input<Date>();
 
 	/**
-	 * format given to the date pipe for display.
+	 * Format given to the date pipe for display. Ignored if heading is specified.
 	 *
 	 * See https://angular.dev/api/common/DatePipe#custom-format-options
 	 */
