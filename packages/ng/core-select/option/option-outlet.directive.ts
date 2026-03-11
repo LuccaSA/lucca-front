@@ -28,13 +28,17 @@ export class LuOptionOutletDirective<T> implements OnChanges, OnDestroy {
 
 		const hasRef = this.embeddedViewRef || this.componentRef;
 
-		if (changes['luOptionOutlet'] || (hasRenderableValue(changes['luOptionOutletValue']?.currentValue as T | undefined) && !hasRef)) {
-			const newValue = changes['luOptionOutletValue']?.currentValue as T | undefined;
-			if (hasRenderableValue(newValue)) {
+		if (changes['luOptionOutlet']) {
+			// Outlet template changed: recreate if current value is renderable
+			if (hasRenderableValue(this.luOptionOutletValue)) {
 				this.createComponent();
 			}
-		} else if (changes['luOptionOutletValue'] && hasRenderableValue(this.luOptionOutletValue)) {
-			this.updateRefValue();
+		} else if (changes['luOptionOutletValue']) {
+			if (!hasRef && hasRenderableValue(this.luOptionOutletValue)) {
+				this.createComponent();
+			} else if (hasRef) {
+				this.updateRefValue();
+			}
 		}
 	}
 

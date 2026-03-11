@@ -75,7 +75,7 @@ export class LuMultiSelectWithSelectAllDirective<TValue> extends ɵIsSelectedStr
 			}
 		});
 
-		this.select.registerOnChange = (fn) => this.registerOnChange(fn as unknown as (value: TValue[] | LuMultiSelection<TValue>) => void);
+		(this.select as { registerOnChange: (fn: (value: TValue[] | LuMultiSelection<TValue>) => void) => void }).registerOnChange = (fn) => this.registerOnChange(fn);
 		this.select.writeValue = (value) => this.writeValue(value);
 		this.select.clearValue = ($event) => this.clearValue($event);
 
