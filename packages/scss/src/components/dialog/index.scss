@@ -66,8 +66,16 @@
 			@include withAction;
 		}
 
-		&.mod-stacked {
-			@include stacked;
+		&.mod-fancy {
+			@include fancy;
+
+			@include media.max('XS') {
+				@include fancySmall;
+			}
+
+			@include media.max('XXS') {
+				@include fancyNarrow;
+			}
 		}
 	}
 }
