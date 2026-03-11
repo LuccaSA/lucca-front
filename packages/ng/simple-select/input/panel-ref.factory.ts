@@ -1,6 +1,6 @@
 import { Overlay, OverlayConfig, OverlayPositionBuilder, OverlayRef, ScrollStrategyOptions } from '@angular/cdk/overlay';
 import { ComponentPortal } from '@angular/cdk/portal';
-import { ComponentRef, ElementRef, inject, Injectable, Injector, ViewContainerRef } from '@angular/core';
+import { ComponentRef, ElementRef, inject, Injectable, Injector, Type, ViewContainerRef } from '@angular/core';
 import { addAttributesOnCdkContainer, LuSelectPanelRef, SELECT_ID, SELECT_LABEL_ID } from '@lucca-front/ng/core-select';
 import { takeUntil } from 'rxjs';
 import { LuSelectPanelComponent } from '../panel';
@@ -77,9 +77,10 @@ class SelectPanelRef<T> extends BaseSelectPanelRef<T> {
 class SelectPanelDOMHostRef<T> extends BaseSelectPanelRef<T> {
 	constructor(host: ViewContainerRef, parentInjector: Injector, selectInput: LuSimpleSelectInputComponent<T>) {
 		super(parentInjector, selectInput);
-		this.panelRef = host.createComponent(this.portalRef.component, {
-			injector: this.portalRef.injector,
-			projectableNodes: this.portalRef.projectableNodes,
+		const panelComponent = this.portalRef.component as Type<LuSelectPanelComponent<T>>;
+
+		this.panelRef = host.createComponent(panelComponent, {
+			injector: this.portalRef.injector ?? undefined,
 		});
 		this.instance = this.panelRef.instance;
 	}

@@ -11,21 +11,17 @@ import tsParser from '@typescript-eslint/parser';
 
 const STRICTIFIED_NG_EXCLUDE_ENTRIES = [
 	'packages/ng/core/**/*.ts',
-	'packages/ng/core-select/**/*.ts',
 	'packages/ng/date2/**/*.ts',
 	'packages/ng/dialog/**/*.ts',
-	'packages/ng/establishment/**/*.ts',
 	'packages/ng/formly/**/*.ts',
 	'packages/ng/forms/**/*.ts',
 	'packages/ng/index-table/**/*.ts',
 	'packages/ng/input/**/*.ts',
 	'packages/ng/modal/**/*.ts',
-	'packages/ng/multi-select/**/*.ts',
 	'packages/ng/option/**/*.ts',
 	'packages/ng/popup/**/*.ts',
 	'packages/ng/schematics/**/*.ts',
 	'packages/ng/select/**/*.ts',
-	'packages/ng/simple-select/**/*.ts',
 	'stories/**/*.ts',
 ];
 

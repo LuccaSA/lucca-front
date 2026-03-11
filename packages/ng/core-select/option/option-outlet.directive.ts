@@ -2,6 +2,10 @@ import { ComponentRef, Directive, EmbeddedViewRef, inject, Injector, Input, OnCh
 import { LuOptionContext } from '../select.model';
 import { LU_OPTION_CONTEXT, provideOptionContext } from './option.token';
 
+function hasRenderableValue<T>(value: T | undefined): value is T {
+	return value !== null && value !== undefined;
+}
+
 @Directive({
 	selector: '[luOptionOutlet]',
 	providers: [provideOptionContext()],
@@ -18,19 +22,23 @@ export class LuOptionOutletDirective<T> implements OnChanges, OnDestroy {
 	private optionContext = inject(LU_OPTION_CONTEXT);
 
 	ngOnChanges(changes: SimpleChanges): void {
-		if (changes['luOptionOutlet'] || !this.luOptionOutletValue) {
+		if (changes['luOptionOutlet'] || !hasRenderableValue(this.luOptionOutletValue)) {
 			this.clearContainer();
 		}
 
 		const hasRef = this.embeddedViewRef || this.componentRef;
 
-		if (changes['luOptionOutlet'] || (changes['luOptionOutletValue'].currentValue !== null && changes['luOptionOutletValue'].currentValue !== undefined && !hasRef)) {
-			const newValue = changes['luOptionOutletValue'].currentValue as T | undefined;
-			if (newValue !== null && newValue !== undefined) {
+		if (changes['luOptionOutlet']) {
+			// Outlet template changed: recreate if current value is renderable
+			if (hasRenderableValue(this.luOptionOutletValue)) {
 				this.createComponent();
 			}
 		} else if (changes['luOptionOutletValue']) {
-			this.updateRefValue();
+			if (!hasRef && hasRenderableValue(this.luOptionOutletValue)) {
+				this.createComponent();
+			} else if (hasRef) {
+				this.updateRefValue();
+			}
 		}
 	}
 
@@ -47,7 +55,7 @@ export class LuOptionOutletDirective<T> implements OnChanges, OnDestroy {
 	}
 
 	private createComponent(): void {
-		if (!this.luOptionOutlet) {
+		if (!this.luOptionOutlet || !hasRenderableValue(this.luOptionOutletValue)) {
 			return;
 		}
 
@@ -60,6 +68,11 @@ export class LuOptionOutletDirective<T> implements OnChanges, OnDestroy {
 	}
 
 	private updateRefValue(): void {
+		if (!hasRenderableValue(this.luOptionOutletValue)) {
+			this.clearContainer();
+			return;
+		}
+
 		if (this.embeddedViewRef) {
 			this.embeddedViewRef.context.$implicit = this.luOptionOutletValue;
 		} else if (this.componentRef) {

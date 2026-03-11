@@ -93,7 +93,7 @@ export class LuEstablishmentSearcherComponent implements ILuOnOpenSubscriber, IL
 								this.isSearching.emit(this._isSearching);
 							}
 						}),
-						switchMap((page) => this._service.searchPaged(clue, page).pipe(catchError(() => of([] as ILuEstablishment[])))),
+						switchMap((page) => this._service.searchPaged(clue ?? '', page).pipe(catchError(() => of([] as ILuEstablishment[])))),
 						takeWhile((loadedItems) => !!loadedItems.length),
 						scan((acc, next) => [...acc, ...next]),
 					),
