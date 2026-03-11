@@ -27,6 +27,9 @@
       ],
       "@/stories/*": [
         "stories/documentation/*"
+      ],
+      "@launched/dimension-assessment": [
+        "front/libs/launched/features/dimension-assessment/src/index.ts"
       ]
     },
     "declaration": false,
