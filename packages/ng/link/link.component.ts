@@ -101,7 +101,8 @@ export class LinkComponent {
 							queryParamsHandling: this.routerLink.queryParamsHandling,
 							preserveFragment: this.routerLink.preserveFragment,
 						});
-			const externalUrl = this.location.prepareExternalUrl(this.router.serializeUrl(urlTree));
+			const serializedUrl = this.router.serializeUrl(urlTree);
+			const externalUrl = Array.isArray(routerLinkCommands) ? this.location.prepareExternalUrl(serializedUrl) : serializedUrl;
 			afterNextRender(() => window.open(externalUrl, '_blank'), { injector: this.#injector });
 		}
 	}
