@@ -46,7 +46,7 @@ export default {
 			control: {
 				type: 'boolean',
 			},
-			description: `Ajoute le validateur marquant l'invariant comme obligatoire.`,
+			description: `[v21.1] Ajoute le validateur marquant l'invariant comme obligatoire.`,
 		},
 		size: {
 			options: ['M', 'S'],
@@ -93,6 +93,9 @@ export default {
 				type: 'text',
 			},
 			description: 'Modifie l’attribut autocomplete des champs input.',
+		},
+		presentation: {
+			description: '[v21.1] Transforme le champ de formulaire en donnée textuelle non éditable.',
 		},
 	},
 } as Meta;

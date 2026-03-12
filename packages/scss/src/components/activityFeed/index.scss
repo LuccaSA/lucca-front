@@ -1,0 +1,29 @@
+@use 'exports' as *;
+@use '@lucca-front/scss/src/components/avatar/exports' as avatar;
+
+.activityFeed {
+	@layer components {
+		@include vars;
+		@include component;
+	}
+}
+
+.activityFeed-step-avatar {
+	@layer mods {
+		@include avatar.S;
+	}
+}
+
+.activityFeed-content-update {
+	@layer mods {
+		&:has(.activityFeed-content-update-before:empty, .activityFeed-content-update-after:empty) {
+			@include single;
+		}
+
+		&:has(.activityFeed-content-update-before:empty) {
+			&:has(.activityFeed-content-update-after:empty) {
+				@include empty;
+			}
+		}
+	}
+}

@@ -4,6 +4,23 @@
 @use '@lucca-front/scss/src/commons/utils/color';
 @use '@lucca-front/scss/src/components/numericBadge/exports' as numericBadge;
 
+@mixin M {
+	@include icons.M;
+
+	--components-button-font: var(--pr-t-font-body-M);
+	--components-button-paddingBlock: var(--pr-t-spacings-100);
+	--components-button-paddingInline: var(--pr-t-spacings-150);
+	--components-button-gap: var(--pr-t-spacings-100);
+
+	.numericBadge {
+		@include numericBadge.M;
+	}
+
+	// Deprecated
+	--components-button-font-size: var(--pr-t-font-body-M-fontSize);
+	--components-button-line-height: var(--pr-t-font-body-M-lineHeight);
+}
+
 @mixin S {
 	@include icons.S;
 

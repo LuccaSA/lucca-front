@@ -12,7 +12,7 @@ import { LU_PAGINATION_TRANSLATIONS } from './pagination.translate';
 	encapsulation: ViewEncapsulation.None,
 })
 export class PaginationComponent {
-	protected intl = input(...intlInputOptions(LU_PAGINATION_TRANSLATIONS));
+	readonly intl = input(...intlInputOptions(LU_PAGINATION_TRANSLATIONS));
 
 	/**
 	 * Disabled the previous page arrow

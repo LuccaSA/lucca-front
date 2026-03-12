@@ -13,7 +13,7 @@ import { LU_SKIP_LINKS_TRANSLATIONS } from './skip-links.translate';
 export class LuSkipLinksComponent {
 	#document = inject(DOCUMENT);
 
-	protected intl = input(...intlInputOptions(LU_SKIP_LINKS_TRANSLATIONS));
+	readonly intl = input(...intlInputOptions(LU_SKIP_LINKS_TRANSLATIONS));
 
 	anchor(hash: string, e: Event) {
 		e.preventDefault();
