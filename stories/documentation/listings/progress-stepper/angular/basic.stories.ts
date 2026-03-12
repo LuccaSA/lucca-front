@@ -18,7 +18,7 @@ export default {
 			control: { type: 'range', min: 1, max: 6 },
 		},
 		steps: {
-			control: { type: 'range', min: 3, max: 6 },
+			control: { type: 'range', min: 2, max: 6 },
 		},
 	},
 	decorators: [
