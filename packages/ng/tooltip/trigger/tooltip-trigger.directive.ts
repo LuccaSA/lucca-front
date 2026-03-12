@@ -9,30 +9,12 @@ import {
 	VerticalConnectionPos,
 } from '@angular/cdk/overlay';
 import { ComponentPortal } from '@angular/cdk/portal';
-import {
-	AfterContentChecked,
-	booleanAttribute,
-	computed,
-	DestroyRef,
-	Directive,
-	effect,
-	EffectRef,
-	ElementRef,
-	inject,
-	Injector,
-	input,
-	linkedSignal,
-	NgZone,
-	numberAttribute,
-	OnDestroy,
-	Renderer2,
-	signal,
-} from '@angular/core';
+import { booleanAttribute, computed, DestroyRef, Directive, effect, EffectRef, ElementRef, inject, Injector, input, linkedSignal, numberAttribute, OnDestroy, Renderer2, signal } from '@angular/core';
 import { takeUntilDestroyed, toObservable, toSignal } from '@angular/core/rxjs-interop';
 import { SafeHtml } from '@angular/platform-browser';
 import { isNotNil, ɵeffectWithDeps } from '@lucca-front/ng/core';
 import { LuPopoverPosition } from '@lucca-front/ng/popover';
-import { combineLatest, Observable, startWith, Subject, switchMap, timer } from 'rxjs';
+import { from, of, startWith, switchMap, timer } from 'rxjs';
 import { debounce, debounceTime, filter, map, tap } from 'rxjs/operators';
 import { LuTooltipPanelComponent } from '../panel';
 import { EllipsisRuler } from './ellipsis.ruler';
@@ -51,113 +33,28 @@ let nextId = 0;
 		'(blur)': 'onBlur()',
 	},
 })
-export class LuTooltipTriggerDirective implements OnDestroy, AfterContentChecked {
+export class LuTooltipTriggerDirective implements OnDestroy {
 	readonly #overlay = inject(Overlay);
-
 	readonly #host = inject<ElementRef<HTMLElement>>(ElementRef);
-
 	readonly #renderer = inject(Renderer2);
 	readonly #ruler = inject(EllipsisRuler);
-	readonly #zone = inject(NgZone, { optional: true });
-
 	readonly #injector = inject(Injector);
 	readonly #destroyRef = inject(DestroyRef);
 
-	#previousTickContent: string = this.#host.nativeElement.innerText;
-
 	readonly luTooltipInput = input<string | SafeHtml>('', { alias: 'luTooltip' });
-
 	readonly luTooltip = linkedSignal<string | SafeHtml>(() => this.luTooltipInput());
 
 	readonly luTooltipEnterDelay = input(300, { transform: numberAttribute });
-
 	readonly luTooltipLeaveDelay = input(100, { transform: numberAttribute });
-
 	readonly luTooltipDisabled = input(false, { transform: booleanAttribute });
-
 	readonly luTooltipOnlyForDisplay = input(false, { transform: booleanAttribute });
-
 	readonly luTooltipPosition = input<LuPopoverPosition>('above');
 
 	readonly luTooltipWhenEllipsisInput = input(false, { alias: 'luTooltipWhenEllipsis', transform: booleanAttribute });
-
 	readonly luTooltipWhenEllipsis = linkedSignal(() => this.luTooltipWhenEllipsisInput());
 
 	readonly luTooltipAnchor = input<FlexibleConnectedPositionStrategyOrigin>(this.#host);
-
 	readonly id = input<string>(`${this.#host.nativeElement.tagName.toLowerCase()}-tooltip-${nextId++}`);
-
-	readonly resize$ = new Observable<void>((observer) => {
-		const resizeObserver = new ResizeObserver(() => {
-			observer.next();
-		});
-		resizeObserver.observe(this.#host.nativeElement);
-		return () => {
-			resizeObserver.disconnect();
-		};
-	});
-
-	readonly #innerTextChange$ = new Subject<void>();
-
-	readonly #hasEllipsis$ = combineLatest([
-		toObservable(
-			// 1. Group necessary inputs
-			computed(() => ({ whenEllipsis: this.luTooltipWhenEllipsis(), disabled: this.luTooltipDisabled() })),
-		),
-		// Resend resize events to trigger the check
-		this.resize$.pipe(debounceTime(150)),
-		// Include content changes
-		this.#innerTextChange$,
-	]).pipe(
-		// 2. Keep only necessary inputs
-		filter(([{ whenEllipsis, disabled }]) => !disabled && whenEllipsis),
-		// 3. Check for ellipsis
-		switchMap(() => this.runOutsideZoneJS(() => this.#ruler.hasEllipsis(this.#host.nativeElement))),
-	);
-
-	readonly #hasEllipsis = toSignal(this.#hasEllipsis$, { initialValue: false });
-
-	readonly #action = signal<'open' | 'close' | null>(null);
-	readonly #realAction = linkedSignal<'open' | 'close' | null, 'open' | 'close' | null>({
-		source: this.#action,
-		computation: (action, previous) => {
-			if (!action || action === 'close') {
-				return action;
-			}
-
-			// We only filter open events because even if it's disabled while opened,
-			// we want the tooltip to be able to close itself no matter what
-			if (this.luTooltipDisabled()) {
-				return previous?.value;
-			}
-
-			// If not disabled, let's check for ellipsis if needed
-			if (this.luTooltipWhenEllipsis()) {
-				return this.#hasEllipsis() ? 'open' : previous.value;
-			}
-
-			// If it's not disabled and is not triggered based on ellipsis, just return true
-			return 'open';
-		},
-	});
-
-	onMouseEnter() {
-		this.#action.set('open');
-	}
-
-	onMouseLeave() {
-		this.#action.set('close');
-	}
-
-	onFocus() {
-		if (this.#host.nativeElement.getAttribute('aria-expanded') !== 'true') {
-			this.#action.set('open');
-		}
-	}
-
-	onBlur() {
-		this.#action.set('close');
-	}
 
 	readonly ariaDescribedBy = computed(() => {
 		if (this.luTooltipDisabled() || this.luTooltipWhenEllipsis() || this.luTooltipOnlyForDisplay()) {
@@ -167,10 +64,51 @@ export class LuTooltipTriggerDirective implements OnDestroy, AfterContentChecked
 	});
 
 	overlayRef?: OverlayRef;
+
+	readonly #isVisible = signal(false);
+
+	readonly #ellipsisTrigger = signal(0);
+
+	readonly #hasEllipsis = toSignal(
+		toObservable(this.#ellipsisTrigger).pipe(
+			debounceTime(150),
+			switchMap(() => {
+				if (!this.luTooltipWhenEllipsis() || this.luTooltipDisabled()) {
+					return of(false);
+				}
+				return from(this.#ruler.hasEllipsis(this.#host.nativeElement));
+			}),
+		),
+		{ initialValue: false },
+	);
+
+	readonly #action = signal<'open' | 'close' | null>(null);
+	readonly #realAction = linkedSignal<'open' | 'close' | null, 'open' | 'close' | null>({
+		source: this.#action,
+		computation: (action, previous): 'open' | 'close' | null => {
+			if (!action || action === 'close') {
+				return action;
+			}
+
+			// We only filter open events because even if it's disabled while opened,
+			// we want the tooltip to be able to close itself no matter what
+			if (this.luTooltipDisabled()) {
+				return previous?.value ?? null;
+			}
+
+			if (this.luTooltipWhenEllipsis()) {
+				return this.#hasEllipsis() ? 'open' : (previous?.value ?? null);
+			}
+
+			return 'open';
+		},
+	});
+
 	#effectRef?: EffectRef;
 	#idEffectRef?: EffectRef;
 
 	constructor() {
+		// Action debounce pipeline — kept as Observable since signals can't debounce
 		toObservable(this.#realAction)
 			.pipe(
 				filter(isNotNil),
@@ -193,13 +131,67 @@ export class LuTooltipTriggerDirective implements OnDestroy, AfterContentChecked
 				this.setAccessibilityProperties(null);
 			}
 		});
+
+		effect((onCleanup) => {
+			if (!this.luTooltipWhenEllipsis() || this.luTooltipDisabled()) {
+				this.#isVisible.set(false);
+				return;
+			}
+
+			const observer = new IntersectionObserver((entries) => this.#isVisible.set(entries.some((e) => e.isIntersecting)), { rootMargin: '100px' });
+			observer.observe(this.#host.nativeElement);
+
+			onCleanup(() => observer.disconnect());
+		});
+
+		effect((onCleanup) => {
+			if (!this.#isVisible() || !this.luTooltipWhenEllipsis() || this.luTooltipDisabled()) {
+				return;
+			}
+
+			const el = this.#host.nativeElement;
+			const bump = () => this.#ellipsisTrigger.update((v) => v + 1);
+
+			const resizeObserver = new ResizeObserver(() => bump());
+			resizeObserver.observe(el);
+
+			const mutationObserver = new MutationObserver(() => bump());
+			mutationObserver.observe(el, { characterData: true, subtree: true, childList: true });
+
+			// Initial check when element becomes visible — prevents regression where tooltips never appear
+			bump();
+
+			onCleanup(() => {
+				resizeObserver.disconnect();
+				mutationObserver.disconnect();
+			});
+		});
 	}
 
-	ngAfterContentChecked(): void {
-		if (this.#previousTickContent != this.#host.nativeElement.innerText) {
-			this.#innerTextChange$.next();
-			this.#previousTickContent = this.#host.nativeElement.innerText;
+	onMouseEnter() {
+		this.#action.set('open');
+	}
+
+	onMouseLeave() {
+		this.#action.set('close');
+	}
+
+	onFocus() {
+		if (this.#host.nativeElement.getAttribute('aria-expanded') !== 'true') {
+			this.#action.set('open');
 		}
+	}
+
+	onBlur() {
+		this.#action.set('close');
+	}
+
+	requestOpen() {
+		this.#action.set('open');
+	}
+
+	requestClose() {
+		this.#action.set('close');
 	}
 
 	ngOnDestroy(): void {
@@ -207,7 +199,6 @@ export class LuTooltipTriggerDirective implements OnDestroy, AfterContentChecked
 	}
 
 	private openTooltip(): void {
-		// If tooltip is already opened, don't do anything
 		if (this.overlayRef) {
 			return;
 		}
@@ -246,20 +237,18 @@ export class LuTooltipTriggerDirective implements OnDestroy, AfterContentChecked
 		this.#idEffectRef = ɵeffectWithDeps(
 			[this.ariaDescribedBy],
 			(ariaDescribedBy) => {
-				ref.instance.id.set(ariaDescribedBy);
+				ref.instance.id.set(ariaDescribedBy as string);
 			},
 			{ injector: this.#injector },
 		);
 
-		// On tooltip leave => trigger close
 		ref.instance.mouseLeave$.pipe(takeUntilDestroyed(ref.instance.destroyRef)).subscribe(() => this.#action.set('close'));
-		// On tooltip enter => trigger open to keep it opened
 		ref.instance.mouseEnter$.pipe(takeUntilDestroyed(ref.instance.destroyRef)).subscribe(() => this.#action.set('open'));
 	}
 
 	private closeTooltip(): void {
 		if (this.overlayRef) {
-			this.overlayRef.detach();
+			this.overlayRef.dispose();
 			delete this.overlayRef;
 		}
 		this.#effectRef?.destroy();
@@ -287,16 +276,7 @@ export class LuTooltipTriggerDirective implements OnDestroy, AfterContentChecked
 		}
 	}
 
-	private runOutsideZoneJS<T>(callback: () => T): T {
-		return this.#zone ? this.#zone.runOutsideAngular(callback) : callback();
-	}
-
-	/**********************
-	 *
-	 * LEGACY STUFF TO HANDLE EXISTING POSITIONS
-	 *
-	 ***********************/
-
+	// Legacy position builder to handle existing position API
 	private legacyPositionBuilder(): FlexibleConnectedPositionStrategy {
 		const connectionPosition: OriginConnectionPosition = {
 			originX: 'start',
@@ -382,13 +362,5 @@ export class LuTooltipTriggerDirective implements OnDestroy, AfterContentChecked
 			return 'end';
 		}
 		return x;
-	}
-
-	requestClose() {
-		this.#action.set('close');
-	}
-
-	requestOpen() {
-		this.#action.set('open');
 	}
 }
