@@ -11,9 +11,9 @@
 		@include media.max('XS') {
 			@include narrow;
 		}
-	}
 
-	&.mod-S {
-		@include S;
+		&.mod-S {
+			@include S;
+		}
 	}
 }

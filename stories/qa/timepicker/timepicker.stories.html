@@ -1,0 +1,71 @@
+<table class="demo-QAtable">
+	<tbody>
+		<tr>
+			<td></td>
+			<td>
+				<div class="demo-QAtable-list">HTML</div>
+			</td>
+			<td>
+				<div class="demo-QAtable-list">Angular</div>
+			</td>
+		</tr>
+		<tr>
+			<td>Default</td>
+			<td></td>
+			<td>
+				<div class="demo-QAtable-list">
+					<lu-form-field label="Label">
+						<lu-time-picker [(ngModel)]="selectedTime" />
+					</lu-form-field>
+				</div>
+			</td>
+		</tr>
+		<tr>
+			<td>Filled</td>
+			<td></td>
+			<td>
+				<div class="demo-QAtable-list">
+					<lu-form-field label="Label">
+						<lu-time-picker [(ngModel)]="filledTime" />
+					</lu-form-field>
+				</div>
+			</td>
+		</tr>
+		<tr>
+			<td>Size Small</td>
+			<td></td>
+			<td>
+				<div class="demo-QAtable-list">
+					<lu-form-field label="Label" size="S">
+						<lu-time-picker [(ngModel)]="selectedTime" />
+					</lu-form-field>
+				</div>
+			</td>
+		</tr>
+		<tr>
+			<td>Disabled</td>
+			<td></td>
+			<td>
+				<div class="demo-QAtable-list">
+					<lu-form-field label="Label">
+						<lu-time-picker [(ngModel)]="selectedTime" disabled />
+					</lu-form-field>
+				</div>
+			</td>
+		</tr>
+		<tr>
+			<td>With displayArrows</td>
+			<td></td>
+			<td>
+				<div class="demo-QAtable-list">
+					<lu-form-field label="Label">
+						<lu-time-picker [(ngModel)]="selectedTime" [displayArrows]="true" />
+					</lu-form-field>
+				</div>
+			</td>
+		</tr>
+	</tbody>
+</table>
+
+<!-- To tell the ui-diff tool that the page has finished rendering -->
+<span id="ready"></span>
