@@ -22,7 +22,6 @@ export type LuCoreSelectInputStoryComponent = {
 
 export type LuCoreColorPickerInputStoryComponent = {
 	colors: ColorOption[];
-	size: string;
 	noSearch: boolean;
 } & ColorInputComponent &
 	ALuSelectInputComponent<ColorOption, ColorOption | ColorOption[]>;
@@ -126,13 +125,6 @@ export const colorNameByColor: Record<LegumeColor, string> = {
 
 export const colorPickerStory = {
 	argTypes: {
-		size: {
-			options: ['', 'S'],
-			control: {
-				type: 'select',
-			},
-			description: 'Modifie la taille du form field.',
-		},
 		compact: {
 			description: 'Modifie la taille du composant.',
 		},
