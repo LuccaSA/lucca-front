@@ -1,3 +1,4 @@
+import { Location } from '@angular/common';
 import { afterNextRender, booleanAttribute, ChangeDetectionStrategy, Component, effect, inject, Injector, input, ViewEncapsulation } from '@angular/core';
 import { Router, UrlTree } from '@angular/router';
 import { intlInputOptions } from '@lucca-front/ng/core';
@@ -35,6 +36,7 @@ export class LinkComponent {
 	routerLink = inject(LuRouterLink);
 	#injector = inject(Injector);
 	router = inject(Router);
+	location = inject(Location);
 
 	/**
 	 * Target page address. Use only for external links or pages not recognized by the router.
@@ -99,7 +101,8 @@ export class LinkComponent {
 							queryParamsHandling: this.routerLink.queryParamsHandling,
 							preserveFragment: this.routerLink.preserveFragment,
 						});
-			afterNextRender(() => window.open(this.router.serializeUrl(urlTree), '_blank'), { injector: this.#injector });
+			const externalUrl = this.location.prepareExternalUrl(this.router.serializeUrl(urlTree));
+			afterNextRender(() => window.open(externalUrl, '_blank'), { injector: this.#injector });
 		}
 	}
 }
