@@ -228,7 +228,7 @@
 			@include clear.S;
 
 			inset-inline-end: 2.125rem;
-			inset-block-end: 0.625rem;
+			inset-block-end: calc(var(--pr-t-spacings-100) + var(--pr-t-spacings-25));
 		}
 	}
 }

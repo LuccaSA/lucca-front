@@ -1,0 +1,48 @@
+@use '@lucca-front/icons/src/commons/utils/icon';
+
+@mixin current {
+	--components-progressStepper-list-step-before-blockSize: calc(var(--commons-divider-width) * 2);
+	--components-progressStepper-list-step-before-backgroundColor: var(--palettes-500, var(--palettes-product-500));
+	--components-progressStepper-list-step-title-color: var(--palettes-700, var(--palettes-product-700));
+	--components-progressStepper-list-step-number-before-boxShadowColor: var(--palettes-700, var(--palettes-product-700));
+	--components-progressStepper-list-step-number-before-color: var(--palettes-neutral-0);
+	--components-progressStepper-list-step-number-before-backgroundColor: var(--palettes-700, var(--palettes-product-700));
+}
+
+@mixin beforeCurrent {
+	--components-progressStepper-list-step-before-backgroundColor: var(--palettes-500, var(--palettes-product-500));
+	--components-progressStepper-list-step-before-blockSize: calc(var(--commons-divider-width) * 2);
+	--components-progressStepper-list-step-after-inlineSize: calc(var(--commons-divider-width) * 2);
+	--components-progressStepper-list-step-after-blockSize: calc(var(--commons-divider-width) * 2);
+	--components-progressStepper-list-step-after-backgroundColor: var(--palettes-500, var(--palettes-product-500));
+}
+
+@mixin hover {
+	--components-progressStepper-list-step-title-textDecoration: underline;
+	--components-progressStepper-list-step-number-before-boxShadowWidth: var(--commons-divider-width);
+}
+
+@mixin state($icon) {
+	--components-progressStepper-list-step-number-before-content: '';
+
+	.progressStepper-list-step-number {
+		&::after {
+			@include icon.generate(#{$icon});
+		}
+	}
+}
+
+@mixin success {
+	@include state('sign_confirm');
+
+	--components-progressStepper-list-step-number-before-boxShadowColor: var(--palettes-200, var(--palettes-product-200));
+	--components-progressStepper-list-step-number-before-backgroundColor: var(--palettes-50, var(--palettes-product-50));
+}
+
+@mixin critical {
+	@include state('sign_close');
+
+	--components-progressStepper-list-step-number-before-boxShadowColor: var(--palettes-critical-200);
+	--components-progressStepper-list-step-number-after-color: var(--palettes-critical-700);
+	--components-progressStepper-list-step-number-before-backgroundColor: var(--palettes-50, var(--palettes-critical-50));
+}
