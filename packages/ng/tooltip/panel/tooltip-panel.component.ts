@@ -9,7 +9,6 @@ import { Subject } from 'rxjs';
 	styleUrl: './tooltip-panel.component.scss',
 	host: {
 		role: 'tooltip',
-		'[attr.id]': 'id',
 		'(mouseenter)': 'mouseEnter$.next()',
 		'(mouseleave)': 'mouseLeave$.next()',
 	},
@@ -22,8 +21,6 @@ export class LuTooltipPanelComponent {
 	readonly mouseLeave$ = new Subject<void>();
 
 	readonly content = signal<string | SafeHtml | null>(null);
-
-	readonly id = signal<string>(null);
 
 	readonly contentPositionClasses = signal<Record<string, boolean>>({});
 
