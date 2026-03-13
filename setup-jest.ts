@@ -31,7 +31,21 @@ class ResizeObserver {
 	disconnect() {}
 }
 
-Object.assign(global, { ResizeObserver });
+class IntersectionObserver {
+	observe() {}
+	unobserve() {}
+	disconnect() {}
+}
+
+class MutationObserver {
+	observe() {}
+	disconnect() {}
+	takeRecords() {
+		return [];
+	}
+}
+
+Object.assign(global, { ResizeObserver, IntersectionObserver, MutationObserver });
 
 // xxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxx
 // x          Global JEST mocks          x
