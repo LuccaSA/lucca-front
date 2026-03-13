@@ -68,6 +68,9 @@
 		@include core.cssvars('palettes-#{$palette}', map.get(config.$palettesInterpolation, $palette));
 	}
 
+	// Provided by Lucca.Store Push Panel
+	--commons-pushPanel-width: var(--component-lu-app-lifecycle-push-panel, 0px);
+
 	// stylelint-disable custom-property-pattern
 	--palettes-assets-primary-lighter: var(--palettes-#{config.$product}-50);
 	--palettes-assets-primary-light: var(--palettes-#{config.$product}-100);
