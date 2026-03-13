@@ -67,7 +67,7 @@ export const Basic: StoryObj<RichTextInputComponent & { value: string; disabled:
 		};
 	},
 	args: {
-		value: 'Lorem **ipsum** dolor [link](https://example.com) *italic* and regular text',
+		value: 'Lorem **ipsum** dolor [link](https://example.com) *italic* and regular text. This is an auto link https://example.com',
 		placeholder: 'Placeholder…',
 		disabled: false,
 		required: false,
