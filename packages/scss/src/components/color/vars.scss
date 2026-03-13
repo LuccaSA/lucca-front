@@ -1,3 +1,55 @@
+@mixin properties {
+	@at-root {
+		@property --components-color-value-before-display {
+			syntax: "grid | none";
+			inherits: true;
+			initial-value: none;
+		}
+
+		@property --components-color-value-scale {
+			syntax: "<number>";
+			inherits: false;
+			initial-value: 1;
+		}
+
+		@property --components-color-value-inlineSize {
+			syntax: "<length>";
+			inherits: true;
+			initial-value: 16px;
+		}
+
+		@property --components-color-value-boxShadowColor {
+			syntax: "<color>";
+			inherits: true;
+			initial-value: #000;
+		}
+
+		@property --components-color-value-backgroundColor {
+			syntax: "<color>";
+			inherits: false;
+			initial-value: #FFF;
+		}
+
+		@property --components-color-value-channel {
+			syntax: "<number>";
+			inherits: true;
+			initial-value: clamp(0, (((r * .299) + (g * .587) + (b * .114)) - 128) * -1000, 255);
+		}
+
+		@property --components-colorPicker-input-paddingInlineStart {
+			syntax: "<length>";
+			inherits: true;
+			initial-value: 0;
+		}
+
+		@property --components-colorPicker-inlineSize {
+			syntax: "<length> | auto";
+			inherits: false;
+			initial-value: auto;
+		}
+	}
+}
+
 @mixin vars {
 	--components-color-value-before-display: none;
 	--components-color-value-scale: 1;
