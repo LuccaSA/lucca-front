@@ -1,6 +1,5 @@
 import { formatNumber } from '@angular/common';
 import { ChangeDetectionStrategy, Component, ElementRef, Inject, LOCALE_ID, ModelSignal, ViewChild, booleanAttribute, computed, input, model, numberAttribute, output } from '@angular/core';
-import { toObservable } from '@angular/core/rxjs-interop';
 import { ɵeffectWithDeps } from '@lucca-front/ng/core';
 import { InputDirective } from '@lucca-front/ng/form-field';
 import { FormLabelComponent } from '@lucca-front/ng/form-label';
@@ -101,13 +100,6 @@ export class TimePickerPartComponent {
 				}
 			}
 		});
-		toObservable(this.value)
-			.pipe(
-				skip(1),
-				tap(() => this.isValueSet.set(true)),
-				take(1),
-			)
-			.subscribe();
 	}
 
 	arrowKeyPressed(event: KeyboardEvent, isUpArrow: boolean): void {

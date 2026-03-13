@@ -128,7 +128,7 @@ export class TagNode extends DecoratorNode<string> {
 	}
 
 	override updateDOM(prevNode: TagNode, _dom: HTMLElement, _config: EditorConfig): boolean {
-		return this.#tagDescription !== prevNode.#tagDescription || this.#tagKey !== prevNode.#tagKey || this.#disabled !== prevNode.#disabled || this.#componentRef !== prevNode.#componentRef;
+		return this.#tagDescription !== prevNode.#tagDescription || this.#tagKey !== prevNode.#tagKey || this.#disabled !== prevNode.#disabled;
 	}
 
 	override remove(preserveEmptyParent?: boolean): void {

@@ -6,6 +6,8 @@ import { IconComponent } from '@lucca-front/ng/icon';
 import { BaseIndexTableCell } from '../base-index-table-cell';
 import { LU_INDEX_TABLE_CELL_INSTANCE } from '../index-table-cell.token';
 
+const SORT_VALUES = ['none', 'ascending', 'descending'] as const;
+
 @Component({
 	// eslint-disable-next-line @angular-eslint/component-selector
 	selector: 'th[luIndexTableCell]',
@@ -43,4 +45,10 @@ export class IndexTableRowCellHeaderComponent extends BaseIndexTableCell {
 	hiddenLabel = input(false, { transform: booleanAttribute });
 	actions = input(false, { transform: booleanAttribute });
 	inlineSize = input(0, { transform: numberAttribute });
+
+	toggleSort(): void {
+		if (this.sort()) {
+			this.sort.set(SORT_VALUES[(SORT_VALUES.indexOf(this.sort()) + 1) % SORT_VALUES.length]);
+		}
+	}
 }

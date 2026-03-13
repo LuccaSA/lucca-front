@@ -65,6 +65,9 @@ export default {
 			},
 			description: 'Ajoute un texte descriptif (aide, erreur, etc.) sous le champ de formulaire.',
 		},
+		presentation: {
+			description: 'Transforme le champ de formulaire en donnée textuelle non éditable.',
+		},
 	},
 } as Meta;
 

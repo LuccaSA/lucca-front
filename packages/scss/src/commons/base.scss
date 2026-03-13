@@ -128,5 +128,26 @@
 				}
 			}
 		}
+
+		@each $productName, $productMap in config.$palettesAssets {
+			.palette-#{$productName} {
+				--palettes-assets-primary-lighter: var(--palettes-#{$productName}-50);
+				--palettes-assets-primary-light: var(--palettes-#{$productName}-100);
+				--palettes-assets-primary-dark: var(--palettes-#{$productName}-200);
+
+				@each $level, $palette in $productMap {
+					@if $level == 'secondary' {
+						--palettes-assets-secondary-lighter: var(--palettes-#{$palette}-50);
+						--palettes-assets-secondary-light: var(--palettes-#{$palette}-100);
+					}
+
+					@if $level == 'brand' {
+						--palettes-assets-brand-lighter: var(--palettes-#{$palette}-50);
+						--palettes-assets-brand-light: var(--palettes-#{$palette}-100);
+						--palettes-assets-brand-dark: var(--palettes-#{$palette}-200);
+					}
+				}
+			}
+		}
 	}
 }

@@ -1,5 +1,5 @@
 @if (presentationMode()) {
-	<dl class="presentation-description">
+	<dl class="presentation">
 		<ng-container *ngTemplateOutlet="inputLayoutTpl" />
 	</dl>
 } @else {
@@ -30,10 +30,10 @@
 		</fieldset>
 	} @else {
 		@if (presentationMode()) {
-			<dt class="presentation-description-term">
+			<dt class="presentation-term">
 				<ng-container *luPortal="label()" />
 				@if (tooltip()) {
-					<lu-icon class="presentation-description-term-info" icon="signHelp" [alt]="'?'" [luTooltip]="tooltip()" />
+					<lu-icon class="presentation-term-info" icon="signHelp" [alt]="'?'" [luTooltip]="tooltip()" />
 				}
 
 				@if (tag()) {
@@ -88,7 +88,7 @@
 
 <ng-template #projectionTpl>
 	@if (presentationMode() && presentationDisplayTpl()) {
-		<dd class="presentation-description-definition">
+		<dd class="presentation-definition">
 			<ng-container *ngTemplateOutlet="presentationDisplayTpl()" />
 		</dd>
 	} @else {

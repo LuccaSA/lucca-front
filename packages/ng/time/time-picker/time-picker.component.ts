@@ -39,7 +39,7 @@ let nextId = 0;
 	],
 })
 export class TimePickerComponent extends BasePickerComponent {
-	protected intl = input(...intlInputOptions(LU_TIME_PICKER_TRANSLATIONS));
+	readonly intl = input(...intlInputOptions(LU_TIME_PICKER_TRANSLATIONS));
 	protected localeId = inject(LOCALE_ID);
 
 	readonly idSuffix = nextId++;
@@ -111,6 +111,10 @@ export class TimePickerComponent extends BasePickerComponent {
 
 	writeValue(value: ISO8601Time): void {
 		this.value.set(value || '––:––:––');
+		if (value) {
+			this.hoursPart()?.isValueSet.set(true);
+			this.minutesPart()?.isValueSet.set(true);
+		}
 	}
 
 	setDisabledState?(isDisabled: boolean): void {
@@ -196,6 +200,9 @@ export class TimePickerComponent extends BasePickerComponent {
 	private setTime(protoEvent: TimeChangeEvent): void {
 		const hoursPart = getHoursPartFromIsoTime(protoEvent.value);
 		const minutesPart = getMinutesPartFromIsoTime(protoEvent.value);
+
+		this.hoursPart()?.isValueSet.set(true);
+		this.minutesPart()?.isValueSet.set(true);
 
 		const max = isoTimeToSeconds(this.max());
 

@@ -1,5 +1,6 @@
 import { AsyncPipe, I18nPluralPipe } from '@angular/common';
 import { provideHttpClient } from '@angular/common/http';
+import { LOCALE_ID } from '@angular/core';
 import { FormsModule } from '@angular/forms';
 import { provideAnimations } from '@angular/platform-browser/animations';
 import {
@@ -39,7 +40,6 @@ import { StoryModelDisplayComponent } from 'stories/helpers/story-model-display.
 import { expect, screen, userEvent, within } from 'storybook/test';
 import { sleep, waitForAngular } from '../../../helpers/test';
 import { allLegumes, colorNameByColor, coreSelectStory, FilterLegumesPipe, ILegume, LuCoreSelectInputStoryComponent, SortLegumesPipe } from './select.utils';
-import { LOCALE_ID } from '@angular/core';
 
 type LuMultiSelectInputStoryComponent = LuCoreSelectInputStoryComponent & {
 	selectedLegumes: ILegume[] | LuMultiSelection<ILegume>;
@@ -467,15 +467,13 @@ export const Establishment = generateStory({
 	name: 'Establishment Select',
 	description: "Pour saisir un établissement, il suffit d'utiliser la directive `establishments`",
 	template: `<lu-multi-select
-	withSelectAll
-	withSelectAllDisplayerLabel="établissements"
 	establishments
-	[(ngModel)]="selectedEstablishment"
+	[(ngModel)]="selectedEstablishments"
 	[keepSearchAfterSelection]="keepSearchAfterSelection"
 />
-<pr-story-model-display>{{ selectedEstablishment | json }}</pr-story-model-display>`,
+<pr-story-model-display>{{ selectedEstablishments | json }}</pr-story-model-display>`,
 	neededImports: {
-		'@lucca-front/ng/multi-select': ['LuMultiSelectInputComponent', 'LuMultiSelectWithSelectAllDirective'],
+		'@lucca-front/ng/multi-select': ['LuMultiSelectInputComponent'],
 		'@lucca-front/ng/core-select/establishment': ['LuCoreSelectEstablishmentsDirective'],
 	},
 	storyPartial: {
@@ -489,14 +487,12 @@ export const Department = generateStory({
 	name: 'Departement Select',
 	description: "Pour saisir un département, il suffit d'utiliser la directive `departments`",
 	template: `<lu-multi-select
-	withSelectAll
-	withSelectAllDisplayerLabel="départements"
 	departments
 	[(ngModel)]="selectedDepartements"
 	[keepSearchAfterSelection]="keepSearchAfterSelection"
 />{{ selectedDepartements | json }}`,
 	neededImports: {
-		'@lucca-front/ng/multi-select': ['LuMultiSelectInputComponent', 'LuMultiSelectWithSelectAllDirective'],
+		'@lucca-front/ng/multi-select': ['LuMultiSelectInputComponent'],
 		'@lucca-front/ng/core-select/departments': ['LuCoreSelectDepartmentsDirective'],
 	},
 	storyPartial: {

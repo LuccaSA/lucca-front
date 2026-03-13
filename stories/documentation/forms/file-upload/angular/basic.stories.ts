@@ -121,6 +121,9 @@ export default {
 		},
 		fileMaxSize: {
 			description: 'Limite le poids des fichiers importables (en octets).',
+			control: {
+				type: null,
+			},
 		},
 		illustration: {
 			options: ['invoice', 'picture'],
@@ -228,6 +231,7 @@ export const Multi = {
 		fileMaxSize: 5000000,
 		illustration: 'paper',
 		structure: false,
+		buttonFilled: false,
 	},
 };
 
@@ -256,5 +260,6 @@ export const Single = {
 		illustration: 'invoice',
 		displayFileName: false,
 		structure: false,
+		buttonFilled: false,
 	},
 };

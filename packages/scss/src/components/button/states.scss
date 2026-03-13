@@ -83,8 +83,13 @@
 }
 
 @mixin loadingAI {
+	--components-button-color: transparent;
+	--components-button-backgroundColor: var(--palettes-neutral-0);
+	--commons-loading-frontground: var(--palettes-neutral-300);
+	--components-button-boxShadow: 0 0 0 var(--commons-divider-width) var(--palettes-neutral-100);
+
 	.lucca-icon {
-		@include icons.transparent;
+		background-image: none !important;
 	}
 
 	&::before {

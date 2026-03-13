@@ -7,5 +7,5 @@
 
 @use 'config';
 
-/* stylelint-disable-next-line layer-name-pattern */
+// stylelint-disable-next-line layer-name-pattern
 @layer #{config.$layers};

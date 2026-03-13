@@ -15,6 +15,7 @@ interface InputFramedBasicStory {
 	center: boolean;
 	inlineMessage: string;
 	size: string;
+	presentation: boolean;
 }
 
 export default {
@@ -68,6 +69,9 @@ export default {
 				type: 'select',
 			},
 		},
+		presentation: {
+			description: '[v21.1] Transforme le champ de formulaire en donnée textuelle non éditable.',
+		},
 	},
 	render: (args: InputFramedBasicStory) => {
 		//const column = args.grid ? ` class="grid-column" [attr.style]="'--grid-colspanAtMediaMinXS: 1'"` : ``;
@@ -82,6 +86,7 @@ export default {
 		const framedSize = args.size === 'L' ? ` framedSize="L"` : ``;
 		const size = args.size === 'L' ? ` size="L"` : ``;
 		const inlineMessage = args.inlineMessage ? ` inlineMessage="${args.inlineMessage}"` : ``;
+		const presentation = args.presentation ? ' presentation' : ``;
 
 		const illustrationTemplate = args.illustration
 			? `
@@ -101,22 +106,22 @@ export default {
 			: ``;
 		const templateCheckbox = `
 			<lu-input-framed${panelTemplate}${center}${size}>
-				<lu-form-field label="Option A"${inlineMessage}${tagTemplate}>
+				<lu-form-field label="Option A"${inlineMessage}${tagTemplate}${presentation}>
 					<lu-checkbox-input [(ngModel)]="exampleA" required />
 				</lu-form-field>${infoTemplate}${illustrationTemplate}
 			</lu-input-framed>
 			<lu-input-framed${panelTemplate}${center}${size}>
-				<lu-form-field label="Option B"${inlineMessage}${tagTemplate}>
+				<lu-form-field label="Option B"${inlineMessage}${tagTemplate}${presentation}>
 					<lu-checkbox-input [(ngModel)]="exampleB" required />
 				</lu-form-field>${infoTemplate}${illustrationTemplate}
 			</lu-input-framed>
 			<lu-input-framed${panelTemplate}${center}${size}>
-				<lu-form-field label="Option C"${inlineMessage}${tagTemplate}>
+				<lu-form-field label="Option C"${inlineMessage}${tagTemplate}${presentation}>
 					<lu-checkbox-input disabled [(ngModel)]="exampleC" required />
 				</lu-form-field>${infoTemplate}${illustrationTemplateDisabled}
 			</lu-input-framed>
 			<lu-input-framed${panelTemplate}${center}${size}>
-				<lu-form-field label="Option D"${inlineMessage}${tagTemplate}>
+				<lu-form-field label="Option D"${inlineMessage}${tagTemplate}${presentation}>
 					<lu-checkbox-input [(ngModel)]="exampleD" required />
 				</lu-form-field>${infoTemplate}${illustrationTemplate}
 			</lu-input-framed>
@@ -124,28 +129,28 @@ export default {
 		const templateGridCheckbox = `
 			<lu-grid-column colspan="2" [responsive]="{ colspanAtMediaMinXS: 1 }">
 				<lu-input-framed${panelTemplate}${center}${size}>
-					<lu-form-field label="Option A"${inlineMessage}${tagTemplate}>
+					<lu-form-field label="Option A"${inlineMessage}${tagTemplate}${presentation}>
 						<lu-checkbox-input [(ngModel)]="exampleA" required />
 					</lu-form-field>${infoTemplate}${illustrationTemplate}
 				</lu-input-framed>
 			</lu-grid-column>
 			<lu-grid-column colspan="2" [responsive]="{ colspanAtMediaMinXS: 1 }">
 				<lu-input-framed${panelTemplate}${center}${size}>
-					<lu-form-field label="Option B"${inlineMessage}${tagTemplate}>
+					<lu-form-field label="Option B"${inlineMessage}${tagTemplate}${presentation}>
 						<lu-checkbox-input [(ngModel)]="exampleB" required />
 					</lu-form-field>${infoTemplate}${illustrationTemplate}
 				</lu-input-framed>
 			</lu-grid-column>
 			<lu-grid-column colspan="2" [responsive]="{ colspanAtMediaMinXS: 1 }">
 				<lu-input-framed${panelTemplate}${center}${size}>
-					<lu-form-field label="Option C"${inlineMessage}${tagTemplate}>
+					<lu-form-field label="Option C"${inlineMessage}${tagTemplate}${presentation}>
 						<lu-checkbox-input disabled [(ngModel)]="exampleC" required />
 					</lu-form-field>${infoTemplate}${illustrationTemplateDisabled}
 				</lu-input-framed>
 			</lu-grid-column>
 			<lu-grid-column colspan="2" [responsive]="{ colspanAtMediaMinXS: 1 }">
 				<lu-input-framed${panelTemplate}${center}${size}>
-					<lu-form-field label="Option D"${inlineMessage}${tagTemplate}>
+					<lu-form-field label="Option D"${inlineMessage}${tagTemplate}${presentation}>
 						<lu-checkbox-input [(ngModel)]="exampleD" required />
 					</lu-form-field>${infoTemplate}${illustrationTemplate}
 				</lu-input-framed>
@@ -192,7 +197,7 @@ export default {
 				return {
 					props: { exampleB: true },
 					template: `
-	<lu-form-field label="Label" layout="fieldset">
+	<lu-form-field label="Label" layout="fieldset"${presentation}>
 		<div class="inputFramedWrapper">
 			<lu-grid columns="2">${templateGridCheckbox}</lu-grid>
 		</div>
@@ -202,7 +207,7 @@ export default {
 				return {
 					props: { exampleB: true },
 					template: `
-	<lu-form-field label="Label" layout="fieldset">
+	<lu-form-field label="Label" layout="fieldset"${presentation}>
 		<div class="inputFramedWrapper">${templateCheckbox}</div>
 	</lu-form-field>`,
 				};
@@ -212,7 +217,7 @@ export default {
 				return {
 					props: { example: 'B' },
 					template: `
-	<lu-form-field label="Label" errorInlineMessage="Error inline message">
+	<lu-form-field label="Label" errorInlineMessage="Error inline message"${presentation}>
 		<lu-radio-group-input [(ngModel)]="example" framed required${framedCenter}${framedSize}>
 			<lu-grid columns="2">${templateGrid}</lu-grid>
 		</lu-radio-group-input>
@@ -223,7 +228,7 @@ export default {
 				return {
 					props: { example: 'B' },
 					template: `
-	<lu-form-field label="Label" errorInlineMessage="Error inline message">
+	<lu-form-field label="Label" errorInlineMessage="Error inline message"${presentation}>
 		<lu-radio-group-input [(ngModel)]="example" framed required${framedCenter}${framedSize}>${template}</lu-radio-group-input>
 	</lu-form-field>
 	`,
@@ -244,5 +249,6 @@ export const Basic = {
 		checkbox: false,
 		inlineMessage: '',
 		size: '',
+		presentation: false,
 	},
 };
