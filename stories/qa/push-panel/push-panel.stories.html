@@ -3,13 +3,20 @@
 	<ng-container appLayoutNavSide>navSide</ng-container>
 	<lu-main-layout>
 		<lu-main-layout-block>
-			<lu-container class="pr-u-displayFlex pr-u-gap100">
-				<button luButton="outlined" size="S" [luDialogOpen]="dialog" [luDialogConfig]="{ size: 'M', mode: 'drawer' }">Open Panel</button>
-				<button luButton="outlined" size="S" [luDialogOpen]="dialogClassic" [luDialogConfig]="{ size: 'M' }">Open Dialog</button>
-				<button luButton="outlined" size="S" [luDialogOpen]="dialogBottom" [luDialogConfig]="{ size: 'M', mode: 'drawer-from-bottom' }">
-					Open Bottom Drawer
-				</button>
-				<button luButton="outlined" size="S" (click)="showToast()">Show Toast</button>
+			<lu-container>
+				<div class="pr-u-marginBottom200">
+					<lu-form-field label="Show Push Panel">
+						<lu-switch-input [(ngModel)]="showPushPanel" (ngModelChange)="togglePushPanel()" />
+					</lu-form-field>
+				</div>
+				<div class="pr-u-displayFlex pr-u-gap100">
+					<button luButton="outlined" size="S" [luDialogOpen]="dialog" [luDialogConfig]="{ size: 'M', mode: 'drawer' }">Open Panel</button>
+					<button luButton="outlined" size="S" [luDialogOpen]="dialogClassic" [luDialogConfig]="{ size: 'M' }">Open Dialog</button>
+					<button luButton="outlined" size="S" [luDialogOpen]="dialogBottom" [luDialogConfig]="{ size: 'M', mode: 'drawer-from-bottom' }">
+						Open Bottom Drawer
+					</button>
+					<button luButton="outlined" size="S" (click)="showToast()">Show Toast</button>
+				</div>
 			</lu-container>
 		</lu-main-layout-block>
 	</lu-main-layout>

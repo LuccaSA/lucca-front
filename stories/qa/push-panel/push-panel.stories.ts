@@ -1,8 +1,11 @@
 import { ChangeDetectionStrategy, Component, inject } from '@angular/core';
+import { FormsModule } from '@angular/forms';
 import { AppLayoutComponent } from '@lucca-front/ng/app-layout';
 import { ButtonComponent } from '@lucca-front/ng/button';
 import { ContainerComponent } from '@lucca-front/ng/container';
 import { DialogComponent, DialogContentComponent, DialogFooterComponent, DialogHeaderComponent, DialogOpenDirective } from '@lucca-front/ng/dialog';
+import { FormFieldComponent } from '@lucca-front/ng/form-field';
+import { SwitchInputComponent } from '@lucca-front/ng/forms';
 import { MainLayoutBlockComponent, MainLayoutComponent } from '@lucca-front/ng/main-layout';
 import { LuToastsComponent, LuToastsService } from '@lucca-front/ng/toast';
 import { Meta } from '@storybook/angular';
@@ -22,6 +25,9 @@ import { Meta } from '@storybook/angular';
 		DialogOpenDirective,
 		LuToastsComponent,
 		ContainerComponent,
+		FormFieldComponent,
+		SwitchInputComponent,
+		FormsModule,
 	],
 	changeDetection: ChangeDetectionStrategy.OnPush,
 	styles: [
@@ -127,12 +133,22 @@ import { Meta } from '@storybook/angular';
 class PushPanelStory {
 	private toasts = inject(LuToastsService);
 
+	showPushPanel = false;
+
 	showToast() {
 		this.toasts.addToast({
 			message: 'This is a basic toast notification!',
 			type: 'Info',
 			duration: null,
 		});
+	}
+
+	togglePushPanel() {
+		if (this.showPushPanel) {
+			document.documentElement.style.setProperty('--component-lu-app-lifecycle-push-panel', '348px');
+		} else {
+			document.documentElement.style.removeProperty('--component-lu-app-lifecycle-push-panel');
+		}
 	}
 }
 
