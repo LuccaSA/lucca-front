@@ -1,0 +1,78 @@
+<lu-app-layout>
+	<ng-container appLayoutBanner>banner</ng-container>
+	<ng-container appLayoutNavSide>navSide</ng-container>
+	<lu-main-layout>
+		<lu-main-layout-block>
+			<lu-container class="pr-u-displayFlex pr-u-gap100">
+				<button luButton="outlined" size="S" [luDialogOpen]="dialog" [luDialogConfig]="{ size: 'M', mode: 'drawer' }">Open Panel</button>
+				<button luButton="outlined" size="S" [luDialogOpen]="dialogClassic" [luDialogConfig]="{ size: 'M' }">Open Dialog</button>
+				<button luButton="outlined" size="S" [luDialogOpen]="dialogBottom" [luDialogConfig]="{ size: 'M', mode: 'drawer-from-bottom' }">
+					Open Bottom Drawer
+				</button>
+				<button luButton="outlined" size="S" (click)="showToast()">Show Toast</button>
+			</lu-container>
+		</lu-main-layout-block>
+	</lu-main-layout>
+</lu-app-layout>
+
+<lu-toasts />
+
+<ng-template #dialog>
+	<lu-dialog>
+		<lu-dialog-header>
+			<h1>Dialog Title</h1>
+		</lu-dialog-header>
+
+		<lu-dialog-content>
+			<p>This is a standard dialog.</p>
+		</lu-dialog-content>
+
+		<lu-dialog-footer>
+			<div class="footer-actions">
+				<button luButton luDialogClose>Confirm</button>
+				<button luButton="text" luDialogDismiss>Cancel</button>
+			</div>
+		</lu-dialog-footer>
+	</lu-dialog>
+</ng-template>
+
+<ng-template #dialogClassic>
+	<lu-dialog>
+		<lu-dialog-header>
+			<h1>Classic Dialog</h1>
+		</lu-dialog-header>
+
+		<lu-dialog-content>
+			<p>This is a classic dialog without drawer option.</p>
+		</lu-dialog-content>
+
+		<lu-dialog-footer>
+			<div class="footer-actions">
+				<button luButton luDialogClose>Confirm</button>
+				<button luButton="text" luDialogDismiss>Cancel</button>
+			</div>
+		</lu-dialog-footer>
+	</lu-dialog>
+</ng-template>
+
+<ng-template #dialogBottom>
+	<lu-dialog>
+		<lu-dialog-header>
+			<h1>Bottom Drawer Dialog</h1>
+		</lu-dialog-header>
+
+		<lu-dialog-content>
+			<p>This is a dialog opened as a drawer from the bottom.</p>
+		</lu-dialog-content>
+
+		<lu-dialog-footer>
+			<div class="footer-actions">
+				<button luButton luDialogClose>Confirm</button>
+				<button luButton="text" luDialogDismiss>Cancel</button>
+			</div>
+		</lu-dialog-footer>
+	</lu-dialog>
+</ng-template>
+
+<!-- To tell the ui-diff tool that the page has finished rendering -->
+<span id="ready"></span>
