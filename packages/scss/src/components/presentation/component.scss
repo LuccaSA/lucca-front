@@ -45,6 +45,9 @@
 
 		.presentation-definition {
 			margin: 0;
+			color: var(--pr-t-color-text);
+
+			// TODO apply to other children but exclude lucca icon ?
 		}
 	}
 }
