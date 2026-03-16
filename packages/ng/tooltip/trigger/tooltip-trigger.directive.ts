@@ -105,7 +105,6 @@ export class LuTooltipTriggerDirective implements OnDestroy {
 	});
 
 	#effectRef?: EffectRef;
-	#idEffectRef?: EffectRef;
 
 	constructor() {
 		// Action debounce pipeline — kept as Observable since signals can't debounce
@@ -196,18 +195,40 @@ export class LuTooltipTriggerDirective implements OnDestroy {
 
 	ngOnDestroy(): void {
 		this.closeTooltip();
+		if (this.overlayRef) {
+			this.overlayRef.dispose();
+			delete this.overlayRef;
+		}
 	}
 
-	private openTooltip(): void {
+	private prepareOverlay(): void {
 		if (this.overlayRef) {
 			return;
 		}
-		const position = this.legacyPositionBuilder();
 		this.overlayRef = this.#overlay.create({
-			positionStrategy: position,
 			scrollStrategy: this.#overlay.scrollStrategies.close(),
 			disposeOnNavigation: true,
 		});
+		const describedBy = this.ariaDescribedBy();
+		if (describedBy !== null) {
+			this.overlayRef.overlayElement.id = describedBy;
+		}
+	}
+
+	private openTooltip(): void {
+		if (this.overlayRef?.hasAttached()) {
+			return;
+		}
+		const position = this.legacyPositionBuilder();
+		if (!this.overlayRef) {
+			this.overlayRef = this.#overlay.create({
+				positionStrategy: position,
+				scrollStrategy: this.#overlay.scrollStrategies.close(),
+				disposeOnNavigation: true,
+			});
+		} else {
+			this.overlayRef.updatePositionStrategy(position);
+		}
 		const portal = new ComponentPortal(LuTooltipPanelComponent);
 		const ref = this.overlayRef.attach(portal);
 		position.positionChanges
@@ -234,31 +255,25 @@ export class LuTooltipTriggerDirective implements OnDestroy {
 			ref.instance.content.set('');
 		}
 
-		this.#idEffectRef = ɵeffectWithDeps(
-			[this.ariaDescribedBy],
-			(ariaDescribedBy) => {
-				ref.instance.id.set(ariaDescribedBy as string);
-			},
-			{ injector: this.#injector },
-		);
-
 		ref.instance.mouseLeave$.pipe(takeUntilDestroyed(ref.instance.destroyRef)).subscribe(() => this.#action.set('close'));
 		ref.instance.mouseEnter$.pipe(takeUntilDestroyed(ref.instance.destroyRef)).subscribe(() => this.#action.set('open'));
 	}
 
 	private closeTooltip(): void {
 		if (this.overlayRef) {
-			this.overlayRef.dispose();
-			delete this.overlayRef;
+			this.overlayRef.detach();
 		}
 		this.#effectRef?.destroy();
-		this.#idEffectRef?.destroy();
 	}
 
 	private setAccessibilityProperties(tabindex: number | null): void {
 		if (tabindex === null) {
 			this.#renderer.removeAttribute(this.#host.nativeElement, 'tabindex');
 			return;
+		}
+
+		if (!this.luTooltipWhenEllipsis() && !this.luTooltipOnlyForDisplay()) {
+			this.prepareOverlay();
 		}
 
 		const tag = this.#host.nativeElement.tagName.toLowerCase();
