@@ -59,7 +59,7 @@
 	</div>
 </div>
 <ng-container *luPresentationDisplayDefault>
-	@if (prefix(); as prefix) {
+	@if (prefixAddon(); as prefix) {
 		<ng-container
 			*ngTemplateOutlet="
 				addon;
@@ -75,13 +75,13 @@
 	} @else {
 		<div aria-hidden="true" data-content-before="–"></div>
 	}
-	@if (suffix()) {
+	@if (suffixAddon(); as suffix) {
 		<ng-container
 			*ngTemplateOutlet="
 				addon;
 				context: {
 					type: 'suffix',
-					addon: suffix(),
+					addon: suffix,
 				}
 			"
 		/>
