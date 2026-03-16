@@ -97,10 +97,13 @@ export default {
 			description: '[v18.3] mod-neutralBackground',
 		},
 		fancyIllustration: {
-			options: ['approval', 'checklist', 'email', 'install', 'mapping', 'save', 'users', 'welcome'],
+			options: ['approval', 'checklist', 'email', 'install', 'mapping', 'save', 'users', 'welcome', 'payment-card'],
 			control: {
 				type: 'select',
 			},
+			if: { arg: 'mode', eq: 'fancy' },
+		},
+		fancyIllustrationUrl: {
 			if: { arg: 'mode', eq: 'fancy' },
 		},
 	},
@@ -111,7 +114,6 @@ export const Basic: StoryObj = {
 		size: 'M',
 		alert: false,
 		mode: 'default',
-		fancyIllustration: 'welcome',
 		panelClasses: [],
 	},
 };
@@ -240,6 +242,7 @@ export const WithAction: StoryObj = {
 export const Fancy: StoryObj = {
 	render: (args) => {
 		const fancyIllustrationParam = args['fancyIllustration'] ? ` fancyIllustration="${args['fancyIllustration']}"` : ``;
+		const fancyIllustrationURLParam = args['fancyIllustrationUrl'] ? ` fancyIllustrationUrl="${args['fancyIllustrationUrl']}"` : ``;
 		return {
 			props: {
 				config: args,
@@ -248,7 +251,7 @@ export const Fancy: StoryObj = {
 <button luButton [luDialogOpen]="dialogTpl" [luDialogConfig]="config">Open Template-driven Fancy Dialog</button>
 
 <ng-template #dialogTpl>
-	<lu-dialog #dialog${fancyIllustrationParam}>
+	<lu-dialog #dialog${fancyIllustrationParam}${fancyIllustrationURLParam}>
 		<lu-dialog-header>
 			<h1>Header</h1>
 		</lu-dialog-header>
@@ -267,6 +270,7 @@ export const Fancy: StoryObj = {
 		alert: false,
 		mode: 'fancy',
 		fancyIllustration: 'welcome',
+		fancyIllustrationUrl: '',
 	},
 };
 
