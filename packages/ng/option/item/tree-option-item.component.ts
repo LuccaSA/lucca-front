@@ -93,7 +93,7 @@ export class LuTreeOptionItemComponent<T> extends ALuTreeOptionItem<T> implement
 		}
 	}
 	get disabled() {
-		return this._tree.disabled;
+		return this._tree.disabled ?? false;
 	}
 
 	@ContentChild(ALuInputDisplayer, { static: true }) set _contentChildDisplayer(displayer: ILuInputDisplayer<T>) {
