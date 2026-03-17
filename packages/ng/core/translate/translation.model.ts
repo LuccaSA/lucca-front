@@ -12,3 +12,5 @@ export interface ILuTranslation<T> {
 }
 
 export type LuTranslation<T> = Record<string, T>;
+
+export type LuPluralTranslation = Partial<Record<Intl.LDMLPluralRule, string>> & { other: string };
