@@ -25,14 +25,10 @@ export default {
 				tick$: timer(0, 1000),
 			},
 			template: `
-Angular Navigation : <a luLink="${routerLink}"${disable}${decoration}>${label}</a>
-<br>
-External Angular Navigation : <a luLink="${routerLink}" external${disable}${decoration}>${label}</a>
-<br>
-<hr>
-Browser Navigation : <a href="${href}" luLink${disable}${decoration}>${label}</a>
-<br>
-External Browser Navigation : <a href="${href}"	luLink external${disable}${decoration}>${label}</a>
+Routing application : <a luLink="${routerLink}"${disable}${decoration}>${label}</a><br>
+Routing application (nouvelle fenêtre) : <a luLink="${routerLink}" external${disable}${decoration}>${label}</a><br>
+Lien hors application : <a href="${href}" luLink${disable}${decoration}>${label}</a><br>
+Lien hors application (nouvelle fenêtre) : <a href="${href}"	luLink external${disable}${decoration}>${label}</a>
 `,
 		};
 	},
