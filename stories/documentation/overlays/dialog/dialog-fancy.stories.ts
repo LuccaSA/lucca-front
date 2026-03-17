@@ -72,7 +72,7 @@ export default {
 			},
 		},
 		illustration: {
-			options: ['approval', 'checklist', 'email', 'install', 'mapping', 'save', 'users', 'welcome'],
+			options: ['approval', 'checklist', 'email', 'install', 'mapping', 'save', 'users', 'welcome', 'payment-card'],
 			control: {
 				type: 'select',
 			},

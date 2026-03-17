@@ -78,6 +78,8 @@ export abstract class BaseFileUploadComponent {
 
 	required = input(false, { transform: booleanAttribute });
 
+	readonly buttonFilled = input(false, { transform: booleanAttribute });
+
 	constructor() {
 		effect(() => {
 			this.formFieldRef?.forceInputRequired.set(this.required());

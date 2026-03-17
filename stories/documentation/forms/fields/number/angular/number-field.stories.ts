@@ -16,6 +16,7 @@ export default {
 	argTypes: {
 		tooltip: {
 			type: 'string',
+			description: 'Affiche une icône (?) associée à une info-bulle. ',
 			if: { arg: 'hiddenLabel', truthy: false },
 		},
 		size: {
@@ -23,15 +24,50 @@ export default {
 			control: {
 				type: 'select',
 			},
+			description: 'Modifie la taille du champ.',
+		},
+		inlineMessage: {
+			description: 'Ajoute un texte descriptif (aide, erreur, etc.) sous le champ de formulaire.',
 		},
 		inlineMessageState: {
 			options: ['default', 'success', 'warning', 'error'],
 			control: {
 				type: 'select',
 			},
+			description: "Modifie l'état de l'inline message.",
+		},
+		label: {
+			description: 'Modifie le label de l’input.',
 		},
 		hiddenLabel: {
 			description: "Masque le label en le conservant dans le DOM pour les lecteurs d'écrans",
+		},
+		required: {
+			description: 'Marque le champ comme obligatoire.',
+		},
+		hasClearer: {
+			description: "Affiche un bouton pour vider le champ lorsque celui-ci est rempli. Il est alors conseillé de masquer les boutons d'incrémentation (noSpinButtons).",
+		},
+		disabled: {
+			description: 'Désactive le champ.',
+		},
+		placeholder: {
+			description: 'Modifie le placeholder au champ.',
+		},
+		step: {
+			description: "Modifie le pas d'incrémentation.",
+		},
+		min: {
+			description: 'Définit une valeur minimale.',
+		},
+		max: {
+			description: 'Définit une valeur maximale.',
+		},
+		valueAlignRight: {
+			description: 'Aligne la valeur du champ à droite.',
+		},
+		noSpinButtons: {
+			description: "Masque les boutons d'incrémentation.",
 		},
 	},
 } as Meta;

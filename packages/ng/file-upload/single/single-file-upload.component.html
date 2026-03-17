@@ -31,7 +31,7 @@
 		}
 		<span class="pr-u-mask">{{ intl().fileUploadedListed.one }}</span>
 	</div>
-	<span class="fileUpload-button button" aria-hidden="true">{{ intl().selectFile.one }}</span>
+	<span class="fileUpload-button button" [class.mod-filled]="buttonFilled()" aria-hidden="true">{{ intl().selectFile.one }}</span>
 </div>
 @if (entry()) {
 	<lu-file-entry
