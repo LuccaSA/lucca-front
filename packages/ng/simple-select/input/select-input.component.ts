@@ -6,7 +6,7 @@ import { ClearComponent } from '@lucca-front/ng/clear';
 import { intlInputOptions, PortalDirective } from '@lucca-front/ng/core';
 import { ALuSelectInputComponent, LU_CORE_SELECT_TRANSLATIONS, LuSelectPanelRef, provideLuSelectLabelsAndIds, ɵLuOptionOutletDirective } from '@lucca-front/ng/core-select';
 import { FILTER_PILL_INPUT_COMPONENT, FilterPillDisplayerDirective } from '@lucca-front/ng/filter-pills';
-import { InputDirective, PresentationDisplayDirective } from '@lucca-front/ng/form-field';
+import { InputDirective, PresentationDisplayDirective, ɵPresentationDisplayDefaultDirective } from '@lucca-front/ng/form-field';
 import { IconComponent } from '@lucca-front/ng/icon';
 import { LU_SIMPLE_SELECT_TRANSLATIONS } from '../select.translate';
 import { LuSimpleSelectPanelRefFactory } from './panel-ref.factory';
@@ -29,6 +29,7 @@ import { LuSimpleSelectPanelRefFactory } from './panel-ref.factory';
 		ClearComponent,
 		PortalDirective,
 		PresentationDisplayDirective,
+		ɵPresentationDisplayDefaultDirective,
 	],
 	providers: [
 		{
@@ -69,7 +70,7 @@ export class LuSimpleSelectInputComponent<T> extends ALuSelectInputComponent<T, 
 
 	inputSpace(event: Event): void {
 		if (this.filterPillMode) {
-			if (this.clue.length === 0) {
+			if (this.clue?.length === 0) {
 				event.preventDefault();
 				this.panelRef?.selectCurrentlyHighlightedValue();
 			}

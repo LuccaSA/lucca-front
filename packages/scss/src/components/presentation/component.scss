@@ -44,8 +44,12 @@
 		}
 
 		.presentation-definition {
-			display: var(--components-presentation-definition-display);
 			margin: 0;
+			color: var(--pr-t-color-text);
+
+			> *:not(:has(.lucca-icon)) {
+				color: var(--pr-t-color-text);
+			}
 		}
 	}
 }
