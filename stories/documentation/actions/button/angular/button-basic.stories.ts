@@ -1,6 +1,7 @@
-import { ButtonComponent } from '@lucca-front/ng/button';
+import { ButtonComponent, ButtonSizeList, ButtonStateList, ButtonTypeList } from '@lucca-front/ng/button';
+import { PaletteList } from '@lucca/prisme/core';
 import { Meta, StoryObj } from '@storybook/angular';
-import { createTestStory, generateInputs } from 'stories/helpers/stories';
+import { createTestStory, generateInputs, setStoryOptions } from 'stories/helpers/stories';
 import { expect, within } from 'storybook/test';
 
 export default {
@@ -19,7 +20,7 @@ export default {
 export const Basic: StoryObj<ButtonComponent> = {
 	argTypes: {
 		luButton: {
-			options: ['', 'outlined', 'ghost', 'ghost-invert', 'AI', 'AI-invert'],
+			options: setStoryOptions(ButtonTypeList),
 			control: {
 				type: 'select',
 			},
@@ -31,13 +32,14 @@ export const Basic: StoryObj<ButtonComponent> = {
 		palette: {
 			if: { arg: 'luButton', neq: 'AI' },
 			description: 'Applique une palette de couleurs au bouton.',
-			options: ['', 'product', 'neutral', 'success', 'warning', 'critical'],
+			options: setStoryOptions(PaletteList),
 			control: {
 				type: 'select',
 			},
 		},
 		state: {
 			description: "Modifie l'état du bouton.",
+			options: setStoryOptions(ButtonStateList),
 			control: {
 				type: 'select',
 			},
@@ -54,6 +56,7 @@ export const Basic: StoryObj<ButtonComponent> = {
 		},
 		size: {
 			description: 'Modifie la taille du composant.',
+			options: setStoryOptions(ButtonSizeList),
 			control: {
 				type: 'select',
 			},
