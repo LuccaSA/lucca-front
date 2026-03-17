@@ -8,5 +8,5 @@ export type ButtonSize = (typeof ButtonSizeList)[number];
 export const ButtonStateList = ['default', 'loading', 'error', 'success'] as const;
 export type ButtonState = (typeof ButtonStateList)[number];
 
-export const ButtonTypeList = ['', 'outlined', 'AI', 'AI-invert', 'ghost', 'ghost-invert', 'text', 'text-invert'];
+export const ButtonTypeList = ['', 'outlined', 'AI', 'AI-invert', 'ghost', 'ghost-invert', 'text', 'text-invert'] as const;
 export type ButtonType = (typeof ButtonTypeList)[number];
