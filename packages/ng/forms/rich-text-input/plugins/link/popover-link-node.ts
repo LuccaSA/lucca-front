@@ -10,7 +10,11 @@ export class PopoverLinkNode extends LinkNode {
 		PopoverLinkNode.#viewContainerRef = vcr;
 	}
 	static setTemplateRef(vcr: TemplateRef<unknown>): void {
-		PopoverLinkNode.#templateRef = vcr;
+		PopoverLinkNode.#templateRef = vcr as TemplateRef<{
+			href?: string;
+			title?: string;
+			target?: string;
+		}>;
 	}
 
 	static override getType(): string {
@@ -19,12 +23,14 @@ export class PopoverLinkNode extends LinkNode {
 
 	override createDOM() {
 		if (PopoverLinkNode.#viewContainerRef && PopoverLinkNode.#templateRef) {
-			// Create the view
-			const view = PopoverLinkNode.#viewContainerRef.createEmbeddedView(PopoverLinkNode.#templateRef, {
+			// Create context
+			const context: { href?: string; title?: string; target?: string } = {
 				href: this.sanitizeUrl(this.__url),
-				title: this.__title,
-				target: this.__target,
-			});
+				title: this.__title ?? undefined,
+				target: this.__target ?? undefined,
+			};
+			// Create the view
+			const view = PopoverLinkNode.#viewContainerRef.createEmbeddedView(PopoverLinkNode.#templateRef, context);
 
 			// Return the template DOM element
 			return view.rootNodes[0] as HTMLElement;

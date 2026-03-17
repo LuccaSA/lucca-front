@@ -1,9 +1,9 @@
 import { Provider } from '@angular/core';
+import { registerPlainText } from '@lexical/plain-text';
+import { $rootTextContent } from '@lexical/text';
 import { RICH_TEXT_FORMATTER, RichTextFormatter } from '@lucca-front/ng/forms/rich-text-input';
 import { $createParagraphNode, $createTextNode, $getRoot, LexicalEditor, TextNode } from 'lexical';
-import { $rootTextContent } from '@lexical/text';
 import { PLAINTEXT_TAGS, PlainTextTransformer } from './transformers';
-import { registerPlainText } from '@lexical/plain-text';
 
 export class PlainTextFormatter extends RichTextFormatter {
 	#transformers: PlainTextTransformer[] = [PLAINTEXT_TAGS];
@@ -50,7 +50,10 @@ export class PlainTextFormatter extends RichTextFormatter {
 			const startIndex = match.index || 0;
 			const endIndex = startIndex + match[0].length;
 
-			let transformedNode: TextNode, nodeAfter: TextNode, nodeBefore: TextNode;
+			let transformedNode: TextNode | undefined = undefined;
+			let nodeAfter: TextNode | undefined = undefined;
+			let nodeBefore: TextNode | undefined = undefined;
+
 			if (startIndex === 0) {
 				[transformedNode, nodeAfter] = textNode.splitText(endIndex);
 			} else {

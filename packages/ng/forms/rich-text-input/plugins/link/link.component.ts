@@ -129,8 +129,8 @@ export class LinkComponent implements OnDestroy, AfterViewInit, RichTextPluginCo
 					if (href && !href.startsWith('http')) {
 						newHref = `https://${href}`;
 					}
-					this.#editor.dispatchCommand(FORMAT_LINK, newHref);
-					this.#editor.dispatchCommand(SELECTION_CHANGE_COMMAND, undefined);
+					this.#editor?.dispatchCommand(FORMAT_LINK, newHref);
+					this.#editor?.dispatchCommand(SELECTION_CHANGE_COMMAND, undefined);
 				});
 		});
 	}

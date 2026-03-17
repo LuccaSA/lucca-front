@@ -1,5 +1,5 @@
-import { INVARIANT_CULTURE_CODE, MultilanguageTranslation } from './model/multilanguage-translation';
 import { AbstractControl, ValidatorFn } from '@angular/forms';
+import { INVARIANT_CULTURE_CODE, MultilanguageTranslation } from './model/multilanguage-translation';
 
 export function areAllLanguagesFilled(model: MultilanguageTranslation[]): boolean {
 	return model.every((row) => row.value?.length > 0);
@@ -7,7 +7,7 @@ export function areAllLanguagesFilled(model: MultilanguageTranslation[]): boolea
 
 export function isInvariantFilled(model: MultilanguageTranslation[]): boolean {
 	const invariantTranslation = model.find((row) => row.cultureCode === INVARIANT_CULTURE_CODE);
-	return invariantTranslation && invariantTranslation.value?.length > 0;
+	return (invariantTranslation && invariantTranslation.value?.length > 0) ?? false;
 }
 
 export const MultiLanguageInputValidators: Record<'allLanguagesRequired' | 'invariantRequired', ValidatorFn> = {
