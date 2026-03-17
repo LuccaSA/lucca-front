@@ -17,7 +17,7 @@ import { FORMAT_LINK, registerLink, registerLinkSelectionChange } from './link.c
 import { $createPopoverLinkNode, PopoverLinkNode } from './popover-link-node';
 import { $createPopoverAutoLinkNode, PopoverAutoLinkNode } from './popover-autolink-node';
 
-const URL_REGEX = /https?:\/\/(?:www\.)?[-a-zA-Z0-9@:%._+~#=]{1,256}\.[a-zA-Z0-9()]{1,6}\b(?:[-a-zA-Z0-9()@:%_+.~#?&/=;,[\]]*)/;
+const URL_REGEX = /https?:\/\/(?:www\.)?[-a-zA-Z0-9@:%._+~#=]{1,256}\.[a-zA-Z0-9()]{1,6}\b(?:[-a-zA-Z0-9()@:%_+.~#?!&/=;,[\]]*)/;
 const EMAIL_REGEX = /(([^<>()[\]\\.,;:\s@"]+(\.[^<>()[\]\\.,;:\s@"]+)*)|(".+"))@((\[[0-9]{1,3}\.[0-9]{1,3}\.[0-9]{1,3}\.[0-9]{1,3}\])|(([a-zA-Z\-0-9]+\.)+[a-zA-Z]{2,}))/;
 
 @Component({
@@ -123,8 +123,8 @@ export class LinkComponent implements OnDestroy, RichTextPluginComponent {
 					if (href && !href.startsWith('http')) {
 						newHref = `https://${href}`;
 					}
-					this.#editor.dispatchCommand(FORMAT_LINK, newHref);
-					this.#editor.dispatchCommand(SELECTION_CHANGE_COMMAND, undefined);
+					this.#editor?.dispatchCommand(FORMAT_LINK, newHref);
+					this.#editor?.dispatchCommand(SELECTION_CHANGE_COMMAND, undefined);
 				});
 		});
 	}
