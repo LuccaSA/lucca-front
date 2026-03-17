@@ -6,7 +6,7 @@ import { ɵeffectWithDeps } from '@lucca-front/ng/core';
 import { CORE_SELECT_API_TOTAL_COUNT_PROVIDER, CoreSelectApiTotalCountProvider, LuOptionContext, applySearchDelimiter } from '@lucca-front/ng/core-select';
 import { ALuCoreSelectApiDirective } from '@lucca-front/ng/core-select/api';
 import { LuDisplayFormat, LuDisplayFullname } from '@lucca-front/ng/user';
-import { EMPTY, Observable, catchError, combineLatest, debounceTime, map, of, shareReplay, switchMap, take, tap } from 'rxjs';
+import { Observable, catchError, combineLatest, debounceTime, map, of, shareReplay, switchMap, take, tap } from 'rxjs';
 import { FORMER_EMPLOYEES_CONTEXT, LuCoreSelectFormerEmployeesComponent } from './former-employees.component';
 import { LU_CORE_SELECT_CURRENT_USER_ID } from './me.provider';
 import { LuUserDisplayerComponent } from './user-displayer.component';
@@ -81,7 +81,7 @@ export class LuCoreSelectUsersDirective<T extends LuCoreSelectUser = LuCoreSelec
 		effect(() => {
 			const enableFormerEmployees = this.enableFormerEmployees();
 			if (this.clue() || !enableFormerEmployees) {
-				untracked(() => this.select.panelHeaderTpl.set(null));
+				untracked(() => this.select.panelHeaderTpl.set(undefined));
 			} else {
 				untracked(() => this.select.panelHeaderTpl.set(LuCoreSelectFormerEmployeesComponent));
 			}
@@ -117,14 +117,20 @@ export class LuCoreSelectUsersDirective<T extends LuCoreSelectUser = LuCoreSelec
 	);
 
 	protected meParams$ = toObservable(
-		computed(() => ({
-			fields: this.#userFields,
-			...this.filters(),
-			...(this.uniqueOperationIds() ? { uniqueOperations: this.uniqueOperationIds().join(',') } : {}),
-			...(this.operationIds() ? { operations: this.operationIds().join(',') } : {}),
-			...(this.appInstanceId() ? { appInstanceId: this.appInstanceId() } : {}),
-			id: this.currentUserId,
-		})),
+		computed(() => {
+			const uniqueOperationIds = this.uniqueOperationIds();
+			const operationIds = this.operationIds();
+			const appInstanceId = this.appInstanceId();
+
+			return {
+				fields: this.#userFields,
+				...this.filters(),
+				...(uniqueOperationIds ? { uniqueOperations: uniqueOperationIds.join(',') } : {}),
+				...(operationIds ? { operations: operationIds.join(',') } : {}),
+				...(appInstanceId ? { appInstanceId } : {}),
+				id: this.currentUserId,
+			};
+		}),
 	);
 
 	protected me$ = this.meParams$.pipe(
@@ -135,7 +141,7 @@ export class LuCoreSelectUsersDirective<T extends LuCoreSelectUser = LuCoreSelec
 						item: T;
 					}>
 				>(this.urlOrDefault(), { params })
-				.pipe(catchError(() => EMPTY)),
+				.pipe(catchError(() => of<ILuApiCollectionResponse<{ item: T }>>({ data: { items: [] } }))),
 		),
 		map((res) => res.data.items.map(({ item }) => item)[0] ?? null),
 		takeUntilDestroyed(),
@@ -219,7 +225,7 @@ export class LuCoreSelectUsersDirective<T extends LuCoreSelectUser = LuCoreSelec
 export class LuCoreSelectUserOptionDirective<T extends LuCoreSelectUser = LuCoreSelectUser> {
 	#templateRef = inject(TemplateRef<LuOptionContext<T>>);
 
-	readonly usersDirective = input<LuCoreSelectUsersDirective<T>>(null, { alias: 'luUserOptionUsersRef' });
+	readonly usersDirective = input<LuCoreSelectUsersDirective<T> | null>(null, { alias: 'luUserOptionUsersRef' });
 
 	constructor() {
 		ɵeffectWithDeps([this.usersDirective], (usersDirective) => {
