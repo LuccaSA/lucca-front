@@ -1,6 +1,6 @@
-import { ButtonComponent, ButtonSizeList, ButtonStateList, ButtonTypeList } from '@lucca-front/ng/button';
+import { BUTTON_SIZE, BUTTON_STATE, BUTTON_TYPE, ButtonComponent } from '@lucca-front/ng/button';
 import { NumericBadgeComponent } from '@lucca-front/ng/numeric-badge';
-import { PaletteList } from '@lucca/prisme/core';
+import { PALETTE } from '@lucca/prisme/core';
 import { Meta, moduleMetadata, StoryObj } from '@storybook/angular';
 import { createTestStory, generateInputs, setStoryOptions } from 'stories/helpers/stories';
 import { expect, within } from 'storybook/test';
@@ -24,7 +24,7 @@ export default {
 export const Basic: StoryObj<ButtonComponent> = {
 	argTypes: {
 		luButton: {
-			options: setStoryOptions(ButtonTypeList),
+			options: setStoryOptions(BUTTON_TYPE),
 			control: {
 				type: 'select',
 			},
@@ -36,14 +36,14 @@ export const Basic: StoryObj<ButtonComponent> = {
 		palette: {
 			if: { arg: 'luButton', neq: 'AI' },
 			description: 'Applique une palette de couleurs au bouton.',
-			options: setStoryOptions(PaletteList),
+			options: setStoryOptions(PALETTE),
 			control: {
 				type: 'select',
 			},
 		},
 		state: {
 			description: "Modifie l'état du bouton.",
-			options: setStoryOptions(ButtonStateList),
+			options: setStoryOptions(BUTTON_STATE),
 			control: {
 				type: 'select',
 			},
@@ -59,7 +59,7 @@ export const Basic: StoryObj<ButtonComponent> = {
 		},
 		size: {
 			description: 'Modifie la taille du composant.',
-			options: setStoryOptions(ButtonSizeList),
+			options: setStoryOptions(BUTTON_SIZE),
 			control: {
 				type: 'select',
 			},

@@ -2,11 +2,11 @@
  * Available ButtonComponent Types
  */
 
-export const ButtonSizeList = ['M', 'S', 'XS'] as const;
-export type ButtonSize = (typeof ButtonSizeList)[number];
+export const BUTTON_SIZE = ['M', 'S', 'XS'] as const;
+export type ButtonSize = (typeof BUTTON_SIZE)[number];
 
-export const ButtonStateList = ['default', 'loading', 'error', 'success'] as const;
-export type ButtonState = (typeof ButtonStateList)[number];
+export const BUTTON_STATE = ['default', 'loading', 'error', 'success'] as const;
+export type ButtonState = (typeof BUTTON_STATE)[number];
 
-export const ButtonTypeList = ['', 'outlined', 'AI', 'AI-invert', 'ghost', 'ghost-invert', 'text', 'text-invert'] as const;
-export type ButtonType = (typeof ButtonTypeList)[number];
+export const BUTTON_TYPE = ['', 'outlined', 'AI', 'AI-invert', 'ghost', 'ghost-invert', 'text', 'text-invert'] as const;
+export type ButtonType = (typeof BUTTON_TYPE)[number];
