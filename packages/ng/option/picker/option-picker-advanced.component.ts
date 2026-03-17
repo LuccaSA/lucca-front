@@ -90,7 +90,9 @@ export abstract class ALuOptionPickerAdvancedComponent<T, O extends import('../i
 		let options$: Observable<T[]>;
 		operators.forEach((operator) => {
 			operator.inOptions$ = options$;
-			options$ = operator.outOptions$;
+			if (operator.outOptions$) {
+				options$ = operator.outOptions$;
+			}
 		});
 	}
 	protected initSelectors() {
