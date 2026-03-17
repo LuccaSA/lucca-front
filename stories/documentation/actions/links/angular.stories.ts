@@ -18,7 +18,6 @@ export default {
 	render: (args) => {
 		const { label, disabled, external, href, routerLink, decorationHover, ...inputs } = args;
 		const disable = disabled ? ' disabled' : '';
-		const externe = external ? ' external' : '';
 		const decoration = decorationHover ? ' decorationHover' : '';
 
 		return {
@@ -26,9 +25,14 @@ export default {
 				tick$: timer(0, 1000),
 			},
 			template: `
-Angular Navigation side: <a luLink="${routerLink}"${externe}${disable}${decoration}>${label}</a>
+Angular Navigation : <a luLink="${routerLink}"${disable}${decoration}>${label}</a>
 <br>
-Browser Navigation side: <a href="${href}" luLink${externe}${disable}${decoration}>${label}</a>
+External Angular Navigation : <a luLink="${routerLink}" external${disable}${decoration}>${label}</a>
+<br>
+<hr>
+Browser Navigation : <a href="${href}" luLink${disable}${decoration}>${label}</a>
+<br>
+External Browser Navigation : <a href="${href}"	luLink external${disable}${decoration}>${label}</a>
 `,
 		};
 	},
@@ -64,7 +68,6 @@ export const Basic: StoryObj = {
 		label: `Text link`,
 		routerLink: './#example',
 		href: `https://www.example.org`,
-		external: false,
 		disabled: false,
 		decorationHover: false,
 	},
