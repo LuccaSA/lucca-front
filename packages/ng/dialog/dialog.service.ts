@@ -64,7 +64,7 @@ export class LuDialogService {
 				.pipe(
 					filter(() => config.canCloseWithBackdrop ?? true),
 					switchMap(() => {
-						const canClose = cdkRef.componentInstance ? (config.canClose?.(cdkRef.componentInstance) ?? true) : false;
+						const canClose = cdkRef.componentInstance ? (config.canClose?.(cdkRef.componentInstance) ?? true) : true;
 						const canClose$ = isObservable(canClose) ? canClose : of(canClose);
 						return canClose$.pipe(take(1));
 					}),
