@@ -24,12 +24,10 @@ export default {
 			props: {
 				tick$: timer(0, 1000),
 			},
-			template: `
-Routing application : <a luLink="${routerLink}"${disable}${decoration}>${label}</a><br>
+			template: `Routing application : <a luLink="${routerLink}"${disable}${decoration}>${label}</a><br>
 Routing application (nouvelle fenêtre) : <a luLink="${routerLink}" external${disable}${decoration}>${label}</a><br>
 Lien hors application : <a href="${href}" luLink${disable}${decoration}>${label}</a><br>
-Lien hors application (nouvelle fenêtre) : <a href="${href}"	luLink external${disable}${decoration}>${label}</a>
-`,
+Lien hors application (nouvelle fenêtre) : <a href="${href}" luLink external${disable}${decoration}>${label}</a>`,
 		};
 	},
 	argTypes: {
