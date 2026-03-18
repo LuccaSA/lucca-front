@@ -15,7 +15,7 @@
 		&.mod-sidepanel {
 			position: fixed !important;
 			inset-block: 0;
-			inset-inline-end: 0;
+			inset-inline-end: var(--commons-pushPanel-width);
 			inline-size: var(--components-sidepanel-M);
 			max-inline-size: 100%;
 			max-block-size: 100vh;

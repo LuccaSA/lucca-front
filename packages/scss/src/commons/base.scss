@@ -10,7 +10,7 @@
 	color: var(--pr-t-color-text);
 	font: var(--pr-t-font-body-M);
 	text-rendering: geometricPrecision;
-	width: calc(100% - var(--commons-pushPanel-width));
+	margin-inline-end: var(--commons-pushPanel-width);
 
 	@supports (-webkit-touch-callout: none) {
 		min-block-size: -webkit-fill-available;

@@ -9,12 +9,14 @@
 						<lu-switch-input [(ngModel)]="showPushPanel" (ngModelChange)="togglePushPanel()" />
 					</lu-form-field>
 				</div>
-				<div class="pr-u-displayFlex pr-u-gap100">
+				<div class="pr-u-displayFlex pr-u-flexWrapWrap pr-u-gap100">
 					<button luButton="outlined" size="S" [luDialogOpen]="dialog" [luDialogConfig]="{ size: 'M', mode: 'drawer' }">Open Panel</button>
 					<button luButton="outlined" size="S" [luDialogOpen]="dialogClassic" [luDialogConfig]="{ size: 'M' }">Open Dialog</button>
 					<button luButton="outlined" size="S" [luDialogOpen]="dialogBottom" [luDialogConfig]="{ size: 'M', mode: 'drawer-from-bottom' }">
 						Open Bottom Drawer
 					</button>
+					<button luButton="outlined" size="S" (click)="openLegacySidepanel()">Open Legacy Sidepanel</button>
+					<button luButton="outlined" size="S" (click)="openLegacyModal()">Open Legacy Modal</button>
 					<button luButton="outlined" size="S" (click)="showToast()">Show Toast</button>
 				</div>
 			</lu-container>

@@ -7,6 +7,8 @@ import { DialogComponent, DialogContentComponent, DialogFooterComponent, DialogH
 import { FormFieldComponent } from '@lucca-front/ng/form-field';
 import { SwitchInputComponent } from '@lucca-front/ng/forms';
 import { MainLayoutBlockComponent, MainLayoutComponent } from '@lucca-front/ng/main-layout';
+import { ILuModalContent, LuModal, LuModalModule } from '@lucca-front/ng/modal';
+import { LuSidepanel, LuSidepanelModule } from '@lucca-front/ng/sidepanel';
 import { LuToastsComponent, LuToastsService } from '@lucca-front/ng/toast';
 import { Meta } from '@storybook/angular';
 
@@ -27,11 +29,16 @@ import { Meta } from '@storybook/angular';
 		ContainerComponent,
 		FormFieldComponent,
 		SwitchInputComponent,
+		LuSidepanelModule,
+		LuModalModule,
 		FormsModule,
 	],
 	changeDetection: ChangeDetectionStrategy.OnPush,
 	styles: [
 		`
+			:host {
+				background: lime;
+			}
 			@layer components {
 				:host ::ng-deep {
 					.appLayout {
@@ -132,6 +139,8 @@ import { Meta } from '@storybook/angular';
 })
 class PushPanelStory {
 	private toasts = inject(LuToastsService);
+	private sidepanel = inject(LuSidepanel);
+	private modal = inject(LuModal);
 
 	showPushPanel = false;
 
@@ -150,6 +159,34 @@ class PushPanelStory {
 			document.documentElement.style.removeProperty('--component-lu-app-lifecycle-push-panel');
 		}
 	}
+
+	openLegacySidepanel() {
+		this.sidepanel.legacyOpen(PushPanelLegacySidepanelContent);
+	}
+
+	openLegacyModal() {
+		this.modal.legacyOpen(PushPanelLegacyModalContent);
+	}
+}
+
+@Component({
+	selector: 'push-panel-legacy-sidepanel-content',
+	template: '<p>Legacy sidepanel content</p>',
+	changeDetection: ChangeDetectionStrategy.OnPush,
+})
+class PushPanelLegacySidepanelContent implements ILuModalContent {
+	title = 'Legacy Sidepanel';
+	submitAction = () => {};
+}
+
+@Component({
+	selector: 'push-panel-legacy-modal-content',
+	template: '<p>Legacy modal content</p>',
+	changeDetection: ChangeDetectionStrategy.OnPush,
+})
+class PushPanelLegacyModalContent implements ILuModalContent {
+	title = 'Legacy Modal';
+	submitAction = () => {};
 }
 
 export default {
