@@ -1,4 +1,5 @@
 @use '@lucca-front/scss/src/commons/utils/color';
+@use '@lucca-front/scss/src/commons/utils/a11y';
 
 @mixin block {
 	--components-loading-display: block;
@@ -46,4 +47,10 @@
 	// legacy, approximate centering
 	--components-loading-margin: 0 auto;
 	--components-loading-transform: translateY(35vh);
+}
+
+@mixin hiddenLabel {
+	.loading-label {
+		@include a11y.mask;
+	}
 }

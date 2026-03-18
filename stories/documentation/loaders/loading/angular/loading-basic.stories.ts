@@ -4,6 +4,7 @@ import { cleanupTemplate } from 'stories/helpers/stories';
 
 interface LoadingsBasicStory {
 	label: string;
+	hiddenLabel: boolean;
 	L: boolean;
 	block: boolean;
 	invert: boolean;
@@ -29,18 +30,18 @@ export default {
 		}),
 	],
 	render: (args: LoadingsBasicStory) => {
-		const lParam = args.L ? `size="L"` : ``;
-		const blockParam = args.block ? `block` : ``;
-		const invertParam = args.invert ? `invert` : ``;
-		const templateParam = args.template ? `template="${args.template}"` : ``;
-		const params = `${lParam} ${invertParam} ${blockParam} ${templateParam}`;
+		const lParam = args.L ? ` size="L"` : ``;
+		const blockParam = args.block ? ` block` : ``;
+		const invertParam = args.invert ? ` invert` : ``;
+		const hiddenLabelParam = args.hiddenLabel ? ` hiddenLabel` : ``;
+		const templateParam = args.template ? ` template="${args.template}"` : ``;
 		if (args.label) {
 			return {
-				template: cleanupTemplate(`<lu-loading ${params}>${args.label}</lu-loading>`),
+				template: cleanupTemplate(`<lu-loading${lParam}${hiddenLabelParam}${invertParam}${blockParam}${templateParam}>${args.label}</lu-loading>`),
 			};
 		} else {
 			return {
-				template: cleanupTemplate(`<lu-loading ${params} />`),
+				template: cleanupTemplate(`<lu-loading${lParam}${invertParam}${blockParam}${templateParam} />`),
 			};
 		}
 	},
@@ -48,7 +49,8 @@ export default {
 
 export const Basic = {
 	args: {
-		label: '',
+		label: 'Chargement…',
+		hiddenLabel: true,
 		L: false,
 		block: false,
 		invert: false,
