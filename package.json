@@ -94,6 +94,7 @@
     "@storybook/addon-a11y": "^10.1.9",
     "@storybook/addon-coverage": "^3.0.0",
     "@storybook/addon-docs": "^10.1.9",
+    "@storybook/addon-mcp": "^0.4.1",
     "@storybook/angular": "^10.1.9",
     "@storybook/test-runner": "^0.24.2",
     "@swc/core": "^1.13.5",
