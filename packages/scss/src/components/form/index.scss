@@ -110,6 +110,10 @@
 				}
 			}
 		}
+
+		&:has(.formLabel-counter.mod-critical) {
+			@include counterCritical;
+		}
 	}
 }
 

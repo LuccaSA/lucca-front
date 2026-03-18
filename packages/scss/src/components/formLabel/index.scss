@@ -17,6 +17,14 @@
 
 		&.mod-counter {
 			@include counter;
+
+			&:has(.formLabel-counter.mod-warning) {
+				@include counterWarning;
+			}
+
+			&:has(.formLabel-counter.mod-critical) {
+				@include counterCritical;
+			}
 		}
 
 		&.is-error {
