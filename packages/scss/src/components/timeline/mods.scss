@@ -174,8 +174,9 @@
 }
 
 @mixin numberL {
-	.timeline-step-title::after {
-		font-size: var(--pr-t-font-body-S-fontSize);
+	.timeline-step-title::after,
+	.timeline-step-title::before {
+		font-size: var(--pr-t-font-body-S-fontSize) !important;
 	}
 }
 
