@@ -13,7 +13,7 @@ export class LuDialogRef<C = unknown, TData = LuDialogData<C>> {
 	/**
 	 * Instance of the component that's inside the dialog
 	 */
-	get instance(): C {
+	get instance(): C | null {
 		return this.cdkRef.componentInstance;
 	}
 
@@ -60,7 +60,13 @@ export class LuDialogRef<C = unknown, TData = LuDialogData<C>> {
 		if (this.config.alert) {
 			return;
 		}
-		const canClose = this.config.canClose?.(this.instance) ?? true;
+		let canClose: boolean | Observable<boolean> = true;
+
+		try {
+			canClose = this.config.canClose?.(this.instance as C) ?? true;
+		} catch {
+			canClose = true;
+		}
 		const canClose$ = isObservable(canClose) ? canClose : of(canClose);
 		canClose$.pipe(take(1)).subscribe((close) => {
 			if (close) {
