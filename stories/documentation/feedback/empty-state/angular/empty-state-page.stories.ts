@@ -13,16 +13,6 @@ export default {
 	],
 	render: (args) => {
 		const { heading, description, slotTop, hx } = args;
-		const paramIllustrationAlt =
-			args['illustrationAlt'] === ''
-				? ``
-				: `
-	illustrationAlt="${args['illustrationAlt']}"`;
-		const paramIllustrationUrl =
-			args['illustrationUrl'] === ''
-				? ``
-				: `
-	illustrationUrl="${args['illustrationUrl']}"`;
 		const paramIcon =
 			args['icon'] === ''
 				? ``
@@ -60,7 +50,7 @@ export default {
 			],
 			template: `<lu-empty-state-page
 	heading="${heading}"
-	slotTop="${slotTop}"${paramIllustrationUrl}${paramIllustrationAlt}
+	slotTop="${slotTop}"
 	description="${description}"${paramIcon}${paramTopRightBackground}${paramTopRightForeground}${paramBottomLeftBackground}${paramBottomLeftForeground}
 	hx="${hx}"
 >
