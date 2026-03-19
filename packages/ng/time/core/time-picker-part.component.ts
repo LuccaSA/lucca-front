@@ -2,6 +2,7 @@ import { formatNumber } from '@angular/common';
 import { ChangeDetectionStrategy, Component, ElementRef, Inject, LOCALE_ID, ModelSignal, ViewChild, booleanAttribute, computed, input, model, numberAttribute, output } from '@angular/core';
 import { ɵeffectWithDeps } from '@lucca-front/ng/core';
 import { InputDirective } from '@lucca-front/ng/form-field';
+import { FormLabelComponent } from '@lucca-front/ng/form-label';
 import { PickerControlDirection } from './misc.utils';
 import { RepeatOnHoldDirective } from './repeat-on-hold.directive';
 
@@ -9,7 +10,7 @@ let nextId = 0;
 
 @Component({
 	selector: 'lu-time-picker-part',
-	imports: [RepeatOnHoldDirective, InputDirective],
+	imports: [RepeatOnHoldDirective, InputDirective, FormLabelComponent],
 	templateUrl: './time-picker-part.component.html',
 	changeDetection: ChangeDetectionStrategy.OnPush,
 })
