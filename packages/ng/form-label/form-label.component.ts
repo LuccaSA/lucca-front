@@ -1,4 +1,3 @@
-import { NgTemplateOutlet } from '@angular/common';
 import { booleanAttribute, ChangeDetectionStrategy, Component, input, numberAttribute, ViewEncapsulation } from '@angular/core';
 import { SafeHtml } from '@angular/platform-browser';
 import { intlInputOptions, IntlParamsPipe } from '@lucca-front/ng/core';
@@ -14,7 +13,7 @@ import { LU_FORM_LABEL_TRANSLATIONS } from './form-label.translate';
 	templateUrl: './form-label.component.html',
 	encapsulation: ViewEncapsulation.None,
 	changeDetection: ChangeDetectionStrategy.OnPush,
-	imports: [NgTemplateOutlet, LuTooltipTriggerDirective, LuTooltipTriggerDirective, TagComponent, IconComponent, IntlParamsPipe],
+	imports: [LuTooltipTriggerDirective, LuTooltipTriggerDirective, TagComponent, IconComponent, IntlParamsPipe],
 	host: {
 		class: 'formLabel',
 		'[class.mod-counter]': 'counterMax() > 0',

@@ -1,9 +1,6 @@
-<ng-template #content><ng-content /></ng-template>
-
+<ng-content />
 @if (required()) {
-	<ng-container *ngTemplateOutlet="content" /><sup class="formLabel-required" aria-hidden="true">*</sup>
-} @else {
-	<ng-container *ngTemplateOutlet="content" />
+	<sup class="formLabel-required" aria-hidden="true">*</sup>
 }
 @if (tooltip()) {
 	<span class="formLabel-info" [luTooltip]="tooltip()">
