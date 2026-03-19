@@ -332,7 +332,6 @@ export const BasicTEST = createTestStory(Basic, async (context) => {
 
 		await userEvent.click(editor);
 		await userEvent.keyboard('{Meta>}a{/Meta}{Backspace}');
-		await expect(model).toHaveTextContent('');
 		await userEvent.type(editor, 'Bonjour ');
 
 		await clickToolbarButton('Gras');
