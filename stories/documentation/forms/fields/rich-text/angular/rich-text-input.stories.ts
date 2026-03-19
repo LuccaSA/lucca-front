@@ -10,8 +10,10 @@ import { HtmlFormatterDirective } from '@lucca-front/ng/forms/rich-text-input/fo
 import { DEFAULT_MARKDOWN_TRANSFORMERS, MarkdownFormatterDirective, MarkdownFormatterWithTagsDirective, TAGS } from '@lucca-front/ng/forms/rich-text-input/formatters/markdown';
 import { PLAINTEXT_TAGS, PlainTextFormatterWithTagsDirective } from '@lucca-front/ng/forms/rich-text-input/formatters/plain-text';
 import { applicationConfig, Meta, moduleMetadata, StoryObj } from '@storybook/angular';
-import { cleanupTemplate, generateInputs } from 'stories/helpers/stories';
+import { cleanupTemplate, createTestStory, generateInputs } from 'stories/helpers/stories';
 import { StoryModelDisplayComponent } from 'stories/helpers/story-model-display.component';
+import { waitForAngular } from 'stories/helpers/test';
+import { expect, screen, userEvent, within } from 'storybook/test';
 
 export default {
 	title: 'Documentation/Forms/Fields/RichTextInput/Angular',
@@ -320,3 +322,82 @@ export const WithTagPluginMarkdownContentChange: StoryObj<RichTextInputComponent
 		presentation: false,
 	},
 };
+
+export const BasicTEST = createTestStory(Basic, async (context) => {
+	const canvas = within(context.canvasElement);
+	const editor = canvas.getByRole('textbox');
+
+	await context.step('Type and apply text styles', async () => {
+		const model = modelDisplay(context.canvasElement);
+
+		await userEvent.click(editor);
+		await userEvent.keyboard('{Meta>}a{/Meta}{Backspace}');
+		await expect(model).toHaveTextContent('');
+		await userEvent.type(editor, 'Bonjour ');
+
+		await clickToolbarButton('Gras');
+		await userEvent.type(editor, 'gras');
+		await clickToolbarButton('Gras');
+
+		await userEvent.type(editor, ' et ');
+		await clickToolbarButton('Italique');
+		await userEvent.type(editor, 'italique');
+		await clickToolbarButton('Italique');
+		await waitForAngular();
+
+		await userEvent.type(editor, ' et ');
+		await clickToolbarButton('Barré');
+		await userEvent.type(editor, 'barré');
+		await clickToolbarButton('Barré');
+		await waitForAngular();
+
+		await expect(model).toHaveTextContent('Bonjour **gras** et *italique* et ~~barré~~');
+	});
+
+	await context.step('Create a bulleted list', async () => {
+		await userEvent.type(editor, '{Enter}');
+		await clickToolbarButton('Liste à puces');
+		await userEvent.type(editor, 'Premier point{Enter}Second point');
+		await clickToolbarButton('Liste à puces');
+		await waitForAngular();
+
+		const model = modelDisplay(context.canvasElement);
+		await expect(model).toHaveTextContent('Premier point');
+		await expect(model).toHaveTextContent('Second point');
+	});
+
+	await context.step('Create a numbered list', async () => {
+		await clickToolbarButton('Liste numérotée');
+		await userEvent.type(editor, 'Troisieme point{Enter}Quatrieme point');
+		await clickToolbarButton('Liste numérotée');
+		await waitForAngular();
+
+		const model = modelDisplay(context.canvasElement);
+		await expect(model).toHaveTextContent('Troisieme point');
+		await expect(model).toHaveTextContent('Quatrieme point');
+	});
+
+	await context.step('Create a link', async () => {
+		await userEvent.type(editor, '{Enter}links');
+		await userEvent.keyboard('{Shift>}{ArrowLeft}{ArrowLeft}{ArrowLeft}{ArrowLeft}{ArrowLeft}{/Shift}');
+		await clickToolbarButton('Lien');
+
+		const linkInput = screen.getByPlaceholderText('https://www.nomDuSite.com');
+		await userEvent.clear(linkInput);
+		await userEvent.type(linkInput, 'https://example.org/docs');
+		await userEvent.click(screen.getByRole('button', { name: 'Valider' }));
+		await waitForAngular();
+
+		const model = modelDisplay(context.canvasElement);
+		await expect(model).toHaveTextContent('[links](https://example.org/docs)');
+	});
+});
+
+function modelDisplay(canvasElement: HTMLElement) {
+	return within(canvasElement).getByTestId('pr-ng-model');
+}
+
+async function clickToolbarButton(name: string) {
+	const toolbar = screen.getByRole('toolbar');
+	await userEvent.click(within(toolbar).getByRole('button', { name }));
+}
