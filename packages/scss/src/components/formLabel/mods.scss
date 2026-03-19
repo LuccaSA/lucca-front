@@ -1,4 +1,4 @@
-@use '@lucca-front/icons/src/icon/exports' as icons;
+@use '@lucca-front/icons/src/commons/utils/icon';
 
 @mixin S {
 	--components-formLabel-font: var(--pr-t-font-body-S);
@@ -31,5 +31,21 @@
 @mixin counter {
 	@include widthAuto;
 
-	--components-formLabel-paddingRight: var(--pr-t-spacings-600);
+	--components-formLabel-paddingRight: var(--pr-t-spacings-700);
+}
+
+@mixin counterWarning {
+	--components-formLabel-counter-color: var(--palettes-warning-700);
+
+	.formLabel-counter-content::before {
+		@include icon.generate('sign_warning');
+	}
+}
+
+@mixin counterCritical {
+	--components-formLabel-counter-color: var(--palettes-critical-700);
+
+	.formLabel-counter-content::before {
+		@include icon.generate('sign_error');
+	}
 }
