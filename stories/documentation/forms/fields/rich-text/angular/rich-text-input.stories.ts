@@ -400,14 +400,14 @@ export const BasicTagPluginTEST = createTestStory(WithTagPlugin, async (context)
 
 	await userEvent.click(editor);
 	await userEvent.keyboard('{Meta>}a{/Meta}{Backspace}');
-	await userEvent.type(editor, 'debut ');
 	await waitForAngular();
 
 	await userEvent.click(canvas.getByTestId('tag-0'));
-	await userEvent.type(editor, ' fin');
+	await userEvent.click(canvas.getByTestId('tag-1'));
+	await userEvent.click(canvas.getByTestId('tag-2'));
 	await waitForAngular();
 
-	await expect(modelDisplay(context.canvasElement)).toHaveTextContent('debut {{tag1}} fin');
+	await expect(modelDisplay(context.canvasElement)).toHaveTextContent('{{tag1}}{{tag2}}{{tag3}}');
 });
 
 function modelDisplay(canvasElement: HTMLElement) {
