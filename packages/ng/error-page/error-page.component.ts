@@ -2,7 +2,6 @@ import { Location } from '@angular/common';
 import { ChangeDetectionStrategy, Component, computed, inject, input } from '@angular/core';
 import { intlInputOptions } from '@lucca-front/ng/core';
 import { LinkComponent } from '@lucca-front/ng/link';
-import { PortalContent } from '../core/portal';
 import { ErrorPageImage } from './error-page.model';
 import { LU_ERROR_PAGE_TRANSLATIONS } from './error-page.translate';
 
@@ -19,10 +18,10 @@ import { LU_ERROR_PAGE_TRANSLATIONS } from './error-page.translate';
 export class ErrorPageComponent {
 	intl = input(...intlInputOptions(LU_ERROR_PAGE_TRANSLATIONS));
 
-	readonly heading = input.required<PortalContent>();
+	readonly heading = input.required<string>();
 	readonly img = input.required<ErrorPageImage>();
 
-	readonly description = input<PortalContent>();
+	readonly description = input<string>();
 	readonly link = input<string>();
 	readonly linkLabel = input<string>(this.intl().backPrevious);
 	readonly imgAlt = input('');
