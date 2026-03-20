@@ -79,7 +79,7 @@
 }
 
 @mixin opened {
-	--components-filterPill-toggle-rotation: -0.5turn;
+	--components-filterPill-toggle-rotation: 180deg;
 }
 
 @mixin beginning {
