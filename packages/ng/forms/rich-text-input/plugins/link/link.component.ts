@@ -61,6 +61,7 @@ export class LinkComponent implements OnDestroy, RichTextPluginComponent {
 			registerAutoLink(editor, {
 				matchers: [createLinkMatcherWithRegExp(URL_REGEX, (text) => (text.startsWith('http') ? text : `https://${text}`)), createLinkMatcherWithRegExp(EMAIL_REGEX, (text) => `mailto:${text}`)],
 				changeHandlers: [],
+				excludeParents: [],
 			}),
 		);
 	}
