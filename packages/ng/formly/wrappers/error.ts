@@ -49,4 +49,4 @@ export class LuFormlyWrapperError extends FieldWrapper<FieldTypeConfig> {
 	}
 }
 
-export const templateErrorExtension = buildAddWrapperExtension('error', (field) => !!field.validation);
+export const templateErrorExtension = buildAddWrapperExtension('error', (field) => !!field?.validation);
