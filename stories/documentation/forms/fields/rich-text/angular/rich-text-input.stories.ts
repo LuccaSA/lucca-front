@@ -392,6 +392,22 @@ export const BasicTEST = createTestStory(Basic, async (context) => {
 	});
 });
 
+export const BasicTagPluginTEST = createTestStory(WithTagPlugin, async (context) => {
+	const canvas = within(context.canvasElement);
+	const editor = canvas.getByRole('textbox');
+
+	await userEvent.click(editor);
+	await userEvent.keyboard('{Meta>}a{/Meta}{Backspace}');
+	await waitForAngular();
+
+	await userEvent.click(canvas.getByTestId('tag-0'));
+	await userEvent.click(canvas.getByTestId('tag-1'));
+	await userEvent.click(canvas.getByTestId('tag-2'));
+	await waitForAngular();
+
+	await expect(modelDisplay(context.canvasElement)).toHaveTextContent('{{tag1}}{{tag2}}{{tag3}}');
+});
+
 function modelDisplay(canvasElement: HTMLElement) {
 	return within(canvasElement).getByTestId('pr-ng-model');
 }
