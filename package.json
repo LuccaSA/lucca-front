@@ -45,7 +45,9 @@
     "nglint:fix": "npm run nglint -- --fix",
     "stylelint:fix": "npm run stylelint -- --fix",
     "icons:update": "node ./packages/icons/update-icons.js",
-    "i18n:update": "lucca translate && prettier --write 'packages/ng/**/translations.ts'"
+    "i18n:update": "lucca translate && prettier --write 'packages/ng/**/translations.ts'",
+    "skills:generate": "node scripts/generate-skills.js",
+    "skills:dry-run": "node scripts/generate-skills.js --dry-run"
   },
   "dependencies": {
     "@angular/animations": "^21.0.5",
