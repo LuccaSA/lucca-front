@@ -1,0 +1,14 @@
+<section class="errorPage-section">
+	<div class="errorPage-section-info">
+		<h1 class="errorPage-section-info-title">{{ heading() }}</h1>
+		@if (description()) {
+			<p class="errorPage-section-info-text">{{ description() }}</p>
+		}
+		@if (link()) {
+			<a [href]="link()">{{ linkLabel() }}</a>
+		} @else {
+			<button type="button" luLink (click)="backToPreviousUrl()">{{ linkLabel() }}</button>
+		}
+	</div>
+	<img class="errorPage-section-image" [src]="imgSrc()" width="600" height="400" [alt]="imgAlt()" />
+</section>
