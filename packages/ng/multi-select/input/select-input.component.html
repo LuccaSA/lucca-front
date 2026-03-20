@@ -31,13 +31,15 @@
 	}
 </ng-container>
 @if (!ignorePresentation()) {
-	<ng-container *luPresentationDisplay>
+	<ng-container *luPresentationDisplayDefault>
 		@for (v of value; track $index) {
 			@if ($last) {
 				<ng-container *ngTemplateOutlet="noComma; context: { $implicit: v }" />
 			} @else {
 				<ng-container *ngTemplateOutlet="comma; context: { $implicit: v }" />
 			}
+		} @empty {
+			<span aria-hidden="true" data-content-before="–"></span>
 		}
 	</ng-container>
 }

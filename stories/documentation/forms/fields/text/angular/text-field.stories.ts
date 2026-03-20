@@ -286,7 +286,7 @@ export const WithPrefixAndSuffix: StoryObj<
 	} & FormFieldComponent
 > = {
 	render: (args, { argTypes }) => {
-		const { counter, label, hiddenLabel, tooltip, inlineMessage, inlineMessageState, size, prefix, suffix, ...inputArgs } = args;
+		const { counter, label, hiddenLabel, tooltip, inlineMessage, inlineMessageState, size, prefix, suffix, presentation, ...inputArgs } = args;
 		return {
 			props: {
 				prefix: args.prefix,
@@ -301,6 +301,7 @@ export const WithPrefixAndSuffix: StoryObj<
 					inlineMessageState,
 					size,
 					counter,
+					presentation,
 				},
 				argTypes,
 			)}>
@@ -339,6 +340,7 @@ export const WithPrefixAndSuffix: StoryObj<
 		inlineMessage: 'Helper text',
 		inlineMessageState: 'default',
 		counter: 0,
+		presentation: false,
 	},
 };
 

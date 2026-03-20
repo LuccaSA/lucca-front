@@ -33,10 +33,13 @@
 		}
 
 		.calloutPopover-overlay {
-			inline-size: var(--components-calloutPopover-width);
 			max-inline-size: calc(100vw - (var(--pr-t-spacings-200) * 2));
 			display: flex;
 			gap: var(--pr-t-spacings-100);
+
+			&:has(.calloutFeedbackList) {
+				inline-size: var(--components-calloutPopover-width);
+			}
 		}
 
 		.calloutPopover-overlay-head-title {
@@ -54,10 +57,13 @@
 			@include icon.M;
 
 			color: var(--palettes-700, var(--palettes-neutral-700));
+			display: block;
 		}
 
 		.calloutPopover-overlay-content {
-			margin-block-end: var(--pr-t-spacings-100);
+			&:has(.calloutFeedbackList) {
+				margin-block-end: var(--pr-t-spacings-100);
+			}
 		}
 	}
 }

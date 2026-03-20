@@ -23,7 +23,7 @@ export default (options?: SchematicContextOpts): Rule => {
 			if (path.endsWith('.html')) {
 				migrateFile(path, entry, tree, (content) => migrateHTMLFile(content));
 			}
-			if (path.endsWith('.ts')) {
+			if ( path.endsWith('.ts') && !path.endsWith('.d.ts')) {
 				migrateFile(path, entry, tree, (content) => migrateTsFile(path, content));
 			}
 		});

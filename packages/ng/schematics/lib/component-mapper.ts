@@ -31,7 +31,7 @@ export class ComponentMapper {
 				if (path.includes('node_modules') || !entry) {
 					return;
 				}
-				if (path.endsWith('.ts')) {
+				if ( path.endsWith('.ts') && !path.endsWith('.d.ts')) {
 					migrateFile(path, entry, this.tree, (content) => this.migrateTsFile(path, content));
 				}
 				else {
