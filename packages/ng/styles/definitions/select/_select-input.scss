@@ -277,7 +277,7 @@
 		// Focused
 		:host-context(.textfield .textfield-input.is-focused) {
 			&::after {
-				transform: rotate(-180deg);
+				transform: rotate(180deg);
 			}
 		}
 

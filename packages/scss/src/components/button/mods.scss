@@ -248,7 +248,7 @@
 	}
 
 	&[aria-expanded='true'] {
-		--components-button-arrow-transform: rotate(-180deg);
+		--components-button-arrow-transform: rotate(180deg);
 	}
 }
 
@@ -280,12 +280,11 @@
 	--components-button-backgroundColor: transparent;
 	--components-button-color: var(--palettes-neutral-0);
 
-	background-image:
-		linear-gradient(
-			-135deg,
-			color-mix(in srgb, var(--palettes-AI-500) var(--components-button-AI-background-opacity), transparent),
-			color-mix(in srgb, var(--palettes-brand-400) var(--components-button-AI-background-opacity), transparent)
-		);
+	background-image: linear-gradient(
+		225deg,
+		color-mix(in srgb, var(--palettes-AI-500) var(--components-button-AI-background-opacity), transparent),
+		color-mix(in srgb, var(--palettes-brand-400) var(--components-button-AI-background-opacity), transparent)
+	);
 
 	&:hover,
 	&:focus-visible {

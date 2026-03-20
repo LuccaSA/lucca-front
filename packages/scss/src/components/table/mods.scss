@@ -183,7 +183,7 @@
 		.table-body-row-cell,
 		.table-foot-row-cell {
 			&::before {
-				transform: rotate(-180deg);
+				transform: rotate(180deg);
 			}
 		}
 	}
