@@ -1,7 +1,8 @@
 <div class="richTextField-toolbar-chips" (keydown.arrowleft)="focusTag($event, -1)" (keydown.arrowRight)="focusTag($event, 1)">
 	<span aria-hidden="true">{{ intl().insertTag }}</span>
-	@for (tag of tags(); track tag) {
+	@for (tag of tags(); track tag; let idx = $index) {
 		<lu-chip
+			[attr.data-testid]="'tag-' + idx"
 			[attr.tabindex]="isDisabled() ? null : $first ? 0 : -1"
 			[disabled]="isDisabled()"
 			(click)="!isDisabled() ? insertTag(tag) : null"
