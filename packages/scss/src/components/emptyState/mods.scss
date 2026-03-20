@@ -3,8 +3,10 @@
 @mixin page {
 	--components-emptyState-container-maxWidth: var(--commons-container-maxWidth);
 
-	background-image: var(--components-emptyState-illustration-foreground-bottom-left),
-		var(--components-emptyState-illustration-background-bottom-left), var(--components-emptyState-illustration-foreground-top-right),
+	background-image:
+		var(--components-emptyState-illustration-foreground-bottom-left),
+		var(--components-emptyState-illustration-background-bottom-left),
+		var(--components-emptyState-illustration-foreground-top-right),
 		var(--components-emptyState-illustration-background-top-right);
 	background-repeat: no-repeat;
 	background-position:
@@ -63,4 +65,20 @@
 @mixin insideContainer {
 	--components-emptyState-container-maxWidth: none;
 	--components-emptyState-container-left: auto;
+}
+
+@mixin hasIllustration {
+	--components-emptyState-background-color: transparent !important;
+	--components-emptyState-illustration-background-bottom-left: none !important;
+	--components-emptyState-illustration-foreground-bottom-left: none !important;
+	--components-emptyState-illustration-background-top-right: none !important;
+	--components-emptyState-illustration-foreground-top-right: none !important;
+}
+
+@mixin hasIllustrationNarrow {
+	--components-emptyState-container-flexDirection: column;
+}
+
+@mixin hasIllustrationImgNarrow {
+	--components-emptyState-illustration-display: none;
 }

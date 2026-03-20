@@ -49,6 +49,12 @@ export default {
 		buttonAlt: {
 			description: 'Information restituée par le bouton.',
 		},
+		popoverPosition: {
+			options: [null, 'below', 'before', 'after'],
+			control: {
+				type: 'select',
+			},
+		},
 		icon: {
 			options: [null, 'info', 'success', 'warning', 'error', 'help'],
 			control: {
@@ -113,5 +119,6 @@ export const Template: StoryObj<CalloutPopoverComponent & { items: number; custo
 		items: 2,
 		closeDelay: 500,
 		openDelay: 50,
+		popoverPosition: null,
 	},
 };

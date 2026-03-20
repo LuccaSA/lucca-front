@@ -48,8 +48,9 @@
 				@include fromBottom;
 			}
 
-			@include media.max('XXS') {
+			@include media.max('S') {
 				@include fromBottom;
+				@include maxContent;
 			}
 		}
 
@@ -63,6 +64,18 @@
 
 		&:has(.dialog-inside-header-actionOptional:not(:empty)) {
 			@include withAction;
+		}
+
+		&.mod-fancy {
+			@include fancy;
+
+			@include media.max('XS') {
+				@include fancySmall;
+			}
+
+			@include media.max('XXS') {
+				@include fancyNarrow;
+			}
 		}
 	}
 }

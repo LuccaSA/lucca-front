@@ -6,7 +6,7 @@
 	background-color: var(--components-header-background);
 	min-block-size: var(--components-header-height);
 	padding: var(--components-header-padding);
-	position: relative;
+	position: var(--components-header-position);
 	display: flex;
 	align-items: center;
 	z-index: 99;

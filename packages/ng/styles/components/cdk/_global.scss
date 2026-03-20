@@ -6,8 +6,8 @@
   $string: '~ .cdk-global-overlay-wrapper.mod-stacked';
 
 	@for $i from 1 through $level {
-    $selector: $selector + $string;
-  }
+		$selector: $selector + $string;
+	}
 
   &:has(#{$selector}) {
 		.dialog {

@@ -4,20 +4,13 @@
 @use '@lucca-front/scss/src/commons/utils/a11y';
 
 @mixin component($atRoot: namespace.$defaultAtRoot) {
-	display: flex;
-	flex-direction: column;
 	flex-grow: 1;
-	overflow: auto;
 	background-color: var(--components-richTextField-backgroundColor);
 	color: var(--components-richTextField-color);
 	border-color: var(--components-richTextField-borderColor);
 	border-style: solid;
 	border-width: 1px;
 	border-radius: var(--pr-t-border-radius-input);
-	resize: var(--components-richTextField-resize);
-	min-block-size: calc(var(--components-richTextField-minHeight) + var(--pr-t-spacings-800) + var(--pr-t-spacings-25));
-	max-block-size: var(--components-richTextField-maxHeight);
-	block-size: calc(var(--components-richTextField-height) + var(--pr-t-spacings-800) + var(--pr-t-spacings-25));
 
 	&:has(.richTextField-toolbar-formatting):has(.richTextField-toolbar-chips) {
 		min-block-size: calc(var(--components-richTextField-minHeight) + var(--pr-t-spacings-800) + var(--pr-t-spacings-25) + var(--pr-t-spacings-600));
@@ -114,7 +107,10 @@
 			padding: var(--pr-t-spacings-100);
 			outline: none;
 			overflow: auto;
-			flex-grow: 1;
+			resize: var(--components-richTextField-content-resize);
+			min-block-size: var(--components-richTextField-content-minHeight);
+			max-block-size: var(--components-richTextField-content-maxHeight);
+			block-size: var(--components-richTextField-content-height);
 		}
 
 		.richTextField-content-chip {

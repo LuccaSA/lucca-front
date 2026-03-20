@@ -25,6 +25,11 @@ export class ListingComponent {
 	readonly ordered = input(false, { transform: booleanAttribute });
 
 	/**
+	 * Create HTMLOListElement with fancy numbers
+	 */
+	readonly orderedFancy = input(false, { transform: booleanAttribute });
+
+	/**
 	 * Applies checklist mod to the listing
 	 */
 	readonly checklist = input(false, { transform: booleanAttribute });

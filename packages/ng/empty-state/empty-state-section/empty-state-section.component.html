@@ -11,9 +11,15 @@
 					<div role="heading" [attr.aria-level]="hx()" class="emptyState-content-heading">{{ heading() }}</div>
 				}
 				@if (description()) {
-					<p class="emptyState-content-description">
-						<ng-container *luPortal="description()" />
-					</p>
+					@if (isStringPortalContent(description())) {
+						<p class="emptyState-content-description">
+							<ng-container *luPortal="description()" />
+						</p>
+					} @else {
+						<div class="emptyState-content-description">
+							<ng-container *luPortal="description()" />
+						</div>
+					}
 				}
 				<div class="emptyState-actions">
 					<ng-content />
