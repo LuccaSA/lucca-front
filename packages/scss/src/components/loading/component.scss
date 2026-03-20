@@ -3,25 +3,25 @@
 
 @mixin component($atRoot: namespace.$defaultAtRoot) {
 	min-block-size: var(--components-loading-size);
-	padding: var(--components-loading-padding);
+	min-inline-size: var(--components-loading-size);
 	margin: var(--components-loading-margin);
 	display: var(--components-loading-display);
+	flex-direction: var(--components-loading-flexDirection);
 	transform: var(--components-loading-transform);
 	color: var(--components-loading-color);
 	position: relative;
 	text-align: var(--components-loading-textAlign);
 	vertical-align: top;
+	gap: var(--pr-t-spacings-50) var(--pr-t-spacings-100);
 
 	@include loading.spinner;
-
-	&:not(:empty) {
-		--components-loading-padding: 0 0 0 var(--pr-t-spacings-400);
-	}
 
 	&::after {
 		inline-size: var(--components-loading-size);
 		block-size: var(--components-loading-size);
 		margin: var(--components-loading-spinnerMargin);
+		position: static;
+		order: -1;
 	}
 
 	@at-root ($atRoot) {

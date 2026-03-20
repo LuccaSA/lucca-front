@@ -2,14 +2,11 @@
 @use '@lucca-front/scss/src/commons/utils/a11y';
 
 @mixin block {
-	--components-loading-display: block;
+	--components-loading-display: flex;
 	--components-loading-margin: auto;
 	--components-loading-spinnerMargin: 0 auto;
 	--components-loading-textAlign: center;
-
-	&:not(:empty) {
-		--components-loading-padding: calc(var(--components-loading-size) + var(--pr-t-spacings-50)) 0 0;
-	}
+	--components-loading-flexDirection: column;
 }
 
 @mixin S {
