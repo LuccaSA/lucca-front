@@ -3,6 +3,7 @@
 	luButton="ghost"
 	type="button"
 	size="S"
+	[attr.data-testid]="'list-format-' + format()"
 	(click)="dispatchCommand()"
 	[luTooltip]="tooltip()"
 	luTooltipOnlyForDisplay

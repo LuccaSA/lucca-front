@@ -336,18 +336,19 @@ export const BasicTEST = createTestStory(Basic, async (context) => {
 
 		await clickToolbarButton('Gras');
 		await userEvent.type(editor, 'gras');
-		await clickToolbarButton('Gras');
+		await userEvent.click(canvas.getByTestId('text-style-bold'));
 
 		await userEvent.type(editor, ' et ');
-		await clickToolbarButton('Italique');
+		await userEvent.click(canvas.getByTestId('text-style-italic'));
 		await userEvent.type(editor, 'italique');
-		await clickToolbarButton('Italique');
+		await userEvent.click(canvas.getByTestId('text-style-italic'));
 		await waitForAngular();
 
 		await userEvent.type(editor, ' et ');
-		await clickToolbarButton('Barré');
+
+		await userEvent.click(canvas.getByTestId('text-style-strikethrough'));
 		await userEvent.type(editor, 'barré');
-		await clickToolbarButton('Barré');
+		await userEvent.click(canvas.getByTestId('text-style-strikethrough'));
 		await waitForAngular();
 
 		await expect(model).toHaveTextContent('Bonjour **gras** et *italique* et ~~barré~~');
@@ -355,9 +356,9 @@ export const BasicTEST = createTestStory(Basic, async (context) => {
 
 	await context.step('Create a bulleted list', async () => {
 		await userEvent.type(editor, '{Enter}');
-		await clickToolbarButton('Liste à puces');
+		await userEvent.click(canvas.getByTestId('list-format-bullet'));
 		await userEvent.type(editor, 'Premier point{Enter}Second point');
-		await clickToolbarButton('Liste à puces');
+		await userEvent.click(canvas.getByTestId('list-format-bullet'));
 		await waitForAngular();
 
 		const model = modelDisplay(context.canvasElement);
@@ -367,8 +368,9 @@ export const BasicTEST = createTestStory(Basic, async (context) => {
 
 	await context.step('Create a numbered list', async () => {
 		await clickToolbarButton('Liste numérotée');
+		await userEvent.click(canvas.getByTestId('list-format-number'));
 		await userEvent.type(editor, 'Troisieme point{Enter}Quatrieme point');
-		await clickToolbarButton('Liste numérotée');
+		await userEvent.click(canvas.getByTestId('list-format-number'));
 		await waitForAngular();
 
 		const model = modelDisplay(context.canvasElement);
@@ -379,7 +381,7 @@ export const BasicTEST = createTestStory(Basic, async (context) => {
 	await context.step('Create a link', async () => {
 		await userEvent.type(editor, '{Enter}links');
 		await userEvent.keyboard('{Shift>}{ArrowLeft}{ArrowLeft}{ArrowLeft}{ArrowLeft}{ArrowLeft}{/Shift}');
-		await clickToolbarButton('Lien');
+		await userEvent.click(canvas.getByTestId('link'));
 
 		const linkInput = screen.getByPlaceholderText('https://www.nomDuSite.com');
 		await userEvent.clear(linkInput);
@@ -390,6 +392,22 @@ export const BasicTEST = createTestStory(Basic, async (context) => {
 		const model = modelDisplay(context.canvasElement);
 		await expect(model).toHaveTextContent('[links](https://example.org/docs)');
 	});
+});
+
+export const BasicTagPluginTEST = createTestStory(WithTagPlugin, async (context) => {
+	const canvas = within(context.canvasElement);
+	const editor = canvas.getByRole('textbox');
+
+	await userEvent.click(editor);
+	await userEvent.keyboard('{Meta>}a{/Meta}{Backspace}');
+	await userEvent.type(editor, 'debut ');
+	await waitForAngular();
+
+	await userEvent.click(canvas.getByTestId('tag-0'));
+	await userEvent.type(editor, ' fin');
+	await waitForAngular();
+
+	await expect(modelDisplay(context.canvasElement)).toHaveTextContent('debut {{tag1}} fin');
 });
 
 function modelDisplay(canvasElement: HTMLElement) {
