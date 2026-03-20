@@ -69,6 +69,10 @@
 		@include button.S;
 		@include button.ghost;
 
+		&.mod-critical {
+			@include button.criticalGhost;
+		}
+
 		&:has(> lu-icon:only-child, > .lucca-icon:only-child, > .lucca-icon:first-child + .pr-u-mask:last-child) {
 			@include button.onlyIcon;
 			@include button.onlyIconS;

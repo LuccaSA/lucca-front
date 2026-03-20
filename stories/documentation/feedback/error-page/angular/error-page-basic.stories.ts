@@ -17,7 +17,15 @@ export default {
 	render: (args: ErrorPageComponent, context) => {
 		const { ...inputs } = args;
 		return {
-			template: `<lu-error-page ${generateInputs(inputs, context.argTypes)}/>`,
+			template: `<lu-error-page${generateInputs(inputs, context.argTypes)} />`,
+			styles: [
+				`
+					:host ::ng-deep .errorPage,
+					:host ::ng-deep .errorPage-section {
+						block-size: 100%;
+						inline-size: 100%;
+					}`,
+			],
 		};
 	},
 	argTypes: {
@@ -53,10 +61,10 @@ export default {
 export const Template: StoryObj<ErrorPageComponent> = {
 	args: {
 		heading: 'Erreur 404',
-		description: 'La page que vous cherchez n’existe pas ou plus.',
+		description: 'La page que vous cherchez n’existe pas.',
 		img: '404',
 		link: null,
 		linkLabel: 'Revenir à la page précédente',
-		imgAlt: 'Erreur 404',
+		imgAlt: '',
 	},
 };

@@ -7,23 +7,16 @@ export default {
 } as Meta;
 
 function getTemplate(args: ErrorBasicStory): string {
-	return `
-	<div class="errorPage">
-		<section class="errorPage-section">
-			<div class="errorPage-section-info">
-				<h1 class="errorPage-section-info-title">Titre de l’erreur</h1>
-<<<<<<<< HEAD:stories/documentation/feedback/error-page/basic.stories.ts
-				<p class="errorPage-section-info-text">Vous n’êtes pas autorisé à consulter cette page ou cette ressource.</p>
-				<p><a href="#" class="errorPage-section-info-link">Revenir à la page précédente</a></p>
-========
-				<p class="errorPage-section-info-text">Vous n’êtes pas autorisé à consulter cette page ou cette ressource</p>
-				<a href="#">Revenir à la page précédente</a>
->>>>>>>> 405a5f0d2 (feat(errorPage): add angular ErrorPageComponent):stories/documentation/feedback/error-page/html&css/error-page-basic.stories.ts
-			</div>
-			<img src="https://cdn.lucca.fr/errors/svg/403-lucca.svg" alt="Erreur 403" class="errorPage-section-image">
-		</section>
-	</div>
-	`;
+	return `<div class="errorPage">
+	<section class="errorPage-section">
+		<div class="errorPage-section-info">
+			<h1 class="errorPage-section-info-title">Erreur 403</h1>
+			<p class="errorPage-section-info-text">Vous n’êtes pas autorisé à consulter cette page ou cette ressource.</p>
+			<p><a href="#">Revenir à la page précédente</a></p>
+		</div>
+		<img src="https://cdn.lucca.fr/errors/svg/403-lucca.svg" alt="" class="errorPage-section-image" />
+	</section>
+</div>`;
 }
 
 const Template = (args: ErrorBasicStory) => ({
@@ -31,8 +24,10 @@ const Template = (args: ErrorBasicStory) => ({
 	template: getTemplate(args),
 	styles: [
 		`
-		.errorPage {
-			block-size: 30rem;
+		.errorPage,
+		.errorPage-section {
+			block-size: 100%;
+			inline-size: 100%;
 		}`,
 	],
 });
