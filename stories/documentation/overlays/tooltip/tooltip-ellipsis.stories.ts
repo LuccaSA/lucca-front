@@ -1,15 +1,30 @@
-import { ChangeDetectionStrategy, Component } from '@angular/core';
+import { AsyncPipe } from '@angular/common';
+import { ChangeDetectionStrategy, Component, signal } from '@angular/core';
 import { provideAnimations } from '@angular/platform-browser/animations';
 import { LuTooltipModule } from '@lucca-front/ng/tooltip';
 import { applicationConfig, Meta, StoryObj } from '@storybook/angular';
 import { interval, map } from 'rxjs';
-import { AsyncPipe } from '@angular/common';
 
 @Component({
 	selector: 'tooltip-stories',
 	imports: [LuTooltipModule, AsyncPipe],
-	template: ` <h1>With ellipsis after few seconds</h1>
-		<div class="test ellipsis width400 fontSize2" luTooltip luTooltipWhenEllipsis>{{ dynamicContent$ | async }}</div>
+	template: `
+		<h1>Dynamic content — grows until ellipsis appears</h1>
+		<div class="test ellipsis width400 fontSize2" luTooltip luTooltipWhenEllipsis>{{ dynamicGrowContent$ | async }}</div>
+
+		<h1>Dynamic content — shrinks until ellipsis disappears</h1>
+		<div class="test ellipsis width400" luTooltip luTooltipWhenEllipsis>{{ dynamicShrinkContent$ | async }}</div>
+
+		<h1>Container resize toggle — click the button to toggle width</h1>
+		<button (click)="toggleWidth()">Toggle container width ({{ containerWidth() }}px)</button>
+		<div class="test ellipsis" [style.inline-size.px]="containerWidth()" luTooltip luTooltipWhenEllipsis>Lorem ipsum dolor sit amet consectetur adipisicing elit. Quisquam voluptatibus.</div>
+
+		<h1>Late-appearing element — appears after 2 seconds</h1>
+		@if (showLateElement()) {
+			<div class="test ellipsis width400 fontSize2" luTooltip luTooltipWhenEllipsis>Lorem ipsum dolor sit amet consectetur adipisicing elit. This should have ellipsis.</div>
+		} @else {
+			<p><em>Element will appear in a moment…</em></p>
+		}
 
 		<h1>With ellipsis (should be green)</h1>
 		<div class="test ellipsis width400 fontSize2" luTooltip luTooltipWhenEllipsis>Lorem ipsum dolor sit amet consectetur adipisicing elit.</div>
@@ -34,7 +49,12 @@ import { AsyncPipe } from '@angular/common';
 		<div class="test ellipsis width400 borderInlineEnd" luTooltip luTooltipWhenEllipsis>Lorem ipsum dolor sit amet consectetur adipisicing elit.</div>
 		<div class="test ellipsis width400 borderInlineStart" luTooltip luTooltipWhenEllipsis>Lorem ipsum dolor sit amet consectetur adipisicing elit.</div>
 		<div class="test ellipsis width400 borderInlineStart borderInlineEnd" luTooltip luTooltipWhenEllipsis>Lorem ipsum dolor sit amet consectetur adipisicing elit.</div>
-		<div class="test ellipsis width400 borderInlineStart borderInlineEnd" luTooltip luTooltipWhenEllipsis>Lorem ipsum dolor sit amet consectetur.</div>`,
+		<div class="test ellipsis width400 borderInlineStart borderInlineEnd" luTooltip luTooltipWhenEllipsis>Lorem ipsum dolor sit amet consectetur.</div>
+
+		<h1 class="pr-u-marginTop300">Zoom / resize test (manual)</h1>
+		<p>Use Ctrl +/- to zoom the browser, or resize the window. The resizable div below should update its ellipsis state.</p>
+		<div class="test ellipsis resize" luTooltip luTooltipWhenEllipsis>Lorem ipsum dolor sit amet consectetur adipisicing elit. Drag the bottom-right corner to resize.</div>
+	`,
 	styles: [
 		`
 			.ellipsis {
@@ -63,6 +83,22 @@ import { AsyncPipe } from '@angular/common';
 
 			.width400 {
 				inline-size: 400px;
+			}
+
+			.paddingRight {
+				padding-right: 50px;
+			}
+
+			.paddingLeft {
+				padding-left: 50px;
+			}
+
+			.borderRight {
+				border-right-width: 50px;
+			}
+
+			.borderLeft {
+				border-left-width: 50px;
 			}
 
 			.paddingInlineEnd {
@@ -101,11 +137,27 @@ import { AsyncPipe } from '@angular/common';
 	changeDetection: ChangeDetectionStrategy.OnPush,
 })
 class TooltipStory {
-	dynamicContent$ = interval(1000).pipe(
+	dynamicGrowContent$ = interval(1000).pipe(map((i) => 'lorem '.repeat(i)));
+
+	dynamicShrinkContent$ = interval(1000).pipe(
 		map((i) => {
-			return 'lorem '.repeat(i);
+			const fullText = 'Lorem ipsum dolor sit amet consectetur adipisicing elit quisquam voluptatibus';
+			const words = fullText.split(' ');
+			return words.slice(0, Math.max(1, words.length - i)).join(' ');
 		}),
 	);
+
+	containerWidth = signal(200);
+
+	showLateElement = signal(false);
+
+	constructor() {
+		setTimeout(() => this.showLateElement.set(true), 2000);
+	}
+
+	toggleWidth() {
+		this.containerWidth.update((w) => (w === 200 ? 600 : 200));
+	}
 }
 
 export default {

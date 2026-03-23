@@ -1,5 +1,5 @@
 import { LOCALE_ID } from '@angular/core';
-import { FormControl, ReactiveFormsModule } from '@angular/forms';
+import { FormControl, FormsModule, ReactiveFormsModule } from '@angular/forms';
 import { BrowserAnimationsModule } from '@angular/platform-browser/animations';
 import { FormFieldComponent } from '@lucca-front/ng/form-field';
 import { MultilanguageInputComponent, MultiLanguageInputValidators, MultilanguageTranslation } from '@lucca-front/ng/forms';
@@ -11,7 +11,7 @@ export default {
 	title: 'Documentation/Forms/Fields/MultilanguageField/Angular',
 	decorators: [
 		moduleMetadata({
-			imports: [MultilanguageInputComponent, FormFieldComponent, ReactiveFormsModule, BrowserAnimationsModule, StoryModelDisplayComponent],
+			imports: [MultilanguageInputComponent, FormFieldComponent, ReactiveFormsModule, BrowserAnimationsModule, StoryModelDisplayComponent, FormsModule],
 		}),
 		applicationConfig({
 			providers: [{ provide: LOCALE_ID, useValue: 'fr-FR' }],
@@ -110,30 +110,36 @@ export const Basic: StoryObj<
 		}
 > = {
 	render: (args, { argTypes }) => {
-		const { label, hiddenLabel, tooltip, inlineMessage, inlineMessageState, size, width, allLanguagesRequired, invariantRequired, presentation, ...inputArgs } = args;
+		const { label, hiddenLabel, tooltip, inlineMessage, inlineMessageState, size, width, allLanguagesRequired, invariantRequired, presentation, disabled, ...inputArgs } = args;
+		const formControl = new FormControl<MultilanguageTranslation[]>(
+			[
+				{
+					cultureCode: 'invariant',
+					value: 'Invariant value',
+				},
+				{
+					cultureCode: 'fr-FR',
+					value: 'Valeur en français',
+				},
+				{
+					cultureCode: 'en-EN',
+					value: 'English value',
+				},
+				{
+					cultureCode: 'de-DE',
+					value: "I don't speak German",
+				},
+			],
+			{
+				validators: allLanguagesRequired ? MultiLanguageInputValidators.allLanguagesRequired : invariantRequired ? MultiLanguageInputValidators.invariantRequired : undefined,
+			},
+		);
+		if (disabled) {
+			formControl.disable();
+		}
 		return {
 			props: {
-				formControl: new FormControl<MultilanguageTranslation[]>(
-					[
-						{
-							cultureCode: 'invariant',
-							value: 'Invariant value',
-						},
-						{
-							cultureCode: 'fr-FR',
-							value: 'Valeur en français',
-						},
-						{
-							cultureCode: 'en-EN',
-							value: 'English value',
-						},
-						{
-							cultureCode: 'de-DE',
-							value: "I don't speak German",
-						},
-					],
-					allLanguagesRequired ? MultiLanguageInputValidators.allLanguagesRequired : invariantRequired ? MultiLanguageInputValidators.invariantRequired : undefined,
-				),
+				formControl,
 			},
 			template: cleanupTemplate(`<lu-form-field ${generateInputs(
 				{

@@ -1,11 +1,11 @@
 import { CommonModule } from '@angular/common';
 import {
-	afterRenderEffect,
 	booleanAttribute,
 	ChangeDetectionStrategy,
 	Component,
 	computed,
 	contentChildren,
+	effect,
 	ElementRef,
 	forwardRef,
 	inject,
@@ -100,7 +100,7 @@ export class RichTextInputComponent implements OnInit, OnDestroy, ControlValueAc
 	#isRootElementInitialized = false;
 
 	constructor() {
-		afterRenderEffect(() => {
+		effect(() => {
 			if (this.#formField?.presentation() && this.contentPresentation()) {
 				this.#editor?.setRootElement(this.contentPresentation()?.nativeElement ?? null);
 				this.#editor?.setEditable(false);

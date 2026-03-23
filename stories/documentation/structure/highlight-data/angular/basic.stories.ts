@@ -57,7 +57,7 @@ export const Template: StoryObj<HighlightDataComponent & { action: string }> = {
 				'coffee',
 				'headphone',
 				'mail',
-				'manifying-glass',
+				'magnifying-glass',
 				'mealvoucher-card',
 				'medallon',
 				'piggy-bank',

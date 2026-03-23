@@ -34,5 +34,9 @@
 		&.mod-invert {
 			@include invert;
 		}
+
+		&.mod-hiddenLabel {
+			@include hiddenLabel;
+		}
 	}
 }
