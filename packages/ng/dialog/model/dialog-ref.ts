@@ -14,7 +14,7 @@ export class LuDialogRef<C = unknown, TData = LuDialogData<C>> {
 	/**
 	 * Instance of the component that's inside the dialog
 	 */
-	get instance(): C | null {
+	get instance(): C {
 		assertNotNil(this.cdkRef.componentInstance);
 		return this.cdkRef.componentInstance;
 	}
