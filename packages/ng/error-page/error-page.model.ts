@@ -1,1 +1,1 @@
-export type ErrorPageImage = '400' | '403' | '404' | '429' | '500' | 'keyboard' | 'lock' | 'map';
+export type ErrorPageIllustration = '400' | '403' | '404' | '429' | '500' | 'keyboard' | 'lock' | 'map';

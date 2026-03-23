@@ -37,15 +37,11 @@ export default {
 			type: 'string',
 			description: 'PortalContent',
 		},
-		img: {
+		illustration: {
 			options: ['400', '403', '404', '429', '500', 'keyboard', 'lock', 'map'],
 			control: {
 				type: 'select',
 			},
-		},
-		imgAlt: {
-			type: 'string',
-			description: 'Alternative text for the image, decorative image if not provided',
 		},
 		link: {
 			type: 'string',
@@ -62,9 +58,8 @@ export const Template: StoryObj<ErrorPageComponent> = {
 	args: {
 		heading: 'Erreur 404',
 		description: 'La page que vous cherchez n’existe pas.',
-		img: '404',
+		illustration: '404',
 		link: null,
 		linkLabel: 'Revenir à la page précédente',
-		imgAlt: '',
 	},
 };
