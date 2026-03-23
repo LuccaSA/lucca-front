@@ -27,7 +27,7 @@ function getTemplate(args: ActivityFeedBasicStory): string {
 	return `<lu-activity-feed>
 	<lu-activity-feed-step status="success" [date]="date" label="Lorem ipsum dolor." />
 	<lu-activity-feed-step status="critical" [date]="date" label="Lorem ipsum dolor." />
-	<lu-activity-feed-step [user]="user" label="En attente d’approbation par Daniel Hernandez." />
+	<lu-activity-feed-step status="pending" [user]="user" label="En attente d’approbation par Daniel Hernandez. " />
 	<lu-activity-feed-step [user]="user" [date]="date" label="Lorem ipsum dolor." />
 	<lu-activity-feed-step [user]="user" [date]="date" label="Daniel Hernandez a modifié un statut.">
 		<lu-activity-feed-update>

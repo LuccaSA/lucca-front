@@ -1,10 +1,9 @@
-@if (user()) {
+@if (status() === "critical" || status() === "success") {
+	<div class="activityFeed-step-state" [class.mod-critical]="status() === 'critical'" [class.mod-success]="status() === 'success'"></div>
+} @else {
 	<div class="activityFeed-step-avatar">
 		<lu-user-picture size="S" [user]="user()" />
 	</div>
-}
-@if (status()) {
-	<div class="activityFeed-step-state" [class.mod-critical]="status() === 'critical'" [class.mod-success]="status() === 'success'"></div>
 }
 <div class="activityFeed-step-description">
 	<p class="activityFeed-step-description-content">{{ label() }}</p>

@@ -13,6 +13,7 @@ import { LU_ACTIVITY_FEED_TRANSLATIONS } from '../activity-feed.translate';
 	host: {
 		role: 'listitem',
 		class: 'activityFeed-step',
+		'[class.mod-pending]': 'status() === "pending"',
 	},
 })
 export class ActivityFeedStepComponent {
@@ -31,7 +32,7 @@ export class ActivityFeedStepComponent {
 
 	readonly user = input<ILuUser | null>(null);
 
-	readonly status = input<'success' | 'critical' | null>(null);
+	readonly status = input<'success' | 'critical' | 'pending' | null>(null);
 
 	readonly date = input<Date | null>(null);
 

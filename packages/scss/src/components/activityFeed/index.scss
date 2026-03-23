@@ -41,9 +41,7 @@
 		}
 	}
 
-	.activityFeed-step {
-		&:not(:has(.activityFeed-step-description-time)) {
-			@include withoutDate;
-		}
+	.activityFeed-step.mod-pending {
+		@include pending;
 	}
 }
