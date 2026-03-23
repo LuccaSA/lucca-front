@@ -117,7 +117,7 @@
 	}
 
 	.timeline-step-description {
-		padding-inline-start: calc(var(--pr-t-spacings-200) + var(--pr-t-spacings-50));
+		padding-inline-start: var(--pr-t-spacings-250);
 	}
 }
 
@@ -175,8 +175,9 @@
 }
 
 @mixin numberL {
-	.timeline-step-title::after {
-		font-size: var(--pr-t-font-body-S-fontSize);
+	.timeline-step-title::after,
+	.timeline-step-title::before {
+		font-size: var(--pr-t-font-body-S-fontSize) !important;
 	}
 }
 

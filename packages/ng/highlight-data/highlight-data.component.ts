@@ -1,6 +1,23 @@
 import { booleanAttribute, ChangeDetectionStrategy, Component, computed, effect, inject, input, ViewEncapsulation } from '@angular/core';
 import { LuClass, PortalContent, PortalDirective } from '@lucca-front/ng/core';
 
+type IllustrationType =
+	| 'calculator'
+	| 'calendar'
+	| 'cleemy-card'
+	| 'coffee'
+	| 'headphone'
+	| 'mail'
+	| 'magnifying-glass'
+	/** @deprecated use 'magnifying-glass' instead */
+	| 'manifying-glass'
+	| 'medallon'
+	| 'piggy-bank'
+	| 'polaroid-female'
+	| 'polaroid-male'
+	| 'polaroids'
+	| string;
+
 @Component({
 	selector: 'lu-highlight-data',
 	templateUrl: './highlight-data.component.html',
@@ -53,9 +70,7 @@ export class HighlightDataComponent {
 	 * Main illustration
 	 * An URL can be apply for custom images
 	 */
-	readonly illustration = input<
-		'calculator' | 'calendar' | 'cleemy-card' | 'coffee' | 'headphone' | 'mail' | 'manifying-glass' | 'medallon' | 'piggy-bank' | 'polaroid-female' | 'polaroid-male' | 'polaroids' | string
-	>();
+	readonly illustration = input<IllustrationType>();
 
 	/**
 	 * Which size should the highlight data be? XS to medium

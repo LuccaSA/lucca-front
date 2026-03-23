@@ -1,13 +1,15 @@
 import { AsyncPipe } from '@angular/common';
+import { LOCALE_ID } from '@angular/core';
 import { FormsModule, ReactiveFormsModule } from '@angular/forms';
 import { BrowserAnimationsModule } from '@angular/platform-browser/animations';
 import { FormFieldComponent } from '@lucca-front/ng/form-field';
 import { TextInputComponent } from '@lucca-front/ng/forms';
 import { applicationConfig, Meta, moduleMetadata, StoryObj } from '@storybook/angular';
 import { HiddenArgType } from 'stories/helpers/common-arg-types';
-import { cleanupTemplate, generateInputs } from 'stories/helpers/stories';
+import { cleanupTemplate, createTestStory, generateInputs } from 'stories/helpers/stories';
 import { StoryModelDisplayComponent } from 'stories/helpers/story-model-display.component';
-import { LOCALE_ID } from '@angular/core';
+import { waitForAngular } from 'stories/helpers/test';
+import { expect, userEvent, within } from 'storybook/test';
 
 export default {
 	title: 'Documentation/Forms/Fields/TextField/Angular',
@@ -235,6 +237,9 @@ export const PasswordVisiblity: StoryObj<
 	render: (args, { argTypes }) => {
 		const { counter, label, hiddenLabel, tooltip, inlineMessage, inlineMessageState, size, ...inputArgs } = args;
 		return {
+			props: {
+				example: '',
+			},
 			template: `<lu-form-field ${generateInputs(
 				{
 					label,
@@ -281,7 +286,7 @@ export const WithPrefixAndSuffix: StoryObj<
 	} & FormFieldComponent
 > = {
 	render: (args, { argTypes }) => {
-		const { counter, label, hiddenLabel, tooltip, inlineMessage, inlineMessageState, size, prefix, suffix, ...inputArgs } = args;
+		const { counter, label, hiddenLabel, tooltip, inlineMessage, inlineMessageState, size, prefix, suffix, presentation, ...inputArgs } = args;
 		return {
 			props: {
 				prefix: args.prefix,
@@ -296,6 +301,7 @@ export const WithPrefixAndSuffix: StoryObj<
 					inlineMessageState,
 					size,
 					counter,
+					presentation,
 				},
 				argTypes,
 			)}>
@@ -334,6 +340,7 @@ export const WithPrefixAndSuffix: StoryObj<
 		inlineMessage: 'Helper text',
 		inlineMessageState: 'default',
 		counter: 0,
+		presentation: false,
 	},
 };
 
@@ -377,3 +384,30 @@ export const AI: StoryObj<FormFieldComponent & TextInputComponent> = {
 		iconAItooltip: 'Donnée remplie automatiquement',
 	},
 };
+
+export const BasicPasswordVisibilityTEST = createTestStory(PasswordVisiblity, async (context) => {
+	const canvas = within(context.canvasElement);
+	await waitForAngular();
+
+	const input = context.canvasElement.querySelector('input.textField-input-value');
+	const toggleButton = await canvas.findByRole('button', { name: /Afficher le mot de passe/i });
+
+	await expect(input).toHaveAttribute('type', 'password');
+	await expect(toggleButton).toHaveAttribute('aria-pressed', 'false');
+
+	await userEvent.click(input);
+	await userEvent.type(input, 'MonSuperMotDePasse123!');
+	await waitForAngular();
+
+	await userEvent.click(toggleButton);
+	await waitForAngular();
+	await expect(input).toHaveAttribute('type', 'text');
+	await expect(toggleButton).toHaveAttribute('aria-pressed', 'true');
+
+	await userEvent.click(toggleButton);
+	await waitForAngular();
+	await expect(input).toHaveAttribute('type', 'password');
+	await expect(toggleButton).toHaveAttribute('aria-pressed', 'false');
+
+	await expect(canvas.getByTestId('pr-ng-model')).toHaveTextContent('MonSuperMotDePasse123!');
+});

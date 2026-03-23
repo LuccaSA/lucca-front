@@ -1,6 +1,7 @@
 import { ActiveDescendantKeyManager } from '@angular/cdk/a11y';
 import { computed, DestroyRef, EventEmitter, inject, Injectable, Injector, Signal } from '@angular/core';
 import { takeUntilDestroyed, toObservable } from '@angular/core/rxjs-interop';
+import { isNotNil } from '@lucca-front/ng/core';
 import { asyncScheduler, debounceTime, filter, map, Observable, observeOn, take } from 'rxjs';
 import { LuOptionComparer } from '../select.model';
 import { CoreSelectPanelElement } from './selectable-item';
@@ -72,7 +73,12 @@ export class CoreSelectKeyManager<T> {
 		this.#queryList$
 			.pipe(
 				observeOn(asyncScheduler),
-				map((options) => options.findIndex((el) => optionComparer(el.option(), option))),
+				map((options) =>
+					options.findIndex((el) => {
+						const elOption = el.option();
+						return isNotNil(elOption) && optionComparer(elOption, option);
+					}),
+				),
 				filter((index) => index !== -1),
 				take(1),
 				takeUntilDestroyed(this.#destroyRef),

@@ -1,6 +1,7 @@
+import { BUTTON_SIZE, BUTTON_STATE, BUTTON_TYPE, ButtonComponent } from '@lucca-front/ng/button';
+import { PALETTE } from '@lucca/prisme/core';
 import { Meta, StoryObj } from '@storybook/angular';
-import { ButtonComponent } from '@lucca-front/ng/button';
-import { createTestStory, generateInputs } from 'stories/helpers/stories';
+import { createTestStory, generateInputs, setStoryOptions } from 'stories/helpers/stories';
 import { expect, within } from 'storybook/test';
 
 export default {
@@ -9,7 +10,7 @@ export default {
 	render: ({ luButton, ...inputs }, { argTypes }) => {
 		const disclosureIcon = '<lu-icon icon="arrowChevronBottom" />';
 		return {
-			template: `<button type="button" prButton${luButton !== '' ? `="${luButton}"` : ''}${generateInputs(inputs, argTypes)}
+			template: `<button type="button" luButton${luButton !== '' ? `="${luButton}"` : ''}${generateInputs(inputs, argTypes)}
 >Button</button>`,
 			styles: [luButton === 'AI-invert' || luButton === 'ghost-invert' ? ':host { background-color: var(--palettes-neutral-900); outline: 1rem solid var(--palettes-neutral-900);  }' : ''],
 		};
@@ -19,7 +20,7 @@ export default {
 export const Basic: StoryObj<ButtonComponent> = {
 	argTypes: {
 		luButton: {
-			options: ['', 'outlined', 'ghost', 'ghost-invert', 'AI', 'AI-invert'],
+			options: setStoryOptions(BUTTON_TYPE),
 			control: {
 				type: 'select',
 			},
@@ -31,13 +32,14 @@ export const Basic: StoryObj<ButtonComponent> = {
 		palette: {
 			if: { arg: 'luButton', neq: 'AI' },
 			description: 'Applique une palette de couleurs au bouton.',
-			options: ['', 'product', 'neutral', 'success', 'warning', 'critical'],
+			options: setStoryOptions(PALETTE),
 			control: {
 				type: 'select',
 			},
 		},
 		state: {
 			description: "Modifie l'état du bouton.",
+			options: setStoryOptions(BUTTON_STATE),
 			control: {
 				type: 'select',
 			},
@@ -54,6 +56,7 @@ export const Basic: StoryObj<ButtonComponent> = {
 		},
 		size: {
 			description: 'Modifie la taille du composant.',
+			options: setStoryOptions(BUTTON_SIZE),
 			control: {
 				type: 'select',
 			},

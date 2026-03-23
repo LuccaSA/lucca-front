@@ -59,31 +59,31 @@
 	</div>
 </div>
 <ng-container *luPresentationDisplayDefault>
-	@if (prefix(); as prefix) {
-		<ng-container
-			*ngTemplateOutlet="
-				addon;
-				context: {
-					type: 'prefix',
-					addon: prefix,
-				}
-			"
-		/>
-	}
 	@if (formattedValue()) {
+		@if (prefixAddon(); as prefix) {
+			<ng-container
+				*ngTemplateOutlet="
+					addon;
+					context: {
+						type: 'prefix',
+						addon: prefix,
+					}
+				"
+			/>
+		}
 		{{ formattedValue() }}
+		@if (suffixAddon(); as suffix) {
+			<ng-container
+				*ngTemplateOutlet="
+					addon;
+					context: {
+						type: 'suffix',
+						addon: suffix,
+					}
+				"
+			/>
+		}
 	} @else {
-		<div aria-hidden="true" data-content-before="–"></div>
-	}
-	@if (suffix()) {
-		<ng-container
-			*ngTemplateOutlet="
-				addon;
-				context: {
-					type: 'suffix',
-					addon: suffix(),
-				}
-			"
-		/>
+		<span aria-hidden="true" data-content-before="–"></span>
 	}
 </ng-container>

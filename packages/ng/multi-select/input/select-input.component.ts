@@ -27,7 +27,7 @@ import { ClearComponent } from '@lucca-front/ng/clear';
 import { intlInputOptions } from '@lucca-front/ng/core';
 import { ALuSelectInputComponent, LU_CORE_SELECT_TRANSLATIONS, LuOptionContext, provideLuSelectLabelsAndIds, ɵLuOptionOutletDirective } from '@lucca-front/ng/core-select';
 import { FILTER_PILL_INPUT_COMPONENT, FilterPillDisplayerDirective, FilterPillLabelDirective } from '@lucca-front/ng/filter-pills';
-import { PresentationDisplayDirective } from '@lucca-front/ng/form-field';
+import { PresentationDisplayDirective, ɵPresentationDisplayDefaultDirective } from '@lucca-front/ng/form-field';
 import { LuTooltipModule } from '@lucca-front/ng/tooltip';
 import { Subject } from 'rxjs';
 import { LuMultiSelectDefaultDisplayerComponent } from '../displayer';
@@ -40,7 +40,17 @@ import { LuMultiSelectPanelRef } from './panel.model';
 	templateUrl: './select-input.component.html',
 	styleUrl: './select-input.component.scss',
 	changeDetection: ChangeDetectionStrategy.OnPush,
-	imports: [AsyncPipe, LuTooltipModule, ɵLuOptionOutletDirective, FilterPillDisplayerDirective, FilterPillLabelDirective, ClearComponent, PresentationDisplayDirective, CommonModule],
+	imports: [
+		AsyncPipe,
+		LuTooltipModule,
+		ɵLuOptionOutletDirective,
+		FilterPillDisplayerDirective,
+		FilterPillLabelDirective,
+		ClearComponent,
+		PresentationDisplayDirective,
+		CommonModule,
+		ɵPresentationDisplayDefaultDirective,
+	],
 	providers: [
 		{
 			provide: NG_VALUE_ACCESSOR,

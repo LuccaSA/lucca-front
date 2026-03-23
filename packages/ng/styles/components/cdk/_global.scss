@@ -3,7 +3,7 @@
 
 @mixin stacked($level) {
 	$selector: '';
-	$string: '~ .cdk-global-overlay-wrapper';
+	$string: '~ .cdk-global-overlay-wrapper.mod-stacked';
 
 	@for $i from 1 through $level {
 		$selector: $selector + $string;
@@ -11,9 +11,7 @@
 
 	&:has(#{$selector}) {
 		.dialog {
-			&.mod-stacked {
-				--components-dialog-level: #{$level};
-			}
+			--components-dialog-level: #{$level};
 		}
 	}
 }
@@ -28,8 +26,10 @@
 	position: absolute;
 	z-index: 1000;
 
-	@for $i from 1 through 3 {
-		@include stacked($i);
+	&.mod-stacked {
+		@for $i from 1 through 3 {
+			@include stacked($i);
+		}
 	}
 }
 

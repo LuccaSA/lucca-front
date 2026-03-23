@@ -46,7 +46,7 @@ export class CssMapper {
 			if (path.endsWith('.html')) {
 				migrateFile(path, entry, this.tree, (content) => this.migrateHTMLFile(content));
 			}
-			if (path.endsWith('.ts')) {
+			if ( path.endsWith('.ts') && !path.endsWith('.d.ts')) {
 				migrateFile(path, entry, this.tree, (content) => this.migrateTsFile(path, content));
 			}
 		});

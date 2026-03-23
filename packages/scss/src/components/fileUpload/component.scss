@@ -1,4 +1,5 @@
 @use '@lucca-front/scss/src/commons/utils/namespace';
+@use '@lucca-front/scss/src/commons/utils/color';
 
 @use '@lucca-front/scss/src/commons/utils/a11y';
 @use '@lucca-front/scss/src/components/button/exports' as button;
@@ -89,6 +90,11 @@
 		.fileUpload-button.button {
 			visibility: var(--components-fileUpload-button-visibility);
 			display: var(--components-fileUpload-button-display);
+
+			&:not(.mod-filled) {
+				@include button.outlined;
+				@include color.palette('product');
+			}
 		}
 
 		.fileUpload-instruction-filename {

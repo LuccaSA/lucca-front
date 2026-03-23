@@ -1,10 +1,11 @@
 import { booleanAttribute, ChangeDetectionStrategy, Component, computed, contentChild, ElementRef, inject, input, signal, ViewEncapsulation } from '@angular/core';
 import { Palette, PrClass, ɵeffectWithDeps } from '@lucca/prisme/core';
 import { IconComponent } from '@lucca/prisme/icon';
+import { ButtonSize, ButtonState, ButtonType } from './button-type';
 
 @Component({
 	// eslint-disable-next-line @angular-eslint/component-selector
-	selector: 'button[prButton], a[prButton], span[prButton], button[luButton], a[luButton], span[luButton]',
+	selector: 'button[luButton], a[luButton], span[luButton], button[prButton], a[prButton], span[prButton]',
 	providers: [PrClass],
 	template: '<ng-content />',
 	styleUrl: './button.component.scss',
@@ -26,7 +27,7 @@ export class ButtonComponent {
 	/**
 	 * Change the size of the Button
 	 */
-	readonly size = input<'M' | 'S' | 'XS'>();
+	readonly size = input<ButtonSize>();
 
 	/**
 	 * Apply block display
@@ -56,15 +57,15 @@ export class ButtonComponent {
 	/**
 	 * Modifies the state of the Button
 	 */
-	readonly state = input<'default' | 'loading' | 'error' | 'success'>('default');
+	readonly state = input<ButtonState>('default');
 
-	readonly luButton = input<'' | 'outlined' | 'AI' | 'AI-invert' | 'ghost' | 'ghost-invert' | 'text' | 'text-invert'>('');
+	readonly luButton = input<ButtonType>('');
 
 	/**
 	 * '' is the default value when you just set the `prButton` directive without a value attached to it.
 	 * We just make this explicit here.
 	 */
-	readonly prButton = input<'' | 'outlined' | 'AI' | 'ghost' | 'ghost-invert' | 'text' | 'text-invert'>('');
+	readonly prButton = input<ButtonType>('');
 
 	readonly buttonType = computed(() => this.luButton() || this.prButton());
 

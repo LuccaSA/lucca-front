@@ -16,7 +16,7 @@ import {
 import { PaginationComponent } from '@lucca-front/ng/pagination';
 import { LuTooltipModule } from '@lucca-front/ng/tooltip';
 import { LuUserDisplayModule } from '@lucca-front/ng/user';
-import { LuUserPopoverComponent, LuUserPopoverDirective, provideLuUserPopover } from '@lucca-front/ng/user-popover';
+import { LuUserPopoverComponent, LuUserPopoverDirective } from '@lucca-front/ng/user-popover';
 import { applicationConfig, Meta, moduleMetadata, StoryObj } from '@storybook/angular';
 import { HiddenArgType } from 'stories/helpers/common-arg-types';
 
@@ -56,7 +56,7 @@ export default {
 			],
 		}),
 		applicationConfig({
-			providers: [provideAnimations(), provideLuUserPopover(), provideHttpClient()],
+			providers: [provideAnimations(), provideHttpClient()],
 		}),
 	],
 } as Meta;

@@ -231,6 +231,7 @@ export const Multi = {
 		fileMaxSize: 5000000,
 		illustration: 'paper',
 		structure: false,
+		buttonFilled: false,
 	},
 };
 
@@ -259,5 +260,6 @@ export const Single = {
 		illustration: 'invoice',
 		displayFileName: false,
 		structure: false,
+		buttonFilled: false,
 	},
 };

@@ -1,0 +1,275 @@
+/* stylelint-disable @stylistic/selector-max-empty-lines */
+
+.pr-u-highlightPrisme {
+	// HTML COMPONENTS OUTSIDE
+
+	// Actions
+	.button,
+	.buttonGroup,
+	.link,
+
+	// Icons
+	.bubbleIllustration,
+	.bubbleIcon,
+	.softwareIcon,
+	.lucca-icon,
+
+	// Texts
+	.code,
+	.comment,
+	.newBadge,
+	.numericBadge,
+	.plgPush,
+	.readMore,
+	.statusBadge,
+	.tag,
+	.textFlow,
+	.mobilePush,
+	.presentation,
+
+	// Lists
+	.chip,
+	.indexTable,
+	.sortableList,
+	.listing,
+
+	// Forms
+	.calendar,
+	.color,
+	.textField,
+	.checkboxField,
+	.switchField,
+	.radioField,
+	.clear,
+	.dateField,
+	.dateRangeField,
+	.timepicker,
+	.form,
+	.fieldset,
+	.fileUpload,
+	.fileEntry,
+	.fileToolbar,
+	.formLabel,
+	.inlineMessage,
+	.inputFramed,
+	.richText,
+	.simpleSelect,
+	.multiSelect,
+	.listboxOption,
+
+	// Feedback
+	.callout,
+	.calloutDisclosure,
+	.calloutPopover,
+	.calloutPopover-overlay,
+	.calloutFeedbackList,
+	.errorPage,
+	.gauge,
+	.toast,
+
+	// Navigation
+	.breadcrumbs,
+	.mobileNavigation,
+	.navside,
+	.pagination,
+	.segmentedControl,
+	.skipLinks,
+	.horizontalNavigation,
+	.timeline,
+	.tableOfContent,
+	.verticalNavigation,
+
+	// Overlays
+	.popover,
+	.dropdown,
+	.dialog,
+	.tooltip,
+
+	// Structure
+	.box,
+	.card,
+	.container,
+	.divider,
+	.emptyState,
+	.fancyBox,
+	.filterPill,
+	.filterBar,
+	.footer,
+	.grid,
+	.highlightData,
+	.mobileHeader,
+	.pageHeader,
+	.resourceCard,
+	.appLayout,
+	.mainLayout,
+
+	// Users
+	.avatar,
+	.userPopover,
+	.userTile,
+
+	// Loaders
+	.loading,
+	.progress,
+	.skeleton,
+
+	// Misc & oldies
+	.scrollBox,
+	.suggestion,
+	.section,
+	.collapse,
+	.titleSection,
+	.contentSection {
+		outline: 2px dashed springgreen;
+		outline-offset: 3px;
+	}
+
+	// HTML COMPONENTS INSIDE
+
+	.dataTable {
+		outline: 2px dashed springgreen;
+		outline-offset: -3px;
+	}
+
+	// ANGULAR COMPONENTS
+
+	[luButton],
+	[luLink],
+
+	// Icons
+	lu-bubble-illustration,
+	lu-bubble-icon,
+	lu-software-icon .softwareIcon,
+	lu-icon .lucca-icon,
+
+	// Texts
+	lu-code .code,
+	lu-comment,
+	lu-new-badge,
+	lu-numeric-badge,
+	lu-plg-push,
+	lu-read-more,
+	lu-status-badge,
+	lu-tag .tag,
+	lu-text-flow,
+	lu-mobile-push,
+	lu-data-presentation,
+
+	// Lists
+	lu-chip,
+	[luChip],
+	lu-data-table .dataTable,
+	lu-index-table,
+	lu-sortable-list .sortableList,
+	lu-listing-item,
+
+	// Forms
+	lu-form-field,
+	lu-color-input,
+	lu-text-input,
+	lu-checkbox-input,
+	lu-switch-input,
+	lu-radio-input,
+	lu-clear,
+	lu-date-input,
+	lu-date-range-input,
+	lu-time-picker,
+	lu-duration-picker,
+	[luForm],
+	lu-fieldset,
+	lu-single-file-upload,
+	lu-multi-file-upload,
+	lu-file-entry,
+	lu-inline-message,
+	lu-input-framed,
+	lu-rich-text-input,
+	lu-simple-select,
+	lu-multi-select,
+	lu-listbox-option,
+
+	// Feedback
+	lu-callout .callout,
+	lu-callout-disclosure,
+	lu-callout-popover,
+	lu-callout-feedback-list,
+	lu-gauge .gauge,
+	lu-toasts,
+
+	// Navigation
+	lu-breadcrumbs,
+	lu-mobile-navigation,
+	lu-pagination,
+	lu-segmented-control,
+	lu-skip-links,
+	lu-horizontal-navigation,
+	lu-table-of-content,
+	lu-vertical-navigation,
+
+	// Overlays
+	lu-popover-content,
+	lu-dropdown-item,
+	lu-dialog,
+	lu-dialog-header,
+	lu-dialog-content,
+	lu-dialog-footer,
+	lu-tooltip-panel,
+
+	// Structure
+	lu-box,
+	lu-container,
+	lu-divider,
+	lu-empty-state-page,
+	lu-empty-state-section,
+	lu-fancy-box,
+	lu-filter-pill,
+	lu-filter-bar,
+	lu-footer,
+	lu-grid,
+	lu-highlight-data,
+	lu-mobile-header,
+	lu-page-header,
+	lu-resource-card,
+	lu-app-layout,
+	lu-main-layout,
+
+	// Users
+	lu-user-picture,
+	lu-user-tile,
+
+	// Loaders
+	lu-loading,
+	lu-progress-bar .progress,
+	lu-skeleton-button,
+	lu-skeleton-field,
+	lu-skeleton-header,
+	lu-skeleton-index-table,
+	lu-skeleton-data-table,
+
+	// Misc & oldies
+	lu-scroll-box {
+		outline: 2px solid springgreen !important;
+		outline-offset: 3px;
+	}
+
+	// DEPRECATED COMPONENTS
+
+	.checkbox,
+	.switch,
+	.radio,
+	.file,
+	.list,
+	.label,
+	.radioButtons,
+	.textfield,
+	.table,
+	.main,
+	.filters,
+	.notchBox,
+	.layout,
+	.header,
+	.filterBarDeprecated,
+	lu-skeleton-table {
+		outline: 2px solid red;
+		outline-offset: 3px;
+	}
+}
