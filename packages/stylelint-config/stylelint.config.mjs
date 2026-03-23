@@ -112,6 +112,7 @@ export default {
 				message: (keyframeName) => `Expected "${keyframeName}" to match pattern foo(-bar(Baz)*)*`,
 			},
 		],
+		'nesting-selector-no-missing-scoping-root': null,
 		'number-max-precision': 5,
 		'property-disallowed-list': [
 			getDisallowedObjects(LFDeprecatedProperties),

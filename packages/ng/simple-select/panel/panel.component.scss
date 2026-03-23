@@ -37,6 +37,7 @@
 		@include button.block;
 		@include button.ghost;
 
+		/* stylelint-disable-next-line block-no-redundant-nested-style-rules */
 		& {
 			justify-content: left;
 

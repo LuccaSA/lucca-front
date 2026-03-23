@@ -5,7 +5,7 @@
 // Rules can also be applied per directory: https://stylelint.io/user-guide/configure/#overrides. VSCode does not take overrides into account.
 
 module.exports = {
-	extends: ['./packages/stylelint-config'],
+	extends: ['./packages/stylelint-config/stylelint.config.mjs'],
 	ignoreFiles: ['**/tests/**'],
 	overrides: [
 		{
@@ -13,6 +13,12 @@ module.exports = {
 			files: ['packages/ng/**/*.scss', '**/component.scss', '**/responsive.scss', '**/mods.scss', '**/states.scss', '**/vars.scss'],
 			rules: {
 				'no-empty-source': null,
+				'no-invalid-position-declaration': [
+					true,
+					{
+						ignoreAtRules: ['layer'],
+					},
+				],
 			},
 		},
 	],

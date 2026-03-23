@@ -41,6 +41,7 @@
 @mixin loadingXS {
 	@include loading.spinner(var(--pr-t-font-body-XS-lineHeight));
 
+	/* stylelint-disable-next-line block-no-redundant-nested-style-rules */
 	& {
 		--commons-loading-borderWidth: 2px;
 	}
