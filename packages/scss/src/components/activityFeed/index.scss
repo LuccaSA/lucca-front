@@ -16,26 +16,20 @@
 	}
 }
 
-.activityFeed-step-avatar {
-	@layer mods {
+@layer mods {
+	.activityFeed-step-avatar {
 		@include avatar.S;
 	}
-}
 
-.activityFeed-step-state.mod-success {
-	@layer mods {
+	.activityFeed-step-state.mod-success {
 		@include success;
 	}
-}
 
-.activityFeed-step-state.mod-critical {
-	@layer mods {
+	.activityFeed-step-state.mod-critical {
 		@include critical;
 	}
-}
 
-.activityFeed-content-update {
-	@layer mods {
+	.activityFeed-content-update {
 		&:has(.activityFeed-content-update-before:empty, .activityFeed-content-update-after:empty) {
 			@include single;
 		}
@@ -44,6 +38,12 @@
 			&:has(.activityFeed-content-update-after:empty) {
 				@include empty;
 			}
+		}
+	}
+
+	.activityFeed-step {
+		&:not(:has(.activityFeed-step-description-time)) {
+			@include withoutDate;
 		}
 	}
 }

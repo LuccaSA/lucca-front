@@ -35,6 +35,7 @@
 
 		.activityFeed-step-state {
 			inline-size: var(--pr-t-spacings-400);
+			block-size: var(--pr-t-spacings-400);
 			border-radius: var(--pr-t-border-radius-full);
 			position: relative;
 			background-color: var(--palettes-100, var(--palettes-neutral-100));
@@ -52,6 +53,10 @@
 
 		.activityFeed-step-description {
 			flex-grow: 1;
+			align-self: var(--components-activityFeed-step-description-alignSelf);
+			font-style: var(--components-activityFeed-step-description-fontStyle);
+			color: var(--components-activityFeed-step-description-color);
+			line-height: var(--components-activityFeed-step-description-lineHeight);
 		}
 
 		.activityFeed-step-description-time {

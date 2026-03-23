@@ -2,20 +2,23 @@
 	<div class="activityFeed-step-avatar">
 		<lu-user-picture size="S" [user]="user()" />
 	</div>
-} @else {
-	<div class="activityFeed-step-state"></div>
+}
+@if (status()) {
+	<div class="activityFeed-step-state" [class.mod-critical]="status() === 'critical'" [class.mod-success]="status() === 'success'"></div>
 }
 <div class="activityFeed-step-description">
 	<p class="activityFeed-step-description-content">{{ label() }}</p>
-	<time class="comment-infos-date" [attr.datetime]="date().toISOString()" class="activityFeed-step-description-time">
-		@if (datePipeFormat()) {
-			{{ date() | date: datePipeFormat() }}
-		} @else if (dateDisplay()) {
-			<ng-container *luPortal="dateDisplay()" />
-		} @else {
-			{{ date() | date: "fullDate" }} {{ intl().at }} {{ date() | date: "shortTime" }}
-		}
-	</time>
+	@if (date()) {
+		<time class="comment-infos-date" [attr.datetime]="date().toISOString()" class="activityFeed-step-description-time">
+			@if (datePipeFormat()) {
+				{{ date() | date: datePipeFormat() }}
+			} @else if (dateDisplay()) {
+				<ng-container *luPortal="dateDisplay()" />
+			} @else {
+				{{ date() | date: "fullDate" }} {{ intl().at }} {{ date() | date: "shortTime" }}
+			}
+		</time>
+	}
 	<div class="activityFeed-content">
 		<ng-content />
 	</div>

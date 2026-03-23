@@ -31,6 +31,8 @@ export class ActivityFeedStepComponent {
 
 	readonly user = input<ILuUser | null>(null);
 
+	readonly status = input<'success' | 'critical' | null>(null);
+
 	readonly date = input<Date | null>(null);
 
 	/**
@@ -40,7 +42,10 @@ export class ActivityFeedStepComponent {
 	 */
 	readonly datePipeFormat = input<string>();
 
-	protected readonly dateDisplay = computed<string>(() => {
+	protected readonly dateDisplay = computed<string | null>(() => {
+		if (!this.date()) {
+			return null;
+		}
 		const formatted = this.#intlDateTimeFormat.format(this.date());
 		const parts = formatted.split(', ');
 		return `${parts[0].charAt(0).toUpperCase() + parts[0].slice(1)} ${this.intl().at} ${parts[1]}`;
