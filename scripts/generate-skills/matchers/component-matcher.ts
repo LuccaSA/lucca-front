@@ -18,12 +18,12 @@ export function loadComponentMap(): ComponentMap {
 }
 
 function saveComponentMap(map: ComponentMap): void {
-	// Trier les clés alphabétiquement pour un diff lisible
+	// Sort keys alphabetically for a readable diff
 	const sorted = Object.fromEntries(Object.entries(map).sort(([a], [b]) => a.localeCompare(b)));
 	fs.writeFileSync(MAP_PATH, JSON.stringify(sorted, null, 2) + '\n', 'utf-8');
 }
 
-// ─── Matching principal ───────────────────────────────────────────────────────
+// ─── Main matching ──────────────────────────────────────────────────────────────
 
 export function matchComponents(figmaGroups: Map<string, FigmaGroup>, storybookGroups: Map<string, StorybookGroup>, componentMap: ComponentMap): MatchResult {
 	const matched: MatchedEntry[] = [];
@@ -31,7 +31,7 @@ export function matchComponents(figmaGroups: Map<string, FigmaGroup>, storybookG
 
 	for (const [figmaKey, figmaData] of figmaGroups) {
 		if (!(figmaKey in componentMap)) {
-			// Nouveau composant Figma sans entrée dans la map
+			// New Figma component with no entry in the map
 			figmaOnly.push({ slug: figmaKey, figma: figmaData, reason: 'new' });
 			continue;
 		}
@@ -39,13 +39,13 @@ export function matchComponents(figmaGroups: Map<string, FigmaGroup>, storybookG
 		const sbValue = componentMap[figmaKey];
 
 		if (!sbValue) {
-			// Intentionnellement non mappé (null dans la map)
+			// Intentionally unmapped (null in the map)
 			figmaOnly.push({ slug: figmaKey, figma: figmaData, reason: 'unmapped' });
 			continue;
 		}
 
-		// Supporte les deux formats : chaîne "button" ou objet { slug: "button", storybook: "..." }
-		// et les tableaux pour le cas 1:n
+		// Supports both formats: string "button" or object { slug: "button", storybook: "..." }
+		// and arrays for the 1-to-n case
 		const normalizeEntry = (v: string | ComponentMapEntry): string | null => (typeof v === 'object' && v !== null && !Array.isArray(v) ? v.slug : (v as string));
 		const rawSlugs = Array.isArray(sbValue) ? sbValue : [sbValue as string | ComponentMapEntry];
 		const slugs = rawSlugs.map(normalizeEntry).filter(Boolean) as string[];
@@ -62,14 +62,14 @@ export function matchComponents(figmaGroups: Map<string, FigmaGroup>, storybookG
 			storybook: storybookGroups.get(primarySlug),
 		};
 
-		// Groupes Storybook supplémentaires (cas 1:n)
+		// Additional Storybook groups (1-to-n case)
 		const additional = slugs
 			.slice(1)
 			.filter((s) => storybookGroups.has(s))
 			.map((s) => storybookGroups.get(s)!);
 		if (additional.length > 0) entry.additionalStorybook = additional;
 
-		// Stories connexes par sous-chaîne
+		// Related stories by substring match
 		const related: (StorybookGroup & { sbSlug: string })[] = [];
 		for (const [sbKey, sbData] of storybookGroups) {
 			if (slugs.includes(sbKey)) continue;
@@ -82,7 +82,7 @@ export function matchComponents(figmaGroups: Map<string, FigmaGroup>, storybookG
 		matched.push(entry);
 	}
 
-	// Stories Storybook sans composant Figma
+	// Storybook stories with no matching Figma component
 	const usedSlugs = new Set(matched.map((m) => m.slug));
 	const storybookOnly: StorybookOnlyEntry[] = [];
 	for (const [sbKey, sbData] of storybookGroups) {
@@ -94,7 +94,7 @@ export function matchComponents(figmaGroups: Map<string, FigmaGroup>, storybookG
 	return { matched, figmaOnly, storybookOnly };
 }
 
-// ─── Bootstrap (--init-map) ───────────────────────────────────────────────────
+// ─── Bootstrap (--init-map) ─────────────────────────────────────────────────────
 
 function levenshtein(a: string, b: string): number {
 	const m = a.length;
@@ -162,9 +162,9 @@ function suggestStorybookSlug(figmaKey: string, storybookGroups: Map<string, Sto
 function buildMapEntry(slug: string | null, storybookGroups: Map<string, StorybookGroup>): ComponentMapValue {
 	if (!slug) return null;
 	const group = storybookGroups.get(slug);
-	if (!group) return { slug }; // slug inconnu, on stocke quand même
-	// Titre exact tiré de l'entrée docs (ex: "Documentation/Actions/Button")
-	// On supprime le dernier segment (/Button Docs) pour garder le préfixe commun
+	if (!group) return { slug }; // unknown slug, store it anyway
+	// Exact title from the docs entry (e.g. "Documentation/Actions/Button")
+	// Strip the last segment (/Button Docs) to keep the common prefix
 	const docsTitle = group.docsEntry?.title;
 	const storybook = docsTitle ? docsTitle.replace(/\/[^/]+$/, '') : `${group.category}/${group.storybookName}`;
 	return { slug, storybook };
@@ -176,21 +176,21 @@ export function refreshMap(figmaGroups: Map<string, FigmaGroup>, storybookGroups
 	let added = 0;
 	let removed = 0;
 
-	// Supprimer les clés qui n'existent plus dans Figma
+	// Remove keys no longer present in Figma
 	for (const key of Object.keys(map)) {
 		if (!currentKeys.has(key)) {
 			delete map[key];
-			console.log(`  🗑  "${key}" supprimé (n'existe plus dans Figma)`);
+			console.log(`  🗑  "${key}" removed (no longer in Figma)`);
 			removed++;
 		}
 	}
 
-	// Ajouter les nouvelles clés
+	// Add new keys
 	for (const [figmaKey] of figmaGroups) {
 		if (figmaKey in map) continue;
 		const slug = suggestStorybookSlug(figmaKey, storybookGroups);
 		map[figmaKey] = buildMapEntry(slug, storybookGroups);
-		const label = slug ? `"${figmaKey}" → "${slug}"` : `"${figmaKey}" → null (à mapper manuellement)`;
+		const label = slug ? `"${figmaKey}" → "${slug}"` : `"${figmaKey}" → null (must be mapped manually)`;
 		console.log(`  ➕ ${label}`);
 		added++;
 	}

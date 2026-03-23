@@ -3,9 +3,9 @@ import path from 'path';
 import { MatchedEntry } from '../types';
 
 /**
- * Construit le prompt AI pour générer le SKILL.md d'un composant.
- * Inclut : métadonnées Figma, URLs Storybook, code source des stories,
- * et guidelines Zeroheight.
+ * Builds the AI prompt to generate the SKILL.md for a component.
+ * Includes: Figma metadata, Storybook URLs, story source code,
+ * and Zeroheight guidelines.
  */
 
 const WORKSPACE_ROOT = path.join(__dirname, '..', '..', '..');
@@ -139,10 +139,10 @@ export function buildPrompt({ matched, zeroheightData }: { matched: MatchedEntry
 		.join('\n');
 	const categoryLabel = storybook?.category ? (CATEGORY_LABELS[storybook.category] ?? storybook.category) : '';
 
-	// Code sources des stories
+	// Story source code
 	const codeExamples = readStoryExamples(storybook ?? null);
 
-	// Stories connexes (sous-composants, variantes liées)
+	// Related stories (sub-components, related variants)
 	let relatedSection = '';
 	if (matched.relatedStorybook && matched.relatedStorybook.length > 0) {
 		const relatedLinks: string[] = [];
@@ -197,8 +197,8 @@ Le champ \`name\` dans le frontmatter doit être exactement \`${slug}\`.
 }
 
 /**
- * Lit le code source des stories Angular pour les inclure comme exemples.
- * Limite à ~6000 caractères par fichier pour ne pas saturer le contexte.
+ * Reads Angular story source files to include as code examples.
+ * Capped at ~6000 characters per file to avoid saturating the context window.
  */
 function readStoryExamples(storybook: import('../types').StorybookGroup | null): string | null {
 	if (!storybook?.stories?.length) return null;
@@ -211,19 +211,19 @@ function readStoryExamples(storybook: import('../types').StorybookGroup | null):
 	for (const story of angular) {
 		if (!story.importPath) continue;
 
-		// Sécurité : l'importPath vient d'un serveur externe (Storybook index.json).
-		// On rejette tout chemin contenant '..' pour éviter un path traversal.
+		// Security: importPath comes from an external server (Storybook index.json).
+		// Reject any path containing '..' to prevent path traversal.
 		const normalizedImport = story.importPath.replace(/^[./\\]+/, '');
-		if (/\.\./.test(normalizedImport)) {
-			console.warn(`  ⚠️  importPath suspect ignoré : ${story.importPath}`);
+		if (/\.\.*/.test(normalizedImport)) {
+			console.warn(`  ⚠️  Suspicious importPath skipped: ${story.importPath}`);
 			continue;
 		}
 
 		const filePath = path.resolve(resolvedRoot, normalizedImport);
 
-		// Vérification finale que le fichier résolu est bien dans le workspace
+		// Final check: ensure the resolved path is within the workspace
 		if (!filePath.startsWith(resolvedRoot + path.sep)) {
-			console.warn(`  ⚠️  Chemin hors workspace ignoré : ${filePath}`);
+			console.warn(`  ⚠️  Path outside workspace skipped: ${filePath}`);
 			continue;
 		}
 
@@ -266,7 +266,15 @@ function extractComponentSelectors(storybook: import('../types').StorybookGroup 
 			const importRe = /import\s*\{([^}]+)\}\s*from\s*'@lucca-front\/ng\/([^']+)'/g;
 			let m: RegExpExecArray | null;
 			while ((m = importRe.exec(content)) !== null) {
-				const classes = m[1].split(',').map((c) => c.trim().split(/\s+as\s+/)[0].trim()).filter(Boolean);
+				const classes = m[1]
+					.split(',')
+					.map((c) =>
+						c
+							.trim()
+							.split(/\s+as\s+/)[0]
+							.trim(),
+					)
+					.filter(Boolean);
 				const pkg = m[2];
 				for (const cls of classes) {
 					if (cls && !collectedClasses.has(cls)) {

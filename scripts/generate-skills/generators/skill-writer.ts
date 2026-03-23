@@ -4,28 +4,28 @@ import { IndexEntry, SkillIndex, WriteMeta, WriteResult } from '../types';
 
 function extractDescription(content: string): string {
 	const c = content.replace(/\r\n/g, '\n');
-	// Guillemets simples
+	// Single quotes
 	const m1 = c.match(/^---\n[\s\S]*?^description:\s*'([\s\S]*?)'\s*\n[\s\S]*?^---/m);
 	if (m1) return m1[1].trim();
-	// Guillemets doubles
+	// Double quotes
 	const m2 = c.match(/^---\n[\s\S]*?^description:\s*"([\s\S]*?)"\s*\n[\s\S]*?^---/m);
 	if (m2) return m2[1].trim();
-	// Sans guillemets
+	// No quotes
 	const m3 = c.match(/^---\n[\s\S]*?^description:\s*(.+?)\s*\n[\s\S]*?^---/m);
 	if (m3) return m3[1].trim();
 	return '';
 }
 
 /**
- * Supprime le wrapper ```markdown ... ``` éventuellement ajouté par le modèle IA,
- * puis le frontmatter YAML.
- * Tolère les fins de ligne LF et CRLF.
+ * Strips the ```markdown ... ``` wrapper optionally added by the AI model,
+ * then strips the YAML frontmatter.
+ * Handles both LF and CRLF line endings.
  */
 function stripFrontmatter(content: string): string {
 	let c = content.replace(/\r\n/g, '\n');
-	// Supprimer le wrapper ```markdown ... ``` si le modèle IA l'a ajouté
+	// Strip the ```markdown ... ``` wrapper if the AI model added it
 	c = c.replace(/^```(?:markdown)?\n([\s\S]*?)\n```\s*$/, '$1').trim();
-	// Supprimer le frontmatter YAML
+	// Strip YAML frontmatter
 	c = c.replace(/^---\n[\s\S]*?\n---\n?/, '').trimStart();
 	return c;
 }
@@ -46,16 +46,16 @@ function updateIndex(resolvedSkillsDir: string, slug: string, meta: IndexEntry):
 
 export function writeComponentResource(skillsDir: string, slug: string, content: string, meta: WriteMeta = {}, force = false): WriteResult {
 	if (!/^[a-z0-9][a-z0-9-]*$/.test(slug)) {
-		throw new Error(`Slug invalide "${slug}" — seuls les caractères [a-z0-9-] sont autorisés`);
+		throw new Error(`Invalid slug "${slug}" — only [a-z0-9-] characters are allowed`);
 	}
 
 	const resolvedSkillsDir = path.resolve(skillsDir);
 	const resourcesDir = path.resolve(resolvedSkillsDir, 'lucca-front', 'resources');
 	const filePath = path.resolve(resourcesDir, `${slug}.md`);
 
-	// Vérification anti-path-traversal
+	// Path-traversal guard
 	if (!filePath.startsWith(resourcesDir + path.sep)) {
-		throw new Error(`Path traversal détecté pour le slug "${slug}"`);
+		throw new Error(`Path traversal detected for slug "${slug}"`);
 	}
 
 	if (fs.existsSync(filePath) && !force) {
@@ -64,14 +64,14 @@ export function writeComponentResource(skillsDir: string, slug: string, content:
 
 	const isUpdate = fs.existsSync(filePath);
 
-	// Extraire la description avant de supprimer le frontmatter
+	// Extract description before stripping frontmatter
 	const description = extractDescription(content);
 	const body = stripFrontmatter(content);
 
 	fs.mkdirSync(resourcesDir, { recursive: true });
 	fs.writeFileSync(filePath, body, 'utf-8');
 
-	// Mettre à jour l'index des métadonnées
+	// Update the metadata index
 	updateIndex(resolvedSkillsDir, slug, {
 		description,
 		category: meta.category ?? '',

@@ -1,9 +1,9 @@
 import { Config, McpContext, McpTool } from '../types';
 
 /**
- * Client MCP HTTP pour Zeroheight (Prisme — Design System Lucca).
- * Protocole : JSON-RPC 2.0 over HTTP (MCP 2024-11-05).
- * Fallback SSE si le serveur répond avec text/event-stream.
+ * HTTP MCP client for Zeroheight (Prisme — Lucca Design System).
+ * Protocol: JSON-RPC 2.0 over HTTP (MCP 2024-11-05).
+ * SSE fallback if the server responds with text/event-stream.
  */
 
 let _sessionId: string | null = null;
@@ -11,7 +11,7 @@ let _availableTools: McpTool[] = [];
 
 export async function initializeMcp(config: Config): Promise<McpContext> {
 	const mcpUrl = config.zeroheight.mcpUrl;
-	console.log('🎨 Initialisation du MCP Zeroheight...');
+	console.log('🎨 Initializing Zeroheight MCP...');
 
 	// 1. initialize
 	const initRes = await mcpPost(mcpUrl, {
@@ -29,7 +29,7 @@ export async function initializeMcp(config: Config): Promise<McpContext> {
 		throw new Error(`MCP initialize error: ${JSON.stringify(initRes.error)}`);
 	}
 
-	// 2. notifications/initialized (notification — pas de réponse attendue)
+	// 2. notifications/initialized (fire-and-forget, no response expected)
 	await mcpPost(mcpUrl, {
 		jsonrpc: '2.0',
 		method: 'notifications/initialized',
@@ -46,7 +46,7 @@ export async function initializeMcp(config: Config): Promise<McpContext> {
 
 	_availableTools = toolsRes.result?.tools || [];
 	const toolNames = _availableTools.map((t) => t.name);
-	console.log(`  Outils MCP disponibles : ${toolNames.join(', ') || '(aucun)'}`);
+	console.log(`  Available MCP tools: ${toolNames.join(', ') || '(none)'}`);
 
 	return { mcpUrl, availableTools: toolNames };
 }
@@ -65,7 +65,7 @@ export async function fetchComponentGuidelines(mcpUrl: string, componentName: st
 					arguments: {
 						query: componentName,
 						component: componentName,
-						// Certains outils Zeroheight prennent un argument "page" ou "styleguide"
+						// Some Zeroheight tools accept a "page" or "styleguide" argument
 						page: componentName,
 					},
 				},
@@ -83,7 +83,7 @@ export async function fetchComponentGuidelines(mcpUrl: string, componentName: st
 				}
 			}
 		} catch {
-			// Cet outil n'a pas retourné de résultat pour ce composant — on continue
+			// This tool returned no result for this component — continue
 		}
 	}
 
@@ -106,7 +106,7 @@ async function mcpPost(url: string, body: object): Promise<any> {
 		body: JSON.stringify(body),
 	});
 
-	// Capture le session ID si présent
+	// Capture session ID if present
 	const newSessionId = res.headers.get('Mcp-Session-Id');
 	if (newSessionId) {
 		_sessionId = newSessionId;
@@ -114,7 +114,7 @@ async function mcpPost(url: string, body: object): Promise<any> {
 
 	const contentType = res.headers.get('content-type') || '';
 
-	// Réponse SSE (text/event-stream)
+	// SSE response (text/event-stream)
 	if (contentType.includes('text/event-stream')) {
 		const text = await res.text();
 		for (const line of text.split('\n')) {
@@ -122,14 +122,14 @@ async function mcpPost(url: string, body: object): Promise<any> {
 				try {
 					return JSON.parse(line.slice(6));
 				} catch {
-					// ligne SSE non-JSON, on continue
+					// non-JSON SSE line, continue
 				}
 			}
 		}
 		return {};
 	}
 
-	// notifications/initialized : le serveur peut répondre 202 sans corps
+	// notifications/initialized: the server may return 202 with no body
 	if (!res.ok && (body as any).method !== 'notifications/initialized') {
 		const text = await res.text();
 		throw new Error(`MCP HTTP ${res.status}: ${text}`);

@@ -1,17 +1,17 @@
 #!/usr/bin/env node
 
 /**
- * generate-skills — Génère les SKILL.md VS Code Copilot pour chaque composant
- * du design system Lucca Front à partir de Figma, Storybook et Zeroheight.
+ * generate-skills — Generates SKILL.md files for VS Code Copilot for each component
+ * of the Lucca Front design system, sourced from Figma, Storybook and Zeroheight.
  *
- * Usage :
+ * Usage:
  *   ts-node scripts/generate-skills/index.ts [options]
  *   npm run skills:generate [-- options]
  *
- * Options :
- *   --component <slug>   Génère uniquement le composant spécifié
- *   --force              Régénère même si le SKILL.md existe déjà
- *   --dry-run            Affiche le prompt sans écrire de fichiers
+ * Options:
+ *   --component <slug>   Generate only the specified component
+ *   --force              Regenerate even if the SKILL.md already exists
+ *   --dry-run            Print the prompt without writing any files
  */
 
 import fs from 'fs';
@@ -28,7 +28,7 @@ import { writeToc } from './generators/toc-writer';
 import { loadComponentMap, MAP_PATH, matchComponents, refreshMap, resetMap } from './matchers/component-matcher';
 import { MatchedEntry } from './types';
 
-// ─── Parsing des flags CLI ────────────────────────────────────────────────────
+// ─── CLI flag parsing ──────────────────────────────────────────────────────────
 
 const args = process.argv.slice(2);
 
@@ -43,7 +43,7 @@ const flags = {
 	})(),
 };
 
-// ─── Utilitaire de concurrence ────────────────────────────────────────────────
+// ─── Concurrency helper ────────────────────────────────────────────────────────
 
 async function withConcurrency<T, R>(items: T[], limit: number, fn: (item: T) => Promise<R>): Promise<R[]> {
 	const results: R[] = new Array(items.length);
@@ -62,51 +62,51 @@ async function withConcurrency<T, R>(items: T[], limit: number, fn: (item: T) =>
 	return results;
 }
 
-// ─── Entrée principale ────────────────────────────────────────────────────────
+// ─── Main entry point ──────────────────────────────────────────────────────────
 
 async function main(): Promise<void> {
-	console.log('🚀 Lucca Front — Génération des SKILL.md\n');
-	console.log(`   Flags : ${JSON.stringify(flags)}\n`);
+	console.log('🚀 Lucca Front — Generating SKILL.md files\n');
+	console.log(`   Flags: ${JSON.stringify(flags)}\n`);
 
-	// 1. Chargement de la configuration
+	// 1. Load configuration
 	const config = loadConfig();
 
-	// 2. Collecte des données (Figma + Storybook + MCP en parallèle)
-	console.log('📥 Collecte des données...\n');
+	// 2. Collect data (Figma + Storybook + MCP in parallel)
+	console.log('📥 Collecting data...\n');
 
 	const [figmaComponents, storybookGroups, mcpContext] = await Promise.all([
 		fetchFigmaComponents(config),
 		fetchStorybookIndex(config),
 		initializeMcp(config).catch((err: Error) => {
-			console.warn(`\n  ⚠️  MCP Zeroheight non disponible : ${err.message}`);
-			console.warn('     Les guidelines Prisme seront absentes des SKILL.md générés.\n');
+			console.warn(`\n  ⚠️  MCP Zeroheight unavailable: ${err.message}`);
+			console.warn('     Prisme guidelines will be missing from the generated SKILL.md files.\n');
 			return null;
 		}),
 	]);
 
-	// 3. Matching Figma ↔ Storybook
+	// 3. Match Figma ↔ Storybook
 	const figmaGroups = groupFigmaComponentsBySet(figmaComponents);
 
-	// Mode --init-map-force : réinitialise tout component-map.json avec les suggestions algorithmiques
+	// --init-map-force mode: reset component-map.json entirely with algorithmic suggestions
 	if (flags.initMapForce) {
-		console.log(`\n🗺️  Réinitialisation complète de component-map.json...\n`);
+		console.log(`\n🗺️  Resetting component-map.json...\n`);
 		const total = resetMap(figmaGroups, storybookGroups);
-		console.log(`\n  ✅ ${total} entrée(s) générées dans ${MAP_PATH}`);
-		console.log('     ⚠️  Toutes vos corrections manuelles ont été écrasées.');
-		console.log('     Éditez component-map.json pour corriger les suggestions et mapper les entrées null.');
+		console.log(`\n  ✅ ${total} entries generated in ${MAP_PATH}`);
+		console.log('     ⚠️  All manual corrections have been overwritten.');
+		console.log('     Edit component-map.json to fix suggestions and map null entries.');
 		return;
 	}
 
-	// Mode --refresh-map : ajoute les nouveaux + supprime les disparus, sans toucher aux autres
+	// --refresh-map mode: add new entries + remove deleted ones, without touching existing ones
 	if (flags.refreshMap) {
-		console.log(`\n🗺️  Rafraîchissement de component-map.json...\n`);
+		console.log(`\n🗺️  Refreshing component-map.json...\n`);
 		const { added, removed } = refreshMap(figmaGroups, storybookGroups);
 		if (added === 0 && removed === 0) {
-			console.log('  ✅ Aucun changement — la map est à jour.');
+			console.log('  ✅ No changes — map is up to date.');
 		} else {
-			if (added > 0) console.log(`\n  ✅ ${added} entrée(s) ajoutée(s)`);
-			if (removed > 0) console.log(`  🗑  ${removed} entrée(s) supprimée(s)`);
-			console.log(`\n  Fichier mis à jour : ${MAP_PATH}`);
+			if (added > 0) console.log(`\n  ✅ ${added} entr${added > 1 ? 'ies' : 'y'} added`);
+			if (removed > 0) console.log(`  🗑  ${removed} entr${removed > 1 ? 'ies' : 'y'} removed`);
+			console.log(`\n  File updated: ${MAP_PATH}`);
 		}
 		return;
 	}
@@ -115,14 +115,14 @@ async function main(): Promise<void> {
 	const matchResult = matchComponents(figmaGroups, storybookGroups, componentMap);
 	const { matched } = matchResult;
 
-	// 4. Filtrage par --component si demandé
+	// 4. Filter by --component if requested
 	let targets: MatchedEntry[] = matched;
 	if (flags.component) {
 		targets = matched.filter((m) => m.slug === flags.component || m.storybook?.slug === flags.component);
 		if (targets.length === 0) {
-			console.error(`\n❌ Composant "${flags.component}" introuvable dans les données matchées.`);
+			console.error(`\n❌ Component "${flags.component}" not found in matched data.`);
 			console.log(
-				`   Composants disponibles :\n   ${matched
+				`   Available components:\n   ${matched
 					.map((m) => m.slug)
 					.sort()
 					.join(', ')}`,
@@ -131,8 +131,8 @@ async function main(): Promise<void> {
 		}
 	}
 
-	// 5. Génération des SKILL.md via l'IA
-	console.log(`\n🤖 Génération de ${targets.length} SKILL.md...\n`);
+	// 5. Generate SKILL.md files via AI
+	console.log(`\n🤖 Generating ${targets.length} SKILL.md files...\n`);
 
 	const generateText = await createAiClient(config);
 
@@ -140,46 +140,46 @@ async function main(): Promise<void> {
 		const { slug } = target;
 		const skillPath = path.join(config.output.skillsDir, 'lucca-front', 'resources', `${slug}.md`);
 
-		// Skip si le fichier existe et que --force n'est pas actif
+		// Skip if the file already exists and --force is not set
 		if (fs.existsSync(skillPath) && !flags.force && !flags.dryRun) {
-			console.log(`  ⏭  ${slug} — ignoré (existe déjà, utilisez --force pour remplacer)`);
+			console.log(`  ⏭  ${slug} — skipped (already exists, use --force to overwrite)`);
 			return { slug, status: 'skipped' };
 		}
 
-		console.log(`  ⚙️  ${slug} — génération en cours...`);
+		console.log(`  ⚙️  ${slug} — generating...`);
 
-		// Récupération des guidelines Zeroheight pour ce composant
+		// Fetch Zeroheight guidelines for this component
 		let zeroheightData: Record<string, string> | null = null;
 		if (mcpContext) {
 			try {
 				zeroheightData = await fetchComponentGuidelines(mcpContext.mcpUrl, target.figma.figmaName);
 			} catch (err: any) {
-				console.warn(`     ⚠️  Zeroheight : ${err.message}`);
+				console.warn(`     ⚠️  Zeroheight: ${err.message}`);
 			}
 		}
 
-		// Construction du prompt
+		// Build the prompt
 		const { systemPrompt, userPrompt } = buildPrompt({ matched: target, zeroheightData });
 
-		// Mode --dry-run : affichage du prompt sans appel AI
+		// --dry-run mode: print the prompt without calling the AI
 		if (flags.dryRun) {
 			const separator = '─'.repeat(60);
 			console.log(`\n${separator}\n// DRY RUN — ${slug}\n${separator}`);
-			console.log('SYSTEM (extrait) :\n', systemPrompt.slice(0, 300), '\n[...]\n');
-			console.log('USER (extrait) :\n', userPrompt.slice(0, 600), '\n[...]\n');
+			console.log('SYSTEM (excerpt):\n', systemPrompt.slice(0, 300), '\n[...]\n');
+			console.log('USER (excerpt):\n', userPrompt.slice(0, 600), '\n[...]\n');
 			return { slug, status: 'dry-run' };
 		}
 
-		// Appel AI
+		// AI call
 		let content: string;
 		try {
 			content = await generateText({ systemPrompt, userPrompt });
 		} catch (err: any) {
-			console.error(`  ❌ ${slug} — erreur AI : ${err.message}`);
+			console.error(`  ❌ ${slug} — AI error: ${err.message}`);
 			return { slug, status: 'error', error: err.message };
 		}
 
-		// Écriture du fichier
+		// Write the file
 		const category = target.storybook?.category ?? '';
 		const figmaName = target.figma?.figmaName ?? slug;
 		const storybookName = target.storybook?.storybookName ?? slug;
@@ -188,13 +188,13 @@ async function main(): Promise<void> {
 		return { slug, status: result.status };
 	});
 
-	// 6. Génération de la table des matières
+	// 6. Generate table of contents
 	if (!flags.dryRun) {
 		const tocPath = writeToc(config.output.skillsDir);
-		console.log(`\n📑 Table des matières : ${tocPath}`);
+		console.log(`\n📑 Table of contents: ${tocPath}`);
 	}
 
-	// 7. Résumé final
+	// 7. Final summary
 	const summary = results.reduce(
 		(acc, r) => {
 			acc[r.status] = (acc[r.status] ?? 0) + 1;
@@ -203,16 +203,16 @@ async function main(): Promise<void> {
 		{} as Record<string, number>,
 	);
 
-	console.log('\n🎉 Terminé !');
-	if (summary['created']) console.log(`   Créés    : ${summary['created']}`);
-	if (summary['updated']) console.log(`   Mis à jour : ${summary['updated']}`);
-	if (summary['skipped']) console.log(`   Ignorés  : ${summary['skipped']}`);
-	if (summary['error']) console.log(`   Erreurs  : ${summary['error']}`);
-	if (summary['dry-run']) console.log(`   Dry-run  : ${summary['dry-run']}`);
+	console.log('\n🎉 Done!');
+	if (summary['created']) console.log(`   Created : ${summary['created']}`);
+	if (summary['updated']) console.log(`   Updated : ${summary['updated']}`);
+	if (summary['skipped']) console.log(`   Skipped : ${summary['skipped']}`);
+	if (summary['error']) console.log(`   Errors  : ${summary['error']}`);
+	if (summary['dry-run']) console.log(`   Dry-run : ${summary['dry-run']}`);
 }
 
 main().catch((err: Error) => {
-	console.error('\n❌ Erreur fatale :', err.message);
+	console.error('\n❌ Fatal error:', err.message);
 	if (process.env['DEBUG']) console.error(err.stack);
 	process.exit(1);
 });

@@ -1,7 +1,7 @@
 import { Config, StorybookDocsEntry, StorybookGroup, StorybookStory } from '../types';
 
 export async function fetchStorybookIndex(config: Config): Promise<Map<string, StorybookGroup>> {
-	console.log("📚 Récupération de l'index Storybook...");
+	console.log('📚 Fetching Storybook index...');
 
 	const res = await fetch(config.storybook.indexUrl);
 	if (!res.ok) {
@@ -11,7 +11,7 @@ export async function fetchStorybookIndex(config: Config): Promise<Map<string, S
 	const data = await res.json();
 	const entries: any[] = Object.values(data.entries || {});
 
-	console.log(`  ${entries.length} entrées Storybook trouvées`);
+	console.log(`  ${entries.length} Storybook entries found`);
 
 	return groupStoriesByComponent(entries, config.storybook.baseUrl);
 }
@@ -22,29 +22,29 @@ function groupStoriesByComponent(entries: any[], baseUrl: string): Map<string, S
 	for (const entry of entries) {
 		const { title, type, id, importPath, componentPath, name } = entry;
 
-		// Uniquement les stories Documentation (pas QA)
+		// Documentation stories only (not QA)
 		if (!title?.startsWith('Documentation/')) continue;
 
-		// "Documentation/Actions/Button/Angular/AI"    → segment avant "/Angular"
-		// "Documentation/Overlays/Tooltip/Basic"       → segment avant le suffixe générique (→ "Tooltip")
-		// "Documentation/Forms/Time/Duration Picker/Angular Form" → segment avant "Angular Form" (→ "Duration Picker")
-		// "Documentation/Forms/Date/Calendar"          → dernier segment (→ "Calendar")
+		// "Documentation/Actions/Button/Angular/AI"    → segment before "/Angular"
+		// "Documentation/Overlays/Tooltip/Basic"       → segment before the generic suffix (→ "Tooltip")
+		// "Documentation/Forms/Time/Duration Picker/Angular Form" → segment before "Angular Form" (→ "Duration Picker")
+		// "Documentation/Forms/Date/Calendar"          → last segment (→ "Calendar")
 		const parts: string[] = title.split('/');
 		if (parts.length < 3) continue;
 
-		// Suffixes génériques qui indiquent que le dernier segment est un variant/framework, pas le composant
+		// Generic suffixes indicating the last segment is a variant/framework, not the component name
 		const GENERIC_SUFFIX_RE = /^(basic|html|css|html&css|htmlcss|docs?|vertical|horizontal|progress|dashed|checked|outlined|angular.*)$/i;
 
 		const angularIdx = parts.indexOf('Angular');
 		let componentName: string;
 		if (angularIdx > 0) {
-			// Cas standard : ".../ComponentName/Angular[/StoryVariant]"
+			// Standard case: ".../ComponentName/Angular[/StoryVariant]"
 			componentName = parts[angularIdx - 1].trim();
 		} else if (parts.length > 3 && GENERIC_SUFFIX_RE.test(parts[parts.length - 1].trim())) {
-			// Cas non-standard : ".../ComponentName/Variant" (Tooltip/Basic, Timelines/Vertical, Duration Picker/Angular Form…)
+			// Non-standard case: ".../ComponentName/Variant" (Tooltip/Basic, Timelines/Vertical, Duration Picker/Angular Form…)
 			componentName = parts[parts.length - 2].trim();
 		} else {
-			// Docs ou single-story : dernier segment = nom du composant
+			// Docs or single-story: last segment = component name
 			componentName = parts[parts.length - 1].trim();
 		}
 		const key = normalizeName(componentName);
@@ -63,7 +63,7 @@ function groupStoriesByComponent(entries: any[], baseUrl: string): Map<string, S
 		const group = groups.get(key)!;
 
 		if (type === 'docs') {
-			// On garde la première entrée docs comme URL canonique
+			// Keep the first docs entry as the canonical URL
 			if (!group.docsEntry) {
 				group.docsEntry = {
 					id,
@@ -90,7 +90,7 @@ function groupStoriesByComponent(entries: any[], baseUrl: string): Map<string, S
 function normalizeName(name: string): string {
 	return name
 		.toLowerCase()
-		.replace(/^pr-/, '') // au cas où une story aurait le préfixe pr-
+		.replace(/^pr-/, '') // in case a story has the pr- prefix
 		.replace(/\s*\(v\d+[\d.]*\)\s*/g, '')
 		.replace(/[^\w\s-]/gu, '')
 		.trim()

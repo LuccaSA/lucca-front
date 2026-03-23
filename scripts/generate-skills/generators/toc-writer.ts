@@ -17,14 +17,14 @@ export function writeToc(skillsDir: string): string {
 
 	const slugs = Object.keys(index).sort();
 
-	// Liste de slugs pour la description Copilot (découverte)
+	// Slug list for Copilot description (discoverability)
 	const slugList = slugs.slice(0, 50).join(', ');
 
 	let componentLines = '';
 	for (const slug of slugs) {
 		const { description, figmaName } = index[slug];
 		const displayName = figmaName || slug;
-		// Description tronquée à 120 chars pour ne pas surcharger le TOC
+		// Description truncated at 120 chars to keep the TOC lightweight
 		const descSnippet = description ? ` — ${description.slice(0, 120)}` : '';
 		componentLines += `- **[${displayName}](./resources/${slug}.md)**${descSnippet}\n`;
 	}

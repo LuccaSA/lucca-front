@@ -1,19 +1,19 @@
-# generate-skills
+﻿# generate-skills
 
-Script TypeScript qui génère automatiquement les fichiers `SKILL.md` pour chaque composant du design system Lucca Front. Ces fichiers sont utilisés par **GitHub Copilot** (via VS Code Agent Skills) pour répondre aux questions sur l'utilisation des composants Angular.
+TypeScript script that automatically generates `SKILL.md` files for each component of the Lucca Front design system. These files are used by **GitHub Copilot** (via VS Code Agent Skills) to answer questions about how to use Angular components.
 
-Les fichiers générés sont placés dans `.github/skills/lucca-front/resources/`.
+Generated files are placed in `.github/skills/lucca-front/resources/`.
 
-## Prérequis
+## Prerequisites
 
-- Node.js avec `ts-node` (inclus dans les dépendances du projet)
-- Un token Figma (accès en lecture au fichier de composants)
-- Une clé API pour un provider AI (GitHub Models, Anthropic ou OpenAI)
-- Le MCP Zeroheight configuré dans VS Code (optionnel — pour les guidelines Prisme)
+- Node.js with `ts-node` (included in the project dependencies)
+- A Figma token (read access to the components file)
+- An API key for an AI provider (GitHub Models, Anthropic, or OpenAI)
+- The Zeroheight MCP configured in VS Code (optional  for Prisme guidelines)
 
 ## Configuration
 
-Copier le fichier d'exemple et renseigner les credentials :
+Copy the example file and fill in your credentials:
 
 ```bash
 cp scripts/generate-skills/generate-skills-config.json.example scripts/generate-skills/generate-skills-config.json
@@ -33,34 +33,34 @@ cp scripts/generate-skills/generate-skills-config.json.example scripts/generate-
 }
 ```
 
-Le fichier `generate-skills-config.json` est gitignored.
-/!\ Attention de ne pas partager votre token github_pat ! Pour des raisons de sécurité, supprimer le après votre utilisation.
+`generate-skills-config.json` is gitignored.
+ Never share your `github_pat_` token. For security, delete it after use.
 
-### Providers AI supportés
+### Supported AI providers
 
-| Provider | `provider` | Obtenir une clé |
+| Provider | `provider` | Get a key |
 |---|---|---|
-| GitHub Models | `github-models` | [github.com/settings/tokens](https://github.com/settings/tokens) — token sans permissions requises |
+| GitHub Models | `github-models` | [github.com/settings/tokens](https://github.com/settings/tokens)  no permissions required |
 | Anthropic | `anthropic` | [platform.anthropic.com/settings/api-keys](https://platform.anthropic.com/settings/api-keys) |
 | OpenAI | `openai` | [platform.openai.com/api-keys](https://platform.openai.com/api-keys) |
 
 
-## Utilisation
+## Usage
 
 ```bash
-# Générer les SKILL.md manquants uniquement
+# Generate only missing SKILL.md files
 npm run skills:generate
 
-# Régénérer tous les SKILL.md (y compris ceux déjà existants)
+# Regenerate all SKILL.md files (including existing ones)
 npm run skills:generate -- --force
 
-# Afficher les prompts sans écrire de fichiers (debug)
+# Print prompts without writing any files (debug)
 npm run skills:generate -- --dry-run
 
-# Régénérer un seul composant
+# Regenerate a single component
 npm run skills:generate -- --force --component button
 
-# Redétecter automatiquement les associations Figma ↔ Storybook
+# Re-detect Figma <-> Storybook associations automatically
 npm run skills:generate -- --refresh-map
 ```
 
@@ -69,68 +69,67 @@ npm run skills:generate -- --refresh-map
 
 ```
 scripts/generate-skills/
-├── index.ts                           # Point d'entrée et orchestration
-├── config.ts                          # Chargement et validation de la config
-├── types.ts                           # Types TypeScript partagés
-├── component-map.json                 # Mapping manuel Figma ↔ Storybook
-├── generate-skills-config.json        # Credentials (gitignored)
-├── generate-skills-config.json.example
-│
-├── collectors/
-│   ├── figma.ts                       # Récupère les composants depuis Figma
-│   ├── storybook.ts                   # Récupère et groupe les stories Storybook
-│   └── zeroheight.ts                  # Récupère les guidelines Prisme via MCP
-│
-├── matchers/
-│   └── component-matcher.ts           # Associe Figma ↔ Storybook via component-map.json
-│
-└── generators/
-    ├── ai-client.ts                   # Abstraction multi-provider (GitHub Models / OpenAI / Anthropic)
-    ├── prompt-builder.ts              # Construit le prompt envoyé à l'IA
-    ├── skill-writer.ts                # Écrit les fichiers SKILL.md sur disque
-    └── toc-writer.ts                  # Met à jour la table des matières SKILL.md
+ index.ts                           # Entry point and orchestration
+ config.ts                          # Config loading and validation
+ types.ts                           # Shared TypeScript types
+ component-map.json                 # Manual Figma <-> Storybook mapping
+ generate-skills-config.json        # Credentials (gitignored)
+ generate-skills-config.json.example
+
+ collectors/
+    figma.ts                       # Fetches components from Figma
+    storybook.ts                   # Fetches and groups Storybook stories
+    zeroheight.ts                  # Fetches Prisme guidelines via MCP
+
+ matchers/
+    component-matcher.ts           # Maps Figma <-> Storybook via component-map.json
+
+ generators/
+     ai-client.ts                   # Multi-provider abstraction (GitHub Models / OpenAI / Anthropic)
+     prompt-builder.ts              # Builds the prompt sent to the AI
+     skill-writer.ts                # Writes SKILL.md files to disk
+     toc-writer.ts                  # Updates the SKILL.md table of contents
 ```
 
-## Flux de génération
+## Generation flow
 
 ```
-Figma API ──────┐
-Storybook ──────┼──► component-matcher ──► prompt-builder ──► AI ──► skill-writer ──► SKILL.md
-Zeroheight MCP ─┘                                ▲
-packages/ng/ ────────────────────────────────────┘
-(sélecteurs réels)
+Figma API 
+Storybook  component-matcher  prompt-builder  AI  skill-writer  SKILL.md
+Zeroheight MCP                                 
+packages/ng/ 
+(real selectors)
 ```
 
-1. **Collecte** — Récupère en parallèle les composants Figma, l'index Storybook (1 300+ stories) et les guidelines Zeroheight.
-2. **Matching** — `component-map.json` associe chaque composant Figma à un ou plusieurs slugs Storybook. C'est le registre central à maintenir manuellement.
-3. **Construction du prompt** — Pour chaque composant, le prompt inclut les métadonnées Figma, les liens et le code source des stories Angular, les **vrais sélecteurs Angular** extraits de `packages/ng/` (pour éviter les hallucinations), et les guidelines Prisme.
-4. **Génération IA** — L'IA génère le SKILL.md en suivant un format strict (frontmatter YAML, sections standardisées, exemples Angular uniquement).
-5. **Écriture** — Le fichier est écrit dans `.github/skills/lucca-front/resources/<slug>.md` et la table des matières `SKILL.md` est mise à jour.
+1. **Collection**  Fetches Figma components, the Storybook index (1,300+ stories), and Zeroheight guidelines in parallel.
+2. **Matching**  `component-map.json` maps each Figma component to one or more Storybook slugs. This is the central registry to maintain manually.
+3. **Prompt building**  For each component, the prompt includes Figma metadata, story links and Angular story source code, **real Angular selectors** extracted from `packages/ng/` (to prevent hallucinations), and Prisme guidelines.
+4. **AI generation**  The AI generates the SKILL.md following a strict format (YAML frontmatter, standardised sections, Angular examples only).
+5. **Writing**  The file is written to `.github/skills/lucca-front/resources/<slug>.md` and the `SKILL.md` table of contents is updated.
 
 ## component-map.json
 
-Ce fichier est le registre central des associations Figma ↔ Storybook. Il doit être maintenu à la main quand de nouveaux composants sont ajoutés au design system.
+This file is the central registry of Figma <-> Storybook associations. It must be maintained manually when new components are added to the design system.
 
 ```jsonc
 {
-  // Association simple
+  // Simple mapping
   "pr-Button": { "slug": "button", "storybook": "Documentation/Actions/Button/Angular" },
 
-  // Association multiple (1 composant Figma → plusieurs SKILL.md)
+  // Multiple mapping (1 Figma component -> multiple SKILL.md files)
   "pr-Select": [
     { "slug": "multi-select", "storybook": "Documentation/Forms/Fields/Multi Select/Angular" },
     { "slug": "simple-select", "storybook": "Documentation/Forms/Fields/Simple Select/Angular" }
   ],
 
-  // Pas de story disponible → null
+  // No story available -> null
   "pr-Banner": null
 }
 ```
 
-Pour ajouter un nouveau composant :
-1. Trouver le nom exact dans Figma
-2. Trouver le chemin de la story dans Storybook (titre dans le fichier `.stories.ts`)
-3. Ajouter l'entrée dans `component-map.json`
-(PS : Copilot est très bon pour ça. Demandez lui !)
-
-4. Lancer `npm run skills:generate -- --component <slug>`
+To add a new component:
+1. Find the exact name in Figma
+2. Find the story path in Storybook (title in the `.stories.ts` file)
+3. Add the entry to `component-map.json`
+   (Tip: Copilot is great at this  just ask!)
+4. Run `npm run skills:generate -- --component <slug>`

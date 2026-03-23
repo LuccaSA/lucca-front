@@ -1,16 +1,16 @@
 import { Config, GenerateTextFn } from '../types';
 
 /**
- * Abstraction AI multi-provider.
+ * Multi-provider AI abstraction.
  *
- * Providers supportés :
- *  - "github-models" : GitHub Models (GitHub Copilot) — API compatible OpenAI via fetch natif.
+ * Supported providers:
+ *  - "github-models" : GitHub Models (GitHub Copilot) — OpenAI-compatible API via native fetch.
  *                      endpoint https://models.inference.ai.azure.com
- *                      token = GitHub Personal Access Token avec permission "models".
- *  - "openai"        : OpenAI API directe via fetch natif.
- *  - "anthropic"     : Anthropic API (@anthropic-ai/sdk — doit être installé séparément).
+ *                      token = GitHub Personal Access Token with "models" permission.
+ *  - "openai"        : OpenAI API directly via native fetch.
+ *  - "anthropic"     : Anthropic API (@anthropic-ai/sdk — must be installed separately).
  *
- * Retourne une fonction generateText({ systemPrompt, userPrompt }) → Promise<string>.
+ * Returns a generateText({ systemPrompt, userPrompt }) => Promise<string> function.
  */
 
 const GITHUB_MODELS_ENDPOINT = 'https://models.inference.ai.azure.com';
@@ -51,13 +51,13 @@ export async function createAiClient(config: Config): Promise<GenerateTextFn> {
 
 				if (res.status === 429) {
 					const body = await res.text();
-					// Extraire le délai depuis le header Retry-After ou le message d'erreur
+					// Extract wait time from the Retry-After header or the error message
 					const retryAfterHeader = res.headers.get('retry-after');
 					const waitFromMessage = body.match(/wait\s+(\d+)\s+second/i)?.[1];
 					const waitSeconds = retryAfterHeader ? parseInt(retryAfterHeader, 10) : waitFromMessage ? parseInt(waitFromMessage, 10) : 60;
 
-					const waitMs = (waitSeconds + 2) * 1000; // +2s de marge
-					console.log(`  ⏳ Rate limit — attente de ${waitSeconds + 2}s (tentative ${attempt}/${MAX_RETRIES})...`);
+					const waitMs = (waitSeconds + 2) * 1000; // +2s buffer
+					console.log(`  ⏳ Rate limit — waiting ${waitSeconds + 2}s (attempt ${attempt}/${MAX_RETRIES})...`);
 					await new Promise((resolve) => setTimeout(resolve, waitMs));
 					continue;
 				}
@@ -71,7 +71,7 @@ export async function createAiClient(config: Config): Promise<GenerateTextFn> {
 				return data.choices?.[0]?.message?.content ?? '';
 			}
 
-			throw new Error(`Rate limit persistant après ${MAX_RETRIES} tentatives`);
+			throw new Error(`Persistent rate limit after ${MAX_RETRIES} attempts`);
 		};
 	}
 
@@ -93,5 +93,5 @@ export async function createAiClient(config: Config): Promise<GenerateTextFn> {
 		};
 	}
 
-	throw new Error(`Provider AI inconnu "${provider}". Valeurs acceptées : "anthropic", "openai", "github-models"`);
+	throw new Error(`Unknown AI provider "${provider}". Accepted values: "anthropic", "openai", "github-models"`);
 }

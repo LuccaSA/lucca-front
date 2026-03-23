@@ -1,5 +1,5 @@
 /**
- * Types partagés pour le script generate-skills.
+ * Shared types for the generate-skills script.
  */
 
 // ─── Config ──────────────────────────────────────────────────────────────────
