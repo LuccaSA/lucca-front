@@ -12,9 +12,7 @@ export class LuPopup {
 	open<T, D, R>(component: ComponentType<T>, data: D | undefined = undefined, config: Partial<ILuPopupConfig> = {}): ILuPopupRef<D, R> {
 		const extendedConfig = { ...this._config, ...config };
 		const ref = this._factory.forge<T, ILuPopupConfig, D, R>(component, extendedConfig);
-		if (data) {
-			ref.open(data);
-		}
+		ref.open(data);
 		return ref;
 	}
 }

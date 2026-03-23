@@ -11,7 +11,7 @@ export interface ILuPopupRef<D = unknown, R = unknown> {
 	onClose: Observable<R>;
 	onDismiss: Observable<void>;
 	onBackdropClick: Observable<void>;
-	open(data: D): void;
+	open(data: D | undefined): void;
 	close(result: R): void;
 	dismiss(): void;
 }
