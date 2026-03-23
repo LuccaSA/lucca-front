@@ -133,7 +133,7 @@
 
 @mixin fancyNarrow {
 	--components-dialog-inside-header-paddingBlock: var(--pr-t-spacings-200);
-	--components-dialog-inside-header-paddingInline: var(--pr-t-spacings-300) calc(var(--pr-t-spacings-800) + var(--pr-t-spacings-200) + var(--pr-t-spacings-50));
+	--components-dialog-inside-header-paddingInline: var(--pr-t-spacings-300) calc(var(--pr-t-spacings-800) + var(--pr-t-spacings-250));
 	--components-dialog-inside-paddingInlineEnd: 0px;
 	--components-dialog-minBlockSize: 0px;
 }

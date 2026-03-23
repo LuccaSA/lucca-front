@@ -69,9 +69,9 @@
 				content: var(--components-progressStepper-list-step-number-before-content);
 				color: var(--components-progressStepper-list-step-number-before-color);
 				background-color: var(--components-progressStepper-list-step-number-before-backgroundColor);
-				inline-size: calc(var(--pr-t-spacings-200) + var(--pr-t-spacings-50));
-				block-size: calc(var(--pr-t-spacings-200) + var(--pr-t-spacings-50));
-				line-height: calc(var(--pr-t-spacings-200) + var(--pr-t-spacings-50));
+				inline-size: var(--pr-t-spacings-250);
+				block-size: var(--pr-t-spacings-250);
+				line-height: var(--pr-t-spacings-250);
 				border-radius: var(--pr-t-border-radius-default);
 				box-shadow: 0 0 0 var(--components-progressStepper-list-step-number-before-boxShadowWidth) var(--components-progressStepper-list-step-number-before-boxShadowColor);
 			}

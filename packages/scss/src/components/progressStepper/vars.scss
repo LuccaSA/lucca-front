@@ -18,7 +18,7 @@
 	--components-progressStepper-list-step-number-before-content: counter(progressStepper);
 	--components-progressStepper-list-step-number-after-content: none;
 	--components-progressStepper-list-step-number-before-boxShadowWidth: 0px;
-	--components-progressStepper-list-paddingBlockEnd: calc(var(--pr-t-spacings-200) + var(--pr-t-spacings-50));
+	--components-progressStepper-list-paddingBlockEnd: var(--pr-t-spacings-250);
 	--components-progressStepper-list-step-after-inlineSize: var(--commons-divider-width);
 	--components-progressStepper-list-step-after-borderRadius: var(--pr-t-border-radius-full) 0 0 var(--pr-t-border-radius-full);
 	--components-progressStepper-list-step-after-inset: auto;

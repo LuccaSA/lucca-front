@@ -1,7 +1,6 @@
 import { provideRouter, RouterLink } from '@angular/router';
 import { ProgressStepperComponent, ProgressStepperStepComponent } from '@lucca-front/ng/progress-stepper';
 import { applicationConfig, Meta, moduleMetadata } from '@storybook/angular';
-import { cleanupTemplate } from 'stories/helpers/stories';
 
 interface Story {
 	current: number;
@@ -35,10 +34,10 @@ export default {
 		const step = `
 	<lu-progress-stepper-step label="Lorem ipsum dolor" />`;
 		return {
-			template: cleanupTemplate(`<lu-progress-stepper current="${args.current}">
+			template: `<lu-progress-stepper current="${args.current}">
 	<lu-progress-stepper-step [routerLinkParam]="'./route/step-1'" label="${args.label}"${critical} />
 	<lu-progress-stepper-step [routerLinkParam]="'./route/step-2'" label="Lorem ipsum dolor"${success} />${step.repeat(args.steps - 2)}
-</lu-progress-stepper>`),
+</lu-progress-stepper>`,
 		};
 	},
 } as Meta;
