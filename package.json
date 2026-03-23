@@ -45,7 +45,8 @@
     "nglint:fix": "npm run nglint -- --fix",
     "stylelint:fix": "npm run stylelint -- --fix",
     "icons:update": "node ./packages/icons/update-icons.js",
-    "i18n:update": "lucca translate && prettier --write 'packages/ng/**/translations.ts'"
+    "i18n:update": "lucca translate && prettier --write 'packages/ng/**/translations.ts'",
+    "skills:generate": "ts-node --project scripts/generate-skills/tsconfig.json scripts/generate-skills/index.ts"
   },
   "dependencies": {
     "@angular/animations": "^21.0.5",
@@ -85,6 +86,7 @@
     "@angular-eslint/schematics": "^21.0.3",
     "@angular/cli": "^21.0.3",
     "@angular/compiler-cli": "^21.0.3",
+    "@anthropic-ai/sdk": "^0.80.0",
     "@compodoc/compodoc": "^1.1.16",
     "@jsdevtools/coverage-istanbul-loader": "^3.0.5",
     "@lucca-front/eslint-plugin": "workspace:*",
