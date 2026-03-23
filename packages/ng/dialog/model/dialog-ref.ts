@@ -1,4 +1,5 @@
 import { DialogRef } from '@angular/cdk/dialog';
+import { assertNotNil } from '@lucca-front/ng/core';
 import { isObservable, Observable, of, Subscription, take } from 'rxjs';
 import { filter, map, takeUntil } from 'rxjs/operators';
 import { LuDialogConfig, LuDialogData, LuDialogResult, LuDialogSize } from './dialog-config';
@@ -14,6 +15,7 @@ export class LuDialogRef<C = unknown, TData = LuDialogData<C>> {
 	 * Instance of the component that's inside the dialog
 	 */
 	get instance(): C | null {
+		assertNotNil(this.cdkRef.componentInstance);
 		return this.cdkRef.componentInstance;
 	}
 
