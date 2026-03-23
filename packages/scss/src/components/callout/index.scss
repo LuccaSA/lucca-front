@@ -10,14 +10,18 @@
 		&.mod-S {
 			@include S;
 		}
-	}
 
-	&.mod-AI {
-		@include AI;
-	}
+		&.mod-AI {
+			@include AI;
+		}
 
-	&:has(.callout-content-description-actions.mod-inline) {
-		@include actionsInline;
+		&:has(.callout-content-description-actions) {
+			@include actions;
+		}
+
+		&:has(.callout-content-description-actions.mod-inline) {
+			@include actionsInline;
+		}
 	}
 }
 
