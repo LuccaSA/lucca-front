@@ -185,14 +185,6 @@
 			&.mod-ghost {
 				@include successGhost;
 			}
-
-			&.mod-S {
-				@include successS;
-			}
-
-			&.mod-XS {
-				@include successXS;
-			}
 		}
 
 		// .disabled is deprecated

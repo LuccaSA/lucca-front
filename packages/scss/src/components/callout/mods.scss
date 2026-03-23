@@ -42,6 +42,19 @@
 	}
 }
 
+@mixin actions {
+	.button {
+		@include color.palette('neutral');
+		@include button.S;
+
+
+
+		&.mod-onlyIcon {
+			@include button.onlyIconS;
+		}
+	}
+}
+
 @mixin actionsInline {
 	--components-callout-content-description-display: flex;
 	--components-callout-content-description-action-marginBlockStart: 0;
@@ -49,9 +62,9 @@
 
 	.button {
 		@include button.XS;
-	}
 
-	.button.mod-onlyIcon {
-		@include button.onlyIconXS;
+		&.mod-onlyIcon {
+			@include button.onlyIconXS;
+		}
 	}
 }

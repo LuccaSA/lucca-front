@@ -19,6 +19,12 @@
 	// Deprecated
 	--components-button-font-size: var(--pr-t-font-body-M-fontSize);
 	--components-button-line-height: var(--pr-t-font-body-M-lineHeight);
+
+	// status icon
+	&::after {
+		font-size: var(--pr-t-font-body-M-lineHeight);
+		block-size: var(--pr-t-font-body-M-lineHeight);
+	}
 }
 
 @mixin S {
@@ -36,6 +42,12 @@
 	// Deprecated
 	--components-button-font-size: var(--pr-t-font-body-S-fontSize);
 	--components-button-line-height: var(--pr-t-font-body-S-lineHeight);
+
+	// status icon
+	&::after {
+		font-size: var(--pr-t-font-body-S-lineHeight);
+		block-size: var(--pr-t-font-body-S-lineHeight);
+	}
 }
 
 @mixin XS {
@@ -54,6 +66,12 @@
 	// Deprecated
 	--components-button-font-size: var(--pr-t-font-body-XS-fontSize);
 	--components-button-line-height: var(--pr-t-font-body-XS-lineHeight);
+
+	// status icon
+	&::after {
+		font-size: var(--pr-t-font-body-XS-lineHeight);
+		block-size: var(--pr-t-font-body-XS-lineHeight);
+	}
 }
 
 @mixin onlyIcon {
