@@ -111,20 +111,6 @@
 	}
 }
 
-@mixin successS {
-	&::after {
-		font-size: var(--pr-t-font-body-S-lineHeight);
-		block-size: var(--pr-t-font-body-S-lineHeight);
-	}
-}
-
-@mixin successXS {
-	&::after {
-		font-size: var(--pr-t-font-body-XS-lineHeight);
-		block-size: var(--pr-t-font-body-XS-lineHeight);
-	}
-}
-
 @mixin successOutlined {
 	--components-button-backgroundColor: var(--palettes-neutral-0);
 	--components-button-boxShadow: 0 0 0 var(--commons-divider-width) var(--palettes-neutral-100);
