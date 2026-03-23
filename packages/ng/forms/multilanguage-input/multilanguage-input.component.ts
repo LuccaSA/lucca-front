@@ -79,12 +79,8 @@ export class MultilanguageInputComponent implements ControlValueAccessor {
 	];
 
 	getLocaleDisplayName(locale: string): string {
-		if (locale) {
-			return this.#intlDisplay.of(locale);
-		} else {
-			assertNotNil(locale);
-		}
-		return '';
+		assertNotNil(locale);
+		return this.#intlDisplay.of(locale) ?? locale;
 	}
 
 	writeValue(value: MultilanguageTranslation[]): void {
