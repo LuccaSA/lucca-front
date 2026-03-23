@@ -7,11 +7,11 @@ import { ILuPopupConfig } from './popup-config.model';
 import { LU_POPUP_DATA } from './popup.token';
 
 export interface ILuPopupRef<D = unknown, R = unknown> {
-	onOpen: Observable<D>;
-	onClose: Observable<R>;
+	onOpen: Observable<D | undefined>;
+	onClose: Observable<R | undefined>;
 	onDismiss: Observable<void>;
 	onBackdropClick: Observable<void>;
-	open(data: D | undefined): void;
+	open(data?: D): void;
 	close(result: R): void;
 	dismiss(): void;
 }
@@ -20,8 +20,8 @@ export interface ILuPopupRefFactory<TComponent = unknown, TConfig extends ILuPop
 }
 
 export abstract class ALuPopupRef<T = unknown, D = unknown, R = unknown, C extends ILuPopupConfig = ILuPopupConfig> implements ILuPopupRef<D, R> {
-	onOpen = new Subject<D>();
-	onClose = new Subject<R>();
+	onOpen = new Subject<D | undefined>();
+	onClose = new Subject<R | undefined>();
 	onDismiss = new Subject<void>();
 	onBackdropClick = new Subject<void>();
 
@@ -43,15 +43,11 @@ export abstract class ALuPopupRef<T = unknown, D = unknown, R = unknown, C exten
 
 		this._subToCloseEvents();
 
-		if (data) {
-			this.onOpen.next(data);
-		}
+		this.onOpen.next(data);
 		this.onOpen.complete();
 	}
 	close(result?: R) {
-		if (result) {
-			this.onClose.next(result);
-		}
+		this.onClose.next(result);
 		this._destroy();
 	}
 	dismiss() {
