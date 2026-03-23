@@ -47,8 +47,6 @@
 		@include color.palette('neutral');
 		@include button.S;
 
-
-
 		&.mod-onlyIcon {
 			@include button.onlyIconS;
 		}
