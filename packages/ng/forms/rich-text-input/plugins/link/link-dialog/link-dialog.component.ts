@@ -29,7 +29,7 @@ export class LinkDialogComponent {
 			return;
 		}
 
-		const hrefValue = this.formGroup.controls.href.value ?? '';
+		const hrefValue = this.formGroup.controls.href.value;
 		this.dialogRef.close(hrefValue ? encodeURI(hrefValue.trim()) : hrefValue);
 	}
 

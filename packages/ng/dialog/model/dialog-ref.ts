@@ -86,4 +86,4 @@ export class LuDialogRef<C = unknown, TData = LuDialogData<C>> {
 	}
 }
 
-export type LuDialogSelfRef<R> = { dismiss(): void; close(res: R): void; resize(size: LuDialogSize): void };
+export type LuDialogSelfRef<R> = { dismiss(): void; close(res: R | null | undefined): void; resize(size: LuDialogSize): void };

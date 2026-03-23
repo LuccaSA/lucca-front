@@ -205,15 +205,18 @@ export class PhoneNumberInputComponent implements ControlValueAccessor, Validato
 	formatNationalNumber(): void {
 		const countryCode = this.countryCode();
 		const displayedNumber = this.displayedNumber();
-		try {
-			const { isValid, nationalNumber } = tryParsePhoneNumber(displayedNumber ?? '', countryCode);
-			if (isValid) {
-				this.displayedNumber.set(nationalNumber);
-			} else if (countryCode) {
-				this.displayedNumber.set(formatIncompletePhoneNumber(displayedNumber ?? '', countryCode));
+
+		if (displayedNumber) {
+			try {
+				const { isValid, nationalNumber } = tryParsePhoneNumber(displayedNumber, countryCode);
+				if (isValid) {
+					this.displayedNumber.set(nationalNumber);
+				} else if (countryCode) {
+					this.displayedNumber.set(formatIncompletePhoneNumber(displayedNumber, countryCode));
+				}
+			} catch {
+				// do nothing
 			}
-		} catch {
-			// do nothing
 		}
 	}
 
