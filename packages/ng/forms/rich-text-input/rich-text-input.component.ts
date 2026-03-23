@@ -149,9 +149,7 @@ export class RichTextInputComponent implements OnInit, OnDestroy, ControlValueAc
 		if (value) {
 			this.#editor?.update(
 				() => {
-					if (this.#editor) {
-						this.#richTextFormatter.parse(this.#editor, value);
-					}
+					this.#richTextFormatter.parse(this.#editor!, value);
 				},
 				{ tag: updateTags },
 			);
