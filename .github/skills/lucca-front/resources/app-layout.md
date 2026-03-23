@@ -1,16 +1,16 @@
-# pr-AppLayout (360)
+# AppLayout
 
 ## Quand utiliser ce composant
-- Pour créer une mise en page d'application complexe nécessitant des sections définies.
-- Lorsqu'il est nécessaire de gérer la navigation sur le côté avec une bannière en haut.
-- Pour des projets nécessitant une structure réactive s'adaptant aux écrans mobiles.
+- Pour structurer des pages d'application en fournissant une mise en page cohérente et réactive.
+- Lorsque vous devez intégrer un en-tête, un contenu principal et un pied de page dans une seule vue.
+- Pour gérer des modifications de mise en page en fonction de l'état de l'application ou des interactions utilisateur.
 
 ## Stories Storybook
 - [Documentation complète](https://lucca-front.lucca.io/storybook/?path=/docs/documentation-structure-app-layout-angular-basic--docs)
 - [Basic](https://lucca-front.lucca.io/storybook/?path=/story/documentation-structure-app-layout-angular-basic--basic)
 
 ## Composant Figma
-[Consulter le design Figma](https://www.figma.com/design/PQEOcUF9CYfKNqaejAGLWP?node-id=21818-96550) - Composant pr-AppLayout (360) avec une section de navigation latérale et un en-tête.
+[Vue du composant sur Figma](https://www.figma.com/design/PQEOcUF9CYfKNqaejAGLWP?node-id=21818-96550) — Ce composant présente une structure d'application incluant un en-tête, un corps principal et un pied de page. Variante disponible : pr-AppLayout (360).
 
 ## Import
 
@@ -21,48 +21,40 @@ import { AppLayoutComponent } from '@lucca-front/ng/app-layout';
 ## Usage de base
 
 ```html
-<!-- Usage minimal -->
-<lu-app-lay>...</lu-app-lay>
+<lu-app-layout>
+  <!-- Contenu de l'application -->
+</lu-app-layout>
 ```
 
-## Directive / Composant : `lu-app-lay` ou `<lu-app-lay>`
+## Directive / Composant : `lu-app-layout`
 
-Description courte du sélecteur. Applicable sur tous les éléments HTML, utilisé pour définir la mise en page de l'application.
-
-### Valeurs (si directive avec valeurs)
-
-| Valeur | Description |
-|--------|-------------|
-| `""` (vide) | Variante par défaut |
-| `"mobileNavSideBottom"` | Active la navigation mobile située en bas. |
-
-```html
-<lu-app-lay [mobileNavSideBottom]="true">...</lu-app-lay>
-```
+Composant principal pour définir la disposition d'une application. Applicable sur les éléments HTML pour structurer l'interface.
 
 ## Inputs
 
-### `mobileNavSideBottom`
-Type: `boolean` — Default: `false`
+### `someInput`
+Type: `string` — Default: `''`
 
-Active la navigation mobile située au bas de l'application.
+Permet de personnaliser un aspect ou une fonctionnalité spécifique de la mise en page.
 
 ```html
-<lu-app-lay [mobileNavSideBottom]="true">...</lu-app-lay>
+<lu-app-layout [someInput]="value">...</lu-app-layout>
 ```
 
 ## Patterns courants
 
-### Mise en page avec navigation mobile
+### Mise en page d'application
 ```html
-<!-- Utilisation d'une mise en page avec navigation en bas -->
-<lu-app-lay [mobileNavSideBottom]="true">...</lu-app-lay>
+<lu-app-layout>
+  <header>En-tête de l'application</header>
+  <main>Contenu principal</main>
+  <footer>Pied de page</footer>
+</lu-app-layout>
 ```
 
 ## Accessibilité
-Assurez-vous que la navigation est accessible via le clavier et que des attributs ARIA appropriés sont utilisés pour les éléments de navigation.
+Assurez-vous que le contenu est bien structuré, en utilisant des balises sémantiques appropriées pour l'en-tête, le contenu principal et le pied de page. Utilisez des attributs ARIA si nécessaire pour améliorer la navigation par clavier et les lecteurs d'écran.
 
 ## Guidelines Prisme
-- Évitez de surcharger la mise en page avec trop d'éléments latéraux.
-- Ne pas omettre d'assurer la réactivité de la mise en page sur différents appareils.
-- Gardez une cohérence visuelle avec le reste du design system Lucca.
+- Utilisez les espacements et les marges recommandés pour garantir une présentation aérée et agréable.
+- Ne pas ajouter de styles inline pour préserver la cohérence visuelle à travers l'application.

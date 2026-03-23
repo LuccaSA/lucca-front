@@ -5,7 +5,7 @@ description: 'Table des matières du design system Lucca Front (Angular). Charge
 
 ## Composants
 
-- **[pr-AppLayout (360)](./resources/app-layout.md)** — Composant pr-AppLayout (360), sélecteur `<lu-app-lay>`, input `mobileNavSideBottom`. Variantes disponibles : pr-AppLayou
+- **[pr-AppLayout (360)](./resources/app-layout.md)** — Composant de disposition d'application, sélecteur lu-app-layout, variantes disponibles : pr-AppLayout (360).
 - **[pr-Avatar](./resources/avatar.md)** — Composant pr-Avatar, directive luUserPicture. Inputs principaux : user, sizes, placeholder, displayFormat, AI. Variantes
 - **[pr-Breadcrumbs](./resources/breadcrumbs.md)** — Composant pr-Breadcrumbs pour afficher une navigation à fils; directives luBreadcrumbsLink, variantes Depth=1, Depth=2, 
 - **[pr-BubbleIcon](./resources/bubble-icon.md)** — Composant pr-BubbleIcon, sélecteur luBubbleIcon, inputs: direction, size, palette, icon, alt, variantes: direction, pale

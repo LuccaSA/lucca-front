@@ -222,7 +222,7 @@
     "storybookName": "FileEntry"
   },
   "app-layout": {
-    "description": "Composant pr-AppLayout (360), sélecteur `<lu-app-lay>`, input `mobileNavSideBottom`. Variantes disponibles : pr-AppLayout (360).",
+    "description": "Composant de disposition d'application, sélecteur lu-app-layout, variantes disponibles : pr-AppLayout (360).",
     "category": "Structure",
     "figmaName": "pr-AppLayout (360)",
     "storybookName": "App Layout"
