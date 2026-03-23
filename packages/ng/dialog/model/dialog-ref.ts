@@ -65,7 +65,7 @@ export class LuDialogRef<C = unknown, TData = LuDialogData<C>> {
 		let canClose: boolean | Observable<boolean> = true;
 
 		try {
-			canClose = this.config.canClose?.(this.instance as C) ?? true;
+			canClose = this.config.canClose?.(this.instance) ?? true;
 		} catch {
 			canClose = true;
 		}
