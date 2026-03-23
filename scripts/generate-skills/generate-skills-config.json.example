@@ -1,0 +1,35 @@
+{
+  "_comment": "Choisissez un provider AI parmi les options ci-dessous",
+
+  "_option_github_copilot": {
+    "_doc": "GitHub Models (recommandé si vous avez GitHub Copilot)",
+    "_how_to_get_token": "github.com/settings/tokens → New fine-grained token (aucune permission requise)",
+    "provider": "github-models",
+    "model": "claude-sonnet-4-6",
+    "apiKey": "github_pat_YOUR_TOKEN_HERE"
+  },
+
+  "_option_anthropic": {
+    "_doc": "Anthropic API — platform.anthropic.com/settings/api-keys",
+    "provider": "anthropic",
+    "model": "claude-sonnet-4-6",
+    "apiKey": "sk-ant-YOUR_KEY_HERE"
+  },
+
+  "_option_openai": {
+    "_doc": "OpenAI API — platform.openai.com/api-keys",
+    "provider": "openai",
+    "model": "gpt-4o",
+    "apiKey": "sk-YOUR_KEY_HERE"
+  },
+
+  "ai": {
+    "provider": "github-models",
+    "model": "claude-sonnet-4-6",
+    "apiKey": "github_pat_YOUR_TOKEN_HERE",
+    "concurrency": 3
+  },
+  "figma": {
+    "token": "figd_YOUR_FIGMA_TOKEN_HERE"
+  }
+}
