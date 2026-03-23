@@ -29,8 +29,8 @@ export class LinkDialogComponent {
 			return;
 		}
 
-		const hrefValue = this.formGroup.controls.href.value;
-		this.dialogRef.close(encodeURI(hrefValue ? hrefValue.trim() : ''));
+		const hrefValue = this.formGroup.controls.href.value ?? '';
+		this.dialogRef.close(hrefValue ? encodeURI(hrefValue.trim()) : hrefValue);
 	}
 
 	public deleteLink() {

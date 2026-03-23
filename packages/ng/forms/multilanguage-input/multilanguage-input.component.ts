@@ -1,7 +1,7 @@
 import { ConnectionPositionPair } from '@angular/cdk/overlay';
 import { booleanAttribute, ChangeDetectionStrategy, Component, computed, forwardRef, inject, input, LOCALE_ID, signal, ViewEncapsulation, WritableSignal } from '@angular/core';
 import { ControlValueAccessor, FormsModule, NG_VALUE_ACCESSOR, ReactiveFormsModule } from '@angular/forms';
-import { intlInputOptions, IntlParamsPipe } from '@lucca-front/ng/core';
+import { assertNotNil, intlInputOptions, IntlParamsPipe } from '@lucca-front/ng/core';
 import { FORM_FIELD_INSTANCE, FormFieldComponent, InputDirective, ɵPresentationDisplayDefaultDirective } from '@lucca-front/ng/form-field';
 import { PopoverDirective } from '@lucca-front/ng/popover2';
 import { LuTooltipTriggerDirective } from '@lucca-front/ng/tooltip';
@@ -78,8 +78,13 @@ export class MultilanguageInputComponent implements ControlValueAccessor {
 		new ConnectionPositionPair({ originX: 'end', originY: 'top' }, { overlayX: 'end', overlayY: 'bottom' }, 16, -6),
 	];
 
-	getLocaleDisplayName(locale: string): string | undefined {
-		return this.#intlDisplay.of(locale);
+	getLocaleDisplayName(locale: string): string {
+		if (locale) {
+			return this.#intlDisplay.of(locale);
+		} else {
+			assertNotNil(locale);
+		}
+		return '';
 	}
 
 	writeValue(value: MultilanguageTranslation[]): void {
