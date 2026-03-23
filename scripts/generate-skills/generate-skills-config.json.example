@@ -1,11 +1,11 @@
 {
-  "_comment": "Choisissez un provider AI parmi les options ci-dessous",
+  "_ai_comment": "Choose an AI provider among the options below",
 
   "_option_github_copilot": {
     "_doc": "GitHub Models (recommandé si vous avez GitHub Copilot)",
     "_how_to_get_token": "github.com/settings/tokens → New fine-grained token (aucune permission requise)",
     "provider": "github-models",
-    "model": "claude-sonnet-4-6",
+    "model": "gpt-4o-mini",
     "apiKey": "github_pat_YOUR_TOKEN_HERE"
   },
 
@@ -22,6 +22,8 @@
     "model": "gpt-4o",
     "apiKey": "sk-YOUR_KEY_HERE"
   },
+
+	"_figma_comment": "Go to your Figma Profile > Settings > Security > Personal access tokens (You need to create token) ",
 
   "ai": {
     "provider": "github-models",

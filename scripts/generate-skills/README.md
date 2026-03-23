@@ -11,6 +11,8 @@ Generated files are placed in `.github/skills/lucca-front/resources/`.
 - An API key for an AI provider (GitHub Models, Anthropic, or OpenAI)
 - The Zeroheight MCP configured in VS Code (optional  for Prisme guidelines)
 
+_Go to generate-skills-config.json.example for more instructions about API key for an AI provider and Figma Token_
+
 ## Configuration
 
 Copy the example file and fill in your credentials:
@@ -131,5 +133,18 @@ To add a new component:
 1. Find the exact name in Figma
 2. Find the story path in Storybook (title in the `.stories.ts` file)
 3. Add the entry to `component-map.json`
-   (Tip: Copilot is great at this  just ask!)
+   (Tip: Copilot is great at this just ask!)
+
+```markdown
+Help me fill in `scripts/generate-skills/component-map.json`.
+
+1. Read the current `component-map.json` to identify entries that are `null` or missing a `storybook` path.
+2. Fetch the Storybook index at http://localhost:6006/index.json to get the full list of available stories.
+3. For each `null` or incomplete entry, search in the Storybook index for a story title that matches the Figma component name
+4. If a match is found, fill in `{ "slug": "<kebab-case-name>", "storybook": "<full story title path>" }`.
+5. If a single Figma component maps to multiple stories (e.g. multi-select + simple-select), use an array.
+6. If no story exists for a component, leave it as `null` (do not guess).
+7. Show me a diff of the proposed changes before writing anything, and ask for confirmation.
+```
+
 4. Run `npm run skills:generate -- --component <slug>`
