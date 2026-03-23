@@ -19,6 +19,12 @@
 	// Deprecated
 	--components-button-font-size: var(--pr-t-font-body-M-fontSize);
 	--components-button-line-height: var(--pr-t-font-body-M-lineHeight);
+
+	// status icon
+	&::after {
+		font-size: var(--pr-t-font-body-M-lineHeight);
+		block-size: var(--pr-t-font-body-M-lineHeight);
+	}
 }
 
 @mixin S {

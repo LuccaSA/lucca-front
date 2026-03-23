@@ -48,13 +48,6 @@
 		@include color.palette('neutral');
 		@include button.S;
 
-		&.mod-outlined,
-		&.mod-ghost {
-			&:focus-visible {
-				@include a11y.focusVisible($offset: 3px, $color: var(--palettes-product-700));
-			}
-		}
-
 		&.mod-onlyIcon {
 			@include button.onlyIconS;
 		}
