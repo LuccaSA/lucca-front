@@ -28,8 +28,26 @@
 			}
 		}
 
+		.activityFeed-step-state,
 		.activityFeed-step-avatar {
 			margin-block: var(--pr-t-spacings-75);
+		}
+
+		.activityFeed-step-state {
+			inline-size: var(--pr-t-spacings-400);
+			border-radius: var(--pr-t-border-radius-full);
+			position: relative;
+			background-color: var(--palettes-100, var(--palettes-neutral-100));
+
+			&::before {
+				color: var(--palettes-700, var(--palettes-neutral-700));
+				font-size: calc(1.5 * var(--pr-t-font-body-M-fontSize));
+				block-size: var(--pr-t-font-body-M-lineHeight);
+				inset: 0;
+				margin: auto;
+				position: absolute;
+				text-align: center;
+			}
 		}
 
 		.activityFeed-step-description {

@@ -10,6 +10,24 @@ export default {
 function getTemplate(args: ActivityFeedBasicStory): string {
 	return `<ol class="activityFeed">
 	<li class="activityFeed-step">
+		<div class="activityFeed-step-state mod-success"></div>
+		<div class="activityFeed-step-description">
+			<p class="activityFeed-step-description-content">
+				Demande approuvée.
+			</p>
+			<time datetime="2025-07-15 08:56" class="activityFeed-step-description-time"><abbr>Mar.</abbr> 15 juillet 2025 à 08:56</time>
+		</div>
+	</li>
+	<li class="activityFeed-step">
+		<div class="activityFeed-step-state mod-critical"></div>
+		<div class="activityFeed-step-description">
+			<p class="activityFeed-step-description-content">
+				Demande refusée.
+			</p>
+			<time datetime="2025-07-15 08:56" class="activityFeed-step-description-time"><abbr>Mar.</abbr> 15 juillet 2025 à 08:56</time>
+		</div>
+	</li>
+	<li class="activityFeed-step">
 		<div class="activityFeed-step-avatar avatar mod-placeholder" translate="no">
 			<span class="avatar-picture"></span>
 		</div>

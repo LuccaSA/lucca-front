@@ -1,16 +1,36 @@
 @use 'exports' as *;
 @use '@lucca-front/scss/src/components/avatar/exports' as avatar;
+@use '@lucca-front/scss/src/components/readmore/exports' as readMore;
 
 .activityFeed {
 	@layer components {
 		@include vars;
 		@include component;
 	}
+
+	@layer mods {
+		.readMore {
+			@include readMore.linkReset;
+			@include readMore.sunken;
+		}
+	}
 }
 
 .activityFeed-step-avatar {
 	@layer mods {
 		@include avatar.S;
+	}
+}
+
+.activityFeed-step-state.mod-success {
+	@layer mods {
+		@include success;
+	}
+}
+
+.activityFeed-step-state.mod-critical {
+	@layer mods {
+		@include critical;
 	}
 }
 

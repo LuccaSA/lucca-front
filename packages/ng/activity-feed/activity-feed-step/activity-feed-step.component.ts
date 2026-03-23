@@ -29,9 +29,9 @@ export class ActivityFeedStepComponent {
 
 	readonly label = input.required<string>();
 
-	readonly user = input.required<ILuUser>();
+	readonly user = input<ILuUser | null>(null);
 
-	readonly date = input<Date>();
+	readonly date = input<Date | null>(null);
 
 	/**
 	 * format given to the date pipe for display.

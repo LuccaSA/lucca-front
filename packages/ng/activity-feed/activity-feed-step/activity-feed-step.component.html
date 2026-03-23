@@ -1,6 +1,10 @@
-<div class="activityFeed-step-avatar">
-	<lu-user-picture size="S" [user]="user()" />
-</div>
+@if (user()) {
+	<div class="activityFeed-step-avatar">
+		<lu-user-picture size="S" [user]="user()" />
+	</div>
+} @else {
+	<div class="activityFeed-step-state"></div>
+}
 <div class="activityFeed-step-description">
 	<p class="activityFeed-step-description-content">{{ label() }}</p>
 	<time class="comment-infos-date" [attr.datetime]="date().toISOString()" class="activityFeed-step-description-time">
