@@ -61,14 +61,15 @@ describe('DateRangeInputComponent', () => {
 
 		const input = spectator.query('.mod-start > input');
 		expect(input).toBeTruthy();
+		if (input) {
+			spectator.typeInElement('18/06/2025', input);
 
-		spectator.typeInElement('18/06/2025', input);
-
-		expect(ngModelChangeCallback).toHaveBeenCalledTimes(1);
-		expect(ngModelChangeCallback).toHaveBeenCalledWith({
-			start: new Date('2025-06-18T00:00:00.000Z'),
-			scope: 'day',
-		});
+			expect(ngModelChangeCallback).toHaveBeenCalledTimes(1);
+			expect(ngModelChangeCallback).toHaveBeenCalledWith({
+				start: new Date('2025-06-18T00:00:00.000Z'),
+				scope: 'day',
+			});
+		}
 	});
 
 	it('should not emit value at init if null value with reactive forms', fakeAsync(() => {
@@ -130,13 +131,14 @@ describe('DateRangeInputComponent', () => {
 
 		const input = spectator.query('.mod-start > input');
 		expect(input).toBeTruthy();
+		if (input) {
+			spectator.typeInElement('18/06/2025', input);
 
-		spectator.typeInElement('18/06/2025', input);
-
-		expect(valueChanges).toHaveBeenCalledTimes(1);
-		expect(valueChanges).toHaveBeenCalledWith({
-			start: new Date('2025-06-18T00:00:00.000Z'),
-			scope: 'day',
-		});
+			expect(valueChanges).toHaveBeenCalledTimes(1);
+			expect(valueChanges).toHaveBeenCalledWith({
+				start: new Date('2025-06-18T00:00:00.000Z'),
+				scope: 'day',
+			});
+		}
 	});
 });
