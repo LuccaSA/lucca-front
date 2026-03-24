@@ -396,16 +396,18 @@ export const BasicTagPluginTEST = createTestStory(WithTagPlugin, async (context)
 	const canvas = within(context.canvasElement);
 	const editor = canvas.getByRole('textbox');
 
-	await userEvent.click(editor);
-	await userEvent.keyboard('{Meta>}a{/Meta}{Backspace}');
-	await waitForAngular();
+	await context.step('Insert the 3 tags from the tag plugin', async () => {
+		await userEvent.click(editor);
+		await userEvent.keyboard('{Meta>}a{/Meta}{Backspace}');
 
-	await userEvent.click(canvas.getByTestId('tag-0'));
-	await userEvent.click(canvas.getByTestId('tag-1'));
-	await userEvent.click(canvas.getByTestId('tag-2'));
-	await waitForAngular();
+		await userEvent.click(canvas.getByText('Tag 1'));
+		await userEvent.click(canvas.getByText('Tag 2'));
+		await userEvent.click(canvas.getByText('Tag 3'));
+		await waitForAngular();
 
-	await expect(modelDisplay(context.canvasElement)).toHaveTextContent('{{tag1}}{{tag2}}{{tag3}}');
+		const model = modelDisplay(context.canvasElement);
+		await expect(model).toHaveTextContent('{{tag1}}{{tag2}}{{tag3}}');
+	});
 });
 
 function modelDisplay(canvasElement: HTMLElement) {
