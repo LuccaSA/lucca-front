@@ -142,6 +142,12 @@ export default {
 		structure: {
 			description: "Augmente le border-radius du champ pour l'utiliser en élément de structure.",
 		},
+		buttonFilled: {
+			description: "Augmente l'importance de l'action d'import en lui appliquant le style filled.",
+		},
+		AItag: {
+			description: '[Story] Ajoute un tag AI au contenu du composant.',
+		},
 	},
 	decorators: [
 		moduleMetadata({
@@ -205,7 +211,7 @@ export const Multi = {
 		const sizeSFileUploadParam = size ? ` size="S"` : ``;
 		const sizeSFileEntryParam = media ? ` size="S"` : sizeSFileUploadParam;
 
-		if (args.content) {
+		if (args.AItag) {
 			return {
 				props: {
 					fileUploadFeature,
@@ -277,7 +283,7 @@ export const Multi = {
 		illustration: 'paper',
 		structure: false,
 		buttonFilled: false,
-		content: false,
+		AItag: false,
 	},
 };
 
@@ -285,7 +291,7 @@ export const Single = {
 	render: (args, { argTypes }) => {
 		const multi = Multi.render(args, { argTypes });
 		const { accept, ...mainArgs } = args;
-		if (args.content) {
+		if (args.AItag) {
 			return {
 				props: { ...multi.props, accept },
 				template: `@let fileUpload = fileUploadFeature.fileUploads()[0];
@@ -320,6 +326,6 @@ export const Single = {
 		displayFileName: false,
 		structure: false,
 		buttonFilled: false,
-		content: false,
+		AItag: false,
 	},
 };
