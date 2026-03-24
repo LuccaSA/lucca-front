@@ -54,7 +54,7 @@ export abstract class AbstractDateComponent {
 		transform: transformDateInputToDate,
 	});
 
-	calendarMode = model<CalendarMode>();
+	calendarMode = model<CalendarMode | null>(null);
 
 	readonly panelOpened = output<void>();
 
@@ -113,7 +113,7 @@ export abstract class AbstractDateComponent {
 		return true;
 	}
 
-	isValidDate(date: Date): boolean {
+	isValidDate(date: Date | null | undefined): date is Date {
 		return !!date && !isNaN(date.getTime());
 	}
 

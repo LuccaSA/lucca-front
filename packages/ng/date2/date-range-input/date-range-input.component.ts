@@ -102,9 +102,9 @@ export class DateRangeInputComponent extends AbstractDateComponent implements On
 	endUserTextInput = signal('ɵ');
 
 	// CVA stuff
-	#onChange?: (value: DateRange) => void;
+	#onChange?: (value: DateRange | null) => void;
 
-	initialValue = signal<DateRange | null>(undefined);
+	initialValue = signal<DateRange | null | undefined>(undefined);
 	selectedRange = signal<DateRange | null>(null);
 
 	dateHovered = signal<Date | null>(null);
@@ -188,8 +188,9 @@ export class DateRangeInputComponent extends AbstractDateComponent implements On
 		if (inputValue !== 'ɵ') {
 			return inputValue;
 		}
-		if (this.selectedRange()?.start && this.isValidDate(this.selectedRange()?.start)) {
-			return this.getDateLabelForInput(this.selectedRange()?.start);
+		const range = this.selectedRange();
+		if (range?.start && this.isValidDate(range.start)) {
+			return this.getDateLabelForInput(range.start);
 		}
 		return '';
 	});
@@ -199,8 +200,9 @@ export class DateRangeInputComponent extends AbstractDateComponent implements On
 		if (inputValue !== 'ɵ') {
 			return inputValue;
 		}
-		if (this.selectedRange()?.end && this.isValidDate(this.selectedRange()?.end)) {
-			return this.getDateLabelForInput(this.selectedRange()?.end);
+		const range = this.selectedRange();
+		if (range?.end && this.isValidDate(range.end)) {
+			return this.getDateLabelForInput(range.end);
 		}
 		return '';
 	});
@@ -232,7 +234,7 @@ export class DateRangeInputComponent extends AbstractDateComponent implements On
 	filterPillDisabled = signal(false);
 
 	get isNavigationButtonFocused(): boolean {
-		return [this.previousButton()?.nativeElement, this.nextButton()?.nativeElement].includes(document.activeElement);
+		return [this.previousButton()?.nativeElement, this.nextButton()?.nativeElement].includes(document.activeElement ?? undefined);
 	}
 
 	constructor() {
@@ -322,14 +324,14 @@ export class DateRangeInputComponent extends AbstractDateComponent implements On
 	}
 
 	fixOrderIfNeeded(): void {
-		if (this.selectedRange() && isAfter(this.selectedRange()?.start, this.selectedRange()?.end)) {
-			const range = this.selectedRange();
+		const range = this.selectedRange();
+		if (range && range.end && isAfter(range.start, range.end)) {
 			this.selectedRange.set({
 				...range,
 				end: range.start,
 				start: range.end,
 			});
-			this.#onChange?.(this.selectedRange());
+			this.#onChange?.(range);
 		}
 	}
 
@@ -349,17 +351,20 @@ export class DateRangeInputComponent extends AbstractDateComponent implements On
 		// Once popover is opened, aka in the next CD cycle, focus current tabbable date
 		setTimeout(() => {
 			this.focusedCalendarIndex.set(0);
-			if (propertyToFocus && this.selectedRange()?.[propertyToFocus]) {
+			const selectedRange = this.selectedRange();
+			if (propertyToFocus && selectedRange && selectedRange[propertyToFocus]) {
 				// Specific case: if range is on a single month, focus on it on left calendar
 				// Same goes for focus on start date, we want it on left panel
-				if (propertyToFocus === 'start' || compareCalendarPeriods(this.mode(), this.selectedRange()?.start, this.selectedRange()?.end)) {
-					this.currentDate.set(this.selectedRange()?.[propertyToFocus]);
-					this.tabbableDate.set(this.selectedRange()?.[propertyToFocus]);
+				if (propertyToFocus === 'start' || (selectedRange.end && compareCalendarPeriods(this.mode(), selectedRange.start, selectedRange.end))) {
+					this.currentDate.set(selectedRange[propertyToFocus]);
+					this.tabbableDate.set(selectedRange[propertyToFocus]);
 				} else {
 					// Compute the date to use for proper focus on left panel, minus one calendar on focus date basically
-					const leftPanelFocus = this.selectedRange()?.end;
-					this.currentDate.set(leftPanelFocus);
-					this.tabbableDate.set(leftPanelFocus);
+					const leftPanelFocus = selectedRange.end;
+					if (leftPanelFocus) {
+						this.currentDate.set(leftPanelFocus);
+						this.tabbableDate.set(leftPanelFocus);
+					}
 				}
 			}
 			if (focusTabbableDate) {
@@ -369,7 +374,8 @@ export class DateRangeInputComponent extends AbstractDateComponent implements On
 	}
 
 	dateClicked(date: Date, popoverRef: PopoverDirective): void {
-		if (this.selectedRange() === null) {
+		const selectedRange = this.selectedRange();
+		if (selectedRange === null) {
 			this.selectedRange.set({
 				start: date,
 				scope: this.mode(),
@@ -380,15 +386,15 @@ export class DateRangeInputComponent extends AbstractDateComponent implements On
 			// If we're editing end field
 			if (this.editedField() === 1) {
 				// If end is before start, invert them
-				if (isBefore(date, this.selectedRange()?.start)) {
+				if (isBefore(date, selectedRange.start)) {
 					this.selectedRange.set({
 						start: date,
 						scope: this.mode(),
-						end: this.selectedRange().start,
+						end: selectedRange.start,
 					});
 				} else {
 					this.selectedRange.set({
-						...this.selectedRange(),
+						...selectedRange,
 						scope: this.mode(),
 						end: date,
 					});
@@ -401,14 +407,14 @@ export class DateRangeInputComponent extends AbstractDateComponent implements On
 			} else {
 				// Else, we're editing start field
 				// If start is after end, invert them
-				if (isAfter(date, this.selectedRange()?.end)) {
+				if (selectedRange.end && isAfter(date, selectedRange.end)) {
 					this.selectedRange.set({
 						start: date,
 						scope: this.mode(),
 					});
 				} else {
 					this.selectedRange.set({
-						...this.selectedRange(),
+						...selectedRange,
 						start: date,
 						scope: this.mode(),
 					});
@@ -419,7 +425,7 @@ export class DateRangeInputComponent extends AbstractDateComponent implements On
 			}
 		}
 
-		this.#onChange?.(this.selectedRange());
+		this.#onChange?.(selectedRange);
 	}
 
 	arrowDown(popoverRef: PopoverDirective, fieldToFocus: 'start' | 'end'): void {
@@ -449,7 +455,7 @@ export class DateRangeInputComponent extends AbstractDateComponent implements On
 		const _dateRange = transformDateRangeInputToDateRange(dateRange);
 
 		if (isNil(this.initialValue())) {
-			this.selectedRange.set(this.clearBehavior() === 'reset' ? this.initialValue() : _dateRange);
+			this.selectedRange.set(this.clearBehavior() === 'reset' ? (this.initialValue() ?? null) : _dateRange);
 		}
 
 		if (dateRange != null) {
@@ -466,11 +472,11 @@ export class DateRangeInputComponent extends AbstractDateComponent implements On
 
 	override setDisabledState(isDisabled: boolean) {
 		this.filterPillDisabled.set(isDisabled);
-		super.setDisabledState(isDisabled);
+		super.setDisabledState?.(isDisabled);
 	}
 
 	clear() {
-		const newValue = this.clearBehavior() === 'reset' ? this.initialValue() : null;
+		const newValue = this.clearBehavior() === 'reset' ? (this.initialValue() ?? null) : null;
 		this.selectedRange.set(newValue);
 		this.#onChange?.(this.selectedRange());
 		this.onTouched?.();

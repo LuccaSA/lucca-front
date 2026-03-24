@@ -36,11 +36,11 @@ export function comparePeriods(mode: CalendarMode | null, a: Date, b: Date): boo
 }
 
 export function compareCalendarPeriods(mode: CalendarMode, a: Date, b: Date): boolean {
-	return modeToCalendarComparator[mode](a, b);
+	return mode ? modeToCalendarComparator[mode](a, b) : false;
 }
 
-export function startOfPeriod(mode: CalendarMode, date: Date): Date {
-	return modeToPeriodStart[mode](date);
+export function startOfPeriod(mode: CalendarMode | null, date: Date): Date {
+	return mode ? modeToPeriodStart[mode](date) : date;
 }
 
 function stringToDateISO(value: string): Date {
@@ -53,6 +53,7 @@ function stringToDateISO(value: string): Date {
 
 export function transformDateInputToDate(value: null | undefined): null;
 export function transformDateInputToDate(value: Date | string): Date;
+export function transformDateInputToDate(value: Date | string | null): Date | null;
 export function transformDateInputToDate(value: Date | null | undefined | string): Date | null {
 	if (isNil(value)) {
 		return null;
