@@ -1,0 +1,6 @@
+@mixin pending {
+	--components-activityFeed-step-description-alignSelf: center;
+	--components-activityFeed-step-description-fontStyle: italic;
+	--components-activityFeed-step-description-color: var(--pr-t-color-text-subtle);
+	--components-activityFeed-step-description-lineHeight: var(--pr-t-font-body-S-lineHeight);
+}

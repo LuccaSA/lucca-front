@@ -13,6 +13,7 @@ import { LU_ACTIVITY_FEED_TRANSLATIONS } from '../activity-feed.translate';
 	host: {
 		role: 'listitem',
 		class: 'activityFeed-step',
+		'[class.mod-pending]': 'status() === "pending"',
 	},
 })
 export class ActivityFeedStepComponent {
@@ -29,9 +30,11 @@ export class ActivityFeedStepComponent {
 
 	readonly label = input.required<string>();
 
-	readonly user = input.required<ILuUser>();
+	readonly user = input<ILuUser | null>(null);
 
-	readonly date = input<Date>();
+	readonly status = input<'success' | 'critical' | 'pending' | null>(null);
+
+	readonly date = input<Date | null>(null);
 
 	/**
 	 * format given to the date pipe for display.
@@ -40,7 +43,10 @@ export class ActivityFeedStepComponent {
 	 */
 	readonly datePipeFormat = input<string>();
 
-	protected readonly dateDisplay = computed<string>(() => {
+	protected readonly dateDisplay = computed<string | null>(() => {
+		if (!this.date()) {
+			return null;
+		}
 		const formatted = this.#intlDateTimeFormat.format(this.date());
 		const parts = formatted.split(', ');
 		return `${parts[0].charAt(0).toUpperCase() + parts[0].slice(1)} ${this.intl().at} ${parts[1]}`;

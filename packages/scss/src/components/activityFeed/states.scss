@@ -1,7 +1,26 @@
+@use '@lucca-front/scss/src/commons/utils/color';
+@use '@lucca-front/icons/src/commons/utils/icon';
+
 @mixin empty {
 	--components-activityFeed-content-update-display: none;
 }
 
 @mixin single {
 	--components-activityFeed-content-update-icon-display: none;
+}
+
+@mixin success {
+	@include color.palette('success');
+
+	&::before {
+		@include icon.generate('sign_confirm');
+	}
+}
+
+@mixin critical {
+	@include color.palette('critical');
+
+	&::before {
+		@include icon.generate('sign_close');
+	}
 }

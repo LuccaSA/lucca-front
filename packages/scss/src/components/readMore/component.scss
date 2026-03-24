@@ -10,7 +10,7 @@
 		.readMore-link.link {
 			position: absolute;
 			display: flex;
-			inset: auto 0 var(--pr-t-spacings-50) auto;
+			inset: auto 0 var(--components-readMore-link-insetBlockEnd) auto;
 			flex-direction: column;
 			z-index: 1;
 			line-height: var(--pr-t-font-body-M-lineHeight);

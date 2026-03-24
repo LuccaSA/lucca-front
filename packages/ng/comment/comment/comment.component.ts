@@ -1,6 +1,6 @@
 import { DatePipe, NgTemplateOutlet } from '@angular/common';
 import { booleanAttribute, ChangeDetectionStrategy, Component, computed, inject, input, LOCALE_ID, ViewEncapsulation } from '@angular/core';
-import { PortalDirective } from '@lucca-front/ng/core';
+import { PortalContent, PortalDirective } from '@lucca-front/ng/core';
 import { LuUserPictureModule } from '@lucca-front/ng/user';
 import { COMMENT_BLOCK_INSTANCE } from '../token';
 
@@ -29,7 +29,7 @@ export class CommentComponent {
 
 	#parentBlock = inject(COMMENT_BLOCK_INSTANCE, { optional: true });
 
-	readonly content = input<string>();
+	readonly content = input.required<PortalContent>();
 
 	readonly date = input<Date>();
 
@@ -48,7 +48,9 @@ export class CommentComponent {
 
 	readonly size = computed(() => this.#parentBlock?.size());
 
-	readonly contentIsHTML = computed(() => /<\/?[a-z][\s\S]*>/i.test(this?.content()));
+	readonly contentIsPortal = computed(() => !this.isStringPortalContent(this.content()));
+
+	readonly contentIsHTML = computed(() => !this.contentIsPortal() && /<\/?[a-z][\s\S]*>/i.test(this.content() as string));
 
 	readonly noInfos = input(false, { transform: booleanAttribute });
 
@@ -59,7 +61,11 @@ export class CommentComponent {
 
 	readonly role = computed(() => (this.#parentBlock?.isSingleComment() ? null : 'listitem'));
 
-	get roleAttr(): string {
+	get roleAttr(): string | null {
 		return this.role();
+	}
+
+	public isStringPortalContent(message: PortalContent): message is string {
+		return typeof message === 'string';
 	}
 }

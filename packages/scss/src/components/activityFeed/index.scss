@@ -1,21 +1,35 @@
 @use 'exports' as *;
 @use '@lucca-front/scss/src/components/avatar/exports' as avatar;
+@use '@lucca-front/scss/src/components/readMore/exports' as readMore;
 
 .activityFeed {
 	@layer components {
 		@include vars;
 		@include component;
 	}
-}
 
-.activityFeed-step-avatar {
 	@layer mods {
-		@include avatar.S;
+		.readMore {
+			@include readMore.linkReset;
+			@include readMore.sunken;
+		}
 	}
 }
 
-.activityFeed-content-update {
-	@layer mods {
+@layer mods {
+	.activityFeed-step-avatar {
+		@include avatar.S;
+	}
+
+	.activityFeed-step-state.mod-success {
+		@include success;
+	}
+
+	.activityFeed-step-state.mod-critical {
+		@include critical;
+	}
+
+	.activityFeed-content-update {
 		&:has(.activityFeed-content-update-before:empty, .activityFeed-content-update-after:empty) {
 			@include single;
 		}
@@ -25,5 +39,9 @@
 				@include empty;
 			}
 		}
+	}
+
+	.activityFeed-step.mod-pending {
+		@include pending;
 	}
 }
