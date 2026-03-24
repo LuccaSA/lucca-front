@@ -87,6 +87,12 @@ export default {
 			},
 			description: 'Applique une palette de couleurs au callout.',
 		},
+		popoverTrigger: {
+			options: ['click', 'click+hover', 'hover+focus'],
+			control: {
+				type: 'select',
+			},
+		},
 		size: {
 			options: [null, 'XS', 'S', 'M'],
 			control: {
@@ -105,7 +111,7 @@ export default {
 	},
 } as Meta;
 
-export const Template: StoryObj<CalloutPopoverComponent & { items: number; customText: string }> = {
+export const Template: StoryObj<CalloutPopoverComponent & { items: number; customText: string; popoverTrigger: 'click' | 'click+hover' | 'hover+focus' }> = {
 	args: {
 		icon: 'signInfo',
 		palette: 'none',
@@ -115,6 +121,7 @@ export const Template: StoryObj<CalloutPopoverComponent & { items: number; custo
 		buttonAlt: '2 errors',
 		customText: '',
 		heading: '',
+		popoverTrigger: null,
 		headingHiddenIfSingleItem: false,
 		items: 2,
 		closeDelay: 500,
