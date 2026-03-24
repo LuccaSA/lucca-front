@@ -19,7 +19,7 @@ export interface CalendarCellInfo {
 	isSelected: boolean;
 	noButton: boolean;
 	label?: string;
-	rangeInfo: RangeInfo;
+	rangeInfo: RangeInfo | null;
 	classes: Record<string, boolean>;
 }
 
