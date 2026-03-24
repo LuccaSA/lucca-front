@@ -138,7 +138,7 @@ async function main(): Promise<void> {
 
 	const results = await withConcurrency(targets, config.ai.concurrency, async (target) => {
 		const { slug } = target;
-		const skillPath = path.join(config.output.skillsDir, 'lucca-front', 'resources', `${slug}.md`);
+		const skillPath = path.join(config.output.skillsDir, 'lucca-front', 'references', `${slug}.md`);
 
 		// Skip if the file already exists and --force is not set
 		if (fs.existsSync(skillPath) && !flags.force && !flags.dryRun) {

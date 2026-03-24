@@ -1,6 +1,6 @@
 {
   "richtextinput": {
-    "description": "Composant pr-RichTextfield, sélecteurs: lu-rich-text-input, lu-rich-text-input-toolbar. Inputs: l\\'état, les feedbacks, le formatage HTML, le formatage Markdown. Variantes: Focus, Hover, Default, Disabled / Readonly, Content=Empty, Content=Filled, Feedback=None, Feedback=Critical, Presentation=True, Presentation=False. Mots-clés: rich text, input, formulaire.",
+    "description": "Composant pr-RichTextfield, sélecteurs Angular lu-rich-text-input, lu-rich-text-input-toolbar, directives luWithHtmlFormatter, luWithMarkdownFormatter, luWithPlainTextTagsFormatter, inputs principaux: placeholder, disabled, required, autoResize, hideToolbar, presentation, variantes: Focus, Empty, Filled, Critical, Disabled, mots-clés de déclenchement: Rich Text Input.",
     "category": "Forms",
     "figmaName": "pr-RichTextfield (v19.3)",
     "storybookName": "RichTextInput"
@@ -12,475 +12,475 @@
     "storybookName": "Select"
   },
   "skeleton": {
-    "description": "Composant pr-Skeleton, utilisé pour afficher des états de chargement. Sélecteur : luSkeleton, variantes : Type, Dark, mots-clés : chargement, squelette.",
+    "description": "Composant pr-Skeleton pour afficher des éléments de chargement. Variantes incluent différents types de texte et styles. Selecteurs principaux : `luSkeleton`, `<lu-skeleton>`. Mots-clés : loading, skeleton, placeholder.",
     "category": "Loaders",
     "figmaName": "pr-Skeleton",
     "storybookName": "Skeleton"
   },
   "skeleton-button": {
-    "description": "SkeletonButtonComponent, sélecteur lu-skeleton-button, variante pr-SkeletonButton (v18.1), composants de chargement, affichage d'état de chargement.",
+    "description": "Pr-SkeletonButton (v18.1), lu-skeleton-button, dark, size. Les Skeletons permettent de faire patienter l utilisateur en lui indiquant le type et la position des contenus en cours de chargement.",
     "category": "Loaders",
     "figmaName": "pr-SkeletonButton (v18.1)",
     "storybookName": "Skeleton Button"
   },
   "skeleton-header": {
-    "description": "pr-SkeletonPageHeader (v18.1), lu-skeleton-header. Permet d'indiquer le type et la position des contenus en cours de chargement. Variantes : pr-SkeletonPageHeader (v18.1).",
+    "description": "Composant pr-SkeletonPageHeader, directive lu-skeleton-header. Indique à l'utilisateur le type et la position des contenus en cours de chargement. Variantes : pr-SkeletonPageHeader (v18.1).",
     "category": "Loaders",
     "figmaName": "pr-SkeletonPageHeader (v18.1)",
     "storybookName": "Skeleton Header"
   },
   "resource-card": {
-    "description": "Composant de carte de ressource, sélecteurs Angular: lu-resource-card-wrapper, a[luLink], button[luLink], button[luResourceCardAction], a[luResourceCardAction], lu-status-badge, lu-tag, [luTooltip]. Variantes: Layout=Grid, Layout=Stacked.",
+    "description": "Carte de ressource, sélecteurs : lu-resource-card, button[luResourceCardAction], a[luResourceCardAction], lu-resource-card-wrapper, a[luLink], button[luLink], lu-status-badge, lu-tag, [luTooltip]. Inputs : aucun. Variantes : State (Hover, Disabled, Focus, Active), Size (S, M), Layout (Stacked, Grid), Illustration (True, False).",
     "category": "Structure",
-    "figmaName": "pr-ResourceCardWrapper (v21.0)  🧪",
+    "figmaName": "pr-ResourceCard (v21.0)  🧪",
     "storybookName": "Resource Card"
   },
   "skeleton-field": {
-    "description": "Composant de squelette pour indiquer le chargement des contenus. Directive : lu-skeleton-field. Aide à patienter en indiquant le type et la position des contenus. Variantes : pr-SkeletonFormField (v18.1).",
+    "description": "SkeletonFieldComponent, sélecteur lu-skeleton-field, inputs hiddenLabel et rows, variante pr-SkeletonFormField (v18.1), composants de chargement.",
     "category": "Loaders",
     "figmaName": "pr-SkeletonFormField (v18.1)",
     "storybookName": "Skeleton Field"
   },
   "dialog": {
-    "description": "AssetsDialogs, directives Angular, variantes AssetsDialogs / Backdrop.",
+    "description": "Composant AssetsDialogs, utilisé pour afficher des dialogues avec des variantes incluant AssetsDialogs et Backdrop.",
     "category": "Overlays",
     "figmaName": "AssetsDialogs",
     "storybookName": "Dialog"
   },
   "tags": {
-    "description": "TagComponent, sélecteur lu-tag, inputs principaux: size, type, palette, variantes: Fill, Outline, mots-clés: tag, texte, étiquette.",
+    "description": "Composant pr-Tag, sélecteur `lu-tag`, inputs principaux : `size`, `outlined`, `icon`, `AI`, `withEllipsis`, `label`. Variantes disponibles : tailles (S, M, L), types (Fill, Outline), palettes (Blueberry, Lime, Glacier, etc.).",
     "category": "Texts",
     "figmaName": "pr-Tag",
     "storybookName": "Tags"
   },
   "statusbadge": {
-    "description": "Composant pr-DotBadge, sélecteur Angular lu-status-badge. Inputs : size. Variantes : Size=S, Size=XS, Size=M. Mots-clés de déclenchement : badge, statut.",
+    "description": "Composant pr-DotBadge, sélecteur lu-status-badge, inputs : palette, size, label, withEllipsis. Variantes : Size=S, Size=XS, Size=M.",
     "category": "Texts",
     "figmaName": "pr-DotBadge",
     "storybookName": "StatusBadge"
   },
   "link": {
-    "description": "Composant pr-Link, directive luLink, variantes de taille, d\\'underline, d\\'état et de palette disponibles.",
+    "description": "Composant pr-Link, directives/sélecteurs Angular, inputs principaux, variantes (Size, Underline, State, Palette), mots-clés de déclenchement.",
     "category": "Actions",
     "figmaName": "pr-Link",
     "storybookName": "Link"
   },
   "comment": {
-    "description": "Composant pr-Comment pour afficher des commentaires. Sélecteurs : lu-comment-block, lu-comment-chat, lu-comment. Inputs : align, size. Variantes : Align=Right, Size=M, Align=Left, Size=S. Mots-clés : commentaire, chat, blocs.",
+    "description": "Composant pr-Comment, directives/sélecteurs Angular : lu-comment, lu-comment-block, lu-comment-chat. Inputs principaux : noAvatar, compact, small, date, datePipeFormat, firstName, lastName. Variantes : Align=Right, Size=M, Align=Left, Size=S, Align=Right, Size=S, Align=Left, Size=M. Mots-clés : commentaires, discussion, chat.",
     "category": "Texts",
     "figmaName": "pr-Comment",
     "storybookName": "Comment"
   },
   "clear": {
-    "description": "Composant pr-Clear, sélecteur lu-clear, variantes de tailles, palettes, état d'activation, mots-clés de déclenchement.",
+    "description": "Composant pr-Clear, sélecteur: lu-clear, inputs: disabled, palette, inverted, size, alt, hidden, variantes: 40 (ex: Size=M, Palette=Product, Invert=False, State=Default).",
     "category": "Texts",
     "figmaName": "pr-Clear",
     "storybookName": "Clear"
   },
   "readmore": {
-    "description": "Composant pr-ReadMore, sélecteur lu-read-more, variantes de taille et de surface, inputs principaux: texte, ouvert. Mots-clés: lire plus, développement, contenu dynamique.",
+    "description": "Composant pr-ReadMore, sélecteur lu-read-more. Inputs principaux : lineClamp, surface, textFlow, openOnly, innerContent. Variantes : Size=M, Surface=Sunken, Size=M, Surface=Raised, Size=S, Surface=Default, Size=S, Surface=Sunken, Size=M, Surface=Default, Size=S, Surface=Raised.",
     "category": "Texts",
     "figmaName": "pr-ReadMore (v19.3)",
     "storybookName": "ReadMore"
   },
   "fieldset": {
-    "description": "Composant pr-Fieldset pour grouper des éléments de formulaire. Sélecteurs : lu-fieldset, lu-form-field, lu-text-input, lu-grid, lu-grid-column. Variantes : pr-Fieldset. Mots-clés déclencheurs : formulaire, regroupement, interface.",
+    "description": "Composant AssetsFieldset, directives Angular lu-fieldset, lu-form-field, lu-text-input, lu-grid, lu-grid-column. Inputs : horizontal, expandable, withAction, expanded, size, heading, helper, presentation. Variantes : Columns=2 / 2, Columns=4, Lines=3, Lines=5, Lines=1, Columns=1 / 1 / 1, AssetsFieldset / ContextualFieldset, Columns=3 / 1, Lines=4, AssetsFieldset / DraggableFieldset, Columns=1 / 1 / 1 / 1, Columns=2 / 1 / 1, Columns=2, Columns=1 / 2, Lines=2, Columns=1 / 1 / 2, Columns=1 / 2 / 1, Columns=1 / 3, Columns=3, Lines=6, Lines=7, Columns=1 / 1, Lines=8, Columns=1, Columns=2 / 1.",
     "category": "Forms",
-    "figmaName": "pr-Fieldset",
+    "figmaName": "AssetsFieldset",
     "storybookName": "Fieldset"
   },
   "dateinput": {
-    "description": "pr-DatePicker, directives Angular, inputs principaux: size, period, state, content, feedback, form presentation, presentation. Variantes: Size, Period, State, Content, Feedback.",
+    "description": "Composant pr-DatePicker, directives/sélecteurs Angular, inputs principaux : size, period, state, content, feedback, formPresentation, presentation. Variantes : S, M, Days, Months, Years, Default, Hover, Focus, Disabled / Readonly, etc.",
     "category": "Forms",
     "figmaName": "pr-DatePicker",
     "storybookName": "DateInput"
   },
   "duration-picker": {
-    "description": "Composant pr-DurationPicker, directives/sélecteurs Angular, inputs principaux, variantes disponibles Type, Size, State, Content, Feedback. Mots-clés: \"durée\", \"sélecteur\".",
+    "description": "Composant pr-DurationPicker, directives luDurationPicker, inputs size, type, state, feedback, presentation, variantes de taille, type, et état disponibles.",
     "category": "Forms",
     "figmaName": "pr-DurationPicker",
     "storybookName": "Duration Picker"
   },
   "highlight-data": {
-    "description": "Composant pr-HighlightData, sélecteur lu-highlight-data, variants Size, Theme, Data first, Feedback.",
+    "description": "Composant pr-HighlightData, sélecteur lu-highlight-data, input principal palette, variantes Size, Theme, Data first, Feedback. Mots-clés : highlight, données, bulle.",
     "category": "Structure",
     "figmaName": "pr-HighlightData (v19.3)",
     "storybookName": "Highlight data"
   },
   "filterbar": {
-    "description": "Composant FilterBar, sélecteurs Angular: lu-filter-bar, lu-simple-select, lu-multi-select, lu-date-input, lu-date-range-input, lu-divider, lu-filter-pill, lu-form-field, lu-checkbox-input, lu-text-input, lu-numeric-badge, lu-segmented-control, lu-segmented-control-filter. Variantes: Type=Full, Type=Views only, Type=Right-align views, Type=FilterPills only.",
+    "description": "Composant FilterBar, sélecteur lu-filter-bar, directives luFilterPillAddonBefore, luFilterPillAddonAfter. Inputs principaux : pas d\\'inputs spécifiés. Variantes : Full, Views only, Right-align views, FilterPills only.",
     "category": "Forms",
     "figmaName": "pr-FilterBar (v19.2)",
     "storybookName": "FilterBar"
   },
   "input-framed": {
-    "description": "Composant de champ de formulaire, directives lu-input-framed, lu-form-field, lu-radio, lu-radio-group-input, lu-checkbox-input, variantes : size, type, layout, critical.",
+    "description": "Composant pr-InputFramed, sélecteur lu-input-framed, inputs : panel, illustration, info, tag, checkbox, center, inlineMessage, presentation, variantes : Size, Type, Layout, Critical. Utilisable pour créer des champs de formulaire structurés avec des options radio et checkbox.",
     "category": "Forms",
     "figmaName": "pr-InputFramed (v20.1)",
     "storybookName": "Input Framed"
   },
   "daterangeinput": {
-    "description": "Composant pr-DateRangePicker, sélecteur de date, luXxx, avec des inputs principaux comme period, size et state. Variantes de présentation et feedback disponibles. Mots-clés: date selection, date range, input.",
+    "description": "Composant pr-DateRangePicker, directives/sélecteurs Angular non disponibles, inputs principaux non renseignés, variantes multiples incluant Size, Period, State, Content, Feedback, Presentation. Mots-clés : date range picker, formulaire.",
     "category": "Forms",
     "figmaName": "pr-DateRangePicker (v19.1)",
     "storybookName": "DateRangeInput"
   },
   "radiofield": {
-    "description": "Composant pr-Radio, sélecteurs Angular lu-radio, lu-radio-group-input, lu-form-field. Inputs: size, checked, state, error. Variantes: size S/M, checked true/false, state active/default/hover/focus/disable, error true/false.",
+    "description": "Composant pr-Radio, sélecteurs lu-radio, lu-radio-group-input, inputs: size, inlineMessageState, hiddenLabel, tooltip, label, required, inlineMessage, presentation. Variantes: Size=S, Checked=True, State=Active, Error=False, etc.",
     "category": "Forms",
     "figmaName": "pr-Radio",
     "storybookName": "RadioField"
   },
   "switchfield": {
-    "description": "Composant pr-Switch, sélecteurs lu-form-field, lu-checkbox-input, lu-switch-input, inputs size, checked, state, plusieurs variantes pour tailles, états et vérification.",
+    "description": "Composant pr-Switch, directives Angular lu-form-field, lu-checkbox-input, lu-switch-input, inputs : size, inlineMessage, inlineMessageState, hiddenLabel, tooltip, label, required, presentation. Variantes disponibles : Size=S, Checked=False, State=Default, Size=M, Checked=True, State=Disabled / Readonly, Size=M, Checked=False, State=Hover, Size=M, Checked=True, State=Focus, Size=S, Checked=True, State=Active, Size=S, Checked=True, State=Default, Size=M, Checked=False, State=Active, Size=S, Checked=False, State=Active, Size=M, Checked=False, State=Focus, Size=S, Checked=False, State=Hover, Size=S, Checked=True, State=Focus, Size=M, Checked=True, State=Active, Size=M, Checked=True, State=Default, Size=S, Checked=False, State=Focus, Size=M, Checked=False, State=Default, Size=M, Checked=True, State=Hover, Size=S, Checked=True, State=Hover, Size=S, Checked=False, State=Disabled / Readonly, Size=M, Checked=False, State=Disabled / Readonly, Size=S, Checked=True, State=Disabled / Readonly.",
     "category": "Forms",
     "figmaName": "pr-Switch",
     "storybookName": "SwitchField"
   },
   "empty-state": {
-    "description": "Composant pr-EmptyStateSection, sélecteurs Angular lu-empty-state-page, lu-empty-state-section, variantes pour alignement du texte (Center, Left).",
+    "description": "Composant pour afficher un état vide, avec les sélecteurs Angular lu-empty-state-page et lu-empty-state-section, inputs hx, heading, description, slotTop, variantes de taille d’écran et de produit.",
     "category": "Feedback",
-    "figmaName": "pr-EmptyStateSection",
+    "figmaName": "pr-EmptyStateFull",
     "storybookName": "Empty State"
   },
   "calendar": {
-    "description": "Composant de calendrier, directive/sélecteur Angular non disponible pour le moment, inputs principaux : type, variantes disponibles : Day, Month, Year, mots-clés de déclenchement : calendrier, date.",
+    "description": "Composant pr-Calendar, utilisé pour la sélection de dates. Éléments principaux : luCalendar. Variantes : Type=Day, Type=Month, Type=Year. Mots-clés : calendrier, date, sélection.",
     "category": "Forms",
     "figmaName": "pr-Calendar",
     "storybookName": "Calendar"
   },
   "callout-popover": {
-    "description": "Composant pr-CalloutPopover, sélecteur lu-callout-popover, variant de taille, palette et état, inputs principaux, triggers contextuels.",
+    "description": "Composant CalloutPopover, sélecteur lu-callout-popover, inputs items, buttonLabel, buttonAlt, icon, state, heading, headingHiddenIfSingleItem, palette, closeDelay, openDelay, customText. Variante de popover pour afficher des informations contextuelles.",
     "category": "Feedback",
     "figmaName": "pr-CalloutPopover",
     "storybookName": "Callout Popover"
   },
   "multi-select": {
-    "description": "Composant AssetsSelect, directives Angular [luOption], [lu-multi-select], lu-form-field, inputs : none, variantes : Multiple=True, Tree picker=None, State=Default, Selected=Unselected, Type=Simple, Type=Multiple, etc.",
+    "description": "Composant AssetsSelect, directives : [luOption], [lu-multi-select], inputs : tooltip, label, required, placeholder, size, width, inlineMessage, inlineMessageState, hiddenLabel, clearable, keepSearchAfterSelection, loading, presentation.",
     "category": "Forms",
     "figmaName": "AssetsSelect",
     "storybookName": "Multi Select"
   },
   "textareafield": {
-    "description": "Composant pr-Textarea, sélecteurs Angular : lu-form-field, lu-textarea-input. Inputs principaux : size, state, content, feedback, presentation. Variantes : XS (depréciée), Default, Hover, Focus, Disabled, avec différents feedbacks.",
+    "description": "Composant pr-Textarea, directives lu-form-field et lu-textarea-input, inputs label, required, tooltip, disabled, placeholder, size, inlineMessage, inlineMessageState, rows, autoResize, autoResizeScrollIntoView, hiddenLabel, counter, disableSpellcheck, presentation.",
     "category": "Forms",
     "figmaName": "pr-Textarea",
     "storybookName": "TextAreaField"
   },
   "filterpills": {
-    "description": "Composant pr-FilterPill, directives/sélecteurs Angular : lu-filter-pill, lu-simple-select, lu-multi-select, lu-date-input, lu-date-range-input, lu-checkbox-input. Inputs principaux : totalCount, departments. Variantes : MultiplteSelect, SimpleSelect, DatePicker, DateRangePicker, Checkbox, Filter button, mots-clés : filtrage, sélection, entrée de dates.",
+    "description": "Composant FilterPill, directives Angular lu-filter-pill, lu-simple-select, lu-multi-select, lu-date-input, lu-date-range-input, lu-checkbox-input. Inputs: clearable, label, filterPillLabelPlural, name, disabled. Variantes: multipleSelect, simpleSelect, datePicker, checkbox, dateRangePicker, Filter button.",
     "category": "Forms",
     "figmaName": "pr-FilterPill (v19.2)",
     "storybookName": "FilterPills"
   },
   "phonenumberfield": {
-    "description": "Composant pr-PhoneNumberField, sélecteurs Angular lu-form-field et lu-phone-number-input, inputs, variantes, formulaires, numéro de téléphone, champs de saisie.",
+    "description": "Composant pour entrer un numéro de téléphone. Sélecteurs : lu-phone-number-input, lu-form-field. Inputs : disabled, label, required, size, hiddenLabel, inlineMessage, inlineMessageState, errorInlineMessage, autocomplete, noAutoPlaceholder, tooltip, presentation. Variantes : S, Disabled, Placeholder, Feedback=Critical/Warning/Success, Presentation=False/True.",
     "category": "Forms",
     "figmaName": "pr-PhoneNumberField",
     "storybookName": "PhoneNumberField"
   },
   "divider": {
-    "description": "Composant pr-Divider, sélecteur lu-divider, styles disponibles : Horizontal, Horizontal - Content, Vertical.",
+    "description": "Composant Divider, sélecteur lu-divider, input separatorRole, variantes Horizontal, Horizontal - Content, Vertical.",
     "category": "Listings",
     "figmaName": "pr-Divider",
     "storybookName": "Divider"
   },
   "toasts": {
-    "description": "Composant pr-Toast, directive luToast. Inputs principaux : feedback. Variantes : Error, Warning, Success, Informative. Mots-clés : notification, message d\\'alerte, feedback utilisateur.",
+    "description": "<Composant de notification, pr-Toast, pouvant afficher différents types de messages (Error, Warning, Success, Informative). Utilise les sélecteurs luToast.>",
     "category": "Overlays",
     "figmaName": "pr-Toast",
     "storybookName": "Toasts"
   },
   "button": {
-    "description": "Composant pr-ButtonGroup, directives Angular, inputs principaux: type, palette, nombre. Variantes disponibles: Type=Filled, Palette=Product, Number=4, Type=Outlined, Palette=Product, Number=3, Type=Filled, Palette=Product, Number=2, Type=Outlined, Palette=Product, Number=2, Type=Outlined, Palette=Neutral, Number=2, Type=Filled, Palette=Product, Number=3, Type=Outlined, Palette=Neutral, Number=4, Type=Outlined, Palette=Product, Number=4, Type=Outlined, Palette=Neutral, Number=3.",
+    "description": "Composant pr-ButtonGroup, directive luButton, inputs : block, palette, state, disclosure, critical, size. Variantes : Filled, Outlined, palettes Product et Neutral. Mots-clés : groupement de boutons, actions.",
     "category": "Actions",
     "figmaName": "pr-ButtonGroup",
     "storybookName": "Button"
   },
   "multilanguagefield": {
-    "description": "Composant pr-MultilanguageTextfield, sélecteurs lu-form-field et lu-multilanguage-input, inputs principaux, variantes: Size (S, M), State (HoverIcon, FocusInput, FocusPopover, Default), Content (Filled, Placeholder, Empty), Feedback (None, Critical, Warning), Présentation (True, False).",
+    "description": "Composant pr-MultilanguageTextfield, sélecteurs Angular lu-form-field et lu-multilanguage-input, inputs : label, required, allLanguagesRequired, size, hiddenLabel, inlineMessage, inlineMessageState, placeholder, tooltip, openOnFocus, width, autocomplete, presentation, variantes : Size, State, Content, Feedback, Presentation.",
     "category": "Forms",
     "figmaName": "pr-MultilanguageTextfield",
     "storybookName": "MultilanguageField"
   },
   "textfield": {
-    "description": "Composant de champ de texte, directives Angular lu-form-field et lu-text-input, inputs principaux: type, value, placeholder, feedback, size, state, variants comme outlined, filled, disabled. Mots-clés: entrée de texte, formulaire, validation, accessibilité.",
+    "description": "Composant pr-Textfield, directives lu-form-field et lu-text-input, inputs: label, required, tooltip, tag, size, inlineMessage, inlineMessageState, valueAlignRight, hiddenLabel, autocomplete, width, AI, iconAIalt, iconAItooltip, hasClearer, hasSearchIcon, disabled, placeholder, counter, presentation. Mots-clés: champs de formulaire, input texte, saisie utilisateur.",
     "category": "Forms",
     "figmaName": "pr-Textfield",
     "storybookName": "TextField"
   },
   "fileupload": {
-    "description": "Composant pour le téléchargement de fichiers, comprenant des variantes pour le téléchargement simple et multiple. Directives : lu-file-entry, lu-multi-file-upload, lu-single-file-upload. Inputs principaux : type, accept. Mots-clés : upload, file, drag and drop.",
+    "description": "Composant de téléchargement de fichiers, directives : lu-file-entry, lu-multi-file-upload, lu-single-file-upload, lu-form-field, lu-text-input, [luInput]. Inputs : size, fileMaxSize, illustration, media, displayFileName, structure. Variantes : Type=Default, Type=Media.",
     "category": "File",
     "figmaName": "AssetsFileUpload",
     "storybookName": "FileUpload"
   },
   "fileentry": {
-    "description": "Composant FileEntry, sélecteur lu-file-entry, variant par défaut, types, tailles et états disponibles. Inputs principaux: type, size, state.",
+    "description": "Composant pour afficher une entrée de fichier. Sélecteur : lu-file-entry. Inputs principaux : entry. Variantes : Default, Media, Error, Uploading; tailles : S, M. Mots-clés : FileEntry, upload, fichiers.",
     "category": "File",
     "figmaName": "pr-FileEntry (v19.3)",
     "storybookName": "FileEntry"
   },
   "app-layout": {
-    "description": "Composant pr-AppLayout (360), sélecteur Angular lu-app-layout. Idéal pour structurer des applications, gérer des en-têtes, pieds de page et zones de contenu. Utilisez-le pour les mises en page d\\'applications Angular avec des composants imbriqués.",
+    "description": "pr-AppLayout (1600), lu-app-layout, header, footer, sidebar, headerSticky, footerSticky, repeatContent, contentOverflowing. Composant Angular pour définir la structure des applications Lucca, assurant cohérence visuelle et flexibilité.",
     "category": "Structure",
-    "figmaName": "pr-AppLayout (360)",
+    "figmaName": "pr-AppLayout (1600)",
     "storybookName": "App Layout"
   },
   "bubble-icon": {
-    "description": "BubbleIconComponent, sélecteur lu-bubble-icon, variantes Direction (Right, Bottom, Top, Left), Palette (Lagoon, Kiwi, Pumpkin, Glacier, Warning, Watermelon, Mint, Lavender, Grape, Pineapple, Lime, Cucumber, Product, Blueberry).",
+    "description": "Composant pr-BubbleIcon, sélecteur lu-bubble-icon. Inputs : direction, size, icon, alt. Variantes : Direction, Palette. Mots-clés : icône, bulle, direction, taille.",
     "category": "Structure",
     "figmaName": "pr-BubbleIcon",
     "storybookName": "Bubble icon"
   },
   "icons": {
-    "description": "Composant pr-Icon pour afficher des icônes. Utilise le sélecteur <lu-icon>. Variantes: Size=S, Size=XS, Size=XXS, Size=XXL, Size=L, Size=XL, Size=M.",
+    "description": "Composant pr-Icon, utilisé pour afficher des icônes avec différentes tailles (XS, XXS, S, M, L, XL, XXL). Sélecteur : luIcon. Mots-clés : icône, affichage, taille, liste.",
     "category": "Listings",
     "figmaName": "pr-Icon",
     "storybookName": "Icons"
   },
   "color-picker": {
-    "description": "Composant pr-ColorPicker, directives [luOption], sélecteurs [luOption], lu-form-field, lu-color-input, variantes Compact, Size, State, Content, Presentation, mots-clés de déclenchement : ColorPicker, Input, Formulaire.",
+    "description": "Composant AssetsColorPicker, sélecteurs Angular : [luOption], lu-form-field, lu-color-input. Inputs principaux : label, required, size, width, inlineMessage, inlineMessageState, hiddenLabel, clearable, compact. Variantes : State=Hover, Selected=False, State=Default, Selected=True, etc.",
     "category": "Forms",
-    "figmaName": "pr-ColorPicker",
+    "figmaName": "AssetsColorPicker",
     "storybookName": "Color Picker"
   },
   "listing": {
-    "description": "Composant pr-Listing, directives/sélecteurs Angular: lu-listing, lu-listing-item, variants: Size, Type, Inline. Mots-clés: liste, tableau, affichage dynamique.",
+    "description": "Composant pr-Listing (v20.1)  🎉, sélecteurs: lu-listing, lu-listing-item, inputs: defaultIcon, icon, start, reversed, palette, divider, variantes: Size, Type, Inline, mots-clés: liste, élément, icône.",
     "category": "Listings",
     "figmaName": "pr-Listing (v20.1)  🎉",
     "storybookName": "Listing"
   },
   "fancybox": {
-    "description": "Composant pr-FancyBox, sélecteur lu-fancy-box, inputs pour gérer les tailles et la réactivité, 4 variantes disponibles. Idéal pour afficher des contenus multimédias dans des fenêtres modales attrayantes.",
+    "description": "Composant FancyBox, sélecteur `lu-fancy-box`, inputs principaux : `backgroundLeft`, `backgroundRight`, `foreground`, `size`. Variantes disponibles : Size=M, Responsive=True, Size=S, Responsive=True, Size=M, Responsive=False, Size=S, Responsive=False. Mots-clés : modal, images.",
     "category": "Structure",
     "figmaName": "pr-FancyBox (v19.1)",
     "storybookName": "FancyBox"
   },
   "pageheader": {
-    "description": "Composant de l\\'en-tête de page, sélecteur lu-page-header, variantes Screen size=M, Screen size=S, utilisez les sélecteurs lu-breadcrumbs, [luBreadcrumbsLink], lu-form-field, lu-text-input, lu-horizontal-navigation, [luHorizontalNavigationLink], a[luLink], button[luLink].",
+    "description": "Composant pr-PageHeader, sélecteur lu-page-header, directives lu-breadcrumbs, [luBreadcrumbsLink], lu-form-field, lu-text-input, lu-horizontal-navigation, [luHorizontalNavigationLink], a[luLink], button[luLink]. Inputs: label, description, container. Variantes: Screen size=M, Screen size=S.",
     "category": "Structure",
     "figmaName": "pr-PageHeader",
     "storybookName": "PageHeader"
   },
   "checkbox": {
-    "description": "Composant pr-CheckboxFieldset, sélecteur Angular lu-checkbox-fieldset, inputs principaux: type, size, alignment, feedback, variantes: Default, Checklist, S, M, Vertical, Horizontal, Critical, Default. Mots-clés: formulaire, case à cocher.",
+    "description": "CheckboxFieldset, directives/Sélecteurs: lu-checkbox-input, Inputs: type, size, alignment, feedback; variantes: Default, Size=S, Alignment=Vertical, Feedback=Critical, Checklist, Size=M, Alignment=Horizontal, Feedback=Default, mots-clés: formulaire, case à cocher.",
     "category": "Forms",
     "figmaName": "pr-CheckboxFieldset",
     "storybookName": "Checkbox"
   },
   "inlinemessage": {
-    "description": "Composant pr-InlineMessage, sélecteur lu-inline-message, inputs : type, size. Variantes : Critical, Default, Success, Warning; tailles : S, M. Mots-clés : message d\\'alerte, info à l\\'utilisateur, feedback.",
+    "description": "Composant pr-InlineMessage, sélecteur Angular lu-inline-message, inputs : state, size, label, variantes : Critical, Default, Warning, Success, tailles M et S.",
     "category": "Forms",
     "figmaName": "pr-InlineMessage",
     "storybookName": "InlineMessage"
   },
   "segmentedcontrol": {
-    "description": "Composant pr-SegmentedControl, sélecteurs Angular: lu-segmented-control, lu-segmented-control-tabs, lu-segmented-control-tabs-panel, lu-segmented-control-filter. Inputs principaux: size, selectedItem. Variantes: size=M, number=3, selected item=2nd; size=S, number=5, selected item=3rd; etc. Mots-clés: navigation, contrôle segmenté.",
+    "description": "Composant pr-SegmentedControl, directives: lu-segmented-control, lu-segmented-control-tabs, lu-segmented-control-filter, inputs: small, withNumericBadge, vertical, variantes: taille, affichage vertical, 3 à 5 onglets. Éléments de navigation. Utilisé pour créer des contrôles d’affichage alternatifs.",
     "category": "Navigation",
     "figmaName": "pr-SegmentedControl",
     "storybookName": "segmentedControl"
   },
   "horizontalnavigation": {
-    "description": "Composant de navigation horizontale, sélecteurs: lu-horizontal-navigation, [luHorizontalNavigationLink], lu-numeric-badge. Variantes: Size=M, Size=S.",
+    "description": "Composant de navigation horizontal, sélecteurs : lu-horizontal-navigation, [luHorizontalNavigationLink]. Inputs : size, noBorder, container, numericBadge. Variantes : Size=M, Size=S.",
     "category": "Navigation",
     "figmaName": "pr-HorizontalNavigation",
     "storybookName": "HorizontalNavigation"
   },
   "software-icon": {
-    "description": "Icone représentant divers logiciels, configurable par le sélecteur Angular lu-software-icon. Inputs principaux: product, color. Variantes disponibles: 49 variantes basées sur le produit et la couleur, mots-clés: software, icon, lu-software-icon.",
+    "description": "Icône de logiciel pour représenter divers produits. Sélecteur : lu-software-icon. Inputs : icon, disabled. Variantes : 49 variantes disponibles dont Product=EA - Shared documents, Color=True, Product=CB - Payroll Assistant, Color=True.",
     "category": "Structure",
     "figmaName": "pr-SoftwareIcon",
     "storybookName": "Software icon"
   },
   "time-picker": {
-    "description": "Composant pr-TimePicker, directive luTimePicker, inputs principaux: placeholder, disabled, readonly. Variantes: Size, State, Content, Feedback, Presentation. Mots-clés: sélecteur horaire, formulaire.",
+    "description": "Composant pr-TimePicker, sélecteur de temps Angular, inputs principaux : [size, state, content, feedback], variantes : Size, State, Content, Feedback, mots-clés : time, picker.",
     "category": "Forms",
     "figmaName": "pr-TimePicker",
     "storybookName": "Time Picker"
   },
   "breadcrumbs": {
-    "description": "Composant pr-Breadcrumbs, sélecteur lu-breadcrumbs et directive [luBreadcrumbsLink], variants Depth=1, Depth=2, Depth=3, Depth=4. Mots-clés : navigation, chemins, composants hiérarchiques.",
+    "description": "Composant de navigation à fil d'Ariane, sélecteurs : lu-breadcrumbs, [luBreadcrumbsLink]. Inputs principaux : ariaCurrentWhenActive. Variantes : Depth=1, Depth=2, Depth=3, Depth=4. Mots-clés de déclenchement : breadcrumb, navigation.",
     "category": "Navigation",
     "figmaName": "pr-Breadcrumbs",
     "storybookName": "Breadcrumbs"
   },
   "chip": {
-    "description": "Composant pr-Chip, sélecteurs Angular: lu-chip, button[luChip], a[luChip]. Inputs: size, palette, state, feedback, removable. Variantes: tailles, palettes, états, feedbacks, amovible. Mots-clés: chip, tag.",
+    "description": "ChipComponent, sélecteurs: lu-chip, button[luChip], a[luChip], inputs: unkillable, disabled, product, withEllipsis, small, feedback, variantes: Size, Palette, State, Feedback, Removable.",
     "category": "Listings",
     "figmaName": "pr-Chip",
     "storybookName": "Chip"
   },
   "scrollbox": {
-    "description": "Composant Scrollbar pour la navigation, directives Angular associées, variantes pour PC/Mac et orientations, mots-clés de déclenchement comme scrollbar, navigation, défilement.",
+    "description": "Scrollbar, directive `luScrollbox`, inputs principaux `type`, `direction`, variantes disponibles : PC Horizontal, Mac Vertical, PC Vertical, Mac Horizontal, mots-clés de déclenchement : scrollbar.",
     "category": "Navigation",
     "figmaName": "Scrollbar",
     "storybookName": "Scrollbox"
   },
   "mobilenavigation": {
-    "description": "pr-MobileNavigation, composant de navigation mobile pour Angular. Utilise les sélecteurs Angular pour afficher différentes variantes selon le nombre d\\'onglets. Variantes: Tab Count=2 Tabs, Tab Count=3 Tabs, Tab Count=4 Tabs, Tab Count=5 Tabs.",
+    "description": "Composant pr-MobileNavigation, directives Angular, luMobileNavigation, variantes: Tab Count=2 Tabs, Tab Count=3 Tabs, Tab Count=4 Tabs, Tab Count=5 Tabs. Navigation mobile.",
     "category": "Navigation",
     "figmaName": "pr-MobileNavigation",
     "storybookName": "MobileNavigation"
   },
   "callout-disclosure": {
-    "description": "Composant pr-CalloutDisclosure, sélecteur lu-callout-disclosure. Inputs principaux: size, palette, opened. Variantes: Size=S, M; Palette=Neutral, Success, Product, Warning, Critical; Openned=False, True.",
+    "description": "CalloutDisclosureComponent, lu-callout-disclosure, inputs: icon, state, size, heading, palette, open. Variantes disponibles: Palette=Neutral, Success, Product, Critical, Warning, Taille=S, M, ouvert/fermé.",
     "category": "Feedback",
     "figmaName": "pr-CalloutDisclosure",
     "storybookName": "Callout Disclosure"
   },
   "gauge": {
-    "description": "Composant pr-Gauge, sélecteur lu-gauge, inputs principaux: palette, thin, circular. Variantes: Palette=Product, Thin=True, Circular=True; Palette=Success, Thin=False, Circular=True; etc.",
+    "description": "Composant pr-Gauge, sélecteur: lu-gauge. Inputs: palette, thin, animated, circular, size, value, alt, noAlt. Variantes: Palette=Product, Thin=True, Circular=True, etc. Mots-clés: jauge, chargement.",
     "category": "Loaders",
     "figmaName": "pr-Gauge",
     "storybookName": "Gauge"
   },
   "progress-bar": {
-    "description": "Composant de barre de progression pour indiquer l'état d'opérations en cours. Directive Angular : lu-progress-bar. Inputs principaux : state. Variantes : Success, Error, Default. Mots-clés : barre de progression, état de chargement, feedback utilisateur.",
+    "description": "Composant de barre de progression, sélecteur Angular: lu-progress-bar, inputs: state, indeterminate, value. Variantes: State=Success, State=Error, State=Default.",
     "category": "Loaders",
     "figmaName": "pr-ProgressBar",
     "storybookName": "Progress Bar"
   },
   "float": {
-    "description": "Composant Slot, directive luSlot, avec les variantes de Type: Text, Slot, Slot - Mini.",
+    "description": "Composant Slot, utilisé pour gérer des éléments flottants. Variantes: Type=Text, Type=Slot, Type=Slot - Mini. Sélecteurs Angular non disponibles.",
     "category": "Integration",
     "figmaName": "Slot",
     "storybookName": "Float"
   },
   "numericbadge": {
-    "description": "Badge numérique pour indiquer une valeur. Sélecteur Angular lu-numeric-badge, avec des variantes de taille (XS, S, M) et de palette (Brand, Product, Neutral). Inputs principaux : size, palette, disabled, loader.",
+    "description": "Composant pr-NumericBadge, sélecteur Angular lu-numeric-badge, inputs: value, maxValue, palette, size, loading, disableTooltip. Variantes: Size (XS, S, M), Palette (Brand, Product, Neutral), Disabled (True, False), Loader (True, False).",
     "category": "Texts",
     "figmaName": "pr-NumericBadge",
     "storybookName": "NumericBadge"
   },
   "timelines": {
-    "description": "Composant pr-TimelineVertical, directives Angular non spécifiées, Size, Variantes: Size=M, Size=S.",
+    "description": "Composant de timeline horizontale, directives/sélecteurs Angular, variantes de taille (Small, Default), mots-clés de déclenchement.",
     "category": "Listings",
-    "figmaName": "pr-TimelineVertical",
+    "figmaName": "pr-TimelineHorizontal",
     "storybookName": "Timelines"
   },
   "avatar": {
-    "description": "Composant pr-Avatar, directives lu-user-picture et [luUserPopover], inputs identity, size, variantes. Utilisé pour afficher des avatars d’utilisateurs avec plusieurs tailles et configurations.",
+    "description": "Composant pr-AvatarWrapper, directives lu-user-picture et [luUserPopover], inputs sizes. Variantes: XS, S, M, L. Utilisation pour afficher des avatars d'utilisateurs.",
     "category": "Users",
-    "figmaName": "pr-Avatar",
+    "figmaName": "pr-AvatarWrapper (v17.3)",
     "storybookName": "Avatar"
   },
   "mobile-push": {
-    "description": "Composant pr-MobilePush, sélecteur lu-mobile-push, variantes Badge Alignment=Right, Badge Alignment=Bottom.",
+    "description": "MobilePushComponent, sélecteur lu-mobile-push, inputs appStoreLinkClicked, googlePlayLinkClicked, variantes Badge Alignment=Right, Badge Alignment=Bottom.",
     "category": "Feedback",
     "figmaName": "pr-MobilePush (v20.1)",
     "storybookName": "Mobile Push"
   },
   "bubble-illustration": {
-    "description": "Composant pr-BubbleIllustration, sélecteur Angular lu-bubble-illustration, variantes Type=Error, Type=Success - Thumb up, Type=Success - Award, Type=Warning, Type=Default, Type=Empty search, Type=Success - Party popper.",
+    "description": "Composant pr-BubbleIllustration, sélecteur lu-bubble-illustration, inputs size et action, variantes Type=Error, Type=Success - Thumb up, Type=Success - Award, Type=Warning, Type=Default, Type=Empty search, Type=Success - Party popper.",
     "category": "Structure",
     "figmaName": "pr-BubbleIllustration",
     "storybookName": "Bubble illustration"
   },
   "dropdown": {
-    "description": "Dropdown, sélecteurs : [luDropdown], [lu-dropdown-action], [lu-dropdown-item], lu-dropdown-divider, lu-dropdown-group, lu-dropdown-menu, utilisé pour afficher une liste d\\'actions ou d\\'informations contextuelles accessibles par un bouton.",
+    "description": "Dropdown, luDropdown, lu-dropdown-action, lu-dropdown-divider, lu-dropdown-group, lu-dropdown-item, lu-dropdown-menu. Utilisé pour afficher une liste d\\'actions ou d\\'informations contextuelles actionnables par un bouton.",
     "category": "Listings",
     "figmaName": "pr-DropdownMenu",
     "storybookName": "Dropdown"
   },
   "loading": {
-    "description": "Composant pr-Loading pour indiquer un chargement, sélecteur Angular lu-loading, variantes disponibles incluant différents palettes et tailles, mots-clés de déclenchement : chargement, loading.",
+    "description": "Composant de chargement, sélecteur Angular lu-loading, variantes Palette=Product, Size=S, Palette=Product, Size=XS, Palette=Neutral, Size=M, Palette=Neutral, Size=XS, Palette=Product, Size=M, Palette=Neutral, Size=S, mots-clés de déclenchement : loader, loading.",
     "category": "Forms",
     "figmaName": "pr-Loading",
     "storybookName": "Loading"
   },
   "footer": {
-    "description": "Composant AssetsFooter, sélecteur Angular lu-footer, variante AssetsFooter / Total. Utilisé pour afficher le pied de page des listes et tableaux.",
+    "description": "Composant pr-Footer, sélecteur lu-footer, input container, variantes Screen Size=M, Screen Size=S, déclencheurs footerContent.",
     "category": "Listings",
-    "figmaName": "AssetsFooter",
+    "figmaName": "pr-Footer",
     "storybookName": "Footer"
   },
   "verticalnavigation": {
-    "description": "Composant de navigation verticale, sélecteurs : lu-vertical-navigation, lu-vertical-navigation-group, lu-vertical-navigation-item, span[luVerticalNavigationLink], a[luVerticalNavigationLink]. Inputs principaux : aucune. Variantes : pr-VerticalNavigation. Mots-clés : navigation, vertical, interface.",
+    "description": "VerticalNavigation, lu-vertical-navigation, lu-vertical-navigation-group, lu-vertical-navigation-item, luVerticalNavigationLink, inputs: heading, disabled, iconless. Navigation entre différentes sections d’une interface.",
     "category": "Navigation",
     "figmaName": "pr-VerticalNavigation",
     "storybookName": "VerticalNavigation"
   },
   "pagination": {
-    "description": "Composant de pagination, sélecteur lu-pagination, utilise le PaginationComponent. Permet de naviguer entre les pages d’un contenu. Variantes : pr-Pagination.",
+    "description": "Composant Angular pr-Pagination, sélecteur `lu-pagination`, permet de paginer un contenu ou des données en plusieurs pages numérotées avec navigation entre pages. Inputs principaux : isFirstPage, isLastPage, from, to, itemsCount, mod (vue compacte). Variantes existantes : pr-Pagination.",
     "category": "Listings",
     "figmaName": "pr-Pagination",
     "storybookName": "Pagination"
   },
   "index-table": {
-    "description": "Composant pr-IndexTable, sélecteurs Angular : lu-index-table, luIndexTableAction, luIndexTableBody, luIndexTableFoot, luIndexTableRow, etc. Inputs : aucun. Variantes : pr-IndexTable. Mots-clés : tableau, index, ressource, actions rapide.",
+    "description": "pr-IndexTable, composant lu-index-table avec inputs empty, layoutFixed, selectable, action, hiddenLabel, expanded, group, groupButtonAlt. Affiche une collection de ressources sous forme de tableau interactif, permettant l’action rapide, la sélection de lignes, et le regroupement d’éléments.",
     "category": "Listings",
     "figmaName": "pr-IndexTable",
     "storybookName": "Index Table"
   },
   "sortable-list": {
-    "description": "Composant de liste sortable pour gérer des éléments réorganisables. Directives : lu-sortable-list pour le conteneur, lu-sortable-list-item pour chaque élément. Inputs principaux : aucune entrée mentionnée. Variantes : Size=M, Size=S. Mots-clés : sortable, liste, réorganisable.",
+    "description": "Composant Angular pour des listes réordonnables avec les sélecteurs <lu-sortable-list> et <lu-sortable-list-item>. Inputs principaux : label, helperMessage, small, clickable, unclearable, et drop. Variantes : Size=M, Size=S. Inclut la possibilité de réordonner les éléments par glisser-déposer.",
     "category": "Listings",
     "figmaName": "pr-SortableList",
     "storybookName": "Sortable List"
   },
   "tile": {
-    "description": "Composant pr-UserTile, directives lu-user-tile, [luUserPopover], variantes XS, S, M, L, mots-clés utilisateurs, informations, popover.",
+    "description": "Composant LuUserTileComponent et la directive LuUserPopoverDirective du design system Lucca Front. Représente une fiche utilisateur avec photo, nom, rôle et plusieurs variantes de taille (XS, S, M, L). Utilisée pour afficher des informations utilisateur avec un style cohérent. Sélecteurs : `<lu-user-tile>`, `[luUserPopover]`. Inputs : user, displayFormat, role, size. Variantes : \"XS\", \"S\", \"M\", \"L\".",
     "category": "Users",
     "figmaName": "pr-UserTile",
     "storybookName": "Tile"
   },
   "callout": {
-    "description": "Composant pr-Callout, sélecteurs lu-callout, lu-callout-actions, lu-feedback-item-description, ul[lu-callout-feedback-list]. Inputs : size, palette. Variantes disponibles : Size=S, Palette=Critical, Size=M, Palette=Success, Size=S, Palette=Success, Size=M, Palette=Neutral, Size=M, Palette=Warning, Size=S, Palette=Neutral, Size=M, Palette=AI, Size=S, Palette=Warning, Size=M, Palette=Critical, Size=M, Palette=Product, Size=S, Palette=Product.",
+    "description": "Composant Callout pour afficher des messages contextuels importants. Sélecteurs : lu-callout, lu-callout-actions, lu-feedback-item-description, ul[lu-callout-feedback-list]. Inputs principaux : AI, iconAlt. Variantes : Size (S, M), Palette (Critical, Success, Neutral, Warning, AI).",
     "category": "Feedback",
     "figmaName": "pr-Callout",
     "storybookName": "Callout"
   },
   "data-presentation": {
-    "description": "Composant de présentation de données, sélecteur lu-data-presentation, sans inputs spécifiques. Variantes disponibles : pr-DataPresentation (v21.1) 🎉, mots-clés : présentation de données.",
+    "description": "Composant Angular pour afficher une donnée avec son libellé descriptif. Directive/Component: <lu-data-presentation>, input principal: label. Utilisé dans les formulaires pour présenter une donnée de manière claire et concise. Mots-clés: DataPresentationComponent, lu-data-presentation, Data Presentation, Formulaires.",
     "category": "Forms",
     "figmaName": "pr-DataPresentation (v21.1)  🎉",
     "storybookName": "Data Presentation"
   },
   "popover": {
-    "description": "Popover, [luUserPopover], pr-Popover, directives Angular, variants. Les Popovers servent à afficher, par superposition, un contenu supplémentaire à partir d\\'une interaction avec un élément.",
+    "description": "Popover Angular Directive pour afficher un contenu supplémentaire en superposition, déclenché par interaction avec un élément. Sélecteur `[luUserPopover]`. Usage typique pour afficher des informations utilisateur ou des détails contextuels.",
     "category": "Overlays",
     "figmaName": "pr-Popover",
     "storybookName": "Popover"
   },
   "text-flow": {
-    "description": "Composant pr-TextFlow, sélecteur lu-text-flow, permettant de structurer et styliser un contenu textuel avec différents éléments typographiques.",
+    "description": "Le composant Text flow (`lu-text-flow`) structure et stylise un contenu textuel en appliquant une hiérarchie visuelle (titres, paragraphes, listes). Variantes et guide d’utilisation dans Storybook. Compatible avec tous les conteneurs HTML.",
     "category": "Texts",
     "figmaName": "pr-TextFlow (v19.2)",
     "storybookName": "Text flow"
   },
   "tooltip": {
-    "description": "Tooltip, pr-Tooltip, affiche une aide contextuelle au survol d\\'un élément.",
+    "description": "pr-Tooltip. Aide contextuelle au survol. Angular: aucun sélecteur/directive/inputs documentés dans @lucca-front/ng pour ce composant au moment des données fournies. Variantes Figma: pr-Tooltip. Mots-clés: tooltip, overlay, aide, hover, focus, aria-describedby. Référez-vous aux stories Overlays de Lucca Front.",
     "category": "Overlays",
     "figmaName": "pr-Tooltip",
     "storybookName": "Tooltip"
   },
   "plg-push": {
-    "description": "Composant pr-PLGPush, sélecteur lu-plg-push, incite à élargir le parc d’applications Lucca. Variantes disponibles : pr-PLGPush.",
+    "description": "Composant Angular `lu-plg-push` pour afficher une publicité within app sur une fonctionnalité ou solution Lucca. Inputs principaux : `heading`, `removable`. Ajout de contenu et liens avec des call-to-actions intégrés. Mot-clé : plg-push.",
     "category": "Feedback",
     "figmaName": "pr-PLGPush",
     "storybookName": "PLG Push"
   },
   "form-field": {
-    "description": "FormField est un élément de mise en forme générique pour les champs de formulaires, permettant de changer le type de champ rapidement. Utilise les directives luFormField. Variantes : pr-FormField.",
+    "description": "Composant Angular pr-FormField pour structurer des champs de formulaire. Sélecteur Angular `<pr-FormField>`. Ce composant générique supporte les champs variés et des styles unifiés. Utilisé dans divers scénarios de mises en forme des formulaires.",
     "category": "Forms",
     "figmaName": "pr-FormField",
     "storybookName": "Form Field"
   },
   "user-popover": {
-    "description": "Composant pr-UserPopover, affiche des informations sur un collaborateur (poste, département, lieu de travail, absence) et permet la redirection vers sa fiche, son planning Timmi Absences ou Timmi Office.",
+    "description": "pr-UserPopover — popover d’information collaborateur. Affiche poste, département, lieu de travail, absences et liens vers la fiche, Timmi Absences et Timmi Office. Stories Angular: documentation-users-popover-angular--basic. Variantes: pr-UserPopover. Mots-clés: user, popover, collaborateur, profil, fiche, absences, office.",
     "category": "Listings",
     "figmaName": "pr-UserPopover",
     "storybookName": "User popover"
   },
   "data-table": {
-    "description": "Un Data table affiche un ensemble de données dont le contenu a vocation à être consulté, analysé ou édité par l’utilisateur. Directives: lu-data-table, tbody[luDataTableBody], tfoot[luDataTableFoot], thead[luDataTableHead], tr[luDataTableRow], td[luDataTableCell], th[luDataTableCell].",
+    "description": "Composant Angular lu-data-table pour afficher des données tabulaires. Inclut tbody[luDataTableBody], lu-data-table, tfoot[luDataTableFoot], thead[luDataTableHead], td[luDataTableCell], th[luDataTableCell], tr[luDataTableRow]. Inputs : sort, align, verticalAlign, inlineSize, selected, selectedLabel, selectedLabelHead, selectable, drop. Variantes disponibles incluant glisser-déposer, colonnes fixes. Utilisé pour consultation, analyse ou modification des données complexes en tableurs. Mots-clés : tableau, drag & drop, sélection multiple.",
     "category": "Listings",
     "figmaName": "pr-DataTable",
     "storybookName": "Data table"
   },
   "newbadge": {
-    "description": "Composant pr-NewBadge, sélecteur lu-new-badge, indique une fonctionnalité comme nouvelle dans la navigation de l’application.",
+    "description": "Indique une fonctionnalité comme nouvelle dans une application. Composant Angular NewBadgeComponent, sélecteur lu-new-badge, input label pour personnalisation du texte affiché. Idéal pour signaler des nouveautés dans l\\'application. Mots-clés : NewBadge, lu-new-badge, angular, badge, nouveau, nouveauté.",
     "category": "Texts",
     "figmaName": "pr-NewBadge",
     "storybookName": "NewBadge"

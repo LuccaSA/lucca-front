@@ -50,7 +50,7 @@ export function writeComponentResource(skillsDir: string, slug: string, content:
 	}
 
 	const resolvedSkillsDir = path.resolve(skillsDir);
-	const resourcesDir = path.resolve(resolvedSkillsDir, 'lucca-front', 'resources');
+	const resourcesDir = path.resolve(resolvedSkillsDir, 'lucca-front', 'references');
 	const filePath = path.resolve(resourcesDir, `${slug}.md`);
 
 	// Path-traversal guard

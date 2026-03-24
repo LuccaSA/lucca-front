@@ -41,7 +41,7 @@ export async function createAiClient(config: Config): Promise<GenerateTextFn> {
 					},
 					body: JSON.stringify({
 						model,
-						max_tokens: 4096,
+						max_tokens: 3000,
 						messages: [
 							{ role: 'system', content: systemPrompt },
 							{ role: 'user', content: userPrompt },
@@ -84,7 +84,7 @@ export async function createAiClient(config: Config): Promise<GenerateTextFn> {
 		return async function generateText({ systemPrompt, userPrompt }: { systemPrompt: string; userPrompt: string }): Promise<string> {
 			const message = await client.messages.create({
 				model,
-				max_tokens: 4096,
+				max_tokens: 3000,
 				system: systemPrompt,
 				messages: [{ role: 'user', content: userPrompt }],
 			});

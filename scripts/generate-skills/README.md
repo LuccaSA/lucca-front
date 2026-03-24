@@ -2,7 +2,7 @@
 
 TypeScript script that automatically generates `SKILL.md` files for each component of the Lucca Front design system. These files are used by **GitHub Copilot** (via VS Code Agent Skills) to answer questions about how to use Angular components.
 
-Generated files are placed in `.github/skills/lucca-front/resources/`.
+Generated files are placed in `.github/skills/lucca-front/references/`.
 
 ## Prerequisites
 
@@ -107,7 +107,7 @@ packages/ng/
 2. **Matching**  `component-map.json` maps each Figma component to one or more Storybook slugs. This is the central registry to maintain manually.
 3. **Prompt building**  For each component, the prompt includes Figma metadata, story links and Angular story source code, **real Angular selectors** extracted from `packages/ng/` (to prevent hallucinations), and Prisme guidelines.
 4. **AI generation**  The AI generates the SKILL.md following a strict format (YAML frontmatter, standardised sections, Angular examples only).
-5. **Writing**  The file is written to `.github/skills/lucca-front/resources/<slug>.md` and the `SKILL.md` table of contents is updated.
+5. **Writing**  The file is written to `.github/skills/lucca-front/references/<slug>.md` and the `SKILL.md` table of contents is updated.
 
 ## component-map.json
 

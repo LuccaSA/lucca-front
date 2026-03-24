@@ -78,7 +78,10 @@ export function matchComponents(figmaGroups: Map<string, FigmaGroup>, storybookG
 					const parts = title.split('/');
 					const angularIdx = parts.indexOf('Angular');
 					const componentName = angularIdx > 0 ? parts[angularIdx - 1].trim() : parts[parts.length - 1].trim();
-					const xSlug = componentName.toLowerCase().replace(/\s+/g, '-').replace(/[^a-z0-9-]/g, '');
+					const xSlug = componentName
+						.toLowerCase()
+						.replace(/\s+/g, '-')
+						.replace(/[^a-z0-9-]/g, '');
 					if (xSlug && !extraStorySlugs.includes(xSlug)) extraStorySlugs.push(xSlug);
 				}
 			}

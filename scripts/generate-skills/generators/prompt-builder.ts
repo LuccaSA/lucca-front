@@ -126,7 +126,7 @@ export function buildPrompt({ matched, zeroheightData }: { matched: MatchedEntry
 	const figmaRepresentativeUrl = figma.components[0]?.nodeUrl ?? '';
 	const figmaVariants = figma.components
 		.map((c) => c.name)
-		.slice(0, 30)
+		.slice(0, 8)
 		.join(', ');
 
 	// Storybook stories — Angular uniquement pour les liens
@@ -134,7 +134,7 @@ export function buildPrompt({ matched, zeroheightData }: { matched: MatchedEntry
 	const angularStories = allStories.filter((s) => s.framework === 'angular');
 	const docsLine = storybook?.docsEntry?.url ? `- [Documentation complète](${storybook.docsEntry.url})` : '';
 	const storyLines = angularStories
-		.slice(0, 12)
+		.slice(0, 5)
 		.map((s) => `- [${s.name}](${s.url})`)
 		.join('\n');
 	const categoryLabel = storybook?.category ? (CATEGORY_LABELS[storybook.category] ?? storybook.category) : '';
@@ -146,8 +146,8 @@ export function buildPrompt({ matched, zeroheightData }: { matched: MatchedEntry
 	let relatedSection = '';
 	if (matched.relatedStorybook && matched.relatedStorybook.length > 0) {
 		const relatedLinks: string[] = [];
-		for (const rel of matched.relatedStorybook.slice(0, 3)) {
-			const relAngular = (rel.stories ?? []).filter((s) => s.framework === 'angular').slice(0, 2);
+		for (const rel of matched.relatedStorybook.slice(0, 1)) {
+			const relAngular = (rel.stories ?? []).filter((s) => s.framework === 'angular').slice(0, 1);
 			for (const s of relAngular) {
 				relatedLinks.push(`- [${rel.storybookName ?? rel.sbSlug} / ${s.name}](${s.url})`);
 			}
@@ -158,12 +158,13 @@ export function buildPrompt({ matched, zeroheightData }: { matched: MatchedEntry
 	}
 
 	// Zeroheight
-	const guidelinesText =
+	const guidelinesRaw =
 		zeroheightData && Object.keys(zeroheightData).length > 0
 			? Object.entries(zeroheightData)
 					.map(([tool, text]) => `### Source : ${tool}\n${text}`)
 					.join('\n\n')
 			: '_Aucune guideline Zeroheight disponible pour ce composant._';
+	const guidelinesText = guidelinesRaw.length > 1500 ? guidelinesRaw.slice(0, 1500) + '\n[...]' : guidelinesRaw;
 
 	const userPrompt = `Génère le SKILL.md pour le composant **${figma.figmaName}** du design system Lucca Front.
 
@@ -207,7 +208,7 @@ function readStoryExamples(storybook: import('../types').StorybookGroup | null, 
 
 	const seen = new Set<string>();
 	const examples: string[] = [];
-	const angular = allGroups.flatMap((g) => g.stories.filter((s) => s.framework === 'angular')).slice(0, 5);
+	const angular = allGroups.flatMap((g) => g.stories.filter((s) => s.framework === 'angular')).slice(0, 2);
 
 	const resolvedRoot = path.resolve(WORKSPACE_ROOT);
 
@@ -311,7 +312,7 @@ function extractTemplateLiterals(content: string): string[] {
 		pos = endPos;
 	}
 
-	return results;
+	return results.slice(0, 3);
 }
 
 /** Reads a template literal body until the closing backtick, handling nested ${} recursively. */
@@ -383,7 +384,10 @@ function extractArgTypeDescriptions(content: string): { name: string; descriptio
 		if (!descMatch) continue;
 
 		const raw = descMatch[1] ?? descMatch[2] ?? '';
-		const description = raw.replace(/<[^>]+>/g, '').replace(/\\n/g, ' ').trim();
+		const description = raw
+			.replace(/<[^>]+>/g, '')
+			.replace(/\\n/g, ' ')
+			.trim();
 		if (!description) continue;
 
 		// Find the enclosing property by walking backward for `propName: {` at a lower indent
@@ -404,7 +408,9 @@ function extractArgTypeDescriptions(content: string): { name: string; descriptio
 		const SKIP = new Set(['type', 'control', 'table', 'if', 'mapping']);
 		if (propName && !seen.has(propName) && !SKIP.has(propName)) {
 			seen.add(propName);
-			results.push({ name: propName, description });
+			const truncated = description.length > 120 ? description.slice(0, 120) + '…' : description;
+			results.push({ name: propName, description: truncated });
+			if (results.length >= 8) break;
 		}
 	}
 

@@ -26,7 +26,7 @@ export function writeToc(skillsDir: string): string {
 		const displayName = figmaName || slug;
 		// Description truncated at 120 chars to keep the TOC lightweight
 		const descSnippet = description ? ` — ${description.slice(0, 120)}` : '';
-		componentLines += `- **[${displayName}](./resources/${slug}.md)**${descSnippet}\n`;
+		componentLines += `- **[${displayName}](./references/${slug}.md)**${descSnippet}\n`;
 	}
 
 	const content = `---
