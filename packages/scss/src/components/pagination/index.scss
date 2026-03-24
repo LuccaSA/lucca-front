@@ -6,8 +6,8 @@
 		@include component;
 	}
 
-	@layer components {
-		&.mod-mods {
+	@layer mods {
+		&.mod-compact {
 			@include compact;
 		}
 	}
