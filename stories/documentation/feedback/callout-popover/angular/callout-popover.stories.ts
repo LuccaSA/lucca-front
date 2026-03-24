@@ -1,4 +1,4 @@
-﻿import { BrowserAnimationsModule } from '@angular/platform-browser/animations';
+import { BrowserAnimationsModule } from '@angular/platform-browser/animations';
 import { ButtonComponent } from '@lucca-front/ng/button';
 import {
 	CALLOUT_POPOVER_SIZE,
@@ -103,13 +103,6 @@ export default {
 			control: {
 				type: 'select',
 			},
-			description: 'Détermine le mode d’ouverture du popover.',
-		},
-		popoverDisabled: {
-			control: {
-				type: 'boolean',
-			},
-			description: 'Désactive l’apparition du popover.',
 		},
 		size: {
 			options: setStoryOptions(CALLOUT_POPOVER_SIZE),
@@ -139,7 +132,6 @@ export const Template: StoryObj<CalloutPopoverComponent & { items: number; custo
 		customText: '',
 		heading: '',
 		popoverTrigger: null,
-		popoverDisabled: false,
 		headingHiddenIfSingleItem: false,
 		items: 2,
 		closeDelay: 500,
