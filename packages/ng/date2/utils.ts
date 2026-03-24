@@ -51,6 +51,8 @@ function stringToDateISO(value: string): Date {
 	return res;
 }
 
+export function transformDateInputToDate(value: null | undefined): null;
+export function transformDateInputToDate(value: Date | string): Date;
 export function transformDateInputToDate(value: Date | null | undefined | string): Date | null {
 	if (isNil(value)) {
 		return null;
@@ -61,6 +63,8 @@ export function transformDateInputToDate(value: Date | null | undefined | string
 	return stringToDateISO(value);
 }
 
+export function transformDateToDateISO(value: null): null;
+export function transformDateToDateISO(value: Date): string;
 export function transformDateToDateISO(value: Date | null): string | null {
 	if (isNil(value)) {
 		return null;
@@ -82,17 +86,20 @@ export function transformDateRangeInputToDateRange(value: DateRange | null | und
 		return value;
 	}
 
+	const valueEnd = value.end ? transformDateInputToDate(value.end) : null;
+
 	return {
 		...value,
 		start: transformDateInputToDate(value.start),
-		end: transformDateInputToDate(value.end),
+		end: valueEnd,
 	};
 }
 
 export function transformDateRangeToDateRangeInput(value: DateRange): DateRangeInput {
+	const valueEnd = value.end ? transformDateToDateISO(value.end) : null;
 	return {
 		...value,
 		start: transformDateToDateISO(value.start),
-		end: transformDateToDateISO(value.end),
+		end: valueEnd,
 	};
 }
