@@ -93,13 +93,15 @@
 			color: var(--components-progressStepper-list-step-title-color);
 			pointer-events: none;
 			min-inline-size: 0;
+			display: flex;
+			justify-content: center;
 		}
 
 		.progressStepper-list-step-title-content {
 			@include text.ellipsis;
 
 			pointer-events: auto;
-			display: block;
+			min-inline-size: 0;
 			border-radius: var(--pr-t-border-radius-small);
 
 			&:focus-visible {
