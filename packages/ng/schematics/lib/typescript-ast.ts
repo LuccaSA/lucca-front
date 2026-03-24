@@ -35,7 +35,7 @@ function getStringTokens(newText: string): { separator?: string; text: string }[
 	let indexOfSeparator: number | null = null;
 
 	do {
-		indexOfSeparator = newText.match(/\.| /)?.index ?? null;
+		indexOfSeparator = newText.match(/[. ]/)?.index ?? null;
 
 		if (indexOfSeparator === null) {
 			parts.push({ text: newText });
