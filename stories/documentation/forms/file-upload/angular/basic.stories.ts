@@ -5,6 +5,7 @@ import { FileEntry, FileEntryComponent, MultiFileUploadComponent, SingleFileUplo
 import { FormFieldComponent } from '@lucca-front/ng/form-field';
 import { TextInputComponent } from '@lucca-front/ng/forms';
 import { LuInputDirective } from '@lucca-front/ng/input';
+import { TagComponent } from '@lucca-front/ng/tag';
 import { applicationConfig, Meta, moduleMetadata } from '@storybook/angular';
 import { map, Observable, switchMap, throwError, timer } from 'rxjs';
 import { generateInputs } from 'stories/helpers/stories';
@@ -144,7 +145,17 @@ export default {
 	},
 	decorators: [
 		moduleMetadata({
-			imports: [MultiFileUploadComponent, SingleFileUploadComponent, FormFieldComponent, TextInputComponent, LuInputDirective, ButtonComponent, FileUploadToLFEntryPipe, FileEntryComponent],
+			imports: [
+				MultiFileUploadComponent,
+				SingleFileUploadComponent,
+				FormFieldComponent,
+				TextInputComponent,
+				LuInputDirective,
+				ButtonComponent,
+				FileUploadToLFEntryPipe,
+				FileEntryComponent,
+				TagComponent,
+			],
 		}),
 		applicationConfig({
 			providers: [{ provide: LOCALE_ID, useValue: 'fr-FR' }],
@@ -194,27 +205,60 @@ export const Multi = {
 		const sizeSFileUploadParam = size ? ` size="S"` : ``;
 		const sizeSFileEntryParam = media ? ` size="S"` : sizeSFileUploadParam;
 
-		return {
-			props: {
-				fileUploadFeature,
-				deleteFile: (upload: FileUpload<LuccaFileUploadResult>) => {
-					uploads.set([...uploads().filter(({ file: f }) => f !== upload.file)]);
-				},
-				getPreviewUrl: (fileUpload: FileUpload<LuccaFileUploadResult>) => {
-					if (!fileUpload) {
+		if (args.content) {
+			return {
+				props: {
+					fileUploadFeature,
+					deleteFile: (upload: FileUpload<LuccaFileUploadResult>) => {
+						uploads.set([...uploads().filter(({ file: f }) => f !== upload.file)]);
+					},
+					getPreviewUrl: (fileUpload: FileUpload<LuccaFileUploadResult>) => {
+						if (!fileUpload) {
+							return null;
+						}
+						if (previewCache.has(fileUpload.file)) {
+							return previewCache.get(fileUpload.file);
+						} else if (fileUpload.state !== 'error' && fileUpload.file.type.startsWith('image/')) {
+							const url = URL.createObjectURL(fileUpload.file);
+							previewCache.set(fileUpload.file, url);
+							return url;
+						}
 						return null;
-					}
-					if (previewCache.has(fileUpload.file)) {
-						return previewCache.get(fileUpload.file);
-					} else if (fileUpload.state !== 'error' && fileUpload.file.type.startsWith('image/')) {
-						const url = URL.createObjectURL(fileUpload.file);
-						previewCache.set(fileUpload.file, url);
-						return url;
-					}
-					return null;
+					},
 				},
-			},
-			template: `<lu-form-field label="Label">
+				template: `<lu-form-field label="Label">
+		<lu-multi-file-upload${sizeSFileUploadParam}${generateInputs(mainArgs, argTypes)} (filePicked)="fileUploadFeature.uploadFiles([$event])">
+			<lu-tag icon="weatherStars" label="Scan intelligent" AI />
+		</lu-multi-file-upload>
+	</lu-form-field>
+	<div class="fileEntryDisplayWrapper">
+		@for(fileUpload of fileUploadFeature.fileUploads(); track $index) {
+			<lu-file-entry${sizeSFileEntryParam}${displayFileNameParam}${mediaParam} [entry]="fileUpload | fileUploadToLFEntry" [state]="fileUpload.state" [previewUrl]="getPreviewUrl(fileUpload)" [inlineMessageError]="fileUpload.error?.detail" (deleteFile)="deleteFile(fileUpload)" />
+		}
+	</div>`,
+			};
+		} else {
+			return {
+				props: {
+					fileUploadFeature,
+					deleteFile: (upload: FileUpload<LuccaFileUploadResult>) => {
+						uploads.set([...uploads().filter(({ file: f }) => f !== upload.file)]);
+					},
+					getPreviewUrl: (fileUpload: FileUpload<LuccaFileUploadResult>) => {
+						if (!fileUpload) {
+							return null;
+						}
+						if (previewCache.has(fileUpload.file)) {
+							return previewCache.get(fileUpload.file);
+						} else if (fileUpload.state !== 'error' && fileUpload.file.type.startsWith('image/')) {
+							const url = URL.createObjectURL(fileUpload.file);
+							previewCache.set(fileUpload.file, url);
+							return url;
+						}
+						return null;
+					},
+				},
+				template: `<lu-form-field label="Label">
 		<lu-multi-file-upload${sizeSFileUploadParam}${generateInputs(mainArgs, argTypes)} (filePicked)="fileUploadFeature.uploadFiles([$event])" />
 	</lu-form-field>
 	<div class="fileEntryDisplayWrapper">
@@ -222,7 +266,8 @@ export const Multi = {
 			<lu-file-entry${sizeSFileEntryParam}${displayFileNameParam}${mediaParam} [entry]="fileUpload | fileUploadToLFEntry" [state]="fileUpload.state" [previewUrl]="getPreviewUrl(fileUpload)" [inlineMessageError]="fileUpload.error?.detail" (deleteFile)="deleteFile(fileUpload)" />
 		}
 	</div>`,
-		};
+			};
+		}
 	},
 	args: {
 		size: null,
@@ -232,6 +277,7 @@ export const Multi = {
 		illustration: 'paper',
 		structure: false,
 		buttonFilled: false,
+		content: false,
 	},
 };
 
@@ -239,14 +285,27 @@ export const Single = {
 	render: (args, { argTypes }) => {
 		const multi = Multi.render(args, { argTypes });
 		const { accept, ...mainArgs } = args;
-		return {
-			props: { ...multi.props, accept },
-			template: `@let fileUpload = fileUploadFeature.fileUploads()[0];
+		if (args.content) {
+			return {
+				props: { ...multi.props, accept },
+				template: `@let fileUpload = fileUploadFeature.fileUploads()[0];
+<lu-form-field label="Label">
+	<lu-single-file-upload ${generateInputs(mainArgs, argTypes)} [accept]="accept" (filePicked)="fileUploadFeature.uploadFiles([$event])"
+		[entry]="fileUpload | fileUploadToLFEntry" [state]="fileUpload?.state" [previewUrl]="getPreviewUrl(fileUpload)" [inlineMessageError]="fileUpload?.error?.detail" (deleteFile)="deleteFile(fileUpload)">
+		<lu-tag icon="weatherStars" label="Scan intelligent" AI />
+	</lu-single-file-upload>
+</lu-form-field>`,
+			};
+		} else {
+			return {
+				props: { ...multi.props, accept },
+				template: `@let fileUpload = fileUploadFeature.fileUploads()[0];
 <lu-form-field label="Label">
 	<lu-single-file-upload ${generateInputs(mainArgs, argTypes)} [accept]="accept" (filePicked)="fileUploadFeature.uploadFiles([$event])"
 		[entry]="fileUpload | fileUploadToLFEntry" [state]="fileUpload?.state" [previewUrl]="getPreviewUrl(fileUpload)" [inlineMessageError]="fileUpload?.error?.detail" (deleteFile)="deleteFile(fileUpload)" />
 </lu-form-field>`,
-		};
+			};
+		}
 	},
 	args: {
 		size: null,
@@ -261,5 +320,6 @@ export const Single = {
 		displayFileName: false,
 		structure: false,
 		buttonFilled: false,
+		content: false,
 	},
 };
