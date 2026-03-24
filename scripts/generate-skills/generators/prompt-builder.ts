@@ -139,8 +139,8 @@ export function buildPrompt({ matched, zeroheightData }: { matched: MatchedEntry
 		.join('\n');
 	const categoryLabel = storybook?.category ? (CATEGORY_LABELS[storybook.category] ?? storybook.category) : '';
 
-	// Story source code
-	const codeExamples = readStoryExamples(storybook ?? null);
+	// Story source code — primary + any extra stories from component-map extraStories
+	const codeExamples = readStoryExamples(storybook ?? null, matched.additionalStorybook);
 
 	// Related stories (sub-components, related variants)
 	let relatedSection = '';
@@ -197,14 +197,17 @@ Le champ \`name\` dans le frontmatter doit être exactement \`${slug}\`.
 }
 
 /**
- * Reads Angular story source files to include as code examples.
- * Capped at ~6000 characters per file to avoid saturating the context window.
+ * Reads Angular story source files and extracts only the essential parts:
+ * imports, HTML templates and argType descriptions.
+ * Much more compact and focused than the raw file, with no arbitrary char limit.
  */
-function readStoryExamples(storybook: import('../types').StorybookGroup | null): string | null {
-	if (!storybook?.stories?.length) return null;
+function readStoryExamples(storybook: import('../types').StorybookGroup | null, additionalGroups?: import('../types').StorybookGroup[]): string | null {
+	const allGroups = [storybook, ...(additionalGroups ?? [])].filter(Boolean) as import('../types').StorybookGroup[];
+	if (allGroups.length === 0) return null;
 
+	const seen = new Set<string>();
 	const examples: string[] = [];
-	const angular = storybook.stories.filter((s) => s.framework === 'angular').slice(0, 5);
+	const angular = allGroups.flatMap((g) => g.stories.filter((s) => s.framework === 'angular')).slice(0, 5);
 
 	const resolvedRoot = path.resolve(WORKSPACE_ROOT);
 
@@ -228,17 +231,184 @@ function readStoryExamples(storybook: import('../types').StorybookGroup | null):
 		}
 
 		if (!fs.existsSync(filePath)) continue;
+		// Deduplicate: multiple stories can share the same source file
+		if (seen.has(filePath)) continue;
+		seen.add(filePath);
 
 		try {
 			const content = fs.readFileSync(filePath, 'utf-8');
-			const truncated = content.length > 6000 ? content.slice(0, 6000) + '\n// ... (tronqué)' : content;
-			examples.push(`\`\`\`typescript\n// ${story.importPath}\n${truncated}\n\`\`\``);
+			const extracted = extractStoryEssentials(content);
+			if (extracted) {
+				examples.push(`// ${story.importPath}\n${extracted}`);
+			}
 		} catch {
-			// Fichier illisible — on ignore
+			// Unreadable file — skip
 		}
 	}
 
 	return examples.length > 0 ? examples.join('\n\n') : null;
+}
+
+/**
+ * Extracts the essential parts of a Storybook Angular story file:
+ * 1. Import lines (what modules/components are used)
+ * 2. All HTML templates found in template: `...` properties
+ * 3. argType descriptions (the available inputs and their descriptions)
+ */
+function extractStoryEssentials(content: string): string | null {
+	const parts: string[] = [];
+
+	// 1. Imports
+	const importLines = content
+		.split('\n')
+		.filter((l) => l.trimStart().startsWith('import '))
+		.filter((l) => !l.includes('storybook/test') && !l.includes('stories/helpers'))
+		.join('\n');
+	if (importLines) parts.push(importLines);
+
+	// 2. HTML templates — extract all template: `...` values using a recursive state machine
+	const templates = extractTemplateLiterals(content);
+	if (templates.length > 0) {
+		parts.push('// Templates:\n' + templates.map((t) => `\`\`\`html\n${t.trim()}\n\`\`\``).join('\n'));
+	}
+
+	// 3. argType descriptions — extract prop name + description value
+	const argTypeDescriptions = extractArgTypeDescriptions(content);
+	if (argTypeDescriptions.length > 0) {
+		parts.push('// Inputs:\n' + argTypeDescriptions.map(({ name, description }) => `// @Input() ${name}: ${description}`).join('\n'));
+	}
+
+	return parts.length > 0 ? parts.join('\n\n') : null;
+}
+
+/**
+ * Extracts all template literal values assigned to a `template:` property.
+ * Uses mutual recursion between readTemplateLiteral and skipInterpolation
+ * to correctly handle nested template literals inside ${} expressions.
+ */
+function extractTemplateLiterals(content: string): string[] {
+	const results: string[] = [];
+	const searchStr = 'template:';
+	let pos = 0;
+
+	while (pos < content.length) {
+		const idx = content.indexOf(searchStr, pos);
+		if (idx === -1) break;
+
+		// Skip to the opening backtick (ignore whitespace)
+		let i = idx + searchStr.length;
+		while (i < content.length && (content[i] === ' ' || content[i] === '\n' || content[i] === '\r' || content[i] === '\t')) i++;
+
+		if (content[i] !== '`') {
+			// template: someVar or template: "string" — not a template literal, skip
+			pos = idx + searchStr.length;
+			continue;
+		}
+
+		i++; // skip opening backtick
+		const { text, endPos } = readTemplateLiteral(content, i);
+		if (text.trim()) results.push(text);
+		pos = endPos;
+	}
+
+	return results;
+}
+
+/** Reads a template literal body until the closing backtick, handling nested ${} recursively. */
+function readTemplateLiteral(content: string, startPos: number): { text: string; endPos: number } {
+	let i = startPos;
+	let text = '';
+
+	while (i < content.length) {
+		const ch = content[i];
+		if (ch === '`') {
+			return { text, endPos: i + 1 };
+		} else if (ch === '\\' && i + 1 < content.length) {
+			text += ch + content[i + 1];
+			i += 2;
+		} else if (ch === '$' && content[i + 1] === '{') {
+			i = skipInterpolation(content, i + 2); // skip past ${
+			text += '${…}';
+		} else {
+			text += ch;
+			i++;
+		}
+	}
+
+	return { text, endPos: i };
+}
+
+/** Skips a ${...} interpolation block, recursively handling nested template literals. */
+function skipInterpolation(content: string, startPos: number): number {
+	let i = startPos;
+	let depth = 1;
+
+	while (i < content.length && depth > 0) {
+		const ch = content[i];
+		if (ch === '\\' && i + 1 < content.length) {
+			i += 2;
+		} else if (ch === '`') {
+			// Nested template literal — skip it fully (readTemplateLiteral handles its own ${})
+			i++;
+			const { endPos } = readTemplateLiteral(content, i);
+			i = endPos;
+		} else if (ch === '{') {
+			depth++;
+			i++;
+		} else if (ch === '}') {
+			depth--;
+			i++;
+		} else {
+			i++;
+		}
+	}
+
+	return i;
+}
+
+/**
+ * Extracts argType descriptions from a Storybook story file.
+ * Scans line by line for `description: '...'` values and pairs them
+ * with the enclosing property name by looking at the preceding lines.
+ * Returns an array of { name, description } pairs.
+ */
+function extractArgTypeDescriptions(content: string): { name: string; description: string }[] {
+	const results: { name: string; description: string }[] = [];
+	const seen = new Set<string>();
+	const lines = content.split('\n');
+
+	for (let lineIdx = 0; lineIdx < lines.length; lineIdx++) {
+		const line = lines[lineIdx];
+		const descMatch = line.match(/^\s+description\s*:\s*(?:'((?:[^'\\]|\\.)*)'|"((?:[^"\\]|\\.)*)")/);
+		if (!descMatch) continue;
+
+		const raw = descMatch[1] ?? descMatch[2] ?? '';
+		const description = raw.replace(/<[^>]+>/g, '').replace(/\\n/g, ' ').trim();
+		if (!description) continue;
+
+		// Find the enclosing property by walking backward for `propName: {` at a lower indent
+		const descIndent = (line.match(/^(\s+)/)?.[1] ?? '').length;
+		let propName: string | null = null;
+		for (let j = lineIdx - 1; j >= 0 && j >= lineIdx - 15; j--) {
+			const prev = lines[j];
+			const prevIndent = (prev.match(/^(\s+)/)?.[1] ?? '').length;
+			if (prevIndent < descIndent) {
+				const nameMatch = prev.match(/^\s+(\w+)\s*:\s*\{/);
+				if (nameMatch) {
+					propName = nameMatch[1];
+					break;
+				}
+			}
+		}
+
+		const SKIP = new Set(['type', 'control', 'table', 'if', 'mapping']);
+		if (propName && !seen.has(propName) && !SKIP.has(propName)) {
+			seen.add(propName);
+			results.push({ name: propName, description });
+		}
+	}
+
+	return results;
 }
 
 /**

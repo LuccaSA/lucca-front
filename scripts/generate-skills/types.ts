@@ -102,6 +102,8 @@ export interface McpContext {
 export interface ComponentMapEntry {
 	slug: string;
 	storybook?: string;
+	/** Additional Storybook story groups whose source code will be included in the AI prompt. */
+	extraStories?: string[];
 }
 
 export type ComponentMapSingleValue = string | ComponentMapEntry | null;

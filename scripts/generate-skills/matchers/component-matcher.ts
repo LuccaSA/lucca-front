@@ -69,6 +69,25 @@ export function matchComponents(figmaGroups: Map<string, FigmaGroup>, storybookG
 			.map((s) => storybookGroups.get(s)!);
 		if (additional.length > 0) entry.additionalStorybook = additional;
 
+		// extraStories: additional story groups whose source code should be included in the prompt
+		const extraStorySlugs: string[] = [];
+		for (const raw of rawSlugs) {
+			if (typeof raw === 'object' && raw !== null && !Array.isArray(raw) && raw.extraStories) {
+				for (const title of raw.extraStories) {
+					// Normalize the title to its Storybook slug (same logic as the collector)
+					const parts = title.split('/');
+					const angularIdx = parts.indexOf('Angular');
+					const componentName = angularIdx > 0 ? parts[angularIdx - 1].trim() : parts[parts.length - 1].trim();
+					const xSlug = componentName.toLowerCase().replace(/\s+/g, '-').replace(/[^a-z0-9-]/g, '');
+					if (xSlug && !extraStorySlugs.includes(xSlug)) extraStorySlugs.push(xSlug);
+				}
+			}
+		}
+		if (extraStorySlugs.length > 0) {
+			const extraGroups = extraStorySlugs.filter((s) => storybookGroups.has(s)).map((s) => storybookGroups.get(s)!);
+			if (extraGroups.length > 0) entry.additionalStorybook = [...(entry.additionalStorybook ?? []), ...extraGroups];
+		}
+
 		// Related stories by substring match
 		const related: (StorybookGroup & { sbSlug: string })[] = [];
 		for (const [sbKey, sbData] of storybookGroups) {

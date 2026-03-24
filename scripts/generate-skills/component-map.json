@@ -92,11 +92,13 @@
   "pr-AppDrawer": null,
   "pr-AppLayout (1600)": {
     "slug": "app-layout",
-    "storybook": "Documentation/Structure/App Layout/Angular"
+    "storybook": "Documentation/Structure/App Layout/Angular",
+    "extraStories": ["Documentation/Structure/Main Layout/Angular"]
   },
   "pr-AppLayout (360)": {
     "slug": "app-layout",
-    "storybook": "Documentation/Structure/App Layout/Angular"
+    "storybook": "Documentation/Structure/App Layout/Angular",
+    "extraStories": ["Documentation/Structure/Main Layout/Angular"]
   },
   "pr-Avatar": {
     "slug": "avatar",
