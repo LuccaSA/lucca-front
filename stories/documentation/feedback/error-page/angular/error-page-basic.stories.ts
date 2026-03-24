@@ -17,7 +17,10 @@ export default {
 	render: (args: ErrorPageComponent, context) => {
 		const { ...inputs } = args;
 		return {
-			template: `<lu-error-page${generateInputs(inputs, context.argTypes)} />`,
+			template: `<lu-error-page${generateInputs(inputs, context.argTypes)}>
+	<p>La page que vous cherchez n’existe pas.</p>
+	<p><a href="#">Revenir à la page précédente</a></p>
+</lu-error-page>`,
 			styles: [
 				`
 					:host ::ng-deep .errorPage,
@@ -31,11 +34,6 @@ export default {
 	argTypes: {
 		heading: {
 			type: 'string',
-			description: 'PortalContent',
-		},
-		description: {
-			type: 'string',
-			description: 'PortalContent',
 		},
 		illustration: {
 			options: ['400', '403', '404', '429', '500', 'keyboard', 'lock', 'map'],
@@ -43,23 +41,12 @@ export default {
 				type: 'select',
 			},
 		},
-		link: {
-			type: 'string',
-			description: 'URL to navigate to when clicking the link',
-		},
-		linkLabel: {
-			type: 'string',
-			description: 'Label for the link, defaults to "Revenir à la page précédente"',
-		},
 	},
 } as Meta;
 
 export const Template: StoryObj<ErrorPageComponent> = {
 	args: {
 		heading: 'Erreur 404',
-		description: 'La page que vous cherchez n’existe pas.',
 		illustration: '404',
-		link: null,
-		linkLabel: 'Revenir à la page précédente',
 	},
 };

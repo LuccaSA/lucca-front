@@ -11,8 +11,10 @@ function getTemplate(args: ErrorBasicStory): string {
 	<section class="errorPage-section">
 		<div class="errorPage-section-info">
 			<h1 class="errorPage-section-info-title">Erreur 403</h1>
-			<p class="errorPage-section-info-text">Vous n’êtes pas autorisé à consulter cette page ou cette ressource.</p>
-			<p><a href="#">Revenir à la page précédente</a></p>
+			<div class="textFlow">
+				<p>Vous n’êtes pas autorisé à consulter cette page ou cette ressource.</p>
+				<p><a href="#">Revenir à la page précédente</a></p>
+			</div>
 		</div>
 		<img src="https://cdn.lucca.fr/errors/svg/403-lucca.svg" width="600" height="400" alt="" class="errorPage-section-image" />
 	</section>
