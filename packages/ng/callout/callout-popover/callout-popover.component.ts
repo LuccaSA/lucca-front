@@ -42,6 +42,8 @@ export class CalloutPopoverComponent {
 	 */
 	readonly headingHiddenIfSingleItem = input(false, { transform: booleanAttribute });
 
+	readonly popoverTrigger = input<'click' | 'click+hover' | 'hover+focus'>('click+hover');
+
 	/**
 	 * Palette for both the button and the popover content
 	 */
