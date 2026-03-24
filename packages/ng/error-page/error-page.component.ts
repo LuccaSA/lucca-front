@@ -1,5 +1,5 @@
 import { ChangeDetectionStrategy, Component, computed, input } from '@angular/core';
-import { TextFlowComponent } from '../text-flow/text-flow.component';
+import { TextFlowComponent } from '@lucca-front/ng/text-flow';
 import { ErrorPageIllustration } from './error-page.model';
 
 @Component({
