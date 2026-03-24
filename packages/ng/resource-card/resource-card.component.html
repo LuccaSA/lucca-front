@@ -16,7 +16,7 @@
 		<div class="resourceCard-layout-before-illustration"><ng-content select="[resourceCardIllustration]" /></div>
 	</div>
 	<header class="resourceCard-layout-header">
-		<div class="resourceCard-layout-header-title" role="heading" [attr.level]="headingLevel()"><ng-content /></div>
+		<div class="resourceCard-layout-header-title" role="heading" [attr.aria-level]="headingLevel()"><ng-content /></div>
 		<div class="resourceCard-layout-header-infos"><ng-content select="[resourceCardInfos]" /></div>
 	</header>
 	<div class="resourceCard-layout-after"><ng-content select="[resourceCardAction]" /></div>
