@@ -31,8 +31,8 @@ const modeToPeriodStart: Record<CalendarMode, (date: Date) => Date> = {
 	year: startOfDecade,
 };
 
-export function comparePeriods(mode: CalendarMode, a: Date, b: Date): boolean {
-	return modeToComparator[mode](a, b);
+export function comparePeriods(mode: CalendarMode | null, a: Date, b: Date): boolean {
+	return mode ? modeToComparator[mode](a, b) : false;
 }
 
 export function compareCalendarPeriods(mode: CalendarMode, a: Date, b: Date): boolean {
