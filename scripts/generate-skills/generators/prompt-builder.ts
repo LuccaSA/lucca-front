@@ -214,7 +214,7 @@ function readStoryExamples(storybook: import('../types').StorybookGroup | null):
 		// Security: importPath comes from an external server (Storybook index.json).
 		// Reject any path containing '..' to prevent path traversal.
 		const normalizedImport = story.importPath.replace(/^[./\\]+/, '');
-		if (/\.\.*/.test(normalizedImport)) {
+		if (/\.\./.test(normalizedImport)) {
 			console.warn(`  ⚠️  Suspicious importPath skipped: ${story.importPath}`);
 			continue;
 		}
