@@ -400,9 +400,9 @@ export const BasicTagPluginTEST = createTestStory(WithTagPlugin, async (context)
 		await userEvent.click(editor);
 		await userEvent.keyboard('{Meta>}a{/Meta}{Backspace}');
 
-		await userEvent.click(canvas.getByText('Tag 1'));
-		await userEvent.click(canvas.getByText('Tag 2'));
-		await userEvent.click(canvas.getByText('Tag 3'));
+		await userEvent.click(canvas.getAllByText('Tag 1')[0]);
+		await userEvent.click(canvas.getAllByText('Tag 2')[0]);
+		await userEvent.click(canvas.getAllByText('Tag 3')[0]);
 		await waitForAngular();
 
 		const model = modelDisplay(context.canvasElement);
