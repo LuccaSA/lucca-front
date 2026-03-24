@@ -1,71 +1,67 @@
 # Slot
 
 ## Quand utiliser ce composant
-- Lorsqu'il est nécessaire de créer une zone flottante pour insérer du contenu dans un layout.
-- Pour intégrer des éléments dans des interfaces sans perturber le flux principal.
-- Pour afficher des informations contextuelles ou des actions associées à un élément particulier.
+- Pour afficher des informations dynamiques dans un espace limité.
+- Lorsque vous souhaitez intégrer des éléments interactifs dans votre interface tout en respectant la structure de mise en page.
+- Pour gérer des contenus variés sous forme de "slots" qui peuvent être personnalisés.
 
 ## Stories Storybook
 [Documentation complète](https://lucca-front.lucca.io/storybook/?path=/docs/documentation-integration-utilities-float--docs)
 
 ## Composant Figma
-[Slot Figma](https://www.figma.com/design/PQEOcUF9CYfKNqaejAGLWP?node-id=13461-13359) - Composant visuel représentant une zone flottante avec les variantes disponibles : Type=Text, Type=Slot, Type=Slot - Mini.
+[Slot sur Figma](https://www.figma.com/design/PQEOcUF9CYfKNqaejAGLWP?node-id=13461-13359) - Ce composant permet de créer des puces d'informations avec plusieurs variantes disponibles : Type=Text, Type=Slot, Type=Slot - Mini.
 
 ## Import
 
 ```typescript
-import { FloatComponent } from '@lucca-front/ng/utilities';
-// ou
-import { FloatDirective } from '@lucca-front/ng/utilities';
+import { SlotComponent } from '@lucca-front/ng/float';
 ```
 
 ## Usage de base
 
 ```html
 <!-- Usage minimal -->
-<element luFloat>...</element>
+<lu-slot>...</lu-slot>
 ```
 
-## Directive / Composant : `luFloat` ou `<lu-float>`
+## Directive / Composant : `luSlot` ou `<lu-slot>`
 
-Directives pour créer un slot flottant pouvant être utilisé sur divers éléments HTML.
+Directive utilisée pour gérer l'affichage du contenu dans le composant Slot. Applicable sur les éléments HTML prévus pour le contenu dynamique.
 
 ### Valeurs (si directive avec valeurs)
 
-| Valeur            | Description                          |
-|-------------------|--------------------------------------|
-| `""` (vide)       | Variante par défaut                  |
-| `"text"`          | Affiche le contenu sous forme de texte |
-| `"slot"`          | Affiche un slot personnalisé        |
-| `"slot-mini"`     | Affiche une variante mini du slot   |
+| Valeur      | Description                           |
+|-------------|---------------------------------------|
+| `""` (vide) | Variante par défaut                   |
+| `"Text"`    | Variante affichant du texte           |
+| `"Slot"`    | Variante affichant un slot standard   |
+| `"Mini"`    | Variante affichant un slot miniature   |
 
 ```html
-<element luFloat="text">...</element>
+<lu-slot type="Text">...</lu-slot>
 ```
 
 ## Inputs
 
 ### `type`
-Type: `'text' | 'slot' | 'slot-mini'` — Default: `'text'`
+Type: `'Text' | 'Slot' | 'Mini'` — Default: `'Text'`
 
-Détermine le type d'affichage du slot.
+Définit le type de contenu à afficher dans le slot.
 
 ```html
-<element luFloat [type]="value">...</element>
+<lu-slot [type]="'Slot'">...</lu-slot>
 ```
 
 ## Patterns courants
 
-### Exemple d'usage avec un slot
+### Affichage d'informations dynamiques
 ```html
-<!-- Utilisation d'un slot pour afficher du contenu contextuel -->
-<element luFloat type="slot">Contenu du slot</element>
+<lu-slot type="Slot">Contenu dynamique ici</lu-slot>
 ```
 
 ## Accessibilité
-Assurez-vous que le contenu du slot est accessible via des technologies d'assistance. Fournissez des descriptions claires pour les éléments interactifs.
+Assurez-vous que le contenu du Slot soit accessible au travers de technologies d'assistance. Utilisez des attributs ARIA si nécessaire pour décrire le contenu du slot.
 
 ## Guidelines Prisme
-- Respecter les principes de design de Lucca.
-- Ne pas utiliser des couleurs non conformes au guide de style.
-- S'assurer que tous les slots sont correctement intégrés dans le flux de l'interface utilisateur.
+- Utiliser les Slots pour des contenus variés, en respectant les limites de chaque type.
+- Ne pas surcharger le Slot avec trop d'informations.

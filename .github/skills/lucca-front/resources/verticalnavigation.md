@@ -1,104 +1,78 @@
-# VerticalNavigation
+# pr-VerticalNavigation
 
 ## Quand utiliser ce composant
-- Lorsque vous avez besoin d'une navigation verticale dans votre interface.
-- Pour organiser des éléments de menu en groupes avec des icônes.
-- Pour désactiver des éléments de navigation au besoin.
+- Pour structurer la navigation d'une application avec plusieurs sections.
+- Lorsque l'on souhaite une interface claire et accessible pour les utilisateurs.
+- Pour offrir une navigation persistante tout en économisant de l'espace à l'écran.
 
 ## Stories Storybook
 - [Documentation complète](https://lucca-front.lucca.io/storybook/?path=/docs/documentation-navigation-verticalnavigation-angular-disabled--docs)
-- [Exemple de base avec désactivation](https://lucca-front.lucca.io/storybook/?path=/story/documentation-navigation-verticalnavigation-angular-disabled--basic)
-- [Exemple sans icônes](https://lucca-front.lucca.io/storybook/?path=/story/documentation-navigation-verticalnavigation-angular-iconless--basic)
-- [Exemple de base](https://lucca-front.lucca.io/storybook/?path=/story/documentation-navigation-verticalnavigation-angular-basic--basic)
+- [Basic](https://lucca-front.lucca.io/storybook/?path=/story/documentation-navigation-verticalnavigation-angular-disabled--basic)
+- [Iconless](https://lucca-front.lucca.io/storybook/?path=/story/documentation-navigation-verticalnavigation-angular-iconless--basic)
+- [Basic](https://lucca-front.lucca.io/storybook/?path=/story/documentation-navigation-verticalnavigation-angular-basic--basic)
 
 ## Composant Figma
-[Consulter le design dans Figma](https://www.figma.com/design/PQEOcUF9CYfKNqaejAGLWP?node-id=13580-1866) - Composant de navigation verticale avec des options pour afficher ou masquer des icônes.
+[Design Figma](https://www.figma.com/design/PQEOcUF9CYfKNqaejAGLWP?node-id=13580-1866) - La Vertical navigation permet de naviguer entre différentes sections d’une interface. Variantes disponibles : pr-VerticalNavigation.
 
 ## Import
 
 ```typescript
-import { VerticalNavigationComponent, VerticalNavigationGroupComponent, VerticalNavigationItemComponent, VerticalNavigationLinkComponent } from '@lucca-front/ng/vertical-navigation';
+import { VerticalNavigationComponent } from '@lucca-front/ng/navigation';
+// ou
+import { VerticalNavigationGroupComponent } from '@lucca-front/ng/navigation';
+// ou
+import { VerticalNavigationItemComponent } from '@lucca-front/ng/navigation';
+// ou
+import { VerticalNavigationLinkComponent } from '@lucca-front/ng/navigation';
 ```
 
 ## Usage de base
 
 ```html
-<lu-vertical-navigation heading="Section">
-    <lu-vertical-navigation-group label="Group 1" icon="heart">
-        <lu-vertical-navigation-item>
-            <a luVerticalNavigationLink href="#">Item 1</a>
-        </lu-vertical-navigation-item>
-        <lu-vertical-navigation-item>
-            <a luVerticalNavigationLink href="#" aria-current="page">Item 2</a>
-        </lu-vertical-navigation-item>
-        <lu-vertical-navigation-item>
-            <a luVerticalNavigationLink href="#">Item 3</a>
-        </lu-vertical-navigation-item>
-    </lu-vertical-navigation-group>
-    <lu-vertical-navigation-item>
-        <a luVerticalNavigationLink href="#" icon="heartFilled">Item 4</a>
-    </lu-vertical-navigation-item>
-</lu-vertical-navigation>
+<!-- Usage minimal -->
+<lu-vertical-navigation>...</lu-vertical-navigation>
 ```
 
-## Directive / Composant : `luVerticalNavigation` ou `<lu-vertical-navigation>`
+## Directive / Composant : `lu-vertical-navigation` ou `<lu-vertical-navigation>`
 
-Composant principal de navigation verticale, applicable sur les conteneurs de navigation.
+Composant permettant la création d'une navigation verticale. Applicable sur un conteneur d'éléments de navigation.
 
 ### Valeurs (si directive avec valeurs)
 
-| Valeur   | Description                              |
-|----------|------------------------------------------|
-| `""`     | Variante par défaut                      |
-| `"disabled"` | Désactive le composant.             |
-| `"iconless"` | Présente le composant sans icônes. |
+| Valeur | Description |
+|--------|-------------|
+| `""` (vide) | Variante par défaut |
 
 ```html
-<lu-vertical-navigation [disabled]="true">...</lu-vertical-navigation>
+<lu-vertical-navigation ...>...</lu-vertical-navigation>
 ```
 
 ## Inputs
 
-### `heading`
-Type: `string` — Default: `''`
+### Aucun input spécifique
 
-Titre de la section de navigation.
-
-```html
-<lu-vertical-navigation [heading]="'Titre de la section'">...</lu-vertical-navigation>
-```
-
-### `disabled`
-Type: `boolean` — Default: `false`
-
-Désactive le composant si mis à `true`.
-
-```html
-<lu-vertical-navigation [disabled]="true">...</lu-vertical-navigation>
-```
-
-### `iconless`
-Type: `boolean` — Default: `false`
-
-Affiche le composant sans icônes si mis à `true`.
-
-```html
-<lu-vertical-navigation [iconless]="true">...</lu-vertical-navigation>
-```
+Aucun input n'est requis pour ce composant.
 
 ## Patterns courants
 
-### Navigation avec désactivation
+### Navigation verticale de base
 ```html
-<lu-vertical-navigation heading="Navigation">
+<lu-vertical-navigation>
+  <lu-vertical-navigation-group>
     <lu-vertical-navigation-item>
-        <a luVerticalNavigationLink href="#" disabled>Item désactivé</a>
+      <span luVerticalNavigationLink>Section 1</span>
     </lu-vertical-navigation-item>
+    <lu-vertical-navigation-item>
+      <span luVerticalNavigationLink>Section 2</span>
+    </lu-vertical-navigation-item>
+  </lu-vertical-navigation-group>
 </lu-vertical-navigation>
 ```
 
 ## Accessibilité
-Assurez-vous que les liens contiennent le texte approprié et, si nécessaire, utilisez `aria-current` pour indiquer l'élément courant.
+Le composant doit être utilisé avec des attributs ARIA appropriés pour assurer une navigation accessible via le clavier. Les éléments de navigation doivent être étiquetés clairement.
 
 ## Guidelines Prisme
-- Suivez les directives de la marque pour la conception et l'accessibilité, vérifiez la documentation sur [Zeroheight](https://lucca-front.lucca.io).
+- Privilégier l'utilisation des icônes accompagnées de texte pour une meilleure compréhension.
+- Éviter de surcharger la navigation avec de trop nombreux éléments, privilégier la clarté.
+- Assurer un feedback visuel lors du survol des éléments de navigation.

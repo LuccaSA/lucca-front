@@ -1,66 +1,70 @@
 # pr-Breadcrumbs
 
 ## Quand utiliser ce composant
-- Lorsque vous avez besoin d'afficher une hiérarchie de navigation pour aider les utilisateurs à comprendre leur position dans le site.
-- Pour améliorer la navigation en permettant aux utilisateurs de revenir facilement à des sections précédentes.
-- Pour structurer le contenu d’applications complexes où plusieurs niveaux de navigation sont nécessaires.
+- Lorsqu'il est nécessaire de visualiser la hiérarchie de navigation dans une application.
+- Pour permettre aux utilisateurs de comprendre leur position actuelle dans la structure d'une application.
+- Pour offrir un moyen facile de revenir à des sections précédentes dans une interface utilisateur.
 
 ## Stories Storybook
 - [Documentation complète](https://lucca-front.lucca.io/storybook/?path=/docs/documentation-navigation-breadcrumbs-angular-basic--docs)
 - [Basic](https://lucca-front.lucca.io/storybook/?path=/story/documentation-navigation-breadcrumbs-angular-basic--basic)
 
 ## Composant Figma
-[Visuel du composant pr-Breadcrumbs](https://www.figma.com/design/PQEOcUF9CYfKNqaejAGLWP?node-id=10089-34515) - Variantes disponibles : Depth=1, Depth=2, Depth=3, Depth=4.
+[Visualiser dans Figma](https://www.figma.com/design/PQEOcUF9CYfKNqaejAGLWP?node-id=10089-34515) - Composant pr-Breadcrumbs avec les variantes disponibles : Depth=1, Depth=2, Depth=3, Depth=4.
 
 ## Import
 
 ```typescript
-import { BreadcrumbsComponent, BreadcrumbsLinkDirective } from '@lucca-front/ng/breadcrumbs';
+import { BreadcrumbsComponent } from '@lucca-front/ng/breadcrumbs';
+// ou
+import { BreadcrumbsLinkDirective } from '@lucca-front/ng/breadcrumbs';
 ```
 
 ## Usage de base
 
 ```html
 <!-- Usage minimal -->
-<lu-breadcrumbs>
-  <a *luBreadcrumbsLink routerLink="/" ariaCurrentWhenActive="page">You</a>
-  <a *luBreadcrumbsLink ariaCurrentWhenActive="page" href="#2">are</a>
-  <a *luBreadcrumbsLink aria-current="page">here</a>
-</lu-breadcrumbs>
+<lu-breadcrumbs>...</lu-breadcrumbs>
 ```
 
-## Directive / Composant : `luBreadcrumbsLink` ou `<lu-breadcrumbs-link>`
+## Directive / Composant : `lu-breadcrumbs` ou `[luBreadcrumbsLink]`
 
-Directive utilisée pour chaque lien fourni dans le composant pr-Breadcrumbs. Applicable sur les éléments `<a>`.
+Composant de navigation hiérarchique. Applicable sur des éléments de navigation.
 
 ### Valeurs (si directive avec valeurs)
 
-| Valeur | Description |
-|--------|-------------|
-| `""` (vide) | Variante par défaut sans styles additionnels |
+Aucune valeur applicable.
 
 ```html
-<a *luBreadcrumbsLink>...</a>
+<lu-breadcrumbs>...</lu-breadcrumbs>
 ```
 
 ## Inputs
 
-### Aucun input défini
+### `depth`
+Type: `1 | 2 | 3 | 4` — Default: `1`
+
+Détermine le niveau de profondeur des breadcrumbs affichés.
+
+```html
+<lu-breadcrumbs [depth]="3">...</lu-breadcrumbs>
+```
 
 ## Patterns courants
 
-### Exemple de fil d’Ariane
+### Affichage de breadcrumbs avec un lien
 ```html
 <lu-breadcrumbs>
-  <a *luBreadcrumbsLink routerLink="/" ariaCurrentWhenActive="page">Home</a>
-  <a *luBreadcrumbsLink href="#second-page">Second Page</a>
-  <a *luBreadcrumbsLink aria-current="page">Current Page</a>
+  <a [luBreadcrumbsLink]="true" routerLink="/">Accueil</a>
+  <a [luBreadcrumbsLink]="true" routerLink="/section">Section</a>
+  <span>Page actuelle</span>
 </lu-breadcrumbs>
 ```
 
 ## Accessibilité
-Assurez-vous que chaque lien a un texte visible qui décrit clairement la destination pour améliorer l'expérience utilisateur pour les personnes utilisant des technologies d'assistance.
+Assurez-vous que chaque lien dans le composant breadcrumbs soit accessible par clavier et propose une description pertinente dans le texte du lien. Utilisez des éléments de balisage corrects pour indiquer la structure hiérarchique.
 
 ## Guidelines Prisme
-- Utilisez le composant pr-Breadcrumbs pour respecter les conventions de navigation.
-- Évitez d'utiliser des liens qui ne mènent nulle part ou qui sont redondants.
+- Utiliser les breadcrumbs pour améliorer la navigation.
+- Ne pas utiliser les breadcrumbs sur des pages où la hiérarchie n'est pas pertinente.
+- Assurez-vous que les liens dans les breadcrumbs restent clairs et descriptifs pour les utilisateurs.

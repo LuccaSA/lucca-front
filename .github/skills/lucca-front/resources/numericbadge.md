@@ -1,107 +1,102 @@
-# pr-NumericBadge
+# NumericBadge
 
 ## Quand utiliser ce composant
-- Pour afficher un nombre ou une quantité de manière visuellement attrayante, par exemple dans un tableau de bord.
-- Lorsqu'une valeur dépasse un certain seuil et qu'il est nécessaire d'afficher un indicateur comme "999+".
-- Pour indiquer un état de chargement ou désactiver une interaction dans une interface utilisateur.
+- Pour afficher un compteur d'éléments, par exemple dans une notification.
+- Pour indiquer des valeurs quantifiables sur des icônes ou des boutons d'action.
+- Pour signaler un état d'activité ou d'attente avec l'option de loader.
 
 ## Stories Storybook
 - [Documentation complète](https://lucca-front.lucca.io/storybook/?path=/docs/documentation-texts-numericbadge-angular-basic--docs)
 - [Template](https://lucca-front.lucca.io/storybook/?path=/story/documentation-texts-numericbadge-angular-basic--template)
 
 ## Composant Figma
-[Consulter le design sur Figma](https://www.figma.com/design/PQEOcUF9CYfKNqaejAGLWP?node-id=14014-5098). Ce composant présente un badge numérique avec plusieurs variantes de taille (XS, S, M) et de palette (Brand, Product, Neutral).
+[Visuel Figma](https://www.figma.com/design/PQEOcUF9CYfKNqaejAGLWP?node-id=14014-5098) + Ce composant présente différentes variantes de taille et de palette, offrant une grande flexibilité pour l'intégration visuelle.
 
 ## Import
 
 ```typescript
-import { NumericBadgeComponent } from '@lucca-front/ng/numeric-badge';
+import { NumericBadgeComponent } from '@lucca-front/ng/texts';
 ```
 
 ## Usage de base
 
 ```html
-<!-- Usage minimal -->
-<lu-numeric-badge [value]="7"></lu-numeric-badge>
+<!-- Utilisation minimale -->
+<lu-numeric-badge>5</lu-numeric-badge>
 ```
 
 ## Directive / Composant : `lu-numeric-badge`
 
-Composant pour afficher un badge numérique. Applicable uniquement sur les éléments '<lu-numeric-badge>'.
+Composant pour afficher un badge numérique pouvant être appliqué sur des éléments HTML.
 
-### Valeurs (si directive avec valeurs)
+### Valeurs
 
-| Valeur            | Description                               |
-|-------------------|-------------------------------------------|
-| `"none"`          | Pas de palette de couleur appliquée       |
-| `"product"`       | Palette de couleur pour les produits      |
-| `"neutral"`       | Palette de couleur neutre                 |
-| `"success"`       | Palette de couleur pour un état de succès |
-| `"warning"`       | Palette de couleur pour un avertissement   |
-| `"error"`         | Palette de couleur pour une erreur         |
+| Valeur | Description |
+|--------|-------------|
+| `""` (vide) | Variante par défaut |
+| `"XS"` | Taille très petite |
+| `"S"` | Taille petite |
+| `"M"` | Taille moyenne |
+| `"Brand"` | Palette de couleur Brand |
+| `"Product"` | Palette de couleur Product |
+| `"Neutral"` | Palette de couleur Neutre |
+| `"true"` | Badge en état désactivé |
+| `"false"` | Badge actif avec loader |
 
 ```html
-<lu-numeric-badge [palette]="'product'" [value]="7"></lu-numeric-badge>
+<lu-numeric-badge size="S" palette="Brand" [disabled]="false" [loader]="true">10</lu-numeric-badge>
 ```
 
 ## Inputs
 
-### `value`
-Type: `number | string` — Default: `undefined`
-
-Valeur affichée par le composant. Doit obligatoirement contenir une valeur numérique (ex: 7, "3/5", "999+", etc.).
-
-```html
-<lu-numeric-badge [value]="7"></lu-numeric-badge>
-```
-
-### `maxValue`
-Type: `number` — Default: `undefined`
-
-Valeur maximale affichée au format "999+".
-
-```html
-<lu-numeric-badge [value]="1000" [maxValue]="999"></lu-numeric-badge>
-```
-
-### `disableTooltip`
-Type: `boolean` — Default: `false`
-
-Empêche le déclenchement d'une tooltip si la valeur est supérieure à maxValue.
-
-```html
-<lu-numeric-badge [value]="1000" [maxValue]="999" [disableTooltip]="true"></lu-numeric-badge>
-```
-
 ### `size`
 Type: `'XS' | 'S' | 'M'` — Default: `'S'`
 
-Modifie la taille du composant.
+Détermine la taille du badge numérique.
 
 ```html
-<lu-numeric-badge [size]="'M'" [value]="7"></lu-numeric-badge>
+<lu-numeric-badge [size]="'XS'">1</lu-numeric-badge>
 ```
 
-### `loading`
-Type: `boolean` — Default: `false`
+### `palette`
+Type: `'Brand' | 'Product' | 'Neutral'` — Default: `'Brand'`
 
-Applique l'état de chargement au composant.
+Détermine la palette de couleurs du badge.
 
 ```html
-<lu-numeric-badge [loading]="true" [value]="7"></lu-numeric-badge>
+<lu-numeric-badge [palette]="'Product'">2</lu-numeric-badge>
+```
+
+### `disabled`
+Type: `boolean` — Default: `false`
+
+Indique si le badge est désactivé.
+
+```html
+<lu-numeric-badge [disabled]="true">3</lu-numeric-badge>
+```
+
+### `loader`
+Type: `boolean` — Default: `false`
+
+Indique si un loader est affiché.
+
+```html
+<lu-numeric-badge [loader]="true">4</lu-numeric-badge>
 ```
 
 ## Patterns courants
 
-### Afficher une valeur avec une palette et une taille spécifiques
+### Affichage d'un badge avec un compteur
 ```html
-<lu-numeric-badge [value]="10" [palette]="'success'" [size]="'M'"></lu-numeric-badge>
+<!-- Badge affichant le nombre de notifications non lues -->
+<lu-numeric-badge [size]="'M'" [palette]="'Neutral'">3</lu-numeric-badge>
 ```
 
 ## Accessibilité
-Assurez-vous que la valeur affichée est essentielle pour l'utilisateur et qu'une description est fournie pour toutes les valeurs maximales pour une meilleure compréhension.
+Assurez-vous que le badge a une description accessible, soit via un attribut `aria-label`, soit en utilisant un contexte d'interface utilisateur clair.
 
 ## Guidelines Prisme
-- Utiliser les palettes de couleurs définies dans la documentation.
-- Éviter d'utiliser des valeurs numériques sans explication dans l'interface.
-- Assurer la cohérence dans l'utilisation des tailles pour un aspect visuel harmonieux.
+- Évitez d'utiliser trop de tailles différentes sur un même écran.
+- Préférez des palettes de couleurs cohérentes avec votre interface pour assurer une bonne lisibilité.
+- Ne placez pas de badges numériques sur des éléments qui ne peuvent pas être cliqués ou actionnés.

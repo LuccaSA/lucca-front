@@ -1,9 +1,9 @@
-# pr-SortableList
+# SortableList
 
 ## Quand utiliser ce composant
-- Pour créer des listes d'éléments que l'utilisateur peut trier en modifiant l'ordre des éléments.
-- Lorsqu'une fonctionnalité de glisser-déposer est nécessaire pour réorganiser les éléments listés.
-- Pour afficher des listes d'éléments pouvant être interactives et affichant des messages d'aide.
+- Pour créer une interface utilisateur où les utilisateurs peuvent réorganiser des éléments de manière interactive.
+- Dans les situations où il est nécessaire de classer ou de prioriser des éléments dynamiquement selon les préférences de l'utilisateur.
+- Pour permettre la réorganisation de listes dans des tableaux de bord ou des gestionnaires de tâches.
 
 ## Stories Storybook
 - [Documentation complète](https://lucca-front.lucca.io/storybook/?path=/docs/documentation-listings-sortable-list-angular-basic--docs)
@@ -11,101 +11,55 @@
 - [Draggable](https://lucca-front.lucca.io/storybook/?path=/story/documentation-listings-sortable-list-angular-draggable--basic)
 
 ## Composant Figma
-[🔗 Lien Figma](https://www.figma.com/design/PQEOcUF9CYfKNqaejAGLWP?node-id=3136-21597) – Le composant pr-SortableList permet de gérer des listes triables, avec des variantes de tailles disponibles (Size=M et Size=S).
+[Design Figma](https://www.figma.com/design/PQEOcUF9CYfKNqaejAGLWP?node-id=3136-21597) – Composant de liste sortable avec deux variantes : Size=M, Size=S. Design minimaliste et moderne adapté pour une expérience utilisateur intuitive.
 
 ## Import
 
 ```typescript
-import { SortableListComponent, SortableListItemComponent } from '@lucca-front/ng/sortable-list';
+import { SortableListComponent } from '@lucca-front/ng/list';
+// ou
+import { SortableListItemComponent } from '@lucca-front/ng/list';
 ```
 
 ## Usage de base
 
 ```html
-<!-- Usage minimal -->
 <lu-sortable-list>
-  <lu-sortable-list-item label="Label 1" helperMessage="Helper message 1"></lu-sortable-list-item>
-  <lu-sortable-list-item label="Label 2" helperMessage="Helper message 2"></lu-sortable-list-item>
-  <lu-sortable-list-item label="Label 3" helperMessage="Helper message 3"></lu-sortable-list-item>
+  <lu-sortable-list-item>Élément 1</lu-sortable-list-item>
+  <lu-sortable-list-item>Élément 2</lu-sortable-list-item>
 </lu-sortable-list>
 ```
 
-## Directive / Composant : `luSortableList` ou `<lu-sortable-list>`
+## Directive / Composant : `lu-sortable-list` ou `<lu-sortable-list-item>`
 
-Directive pour créer une liste sortable. Applicable sur les éléments qui doivent être des listes d'éléments triables.
+Le sélecteur `lu-sortable-list` est utilisé pour créer un conteneur pour une liste d'éléments réorganisables. `lu-sortable-list-item` est utilisé pour chaque élément de la liste.
 
 ### Valeurs
 
-| Valeur | Description |
-|--------|-------------|
-| `""` (vide) | Variante par défaut |
-| `"small"` | Affiche la liste dans une taille réduite |
+#### Pour `lu-sortable-list`
+Aucune valeur spécifiée.
 
-```html
-<lu-sortable-list small>...</lu-sortable-list>
-```
+#### Pour `lu-sortable-list-item`
+Aucune valeur spécifiée.
 
 ## Inputs
 
-### `label`
-Type: `string` — Default: `''`
-
-Modifie le texte principal d'un élément de liste.
-
-```html
-<lu-sortable-list-item label="Votre Label">...</lu-sortable-list-item>
-```
-
-### `helperMessage`
-Type: `string` — Default: `''`
-
-Ajoute un texte secondaire à l'élément de liste.
-
-```html
-<lu-sortable-list-item label="Votre Label" helperMessage="Votre message d'aide">...</lu-sortable-list-item>
-```
-
-### `small`
-Type: `boolean` — Default: `false`
-
-Modifie la taille du composant.
-
-```html
-<lu-sortable-list [small]="true">...</lu-sortable-list>
-```
-
-### `clickable`
-Type: `boolean` — Default: `false`
-
-Rend les lignes cliquables.
-
-```html
-<lu-sortable-list-item [clickable]="true">...</lu-sortable-list-item>
-```
-
-### `unclearable`
-Type: `boolean` — Default: `false`
-
-Masque la croix de suppression.
-
-```html
-<lu-sortable-list-item [unclearable]="true">...</lu-sortable-list-item>
-```
+Aucun input mentionné dans les données disponibles.
 
 ## Patterns courants
 
-### Liste triable
+### Liste Réorganisable
 ```html
-<!-- Liste d'éléments avec option de réorganisation -->
 <lu-sortable-list>
-  <lu-sortable-list-item label="Élément 1" helperMessage="Aide 1"></lu-sortable-list-item>
-  <lu-sortable-list-item label="Élément 2" helperMessage="Aide 2"></lu-sortable-list-item>
-  <lu-sortable-list-item label="Élément 3" helperMessage="Aide 3"></lu-sortable-list-item>
+  <lu-sortable-list-item>Élément A</lu-sortable-list-item>
+  <lu-sortable-list-item>Élément B</lu-sortable-list-item>
+  <lu-sortable-list-item>Élément C</lu-sortable-list-item>
 </lu-sortable-list>
 ```
 
 ## Accessibilité
-Assurez-vous que les éléments de la liste soient accessibles via la navigation par clavier et qu'ils respectent les normes ARIA pour une compréhension optimale des utilisateurs de lecteurs d'écran.
+Assurez-vous que les éléments de la liste peuvent être manipulés par le clavier et qu'ils sont correctement étiquetés pour les technologies d'assistance.
 
 ## Guidelines Prisme
-Respectez les lignes directrices établies par le design Lucca lors de la création de listes triables. Évitez les chevauchements d'éléments et assurez-vous que chaque élément ait une taille suffisante pour une interaction facile.
+- Utilisez des couleurs et des polices approuvées selon les spécifications de Lucca pour maintenir une cohérence visuelle.
+- Assurez-vous que les interactions sont intuitives et que l'état d'une liste sortable est clair pour l'utilisateur.

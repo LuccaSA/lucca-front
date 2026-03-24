@@ -1,21 +1,23 @@
-# pr-HorizontalNavigation
+# HorizontalNavigation
 
 ## Quand utiliser ce composant
-- Pour créer des menus de navigation horizontaux sur des pages web avec une mise en page moderne.
-- Lorsque plusieurs liens doivent être alignés horizontalement, facilitant l'accès pour les utilisateurs.
-- Pour intégrer des éléments comme des badges numériques à côté des liens de navigation.
+- Pour créer un menu de navigation horizontal pour une application ou un site web.
+- Quand vous avez besoin d'une navigation claire et accessible pour l'utilisateur, avec possibilité d'ajouter des liens dynamiques.
+- Lorsqu'il est nécessaire d'afficher des notifications ou des compteurs associés aux éléments de navigation.
 
 ## Stories Storybook
 - [Documentation complète](https://lucca-front.lucca.io/storybook/?path=/docs/documentation-navigation-horizontalnavigation-angular--docs)
 - [Basic](https://lucca-front.lucca.io/storybook/?path=/story/documentation-navigation-horizontalnavigation-angular--basic)
 
 ## Composant Figma
-[Consulter le design Figma](https://www.figma.com/design/PQEOcUF9CYfKNqaejAGLWP?node-id=3104-410) - Ce composant représente une navigation horizontale avec deux variantes de taille disponibles : Size=M et Size=S.
+[Vue Figma](https://www.figma.com/design/PQEOcUF9CYfKNqaejAGLWP?node-id=3104-410) + Composant de navigation horizontal avec des tailles disponibles en Size=M et Size=S.
 
 ## Import
 
 ```typescript
-import { HorizontalNavigationComponent, HorizontalNavigationLinkDirective } from '@lucca-front/ng/horizontal-navigation';
+import { HorizontalNavigationComponent } from '@lucca-front/ng/navigation';
+// ou
+import { HorizontalNavigationLinkDirective } from '@lucca-front/ng/navigation';
 ```
 
 ## Usage de base
@@ -23,79 +25,56 @@ import { HorizontalNavigationComponent, HorizontalNavigationLinkDirective } from
 ```html
 <!-- Usage minimal -->
 <lu-horizontal-navigation>
-  <a *luHorizontalNavigationLink href="#1">Lien 1</a>
-  <a *luHorizontalNavigationLink href="#2">Lien 2</a>
+  <a [luHorizontalNavigationLink] routerLink="/home">Accueil</a>
+  <a [luHorizontalNavigationLink] routerLink="/about">À propos</a>
 </lu-horizontal-navigation>
 ```
 
-## Directive / Composant : `luHorizontalNavigationLink` ou `<lu-horizontal-navigation>`
+## Directive / Composant : `lu-horizontal-navigation` ou `[luHorizontalNavigationLink]`
 
-Directive pour marquer les éléments de lien dans la navigation. Applicable sur tous les éléments `<a>`.
+Composant principal pour la navigation horizontale. Permet de contenir plusieurs liens via la directive associée.
 
-### Valeurs
+### Valeurs (si directive avec valeurs)
 
 | Valeur | Description |
 |--------|-------------|
-| `""` (vide) | Variante par défaut |
-| `"S"` | Taille petite |
+| `""` (vide) | Lien habituel sans badge. |
+| `"badge"` | Affiche une notification ou un compteur sur le lien. |
 
 ```html
-<lu-horizontal-navigation size="S">
-  <a *luHorizontalNavigationLink href="#1">Lien 1</a>
+<lu-horizontal-navigation>
+  <a [luHorizontalNavigationLink]="badge">Lien avec badge</a>
 </lu-horizontal-navigation>
 ```
 
 ## Inputs
 
 ### `size`
-Type: `null | 'S'` — Default: `null`
+Type: `'M' | 'S'` — Default: `'M'`
 
-Modifie la taille du composant.
-
-```html
-<lu-horizontal-navigation [size]="'S'">...</lu-horizontal-navigation>
-```
-
-### `noBorder`
-Type: `boolean` — Default: `false`
-
-Retire la bordure sous le composant.
+Définit la taille du composant de navigation.
 
 ```html
-<lu-horizontal-navigation [noBorder]="true">...</lu-horizontal-navigation>
-```
-
-### `container`
-Type: `boolean` — Default: `false`
-
-Applique un container autour des liens pour aligner le composant avec le contenu de la page.
-
-```html
-<lu-horizontal-navigation [container]="true">...</lu-horizontal-navigation>
-```
-
-### `numericBadge`
-Type: `boolean` — Default: `false`
-
-Présente un exemple avec un badge numérique.
-
-```html
-<lu-horizontal-navigation [numericBadge]="true">...</lu-horizontal-navigation>
+<lu-horizontal-navigation [size]="sizeValue">...</lu-horizontal-navigation>
 ```
 
 ## Patterns courants
 
-### Navigation avec badge numérique
+### Navigation avec badges
 ```html
-<lu-horizontal-navigation [numericBadge]="true">
-  <a *luHorizontalNavigationLink href="#1">Page 1 <lu-numeric-badge [value]="888"></lu-numeric-badge></a>
-  <a *luHorizontalNavigationLink href="#2">Page 2 <lu-numeric-badge [value]="999"></lu-numeric-badge></a>
+<lu-horizontal-navigation>
+  <a [luHorizontalNavigationLink] routerLink="/messages">
+    Messages <lu-numeric-badge [count]="5"></lu-numeric-badge>
+  </a>
+  <a [luHorizontalNavigationLink] routerLink="/notifications">
+    Notifications <lu-numeric-badge [count]="2"></lu-numeric-badge>
+  </a>
 </lu-horizontal-navigation>
 ```
 
 ## Accessibilité
-Assurez-vous que chaque lien a un attribut `aria-current` approprié pour indiquer la page active.
+Assurez-vous que tous les liens ont un texte descriptif pour les lecteurs d'écran et que les actions des utilisateurs sont clairement indiquées.
 
 ## Guidelines Prisme
-- Utiliser des couleurs et des styles conformes aux directives de conception de Lucca pour maintenir l'uniformité visuelle.
-- Éviter d'utiliser trop de liens à la fois pour ne pas surcharger l'interface utilisateur.
+- Utiliser les tailles appropriées pour le contexte de navigation.
+- Éviter les surcharges visuelles; garder l'interface simple et intuitive.

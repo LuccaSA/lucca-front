@@ -1,49 +1,51 @@
-# RadioField
+# pr-Radio
 
 ## Quand utiliser ce composant
-- Pour permettre à l'utilisateur de sélectionner une option parmi un groupe limité de choix.
-- Lorsque vous avez besoin de présenter des options de manière claire et esthétique dans un formulaire.
-- Pour capturer des saisies simples tout en maintenant une accessibilité avec un label caché pour les lecteurs d'écrans.
+- Pour créer des groupes d'options où l'utilisateur peut sélectionner une seule option parmi plusieurs.
+- Lorsque vous devez afficher des choix d'options avec un état visuel clair (coché/décoché).
+- Dans les formulaires lorsque le choix d'une seule option parmi plusieurs est requis.
 
 ## Stories Storybook
 - [Documentation complète](https://lucca-front.lucca.io/storybook/?path=/docs/documentation-forms-fields-radiofield-angular--docs)
 - [Basic](https://lucca-front.lucca.io/storybook/?path=/story/documentation-forms-fields-radiofield-angular--basic)
 
 ## Composant Figma
-[Accéder au Figma](https://www.figma.com/design/PQEOcUF9CYfKNqaejAGLWP?node-id=20115-1619) - Composant pr-Radio avec variantes disponibles pour différents états et tailles.
+[Visuel du composant pr-Radio sur Figma](https://www.figma.com/design/PQEOcUF9CYfKNqaejAGLWP?node-id=20115-1619) - Variantes disponibles : Size (S, M), Checked (True, False), State (Active, Default, Hover, Focus, Disable), Error (True, False).
 
 ## Import
 
 ```typescript
-import { RadioComponent, RadioGroupInputComponent } from '@lucca-front/ng/forms';
+import { RadioComponent } from '@lucca-front/ng/forms';
+// ou
+import { RadioGroupInputComponent } from '@lucca-front/ng/forms';
 ```
 
 ## Usage de base
 
 ```html
 <!-- Usage minimal -->
-<lu-radio-group>
-  <lu-radio [label]="'Option 1'" [size]="'M'" [required]="true"></lu-radio>
-  <lu-radio [label]="'Option 2'" [size]="'M'"></lu-radio>
-</lu-radio-group>
+<lu-radioGroupInput>
+  <lu-radio [checked]="true" [size]="'S'">Option 1</lu-radio>
+  <lu-radio [checked]="false" [size]="'M'">Option 2</lu-radio>
+</lu-radioGroupInput>
 ```
 
-## Directive / Composant : `lu-radio-group` ou `<lu-radio>`
+## Directive / Composant : `lu-radio` ou `<lu-radio>`
 
-Groupe de boutons radio permettant la sélection unique d'une option. Applicable sur des éléments de type boutons radio.
+Composant utilisé pour chaque option d'un groupe de boutons radios. Applicable sur des éléments conteneurs.
 
-### Valeurs (si directive avec valeurs)
+### Valeurs
 
 | Valeur | Description |
 |--------|-------------|
 | `""` (vide) | Variante par défaut |
-| `"S"` | Taille petite |
-| `"M"` | Taille moyenne |
+| `"size"` | Définit la taille du radio (S ou M) |
+| `"checked"` | État du radio (true ou false) |
+| `"state"` | État visuel du radio (active, default, hover, focus, disable) |
+| `"error"` | Indicateur d'erreur (true ou false) |
 
 ```html
-<lu-radio-group [size]="'M'">
-  <lu-radio [label]="'Option 1'"></lu-radio>
-</lu-radio-group>
+<lu-radio [size]="'M'" [checked]="true" [state]="'active'" [error]="false">Option</lu-radio>
 ```
 
 ## Inputs
@@ -51,89 +53,52 @@ Groupe de boutons radio permettant la sélection unique d'une option. Applicable
 ### `size`
 Type: `'S' | 'M'` — Default: `'M'`
 
-Modifie la taille du radio.
+Définit la taille du bouton radio.
 
 ```html
-<lu-radio [size]="'S'"></lu-radio>
+<lu-radio [size]="'S'">Option</lu-radio>
 ```
 
-### `inlineMessageState`
-Type: `'default' | 'success' | 'warning' | 'error'`
+### `checked`
+Type: `boolean` — Default: `false`
 
-Modifie l'état de l'inline message associé au champ.
+Indique si le radio est sélectionné ou non.
 
 ```html
-<lu-radio [inlineMessageState]="'error'"></lu-radio>
+<lu-radio [checked]="true">Option sélectionnée</lu-radio>
 ```
 
-### `hiddenLabel`
-Type: `boolean`
+### `state`
+Type: `'active' | 'default' | 'hover' | 'focus' | 'disable'` — Default: `'default'`
 
-Masque le label tout en le conservant dans le DOM pour les lecteurs d'écrans.
+Définit l'état visuel du radio.
 
 ```html
-<lu-radio [hiddenLabel]="true"></lu-radio>
+<lu-radio [state]="'hover'">Option</lu-radio>
 ```
 
-### `tooltip`
-Type: `string`
+### `error`
+Type: `boolean` — Default: `false`
 
-Affiche une icône (?) associée à une info-bulle si le label est visible.
-
-```html
-<lu-radio [tooltip]="'Cette option...'"></lu-radio>
-```
-
-### `label`
-Type: `string`
-
-Modifie le label de l'input.
+Indique si le radio est dans un état d'erreur.
 
 ```html
-<lu-radio [label]="'Mon Option'"></lu-radio>
-```
-
-### `required`
-Type: `boolean`
-
-Marque le champ comme obligatoire.
-
-```html
-<lu-radio [required]="true"></lu-radio>
-```
-
-### `inlineMessage`
-Type: `string`
-
-Ajoute un texte descriptif sous le champ de formulaire.
-
-```html
-<lu-radio [inlineMessage]="'Ceci est une aide'"></lu-radio>
-```
-
-### `presentation`
-Type: `boolean`
-
-Transforme le champ de formulaire en donnée textuelle non éditable.
-
-```html
-<lu-radio [presentation]="true"></lu-radio>
+<lu-radio [error]="true">Option avec erreur</lu-radio>
 ```
 
 ## Patterns courants
 
-### Utilisation d'un groupe de boutons radio
+### Groupe de boutons radio
 ```html
-<!-- Groupe de boutons radio permettant de choisir une option -->
-<lu-radio-group>
-  <lu-radio [label]="'Option A'" [size]="'M'"></lu-radio>
-  <lu-radio [label]="'Option B'" [size]="'M'"></lu-radio>
-</lu-radio-group>
+<lu-radioGroupInput>
+  <lu-radio [checked]="true">Option 1</lu-radio>
+  <lu-radio [checked]="false">Option 2</lu-radio>
+</lu-radioGroupInput>
 ```
 
 ## Accessibilité
-Veillez à toujours fournir un label descriptif pour chaque option de radio afin d'améliorer l'expérience utilisateur pour les personnes utilisant des technologies d'assistance.
+S'assurer que chaque bouton radio a une étiquette associé pour que les utilisateurs de lecteurs d'écran puissent comprendre le choix d'options.
 
 ## Guidelines Prisme
-- Évitez d'utiliser des groupes de boutons radio lorsque le nombre d'options dépasse 5, préférez les listes déroulantes.
-- Assurez-vous que chaque option ait un label clair et concis.
+- Utiliser des couleurs et des états conformes aux directives de design systématique.
+- Éviter de désactiver les boutons radio sauf si intégré dans un état logique (par exemple, désactiver tous les choix lorsque nécessaire).

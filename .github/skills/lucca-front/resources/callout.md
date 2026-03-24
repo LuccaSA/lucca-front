@@ -1,9 +1,9 @@
-# pr-Callout
+# Callout
 
 ## Quand utiliser ce composant
-- Pour afficher des informations sans ambigüité ou de façon pro-active dans des contextes de feedback.
-- Lorsque vous devez transmettre des suggestions ou des alertes à l'utilisateur par rapport à une action réalisée.
-- Pour présenter des événements ou des actions utilisateur importants en mettant en avant des détails supplémentaires.
+- Pour afficher des informations importantes et attirer l'attention de l'utilisateur sur des contenus spécifiques.
+- Lorsqu'il est nécessaire de fournir des retours d'événements utilisateur (par exemple, en cas de succès, d'avertissement ou d'erreur).
+- Pour présenter des suggestions ou des actions à l'utilisateur dans le cadre d'interactions plus complexes.
 
 ## Stories Storybook
 - [Documentation complète](https://lucca-front.lucca.io/storybook/?path=/docs/documentation-feedback-callout-angular-ai--docs)
@@ -14,86 +14,86 @@
 - [Template](https://lucca-front.lucca.io/storybook/?path=/story/documentation-feedback-callout-angular-basic--template)
 
 ## Composant Figma
-[Pr-Callout Figma](https://www.figma.com/design/PQEOcUF9CYfKNqaejAGLWP?node-id=6053-35275) - Composant visuellement distinct permettant de mettre en avant des messages variés selon des palettes et tailles.
+[Visuel du composant pr-Callout sur Figma](https://www.figma.com/design/PQEOcUF9CYfKNqaejAGLWP?node-id=6053-35275) — Ce composant propose diverses variantes en fonction de la taille et de la palette, offrant une flexibilité dans l'affichage des messages.
 
 ## Import
 
 ```typescript
-import { CalloutComponent, CalloutActionsComponent, CalloutFeedbackItemComponent, CalloutFeedbackListComponent } from '@lucca-front/ng/callout';
+import { CalloutComponent } from '@lucca-front/ng/callout';
+// ou
+import { CalloutActionsComponent } from '@lucca-front/ng/callout';
 ```
 
 ## Usage de base
 
 ```html
-<!-- Usage minimal -->
-<lu-callout icon="weatherStars" iconAlt="Description de l'icône">Votre message ici</lu-callout>
+<lu-callout>Contenu du callout ici...</lu-callout>
 ```
 
-## Directive / Composant : `luCallout` ou `<lu-callout>`
+## Directive / Composant : `lu-callout` ou `<lu-callout>`
 
-Description courte du sélecteur. Applicable aux éléments qui nécessitent une mise en avant de messages ou d'informations importantes.
+Composant principal pour afficher des messages callout. Applicable sur n'importe quel élément pour un affichage d'informations contextuelles.
 
-### Valeurs
+### Valeurs (si directive avec valeurs)
 
-| Valeur | Description |
-|--------|-------------|
-| `""` (vide) | Variante par défaut |
-| `"AI"` | Variante IA |
-| `"Success"` | Palette de succès |
-| `"Warning"` | Palette d'avertissement |
-| `"Critical"` | Palette critique |
-| `"Neutral"` | Palette neutre |
-| `"Product"` | Palette produit |
+| Valeur        | Description                  |
+|---------------|------------------------------|
+| `""` (vide)   | Variante par défaut          |
+| `"success"`   | Affiche un message de succès |
+| `"warning"`   | Affiche un message d'avertissement |
+| `"critical"`  | Affiche un message critique   |
+| `"neutral"`   | Affiche un message neutre    |
+| `"product"`   | Affiche un message produit    |
+| `"ai"`        | Affiche un message AI        |
 
 ```html
-<lu-callout AI>...</lu-callout>
+<lu-callout size="M" palette="success">Contenu du callout ici...</lu-callout>
 ```
 
 ## Inputs
 
-### `icon`
-Type: `'weatherStars' | 'officePenStar' | 'bubbleStars'` — Default: `'weatherStars'`
+### `size`
+Type: `'S' | 'M'` — Default: `'M'`
 
-Icône à afficher à gauche du message.
+Détermine la taille du callout.
 
 ```html
-<lu-callout [icon]="'officePenStar'">...</lu-callout>
+<lu-callout [size]="'S'">Contenu du callout ici...</lu-callout>
 ```
 
-### `iconAlt`
-Type: `string` — Default: `''`
+### `palette`
+Type: `'Critical' | 'Success' | 'Neutral' | 'Warning' | 'AI' | 'Product'` — Default: `'Neutral'`
 
-Texte alternatif pour l'icône.
-
-```html
-<lu-callout iconAlt="Icône d'exemple">...</lu-callout>
-```
-
-### `actions`
-Type: `boolean` — Default: `false`
-
-Affiche la section d'actions si défini sur true.
+Définit la palette visuelle du callout.
 
 ```html
-<lu-callout [actions]="true">...</lu-callout>
+<lu-callout [palette]="'Critical'">Contenu du callout ici...</lu-callout>
 ```
 
 ## Patterns courants
 
-### Utilisation avec actions
-
+### Callout avec action
 ```html
-<lu-callout icon="weatherStars" iconAlt="Assistance" [actions]="true">
-    Votre message ici
-    <lu-callout-actions>
-        <button luButton="outlined">Action 1</button>
-        <button luButton="outlined">Action 2</button>
-    </lu-callout-actions>
+<lu-callout>
+  <lu-callout-actions>
+    <button type="button">Action</button>
+  </lu-callout-actions>
+  Contenu avec action.
+</lu-callout>
+```
+
+### Liste de feedback
+```html
+<lu-callout>
+  <ul lu-callout-feedback-list>
+    <li lu-feedback-item-description>Feedback 1</li>
+    <li lu-feedback-item-description>Feedback 2</li>
+  </ul>
 </lu-callout>
 ```
 
 ## Accessibilité
-- Assurez-vous d'utiliser des descriptions d'icônes alternatives claires avec `iconAlt` pour aider les utilisateurs d'assistances.
+S'assurer que tous les messages sont clairs et qu'ils incluent des descriptions significatives pour les lecteurs d'écrans. Éviter l'utilisation de termes trop techniques sans explications.
 
 ## Guidelines Prisme
-- Se référer à la ligne directrice de style "Prisme, le design selon Lucca" pour la conception et l'utilisation appropriée des composants.
+Respecter la documentation de style concernant l'usage des couleurs et des tailles pour garantir une cohérence visuelle au sein de l'application.

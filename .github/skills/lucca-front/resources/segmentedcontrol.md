@@ -1,9 +1,9 @@
-# pr-SegmentedControl
+# Pr-SegmentedControl
 
 ## Quand utiliser ce composant
-1. Pour créer une interface utilisateur permettant aux utilisateurs de sélectionner un élément parmi plusieurs options de manière intuitive.
-2. Lorsqu'il est nécessaire de présenter des options sous forme de boutons, facilitant l'accès rapide aux choix dans un espace réduit.
-3. Pour des interactions où le changement de sélection doit déclencher automatiquement une mise à jour des contenus associés, comme des panels d'information.
+- Lorsque vous souhaitez offrir une navigation par onglets où une seule option peut être sélectionnée à la fois.
+- Pour représenter des actions ou des catégories distinctes où l'utilisateur doit effectuer un choix.
+- Lorsqu'il est important d'afficher des options rapidement accessibles pour une meilleure expérience utilisateur.
 
 ## Stories Storybook
 - [Documentation complète](https://lucca-front.lucca.io/storybook/?path=/docs/documentation-navigation-segmentedcontrol-angular-tabs--docs)
@@ -11,89 +11,85 @@
 - [Basic](https://lucca-front.lucca.io/storybook/?path=/story/documentation-navigation-segmentedcontrol-angular-basic--basic)
 
 ## Composant Figma
-[Vue du composant pr-SegmentedControl sur Figma](https://www.figma.com/design/PQEOcUF9CYfKNqaejAGLWP?node-id=21275-81302) - Le composant se présente comme un ensemble de boutons de sélection, avec différentes tailles et options de sélection disponibles. Variantes : tailles (S, M), nombre d'éléments (2 à 5), éléments sélectionnés (1er à 5ème).
+[Consulter le composant Figma](https://www.figma.com/design/PQEOcUF9CYfKNqaejAGLWP?node-id=21275-81302) - Composant sous forme de bouton segmenté avec variants pour différentes tailles et sélections d’éléments.
 
 ## Import
 
 ```typescript
-import { SegmentedControlComponent, SegmentedControlFilterComponent } from '@lucca-front/ng/segmented-control';
-// ou
-import { SegmentedControlTabsComponent, SegmentedControlTabsPanelComponent } from '@lucca-front/ng/segmented-control-tabs';
+import { SegmentedControlComponent } from '@lucca-front/ng/navigation';
+import { SegmentedControlTabsComponent } from '@lucca-front/ng/navigation';
+import { SegmentedControlTabsPanelComponent } from '@lucca-front/ng/navigation';
+import { SegmentedControlFilterComponent } from '@lucca-front/ng/navigation';
 ```
 
 ## Usage de base
 
 ```html
 <!-- Usage minimal -->
-<lu-segmented-control>
-    <lu-segmented-control-filter label="Option 1" value="0"></lu-segmented-control-filter>
-    <lu-segmented-control-filter label="Option 2" value="1"></lu-segmented-control-filter>
+<lu-segmented-control [size]="'M'" [selectedItem]="1">
+  <lu-segmented-control-tabs>
+    <lu-segmented-control-tabs-panel label="Option 1"></lu-segmented-control-tabs-panel>
+    <lu-segmented-control-tabs-panel label="Option 2"></lu-segmented-control-tabs-panel>
+    <lu-segmented-control-tabs-panel label="Option 3"></lu-segmented-control-tabs-panel>
+  </lu-segmented-control-tabs>
 </lu-segmented-control>
 ```
 
 ## Directive / Composant : `lu-segmented-control` ou `<lu-segmented-control>`
 
-Ce sélecteur est utilisé pour créer un contrôle segmenté. Il est applicable sur les éléments HTML comme `<lu-segmented-control>` et permet de regrouper plusieurs options.
+Composant principal pour le contrôle segmenté, applicable sur les éléments de type bouton.
 
 ### Valeurs
 
 | Valeur | Description |
 |--------|-------------|
-| `""` (vide) | Variante par défaut |
-| `"small"` | Réduit la taille du contrôle segmenté |
-| `"vertical"` | Affiche les options en vertical |
+| `""` (vide) | Variante par défaut, taille M, 3 éléments |
+| `"S"` | Taille petite |
+| `"M"` | Taille moyenne |
 
 ```html
-<lu-segmented-control small vertical>
-    <lu-segmented-control-filter label="Option" value="0"></lu-segmented-control-filter>
-</lu-segmented-control>
+<lu-segmented-control [size]="'S'" [selectedItem]="0">...</lu-segmented-control>
 ```
 
 ## Inputs
 
-### `small`
-Type: `boolean` — Default: `false`
+### `size`
+Type: `'S' | 'M'` — Default: `'M'`
 
-Modifie la taille du composant.
+Détermine la taille du composant, soit petit (S) soit moyen (M).
 
 ```html
-<lu-segmented-control [small]="true">...</lu-segmented-control>
+<lu-segmented-control [size]="'M'">...</lu-segmented-control>
 ```
 
-### `withNumericBadge`
-Type: `boolean` — Default: `false`
+### `selectedItem`
+Type: `number` — Default: `0`
 
-Présente un exemple avec un badge numérique à côté de l'option.
-
-```html
-<lu-segmented-control [withNumericBadge]="true">...</lu-segmented-control>
-```
-
-### `vertical`
-Type: `boolean` — Default: `false`
-
-Affiche le composant en disposition verticale.
+Indique l'index de l'élément sélectionné actuellement.
 
 ```html
-<lu-segmented-control [vertical]="true">...</lu-segmented-control>
+<lu-segmented-control [selectedItem]="1">...</lu-segmented-control>
 ```
 
 ## Patterns courants
 
-### Utilisation avec un Badge Numérique
+### Contrôle segmenté avec 5 options
 ```html
-<ng-template #label>
-    Option <lu-numeric-badge value="8"></lu-numeric-badge>
-</ng-template>
-<lu-segmented-control [(ngModel)]="sample">
-    <lu-segmented-control-filter [label]="label" value="0" />
-    <lu-segmented-control-filter label="Option 2" value="1" />
+<!-- Exemple de contrôle avec 5 éléments -->
+<lu-segmented-control [size]="'M'" [selectedItem]="2">
+  <lu-segmented-control-tabs>
+    <lu-segmented-control-tabs-panel label="Option 1"></lu-segmented-control-tabs-panel>
+    <lu-segmented-control-tabs-panel label="Option 2"></lu-segmented-control-tabs-panel>
+    <lu-segmented-control-tabs-panel label="Option 3"></lu-segmented-control-tabs-panel>
+    <lu-segmented-control-tabs-panel label="Option 4"></lu-segmented-control-tabs-panel>
+    <lu-segmented-control-tabs-panel label="Option 5"></lu-segmented-control-tabs-panel>
+  </lu-segmented-control-tabs>
 </lu-segmented-control>
 ```
 
 ## Accessibilité
-Assurez-vous que chaque option du contrôle segmenté possède un label accessible, facilitant la navigation pour les utilisateurs de lecteurs d'écran.
+Le composant doit être navigable au clavier. Chaque option doit avoir une étiquette accessible pour garantir une compréhension claire par les lecteurs d'écran.
 
 ## Guidelines Prisme
-- Utiliser des labels clairs et concis pour chaque option du contrôle segmenté.
-- Éviter de superposer des éléments ou d'utiliser des couleurs qui nuisent à la lisibilité.
+- Favoriser l'utilisation de la variante la plus adaptée en fonction de l'espace disponible.
+- Ne pas utiliser le contrôle segmenté pour des options qui ne sont pas mutuellement exclusives.

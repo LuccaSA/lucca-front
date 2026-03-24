@@ -1,90 +1,80 @@
-# Dropdown
+# pr-DropdownMenu
 
 ## Quand utiliser ce composant
-- Pour afficher des options d'actions contextuelles liées à un élément.
-- Lorsqu'il est nécessaire d'afficher des informations supplémentaires sans encombrer l'interface.
-- Pour regrouper plusieurs actions sous un même élément interactif.
+- Pour afficher un menu d'actions liées à un élément de contenu.
+- Pour constituer une liste d'options contextuelles à choisir lors d'une interaction utilisateur.
+- Pour gérer des éléments d'interface plus complexes comme des groupes d'actions qui nécessitent une séparation visuelle.
 
 ## Stories Storybook
 - [Documentation complète](https://lucca-front.lucca.io/storybook/?path=/docs/documentation-listings-index-table-html-css-actions-dropdown--docs)
 - [Basic](https://lucca-front.lucca.io/storybook/?path=/story/documentation-overlays-dropdown-angular-basic--basic)
 - [Component](https://lucca-front.lucca.io/storybook/?path=/story/documentation-overlays-dropdown-angular-component--component)
-- [Directive Legacy](https://lucca-front.lucca.io/storybook/?path=/story/documentation-overlays-dropdown-angular-directive-legacy--directive)
+- [Directive](https://lucca-front.lucca.io/storybook/?path=/story/documentation-overlays-dropdown-angular-directive-legacy--directive)
 - [Directive](https://lucca-front.lucca.io/storybook/?path=/story/documentation-overlays-dropdown-angular-directive--directive)
 
 ## Composant Figma
-[Pr-DropdownMenu Figma](https://www.figma.com/design/PQEOcUF9CYfKNqaejAGLWP?node-id=26837-32810) - Le Dropdown est présenté avec différentes variantes, permettant d'afficher des listes d'options de manières variées.
+[Pr-DropdownMenu sur Figma](https://www.figma.com/design/PQEOcUF9CYfKNqaejAGLWP?node-id=26837-32810) - Ce composant représente un menu déroulant avec des actions listées et peut contenir des éléments comme des diviseurs pour séparer visuellement les groupes. Variante disponible : pr-DropdownMenu.
 
 ## Import
 
 ```typescript
-import { LuDropdownModule } from '@lucca-front/ng/dropdown';
+import { DropdownMenuComponent } from '@lucca-front/ng/dropdown';
+// ou
+import { LuDropdownTriggerDirective } from '@lucca-front/ng/dropdown';
 ```
 
 ## Usage de base
 
 ```html
-<!-- Utilisation minimale -->
-<button type="button" class="button" [luDropdown]="dropdown">Open dropdown</button>
-<lu-dropdown #dropdown>
-    <li class="dropdown-list-option">
-        <span class="dropdown-list-option-action is-disabled" luDropdownItem>
-            <span aria-hidden="true" class="lucca-icon icon-eye"></span>
-            Prévisualiser
-        </span>
-    </li>
-    <li class="dropdown-list-option">
-        <a routerLink="." fragment="link2" class="dropdown-list-option-action" luDropdownItem>
-            <span aria-hidden="true" class="lucca-icon icon-officePen"></span>
-            Éditer
-        </a>
-    </li>
-    <li class="dropdown-list-option">
-        <button type="button" class="dropdown-list-option-action mod-critical" luDropdownItem>
-            <span aria-hidden="true" class="lucca-icon icon-trashDelete"></span>
-            Supprimer
-        </button>
-    </li>
-</lu-dropdown>
+<!-- Usage minimal -->
+<button luDropdown>Options</button>
+<lu-dropdown-menu>
+  <lu-dropdown-item>Action 1</lu-dropdown-item>
+  <lu-dropdown-divider></lu-dropdown-divider>
+  <lu-dropdown-item>Action 2</lu-dropdown-item>
+</lu-dropdown-menu>
 ```
 
-## Directive / Composant : `luDropdown` ou `<lu-dropdown>`
+## Directive / Composant : `lu-dropdown` ou `[luDropdown]`
 
-Directive appliquée à un bouton pour activer le menu déroulant. Peut être utilisée sur un bouton ou un autre élément cliquable.
+Utilisé pour activer le menu déroulant sur un élément, généralement un bouton.
 
-### Valeurs
+### Valeurs (si directive avec valeurs)
 
 | Valeur | Description |
 |--------|-------------|
 | `""` (vide) | Variante par défaut |
 
 ```html
-<button type="button" [luDropdown]="dropdown">...</button>
+<button luDropdown>Options</button>
 ```
 
 ## Inputs
 
-### Aucun
-Aucun input principal n'est spécifié pour ce composant.
+### `luDropdown`
+Type: `boolean` — Default: `false`
+
+Active ou désactive le composant Dropdown.
+
+```html
+<button [luDropdown]="true">Options</button>
+```
 
 ## Patterns courants
 
-### Dropdown avec options
+### Dropdown avec actions
 ```html
-<lu-dropdown #dropdown>
-    <li class="dropdown-list-option">
-        <span class="dropdown-list-option-action" luDropdownItem>Option 1</span>
-    </li>
-    <li class="dropdown-list-option">
-        <span class="dropdown-list-option-action" luDropdownItem>Option 2</span>
-    </li>
-</lu-dropdown>
+<button luDropdown>Actions</button>
+<lu-dropdown-menu>
+  <lu-dropdown-item>Modifier</lu-dropdown-item>
+  <lu-dropdown-item>Supprimer</lu-dropdown-item>
+</lu-dropdown-menu>
 ```
 
 ## Accessibilité
-S'assurer que les éléments de la liste soient accessibles via le clavier et que les éléments désactivés soient clairement indiqués. Utiliser des aria-labels ou des descriptions pour améliorer l'accessibilité.
+Assurez-vous que le menu déroulant puisse être navigué au clavier et que les éléments soient clairement labellisés pour les lecteurs d'écran.
 
 ## Guidelines Prisme
-- Avant de dévoiler des actions, s'assurer que le contexte de l'utilisateur est clair.
-- Éviter d'encombrer le dropdown avec trop d'options. Prioriser la clarté et la simplicité.
-- Toujours inclure une action "Annuler" ou "Fermer" si le dropdown déclenche des changements d'état significatifs.
+- Utilisez les icônes appropriées pour chaque action.
+- Évitez l'encombrement visuel en limitant le nombre d'options présentées dans le dropdown.
+- Assurez-vous que les options sont suffisamment distinctes et faciles à sélectionner pour l'utilisateur.

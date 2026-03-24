@@ -1,17 +1,16 @@
 # pr-Clear
 
 ## Quand utiliser ce composant
-- Lorsque vous avez besoin d'un bouton clair pour réinitialiser un formulaire ou enlever des filtres.
-- Pour améliorer l'accessibilité, en fournissant une alternative textuelle grâce à l'input `alt`.
-- Lorsqu'il est nécessaire de rendre un bouton inactif dans certaines situations (utiliser `disabled`).
+- Pour offrir une action claire et rapide, telle que l'annulation d'une opération.
+- Lorsqu'une approche minimaliste est nécessaire pour le design d'une interface utilisateur.
+- Pour des boutons où la clarté visual est primordiale, comme dans des formulaires ou des dialogues.
 
 ## Stories Storybook
 - [Documentation complète](https://lucca-front.lucca.io/storybook/?path=/docs/documentation-texts-clear-angular-basic--docs)
 - [Template](https://lucca-front.lucca.io/storybook/?path=/story/documentation-texts-clear-angular-basic--template)
 
 ## Composant Figma
-[https://www.figma.com/design/PQEOcUF9CYfKNqaejAGLWP?node-id=5657-31695](https://www.figma.com/design/PQEOcUF9CYfKNqaejAGLWP?node-id=5657-31695) 
-Description visuelle : Le composant pr-Clear est un bouton avec plusieurs variantes de taille, palette et état (actif, désactivé, focus, etc.). Disponible en taille S et M, ainsi qu'en palettes de couleurs neutres et produits.
+[pr-Clear sur Figma](https://www.figma.com/design/PQEOcUF9CYfKNqaejAGLWP?node-id=5657-31695) - Composant de type bouton avec plusieurs variantes disponibles en fonction de la taille, de la palette de couleurs et de l'état. 
 
 ## Import
 
@@ -23,91 +22,74 @@ import { ClearComponent } from '@lucca-front/ng/clear';
 
 ```html
 <!-- Usage minimal -->
-<lu-clear>Clear</lu-clear>
+<button lu-clear type="button">Effacer</button>
 ```
 
-## Directive / Composant : `luClear` ou `<lu-clear>`
+## Directive / Composant : `lu-clear` ou `<lu-clear>`
 
-Directive pour le composant de suppression, applicable aux éléments de type bouton.
+Composant utilisé pour représenter un bouton clair. Applicable sur les éléments HTML `<button>`.
 
-### Valeurs (si directive avec valeurs)
+### Valeurs
 
-| Valeur | Description |
-|--------|-------------|
-| `""` (vide) | Variante par défaut |
-| `"S"` | Variante taille petite |
+| Valeur       | Description                                                  |
+|--------------|-------------------------------------------------------------|
+| `""` (vide)  | Variante par défaut                                         |
+| `"outlined"` | Variante avec une bordure claire                           |
 
 ```html
-<lu-clear size="S">Clear</lu-clear>
+<button lu-clear="outlined" type="button">Effacer</button>
 ```
 
 ## Inputs
 
 ### `size`
-Type: `'' | 'S'` — Default: `''`
+Type: `'S' | 'M'` — Default: `'M'`
 
-Modifie la taille du bouton.
+Définit la taille du bouton.
 
 ```html
-<lu-clear [size]="'S'">Clear</lu-clear>
+<button lu-clear [size]="'S'" type="button">Effacer</button>
 ```
 
 ### `palette`
-Type: `'' | 'success' | 'warning' | 'error' | 'product' | 'brand' | 'neutral' | 'none' | 'primary' | 'grey'` — Default: `''`
+Type: `'Neutral' | 'Product'` — Default: `'Neutral'`
 
-Applique une palette de couleurs au bouton.
+Définit la palette de couleur du bouton.
 
 ```html
-<lu-clear [palette]="'product'">Clear</lu-clear>
+<button lu-clear [palette]="'Product'" type="button">Effacer</button>
 ```
 
-### `inverted`
+### `invert`
 Type: `boolean` — Default: `false`
 
-Modifie les couleurs du bouton pour un usage sur fond foncé.
+Indique si le bouton doit être inversé.
 
 ```html
-<lu-clear [inverted]="true">Clear</lu-clear>
+<button lu-clear [invert]="true" type="button">Effacer</button>
 ```
 
-### `disabled`
-Type: `boolean` — Default: `false`
+### `state`
+Type: `'Default' | 'Hover' | 'Focus' | 'Active' | 'Disabled'` — Default: `'Default'`
 
-Désactive le bouton.
-
-```html
-<lu-clear [disabled]="true">Clear</lu-clear>
-```
-
-### `alt`
-Type: `string` — Default: `''`
-
-Information restituée par le lecteur d'écran.
+Définit l'état du bouton.
 
 ```html
-<lu-clear [alt]="'Clear button'">Clear</lu-clear>
-```
-
-### `hidden`
-Type: `boolean` — Default: `false`
-
-Masque le bouton.
-
-```html
-<lu-clear [hidden]="true">Clear</lu-clear>
+<button lu-clear [state]="'Hover'" type="button">Effacer</button>
 ```
 
 ## Patterns courants
 
-### Bouton clair désactivé
+### Bouton effacer avec état désactivé
 ```html
-<lu-clear [disabled]="true">Clear</lu-clear>
+<!-- Bouton désactivé pour prévenir l'action -->
+<button lu-clear [state]="'Disabled'" type="button" disabled>Effacer</button>
 ```
 
 ## Accessibilité
-Utiliser l'attribut `alt` pour fournir une description textuelle pour les lecteurs d'écran, garantissant que l'information soit accessible aux utilisateurs ayant des déficiences visuelles.
+Assurez-vous d'utiliser un texte de bouton clair. Gérez les états visuels pour indiquer l'interaction. Utilisez des attributs ARIA si nécessaire.
 
 ## Guidelines Prisme
-- Respecter les tailles et les palettes de couleurs recommandées dans le Design System.
-- Ne pas utiliser le composant dans des contextes où son effet d’annulation peut être déroutant pour l'utilisateur.
-- Toujours fournir un texte alternatif clair pour maintenir l'accessibilité.
+- Utilisez le composant pour des actions claires uniquement.
+- Évitez d'utiliser le bouton pr-Clear pour des actions critiques qui nécessitent une confirmation.
+- Privilégiez l'utilisation de variantes pour indiquer clairement l'état visuel.

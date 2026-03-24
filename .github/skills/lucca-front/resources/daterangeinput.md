@@ -1,105 +1,86 @@
 # pr-DateRangePicker
 
 ## Quand utiliser ce composant
-- Pour sélectionner une plage de dates dans un formulaire.
-- Lors de la création de filtres dans des tableaux de données.
-- Pour des opérations de planification où plusieurs dates sont nécessaires.
+1. Lorsque vous avez besoin de permettre à l'utilisateur de sélectionner une plage de dates dans un formulaire.
+2. Pour les tableaux de bord où les utilisateurs doivent filtrer les données par période.
+3. Lors de la création de rapports ou d'analyses nécessitant des sélections de dates spécifiques.
 
 ## Stories Storybook
 - [Documentation complète](https://lucca-front.lucca.io/storybook/?path=/docs/documentation-forms-date2-daterangeinput--docs)
 
 ## Composant Figma
-[Consulter le design sur Figma](https://www.figma.com/design/PQEOcUF9CYfKNqaejAGLWP?node-id=24726-53006) - Composant pr-DateRangePicker avec différentes variantes de taille, période, état, contenu et feedback.
+[PR-DateRangePicker sur Figma](https://www.figma.com/design/PQEOcUF9CYfKNqaejAGLWP?node-id=24726-53006) - Composant avec plusieurs variantes visuelles. Variantes disponibles incluent différentes tailles, périodes et états d'interaction.
 
 ## Import
 
 ```typescript
 import { DateRangePickerComponent } from '@lucca-front/ng/forms';
-// ou
-import { DateRangePickerDirective } from '@lucca-front/ng/forms';
 ```
 
 ## Usage de base
 
 ```html
 <!-- Usage minimal -->
-<input luDateRangePicker />
+<lu-date-range-picker></lu-date-range-picker>
 ```
 
-## Directive / Composant : `luDateRangePicker` ou `<lu-date-range-picker>`
+## Directive / Composant : `luXxx` ou `<lu-date-range-picker>`
 
-Directive permettant de créer un sélecteur de plage de dates. Applicable sur les éléments d'entrée.
+Sélecteur pour le composant DateRangePicker. Applicable sur les éléments pouvant contenir des données d'interaction utilisateur.
 
 ### Valeurs
 
-| Valeur            | Description        |
-|-------------------|--------------------|
-| `""` (vide)       | Variante par défaut |
-| `"outlined"`      | Variante avec contour |
+| Valeur | Description |
+|--------|-------------|
+| `""` (vide) | Variante par défaut |
+| `"filled"` | État rempli de l'input |
+| `"outline"` | État en contournement de l'input |
 
 ```html
-<input luDateRangePicker="outlined" />
+<lu-date-range-picker period="Months" size="M" state="Default"></lu-date-range-picker>
 ```
 
 ## Inputs
 
-### `size`
-Type: `'S' | 'M'` — Default: `'M'`
-
-Détermine la taille du sélecteur de plage de dates.
-
-```html
-<input luDateRangePicker [size]="'S'" />
-```
-
 ### `period`
 Type: `'Days' | 'Months' | 'Years'` — Default: `'Days'`
 
-Définit la période sélectionnée pour les dates.
+Permet de définir la période pour la sélection de dates.
 
 ```html
-<input luDateRangePicker [period]="'Months'" />
+<lu-date-range-picker [period]="'Months'"></lu-date-range-picker>
+```
+
+### `size`
+Type: `'S' | 'M'` — Default: `'M'`
+
+Définit la taille de l'input à utiliser.
+
+```html
+<lu-date-range-picker [size]="'S'"></lu-date-range-picker>
 ```
 
 ### `state`
 Type: `'Default' | 'FocusStart' | 'FocusEnd' | 'Hover' | 'Disabled'` — Default: `'Default'`
 
-Indique l'état du sélecteur.
+Indique l'état de l'input (focus, hover, disabled).
 
 ```html
-<input luDateRangePicker [state]="'FocusStart'" />
-```
-
-### `feedback`
-Type: `'None' | 'Warning' | 'Success' | 'Critical'` — Default: `'None'`
-
-Affiche le retour d'information sur le champ.
-
-```html
-<input luDateRangePicker [feedback]="'Warning'" />
-```
-
-### `presentation`
-Type: `boolean` — Default: `true`
-
-Indique si la présentation est active ou non.
-
-```html
-<input luDateRangePicker [presentation]="false" />
+<lu-date-range-picker [state]="'FocusStart'"></lu-date-range-picker>
 ```
 
 ## Patterns courants
 
-### Sélecteur de plage de dates avec état de focus
+### Sélection de plage de dates
 ```html
-<!-- Utilisation du sélecteur de plage de dates avec état de focus -->
-<input luDateRangePicker [state]="'FocusStart'" [size]="'M'" [period]="'Days'" />
+<!-- Utilisation d'une plage de dates avec période et taille spécifiées -->
+<lu-date-range-picker period="Days" size="M"></lu-date-range-picker>
 ```
 
 ## Accessibilité
-Assurez-vous que le sélecteur de plage de dates est accessible via le clavier et que les attributs ARIA sont correctement utilisés pour décrire l'interaction.
+Assurez-vous que les éléments de date soient accessibles via le clavier et que des descriptions claires soient fournies pour aider les utilisateurs screen-reader.
 
 ## Guidelines Prisme
-- Utiliser le composant pour tous les choix de dates où cela est possible.
-- Ne pas combiner les variations sans justification claire.
-- Respecter l'accessibilité lors du choix des dates.
+- Utilisez des labels clairs pour les inputs.
+- Ne pas empiler trop d'inputs de date dans un seul formulaire.
+- Assurez-vous que les périodes de date soient logiques et faciles à comprendre pour l'utilisateur.

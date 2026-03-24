@@ -1,9 +1,9 @@
 # pr-DataTable
 
 ## Quand utiliser ce composant
-- Pour afficher des listes de données structurées que l’utilisateur peut consulter ou modifier.
-- Lorsque le tri, la sélection ou la possibilité de glisser les lignes du tableau sont nécessaires.
-- Pour rendre les données plus interactives avec pagination et intégration de formulaires.
+- Lorsque vous devez afficher des ensembles de données structurées pour des analyses.
+- Pour permettre à l'utilisateur d'éditer des données directement depuis la table.
+- Lorsque vous devez intégrer des tables avec pagination et différentes options de tri.
 
 ## Stories Storybook
 - [Documentation complète](https://lucca-front.lucca.io/storybook/?path=/docs/documentation-listings-data-table-angular-basic--docs)
@@ -14,111 +14,76 @@
 - [Responsive](https://lucca-front.lucca.io/storybook/?path=/story/documentation-listings-data-table-angular-responsive--basic)
 
 ## Composant Figma
-[Visualiser dans Figma](https://www.figma.com/design/PQEOcUF9CYfKNqaejAGLWP?node-id=23373-9022) - Le composant pr-DataTable présente des données sous forme de tableau avec des en-têtes personnalisés et des options de tri. Variantes disponibles incluent la possibilité de rendre des lignes déplaçables.
+[Visuel Figma](https://www.figma.com/design/PQEOcUF9CYfKNqaejAGLWP?node-id=23373-9022) - Le composant représente un tableau de données interactif, permettant à l'utilisateur de naviguer facilement à travers les informations. Variantes disponibles : pr-DataTable.
 
 ## Import
 
 ```typescript
-import { DataTableComponent, DataTableBodyComponent, DataTableFootComponent, DataTableHeadComponent, DataTableRowComponent, DataTableRowCellComponent, DataTableRowCellHeaderComponent } from '@lucca-front/ng/data-table';
+import { DataTableComponent } from '@lucca-front/ng/table';
 ```
 
 ## Usage de base
 
 ```html
 <lu-data-table>
-    <thead luDataTableHead>
-        <tr luDataTableRow>
-            <th luDataTableCell>Header</th>
-            <th luDataTableCell>Cell</th>
-        </tr>
-    </thead>
-    <tbody luDataTableBody>
-        <tr luDataTableRow>
-            <td luDataTableCell>Data 1</td>
-            <td luDataTableCell>Data 2</td>
-        </tr>
-    </tbody>
+  <thead luDataTableHead>
+    <tr luDataTableRow>
+      <th luDataTableCell>Header 1</th>
+      <th luDataTableCell>Header 2</th>
+    </tr>
+  </thead>
+  <tbody luDataTableBody>
+    <tr luDataTableRow>
+      <td luDataTableCell>Données 1</td>
+      <td luDataTableCell>Données 2</td>
+    </tr>
+  </tbody>
+  <tfoot luDataTableFoot>
+    <tr luDataTableRow>
+      <td luDataTableCell colspan="2">Pied de table</td>
+    </tr>
+  </tfoot>
 </lu-data-table>
 ```
 
-## Directive / Composant : `luDataTable` ou `<lu-data-table>`
+## Directives / Composant : `lu-data-table` ou `tbody[luDataTableBody]`, `tfoot[luDataTableFoot]`, `thead[luDataTableHead]`, `tr[luDataTableRow]`, `td[luDataTableCell]`, `th[luDataTableCell]`
 
-Implémente un tableau de données. Applicable sur les éléments HTML de type `<lu-data-table>`.
+Le composant `lu-data-table` est utilisé pour créer un tableau de données. Les autres directives permettent de structurer le tableau par des entêtes, corps et pieds de tableau, ainsi que des lignes et cellules.
 
-### Valeurs
-
-| Valeur | Description |
-|--------|-------------|
-| `""` (vide) | Variante par défaut. |
-| `"drag"` | Permet de déplacer les lignes de données dans le tableau. |
+### Valeurs (si directive avec valeurs)
+Aucune valeur spécifique n'est mentionnée.
 
 ```html
-<lu-data-table drag>
-    ...
-</lu-data-table>
+<lu-data-table ...>...</lu-data-table>
 ```
 
 ## Inputs
-
-### `sort`
-Type: `'' | 'none' | 'ascending' | 'descending'` — Default: `''`
-
-Définit l'état de tri d'une cellule d'en-tête.
-
-```html
-<lu-data-table [sort]="'ascending'">...</lu-data-table>
-```
-
-### `align`
-Type: `'' | 'start' | 'center' | 'end'` — Default: `''`
-
-Aligne le contenu des cellules horizontalement.
-
-```html
-<lu-data-table [align]="'center'">...</lu-data-table>
-```
-
-### `verticalAlign`
-Type: `'' | 'top' | 'middle' | 'bottom'` — Default: `''`
-
-Aligne le contenu des cellules verticalement.
-
-```html
-<lu-data-table [verticalAlign]="'middle'">...</lu-data-table>
-```
-
-### `selected`
-Type: `boolean` — Default: `false`
-
-Applique l'état actif à une ligne sélectionnable.
-
-```html
-<lu-data-table [selected]="true">...</lu-data-table>
-```
+Aucun input documenté spécifiquement.
 
 ## Patterns courants
 
-### Exemple de tableau avec tri
+### Affichage basique
 ```html
-<lu-data-table [sort]="'ascending'">
-    <thead luDataTableHead>
-        <tr luDataTableRow>
-            <th luDataTableCell>Header</th>
-            <th luDataTableCell>Cell</th>
-        </tr>
-    </thead>
-    <tbody luDataTableBody>
-        <tr luDataTableRow>
-            <td luDataTableCell>Data 1</td>
-            <td luDataTableCell>Data 2</td>
-        </tr>
-    </tbody>
+<lu-data-table>
+  <thead luDataTableHead>
+    <tr luDataTableRow>
+      <th luDataTableCell>Column A</th>
+      <th luDataTableCell>Column B</th>
+    </tr>
+  </thead>
+  <tbody luDataTableBody>
+    <tr luDataTableRow>
+      <td luDataTableCell>Valeur A</td>
+      <td luDataTableCell>Valeur B</td>
+    </tr>
+  </tbody>
 </lu-data-table>
 ```
 
 ## Accessibilité
-Assurez-vous que les en-têtes des colonnes sont clairement identifiés pour les lecteurs d'écran et que les fonctionnalités de tri sont accessibles via le clavier.
+Veiller à fournir des en-têtes significatifs pour chaque colonne, utiliser les attributs `scope` dans les éléments `<th>` pour améliorer l'accessibilité.
 
 ## Guidelines Prisme
-- Utiliser des en-têtes clairs et des cellules pour fournir un contexte aux données présentées.
-- Éviter les tableaux à plusieurs niveaux qui peuvent nuire à la lisibilité.
+- Garder une hiérarchie claire des données.
+- Ne pas surcharger la table avec trop d'informations à la fois.
+- Utiliser des libellés explicites pour chaque colonne.

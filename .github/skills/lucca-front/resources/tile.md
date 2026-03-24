@@ -1,9 +1,9 @@
 # pr-UserTile
 
 ## Quand utiliser ce composant
-- Pour afficher les informations d'un utilisateur de manière visuelle et compact, notamment dans les listes d'utilisateurs.
-- Lorsqu'il est nécessaire d'afficher une image, le nom, et d'autres détails sur l'utilisateur dans un module.
-- Dans des situations où l'interaction avec l'utilisateur est requise, comme des popovers pour des actions supplémentaires.
+- Pour afficher des informations succinctes sur un utilisateur, comme son nom et sa photo.
+- Idéal pour créer des listes d'utilisateurs dans des interfaces où l'espace est limité.
+- Utile lorsque des interactions supplémentaires, comme un popover d'informations détaillées, sont nécessaires.
 
 ## Stories Storybook
 - [Documentation complète](https://lucca-front.lucca.io/storybook/?path=/docs/documentation-users-tile-angular-format--docs)
@@ -11,74 +11,51 @@
 - [Basic](https://lucca-front.lucca.io/storybook/?path=/story/documentation-users-tile-angular-basic--basic)
 
 ## Composant Figma
-[Composant pr-UserTile sur Figma](https://www.figma.com/design/PQEOcUF9CYfKNqaejAGLWP?node-id=6053-35170) — Ce composant présente les variantes disponibles en différentes tailles : XS, S, M, L.
+[Accéder au design Figma](https://www.figma.com/design/PQEOcUF9CYfKNqaejAGLWP?node-id=6053-35170) - Le composant pr-UserTile présente un design ergonomique adapté à différents contextes avec les variantes XS, S, M, et L.
 
 ## Import
 
 ```typescript
-import { LuUserTileComponent } from '@lucca-front/ng/user';
-import { LuUserPopoverDirective } from '@lucca-front/ng/user-popover';
+import { LuUserTileComponent } from '@lucca-front/ng/users';
+import { LuUserPopoverDirective } from '@lucca-front/ng/users';
 ```
 
 ## Usage de base
 
 ```html
 <!-- Usage minimal -->
-<lu-user-tile [user]="user">...</lu-user-tile>
+<lu-user-tile></lu-user-tile>
 ```
 
-## Directive / Composant : `luUserTile` ou `<lu-user-tile>`
+## Directive / Composant : `lu-user-tile` ou `<lu-user-tile>`
 
-Directive pour afficher un tile utilisateur. Applicable sur des éléments Angular pour intégrer des informations utilisateurs.
+Composant représentatif d'un utilisateur. Peut être utilisé pour afficher des informations sur un utilisateur.
 
-### Valeurs
+### Valeurs (si directive avec valeurs)
 
-| Valeur | Description |
-|--------|-------------|
-| `""` (vide) | Variante par défaut |
-| `"XS"` | Taille extra petite |
-| `"S"` | Taille petite |
-| `"M"` | Taille moyenne |
-| `"L"` | Taille grande |
-
-```html
-<lu-user-tile size="L" [user]="user">...</lu-user-tile>
-```
+- Aucune valeur spécifique à cette directive.
 
 ## Inputs
 
-### `user`
-Type: `User` — Default: `undefined`
-
-Objet représentant les informations de l'utilisateur à afficher.
-
-```html
-<lu-user-tile [user]="bob">...</lu-user-tile>
-```
-
 ### `size`
-Type: `'XS' | 'S' | 'M' | 'L'` — Default: `undefined`
+Type: `'XS' | 'S' | 'M' | 'L'` — Default: `'M'`
 
-Définit la taille du tile.
+Permet de définir la taille du composant utilisateur.
 
 ```html
-<lu-user-tile [user]="bob" size="M">...</lu-user-tile>
+<lu-user-tile [size]="'L'"></lu-user-tile>
 ```
 
 ## Patterns courants
 
-### Affichage d'utilisateur
+### Affichage d'un utilisateur avec popover
 ```html
-<!-- Affichage basique d'un utilisateur avec popover -->
-<button [luUserPopover]="bob" type="button" class="userPopover_trigger">
-	<lu-user-tile [user]="bob" />
-</button>
-<lu-user-tile [user]="bob" displayFormat="LF" role="Administrateur" />
-<lu-user-tile [user]="bob" size="L" />
+<lu-user-tile [luUserPopover]="userDetails"></lu-user-tile>
 ```
 
 ## Accessibilité
-Assurez-vous de fournir un rôle approprié et des attributs ARIA lorsque nécessaire pour améliorer l'accessibilité.
+Assurez-vous que les informations affichées dans le composant sont accessibles via des technologies d'assistance. Utilisez des attributs ARIA descriptifs si nécessaire.
 
 ## Guidelines Prisme
-Assurez-vous d'utiliser les styles et l'interface utilisateur définis dans le design system Prisme pour garantir l'homogénéité visuelle et fonctionnelle.
+- Ne pas surcharger le composant avec des informations superflues.
+- Respecter l'harmonie visuelle selon les guidelines de Lucca pour assurer une cohérence avec le reste de l'interface.

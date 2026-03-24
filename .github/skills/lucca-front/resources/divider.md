@@ -1,16 +1,16 @@
 # pr-Divider
 
 ## Quand utiliser ce composant
-- Pour séparer visuellement des sections dans un formulaire ou une page.
-- Pour fournir une séparation entre des éléments de liste ou des éléments d'interface où un espace visuel est nécessaire.
-- Pour créer des groupes d'éléments lorsque l'espace est réduit, tout en maintenant une lisibilité optimale.
+- Pour séparer visuellement des sections dans un layout.
+- Lors de la création d'un formulaire pour distinguer les groupes de champs.
+- Pour organiser des listes ou des tableaux en récupérant une meilleure lisibilité.
 
 ## Stories Storybook
 - [Documentation complète](https://lucca-front.lucca.io/storybook/?path=/docs/documentation-listings-listing-html-css-divider--docs)
 - [Basic](https://lucca-front.lucca.io/storybook/?path=/story/documentation-structure-divider-angular--basic)
 
 ## Composant Figma
-[Accéder au Figma](https://www.figma.com/design/PQEOcUF9CYfKNqaejAGLWP?node-id=3130-2035) — le composant pr-Divider a trois variantes : Horizontal, Horizontal - Content, et Vertical, permettant de s'adapter à différents styles de mise en page.
+[Visuel pr-Divider sur Figma](https://www.figma.com/design/PQEOcUF9CYfKNqaejAGLWP?node-id=3130-2035) + Variantes disponibles : Style=Horizontal, Style=Horizontal - Content, Style=Vertical.
 
 ## Import
 
@@ -27,88 +27,42 @@ import { DividerComponent } from '@lucca-front/ng/divider';
 
 ## Directive / Composant : `lu-divider`
 
-Utilisé pour créer des diviseurs verticaux ou horizontaux entre des éléments dans l'interface utilisateur.
+Composant utilisé pour créer des séparateurs visuels entre les sections.
 
 ### Valeurs
 
-| Valeur      | Description                          |
-|-------------|--------------------------------------|
-| `""` (vide) | Variante par défaut                   |
-| `"horizontal"`   | Séparateur horizontal              |
-| `"vertical"` | Séparateur vertical                  |
+| Valeur          | Description                       |
+|-----------------|-----------------------------------|
+| `""` (vide)     | Variante par défaut (horizontal)  |
+| `"content"`     | Variante avec contenu horizontal   |
+| `"vertical"`    | Variante verticale                 |
 
 ```html
-<lu-divider vertical></lu-divider>
-<lu-divider style="horizontal"></lu-divider>
+<lu-divider style="vertical"></lu-divider>
 ```
 
 ## Inputs
 
-### `size`
-Type: `'S' | 'M' | ''` — Default: `''`
+### `style`
+Type: `'horizontal' | 'content' | 'vertical'` — Default: `'horizontal'`
 
-Permet de définir la taille du diviseur.
-
-```html
-<lu-divider [size]="'M'"></lu-divider>
-```
-
-### `content`
-Type: `string` — Default: `''`
-
-Texte à afficher dans le diviseur.
+Définit le style du séparateur.
 
 ```html
-<lu-divider [content]="'Texte de séparation'"></lu-divider>
-```
-
-### `separatorRole`
-Type: `boolean` — Default: `false`
-
-Permet de restituer le Divider comme un séparateur natif (hr). Son éventuel contenu textuel ne sera alors plus affiché.
-
-```html
-<lu-divider [separatorRole]="true"></lu-divider>
-```
-
-### `vertical`
-Type: `boolean` — Default: `false`
-
-Détermine si le diviseur est vertical.
-
-```html
-<lu-divider [vertical]="true"></lu-divider>
-```
-
-### `icon`
-Type: `boolean` — Default: `false`
-
-Permet d'afficher une icône dans le diviseur.
-
-```html
-<lu-divider [icon]="true"></lu-divider>
-```
-
-### `button`
-Type: `boolean` — Default: `false`
-
-Permet d'afficher un bouton dans le diviseur plutôt que du texte.
-
-```html
-<lu-divider [button]="true" [content]="'Cliquez ici'"></lu-divider>
+<lu-divider [style]="'content'"></lu-divider>
 ```
 
 ## Patterns courants
 
-### Divider avec icône
+### Séparation de sections
 ```html
-<!-- Affiche un diviseur avec une icône à gauche -->
-<lu-divider [icon]="true"><lu-icon icon="heart"></lu-icon></lu-divider>
+<!-- Utilisation pour séparer deux parties d'une page -->
+<lu-divider></lu-divider>
 ```
 
 ## Accessibilité
-Veillez à utiliser l'attribut `separatorRole` pour indiquer aux technologies d'assistance que le composant doit être interprété comme un séparateur.
+Assurez-vous que le séparateur n'est pas perçu comme une barrière par les technologies d'assistance en utilisant des rôles et des attributs ARIA appropriés si nécessaire.
 
 ## Guidelines Prisme
-- Assurez-vous que l'utilisation du composant est cohérente avec les styles de séparation de l'interface utilisateur.
-- Évitez d'encombrer la mise en page avec trop de diviseurs pour maintenir la clarté visuelle.
+- Utilisez le composant pour améliorer la lisibilité.
+- Évitez d'utiliser plusieurs séparateurs consécutifs sans contenu significatif entre eux.

@@ -1,16 +1,16 @@
 # pr-CheckboxFieldset
 
 ## Quand utiliser ce composant
-- Lorsque vous avez besoin de grouper des options de sélection sous forme de cases à cocher.
-- Pour la création de filtres sur une liste d’éléments où plusieurs éléments peuvent être sélectionnés.
-- Pour permettre à l'utilisateur de faire des choix multiples de manière claire et organisée.
+- Lorsque vous avez besoin d'un groupe de cases à cocher (checkbox) pour des choix multiples.
+- Pour afficher des options configurables dans différents formats, tels que horizontal ou vertical.
+- Pour fournir des retours visuels basés sur l'interaction utilisateur, par exemple en utilisant un feedback critique.
 
 ## Stories Storybook
 - [Documentation complète](https://lucca-front.lucca.io/storybook/?path=/docs/documentation-forms-checkbox-basic--docs)
 - [Basic](https://lucca-front.lucca.io/storybook/?path=/story/documentation-forms-filterspills-checkbox-angular--basic)
 
 ## Composant Figma
-[Voir le design Figma](https://www.figma.com/design/PQEOcUF9CYfKNqaejAGLWP?node-id=20185-80450) - Le composant pr-CheckboxFieldset permet divers styles de présentation avec plusieurs variantes disponibles comme Type, Size, et Feedback.
+[Visuel Figma](https://www.figma.com/design/PQEOcUF9CYfKNqaejAGLWP?node-id=20185-80450) — Le pr-CheckboxFieldset est présenté avec plusieurs variantes incluant différentes tailles et alignements. 
 
 ## Import
 
@@ -22,60 +22,78 @@ import { CheckboxFieldsetComponent } from '@lucca-front/ng/forms';
 
 ```html
 <!-- Usage minimal -->
-<pr-checkbox-fieldset label="Options disponibles" name="options">
-  <lu-checkbox-input [(ngModel)]="option1" label="Option 1"></lu-checkbox-input>
-  <lu-checkbox-input [(ngModel)]="option2" label="Option 2"></lu-checkbox-input>
-</pr-checkbox-fieldset>
+<lu-checkbox-fieldset>...</lu-checkbox-fieldset>
 ```
 
-## Directive / Composant : `pr-checkbox-fieldset` ou `<pr-checkbox-fieldset>`
+## Directive / Composant : `lu-checkbox-fieldset` ou `<lu-checkbox-fieldset>`
 
-Composant utilisé pour grouper des cases à cocher. Applicable à tout élément HTML qui nécessite un groupement d'options.
+Ce sélecteur représente un ensemble de cases à cocher qui peut être utilisé dans les formulaires.
 
-### Valeurs (si applicable)
+### Valeurs (si directive avec valeurs)
 
-| Valeur    | Description                              |
-|-----------|------------------------------------------|
-| `default` | Variante par défaut                      |
-| `checklist` | Variante d'affichage de checklist      |
+| Valeur      | Description                             |
+|-------------|-----------------------------------------|
+| `""` (vide) | Variante par défaut                     |
+| `"Checklist"` | Variante pour des options checklist  |
+| `"S"`       | Taille petite                           |
+| `"M"`       | Taille moyenne                          |
+| `"Vertical"`| Alignement vertical                     |
+| `"Horizontal"`| Alignement horizontal                 |
+| `"Critical"`| Feedback critique                       |
+| `"Default"` | Feedback par défaut                     |
 
 ```html
-<pr-checkbox-fieldset type="checklist">...</pr-checkbox-fieldset>
+<lu-checkbox-fieldset type="Checklist" size="M" alignment="Horizontal" feedback="Critical">...</lu-checkbox-fieldset>
 ```
 
 ## Inputs
 
-### `label`
-Type: `string` — Default: `''`
+### `type`
+Type: `'Default' | 'Checklist'` — Default: `'Default'`
 
-Libellé du groupe de cases à cocher.
+Définit le type de case à cocher.
 
 ```html
-<pr-checkbox-fieldset [label]="'Inclure les collaborateurs partis'" name="includeFormerEmployees">...</pr-checkbox-fieldset>
+<lu-checkbox-fieldset [type]="'Checklist'">...</lu-checkbox-fieldset>
 ```
 
-### `name`
-Type: `string` — Default: `''`
+### `size`
+Type: `'S' | 'M'` — Default: `'M'`
 
-Nom du groupe de cases à cocher pour faciliter la gestion des valeurs.
+Définit la taille du champ de cases à cocher.
 
 ```html
-<pr-checkbox-fieldset label="Options" [name]="'options'">...</pr-checkbox-fieldset>
+<lu-checkbox-fieldset [size]="'S'">...</lu-checkbox-fieldset>
+```
+
+### `alignment`
+Type: `'Vertical' | 'Horizontal'` — Default: `'Vertical'`
+
+Définit l'alignement des cases à cocher.
+
+```html
+<lu-checkbox-fieldset [alignment]="'Horizontal'">...</lu-checkbox-fieldset>
+```
+
+### `feedback`
+Type: `'Critical' | 'Default'` — Default: `'Default'`
+
+Définit le type de retour visuel à afficher.
+
+```html
+<lu-checkbox-fieldset [feedback]="'Critical'">...</lu-checkbox-fieldset>
 ```
 
 ## Patterns courants
 
-### Groupement de cases à cocher
+### Groupe de choix multiples
 ```html
-<pr-checkbox-fieldset label="Choisissez vos préférences" name="preferences">
-  <lu-checkbox-input [(ngModel)]="preference1" label="Préférence 1"></lu-checkbox-input>
-  <lu-checkbox-input [(ngModel)]="preference2" label="Préférence 2"></lu-checkbox-input>
-</pr-checkbox-fieldset>
+<lu-checkbox-fieldset [type]="'Checklist'" [alignment]="'Vertical'">...</lu-checkbox-fieldset>
 ```
 
 ## Accessibilité
-Assurez-vous que chaque case à cocher ait un label descriptif associé pour améliorer l'accessibilité. Utilisez le champ "name" pour grouper les cases correctement.
+Veillez à fournir des labels clairs pour chaque option de case à cocher afin d'assurer une bonne compréhension et utilisation pour les utilisateurs de technologies d'assistance.
 
 ## Guidelines Prisme
-- **Dos** : Utiliser des labels clairs et concis pour chaque case à cocher.
-- **Don'ts** : Ne pas superposer les cases à cocher ou les rendre difficiles à accéder.
+- Évitez de surcharger le composant avec trop d'options, optez pour une présentation claire.
+- Utilisez le feedback critique pour signaler des erreurs ou des choix incorrects aux utilisateurs.

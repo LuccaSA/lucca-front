@@ -1,78 +1,67 @@
-# MobilePush
+# pr-MobilePush
 
 ## Quand utiliser ce composant
-- Pour afficher des notifications ou des rappels importants concernant l'application mobile à l'utilisateur.
-- Lorsque vous souhaitez diriger les utilisateurs vers l'App Store ou Google Play depuis une application web.
-- Pour améliorer l'engagement des utilisateurs avec des messages contextuels sur les fonctionnalités de l'application Lucca.
+- Pour afficher des notifications ou des alertes sous forme de push mobile.
+- Lorsque vous souhaitez informer les utilisateurs d'événements importants de manière discrète et efficace.
+- Pour des interactions rapides grâce à un affichage temporaire de messages sur les appareils mobiles.
 
 ## Stories Storybook
 - [Documentation complète](https://lucca-front.lucca.io/storybook/?path=/docs/documentation-feedback-mobile-push-angular-basic--docs)
 - [Template](https://lucca-front.lucca.io/storybook/?path=/story/documentation-feedback-mobile-push-angular-basic--template)
 
 ## Composant Figma
-[Pr-MobilePush (v20.1)](https://www.figma.com/design/PQEOcUF9CYfKNqaejAGLWP?node-id=29907-398) - Composant mettant en avant des notifications avec la possibilité d'aligner le badge soit à droite soit en bas.
+[Vue du composant dans Figma](https://www.figma.com/design/PQEOcUF9CYfKNqaejAGLWP?node-id=29907-398). Ce composant présente des variantes pour l'alignement du badge : à droite et en bas.
 
 ## Import
 
 ```typescript
-import { MobilePushComponent } from '@lucca-front/ng/mobile-push';
+import { MobilePushComponent } from '@lucca-front/ng/feedback';
 ```
 
 ## Usage de base
 
 ```html
-<!-- Usage minimal -->
-<lu-mobile-push>Posez une absence depuis n’importe où avec l’application Lucca.</lu-mobile-push>
+<lu-mobile-push>Votre message ici</lu-mobile-push>
 ```
 
 ## Directive / Composant : `lu-mobile-push`
 
-Composant pour afficher des notifications liées à l'application mobile. Applicable sur les éléments HTML pour intégrer des messages d'engagement.
+Composant utilisé pour afficher des notifications sur mobile. Applicable sur les éléments HTML.
 
-### Valeurs (si directive avec valeurs)
+### Valeurs
 
-| Valeur                | Description                             |
-|-----------------------|-----------------------------------------|
-| `""` (vide)           | Variante par défaut                     |
-| `"right"`             | Alignment du badge à droite             |
-| `"bottom"`            | Alignment du badge en bas               |
+| Valeur | Description |
+|--------|-------------|
+| `""` (vide)  | Variante par défaut |
+| `"badge-right"` | Badge aligné à droite |
+| `"badge-bottom"` | Badge aligné en bas |
 
 ```html
-<lu-mobile-push badgeAlignment="right">...</lu-mobile-push>
+<lu-mobile-push badge-alignment="badge-right">Message avec badge à droite</lu-mobile-push>
 ```
 
 ## Inputs
 
-### `appStoreLinkClicked`
-Type: `null` — Default: `null`
+### `badgeAlignment`
+Type: `'badge-right' | 'badge-bottom'` — Default: `''`
 
-Événement déclenché lors d'un clic sur le bouton App Store.
-
-```html
-<lu-mobile-push (appStoreLinkClicked)="action()">...</lu-mobile-push>
-```
-
-### `googlePlayLinkClicked`
-Type: `null` — Default: `null`
-
-Événement déclenché lors d'un clic sur le bouton Google Play.
+Permet de définir la position du badge sur le composant.
 
 ```html
-<lu-mobile-push (googlePlayLinkClicked)="action()">...</lu-mobile-push>
+<lu-mobile-push [badgeAlignment]="'badge-bottom'">Message avec badge en bas</lu-mobile-push>
 ```
 
 ## Patterns courants
 
-### Notification basique
+### Notification simple
 ```html
-<!-- Notification simple pour rediriger vers l'application mobile -->
-<lu-mobile-push (appStoreLinkClicked)="onAppStoreClick()" (googlePlayLinkClicked)="onGooglePlayClick()">Posez une absence depuis n’importe où avec l’application Lucca.</lu-mobile-push>
+<lu-mobile-push>Nouvelle mise à jour disponible!</lu-mobile-push>
 ```
 
 ## Accessibilité
-S'assurer que les liens vers l'App Store et Google Play sont clairs et accessibles pour les lecteurs d'écran.
+S'assurer que le composant est lisible et offre une interaction tactile adéquate pour les utilisateurs d'appareils mobiles.
 
 ## Guidelines Prisme
-- Utiliser des messages clairs et concis.
-- Éviter de surcharger l'utilisateur avec trop d'informations dans les notifications.
-- Assurez-vous que les boutons sont facilement cliquables sur les appareils mobiles.
+- Utiliser le composant pour des notifications nécessaires et non intrusives.
+- Ne pas surcharger l'écran avec des messages multiples en même temps.
+- S'assurer que le contenu du message est concis et clair.

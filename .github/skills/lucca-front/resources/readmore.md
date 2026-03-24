@@ -1,106 +1,70 @@
 # pr-ReadMore
 
 ## Quand utiliser ce composant
-- Pour afficher un texte long qui peut être réduit à un nombre limité de lignes pour une meilleure lisibilité.
-- Lorsque vous souhaitez donner à l'utilisateur la possibilité de voir plus ou moins de contenu sans changer de page.
-- Dans des contextes où l'espace est limité, comme les aperçus ou les cartes d'information.
+- Lorsque vous devez afficher du texte long qui peut être tronqué pour améliorer la lisibilité.
+- Pour des fonctionnalités de lecture condensée où l'utilisateur peut voir plus de contenu sur demande.
+- Lors de l'affichage de résumés d'articles, d'actualités ou de tout autre contenu qui nécessite une interaction pour lire la suite.
 
 ## Stories Storybook
 - [Documentation complète](https://lucca-front.lucca.io/storybook/?path=/docs/documentation-texts-readmore-angular-ai--docs)
 - [Basic](https://lucca-front.lucca.io/storybook/?path=/story/documentation-texts-readmore-angular-ai--basic)
-- [Basic](https://lucca-front.lucca.io/storybook/?path=/story/documentation-texts-readmore-angular-basic--basic)
 
 ## Composant Figma
-[Design dans Figma](https://www.figma.com/design/PQEOcUF9CYfKNqaejAGLWP?node-id=27984-193). Variantes disponibles : Size=M, Surface=Sunken, Size=M, Surface=Raised, Size=S, Surface=Default, Size=S, Surface=Sunken, Size=M, Surface=Default, Size=S, Surface=Raised.
+[Design dans Figma](https://www.figma.com/design/PQEOcUF9CYfKNqaejAGLWP?node-id=27984-193). Variantes disponibles: 
+- Taille M, Surface Sunken
+- Taille M, Surface Raised
+- Taille S, Surface Default
+- Taille S, Surface Sunken
+- Taille M, Surface Default
+- Taille S, Surface Raised
 
 ## Import
 
 ```typescript
-import { ReadMoreComponent } from '@lucca-front/ng/read-more';
+import { ReadMoreComponent } from '@lucca-front/ng/texts';
 ```
 
 ## Usage de base
 
 ```html
 <!-- Usage minimal -->
-<lu-read-more></lu-read-more>
+<lu-read-more texte="Votre texte ici" [ouvert]="false"></lu-read-more>
 ```
 
-## Directive / Composant : `lu-read-more` ou `<lu-read-more>`
+## Directive / Composant : `lu-read-more`
 
-Directive utilisée pour afficher un texte avec des options pour le réduire ou l'étendre. Applicable sur des éléments HTML pour gérer le contenu textuel.
+Composant permettant d'afficher un texte qui peut être étendu ou réduit. Applicable sur les éléments HTML contenant du texte.
 
-### Valeurs
+### Inputs
 
-| Valeur | Description |
-|--------|-------------|
-| `""` (vide) | Variante par défaut |
+#### `texte`
+Type: `string` — Default: `''`
+
+Texte à afficher dans le composant.
 
 ```html
-<lu-read-more lineClamp="3" surface="default" textFlow="true">...</lu-read-more>
+<lu-read-more [texte]="value"></lu-read-more>
 ```
 
-## Inputs
-
-### `lineClamp`
-Type: `number` — Default: `3`
-
-Modifie le nombre de lignes visibles avant que le contenu ne soit masqué.
-
-```html
-<lu-read-more [lineClamp]="lineClampValue">...</lu-read-more>
-```
-
-### `surface`
-Type: `'default' | 'sunken' | null` — Default: `null`
-
-Modifie la couleur de fond sous le bouton "Lire plus / moins".
-
-```html
-<lu-read-more [surface]="'sunken'">...</lu-read-more>
-```
-
-### `textFlow`
+#### `ouvert`
 Type: `boolean` — Default: `false`
 
-Applique les espacements du composant Text flow.
+Détermine si le texte est affiché en entier ou non.
 
 ```html
-<lu-read-more [textFlow]="true">...</lu-read-more>
-```
-
-### `openOnly`
-Type: `boolean` — Default: `false`
-
-Empêche la fermeture du composant en masquant le bouton "Lire moins".
-
-```html
-<lu-read-more [openOnly]="true">...</lu-read-more>
-```
-
-### `innerContent`
-Type: `boolean` — Default: `false`
-
-Permet de passer le contenu via un innerHTML.
-
-```html
-<lu-read-more [innerContent]="true">...</lu-read-more>
+<lu-read-more [ouvert]="true"></lu-read-more>
 ```
 
 ## Patterns courants
 
-### Affichage de texte
+### Affichage d'un texte étendu
 ```html
-<!-- Exemple d'utilisation du composant pour afficher un texte avec options -->
-<lu-read-more [lineClamp]="2" [surface]="'raised'" [openOnly]="false">
-  <p>Voici un exemple de texte qui peut être étendu ou réduit.</p>
-</lu-read-more>
+<lu-read-more texte="Text long ici..." [ouvert]="true"></lu-read-more>
 ```
 
 ## Accessibilité
-Assurez-vous que le texte réduit est clairement visible et qu'il y a un bouton identifiable pour l'expansion. Utilisez des attributs ARIA pour indiquer l'état de l'élément (développé ou réduit).
+Veillez à fournir un texte alternatif descriptif suffisamment long pour être compris dans tous les contextes, et utilisez des éléments interactifs de manière appropriée pour le contrôle de l'accessibilité.
 
 ## Guidelines Prisme
-- Favorisez un espacement adéquat pour une meilleure lisibilité.
-- Évitez d'afficher trop de contenu à la fois pour ne pas submerger l'utilisateur.
-- Utilisez des couleurs contrastantes pour les surfaces afin d'améliorer l'accessibilité visuelle.
+- Ne pas utiliser le composant pour des listes d'éléments à dérouler.
+- Toujours fournir un texte alternatif sensé dans l'input `texte`.

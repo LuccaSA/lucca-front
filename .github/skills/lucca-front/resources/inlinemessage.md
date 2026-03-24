@@ -1,91 +1,79 @@
 # pr-InlineMessage
 
 ## Quand utiliser ce composant
-- Pour afficher des messages d'information, d'erreur ou de succès directement sous un champ de formulaire.
-- Lorsqu'un retour immédiat est nécessaire pour l'utilisateur suite à une action, comme un enregistrement ou une validation de saisie.
-- Pour signaler des avertissements ou erreurs à l'utilisateur sans interrompre le flux de la page.
+- Pour afficher des messages d'erreur critiques dans un formulaire.
+- Pour fournir un retour d'information positif lors de la soumission d'un formulaire.
+- Pour avertir l'utilisateur d'un problème ou d'une information importante liée à un champ de formulaire.
 
 ## Stories Storybook
 [Documentation complète](https://lucca-front.lucca.io/storybook/?path=/docs/documentation-forms-inlinemessage-angular-basic--docs)
 
 ## Composant Figma
-[Visuel Figma](https://www.figma.com/design/PQEOcUF9CYfKNqaejAGLWP?node-id=5743-32740) + Variantes disponibles : Size=M, Type=Critical, Size=S, Type=Critical, Size=S, Type=Default, Size=S, Type=Warning, Size=M, Type=Default, Size=M, Type=Success, Size=S, Type=Success, Size=M, Type=Warning.
+[Lien Figma](https://www.figma.com/design/PQEOcUF9CYfKNqaejAGLWP?node-id=5743-32740) – Le composant pr-InlineMessage est présenté dans plusieurs variantes selon le type (Critical, Default, Success, Warning) et la taille (S, M). 
 
 ## Import
 
 ```typescript
-import { InlineMessageComponent } from '@lucca-front/ng/inline-message';
+import { InlineMessageComponent } from '@lucca-front/ng/forms';
 ```
 
 ## Usage de base
 
 ```html
 <!-- Usage minimal -->
-<lu-inline-message>Message d'information</lu-inline-message>
+<lu-inline-message>Votre message ici</lu-inline-message>
 ```
 
-## Directive / Composant : `luInlineMessage` ou `<lu-inline-message>`
+## Directive / Composant : `lu-inline-message`
 
-Affiche un message d'information, d'avertissement, d'erreur ou de succès. Applicable sur les éléments de type bloc.
+Affiche un message contextuel en ligne. Applicable sur tous les éléments qui nécessitent un retour d'information à l'utilisateur.
 
 ### Valeurs
 
-| Valeur   | Description                              |
-|----------|------------------------------------------|
-| `""`     | Variante par défaut                      |
-| `"critical"` | Correspond à un message d'erreur    |
-| `"default"` | Correspond à un message standard     |
-| `"warning"`  | Correspond à un message d'avertissement |
-| `"success"`  | Correspond à un message de succès   |
+| Valeur       | Description                    |
+|--------------|--------------------------------|
+| `""` (vide)  | Variante par défaut            |
+| `"Critical"` | Message d'erreur critique      |
+| `"Default"`  | Message d'information standard  |
+| `"Success"`  | Message de succès              |
+| `"Warning"`  | Message d'avertissement        |
 
 ```html
-<lu-inline-message state="success">Message de succès</lu-inline-message>
+<lu-inline-message type="Critical">Attention, une erreur est survenue!</lu-inline-message>
 ```
 
 ## Inputs
 
-### `state`
-Type: `'success' | 'warning' | 'error' | 'default'` — Default: `'default'`
+### `type`
+Type: `'Critical' | 'Default' | 'Success' | 'Warning'` — Default: `'Default'`
 
-Modifie l'état de l'inline message.
+Définit le type du message à afficher.
 
 ```html
-<lu-inline-message [state]="'warning'">Message d'avertissement</lu-inline-message>
+<lu-inline-message [type]="'Success'">Soumission réussie!</lu-inline-message>
 ```
 
 ### `size`
 Type: `'S' | 'M'` — Default: `'M'`
 
-Modifie la taille du composant.
+Définit la taille du message.
 
 ```html
 <lu-inline-message [size]="'S'">Message de petite taille</lu-inline-message>
-```
-
-### `label`
-Type: `string`
-
-Modifie le texte affiché par le composant. (PortalContent)
-
-```html
-<lu-inline-message [label]="'Ceci est un message'"></lu-inline-message>
 ```
 
 ## Patterns courants
 
 ### Message d'erreur
 ```html
-<lu-inline-message state="error" label="Champ requis."></lu-inline-message>
-```
-
-### Message de succès
-```html
-<lu-inline-message state="success" label="Enregistrement réussi!"></lu-inline-message>
+<!-- Afficher un message d'erreur critique -->
+<lu-inline-message type="Critical">Veillez à corriger les erreurs signalées.</lu-inline-message>
 ```
 
 ## Accessibilité
-Assurez-vous que les messages soient clairs et concis, et qu'ils soient visibles et auditifs pour les lecteurs d'écran.
+Veillez à ce que chaque message soit descriptif afin qu'il soit compréhensible pour les utilisateurs utilisant des lecteurs d'écran.
 
 ## Guidelines Prisme
-- Ne pas utiliser les messages pour transmettre des informations non essentielles.
-- S'assurer que l'état des messages est toujours accessible (couleurs et contrastes appropriés).
+- Toujours fournir des messages clairs et utiles.
+- Ne pas utiliser les messages d'alerte pour des informations non critiques.
+- Eviter la surcharge d'information pour ne pas distraire l'utilisateur.

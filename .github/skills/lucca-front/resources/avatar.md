@@ -1,119 +1,79 @@
-# pr-Avatar
+# Avatar
 
 ## Quand utiliser ce composant
-- Pour afficher une image de profil d'un utilisateur dans une application.
-- Lorsqu'il est nécessaire d'afficher des initiales si l'image de l'utilisateur est manquante ou erronée.
-- Pour former des groupes d'avatars pour représenter plusieurs utilisateurs dans une interface.
+1. Pour afficher l'avatar d'un utilisateur dans les profils, listes ou interfaces d'utilisateur.
+2. Pour utiliser des avatars de remplacement (placeholders) lorsque l'image réelle de l'utilisateur n'est pas disponible.
+3. Pour afficher des groupes d'avatars d'utilisateurs dans des interfaces collaboratives.
 
 ## Stories Storybook
 - [Documentation complète](https://lucca-front.lucca.io/storybook/?path=/docs/documentation-users-avatar-angular-basic--docs)
-- [Basic](https://lucca-front.lucca.io/storybook/?path=/story/documentation-users-avatar-angular-basic--basic)
-- [Group](https://lucca-front.lucca.io/storybook/?path=/story/documentation-users-avatar-angular-group--basic)
+- [Usage Basique](https://lucca-front.lucca.io/storybook/?path=/story/documentation-users-avatar-angular-basic--basic)
+- [Groupe d'Utilisateurs](https://lucca-front.lucca.io/storybook/?path=/story/documentation-users-avatar-angular-group--basic)
 
 ## Composant Figma
-[pr-Avatar sur Figma](https://www.figma.com/design/PQEOcUF9CYfKNqaejAGLWP?node-id=3426-28808) - Variété d'écrans disponibles pour différents tailles et identités avec visualisation des avatars.
+[Visuel sur Figma](https://www.figma.com/design/PQEOcUF9CYfKNqaejAGLWP?node-id=3426-28808) - Composant d'avatar illustrant différentes tailles (XS, S, M, L, XL, 2XL, 3XL) et identités d'utilisateurs.
 
 ## Import
 
 ```typescript
-import { LuUserPictureComponent } from '@lucca-front/ng/user';
-import { LuUserPopoverDirective } from '@lucca-front/ng/user-popover';
+import { LuUserPictureComponent } from '@lucca-front/ng/avatar';
+// ou
+import { LuUserPopoverDirective } from '@lucca-front/ng/avatar';
 ```
 
 ## Usage de base
 
 ```html
-<!-- Usage minimal -->
-<lu-user-picture [user]="someUser" sizes="L"></lu-user-picture>
+<!-- Usage minimal d'un avatar -->
+<lu-user-picture [identity]="'[FR] Archer Marie-Françoise'" size="L"></lu-user-picture>
 ```
 
-## Directive / Composant : `luUserPicture` ou `<lu-user-picture>`
+## Directive / Composant : `lu-user-picture` ou `*[luUserPopover]`
 
-Affiche une image ou des initiales d'un utilisateur. Applicable n'importe où dans un document Angular.
+Affiche l'image de l'utilisateur. Applicable sur les éléments de type image ou bloc pour les avatars.
 
-### Valeurs
+### Valeurs (si directive avec valeurs)
 
 | Valeur | Description |
 |--------|-------------|
-| `""` (vide) | Taille par défaut |
-| `"XS"` | Taille extra petite |
-| `"S"` | Taille petite |
-| `"L"` | Taille grande |
-| `"XL"` | Taille très grande |
-| `"XXL"` | Taille extra grande |
-| `"XXXL"` | Taille maxi |
+| `""` (vide) | Variante par défaut, affiche l'avatar sans popover. |
 
 ```html
-<lu-user-picture [user]="user" sizes="XL"></lu-user-picture>
+<lu-user-picture [identity]="'[FR] Bart Maurice'" size="S"></lu-user-picture>
 ```
 
 ## Inputs
 
-### `user`
-Type: `User` — Default: `null`
+### `identity`
+Type: `string` — Default: `''`
 
-Représente les données de l'utilisateur à afficher.
+Identité de l'utilisateur à afficher dans l'avatar.
 
 ```html
-<lu-user-picture [user]="user"></lu-user-picture>
+<lu-user-picture [identity]="'[ES] Pérez Sofia'"></lu-user-picture>
 ```
 
-### `sizes`
-Type: `'XS' | 'S' | '' | 'L' | 'XL' | 'XXL' | 'XXXL'` — Default: `''`
+### `size`
+Type: `'XS' | 'S' | 'M' | 'L' | 'XL' | '2XL' | '3XL'` — Default: `'M'`
 
-Définit la taille de l'avatar.
-
-```html
-<lu-user-picture [sizes]="'XL'" [user]="user"></lu-user-picture>
-```
-
-### `placeholder`
-Type: `boolean` — Default: `false`
-
-Indique si l'avatar doit afficher un espace réservé.
+Définit la taille de l'avatar à afficher.
 
 ```html
-<lu-user-picture [user]="user" [placeholder]="true"></lu-user-picture>
-```
-
-### `displayFormat`
-Type: `LuDisplayInitials` — Default: `LuDisplayInitials.firstlast`
-
-Détermine le format d'affichage des initiales lorsque l'image est manquante.
-
-```html
-<lu-user-picture [user]="user" [displayFormat]="LuDisplayInitials.firstlast"></lu-user-picture>
-```
-
-### `AI`
-Type: `boolean` — Default: `false`
-
-Indique si l'avatar devrait avoir un style supplémentaire pour des interactions AI.
-
-```html
-<lu-user-picture [user]="user" [AI]="true"></lu-user-picture>
+<lu-user-picture [identity]="'[UK] Berry Jessica'" size="XL"></lu-user-picture>
 ```
 
 ## Patterns courants
 
-### Avatars groupés
+### Affichage d'un avatar avec popover
 ```html
-<ul class="avatarWrapper">
-	<li>
-		<lu-user-picture [user]="user1"></lu-user-picture>
-	</li>
-	<li>
-		<lu-user-picture [user]="user2"></lu-user-picture>
-	</li>
-	<li>
-		<lu-user-picture [user]="user3"></lu-user-picture>
-	</li>
-</ul>
+<!-- Affiche l'avatar avec information au survol -->
+<lu-user-picture [identity]="'[FR] Bragoulet Marie'" size="M" [luUserPopover]></lu-user-picture>
 ```
 
 ## Accessibilité
-Assurez-vous de fournir des attributs ARIA pour les utilisateurs d'assistance et de décrire correctement chaque avatar à l'aide de l'attribut `aria-label` ou d'autres attributs pertinents.
+Assurez-vous que les avatars ont des attributs 'aria-label' appropriés pour décrire l'utilisateur, afin de faciliter l'accès pour les utilisateurs de lecteurs d'écran.
 
 ## Guidelines Prisme
-- Evitez des images trop lourdes pour garantir le temps de chargement.
-- Ne pas afficher d'avatar sans un label descriptif alterné pour l'accessibilité.
+- Utiliser des avatars de tailles appropriées selon le contexte (liste, carte, etc.).
+- Ne pas surcharger l'interface avec trop d'avatars. 
+- Privilégier l'utilisation de placeholders lorsque cela est pertinent.

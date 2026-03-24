@@ -1,42 +1,70 @@
-# pr-FilterBar
+# FilterBar
 
 ## Quand utiliser ce composant
-1. Pour créer des barres de filtrage contextuelles dans des formulaires d'application.
-2. Pour permettre aux utilisateurs de sélectionner des vues spécifiques et des filtres avec un seul composant.
-3. Pour intégrer des éléments de filtre supplémentaires dans une interface utilisateur de manière dynamique.
+- Lorsque vous devez offrir plusieurs options de filtrage pour affiner les résultats d'une liste ou d'une table.
+- Pour organiser les filtres d'une manière intuitive et accessible, en améliorant l'expérience utilisateur.
+- Lorsque vous souhaitez intégrer des sélecteurs et des champs de saisie avec un design cohérent au sein d'un formulaire complexe.
 
 ## Stories Storybook
 - [Documentation complète](https://lucca-front.lucca.io/storybook/?path=/docs/documentation-forms-filterspills-filterbar-angular--docs)
 - [Basic](https://lucca-front.lucca.io/storybook/?path=/story/documentation-forms-filterspills-filterbar-angular--basic)
 
 ## Composant Figma
-[Visuel Figma](https://www.figma.com/design/PQEOcUF9CYfKNqaejAGLWP?node-id=26824-221178) — Le pr-FilterBar est représenté avec des variations : Full, Views only, Right-align views, et FilterPills only, chacune adaptée à des cas d'utilisation spécifiques.
+[Consulter le design sur Figma](https://www.figma.com/design/PQEOcUF9CYfKNqaejAGLWP?node-id=26824-221178) - Le composant FilterBar propose un design modulaire avec plusieurs variantes, permettant une intégration élégante dans des applications riches, tout en offrant des options flexibles pour le filtrage.
 
 ## Import
 
 ```typescript
-import { FilterBarComponent } from '@lucca-front/ng/filter-pills';
+import { FilterBarComponent } from '@lucca-front/ng/forms';
+// ou
+import { LuCoreSelectApiV4Directive } from '@lucca-front/ng/select';
+import { DateInputComponent } from '@lucca-front/ng/forms';
+import { DateRangeInputComponent } from '@lucca-front/ng/forms';
+import { DividerComponent } from '@lucca-front/ng/layout';
+import { FilterPillComponent } from '@lucca-front/ng/forms';
+import { FormFieldComponent } from '@lucca-front/ng/forms';
+import { CheckboxInputComponent } from '@lucca-front/ng/forms';
+import { TextInputComponent } from '@lucca-front/ng/forms';
+import { LuMultiSelectInputComponent } from '@lucca-front/ng/select';
+import { NumericBadgeComponent } from '@lucca-front/ng/badge';
+import { SegmentedControlComponent } from '@lucca-front/ng/controls';
+import { SegmentedControlFilterComponent } from '@lucca-front/ng/controls';
+import { LuSimpleSelectInputComponent } from '@lucca-front/ng/select';
 ```
 
 ## Usage de base
 
 ```html
-<!-- Usage minimal -->
-<lu-filter-bar>...</lu-filter-bar>
+<lu-filter-bar>
+  <lu-simple-select apiV4>...</lu-simple-select>
+  <lu-multi-select apiV4>...</lu-multi-select>
+  <lu-date-input>...</lu-date-input>
+  <lu-date-range-input>...</lu-date-range-input>
+  <lu-divider></lu-divider>
+  <lu-filter-pill>...</lu-filter-pill>
+  <lu-form-field>...</lu-form-field>
+  <lu-checkbox-input>...</lu-checkbox-input>
+  <lu-text-input>...</lu-text-input>
+  <lu-numeric-badge>...</lu-numeric-badge>
+  <lu-segmented-control>...</lu-segmented-control>
+  <lu-segmented-control-filter>...</lu-segmented-control-filter>
+  <lu-multi-select>...</lu-multi-select>
+  <lu-simple-select>...</lu-simple-select>
+</lu-filter-bar>
 ```
 
-## Directive / Composant : `luFilterBar` ou `<lu-filter-bar>`
+## Directive / Composant : `lu-filter-bar`
 
-Description courte du sélecteur. Applicable sur le conteneur de la barre de filtrage.
+Composant principal pour la création d'une barre de filtre, appliqué sur le conteneur de filtrage.
 
-### Valeurs
+### Valeurs (si directive avec valeurs)
 
 | Valeur | Description |
 |--------|-------------|
-| `""` (vide) | Variante par défaut : Full |
-| `"views-only"` | Variante affichant uniquement les vues |
-| `"right-align"` | Variante avec les vues alignées à droite |
-| `"filter-pills-only"` | Variante affichant uniquement les filtres sous forme de «pills» |
+| `""` (vide) | Variante par défaut (Type=Full) |
+| `"views-only"` | Affiche uniquement les vues |
+| `"right-align"` | Aligne les vues à droite |
+| `"filter-pills-only"` | Affiche uniquement les filtres sous forme de pills |
 
 ```html
 <lu-filter-bar type="views-only">...</lu-filter-bar>
@@ -47,23 +75,25 @@ Description courte du sélecteur. Applicable sur le conteneur de la barre de fil
 ### `type`
 Type: `'full' | 'views-only' | 'right-align' | 'filter-pills-only'` — Default: `'full'`
 
-Définit la variante de la barre de filtre.
+Détermine le type de la barre de filtre et ses options d'affichage.
 
 ```html
-<lu-filter-bar [type]="'right-align'">...</lu-filter-bar>
+<lu-filter-bar [type]="'views-only'">...</lu-filter-bar>
 ```
 
 ## Patterns courants
 
-### Barre de filtres complète
+### Intégration de filtres
 ```html
-<lu-filter-bar type="full">...</lu-filter-bar>
+<lu-filter-bar>
+  <lu-simple-select apiV4></lu-simple-select>
+  <lu-date-input></lu-date-input>
+</lu-filter-bar>
 ```
 
 ## Accessibilité
-Assurez-vous que tous les éléments interactifs dans le pr-FilterBar sont accessibles via le clavier et offrent des étiquettes significatives pour les technologies d'assistance.
+Assurez-vous que les éléments de filtrage sont accessibles via le clavier et que les contrôles permettent une navigation claire pour tous les utilisateurs, avec des étiquettes descriptives.
 
 ## Guidelines Prisme
-- Utiliser des étiquettes claires et concises pour chaque type de filtre.
-- Éviter d'encombrer la barre de filtres avec trop d'options.
-- S'assurer que les vues sont intuitives et faciles à utiliser pour l'utilisateur.
+- Respecter les conventions de couleurs établies dans le design system.
+- Ne pas surcharger la barre de filtres avec trop d'options, privilégier la clarté.

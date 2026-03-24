@@ -1,71 +1,81 @@
 # pr-TimePicker
 
 ## Quand utiliser ce composant
-- Pour permettre aux utilisateurs de sélectionner une heure de manière intuitive dans un formulaire.
-- Lorsqu'il est nécessaire de valider l'heure saisie pour des événements ou des réservations.
-- Pour des interfaces nécessitant une entrée d'heure, comme des applications de calendrier ou de réservation.
+- Pour permettre la sélection d'une heure dans un formulaire.
+- Lorsque vous avez besoin de valider une heure avant de l'envoyer au serveur.
+- Pour afficher un champ d'entrée d'heure avec différentes options de personnalisation.
 
 ## Stories Storybook
 [Documentation complète](https://lucca-front.lucca.io/storybook/?path=/docs/documentation-forms-time-time-picker-angular-form--docs)
 
 ## Composant Figma
-[Design Figma](https://www.figma.com/design/PQEOcUF9CYfKNqaejAGLWP?node-id=12773-20990) - Composant permettant la sélection horaire avec plusieurs variantes disponibles.
+[Visuel du pr-TimePicker](https://www.figma.com/design/PQEOcUF9CYfKNqaejAGLWP?node-id=12773-20990) — Ce composant présente différentes variantes de taille, état, contenu, feedback et présentation.
 
 ## Import
 
 ```typescript
-import { TimePickerComponent } from '@lucca-front/ng/form';
-// ou
-import { TimePickerDirective } from '@lucca-front/ng/form';
+import { TimePickerComponent } from '@lucca-front/ng/forms';
 ```
 
 ## Usage de base
 
 ```html
 <!-- Usage minimal -->
-<input luTimePicker [value]="heure"> 
+<lu-time-picker placeholder="Sélectionner une heure" ></lu-time-picker>
 ```
 
 ## Directive / Composant : `luTimePicker` ou `<lu-time-picker>`
 
-Directive utilisée pour transformer un élément d'entrée en sélecteur de temps. Applicable sur les éléments `<input>`.
+Directive applicable sur les éléments de type input pour gérer la sélection d'une heure.
 
-### Valeurs (si directive avec valeurs)
+### Valeurs
 
 | Valeur | Description |
 |--------|-------------|
-| `""` (vide) | Variante par défaut avec affichage standard de l'heure. |
-| `"size"` | Permet de définir la taille du sélecteur (ex : 'S', 'M'). |
-| `"state"` | Définit l'état visuel du champ (ex : 'FocusHours', 'Hover', 'Disabled'). |
-| `"content"` | Définit le contenu affiché (ex : 'Filled', 'Empty'). |
-| `"feedback"` | État de rétroaction visuelle (ex : 'None', 'Critical'). |
-| `"presentation"` | Définit si le champ doit être exposé ou non. |
+| `""` (vide) | Variante par défaut |
 
 ```html
-<input luTimePicker="size='M'" [value]="heure"> 
+<lu-time-picker size="S" state="FocusHours" content="Filled" feedback="None"></lu-time-picker>
 ```
 
 ## Inputs
 
-### `value`
+### `placeholder`
 Type: `string` — Default: `''`
 
-Heure sélectionnée au format HH:mm ou AM/PM.
+Texte affiché lorsque le champ est vide.
 
 ```html
-<input luTimePicker [value]="heure"> 
+<lu-time-picker [placeholder]="'Sélectionnez une heure'"></lu-time-picker>
+```
+
+### `disabled`
+Type: `boolean` — Default: `false`
+
+Indique si le composant est désactivé.
+
+```html
+<lu-time-picker [disabled]="true"></lu-time-picker>
+```
+
+### `readonly`
+Type: `boolean` — Default: `false`
+
+Indique si le champ est en lecture seule.
+
+```html
+<lu-time-picker [readonly]="true"></lu-time-picker>
 ```
 
 ## Patterns courants
 
-### Sélecteur d'heure
+### Sélection d'heure avec état d'erreur
 ```html
-<!-- Sélection d'une heure configurable -->
-<input luTimePicker [value]="selectedTime" size="M" state="FocusHours" feedback="None">
+<lu-time-picker size="M" state="Hover" content="Empty" feedback="Critical"></lu-time-picker>
 ```
 
 ## Accessibilité
-Assurez-vous que le champ a une étiquette associée pour aider les utilisateurs utilisant des lecteurs d'écran.
+Utilisez des attributs `aria` appropriés pour indiquer l'état et la valeur actuelle du sélecteur horaire.
 
 ## Guidelines Prisme
-Utilisez le composant pr-TimePicker pour les interfaces nécessitant une saisie d'heure et suivez les principes de conception de Lucca pour assurer la clarté visuelle et l'accessibilité.
+Respectez les principes de design de Lucca lors de l'utilisation de ce composant pour garantir une expérience utilisateur cohérente. Évitez les modifications non autorisées des styles et comportements.

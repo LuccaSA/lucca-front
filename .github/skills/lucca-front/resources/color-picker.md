@@ -1,20 +1,24 @@
 # pr-ColorPicker
 
 ## Quand utiliser ce composant
-1. Pour permettre aux utilisateurs de sélectionner une couleur dans un formulaire.
-2. Lorsque vous avez besoin d'une interface intuitive pour choisir une couleur personnalisée.
-3. Pour des cas d'utilisation nécessitant une variante de couleur stylisée avec plusieurs états et tailles.
+- Lorsque vous avez besoin d'un sélecteur de couleur dans un formulaire.
+- Pour permettre à l'utilisateur de choisir une couleur à partir d'une palette.
+- Lors de la création de thèmes personnalisés où les couleurs sont essentielles.
 
 ## Stories Storybook
 - [Documentation complète](https://lucca-front.lucca.io/storybook/?path=/docs/documentation-forms-fields-color-picker-angular--docs)
 - [Basic](https://lucca-front.lucca.io/storybook/?path=/story/documentation-forms-fields-color-picker-angular--basic)
 
 ## Composant Figma
-[Vue du composant sur Figma](https://www.figma.com/design/PQEOcUF9CYfKNqaejAGLWP?node-id=34491-7965) - Ce composant présente différentes variantes telles que Compact, différentes tailles, états, et types de contenu (rempli ou vide).
+[pr-ColorPicker Figma](https://www.figma.com/design/PQEOcUF9CYfKNqaejAGLWP?node-id=34491-7965) — Composant visuel de sélecteur de couleur avec différentes variantes disponibles.
 
 ## Import
 
 ```typescript
+import { LuColorPickerComponent } from '@lucca-front/ng/forms';
+// ou
+import { LuOptionDirective } from '@lucca-front/ng/forms';
+import { FormFieldComponent } from '@lucca-front/ng/forms';
 import { ColorInputComponent } from '@lucca-front/ng/forms';
 ```
 
@@ -22,119 +26,57 @@ import { ColorInputComponent } from '@lucca-front/ng/forms';
 
 ```html
 <!-- Usage minimal -->
-<input luColorPicker />
+<lu-color-input></lu-color-input>
 ```
 
-## Directive / Composant : `luColorPicker` ou `<lu-color-picker>`
+## Directive / Composant : `lu-color-input` ou `<lu-color-input>`
 
-Directive pour un sélecteur de couleur, applicable sur les éléments `<input>`.
+Composant de saisie de couleur. Applicable sur les éléments de formulaire.
 
 ### Valeurs
 
 | Valeur | Description |
 |--------|-------------|
-| `null` | Variante par défaut, affichée normalement. |
-| `"compact"` | Variante compacte du sélecteur. |
+| `""` (vide) | Variante par défaut |
 
 ```html
-<input luColorPicker="compact" />
+<lu-color-input>...</lu-color-input>
 ```
 
 ## Inputs
 
-### `tooltip`
-Type: `string` — Default: `undefined`
+### `value`
+Type: `string` — Default: `''`
 
-Affiche une icône (?) associée à une info-bulle pour plus d'informations.
-
-```html
-<input luColorPicker [tooltip]="'Exemple d'info-bulle'" />
-```
-
-### `label`
-Type: `string` — Default: `undefined`
-
-Modifie le label du champ.
+Couleur sélectionnée par l'utilisateur.
 
 ```html
-<input luColorPicker [label]="'Choisissez une couleur'" />
+<lu-color-input [value]="selectedColor">...</lu-color-input>
 ```
 
-### `required`
+### `disabled`
 Type: `boolean` — Default: `false`
 
-Marque le champ comme obligatoire.
+Indique si le composant est désactivé.
 
 ```html
-<input luColorPicker [required]="true" />
-```
-
-### `size`
-Type: `'M' | 'S'` — Default: `'M'`
-
-Modifie la taille du champ.
-
-```html
-<input luColorPicker [size]="'S'" />
-```
-
-### `width`
-Type: `number | null` — Default: `null`
-
-Applique une largeur fixe au champ.
-
-```html
-<input luColorPicker [width]="30" />
-```
-
-### `inlineMessage`
-Type: `string` — Default: `undefined`
-
-Ajoute un texte descriptif (aide, erreur, etc.) sous le champ de formulaire.
-
-```html
-<input luColorPicker [inlineMessage]="'Entrée requise'" />
-```
-
-### `inlineMessageState`
-Type: `'default' | 'success' | 'warning' | 'error'` — Default: `'default'`
-
-Modifie l'état de l'inline message.
-
-```html
-<input luColorPicker [inlineMessageState]="'error'" />
-```
-
-### `hiddenLabel`
-Type: `boolean` — Default: `false`
-
-Masque le label en le conservant dans le DOM pour les lecteurs d’écrans.
-
-```html
-<input luColorPicker [hiddenLabel]="true" />
-```
-
-### `clearable`
-Type: `boolean` — Default: `false`
-
-Affiche un bouton pour vider le champ lorsque celui-ci est rempli.
-
-```html
-<input luColorPicker [clearable]="true" />
+<lu-color-input [disabled]="isDisabled">...</lu-color-input>
 ```
 
 ## Patterns courants
 
-### Utilisation d'un sélecteur de couleur
+### Sélection de couleur
 ```html
-<!-- Utilisation d'un sélecteur de couleur avec label et info-bulle -->
-<input luColorPicker [label]="'Sélectionnez la couleur'" [tooltip]="'Cliquez pour choisir une couleur'" />
+<!-- Composant de couleur utilisé dans un formulaire -->
+<lu-form-field>
+  <lu-color-input [value]="selectedColor" [disabled]="false"></lu-color-input>
+</lu-form-field>
 ```
 
 ## Accessibilité
-Assurez-vous que le champ est associé à un label pour améliorer l'accessibilité. Utilisez `hiddenLabel` pour garder le label accessible tout en masquant le texte visuellement.
+Assurez-vous que le composant est accessible via le clavier et que des étiquettes appropriées sont fournies pour chaque sélecteur de couleur.
 
 ## Guidelines Prisme
-- Utiliser le composant dans un formulaire pour renforcer la cohérence visuelle.
-- Éviter d'utiliser des couleurs difficiles à distinguer pour garantir l'accessibilité.
-- Fournir un message d'état informatif lorsque cela est pertinent (ex: erreur, succès).
+- Utilisez des couleurs contrastées pour améliorer la visibilité.
+- Ne pas surcharger le composant avec des options inutiles.
+- Évitez d'utiliser un trop grand nombre de couleurs différentes sans indication claire.

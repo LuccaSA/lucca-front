@@ -1,96 +1,71 @@
 # ResourceCardWrapper
 
 ## Quand utiliser ce composant
-- Pour créer un conteneur de cartes de ressources qui peut être disposé de manière flexible.
-- Lors de la création d'interfaces dynamiques où les cartes peuvent être réorganisées par l'utilisateur.
-- Quand l'affichage de plusieurs cartes doit être organisé en grille ou en colonne.
+- Pour afficher une liste de cartes de ressources dans une disposition en grille ou empilée.
+- Lorsqu'il est nécessaire d'intégrer des actions sur chaque carte, comme des boutons ou des liens.
+- Pour présenter des informations structurées et concises sur des objets, telles que des utilisateurs, des projets ou d'autres éléments significatifs.
 
 ## Stories Storybook
 - [Documentation complète](https://lucca-front.lucca.io/storybook/?path=/docs/documentation-structure-resource-card-angular-basic--docs)
 - [Basic](https://lucca-front.lucca.io/storybook/?path=/story/documentation-structure-resource-card-angular-basic--basic)
-- [Drag and drop](https://lucca-front.lucca.io/storybook/?path=/story/documentation-structure-resource-card-angular-drag-and-drop--basic)
+- [Drag and Drop](https://lucca-front.lucca.io/storybook/?path=/story/documentation-structure-resource-card-angular-drag-and-drop--basic)
 
 ## Composant Figma
-[Visuel du composant Figma](https://www.figma.com/design/PQEOcUF9CYfKNqaejAGLWP?node-id=33040-2909). Variantes disponibles : Layout=Grid, Layout=Stacked.
+[Design Figma](https://www.figma.com/design/PQEOcUF9CYfKNqaejAGLWP?node-id=33040-2909) - Ce composant représente une carte de ressource avec deux variantes de mise en page : Grille et Empilée.
 
 ## Import
 
 ```typescript
-import { ResourceCardWrapperComponent } from '@lucca-front/ng/resource-card';
+import { ResourceCardWrapperComponent } from '@lucca-front/ng/structure';
 ```
 
 ## Usage de base
 
 ```html
 <!-- Usage minimal -->
-<lu-resource-card-wrapper>...</lu-resource-card-wrapper>
+<lu-resource-card-wrapper>
+  <lu-resource-card>...</lu-resource-card>
+</lu-resource-card-wrapper>
 ```
 
-## Directive / Composant : `luResourceCardWrapper` ou `<lu-resource-card-wrapper>`
+## Directive / Composant : `lu-resource-card-wrapper` ou `<lu-resource-card-wrapper>`
 
-Directive pour envelopper des cartes de ressources. Applicable sur les éléments de conteneur.
-
-### Valeurs
-
-| Valeur                | Description                  |
-|-----------------------|------------------------------|
-| `""` (vide)           | Variante par défaut          |
-| `"grid"`              | Disposition en grille        |
-| `"stacked"`           | Disposition empilée          |
-
-```html
-<lu-resource-card-wrapper layout="grid">...</lu-resource-card-wrapper>
-```
+Composant principal pour encapsuler une ou plusieurs cartes de ressources. Applicable sur des éléments HTML comme `<div>`.
 
 ## Inputs
 
-### `wrapper`
-Type: `boolean` — Default: `false`
+### `layout`
+Type: `'grid' | 'stacked'` — Default: `'grid'`
 
-Indique si le wrapper est actif.
-
-```html
-<lu-resource-card-wrapper [wrapper]="true">...</lu-resource-card-wrapper>
-```
-
-### `wrapperGrid`
-Type: `boolean` — Default: `false`
-
-Indique si le layout doit être en grille.
+Définit l'agencement des cartes de ressources, en grille ou empilé.
 
 ```html
-<lu-resource-card-wrapper [wrapperGrid]="true">...</lu-resource-card-wrapper>
-```
-
-### `wrapperDraggable`
-Type: `boolean` — Default: `false`
-
-Indique si le wrapper permet le drag-and-drop.
-
-```html
-<lu-resource-card-wrapper [wrapperDraggable]="true">...</lu-resource-card-wrapper>
-```
-
-### `wrapperSize`
-Type: `'S' | ''` — Default: `''`
-
-Définit la taille des cartes contenues.
-
-```html
-<lu-resource-card-wrapper [wrapperSize]="'S'">...</lu-resource-card-wrapper>
+<lu-resource-card-wrapper [layout]="layoutValue">...</lu-resource-card-wrapper>
 ```
 
 ## Patterns courants
 
-### Utilisation de la carte avec drag-and-drop
+### Affichage en grille
 ```html
-<!-- Exemple de carte avec fonctionnalité de drag-and-drop -->
-<lu-resource-card-wrapper [wrapperDraggable]="true">...</lu-resource-card-wrapper>
+<!-- Présente une collection de ressources en grille -->
+<lu-resource-card-wrapper layout="grid">
+  <lu-resource-card>...</lu-resource-card>
+  <lu-resource-card>...</lu-resource-card>
+</lu-resource-card-wrapper>
+```
+
+### Affichage empilé
+```html
+<!-- Présente une collection de ressources en disposition empilée -->
+<lu-resource-card-wrapper layout="stacked">
+  <lu-resource-card>...</lu-resource-card>
+  <lu-resource-card>...</lu-resource-card>
+</lu-resource-card-wrapper>
 ```
 
 ## Accessibilité
-Assurez-vous que les éléments pouvant être déplacés par glisser-déposer sont accessibles via le clavier et que des descriptions sont fournies pour les utilisateurs de lecteurs d'écran.
+Assurez-vous que tous les liens et boutons inclus à l'intérieur des cartes sont accessibles via le clavier et ont des labels descriptifs.
 
 ## Guidelines Prisme
-- Veillez à utiliser des tailles et dispositions de carte conformes aux spécifications de design.
-- Évitez les conflits de mise en page en testant différents contenus dans les cartes.
+- Toujours fournir des directives claires pour l'utilisation des boutons et des liens dans les cartes.
+- Évitez d'encombrer visuellement chaque carte avec trop d'informations.

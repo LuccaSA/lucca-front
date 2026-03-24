@@ -1,20 +1,22 @@
 # pr-Switch
 
 ## Quand utiliser ce composant
-- Pour permettre à l'utilisateur de faire des choix binaires simples, comme activer ou désactiver une fonctionnalité.
-- Dans des formulaires où il est nécessaire d'indiquer un état d'activation, par exemple, pour souscrire à des newsletters.
-- Lorsqu'il est nécessaire de fournir une interaction plus intuitive qu'une case à cocher standard, tout en conservant la clarté visuelle.
+- Pour créer des cases à cocher qui sont plus visuelles et faciles à utiliser dans des formulaires.
+- Lorsqu'il est nécessaire d'indiquer une action binaire à l'utilisateur (on/off).
+- Pour remplacer des boutons radio ou des cases à cocher classiques lorsque l'on souhaite un design plus moderne et engageant.
 
 ## Stories Storybook
 - [Documentation complète](https://lucca-front.lucca.io/storybook/?path=/docs/documentation-forms-fields-switchfield-angular--docs)
 - [Basic](https://lucca-front.lucca.io/storybook/?path=/story/documentation-forms-fields-switchfield-angular--basic)
 
 ## Composant Figma
-[Accéder au Figma](https://www.figma.com/design/PQEOcUF9CYfKNqaejAGLWP?node-id=20183-78399) — Ce composant présente un interrupteur graphique avec différentes variantes de taille (S, M) et d'état (Checked, Disabled/Readonly, etc.).
+[Design du pr-Switch sur Figma](https://www.figma.com/design/PQEOcUF9CYfKNqaejAGLWP?node-id=20183-78399) - Composant de type switch, déclenchant un état on/off visible, avec plusieurs variantes disponibles pour différentes tailles et états d'activation.
 
 ## Import
 
 ```typescript
+import { FormFieldComponent } from '@lucca-front/ng/forms';
+import { CheckboxInputComponent } from '@lucca-front/ng/forms';
 import { SwitchInputComponent } from '@lucca-front/ng/forms';
 ```
 
@@ -22,23 +24,27 @@ import { SwitchInputComponent } from '@lucca-front/ng/forms';
 
 ```html
 <!-- Usage minimal -->
-<lu-switch></lu-switch>
+<lu-form-field>
+  <lu-checkbox-input [checked]="true"></lu-checkbox-input>
+</lu-form-field>
 ```
 
-## Directive / Composant : `luSwitch` ou `<lu-switch>`
+## Directive / Composant : `lu-form-field`, `lu-checkbox-input` ou `lu-switch-input`
 
-Interrupteur à bascule permettant aux utilisateurs de basculer entre deux états. Applicable sur les éléments HTML.
+Containers pour les éléments de formulaire, applicables sur des éléments de type formulaire. 
 
 ### Valeurs
 
-| Valeur | Description |
-|--------|-------------|
-| `""` (vide) | Variante par défaut |
-| `"S"` | Taille petite |
-| `"M"` | Taille moyenne |
+| Valeur     | Description                   |
+|------------|-------------------------------|
+| `size`     | Définit la taille du switch (S, M) |
+| `checked`  | Indique si le switch est coché (true, false) |
+| `state`    | Indique l'état du switch (Default, Disabled / Readonly, Hover, Focus, Active) |
 
 ```html
-<lu-switch size="M" [checked]="true"></lu-switch>
+<lu-form-field>
+  <lu-switch-input size="M" checked="true" state="Default"></lu-switch-input>
+</lu-form-field>
 ```
 
 ## Inputs
@@ -46,87 +52,44 @@ Interrupteur à bascule permettant aux utilisateurs de basculer entre deux état
 ### `size`
 Type: `'S' | 'M'` — Default: `'M'`
 
-Modifie la taille de l'interrupteur.
+Définir la taille du switch.
 
 ```html
-<lu-switch [size]="'S'"></lu-switch>
+<lu-switch-input [size]="'S'">...</lu-switch-input>
 ```
 
-### `inlineMessage`
-Type: `string`
+### `checked`
+Type: `boolean` — Default: `false`
 
-Ajoute un texte descriptif (aide, erreur, etc.) sous le champ de formulaire.
+Indique si le switch est activé.
 
 ```html
-<lu-switch [inlineMessage]="'Ceci est un message inline'"></lu-switch>
+<lu-switch-input [checked]="true">...</lu-switch-input>
 ```
 
-### `inlineMessageState`
-Type: `'default' | 'success' | 'warning' | 'error'`
+### `state`
+Type: `'Default' | 'Disabled/Readonly' | 'Hover' | 'Focus' | 'Active'` — Default: `'Default'`
 
-Modifie l'état de l'inline message.
-
-```html
-<lu-switch [inlineMessageState]="'success'"></lu-switch>
-```
-
-### `hiddenLabel`
-Type: `boolean`
-
-Masque le label en le conservant dans le DOM pour les lecteurs d'écrans.
+Définit l'état visuel du switch.
 
 ```html
-<lu-switch [hiddenLabel]="true"></lu-switch>
-```
-
-### `tooltip`
-Type: `string`
-
-Affiche une icône (?) associée à une info-bulle.
-
-```html
-<lu-switch [tooltip]="'Info supplémentaire'"></lu-switch>
-```
-
-### `label`
-Type: `string`
-
-Modifie le label de l'input.
-
-```html
-<lu-switch [label]="'Activer la fonctionnalité'"></lu-switch>
-```
-
-### `required`
-Type: `boolean`
-
-Marque le champ comme obligatoire.
-
-```html
-<lu-switch [required]="true"></lu-switch>
-```
-
-### `presentation`
-Type: `boolean`
-
-Transforme le champ de formulaire en donnée textuelle non éditable.
-
-```html
-<lu-switch [presentation]="true"></lu-switch>
+<lu-switch-input [state]="'Disabled/Readonly'">...</lu-switch-input>
 ```
 
 ## Patterns courants
 
-### Switch basique
+### Utilisation d'un pr-Switch
 ```html
-<!-- Interrupteur avec un label -->
-<lu-switch [label]="'Activer'"></lu-switch>
+<!-- Exemple d'un switch activé -->
+<lu-form-field>
+  <lu-switch-input size="M" checked="true" state="Focus"></lu-switch-input>
+</lu-form-field>
 ```
 
 ## Accessibilité
-Assurez-vous que le composant a des labels descriptifs et que les états peuvent être détectés par des lecteurs d'écran. Utilisez `hiddenLabel` pour masquer visuellement le label tout en le gardant accessible.
+Assurez-vous que chaque switch est associé à une étiquette explicite pour garantir une utilisation facile par tous les utilisateurs, y compris ceux utilisant des lecteurs d'écran.
 
 ## Guidelines Prisme
-- Respectez les directives d'interaction et de visuel données dans le guide Prisme de Lucca.
-- Ne pas utiliser le composant pour des choix qui pourraient être mieux exprimés par une sélection multiple ou un menu déroulant.
-- Utiliser des messages inline clairement articulés pour toutes les valeurs d'état.
+- Ne pas utiliser le switch pour des options qui peuvent être réglées avec une sélection simple.
+- Éviter les contenus trop près d'un switch qui peuvent le rendre difficile à utiliser.
+- Gardez vos labels clairs et courts pour assurer une bonne compréhension de l'état du switch.

@@ -1,9 +1,9 @@
 # pr-IndexTable
 
 ## Quand utiliser ce composant
-- Pour afficher une liste de ressources avec des actions rapides.
-- Lorsque vous avez besoin d'une vue détaillée de plusieurs éléments similaires.
-- Pour permettre des opérations de sélection sur des lignes dans un tableau.
+- Pour afficher une collection de ressources similaires dans une interface claire et structurée.
+- Lorsqu'une navigation rapide vers des détails ou des actions sur les ressources est nécessaire.
+- Pour offrir à l'utilisateur un aperçu des informations clés de manière concise.
 
 ## Stories Storybook
 - [Documentation complète](https://lucca-front.lucca.io/storybook/?path=/docs/documentation-listings-index-table-angular-actions--docs)
@@ -12,116 +12,66 @@
 - [Basic](https://lucca-front.lucca.io/storybook/?path=/story/documentation-listings-index-table-angular-tooltips--basic)
 
 ## Composant Figma
-[https://www.figma.com/design/PQEOcUF9CYfKNqaejAGLWP?node-id=19654-99228](https://www.figma.com/design/PQEOcUF9CYfKNqaejAGLWP?node-id=19654-99228) — Composant représentant un tableau d'index avec diverses variantes.
+[Design Figma](https://www.figma.com/design/PQEOcUF9CYfKNqaejAGLWP?node-id=19654-99228) — Le pr-IndexTable présente une interface élégante pour l'affichage des données. Variantes disponibles : pr-IndexTable.
 
 ## Import
 
 ```typescript
-import { IndexTableComponent, IndexTableBodyComponent, IndexTableHeadComponent, IndexTableRowComponent, IndexTableRowCellComponent, IndexTableRowCellHeaderComponent, IndexTableFootComponent, IndexTableActionComponent } from '@lucca-front/ng/index-table';
+import { IndexTableComponent } from '@lucca-front/ng/index-table';
 ```
 
 ## Usage de base
 
 ```html
-<!-- Usage minimal -->
-<lu-index-table layoutFixed>
-  <thead luIndexTableHead>
-    <tr luIndexTableRow>
-      <th luIndexTableCell>Action</th>
-      <th luIndexTableCell>Contenu</th>
-    </tr>
-  </thead>
-  <tbody luIndexTableBody>
-    <tr luIndexTableRow>
-      <th luIndexTableCell>
-        <a href="#" luIndexTableAction>Action primaire</a>
-      </th>
-      <td luIndexTableCell>Contenu de la ressource</td>
-    </tr>
-  </tbody>
+<lu-index-table>
+  <!-- Contenu de l'index table -->
 </lu-index-table>
 ```
 
-## Directive / Composant : `luIndexTable` ou `<lu-index-table>`
+## Directive / Composant : `lu-index-table` ou `<lu-index-table>`
 
-Sélecteur principal pour utiliser le composant Index Table. Applicable sur les éléments HTML pour structurer un tableau d'index.
+Composant principal pour afficher un tableau d'index, utilisable comme racine pour d'autres éléments de tableau.
 
-### Valeurs
-
+### Valeurs (si directive avec valeurs)
 | Valeur | Description |
 |--------|-------------|
-| `layoutFixed` | Applique une largeur fixe aux colonnes. |
-
-```html
-<lu-index-table layoutFixed>...</lu-index-table>
-```
+| `""` (vide) | Variante par défaut |
 
 ## Inputs
 
-### `action`
-Type: `'link' | 'button' | 'user' | 'file'` — Default: `'link'`
-
-Modifie le type d'élément HTML cliquable.
-
-```html
-<lu-index-table [action]="'button'">...</lu-index-table>
-```
-
-### `layoutFixed`
-Type: `boolean` — Default: `false`
-
-Détermine si le tableau doit avoir une largeur fixe pour les colonnes.
-
-```html
-<lu-index-table [layoutFixed]="true">...</lu-index-table>
-```
-
-### `pagination`
-Type: `boolean` — Default: `false`
-
-Active ou désactive la pagination des lignes.
-
-```html
-<lu-index-table [pagination]="true">...</lu-index-table>
-```
-
-### `selectable`
-Type: `boolean` — Default: `false`
-
-Indique si les lignes du tableau sont sélectionnables via des checkbox.
-
-```html
-<lu-index-table [selectable]="true">...</lu-index-table>
-```
+### Aucun
 
 ## Patterns courants
 
-### Tableau avec actions et pagination
+### Utilisation d'un tableau d'index
 ```html
-<lu-index-table [pagination]="true" [selectable]="true">
+<lu-index-table>
   <thead luIndexTableHead>
     <tr luIndexTableRow>
-      <th luIndexTableCell actions>Actions</th>
-      <th luIndexTableCell>Titre</th>
-      <th luIndexTableCell>Statut</th>
+      <th luIndexTableCell>Nom</th>
+      <th luIndexTableCell>Actions</th>
     </tr>
   </thead>
   <tbody luIndexTableBody>
     <tr luIndexTableRow>
+      <td luIndexTableCell>Exemple 1</td>
       <td luIndexTableCell>
-        <button type="button" luIndexTableAction>Modifier</button>
+        <button luIndexTableAction type="button">Voir</button>
       </td>
-      <td luIndexTableCell>Article 1</td>
-      <td luIndexTableCell>Actif</td>
     </tr>
   </tbody>
+  <tfoot luIndexTableFoot>
+    <tr>
+      <td colspan="2">Pagination ici</td>
+    </tr>
+  </tfoot>
 </lu-index-table>
 ```
 
 ## Accessibilité
-Assurez-vous que chaque ligne du tableau a un rôle approprié et que les actions sont étiquetées pour que les utilisateurs de lecteurs d'écran puissent les comprendre.
+Assurez-vous que les tables respectent les normes d'accessibilité en incluant des `aria-labels` appropriés et en s'assurant que les éléments interactifs soient focalisables.
 
 ## Guidelines Prisme
-- Utiliser les couleurs et typographies spécifiées dans le guide de style Lucca.
-- S'assurer que les tables sont responsives et accessibles.
-- Éviter de surcharger le tableau avec trop d'informations à la fois.
+- Favorisez l'utilisation de composants visuels standards pour une cohérence à travers l'application.
+- Évitez de surcharger le tableau avec trop d'actions ou d'informations.
+- Assurez-vous que la taille des tableaux s'adapte bien à différents écrans et résolutions.

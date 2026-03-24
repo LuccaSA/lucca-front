@@ -1,67 +1,50 @@
-# SkeletonPageHeader
+# SkeletonHeaderComponent
 
 ## Quand utiliser ce composant
-- Lorsque vous souhaitez indiquer qu'un contenu est en cours de chargement.
-- Pour maintenir une bonne expérience utilisateur en prévenant l'utilisateur de l'attente.
-- Dans des pages où le contenu peut varier en fonction des données, pour maintenir la structure d'affichage.
+- Pour afficher une interface utilisateur pendant le chargement des données.
+- Lorsque vous devez signaler à l'utilisateur qu'un contenu va bientôt être disponible.
+- Pour maintenir une apparence visuelle stable pendant que le contenu se charge.
 
 ## Stories Storybook
 - [Documentation complète](https://lucca-front.lucca.io/storybook/?path=/docs/documentation-loaders-skeleton-skeleton-header--docs)
 - [Template](https://lucca-front.lucca.io/storybook/?path=/story/documentation-loaders-skeleton-skeleton-header--template)
 
 ## Composant Figma
-[Voir le design sur Figma](https://www.figma.com/design/PQEOcUF9CYfKNqaejAGLWP?node-id=21713-46912) - Composant pr-SkeletonPageHeader en version 18.1 avec des variantes pour indiquer le chargement.
+[Voir Figma](https://www.figma.com/design/PQEOcUF9CYfKNqaejAGLWP?node-id=21713-46912) - Le composant pr-SkeletonPageHeader (v18.1) montre une structure de chargement avec des emplacements pour les titres, les sous-titres et des éléments visuels.
 
 ## Import
 
 ```typescript
-import { SkeletonHeaderComponent } from '@lucca-front/ng/skeleton';
+import { SkeletonHeaderComponent } from '@lucca-front/ng/loaders';
 ```
 
 ## Usage de base
 
 ```html
 <!-- Usage minimal -->
-<lu-skeleton-page-header>...</lu-skeleton-page-header>
+<lu-skeleton-header></lu-skeleton-header>
 ```
 
-## Directive / Composant : `luSkeletonPageHeader` ou `<lu-skeleton-page-header>`
+## Directive / Composant : `lu-skeleton-header`
 
-Directive appliquée sur le composant SkeletonPageHeader pour indiquer un chargement de contenu.
-
-### Valeurs
-
-| Valeur | Description |
-|--------|-------------|
-| `""` (vide) | Variante par défaut |
-| `true`    | Indique un mode sombre |
-
-```html
-<lu-skeleton-page-header [dark]="true">...</lu-skeleton-page-header>
-```
+Composant pour afficher un en-tête de page en mode chargement. Applicable sur des structures générales d'en-têtes.
 
 ## Inputs
 
-### `dark`
-Type: `boolean` — Default: `false`
-
-Active le mode sombre pour le composant.
-
-```html
-<lu-skeleton-page-header [dark]="true">...</lu-skeleton-page-header>
-```
+Aucun input disponible pour ce composant.
 
 ## Patterns courants
 
-### Chargement de contenu
+### Exemple de chargement d'en-tête
 ```html
-<!-- Affichage d'un en-tête en cours de chargement -->
-<lu-skeleton-page-header [dark]="false">...</lu-skeleton-page-header>
+<!-- Affichage d'un en-tête de page lors du chargement -->
+<lu-skeleton-header></lu-skeleton-header>
 ```
 
 ## Accessibilité
-Assurez-vous que les composants Skeleton ne perturbent pas la navigation des lecteurs d'écran et sont correctement étiquetés lorsque le contenu devient disponible.
+Les composants Skeleton ne devraient pas interagir avec l'utilisateur. Ils sont uniquement visuels et ne doivent pas être focussables pour garantir une expérience utilisateur fluide.
 
 ## Guidelines Prisme
-- Utilisez les Skeletons pour améliorer l'expérience utilisateur lors des temps de chargement.
-- Ne pas abuser des Skeletons : utilisez-les uniquement lorsque cela est nécessaire pour une meilleur UX.
+- Toujours utiliser les Skeletons lorsqu'un chargement est nécessaire.
+- Ne pas surcharger l'interface avec trop de Skeletons à la fois.
+- Éviter l'utilisation des Skeletons pour masquer des contenus qui peuvent être instantanément chargés.

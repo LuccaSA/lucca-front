@@ -1,9 +1,9 @@
-# RichTextInputComponent
+# pr-RichTextfield
 
 ## Quand utiliser ce composant
-- Lors de la création de formulaires nécessitant un champ de texte riche (texte formaté).
-- Pour permettre aux utilisateurs d'entrer et de formater du texte, incluant du markdown ou des balises HTML.
-- Quand un retour visuel dynamique est nécessaire lors de la saisie de texte.
+- Pour créer un champ de saisie riche où l'utilisateur peut formater le texte.
+- Lorsqu'un retour d'information est nécessaire, comme des messages d'erreur ou des confirmations visuelles de succès.
+- Pour des fonctionnalités avancées comme l'intégration de balises ou le formatage HTML dans un champ de saisie.
 
 ## Stories Storybook
 - [Documentation complète](https://lucca-front.lucca.io/storybook/?path=/docs/documentation-forms-fields-richtextinput-angular--docs)
@@ -16,95 +16,66 @@
 - [With Tag Plugin Markdown Content Change](https://lucca-front.lucca.io/storybook/?path=/story/documentation-forms-fields-richtextinput-angular--with-tag-plugin-markdown-content-change)
 
 ## Composant Figma
-[RichTextInput Figma](https://www.figma.com/design/PQEOcUF9CYfKNqaejAGLWP?node-id=6946-36429) — Le composant est un champ de saisie riche avec des options de formatage. Variantes disponibles pour différents états et contenus.
+[Consulter le composant Figma](https://www.figma.com/design/PQEOcUF9CYfKNqaejAGLWP?node-id=6946-36429). Variantes disponibles incluent: état de focus, contenu vide, retour d'information critique, présentation par défaut, etc.
 
 ## Import
 
 ```typescript
-import { RichTextInputComponent, RichTextInputToolbarComponent, HtmlFormatterDirective, MarkdownFormatterDirective, MarkdownFormatterWithTagsDirective, PlainTextFormatterWithTagsDirective } from '@lucca-front/ng/forms/rich-text-input';
+import { RichTextInputComponent } from '@lucca-front/ng/forms';
+// ou
+import { HtmlFormatterDirective } from '@lucca-front/ng/forms';
 ```
 
 ## Usage de base
 
 ```html
 <!-- Usage minimal -->
-<lu-rich-text-input placeholder="Saisissez votre texte ici..."></lu-rich-text-input>
+<lu-rich-text-input></lu-rich-text-input>
 ```
 
-## Directive / Composant : `luRichTextInput` ou `<lu-rich-text-input>`
+## Directive / Composant : `lu-rich-text-input` ou `<lu-rich-text-input>`
 
-Composant de saisie de texte riche, pouvant être utilisé dans les formulaires Angular pour collecter et formater du texte.
+Composant principal pour l'édition de texte enrichi. Applicable sur tout élément qui doit contenir du texte avec mise en forme.
 
-### Valeurs (si directive avec valeurs)
+### Inputs
 
-| Valeur | Description |
-|--------|-------------|
-| `` (vide) | Variante par défaut, sans état spécifique |
-| `"html"` | Utilise un formatage HTML |
-| `"markdown"` | Utilise un formatage Markdown |
-| `"plain"` | Utilise un formatage simple |
-
-```html
-<lu-rich-text-input format="markdown"></lu-rich-text-input>
-```
-
-## Inputs
-
-### `placeholder`
-Type: `string` — Default: `''`
-
-Texte affiché lorsque le champ est vide.
-
-```html
-<lu-rich-text-input [placeholder]="'Entrez votre texte ici...'"></lu-rich-text-input>
-```
-
-### `disabled`
+#### `luWithHtmlFormatter`
 Type: `boolean` — Default: `false`
 
-Désactive le champ si vrai.
+Active le formatage HTML dans le champ de saisie.
 
 ```html
-<lu-rich-text-input [disabled]="true"></lu-rich-text-input>
+<lu-rich-text-input [luWithHtmlFormatter]="true"></lu-rich-text-input>
 ```
 
-### `required`
+#### `luWithMarkdownFormatter`
 Type: `boolean` — Default: `false`
 
-Indique si le champ est obligatoire.
+Active le formatage Markdown dans le champ de saisie.
 
 ```html
-<lu-rich-text-input [required]="true"></lu-rich-text-input>
+<lu-rich-text-input [luWithMarkdownFormatter]="true"></lu-rich-text-input>
 ```
 
-### `disableSpellcheck`
+#### `luWithPlainTextTagsFormatter`
 Type: `boolean` — Default: `false`
 
-Désactive le correcteur d'orthographe du navigateur.
+Active le formatage de texte brut avec balises.
 
 ```html
-<lu-rich-text-input [disableSpellcheck]="true"></lu-rich-text-input>
-```
-
-### `autoResize`
-Type: `boolean` — Default: `false`
-
-Permet au champ de s'ajuster automatiquement en fonction de la quantité de texte.
-
-```html
-<lu-rich-text-input [autoResize]="true"></lu-rich-text-input>
+<lu-rich-text-input [luWithPlainTextTagsFormatter]="true"></lu-rich-text-input>
 ```
 
 ## Patterns courants
 
-### Saisie de texte avec validation
+### Saisie de texte enrichie avec balises
 ```html
-<lu-rich-text-input placeholder="Saisissez votre texte ici..." [required]="true"></lu-rich-text-input>
+<!-- Champs de texte riche avec plugin de balises -->
+<lu-rich-text-input [luWithHtmlFormatter]="true" [required]="true"></lu-rich-text-input>
 ```
 
 ## Accessibilité
-Assurez-vous que le champ de saisie inclut des attributs ARIA appropriés pour indiquer l'état de validation et d'obligation.
+S'assurer que le champ de saisie est accessible via des étiquettes appropriées et que les retours d'information sont lisibles par un lecteur d'écran.
 
 ## Guidelines Prisme
-- Suivre les standards de design et d'interaction selon Lucca.
-- Évitez d'utiliser trop d'options de formatage pour ne pas surcharger l'utilisateur.
+- Suivre les bonnes pratiques pour le design des champs de saisie riches, comme éviter la surcharge d'options et assurer une facilité d'utilisation.

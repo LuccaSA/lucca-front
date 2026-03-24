@@ -1,67 +1,69 @@
 # AssetsDialogs
 
 ## Quand utiliser ce composant
-1. Pour afficher des informations complémentaires sans quitter la page actuelle.
-2. Lorsqu'il est nécessaire de confirmer une action utilisateur (ex: suppression, validation).
-3. Pour guider l'utilisateur à travers un processus nécessitant plusieurs étapes ou formulaires.
+- Pour afficher des dialogues d'information ou d'alerte aux utilisateurs.
+- Lorsqu'il est nécessaire de demander une confirmation à l'utilisateur avant d'effectuer une action.
+- Pour afficher des formulaires ou des contenus supplémentaires sans quitter la page courante.
 
 ## Stories Storybook
-[Documentation complète](https://lucca-front.lucca.io/storybook/?path=/docs/documentation-overlays-dialog-basic--docs)
+- [Documentation complète](https://lucca-front.lucca.io/storybook/?path=/docs/documentation-overlays-dialog-basic--docs)
 
 ## Composant Figma
-[AssetsDialogs Figma](https://www.figma.com/design/PQEOcUF9CYfKNqaejAGLWP?node-id=11108-69338) — Composant de dialogue avec supports visuels pour les interactions utilisateur. Variantes disponibles : AssetsDialogs et Backdrop.
+[AssetsDialogs Figma](https://www.figma.com/design/PQEOcUF9CYfKNqaejAGLWP?node-id=11108-69338) - Ce composant permet de créer des dialogues avec des variants tels que AssetsDialogs et Backdrop.
 
 ## Import
 
 ```typescript
 import { AssetsDialogsComponent } from '@lucca-front/ng/dialog';
+// ou
+import { AssetsDialogsDirective } from '@lucca-front/ng/dialog';
 ```
 
 ## Usage de base
 
 ```html
-<!-- Usage minimal -->
-<lu-assets-dialogs></lu-assets-dialogs>
+<lu-assets-dialog>...</lu-assets-dialog>
 ```
 
-## Directive / Composant : `luAssetsDialogs` ou `<lu-assets-dialogs>`
+## Directive / Composant : `lu-assets-dialog` ou `<lu-assets-dialog>`
 
-Composant dialogue qui s'affiche comme une fenêtre modale. Applicable sur les éléments pour afficher des messages ou des formulaires.
-
-### Valeurs
-
-| Valeur | Description |
-|--------|-------------|
-| `""` (vide) | Variante AssetsDialogs par défaut |
-| `"backdrop"` | Variante avec un arrière-plan masquant |
-
-```html
-<lu-assets-dialogs value="backdrop">...</lu-assets-dialogs>
-```
+Directive utilisée pour créer des dialogues. Applicable sur tous les éléments HTML.
 
 ## Inputs
 
 ### `isOpen`
 Type: `boolean` — Default: `false`
 
-Contrôle l'état d'ouverture du dialogue. 
+Indique si le dialogue est ouvert ou non.
 
 ```html
-<lu-assets-dialogs [isOpen]="true">...</lu-assets-dialogs>
+<lu-assets-dialog [isOpen]="true">...</lu-assets-dialog>
+```
+
+### `title`
+Type: `string` — Default: `''`
+
+Titre du dialogue.
+
+```html
+<lu-assets-dialog [title]="'Mon Titre'">...</lu-assets-dialog>
 ```
 
 ## Patterns courants
 
 ### Dialogue de confirmation
 ```html
-<!-- Un dialogue simple pour confirmer une action -->
-<lu-assets-dialogs [isOpen]="true">Êtes-vous sûr de vouloir continuer ?</lu-assets-dialogs>
+<lu-assets-dialog [isOpen]="isOpen" [title]="'Confirmer'">
+  Êtes-vous sûr de vouloir continuer ?
+  <button type="button" (click)="confirm()">Oui</button>
+  <button type="button" (click)="cancel()">Non</button>
+</lu-assets-dialog>
 ```
 
 ## Accessibilité
-S'assurer que le dialogue est focusable et que l'utilisateur peut naviguer à l'intérieur avec le clavier. Utiliser des alternatives textuelles pour les images.
+Assurez-vous que le dialogue est modale et que l'utilisation au clavier est prise en compte, avec un focus sur le premier élément interactif à l'ouverture.
 
 ## Guidelines Prisme
-- Ne pas superposer plusieurs dialogues.
-- Le dialogue doit être fermé après action ou en cliquant à l'extérieur de celui-ci.
-- Toujours fournir une option de fermeture claire (ex: bouton "Annuler" ou "Fermer").
+- Ne pas surcharger le dialogue avec trop d'informations.
+- Toujours fournir des options claires pour l'utilisateur.
+- Éviter d'utiliser des dialogues pour des interactions mineures ou fréquentes.

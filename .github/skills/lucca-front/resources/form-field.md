@@ -1,15 +1,15 @@
-# pr-FormField
+# FormField
 
 ## Quand utiliser ce composant
-1. Pour créer des formulaires sans avoir à se soucier des détails de mise en forme.
-2. Lorsque vous devez rapidement changer le type d'un champ dans un formulaire (texte, email, mot de passe, etc.).
-3. Pour assurer une cohérence visuelle et fonctionnelle dans l'ensemble des champs de formulaire d'une application.
+- Lorsque vous devez créer des formulaires dynamiques avec des champs variables.
+- Pour uniformiser l'apparence et le comportement des champs de saisie au sein d'une application.
+- Lorsque vous avez besoin d'un champ de formulaire qui peut évoluer d'un type à un autre (par exemple : texte, nombre, email).
 
 ## Stories Storybook
-- [Documentation complète](https://lucca-front.lucca.io/storybook/?path=/docs/documentation-forms-fields-form-field--docs)
+[Documentation complète](https://lucca-front.lucca.io/storybook/?path=/docs/documentation-forms-fields-form-field--docs)
 
 ## Composant Figma
-[Design du pr-FormField](https://www.figma.com/design/PQEOcUF9CYfKNqaejAGLWP?node-id=28461-196506) — L'élément permet de formater de manière uniforme les champs de formulaires. Il n'a qu'une seule variante disponible, `pr-FormField`.
+[FormField sur Figma](https://www.figma.com/design/PQEOcUF9CYfKNqaejAGLWP?node-id=28461-196506) - Ce composant est conçu pour être flexible avec plusieurs variantes disponibles.
 
 ## Import
 
@@ -20,44 +20,36 @@ import { FormFieldComponent } from '@lucca-front/ng/form-field';
 ## Usage de base
 
 ```html
-<lu-form-field>...</lu-form-field>
+<!-- Usage minimal -->
+<li pr-form-field>...</li>
 ```
 
-## Directive / Composant : `luFormField` ou `<lu-form-field>`
+## Directive / Composant : `pr-form-field` ou `<pr-form-field>`
 
-Directive permettant de formater les champs de formulaire. Applicable sur tout élément de formulaire.
-
-### Valeurs (si directive avec valeurs)
-
-| Valeur | Description |
-|--------|-------------|
-| `""` (vide) | Variante par défaut |
-
-```html
-<lu-form-field ...>...</lu-form-field>
-```
+Le sélecteur `pr-form-field` est utilisé pour appliquer les styles et fonctionnalités spécifiques aux champs de formulaire. Applicable sur tous les éléments HTML pouvant contenir des entrées utilisateur.
 
 ## Inputs
 
 ### `type`
-Type: `'text' | 'email' | 'password' | 'number'` — Default: `'text'`
+Type: `'text' | 'number' | 'email'` — Default: `'text'`
 
-Définit le type du champ de formulaire.
+Permet de définir le type de champ de formulaire souhaité.
 
 ```html
-<lu-form-field [type]="typeValue">...</lu-form-field>
+<pr-form-field [type]="inputType">...</pr-form-field>
 ```
 
 ## Patterns courants
 
-### Utilisation d'un champ de texte
+### Champ de texte simple
 ```html
-<lu-form-field [type]="'text'">Mon champ de texte</lu-form-field>
+<!-- Champ de texte simple à usage général -->
+<pr-form-field type="text">...</pr-form-field>
 ```
 
 ## Accessibilité
-Assurez-vous que les champs sont correctement étiquetés pour donner aux utilisateurs de lecteurs d'écran des indications claires sur leur utilisation.
+Assurez-vous que tous les champs de formulaire incluent des étiquettes accessibles (via la propriété `label`) pour un support optimal des technologies d'assistance.
 
 ## Guidelines Prisme
-- Utilisez pr-FormField pour tous les champs similaires afin de maintenir la cohérence.
-- Ne mélangez pas plusieurs types de champs dans un même formulaire sans structuration adéquate.
+- Toujours utiliser les composants de formulaire fournis par Lucca pour garder une cohérence au niveau du design.
+- Ne pas modifier directement les styles des champs sans justification, utiliser plutôt les variantes disponibles.

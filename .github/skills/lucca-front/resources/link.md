@@ -1,15 +1,15 @@
 # pr-Link
 
 ## Quand utiliser ce composant
-- Pour créer des liens interactifs dans une interface utilisateur.
-- Lors de la présentation d'actions cliquables qui nécessitent un retour visuel comme le changement d'état.
-- Pour styliser des navigations internes et externes d'une manière cohérente avec le design system.
+1. Pour créer des liens textuels clairs et accessibles dans vos interfaces utilisateurs.
+2. Lorsqu'il est nécessaire de distinguer des actions cliquables d'autres éléments de contenu, par exemple dans des listes ou des paragraphes.
+3. Lors de la mise en place de navigations contextuelles ou de redirections sans surcharger la mise en page.
 
 ## Stories Storybook
 [Documentation complète](https://lucca-front.lucca.io/storybook/?path=/docs/documentation-actions-link-angular-test--docs)
 
 ## Composant Figma
-[Visuel Figma](https://www.figma.com/design/PQEOcUF9CYfKNqaejAGLWP?node-id=33422-7619) — Composant pr-Link avec 40 variantes disponibles pour la taille, le soulignement, l'état et la palette.
+[Modèle Figma](https://www.figma.com/design/PQEOcUF9CYfKNqaejAGLWP?node-id=33422-7619) - Composant visuel représentant un lien avec plusieurs variantes pour la taille, l'underline, l'état et la palette.
 
 ## Import
 
@@ -23,82 +23,55 @@ import { LinkDirective } from '@lucca-front/ng/actions';
 
 ```html
 <!-- Usage minimal -->
-<a luLink>Mon lien</a>
+<a luLink href="#">Mon lien</a>
 ```
 
 ## Directive / Composant : `luLink` ou `<lu-link>`
 
-Directive utilisée pour styliser les liens. Applicable sur les éléments `<a>` ou autres éléments HTML interactifs.
+Directive utilisée pour transformer un élément en lien interactif. Applicable sur les éléments `<a>`.
 
 ### Valeurs
 
-| Valeur                                | Description                                   |
-|---------------------------------------|-----------------------------------------------|
-| `""` (vide)                           | Variante par défaut                          |
-| `"size=M"`                            | Taille moyenne                                |
-| `"size=S"`                            | Taille petite                                 |
-| `"underline=True"`                    | Lien souligné                                 |
-| `"underline=False"`                   | Lien non souligné                             |
-| `"state=Focus"`                       | État lorsque le lien est focalisé            |
-| `"state=Hover"`                       | État lorsque le lien est survolé             |
-| `"state=Disabled"`                    | État désactivé                                |
-| `"state=Default"`                     | État par défaut                               |
-| `"state=Visited"`                     | État lorsque le lien a déjà été visité       |
-| `"palette=Neutral"`                   | Palette neutre                                |
-| `"palette=Product"`                   | Palette produit                               |
+| Valeur | Description |
+|--------|-------------|
+| `""` (vide) | Variante par défaut |
+| `"size=S"` | Taille petite |
+| `"size=M"` | Taille moyenne |
+| `"underline=True"` | Lien souligné |
+| `"underline=False"` | Lien non souligné |
+| `"state=Focus"` | État focus |
+| `"state=Hover"` | État hover |
+| `"state=Disabled"` | État désactivé |
+| `"state=Visited"` | État visité |
+| `"palette=Neutral"` | Palette neutre |
+| `"palette=Product"` | Palette produit |
 
 ```html
-<a luLink="size=M" luLink="underline=True" luLink="state=Hover" luLink="palette=Product">Lien interactif</a>
+<a luLink="size=M,underline=True,state=Hover,palette=Product" href="#">Lien exemple</a>
 ```
 
 ## Inputs
 
-### `size`
-Type: `'S' | 'M'` — Default: `'M'`
+### `href`
+Type: `string` — Default: `"#"`
 
-Définit la taille du lien.
-
-```html
-<a luLink [size]="'S'">Lien petit</a>
-```
-
-### `underline`
-Type: `boolean` — Default: `true`
-
-Détermine si le lien doit être souligné.
+L'URL cible du lien.
 
 ```html
-<a luLink [underline]="false">Lien sans soulignement</a>
-```
-
-### `state`
-Type: `'Default' | 'Hover' | 'Focus' | 'Disabled' | 'Visited'` — Default: `'Default'`
-
-Indique l'état visuel du lien.
-
-```html
-<a luLink [state]="'Hover'">Lien au survol</a>
-```
-
-### `palette`
-Type: `'Neutral' | 'Product'` — Default: `'Neutral'`
-
-Choisit la palette de couleurs à appliquer au lien.
-
-```html
-<a luLink [palette]="'Product'">Lien avec palette produit</a>
+<a luLink [href]="'https://example.com'">Lien vers exemple</a>
 ```
 
 ## Patterns courants
 
-### Lien avec état et style
+### Lien avec état hover
 ```html
-<!-- Lien au survol avec taille grande et souligné -->
-<a luLink size="M" underline="true" state="Hover">Lien stylisé</a>
+<!-- Lien qui change d'apparence au survol -->
+<a luLink="size=S,underline=False,state=Hover,palette=Neutral" href="#">Lien sobre</a>
 ```
 
 ## Accessibilité
-Utiliser des éléments `<a>` pour les liens, s'assurer que le texte du lien est descriptif pour les utilisateurs de lecteurs d'écran. Fournir des couleurs de contraste suffisantes.
+Assurez-vous que tous les liens ont un attribut `href` valide et qu'ils sont décrits de manière textuelle pour un accès via les lecteurs d'écran. Utilisez également le rôle `link` si nécessaire.
 
 ## Guidelines Prisme
-Consulter les guidelines de style dans Zeroheight pour assurer la cohérence avec les autres composants du design system.
+- Utilisez des couleurs de lien qui se démarquent suffisamment de l'arrière-plan.
+- Évitez d'utiliser des liens uniquement pour des actions de navigation requises par le contenu.

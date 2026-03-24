@@ -1,88 +1,78 @@
 # pr-SoftwareIcon
 
 ## Quand utiliser ce composant
-- Lorsque vous devez afficher une icône correspondant à un produit spécifique de Lucca dans votre application.
-- Si vous souhaitez indiquer visuellement un produit comme actif ou inactif grâce à la propriété `disabled`.
-- Pour ajuster la taille de l'icône en fonction de votre design ou de l'emplacement sur l'interface utilisateur via la propriété `size`.
+- Pour afficher une icône spécifique à un logiciel dans une liste ou un tableau.
+- Lors de l'illustration de fonctionnalités liées à des logiciels dans une interface utilisateur.
+- Lorsque vous souhaitez mettre en avant des outils ou applications au sein d'un produit SaaS.
 
 ## Stories Storybook
 - [Documentation complète](https://lucca-front.lucca.io/storybook/?path=/docs/documentation-structure-software-icon-angular-basic--docs)
 - [Basic](https://lucca-front.lucca.io/storybook/?path=/story/documentation-structure-software-icon-angular-basic--basic)
 
 ## Composant Figma
-[Accéder au design sur Figma](https://www.figma.com/design/PQEOcUF9CYfKNqaejAGLWP?node-id=27992-3088) – Icône représentant divers produits Lucca, avec plusieurs variantes de couleur et de type de produit.
+[pr-SoftwareIcon sur Figma](https://www.figma.com/design/PQEOcUF9CYfKNqaejAGLWP?node-id=27992-3088) - Ce composant présente 49 variantes d'icônes représentant différents logiciels, certaines avec une option de couleur. Les variantes incluent des logiciels comme "Payroll Assistant", "Analytics" et "Timesheet".
 
 ## Import
 
 ```typescript
-import { SoftwareIconComponent } from '@lucca-front/ng/software-icon';
+import { SoftwareIconComponent } from '@lucca-front/ng/component-library';
 ```
 
 ## Usage de base
 
 ```html
 <!-- Usage minimal -->
-<lu-software-icon icon="absences" size="" disabled></lu-software-icon>
+<lu-software-icon product="CB - Payroll Assistant" [color]="true"></lu-software-icon>
 ```
 
 ## Directive / Composant : `lu-software-icon`
 
-Composant permettant d'afficher une icône de produit Lucca. Applicable sur tous les éléments où une icône peut être intégrée.
+Composant pour afficher une icône de logiciel. Applicable sur des éléments générant un visuel directement.
 
-### Valeurs
+### Valeurs (si directive avec valeurs)
 
 | Valeur | Description |
 |--------|-------------|
-| `""` (vide) | Variante de taille par défaut |
-| `"XXS"` | Icône très petite |
-| `"XS"` | Icône petite |
-| `"S"` | Icône standard |
-| `"L"` | Icône grande |
+| `""` (vide) | Variante par défaut, produit non spécifié |
+| `"EA - Shared documents"` | Icône pour le produit "Shared documents" avec option de couleur |
+| `"CB - Payroll Assistant"` | Icône pour le produit "Payroll Assistant" avec option de couleur |
+| ... | D'autres variantes disponibles selon la documentation |
 
 ```html
-<lu-software-icon icon="absences" size="S"></lu-software-icon>
+<lu-software-icon product="EA - Analytics" [color]="true"></lu-software-icon>
 ```
 
 ## Inputs
 
-### `icon`
-Type: `'absences' | 'productName'` — Default: `'absences'`
+### `product`
+Type: `string` — Default: `""`
 
-Modifie l'icône produit affichée.
-
-```html
-<lu-software-icon [icon]="'absences'"></lu-software-icon>
-```
-
-### `size`
-Type: `'XXS' | 'XS' | 'S' | 'L'` — Default: `''`
-
-Détermine la taille de l'icône. Si aucune taille n'est spécifiée, la taille par défaut est utilisée.
+Identifiant du produit pour lequel afficher l'icône.
 
 ```html
-<lu-software-icon [size]="'L'"></lu-software-icon>
+<lu-software-icon [product]="'TA - Timesheet'"></lu-software-icon>
 ```
 
-### `disabled`
+### `color`
 Type: `boolean` — Default: `false`
 
-Marque l'icône comme inactive. Visuellement, cela indique à l'utilisateur que l'icône n'est pas cliquable.
+Indique si l'icône doit être affichée en couleur ou en version monochrome.
 
 ```html
-<lu-software-icon [disabled]="true"></lu-software-icon>
+<lu-software-icon [product]="'TM - Training'" [color]="true"></lu-software-icon>
 ```
 
 ## Patterns courants
 
-### Affichage d'une icône avec désactivation
+### Afficher une icône colorée
 ```html
-<!-- Icône désactivée indiquant un produit inactif -->
-<lu-software-icon icon="absences" disabled="true"></lu-software-icon>
+<!-- Utilisation d'une icône en couleur pour un logiciel spécifique -->
+<lu-software-icon product="EA - Faces" [color]="true"></lu-software-icon>
 ```
 
 ## Accessibilité
-Utilisez des attributs `aria-disabled` sur les icônes désactivées pour indiquer leur état aux technologies d'assistance.
+Veillez à utiliser des attributs `aria-label` appropriés pour décrire l'icône pour les utilisateurs d'assistants de navigation.
 
 ## Guidelines Prisme
-- Suivez les standards de style établis dans le guide Pareto pour l'utilisation des icônes à travers l'interface utilisateur.
-- Évitez d'utiliser des icônes trop petites qui ne seront pas lisibles par l'utilisateur.
+- Ne pas utiliser d'icônes qui ne correspondent pas à des logiciels spécifiques.
+- Suivez le schéma de couleurs défini pour garantir la cohérence visuelle.

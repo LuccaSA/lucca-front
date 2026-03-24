@@ -1,70 +1,66 @@
 # pr-Toast
 
 ## Quand utiliser ce composant
-- Lorsqu'un retour utilisateur instantané est nécessaire après une action, comme la validation d'un formulaire.
-- Pour afficher des notifications contextuelles sans intercepter le flux de l'utilisateur.
-- Pour fournir des mises à jour sur l'état d'un processus, comme l'envoi d'un message ou le chargement de données.
+- Pour afficher des messages d'alerte temporaires aux utilisateurs, comme des succès d'action ou des erreurs.
+- Lorsqu'une interaction avec l'application nécessite une confirmation visuelle (par exemple, enregistrement réussit).
+- Pour informer l'utilisateur de changements importants ou d'alertes qui nécessitent son attention.
 
 ## Stories Storybook
 [Documentation complète](https://lucca-front.lucca.io/storybook/?path=/docs/documentation-overlays-toasts--docs)
 
 ## Composant Figma
-[Design Figma](https://www.figma.com/design/PQEOcUF9CYfKNqaejAGLWP?node-id=3101-1158) - Ce composant présente des notifications temporaires avec différentes variantes : Feedback=Error, Feedback=Warning, Feedback=Success, Feedback=Informative.
+[Vue Figma](https://www.figma.com/design/PQEOcUF9CYfKNqaejAGLWP?node-id=3101-1158) - Ce composant présente différentes variantes visuelles pour les notifications de feedback. Variantes disponibles : Feedback=Error, Feedback=Warning, Feedback=Success, Feedback=Informative.
 
 ## Import
 
 ```typescript
 import { ToastComponent } from '@lucca-front/ng/overlays';
-// ou
-import { ToastDirective } from '@lucca-front/ng/overlays';
 ```
 
 ## Usage de base
 
 ```html
 <!-- Usage minimal -->
-<button type="button" luToast feedback="success">Notification de succès</button>
+<lu-toast feedback="Success">Votre action a été effectuée avec succès!</lu-toast>
 ```
 
 ## Directive / Composant : `luToast` ou `<lu-toast>`
 
-Directive pour afficher des notifications. Applicable sur les éléments HTML tels que `<button>`, `<div>`, etc.
+Permet d'afficher un toast de notification. Applicable sur les balises HTML `<lu-toast>` spécifiquement.
 
 ### Valeurs
 
-| Valeur      | Description               |
-|-------------|---------------------------|
-| `""` (vide) | Variante par défaut       |
-| `"error"`   | Notification d'erreur     |
-| `"warning"` | Notification d'avertissement|
-| `"success"` | Notification de succès     |
-| `"informative"` | Notification informative  |
+| Valeur        | Description                      |
+|---------------|----------------------------------|
+| `"Error"`     | Affiche un message d'erreur.    |
+| `"Warning"`   | Affiche un message d'avertissement. |
+| `"Success"`   | Affiche un message de succès.    |
+| `"Informative"`| Affiche un message informatif.    |
 
 ```html
-<button type="button" luToast="error">Notification d'erreur</button>
+<lu-toast feedback="Error">Une erreur s'est produite!</lu-toast>
 ```
 
 ## Inputs
 
 ### `feedback`
-Type: `'error' | 'warning' | 'success' | 'informative'` — Default: `''`
+Type: `'Error' | 'Warning' | 'Success' | 'Informative'` — Default: `'Informative'`
 
-Spécifie le type de feedback à afficher dans la notification.
+Définit le type de feedback à afficher dans le toast.
 
 ```html
-<button type="button" luToast [feedback]="'warning'">Avertissement</button>
+<lu-toast [feedback]="value">Message de feedback</lu-toast>
 ```
 
 ## Patterns courants
 
-### Notification d'erreur
+### Notification de succès
 ```html
-<!-- Affiche une notification d'erreur -->
-<button type="button" luToast feedback="error">Erreur détectée</button>
+<lu-toast feedback="Success">Votre action a été effectuée avec succès!</lu-toast>
 ```
 
 ## Accessibilité
-Assurez-vous que les notifications soient annoncées correctement par les lecteurs d'écran. Utilisez des attributs ARIA pour décrire le type de notification et son importance.
+Assurez-vous que le contenu du toast est suffisamment contrasté avec son arrière-plan et qu'il est de courte durée pour ne pas distraire les utilisateurs.
 
 ## Guidelines Prisme
-Consultez le guide de style Prisme pour les bonnes pratiques sur l'utilisation des notifications et des toasts.
+Respecter les consignes d'utilisation des notifications conformément aux directives de Prisme, éviter d'encombrer l'interface avec trop de toasts simultanément.

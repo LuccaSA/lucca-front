@@ -1,33 +1,33 @@
 # Popover
 
 ## Quand utiliser ce composant
-- Pour afficher des informations supplémentaires sur un élément au survol ou au clic de l'utilisateur.
-- Lorsqu'il est nécessaire de fournir des conseils ou des descriptions contextuelles sans occuper d'espace permanent sur l'interface.
-- Pour créer des interactions riches où l'utilisateur a besoin de plus d'informations avant de prendre une décision.
+- Pour afficher des informations contextuelles lorsqu'un utilisateur survole ou clique sur un élément.
+- Lorsqu'il est nécessaire de fournir des instructions supplémentaires sans quitter la page actuelle.
+- Pour montrer des actions disponibles en association avec des éléments d'interface utilisateur.
 
 ## Stories Storybook
 - [Documentation complète](https://lucca-front.lucca.io/storybook/?path=/docs/documentation-overlays-popover--docs)
 - [Basic](https://lucca-front.lucca.io/storybook/?path=/story/documentation-users-popover-angular--basic)
 
 ## Composant Figma
-[Visuel du pr-Popover](https://www.figma.com/design/PQEOcUF9CYfKNqaejAGLWP?node-id=5742-31562) - Ce composant représente une superposition d'informations contextuelles avec une variante disponible : pr-Popover.
+[Visuel du composant sur Figma](https://www.figma.com/design/PQEOcUF9CYfKNqaejAGLWP?node-id=5742-31562) - Ce Popover permet d'afficher du contenu additionnel par superposition. Variante disponible : pr-Popover.
 
 ## Import
 
 ```typescript
-import { LuUserPopoverDirective } from '@lucca-front/ng/user-popover';
+import { LuUserPopoverDirective } from '@lucca-front/ng/popover';
 ```
 
 ## Usage de base
 
 ```html
 <!-- Usage minimal -->
-<button type="button" class="userPopover_trigger" [luUserPopover]="luUserPopover()" [luUserPopoverDisabled]="luUserPopoverDisabled()">Survolez-moi !</button>
+<button type="button" [luUserPopover]="'Votre texte ici'">Ouvrir Popover</button>
 ```
 
-## Directive / Composant : `luUserPopover` ou `<lu-user-popover>`
+## Directive / Composant : `luUserPopover` ou `[luUserPopover]`
 
-Cette directive permet d'afficher un popover associé à un élément déclencheur.
+Description courte du sélecteur. Applicable sur les éléments HTML pour afficher un Popover.
 
 ### Valeurs
 
@@ -36,59 +36,32 @@ Cette directive permet d'afficher un popover associé à un élément déclenche
 | `""` (vide) | Variante par défaut |
 
 ```html
-<!-- Exemple de directive avec valeur -->
-<button type="button" [luUserPopover]="yourValue">...</button>
+<button type="button" [luUserPopover]="'Votre texte ici'">Ouvrir Popover</button>
 ```
 
 ## Inputs
 
-### `luUserPopover`
-Type: `ILuUser | null` — Default: `null`
+### `content`
+Type: `string` — Default: `''`
 
-Permet de spécifier l'utilisateur dont les informations seront affichées dans le popover.
-
-```html
-<button type="button" [luUserPopover]="{ id: 1, firstName: 'Chloe', lastName: 'Alibert' }">Survolez-moi !</button>
-```
-
-### `luUserPopoverEnterDelay`
-Type: `number` — Default: `300`
-
-Délai en millisecondes avant d'afficher le popover après le survol.
+Le contenu à afficher à l'intérieur du Popover.
 
 ```html
-<button type="button" [luUserPopoverEnterDelay]="500">Survolez-moi !</button>
-```
-
-### `luUserPopoverLeaveDelay`
-Type: `number` — Default: `200`
-
-Délai en millisecondes avant de masquer le popover après que le curseur quitte l'élément déclencheur.
-
-```html
-<button type="button" [luUserPopoverLeaveDelay]="400">Survolez-moi !</button>
-```
-
-### `luUserPopoverDisabled`
-Type: `boolean` — Default: `false`
-
-Indique si le popover est désactivé.
-
-```html
-<button type="button" [luUserPopoverDisabled]="true">Survolez-moi !</button>
+<button type="button" [luUserPopover]="content">Ouvrir Popover</button>
 ```
 
 ## Patterns courants
 
-### Utilisation de Popover avec délai
+### Afficher un Popover sur un bouton
 ```html
-<!-- Utilisation d'un popover avec des délais personnalisés -->
-<button type="button" [luUserPopover]="{ id: 1, firstName: 'Chloe', lastName: 'Alibert' }" [luUserPopoverEnterDelay]="300" [luUserPopoverLeaveDelay]="200">Survolez-moi !</button>
+<!-- Un bouton qui affiche un Popover avec du texte explicatif -->
+<button type="button" [luUserPopover]="'Cliquez ici pour plus d\'infos'">Infos</button>
 ```
 
 ## Accessibilité
-Veillez à maintenir un bon contraste visuel entre le popover et le fond, et à utiliser des descriptions d'éléments pour s'assurer que les lecteurs d'écran puissent correctement interpréter les popovers.
+Assurez-vous que le Popover soit accessible via le clavier et que l'utilisateur puisse le fermer avec un bouton ou un clic en dehors de celui-ci.
 
 ## Guidelines Prisme
-- Utiliser cette directive pour toutes les informations contextuelles qui ne doivent pas encombrer l'interface principale.
-- Ne pas abuser des popovers pour éviter une surcharge d’informations pouvant nuire à l’expérience utilisateur.
+- Utilisez des popovers pour fournir des informations contextuelles de manière non intrusives.
+- Évitez d'utiliser un Popover pour des informations critiques qui nécessitent l'attention immédiate de l'utilisateur.
+- Soyez attentif à la clarté et à la concision du contenu présenté dans un Popover pour une meilleure compréhension.

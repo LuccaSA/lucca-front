@@ -1,16 +1,17 @@
 # pr-Loading
 
 ## Quand utiliser ce composant
-- Pour indiquer un chargement en cours lors du traitement de données dans une application.
-- Pour signaler à l'utilisateur que certaines actions prennent un peu de temps, par exemple lors du chargement d'une page.
-- Pour améliorer l'expérience utilisateur en bloquant des interactions pendant le chargement d'un contenu.
+- Lors de la soumission d'un formulaire pour indiquer à l'utilisateur que les données sont en cours de traitement.
+- Pendant le chargement de données depuis une API pour informer l'utilisateur que l'application est en train de récupérer les informations.
+- Dans les situations où des actions longues sont en cours pour améliorer l'expérience utilisateur en fournissant un feedback visuel.
 
 ## Stories Storybook
-- [Documentation complète](https://lucca-front.lucca.io/storybook/?path=/docs/documentation-forms-listbox-option-html-css-loading--docs)
-- [Basic](https://lucca-front.lucca.io/storybook/?path=/story/documentation-loaders-loading-angular-basic--basic)
+[Documentation complète](https://lucca-front.lucca.io/storybook/?path=/docs/documentation-forms-listbox-option-html-css-loading--docs)  
+[Basic](https://lucca-front.lucca.io/storybook/?path=/story/documentation-loaders-loading-angular-basic--basic)
 
 ## Composant Figma
-[pr-Loading Figma](https://www.figma.com/design/PQEOcUF9CYfKNqaejAGLWP?node-id=10583-34479) — Ce composant représente un indicateur de chargement avec différentes variantes visuelles en fonction des palettes de couleurs et des tailles.
+[Design Figma](https://www.figma.com/design/PQEOcUF9CYfKNqaejAGLWP?node-id=10583-34479)  
+Le composant pr-Loading est une animation de chargement qui tourne pour signaler que quelque chose est en cours. Variantes disponibles : Palette=Product, Size=S, Palette=Product, Size=XS, Palette=Neutral, Size=M, Palette=Neutral, Size=XS, Palette=Product, Size=M, Palette=Neutral, Size=S.
 
 ## Import
 
@@ -25,74 +26,54 @@ import { LoadingComponent } from '@lucca-front/ng/loading';
 <lu-loading></lu-loading>
 ```
 
-## Directive / Composant : `lu-loading` ou `<lu-loading>`
+## Directive / Composant : `lu-loading`
 
-Permet d'afficher un indicateur de chargement. Applicable sur tous les éléments HTML. 
+Composant indicatif de chargement. Applicable sur n'importe quel élément qui nécessite un indicateur visuel de traitement.
 
 ### Valeurs (si directive avec valeurs)
 
-| Valeur  | Description                          |
-|---------|--------------------------------------|
-| `""`    | Variante par défaut                  |
-| `"L"`   | Taille large                         |
-| `"block"` | Rend l'indicateur de chargement en mode bloc |
-| `"invert"` | Inverse les couleurs de l'indicateur de chargement |
-| `"template"` | Spécifie le type de template à utiliser pour l'affichage |
+| Valeur         | Description                     |
+|----------------|---------------------------------|
+| `""` (vide)    | Variante par défaut             |
+| `"outline"`    | Variante outline (non spécifiée)|
+| `"solid"`      | Variante solide (non spécifiée) |
 
 ```html
-<lu-loading size="L" block invert template="popin"></lu-loading>
+<lu-loading></lu-loading>
 ```
 
 ## Inputs
 
+### `palette`
+Type: `'product' | 'neutral'` — Default: `'product'`
+
+Détermine la palette de couleur à utiliser pour l'indicateur de chargement.
+
+```html
+<lu-loading [palette]="value"></lu-loading>
+```
+
 ### `size`
-Type: `'S' | 'XS' | 'M' | 'L'` — Default: `'M'`
+Type: `'xs' | 's' | 'm'` — Default: `'m'`
 
 Définit la taille de l'indicateur de chargement.
 
 ```html
-<lu-loading [size]="'L'"></lu-loading>
-```
-
-### `block`
-Type: `boolean` — Default: `false`
-
-Active le mode bloc pour l'indicateur de chargement.
-
-```html
-<lu-loading [block]="true"></lu-loading>
-```
-
-### `invert`
-Type: `boolean` — Default: `false`
-
-Inverse les couleurs de l'indicateur de chargement.
-
-```html
-<lu-loading [invert]="true"></lu-loading>
-```
-
-### `template`
-Type: `string` — Default: `''`
-
-Définit le type de template à utiliser pour l'affichage.
-
-```html
-<lu-loading [template]="'fullPage'"></lu-loading>
+<lu-loading [size]="value"></lu-loading>
 ```
 
 ## Patterns courants
 
-### Chargement standard
+### Chargement d'une soumission de formulaire
 ```html
-<!-- Utilisation simple d'un indicateur de chargement -->
-<lu-loading size="M" block></lu-loading>
+<!-- Indicateur de chargement lors de la soumission -->
+<lu-loading></lu-loading>
 ```
 
 ## Accessibilité
-S'assurer que l'indicateur de chargement est accompagné d'un texte alternatif pour informer l'utilisateur lorsqu'un contenu est en cours de chargement.
+Assurez-vous que le composant de chargement n'est pas utilisé sur des éléments interactifs comme des boutons ou des liens pour ne pas interférer avec la navigation et l'interactivité de l'utilisateur.
 
 ## Guidelines Prisme
-1. Évitez d'utiliser des indicateurs de chargement excessifs qui pourraient frustrer l'utilisateur.
-2. Utilisez des animations pour renforcer l'indication de chargement sans distraire l'utilisateur.
-3. Assurez-vous que les états de chargement ne bloquent pas complètement l'interaction lorsque cela n'est pas nécessaire.
+- Utilisez pr-Loading pour indiquer des processus longs ou des chargements.
+- Ne pas combiner avec d'autres animations qui peuvent créer une confusion pour l'utilisateur.
+- Assurez-vous que le composant est utilisé de manière cohérente à travers l'application.

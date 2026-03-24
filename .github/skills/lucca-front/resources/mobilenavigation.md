@@ -1,60 +1,69 @@
-# MobileNavigation
+# pr-MobileNavigation
 
 ## Quand utiliser ce composant
-- Lorsque vous souhaitez offrir une navigation optimisée pour les appareils mobiles.
-- Pour créer une interface utilisateur intuitive avec plusieurs onglets accessibles facilement.
-- Lorsque vous avez besoin d'une barre de navigation qui s'adapte à différents nombre d'onglets.
+- Pour créer une navigation mobile avec un nombre flexible d'onglets.
+- Lors de la conception d'applications où l'espace d'affichage est limité et nécessite une interface utilisateur mobile conviviale.
+- Pour améliorer l'expérience utilisateur sur des appareils mobiles en fournissant une navigation intuitive et accessible.
 
 ## Stories Storybook
-- [Documentation complète](https://lucca-front.lucca.io/storybook/?path=/docs/documentation-navigation-mobilenavigation-basic--docs)
+[Documentation complète](https://lucca-front.lucca.io/storybook/?path=/docs/documentation-navigation-mobilenavigation-basic--docs)
 
 ## Composant Figma
-[Voir le composant Figma](https://www.figma.com/design/PQEOcUF9CYfKNqaejAGLWP?node-id=8399-38433) — Le composant pr-MobileNavigation présente une navigation fluide avec la possibilité d'avoir jusqu'à 5 onglets différents.
+[pr-MobileNavigation Figma](https://www.figma.com/design/PQEOcUF9CYfKNqaejAGLWP?node-id=8399-38433) - Ce composant présente une navigation sobre avec des variantes disponibles permettant d'afficher de 2 à 5 onglets.
 
 ## Import
 
 ```typescript
-import { MobileNavigationComponent } from '@lucca-front/ng/navigation';
+import { PrMobileNavigationComponent } from '@lucca-front/ng/navigation';
 ```
 
 ## Usage de base
 
 ```html
 <!-- Usage minimal -->
-<lu-mobile-navigation></lu-mobile-navigation>
+<pr-mobile-navigation></pr-mobile-navigation>
 ```
 
-## Directive / Composant : `luMobileNavigation` ou `<lu-mobile-navigation>`
+## Directive / Composant : `prMobileNavigation` ou `<pr-mobile-navigation>`
 
-Le sélecteur `luMobileNavigation` est utilisé pour intégrer le composant de navigation mobile. Il peut être appliqué directement sur un élément pour créer une barre de navigation.
+Composant de navigation mobile. Applicable comme élément racine pour structurer la navigation sur mobile.
 
 ### Valeurs (si directive avec valeurs)
 
-| Valeur        | Description                      |
-|---------------|----------------------------------|
-| `""` (vide)   | Variante par défaut              |
-| `"tabCount=2"`| 2 onglets                        |
-| `"tabCount=3"`| 3 onglets                        |
-| `"tabCount=4"`| 4 onglets                        |
-| `"tabCount=5"`| 5 onglets                        |
+| Valeur | Description |
+|--------|-------------|
+| `2` | Affiche 2 onglets |
+| `3` | Affiche 3 onglets |
+| `4` | Affiche 4 onglets |
+| `5` | Affiche 5 onglets |
 
 ```html
-<lu-mobile-navigation tabCount="3"></lu-mobile-navigation>
+<pr-mobile-navigation [tabCount]="3"></pr-mobile-navigation>
 ```
 
 ## Inputs
 
-### (Aucun input à spécifier)
+### `tabCount`
+Type: `2 | 3 | 4 | 5` — Default: `2`
+
+Détermine le nombre d'onglets à afficher dans la navigation mobile.
+
+```html
+<pr-mobile-navigation [tabCount]="4"></pr-mobile-navigation>
+```
 
 ## Patterns courants
 
-### Navigation mobile avec 4 onglets
+### Navigation avec plusieurs onglets
 ```html
-<lu-mobile-navigation tabCount="4"></lu-mobile-navigation>
+<!-- Exemple de navigation avec 5 onglets -->
+<pr-mobile-navigation [tabCount]="5"></pr-mobile-navigation>
 ```
 
 ## Accessibilité
-Assurez-vous que la navigation mobile est accessible via le clavier et que les étapes de navigation sont clairement définies pour les lecteurs d'écran.
+Assurez-vous que chaque onglet est accessible via le clavier et qu'ils possèdent des labels pertinents pour les lecteurs d'écran.
 
 ## Guidelines Prisme
-- Suivez les principes de conception définis dans le guide Prisme, en vous assurant que les interactions utilisateur sont intuitives et que la navigation est fluide.
+- Favorisez la simplicité et la clarté dans la navigation.
+- Limitez le nombre d'onglets visibles pour éviter la surcharge d'information.
+- Utilisez des icônes representant clairement chaque onglet.

@@ -1,74 +1,71 @@
 # pr-BubbleIllustration
 
 ## Quand utiliser ce composant
-1. Pour afficher une illustration représentant un état ou un concept (erreur, succès, avertissement) de manière visuelle.
-2. Lors de la réalisation d'une interface utilisateur qui nécessite des représentations graphiques pour renforcer la compréhension utilisateur.
-3. Dans des situations où une métaphore visuelle peut remédier à une information qui pourrait paraître sèche ou complexe via du texte seul.
+- Pour afficher un message d'état (erreur, succès, avertissement) visuellement attractif.
+- Lors de la recherche de contenu pour indiquer qu'aucun résultat n'a été trouvé.
+- Pour rendre des notifications à l'utilisateur de manière ludique et engageante.
 
 ## Stories Storybook
 - [Documentation complète](https://lucca-front.lucca.io/storybook/?path=/docs/documentation-structure-bubble-illustration-angular-basic--docs)
 - [Basic](https://lucca-front.lucca.io/storybook/?path=/story/documentation-structure-bubble-illustration-angular-basic--basic)
 
 ## Composant Figma
-[Voir le Figma](https://www.figma.com/design/PQEOcUF9CYfKNqaejAGLWP?node-id=34491-10009) - Le composant se présente sous différentes variantes visuelles, représentant des émotions ou des événements (ex: succès, erreur, animations). Variantes disponibles incluent des illustrations pour "Success - Thumb up", "Error", "Warning", etc.
+[Documentation Figma](https://www.figma.com/design/PQEOcUF9CYfKNqaejAGLWP?node-id=34491-10009) - Composant visuel représentant des illustrations de bulles avec différentes variantes incluant des messages d'état tels que succès, erreur et avertissement.
 
 ## Import
 
 ```typescript
-import { BubbleIllustrationComponent } from '@lucca-front/ng/bubble-illustration';
+import { BubbleIllustrationComponent } from '@lucca-front/ng/structure';
 ```
 
 ## Usage de base
 
 ```html
 <!-- Usage minimal -->
-<lu-bubble-illustration></lu-bubble-illustration>
+<lu-bubble-illustration>...</lu-bubble-illustration>
 ```
 
-## Directive / Composant : `luBubbleIllustration` ou `<lu-bubble-illustration>`
+## Directive / Composant : `lu-bubble-illustration` ou `<lu-bubble-illustration>`
 
-Directive pour afficher une illustration bulle. Applicable sur les éléments `<lu-bubble-illustration>`.
+Composant à utiliser pour afficher des illustrations de bulles. Applicable sur tous les éléments HTML.
 
 ### Valeurs
 
-| Valeur                  | Description                   |
-|-------------------------|-------------------------------|
-| `""` (vide)             | Variante par défaut           |
-| `"Error"`               | Illustration d'erreur         |
-| `"Success - Thumb up"`  | Illustration de succès (pouce en l'air) |
-| `"Success - Award"`     | Illustration de succès (prix) |
-| `"Warning"`             | Illustration d'avertissement   |
-| `"Default"`             | Illustration par défaut        |
-| `"Empty search"`        | Illustration sans résultat de recherche |
-| `"Success - Party popper"` | Illustration de succès (fête)  |
+| Valeur                 | Description                  |
+|-----------------------|------------------------------|
+| `""` (vide)           | Variante par défaut          |
+| `"Type=Error"`       | Illustration pour une erreur  |
+| `"Type=Success - Thumb up"` | Illustration pour un succès avec un pouce levé |
+| `"Type=Success - Award"`     | Illustration pour un succès avec un prix |
+| `"Type=Warning"`     | Illustration pour une alerte  |
+| `"Type=Empty search"` | Illustration quand aucun résultat n'est trouvé |
+| `"Type=Success - Party popper"` | Illustration festive pour un succès |
 
 ```html
-<lu-bubble-illustration illustration="Error"></lu-bubble-illustration>
+<lu-bubble-illustration type="Type=Success - Thumb up">...</lu-bubble-illustration>
 ```
 
 ## Inputs
 
-### `illustration`
-Type: `'moodAngry' | 'moodBored' | 'moodHappy' | 'moodJoyful' | 'moodMoody' | 'moodSad' | 'moodShoked' | 'moodSly' | 'moodSmirking' | 'moodSurprised' | 'absence' | 'anniversary' | 'awardRibbon' | 'banknote' | 'battery' | 'bell' | 'binders' | 'biscuit' | 'bookmark' | 'books' | 'bronzeMedal' | 'building' | 'bulb' | 'calculator' | 'calendar' | 'camera' | 'charts' | 'chat' | 'checkmark' | 'chemistry' | 'clipboard' | 'clock' | 'coffee' | 'cup' | 'diamond' | 'equity' | 'error' | 'export' | 'file' | 'fish' | 'folder' | 'gear' | 'gift' | 'goldMedal' | 'graduate' | 'growth' | 'hearth' | 'home' | 'hourglass' | 'import' | 'invoice' | 'jigsaw' | 'link' | 'lock' | 'magnifyingGlass' | 'mail' | 'map' | 'mapPin' | 'medical' | 'megaphone' | 'mix' | 'mobile' | 'multipleReceipts' | 'newbie' | 'newsFeed' | 'office' | 'outside' | 'paint' | 'paperplane' | 'party' | 'paymentCards' | 'payslip' | 'pen' | 'percent' | 'phone' | 'picture' | 'polaroid' | 'receipt' | 'recruit' | 'reload' | 'restaurant' | 'rocket' | 'save' | 'screwdriver' | 'security' | 'silverMedal' | 'sliders' | 'speed' | 'stopwatch' | 'subjects' | 'survey' | 'target' | 'tasklist' | 'temperature' | 'thumbtack' | 'thumbUp' | 'timer' | 'trash' | 'userID' | 'video' | 'warning'` — Default: `''`
+### `type`
+Type: `'Type=Error' | 'Type=Success - Thumb up' | 'Type=Success - Award' | 'Type=Warning' | 'Type=Default' | 'Type=Empty search' | 'Type=Success - Party popper'` — Default: `'Type=Default'`
 
-Description de l'illustration à afficher.
+Détermine le type de l'illustration à afficher.
 
 ```html
-<lu-bubble-illustration [illustration]="'moodHappy'"></lu-bubble-illustration>
+<lu-bubble-illustration [type]="'Type=Warning'">...</lu-bubble-illustration>
 ```
 
 ## Patterns courants
 
-### Utilisation d'une illustration d'erreur
+### Affichage d'un succès
 ```html
-<!-- Affichage d'un message d'erreur visuellement -->
-<lu-bubble-illustration illustration="Error"></lu-bubble-illustration>
+<lu-bubble-illustration type="Type=Success - Award">Félicitations ! Vous avez réussi.</lu-bubble-illustration>
 ```
 
 ## Accessibilité
-Assurez-vous que les illustrations utilisées sont accompagnées d'un texte alternatif approprié pour que les utilisateurs de lecteurs d'écran puissent comprendre le contenu visuel.
+Assurez-vous que le composant fournit des descriptions adéquates pour les lecteurs d'écran, notamment par le biais d'attributs `aria` appropriés.
 
 ## Guidelines Prisme
-- Utiliser les illustrations pour enrichir l'expérience utilisateur, mais ne pas surcharger l'interface.
-- S'assurer que les illustrations sont pertinentes par rapport au contexte dans lequel elles sont utilisées.
-- Éviter les illustrations qui pourraient être considérées comme biaisées ou stéréotypées.
+- Utilisez des illustrations conforme aux variations disponibles pour maintenir la cohérence visuelle dans votre application.
+- Évitez d'utiliser des illustrations trop chargées qui peuvent distraire l'utilisateur.

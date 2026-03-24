@@ -1,57 +1,37 @@
-# Pr-NewBadge
+# pr-NewBadge
 
 ## Quand utiliser ce composant
-- Pour signaler aux utilisateurs qu'une fonctionnalité a été récemment ajoutée dans l'application.
-- Lors de la mise en avant de mises à jour ou de nouvelles fonctionnalités sur des éléments de navigation.
-- Pour attirer l'attention sur des sections spécifiques d'une interface utilisateur qui viennent d'être lancées.
+- Pour signaler une nouvelle fonctionnalité dans la navigation de l'application.
+- Lors de l'introduction de mises à jour significatives aux utilisateurs.
+- Pour attirer l'attention sur des éléments récents ou des promotions temporaires.
 
 ## Stories Storybook
 - [Documentation complète](https://lucca-front.lucca.io/storybook/?path=/docs/documentation-texts-newbadge-angular-basic--docs)
 - [Template](https://lucca-front.lucca.io/storybook/?path=/story/documentation-texts-newbadge-angular-basic--template)
 
 ## Composant Figma
-[Pr-NewBadge Figma](https://www.figma.com/design/PQEOcUF9CYfKNqaejAGLWP?node-id=8174-35724) - Ce lien vous permet de visualiser le design du composant ainsi que ses variantes disponibles.
+[Voir sur Figma](https://www.figma.com/design/PQEOcUF9CYfKNqaejAGLWP?node-id=8174-35724) — Ce composant indique une fonctionnalité comme étant nouvelle. Variantes disponibles : pr-NewBadge.
 
 ## Import
 
 ```typescript
-import { NewBadgeComponent } from '@lucca-front/ng/new-badge';
+import { NewBadgeComponent } from '@lucca-front/ng/texts';
 ```
 
 ## Usage de base
 
 ```html
-<!-- Usage minimal -->
-<pr-new-badge label="New"></pr-new-badge>
+<lu-new-badge>Nouvelle Fonctionnalité</lu-new-badge>
 ```
 
-## Directive / Composant : `pr-new-badge` ou `<pr-new-badge>`
+## Directive / Composant : `lu-new-badge` ou `<lu-new-badge>`
 
-Composant utilisé pour afficher un badge indiquant qu'une fonctionnalité est nouvelle. Applicable sur de nombreux éléments, principalement des éléments textuels ou des indications dans l'interface.
-
-### Inputs
-
-#### `label`
-Type: `string` — Default: `''`
-
-Modifie le texte affiché par le composant.
-
-```html
-<pr-new-badge [label]="'New'"></pr-new-badge>
-```
-
-## Patterns courants
-
-### Indiquer une nouvelle fonctionnalité
-```html
-<!-- Affiche un badge indiquant qu'une fonctionnalité est nouvelle -->
-<pr-new-badge label="New"></pr-new-badge>
-```
+Composant utilisé pour indiquer une fonctionnalité nouvelle. Applicable sur les éléments HTML définis par le composant.
 
 ## Accessibilité
-Assurez-vous que le badge est visible et lisible, avec un contraste suffisant par rapport à l'arrière-plan. Utilisez des attributs ARIA pour fournir des indications supplémentaires si nécessaire.
+Assurez-vous que le badge est accompagné d’une description textuelle explicite pour garantir l'accessibilité à tous.
 
 ## Guidelines Prisme
-- Ne pas utiliser le badge pour des éléments déjà bien établis.
-- Utiliser le badge uniquement pour des éléments en rapport avec des fonctionnalités nouvelles.
-- S'assurer que le badge se fond harmonieusement avec l'ensemble visuel de l'application.
+- Utiliser le badge pour marquer des éléments réellement nouveaux.
+- Éviter d'utiliser le badge pour des promotions éphémères qui ne justifient pas la mention "nouveau".
+- Maintenir une cohérence dans l'utilisation à travers l'application pour éviter toute confusion chez l'utilisateur.

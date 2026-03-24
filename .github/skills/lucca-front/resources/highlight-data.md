@@ -1,118 +1,98 @@
 # pr-HighlightData
 
 ## Quand utiliser ce composant
-- Pour afficher des statistiques importantes sous forme de données mises en avant.
-- Lorsqu'il est nécessaire de mettre en valeur des informations clés dans une interface utilisateur.
-- Pour intégrer des graphiques de données résumées avec options de feedback visuel.
+1. Pour mettre en évidence des données importantes dans une interface utilisateur mobile ou desktop.
+2. Lorsqu'il est nécessaire de fournir un retour visuel critique sur l'état d'une donnée affichée.
+3. Pour afficher des messages d'alerte ou de succès de manière claire et concise dans des tableaux ou des cartes.
 
 ## Stories Storybook
 - [Documentation complète](https://lucca-front.lucca.io/storybook/?path=/docs/documentation-structure-highlight-data-angular-basic--docs)
 - [Template](https://lucca-front.lucca.io/storybook/?path=/story/documentation-structure-highlight-data-angular-basic--template)
 
 ## Composant Figma
-[Design Figma](https://www.figma.com/design/PQEOcUF9CYfKNqaejAGLWP?node-id=28445-185189) - Visualisation du composant avec plusieurs variantes disponibles, incluant différentes tailles et thèmes.
+[pr-HighlightData (v19.3) Figma](https://www.figma.com/design/PQEOcUF9CYfKNqaejAGLWP?node-id=28445-185189) - Composant qui présente des données avec plusieurs variations de taille et de thème ; il est conçu pour attirer l'attention de l'utilisateur sur des informations critiques.
 
 ## Import
 
 ```typescript
-import { HighlightDataComponent } from '@lucca-front/ng/highlight-data';
+import { HighlightDataComponent } from '@lucca-front/ng/structure';
 ```
 
 ## Usage de base
 
 ```html
 <!-- Usage minimal -->
-<lu-highlight-data [heading]="'Titre'" [value]="'Valeur'" [subText]="'Texte additionnel'">...</lu-highlight-data>
+<lu-highlight-data>Texte important</lu-highlight-data>
 ```
 
-## Directive / Composant : `luHighlightData` ou `<lu-highlight-data>`
+## Directive / Composant : `lu-highlight-data`
 
-Directive pour personnaliser l'affichage des données mises en avant. Applicable sur des éléments du composant Angular.
+Composant utilisé pour afficher des données mises en avant de manière graphique. Applicable à tout élément HTML.
 
-### Valeurs
+### Valeurs (si directive avec valeurs)
 
-| Valeur      | Description                          |
-|-------------|--------------------------------------|
-| `null`      | Variante par défaut                  |
-| `"S"`       | Taille petite                        |
-| `"XS"`      | Taille extra petite                  |
+| Valeur       | Description                   |
+|--------------|-------------------------------|
+| `""` (vide)  | Variante par défaut           |
+| `"XS"`       | Petite taille                 |
+| `"S"`        | Taille petite                 |
+| `"M"`        | Taille moyenne                |
+| `"Theme"`    | Thème de couleur             |
+| `"Data first"` | Affichage prioritaire des données |
+| `"Feedback"`  | Indicateur de retour         |
 
 ```html
-<lu-highlight-data [size]="'S'">...</lu-highlight-data>
+<lu-highlight-data size="S" theme="Dark" dataFirst="false" feedback="Critical">Texte important</lu-highlight-data>
 ```
 
 ## Inputs
 
-### `heading`
-Type: `string` — Default: `undefined`
-
-Le titre principal de la mise en avant.
-
-```html
-<lu-highlight-data [heading]="'Mon Titre'">...</lu-highlight-data>
-```
-
-### `value`
-Type: `string` — Default: `undefined`
-
-La valeur principale à mettre en avant.
-
-```html
-<lu-highlight-data [value]="'1000'">...</lu-highlight-data>
-```
-
-### `subText`
-Type: `string` — Default: `undefined`
-
-Texte additionnel pour accompagner la valeur.
-
-```html
-<lu-highlight-data [subText]="'Informations supplémentaires'">...</lu-highlight-data>
-```
-
-### `bubble`
-Type: `1 | 2 | 3 | 4 | null` — Default: `null`
-
-Indique une bulle d'information associée à la mise en avant.
-
-### `illustration`
-Type: `'calculator' | 'calendar' | 'cleemy-card' | 'coffee' | 'headphone' | 'mail' | 'manifying-glass' | 'medallon' | 'piggy-bank' | 'polaroid-female' | 'polaroid-male' | 'polaroids' | null` — Default: `null`
-
-Permet d'afficher une illustration pertinente.
-
-### `valueFirst`
-Type: `boolean` — Default: `false`
-
-Indique si la valeur doit être affichée avant le titre.
-
 ### `size`
-Type: `null | 'S' | 'XS'` — Default: `null`
+Type: `'XS' | 'S' | 'M'` — Default: `'M'`
 
-Définit la taille de la mise en avant.
+Définit la taille du composant.
+
+```html
+<lu-highlight-data [size]="'S'">Texte important</lu-highlight-data>
+```
 
 ### `theme`
-Type: `null | 'light' | 'dark'` — Default: `null`
+Type: `'Light' | 'Dark' | 'White'` — Default: `'Light'`
 
-Choix du thème d'affichage.
+Sélectionne le thème de couleur du composant.
+
+```html
+<lu-highlight-data [theme]="'Dark'">Texte important</lu-highlight-data>
+```
+
+### `dataFirst`
+Type: `boolean` — Default: `false`
+
+Indique si les données doivent être affichées en priorité.
+
+```html
+<lu-highlight-data [dataFirst]="true">Texte important</lu-highlight-data>
+```
+
+### `feedback`
+Type: `'None' | 'Critical' | 'Success' | 'Warning'` — Default: `'None'`
+
+Indique le retour d'état du composant.
+
+```html
+<lu-highlight-data [feedback]="'Critical'">Texte important</lu-highlight-data>
+```
 
 ## Patterns courants
 
-### Mise en avant de statistiques
+### Affichage d'une donnée critique
 ```html
-<lu-highlight-data 
-  [heading]="'Visiteurs'"
-  [value]="'150'"
-  [subText]="'Visiteurs uniques cette semaine'"
-  [bubble]="2"
-  [theme]="'light'"
-  [size]="'S'">
-</lu-highlight-data>
+<lu-highlight-data size="M" theme="Light" dataFirst="true" feedback="Critical">Attention : Vérifiez les informations!</lu-highlight-data>
 ```
 
 ## Accessibilité
-S'assurer que tous les textes et sous-textes sont visibles afin de garantir une bonne lisibilité, et utiliser des couleurs contrastées selon le thème sélectionné.
+Assurez-vous que le texte mis en évidence soit suffisamment contrasté par rapport à l'arrière-plan pour garantir la lisibilité.
 
 ## Guidelines Prisme
-- Utiliser des termes simples et accessibles.
-- Éviter de surcharger l’utilisateur d’informations. 
-- S’assurer de la cohérence des tailles et thèmes à travers l’application.
+- Évitez d'utiliser le composant pour des informations de peu d'importance.
+- N'utilisez pas plusieurs instances du composant dans des contextes où la clarté est essentielle.

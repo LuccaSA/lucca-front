@@ -1,105 +1,50 @@
 # AssetsFooter
 
 ## Quand utiliser ce composant
-1. Pour afficher un footer avec contenu personnalisé dans les applications Angular.
-2. Lorsque vous avez besoin d'un footer fixe en bas de page qui reste visible lors du défilement.
-3. Pour encapsuler des éléments tels que des boutons ou des liens dans un footer structuré.
+- Lorsque vous avez besoin d'afficher un pied de page pour des listes ou des tableaux dans votre application.
+- Pour présenter des informations de totalisation ou de résumé en bas d'une liste.
+- Lorsqu'une interaction utilisateur est requise, notamment des boutons pour des actions spécifiques (ex: imprimer, exporter).
 
 ## Stories Storybook
 - [Documentation complète](https://lucca-front.lucca.io/storybook/?path=/docs/documentation-listings-index-table-html-css-footer--docs)
 - [Basic](https://lucca-front.lucca.io/storybook/?path=/story/documentation-structure-footer-angular-basic--basic)
 
 ## Composant Figma
-[AssetsFooter Figma](https://www.figma.com/design/PQEOcUF9CYfKNqaejAGLWP?node-id=30336-1613) - Ce composant présente une disposition simple avec des boutons et un contenu personnalisé. Variantes disponibles : AssetsFooter / Total.
+[AssetsFooter dans Figma](https://www.figma.com/design/PQEOcUF9CYfKNqaejAGLWP?node-id=30336-1613) — Composant représentant le pied de page avec des variantes disponibles : AssetsFooter et Total.
 
 ## Import
 
 ```typescript
-import { FooterComponent } from '@lucca-front/ng/footer';
+import { FooterComponent } from '@lucca-front/ng/listes-tableaux';
 ```
 
 ## Usage de base
 
 ```html
 <!-- Usage minimal -->
-<lu-footer>
-    <ng-container footerContent>
-        Content
-    </ng-container>
-    <button type="button" luButton>Button</button>
-    <button type="button" luButton="outlined">Button</button>
-</lu-footer>
+<lu-footer>...</lu-footer>
 ```
 
 ## Directive / Composant : `lu-footer` ou `<lu-footer>`
 
-Composant utilisé pour créer un footer personnalisé, applicable aux éléments de type footer.
-
-### Valeurs
-
-| Valeur | Description |
-|--------|-------------|
-| `""` (vide) | Variante par défaut (AssetsFooter) |
-| `"Total"` | Variante affichant des informations totales dans le footer. |
-
-```html
-<lu-footer variant="Total">...</lu-footer>
-```
+Description courte du sélecteur. Applicable sur les éléments `<lu-footer>` pour définir un pied de page dans les listes ou tableaux.
 
 ## Inputs
 
-### `sticky`
-Type: `boolean` — Default: `false`
-
-Indique si le footer doit rester fixé en bas de la fenêtre.
-
-```html
-<lu-footer [sticky]="true">...</lu-footer>
-```
-
-### `container`
-Type: `boolean` — Default: `false`
-
-Applique un conteneur autour du contenu du footer.
-
-```html
-<lu-footer [container]="true">...</lu-footer>
-```
-
-### `forceNarrow`
-Type: `boolean` — Default: `false`
-
-Force le footer à utiliser un style étroit.
-
-```html
-<lu-footer [forceNarrow]="true">...</lu-footer>
-```
-
-### `narrowAtMediaMax`
-Type: `'XXS' | 'XS' | 'S' | 'M'` — Default: `'XXS'`
-
-Définit le point d'arrêt pour l'état étroit du footer.
-
-```html
-<lu-footer narrowAtMediaMax="S">...</lu-footer>
-```
+Aucun input défini pour ce composant.
 
 ## Patterns courants
 
-### Footer avec contenu flex
+### Pied de page avec total
 ```html
-<lu-footer>
-    <ng-container footerContent>
-        Contenu du Footer
-    </ng-container>
-    <button type="button" luButton>Action</button>
-</lu-footer>
+<!-- Utilisation du footer pour un pied de page de tableau avec total -->
+<lu-footer>...</lu-footer>
 ```
 
 ## Accessibilité
-Assurez-vous que le contenu du footer est bien structuré et utilise des balises sémantiques pour optimiser l'accessibilité.
+Assurez-vous que le contenu du pied de page est descriptif et accessible via des technologies d'assistance. Utilisez des éléments HTML appropriés pour garantir une navigation fluide.
 
 ## Guidelines Prisme
-- Favorisez un texte clair et concis dans le footer.
-- Évitez de surcharger le footer avec trop de contenu interactif.
-- Respectez les contrastes de couleurs pour assurer une bonne lisibilité.
+- Utilisez le composant `lu-footer` pour afficher des informations essentielles à l'utilisateur.
+- Évitez d'encombrer le pied de page avec trop d'informations.
+- Assurez-vous que les actions ou boutons sont clairement étiquetés pour une meilleure compréhension.

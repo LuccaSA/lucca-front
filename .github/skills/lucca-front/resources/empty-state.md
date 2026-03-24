@@ -1,9 +1,9 @@
-# EmptyStateSection
+# pr-EmptyStateSection
 
 ## Quand utiliser ce composant
-- Lorsque vous avez besoin d'afficher un état vide avec un message d'information.
-- Pour ajouter un appel à l'action lorsque le contenu est indisponible.
-- Pour illustrer une section sans données, tout en restant visuellement cohérent.
+- Lorsque vous souhaitez afficher un état vide dans une section d'une page.
+- Pour fournir un message d'information ou d'instruction lorsque le contenu est absent.
+- Pour améliorer l'expérience utilisateur en rendant les états vides plus compréhensibles et agréables visuellement.
 
 ## Stories Storybook
 - [Documentation complète](https://lucca-front.lucca.io/storybook/?path=/docs/documentation-feedback-empty-state-angular-page--docs)
@@ -11,104 +11,61 @@
 - [Section](https://lucca-front.lucca.io/storybook/?path=/story/documentation-feedback-empty-state-angular-section--section)
 
 ## Composant Figma
-[Accéder au fichier Figma](https://www.figma.com/design/PQEOcUF9CYfKNqaejAGLWP?node-id=21818-76686) - Composant visuellement conçu pour afficher des états vides avec possibilité d'alignement du texte à gauche ou centré.
+[Visualisation du composant Figma](https://www.figma.com/design/PQEOcUF9CYfKNqaejAGLWP?node-id=21818-76686) — Le composant pr-EmptyStateSection permet deux variantes d'alignement du texte : Center et Left.
 
 ## Import
 
 ```typescript
-import { EmptyStateSectionComponent } from '@lucca-front/ng/empty-state';
+import { EmptyStateSectionComponent } from '@lucca-front/ng/feedback';
 ```
 
 ## Usage de base
 
 ```html
-<lu-empty-state-section ...>...</lu-empty-state-section>
+<lu-empty-state-section>...</lu-empty-state-section>
 ```
 
-## Directive / Composant : `luEmptyStateSection` ou `<lu-empty-state-section>`
+## Directive / Composant : `lu-empty-state-section`
 
-Permet d'afficher une section d'état vide. Applicable sur des éléments pour présenter des données vides ou des messages descriptifs.
+Composant utilisé pour afficher un état vide dans une section. 
 
-### Valeurs (si directive avec valeurs)
+### Valeurs
 
-| Valeur   | Description                     |
-|----------|---------------------------------|
-| `""`     | Variante par défaut             |
-| `center` | Aligne le texte au centre       |
+| Valeur | Description                  |
+|--------|------------------------------|
+| `""` (vide) | Variante par défaut (Alignement Center) |
+| `"left"`    | Aligne le contenu à gauche      |
 
 ```html
-<lu-empty-state-section center>...</lu-empty-state-section>
+<lu-empty-state-section alignment="left">...</lu-empty-state-section>
 ```
 
 ## Inputs
 
-### `heading`
-Type: `string` — Default: `''`
+### `alignment`
+Type: `'center' | 'left'` — Default: `'center'`
 
-Titre principal de la section.
-
-```html
-<lu-empty-state-section [heading]="'Titre'">...</lu-empty-state-section>
-```
-
-### `description`
-Type: `string` — Default: `''`
-
-Description de l'état vide.
+Définit l'alignement du texte à l'intérieur de la section.
 
 ```html
-<lu-empty-state-section [description]="'Aucune donnée disponible.'">...</lu-empty-state-section>
-```
-
-### `illustration`
-Type: `string` — Default: `''`
-
-Illustration à afficher dans la section vide.
-
-```html
-<lu-empty-state-section illustration="absence">...</lu-empty-state-section>
-```
-
-### `action`
-Type: `boolean` — Default: `false`
-
-Indique si un bouton d'action doit être affiché.
-
-```html
-<lu-empty-state-section [action]="true">...</lu-empty-state-section>
-```
-
-### `center`
-Type: `boolean` — Default: `false`
-
-Indique si le contenu doit être centré.
-
-```html
-<lu-empty-state-section [center]="true">...</lu-empty-state-section>
-```
-
-### `palette`
-Type: `'none' | 'primary' | 'secondary' | 'product'` — Default: `'none'`
-
-Palette de couleur à appliquer sur le bouton.
-
-```html
-<lu-empty-state-section [palette]="'primary'">...</lu-empty-state-section>
+<lu-empty-state-section [alignment]="'left'">...</lu-empty-state-section>
 ```
 
 ## Patterns courants
 
-### Section avec action
+### État vide avec message centré
 ```html
-<lu-empty-state-section heading="Pas de données" description="Veuillez ajouter des données." action center>
-    <button luButton type="button" palette="product">Ajouter des données</button>
-</lu-empty-state-section>
+<lu-empty-state-section>Veuillez ajouter du contenu ici.</lu-empty-state-section>
+```
+
+### État vide avec message aligné à gauche
+```html
+<lu-empty-state-section alignment="left">Aucun élément disponible.</lu-empty-state-section>
 ```
 
 ## Accessibilité
-Assurez-vous que le contenu est descriptif et que les boutons d'action sont accessibles via le clavier.
+Assurez-vous que le contenu de l'état vide est informatif et facilement compréhensible pour les utilisateurs, en évitant un langage trop technique.
 
 ## Guidelines Prisme
-- Toujours fournir un message clair pour les états vides.
-- Utiliser des illustrations pertinentes lorsque cela est nécessaire.
-- Éviter de surcharger l'utilisateur avec trop d'options dans les états vides.
+- Évitez d'utiliser des états vides sans fournir d'indications claires sur les actions à entreprendre.
+- Ne pas surcharger l'état vide avec trop d'éléments textuels ou graphiques qui pourraient distraire l'utilisateur.

@@ -1,9 +1,9 @@
-# ButtonGroup
+# pr-ButtonGroup
 
 ## Quand utiliser ce composant
-- Lorsque vous souhaitez regrouper plusieurs boutons pour une action commune.
-- Pour limiter l'utilisation de l'espace tout en offrant plusieurs options d'interaction à l'utilisateur.
-- Lorsque les boutons ont besoin d'un style cohérent et harmonisé dans une interface utilisateur.
+- Lorsque vous souhaitez grouper plusieurs boutons pour une action cohérente.
+- Pour présenter des options alternatives que l'utilisateur peut choisir.
+- Dans un contexte où l'espace est limité et où les boutons doivent être clairs et accessibles.
 
 ## Stories Storybook
 - [Documentation complète](https://lucca-front.lucca.io/storybook/?path=/docs/documentation-actions-button-angular-ai--docs)
@@ -16,91 +16,82 @@
 - [Basic TEST](https://lucca-front.lucca.io/storybook/?path=/story/documentation-actions-button-angular-icon--basic-test)
 
 ## Composant Figma
-[ButtonGroup sur Figma](https://www.figma.com/design/PQEOcUF9CYfKNqaejAGLWP?node-id=32845-165564) — Le composant ButtonGroup est conçu pour afficher une série de boutons. Variantes disponibles incluent différentes combinaisons de types (Filled, Outlined) et palettes (Product, Neutral).
+[Consulter le design Figma](https://www.figma.com/design/PQEOcUF9CYfKNqaejAGLWP?node-id=32845-165564) - Le pr-ButtonGroup dispose de plusieurs variantes : remplies et contourées, avec des palettes de couleurs variées (Product et Neutral), permettant des options flexibles pour les interfaces.
 
 ## Import
 
 ```typescript
-import { ButtonComponent } from '@lucca-front/ng/button';
+import { ButtonGroupComponent } from '@lucca-front/ng/button';
+// ou
+import { ButtonGroupDirective } from '@lucca-front/ng/button';
 ```
 
 ## Usage de base
 
 ```html
 <!-- Usage minimal -->
-<button type="button" luButton="outlined">Bouton</button>
+<lu-button-group>...</lu-button-group>
 ```
 
-## Directive / Composant : `luButton` ou `<lu-button>`
+## Directive / Composant : `lu-button-group` ou `<lu-button-group>`
 
-Directive qui permet de modifier le style et le comportement des boutons. Applicable sur les éléments `<button>`.
+Sélecteur Angular utilisé pour regrouper des boutons. Applicable sur des éléments HTML comme `<div>` ou `<ng-container>`.
 
-### Valeurs
+### Valeurs (si directive avec valeurs)
 
-| Valeur            | Description                                                                |
-|-------------------|----------------------------------------------------------------------------|
-| `""` (vide)       | Variante par défaut.                                                       |
-| `"outlined"`      | Bouton avec un contour.                                                   |
-| `"ghost"`         | Bouton sans fond, avec une bordure.                                      |
-| `"AI"`            | Style spécifique pour actions liées à l'IA.                               |
-| `"AI-invert"`     | Variante inversée du style AI, pour un contraste plus fort.               |
-| `"ghost-invert"`  | Variante inversée du style ghost, pour un contraste accru.                |
+| Valeur | Description |
+|--------|-------------|
+| `""` (vide) | Variante par défaut |
+| `"outlined"` | Boutons avec contour |
 
 ```html
-<button type="button" luButton="outlined">Bouton</button>
+<lu-button-group variant="outlined">...</lu-button-group>
 ```
 
 ## Inputs
 
-### `luButton`
-Type: `'' | 'outlined' | 'ghost' | 'AI' | 'AI-invert' | 'ghost-invert'` — Default: `''`
+### `type`
+Type: `'filled' | 'outlined'` — Default: `'filled'`
 
-Modifie la hiérarchie ou le style du bouton.
-
-```html
-<button type="button" luButton="AI">Bouton AI</button>
-```
-
-### `block`
-Type: `boolean` — Default: `false`
-
-Applique `display: block` au bouton.
+Détermine le style visuel des boutons à l'intérieur du groupe.
 
 ```html
-<button type="button" luButton="outlined" [block]="true">Bouton Bloc</button>
+<lu-button-group [type]="'outlined'">...</lu-button-group>
 ```
 
 ### `palette`
-Type: `'' | 'product' | 'neutral' | 'success' | 'warning' | 'critical'` — Default: `''`
+Type: `'product' | 'neutral'` — Default: `'product'`
 
-Applique une palette de couleurs au bouton. Non applicable si `luButton` est 'AI'.
+Choisissez la palette de couleur parmi les options disponibles.
 
 ```html
-<button type="button" luButton="outlined" palette="product">Bouton Produit</button>
+<lu-button-group [palette]="'neutral'">...</lu-button-group>
 ```
 
-### `state`
-Type: `string` 
+### `number`
+Type: `number` — Default: `2`
 
-Modifie l'état du bouton.
+Indique le nombre de boutons à afficher dans le groupe.
 
 ```html
-<button type="button" luButton="outlined" state="hover">Bouton survolé</button>
+<lu-button-group [number]="4">...</lu-button-group>
 ```
 
 ## Patterns courants
 
-### Bouton d'action
+### Groupement de boutons
 ```html
-<!-- Exemple d'utilisation d'un bouton d'action regroupé -->
-<button type="button" luButton="outlined">Titre</button>
-<button type="button" luButton="ghost">Annuler</button>
-<button type="button" luButton="outlined" palette="success">Confirmer</button>
+<!-- Regroupe plusieurs boutons d'action -->
+<lu-button-group>
+  <lu-button type="button">Action 1</lu-button>
+  <lu-button type="button">Action 2</lu-button>
+</lu-button-group>
 ```
 
 ## Accessibilité
-Assurez-vous que chaque bouton a un libellé approprié pour que les technologies d'assistance puissent identifier leur fonction.
+Assurez-vous que chaque bouton dans le groupe a un label accessible pour les lecteurs d'écran.
 
 ## Guidelines Prisme
-1. Utilisez des variantes appropriées pour la hiérarchie et le contraste.
-2. Évitez d'utiliser trop de styles différents dans le même groupe de boutons pour maintenir la cohérence.
+- Utiliser des noms de boutons clairs et descriptifs.
+- Éviter de surcharger le groupe avec trop de boutons pour maintenir la lisibilité.
+- Ne pas mélanger différents types ou palettes dans un même groupe.

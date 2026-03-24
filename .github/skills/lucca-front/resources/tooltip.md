@@ -1,64 +1,66 @@
-# pr-Tooltip
+# Tooltip
 
 ## Quand utiliser ce composant
-- Pour fournir des informations additionnelles au survol d'un élément interactif.
-- Pour expliquer des actions ou des fonctionnalités dans une interface utilisateur.
-- Pour donner des conseils ou des recommandations sans encombrer l'interface.
+- Pour fournir des informations supplémentaires au survol d’un bouton ou d’un lien.
+- Pour aider l'utilisateur à comprendre une fonctionnalité sans l'encombrer visuellement.
+- Pour montrer des conseils ou des messages d'erreur de manière contextuelle.
 
 ## Stories Storybook
 [Documentation complète](https://lucca-front.lucca.io/storybook/?path=/docs/documentation-overlays-tooltip-html-css--docs)
 
 ## Composant Figma
-[Visuel du pr-Tooltip dans Figma](https://www.figma.com/design/PQEOcUF9CYfKNqaejAGLWP?node-id=5639-31388) - Le pr-Tooltip présente une aide contextuelle avec une flèche indiquant l'élément, disponible en variante par défaut.
+[Voir sur Figma](https://www.figma.com/design/PQEOcUF9CYfKNqaejAGLWP?node-id=5639-31388) - Le composant pr-Tooltip fournit une aide contextuelle visuelle avec une variante disponible.
 
 ## Import
 
 ```typescript
-import { PrTooltipComponent } from '@lucca-front/ng/overlays';
+import { TooltipComponent } from '@lucca-front/ng/tooltip';
 ```
 
 ## Usage de base
 
 ```html
 <!-- Usage minimal -->
-<span prTooltip="Texte d'aide">Survolez-moi</span>
+<button luTooltip="Texte d'aide contextuelle" type="button">Survoler moi</button>
 ```
 
-## Directive / Composant : `prTooltip` ou `<pr-tooltip>`
+## Directive / Composant : `luTooltip` ou `<lu-tooltip>`
 
-Directive utilisée pour afficher une aide contextuelle lors du survol d'un élément HTML standard. Applicable à tout élément pouvant être survolé.
+Affiche un tooltip d’aide contextuelle au survol d’un élément HTML.
 
 ### Valeurs
 
 | Valeur | Description |
 |--------|-------------|
-| `""` (vide) | Affiche le contenu par défaut. |
+| `""` (vide) | Variante par défaut |
 
 ```html
-<span prTooltip="Texte d'aide">Survolez-moi</span>
+<button luTooltip="Texte d'aide contextuelle" type="button">Survoler moi</button>
 ```
 
 ## Inputs
 
 ### `content`
-Type: `string` — Default: `''`
+Type: `string` — Default: `undefined`
 
 Le texte à afficher dans le tooltip.
 
 ```html
-<span prTooltip [content]="'Texte d\'aide'">Survolez-moi</span>
+<button luTooltip [content]="'Texte d\'aide contextuelle'" type="button">Survoler moi</button>
 ```
 
 ## Patterns courants
 
 ### Tooltip sur un bouton
 ```html
-<!-- Afficher un tooltip sur un bouton -->
-<button prTooltip="Cliquez ici pour sauvegarder" type="button">Sauvegarder</button>
+<!-- Affiche un tooltip lorsque l'on survole le bouton -->
+<button luTooltip="Texte d'aide contextuelle" type="button">Survoler moi</button>
 ```
 
 ## Accessibilité
-Assurez-vous que le tooltip est associé à un élément de manière à ne pas interférer avec les utilisateurs de lecteurs d'écran. Utilisez des attributs ARIA si nécessaire pour décrire le contenu du tooltip.
+Veillez à ce que les tooltips soient accessibles via le clavier et que leur contenu soit disponible pour les lecteurs d'écran.
 
 ## Guidelines Prisme
-Évitez d'afficher trop d'informations dans le tooltip afin de maintenir une interface propre. Ne pas utiliser de tooltips pour des informations critiques ou vitales, privilégiez les messages en ligne.
+- Toujours utiliser les tooltips pour fournir des informations complémentaires sans surcharger l'interface.
+- Évitez d'utiliser des tooltips pour afficher des informations critiques, car ils ne sont pas toujours visibles.
+- Assurez-vous que le contenu du tooltip est concis et pertinent pour l'élément qu'il accompagne.

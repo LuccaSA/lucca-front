@@ -1,152 +1,109 @@
 # pr-Textarea
 
 ## Quand utiliser ce composant
-1. Utiliser ce composant pour permettre à l'utilisateur de saisir des commentaires longs dans un formulaire.
-2. Lorsque vous avez besoin d'un champ de saisie flexible qui peut s'ajuster automatiquement à la quantité de texte saisie.
-3. Pour des formulaires nécessitant une validation visuelle avec un état de succès, d'avertissement ou d'erreur.
+- Pour créer des champs de texte multi-lignes dans des formulaires.
+- Pour recueillir des commentaires ou des descriptions longs d'utilisateurs.
+- Lorsque vous avez besoin d'un contrôle de saisie de texte avec des fonctionnalités de feedback utilisateur.
 
 ## Stories Storybook
 - [Documentation complète](https://lucca-front.lucca.io/storybook/?path=/docs/documentation-forms-fields-textareafield-angular--docs)
 - [Basic](https://lucca-front.lucca.io/storybook/?path=/story/documentation-forms-fields-textareafield-angular--basic)
 
 ## Composant Figma
-[https://www.figma.com/design/PQEOcUF9CYfKNqaejAGLWP?node-id=8718-45752](https://www.figma.com/design/PQEOcUF9CYfKNqaejAGLWP?node-id=8718-45752) - Zone de texte avec plusieurs variantes de taille et état, permettant des contenus variés comme le feedback utilisateur.
+[Vue du composant sur Figma](https://www.figma.com/design/PQEOcUF9CYfKNqaejAGLWP?node-id=8718-45752) - Composant pr-Textarea avec différentes variantes selon la taille, l'état, le contenu et le feedback.
 
 ## Import
 
 ```typescript
+import { FormFieldComponent } from '@lucca-front/ng/forms';
 import { TextareaInputComponent } from '@lucca-front/ng/forms';
-import { FormFieldComponent } from '@lucca-front/ng/form-field';
 ```
 
 ## Usage de base
 
 ```html
-<!-- Usage minimal -->
-<lu-textarea label="Votre commentaire" placeholder="Saisissez ici..."></lu-textarea>
+<lu-form-field>
+  <lu-textarea-input></lu-textarea-input>
+</lu-form-field>
 ```
 
-## Directive / Composant : `luTextarea` ou `<lu-textarea>`
+## Directive / Composant : `lu-textarea-input` ou `<lu-textarea-input>`
 
-Utilisé pour créer une zone de texte flexible pour la saisie d'informations.
+Composant de saisie de texte multi-lignes. Applicable sur les éléments HTML pour la gestion de texte.
 
 ### Valeurs
 
-| Valeur | Description |
-|--------|-------------|
-| `""` (vide) | Variante par défaut |
-| `"M"` | Taille moyenne |
-| `"S"` | Taille petite |
-| `"XS"` | Taille très petite (dépréciée) |
+| Valeur                           | Description                       |
+|----------------------------------|-----------------------------------|
+| `""` (vide)                      | Variante par défaut              |
+| `"XS"`                           | Variante petite (depréciée)      |
+| `"Default"`                      | État par défaut                   |
+| `"Hover"`                        | État au survol                   |
+| `"Focus"`                        | État au focus                     |
+| `"Disabled"`                     | État désactivé/lecture seule     |
 
 ```html
-<lu-textarea size="M">...</lu-textarea>
+<lu-textarea-input size="Default" state="Hover" content="Votre texte ici"></lu-textarea-input>
 ```
 
 ## Inputs
 
-### `label`
-Type: `string` — Default: `''`
-
-Texte affiché comme étiquette pour le champ.
-
-```html
-<lu-textarea [label]="'Votre message'"></lu-textarea>
-```
-
-### `required`
-Type: `boolean` — Default: `false`
-
-Indique si le champ est obligatoire.
-
-```html
-<lu-textarea [required]="true"></lu-textarea>
-```
-
-### `tooltip`
-Type: `string` — Default: `''`
-
-Affiche une info-bulle liée au champ.
-
-```html
-<lu-textarea [tooltip]="'Informations supplémentaires'"></lu-textarea>
-```
-
-### `disabled`
-Type: `boolean` — Default: `false`
-
-Désactive le champ.
-
-```html
-<lu-textarea [disabled]="true"></lu-textarea>
-```
-
-### `placeholder`
-Type: `string` — Default: `''`
-
-Texte à afficher lorsque le champ est vide.
-
-```html
-<lu-textarea [placeholder]="'Entrez votre texte ici...'"></lu-textarea>
-```
-
 ### `size`
-Type: `'M' | 'S' | 'XS'` — Default: `'M'`
+Type: `'XS' | 'S' | 'M'` — Default: `'S'`
 
-Modifie la taille du champ.
-
-```html
-<lu-textarea [size]="'S'"></lu-textarea>
-```
-
-### `inlineMessage`
-Type: `string` — Default: `''`
-
-Texte descriptif affiché sous le champ.
+Définit la taille du champ de texte.
 
 ```html
-<lu-textarea [inlineMessage]="'Message d'erreur'"></lu-textarea>
+<lu-textarea-input [size]="'M'"></lu-textarea-input>
 ```
 
-### `inlineMessageState`
-Type: `'default' | 'success' | 'warning' | 'error'` — Default: `'default'`
+### `state`
+Type: `'Default' | 'Hover' | 'Focus' | 'Disabled'` — Default: `'Default'`
 
-État du message d'indication.
+Définit l'état du champ de texte.
 
 ```html
-<lu-textarea [inlineMessageState]="'error'"></lu-textarea>
+<lu-textarea-input [state]="'Focus'"></lu-textarea-input>
 ```
 
-### `rows`
-Type: `number` — Default: `3`
+### `content`
+Type: `'Filled' | 'Empty' | '💀 Placeholder'` — Default: `'Filled'`
 
-Nombre de lignes visibles par défaut.
+Pour définir le contenu initial du champ de texte.
 
 ```html
-<lu-textarea [rows]="5"></lu-textarea>
+<lu-textarea-input [content]="'💀 Placeholder'"></lu-textarea-input>
 ```
 
-### `autoResize`
+### `feedback`
+Type: `'None' | 'Critical' | 'Warning' | 'Success'` — Default: `'None'`
+
+Définit le retour d'information utilisateur sur le champ de texte.
+
+```html
+<lu-textarea-input [feedback]="'Success'"></lu-textarea-input>
+```
+
+### `presentation`
 Type: `boolean` — Default: `false`
 
-Active l'ajustement automatique de la taille du champ.
+Indique si le champ doit être présenté d'une certaine manière.
 
 ```html
-<lu-textarea [autoResize]="true"></lu-textarea>
+<lu-textarea-input [presentation]="true"></lu-textarea-input>
 ```
 
 ## Patterns courants
 
-### Exemple de champ de texte
+### Champ de texte avec placeholder
 ```html
-<!-- Exemple d'un champ de zone de texte avec label, placeholder et message d'aide -->
-<lu-textarea label="Description" placeholder="Décrivez votre idée" [inlineMessage]="'Champ obligatoire'" [required]="true"></lu-textarea>
+<lu-form-field>
+  <lu-textarea-input size="S" state="Default" content="💀 Placeholder" feedback="Warning"></lu-textarea-input>
+</lu-form-field>
 ```
 
 ## Accessibilité
-Assurez-vous que toutes les étiquettes sont associées aux champs afin de garantir une bonne compréhension pour les utilisateurs d'assistants vocaux.
+Utilisez les attributs ARIA appropriés pour améliorer l'accessibilité, comme `aria-label` pour étiqueter les champs de saisie.
 
 ## Guidelines Prisme
-- Utiliser des labels clairs et descriptifs.
-- Éviter de désactiver les champs sans raison valable, surtout pour les formulaires.
-- Toujours fournir des messages d'état pour la validation des données.
+Suivez les principes de design selon Lucca pour garantir une cohérence visuelle et une bonne expérience utilisateur.

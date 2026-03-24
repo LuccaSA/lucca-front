@@ -1,77 +1,55 @@
 # pr-TextFlow
 
 ## Quand utiliser ce composant
-- Lorsque vous souhaitez afficher un contenu textuel structuré avec des titres et des paragraphes.
-- Pour créer une hiérarchie visuelle dans vos documents textuels, facilitant la lecture et la compréhension.
-- Lors de la présentation de listes (à puces ou ordonnées) dans un format stylisé.
+- Pour créer des présentations de contenu textuel hiérarchique, comme des articles avec titres et paragraphes.
+- Lorsqu'il est nécessaire d'appliquer des styles typographiques cohérents dans un document ou une interface.
+- Pour organiser des listes avec des éléments de texte dans une interface utilisateur tout en respectant les bonnes pratiques d'accessibilité.
 
 ## Stories Storybook
 - [Documentation complète](https://lucca-front.lucca.io/storybook/?path=/docs/documentation-texts-text-flow-angular-basic--docs)
 - [Basic](https://lucca-front.lucca.io/storybook/?path=/story/documentation-texts-text-flow-angular-basic--basic)
 
 ## Composant Figma
-[Link Figma](https://www.figma.com/design/PQEOcUF9CYfKNqaejAGLWP?node-id=30462-137476) - Composant pr-TextFlow (v19.2) permettant de styliser différents éléments textuels. Variantes disponibles : pr-TextFlow (v19.2).
+[https://www.figma.com/design/PQEOcUF9CYfKNqaejAGLWP?node-id=30462-137476](https://www.figma.com/design/PQEOcUF9CYfKNqaejAGLWP?node-id=30462-137476) - Le pr-TextFlow est illustré avec différentes variantes typographiques pour le contenu texte.
 
 ## Import
 
 ```typescript
-import { TextFlowComponent } from '@lucca-front/ng/text-flow';
+import { TextFlowComponent } from '@lucca-front/ng/texts';
 ```
 
 ## Usage de base
 
 ```html
 <!-- Usage minimal -->
-<lu-text-flow>
-	<h1>Heading 1</h1>
-	<h2>Heading 2</h2>
-	<p>Paragraph</p>
-	<p>Paragraph</p>
-	<h2>Heading 2</h2>
-	<p>Paragraph</p>
-	<ul>
-		<li>List item</li>
-		<li>List item</li>
-		<li>List item</li>
-	</ul>
-	<h3>Heading 3</h3>
-	<p>Paragraph</p>
-	<h4>Heading 4</h4>
-	<ol>
-		<li>List item</li>
-		<li>List item</li>
-		<li>List item</li>
-	</ol>
-</lu-text-flow>
+<lu-text-flow>... contenu textuel ...</lu-text-flow>
 ```
 
-## Directive / Composant : `lu-text-flow` ou `<lu-text-flow>`
+## Directive / Composant : `lu-text-flow`
 
-Composant utilisé pour encapsuler du contenu textuel structuré. Applicable sur des éléments HTML qui contiennent du texte et des éléments enfants comme `<h1>`, `<h2>`, `<p>`, `<ul>`, et `<ol>`.
+Composant permettant de structurer et styliser un contenu textuel. Applicable sur des éléments de contenu textuel.
 
 ## Inputs
 
-Aucun input ou valeur spécifique n'est défini pour ce composant.
+Aucun input spécifique n'est mentionné dans la documentation.
 
 ## Patterns courants
 
-### Exemple de contenu textuel
+### Exemple de structure de contenu
 ```html
+<!-- Exemples d'utilisation des éléments typographiques avec le composant -->
 <lu-text-flow>
-	<h1>Mon Titre Principal</h1>
-	<p>Ceci est un exemple d'utilisation du composant pr-TextFlow pour afficher un contenu textuel avec une structure hiérarchique.</p>
-	<ul>
-		<li>Élément de la liste</li>
-		<li>Élément de la liste</li>
-		<li>Élément de la liste</li>
-	</ul>
+  <h1>Titre principal</h1>
+  <p>Un paragraphe descriptif ici.</p>
+  <ul>
+    <li>Élément de liste 1</li>
+    <li>Élément de liste 2</li>
+  </ul>
 </lu-text-flow>
 ```
 
 ## Accessibilité
-Assurez-vous que les titres sont utilisés de manière hiérarchique (de `<h1>` à `<h6>`) pour maintenir la structure et l'accessibilité des contenus textuels.
+Le composant pr-TextFlow respecte les bonnes pratiques d'accessibilité en garantissant une hiérarchie visuelle claire des éléments textuels. Assurez-vous que les titres et paragraphes sont correctement étiquetés.
 
 ## Guidelines Prisme
-- Utiliser des titres pour segmenter le contenu.
-- Éviter de surcharger le composant avec trop de texte.
-- Maintenir une hiérarchie visuelle claire tout au long du texte.
+- Suivre les directives de typographie et d'agencement fournies dans le styleguide de Prisme pour garantir la cohérence visuelle.

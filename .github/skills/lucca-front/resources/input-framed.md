@@ -1,130 +1,108 @@
-# pr-InputFramed
+# pr-InputFramed (v20.1)
 
 ## Quand utiliser ce composant
-- Lorsque vous avez besoin d'un champ de formulaire personnalisé avec un cadre pour améliorer l'interaction utilisateur.
-- Pour des formulaires qui nécessitent à la fois des options de sélection (radio/checkbox) et un champ de texte standard.
-- Lors de la création de formulaires nécessitant des sections d'information associées ou des illustrations contextuelles.
+- Lors de la création de formulaires nécessitant des champs avec des options radio ou des cases à cocher.
+- Pour offrir une interface utilisateur claire et accessible lors de la collecte d'informations.
+- Quand il est nécessaire de disposer de différentes tailles et types d'options d'entrée dans un même formulaire.
 
 ## Stories Storybook
 - [Documentation complète](https://lucca-front.lucca.io/storybook/?path=/docs/documentation-forms-input-framed-angular-basic--docs)
 - [Basic](https://lucca-front.lucca.io/storybook/?path=/story/documentation-forms-input-framed-angular-basic--basic)
 
 ## Composant Figma
-[pr-InputFramed Figma](https://www.figma.com/design/PQEOcUF9CYfKNqaejAGLWP?node-id=29856-17751) - Ce composant présente un champ d'entrée avec un cadre, des variantes pour la taille et le type, et différentes dispositions pour l'affichage.
+[pr-InputFramed](https://www.figma.com/design/PQEOcUF9CYfKNqaejAGLWP?node-id=29856-17751) - Composant de champ de formulaire avec plusieurs variantes disponibles, incluant différentes tailles et options pour des éléments radio et cases à cocher.
 
 ## Import
 
 ```typescript
-import { InputFramedComponent } from '@lucca-front/ng/form-field';
+import { InputFramedComponent } from '@lucca-front/ng/forms';
+// ou
+import { FormFieldComponent } from '@lucca-front/ng/forms';
+import { RadioComponent } from '@lucca-front/ng/forms';
+import { CheckboxInputComponent } from '@lucca-front/ng/forms';
+import { RadioGroupInputComponent } from '@lucca-front/ng/forms';
+import { GridColumnComponent } from '@lucca-front/ng/forms';
+import { GridComponent } from '@lucca-front/ng/forms';
 ```
 
 ## Usage de base
 
 ```html
 <!-- Usage minimal -->
-<lu-input-framed></lu-input-framed>
+<lu-form-field>
+    <lu-input-framed placeholder="Votre texte ici"></lu-input-framed>
+</lu-form-field>
 ```
 
-## Directive / Composant : `luInputFramed` ou `<lu-input-framed>`
+## Directive / Composant : `lu-input-framed` ou `<lu-input-framed>`
 
-Composant de champ d'entrée encadré, utilisable comme un champ de texte, radio ou checkbox.
+Champ de formulaire utilisé pour la saisie. Applicable aux formulaires.
 
-### Valeurs (si directive avec valeurs)
+### Valeurs
 
-| Valeur | Description |
-|--------|-------------|
-| `""` (vide) | Variante de taille M par défaut |
-| `"L"` | Variante de taille L |
+| Valeur | Description                      |
+|--------|----------------------------------|
+| `""` (vide)    | Variante par défaut                |
+| `"radio"`      | Champ de type radio                |
+| `"checkbox"`   | Champ de type case à cocher       |
 
 ```html
-<lu-input-framed size="L"></lu-input-framed>
+<lu-input-framed type="radio">...</lu-input-framed>
 ```
 
 ## Inputs
 
 ### `size`
-Type: `'' | 'L'` — Default: `''`
+Type: `'M' | 'L'` — Default: `'M'`
 
-Définit la taille du champ.
+Détermine la taille du champ de saisie.
 
 ```html
-<lu-input-framed [size]="'L'"></lu-input-framed>
+<lu-input-framed [size]="'L'">...</lu-input-framed>
 ```
 
-### `panel`
+### `type`
+Type: `'radio' | 'checkbox'` — Default: `'radio'`
+
+Définit le type d'entrée utilisé.
+
+```html
+<lu-input-framed [type]="'checkbox'">...</lu-input-framed>
+```
+
+### `layout`
+Type: `'stacked' | 'grid'` — Default: `'stacked'`
+
+Configure la disposition des éléments à l'intérieur du formulaire.
+
+```html
+<lu-input-framed [layout]="'grid'">...</lu-input-framed>
+```
+
+### `critical`
 Type: `boolean` — Default: `false`
 
-Ajoute une section visible lorsque le champ est sélectionné.
+Indique si le champ est critique pour la saisie de données.
 
 ```html
-<lu-input-framed [panel]="true"></lu-input-framed>
-```
-
-### `illustration`
-Type: `boolean` — Default: `false`
-
-Slot dédié à l'ajout d'illustrations.
-
-```html
-<lu-input-framed [illustration]="true"></lu-input-framed>
-```
-
-### `info`
-Type: `boolean` — Default: `false`
-
-Ajoute une section informative toujours visible sous le champ.
-
-```html
-<lu-input-framed [info]="true"></lu-input-framed>
-```
-
-### `tag`
-Type: `boolean` — Default: `false`
-
-Ajoute un tag après le label du champ.
-
-```html
-<lu-input-framed [tag]="true"></lu-input-framed>
-```
-
-### `checkbox`
-Type: `boolean` — Default: `false`
-
-Passe le composant au format checkbox.
-
-```html
-<lu-input-framed [checkbox]="true"></lu-input-framed>
-```
-
-### `center`
-Type: `boolean` — Default: `false`
-
-Aligne le champ et son illustration verticalement lorsque le label est trop court.
-
-```html
-<lu-input-framed [center]="true"></lu-input-framed>
-```
-
-### `inlineMessage`
-Type: `string` — Default: `''`
-
-Ajoute un texte descriptif (aide, erreur, etc.) sous le champ de formulaire.
-
-```html
-<lu-input-framed [inlineMessage]="'Ceci est une aide.'"></lu-input-framed>
+<lu-input-framed [critical]="true">...</lu-input-framed>
 ```
 
 ## Patterns courants
 
-### Input avec illustration
+### Champ radio groupé
 ```html
-<lu-input-framed [illustration]="true" [panel]="true">...</lu-input-framed>
+<!-- Utilisation de plusieurs options radio -->
+<lu-form-field>
+    <lu-input-framed type="radio" layout="stacked" size="M"></lu-input-framed>
+    <lu-input-framed type="radio" layout="stacked" size="M"></lu-input-framed>
+</lu-form-field>
 ```
 
 ## Accessibilité
-Assurez-vous que tous les champs sont correctement étiquetés et que les descriptions inline sont utiles pour les utilisateurs d'assistants vocaux.
+Assurez-vous que chaque champ de formulaire soit étiqueté correctement pour les technologies d'assistance. Les contrôles devraient être pratiques et avoir des indications claires sur leurs états.
 
 ## Guidelines Prisme
-- Utiliser des tailles cohérentes pour assurer une bonne lisibilité.
-- Ne pas abuser des illustrations pour rester simple et efficace.
-- Les messages inline doivent être clairs et concis pour éviter toute confusion.
+- Utiliser des éléments de formulaire accessibles et bien étiquetés.
+- Éviter d'utiliser des champs trop petits, assurant une bonne expérience utilisateur sur les appareils tactiles.
+- S'assurer que les messages d'erreur sont clairs et visibles pour les utilisateurs.

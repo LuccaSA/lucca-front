@@ -1,15 +1,15 @@
 # pr-Icon
 
 ## Quand utiliser ce composant
-- Pour afficher des icônes dans un menu ou une barre de navigation.
-- Lors de la création de boutons d'action avec des icônes pour enrichir l'interface utilisateur.
-- Pour ajouter des éléments graphiques succincts dans des tableaux ou des listes.
+- Pour afficher des icônes dans des listes ou tableaux.
+- Lorsqu'un élément graphique est nécessaire pour améliorer l'interface utilisateur.
+- Quand une présentation visuelle cohérente est requise à travers l'application.
 
 ## Stories Storybook
 [Documentation complète](https://lucca-front.lucca.io/storybook/?path=/docs/documentation-listings-listing-html-css-icons--docs)
 
 ## Composant Figma
-[Accéder au composant Figma](https://www.figma.com/design/PQEOcUF9CYfKNqaejAGLWP?node-id=34358-50637) - Composant pr-Icon avec 7 variantes de taille disponibles.
+[Voir le composant Figma](https://www.figma.com/design/PQEOcUF9CYfKNqaejAGLWP?node-id=34358-50637) - Ce composant représente différentes tailles d'icônes adaptées aux contextes variés. Variantes disponibles: Size=S, Size=XS, Size=XXS, Size=XXL, Size=L, Size=XL, Size=M.
 
 ## Import
 
@@ -21,24 +21,24 @@ import { IconComponent } from '@lucca-front/ng/icons';
 
 ```html
 <!-- Usage minimal -->
-<lu-icon></lu-icon>
+<lu-icon size="M"></lu-icon>
 ```
 
-## Directive / Composant : `luIcon` ou `<lu-icon>`
+## Directive / Composant : `lu-icon` ou `<lu-icon>`
 
-Directive utilisée pour afficher une icône. Applicable sur les éléments permettant l'insertion d'images ou d'éléments graphiques.
+Composant utilisé pour afficher une icône. Applicable sur les éléments HTML qui nécessitent une représentation d'icône.
 
-### Valeurs
+### Valeurs (si directive avec valeurs)
 
-| Valeur | Description               |
-|--------|---------------------------|
-| `""` (vide) | Variante par défaut (taille M) |
-| `"S"`      | Taille petite              |
-| `"XS"`     | Taille extra petite        |
-| `"XXS"`    | Taille très petite         |
-| `"XXL"`    | Taille très grande         |
-| `"L"`      | Taille grande              |
-| `"XL"`     | Taille extra grande        |
+| Valeur | Description         |
+|--------|---------------------|
+| `""` (vide) | Variante par défaut |
+| `"XS"`  | Petite icône         |
+| `"S"`   | Icône standard       |
+| `"M"`   | Icône moyenne        |
+| `"L"`   | Grande icône         |
+| `"XL"`  | Très grande icône    |
+| `"XXL"` | Icône extra large    |
 
 ```html
 <lu-icon size="S"></lu-icon>
@@ -47,28 +47,29 @@ Directive utilisée pour afficher une icône. Applicable sur les éléments perm
 ## Inputs
 
 ### `size`
-Type: `'S' | 'XS' | 'XXS' | 'XXL' | 'L' | 'XL' | 'M'` — Default: `'M'`
+Type: `'XS' | 'S' | 'M' | 'L' | 'XL' | 'XXL'` — Default: `'M'`
 
-Définit la taille de l'icône affichée.
+Définit la taille de l'icône pour l'affichage.
 
 ```html
-<lu-icon [size]="value"></lu-icon>
+<lu-icon [size]="'L'"></lu-icon>
 ```
 
 ## Patterns courants
 
-### Utilisation d'une icône dans un bouton
+### Icône dans un bouton
 ```html
-<!-- Ajout d'une icône à un bouton -->
+<!-- Utilisation d'une icône dans un bouton -->
 <button type="button">
-  <lu-icon size="L"></lu-icon>
+  <lu-icon size="S"></lu-icon>
   Action
 </button>
 ```
 
 ## Accessibilité
-S'assurer que les icônes ont une signification visuelle et contextuelle. Ajouter des attributs `aria-label` si nécessaire pour décrire la fonction de l'icône.
+Assurez-vous que chaque icône a un équivalent textuel accessible pour les utilisateurs de lecteurs d'écran.
 
 ## Guidelines Prisme
-- Ne pas utiliser d'icônes trop chargées visuellement, optez pour des designs simples.
-- Ne pas superposer plusieurs icônes, cela peut créer de la confusion pour l'utilisateur.
+- Privilégier l'utilisation d'icônes qui respectent l'identité visuelle de Lucca.
+- Ne pas surcharger l'interface avec trop d'icônes.
+- Utiliser des tailles d'icônes appropriées pour chaque contexte.

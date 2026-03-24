@@ -1,16 +1,16 @@
 # pr-Chip
 
 ## Quand utiliser ce composant
-- Pour afficher des éléments dédiés dans une liste, comme des tags ou des catégories.
-- Lorsque vous avez besoin d'un composant d'étiquette qui peut être supprimé ou non, selon le contexte d'utilisation.
-- Lors de l'affichage de statuts ou de feedbacks visuels au sein d’interfaces utilisateur.
+- Pour afficher des étiquettes ou des badges avec des informations supplémentaires dans des listes ou tableaux.
+- Lorsque vous souhaitez permettre aux utilisateurs de retirer dynamiquement des éléments d'une interface (avec l'option amovible).
+- Pour représenter des éléments d'état avec différentes palettes de couleurs et de tailles pour une meilleure visibilité et hiérarchie visuelle.
 
 ## Stories Storybook
 - [Documentation complète](https://lucca-front.lucca.io/storybook/?path=/docs/documentation-listings-chip-angular-basic--docs)
 - [Basic](https://lucca-front.lucca.io/storybook/?path=/story/documentation-listings-chip-angular-basic--basic)
 
 ## Composant Figma
-[pr-Chip Figma](https://www.figma.com/design/PQEOcUF9CYfKNqaejAGLWP?node-id=8730-71664) - Composant visuel avec différentes variantes de taille, palette de couleurs, états, et possibilité de suppression.
+[pr-Chip sur Figma](https://www.figma.com/design/PQEOcUF9CYfKNqaejAGLWP?node-id=8730-71664) - Un élément visuel polyvalent, décliné en plusieurs tailles et palettes, permettant d'afficher des informations contextuelles. Variantes disponibles pour ajuster le style et le comportement.
 
 ## Import
 
@@ -21,101 +21,83 @@ import { ChipComponent } from '@lucca-front/ng/chip';
 ## Usage de base
 
 ```html
-<lu-chip>Label</lu-chip>
+<!-- Usage minimal -->
+<lu-chip>Étiquette</lu-chip>
 ```
 
-## Directive / Composant : `lu-chip` ou `<lu-chip>`
+## Directive / Composant : `lu-chip` ou `button[luChip], a[luChip]`
 
-Composant d'étiquette qui peut être utilisé pour représenter des éléments en tant que tags. Applicable sur les composants Angular.
+Description courte du sélecteur. Applicable sur des éléments HTML comme `div`, `button` et `a`.
 
 ### Valeurs
 
-| Valeur       | Description                                       |
-|--------------|---------------------------------------------------|
-| `""` (vide)  | Variante par défaut.                              |
-| `"S"`       | Taille petite.                                    |
-| `"M"`       | Taille moyenne.                                   |
-| `"product"`  | Applique la palette produit.                      |
-| `"neutral"`  | Applique la palette neutre.                       |
-| `"active"`   | État actif.                                      |
-| `"disabled"`  | État désactivé.                                  |
-| `"default"`  | État par défaut.                                  |
-| `"hover"`    | État au survol.                                  |
-| `"focus"`    | État de focus.                                   |
-| `"warning"`   | Feedback avertissement.                          |
-| `"critical"`  | Feedback critique.                               |
-| `"none"`      | Pas de feedback.                                 |
+| Valeur | Description |
+|--------|-------------|
+| `""` (vide) | Variante par défaut |
+| `"removable"` | Permet de rendre l'élément amovible |
 
 ```html
-<lu-chip size="S" palette="product" state="active" feedback="warning" unkillable="true">Label</lu-chip>
+<lu-chip removable>Étiquette amovible</lu-chip>
 ```
 
 ## Inputs
 
-### `unkillable`
-Type: `boolean` — Default: `false`
+### `size`
+Type: `'S' | 'M'` — Default: `'S'`
 
-Rend le chip non supprimable.
+Définit la taille du chip.
 
 ```html
-<lu-chip [unkillable]="true">Label</lu-chip>
+<lu-chip [size]="'M'">Étiquette Moyenne</lu-chip>
 ```
 
-### `disabled`
-Type: `boolean` — Default: `false`
+### `palette`
+Type: `'Product' | 'Neutral'` — Default: `'Neutral'`
 
-Désactive le composant.
+Choisit la palette de couleurs pour le chip.
 
 ```html
-<lu-chip [disabled]="true">Label</lu-chip>
+<lu-chip [palette]="'Product'">Étiquette Produit</lu-chip>
 ```
 
-### `product`
-Type: `boolean` — Default: `false`
+### `state`
+Type: `'Active' | 'Disabled' | 'Default' | 'Hover' | 'Focus'` — Default: `'Default'`
 
-Applique la palette produit au composant.
-
-```html
-<lu-chip [product]="true">Label</lu-chip>
-```
-
-### `withEllipsis`
-Type: `boolean` — Default: `false`
-
-Ajoute une ellipse au texte et une tooltip lorsque le label est trop long.
+Définit l'état du chip pour déterminer son style visuel.
 
 ```html
-<lu-chip [withEllipsis]="true">Label avec un texte très long qui dépasse</lu-chip>
-```
-
-### `small`
-Type: `boolean` — Default: `false`
-
-Modifie la taille du composant.
-
-```html
-<lu-chip [small]="true">Label</lu-chip>
+<lu-chip [state]="'Active'">Étiquette Active</lu-chip>
 ```
 
 ### `feedback`
-Type: `'' | 'warning' | 'critical'` — Default: `''`
+Type: `'None' | 'Warning' | 'Critical'` — Default: `'None'`
 
-Donne une information sur l'état du composant.
+Indique le type de feedback associé au chip.
 
 ```html
-<lu-chip feedback="warning">Label d'avertissement</lu-chip>
+<lu-chip [feedback]="'Warning'">Étiquette Avertissement</lu-chip>
+```
+
+### `removable`
+Type: `boolean` — Default: `false`
+
+Indique si le chip peut être retiré.
+
+```html
+<lu-chip [removable]="true">Étiquette Amovible</lu-chip>
 ```
 
 ## Patterns courants
 
-### Exemple d'utilisation d'un chip avec plusieurs options
+### Chip avec suppression
 ```html
-<lu-chip unkillable="false" [disabled]="false" product="true" withEllipsis="false" small="true" feedback="critical">Label</lu-chip>
+<!-- Chip où l'utilisateur peut le retirer -->
+<lu-chip size="M" removable>Étiquette Amovible</lu-chip>
 ```
 
 ## Accessibilité
-S'assurer que le chip est identifiable via un label accessible pour l'utilisateur. Ajouter un attribut `aria-label` si le texte n'est pas suffisamment descriptif.
+Assurez-vous que les chips amovibles sont clairement étiquetés et que les utilisateurs peuvent comprendre comment interagir avec eux, y compris les raccourcis clavier pour les retirer.
 
 ## Guidelines Prisme
-- Ne pas utiliser de styles qui dénaturent l'apparence du composant.
-- Assurer une expérience utilisateur cohérente en respectant l'état et les retours visuels fournis par le chip.
+- Favoriser l'utilisation de la palette de couleurs neutres pour des éléments informatifs.
+- Éviter les chips surchargés de texte, privilégier la clarté et la concision.

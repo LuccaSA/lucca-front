@@ -1,84 +1,86 @@
-# pr-Comment
+# Commentaire
 
 ## Quand utiliser ce composant
-- Pour afficher des commentaires avec un style bien défini dans des applications de discussion ou de feedback.
-- Lorsqu'il est nécessaire de présenter des contenus générés par des utilisateurs ou par un système (comme un assistant IA).
-- Pour structurer des éléments de discussion dans un format conversationnel avec différents types d'utilisateurs.
+- Lorsque vous souhaitez afficher des commentaires dans une interface utilisateur.
+- Pour créer des sections de discussion où les utilisateurs peuvent interagir.
+- Dans les applications de collaboration pour permettre aux utilisateurs de poster des retours sous forme de commentaires.
 
 ## Stories Storybook
 - [Documentation complète](https://lucca-front.lucca.io/storybook/?path=/docs/documentation-texts-comment-angular-ai--docs)
-- [Chat](https://lucca-front.lucca.io/storybook/?path=/story/documentation-texts-comment-angular-ai--chat)
+- [Chat](https://lucca-front.lucca.io/storybook/?path=/story/documentation-texts-comment-angular-chat--chat)
 - [Basic](https://lucca-front.lucca.io/storybook/?path=/story/documentation-texts-comment-angular-basic--basic)
 - [Chat](https://lucca-front.lucca.io/storybook/?path=/story/documentation-texts-comment-angular-chat--chat)
 
 ## Composant Figma
-[pr-Comment sur Figma](https://www.figma.com/design/PQEOcUF9CYfKNqaejAGLWP?node-id=18702-2534) - Composant pour l'affichage de commentaires avec différentes variantes de taille et d'alignement.
+[Vue de pr-Comment sur Figma](https://www.figma.com/design/PQEOcUF9CYfKNqaejAGLWP?node-id=18702-2534) - Ce composant présente des variantes pour l'alignement (gauche/droite) et la taille (S/M).
 
 ## Import
 
 ```typescript
-import { CommentComponent, CommentBlockComponent, CommentChatComponent } from '@lucca-front/ng/comment';
+import { CommentBlockComponent } from '@lucca-front/ng/comment';
+// ou
+import { CommentChatComponent } from '@lucca-front/ng/comment';
+// ou
+import { CommentComponent } from '@lucca-front/ng/comment';
 ```
 
 ## Usage de base
 
 ```html
 <!-- Usage minimal -->
-<lu-comment>Contenu du commentaire</lu-comment>
+<lu-comment>Votre commentaire ici</lu-comment>
 ```
 
 ## Directive / Composant : `lu-comment` ou `<lu-comment>`
 
-Le sélecteur pour le composant de commentaire. Applicable sur le contenu HTML pour afficher des commentaires.
+Affichez un commentaire. Applicable sur les éléments HTML qui affichent des textes ou des interactions utilisateurs.
 
 ### Valeurs
 
 | Valeur | Description |
 |--------|-------------|
 | `""` (vide) | Variante par défaut |
-| `"compact"` | Affiche le commentaire en mode compact |
-| `"small"` | Affiche le commentaire dans une taille réduite |
+| `"align='left'"` | Aligne le commentaire à gauche |
+| `"align='right'"` | Aligne le commentaire à droite |
+| `"size='s'"` | Taille petite |
+| `"size='m'"` | Taille moyenne |
 
 ```html
-<lu-comment compact>Contenu du commentaire</lu-comment>
+<lu-comment align="left" size="s">Commentaire aligné à gauche et en taille petite</lu-comment>
 ```
 
 ## Inputs
 
-### `date`
-Type: `Date` — Default: `new Date()`
+### `align`
+Type: `'left' | 'right'` — Default: `'left'`
 
-La date à laquelle le commentaire a été posté.
+Détermine l'alignement du commentaire.
 
 ```html
-<lu-comment [date]="date">Contenu du commentaire</lu-comment>
+<lu-comment [align]="'right'">Commentaire aligné à droite</lu-comment>
 ```
 
-### `content`
-Type: `string`
+### `size`
+Type: `'s' | 'm'` — Default: `'m'`
 
-Le texte du commentaire.
+Détermine la taille du commentaire.
 
 ```html
-<lu-comment content="Ceci est un commentaire.">...</lu-comment>
+<lu-comment [size]="'s'">Commentaire en taille petite</lu-comment>
 ```
 
 ## Patterns courants
 
-### Chat
+### Simple Commentaire
 ```html
-<!-- Affichage de commentaires dans un chat -->
-<lu-comment-chat>
-    <lu-comment-block authorName="Utilisateur">
-        <lu-comment content="Bonjour ! Je suis là pour aider." />
-    </lu-comment-block>
-</lu-comment-chat>
+<!-- Affichage d'un simple commentaire -->
+<lu-comment>Ce commentaire est affiché par défaut.</lu-comment>
 ```
 
 ## Accessibilité
-Assurez-vous que chaque commentaire est accompagné d'un auteur et d'une date pour permettre une meilleure compréhension du contexte.
+Assurez-vous que le texte des commentaires est lisible et que les utilisateurs peuvent naviguer facilement en utilisant des lecteurs d'écran.
 
 ## Guidelines Prisme
-- Utiliser les tailles et alignements appropriés pour améliorer la lisibilité.
-- Éviter de surcharger les commentaires avec trop de texte.
-- Favoriser un style cohérent à travers les différents états et types de commentaires.
+- Évitez d'utiliser des polices trop petites pour les commentaires.
+- Utilisez des couleurs contrastées pour assurer la lisibilité.
+- Ne surchargez pas les commentaires avec trop d'informations, gardez-les concis.

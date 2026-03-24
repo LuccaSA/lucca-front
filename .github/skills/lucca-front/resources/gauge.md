@@ -1,125 +1,90 @@
 # pr-Gauge
 
 ## Quand utiliser ce composant
-- Pour afficher une valeur sous forme de pourcentage dans des tableaux de bord ou des rapports.
-- Lorsqu'il est nécessaire de visualiser des indicateurs de performance pour des applications analytiques.
-- Dans des cas où une représentation stylisée de la progression est essentielle (ex: chargeurs ou jauges de performance).
+- Pour afficher un indicateur de performance ou de statut avec des visuels intuitifs.
+- Dans des tableaux de bord pour représenter des métriques de façon visuelle.
+- Lors de la présentation de données dans des applications où l'espace est limité, mais des informations doivent être perçues rapidement.
 
 ## Stories Storybook
 - [Documentation complète](https://lucca-front.lucca.io/storybook/?path=/docs/documentation-loaders-gauge-angular-basic--docs)
 - [Basic](https://lucca-front.lucca.io/storybook/?path=/story/documentation-loaders-gauge-angular-basic--basic)
 
 ## Composant Figma
-[pr-Gauge Figma](https://www.figma.com/design/PQEOcUF9CYfKNqaejAGLWP?node-id=31115-14785) - Ce composant représente une jauge avec plusieurs variantes disponibles, notamment des styles circulaires et différents niveaux d'épaisseur.
+[Vue du composant pr-Gauge sur Figma](https://www.figma.com/design/PQEOcUF9CYfKNqaejAGLWP?node-id=31115-14785) — Ce composant est disponible en plusieurs variantes : différentes palettes (Product, Success, Error, Warning, Neutral) et deux modes d'épaisseur (Thin et non-Thin), ainsi que des options circulaires.
 
 ## Import
 
 ```typescript
-import { GaugeComponent } from '@lucca-front/ng/gauge';
+import { GaugeComponent } from '@lucca-front/ng/loading';
 ```
 
 ## Usage de base
 
 ```html
 <!-- Usage minimal -->
-<lu-gauge [value]="50" palette="success"></lu-gauge>
+<lu-gauge></lu-gauge>
 ```
 
 ## Directive / Composant : `lu-gauge` ou `<lu-gauge>`
 
-Directive utilisée pour créer une jauge. Applicable sur des éléments HTML personnalisés créés par le composant.
+Composant pour afficher une jauge. Applicable sur les éléments HTML comme `<lu-gauge>`.
 
 ### Valeurs
 
-| Valeur          | Description                                          |
-|-----------------|------------------------------------------------------|
-| `""` (vide)     | Variante par défaut                                  |
-| `"product"`     | Palette de couleur produit                           |
-| `"neutral"`     | Palette de couleur neutre                            |
-| `"success"`     | Palette représentant le succès                       |
-| `"warning"`     | Palette représentant un avertissement                |
-| `"error"`       | Palette représentant une erreur                      |
+| Valeur           | Description                           |
+|------------------|---------------------------------------|
+| `""` (vide)      | Variante par défaut                   |
+| `"success"`      | Palettes de succès                   |
+| `"error"`        | Palettes d'erreur                    |
+| `"warning"`      | Palettes d'avertissement              |
+| `"neutral"`      | Palettes neutres                      |
+| `"product"`      | Palettes de produit                   |
+| `"thin"`         | Mode d'affichage fin                  |
+| `"circular"`     | Jauge en mode circulaire              |
 
 ```html
-<lu-gauge palette="success" circular="true" [value]="75"></lu-gauge>
+<lu-gauge palette="success" thin="true" circular="false"></lu-gauge>
 ```
 
 ## Inputs
 
-### `value`
-Type: `number` — Default: `0`
-
-Valeur en pourcentage à afficher dans la jauge.
-
-```html
-<lu-gauge [value]="33"></lu-gauge>
-```
-
 ### `palette`
-Type: `'' | 'product' | 'neutral' | 'success' | 'warning' | 'error'` — Default: `''`
+Type: `'product' | 'success' | 'error' | 'warning' | 'neutral'` — Default: `'product'`
 
-Applique une palette de couleurs à la jauge.
+Palette des couleurs pour la jauge.
 
 ```html
-<lu-gauge palette="warning" [value]="50"></lu-gauge>
+<lu-gauge [palette]="'success'"></lu-gauge>
 ```
 
 ### `thin`
 Type: `boolean` — Default: `false`
 
-Diminue l'épaisseur de la jauge.
+Indique si la jauge doit être affichée en mode épais ou fin.
 
 ```html
-<lu-gauge [thin]="true" [value]="50"></lu-gauge>
+<lu-gauge [thin]="true"></lu-gauge>
 ```
 
 ### `circular`
 Type: `boolean` — Default: `false`
 
-Affiche la jauge sous une forme circulaire.
+Indique si la jauge doit être affichée en mode circulaire.
 
 ```html
-<lu-gauge [circular]="true" [value]="50"></lu-gauge>
-```
-
-### `animated`
-Type: `boolean` — Default: `false`
-
-Ajoute une animation au chargement ou lorsque la valeur est modifiée.
-
-```html
-<lu-gauge [animated]="true" [value]="50"></lu-gauge>
-```
-
-### `alt`
-Type: `string` — Default: `''`
-
-Information restituée par le lecteur d'écran.
-
-```html
-<lu-gauge [alt]="'Jauge de performance'" [value]="50"></lu-gauge>
-```
-
-### `noAlt`
-Type: `boolean` — Default: `false`
-
-Empêche la restitution par le lecteur d'écran. À n'utiliser que si l'information est déjà présente.
-
-```html
-<lu-gauge [noAlt]="true" [value]="50"></lu-gauge>
+<lu-gauge [circular]="true"></lu-gauge>
 ```
 
 ## Patterns courants
 
 ### Jauge de succès
 ```html
-<!-- Jauge indiquant un succès avec une palette verte -->
-<lu-gauge palette="success" [value]="80" [circular]="true"></lu-gauge>
+<lu-gauge palette="success" thin="false" circular="true"></lu-gauge>
 ```
 
 ## Accessibilité
-Assurez-vous que toutes les jauges ont des attributs `alt` appropriés pour permettre aux lecteurs d'écran de fournir un contexte significatif.
+Veillez à fournir une alternative textuelle lorsque cela est possible pour aider les utilisateurs de lecteurs d'écran à comprendre ce que représente la jauge.
 
 ## Guidelines Prisme
-- Utilisez des couleurs appropriées pour chaque état de la jauge (succès, erreur, etc.).
-- Évitez d'utiliser les jauges pour des états qui ne peuvent pas être représentés en pourcentage, à moins qu'une alternative graphique ne soit fournie.
+- Utiliser des palettes de couleurs cohérentes et accessibles pour assurer une lisibilité adéquate.
+- Évitez d'utiliser des couleurs uniquement pour transmettre des informations critiques; combinez-les avec des icônes ou des textes descriptifs.

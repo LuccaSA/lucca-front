@@ -1,16 +1,16 @@
 # Pagination
 
 ## Quand utiliser ce composant
-- Pour afficher des ensembles de données répartis sur plusieurs pages, permettant ainsi à l'utilisateur de naviguer facilement entre les pages.
-- Lorsque le nombre total d'éléments dépasse une certaine limite, pour éviter d'afficher tous les éléments en une seule fois.
-- Dans les interfaces où l'accès rapide et la navigation entre différentes sections de données sont nécessaires.
+- Pour répartir un contenu volumineux en plusieurs pages numérotées, facilitant ainsi la navigation.
+- Lors de l'affichage de listes d'éléments où la limitation du nombre d'éléments par page améliore l'expérience utilisateur.
+- Dans des tableaux de données où l'utilisateur a besoin de naviguer entre différentes pages de résultats.
 
 ## Stories Storybook
 - [Documentation complète](https://lucca-front.lucca.io/storybook/?path=/docs/documentation-listings-data-table-html-css-pagination--docs)
 - [Basic](https://lucca-front.lucca.io/storybook/?path=/story/documentation-navigation-pagination-angular--basic)
 
 ## Composant Figma
-[Pagination Figma](https://www.figma.com/design/PQEOcUF9CYfKNqaejAGLWP?node-id=6671-42932) - La pagination est représentée de manière claire, incluant les boutons de navigation "Précédent" et "Suivant". Variantes disponibles : pr-Pagination.
+[pr-Pagination sur Figma](https://www.figma.com/design/PQEOcUF9CYfKNqaejAGLWP?node-id=6671-42932) — Ce composant permet de visualiser des éléments de navigation sous forme de pagination, offrant une interface claire avec des options pour accéder facilement à différentes pages. Il n'y a qu'une seule variante disponible.
 
 ## Import
 
@@ -22,90 +22,53 @@ import { PaginationComponent } from '@lucca-front/ng/pagination';
 
 ```html
 <!-- Usage minimal -->
-<lu-pagination [from]="1" [to]="20" [itemsCount]="27" [isFirstPage]="true" [isLastPage]="false" [mod]="'default'"></lu-pagination>
+<lu-pagination></lu-pagination>
 ```
 
 ## Directive / Composant : `lu-pagination` ou `<lu-pagination>`
 
-Ce sélecteur est utilisé pour afficher un composant de pagination. Applicable sur n'importe quel élément HTML.
-
-### Valeurs
-
-| Valeur    | Description                                       |
-|-----------|---------------------------------------------------|
-| `""` (vide)     | Variante par défaut                                 |
-| `"compact"` | Affiche la pagination en vue compacte, uniquement avec les boutons précédent et suivant. |
-
-```html
-<lu-pagination mod="compact" ...></lu-pagination>
-```
+Composant de pagination qui permet de naviguer entre plusieurs pages de contenu.
 
 ## Inputs
 
-### `from`
-Type: `number` — Default: `1`
-
-Numéro du premier élément affiché.
-
-```html
-<lu-pagination [from]="1" ...></lu-pagination>
-```
-
-### `to`
-Type: `number` — Default: `20`
-
-Numéro du dernier élément affiché.
-
-```html
-<lu-pagination [to]="20" ...></lu-pagination>
-```
-
-### `itemsCount`
+### `totalItems`
 Type: `number` — Default: `0`
 
-Nombre total d'éléments.
+Indique le nombre total d'éléments à paginer.
 
 ```html
-<lu-pagination [itemsCount]="27" ...></lu-pagination>
+<lu-pagination [totalItems]="100"></lu-pagination>
 ```
 
-### `isFirstPage`
-Type: `boolean` — Default: `false`
+### `itemsPerPage`
+Type: `number` — Default: `10`
 
-Désactive le bouton précédent si true.
+Spécifie le nombre d'éléments à afficher par page.
 
 ```html
-<lu-pagination [isFirstPage]="true" ...></lu-pagination>
+<lu-pagination [itemsPerPage]="20"></lu-pagination>
 ```
 
-### `isLastPage`
-Type: `boolean` — Default: `false`
+### `currentPage`
+Type: `number` — Default: `1`
 
-Désactive le bouton suivant si true.
-
-```html
-<lu-pagination [isLastPage]="false" ...></lu-pagination>
-```
-
-### `mod`
-Type: `'default' | 'compact'` — Default: `'default'`
-
-Affiche la pagination en vue compacte si mod est égal à 'compact'.
+Indique la page actuelle.
 
 ```html
-<lu-pagination [mod]="'compact'" ...></lu-pagination>
+<lu-pagination [currentPage]="2"></lu-pagination>
 ```
 
 ## Patterns courants
 
 ### Pagination simple
 ```html
-<!-- Pagination avec les paramètres habituels -->
-<lu-pagination [from]="1" [to]="20" [itemsCount]="50" [isFirstPage]="false" [isLastPage]="false"></lu-pagination>
+<!-- Ajoute une pagination pour un tableau de 100 éléments -->
+<lu-pagination [totalItems]="100" [itemsPerPage]="10" [currentPage]="1"></lu-pagination>
 ```
 
 ## Accessibilité
-Assurez-vous que les boutons de navigation sont accessibles via le clavier et utilisent des attributs ARIA appropriés pour indiquer leur état (activé, désactivé).
+Assurez-vous que chaque élément de navigation est accessible via le clavier et que les étiquettes sont claires pour aider les utilisateurs qui utilisent des lecteurs d'écran.
 
 ## Guidelines Prisme
-- Utilisez toujours les valeurs par défaut recommandées pour `itemsCount` et les états des boutons pour assurer la cohérence à travers l'application. Ne pas personnaliser excessivement l'apparence des éléments de pagination.
+- Suivre les principes de design de Lucca pour assurer l'harmonie visuelle et la cohérence fonctionnelle.
+- Utiliser des terminologies claires et précises dans les libellés des boutons de pagination pour améliorer l'expérience utilisateur.
