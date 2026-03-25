@@ -1,4 +1,4 @@
-import { computed, Directive, inject, input, OnDestroy } from '@angular/core';
+import { computed, Directive, inject, input, OnDestroy, untracked } from '@angular/core';
 import { ɵeffectWithDeps } from '@lucca-front/ng/core';
 import { FormFieldComponent } from '@lucca-front/ng/form-field';
 import { filter, take } from 'rxjs/operators';
@@ -21,14 +21,14 @@ export class FormFieldIdDirective implements OnDestroy {
 	constructor() {
 		ɵeffectWithDeps([this.suffix], (suffix) => {
 			if (suffix && this.#formFieldComponent.ready) {
-				this.applyLabelledBy();
+				this.#applyLabelledBy(this.id(), this.labelledByStrategy());
 			}
 		});
-		this.#formFieldComponent.ready$.pipe(filter(Boolean), take(1)).subscribe(() => this.applyLabelledBy());
+		this.#formFieldComponent.ready$.pipe(filter(Boolean), take(1)).subscribe(() => untracked(() => this.#applyLabelledBy(this.id(), this.labelledByStrategy())));
 	}
 
-	private applyLabelledBy(): void {
-		this.#formFieldComponent.addLabelledBy(this.id(), this.labelledByStrategy() === 'prepend');
+	#applyLabelledBy(id: string, strategy: 'prepend' | 'append'): void {
+		this.#formFieldComponent.addLabelledBy(id, strategy === 'prepend');
 	}
 
 	ngOnDestroy(): void {

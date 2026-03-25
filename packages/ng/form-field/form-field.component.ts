@@ -201,7 +201,7 @@ export class FormFieldComponent implements OnDestroy, DoCheck {
 	}
 
 	removeLabelledBy(id: string): void {
-		this.#ariaLabelledBy = this.#ariaLabelledBy.filter((labelledBy) => labelledBy === id);
+		this.#ariaLabelledBy = this.#ariaLabelledBy.filter((labelledBy) => labelledBy !== id);
 	}
 
 	prepareInput(): void {
