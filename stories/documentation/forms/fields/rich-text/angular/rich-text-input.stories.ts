@@ -12,8 +12,8 @@ import { PLAINTEXT_TAGS, PlainTextFormatterWithTagsDirective } from '@lucca-fron
 import { applicationConfig, Meta, moduleMetadata, StoryObj } from '@storybook/angular';
 import { cleanupTemplate, createTestStory, generateInputs } from 'stories/helpers/stories';
 import { StoryModelDisplayComponent } from 'stories/helpers/story-model-display.component';
-import { waitForAngular } from 'stories/helpers/test';
-import { expect, screen, userEvent, within } from 'storybook/test';
+import { expectNgModelDisplay, waitForAngular } from 'stories/helpers/test';
+import { screen, userEvent, within } from 'storybook/test';
 
 export default {
 	title: 'Documentation/Forms/Fields/RichTextInput/Angular',
@@ -323,13 +323,11 @@ export const WithTagPluginMarkdownContentChange: StoryObj<RichTextInputComponent
 	},
 };
 
-export const BasicTEST = createTestStory(Basic, async (context) => {
+export const BasicTEST = createTestStory(WithTagPlugin, async (context) => {
 	const canvas = within(context.canvasElement);
 	const editor = canvas.getByRole('textbox');
 
 	await context.step('Type and apply text styles', async () => {
-		const model = modelDisplay(context.canvasElement);
-
 		await userEvent.click(editor);
 		await userEvent.keyboard('{Meta>}a{/Meta}{Backspace}');
 		await userEvent.type(editor, 'Bonjour ');
@@ -350,7 +348,7 @@ export const BasicTEST = createTestStory(Basic, async (context) => {
 		await clickToolbarButton('Barré');
 		await waitForAngular();
 
-		await expect(model).toHaveTextContent('Bonjour **gras** et *italique* et ~~barré~~');
+		await expectNgModelDisplay(context.canvasElement, '<p><span>Bonjour </span><b><strong>gras</strong></b><span> et </span><i><em>italique</em></i><span> et </span><s><span>barré</span></s></p>');
 	});
 
 	await context.step('Create a bulleted list', async () => {
@@ -360,9 +358,8 @@ export const BasicTEST = createTestStory(Basic, async (context) => {
 		await clickToolbarButton('Liste à puces');
 		await waitForAngular();
 
-		const model = modelDisplay(context.canvasElement);
-		await expect(model).toHaveTextContent('Premier point');
-		await expect(model).toHaveTextContent('Second point');
+		await expectNgModelDisplay(context.canvasElement, 'Premier point');
+		await expectNgModelDisplay(context.canvasElement, 'Second point');
 	});
 
 	await context.step('Create a numbered list', async () => {
@@ -371,9 +368,8 @@ export const BasicTEST = createTestStory(Basic, async (context) => {
 		await clickToolbarButton('Liste numérotée');
 		await waitForAngular();
 
-		const model = modelDisplay(context.canvasElement);
-		await expect(model).toHaveTextContent('Troisieme point');
-		await expect(model).toHaveTextContent('Quatrieme point');
+		await expectNgModelDisplay(context.canvasElement, 'Troisieme point');
+		await expectNgModelDisplay(context.canvasElement, 'Quatrieme point');
 	});
 
 	await context.step('Create a link', async () => {
@@ -387,32 +383,20 @@ export const BasicTEST = createTestStory(Basic, async (context) => {
 		await userEvent.click(screen.getByRole('button', { name: 'Valider' }));
 		await waitForAngular();
 
-		const model = modelDisplay(context.canvasElement);
-		await expect(model).toHaveTextContent('[links](https://example.org/docs)');
+		await expectNgModelDisplay(context.canvasElement, '<p><a href="https://example.org/docs" rel="noreferrer"><span>links</span></a></p>');
 	});
-});
 
-export const BasicTagPluginTEST = createTestStory(WithTagPlugin, async (context) => {
-	const canvas = within(context.canvasElement);
-	const editor = canvas.getByRole('textbox');
-
-	await context.step('Insert the 3 tags from the tag plugin', async () => {
-		await userEvent.click(editor);
+	await context.step('add tag', async () => {
 		await userEvent.keyboard('{Meta>}a{/Meta}{Backspace}');
 
-		await userEvent.click(canvas.getAllByText('Tag 1')[0]);
-		await userEvent.click(canvas.getAllByText('Tag 2')[0]);
-		await userEvent.click(canvas.getAllByText('Tag 3')[0]);
+		await userEvent.click(canvas.getByText('Tag 1'));
+		await userEvent.click(canvas.getByText('Tag 2'));
+		await userEvent.click(canvas.getByText('Tag 3'));
 		await waitForAngular();
 
-		const model = modelDisplay(context.canvasElement);
-		await expect(model).toHaveTextContent('{{tag1}}{{tag2}}{{tag3}}');
+		await expectNgModelDisplay(context.canvasElement, '{{tag1}}{{tag2}}{{tag3}}');
 	});
 });
-
-function modelDisplay(canvasElement: HTMLElement) {
-	return within(canvasElement).getByTestId('pr-ng-model');
-}
 
 async function clickToolbarButton(name: string) {
 	const toolbar = screen.getByRole('toolbar');
