@@ -1,12 +1,16 @@
 @if (status() === "critical" || status() === "success") {
 	<div class="activityFeed-step-state" [class.mod-critical]="status() === 'critical'" [class.mod-success]="status() === 'success'"></div>
 } @else {
-	<div class="activityFeed-step-avatar">
-		<lu-user-picture size="S" [user]="user()" />
-	</div>
+	@if (user()) {
+		<div class="activityFeed-step-avatar">
+			<lu-user-picture size="S" [user]="user()" />
+		</div>
+	}
 }
 <div class="activityFeed-step-description">
-	<p class="activityFeed-step-description-content">{{ label() }}</p>
+	@if (label()) {
+		<p class="activityFeed-step-description-content">{{ label() }}</p>
+	}
 	@if (date()) {
 		<time class="comment-infos-date" [attr.datetime]="date().toISOString()" class="activityFeed-step-description-time">
 			@if (datePipeFormat()) {

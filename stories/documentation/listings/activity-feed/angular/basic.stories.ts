@@ -52,6 +52,9 @@ function getTemplate(args: ActivityFeedBasicStory): string {
 			</lu-read-more>
 		</ng-template>
 	</lu-activity-feed-step>
+	<lu-activity-feed-step>
+		<button type="button" luButton>Afficher plus</button>
+	</lu-activity-feed-step>
 </lu-activity-feed>`;
 }
 

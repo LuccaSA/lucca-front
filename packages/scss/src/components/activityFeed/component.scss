@@ -22,7 +22,7 @@
 					position: absolute;
 					inset-block-end: 0;
 					border-radius: var(--pr-t-border-radius-full);
-					inset-block-start: calc(var(--pr-t-spacings-500) + var(--pr-t-spacings-50));
+					inset-block-start: var(--components-activityFeed-step-before-insetBlockStart);
 					inset-inline-start: calc(var(--pr-t-spacings-200) - var(--pr-t-spacings-25) / 2);
 				}
 			}
