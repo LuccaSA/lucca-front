@@ -21,6 +21,7 @@ export const SoftwareIconList = [
 	'invoices',
 	'payment-methods',
 	'accounting-assistant',
+	'certified-einvoicing-platform',
 	// Compensation and Benefits
 	'compensation',
 	'payslip',
