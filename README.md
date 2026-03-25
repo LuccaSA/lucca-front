@@ -1,3 +1,4 @@
+test
 # Lucca Front
 
 Lucca Front is a modular framework for developing web applications by [lucca](http://www.lucca.fr).
