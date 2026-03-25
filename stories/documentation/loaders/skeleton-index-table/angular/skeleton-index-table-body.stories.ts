@@ -1,3 +1,4 @@
+import { IndexTableComponent, IndexTableHeadComponent, IndexTableRowCellHeaderComponent, IndexTableRowComponent } from '@lucca-front/ng/index-table';
 import { SkeletonIndexTableComponent } from '@lucca-front/ng/skeleton';
 import { Meta, moduleMetadata, StoryObj } from '@storybook/angular';
 
@@ -7,24 +8,23 @@ export default {
 	title: 'Documentation/Loaders/Skeleton/Skeleton IndexTable',
 	decorators: [
 		moduleMetadata({
-			imports: [SkeletonIndexTableComponent],
+			imports: [SkeletonIndexTableComponent, IndexTableComponent, IndexTableHeadComponent, IndexTableRowComponent, IndexTableRowCellHeaderComponent],
 		}),
 	],
 	argTypes: {},
 } as Meta;
 
 function getTemplate(args: SkeletonIndexTableStory): string {
-	return `<table class="indexTable skeleton is-loading" inert="inert">
-	<thead class="indexTable-head">
-		<tr class="indexTable-head-row">
-			<th class="indexTable-head-row-cell">Lorem</th>
-			<th class="indexTable-head-row-cell mod-alignCenter">Ipsum</th>
-			<th class="indexTable-head-row-cell mod-alignEnd">Dolor</th>
+	return `<lu-index-table inert="inert">
+	<thead luIndexTableHead>
+		<tr luIndexTableRow>
+			<th luIndexTableCell>Label</th>
+			<th luIndexTableCell align="center">Label</th>
+			<th luIndexTableCell align="end">Label</th>
 		</tr>
 	</thead>
 	<lu-skeleton-index-table tableBodyOnly [cols]="3" [rows]="8" [colsAlign]="{ '1': 'center', '2': 'end' }" />
-</table>
-	`;
+</lu-index-table>`;
 }
 
 const Template = (args: SkeletonIndexTableStory) => ({
