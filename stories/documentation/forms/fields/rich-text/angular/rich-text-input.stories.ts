@@ -110,6 +110,50 @@ export const RequiredWithNoInitialValue: StoryObj<RichTextInputComponent & { val
 	},
 };
 
+export const WithTagPluginWithNoInitialValue: StoryObj<RichTextInputComponent & { value: string; disabled: boolean; required: boolean } & FormFieldComponent> = {
+	render: (args, { argTypes }) => {
+		const { value, disabled, required, presentation, ...inputArgs } = args;
+		return {
+			props: { value, disabled, required },
+			template: cleanupTemplate(`<lu-form-field label="Label" ${generateInputs({ presentation }, argTypes)}>
+	<lu-rich-text-input luWithHtmlFormatter
+	${generateInputs(inputArgs, argTypes)}
+	[(ngModel)]="value" [disabled]="disabled" [required]="required">
+		<lu-rich-text-input-toolbar />
+		<lu-rich-text-plugin-tag [tags]="[
+																		{
+																			key: 'tag1',
+																			description: 'Tag 1',
+																		},
+																		{
+																			key: 'tag2',
+																			description: 'Tag 2',
+																		},
+																		{
+																			key: 'tag3',
+																			description: 'Tag 3',
+																		},
+																	]" />
+		</lu-rich-text-input>
+</lu-form-field>
+<pr-story-model-display>{{ value }}</pr-story-model-display>`),
+			moduleMetadata: {
+				imports: [RichTextInputComponent, RichTextPluginTagComponent, FormFieldComponent, FormsModule, BrowserAnimationsModule, HtmlFormatterDirective],
+			},
+		};
+	},
+	args: {
+		value: '',
+		placeholder: 'Placeholder…',
+		disabled: false,
+		required: false,
+		disableSpellcheck: false,
+		autoResize: true,
+		hideToolbar: false,
+		presentation: false,
+	},
+};
+
 export const WithHtmlFormatter: StoryObj<RichTextInputComponent & { value: string; disabled: boolean; required: boolean } & FormFieldComponent> = {
 	render: (args, { argTypes }) => {
 		const { value, disabled, required, presentation, ...inputArgs } = args;
@@ -323,13 +367,12 @@ export const WithTagPluginMarkdownContentChange: StoryObj<RichTextInputComponent
 	},
 };
 
-export const BasicTEST = createTestStory(WithTagPlugin, async (context) => {
+export const BasicTEST = createTestStory(WithTagPluginWithNoInitialValue, async (context) => {
 	const canvas = within(context.canvasElement);
 	const editor = canvas.getByRole('textbox');
 
 	await context.step('Type and apply text styles', async () => {
 		await userEvent.click(editor);
-		await userEvent.keyboard('{Meta>}a{/Meta}{Backspace}');
 		await userEvent.type(editor, 'Bonjour ');
 
 		await clickToolbarButton('Gras');
