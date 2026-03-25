@@ -4,11 +4,11 @@ import { CalendarMode } from './calendar-mode';
 export interface DateRangeInput {
 	class?: `palette-${Palette}` | string;
 	start: Date | string;
-	end?: Date | string;
+	end?: Date | string | null;
 	label?: string;
 	scope?: CalendarMode;
 }
 export interface DateRange extends DateRangeInput {
 	start: Date;
-	end?: Date;
+	end?: Date | null;
 }

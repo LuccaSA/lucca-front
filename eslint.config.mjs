@@ -10,7 +10,6 @@ import { defineConfig } from 'eslint/config';
 import tsParser from '@typescript-eslint/parser';
 
 const STRICTIFIED_NG_EXCLUDE_ENTRIES = [
-	'packages/ng/date2/**/*.ts',
 	'packages/ng/dialog/**/*.ts',
 	'packages/ng/forms/**/*.ts',
 	'packages/ng/schematics/**/*.ts',
