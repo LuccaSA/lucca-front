@@ -36,12 +36,12 @@
 					type="text"
 					#end
 					id="range-input-end-{{ idSuffix }}"
-					attr.aria-describedby="range-input-start-{{ idSuffix }}-message"
+					attr.aria-describedby="range-input-end-{{ idSuffix }}-message"
 					luInput
 					luInputStandalone
 					class="textField-input-value dateRangeField-fieldset-input-value"
 					[ngModel]="endLabel()"
-					(input)="textInputChange(start.value, 'end')"
+					(input)="textInputChange(end.value, 'end')"
 					(blur)="inputBlur()"
 					(focus)="inputFocused.set(true); editedField.set(1); highlightedField.set(1)"
 					aria-haspopup="true"
