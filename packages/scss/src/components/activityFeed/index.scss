@@ -1,6 +1,7 @@
 @use 'exports' as *;
 @use '@lucca-front/scss/src/components/avatar/exports' as avatar;
 @use '@lucca-front/scss/src/components/readMore/exports' as readMore;
+@use '@lucca-front/scss/src/components/button/exports' as button;
 
 .activityFeed {
 	@layer components {
@@ -17,6 +18,10 @@
 }
 
 @layer mods {
+	.activityFeed-content > .button:only-child {
+		@include button.outlined;
+	}
+
 	.activityFeed-step-avatar {
 		@include avatar.S;
 	}
@@ -41,7 +46,13 @@
 		}
 	}
 
-	.activityFeed-step.mod-pending {
-		@include pending;
+	.activityFeed-step {
+		&.mod-pending {
+			@include pending;
+		}
+
+		&:has(.activityFeed-content > .button:only-child) {
+			@include withButton;
+		}
 	}
 }

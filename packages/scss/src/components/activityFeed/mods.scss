@@ -4,3 +4,7 @@
 	--components-activityFeed-step-description-color: var(--pr-t-color-text-subtle);
 	--components-activityFeed-step-description-lineHeight: var(--pr-t-font-body-S-lineHeight);
 }
+
+@mixin withButton {
+	--components-activityFeed-step-before-insetBlockStart: var(--pr-t-spacings-700);
+}

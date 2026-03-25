@@ -28,7 +28,7 @@ export class ActivityFeedStepComponent {
 		minute: 'numeric',
 	});
 
-	readonly label = input.required<string>();
+	readonly label = input<string | null>(null);
 
 	readonly user = input<ILuUser | null>(null);
 
