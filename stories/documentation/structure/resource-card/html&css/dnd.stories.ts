@@ -63,7 +63,7 @@ function getTemplate(args: ResourceCardHTMLBasicStory) {
 				</div>
 				<header class="resourceCard-layout-header">
 					<h3 class="resourceCard-layout-header-title">
-						<a href="#" luTooltip luTooltipOnlyForDisplay luTooltipWhenEllipsis [luTooltipAnchor]="resourceCard1" class="resourceCard-layout-header-title-action">Lorem ipsum dolor</a>
+						<a href="#" luTooltip luTooltipWhenEllipsis [luTooltipAnchor]="resourceCard1" class="resourceCard-layout-header-title-action">Lorem ipsum dolor</a>
 					</h3>${infosTpl}
 				</header>${descriptionContentTpl}${actionTpl}
 			</div>
@@ -77,7 +77,7 @@ function getTemplate(args: ResourceCardHTMLBasicStory) {
 				</div>
 				<header class="resourceCard-layout-header">
 					<h3 class="resourceCard-layout-header-title">
-						<a href="#" luTooltip luTooltipOnlyForDisplay luTooltipWhenEllipsis [luTooltipAnchor]="resourceCard1" class="resourceCard-layout-header-title-action">Lorem ipsum dolor</a>
+						<a href="#" luTooltip luTooltipWhenEllipsis [luTooltipAnchor]="resourceCard1" class="resourceCard-layout-header-title-action">Lorem ipsum dolor</a>
 					</h3>${infosTpl}
 				</header>${descriptionContentTpl}${actionTpl}
 			</div>
@@ -91,7 +91,7 @@ function getTemplate(args: ResourceCardHTMLBasicStory) {
 				</div>
 				<header class="resourceCard-layout-header">
 					<h3 class="resourceCard-layout-header-title">
-						<a href="#" luTooltip luTooltipOnlyForDisplay luTooltipWhenEllipsis [luTooltipAnchor]="resourceCard1" class="resourceCard-layout-header-title-action">Lorem ipsum dolor</a>
+						<a href="#" luTooltip luTooltipWhenEllipsis [luTooltipAnchor]="resourceCard1" class="resourceCard-layout-header-title-action">Lorem ipsum dolor</a>
 					</h3>${infosTpl}
 				</header>${descriptionContentTpl}${actionTpl}
 			</div>
