@@ -9,6 +9,9 @@ export type ColAlignIndexTable = 'start' | 'center' | 'end';
 	styleUrl: './skeleton-index-table.component.scss',
 	changeDetection: ChangeDetectionStrategy.OnPush,
 	imports: [NgTemplateOutlet],
+	host: {
+		class: 'skeleton is-loading',
+	},
 })
 export class SkeletonIndexTableComponent {
 	/**
