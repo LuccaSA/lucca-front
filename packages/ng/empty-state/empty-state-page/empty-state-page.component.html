@@ -1,5 +1,6 @@
 <section
 	class="emptyState mod-page"
+	[class.mod-headingStyleH2]="hxStyle() === 2"
 	[attr.role]="heading() ? null : 'presentation'"
 	[style.--components-emptyState-background-color]="contentBackgroundColor()"
 	[style.--components-emptyState-illustration-background-bottom-left]="bottomLeftBackground() ? `url(${bottomLeftBackground()})` : null"

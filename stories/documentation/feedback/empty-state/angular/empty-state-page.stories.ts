@@ -12,7 +12,17 @@ export default {
 		}),
 	],
 	render: (args) => {
-		const { heading, description, slotTop, hx } = args;
+		const { heading, description, slotTop } = args;
+		const paramHx =
+			args['hx'] === 1
+				? ``
+				: `
+	hx="${args['hx']}"`;
+		const paramHxStyle =
+			args['hxStyle'] === 1
+				? ``
+				: `
+	hxStyle="${args['hxStyle']}"`;
 		const paramIcon =
 			args['icon'] === ''
 				? ``
@@ -51,8 +61,7 @@ export default {
 			template: `<lu-empty-state-page
 	heading="${heading}"
 	slotTop="${slotTop}"
-	description="${description}"${paramIcon}${paramTopRightBackground}${paramTopRightForeground}${paramBottomLeftBackground}${paramBottomLeftForeground}
-	hx="${hx}"
+	description="${description}"${paramIcon}${paramTopRightBackground}${paramTopRightForeground}${paramBottomLeftBackground}${paramBottomLeftForeground}${paramHx}${paramHxStyle}
 >
 	<button luButton type="button" palette="product">Button</button>
 	<button luButton="outlined" type="button">Button</button>
@@ -162,6 +171,14 @@ export default {
 			},
 			description: '[v18.1]',
 		},
+		hxStyle: {
+			control: {
+				type: 'number',
+				min: 1,
+				max: 2,
+			},
+			description: '[v21.2]',
+		},
 		heading: {
 			description: '[v18.1] Optional',
 		},
@@ -186,5 +203,6 @@ export const Page: StoryObj<EmptyStatePageComponent> = {
 		bottomLeftForeground: 'poplee/core-hr-01',
 		contentBackgroundColor: 'var(--pr-t-elevation-surface-default)',
 		hx: 1,
+		hxStyle: 1,
 	},
 };
