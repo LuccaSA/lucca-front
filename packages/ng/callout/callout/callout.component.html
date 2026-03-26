@@ -7,7 +7,7 @@
 		}
 		<div class="callout-content">
 			@if (heading()) {
-				<p class="callout-content-title">
+				<p [attr.role]="hx() ? 'heading' : null" [attr.aria-level]="hx() ? hx() : null" class="callout-content-title">
 					<ng-container *luPortal="heading()" />
 				</p>
 			}
