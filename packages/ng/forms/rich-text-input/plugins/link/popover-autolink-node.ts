@@ -12,7 +12,7 @@ export class PopoverAutoLinkNode extends AutoLinkNode {
 		self.#viewContainerRef = vcr;
 		return self;
 	}
-	getViewContainerRef(): ViewContainerRef {
+	getViewContainerRef(): ViewContainerRef | undefined {
 		return this.#viewContainerRef;
 	}
 	setTemplateRef(vcr: TemplateRef<{ href?: string; title?: string; target?: string }>): this {
@@ -20,7 +20,7 @@ export class PopoverAutoLinkNode extends AutoLinkNode {
 		self.#templateRef = vcr;
 		return self;
 	}
-	getTemplateRef(): TemplateRef<{ href?: string; title?: string; target?: string }> {
+	getTemplateRef(): TemplateRef<{ href?: string; title?: string; target?: string }> | undefined {
 		return this.#templateRef;
 	}
 
@@ -28,7 +28,7 @@ export class PopoverAutoLinkNode extends AutoLinkNode {
 		return 'popoverautolink';
 	}
 
-	constructor(url?: string, attributes?: LinkAttributes & { viewContainerRef: ViewContainerRef; templateRef: TemplateRef<{ href?: string; title?: string; target?: string }> }, key?: NodeKey) {
+	constructor(url?: string, attributes?: LinkAttributes & { viewContainerRef?: ViewContainerRef; templateRef?: TemplateRef<{ href?: string; title?: string; target?: string }> }, key?: NodeKey) {
 		super(url, attributes, key);
 		this.#viewContainerRef = attributes?.viewContainerRef;
 		this.#templateRef = attributes?.templateRef;
@@ -36,10 +36,10 @@ export class PopoverAutoLinkNode extends AutoLinkNode {
 
 	override createDOM(config: EditorConfig): HTMLElement {
 		if (this.#viewContainerRef && this.#templateRef) {
-			const context = {
+			const context: { href?: string; title?: string; target?: string; key: string } = {
 				href: this.sanitizeUrl(this.__url),
-				title: this.__title,
-				target: this.__target,
+				title: this.__title ?? undefined,
+				target: this.__target ?? undefined,
 				key: this.__key,
 			};
 			if (this.#view) {
@@ -93,7 +93,7 @@ export class PopoverAutoLinkNode extends AutoLinkNode {
 
 export function $createPopoverAutoLinkNode(
 	url?: string,
-	attributes?: LinkAttributes & { viewContainerRef: ViewContainerRef; templateRef: TemplateRef<{ href?: string; title?: string; target?: string }> },
+	attributes?: LinkAttributes & { viewContainerRef?: ViewContainerRef; templateRef?: TemplateRef<{ href?: string; title?: string; target?: string }> },
 	key?: NodeKey,
 ): PopoverAutoLinkNode {
 	return new PopoverAutoLinkNode(url, attributes, key);
