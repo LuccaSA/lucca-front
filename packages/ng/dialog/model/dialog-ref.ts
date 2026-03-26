@@ -14,8 +14,7 @@ export class LuDialogRef<C = unknown, TData = LuDialogData<C>> {
 	/**
 	 * Instance of the component that's inside the dialog
 	 */
-	get instance(): C {
-		assertNotNil(this.cdkRef.componentInstance);
+	get instance(): C | null {
 		return this.cdkRef.componentInstance;
 	}
 
@@ -65,10 +64,12 @@ export class LuDialogRef<C = unknown, TData = LuDialogData<C>> {
 		let canClose: boolean | Observable<boolean> = true;
 
 		try {
+			assertNotNil(this.instance);
 			canClose = this.config.canClose?.(this.instance) ?? true;
 		} catch {
 			canClose = true;
 		}
+
 		const canClose$ = isObservable(canClose) ? canClose : of(canClose);
 		canClose$.pipe(take(1)).subscribe((close) => {
 			if (close) {

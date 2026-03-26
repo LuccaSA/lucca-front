@@ -223,6 +223,8 @@ describe('dialog-routing.utils', () => {
 			// Navigate away to trigger canDeactivate
 			await router.navigateByUrl('/');
 
+			await new Promise((resolve) => setTimeout(resolve, 100));
+
 			// Assert
 			expect(canDeactivateGuard1).toHaveBeenCalledTimes(1);
 			expect(canDeactivateGuard2).toHaveBeenCalledTimes(1);
