@@ -17,7 +17,7 @@ export default {
 		const { palette, heading, hx, actions, actionsInline, ...inputs } = args;
 		const paletteArg = palette !== 'none' && palette !== undefined ? ` palette="${palette}"` : ``;
 		const headingArg = heading ? ` heading="${heading}"` : ``;
-		const hxArg = heading ? ` hx="${hx}"` : ``;
+		const hxArg = heading && hx ? ` hx="${hx}"` : ``;
 
 		const actionsInlineArg = actionsInline ? ` inline` : ``;
 		const actionsTemplate = actions
@@ -85,6 +85,7 @@ export default {
 				type: 'select',
 			},
 			description: '[v21.4] Optional',
+			if: { arg: 'heading', truthy: true },
 		},
 		removedChange: HiddenArgType,
 		AI: {
