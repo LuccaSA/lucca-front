@@ -41,11 +41,3 @@
 
 	--components-formLabel-paddingRight: var(--pr-t-spacings-700);
 }
-
-@mixin counterWarning {
-	--components-formLabel-counter-color: var(--palettes-warning-700);
-}
-
-@mixin counterCritical {
-	--components-formLabel-counter-color: var(--palettes-critical-700);
-}
