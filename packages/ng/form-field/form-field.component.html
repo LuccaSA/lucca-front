@@ -59,33 +59,6 @@
 				[class.inputFramed-header-label]="framed"
 			>
 				<span><ng-container *luPortal="label()" /></span>
-				@if (isInputRequired()) {
-					<sup class="formLabel-required" aria-hidden="true">*</sup>
-				}
-				@if (tooltip()) {
-					<lu-icon
-						class="formLabel-info"
-						icon="signHelp"
-						[alt]="'?'"
-						[luTooltip]="tooltip()"
-						[color]="invalidStatus() ? 'error' : 'inherit'"
-					/>
-				}
-				@if (tag()) {
-					<span class="formLabel-tag tag">{{ tag() }}</span>
-				}
-				@if (counter() > 0) {
-					<span
-						class="formLabel-counter"
-						[class.mod-warning]="contentLength() > counter() - counter() / (100 / 20) && contentLength() <= counter()"
-						[class.mod-critical]="contentLength() > counter()"
-						id="{{ id() }}-counter"
-						aria-live="polite"
-					>
-						<span class="formLabel-counter-content" aria-hidden="true">{{ contentLength() }}/{{ counter() }}</span>
-						<span class="formLabel-counter-alt">{{ intl().counter | intlParams: { current: contentLength(), max: counter() } }}</span>
-					</span>
-				}
 			</label>
 			@if (AI()) {
 				<div class="form-field-contentOptional">
