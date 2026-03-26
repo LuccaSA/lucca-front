@@ -33,17 +33,24 @@ export class TagNode extends DecoratorNode<string> {
 	#disabled: boolean;
 	// Store the component reference on the node instance
 	#componentRef?: ComponentRef<ChipComponent>;
-	static #viewContainerRef: ViewContainerRef;
+	#viewContainerRef?: ViewContainerRef;
 
-	static setViewContainerRef(vcr: ViewContainerRef): void {
-		TagNode.#viewContainerRef = vcr;
+	setViewContainerRef(vcr: ViewContainerRef): this {
+		const self = this.getWritable();
+		self.#viewContainerRef = vcr;
+		return self;
 	}
 
-	constructor(tagKey = '', tagDescription?: string, disabled = false, key?: NodeKey) {
+	getViewContainerRef(): ViewContainerRef {
+		return this.#viewContainerRef;
+	}
+
+	constructor(tagKey = '', viewContainerRef?: ViewContainerRef, tagDescription?: string, disabled = false, key?: NodeKey) {
 		super(key);
 		this.#tagKey = tagKey;
 		this.#tagDescription = tagDescription;
 		this.#disabled = disabled;
+		this.#viewContainerRef = viewContainerRef;
 	}
 
 	isDisabled(): boolean {
@@ -81,7 +88,7 @@ export class TagNode extends DecoratorNode<string> {
 	}
 
 	static override clone(node: TagNode): TagNode {
-		return new TagNode(node.#tagKey, node.#tagDescription, node.#disabled, node.__key);
+		return new TagNode(node.#tagKey, node.#viewContainerRef, node.#tagDescription, node.#disabled, node.__key);
 	}
 
 	/**
@@ -92,15 +99,17 @@ export class TagNode extends DecoratorNode<string> {
 	}
 
 	override createDOM(_config: EditorConfig, editor: LexicalEditor): HTMLElement {
-		if (TagNode.#viewContainerRef) {
+		if (this.#viewContainerRef) {
 			if (!editor.isEditable()) {
 				this.#componentRef?.destroy();
 				const span = document.createElement('span');
 				span.textContent = this.#tagDescription ?? this.#tagKey;
 				return span;
 			}
-			// Create the component
-			this.#componentRef = TagNode.#viewContainerRef.createComponent(ChipComponent);
+			if (!this.#componentRef) {
+				// Create the component
+				this.#componentRef = this.#viewContainerRef.createComponent(ChipComponent);
+			}
 
 			// Set inputs on the component instance
 			this.#componentRef.setInput('unkillable', false);
@@ -124,11 +133,13 @@ export class TagNode extends DecoratorNode<string> {
 			// Return the component's DOM element
 			return componentElement;
 		}
-		throw new Error('ViewContainerRef is not set for TagNode. Ensure it is initialized before creating TagNode instances.');
+		const element = document.createElement('span');
+		element.textContent = this.getTextContent();
+		return element;
 	}
 
 	override updateDOM(prevNode: TagNode, _dom: HTMLElement, _config: EditorConfig): boolean {
-		return this.#tagDescription !== prevNode.#tagDescription || this.#tagKey !== prevNode.#tagKey || this.#disabled !== prevNode.#disabled;
+		return this.#tagDescription !== prevNode.#tagDescription || this.#tagKey !== prevNode.#tagKey || this.#disabled !== prevNode.#disabled || this.#viewContainerRef !== prevNode.#viewContainerRef;
 	}
 
 	override remove(preserveEmptyParent?: boolean): void {
@@ -209,8 +220,8 @@ function domConversionFunction(domNode: Node): DOMConversion {
 	};
 }
 
-export function $createTagNode(key = '', description?: string): TagNode {
-	return new TagNode(key, description);
+export function $createTagNode(key = '', viewContainerRef?: ViewContainerRef, description?: string): TagNode {
+	return new TagNode(key, viewContainerRef, description);
 }
 
 export function $isTagNode(node: LexicalNode | null | undefined): node is TagNode {

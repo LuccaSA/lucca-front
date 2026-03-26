@@ -39,8 +39,6 @@ export class RichTextPluginTagComponent implements RichTextPluginComponent, OnDe
 	#registeredCommands = () => {};
 
 	constructor() {
-		TagNode.setViewContainerRef(this.#viewContainerRef);
-
 		// Listen for new partial tag nodes and update their descriptions
 		effect(() => {
 			const tags = this.tags();
@@ -57,6 +55,7 @@ export class RichTextPluginTagComponent implements RichTextPluginComponent, OnDe
 						}
 						const tag = tags.find((t) => t.key === tagNode.getTagKey());
 						if (tag) {
+							tagNode.setViewContainerRef(this.#viewContainerRef);
 							tagNode.setTagDescription(tag.description ?? '').setDisabled(isDisabled);
 						} else {
 							tagNode.remove();
@@ -103,7 +102,7 @@ export class RichTextPluginTagComponent implements RichTextPluginComponent, OnDe
 			if (!selection) {
 				selection = $getRoot().selectEnd();
 			}
-			const node = $createTagNode(tag.key, tag.description);
+			const node = $createTagNode(tag.key, this.#viewContainerRef, tag.description);
 			selection.insertNodes([node]);
 		});
 	}

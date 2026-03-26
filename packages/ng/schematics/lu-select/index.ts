@@ -16,7 +16,7 @@ export default (options?: SchematicContextOpts & { noComments?: boolean }): Rule
 			if (path.includes('node_modules') || !entry) {
 				return;
 			}
-			if (path.endsWith('.ts')) {
+			if ( path.endsWith('.ts') && !path.endsWith('.d.ts')) {
 				migrateFile(path, entry, tree, (content) => {
 					const sourceFile = createSourceFile(path, content, ScriptTarget.ESNext);
 					return migrateComponent(sourceFile, path, tree, options?.noComments);

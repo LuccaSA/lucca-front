@@ -14,6 +14,10 @@ export interface StoryGeneratorArgs<TComponent> {
 
 export type StoryGenerator<TComponent> = (args: StoryGeneratorArgs<TComponent>) => StoryObj<TComponent>;
 
+export function setStoryOptions<T extends string>(list: readonly T[]): Array<T | ''> {
+	return ['', ...list];
+}
+
 export function generateMarkdownCodeBlock(lang: string, code: string): string {
 	return `
 \`\`\`${lang}

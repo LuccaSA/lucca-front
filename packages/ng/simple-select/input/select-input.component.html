@@ -45,7 +45,11 @@
 </ng-template>
 
 @if (!ignorePresentation()) {
-	<ng-container *luPresentationDisplay>
-		<ng-container *ngTemplateOutlet="currentValueDisplayerTpl" />
+	<ng-container *luPresentationDisplayDefault>
+		@if (value) {
+			<ng-container *ngTemplateOutlet="currentValueDisplayerTpl" />
+		} @else {
+			<span aria-hidden="true" data-content-before="–"></span>
+		}
 	</ng-container>
 }

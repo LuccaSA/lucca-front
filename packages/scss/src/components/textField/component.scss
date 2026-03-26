@@ -119,7 +119,7 @@
 		}
 
 		.textField-prefix {
-			display: flex;
+			display: inline-flex;
 			padding-inline-start: var(--component-textField-padding);
 			align-items: center;
 			color: var(--pr-t-color-input-text-suffix);
@@ -135,7 +135,7 @@
 		}
 
 		.textField-suffix {
-			display: flex;
+			display: inline-flex;
 			padding-inline-end: var(--component-textField-padding);
 			align-items: center;
 			color: var(--pr-t-color-input-text-suffix);

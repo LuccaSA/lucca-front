@@ -1,4 +1,9 @@
 @mixin vars {
 	--components-activityFeed-content-update-display: flex;
 	--components-activityFeed-content-update-icon-display: flex;
+	--components-activityFeed-step-description-alignSelf: auto;
+	--components-activityFeed-step-description-fontStyle: normal;
+	--components-activityFeed-step-description-color: inherit;
+	--components-activityFeed-step-description-lineHeight: inherit;
+	--components-activityFeed-step-before-insetBlockStart: calc(var(--pr-t-spacings-500) + var(--pr-t-spacings-50));
 }
