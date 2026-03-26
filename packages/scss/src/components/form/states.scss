@@ -1,4 +1,5 @@
 @use '@lucca-front/scss/src/commons/utils/form';
+@use '@lucca-front/scss/src/commons/utils/keyframe';
 @use '@lucca-front/scss/src/components/formLabel/exports' as formLabel;
 @use '@lucca-front/scss/src/components/inlineMessage/exports' as inlineMessage;
 @use '@lucca-front/scss/src/components/textField/exports' as textField;
@@ -26,5 +27,15 @@
 		&::after {
 			@include form.required;
 		}
+	}
+}
+
+@mixin critical {
+	.textField {
+		animation-name: shake;
+		animation-iteration-count: 1;
+		animation-duration: var(--commons-animations-durations-standard);
+
+		@include keyframe.shake;
 	}
 }

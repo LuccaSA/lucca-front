@@ -90,10 +90,7 @@
 			}
 
 			.formLabel-tag {
-				&,
-				.tag {
-					@include tag.disabled;
-				}
+				@include tag.disabled;
 			}
 		}
 
@@ -114,13 +111,15 @@
 			}
 		}
 
-		&:has(.formLabel-counter.mod-critical) {
-			@include counterCritical;
+		&:has(.formLabel.is-error) {
+			@include critical;
 		}
 	}
 }
 
 // deprecated
+
+// stylelint-disable no-duplicate-selectors -- deprecated
 .form {
 	@layer components {
 		@include vars;
@@ -197,3 +196,4 @@
 		}
 	}
 }
+// stylelint-enable
