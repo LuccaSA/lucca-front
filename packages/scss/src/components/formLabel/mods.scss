@@ -36,16 +36,8 @@
 
 @mixin counterWarning {
 	--components-formLabel-counter-color: var(--palettes-warning-700);
-
-	.formLabel-counter-content::before {
-		@include icon.generate('sign_warning');
-	}
 }
 
 @mixin counterCritical {
 	--components-formLabel-counter-color: var(--palettes-critical-700);
-
-	.formLabel-counter-content::before {
-		@include icon.generate('sign_error');
-	}
 }
