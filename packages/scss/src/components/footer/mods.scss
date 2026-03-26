@@ -1,3 +1,5 @@
+@use '@lucca-front/scss/src/components/container/exports' as container;
+
 @mixin sticky {
 	--components-footer-position: sticky;
 }
@@ -27,4 +29,8 @@
 
 @mixin withContainer {
 	--components-footer-paddingInline: 0;
+
+	.footer-containerOptional {
+		@include container.insideFooter;
+	}
 }
