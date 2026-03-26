@@ -25,16 +25,5 @@
 			gap: var(--pr-t-spacings-150);
 			flex-direction: var(--components-footer-direction);
 		}
-
-		.footer-containerOptional {
-			display: flex;
-			gap: var(--pr-t-spacings-200);
-			align-items: var(--components-footer-alignItems);
-			flex-grow: 1;
-			justify-content: space-between;
-			flex-direction: var(--components-footer-direction);
-			max-inline-size: var(--commons-container-maxWidth);
-			padding: var(--commons-container-padding);
-		}
 	}
 }

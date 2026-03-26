@@ -1,12 +1,13 @@
 import { NgTemplateOutlet } from '@angular/common';
 import { booleanAttribute, ChangeDetectionStrategy, Component, computed, input, ViewEncapsulation } from '@angular/core';
+import { ContainerComponent } from '@lucca-front/ng/container';
 
 @Component({
 	selector: 'lu-footer',
 	styleUrl: './footer.component.scss',
 	templateUrl: './footer.component.html',
 	encapsulation: ViewEncapsulation.None,
-	imports: [NgTemplateOutlet],
+	imports: [NgTemplateOutlet, ContainerComponent],
 	changeDetection: ChangeDetectionStrategy.OnPush,
 })
 export class FooterComponent {
@@ -16,6 +17,8 @@ export class FooterComponent {
 	 * Applies a container around the Page Header content
 	 */
 	readonly container = input(false, { transform: booleanAttribute });
+
+	readonly containerMax = input<null | 'M' | 'L' | 'XL' | 'XXL' | 'XXXL'>();
 
 	readonly forceNarrow = input(false, { transform: booleanAttribute });
 
