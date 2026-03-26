@@ -12,10 +12,6 @@
 	box-shadow: 0 0 0 1px var(--component-textField-border);
 	inline-size: var(--component-textField-width);
 
-	&:hover {
-		box-shadow: 0 0 0 1px var(--component-textField-borderHover);
-	}
-
 	&:has(.textField-input-value:focus-visible) {
 		@include a11y.focusVisible($offset: 3px);
 	}
