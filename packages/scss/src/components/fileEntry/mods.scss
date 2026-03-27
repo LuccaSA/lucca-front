@@ -1,16 +1,16 @@
 @use '@lucca-front/icons/src/icon/exports' as icon;
 
-@mixin S {
-	--components-fileEntry-padding: var(--pr-t-spacings-50);
-	--components-fileEntry-status-inlineSize: 32px;
-	--components-fileEntry-description-display: none;
-	--components-fileEntry-gridTemplateAreas: 'picture title title toolbar';
-	--components-fileEntry-filename-alignSelf: center;
-	--components-fileEntry-gapInline: var(--pr-t-spacings-75);
-	--components-fileEntry-status-content-svg-margin: calc(var(--pr-t-spacings-100) * -1);
+@mixin L {
+	--components-fileEntry-padding: var(--pr-t-spacings-150);
+	--components-fileEntry-gapInline: var(--components-fileEntry-padding);
+	--components-fileEntry-gridTemplateAreas: 'picture title toolbar' 'picture description toolbar';
+	--components-fileEntry-filename-alignSelf: end;
+	--components-fileEntry-status-inlineSize: 48px;
+	--components-fileEntry-description-display: flex;
+	--components-fileEntry-status-content-svg-margin: 0;
 
 	.fileEntry-status-content-inside-icon {
-		@include icon.S;
+		@include icon.M;
 	}
 }
 

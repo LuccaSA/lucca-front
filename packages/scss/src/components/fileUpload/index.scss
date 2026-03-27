@@ -15,8 +15,8 @@
 			@include structure;
 		}
 
-		&.mod-S {
-			@include S;
+		&.mod-L {
+			@include L;
 
 			&.is-loading {
 				@include loadingS;
