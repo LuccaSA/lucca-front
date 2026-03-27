@@ -20,6 +20,7 @@ export class FieldsetComponent {
 	readonly size = input<'S' | null>(null);
 	readonly horizontal = input(false, { transform: booleanAttribute });
 	readonly expandable = input(false, { transform: booleanAttribute });
+	readonly fullInlineSize = input(false, { transform: booleanAttribute });
 
 	expanded = model(false);
 

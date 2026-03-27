@@ -15,10 +15,18 @@
 		cursor: pointer;
 		font: inherit;
 
+		.lucca-icon {
+			margin-block-start: var(--pr-t-spacings-50);
+		}
+
 		&:focus-visible {
 			@include a11y.focusVisible;
 		}
 	}
+}
+
+@mixin fullInlineSize {
+	--components-fieldset-contentMaxWidth: none;
 }
 
 @mixin withAction {
