@@ -13,7 +13,7 @@
 	inline-size: var(--component-textField-width);
 
 	&:hover {
-		box-shadow: 0 0 0 1px var(--component-textField-borderHover);
+		--component-textField-border: var(--component-textField-borderHover);
 	}
 
 	&:has(.textField-input-value:focus-visible) {

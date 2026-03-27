@@ -1,4 +1,3 @@
-@use '@lucca-front/icons/src/icon/exports' as icons;
 @use '@lucca-front/scss/src/components/tag/exports' as tag;
 
 @mixin S {
@@ -40,5 +39,5 @@
 @mixin counter {
 	@include widthAuto;
 
-	--components-formLabel-paddingRight: var(--pr-t-spacings-600);
+	--components-formLabel-paddingRight: var(--pr-t-spacings-700);
 }

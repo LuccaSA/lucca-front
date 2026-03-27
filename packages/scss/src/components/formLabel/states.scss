@@ -7,3 +7,11 @@
 	--components-formLabel-color: var(--pr-t-color-input-text-disabled);
 	--components-formLabel-cursor: default;
 }
+
+@mixin counterWarning {
+	--components-formLabel-counter-color: var(--palettes-warning-700);
+}
+
+@mixin counterCritical {
+	--components-formLabel-counter-color: var(--palettes-critical-700);
+}

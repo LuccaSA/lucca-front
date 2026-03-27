@@ -13,8 +13,8 @@ function getTemplate(args: TextfieldCounterStory): string {
 	<label class="formLabel mod-counter" id="IDlabel" for="ID">
 		Label
 		<span class="formLabel-counter" id="IDcounter" aria-live="polite">
-			<span aria-hidden="true">8/88</span>
-			<span class="pr-u-mask">
+			<span class="formLabel-counter-content" aria-hidden="true">8/88</span>
+			<span class="formLabel-counter-alt">
 				Votre publication fait 8 caractères de long. 88 caractères maximum sont autorisés.
 			</span>
 		</span>
