@@ -19,16 +19,19 @@ export default {
 			control: {
 				type: 'boolean',
 			},
+			description: 'Supprime la bordure inférieure de la navigation.',
 		},
 		header: {
 			control: {
 				type: 'boolean',
 			},
+			description: 'Adapte le style de la navigation pour une utilisation dans un Page header.',
 		},
 		s: {
 			control: {
 				type: 'boolean',
 			},
+			description: 'Modifie la taille du composant.',
 		},
 	},
 } as Meta;

@@ -67,6 +67,9 @@ export default {
 			},
 			description: "Applique une largeur fixe au champ. A n'utiliser que lorsque la grille de formulaire n'est pas adaptée.",
 		},
+		rolePresentationLabel: {
+			description: "Applique role='presentation' au label du champ dans le cas où celui-ci ne doit pas être lu par les lecteurs d'écran.",
+		},
 	},
 	render: (args, { argTypes }) => {
 		const { required, ...fieldArgs } = args;

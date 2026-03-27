@@ -86,12 +86,14 @@ export default {
 			control: {
 				type: 'select',
 			},
+			description: "Détermine le mode d'ouverture du popover.",
 		},
 		size: {
 			options: [null, 'XS', 'S', 'M'],
 			control: {
 				type: 'select',
 			},
+			description: 'Modifie la taille du composant.',
 		},
 		closeDelay: {
 			description: 'Délai nécessaire à la fermeture du popover.',
