@@ -7,14 +7,14 @@
 	}
 
 	@layer mods {
-		&.mod-S {
-			@include S;
+		&.mod-L {
+			@include L;
 		}
 
 		&.mod-media {
 			@include media;
 
-			&.mod-S {
+			&.mod-L {
 				@include mediaS;
 			}
 		}
@@ -22,7 +22,7 @@
 		&.is-error {
 			@include error;
 
-			&.mod-S {
+			&.mod-L {
 				@include errorS;
 			}
 		}
@@ -30,7 +30,7 @@
 		&.is-loading {
 			@include loading;
 
-			&.mod-S {
+			&.mod-L {
 				@include loadingS;
 			}
 		}
