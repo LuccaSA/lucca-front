@@ -9,11 +9,18 @@ import typescript from 'typescript-eslint';
 import { defineConfig } from 'eslint/config';
 import tsParser from '@typescript-eslint/parser';
 
-const STRICTIFIED_NG_EXCLUDE_ENTRIES = ['packages/ng/schematics/**/*.ts', 'stories/**/*.ts'];
-
 export default defineConfig(
 	{
-		ignores: ['dist/', '.storybook/**', '**/schematics/**/tests/', 'node_modules/', '.angular/', ...STRICTIFIED_NG_EXCLUDE_ENTRIES],
+		ignores: [
+			'dist/',
+			'.storybook/**',
+			'**/schematics/**/tests/',
+			'node_modules/',
+			'.angular/',
+			// schematics && stories can be strictified
+			'packages/ng/schematics/**/*.ts',
+			'stories/**/*.ts',
+		],
 	},
 	{
 		linterOptions: {
