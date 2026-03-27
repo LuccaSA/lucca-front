@@ -29,6 +29,10 @@
 			@include withAction;
 		}
 
+		&.mod-fullInlineSize {
+			@include fullInlineSize;
+		}
+
 		@include media.max('XXS') {
 			@include narrow;
 		}

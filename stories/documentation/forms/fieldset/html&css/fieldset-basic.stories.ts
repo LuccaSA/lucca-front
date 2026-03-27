@@ -7,6 +7,7 @@ interface FieldsetBasicStory {
 	helper: string;
 	heading: string;
 	size: string;
+	fullInlineSize: boolean;
 }
 
 export default {
@@ -23,6 +24,13 @@ export default {
 				type: 'boolean',
 			},
 			if: { arg: 'horizontal', truthy: false },
+		},
+		fullInlineSize: {
+			control: {
+				type: 'boolean',
+			},
+			if: { arg: 'expandable', truthy: true },
+			description: 'Permet au fieldset de prendre toute la largeur.',
 		},
 		expanded: {
 			control: {
@@ -51,6 +59,7 @@ export default {
 
 function getTemplate(args: FieldsetBasicStory): string {
 	const horizontal = args.horizontal ? ` mod-horizontal` : ``;
+	const fullInlineSize = args.fullInlineSize ? ` mod-fullInlineSize` : ``;
 	const s = args.size === 'S' ? ` mod-S` : ``;
 	const helper = args.helper
 		? `
@@ -82,7 +91,7 @@ function getTemplate(args: FieldsetBasicStory): string {
 		</div>`;
 
 	if (args.expandable === true)
-		return `<fieldset class="fieldset mod-expandable${s}" aria-labelledby="fieldsetTitleContent1">
+		return `<fieldset class="fieldset mod-expandable${s}${fullInlineSize}" aria-labelledby="fieldsetTitleContent1">
 	<legend class="fieldset-title">
 		<button type="button" class="fieldset-title-content" id="fieldsetTitleContent1" [attr.aria-expanded]="expanded" (click)="expanded = !expanded">
 			<span class="fieldset-title-content-text">
@@ -120,6 +129,7 @@ export const Basic: StoryObj<FieldsetBasicStory> = {
 		size: null,
 		expandable: false,
 		expanded: false,
+		fullInlineSize: false,
 		horizontal: false,
 	},
 	render: Template,
