@@ -22,7 +22,7 @@ export default {
 			control: {
 				type: 'boolean',
 			},
-			descripotion: 'Désactive le champ.',
+			description: 'Désactive le champ.',
 		},
 		label: {
 			control: {

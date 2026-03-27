@@ -749,8 +749,12 @@ export const AddOption = generateStory({
 	},
 	storyPartial: {
 		argTypes: {
-			addOptionLabel: { control: { type: 'text' } },
+			addOptionLabel: {
+				control: { type: 'text' },
+				description: "Label affiché sur le bouton d'ajout d'option.",
+			},
 			addOptionStrategy: {
+				description: "Définit les conditions pour afficher le bouton d'ajout d'option.",
 				control: {
 					type: 'select',
 					options: ['never', 'always', 'if-empty-clue', 'if-not-empty-clue'],

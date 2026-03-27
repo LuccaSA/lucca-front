@@ -21,6 +21,9 @@ export default {
 		thin: {
 			description: "Diminue l'épaisseur de la jauge.",
 		},
+		vertical: {
+			description: 'Affiche la jauge verticalement.',
+		},
 		animated: {
 			description: 'Ajoute une animation au chargement ou lorsque la valeur est modifiée.',
 		},

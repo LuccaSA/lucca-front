@@ -141,6 +141,12 @@ export default {
 		structure: {
 			description: "Augmente le border-radius du champ pour l'utiliser en élément de structure.",
 		},
+		buttonFilled: {
+			description: 'Affiche le bouton comme action principale de la page.',
+		},
+		accept: {
+			description: 'Liste des formats de fichiers acceptés.',
+		},
 	},
 	decorators: [
 		moduleMetadata({

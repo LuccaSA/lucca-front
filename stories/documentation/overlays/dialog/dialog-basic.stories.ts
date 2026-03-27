@@ -58,12 +58,13 @@ export default {
 			control: {
 				type: 'select',
 			},
+			description: 'Modifie la taille de la dialog.',
 		},
 		neutralBackground: {
 			control: {
 				type: 'boolean',
 			},
-			description: '[v18.3]',
+			description: '[v18.3] Applique un fond neutre au contenu de la dialog.',
 		},
 	},
 } as Meta;

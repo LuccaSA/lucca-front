@@ -30,6 +30,9 @@ export default {
 		innerContent: {
 			description: 'Permet de passer le contenu via un innerHTML',
 		},
+		content: {
+			table: { disable: true },
+		},
 	},
 	decorators: [
 		moduleMetadata({

@@ -11,18 +11,49 @@ export default {
 			control: {
 				type: 'radio',
 			},
+			description: 'Modifie la taille du composant.',
 		},
 		state: {
 			options: [null, 'loading', 'error'],
 			control: {
 				type: 'radio',
 			},
+			description: "Modifie l'état du composant.",
 		},
 		previewUrl: {
 			if: { arg: 'iconOverride', truthy: false },
+			description: "URL de prévisualisation de l'image uploadée.",
 		},
 		displayFileName: {
 			if: { arg: 'media', truthy: true },
+			description: "Affiche le nom du fichier sous l'image en vue <code>media</code>.",
+		},
+		media: {
+			description: 'Affiche le fichier avec une mise en forme adaptée aux visuels.',
+		},
+		iconOverride: {
+			description: "Remplace l'icône de format de fichier.",
+		},
+		downloadURL: {
+			description: 'URL de téléchargement du fichier.',
+		},
+		inlineMessageError: {
+			description: "Message d'erreur affiché sous le composant.",
+		},
+		deletable: {
+			description: 'Affiche un bouton de suppression.',
+		},
+		withPassword: {
+			description: 'Affiche un champ permettant de définir un mot de passe au fichier.',
+		},
+		fileName: {
+			description: 'Nom du fichier.',
+		},
+		fileSize: {
+			description: 'Poids du fichier (en octets).',
+		},
+		fileType: {
+			description: 'Type MIME du fichier.',
 		},
 	},
 	decorators: [

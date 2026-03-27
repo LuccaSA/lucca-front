@@ -61,6 +61,7 @@ export default {
 			control: {
 				type: 'select',
 			},
+			description: 'Modifie la taille du composant.',
 		},
 		disabled: {
 			description: 'Marque le produit comme inactif.',
