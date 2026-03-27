@@ -34,9 +34,9 @@
 	--components-dialog-maxHeight: none;
 	--components-dialog-maxHeightFallback: var(--components-dialog-maxHeight);
 	--components-dialog-height: calc(100% - var(--pr-t-spacings-100) * 2);
-	--components-dialog-maxWidth: calc(100vw - var(--pr-t-spacings-200));
+	--components-dialog-maxWidth: calc(100vw - var(--pr-t-spacings-200) - var(--commons-pushPanel-width));
 	--components-dialog-borderRadius: var(--pr-t-border-radius-structure);
-	--components-dialog-inset: var(--pr-t-spacings-100) var(--pr-t-spacings-100) var(--pr-t-spacings-100) auto;
+	--components-dialog-inset: var(--pr-t-spacings-100) calc(var(--pr-t-spacings-100) + var(--commons-pushPanel-width)) var(--pr-t-spacings-100) auto;
 	--components-dialog-translateX: var(--components-dialog-translate);
 	--components-dialog-translateY: 0;
 	--components-dialog-translate-spacing: calc(var(--pr-t-spacings-500) * 2);
@@ -49,9 +49,9 @@
 	--components-dialog-maxHeight: calc(100dvh - var(--pr-t-spacings-200));
 	--components-dialog-maxHeightFallback: calc(100vh - var(--pr-t-spacings-200));
 	--components-dialog-maxWidth: none;
-	--components-dialog-inset: auto var(--pr-t-spacings-100) var(--pr-t-spacings-100) var(--pr-t-spacings-100);
+	--components-dialog-inset: auto calc(var(--pr-t-spacings-100) + var(--commons-pushPanel-width)) var(--pr-t-spacings-100) var(--pr-t-spacings-100);
 	--components-dialog-borderRadius: var(--pr-t-border-radius-structure);
-	--components-dialog-width: calc(100% - var(--pr-t-spacings-100) * 2);
+	--components-dialog-width: calc(100% - var(--pr-t-spacings-100) * 2 - var(--commons-pushPanel-width));
 	--components-dialog-height: fit-content;
 	--components-dialog-translateX: 0;
 	--components-dialog-translateY: var(--components-dialog-translate);
