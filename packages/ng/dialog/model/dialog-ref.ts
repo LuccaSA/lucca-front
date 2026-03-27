@@ -1,5 +1,4 @@
 import { DialogRef } from '@angular/cdk/dialog';
-import { assertNotNil } from '@lucca-front/ng/core';
 import { isObservable, Observable, of, Subscription, take } from 'rxjs';
 import { filter, map, takeUntil } from 'rxjs/operators';
 import { LuDialogConfig, LuDialogData, LuDialogResult, LuDialogSize } from './dialog-config';
@@ -64,8 +63,7 @@ export class LuDialogRef<C = unknown, TData = LuDialogData<C>> {
 		let canClose: boolean | Observable<boolean> = true;
 
 		try {
-			assertNotNil(this.instance);
-			canClose = this.config.canClose?.(this.instance) ?? true;
+			canClose = this.instance !== null ? (this.config.canClose?.(this.instance) ?? true) : true;
 		} catch {
 			canClose = true;
 		}
