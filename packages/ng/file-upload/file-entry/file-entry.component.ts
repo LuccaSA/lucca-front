@@ -8,11 +8,11 @@ import { FormFieldComponent } from '@lucca-front/ng/form-field';
 import { TextInputComponent } from '@lucca-front/ng/forms';
 import { IconComponent } from '@lucca-front/ng/icon';
 import { InlineMessageComponent } from '@lucca-front/ng/inline-message';
+import { LuTooltipTriggerDirective } from '@lucca-front/ng/tooltip';
 import { Subject } from 'rxjs';
 import { FileEntry } from '../file-upload-entry';
 import { LU_FILE_UPLOAD_TRANSLATIONS } from '../file-upload.translate';
 import { formatFileSize } from '../formatter';
-import { LuTooltipTriggerDirective } from '@lucca-front/ng/tooltip';
 
 @Component({
 	selector: 'lu-file-entry',
@@ -38,7 +38,7 @@ export class FileEntryComponent {
 
 	readonly entry = input.required<FileEntry>();
 
-	readonly size = input<'S' | null>(null);
+	readonly size = input<null | 'L'>(null);
 
 	readonly iconOverride = input('');
 
@@ -111,12 +111,12 @@ export class FileEntryComponent {
 			}
 		}
 
-		if (!this.media() && this.size() === null) {
-			return null;
-		}
-
-		if (this.size() === 'S' && !this.media()) {
-			return this.fileTypeDisplay() + fileSize;
+		if (!this.media()) {
+			if (this.size() === 'L') {
+				return null;
+			} else {
+				return this.fileTypeDisplay() + fileSize;
+			}
 		}
 
 		return this.fileName() + ' – ' + this.fileTypeDisplay() + fileSize;

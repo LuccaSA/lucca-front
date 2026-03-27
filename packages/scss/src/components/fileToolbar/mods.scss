@@ -2,8 +2,9 @@
 
 @mixin disablePositioning {
 	--components-fileToolbar-display: contents;
+	--components-fileToolbar-list-padding: 0;
 }
 
-@mixin disablePositioningS {
-	--components-fileToolbar-list-padding: 0;
+@mixin disablePositioningL {
+	--components-fileToolbar-list-padding: var(--pr-t-spacings-50);
 }

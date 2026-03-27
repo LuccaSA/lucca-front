@@ -12,7 +12,7 @@ export default {
 	],
 	argTypes: {
 		size: {
-			options: ['S', null],
+			options: [null, 'L'],
 			control: {
 				type: 'radio',
 			},
@@ -21,7 +21,7 @@ export default {
 
 	render: (args) => {
 		const { size, disablePositioning, downloadAction, deleteAction, ..._inputArgs } = args;
-		const sizeClass = size === 'S' ? `mod-S` : ``;
+		const sizeClass = size === 'L' ? `mod-L` : ``;
 		const disablePositioningClass = disablePositioning ? `mod-disablePositioning` : ``;
 		const down = downloadAction
 			? `<li class="fileToolbar-list-item">

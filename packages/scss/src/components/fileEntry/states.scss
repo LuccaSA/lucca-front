@@ -11,12 +11,13 @@
 	--components-fileEntry-status-content-img-opacity: 0.08;
 }
 
-@mixin loadingS {
+@mixin loadingL {
 	.fileEntry-status-content-inside-loading.loading {
+		// TODO
 		@include loading.S;
 	}
 }
 
-@mixin errorS {
+@mixin errorL {
 	--components-fileEntry-status-blockSize: 100%;
 }
