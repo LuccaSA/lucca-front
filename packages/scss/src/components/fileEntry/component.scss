@@ -79,6 +79,8 @@
 		}
 
 		.fileEntry-status-content-inside-icon {
+			@include icon.S;
+
 			color: var(--palettes-critical-700);
 		}
 

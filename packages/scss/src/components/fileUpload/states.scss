@@ -28,8 +28,8 @@
 	--components-fileUpload-button-display: none;
 }
 
-@mixin loadingS {
-	--components-fileUpload-instruction-display: block;
+@mixin loadingL {
+	--components-fileUpload-instruction-display: flex;
 }
 
 @mixin hidden {
