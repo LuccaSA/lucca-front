@@ -34,8 +34,8 @@ export abstract class ALuSelectInput<T, TPicker extends ILuPickerPanel<T> = ILuP
 	 * contriol value accessor interface implementation
 	 */
 	protected _value: T | T[];
-	setValue(value: T | T[]) {
-		if (this.disabled) {
+	setValue(value: T | T[] | undefined) {
+		if (this.disabled || !value) {
 			return;
 		}
 		this.value = value;
@@ -59,12 +59,12 @@ export abstract class ALuSelectInput<T, TPicker extends ILuPickerPanel<T> = ILuP
 		this.value = value;
 	}
 	// From ControlValueAccessor interface
-	protected _cvaOnChange = (v: T | T[]) => void v;
+	protected _cvaOnChange: (v: T | T[]) => unknown = (v: T | T[]) => void v;
 	registerOnChange(fn: (v: T | T[]) => unknown) {
 		this._cvaOnChange = fn;
 	}
 	// From ControlValueAccessor interface
-	protected _onTouched = () => void {};
+	protected _onTouched: () => unknown = () => {};
 	registerOnTouched(fn: () => unknown) {
 		this._onTouched = fn;
 	}
@@ -172,7 +172,7 @@ export abstract class ALuSelectInput<T, TPicker extends ILuPickerPanel<T> = ILuP
 		}
 		return undefined;
 	}
-	protected displayView(view: ViewRef) {
+	protected displayView(view: ViewRef | undefined) {
 		if (view) {
 			this._displayContainer.insert(view);
 		}

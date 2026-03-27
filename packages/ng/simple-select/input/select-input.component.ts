@@ -82,7 +82,10 @@ export class LuSimpleSelectInputComponent<T> extends ALuSelectInputComponent<T, 
 	}
 
 	override enableFilterPillMode() {
-		this._panelRef = this.panelRefFactory.buildAndAttachPanelRef(this, this.filterPillPanelAnchorRef());
+		const host = this.filterPillPanelAnchorRef();
+		if (host) {
+			this._panelRef = this.panelRefFactory.buildAndAttachPanelRef(this, host);
+		}
 		super.enableFilterPillMode();
 	}
 }

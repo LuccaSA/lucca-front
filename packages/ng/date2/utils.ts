@@ -31,16 +31,16 @@ const modeToPeriodStart: Record<CalendarMode, (date: Date) => Date> = {
 	year: startOfDecade,
 };
 
-export function comparePeriods(mode: CalendarMode, a: Date, b: Date): boolean {
-	return modeToComparator[mode](a, b);
+export function comparePeriods(mode: CalendarMode | null, a: Date, b: Date): boolean {
+	return mode ? modeToComparator[mode](a, b) : false;
 }
 
 export function compareCalendarPeriods(mode: CalendarMode, a: Date, b: Date): boolean {
-	return modeToCalendarComparator[mode](a, b);
+	return mode ? modeToCalendarComparator[mode](a, b) : false;
 }
 
-export function startOfPeriod(mode: CalendarMode, date: Date): Date {
-	return modeToPeriodStart[mode](date);
+export function startOfPeriod(mode: CalendarMode | null, date: Date): Date {
+	return mode ? modeToPeriodStart[mode](date) : date;
 }
 
 function stringToDateISO(value: string): Date {
@@ -51,6 +51,9 @@ function stringToDateISO(value: string): Date {
 	return res;
 }
 
+export function transformDateInputToDate(value: null | undefined): null;
+export function transformDateInputToDate(value: Date | string): Date;
+export function transformDateInputToDate(value: Date | string | null): Date | null;
 export function transformDateInputToDate(value: Date | null | undefined | string): Date | null {
 	if (isNil(value)) {
 		return null;
@@ -61,6 +64,8 @@ export function transformDateInputToDate(value: Date | null | undefined | string
 	return stringToDateISO(value);
 }
 
+export function transformDateToDateISO(value: null): null;
+export function transformDateToDateISO(value: Date): string;
 export function transformDateToDateISO(value: Date | null): string | null {
 	if (isNil(value)) {
 		return null;
@@ -82,17 +87,20 @@ export function transformDateRangeInputToDateRange(value: DateRange | null | und
 		return value;
 	}
 
+	const valueEnd = value.end ? transformDateInputToDate(value.end) : null;
+
 	return {
 		...value,
 		start: transformDateInputToDate(value.start),
-		end: transformDateInputToDate(value.end),
+		end: valueEnd,
 	};
 }
 
 export function transformDateRangeToDateRangeInput(value: DateRange): DateRangeInput {
+	const valueEnd = value.end ? transformDateToDateISO(value.end) : null;
 	return {
 		...value,
 		start: transformDateToDateISO(value.start),
-		end: transformDateToDateISO(value.end),
+		end: valueEnd,
 	};
 }

@@ -104,7 +104,7 @@ export class DateInputComponent extends AbstractDateComponent implements OnInit,
 
 	selectedDate = signal<Date | null>(null);
 
-	initialValue = signal<Date | null>(undefined);
+	initialValue = signal<Date | null | undefined>(undefined);
 	dateFromWriteValue = signal<Date | null>(null);
 
 	calendar = viewChild(Calendar2Component);
@@ -119,7 +119,8 @@ export class DateInputComponent extends AbstractDateComponent implements OnInit,
 				return textInput;
 			}
 		}
-		if (this.selectedDate() && this.isValidDate(this.selectedDate())) {
+		const selectedDate = this.selectedDate();
+		if (selectedDate && this.isValidDate(selectedDate)) {
 			let formatter: Intl.DateTimeFormat;
 			switch (this.mode()) {
 				case 'day':
@@ -132,7 +133,7 @@ export class DateInputComponent extends AbstractDateComponent implements OnInit,
 					formatter = this.intlDateTimeFormatYear;
 					break;
 			}
-			return formatter.format(this.selectedDate());
+			return formatter.format(selectedDate);
 		}
 		// If we are initializing the component, we don't want to display the value
 		if (textInput === 'ɵ') {
@@ -146,10 +147,11 @@ export class DateInputComponent extends AbstractDateComponent implements OnInit,
 
 	combinedGetCellInfo = (date: Date, mode: CalendarMode): CellStatus => {
 		const infoFromInput = this.getCellInfo()?.(date, mode);
+		const selectedDate = this.selectedDate();
 		return {
 			classes: [...(infoFromInput?.classes || [])],
 			disabled: infoFromInput?.disabled || !this.isInMinMax(date, mode),
-			selected: this.selectedDate() && this.calendarMode() === mode && comparePeriods(mode, date, this.selectedDate()),
+			selected: Boolean(selectedDate && this.calendarMode() === mode && comparePeriods(mode, date, selectedDate)),
 			label: infoFromInput?.label,
 		};
 	};
@@ -174,7 +176,7 @@ export class DateInputComponent extends AbstractDateComponent implements OnInit,
 	filterPillPopoverCloseFn?: () => void;
 
 	get isNavigationButtonFocused(): boolean {
-		return [this.previousButton()?.nativeElement, this.nextButton()?.nativeElement].includes(document.activeElement);
+		return [this.previousButton()?.nativeElement, this.nextButton()?.nativeElement].includes(document.activeElement || undefined);
 	}
 
 	constructor() {
@@ -201,11 +203,12 @@ export class DateInputComponent extends AbstractDateComponent implements OnInit,
 				return;
 			}
 			if (inputValue.length > 0) {
-				let parsed: Date;
+				let parsed: Date | null;
 				try {
 					parsed = parse(inputValue, this.dateFormatWithMode(), startOfDay(new Date()));
 				} catch {
 					/* not a correct date */
+					parsed = null;
 				}
 				if (parsed instanceof Date && parsed.getFullYear() > 999) {
 					this.selectedDate.set(startOfDay(parsed));
@@ -242,8 +245,8 @@ export class DateInputComponent extends AbstractDateComponent implements OnInit,
 		});
 
 		ɵeffectWithDeps([this.calendarMode, this.tabbableDate], (calendarMode, tabbableDate) => {
-			if (tabbableDate && !comparePeriods(calendarMode, tabbableDate, this.currentDate())) {
-				this.currentDate.set(startOfPeriod(calendarMode, tabbableDate));
+			if (tabbableDate && !comparePeriods(calendarMode ?? null, tabbableDate, this.currentDate())) {
+				this.currentDate.set(startOfPeriod(calendarMode ?? null, tabbableDate));
 			}
 			if (!this.isNavigationButtonFocused && !this.inputFocused()) {
 				this.calendar()?.blurTabbableDate();
@@ -258,7 +261,7 @@ export class DateInputComponent extends AbstractDateComponent implements OnInit,
 		this.ngControl = this.#injector.get(NgControl);
 	}
 
-	#safeCompareDate(a: Date, b: Date): boolean {
+	#safeCompareDate(a: Date | null, b: Date | null): boolean {
 		return a === b || (!!a && !!b && isSameDay(a, b));
 	}
 
@@ -350,7 +353,7 @@ export class DateInputComponent extends AbstractDateComponent implements OnInit,
 			this.initialValue.set(_date);
 		}
 
-		if (date != null) {
+		if (date != null && _date != null) {
 			const start = startOfDay(_date);
 			this.dateFromWriteValue.set(start);
 			this.selectedDate.set(start);
@@ -368,11 +371,11 @@ export class DateInputComponent extends AbstractDateComponent implements OnInit,
 
 	override setDisabledState(isDisabled: boolean) {
 		this.filterPillDisabled.set(isDisabled);
-		super.setDisabledState(isDisabled);
+		super.setDisabledState?.(isDisabled);
 	}
 
 	reset(): Date | null {
-		const newValue = this.clearBehavior() === 'reset' ? this.initialValue() : null;
+		const newValue = this.clearBehavior() === 'reset' ? (this.initialValue() ?? null) : null;
 		this.dateFromWriteValue.set(newValue);
 		this.selectedDate.set(newValue);
 		return newValue;

@@ -33,7 +33,7 @@ export class LuMultiSelectWithSelectAllDirective<TValue> extends ɵIsSelectedStr
 
 	readonly mode = this.#mode.asReadonly();
 	readonly values = this.#values.asReadonly();
-	readonly totalCount = toSignal(inject(CORE_SELECT_API_TOTAL_COUNT_PROVIDER).totalCount$);
+	readonly totalCount = toSignal(inject(CORE_SELECT_API_TOTAL_COUNT_PROVIDER).totalCount$, { initialValue: 0 });
 
 	readonly #hasValue = computed(() => this.mode() !== 'none');
 
@@ -69,13 +69,13 @@ export class LuMultiSelectWithSelectAllDirective<TValue> extends ɵIsSelectedStr
 		const clueChange = toSignal(this.select.clueChange$);
 		effect(() => {
 			if (clueChange()) {
-				this.select.panelHeaderTpl.set(null);
+				this.select.panelHeaderTpl.set(undefined);
 			} else {
 				this.select.panelHeaderTpl.set(LuMultiSelectAllHeaderComponent);
 			}
 		});
 
-		this.select.registerOnChange = (fn) => this.registerOnChange(fn);
+		(this.select as { registerOnChange: (fn: (value: TValue[] | LuMultiSelection<TValue>) => void) => void }).registerOnChange = (fn) => this.registerOnChange(fn);
 		this.select.writeValue = (value) => this.writeValue(value);
 		this.select.clearValue = ($event) => this.clearValue($event);
 
@@ -84,7 +84,7 @@ export class LuMultiSelectWithSelectAllDirective<TValue> extends ɵIsSelectedStr
 		this.select.hasValue = () => this.#hasValue();
 		this.select.isFilterPillEmpty = computed(() => !this.#hasValue());
 		this.select.useSingleOptionDisplayer = computed(() => this.#mode() === 'include');
-		this.select.valueLength = this.displayerCount;
+		this.select.valueLength = computed(() => this.displayerCount() ?? 0);
 	}
 
 	setSelectAll(selectAll: boolean): void {
@@ -165,7 +165,7 @@ export class LuMultiSelectWithSelectAllDirective<TValue> extends ɵIsSelectedStr
 		this.#values.set(values);
 	}
 
-	clearValue($event: Event): void {
+	clearValue($event?: Event): void {
 		this.#mode.set('none');
 		this.#selectClearValue($event);
 	}

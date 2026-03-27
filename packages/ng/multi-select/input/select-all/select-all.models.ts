@@ -8,7 +8,7 @@ export interface LuMultiSelectWithSelectAllContext {
 	values: Signal<unknown[]>;
 	displayerLabel: Signal<string>;
 	totalCount: Signal<number>;
-	displayerCount: Signal<number>;
+	displayerCount: Signal<number | null>;
 	intl: Signal<ILuMultiSelectLabel>;
 }
 

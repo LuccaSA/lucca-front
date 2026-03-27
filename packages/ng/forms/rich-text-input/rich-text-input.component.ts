@@ -131,7 +131,9 @@ export class RichTextInputComponent implements OnInit, OnDestroy, ControlValueAc
 			this.#editor.registerUpdateListener((payload) => this.#onEditorUpdate(payload)),
 		);
 
-		this.pluginComponents().forEach((plugin) => plugin.setEditorInstance(this.#editor));
+		if (this.#editor) {
+			this.pluginComponents().forEach((plugin) => plugin.setEditorInstance(this.#editor!));
+		}
 
 		if (this.#allPlugins().length > 0) {
 			this.#allPlugins()[this.#focusedPlugin].tabindex?.set(0);
@@ -147,7 +149,7 @@ export class RichTextInputComponent implements OnInit, OnDestroy, ControlValueAc
 		if (value) {
 			this.#editor?.update(
 				() => {
-					this.#richTextFormatter.parse(this.#editor, value);
+					this.#richTextFormatter.parse(this.#editor!, value);
 				},
 				{ tag: updateTags },
 			);
@@ -214,14 +216,14 @@ export class RichTextInputComponent implements OnInit, OnDestroy, ControlValueAc
 			this.#editor?.read(() => {
 				let result = '';
 				// ignore empty nodes
-				if (!$isRootTextContentEmpty(isComposing, false)) {
+				if (!$isRootTextContentEmpty(isComposing ?? false, false) && this.#editor) {
 					result = this.#richTextFormatter.format(this.#editor);
 				}
 				this.touch();
 				this.#onChange?.(result);
 			});
 		}
-		const currentCanShowPlaceholder = this.#editor?.getEditorState().read($canShowPlaceholderCurry(isComposing));
-		this.currentCanShowPlaceholder.set(currentCanShowPlaceholder);
+		const currentCanShowPlaceholder = this.#editor?.getEditorState().read($canShowPlaceholderCurry(isComposing ?? false));
+		this.currentCanShowPlaceholder.set(currentCanShowPlaceholder ?? false);
 	}
 }

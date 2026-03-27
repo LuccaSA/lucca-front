@@ -62,8 +62,8 @@ describe('ALuCoreSelectApiDirective', () => {
 
 	beforeEach(() => {
 		spectator = createComponent({ detectChanges: false });
-		testApi = spectator.query(TestDirective);
-		select = spectator.query<LuSimpleSelectInputComponent<TestEntity>>(LuSimpleSelectInputComponent);
+		testApi = spectator.query(TestDirective)!;
+		select = spectator.query<LuSimpleSelectInputComponent<TestEntity>>(LuSimpleSelectInputComponent)!;
 		getOptionsSpy = jest.spyOn(testApi, 'getOptions');
 	});
 
@@ -156,7 +156,7 @@ describe('ALuCoreSelectApiDirective', () => {
 		// // Assert
 		expect(testApi.getOptions).toHaveBeenCalledTimes(3);
 
-		let options: readonly TestEntity[];
+		let options: readonly TestEntity[] = [];
 
 		select.options$.subscribe((o) => (options = o));
 
@@ -201,7 +201,7 @@ describe('ALuCoreSelectApiDirective', () => {
 		spectator.tick(MAGIC_OPTION_SCROLL_DELAY);
 
 		// Assert
-		let options: readonly TestEntity[];
+		let options: readonly TestEntity[] = [];
 		select.options$.subscribe((o) => (options = o));
 		expect(options).toEqual([
 			{ id: 1, name: 'test 1' },

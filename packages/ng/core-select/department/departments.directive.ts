@@ -1,6 +1,7 @@
 import { HttpClient } from '@angular/common/http';
 import { computed, Directive, forwardRef, inject, input, OnInit } from '@angular/core';
 import { toObservable } from '@angular/core/rxjs-interop';
+import { isNotNil } from '@lucca-front/ng/core';
 import { CORE_SELECT_API_TOTAL_COUNT_PROVIDER, CoreSelectApiTotalCountProvider, TreeNode } from '@lucca-front/ng/core-select';
 import { ALuCoreSelectApiDirective } from '@lucca-front/ng/core-select/api';
 import { ILuDepartment } from '@lucca-front/ng/department';
@@ -45,12 +46,12 @@ export class LuCoreSelectDepartmentsDirective<T extends ILuDepartment = ILuDepar
 
 	protected override getOptions(params: Record<string, string | number | boolean> | null): Observable<TreeNode<T>[]> {
 		return this.httpClient
-			.get<TreeNode<T>>(this.url(), {
-				params,
+			.get<{ children?: TreeNode<T>[] }>(this.url(), {
+				params: params ?? {},
 			})
 			.pipe(
 				map((data) => {
-					return data.children;
+					return data.children ?? [];
 				}),
 			);
 	}
@@ -67,7 +68,7 @@ export class LuCoreSelectDepartmentsDirective<T extends ILuDepartment = ILuDepar
 				}
 				return undefined;
 			})
-			.filter((o) => !!o);
+			.filter(isNotNil);
 	}
 
 	protected override params$: Observable<Record<string, string | number | boolean>> = toObservable(
@@ -93,8 +94,9 @@ export class LuCoreSelectDepartmentsDirective<T extends ILuDepartment = ILuDepar
 
 	protected flattenTree(branch: TreeNode<T>): T[] {
 		const result: T[] = [branch.node];
-		if (branch.children.length > 0) {
-			result.push(...branch.children.map((child) => this.flattenTree(child)).flat());
+		const children = branch.children ?? [];
+		if (children.length > 0) {
+			result.push(...children.map((child) => this.flattenTree(child)).flat());
 		}
 		return result;
 	}

@@ -54,7 +54,7 @@ export abstract class AbstractDateComponent {
 		transform: transformDateInputToDate,
 	});
 
-	calendarMode = model<CalendarMode>();
+	calendarMode = model<CalendarMode | null>(null);
 
 	readonly panelOpened = output<void>();
 
@@ -86,34 +86,34 @@ export abstract class AbstractDateComponent {
 
 		switch (mode) {
 			case 'day':
-				return this.min().getTime() <= date.getTime();
+				return (this.min()?.getTime() ?? 0) <= date.getTime();
 			case 'month':
-				return isBefore(startOfMonth(this.min()), startOfMonth(date)) || isSameMonth(this.min(), date);
+				return isBefore(startOfMonth(this.min() ?? 0), startOfMonth(date)) || isSameMonth(this.min() ?? 0, date);
 			case 'year':
-				return this.min().getFullYear() <= date.getFullYear();
+				return (this.min()?.getFullYear() ?? 0) <= date.getFullYear();
 			default:
 				return true;
 		}
 	}
 
 	isBeforeMax(date: Date, mode: CalendarMode): boolean {
-		if (!this.max()) {
-			return true;
+		const max = this.max();
+		if (max) {
+			switch (mode) {
+				case 'day':
+					return max.getTime() >= date.getTime();
+				case 'month':
+					return isAfter(startOfMonth(max), startOfMonth(date)) || isSameMonth(max, date);
+				case 'year':
+					return max.getFullYear() >= date.getFullYear();
+				default:
+					return true;
+			}
 		}
-
-		switch (mode) {
-			case 'day':
-				return this.max().getTime() >= date.getTime();
-			case 'month':
-				return isAfter(startOfMonth(this.max()), startOfMonth(date)) || isSameMonth(this.max(), date);
-			case 'year':
-				return this.max().getFullYear() >= date.getFullYear();
-			default:
-				return true;
-		}
+		return true;
 	}
 
-	isValidDate(date: Date): boolean {
+	isValidDate(date: Date | null | undefined): date is Date {
 		return !!date && !isNaN(date.getTime());
 	}
 
@@ -137,15 +137,15 @@ export abstract class AbstractDateComponent {
 		switch (mode) {
 			case 'year':
 				this.currentDate.set(addYears(this.currentDate(), direction * 10));
-				this.tabbableDate.set(addYears(this.tabbableDate(), direction * 10));
+				this.tabbableDate.set(addYears(this.tabbableDate() ?? 0, direction * 10));
 				break;
 			case 'month':
 				this.currentDate.set(addYears(this.currentDate(), direction));
-				this.tabbableDate.set(addYears(this.tabbableDate(), direction));
+				this.tabbableDate.set(addYears(this.tabbableDate() ?? 0, direction));
 				break;
 			case 'day':
 				this.currentDate.set(addMonths(this.currentDate(), direction));
-				this.tabbableDate.set(addMonths(this.tabbableDate(), direction));
+				this.tabbableDate.set(addMonths(this.tabbableDate() ?? 0, direction));
 				break;
 		}
 	}

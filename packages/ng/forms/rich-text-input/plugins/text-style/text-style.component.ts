@@ -48,9 +48,9 @@ export class TextStyleComponent implements OnDestroy, RichTextPluginComponent {
 	}
 
 	dispatchCommand() {
-		this.#editor.dispatchCommand(FORMAT_TEXT_COMMAND, this.format());
+		this.#editor?.dispatchCommand(FORMAT_TEXT_COMMAND, this.format());
 		// force update selection
-		this.#editor.dispatchCommand(SELECTION_CHANGE_COMMAND, undefined);
+		this.#editor?.dispatchCommand(SELECTION_CHANGE_COMMAND, undefined);
 	}
 
 	setDisabledState(isDisabled: boolean) {
