@@ -1,0 +1,556 @@
+<table class="demo-QAtable">
+	<tbody>
+		<tr>
+			<td style="width: 8rem"></td>
+			<td>
+				<div class="demo-QAtable-list">HTML</div>
+			</td>
+			<td>
+				<div class="demo-QAtable-list">Angular</div>
+			</td>
+		</tr>
+		<tr>
+			<td>Default</td>
+			<td>
+				<div class="demo-QAtable-list">
+					<div class="fileEntryDisplayWrapper">
+						<dl class="fileEntry">
+							<dt class="fileEntry-filename">
+								<div class="fileEntry-filename-tooltip">dummyimage.png</div>
+							</dt>
+							<dd class="fileEntry-description">
+								<span class="fileEntry-description-format">PNG file</span>
+								<span class="pr-u-mask"> – </span>
+								<div class="divider mod-vertical"></div>
+								<span class="fileEntry-description-size">80MB</span>
+							</dd>
+							<dd class="fileEntry-status">
+								<div class="fileEntry-status-content">
+									<div class="fileEntry-status-content-inside">
+										<img alt="" loading="lazy" class="fileEntry-status-content-inside-img" src="https://dummyimage.com/500" />
+									</div>
+								</div>
+							</dd>
+							<dd class="fileEntry-toolbar">
+								<div class="fileToolbar mod-disablePositioning">
+									<ul class="fileToolbar-list">
+										<li class="fileToolbar-list-item">
+											<button type="button" class="button fileToolbar-list-item-button mod-onlyIcon mod-iconOnLeft mod-iconOnRight">
+												<span aria-hidden="true" class="lucca-icon icon-trashDelete fileToolbar-list-item-button-icon"></span>
+												<span class="pr-u-mask">Delete file "dummyimage.png"</span>
+											</button>
+										</li>
+									</ul>
+								</div>
+							</dd>
+						</dl>
+						<dl class="fileEntry is-loading">
+							<dt class="fileEntry-filename">
+								<div class="fileEntry-filename-tooltip">dummyimage.png</div>
+							</dt>
+							<dd class="fileEntry-description">
+								<span class="fileEntry-description-format">PNG file</span>
+								<span class="pr-u-mask"> – </span>
+								<div class="divider mod-vertical"></div>
+								<span class="fileEntry-description-size">80MB</span>
+							</dd>
+							<dd class="fileEntry-status">
+								<div class="fileEntry-status-content">
+									<div class="fileEntry-status-content-inside">
+										<div class="fileEntry-status-content-inside-loading loading"></div>
+									</div>
+								</div>
+							</dd>
+							<dd class="fileEntry-toolbar">
+								<div class="fileToolbar mod-disablePositioning">
+									<ul class="fileToolbar-list">
+										<li class="fileToolbar-list-item">
+											<button type="button" class="button fileToolbar-list-item-button mod-onlyIcon mod-iconOnLeft mod-iconOnRight">
+												<span aria-hidden="true" class="lucca-icon icon-trashDelete fileToolbar-list-item-button-icon"></span>
+												<span class="pr-u-mask">Delete file "dummyimage.png"</span>
+											</button>
+										</li>
+									</ul>
+								</div>
+							</dd>
+						</dl>
+						<dl class="fileEntry is-error">
+							<dt class="fileEntry-filename">
+								<div class="fileEntry-filename-tooltip">dummyimage.png</div>
+							</dt>
+							<dd class="fileEntry-description">
+								<div class="inlineMessage is-error">
+									<p lutooltip="" lutooltipwhenellipsis="" class="inlineMessage-content pr-u-ellipsis">
+										An error occurred while uploading.
+									</p>
+								</div>
+							</dd>
+							<dd class="fileEntry-status">
+								<div class="fileEntry-status-content">
+									<div class="fileEntry-status-content-inside">
+										<span aria-hidden="true" class="lucca-icon icon-signError fileEntry-status-content-inside-icon"></span>
+									</div>
+								</div>
+							</dd>
+							<dd class="fileEntry-toolbar">
+								<div class="fileToolbar mod-disablePositioning">
+									<ul class="fileToolbar-list">
+										<li class="fileToolbar-list-item">
+											<button
+												type="button"
+												class="button fileToolbar-list-item-button mod-onlyIcon mod-iconOnLeft mod-iconOnRight palette-critical"
+											>
+												<span aria-hidden="true" class="lucca-icon icon-trashDelete fileToolbar-list-item-button-icon"></span>
+												<span class="pr-u-mask">Delete file "dummyimage.png"</span>
+											</button>
+										</li>
+									</ul>
+								</div>
+							</dd>
+						</dl>
+					</div>
+				</div>
+			</td>
+			<td>
+				<div class="demo-QAtable-list">
+					<div class="fileEntryDisplayWrapper">
+						<lu-file-entry
+							(deleteFile)="deleteFile()"
+							[entry]="{
+								name: 'dummyimage.png',
+								size: 80000000,
+								type: 'image/png',
+							}"
+							previewUrl="https://dummyimage.com/500"
+						/>
+						<lu-file-entry
+							state="loading"
+							(deleteFile)="deleteFile()"
+							[entry]="{
+								name: 'dummyimage.png',
+								size: 80000000,
+								type: 'image/png',
+							}"
+							previewUrl="https://dummyimage.com/500"
+						/>
+						<lu-file-entry
+							state="error"
+							inlineMessageError="An error occurred while uploading."
+							(deleteFile)="deleteFile()"
+							[entry]="{
+								name: 'dummyimage.png',
+								size: 80000000,
+								type: 'image/png',
+							}"
+							previewUrl="https://dummyimage.com/500"
+						/>
+					</div>
+				</div>
+			</td>
+		</tr>
+		<tr>
+			<td>Default S</td>
+			<td>
+				<div class="demo-QAtable-list">
+					<div class="fileEntryDisplayWrapper">
+						<dl class="fileEntry mod-S">
+							<dt class="fileEntry-filename">
+								<div class="fileEntry-filename-tooltip">dummyimage.png</div>
+							</dt>
+							<dd class="fileEntry-status">
+								<div class="fileEntry-status-content">
+									<div class="fileEntry-status-content-inside">
+										<img alt="" loading="lazy" class="fileEntry-status-content-inside-img" src="https://dummyimage.com/500" />
+									</div>
+								</div>
+							</dd>
+							<dd class="fileEntry-toolbar">
+								<div class="fileToolbar mod-disablePositioning mod-S">
+									<ul class="fileToolbar-list">
+										<li class="fileToolbar-list-item">
+											<button type="button" class="button fileToolbar-list-item-button mod-onlyIcon mod-iconOnLeft mod-iconOnRight">
+												<span aria-hidden="true" class="lucca-icon icon-trashDelete fileToolbar-list-item-button-icon"></span>
+												<span class="pr-u-mask">Delete file "dummyimage.png"</span>
+											</button>
+										</li>
+									</ul>
+								</div>
+							</dd>
+						</dl>
+						<dl class="fileEntry mod-S is-loading">
+							<dt class="fileEntry-filename">
+								<div class="fileEntry-filename-tooltip">dummyimage.png</div>
+							</dt>
+							<dd class="fileEntry-status">
+								<div class="fileEntry-status-content">
+									<div class="fileEntry-status-content-inside">
+										<div class="fileEntry-status-content-inside-loading loading"></div>
+									</div>
+								</div>
+							</dd>
+							<dd class="fileEntry-toolbar">
+								<div class="fileToolbar mod-disablePositioning mod-S">
+									<ul class="fileToolbar-list">
+										<li class="fileToolbar-list-item">
+											<button type="button" class="button fileToolbar-list-item-button mod-onlyIcon mod-iconOnLeft mod-iconOnRight">
+												<span aria-hidden="true" class="lucca-icon icon-trashDelete fileToolbar-list-item-button-icon"></span>
+												<span class="pr-u-mask">Delete file "dummyimage.png"</span>
+											</button>
+										</li>
+									</ul>
+								</div>
+							</dd>
+						</dl>
+						<dl class="fileEntry mod-S is-error">
+							<dt class="fileEntry-filename">
+								<div class="fileEntry-filename-tooltip">dummyimage.png</div>
+							</dt>
+							<dd class="fileEntry-inlineMessage">
+								<div class="inlineMessage is-error">
+									<p class="inlineMessage-content pr-u-ellipsis">An error occurred while uploading.</p>
+								</div>
+							</dd>
+							<dd class="fileEntry-status">
+								<div class="fileEntry-status-content">
+									<div class="fileEntry-status-content-inside">
+										<span aria-hidden="true" class="lucca-icon icon-signError fileEntry-status-content-inside-icon"></span>
+									</div>
+								</div>
+							</dd>
+							<dd class="fileEntry-toolbar">
+								<div class="fileToolbar mod-disablePositioning mod-S">
+									<ul class="fileToolbar-list">
+										<li class="fileToolbar-list-item">
+											<button
+												type="button"
+												class="button fileToolbar-list-item-button mod-onlyIcon mod-iconOnLeft mod-iconOnRight palette-critical"
+											>
+												<span aria-hidden="true" class="lucca-icon icon-trashDelete fileToolbar-list-item-button-icon"></span>
+												<span class="pr-u-mask">Delete file "dummyimage.png"</span>
+											</button>
+										</li>
+									</ul>
+								</div>
+							</dd>
+						</dl>
+					</div>
+				</div>
+			</td>
+			<td>
+				<div class="demo-QAtable-list">
+					<div class="fileEntryDisplayWrapper">
+						<lu-file-entry
+							size="S"
+							(deleteFile)="deleteFile()"
+							[entry]="{
+								name: 'dummyimage.png',
+								size: 80000000,
+								type: 'image/png',
+							}"
+							previewUrl="https://dummyimage.com/500"
+						/>
+						<lu-file-entry
+							state="loading"
+							size="S"
+							(deleteFile)="deleteFile()"
+							[entry]="{
+								name: 'dummyimage.png',
+								size: 80000000,
+								type: 'image/png',
+							}"
+							previewUrl="https://dummyimage.com/500"
+						/>
+						<lu-file-entry
+							state="error"
+							inlineMessageError="An error occurred while uploading."
+							size="S"
+							(deleteFile)="deleteFile()"
+							[entry]="{
+								name: 'dummyimage.png',
+								size: 80000000,
+								type: 'image/png',
+							}"
+							previewUrl="https://dummyimage.com/500"
+						/>
+					</div>
+				</div>
+			</td>
+		</tr>
+		<tr>
+			<td>Default Media</td>
+			<td>
+				<div class="demo-QAtable-list">
+					<div class="fileEntryDisplayWrapper">
+						<dl class="fileEntry mod-media">
+							<dd class="fileEntry-description">
+								<span class="fileEntry-description-format">PNG file</span>
+								<span class="pr-u-mask"> – </span>
+								<div class="divider mod-vertical"></div>
+								<span class="fileEntry-description-size">80MB</span>
+							</dd>
+							<dd class="fileEntry-status">
+								<div class="fileEntry-status-content">
+									<div class="fileEntry-status-content-inside">
+										<img alt="" loading="lazy" class="fileEntry-status-content-inside-img" src="https://dummyimage.com/500" />
+									</div>
+								</div>
+							</dd>
+							<dd class="fileEntry-toolbar">
+								<div class="fileToolbar">
+									<ul class="fileToolbar-list">
+										<li class="fileToolbar-list-item">
+											<button type="button" class="button fileToolbar-list-item-button mod-onlyIcon mod-iconOnLeft mod-iconOnRight">
+												<span aria-hidden="true" class="lucca-icon icon-trashDelete fileToolbar-list-item-button-icon"></span>
+												<span class="pr-u-mask">Delete file "dummyimage.png"</span>
+											</button>
+										</li>
+									</ul>
+								</div>
+							</dd>
+						</dl>
+						<dl class="fileEntry mod-media is-loading">
+							<dd class="fileEntry-description">
+								<span class="fileEntry-description-format">PNG file</span>
+								<span class="pr-u-mask"> – </span>
+								<div class="divider mod-vertical"></div>
+								<span class="fileEntry-description-size">80MB</span>
+							</dd>
+							<dd class="fileEntry-status">
+								<div class="fileEntry-status-content">
+									<div class="fileEntry-status-content-inside">
+										<div class="fileEntry-status-content-inside-loading loading"></div>
+									</div>
+								</div>
+							</dd>
+							<dd class="fileEntry-toolbar">
+								<div class="fileToolbar">
+									<ul class="fileToolbar-list">
+										<li class="fileToolbar-list-item">
+											<button type="button" class="button fileToolbar-list-item-button mod-onlyIcon mod-iconOnLeft mod-iconOnRight">
+												<span aria-hidden="true" class="lucca-icon icon-trashDelete fileToolbar-list-item-button-icon"></span>
+												<span class="pr-u-mask">Delete file "dummyimage.png"</span>
+											</button>
+										</li>
+									</ul>
+								</div>
+							</dd>
+						</dl>
+						<dl class="fileEntry mod-media is-error">
+							<dd class="fileEntry-description">
+								<span class="fileEntry-description-format">PNG file</span>
+								<span class="pr-u-mask"> – </span>
+								<div class="divider mod-vertical"></div>
+								<span class="fileEntry-description-size">80MB</span>
+							</dd>
+							<dd class="fileEntry-status">
+								<div class="fileEntry-status-content">
+									<div class="fileEntry-status-content-inside">
+										<div class="inlineMessage fileEntry-status-content-inlineMessage is-error">
+											<span aria-hidden="true" class="lucca-icon inlineMessage-statusIcon"></span>
+											<p class="inlineMessage-content">An error occurred while uploading.</p>
+										</div>
+									</div>
+								</div>
+							</dd>
+							<dd class="fileEntry-toolbar">
+								<div class="fileToolbar">
+									<ul class="fileToolbar-list">
+										<li class="fileToolbar-list-item">
+											<button
+												type="button"
+												class="button fileToolbar-list-item-button mod-onlyIcon mod-iconOnLeft mod-iconOnRight palette-critical"
+											>
+												<span aria-hidden="true" class="lucca-icon icon-trashDelete fileToolbar-list-item-button-icon"></span>
+												<span class="pr-u-mask">Delete file "dummyimage.png"</span>
+											</button>
+										</li>
+									</ul>
+								</div>
+							</dd>
+						</dl>
+					</div>
+				</div>
+			</td>
+			<td>
+				<div class="demo-QAtable-list">
+					<div class="fileEntryDisplayWrapper">
+						<lu-file-entry
+							media
+							(deleteFile)="deleteFile()"
+							[entry]="{
+								name: 'dummyimage.png',
+								size: 80000000,
+								type: 'image/png',
+							}"
+							previewUrl="https://dummyimage.com/500"
+						/>
+						<lu-file-entry
+							state="loading"
+							media
+							(deleteFile)="deleteFile()"
+							[entry]="{
+								name: 'dummyimage.png',
+								size: 80000000,
+								type: 'image/png',
+							}"
+							previewUrl="https://dummyimage.com/500"
+						/>
+						<lu-file-entry
+							state="error"
+							inlineMessageError="An error occurred while uploading."
+							media
+							(deleteFile)="deleteFile()"
+							[entry]="{
+								name: 'dummyimage.png',
+								size: 80000000,
+								type: 'image/png',
+							}"
+							previewUrl="https://dummyimage.com/500"
+						/>
+					</div>
+				</div>
+			</td>
+		</tr>
+		<tr>
+			<td>Default Media S</td>
+			<td>
+				<div class="demo-QAtable-list">
+					<div class="fileEntryDisplayWrapper">
+						<dl class="fileEntry mod-S mod-media">
+							<dd class="fileEntry-description">
+								<span class="fileEntry-description-format">PNG file</span>
+								<span class="pr-u-mask"> – </span>
+								<div class="divider mod-vertical"></div>
+								<span class="fileEntry-description-size">80MB</span>
+							</dd>
+							<dd class="fileEntry-status">
+								<div class="fileEntry-status-content">
+									<div class="fileEntry-status-content-inside">
+										<img alt="" loading="lazy" class="fileEntry-status-content-inside-img" src="https://dummyimage.com/500" />
+									</div>
+								</div>
+							</dd>
+							<dd class="fileEntry-toolbar">
+								<div class="fileToolbar mod-S">
+									<ul class="fileToolbar-list">
+										<li class="fileToolbar-list-item">
+											<button type="button" class="button fileToolbar-list-item-button mod-onlyIcon mod-iconOnLeft mod-iconOnRight">
+												<span aria-hidden="true" class="lucca-icon icon-trashDelete fileToolbar-list-item-button-icon"></span>
+												<span class="pr-u-mask">Delete file "dummyimage.png"</span>
+											</button>
+										</li>
+									</ul>
+								</div>
+							</dd>
+						</dl>
+						<dl class="fileEntry mod-S mod-media is-loading">
+							<dd class="fileEntry-description">
+								<span class="fileEntry-description-format">PNG file</span>
+								<span class="pr-u-mask"> – </span>
+								<div class="divider mod-vertical"></div>
+								<span class="fileEntry-description-size">80MB</span>
+							</dd>
+							<dd class="fileEntry-status">
+								<div class="fileEntry-status-content">
+									<div class="fileEntry-status-content-inside">
+										<div class="fileEntry-status-content-inside-loading loading"></div>
+									</div>
+								</div>
+							</dd>
+							<dd class="fileEntry-toolbar">
+								<div class="fileToolbar mod-S">
+									<ul class="fileToolbar-list">
+										<li class="fileToolbar-list-item">
+											<button type="button" class="button fileToolbar-list-item-button mod-onlyIcon mod-iconOnLeft mod-iconOnRight">
+												<span aria-hidden="true" class="lucca-icon icon-trashDelete fileToolbar-list-item-button-icon"></span>
+												<span class="pr-u-mask">Delete file "dummyimage.png"</span>
+											</button>
+										</li>
+									</ul>
+								</div>
+							</dd>
+						</dl>
+						<dl class="fileEntry mod-S mod-media is-error">
+							<dd class="fileEntry-description">
+								<span class="fileEntry-description-format">PNG file</span>
+								<span class="pr-u-mask"> – </span>
+								<div class="divider mod-vertical"></div>
+								<span class="fileEntry-description-size">80MB</span>
+							</dd>
+							<dd class="fileEntry-status">
+								<div class="fileEntry-status-content">
+									<div class="fileEntry-status-content-inside">
+										<div class="inlineMessage fileEntry-status-content-inlineMessage is-error">
+											<span aria-hidden="true" class="lucca-icon inlineMessage-statusIcon"></span>
+											<p class="inlineMessage-content">An error occurred while uploading.</p>
+										</div>
+									</div>
+								</div>
+							</dd>
+							<dd class="fileEntry-toolbar">
+								<div class="fileToolbar mod-S">
+									<ul class="fileToolbar-list">
+										<li class="fileToolbar-list-item">
+											<button
+												type="button"
+												class="button fileToolbar-list-item-button mod-onlyIcon mod-iconOnLeft mod-iconOnRight palette-critical"
+											>
+												<span aria-hidden="true" class="lucca-icon icon-trashDelete fileToolbar-list-item-button-icon"></span>
+												<span class="pr-u-mask">Delete file "dummyimage.png"</span>
+											</button>
+										</li>
+									</ul>
+								</div>
+							</dd>
+						</dl>
+					</div>
+				</div>
+			</td>
+			<td>
+				<div class="demo-QAtable-list">
+					<div class="fileEntryDisplayWrapper">
+						<lu-file-entry
+							media
+							size="S"
+							(deleteFile)="deleteFile()"
+							[entry]="{
+								name: 'dummyimage.png',
+								size: 80000000,
+								type: 'image/png',
+							}"
+							previewUrl="https://dummyimage.com/500"
+						/>
+						<lu-file-entry
+							state="loading"
+							media
+							size="S"
+							(deleteFile)="deleteFile()"
+							[entry]="{
+								name: 'dummyimage.png',
+								size: 80000000,
+								type: 'image/png',
+							}"
+							previewUrl="https://dummyimage.com/500"
+						/>
+						<lu-file-entry
+							state="error"
+							inlineMessageError="An error occurred while uploading."
+							media
+							size="S"
+							(deleteFile)="deleteFile()"
+							[entry]="{
+								name: 'dummyimage.png',
+								size: 80000000,
+								type: 'image/png',
+							}"
+							previewUrl="https://dummyimage.com/500"
+						/>
+					</div>
+				</div>
+			</td>
+		</tr>
+	</tbody>
+</table>
+
+<!-- To tell the ui-diff tool that the page has finished rendering -->
+<span id="ready"></span>
