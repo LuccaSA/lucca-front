@@ -62,12 +62,14 @@ export default {
 		},
 		grid: {
 			if: { arg: 'panel', truthy: false },
+			description: 'Affiche les différentes options dans une grille.',
 		},
 		size: {
 			options: ['', 'L'],
 			control: {
 				type: 'select',
 			},
+			description: 'Modifie la taille du composant.',
 		},
 		presentation: {
 			description: '[v21.1] Transforme le champ de formulaire en donnée textuelle non éditable.',

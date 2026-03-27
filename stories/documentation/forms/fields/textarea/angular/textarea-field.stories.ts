@@ -80,6 +80,9 @@ export default {
 		presentation: {
 			description: '[v21.1] Transforme le champ de formulaire en donnée textuelle non éditable.',
 		},
+		value: {
+			table: { disable: true },
+		},
 	},
 } as Meta;
 

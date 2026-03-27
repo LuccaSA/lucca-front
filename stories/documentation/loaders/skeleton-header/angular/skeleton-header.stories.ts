@@ -9,6 +9,7 @@ export default {
 export const Template: StoryObj<SkeletonHeaderComponent> = {
 	argTypes: {
 		dark: {
+			description: 'Applique un style foncé pour un usage sur fond gris.',
 			control: {
 				type: 'boolean',
 			},

@@ -9,16 +9,21 @@ export default {
 export const Template: StoryObj<SkeletonIndexTableComponent> = {
 	argTypes: {
 		cols: {
+			description: 'Nombre de colonnes.',
 			control: {
 				type: 'number',
 				min: 1,
 			},
 		},
 		rows: {
+			description: 'Nombre de lignes.',
 			control: {
 				type: 'number',
 				min: 1,
 			},
+		},
+		colsAlign: {
+			description: 'Alignement horizontal du contenu des colonnes.',
 		},
 	},
 	args: {

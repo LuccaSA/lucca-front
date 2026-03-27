@@ -143,10 +143,10 @@ export default {
 			description: "Augmente le border-radius du champ pour l'utiliser en élément de structure.",
 		},
 		buttonFilled: {
-			description: "Augmente l'importance de l'action d'import en lui appliquant le style filled.",
+			description: 'Affiche le bouton comme action principale de la page.',
 		},
-		AItag: {
-			description: '[Story] Ajoute un tag AI au contenu du composant.',
+		accept: {
+			description: 'Liste des formats de fichiers acceptés.',
 		},
 	},
 	decorators: [

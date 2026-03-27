@@ -15,7 +15,7 @@ export default {
 		}),
 	],
 	argTypes: {
-		small: {
+		S: {
 			description: 'Modifie la taille du composant.',
 		},
 		withNumericBadge: {

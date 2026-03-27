@@ -56,6 +56,9 @@ export default {
 		presentation: {
 			description: '[v21.1] Transforme le champ de formulaire en donnée textuelle non éditable.',
 		},
+		inline: {
+			description: 'Affiche les différentes options sur un axe horizontal.',
+		},
 	},
 } as Meta;
 

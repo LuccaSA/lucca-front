@@ -13,19 +13,21 @@ export default {
 			control: {
 				type: 'boolean',
 			},
-			description: 'Taille : Small',
+			description: 'Modifie la taille du composant.',
 		},
 		palette: {
 			options: ['', 'success', 'warning', 'error'],
 			control: {
 				type: 'select',
 			},
+			description: 'Applique une palette de couleurs au callout.',
 		},
 		icon: {
 			options: ['signHelp', 'signSuccess', 'signWarning', 'signError', 'weatherStars', 'officePenStar'],
 			control: {
 				type: 'select',
 			},
+			description: "Modifie l'icône du callout.",
 		},
 	},
 } as Meta;

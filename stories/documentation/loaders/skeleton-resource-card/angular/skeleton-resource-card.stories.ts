@@ -13,7 +13,15 @@ export default {
 } as Meta;
 
 export const Template: StoryObj<SkeletonResourceCardComponent> = {
-	argTypes: {},
+	argTypes: {
+		descriptionLines: {
+			description: 'Nombre de lignes de contenu.',
+			control: {
+				type: 'number',
+				min: 0,
+			},
+		},
+	},
 
 	args: {
 		descriptionLines: 0,

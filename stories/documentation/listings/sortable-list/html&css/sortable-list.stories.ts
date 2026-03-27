@@ -15,11 +15,13 @@ export default {
 	],
 	argTypes: {
 		clickable: {
+			description: 'Rend les lignes cliquables.',
 			control: {
 				type: 'boolean',
 			},
 		},
 		small: {
+			description: 'Modifie la taille du composant.',
 			control: {
 				type: 'boolean',
 			},

@@ -15,27 +15,31 @@ export default {
 			control: {
 				type: 'boolean',
 			},
+			description: 'Supprime la bordure inférieure de la navigation.',
 		},
 		header: {
 			control: {
 				type: 'boolean',
 			},
+			description: 'Adapte le style de la navigation pour une utilisation dans un Page header.',
 		},
 		s: {
 			control: {
 				type: 'boolean',
 			},
-			description: 'Taille : Small',
+			description: 'Modifie la taille du composant.',
 		},
 		disabled: {
 			control: {
 				type: 'boolean',
 			},
+			description: 'Désactive un élément de navigation.',
 		},
 		vertical: {
 			control: {
 				type: 'boolean',
 			},
+			table: { disable: true },
 		},
 	},
 } as Meta;

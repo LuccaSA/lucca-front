@@ -9,21 +9,22 @@ export default {
 export const Template: StoryObj<SkeletonFieldComponent> = {
 	argTypes: {
 		dark: {
+			description: 'Applique un style foncé pour un usage sur fond gris.',
 			control: {
 				type: 'boolean',
 			},
 		},
 		hiddenLabel: {
+			description: '[v20.1] Masque le label.',
 			control: {
 				type: 'boolean',
 			},
-			description: '[v20.1]',
 		},
 		rows: {
+			description: '[v20.1] Modifie le nombre de lignes de contenu.',
 			control: {
 				type: 'number',
 			},
-			description: '[v20.1]',
 		},
 	},
 
