@@ -12,7 +12,26 @@ export default {
 	],
 	argTypes: {
 		palette: {
-			options: ['none', 'product', 'neutral', 'success', 'warning', 'error'],
+			options: [
+				'none',
+				'product',
+				'neutral',
+				'success',
+				'warning',
+				'error',
+				'kiwi',
+				'lime',
+				'cucumber',
+				'mint',
+				'glacier',
+				'lagoon',
+				'blueberry',
+				'lavender',
+				'grape',
+				'watermelon',
+				'pumpkin',
+				'pineapple',
+			],
 			control: {
 				type: 'select',
 			},
