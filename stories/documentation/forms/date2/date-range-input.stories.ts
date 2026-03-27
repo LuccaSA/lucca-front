@@ -53,7 +53,7 @@ export default {
 		},
 		focusedDate: {
 			control: 'date',
-			description: 'Définit la date préselectionnée à l’ouverture du calendrier.',
+			description: "Définit la date préselectionnée à l'ouverture du calendrier.",
 		},
 		widthAuto: {
 			control: 'boolean',

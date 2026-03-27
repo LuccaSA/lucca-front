@@ -36,13 +36,6 @@ export default {
 			if: { arg: 'expandable', truthy: true },
 			description: 'Affiche le fieldset en vue dépliée.',
 		},
-		hiddenLegend: {
-			control: {
-				type: 'boolean',
-			},
-			if: { arg: 'expandable', truthy: false },
-			description: 'Masque la légende en la conservant dans le DOM pour les lecteurs d’écrans. ',
-		},
 		size: {
 			options: setStoryOptions(FIELDSET_SIZE),
 			control: {

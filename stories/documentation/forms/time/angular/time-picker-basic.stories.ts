@@ -83,7 +83,7 @@ export default {
 			control: {
 				type: 'select',
 			},
-			description: 'Force l’affichage de l’indicateur AM/PM',
+			description: "Force l'affichage de l'indicateur AM/PM",
 		},
 		presentation: {
 			description: '[v21.1] Transforme le champ de formulaire en donnée textuelle non éditable.',

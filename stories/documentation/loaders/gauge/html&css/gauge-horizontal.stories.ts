@@ -26,6 +26,9 @@ export default {
 		vertical: {
 			description: 'Affiche la jauge verticalement.',
 		},
+		vertical: {
+			description: 'Affiche la jauge verticalement.',
+		},
 		animated: {
 			description: 'Ajoute une animation au chargement ou lorsque la valeur est modifiée.',
 		},

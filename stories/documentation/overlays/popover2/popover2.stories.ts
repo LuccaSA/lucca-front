@@ -26,7 +26,7 @@ export default {
 		luPopoverTrigger: {
 			control: 'select',
 			options: ['click', 'click+hover', 'hover+focus'],
-			description: 'Méthode d’ouverture du popover.',
+			description: "Méthode d'ouverture du popover.",
 		},
 		luPopoverPosition: {
 			control: 'select',
@@ -49,14 +49,6 @@ export default {
 		},
 		luPopoverNoCloseButton: {
 			description: 'Masque le bouton de fermeture du popover visible à la navigation clavier.',
-		},
-		luPopoverMaxBlockSize: {
-			control: 'text',
-			description: 'Modifie la hauteur max de la popover.',
-		},
-		luPopoverMaxInlineSize: {
-			control: 'text',
-			description: 'Modifie la largeur max de la popover.',
 		},
 	},
 } as Meta;

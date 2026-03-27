@@ -148,9 +148,6 @@ export default {
 		accept: {
 			description: 'Liste des formats de fichiers acceptés.',
 		},
-		AItag: {
-			description: '[Story] Ajoute un tag AI au contenu du composant.',
-		},
 	},
 	decorators: [
 		moduleMetadata({

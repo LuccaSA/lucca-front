@@ -18,9 +18,6 @@ export default {
 			description: '[Story] Modifie le texte affiché par le composant.',
 			control: 'text',
 		},
-		hiddenLabel: {
-			description: 'Masque le label en le conservant dans le DOM pour les lecteurs d’écrans.',
-		},
 		L: {
 			description: 'Applique la taille L au loading. Applique également automatiquement le mode block.',
 		},

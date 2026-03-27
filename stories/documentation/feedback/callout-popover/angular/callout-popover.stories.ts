@@ -103,6 +103,7 @@ export default {
 			control: {
 				type: 'select',
 			},
+			description: "Détermine le mode d'ouverture du popover.",
 		},
 		size: {
 			options: setStoryOptions(CALLOUT_POPOVER_SIZE),

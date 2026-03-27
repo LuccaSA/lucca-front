@@ -74,6 +74,9 @@ export default {
 		rolePresentationLabel: {
 			description: "Applique role='presentation' au label du champ dans le cas où celui-ci ne doit pas être lu par le lecteur d’écran.",
 		},
+		rolePresentationLabel: {
+			description: "Applique role='presentation' au label du champ dans le cas où celui-ci ne doit pas être lu par les lecteurs d'écran.",
+		},
 	},
 	render: (args, { argTypes }) => {
 		const { required, ...fieldArgs } = args;
