@@ -1,5 +1,5 @@
 import { booleanAttribute, ChangeDetectionStrategy, Component, computed, inject, input, ViewEncapsulation } from '@angular/core';
-import { LuClass, Palette, ɵeffectWithDeps } from '@lucca-front/ng/core';
+import { DecorativePalette, LuClass, Palette, ɵeffectWithDeps } from '@lucca-front/ng/core';
 import { LuTooltipModule } from '@lucca-front/ng/tooltip';
 
 @Component({
@@ -32,7 +32,7 @@ export class NumericBadgeComponent {
 	/**
 	 * The palette to use for this badge. Defaults to 'none' (inherits parent palette)
 	 */
-	readonly palette = input<Palette>('none');
+	readonly palette = input<Palette | DecorativePalette>('none');
 
 	/**
 	 * Applies the loading state
