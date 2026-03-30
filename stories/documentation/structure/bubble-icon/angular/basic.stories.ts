@@ -1,21 +1,21 @@
 //import { DecorativeIconComponent } from '@lucca-front/ng/';
 import { IconsList } from '@/stories/icons-list';
-import { BubbleIconComponent } from '@lucca-front/ng/bubble-icon';
+import { BUBBLE_ICON_DIRECTION, BUBBLE_ICON_SIZE, BubbleIconComponent } from '@lucca-front/ng/bubble-icon';
 import { Meta, moduleMetadata, StoryObj } from '@storybook/angular';
-import { generateInputs } from 'stories/helpers/stories';
+import { generateInputs, setStoryOptions } from 'stories/helpers/stories';
 
 export default {
 	title: 'Documentation/Structure/Bubble icon/Angular/Basic',
 	argTypes: {
-		bubbleDirection: {
-			options: ['random', 'left', 'right', 'top', 'bottom'],
+		direction: {
+			options: setStoryOptions(BUBBLE_ICON_DIRECTION),
 			control: {
 				type: 'select',
 			},
 			description: 'Définit une direction de la bulle. Aléatoire par défaut.',
 		},
 		size: {
-			options: ['S', 'M', 'L'],
+			options: setStoryOptions(BUBBLE_ICON_SIZE),
 			control: {
 				type: 'select',
 			},

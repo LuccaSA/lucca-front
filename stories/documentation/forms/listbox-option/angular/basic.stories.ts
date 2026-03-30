@@ -1,6 +1,6 @@
-import { ListboxComponent, OptionComponent } from '@lucca-front/ng/listbox';
+import { LISTBOX_STATE, ListboxComponent, OptionComponent } from '@lucca-front/ng/listbox';
 import { Meta, moduleMetadata } from '@storybook/angular';
-import { cleanupTemplate } from 'stories/helpers/stories';
+import { cleanupTemplate, setStoryOptions } from 'stories/helpers/stories';
 
 interface OptionBasicStory {
 	multiple: boolean;
@@ -21,7 +21,7 @@ export default {
 		},
 		state: {
 			control: 'select',
-			options: [null, 'loading', 'empty'],
+			options: setStoryOptions(LISTBOX_STATE),
 			description: "Modifie l'état de l'option.",
 		},
 		withOption: {

@@ -1,9 +1,9 @@
 import { provideRouter } from '@angular/router';
 import { ButtonComponent } from '@lucca-front/ng/button';
-import { HighlightDataComponent } from '@lucca-front/ng/highlight-data';
+import { HIGHLIGHT_DATA_PALETTE, HIGHLIGHT_DATA_SIZE, HIGHLIGHT_DATA_THEME, HighlightDataComponent } from '@lucca-front/ng/highlight-data';
 import { LinkComponent } from '@lucca-front/ng/link';
 import { applicationConfig, Meta, moduleMetadata, StoryObj } from '@storybook/angular';
-import { generateInputs } from 'stories/helpers/stories';
+import { generateInputs, setStoryOptions } from 'stories/helpers/stories';
 export default {
 	title: 'Documentation/Structure/Highlight data/Angular/Basic',
 	component: HighlightDataComponent,
@@ -75,19 +75,19 @@ export const Template: StoryObj<HighlightDataComponent & { action: string }> = {
 			type: 'boolean',
 		},
 		size: {
-			options: [null, 'S', 'XS'],
+			options: [null, ...HIGHLIGHT_DATA_SIZE],
 			control: {
 				type: 'select',
 			},
 		},
 		theme: {
-			options: [null, 'light', 'dark'],
+			options: [null, ...HIGHLIGHT_DATA_THEME],
 			control: {
 				type: 'select',
 			},
 		},
 		palette: {
-			options: ['lucca', 'cleemy', 'timmi', 'poplee', 'coreHR', 'pagga', 'cc', 'success', 'warning', 'critical'],
+			options: setStoryOptions(HIGHLIGHT_DATA_PALETTE),
 			control: {
 				type: 'select',
 			},

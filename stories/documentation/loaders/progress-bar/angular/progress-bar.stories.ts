@@ -1,6 +1,6 @@
-import { ProgressBarComponent } from '@lucca-front/ng/progress-bar';
+import { PROGRESS_BAR_STATE, ProgressBarComponent } from '@lucca-front/ng/progress-bar';
 import { Meta, moduleMetadata } from '@storybook/angular';
-import { cleanupTemplate } from 'stories/helpers/stories';
+import { cleanupTemplate, setStoryOptions } from 'stories/helpers/stories';
 
 interface ProgressBarBasicStory {
 	state: string;
@@ -12,7 +12,7 @@ export default {
 	title: 'Documentation/Loaders/Progress Bar/Angular/Basic',
 	argTypes: {
 		state: {
-			options: ['', 'success', 'error'],
+			options: setStoryOptions(PROGRESS_BAR_STATE),
 			control: {
 				type: 'select',
 			},

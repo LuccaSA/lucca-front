@@ -1,5 +1,6 @@
-import { StatusBadgeComponent } from '@lucca-front/ng/status-badge';
+import { STATUS_BADGE_SIZE, StatusBadgeComponent } from '@lucca-front/ng/status-badge';
 import { Meta, moduleMetadata, StoryObj } from '@storybook/angular';
+import { setStoryOptions } from 'stories/helpers/stories';
 
 interface StatusBadgeBasicStory {
 	label: string;
@@ -24,7 +25,7 @@ export default {
 			description: 'Applique une palette de couleurs au composant.<br>[v19.2] Ajout de Neutral.',
 		},
 		size: {
-			options: ['', 'M', 'L'],
+			options: setStoryOptions(STATUS_BADGE_SIZE),
 			control: {
 				type: 'select',
 			},

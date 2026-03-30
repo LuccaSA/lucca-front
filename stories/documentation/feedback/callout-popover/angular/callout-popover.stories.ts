@@ -1,6 +1,6 @@
 import { BrowserAnimationsModule } from '@angular/platform-browser/animations';
 import { ButtonComponent } from '@lucca-front/ng/button';
-import { CalloutFeedbackItemComponent, CalloutFeedbackItemDescriptionDirective, CalloutFeedbackListComponent, CalloutPopoverComponent } from '@lucca-front/ng/callout';
+import { CALLOUT_POPOVER_SIZE, CalloutFeedbackItemComponent, CalloutFeedbackItemDescriptionDirective, CalloutFeedbackListComponent, CalloutPopoverComponent } from '@lucca-front/ng/callout';
 import { Meta, moduleMetadata, StoryObj } from '@storybook/angular';
 import { generateInputs } from 'stories/helpers/stories';
 
@@ -95,7 +95,7 @@ export default {
 			description: "Détermine le mode d'ouverture du popover.",
 		},
 		size: {
-			options: [null, 'XS', 'S', 'M'],
+			options: [null, ...CALLOUT_POPOVER_SIZE],
 			control: {
 				type: 'select',
 			},

@@ -1,13 +1,13 @@
 import { ButtonComponent } from '@lucca-front/ng/button';
-import { FooterComponent } from '@lucca-front/ng/footer';
+import { FOOTER_NARROW_AT_MEDIA_MAX, FooterComponent } from '@lucca-front/ng/footer';
 import { Meta, moduleMetadata } from '@storybook/angular';
-import { generateInputs } from 'stories/helpers/stories';
+import { generateInputs, setStoryOptions } from 'stories/helpers/stories';
 
 export default {
 	title: 'Documentation/Structure/Footer/Angular/Basic',
 	argTypes: {
 		narrowAtMediaMax: {
-			options: ['XXS', 'XS', 'S', 'M'],
+			options: setStoryOptions(FOOTER_NARROW_AT_MEDIA_MAX),
 			control: {
 				type: 'select',
 			},
