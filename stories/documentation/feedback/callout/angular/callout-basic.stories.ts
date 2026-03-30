@@ -1,5 +1,5 @@
 import { ButtonComponent } from '@lucca-front/ng/button';
-import { CALLOUT_SIZE, CalloutActionsComponent, CalloutComponent, CalloutFeedbackItemComponent, CalloutFeedbackListComponent } from '@lucca-front/ng/callout';
+import { CALLOUT_SIZE, CalloutActionsComponent, CalloutComponent, CalloutFeedbackItemComponent, CalloutFeedbackListComponent, CalloutStates } from '@lucca-front/ng/callout';
 import { IconComponent } from '@lucca-front/ng/icon';
 import { Meta, moduleMetadata, StoryObj } from '@storybook/angular';
 import { HiddenArgType } from 'stories/helpers/common-arg-types';
@@ -51,7 +51,7 @@ export default {
 			if: { arg: 'AI', truthy: false },
 		},
 		icon: {
-			options: [null, 'signInfo', 'signSuccess', 'signWarning', 'signError', 'signHelp', 'weatherStars', 'officePenStar'],
+			options: ['', 'signInfo', 'signSuccess', 'signWarning', 'signError', 'signHelp', 'weatherStars', 'officePenStar'],
 			control: {
 				type: 'select',
 			},
@@ -62,7 +62,7 @@ export default {
 			type: 'string',
 		},
 		state: {
-			options: [null, 'success', 'warning', 'error'],
+			options: setStoryOptions(CalloutStates),
 			description: 'État du callout.',
 			control: {
 				type: 'select',
@@ -107,9 +107,6 @@ export default {
 export const Template: StoryObj<CalloutComponent & { actions: boolean; actionsInline: boolean }> = {
 	args: {
 		heading: '',
-		hx: null,
-		state: null,
-		icon: null,
 		palette: 'none',
 		removable: false,
 		removed: false,

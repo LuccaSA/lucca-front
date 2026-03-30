@@ -1,8 +1,15 @@
 import { BrowserAnimationsModule } from '@angular/platform-browser/animations';
 import { ButtonComponent } from '@lucca-front/ng/button';
-import { CALLOUT_POPOVER_SIZE, CalloutFeedbackItemComponent, CalloutFeedbackItemDescriptionDirective, CalloutFeedbackListComponent, CalloutPopoverComponent } from '@lucca-front/ng/callout';
+import {
+	CALLOUT_POPOVER_SIZE,
+	CalloutFeedbackItemComponent,
+	CalloutFeedbackItemDescriptionDirective,
+	CalloutFeedbackListComponent,
+	CalloutPopoverComponent,
+	CalloutStates,
+} from '@lucca-front/ng/callout';
 import { Meta, moduleMetadata, StoryObj } from '@storybook/angular';
-import { generateInputs } from 'stories/helpers/stories';
+import { generateInputs, setStoryOptions } from 'stories/helpers/stories';
 
 export default {
 	title: 'Documentation/Feedback/Callout Popover/Angular',
@@ -50,21 +57,21 @@ export default {
 			description: 'Information restituée par le bouton.',
 		},
 		popoverPosition: {
-			options: [null, 'below', 'before', 'after'],
+			options: ['', 'below', 'before', 'after'],
 			control: {
 				type: 'select',
 			},
 			description: 'Position du popover par rapport au bouton de déclenchement.',
 		},
 		icon: {
-			options: [null, 'info', 'success', 'warning', 'error', 'help'],
+			options: ['', 'info', 'success', 'warning', 'error', 'help'],
 			control: {
 				type: 'select',
 			},
 			description: 'Ajoute une icône au callout.',
 		},
 		state: {
-			options: [null, 'success', 'warning', 'error'],
+			options: setStoryOptions(CalloutStates),
 			control: {
 				type: 'select',
 			},
@@ -96,7 +103,7 @@ export default {
 			description: 'Détermine le mode d’ouverture du popover.',
 		},
 		size: {
-			options: [null, ...CALLOUT_POPOVER_SIZE],
+			options: setStoryOptions(CALLOUT_POPOVER_SIZE),
 			control: {
 				type: 'select',
 			},
@@ -118,8 +125,6 @@ export const Template: StoryObj<CalloutPopoverComponent & { items: number; custo
 	args: {
 		icon: 'signInfo',
 		palette: 'none',
-		state: null,
-		size: null,
 		buttonLabel: '2',
 		buttonAlt: '2 errors',
 		customText: '',
@@ -129,6 +134,5 @@ export const Template: StoryObj<CalloutPopoverComponent & { items: number; custo
 		items: 2,
 		closeDelay: 500,
 		openDelay: 50,
-		popoverPosition: null,
 	},
 };

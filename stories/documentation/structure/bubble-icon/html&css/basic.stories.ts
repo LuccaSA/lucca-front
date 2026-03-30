@@ -1,5 +1,7 @@
 import { IconsList } from '@/stories/icons-list';
+import { BUBBLE_ICON_DIRECTION, BUBBLE_ICON_SIZE } from '@lucca-front/ng/bubble-icon';
 import { Meta, StoryObj } from '@storybook/angular';
+import { setStoryOptions } from 'stories/helpers/stories';
 
 interface BubbleIconBasicStory {
 	icon: string;
@@ -13,14 +15,14 @@ export default {
 	title: 'Documentation/Structure/Bubble icon/HTML&CSS/Basic',
 	argTypes: {
 		direction: {
-			options: ['', 'left', 'right', 'top', 'bottom'],
+			options: setStoryOptions(BUBBLE_ICON_DIRECTION),
 			control: {
 				type: 'select',
 			},
 			description: 'Définit une direction de la bulle. Aléatoire par défaut.',
 		},
 		size: {
-			options: ['S', '', 'L'],
+			options: setStoryOptions(BUBBLE_ICON_SIZE),
 			control: {
 				type: 'select',
 			},

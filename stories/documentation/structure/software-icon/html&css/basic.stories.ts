@@ -1,6 +1,8 @@
 import { HttpClientModule } from '@angular/common/http';
 import { LuSafeExternalSvgPipe } from '@lucca-front/ng/safe-content';
+import { SOFTWARE_ICON_SIZE, SoftwareIconList } from '@lucca-front/ng/software-icon';
 import { Meta, moduleMetadata, StoryObj } from '@storybook/angular';
+import { setStoryOptions } from 'stories/helpers/stories';
 
 interface SoftwareIconBasicStory {
 	icon: string;
@@ -17,47 +19,14 @@ export default {
 	],
 	argTypes: {
 		icon: {
-			options: [
-				// Time and Activities
-				'absences',
-				'timesheet',
-				'office',
-				'projects',
-				'shifts',
-				// Talent Management
-				'performance',
-				'engagement',
-				'training',
-				'recruitment',
-				'mood',
-				// Employee Administration
-				'analytics',
-				'employee-administration',
-				'shared-documents',
-				'faces',
-				// Spend Management
-				'business-expenses',
-				'invoices',
-				'payment-methods',
-				'accounting-assistant',
-				'certified-einvoicing-platform',
-				// Compensation and Benefits
-				'compensation',
-				'payslip',
-				'benefits',
-				'payroll-assistant',
-				// Lucca
-				'administration',
-				'cloud-control',
-				'lucca',
-			],
+			options: SoftwareIconList,
 			control: {
 				type: 'select',
 			},
 			description: 'Modifie l’icône produit.',
 		},
 		size: {
-			options: ['XXS', 'XS', 'S', '', 'L'],
+			options: setStoryOptions(SOFTWARE_ICON_SIZE),
 			control: {
 				type: 'select',
 			},

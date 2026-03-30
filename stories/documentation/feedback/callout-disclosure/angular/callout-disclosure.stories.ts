@@ -1,5 +1,5 @@
 import { ButtonComponent } from '@lucca-front/ng/button';
-import { CALLOUT_SIZE, CalloutDisclosureComponent, CalloutFeedbackItemComponent, CalloutFeedbackItemDescriptionDirective, CalloutFeedbackListComponent } from '@lucca-front/ng/callout';
+import { CALLOUT_SIZE, CalloutDisclosureComponent, CalloutFeedbackItemComponent, CalloutFeedbackItemDescriptionDirective, CalloutFeedbackListComponent, CalloutStates } from '@lucca-front/ng/callout';
 import { Meta, StoryObj, moduleMetadata } from '@storybook/angular';
 import { generateInputs, setStoryOptions } from 'stories/helpers/stories';
 
@@ -37,14 +37,14 @@ export default {
 	},
 	argTypes: {
 		icon: {
-			options: [null, 'signInfo', 'signSuccess', 'signWarning', 'signError', 'signHelp'],
+			options: ['', 'signInfo', 'signSuccess', 'signWarning', 'signError', 'signHelp'],
 			control: {
 				type: 'select',
 			},
 			description: 'Ajoute une icône au callout.',
 		},
 		state: {
-			options: [null, 'success', 'warning', 'error'],
+			options: setStoryOptions(CalloutStates),
 			control: {
 				type: 'select',
 			},
@@ -75,9 +75,7 @@ export default {
 
 export const Template: StoryObj<CalloutDisclosureComponent> = {
 	args: {
-		state: null,
 		heading: 'List title',
-		icon: null,
 		palette: 'none',
 		open: false,
 	},
