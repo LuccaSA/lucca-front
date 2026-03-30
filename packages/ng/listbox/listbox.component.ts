@@ -1,6 +1,7 @@
 import { booleanAttribute, ChangeDetectionStrategy, Component, forwardRef, input, ViewEncapsulation } from '@angular/core';
 
 import { LoadingComponent } from '@lucca-front/ng/loading';
+import { ListboxState } from './listbox-type';
 import { OptionComponent } from './option/option.component';
 import { LISTBOX_INSTANCE } from './tokens';
 
@@ -35,7 +36,7 @@ export class ListboxComponent {
 	/**
 	 * Listbox state
 	 */
-	readonly state = input<'loading' | 'empty' | null>(null);
+	readonly state = input<ListboxState | null>(null);
 
 	/**
 	 * Add message when listbox state loading or empty
