@@ -1,6 +1,7 @@
 import { booleanAttribute, ChangeDetectionStrategy, Component, computed, input, ViewEncapsulation } from '@angular/core';
 import { LuSafeExternalSvgPipe } from '@lucca-front/ng/safe-content';
 import { SoftwareIcon } from './software-icon';
+import { SoftwareIconSize } from './software-icon-type';
 
 @Component({
 	selector: 'lu-software-icon',
@@ -18,7 +19,7 @@ export class SoftwareIconComponent {
 	readonly icon = input.required<SoftwareIcon>();
 
 	readonly disabled = input(false, { transform: booleanAttribute });
-	readonly size = input<'XXS' | 'XS' | 'S' | 'L' | ''>('');
+	readonly size = input<SoftwareIconSize | ''>('');
 
 	readonly iconUrl = computed(() => `${this.domain}${this.path}${this.icon()}${this.extension}`);
 }
