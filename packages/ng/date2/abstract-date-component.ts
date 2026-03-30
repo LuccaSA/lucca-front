@@ -6,6 +6,7 @@ import { CellStatus } from './calendar2/cell-status';
 import { DateRange, DateRangeInput } from './calendar2/date-range';
 import { getDateFormat, getLocalizedDateFormat, getSeparator } from './date-format';
 import { DATE_FORMAT, DateFormat } from './date.const';
+import { Date2ClearBehavior } from './date2-type';
 import { LU_DATE2_TRANSLATIONS } from './date2.translate';
 import { transformDateInputToDate, transformDateRangeInputToDateRange } from './utils';
 
@@ -37,7 +38,7 @@ export abstract class AbstractDateComponent {
 	readonly hideToday = input(false, { transform: booleanAttribute });
 	readonly hasTodayButton = input(false, { transform: booleanAttribute });
 	readonly clearable = input(null, { transform: booleanAttribute });
-	readonly clearBehavior = input<'clear' | 'reset'>('clear');
+	readonly clearBehavior = input<Date2ClearBehavior>('clear');
 
 	readonly mode = input<CalendarMode>('day');
 	readonly hideWeekend = input(false, { transform: booleanAttribute });
