@@ -61,7 +61,6 @@ export default {
 export const Basic: StoryObj<ContainerComponent> = {
 	args: {
 		center: false,
-		max: null,
 		overflow: false,
 	},
 };

@@ -15,7 +15,7 @@ export default {
 			description: "Modifie le nombre de lignes affichées à l'état replié.",
 		},
 		surface: {
-			options: [null, 'default', 'sunken', '#0b1732'],
+			options: ['', 'default', 'sunken', '#0b1732'],
 			control: {
 				type: 'select',
 			},

@@ -8,7 +8,7 @@ export default {
 	title: 'Documentation/Navigation/HorizontalNavigation/Angular',
 	argTypes: {
 		size: {
-			options: [null, 'S'],
+			options: ['', 'S'],
 			control: {
 				type: 'select',
 			},
@@ -50,7 +50,6 @@ export const Basic = {
 	args: {
 		noBorder: false,
 		container: false,
-		size: null,
 		numericBadge: false,
 	},
 };

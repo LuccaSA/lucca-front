@@ -32,9 +32,9 @@ export default {
 	},
 	render: (args: OptionBasicStory) => {
 		const multiple = args.multiple ? ` multiple` : ``;
-		const status = args.state !== null ? ` state="${args.state}"` : ``;
+		const status = args.state ? ` state="${args.state}"` : ``;
 		const statusMsg = args.state === 'loading' ? ` statusMsg="Chargement…"` : args.state === 'empty' ? ` statusMsg="Aucun résultat pour votre recherche"` : ``;
-		if (args.withOption || args.state === null) {
+		if (args.withOption || !args.state) {
 			return {
 				template: cleanupTemplate(`<lu-listbox${multiple}${status}${statusMsg}>
 	<lu-listbox-option>option 1</lu-listbox-option>
@@ -56,7 +56,6 @@ export default {
 export const Basic = {
 	args: {
 		multiple: false,
-		state: null,
 		withOption: false,
 	},
 };

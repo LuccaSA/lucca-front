@@ -64,19 +64,19 @@ export default {
 			control: {
 				type: 'select',
 			},
-			options: [null, ...GRID_COLUMN_ALIGNMENT],
+			options: ['', ...GRID_COLUMN_ALIGNMENT],
 		},
 		justify: {
 			control: {
 				type: 'select',
 			},
-			options: [null, ...GRID_COLUMN_ALIGNMENT],
+			options: ['', ...GRID_COLUMN_ALIGNMENT],
 		},
 		mode: {
 			control: {
 				type: 'select',
 			},
-			options: [null, 'form', 'auto'],
+			options: ['', 'form', 'auto'],
 		},
 
 		repeatCols: {
@@ -154,7 +154,6 @@ export const Basic: StoryObj<GridComponent & GridColumnComponent & { repeatCols:
 		semantic: false,
 		columns: 6,
 		repeatCols: 10,
-		mode: null,
 		gap: null,
 		columnGap: null,
 		rowGap: null,
@@ -162,7 +161,5 @@ export const Basic: StoryObj<GridComponent & GridColumnComponent & { repeatCols:
 		rowspan: 1,
 		column: 0,
 		row: 0,
-		align: null,
-		justify: null,
 	},
 };

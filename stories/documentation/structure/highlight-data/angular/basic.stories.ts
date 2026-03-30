@@ -44,7 +44,7 @@ export const Template: StoryObj<HighlightDataComponent & { action: string }> = {
 			type: 'string',
 		},
 		bubble: {
-			options: [1, 2, 3, 4, null],
+			options: [1, 2, 3, 4, ''],
 			control: {
 				type: 'select',
 			},
@@ -64,7 +64,7 @@ export const Template: StoryObj<HighlightDataComponent & { action: string }> = {
 				'polaroid-female',
 				'polaroid-male',
 				'polaroids',
-				null,
+				'',
 			],
 			control: {
 				type: 'select',
@@ -75,13 +75,13 @@ export const Template: StoryObj<HighlightDataComponent & { action: string }> = {
 			type: 'boolean',
 		},
 		size: {
-			options: [null, ...HIGHLIGHT_DATA_SIZE],
+			options: ['', ...HIGHLIGHT_DATA_SIZE],
 			control: {
 				type: 'select',
 			},
 		},
 		theme: {
-			options: [null, ...HIGHLIGHT_DATA_THEME],
+			options: ['', ...HIGHLIGHT_DATA_THEME],
 			control: {
 				type: 'select',
 			},
@@ -94,7 +94,7 @@ export const Template: StoryObj<HighlightDataComponent & { action: string }> = {
 			description: 'La palette influençant également la couleur du SVG des bubbles et donc l’URL associée, il est nécessaire de renseigner la gamme.',
 		},
 		action: {
-			options: [null, 'button', 'link'],
+			options: ['', 'button', 'link'],
 			control: {
 				type: 'select',
 			},
@@ -107,10 +107,6 @@ export const Template: StoryObj<HighlightDataComponent & { action: string }> = {
 		bubble: 1,
 		illustration: 'piggy-bank',
 		valueFirst: false,
-		size: null,
-		theme: null,
-		palette: null,
-		action: null,
 		subText: null,
 	},
 };

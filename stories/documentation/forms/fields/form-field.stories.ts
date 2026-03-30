@@ -61,7 +61,7 @@ export default {
 			description: "Nombre de caractère maximum autorisés pour un champ de type texte. A seulement un impact sur l'interface et doit être complé à un réglage au niveau de <code>FormControl</code>.",
 		},
 		width: {
-			options: [null, 20, 30, 40, 50, 60],
+			options: ['', 20, 30, 40, 50, 60],
 			control: {
 				type: 'select',
 			},
@@ -104,6 +104,5 @@ export const Template: StoryObj<FormFieldComponent & { required: boolean }> = {
 		invalid: false,
 		counter: null,
 		rolePresentationLabel: false,
-		width: null,
 	},
 };

@@ -99,7 +99,6 @@ export const Basic: StoryObj<FieldsetComponent & { content: string; withAction: 
 	args: {
 		heading: 'Title',
 		helper: '',
-		size: null,
 		expandable: false,
 		expanded: false,
 		horizontal: false,
