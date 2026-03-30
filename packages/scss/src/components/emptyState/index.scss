@@ -10,6 +10,14 @@
 	@layer mods {
 		&.mod-page {
 			@include page;
+
+			@include media.max('XXS') {
+				@include headingStyleH(2);
+			}
+		}
+
+		&.mod-headingStyleH2 {
+			@include headingStyleH(2);
 		}
 
 		&.mod-center {

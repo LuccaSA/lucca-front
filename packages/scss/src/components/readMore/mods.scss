@@ -5,3 +5,7 @@
 @mixin sunken {
 	--components-readMore-link-backgroudColor: var(--pr-t-elevation-surface-sunken);
 }
+
+@mixin linkReset {
+	--components-readMore-link-insetBlockEnd: 0;
+}

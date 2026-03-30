@@ -2,6 +2,9 @@
 
 @mixin vars($atRoot: namespace.$defaultAtRoot) {
 	--components-container-minInlineSize: 0;
+	--components-container-display: block;
+	--components-container-alignItems: normal;
+	--components-container-flexDirection: column;
 
 	// for this component some variables are placed in root
 

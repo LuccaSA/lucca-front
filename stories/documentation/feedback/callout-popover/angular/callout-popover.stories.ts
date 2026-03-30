@@ -12,19 +12,27 @@ export default {
 			imports: [CalloutFeedbackItemComponent, CalloutFeedbackListComponent, CalloutFeedbackItemComponent, CalloutFeedbackItemDescriptionDirective, ButtonComponent, BrowserAnimationsModule],
 		}),
 	],
-	render: ({ items, ...args }, { argTypes }) => {
+	render: ({ items, customText, ...args }, { argTypes }) => {
 		const itemsContent = `
 			<li lu-callout-feedback-item>
 				<lu-feedback-item-description>Feedback description</lu-feedback-item-description>
 				<button lu-feedback-item-action luButton>Click me!</button>
 				<button lu-feedback-item-action luButton="outlined">Click me!</button>
 			</li>`.repeat(items);
-		return {
-			template: `<lu-callout-popover${generateInputs(args, argTypes)}>
+		if (customText !== '') {
+			return {
+				template: `<lu-callout-popover${generateInputs(args, argTypes)}>
+		${customText}
+	</lu-callout-popover>`,
+			};
+		} else {
+			return {
+				template: `<lu-callout-popover${generateInputs(args, argTypes)}>
 		<ul lu-callout-feedback-list palette="neutral">${itemsContent}
 		</ul>
 	</lu-callout-popover>`,
-		};
+			};
+		}
 	},
 	argTypes: {
 		items: {
@@ -32,6 +40,7 @@ export default {
 				type: 'number',
 				min: 1,
 			},
+			if: { arg: 'customText', truthy: false },
 			description: "Nombre d'éléments présentés dans la story.",
 		},
 		buttonLabel: {
@@ -39,6 +48,12 @@ export default {
 		},
 		buttonAlt: {
 			description: 'Information restituée par le bouton.',
+		},
+		popoverPosition: {
+			options: [null, 'below', 'before', 'after'],
+			control: {
+				type: 'select',
+			},
 		},
 		icon: {
 			options: [null, 'info', 'success', 'warning', 'error', 'help'],
@@ -56,15 +71,27 @@ export default {
 		},
 		heading: {
 			description: 'Ajoute un titre au popover.',
+			if: { arg: 'customText', truthy: false },
 		},
 		headingHiddenIfSingleItem: {
 			control: {
 				type: 'boolean',
 			},
+			if: { arg: 'customText', truthy: false },
 			description: "Masque le titre si le popover ne contient qu'un élément.",
 		},
 		palette: {
+			options: ['none', 'product', 'neutral'],
+			control: {
+				type: 'select',
+			},
 			description: 'Applique une palette de couleurs au callout.',
+		},
+		size: {
+			options: [null, 'XS', 'S', 'M'],
+			control: {
+				type: 'select',
+			},
 		},
 		closeDelay: {
 			description: 'Délai nécessaire à la fermeture du popover.',
@@ -72,20 +99,26 @@ export default {
 		openDelay: {
 			description: "Délai nécessaire à l'ouverture du popover.",
 		},
+		customText: {
+			description: 'Remplace la liste d’éléments par un texte personnalisé.',
+		},
 	},
 } as Meta;
 
-export const Template: StoryObj<CalloutPopoverComponent & { items: number }> = {
+export const Template: StoryObj<CalloutPopoverComponent & { items: number; customText: string }> = {
 	args: {
-		items: 2,
-		buttonLabel: '2',
-		buttonAlt: '2 errors',
-		state: null,
-		heading: '',
-		headingHiddenIfSingleItem: false,
 		icon: 'signInfo',
 		palette: 'none',
+		state: null,
+		size: null,
+		buttonLabel: '2',
+		buttonAlt: '2 errors',
+		customText: '',
+		heading: '',
+		headingHiddenIfSingleItem: false,
+		items: 2,
 		closeDelay: 500,
 		openDelay: 50,
+		popoverPosition: null,
 	},
 };

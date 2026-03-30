@@ -2,14 +2,15 @@ import { OverlayModule } from '@angular/cdk/overlay';
 import { provideAnimations } from '@angular/platform-browser/animations';
 import { IconComponent } from '@lucca-front/ng/icon';
 import { LuTooltipPanelComponent, LuTooltipTriggerDirective } from '@lucca-front/ng/tooltip';
+import { ButtonComponent } from '@lucca/prisme/button';
 import { applicationConfig, Meta, moduleMetadata, StoryObj } from '@storybook/angular';
 import { generateInputs } from '../../../helpers/stories';
-import { ButtonComponent } from '@lucca/prisme/button';
 
 export default {
 	title: 'Documentation/Overlays/Tooltip/Basic',
 	argTypes: {
 		luTooltipEnterDelay: {
+			description: "Délai d'apparition du tooltip au survol (en ms).",
 			control: { type: 'number' },
 			table: {
 				category: 'inputs',
@@ -17,6 +18,7 @@ export default {
 			},
 		},
 		luTooltipLeaveDelay: {
+			description: 'Délai de disparition du tooltip après la fin du survol (en ms).',
 			control: { type: 'number' },
 			table: {
 				category: 'inputs',
@@ -24,6 +26,7 @@ export default {
 			},
 		},
 		luTooltipDisabled: {
+			description: 'Désactive le tooltip.',
 			control: { type: 'boolean' },
 			table: {
 				category: 'inputs',
@@ -31,6 +34,7 @@ export default {
 			},
 		},
 		luTooltipPosition: {
+			description: 'Position du tooltip par rapport à son élément déclencheur.',
 			control: 'inline-radio',
 			options: ['above', 'below', 'before', 'after'],
 			table: {
@@ -39,6 +43,7 @@ export default {
 			},
 		},
 		luTooltipWhenEllipsis: {
+			description: "N'affiche le tooltip que lorsque le contenu de l'élément déclencheur est tronqué par une ellipse.",
 			control: { type: 'boolean' },
 			table: {
 				category: 'inputs',
@@ -46,7 +51,7 @@ export default {
 			},
 		},
 		luTooltipOnlyForDisplay: {
-			description: '[v18.2]',
+			description: "[v18.2] Affiche un tooltip non restituée par les lecteurs d'écran. À utiliser si la réstitution est déjà portée par l'élément déclancheur (ex. une icône avec attribut `alt`)",
 		},
 	},
 	decorators: [

@@ -101,6 +101,10 @@
 			}
 		}
 
+		input {
+			text-rendering: inherit;
+		}
+
 		button,
 		button[type] {
 			text-rendering: inherit;

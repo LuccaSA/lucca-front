@@ -1,7 +1,7 @@
 import { ChangeDetectionStrategy, Component, input, numberAttribute, ViewEncapsulation } from '@angular/core';
 import { PortalContent, PortalDirective } from '@lucca-front/ng/core';
 import { LuSafeExternalSvgPipe } from '@lucca-front/ng/safe-content';
-import { Hx } from '../empty-state.model';
+import { Hx, HxStyle } from '../empty-state.model';
 
 @Component({
 	selector: 'lu-empty-state-page',
@@ -60,6 +60,8 @@ export class EmptyStatePageComponent {
 	readonly description = input<PortalContent>();
 
 	readonly hx = input(1, { transform: numberAttribute as (value: Hx | `${Hx}`) => Hx });
+
+	readonly hxStyle = input(1, { transform: numberAttribute as (value: HxStyle | `${HxStyle}`) => HxStyle });
 
 	public isStringPortalContent(message: PortalContent): message is string {
 		return typeof message === 'string';

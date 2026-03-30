@@ -1,5 +1,7 @@
-<div
-	class="dialog-inside-fancyIllustrations"
-	[innerHtml]="'https://cdn.lucca.fr/transverse/prisme/visuals/fancy-dialog/background-bubbles.svg' | luSafeExternalSvg"
-></div>
+@if (foregroundImage()) {
+	<div
+		class="dialog-inside-fancyIllustrations"
+		[innerHtml]="'https://cdn.lucca.fr/transverse/prisme/visuals/fancy-dialog/background-bubbles.svg' | luSafeExternalSvg"
+	></div>
+}
 <ng-content />

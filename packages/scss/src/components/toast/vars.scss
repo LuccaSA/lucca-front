@@ -5,7 +5,7 @@
 	--components-toasts-left: var(--pr-t-spacings-300);
 	--components-toasts-bottom: var(--pr-t-spacings-300);
 	--components-toasts-margin-bottom: var(--pr-t-spacings-50);
-	--components-toasts-maxwidth: 22.5rem;
+	--components-toasts-maxwidth: min(22.5rem, calc(100dvw - (var(--components-toasts-right) * 2)));
 	--components-toasts-inset: var(--components-toasts-top) var(--components-toasts-right) auto auto;
 	--components-toasts-footerHeight: 4.5rem;
 

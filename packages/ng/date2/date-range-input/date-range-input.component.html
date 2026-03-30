@@ -171,12 +171,12 @@
 	@if (startLabel()) {
 		{{ startLabel() }}
 	} @else {
-		<div aria-hidden="true" data-content-before="–"></div>
+		<span aria-hidden="true" data-content-before="–"></span>
 	}
 	<lu-icon [icon]="'arrowRight'" size="XS" [alt]="intl().to" />
 	@if (endLabel()) {
 		{{ endLabel() }}
 	} @else {
-		<div aria-hidden="true" data-content-before="–"></div>
+		<span aria-hidden="true" data-content-before="–"></span>
 	}
 </ng-container>
