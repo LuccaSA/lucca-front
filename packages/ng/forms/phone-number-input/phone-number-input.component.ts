@@ -5,6 +5,7 @@ import { InputDirective, ɵPresentationDisplayDefaultDirective } from '@lucca-fr
 import { LuSimpleSelectInputComponent } from '@lucca-front/ng/simple-select';
 import { type CountryCallingCode, formatIncompletePhoneNumber, getCountries, getCountryCallingCode, getExampleNumber, parsePhoneNumber } from 'libphonenumber-js';
 import examples from 'libphonenumber-js/mobile/examples';
+import { PhoneNumberInputAutocomplete } from './phone-number-input-type';
 import { CountryCode, E164Number } from './types';
 import { PhoneNumberValidators } from './validators';
 
@@ -64,7 +65,7 @@ export class PhoneNumberInputComponent implements ControlValueAccessor, Validato
 
 	readonly label = input<string>();
 
-	readonly autocomplete = input<'off' | 'tel'>();
+	readonly autocomplete = input<PhoneNumberInputAutocomplete>();
 
 	/**
 	 * Which countries should be shown? Defaults to empty array which means all of them.
