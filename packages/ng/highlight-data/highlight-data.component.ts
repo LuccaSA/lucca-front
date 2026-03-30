@@ -1,7 +1,8 @@
 import { booleanAttribute, ChangeDetectionStrategy, Component, computed, effect, inject, input, ViewEncapsulation } from '@angular/core';
 import { LuClass, PortalContent, PortalDirective } from '@lucca-front/ng/core';
+import { HighlightDataPalette, HighlightDataSize, HighlightDataTheme } from './highlight-data-type';
 
-type IllustrationType =
+export type HighlightDataIllustration =
 	| 'calculator'
 	| 'calendar'
 	| 'cleemy-card'
@@ -58,24 +59,24 @@ export class HighlightDataComponent {
 	/**
 	 * Define a specific them white light or dark. (White by default)
 	 */
-	readonly theme = input<'white' | 'light' | 'dark'>('white');
+	readonly theme = input<HighlightDataTheme>('white');
 
 	/**
 	 * Apply product name to illustration URL and CSS component palette
 	 * This specific palette must be set up on config.scss
 	 */
-	readonly palette = input<'lucca' | 'cleemy' | 'timmi' | 'poplee' | 'coreHR' | 'pagga' | 'cc' | 'success' | 'warning' | 'critical' | string>('lucca');
+	readonly palette = input<HighlightDataPalette | string>('lucca');
 
 	/**
 	 * Main illustration
 	 * An URL can be apply for custom images
 	 */
-	readonly illustration = input<IllustrationType>();
+	readonly illustration = input<HighlightDataIllustration>();
 
 	/**
 	 * Which size should the highlight data be? XS to medium
 	 */
-	readonly size = input<'XS' | 'S' | 'M' | null>(null);
+	readonly size = input<HighlightDataSize | null>(null);
 
 	/**
 	 * Adjust layout to text value
