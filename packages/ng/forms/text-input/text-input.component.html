@@ -35,9 +35,8 @@
 			class="textField-input-value"
 			[placeholder]="placeholder()"
 			[value]="value()"
-			(input)="value.set($event.target.value)"
+			(input)="updateValue($event.target)"
 			(blur)="blur.emit($event)"
-			[mask]="mask()"
 			#inputElement
 		/>
 		<div class="textField-input-affix">

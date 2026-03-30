@@ -10,7 +10,28 @@
 			<td>Default</td>
 			<td>
 				<lu-form-field extraDescribedBy="extra-message" label="Label">
-					<lu-text-input autocomplete="" searchIcon="searchMagnifyingGlass" type="text" placeholder="Placeholder" [formField]="form" />
+					<lu-text-input
+						autocomplete=""
+						searchIcon="searchMagnifyingGlass"
+						type="text"
+						placeholder="Placeholder"
+						[formField]="form.default"
+					/>
+				</lu-form-field>
+			</td>
+		</tr>
+		<tr>
+			<td>Mask</td>
+			<td>
+				<lu-form-field extraDescribedBy="extra-message" label="Label">
+					<lu-text-input
+						autocomplete=""
+						searchIcon="searchMagnifyingGlass"
+						type="text"
+						placeholder="Placeholder"
+						[formField]="form.iban"
+						mask="SS00 AAAA 0000 0000 0000 9999 9999 9999 99"
+					/>
 				</lu-form-field>
 			</td>
 		</tr>
@@ -195,11 +216,13 @@
 	</tbody>
 </table>
 
-<h3>Value :</h3>
-<p>{{ value() }}</p>
+<pr-story-model-display>
+	<pre>{{ value() | json }}</pre>
+</pr-story-model-display>
 
-<h3>CompatValue :</h3>
-<p>{{ compatForm.value }}</p>
+<pr-story-model-display heading="CompatFormControl value">
+	<pre>{{ compatFormValue() }}</pre>
+</pr-story-model-display>
 
 <!-- To tell the ui-diff tool that the page has finished rendering -->
 <span id="ready"></span>
