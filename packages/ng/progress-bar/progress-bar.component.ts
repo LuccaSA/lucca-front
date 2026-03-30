@@ -1,4 +1,5 @@
 import { booleanAttribute, ChangeDetectionStrategy, Component, computed, input, numberAttribute, ViewEncapsulation } from '@angular/core';
+import { ProgressBarState } from './progress-bar-type';
 
 @Component({
 	selector: 'lu-progress-bar',
@@ -16,7 +17,7 @@ export class ProgressBarComponent {
 	/**
 	 * Progress bar state
 	 */
-	readonly state = input<'success' | 'error' | 'null'>(null);
+	readonly state = input<ProgressBarState | null>(null);
 
 	/**
 	 * Displays a loading state without progress information
