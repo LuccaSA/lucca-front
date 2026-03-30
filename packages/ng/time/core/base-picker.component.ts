@@ -1,5 +1,6 @@
 import { ChangeDetectionStrategy, Component, computed, input, model, viewChild } from '@angular/core';
 import { ControlValueAccessor } from '@angular/forms';
+import { BasePickerSize } from './base-picker-type';
 import { ISO8601Duration, ISO8601Time } from './date-primitives';
 import { TimePickerPartComponent } from './time-picker-part.component';
 
@@ -15,7 +16,7 @@ export abstract class BasePickerComponent implements ControlValueAccessor {
 
 	disabled = model(false);
 
-	size = input<'S' | 'M'>();
+	size = input<BasePickerSize>();
 
 	hoursPart = viewChild<TimePickerPartComponent>('hoursPart');
 
