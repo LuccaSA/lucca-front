@@ -145,9 +145,9 @@ class PushPanelStory {
 
 	togglePushPanel() {
 		if (this.showPushPanel) {
-			document.documentElement.style.setProperty('--component-lu-app-lifecycle-push-panel', '348px');
+			document.documentElement.style.setProperty('--commons-pushPanel-width', '348px');
 		} else {
-			document.documentElement.style.removeProperty('--component-lu-app-lifecycle-push-panel');
+			document.documentElement.style.removeProperty('--commons-pushPanel-width');
 		}
 	}
 }
