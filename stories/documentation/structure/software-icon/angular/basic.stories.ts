@@ -1,6 +1,6 @@
-import { SoftwareIconComponent, SoftwareIconList } from '@lucca-front/ng/software-icon';
+import { SOFTWARE_ICON_SIZE, SoftwareIconComponent, SoftwareIconList } from '@lucca-front/ng/software-icon';
 import { Meta, moduleMetadata, StoryObj } from '@storybook/angular';
-import { cleanupTemplate, generateInputs } from 'stories/helpers/stories';
+import { cleanupTemplate, generateInputs, setStoryOptions } from 'stories/helpers/stories';
 
 export default {
 	title: 'Documentation/Structure/Software icon/Angular/Basic',
@@ -13,7 +13,7 @@ export default {
 			description: 'Modifie l’icône produit.',
 		},
 		size: {
-			options: ['XXS', 'XS', 'S', '', 'L'],
+			options: setStoryOptions(SOFTWARE_ICON_SIZE),
 			control: {
 				type: 'select',
 			},

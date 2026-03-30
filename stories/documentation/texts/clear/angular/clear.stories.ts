@@ -1,6 +1,6 @@
-import { ClearComponent } from '@lucca-front/ng/clear';
+import { CLEAR_SIZE, ClearComponent } from '@lucca-front/ng/clear';
 import { Meta, moduleMetadata, StoryObj } from '@storybook/angular';
-import { generateInputs } from 'stories/helpers/stories';
+import { generateInputs, setStoryOptions } from 'stories/helpers/stories';
 
 export default {
 	title: 'Documentation/Texts/Clear/Angular/Basic',
@@ -38,7 +38,7 @@ export const Template: StoryObj = {
 			description: 'Modifie les couleurs du bouton pour un usage sur fond foncé.',
 		},
 		size: {
-			options: ['', 'S'],
+			options: setStoryOptions(CLEAR_SIZE),
 			control: {
 				type: 'select',
 			},

@@ -1,6 +1,6 @@
-import { BubbleIllustrationComponent } from '@lucca-front/ng/bubble-illustration';
+import { BUBBLE_ILLUSTRATION_SIZE, BubbleIllustrationComponent } from '@lucca-front/ng/bubble-illustration';
 import { Meta, moduleMetadata, StoryObj } from '@storybook/angular';
-import { cleanupTemplate, generateInputs } from 'stories/helpers/stories';
+import { cleanupTemplate, generateInputs, setStoryOptions } from 'stories/helpers/stories';
 
 export default {
 	title: 'Documentation/Structure/Bubble illustration/Angular/Basic',
@@ -116,7 +116,7 @@ export default {
 			description: 'Modifie l’illustration.',
 		},
 		size: {
-			options: ['S', 'M', 'L'],
+			options: setStoryOptions(BUBBLE_ILLUSTRATION_SIZE),
 			control: {
 				type: 'select',
 			},

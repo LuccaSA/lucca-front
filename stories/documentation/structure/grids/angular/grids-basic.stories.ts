@@ -1,4 +1,4 @@
-import { GridColumnComponent, GridComponent } from '@lucca-front/ng/grid';
+import { GRID_COLUMN_ALIGNMENT, GridColumnComponent, GridComponent } from '@lucca-front/ng/grid';
 import { Meta, moduleMetadata, StoryObj } from '@storybook/angular';
 import { cleanupTemplate, generateInputs } from 'stories/helpers/stories';
 
@@ -64,13 +64,13 @@ export default {
 			control: {
 				type: 'select',
 			},
-			options: [null, 'start', 'center', 'end'],
+			options: [null, ...GRID_COLUMN_ALIGNMENT],
 		},
 		justify: {
 			control: {
 				type: 'select',
 			},
-			options: [null, 'start', 'center', 'end'],
+			options: [null, ...GRID_COLUMN_ALIGNMENT],
 		},
 		mode: {
 			control: {

@@ -1,7 +1,7 @@
 import { ButtonComponent } from '@lucca-front/ng/button';
-import { CalloutDisclosureComponent, CalloutFeedbackItemComponent, CalloutFeedbackItemDescriptionDirective, CalloutFeedbackListComponent } from '@lucca-front/ng/callout';
+import { CALLOUT_SIZE, CalloutDisclosureComponent, CalloutFeedbackItemComponent, CalloutFeedbackItemDescriptionDirective, CalloutFeedbackListComponent } from '@lucca-front/ng/callout';
 import { Meta, StoryObj, moduleMetadata } from '@storybook/angular';
-import { generateInputs } from 'stories/helpers/stories';
+import { generateInputs, setStoryOptions } from 'stories/helpers/stories';
 
 export default {
 	title: 'Documentation/Feedback/Callout Disclosure/Angular',
@@ -51,6 +51,7 @@ export default {
 			description: 'État du callout.',
 		},
 		size: {
+			options: setStoryOptions(CALLOUT_SIZE),
 			control: {
 				type: 'select',
 			},

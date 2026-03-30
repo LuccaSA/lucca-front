@@ -1,9 +1,9 @@
 import { ButtonComponent } from '@lucca-front/ng/button';
-import { CalloutActionsComponent, CalloutComponent, CalloutFeedbackItemComponent, CalloutFeedbackListComponent } from '@lucca-front/ng/callout';
+import { CALLOUT_SIZE, CalloutActionsComponent, CalloutComponent, CalloutFeedbackItemComponent, CalloutFeedbackListComponent } from '@lucca-front/ng/callout';
 import { IconComponent } from '@lucca-front/ng/icon';
 import { Meta, moduleMetadata, StoryObj } from '@storybook/angular';
 import { HiddenArgType } from 'stories/helpers/common-arg-types';
-import { generateInputs } from 'stories/helpers/stories';
+import { generateInputs, setStoryOptions } from 'stories/helpers/stories';
 
 export default {
 	title: 'Documentation/Feedback/Callout/Angular/Basic',
@@ -69,7 +69,7 @@ export default {
 			},
 		},
 		size: {
-			options: ['M', 'S'],
+			options: setStoryOptions(CALLOUT_SIZE),
 			control: {
 				type: 'select',
 			},

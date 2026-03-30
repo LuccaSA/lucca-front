@@ -1,10 +1,10 @@
 import { FormsModule } from '@angular/forms';
 import { BrowserAnimationsModule } from '@angular/platform-browser/animations';
 import { FormFieldComponent } from '@lucca-front/ng/form-field';
-import { TimePickerComponent } from '@lucca-front/ng/time';
+import { BASE_PICKER_SIZE, TimePickerComponent } from '@lucca-front/ng/time';
 import { Meta, moduleMetadata, StoryObj } from '@storybook/angular';
 import { StoryModelDisplayComponent } from 'stories/helpers/story-model-display.component';
-import { cleanupTemplate, generateInputs } from '../../../helpers/stories';
+import { cleanupTemplate, generateInputs, setStoryOptions } from '../../../helpers/stories';
 
 export default {
 	title: 'Documentation/Forms/Time/Time Picker/Angular Form',
@@ -15,7 +15,7 @@ export default {
 	],
 	argTypes: {
 		size: {
-			options: ['M', 'S'],
+			options: setStoryOptions(BASE_PICKER_SIZE),
 			control: {
 				type: 'select',
 			},

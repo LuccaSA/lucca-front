@@ -1,6 +1,6 @@
-import { NumericBadgeComponent } from '@lucca-front/ng/numeric-badge';
+import { NUMERIC_BADGE_SIZE, NumericBadgeComponent } from '@lucca-front/ng/numeric-badge';
 import { Meta, moduleMetadata, StoryObj } from '@storybook/angular';
-import { generateInputs } from 'stories/helpers/stories';
+import { generateInputs, setStoryOptions } from 'stories/helpers/stories';
 
 export default {
 	title: 'Documentation/Texts/NumericBadge/Angular/Basic',
@@ -30,6 +30,7 @@ export default {
 			description: 'Empêche le déclenchement d’une tooltip si la valeur est supérieure à <code>maxValue</code>.',
 		},
 		size: {
+			options: setStoryOptions(NUMERIC_BADGE_SIZE),
 			control: {
 				type: 'select',
 			},
