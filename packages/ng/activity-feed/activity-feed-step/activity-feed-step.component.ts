@@ -2,6 +2,7 @@ import { DatePipe } from '@angular/common';
 import { ChangeDetectionStrategy, Component, computed, inject, input, LOCALE_ID, ViewEncapsulation } from '@angular/core';
 import { intlInputOptions, PortalContent, PortalDirective } from '@lucca-front/ng/core';
 import { ILuUser, LuUserPictureComponent } from '@lucca-front/ng/user';
+import { ActivityFeedStepStatus } from '../activity-feed-step-type';
 import { LU_ACTIVITY_FEED_TRANSLATIONS } from '../activity-feed.translate';
 
 @Component({
@@ -32,7 +33,7 @@ export class ActivityFeedStepComponent {
 
 	readonly user = input<ILuUser | null>(null);
 
-	readonly status = input<'success' | 'critical' | 'pending' | null>(null);
+	readonly status = input<ActivityFeedStepStatus | null>(null);
 
 	readonly date = input<Date | string | null>(null);
 
