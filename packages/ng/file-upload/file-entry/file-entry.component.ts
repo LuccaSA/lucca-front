@@ -13,6 +13,7 @@ import { Subject } from 'rxjs';
 import { FileEntry } from '../file-upload-entry';
 import { LU_FILE_UPLOAD_TRANSLATIONS } from '../file-upload.translate';
 import { formatFileSize } from '../formatter';
+import { FileEntrySize, FileEntryState } from './file-entry-type';
 
 @Component({
 	selector: 'lu-file-entry',
@@ -30,7 +31,7 @@ export class FileEntryComponent {
 
 	readonly intl = input(...intlInputOptions(LU_FILE_UPLOAD_TRANSLATIONS));
 
-	readonly state = input<'success' | 'loading' | 'error' | 'default'>('default');
+	readonly state = input<FileEntryState>('default');
 
 	readonly displayFileName = input(false, { transform: booleanAttribute });
 
@@ -38,7 +39,7 @@ export class FileEntryComponent {
 
 	readonly entry = input.required<FileEntry>();
 
-	readonly size = input<'S' | null>(null);
+	readonly size = input<FileEntrySize | null>(null);
 
 	readonly iconOverride = input('');
 
