@@ -1,10 +1,10 @@
 import { LOCALE_ID } from '@angular/core';
 import { FormsModule } from '@angular/forms';
-import { DateInputComponent } from '@lucca-front/ng/date2';
+import { DATE2_CLEAR_BEHAVIOR, DateInputComponent } from '@lucca-front/ng/date2';
 import { FormFieldComponent } from '@lucca-front/ng/form-field';
 import { applicationConfig, Meta, moduleMetadata, StoryObj } from '@storybook/angular';
 import { expect, screen, userEvent, within } from 'storybook/test';
-import { cleanupTemplate, createTestStory, generateInputs } from '../../../../helpers/stories';
+import { cleanupTemplate, createTestStory, generateInputs, setStoryOptions } from '../../../../helpers/stories';
 import { StoryModelDisplayComponent } from '../../../../helpers/story-model-display.component';
 import { expectNgModelDisplay, waitForAngular } from '../../../../helpers/test';
 
@@ -48,7 +48,7 @@ export default {
 		},
 		clearBehavior: {
 			control: 'select',
-			options: ['clear', 'reset'],
+			options: setStoryOptions(DATE2_CLEAR_BEHAVIOR),
 			description: '[v20.1] Change le comportement au clic sur la croix de suppression',
 		},
 		mode: {
