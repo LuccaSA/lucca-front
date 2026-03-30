@@ -14,6 +14,7 @@ import {
 	ViewEncapsulation,
 } from '@angular/core';
 import { intlInputOptions, LuClass, Palette } from '@lucca-front/ng/core';
+import { ClearSize } from './clear-type';
 import { ALuClear, ILuClear } from './clear.model';
 import { LU_CLEAR_TRANSLATIONS } from './clear.translate';
 
@@ -52,7 +53,7 @@ export class ClearComponent<T> extends ALuClear<T> implements ILuClear<T> {
 	/**
 	 * Which size should the clear be? Defaults to small
 	 */
-	readonly size = input<'S' | null>(null);
+	readonly size = input<ClearSize | null>(null);
 
 	/**
 	 * Disabled the clear
