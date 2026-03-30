@@ -1,3 +1,4 @@
+export * from './skeleton-button/skeleton-button-type';
 export * from './skeleton-button/skeleton-button.component';
 export * from './skeleton-data-table/skeleton-data-table.component';
 export * from './skeleton-field/skeleton-field.component';
