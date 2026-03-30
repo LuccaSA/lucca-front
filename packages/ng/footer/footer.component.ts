@@ -1,6 +1,7 @@
 import { NgTemplateOutlet } from '@angular/common';
 import { booleanAttribute, ChangeDetectionStrategy, Component, computed, input, ViewEncapsulation } from '@angular/core';
 import { ContainerComponent } from '@lucca-front/ng/container';
+import { FooterNarrowAtMediaMax } from './footer-type';
 
 @Component({
 	selector: 'lu-footer',
@@ -24,7 +25,7 @@ export class FooterComponent {
 
 	readonly dialog = input(false, { transform: booleanAttribute });
 
-	readonly narrowAtMediaMax = input<'XXS' | 'XS' | 'S' | 'M'>('XXS');
+	readonly narrowAtMediaMax = input<FooterNarrowAtMediaMax>('XXS');
 
 	readonly breakpointClass = computed(() => (this.forceNarrow() ? 'mod-narrow' : { [`mod-narrowAtMediaMax${this.narrowAtMediaMax()}`]: !!this.narrowAtMediaMax() }));
 }
