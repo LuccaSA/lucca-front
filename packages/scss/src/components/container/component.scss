@@ -6,10 +6,4 @@
 	max-inline-size: var(--commons-container-maxWidth);
 	margin-inline: var(--commons-container-marginInline);
 	position: relative;
-	flex-grow: 1;
-	justify-content: space-between;
-	gap: var(--pr-t-spacings-200);
-	display: var(--components-container-display);
-	align-items: var(--components-container-alignItems);
-	flex-direction: var(--components-container-flexDirection);
 }
