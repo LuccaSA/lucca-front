@@ -3,6 +3,7 @@ import { booleanAttribute, ChangeDetectionStrategy, Component, computed, content
 import { PortalContent } from '@lucca-front/ng/core';
 import { CommentComponent } from '../comment/comment.component';
 import { COMMENT_BLOCK_INSTANCE, COMMENT_CHAT_INSTANCE } from '../token';
+import { CommentBlockSize } from './comment-block-type';
 
 @Component({
 	selector: 'lu-comment-block',
@@ -43,7 +44,7 @@ export class CommentBlockComponent {
 	/**
 	 * Which size should the block comment be? Defaults or small
 	 */
-	readonly size = input<'S' | 'M'>();
+	readonly size = input<CommentBlockSize>();
 
 	readonly noAvatar = computed(() => !this.avatar());
 	readonly isSingleComment = computed(() => this.comments().length === 1);
