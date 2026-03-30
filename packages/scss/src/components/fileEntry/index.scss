@@ -1,8 +1,6 @@
 @use 'exports' as *;
 
 .fileEntry {
-
-
 	@layer components {
 		@include vars;
 		@include component;
