@@ -4,6 +4,7 @@ import { LuccaIcon } from '@lucca-front/icons';
 import { DecorativePalette, Palette } from '@lucca-front/ng/core';
 import { IconComponent } from '@lucca-front/ng/icon';
 import { LuTooltipModule } from '@lucca-front/ng/tooltip';
+import { TagSize } from './tag-type';
 
 @Component({
 	selector: 'lu-tag',
@@ -22,7 +23,7 @@ export class TagComponent {
 	/**
 	 * Which size should the tag be? Defaults to medium
 	 */
-	readonly size = input<'S' | 'M' | 'L'>('M');
+	readonly size = input<TagSize>('M');
 
 	/**
 	 * Which palette should be used for the entire tag.
