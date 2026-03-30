@@ -120,6 +120,13 @@
 		@include button.onlyIconS;
 		@include button.ghost;
 
+		// .mod-delete is deprecated
+		&.mod-critical,
+		&.mod-delete {
+			// For specificity purpose. Could be removed if we decide to remove automatic CSS imports in Angular components
+			@include button.critical;
+		}
+
 		transition-property: box-shadow, color;
 	}
 
