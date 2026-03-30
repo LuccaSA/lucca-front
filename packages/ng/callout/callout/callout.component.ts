@@ -4,6 +4,7 @@ import { intlInputOptions, Palette, PortalContent, PortalDirective } from '@lucc
 import { IconComponent } from '@lucca-front/ng/icon';
 import { CalloutIconPipe } from '../callout-icon.pipe';
 import { CalloutState } from '../callout-state';
+import { CalloutSize } from '../callout-type';
 import { Hx } from '../callout.model';
 import { LU_CALLOUT_TRANSLATIONS } from '../callout.translate';
 import { getCalloutPalette } from '../callout.utils';
@@ -41,7 +42,7 @@ export class CalloutComponent {
 	/**
 	 * Which size should the callout be? Defaults to medium
 	 */
-	readonly size = input<'M' | 'S'>();
+	readonly size = input<CalloutSize>();
 
 	/**
 	 * State is a shorthand to set the icon and the palette to the recommended values for the icon and palette based on
