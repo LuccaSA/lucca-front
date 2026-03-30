@@ -1,6 +1,7 @@
 import { ChangeDetectionStrategy, Component, computed, inject, input, numberAttribute, ViewEncapsulation } from '@angular/core';
 import { ResponsiveConfig } from '@lucca-front/ng/core';
 import { LU_GRID_INSTANCE } from '../grid.token';
+import { GridColumnAlignment } from './grid-column-type';
 
 @Component({
 	selector: 'lu-grid-column, [lu-grid-column]',
@@ -17,8 +18,8 @@ export class GridColumnComponent {
 	readonly rowspan = input(null, { transform: numberAttribute });
 	readonly column = input(null, { transform: numberAttribute });
 	readonly row = input(null, { transform: numberAttribute });
-	readonly align = input<'start' | 'center' | 'end' | 'auto' | null>(null);
-	readonly justify = input<'start' | 'center' | 'end' | 'auto' | null>(null);
+	readonly align = input<GridColumnAlignment | null>(null);
+	readonly justify = input<GridColumnAlignment | null>(null);
 
 	readonly responsive = input<ResponsiveConfig<'row' | 'column' | 'rowspan' | 'colspan', number>>({});
 
