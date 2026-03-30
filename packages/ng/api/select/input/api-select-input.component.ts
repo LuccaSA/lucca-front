@@ -5,6 +5,7 @@ import { ClearComponent } from '@lucca-front/ng/clear';
 import { LuInputDisplayerDirective } from '@lucca-front/ng/input';
 import { ILuOptionItem, LuForOptionsDirective, LuOptionComparer, LuOptionItemComponent, LuOptionPickerAdvancedComponent } from '@lucca-front/ng/option';
 import { ALuSelectInputComponent } from '@lucca-front/ng/select';
+import { ApiSelectStandard } from '../api-select-type';
 import { LuApiPagedSearcherComponent } from '../searcher';
 
 @Component({
@@ -25,7 +26,7 @@ export class LuApiSelectInputComponent<T extends import('../../api.model').ILuAp
 	extends ALuSelectInputComponent<T, LuOptionPickerAdvancedComponent<T, ILuOptionItem<T>>>
 	implements ControlValueAccessor, AfterViewInit
 {
-	@Input() standard: 'v3' | 'v4' = 'v3';
+	@Input() standard: ApiSelectStandard = 'v3';
 	@Input() api: string;
 	/**
 	 * only works with standard="v3"
