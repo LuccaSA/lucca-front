@@ -7,6 +7,10 @@
 	}
 
 	@layer mods {
+		.divider.fileEntry-description-divider {
+			@include divider;
+		}
+
 		&.mod-S {
 			@include S;
 		}
