@@ -1,6 +1,7 @@
 import { CdkDragHandle } from '@angular/cdk/drag-drop';
 import { booleanAttribute, ChangeDetectionStrategy, Component, inject, input, ViewEncapsulation } from '@angular/core';
 import { IconComponent } from '@lucca-front/ng/icon';
+import { ResourceCardHeadingLevel, ResourceCardSize } from './resource-card-type';
 import { LU_RESOURCE_CARD_WRAPPER_INSTANCE } from './wrapper/resource-card-wrapper.token';
 
 @Component({
@@ -24,7 +25,7 @@ export class ResourceCardComponent {
 
 	readonly grid = input(false, { transform: booleanAttribute });
 
-	readonly headingLevel = input<'1' | '2' | '3' | '4' | '5' | '6'>('3');
+	readonly headingLevel = input<ResourceCardHeadingLevel>('3');
 
-	readonly size = input<'S' | null>(null);
+	readonly size = input<ResourceCardSize | null>(null);
 }
