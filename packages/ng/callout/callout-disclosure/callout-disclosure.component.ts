@@ -4,6 +4,7 @@ import { Palette, PortalContent, PortalDirective } from '@lucca-front/ng/core';
 import { IconComponent } from '@lucca-front/ng/icon';
 import { CalloutIconPipe } from '../callout-icon.pipe';
 import { CalloutState } from '../callout-state';
+import { CalloutSize } from '../callout-type';
 import { getCalloutPalette } from '../callout.utils';
 
 @Component({
@@ -35,7 +36,7 @@ export class CalloutDisclosureComponent {
 	/**
 	 * Which size should the disclosure callout be? Defaults to medium
 	 */
-	readonly size = input<'M' | 'S'>('M');
+	readonly size = input<CalloutSize>('M');
 
 	/**
 	 * State is a shorthand to set the icon and the palette to the recommended values for the icon and palette based on
