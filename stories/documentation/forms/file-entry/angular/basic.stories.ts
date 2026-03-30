@@ -7,14 +7,14 @@ export default {
 	title: 'Documentation/File/FileEntry/Angular/Basic',
 	argTypes: {
 		size: {
-			options: [null, ...FILE_ENTRY_SIZE],
+			options: ['', ...FILE_ENTRY_SIZE],
 			control: {
 				type: 'radio',
 			},
 			description: 'Modifie la taille du composant.',
 		},
 		state: {
-			options: [null, ...FILE_ENTRY_STATE],
+			options: ['', ...FILE_ENTRY_STATE],
 			control: {
 				type: 'radio',
 			},
@@ -88,7 +88,6 @@ export const Basic = {
 	args: {
 		media: false,
 		displayFileName: false,
-		size: null,
 		fileSize: 28420,
 		withFileSize: true,
 		fileType: 'image/png',
@@ -96,7 +95,6 @@ export const Basic = {
 		fileName: 'dummyimage.png',
 		iconOverride: '',
 		previewUrl: 'https://dummyimage.com/500',
-		state: null,
 		inlineMessageError: 'Virus détecté dans le fichier.',
 		downloadURL: '',
 		deletable: true,

@@ -80,7 +80,7 @@ export default {
 			description: 'Modifie le comportement autocomplete du champ.',
 		},
 		width: {
-			options: [null, 20, 30, 40, 50, 60],
+			options: ['', 20, 30, 40, 50, 60],
 			control: {
 				type: 'select',
 			},

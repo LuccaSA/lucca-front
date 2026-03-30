@@ -78,7 +78,7 @@ export default {
 			description: 'Définit une valeur maximale.',
 		},
 		forceMeridiemDisplay: {
-			options: [null, false, true],
+			options: ['', false, true],
 			control: {
 				type: 'select',
 			},
@@ -96,7 +96,7 @@ export const Basic: StoryObj<TimePickerComponent & FormFieldComponent & { requir
 		return {
 			template: cleanupTemplate(`
 <lu-form-field [label]="labelID" [rolePresentationLabel]="true" ${generateInputs({ hiddenLabel, tooltip, inlineMessage, inlineMessageState, size, presentation }, argTypes)}>
-<lu-time-picker label="${label}" ${generateInputs(inputArgs, argTypes)} ${forceMeridiemDisplay !== null ? `[forceMeridiemDisplay]="${forceMeridiemDisplay}"` : ''} [(ngModel)]="example" />
+<lu-time-picker label="${label}" ${generateInputs(inputArgs, argTypes)} ${typeof forceMeridiemDisplay === 'boolean' ? `[forceMeridiemDisplay]="${forceMeridiemDisplay}"` : ''} [(ngModel)]="example" />
 	<ng-template #labelID>
 			<span aria-hidden="true">${label}</span>
 		</ng-template>
@@ -116,7 +116,6 @@ export const Basic: StoryObj<TimePickerComponent & FormFieldComponent & { requir
 		disabled: false,
 		step: 'PT1M',
 		max: '23:59:59',
-		forceMeridiemDisplay: null,
 		presentation: false,
 	},
 };

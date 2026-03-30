@@ -36,7 +36,7 @@ export default {
 			description: 'Modifie la taille du champ.',
 		},
 		width: {
-			options: [null, 20, 30, 40, 50, 60],
+			options: ['', 20, 30, 40, 50, 60],
 			control: {
 				type: 'select',
 			},
