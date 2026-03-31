@@ -90,7 +90,7 @@ export class PopoverDirective implements OnDestroy {
 	})
 	content: TemplateRef<unknown> | Type<unknown>;
 
-	luPopoverPosition = input<PopoverPosition>('above');
+	luPopoverPosition = input<PopoverPosition | null>(null);
 
 	@Input()
 	overlayScrollStrategy: 'reposition' | 'block' | 'close' = 'reposition';
@@ -122,7 +122,7 @@ export class PopoverDirective implements OnDestroy {
 
 	luPopoverCloseDelay: InputSignal<number> = input<number>(100);
 
-	luPopoverPositionRef = linkedSignal(() => this.luPopoverPosition());
+	luPopoverPositionRef = linkedSignal(() => this.luPopoverPosition() || 'above');
 
 	open$ = new Subject<'focus' | 'click' | 'hover'>();
 
