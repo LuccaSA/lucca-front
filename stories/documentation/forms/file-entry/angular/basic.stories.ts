@@ -1,20 +1,20 @@
 import { provideHttpClient } from '@angular/common/http';
 import { FILE_ENTRY_SIZE, FILE_ENTRY_STATE, FileEntryComponent } from '@lucca-front/ng/file-upload';
 import { applicationConfig, Meta, moduleMetadata } from '@storybook/angular';
-import { generateInputs } from 'stories/helpers/stories';
+import { generateInputs, setStoryOptions } from 'stories/helpers/stories';
 
 export default {
 	title: 'Documentation/File/FileEntry/Angular/Basic',
 	argTypes: {
 		size: {
-			options: ['', ...FILE_ENTRY_SIZE],
+			options: setStoryOptions(FILE_ENTRY_SIZE),
 			control: {
 				type: 'radio',
 			},
 			description: 'Modifie la taille du composant.',
 		},
 		state: {
-			options: ['', ...FILE_ENTRY_STATE],
+			options: setStoryOptions(FILE_ENTRY_STATE),
 			control: {
 				type: 'radio',
 			},

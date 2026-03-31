@@ -8,6 +8,7 @@ import {
 	CalloutPopoverComponent,
 	CalloutStates,
 } from '@lucca-front/ng/callout';
+import { PALETTE } from '@lucca/prisme/core';
 import { Meta, moduleMetadata, StoryObj } from '@storybook/angular';
 import { generateInputs, setStoryOptions } from 'stories/helpers/stories';
 
@@ -89,7 +90,7 @@ export default {
 			description: 'Masque le titre si le popover ne contient qu’un élément.',
 		},
 		palette: {
-			options: ['none', 'product', 'neutral'],
+			options: setStoryOptions(PALETTE),
 			control: {
 				type: 'select',
 			},

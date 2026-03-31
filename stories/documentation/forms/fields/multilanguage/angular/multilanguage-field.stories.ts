@@ -1,7 +1,7 @@
 import { LOCALE_ID } from '@angular/core';
 import { FormControl, FormsModule, ReactiveFormsModule } from '@angular/forms';
 import { BrowserAnimationsModule } from '@angular/platform-browser/animations';
-import { FORM_FIELD_WIDTH, FormFieldComponent } from '@lucca-front/ng/form-field';
+import { FORM_FIELD_SIZE, FORM_FIELD_WIDTH, FormFieldComponent } from '@lucca-front/ng/form-field';
 import { MultilanguageInputComponent, MultiLanguageInputValidators, MultilanguageTranslation } from '@lucca-front/ng/forms';
 import { INLINE_MESSAGE_STATE } from '@lucca-front/ng/inline-message';
 import { applicationConfig, Meta, moduleMetadata, StoryObj } from '@storybook/angular';
@@ -50,7 +50,7 @@ export default {
 			description: `[v21.1] Ajoute le validateur marquant l'invariant comme obligatoire.`,
 		},
 		size: {
-			options: ['M', 'S'],
+			options: setStoryOptions(FORM_FIELD_SIZE),
 			control: {
 				type: 'select',
 			},

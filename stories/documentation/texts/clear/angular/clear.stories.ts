@@ -1,4 +1,5 @@
 import { CLEAR_SIZE, ClearComponent } from '@lucca-front/ng/clear';
+import { PALETTE } from '@lucca/prisme/core';
 import { Meta, moduleMetadata, StoryObj } from '@storybook/angular';
 import { generateInputs, setStoryOptions } from 'stories/helpers/stories';
 
@@ -27,7 +28,7 @@ export const Template: StoryObj = {
 			description: 'Désactive le bouton.',
 		},
 		palette: {
-			options: ['', 'success', 'warning', 'error', 'product', 'brand', 'neutral', 'none', 'primary', 'grey'],
+			options: setStoryOptions(PALETTE),
 			control: {
 				type: 'select',
 			},

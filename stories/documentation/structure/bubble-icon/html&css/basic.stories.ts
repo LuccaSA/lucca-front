@@ -1,5 +1,6 @@
 import { IconsList } from '@/stories/icons-list';
 import { BUBBLE_ICON_DIRECTION, BUBBLE_ICON_SIZE } from '@lucca-front/ng/bubble-icon';
+import { DECORATIVE_PALETTE, PALETTE } from '@lucca/prisme/core';
 import { Meta, StoryObj } from '@storybook/angular';
 import { setStoryOptions } from 'stories/helpers/stories';
 
@@ -29,35 +30,7 @@ export default {
 			description: 'Modifie la taille du composant.',
 		},
 		palette: {
-			options: [
-				// products
-				'product',
-				'pagga',
-				'poplee',
-				'coreHR',
-				'timmi',
-				'cleemy',
-				'cc',
-				'brand',
-				// states
-				'neutral',
-				'success',
-				'warning',
-				'critical',
-				// decoratives
-				'kiwi',
-				'lime',
-				'cucumber',
-				'mint',
-				'glacier',
-				'lagoon',
-				'blueberry',
-				'lavender',
-				'grape',
-				'watermelon',
-				'pumpkin',
-				'pineapple',
-			],
+			options: setStoryOptions([...PALETTE, ...DECORATIVE_PALETTE]),
 			control: {
 				type: 'select',
 			},

@@ -1,4 +1,4 @@
-export const BubbleIllustrationList = [
+export const BUBBLE_ILLUSTRATION = [
 	'moodAngry',
 	'moodBored',
 	'moodHappy',
@@ -103,4 +103,4 @@ export const BubbleIllustrationList = [
 	'widget',
 ] as const;
 
-export type BubbleIllustration = (typeof BubbleIllustrationList)[number];
+export type BubbleIllustration = (typeof BUBBLE_ILLUSTRATION)[number];
