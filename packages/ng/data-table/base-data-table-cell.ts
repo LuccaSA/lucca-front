@@ -3,6 +3,7 @@ import { LU_DATA_TABLE_BODY_INSTANCE } from './data-table-body/data-table-body.t
 import { LU_DATA_TABLE_FOOT_INSTANCE } from './data-table-foot/data-table-foot.token';
 import { LU_DATA_TABLE_HEAD_INSTANCE } from './data-table-head/data-table-head.token';
 import { LU_DATA_TABLE_ROW_INSTANCE } from './data-table-row/data-table-row.token';
+import { DataTableAlign } from './data-table-type';
 import { LU_DATA_TABLE_INSTANCE } from './data-table.token';
 
 @Component({
@@ -18,7 +19,7 @@ export abstract class BaseDataTableCell {
 	rowRef = inject(LU_DATA_TABLE_ROW_INSTANCE, { optional: true });
 
 	editable = input(false, { transform: booleanAttribute });
-	align = input<null | 'start' | 'center' | 'end'>(null);
+	align = input<DataTableAlign | null>(null);
 
 	isStickyStart = computed(() => {
 		return this.position() <= this.tableRef?.stickyColsStart() - 1;
