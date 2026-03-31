@@ -1,5 +1,5 @@
 /**
- * Available ListboxComponent States
+ * Available ListboxComponent Types
  */
 
 export const LISTBOX_STATE = ['loading', 'empty'] as const;

@@ -1,6 +1,8 @@
-import { ReadMoreComponent } from '@lucca-front/ng/read-more';
+import { READ_MORE_SURFACE, ReadMoreComponent } from '@lucca-front/ng/read-more';
 import { Meta, moduleMetadata } from '@storybook/angular';
-import { generateInputs } from 'stories/helpers/stories';
+import { generateInputs, setStoryOptions } from 'stories/helpers/stories';
+
+const OTHER_SURFACE_OPTIONS = ['#0b1732'];
 
 export default {
 	title: 'Documentation/Texts/ReadMore/Angular/Basic',
@@ -15,7 +17,7 @@ export default {
 			description: "Modifie le nombre de lignes affichées à l'état replié.",
 		},
 		surface: {
-			options: ['', 'default', 'sunken', '#0b1732'],
+			options: setStoryOptions([...READ_MORE_SURFACE, ...OTHER_SURFACE_OPTIONS]),
 			control: {
 				type: 'select',
 			},

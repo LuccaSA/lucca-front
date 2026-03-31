@@ -1,5 +1,5 @@
 /**
- * Available ActivityFeedStepComponent Statuses
+ * Available ActivityFeedComponent Types
  */
 
 export const ACTIVITY_FEED_STEP_STATUS = ['success', 'critical', 'pending'] as const;

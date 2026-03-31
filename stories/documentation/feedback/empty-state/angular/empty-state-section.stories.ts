@@ -1,6 +1,6 @@
 import { HttpClientModule } from '@angular/common/http';
 import { ButtonComponent } from '@lucca-front/ng/button';
-import { EmptyStateSectionComponent } from '@lucca-front/ng/empty-state';
+import { EMPTY_STATE_HX, EmptyStateSectionComponent } from '@lucca-front/ng/empty-state';
 import { Meta, moduleMetadata, StoryObj } from '@storybook/angular';
 import { PaletteArgType } from '../../../../helpers/common-arg-types';
 
@@ -127,8 +127,8 @@ export default {
 		hx: {
 			control: {
 				type: 'number',
-				min: 1,
-				max: 6,
+				min: EMPTY_STATE_HX.at(0),
+				max: EMPTY_STATE_HX.at(EMPTY_STATE_HX.length - 1),
 			},
 			description: '[v18.1]',
 		},

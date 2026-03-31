@@ -1,5 +1,5 @@
 /**
- * Available DividerComponent Sizes
+ * Available DividerComponent Types
  */
 
 export const DIVIDER_SIZE = ['M', 'S'] as const;

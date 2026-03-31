@@ -1,5 +1,5 @@
 /**
- * Available ResourceCard types
+ * Available ResourceCard Types
  */
 
 export const RESOURCE_CARD_HEADING_LEVEL = ['1', '2', '3', '4', '5', '6'] as const;

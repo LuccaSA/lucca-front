@@ -1,5 +1,5 @@
 /**
- * Available ClearComponent sizes
+ * Available ClearComponent Types
  */
 
 export const CLEAR_SIZE = ['S'] as const;

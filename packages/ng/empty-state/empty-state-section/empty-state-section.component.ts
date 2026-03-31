@@ -1,7 +1,7 @@
 import { ChangeDetectionStrategy, Component, ViewEncapsulation, booleanAttribute, computed, input, numberAttribute } from '@angular/core';
 import { BubbleIllustration, BubbleIllustrationComponent } from '@lucca-front/ng/bubble-illustration';
 import { Palette, PortalContent, PortalDirective } from '@lucca-front/ng/core';
-import { Hx } from '../empty-state.model';
+import { Hx } from '../empty-state.type';
 
 const ICON_TO_ILLUSTRATION: Record<string, BubbleIllustration> = {
 	Banknote: 'banknote',

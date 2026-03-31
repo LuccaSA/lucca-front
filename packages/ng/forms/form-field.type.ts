@@ -1,5 +1,5 @@
 /**
- * Available FormFieldIdDirective labelledBy strategies
+ * Available FormField Types
  */
 
 export const FORM_FIELD_ID_LABELLED_BY_STRATEGY = ['prepend', 'append'] as const;

@@ -1,5 +1,5 @@
 /**
- * Available TagComponent Sizes
+ * Available TagComponent Types
  */
 
 export const TAG_SIZE = ['S', 'M', 'L'] as const;

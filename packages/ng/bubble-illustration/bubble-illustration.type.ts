@@ -1,5 +1,5 @@
 /**
- * Available BubbleIllustrationComponent Sizes
+ * Available BubbleIllustrationComponent Types
  */
 
 export const BUBBLE_ILLUSTRATION_SIZE = ['S', 'M', 'L'] as const;

@@ -1,5 +1,5 @@
 /**
- * Available ColorComponent Sizes
+ * Available ColorComponent Types
  */
 
 export const COLOR_SIZE = ['L', 'XL'] as const;
