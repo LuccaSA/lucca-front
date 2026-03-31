@@ -10,6 +10,84 @@
 			</td>
 		</tr>
 		<tr>
+			<td>Default Single L</td>
+			<td>
+				<div class="demo-QAtable-list">
+					<div class="fileUpload mod-L">
+						<input
+							type="file"
+							title=""
+							class="fileUpload-input"
+							accept="*/*"
+							aria-describedby="input-1-message"
+							id="input-1"
+							aria-labelledby="input-1-label"
+						/>
+						<div class="fileUpload-status">
+							<div
+								class="bubbleIllustration palette-product mod-L mod-action"
+								aria-hidden="true"
+								[innerHtml]="'https://cdn.lucca.fr/transverse/prisme/visuals/bubble-illustration/invoice.svg' | luSafeExternalSvg"
+							></div>
+						</div>
+						<div class="fileUpload-instruction" id="fileUpload-instruction-1">
+							<span aria-hidden="true" class="fileUpload-instruction-action">
+								Drag and drop file here or <span>click to browse</span>.
+							</span>
+							<span class="fileUpload-instruction-formats">Accepted formats: all. </span>
+							<span class="fileUpload-instruction-size">Maximum size: 80MB. </span
+							><span class="pr-u-mask">The submitted file is detailed below. </span>
+						</div>
+						<span aria-hidden="true" class="fileUpload-button button">Select a file</span>
+					</div>
+				</div>
+			</td>
+			<td>
+				<div class="demo-QAtable-list">
+					<lu-single-file-upload size="L" />
+				</div>
+			</td>
+		</tr>
+		<tr>
+			<td>Default Multi L</td>
+			<td>
+				<div class="demo-QAtable-list">
+					<div class="fileUpload mod-L">
+						<input
+							type="file"
+							title=""
+							class="fileUpload-input"
+							accept="*/*"
+							aria-describedby="input-1-message"
+							id="input-1"
+							aria-labelledby="input-1-label"
+						/>
+						<div class="fileUpload-status">
+							<div
+								class="bubbleIllustration palette-product mod-L mod-action"
+								aria-hidden="true"
+								[innerHtml]="'https://cdn.lucca.fr/transverse/prisme/visuals/bubble-illustration/invoice.svg' | luSafeExternalSvg"
+							></div>
+						</div>
+						<div class="fileUpload-instruction" id="fileUpload-instruction-1">
+							<span aria-hidden="true" class="fileUpload-instruction-action">
+								Drag and drop files here or <span>click to browse</span>.
+							</span>
+							<span class="fileUpload-instruction-formats">Accepted formats: all. </span>
+							<span class="fileUpload-instruction-size">Maximum size: 80MB. </span
+							><span class="pr-u-mask">The submitted files are detailed below. </span>
+						</div>
+						<span aria-hidden="true" class="fileUpload-button button">Select files</span>
+					</div>
+				</div>
+			</td>
+			<td>
+				<div class="demo-QAtable-list">
+					<lu-multi-file-upload size="L" />
+				</div>
+			</td>
+		</tr>
+		<tr>
 			<td>Default Single</td>
 			<td>
 				<div class="demo-QAtable-list">
@@ -85,84 +163,6 @@
 			<td>
 				<div class="demo-QAtable-list">
 					<lu-multi-file-upload />
-				</div>
-			</td>
-		</tr>
-		<tr>
-			<td>Default Single S</td>
-			<td>
-				<div class="demo-QAtable-list">
-					<div class="fileUpload mod-S">
-						<input
-							type="file"
-							title=""
-							class="fileUpload-input"
-							accept="*/*"
-							aria-describedby="input-1-message"
-							id="input-1"
-							aria-labelledby="input-1-label"
-						/>
-						<div class="fileUpload-status">
-							<div
-								class="bubbleIllustration palette-product mod-L mod-action"
-								aria-hidden="true"
-								[innerHtml]="'https://cdn.lucca.fr/transverse/prisme/visuals/bubble-illustration/invoice.svg' | luSafeExternalSvg"
-							></div>
-						</div>
-						<div class="fileUpload-instruction" id="fileUpload-instruction-1">
-							<span aria-hidden="true" class="fileUpload-instruction-action">
-								Drag and drop file here or <span>click to browse</span>.
-							</span>
-							<span class="fileUpload-instruction-formats">Accepted formats: all. </span>
-							<span class="fileUpload-instruction-size">Maximum size: 80MB. </span
-							><span class="pr-u-mask">The submitted file is detailed below. </span>
-						</div>
-						<span aria-hidden="true" class="fileUpload-button button">Select a file</span>
-					</div>
-				</div>
-			</td>
-			<td>
-				<div class="demo-QAtable-list">
-					<lu-single-file-upload size="S" />
-				</div>
-			</td>
-		</tr>
-		<tr>
-			<td>Default Multi S</td>
-			<td>
-				<div class="demo-QAtable-list">
-					<div class="fileUpload mod-S">
-						<input
-							type="file"
-							title=""
-							class="fileUpload-input"
-							accept="*/*"
-							aria-describedby="input-1-message"
-							id="input-1"
-							aria-labelledby="input-1-label"
-						/>
-						<div class="fileUpload-status">
-							<div
-								class="bubbleIllustration palette-product mod-L mod-action"
-								aria-hidden="true"
-								[innerHtml]="'https://cdn.lucca.fr/transverse/prisme/visuals/bubble-illustration/invoice.svg' | luSafeExternalSvg"
-							></div>
-						</div>
-						<div class="fileUpload-instruction" id="fileUpload-instruction-1">
-							<span aria-hidden="true" class="fileUpload-instruction-action">
-								Drag and drop files here or <span>click to browse</span>.
-							</span>
-							<span class="fileUpload-instruction-formats">Accepted formats: all. </span>
-							<span class="fileUpload-instruction-size">Maximum size: 80MB. </span
-							><span class="pr-u-mask">The submitted files are detailed below. </span>
-						</div>
-						<span aria-hidden="true" class="fileUpload-button button">Select files</span>
-					</div>
-				</div>
-			</td>
-			<td>
-				<div class="demo-QAtable-list">
-					<lu-multi-file-upload size="S" />
 				</div>
 			</td>
 		</tr>
