@@ -1,6 +1,6 @@
 import { LOCALE_ID } from '@angular/core';
 import { FormsModule } from '@angular/forms';
-import { DATE2_CLEAR_BEHAVIOR, DateInputComponent } from '@lucca-front/ng/date2';
+import { CALENDAR_MODE, DATE2_CLEAR_BEHAVIOR, DateInputComponent } from '@lucca-front/ng/date2';
 import { FormFieldComponent } from '@lucca-front/ng/form-field';
 import { IconComponent } from '@lucca-front/ng/icon';
 import { applicationConfig, Meta, moduleMetadata, StoryObj } from '@storybook/angular';
@@ -50,7 +50,7 @@ export default {
 		},
 		mode: {
 			control: 'select',
-			options: ['day', 'month', 'year'],
+			options: setStoryOptions(CALENDAR_MODE),
 			description: "Modifie le mode de sélection au mois ou à l'année.",
 		},
 		focusedDate: {
