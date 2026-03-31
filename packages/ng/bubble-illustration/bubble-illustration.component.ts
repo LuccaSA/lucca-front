@@ -23,7 +23,7 @@ export class BubbleIllustrationComponent {
 	readonly action = input(false, { transform: booleanAttribute });
 
 	readonly illustrationUrl = computed(() => {
-		if (this.illustration().startsWith('https://')) {
+		if (this.illustration().startsWith('https://') || this.illustration().startsWith('/')) {
 			return this.illustration();
 		}
 		return `${this.domain}${this.path}${this.illustration()}${this.extension}`;
