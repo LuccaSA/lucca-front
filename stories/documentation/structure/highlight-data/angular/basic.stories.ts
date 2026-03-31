@@ -60,13 +60,13 @@ export const Template: StoryObj<HighlightDataComponent & { action: string }> = {
 			type: 'boolean',
 		},
 		size: {
-			options: ['', ...HIGHLIGHT_DATA_SIZE],
+			options: setStoryOptions(HIGHLIGHT_DATA_SIZE),
 			control: {
 				type: 'select',
 			},
 		},
 		theme: {
-			options: ['', ...HIGHLIGHT_DATA_THEME],
+			options: setStoryOptions(HIGHLIGHT_DATA_THEME),
 			control: {
 				type: 'select',
 			},

@@ -1,5 +1,6 @@
 import { ButtonComponent } from '@lucca-front/ng/button';
 import { CALLOUT_SIZE, CalloutDisclosureComponent, CalloutFeedbackItemComponent, CalloutFeedbackItemDescriptionDirective, CalloutFeedbackListComponent, CalloutStates } from '@lucca-front/ng/callout';
+import { PALETTE } from '@lucca/prisme/core';
 import { Meta, StoryObj, moduleMetadata } from '@storybook/angular';
 import { generateInputs, setStoryOptions } from 'stories/helpers/stories';
 
@@ -61,7 +62,7 @@ export default {
 			description: 'Titre du callout.',
 		},
 		palette: {
-			options: ['none', 'product', 'neutral', 'success', 'warning', 'error'],
+			options: setStoryOptions(PALETTE),
 			control: {
 				type: 'select',
 			},
