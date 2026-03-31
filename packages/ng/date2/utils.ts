@@ -3,7 +3,7 @@ import { Day, format, isSameDay, isSameMonth, isSameYear, parse, startOfDecade, 
 import { CalendarWeekDay, CalendarWeekInfo } from './calendar.token';
 import { CalendarMode } from './calendar2/calendar-mode';
 import { DateRange, DateRangeInput } from './calendar2/date-range';
-import { DATE_ISO_FORMAT } from './date.const';
+import { DATE_ISO_FORMAT } from './date2.type';
 
 export function getIntlWeekDay(date: Date): CalendarWeekDay {
 	return (date.getDay() || 7) as CalendarWeekDay;
