@@ -5,6 +5,7 @@ import { ButtonComponent } from '@lucca-front/ng/button';
 import { IconComponent } from '@lucca-front/ng/icon';
 import { BaseIndexTableCell } from '../base-index-table-cell';
 import { LU_INDEX_TABLE_CELL_INSTANCE } from '../index-table-cell.token';
+import { IndexTableSort } from '../index-table-type';
 
 const SORT_VALUES = ['none', 'ascending', 'descending'] as const;
 
@@ -40,7 +41,7 @@ const SORT_VALUES = ['none', 'ascending', 'descending'] as const;
 export class IndexTableRowCellHeaderComponent extends BaseIndexTableCell {
 	elementRef = inject<ElementRef<HTMLTableCellElement>>(ElementRef);
 
-	sort = model<null | 'none' | 'ascending' | 'descending'>(null);
+	sort = model<IndexTableSort | null>(null);
 	selectable = input(false, { transform: booleanAttribute });
 	hiddenLabel = input(false, { transform: booleanAttribute });
 	actions = input(false, { transform: booleanAttribute });

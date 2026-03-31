@@ -3,6 +3,8 @@ import { provideAnimations } from '@angular/platform-browser/animations';
 import { ButtonComponent } from '@lucca-front/ng/button';
 import { EmptyStateSectionComponent } from '@lucca-front/ng/empty-state';
 import {
+	INDEX_TABLE_ALIGN,
+	INDEX_TABLE_SORT,
 	IndexTableActionComponent,
 	IndexTableActionFileComponent,
 	IndexTableBodyComponent,
@@ -19,6 +21,7 @@ import { LuUserDisplayModule } from '@lucca-front/ng/user';
 import { LuUserPopoverComponent, LuUserPopoverDirective } from '@lucca-front/ng/user-popover';
 import { applicationConfig, Meta, moduleMetadata, StoryObj } from '@storybook/angular';
 import { HiddenArgType } from 'stories/helpers/common-arg-types';
+import { setStoryOptions } from 'stories/helpers/stories';
 
 interface BasicStory {
 	action: string;
@@ -78,14 +81,14 @@ export default {
 			description: "Affiche une ligne sous la forme d'un empilement d'éléments.",
 		},
 		sort: {
-			options: ['', 'none', 'ascending', 'descending'],
+			options: setStoryOptions(INDEX_TABLE_SORT),
 			control: {
 				type: 'select',
 			},
 			description: "Définit l'état de tri d'une cellule d'en-tête.",
 		},
 		align: {
-			options: ['', 'start', 'center', 'end'],
+			options: setStoryOptions(INDEX_TABLE_ALIGN),
 			control: {
 				type: 'select',
 			},

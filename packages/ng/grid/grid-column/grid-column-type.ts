@@ -1,5 +1,5 @@
 /**
- * Available GridColumnComponent alignments
+ * Available GridComponent types
  */
 
 export const GRID_COLUMN_ALIGNMENT = ['start', 'center', 'end', 'auto'] as const;
