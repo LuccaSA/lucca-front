@@ -6,4 +6,5 @@ export * from './index-table-cell/index-table-cell.component';
 export * from './index-table-foot/index-table-foot.component';
 export * from './index-table-head/index-table-head.component';
 export * from './index-table-row/index-table-row.component';
+export * from './index-table-type';
 export * from './index-table.component';
