@@ -9,16 +9,16 @@
 }
 <div class="activityFeed-step-description">
 	@if (label()) {
-		<p class="activityFeed-step-description-content">{{ label() }}</p>
+		<p class="activityFeed-step-description-content">
+			<ng-container *luPortal="label()"></ng-container>
+		</p>
 	}
 	@if (date()) {
-		<time class="comment-infos-date" [attr.datetime]="date().toISOString()" class="activityFeed-step-description-time">
+		<time class="comment-infos-date activityFeed-step-description-time" [attr.datetime]="preparedDate().toISOString()">
 			@if (datePipeFormat()) {
 				{{ date() | date: datePipeFormat() }}
-			} @else if (dateDisplay()) {
-				<ng-container *luPortal="dateDisplay()" />
 			} @else {
-				{{ date() | date: "fullDate" }} {{ intl().at }} {{ date() | date: "shortTime" }}
+				{{ dateDisplay() }}
 			}
 		</time>
 	}
