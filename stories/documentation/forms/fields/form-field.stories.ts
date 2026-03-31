@@ -1,8 +1,9 @@
 import { FormsModule } from '@angular/forms';
 import { BrowserAnimationsModule } from '@angular/platform-browser/animations';
-import { FormFieldComponent, InputDirective } from '@lucca-front/ng/form-field';
+import { FORM_FIELD_WIDTH, FormFieldComponent, InputDirective } from '@lucca-front/ng/form-field';
+import { INLINE_MESSAGE_STATE } from '@lucca-front/ng/inline-message';
 import { Meta, moduleMetadata, StoryObj } from '@storybook/angular';
-import { generateInputs } from '../../../helpers/stories';
+import { generateInputs, setStoryOptions } from '../../../helpers/stories';
 
 export default {
 	title: 'Documentation/Forms/Fields/Form Field',
@@ -35,7 +36,7 @@ export default {
 			description: 'Ajoute un texte indicatif sous le champ de formulaire.',
 		},
 		inlineMessageState: {
-			options: ['default', 'success', 'warning', 'error'],
+			options: setStoryOptions(INLINE_MESSAGE_STATE),
 			control: {
 				type: 'select',
 			},
@@ -61,7 +62,7 @@ export default {
 			description: "Nombre de caractère maximum autorisés pour un champ de type texte. A seulement un impact sur l'interface et doit être complé à un réglage au niveau de <code>FormControl</code>.",
 		},
 		width: {
-			options: ['', 20, 30, 40, 50, 60],
+			options: setStoryOptions(FORM_FIELD_WIDTH),
 			control: {
 				type: 'select',
 			},

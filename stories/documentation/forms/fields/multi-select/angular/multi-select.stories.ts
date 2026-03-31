@@ -2,12 +2,13 @@ import { allLegumes, FilterLegumesPipe } from '@/stories/forms/select/select.uti
 import { FormsModule } from '@angular/forms';
 import { BrowserAnimationsModule } from '@angular/platform-browser/animations';
 import { LuOptionDirective } from '@lucca-front/ng/core-select';
-import { FormFieldComponent } from '@lucca-front/ng/form-field';
+import { FORM_FIELD_WIDTH, FormFieldComponent } from '@lucca-front/ng/form-field';
+import { INLINE_MESSAGE_STATE } from '@lucca-front/ng/inline-message';
 import { LuMultiSelectInputComponent } from '@lucca-front/ng/multi-select';
 import { Meta, moduleMetadata, StoryObj } from '@storybook/angular';
 import { StoryModelDisplayComponent } from 'stories/helpers/story-model-display.component';
 import { HiddenArgType } from '../../../../../helpers/common-arg-types';
-import { generateInputs } from '../../../../../helpers/stories';
+import { generateInputs, setStoryOptions } from '../../../../../helpers/stories';
 
 export default {
 	title: 'Documentation/Forms/Fields/Multi Select/Angular',
@@ -39,7 +40,7 @@ export default {
 			description: 'Modifie la taille du champ.',
 		},
 		width: {
-			options: ['', 20, 30, 40, 50, 60],
+			options: setStoryOptions(FORM_FIELD_WIDTH),
 			control: {
 				type: 'select',
 			},
@@ -49,7 +50,7 @@ export default {
 			description: 'Ajoute un texte descriptif (aide, erreur, etc.) sous le champ de formulaire.',
 		},
 		inlineMessageState: {
-			options: ['default', 'success', 'warning', 'error'],
+			options: setStoryOptions(INLINE_MESSAGE_STATE),
 			control: {
 				type: 'select',
 			},
