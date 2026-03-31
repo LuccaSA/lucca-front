@@ -7,10 +7,6 @@
 	}
 
 	@layer mods {
-		.divider.fileEntry-description-divider {
-			@include divider;
-		}
-
 		&.mod-S {
 			@include S;
 		}
@@ -38,5 +34,11 @@
 				@include loadingS;
 			}
 		}
+	}
+}
+
+.fileEntry-description-divider.divider.mod-vertical {
+	@layer mods {
+		@include divider;
 	}
 }

@@ -15,4 +15,10 @@
 			}
 		}
 	}
+
+	@layer mods {
+		.fileToolbar-list-item-button.button {
+			@include button;
+		}
+	}
 }

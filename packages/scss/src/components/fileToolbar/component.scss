@@ -1,8 +1,6 @@
 @use '@lucca-front/scss/src/commons/utils/namespace';
 @use '@lucca-front/scss/src/commons/utils/reset';
 
-@use '@lucca-front/scss/src/components/button/exports' as button;
-
 @use '@lucca-front/icons/src/icon/exports' as icon;
 
 @mixin component($atRoot: namespace.$defaultAtRoot) {
@@ -23,13 +21,6 @@
 			display: flex;
 			gap: var(--pr-t-spacings-50);
 			padding: var(--components-fileToolbar-list-padding);
-		}
-
-		.fileToolbar-list-item-button.button {
-			@include button.ghost;
-			@include button.S;
-
-			--components-button-padding: var(--pr-t-spacings-75) !important;
 		}
 	}
 }
