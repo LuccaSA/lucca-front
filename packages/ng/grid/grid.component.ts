@@ -53,4 +53,5 @@ export class GridComponent {
 	}));
 }
 
-export type Gap = '0' | '25' | '50' | '75' | '100' | '150' | '200' | '300' | '400' | '500' | '600' | '700' | '800' | `${number}${string}`;
+export const GRID_GAP = ['0', '25', '50', '75', '100', '150', '200', '300', '400', '500', '600', '700', '800'] as const;
+export type Gap = (typeof GRID_GAP)[number] | `${number}${string}`;
