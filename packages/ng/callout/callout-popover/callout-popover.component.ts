@@ -7,7 +7,7 @@ import { PopoverDirective, PopoverPosition } from '@lucca-front/ng/popover2';
 import { CalloutFeedbackItemComponent } from '../callout-feedback-item/callout-feedback-item.component';
 import { CalloutIconPipe } from '../callout-icon.pipe';
 import { CalloutState } from '../callout-state';
-import { CalloutPopoverSize } from '../callout-type';
+import { CalloutPopoverSize } from '../callout.type';
 import { getCalloutPalette } from '../callout.utils';
 
 @Component({

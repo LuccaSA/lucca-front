@@ -7,7 +7,7 @@ import { IconComponent } from '@lucca-front/ng/icon';
 import { ReplaySubject } from 'rxjs';
 import { BaseDataTableCell } from '../base-data-table-cell';
 import { LU_DATA_TABLE_CELL_INSTANCE } from '../data-table-cell.token';
-import { DataTableSort } from '../data-table-type';
+import { DataTableSort } from '../data-table.type';
 
 @Component({
 	// eslint-disable-next-line @angular-eslint/component-selector

@@ -1,6 +1,6 @@
 import { booleanAttribute, ChangeDetectionStrategy, Component, computed, effect, inject, input, ViewEncapsulation } from '@angular/core';
 import { LuClass, PortalContent, PortalDirective } from '@lucca-front/ng/core';
-import { HighlightDataPalette, HighlightDataSize, HighlightDataTheme } from './highlight-data-type';
+import { HighlightDataPalette, HighlightDataSize, HighlightDataTheme } from './highlight-data.type';
 
 export type HighlightDataIllustration =
 	| 'calculator'

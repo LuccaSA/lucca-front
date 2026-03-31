@@ -1,6 +1,6 @@
 import { booleanAttribute, ChangeDetectionStrategy, Component, forwardRef, input, ViewEncapsulation } from '@angular/core';
 import { PortalContent, PortalDirective } from '@lucca-front/ng/core';
-import { InputFramedSize } from './input-framed-type';
+import { InputFramedSize } from './input-framed.type';
 import { INPUT_FRAMED_INSTANCE } from './input-framed.token';
 
 @Component({

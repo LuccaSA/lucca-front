@@ -1,5 +1,5 @@
 import { booleanAttribute, ChangeDetectionStrategy, Component, computed, input, numberAttribute, ViewEncapsulation } from '@angular/core';
-import { ProgressBarState } from './progress-bar-type';
+import { ProgressBarState } from './progress-bar.type';
 
 @Component({
 	selector: 'lu-progress-bar',

@@ -2,7 +2,7 @@ import { NgStyle } from '@angular/common';
 import { booleanAttribute, ChangeDetectionStrategy, Component, computed, inject, input, linkedSignal, ViewEncapsulation } from '@angular/core';
 import { isNotNilOrEmptyString } from '@lucca-front/ng/core';
 import { LU_DEFAULT_DISPLAY_POLICY, LuDisplayFormat, LuDisplayFullname, LuDisplayHybrid, LuDisplayInitials, luUserDisplay } from '../display';
-import { UserPictureSize } from './user-picture-type';
+import { UserPictureSize } from './user-picture.type';
 
 export interface LuUserPictureUserInput {
 	picture?: { href: string } | null;

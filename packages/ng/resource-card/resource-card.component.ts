@@ -1,7 +1,7 @@
 import { CdkDragHandle } from '@angular/cdk/drag-drop';
 import { booleanAttribute, ChangeDetectionStrategy, Component, inject, input, ViewEncapsulation } from '@angular/core';
 import { IconComponent } from '@lucca-front/ng/icon';
-import { ResourceCardHeadingLevel, ResourceCardSize } from './resource-card-type';
+import { ResourceCardHeadingLevel, ResourceCardSize } from './resource-card.type';
 import { LU_RESOURCE_CARD_WRAPPER_INSTANCE } from './wrapper/resource-card-wrapper.token';
 
 @Component({

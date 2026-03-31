@@ -1,6 +1,6 @@
 import { AfterViewInit, booleanAttribute, ChangeDetectionStrategy, Component, computed, ElementRef, inject, input, ViewEncapsulation } from '@angular/core';
 import { LuSafeExternalSvgPipe } from '@lucca-front/ng/safe-content';
-import { DialogFancyIllustration } from '../dialog-type';
+import { DialogFancyIllustration } from '../dialog.type';
 import { LuDialogRef } from '../model';
 
 @Component({

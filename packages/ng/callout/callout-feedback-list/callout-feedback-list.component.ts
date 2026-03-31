@@ -1,6 +1,6 @@
 import { ChangeDetectionStrategy, Component, inject, input, ViewEncapsulation } from '@angular/core';
 import { LuClass, Palette, ɵeffectWithDeps } from '@lucca-front/ng/core';
-import { CalloutSize } from '../callout-type';
+import { CalloutSize } from '../callout.type';
 
 @Component({
 	selector: 'ul[lu-callout-feedback-list]',

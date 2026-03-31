@@ -14,7 +14,7 @@ import {
 	ViewEncapsulation,
 } from '@angular/core';
 import { intlInputOptions, LuClass, Palette } from '@lucca-front/ng/core';
-import { ClearSize } from './clear-type';
+import { ClearSize } from './clear.type';
 import { ALuClear, ILuClear } from './clear.model';
 import { LU_CLEAR_TRANSLATIONS } from './clear.translate';
 

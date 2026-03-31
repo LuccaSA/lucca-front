@@ -2,7 +2,7 @@ import { computed, Directive, inject, input, OnDestroy, untracked } from '@angul
 import { ɵeffectWithDeps } from '@lucca-front/ng/core';
 import { FormFieldComponent } from '@lucca-front/ng/form-field';
 import { filter, take } from 'rxjs/operators';
-import { FormFieldIdLabelledByStrategy } from './form-field-id-type';
+import { FormFieldIdLabelledByStrategy } from './form-field-id.type';
 
 @Directive({
 	selector: '[luFormFieldId]',

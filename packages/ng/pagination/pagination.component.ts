@@ -1,7 +1,7 @@
 import { booleanAttribute, ChangeDetectionStrategy, Component, effect, input, output, ViewEncapsulation } from '@angular/core';
 import { intlInputOptions, IntlParamsPipe } from '@lucca-front/ng/core';
 import { IconComponent } from '@lucca-front/ng/icon';
-import { PaginationMod } from './pagination-type';
+import { PaginationMod } from './pagination.type';
 import { LU_PAGINATION_TRANSLATIONS } from './pagination.translate';
 
 @Component({

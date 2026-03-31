@@ -5,7 +5,7 @@ import { InputDirective, ɵPresentationDisplayDefaultDirective } from '@lucca-fr
 import { LuSimpleSelectInputComponent } from '@lucca-front/ng/simple-select';
 import { type CountryCallingCode, formatIncompletePhoneNumber, getCountries, getCountryCallingCode, getExampleNumber, parsePhoneNumber } from 'libphonenumber-js';
 import examples from 'libphonenumber-js/mobile/examples';
-import { PhoneNumberInputAutocomplete } from './phone-number-input-type';
+import { PhoneNumberInputAutocomplete } from './phone-number-input.type';
 import { CountryCode, E164Number } from './types';
 import { PhoneNumberValidators } from './validators';
 

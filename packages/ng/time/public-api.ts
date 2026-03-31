@@ -1,4 +1,4 @@
-export * from './core/base-picker-type';
+export * from './core/base-picker.type';
 export * from './core/date-primitives';
 export * from './duration-picker/duration-picker.component';
 export * from './duration-picker/duration-picker.translate';

@@ -1,7 +1,7 @@
 import { booleanAttribute, ChangeDetectionStrategy, Component, computed, input, ViewEncapsulation } from '@angular/core';
 import { LuSafeExternalSvgPipe } from '@lucca-front/ng/safe-content';
 import { SoftwareIcon } from './software-icon';
-import { SoftwareIconSize } from './software-icon-type';
+import { SoftwareIconSize } from './software-icon.type';
 
 @Component({
 	selector: 'lu-software-icon',
