@@ -7,3 +7,11 @@
 @mixin disablePositioningS {
 	--components-fileToolbar-list-padding: 0;
 }
+
+@mixin button {
+	@include button.ghost;
+	@include button.S;
+
+	--components-button-borderRadius: 4px;
+	--components-button-padding: var(--pr-t-spacings-75);
+}
