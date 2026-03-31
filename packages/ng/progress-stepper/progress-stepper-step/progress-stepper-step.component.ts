@@ -3,7 +3,7 @@ import { ChangeDetectionStrategy, Component, computed, inject, input, ViewEncaps
 import { RouterLink, RouterModule, UrlTree } from '@angular/router';
 import { isRouterLinkParam, LuTypeGuardPipe, RouterLinkParam } from '@lucca-front/ng/core';
 import { LuTooltipTriggerDirective } from '@lucca-front/ng/tooltip';
-import { ProgressStepperStepState } from '../progress-stepper-step-type';
+import { ProgressStepperStepState } from '../progress-stepper-step.type';
 import { LU_PROGRESS_STEPPER_INSTANCE } from '../progress-stepper.token';
 
 @Component({

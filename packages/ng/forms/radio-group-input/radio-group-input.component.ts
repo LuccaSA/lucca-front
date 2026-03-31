@@ -3,7 +3,7 @@ import { ReactiveFormsModule } from '@angular/forms';
 import { FORM_FIELD_INSTANCE, FormFieldComponent } from '@lucca-front/ng/form-field';
 import { injectNgControl } from '../inject-ng-control';
 import { NoopValueAccessorDirective } from '../noop-value-accessor.directive';
-import { RadioGroupInputArrow, RadioGroupInputFramedSize, RadioGroupInputSize } from './radio-group-input-type';
+import { RadioGroupInputArrow, RadioGroupInputFramedSize, RadioGroupInputSize } from './radio-group-input.type';
 import { RADIO_GROUP_INSTANCE } from './radio-group-token';
 
 let nextId = 0;

@@ -2,7 +2,7 @@ import { ChangeDetectionStrategy, Component, computed, effect, inject, input, Vi
 import { LuClass } from '@lucca-front/ng/core';
 import { LU_DEFAULT_DISPLAY_POLICY, LuDisplayFormat, LuUserDisplayPipe } from '../display/index';
 import { displayPictureFormatRecord, LuUserPictureComponent } from '../picture/user-picture.component';
-import { UserTileSize } from './user-tile-type';
+import { UserTileSize } from './user-tile.type';
 
 export interface LuUserTileUserInput {
 	picture?: { href: string } | null;

@@ -3,7 +3,7 @@ import { ALuOnOpenSubscriber, ALuOnScrollBottomSubscriber, ILuOnOpenSubscriber, 
 import { ALuOptionOperator, ILuOptionOperator } from '@lucca-front/ng/option';
 import { ILuApiItem } from '../../api.model';
 import { ALuApiService, LuApiHybridService } from '../../service/index';
-import { ApiSelectStandard } from '../api-select-type';
+import { ApiSelectStandard } from '../api-select.type';
 import { ALuApiOptionPager } from './api-pager.model';
 
 @Component({

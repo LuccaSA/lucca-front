@@ -19,7 +19,7 @@ import {
 import { ResponsiveConfig, ɵeffectWithDeps } from '@lucca-front/ng/core';
 import { DataTableHeadComponent } from './data-table-head/data-table-head.component';
 import { DataTableRowComponent } from './data-table-row/data-table-row.component';
-import { DataTableVerticalAlign } from './data-table-type';
+import { DataTableVerticalAlign } from './data-table.type';
 import { LU_DATA_TABLE_INSTANCE } from './data-table.token';
 
 @Component({

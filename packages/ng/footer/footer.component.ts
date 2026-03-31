@@ -1,7 +1,7 @@
 import { NgTemplateOutlet } from '@angular/common';
 import { booleanAttribute, ChangeDetectionStrategy, Component, computed, input, ViewEncapsulation } from '@angular/core';
 import { ContainerComponent } from '@lucca-front/ng/container';
-import { FooterContainerMax, FooterNarrowAtMediaMax } from './footer-type';
+import { FooterContainerMax, FooterNarrowAtMediaMax } from './footer.type';
 
 @Component({
 	selector: 'lu-footer',

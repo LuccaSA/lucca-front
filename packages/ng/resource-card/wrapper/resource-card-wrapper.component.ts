@@ -1,5 +1,5 @@
 import { booleanAttribute, ChangeDetectionStrategy, Component, forwardRef, input, ViewEncapsulation } from '@angular/core';
-import { ResourceCardSize } from '../resource-card-type';
+import { ResourceCardSize } from '../resource-card.type';
 import { LU_RESOURCE_CARD_WRAPPER_INSTANCE } from './resource-card-wrapper.token';
 
 @Component({

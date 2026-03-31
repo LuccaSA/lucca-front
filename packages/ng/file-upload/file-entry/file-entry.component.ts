@@ -13,7 +13,7 @@ import { Subject } from 'rxjs';
 import { FileEntry } from '../file-upload-entry';
 import { LU_FILE_UPLOAD_TRANSLATIONS } from '../file-upload.translate';
 import { formatFileSize } from '../formatter';
-import { FileEntrySize, FileEntryState } from './file-entry-type';
+import { FileEntrySize, FileEntryState } from './file-entry.type';
 
 @Component({
 	selector: 'lu-file-entry',

@@ -1,7 +1,7 @@
 import { booleanAttribute, ChangeDetectionStrategy, Component, computed, contentChild, ElementRef, inject, input, signal, ViewEncapsulation } from '@angular/core';
 import { Palette, PrClass, ɵeffectWithDeps } from '@lucca/prisme/core';
 import { IconComponent } from '@lucca/prisme/icon';
-import { ButtonSize, ButtonState, ButtonType } from './button-type';
+import { ButtonSize, ButtonState, ButtonType } from './button.type';
 
 @Component({
 	// eslint-disable-next-line @angular-eslint/component-selector

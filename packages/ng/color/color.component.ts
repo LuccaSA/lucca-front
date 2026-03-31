@@ -1,5 +1,5 @@
 import { booleanAttribute, ChangeDetectionStrategy, Component, input, ViewEncapsulation } from '@angular/core';
-import { ColorSize } from './color-type';
+import { ColorSize } from './color.type';
 
 @Component({
 	selector: 'lu-color',

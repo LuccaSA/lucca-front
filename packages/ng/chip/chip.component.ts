@@ -5,7 +5,7 @@ import { intlInputOptions } from '@lucca-front/ng/core';
 import { LuccaIcon } from '@lucca-front/icons';
 import { IconComponent } from '@lucca-front/ng/icon';
 import { LuTooltipModule } from '@lucca-front/ng/tooltip';
-import { ChipSize, ChipState } from './chip-type';
+import { ChipSize, ChipState } from './chip.type';
 import { LU_CHIP_TRANSLATIONS } from './chip.translate';
 
 @Component({

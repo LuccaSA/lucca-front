@@ -1,7 +1,7 @@
 import { booleanAttribute, ChangeDetectionStrategy, Component, inject, input, OnChanges, ViewEncapsulation } from '@angular/core';
 import { LuClass, Palette } from '@lucca-front/ng/core';
 import { LuTooltipModule } from '@lucca-front/ng/tooltip';
-import { StatusBadgeSize } from './status-badge-type';
+import { StatusBadgeSize } from './status-badge.type';
 
 @Component({
 	selector: 'lu-status-badge',

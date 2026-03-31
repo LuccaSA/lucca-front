@@ -1,6 +1,6 @@
 import { booleanAttribute, ChangeDetectionStrategy, Component, computed, ElementRef, inject, input, OnChanges, ViewChild, ViewEncapsulation } from '@angular/core';
 import { LuClass } from '@lucca-front/ng/core';
-import { DividerSize } from './divider-type';
+import { DividerSize } from './divider.type';
 
 @Component({
 	selector: 'lu-divider',

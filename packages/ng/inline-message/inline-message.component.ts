@@ -2,7 +2,7 @@ import { booleanAttribute, ChangeDetectionStrategy, Component, inject, input, Vi
 import { LuClass, PortalContent, PortalDirective, ɵeffectWithDeps } from '@lucca-front/ng/core';
 import { LuTooltipModule } from '@lucca-front/ng/tooltip';
 import { InlineMessageState } from './inline-message-state';
-import { InlineMessageSize } from './inline-message-type';
+import { InlineMessageSize } from './inline-message.type';
 
 @Component({
 	selector: 'lu-inline-message',

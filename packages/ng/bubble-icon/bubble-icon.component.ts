@@ -2,7 +2,7 @@ import { ChangeDetectionStrategy, Component, computed, input, signal, ViewEncaps
 import { LuccaIcon } from '@lucca-front/icons';
 import { DecorativePalette, Palette } from '@lucca-front/ng/core';
 import { IconComponent } from '@lucca-front/ng/icon';
-import { BubbleIconSize } from './bubble-icon-type';
+import { BubbleIconSize } from './bubble-icon.type';
 
 @Component({
 	selector: 'lu-bubble-icon',

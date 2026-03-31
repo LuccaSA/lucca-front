@@ -3,7 +3,7 @@ import { booleanAttribute, ChangeDetectionStrategy, Component, computed, content
 import { PortalContent } from '@lucca-front/ng/core';
 import { CommentComponent } from '../comment/comment.component';
 import { COMMENT_BLOCK_INSTANCE, COMMENT_CHAT_INSTANCE } from '../token';
-import { CommentBlockSize } from './comment-block-type';
+import { CommentBlockSize } from './comment-block.type';
 
 @Component({
 	selector: 'lu-comment-block',

@@ -1,7 +1,7 @@
 import { booleanAttribute, ChangeDetectionStrategy, Component, computed, inject, input, ViewEncapsulation } from '@angular/core';
 import { LuClass, Palette, ɵeffectWithDeps } from '@lucca-front/ng/core';
 import { LuTooltipModule } from '@lucca-front/ng/tooltip';
-import { NumericBadgeSize } from './numeric-badge-type';
+import { NumericBadgeSize } from './numeric-badge.type';
 
 @Component({
 	selector: 'lu-numeric-badge',

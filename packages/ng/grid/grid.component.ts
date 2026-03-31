@@ -1,6 +1,6 @@
 import { NgTemplateOutlet } from '@angular/common';
 import { booleanAttribute, ChangeDetectionStrategy, Component, computed, forwardRef, input, numberAttribute, ViewEncapsulation } from '@angular/core';
-import { GridMode } from './grid-type';
+import { GridMode } from './grid.type';
 import { LU_GRID_INSTANCE } from './grid.token';
 
 @Component({

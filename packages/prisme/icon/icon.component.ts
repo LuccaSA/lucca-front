@@ -1,6 +1,6 @@
 import { NgClass } from '@angular/common';
 import { booleanAttribute, ChangeDetectionStrategy, Component, computed, input, ViewEncapsulation } from '@angular/core';
-import { IconColor, IconSize } from './icon-type';
+import { IconColor, IconSize } from './icon.type';
 import type { LuccaIcon } from './icons';
 
 @Component({

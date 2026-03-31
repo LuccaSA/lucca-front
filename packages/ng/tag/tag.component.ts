@@ -4,7 +4,7 @@ import { LuccaIcon } from '@lucca-front/icons';
 import { DecorativePalette, Palette } from '@lucca-front/ng/core';
 import { IconComponent } from '@lucca-front/ng/icon';
 import { LuTooltipModule } from '@lucca-front/ng/tooltip';
-import { TagSize } from './tag-type';
+import { TagSize } from './tag.type';
 
 @Component({
 	selector: 'lu-tag',

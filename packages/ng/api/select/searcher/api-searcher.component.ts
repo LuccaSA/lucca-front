@@ -6,7 +6,7 @@ import { ALuOptionOperator, LuOptionPlaceholderComponent } from '@lucca-front/ng
 import { Observable } from 'rxjs';
 import { debounceTime } from 'rxjs/operators';
 import { ALuApiService, LuApiHybridService } from '../../service/index';
-import { ApiSelectStandard } from '../api-select-type';
+import { ApiSelectStandard } from '../api-select.type';
 import { ALuApiOptionPagedSearcher, ALuApiOptionSearcher } from './api-searcher.model';
 
 @Component({

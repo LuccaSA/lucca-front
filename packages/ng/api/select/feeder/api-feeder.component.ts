@@ -4,7 +4,7 @@ import { ALuOptionOperator, ILuOptionOperator } from '@lucca-front/ng/option';
 import { BehaviorSubject } from 'rxjs';
 import { ILuApiItem } from '../../api.model';
 import { ALuApiService, LuApiHybridService } from '../../service/index';
-import { ApiSelectStandard } from '../api-select-type';
+import { ApiSelectStandard } from '../api-select.type';
 import { ALuApiOptionFeeder } from './api-feeder.model';
 @Component({
 	selector: 'lu-api-feeder',

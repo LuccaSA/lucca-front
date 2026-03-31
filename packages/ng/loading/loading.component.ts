@@ -1,6 +1,6 @@
 import { booleanAttribute, ChangeDetectionStrategy, Component, effect, inject, input, ViewEncapsulation } from '@angular/core';
 import { LuClass } from '@lucca-front/ng/core';
-import { LoadingSize } from './loading-type';
+import { LoadingSize } from './loading.type';
 
 type DisplayMode =
 	| 'popin'

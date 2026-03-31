@@ -4,7 +4,7 @@ import { intlInputOptions, IntlParamsPipe } from '@lucca-front/ng/core';
 import { IconComponent } from '@lucca-front/ng/icon';
 import { TagComponent } from '@lucca-front/ng/tag';
 import { LuTooltipTriggerDirective } from '@lucca-front/ng/tooltip';
-import { FormLabelSize } from './form-label-type';
+import { FormLabelSize } from './form-label.type';
 import { LU_FORM_LABEL_TRANSLATIONS } from './form-label.translate';
 
 @Component({

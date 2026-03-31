@@ -1,5 +1,5 @@
 import { booleanAttribute, ChangeDetectionStrategy, Component, input } from '@angular/core';
-import { SkeletonButtonSize } from './skeleton-button-type';
+import { SkeletonButtonSize } from './skeleton-button.type';
 
 @Component({
 	selector: 'lu-skeleton-button',

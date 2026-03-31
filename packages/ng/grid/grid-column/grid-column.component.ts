@@ -1,7 +1,7 @@
 import { ChangeDetectionStrategy, Component, computed, inject, input, numberAttribute, ViewEncapsulation } from '@angular/core';
 import { ResponsiveConfig } from '@lucca-front/ng/core';
 import { LU_GRID_INSTANCE } from '../grid.token';
-import { GridColumnAlignment, GridColumnResponsive } from './grid-column-type';
+import { GridColumnAlignment, GridColumnResponsive } from './grid-column.type';
 
 @Component({
 	selector: 'lu-grid-column, [lu-grid-column]',
