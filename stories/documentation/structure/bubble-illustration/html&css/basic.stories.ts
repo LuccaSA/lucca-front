@@ -1,5 +1,5 @@
 import { HttpClientModule } from '@angular/common/http';
-import { BUBBLE_ILLUSTRATION_SIZE } from '@lucca-front/ng/bubble-illustration';
+import { BUBBLE_ILLUSTRATION, BUBBLE_ILLUSTRATION_SIZE } from '@lucca-front/ng/bubble-illustration';
 import { LuSafeExternalSvgPipe } from '@lucca-front/ng/safe-content';
 import { DECORATIVE_PALETTE, PALETTE } from '@lucca/prisme/core';
 import { Meta, moduleMetadata, StoryObj } from '@storybook/angular';
@@ -21,7 +21,7 @@ export default {
 	],
 	argTypes: {
 		illustration: {
-			options: setStoryOptions(BUBBLE_ILLUSTRATION_SIZE),
+			options: setStoryOptions(BUBBLE_ILLUSTRATION),
 			control: {
 				type: 'select',
 			},
