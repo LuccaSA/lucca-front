@@ -136,10 +136,10 @@
 			grid-area: header;
 		}
 
-		.dialog-inside-header-button {
+		.dialog-inside-header-button.button {
 			position: var(--components-dialog-inside-header-button-position);
 			inset-block-start: var(--components-dialog-inside-header-button-insetBlockStart);
-			inset-inline-end: var(--components-dialog-inside-header-button-insetBlockEnd);
+			inset-inline-end: var(--components-dialog-inside-header-button-insetInlineEnd);
 		}
 
 		.dialog-inside-content {

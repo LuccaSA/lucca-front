@@ -80,16 +80,14 @@
 }
 
 @mixin withCloseButton {
-	.dialog-inside-header-button {
-		@include button.ghost;
-		@include button.S;
-		@include button.onlyIconS;
+	@include button.ghost;
+	@include button.S;
+	@include button.onlyIconS;
 
-		align-self: start;
-		justify-self: end;
-		grid-area: close;
-		display: var(--components-dialog-insideHeaderButtonDisplay);
-	}
+	align-self: start;
+	justify-self: end;
+	grid-area: close;
+	display: var(--components-dialog-insideHeaderButtonDisplay);
 }
 
 @mixin withAction {

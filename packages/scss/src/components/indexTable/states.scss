@@ -83,3 +83,8 @@
 @mixin rowsHidden {
 	--components-indexTable-row-display: none;
 }
+
+@mixin paginationHover {
+	--components-button-backgroundColor: var(--palettes-neutral-100);
+	--components-button-color: var(--palettes-neutral-700);
+}

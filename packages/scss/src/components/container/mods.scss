@@ -30,9 +30,3 @@
 @mixin overflow {
 	--components-container-minInlineSize: fit-content;
 }
-
-@mixin insideFooter {
-	--components-container-display: flex;
-	--components-container-alignItems: var(--components-footer-alignItems);
-	--components-container-flexDirection: var(--components-footer-direction);
-}

@@ -1,6 +1,6 @@
 import { DatePipe } from '@angular/common';
 import { ChangeDetectionStrategy, Component, computed, inject, input, LOCALE_ID, ViewEncapsulation } from '@angular/core';
-import { intlInputOptions, PortalDirective } from '@lucca-front/ng/core';
+import { intlInputOptions, PortalContent, PortalDirective } from '@lucca-front/ng/core';
 import { ILuUser, LuUserPictureComponent } from '@lucca-front/ng/user';
 import { LU_ACTIVITY_FEED_TRANSLATIONS } from '../activity-feed.translate';
 
@@ -28,13 +28,21 @@ export class ActivityFeedStepComponent {
 		minute: 'numeric',
 	});
 
-	readonly label = input<string | null>(null);
+	readonly label = input<PortalContent | null>(null);
 
 	readonly user = input<ILuUser | null>(null);
 
 	readonly status = input<'success' | 'critical' | 'pending' | null>(null);
 
-	readonly date = input<Date | null>(null);
+	readonly date = input<Date | string | null>(null);
+
+	protected readonly preparedDate = computed(() => {
+		const date = this.date();
+		if (typeof date === 'string') {
+			return new Date(date);
+		}
+		return date;
+	});
 
 	/**
 	 * format given to the date pipe for display.
@@ -44,10 +52,11 @@ export class ActivityFeedStepComponent {
 	readonly datePipeFormat = input<string>();
 
 	protected readonly dateDisplay = computed<string | null>(() => {
-		if (!this.date()) {
+		const date = this.preparedDate();
+		if (!date) {
 			return null;
 		}
-		const formatted = this.#intlDateTimeFormat.format(this.date());
+		const formatted = this.#intlDateTimeFormat.format(date);
 		const parts = formatted.split(', ');
 		return `${parts[0].charAt(0).toUpperCase() + parts[0].slice(1)} ${this.intl().at} ${parts[1]}`;
 	});
