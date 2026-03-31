@@ -1,5 +1,5 @@
 /**
- * Available FormLabelComponent sizes
+ * Available FormLabelComponent Types
  */
 
 export const FORM_LABEL_SIZE = ['XS', 'S'] as const;

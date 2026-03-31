@@ -1,5 +1,5 @@
 /**
- * Available StatusBadgeComponent Sizes
+ * Available StatusBadgeComponent Types
  */
 
 export const STATUS_BADGE_SIZE = ['L', 'M'] as const;

@@ -1,6 +1,6 @@
 import { HttpClientModule } from '@angular/common/http';
 import { ButtonComponent } from '@lucca-front/ng/button';
-import { EmptyStatePageComponent } from '@lucca-front/ng/empty-state';
+import { EMPTY_STATE_HX, EMPTY_STATE_HX_STYLE, EmptyStatePageComponent } from '@lucca-front/ng/empty-state';
 import { Meta, moduleMetadata, StoryObj } from '@storybook/angular';
 
 export default {
@@ -172,16 +172,16 @@ export default {
 		hx: {
 			control: {
 				type: 'number',
-				min: 1,
-				max: 6,
+				min: EMPTY_STATE_HX.at(0),
+				max: EMPTY_STATE_HX.at(EMPTY_STATE_HX.length - 1),
 			},
 			description: 'Niveau de titre (sémantique).',
 		},
 		hxStyle: {
 			control: {
 				type: 'number',
-				min: 1,
-				max: 2,
+				min: EMPTY_STATE_HX_STYLE.at(0),
+				max: EMPTY_STATE_HX_STYLE.at(EMPTY_STATE_HX_STYLE.length - 1),
 			},
 			description: '[v21.2] Niveau du titre (style).',
 		},

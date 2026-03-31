@@ -1,5 +1,5 @@
 /**
- * Available NumericBadgeComponent Sizes
+ * Available NumericBadgeComponent Types
  */
 
 export const NUMERIC_BADGE_SIZE = ['XS', 'S', 'M'] as const;

@@ -3,8 +3,7 @@ import { LuccaIcon } from '@lucca-front/icons';
 import { Palette, PortalContent, PortalDirective } from '@lucca-front/ng/core';
 import { IconComponent } from '@lucca-front/ng/icon';
 import { CalloutIconPipe } from '../callout-icon.pipe';
-import { CalloutState } from '../callout-state';
-import { CalloutSize } from '../callout.type';
+import { CalloutSize, CalloutState } from '../callout.type';
 import { getCalloutPalette } from '../callout.utils';
 
 @Component({

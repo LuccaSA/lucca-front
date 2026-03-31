@@ -1,4 +1,4 @@
-import { SOFTWARE_ICON_SIZE, SoftwareIconComponent, SoftwareIconList } from '@lucca-front/ng/software-icon';
+import { SOFTWARE_ICON, SOFTWARE_ICON_SIZE, SoftwareIconComponent } from '@lucca-front/ng/software-icon';
 import { Meta, moduleMetadata, StoryObj } from '@storybook/angular';
 import { cleanupTemplate, generateInputs, setStoryOptions } from 'stories/helpers/stories';
 
@@ -6,7 +6,7 @@ export default {
 	title: 'Documentation/Structure/Software icon/Angular/Basic',
 	argTypes: {
 		icon: {
-			options: SoftwareIconList,
+			options: setStoryOptions(SOFTWARE_ICON),
 			control: {
 				type: 'select',
 			},

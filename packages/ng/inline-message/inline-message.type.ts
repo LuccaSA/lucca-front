@@ -1,5 +1,5 @@
 /**
- * Available InlineMessageComponent Sizes
+ * Available InlineMessageComponent Types
  */
 
 export const INLINE_MESSAGE_SIZE = ['S', 'M'] as const;

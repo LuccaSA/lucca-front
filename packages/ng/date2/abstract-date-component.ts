@@ -5,9 +5,8 @@ import { CalendarMode } from './calendar2/calendar-mode';
 import { CellStatus } from './calendar2/cell-status';
 import { DateRange, DateRangeInput } from './calendar2/date-range';
 import { getDateFormat, getLocalizedDateFormat, getSeparator } from './date-format';
-import { DATE_FORMAT, DateFormat } from './date.const';
-import { Date2ClearBehavior } from './date2.type';
 import { LU_DATE2_TRANSLATIONS } from './date2.translate';
+import { Date2ClearBehavior, DATE_FORMAT, DateFormat } from './date2.type';
 import { transformDateInputToDate, transformDateRangeInputToDateRange } from './utils';
 
 @Component({

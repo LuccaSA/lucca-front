@@ -1,5 +1,5 @@
 /**
- * Available ProgressBarComponent States
+ * Available ProgressBarComponent Types
  */
 
 export const PROGRESS_BAR_STATE = ['success', 'error'] as const;

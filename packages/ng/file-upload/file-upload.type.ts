@@ -1,5 +1,5 @@
 /**
- * Available file upload shared types
+ * Available FileUploadComponent Types
  */
 
 export const FILE_UPLOAD_STATE = ['loading', 'success', 'error', 'default'] as const;

@@ -1,5 +1,5 @@
 /**
- * Available CommentBlockComponent Sizes
+ * Available CommentComponent Types
  */
 
 export const COMMENT_BLOCK_SIZE = ['S', 'M'] as const;

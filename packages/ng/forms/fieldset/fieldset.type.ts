@@ -1,5 +1,5 @@
 /**
- * Available FieldsetComponent sizes
+ * Available FieldsetComponent Types
  */
 
 export const FIELDSET_SIZE = ['S'] as const;

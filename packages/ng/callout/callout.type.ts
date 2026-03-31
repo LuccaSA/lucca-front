@@ -1,3 +1,6 @@
+import { LuccaIcon } from '@lucca-front/icons';
+import { Palette } from '@lucca/prisme/core';
+
 /**
  * Available CalloutComponent Types
  */
@@ -7,3 +10,21 @@ export type CalloutSize = (typeof CALLOUT_SIZE)[number];
 
 export const CALLOUT_POPOVER_SIZE = ['M', 'S', 'XS'] as const;
 export type CalloutPopoverSize = (typeof CALLOUT_POPOVER_SIZE)[number];
+
+export const CalloutStates = ['success', 'warning', 'error'] as const;
+export type CalloutState = (typeof CalloutStates)[number];
+
+export const CalloutStateMap: Record<CalloutState, { icon: LuccaIcon; palette: Palette }> = {
+	success: {
+		icon: 'signSuccess',
+		palette: 'success',
+	},
+	warning: {
+		icon: 'signWarning',
+		palette: 'warning',
+	},
+	error: {
+		icon: 'signError',
+		palette: 'error',
+	},
+};

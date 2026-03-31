@@ -52,7 +52,6 @@ export const Template: StoryObj<TagComponent> = {
 
 	args: {
 		label: 'Text',
-		palette: null,
 		outlined: false,
 		icon: null,
 		withEllipsis: false,

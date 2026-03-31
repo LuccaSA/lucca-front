@@ -1,6 +1,6 @@
 import { LOCALE_ID } from '@angular/core';
 import { FormsModule } from '@angular/forms';
-import { CALENDAR_MODE, DATE2_CLEAR_BEHAVIOR, DateInputComponent } from '@lucca-front/ng/date2';
+import { CALENDAR_MODE, DATE2_CLEAR_BEHAVIOR, DATE_FORMAT_CONST, DateInputComponent } from '@lucca-front/ng/date2';
 import { FormFieldComponent } from '@lucca-front/ng/form-field';
 import { IconComponent } from '@lucca-front/ng/icon';
 import { applicationConfig, Meta, moduleMetadata, StoryObj } from '@storybook/angular';
@@ -45,7 +45,7 @@ export default {
 		},
 		format: {
 			control: 'select',
-			options: ['date', 'date-iso'],
+			options: setStoryOptions(DATE_FORMAT_CONST),
 			description: 'Modifie le format de date.',
 		},
 		mode: {
