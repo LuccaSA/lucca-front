@@ -5,7 +5,7 @@
 export const DATE2_CLEAR_BEHAVIOR = ['clear', 'reset'] as const;
 export type Date2ClearBehavior = (typeof DATE2_CLEAR_BEHAVIOR)[number];
 
-export const DATE_FORMAT_CONST = ['date', 'date-iso'];
+export const DATE_FORMAT_CONST = ['date', 'date-iso'] as const;
 
 export const DATE_FORMAT = {
 	DATE: 'date',
