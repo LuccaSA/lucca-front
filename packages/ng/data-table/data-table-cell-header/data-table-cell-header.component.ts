@@ -7,6 +7,7 @@ import { IconComponent } from '@lucca-front/ng/icon';
 import { ReplaySubject } from 'rxjs';
 import { BaseDataTableCell } from '../base-data-table-cell';
 import { LU_DATA_TABLE_CELL_INSTANCE } from '../data-table-cell.token';
+import { DataTableSort } from '../data-table-type';
 
 @Component({
 	// eslint-disable-next-line @angular-eslint/component-selector
@@ -41,7 +42,7 @@ import { LU_DATA_TABLE_CELL_INSTANCE } from '../data-table-cell.token';
 export class DataTableRowCellHeaderComponent extends BaseDataTableCell implements AfterContentInit {
 	elementRef = inject<ElementRef<HTMLTableCellElement>>(ElementRef);
 
-	sort = model<null | 'none' | 'ascending' | 'descending'>(null);
+	sort = model<DataTableSort | null>(null);
 	fixedWidth = input<string | null>(null);
 	inlineSize = input<string | null>(null);
 
