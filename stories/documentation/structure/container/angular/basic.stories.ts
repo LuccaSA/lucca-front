@@ -1,7 +1,7 @@
-import { ContainerComponent } from '@lucca-front/ng/container';
+import { CONTAINER_SIZE, ContainerComponent } from '@lucca-front/ng/container';
 import { Meta, moduleMetadata, StoryObj } from '@storybook/angular';
 import { HiddenArgType } from 'stories/helpers/common-arg-types';
-import { cleanupTemplate, generateInputs } from 'stories/helpers/stories';
+import { cleanupTemplate, generateInputs, setStoryOptions } from 'stories/helpers/stories';
 
 export default {
 	title: 'Documentation/Structure/Container/Angular/Basic',
@@ -12,7 +12,7 @@ export default {
 		overflow: HiddenArgType,
 		max: {
 			description: 'Définit la largeur maximale du container.',
-			options: [null, 'M', 'L', 'XL', 'XXL', 'XXXL'],
+			options: setStoryOptions(CONTAINER_SIZE),
 			control: {
 				type: 'select',
 			},
