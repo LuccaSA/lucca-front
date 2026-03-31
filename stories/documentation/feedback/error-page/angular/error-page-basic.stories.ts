@@ -1,7 +1,6 @@
 import { provideRouter } from '@angular/router';
-import { ErrorPageComponent } from '@lucca-front/ng/error-page';
+import { ERROR_PAGE_ILLUSTRATION, ErrorPageComponent } from '@lucca-front/ng/error-page';
 import { applicationConfig, Meta, moduleMetadata, StoryObj } from '@storybook/angular';
-import { ERROR_PAGE_ILLUSTRATION } from 'packages/ng/error-page/error-page.model';
 import { generateInputs, setStoryOptions } from 'stories/helpers/stories';
 
 export default {
