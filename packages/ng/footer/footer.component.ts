@@ -1,6 +1,6 @@
 import { NgTemplateOutlet } from '@angular/common';
 import { booleanAttribute, ChangeDetectionStrategy, Component, computed, input, ViewEncapsulation } from '@angular/core';
-import { FooterNarrowAtMediaMax } from './footer-type';
+import { FooterContainerMax, FooterNarrowAtMediaMax } from './footer-type';
 
 @Component({
 	selector: 'lu-footer',
@@ -18,7 +18,7 @@ export class FooterComponent {
 	 */
 	readonly container = input(false, { transform: booleanAttribute });
 
-	readonly containerMax = input<null | 'M' | 'L' | 'XL' | 'XXL' | 'XXXL'>();
+	readonly containerMax = input<FooterContainerMax | null>();
 
 	readonly forceNarrow = input(false, { transform: booleanAttribute });
 

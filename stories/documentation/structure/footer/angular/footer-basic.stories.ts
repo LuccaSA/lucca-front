@@ -1,5 +1,5 @@
 import { ButtonComponent } from '@lucca-front/ng/button';
-import { FOOTER_NARROW_AT_MEDIA_MAX, FooterComponent } from '@lucca-front/ng/footer';
+import { FOOTER_CONTAINER_MAX, FOOTER_NARROW_AT_MEDIA_MAX, FooterComponent } from '@lucca-front/ng/footer';
 import { Meta, moduleMetadata } from '@storybook/angular';
 import { generateInputs, setStoryOptions } from 'stories/helpers/stories';
 
@@ -17,7 +17,7 @@ export default {
 			description: 'Applique un container autour du contenu du footer.',
 		},
 		containerMax: {
-			options: ['', 'M', 'L', 'XL', 'XXL', 'XXXL'],
+			options: setStoryOptions(FOOTER_CONTAINER_MAX),
 			control: {
 				type: 'select',
 			},
