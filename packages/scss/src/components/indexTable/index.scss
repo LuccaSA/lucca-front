@@ -105,3 +105,11 @@
 		}
 	}
 }
+
+.indexTableWrapper {
+	@layer mods {
+		.pagination-scrolling .button:hover {
+			@include paginationHover;
+		}
+	}
+}
