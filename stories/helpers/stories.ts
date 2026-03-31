@@ -14,7 +14,7 @@ export interface StoryGeneratorArgs<TComponent> {
 
 export type StoryGenerator<TComponent> = (args: StoryGeneratorArgs<TComponent>) => StoryObj<TComponent>;
 
-export function setStoryOptions<T extends string>(list: readonly T[]): Array<T | ''> {
+export function setStoryOptions<T extends string | number>(list: readonly T[]): Array<T | ''> {
 	return ['', ...list];
 }
 

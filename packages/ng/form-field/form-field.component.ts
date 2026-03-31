@@ -30,14 +30,13 @@ import { InlineMessageComponent, InlineMessageState } from '@lucca-front/ng/inli
 import { LuTooltipModule } from '@lucca-front/ng/tooltip';
 import { BehaviorSubject } from 'rxjs';
 import { FormFieldSize } from './form-field-size';
+import { FormFieldLayout, FormFieldWidth } from './form-field-type';
 import { FORM_FIELD_INSTANCE } from './form-field.token';
 import { LU_FORM_FIELD_TRANSLATIONS } from './form-field.translate';
 import { InputDirective } from './input.directive';
 import { INPUT_FRAMED_INSTANCE } from './public-api';
 
 let nextId = 0;
-
-type FormFieldWidth = 20 | 30 | 40 | 50 | 60;
 
 @Component({
 	selector: 'lu-form-field',
@@ -133,7 +132,7 @@ export class FormFieldComponent implements OnDestroy, DoCheck {
 	 */
 	readonly extraDescribedBy = input<string>('');
 
-	readonly layout = model<'default' | 'checkable' | 'fieldset'>('default');
+	readonly layout = model<FormFieldLayout>('default');
 
 	#inputs: InputDirective[] = [];
 
