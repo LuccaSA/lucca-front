@@ -1,7 +1,8 @@
 import { provideRouter } from '@angular/router';
 import { ErrorPageComponent } from '@lucca-front/ng/error-page';
 import { applicationConfig, Meta, moduleMetadata, StoryObj } from '@storybook/angular';
-import { generateInputs } from 'stories/helpers/stories';
+import { ERROR_PAGE_ILLUSTRATION } from 'packages/ng/error-page/error-page.model';
+import { generateInputs, setStoryOptions } from 'stories/helpers/stories';
 
 export default {
 	title: 'Documentation/Feedback/ErrorPage/Angular/Basic',
@@ -36,7 +37,7 @@ export default {
 			type: 'string',
 		},
 		illustration: {
-			options: ['400', '403', '404', '429', '500', 'keyboard', 'lock', 'map'],
+			options: setStoryOptions(ERROR_PAGE_ILLUSTRATION),
 			control: {
 				type: 'select',
 			},
