@@ -35,7 +35,7 @@ export default {
 } as Meta;
 
 function getTemplate(args: DropdownBasicStory): string {
-	const direction = args.luPopoverPosition !== 'below' ? ` luDropdownPostion="${args.luPopoverPosition}"` : ``;
+	const direction = args.luPopoverPosition !== 'below' ? ` luDropdownPosition="${args.luPopoverPosition}"` : ``;
 	return `<div class="demo">
 	<button type="button" luButton disclosure [luDropdown]="dropdownSample"${direction}>Dropdown<lu-icon icon="arrowChevronBottom" /></button>
 	<ng-template #dropdownSample>
@@ -91,7 +91,8 @@ const Template = (args) => ({
 		`
 		.demo {
 		display: flex;
-		min-block-size: 20rem;
+		min-block-size: 30rem;
+		padding-top: 4rem;
 		align-items: center;
 		justify-content: center;
 	}
