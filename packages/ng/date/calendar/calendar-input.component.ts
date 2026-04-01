@@ -28,7 +28,7 @@ import { ICalendarItem } from './calendar-item.interface';
 	],
 })
 export class LuCalendarInputComponent<D> extends ALuInput<D> implements ControlValueAccessor, OnInit, Validator {
-	intl = input(...intlInputOptions(LU_CALENDARINPUT_TRANSLATIONS));
+	readonly intl = input(...intlInputOptions(LU_CALENDARINPUT_TRANSLATIONS));
 
 	@Input() min?: D;
 	@Input() max?: D;

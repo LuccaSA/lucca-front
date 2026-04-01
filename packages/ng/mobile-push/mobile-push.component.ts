@@ -14,7 +14,7 @@ import { LU_MOBILE_PUSH_TRANSLATIONS } from './mobile-push.translate';
 	encapsulation: ViewEncapsulation.None,
 })
 export class MobilePushComponent {
-	intl = input(...intlInputOptions(LU_MOBILE_PUSH_TRANSLATIONS));
+	readonly intl = input(...intlInputOptions(LU_MOBILE_PUSH_TRANSLATIONS));
 
 	/**
 	 * Emit event when appStoreLink is clicked

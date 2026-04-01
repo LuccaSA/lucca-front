@@ -66,8 +66,8 @@ export class LuCoreSelectUsersDirective<T extends LuCoreSelectUser = LuCoreSelec
 	operationIds = input<readonly number[] | null>(null);
 	uniqueOperationIds = input<readonly number[] | null>(null);
 	appInstanceId = input<number | null>(null);
-	enableFormerEmployees = input(false, { transform: booleanAttribute });
-	displayMeOption = input(true);
+	readonly enableFormerEmployees = input(false, { transform: booleanAttribute });
+	readonly displayMeOption = input(true);
 	customUserOptionTpl = model<TemplateRef<LuOptionContext<T>> | Type<unknown> | undefined>();
 
 	readonly includeFormerEmployees = signal(false);

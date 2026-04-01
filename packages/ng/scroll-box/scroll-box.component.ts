@@ -20,7 +20,7 @@ export class ScrollBoxComponent implements OnInit {
 	/**
 	 * Scroll box content vertically
 	 */
-	vertical = input(false, { transform: booleanAttribute });
+	readonly vertical = input(false, { transform: booleanAttribute });
 
 	readonly isFirstVisible = signal(true);
 	readonly isLastVisible = signal(false);

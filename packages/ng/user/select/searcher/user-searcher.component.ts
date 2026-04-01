@@ -85,7 +85,7 @@ export class LuUserPagedSearcherComponent<U extends ILuUser = ILuUser> implement
 	private _isLastPage: boolean;
 	private _options: U[] = [];
 
-	intl = input(...intlInputOptions(LU_USER_SEARCHER_TRANSLATIONS));
+	readonly intl = input(...intlInputOptions(LU_USER_SEARCHER_TRANSLATIONS));
 
 	constructor(@Inject(ALuUserService) @Optional() @SkipSelf() hostService: LuUserV3Service<U>, @Inject(ALuUserService) @Self() selfService: LuUserV3Service<U>) {
 		this._service = hostService || selfService;

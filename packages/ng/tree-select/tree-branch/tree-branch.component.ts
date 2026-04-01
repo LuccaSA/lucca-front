@@ -31,9 +31,9 @@ export class TreeBranchComponent<T> {
 
 	unselectMany = output<T[]>();
 
-	simpleMode = input(false, { transform: booleanAttribute });
+	readonly simpleMode = input(false, { transform: booleanAttribute });
 
-	depth = input(1);
+	readonly depth = input(1);
 
 	constructor() {
 		if (this.selectInputComponent.selectChildren$) {

@@ -81,9 +81,9 @@ export class DateInputComponent extends AbstractDateComponent implements OnInit,
 
 	placeholder = input<string>();
 
-	disableOverflow = input(false, { transform: booleanAttribute });
-	hideOverflow = input(false, { transform: booleanAttribute });
-	widthAuto = input(false, { transform: booleanAttribute });
+	readonly disableOverflow = input(false, { transform: booleanAttribute });
+	readonly hideOverflow = input(false, { transform: booleanAttribute });
+	readonly widthAuto = input(false, { transform: booleanAttribute });
 
 	readonly filterPillDisabled = signal(false);
 

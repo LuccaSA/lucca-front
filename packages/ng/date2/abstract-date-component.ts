@@ -25,7 +25,7 @@ export abstract class AbstractDateComponent {
 	intlDateTimeFormatMonth = new Intl.DateTimeFormat(this.locale, { month: 'numeric', year: 'numeric' });
 	intlDateTimeFormatYear = new Intl.DateTimeFormat(this.locale, { year: 'numeric' });
 
-	intl = input(...intlInputOptions(LU_DATE2_TRANSLATIONS));
+	readonly intl = input(...intlInputOptions(LU_DATE2_TRANSLATIONS));
 
 	onTouched?: () => void;
 	disabled = signal<boolean>(false);

@@ -32,7 +32,7 @@ import { LuMultiSelectDisplayerInputDirective } from './displayer-input.directiv
 })
 export class LuMultiSelectDefaultDisplayerComponent<T> implements OnInit {
 	select = inject<LuMultiSelectInputComponent<T>>(LuMultiSelectInputComponent);
-	intl = input(...intlInputOptions(LU_MULTI_SELECT_DISPLAYER_TRANSLATIONS));
+	readonly intl = input(...intlInputOptions(LU_MULTI_SELECT_DISPLAYER_TRANSLATIONS));
 
 	protected destroyRef = inject(DestroyRef);
 

@@ -30,7 +30,7 @@ import { LU_DATA_TABLE_CELL_INSTANCE } from '../data-table-cell.token';
 	changeDetection: ChangeDetectionStrategy.OnPush,
 })
 export class DataTableRowCellComponent extends BaseDataTableCell {
-	actions = input(false, { transform: booleanAttribute });
+	readonly actions = input(false, { transform: booleanAttribute });
 
 	isSticky = computed(() => {
 		return this.isStickyStart() || this.isStickyEnd();

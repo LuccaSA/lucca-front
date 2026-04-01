@@ -74,7 +74,7 @@ import { LuMultiSelectPanelRef } from './panel.model';
 	encapsulation: ViewEncapsulation.None,
 })
 export class LuMultiSelectInputComponent<T> extends ALuSelectInputComponent<T, T[]> implements ControlValueAccessor, OnDestroy, OnInit {
-	intl = input(...intlInputOptions(LU_CORE_SELECT_TRANSLATIONS, LU_MULTI_SELECT_TRANSLATIONS));
+	readonly intl = input(...intlInputOptions(LU_CORE_SELECT_TRANSLATIONS, LU_MULTI_SELECT_TRANSLATIONS));
 
 	showColon: false;
 

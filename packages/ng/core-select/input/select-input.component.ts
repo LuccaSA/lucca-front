@@ -57,15 +57,15 @@ export abstract class ALuSelectInputComponent<TOption, TValue> implements OnDest
 	protected updatePositionFn?: () => void;
 	protected filterPillMode = false;
 
-	public ignorePresentation = input(false, { transform: booleanAttribute });
+	public readonly ignorePresentation = input(false, { transform: booleanAttribute });
 
 	public selectParent$?: Subject<void>;
 	public selectChildren$?: Subject<void>;
 
-	public panelClosed = output<void>();
-	public panelOpened = output<void>();
+	public readonly panelClosed = output<void>();
+	public readonly panelOpened = output<void>();
 
-	public highlightedOption = output<TOption>();
+	public readonly highlightedOption = output<TOption>();
 
 	@ViewChild('inputElement')
 	private inputElementRef: ElementRef<HTMLInputElement>;
@@ -75,7 +75,7 @@ export abstract class ALuSelectInputComponent<TOption, TValue> implements OnDest
 	readonly disabled$ = new BehaviorSubject(false);
 	filterPillDisabled = toSignal(this.disabled$, { initialValue: false });
 
-	prefix = input<PortalContent | null>(null);
+	readonly prefix = input<PortalContent | null>(null);
 
 	@Input()
 	set placeholder(value: string) {
@@ -169,12 +169,12 @@ export abstract class ALuSelectInputComponent<TOption, TValue> implements OnDest
 	@Input() optionComparer: LuOptionComparer<TOption> = coreSelectDefaultOptionComparer;
 	@Input() optionKey: (option: TOption) => unknown = coreSelectDefaultOptionKey;
 
-	noClueIcon = input(false, { transform: booleanAttribute });
+	readonly noClueIcon = input(false, { transform: booleanAttribute });
 	inputTabindex = input<number>(0);
 
-	compact = input(false, { transform: booleanAttribute });
+	readonly compact = input(false, { transform: booleanAttribute });
 
-	colorPicker = input(false, { transform: booleanAttribute });
+	readonly colorPicker = input(false, { transform: booleanAttribute });
 
 	@HostBinding('class.mod-noClueIcon')
 	protected get isNoClueIconClass(): boolean {
@@ -209,8 +209,8 @@ export abstract class ALuSelectInputComponent<TOption, TValue> implements OnDest
 	clueChange = outputFromObservable(this.clueChange$);
 	readonly nextPage$ = new Subject<void>();
 	nextPage = outputFromObservable(this.nextPage$);
-	previousPage = output<void>();
-	addOption = output<string>();
+	readonly previousPage = output<void>();
+	readonly addOption = output<string>();
 
 	public readonly valueSignal = signal<TValue | null>(null);
 	isFilterPillEmpty = computed(() => this.valueSignal() === null);

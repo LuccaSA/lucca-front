@@ -51,7 +51,7 @@ let nextId = 0;
 	},
 })
 export class FilterPillComponent {
-	intl = input(...intlInputOptions(LU_FILTER_PILLS_TRANSLATIONS));
+	readonly intl = input(...intlInputOptions(LU_FILTER_PILLS_TRANSLATIONS));
 
 	#locale = inject(LOCALE_ID);
 
@@ -82,7 +82,7 @@ export class FilterPillComponent {
 
 	name = input<string>();
 
-	optional = input(false, { transform: booleanAttribute });
+	readonly optional = input(false, { transform: booleanAttribute });
 
 	disabled = computed(() => this.inputComponentRef()?.filterPillDisabled?.() || false);
 

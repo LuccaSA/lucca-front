@@ -22,7 +22,7 @@ import { LU_COLOR_TRANSLATIONS } from './color.translate';
 	changeDetection: ChangeDetectionStrategy.OnPush,
 })
 export class ColorInputComponent {
-	intl = input(...intlInputOptions(LU_COLOR_TRANSLATIONS));
+	readonly intl = input(...intlInputOptions(LU_COLOR_TRANSLATIONS));
 
 	mouseHighlighted = signal<string>('');
 	keyboardHighlighted = signal<string>('');
@@ -30,8 +30,8 @@ export class ColorInputComponent {
 
 	clue = signal<string>('');
 	colors = input.required<ColorOption[]>();
-	clearable = input(false, { transform: booleanAttribute });
-	compact = input(false, { transform: booleanAttribute });
+	readonly clearable = input(false, { transform: booleanAttribute });
+	readonly compact = input(false, { transform: booleanAttribute });
 
 	ngControl = injectNgControl();
 

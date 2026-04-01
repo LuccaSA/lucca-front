@@ -18,7 +18,7 @@ import { LU_POPOVER2_TRANSLATIONS } from '../../popover.translate';
 	changeDetection: ChangeDetectionStrategy.OnPush,
 })
 export class PopoverContentComponent implements AfterViewInit, OnDestroy {
-	intl = input(...intlInputOptions(LU_POPOVER2_TRANSLATIONS));
+	readonly intl = input(...intlInputOptions(LU_POPOVER2_TRANSLATIONS));
 
 	#elementRef = inject<ElementRef<HTMLElement>>(ElementRef);
 

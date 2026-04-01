@@ -77,21 +77,21 @@ export class Calendar2Component implements OnInit {
 
 	#weekOptions: WeekOptions = { weekStartsOn: getJSFirstDayOfWeek(this.#weekInfo) };
 
-	intl = input(...intlInputOptions(LU_DATE2_TRANSLATIONS));
+	readonly intl = input(...intlInputOptions(LU_DATE2_TRANSLATIONS));
 
-	showOverflow = input(false, { transform: booleanAttribute });
+	readonly showOverflow = input(false, { transform: booleanAttribute });
 
-	enableOverflow = input(false, { transform: booleanAttribute });
+	readonly enableOverflow = input(false, { transform: booleanAttribute });
 
-	removeYearOverflow = input(false, { transform: booleanAttribute });
+	readonly removeYearOverflow = input(false, { transform: booleanAttribute });
 
-	hideToday = input(false, { transform: booleanAttribute });
+	readonly hideToday = input(false, { transform: booleanAttribute });
 
-	hasTodayButton = input(false, { transform: booleanAttribute });
+	readonly hasTodayButton = input(false, { transform: booleanAttribute });
 
-	hideWeekend = input(false, { transform: booleanAttribute });
+	readonly hideWeekend = input(false, { transform: booleanAttribute });
 
-	disableModeChange = input(false, { transform: booleanAttribute });
+	readonly disableModeChange = input(false, { transform: booleanAttribute });
 
 	// Date used to init the component and as internal focus model
 	date = model.required<Date>();
@@ -119,9 +119,9 @@ export class Calendar2Component implements OnInit {
 
 	nextMonth = computed(() => addMonths(this.month(), 1));
 
-	nextPage = output();
+	readonly nextPage = output();
 
-	previousPage = output();
+	readonly previousPage = output();
 
 	dateClicked = output<Date>();
 

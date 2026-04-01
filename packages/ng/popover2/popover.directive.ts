@@ -83,7 +83,7 @@ export class PopoverDirective implements OnDestroy {
 
 	#renderer = inject(Renderer2);
 
-	intl = input(...intlInputOptions(LU_POPOVER2_TRANSLATIONS));
+	readonly intl = input(...intlInputOptions(LU_POPOVER2_TRANSLATIONS));
 
 	@Input({
 		alias: 'luPopover2',
