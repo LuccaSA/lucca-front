@@ -1,30 +1,32 @@
 import { ChangeDetectionStrategy, Component } from '@angular/core';
-import { LuSkipLinksComponent } from '@lucca-front/ng/a11y';
-import { Meta, StoryObj } from '@storybook/angular';
+import { LuSkipLinksComponent, SkipLinkDirective, SkipLinksService } from '@lucca-front/ng/a11y';
+import { applicationConfig, Meta, StoryObj } from '@storybook/angular';
 
 @Component({
 	selector: 'skip-links-story',
-	imports: [LuSkipLinksComponent],
+	imports: [LuSkipLinksComponent, SkipLinkDirective],
 	template: `
 		<lu-skip-links />
-		<div id="lucca-banner-solutions-container">
+		<div id="lucca-banner-solutions-container" tabindex="-1">
 			<button type="button" class="button mod-onlyIcon mod-ghost" luTooltip="Modifier"><span aria-hidden="true" class="lucca-icon icon-app"></span></button>
 			<button type="button" class="button mod-onlyIcon mod-ghost" luTooltip="Modifier"><span aria-hidden="true" class="lucca-icon icon-peopleGroup"></span></button>
 			<button type="button" class="button mod-onlyIcon mod-ghost" luTooltip="Modifier"><span aria-hidden="true" class="lucca-icon icon-transportRocket"></span></button>
 			<button type="button" class="button mod-onlyIcon mod-ghost" luTooltip="Modifier"><span aria-hidden="true" class="lucca-icon icon-signInfo"></span></button>
 			<button type="button" class="button mod-onlyIcon mod-ghost" luTooltip="Modifier"><span aria-hidden="true" class="lucca-icon icon-bell"></span></button>
 		</div>
-		<div id="navSide">
+		<div id="navSide" tabindex="-1">
 			<button type="button" class="button mod-withIcon palette-product"><span aria-hidden="true" class="lucca-icon icon-mailPaperPlane"></span>Internal navigation</button>
 			<button type="button" class="button mod-withIcon palette-product"><span aria-hidden="true" class="lucca-icon icon-timeClock"></span>Internal navigation</button>
 			<button type="button" class="button mod-withIcon palette-product"><span aria-hidden="true" class="lucca-icon icon-eye"></span>Internal navigation</button>
 		</div>
-		<div id="main-content">
+		<div id="main-content" tabindex="-1">
 			<a href="#" class="link">Content link</a>
 			<a href="#" class="link">Content link</a>
 			<a href="#" class="link">Content link</a>
 			<a href="#" class="link">Content link</a>
 		</div>
+
+		<div luSkipLinkTarget="customElement" luSkipLinkLabel="Go to custom element">Custom element</div>
 	`,
 	styles: [
 		`
@@ -48,6 +50,11 @@ class SkipLinksStory {}
 export default {
 	title: 'Documentation/Navigation/SkipLinks/Basic',
 	component: SkipLinksStory,
+	decorators: [
+		applicationConfig({
+			providers: [SkipLinksService],
+		}),
+	],
 } as Meta;
 
 const Template = (props: SkipLinksStory) => ({ props });

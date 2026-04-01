@@ -35,7 +35,7 @@
 			}
 
 			&:not(:focus-visible) {
-				@include a11y.mask;
+				// @include a11y.mask;
 			}
 		}
 	}
