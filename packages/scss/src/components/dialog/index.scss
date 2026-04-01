@@ -76,7 +76,7 @@
 	}
 
 	@layer mods {
-		.dialog-inside-header-button {
+		.dialog-inside-header-button.button {
 			@include withCloseButton;
 		}
 	}
