@@ -57,7 +57,7 @@ export class MultilanguageInputComponent implements ControlValueAccessor {
 	autocomplete = input<AutoFill>('off');
 
 	// Suffixed with Internal to avoid conflict with NgModel's disabled attribute
-	disabledInternal = signal(false);
+	readonly disabledInternal = signal(false);
 
 	model: WritableSignal<MultilanguageTranslation[]> = signal([] as MultilanguageTranslation[]);
 

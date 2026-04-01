@@ -22,8 +22,8 @@ export class ScrollBoxComponent implements OnInit {
 	 */
 	vertical = input(false, { transform: booleanAttribute });
 
-	isFirstVisible = signal(true);
-	isLastVisible = signal(false);
+	readonly isFirstVisible = signal(true);
+	readonly isLastVisible = signal(false);
 
 	scroll() {
 		if (this.vertical()) {

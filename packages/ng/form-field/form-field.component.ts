@@ -77,8 +77,8 @@ export class FormFieldComponent implements OnDestroy, DoCheck {
 	readonly ownRequiredValidators = computed(() => this.requiredValidators().filter((c) => !this.ignoredRequiredValidators().has(c)));
 	readonly ownControls = computed(() => this.ngControls().filter((c) => !this.ignoredControls().has(c)));
 
-	#hasInputRequired = signal(false);
-	forceInputRequired = signal(false);
+	readonly #hasInputRequired = signal(false);
+	readonly forceInputRequired = signal(false);
 	readonly isInputRequired = computed(() => this.forceInputRequired() || this.#hasInputRequired());
 
 	readonly label = input.required<PortalContent>();
@@ -108,7 +108,7 @@ export class FormFieldComponent implements OnDestroy, DoCheck {
 		transform: numberAttribute as (value: FormFieldWidth | `${FormFieldWidth}`) => FormFieldWidth,
 	});
 
-	#invalidStatus = signal(false);
+	readonly #invalidStatus = signal(false);
 	invalidStatus = this.#invalidStatus.asReadonly();
 
 	invalid = input<boolean | null, boolean>(null, { transform: booleanAttribute });

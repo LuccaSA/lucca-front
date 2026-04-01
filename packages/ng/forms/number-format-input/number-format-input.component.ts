@@ -59,7 +59,7 @@ export class NumberFormatInputComponent implements AfterViewInit {
 
 	inputElementRef = viewChild<ElementRef<HTMLInputElement>>('inputElement');
 
-	#suffixPrefixValue = signal(1);
+	readonly #suffixPrefixValue = signal(1);
 
 	readonly #numberFormat = computed(() => new NumberFormat(this.formatOptions()));
 	readonly prefixAddon = computed(() => {

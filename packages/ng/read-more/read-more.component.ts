@@ -54,8 +54,8 @@ export class ReadMoreComponent {
 
 	readonly contentRef = viewChild<ElementRef<HTMLDivElement>>('content');
 
-	expanded = signal(false);
-	isClamped = signal(false);
+	readonly expanded = signal(false);
+	readonly isClamped = signal(false);
 
 	readonly backgroundColor = computed(() => {
 		if (this.surface() === 'sunken' || this.surface() === 'default' || this.surface() === null) {

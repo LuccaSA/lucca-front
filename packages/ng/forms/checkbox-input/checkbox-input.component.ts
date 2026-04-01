@@ -1,12 +1,12 @@
 import { booleanAttribute, ChangeDetectionStrategy, Component, forwardRef, inject, input, signal, Signal, ViewEncapsulation } from '@angular/core';
 import { ReactiveFormsModule } from '@angular/forms';
+import { getIntl } from '@lucca-front/ng/core';
 import { FILTER_PILL_INPUT_COMPONENT, FilterPillInputComponent, FilterPillLabelDirective, FilterPillLayout } from '@lucca-front/ng/filter-pills';
 import { FORM_FIELD_INSTANCE, FormFieldComponent, INPUT_FRAMED_INSTANCE, InputDirective, ɵPresentationDisplayDefaultDirective } from '@lucca-front/ng/form-field';
 import { LuTooltipTriggerDirective } from '@lucca-front/ng/tooltip';
 import { injectNgControl } from '../inject-ng-control';
 import { NoopValueAccessorDirective } from '../noop-value-accessor.directive';
 import { CHECKBOX_INPUT_TRANSLATIONS } from './checkbox-input.translate';
-import { getIntl } from '@lucca-front/ng/core';
 
 let nextId = 0;
 
@@ -45,11 +45,11 @@ export class CheckboxInputComponent implements FilterPillInputComponent {
 	isFilterPill = signal<boolean>(false);
 	filterPillInputId = `lu-checkbox-pill-input-${nextId++}`;
 
-	filterPillLayout: Signal<FilterPillLayout> = signal('checkable');
-	isFilterPillEmpty: Signal<boolean> = signal(true);
-	isFilterPillClearable: Signal<boolean> = signal(false);
-	hideCombobox: Signal<boolean> = signal(true);
-	showColon: Signal<boolean> = signal(false);
+	readonly filterPillLayout: Signal<FilterPillLayout> = signal('checkable');
+	readonly isFilterPillEmpty: Signal<boolean> = signal(true);
+	readonly isFilterPillClearable: Signal<boolean> = signal(false);
+	readonly hideCombobox: Signal<boolean> = signal(true);
+	readonly showColon: Signal<boolean> = signal(false);
 
 	ngControl = injectNgControl();
 

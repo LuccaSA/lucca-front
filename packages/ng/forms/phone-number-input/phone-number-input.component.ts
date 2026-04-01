@@ -105,7 +105,7 @@ export class PhoneNumberInputComponent implements ControlValueAccessor, Validato
 		return this.prefixEntries.filter((e) => whitelist.includes(e.country));
 	});
 
-	query = signal('');
+	readonly query = signal('');
 
 	protected prefixesDisplay = computed(() => {
 		const query = this.query();

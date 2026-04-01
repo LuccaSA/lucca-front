@@ -91,15 +91,15 @@ export abstract class ALuSelectInputComponent<TOption, TValue> implements OnDest
 		return this.#clearable();
 	}
 	#clearable = computed(() => this.#inputClearable() ?? this.#defaultFilterPillClearable() ?? this.#defaultClearable);
-	#defaultFilterPillClearable = signal<boolean | null>(null);
-	#inputClearable = signal<boolean | null>(null);
+	readonly #defaultFilterPillClearable = signal<boolean | null>(null);
+	readonly #inputClearable = signal<boolean | null>(null);
 	#defaultClearable = false;
 
 	get searchable(): boolean {
 		return this.clueChange$.observed;
 	}
 
-	#addOptionLabelInput = signal<PortalContent | null>(null);
+	readonly #addOptionLabelInput = signal<PortalContent | null>(null);
 	protected computedAddOptionLabel = computed(() => this.#addOptionLabelInput() ?? this.intl().addOption);
 
 	@Input()
@@ -188,7 +188,7 @@ export abstract class ALuSelectInputComponent<TOption, TValue> implements OnDest
 
 	displayerTpl = computed(() => this.valueTpl() || this.optionTpl());
 
-	groupingSignal = signal<LuOptionGrouping<TOption, unknown> | undefined>(undefined);
+	readonly groupingSignal = signal<LuOptionGrouping<TOption, unknown> | undefined>(undefined);
 
 	/**
 	 * @deprecated use groupingSignal
@@ -212,7 +212,7 @@ export abstract class ALuSelectInputComponent<TOption, TValue> implements OnDest
 	previousPage = output<void>();
 	addOption = output<string>();
 
-	public valueSignal = signal<TValue | null>(null);
+	public readonly valueSignal = signal<TValue | null>(null);
 	isFilterPillEmpty = computed(() => this.valueSignal() === null);
 	isFilterPillClearable = computed(() => this.#clearable());
 

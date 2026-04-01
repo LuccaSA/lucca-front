@@ -30,7 +30,7 @@ export class CoreSelectPanelElement<T> implements Highlightable, OnDestroy {
 
 	option = input<T>();
 
-	isHighlighted = signal(false);
+	readonly isHighlighted = signal(false);
 
 	selected = output<void>();
 

@@ -85,7 +85,7 @@ export class DateInputComponent extends AbstractDateComponent implements OnInit,
 	hideOverflow = input(false, { transform: booleanAttribute });
 	widthAuto = input(false, { transform: booleanAttribute });
 
-	filterPillDisabled = signal(false);
+	readonly filterPillDisabled = signal(false);
 
 	popoverPositions: ConnectionPositionPair[] = [
 		new ConnectionPositionPair({ originX: 'start', originY: 'bottom' }, { overlayX: 'start', overlayY: 'top' }, -8, 0),
@@ -100,12 +100,12 @@ export class DateInputComponent extends AbstractDateComponent implements OnInit,
 		),
 	];
 
-	inputFocused = signal(false);
+	readonly inputFocused = signal(false);
 
-	selectedDate = signal<Date | null>(null);
+	readonly selectedDate = signal<Date | null>(null);
 
-	initialValue = signal<Date | null | undefined>(undefined);
-	dateFromWriteValue = signal<Date | null>(null);
+	readonly initialValue = signal<Date | null | undefined>(undefined);
+	readonly dateFromWriteValue = signal<Date | null>(null);
 
 	calendar = viewChild(Calendar2Component);
 
