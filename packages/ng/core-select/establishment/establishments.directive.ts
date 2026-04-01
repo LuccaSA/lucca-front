@@ -66,7 +66,7 @@ export class LuCoreSelectEstablishmentsDirective<T extends LuCoreSelectEstablish
 		return this.#groupingService.useGrouping$.pipe(switchMap(() => options$));
 	}
 
-	protected override params$: Observable<Record<string, string | number | boolean>> = toObservable(
+	protected override readonly params$: Observable<Record<string, string | number | boolean>> = toObservable(
 		computed(() => {
 			const operationIds = this.operationIds();
 			const uniqueOperationIds = this.uniqueOperationIds();
@@ -87,7 +87,7 @@ export class LuCoreSelectEstablishmentsDirective<T extends LuCoreSelectEstablish
 		}),
 	);
 
-	public totalCount$ = toObservable(computed(() => ({ url: this.url(), filters: this.filters() }))).pipe(
+	public readonly totalCount$ = toObservable(computed(() => ({ url: this.url(), filters: this.filters() }))).pipe(
 		debounceTime(250),
 		switchMap(({ url, filters }) =>
 			this.httpClient.get<{ count: number }>(url, {

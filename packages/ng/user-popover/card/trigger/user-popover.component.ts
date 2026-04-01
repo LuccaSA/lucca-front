@@ -34,7 +34,7 @@ export class LuUserPopoverComponent {
 
 	skeletonWidths = [this.getRandomPercent(), this.getRandomPercent(), this.getRandomPercent(), this.getRandomPercent()];
 
-	public employee$: Observable<LuUserPopover> = toObservable(this.luUser).pipe(
+	public readonly employee$: Observable<LuUserPopover> = toObservable(this.luUser).pipe(
 		switchMap((user) =>
 			this.#service.get(user.id).pipe(
 				catchError(() =>
