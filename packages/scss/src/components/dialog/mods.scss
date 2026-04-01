@@ -107,7 +107,7 @@
 	--components-dialog-insideContent-paddingBlock: var(--pr-t-spacings-50) var(--pr-t-spacings-200);
 	--components-dialog-inside-header-button-position: absolute;
 	--components-dialog-inside-header-button-insetBlockStart: var(--pr-t-spacings-100);
-	--components-dialog-inside-header-button-insetBlockEnd: var(--pr-t-spacings-100);
+	--components-dialog-inside-header-button-insetInlineEnd: var(--pr-t-spacings-100);
 
 	.dialog-inside-footer {
 		@include footer.fancy;
