@@ -113,7 +113,7 @@ export default {
 	title: 'Documentation/File/FileUpload/Angular/Basic',
 	argTypes: {
 		size: {
-			options: ['S', null],
+			options: [null, 'L'],
 			control: {
 				type: 'select',
 			},
@@ -197,8 +197,8 @@ export const Multi = {
 		const previewCache = new Map<File, string>();
 		const mediaParam = media ? ` media` : ``;
 		const displayFileNameParam = displayFileName && media ? ` displayFileName` : ``;
-		const sizeSFileUploadParam = size ? ` size="S"` : ``;
-		const sizeSFileEntryParam = media ? ` size="S"` : sizeSFileUploadParam;
+		const sizeLFileUploadParam = size ? ` size="L"` : ``;
+		const sizeLFileEntryParam = media ? `` : sizeLFileUploadParam;
 
 		return {
 			props: {
@@ -221,11 +221,11 @@ export const Multi = {
 				},
 			},
 			template: `<lu-form-field label="Label">
-		<lu-multi-file-upload${sizeSFileUploadParam}${generateInputs(mainArgs, argTypes)} (filePicked)="fileUploadFeature.uploadFiles([$event])" />
+		<lu-multi-file-upload${sizeLFileUploadParam}${generateInputs(mainArgs, argTypes)} (filePicked)="fileUploadFeature.uploadFiles([$event])" />
 	</lu-form-field>
 	<div class="fileEntryDisplayWrapper">
 		@for(fileUpload of fileUploadFeature.fileUploads(); track $index) {
-			<lu-file-entry${sizeSFileEntryParam}${displayFileNameParam}${mediaParam} [entry]="fileUpload | fileUploadToLFEntry" [state]="fileUpload.state" [previewUrl]="getPreviewUrl(fileUpload)" [inlineMessageError]="fileUpload.error?.detail" (deleteFile)="deleteFile(fileUpload)" />
+			<lu-file-entry${sizeLFileEntryParam}${displayFileNameParam}${mediaParam} [entry]="fileUpload | fileUploadToLFEntry" [state]="fileUpload.state" [previewUrl]="getPreviewUrl(fileUpload)" [inlineMessageError]="fileUpload.error?.detail" (deleteFile)="deleteFile(fileUpload)" />
 		}
 	</div>`,
 		};

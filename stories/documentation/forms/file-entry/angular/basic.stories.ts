@@ -7,7 +7,7 @@ export default {
 	title: 'Documentation/File/FileEntry/Angular/Basic',
 	argTypes: {
 		size: {
-			options: ['S', null],
+			options: [null, 'L'],
 			control: {
 				type: 'radio',
 			},

@@ -38,7 +38,7 @@ export class FileEntryComponent {
 
 	readonly entry = input.required<FileEntry>();
 
-	readonly size = input<'S' | null>(null);
+	readonly size = input<null | 'L'>(null);
 
 	readonly iconOverride = input('');
 
@@ -107,11 +107,11 @@ export class FileEntryComponent {
 			}
 		}
 
-		if (!this.media() && this.size() === null) {
+		if (!this.media() && this.size() === 'L') {
 			return null;
 		}
 
-		if (this.size() === 'S' && !this.media()) {
+		if (this.size() === null && !this.media()) {
 			return this.fileTypeDisplay() + ' – ' + this.fileSizeDisplay();
 		}
 

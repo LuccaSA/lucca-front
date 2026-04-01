@@ -7,38 +7,42 @@
 	}
 
 	@layer mods {
-		&.mod-S {
-			@include S;
+		&.mod-L {
+			@include L;
 		}
 
 		&.mod-media {
 			@include media;
 
-			&.mod-S {
-				@include mediaS;
+			&.mod-L {
+				@include mediaL;
 			}
 		}
 
 		&.is-error {
 			@include error;
 
-			&.mod-S {
-				@include errorS;
+			&.mod-L {
+				@include errorL;
+
+				&.mod-media {
+					@include mediaErrorL;
+				}
 			}
 		}
 
 		&.is-loading {
 			@include loading;
 
-			&.mod-S {
-				@include loadingS;
+			&.mod-L {
+				@include loadingL;
 			}
 		}
 	}
 }
 
-.fileEntry-description-divider.divider.mod-vertical {
-	@layer mods {
+@layer mods {
+	.fileEntry-description-divider.divider.mod-vertical {
 		@include divider;
 	}
 }
