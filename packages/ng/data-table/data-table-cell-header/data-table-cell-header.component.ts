@@ -45,7 +45,7 @@ export class DataTableRowCellHeaderComponent extends BaseDataTableCell implement
 	fixedWidth = input<string | null>(null);
 	inlineSize = input<string | null>(null);
 
-	insetInlineStart = computed(() => {
+	readonly insetInlineStart = computed(() => {
 		if (!this.isStickyStart() || !this.headRef) {
 			return '';
 		}
@@ -59,7 +59,7 @@ export class DataTableRowCellHeaderComponent extends BaseDataTableCell implement
 		);
 	});
 
-	insetInlineEnd = computed(() => {
+	readonly insetInlineEnd = computed(() => {
 		if (!this.isStickyEnd() || !this.headRef) {
 			return '';
 		}

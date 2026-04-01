@@ -39,15 +39,15 @@ export abstract class BaseFileUploadComponent {
 		return acceptValue.length > 0 ? acceptValue : this.defaultAccept();
 	});
 
-	acceptNames = computed(() =>
+	readonly acceptNames = computed(() =>
 		this.resolvedAccept()
 			.filter((e) => e.name)
 			.map((e) => e.name),
 	);
 
-	acceptAttribute = computed(() => this.resolvedAccept().map((e) => e.format));
+	readonly acceptAttribute = computed(() => this.resolvedAccept().map((e) => e.format));
 
-	acceptAll = computed(() => {
+	readonly acceptAll = computed(() => {
 		return this.acceptAttribute().some((str) => str.includes('*'));
 	});
 
@@ -55,7 +55,7 @@ export abstract class BaseFileUploadComponent {
 
 	fileMaxSize = input<number>(80 * MEGA_BYTE);
 
-	maxSizeDisplay = computed(() => formatFileSize(this.locale, this.fileMaxSize()));
+	readonly maxSizeDisplay = computed(() => formatFileSize(this.locale, this.fileMaxSize()));
 
 	size = input<'S' | null>(null);
 
@@ -66,7 +66,7 @@ export abstract class BaseFileUploadComponent {
 		'paper' | 'picture' | 'invoice'
 	>('invoice');
 
-	illus = computed(() => {
+	readonly illus = computed(() => {
 		switch (this.illustration()) {
 			case 'paper':
 			case 'invoice':

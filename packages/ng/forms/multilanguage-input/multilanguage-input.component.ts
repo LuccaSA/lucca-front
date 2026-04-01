@@ -61,15 +61,15 @@ export class MultilanguageInputComponent implements ControlValueAccessor {
 
 	model: WritableSignal<MultilanguageTranslation[]> = signal([] as MultilanguageTranslation[]);
 
-	invariant = computed(() => {
+	readonly invariant = computed(() => {
 		return this.model().find((row) => row.cultureCode === INVARIANT_CULTURE_CODE) || { value: '' };
 	});
 
-	panelInputs = computed(() => {
+	readonly panelInputs = computed(() => {
 		return this.model().filter((row) => row.cultureCode !== INVARIANT_CULTURE_CODE);
 	});
 
-	presentationValue = computed(() => {
+	readonly presentationValue = computed(() => {
 		return this.model().find((row) => row.cultureCode === this.#localeId)?.value || this.invariant()?.value;
 	});
 

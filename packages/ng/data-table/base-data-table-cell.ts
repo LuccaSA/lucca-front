@@ -21,17 +21,17 @@ export abstract class BaseDataTableCell {
 	readonly editable = input(false, { transform: booleanAttribute });
 	align = input<null | 'start' | 'center' | 'end'>(null);
 
-	isStickyStart = computed(() => {
+	readonly isStickyStart = computed(() => {
 		const position = this.position();
 		return isNotNil(position) && isNotNil(this.tableRef) ? position <= this.tableRef.stickyColsStart() - 1 : undefined;
 	});
 
-	isStickyEnd = computed(() => {
+	readonly isStickyEnd = computed(() => {
 		const position = this.position();
 		return isNotNil(position) && isNotNil(this.tableRef) && isNotNil(this.rowRef) ? position >= this.rowRef.cells().length - this.tableRef.stickyColsEnd() : undefined;
 	});
 
-	position = computed(() => {
+	readonly position = computed(() => {
 		return this.rowRef?.cells().indexOf(this);
 	});
 }

@@ -176,14 +176,14 @@ export class DateRangeInputComponent extends AbstractDateComponent implements On
 		};
 	};
 
-	calendarRanges = computed(() => {
+	readonly calendarRanges = computed(() => {
 		if (this.selectedRange()) {
 			return [this.selectedRange(), ...this.ranges()];
 		}
 		return this.ranges();
 	});
 
-	startLabel = computed(() => {
+	readonly startLabel = computed(() => {
 		const inputValue = this.startUserTextInput();
 		if (inputValue !== 'ɵ') {
 			return inputValue;
@@ -195,7 +195,7 @@ export class DateRangeInputComponent extends AbstractDateComponent implements On
 		return '';
 	});
 
-	endLabel = computed(() => {
+	readonly endLabel = computed(() => {
 		const inputValue = this.endUserTextInput();
 		if (inputValue !== 'ɵ') {
 			return inputValue;
@@ -214,7 +214,7 @@ export class DateRangeInputComponent extends AbstractDateComponent implements On
 	// Which calendar is currently being focused in, used for tabbable date logic
 	readonly focusedCalendarIndex = signal(0);
 
-	focusedCalendar = computed(() => this.calendars()[this.focusedCalendarIndex()]);
+	readonly focusedCalendar = computed(() => this.calendars()[this.focusedCalendarIndex()]);
 
 	@HostBinding('class.mod-filterPill')
 	isFilterPill = false;
@@ -224,8 +224,8 @@ export class DateRangeInputComponent extends AbstractDateComponent implements On
 		return this.widthAuto();
 	}
 
-	isFilterPillEmpty = computed(() => this.selectedRange() === null);
-	isFilterPillClearable = computed(() => this.clearable() ?? this.#defaultFilterPillClearable() ?? this.#defaultClearable);
+	readonly isFilterPillEmpty = computed(() => this.selectedRange() === null);
+	readonly isFilterPillClearable = computed(() => this.clearable() ?? this.#defaultFilterPillClearable() ?? this.#defaultClearable);
 	#defaultClearable = false;
 	#defaultFilterPillClearable = signal<boolean | null>(null);
 

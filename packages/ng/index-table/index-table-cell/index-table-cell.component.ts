@@ -32,7 +32,7 @@ export class IndexTableRowCellComponent extends BaseIndexTableCell {
 	readonly allowTextSelection = input(false, { transform: booleanAttribute });
 	readonly tfoot = input(false, { transform: booleanAttribute });
 
-	actions = computed(() => {
+	readonly actions = computed(() => {
 		return this.tableRef.header()?.cols()[this.position()].actions();
 	});
 }

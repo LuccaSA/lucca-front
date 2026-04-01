@@ -91,7 +91,7 @@ export class FormFieldComponent implements OnDestroy, DoCheck {
 
 	rolePresentationLabel = model(false);
 
-	labelIsPresentation = computed(() => this.rolePresentationLabel() || this.presentation());
+	readonly labelIsPresentation = computed(() => this.rolePresentationLabel() || this.presentation());
 
 	readonly inline = input(false, { transform: booleanAttribute });
 

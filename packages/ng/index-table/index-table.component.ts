@@ -34,9 +34,9 @@ export class IndexTableComponent {
 	rows = contentChildren(IndexTableRowComponent, { descendants: true });
 	header = contentChild(IndexTableHeadComponent, { descendants: true });
 
-	cols = computed(() => this.header()?.cols());
+	readonly cols = computed(() => this.header()?.cols());
 
-	classMods = computed(() => {
+	readonly classMods = computed(() => {
 		return {
 			indexTable: true,
 			['mod-selectable']: this.selectable(),

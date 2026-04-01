@@ -90,7 +90,7 @@ export abstract class ALuSelectInputComponent<TOption, TValue> implements OnDest
 	get clearable(): boolean {
 		return this.#clearable();
 	}
-	#clearable = computed(() => this.#inputClearable() ?? this.#defaultFilterPillClearable() ?? this.#defaultClearable);
+	readonly #clearable = computed(() => this.#inputClearable() ?? this.#defaultFilterPillClearable() ?? this.#defaultClearable);
 	readonly #defaultFilterPillClearable = signal<boolean | null>(null);
 	readonly #inputClearable = signal<boolean | null>(null);
 	#defaultClearable = false;
@@ -186,7 +186,7 @@ export abstract class ALuSelectInputComponent<TOption, TValue> implements OnDest
 	panelHeaderTpl = model<TemplateRef<void> | Type<unknown> | undefined>();
 	panelFooterTpl = model<TemplateRef<void> | Type<unknown> | undefined>();
 
-	displayerTpl = computed(() => this.valueTpl() || this.optionTpl());
+	readonly displayerTpl = computed(() => this.valueTpl() || this.optionTpl());
 
 	readonly groupingSignal = signal<LuOptionGrouping<TOption, unknown> | undefined>(undefined);
 
@@ -213,8 +213,8 @@ export abstract class ALuSelectInputComponent<TOption, TValue> implements OnDest
 	readonly addOption = output<string>();
 
 	public readonly valueSignal = signal<TValue | null>(null);
-	isFilterPillEmpty = computed(() => this.valueSignal() === null);
-	isFilterPillClearable = computed(() => this.#clearable());
+	readonly isFilterPillEmpty = computed(() => this.valueSignal() === null);
+	readonly isFilterPillClearable = computed(() => this.#clearable());
 
 	public get value(): TValue | null {
 		return this._value;

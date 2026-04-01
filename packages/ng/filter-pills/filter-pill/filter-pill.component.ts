@@ -59,7 +59,7 @@ export class FilterPillComponent {
 
 	id = `filterPill-combobox-${nextId++}`;
 
-	layout = computed(() => this.inputComponentRef()?.filterPillLayout?.() || 'default');
+	readonly layout = computed(() => this.inputComponentRef()?.filterPillLayout?.() || 'default');
 
 	// The easy way to grab input component, will work in most cases
 	childInputComponentRef = contentChild(FILTER_PILL_INPUT_COMPONENT);
@@ -68,13 +68,13 @@ export class FilterPillComponent {
 	// (like when child isn't created when component inits or it's too deep)
 	registeredInputComponentRef = signal<FilterPillInputComponent | null>(null);
 
-	inputComponentRef = computed(() => this.registeredInputComponentRef() || this.childInputComponentRef());
+	readonly inputComponentRef = computed(() => this.registeredInputComponentRef() || this.childInputComponentRef());
 
 	popoverRef = viewChild(PopoverDirective);
 
 	pillTpl: TemplateRef<unknown>;
 
-	labelTpl = computed(() => this.customLabelTpl() || this.defaultLabelTpl());
+	readonly labelTpl = computed(() => this.customLabelTpl() || this.defaultLabelTpl());
 
 	defaultLabelTpl = viewChild<TemplateRef<unknown>>('defaultLabel');
 
@@ -84,7 +84,7 @@ export class FilterPillComponent {
 
 	readonly optional = input(false, { transform: booleanAttribute });
 
-	disabled = computed(() => this.inputComponentRef()?.filterPillDisabled?.() || false);
+	readonly disabled = computed(() => this.inputComponentRef()?.filterPillDisabled?.() || false);
 
 	@HostBinding('class.is-hidden')
 	get isHiddenClass() {
@@ -118,23 +118,23 @@ export class FilterPillComponent {
 
 	label = input.required<string>();
 
-	placeholder = computed(() => this.placeholderOverride() ?? this.intl().placeholder);
+	readonly placeholder = computed(() => this.placeholderOverride() ?? this.intl().placeholder);
 	placeholderOverride = input<string | null>(null, { alias: 'placeholder' });
 
 	icon = input<LuccaIcon>();
 
-	defaultIcon = computed<LuccaIcon>(() => this.inputComponentRef()?.getDefaultFilterPillIcon?.() ?? 'arrowChevronBottom');
+	readonly defaultIcon = computed<LuccaIcon>(() => this.inputComponentRef()?.getDefaultFilterPillIcon?.() ?? 'arrowChevronBottom');
 
-	displayedIcon = computed(() => this.icon() || this.defaultIcon());
+	readonly displayedIcon = computed(() => this.icon() || this.defaultIcon());
 
-	shouldHideCombobox = computed(() => this.inputComponentRef()?.hideCombobox?.() ?? false);
+	readonly shouldHideCombobox = computed(() => this.inputComponentRef()?.hideCombobox?.() ?? false);
 
-	inputIsEmpty = computed(() => this.inputComponentRef()?.isFilterPillEmpty() ?? true);
-	inputIsClearable = computed(() => this.inputComponentRef()?.isFilterPillClearable() ?? false);
+	readonly inputIsEmpty = computed(() => this.inputComponentRef()?.isFilterPillEmpty() ?? true);
+	readonly inputIsClearable = computed(() => this.inputComponentRef()?.isFilterPillClearable() ?? false);
 
-	shouldShowColon = computed(() => this.inputComponentRef()?.showColon?.() || !this.inputIsEmpty());
+	readonly shouldShowColon = computed(() => this.inputComponentRef()?.showColon?.() || !this.inputIsEmpty());
 
-	colonDisplay = computed(() => {
+	readonly colonDisplay = computed(() => {
 		if (!this.shouldShowColon()) {
 			return '';
 		}
@@ -144,7 +144,7 @@ export class FilterPillComponent {
 		return ':';
 	});
 
-	modCheckbox = computed(() => this.layout() === 'checkable');
+	readonly modCheckbox = computed(() => this.layout() === 'checkable');
 
 	@HostBinding('class.mod-checkbox')
 	get isModCheckbox() {

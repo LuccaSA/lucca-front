@@ -111,7 +111,7 @@ export class DateInputComponent extends AbstractDateComponent implements OnInit,
 
 	inputRef = viewChild<ElementRef<HTMLInputElement>>('date');
 
-	displayValue = computed(() => {
+	readonly displayValue = computed(() => {
 		const textInput = this.userTextInput();
 		if (textInput !== 'ɵ') {
 			const parsedInput = parse(textInput, this.dateFormatWithMode(), startOfDay(new Date()));
@@ -168,8 +168,8 @@ export class DateInputComponent extends AbstractDateComponent implements OnInit,
 		return this.widthAuto();
 	}
 
-	isFilterPillEmpty = computed(() => !this.selectedDate());
-	isFilterPillClearable = computed(() => this.clearable() ?? this.#defaultFilterPillClearable() ?? this.#defaultClearable);
+	readonly isFilterPillEmpty = computed(() => !this.selectedDate());
+	readonly isFilterPillClearable = computed(() => this.clearable() ?? this.#defaultFilterPillClearable() ?? this.#defaultClearable);
 	#defaultClearable = false;
 	#defaultFilterPillClearable = signal<boolean | null>(null);
 

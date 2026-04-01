@@ -79,7 +79,7 @@ export class LuMultiSelectPanelComponent<T> implements AfterViewInit, CoreSelect
 	options = signal<ɵCoreSelectPanelElement<T>[]>([]);
 	keyManager = inject<CoreSelectKeyManager<T>>(CoreSelectKeyManager);
 
-	someGroupOptionEnabled = computed(() => {
+	readonly someGroupOptionEnabled = computed(() => {
 		return (groupOptions: T[]) => {
 			const disabledOptionIds = this.options()
 				.filter((o) => o.disabled)

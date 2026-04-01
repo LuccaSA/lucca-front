@@ -20,11 +20,11 @@ export abstract class BaseIndexTableCell {
 
 	align = input<null | 'start' | 'center' | 'end'>(null);
 
-	alignCol = computed(() => {
+	readonly alignCol = computed(() => {
 		return this.tableRef.header()?.cols()[this.position()].align();
 	});
 
-	position = computed(() => {
+	readonly position = computed(() => {
 		return this.rowRef.cells().indexOf(this);
 	});
 }

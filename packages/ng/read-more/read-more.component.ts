@@ -47,10 +47,10 @@ export class ReadMoreComponent {
 	 */
 	readonly innerContent = input<null | string>(null);
 
-	labelReadMore = computed(() => this.intl().readMore);
-	labelReadLess = computed(() => this.intl().readLess);
+	readonly labelReadMore = computed(() => this.intl().readMore);
+	readonly labelReadLess = computed(() => this.intl().readLess);
 
-	label = computed(() => (this.expanded() ? this.labelReadLess() : this.labelReadMore()));
+	readonly label = computed(() => (this.expanded() ? this.labelReadLess() : this.labelReadMore()));
 
 	readonly contentRef = viewChild<ElementRef<HTMLDivElement>>('content');
 

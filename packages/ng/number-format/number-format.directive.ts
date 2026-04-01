@@ -25,7 +25,7 @@ export class NumberFormatDirective implements ControlValueAccessor {
 	#isFocused = signal<boolean>(false);
 
 	formatOptions = input.required<NumberFormatOptions>();
-	#numberFormat = computed(() => {
+	readonly #numberFormat = computed(() => {
 		return new NumberFormat(this.formatOptions());
 	});
 
