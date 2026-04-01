@@ -31,7 +31,7 @@ import { LuMultiSelectDisplayerInputDirective } from './displayer-input.directiv
 	changeDetection: ChangeDetectionStrategy.OnPush,
 })
 export class LuMultiSelectDefaultDisplayerComponent<T> implements OnInit {
-	select = inject<LuMultiSelectInputComponent<T>>(LuMultiSelectInputComponent);
+	readonly select = inject<LuMultiSelectInputComponent<T>>(LuMultiSelectInputComponent);
 	readonly intl = input(...intlInputOptions(LU_MULTI_SELECT_DISPLAYER_TRANSLATIONS));
 
 	protected destroyRef = inject(DestroyRef);
@@ -43,7 +43,7 @@ export class LuMultiSelectDefaultDisplayerComponent<T> implements OnInit {
 		return this.select.value || [];
 	}
 
-	context = inject<ILuOptionContext<T[]>>(LU_OPTION_CONTEXT);
+	readonly context = inject<ILuOptionContext<T[]>>(LU_OPTION_CONTEXT);
 
 	displayedOptions$ = this.context.option$.pipe(
 		map((options) => {

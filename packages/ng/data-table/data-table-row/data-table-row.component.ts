@@ -37,11 +37,11 @@ import { LU_DATA_TABLE_ROW_INSTANCE } from './data-table-row.token';
 })
 export class DataTableRowComponent {
 	readonly intl = input(...intlInputOptions(LU_DATA_TABLE_TRANSLATIONS));
-	bodyRef = inject(LU_DATA_TABLE_BODY_INSTANCE, { optional: true });
-	headRef = inject(LU_DATA_TABLE_HEAD_INSTANCE, { optional: true });
-	footRef = inject(LU_DATA_TABLE_FOOT_INSTANCE, { optional: true });
+	readonly bodyRef = inject(LU_DATA_TABLE_BODY_INSTANCE, { optional: true });
+	readonly headRef = inject(LU_DATA_TABLE_HEAD_INSTANCE, { optional: true });
+	readonly footRef = inject(LU_DATA_TABLE_FOOT_INSTANCE, { optional: true });
 
-	elementRef = inject<ElementRef<Element>>(ElementRef);
+	readonly elementRef = inject<ElementRef<Element>>(ElementRef);
 
 	public readonly cells = contentChildren(LU_DATA_TABLE_CELL_INSTANCE);
 

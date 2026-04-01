@@ -64,7 +64,7 @@ export class FormFieldComponent implements OnDestroy, DoCheck {
 	#renderer = inject(Renderer2);
 	protected parentForm = inject(LU_FORM_INSTANCE, { optional: true });
 
-	framed = inject(INPUT_FRAMED_INSTANCE, { optional: true }) !== null;
+	readonly framed = inject(INPUT_FRAMED_INSTANCE, { optional: true }) !== null;
 
 	readonly formFieldChildren = contentChildren(FormFieldComponent, { descendants: true });
 

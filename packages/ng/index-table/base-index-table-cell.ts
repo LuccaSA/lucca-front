@@ -12,11 +12,11 @@ import { LU_INDEX_TABLE_INSTANCE } from './index-table.token';
 	changeDetection: ChangeDetectionStrategy.OnPush,
 })
 export abstract class BaseIndexTableCell {
-	tableRef = inject(LU_INDEX_TABLE_INSTANCE);
-	bodyRef = inject(LU_INDEX_TABLE_BODY_INSTANCE, { optional: true });
-	headRef = inject(LU_INDEX_TABLE_HEAD_INSTANCE, { optional: true });
-	footRef = inject(LU_INDEX_TABLE_FOOT_INSTANCE, { optional: true });
-	rowRef = inject(LU_INDEX_TABLE_ROW_INSTANCE);
+	readonly tableRef = inject(LU_INDEX_TABLE_INSTANCE);
+	readonly bodyRef = inject(LU_INDEX_TABLE_BODY_INSTANCE, { optional: true });
+	readonly headRef = inject(LU_INDEX_TABLE_HEAD_INSTANCE, { optional: true });
+	readonly footRef = inject(LU_INDEX_TABLE_FOOT_INSTANCE, { optional: true });
+	readonly rowRef = inject(LU_INDEX_TABLE_ROW_INSTANCE);
 
 	readonly align = input<null | 'start' | 'center' | 'end'>(null);
 

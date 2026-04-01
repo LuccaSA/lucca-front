@@ -33,10 +33,10 @@ import { LuRouterLink } from './lu-router-link';
 })
 export class LinkComponent {
 	readonly intl = input(...intlInputOptions(LU_LINK_TRANSLATIONS));
-	routerLink = inject(LuRouterLink);
+	readonly routerLink = inject(LuRouterLink);
 	#injector = inject(Injector);
-	router = inject(Router);
-	location = inject(Location);
+	readonly router = inject(Router);
+	readonly location = inject(Location);
 
 	/**
 	 * Target page address. Use only for external links or pages not recognized by the router.

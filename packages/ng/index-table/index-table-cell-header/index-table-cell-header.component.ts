@@ -38,7 +38,7 @@ const SORT_VALUES = ['none', 'ascending', 'descending'] as const;
 	changeDetection: ChangeDetectionStrategy.OnPush,
 })
 export class IndexTableRowCellHeaderComponent extends BaseIndexTableCell {
-	elementRef = inject<ElementRef<HTMLTableCellElement>>(ElementRef);
+	readonly elementRef = inject<ElementRef<HTMLTableCellElement>>(ElementRef);
 
 	readonly sort = model<null | 'none' | 'ascending' | 'descending'>(null);
 	readonly selectable = input(false, { transform: booleanAttribute });

@@ -17,5 +17,5 @@ import { LuMultiSelectDisplayerInputDirective } from '../displayer-input.directi
 	changeDetection: ChangeDetectionStrategy.OnPush,
 })
 export class LuMultiSelectContentDisplayerComponent<T> {
-	select = inject<LuMultiSelectInputComponent<T>>(LuMultiSelectInputComponent);
+	readonly select = inject<LuMultiSelectInputComponent<T>>(LuMultiSelectInputComponent);
 }

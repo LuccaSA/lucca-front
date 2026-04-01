@@ -34,9 +34,9 @@ import { LU_INDEX_TABLE_ROW_INSTANCE } from './index-table-row.token';
 	changeDetection: ChangeDetectionStrategy.OnPush,
 })
 export class IndexTableRowComponent {
-	bodyRef = inject(LU_INDEX_TABLE_BODY_INSTANCE, { optional: true });
-	headRef = inject(LU_INDEX_TABLE_HEAD_INSTANCE, { optional: true });
-	footRef = inject(LU_INDEX_TABLE_FOOT_INSTANCE, { optional: true });
+	readonly bodyRef = inject(LU_INDEX_TABLE_BODY_INSTANCE, { optional: true });
+	readonly headRef = inject(LU_INDEX_TABLE_HEAD_INSTANCE, { optional: true });
+	readonly footRef = inject(LU_INDEX_TABLE_FOOT_INSTANCE, { optional: true });
 
 	public readonly cells = contentChildren(LU_INDEX_TABLE_CELL_INSTANCE);
 
