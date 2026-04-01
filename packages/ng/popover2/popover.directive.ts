@@ -128,9 +128,9 @@ export class PopoverDirective implements OnDestroy {
 
 	readonly close$ = new Subject<void>();
 
-	luPopoverClosed = output<void>();
+	readonly luPopoverClosed = output<void>();
 
-	luPopoverOpened = output<void>();
+	readonly luPopoverOpened = output<void>();
 
 	#listenToMouseLeave = false;
 	#listenToMouseEnter = true;

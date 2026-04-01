@@ -78,14 +78,14 @@ export class LuEstablishmentSearcherComponent implements ILuOnOpenSubscriber, IL
 
 	loading = false;
 
-	private _nextPage$ = new Subject<void>();
-	private _page$: Observable<number> = this._nextPage$.pipe(
+	private readonly _nextPage$ = new Subject<void>();
+	private readonly _page$: Observable<number> = this._nextPage$.pipe(
 		scan((acc) => acc + 1, 0),
 		startWith(0),
 	);
 	private _resetOutOptions = new Subject<void>();
 
-	outOptions$ = this._resetOutOptions.pipe(
+	readonly outOptions$ = this._resetOutOptions.pipe(
 		startWith(undefined),
 		switchMap(() =>
 			this.clueControl.valueChanges.pipe(
@@ -112,7 +112,7 @@ export class LuEstablishmentSearcherComponent implements ILuOnOpenSubscriber, IL
 		share(),
 	);
 
-	displayPlaceholder$ = this.outOptions$.pipe(map((o) => o?.length === 0 && this._isSearching));
+	readonly displayPlaceholder$ = this.outOptions$.pipe(map((o) => o?.length === 0 && this._isSearching));
 
 	constructor(
 		@Inject(ALuEstablishmentService)

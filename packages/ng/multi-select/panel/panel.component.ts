@@ -60,10 +60,10 @@ export class LuMultiSelectPanelComponent<T> implements AfterViewInit, CoreSelect
 	readonly panelRef = inject<LuMultiSelectPanelRef<T>>(LuMultiSelectPanelRef);
 	readonly selectId = inject(SELECT_ID);
 
-	options$ = this.selectInput.options$;
+	readonly options$ = this.selectInput.options$;
 	readonly grouping = this.selectInput.groupingSignal;
 	treeGenerator = this.selectInput.treeGenerator;
-	loading$ = this.selectInput.loading$;
+	readonly loading$ = this.selectInput.loading$;
 	searchable = this.selectInput.searchable;
 	optionComparer = this.selectInput.optionComparer;
 	optionKey = this.selectInput.optionKey;
@@ -91,10 +91,10 @@ export class LuMultiSelectPanelComponent<T> implements AfterViewInit, CoreSelect
 	});
 
 	readonly hasGrouping$ = toObservable(this.grouping).pipe(map((grouping) => !!grouping));
-	public clueChange$ = this.selectInput.clue$.pipe(map((clue) => clue ?? ''));
-	public shouldDisplayAddOption$ = this.selectInput.shouldDisplayAddOption$;
+	public readonly clueChange$ = this.selectInput.clue$.pipe(map((clue) => clue ?? ''));
+	public readonly shouldDisplayAddOption$ = this.selectInput.shouldDisplayAddOption$;
 
-	groupTemplateLocation$ = ɵgetGroupTemplateLocation(this.hasGrouping$, this.clueChange$, this.options$, this.searchable);
+	readonly groupTemplateLocation$ = ɵgetGroupTemplateLocation(this.hasGrouping$, this.clueChange$, this.options$, this.searchable);
 
 	onScroll(evt: Event): void {
 		if (!(evt.target instanceof HTMLElement)) {

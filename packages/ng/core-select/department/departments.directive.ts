@@ -85,7 +85,7 @@ export class LuCoreSelectDepartmentsDirective<T extends ILuDepartment = ILuDepar
 		}),
 	);
 
-	public totalCount$ = this.select.options$.pipe(
+	public readonly totalCount$ = this.select.options$.pipe(
 		filter((opts) => opts.length > 0),
 		map((opts) => {
 			return opts.map((branch) => this.flattenTree(branch)).flat().length;

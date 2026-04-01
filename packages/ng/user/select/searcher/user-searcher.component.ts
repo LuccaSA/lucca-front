@@ -80,8 +80,8 @@ export class LuUserPagedSearcherComponent<U extends ILuUser = ILuUser> implement
 	loading$: Observable<boolean>;
 	empty$: Observable<boolean>;
 	private _loading = false;
-	private _isOpened$ = new BehaviorSubject(false);
-	private _page$ = new Subject<void>();
+	private readonly _isOpened$ = new BehaviorSubject(false);
+	private readonly _page$ = new Subject<void>();
 	private _isLastPage: boolean;
 	private _options: U[] = [];
 

@@ -13,12 +13,12 @@ export abstract class ALuCoreSelectApiDirective<TOption, TParams = Record<string
 
 	public select = inject<ALuSelectInputComponent<TOption, unknown>>(ALuSelectInputComponent);
 
-	protected page$ = this.select.nextPage$.pipe(
+	protected readonly page$ = this.select.nextPage$.pipe(
 		scan((page) => page + 1, 0),
 		startWith(0),
 	);
 
-	protected clue$ = this.select.clueChange$.pipe(debounceTime(this.debounceDuration), startWith(''));
+	protected readonly clue$ = this.select.clueChange$.pipe(debounceTime(this.debounceDuration), startWith(''));
 
 	/**
 	 * Create an object that will be used as params for the api call

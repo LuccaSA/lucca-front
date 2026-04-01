@@ -249,7 +249,7 @@ export abstract class ALuSelectInputComponent<TOption, TValue> implements OnDest
 	clue: string | null = null;
 	// This is the clue stored after we selected an option to know if we should emit an empty clue on open or not
 	lastEmittedClue: string = '';
-	clue$ = defer(() => this.clueChange$.pipe(startWith(this.clue)));
+	readonly clue$ = defer(() => this.clueChange$.pipe(startWith(this.clue)));
 
 	readonly addOptionStrategy$ = new BehaviorSubject<CoreSelectAddOptionStrategy>('never');
 	shouldDisplayAddOption$ = this.addOptionStrategy$.pipe(

@@ -62,10 +62,10 @@ export class LuSelectPanelComponent<T> implements AfterViewInit, CoreSelectPanel
 	public selectId = inject(SELECT_ID);
 	public intl = this.selectInput.intl;
 
-	options$ = this.selectInput.options$;
+	readonly options$ = this.selectInput.options$;
 	readonly grouping = this.selectInput.groupingSignal;
 	treeGenerator = this.selectInput.treeGenerator;
-	loading$ = this.selectInput.loading$;
+	readonly loading$ = this.selectInput.loading$;
 	searchable = this.selectInput.searchable;
 	optionComparer = this.selectInput.optionComparer;
 	optionKey = this.selectInput.optionKey;

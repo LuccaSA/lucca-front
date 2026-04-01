@@ -28,7 +28,7 @@ import { ALuOptionOperator, ILuOptionOperator } from '../option-operator.model';
 })
 export class LuOptionSearcherComponent<T> extends ALuOptionOperator<T> implements ILuOptionOperator<T>, ILuOnOpenSubscriber {
 	searchControl = new FormControl();
-	clue$ = merge(of(''), this.searchControl.valueChanges) as Observable<string>;
+	readonly clue$ = merge(of(''), this.searchControl.valueChanges) as Observable<string>;
 	empty$: Observable<boolean>;
 	@ViewChild('searchInput', { read: ElementRef, static: true })
 	readonly searchInput: ElementRef<HTMLElement>;
