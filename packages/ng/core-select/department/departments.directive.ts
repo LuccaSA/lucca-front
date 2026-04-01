@@ -71,7 +71,7 @@ export class LuCoreSelectDepartmentsDirective<T extends ILuDepartment = ILuDepar
 			.filter(isNotNil);
 	}
 
-	protected override params$: Observable<Record<string, string | number | boolean>> = toObservable(
+	protected override readonly params$: Observable<Record<string, string | number | boolean>> = toObservable(
 		computed(() => {
 			const operationIds = this.operationIds();
 			const uniqueOperationIds = this.uniqueOperationIds();

@@ -90,7 +90,7 @@ export class LuMultiSelectPanelComponent<T> implements AfterViewInit, CoreSelect
 		};
 	});
 
-	hasGrouping$ = toObservable(this.grouping).pipe(map((grouping) => !!grouping));
+	readonly hasGrouping$ = toObservable(this.grouping).pipe(map((grouping) => !!grouping));
 	public clueChange$ = this.selectInput.clue$.pipe(map((clue) => clue ?? ''));
 	public shouldDisplayAddOption$ = this.selectInput.shouldDisplayAddOption$;
 
