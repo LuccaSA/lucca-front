@@ -62,9 +62,9 @@ export abstract class AbstractDateComponent {
 
 	readonly dateFormatLocalized = computed(() => getLocalizedDateFormat(this.locale, this.mode()));
 
-	protected currentDate = signal(new Date());
+	protected readonly currentDate = signal(new Date());
 
-	protected tabbableDate = signal<Date | null>(null);
+	protected readonly tabbableDate = signal<Date | null>(null);
 
 	protected constructor() {
 		effect(() => {

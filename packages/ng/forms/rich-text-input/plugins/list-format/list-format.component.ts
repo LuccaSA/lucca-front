@@ -31,9 +31,9 @@ export class ListFormatComponent implements OnDestroy, RichTextPluginComponent {
 
 	public element = viewChild('element', { read: ElementRef<HTMLButtonElement> });
 
-	public tabindex = signal<number>(-1);
-	public active = signal(false);
-	public isDisabled = signal(false);
+	public readonly tabindex = signal<number>(-1);
+	public readonly active = signal(false);
+	public readonly isDisabled = signal(false);
 
 	#editor?: LexicalEditor;
 

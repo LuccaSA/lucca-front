@@ -96,24 +96,24 @@ export class DateRangeInputComponent extends AbstractDateComponent implements On
 	idSuffix = nextId++;
 
 	startTextInputRef = viewChild<ElementRef<HTMLInputElement>>('start');
-	startUserTextInput = signal('ɵ');
+	readonly startUserTextInput = signal('ɵ');
 
 	endTextInputRef = viewChild<ElementRef<HTMLInputElement>>('end');
-	endUserTextInput = signal('ɵ');
+	readonly endUserTextInput = signal('ɵ');
 
 	// CVA stuff
 	#onChange?: (value: DateRange | null) => void;
 
-	initialValue = signal<DateRange | null | undefined>(undefined);
-	selectedRange = signal<DateRange | null>(null);
+	readonly initialValue = signal<DateRange | null | undefined>(undefined);
+	readonly selectedRange = signal<DateRange | null>(null);
 
-	dateHovered = signal<Date | null>(null);
+	readonly dateHovered = signal<Date | null>(null);
 
 	placeholder = input<string>();
 
 	widthAuto = input(false, { transform: booleanAttribute });
 
-	label: Signal<PortalContent | undefined> = signal('');
+	readonly label: Signal<PortalContent | undefined> = signal('');
 
 	popoverPositions: ConnectionPositionPair[] = [
 		new ConnectionPositionPair({ originX: 'start', originY: 'bottom' }, { overlayX: 'start', overlayY: 'top' }, -8, 0),
@@ -128,11 +128,11 @@ export class DateRangeInputComponent extends AbstractDateComponent implements On
 		),
 	];
 
-	inputFocused = signal(false);
+	readonly inputFocused = signal(false);
 
-	editedField = signal<-1 | 0 | 1>(-1);
+	readonly editedField = signal<-1 | 0 | 1>(-1);
 
-	highlightedField = signal<-1 | 0 | 1>(-1);
+	readonly highlightedField = signal<-1 | 0 | 1>(-1);
 
 	shortcuts = input<readonly CalendarShortcut[]>();
 
@@ -212,7 +212,7 @@ export class DateRangeInputComponent extends AbstractDateComponent implements On
 	nextButton = viewChild<ElementRef<Element>>('nextButtonRef');
 
 	// Which calendar is currently being focused in, used for tabbable date logic
-	focusedCalendarIndex = signal(0);
+	readonly focusedCalendarIndex = signal(0);
 
 	focusedCalendar = computed(() => this.calendars()[this.focusedCalendarIndex()]);
 
@@ -231,7 +231,7 @@ export class DateRangeInputComponent extends AbstractDateComponent implements On
 
 	filterPillPopoverCloseFn?: () => void;
 
-	filterPillDisabled = signal(false);
+	readonly filterPillDisabled = signal(false);
 
 	get isNavigationButtonFocused(): boolean {
 		return [this.previousButton()?.nativeElement, this.nextButton()?.nativeElement].includes(document.activeElement ?? undefined);

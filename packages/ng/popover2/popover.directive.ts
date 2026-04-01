@@ -142,7 +142,7 @@ export class PopoverDirective implements OnDestroy {
 
 	positionPairs: Record<PopoverPosition, ConnectionPositionPair> = defaultPositionPairs;
 
-	opened = signal(false);
+	readonly opened = signal(false);
 
 	@HostBinding('attr.aria-controls')
 	ariaControls = `popover-content-${nextId++}`;

@@ -28,9 +28,9 @@ export class TextStyleComponent implements OnDestroy, RichTextPluginComponent {
 	public icon = input.required<LuccaIcon>();
 	public tooltip = input.required<string>();
 
-	public tabindex = signal<number>(-1);
-	public active = signal(false);
-	public isDisabled = signal(false);
+	public readonly tabindex = signal<number>(-1);
+	public readonly active = signal(false);
+	public readonly isDisabled = signal(false);
 
 	public element = viewChild('element', { read: ElementRef<HTMLButtonElement> });
 

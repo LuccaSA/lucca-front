@@ -70,7 +70,7 @@ export class LuCoreSelectUsersDirective<T extends LuCoreSelectUser = LuCoreSelec
 	displayMeOption = input(true);
 	customUserOptionTpl = model<TemplateRef<LuOptionContext<T>> | Type<unknown> | undefined>();
 
-	includeFormerEmployees = signal(false);
+	readonly includeFormerEmployees = signal(false);
 	searchDelimiter = input<string>(' ');
 
 	constructor() {

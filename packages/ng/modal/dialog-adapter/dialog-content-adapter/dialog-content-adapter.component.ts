@@ -40,7 +40,7 @@ export class DialogContentAdapterComponent<D, C extends ILuModalContent> impleme
 
 	ref = injectDialogRef<LuModalContentResult<C> | undefined>();
 
-	submitClass = signal('');
+	readonly submitClass = signal('');
 	readonly error$ = new Subject();
 
 	protected readonly doCheck$ = new ReplaySubject<void>(1);
