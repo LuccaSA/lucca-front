@@ -55,7 +55,7 @@ export class FilterPillComponent {
 
 	#locale = inject(LOCALE_ID);
 
-	elementRef = inject(ElementRef);
+	readonly elementRef = inject(ElementRef);
 
 	id = `filterPill-combobox-${nextId++}`;
 

@@ -11,7 +11,7 @@ import { ALuSelectInputComponent, LuIsOptionSelectedPipe, LuOptionComparer, LuOp
 	changeDetection: ChangeDetectionStrategy.OnPush,
 })
 export class TreeBranchComponent<T> {
-	selectInputComponent = inject(ALuSelectInputComponent);
+	readonly selectInputComponent = inject(ALuSelectInputComponent);
 
 	readonly rootOptionRef = viewChild<ɵCoreSelectPanelElement<T>>('rootOption');
 

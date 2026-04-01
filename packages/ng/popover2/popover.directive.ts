@@ -73,9 +73,9 @@ const defaultPositionPairs: Record<PopoverPosition, ConnectionPositionPair> = {
 	exportAs: 'luPopover2',
 })
 export class PopoverDirective implements OnDestroy {
-	overlay = inject(Overlay);
+	readonly overlay = inject(Overlay);
 
-	elementRef = inject<ElementRef<HTMLElement>>(ElementRef);
+	readonly elementRef = inject<ElementRef<HTMLElement>>(ElementRef);
 
 	#vcr = inject(ViewContainerRef);
 

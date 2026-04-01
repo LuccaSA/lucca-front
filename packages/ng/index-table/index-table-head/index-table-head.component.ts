@@ -25,5 +25,5 @@ import { LU_INDEX_TABLE_HEAD_INSTANCE } from './index-table-head.token';
 export class IndexTableHeadComponent {
 	readonly cols = contentChildren(IndexTableRowCellHeaderComponent, { descendants: true });
 
-	tableRef = inject(LU_INDEX_TABLE_INSTANCE);
+	readonly tableRef = inject(LU_INDEX_TABLE_INSTANCE);
 }

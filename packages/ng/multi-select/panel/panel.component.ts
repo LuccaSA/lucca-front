@@ -56,9 +56,9 @@ import { LuOptionsGroupContextPipe } from './option-group-context.pipe';
 	],
 })
 export class LuMultiSelectPanelComponent<T> implements AfterViewInit, CoreSelectPanelInstance {
-	protected selectInput = inject<LuMultiSelectInputComponent<T>>(MULTI_SELECT_INPUT);
-	panelRef = inject<LuMultiSelectPanelRef<T>>(LuMultiSelectPanelRef);
-	selectId = inject(SELECT_ID);
+	protected readonly selectInput = inject<LuMultiSelectInputComponent<T>>(MULTI_SELECT_INPUT);
+	readonly panelRef = inject<LuMultiSelectPanelRef<T>>(LuMultiSelectPanelRef);
+	readonly selectId = inject(SELECT_ID);
 
 	options$ = this.selectInput.options$;
 	readonly grouping = this.selectInput.groupingSignal;

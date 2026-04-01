@@ -22,9 +22,9 @@ export class PopoverContentComponent implements AfterViewInit, OnDestroy {
 
 	#elementRef = inject<ElementRef<HTMLElement>>(ElementRef);
 
-	config = inject(POPOVER_CONFIG);
+	readonly config = inject(POPOVER_CONFIG);
 
-	destroyRef = inject(DestroyRef);
+	readonly destroyRef = inject(DestroyRef);
 
 	@HostBinding('attr.id')
 	contentId = this.config.contentId;

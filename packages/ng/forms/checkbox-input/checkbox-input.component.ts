@@ -30,10 +30,10 @@ let nextId = 0;
 	},
 })
 export class CheckboxInputComponent implements FilterPillInputComponent {
-	framed = inject(INPUT_FRAMED_INSTANCE, { optional: true }) !== null;
-	parentInput = inject(FILTER_PILL_INPUT_COMPONENT, { optional: true, skipSelf: true });
-	formField = inject<FormFieldComponent>(FORM_FIELD_INSTANCE, { optional: true });
-	intl = getIntl(CHECKBOX_INPUT_TRANSLATIONS);
+	readonly framed = inject(INPUT_FRAMED_INSTANCE, { optional: true }) !== null;
+	readonly parentInput = inject(FILTER_PILL_INPUT_COMPONENT, { optional: true, skipSelf: true });
+	readonly formField = inject<FormFieldComponent>(FORM_FIELD_INSTANCE, { optional: true });
+	readonly intl = getIntl(CHECKBOX_INPUT_TRANSLATIONS);
 
 	readonly checklist = input(false, { transform: booleanAttribute });
 

@@ -39,7 +39,7 @@ import { LU_DATA_TABLE_CELL_INSTANCE } from '../data-table-cell.token';
 	changeDetection: ChangeDetectionStrategy.OnPush,
 })
 export class DataTableRowCellHeaderComponent extends BaseDataTableCell implements AfterContentInit {
-	elementRef = inject<ElementRef<HTMLTableCellElement>>(ElementRef);
+	readonly elementRef = inject<ElementRef<HTMLTableCellElement>>(ElementRef);
 
 	readonly sort = model<null | 'none' | 'ascending' | 'descending'>(null);
 	readonly fixedWidth = input<string | null>(null);
