@@ -35,5 +35,5 @@ export class IndexTableBodyComponent {
 
 	protected tableRef = inject(LU_INDEX_TABLE_INSTANCE);
 
-	colspan = computed(() => this.tableRef.cols()?.length ?? 0 + (this.tableRef.selectable() ? 1 : 0));
+	colspan = computed(() => (this.tableRef.cols()?.length ?? 0) + (this.tableRef.selectable() ? 1 : 0));
 }

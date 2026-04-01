@@ -326,12 +326,13 @@ export class DateRangeInputComponent extends AbstractDateComponent implements On
 	fixOrderIfNeeded(): void {
 		const range = this.selectedRange();
 		if (range && range.end && isAfter(range.start, range.end)) {
-			this.selectedRange.set({
+			const swappedRange = {
 				...range,
 				end: range.start,
 				start: range.end,
-			});
-			this.#onChange?.(range);
+			};
+			this.selectedRange.set(swappedRange);
+			this.#onChange?.(swappedRange);
 		}
 	}
 

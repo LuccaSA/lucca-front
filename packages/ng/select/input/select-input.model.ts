@@ -2,6 +2,7 @@ import { Overlay, OverlayConfig } from '@angular/cdk/overlay';
 import { ChangeDetectorRef, ElementRef, Renderer2, ViewContainerRef, ViewRef } from '@angular/core';
 import { ControlValueAccessor } from '@angular/forms';
 import { ILuClear } from '@lucca-front/ng/clear';
+import { isNil } from '@lucca-front/ng/core';
 import { ILuInput, ILuInputDisplayer } from '@lucca-front/ng/input';
 import { ILuInputWithPicker, ILuPickerPanel } from '@lucca-front/ng/picker';
 import { ALuPopoverTrigger, LuPopoverTarget } from '@lucca-front/ng/popover';
@@ -35,7 +36,7 @@ export abstract class ALuSelectInput<T, TPicker extends ILuPickerPanel<T> = ILuP
 	 */
 	protected _value: T | T[];
 	setValue(value: T | T[] | undefined) {
-		if (this.disabled || !value) {
+		if (this.disabled || isNil(value)) {
 			return;
 		}
 		this.value = value;
