@@ -9,6 +9,10 @@
 	@layer mods {
 		&.mod-L {
 			@include L;
+
+			&.mod-structure {
+				@include structure;
+			}
 		}
 
 		&.mod-media {

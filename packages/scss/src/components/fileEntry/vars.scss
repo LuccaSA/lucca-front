@@ -1,4 +1,5 @@
 @mixin vars {
+	--components-fileEntry-borderRadius: var(--pr-t-border-radius-default);
 	--components-fileEntry-gridColumn: 1 / -1;
 	--components-fileEntry-borderColor: var(--palettes-neutral-100);
 	--components-fileEntry-minHeight: auto;

@@ -19,8 +19,13 @@
 }
 
 @mixin dropzone {
-	position: fixed;
-	inset: var(--pr-t-spacings-200);
+	--components-fileUpload-position: fixed;
+	--components-fileUpload-flexDirection: column;
+	--components-fileUpload-alignItems: center;
+	--components-fileUpload-justifyContent: center;
+	--components-fileUpload-instruction-display: flex;
+	--components-fileUpload-instruction-alignItems: center;
+	--components-fileUpload-inset: var(--pr-t-spacings-200);
 }
 
 @mixin structure {

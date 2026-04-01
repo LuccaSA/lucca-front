@@ -1,4 +1,10 @@
-<div class="fileUpload" [class.is-droppable]="droppable" [class.mod-L]="size() === 'L'" [class.is-hidden]="!!entry()">
+<div
+	class="fileUpload"
+	[class.is-droppable]="droppable"
+	[class.mod-L]="size() === 'L'"
+	[class.is-hidden]="!!entry()"
+	[class.mod-structure]="structure()"
+>
 	<input
 		class="fileUpload-input"
 		type="file"
@@ -43,5 +49,6 @@
 		(deleteFile)="deleteFile.emit()"
 		[inlineMessageError]="inlineMessageError()"
 		[displayFileName]="displayFileName()"
+		[structure]="structure()"
 	/>
 }

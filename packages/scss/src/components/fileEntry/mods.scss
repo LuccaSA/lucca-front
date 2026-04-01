@@ -41,3 +41,7 @@
 	--components-divider-marginBlock: var(--pr-t-spacings-25);
 	--components-divider-marginInline: 0;
 }
+
+@mixin structure {
+	--components-fileEntry-borderRadius: var(--pr-t-border-radius-structure);
+}

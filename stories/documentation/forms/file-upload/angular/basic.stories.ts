@@ -137,14 +137,19 @@ export default {
 		},
 		displayFileName: {
 			description: "Affiche le nom des fichiers importés sous l'image en vue <code>media</code>.",
+			if: { arg: 'media', truthy: true },
 		},
 		structure: {
 			description: "Augmente le border-radius du champ pour l'utiliser en élément de structure.",
 		},
 		buttonFilled: {
 			description: 'Affiche le bouton comme action principale de la page.',
+			if: { arg: 'size', truthy: true },
 		},
 		accept: {
+			control: {
+				type: 'object',
+			},
 			description: 'Liste des formats de fichiers acceptés.',
 		},
 	},
@@ -161,7 +166,7 @@ export default {
 
 export const Multi = {
 	render: (args, { argTypes }) => {
-		const { media, size, displayFileName, ...mainArgs } = args;
+		const { media, size, displayFileName, accept, ...mainArgs } = args;
 		const service = new MockFileUploadService();
 		const uploads = signal([] as FileUpload<LuccaFileUploadResult>[]);
 		const fileUploadFeature = {
@@ -202,6 +207,7 @@ export const Multi = {
 
 		return {
 			props: {
+				accept,
 				fileUploadFeature,
 				deleteFile: (upload: FileUpload<LuccaFileUploadResult>) => {
 					uploads.set([...uploads().filter(({ file: f }) => f !== upload.file)]);
@@ -221,7 +227,7 @@ export const Multi = {
 				},
 			},
 			template: `<lu-form-field label="Label">
-		<lu-multi-file-upload${sizeLFileUploadParam}${generateInputs(mainArgs, argTypes)} (filePicked)="fileUploadFeature.uploadFiles([$event])" />
+		<lu-multi-file-upload${sizeLFileUploadParam}${generateInputs(mainArgs, argTypes)} [accept]="accept" (filePicked)="fileUploadFeature.uploadFiles([$event])" />
 	</lu-form-field>
 	<div class="fileEntryDisplayWrapper">
 		@for(fileUpload of fileUploadFeature.fileUploads(); track $index) {
@@ -238,6 +244,12 @@ export const Multi = {
 		illustration: 'paper',
 		structure: false,
 		buttonFilled: false,
+		accept: [
+			{
+				format: 'image/*',
+				name: 'tous les formats d’images',
+			},
+		],
 	},
 };
 

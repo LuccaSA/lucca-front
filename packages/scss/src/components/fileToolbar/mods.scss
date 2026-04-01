@@ -6,6 +6,10 @@
 
 	--components-button-borderRadius: 4px;
 	--components-button-padding: var(--pr-t-spacings-75);
+
+	&:has(.icon-trashDelete) {
+		@include button.critical;
+	}
 }
 
 @mixin disablePositioning {

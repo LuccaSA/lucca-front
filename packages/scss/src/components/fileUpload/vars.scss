@@ -1,4 +1,6 @@
 @mixin vars {
+	--components-fileUpload-inset: auto;
+	--components-fileUpload-position: relative;
 	--components-fileUpload-button-visibility: visible;
 	--components-fileUpload-borderRadius: var(--pr-t-border-radius-input);
 	--components-fileUpload-width: auto;

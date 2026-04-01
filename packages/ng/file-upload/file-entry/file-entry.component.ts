@@ -34,6 +34,8 @@ export class FileEntryComponent {
 
 	readonly displayFileName = input(false, { transform: booleanAttribute });
 
+	readonly structure = input(false, { transform: booleanAttribute });
+
 	readonly inlineMessageError = input<string | null>(null);
 
 	readonly entry = input.required<FileEntry>();
