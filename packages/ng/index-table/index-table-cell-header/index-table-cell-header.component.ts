@@ -40,7 +40,7 @@ const SORT_VALUES = ['none', 'ascending', 'descending'] as const;
 export class IndexTableRowCellHeaderComponent extends BaseIndexTableCell {
 	elementRef = inject<ElementRef<HTMLTableCellElement>>(ElementRef);
 
-	sort = model<null | 'none' | 'ascending' | 'descending'>(null);
+	readonly sort = model<null | 'none' | 'ascending' | 'descending'>(null);
 	readonly selectable = input(false, { transform: booleanAttribute });
 	readonly hiddenLabel = input(false, { transform: booleanAttribute });
 	readonly actions = input(false, { transform: booleanAttribute });

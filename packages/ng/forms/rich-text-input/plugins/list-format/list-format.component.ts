@@ -25,11 +25,11 @@ import { FORMAT_LIST, registerListsSelectionChange } from './list-format.command
 	],
 })
 export class ListFormatComponent implements OnDestroy, RichTextPluginComponent {
-	public format = input.required<ListType>();
-	public icon = input.required<LuccaIcon>();
-	public tooltip = input.required<string>();
+	public readonly format = input.required<ListType>();
+	public readonly icon = input.required<LuccaIcon>();
+	public readonly tooltip = input.required<string>();
 
-	public element = viewChild('element', { read: ElementRef<HTMLButtonElement> });
+	public readonly element = viewChild('element', { read: ElementRef<HTMLButtonElement> });
 
 	public readonly tabindex = signal<number>(-1);
 	public readonly active = signal(false);

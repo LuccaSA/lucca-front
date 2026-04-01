@@ -57,7 +57,7 @@ export class NumberFormatInputComponent implements AfterViewInit {
 
 	readonly valueAlignRight = input(false, { transform: booleanAttribute });
 
-	inputElementRef = viewChild<ElementRef<HTMLInputElement>>('inputElement');
+	readonly inputElementRef = viewChild<ElementRef<HTMLInputElement>>('inputElement');
 
 	readonly #suffixPrefixValue = signal(1);
 

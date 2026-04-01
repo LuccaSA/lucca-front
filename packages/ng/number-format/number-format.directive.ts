@@ -21,10 +21,10 @@ export class NumberFormatDirective implements ControlValueAccessor {
 	readonly #inputElement = inject<ElementRef<HTMLInputElement>>(ElementRef<HTMLInputElement>).nativeElement;
 	readonly #renderer = inject(Renderer2);
 
-	#value = signal<number | undefined | null>(null);
-	#isFocused = signal<boolean>(false);
+	readonly #value = signal<number | undefined | null>(null);
+	readonly #isFocused = signal<boolean>(false);
 
-	formatOptions = input.required<NumberFormatOptions>();
+	readonly formatOptions = input.required<NumberFormatOptions>();
 	readonly #numberFormat = computed(() => {
 		return new NumberFormat(this.formatOptions());
 	});

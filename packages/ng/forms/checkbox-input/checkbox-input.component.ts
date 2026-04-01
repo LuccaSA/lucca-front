@@ -42,7 +42,7 @@ export class CheckboxInputComponent implements FilterPillInputComponent {
 	 */
 	readonly mixed = input(false, { transform: booleanAttribute });
 
-	isFilterPill = signal<boolean>(false);
+	readonly isFilterPill = signal<boolean>(false);
 	filterPillInputId = `lu-checkbox-pill-input-${nextId++}`;
 
 	readonly filterPillLayout: Signal<FilterPillLayout> = signal('checkable');

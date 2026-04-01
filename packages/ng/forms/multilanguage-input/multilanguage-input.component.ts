@@ -44,7 +44,7 @@ export class MultilanguageInputComponent implements ControlValueAccessor {
 
 	#formFieldRef = inject(FORM_FIELD_INSTANCE);
 
-	formFieldSize = this.#formFieldRef.size;
+	readonly formFieldSize = this.#formFieldRef.size;
 
 	protected onTouched = () => {};
 
@@ -54,12 +54,12 @@ export class MultilanguageInputComponent implements ControlValueAccessor {
 
 	readonly openOnFocus = input(false, { transform: booleanAttribute });
 
-	autocomplete = input<AutoFill>('off');
+	readonly autocomplete = input<AutoFill>('off');
 
 	// Suffixed with Internal to avoid conflict with NgModel's disabled attribute
 	readonly disabledInternal = signal(false);
 
-	model: WritableSignal<MultilanguageTranslation[]> = signal([] as MultilanguageTranslation[]);
+	readonly model: WritableSignal<MultilanguageTranslation[]> = signal([] as MultilanguageTranslation[]);
 
 	readonly invariant = computed(() => {
 		return this.model().find((row) => row.cultureCode === INVARIANT_CULTURE_CODE) || { value: '' };

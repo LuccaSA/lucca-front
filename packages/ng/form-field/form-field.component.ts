@@ -88,7 +88,7 @@ export class FormFieldComponent implements OnDestroy, DoCheck {
 	 */
 	readonly hiddenLabel = input(false, { transform: booleanAttribute });
 
-	rolePresentationLabel = model(false);
+	readonly rolePresentationLabel = model(false);
 
 	readonly labelIsPresentation = computed(() => this.rolePresentationLabel() || this.presentation());
 
@@ -111,7 +111,7 @@ export class FormFieldComponent implements OnDestroy, DoCheck {
 	readonly #invalidStatus = signal(false);
 	invalidStatus = this.#invalidStatus.asReadonly();
 
-	invalid = input<boolean | null, boolean>(null, { transform: booleanAttribute });
+	readonly invalid = input<boolean | null, boolean>(null, { transform: booleanAttribute });
 
 	readonly inlineMessage = input<PortalContent | null>(null);
 
@@ -163,7 +163,7 @@ export class FormFieldComponent implements OnDestroy, DoCheck {
 		return this.#inputs;
 	}
 
-	id = signal<string>('');
+	readonly id = signal<string>('');
 
 	readonly ready$ = new BehaviorSubject<boolean>(false);
 

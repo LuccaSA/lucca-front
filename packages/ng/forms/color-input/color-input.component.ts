@@ -24,18 +24,18 @@ import { LU_COLOR_TRANSLATIONS } from './color.translate';
 export class ColorInputComponent {
 	readonly intl = input(...intlInputOptions(LU_COLOR_TRANSLATIONS));
 
-	mouseHighlighted = signal<string>('');
-	keyboardHighlighted = signal<string>('');
+	readonly mouseHighlighted = signal<string>('');
+	readonly keyboardHighlighted = signal<string>('');
 	readonly highlighted = computed(() => this.mouseHighlighted() || this.keyboardHighlighted());
 
-	clue = signal<string>('');
-	colors = input.required<ColorOption[]>();
+	readonly clue = signal<string>('');
+	readonly colors = input.required<ColorOption[]>();
 	readonly clearable = input(false, { transform: booleanAttribute });
 	readonly compact = input(false, { transform: booleanAttribute });
 
 	ngControl = injectNgControl();
 
-	currentColorPresentation: Signal<ColorOption | null>;
+	readonly currentColorPresentation: Signal<ColorOption | null>;
 
 	constructor() {
 		if (this.ngControl && this.ngControl.valueChanges) {

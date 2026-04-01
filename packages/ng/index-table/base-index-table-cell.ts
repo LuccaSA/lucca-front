@@ -18,7 +18,7 @@ export abstract class BaseIndexTableCell {
 	footRef = inject(LU_INDEX_TABLE_FOOT_INSTANCE, { optional: true });
 	rowRef = inject(LU_INDEX_TABLE_ROW_INSTANCE);
 
-	align = input<null | 'start' | 'center' | 'end'>(null);
+	readonly align = input<null | 'start' | 'center' | 'end'>(null);
 
 	readonly alignCol = computed(() => {
 		return this.tableRef.header()?.cols()[this.position()].align();

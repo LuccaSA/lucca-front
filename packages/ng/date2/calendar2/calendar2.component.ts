@@ -94,17 +94,17 @@ export class Calendar2Component implements OnInit {
 	readonly disableModeChange = input(false, { transform: booleanAttribute });
 
 	// Date used to init the component and as internal focus model
-	date = model.required<Date>();
+	readonly date = model.required<Date>();
 
-	tabbableDate = model<Date | null>(null);
+	readonly tabbableDate = model<Date | null>(null);
 
-	mode = model<CalendarMode>('day');
+	readonly mode = model<CalendarMode>('day');
 
-	displayMode = model<CalendarMode | null>(null);
+	readonly displayMode = model<CalendarMode | null>(null);
 
-	ranges = input<readonly DateRange[]>([]);
+	readonly ranges = input<readonly DateRange[]>([]);
 
-	getCellInfo = input<(date: Date, displayMode: CalendarMode | null) => CellStatus>((_date: Date) => ({
+	readonly getCellInfo = input<(date: Date, displayMode: CalendarMode | null) => CellStatus>((_date: Date) => ({
 		classes: [],
 		disabled: false,
 	}));
@@ -125,7 +125,7 @@ export class Calendar2Component implements OnInit {
 
 	dateClicked = output<Date>();
 
-	dateHovered = model<Date | null>(null);
+	readonly dateHovered = model<Date | null>(null);
 
 	todayLabel = this.#intlRelativeDay.format(0, 'day');
 	thisMonthLabel = this.#intlRelativeDay.format(0, 'month');

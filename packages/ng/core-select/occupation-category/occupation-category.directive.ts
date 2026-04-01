@@ -25,11 +25,11 @@ export class LuCoreSelectOccupationCategoriesDirective<T extends LuCoreSelectOcc
 {
 	protected httpClient = inject(HttpClient);
 
-	url = input<string>('/organization/structure/api/occupation-categories');
-	filters = input<Record<string, string | number | boolean> | null>(null);
-	searchDelimiter = input<string>(' ');
+	readonly url = input<string>('/organization/structure/api/occupation-categories');
+	readonly filters = input<Record<string, string | number | boolean> | null>(null);
+	readonly searchDelimiter = input<string>(' ');
 
-	protected clue = toSignal(this.clue$);
+	protected readonly clue = toSignal(this.clue$);
 
 	protected override getOptions(params: Record<string, string | number | boolean> | null, page: number): Observable<T[]> {
 		return this.httpClient

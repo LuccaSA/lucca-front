@@ -78,7 +78,7 @@ export class LuMultiSelectInputComponent<T> extends ALuSelectInputComponent<T, T
 
 	showColon: false;
 
-	valuesTpl = model<TemplateRef<LuOptionContext<T[]>> | Type<unknown>>(LuMultiSelectDefaultDisplayerComponent);
+	readonly valuesTpl = model<TemplateRef<LuOptionContext<T[]>> | Type<unknown>>(LuMultiSelectDefaultDisplayerComponent);
 
 	@Input({ transform: numberAttribute })
 	maxValuesShown = 500;
@@ -101,12 +101,15 @@ export class LuMultiSelectInputComponent<T> extends ALuSelectInputComponent<T, T
 
 	readonly filterPillPanelAnchorRef = viewChild('filterPillPanelAnchor', { read: ViewContainerRef });
 
+	// eslint-disable-next-line @angular-eslint/prefer-signals
 	override isFilterPillEmpty = computed(() => {
 		const valueSignal = this.valueSignal();
 		return !valueSignal || valueSignal.length === 0;
 	});
 
+	// eslint-disable-next-line @angular-eslint/prefer-signals
 	public valueLength = computed(() => this.valueSignal()?.length ?? 0);
+	// eslint-disable-next-line @angular-eslint/prefer-signals
 	public useSingleOptionDisplayer: Signal<boolean> = signal(true);
 	override _value: T[] = [];
 

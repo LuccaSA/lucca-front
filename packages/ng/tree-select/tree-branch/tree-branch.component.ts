@@ -13,17 +13,17 @@ import { ALuSelectInputComponent, LuIsOptionSelectedPipe, LuOptionComparer, LuOp
 export class TreeBranchComponent<T> {
 	selectInputComponent = inject(ALuSelectInputComponent);
 
-	rootOptionRef = viewChild<ɵCoreSelectPanelElement<T>>('rootOption');
+	readonly rootOptionRef = viewChild<ɵCoreSelectPanelElement<T>>('rootOption');
 
-	branch = input.required<TreeNode<T>>();
+	readonly branch = input.required<TreeNode<T>>();
 
-	optionTpl = input.required<TemplateRef<LuOptionContext<T>> | Type<unknown> | undefined>();
+	readonly optionTpl = input.required<TemplateRef<LuOptionContext<T>> | Type<unknown> | undefined>();
 
-	optionIndex = input.required({ transform: (value: string | number) => `${value}` });
+	readonly optionIndex = input.required({ transform: (value: string | number) => `${value}` });
 
-	optionComparer = input.required<LuOptionComparer<T>>();
+	readonly optionComparer = input.required<LuOptionComparer<T>>();
 
-	selectedOptions = input<T[]>([]);
+	readonly selectedOptions = input<T[]>([]);
 
 	toggleOne = output<T>();
 

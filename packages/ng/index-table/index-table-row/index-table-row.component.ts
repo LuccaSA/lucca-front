@@ -42,8 +42,8 @@ export class IndexTableRowComponent {
 
 	protected tableRef = inject(LU_INDEX_TABLE_INSTANCE);
 
-	selected = model<boolean>(false);
-	selectedLabel = input<string | null>(null);
+	readonly selected = model<boolean>(false);
+	readonly selectedLabel = input<string | null>(null);
 	readonly disabled = input(false, { transform: booleanAttribute });
 	readonly stack = input(1, { transform: numberAttribute });
 }

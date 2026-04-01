@@ -66,7 +66,7 @@ export class FilterPillComponent {
 
 	// The harder way, because child has to register itself to the host, might become the default approach if this is required too much
 	// (like when child isn't created when component inits or it's too deep)
-	registeredInputComponentRef = signal<FilterPillInputComponent | null>(null);
+	readonly registeredInputComponentRef = signal<FilterPillInputComponent | null>(null);
 
 	readonly inputComponentRef = computed(() => this.registeredInputComponentRef() || this.childInputComponentRef());
 
@@ -78,9 +78,9 @@ export class FilterPillComponent {
 
 	readonly defaultLabelTpl = viewChild<TemplateRef<unknown>>('defaultLabel');
 
-	customLabelTpl = signal<TemplateRef<unknown> | null>(null);
+	readonly customLabelTpl = signal<TemplateRef<unknown> | null>(null);
 
-	name = input<string>();
+	readonly name = input<string>();
 
 	readonly optional = input(false, { transform: booleanAttribute });
 
@@ -91,9 +91,9 @@ export class FilterPillComponent {
 		return this.isHidden();
 	}
 
-	displayed = model(false);
+	readonly displayed = model(false);
 
-	protected isHidden = computed(() => this.optional() && !this.displayed());
+	protected readonly isHidden = computed(() => this.optional() && !this.displayed());
 
 	popoverPositions: ConnectionPositionPair[] = [
 		new ConnectionPositionPair(
@@ -116,12 +116,12 @@ export class FilterPillComponent {
 		),
 	];
 
-	label = input.required<string>();
+	readonly label = input.required<string>();
 
 	readonly placeholder = computed(() => this.placeholderOverride() ?? this.intl().placeholder);
-	placeholderOverride = input<string | null>(null, { alias: 'placeholder' });
+	readonly placeholderOverride = input<string | null>(null, { alias: 'placeholder' });
 
-	icon = input<LuccaIcon>();
+	readonly icon = input<LuccaIcon>();
 
 	readonly defaultIcon = computed<LuccaIcon>(() => this.inputComponentRef()?.getDefaultFilterPillIcon?.() ?? 'arrowChevronBottom');
 

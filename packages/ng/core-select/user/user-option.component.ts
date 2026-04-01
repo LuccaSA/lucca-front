@@ -50,5 +50,5 @@ export class LuUserOptionComponent {
 		startWith(this.userDirective.select.clue),
 		map((clue) => !clue),
 	);
-	protected customUserOptionTpl = this.userDirective.customUserOptionTpl;
+	protected readonly customUserOptionTpl = this.userDirective.customUserOptionTpl;
 }

@@ -107,7 +107,7 @@ export class PhoneNumberInputComponent implements ControlValueAccessor, Validato
 
 	readonly query = signal('');
 
-	protected prefixesDisplay = computed(() => {
+	protected readonly prefixesDisplay = computed(() => {
 		const query = this.query();
 		if (query === '') {
 			return this.#prefixEntries();
@@ -117,7 +117,7 @@ export class PhoneNumberInputComponent implements ControlValueAccessor, Validato
 		});
 	});
 
-	countryCodeSelected = signal<CountryCode | undefined>(undefined);
+	readonly countryCodeSelected = signal<CountryCode | undefined>(undefined);
 
 	readonly countryCode = computed(() => this.countryCodeSelected() ?? this.defaultCountryCode());
 
@@ -127,7 +127,7 @@ export class PhoneNumberInputComponent implements ControlValueAccessor, Validato
 		return exampleNumber?.formatNational() ?? '';
 	});
 
-	displayedNumber = signal<string | undefined>(undefined);
+	readonly displayedNumber = signal<string | undefined>(undefined);
 
 	readonly prefixEntry = computed(() => this.#prefixEntries().find((p) => p.country === this.countryCode()));
 

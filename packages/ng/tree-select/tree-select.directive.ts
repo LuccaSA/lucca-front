@@ -8,9 +8,9 @@ import { ALuSelectInputComponent, TreeGenerator, TreeGroupingFn, TreeNode } from
 export class TreeSelectDirective<T, V> implements TreeGenerator<T, TreeNode<T>> {
 	#select = inject<ALuSelectInputComponent<T, V>>(ALuSelectInputComponent);
 
-	groupingFnInput = input.required<TreeGroupingFn<T>>({ alias: 'treeSelect' });
+	readonly groupingFnInput = input.required<TreeGroupingFn<T>>({ alias: 'treeSelect' });
 
-	groupingFn = linkedSignal(() => this.groupingFnInput());
+	readonly groupingFn = linkedSignal(() => this.groupingFnInput());
 
 	constructor() {
 		this.#select.treeGenerator = this;

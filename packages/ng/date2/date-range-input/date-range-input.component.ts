@@ -91,14 +91,14 @@ export class DateRangeInputComponent extends AbstractDateComponent implements On
 
 	#breakpointObserver = inject(BreakpointObserver);
 
-	hasTwoCalendars = toSignal(this.#breakpointObserver.observe('(min-width: 40em)').pipe(map((state) => state.matches)));
+	readonly hasTwoCalendars = toSignal(this.#breakpointObserver.observe('(min-width: 40em)').pipe(map((state) => state.matches)));
 
 	idSuffix = nextId++;
 
-	startTextInputRef = viewChild<ElementRef<HTMLInputElement>>('start');
+	readonly startTextInputRef = viewChild<ElementRef<HTMLInputElement>>('start');
 	readonly startUserTextInput = signal('ɵ');
 
-	endTextInputRef = viewChild<ElementRef<HTMLInputElement>>('end');
+	readonly endTextInputRef = viewChild<ElementRef<HTMLInputElement>>('end');
 	readonly endUserTextInput = signal('ɵ');
 
 	// CVA stuff
@@ -109,7 +109,7 @@ export class DateRangeInputComponent extends AbstractDateComponent implements On
 
 	readonly dateHovered = signal<Date | null>(null);
 
-	placeholder = input<string>();
+	readonly placeholder = input<string>();
 
 	readonly widthAuto = input(false, { transform: booleanAttribute });
 
@@ -134,15 +134,15 @@ export class DateRangeInputComponent extends AbstractDateComponent implements On
 
 	readonly highlightedField = signal<-1 | 0 | 1>(-1);
 
-	shortcuts = input<readonly CalendarShortcut[]>();
+	readonly shortcuts = input<readonly CalendarShortcut[]>();
 
-	autocomplete = input<AutoFill>('off');
+	readonly autocomplete = input<AutoFill>('off');
 
-	protected currentRightDate = computed(() => {
+	protected readonly currentRightDate = computed(() => {
 		return this.hasTwoCalendars() ? this.getNextCalendarDate(this.currentDate()) : this.currentDate();
 	});
 
-	protected currentStartDisplayDate = computed(() => {
+	protected readonly currentStartDisplayDate = computed(() => {
 		switch (this.mode()) {
 			case 'day':
 				return startOfMonth(this.currentDate());
@@ -153,7 +153,7 @@ export class DateRangeInputComponent extends AbstractDateComponent implements On
 		}
 	});
 
-	protected currentEndDisplayDate = computed(() => {
+	protected readonly currentEndDisplayDate = computed(() => {
 		switch (this.mode()) {
 			case 'day':
 				return endOfMonth(this.currentRightDate());
@@ -207,9 +207,9 @@ export class DateRangeInputComponent extends AbstractDateComponent implements On
 		return '';
 	});
 
-	previousButton = viewChild<ElementRef<Element>>('previousButtonRef');
+	readonly previousButton = viewChild<ElementRef<Element>>('previousButtonRef');
 
-	nextButton = viewChild<ElementRef<Element>>('nextButtonRef');
+	readonly nextButton = viewChild<ElementRef<Element>>('nextButtonRef');
 
 	// Which calendar is currently being focused in, used for tabbable date logic
 	readonly focusedCalendarIndex = signal(0);
@@ -227,7 +227,7 @@ export class DateRangeInputComponent extends AbstractDateComponent implements On
 	readonly isFilterPillEmpty = computed(() => this.selectedRange() === null);
 	readonly isFilterPillClearable = computed(() => this.clearable() ?? this.#defaultFilterPillClearable() ?? this.#defaultClearable);
 	#defaultClearable = false;
-	#defaultFilterPillClearable = signal<boolean | null>(null);
+	readonly #defaultFilterPillClearable = signal<boolean | null>(null);
 
 	filterPillPopoverCloseFn?: () => void;
 

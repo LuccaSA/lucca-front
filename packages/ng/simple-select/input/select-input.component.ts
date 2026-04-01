@@ -58,7 +58,7 @@ export class LuSimpleSelectInputComponent<T> extends ALuSelectInputComponent<T, 
 		return this.filterPillMode;
 	}
 
-	autocomplete = input<AutoFill>('off');
+	readonly autocomplete = input<AutoFill>('off');
 
 	readonly filterPillPanelAnchorRef = viewChild('filterPillPanelAnchor', { read: ViewContainerRef });
 

@@ -77,9 +77,9 @@ export class DateInputComponent extends AbstractDateComponent implements OnInit,
 
 	#luClass = inject(LuClass);
 
-	autocomplete = input<AutoFill>('off');
+	readonly autocomplete = input<AutoFill>('off');
 
-	placeholder = input<string>();
+	readonly placeholder = input<string>();
 
 	readonly disableOverflow = input(false, { transform: booleanAttribute });
 	readonly hideOverflow = input(false, { transform: booleanAttribute });
@@ -143,7 +143,7 @@ export class DateInputComponent extends AbstractDateComponent implements OnInit,
 	});
 
 	// We need to use a "magic key" here to avoid sending a null value change on initialization
-	userTextInput = signal<string>('ɵ');
+	readonly userTextInput = signal<string>('ɵ');
 
 	combinedGetCellInfo = (date: Date, mode: CalendarMode): CellStatus => {
 		const infoFromInput = this.getCellInfo()?.(date, mode);
@@ -156,9 +156,9 @@ export class DateInputComponent extends AbstractDateComponent implements OnInit,
 		};
 	};
 
-	previousButton = viewChild<ElementRef<Element>>('previousButtonRef');
+	readonly previousButton = viewChild<ElementRef<Element>>('previousButtonRef');
 
-	nextButton = viewChild<ElementRef<Element>>('nextButtonRef');
+	readonly nextButton = viewChild<ElementRef<Element>>('nextButtonRef');
 
 	@HostBinding('class.mod-filterPill')
 	isFilterPill = false;
@@ -171,7 +171,7 @@ export class DateInputComponent extends AbstractDateComponent implements OnInit,
 	readonly isFilterPillEmpty = computed(() => !this.selectedDate());
 	readonly isFilterPillClearable = computed(() => this.clearable() ?? this.#defaultFilterPillClearable() ?? this.#defaultClearable);
 	#defaultClearable = false;
-	#defaultFilterPillClearable = signal<boolean | null>(null);
+	readonly #defaultFilterPillClearable = signal<boolean | null>(null);
 
 	filterPillPopoverCloseFn?: () => void;
 

@@ -58,20 +58,20 @@ export class LuCoreSelectUsersDirective<T extends LuCoreSelectUser = LuCoreSelec
 	protected httpClient = inject(HttpClient);
 	public currentUserId = inject(LU_CORE_SELECT_CURRENT_USER_ID);
 
-	displayFormat = input<LuDisplayFormat>(LuDisplayFullname.lastfirst);
+	readonly displayFormat = input<LuDisplayFormat>(LuDisplayFullname.lastfirst);
 
-	filters = input<Record<string, string | number | boolean>>({});
-	url = input<string | null>(null);
-	orderBy = input<string | null>(null);
-	operationIds = input<readonly number[] | null>(null);
-	uniqueOperationIds = input<readonly number[] | null>(null);
-	appInstanceId = input<number | null>(null);
+	readonly filters = input<Record<string, string | number | boolean>>({});
+	readonly url = input<string | null>(null);
+	readonly orderBy = input<string | null>(null);
+	readonly operationIds = input<readonly number[] | null>(null);
+	readonly uniqueOperationIds = input<readonly number[] | null>(null);
+	readonly appInstanceId = input<number | null>(null);
 	readonly enableFormerEmployees = input(false, { transform: booleanAttribute });
 	readonly displayMeOption = input(true);
-	customUserOptionTpl = model<TemplateRef<LuOptionContext<T>> | Type<unknown> | undefined>();
+	readonly customUserOptionTpl = model<TemplateRef<LuOptionContext<T>> | Type<unknown> | undefined>();
 
 	readonly includeFormerEmployees = signal(false);
-	searchDelimiter = input<string>(' ');
+	readonly searchDelimiter = input<string>(' ');
 
 	constructor() {
 		super();
@@ -88,10 +88,10 @@ export class LuCoreSelectUsersDirective<T extends LuCoreSelectUser = LuCoreSelec
 		});
 	}
 
-	protected defaultUrl = computed(() => (this.uniqueOperationIds()?.length || (this.appInstanceId() && this.operationIds()?.length) ? this.#defaultScopedSearchUrl : this.#defaultSearchUrl));
-	protected urlOrDefault = computed(() => this.url() ?? this.defaultUrl());
+	protected readonly defaultUrl = computed(() => (this.uniqueOperationIds()?.length || (this.appInstanceId() && this.operationIds()?.length) ? this.#defaultScopedSearchUrl : this.#defaultSearchUrl));
+	protected readonly urlOrDefault = computed(() => this.url() ?? this.defaultUrl());
 
-	protected clue = toSignal(this.clue$);
+	protected readonly clue = toSignal(this.clue$);
 
 	protected override params$: Observable<Record<string, string | number | boolean>> = toObservable(
 		computed(() => {

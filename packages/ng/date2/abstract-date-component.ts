@@ -19,7 +19,7 @@ export abstract class AbstractDateComponent {
 	// Contains the current date format (like dd/mm/yy etc) based on current locale
 	protected dateFormat = getDateFormat(this.locale);
 	protected separator = getSeparator(this.locale);
-	protected dateFormatWithMode = computed(() => getDateFormat(this.locale, this.mode()));
+	protected readonly dateFormatWithMode = computed(() => getDateFormat(this.locale, this.mode()));
 	intlDateTimeFormat = new Intl.DateTimeFormat(this.locale);
 
 	intlDateTimeFormatMonth = new Intl.DateTimeFormat(this.locale, { month: 'numeric', year: 'numeric' });
@@ -28,10 +28,10 @@ export abstract class AbstractDateComponent {
 	readonly intl = input(...intlInputOptions(LU_DATE2_TRANSLATIONS));
 
 	onTouched?: () => void;
-	disabled = signal<boolean>(false);
+	readonly disabled = signal<boolean>(false);
 
 	readonly format = input<DateFormat>(DATE_FORMAT.DATE);
-	protected inDateISOFormat = computed(() => this.format() === DATE_FORMAT.DATE_ISO);
+	protected readonly inDateISOFormat = computed(() => this.format() === DATE_FORMAT.DATE_ISO);
 
 	readonly ranges = input([], { transform: (v: readonly DateRange[] | readonly DateRangeInput[]) => v.map(transformDateRangeInputToDateRange) });
 	readonly hideToday = input(false, { transform: booleanAttribute });
@@ -54,7 +54,7 @@ export abstract class AbstractDateComponent {
 		transform: transformDateInputToDate,
 	});
 
-	calendarMode = model<CalendarMode | null>(null);
+	readonly calendarMode = model<CalendarMode | null>(null);
 
 	readonly panelOpened = output<void>();
 

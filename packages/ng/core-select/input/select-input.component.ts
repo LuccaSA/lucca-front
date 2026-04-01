@@ -73,7 +73,7 @@ export abstract class ALuSelectInputComponent<TOption, TValue> implements OnDest
 	readonly placeholder$ = new BehaviorSubject('');
 
 	readonly disabled$ = new BehaviorSubject(false);
-	filterPillDisabled = toSignal(this.disabled$, { initialValue: false });
+	readonly filterPillDisabled = toSignal(this.disabled$, { initialValue: false });
 
 	readonly prefix = input<PortalContent | null>(null);
 
@@ -100,7 +100,7 @@ export abstract class ALuSelectInputComponent<TOption, TValue> implements OnDest
 	}
 
 	readonly #addOptionLabelInput = signal<PortalContent | null>(null);
-	protected computedAddOptionLabel = computed(() => this.#addOptionLabelInput() ?? this.intl().addOption);
+	protected readonly computedAddOptionLabel = computed(() => this.#addOptionLabelInput() ?? this.intl().addOption);
 
 	@Input()
 	set addOptionLabel(label: PortalContent) {
@@ -170,7 +170,7 @@ export abstract class ALuSelectInputComponent<TOption, TValue> implements OnDest
 	@Input() optionKey: (option: TOption) => unknown = coreSelectDefaultOptionKey;
 
 	readonly noClueIcon = input(false, { transform: booleanAttribute });
-	inputTabindex = input<number>(0);
+	readonly inputTabindex = input<number>(0);
 
 	readonly compact = input(false, { transform: booleanAttribute });
 
@@ -181,10 +181,10 @@ export abstract class ALuSelectInputComponent<TOption, TValue> implements OnDest
 		return this.noClueIcon();
 	}
 
-	optionTpl = model<TemplateRef<LuOptionContext<TOption>> | Type<unknown>>(LuSimpleSelectDefaultOptionComponent);
-	valueTpl = model<TemplateRef<LuOptionContext<TOption>> | Type<unknown> | undefined>();
-	panelHeaderTpl = model<TemplateRef<void> | Type<unknown> | undefined>();
-	panelFooterTpl = model<TemplateRef<void> | Type<unknown> | undefined>();
+	readonly optionTpl = model<TemplateRef<LuOptionContext<TOption>> | Type<unknown>>(LuSimpleSelectDefaultOptionComponent);
+	readonly valueTpl = model<TemplateRef<LuOptionContext<TOption>> | Type<unknown> | undefined>();
+	readonly panelHeaderTpl = model<TemplateRef<void> | Type<unknown> | undefined>();
+	readonly panelFooterTpl = model<TemplateRef<void> | Type<unknown> | undefined>();
 
 	readonly displayerTpl = computed(() => this.valueTpl() || this.optionTpl());
 

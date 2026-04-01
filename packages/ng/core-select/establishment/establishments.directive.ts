@@ -29,14 +29,14 @@ export class LuCoreSelectEstablishmentsDirective<T extends LuCoreSelectEstablish
 
 	protected httpClient = inject(HttpClient);
 
-	url = input<string>('/organization/structure/api/establishments');
-	filters = input<Record<string, string | number | boolean> | null>(null);
-	operationIds = input<readonly number[] | null>(null);
-	uniqueOperationIds = input<readonly number[] | null>(null);
-	appInstanceId = input<number | null>(null);
-	searchDelimiter = input<string>(' ');
+	readonly url = input<string>('/organization/structure/api/establishments');
+	readonly filters = input<Record<string, string | number | boolean> | null>(null);
+	readonly operationIds = input<readonly number[] | null>(null);
+	readonly uniqueOperationIds = input<readonly number[] | null>(null);
+	readonly appInstanceId = input<number | null>(null);
+	readonly searchDelimiter = input<string>(' ');
 
-	protected clue = toSignal(this.clue$);
+	protected readonly clue = toSignal(this.clue$);
 
 	public override ngOnInit(): void {
 		super.ngOnInit();
