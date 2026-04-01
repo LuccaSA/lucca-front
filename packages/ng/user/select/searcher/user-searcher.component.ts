@@ -1,7 +1,7 @@
 import { AsyncPipe } from '@angular/common';
 import { ChangeDetectionStrategy, Component, ElementRef, forwardRef, HostBinding, Inject, input, Input, OnDestroy, OnInit, Optional, Output, Self, SkipSelf, ViewChild } from '@angular/core';
 import { FormControl, FormGroup, ReactiveFormsModule } from '@angular/forms';
-import { ALuOnCloseSubscriber, ALuOnOpenSubscriber, ALuOnScrollBottomSubscriber, intlInputOptions, ILuOnCloseSubscriber, ILuOnOpenSubscriber, ILuOnScrollBottomSubscriber } from '@lucca-front/ng/core';
+import { ALuOnCloseSubscriber, ALuOnOpenSubscriber, ALuOnScrollBottomSubscriber, ILuOnCloseSubscriber, ILuOnOpenSubscriber, ILuOnScrollBottomSubscriber, intlInputOptions } from '@lucca-front/ng/core';
 import { ALuOptionOperator, LuOptionPlaceholderComponent } from '@lucca-front/ng/option';
 import { BehaviorSubject, combineLatest, merge, Observable, of, Subject, Subscription } from 'rxjs';
 import { catchError, debounceTime, filter, map, scan, share, startWith, switchMap } from 'rxjs/operators';
@@ -76,7 +76,7 @@ export class LuUserPagedSearcherComponent<U extends ILuUser = ILuUser> implement
 
 	form: FormGroup;
 	// page$: Subject<number>;
-	outOptions$ = new Subject<U[]>();
+	readonly outOptions$ = new Subject<U[]>();
 	loading$: Observable<boolean>;
 	empty$: Observable<boolean>;
 	private _loading = false;

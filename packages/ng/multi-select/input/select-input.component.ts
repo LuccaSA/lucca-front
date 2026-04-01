@@ -89,8 +89,8 @@ export class LuMultiSelectInputComponent<T> extends ALuSelectInputComponent<T, T
 	@Input()
 	filterPillLabelPlural: string;
 
-	override selectParent$ = new Subject<void>();
-	override selectChildren$ = new Subject<void>();
+	override readonly selectParent$ = new Subject<void>();
+	override readonly selectChildren$ = new Subject<void>();
 
 	@HostBinding('class.mod-filterPill')
 	public get filterPillClass() {

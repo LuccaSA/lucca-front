@@ -70,9 +70,9 @@ export abstract class ALuSelectInputComponent<TOption, TValue> implements OnDest
 	@ViewChild('inputElement')
 	private inputElementRef: ElementRef<HTMLInputElement>;
 
-	public placeholder$ = new BehaviorSubject('');
+	readonly placeholder$ = new BehaviorSubject('');
 
-	public disabled$ = new BehaviorSubject(false);
+	readonly disabled$ = new BehaviorSubject(false);
 	filterPillDisabled = toSignal(this.disabled$, { initialValue: false });
 
 	prefix = input<PortalContent | null>(null);
@@ -132,9 +132,9 @@ export abstract class ALuSelectInputComponent<TOption, TValue> implements OnDest
 		return this.isPanelOpen$.value;
 	}
 
-	public isPanelOpen$ = new BehaviorSubject(false);
+	readonly isPanelOpen$ = new BehaviorSubject(false);
 
-	public activeDescendant$ = new BehaviorSubject('');
+	readonly activeDescendant$ = new BehaviorSubject('');
 
 	get ariaControls(): string {
 		return this.overlayContainerRef.id;
@@ -205,9 +205,9 @@ export abstract class ALuSelectInputComponent<TOption, TValue> implements OnDest
 
 	treeGenerator?: TreeGenerator<TOption, TreeNode<TOption>>;
 
-	clueChange$ = new Subject<string>();
+	readonly clueChange$ = new Subject<string>();
 	clueChange = outputFromObservable(this.clueChange$);
-	nextPage$ = new Subject<void>();
+	readonly nextPage$ = new Subject<void>();
 	nextPage = outputFromObservable(this.nextPage$);
 	previousPage = output<void>();
 	addOption = output<string>();
@@ -244,14 +244,14 @@ export abstract class ALuSelectInputComponent<TOption, TValue> implements OnDest
 
 	protected _value: TValue | null = null;
 
-	options$ = new ReplaySubject<readonly TOption[]>(1);
-	loading$ = new BehaviorSubject(false);
+	readonly options$ = new ReplaySubject<readonly TOption[]>(1);
+	readonly loading$ = new BehaviorSubject(false);
 	clue: string | null = null;
 	// This is the clue stored after we selected an option to know if we should emit an empty clue on open or not
 	lastEmittedClue: string = '';
 	clue$ = defer(() => this.clueChange$.pipe(startWith(this.clue)));
 
-	addOptionStrategy$ = new BehaviorSubject<CoreSelectAddOptionStrategy>('never');
+	readonly addOptionStrategy$ = new BehaviorSubject<CoreSelectAddOptionStrategy>('never');
 	shouldDisplayAddOption$ = this.addOptionStrategy$.pipe(
 		switchMap((strategy) => {
 			switch (strategy) {
@@ -276,7 +276,7 @@ export abstract class ALuSelectInputComponent<TOption, TValue> implements OnDest
 
 	protected _panelRef?: LuSelectPanelRef<TOption, TValue>;
 
-	protected destroyed$ = new Subject<void>();
+	protected readonly destroyed$ = new Subject<void>();
 
 	constructor() {
 		if (this.filterPillHost) {

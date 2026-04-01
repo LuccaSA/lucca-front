@@ -29,7 +29,7 @@ import { LU_OPTION_SELECT_ALL_TRANSLATIONS } from './select-all.translate';
 })
 export class LuOptionSelectAllComponent<T> extends ALuOptionOperator<T> implements ILuOptionSelector<T> {
 	multiple = true;
-	onSelectValue = new Subject<T | T[]>();
+	readonly onSelectValue = new Subject<T | T[]>();
 	private _values: T[];
 
 	@HostBinding('class.position-fixed') fixed = true;

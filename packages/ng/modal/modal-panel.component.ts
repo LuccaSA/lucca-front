@@ -17,7 +17,7 @@ export abstract class ALuModalPanelComponent<T extends ILuModalContent> implemen
 	@ViewChild('container', { read: ViewContainerRef, static: true })
 	protected _containerRef: ViewContainerRef;
 	protected _componentInstance: ILuModalContent;
-	protected doCheck$ = new ReplaySubject<void>(1);
+	protected readonly doCheck$ = new ReplaySubject<void>(1);
 
 	public intl = getIntl(LU_MODAL_TRANSLATIONS);
 	protected title$ = this.listenComponentValue(() => this._componentInstance.title);
@@ -36,8 +36,8 @@ export abstract class ALuModalPanelComponent<T extends ILuModalContent> implemen
 		return this._componentInstance.submitPalette || 'product';
 	}
 
-	submitClass$ = new Subject();
-	error$ = new Subject();
+	readonly submitClass$ = new Subject();
+	readonly error$ = new Subject();
 
 	public readonly modalId = modalId++;
 

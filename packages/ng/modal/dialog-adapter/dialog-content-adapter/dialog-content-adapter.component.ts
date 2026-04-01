@@ -41,9 +41,9 @@ export class DialogContentAdapterComponent<D, C extends ILuModalContent> impleme
 	ref = injectDialogRef<LuModalContentResult<C> | undefined>();
 
 	submitClass = signal('');
-	error$ = new Subject();
+	readonly error$ = new Subject();
 
-	protected doCheck$ = new ReplaySubject<void>(1);
+	protected readonly doCheck$ = new ReplaySubject<void>(1);
 
 	public intl = getIntl(LU_MODAL_TRANSLATIONS);
 	protected title$ = this.observeValue(() => this.#contentComponentInstance.title);

@@ -63,7 +63,7 @@ export abstract class ALuPopoverTrigger<TPanel extends ILuPopoverPanel = ILuPopo
 
 	protected _mouseoverTimer: unknown;
 
-	protected _hovered$ = new Subject();
+	protected readonly _hovered$ = new Subject();
 	protected _hoveredSubscription: Subscription;
 	protected _panelEventsSubscriptions: Subscription;
 	protected _overlayDetachmentsSubscription: Subscription;

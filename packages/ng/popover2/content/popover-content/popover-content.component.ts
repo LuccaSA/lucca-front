@@ -33,18 +33,18 @@ export class PopoverContentComponent implements AfterViewInit, OnDestroy {
 
 	#focusManager = new PopoverFocusTrap(this.#elementRef.nativeElement, this.config.triggerElement);
 
-	closed$ = new Subject<void>();
+	readonly closed$ = new Subject<void>();
 
 	contentChangedDebounceTime = 100;
 
-	mouseEnter$ = new Subject<void>();
+	readonly mouseEnter$ = new Subject<void>();
 
 	@HostListener('mouseenter')
 	mouseEnter(): void {
 		this.mouseEnter$.next();
 	}
 
-	mouseLeave$ = new Subject<void>();
+	readonly mouseLeave$ = new Subject<void>();
 
 	@HostListener('mouseleave')
 	mouseLeave(): void {
