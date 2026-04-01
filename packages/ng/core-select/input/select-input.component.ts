@@ -68,7 +68,7 @@ export abstract class ALuSelectInputComponent<TOption, TValue> implements OnDest
 	public readonly highlightedOption = output<TOption>();
 
 	@ViewChild('inputElement')
-	private inputElementRef: ElementRef<HTMLInputElement>;
+	private readonly inputElementRef: ElementRef<HTMLInputElement>;
 
 	readonly placeholder$ = new BehaviorSubject('');
 

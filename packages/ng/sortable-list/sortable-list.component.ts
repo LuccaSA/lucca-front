@@ -15,5 +15,5 @@ export class SortableListComponent {
 	 */
 	readonly small = input(false, { transform: booleanAttribute });
 
-	sortableListItems = contentChildren(SortableListItemComponent, { descendants: true });
+	readonly sortableListItems = contentChildren(SortableListItemComponent, { descendants: true });
 }

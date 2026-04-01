@@ -164,7 +164,7 @@ export class DateRangeInputComponent extends AbstractDateComponent implements On
 		}
 	});
 
-	calendars = viewChildren(Calendar2Component);
+	readonly calendars = viewChildren(Calendar2Component);
 
 	combinedGetCellInfo = (date: Date, mode: CalendarMode): CellStatus => {
 		const infoFromInput = this.getCellInfo()?.(date, mode);

@@ -23,7 +23,7 @@ import { LU_INDEX_TABLE_HEAD_INSTANCE } from './index-table-head.token';
 	changeDetection: ChangeDetectionStrategy.OnPush,
 })
 export class IndexTableHeadComponent {
-	cols = contentChildren(IndexTableRowCellHeaderComponent, { descendants: true });
+	readonly cols = contentChildren(IndexTableRowCellHeaderComponent, { descendants: true });
 
 	tableRef = inject(LU_INDEX_TABLE_INSTANCE);
 }

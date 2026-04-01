@@ -31,8 +31,8 @@ export class IndexTableComponent {
 
 	responsive = input<ResponsiveConfig<'layoutFixed', true>>({});
 
-	rows = contentChildren(IndexTableRowComponent, { descendants: true });
-	header = contentChild(IndexTableHeadComponent, { descendants: true });
+	readonly rows = contentChildren(IndexTableRowComponent, { descendants: true });
+	readonly header = contentChild(IndexTableHeadComponent, { descendants: true });
 
 	readonly cols = computed(() => this.header()?.cols());
 

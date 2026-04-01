@@ -30,7 +30,7 @@ export class DialogContentAdapterComponent<D, C extends ILuModalContent> impleme
 	#destroyRef = inject(DestroyRef);
 
 	@ViewChild('contentProjectionRef', { read: ViewContainerRef, static: true })
-	contentProjectionRef: ViewContainerRef;
+	readonly contentProjectionRef: ViewContainerRef;
 
 	#contentComponentInstance: C;
 

@@ -37,7 +37,7 @@ export class LuMultiSelectDefaultDisplayerComponent<T> implements OnInit {
 	protected destroyRef = inject(DestroyRef);
 
 	@ViewChild('inputElement')
-	inputElementRef: ElementRef<HTMLInputElement>;
+	readonly inputElementRef: ElementRef<HTMLInputElement>;
 
 	get value(): T[] {
 		return this.select.value || [];

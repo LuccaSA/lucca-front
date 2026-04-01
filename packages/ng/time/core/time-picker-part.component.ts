@@ -63,7 +63,7 @@ export class TimePickerPartComponent {
 	inputControlClick = output<PickerControlDirection>();
 	touched = output<void>();
 
-	@ViewChild('timePickerInput') timePickerInput?: ElementRef<HTMLInputElement>;
+	@ViewChild('timePickerInput') readonly timePickerInput?: ElementRef<HTMLInputElement>;
 
 	readonly valueLabel = computed(() => {
 		if (this.hideValue()) {

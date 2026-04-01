@@ -65,7 +65,7 @@ export class LuOptionComponent<T> implements AfterViewInit, OnDestroy, OnInit {
 	groupTemplateLocation = input<GroupTemplateLocation>();
 
 	@ViewChild(LuOptionOutletDirective, { read: LU_OPTION_CONTEXT, static: true })
-	private optionContext?: ILuOptionContext<T>;
+	private readonly optionContext?: ILuOptionContext<T>;
 
 	private cdr = inject(ChangeDetectorRef);
 	private subscription?: Subscription;

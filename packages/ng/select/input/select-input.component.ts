@@ -94,16 +94,16 @@ export abstract class ALuSelectInputComponent<T, TPicker extends ILuPickerPanel<
 	/**
 	 * popover trigger class extension
 	 */
-	@ContentChild(ALuPickerPanel, { static: true }) ccPicker: TPicker;
-	@ViewChild(ALuPickerPanel, { static: true }) vcPicker: TPicker;
+	@ContentChild(ALuPickerPanel, { static: true }) readonly ccPicker: TPicker;
+	@ViewChild(ALuPickerPanel, { static: true }) readonly vcPicker: TPicker;
 
 	@ContentChild(ALuInputDisplayer, { static: true })
-	ccDisplayer: ILuInputDisplayer<T>;
+	readonly ccDisplayer: ILuInputDisplayer<T>;
 	@ViewChild(ALuInputDisplayer, { static: true })
-	vcDisplayer: ILuInputDisplayer<T>;
+	readonly vcDisplayer: ILuInputDisplayer<T>;
 
-	@ContentChild(ALuClear, { static: true }) ccClearer: ILuClear<T>;
-	@ViewChild(ALuClear, { static: true }) vcClearer: ILuClear<T>;
+	@ContentChild(ALuClear, { static: true }) readonly ccClearer: ILuClear<T>;
+	@ViewChild(ALuClear, { static: true }) readonly vcClearer: ILuClear<T>;
 
 	@HostListener('click')
 	override onClick() {
@@ -222,9 +222,9 @@ export class LuSelectInputComponent<T> extends ALuSelectInputComponent<T> implem
 
 	// display clearer
 	@ContentChild(ALuClear, { read: ElementRef, static: false })
-	clearerEltRef: ElementRef<HTMLElement>;
+	readonly clearerEltRef: ElementRef<HTMLElement>;
 	@ViewChild('suffix', { read: ElementRef, static: true })
-	suffixEltRef: ElementRef<HTMLElement>;
+	readonly suffixEltRef: ElementRef<HTMLElement>;
 
 	displayClearer() {
 		if (this.clearerEltRef) {

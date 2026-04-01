@@ -53,7 +53,7 @@ export class LuUserPagedSearcherComponent<U extends ILuUser = ILuUser> implement
 
 	@HostBinding('class.position-fixed') fixed = true;
 	@ViewChild('searchInput', { read: ElementRef, static: true })
-	searchInput: ElementRef<HTMLInputElement>;
+	readonly searchInput: ElementRef<HTMLInputElement>;
 
 	@Input() set fields(fields: string) {
 		this._service.fields = fields;
