@@ -15,7 +15,7 @@ let modalId = 0;
 @Directive()
 export abstract class ALuModalPanelComponent<T extends ILuModalContent> implements OnDestroy, DoCheck {
 	@ViewChild('container', { read: ViewContainerRef, static: true })
-	protected _containerRef: ViewContainerRef;
+	protected readonly _containerRef: ViewContainerRef;
 	protected _componentInstance: ILuModalContent;
 	protected readonly doCheck$ = new ReplaySubject<void>(1);
 

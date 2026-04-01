@@ -107,9 +107,9 @@ export class DateInputComponent extends AbstractDateComponent implements OnInit,
 	readonly initialValue = signal<Date | null | undefined>(undefined);
 	readonly dateFromWriteValue = signal<Date | null>(null);
 
-	calendar = viewChild(Calendar2Component);
+	readonly calendar = viewChild(Calendar2Component);
 
-	inputRef = viewChild<ElementRef<HTMLInputElement>>('date');
+	readonly inputRef = viewChild<ElementRef<HTMLInputElement>>('date');
 
 	readonly displayValue = computed(() => {
 		const textInput = this.userTextInput();

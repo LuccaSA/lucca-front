@@ -99,7 +99,7 @@ export class LuMultiSelectInputComponent<T> extends ALuSelectInputComponent<T, T
 
 	readonly hideCombobox = computed(() => (this.valueSignal()?.length ?? 0) > 1);
 
-	filterPillPanelAnchorRef = viewChild('filterPillPanelAnchor', { read: ViewContainerRef });
+	readonly filterPillPanelAnchorRef = viewChild('filterPillPanelAnchor', { read: ViewContainerRef });
 
 	override isFilterPillEmpty = computed(() => {
 		const valueSignal = this.valueSignal();

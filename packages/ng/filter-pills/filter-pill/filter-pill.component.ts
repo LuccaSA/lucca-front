@@ -62,7 +62,7 @@ export class FilterPillComponent {
 	readonly layout = computed(() => this.inputComponentRef()?.filterPillLayout?.() || 'default');
 
 	// The easy way to grab input component, will work in most cases
-	childInputComponentRef = contentChild(FILTER_PILL_INPUT_COMPONENT);
+	readonly childInputComponentRef = contentChild(FILTER_PILL_INPUT_COMPONENT);
 
 	// The harder way, because child has to register itself to the host, might become the default approach if this is required too much
 	// (like when child isn't created when component inits or it's too deep)
@@ -70,13 +70,13 @@ export class FilterPillComponent {
 
 	readonly inputComponentRef = computed(() => this.registeredInputComponentRef() || this.childInputComponentRef());
 
-	popoverRef = viewChild(PopoverDirective);
+	readonly popoverRef = viewChild(PopoverDirective);
 
 	pillTpl: TemplateRef<unknown>;
 
 	readonly labelTpl = computed(() => this.customLabelTpl() || this.defaultLabelTpl());
 
-	defaultLabelTpl = viewChild<TemplateRef<unknown>>('defaultLabel');
+	readonly defaultLabelTpl = viewChild<TemplateRef<unknown>>('defaultLabel');
 
 	customLabelTpl = signal<TemplateRef<unknown> | null>(null);
 

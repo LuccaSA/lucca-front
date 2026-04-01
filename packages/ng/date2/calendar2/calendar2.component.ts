@@ -131,7 +131,7 @@ export class Calendar2Component implements OnInit {
 	thisMonthLabel = this.#intlRelativeDay.format(0, 'month');
 	thisYearLabel = this.#intlRelativeDay.format(0, 'year');
 
-	calendar2CellInstances = viewChildren(Calendar2CellDirective);
+	readonly calendar2CellInstances = viewChildren(Calendar2CellDirective);
 
 	daysOfWeek = eachDayOfInterval({
 		start: startOfWeek(new Date(), this.#weekOptions),

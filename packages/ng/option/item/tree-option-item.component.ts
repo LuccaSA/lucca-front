@@ -27,10 +27,10 @@ export class LuTreeOptionItemComponent<T> extends ALuTreeOptionItem<T> implement
 	protected _tree: ILuTree<T>;
 	protected _displayer: ILuInputDisplayer<T>;
 	@ViewChild('value', { static: true, read: ViewContainerRef })
-	protected _valueVCR: ViewContainerRef;
+	protected readonly _valueVCR: ViewContainerRef;
 	@ViewChild('children', { static: true, read: ViewContainerRef })
-	protected _childrenVCR: ViewContainerRef;
-	@ViewChild('element', { read: ElementRef, static: true }) element: ElementRef;
+	protected readonly _childrenVCR: ViewContainerRef;
+	@ViewChild('element', { read: ElementRef, static: true }) readonly element: ElementRef;
 
 	// eslint-disable-next-line @angular-eslint/no-output-on-prefix
 	@Output() onSelect = new EventEmitter<this>();

@@ -60,7 +60,7 @@ export class LuEstablishmentSearcherComponent implements ILuOnOpenSubscriber, IL
 
 	@HostBinding('class.position-fixed') fixed = true;
 	@ViewChild('searchInput', { read: ElementRef, static: true })
-	searchInput: ElementRef<HTMLElement>;
+	readonly searchInput: ElementRef<HTMLElement>;
 
 	@Output()
 	isSearching = new EventEmitter<boolean>();
