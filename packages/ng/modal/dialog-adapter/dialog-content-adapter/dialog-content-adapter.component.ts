@@ -46,13 +46,13 @@ export class DialogContentAdapterComponent<D, C extends ILuModalContent> impleme
 	protected readonly doCheck$ = new ReplaySubject<void>(1);
 
 	public intl = getIntl(LU_MODAL_TRANSLATIONS);
-	protected title$ = this.observeValue(() => this.#contentComponentInstance.title);
-	protected submitLabel$ = this.observeValue(() => this.#contentComponentInstance.submitLabel || this.intl.submit);
-	protected cancelLabel$ = this.observeValue(() => this.#contentComponentInstance.cancelLabel || this.intl.cancel);
-	protected submitCounter$ = this.observeValue(() => this.#contentComponentInstance.submitCounter);
-	protected submitDisabled$ = this.observeValue(() => this.#contentComponentInstance.submitDisabled);
-	protected hasSubmitCounter$ = this.submitCounter$.pipe(map(Boolean));
-	protected hasSubmit$ = this.observeValue(() => this.#contentComponentInstance.submitAction).pipe(map(Boolean));
+	protected readonly title$ = this.observeValue(() => this.#contentComponentInstance.title);
+	protected readonly submitLabel$ = this.observeValue(() => this.#contentComponentInstance.submitLabel || this.intl.submit);
+	protected readonly cancelLabel$ = this.observeValue(() => this.#contentComponentInstance.cancelLabel || this.intl.cancel);
+	protected readonly submitCounter$ = this.observeValue(() => this.#contentComponentInstance.submitCounter);
+	protected readonly submitDisabled$ = this.observeValue(() => this.#contentComponentInstance.submitDisabled);
+	protected readonly hasSubmitCounter$ = this.submitCounter$.pipe(map(Boolean));
+	protected readonly hasSubmit$ = this.observeValue(() => this.#contentComponentInstance.submitAction).pipe(map(Boolean));
 
 	get submitPalette() {
 		return (this.#contentComponentInstance.submitPalette || 'product') as Palette;

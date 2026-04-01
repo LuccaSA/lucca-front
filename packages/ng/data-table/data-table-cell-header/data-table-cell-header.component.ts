@@ -73,7 +73,7 @@ export class DataTableRowCellHeaderComponent extends BaseDataTableCell implement
 		);
 	});
 
-	#inlineSizePx$ = new ReplaySubject<number>();
+	readonly #inlineSizePx$ = new ReplaySubject<number>();
 
 	readonly inlineSizePx = toSignal(this.#inlineSizePx$);
 

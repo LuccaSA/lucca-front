@@ -133,7 +133,7 @@ export class LuCoreSelectUsersDirective<T extends LuCoreSelectUser = LuCoreSelec
 		}),
 	);
 
-	protected me$ = this.meParams$.pipe(
+	protected readonly me$ = this.meParams$.pipe(
 		switchMap((params) =>
 			this.httpClient
 				.get<

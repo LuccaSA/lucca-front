@@ -20,12 +20,12 @@ export abstract class ALuModalPanelComponent<T extends ILuModalContent> implemen
 	protected readonly doCheck$ = new ReplaySubject<void>(1);
 
 	public intl = getIntl(LU_MODAL_TRANSLATIONS);
-	protected title$ = this.listenComponentValue(() => this._componentInstance.title);
-	protected submitLabel$ = this.listenComponentValue(() => this._componentInstance.submitLabel || this.intl.submit);
-	protected cancelLabel$ = this.listenComponentValue(() => this._componentInstance.cancelLabel || this.intl.cancel);
-	protected submitCounter$ = this.listenComponentValue(() => this._componentInstance.submitCounter);
-	protected submitDisabled$ = this.listenComponentValue(() => this._componentInstance.submitDisabled);
-	protected hasSubmitCounter$ = this.submitCounter$.pipe(map(Boolean));
+	protected readonly title$ = this.listenComponentValue(() => this._componentInstance.title);
+	protected readonly submitLabel$ = this.listenComponentValue(() => this._componentInstance.submitLabel || this.intl.submit);
+	protected readonly cancelLabel$ = this.listenComponentValue(() => this._componentInstance.cancelLabel || this.intl.cancel);
+	protected readonly submitCounter$ = this.listenComponentValue(() => this._componentInstance.submitCounter);
+	protected readonly submitDisabled$ = this.listenComponentValue(() => this._componentInstance.submitDisabled);
+	protected readonly hasSubmitCounter$ = this.submitCounter$.pipe(map(Boolean));
 
 	protected closeLabel = this.intl.close;
 
