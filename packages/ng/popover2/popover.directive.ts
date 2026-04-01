@@ -124,9 +124,9 @@ export class PopoverDirective implements OnDestroy {
 
 	luPopoverPositionRef = linkedSignal(() => this.luPopoverPosition() || 'above');
 
-	open$ = new Subject<'focus' | 'click' | 'hover'>();
+	readonly open$ = new Subject<'focus' | 'click' | 'hover'>();
 
-	close$ = new Subject<void>();
+	readonly close$ = new Subject<void>();
 
 	luPopoverClosed = output<void>();
 

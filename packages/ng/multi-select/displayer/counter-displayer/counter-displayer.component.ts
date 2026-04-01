@@ -45,7 +45,7 @@ export class LuMultiSelectCounterDisplayerComponent<T> implements OnInit {
 		return this.select.value || [];
 	}
 
-	selectedOptions$ = new BehaviorSubject<T[]>([]);
+	readonly selectedOptions$ = new BehaviorSubject<T[]>([]);
 
 	@Input()
 	set selected(options: T[]) {

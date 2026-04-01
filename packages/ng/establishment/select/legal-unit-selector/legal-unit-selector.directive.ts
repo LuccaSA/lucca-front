@@ -21,7 +21,7 @@ import { DEFAULT_ESTABLISHMENT_SERVICE } from '../establishment-select.token';
 })
 export class LuLegalUnitSelectorDirective implements ILuOptionSelector<ILuEstablishment>, OnDestroy {
 	multiple = true;
-	onSelectValue = new Subject<ILuEstablishment[]>();
+	readonly onSelectValue = new Subject<ILuEstablishment[]>();
 	private _values: ILuEstablishment[];
 	private _service: LuEstablishmentService;
 	private _subs = new Subscription();

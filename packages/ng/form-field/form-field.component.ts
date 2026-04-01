@@ -166,7 +166,7 @@ export class FormFieldComponent implements OnDestroy, DoCheck {
 
 	id = signal<string>('');
 
-	ready$ = new BehaviorSubject<boolean>(false);
+	readonly ready$ = new BehaviorSubject<boolean>(false);
 
 	public get ready(): boolean {
 		return this.ready$.value;
