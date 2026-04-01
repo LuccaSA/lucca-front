@@ -1,6 +1,6 @@
 import { computed, Directive, ElementRef, HostBinding, HostListener, inject, input } from '@angular/core';
-import { add, addMonths, addYears, endOfWeek, startOfWeek, sub, subMonths, subYears } from 'date-fns';
 import type { Duration } from 'date-fns';
+import { add, addMonths, addYears, endOfWeek, startOfWeek, sub, subMonths, subYears } from 'date-fns';
 import { WEEK_INFO } from '../calendar.token';
 import { comparePeriods, getJSFirstDayOfWeek } from '../utils';
 import { CalendarMode } from './calendar-mode';
@@ -33,7 +33,7 @@ export class Calendar2CellDirective {
 		return this.isTabbableDate() ? 0 : -1;
 	}
 
-	isTabbableDate = computed(() => {
+	readonly isTabbableDate = computed(() => {
 		return comparePeriods(this.luCalendar2Mode(), this.luCalendar2Date(), this.#tabbableDate());
 	});
 

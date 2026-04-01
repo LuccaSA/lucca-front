@@ -109,15 +109,15 @@ export class Calendar2Component implements OnInit {
 		disabled: false,
 	}));
 
-	month = computed(() => startOfMonth(this.date()));
+	readonly month = computed(() => startOfMonth(this.date()));
 
-	year = computed(() => startOfYear(this.date()));
+	readonly year = computed(() => startOfYear(this.date()));
 
-	decade = computed(() => startOfDecade(this.date()));
+	readonly decade = computed(() => startOfDecade(this.date()));
 
-	previousMonth = computed(() => subMonths(this.month(), 1));
+	readonly previousMonth = computed(() => subMonths(this.month(), 1));
 
-	nextMonth = computed(() => addMonths(this.month(), 1));
+	readonly nextMonth = computed(() => addMonths(this.month(), 1));
 
 	readonly nextPage = output();
 
@@ -141,7 +141,7 @@ export class Calendar2Component implements OnInit {
 		short: this.#intlDaysShort.format(day),
 	}));
 
-	monthGridDisplay = computed(() => {
+	readonly monthGridDisplay = computed(() => {
 		const daysOfMonth: CalendarCellInfo[] = eachDayOfInterval({
 			start: this.month(),
 			end: endOfMonth(this.month()),
@@ -190,7 +190,7 @@ export class Calendar2Component implements OnInit {
 			.map((weekStart) => daysByWeek[+weekStart]);
 	});
 
-	yearGridDisplay = computed(() => {
+	readonly yearGridDisplay = computed(() => {
 		const monthsOfYear: Date[] = eachMonthOfInterval({
 			start: this.year(),
 			end: endOfYear(this.year()),
@@ -211,7 +211,7 @@ export class Calendar2Component implements OnInit {
 			}, []);
 	});
 
-	decadeGridDisplay = computed(() => {
+	readonly decadeGridDisplay = computed(() => {
 		const yearsOfDecade: Date[] = eachYearOfInterval({
 			start: this.removeYearOverflow() ? this.decade() : subYears(this.decade(), 1),
 			end: this.removeYearOverflow() ? endOfDecade(this.decade()) : addYears(endOfDecade(this.decade()), 1),
@@ -231,15 +231,15 @@ export class Calendar2Component implements OnInit {
 			}, []);
 	});
 
-	currentMonthLabel = computed(() => {
+	readonly currentMonthLabel = computed(() => {
 		return this.#intlDateFormat.format(this.date());
 	});
 
-	currentYearLabel = computed(() => {
+	readonly currentYearLabel = computed(() => {
 		return this.#intlDateYear.format(this.date());
 	});
 
-	currentDecadeLabel = computed(() => {
+	readonly currentDecadeLabel = computed(() => {
 		return `${this.#intlDateYear.format(startOfDecade(this.decade()))} – ${this.#intlDateYear.format(endOfDecade(this.decade()))}`;
 	});
 

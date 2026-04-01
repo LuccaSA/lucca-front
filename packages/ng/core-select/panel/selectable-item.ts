@@ -24,7 +24,7 @@ export class CoreSelectPanelElement<T> implements Highlightable, OnDestroy {
 
 	elementId = input<string>('');
 
-	idAttribute = computed(() => this.id() || this.elementId());
+	readonly idAttribute = computed(() => this.id() || this.elementId());
 
 	isSelected = model(false);
 

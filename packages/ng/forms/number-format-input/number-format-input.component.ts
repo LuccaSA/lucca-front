@@ -103,7 +103,7 @@ export class NumberFormatInputComponent implements AfterViewInit {
 			}) satisfies NumberFormatOptions,
 	);
 
-	formattedValue = computed(() => this.#numberFormat().getBlurFormat(this.#suffixPrefixValue()));
+	readonly formattedValue = computed(() => this.#numberFormat().getBlurFormat(this.#suffixPrefixValue()));
 
 	readonly intl = input(...intlInputOptions(LU_NUMBERFORMATFIELD_TRANSLATIONS));
 

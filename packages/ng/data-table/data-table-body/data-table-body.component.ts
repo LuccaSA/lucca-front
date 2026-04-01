@@ -34,7 +34,7 @@ export class DataTableBodyComponent {
 
 	protected tableRef = inject(LU_DATA_TABLE_INSTANCE, { optional: true });
 
-	colspan = computed(() => {
+	readonly colspan = computed(() => {
 		if (!this.tableRef) {
 			return 0;
 		}

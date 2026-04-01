@@ -51,5 +51,5 @@ export class FilterBarComponent {
 
 	pills = contentChildren(FilterPillComponent, { descendants: true });
 
-	optionalPills = computed(() => this.pills().filter((pill) => pill.optional()));
+	readonly optionalPills = computed(() => this.pills().filter((pill) => pill.optional()));
 }

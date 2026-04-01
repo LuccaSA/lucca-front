@@ -26,7 +26,7 @@ export class ColorInputComponent {
 
 	mouseHighlighted = signal<string>('');
 	keyboardHighlighted = signal<string>('');
-	highlighted = computed(() => this.mouseHighlighted() || this.keyboardHighlighted());
+	readonly highlighted = computed(() => this.mouseHighlighted() || this.keyboardHighlighted());
 
 	clue = signal<string>('');
 	colors = input.required<ColorOption[]>();
@@ -46,7 +46,7 @@ export class ColorInputComponent {
 		}
 	}
 
-	filteredColors = computed(() => {
+	readonly filteredColors = computed(() => {
 		if (this.clue()) {
 			return this.colors().filter((color) => color.name.toLowerCase().includes(this.clue().toLowerCase()));
 		}

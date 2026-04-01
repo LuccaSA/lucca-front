@@ -119,9 +119,9 @@ export class PhoneNumberInputComponent implements ControlValueAccessor, Validato
 
 	countryCodeSelected = signal<CountryCode | undefined>(undefined);
 
-	countryCode = computed(() => this.countryCodeSelected() ?? this.defaultCountryCode());
+	readonly countryCode = computed(() => this.countryCodeSelected() ?? this.defaultCountryCode());
 
-	placeholder = computed(() => {
+	readonly placeholder = computed(() => {
 		const countryCode = this.countryCode();
 		const exampleNumber = this.noAutoPlaceholder() === false && countryCode ? getExampleNumber(countryCode, examples) : undefined;
 		return exampleNumber?.formatNational() ?? '';
