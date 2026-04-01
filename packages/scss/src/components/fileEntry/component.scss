@@ -3,13 +3,14 @@
 @use '@lucca-front/scss/src/commons/utils/a11y';
 @use '@lucca-front/scss/src/commons/utils/text';
 
+@use '@lucca-front/scss/src/components/loading/exports' as loading;
 @use '@lucca-front/icons/src/icon/exports' as icon;
 
 @mixin component($atRoot: namespace.$defaultAtRoot) {
 	border: 1px solid var(--components-fileEntry-borderColor);
 	padding: var(--components-fileEntry-padding);
 	margin: 0;
-	border-radius: var(--pr-t-border-radius-default);
+	border-radius: var(--components-fileEntry-borderRadius);
 	background-color: var(--pr-t-elevation-surface-raised);
 	gap: 0 var(--components-fileEntry-gapInline);
 	position: relative;
@@ -31,6 +32,12 @@
 	}
 
 	@at-root ($atRoot) {
+		.fileEntry-status-content-inside-icon {
+			color: var(--palettes-critical-700);
+
+			@include icon.S;
+		}
+
 		.fileEntryDisplayWrapper {
 			display: grid;
 			grid-template-columns: repeat(auto-fill, minmax(12rem, 1fr));
@@ -78,14 +85,11 @@
 			inline-size: 100%;
 		}
 
-		.fileEntry-status-content-inside-icon {
-			color: var(--palettes-critical-700);
-		}
-
 		.fileEntry-status-content-inlineMessage.inlineMessage {
 			flex-direction: column;
 			align-items: center;
 			text-align: center;
+			padding: var(--pr-t-spacings-100);
 
 			.inlineMessage-statusIcon:first-child {
 				@include icon.M;
@@ -193,6 +197,10 @@
 			flex-grow: 1;
 			flex-basis: 0;
 			min-inline-size: fit-content;
+		}
+
+		.fileEntry-status-content-inside-loading.loading {
+			@include loading.S;
 		}
 	}
 }

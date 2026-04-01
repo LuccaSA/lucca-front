@@ -12,25 +12,23 @@ export default {
 	],
 	argTypes: {
 		size: {
-			options: ['S', null],
+			options: [null, 'L'],
 			control: {
 				type: 'radio',
 			},
+			if: { arg: 'disablePositioning', truthy: true },
 		},
 	},
 
 	render: (args) => {
 		const { size, disablePositioning, downloadAction, deleteAction, ..._inputArgs } = args;
-		const sizeClass = size === 'S' ? `mod-S` : ``;
+		const sizeClass = size === 'L' ? `mod-L` : ``;
 		const disablePositioningClass = disablePositioning ? `mod-disablePositioning` : ``;
 		const down = downloadAction
 			? `<li class="fileToolbar-list-item">
 			<button
-				class="fileToolbar-list-item-button"
+				class="fileToolbar-list-item-button button"
 				type="button"
-				luButton
-				luTooltip="Télécharger"
-				luTooltipOnlyForDisplay
 				(click)="abort(inputRef)"
 			>
 				<lu-icon class="fileToolbar-list-item-button-icon" icon="arrowDownload" alt="Télécharger le fichier « Lorem »" />
@@ -40,11 +38,8 @@ export default {
 		const del = deleteAction
 			? `<li class="fileToolbar-list-item">
 			<button
-				class="fileToolbar-list-item-button"
+				class="fileToolbar-list-item-button button mod-delete"
 				type="button"
-				luButton
-				luTooltip="Supprimer"
-				luTooltipOnlyForDisplay
 				(click)="abort(inputRef)"
 			>
 				<lu-icon class="fileToolbar-list-item-button-icon" icon="trashDelete" alt="Supprimer le fichier « Lorem »" />
@@ -78,8 +73,8 @@ export default {
 
 export const Basic = {
 	args: {
-		size: null,
 		disablePositioning: false,
+		size: null,
 		downloadAction: false,
 		deleteAction: true,
 	},

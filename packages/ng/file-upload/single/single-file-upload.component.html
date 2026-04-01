@@ -1,4 +1,10 @@
-<div class="fileUpload" [class.is-droppable]="droppable" [class.mod-S]="size() === 'S'" [class.is-hidden]="!!entry()">
+<div
+	class="fileUpload"
+	[class.is-droppable]="droppable"
+	[class.mod-L]="size() === 'L'"
+	[class.is-hidden]="!!entry()"
+	[class.mod-structure]="structure()"
+>
 	<input
 		class="fileUpload-input"
 		type="file"
@@ -35,12 +41,14 @@
 </div>
 @if (entry()) {
 	<lu-file-entry
-		[media]="size() === null"
+		[media]="size() === 'L'"
+		[size]="'L'"
 		[previewUrl]="previewUrl()"
 		[entry]="entry()"
 		[state]="state()"
 		(deleteFile)="deleteFile.emit()"
 		[inlineMessageError]="inlineMessageError()"
 		[displayFileName]="displayFileName()"
+		[structure]="structure()"
 	/>
 }

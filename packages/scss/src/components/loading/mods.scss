@@ -15,6 +15,10 @@
 	--components-loading-size: calc(var(--pr-t-spacings-200) + var(--pr-t-spacings-50));
 }
 
+@mixin M {
+	--components-loading-size: var(--pr-t-spacings-300);
+}
+
 @mixin L {
 	@include block;
 

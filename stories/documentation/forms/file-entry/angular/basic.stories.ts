@@ -7,7 +7,7 @@ export default {
 	title: 'Documentation/File/FileEntry/Angular/Basic',
 	argTypes: {
 		size: {
-			options: ['S', null],
+			options: [null, 'L'],
 			control: {
 				type: 'radio',
 			},
@@ -21,7 +21,6 @@ export default {
 			description: "Modifie l'état du composant.",
 		},
 		previewUrl: {
-			if: { arg: 'iconOverride', truthy: false },
 			description: "URL de prévisualisation de l'image uploadée.",
 		},
 		displayFileName: {
@@ -32,6 +31,7 @@ export default {
 			description: 'Affiche le fichier avec une mise en forme adaptée aux visuels.',
 		},
 		iconOverride: {
+			if: { arg: 'previewUrl', truthy: false },
 			description: "Remplace l'icône de format de fichier.",
 		},
 		downloadURL: {
@@ -55,6 +55,10 @@ export default {
 		fileType: {
 			description: 'Type MIME du fichier.',
 		},
+		structure: {
+			if: { arg: 'size', truthy: true },
+			description: "Augmente le border-radius du champ pour l'utiliser en élément de structure.",
+		},
 	},
 	decorators: [
 		moduleMetadata({
@@ -63,13 +67,14 @@ export default {
 		applicationConfig({ providers: [provideHttpClient()] }),
 	],
 	render: (args, { argTypes }) => {
-		const { fileName, fileSize, fileType, deletable, withPassword, ...otherArgs } = args;
+		const { fileName, fileSize, fileType, deletable, withPassword, structure, ...otherArgs } = args;
 
-		const deletableParam = deletable ? `(deleteFile)="deleteFile()"` : ``;
-		const withPasswordParam = withPassword ? `(passwordChange)="passwordChange()"` : ``;
+		const deletableParam = deletable ? ` (deleteFile)="deleteFile()"` : ``;
+		const withPasswordParam = withPassword ? ` (passwordChange)="passwordChange()"` : ``;
+		const structureParam = structure ? ` structure` : ``;
 
 		return {
-			template: `<lu-file-entry ${deletableParam} ${withPasswordParam} [entry]="{
+			template: `<lu-file-entry${structureParam}${deletableParam}${withPasswordParam} [entry]="{
 			name: '${fileName}',
 			size: ${fileSize},
 			type: '${fileType}',
@@ -86,12 +91,13 @@ export const Basic = {
 		fileSize: 28420,
 		fileType: 'image/png',
 		fileName: 'dummyimage.png',
-		iconOverride: '',
 		previewUrl: 'https://dummyimage.com/500',
+		iconOverride: '',
 		state: null,
 		inlineMessageError: 'Virus détecté dans le fichier.',
 		downloadURL: '',
 		deletable: true,
 		withPassword: false,
+		structure: false,
 	},
 };
