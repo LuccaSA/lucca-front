@@ -25,11 +25,11 @@ export class LuCoreSelectJobQualificationsDirective<T extends LuCoreSelectJobQua
 {
 	protected httpClient = inject(HttpClient);
 
-	url = input<string>('/organization/structure/api/job-qualifications');
-	filters = input<Record<string, string | number | boolean> | null>(null);
-	searchDelimiter = input<string>(' ');
+	readonly url = input<string>('/organization/structure/api/job-qualifications');
+	readonly filters = input<Record<string, string | number | boolean> | null>(null);
+	readonly searchDelimiter = input<string>(' ');
 
-	protected clue = toSignal(this.clue$);
+	protected readonly clue = toSignal(this.clue$);
 
 	public constructor() {
 		super();

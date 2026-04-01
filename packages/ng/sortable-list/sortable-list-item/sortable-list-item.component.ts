@@ -23,12 +23,12 @@ export class SortableListItemComponent {
 	/**
 	 * Changes the text displayed by the sortable list item
 	 */
-	label = input.required<string>();
+	readonly label = input.required<string>();
 
 	/**
 	 * Adds descriptive help text below the label
 	 */
-	helperMessage = input<string>();
+	readonly helperMessage = input<string>();
 
 	/**
 	 * Sortable list item can be clickable

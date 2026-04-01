@@ -24,15 +24,15 @@ import { registerFormatSelectionChange } from './text-style.command';
 	],
 })
 export class TextStyleComponent implements OnDestroy, RichTextPluginComponent {
-	public format = input.required<TextFormatType>();
-	public icon = input.required<LuccaIcon>();
-	public tooltip = input.required<string>();
+	public readonly format = input.required<TextFormatType>();
+	public readonly icon = input.required<LuccaIcon>();
+	public readonly tooltip = input.required<string>();
 
 	public readonly tabindex = signal<number>(-1);
 	public readonly active = signal(false);
 	public readonly isDisabled = signal(false);
 
-	public element = viewChild('element', { read: ElementRef<HTMLButtonElement> });
+	public readonly element = viewChild('element', { read: ElementRef<HTMLButtonElement> });
 
 	#editor?: LexicalEditor;
 

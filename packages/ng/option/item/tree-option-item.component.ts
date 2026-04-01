@@ -100,7 +100,7 @@ export class LuTreeOptionItemComponent<T> extends ALuTreeOptionItem<T> implement
 		this._displayer = displayer;
 	}
 
-	public intl = input(...intlInputOptions(LU_TREE_OPTION_ITEM_TRANSLATIONS));
+	public readonly intl = input(...intlInputOptions(LU_TREE_OPTION_ITEM_TRANSLATIONS));
 
 	constructor(private _cdr: ChangeDetectorRef) {
 		super();

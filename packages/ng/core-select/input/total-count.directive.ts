@@ -14,7 +14,7 @@ import { CORE_SELECT_API_TOTAL_COUNT_PROVIDER, CoreSelectApiTotalCountProvider }
 	],
 })
 export class LuCoreSelectTotalCountDirective implements CoreSelectApiTotalCountProvider {
-	totalCount = input.required<number>({ alias: 'totalCount' });
+	readonly totalCount = input.required<number>({ alias: 'totalCount' });
 
 	totalCount$ = toObservable(this.totalCount);
 }

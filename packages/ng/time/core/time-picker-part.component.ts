@@ -19,7 +19,7 @@ export class TimePickerPartComponent {
 
 	readonly decimalConf = input('2.0-0');
 
-	value: ModelSignal<number | '––'> = model('––');
+	readonly value: ModelSignal<number | '––'> = model('––');
 
 	readonly display = input<number | '––'>();
 
@@ -55,8 +55,8 @@ export class TimePickerPartComponent {
 
 	readonly showZero = input(false, { transform: booleanAttribute });
 
-	digitNumber = model(2);
-	isValueSet = model<boolean>(false);
+	readonly digitNumber = model(2);
+	readonly isValueSet = model<boolean>(false);
 
 	prevRequest = output<void>();
 	nextRequest = output<void>();

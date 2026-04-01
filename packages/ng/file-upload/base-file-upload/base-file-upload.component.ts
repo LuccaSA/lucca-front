@@ -20,21 +20,21 @@ export abstract class BaseFileUploadComponent {
 
 	filePicked = output<File>();
 
-	accept = input<
+	readonly accept = input<
 		Array<{
 			format: string;
 			name?: string;
 		}>
 	>([]);
 
-	protected defaultAccept = computed(() => [
+	protected readonly defaultAccept = computed(() => [
 		{
 			format: '*',
 			name: this.intl().all,
 		},
 	]);
 
-	protected resolvedAccept = computed(() => {
+	protected readonly resolvedAccept = computed(() => {
 		const acceptValue = this.accept();
 		return acceptValue.length > 0 ? acceptValue : this.defaultAccept();
 	});
@@ -53,15 +53,15 @@ export abstract class BaseFileUploadComponent {
 
 	readonly structure = input(false, { transform: booleanAttribute });
 
-	fileMaxSize = input<number>(80 * MEGA_BYTE);
+	readonly fileMaxSize = input<number>(80 * MEGA_BYTE);
 
 	readonly maxSizeDisplay = computed(() => formatFileSize(this.locale, this.fileMaxSize()));
 
-	size = input<'S' | null>(null);
+	readonly size = input<'S' | null>(null);
 
 	readonly password = input(false, { transform: booleanAttribute });
 
-	illustration = input<
+	readonly illustration = input<
 		/** @deprecated use 'invoice' instead */
 		'paper' | 'picture' | 'invoice'
 	>('invoice');

@@ -24,10 +24,10 @@ import { LU_INDEX_TABLE_BODY_INSTANCE } from './index-table-body.token';
 	changeDetection: ChangeDetectionStrategy.OnPush,
 })
 export class IndexTableBodyComponent {
-	group = input<PortalContent | null>(null);
-	groupButtonAlt = input<string | null>(null);
+	readonly group = input<PortalContent | null>(null);
+	readonly groupButtonAlt = input<string | null>(null);
 
-	expanded = model(false);
+	readonly expanded = model(false);
 
 	expandedToggle() {
 		this.expanded.set(!this.expanded());

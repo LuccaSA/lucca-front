@@ -23,13 +23,13 @@ import { LU_INDEX_TABLE_INSTANCE } from './index-table.token';
 	changeDetection: ChangeDetectionStrategy.OnPush,
 })
 export class IndexTableComponent {
-	tableRef = viewChild<ElementRef<Element>>('tableRef');
+	readonly tableRef = viewChild<ElementRef<Element>>('tableRef');
 
 	readonly selectable = input(false, { transform: booleanAttribute });
 	readonly layoutFixed = input(false, { transform: booleanAttribute });
 	readonly empty = input(false, { transform: booleanAttribute });
 
-	responsive = input<ResponsiveConfig<'layoutFixed', true>>({});
+	readonly responsive = input<ResponsiveConfig<'layoutFixed', true>>({});
 
 	readonly rows = contentChildren(IndexTableRowComponent, { descendants: true });
 	readonly header = contentChild(IndexTableHeadComponent, { descendants: true });

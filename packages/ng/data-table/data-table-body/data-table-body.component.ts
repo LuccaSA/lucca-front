@@ -23,10 +23,10 @@ import { LU_DATA_TABLE_BODY_INSTANCE } from './data-table-body.token';
 	changeDetection: ChangeDetectionStrategy.OnPush,
 })
 export class DataTableBodyComponent {
-	group = input<PortalContent | null>(null);
-	groupButtonAlt = input<string | null>(null);
+	readonly group = input<PortalContent | null>(null);
+	readonly groupButtonAlt = input<string | null>(null);
 
-	expanded = model(false);
+	readonly expanded = model(false);
 
 	expandedToggle() {
 		this.expanded.set(!this.expanded());

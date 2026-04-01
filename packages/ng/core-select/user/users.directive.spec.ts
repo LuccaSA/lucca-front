@@ -31,8 +31,8 @@ class TestUsersDirective extends LuCoreSelectUsersDirective {
 	changeDetection: ChangeDetectionStrategy.OnPush,
 })
 class LuUsersDirectiveHostComponent {
-	simpleSelect = viewChild.required<LuSimpleSelectInputComponent<LuCoreSelectUser>>(LuSimpleSelectInputComponent);
-	usersDirective = viewChild.required<TestUsersDirective>(TestUsersDirective);
+	readonly simpleSelect = viewChild.required<LuSimpleSelectInputComponent<LuCoreSelectUser>>(LuSimpleSelectInputComponent);
+	readonly usersDirective = viewChild.required<TestUsersDirective>(TestUsersDirective);
 }
 
 const CURRENT_USER_ID = 12;

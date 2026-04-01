@@ -18,15 +18,15 @@ const modeToDurationKey: Record<CalendarMode, keyof Duration> = {
 export class Calendar2CellDirective {
 	#host = inject<ElementRef<HTMLButtonElement>>(ElementRef);
 
-	#tabbableDate = inject(CALENDAR_TABBABLE_DATE);
+	readonly #tabbableDate = inject(CALENDAR_TABBABLE_DATE);
 	#weekInfo = inject(WEEK_INFO);
 
 	// Index of this day in the current week display row, not depending on locale, 0 is first day of week and 6 is last
-	luCalendar2Cell = input.required<number>();
+	readonly luCalendar2Cell = input.required<number>();
 
-	luCalendar2Mode = input.required<CalendarMode>();
+	readonly luCalendar2Mode = input.required<CalendarMode>();
 
-	luCalendar2Date = input.required<Date>();
+	readonly luCalendar2Date = input.required<Date>();
 
 	@HostBinding('tabindex')
 	get tabindex(): 0 | -1 {

@@ -28,7 +28,7 @@ export class LuDateInputDirective<D> extends ALuInput<D, HTMLInputElement> imple
 	@Input() override set placeholder(p: string) {
 		this._elementRef.nativeElement.placeholder = p;
 	}
-	public intl = input(...intlInputOptions(LU_DATE_INPUT_TRANSLATIONS));
+	public readonly intl = input(...intlInputOptions(LU_DATE_INPUT_TRANSLATIONS));
 	constructor(
 		_changeDetectorRef: ChangeDetectorRef,
 		_elementRef: ElementRef<HTMLInputElement>,

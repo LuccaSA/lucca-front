@@ -65,10 +65,10 @@ export class LuMultiSelectDisplayerInputDirective<T> implements OnInit {
 		this.select.clueChanged(this.elementRef.nativeElement.value);
 	}
 
-	#panelOpen = toSignal(this.select.isPanelOpen$);
-	#activeDescendant = toSignal(this.select.activeDescendant$);
-	#disabled = toSignal(this.select.disabled$);
-	#placeholder = toSignal(
+	readonly #panelOpen = toSignal(this.select.isPanelOpen$);
+	readonly #activeDescendant = toSignal(this.select.activeDescendant$);
+	readonly #disabled = toSignal(this.select.disabled$);
+	readonly #placeholder = toSignal(
 		this.context.option$.pipe(
 			startWith([]),
 			switchMap((options) => {

@@ -55,14 +55,14 @@ export class LuOptionComponent<T> implements AfterViewInit, OnDestroy, OnInit {
 	onlyParent = output<void>();
 	onlyChildren = output<void>();
 
-	groupIndex = input<number>();
+	readonly groupIndex = input<number>();
 
-	public optionIndex = input.required({ transform: (value: string | number) => `${value}` });
+	public readonly optionIndex = input.required({ transform: (value: string | number) => `${value}` });
 
 	@Input()
 	scrollIntoViewOptions: ScrollIntoViewOptions = {};
 
-	groupTemplateLocation = input<GroupTemplateLocation>();
+	readonly groupTemplateLocation = input<GroupTemplateLocation>();
 
 	@ViewChild(LuOptionOutletDirective, { read: LU_OPTION_CONTEXT, static: true })
 	private readonly optionContext?: ILuOptionContext<T>;

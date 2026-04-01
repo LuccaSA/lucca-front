@@ -90,7 +90,7 @@ export class PopoverDirective implements OnDestroy {
 	})
 	content: TemplateRef<unknown> | Type<unknown>;
 
-	luPopoverPosition = input<PopoverPosition | null>(null);
+	readonly luPopoverPosition = input<PopoverPosition | null>(null);
 
 	@Input()
 	overlayScrollStrategy: 'reposition' | 'block' | 'close' = 'reposition';
@@ -100,7 +100,7 @@ export class PopoverDirective implements OnDestroy {
 	})
 	luPopoverDisabled = false;
 
-	luPopoverTrigger = model<'click' | 'click+hover' | 'hover+focus'>('click');
+	readonly luPopoverTrigger = model<'click' | 'click+hover' | 'hover+focus'>('click');
 
 	@Input()
 	customPositions?: ConnectionPositionPair[];
@@ -115,14 +115,14 @@ export class PopoverDirective implements OnDestroy {
 	 * Allows to anchor the popover to another element instead of the trigger one
 	 * for placement purpose
 	 */
-	luPopoverAnchor = input<FlexibleConnectedPositionStrategyOrigin>(this.elementRef);
+	readonly luPopoverAnchor = input<FlexibleConnectedPositionStrategyOrigin>(this.elementRef);
 
 	// We have to type these two for Compodoc to find the right type and tell Storybook these aren't strings
-	luPopoverOpenDelay: InputSignal<number> = input<number>(300);
+	readonly luPopoverOpenDelay: InputSignal<number> = input<number>(300);
 
-	luPopoverCloseDelay: InputSignal<number> = input<number>(100);
+	readonly luPopoverCloseDelay: InputSignal<number> = input<number>(100);
 
-	luPopoverPositionRef = linkedSignal(() => this.luPopoverPosition() || 'above');
+	readonly luPopoverPositionRef = linkedSignal(() => this.luPopoverPosition() || 'above');
 
 	readonly open$ = new Subject<'focus' | 'click' | 'hover'>();
 

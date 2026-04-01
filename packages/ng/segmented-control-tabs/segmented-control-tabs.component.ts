@@ -46,7 +46,7 @@ export class SegmentedControlTabsComponent<T = unknown> implements AfterContentI
 	 */
 	readonly vertical = input(false, { transform: booleanAttribute });
 
-	active = model<T | null>(null);
+	readonly active = model<T | null>(null);
 
 	readonly id = `segmentedControl${nextId++}`;
 

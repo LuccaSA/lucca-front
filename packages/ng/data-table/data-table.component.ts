@@ -42,7 +42,7 @@ import { LU_DATA_TABLE_INSTANCE } from './data-table.token';
 })
 export class DataTableComponent implements OnInit {
 	#elementRef = inject<ElementRef<Element>>(ElementRef);
-	tableRef = viewChild<ElementRef<Element>>('tableRef');
+	readonly tableRef = viewChild<ElementRef<Element>>('tableRef');
 
 	readonly hover = input(false, { transform: booleanAttribute });
 	readonly selectable = input(false, { transform: booleanAttribute });

@@ -26,8 +26,8 @@ import { LU_FILTER_PILLS_TRANSLATIONS } from '../filter-pills.translate';
 export class FilterBarComponent {
 	readonly intl = input(...intlInputOptions(LU_FILTER_PILLS_TRANSLATIONS));
 
-	addonBefore = signal<TemplateRef<unknown> | null>(null);
-	addonAfter = signal<TemplateRef<unknown> | null>(null);
+	readonly addonBefore = signal<TemplateRef<unknown> | null>(null);
+	readonly addonAfter = signal<TemplateRef<unknown> | null>(null);
 
 	popoverPositions: ConnectionPositionPair[] = [
 		new ConnectionPositionPair(

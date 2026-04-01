@@ -61,7 +61,7 @@ export class LuMultiSelectPanelComponent<T> implements AfterViewInit, CoreSelect
 	selectId = inject(SELECT_ID);
 
 	options$ = this.selectInput.options$;
-	grouping = this.selectInput.groupingSignal;
+	readonly grouping = this.selectInput.groupingSignal;
 	treeGenerator = this.selectInput.treeGenerator;
 	loading$ = this.selectInput.loading$;
 	searchable = this.selectInput.searchable;
@@ -74,9 +74,9 @@ export class LuMultiSelectPanelComponent<T> implements AfterViewInit, CoreSelect
 	trackBranchesBy: TrackByFunction<TreeNode<T>> = (_, option) => this.optionKey(option.node);
 
 	selectedOptions: T[] = this.selectInput.value || [];
-	optionTpl = this.selectInput.optionTpl;
+	readonly optionTpl = this.selectInput.optionTpl;
 
-	options = signal<ɵCoreSelectPanelElement<T>[]>([]);
+	readonly options = signal<ɵCoreSelectPanelElement<T>[]>([]);
 	keyManager = inject<CoreSelectKeyManager<T>>(CoreSelectKeyManager);
 
 	readonly someGroupOptionEnabled = computed(() => {

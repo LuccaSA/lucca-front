@@ -21,7 +21,7 @@ export class FieldsetComponent {
 	readonly horizontal = input(false, { transform: booleanAttribute });
 	readonly expandable = input(false, { transform: booleanAttribute });
 
-	expanded = model(false);
+	readonly expanded = model(false);
 
 	id = `fieldsetTitleContent${nextId++}`;
 }
