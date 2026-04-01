@@ -44,6 +44,6 @@ export class IndexTableRowComponent {
 
 	selected = model<boolean>(false);
 	selectedLabel = input<string | null>(null);
-	disabled = input(false, { transform: booleanAttribute });
-	stack = input(1, { transform: numberAttribute });
+	readonly disabled = input(false, { transform: booleanAttribute });
+	readonly stack = input(1, { transform: numberAttribute });
 }

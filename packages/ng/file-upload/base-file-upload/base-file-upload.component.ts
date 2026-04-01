@@ -14,7 +14,7 @@ export abstract class BaseFileUploadComponent {
 
 	protected droppable = false;
 
-	intl = input(...intlInputOptions(LU_FILE_UPLOAD_TRANSLATIONS));
+	readonly intl = input(...intlInputOptions(LU_FILE_UPLOAD_TRANSLATIONS));
 
 	protected formFieldRef = inject(FORM_FIELD_INSTANCE, { optional: true });
 
@@ -51,7 +51,7 @@ export abstract class BaseFileUploadComponent {
 		return this.acceptAttribute().some((str) => str.includes('*'));
 	});
 
-	structure = input(false, { transform: booleanAttribute });
+	readonly structure = input(false, { transform: booleanAttribute });
 
 	fileMaxSize = input<number>(80 * MEGA_BYTE);
 
@@ -59,7 +59,7 @@ export abstract class BaseFileUploadComponent {
 
 	size = input<'S' | null>(null);
 
-	password = input(false, { transform: booleanAttribute });
+	readonly password = input(false, { transform: booleanAttribute });
 
 	illustration = input<
 		/** @deprecated use 'invoice' instead */
@@ -76,7 +76,7 @@ export abstract class BaseFileUploadComponent {
 		}
 	});
 
-	required = input(false, { transform: booleanAttribute });
+	readonly required = input(false, { transform: booleanAttribute });
 
 	readonly buttonFilled = input(false, { transform: booleanAttribute });
 

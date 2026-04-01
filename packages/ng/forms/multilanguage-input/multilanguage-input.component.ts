@@ -40,7 +40,7 @@ export class MultilanguageInputComponent implements ControlValueAccessor {
 
 	#intlDisplay = new Intl.DisplayNames([this.#localeId], { type: 'language' });
 
-	intl = input(...intlInputOptions(LU_MULTILANGUAGE_INPUT_TRANSLATIONS));
+	readonly intl = input(...intlInputOptions(LU_MULTILANGUAGE_INPUT_TRANSLATIONS));
 
 	#formFieldRef = inject(FORM_FIELD_INSTANCE);
 
@@ -50,9 +50,9 @@ export class MultilanguageInputComponent implements ControlValueAccessor {
 
 	protected onChange = (_value: MultilanguageTranslation[]) => {};
 
-	placeholder = input('');
+	readonly placeholder = input('');
 
-	openOnFocus = input(false, { transform: booleanAttribute });
+	readonly openOnFocus = input(false, { transform: booleanAttribute });
 
 	autocomplete = input<AutoFill>('off');
 

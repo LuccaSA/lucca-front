@@ -20,7 +20,7 @@ import { LU_READMORE_TRANSLATIONS } from './read-more.translate';
 	},
 })
 export class ReadMoreComponent {
-	intl = input(...intlInputOptions(LU_READMORE_TRANSLATIONS));
+	readonly intl = input(...intlInputOptions(LU_READMORE_TRANSLATIONS));
 
 	/**
 	 * Change the number of lines displayed when collapsed

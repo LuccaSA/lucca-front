@@ -25,9 +25,9 @@ import { LU_INDEX_TABLE_INSTANCE } from './index-table.token';
 export class IndexTableComponent {
 	tableRef = viewChild<ElementRef<Element>>('tableRef');
 
-	selectable = input(false, { transform: booleanAttribute });
-	layoutFixed = input(false, { transform: booleanAttribute });
-	empty = input(false, { transform: booleanAttribute });
+	readonly selectable = input(false, { transform: booleanAttribute });
+	readonly layoutFixed = input(false, { transform: booleanAttribute });
+	readonly empty = input(false, { transform: booleanAttribute });
 
 	responsive = input<ResponsiveConfig<'layoutFixed', true>>({});
 

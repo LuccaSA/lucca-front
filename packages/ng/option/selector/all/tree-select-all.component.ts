@@ -39,7 +39,7 @@ export class LuTreeOptionSelectAllComponent<T> extends ALuTreeOptionOperator<T> 
 		this.outOptions$ = in$.pipe(tap((options) => (this.flatOptions = this.flattenTree(options))));
 	}
 
-	public intl = input(...intlInputOptions(LU_OPTION_SELECT_ALL_TRANSLATIONS));
+	public readonly intl = input(...intlInputOptions(LU_OPTION_SELECT_ALL_TRANSLATIONS));
 
 	selectAll() {
 		if (!this.flatOptions) {

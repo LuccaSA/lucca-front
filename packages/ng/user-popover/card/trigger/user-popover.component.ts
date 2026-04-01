@@ -28,7 +28,7 @@ export class LuUserPopoverComponent {
 
 	#service = inject(LuUserPopoverStore);
 
-	intl = input(...intlInputOptions(LU_POPUP_EMPLOYEE_TRANSLATIONS));
+	readonly intl = input(...intlInputOptions(LU_POPUP_EMPLOYEE_TRANSLATIONS));
 
 	#errorImage$ = new BehaviorSubject<boolean>(false);
 

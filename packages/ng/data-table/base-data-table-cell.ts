@@ -18,7 +18,7 @@ export abstract class BaseDataTableCell {
 	footRef = inject(LU_DATA_TABLE_FOOT_INSTANCE, { optional: true });
 	rowRef = inject(LU_DATA_TABLE_ROW_INSTANCE, { optional: true });
 
-	editable = input(false, { transform: booleanAttribute });
+	readonly editable = input(false, { transform: booleanAttribute });
 	align = input<null | 'start' | 'center' | 'end'>(null);
 
 	isStickyStart = computed(() => {

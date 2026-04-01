@@ -32,7 +32,7 @@ import { LuRouterLink } from './lu-router-link';
 	changeDetection: ChangeDetectionStrategy.OnPush,
 })
 export class LinkComponent {
-	intl = input(...intlInputOptions(LU_LINK_TRANSLATIONS));
+	readonly intl = input(...intlInputOptions(LU_LINK_TRANSLATIONS));
 	routerLink = inject(LuRouterLink);
 	#injector = inject(Injector);
 	router = inject(Router);

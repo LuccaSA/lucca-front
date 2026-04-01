@@ -39,7 +39,7 @@ export class LuOptionSelectAllComponent<T> extends ALuOptionOperator<T> implemen
 		this.outOptions$ = in$.pipe(tap((options) => (this.options = options)));
 	}
 
-	public intl = input(...intlInputOptions(LU_OPTION_SELECT_ALL_TRANSLATIONS));
+	public readonly intl = input(...intlInputOptions(LU_OPTION_SELECT_ALL_TRANSLATIONS));
 
 	selectAll() {
 		if (!this.options) {

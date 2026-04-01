@@ -111,7 +111,7 @@ export class DateRangeInputComponent extends AbstractDateComponent implements On
 
 	placeholder = input<string>();
 
-	widthAuto = input(false, { transform: booleanAttribute });
+	readonly widthAuto = input(false, { transform: booleanAttribute });
 
 	readonly label: Signal<PortalContent | undefined> = signal('');
 

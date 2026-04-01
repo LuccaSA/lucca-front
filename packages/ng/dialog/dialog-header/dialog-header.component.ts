@@ -28,7 +28,7 @@ export class DialogHeaderAction {}
 export class DialogHeaderComponent implements OnInit {
 	#ref = inject(LuDialogRef);
 
-	intl = input(...intlInputOptions(LU_DIALOG_HEADER_TRANSLATIONS));
+	readonly intl = input(...intlInputOptions(LU_DIALOG_HEADER_TRANSLATIONS));
 
 	dismissible = !this.#ref.config.alert;
 

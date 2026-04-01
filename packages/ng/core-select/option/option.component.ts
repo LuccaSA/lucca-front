@@ -51,7 +51,7 @@ export class LuOptionComponent<T> implements AfterViewInit, OnDestroy, OnInit {
 	@Input() option?: T;
 	@Input() grouping?: LuOptionGrouping<T, unknown>;
 
-	hasChildren = input(false, { transform: booleanAttribute });
+	readonly hasChildren = input(false, { transform: booleanAttribute });
 	onlyParent = output<void>();
 	onlyChildren = output<void>();
 
