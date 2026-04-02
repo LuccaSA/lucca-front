@@ -49,7 +49,7 @@ export class LuUserTileComponent {
 	 */
 	readonly size = input<'L' | 'M' | 'S' | 'XS'>();
 
-	readonly displayPictureFormat = computed(() => displayPictureFormatRecord[this.displayFormat()]);
+	readonly displayPictureFormat = computed(() => displayPictureFormatRecord[this.displayFormat() ?? this.#defaultFormat]);
 
 	constructor() {
 		effect(() => {
