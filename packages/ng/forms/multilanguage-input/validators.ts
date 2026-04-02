@@ -7,7 +7,7 @@ export function areAllLanguagesFilled(model: MultilanguageTranslation[]): boolea
 
 export function isInvariantFilled(model: MultilanguageTranslation[]): boolean {
 	const invariantTranslation = model.find((row) => row.cultureCode === INVARIANT_CULTURE_CODE);
-	return (invariantTranslation && invariantTranslation.value?.length > 0) ?? false;
+	return (invariantTranslation?.value?.length ?? 0) > 0;
 }
 
 export const MultiLanguageInputValidators: Record<'allLanguagesRequired' | 'invariantRequired', ValidatorFn> = {

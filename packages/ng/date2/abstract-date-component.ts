@@ -1,5 +1,5 @@
 import { booleanAttribute, ChangeDetectionStrategy, Component, computed, effect, inject, input, LOCALE_ID, model, output, signal } from '@angular/core';
-import { intlInputOptions } from '@lucca-front/ng/core';
+import { intlInputOptions, isNotNil } from '@lucca-front/ng/core';
 import { addMonths, addYears, isAfter, isBefore, isSameMonth, startOfDay, startOfMonth } from 'date-fns';
 import { CalendarMode } from './calendar2/calendar-mode';
 import { CellStatus } from './calendar2/cell-status';
@@ -80,17 +80,18 @@ export abstract class AbstractDateComponent {
 	}
 
 	isAfterMin(date: Date, mode: CalendarMode): boolean {
-		if (!this.min()) {
+		const min = this.min();
+		if (!min) {
 			return true;
 		}
 
 		switch (mode) {
 			case 'day':
-				return (this.min()?.getTime() ?? 0) <= date.getTime();
+				return min.getTime() <= date.getTime();
 			case 'month':
-				return isBefore(startOfMonth(this.min() ?? 0), startOfMonth(date)) || isSameMonth(this.min() ?? 0, date);
+				return isBefore(startOfMonth(min), startOfMonth(date)) || isSameMonth(min, date);
 			case 'year':
-				return (this.min()?.getFullYear() ?? 0) <= date.getFullYear();
+				return min.getFullYear() <= date.getFullYear();
 			default:
 				return true;
 		}
@@ -114,7 +115,7 @@ export abstract class AbstractDateComponent {
 	}
 
 	isValidDate(date: Date | null | undefined): date is Date {
-		return !!date && !isNaN(date.getTime());
+		return isNotNil(date) && !isNaN(date.getTime());
 	}
 
 	prev(mode: CalendarMode) {
