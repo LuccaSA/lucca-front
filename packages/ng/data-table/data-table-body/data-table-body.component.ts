@@ -39,6 +39,6 @@ export class DataTableBodyComponent {
 			return 0;
 		}
 
-		return (this.tableRef.cols()?.length ?? 0) + (this.tableRef?.selectable() ? 1 : 0);
+		return (this.tableRef.cols()?.length ?? 0) + (this.tableRef.selectable() ? 1 : 0);
 	});
 }

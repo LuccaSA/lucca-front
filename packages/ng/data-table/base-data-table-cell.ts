@@ -23,12 +23,12 @@ export abstract class BaseDataTableCell {
 
 	isStickyStart = computed(() => {
 		const position = this.position();
-		return position !== undefined && isNotNil(this.tableRef) ? position <= this.tableRef.stickyColsStart() - 1 : undefined;
+		return isNotNil(position) && isNotNil(this.tableRef) ? position <= this.tableRef.stickyColsStart() - 1 : undefined;
 	});
 
 	isStickyEnd = computed(() => {
 		const position = this.position();
-		return position !== undefined && isNotNil(this.tableRef) && isNotNil(this.rowRef) ? position >= this.rowRef?.cells().length - this.tableRef?.stickyColsEnd() : undefined;
+		return isNotNil(position) && isNotNil(this.tableRef) && isNotNil(this.rowRef) ? position >= this.rowRef.cells().length - this.tableRef.stickyColsEnd() : undefined;
 	});
 
 	position = computed(() => {

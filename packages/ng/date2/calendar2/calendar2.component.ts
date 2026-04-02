@@ -325,7 +325,7 @@ export class Calendar2Component implements OnInit {
 		// Is it weekend day? for is-dayOff class toggle
 		const isWeekend = isDayMode && this.#weekInfo.weekend.includes(getIntlWeekDay(date)) && !this.hideWeekend();
 		// Is it first day of month? Mostly used for overflow display logic
-		const isFirstDayOfMonth = isDayMode && rangeInfo && isSameDay(startOfMonth(date), rangeInfo?.range.start);
+		const isFirstDayOfMonth = isDayMode && rangeInfo && isSameDay(startOfMonth(date), rangeInfo.range.start);
 
 		// Is this the current period? Will match if same day as today, or same month in month display, or same year if year display
 		const isCurrent = comparePeriods(this.displayMode(), new Date(), date) && !this.hideToday();
