@@ -46,9 +46,10 @@ export class TreeSelectDirective<T, V> implements TreeGenerator<T, TreeNode<T>> 
 					itemToNode.set(item, itemNode);
 					handled.push(item);
 				} else {
+					const parentNode = itemToNode.get(parent);
 					// If the parent is already in the resultset, we can add this
-					if (itemToNode.has(parent)) {
-						itemToNode.get(parent)!.children?.push(itemNode);
+					if (parentNode) {
+						parentNode.children?.push(itemNode);
 						itemToNode.set(item, itemNode);
 						handled.push(item);
 					}
