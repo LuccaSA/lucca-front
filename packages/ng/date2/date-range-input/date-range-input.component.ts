@@ -376,11 +376,14 @@ export class DateRangeInputComponent extends AbstractDateComponent implements On
 
 	dateClicked(date: Date, popoverRef: PopoverDirective): void {
 		const selectedRange = this.selectedRange();
+		let newRange: DateRange | null;
+
 		if (selectedRange === null) {
-			this.selectedRange.set({
+			newRange = {
 				start: date,
 				scope: this.mode(),
-			});
+			};
+			this.selectedRange.set(newRange);
 			this.editedField.set(1);
 			this.highlightedField.set(1);
 		} else {
@@ -388,18 +391,19 @@ export class DateRangeInputComponent extends AbstractDateComponent implements On
 			if (this.editedField() === 1) {
 				// If end is before start, invert them
 				if (isBefore(date, selectedRange.start)) {
-					this.selectedRange.set({
+					newRange = {
 						start: date,
 						scope: this.mode(),
 						end: selectedRange.start,
-					});
+					};
 				} else {
-					this.selectedRange.set({
+					newRange = {
 						...selectedRange,
 						scope: this.mode(),
 						end: date,
-					});
+					};
 				}
+				this.selectedRange.set(newRange);
 				popoverRef?.close();
 				this.filterPillPopoverCloseFn?.();
 				this.endTextInputRef()?.nativeElement.focus();
@@ -409,24 +413,25 @@ export class DateRangeInputComponent extends AbstractDateComponent implements On
 				// Else, we're editing start field
 				// If start is after end, invert them
 				if (selectedRange.end && isAfter(date, selectedRange.end)) {
-					this.selectedRange.set({
+					newRange = {
 						start: date,
 						scope: this.mode(),
-					});
+					};
 				} else {
-					this.selectedRange.set({
+					newRange = {
 						...selectedRange,
 						start: date,
 						scope: this.mode(),
-					});
+					};
 				}
+				this.selectedRange.set(newRange);
 				this.editedField.set(1);
 				this.highlightedField.set(1);
 				this.dateHovered.set(null);
 			}
 		}
 
-		this.#onChange?.(selectedRange);
+		this.#onChange?.(newRange);
 	}
 
 	arrowDown(popoverRef: PopoverDirective, fieldToFocus: 'start' | 'end'): void {
