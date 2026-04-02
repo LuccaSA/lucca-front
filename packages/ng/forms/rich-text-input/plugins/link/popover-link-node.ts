@@ -12,7 +12,7 @@ export class PopoverLinkNode extends LinkNode {
 		self.#viewContainerRef = vcr;
 		return self;
 	}
-	getViewContainerRef(): ViewContainerRef {
+	getViewContainerRef(): ViewContainerRef | undefined {
 		return this.#viewContainerRef;
 	}
 	setTemplateRef(vcr: TemplateRef<{ href?: string; title?: string; target?: string }>): this {
@@ -20,7 +20,7 @@ export class PopoverLinkNode extends LinkNode {
 		self.#templateRef = vcr;
 		return self;
 	}
-	getTemplateRef(): TemplateRef<{ href?: string; title?: string; target?: string }> {
+	getTemplateRef(): TemplateRef<{ href?: string; title?: string; target?: string }> | undefined {
 		return this.#templateRef;
 	}
 
@@ -28,7 +28,7 @@ export class PopoverLinkNode extends LinkNode {
 		return 'popoverlink';
 	}
 
-	constructor(url?: string, attributes?: LinkAttributes & { viewContainerRef: ViewContainerRef; templateRef: TemplateRef<{ href?: string; title?: string; target?: string }> }, key?: NodeKey) {
+	constructor(url?: string, attributes?: LinkAttributes & { viewContainerRef?: ViewContainerRef; templateRef?: TemplateRef<{ href?: string; title?: string; target?: string }> }, key?: NodeKey) {
 		super(url, attributes, key);
 		this.#viewContainerRef = attributes?.viewContainerRef;
 		this.#templateRef = attributes?.templateRef;
@@ -36,11 +36,11 @@ export class PopoverLinkNode extends LinkNode {
 
 	override createDOM(config: EditorConfig): HTMLElement {
 		if (this.#viewContainerRef && this.#templateRef) {
-			const context = {
+			const context: { href?: string; title?: string; target?: string; key?: string } = {
 				href: this.sanitizeUrl(this.__url),
-				title: this.__title,
-				target: this.__target,
-				key: this.__key,
+				title: this.__title ?? undefined,
+				target: this.__target ?? undefined,
+				key: this.__key ?? undefined,
 			};
 			if (this.#view) {
 				this.#view.context = context;

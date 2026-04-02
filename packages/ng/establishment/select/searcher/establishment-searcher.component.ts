@@ -1,7 +1,15 @@
 import { AsyncPipe } from '@angular/common';
 import { ChangeDetectionStrategy, Component, ElementRef, EventEmitter, forwardRef, HostBinding, Inject, Input, Optional, Output, Self, ViewChild } from '@angular/core';
 import { FormControl, ReactiveFormsModule } from '@angular/forms';
-import { ALuOnCloseSubscriber, ALuOnOpenSubscriber, ALuOnScrollBottomSubscriber, ILuOnCloseSubscriber, ILuOnOpenSubscriber, ILuOnScrollBottomSubscriber } from '@lucca-front/ng/core';
+import {
+	ALuOnCloseSubscriber,
+	ALuOnOpenSubscriber,
+	ALuOnScrollBottomSubscriber,
+	ILuOnCloseSubscriber,
+	ILuOnOpenSubscriber,
+	ILuOnScrollBottomSubscriber,
+	isNotNilOrEmptyString,
+} from '@lucca-front/ng/core';
 import { ALuOptionOperator, ILuOptionOperator, LuOptionPlaceholderComponent } from '@lucca-front/ng/option';
 import { Observable, of, Subject } from 'rxjs';
 import { catchError, debounceTime, map, scan, share, startWith, switchMap, takeWhile, tap } from 'rxjs/operators';
@@ -87,13 +95,13 @@ export class LuEstablishmentSearcherComponent implements ILuOnOpenSubscriber, IL
 						tap(() => (this.loading = true)),
 						tap(() => {
 							// FIXME refactor, add some spec anywhere
-							const isSearching = clue != null && clue !== '';
+							const isSearching = isNotNilOrEmptyString(clue);
 							if (this._isSearching !== isSearching) {
 								this._isSearching = isSearching;
 								this.isSearching.emit(this._isSearching);
 							}
 						}),
-						switchMap((page) => this._service.searchPaged(clue, page).pipe(catchError(() => of([] as ILuEstablishment[])))),
+						switchMap((page) => this._service.searchPaged(clue ?? '', page).pipe(catchError(() => of([] as ILuEstablishment[])))),
 						takeWhile((loadedItems) => !!loadedItems.length),
 						scan((acc, next) => [...acc, ...next]),
 					),

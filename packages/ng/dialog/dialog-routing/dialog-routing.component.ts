@@ -4,7 +4,7 @@ import { ActivatedRoute, CanDeactivateFn, DeprecatedGuard, GuardResult, Router, 
 import { combineLatest, concat, map, Observable, of } from 'rxjs';
 import { provideLuDialog } from '../dialog.providers';
 import { LuDialogService } from '../dialog.service';
-import { LuDialogRef, LuDialogResult } from '../model';
+import { LuDialogData, LuDialogRef, LuDialogResult } from '../model';
 import {
 	DIALOG_ROUTE_CLOSE_TRIGGER,
 	DIALOG_ROUTE_CONFIG,
@@ -46,9 +46,11 @@ export function defaultOnClosedFn<C>(): void {
 	const route = inject(ActivatedRoute);
 	const routeData = route.snapshot.data as DialogRouteData<C>;
 	const next = routeData.dialogRouteConfig.path
-		.split('/')
-		.map(() => '..')
-		.join('/');
+		? routeData.dialogRouteConfig.path
+				.split('/')
+				.map(() => '..')
+				.join('/')
+		: '';
 
 	return void router.navigate([next], {
 		relativeTo: route.children[0],
@@ -115,7 +117,10 @@ export class DialogRoutingContainerComponent<C> implements OnDestroy, OnInit {
 	}
 
 	async #openDialog(): Promise<void> {
-		const [data, dialogConfig] = await Promise.all([this.#resolve(this.config.dataFactory), this.#resolve(this.config.dialogConfigFactory)]);
+		const [data, dialogConfig] = await Promise.all([
+			this.config.dataFactory ? this.#resolve(this.config.dataFactory) : (Promise.resolve() as Awaited<LuDialogData<C>>),
+			this.#resolve(this.config.dialogConfigFactory),
+		]);
 
 		this.#ref = this.#dialog.open<C>({
 			...dialogConfig,
@@ -128,18 +133,18 @@ export class DialogRoutingContainerComponent<C> implements OnDestroy, OnInit {
 		this.#ref.dismissed$.pipe(takeUntilDestroyed(this.#destroyRef)).subscribe(() => this.#onDialogDismissed());
 	}
 
-	#getCanCloseFn(config: DialogRouteDialogConfig<C>): ((c: C) => Observable<boolean>) | undefined {
+	#getCanCloseFn(config: DialogRouteDialogConfig<C>): ((c: C) => Observable<boolean>) | boolean {
 		const canCloseFns: ((c: C) => Observable<boolean>)[] = [];
 
 		if (config.canClose) {
-			canCloseFns.push((c: C) => deferrableToObservable(config.canClose(c)));
+			canCloseFns.push((c: C) => deferrableToObservable(config.canClose!(c)));
 		}
 
 		if (this.config.canDeactivate) {
 			canCloseFns.push(this.#getCanCloseFromGuardDialogFn(this.config.canDeactivate));
 		}
 
-		return canCloseFns.length ? (c: C) => combineLatest(canCloseFns.map((fn) => fn(c))).pipe(map((results) => results.every((r) => r))) : undefined;
+		return canCloseFns.length ? (c: C) => combineLatest(canCloseFns.map((fn) => fn(c))).pipe(map((results) => results.every((r) => r))) : true;
 	}
 
 	#getCanCloseFromGuardDialogFn(canDeactivate: (CanDeactivateFn<C> | DeprecatedGuard)[]): () => Observable<boolean> {
@@ -219,11 +224,7 @@ export class DialogRoutingContainerComponent<C> implements OnDestroy, OnInit {
 		this.#ref = undefined;
 	}
 
-	async #resolve<T>(resolveFn: DialogResolveFn<T>): Promise<T | undefined> {
-		if (!resolveFn) {
-			return undefined;
-		}
-
+	async #resolve<T>(resolveFn: DialogResolveFn<T>): Promise<T> {
 		const resolved = runInInjectionContext(this.injector, resolveFn);
 		return deferrableToPromise(resolved);
 	}

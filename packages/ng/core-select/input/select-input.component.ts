@@ -73,7 +73,7 @@ export abstract class ALuSelectInputComponent<TOption, TValue> implements OnDest
 	public placeholder$ = new BehaviorSubject('');
 
 	public disabled$ = new BehaviorSubject(false);
-	filterPillDisabled = toSignal(this.disabled$);
+	filterPillDisabled = toSignal(this.disabled$, { initialValue: false });
 
 	prefix = input<PortalContent | null>(null);
 
@@ -123,7 +123,7 @@ export abstract class ALuSelectInputComponent<TOption, TValue> implements OnDest
 
 	@HostBinding('class.is-searchFilled')
 	protected get isSearchFilledClass(): boolean {
-		return this.clue?.length > 0;
+		return (this.clue?.length ?? 0) > 0;
 	}
 
 	protected abstract hasValue(): boolean;
@@ -212,15 +212,15 @@ export abstract class ALuSelectInputComponent<TOption, TValue> implements OnDest
 	previousPage = output<void>();
 	addOption = output<string>();
 
-	public valueSignal = signal<TValue>(null);
+	public valueSignal = signal<TValue | null>(null);
 	isFilterPillEmpty = computed(() => this.valueSignal() === null);
 	isFilterPillClearable = computed(() => this.#clearable());
 
-	public get value(): TValue {
+	public get value(): TValue | null {
 		return this._value;
 	}
 
-	protected set value(value: TValue) {
+	protected set value(value: TValue | null) {
 		// TODO remove once migrated to signal, but there's an override
 		this._value = value;
 		this.valueSignal.set(value);
@@ -242,7 +242,7 @@ export abstract class ALuSelectInputComponent<TOption, TValue> implements OnDest
 		}
 	}
 
-	protected _value?: TValue;
+	protected _value: TValue | null = null;
 
 	options$ = new ReplaySubject<readonly TOption[]>(1);
 	loading$ = new BehaviorSubject(false);
@@ -344,7 +344,7 @@ export abstract class ALuSelectInputComponent<TOption, TValue> implements OnDest
 		}
 	}
 
-	registerOnChange(onChange: (value: TValue) => void): void {
+	registerOnChange(onChange: (value: TValue | null) => void): void {
 		this.onChange = onChange;
 	}
 
@@ -411,7 +411,7 @@ export abstract class ALuSelectInputComponent<TOption, TValue> implements OnDest
 	}
 
 	emitAddOption(): void {
-		this.addOption.emit(this.clue);
+		this.addOption.emit(this.clue ?? '');
 		this.panelRef?.close();
 	}
 
@@ -465,11 +465,11 @@ export abstract class ALuSelectInputComponent<TOption, TValue> implements OnDest
 		this.afterCloseFn?.();
 	}
 
-	public writeValue(value: TValue): void {
+	public writeValue(value: TValue | null): void {
 		this.value = value;
 	}
 
-	public updateValue(value: TValue, skipPanelOpen = false, noClear = false): void {
+	public updateValue(value: TValue | null, skipPanelOpen = false, noClear = false): void {
 		this.value = value;
 		if (!noClear) {
 			this.emptyClue();

@@ -1,4 +1,5 @@
 import { booleanAttribute, ChangeDetectionStrategy, Component, computed, inject, input } from '@angular/core';
+import { isNotNil } from '@lucca-front/ng/core';
 import { LU_DATA_TABLE_BODY_INSTANCE } from './data-table-body/data-table-body.token';
 import { LU_DATA_TABLE_FOOT_INSTANCE } from './data-table-foot/data-table-foot.token';
 import { LU_DATA_TABLE_HEAD_INSTANCE } from './data-table-head/data-table-head.token';
@@ -21,11 +22,13 @@ export abstract class BaseDataTableCell {
 	align = input<null | 'start' | 'center' | 'end'>(null);
 
 	isStickyStart = computed(() => {
-		return this.position() <= this.tableRef?.stickyColsStart() - 1;
+		const position = this.position();
+		return isNotNil(position) && isNotNil(this.tableRef) ? position <= this.tableRef.stickyColsStart() - 1 : undefined;
 	});
 
 	isStickyEnd = computed(() => {
-		return this.position() >= this.rowRef?.cells().length - this.tableRef?.stickyColsEnd();
+		const position = this.position();
+		return isNotNil(position) && isNotNil(this.tableRef) && isNotNil(this.rowRef) ? position >= this.rowRef.cells().length - this.tableRef.stickyColsEnd() : undefined;
 	});
 
 	position = computed(() => {

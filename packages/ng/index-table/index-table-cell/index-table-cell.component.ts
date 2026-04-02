@@ -33,6 +33,6 @@ export class IndexTableRowCellComponent extends BaseIndexTableCell {
 	tfoot = input(false, { transform: booleanAttribute });
 
 	actions = computed(() => {
-		return this.tableRef.header().cols()[this.position()].actions();
+		return this.tableRef.header()?.cols()[this.position()].actions();
 	});
 }

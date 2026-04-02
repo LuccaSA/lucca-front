@@ -1,16 +1,16 @@
+import { LuDialogRef, LuDialogSize } from '@lucca-front/ng/dialog';
 import { Observable, of } from 'rxjs';
+import { map } from 'rxjs/operators';
 import { LuModalClasses, LuModalMode } from '../modal-config.model';
 import { ILuModalRef } from '../modal-ref.model';
 import { ILuModalContent, LuModalContentResult } from '../modal.model';
-import { LuDialogRef, LuDialogSize } from '@lucca-front/ng/dialog';
-import { map } from 'rxjs/operators';
 import { DialogContentAdapterComponent } from './dialog-content-adapter/dialog-content-adapter.component';
 
 export class DialogRefAdapter<D, T extends ILuModalContent> implements ILuModalRef<D, LuModalContentResult<T>> {
 	mode: LuModalMode;
 	modalClasses: LuModalClasses;
 
-	onOpen: Observable<D> = of(this.dialogRef.instance.dialogData.data);
+	onOpen: Observable<D | undefined> = of(this.dialogRef.instance?.dialogData?.data);
 	onClose: Observable<LuModalContentResult<T>> = this.dialogRef.result$ as Observable<LuModalContentResult<T>>;
 	onDismiss: Observable<void> = this.dialogRef.dismissed$;
 	onBackdropClick: Observable<void> = this.dialogRef.cdkRef.backdropClick.pipe(map(() => {}));

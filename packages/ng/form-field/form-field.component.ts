@@ -22,7 +22,7 @@ import {
 } from '@angular/core';
 import { AbstractControl, NgControl, ReactiveFormsModule, RequiredValidator, Validators } from '@angular/forms';
 import { SafeHtml } from '@angular/platform-browser';
-import { intlInputOptions, IntlParamsPipe, LuClass, PortalContent, PortalDirective, ɵeffectWithDeps } from '@lucca-front/ng/core';
+import { intlInputOptions, IntlParamsPipe, isNotNil, LuClass, PortalContent, PortalDirective, ɵeffectWithDeps } from '@lucca-front/ng/core';
 import { LU_FORM_INSTANCE } from '@lucca-front/ng/form';
 import { IconComponent } from '@lucca-front/ng/icon';
 import { InlineMessageComponent, InlineMessageState } from '@lucca-front/ng/inline-message';
@@ -104,7 +104,7 @@ export class FormFieldComponent implements OnDestroy, DoCheck {
 	readonly iconAItooltip = input<string | null>(null);
 	readonly iconAIalt = input<string | null>(null);
 
-	readonly width = input<FormFieldWidth, FormFieldWidth | `${FormFieldWidth}` | null>(null, {
+	readonly width = input<FormFieldWidth | null, FormFieldWidth | `${FormFieldWidth}` | null>(null, {
 		transform: numberAttribute as (value: FormFieldWidth | `${FormFieldWidth}`) => FormFieldWidth,
 	});
 
@@ -261,9 +261,9 @@ export class FormFieldComponent implements OnDestroy, DoCheck {
 	}
 
 	#hasInvalidStatus(): boolean {
-		const isInvalidOverride = this.invalid() !== undefined && this.invalid() !== null;
+		const isInvalidOverride = isNotNil(this.invalid());
 		if (isInvalidOverride) {
-			return this.invalid();
+			return this.invalid() ?? false;
 		}
 		const statusControlOverride = this.statusControl();
 		if (statusControlOverride) {

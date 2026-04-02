@@ -15,7 +15,7 @@ import { LU_MODAL_TRANSLATIONS } from '../../modal.translate';
 
 interface AdapterData<D, C> {
 	component: ComponentType<C>;
-	data: D;
+	data: D | undefined;
 }
 
 @Component({
@@ -38,7 +38,7 @@ export class DialogContentAdapterComponent<D, C extends ILuModalContent> impleme
 
 	dialogData = injectDialogData<AdapterData<D, C>>();
 
-	ref = injectDialogRef<LuModalContentResult<C>>();
+	ref = injectDialogRef<LuModalContentResult<C> | undefined>();
 
 	submitClass = signal('');
 	error$ = new Subject();
@@ -80,7 +80,7 @@ export class DialogContentAdapterComponent<D, C extends ILuModalContent> impleme
 						takeUntilDestroyed(this.#destroyRef),
 					)
 					.subscribe({
-						next: (res) => this.ref.close(res as LuModalContentResult<C>),
+						next: (res: LuModalContentResult<C>) => this.ref.close(res),
 						error: (err) => {
 							this.submitClass.set('is-error');
 							this.error$.next(err);

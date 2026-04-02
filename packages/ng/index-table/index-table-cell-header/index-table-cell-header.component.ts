@@ -48,7 +48,7 @@ export class IndexTableRowCellHeaderComponent extends BaseIndexTableCell {
 
 	toggleSort(): void {
 		if (this.sort()) {
-			this.sort.set(SORT_VALUES[(SORT_VALUES.indexOf(this.sort()) + 1) % SORT_VALUES.length]);
+			this.sort.set(SORT_VALUES[(SORT_VALUES.indexOf(this.sort() ?? 'none') + 1) % SORT_VALUES.length]);
 		}
 	}
 }

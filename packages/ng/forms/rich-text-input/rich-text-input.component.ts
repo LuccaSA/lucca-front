@@ -23,6 +23,7 @@ import { ControlValueAccessor, NG_VALUE_ACCESSOR } from '@angular/forms';
 import { createEmptyHistoryState, registerHistory } from '@lexical/history';
 import { $canShowPlaceholderCurry, $isRootTextContentEmpty } from '@lexical/text';
 import { mergeRegister } from '@lexical/utils';
+import { isNil } from '@lucca-front/ng/core';
 import { FormFieldComponent, InputDirective, ɵPresentationDisplayDefaultDirective } from '@lucca-front/ng/form-field';
 import { $getRoot, createEditor, Klass, LexicalEditor, LexicalNode, LexicalNodeReplacement, UpdateListenerPayload } from 'lexical';
 import { RICH_TEXT_FORMATTER, RichTextFormatter } from './formatters';
@@ -131,7 +132,9 @@ export class RichTextInputComponent implements OnInit, OnDestroy, ControlValueAc
 			this.#editor.registerUpdateListener((payload) => this.#onEditorUpdate(payload)),
 		);
 
-		this.pluginComponents().forEach((plugin) => plugin.setEditorInstance(this.#editor));
+		if (this.#editor) {
+			this.pluginComponents().forEach((plugin) => plugin.setEditorInstance(this.#editor!));
+		}
 
 		if (this.#allPlugins().length > 0) {
 			this.#allPlugins()[this.#focusedPlugin].tabindex?.set(0);
@@ -143,16 +146,21 @@ export class RichTextInputComponent implements OnInit, OnDestroy, ControlValueAc
 	}
 
 	writeValue(value: string | null): void {
+		const editorRef = this.#editor;
+		if (isNil(editorRef)) {
+			return;
+		}
 		const updateTags = [SKIP_DOM_SELECTION_TAG, INITIAL_UPDATE_TAG];
+
 		if (value) {
-			this.#editor?.update(
+			editorRef.update(
 				() => {
-					this.#richTextFormatter.parse(this.#editor, value);
+					this.#richTextFormatter.parse(editorRef, value);
 				},
 				{ tag: updateTags },
 			);
-		} else if (!this.#editor?.getEditorState().isEmpty()) {
-			this.#editor?.update(
+		} else if (!editorRef.getEditorState().isEmpty()) {
+			editorRef.update(
 				() => {
 					const root = $getRoot();
 					root.clear();
@@ -214,14 +222,14 @@ export class RichTextInputComponent implements OnInit, OnDestroy, ControlValueAc
 			this.#editor?.read(() => {
 				let result = '';
 				// ignore empty nodes
-				if (!$isRootTextContentEmpty(isComposing, false)) {
+				if (!$isRootTextContentEmpty(isComposing ?? false, false) && this.#editor) {
 					result = this.#richTextFormatter.format(this.#editor);
 				}
 				this.touch();
 				this.#onChange?.(result);
 			});
 		}
-		const currentCanShowPlaceholder = this.#editor?.getEditorState().read($canShowPlaceholderCurry(isComposing));
-		this.currentCanShowPlaceholder.set(currentCanShowPlaceholder);
+		const currentCanShowPlaceholder = this.#editor?.getEditorState().read($canShowPlaceholderCurry(isComposing ?? false));
+		this.currentCanShowPlaceholder.set(currentCanShowPlaceholder ?? false);
 	}
 }
