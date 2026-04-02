@@ -21,7 +21,7 @@ export class LuModal {
 			content: DialogContentAdapterComponent<D, T>,
 			data: {
 				component: component,
-				data: data as D,
+				data: data,
 			},
 			modal: !extendedConfig.noBackdrop,
 			alert: extendedConfig.undismissable,

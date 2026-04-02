@@ -15,7 +15,7 @@ import { LU_MODAL_TRANSLATIONS } from '../../modal.translate';
 
 interface AdapterData<D, C> {
 	component: ComponentType<C>;
-	data: D;
+	data: D | undefined;
 }
 
 @Component({
