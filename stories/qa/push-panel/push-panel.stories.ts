@@ -145,9 +145,9 @@ class PushPanelStory {
 
 	togglePushPanel() {
 		if (this.showPushPanel) {
-			document.documentElement.style.setProperty('--commons-pushPanel-width', '348px');
+			document.documentElement.style.setProperty('--commons-pushPanel-inlineSize', '348px');
 		} else {
-			document.documentElement.style.removeProperty('--commons-pushPanel-width');
+			document.documentElement.style.removeProperty('--commons-pushPanel-inlineSize');
 		}
 	}
 }

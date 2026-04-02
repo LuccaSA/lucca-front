@@ -1,7 +1,7 @@
 @mixin vars {
 	--components-toasts-color: var(--pr-t-color-text-reverse);
 	--components-toasts-top: var(--pr-t-spacings-300);
-	--components-toasts-right: calc(var(--pr-t-spacings-300) + var(--commons-pushPanel-width));
+	--components-toasts-right: calc(var(--pr-t-spacings-300) + var(--commons-pushPanel-inlineSize));
 	--components-toasts-left: var(--pr-t-spacings-300);
 	--components-toasts-bottom: var(--pr-t-spacings-300);
 	--components-toasts-margin-bottom: var(--pr-t-spacings-50);
