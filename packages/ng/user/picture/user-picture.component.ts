@@ -74,12 +74,9 @@ export class LuUserPictureComponent {
 	readonly initials = computed(() => luUserDisplay(this.user(), this.displayFormat()));
 	readonly modSize = computed(() => `mod-${this.size()}`);
 	readonly hasPicture = linkedSignal(() => isNotNilOrEmptyString(this.pictureHref()));
-	readonly pictureHref = computed(() => {
+	readonly pictureHref = linkedSignal(() => {
 		const user = this.user();
-		if (user) {
-			return user?.picture?.href || user?.pictureHref;
-		}
-		return null;
+		return user?.picture?.href || user?.pictureHref || null;
 	});
 	readonly style = linkedSignal(() => {
 		if (!this.hasPicture()) {
@@ -98,6 +95,15 @@ export class LuUserPictureComponent {
 	});
 
 	pictureError() {
+		const user = this.user();
+		const currentHref = this.pictureHref();
+		const fallbackHref = user?.pictureHref;
+
+		if (isNotNilOrEmptyString(fallbackHref) && fallbackHref !== currentHref) {
+			this.pictureHref.set(fallbackHref);
+			return;
+		}
+
 		this.hasPicture.set(false);
 		const hsl = this.#getNameHue();
 		this.style.set({ 'background-color': `hsl(${hsl}, 60%, 60%)` });
