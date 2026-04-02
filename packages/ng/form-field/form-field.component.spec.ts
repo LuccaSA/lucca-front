@@ -15,10 +15,10 @@ import { FormFieldComponent } from './form-field.component';
 	changeDetection: ChangeDetectionStrategy.OnPush,
 })
 export class FormFieldComponentTestComponent {
-	formControlToUse = input<'normal' | 'required'>('normal');
-	formField = viewChild(FormFieldComponent);
+	readonly formControlToUse = input<'normal' | 'required'>('normal');
+	readonly formField = viewChild(FormFieldComponent);
 
-	formControl = computed(() => (this.formControlToUse() === 'normal' ? this.normalFormControl : this.requiredFormControl));
+	readonly formControl = computed(() => (this.formControlToUse() === 'normal' ? this.normalFormControl : this.requiredFormControl));
 
 	requiredFormControl = new FormControl('', { validators: Validators.required });
 	normalFormControl = new FormControl('');

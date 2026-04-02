@@ -23,10 +23,10 @@ import { LU_FILTER_PILLS_TRANSLATIONS } from '../filter-pills.translate';
 	},
 })
 export class FilterBarComponent {
-	intl = input(...intlInputOptions(LU_FILTER_PILLS_TRANSLATIONS));
+	readonly intl = input(...intlInputOptions(LU_FILTER_PILLS_TRANSLATIONS));
 
-	addonBefore = signal<TemplateRef<unknown> | null>(null);
-	addonAfter = signal<TemplateRef<unknown> | null>(null);
+	readonly addonBefore = signal<TemplateRef<unknown> | null>(null);
+	readonly addonAfter = signal<TemplateRef<unknown> | null>(null);
 
 	popoverPositions: ConnectionPositionPair[] = [
 		new ConnectionPositionPair(
@@ -49,7 +49,7 @@ export class FilterBarComponent {
 		),
 	];
 
-	pills = contentChildren(FilterPillComponent, { descendants: true });
+	readonly pills = contentChildren(FilterPillComponent, { descendants: true });
 
-	optionalPills = computed(() => this.pills().filter((pill) => pill.optional()));
+	readonly optionalPills = computed(() => this.pills().filter((pill) => pill.optional()));
 }

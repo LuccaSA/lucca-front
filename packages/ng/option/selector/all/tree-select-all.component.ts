@@ -1,5 +1,5 @@
 import { ChangeDetectionStrategy, Component, forwardRef, HostBinding, input } from '@angular/core';
-import { intlInputOptions, ILuTree } from '@lucca-front/ng/core';
+import { ILuTree, intlInputOptions } from '@lucca-front/ng/core';
 import { Observable, Subject } from 'rxjs';
 import { tap } from 'rxjs/operators';
 import { ALuTreeOptionOperator } from '../../operator/index';
@@ -29,7 +29,7 @@ import { LU_OPTION_SELECT_ALL_TRANSLATIONS } from './select-all.translate';
 })
 export class LuTreeOptionSelectAllComponent<T> extends ALuTreeOptionOperator<T> implements ILuTreeOptionSelector<T> {
 	multiple = true;
-	onSelectValue = new Subject<T | T[]>();
+	readonly onSelectValue = new Subject<T | T[]>();
 	private _values: T[];
 
 	@HostBinding('class.position-fixed') fixed = true;
@@ -39,7 +39,7 @@ export class LuTreeOptionSelectAllComponent<T> extends ALuTreeOptionOperator<T> 
 		this.outOptions$ = in$.pipe(tap((options) => (this.flatOptions = this.flattenTree(options))));
 	}
 
-	public intl = input(...intlInputOptions(LU_OPTION_SELECT_ALL_TRANSLATIONS));
+	public readonly intl = input(...intlInputOptions(LU_OPTION_SELECT_ALL_TRANSLATIONS));
 
 	selectAll() {
 		if (!this.flatOptions) {

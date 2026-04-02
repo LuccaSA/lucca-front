@@ -58,20 +58,20 @@ export class LuCoreSelectUsersDirective<T extends LuCoreSelectUser = LuCoreSelec
 	protected httpClient = inject(HttpClient);
 	public currentUserId = inject(LU_CORE_SELECT_CURRENT_USER_ID);
 
-	displayFormat = input<LuDisplayFormat>(LuDisplayFullname.lastfirst);
+	readonly displayFormat = input<LuDisplayFormat>(LuDisplayFullname.lastfirst);
 
-	filters = input<Record<string, string | number | boolean>>({});
-	url = input<string | null>(null);
-	orderBy = input<string | null>(null);
-	operationIds = input<readonly number[] | null>(null);
-	uniqueOperationIds = input<readonly number[] | null>(null);
-	appInstanceId = input<number | null>(null);
-	enableFormerEmployees = input(false, { transform: booleanAttribute });
-	displayMeOption = input(true);
-	customUserOptionTpl = model<TemplateRef<LuOptionContext<T>> | Type<unknown> | undefined>();
+	readonly filters = input<Record<string, string | number | boolean>>({});
+	readonly url = input<string | null>(null);
+	readonly orderBy = input<string | null>(null);
+	readonly operationIds = input<readonly number[] | null>(null);
+	readonly uniqueOperationIds = input<readonly number[] | null>(null);
+	readonly appInstanceId = input<number | null>(null);
+	readonly enableFormerEmployees = input(false, { transform: booleanAttribute });
+	readonly displayMeOption = input(true);
+	readonly customUserOptionTpl = model<TemplateRef<LuOptionContext<T>> | Type<unknown> | undefined>();
 
-	includeFormerEmployees = signal(false);
-	searchDelimiter = input<string>(' ');
+	readonly includeFormerEmployees = signal(false);
+	readonly searchDelimiter = input<string>(' ');
 
 	constructor() {
 		super();
@@ -88,12 +88,12 @@ export class LuCoreSelectUsersDirective<T extends LuCoreSelectUser = LuCoreSelec
 		});
 	}
 
-	protected defaultUrl = computed(() => (this.uniqueOperationIds()?.length || (this.appInstanceId() && this.operationIds()?.length) ? this.#defaultScopedSearchUrl : this.#defaultSearchUrl));
-	protected urlOrDefault = computed(() => this.url() ?? this.defaultUrl());
+	protected readonly defaultUrl = computed(() => (this.uniqueOperationIds()?.length || (this.appInstanceId() && this.operationIds()?.length) ? this.#defaultScopedSearchUrl : this.#defaultSearchUrl));
+	protected readonly urlOrDefault = computed(() => this.url() ?? this.defaultUrl());
 
-	protected clue = toSignal(this.clue$);
+	protected readonly clue = toSignal(this.clue$);
 
-	protected override params$: Observable<Record<string, string | number | boolean>> = toObservable(
+	protected override readonly params$: Observable<Record<string, string | number | boolean>> = toObservable(
 		computed(() => {
 			const orderBy = this.orderBy();
 			const clue = this.clue();
@@ -116,7 +116,7 @@ export class LuCoreSelectUsersDirective<T extends LuCoreSelectUser = LuCoreSelec
 		}),
 	);
 
-	protected meParams$ = toObservable(
+	protected readonly meParams$ = toObservable(
 		computed(() => {
 			const uniqueOperationIds = this.uniqueOperationIds();
 			const operationIds = this.operationIds();
@@ -133,7 +133,7 @@ export class LuCoreSelectUsersDirective<T extends LuCoreSelectUser = LuCoreSelec
 		}),
 	);
 
-	protected me$ = this.meParams$.pipe(
+	protected readonly me$ = this.meParams$.pipe(
 		switchMap((params) =>
 			this.httpClient
 				.get<
@@ -148,7 +148,7 @@ export class LuCoreSelectUsersDirective<T extends LuCoreSelectUser = LuCoreSelec
 		shareReplay(1),
 	);
 
-	public totalCount$ = toObservable(computed(() => ({ url: this.urlOrDefault(), filters: this.filters() }))).pipe(
+	public readonly totalCount$ = toObservable(computed(() => ({ url: this.urlOrDefault(), filters: this.filters() }))).pipe(
 		debounceTime(250),
 		switchMap(({ url, filters }) =>
 			this.httpClient.get<{ count: number }>(url, {

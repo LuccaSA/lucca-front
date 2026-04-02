@@ -17,7 +17,7 @@ import { LuClass } from '@lucca-front/ng/core';
 export class DividerComponent implements OnChanges {
 	#luClass = inject(LuClass);
 
-	@ViewChild('content') content: ElementRef;
+	@ViewChild('content') readonly content: ElementRef;
 
 	/**
 	 * Allows rendering the Divider as a native separator

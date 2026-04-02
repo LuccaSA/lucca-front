@@ -17,7 +17,7 @@ export class LinkDialogComponent {
 	public readonly dialogData = injectDialogData<string>();
 	public readonly dialogRef = injectDialogRef<string | undefined>();
 
-	intl = input(...intlInputOptions(LU_RICH_TEXT_INPUT_TRANSLATIONS));
+	readonly intl = input(...intlInputOptions(LU_RICH_TEXT_INPUT_TRANSLATIONS));
 
 	public readonly formGroup = new FormGroup({
 		href: new FormControl<string>(this.dialogData, Validators.required),

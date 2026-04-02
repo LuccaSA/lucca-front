@@ -56,14 +56,14 @@ import { LuOptionsGroupContextPipe } from './option-group-context.pipe';
 	],
 })
 export class LuMultiSelectPanelComponent<T> implements AfterViewInit, CoreSelectPanelInstance {
-	protected selectInput = inject<LuMultiSelectInputComponent<T>>(MULTI_SELECT_INPUT);
-	panelRef = inject<LuMultiSelectPanelRef<T>>(LuMultiSelectPanelRef);
-	selectId = inject(SELECT_ID);
+	protected readonly selectInput = inject<LuMultiSelectInputComponent<T>>(MULTI_SELECT_INPUT);
+	readonly panelRef = inject<LuMultiSelectPanelRef<T>>(LuMultiSelectPanelRef);
+	readonly selectId = inject(SELECT_ID);
 
-	options$ = this.selectInput.options$;
-	grouping = this.selectInput.groupingSignal;
+	readonly options$ = this.selectInput.options$;
+	readonly grouping = this.selectInput.groupingSignal;
 	treeGenerator = this.selectInput.treeGenerator;
-	loading$ = this.selectInput.loading$;
+	readonly loading$ = this.selectInput.loading$;
 	searchable = this.selectInput.searchable;
 	optionComparer = this.selectInput.optionComparer;
 	optionKey = this.selectInput.optionKey;
@@ -74,12 +74,12 @@ export class LuMultiSelectPanelComponent<T> implements AfterViewInit, CoreSelect
 	trackBranchesBy: TrackByFunction<TreeNode<T>> = (_, option) => this.optionKey(option.node);
 
 	selectedOptions: T[] = this.selectInput.value || [];
-	optionTpl = this.selectInput.optionTpl;
+	readonly optionTpl = this.selectInput.optionTpl;
 
-	options = signal<ɵCoreSelectPanelElement<T>[]>([]);
+	readonly options = signal<ɵCoreSelectPanelElement<T>[]>([]);
 	keyManager = inject<CoreSelectKeyManager<T>>(CoreSelectKeyManager);
 
-	someGroupOptionEnabled = computed(() => {
+	readonly someGroupOptionEnabled = computed(() => {
 		return (groupOptions: T[]) => {
 			const disabledOptionIds = this.options()
 				.filter((o) => o.disabled)
@@ -90,11 +90,11 @@ export class LuMultiSelectPanelComponent<T> implements AfterViewInit, CoreSelect
 		};
 	});
 
-	hasGrouping$ = toObservable(this.grouping).pipe(map((grouping) => !!grouping));
-	public clueChange$ = this.selectInput.clue$.pipe(map((clue) => clue ?? ''));
-	public shouldDisplayAddOption$ = this.selectInput.shouldDisplayAddOption$;
+	readonly hasGrouping$ = toObservable(this.grouping).pipe(map((grouping) => !!grouping));
+	public readonly clueChange$ = this.selectInput.clue$.pipe(map((clue) => clue ?? ''));
+	public readonly shouldDisplayAddOption$ = this.selectInput.shouldDisplayAddOption$;
 
-	groupTemplateLocation$ = ɵgetGroupTemplateLocation(this.hasGrouping$, this.clueChange$, this.options$, this.searchable);
+	readonly groupTemplateLocation$ = ɵgetGroupTemplateLocation(this.hasGrouping$, this.clueChange$, this.options$, this.searchable);
 
 	onScroll(evt: Event): void {
 		if (!(evt.target instanceof HTMLElement)) {

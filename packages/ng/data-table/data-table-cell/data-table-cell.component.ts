@@ -30,25 +30,25 @@ import { LU_DATA_TABLE_CELL_INSTANCE } from '../data-table-cell.token';
 	changeDetection: ChangeDetectionStrategy.OnPush,
 })
 export class DataTableRowCellComponent extends BaseDataTableCell {
-	actions = input(false, { transform: booleanAttribute });
+	readonly actions = input(false, { transform: booleanAttribute });
 
-	isSticky = computed(() => {
+	readonly isSticky = computed(() => {
 		return this.isStickyStart() || this.isStickyEnd();
 	});
 
-	alignCol = computed(() => {
+	readonly alignCol = computed(() => {
 		const cols = this.tableRef?.header()?.cols?.();
 		const position = this.position();
 		return position !== undefined ? cols?.[position]?.align?.() : undefined;
 	});
 
-	insetInlineStart = computed(() => {
+	readonly insetInlineStart = computed(() => {
 		const cols = this.tableRef?.header()?.cols?.();
 		const position = this.position();
 		return position !== undefined ? cols?.[position]?.insetInlineStart?.() : undefined;
 	});
 
-	insetInlineEnd = computed(() => {
+	readonly insetInlineEnd = computed(() => {
 		const cols = this.tableRef?.header()?.cols?.();
 		const position = this.position();
 		return position !== undefined ? cols?.[position]?.insetInlineEnd?.() : undefined;
