@@ -1,3 +1,4 @@
+import { isNil } from '@lucca-front/ng/core';
 import { canCastSplittedInputToNumber, joinSplittedInput, NumberFormatOptions, NumberFormatParsedInput, NumberFormatSplittedInput } from './number-format.models';
 
 const VALUE_TYPES: Intl.NumberFormatPartTypes[] = ['integer', 'decimal', 'fraction', 'group', 'minusSign'];
@@ -86,7 +87,7 @@ export class NumberFormat {
 	}
 
 	applyRange(value: number | null | undefined): number | null {
-		if (value === null || value === undefined) {
+		if (isNil(value)) {
 			return null;
 		}
 		if (this.min !== undefined) {
@@ -176,7 +177,7 @@ export class NumberFormat {
 	}
 
 	getFocusFormat(value: number | undefined | null): string {
-		if (value === null || value === undefined || isNaN(value)) {
+		if (isNil(value) || isNaN(value)) {
 			// Add minus sign by default if range only allows negative values
 			return this.max !== undefined && this.max < 0 ? '-' : '';
 		}
@@ -196,7 +197,7 @@ export class NumberFormat {
 	}
 
 	getBlurFormat(value: number | undefined | null): string {
-		if (value === null || value === undefined) {
+		if (isNil(value)) {
 			return '';
 		}
 		return this.#intlNumberFormat

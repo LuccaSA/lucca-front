@@ -1,5 +1,6 @@
 import { ChangeDetectorRef, ElementRef, Renderer2 } from '@angular/core';
 import { ControlValueAccessor } from '@angular/forms';
+import { isNil } from '@lucca-front/ng/core';
 
 export type ILuInput = ControlValueAccessor;
 
@@ -47,7 +48,7 @@ export abstract class ALuInput<T, U extends HTMLElement = HTMLElement> implement
 		this._onTouched = fn;
 	}
 	protected isEmpty() {
-		return this.value === null || this.value === undefined;
+		return isNil(this.value);
 	}
 	protected applyClasses() {
 		if (this.isEmpty()) {

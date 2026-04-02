@@ -24,7 +24,7 @@ import { toSignal } from '@angular/core/rxjs-interop';
 import { AbstractControl, ControlValueAccessor, FormsModule, NG_VALIDATORS, NG_VALUE_ACCESSOR, NgControl, NgModel, ValidationErrors, Validator } from '@angular/forms';
 import { LuccaIcon } from '@lucca-front/icons';
 import { ClearComponent } from '@lucca-front/ng/clear';
-import { isNil, LuClass, PortalContent, PortalDirective, ɵeffectWithDeps } from '@lucca-front/ng/core';
+import { isNil, isNotNil, LuClass, PortalContent, PortalDirective, ɵeffectWithDeps } from '@lucca-front/ng/core';
 import { FILTER_PILL_INPUT_COMPONENT, FilterPillDisplayerDirective, FilterPillInputComponent } from '@lucca-front/ng/filter-pills';
 import { FORM_FIELD_INSTANCE, InputDirective, ɵPresentationDisplayDefaultDirective } from '@lucca-front/ng/form-field';
 import { IconComponent } from '@lucca-front/ng/icon';
@@ -464,7 +464,7 @@ export class DateRangeInputComponent extends AbstractDateComponent implements On
 			this.selectedRange.set(this.clearBehavior() === 'reset' ? (this.initialValue() ?? null) : _dateRange);
 		}
 
-		if (dateRange != null) {
+		if (isNotNil(dateRange)) {
 			this.selectedRange.set(_dateRange);
 			this.currentDate.set(startOfDay(dateRange.start));
 		}

@@ -1,9 +1,10 @@
 import { ComponentRef, Directive, EmbeddedViewRef, inject, Injector, Input, OnChanges, OnDestroy, SimpleChanges, TemplateRef, Type, ViewContainerRef } from '@angular/core';
+import { isNotNil } from '@lucca-front/ng/core';
 import { LuOptionContext } from '../select.model';
 import { LU_OPTION_CONTEXT, provideOptionContext } from './option.token';
 
 function hasRenderableValue<T>(value: T | undefined): value is T {
-	return value !== null && value !== undefined;
+	return isNotNil(value);
 }
 
 @Directive({

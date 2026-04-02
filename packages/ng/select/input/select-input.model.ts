@@ -81,7 +81,7 @@ export abstract class ALuSelectInput<T, TPicker extends ILuPickerPanel<T> = ILuP
 	}
 	protected isEmpty() {
 		const isEmptyArray = Array.isArray(this.value) && this.value.length === 0;
-		return this.value === null || this.value === undefined || isEmptyArray;
+		return isNil(this.value) || isEmptyArray;
 	}
 	protected applyClasses() {
 		if (this.isEmpty()) {
@@ -159,7 +159,7 @@ export abstract class ALuSelectInput<T, TPicker extends ILuPickerPanel<T> = ILuP
 
 	protected renderSingleView() {
 		this.clearDisplay();
-		if (this.value !== null && this.value !== undefined) {
+		if (!isNil(this.value)) {
 			const newView = this.getView(this.value);
 			this.displayView(newView);
 		}

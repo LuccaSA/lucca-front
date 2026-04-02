@@ -315,7 +315,7 @@ export class DateInputComponent extends AbstractDateComponent implements OnInit,
 	validate(control: AbstractControl<Date | string | null>): Partial<DateInputValidatorErrorType> | null {
 		// null is not an error but means we'll skip everything else, we'll let the presence of a
 		// Validators.required (or not) decide if it's an error.
-		if (control.value === null || control.value === undefined) {
+		if (isNil(control.value)) {
 			return null;
 		}
 		const date = transformDateInputToDate(control.value);
@@ -353,7 +353,7 @@ export class DateInputComponent extends AbstractDateComponent implements OnInit,
 			this.initialValue.set(_date);
 		}
 
-		if (date != null && _date != null) {
+		if (isNotNil(date) && isNotNil(_date)) {
 			const start = startOfDay(_date);
 			this.dateFromWriteValue.set(start);
 			this.selectedDate.set(start);
