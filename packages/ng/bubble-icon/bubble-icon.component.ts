@@ -24,12 +24,12 @@ import { IconComponent } from '@lucca-front/ng/icon';
 export class BubbleIconComponent {
 	readonly icon = input.required<LuccaIcon>();
 	readonly alt = input<string | null>(null);
-	readonly size = input<'S' | 'L' | ''>('');
+	readonly size = input<'S' | 'M' | 'L'>('M');
 
 	readonly palette = input<Palette | DecorativePalette>('product');
 	readonly paletteClass = computed(() => ({ [`palette-${this.palette()}`]: !!this.palette() }));
 
-	readonly bubbleDirection = input<'top' | 'bottom' | 'left' | 'right' | null>(null);
+	readonly bubbleDirection = input<'top' | 'bottom' | 'left' | 'right' | 'random'>('random');
 
 	readonly randomNumber = signal<number>(Math.floor(Math.random() * 4) + 1);
 

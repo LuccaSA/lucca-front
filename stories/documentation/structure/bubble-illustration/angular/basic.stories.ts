@@ -116,7 +116,7 @@ export default {
 			description: "Modifie l'illustration.",
 		},
 		size: {
-			options: ['S', '', 'L'],
+			options: ['S', 'M', 'L'],
 			control: {
 				type: 'select',
 			},
@@ -168,7 +168,7 @@ export default {
 	],
 	render: ({ palette, size, ...args }, { argTypes }) => {
 		const paletteArg = palette !== 'product' ? ` palette="${palette}"` : ``;
-		const sizeArg = size !== '' ? ` size="${size}"` : ``;
+		const sizeArg = size === 'M' ? `` : ` size="${size}"`;
 		return {
 			template: cleanupTemplate(`<lu-bubble-illustration${sizeArg}${paletteArg}${generateInputs(args, argTypes)} />`),
 		};
@@ -180,6 +180,6 @@ export const Basic: StoryObj<BubbleIllustrationComponent & { palette: string }> 
 		illustration: 'anniversary',
 		palette: 'product',
 		action: false,
-		size: '',
+		size: 'M',
 	},
 };
