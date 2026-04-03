@@ -7,6 +7,8 @@
 
 @mixin horizontal {
 	grid-template-columns: 1fr auto;
+
+	--components-form-maxWidth: initial;
 }
 
 @mixin expandable {
@@ -21,6 +23,10 @@
 
 		&:focus-visible {
 			@include a11y.focusVisible;
+		}
+
+		.lucca-icon {
+			margin-block-start: var(--pr-t-spacings-50);
 		}
 	}
 }
