@@ -90,10 +90,7 @@
 			}
 
 			.formLabel-tag {
-				&,
-				.tag {
-					@include tag.disabled;
-				}
+				@include tag.disabled;
 			}
 		}
 
@@ -112,6 +109,10 @@
 					@include hiddenLabel;
 				}
 			}
+		}
+
+		&:has(.formLabel.is-error) {
+			@include critical;
 		}
 	}
 }

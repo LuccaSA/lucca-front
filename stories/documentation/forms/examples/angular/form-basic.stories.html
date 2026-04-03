@@ -1,0 +1,70 @@
+<form luForm maxWidth [formGroup]="form" (submit)="submit()">
+	<lu-form-header>Form title</lu-form-header>
+	<lu-fieldset heading="Fieldset title" helper="Helper message">
+		<lu-grid mode="form">
+			<lu-grid-column colspan="4">
+				<lu-form-field label="Label" counter="50" errorInlineMessage="Your message is too long. A maximum of 50 characters is allowed.">
+					<lu-text-input formControlName="field1" />
+				</lu-form-field>
+			</lu-grid-column>
+			<lu-grid-column colspan="4" [responsive]="{ colspanAtMediaMinXXS: 2 }">
+				<lu-form-field label="Label" errorInlineMessage="Mandatory field">
+					<lu-text-input required formControlName="field2" />
+				</lu-form-field>
+			</lu-grid-column>
+			<lu-grid-column colspan="4" [responsive]="{ colspanAtMediaMinXXS: 2 }">
+				<lu-form-field label="Label" errorInlineMessage="Mandatory field">
+					<lu-text-input required formControlName="field3" />
+				</lu-form-field>
+			</lu-grid-column>
+			<lu-grid-column colspan="4" [responsive]="{ colspanAtMediaMinXXS: 2 }">
+				<lu-form-field label="Label">
+					<lu-text-input formControlName="field4" />
+				</lu-form-field>
+			</lu-grid-column>
+			<lu-grid-column colspan="4" [responsive]="{ colspanAtMediaMinXXS: 1 }">
+				<lu-form-field label="Label">
+					<lu-text-input formControlName="field5" />
+				</lu-form-field>
+			</lu-grid-column>
+			<lu-grid-column colspan="4" [responsive]="{ colspanAtMediaMinXXS: 1 }">
+				<lu-form-field label="Label">
+					<lu-text-input formControlName="field6" />
+				</lu-form-field>
+			</lu-grid-column>
+			<lu-grid-column colspan="4" [responsive]="{ colspanAtMediaMinXXS: 1 }">
+				<lu-form-field label="Label">
+					<lu-text-input formControlName="field7" />
+				</lu-form-field>
+			</lu-grid-column>
+			<lu-grid-column colspan="4" [responsive]="{ colspanAtMediaMinXXS: 1 }">
+				<lu-form-field label="Label">
+					<lu-text-input formControlName="field8" />
+				</lu-form-field>
+			</lu-grid-column>
+		</lu-grid>
+	</lu-fieldset>
+	<lu-divider />
+	<lu-fieldset heading="Fieldset title" helper="Helper message">
+		<lu-grid mode="form">
+			<lu-grid-column colspan="4">
+				<lu-form-field label="Label" counter="400" errorInlineMessage="Your message is too long. A maximum of 400 characters is allowed.">
+					<lu-textarea-input formControlName="field9" autoResizeScrollIntoView="true" autoResize="true" rows="2" />
+				</lu-form-field>
+			</lu-grid-column>
+			<lu-grid-column colspan="4" [responsive]="{ colspanAtMediaMinXXS: 2 }">
+				<lu-form-field label="Label">
+					<lu-text-input formControlName="field10" />
+				</lu-form-field>
+			</lu-grid-column>
+			<lu-grid-column colspan="4" [responsive]="{ colspanAtMediaMinXXS: 2 }">
+				<lu-form-field label="Label">
+					<lu-text-input formControlName="field11" />
+				</lu-form-field>
+			</lu-grid-column>
+		</lu-grid>
+	</lu-fieldset>
+	<div class="pr-u-marginBlock200 pr-u-textAlignRight">
+		<button type="submit" luButton>Valider</button>
+	</div>
+</form>

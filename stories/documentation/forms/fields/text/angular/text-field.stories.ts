@@ -124,7 +124,7 @@ export const Basic: StoryObj<TextInputComponent & { disabled: boolean; required:
 		const { counter, label, hiddenLabel, tooltip, tag, inlineMessage, inlineMessageState, size, width, AI, iconAItooltip, iconAIalt, presentation, ...inputArgs } = args;
 		return {
 			props: {
-				example: 'Example value',
+				example: 'Lorem ipsum',
 			},
 			template: cleanupTemplate(`<lu-form-field ${generateInputs(
 				{

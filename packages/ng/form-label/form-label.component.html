@@ -11,7 +11,13 @@
 	<lu-tag class="formLabel-tag" [label]="tag()" />
 }
 @if (counterMax() > 0) {
-	<span class="formLabel-counter" [attr.id]="counterId()" aria-live="polite">
+	<span
+		class="formLabel-counter"
+		[class.mod-warning]="counterStatus() > counterMax() - counterMax() / (100 / 20) && counterStatus() <= counterMax()"
+		[class.mod-critical]="counterStatus() > counterMax()"
+		[attr.id]="counterId()"
+		aria-live="polite"
+	>
 		<span aria-hidden="true">{{ counterStatus() }}/{{ counterMax() }}</span>
 		<span class="pr-u-mask">{{
 			counterStatus() <= 1
