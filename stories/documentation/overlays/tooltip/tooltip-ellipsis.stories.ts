@@ -86,11 +86,11 @@ import { interval, map } from 'rxjs';
 			}
 
 			.paddingRight {
-				padding-right: 50px;
+				padding-inline-end: 50px;
 			}
 
 			.paddingLeft {
-				padding-left: 50px;
+				padding-inline-start: 50px;
 			}
 
 			.borderRight {

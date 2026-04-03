@@ -23,7 +23,7 @@ function getTemplate(args: FilesUploadingStory): string {
 			<span class="pr-u-mask"></span>
 			<span class="file-formats pr-u-marginBlockStart100"></span>
 			<span class="file-progress progress">
-				<span class="progress-bar" style="width: 50%"></span>
+				<span class="progress-bar" style="inline-size: 50%"></span>
 			</span>
 		</span>
 	</label>
@@ -42,7 +42,7 @@ function getTemplate(args: FilesUploadingStory): string {
 			<span class="file-button button mod-outlined mod-S"></span>
 			<span class="file-formats"></span>
 			<span class="file-progress progress">
-				<span class="progress-bar" style="width: 50%"></span>
+				<span class="progress-bar" style="inline-size: 50%"></span>
 			</span>
 		</span>
 	</label>

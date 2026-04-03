@@ -8,7 +8,7 @@ export default {
 } as Meta;
 
 function getTemplate(args: OverflowBothStory): string {
-	return `<div class="dataTableWrapper" style="width: 30rem; height: 10rem">
+	return `<div class="dataTableWrapper" style="inline-size: 30rem; height: 10rem">
 	<div class="dataTableShadows">
 		<table
 			class="dataTable mod-columnsOverflow mod-rowsOverflow -is-firstColumnVisible -is-firstRowVisible -is-lastColumnVisible -is-lastRowVisible"
