@@ -12,6 +12,14 @@ export default {
 				type: 'select',
 			},
 		},
+		containerMax: {
+			options: ['', 'M', 'L', 'XL', 'XXL', 'XXXL'],
+			control: {
+				type: 'select',
+			},
+			if: { arg: 'container', truthy: true },
+			description: 'Fixe une largeur maximum au container.',
+		},
 		container: {
 			description: 'Applique un container autour du contenu de Page Header.',
 		},
@@ -42,6 +50,7 @@ export const Basic = {
 	args: {
 		sticky: false,
 		container: false,
+		containerMax: '',
 		forceNarrow: false,
 		narrowAtMediaMax: 'XXS',
 	},

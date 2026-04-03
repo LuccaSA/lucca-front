@@ -3,7 +3,7 @@ import { Meta, StoryObj } from '@storybook/angular';
 interface FormLabelSizeStory {}
 
 export default {
-	title: 'Documentation/Forms/Form Label Size',
+	title: 'Documentation/Forms/Form Label/HTML & CSS/Size',
 	argTypes: {},
 } as Meta;
 

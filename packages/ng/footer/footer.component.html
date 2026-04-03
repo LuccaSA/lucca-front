@@ -1,8 +1,8 @@
 @if (container()) {
 	<footer class="footer" [class.dialog-inside-footer]="dialog()" [class.mod-sticky]="sticky()" [class]="breakpointClass()">
-		<div class="footer-containerOptional">
+		<lu-container [max]="containerMax()" class="footer-containerOptional">
 			<ng-container *ngTemplateOutlet="footerContent" />
-		</div>
+		</lu-container>
 	</footer>
 } @else {
 	<footer class="footer" [class.dialog-inside-footer]="dialog()" [class.mod-sticky]="sticky()" [class]="breakpointClass()">

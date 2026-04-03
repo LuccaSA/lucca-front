@@ -15,7 +15,7 @@
 				<div class="demo-QAtable-list"><a href="#">Link (HTML element)</a><a class="link" href="#">Link (class)</a></div>
 			</td>
 			<td>
-				<div class="demo-QAtable-list"><a luLink="./#example">Link (HTML element)</a></div>
+				<div class="demo-QAtable-list"><a luLink="./#example">Link</a></div>
 			</td>
 		</tr>
 		<tr>
@@ -23,7 +23,9 @@
 			<td>
 				<div class="demo-QAtable-list"><button type="button" class="link">Link</button></div>
 			</td>
-			<td></td>
+			<td>
+				<div class="demo-QAtable-list"><button type="button" luLink="./#example">Link</button></div>
+			</td>
 		</tr>
 		<tr>
 			<td>Disabled</td>
@@ -52,12 +54,25 @@
 			</td>
 		</tr>
 		<tr>
-			<td>Icon</td>
+			<td>Icon legacy</td>
 			<td>
 				<div class="demo-QAtable-list">
 					<a class="link mod-icon" href="" target="_blank">
 						Link<span aria-hidden="true" class="lucca-icon icon-arrowExternal"></span>
 						<span class="pr-u-mask">Ouvrir dans une nouvelle fenêtre</span>
+					</a>
+				</div>
+			</td>
+			<td></td>
+		</tr>
+		<tr>
+			<td>Icon</td>
+			<td>
+				<div class="demo-QAtable-list">
+					<a href="#" class="link mod-icon" rel="noopener noreferrer" target="_blank"
+						><span class="link-text">Link</span
+						><span class="link-icon"><span aria-hidden="true" class="lucca-icon icon-arrowExternal"></span></span
+						><span class="pr-u-mask">(Open in a new window.)</span>
 					</a>
 				</div>
 			</td>

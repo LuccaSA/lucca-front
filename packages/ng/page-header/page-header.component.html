@@ -1,4 +1,4 @@
-<header class="pageHeader">
+<header class="pageHeader" [class.mod-sticky]="sticky()">
 	@if (container()) {
 		<div class="pageHeader-containerOptional">
 			<ng-container *ngTemplateOutlet="content" />

@@ -50,7 +50,22 @@ export const Template: StoryObj<HighlightDataComponent & { action: string }> = {
 			},
 		},
 		illustration: {
-			options: ['calculator', 'calendar', 'cleemy-card', 'coffee', 'headphone', 'mail', 'magnifying-glass', 'medallon', 'piggy-bank', 'polaroid-female', 'polaroid-male', 'polaroids', null],
+			options: [
+				'calculator',
+				'calendar',
+				'cleemy-card',
+				'coffee',
+				'headphone',
+				'mail',
+				'magnifying-glass',
+				'mealvoucher-card',
+				'medallon',
+				'piggy-bank',
+				'polaroid-female',
+				'polaroid-male',
+				'polaroids',
+				null,
+			],
 			control: {
 				type: 'select',
 			},

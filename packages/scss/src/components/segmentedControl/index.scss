@@ -42,6 +42,7 @@
 	// .viewTabs_panel is deprecated
 	.segmentedControl_panel,
 	.viewTabs_panel {
+		// .active is deprecated
 		&:not(.is-active, .active) {
 			@include panelInactive;
 		}

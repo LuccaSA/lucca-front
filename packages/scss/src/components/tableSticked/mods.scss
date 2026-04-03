@@ -22,9 +22,11 @@
 		// left sticked columns shadow
 		&.mod-stickyColumn-shadow,
 		.stickyColumn-shadow-wrapper::before {
-			inset-inline-start: calc(
-				var(--components-tableSticked-column-sticky-offset) - var(--components-tableSticked-column-sticky-shadow-width)
-			);
+			inset-inline-start:
+				calc(
+					var(--components-tableSticked-column-sticky-offset)
+					- var(--components-tableSticked-column-sticky-shadow-width)
+				);
 		}
 
 		.stickyColumn-shadow-wrapper::after {
@@ -46,9 +48,11 @@
 
 		&.mod-stickyColumn-shadow,
 		.stickyColumn-shadow-wrapper::before {
-			inset-inline-end: calc(
-				var(--components-tableSticked-column-sticky-offset) - var(--components-tableSticked-column-sticky-shadow-width)
-			);
+			inset-inline-end:
+				calc(
+					var(--components-tableSticked-column-sticky-offset)
+					- var(--components-tableSticked-column-sticky-shadow-width)
+				);
 		}
 
 		.stickyColumn-shadow-wrapper::after {
@@ -124,9 +128,12 @@
 	}
 
 	.mod-stickyHeader-shadow .table-body-row-cell {
-		inset-block-start: calc(
-			var(--table-stickyHeader-shadow-offset) + var(--commons-banner-height) + var(--components-tableSticked-column-sticky-shadow-width)
-		);
+		inset-block-start:
+			calc(
+				var(--table-stickyHeader-shadow-offset)
+				+ var(--commons-banner-height)
+				+ var(--components-tableSticked-column-sticky-shadow-width)
+			);
 	}
 }
 
