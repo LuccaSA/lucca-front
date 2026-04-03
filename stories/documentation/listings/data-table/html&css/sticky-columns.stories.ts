@@ -8,7 +8,7 @@ export default {
 } as Meta;
 
 function getTemplate(args: StickyColumnsStory): string {
-	return `<div class="dataTableWrapper" style="width: 30rem">
+	return `<div class="dataTableWrapper" style="inline-size: 30rem">
 	<table class="dataTable">
 		<thead class="dataTable-head">
 			<tr class="dataTable-head-row">
