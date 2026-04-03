@@ -1,3 +1,7 @@
+![status - active](https://img.shields.io/badge/status-active-success)
+![slack-public - lucca-front](https://img.shields.io/badge/slack--public-lucca--front-informational?logo=slack)
+[![miguell - 77 projets](https://img.shields.io/badge/miguell-20_projets-blueviolet?logo=The+Mighty)](https://miguell.lucca.tech/projects/byDependency?name=@lucca-front/ng)
+
 # Lucca Front
 
 Lucca Front is a modular framework for developing web applications by [lucca](http://www.lucca.fr).
@@ -7,10 +11,23 @@ It uses sub-packages architecture with unified versioning, à la [angular](https
 
 - a set of icons [@lucca-front/icons](packages/icons/README.md)
 - a SCSS framework [@lucca-front/scss](packages/scss/README.md)
-- a library of useful angular components [@lucca-front/ng](packages/ng/)
-- a library of useful angular components [@lucca-front/prisme](packages/prisme/)
+- a library of lucca components [@lucca-front/ng](packages/ng/README.md)
+- a library of design system components [@lucca-front/prisme](packages/prisme/README.md)
 
 Angular package depends on the SCSS one which depends itself on Icons.
+
+### Why Ng and Prisme packges ?
+
+Historically, `@lucca-front/ng` contained both Design System components (Prisme) and Lucca specific business components. This created maintenance challenges as the Design System team needed to maintain atomic/molecular components while business units maintained domain-specific components (like `department-select`).
+
+To solve this separation of concerns:
+- **`@lucca-front/prisme`** contains pure Design System components (atomic, molecular), maintained by the Design System team. This package is Open Source, promoting transparency and sharing.
+- **`@lucca-front/ng`** contains Lucca business components and domain-specific logic (API interactions, business data display), maintained by the respective business units. This package contains proprietary business logic.
+
+This split ensures clear ownership, better maintenance, and respects the Open Source philosophy for the Design System while keeping business logic internal.
+
+[Full Split LF/Prisme documentation](https://www.notion.so/D-coupe-LF-Prisme-058d096867ed460bb57681d82e5a097c?source=copy_link)
+[Distribution of LF/Prism components](https://www.notion.so/120d278ab26e8009825cf8879bb0b2e6?v=121d278ab26e80d98405000ca486e14a&source=copy_link)
 
 ## How to install
 
@@ -141,7 +158,7 @@ Components use the `intlInputOptions()` function to create an `intl` input that:
 <lu-pagination 
   [from]="0" 
   [to]="10" 
-  [itemsCount]="1000" 
+  [itemsCount]="100" 
   [intl]="{
     results: 'Page {{from}}-{{to}} / {{itemsCount}}',
     previous: 'Prev',
