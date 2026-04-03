@@ -5,6 +5,7 @@
 
 @mixin component($atRoot: namespace.$defaultAtRoot) {
 	display: block;
+	max-inline-size: var(--components-form-maxWidth);
 
 	.divider:not(.mod-vertical) {
 		margin-block: var(--pr-t-spacings-300);
