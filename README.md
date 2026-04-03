@@ -16,7 +16,7 @@ It uses sub-packages architecture with unified versioning, à la [angular](https
 
 Angular package depends on the SCSS one which depends itself on Icons.
 
-### Why Ng and Prisme packges ?
+### Why Ng and Prisme packages ?
 
 Historically, `@lucca-front/ng` contained both Design System components (Prisme) and Lucca specific business components. This created maintenance challenges as the Design System team needed to maintain atomic/molecular components while business units maintained domain-specific components (like `department-select`).
 
