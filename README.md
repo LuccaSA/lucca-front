@@ -193,19 +193,11 @@ graph TB
     ng["@lucca-front/ng"]
     
     %% Angular dependencies
-    ng --> angular_common["@angular/common"]
-    ng --> angular_core["@angular/core"]
-    ng --> angular_cdk["@angular/cdk"]
-    ng --> angular_animations["@angular/animations"]
+    angular_common["@angular/common"] --> ng
+    angular_core["@angular/core"] --> ng
+    angular_cdk["@angular/cdk"] --> ng
+    angular_animations["@angular/animations"] --> ng
     
-    %% Lucca packages
-    ng --> prisme["@lucca/prisme"]
-    ng --> scss["@lucca-front/scss"]
-    ng --> icons["@lucca-front/icons"]
-    
-    %% Rich text (optional)
-    ng -.-> lexical["lexical (optional)"]
-    ng -.-> lexical_plugins["@lexical/* (optional)"]
 ```
 
 ## License
