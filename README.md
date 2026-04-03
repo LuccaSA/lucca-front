@@ -3,11 +3,12 @@
 Lucca Front is a modular framework for developing web applications by [lucca](http://www.lucca.fr).
 It uses sub-packages architecture with unified versioning, à la [angular](https://github.com/angular/angular).
 
-## Lucca Front contains 3 packages
+## Lucca Front contains 4 packages
 
-- a set of icons
-- a SCSS framework
-- a library of useful angular components
+- a set of icons [@lucca-front/icons](packages/icons/README.md)
+- a SCSS framework [@lucca-front/scss](packages/scss/README.md)
+- a library of useful angular components [@lucca-front/ng](packages/ng/)
+- a library of useful angular components [@lucca-front/prisme](packages/prisme/)
 
 Angular package depends on the SCSS one which depends itself on Icons.
 
@@ -19,78 +20,29 @@ Angular package depends on the SCSS one which depends itself on Icons.
 npm install @lucca-front/icons --save
 npm install @lucca-front/scss --save
 npm install @lucca-front/ng --save
+npm install @lucca-front/prisme --save
 ```
 
 ### Import packages styles
 
-In your file styles.scss, add imports files and components you want to import to your project:
+In your file styles.scss, add imports files and components you want to import to your project.
+
+#### Basic setup
 
 ```
-// Import styles
+// Import core styles (required)
 @forward '@lucca-front/icons/src/main';
 @forward '@lucca-front/scss/src/main';
 @forward '@lucca-front/ng/src/main';
-
-// Import SCSS components
-@forward '@lucca-front/scss/src/components/box';
-@forward '@lucca-front/scss/src/components/breadcrumbs';
-@forward '@lucca-front/scss/src/components/button';
-@forward '@lucca-front/scss/src/components/buttonGroup';
-@forward '@lucca-front/scss/src/components/callout';
-@forward '@lucca-front/scss/src/components/card';
-@forward '@lucca-front/scss/src/components/checkbox';
-@forward '@lucca-front/scss/src/components/chip';
-@forward '@lucca-front/scss/src/components/clear';
-@forward '@lucca-front/scss/src/components/code';
-@forward '@lucca-front/scss/src/components/collapse';
-@forward '@lucca-front/scss/src/components/container';
-@forward '@lucca-front/scss/src/components/contentSection';
-@forward '@lucca-front/scss/src/components/divider';
-@forward '@lucca-front/scss/src/components/errorPage';
-@forward '@lucca-front/scss/src/components/field';
-@forward '@lucca-front/scss/src/components/file';
-@forward '@lucca-front/scss/src/components/filters';
-@forward '@lucca-front/scss/src/components/form';
-@forward '@lucca-front/scss/src/components/formLabel';
-@forward '@lucca-front/scss/src/components/gauge';
-@forward '@lucca-front/scss/src/components/grid';
-@forward '@lucca-front/scss/src/components/header';
-@forward '@lucca-front/scss/src/components/label';
-@forward '@lucca-front/scss/src/components/layout';
-@forward '@lucca-front/scss/src/components/link';
-@forward '@lucca-front/scss/src/components/list';
-@forward '@lucca-front/scss/src/components/loading';
-@forward '@lucca-front/scss/src/components/main';
-@forward '@lucca-front/scss/src/components/menu';
-@forward '@lucca-front/scss/src/components/navSide';
-@forward '@lucca-front/scss/src/components/notchBox';
-@forward '@lucca-front/scss/src/components/pageHeader';
-@forward '@lucca-front/scss/src/components/pagination';
-@forward '@lucca-front/scss/src/components/progress';
-@forward '@lucca-front/scss/src/components/radio';
-@forward '@lucca-front/scss/src/components/radioButtons';
-@forward '@lucca-front/scss/src/components/section';
-@forward '@lucca-front/scss/src/components/sortableList';
-@forward '@lucca-front/scss/src/components/statusBadge';
-@forward '@lucca-front/scss/src/components/switch';
-@forward '@lucca-front/scss/src/components/table';
-@forward '@lucca-front/scss/src/components/tableFixed';
-@forward '@lucca-front/scss/src/components/tableOfContent';
-@forward '@lucca-front/scss/src/components/tableSorted';
-@forward '@lucca-front/scss/src/components/tableSticked';
-@forward '@lucca-front/scss/src/components/tag';
-@forward '@lucca-front/scss/src/components/textfield';
-@forward '@lucca-front/scss/src/components/timeline';
-@forward '@lucca-front/scss/src/components/timepicker';
-@forward '@lucca-front/scss/src/components/title';
-@forward '@lucca-front/scss/src/components/titleSection';
-@forward '@lucca-front/scss/src/components/toast';
-@forward '@lucca-front/scss/src/components/verticalNavigation';
 ```
 
-Then comment unused components to reduce LF’s distribution size and compilation time.
+#### Available SCSS components
 
-To import all components, replace the previous code by the 3 following lines (not recommended):
+For the complete list of available SCSS components organized by category, see the [SCSS package documentation](packages/scss/README.md).
+
+#### Import all components (not recommended)
+
+To import all components at once:
 
 ```
 // Import styles
@@ -168,8 +120,36 @@ In order to work on Lucca Front, we use Storybook to display components.
 
 ## Translations
 
+### How it work
+
 Translations are hosted by Lokalise on `Lucca.Front` project and must be imported by launching the command at project root: `npm run i18n:update`.
-[Full translations documentation] (https://www.notion.so/Lucca-Front-Traductions-Lokalise-173d278ab26e801b8462f90e1a93dd50)
+[Full translations documentation](https://www.notion.so/Lucca-Front-Traductions-Lokalise-173d278ab26e801b8462f90e1a93dd50)
+
+### Overrides
+
+Many Lucca Front components support translation overrides through the `[intl]` input. This allows you to customize specific translations without modifying the default translation files.
+
+Components use the `intlInputOptions()` function to create an `intl` input that:
+1. Automatically loads translations based on the current locale (`LOCALE_ID`)
+2. Accepts an object with partial translations to override specific keys
+3. Merges your custom translations with the default ones
+
+#### Example with Pagination Component
+
+**Override multiple keys**:
+```html
+<lu-pagination 
+  [from]="0" 
+  [to]="10" 
+  [itemsCount]="1000" 
+  [intl]="{
+    results: 'Page {{from}}-{{to}} / {{itemsCount}}',
+    previous: 'Prev',
+    next: 'Next',
+    results: 'Showing {{from}} to {{to}} of {{itemsCount}} items'
+  }" 
+/>
+```
 
 ## License
 The source code of this project is distributed under the Apache 2.0 license (see the LICENSE file). 
