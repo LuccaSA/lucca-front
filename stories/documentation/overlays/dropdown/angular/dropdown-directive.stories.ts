@@ -28,6 +28,7 @@ export default {
 	],
 	argTypes: {
 		luPopoverPosition: {
+			description: 'Modifie la position du dropdown par rapport à son déclencheur.',
 			control: 'select',
 			options: ['above', 'below', 'before', 'after'],
 		},

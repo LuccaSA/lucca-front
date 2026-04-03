@@ -26,6 +26,9 @@ export default {
 		}),
 	],
 	argTypes: {
+		value: {
+			description: '[Story] Valeur du champ.',
+		},
 		placeholder: {
 			description: 'Applique un placeholder au champ.',
 		},

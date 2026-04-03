@@ -116,11 +116,11 @@ function getTemplate(args: ResourceCardHTMLBasicStory) {
 	const headingTpl =
 		args.actionType === 'a'
 			? args.disabled
-				? `<span luTooltip luTooltipOnlyForDisplay luTooltipWhenEllipsis [luTooltipAnchor]="resourceCard1" class="resourceCard-layout-header-title-action is-disabled">${args.heading}</span>`
-				: `<a href="#" luTooltip luTooltipOnlyForDisplay luTooltipWhenEllipsis [luTooltipAnchor]="resourceCard1" class="resourceCard-layout-header-title-action">${args.heading}</a>`
+				? `<span luTooltip luTooltipWhenEllipsis [luTooltipAnchor]="resourceCard1" class="resourceCard-layout-header-title-action is-disabled">${args.heading}</span>`
+				: `<a href="#" luTooltip luTooltipWhenEllipsis [luTooltipAnchor]="resourceCard1" class="resourceCard-layout-header-title-action">${args.heading}</a>`
 			: args.disabled
-				? `<button luTooltip luTooltipOnlyForDisplay luTooltipWhenEllipsis [luTooltipAnchor]="resourceCard1" class="resourceCard-layout-header-title-action" disabled="disabled">${args.heading}</button>`
-				: `<button type="button" luTooltip luTooltipOnlyForDisplay luTooltipWhenEllipsis [luTooltipAnchor]="resourceCard1" class="resourceCard-layout-header-title-action">${args.heading}</button>`;
+				? `<button luTooltip luTooltipWhenEllipsis [luTooltipAnchor]="resourceCard1" class="resourceCard-layout-header-title-action" disabled="disabled">${args.heading}</button>`
+				: `<button type="button" luTooltip luTooltipWhenEllipsis [luTooltipAnchor]="resourceCard1" class="resourceCard-layout-header-title-action">${args.heading}</button>`;
 	const draggableTpl = args.draggable
 		? `
 					<div class="button resourceCard-layout-before-button">

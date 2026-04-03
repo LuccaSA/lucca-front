@@ -12,20 +12,20 @@ export default {
 		compact: {
 			control: {
 				type: 'boolean',
-				description: 'Affiche la navigation en vue compacte.',
 			},
+			description: 'Affiche la navigation en vue compacte.',
 		},
 		banner: {
 			control: {
 				type: 'boolean',
-				description: 'Ajoute une marge pour positionner la navigation sous la bannière Lucca.',
 			},
+			description: 'Ajoute une marge pour positionner la navigation sous la bannière Lucca.',
 		},
 		open: {
 			control: {
 				type: 'boolean',
-				description: 'Affiche un sous-menu en vue dépliée.',
 			},
+			description: 'Affiche un sous-menu en vue dépliée.',
 		},
 	},
 } as Meta;

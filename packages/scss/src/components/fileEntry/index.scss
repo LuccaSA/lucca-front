@@ -36,3 +36,9 @@
 		}
 	}
 }
+
+.fileEntry-description-divider.divider.mod-vertical {
+	@layer mods {
+		@include divider;
+	}
+}

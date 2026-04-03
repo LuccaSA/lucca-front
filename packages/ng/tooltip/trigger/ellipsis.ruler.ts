@@ -57,10 +57,10 @@ export class EllipsisRuler {
 		elementCloned.innerHTML = element.innerHTML;
 
 		try {
-			const clonedElementWidth = elementCloned.getBoundingClientRect().width;
-			const elementWidth = element.getBoundingClientRect().width;
+			const clonedElementWidth = elementCloned.getBoundingClientRect().width.toFixed(3);
+			const elementWidth = element.getBoundingClientRect().width.toFixed(3);
 
-			return clonedElementWidth > elementWidth;
+			return parseFloat(clonedElementWidth) > parseFloat(elementWidth);
 		} catch {
 			return false;
 		} finally {

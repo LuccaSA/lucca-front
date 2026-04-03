@@ -7,15 +7,15 @@ import { generateInputs } from 'stories/helpers/stories';
 export default {
 	title: 'Documentation/Structure/Bubble icon/Angular/Basic',
 	argTypes: {
-		direction: {
-			options: ['', 'left', 'right', 'top', 'bottom'],
+		bubbleDirection: {
+			options: ['random', 'left', 'right', 'top', 'bottom'],
 			control: {
 				type: 'select',
 			},
 			description: 'Définit une direction de la bulle. Aléatoire par défaut.',
 		},
 		size: {
-			options: ['S', '', 'L'],
+			options: ['S', 'M', 'L'],
 			control: {
 				type: 'select',
 			},
@@ -72,9 +72,9 @@ export default {
 			imports: [BubbleIconComponent],
 		}),
 	],
-	render: ({ direction, alt, palette, size, ...args }, { argTypes }) => {
-		const sizeArg = size !== '' ? ` size="${size}"` : ``;
-		const directionArg = direction === null || direction === '' ? `` : ` bubbleDirection="${direction}"`;
+	render: ({ bubbleDirection, alt, palette, size, ...args }, { argTypes }) => {
+		const sizeArg = size === 'M' ? `` : ` size="${size}"`;
+		const directionArg = bubbleDirection === 'random' ? `` : ` bubbleDirection="${bubbleDirection}"`;
 		const altArg = alt === '' ? `` : ` alt="${alt}"`;
 		const paletteArg = palette === 'product' ? `` : ` palette="${palette}"`;
 		return {
@@ -87,9 +87,9 @@ export default {
 export const Basic: StoryObj<BubbleIconComponent & { palette: string }> = {
 	args: {
 		icon: 'app',
-		direction: null,
+		bubbleDirection: 'random',
 		palette: 'product',
-		size: '',
+		size: 'M',
 		alt: '',
 	},
 };

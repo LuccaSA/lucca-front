@@ -1,11 +1,15 @@
+@mixin hover {
+	--component-textField-border: var(--component-textField-borderHover);
+}
+
 @mixin invalid {
 	--component-textField-border: var(--pr-t-color-input-border-critical);
 	--component-textField-background: var(--pr-t-color-input-background-critical);
 	--component-textField-placeholder: var(--pr-t-color-input-text-placeholder-critical);
+}
 
-	&:hover {
-		--component-textField-border: var(--pr-t-color-input-border-critical-hover);
-	}
+@mixin invalidHover {
+	--component-textField-border: var(--pr-t-color-input-border-critical-hover);
 }
 
 @mixin disabled {

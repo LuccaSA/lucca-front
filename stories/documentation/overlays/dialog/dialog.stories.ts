@@ -79,10 +79,11 @@ export default {
 			control: {
 				type: 'select',
 			},
+			description: "Permet d'afficher la fenêtre de dialogue en mode drawer.",
 		},
 		autoFocus: {
 			options: ['first-tabbable', 'first-input'],
-			description: 'Peut aussi être un sélecteur CSS',
+			description: "Définit quel élément doit recevoir le focus lorsque la fenêtre de dialogue s'ouvre. Peut aussi être un sélecteur CSS.",
 			control: {
 				type: 'select',
 			},
@@ -92,9 +93,14 @@ export default {
 			control: {
 				type: 'select',
 			},
+			description: 'Largeur de la fenêtre de dialogue.',
 		},
 		panelClasses: {
-			description: '[v18.3] mod-neutralBackground',
+			description: "Permet d'ajouter des classes CSS au composant. (ex : mod-neutralBackground)",
+		},
+		alert: {
+			description:
+				"Transforme la fenêtre de dialogue en alerte en obligeant l'utilisateur à faire un choix. L'utilisateur ne peut alors plus la fermer en cliquant sur le backdrop ou en appuyant sur la touche Échap.",
 		},
 		fancyIllustration: {
 			options: ['approval', 'checklist', 'email', 'install', 'mapping', 'save', 'users', 'welcome', 'payment-card'],
