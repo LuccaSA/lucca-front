@@ -1,4 +1,11 @@
-export const SoftwareIconList = [
+/**
+ * Available SoftwareIconComponent Types
+ */
+
+export const SOFTWARE_ICON_SIZE = ['XXS', 'XS', 'S', 'L'] as const;
+export type SoftwareIconSize = (typeof SOFTWARE_ICON_SIZE)[number];
+
+export const SOFTWARE_ICON = [
 	// Time and Activities
 	'absences',
 	'timesheet',
@@ -34,4 +41,4 @@ export const SoftwareIconList = [
 	'lucca',
 ] as const;
 
-export type SoftwareIcon = (typeof SoftwareIconList)[number];
+export type SoftwareIcon = (typeof SOFTWARE_ICON)[number];

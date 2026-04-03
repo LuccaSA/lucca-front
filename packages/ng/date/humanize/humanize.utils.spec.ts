@@ -1,5 +1,6 @@
 import { signal } from '@angular/core';
 import { fakeAsync, tick } from '@angular/core/testing';
+import { CALENDAR_MODE } from '@lucca-front/ng/date2';
 import { LuRelativeTime, LuRelativeTimeFormatUnit } from './humanize.model';
 import { getRelativeTime, relativeTimeTimer } from './humanize.utils';
 
@@ -66,7 +67,7 @@ describe('HumanizeUtils', () => {
 				const durationInMs = 20 * hour;
 
 				// Act
-				const { unit, value } = getRelativeTime(reference + durationInMs, reference, ['day', 'month', 'year']);
+				const { unit, value } = getRelativeTime(reference + durationInMs, reference, CALENDAR_MODE);
 
 				// Assert
 				expect(unit).toBe('day');

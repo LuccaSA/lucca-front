@@ -5,6 +5,7 @@ import { InputDirective } from '@lucca-front/ng/form-field';
 import { BaseFileUploadComponent } from '../base-file-upload/base-file-upload.component';
 import { FileEntryComponent } from '../file-entry/file-entry.component';
 import { FileEntry } from '../file-upload-entry';
+import { FileUploadState } from '../file-upload.type';
 
 @Component({
 	selector: 'lu-single-file-upload',
@@ -20,7 +21,7 @@ import { FileEntry } from '../file-upload-entry';
 export class SingleFileUploadComponent extends BaseFileUploadComponent {
 	readonly entry = input<FileEntry | null>(null);
 
-	readonly state = input<'loading' | 'success' | 'error' | 'default'>('default');
+	readonly state = input<FileUploadState>('default');
 
 	readonly inlineMessageError = input<string | null>(null);
 

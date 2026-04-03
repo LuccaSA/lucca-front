@@ -1,6 +1,7 @@
 import { LOCALE_ID } from '@angular/core';
-import { FormLabelComponent } from '@lucca-front/ng/form-label';
+import { FORM_LABEL_SIZE, FormLabelComponent } from '@lucca-front/ng/form-label';
 import { applicationConfig, Meta, moduleMetadata, StoryObj } from '@storybook/angular';
+import { setStoryOptions } from 'stories/helpers/stories';
 
 interface FormLabelBasicStory {
 	for: string;
@@ -28,7 +29,7 @@ export default {
 	],
 	argTypes: {
 		size: {
-			options: ['', 'S', 'XS'],
+			options: setStoryOptions(FORM_LABEL_SIZE),
 			control: {
 				type: 'select',
 			},

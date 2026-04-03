@@ -1,8 +1,9 @@
 import { provideHttpClient } from '@angular/common/http';
 import { provideAnimations } from '@angular/platform-browser/animations';
-import { LuDisplayInitials, LuUserPictureComponent } from '@lucca-front/ng/user';
+import { LuDisplayInitials, LuUserPictureComponent, USER_PICTURE_SIZE } from '@lucca-front/ng/user';
 import { LuUserPopoverDirective } from '@lucca-front/ng/user-popover';
 import { applicationConfig, Meta, moduleMetadata, StoryObj } from '@storybook/angular';
+import { setStoryOptions } from 'stories/helpers/stories';
 import { bob, georges, squidwards } from '../../user.mocks';
 
 export default {
@@ -48,7 +49,7 @@ export default {
 		},
 		sizes: {
 			description: "Taille de l'avatar.",
-			options: ['XS', 'S', '', 'L', 'XL', 'XXL', 'XXXL'],
+			options: setStoryOptions(USER_PICTURE_SIZE),
 			control: {
 				type: 'select',
 			},

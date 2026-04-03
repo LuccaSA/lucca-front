@@ -1,5 +1,6 @@
-import { FancyBoxComponent } from '@lucca-front/ng/fancy-box';
+import { FANCY_BOX_SIZE, FancyBoxComponent } from '@lucca-front/ng/fancy-box';
 import { Meta, moduleMetadata, StoryObj } from '@storybook/angular';
+import { setStoryOptions } from 'stories/helpers/stories';
 
 interface FancyBoxBasicStory {
 	backgroundLeft: string;
@@ -35,7 +36,7 @@ export default {
 			description: "URL de l'image au premier plan (200x160).",
 		},
 		size: {
-			options: ['', 'S'],
+			options: setStoryOptions(FANCY_BOX_SIZE),
 			control: {
 				type: 'select',
 			},
@@ -84,7 +85,6 @@ export const Basic: StoryObj<FancyBoxBasicStory> = {
 		backgroundLeft: 'https://cdn.lucca.fr/transverse/prisme/visuals/fancy-box/background-left-plant.svg',
 		backgroundRight: 'https://cdn.lucca.fr/transverse/prisme/visuals/fancy-box/background-right-candies.svg',
 		foreground: 'https://cdn.lucca.fr/transverse/prisme/visuals/fancy-box/foreground-right-pizza.svg',
-		size: null,
 	},
 	render: Template,
 };
