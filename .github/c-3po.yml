@@ -32,5 +32,6 @@ check-milestone:
   targetBranches:
     - "rc"
     - "master"
+    - "pattern:release/"
   linkMilestonesToMepBranches:
     enabled: false

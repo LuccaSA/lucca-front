@@ -42,8 +42,8 @@
 		@include media.min('L') {
 			grid-template-columns: var(--commons-navSide-width) var(--components-aside-width) 1fr;
 			grid-template-areas:
-				'banner	banner banner'
-				'navside aside	content';
+				'banner  banner banner '
+				'navside aside  content';
 
 			&.mod-navsideLarge {
 				grid-template-columns: var(--commons-navSide-width) var(--components-aside-width) 1fr;

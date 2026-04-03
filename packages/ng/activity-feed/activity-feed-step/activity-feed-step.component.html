@@ -1,0 +1,28 @@
+@if (status() === "critical" || status() === "success") {
+	<div class="activityFeed-step-state" [class.mod-critical]="status() === 'critical'" [class.mod-success]="status() === 'success'"></div>
+} @else {
+	@if (user()) {
+		<div class="activityFeed-step-avatar">
+			<lu-user-picture size="S" [user]="user()" />
+		</div>
+	}
+}
+<div class="activityFeed-step-description">
+	@if (label()) {
+		<p class="activityFeed-step-description-content">
+			<ng-container *luPortal="label()" />
+		</p>
+	}
+	@if (date()) {
+		<time class="comment-infos-date activityFeed-step-description-time" [attr.datetime]="preparedDate().toISOString()">
+			@if (datePipeFormat()) {
+				{{ date() | date: datePipeFormat() }}
+			} @else {
+				{{ dateDisplay() }}
+			}
+		</time>
+	}
+	<div class="activityFeed-content">
+		<ng-content />
+	</div>
+</div>
