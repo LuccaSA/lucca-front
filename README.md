@@ -168,6 +168,46 @@ Components use the `intlInputOptions()` function to create an `intl` input that:
 />
 ```
 
+## Table de compatibilité
+
+| Angular | @lucca-front/ng | @lucca/prisme | Note |
+| ------- | --------------- | ------------- | ---- |
+| 21.0    | 21.x           | 21.x          | Version actuelle |
+| 20.0    | 20.4+          | 20.4+         | Support Angular 20 & 21 depuis v20.4.0 |
+| 19.0    | 19.x           | -             | Angular 19 uniquement |
+| 18.0    | 18.x           | -             | Angular 18 uniquement |
+| 17.0    | 17.x           | -             | Angular 17 uniquement |
+| 16.0    | 16.x           | -             | Angular 16 uniquement |
+
+**Notes importantes :**
+- Lucca Front suit la même version majeure qu'Angular (v21.x pour Angular 21, v20.x pour Angular 20, etc.)
+
+[Lucca Front et SemVer](https://www.notion.so/Lucca-Front-et-SemVer-27ad278ab26e802ca4dacd9bea53d648?source=copy_link)
+
+## Dépendances
+
+### @lucca-front/ng
+
+```mermaid
+graph TB
+    ng["@lucca-front/ng"]
+    
+    %% Angular dependencies
+    ng --> angular_common["@angular/common"]
+    ng --> angular_core["@angular/core"]
+    ng --> angular_cdk["@angular/cdk"]
+    ng --> angular_animations["@angular/animations"]
+    
+    %% Lucca packages
+    ng --> prisme["@lucca/prisme"]
+    ng --> scss["@lucca-front/scss"]
+    ng --> icons["@lucca-front/icons"]
+    
+    %% Rich text (optional)
+    ng -.-> lexical["lexical (optional)"]
+    ng -.-> lexical_plugins["@lexical/* (optional)"]
+```
+
 ## License
 The source code of this project is distributed under the Apache 2.0 license (see the LICENSE file). 
 
