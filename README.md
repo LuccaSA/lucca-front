@@ -27,7 +27,7 @@ To solve this separation of concerns:
 This split ensures clear ownership, better maintenance, and respects the Open Source philosophy for the Design System while keeping business logic internal.
 
 [Full Split LF/Prisme documentation](https://www.notion.so/D-coupe-LF-Prisme-058d096867ed460bb57681d82e5a097c?source=copy_link)
-[Distribution of LF/Prism components](https://www.notion.so/120d278ab26e8009825cf8879bb0b2e6?v=121d278ab26e80d98405000ca486e14a&source=copy_link)
+[Distribution of LF/Prisme components](https://www.notion.so/120d278ab26e8009825cf8879bb0b2e6?v=121d278ab26e80d98405000ca486e14a&source=copy_link)
 
 ## How to install
 
