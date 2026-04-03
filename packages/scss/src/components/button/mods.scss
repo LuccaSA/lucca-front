@@ -292,20 +292,12 @@
 	--components-button-backgroundColor: transparent;
 	--components-button-color: var(--palettes-neutral-0);
 
-<<<<<<< HEAD
-	background-image: linear-gradient(
-		225deg,
-		color-mix(in srgb, var(--palettes-AI-500) var(--components-button-AI-background-opacity), transparent),
-		color-mix(in srgb, var(--palettes-brand-400) var(--components-button-AI-background-opacity), transparent)
-	);
-=======
 	background-image:
 		linear-gradient(
-			-135deg,
+			225deg,
 			color-mix(in srgb, var(--palettes-AI-500) var(--components-button-AI-background-opacity), transparent),
 			color-mix(in srgb, var(--palettes-brand-400) var(--components-button-AI-background-opacity), transparent)
 		);
->>>>>>> rc
 
 	&:hover,
 	&:focus-visible {
