@@ -58,16 +58,8 @@ export default {
 		withFileType: {
 			control: 'boolean',
 		},
-		fileType: {
-			control: 'text',
-			if: { arg: 'withFileType' },
-		},
 		withFileSize: {
 			control: 'boolean',
-		},
-		fileSize: {
-			control: 'number',
-			if: { arg: 'withFileSize' },
 		},
 	},
 	decorators: [
