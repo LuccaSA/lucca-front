@@ -15,7 +15,7 @@
 @use '@lucca-front/scss/src/components/color/exports' as color;
 
 @mixin maxWidth {
-	max-inline-size: var(--components-form-maxWidth);
+	--components-form-maxWidth: 50rem;
 }
 
 @mixin inline {
