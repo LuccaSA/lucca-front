@@ -8,7 +8,6 @@
 
 This package contains foundational Design System components:
 
-- **Core utilities**: Translation system, theming, accessibility helpers
 - **Button**: Action buttons with various styles and states
 - **Icon**: Icon component system
 
