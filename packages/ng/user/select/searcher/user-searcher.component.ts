@@ -9,7 +9,7 @@ import {
 	ILuOnOpenSubscriber,
 	ILuOnScrollBottomSubscriber,
 	intlInputOptions,
-	syncSignal,
+	syncInputSignal,
 } from '@lucca-front/ng/core';
 import { ALuOptionOperator, LuOptionPlaceholderComponent } from '@lucca-front/ng/option';
 import { BehaviorSubject, combineLatest, merge, Observable, of, Subject, Subscription } from 'rxjs';
@@ -110,11 +110,11 @@ export class LuUserPagedSearcherComponent<U extends ILuUser = ILuUser> implement
 	}
 
 	#initServiceValues() {
-		syncSignal(this.fields, (fields) => (this._service.fields = fields));
-		syncSignal(this.filters, (filters) => (this._service.filters = filters));
-		syncSignal(this.orderBy, (orderBy) => (this._service.orderBy = orderBy));
-		syncSignal(this.appInstanceId, (appInstanceId) => (this._service.appInstanceId = appInstanceId));
-		syncSignal(this.operations, (operations) => (this._service.operations = operations));
+		syncInputSignal(this.fields, (fields) => (this._service.fields = fields));
+		syncInputSignal(this.filters, (filters) => (this._service.filters = filters));
+		syncInputSignal(this.orderBy, (orderBy) => (this._service.orderBy = orderBy));
+		syncInputSignal(this.appInstanceId, (appInstanceId) => (this._service.appInstanceId = appInstanceId));
+		syncInputSignal(this.operations, (operations) => (this._service.operations = operations));
 	}
 
 	ngOnInit() {

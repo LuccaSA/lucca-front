@@ -2,7 +2,7 @@ import { A11yModule } from '@angular/cdk/a11y';
 import { OverlayModule } from '@angular/cdk/overlay';
 import { NgTemplateOutlet } from '@angular/common';
 import { ChangeDetectionStrategy, Component, EventEmitter, input, OnDestroy, Output, TemplateRef, viewChild } from '@angular/core';
-import { syncSignal, ɵeffectWithDeps } from '@lucca-front/ng/core';
+import { isNotNil, syncInputSignal, ɵeffectWithDeps } from '@lucca-front/ng/core';
 import { luTransformPopover } from '../animation/index';
 import { ALuPopoverPanel, ILuPopoverPanel, LuPopoverScrollStrategy } from './popover-panel.model';
 
@@ -71,16 +71,16 @@ export class LuPopoverPanelComponent extends ALuPopoverPanel implements ILuPopov
 	constructor() {
 		super();
 
-		syncSignal(this.template, (template) => (this._template = template));
-		syncSignal(this.templateContext, (templateContext) => (this._templateContext = templateContext));
-		syncSignal(this.inputCloseOnClick, (closeOnClick) => (this.closeOnClick = closeOnClick));
-		syncSignal(this.inputTrapFocus, (trapFocus) => (this.trapFocus = trapFocus));
-		syncSignal(this.inputScrollStrategy, (scrollStrategy) => (this.scrollStrategy = scrollStrategy));
-		syncSignal(this.inputPanelClasses, (panelClasses) => (this.panelClasses = panelClasses));
-		syncSignal(this.inputContentClasses, (contentClasses) => (this.contentClasses = contentClasses));
+		syncInputSignal(this.template, (template) => (this._template = template));
+		syncInputSignal(this.templateContext, (templateContext) => (this._templateContext = templateContext));
+		syncInputSignal(this.inputCloseOnClick, (closeOnClick) => (this.closeOnClick = closeOnClick));
+		syncInputSignal(this.inputTrapFocus, (trapFocus) => (this.trapFocus = trapFocus));
+		syncInputSignal(this.inputScrollStrategy, (scrollStrategy) => (this.scrollStrategy = scrollStrategy));
+		syncInputSignal(this.inputPanelClasses, (panelClasses) => (this.panelClasses = panelClasses));
+		syncInputSignal(this.inputContentClasses, (contentClasses) => (this.contentClasses = contentClasses));
 
 		ɵeffectWithDeps([this.vcTemplateRef], (vcTemplateRef) => {
-			if (vcTemplateRef) {
+			if (isNotNil(vcTemplateRef)) {
 				this.templateRef = vcTemplateRef;
 			}
 		});
