@@ -9,6 +9,7 @@ import { PopoverContentComponent } from '@lucca-front/ng/popover2';
 		class: 'dropdown-list-option-action',
 		'[class.is-disabled]': 'disabled()',
 		'[class.mod-critical]': 'critical()',
+		'[attr.disabled]': 'disabled() ? "disabled" : null',
 		'(click)': 'closePanel()',
 	},
 	changeDetection: ChangeDetectionStrategy.OnPush,

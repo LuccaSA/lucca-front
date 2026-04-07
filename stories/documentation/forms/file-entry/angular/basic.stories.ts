@@ -55,6 +55,12 @@ export default {
 		fileType: {
 			description: 'Type MIME du fichier.',
 		},
+		withFileType: {
+			control: 'boolean',
+		},
+		withFileSize: {
+			control: 'boolean',
+		},
 	},
 	decorators: [
 		moduleMetadata({
@@ -72,7 +78,7 @@ export default {
 			template: `<lu-file-entry ${deletableParam} ${withPasswordParam} [entry]="{
 			name: '${fileName}',
 			size: ${fileSize},
-			type: '${fileType}',
+			type: ${fileType && `'${fileType}'`},
 		}"  ${generateInputs(otherArgs, argTypes)} />`,
 		};
 	},
@@ -84,7 +90,9 @@ export const Basic = {
 		displayFileName: false,
 		size: null,
 		fileSize: 28420,
+		withFileSize: true,
 		fileType: 'image/png',
+		withFileType: true,
 		fileName: 'dummyimage.png',
 		iconOverride: '',
 		previewUrl: 'https://dummyimage.com/500',

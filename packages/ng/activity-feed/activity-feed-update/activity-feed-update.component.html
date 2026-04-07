@@ -1,0 +1,11 @@
+<div class="activityFeed-content-update-before">
+	<ng-container *ngTemplateOutlet="content" />
+</div>
+<lu-icon class="activityFeed-content-update-icon" size="XS" icon="arrowRight" [alt]="intl().replaceByAlt" />
+<div class="activityFeed-content-update-after">
+	<ng-content select="[activityFeedUpdateAfter]" />
+</div>
+
+<ng-template #content>
+	<ng-content select="[activityFeedUpdateBefore]" />
+</ng-template>

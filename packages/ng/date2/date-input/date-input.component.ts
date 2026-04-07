@@ -215,7 +215,6 @@ export class DateInputComponent extends AbstractDateComponent implements OnInit,
 					this.currentDate.set(startOfDay(parsed));
 					this.tabbableDate.set(startOfDay(parsed));
 				} else if (!this.isFilterPill) {
-					this.onTouched?.();
 					this.selectedDate.set(parsed);
 				}
 			} else {

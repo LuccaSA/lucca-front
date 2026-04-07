@@ -28,8 +28,8 @@
 // drag and drop preview
 :not(.sortableList) {
 	> .sortableList-item {
-			@layer components {
-				@include vars;
-			}
+		@layer components {
+			@include vars;
+		}
 	}
 }
