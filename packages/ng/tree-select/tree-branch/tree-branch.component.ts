@@ -11,19 +11,19 @@ import { ALuSelectInputComponent, LuIsOptionSelectedPipe, LuOptionComparer, LuOp
 	changeDetection: ChangeDetectionStrategy.OnPush,
 })
 export class TreeBranchComponent<T> {
-	selectInputComponent = inject(ALuSelectInputComponent);
+	readonly selectInputComponent = inject(ALuSelectInputComponent);
 
-	rootOptionRef = viewChild<ɵCoreSelectPanelElement<T>>('rootOption');
+	readonly rootOptionRef = viewChild<ɵCoreSelectPanelElement<T>>('rootOption');
 
-	branch = input.required<TreeNode<T>>();
+	readonly branch = input.required<TreeNode<T>>();
 
-	optionTpl = input.required<TemplateRef<LuOptionContext<T>> | Type<unknown> | undefined>();
+	readonly optionTpl = input.required<TemplateRef<LuOptionContext<T>> | Type<unknown> | undefined>();
 
-	optionIndex = input.required({ transform: (value: string | number) => `${value}` });
+	readonly optionIndex = input.required({ transform: (value: string | number) => `${value}` });
 
-	optionComparer = input.required<LuOptionComparer<T>>();
+	readonly optionComparer = input.required<LuOptionComparer<T>>();
 
-	selectedOptions = input<T[]>([]);
+	readonly selectedOptions = input<T[]>([]);
 
 	toggleOne = output<T>();
 
@@ -31,9 +31,9 @@ export class TreeBranchComponent<T> {
 
 	unselectMany = output<T[]>();
 
-	simpleMode = input(false, { transform: booleanAttribute });
+	readonly simpleMode = input(false, { transform: booleanAttribute });
 
-	depth = input(1);
+	readonly depth = input(1);
 
 	constructor() {
 		if (this.selectInputComponent.selectChildren$) {

@@ -77,61 +77,61 @@ export class Calendar2Component implements OnInit {
 
 	#weekOptions: WeekOptions = { weekStartsOn: getJSFirstDayOfWeek(this.#weekInfo) };
 
-	intl = input(...intlInputOptions(LU_DATE2_TRANSLATIONS));
+	readonly intl = input(...intlInputOptions(LU_DATE2_TRANSLATIONS));
 
-	showOverflow = input(false, { transform: booleanAttribute });
+	readonly showOverflow = input(false, { transform: booleanAttribute });
 
-	enableOverflow = input(false, { transform: booleanAttribute });
+	readonly enableOverflow = input(false, { transform: booleanAttribute });
 
-	removeYearOverflow = input(false, { transform: booleanAttribute });
+	readonly removeYearOverflow = input(false, { transform: booleanAttribute });
 
-	hideToday = input(false, { transform: booleanAttribute });
+	readonly hideToday = input(false, { transform: booleanAttribute });
 
-	hasTodayButton = input(false, { transform: booleanAttribute });
+	readonly hasTodayButton = input(false, { transform: booleanAttribute });
 
-	hideWeekend = input(false, { transform: booleanAttribute });
+	readonly hideWeekend = input(false, { transform: booleanAttribute });
 
-	disableModeChange = input(false, { transform: booleanAttribute });
+	readonly disableModeChange = input(false, { transform: booleanAttribute });
 
 	// Date used to init the component and as internal focus model
-	date = model.required<Date>();
+	readonly date = model.required<Date>();
 
-	tabbableDate = model<Date | null>(null);
+	readonly tabbableDate = model<Date | null>(null);
 
-	mode = model<CalendarMode>('day');
+	readonly mode = model<CalendarMode>('day');
 
-	displayMode = model<CalendarMode | null>(null);
+	readonly displayMode = model<CalendarMode | null>(null);
 
-	ranges = input<readonly DateRange[]>([]);
+	readonly ranges = input<readonly DateRange[]>([]);
 
-	getCellInfo = input<(date: Date, displayMode: CalendarMode | null) => CellStatus>((_date: Date) => ({
+	readonly getCellInfo = input<(date: Date, displayMode: CalendarMode | null) => CellStatus>((_date: Date) => ({
 		classes: [],
 		disabled: false,
 	}));
 
-	month = computed(() => startOfMonth(this.date()));
+	readonly month = computed(() => startOfMonth(this.date()));
 
-	year = computed(() => startOfYear(this.date()));
+	readonly year = computed(() => startOfYear(this.date()));
 
-	decade = computed(() => startOfDecade(this.date()));
+	readonly decade = computed(() => startOfDecade(this.date()));
 
-	previousMonth = computed(() => subMonths(this.month(), 1));
+	readonly previousMonth = computed(() => subMonths(this.month(), 1));
 
-	nextMonth = computed(() => addMonths(this.month(), 1));
+	readonly nextMonth = computed(() => addMonths(this.month(), 1));
 
-	nextPage = output();
+	readonly nextPage = output();
 
-	previousPage = output();
+	readonly previousPage = output();
 
 	dateClicked = output<Date>();
 
-	dateHovered = model<Date | null>(null);
+	readonly dateHovered = model<Date | null>(null);
 
 	todayLabel = this.#intlRelativeDay.format(0, 'day');
 	thisMonthLabel = this.#intlRelativeDay.format(0, 'month');
 	thisYearLabel = this.#intlRelativeDay.format(0, 'year');
 
-	calendar2CellInstances = viewChildren(Calendar2CellDirective);
+	readonly calendar2CellInstances = viewChildren(Calendar2CellDirective);
 
 	daysOfWeek = eachDayOfInterval({
 		start: startOfWeek(new Date(), this.#weekOptions),
@@ -141,7 +141,7 @@ export class Calendar2Component implements OnInit {
 		short: this.#intlDaysShort.format(day),
 	}));
 
-	monthGridDisplay = computed(() => {
+	readonly monthGridDisplay = computed(() => {
 		const daysOfMonth: CalendarCellInfo[] = eachDayOfInterval({
 			start: this.month(),
 			end: endOfMonth(this.month()),
@@ -190,7 +190,7 @@ export class Calendar2Component implements OnInit {
 			.map((weekStart) => daysByWeek[+weekStart]);
 	});
 
-	yearGridDisplay = computed(() => {
+	readonly yearGridDisplay = computed(() => {
 		const monthsOfYear: Date[] = eachMonthOfInterval({
 			start: this.year(),
 			end: endOfYear(this.year()),
@@ -211,7 +211,7 @@ export class Calendar2Component implements OnInit {
 			}, []);
 	});
 
-	decadeGridDisplay = computed(() => {
+	readonly decadeGridDisplay = computed(() => {
 		const yearsOfDecade: Date[] = eachYearOfInterval({
 			start: this.removeYearOverflow() ? this.decade() : subYears(this.decade(), 1),
 			end: this.removeYearOverflow() ? endOfDecade(this.decade()) : addYears(endOfDecade(this.decade()), 1),
@@ -231,15 +231,15 @@ export class Calendar2Component implements OnInit {
 			}, []);
 	});
 
-	currentMonthLabel = computed(() => {
+	readonly currentMonthLabel = computed(() => {
 		return this.#intlDateFormat.format(this.date());
 	});
 
-	currentYearLabel = computed(() => {
+	readonly currentYearLabel = computed(() => {
 		return this.#intlDateYear.format(this.date());
 	});
 
-	currentDecadeLabel = computed(() => {
+	readonly currentDecadeLabel = computed(() => {
 		return `${this.#intlDateYear.format(startOfDecade(this.decade()))} – ${this.#intlDateYear.format(endOfDecade(this.decade()))}`;
 	});
 

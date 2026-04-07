@@ -11,18 +11,18 @@ export abstract class BasePickerComponent implements ControlValueAccessor {
 	onChange: (value: ISO8601Time | ISO8601Duration) => void;
 	onTouched: () => void;
 
-	step = input<ISO8601Duration | null>(null);
+	readonly step = input<ISO8601Duration | null>(null);
 
-	disabled = model(false);
+	readonly disabled = model(false);
 
-	size = input<'S' | 'M'>();
+	readonly size = input<'S' | 'M'>();
 
-	hoursPart = viewChild<TimePickerPartComponent>('hoursPart');
+	readonly hoursPart = viewChild<TimePickerPartComponent>('hoursPart');
 
-	minutesPart = viewChild<TimePickerPartComponent>('minutesPart');
+	readonly minutesPart = viewChild<TimePickerPartComponent>('minutesPart');
 
-	protected hoursIncrement = computed(() => this.getHoursIncrement());
-	protected minutesIncrement = computed(() => this.getMinutesIncrement());
+	protected readonly hoursIncrement = computed(() => this.getHoursIncrement());
+	protected readonly minutesIncrement = computed(() => this.getMinutesIncrement());
 
 	registerOnChange(fn: () => void): void {
 		this.onChange = fn;

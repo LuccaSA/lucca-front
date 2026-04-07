@@ -74,7 +74,7 @@ export class LuEstablishmentSelectInputComponent<
 		return this.isSearching ? 'name' : 'legalunit.name,name';
 	}
 
-	public intl = input(...intlInputOptions(LU_ESTABLISHMENT_SELECT_INPUT_TRANSLATIONS));
+	public readonly intl = input(...intlInputOptions(LU_ESTABLISHMENT_SELECT_INPUT_TRANSLATIONS));
 
 	constructor(
 		protected override _changeDetectorRef: ChangeDetectorRef,

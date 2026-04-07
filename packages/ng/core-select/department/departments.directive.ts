@@ -25,12 +25,12 @@ import { NoopTreeSelectDirective } from './noop-tree-select.directive';
 export class LuCoreSelectDepartmentsDirective<T extends ILuDepartment = ILuDepartment> extends ALuCoreSelectApiDirective<TreeNode<T>> implements OnInit, CoreSelectApiTotalCountProvider {
 	protected httpClient = inject(HttpClient);
 
-	url = input<string>('/organization/structure/api/departments/tree');
-	filters = input<Record<string, string | number | boolean> | null>(null);
-	operationIds = input<readonly number[] | null>(null);
-	uniqueOperationIds = input<readonly number[] | null>(null);
-	appInstanceId = input<number | null>(null);
-	searchDelimiter = input<string>(' ');
+	readonly url = input<string>('/organization/structure/api/departments/tree');
+	readonly filters = input<Record<string, string | number | boolean> | null>(null);
+	readonly operationIds = input<readonly number[] | null>(null);
+	readonly uniqueOperationIds = input<readonly number[] | null>(null);
+	readonly appInstanceId = input<number | null>(null);
+	readonly searchDelimiter = input<string>(' ');
 
 	public override ngOnInit(): void {
 		super.ngOnInit();
@@ -71,7 +71,7 @@ export class LuCoreSelectDepartmentsDirective<T extends ILuDepartment = ILuDepar
 			.filter(isNotNil);
 	}
 
-	protected override params$: Observable<Record<string, string | number | boolean>> = toObservable(
+	protected override readonly params$: Observable<Record<string, string | number | boolean>> = toObservable(
 		computed(() => {
 			const operationIds = this.operationIds();
 			const uniqueOperationIds = this.uniqueOperationIds();
@@ -85,7 +85,7 @@ export class LuCoreSelectDepartmentsDirective<T extends ILuDepartment = ILuDepar
 		}),
 	);
 
-	public totalCount$ = this.select.options$.pipe(
+	public readonly totalCount$ = this.select.options$.pipe(
 		filter((opts) => opts.length > 0),
 		map((opts) => {
 			return opts.map((branch) => this.flattenTree(branch)).flat().length;

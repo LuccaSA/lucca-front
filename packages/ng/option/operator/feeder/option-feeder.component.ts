@@ -15,7 +15,7 @@ import { ALuOptionOperator, ILuOptionOperator } from '../option-operator.model';
 	],
 })
 export class LuOptionFeederComponent<T> implements ILuOptionOperator<T> {
-	outOptions$ = new BehaviorSubject<T[]>([]);
+	readonly outOptions$ = new BehaviorSubject<T[]>([]);
 	@Input() set options(options: T[]) {
 		this.outOptions$.next(options);
 	}

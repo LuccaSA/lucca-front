@@ -12,7 +12,7 @@ import { LuUserPopoverComponent } from './user-popover.component';
 	exportAs: 'LuUserPopoverDirective',
 })
 export class LuUserPopoverDirective extends PopoverDirective {
-	luUserPopover = input.required<ILuUser>();
+	readonly luUserPopover = input.required<ILuUser>();
 
 	@Input()
 	set luUserPopoverDisabled(disabled: boolean) {

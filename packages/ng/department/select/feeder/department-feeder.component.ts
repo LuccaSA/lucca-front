@@ -32,7 +32,7 @@ import { ALuDepartmentService, LuDepartmentV4Service } from '../../service/index
 export class LuDepartmentFeederComponent extends ALuTreeOptionOperator<ILuDepartment> implements ILuTreeOptionOperator<ILuDepartment>, ILuOnOpenSubscriber {
 	inOptions$: Observable<ILuTree<ILuDepartment>[]>;
 	outOptions$: Observable<ILuTree<ILuDepartment>[]>;
-	protected _out$ = new Subject<ILuTree<ILuDepartment>[]>();
+	protected readonly _out$ = new Subject<ILuTree<ILuDepartment>[]>();
 	protected _service: LuDepartmentV4Service;
 	@Input() set appInstanceId(appInstanceId: number | string) {
 		this._service.appInstanceId = appInstanceId;
