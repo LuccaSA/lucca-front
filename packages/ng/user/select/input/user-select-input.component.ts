@@ -54,19 +54,13 @@ export class LuUserSelectInputComponent<U extends import('../../user.model').ILu
 		this._placeholder = p;
 	}
 
-	readonly fields = input<string>();
-
-	readonly filters = input<string[]>();
-
-	readonly orderBy = input<string>();
-
-	readonly appInstanceId = input<number | string>();
-
-	readonly operations = input<number[]>();
-
-	readonly enableFormerEmployees = input<boolean>(false);
-
-	readonly disablePrincipal = input<boolean>(false);
+	@Input() fields: string;
+	@Input() filters: string[];
+	@Input() orderBy: string;
+	@Input() appInstanceId: number | string;
+	@Input() operations: number[];
+	@Input() enableFormerEmployees = false;
+	@Input() disablePrincipal = false;
 
 	clue = '';
 

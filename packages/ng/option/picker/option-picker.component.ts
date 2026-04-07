@@ -14,15 +14,14 @@ import {
 	forwardRef,
 	inject,
 	Inject,
-	input,
+	Input,
 	OnDestroy,
 	Output,
 	QueryList,
 	TemplateRef,
-	viewChild,
+	ViewChild,
 } from '@angular/core';
 import { takeUntilDestroyed } from '@angular/core/rxjs-interop';
-import { isNotNil, syncInputSignal, ɵeffectWithDeps } from '@lucca-front/ng/core';
 import { ALuPickerPanel } from '@lucca-front/ng/picker';
 import { luTransformPopover } from '@lucca-front/ng/popover';
 import { merge, of } from 'rxjs';
@@ -46,7 +45,10 @@ export abstract class ALuOptionPickerComponent<T, O extends import('../item/opti
 	 * to style the containing popover from outside the component.
 	 * @param classes list of class names
 	 */
-	readonly inputPanelClasses = input<string>('', { alias: 'panel-classes' });
+	@Input('panel-classes')
+	set inputPanelClasses(classes: string) {
+		this.panelClasses = classes;
+	}
 
 	/**
 	 * This method takes classes set on the host lu-popover element and applies them on the
@@ -54,13 +56,19 @@ export abstract class ALuOptionPickerComponent<T, O extends import('../item/opti
 	 * to style the containing popover from outside the component.
 	 * @param classes list of class names
 	 */
-	readonly inputContentClasses = input<string>('', { alias: 'content-classes' });
+	@Input('content-classes')
+	set inputContentClasses(classes: string) {
+		this.contentClasses = classes;
+	}
 
 	/**
 	 * This method take a function that compare options from feeder and options from form value.
 	 * By default, compare JSON values.
 	 */
-	readonly inputOptionComparer = input<LuOptionComparer<T>>(undefined, { alias: 'option-comparer' });
+	@Input('option-comparer')
+	set inputOptionComparer(comparer: LuOptionComparer<T>) {
+		this.optionComparer = comparer;
+	}
 
 	@Output() override close = new EventEmitter<void>();
 	@Output() override open = new EventEmitter<void>();
@@ -87,16 +95,6 @@ export abstract class ALuOptionPickerComponent<T, O extends import('../item/opti
 		super();
 		this._isOptionItemsInitialized = false;
 		this.overlayPaneClass = this._defaultOverlayPaneClasses;
-
-		syncInputSignal(this.inputPanelClasses, (panelClasses) => (this.panelClasses = panelClasses));
-		syncInputSignal(this.inputContentClasses, (contentClasses) => (this.contentClasses = contentClasses));
-		syncInputSignal(this.inputOptionComparer, (optionComparer) => (this.optionComparer = optionComparer));
-
-		ɵeffectWithDeps([this.vcTemplateRef], (vcTemplateRef) => {
-			if (isNotNil(vcTemplateRef)) {
-				this.templateRef = vcTemplateRef;
-			}
-		});
 	}
 
 	protected _emitSelectValue(val: T) {
@@ -126,7 +124,10 @@ export abstract class ALuOptionPickerComponent<T, O extends import('../item/opti
 		this._applySelected();
 	}
 
-	readonly vcTemplateRef = viewChild(TemplateRef);
+	@ViewChild(TemplateRef, { static: true })
+	set vcTemplateRef(tr: TemplateRef<HTMLElement>) {
+		this.templateRef = tr;
+	}
 
 	// keydown
 	override _handleKeydown(event: KeyboardEvent) {
