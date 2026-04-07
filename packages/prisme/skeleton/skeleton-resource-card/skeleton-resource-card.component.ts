@@ -1,7 +1,7 @@
 import { ChangeDetectionStrategy, Component, computed, input, numberAttribute } from '@angular/core';
 
 @Component({
-	selector: 'lu-skeleton-resource-card',
+	selector: 'lu-skeleton-resource-card,pr-skeleton-resource-card',
 	templateUrl: './skeleton-resource-card.component.html',
 	styleUrl: './skeleton-resource-card.component.scss',
 	changeDetection: ChangeDetectionStrategy.OnPush,

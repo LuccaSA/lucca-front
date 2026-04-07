@@ -1,7 +1,7 @@
 import { booleanAttribute, ChangeDetectionStrategy, Component, input } from '@angular/core';
 
 @Component({
-	selector: 'lu-skeleton-header',
+	selector: 'lu-skeleton-header,pr-skeleton-header',
 	templateUrl: './skeleton-header.component.html',
 	styleUrl: './skeleton-header.component.scss',
 	changeDetection: ChangeDetectionStrategy.OnPush,

@@ -4,7 +4,7 @@ import { booleanAttribute, ChangeDetectionStrategy, Component, computed, input }
 export type ColAlignTable = 'start' | 'center' | 'end';
 
 @Component({
-	selector: 'lu-skeleton-table',
+	selector: 'lu-skeleton-table,pr-skeleton-table',
 	templateUrl: './skeleton-table.component.html',
 	styleUrl: './skeleton-table.component.scss',
 	changeDetection: ChangeDetectionStrategy.OnPush,
