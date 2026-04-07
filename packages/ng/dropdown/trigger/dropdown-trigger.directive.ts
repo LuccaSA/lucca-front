@@ -1,7 +1,7 @@
 import { ConnectionPositionPair, HorizontalConnectionPos, OriginConnectionPosition, OverlayConnectionPosition, VerticalConnectionPos } from '@angular/cdk/overlay';
-import { DestroyRef, Directive, effect, inject, Input, OnInit, TemplateRef, Type } from '@angular/core';
+import { DestroyRef, Directive, effect, inject, input, OnInit, TemplateRef, Type } from '@angular/core';
 import { takeUntilDestroyed } from '@angular/core/rxjs-interop';
-import { isNil } from '@lucca-front/ng/core';
+import { isNil, ɵeffectWithDeps } from '@lucca-front/ng/core';
 import { ALuPopoverPanel, LuPopoverAlignment } from '@lucca-front/ng/popover';
 import { PopoverDirective, PopoverPosition } from '@lucca-front/ng/popover2';
 
@@ -24,14 +24,7 @@ export class LuDropdownTriggerDirective<_T> implements OnInit {
 	#destroyRef = inject(DestroyRef);
 	// Keeping generic type here just for the sake of backwards compatibility
 	/** References the popover instance that the trigger is associated with. */
-	@Input('luDropdown') set inputPanel(p: TemplateRef<unknown> | Type<unknown> | ALuPopoverPanel) {
-		if (p instanceof ALuPopoverPanel) {
-			this.popover2.content = p.templateRef;
-			p.close.pipe(takeUntilDestroyed(this.#destroyRef)).subscribe(() => this.popover2.close());
-		} else {
-			this.popover2.content = p;
-		}
-	}
+	readonly inputPanel = input<TemplateRef<unknown> | Type<unknown> | ALuPopoverPanel>(undefined, { alias: 'luDropdown' });
 
 	constructor() {
 		this.popover2.luPopoverNoCloseButton = true;
@@ -40,6 +33,19 @@ export class LuDropdownTriggerDirective<_T> implements OnInit {
 				this.popover2.customPositions = this.legacyPositionBuilder(this.popover2.luPopoverPositionRef());
 			});
 		}
+
+		ɵeffectWithDeps([this.inputPanel], (p) => {
+			if (isNil(p)) {
+				return;
+			}
+
+			if (p instanceof ALuPopoverPanel) {
+				this.popover2.content = p.templateRef;
+				p.close.pipe(takeUntilDestroyed(this.#destroyRef)).subscribe(() => this.popover2.close());
+			} else {
+				this.popover2.content = p;
+			}
+		});
 	}
 
 	/** how the panel will be aligned with the target, allowed values: top, bottom, left, right
