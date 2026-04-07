@@ -1,6 +1,6 @@
 import { Overlay } from '@angular/cdk/overlay';
 import { AfterViewInit, Directive, ElementRef, EventEmitter, input, OnDestroy, Output, ViewContainerRef } from '@angular/core';
-import { isNotNil, ɵeffectWithDeps } from '@lucca-front/ng/core';
+import { syncSignal } from '@lucca-front/ng/core';
 import { ILuPopoverPanel } from '../panel/index';
 import { ILuPopoverTarget, LuPopoverAlignment, LuPopoverPosition, LuPopoverTarget } from '../target/index';
 import { ALuPopoverTrigger, ILuPopoverTrigger, LuPopoverTriggerEvent } from './popover-trigger.model';
@@ -86,73 +86,20 @@ export class LuPopoverTriggerDirective<TPanel extends ILuPopoverPanel = ILuPopov
 		this._triggerId = this._elementRef.nativeElement.getAttribute('id') || this._triggerId;
 		this.#initTarget();
 
-		ɵeffectWithDeps([this.inputPanel], (inputPanel) => {
-			if (isNotNil(inputPanel)) {
-				this.panel = inputPanel;
-			}
-		});
-
-		ɵeffectWithDeps([this.inputTriggerEvent], (inputTriggerEvent) => {
-			if (isNotNil(inputTriggerEvent)) {
-				this.triggerEvent = inputTriggerEvent;
-			}
-		});
-
-		ɵeffectWithDeps([this.inputEnterDelay], (inputEnterDelay) => {
-			if (isNotNil(inputEnterDelay)) {
-				this.enterDelay = inputEnterDelay;
-			}
-		});
-
-		ɵeffectWithDeps([this.inputLeaveDelay], (inputLeaveDelay) => {
-			if (isNotNil(inputLeaveDelay)) {
-				this.leaveDelay = inputLeaveDelay;
-			}
-		});
-
-		ɵeffectWithDeps([this.inputDisabled], (inputDisabled) => {
-			if (isNotNil(inputDisabled)) {
-				this.disabled = inputDisabled;
-			}
-		});
+		syncSignal(this.inputPanel, (inputPanel) => (this.panel = inputPanel));
+		syncSignal(this.inputTriggerEvent, (inputTriggerEvent) => (this.triggerEvent = inputTriggerEvent));
+		syncSignal(this.inputEnterDelay, (inputEnterDelay) => (this.enterDelay = inputEnterDelay));
+		syncSignal(this.inputLeaveDelay, (inputLeaveDelay) => (this.leaveDelay = inputLeaveDelay));
+		syncSignal(this.inputDisabled, (inputDisabled) => (this.disabled = inputDisabled));
 	}
 
 	#initTarget() {
-		ɵeffectWithDeps([this.inputTarget], (inputTarget) => {
-			if (isNotNil(inputTarget)) {
-				this.target = inputTarget;
-			}
-		});
-
-		ɵeffectWithDeps([this.inputPosition], (inputPosition) => {
-			if (isNotNil(inputPosition)) {
-				this.target.position = inputPosition;
-			}
-		});
-
-		ɵeffectWithDeps([this.inputAlignment], (inputAlignment) => {
-			if (isNotNil(inputAlignment)) {
-				this.target.alignment = inputAlignment;
-			}
-		});
-
-		ɵeffectWithDeps([this.inputOverlap], (inputOverlap) => {
-			if (isNotNil(inputOverlap)) {
-				this.target.overlap = inputOverlap;
-			}
-		});
-
-		ɵeffectWithDeps([this.inputOffsetX], (inputOffsetX) => {
-			if (isNotNil(inputOffsetX)) {
-				this.target.offsetX = inputOffsetX;
-			}
-		});
-
-		ɵeffectWithDeps([this.inputOffsetY], (inputOffsetY) => {
-			if (isNotNil(inputOffsetY)) {
-				this.target.offsetY = inputOffsetY;
-			}
-		});
+		syncSignal(this.inputTarget, (inputTarget) => (this.target = inputTarget));
+		syncSignal(this.inputPosition, (inputPosition) => (this.target.position = inputPosition));
+		syncSignal(this.inputAlignment, (inputAlignment) => (this.target.alignment = inputAlignment));
+		syncSignal(this.inputOverlap, (inputOverlap) => (this.target.overlap = inputOverlap));
+		syncSignal(this.inputOffsetX, (inputOffsetX) => (this.target.offsetX = inputOffsetX));
+		syncSignal(this.inputOffsetY, (inputOffsetY) => (this.target.offsetY = inputOffsetY));
 	}
 
 	override onClick() {
