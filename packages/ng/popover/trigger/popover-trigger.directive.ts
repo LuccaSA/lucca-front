@@ -1,5 +1,6 @@
 import { Overlay } from '@angular/cdk/overlay';
-import { AfterViewInit, Directive, ElementRef, EventEmitter, HostBinding, HostListener, Input, OnDestroy, Output, ViewContainerRef } from '@angular/core';
+import { AfterViewInit, Directive, ElementRef, EventEmitter, input, OnDestroy, Output, ViewContainerRef } from '@angular/core';
+import { isNotNil, ɵeffectWithDeps } from '@lucca-front/ng/core';
 import { ILuPopoverPanel } from '../panel/index';
 import { ILuPopoverTarget, LuPopoverAlignment, LuPopoverPosition, LuPopoverTarget } from '../target/index';
 import { ALuPopoverTrigger, ILuPopoverTrigger, LuPopoverTriggerEvent } from './popover-trigger.model';
@@ -7,25 +8,29 @@ import { ALuPopoverTrigger, ILuPopoverTrigger, LuPopoverTriggerEvent } from './p
 @Directive({
 	selector: '[luPopover]',
 	exportAs: 'LuPopoverTrigger',
+	host: {
+		'[attr.aria-expanded]': '_attrAriaExpanded',
+		'[attr.id]': '_attrId',
+		'[attr.aria-controls]': '_attrAriaControls',
+		'(click)': 'onClick()',
+		'(mouseenter)': 'onMouseEnter()',
+		'(mouseleave)': 'onMouseLeave()',
+		'(focus)': 'onFocus()',
+		'(blur)': 'onBlur()',
+	},
 })
 export class LuPopoverTriggerDirective<TPanel extends ILuPopoverPanel = ILuPopoverPanel, TTarget extends ILuPopoverTarget = ILuPopoverTarget>
 	extends ALuPopoverTrigger<TPanel, TTarget>
 	implements ILuPopoverTrigger<TPanel, TTarget>, AfterViewInit, OnDestroy
 {
 	/** References the popover instance that the trigger is associated with. */
-	@Input('luPopover') set inputPanel(p: TPanel) {
-		this.panel = p;
-	}
+	inputPanel = input<TPanel>(undefined, { alias: 'luPopover' });
 
 	/** References the popover target instance that the trigger is associated with. */
-	@Input('luPopoverTarget') set inputTarget(t: TTarget) {
-		this.target = t;
-	}
+	inputTarget = input<TTarget>(undefined, { alias: 'luPopoverTarget' });
 
 	/** References the popover target instance that the trigger is associated with. */
-	@Input('luPopoverTrigger') set inputTriggerEvent(te: LuPopoverTriggerEvent) {
-		this.triggerEvent = te;
-	}
+	inputTriggerEvent = input<LuPopoverTriggerEvent>(undefined, { alias: 'luPopoverTrigger' });
 
 	/** Event emitted when the associated popover is opened. */
 	// eslint-disable-next-line @angular-eslint/no-output-on-prefix
@@ -36,50 +41,37 @@ export class LuPopoverTriggerDirective<TPanel extends ILuPopoverPanel = ILuPopov
 	@Output('luPopoverOnClose') onClose = new EventEmitter<void>();
 
 	/** how you want to position the panel relative to the target, allowed values: above, below, before, after */
-	@Input('luPopoverPosition') set inputPosition(pos: LuPopoverPosition) {
-		this.target.position = pos;
-	}
+	inputPosition = input<LuPopoverPosition>(undefined, { alias: 'luPopoverPosition' });
+
 	/** how the panel will be align with the target, allowed values: top, bottom, left, right */
-	@Input('luPopoverAlignment') set inputAlignment(al: LuPopoverAlignment) {
-		this.target.alignment = al;
-	}
+	inputAlignment = input<LuPopoverAlignment>(undefined, { alias: 'luPopoverAlignment' });
 
 	/** when trigger = hover, delay before the popover panel appears */
-	@Input('luPopoverEnterDelay') set inputEnterDelay(d: number) {
-		this.enterDelay = d;
-	}
+	inputEnterDelay = input<number>(undefined, { alias: 'luPopoverEnterDelay' });
+
 	/** when trigger = hover, delay before the popover panel disappears */
-	@Input('luPopoverLeaveDelay') set inputLeaveDelay(d: number) {
-		this.leaveDelay = d;
-	}
+	inputLeaveDelay = input<number>(undefined, { alias: 'luPopoverLeaveDelay' });
 
 	/** disable popover apparition */
-	@Input('luPopoverDisabled') set inputDisabled(d: boolean) {
-		this.disabled = d;
-	}
+	inputDisabled = input<boolean>(undefined, { alias: 'luPopoverDisabled' });
 
 	/** set to true if you want the panel to appear on top of the target */
-	@Input('luPopoverOverlap') set inputOverlap(ov: boolean) {
-		this.target.overlap = ov;
-	}
+	inputOverlap = input<boolean>(undefined, { alias: 'luPopoverOverlap' });
 
-	@Input('luPopoverOffsetX') set inputOffsetX(ox: number) {
-		this.target.offsetX = ox;
-	}
-	@Input('luPopoverOffsetY') set inputOffsetY(oy: number) {
-		this.target.offsetY = oy;
-	}
+	inputOffsetX = input<number>(undefined, { alias: 'luPopoverOffsetX' });
+
+	inputOffsetY = input<number>(undefined, { alias: 'luPopoverOffsetY' });
 
 	/** accessibility attribute - dont override */
-	@HostBinding('attr.aria-expanded') get _attrAriaExpanded() {
+	get _attrAriaExpanded() {
 		return this._popoverOpen;
 	}
 	/** accessibility attribute - dont override */
-	@HostBinding('attr.id') get _attrId() {
+	get _attrId() {
 		return this._triggerId;
 	}
 	/** accessibility attribute - dont override */
-	@HostBinding('attr.aria-controls') get _attrAriaControls() {
+	get _attrAriaControls() {
 		return this._panelId;
 	}
 
@@ -92,27 +84,93 @@ export class LuPopoverTriggerDirective<TPanel extends ILuPopoverPanel = ILuPopov
 		this.target = new LuPopoverTarget() as ILuPopoverTarget as TTarget;
 		this.target.elementRef = this._elementRef;
 		this._triggerId = this._elementRef.nativeElement.getAttribute('id') || this._triggerId;
+		this.#initTarget();
+
+		ɵeffectWithDeps([this.inputPanel], (inputPanel) => {
+			if (isNotNil(inputPanel)) {
+				this.panel = inputPanel;
+			}
+		});
+
+		ɵeffectWithDeps([this.inputTriggerEvent], (inputTriggerEvent) => {
+			if (isNotNil(inputTriggerEvent)) {
+				this.triggerEvent = inputTriggerEvent;
+			}
+		});
+
+		ɵeffectWithDeps([this.inputEnterDelay], (inputEnterDelay) => {
+			if (isNotNil(inputEnterDelay)) {
+				this.enterDelay = inputEnterDelay;
+			}
+		});
+
+		ɵeffectWithDeps([this.inputLeaveDelay], (inputLeaveDelay) => {
+			if (isNotNil(inputLeaveDelay)) {
+				this.leaveDelay = inputLeaveDelay;
+			}
+		});
+
+		ɵeffectWithDeps([this.inputDisabled], (inputDisabled) => {
+			if (isNotNil(inputDisabled)) {
+				this.disabled = inputDisabled;
+			}
+		});
 	}
 
-	@HostListener('click')
+	#initTarget() {
+		ɵeffectWithDeps([this.inputTarget], (inputTarget) => {
+			if (isNotNil(inputTarget)) {
+				this.target = inputTarget;
+			}
+		});
+
+		ɵeffectWithDeps([this.inputPosition], (inputPosition) => {
+			if (isNotNil(inputPosition)) {
+				this.target.position = inputPosition;
+			}
+		});
+
+		ɵeffectWithDeps([this.inputAlignment], (inputAlignment) => {
+			if (isNotNil(inputAlignment)) {
+				this.target.alignment = inputAlignment;
+			}
+		});
+
+		ɵeffectWithDeps([this.inputOverlap], (inputOverlap) => {
+			if (isNotNil(inputOverlap)) {
+				this.target.overlap = inputOverlap;
+			}
+		});
+
+		ɵeffectWithDeps([this.inputOffsetX], (inputOffsetX) => {
+			if (isNotNil(inputOffsetX)) {
+				this.target.offsetX = inputOffsetX;
+			}
+		});
+
+		ɵeffectWithDeps([this.inputOffsetY], (inputOffsetY) => {
+			if (isNotNil(inputOffsetY)) {
+				this.target.offsetY = inputOffsetY;
+			}
+		});
+	}
+
 	override onClick() {
 		super.onClick();
 	}
 
-	@HostListener('mouseenter')
 	override onMouseEnter() {
 		super.onMouseEnter();
 	}
 
-	@HostListener('mouseleave')
 	override onMouseLeave() {
 		super.onMouseLeave();
 	}
-	@HostListener('focus')
+
 	override onFocus() {
 		super.onFocus();
 	}
-	@HostListener('blur')
+
 	override onBlur() {
 		super.onBlur();
 	}
@@ -121,6 +179,7 @@ export class LuPopoverTriggerDirective<TPanel extends ILuPopoverPanel = ILuPopov
 		this._checkPanel();
 		this._checkTarget();
 	}
+
 	ngOnDestroy() {
 		this._cleanUpSubscriptions();
 		if (this._popoverOpen) {
@@ -128,9 +187,11 @@ export class LuPopoverTriggerDirective<TPanel extends ILuPopoverPanel = ILuPopov
 		}
 		this.destroyPopover();
 	}
+
 	protected _emitOpen(): void {
 		this.onOpen.emit();
 	}
+
 	protected _emitClose(): void {
 		this.onClose.emit();
 	}
