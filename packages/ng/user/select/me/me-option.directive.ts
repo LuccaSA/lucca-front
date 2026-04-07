@@ -1,5 +1,5 @@
 import { Directive, EmbeddedViewRef, forwardRef, Inject, input, Optional, Self, SkipSelf, TemplateRef, ViewContainerRef } from '@angular/core';
-import { ALuOnOpenSubscriber, isNotNil, syncSignal, ɵeffectWithDeps } from '@lucca-front/ng/core';
+import { ALuOnOpenSubscriber, isNotNil, syncInputSignal, ɵeffectWithDeps } from '@lucca-front/ng/core';
 import { ALuOptionOperator, ILuOptionOperator } from '@lucca-front/ng/option';
 import { BehaviorSubject, combineLatest, Observable } from 'rxjs';
 import { map } from 'rxjs/operators';
@@ -69,11 +69,11 @@ export class LuUserMeOptionDirective<U extends ILuUser = ILuUser> implements ILu
 	private readonly meDisplayed$ = new BehaviorSubject(false);
 
 	#initServiceValues() {
-		syncSignal(this.luUserMeOptionFields, (luUserMeOptionFields) => (this._service.fields = luUserMeOptionFields));
-		syncSignal(this.luUserMeOptionFilters, (luUserMeOptionFilters) => (this._service.filters = luUserMeOptionFilters));
-		syncSignal(this.luUserMeOptionOrderBy, (luUserMeOptionOrderBy) => (this._service.orderBy = luUserMeOptionOrderBy));
-		syncSignal(this.luUserMeOptionAppInstanceId, (luUserMeOptionAppInstanceId) => (this._service.appInstanceId = luUserMeOptionAppInstanceId));
-		syncSignal(this.luUserMeOptionOperations, (luUserMeOptionOperations) => (this._service.operations = luUserMeOptionOperations));
+		syncInputSignal(this.luUserMeOptionFields, (luUserMeOptionFields) => (this._service.fields = luUserMeOptionFields));
+		syncInputSignal(this.luUserMeOptionFilters, (luUserMeOptionFilters) => (this._service.filters = luUserMeOptionFilters));
+		syncInputSignal(this.luUserMeOptionOrderBy, (luUserMeOptionOrderBy) => (this._service.orderBy = luUserMeOptionOrderBy));
+		syncInputSignal(this.luUserMeOptionAppInstanceId, (luUserMeOptionAppInstanceId) => (this._service.appInstanceId = luUserMeOptionAppInstanceId));
+		syncInputSignal(this.luUserMeOptionOperations, (luUserMeOptionOperations) => (this._service.operations = luUserMeOptionOperations));
 	}
 
 	onOpen() {

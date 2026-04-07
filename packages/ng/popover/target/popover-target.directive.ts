@@ -1,5 +1,5 @@
 import { Directive, ElementRef, input } from '@angular/core';
-import { syncSignal } from '@lucca-front/ng/core';
+import { syncInputSignal } from '@lucca-front/ng/core';
 import { ALuPopoverTarget, LuPopoverAlignment, LuPopoverPosition } from './popover-target.model';
 
 @Directive({
@@ -24,10 +24,10 @@ export class LuPopoverTargetDirective extends ALuPopoverTarget {
 		super();
 		this.elementRef = ref;
 
-		syncSignal(this.inputPosition, (inputPosition) => (this.position = inputPosition));
-		syncSignal(this.inputAlignment, (inputAlignment) => (this.alignment = inputAlignment));
-		syncSignal(this.inputOverlap, (inputOverlap) => (this.overlap = inputOverlap));
-		syncSignal(this.inputOffsetX, (inputOffsetX) => (this.offsetX = inputOffsetX));
-		syncSignal(this.inputOffsetY, (inputOffsetY) => (this.offsetY = inputOffsetY));
+		syncInputSignal(this.inputPosition, (inputPosition) => (this.position = inputPosition));
+		syncInputSignal(this.inputAlignment, (inputAlignment) => (this.alignment = inputAlignment));
+		syncInputSignal(this.inputOverlap, (inputOverlap) => (this.overlap = inputOverlap));
+		syncInputSignal(this.inputOffsetX, (inputOffsetX) => (this.offsetX = inputOffsetX));
+		syncInputSignal(this.inputOffsetY, (inputOffsetY) => (this.offsetY = inputOffsetY));
 	}
 }

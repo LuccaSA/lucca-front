@@ -26,10 +26,10 @@ export function ɵeffectWithDeps<const T extends EffectWithDepsInput>(
 }
 
 /**
- * Utilitaire pour synchroniser un signal avec une props via un setter.
+ * Utilitaire pour synchroniser un input signal avec une props via un setter.
  * Évite la répétition des ɵeffectWithDeps + isNotNil.
  */
-export function syncSignal<T>(signal: ReturnType<typeof input<T>>, setter: (value: T) => void): void {
+export function syncInputSignal<T>(signal: ReturnType<typeof input<T>>, setter: (value: T) => void): void {
 	ɵeffectWithDeps([signal], (value) => {
 		if (isNotNil(value)) {
 			setter(value);
