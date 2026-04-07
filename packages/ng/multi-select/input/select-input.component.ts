@@ -5,11 +5,8 @@ import {
 	Component,
 	computed,
 	forwardRef,
-	HostBinding,
-	HostListener,
 	inject,
 	input,
-	Input,
 	model,
 	numberAttribute,
 	OnDestroy,
@@ -70,6 +67,9 @@ import { LuMultiSelectPanelRef } from './panel.model';
 	],
 	host: {
 		class: 'multiSelect',
+		'[class.mod-filterPill]': 'filterPillClass',
+		'(keydown.control.enter)': 'selectParentOnly()',
+		'(keydown.shift.enter)': 'selectChildrenOnly()',
 	},
 	encapsulation: ViewEncapsulation.None,
 })
@@ -80,19 +80,15 @@ export class LuMultiSelectInputComponent<T> extends ALuSelectInputComponent<T, T
 
 	readonly valuesTpl = model<TemplateRef<LuOptionContext<T[]>> | Type<unknown>>(LuMultiSelectDefaultDisplayerComponent);
 
-	@Input({ transform: numberAttribute })
-	maxValuesShown = 500;
+	readonly maxValuesShown = input(500, { transform: numberAttribute });
 
-	@Input({ transform: booleanAttribute })
-	keepSearchAfterSelection = false;
+	readonly keepSearchAfterSelection = input(false, { transform: booleanAttribute });
 
-	@Input()
-	filterPillLabelPlural: string;
+	readonly filterPillLabelPlural = input<string>();
 
 	override readonly selectParent$ = new Subject<void>();
 	override readonly selectChildren$ = new Subject<void>();
 
-	@HostBinding('class.mod-filterPill')
 	public get filterPillClass() {
 		return this.filterPillMode;
 	}
@@ -130,12 +126,10 @@ export class LuMultiSelectInputComponent<T> extends ALuSelectInputComponent<T, T
 
 	public readonly emptyClue$ = new Subject<void>();
 
-	@HostListener('keydown.control.enter')
 	public selectParentOnly() {
 		this.selectParent$.next();
 	}
 
-	@HostListener('keydown.shift.enter')
 	public selectChildrenOnly() {
 		this.selectChildren$.next();
 	}
@@ -154,7 +148,7 @@ export class LuMultiSelectInputComponent<T> extends ALuSelectInputComponent<T, T
 	}
 
 	public override updateValue(value: T[], skipFocus = false): void {
-		super.updateValue(value, skipFocus, this.keepSearchAfterSelection);
+		super.updateValue(value, skipFocus, this.keepSearchAfterSelection());
 		if (!skipFocus) {
 			this.focusInput();
 		}
