@@ -1,7 +1,17 @@
 import { AsyncPipe } from '@angular/common';
-import { ChangeDetectionStrategy, Component, ElementRef, forwardRef, HostBinding, Inject, input, Input, OnDestroy, OnInit, Optional, Output, Self, SkipSelf, ViewChild } from '@angular/core';
+import { ChangeDetectionStrategy, Component, ElementRef, forwardRef, Inject, input, OnDestroy, OnInit, Optional, output, Self, SkipSelf, viewChild } from '@angular/core';
 import { FormControl, FormGroup, ReactiveFormsModule } from '@angular/forms';
-import { ALuOnCloseSubscriber, ALuOnOpenSubscriber, ALuOnScrollBottomSubscriber, ILuOnCloseSubscriber, ILuOnOpenSubscriber, ILuOnScrollBottomSubscriber, intlInputOptions } from '@lucca-front/ng/core';
+import {
+	ALuOnCloseSubscriber,
+	ALuOnOpenSubscriber,
+	ALuOnScrollBottomSubscriber,
+	ILuOnCloseSubscriber,
+	ILuOnOpenSubscriber,
+	ILuOnScrollBottomSubscriber,
+	intlInputOptions,
+	isNotNil,
+	ɵeffectWithDeps,
+} from '@lucca-front/ng/core';
 import { ALuOptionOperator, LuOptionPlaceholderComponent } from '@lucca-front/ng/option';
 import { BehaviorSubject, combineLatest, merge, Observable, of, Subject, Subscription } from 'rxjs';
 import { catchError, debounceTime, filter, map, scan, share, startWith, switchMap } from 'rxjs/operators';
@@ -19,6 +29,9 @@ interface UserPagedSearcherForm {
 	templateUrl: 'user-searcher.component.html',
 	styleUrl: 'user-searcher.component.scss',
 	changeDetection: ChangeDetectionStrategy.OnPush,
+	host: {
+		class: 'position-fixed',
+	},
 	imports: [AsyncPipe, ReactiveFormsModule, LuOptionPlaceholderComponent],
 	providers: [
 		{
@@ -51,28 +64,16 @@ export class LuUserPagedSearcherComponent<U extends ILuUser = ILuUser> implement
 	private _service: LuUserV3Service<U>;
 	private _subs = new Subscription();
 
-	@HostBinding('class.position-fixed') fixed = true;
-	@ViewChild('searchInput', { read: ElementRef, static: true })
-	readonly searchInput: ElementRef<HTMLInputElement>;
+	readonly searchInput = viewChild<ElementRef<HTMLInputElement>>('searchInput');
 
-	@Input() set fields(fields: string) {
-		this._service.fields = fields;
-	}
-	@Input() set filters(filters: string[]) {
-		this._service.filters = filters;
-	}
-	@Input() set orderBy(orderBy: string) {
-		this._service.orderBy = orderBy;
-	}
-	@Input() set appInstanceId(appInstanceId: number | string) {
-		this._service.appInstanceId = appInstanceId;
-	}
-	@Input() set operations(operations: number[]) {
-		this._service.operations = operations;
-	}
-	@Input() enableFormerEmployees = false;
+	readonly fields = input<string>();
+	readonly filters = input<string[]>();
+	readonly orderBy = input<string>();
+	readonly appInstanceId = input<number | string>();
+	readonly operations = input<number[]>();
+	readonly enableFormerEmployees = input<boolean>(false);
 
-	@Output() clueChange: Observable<string>;
+	readonly clueChange = output<string>();
 
 	form: FormGroup;
 	// page$: Subject<number>;
@@ -97,7 +98,39 @@ export class LuUserPagedSearcherComponent<U extends ILuUser = ILuUser> implement
 			formerEmployees: new FormControl(false),
 		});
 
-		this.clueChange = clue.valueChanges as Observable<string>;
+		const clueValueChangesSub = clue.valueChanges.subscribe((value: string) => {
+			this.clueChange.emit(value);
+		});
+		this._subs.add(clueValueChangesSub);
+		this.#initServiceValues();
+	}
+
+	#initServiceValues() {
+		ɵeffectWithDeps([this.fields], (fields) => {
+			if (isNotNil(fields)) {
+				this._service.fields = fields;
+			}
+		});
+		ɵeffectWithDeps([this.filters], (filters) => {
+			if (isNotNil(filters)) {
+				this._service.filters = filters;
+			}
+		});
+		ɵeffectWithDeps([this.orderBy], (orderBy) => {
+			if (isNotNil(orderBy)) {
+				this._service.orderBy = orderBy;
+			}
+		});
+		ɵeffectWithDeps([this.appInstanceId], (appInstanceId) => {
+			if (isNotNil(appInstanceId)) {
+				this._service.appInstanceId = appInstanceId;
+			}
+		});
+		ɵeffectWithDeps([this.operations], (operations) => {
+			if (isNotNil(operations)) {
+				this._service.operations = operations;
+			}
+		});
 	}
 
 	ngOnInit() {
@@ -150,7 +183,7 @@ export class LuUserPagedSearcherComponent<U extends ILuUser = ILuUser> implement
 	}
 
 	onOpen() {
-		this.searchInput.nativeElement.focus();
+		this.searchInput()?.nativeElement.focus();
 		this._isOpened$.next(true);
 	}
 	onScrollBottom() {
