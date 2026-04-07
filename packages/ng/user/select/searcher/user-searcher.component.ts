@@ -9,8 +9,7 @@ import {
 	ILuOnOpenSubscriber,
 	ILuOnScrollBottomSubscriber,
 	intlInputOptions,
-	isNotNil,
-	ɵeffectWithDeps,
+	syncSignal,
 } from '@lucca-front/ng/core';
 import { ALuOptionOperator, LuOptionPlaceholderComponent } from '@lucca-front/ng/option';
 import { BehaviorSubject, combineLatest, merge, Observable, of, Subject, Subscription } from 'rxjs';
@@ -111,31 +110,11 @@ export class LuUserPagedSearcherComponent<U extends ILuUser = ILuUser> implement
 	}
 
 	#initServiceValues() {
-		ɵeffectWithDeps([this.fields], (fields) => {
-			if (isNotNil(fields)) {
-				this._service.fields = fields;
-			}
-		});
-		ɵeffectWithDeps([this.filters], (filters) => {
-			if (isNotNil(filters)) {
-				this._service.filters = filters;
-			}
-		});
-		ɵeffectWithDeps([this.orderBy], (orderBy) => {
-			if (isNotNil(orderBy)) {
-				this._service.orderBy = orderBy;
-			}
-		});
-		ɵeffectWithDeps([this.appInstanceId], (appInstanceId) => {
-			if (isNotNil(appInstanceId)) {
-				this._service.appInstanceId = appInstanceId;
-			}
-		});
-		ɵeffectWithDeps([this.operations], (operations) => {
-			if (isNotNil(operations)) {
-				this._service.operations = operations;
-			}
-		});
+		syncSignal(this.fields, (fields) => (this._service.fields = fields));
+		syncSignal(this.filters, (filters) => (this._service.filters = filters));
+		syncSignal(this.orderBy, (orderBy) => (this._service.orderBy = orderBy));
+		syncSignal(this.appInstanceId, (appInstanceId) => (this._service.appInstanceId = appInstanceId));
+		syncSignal(this.operations, (operations) => (this._service.operations = operations));
 	}
 
 	ngOnInit() {
