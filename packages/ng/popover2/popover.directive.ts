@@ -5,8 +5,6 @@ import {
 	DestroyRef,
 	Directive,
 	ElementRef,
-	HostBinding,
-	HostListener,
 	inject,
 	Injector,
 	input,
@@ -69,6 +67,13 @@ const defaultPositionPairs: Record<PopoverPosition, ConnectionPositionPair> = {
 	selector: '[luPopover2]',
 	host: {
 		'[attr.aria-expanded]': 'opened()',
+		'[attr.aria-controls]': 'ariaControls',
+		'(click)': 'onMouseClick()',
+		'(mouseleave)': 'onMouseLeave()',
+		'(focus)': 'onFocus()',
+		'(mouseenter)': 'onMouseEnter()',
+		'(keydown.Tab)': 'focusBackToContent($event)',
+		'(keydown.Shift.Tab)': 'focusOutBefore()',
 	},
 	exportAs: 'luPopover2',
 })
@@ -144,8 +149,7 @@ export class PopoverDirective implements OnDestroy {
 
 	readonly opened = signal(false);
 
-	@HostBinding('attr.aria-controls')
-	ariaControls = `popover-content-${nextId++}`;
+	readonly ariaControls = `popover-content-${nextId++}`;
 
 	#screenReaderDescription?: HTMLSpanElement;
 
@@ -188,7 +192,6 @@ export class PopoverDirective implements OnDestroy {
 		this.#componentRef?.close();
 	}
 
-	@HostListener('mouseenter')
 	onMouseEnter() {
 		if (this.#listenToMouseEnter && this.luPopoverTrigger().includes('hover')) {
 			this.open$.next('hover');
@@ -196,7 +199,6 @@ export class PopoverDirective implements OnDestroy {
 		}
 	}
 
-	@HostListener('focus')
 	onFocus() {
 		if (this.luPopoverTrigger().includes('focus')) {
 			if (this.#skipNextFocus) {
@@ -209,7 +211,6 @@ export class PopoverDirective implements OnDestroy {
 		}
 	}
 
-	@HostListener('mouseleave')
 	onMouseLeave() {
 		if (this.#listenToMouseLeave && this.luPopoverTrigger().includes('hover')) {
 			this.close$.next();
@@ -217,8 +218,7 @@ export class PopoverDirective implements OnDestroy {
 		}
 	}
 
-	@HostListener('click')
-	click(): void {
+	onMouseClick(): void {
 		if (this.opened()) {
 			this.#componentRef?.close();
 			this.#listenToMouseLeave = true;
@@ -293,7 +293,6 @@ export class PopoverDirective implements OnDestroy {
 		}
 	}
 
-	@HostListener('keydown.Tab', ['$event'])
 	focusBackToContent(event: Event): void {
 		if (this.opened()) {
 			event.preventDefault();
@@ -301,7 +300,6 @@ export class PopoverDirective implements OnDestroy {
 		}
 	}
 
-	@HostListener('keydown.Shift.Tab')
 	focusOutBefore(): void {
 		if (this.opened() && this.luPopoverTrigger().includes('focus')) {
 			this.#componentRef?.close();
