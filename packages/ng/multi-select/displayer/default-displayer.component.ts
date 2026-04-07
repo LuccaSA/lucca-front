@@ -48,7 +48,7 @@ export class LuMultiSelectDefaultDisplayerComponent<T> implements OnInit {
 	readonly displayedOptions$ = this.context.option$.pipe(
 		map((options) => {
 			if (this.select.maxValuesShown) {
-				return (options || []).slice(0, this.select.maxValuesShown);
+				return (options || []).slice(0, this.select.maxValuesShown());
 			}
 			return options;
 		}),
@@ -56,7 +56,7 @@ export class LuMultiSelectDefaultDisplayerComponent<T> implements OnInit {
 
 	readonly overflowOptions$ = this.context.option$.pipe(
 		map((options) => {
-			return Math.max(0, (options || []).length - this.select.maxValuesShown);
+			return Math.max(0, (options || []).length - this.select.maxValuesShown());
 		}),
 	);
 
