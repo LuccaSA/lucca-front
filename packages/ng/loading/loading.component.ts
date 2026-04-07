@@ -12,7 +12,7 @@ type DisplayMode =
 	selector: 'lu-loading',
 	providers: [LuClass],
 	styleUrl: './loading.component.scss',
-	template: '<ng-content />',
+	template: '<span class="loading-label"><ng-content /></span>',
 	encapsulation: ViewEncapsulation.None,
 	changeDetection: ChangeDetectionStrategy.OnPush,
 	host: {
@@ -20,6 +20,7 @@ type DisplayMode =
 		'[class.mod-block]': 'block()',
 		'[class.mod-invert]': 'invert()',
 		'[class.mod-L]': 'size() === "L"',
+		'[class.mod-hiddenLabel]': 'hiddenLabel()',
 	},
 })
 export class LoadingComponent {
@@ -30,6 +31,8 @@ export class LoadingComponent {
 	readonly invert = input(false, { transform: booleanAttribute });
 
 	readonly block = input(false, { transform: booleanAttribute });
+
+	readonly hiddenLabel = input(false, { transform: booleanAttribute });
 
 	readonly template = input<DisplayMode | null>(null);
 

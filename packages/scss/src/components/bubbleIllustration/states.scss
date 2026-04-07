@@ -1,6 +1,5 @@
 @use '@lucca-front/scss/src/commons/utils/color';
 
-
 @mixin success {
 	@include color.palette('success');
 }

@@ -1,9 +1,9 @@
 import { ConnectionPositionPair, HorizontalConnectionPos, OriginConnectionPosition, OverlayConnectionPosition, VerticalConnectionPos } from '@angular/cdk/overlay';
-import { DestroyRef, Directive, inject, Input, OnInit, TemplateRef, Type } from '@angular/core';
+import { DestroyRef, Directive, effect, inject, Input, OnInit, TemplateRef, Type } from '@angular/core';
 import { takeUntilDestroyed } from '@angular/core/rxjs-interop';
 import { isNil } from '@lucca-front/ng/core';
 import { ALuPopoverPanel, LuPopoverAlignment } from '@lucca-front/ng/popover';
-import { PopoverDirective } from '@lucca-front/ng/popover2';
+import { PopoverDirective, PopoverPosition } from '@lucca-front/ng/popover2';
 
 @Directive({
 	selector: '[luDropdown]',
@@ -35,6 +35,11 @@ export class LuDropdownTriggerDirective<_T> implements OnInit {
 
 	constructor() {
 		this.popover2.luPopoverNoCloseButton = true;
+		if (!this.popover2.customPositions || this.popover2.customPositions.length === 0) {
+			effect(() => {
+				this.popover2.customPositions = this.legacyPositionBuilder(this.popover2.luPopoverPositionRef());
+			});
+		}
 	}
 
 	/** how the panel will be aligned with the target, allowed values: top, bottom, left, right
@@ -46,9 +51,6 @@ export class LuDropdownTriggerDirective<_T> implements OnInit {
 		if (isNil(this.popover2.luPopoverPosition())) {
 			this.popover2.luPopoverPositionRef.set('below');
 		}
-		if (!this.popover2.customPositions || this.popover2.customPositions.length === 0) {
-			this.popover2.customPositions = this.legacyPositionBuilder();
-		}
 	}
 
 	/**********************
@@ -56,14 +58,13 @@ export class LuDropdownTriggerDirective<_T> implements OnInit {
 	 * LEGACY STUFF TO HANDLE EXISTING POSITIONS
 	 *
 	 ***********************/
-	private legacyPositionBuilder(): ConnectionPositionPair[] {
+	private legacyPositionBuilder(position: PopoverPosition): ConnectionPositionPair[] {
 		const connectionPosition: OriginConnectionPosition = {
 			originX: 'start',
 			originY: 'top',
 		};
 
 		// Position
-		const position = this.popover2.luPopoverPositionRef();
 		if (position === 'above') {
 			connectionPosition.originY = 'top';
 		} else if (position === 'below') {

@@ -48,7 +48,8 @@
 		margin-inline-start: calc(var(--components-scrollBox-paddingInline) * -1);
 		margin-inline-end: calc(var(--components-scrollBox-paddingInline) - var(--components-scrollBox-shadowSize) - var(--components-scrollBox-gap));
 		background-position: 0% 50%;
-		background-image: radial-gradient(
+		background-image:
+			radial-gradient(
 				farthest-side at 0% 50%,
 				color.transparentize(var(--components-scrollBox-shadowColor), 0.24),
 				color.transparentize(var(--palettes-neutral-900), 0)
@@ -70,7 +71,8 @@
 		margin-inline-start: calc(var(--components-scrollBox-paddingInline) - var(--components-scrollBox-shadowSize) - var(--components-scrollBox-gap));
 		margin-inline-end: calc(var(--components-scrollBox-paddingInline) * -1);
 		background-position: 100% 50%;
-		background-image: radial-gradient(
+		background-image:
+			radial-gradient(
 				farthest-side at 100% 50%,
 				color.transparentize(var(--components-scrollBox-shadowColor), 0.24),
 				color.transparentize(var(--palettes-neutral-900), 0)

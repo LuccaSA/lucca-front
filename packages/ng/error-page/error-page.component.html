@@ -1,0 +1,9 @@
+<section class="errorPage-section">
+	<div class="errorPage-section-info">
+		<h1 class="errorPage-section-info-title">{{ heading() }}</h1>
+		<lu-text-flow>
+			<ng-content />
+		</lu-text-flow>
+	</div>
+	<img class="errorPage-section-image" [src]="illustrationSrc()" width="600" height="400" alt="" />
+</section>

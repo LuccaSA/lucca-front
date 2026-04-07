@@ -29,7 +29,6 @@ export const PaletteAllArgType = {
 	control: {
 		type: 'select',
 	},
-	if: { arg: 'AI', truthy: false },
 	description: 'Applique une palette de couleurs au composant.',
 } as const;
 
