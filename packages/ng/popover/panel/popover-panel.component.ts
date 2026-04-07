@@ -21,28 +21,28 @@ export class LuPopoverPanelComponent extends ALuPopoverPanel implements ILuPopov
 	protected _templateContext: unknown;
 
 	/** Template to Use for the popover */
-	template = input<TemplateRef<unknown>>();
+	readonly template = input<TemplateRef<unknown>>();
 
 	/** Template context to use for the popover when created using a template */
-	templateContext = input<unknown>(undefined, { alias: 'template-context' });
+	readonly templateContext = input<unknown>(undefined, { alias: 'template-context' });
 
 	/**
 	 * Popover container close on click
 	 * default: false
 	 */
-	inputCloseOnClick = input<boolean>(false, { alias: 'close-on-click' });
+	readonly inputCloseOnClick = input<boolean>(false, { alias: 'close-on-click' });
 
 	/**
 	 * Popover focus trap using cdkTrapFocus
 	 * default: false
 	 */
-	inputTrapFocus = input<boolean>(false, { alias: 'trap-focus' });
+	readonly inputTrapFocus = input<boolean>(false, { alias: 'trap-focus' });
 
 	/**
 	 * Popover scrollStrategy
 	 * default: reposition
 	 */
-	inputScrollStrategy = input<LuPopoverScrollStrategy>('reposition', { alias: 'scroll-strategy' });
+	readonly inputScrollStrategy = input<LuPopoverScrollStrategy>('reposition', { alias: 'scroll-strategy' });
 
 	/**
 	 * This method takes classes set on the host lu-popover element and applies them on the
@@ -50,7 +50,7 @@ export class LuPopoverPanelComponent extends ALuPopoverPanel implements ILuPopov
 	 * to style the containing popover from outside the component.
 	 * @param classes list of class names
 	 */
-	inputPanelClasses = input<string>('', { alias: 'panel-classes' });
+	readonly inputPanelClasses = input<string>('', { alias: 'panel-classes' });
 
 	/**
 	 * This method takes classes set on the host lu-popover element and applies them on the
@@ -58,7 +58,7 @@ export class LuPopoverPanelComponent extends ALuPopoverPanel implements ILuPopov
 	 * to style the containing popover from outside the component.
 	 * @param classes list of class names
 	 */
-	inputContentClasses = input<string>('', { alias: 'content-classes' });
+	readonly inputContentClasses = input<string>('', { alias: 'content-classes' });
 
 	/** Event emitted when the popover is closed. */
 	// eslint-disable-next-line @angular-eslint/no-output-native
@@ -66,7 +66,7 @@ export class LuPopoverPanelComponent extends ALuPopoverPanel implements ILuPopov
 	@Output() override open = new EventEmitter<void>();
 	@Output() override hovered = new EventEmitter<boolean>();
 
-	vcTemplateRef = viewChild(TemplateRef);
+	readonly vcTemplateRef = viewChild(TemplateRef);
 
 	constructor() {
 		super();

@@ -19,25 +19,25 @@
 <lu-option-picker-advanced [option-comparer]="byId">
 	<header class="lu-picker-header">
 		<lu-user-paged-searcher
-			[fields]="fields()"
-			[filters]="filters()"
-			[orderBy]="orderBy()"
-			[appInstanceId]="appInstanceId()"
-			[operations]="operations()"
-			[enableFormerEmployees]="enableFormerEmployees()"
+			[fields]="fields"
+			[filters]="filters"
+			[orderBy]="orderBy"
+			[appInstanceId]="appInstanceId"
+			[operations]="operations"
+			[enableFormerEmployees]="enableFormerEmployees"
 			(clueChange)="clue = $event"
 		/>
 	</header>
 	<lu-user-homonyms />
-	@if (!disablePrincipal()) {
+	@if (!disablePrincipal) {
 		<lu-option
 			*luUserMeOption="
 				let user;
-				fields: fields();
-				filters: filters();
-				orderBy: orderBy();
-				appInstanceId: appInstanceId();
-				operations: operations();
+				fields: fields;
+				filters: filters;
+				orderBy: orderBy;
+				appInstanceId: appInstanceId;
+				operations: operations;
 				clue: clue
 			"
 			[value]="user"

@@ -8,17 +8,17 @@ import { ALuPopoverTarget, LuPopoverAlignment, LuPopoverPosition } from './popov
 })
 export class LuPopoverTargetDirective extends ALuPopoverTarget {
 	/** how you want to position the panel relative to the target, allowed values: above, below, before, after */
-	inputPosition = input<LuPopoverPosition>(undefined, { alias: 'luPopoverPosition' });
+	readonly inputPosition = input<LuPopoverPosition>(undefined, { alias: 'luPopoverPosition' });
 
 	/** how the panel will be align with the target, allowed values: top, bottom, left, right */
-	inputAlignment = input<LuPopoverAlignment>(undefined, { alias: 'luPopoverAlignment' });
+	readonly inputAlignment = input<LuPopoverAlignment>(undefined, { alias: 'luPopoverAlignment' });
 
 	/** set to true if you want the panel to appear on top of the target */
-	inputOverlap = input<boolean>(undefined, { alias: 'luPopoverOverlap' });
+	readonly inputOverlap = input<boolean>(undefined, { alias: 'luPopoverOverlap' });
 
-	inputOffsetX = input<number>(undefined, { alias: 'luPopoverOffsetX' });
+	readonly inputOffsetX = input<number>(undefined, { alias: 'luPopoverOffsetX' });
 
-	inputOffsetY = input<number>(undefined, { alias: 'luPopoverOffsetY' });
+	readonly inputOffsetY = input<number>(undefined, { alias: 'luPopoverOffsetY' });
 
 	constructor(ref: ElementRef) {
 		super();
