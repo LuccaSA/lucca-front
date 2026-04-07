@@ -6,18 +6,16 @@ import {
 	Component,
 	effect,
 	ElementRef,
-	HostBinding,
 	inject,
-	Input,
 	input,
 	OnDestroy,
 	OnInit,
 	output,
 	TemplateRef,
 	Type,
-	ViewChild,
+	viewChild,
 } from '@angular/core';
-import { intlInputOptions, PortalDirective } from '@lucca-front/ng/core';
+import { intlInputOptions, isNil, PortalDirective } from '@lucca-front/ng/core';
 import { LuTooltipTriggerDirective } from '@lucca-front/ng/tooltip';
 import { asyncScheduler, observeOn, Subscription } from 'rxjs';
 import { GroupTemplateLocation } from '../panel/panel.utils';
@@ -26,7 +24,7 @@ import { LuOptionContext, SELECT_ID } from '../select.model';
 import { LuOptionGrouping } from './group.directive';
 import { LuOptionGroupPipe } from './group.pipe';
 import { LuOptionOutletDirective } from './option-outlet.directive';
-import { ILuOptionContext, LU_OPTION_CONTEXT } from './option.token';
+import { LU_OPTION_CONTEXT } from './option.token';
 import { LU_OPTION_TRANSLATIONS } from './option.translate';
 
 export const MAGIC_OPTION_SCROLL_DELAY = 15;
@@ -35,6 +33,9 @@ export const MAGIC_OPTION_SCROLL_DELAY = 15;
 	selector: 'lu-select-option',
 	templateUrl: './option.component.html',
 	styleUrl: './option.component.scss',
+	host: {
+		class: 'optionItem',
+	},
 	changeDetection: ChangeDetectionStrategy.OnPush,
 	imports: [LuOptionOutletDirective, PortalDirective, LuOptionGroupPipe, LuTooltipTriggerDirective],
 })
@@ -42,30 +43,27 @@ export class LuOptionComponent<T> implements AfterViewInit, OnDestroy, OnInit {
 	protected selectableItem = inject(CoreSelectPanelElement);
 	readonly intl = input(...intlInputOptions(LU_OPTION_TRANSLATIONS));
 
-	@HostBinding('class.optionItem')
-	public hasOptionItemClass = true;
+	readonly optionTpl = input<TemplateRef<LuOptionContext<T>> | Type<unknown>>();
 
-	@Input()
-	public optionTpl: TemplateRef<LuOptionContext<T>> | Type<unknown> | undefined;
+	readonly option = input<T>();
 
-	@Input() option?: T;
-	@Input() grouping?: LuOptionGrouping<T, unknown>;
+	readonly grouping = input<LuOptionGrouping<T, unknown>>();
 
 	readonly hasChildren = input(false, { transform: booleanAttribute });
-	onlyParent = output<void>();
-	onlyChildren = output<void>();
+
+	readonly onlyParent = output<void>();
+
+	readonly onlyChildren = output<void>();
 
 	readonly groupIndex = input<number>();
 
 	public readonly optionIndex = input.required({ transform: (value: string | number) => `${value}` });
 
-	@Input()
-	scrollIntoViewOptions: ScrollIntoViewOptions = {};
+	readonly scrollIntoViewOptions = input<ScrollIntoViewOptions>({});
 
 	readonly groupTemplateLocation = input<GroupTemplateLocation>();
 
-	@ViewChild(LuOptionOutletDirective, { read: LU_OPTION_CONTEXT, static: true })
-	private readonly optionContext?: ILuOptionContext<T>;
+	readonly optionContext = viewChild(LU_OPTION_CONTEXT);
 
 	private cdr = inject(ChangeDetectorRef);
 	private subscription?: Subscription;
@@ -83,7 +81,7 @@ export class LuOptionComponent<T> implements AfterViewInit, OnDestroy, OnInit {
 		effect(() => {
 			if (this.selectableItem.isHighlighted()) {
 				setTimeout(() => {
-					this.elementRef.nativeElement.scrollIntoView(this.scrollIntoViewOptions);
+					this.elementRef.nativeElement.scrollIntoView(this.scrollIntoViewOptions());
 				}, MAGIC_OPTION_SCROLL_DELAY);
 			}
 		});
@@ -98,11 +96,12 @@ export class LuOptionComponent<T> implements AfterViewInit, OnDestroy, OnInit {
 	}
 
 	ngAfterViewInit(): void {
-		if (!this.optionContext) {
+		const optionContext = this.optionContext();
+		if (isNil(optionContext)) {
 			return;
 		}
 
-		this.subscription = this.optionContext.isDisabled$.pipe(observeOn(asyncScheduler)).subscribe((isDisabled) => {
+		this.subscription = optionContext.isDisabled$.pipe(observeOn(asyncScheduler)).subscribe((isDisabled) => {
 			this.selectableItem.disabled = isDisabled;
 			this.cdr.markForCheck();
 		});
