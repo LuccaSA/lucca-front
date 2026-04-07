@@ -1,6 +1,6 @@
 import { Overlay } from '@angular/cdk/overlay';
 import { AfterViewInit, Directive, ElementRef, EventEmitter, input, OnDestroy, Output, ViewContainerRef } from '@angular/core';
-import { syncSignal } from '@lucca-front/ng/core';
+import { syncInputSignal } from '@lucca-front/ng/core';
 import { ILuPopoverPanel } from '../panel/index';
 import { ILuPopoverTarget, LuPopoverAlignment, LuPopoverPosition, LuPopoverTarget } from '../target/index';
 import { ALuPopoverTrigger, ILuPopoverTrigger, LuPopoverTriggerEvent } from './popover-trigger.model';
@@ -86,20 +86,20 @@ export class LuPopoverTriggerDirective<TPanel extends ILuPopoverPanel = ILuPopov
 		this._triggerId = this._elementRef.nativeElement.getAttribute('id') || this._triggerId;
 		this.#initTarget();
 
-		syncSignal(this.inputPanel, (inputPanel) => (this.panel = inputPanel));
-		syncSignal(this.inputTriggerEvent, (inputTriggerEvent) => (this.triggerEvent = inputTriggerEvent));
-		syncSignal(this.inputEnterDelay, (inputEnterDelay) => (this.enterDelay = inputEnterDelay));
-		syncSignal(this.inputLeaveDelay, (inputLeaveDelay) => (this.leaveDelay = inputLeaveDelay));
-		syncSignal(this.inputDisabled, (inputDisabled) => (this.disabled = inputDisabled));
+		syncInputSignal(this.inputPanel, (inputPanel) => (this.panel = inputPanel));
+		syncInputSignal(this.inputTriggerEvent, (inputTriggerEvent) => (this.triggerEvent = inputTriggerEvent));
+		syncInputSignal(this.inputEnterDelay, (inputEnterDelay) => (this.enterDelay = inputEnterDelay));
+		syncInputSignal(this.inputLeaveDelay, (inputLeaveDelay) => (this.leaveDelay = inputLeaveDelay));
+		syncInputSignal(this.inputDisabled, (inputDisabled) => (this.disabled = inputDisabled));
 	}
 
 	#initTarget() {
-		syncSignal(this.inputTarget, (inputTarget) => (this.target = inputTarget));
-		syncSignal(this.inputPosition, (inputPosition) => (this.target.position = inputPosition));
-		syncSignal(this.inputAlignment, (inputAlignment) => (this.target.alignment = inputAlignment));
-		syncSignal(this.inputOverlap, (inputOverlap) => (this.target.overlap = inputOverlap));
-		syncSignal(this.inputOffsetX, (inputOffsetX) => (this.target.offsetX = inputOffsetX));
-		syncSignal(this.inputOffsetY, (inputOffsetY) => (this.target.offsetY = inputOffsetY));
+		syncInputSignal(this.inputTarget, (inputTarget) => (this.target = inputTarget));
+		syncInputSignal(this.inputPosition, (inputPosition) => (this.target.position = inputPosition));
+		syncInputSignal(this.inputAlignment, (inputAlignment) => (this.target.alignment = inputAlignment));
+		syncInputSignal(this.inputOverlap, (inputOverlap) => (this.target.overlap = inputOverlap));
+		syncInputSignal(this.inputOffsetX, (inputOffsetX) => (this.target.offsetX = inputOffsetX));
+		syncInputSignal(this.inputOffsetY, (inputOffsetY) => (this.target.offsetY = inputOffsetY));
 	}
 
 	override onClick() {
