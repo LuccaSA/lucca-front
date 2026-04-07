@@ -66,11 +66,18 @@ export class LuUserPagedSearcherComponent<U extends ILuUser = ILuUser> implement
 
 	readonly searchInput = viewChild<ElementRef<HTMLInputElement>>('searchInput');
 
+	readonly intl = input(...intlInputOptions(LU_USER_SEARCHER_TRANSLATIONS));
+
 	readonly fields = input<string>();
+
 	readonly filters = input<string[]>();
+
 	readonly orderBy = input<string>();
+
 	readonly appInstanceId = input<number | string>();
+
 	readonly operations = input<number[]>();
+
 	readonly enableFormerEmployees = input<boolean>(false);
 
 	readonly clueChange = output<string>();
@@ -85,8 +92,6 @@ export class LuUserPagedSearcherComponent<U extends ILuUser = ILuUser> implement
 	private readonly _page$ = new Subject<void>();
 	private _isLastPage: boolean;
 	private _options: U[] = [];
-
-	readonly intl = input(...intlInputOptions(LU_USER_SEARCHER_TRANSLATIONS));
 
 	constructor(@Inject(ALuUserService) @Optional() @SkipSelf() hostService: LuUserV3Service<U>, @Inject(ALuUserService) @Self() selfService: LuUserV3Service<U>) {
 		this._service = hostService || selfService;
