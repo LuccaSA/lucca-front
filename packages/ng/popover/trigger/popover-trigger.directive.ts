@@ -24,13 +24,13 @@ export class LuPopoverTriggerDirective<TPanel extends ILuPopoverPanel = ILuPopov
 	implements ILuPopoverTrigger<TPanel, TTarget>, AfterViewInit, OnDestroy
 {
 	/** References the popover instance that the trigger is associated with. */
-	inputPanel = input<TPanel>(undefined, { alias: 'luPopover' });
+	readonly inputPanel = input<TPanel>(undefined, { alias: 'luPopover' });
 
 	/** References the popover target instance that the trigger is associated with. */
-	inputTarget = input<TTarget>(undefined, { alias: 'luPopoverTarget' });
+	readonly inputTarget = input<TTarget>(undefined, { alias: 'luPopoverTarget' });
 
 	/** References the popover target instance that the trigger is associated with. */
-	inputTriggerEvent = input<LuPopoverTriggerEvent>(undefined, { alias: 'luPopoverTrigger' });
+	readonly inputTriggerEvent = input<LuPopoverTriggerEvent>(undefined, { alias: 'luPopoverTrigger' });
 
 	/** Event emitted when the associated popover is opened. */
 	// eslint-disable-next-line @angular-eslint/no-output-on-prefix
@@ -41,26 +41,26 @@ export class LuPopoverTriggerDirective<TPanel extends ILuPopoverPanel = ILuPopov
 	@Output('luPopoverOnClose') onClose = new EventEmitter<void>();
 
 	/** how you want to position the panel relative to the target, allowed values: above, below, before, after */
-	inputPosition = input<LuPopoverPosition>(undefined, { alias: 'luPopoverPosition' });
+	readonly inputPosition = input<LuPopoverPosition>(undefined, { alias: 'luPopoverPosition' });
 
 	/** how the panel will be align with the target, allowed values: top, bottom, left, right */
-	inputAlignment = input<LuPopoverAlignment>(undefined, { alias: 'luPopoverAlignment' });
+	readonly inputAlignment = input<LuPopoverAlignment>(undefined, { alias: 'luPopoverAlignment' });
 
 	/** when trigger = hover, delay before the popover panel appears */
-	inputEnterDelay = input<number>(undefined, { alias: 'luPopoverEnterDelay' });
+	readonly inputEnterDelay = input<number>(undefined, { alias: 'luPopoverEnterDelay' });
 
 	/** when trigger = hover, delay before the popover panel disappears */
-	inputLeaveDelay = input<number>(undefined, { alias: 'luPopoverLeaveDelay' });
+	readonly inputLeaveDelay = input<number>(undefined, { alias: 'luPopoverLeaveDelay' });
 
 	/** disable popover apparition */
-	inputDisabled = input<boolean>(undefined, { alias: 'luPopoverDisabled' });
+	readonly inputDisabled = input<boolean>(undefined, { alias: 'luPopoverDisabled' });
 
 	/** set to true if you want the panel to appear on top of the target */
-	inputOverlap = input<boolean>(undefined, { alias: 'luPopoverOverlap' });
+	readonly inputOverlap = input<boolean>(undefined, { alias: 'luPopoverOverlap' });
 
-	inputOffsetX = input<number>(undefined, { alias: 'luPopoverOffsetX' });
+	readonly inputOffsetX = input<number>(undefined, { alias: 'luPopoverOffsetX' });
 
-	inputOffsetY = input<number>(undefined, { alias: 'luPopoverOffsetY' });
+	readonly inputOffsetY = input<number>(undefined, { alias: 'luPopoverOffsetY' });
 
 	/** accessibility attribute - dont override */
 	get _attrAriaExpanded() {
