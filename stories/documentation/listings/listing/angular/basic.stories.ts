@@ -62,7 +62,7 @@ export const Template: StoryObj<ListingComponent & ListingItemComponent & { type
 			control: {
 				type: 'select',
 			},
-			description: 'Modifie le type de liste (ordonnée, checklist, icônes, etc.)',
+			description: 'Modifie le type de liste (ordonnée, checklist, icônes, etc.).<br>[v21.2] <code>orderedFancy</code>',
 		},
 		defaultIcon: {
 			options: IconsList.map((i) => i.icon),
