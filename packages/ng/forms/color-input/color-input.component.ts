@@ -1,16 +1,16 @@
 import { booleanAttribute, ChangeDetectionStrategy, Component, computed, input, Signal, signal, ViewEncapsulation } from '@angular/core';
+import { toSignal } from '@angular/core/rxjs-interop';
 import { ReactiveFormsModule } from '@angular/forms';
 import { ColorComponent } from '@lucca-front/ng/color';
 import { intlInputOptions } from '@lucca-front/ng/core';
 import { LuCoreSelectNoClueDirective, LuDisplayerDirective, LuOptionDirective } from '@lucca-front/ng/core-select';
+import { ɵPresentationDisplayDefaultDirective } from '@lucca-front/ng/form-field';
 import { LuSimpleSelectInputComponent } from '@lucca-front/ng/simple-select';
+import { startWith } from 'rxjs';
 import { injectNgControl } from '../inject-ng-control';
 import { NoopValueAccessorDirective } from '../noop-value-accessor.directive';
 import { ColorOption } from './color';
 import { LU_COLOR_TRANSLATIONS } from './color.translate';
-import { ɵPresentationDisplayDefaultDirective } from '@lucca-front/ng/form-field';
-import { toSignal } from '@angular/core/rxjs-interop';
-import { startWith } from 'rxjs';
 
 @Component({
 	selector: 'lu-color-input',
@@ -38,7 +38,7 @@ export class ColorInputComponent {
 	currentColorPresentation: Signal<ColorOption | null>;
 
 	constructor() {
-		if (this.ngControl) {
+		if (this.ngControl && this.ngControl.valueChanges) {
 			const controlValueSignal = toSignal(this.ngControl.valueChanges?.pipe(startWith(this.ngControl.value)));
 			this.currentColorPresentation = computed(() => {
 				return this.colors().find((c) => c.background === controlValueSignal()) || null;

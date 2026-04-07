@@ -19,7 +19,7 @@ export class FilterPillLabelDirective {
 	#templateRef = inject(TemplateRef);
 
 	constructor() {
-		if (this.#filterPillComponentRef && !this.#parentComponentRef.parentInput) {
+		if (this.#filterPillComponentRef && this.#parentComponentRef && !this.#parentComponentRef.parentInput) {
 			this.#filterPillComponentRef.customLabelTpl.set(this.#templateRef);
 		}
 	}

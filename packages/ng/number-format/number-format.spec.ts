@@ -386,7 +386,7 @@ describe('NumberFormat', () => {
 	it.each<ParseTestData>(minMaxTests)(
 		"with range '$min' to '$max', and style '$style', should parse '$input' to $value and clean to '$cleanInput'",
 		({ min, max, input, cleanInput, value, style }) => {
-			const numberFormat = new NumberFormat({ locale: LOCALE_FR, style, min, max });
+			const numberFormat = new NumberFormat({ locale: LOCALE_FR, style: style!, min, max });
 
 			const parsedInput = numberFormat.parse(input);
 			expect(parsedInput.cleanInput).toBe(cleanInput);

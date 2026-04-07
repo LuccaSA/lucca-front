@@ -23,7 +23,7 @@ jest.mock('../dialog.providers', () => {
 				const originalOpen = dialogService.open.bind(dialogService) as LuDialogService['open'];
 				jest.spyOn(dialogService, 'open').mockImplementation((config) => {
 					openDialogs++;
-					dialogRef = originalOpen(config);
+					dialogRef = originalOpen(config)!;
 					jest.spyOn(dialogRef, 'close');
 					jest.spyOn(dialogRef, 'dismiss');
 					return dialogRef;

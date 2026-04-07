@@ -10,7 +10,7 @@ export class ɵLuMultiSelectSelectedChipDirective<T> implements Highlightable {
 	elementRef = inject<ElementRef<HTMLElement>>(ElementRef).nativeElement;
 
 	setActiveStyles(): void {
-		this.elementRef.querySelector('button').focus();
+		this.elementRef.querySelector('button')?.focus();
 	}
 	setInactiveStyles(): void {
 		// Nothing to do

@@ -2,6 +2,7 @@ import { Overlay, OverlayConfig } from '@angular/cdk/overlay';
 import { ChangeDetectorRef, ElementRef, Renderer2, ViewContainerRef, ViewRef } from '@angular/core';
 import { ControlValueAccessor } from '@angular/forms';
 import { ILuClear } from '@lucca-front/ng/clear';
+import { isNil } from '@lucca-front/ng/core';
 import { ILuInput, ILuInputDisplayer } from '@lucca-front/ng/input';
 import { ILuInputWithPicker, ILuPickerPanel } from '@lucca-front/ng/picker';
 import { ALuPopoverTrigger, LuPopoverTarget } from '@lucca-front/ng/popover';
@@ -34,8 +35,8 @@ export abstract class ALuSelectInput<T, TPicker extends ILuPickerPanel<T> = ILuP
 	 * contriol value accessor interface implementation
 	 */
 	protected _value: T | T[];
-	setValue(value: T | T[]) {
-		if (this.disabled) {
+	setValue(value: T | T[] | undefined) {
+		if (this.disabled || isNil(value)) {
 			return;
 		}
 		this.value = value;
@@ -59,12 +60,12 @@ export abstract class ALuSelectInput<T, TPicker extends ILuPickerPanel<T> = ILuP
 		this.value = value;
 	}
 	// From ControlValueAccessor interface
-	protected _cvaOnChange = (v: T | T[]) => void v;
+	protected _cvaOnChange: (v: T | T[]) => unknown = (v: T | T[]) => void v;
 	registerOnChange(fn: (v: T | T[]) => unknown) {
 		this._cvaOnChange = fn;
 	}
 	// From ControlValueAccessor interface
-	protected _onTouched = () => void {};
+	protected _onTouched: () => unknown = () => {};
 	registerOnTouched(fn: () => unknown) {
 		this._onTouched = fn;
 	}
@@ -80,7 +81,7 @@ export abstract class ALuSelectInput<T, TPicker extends ILuPickerPanel<T> = ILuP
 	}
 	protected isEmpty() {
 		const isEmptyArray = Array.isArray(this.value) && this.value.length === 0;
-		return this.value === null || this.value === undefined || isEmptyArray;
+		return isNil(this.value) || isEmptyArray;
 	}
 	protected applyClasses() {
 		if (this.isEmpty()) {
@@ -158,7 +159,7 @@ export abstract class ALuSelectInput<T, TPicker extends ILuPickerPanel<T> = ILuP
 
 	protected renderSingleView() {
 		this.clearDisplay();
-		if (this.value !== null && this.value !== undefined) {
+		if (!isNil(this.value)) {
 			const newView = this.getView(this.value);
 			this.displayView(newView);
 		}
@@ -172,7 +173,7 @@ export abstract class ALuSelectInput<T, TPicker extends ILuPickerPanel<T> = ILuP
 		}
 		return undefined;
 	}
-	protected displayView(view: ViewRef) {
+	protected displayView(view: ViewRef | undefined) {
 		if (view) {
 			this._displayContainer.insert(view);
 		}

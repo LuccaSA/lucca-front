@@ -1,5 +1,5 @@
 import { booleanAttribute, ChangeDetectionStrategy, Component, computed, effect, inject, input, LOCALE_ID, model, output, signal } from '@angular/core';
-import { intlInputOptions } from '@lucca-front/ng/core';
+import { intlInputOptions, isNotNil } from '@lucca-front/ng/core';
 import { addMonths, addYears, isAfter, isBefore, isSameMonth, startOfDay, startOfMonth } from 'date-fns';
 import { CalendarMode } from './calendar2/calendar-mode';
 import { CellStatus } from './calendar2/cell-status';
@@ -54,7 +54,7 @@ export abstract class AbstractDateComponent {
 		transform: transformDateInputToDate,
 	});
 
-	calendarMode = model<CalendarMode>();
+	calendarMode = model<CalendarMode | null>(null);
 
 	readonly panelOpened = output<void>();
 
@@ -80,41 +80,42 @@ export abstract class AbstractDateComponent {
 	}
 
 	isAfterMin(date: Date, mode: CalendarMode): boolean {
-		if (!this.min()) {
+		const min = this.min();
+		if (!min) {
 			return true;
 		}
 
 		switch (mode) {
 			case 'day':
-				return this.min().getTime() <= date.getTime();
+				return min.getTime() <= date.getTime();
 			case 'month':
-				return isBefore(startOfMonth(this.min()), startOfMonth(date)) || isSameMonth(this.min(), date);
+				return isBefore(startOfMonth(min), startOfMonth(date)) || isSameMonth(min, date);
 			case 'year':
-				return this.min().getFullYear() <= date.getFullYear();
+				return min.getFullYear() <= date.getFullYear();
 			default:
 				return true;
 		}
 	}
 
 	isBeforeMax(date: Date, mode: CalendarMode): boolean {
-		if (!this.max()) {
-			return true;
+		const max = this.max();
+		if (max) {
+			switch (mode) {
+				case 'day':
+					return max.getTime() >= date.getTime();
+				case 'month':
+					return isAfter(startOfMonth(max), startOfMonth(date)) || isSameMonth(max, date);
+				case 'year':
+					return max.getFullYear() >= date.getFullYear();
+				default:
+					return true;
+			}
 		}
-
-		switch (mode) {
-			case 'day':
-				return this.max().getTime() >= date.getTime();
-			case 'month':
-				return isAfter(startOfMonth(this.max()), startOfMonth(date)) || isSameMonth(this.max(), date);
-			case 'year':
-				return this.max().getFullYear() >= date.getFullYear();
-			default:
-				return true;
-		}
+		return true;
 	}
 
-	isValidDate(date: Date): boolean {
-		return !!date && !isNaN(date.getTime());
+	isValidDate(date: Date | null | undefined): date is Date {
+		return isNotNil(date) && !isNaN(date.getTime());
 	}
 
 	prev(mode: CalendarMode) {
@@ -137,15 +138,15 @@ export abstract class AbstractDateComponent {
 		switch (mode) {
 			case 'year':
 				this.currentDate.set(addYears(this.currentDate(), direction * 10));
-				this.tabbableDate.set(addYears(this.tabbableDate(), direction * 10));
+				this.tabbableDate.set(addYears(this.tabbableDate() ?? 0, direction * 10));
 				break;
 			case 'month':
 				this.currentDate.set(addYears(this.currentDate(), direction));
-				this.tabbableDate.set(addYears(this.tabbableDate(), direction));
+				this.tabbableDate.set(addYears(this.tabbableDate() ?? 0, direction));
 				break;
 			case 'day':
 				this.currentDate.set(addMonths(this.currentDate(), direction));
-				this.tabbableDate.set(addMonths(this.tabbableDate(), direction));
+				this.tabbableDate.set(addMonths(this.tabbableDate() ?? 0, direction));
 				break;
 		}
 	}
