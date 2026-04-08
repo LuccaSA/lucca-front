@@ -1,1 +1,1 @@
-export * from './numeric-badge.component';
+export * from '@lucca/prisme/numeric-badge';
