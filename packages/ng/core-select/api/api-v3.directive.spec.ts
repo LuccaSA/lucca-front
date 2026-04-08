@@ -55,7 +55,7 @@ describe('CoreSelectApiV3Directive', () => {
 
 	it('should call http.get on open', fakeAsync(() => {
 		// Arrange
-		directive.apiV3 = '/api/v3/axisSections';
+		directive['url$'].next('/api/v3/axisSections');
 		directive.ngOnInit();
 		tick(MAGIC_DEBOUNCE_DURATION);
 
@@ -69,7 +69,7 @@ describe('CoreSelectApiV3Directive', () => {
 
 	it('should call http.get when page changes and aggregate options', fakeAsync(() => {
 		// Arrange
-		directive.apiV3 = '/api/v3/axisSections';
+		directive['url$'].next('/api/v3/axisSections');
 		directive.ngOnInit();
 		tick(MAGIC_DEBOUNCE_DURATION);
 		selectMock.isPanelOpen$.next(true);
@@ -96,7 +96,7 @@ describe('CoreSelectApiV3Directive', () => {
 
 	it('should call http.get when clue changes and reset options and page', fakeAsync(() => {
 		// Arrange
-		directive.apiV3 = '/api/v3/axisSections';
+		directive['url$'].next('/api/v3/axisSections');
 		directive.ngOnInit();
 		tick(MAGIC_DEBOUNCE_DURATION);
 		selectMock.isPanelOpen$.next(true);
