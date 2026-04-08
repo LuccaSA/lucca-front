@@ -7,39 +7,57 @@ import { applicationConfig, Meta, StoryObj } from '@storybook/angular';
 	imports: [LuSkipLinksComponent, SkipLinkDirective],
 	template: `
 		<lu-skip-links />
-		<div id="lucca-banner-solutions-container" tabindex="-1">
-			<button type="button" class="button mod-onlyIcon mod-ghost" luTooltip="Modifier"><span aria-hidden="true" class="lucca-icon icon-app"></span></button>
-			<button type="button" class="button mod-onlyIcon mod-ghost" luTooltip="Modifier"><span aria-hidden="true" class="lucca-icon icon-peopleGroup"></span></button>
-			<button type="button" class="button mod-onlyIcon mod-ghost" luTooltip="Modifier"><span aria-hidden="true" class="lucca-icon icon-transportRocket"></span></button>
-			<button type="button" class="button mod-onlyIcon mod-ghost" luTooltip="Modifier"><span aria-hidden="true" class="lucca-icon icon-signInfo"></span></button>
-			<button type="button" class="button mod-onlyIcon mod-ghost" luTooltip="Modifier"><span aria-hidden="true" class="lucca-icon icon-bell"></span></button>
-		</div>
-		<div id="navSide" tabindex="-1">
-			<button type="button" class="button mod-withIcon palette-product"><span aria-hidden="true" class="lucca-icon icon-mailPaperPlane"></span>Internal navigation</button>
-			<button type="button" class="button mod-withIcon palette-product"><span aria-hidden="true" class="lucca-icon icon-timeClock"></span>Internal navigation</button>
-			<button type="button" class="button mod-withIcon palette-product"><span aria-hidden="true" class="lucca-icon icon-eye"></span>Internal navigation</button>
-		</div>
-		<div id="main-content" tabindex="-1">
-			<a href="#" class="link">Content link</a>
-			<a href="#" class="link">Content link</a>
-			<a href="#" class="link">Content link</a>
-			<a href="#" class="link">Content link</a>
+		<div id="lucca-banner-solutions-container" class="pr-u-focusVisible" tabindex="0">Banner <a href="#" class="link">Banner</a> Banner</div>
+		<div id="navSide" class="pr-u-focusVisible" tabindex="0">NavSide <a href="#" class="link">NavSide</a> NavSide</div>
+		<div id="main-content" class="pr-u-focusVisible" tabindex="0">Content <a href="#" class="link">Content</a> Content</div>
+
+		<div class="pr-u-focusVisible" tabindex="0" id="customElementWithIDInHTML" luSkipLinkTarget luSkipLinkLabel="Go to custom element (with ID in HTML)">Custom element (with ID in HTML)</div>
+
+		<div class="pr-u-focusVisible" tabindex="0" luSkipLinkTarget="customElementWithIDAsParameter" luSkipLinkLabel="Go to custom element (with ID as parameter)">
+			Custom element (with ID as parameter)
 		</div>
 
-		<div luSkipLinkTarget="customElement" luSkipLinkLabel="Go to custom element">Custom element</div>
+		<div
+			class="pr-u-focusVisible"
+			tabindex="0"
+			id="customElementWithIdenticalIDinTheHTMLandParameter"
+			luSkipLinkTarget="customElementWithIdenticalIDinTheHTMLandParameter"
+			luSkipLinkLabel="Go to custom element (with identical ID in the HTML and parameter)"
+		>
+			Custom element (with identical ID in the HTML and parameter)
+		</div>
+
+		<div
+			class="pr-u-focusVisible"
+			tabindex="0"
+			id="elementWithDifferentIDinTheHTMLandParameter"
+			luSkipLinkTarget="customElementWithDifferentIDinTheHTMLandParameter"
+			luSkipLinkLabel="Go to custom element (with different ID in the HTML and parameter)"
+		>
+			Custom element (with different ID in the HTML and parameter)
+		</div>
+
+		<div class="pr-u-focusVisible" tabindex="0" luSkipLinkTarget luSkipLinkLabel="Go to custom element (without ID)">Custom element (without ID)</div>
 	`,
 	styles: [
 		`
-			#navSide {
-				margin-block-start: var(--pr-t-spacings-100);
+			:host ::ng-deep .skipLinks {
+				position: static;
 			}
 
-			#main-content {
-				margin-block-start: var(--pr-t-spacings-100);
+			:host ::ng-deep .skipLinks-action {
+				position: unset;
+				inline-size: unset;
+				block-size: unset;
+				padding-block: var(--pr-t-spacings-50);
+				padding-inline: var(--pr-t-spacings-100);
+				margin: 0;
 			}
 
-			.link {
-				margin-inline-end: var(--pr-t-spacings-100);
+			:host {
+				display: flex;
+				flex-direction: column;
+				gap: var(--pr-t-spacings-200);
 			}
 		`,
 	],

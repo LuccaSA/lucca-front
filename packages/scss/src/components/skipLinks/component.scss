@@ -5,6 +5,9 @@
 	list-style-type: none;
 	justify-content: center;
 	display: flex;
+	flex-direction: column;
+	align-items: center;
+	gap: var(--pr-t-spacings-100);
 	margin: 0;
 	padding: 0;
 	z-index: 9010;
@@ -35,7 +38,7 @@
 			}
 
 			&:not(:focus-visible) {
-				// @include a11y.mask;
+				@include a11y.mask;
 			}
 		}
 	}
