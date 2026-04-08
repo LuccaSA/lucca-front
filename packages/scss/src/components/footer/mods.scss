@@ -30,3 +30,7 @@
 @mixin withContainer {
 	--components-footer-paddingInline: 0;
 }
+
+@mixin withContainerMax($breakpoint) {
+	--components-footer-container-maxInlineSize: #{$breakpoint};
+}

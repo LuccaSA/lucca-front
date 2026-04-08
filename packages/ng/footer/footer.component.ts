@@ -1,13 +1,12 @@
 import { NgTemplateOutlet } from '@angular/common';
 import { booleanAttribute, ChangeDetectionStrategy, Component, computed, input, ViewEncapsulation } from '@angular/core';
-import { ContainerComponent } from '@lucca-front/ng/container';
 
 @Component({
 	selector: 'lu-footer',
 	styleUrl: './footer.component.scss',
 	templateUrl: './footer.component.html',
 	encapsulation: ViewEncapsulation.None,
-	imports: [NgTemplateOutlet, ContainerComponent],
+	imports: [NgTemplateOutlet],
 	changeDetection: ChangeDetectionStrategy.OnPush,
 })
 export class FooterComponent {
