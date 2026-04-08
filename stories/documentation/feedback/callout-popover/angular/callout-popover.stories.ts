@@ -54,6 +54,7 @@ export default {
 			control: {
 				type: 'select',
 			},
+			description: 'Position du popover par rapport au bouton de déclenchement.',
 		},
 		icon: {
 			options: [null, 'info', 'success', 'warning', 'error', 'help'],

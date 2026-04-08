@@ -7,7 +7,6 @@ interface Story {
 	steps: number;
 	critical: boolean;
 	success: boolean;
-	label: string;
 }
 
 export default {
@@ -15,9 +14,19 @@ export default {
 	argTypes: {
 		current: {
 			control: { type: 'range', min: 1, max: 6 },
+			description: 'Étape courante.',
 		},
 		steps: {
 			control: { type: 'range', min: 2, max: 6 },
+			description: "Nombre d'étapes présentées dans l'exemple.",
+		},
+		critical: {
+			control: { type: 'boolean' },
+			description: 'Affiche une étape en état critical.',
+		},
+		success: {
+			control: { type: 'boolean' },
+			description: 'Affiche une étape en état success.',
 		},
 	},
 	decorators: [
@@ -35,7 +44,7 @@ export default {
 	<lu-progress-stepper-step label="Lorem ipsum dolor" />`;
 		return {
 			template: `<lu-progress-stepper current="${args.current}">
-	<lu-progress-stepper-step [routerLinkParam]="'./route/step-1'" label="${args.label}"${critical} />
+	<lu-progress-stepper-step [routerLinkParam]="'./route/step-1'" label="Lorem ipsum dolor"${critical} />
 	<lu-progress-stepper-step [routerLinkParam]="'./route/step-2'" label="Lorem ipsum dolor"${success} />${step.repeat(args.steps - 2)}
 </lu-progress-stepper>`,
 		};
@@ -48,6 +57,5 @@ export const Basic = {
 		current: 3,
 		critical: false,
 		success: false,
-		label: 'Lorem',
 	},
 };

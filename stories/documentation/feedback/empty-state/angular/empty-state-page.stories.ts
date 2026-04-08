@@ -169,7 +169,7 @@ export default {
 				min: 1,
 				max: 6,
 			},
-			description: '[v18.1]',
+			description: '',
 		},
 		hxStyle: {
 			control: {
@@ -180,10 +180,10 @@ export default {
 			description: '[v21.2]',
 		},
 		heading: {
-			description: '[v18.1] Optional',
+			description: 'Optional',
 		},
 		description: {
-			description: '[v18.1] Optional',
+			description: 'Optional',
 		},
 		slotTop: {
 			description: '[v19.3] Optional, Add content above heading.',

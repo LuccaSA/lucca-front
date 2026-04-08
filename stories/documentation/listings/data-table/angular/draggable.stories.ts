@@ -51,7 +51,7 @@ export default {
 			description: 'Rend les lignes du tableau sélectionnables via des checkbox.',
 		},
 		drop: {
-			description: 'Evénement déclanché au drop.',
+			description: 'Evénement déclenché au drop.',
 		},
 		listItem: HiddenArgType,
 	},

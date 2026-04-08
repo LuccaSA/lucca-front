@@ -34,12 +34,14 @@ export default {
 	argTypes: {
 		heading: {
 			type: 'string',
+			description: "Titre de la page d'erreur.",
 		},
 		illustration: {
 			options: ['400', '403', '404', '429', '500', 'keyboard', 'lock', 'map'],
 			control: {
 				type: 'select',
 			},
+			description: "Modifie l'illustration.",
 		},
 	},
 } as Meta;
