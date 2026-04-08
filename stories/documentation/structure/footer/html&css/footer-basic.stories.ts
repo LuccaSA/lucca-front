@@ -19,11 +19,11 @@ export default {
 			control: {
 				type: 'select',
 			},
-			description: '[v18.1] Modifie le breakpoint. Default: XXS',
+			description: 'Modifie le breakpoint. Default: XXS',
 		},
 		container: {
 			type: 'boolean',
-			description: '[v18.1]',
+			description: '',
 		},
 	},
 } as Meta;

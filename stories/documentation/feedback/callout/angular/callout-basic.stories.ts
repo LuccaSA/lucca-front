@@ -84,7 +84,7 @@ export default {
 			control: {
 				type: 'select',
 			},
-			description: '[v21.4] Optional',
+			description: '[v21.4] Applique un niveau sémantique au titre.',
 			if: { arg: 'heading', truthy: true },
 		},
 		removedChange: HiddenArgType,

@@ -58,7 +58,8 @@ export default {
 			control: {
 				type: 'number',
 			},
-			description: "Nombre de caractère maximum autorisés pour un champ de type texte. A seulement un impact sur l'interface et doit être complé à un réglage au niveau de <code>FormControl</code>.",
+			description:
+				"Nombre de caractères maximum autorisés pour un champ de type texte. A seulement un impact sur l'interface et doit être complété à un réglage au niveau de <code>FormControl</code>.",
 		},
 		width: {
 			options: [null, 20, 30, 40, 50, 60],
@@ -68,7 +69,7 @@ export default {
 			description: "Applique une largeur fixe au champ. A n'utiliser que lorsque la grille de formulaire n'est pas adaptée.",
 		},
 		rolePresentationLabel: {
-			description: "Applique role='presentation' au label du champ dans le cas où celui-ci ne doit pas être lu par les lecteurs d'écran.",
+			description: "Applique role='presentation' au label du champ dans le cas où celui-ci ne doit pas être lu par le lecteur d'écran.",
 		},
 	},
 	render: (args, { argTypes }) => {

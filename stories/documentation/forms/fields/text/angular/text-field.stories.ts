@@ -70,7 +70,7 @@ export default {
 			},
 		},
 		valueAlignRight: {
-			description: '[v18.1] Aligne la valeur du champ à droite.',
+			description: 'Aligne la valeur du champ à droite.',
 		},
 		hiddenLabel: {
 			description: "Masque le label en le conservant dans le DOM pour les lecteurs d'écrans",

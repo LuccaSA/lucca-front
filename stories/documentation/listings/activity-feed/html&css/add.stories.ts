@@ -1,13 +1,13 @@
 import { Meta, StoryObj } from '@storybook/angular';
 
-interface ActivityFeedBasicStory {}
+interface ActivityFeedAddStory {}
 
 export default {
-	title: 'Documentation/Listings/Activity feed/HTML&CSS/Basic',
+	title: 'Documentation/Listings/Activity feed/HTML&CSS/Add',
 	argTypes: {},
 } as Meta;
 
-function getTemplate(args: ActivityFeedBasicStory): string {
+function getTemplate(args: ActivityFeedAddStory): string {
 	return `<ol class="activityFeed">
 	<li class="activityFeed-step">
 		<div class="activityFeed-step-avatar avatar mod-placeholder" translate="no">
@@ -31,15 +31,20 @@ function getTemplate(args: ActivityFeedBasicStory): string {
 			<time datetime="2025-07-15 08:56" class="activityFeed-step-description-time"><abbr>Mar.</abbr> 15 juillet 2025 à 08:56</time>
 		</div>
 	</li>
+	<li class="activityFeed-step">
+		<div class="activityFeed-content">
+			<button type="button" class="activityFeed-step-add button mod-outlined">Afficher plus</button>
+		</div>
+	</li>
 </ol>`;
 }
 
-const Template = (args: ActivityFeedBasicStory) => ({
+const Template = (args: ActivityFeedAddStory) => ({
 	props: args,
 	template: getTemplate(args),
 });
 
-export const Basic: StoryObj<ActivityFeedBasicStory> = {
+export const Add: StoryObj<ActivityFeedAddStory> = {
 	args: {},
 	render: Template,
 };

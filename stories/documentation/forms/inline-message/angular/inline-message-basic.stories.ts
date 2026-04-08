@@ -20,7 +20,7 @@ export default {
 			description: 'Modifie la taille du composant.',
 		},
 		label: {
-			description: '[v18.2] Modifie le texte affiché par le composant. PortalContent. ',
+			description: 'Modifie le texte affiché par le composant. PortalContent. ',
 		},
 	},
 } as Meta;

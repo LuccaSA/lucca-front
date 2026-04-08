@@ -130,13 +130,13 @@ export default {
 				min: 1,
 				max: 6,
 			},
-			description: '[v18.1]',
+			description: '',
 		},
 		heading: {
-			description: '[v18.1] Optional',
+			description: 'Optional',
 		},
 		description: {
-			description: '[v18.1] Optional',
+			description: 'Optional',
 		},
 	},
 } as Meta;

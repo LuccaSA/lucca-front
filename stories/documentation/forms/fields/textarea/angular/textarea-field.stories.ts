@@ -57,16 +57,16 @@ export default {
 		},
 		rows: {
 			control: { type: 'number' },
-			description: '[v18.1] Nombre de lignes visibles par défaut.',
+			description: 'Nombre de lignes visibles par défaut.',
 		},
 		autoResize: {
 			type: 'boolean',
-			description: "[v18.3] Active l'autoresize du champ.",
+			description: "Active l'autoresize du champ.",
 		},
 		autoResizeScrollIntoView: {
 			type: 'boolean',
 			if: { arg: 'autoResize', truthy: true },
-			description: "[v18.3] Assure que le curseur de saisie soit toujours visible à l'écran en appliquant un scroll.",
+			description: "Assure que le curseur de saisie soit toujours visible à l'écran en appliquant un scroll.",
 		},
 		hiddenLabel: {
 			description: "Masque le label en le conservant dans le DOM pour les lecteurs d'écrans",
