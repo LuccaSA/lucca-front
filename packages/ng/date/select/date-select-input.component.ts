@@ -1,8 +1,8 @@
 import { Overlay, OverlayModule } from '@angular/cdk/overlay';
-import { AfterViewInit, ChangeDetectionStrategy, ChangeDetectorRef, Component, ElementRef, Input, Renderer2, ViewContainerRef, forwardRef } from '@angular/core';
+import { AfterViewInit, ChangeDetectionStrategy, ChangeDetectorRef, Component, ElementRef, forwardRef, Input, input, Renderer2, ViewContainerRef } from '@angular/core';
 import { AbstractControl, ControlValueAccessor, NG_VALIDATORS, NG_VALUE_ACCESSOR, ValidationErrors, Validator } from '@angular/forms';
 import { ClearComponent } from '@lucca-front/ng/clear';
-import { ALuDateAdapter, ELuDateGranularity, LuDateGranularity } from '@lucca-front/ng/core';
+import { ALuDateAdapter, ELuDateGranularity, LuDateGranularity, syncInputSignal } from '@lucca-front/ng/core';
 import { LuInputDisplayerDirective } from '@lucca-front/ng/input';
 import { ILuInputWithPicker } from '@lucca-front/ng/picker';
 import { ALuSelectInputComponent } from '@lucca-front/ng/select';
@@ -29,23 +29,24 @@ import { LuDatePickerComponent } from '../picker';
 	],
 })
 export class LuDateSelectInputComponent<D> extends ALuSelectInputComponent<D> implements ControlValueAccessor, ILuInputWithPicker<D>, AfterViewInit, Validator {
-	@Input() min?: D;
-	@Input() max?: D;
-	@Input() granularity: LuDateGranularity = ELuDateGranularity.day;
+	readonly min = input<D>();
+
+	readonly max = input<D>();
+
+	readonly granularity = input<LuDateGranularity>(ELuDateGranularity.day);
+
 	@Input('placeholder') override set inputPlaceholder(p: string) {
 		this._placeholder = p;
 	}
-	@Input() hideClearer = false;
+
+	readonly hideClearer = input<boolean>(false);
+
+	readonly startOn = input<D>();
+
 	protected _startOn: D = this._adapter.forgeToday();
-	@Input() set startOn(s: D) {
-		this._startOn = s ?? this._adapter.forgeToday();
-	}
-	get startOn(): D {
-		return this._startOn;
-	}
 
 	get format(): string {
-		switch (this.granularity) {
+		switch (this.granularity()) {
 			case ELuDateGranularity.year:
 				return 'y';
 			case ELuDateGranularity.month:
@@ -55,6 +56,7 @@ export class LuDateSelectInputComponent<D> extends ALuSelectInputComponent<D> im
 				return 'shortDate';
 		}
 	}
+
 	constructor(
 		protected override _changeDetectorRef: ChangeDetectorRef,
 		protected override _overlay: Overlay,
@@ -65,6 +67,10 @@ export class LuDateSelectInputComponent<D> extends ALuSelectInputComponent<D> im
 	) {
 		super(_changeDetectorRef, _overlay, _elementRef, _viewContainerRef, _renderer);
 		this.overlapInput = true;
+
+		syncInputSignal(this.startOn, (s) => {
+			this._startOn = s ?? this._adapter.forgeToday();
+		});
 	}
 
 	validate(control: AbstractControl): ValidationErrors | null {
@@ -75,10 +81,12 @@ export class LuDateSelectInputComponent<D> extends ALuSelectInputComponent<D> im
 		if (!this._adapter.isValid(d)) {
 			return { date: true };
 		}
-		if (!!this.min && this._adapter.isValid(this.min) && this._adapter.compare(this.min, d, ELuDateGranularity.day) > 0) {
+		const min = this.min();
+		if (!!min && this._adapter.isValid(min) && this._adapter.compare(min, d, ELuDateGranularity.day) > 0) {
 			return { min: true };
 		}
-		if (!!this.max && this._adapter.isValid(this.max) && this._adapter.compare(this.max, d, ELuDateGranularity.day) < 0) {
+		const max = this.max();
+		if (!!max && this._adapter.isValid(max) && this._adapter.compare(max, d, ELuDateGranularity.day) < 0) {
 			return { max: true };
 		}
 		return null;
