@@ -22,7 +22,7 @@ import { EllipsisRuler } from './ellipsis.ruler';
 let nextId = 0;
 
 @Directive({
-	selector: '[luTooltip]',
+	selector: '[luTooltip],[prTooltip]',
 	exportAs: 'luTooltip',
 	host: {
 		'[attr.aria-describedby]': 'ariaDescribedBy()',
@@ -68,11 +68,10 @@ export class LuTooltipTriggerDirective implements OnDestroy {
 	readonly tooltipPosition = computed(() => this.prTooltipPosition() || this.luTooltipPosition());
 
 	readonly luTooltipWhenEllipsisInput = input(false, { alias: 'luTooltipWhenEllipsis', transform: booleanAttribute });
-	readonly prTooltipWhenEllipsisInput = input(false, { alias: 'luTooltipWhenEllipsis', transform: booleanAttribute });
-	readonly tooltipWhenEllipsisInput = computed(() => this.prTooltipWhenEllipsisInput() || this.luTooltipWhenEllipsisInput());
+	readonly prTooltipWhenEllipsisInput = input(false, { alias: 'prTooltipWhenEllipsis', transform: booleanAttribute });
 
 	readonly luTooltipWhenEllipsis = linkedSignal(() => this.luTooltipWhenEllipsisInput());
-	readonly prTooltipWhenEllipsis = linkedSignal(() => this.luTooltipWhenEllipsisInput());
+	readonly prTooltipWhenEllipsis = linkedSignal(() => this.prTooltipWhenEllipsisInput());
 	readonly tooltipWhenEllipsis = computed(() => this.prTooltipWhenEllipsis() || this.luTooltipWhenEllipsis());
 
 	readonly luTooltipAnchor = input<FlexibleConnectedPositionStrategyOrigin>(this.#host);
