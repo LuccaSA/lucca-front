@@ -1,10 +1,11 @@
-import { ChangeDetectionStrategy, Component, forwardRef, Inject, Input, Optional, Self, SkipSelf } from '@angular/core';
-import { ALuOnOpenSubscriber, ILuOnOpenSubscriber } from '@lucca-front/ng/core';
+import { ChangeDetectionStrategy, Component, forwardRef, Inject, input, Optional, Self, SkipSelf } from '@angular/core';
+import { ALuOnOpenSubscriber, ILuOnOpenSubscriber, syncInputSignal } from '@lucca-front/ng/core';
 import { ALuOptionOperator, ILuOptionOperator } from '@lucca-front/ng/option';
 import { BehaviorSubject } from 'rxjs';
 import { ILuApiItem } from '../../api.model';
 import { ALuApiService, LuApiHybridService } from '../../service/index';
 import { ALuApiOptionFeeder } from './api-feeder.model';
+
 @Component({
 	selector: 'lu-api-feeder',
 	template: '',
@@ -28,6 +29,19 @@ import { ALuApiOptionFeeder } from './api-feeder.model';
 })
 export class LuApiFeederComponent<T extends ILuApiItem = ILuApiItem> extends ALuApiOptionFeeder<T, LuApiHybridService<T>> implements ILuOptionOperator<T>, ILuOnOpenSubscriber {
 	override readonly outOptions$ = new BehaviorSubject<T[]>([]);
+
+	readonly standard = input<'v3' | 'v4'>();
+
+	readonly api = input<string>();
+
+	readonly fields = input<string>();
+
+	readonly filters = input<string[]>();
+
+	readonly orderBy = input<string>();
+
+	readonly sort = input<string>();
+
 	constructor(
 		@Inject(ALuApiService)
 		@Optional()
@@ -36,24 +50,12 @@ export class LuApiFeederComponent<T extends ILuApiItem = ILuApiItem> extends ALu
 		@Inject(ALuApiService) @Self() selfService: LuApiHybridService<T>,
 	) {
 		super(hostService || selfService);
-	}
 
-	@Input() set standard(standard: 'v3' | 'v4') {
-		this._service.standard = standard;
-	}
-	@Input() set api(api: string) {
-		this._service.api = api;
-	}
-	@Input() set fields(fields: string) {
-		this._service.fields = fields;
-	}
-	@Input() set filters(filters: string[]) {
-		this._service.filters = filters;
-	}
-	@Input() set orderBy(orderBy: string) {
-		this._service.orderBy = orderBy;
-	}
-	@Input() set sort(sort: string) {
-		this._service.sort = sort;
+		syncInputSignal(this.standard, (standard) => (this._service.standard = standard));
+		syncInputSignal(this.api, (api) => (this._service.api = api));
+		syncInputSignal(this.fields, (fields) => (this._service.fields = fields));
+		syncInputSignal(this.filters, (filters) => (this._service.filters = filters));
+		syncInputSignal(this.orderBy, (orderBy) => (this._service.orderBy = orderBy));
+		syncInputSignal(this.sort, (sort) => (this._service.sort = sort));
 	}
 }
