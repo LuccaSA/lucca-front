@@ -34,7 +34,7 @@
 			align-items: var(--components-footer-alignItems);
 			flex-direction: var(--components-footer-direction);
 			padding: var(--commons-container-padding);
-			max-inline-size: var(--components-footer-container-maxInlineSize, --commons-container-maxWidth);
+			max-inline-size: var(--components-footer-container-maxInlineSize, var(--commons-container-maxWidth));
 		}
 	}
 }
