@@ -30,12 +30,12 @@ export default {
 		},
 		updated: {
 			control: 'boolean',
-			description: 'Présente une étape avec des valeurs modifiées grace au sous-composant <code>lu-activity-feed-update</code>.',
+			description: 'Présente une étape avec des valeurs modifiées grâce au sous-composant <code>lu-activity-feed-update</code>.',
 		},
 		attachedContent: {
 			options: ['none', 'file', 'readMore'],
 			control: { type: 'select' },
-			description: 'Présente avec une étape avec un contenu attaché (fichier ou commentaire).',
+			description: 'Présente une étape avec un contenu attaché (fichier ou commentaire).',
 		},
 		addAction: {
 			control: 'boolean',

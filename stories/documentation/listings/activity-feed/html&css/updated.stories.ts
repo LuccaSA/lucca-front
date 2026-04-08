@@ -22,7 +22,7 @@ function getTemplate(args: ActivityFeedUpdatedStory): string {
 				<div class="activityFeed-content-update">
 					<div class="activityFeed-content-update-before">1000&nbsp;€</div>
 					<span class="activityFeed-content-update-icon lucca-icon icon-arrowRight mod-XS" aria-hidden="true"></span>
-					<span class="pr-u-mask">à été remplacé par</span>
+					<span class="pr-u-mask">a été remplacé par</span>
 					<div class="activityFeed-content-update-after">800&nbsp;€</div>
 				</div>
 			</div>
@@ -41,7 +41,7 @@ function getTemplate(args: ActivityFeedUpdatedStory): string {
 				<div class="activityFeed-content-update">
 					<div class="activityFeed-content-update-before"><div class="statusBadge palette-critical">Refusé</div></div>
 					<span class="activityFeed-content-update-icon lucca-icon icon-arrowRight mod-XS" aria-hidden="true"></span>
-					<span class="pr-u-mask">à été remplacé par</span>
+					<span class="pr-u-mask">a été remplacé par</span>
 					<div class="activityFeed-content-update-after"><div class="statusBadge palette-success">Approuvé</div></div>
 				</div>
 			</div>

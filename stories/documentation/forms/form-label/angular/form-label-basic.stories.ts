@@ -39,7 +39,7 @@ export default {
 				min: 0,
 				step: 1,
 			},
-			description: 'Nombre de caractères actuelement saisis.',
+			description: 'Nombre de caractères actuellement saisis.',
 		},
 		counterId: {
 			if: { arg: 'counterMax', truthy: true },

@@ -51,7 +51,7 @@ export default {
 			},
 		},
 		luTooltipOnlyForDisplay: {
-			description: "Affiche un tooltip non restituée par les lecteurs d'écran. À utiliser si la réstitution est déjà portée par l'élément déclancheur (ex. une icône avec attribut `alt`)",
+			description: "Affiche un tooltip non restituée par les lecteurs d'écran. À utiliser si la réstitution est déjà portée par l'élément déclencheur (ex. une icône avec attribut `alt`)",
 		},
 	},
 	decorators: [
