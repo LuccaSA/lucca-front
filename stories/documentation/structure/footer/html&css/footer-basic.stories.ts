@@ -14,17 +14,18 @@ export default {
 			control: {
 				type: 'boolean',
 			},
+			description: 'Fige le footer lors du défilement vertical.',
 		},
 		responsive: {
 			options: ['', 'mod-narrow', 'mod-narrowAtMediaMaxM', 'mod-narrowAtMediaMaxS', 'mod-narrowAtMediaMaxXS'],
 			control: {
 				type: 'select',
 			},
-			description: 'Modifie le breakpoint. Default: XXS',
+			description: 'Définit le breakpoint pour lequel le mode narrow (responsive) est appliqué.',
 		},
 		container: {
 			type: 'boolean',
-			description: '',
+			description: 'Applique un container autour du contenu du footer.',
 		},
 		containerMax: {
 			options: ['', 'M', 'L', 'XL', 'XXL', 'XXXL'],
