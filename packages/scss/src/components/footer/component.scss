@@ -8,7 +8,6 @@
 	inset-block-end: 0;
 	position: var(--components-footer-position);
 	overflow: var(--components-footer-overflow);
-
 	display: var(--components-footer-display);
 	justify-content: var(--components-footer-justifyContent);
 	gap: var(--components-footer-gap);
@@ -29,12 +28,13 @@
 
 		.footer-containerOptional {
 			flex-grow: 1;
-
 			display: var(--components-footer-display);
 			justify-content: var(--components-footer-justifyContent);
 			gap: var(--components-footer-gap);
 			align-items: var(--components-footer-alignItems);
 			flex-direction: var(--components-footer-direction);
+			padding: var(--commons-container-padding);
+			max-inline-size: var(--components-footer-container-maxInlineSize, --commons-container-maxWidth);
 		}
 	}
 }

@@ -1,8 +1,15 @@
 @if (container()) {
 	<footer class="footer" [class.dialog-inside-footer]="dialog()" [class.mod-sticky]="sticky()" [class]="breakpointClass()">
-		<lu-container [max]="containerMax()" class="footer-containerOptional">
+		<div
+			class="footer-containerOptional"
+			[class.mod-containerMaxXXXL]="containerMax() === 'XXXL'"
+			[class.mod-containerMaxXXL]="containerMax() === 'XXL'"
+			[class.mod-containerMaxXL]="containerMax() === 'XL'"
+			[class.mod-containerMaxL]="containerMax() === 'L'"
+			[class.mod-containerMaxM]="containerMax() === 'M'"
+		>
 			<ng-container *ngTemplateOutlet="footerContent" />
-		</lu-container>
+		</div>
 	</footer>
 } @else {
 	<footer class="footer" [class.dialog-inside-footer]="dialog()" [class.mod-sticky]="sticky()" [class]="breakpointClass()">
