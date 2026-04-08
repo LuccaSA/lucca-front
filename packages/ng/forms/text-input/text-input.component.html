@@ -34,9 +34,9 @@
 			[attr.autocomplete]="autocomplete() ? autocomplete() : null"
 			class="textField-input-value"
 			[placeholder]="placeholder()"
-			[formControl]="ngControl.control"
+			[value]="value()"
+			(input)="updateValue($event.target)"
 			(blur)="blur.emit($event)"
-			[mask]="mask()"
 			#inputElement
 		/>
 		<div class="textField-input-affix">
@@ -72,7 +72,7 @@
 	}
 </div>
 <ng-container *luPresentationDisplayDefault>
-	@if (ngControl.value) {
+	@if (value()) {
 		@if (prefix(); as prefix) {
 			<ng-container
 				*ngTemplateOutlet="
@@ -84,7 +84,7 @@
 				"
 			/>
 		}
-		{{ ngControl.value }}
+		{{ value() }}
 		@if (suffix()) {
 			<ng-container
 				*ngTemplateOutlet="
