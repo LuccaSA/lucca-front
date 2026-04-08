@@ -108,9 +108,11 @@ export default {
 				type: 'select',
 			},
 			if: { arg: 'mode', eq: 'fancy' },
+			description: "Modifie l'illustration affichée dans la Fancy dialog.",
 		},
 		fancyIllustrationUrl: {
 			if: { arg: 'mode', eq: 'fancy' },
+			description: "Surcharge l'illustration avec une URL personnalisée.",
 		},
 	},
 } as Meta;

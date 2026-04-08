@@ -41,11 +41,11 @@ export default {
 		const critical = args.critical ? ` state="critical"` : ``;
 		const success = args.success ? ` state="success"` : ``;
 		const step = `
-	<lu-progress-stepper-step label="Lorem ipsum dolor" />`;
+	<lu-progress-stepper-step label="Step" />`;
 		return {
 			template: `<lu-progress-stepper current="${args.current}">
-	<lu-progress-stepper-step [routerLinkParam]="'./route/step-1'" label="Lorem ipsum dolor"${critical} />
-	<lu-progress-stepper-step [routerLinkParam]="'./route/step-2'" label="Lorem ipsum dolor"${success} />${step.repeat(args.steps - 2)}
+	<lu-progress-stepper-step [routerLinkParam]="'./route/step-1'" label="Step"${critical} />
+	<lu-progress-stepper-step [routerLinkParam]="'./route/step-2'" label="Step"${success} />${step.repeat(args.steps - 2)}
 </lu-progress-stepper>`,
 		};
 	},
@@ -53,7 +53,7 @@ export default {
 
 export const Basic = {
 	args: {
-		steps: 6,
+		steps: 5,
 		current: 3,
 		critical: false,
 		success: false,

@@ -39,7 +39,7 @@ export default {
 
 <ng-template #slotTop><lu-tag label="Inclus dans votre abonnement" /></ng-template>
 <ng-template #description>
-	<lu-listing ordered fancy>
+	<lu-listing orderedFancy>
 		<lu-listing-item>Les responsables proposent les augmentations.</lu-listing-item>
 		<lu-listing-item>Les augmentations sont commentées, révisées.</lu-listing-item>
 		<lu-listing-item>Vous contrôlez, validez ces augmentations et décidez de leur mise en œuvre.</lu-listing-item>
@@ -50,7 +50,25 @@ export default {
 </ng-template>`,
 		};
 	},
-	argTypes: {},
+	argTypes: {
+		heading: {
+			description: "Titre de l'empty state.",
+		},
+		hx: {
+			control: {
+				type: 'number',
+				min: 1,
+				max: 6,
+			},
+			description: 'Définit le niveau sémantique du titre.',
+		},
+		src: {
+			description: "URL de l'illustration.",
+		},
+		alt: {
+			description: "Texte alternatif de l'illustration restitué par les lecteurs d'écran.",
+		},
+	},
 } as Meta;
 
 export const Page: StoryObj<EmptyStatePageComponent & { src: string; alt: string }> = {
