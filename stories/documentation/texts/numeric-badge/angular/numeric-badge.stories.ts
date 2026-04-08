@@ -27,7 +27,7 @@ export default {
 		},
 		disableTooltip: {
 			type: 'boolean',
-			description: "Empêche le déclanchement d'une tooltip si la valeur est supérieure à <code>maxValue</code>.",
+			description: "Empêche le déclenchement d'une tooltip si la valeur est supérieure à <code>maxValue</code>.",
 		},
 		size: {
 			control: {
