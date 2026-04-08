@@ -12,13 +12,28 @@ interface LoadingsBasicStory {
 export default {
 	title: 'Documentation/Loaders/Loading/HTML&CSS/Basic',
 	argTypes: {
+		label: {
+			description: '[Story] Modifie le texte affiché par le composant.',
+			control: 'text',
+		},
+		hiddenLabel: {
+			description: "Masque le label en le conservant dans le DOM pour les lecteurs d'écrans.",
+		},
+		L: {
+			description: 'Applique la taille L au loading. Applique également automatiquement le mode block.',
+		},
 		block: {
+			description: 'Centre le loading dans son conteneur pour une utilisation en pleine page, dialog, section, etc.',
 			control: {
 				type: 'boolean',
 			},
 			if: { arg: 'L', truthy: false },
 		},
+		invert: {
+			description: 'Modifie les couleurs du loading pour un usage sur fond foncé.',
+		},
 		template: {
+			description: 'Applique une mise en forme adaptée à certains contextes (pleine page, dialog, etc.).',
 			options: ['', 'mod-popin', 'mod-drawer', 'mod-fullPage'],
 			control: {
 				type: 'select',
