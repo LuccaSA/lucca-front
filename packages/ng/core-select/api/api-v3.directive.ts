@@ -1,6 +1,7 @@
 import { HttpClient } from '@angular/common/http';
-import { Directive, forwardRef, inject, Input } from '@angular/core';
+import { Directive, forwardRef, inject, input } from '@angular/core';
 import { ILuApiCollectionResponse, ILuApiItem } from '@lucca-front/ng/api';
+import { syncInputSignal } from '@lucca-front/ng/core';
 import { CORE_SELECT_API_TOTAL_COUNT_PROVIDER, CoreSelectApiTotalCountProvider } from '@lucca-front/ng/core-select';
 import { BehaviorSubject, combineLatest, debounceTime, map, Observable, ReplaySubject, switchMap, take } from 'rxjs';
 import { ALuCoreSelectApiDirective } from './api.directive';
@@ -17,32 +18,29 @@ import { ALuCoreSelectApiDirective } from './api.directive';
 	],
 })
 export class LuCoreSelectApiV3Directive<T extends ILuApiItem> extends ALuCoreSelectApiDirective<T> implements CoreSelectApiTotalCountProvider {
-	@Input()
-	public set apiV3(value: string) {
-		this.url$.next(value);
-	}
+	protected httpClient = inject(HttpClient);
 
-	@Input()
-	public set fields(value: string) {
-		this.fields$.next(value);
-	}
+	readonly apiV3 = input<string>();
 
-	@Input()
-	public set orderBy(value: string | null) {
-		this.orderBy$.next(value);
-	}
+	readonly fields = input<string>();
 
-	@Input()
-	public set filters(value: Record<string, string | number | boolean>) {
-		this.filters$.next(value);
-	}
+	readonly orderBy = input<string | null>();
+
+	readonly filters = input<Record<string, string | number | boolean>>();
 
 	protected readonly url$ = new ReplaySubject<string>(1);
 	protected readonly fields$ = new BehaviorSubject<string>('id,name');
 	protected readonly orderBy$ = new BehaviorSubject<string | null>('name,asc');
 	protected readonly filters$ = new BehaviorSubject<Record<string, string | number | boolean>>({});
 
-	protected httpClient = inject(HttpClient);
+	constructor() {
+		super();
+
+		syncInputSignal(this.apiV3, (value) => this.url$.next(value));
+		syncInputSignal(this.fields, (value) => this.fields$.next(value));
+		syncInputSignal(this.orderBy, (value) => this.orderBy$.next(value));
+		syncInputSignal(this.filters, (value) => this.filters$.next(value));
+	}
 
 	protected override params$ = combineLatest([this.fields$, this.filters$, this.orderBy$, this.clue$]).pipe(
 		map(([fields, filters, orderBy, clue]) => ({
