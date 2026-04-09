@@ -2,6 +2,7 @@ import { computed, Directive, inject, input, OnDestroy, untracked } from '@angul
 import { ɵeffectWithDeps } from '@lucca-front/ng/core';
 import { FormFieldComponent } from '@lucca-front/ng/form-field';
 import { filter, take } from 'rxjs/operators';
+import { FormFieldIdLabelledByStrategy } from './form-field.type';
 
 @Directive({
 	selector: '[luFormFieldId]',
@@ -14,7 +15,7 @@ export class FormFieldIdDirective implements OnDestroy {
 
 	readonly suffix = input.required<string>({ alias: 'luFormFieldId' });
 
-	readonly labelledByStrategy = input<'prepend' | 'append'>('append');
+	readonly labelledByStrategy = input<FormFieldIdLabelledByStrategy>('append');
 
 	readonly id = computed(() => `${this.#formFieldComponent.id()}-${this.suffix()}`);
 

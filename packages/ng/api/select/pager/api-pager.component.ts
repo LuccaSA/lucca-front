@@ -3,6 +3,7 @@ import { ALuOnOpenSubscriber, ALuOnScrollBottomSubscriber, ILuOnOpenSubscriber, 
 import { ALuOptionOperator, ILuOptionOperator } from '@lucca-front/ng/option';
 import { ILuApiItem } from '../../api.model';
 import { ALuApiService, LuApiHybridService } from '../../service/index';
+import { ApiSelectStandard } from '../api-select.type';
 import { ALuApiOptionPager } from './api-pager.model';
 
 @Component({
@@ -45,7 +46,7 @@ export class LuApiPagerComponent<T extends ILuApiItem = ILuApiItem>
 		super(hostService || selfService);
 	}
 
-	@Input() set standard(standard: 'v3' | 'v4') {
+	@Input() set standard(standard: ApiSelectStandard) {
 		this._service.standard = standard;
 	}
 	@Input() set api(api: string) {

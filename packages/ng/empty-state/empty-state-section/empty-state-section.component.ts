@@ -1,35 +1,7 @@
 import { ChangeDetectionStrategy, Component, ViewEncapsulation, booleanAttribute, computed, input, numberAttribute } from '@angular/core';
 import { BubbleIllustration, BubbleIllustrationComponent } from '@lucca-front/ng/bubble-illustration';
 import { Palette, PortalContent, PortalDirective } from '@lucca-front/ng/core';
-import { Hx } from '../empty-state.model';
-
-const ICON_TO_ILLUSTRATION: Record<string, BubbleIllustration> = {
-	Banknote: 'banknote',
-	Bell: 'bell',
-	Bulb: 'bulb',
-	Calendar: 'calendar',
-	Chat: 'chat',
-	Clock: 'clock',
-	Coffee: 'coffee',
-	CreditCard: 'paymentCards',
-	Folder: 'folder',
-	Gift: 'gift',
-	Graduate: 'graduate',
-	IDCard: 'polaroid',
-	Lock: 'lock',
-	Mail: 'mail',
-	Megaphone: 'megaphone',
-	Paint: 'paint',
-	Paper: 'invoice',
-	Party: 'party',
-	Picture: 'picture',
-	Poc: 'banknote',
-	Rocket: 'rocket',
-	Search: 'magnifyingGlass',
-	Temperature: 'temperature',
-	Thumb: 'thumbUp',
-	Warning: 'warning',
-};
+import { Hx, ICON_TO_ILLUSTRATION } from '../empty-state.type';
 
 @Component({
 	selector: 'lu-empty-state-section',

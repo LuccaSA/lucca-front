@@ -1,6 +1,8 @@
 import { HttpClientModule } from '@angular/common/http';
+import { DIALOG_FANCY_ILLUSTRATION } from '@lucca-front/ng/dialog';
 import { LuSafeExternalSvgPipe } from '@lucca-front/ng/safe-content';
 import { Meta, moduleMetadata, StoryObj } from '@storybook/angular';
+import { setStoryOptions } from 'stories/helpers/stories';
 
 interface DialogFancyStory {
 	size: string;
@@ -72,7 +74,7 @@ export default {
 			},
 		},
 		illustration: {
-			options: ['approval', 'checklist', 'email', 'install', 'mapping', 'save', 'users', 'welcome', 'payment-card'],
+			options: setStoryOptions(DIALOG_FANCY_ILLUSTRATION),
 			control: {
 				type: 'select',
 			},

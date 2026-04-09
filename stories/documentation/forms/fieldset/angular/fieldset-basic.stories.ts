@@ -1,10 +1,10 @@
 import { FormsModule } from '@angular/forms';
 import { ButtonComponent } from '@lucca-front/ng/button';
 import { FormFieldComponent } from '@lucca-front/ng/form-field';
-import { FieldsetComponent, TextInputComponent } from '@lucca-front/ng/forms';
+import { FIELDSET_SIZE, FieldsetComponent, TextInputComponent } from '@lucca-front/ng/forms';
 import { GridColumnComponent, GridComponent } from '@lucca-front/ng/grid';
 import { Meta, moduleMetadata, StoryObj } from '@storybook/angular';
-import { generateInputs } from 'stories/helpers/stories';
+import { generateInputs, setStoryOptions } from 'stories/helpers/stories';
 
 export default {
 	title: 'Documentation/Forms/Fieldset/Angular/Basic',
@@ -35,7 +35,7 @@ export default {
 			description: 'Affiche le fieldset en vue dépliée.',
 		},
 		size: {
-			options: ['', 'S'],
+			options: setStoryOptions(FIELDSET_SIZE),
 			control: {
 				type: 'select',
 			},
@@ -99,7 +99,6 @@ export const Basic: StoryObj<FieldsetComponent & { content: string; withAction: 
 	args: {
 		heading: 'Title',
 		helper: '',
-		size: null,
 		expandable: false,
 		expanded: false,
 		horizontal: false,

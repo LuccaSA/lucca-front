@@ -1,9 +1,10 @@
 import { FormsModule } from '@angular/forms';
-import { FormFieldComponent, InputFramedComponent } from '@lucca-front/ng/form-field';
+import { FormFieldComponent, INPUT_FRAMED_SIZE, InputFramedComponent } from '@lucca-front/ng/form-field';
 import { CheckboxInputComponent, RadioComponent, RadioGroupInputComponent } from '@lucca-front/ng/forms';
 import { GridColumnComponent, GridComponent } from '@lucca-front/ng/grid';
 import { IconComponent } from '@lucca-front/ng/icon';
 import { Meta, moduleMetadata } from '@storybook/angular';
+import { setStoryOptions } from 'stories/helpers/stories';
 
 interface InputFramedBasicStory {
 	grid: boolean;
@@ -65,7 +66,7 @@ export default {
 			description: 'Affiche les différentes options dans une grille.',
 		},
 		size: {
-			options: ['', 'L'],
+			options: setStoryOptions(INPUT_FRAMED_SIZE),
 			control: {
 				type: 'select',
 			},

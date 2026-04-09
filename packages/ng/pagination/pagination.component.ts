@@ -1,6 +1,7 @@
 import { booleanAttribute, ChangeDetectionStrategy, Component, effect, input, output, ViewEncapsulation } from '@angular/core';
 import { intlInputOptions, IntlParamsPipe } from '@lucca-front/ng/core';
 import { IconComponent } from '@lucca-front/ng/icon';
+import { PaginationMod } from './pagination.type';
 import { LU_PAGINATION_TRANSLATIONS } from './pagination.translate';
 
 @Component({
@@ -42,7 +43,7 @@ export class PaginationComponent {
 	/**
 	 * Pagination mod (default or compact)
 	 */
-	readonly mod = input<'default' | 'compact'>('default');
+	readonly mod = input<PaginationMod>('default');
 
 	/**
 	 * Emit event when click on previous arrow

@@ -1,6 +1,6 @@
 import { ChangeDetectionStrategy, Component } from '@angular/core';
 import { LuSafeExternalSvgPipe } from '@lucca-front/ng/safe-content';
-import { SoftwareIconComponent, SoftwareIconList } from '@lucca-front/ng/software-icon';
+import { SOFTWARE_ICON, SoftwareIconComponent } from '@lucca-front/ng/software-icon';
 import { Meta, StoryObj, moduleMetadata } from '@storybook/angular';
 
 @Component({
@@ -10,7 +10,7 @@ import { Meta, StoryObj, moduleMetadata } from '@storybook/angular';
 	changeDetection: ChangeDetectionStrategy.OnPush,
 })
 class SoftwareIconStory {
-	softwareIconList = SoftwareIconList;
+	softwareIconList = SOFTWARE_ICON;
 }
 
 export default {
