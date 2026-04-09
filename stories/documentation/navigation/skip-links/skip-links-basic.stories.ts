@@ -6,8 +6,9 @@ import { applicationConfig, Meta, StoryObj } from '@storybook/angular';
 	selector: 'skip-links-story',
 	imports: [LuSkipLinksComponent, SkipLinkDirective],
 	template: `
-		<div><input id="showSkipLinks" type="checkbox" />&ngsp;<label for="showSkipLinks">Show skip links</label></div>
 		<lu-skip-links />
+
+		<div><input id="showSkipLinks" type="checkbox" />&ngsp;<label for="showSkipLinks">Show skip links</label></div>
 		<div id="lucca-banner-solutions-container" class="skipLinks_target" tabindex="-1">Banner <a href="#">Banner</a> Banner</div>
 		<div id="navSide" class="skipLinks_target" tabindex="-1">NavSide <a href="#">NavSide</a> NavSide</div>
 		<div id="main-content" class="skipLinks_target" tabindex="-1">Content <a href="#">Content</a> Content</div>
@@ -56,6 +57,7 @@ import { applicationConfig, Meta, StoryObj } from '@storybook/angular';
 				position: unset;
 				inline-size: unset;
 				block-size: unset;
+				clip-path: unset;
 				padding-block: var(--pr-t-spacings-50);
 				padding-inline: var(--pr-t-spacings-100);
 				margin: 0;
