@@ -20,6 +20,7 @@ export class LuSkipLinksComponent {
 
 	anchor(hash: string, e: Event) {
 		e.preventDefault();
+		document.getElementById(hash)?.focus();
 		this.#document.location.hash = '';
 		this.#document.location.hash = hash;
 	}

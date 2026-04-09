@@ -40,6 +40,14 @@ export class SkipLinkDirective implements OnDestroy {
 			const link = this.#link();
 			const currentId = this.#host.nativeElement.id;
 
+			this.#host.nativeElement.classList.add('skipLinks_target');
+
+			const isFocusable = this.#host.nativeElement.matches('button, a[href], input:not([type="hidden"]), textarea, select, [tabindex]');
+
+			if (!isFocusable) {
+				this.#renderer.setAttribute(this.#host.nativeElement, 'tabindex', '-1');
+			}
+
 			if (!currentId && !link.id) {
 				const id = `skipLink${++nextId}`;
 
@@ -50,6 +58,12 @@ export class SkipLinkDirective implements OnDestroy {
 
 			if (!currentId) {
 				this.#renderer.setAttribute(this.#host.nativeElement, 'id', link.id);
+
+				if (this.#registeredLink) {
+					this.#service.unregister(this.#registeredLink);
+				}
+				this.#registeredLink = link;
+				this.#service.register(this.#registeredLink);
 				return;
 			}
 

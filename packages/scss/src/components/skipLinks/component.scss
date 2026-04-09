@@ -15,6 +15,12 @@
 	inset-block-end: auto;
 
 	@at-root ($atRoot) {
+		.skipLinks_target {
+			&:focus-visible {
+				@include a11y.focusVisible;
+			}
+		}
+
 		.skipLinks-action {
 			border: 0;
 			margin: 0;
