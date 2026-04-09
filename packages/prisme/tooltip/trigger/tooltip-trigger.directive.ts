@@ -12,12 +12,12 @@ import { ComponentPortal } from '@angular/cdk/portal';
 import { booleanAttribute, computed, DestroyRef, Directive, effect, EffectRef, ElementRef, inject, Injector, input, linkedSignal, numberAttribute, OnDestroy, Renderer2, signal } from '@angular/core';
 import { takeUntilDestroyed, toObservable, toSignal } from '@angular/core/rxjs-interop';
 import { SafeHtml } from '@angular/platform-browser';
-import { isNotNil, ɵeffectWithDeps } from '@lucca-front/ng/core';
-import { LuPopoverPosition } from '@lucca-front/ng/popover';
+import { isNotNil, ɵeffectWithDeps } from '@lucca/prisme/core';
 import { from, of, startWith, switchMap, timer } from 'rxjs';
 import { debounce, debounceTime, filter, map, tap } from 'rxjs/operators';
 import { LuTooltipPanelComponent } from '../panel';
 import { EllipsisRuler } from './ellipsis.ruler';
+import { TooltipPosition } from './tooltip-position';
 
 let nextId = 0;
 
@@ -63,8 +63,8 @@ export class LuTooltipTriggerDirective implements OnDestroy {
 	readonly prTooltipOnlyForDisplay = input(false, { transform: booleanAttribute });
 	readonly tooltipOnlyForDisplay = computed(() => this.prTooltipOnlyForDisplay() || this.luTooltipOnlyForDisplay());
 
-	readonly luTooltipPosition = input<LuPopoverPosition>('above');
-	readonly prTooltipPosition = input<LuPopoverPosition>('above');
+	readonly luTooltipPosition = input<TooltipPosition>('above');
+	readonly prTooltipPosition = input<TooltipPosition>('above');
 	readonly tooltipPosition = computed(() => this.prTooltipPosition() || this.luTooltipPosition());
 
 	readonly luTooltipWhenEllipsisInput = input(false, { alias: 'luTooltipWhenEllipsis', transform: booleanAttribute });
