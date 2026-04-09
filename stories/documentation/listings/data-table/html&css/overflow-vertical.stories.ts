@@ -8,7 +8,7 @@ export default {
 } as Meta;
 
 function getTemplate(args: OverflowVerticalStory): string {
-	return `<div class="dataTableWrapper" style="height: 10rem">
+	return `<div class="dataTableWrapper" style="block-size: 10rem">
 	<div class="dataTableShadows">
 		<table class="dataTable mod-rowsOverflow -is-firstRowVisible -is-lastRowVisible">
 			<thead class="dataTable-head">
