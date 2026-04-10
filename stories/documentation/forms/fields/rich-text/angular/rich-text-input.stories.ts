@@ -39,10 +39,10 @@ export default {
 			description: 'Marque le champ comme obligatoire.',
 		},
 		disableSpellcheck: {
-			description: "Désactive le correcteur d'orthographe.",
+			description: 'Désactive le correcteur d’orthographe.',
 		},
 		autoResize: {
-			description: "Active / désactive l'autoresize du champ.",
+			description: 'Active / désactive l’autoresize du champ.',
 		},
 		hideToolbar: {
 			description: 'Masque les options de mise en forme.',

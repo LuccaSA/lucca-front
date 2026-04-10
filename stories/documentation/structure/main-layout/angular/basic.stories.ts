@@ -36,7 +36,7 @@ export default {
 		},
 		repeatContent: {
 			control: { type: 'range', min: 1, max: 10 },
-			description: "[Story] Modifie le nombre d'éléments <lu-main-layout-block>",
+			description: '[Story] Modifie le nombre d’éléments <lu-main-layout-block>',
 		},
 		repeatOverflow: {
 			control: { type: 'range', min: 1, max: 10 },

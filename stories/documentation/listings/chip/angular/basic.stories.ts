@@ -41,7 +41,7 @@ export default {
 			description: 'Modifie la taille du composant.',
 		},
 		feedback: {
-			description: "[20.1] Donne une information sur l'état du composant.",
+			description: '[20.1] Donne une information sur l’état du composant.',
 			options: ['', 'warning', 'critical'],
 			control: {
 				type: 'select',

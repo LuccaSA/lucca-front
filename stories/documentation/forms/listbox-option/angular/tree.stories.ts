@@ -17,7 +17,7 @@ export default {
 	],
 	argTypes: {
 		multiple: {
-			description: "Ajoute une checkbox à l'option.",
+			description: 'Ajoute une checkbox à l’option.',
 		},
 	},
 	render: (args: OptionBasicStory) => {

@@ -125,7 +125,7 @@ export default {
 			control: {
 				type: 'select',
 			},
-			description: "Modifie l'illustration.",
+			description: 'Modifie l’illustration.',
 		},
 		size: {
 			options: ['S', '', 'L'],
@@ -170,7 +170,7 @@ export default {
 			description: 'Applique une palette de couleurs au composant.',
 		},
 		action: {
-			description: "Ajoute une icône d'action (+) à l'illustration.",
+			description: 'Ajoute une icône d’action (+) à l’illustration.',
 		},
 	},
 } as Meta;

@@ -131,16 +131,16 @@ export default {
 			control: {
 				type: 'select',
 			},
-			description: "Modifie l'illustration de l'icône dans la zone de drop.",
+			description: 'Modifie l’illustration de l’icône dans la zone de drop.',
 		},
 		media: {
 			description: 'Affiche les fichiers importés avec une mise en forme adaptée aux visuels.',
 		},
 		displayFileName: {
-			description: "Affiche le nom des fichiers importés sous l'image en vue <code>media</code>.",
+			description: 'Affiche le nom des fichiers importés sous l’image en vue <code>media</code>.',
 		},
 		structure: {
-			description: "Augmente le border-radius du champ pour l'utiliser en élément de structure.",
+			description: 'Augmente le border-radius du champ pour l’utiliser en élément de structure.',
 		},
 		buttonFilled: {
 			description: 'Affiche le bouton comme action principale de la page.',

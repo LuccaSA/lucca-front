@@ -36,7 +36,7 @@ Lien hors application (nouvelle fenêtre) : <a href="${href}" luLink external${d
 			type: 'boolean',
 		},
 		external: {
-			description: "Précise que le lien va s'ouvrir dans un nouvel onglet.",
+			description: 'Précise que le lien va s’ouvrir dans un nouvel onglet.',
 			type: 'boolean',
 		},
 		label: {
@@ -45,7 +45,7 @@ Lien hors application (nouvelle fenêtre) : <a href="${href}" luLink external${d
 		},
 		href: {
 			type: 'string',
-			description: "Adresse de la page cible. A n'utiliser qu'en lien externe ou non connu par le routeur.",
+			description: 'Adresse de la page cible. À n’utiliser qu’en lien externe ou non connu par le routeur.',
 		},
 		routerLink: {
 			type: 'string',

@@ -27,7 +27,7 @@ export default {
 		},
 		disableTooltip: {
 			type: 'boolean',
-			description: "Empêche le déclenchement d'une tooltip si la valeur est supérieure à <code>maxValue</code>.",
+			description: 'Empêche le déclenchement d’une tooltip si la valeur est supérieure à <code>maxValue</code>.',
 		},
 		size: {
 			control: {
@@ -39,7 +39,7 @@ export default {
 			control: {
 				type: 'boolean',
 			},
-			description: "[v19.1] Applique l'état de chargement.",
+			description: '[v19.1] Applique l’état de chargement.',
 		},
 	},
 	render: (args, { argTypes }) => {

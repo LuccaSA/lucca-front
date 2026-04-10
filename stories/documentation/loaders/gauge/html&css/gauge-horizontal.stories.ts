@@ -19,7 +19,7 @@ export default {
 			description: 'Applique une palette de couleurs à la jauge.',
 		},
 		thin: {
-			description: "Diminue l'épaisseur de la jauge.",
+			description: 'Diminue l’épaisseur de la jauge.',
 		},
 		vertical: {
 			description: 'Affiche la jauge verticalement.',
