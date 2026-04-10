@@ -10,7 +10,7 @@
 							class="skeleton-item mod-dark pr-u-bodyS"
 							[class.mod-alignRight]="colsAlign()[i] === 'end'"
 							[class.mod-alignCenter]="colsAlign()[i] === 'center'"
-							[style.--components-skeleton-text-width]="randomPercent"
+							[style.--components-skeleton-text-width]="getRandomPercent()"
 						></span>
 					</th>
 				}
@@ -29,7 +29,7 @@
 							class="skeleton-item"
 							[class.mod-alignRight]="colsAlign()[i] === 'end'"
 							[class.mod-alignCenter]="colsAlign()[i] === 'center'"
-							[style.--components-skeleton-text-width]="randomPercent"
+							[style.--components-skeleton-text-width]="getRandomPercent()"
 						></span>
 					</td>
 				}
