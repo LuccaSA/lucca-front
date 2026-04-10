@@ -73,7 +73,7 @@ export default {
 			description: 'Aligne la valeur du champ à droite.',
 		},
 		hiddenLabel: {
-			description: "Masque le label en le conservant dans le DOM pour les lecteurs d'écrans",
+			description: "Masque le label en le conservant dans le DOM pour les lecteurs d'écran",
 		},
 		autocomplete: {
 			type: 'string',

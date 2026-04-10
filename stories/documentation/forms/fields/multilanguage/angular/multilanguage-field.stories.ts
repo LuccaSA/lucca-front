@@ -56,7 +56,7 @@ export default {
 			description: 'Modifie la taille de la checkbox.',
 		},
 		hiddenLabel: {
-			description: "Masque le label en le conservant dans le DOM pour les lecteurs d'écrans",
+			description: "Masque le label en le conservant dans le DOM pour les lecteurs d'écran",
 		},
 		inlineMessage: {
 			control: {

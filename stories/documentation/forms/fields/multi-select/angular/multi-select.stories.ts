@@ -56,7 +56,7 @@ export default {
 			description: "Modifie l'état de l'inline message.",
 		},
 		hiddenLabel: {
-			description: "Masque le label en le conservant dans le DOM pour les lecteurs d'écrans",
+			description: "Masque le label en le conservant dans le DOM pour les lecteurs d'écran",
 		},
 		clearable: {
 			description: 'Affiche un bouton pour vider le champ lorsque celui-ci est rempli.',

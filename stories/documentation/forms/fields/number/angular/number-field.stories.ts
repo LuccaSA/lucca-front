@@ -40,7 +40,7 @@ export default {
 			description: 'Modifie le label de l’input.',
 		},
 		hiddenLabel: {
-			description: "Masque le label en le conservant dans le DOM pour les lecteurs d'écrans",
+			description: "Masque le label en le conservant dans le DOM pour les lecteurs d'écran",
 		},
 		required: {
 			description: 'Marque le champ comme obligatoire.',

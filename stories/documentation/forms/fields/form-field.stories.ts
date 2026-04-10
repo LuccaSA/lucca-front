@@ -26,7 +26,7 @@ export default {
 			description: 'Marque le champ comme obligatoire.',
 		},
 		hiddenLabel: {
-			description: "Masque le label en le conservant dans le DOM pour les lecteurs d'écrans",
+			description: "Masque le label en le conservant dans le DOM pour les lecteurs d'écran",
 		},
 		inlineMessage: {
 			control: {

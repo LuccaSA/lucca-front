@@ -39,7 +39,7 @@ export default {
 			description: 'Affiche une icône (?) associée à une info-bulle.',
 		},
 		hiddenLabel: {
-			description: "Masque le label en le conservant dans le DOM pour les lecteurs d'écrans.",
+			description: "Masque le label en le conservant dans le DOM pour les lecteurs d'écran.",
 		},
 		label: {
 			control: {

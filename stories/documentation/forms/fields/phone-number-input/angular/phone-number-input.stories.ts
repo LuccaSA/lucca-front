@@ -77,7 +77,7 @@ export const Basic: StoryObj<PhoneNumberInputComponent & FormFieldComponent & { 
 			description: 'Modifie la taille du champ.',
 		},
 		hiddenLabel: {
-			description: "Masque le label en le conservant dans le DOM pour les lecteurs d'écrans",
+			description: "Masque le label en le conservant dans le DOM pour les lecteurs d'écran",
 		},
 		inlineMessage: {
 			control: {
