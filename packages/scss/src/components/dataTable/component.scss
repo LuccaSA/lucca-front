@@ -92,10 +92,15 @@
 
 			&:first-child {
 				inline-size: var(--components-dataTable-cellFirst-width);
+				inset-inline-start: 0;
 
 				.checkboxField {
 					--component-checkboxField-top: 0;
 				}
+			}
+
+			&:last-child {
+				inset-inline-end: 0;
 			}
 		}
 
