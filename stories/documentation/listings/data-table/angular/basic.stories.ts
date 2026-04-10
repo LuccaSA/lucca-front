@@ -122,7 +122,7 @@ export default {
 			control: {
 				type: 'boolean',
 			},
-			description: 'Ajoute un champ de saisi dans une cellule.',
+			description: 'Ajoute un champ de saisie dans une cellule.',
 		},
 		nested: {
 			control: {

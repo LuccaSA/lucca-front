@@ -58,7 +58,7 @@ export default {
 			description: 'Affiche un bouton pour vider le champ lorsque celui-ci est rempli.',
 		},
 		compact: {
-			description: 'Modifile la taille du color picker pour le rendre plus petit.',
+			description: 'Modifie la taille du color picker pour le rendre plus petit.',
 		},
 	},
 } as Meta;

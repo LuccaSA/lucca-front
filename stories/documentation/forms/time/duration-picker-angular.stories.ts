@@ -63,7 +63,7 @@ export default {
 			control: {
 				type: 'boolean',
 			},
-			description: "Affiche les boutons d'incrémention.",
+			description: "Affiche les boutons d'incrémentation.",
 		},
 		disabled: {
 			control: {

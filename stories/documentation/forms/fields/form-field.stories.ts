@@ -66,7 +66,7 @@ export default {
 			control: {
 				type: 'select',
 			},
-			description: "Applique une largeur fixe au champ. A n'utiliser que lorsque la grille de formulaire n'est pas adaptée.",
+			description: "Applique une largeur fixe au champ. À n'utiliser que lorsque la grille de formulaire n'est pas adaptée.",
 		},
 		rolePresentationLabel: {
 			description: "Applique role='presentation' au label du champ dans le cas où celui-ci ne doit pas être lu par le lecteur d'écran.",

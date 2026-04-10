@@ -86,7 +86,7 @@ export default {
 			control: {
 				type: 'select',
 			},
-			description: "[v19.2] Applique une largeur fixe au champ. A n'utiliser que lorsque la grille de formulaire n'est pas adaptée.",
+			description: "[v19.2] Applique une largeur fixe au champ. À n'utiliser que lorsque la grille de formulaire n'est pas adaptée.",
 		},
 		autocomplete: {
 			control: {

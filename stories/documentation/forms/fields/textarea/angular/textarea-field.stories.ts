@@ -72,7 +72,7 @@ export default {
 			description: "Masque le label en le conservant dans le DOM pour les lecteurs d'écrans",
 		},
 		counter: {
-			description: 'Indique le nombre de caractères maximum du champ. Cette information n’est présente qu’à titre indicatif. La longueur du champ doit également être limité via formControl.',
+			description: 'Indique le nombre de caractères maximum du champ. Cette information n’est présente qu’à titre indicatif. La longueur du champ doit également être limitée via formControl.',
 		},
 		disableSpellcheck: {
 			description: "Désactive le correcteur d'orthographe.",

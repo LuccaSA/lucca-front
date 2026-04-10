@@ -111,7 +111,7 @@ export default {
 			description: 'Applique un placeholder au champ.',
 		},
 		counter: {
-			description: 'Indique le nombre de caractères maximum du champ. Cette information n’est présente qu’à titre indicatif. La longueur du champ doit également être limité via formControl.',
+			description: 'Indique le nombre de caractères maximum du champ. Cette information n’est présente qu’à titre indicatif. La longueur du champ doit également être limitée via formControl.',
 		},
 		presentation: {
 			description: 'Affiche une version présentation, en lecture seule, de la valeur',

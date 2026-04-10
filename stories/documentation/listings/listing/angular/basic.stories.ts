@@ -86,7 +86,7 @@ export const Template: StoryObj<ListingComponent & ListingItemComponent & { type
 		},
 		reversed: {
 			if: { arg: 'type', eq: 'ordered' },
-			description: 'Prédente la liste sous forme décroissante.',
+			description: 'Présente la liste sous forme décroissante.',
 		},
 		checklist: HiddenArgType,
 		icons: HiddenArgType,
