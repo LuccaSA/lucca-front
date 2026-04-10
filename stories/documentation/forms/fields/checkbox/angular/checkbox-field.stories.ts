@@ -26,10 +26,10 @@ export default {
 			control: {
 				type: 'select',
 			},
-			description: "Modifie l'état de l'inline message.",
+			description: 'Modifie l’état de l’inline message.',
 		},
 		hiddenLabel: {
-			description: "Masque le label en le conservant dans le DOM pour les lecteurs d'écran",
+			description: 'Masque le label en le conservant dans le DOM pour les lecteurs d’écran',
 		},
 		tooltip: {
 			if: { arg: 'hiddenLabel', truthy: false },
@@ -39,13 +39,13 @@ export default {
 			control: {
 				type: 'boolean',
 			},
-			description: "[v20.2] Présente la checkbox sous la forme d'un élément d'une liste de tâches.",
+			description: '[v20.2] Présente la checkbox sous la forme d’un élément d’une liste de tâches.',
 		},
 		label: {
 			control: {
 				type: 'text',
 			},
-			description: "Modifie le label de l'input.",
+			description: 'Modifie le label de l’input.',
 		},
 		required: {
 			control: {

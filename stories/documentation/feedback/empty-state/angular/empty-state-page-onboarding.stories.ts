@@ -52,7 +52,7 @@ export default {
 	},
 	argTypes: {
 		heading: {
-			description: "Titre de l'empty state.",
+			description: 'Titre de l’empty state.',
 		},
 		hx: {
 			control: {
@@ -63,10 +63,10 @@ export default {
 			description: 'Définit le niveau sémantique du titre.',
 		},
 		src: {
-			description: "URL de l'illustration.",
+			description: 'URL de l’illustration.',
 		},
 		alt: {
-			description: "Texte alternatif de l'illustration restitué par les lecteurs d'écran.",
+			description: 'Texte alternatif de l’illustration restitué par les lecteurs d’écran.',
 		},
 	},
 } as Meta;

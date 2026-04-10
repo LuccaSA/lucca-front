@@ -56,7 +56,7 @@ export default {
 			description: 'Modifie la taille de la checkbox.',
 		},
 		hiddenLabel: {
-			description: "Masque le label en le conservant dans le DOM pour les lecteurs d'écran",
+			description: 'Masque le label en le conservant dans le DOM pour les lecteurs d’écran',
 		},
 		inlineMessage: {
 			control: {
@@ -69,7 +69,7 @@ export default {
 			control: {
 				type: 'select',
 			},
-			description: "Modifie l'état de l'inline message.",
+			description: 'Modifie l’état de l’inline message.',
 		},
 		placeholder: {
 			description: 'Modifie le placeholder au champ.',
@@ -86,7 +86,7 @@ export default {
 			control: {
 				type: 'select',
 			},
-			description: "[v19.2] Applique une largeur fixe au champ. À n'utiliser que lorsque la grille de formulaire n'est pas adaptée.",
+			description: '[v19.2] Applique une largeur fixe au champ. À n’utiliser que lorsque la grille de formulaire n’est pas adaptée.',
 		},
 		autocomplete: {
 			control: {

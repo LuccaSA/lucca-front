@@ -67,7 +67,7 @@ export default {
 			description: 'Marque le champ comme obligatoire.',
 		},
 		error: {
-			description: "Applique l'état d'erreur au label.",
+			description: 'Applique l’état d’erreur au label.',
 		},
 	},
 } as Meta;

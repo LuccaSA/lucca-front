@@ -42,7 +42,7 @@ export default {
 			description: 'Exemple avec un bouton d’action supplémentaire à la fin du fil d’activité.',
 		},
 		user: {
-			description: "Permet de définir l'utilisateur présenté dans l'avatar",
+			description: 'Permet de définir l’utilisateur présenté dans l’avatar',
 		},
 	},
 	decorators: [

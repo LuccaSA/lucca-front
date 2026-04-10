@@ -17,7 +17,7 @@ export default {
 			control: {
 				type: 'text',
 			},
-			description: "Modifie le label de l'input.",
+			description: 'Modifie le label de l’input.',
 		},
 		required: {
 			control: {
@@ -26,7 +26,7 @@ export default {
 			description: 'Marque le champ comme obligatoire.',
 		},
 		hiddenLabel: {
-			description: "Masque le label en le conservant dans le DOM pour les lecteurs d'écran",
+			description: 'Masque le label en le conservant dans le DOM pour les lecteurs d’écran',
 		},
 		inlineMessage: {
 			control: {
@@ -39,10 +39,10 @@ export default {
 			control: {
 				type: 'select',
 			},
-			description: "Modifie l'état de l'inline message.",
+			description: 'Modifie l’état de l’inline message.',
 		},
 		errorInlineMessage: {
-			description: "Ajoute un texte d'erreur sous le champ de formulaire lorsque celui-ci est en erreur.",
+			description: 'Ajoute un texte d’erreur sous le champ de formulaire lorsque celui-ci est en erreur.',
 		},
 		tooltip: {
 			if: { arg: 'hiddenLabel', truthy: false },
@@ -52,24 +52,24 @@ export default {
 			control: {
 				type: 'boolean',
 			},
-			description: "Applique l'état invalide au champ.",
+			description: 'Applique l’état invalide au champ.',
 		},
 		counter: {
 			control: {
 				type: 'number',
 			},
 			description:
-				"Nombre de caractères maximum autorisés pour un champ de type texte. A seulement un impact sur l'interface et doit être complété à un réglage au niveau de <code>FormControl</code>.",
+				'Nombre de caractères maximum autorisés pour un champ de type texte. A seulement un impact sur l’interface et doit être complété à un réglage au niveau de <code>FormControl</code>.',
 		},
 		width: {
 			options: [null, 20, 30, 40, 50, 60],
 			control: {
 				type: 'select',
 			},
-			description: "Applique une largeur fixe au champ. À n'utiliser que lorsque la grille de formulaire n'est pas adaptée.",
+			description: 'Applique une largeur fixe au champ. À n’utiliser que lorsque la grille de formulaire n’est pas adaptée.',
 		},
 		rolePresentationLabel: {
-			description: "Applique role='presentation' au label du champ dans le cas où celui-ci ne doit pas être lu par le lecteur d'écran.",
+			description: "Applique role='presentation' au label du champ dans le cas où celui-ci ne doit pas être lu par le lecteur d’écran.",
 		},
 	},
 	render: (args, { argTypes }) => {

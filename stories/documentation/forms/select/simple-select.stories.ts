@@ -111,7 +111,7 @@ export const BasicTEST = createTestStory(Basic, basePlay);
 
 export const Minimal = generateStory({
 	name: 'Minimal',
-	description: "Pas besoin systématiquement de `*luOption`, le simple-select affiche par défaut la propriété `name` ou l'option elle-même.",
+	description: 'Pas besoin systématiquement de `*luOption`, le simple-select affiche par défaut la propriété `name` ou l’option elle-même.',
 	template: `<lu-simple-select
 	[(ngModel)]="selectedLegume"
 	[options]="legumes | filterLegumes:clue"
@@ -126,7 +126,7 @@ export const MinimalTEST = createTestStory(Minimal, basePlay);
 
 export const WithDisplayer = generateStory({
 	name: 'Displayer',
-	description: "Il est possible de customiser l'affichage de l'option sélectionnée en utilisant `*luDisplayer`.",
+	description: 'Il est possible de customiser l’affichage de l’option sélectionnée en utilisant `*luDisplayer`.',
 	template: `<lu-simple-select
 	#selectRef
 	[(ngModel)]="selectedLegume"
@@ -149,7 +149,7 @@ export const WithDisplayer = generateStory({
 
 export const WithIcon = generateStory({
 	name: 'With Icon',
-	description: "Il est possible de customiser l'affichage des options ainsi que de l'option sélectionnée en utilisant `*luOption`.",
+	description: 'Il est possible de customiser l’affichage des options ainsi que de l’option sélectionnée en utilisant `*luOption`.',
 	template: `<lu-simple-select
 	#selectRef
 	[(ngModel)]="selectedLegume"
@@ -178,7 +178,7 @@ export const WithDisplayerTEST = createTestStory(WithDisplayer, async (context) 
 
 export const WithPrefix = generateStory({
 	name: 'With Prefix',
-	description: "Il est possible d'ajouter un préfixe à l'affichage, qui sera là même si le placeholder est utilisé.",
+	description: 'Il est possible d’ajouter un préfixe à l’affichage, qui sera là même si le placeholder est utilisé.',
 	template: `<lu-simple-select
 	#selectRef
 	placeholder="Placeholder…"
@@ -199,7 +199,7 @@ export const WithPrefix = generateStory({
 
 export const WithClue = generateStory({
 	name: 'Clue',
-	description: "Il est possible d'afficher une barre de recherche pour filtrer les options en écoutant l'évènement `(clueChange)`.",
+	description: 'Il est possible d’afficher une barre de recherche pour filtrer les options en écoutant l’évènement `(clueChange)`.',
 	template: `<lu-simple-select
 	#selectRef
 	[(ngModel)]="selectedLegume"
@@ -231,7 +231,7 @@ export const WithClueTEST = createTestStory(WithClue, async (context) => {
 
 export const WithPagination = generateStory({
 	name: 'Pagination',
-	description: "Il est possible de charger les options au fur et à mesure en écoutant l'évènement `(nextPage)`.",
+	description: 'Il est possible de charger les options au fur et à mesure en écoutant l’évènement `(nextPage)`.',
 	template: `<lu-simple-select
 	#selectRef
 	[(ngModel)]="selectedLegume"
@@ -251,7 +251,7 @@ export const WithPaginationTEST = createTestStory(WithPagination, basePlay);
 
 export const WithClearer = generateStory({
 	name: 'Clearer',
-	description: "Il est possible vider le contenu du select via l'input clearable",
+	description: 'Il est possible vider le contenu du select via l’input clearable',
 	template: `<lu-simple-select
 	#selectRef
 	[(ngModel)]="selectedLegume"
@@ -279,7 +279,7 @@ export const WithClearerTEST = createTestStory(WithClearer, async (context) => {
 
 export const WithDisabledOptions = generateStory({
 	name: 'Disabled options',
-	description: "Il est possible de désactiver certaines options en utilisant la directive `luDisabledOption` sur l'option.",
+	description: 'Il est possible de désactiver certaines options en utilisant la directive `luDisabledOption` sur l’option.',
 	template: `<lu-simple-select
 	#selectRef
 	[(ngModel)]="selectedLegume"
@@ -489,7 +489,7 @@ export const UserAvatarTemplate = generateStory({
 
 export const FormerUser = generateStory({
 	name: 'User Select (with former)',
-	description: "Pour saisir des utilisateurs, il suffit d'utiliser la directive `users`",
+	description: 'Pour saisir des utilisateurs, il suffit d’utiliser la directive `users`',
 	template: `<lu-simple-select
 	users
 	enableFormerEmployees
@@ -503,7 +503,7 @@ export const FormerUser = generateStory({
 
 export const Establishment = generateStory({
 	name: 'Establishment Select',
-	description: "Pour saisir un établissement, il suffit d'utiliser la directive `establishments`",
+	description: 'Pour saisir un établissement, il suffit d’utiliser la directive `establishments`',
 	template: `<lu-simple-select
 	establishments
 	[(ngModel)]="selectedEstablishment"
@@ -516,7 +516,7 @@ export const Establishment = generateStory({
 
 export const EstablishmentCustom = generateStory({
 	name: 'Establishment Select (custom)',
-	description: "Pour saisir un établissement, il suffit d'utiliser la directive `establishments`",
+	description: 'Pour saisir un établissement, il suffit d’utiliser la directive `establishments`',
 	template: `<lu-simple-select
 	#establishmentsRef="luCustomEstablishments"
 	customEstablishments
@@ -567,7 +567,7 @@ export const Tree = generateStory({
 
 export const Department = generateStory({
 	name: 'Department Select',
-	description: "Pour saisir un département, il suffit d'utiliser la directive `departments`",
+	description: 'Pour saisir un département, il suffit d’utiliser la directive `departments`',
 	template: `<lu-simple-select
 	departments
 	[(ngModel)]="selectedDepartment"
@@ -580,7 +580,7 @@ export const Department = generateStory({
 
 export const JobQualification = generateStory({
 	name: 'JobQualification Select',
-	description: "Pour saisir une qualification, il suffit d'utiliser la directive `jobQualifications`",
+	description: 'Pour saisir une qualification, il suffit d’utiliser la directive `jobQualifications`',
 	template: `<lu-simple-select
 	jobQualifications
 	[(ngModel)]="selectedJobQualifications"
@@ -593,7 +593,7 @@ export const JobQualification = generateStory({
 
 export const OccupationCategory = generateStory({
 	name: 'OccupationCategory Select',
-	description: "Pour saisir une catégorie socioprofessionnelle (CSP), il suffit d'utiliser la directive `occupationCategories`",
+	description: 'Pour saisir une catégorie socioprofessionnelle (CSP), il suffit d’utiliser la directive `occupationCategories`',
 	template: `<lu-simple-select
 	placeholder="Placeholder…"
 	occupationCategories
@@ -607,7 +607,7 @@ export const OccupationCategory = generateStory({
 
 export const GroupBy = generateStory({
 	name: 'Group options',
-	description: "Pour grouper les options, il suffit d'utiliser la directive `luOptionGroup`.",
+	description: 'Pour grouper les options, il suffit d’utiliser la directive `luOptionGroup`.',
 	template: `<lu-simple-select
 	#selectRef
 	[(ngModel)]="selectedLegume"
@@ -632,7 +632,7 @@ export const GroupBy = generateStory({
 
 export const AddOption = generateStory({
 	name: 'Add option',
-	description: "Pour ajouter une option, il suffit d'utiliser l'input `addOptionStrategy` et de s'abonner à l'output `addOption`. Le label est customisable via l'input `addOptionLabel`.",
+	description: 'Pour ajouter une option, il suffit d’utiliser l’input `addOptionStrategy` et de s’abonner à l’output `addOption`. Le label est customisable via l’input `addOptionLabel`.',
 	template: `<div class="pr-u-marginBlockEnd200">There is <span data-testid="legumes-count">{{ legumes.length }}</span> legumes in the list.</div>
 <lu-simple-select
 	#selectRef
@@ -650,10 +650,10 @@ export const AddOption = generateStory({
 		argTypes: {
 			addOptionLabel: {
 				control: { type: 'text' },
-				description: "Label affiché sur le bouton d'ajout d'option.",
+				description: 'Label affiché sur le bouton d’ajout d’option.',
 			},
 			addOptionStrategy: {
-				description: "Définit les conditions pour afficher le bouton d'ajout d'option.",
+				description: 'Définit les conditions pour afficher le bouton d’ajout d’option.',
 				control: {
 					type: 'select',
 					options: ['never', 'always', 'if-empty-clue', 'if-not-empty-clue'],
@@ -692,7 +692,7 @@ export const AddOptionTEST = createTestStory(AddOption, async (context) => {
 
 export const CustomPanelHeader = generateStory({
 	name: 'Custom Panel Header',
-	description: "Pour customiser l'en-tête du panel, il suffit d'utiliser la directive `luCoreSelectPanelHeader`.",
+	description: 'Pour customiser l’en-tête du panel, il suffit d’utiliser la directive `luCoreSelectPanelHeader`.',
 	template: `<lu-simple-select
 	#selectRef
 	[(ngModel)]="selectedLegume"

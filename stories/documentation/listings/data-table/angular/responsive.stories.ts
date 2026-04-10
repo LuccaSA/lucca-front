@@ -19,7 +19,7 @@ export default {
 	title: 'Documentation/Listings/Data table/Angular/Responsive',
 	argTypes: {
 		inlineSize: {
-			description: "Modifie la largeur d'une colonne lorsque <code>layoutFixed</code> est activé.",
+			description: 'Modifie la largeur d’une colonne lorsque <code>layoutFixed</code> est activé.',
 		},
 		inlineSizeValue: {
 			if: { arg: 'inlineSize', truthy: true },

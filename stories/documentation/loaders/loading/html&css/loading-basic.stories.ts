@@ -17,7 +17,7 @@ export default {
 			control: 'text',
 		},
 		hiddenLabel: {
-			description: "Masque le label en le conservant dans le DOM pour les lecteurs d'écran.",
+			description: 'Masque le label en le conservant dans le DOM pour les lecteurs d’écran.',
 		},
 		L: {
 			description: 'Applique la taille L au loading. Applique également automatiquement le mode block.',

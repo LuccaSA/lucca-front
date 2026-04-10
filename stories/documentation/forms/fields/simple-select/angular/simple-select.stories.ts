@@ -50,16 +50,16 @@ export default {
 			control: {
 				type: 'select',
 			},
-			description: "Modifie l'état de l'inline message.",
+			description: 'Modifie l’état de l’inline message.',
 		},
 		hiddenLabel: {
-			description: "Masque le label en le conservant dans le DOM pour les lecteurs d'écran",
+			description: 'Masque le label en le conservant dans le DOM pour les lecteurs d’écran',
 		},
 		clearable: {
 			description: 'Affiche un bouton pour vider le champ lorsque celui-ci est rempli.',
 		},
 		loading: {
-			description: "Applique l'état de chargement.",
+			description: 'Applique l’état de chargement.',
 		},
 		disabled: {
 			description: 'Désactive le champ.',

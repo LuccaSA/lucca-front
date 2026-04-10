@@ -17,7 +17,7 @@ export default {
 			control: {
 				type: 'text',
 			},
-			description: "Modifie le label de l'input.",
+			description: 'Modifie le label de l’input.',
 		},
 		required: {
 			control: {
@@ -53,7 +53,7 @@ export default {
 			control: {
 				type: 'select',
 			},
-			description: "Modifie l'état de l'inline message.",
+			description: 'Modifie l’état de l’inline message.',
 		},
 		rows: {
 			control: { type: 'number' },
@@ -61,21 +61,21 @@ export default {
 		},
 		autoResize: {
 			type: 'boolean',
-			description: "Active l'autoresize du champ.",
+			description: 'Active l’autoresize du champ.',
 		},
 		autoResizeScrollIntoView: {
 			type: 'boolean',
 			if: { arg: 'autoResize', truthy: true },
-			description: "Assure que le curseur de saisie soit toujours visible à l'écran en appliquant un scroll.",
+			description: 'Assure que le curseur de saisie soit toujours visible à l’écran en appliquant un scroll.',
 		},
 		hiddenLabel: {
-			description: "Masque le label en le conservant dans le DOM pour les lecteurs d'écran",
+			description: 'Masque le label en le conservant dans le DOM pour les lecteurs d’écran',
 		},
 		counter: {
 			description: 'Indique le nombre de caractères maximum du champ. Cette information n’est présente qu’à titre indicatif. La longueur du champ doit également être limitée via formControl.',
 		},
 		disableSpellcheck: {
-			description: "Désactive le correcteur d'orthographe.",
+			description: 'Désactive le correcteur d’orthographe.',
 		},
 		presentation: {
 			description: '[v21.1] Transforme le champ de formulaire en donnée textuelle non éditable.',

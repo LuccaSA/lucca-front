@@ -77,7 +77,7 @@ export const Basic: StoryObj<PhoneNumberInputComponent & FormFieldComponent & { 
 			description: 'Modifie la taille du champ.',
 		},
 		hiddenLabel: {
-			description: "Masque le label en le conservant dans le DOM pour les lecteurs d'écran",
+			description: 'Masque le label en le conservant dans le DOM pour les lecteurs d’écran',
 		},
 		inlineMessage: {
 			control: {
@@ -90,10 +90,10 @@ export const Basic: StoryObj<PhoneNumberInputComponent & FormFieldComponent & { 
 			control: {
 				type: 'select',
 			},
-			description: "Modifie l'état de l'inline message.",
+			description: 'Modifie l’état de l’inline message.',
 		},
 		errorInlineMessage: {
-			description: "Ajoute un texte d'erreur sous le champ lorsque celui-ci est en erreur.",
+			description: 'Ajoute un texte d’erreur sous le champ lorsque celui-ci est en erreur.',
 		},
 		autocomplete: {
 			options: ['', 'off', 'tel'],

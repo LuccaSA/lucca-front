@@ -42,7 +42,7 @@ export const Basic: StoryObj<ButtonComponent> = {
 			},
 		},
 		state: {
-			description: "Modifie l'état du bouton.",
+			description: 'Modifie l’état du bouton.',
 			options: setStoryOptions(BUTTON_STATE),
 			control: {
 				type: 'select',
@@ -52,7 +52,7 @@ export const Basic: StoryObj<ButtonComponent> = {
 			description: '[v20.2] Marque une action aux conséquences importantes ou irréversibles au survol et focus. Seulement compatible avec <code>outlined</code> et <code>ghost</code>.',
 		},
 		disclosure: {
-			description: "Indique la présence d'un menu.",
+			description: 'Indique la présence d’un menu.',
 		},
 		delete: {
 			description: '[Deprecated] Remplacé par <code>critical</code>.',

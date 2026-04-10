@@ -28,7 +28,7 @@ export default {
 			description: '[v21.2] Applique un comportement sticky au Page Header quand celui ci n’est pas géré par le Main Layout',
 		},
 		breadcrumbs: {
-			description: "Exemple avec fil d'Ariane.",
+			description: 'Exemple avec fil d’Ariane.',
 		},
 		actions: {
 			description: 'Exemple avec des actions générales.',
@@ -43,10 +43,10 @@ export default {
 			description: 'Exemple avec une action de retour en arrière.',
 		},
 		leading: {
-			description: "Ajout d'un slot avant le titre.",
+			description: 'Ajout d’un slot avant le titre.',
 		},
 		trailing: {
-			description: "Ajout d'un slot après le titre.",
+			description: 'Ajout d’un slot après le titre.',
 		},
 	},
 	decorators: [

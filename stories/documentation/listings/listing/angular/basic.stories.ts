@@ -69,7 +69,7 @@ export const Template: StoryObj<ListingComponent & ListingItemComponent & { type
 			control: {
 				type: 'select',
 			},
-			description: "Modifie l'icône par défaut.",
+			description: 'Modifie l’icône par défaut.',
 			if: { arg: 'type', eq: 'icons' },
 		},
 		icon: {
@@ -77,7 +77,7 @@ export const Template: StoryObj<ListingComponent & ListingItemComponent & { type
 			control: {
 				type: 'select',
 			},
-			description: "Modifie l'icône d'un élément de la liste.",
+			description: 'Modifie l’icône d’un élément de la liste.',
 			if: { arg: 'type', eq: 'icons' },
 		},
 		start: {
