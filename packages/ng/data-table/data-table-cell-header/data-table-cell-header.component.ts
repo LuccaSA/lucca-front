@@ -46,7 +46,8 @@ export class DataTableRowCellHeaderComponent extends BaseDataTableCell implement
 	inlineSize = input<string | null>(null);
 
 	insetInlineStart = computed(() => {
-		if (!this.isStickyStart() || !this.headRef) {
+		const isFirstOrLastCol = this.position() === 0 || this.position() === (this.rowRef?.cells().length ?? 0) - 1;
+		if (isFirstOrLastCol || !this.isStickyStart() || !this.headRef) {
 			return '';
 		}
 		return (
@@ -60,7 +61,8 @@ export class DataTableRowCellHeaderComponent extends BaseDataTableCell implement
 	});
 
 	insetInlineEnd = computed(() => {
-		if (!this.isStickyEnd() || !this.headRef) {
+		const isFirstOrLastCol = this.position() === 0 || this.position() === (this.rowRef?.cells().length ?? 0) - 1;
+		if (isFirstOrLastCol || !this.isStickyEnd() || !this.headRef) {
 			return '';
 		}
 		return (

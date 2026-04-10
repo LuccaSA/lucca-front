@@ -41,10 +41,14 @@ export class DataTableRowCellComponent extends BaseDataTableCell {
 	});
 
 	insetInlineStart = computed(() => {
+		const isFirstOrLastCol = this.position() === 0 || this.position() === (this.rowRef?.cells().length ?? 0) - 1;
+		if (isFirstOrLastCol) return null;
 		return this.tableRef?.header()?.cols()?.[this.position()]?.insetInlineStart();
 	});
 
 	insetInlineEnd = computed(() => {
+		const isFirstOrLastCol = this.position() === 0 || this.position() === (this.rowRef?.cells().length ?? 0) - 1;
+		if (isFirstOrLastCol) return null;
 		return this.tableRef?.header()?.cols()?.[this.position()]?.insetInlineEnd();
 	});
 }
