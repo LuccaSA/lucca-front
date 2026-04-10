@@ -28,7 +28,7 @@ export default {
 		},
 		itemsCount: {
 			type: 'number',
-			description: "Nombre total d'éléments.",
+			description: 'Nombre total d’éléments.',
 		},
 		mod: {
 			options: ['default', 'compact'],

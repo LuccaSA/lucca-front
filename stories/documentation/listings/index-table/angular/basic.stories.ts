@@ -57,10 +57,10 @@ export default {
 			control: {
 				type: 'select',
 			},
-			description: "Modifie le type d'élément HTML cliquable.",
+			description: 'Modifie le type d’élément HTML cliquable.',
 		},
 		hiddenLabel: {
-			description: "Masque les cellules d'en-tête du tableau.",
+			description: 'Masque les cellules d’en-tête du tableau.',
 		},
 		expanded: {
 			if: { arg: 'group', truthy: true },
@@ -75,14 +75,14 @@ export default {
 		},
 		stack: {
 			control: { type: 'range', min: 1, max: 3 },
-			description: "Affiche une ligne sous la forme d'un empilement d'éléments.",
+			description: 'Affiche une ligne sous la forme d’un empilement d’éléments.',
 		},
 		sort: {
 			options: ['', 'none', 'ascending', 'descending'],
 			control: {
 				type: 'select',
 			},
-			description: "Définit l'état de tri d'une cellule d'en-tête.",
+			description: 'Définit l’état de tri d’une cellule d’en-tête.',
 		},
 		align: {
 			options: ['', 'start', 'center', 'end'],
@@ -92,13 +92,13 @@ export default {
 			description: 'Aligne le contenu des cellules horizontalement.',
 		},
 		allowSelection: {
-			description: "Permet de sélectionner le texte d'une cellule. Désactive l'action principal au clic sur la cellule.",
+			description: 'Permet de sélectionner le texte d’une cellule. Désactive l’action principal au clic sur la cellule.',
 		},
 		allowAction: {
-			description: "Permet de rendre une cellule cliquable. Désactive l'action principal au clic sur la cellule.",
+			description: 'Permet de rendre une cellule cliquable. Désactive l’action principal au clic sur la cellule.',
 		},
 		intermediateFooter: {
-			description: "Présente une ligne de tableau sous la forme d'un footer intermédiaire. Exemple : Sous-total.",
+			description: 'Présente une ligne de tableau sous la forme d’un footer intermédiaire. Exemple : Sous-total.',
 		},
 		footer: {
 			description: 'Présente le tableau avec un footer.',

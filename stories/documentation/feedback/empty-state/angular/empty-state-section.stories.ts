@@ -29,7 +29,7 @@ export default {
 			description: 'Centre le contenu horizontalement.',
 		},
 		action: {
-			description: "Ajoute une icône (+) à l'illustration.",
+			description: 'Ajoute une icône (+) à l’illustration.',
 		},
 		illustration: {
 			options: [
@@ -129,7 +129,7 @@ export default {
 			control: {
 				type: 'select',
 			},
-			description: "Modifie l'illustration.",
+			description: 'Modifie l’illustration.',
 		},
 		hx: {
 			control: {
@@ -140,10 +140,10 @@ export default {
 			description: 'Définit le niveau sémantique du titre.',
 		},
 		heading: {
-			description: "Titre de l'empty state.",
+			description: 'Titre de l’empty state.',
 		},
 		description: {
-			description: "Description de l'empty state.",
+			description: 'Description de l’empty state.',
 		},
 	},
 } as Meta;

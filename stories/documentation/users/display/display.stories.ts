@@ -27,7 +27,7 @@ export default {
 	component: DisplayStory,
 	argTypes: {
 		displayFormat: {
-			description: "Format utilisé pour afficher le nom de l'utilisateur.",
+			description: 'Format utilisé pour afficher le nom de l’utilisateur.',
 			options: [...Object.values(LuDisplayFullname), ...Object.values(LuDisplayInitials), ...Object.values(LuDisplayHybrid)],
 			control: {
 				type: 'select',
@@ -43,7 +43,7 @@ export default {
 			control: 'text',
 		},
 		formatter: {
-			description: "Formate la liste d'utilisateurs selon la langue, via `Intl.ListFormat`.",
+			description: 'Formate la liste d’utilisateurs selon la langue, via `Intl.ListFormat`.',
 			options: Object.keys(formatters),
 			mapping: formatters,
 			control: {
