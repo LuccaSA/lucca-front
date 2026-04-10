@@ -192,7 +192,7 @@ export default {
 			description: 'Description du composant.',
 		},
 		slotTop: {
-			description: "[v19.3] Ajout d'un slot au dessus du titre.",
+			description: '[v19.3] Ajout d’un slot au dessus du titre.',
 		},
 	},
 } as Meta;

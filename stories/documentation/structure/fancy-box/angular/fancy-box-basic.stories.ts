@@ -20,19 +20,19 @@ export default {
 			control: {
 				type: 'text',
 			},
-			description: "URL de l'image en arrière plan à gauche (200x160).",
+			description: 'URL de l’image en arrière plan à gauche (200x160).',
 		},
 		backgroundRight: {
 			control: {
 				type: 'text',
 			},
-			description: "URL de l'image en arrière plan à droite (200x160).",
+			description: 'URL de l’image en arrière plan à droite (200x160).',
 		},
 		foreground: {
 			control: {
 				type: 'text',
 			},
-			description: "URL de l'image au premier plan (200x160).",
+			description: 'URL de l’image au premier plan (200x160).',
 		},
 		size: {
 			options: ['', 'S'],

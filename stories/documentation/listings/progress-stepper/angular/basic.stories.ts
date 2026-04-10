@@ -18,7 +18,7 @@ export default {
 		},
 		steps: {
 			control: { type: 'range', min: 2, max: 6 },
-			description: "Nombre d'étapes présentées dans l'exemple.",
+			description: 'Nombre d’étapes présentées dans l’exemple.',
 		},
 		critical: {
 			control: { type: 'boolean' },

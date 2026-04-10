@@ -43,7 +43,7 @@ export default {
 			description: 'Ajoute une section visible lorsque le champ est sélectionné.',
 		},
 		illustration: {
-			description: "Slot dédié à l'ajout d'illustrations.",
+			description: 'Slot dédié à l’ajout d’illustrations.',
 		},
 		info: {
 			description: 'Ajoute une section informative toujours visible sous le champ.',

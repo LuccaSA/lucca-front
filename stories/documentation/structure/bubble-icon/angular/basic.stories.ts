@@ -61,10 +61,10 @@ export default {
 			control: {
 				type: 'select',
 			},
-			description: "Modifie le glyphe de l'icône.",
+			description: 'Modifie le glyphe de l’icône.',
 		},
 		alt: {
-			description: "Information restituée par le lecteur d'écran.",
+			description: 'Information restituée par le lecteur d’écran.',
 		},
 	},
 	decorators: [

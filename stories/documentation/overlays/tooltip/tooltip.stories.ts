@@ -10,7 +10,7 @@ export default {
 	title: 'Documentation/Overlays/Tooltip/Basic',
 	argTypes: {
 		luTooltipEnterDelay: {
-			description: "Délai d'apparition du tooltip au survol (en ms).",
+			description: 'Délai d’apparition du tooltip au survol (en ms).',
 			control: { type: 'number' },
 			table: {
 				category: 'inputs',
@@ -43,7 +43,7 @@ export default {
 			},
 		},
 		luTooltipWhenEllipsis: {
-			description: "N'affiche le tooltip que lorsque le contenu de l'élément déclencheur est tronqué par une ellipse.",
+			description: 'N’affiche le tooltip que lorsque le contenu de l’élément déclencheur est tronqué par une ellipse.',
 			control: { type: 'boolean' },
 			table: {
 				category: 'inputs',
@@ -51,7 +51,7 @@ export default {
 			},
 		},
 		luTooltipOnlyForDisplay: {
-			description: "Affiche un tooltip non restituée par les lecteurs d'écran. À utiliser si la réstitution est déjà portée par l'élément déclencheur (ex. une icône avec attribut `alt`)",
+			description: 'Affiche un tooltip non restituée par les lecteurs d’écran. À utiliser si la réstitution est déjà portée par l’élément déclencheur (ex. une icône avec attribut `alt`)',
 		},
 	},
 	decorators: [

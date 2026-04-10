@@ -13,7 +13,7 @@ export default {
 			control: {
 				type: 'boolean',
 			},
-			description: "Désactive le lien d'un des éléments.",
+			description: 'Désactive le lien d’un des éléments.',
 		},
 	},
 	decorators: [
