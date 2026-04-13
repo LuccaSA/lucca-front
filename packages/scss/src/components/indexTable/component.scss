@@ -263,11 +263,11 @@
 				margin-inline-end: var(--pr-t-spacings-100);
 			}
 		}
-	}
 
-	.indexTableWrapper-pagination {
-		&:empty {
-			display: none;
+		.indexTableWrapper-pagination {
+			&:empty {
+				display: none;
+			}
 		}
 	}
 
