@@ -280,6 +280,7 @@ export const Fancy: StoryObj = {
 		};
 	},
 	args: {
+		size: 'M',
 		fancyIllustration: 'install',
 		fancyIllustrationUrl: '',
 	},
