@@ -32,6 +32,12 @@
 			flex: 1;
 		}
 
+		.multipleSelect-displayer-value {
+			display: flex;
+			gap: var(--pr-t-spacings-50);
+			flex-wrap: wrap;
+		}
+
 		.multipleSelect-displayer-chip.chip {
 			min-inline-size: 0;
 

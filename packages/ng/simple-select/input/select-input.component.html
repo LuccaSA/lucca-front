@@ -23,8 +23,9 @@
 		#inputElement
 		[attr.autocomplete]="autocomplete()"
 		[attr.tabindex]="inputTabindex()"
+		[attr.aria-labelledby]="valueID"
 	/>
-	<div class="simpleSelect-field-value">
+	<div class="simpleSelect-field-value" [attr.id]="valueID">
 		<ng-container *ngTemplateOutlet="currentValueDisplayerTpl" />
 	</div>
 	@if (!filterPillMode) {
