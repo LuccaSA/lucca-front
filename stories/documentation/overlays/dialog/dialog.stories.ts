@@ -248,6 +248,12 @@ export const WithAction: StoryObj = {
 };
 
 export const Fancy: StoryObj = {
+	argTypes: {
+		mode: { table: { disable: true } },
+		alert: { table: { disable: true } },
+		autoFocus: { table: { disable: true } },
+		panelClasses: { table: { disable: true } },
+	},
 	render: (args) => {
 		const fancyIllustrationParam = args['fancyIllustration'] ? ` fancyIllustration="${args['fancyIllustration']}"` : ``;
 		const fancyIllustrationURLParam = args['fancyIllustrationUrl'] ? ` fancyIllustrationUrl="${args['fancyIllustrationUrl']}"` : ``;
@@ -256,7 +262,7 @@ export const Fancy: StoryObj = {
 				config: args,
 			},
 			template: `
-<button luButton [luDialogOpen]="dialogTpl" [luDialogConfig]="config">Open Template-driven Fancy Dialog</button>
+<button luButton [luDialogOpen]="dialogTpl" [luDialogConfig]="{mode: 'fancy'}">Open Template-driven Fancy Dialog</button>
 
 <ng-template #dialogTpl>
 	<lu-dialog #dialog${fancyIllustrationParam}${fancyIllustrationURLParam}>
