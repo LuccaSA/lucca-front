@@ -24,8 +24,8 @@
 
 	@at-root ($atRoot) {
 		.mainLayout-sidebar {
-			overflow-x: hidden;
-			overflow-y: auto;
+			overflow-inline: hidden;
+			overflow-block: auto;
 			flex-shrink: 0;
 			inline-size: var(--components-mainLayout-sidebar-inlineSize);
 
