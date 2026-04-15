@@ -145,7 +145,7 @@
 		.dialog-inside-content {
 			background-color: var(--components-dialog-insideContent-background);
 			padding-block: var(--components-dialog-insideContent-paddingBlock);
-			padding-inline: var(--pr-t-spacings-300);
+			padding-inline: var(--components-dialog-insideContent-paddingInline);
 			grid-area: overflow;
 			overflow: auto;
 			outline: none;
