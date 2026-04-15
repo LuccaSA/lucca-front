@@ -16,9 +16,9 @@ export class PopoverAutoLinkNode extends AutoLinkNode {
 	getViewContainerRef(): ViewContainerRef | undefined {
 		return this.#viewContainerRef;
 	}
-	setTemplateRef(vcr: TemplateRef<LinkTemplateContext>): this {
+	setTemplateRef(templateRef: TemplateRef<LinkTemplateContext>): this {
 		const self = this.getWritable();
-		self.#templateRef = vcr;
+		self.#templateRef = templateRef;
 		return self;
 	}
 	getTemplateRef(): TemplateRef<LinkTemplateContext> | undefined {
