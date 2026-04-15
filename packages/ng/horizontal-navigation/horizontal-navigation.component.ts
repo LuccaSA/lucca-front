@@ -1,6 +1,7 @@
 import { NgTemplateOutlet } from '@angular/common';
 import { booleanAttribute, ChangeDetectionStrategy, Component, contentChildren, input, ViewEncapsulation } from '@angular/core';
 import { HorizontalNavigationLinkDirective } from './horizontal-navigation-link.directive';
+import { HorizontalNavigationTabComponent } from './horizontal-navigation-tab.component';
 
 @Component({
 	selector: 'lu-horizontal-navigation',
@@ -19,6 +20,8 @@ import { HorizontalNavigationLinkDirective } from './horizontal-navigation-link.
 export class HorizontalNavigationComponent {
 	readonly links = contentChildren(HorizontalNavigationLinkDirective);
 
+	readonly tabs = contentChildren(HorizontalNavigationTabComponent);
+
 	readonly noBorder = input(false, { transform: booleanAttribute });
 
 	readonly container = input(false, { transform: booleanAttribute });
@@ -29,4 +32,6 @@ export class HorizontalNavigationComponent {
 	 * Which size should the horizontal navigation be? Defaults and small
 	 */
 	readonly size = input<null | 'S'>(null);
+
+	readonly tablist = input(false, { transform: booleanAttribute });
 }

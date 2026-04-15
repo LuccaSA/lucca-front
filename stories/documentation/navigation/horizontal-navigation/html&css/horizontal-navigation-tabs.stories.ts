@@ -9,7 +9,7 @@ interface HorizontalNavigationBasicStory {
 }
 
 export default {
-	title: 'Documentation/Navigation/HorizontalNavigation/HTML&CSS/Basic',
+	title: 'Documentation/Navigation/HorizontalNavigation/HTML&CSS/Tabs',
 	argTypes: {
 		noBorder: {
 			control: {
@@ -48,43 +48,24 @@ function getTemplate(args: HorizontalNavigationBasicStory): string {
 	const header = args.header ? ` mod-header` : '';
 	const s = args.s ? ` mod-S` : '';
 	const vertical = args.vertical ? ` mod-vertical` : '';
-	if (args.disabled)
-		return `<div class="horizontalNavigation${s}${noBorder}${header}${vertical}">
-	<ul class="horizontalNavigation-list">
-		<li class="horizontalNavigation-list-item">
-			<a href="#" class="horizontalNavigation-list-item-action" aria-current="page">
-				Page 1
-			</a>
+	const disabled = args.disabled ? ` disabled` : ``;
+
+	return `<div class="horizontalNavigation${s}${noBorder}${header}${vertical}">
+	<ul class="horizontalNavigation-list" role="tablist">
+		<li class="horizontalNavigation-list-item" role="presentation">
+			<button type="button" class="horizontalNavigation-list-item-action" role="tab" id="tab1" aria-controls="panel1" aria-selected="true">
+				Tab 1
+			</button>
 		</li>
-		<li class="horizontalNavigation-list-item">
-			<a href="#" class="horizontalNavigation-list-item-action">
-				Page 2
-			</a>
+		<li class="horizontalNavigation-list-item" role="presentation">
+			<button type="button" class="horizontalNavigation-list-item-action" role="tab" id="tab2" aria-controls="panel2" tabindex="-1">
+				Tab 2
+			</button>
 		</li>
-		<li class="horizontalNavigation-list-item">
-			<a class="horizontalNavigation-list-item-action is-disabled">
-				Page 3
-			</a>
-		</li>
-	</ul>
-</div>`;
-	else
-		return `<div class="horizontalNavigation${s}${noBorder}${header}${vertical}">
-	<ul class="horizontalNavigation-list">
-		<li class="horizontalNavigation-list-item">
-			<a href="#" class="horizontalNavigation-list-item-action" aria-current="page">
-				Page 1
-			</a>
-		</li>
-		<li class="horizontalNavigation-list-item">
-			<a href="#" class="horizontalNavigation-list-item-action">
-				Page 2
-			</a>
-		</li>
-		<li class="horizontalNavigation-list-item">
-			<a href="#" class="horizontalNavigation-list-item-action">
-				Page 3
-			</a>
+		<li class="horizontalNavigation-list-item" role="presentation">
+			<button type="button" class="horizontalNavigation-list-item-action" role="tab" id="tab3" aria-controls="panel3" tabindex="-1"${disabled}>
+				Tab 3
+			</button>
 		</li>
 	</ul>
 </div>`;
