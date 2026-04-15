@@ -23,6 +23,12 @@ export default {
 			},
 		},
 	],
+	languageOptions: {
+		directionality: {
+			block: 'top-to-bottom',
+			inline: 'left-to-right',
+		},
+	},
 	rules: {
 		// SCSS specific
 		// ============================================================================================
@@ -130,6 +136,7 @@ export default {
 				severity: (property) => getDisallowedData(LFDeprecatedProperties, property).severity,
 			},
 		],
+		'property-layout-mappings': 'flow-relative',
 		'property-no-unknown': [
 			true,
 			{
