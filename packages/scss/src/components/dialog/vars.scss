@@ -15,6 +15,8 @@
 	--components-dialog-insideHeaderLinkDisplay: none;
 	--components-dialog-insideHeaderColumns: 1fr auto;
 	--components-dialog-insideContent-background: transparent;
+	--components-dialog-insideContent-paddingInline: var(--pr-t-spacings-300);
+	--components-dialog-insideContent-paddingBlock: var(--pr-t-spacings-200);
 	--components-dialog-level: 0;
 	--components-dialog-translate-spacing: var(--pr-t-spacings-500);
 	--components-dialog-translate: calc(var(--components-dialog-translate-spacing) * var(--components-dialog-level) * -1);
@@ -25,7 +27,6 @@
 	--components-dialog-inside-header-position: relative;
 	--components-dialog-inside-header-paddingBlock: var(--pr-t-spacings-200);
 	--components-dialog-inside-header-paddingInline: var(--pr-t-spacings-300);
-	--components-dialog-insideContent-paddingBlock: var(--pr-t-spacings-200);
 	--components-dialog-inside-header-button-position: static;
 	--components-dialog-inside-backgroundImage: none;
 	--components-dialog-minBlockSize: 0px;
