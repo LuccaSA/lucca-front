@@ -164,6 +164,7 @@ export default {
 				message: (selectorId) => `Expected "${selectorId}" to match pattern #foo(-bar(Baz)*)*`,
 			},
 		],
+		'selector-no-deprecated': true,
 		'selector-pseudo-element-no-unknown': [
 			true,
 			{
