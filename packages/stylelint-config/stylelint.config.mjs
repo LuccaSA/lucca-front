@@ -11,7 +11,7 @@ export default {
 			files: ['**/*.scss'],
 			rules: {
 				// Disable for now because of bugs with SCSS files.
-				// SEE https://github.com/stylelint-scss/stylelint-config-standard-scss/issues/252
+				// SEE https://github.com/stylelint-scss/stylelint-config-standard-scss/issues/269
 				'no-invalid-position-declaration': null,
 			},
 		},
@@ -184,5 +184,6 @@ export default {
 			},
 		],
 		'@stylistic/string-quotes': 'single',
+		'@stylistic/no-multiple-whitespaces': null, // Allow people to align values as they wish.
 	},
 };
