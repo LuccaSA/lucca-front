@@ -1,5 +1,5 @@
 @mixin compact {
-	overflow-y: auto;
+	overflow-block: auto;
 
 	.errorPage-section {
 		flex-direction: column;
