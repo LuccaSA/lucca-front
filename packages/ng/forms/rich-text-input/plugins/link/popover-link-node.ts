@@ -44,13 +44,12 @@ export class PopoverLinkNode extends LinkNode {
 				key: this.__key,
 				isAutoLink: false,
 			};
+			// if view already exists, destroy it. Can't reuse it since Lexical injects HTML content inside afterward (link text).
 			if (this.#view) {
-				this.#view.context = context;
-				this.#view.markForCheck();
-			} else {
-				// Create the view
-				this.#view = this.#viewContainerRef.createEmbeddedView(this.#templateRef, context);
+				this.#view.destroy();
 			}
+			// Create the view
+			this.#view = this.#viewContainerRef.createEmbeddedView(this.#templateRef, context);
 
 			// Return the template DOM element
 			return this.#view.rootNodes[0] as HTMLElement;
