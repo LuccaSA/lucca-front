@@ -14,8 +14,8 @@
 	<lu-icon icon="formatLink" [alt]="intl().linksLabel" />
 </button>
 
-<ng-template #linkNodeTemplate let-href="href" let-title="title" let-target="target">
-	<a [href]="href" [title]="title" [target]="target" [luPopover2]="popover" #trigger="luPopover2"></a>
+<ng-template #linkNodeTemplate let-href="href" let-title="title" let-target="target" let-isAutoLink="isAutoLink">
+	<a [href]="href" [attr.title]="title" [attr.target]="target" [luPopover2]="popover" rel="noopener noreferrer" #trigger="luPopover2"></a>
 	<ng-template #popover>
 		<div class="popover-contentOptional linkPopover">
 			<a [href]="href" luLink external class="pr-u-ellipsis">{{ href }}</a>
@@ -29,16 +29,18 @@
 			>
 				<lu-icon icon="officePen" [alt]="intl().linksLabel" />
 			</button>
-			<button
-				type="button"
-				luButton="ghost"
-				size="XS"
-				(click)="trigger.close(); deleteLink()"
-				[luTooltip]="intl().linksDelete"
-				luTooltipOnlyForDisplay
-			>
-				<lu-icon icon="trashDelete" [alt]="intl().linksDelete" />
-			</button>
+			@if (!isAutoLink) {
+				<button
+					type="button"
+					luButton="ghost"
+					size="XS"
+					(click)="trigger.close(); deleteLink()"
+					[luTooltip]="intl().linksDelete"
+					luTooltipOnlyForDisplay
+				>
+					<lu-icon icon="trashDelete" [alt]="intl().linksDelete" />
+				</button>
+			}
 		</div>
 	</ng-template>
 </ng-template>

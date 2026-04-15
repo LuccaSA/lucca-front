@@ -41,6 +41,7 @@ export class PopoverAutoLinkNode extends AutoLinkNode {
 				title: this.__title,
 				target: this.__target,
 				key: this.__key,
+				isAutoLink: true,
 			};
 			if (this.#view) {
 				this.#view.context = context;
