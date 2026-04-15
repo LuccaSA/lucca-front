@@ -11,6 +11,7 @@ import {
 	DialogHeaderComponent,
 	DialogOpenDirective,
 } from '@lucca-front/ng/dialog';
+import { FormComponent } from '@lucca-front/ng/form';
 import { FormFieldComponent } from '@lucca-front/ng/form-field';
 import { CheckboxInputComponent, TextInputComponent } from '@lucca-front/ng/forms';
 import { IconComponent } from '@lucca-front/ng/icon';
@@ -42,6 +43,7 @@ export default {
 				ReactiveFormsModule,
 				IconComponent,
 				DialogHeaderAction,
+				FormComponent,
 			],
 		}),
 	],
@@ -180,7 +182,7 @@ export const WithForm: StoryObj = {
 <!--form = new FormGroup({
 			example: new FormControl('', Validators.required)
 		})-->
-		<form [formGroup]="form" class="dialog-inside-formOptional">
+		<form luForm [formGroup]="form">
 			<lu-dialog-header>Template driven header with Form inside</lu-dialog-header>
 
 			<lu-dialog-content>
