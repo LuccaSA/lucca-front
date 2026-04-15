@@ -25,9 +25,24 @@ export default {
 	flex-direction: column;
 	min-block-size: 30rem;
 }
+lu-empty-state-page {
+	--palettes-text: var(--palettes-pagga-text);
+	--palettes-0: var(--palettes-pagga-0);
+	--palettes-25: var(--palettes-pagga-25);
+	--palettes-50: var(--palettes-pagga-50);
+	--palettes-100: var(--palettes-pagga-100);
+	--palettes-200: var(--palettes-pagga-200);
+	--palettes-300: var(--palettes-pagga-300);
+	--palettes-400: var(--palettes-pagga-400);
+	--palettes-500: var(--palettes-pagga-500);
+	--palettes-600: var(--palettes-pagga-600);
+	--palettes-700: var(--palettes-pagga-700);
+	--palettes-800: var(--palettes-pagga-800);
+	--palettes-900: var(--palettes-pagga-900);
+}
 `,
 			],
-			template: `<lu-empty-state-page class="palette-pagga"
+			template: `<lu-empty-state-page
 	heading="${heading}"
 	[slotTop]="slotTop"
 	[illustration]="illustration"
