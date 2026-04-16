@@ -1,0 +1,74 @@
+@use 'exports' as *;
+
+lu-tree-option {
+	@layer components {
+		@include vars;
+
+		.optionItem {
+			@include optionItem;
+		}
+
+		.optionItem-value {
+			@include value;
+		}
+
+		.optionItem-icons {
+			@include icons;
+		}
+
+		.optionItem-icon {
+			@include icon;
+		}
+
+		.optionItem-icon-shape {
+			@include iconShape;
+		}
+	}
+
+	@layer mods {
+		&.is-disabled {
+			@include disabled;
+		}
+	}
+}
+
+.lu-picker-panel {
+	lu-tree-option {
+		@layer components {
+			@include pickerPanel;
+		}
+	}
+
+	&.mod-multiple lu-tree-option {
+		@layer mods {
+			@include multiple;
+		}
+	}
+
+	@layer mods {
+		@for $i from 1 through 10 {
+			// Single
+			#{repeat($i + 1, 'lu-tree-option')} .optionItem-value {
+				@if ($i == 1) {
+					padding-inline-start: calc(var(--pr-t-spacings-100) + (var(--components-options-tree-padding-child) * var(--nesting)));
+				}
+
+				--nesting: #{$i - 1};
+			}
+
+			// Multiple
+			&.mod-multiple #{repeat($i + 1, 'lu-tree-option')} .optionItem-value {
+				@if ($i == 1) {
+					padding-inline-start: calc(var(--components-options-tree-multiple-padding) + (var(--components-options-tree-padding-child) * var(--nesting)));
+
+					&::before,
+					&::after {
+						inset-inline-start: calc(var(--pr-t-spacings-100) + (var(--components-options-tree-padding-child) * var(--nesting)));
+					}
+				}
+
+				--nesting: #{$i - 1};
+			}
+		}
+	}
+}

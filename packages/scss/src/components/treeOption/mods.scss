@@ -1,0 +1,19 @@
+@function repeat($repeat, $selector) {
+	$result: '';
+
+	@for $i from 1 through $repeat {
+		$result: $result + ' ' + $selector;
+	}
+
+	@return $result;
+}
+
+@mixin multiple {
+	.optionItem-icons {
+		display: block;
+	}
+
+	.optionItem-value {
+		padding-inline-end: 4rem;
+	}
+}
