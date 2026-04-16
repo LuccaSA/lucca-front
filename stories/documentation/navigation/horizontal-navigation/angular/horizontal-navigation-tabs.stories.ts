@@ -1,6 +1,5 @@
 import { provideRouter } from '@angular/router';
 import { HorizontalNavigationComponent, HorizontalNavigationLinkDirective, HorizontalNavigationTabComponent } from '@lucca-front/ng/horizontal-navigation';
-import { NumericBadgeComponent } from '@lucca-front/ng/numeric-badge';
 import { applicationConfig, Meta, moduleMetadata } from '@storybook/angular';
 import { generateInputs } from 'stories/helpers/stories';
 
@@ -20,28 +19,51 @@ export default {
 		container: {
 			description: 'Applique un container autour des liens pour aligner le composant avec le contenu de la page.',
 		},
-		numericBadge: {
-			description: 'Présente un exemple avec Numeric Badge.',
+		selected: {
+			control: {
+				type: 'range',
+				min: 1,
+				max: 3,
+			},
 		},
 	},
 	decorators: [
 		moduleMetadata({
-			imports: [HorizontalNavigationComponent, HorizontalNavigationLinkDirective, NumericBadgeComponent, HorizontalNavigationTabComponent],
+			imports: [HorizontalNavigationComponent, HorizontalNavigationLinkDirective, HorizontalNavigationTabComponent],
 		}),
 		applicationConfig({
 			providers: [provideRouter([])],
 		}),
 	],
 	render: (args, { argTypes }) => {
-		const { numericBadge, ...otherArgs } = args;
-		const numericBadgeElement = numericBadge ? ` <lu-numeric-badge [value]="888" />` : ``;
+		const { numericBadge, disabled, selected, ...otherArgs } = args;
+		const disabledParam = disabled ? ` disabled` : ``;
+		const selectedParam = selected !== 1 ? ` [selected]="${selected}"` : ``;
 
 		return {
-			template: `<lu-horizontal-navigation tablist${generateInputs(otherArgs, argTypes)}>
-	<button type="button" luHorizontalNavigationTab>Tab 1${numericBadgeElement}</button>
-	<button type="button" luHorizontalNavigationTab>Tab 2${numericBadgeElement}</button>
-	<button type="button" luHorizontalNavigationTab>Tab 3${numericBadgeElement}</button>
-</lu-horizontal-navigation>`,
+			template: `<lu-horizontal-navigation${selectedParam} tablist${generateInputs(otherArgs, argTypes)}>
+	<lu-horizontal-navigation-tab label="Tab 1">Contenu 1</lu-horizontal-navigation-tab>
+	<lu-horizontal-navigation-tab label="Tab 2">Contenu 2</lu-horizontal-navigation-tab>
+	<lu-horizontal-navigation-tab label="Tab 3">Contenu 3</lu-horizontal-navigation-tab>
+	<lu-horizontal-navigation-tab label="Tab 4"${disabledParam}>Contenu 4</lu-horizontal-navigation-tab>
+</lu-horizontal-navigation>
+
+<div id="panel-1" aria-labelledby="tab-1" role="tabpanel" tabindex="0" class="horizontalNavigation_panel is-active">
+	<p>Contenu 1</p>
+</div>
+
+<div id="panel-2" aria-labelledby="tab-2" role="tabpanel" tabindex="0" class="horizontalNavigation_panel">
+	<p>Contenu 2</p>
+</div>
+
+<div id="panel-3" aria-labelledby="tab-3" role="tabpanel" tabindex="0" class="horizontalNavigation_panel">
+	<p>Contenu 3</p>
+</div>
+
+<div id="panel-4" aria-labelledby="tab-4" role="tabpanel" tabindex="0" class="horizontalNavigation_panel">
+	<p>Contenu 4</p>
+</div>
+`,
 		};
 	},
 } as Meta;
@@ -51,6 +73,7 @@ export const Basic = {
 		noBorder: false,
 		container: false,
 		size: null,
-		numericBadge: false,
+		disabled: false,
+		selected: 1,
 	},
 };

@@ -68,6 +68,18 @@ function getTemplate(args: HorizontalNavigationBasicStory): string {
 			</button>
 		</li>
 	</ul>
+</div>
+
+<div id="panel1" aria-labelledby="tab1" role="tabpanel" tabindex="0" class="horizontalNavigation_panel is-active">
+	<p>Content 1</p>
+</div>
+
+<div id="panel2" aria-labelledby="tab2" role="tabpanel" tabindex="0" class="horizontalNavigation_panel">
+	<p>Content 2</p>
+</div>
+
+<div id="panel3" aria-labelledby="tab3" role="tabpanel" tabindex="0" class="horizontalNavigation_panel">
+	<p>Content 3</p>
 </div>`;
 }
 

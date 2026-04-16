@@ -1,0 +1,15 @@
+<button
+	#button
+	[attr.tabindex]="!selected() ? '-1' : null"
+	[attr.aria-selected]="selected()"
+	[attr.disabled]="disabled() ? 'disabled' : null"
+	[attr.aria-controls]="'TODO'"
+	[attr.id]="'TODO'"
+	(keydown)="changeTab($event)"
+	(click)="selectTab()"
+	role="tab"
+	type="button"
+	class="horizontalNavigation-list-item-action"
+>
+	<ng-container *luPortal="label()" />
+</button>

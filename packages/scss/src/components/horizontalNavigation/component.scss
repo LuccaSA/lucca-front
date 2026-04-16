@@ -138,5 +138,15 @@
 				font-weight: var(--pr-t-font-fontWeight-semibold);
 			}
 		}
+
+		.horizontalNavigation_panel {
+			&:focus-visible {
+				@include a11y.focusVisible;
+			}
+
+			&:not(.is-active) {
+				display: none;
+			}
+		}
 	}
 }

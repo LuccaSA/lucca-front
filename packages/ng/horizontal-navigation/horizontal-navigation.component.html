@@ -8,10 +8,8 @@
 
 <ng-template #horizontalNavigationList>
 	<ul class="horizontalNavigation-list" [attr.role]="tablist() ? 'tablist' : null">
-		@if (tabs()) {
-			@for (tab of tabs(); track $index) {
-				<li class="horizontalNavigation-list-item" role="presentation"></li>
-			}
+		@if (tablist()) {
+			<ng-content />
 		} @else {
 			@for (link of links(); track $index) {
 				<li class="horizontalNavigation-list-item">
