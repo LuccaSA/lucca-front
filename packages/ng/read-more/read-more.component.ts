@@ -11,7 +11,7 @@ import { LU_READMORE_TRANSLATIONS } from './read-more.translate';
 	host: {
 		class: 'readMore',
 		'[style.--components-readMore-lineClamp]': 'lineClamp()',
-		'[style.--components-readMore-content-lastChild-content]': 'labelReadLess',
+		'[style.--components-readMore-content-lastChild-content]': '`"${labelReadLess()}"`',
 		'[class.is-disabled]': '!expanded() && !isClamped()',
 		'[class.mod-openOnly]': 'openOnly()',
 		'[class.mod-sunken]': 'surface() === `sunken`',
