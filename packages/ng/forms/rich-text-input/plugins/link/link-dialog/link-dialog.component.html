@@ -6,9 +6,9 @@
 			</lu-form-field>
 		</lu-dialog-content>
 		<lu-dialog-footer>
-			@if (dialogData) {
+			@if (dialogData.url && dialogData.canDelete) {
 				<div class="footer-content">
-					<button type="button" luButton="ghost" delete (click)="deleteLink()">{{ intl().linksDelete }}</button>
+					<button type="button" luButton="ghost" critical (click)="deleteLink()">{{ intl().linksDelete }}</button>
 				</div>
 			}
 			<div class="footer-actions">
