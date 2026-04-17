@@ -160,7 +160,8 @@
 			padding: var(--components-dialog-insideHeaderTitlePadding);
 			text-align: var(--components-dialog-insideHeaderTitleAlign);
 			margin: 0;
-			overflow-wrap: anywhere;
+			overflow-wrap: break-word;
+			hyphens: auto;
 		}
 
 		.dialog_backdrop {
