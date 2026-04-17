@@ -1,0 +1,7 @@
+@use '@lucca-front/scss/src/components/timepicker';
+
+@layer base {
+	lu-time-picker-range {
+		display: contents;
+	}
+}
