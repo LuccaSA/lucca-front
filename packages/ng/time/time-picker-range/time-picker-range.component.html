@@ -1,0 +1,9 @@
+<div class="timePicker">
+	<div class="timePicker-fieldset">
+		<lu-time-picker [label]="`${label()} (TODO start)`" [forceMeridiemDisplay]="forceMeridiemDisplay()" />
+		<label role="presentation" for="TODO-end-hour-input" class="timePicker-arrow">
+			<lu-icon class="timePicker-arrow-icon" icon="arrowRight" />
+		</label>
+		<lu-time-picker [label]="`${label()} (TODO end)`" [forceMeridiemDisplay]="forceMeridiemDisplay()" />
+	</div>
+</div>

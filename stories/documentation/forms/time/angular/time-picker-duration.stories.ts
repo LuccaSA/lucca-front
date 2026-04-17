@@ -5,10 +5,10 @@ import { INLINE_MESSAGE_STATE } from '@lucca-front/ng/inline-message';
 import { BASE_PICKER_SIZE, DurationPickerComponent } from '@lucca-front/ng/time';
 import { Meta, moduleMetadata, StoryObj } from '@storybook/angular';
 import { StoryModelDisplayComponent } from 'stories/helpers/story-model-display.component';
-import { cleanupTemplate, generateInputs, setStoryOptions } from '../../../helpers/stories';
+import { generateInputs, setStoryOptions } from '../../../helpers/stories';
 
 export default {
-	title: 'Documentation/Forms/Time/Duration Picker/Angular Form',
+	title: 'Documentation/Forms/Time/Angular/Duration',
 	decorators: [
 		moduleMetadata({
 			imports: [DurationPickerComponent, FormFieldComponent, FormsModule, BrowserAnimationsModule, StoryModelDisplayComponent],
@@ -94,7 +94,7 @@ export const Basic: StoryObj<DurationPickerComponent & FormFieldComponent & { re
 	render: (args, { argTypes }) => {
 		const { label, hiddenLabel, tooltip, inlineMessage, inlineMessageState, size, presentation, ...inputArgs } = args;
 		return {
-			template: cleanupTemplate(`<lu-form-field [rolePresentationLabel]="true" ${generateInputs(
+			template: `<lu-form-field [rolePresentationLabel]="true"${generateInputs(
 				{
 					label,
 					hiddenLabel,
@@ -106,10 +106,10 @@ export const Basic: StoryObj<DurationPickerComponent & FormFieldComponent & { re
 				},
 				argTypes,
 			)}>
-	<lu-duration-picker label="${label}" ${generateInputs(inputArgs, argTypes)} [(ngModel)]="example">
-	</lu-duration-picker>
+	<lu-duration-picker label="${label}"${generateInputs(inputArgs, argTypes)} [(ngModel)]="example" />
 </lu-form-field>
-<pr-story-model-display>{{ example }}</pr-story-model-display>`),
+
+<pr-story-model-display>{{ example }}</pr-story-model-display>`,
 		};
 	},
 	args: {

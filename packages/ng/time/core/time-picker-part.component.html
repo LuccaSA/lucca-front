@@ -19,7 +19,7 @@
 			(focus)="timePickerInput.select()"
 			[style]="'--components-timepicker-input-digits:' + digitNumber()"
 		/>
-		<span aria-hidden="true" class="timePicker-fieldset-group-textfield-display">{{ valueLabel() }}</span>
+		<span aria-hidden="true" class="timePicker-fieldset-group-textfield-display" [attr.data-content-before]="valueLabel()"></span>
 	</div>
 	@if (displayArrows()) {
 		<button class="timePicker-fieldset-group-stepper" type="button" tabindex="-1" aria-hidden="true" luRepeatOnHold (hold)="up()">

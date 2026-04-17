@@ -28,6 +28,24 @@
 			&:focus-within {
 				@include a11y.focusVisible($offset: 3px);
 			}
+
+			.timePicker-fieldset {
+				box-shadow: initial;
+
+				&:focus-within {
+					outline: initial;
+				}
+			}
+		}
+
+		.timePicker-arrow {
+			align-self: stretch;
+			display: flex;
+			align-items: center;
+		}
+
+		.timePicker-arrow-icon .lucca-icon {
+			@include icons.S;
 		}
 
 		.timePicker-fieldset-groupSeparator {

@@ -5,10 +5,10 @@ import { INLINE_MESSAGE_STATE } from '@lucca-front/ng/inline-message';
 import { BASE_PICKER_SIZE, TimePickerComponent } from '@lucca-front/ng/time';
 import { Meta, moduleMetadata, StoryObj } from '@storybook/angular';
 import { StoryModelDisplayComponent } from 'stories/helpers/story-model-display.component';
-import { cleanupTemplate, generateInputs, setStoryOptions } from '../../../helpers/stories';
+import { generateInputs, setStoryOptions } from '../../../helpers/stories';
 
 export default {
-	title: 'Documentation/Forms/Time/Time Picker/Angular Form',
+	title: 'Documentation/Forms/Time/Angular/Basic',
 	decorators: [
 		moduleMetadata({
 			imports: [TimePickerComponent, FormFieldComponent, FormsModule, BrowserAnimationsModule, StoryModelDisplayComponent],
@@ -95,15 +95,16 @@ export const Basic: StoryObj<TimePickerComponent & FormFieldComponent & { requir
 	render: (args, { argTypes }) => {
 		const { label, hiddenLabel, tooltip, inlineMessage, inlineMessageState, size, forceMeridiemDisplay, presentation, ...inputArgs } = args;
 		return {
-			template: cleanupTemplate(`
-<lu-form-field [label]="labelID" [rolePresentationLabel]="true" ${generateInputs({ hiddenLabel, tooltip, inlineMessage, inlineMessageState, size, presentation }, argTypes)}>
-<lu-time-picker label="${label}" ${generateInputs(inputArgs, argTypes)} ${typeof forceMeridiemDisplay === 'boolean' ? `[forceMeridiemDisplay]="${forceMeridiemDisplay}"` : ''} [(ngModel)]="example" />
+			template: `
+<lu-form-field [label]="labelID" [rolePresentationLabel]="true"${generateInputs({ hiddenLabel, tooltip, inlineMessage, inlineMessageState, size, presentation }, argTypes)}>
+	<lu-time-picker label="${label}"${generateInputs(inputArgs, argTypes)} ${forceMeridiemDisplay !== null ? `[forceMeridiemDisplay]="${forceMeridiemDisplay}"` : ''} [(ngModel)]="example" />
 	<ng-template #labelID>
-			<span aria-hidden="true">${label}</span>
-		</ng-template>
+		<span aria-hidden="true">${label}</span>
+	</ng-template>
 </lu-form-field>
+
 <pr-story-model-display>{{ example }}</pr-story-model-display>
-`),
+`,
 		};
 	},
 	args: {
