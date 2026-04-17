@@ -124,6 +124,7 @@
 		.richTextField-content-placeholder {
 			position: absolute;
 			pointer-events: none;
+			inset-block-start: 0;
 			padding: var(--pr-t-spacings-100);
 			user-select: none;
 			color: var(--components-richTextField-placeholder-color);
