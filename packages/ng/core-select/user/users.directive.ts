@@ -80,7 +80,7 @@ export class LuCoreSelectUsersDirective<T extends LuCoreSelectUser = LuCoreSelec
 
 		effect(() => {
 			const enableFormerEmployees = this.enableFormerEmployees();
-			if (this.clue() || !enableFormerEmployees) {
+			if (!enableFormerEmployees) {
 				untracked(() => this.select.panelHeaderTpl.set(undefined));
 			} else {
 				untracked(() => this.select.panelHeaderTpl.set(LuCoreSelectFormerEmployeesComponent));
