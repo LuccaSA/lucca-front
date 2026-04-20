@@ -56,8 +56,20 @@ export class ActivityFeedStepComponent {
 		if (!date) {
 			return null;
 		}
-		const formatted = this.#intlDateTimeFormat.format(date);
-		const parts = formatted.split(', ');
-		return `${parts[0].charAt(0).toUpperCase() + parts[0].slice(1)} ${this.intl().at} ${parts[1]}`;
+		// Use formatToParts for reliable cross-browser parsing (especially Safari)
+		const parts = this.#intlDateTimeFormat.formatToParts(date);
+		const datePart = parts
+			.filter(({ type }) => ['weekday', 'day', 'month', 'year'].includes(type))
+			.map(({ value }) => value)
+			.join(' ');
+		const timePart = parts
+			.filter(({ type }) => ['hour', 'minute'].includes(type))
+			.map(({ value }) => value)
+			.join(':');
+		if (timePart) {
+			return `${datePart.charAt(0).toUpperCase() + datePart.slice(1)} ${this.intl().at} ${timePart}`;
+		} else {
+			return datePart.charAt(0).toUpperCase() + datePart.slice(1);
+		}
 	});
 }
