@@ -42,6 +42,7 @@
 			align-self: stretch;
 			display: flex;
 			align-items: center;
+			color: var(--pr-t-color-text-subtle);
 		}
 
 		.timePicker-arrow-icon .lucca-icon {
@@ -65,6 +66,9 @@
 
 			~ .timePicker-fieldset-group {
 				margin-inline-start: calc(var(--pr-t-spacings-50) * -1);
+
+				--components-timepicker-input-padding-inline: var(--components-timepicker-end) var(--components-timepicker-start);
+				--components-timepicker-display-inset-inline: var(--components-timepicker-input-padding-inline);
 			}
 		}
 
@@ -101,7 +105,8 @@
 
 		.timePicker-fieldset-group-textfield-display {
 			position: absolute;
-			inset: var(--components-timepicker-display-padding-inline) var(--components-timepicker-display-padding-block);
+			inset-block: var(--components-timepicker-display-inset-block);
+			inset-inline: var(--components-timepicker-display-inset-inline);
 			border-radius: var(--pr-t-border-radius-50);
 			pointer-events: none;
 			display: grid;
@@ -152,8 +157,8 @@
 
 		.timePicker-fieldset-meridiem {
 			box-sizing: content-box;
-			inline-size: calc(var(--components-timepicker-input-minInlineSize) + 2ch);
-			padding-inline: var(--components-timepicker-display-padding-block);
+			inline-size: calc(var(--pr-t-spacings-100) + 2ch);
+			padding-inline: var(--pr-t-spacings-50);
 			position: relative;
 			align-self: stretch;
 			margin-inline-start: calc(var(--pr-t-spacings-50) * -1);
@@ -161,7 +166,8 @@
 			&::after {
 				content: '';
 				position: absolute;
-				inset: var(--components-timepicker-display-padding-inline) var(--components-timepicker-display-padding-block);
+				inset-block: var(--components-timepicker-display-inset-block);
+				inset-inline: var(--pr-t-spacings-50);
 				border-radius: var(--pr-t-border-radius-50);
 				display: grid;
 				place-items: center;
