@@ -93,7 +93,7 @@ const Template = (args) => ({
 		.demo {
 		display: flex;
 		min-block-size: 30rem;
-		padding-top: 4rem;
+		padding-block-start: 4rem;
 		align-items: center;
 		justify-content: center;
 	}

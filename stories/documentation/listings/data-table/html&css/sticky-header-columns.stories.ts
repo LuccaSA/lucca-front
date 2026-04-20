@@ -8,7 +8,7 @@ export default {
 } as Meta;
 
 function getTemplate(args: StickyHeaderColumnsStory): string {
-	return `<div class="dataTableWrapper" style="width: 30rem; height: 10rem">
+	return `<div class="dataTableWrapper" style="inline-size: 30rem; height: 10rem">
 	<table class="dataTable mod-stickyHeader">
 		<thead class="dataTable-head">
 			<tr class="dataTable-head-row">

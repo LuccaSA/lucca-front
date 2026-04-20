@@ -71,7 +71,7 @@
 
 		.fileUpload-instruction-action {
 			display: block;
-			margin-bottom: var(--fileUpload-instruction-action-marginBottom);
+			margin-block-end: var(--fileUpload-instruction-action-marginBottom);
 			line-height: var(--pr-t-font-body-M-lineHeight);
 
 			span {

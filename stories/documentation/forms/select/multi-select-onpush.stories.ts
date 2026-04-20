@@ -1,11 +1,11 @@
-import { applicationConfig, Meta } from '@storybook/angular';
-import { LuMultiSelectInputComponent } from '@lucca-front/ng/multi-select';
+import { allLegumes } from '@/stories/forms/select/select.utils';
+import { provideHttpClient } from '@angular/common/http';
 import { ChangeDetectionStrategy, Component, LOCALE_ID } from '@angular/core';
 import { provideAnimations } from '@angular/platform-browser/animations';
-import { provideHttpClient } from '@angular/common/http';
-import { allLegumes } from '@/stories/forms/select/select.utils';
 import { LuCoreSelectApiV4Directive } from '@lucca-front/ng/core-select/api';
 import { FormFieldComponent } from '@lucca-front/ng/form-field';
+import { LuMultiSelectInputComponent } from '@lucca-front/ng/multi-select';
+import { applicationConfig, Meta } from '@storybook/angular';
 
 @Component({
 	selector: 'multi-select-onpush',
@@ -15,12 +15,12 @@ import { FormFieldComponent } from '@lucca-front/ng/form-field';
 		`
 			lu-form-field {
 				display: block;
-				padding-top: 550px;
-				padding-bottom: 600px;
+				padding-block-start: 550px;
+				padding-block-end: 600px;
 			}
 			.scroll-test {
 				overflow: auto;
-				height: 600px;
+				block-size: 600px;
 			}
 		`,
 	],
