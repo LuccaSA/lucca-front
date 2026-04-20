@@ -1,0 +1,664 @@
+<table class="demo-QAtable">
+	<tbody>
+		<tr>
+			<td></td>
+			<td style="width: 50%">HTML</td>
+			<td style="width: 50%">Angular</td>
+		</tr>
+		<tr>
+			<td>Default (radio)</td>
+			<td>
+				<div class="inputFramedWrapper">
+					<div class="inputFramed">
+						<div class="inputFramed-header">
+							<div class="inputFramed-header-field form-field">
+								<label class="formLabel inputFramed-header-label" for="radio-default-html-a">Option A</label>
+								<span class="radioField">
+									<input
+										type="radio"
+										class="radioField-input inputFramed-header-input"
+										id="radio-default-html-a"
+										name="radio-default-html"
+										checked
+									/>
+									<span class="radioField-icon inputFramed-header-icon" aria-hidden="true"
+										><span class="radioField-icon-check"></span
+									></span>
+								</span>
+							</div>
+						</div>
+					</div>
+					<div class="inputFramed">
+						<div class="inputFramed-header">
+							<div class="inputFramed-header-field form-field">
+								<label class="formLabel inputFramed-header-label" for="radio-default-html-b">Option B</label>
+								<span class="radioField">
+									<input
+										type="radio"
+										class="radioField-input inputFramed-header-input"
+										id="radio-default-html-b"
+										name="radio-default-html"
+									/>
+									<span class="radioField-icon inputFramed-header-icon" aria-hidden="true"
+										><span class="radioField-icon-check"></span
+									></span>
+								</span>
+							</div>
+						</div>
+					</div>
+				</div>
+			</td>
+			<td>
+				<lu-form-field label="Label" hiddenLabel>
+					<lu-radio-group-input [(ngModel)]="radioDefault" framed>
+						<lu-radio value="A">Option A</lu-radio>
+						<lu-radio value="B">Option B</lu-radio>
+					</lu-radio-group-input>
+				</lu-form-field>
+			</td>
+		</tr>
+		<tr>
+			<td>Default (checkbox)</td>
+			<td>
+				<div class="inputFramedWrapper">
+					<div class="inputFramed">
+						<div class="inputFramed-header">
+							<div class="inputFramed-header-field form-field">
+								<label class="formLabel inputFramed-header-label" for="cb-default-html-a">Option A</label>
+								<span class="checkboxField">
+									<input type="checkbox" class="checkboxField-input inputFramed-header-input" id="cb-default-html-a" checked />
+									<span class="checkboxField-icon inputFramed-header-icon" aria-hidden="true"
+										><span class="checkboxField-icon-check"></span
+									></span>
+								</span>
+							</div>
+						</div>
+					</div>
+					<div class="inputFramed">
+						<div class="inputFramed-header">
+							<div class="inputFramed-header-field form-field">
+								<label class="formLabel inputFramed-header-label" for="cb-default-html-b">Option B</label>
+								<span class="checkboxField">
+									<input type="checkbox" class="checkboxField-input inputFramed-header-input" id="cb-default-html-b" />
+									<span class="checkboxField-icon inputFramed-header-icon" aria-hidden="true"
+										><span class="checkboxField-icon-check"></span
+									></span>
+								</span>
+							</div>
+						</div>
+					</div>
+				</div>
+			</td>
+			<td>
+				<lu-form-field label="Label" hiddenLabel layout="fieldset">
+					<div class="inputFramedWrapper">
+						<lu-input-framed>
+							<lu-form-field label="Option A">
+								<lu-checkbox-input [(ngModel)]="checkboxA" />
+							</lu-form-field>
+						</lu-input-framed>
+						<lu-input-framed>
+							<lu-form-field label="Option B">
+								<lu-checkbox-input [(ngModel)]="checkboxB" />
+							</lu-form-field>
+						</lu-input-framed>
+					</div>
+				</lu-form-field>
+			</td>
+		</tr>
+		<tr>
+			<td>Disabled</td>
+			<td>
+				<div class="inputFramedWrapper">
+					<div class="inputFramed">
+						<div class="inputFramed-header">
+							<div class="inputFramed-header-field form-field">
+								<label class="formLabel inputFramed-header-label" for="radio-disabled-html-a">Option A (radio)</label>
+								<span class="radioField">
+									<input
+										type="radio"
+										class="radioField-input inputFramed-header-input"
+										id="radio-disabled-html-a"
+										name="radio-disabled-html"
+										checked
+										disabled
+									/>
+									<span class="radioField-icon inputFramed-header-icon" aria-hidden="true"
+										><span class="radioField-icon-check"></span
+									></span>
+								</span>
+							</div>
+						</div>
+					</div>
+					<div class="inputFramed">
+						<div class="inputFramed-header">
+							<div class="inputFramed-header-field form-field">
+								<label class="formLabel inputFramed-header-label" for="radio-disabled-html-b">Option B (radio)</label>
+								<span class="radioField">
+									<input
+										type="radio"
+										class="radioField-input inputFramed-header-input"
+										id="radio-disabled-html-b"
+										name="radio-disabled-html"
+										disabled
+									/>
+									<span class="radioField-icon inputFramed-header-icon" aria-hidden="true"
+										><span class="radioField-icon-check"></span
+									></span>
+								</span>
+							</div>
+						</div>
+					</div>
+					<div class="inputFramed">
+						<div class="inputFramed-header">
+							<div class="inputFramed-header-field form-field">
+								<label class="formLabel inputFramed-header-label" for="cb-disabled-html-a">Option A (checkbox)</label>
+								<span class="checkboxField">
+									<input type="checkbox" class="checkboxField-input inputFramed-header-input" id="cb-disabled-html-a" checked disabled />
+									<span class="checkboxField-icon inputFramed-header-icon" aria-hidden="true"
+										><span class="checkboxField-icon-check"></span
+									></span>
+								</span>
+							</div>
+						</div>
+					</div>
+					<div class="inputFramed">
+						<div class="inputFramed-header">
+							<div class="inputFramed-header-field form-field">
+								<label class="formLabel inputFramed-header-label" for="cb-disabled-html-b">Option B (checkbox)</label>
+								<span class="checkboxField">
+									<input type="checkbox" class="checkboxField-input inputFramed-header-input" id="cb-disabled-html-b" disabled />
+									<span class="checkboxField-icon inputFramed-header-icon" aria-hidden="true"
+										><span class="checkboxField-icon-check"></span
+									></span>
+								</span>
+							</div>
+						</div>
+					</div>
+				</div>
+			</td>
+			<td>
+				<lu-form-field label="Label" hiddenLabel>
+					<lu-radio-group-input [(ngModel)]="radioDisabled" framed>
+						<lu-radio value="A" disabled>Option A (radio)</lu-radio>
+						<lu-radio value="B" disabled>Option B (radio)</lu-radio>
+					</lu-radio-group-input>
+				</lu-form-field>
+				<lu-form-field label="Label" hiddenLabel layout="fieldset">
+					<div class="inputFramedWrapper">
+						<lu-input-framed>
+							<lu-form-field label="Option A (checkbox)">
+								<lu-checkbox-input [(ngModel)]="checkboxDisabledA" disabled />
+							</lu-form-field>
+						</lu-input-framed>
+						<lu-input-framed>
+							<lu-form-field label="Option B (checkbox)">
+								<lu-checkbox-input [(ngModel)]="checkboxDisabledB" disabled />
+							</lu-form-field>
+						</lu-input-framed>
+					</div>
+				</lu-form-field>
+			</td>
+		</tr>
+		<tr>
+			<td>With tag</td>
+			<td>
+				<div class="inputFramedWrapper">
+					<div class="inputFramed">
+						<div class="inputFramed-header">
+							<div class="inputFramed-header-field form-field">
+								<label class="formLabel inputFramed-header-label" for="radio-tag-html-a">
+									Option A
+									<span class="formLabel-tag tag palette-product">Tag</span>
+								</label>
+								<span class="radioField">
+									<input
+										type="radio"
+										class="radioField-input inputFramed-header-input"
+										id="radio-tag-html-a"
+										name="radio-tag-html"
+										checked
+									/>
+									<span class="radioField-icon inputFramed-header-icon" aria-hidden="true"
+										><span class="radioField-icon-check"></span
+									></span>
+								</span>
+							</div>
+						</div>
+					</div>
+					<div class="inputFramed">
+						<div class="inputFramed-header">
+							<div class="inputFramed-header-field form-field">
+								<label class="formLabel inputFramed-header-label" for="radio-tag-html-b">
+									Option B
+									<span class="formLabel-tag tag palette-product">Tag</span>
+								</label>
+								<span class="radioField">
+									<input type="radio" class="radioField-input inputFramed-header-input" id="radio-tag-html-b" name="radio-tag-html" />
+									<span class="radioField-icon inputFramed-header-icon" aria-hidden="true"
+										><span class="radioField-icon-check"></span
+									></span>
+								</span>
+							</div>
+						</div>
+					</div>
+				</div>
+			</td>
+			<td>
+				<lu-form-field label="Label" hiddenLabel>
+					<lu-radio-group-input [(ngModel)]="radioTag" framed>
+						<lu-radio value="A" tag="Tag">Option A</lu-radio>
+						<lu-radio value="B" tag="Tag">Option B</lu-radio>
+					</lu-radio-group-input>
+				</lu-form-field>
+			</td>
+		</tr>
+		<tr>
+			<td>With info</td>
+			<td>
+				<div class="inputFramedWrapper">
+					<div class="inputFramed">
+						<div class="inputFramed-header">
+							<div class="inputFramed-header-field form-field">
+								<label class="formLabel inputFramed-header-label" for="radio-info-html-a">Option A</label>
+								<span class="radioField">
+									<input
+										type="radio"
+										class="radioField-input inputFramed-header-input"
+										id="radio-info-html-a"
+										name="radio-info-html"
+										checked
+									/>
+									<span class="radioField-icon inputFramed-header-icon" aria-hidden="true"
+										><span class="radioField-icon-check"></span
+									></span>
+								</span>
+							</div>
+							<div class="inputFramed-header-info">Additional information for option A</div>
+						</div>
+					</div>
+					<div class="inputFramed">
+						<div class="inputFramed-header">
+							<div class="inputFramed-header-field form-field">
+								<label class="formLabel inputFramed-header-label" for="radio-info-html-b">Option B</label>
+								<span class="radioField">
+									<input type="radio" class="radioField-input inputFramed-header-input" id="radio-info-html-b" name="radio-info-html" />
+									<span class="radioField-icon inputFramed-header-icon" aria-hidden="true"
+										><span class="radioField-icon-check"></span
+									></span>
+								</span>
+							</div>
+							<div class="inputFramed-header-info">Additional information for option B</div>
+						</div>
+					</div>
+				</div>
+			</td>
+			<td>
+				<lu-form-field label="Label" hiddenLabel>
+					<lu-radio-group-input [(ngModel)]="radioInfo" framed>
+						<lu-radio value="A">
+							Option A
+							<ng-container info>Additional information for option A</ng-container>
+						</lu-radio>
+						<lu-radio value="B">
+							Option B
+							<ng-container info>Additional information for option B</ng-container>
+						</lu-radio>
+					</lu-radio-group-input>
+				</lu-form-field>
+			</td>
+		</tr>
+		<tr>
+			<td>With panel</td>
+			<td>
+				<div class="inputFramedWrapper">
+					<div class="inputFramed">
+						<div class="inputFramed-header">
+							<div class="inputFramed-header-field form-field">
+								<label class="formLabel inputFramed-header-label" for="radio-panel-html-a">Option A</label>
+								<span class="radioField">
+									<input
+										type="radio"
+										class="radioField-input inputFramed-header-input"
+										id="radio-panel-html-a"
+										name="radio-panel-html"
+										checked
+									/>
+									<span class="radioField-icon inputFramed-header-icon" aria-hidden="true"
+										><span class="radioField-icon-check"></span
+									></span>
+								</span>
+							</div>
+						</div>
+						<div class="inputFramed-content">Lorem ipsum dolor sit amet</div>
+					</div>
+					<div class="inputFramed">
+						<div class="inputFramed-header">
+							<div class="inputFramed-header-field form-field">
+								<label class="formLabel inputFramed-header-label" for="radio-panel-html-b">Option B</label>
+								<span class="radioField">
+									<input type="radio" class="radioField-input inputFramed-header-input" id="radio-panel-html-b" name="radio-panel-html" />
+									<span class="radioField-icon inputFramed-header-icon" aria-hidden="true"
+										><span class="radioField-icon-check"></span
+									></span>
+								</span>
+							</div>
+						</div>
+						<div class="inputFramed-content">Lorem ipsum dolor sit amet</div>
+					</div>
+				</div>
+			</td>
+			<td>
+				<lu-form-field label="Label" hiddenLabel>
+					<lu-radio-group-input [(ngModel)]="radioPanel" framed>
+						<lu-radio value="A" framedPortal="Lorem ipsum dolor sit amet">Option A</lu-radio>
+						<lu-radio value="B" framedPortal="Lorem ipsum dolor sit amet">Option B</lu-radio>
+					</lu-radio-group-input>
+				</lu-form-field>
+			</td>
+		</tr>
+		<tr>
+			<td>With illustration</td>
+			<td>
+				<div class="inputFramedWrapper">
+					<div class="inputFramed">
+						<div class="inputFramed-header">
+							<div class="inputFramed-header-field form-field">
+								<label class="formLabel inputFramed-header-label" for="radio-illus-html-a">Option A</label>
+								<span class="radioField">
+									<input
+										type="radio"
+										class="radioField-input inputFramed-header-input"
+										id="radio-illus-html-a"
+										name="radio-illus-html"
+										checked
+									/>
+									<span class="radioField-icon inputFramed-header-icon" aria-hidden="true"
+										><span class="radioField-icon-check"></span
+									></span>
+								</span>
+							</div>
+							<div class="inputFramed-header-illustration">
+								<div
+									style="background-color: var(--palettes-product-100); color: var(--palettes-product-700)"
+									class="pr-u-padding100 pr-u-borderRadiusXL pr-u-displayFlex"
+								>
+									<span class="lucca-icon icon-moneyBag" aria-hidden="true"></span>
+								</div>
+							</div>
+						</div>
+					</div>
+					<div class="inputFramed">
+						<div class="inputFramed-header">
+							<div class="inputFramed-header-field form-field">
+								<label class="formLabel inputFramed-header-label" for="radio-illus-html-b">Option B</label>
+								<span class="radioField">
+									<input type="radio" class="radioField-input inputFramed-header-input" id="radio-illus-html-b" name="radio-illus-html" />
+									<span class="radioField-icon inputFramed-header-icon" aria-hidden="true"
+										><span class="radioField-icon-check"></span
+									></span>
+								</span>
+							</div>
+							<div class="inputFramed-header-illustration">
+								<div
+									style="background-color: var(--palettes-product-100); color: var(--palettes-product-700)"
+									class="pr-u-padding100 pr-u-borderRadiusXL pr-u-displayFlex"
+								>
+									<span class="lucca-icon icon-moneyBag" aria-hidden="true"></span>
+								</div>
+							</div>
+						</div>
+					</div>
+				</div>
+			</td>
+			<td>
+				<lu-form-field label="Label" hiddenLabel>
+					<lu-radio-group-input [(ngModel)]="radioIllustration" framed>
+						<lu-radio value="A">
+							Option A
+							<ng-container illustration>
+								<div
+									style="background-color: var(--palettes-product-100); color: var(--palettes-product-700)"
+									class="pr-u-padding100 pr-u-borderRadiusXL pr-u-displayFlex"
+								>
+									<lu-icon icon="moneyBag" />
+								</div>
+							</ng-container>
+						</lu-radio>
+						<lu-radio value="B">
+							Option B
+							<ng-container illustration>
+								<div
+									style="background-color: var(--palettes-product-100); color: var(--palettes-product-700)"
+									class="pr-u-padding100 pr-u-borderRadiusXL pr-u-displayFlex"
+								>
+									<lu-icon icon="moneyBag" />
+								</div>
+							</ng-container>
+						</lu-radio>
+					</lu-radio-group-input>
+				</lu-form-field>
+			</td>
+		</tr>
+		<tr>
+			<td>Size L</td>
+			<td>
+				<div class="inputFramedWrapper">
+					<div class="inputFramed mod-L">
+						<div class="inputFramed-header">
+							<div class="inputFramed-header-field form-field">
+								<label class="formLabel inputFramed-header-label" for="radio-L-html-a">Option A</label>
+								<span class="radioField">
+									<input type="radio" class="radioField-input inputFramed-header-input" id="radio-L-html-a" name="radio-L-html" checked />
+									<span class="radioField-icon inputFramed-header-icon" aria-hidden="true"
+										><span class="radioField-icon-check"></span
+									></span>
+								</span>
+							</div>
+						</div>
+					</div>
+					<div class="inputFramed mod-L">
+						<div class="inputFramed-header">
+							<div class="inputFramed-header-field form-field">
+								<label class="formLabel inputFramed-header-label" for="radio-L-html-b">Option B</label>
+								<span class="radioField">
+									<input type="radio" class="radioField-input inputFramed-header-input" id="radio-L-html-b" name="radio-L-html" />
+									<span class="radioField-icon inputFramed-header-icon" aria-hidden="true"
+										><span class="radioField-icon-check"></span
+									></span>
+								</span>
+							</div>
+						</div>
+					</div>
+				</div>
+			</td>
+			<td>
+				<lu-form-field label="Label" hiddenLabel>
+					<lu-radio-group-input [(ngModel)]="radioSizeL" framed framedSize="L">
+						<lu-radio value="A">Option A</lu-radio>
+						<lu-radio value="B">Option B</lu-radio>
+					</lu-radio-group-input>
+				</lu-form-field>
+			</td>
+		</tr>
+		<tr>
+			<td>Center</td>
+			<td>
+				<div class="inputFramedWrapper">
+					<div class="inputFramed mod-center">
+						<div class="inputFramed-header">
+							<div class="inputFramed-header-field form-field">
+								<label class="formLabel inputFramed-header-label" for="radio-center-html-a">Option A with a longer label text</label>
+								<span class="radioField">
+									<input
+										type="radio"
+										class="radioField-input inputFramed-header-input"
+										id="radio-center-html-a"
+										name="radio-center-html"
+										checked
+									/>
+									<span class="radioField-icon inputFramed-header-icon" aria-hidden="true"
+										><span class="radioField-icon-check"></span
+									></span>
+								</span>
+							</div>
+							<div class="inputFramed-header-illustration">
+								<div
+									style="background-color: var(--palettes-product-100); color: var(--palettes-product-700)"
+									class="pr-u-padding100 pr-u-borderRadiusXL pr-u-displayFlex"
+								>
+									<span class="lucca-icon icon-moneyBag" aria-hidden="true"></span>
+								</div>
+							</div>
+						</div>
+					</div>
+					<div class="inputFramed mod-center">
+						<div class="inputFramed-header">
+							<div class="inputFramed-header-field form-field">
+								<label class="formLabel inputFramed-header-label" for="radio-center-html-b">Option B</label>
+								<span class="radioField">
+									<input type="radio" class="radioField-input inputFramed-header-input" id="radio-center-html-b" name="radio-center-html" />
+									<span class="radioField-icon inputFramed-header-icon" aria-hidden="true"
+										><span class="radioField-icon-check"></span
+									></span>
+								</span>
+							</div>
+							<div class="inputFramed-header-illustration">
+								<div
+									style="background-color: var(--palettes-product-100); color: var(--palettes-product-700)"
+									class="pr-u-padding100 pr-u-borderRadiusXL pr-u-displayFlex"
+								>
+									<span class="lucca-icon icon-moneyBag" aria-hidden="true"></span>
+								</div>
+							</div>
+						</div>
+					</div>
+				</div>
+			</td>
+			<td>
+				<lu-form-field label="Label" hiddenLabel>
+					<lu-radio-group-input [(ngModel)]="radioIllustration" framed framedCenter>
+						<lu-radio value="A">
+							Option A with a longer label text
+							<ng-container illustration>
+								<div
+									style="background-color: var(--palettes-product-100); color: var(--palettes-product-700)"
+									class="pr-u-padding100 pr-u-borderRadiusXL pr-u-displayFlex"
+								>
+									<lu-icon icon="moneyBag" />
+								</div>
+							</ng-container>
+						</lu-radio>
+						<lu-radio value="B">
+							Option B
+							<ng-container illustration>
+								<div
+									style="background-color: var(--palettes-product-100); color: var(--palettes-product-700)"
+									class="pr-u-padding100 pr-u-borderRadiusXL pr-u-displayFlex"
+								>
+									<lu-icon icon="moneyBag" />
+								</div>
+							</ng-container>
+						</lu-radio>
+					</lu-radio-group-input>
+				</lu-form-field>
+			</td>
+		</tr>
+		<tr>
+			<td>Grid (2 columns)</td>
+			<td>
+				<div class="grid" style="--grid-columns: 2">
+					<div class="grid-column" style="--grid-colspanAtMediaMinXXS: 1">
+						<div class="inputFramed">
+							<div class="inputFramed-header">
+								<div class="inputFramed-header-field form-field">
+									<label class="formLabel inputFramed-header-label" for="radio-grid-html-a">Option A</label>
+									<span class="radioField">
+										<input
+											type="radio"
+											class="radioField-input inputFramed-header-input"
+											id="radio-grid-html-a"
+											name="radio-grid-html"
+											checked
+										/>
+										<span class="radioField-icon inputFramed-header-icon" aria-hidden="true"
+											><span class="radioField-icon-check"></span
+										></span>
+									</span>
+								</div>
+							</div>
+						</div>
+					</div>
+					<div class="grid-column" style="--grid-colspanAtMediaMinXXS: 1">
+						<div class="inputFramed">
+							<div class="inputFramed-header">
+								<div class="inputFramed-header-field form-field">
+									<label class="formLabel inputFramed-header-label" for="radio-grid-html-b">Option B</label>
+									<span class="radioField">
+										<input type="radio" class="radioField-input inputFramed-header-input" id="radio-grid-html-b" name="radio-grid-html" />
+										<span class="radioField-icon inputFramed-header-icon" aria-hidden="true"
+											><span class="radioField-icon-check"></span
+										></span>
+									</span>
+								</div>
+							</div>
+						</div>
+					</div>
+					<div class="grid-column" style="--grid-colspanAtMediaMinXXS: 1">
+						<div class="inputFramed">
+							<div class="inputFramed-header">
+								<div class="inputFramed-header-field form-field">
+									<label class="formLabel inputFramed-header-label" for="radio-grid-html-c">Option C</label>
+									<span class="radioField">
+										<input type="radio" class="radioField-input inputFramed-header-input" id="radio-grid-html-c" name="radio-grid-html" />
+										<span class="radioField-icon inputFramed-header-icon" aria-hidden="true"
+											><span class="radioField-icon-check"></span
+										></span>
+									</span>
+								</div>
+							</div>
+						</div>
+					</div>
+					<div class="grid-column" style="--grid-colspanAtMediaMinXXS: 1">
+						<div class="inputFramed">
+							<div class="inputFramed-header">
+								<div class="inputFramed-header-field form-field">
+									<label class="formLabel inputFramed-header-label" for="radio-grid-html-d">Option D</label>
+									<span class="radioField">
+										<input type="radio" class="radioField-input inputFramed-header-input" id="radio-grid-html-d" name="radio-grid-html" />
+										<span class="radioField-icon inputFramed-header-icon" aria-hidden="true"
+											><span class="radioField-icon-check"></span
+										></span>
+									</span>
+								</div>
+							</div>
+						</div>
+					</div>
+				</div>
+			</td>
+			<td>
+				<lu-form-field label="Label" hiddenLabel>
+					<lu-radio-group-input [(ngModel)]="radioDefault" framed>
+						<lu-grid columns="2">
+							<lu-grid-column [responsive]="{ colspanAtMediaMinXS: 1 }">
+								<lu-radio value="A">Option A</lu-radio>
+							</lu-grid-column>
+							<lu-grid-column [responsive]="{ colspanAtMediaMinXS: 1 }">
+								<lu-radio value="B">Option B</lu-radio>
+							</lu-grid-column>
+							<lu-grid-column [responsive]="{ colspanAtMediaMinXS: 1 }">
+								<lu-radio value="C">Option C</lu-radio>
+							</lu-grid-column>
+							<lu-grid-column [responsive]="{ colspanAtMediaMinXS: 1 }">
+								<lu-radio value="D">Option D</lu-radio>
+							</lu-grid-column>
+						</lu-grid>
+					</lu-radio-group-input>
+				</lu-form-field>
+			</td>
+		</tr>
+	</tbody>
+</table>
+
+<!-- To tell the ui-diff tool that the page has finished rendering -->
+<span id="ready"></span>
