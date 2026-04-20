@@ -51,9 +51,11 @@ function getTemplate(args: timepickerBasicStory): string {
 			? `
 				<button ${disabled} class="timePicker-fieldset-group-stepper" type="button" tabindex="-1" aria-hidden="true">
 					<span aria-hidden="true" class="lucca-icon icon-northArrow"></span>
+					<span class="pr-u-mask">−</span>
 				</button>
 				<button ${disabled} class="timePicker-fieldset-group-stepper" type="button" tabindex="-1" aria-hidden="true">
 					<span aria-hidden="true" class="lucca-icon icon-southArrow"></span>
+					<span class="pr-u-mask">+</span>
 				</button>`
 			: '';
 	return `
