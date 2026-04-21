@@ -39,13 +39,13 @@ import { LU_DATA_TABLE_CELL_INSTANCE } from '../data-table-cell.token';
 	changeDetection: ChangeDetectionStrategy.OnPush,
 })
 export class DataTableRowCellHeaderComponent extends BaseDataTableCell implements AfterContentInit {
-	elementRef = inject<ElementRef<HTMLTableCellElement>>(ElementRef);
+	readonly elementRef = inject<ElementRef<HTMLTableCellElement>>(ElementRef);
 
-	sort = model<null | 'none' | 'ascending' | 'descending'>(null);
-	fixedWidth = input<string | null>(null);
-	inlineSize = input<string | null>(null);
+	readonly sort = model<null | 'none' | 'ascending' | 'descending'>(null);
+	readonly fixedWidth = input<string | null>(null);
+	readonly inlineSize = input<string | null>(null);
 
-	insetInlineStart = computed(() => {
+	readonly insetInlineStart = computed(() => {
 		if (!this.isStickyStart() || !this.headRef) {
 			return '';
 		}
@@ -59,7 +59,7 @@ export class DataTableRowCellHeaderComponent extends BaseDataTableCell implement
 		);
 	});
 
-	insetInlineEnd = computed(() => {
+	readonly insetInlineEnd = computed(() => {
 		if (!this.isStickyEnd() || !this.headRef) {
 			return '';
 		}
@@ -73,9 +73,9 @@ export class DataTableRowCellHeaderComponent extends BaseDataTableCell implement
 		);
 	});
 
-	#inlineSizePx$ = new ReplaySubject<number>();
+	readonly #inlineSizePx$ = new ReplaySubject<number>();
 
-	inlineSizePx = toSignal(this.#inlineSizePx$);
+	readonly inlineSizePx = toSignal(this.#inlineSizePx$);
 
 	ngAfterContentInit(): void {
 		new ResizeObserver(() => {

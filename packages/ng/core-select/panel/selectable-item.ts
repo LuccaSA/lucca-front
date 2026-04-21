@@ -20,17 +20,17 @@ export class CoreSelectPanelElement<T> implements Highlightable, OnDestroy {
 
 	readonly #selectRef = inject<ALuSelectInputComponent<T, T>>(ALuSelectInputComponent);
 
-	id = signal<string>('');
+	readonly id = signal<string>('');
 
-	elementId = input<string>('');
+	readonly elementId = input<string>('');
 
-	idAttribute = computed(() => this.id() || this.elementId());
+	readonly idAttribute = computed(() => this.id() || this.elementId());
 
-	isSelected = model(false);
+	readonly isSelected = model(false);
 
-	option = input<T>();
+	readonly option = input<T>();
 
-	isHighlighted = signal(false);
+	readonly isHighlighted = signal(false);
 
 	selected = output<void>();
 

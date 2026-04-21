@@ -22,20 +22,20 @@ import { LU_COLOR_TRANSLATIONS } from './color.translate';
 	changeDetection: ChangeDetectionStrategy.OnPush,
 })
 export class ColorInputComponent {
-	intl = input(...intlInputOptions(LU_COLOR_TRANSLATIONS));
+	readonly intl = input(...intlInputOptions(LU_COLOR_TRANSLATIONS));
 
-	mouseHighlighted = signal<string>('');
-	keyboardHighlighted = signal<string>('');
-	highlighted = computed(() => this.mouseHighlighted() || this.keyboardHighlighted());
+	readonly mouseHighlighted = signal<string>('');
+	readonly keyboardHighlighted = signal<string>('');
+	readonly highlighted = computed(() => this.mouseHighlighted() || this.keyboardHighlighted());
 
-	clue = signal<string>('');
-	colors = input.required<ColorOption[]>();
-	clearable = input(false, { transform: booleanAttribute });
-	compact = input(false, { transform: booleanAttribute });
+	readonly clue = signal<string>('');
+	readonly colors = input.required<ColorOption[]>();
+	readonly clearable = input(false, { transform: booleanAttribute });
+	readonly compact = input(false, { transform: booleanAttribute });
 
 	ngControl = injectNgControl();
 
-	currentColorPresentation: Signal<ColorOption | null>;
+	readonly currentColorPresentation: Signal<ColorOption | null>;
 
 	constructor() {
 		if (this.ngControl && this.ngControl.valueChanges) {
@@ -46,7 +46,7 @@ export class ColorInputComponent {
 		}
 	}
 
-	filteredColors = computed(() => {
+	readonly filteredColors = computed(() => {
 		if (this.clue()) {
 			return this.colors().filter((color) => color.name.toLowerCase().includes(this.clue().toLowerCase()));
 		}

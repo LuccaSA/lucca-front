@@ -22,6 +22,7 @@ export class CoreSelectKeyManager<T> {
 	#options?: CoreSelectKeyManagerOptions<T>;
 	#injector = inject(Injector);
 
+	// eslint-disable-next-line @angular-eslint/prefer-signals
 	#queryList: Signal<CoreSelectPanelElement<T>[]>;
 	#queryList$: Observable<CoreSelectPanelElement<T>[]>;
 

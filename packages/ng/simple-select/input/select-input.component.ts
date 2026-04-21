@@ -51,16 +51,16 @@ import { LuSimpleSelectPanelRefFactory } from './panel-ref.factory';
 	encapsulation: ViewEncapsulation.None,
 })
 export class LuSimpleSelectInputComponent<T> extends ALuSelectInputComponent<T, T> implements ControlValueAccessor {
-	intl = input(...intlInputOptions(LU_CORE_SELECT_TRANSLATIONS, LU_SIMPLE_SELECT_TRANSLATIONS));
+	readonly intl = input(...intlInputOptions(LU_CORE_SELECT_TRANSLATIONS, LU_SIMPLE_SELECT_TRANSLATIONS));
 
 	@HostBinding('class.mod-filterPill')
 	public get filterPillClass() {
 		return this.filterPillMode;
 	}
 
-	autocomplete = input<AutoFill>('off');
+	readonly autocomplete = input<AutoFill>('off');
 
-	filterPillPanelAnchorRef = viewChild('filterPillPanelAnchor', { read: ViewContainerRef });
+	readonly filterPillPanelAnchorRef = viewChild('filterPillPanelAnchor', { read: ViewContainerRef });
 
 	protected panelRefFactory = inject(LuSimpleSelectPanelRefFactory);
 

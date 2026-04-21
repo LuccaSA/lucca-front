@@ -68,7 +68,7 @@ export class LuUserMeOptionDirective<U extends ILuUser = ILuUser> implements ILu
 	}
 
 	me: U | undefined = undefined;
-	private meDisplayed$ = new BehaviorSubject(false);
+	private readonly meDisplayed$ = new BehaviorSubject(false);
 	onOpen() {
 		this._service.getMe().subscribe((me) => {
 			this.me = me;

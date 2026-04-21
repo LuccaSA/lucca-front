@@ -25,11 +25,11 @@ export class LuCoreSelectOccupationCategoriesDirective<T extends LuCoreSelectOcc
 {
 	protected httpClient = inject(HttpClient);
 
-	url = input<string>('/organization/structure/api/occupation-categories');
-	filters = input<Record<string, string | number | boolean> | null>(null);
-	searchDelimiter = input<string>(' ');
+	readonly url = input<string>('/organization/structure/api/occupation-categories');
+	readonly filters = input<Record<string, string | number | boolean> | null>(null);
+	readonly searchDelimiter = input<string>(' ');
 
-	protected clue = toSignal(this.clue$);
+	protected readonly clue = toSignal(this.clue$);
 
 	protected override getOptions(params: Record<string, string | number | boolean> | null, page: number): Observable<T[]> {
 		return this.httpClient
@@ -43,7 +43,7 @@ export class LuCoreSelectOccupationCategoriesDirective<T extends LuCoreSelectOcc
 			.pipe(map((res) => (Array.isArray(res) ? res : res?.items) ?? []));
 	}
 
-	protected override params$: Observable<Record<string, string | number | boolean>> = toObservable(
+	protected override readonly params$: Observable<Record<string, string | number | boolean>> = toObservable(
 		computed(() => {
 			const filters = this.filters();
 			const clue = this.clue();
@@ -59,7 +59,7 @@ export class LuCoreSelectOccupationCategoriesDirective<T extends LuCoreSelectOcc
 		}),
 	);
 
-	public totalCount$ = toObservable(computed(() => ({ url: this.url(), filters: this.filters() }))).pipe(
+	public readonly totalCount$ = toObservable(computed(() => ({ url: this.url(), filters: this.filters() }))).pipe(
 		debounceTime(250),
 		switchMap(({ url, filters }) =>
 			this.httpClient.get<{ count: number }>(url, {

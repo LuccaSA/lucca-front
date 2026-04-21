@@ -45,7 +45,7 @@ export class FileEntryComponent {
 	readonly downloadURL = input('');
 
 	readonly password = input('');
-	passwordChange$ = new Subject<string>();
+	readonly passwordChange$ = new Subject<string>();
 	passwordChange = outputFromObservable(this.passwordChange$);
 
 	get withPassword() {
@@ -54,7 +54,7 @@ export class FileEntryComponent {
 
 	readonly media = input(false, { transform: booleanAttribute });
 
-	deleteFile$ = new Subject<void>();
+	readonly deleteFile$ = new Subject<void>();
 
 	deleteFile = outputFromObservable(this.deleteFile$);
 
