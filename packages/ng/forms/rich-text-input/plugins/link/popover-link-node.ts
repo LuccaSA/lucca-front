@@ -37,7 +37,7 @@ export class PopoverLinkNode extends LinkNode {
 
 	override createDOM(config: EditorConfig): HTMLElement {
 		if (this.#viewContainerRef && this.#templateRef) {
-			const context: { href?: string; title?: string; target?: string; key?: string; isAutoLink: boolean } = {
+			const context: LinkTemplateContext = {
 				href: this.sanitizeUrl(this.__url),
 				title: this.__title ?? undefined,
 				target: this.__target ?? undefined,

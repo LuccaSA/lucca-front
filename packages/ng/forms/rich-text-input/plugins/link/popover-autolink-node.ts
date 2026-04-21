@@ -21,7 +21,7 @@ export class PopoverAutoLinkNode extends AutoLinkNode {
 		self.#templateRef = templateRef;
 		return self;
 	}
-	getTemplateRef(): TemplateRef<{ href?: string; title?: string; target?: string }> | undefined {
+	getTemplateRef(): TemplateRef<LinkTemplateContext> | undefined {
 		return this.#templateRef;
 	}
 
@@ -37,7 +37,7 @@ export class PopoverAutoLinkNode extends AutoLinkNode {
 
 	override createDOM(config: EditorConfig): HTMLElement {
 		if (this.#viewContainerRef && this.#templateRef) {
-			const context: { href?: string; title?: string; target?: string; key: string } = {
+			const context: LinkTemplateContext = {
 				href: this.sanitizeUrl(this.__url),
 				title: this.__title ?? undefined,
 				target: this.__target ?? undefined,
