@@ -45,7 +45,7 @@ export const Template: StoryObj = {
 			description: 'Modifie la taille du bouton.',
 		},
 		alt: {
-			description: "Information restituée par le lecteur d'écran.",
+			description: 'Information restituée par le lecteur d’écran.',
 		},
 		hidden: {
 			description: 'Masque le bouton.',

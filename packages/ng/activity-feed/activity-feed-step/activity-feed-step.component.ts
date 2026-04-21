@@ -56,8 +56,6 @@ export class ActivityFeedStepComponent {
 		if (!date) {
 			return null;
 		}
-		const formatted = this.#intlDateTimeFormat.format(date);
-		const parts = formatted.split(', ');
-		return `${parts[0].charAt(0).toUpperCase() + parts[0].slice(1)} ${this.intl().at} ${parts[1]}`;
+		return this.#intlDateTimeFormat.format(date);
 	});
 }

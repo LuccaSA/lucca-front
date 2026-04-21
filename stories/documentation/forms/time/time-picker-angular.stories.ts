@@ -32,20 +32,20 @@ export default {
 			control: {
 				type: 'select',
 			},
-			description: "Modifie l'état de l'inline message.",
+			description: 'Modifie l’état de l’inline message.',
 		},
 		tooltip: {
 			if: { arg: 'hiddenLabel', truthy: false },
 			description: 'Affiche une icône (?) associée à une info-bulle.',
 		},
 		hiddenLabel: {
-			description: "Masque le label en le conservant dans le DOM pour les lecteurs d'écrans.",
+			description: 'Masque le label en le conservant dans le DOM pour les lecteurs d’écran.',
 		},
 		label: {
 			control: {
 				type: 'text',
 			},
-			description: "Modifie le label de l'input.",
+			description: 'Modifie le label de l’input.',
 		},
 		required: {
 			control: {
@@ -57,7 +57,7 @@ export default {
 			control: {
 				type: 'boolean',
 			},
-			description: "Affiche les boutons d'incrémention.",
+			description: 'Affiche les boutons d’incrémentation.',
 		},
 		disabled: {
 			control: {
@@ -69,7 +69,7 @@ export default {
 			control: {
 				type: 'text',
 			},
-			description: "Modifie le pas d'incrémentation.",
+			description: 'Modifie le pas d’incrémentation.',
 		},
 		max: {
 			control: {
@@ -82,7 +82,7 @@ export default {
 			control: {
 				type: 'select',
 			},
-			description: "Force l'affichage de l'indicateur AM/PM",
+			description: 'Force l’affichage de l’indicateur AM/PM',
 		},
 		presentation: {
 			description: '[v21.1] Transforme le champ de formulaire en donnée textuelle non éditable.',

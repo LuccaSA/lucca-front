@@ -33,7 +33,7 @@ export default {
 			description: 'Applique une largeur fixe aux colonnes.',
 		},
 		dropdown: {
-			description: "Remplace les boutons d'action par un menu déroulant.",
+			description: 'Remplace les boutons d’action par un menu déroulant.',
 		},
 	},
 	decorators: [

@@ -25,8 +25,8 @@ export default {
 			description: 'Permet au fieldset de se replier.',
 		},
 		withAction: {
-			if: { arg: 'expandable', truthy: false },
-			description: "Ajoute un bouton d'action à droite du titre.",
+			if: { arg: 'expandable', eq: false },
+			description: 'Ajoute un bouton d’action à droite du titre.',
 		},
 		expanded: {
 			control: {
