@@ -71,6 +71,14 @@ export class SegmentedControlTabsComponent<T = unknown> implements AfterContentI
 		this.setActiveTab(newIndex);
 	}
 
+	first() {
+		this.setActiveTab(0);
+	}
+
+	last() {
+		this.setActiveTab(this.tabs().length - 1);
+	}
+
 	setActiveTab(index: number) {
 		this.active.set(this.tabs()[index].value());
 		this.tabButtons()[index].nativeElement.focus();

@@ -8,7 +8,7 @@ import { Meta, StoryObj } from '@storybook/angular';
 	styles: [
 		`
 			.demo-QAtable {
-				width: 100%;
+				inline-size: 100%;
 				table-layout: fixed;
 
 				+ & {

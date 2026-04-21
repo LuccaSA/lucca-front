@@ -23,7 +23,7 @@ function getTemplate(args: FilesErrorStory): string {
 			<span class="file-button button mod-outlined">Select another file</span>
 			<span class="pr-u-mask"> – </span>
 			<span class="file-progress progress">
-				<span class="progress-bar" style="width: 50%"></span>
+				<span class="progress-bar" style="inline-size: 50%"></span>
 			</span>
 		</span>
 	</label>
@@ -41,7 +41,7 @@ function getTemplate(args: FilesErrorStory): string {
 			<span class="file-or">It’s the wrong file?</span>
 			<span class="file-button button mod-outlined mod-S">Select another file</span>
 			<span class="file-progress progress">
-				<span class="progress-bar" style="width: 50%"></span>
+				<span class="progress-bar" style="inline-size: 50%"></span>
 			</span>
 		</span>
 	</label>
