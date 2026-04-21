@@ -20,11 +20,8 @@
 			@include active;
 		}
 
-		&.is-comboboxHidden {
-			@include comboboxHidden;
-		}
-
-		&:has(.filterPill-combobox:focus-visible) {
+		&:has(.filterPill-combobox:focus-visible),
+		&:has(.filterPill-label:focus-visible) {
 			@include focusVisible;
 		}
 
@@ -51,6 +48,7 @@
 				@include focusVisible;
 			}
 
+			&[aria-pressed='true'],
 			&:has(.filterPill-checkbox-input:checked) {
 				@include checkboxChecked;
 
@@ -63,9 +61,11 @@
 				}
 			}
 
+			&[disabled],
 			&:has(.filterPill-checkbox-input:disabled) {
 				@include checkboxDisabled;
 
+				&[aria-pressed='true'],
 				&:has(.filterPill-checkbox-input:checked) {
 					@include checkboxCheckedDisabled;
 				}

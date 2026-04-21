@@ -24,6 +24,7 @@
 	white-space: nowrap;
 	transition-property: box-shadow;
 	transition-duration: var(--commons-animations-durations-fast);
+	border: 0;
 
 	@at-root ($atRoot) {
 		.filterPill_popover-content.popover-contentOptional {

@@ -13,7 +13,7 @@
 }
 
 @mixin focusVisible {
-	@include a11y.focusVisible($offset: 3px);
+	@include a11y.focusVisible($offset: 2px);
 }
 
 @mixin hover {
@@ -73,9 +73,6 @@
 	.filterPill-combobox {
 		@include a11y.mask;
 	}
-}
-
-@mixin comboboxHidden {
 }
 
 @mixin opened {

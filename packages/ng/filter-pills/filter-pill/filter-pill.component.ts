@@ -47,7 +47,7 @@ let nextId = 0;
 		},
 	],
 	host: {
-		class: 'filterPill',
+		'[class.filterPill]': '!this.modCheckbox()',
 	},
 })
 export class FilterPillComponent {
@@ -146,19 +146,9 @@ export class FilterPillComponent {
 
 	modCheckbox = computed(() => this.layout() === 'checkable');
 
-	@HostBinding('class.mod-checkbox')
-	get isModCheckbox() {
-		return this.modCheckbox();
-	}
-
 	@HostBinding('class.is-filled')
 	get isFilled() {
 		return !this.inputIsEmpty();
-	}
-
-	@HostBinding('class.is-comboboxHidden')
-	get hideCombobox() {
-		return this.shouldHideCombobox();
 	}
 
 	constructor() {
