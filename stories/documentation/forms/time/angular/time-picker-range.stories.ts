@@ -1,3 +1,4 @@
+import { JsonPipe } from '@angular/common';
 import { FormsModule } from '@angular/forms';
 import { BrowserAnimationsModule } from '@angular/platform-browser/animations';
 import { FormFieldComponent } from '@lucca-front/ng/form-field';
@@ -10,7 +11,7 @@ export default {
 	title: 'Documentation/Forms/Time/Angular/Range',
 	decorators: [
 		moduleMetadata({
-			imports: [TimePickerComponent, FormFieldComponent, FormsModule, BrowserAnimationsModule, StoryModelDisplayComponent, TimePickerRangeComponent],
+			imports: [TimePickerComponent, FormFieldComponent, FormsModule, BrowserAnimationsModule, StoryModelDisplayComponent, TimePickerRangeComponent, JsonPipe],
 		}),
 	],
 	argTypes: {
@@ -102,7 +103,7 @@ export const Basic: StoryObj<TimePickerComponent & FormFieldComponent & { requir
 	<span aria-hidden="true">${label}</span>
 </ng-template>
 
-<pr-story-model-display>{{ example }}</pr-story-model-display>
+<pr-story-model-display>{{ example | json }}</pr-story-model-display>
 `,
 		};
 	},
