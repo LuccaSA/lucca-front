@@ -1,9 +1,31 @@
 <div class="timePicker">
 	<div class="timePicker-fieldset">
-		<lu-time-picker />
+		<lu-time-picker
+			#timePickerStart
+			[value]="startValue()"
+			(valueChange)="onStartChange($event)"
+			[disabled]="disabled()"
+			[max]="max()"
+			[step]="step()"
+			[size]="size()"
+			[displayArrows]="displayArrows()"
+			[forceMeridiemDisplay]="forceMeridiemDisplay()"
+			(blur)="onTouched()"
+		/>
 		<label role="presentation" for="TODO-end-hour-input" class="timePicker-arrow">
 			<lu-icon class="timePicker-arrow-icon" icon="arrowRight" />
 		</label>
-		<lu-time-picker />
+		<lu-time-picker
+			#timePickerEnd
+			[value]="endValue()"
+			(valueChange)="onEndChange($event)"
+			[disabled]="disabled()"
+			[max]="max()"
+			[step]="step()"
+			[size]="size()"
+			[displayArrows]="displayArrows()"
+			[forceMeridiemDisplay]="forceMeridiemDisplay()"
+			(blur)="onTouched()"
+		/>
 	</div>
 </div>

@@ -84,3 +84,5 @@ export const getMinutesPartFromDuration = (duration: ISO8601Duration): number =>
 export const createDurationFromHoursAndMinutes = (hours: number, minutes: number): ISO8601Duration => {
 	return `PT${hours}H${minutes}M`;
 };
+
+export const MAX_TIME = '23:59:59';
