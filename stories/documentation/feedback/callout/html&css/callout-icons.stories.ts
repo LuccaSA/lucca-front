@@ -27,7 +27,7 @@ export default {
 			control: {
 				type: 'select',
 			},
-			description: "Modifie l'icône du callout.",
+			description: 'Modifie l’icône du callout.',
 		},
 	},
 } as Meta;

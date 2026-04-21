@@ -5,7 +5,6 @@ import { applicationConfig, Meta, moduleMetadata, StoryObj } from '@storybook/an
 interface FormLabelBasicStory {
 	for: string;
 	required: boolean;
-	label: string;
 	tooltip: string;
 	tag: string;
 	size: string;
@@ -32,6 +31,7 @@ export default {
 			control: {
 				type: 'select',
 			},
+			description: 'Modifie la taille du composant.',
 		},
 		counterStatus: {
 			if: { arg: 'counterMax', truthy: true },
@@ -39,6 +39,7 @@ export default {
 				min: 0,
 				step: 1,
 			},
+			description: 'Nombre de caractères actuellement saisis.',
 		},
 		counterId: {
 			if: { arg: 'counterMax', truthy: true },
@@ -51,6 +52,22 @@ export default {
 				min: 0,
 				step: 1,
 			},
+			description: 'Définit la valeur maximale du compteur de caractères.',
+		},
+		for: {
+			description: 'ID du champ de formulaire associé au label.',
+		},
+		tooltip: {
+			description: 'Affiche une icône (?) associée à une info-bulle.',
+		},
+		tag: {
+			description: 'Ajoute un tag associé au label.',
+		},
+		required: {
+			description: 'Marque le champ comme obligatoire.',
+		},
+		error: {
+			description: 'Applique l’état d’erreur au label.',
 		},
 	},
 } as Meta;
@@ -66,7 +83,7 @@ function getTemplate(args: FormLabelBasicStory): string {
 	const labelIdAttr = args.counterMax > 0 ? ` labelId="${args.labelId}"` : ``;
 	const errorAttr = args.error ? ` error` : ``;
 
-	return `<label luFormLabel for="${args.for}"${tooltipAttr}${tagAttr}${sizeAttr}${counterMaxAttr}${counterStatusAttr}${counterIdAttr}${labelIdAttr}${requiredAttr}${errorAttr}>${args.label}</label>`;
+	return `<label luFormLabel for="${args.for}"${tooltipAttr}${tagAttr}${sizeAttr}${counterMaxAttr}${counterStatusAttr}${counterIdAttr}${labelIdAttr}${requiredAttr}${errorAttr}>Label</label>`;
 }
 
 const Template = (args: FormLabelBasicStory) => ({
@@ -77,7 +94,6 @@ const Template = (args: FormLabelBasicStory) => ({
 export const Basic: StoryObj<FormLabelBasicStory> = {
 	args: {
 		for: 'inputID',
-		label: 'Label',
 		tooltip: '',
 		tag: '',
 		required: false,

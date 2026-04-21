@@ -88,6 +88,7 @@ export default {
 				'timmi/bubbles-top-right-03',
 			],
 			control: 'select',
+			description: 'Illustration de fond dans le coin supérieur droit.',
 		},
 		topRightForeground: {
 			options: [
@@ -104,6 +105,7 @@ export default {
 				'generic/plug-01',
 			],
 			control: 'select',
+			description: 'Illustration de premier plan dans le coin supérieur droit.',
 		},
 		bottomLeftBackground: {
 			options: [
@@ -124,6 +126,7 @@ export default {
 				'timmi/bubbles-bottom-left-03',
 			],
 			control: 'select',
+			description: 'Illustration de fond dans le coin inférieur gauche.',
 		},
 		bottomLeftForeground: {
 			options: [
@@ -151,17 +154,20 @@ export default {
 				'timmi/timesheet-01',
 			],
 			control: 'select',
+			description: 'Illustration de premier plan dans le coin inférieur gauche.',
 		},
 		icon: {
 			options: ['', 'medal-01', 'post-it-01'],
 			control: {
 				type: 'select',
 			},
+			description: 'Affiche une illustration au dessus du titre.',
 		},
 		contentBackgroundColor: {
 			control: {
 				type: 'text',
 			},
+			description: 'Modifie la couleur de fond du contenu (variable CSS, couleur hexadécimale, etc.).',
 		},
 		hx: {
 			control: {
@@ -169,7 +175,7 @@ export default {
 				min: 1,
 				max: 6,
 			},
-			description: '[v18.1]',
+			description: 'Niveau de titre (sémantique).',
 		},
 		hxStyle: {
 			control: {
@@ -177,16 +183,16 @@ export default {
 				min: 1,
 				max: 2,
 			},
-			description: '[v21.2]',
+			description: '[v21.2] Niveau du titre (style).',
 		},
 		heading: {
-			description: '[v18.1] Optional',
+			description: 'Titre du composant.',
 		},
 		description: {
-			description: '[v18.1] Optional',
+			description: 'Description du composant.',
 		},
 		slotTop: {
-			description: '[v19.3] Optional, Add content above heading.',
+			description: '[v19.3] Ajout d’un slot au dessus du titre.',
 		},
 	},
 } as Meta;

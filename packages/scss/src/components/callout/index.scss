@@ -21,6 +21,10 @@
 
 		&:has(.callout-content-description-actions.mod-inline) {
 			@include actionsInline;
+
+			&.mod-S {
+				@include actionsInlineS;
+			}
 		}
 	}
 }

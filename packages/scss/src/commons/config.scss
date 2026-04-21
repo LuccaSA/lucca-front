@@ -3,7 +3,7 @@
 
 @use '@lucca-front/scss/src/commons/function';
 
-$layers: 'reset, base, components, mods, product, utils' !default;
+$layers: 'reset, base, components, mods, product, utils';
 
 $isNamespaced: false !default;
 $deprecatedSpacings: false !default;
