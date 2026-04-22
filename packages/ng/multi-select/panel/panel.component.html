@@ -97,7 +97,7 @@
 						}
 					}
 				</ng-template>
-				@if (ctx.options.length === 0 && (loading()) === false) {
+				@if (ctx.options.length === 0 && !loading()) {
 					<div class="lu-picker-content-option-emptyState">
 						{{ ctx.clueChange.length ? intl().emptyResults : intl().emptyOptions }}
 					</div>
