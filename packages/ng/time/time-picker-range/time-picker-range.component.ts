@@ -62,7 +62,7 @@ export class TimePickerRangeComponent implements ControlValueAccessor, OnInit, V
 	}
 
 	validate(control: AbstractControl<TimePickerRange | null>): ValidationErrors | null {
-		if (!control.value) {
+		if (isNil(control.value)) {
 			return null;
 		}
 		return !isValidTimePickerRange(control.value) ? { time: true } : isEndTimeBeforeStartTime(control.value) ? { endTimeBeforeStartTime: true } : null;
