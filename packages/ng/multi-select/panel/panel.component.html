@@ -10,7 +10,7 @@
 	<div class="lu-picker-panel lu-option-picker-panel mod-multiple" data-testid="dialog-panel">
 		<div
 			class="lu-picker-content"
-			[class.is-loading]="loading$ | async"
+			[class.is-loading]="loading()"
 			[class.is-filled]="ctx.options.length > 0"
 			tabindex="0"
 			role="listbox"
@@ -97,13 +97,13 @@
 						}
 					}
 				</ng-template>
-				@if (ctx.options.length === 0 && (loading$ | async) === false) {
+				@if (ctx.options.length === 0 && (loading()) === false) {
 					<div class="lu-picker-content-option-emptyState">
 						{{ ctx.clueChange.length ? intl().emptyResults : intl().emptyOptions }}
 					</div>
 				}
 			</div>
-			@if (loading$ | async) {
+			@if (loading()) {
 				<div class="lu-picker-content-loading">
 					<div class="loading">{{ intl().loading }}</div>
 				</div>
