@@ -1,9 +1,9 @@
 import { booleanAttribute, ChangeDetectionStrategy, Component, computed, forwardRef, inject, Injector, input, OnInit, signal, ViewEncapsulation } from '@angular/core';
-import { ControlValueAccessor, NG_VALUE_ACCESSOR, NgControl, NgModel } from '@angular/forms';
+import { AbstractControl, ControlValueAccessor, NG_VALIDATORS, NG_VALUE_ACCESSOR, NgControl, NgModel, ValidationErrors, Validator } from '@angular/forms';
 import { intlInputOptions, isNil } from '@lucca-front/ng/core';
 import { IconComponent } from '@lucca/prisme/icon';
 import { ISO8601Duration, ISO8601Time } from '../core/date-primitives';
-import { MAX_TIME } from '../core/duration.utils';
+import { isEndTimeBeforeStartTime, isValidTimePickerRange, MAX_TIME } from '../core/duration.utils';
 import { TimePickerComponent } from '../time-picker/time-picker.component';
 import { TimePickerRange } from './time-picker-range';
 import { LU_TIME_PICKER_RANGE_TRANSLATIONS } from './time-picker-range.translate';
@@ -22,9 +22,14 @@ import { TimeRangePickerSize } from './time-picker-range.type';
 			useExisting: forwardRef(() => TimePickerRangeComponent),
 			multi: true,
 		},
+		{
+			provide: NG_VALIDATORS,
+			useExisting: forwardRef(() => TimePickerRangeComponent),
+			multi: true,
+		},
 	],
 })
-export class TimePickerRangeComponent implements ControlValueAccessor, OnInit {
+export class TimePickerRangeComponent implements ControlValueAccessor, OnInit, Validator {
 	#injector = inject(Injector);
 	#ngControl: NgControl; // Initialized in ngOnInit
 
@@ -54,6 +59,13 @@ export class TimePickerRangeComponent implements ControlValueAccessor, OnInit {
 
 	ngOnInit() {
 		this.#ngControl = this.#injector.get(NgControl);
+	}
+
+	validate(control: AbstractControl<TimePickerRange | null>): ValidationErrors | null {
+		if (!control.value) {
+			return null;
+		}
+		return !isValidTimePickerRange(control.value) ? { time: true } : isEndTimeBeforeStartTime(control.value) ? { endTimeBeforeStartTime: true } : null;
 	}
 
 	writeValue(value: TimePickerRange | null): void {
