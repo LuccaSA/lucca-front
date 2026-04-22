@@ -7,11 +7,15 @@
 }
 
 <ng-template #horizontalNavigationList>
-	<ul class="horizontalNavigation-list">
-		@for (link of links(); track $index) {
-			<li class="horizontalNavigation-list-item">
-				<ng-container *ngTemplateOutlet="link.template" />
-			</li>
+	<ul class="horizontalNavigation-list" [attr.role]="tablist() ? 'tablist' : null">
+		@if (tablist()) {
+			<ng-content />
+		} @else {
+			@for (link of links(); track $index) {
+				<li class="horizontalNavigation-list-item">
+					<ng-container *ngTemplateOutlet="link.template" />
+				</li>
+			}
 		}
 	</ul>
 </ng-template>

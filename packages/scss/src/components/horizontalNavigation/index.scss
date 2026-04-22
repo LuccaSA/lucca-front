@@ -28,6 +28,7 @@
 			.menu-list-item-action,
 			.horizontalNavigation-list-item-action {
 				&[aria-current='page'],
+				&[aria-selected='true'],
 				&.is-active {
 					@include activeVertical;
 				}
@@ -47,12 +48,13 @@
 		// .active is deprecated
 		&.active,
 		&[aria-current='page'],
+		&[aria-selected='true'],
 		&.is-active {
 			@include active;
 		}
 
 		&.disabled, // .disabled is deprecated
-		&[disabled], // [disabled] is deprecated
+		&[disabled],
 		&.is-disabled {
 			@include disabled;
 		}
