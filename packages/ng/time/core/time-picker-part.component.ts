@@ -85,7 +85,7 @@ export class TimePickerPartComponent {
 		return this.showZero() ? label : label.replace(/^0/, '');
 	});
 
-	protected inputId = `time-picker-part-${nextId++}`;
+	readonly inputId = `time-picker-part-${nextId++}`;
 
 	constructor(@Inject(LOCALE_ID) private locale: string) {
 		ɵeffectWithDeps([this.valueLabel], (valueLabel) => {

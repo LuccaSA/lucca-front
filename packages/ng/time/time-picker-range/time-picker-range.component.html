@@ -13,7 +13,7 @@
 			[forceMeridiemDisplay]="forceMeridiemDisplay()"
 			(blur)="onTouched()"
 		/>
-		<label role="presentation" for="TODO-end-hour-input" class="timePicker-arrow">
+		<label role="presentation" [attr.for]="timePickerEnd?.firstTimePickerInputId" class="timePicker-arrow">
 			<lu-icon class="timePicker-arrow-icon" icon="arrowRight" />
 		</label>
 		<lu-time-picker
