@@ -1,34 +1,34 @@
 ﻿export const Translations = {
-	pt: {
-		timePickerRangeStart: '',
-		timePickerRangeEnd: '',
-	},
-	es: {
-		timePickerRangeStart: '',
-		timePickerRangeEnd: '',
-	},
 	'nl-BE': {
-		timePickerRangeStart: '',
-		timePickerRangeEnd: '',
-	},
-	nl: {
-		timePickerRangeStart: '',
-		timePickerRangeEnd: '',
-	},
-	it: {
-		timePickerRangeStart: '',
-		timePickerRangeEnd: '',
-	},
-	de: {
-		timePickerRangeStart: '',
-		timePickerRangeEnd: '',
+		timePickerRangeStart: 'start',
+		timePickerRangeEnd: 'einde',
 	},
 	fr: {
-		timePickerRangeStart: '(début)',
-		timePickerRangeEnd: '(fin)',
+		timePickerRangeStart: 'début',
+		timePickerRangeEnd: 'fin',
+	},
+	de: {
+		timePickerRangeStart: 'anfang',
+		timePickerRangeEnd: 'ende',
 	},
 	en: {
-		timePickerRangeStart: '(start)',
-		timePickerRangeEnd: '(end)',
+		timePickerRangeStart: 'start',
+		timePickerRangeEnd: 'end',
+	},
+	es: {
+		timePickerRangeStart: 'iniciar',
+		timePickerRangeEnd: 'fin',
+	},
+	it: {
+		timePickerRangeStart: 'inizio',
+		timePickerRangeEnd: 'fine',
+	},
+	nl: {
+		timePickerRangeStart: 'start',
+		timePickerRangeEnd: 'einde',
+	},
+	pt: {
+		timePickerRangeStart: 'início',
+		timePickerRangeEnd: 'fim',
 	},
 };
