@@ -98,7 +98,7 @@
 @mixin fancy {
 	// padding and minimum height are in pixels because they correspond to the size of the image
 	--components-dialog-inside-paddingInlineEnd: 224px;
-	--components-dialog-minBlockSize: calc(288px + var(--pr-t-spacings-400));
+	--components-dialog-minBlockSize: calc(288px + var(--pr-t-spacings-200));
 	--components-dialog-inside-gridTemplateRows: auto auto auto;
 	--components-dialog-inside-alignContent: center;
 	--components-dialog-inside-header-boxShadow: none;
@@ -132,7 +132,7 @@
 @mixin fancySmall {
 	// padding and minimum height are in pixels because they correspond to the size of the image
 	--components-dialog-inside-paddingInlineEnd: 168px;
-	--components-dialog-minBlockSize: calc(216px + var(--pr-t-spacings-400));
+	--components-dialog-minBlockSize: calc(216px + var(--pr-t-spacings-200));
 }
 
 @mixin fancyNarrow {
