@@ -1,0 +1,34 @@
+<button
+	type="button"
+	role="combobox"
+	luButton
+	[luPopover2]="pillContent"
+	[luPopoverNoCloseButton]="true"
+	[customPositions]="popoverPositions"
+	[luPopoverAnchor]="elementRef"
+	#comboboxRef
+	#popoverRef="luPopover2"
+	[attr.aria-expanded]="popoverRef.opened()"
+	(keydown.arrowDown)="$event.preventDefault(); popoverRef.openPopover(true)"
+	(keydown.arrowUp)="$event.preventDefault(); popoverRef.openPopover(true)"
+>
+	@let user = selectedUser();
+	@if (user) {
+		<lu-user-picture [user]="user"></lu-user-picture>&nbsp;{{ user | luUserDisplay }}
+	} @else {
+		TODO Placeholder
+	}
+</button>
+<ng-template #pillContent>
+	<lu-simple-select [(ngModel)]="selectedUser" users #selectRef>
+		<ng-container *luOption="let user; select: selectRef">
+			<lu-user-picture [user]="user"></lu-user-picture>
+			<span translate="no">{{ user | luUserDisplay }}</span>
+
+			<!-- Handle homonyms -->
+			@if (user.additionalInformation) {
+				<div>({{ user.additionalInformation }})</div>
+			}
+		</ng-container>
+	</lu-simple-select>
+</ng-template>
