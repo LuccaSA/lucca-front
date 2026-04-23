@@ -40,7 +40,7 @@ export class TimePickerRangeComponent implements ControlValueAccessor, OnInit, V
 
 	readonly intl = input(...intlInputOptions(LU_TIME_PICKER_RANGE_TRANSLATIONS));
 
-	readonly label = input<string>();
+	readonly label = input<string>('');
 
 	readonly displayArrows = input(false, { transform: booleanAttribute });
 
