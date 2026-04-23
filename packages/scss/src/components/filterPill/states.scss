@@ -67,11 +67,16 @@
 	--components-filterPill-backgroundColor: var(--palettes-product-50);
 	--components-filterPill-color: var(--palettes-product-800);
 	--components-filterPill-toggle-iconColor: var(--palettes-product-700);
+	--components-filterPill-toggle-marginInlineStart: calc(var(--pr-t-spacings-300) + var(--pr-t-spacings-50));
 }
 
 @mixin notFilled {
-	.filterPill-combobox {
+	.filterPill-value {
 		@include a11y.mask;
+	}
+
+	+ .filterPill_clear.clear {
+		@include clear.hidden;
 	}
 }
 
@@ -99,11 +104,8 @@
 	box-shadow: var(--components-filterPill-shadow);
 
 	@include clear.hidden;
-
-	// TODO
-	// --components-filterPill-checkbox-borderColor: var(--palettes-neutral-600);
 }
 
 @mixin hidden {
-	--components-filterPill-display: none;
+	--components-filterPillWrapper-display: none;
 }
