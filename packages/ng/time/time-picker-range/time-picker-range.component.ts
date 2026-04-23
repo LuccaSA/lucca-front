@@ -3,7 +3,7 @@ import { AbstractControl, ControlValueAccessor, NG_VALIDATORS, NG_VALUE_ACCESSOR
 import { intlInputOptions, isNil } from '@lucca-front/ng/core';
 import { IconComponent } from '@lucca/prisme/icon';
 import { ISO8601Duration, ISO8601Time } from '../core/date-primitives';
-import { isEndTimeBeforeStartTime, isValidTimePickerRange, MAX_TIME } from '../core/duration.utils';
+import { isValidTimePickerRange, MAX_TIME } from '../core/duration.utils';
 import { TimePickerComponent } from '../time-picker/time-picker.component';
 import { TimePickerRange } from './time-picker-range';
 import { LU_TIME_PICKER_RANGE_TRANSLATIONS } from './time-picker-range.translate';
@@ -65,7 +65,7 @@ export class TimePickerRangeComponent implements ControlValueAccessor, OnInit, V
 		if (isNil(control.value)) {
 			return null;
 		}
-		return !isValidTimePickerRange(control.value) ? { time: true } : isEndTimeBeforeStartTime(control.value) ? { endTimeBeforeStartTime: true } : null;
+		return !isValidTimePickerRange(control.value) ? { time: true } : null;
 	}
 
 	writeValue(value: TimePickerRange | null): void {
