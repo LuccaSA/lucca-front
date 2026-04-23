@@ -10,7 +10,7 @@ import { LuTooltipModule } from '@lucca-front/ng/tooltip';
 import { Meta, StoryObj } from '@storybook/angular';
 
 type TokenCategory = 'all' | 'palette' | 'color' | 'spacing' | 'radius' | 'typography' | 'elevation';
-type TokenPreview = 'swatch' | 'text' | 'spacing' | 'radius' | 'font' | 'fontSize' | 'lineHeight' | 'fontFamily' | 'shadow' | 'surface' | 'raw';
+type TokenPreview = 'swatch' | 'text' | 'spacing' | 'radius' | 'font' | 'fontSize' | 'lineHeight' | 'fontWeight' | 'fontFamily' | 'shadow' | 'surface' | 'raw';
 
 interface TokenEntry {
 	name: string;
@@ -195,7 +195,7 @@ const TYPOGRAPHY_TOKENS: TokenEntry[] = [
 		value: s.value,
 		category: 'typography' as const,
 		group: 'Font weight',
-		preview: 'raw' as const,
+		preview: 'fontWeight' as const,
 	})),
 	...FONT_FAMILY.map((s) => ({
 		name: `--pr-t-font-${s.key}`,
@@ -415,6 +415,17 @@ const ALL_TOKENS: TokenEntry[] = [...buildPaletteTokens(), ...SEMANTIC_COLOR_TOK
 
 			.tokensExplorer-card-preview-lineHeight::after {
 				inset-block-end: 0;
+			}
+
+			.tokensExplorer-card-preview-fontWeight {
+				color: var(--pr-t-color-text-heading);
+				font-family: var(--pr-t-font-family);
+				font-size: var(--pr-t-font-fontSize-250);
+				line-height: 1;
+				display: block;
+				max-inline-size: 100%;
+				max-block-size: 100%;
+				overflow: hidden;
 			}
 
 			.tokensExplorer-card-preview-fontFamily {
