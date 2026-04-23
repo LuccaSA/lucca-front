@@ -99,6 +99,10 @@ export class TimePickerComponent extends BasePickerComponent {
 		return formatAMPM(this.hours()).suffix;
 	});
 
+	get firstTimePickerInputId(): string | undefined {
+		return this.hoursPart()?.inputId ? `${this.hoursPart()?.inputId}-input` : undefined;
+	}
+
 	protected override focusPart(type: 'hours' | 'minutes' | 'meridiem') {
 		if (type === 'meridiem') {
 			const elementToFocus = this.ampmDisplay() === 'AM' ? this.anteMeridiemRef()?.nativeElement : this.postMeridiemRef()?.nativeElement;
