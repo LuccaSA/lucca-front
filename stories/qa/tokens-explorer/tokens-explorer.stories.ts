@@ -510,8 +510,12 @@ class TokensExplorerStory {
 	});
 
 	readonly groupedTokens = computed(() => {
+		const tokens = this.filteredTokens();
+		if (this.search().trim()) {
+			return tokens.length === 0 ? [] : [{ label: '', tokens }];
+		}
 		const groups = new Map<string, TokenEntry[]>();
-		for (const token of this.filteredTokens()) {
+		for (const token of tokens) {
 			const key = `${this.categoryLabel(token.category)} · ${token.group}`;
 			if (!groups.has(key)) {
 				groups.set(key, []);

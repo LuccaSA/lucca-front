@@ -16,7 +16,7 @@
 		<lu-form-field label="Rechercher un token" hiddenLabel>
 			<lu-text-input
 				[ngModel]="search()"
-				(ngModelChange)="search.set($event)"
+				(ngModelChange)="search.set($event ?? '')"
 				[ngModelOptions]="{ standalone: true }"
 				placeholder="Rechercher…"
 				hasSearchIcon
@@ -32,7 +32,9 @@
 	} @else {
 		@for (group of groupedTokens(); track group.label) {
 			<section class="tokensExplorer-group">
-				<h2 class="tokensExplorer-group-title">{{ group.label }}</h2>
+				@if (group.label) {
+					<h2 class="tokensExplorer-group-title">{{ group.label }}</h2>
+				}
 				<div class="tokensExplorer-grid">
 					@for (token of group.tokens; track token.name) {
 						<button
