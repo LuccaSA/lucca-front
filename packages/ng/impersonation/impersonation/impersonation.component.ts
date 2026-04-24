@@ -1,20 +1,36 @@
-import { ChangeDetectionStrategy, Component, effect, ElementRef, inject, model, untracked, viewChild, ViewEncapsulation } from '@angular/core';
-import { ButtonComponent } from '@lucca/prisme/button';
-import { PopoverDirective } from '@lucca-front/ng/popover2';
 import { ConnectionPositionPair } from '@angular/cdk/overlay';
+import { ChangeDetectionStrategy, Component, effect, ElementRef, inject, model, untracked, viewChild, ViewEncapsulation } from '@angular/core';
+import { FormsModule } from '@angular/forms';
+import { ClearComponent } from '@lucca-front/ng/clear';
+import { LuOptionDirective } from '@lucca-front/ng/core-select';
+import { LuCoreSelectUsersDirective } from '@lucca-front/ng/core-select/user';
+import { PopoverDirective } from '@lucca-front/ng/popover2';
 import { LuSimpleSelectInputComponent } from '@lucca-front/ng/simple-select';
 import { ILuUser, LuUserDisplayPipe, LuUserPictureComponent } from '@lucca-front/ng/user';
-import { FormsModule } from '@angular/forms';
-import { LuCoreSelectUsersDirective } from '@lucca-front/ng/core-select/user';
-import { LuOptionDirective } from '@lucca-front/ng/core-select';
+import { ButtonComponent } from '@lucca/prisme/button';
+import { IconComponent } from '@lucca/prisme/icon';
 
 @Component({
 	selector: 'lu-impersonation',
-	imports: [ButtonComponent, PopoverDirective, FormsModule, LuSimpleSelectInputComponent, LuCoreSelectUsersDirective, LuUserDisplayPipe, LuOptionDirective, LuUserPictureComponent],
+	imports: [
+		ButtonComponent,
+		PopoverDirective,
+		FormsModule,
+		LuSimpleSelectInputComponent,
+		LuCoreSelectUsersDirective,
+		LuUserDisplayPipe,
+		LuOptionDirective,
+		LuUserPictureComponent,
+		IconComponent,
+		ClearComponent,
+	],
 	templateUrl: './impersonation.component.html',
 	styleUrl: './impersonation.component.scss',
 	encapsulation: ViewEncapsulation.None,
 	changeDetection: ChangeDetectionStrategy.OnPush,
+	host: {
+		class: 'impersonation',
+	},
 })
 export class ImpersonationComponent {
 	protected elementRef = inject(ElementRef);

@@ -1,0 +1,93 @@
+@use '@lucca-front/scss/src/commons/config';
+@use '@lucca-front/scss/src/commons/utils/namespace';
+@use '@lucca-front/scss/src/commons/utils/reset';
+@use '@lucca-front/scss/src/components/clear/exports' as clear;
+
+@mixin component($atRoot: namespace.$defaultAtRoot) {
+	position: relative;
+	inline-size: fit-content;
+	display: block;
+
+	@at-root ($atRoot) {
+		.impersonation-trigger {
+			@include reset.button;
+
+			border: 1px solid var(--components-impersonation-trigger-borderColor);
+			background-color: var(--components-impersonation-trigger-backgroundColor);
+			border-radius: var(--pr-t-border-radius-200);
+			inline-size: fit-content;
+			display: flex;
+			align-items: center;
+			gap: var(--pr-t-spacings-100);
+			padding: var(--pr-t-spacings-50);
+			padding-inline-end: var(--pr-t-spacings-100);
+			min-block-size: var(--pr-t-spacings-500);
+			min-inline-size: var(--pr-t-spacings-500);
+			font-weight: var(--components-impersonation-trigger-fontWeight);
+			color: var(--components-impersonation-trigger-color);
+			box-shadow: var(--components-impersonation-trigger-boxShadow);
+			transition-property: box-shadow, border-color;
+			transition-duration: var(--commons-animations-durations-fast);
+		}
+
+		.impersonation-trigger-icon {
+			color: var(--components-impersonation-trigger-icon-color);
+			rotate: var(--components-impersonation-trigger-icon-rotate);
+			transition-property: rotate;
+			transition-duration: var(--commons-animations-durations-fast);
+			margin-inline-start: var(--components-impersonation-trigger-icon-marginInlineStart);
+		}
+
+		.impersonation-clear.clear {
+			position: absolute;
+			z-index: 1;
+			inset-inline-end: calc(var(--pr-t-spacings-400) + var(--pr-t-spacings-75));
+			inset-block-start: var(--pr-t-spacings-150);
+			display: var(--components-impersonation-clear-display);
+
+			@include clear.product;
+		}
+
+		.impersonation_popover-content-option {
+			display: flex;
+		}
+
+		// .impersonation_popover-content.popover-contentOptional {
+		// 	display: flex;
+		// 	flex-direction: column;
+		// 	gap: var(--pr-t-spacings-50);
+
+		// 	&:has(.impersonation_popover-content-option) {
+		// 		--components-popover-padding: var(--pr-t-spacings-50);
+		// 	}
+		// }
+
+		// .impersonation_popover-content-option {
+		// 	padding: var(--pr-t-spacings-50) var(--pr-t-spacings-100);
+		// 	border-radius: var(--pr-t-border-radius-default);
+		// 	position: relative;
+
+		// 	.formLabel {
+		// 		position: static;
+
+		// 		&::before {
+		// 			content: '';
+		// 			position: absolute;
+		// 			inset: 0;
+		// 		}
+		// 	}
+
+		// 	&:hover {
+		// 		background-color: var(--palettes-neutral-50);
+		// 	}
+
+		// 	&:has(:checked) {
+		// 		background-color: var(--palettes-product-50);
+
+		// 		&:hover {
+		// 			background-color: var(--palettes-product-100);
+		// 		}
+		// 	}
+		// }
+	}
+}

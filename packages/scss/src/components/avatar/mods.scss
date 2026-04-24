@@ -102,3 +102,31 @@
 		}
 	}
 }
+
+@mixin notFullRoundedXXXL {
+	--components-avatar-borderRadius: var(--pr-t-border-radius-400);
+}
+
+@mixin notFullRoundedXXL {
+	--components-avatar-borderRadius: var(--pr-t-border-radius-300);
+}
+
+@mixin notFullRoundedXL {
+	--components-avatar-borderRadius: var(--pr-t-border-radius-300);
+}
+
+@mixin notFullRoundedL {
+	--components-avatar-borderRadius: var(--pr-t-border-radius-200);
+}
+
+@mixin notFullRounded {
+	--components-avatar-borderRadius: var(--pr-t-border-radius-200);
+}
+
+@mixin notFullRoundedS {
+	--components-avatar-borderRadius: var(--pr-t-border-radius-150);
+}
+
+@mixin notFullRoundedXS {
+	--components-avatar-borderRadius: var(--pr-t-border-radius-100);
+}

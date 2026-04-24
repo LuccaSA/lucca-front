@@ -1,9 +1,9 @@
-import { applicationConfig, Meta, moduleMetadata } from '@storybook/angular';
-import { ImpersonationComponent } from '@lucca-front/ng/impersonation';
+import { JsonPipe } from '@angular/common';
 import { provideHttpClient } from '@angular/common/http';
 import { provideCoreSelectCurrentUserId } from '@lucca-front/ng/core-select/user';
+import { ImpersonationComponent } from '@lucca-front/ng/impersonation';
+import { applicationConfig, Meta, moduleMetadata } from '@storybook/angular';
 import { StoryModelDisplayComponent } from '../../../../helpers/story-model-display.component';
-import { JsonPipe } from '@angular/common';
 
 export default {
 	title: 'Documentation/Navigation/Impersonation/Angular',
@@ -16,11 +16,9 @@ export default {
 	],
 	render: () => {
 		return {
-			template: `<lu-impersonation [(selectedUser)]="example"></lu-impersonation>
+			template: `<lu-impersonation [(selectedUser)]="example" />
 
-<pr-story-model-display>
-	{{example | json}}
-</pr-story-model-display>
+<pr-story-model-display>{{example | json}}</pr-story-model-display>
 `,
 		};
 	},

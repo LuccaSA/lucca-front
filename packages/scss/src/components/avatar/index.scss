@@ -36,10 +36,38 @@
 		&.mod-placeholder {
 			@include placeholder;
 		}
-	}
 
-	&.mod-AI {
-		@include AI;
+		&.mod-AI {
+			@include AI;
+		}
+
+		&.mod-notFullRounded {
+			&.mod-XS {
+				@include notFullRoundedXS;
+			}
+
+			&.mod-S {
+				@include notFullRoundedS;
+			}
+
+			@include notFullRounded;
+
+			&.mod-L {
+				@include notFullRoundedL;
+			}
+
+			&.mod-XL {
+				@include notFullRoundedXL;
+			}
+
+			&.mod-XXL {
+				@include notFullRoundedXXL;
+			}
+
+			&.mod-XXXL {
+				@include notFullRoundedXXXL;
+			}
+		}
 	}
 }
 
