@@ -1,6 +1,6 @@
 import { booleanAttribute, ChangeDetectionStrategy, Component, computed, ElementRef, forwardRef, inject, input, LOCALE_ID, model, output, viewChild, ViewEncapsulation } from '@angular/core';
 import { FormsModule, NG_VALUE_ACCESSOR } from '@angular/forms';
-import { intlInputOptions, isNil, isNotNil } from '@lucca-front/ng/core';
+import { intlInputOptions, isNil, isNotNil, ɵeffectWithDeps } from '@lucca-front/ng/core';
 import { BasePickerComponent } from '../core/base-picker.component';
 import { ISO8601Time } from '../core/date-primitives';
 import {
@@ -101,6 +101,16 @@ export class TimePickerComponent extends BasePickerComponent {
 	protected readonly ampmDisplay = computed(() => {
 		return formatAMPM(this.hours()).suffix;
 	});
+
+	constructor() {
+		super();
+		ɵeffectWithDeps([this.value], (value) => {
+			if (isNotNil(value) && value !== '––:––:––') {
+				this.hoursPart()?.isValueSet.set(true);
+				this.minutesPart()?.isValueSet.set(true);
+			}
+		});
+	}
 
 	get firstTimePickerInputId(): string | undefined {
 		return this.hoursPart()?.inputId ? `${this.hoursPart()?.inputId}-input` : undefined;
