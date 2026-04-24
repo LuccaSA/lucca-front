@@ -9,8 +9,8 @@
 	min-inline-size: var(--components-dropdown-minInlineSize);
 	max-inline-size: var(--components-dropdown-maxInlineSize);
 	max-block-size: var(--components-dropdown-maxBlockSize);
-	overflow-x: hidden;
-	overflow-y: auto;
+	overflow-inline: hidden;
+	overflow-block: auto;
 
 	@at-root ($atRoot) {
 		// stylelint-disable-next-line selector-disallowed-list -- .lu-dropdown-options is deprecated
