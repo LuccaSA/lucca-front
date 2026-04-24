@@ -71,6 +71,9 @@ export class TimePickerComponent extends BasePickerComponent {
 
 	readonly timeChange = output<TimeChangeEvent>();
 
+	readonly prevPicker = output<void>();
+	readonly nextPicker = output<void>();
+
 	protected readonly hoursDisplay = computed(() => getHoursDisplayPartFromIsoTime(this.value(), this.enableMeridiemDisplay()));
 	protected readonly minutesDisplay = computed(() => getMinutesDisplayPartFromIsoTime(this.value()));
 
@@ -103,7 +106,7 @@ export class TimePickerComponent extends BasePickerComponent {
 		return this.hoursPart()?.inputId ? `${this.hoursPart()?.inputId}-input` : undefined;
 	}
 
-	protected override focusPart(type: 'hours' | 'minutes' | 'meridiem') {
+	override focusPart(type: 'hours' | 'minutes' | 'meridiem') {
 		if (type === 'meridiem') {
 			const elementToFocus = this.ampmDisplay() === 'AM' ? this.anteMeridiemRef()?.nativeElement : this.postMeridiemRef()?.nativeElement;
 			elementToFocus?.focus();

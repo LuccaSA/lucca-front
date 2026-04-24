@@ -12,6 +12,7 @@
 			[displayArrows]="displayArrows()"
 			[forceMeridiemDisplay]="forceMeridiemDisplay()"
 			(blur)="onTouched()"
+			(nextPicker)="timePickerEnd.focusPart('hours')"
 		/>
 		<label role="presentation" [attr.for]="timePickerEnd?.firstTimePickerInputId" class="timePicker-arrow">
 			<lu-icon class="timePicker-arrow-icon" icon="arrowRight" />
@@ -28,6 +29,7 @@
 			[displayArrows]="displayArrows()"
 			[forceMeridiemDisplay]="forceMeridiemDisplay()"
 			(blur)="onTouched()"
+			(prevPicker)="timePickerStart.focusPart(partToFocus())"
 		/>
 	</div>
 </div>

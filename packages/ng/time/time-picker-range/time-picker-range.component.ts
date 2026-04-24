@@ -106,4 +106,8 @@ export class TimePickerRangeComponent implements ControlValueAccessor, OnInit, V
 	onTouched(): void {
 		this.#onTouched?.();
 	}
+
+	partToFocus(): 'meridiem' | 'minutes' {
+		return this.forceMeridiemDisplay() ? 'meridiem' : 'minutes';
+	}
 }
