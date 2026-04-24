@@ -1,6 +1,6 @@
 import { isNotNil } from '@lucca-front/ng/core';
 import { Duration } from 'date-fns';
-import { TimePickerRange } from '../time-picker-range/time-picker-range';
+import { TimeRangePickerRange } from '../time-range-picker/time-range-picker';
 import { ISO8601Duration, ISO8601Time } from './date-primitives';
 
 export type NonNullableDateFnsDuration = {
@@ -93,14 +93,14 @@ export const createDurationFromHoursAndMinutes = (hours: number, minutes: number
 	return `PT${hours}H${minutes}M`;
 };
 
-export const isValidTimePickerRange = (time: TimePickerRange): boolean => {
+export const isValidTimeRangePicker = (time: TimeRangePickerRange): boolean => {
 	if (isNotNil(time?.end) && isNotNil(time?.start)) {
 		return true;
 	}
 	return false;
 };
 
-export const isEndTimeBeforeStartTime = (time: TimePickerRange): boolean => {
+export const isEndTimeBeforeStartTime = (time: TimeRangePickerRange): boolean => {
 	if (isNotNil(time?.end) && isNotNil(time?.start)) {
 		return getTotalSeconds(time.end) >= getTotalSeconds(time.start);
 	}
