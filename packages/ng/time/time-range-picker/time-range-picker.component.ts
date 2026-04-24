@@ -1,6 +1,7 @@
 import { booleanAttribute, ChangeDetectionStrategy, Component, computed, forwardRef, inject, Injector, input, OnInit, signal, ViewEncapsulation } from '@angular/core';
 import { AbstractControl, ControlValueAccessor, NG_VALIDATORS, NG_VALUE_ACCESSOR, NgControl, NgModel, ValidationErrors, Validator } from '@angular/forms';
 import { intlInputOptions, isNil } from '@lucca-front/ng/core';
+import { FORM_FIELD_INSTANCE } from '@lucca-front/ng/form-field';
 import { IconComponent } from '@lucca/prisme/icon';
 import { ISO8601Duration, ISO8601Time } from '../core/date-primitives';
 import { isValidTimeRangePicker, MAX_TIME } from '../core/duration.utils';
@@ -36,6 +37,7 @@ import { TimeRangePickerSize } from './time-range-picker.type';
 })
 export class TimeRangePickerComponent implements ControlValueAccessor, OnInit, Validator {
 	#injector = inject(Injector);
+	#formFieldRef = inject(FORM_FIELD_INSTANCE, { optional: true });
 	#ngControl: NgControl; // Initialized in ngOnInit
 
 	#onChange?: (value: TimeRangePickerRange | null) => void;
@@ -44,8 +46,6 @@ export class TimeRangePickerComponent implements ControlValueAccessor, OnInit, V
 	readonly value = signal<TimeRangePickerRange | null>(null);
 
 	readonly intl = input(...intlInputOptions(LU_TIME_RANGE_PICKER_TRANSLATIONS));
-
-	readonly label = input<string>('');
 
 	readonly displayArrows = input(false, { transform: booleanAttribute });
 
@@ -61,6 +61,7 @@ export class TimeRangePickerComponent implements ControlValueAccessor, OnInit, V
 
 	readonly startValue = computed(() => this.value()?.start ?? '––:––:––');
 	readonly endValue = computed(() => this.value()?.end ?? '––:––:––');
+	readonly formFieldLabel = computed(() => this.#formFieldRef?.label());
 
 	ngOnInit() {
 		this.#ngControl = this.#injector.get(NgControl);
