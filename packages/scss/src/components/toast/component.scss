@@ -70,8 +70,7 @@
 
 		.toast-item-content-description {
 			margin: 0;
-			overflow-wrap: break-word;
-			hyphens: auto;
+			overflow-wrap: anywhere;
 		}
 
 		.toasts-item-kill {

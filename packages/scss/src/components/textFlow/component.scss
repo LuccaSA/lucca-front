@@ -1,10 +1,7 @@
 @use '@lucca-front/scss/src/commons/utils/namespace';
 
 @mixin component($atRoot: namespace.$defaultAtRoot) {
-	* {
-		overflow-wrap: break-word;
-		hyphens: auto;
-	}
+	overflow-wrap: anywhere;
 
 	h1 {
 		margin-block: var(--pr-t-spacings-300);
@@ -33,11 +30,6 @@
 
 	li {
 		margin-block: var(--pr-t-spacings-50);
-	}
-
-	a {
-		overflow-wrap: anywhere;
-		hyphens: unset;
 	}
 
 	& > :first-child {
