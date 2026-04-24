@@ -1,20 +1,20 @@
 import { provideHttpClient } from '@angular/common/http';
-import { FileEntryComponent } from '@lucca-front/ng/file-upload';
+import { FILE_ENTRY_SIZE, FILE_ENTRY_STATE, FileEntryComponent } from '@lucca-front/ng/file-upload';
 import { applicationConfig, Meta, moduleMetadata } from '@storybook/angular';
-import { generateInputs } from 'stories/helpers/stories';
+import { generateInputs, setStoryOptions } from 'stories/helpers/stories';
 
 export default {
 	title: 'Documentation/File/FileEntry/Angular/Basic',
 	argTypes: {
 		size: {
-			options: ['S', null],
+			options: setStoryOptions(FILE_ENTRY_SIZE),
 			control: {
 				type: 'radio',
 			},
 			description: 'Modifie la taille du composant.',
 		},
 		state: {
-			options: [null, 'loading', 'error'],
+			options: setStoryOptions(FILE_ENTRY_STATE),
 			control: {
 				type: 'radio',
 			},
@@ -88,7 +88,6 @@ export const Basic = {
 	args: {
 		media: false,
 		displayFileName: false,
-		size: null,
 		fileSize: 28420,
 		withFileSize: true,
 		fileType: 'image/png',
@@ -96,7 +95,6 @@ export const Basic = {
 		fileName: 'dummyimage.png',
 		iconOverride: '',
 		previewUrl: 'https://dummyimage.com/500',
-		state: null,
 		inlineMessageError: 'Virus détecté dans le fichier.',
 		downloadURL: '',
 		deletable: true,

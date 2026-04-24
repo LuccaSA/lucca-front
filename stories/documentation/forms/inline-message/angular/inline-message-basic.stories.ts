@@ -1,19 +1,20 @@
-import { InlineMessageComponent } from '@lucca-front/ng/inline-message';
+import { INLINE_MESSAGE_SIZE, INLINE_MESSAGE_STATE, InlineMessageComponent } from '@lucca-front/ng/inline-message';
 import { Meta, StoryObj } from '@storybook/angular';
+import { setStoryOptions } from 'stories/helpers/stories';
 
 export default {
 	title: 'Documentation/Forms/InlineMessage/Angular/Basic',
 	component: InlineMessageComponent,
 	argTypes: {
 		state: {
-			options: ['success', 'warning', 'error', 'default'],
+			options: setStoryOptions(INLINE_MESSAGE_STATE),
 			control: {
 				type: 'select',
 			},
 			description: 'Modifie l’état de l’inline message.',
 		},
 		size: {
-			options: ['S', 'M'],
+			options: setStoryOptions(INLINE_MESSAGE_SIZE),
 			control: {
 				type: 'select',
 			},

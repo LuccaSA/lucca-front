@@ -1,6 +1,7 @@
 import { IconsList } from '@/stories/icons-list';
-import { IconComponent } from '@lucca-front/ng/icon';
+import { ICON_COLOR, ICON_SIZE, IconComponent } from '@lucca-front/ng/icon';
 import { Meta, StoryObj } from '@storybook/angular';
+import { setStoryOptions } from 'stories/helpers/stories';
 
 export default {
 	title: 'Documentation/Texts/Icons/Angular',
@@ -15,6 +16,7 @@ export default {
 			description: 'Modifie le glyphe de l’icône.',
 		},
 		color: {
+			options: setStoryOptions(ICON_COLOR),
 			if: { arg: 'AI', truthy: false },
 			description: 'Modifie la couleur de l’icône.',
 		},
@@ -25,8 +27,8 @@ export default {
 			},
 		},
 		size: {
-			options: ['XXS', 'XS', 'S', 'M', 'L', 'XL', 'XXL'],
-			description: 'Modifie la taille de l’icône.',
+			options: setStoryOptions(ICON_SIZE),
+			description: "Modifie la taille de l'icône.",
 			control: {
 				type: 'select',
 			},

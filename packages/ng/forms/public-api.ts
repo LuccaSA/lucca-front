@@ -1,4 +1,5 @@
 export * from './form-field-id.directive';
+export * from './form-field.type';
 export * from './inject-ng-control';
 export * from './noop-value-accessor.directive';
 
@@ -9,6 +10,7 @@ export * from './multilanguage-input/validators';
 export * from './number-format-input/number-format-input.component';
 export * from './number-input/number-input.component';
 export * from './radio-group-input/radio-group-input.component';
+export * from './radio-group-input/radio-group-input.type';
 export * from './radio-group-input/radio/radio.component';
 export * from './switch-input/switch-input.component';
 export * from './text-input/text-input-addon';
@@ -19,6 +21,7 @@ export * from './number-input/number-input.translate';
 export * from './text-input/text-input.translate';
 
 export * from './fieldset/fieldset.component';
+export * from './fieldset/fieldset.type';
 
 export * from './color-input/color';
 export * from './color-input/color-input.component';

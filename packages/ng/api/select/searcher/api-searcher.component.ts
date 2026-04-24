@@ -6,6 +6,7 @@ import { ALuOptionOperator, LuOptionPlaceholderComponent } from '@lucca-front/ng
 import { Observable } from 'rxjs';
 import { debounceTime } from 'rxjs/operators';
 import { ALuApiService, LuApiHybridService } from '../../service/index';
+import { ApiSelectStandard } from '../api-select.type';
 import { ALuApiOptionPagedSearcher, ALuApiOptionSearcher } from './api-searcher.model';
 
 @Component({
@@ -35,7 +36,7 @@ export class LuApiSearcherComponent<T extends import('../../api.model').ILuApiIt
 	@ViewChild('searchInput', { read: ElementRef, static: true })
 	searchInput: ElementRef<HTMLElement>;
 
-	@Input() set standard(standard: 'v3' | 'v4') {
+	@Input() set standard(standard: ApiSelectStandard) {
 		this._service.standard = standard;
 	}
 	@Input() set api(api: string) {
@@ -119,7 +120,7 @@ export class LuApiPagedSearcherComponent<T extends import('../../api.model').ILu
 {
 	@ViewChild('searchInput', { read: ElementRef, static: true })
 	searchInput: ElementRef<HTMLElement>;
-	@Input() set standard(standard: 'v3' | 'v4') {
+	@Input() set standard(standard: ApiSelectStandard) {
 		this._service.standard = standard;
 	}
 	@Input() set api(api: string) {

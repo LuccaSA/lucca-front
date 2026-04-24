@@ -1,14 +1,14 @@
 import { HttpErrorResponse, HttpStatusCode, provideHttpClient } from '@angular/common/http';
 import { Injectable, LOCALE_ID, Pipe, PipeTransform, signal } from '@angular/core';
 import { ButtonComponent } from '@lucca-front/ng/button';
-import { FileEntry, FileEntryComponent, MultiFileUploadComponent, SingleFileUploadComponent } from '@lucca-front/ng/file-upload';
+import { FILE_UPLOAD_SIZE, FileEntry, FileEntryComponent, MultiFileUploadComponent, SingleFileUploadComponent } from '@lucca-front/ng/file-upload';
 import { FormFieldComponent } from '@lucca-front/ng/form-field';
 import { TextInputComponent } from '@lucca-front/ng/forms';
 import { LuInputDirective } from '@lucca-front/ng/input';
 import { TagComponent } from '@lucca-front/ng/tag';
 import { applicationConfig, Meta, moduleMetadata } from '@storybook/angular';
 import { map, Observable, switchMap, throwError, timer } from 'rxjs';
-import { generateInputs } from 'stories/helpers/stories';
+import { generateInputs, setStoryOptions } from 'stories/helpers/stories';
 
 type LuccaFileUploadResultId = string;
 
@@ -114,7 +114,7 @@ export default {
 	title: 'Documentation/File/FileUpload/Angular/Basic',
 	argTypes: {
 		size: {
-			options: ['S', null],
+			options: setStoryOptions(FILE_UPLOAD_SIZE),
 			control: {
 				type: 'select',
 			},
@@ -279,7 +279,6 @@ export const Multi = {
 		}
 	},
 	args: {
-		size: null,
 		media: false,
 		displayFileName: false,
 		fileMaxSize: 5000000,
@@ -317,7 +316,6 @@ export const Single = {
 		}
 	},
 	args: {
-		size: null,
 		accept: [
 			{
 				format: 'image/*',
