@@ -6,4 +6,5 @@ export * from './skeleton-header/skeleton-header.component';
 export * from './skeleton-index-table/skeleton-index-table.component';
 export * from './skeleton-resource-card/skeleton-resource-card.component';
 export * from './skeleton-table/skeleton-table.component';
+export * from './skeleton-user-popover/skeleton-user-popover.component';
 export * from './skeleton.type';

@@ -1,6 +1,6 @@
-<div class="form-field skeleton is-loading" [class.mod-dark]="dark()" inert="inert">
+<div class="form-field skeleton is-loading" inert="inert">
 	@if (!hiddenLabel()) {
-		<span class="skeleton-item" [style.--components-skeleton-text-width]="getRandomPercent()"></span>
+		<span class="skeleton-item" [class.mod-dark]="dark()" [style.--components-skeleton-text-width]="getRandomPercent()"></span>
 	}
 	<div class="textField">
 		<div class="textField-input">

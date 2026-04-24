@@ -32,5 +32,5 @@ export class SkeletonTableComponent {
 	readonly colsNumber = computed<unknown[]>(() => new Array(this.cols()));
 	readonly rowsNumber = computed<unknown[]>(() => new Array(this.rows()));
 
-	readonly randomPercent: string = `${Math.floor(Math.random() * (66 - 33) + 33).toString()}%`;
+	readonly getRandomPercent = (min: number = 33, max: number = 66): string => `${Math.floor(Math.random() * (max - min) + min).toString()}%`;
 }

@@ -14,5 +14,5 @@ export class SkeletonResourceCardComponent {
 
 	readonly lines = computed(() => Array.from({ length: this.descriptionLines() }));
 
-	getRandomPercent = (min: number = 33, max: number = 66): string => `${Math.floor(Math.random() * (max - min) + min).toString()}%`;
+	readonly getRandomPercent = (min: number = 33, max: number = 66): string => `${Math.floor(Math.random() * (max - min) + min).toString()}%`;
 }
