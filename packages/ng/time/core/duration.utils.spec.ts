@@ -1,6 +1,5 @@
-import { TimePickerRange } from '../time-picker-range/time-picker-range';
-import { ISO8601Time } from './date-primitives';
-import { getTotalSeconds, isEndTimeBeforeStartTime, isValidTimePickerRange } from './duration.utils';
+import { TimeRangePickerRange } from '../time-range-picker/time-range-picker';
+import { getTotalSeconds, isEndTimeBeforeStartTime, isValidTimeRangePicker } from './duration.utils';
 
 describe('DurationUtils', () => {
 	describe('getTotalSeconds', () => {
@@ -27,16 +26,16 @@ describe('DurationUtils', () => {
 		});
 	});
 
-	describe('isValidTimePickerRange', () => {
+	describe('isValidTimeRangePicker', () => {
 		it('should return true when start and end are defined', () => {
 			// Arrange
-			const range: TimePickerRange = {
+			const range: TimeRangePickerRange = {
 				start: '09:00:00',
 				end: '17:00:00',
 			};
 
 			// Act
-			const isValid = isValidTimePickerRange(range);
+			const isValid = isValidTimeRangePicker(range);
 
 			// Assert
 			expect(isValid).toBe(true);
@@ -44,12 +43,12 @@ describe('DurationUtils', () => {
 
 		it('should return false when start is undefined', () => {
 			// Arrange
-			const range: TimePickerRange = {
+			const range: TimeRangePickerRange = {
 				end: '17:00:00',
 			};
 
 			// Act
-			const isValid = isValidTimePickerRange(range);
+			const isValid = isValidTimeRangePicker(range);
 
 			// Assert
 			expect(isValid).toBe(false);
@@ -57,12 +56,12 @@ describe('DurationUtils', () => {
 
 		it('should return false when end is undefined', () => {
 			// Arrange
-			const range: TimePickerRange = {
+			const range: TimeRangePickerRange = {
 				start: '09:00:00',
 			};
 
 			// Act
-			const isValid = isValidTimePickerRange(range);
+			const isValid = isValidTimeRangePicker(range);
 
 			// Assert
 			expect(isValid).toBe(false);
@@ -70,10 +69,10 @@ describe('DurationUtils', () => {
 
 		it('should return false when both start and end are undefined', () => {
 			// Arrange
-			const range: TimePickerRange = {};
+			const range: TimeRangePickerRange = {};
 
 			// Act
-			const isValid = isValidTimePickerRange(range);
+			const isValid = isValidTimeRangePicker(range);
 
 			// Assert
 			expect(isValid).toBe(false);
@@ -83,7 +82,7 @@ describe('DurationUtils', () => {
 	describe('isEndTimeBeforeStartTime', () => {
 		it('should return true when end time is after start time', () => {
 			// Arrange
-			const range: TimePickerRange = {
+			const range: TimeRangePickerRange = {
 				start: '09:00:00',
 				end: '17:00:00',
 			};
@@ -97,7 +96,7 @@ describe('DurationUtils', () => {
 
 		it('should return true when end time equals start time', () => {
 			// Arrange
-			const range: TimePickerRange = {
+			const range: TimeRangePickerRange = {
 				start: '12:00:00',
 				end: '12:00:00',
 			};
@@ -111,7 +110,7 @@ describe('DurationUtils', () => {
 
 		it('should return false when end time is before start time', () => {
 			// Arrange
-			const range: TimePickerRange = {
+			const range: TimeRangePickerRange = {
 				start: '17:00:00',
 				end: '09:00:00',
 			};

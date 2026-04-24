@@ -3,42 +3,42 @@ import { AbstractControl, ControlValueAccessor, NG_VALIDATORS, NG_VALUE_ACCESSOR
 import { intlInputOptions, isNil } from '@lucca-front/ng/core';
 import { IconComponent } from '@lucca/prisme/icon';
 import { ISO8601Duration, ISO8601Time } from '../core/date-primitives';
-import { isValidTimePickerRange, MAX_TIME } from '../core/duration.utils';
+import { isValidTimeRangePicker, MAX_TIME } from '../core/duration.utils';
 import { TimePickerComponent } from '../time-picker/time-picker.component';
-import { TimePickerRange } from './time-picker-range';
-import { LU_TIME_PICKER_RANGE_TRANSLATIONS } from './time-picker-range.translate';
-import { TimeRangePickerSize } from './time-picker-range.type';
+import { TimeRangePickerRange } from './time-range-picker';
+import { LU_TIME_RANGE_PICKER_TRANSLATIONS } from './time-range-picker.translate';
+import { TimeRangePickerSize } from './time-range-picker.type';
 
 @Component({
-	selector: 'lu-time-picker-range',
-	templateUrl: './time-picker-range.component.html',
-	styleUrl: './time-picker-range.component.scss',
+	selector: 'lu-time-range-picker',
+	templateUrl: './time-range-picker.component.html',
+	styleUrl: './time-range-picker.component.scss',
 	changeDetection: ChangeDetectionStrategy.OnPush,
 	encapsulation: ViewEncapsulation.None,
 	imports: [IconComponent, TimePickerComponent],
 	providers: [
 		{
 			provide: NG_VALUE_ACCESSOR,
-			useExisting: forwardRef(() => TimePickerRangeComponent),
+			useExisting: forwardRef(() => TimeRangePickerComponent),
 			multi: true,
 		},
 		{
 			provide: NG_VALIDATORS,
-			useExisting: forwardRef(() => TimePickerRangeComponent),
+			useExisting: forwardRef(() => TimeRangePickerComponent),
 			multi: true,
 		},
 	],
 })
-export class TimePickerRangeComponent implements ControlValueAccessor, OnInit, Validator {
+export class TimeRangePickerComponent implements ControlValueAccessor, OnInit, Validator {
 	#injector = inject(Injector);
 	#ngControl: NgControl; // Initialized in ngOnInit
 
-	#onChange?: (value: TimePickerRange | null) => void;
+	#onChange?: (value: TimeRangePickerRange | null) => void;
 	#onTouched?: () => void;
 
-	readonly value = signal<TimePickerRange | null>(null);
+	readonly value = signal<TimeRangePickerRange | null>(null);
 
-	readonly intl = input(...intlInputOptions(LU_TIME_PICKER_RANGE_TRANSLATIONS));
+	readonly intl = input(...intlInputOptions(LU_TIME_RANGE_PICKER_TRANSLATIONS));
 
 	readonly label = input<string>('');
 
@@ -61,14 +61,14 @@ export class TimePickerRangeComponent implements ControlValueAccessor, OnInit, V
 		this.#ngControl = this.#injector.get(NgControl);
 	}
 
-	validate(control: AbstractControl<TimePickerRange | null>): ValidationErrors | null {
+	validate(control: AbstractControl<TimeRangePickerRange | null>): ValidationErrors | null {
 		if (isNil(control.value)) {
 			return null;
 		}
-		return !isValidTimePickerRange(control.value) ? { time: true } : null;
+		return !isValidTimeRangePicker(control.value) ? { time: true } : null;
 	}
 
-	writeValue(value: TimePickerRange | null): void {
+	writeValue(value: TimeRangePickerRange | null): void {
 		if (this.#ngControl instanceof NgModel && isNil(this.#onChange)) {
 			// avoid phantom call for ngModel
 			// https://github.com/angular/angular/issues/14988#issuecomment-1310420293
@@ -77,7 +77,7 @@ export class TimePickerRangeComponent implements ControlValueAccessor, OnInit, V
 		this.value.set(value ?? null);
 	}
 
-	registerOnChange(fn: (value: TimePickerRange | null) => void): void {
+	registerOnChange(fn: (value: TimeRangePickerRange | null) => void): void {
 		this.#onChange = fn;
 	}
 
@@ -86,7 +86,7 @@ export class TimePickerRangeComponent implements ControlValueAccessor, OnInit, V
 	}
 
 	onStartChange(start: ISO8601Time): void {
-		const newValue: TimePickerRange = {
+		const newValue: TimeRangePickerRange = {
 			start,
 			end: this.value()?.end,
 		};
@@ -95,7 +95,7 @@ export class TimePickerRangeComponent implements ControlValueAccessor, OnInit, V
 	}
 
 	onEndChange(end: ISO8601Time): void {
-		const newValue: TimePickerRange = {
+		const newValue: TimeRangePickerRange = {
 			start: this.value()?.start,
 			end,
 		};
