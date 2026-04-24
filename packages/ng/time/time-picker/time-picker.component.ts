@@ -17,6 +17,7 @@ import { isoDurationToDateFnsDuration, MAX_TIME } from '../core/duration.utils';
 import { ceilToNearest, circularize, floorToNearest, roundToNearest } from '../core/math.utils';
 import { PickerControlDirection } from '../core/misc.utils';
 import { TimePickerPartComponent } from '../core/time-picker-part.component';
+import { LU_TIME_RANGE_PICKER_INSTANCE } from '../time-range-picker/time-range-picker.token';
 import { DEFAULT_MIN_TIME, DEFAULT_TIME_DECIMAL_PIPE_FORMAT, TimeChangeEvent } from './time-picker.model';
 import { LU_TIME_PICKER_TRANSLATIONS } from './time-picker.translate';
 
@@ -38,6 +39,7 @@ let nextId = 0;
 	],
 })
 export class TimePickerComponent extends BasePickerComponent {
+	#timeRangePicker = inject(LU_TIME_RANGE_PICKER_INSTANCE, { optional: true });
 	readonly intl = input(...intlInputOptions(LU_TIME_PICKER_TRANSLATIONS));
 	protected localeId = inject(LOCALE_ID);
 
@@ -82,8 +84,8 @@ export class TimePickerComponent extends BasePickerComponent {
 	protected readonly pickerClasses = computed(() => {
 		return {
 			timePicker: true,
-			'mod-stepper': this.displayArrows(),
-			'mod-stepperHover': this.displayArrows(),
+			'mod-stepper': this.displayArrows() && isNil(this.#timeRangePicker),
+			'mod-stepperHover': this.displayArrows() && isNil(this.#timeRangePicker),
 			[`mod-${this.size()}`]: Boolean(this.size()),
 		};
 	});
