@@ -72,10 +72,10 @@
 			<td>Meridiem Display</td>
 			<td>
 				<lu-form-field label="Label" tooltip="Tooltip message" inlineMessage="Helper text" inlineMessageState="default">
-					<lu-time-picker [(ngModel)]="emptyTime" forceMeridiemDisplay />
+					<lu-time-picker [(ngModel)]="emptyTime" [forceMeridiemDisplay]="true" />
 				</lu-form-field>
 				<lu-form-field label="Label" tooltip="Tooltip message" inlineMessage="Helper text" inlineMessageState="default">
-					<lu-time-picker [(ngModel)]="filledTime" forceMeridiemDisplay />
+					<lu-time-picker [(ngModel)]="filledTime" [forceMeridiemDisplay]="true" />
 				</lu-form-field>
 			</td>
 		</tr>
