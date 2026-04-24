@@ -38,6 +38,47 @@
 				</lu-form-field>
 			</td>
 		</tr>
+		<tr>
+			<td>Size</td>
+			<td>
+				<lu-form-field label="Label" tooltip="Tooltip message" inlineMessage="Helper text" inlineMessageState="default">
+					<lu-time-picker [(ngModel)]="emptyTime" size="S" />
+				</lu-form-field>
+			</td>
+		</tr>
+		<tr>
+			<td>Disabled</td>
+			<td>
+				<lu-form-field label="Label" tooltip="Tooltip message" inlineMessage="Helper text" inlineMessageState="default">
+					<lu-time-picker [(ngModel)]="emptyTime" disabled />
+				</lu-form-field>
+				<lu-form-field label="Label" tooltip="Tooltip message" inlineMessage="Helper text" inlineMessageState="default">
+					<lu-time-picker [(ngModel)]="filledTime" disabled />
+				</lu-form-field>
+			</td>
+		</tr>
+		<tr>
+			<td>Display Arrows</td>
+			<td>
+				<lu-form-field label="Label" tooltip="Tooltip message" inlineMessage="Helper text" inlineMessageState="default">
+					<lu-time-picker [(ngModel)]="emptyTime" displayArrows />
+				</lu-form-field>
+				<lu-form-field label="Label" tooltip="Tooltip message" inlineMessage="Helper text" inlineMessageState="default">
+					<lu-time-picker [(ngModel)]="filledTime" displayArrows />
+				</lu-form-field>
+			</td>
+		</tr>
+		<tr>
+			<td>Meridiem Display</td>
+			<td>
+				<lu-form-field label="Label" tooltip="Tooltip message" inlineMessage="Helper text" inlineMessageState="default">
+					<lu-time-picker [(ngModel)]="emptyTime" forceMeridiemDisplay />
+				</lu-form-field>
+				<lu-form-field label="Label" tooltip="Tooltip message" inlineMessage="Helper text" inlineMessageState="default">
+					<lu-time-picker [(ngModel)]="filledTime" forceMeridiemDisplay />
+				</lu-form-field>
+			</td>
+		</tr>
 	</tbody>
 </table>
 

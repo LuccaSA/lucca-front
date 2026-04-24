@@ -46,6 +46,36 @@
 				</lu-form-field>
 			</td>
 		</tr>
+		<tr>
+			<td>Size</td>
+			<td>
+				<lu-form-field label="Label" tooltip="Tooltip message" inlineMessage="Helper text" inlineMessageState="default">
+					<lu-duration-picker [(ngModel)]="emptyDuration" size="S" />
+				</lu-form-field>
+			</td>
+		</tr>
+		<tr>
+			<td>Disabled</td>
+			<td>
+				<lu-form-field label="Label" tooltip="Tooltip message" inlineMessage="Helper text" inlineMessageState="default">
+					<lu-duration-picker [(ngModel)]="emptyDuration" disabled />
+				</lu-form-field>
+				<lu-form-field label="Label" tooltip="Tooltip message" inlineMessage="Helper text" inlineMessageState="default">
+					<lu-duration-picker [(ngModel)]="filledDuration" disabled />
+				</lu-form-field>
+			</td>
+		</tr>
+		<tr>
+			<td>Display Arrows</td>
+			<td>
+				<lu-form-field label="Label" tooltip="Tooltip message" inlineMessage="Helper text" inlineMessageState="default">
+					<lu-duration-picker [(ngModel)]="emptyDuration" displayArrows />
+				</lu-form-field>
+				<lu-form-field label="Label" tooltip="Tooltip message" inlineMessage="Helper text" inlineMessageState="default">
+					<lu-duration-picker [(ngModel)]="filledDuration" displayArrows />
+				</lu-form-field>
+			</td>
+		</tr>
 	</tbody>
 </table>
 
