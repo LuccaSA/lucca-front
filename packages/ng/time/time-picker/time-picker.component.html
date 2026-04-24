@@ -16,9 +16,10 @@
 			(touched)="onTouched?.()"
 			(valueChange)="hoursInputHandler($event)"
 			(nextRequest)="focusPart('minutes')"
+			(keydown.arrowleft)="$event.preventDefault(); prevPicker.emit()"
 			(inputControlClick)="inputControlClickHandler('hours', $event)"
 		/>
-		<div aria-hidden="true" class="timePicker-fieldset-groupSeparator">{{ separator() }}</div>
+		<div aria-hidden="true" class="timePicker-fieldset-groupSeparator" [attr.data-content-before]="separator()"></div>
 		<lu-time-picker-part
 			#minutesPart
 			class="timePicker-fieldset-group"
@@ -31,7 +32,7 @@
 			showZero
 			(valueChange)="minutesInputHandler($event)"
 			(prevRequest)="focusPart('hours')"
-			(nextRequest)="focusPart('meridiem')"
+			(nextRequest)="enableMeridiemDisplay() ? focusPart('meridiem') : nextPicker.emit()"
 			(inputControlClick)="inputControlClickHandler('minutes', $event)"
 		/>
 		@if (enableMeridiemDisplay()) {
@@ -59,7 +60,7 @@
 						(ngModelChange)="switchMeridiem($event)"
 						(click)="$event.stopPropagation()"
 						(keydown.arrowleft)="$event.preventDefault(); focusPart('minutes')"
-						(keydown.arrowright)="$event.preventDefault()"
+						(keydown.arrowright)="$event.preventDefault(); nextPicker.emit()"
 					/>
 				</div>
 				<div class="timePicker-fieldset-meridiem-post">
@@ -76,7 +77,7 @@
 						(ngModelChange)="switchMeridiem($event)"
 						(click)="$event.stopPropagation()"
 						(keydown.arrowleft)="$event.preventDefault(); focusPart('minutes')"
-						(keydown.arrowright)="$event.preventDefault()"
+						(keydown.arrowright)="$event.preventDefault(); nextPicker.emit()"
 					/>
 				</div>
 				@if (displayArrows()) {

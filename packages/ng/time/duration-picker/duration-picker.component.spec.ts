@@ -52,8 +52,8 @@ function getDisplayTexts(fixture: ComponentFixture<unknown>): { hours: string; m
 	const inputs = (fixture.nativeElement as HTMLElement).querySelectorAll(classSpan);
 	expect(inputs.length).toBeGreaterThanOrEqual(2);
 	return {
-		hours: inputs[0].textContent ?? '',
-		minutes: inputs[1].textContent ?? '',
+		hours: inputs[0].getAttribute('data-content-before')!,
+		minutes: inputs[1].getAttribute('data-content-before')!,
 	};
 }
 

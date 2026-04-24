@@ -11,6 +11,10 @@ import { CalloutComponent } from '@lucca-front/ng/callout';
 		pr-story-model-display {
 			margin-block-start: var(--pr-t-spacings-400);
 			display: block;
+
+			& + & {
+				margin-block-start: var(--pr-t-spacings-100);
+			}
 		}
 
 		pr-story-model-display .callout-content {

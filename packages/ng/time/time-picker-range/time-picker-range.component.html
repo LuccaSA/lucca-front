@@ -1,0 +1,35 @@
+<div class="timePicker">
+	<div class="timePicker-fieldset">
+		<lu-time-picker
+			#timePickerStart
+			[label]="`${label()} (${intl().timePickerRangeStart})`"
+			[value]="startValue()"
+			(valueChange)="onStartChange($event)"
+			[disabled]="disabled()"
+			[max]="max()"
+			[step]="step()"
+			[size]="size()"
+			[displayArrows]="displayArrows()"
+			[forceMeridiemDisplay]="forceMeridiemDisplay()"
+			(blur)="onTouched()"
+			(nextPicker)="timePickerEnd.focusPart('hours')"
+		/>
+		<label role="presentation" [attr.for]="timePickerEnd?.firstTimePickerInputId" class="timePicker-arrow">
+			<lu-icon class="timePicker-arrow-icon" icon="arrowRight" />
+		</label>
+		<lu-time-picker
+			#timePickerEnd
+			[label]="`${label()} (${intl().timePickerRangeEnd})`"
+			[value]="endValue()"
+			(valueChange)="onEndChange($event)"
+			[disabled]="disabled()"
+			[max]="max()"
+			[step]="step()"
+			[size]="size()"
+			[displayArrows]="displayArrows()"
+			[forceMeridiemDisplay]="forceMeridiemDisplay()"
+			(blur)="onTouched()"
+			(prevPicker)="timePickerStart.focusPart(partToFocus())"
+		/>
+	</div>
+</div>

@@ -17,7 +17,7 @@
 			(nextRequest)="focusPart('minutes')"
 			(inputControlClick)="inputControlClickHandler('hours', $event)"
 		/>
-		<div aria-hidden="true" [class]="fieldsetSuffixClasses()">{{ separator() }}</div>
+		<div aria-hidden="true" [class]="fieldsetSuffixClasses()" [attr.data-content-before]="separator()"></div>
 		<lu-time-picker-part
 			#minutesPart
 			class="timePicker-fieldset-group"

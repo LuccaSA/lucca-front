@@ -13,14 +13,13 @@ import {
 	getMinutesPartFromIsoTime,
 	isoTimeToSeconds,
 } from '../core/date.utils';
-import { isoDurationToDateFnsDuration } from '../core/duration.utils';
+import { isoDurationToDateFnsDuration, MAX_TIME } from '../core/duration.utils';
 import { ceilToNearest, circularize, floorToNearest, roundToNearest } from '../core/math.utils';
 import { PickerControlDirection } from '../core/misc.utils';
 import { TimePickerPartComponent } from '../core/time-picker-part.component';
 import { DEFAULT_MIN_TIME, DEFAULT_TIME_DECIMAL_PIPE_FORMAT, TimeChangeEvent } from './time-picker.model';
 import { LU_TIME_PICKER_TRANSLATIONS } from './time-picker.translate';
 
-const MAX_TIME = '23:59:59';
 let nextId = 0;
 
 @Component({
@@ -72,6 +71,9 @@ export class TimePickerComponent extends BasePickerComponent {
 
 	readonly timeChange = output<TimeChangeEvent>();
 
+	readonly prevPicker = output<void>();
+	readonly nextPicker = output<void>();
+
 	protected readonly hoursDisplay = computed(() => getHoursDisplayPartFromIsoTime(this.value(), this.enableMeridiemDisplay()));
 	protected readonly minutesDisplay = computed(() => getMinutesDisplayPartFromIsoTime(this.value()));
 
@@ -100,7 +102,11 @@ export class TimePickerComponent extends BasePickerComponent {
 		return formatAMPM(this.hours()).suffix;
 	});
 
-	protected override focusPart(type: 'hours' | 'minutes' | 'meridiem') {
+	get firstTimePickerInputId(): string | undefined {
+		return this.hoursPart()?.inputId ? `${this.hoursPart()?.inputId}-input` : undefined;
+	}
+
+	override focusPart(type: 'hours' | 'minutes' | 'meridiem') {
 		if (type === 'meridiem') {
 			const elementToFocus = this.ampmDisplay() === 'AM' ? this.anteMeridiemRef()?.nativeElement : this.postMeridiemRef()?.nativeElement;
 			elementToFocus?.focus();

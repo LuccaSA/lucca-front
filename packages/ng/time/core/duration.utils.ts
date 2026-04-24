@@ -1,6 +1,7 @@
 import { isNotNil } from '@lucca-front/ng/core';
 import { Duration } from 'date-fns';
-import { ISO8601Duration } from './date-primitives';
+import { TimePickerRange } from '../time-picker-range/time-picker-range';
+import { ISO8601Duration, ISO8601Time } from './date-primitives';
 
 export type NonNullableDateFnsDuration = {
 	years: number;
@@ -12,6 +13,8 @@ export type NonNullableDateFnsDuration = {
 };
 
 type DateFnsDuration = Duration;
+
+export const MAX_TIME = '23:59:59';
 
 const ISO8601DurationRegExp =
 	/^(?<sign>-)?P(?:(?<years>-?\d+)Y)?(?:(?<months>-?\d+)M)?(?:(?<weeks>-?\d+)W)?(?:(?<days>-?\d+)D)?(?:T(?:(?<hours>-?\d+)H)?(?:(?<minutes>-?\d+)M)?(?:(?<seconds>-?\d+(?:\.\d+)?)S)?)?$/;
@@ -81,6 +84,25 @@ export const getMinutesPartFromDuration = (duration: ISO8601Duration): number =>
 	return Math.floor((isoDurationToSeconds(duration) % 3600) / 60);
 };
 
+export const getTotalSeconds = (time: ISO8601Time): number => {
+	const [hours, minutes, seconds] = time.split(':').map(Number);
+	return hours * 3600 + minutes * 60 + seconds;
+};
+
 export const createDurationFromHoursAndMinutes = (hours: number, minutes: number): ISO8601Duration => {
 	return `PT${hours}H${minutes}M`;
+};
+
+export const isValidTimePickerRange = (time: TimePickerRange): boolean => {
+	if (isNotNil(time?.end) && isNotNil(time?.start)) {
+		return true;
+	}
+	return false;
+};
+
+export const isEndTimeBeforeStartTime = (time: TimePickerRange): boolean => {
+	if (isNotNil(time?.end) && isNotNil(time?.start)) {
+		return getTotalSeconds(time.end) >= getTotalSeconds(time.start);
+	}
+	return false;
 };
