@@ -1,6 +1,6 @@
 import { OverlayModule } from '@angular/cdk/overlay';
 import { AsyncPipe, NgTemplateOutlet } from '@angular/common';
-import { ChangeDetectionStrategy, Component, forwardRef, HostBinding, inject, input, viewChild, ViewContainerRef, ViewEncapsulation } from '@angular/core';
+import { ChangeDetectionStrategy, Component, forwardRef, inject, input, viewChild, ViewContainerRef, ViewEncapsulation } from '@angular/core';
 import { ControlValueAccessor, FormsModule, NG_VALUE_ACCESSOR } from '@angular/forms';
 import { ClearComponent } from '@lucca-front/ng/clear';
 import { intlInputOptions, PortalDirective } from '@lucca-front/ng/core';
@@ -17,7 +17,11 @@ let nextID = 0;
 	selector: 'lu-simple-select',
 	templateUrl: './select-input.component.html',
 	styleUrl: './select-input.component.scss',
-	host: { class: 'simpleSelect' },
+	host: {
+		class: 'simpleSelect',
+		'[class.mod-filterPill]': 'this.filterPillMode',
+		'[class.mod-impersonation]': 'this.impersonationMode',
+	},
 	changeDetection: ChangeDetectionStrategy.OnPush,
 	imports: [
 		AsyncPipe,
@@ -57,11 +61,6 @@ export class LuSimpleSelectInputComponent<T> extends ALuSelectInputComponent<T, 
 
 	valueID = `value-${++nextID}`;
 
-	@HostBinding('class.mod-filterPill')
-	public get filterPillClass() {
-		return this.filterPillMode;
-	}
-
 	autocomplete = input<AutoFill>('off');
 
 	filterPillPanelAnchorRef = viewChild('filterPillPanelAnchor', { read: ViewContainerRef });
@@ -73,7 +72,7 @@ export class LuSimpleSelectInputComponent<T> extends ALuSelectInputComponent<T, 
 	}
 
 	inputSpace(event: Event): void {
-		if (this.filterPillMode) {
+		if (this.filterPillMode || this.impersonationMode) {
 			if (this.clue?.length === 0) {
 				event.preventDefault();
 				this.panelRef?.selectCurrentlyHighlightedValue();
@@ -88,5 +87,10 @@ export class LuSimpleSelectInputComponent<T> extends ALuSelectInputComponent<T, 
 	override enableFilterPillMode() {
 		this._panelRef = this.panelRefFactory.buildAndAttachPanelRef(this, this.filterPillPanelAnchorRef());
 		super.enableFilterPillMode();
+	}
+
+	override enableImpersonationMode() {
+		this._panelRef = this.panelRefFactory.buildAndAttachPanelRef(this, this.filterPillPanelAnchorRef());
+		super.enableImpersonationMode();
 	}
 }

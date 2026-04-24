@@ -22,7 +22,7 @@
 			padding: var(--pr-t-spacings-50);
 			padding-inline-end: var(--pr-t-spacings-100);
 			min-block-size: var(--pr-t-spacings-500);
-			min-inline-size: var(--pr-t-spacings-500);
+			min-inline-size: calc(var(--pr-t-spacings-500) + var(--pr-t-spacings-25));
 			font-weight: var(--components-impersonation-trigger-fontWeight);
 			color: var(--components-impersonation-trigger-color);
 			box-shadow: var(--components-impersonation-trigger-boxShadow);
@@ -51,43 +51,5 @@
 		.impersonation_popover-content-option {
 			display: flex;
 		}
-
-		// .impersonation_popover-content.popover-contentOptional {
-		// 	display: flex;
-		// 	flex-direction: column;
-		// 	gap: var(--pr-t-spacings-50);
-
-		// 	&:has(.impersonation_popover-content-option) {
-		// 		--components-popover-padding: var(--pr-t-spacings-50);
-		// 	}
-		// }
-
-		// .impersonation_popover-content-option {
-		// 	padding: var(--pr-t-spacings-50) var(--pr-t-spacings-100);
-		// 	border-radius: var(--pr-t-border-radius-default);
-		// 	position: relative;
-
-		// 	.formLabel {
-		// 		position: static;
-
-		// 		&::before {
-		// 			content: '';
-		// 			position: absolute;
-		// 			inset: 0;
-		// 		}
-		// 	}
-
-		// 	&:hover {
-		// 		background-color: var(--palettes-neutral-50);
-		// 	}
-
-		// 	&:has(:checked) {
-		// 		background-color: var(--palettes-product-50);
-
-		// 		&:hover {
-		// 			background-color: var(--palettes-product-100);
-		// 		}
-		// 	}
-		// }
 	}
 }

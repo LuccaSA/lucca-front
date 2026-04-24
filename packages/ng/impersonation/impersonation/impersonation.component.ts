@@ -65,13 +65,13 @@ export class ImpersonationComponent {
 	constructor() {
 		effect(() => {
 			const ref = this.inputComponentRef();
-			// Because ref appears only when opening the panel, we're going to call the filter pill opened hook too
+			// Because ref appears only when opening the panel, we're going to call the impersonation opened hook too
 			if (ref) {
 				untracked(() => {
-					ref.enableFilterPillMode();
-					ref.registerFilterPillClosePopover(this.closePopover);
-					ref.registerFilterPillUpdatePosition?.(this.updatePosition);
-					ref.onFilterPillOpened?.();
+					ref.enableImpersonationMode();
+					ref.registerImpersonationClosePopover(this.closePopover);
+					ref.registerImpersonationPosition?.(this.updatePosition);
+					ref.onImpersonationOpened?.();
 				});
 			}
 		});
@@ -79,7 +79,7 @@ export class ImpersonationComponent {
 
 	closePopover = () => {
 		this.popoverRef()?.close();
-		this.inputComponentRef()?.onFilterPillClosed?.();
+		this.inputComponentRef()?.onImpersonationClosed?.();
 	};
 
 	updatePosition = () => {
