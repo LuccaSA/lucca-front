@@ -1,12 +1,11 @@
 <nav role="navigation" id="top" class="skipLinks" [attr.aria-label]="intl().Goto">
-	<a
-		class="skipLinks-action palette-neutral mod-XS"
-		href="#lucca-banner-solutions-container"
-		(click)="anchor('#lucca-banner-solutions-container', $event)"
-		>{{ intl().Goto_Nav_Banner }}</a
-	>
-	<a class="skipLinks-action palette-neutral mod-XS" href="#navSide" (click)="anchor('#navSide', $event)">{{ intl().Goto_Nav_Navside }}</a>
-	<a class="skipLinks-action palette-neutral mod-XS" href="#main-content" (click)="anchor('#main-content', $event)">{{
-		intl().Goto_Content
+	<a class="skipLinks-action" href="#lucca-banner-solutions-container" (click)="anchor('#lucca-banner-solutions-container', $event)">{{
+		intl().Goto_Nav_Banner
 	}}</a>
+	<a class="skipLinks-action" href="#navSide" (click)="anchor('#navSide', $event)">{{ intl().Goto_Nav_Navside }}</a>
+	<a class="skipLinks-action" href="#main-content" (click)="anchor('#main-content', $event)">{{ intl().Goto_Content }}</a>
+
+	@for (link of skipLinksService.links; track link.id) {
+		<a class="skipLinks-action" [attr.href]="`#${link.id}`" (click)="anchor(`#${link.id}`, $event)">{{ link.label }}</a>
+	}
 </nav>
