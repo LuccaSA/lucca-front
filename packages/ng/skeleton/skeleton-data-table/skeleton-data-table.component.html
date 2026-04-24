@@ -8,7 +8,7 @@
 					@for (col of colsNumber(); track col; let i = $index) {
 						<th class="dataTable-head-row-cell" scope="col">
 							<span
-								class="skeleton-item mod-dark"
+								class="skeleton-item"
 								[class.mod-alignRight]="colsAlign()[i] === 'end'"
 								[class.mod-alignCenter]="colsAlign()[i] === 'center'"
 								[style.--components-skeleton-text-width]="getRandomPercent()"
