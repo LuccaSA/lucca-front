@@ -1,0 +1,99 @@
+<table class="demo-QAtable">
+	<tbody>
+		<tr>
+			<td></td>
+			<td>
+				<div class="demo-QAtable-list">Angular</div>
+			</td>
+		</tr>
+		<tr>
+			<td>Empty Model</td>
+			<td>
+				<div class="demo-QAtable-list">
+					<lu-time-picker-range [(ngModel)]="emptyRange" />
+				</div>
+			</td>
+		</tr>
+		<tr>
+			<td>Filled Model</td>
+			<td>
+				<div class="demo-QAtable-list">
+					<lu-time-picker-range [(ngModel)]="filledRange" />
+				</div>
+			</td>
+		</tr>
+		<tr>
+			<td>Empty Form</td>
+			<td>
+				<div class="demo-QAtable-list">
+					<lu-time-picker-range [formControl]="emptyRangeControl" />
+				</div>
+			</td>
+		</tr>
+		<tr>
+			<td>Filled Form</td>
+			<td>
+				<div class="demo-QAtable-list">
+					<lu-time-picker-range [formControl]="filledRangeControl" />
+				</div>
+			</td>
+		</tr>
+		<tr>
+			<td>Filled Start Form</td>
+			<td>
+				<div class="demo-QAtable-list">
+					<lu-time-picker-range [formControl]="filledRangeStartOnlyControl" />
+				</div>
+			</td>
+		</tr>
+		<tr>
+			<td>Filled End Form</td>
+			<td>
+				<div class="demo-QAtable-list">
+					<lu-time-picker-range [formControl]="filledRangeEndOnlyControl" />
+				</div>
+			</td>
+		</tr>
+		<tr>
+			<td>Size</td>
+			<td>
+				<div class="demo-QAtable-list">
+					<lu-time-picker-range [(ngModel)]="emptyRange" size="M" />
+					<lu-time-picker-range [(ngModel)]="filledRange" size="M" />
+					<lu-time-picker-range [(ngModel)]="emptyRange" size="S" />
+					<lu-time-picker-range [(ngModel)]="filledRange" size="S" />
+				</div>
+			</td>
+		</tr>
+		<tr>
+			<td>Meridiem Display</td>
+			<td>
+				<div class="demo-QAtable-list">
+					<lu-time-picker-range [(ngModel)]="emptyRange" forceMeridiemDisplay />
+					<lu-time-picker-range [(ngModel)]="filledRange" forceMeridiemDisplay />
+				</div>
+			</td>
+		</tr>
+		<tr>
+			<td>Display Arrows</td>
+			<td>
+				<div class="demo-QAtable-list">
+					<lu-time-picker-range [(ngModel)]="emptyRange" displayArrows />
+					<lu-time-picker-range [(ngModel)]="filledRange" displayArrows />
+				</div>
+			</td>
+		</tr>
+		<tr>
+			<td>Disabled</td>
+			<td>
+				<div class="demo-QAtable-list">
+					<lu-time-picker-range [(ngModel)]="emptyRange" disabled />
+					<lu-time-picker-range [(ngModel)]="filledRange" disabled />
+				</div>
+			</td>
+		</tr>
+	</tbody>
+</table>
+
+<!-- To tell the ui-diff tool that the page has finished rendering -->
+<span id="ready"></span>
