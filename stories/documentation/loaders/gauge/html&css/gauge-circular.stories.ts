@@ -1,4 +1,6 @@
+import { PALETTE } from '@lucca/prisme/core';
 import { Meta, StoryObj } from '@storybook/angular';
+import { setStoryOptions } from 'stories/helpers/stories';
 
 interface GaugeBasicStory {
 	palette: string;
@@ -12,14 +14,14 @@ export default {
 	title: 'Documentation/Loaders/Gauge/HTML&CSS/Circular',
 	argTypes: {
 		palette: {
-			options: ['', 'product', 'neutral', 'success', 'warning', 'error'],
+			options: setStoryOptions(PALETTE),
 			control: {
 				type: 'select',
 			},
 			description: 'Applique une palette de couleurs à la jauge.',
 		},
 		thin: {
-			description: "Diminue l'épaisseur de la jauge.",
+			description: 'Diminue l’épaisseur de la jauge.',
 		},
 		animated: {
 			description: 'Ajoute une animation au chargement ou lorsque la valeur est modifiée.',

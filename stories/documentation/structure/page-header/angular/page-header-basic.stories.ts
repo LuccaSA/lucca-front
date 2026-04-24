@@ -16,16 +16,37 @@ export default {
 	title: 'Documentation/Structure/PageHeader/Angular/Basic',
 	argTypes: {
 		label: {
-			description: 'PortalContent',
+			description: 'Titre du composant. PortalContent.',
 		},
 		description: {
-			description: 'PortalContent',
+			description: 'Description du composant. PortalContent.',
 		},
 		container: {
 			description: '[v20.1] Applique un container autour du contenu de Page Header.',
 		},
 		sticky: {
 			description: '[v21.2] Applique un comportement sticky au Page Header quand celui ci n’est pas géré par le Main Layout',
+		},
+		breadcrumbs: {
+			description: 'Exemple avec fil d’Ariane.',
+		},
+		actions: {
+			description: 'Exemple avec des actions générales.',
+		},
+		titleActions: {
+			description: 'Exemple avec des actions spécifiques au titre.',
+		},
+		navigation: {
+			description: 'Exemple avec une navigation horizontale.',
+		},
+		backAction: {
+			description: 'Exemple avec une action de retour en arrière.',
+		},
+		leading: {
+			description: 'Ajout d’un slot avant le titre.',
+		},
+		trailing: {
+			description: 'Ajout d’un slot après le titre.',
 		},
 	},
 	decorators: [

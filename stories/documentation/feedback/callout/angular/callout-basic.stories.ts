@@ -1,9 +1,10 @@
 import { ButtonComponent } from '@lucca-front/ng/button';
-import { CalloutActionsComponent, CalloutComponent, CalloutFeedbackItemComponent, CalloutFeedbackListComponent } from '@lucca-front/ng/callout';
+import { CALLOUT_HX, CALLOUT_SIZE, CalloutActionsComponent, CalloutComponent, CalloutFeedbackItemComponent, CalloutFeedbackListComponent, CalloutStates } from '@lucca-front/ng/callout';
 import { IconComponent } from '@lucca-front/ng/icon';
+import { PALETTE } from '@lucca/prisme/core';
 import { Meta, moduleMetadata, StoryObj } from '@storybook/angular';
 import { HiddenArgType } from 'stories/helpers/common-arg-types';
-import { generateInputs } from 'stories/helpers/stories';
+import { generateInputs, setStoryOptions } from 'stories/helpers/stories';
 
 export default {
 	title: 'Documentation/Feedback/Callout/Angular/Basic',
@@ -43,7 +44,7 @@ export default {
 			description: 'Masque le callout.',
 		},
 		palette: {
-			options: ['none', 'product', 'neutral', 'success', 'warning', 'error'],
+			options: setStoryOptions(PALETTE),
 			control: {
 				type: 'select',
 			},
@@ -51,25 +52,25 @@ export default {
 			if: { arg: 'AI', truthy: false },
 		},
 		icon: {
-			options: [null, 'signInfo', 'signSuccess', 'signWarning', 'signError', 'signHelp', 'weatherStars', 'officePenStar'],
+			options: ['', 'signInfo', 'signSuccess', 'signWarning', 'signError', 'signHelp', 'weatherStars', 'officePenStar'],
 			control: {
 				type: 'select',
 			},
 			description: 'Ajoute une icône au callout.',
 		},
 		iconAlt: {
-			description: "Information de l'icône restituée par le lecteur d'écran.",
+			description: 'Information de l’icône restituée par le lecteur d’écran.',
 			type: 'string',
 		},
 		state: {
-			options: [null, 'success', 'warning', 'error'],
+			options: setStoryOptions(CalloutStates),
 			description: 'État du callout.',
 			control: {
 				type: 'select',
 			},
 		},
 		size: {
-			options: ['M', 'S'],
+			options: setStoryOptions(CALLOUT_SIZE),
 			control: {
 				type: 'select',
 			},
@@ -80,11 +81,11 @@ export default {
 			description: 'Ajoute un titre au callout.',
 		},
 		hx: {
-			options: [null, 1, 2, 3, 4, 5, 6],
+			options: setStoryOptions(CALLOUT_HX),
 			control: {
 				type: 'select',
 			},
-			description: '[v21.4] Optional',
+			description: '[v21.4] Applique un niveau sémantique au titre.',
 			if: { arg: 'heading', truthy: true },
 		},
 		removedChange: HiddenArgType,
@@ -95,7 +96,7 @@ export default {
 			},
 		},
 		actions: {
-			description: "[v20.3] Ajoute une liste d'actions sous la description.",
+			description: '[v20.3] Ajoute une liste d’actions sous la description.',
 		},
 		actionsInline: {
 			if: { arg: 'actions', truthy: true },
@@ -107,9 +108,6 @@ export default {
 export const Template: StoryObj<CalloutComponent & { actions: boolean; actionsInline: boolean }> = {
 	args: {
 		heading: '',
-		hx: null,
-		state: null,
-		icon: null,
 		palette: 'none',
 		removable: false,
 		removed: false,

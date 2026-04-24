@@ -1,5 +1,6 @@
 import { NgTemplateOutlet } from '@angular/common';
 import { booleanAttribute, ChangeDetectionStrategy, Component, computed, input } from '@angular/core';
+import { SkeletonColsAlign } from '../skeleton.type';
 
 export type ColAlignTable = 'start' | 'center' | 'end';
 
@@ -21,7 +22,7 @@ export class SkeletonTableComponent {
 	 */
 	readonly cols = input<number>(5);
 
-	readonly colsAlign = input<Record<number, ColAlignTable>>({});
+	readonly colsAlign = input<Record<number, SkeletonColsAlign>>({});
 
 	/**
 	 * Defines the number of row (8 by default)

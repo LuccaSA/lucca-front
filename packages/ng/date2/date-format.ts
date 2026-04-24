@@ -26,7 +26,7 @@ export function getSeparator(locale: string): string {
 }
 
 // Warning: it works on Latin languages, but deserves to be tested on non-Latin languages
-export function getLocalizedDateFormat(locale: string, period: 'year' | 'month' | 'day' = 'day'): string {
+export function getLocalizedDateFormat(locale: string, period: CalendarMode = 'day'): string {
 	const letterLocalizedForDay = new Intl.RelativeTimeFormat(locale, { numeric: 'auto' }).formatToParts(100, 'day')[2]['value'].charAt(1).toUpperCase();
 	const letterLocalizedForMonth = new Intl.RelativeTimeFormat(locale, { numeric: 'auto' }).formatToParts(100, 'month')[2]['value'].charAt(1).toUpperCase();
 	const letterLocalizedForYear = new Intl.RelativeTimeFormat(locale, { numeric: 'auto' }).formatToParts(100, 'year')[2]['value'].charAt(1).toUpperCase();

@@ -1,4 +1,6 @@
+import { DIVIDER_SIZE } from '@lucca-front/ng/divider';
 import { Meta, StoryObj } from '@storybook/angular';
+import { setStoryOptions } from 'stories/helpers/stories';
 
 interface DividerBasicStory {
 	size: string;
@@ -18,7 +20,7 @@ export default {
 			},
 		},
 		size: {
-			options: ['', 'S', 'M'],
+			options: setStoryOptions(DIVIDER_SIZE),
 			control: {
 				type: 'select',
 			},

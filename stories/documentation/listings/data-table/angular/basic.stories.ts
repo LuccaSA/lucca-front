@@ -1,6 +1,9 @@
 import { FormsModule } from '@angular/forms';
 import { ButtonComponent } from '@lucca-front/ng/button';
 import {
+	DATA_TABLE_ALIGN,
+	DATA_TABLE_SORT,
+	DATA_TABLE_VERTICAL_ALIGN,
 	DataTableBodyComponent,
 	DataTableComponent,
 	DataTableFootComponent,
@@ -17,27 +20,28 @@ import { PaginationComponent } from '@lucca-front/ng/pagination';
 
 import { Meta, moduleMetadata, StoryObj } from '@storybook/angular';
 import { HiddenArgType } from 'stories/helpers/common-arg-types';
+import { setStoryOptions } from 'stories/helpers/stories';
 import { StoryModelDisplayComponent } from 'stories/helpers/story-model-display.component';
 
 export default {
 	title: 'Documentation/Listings/Data table/Angular/Basic',
 	argTypes: {
 		sort: {
-			options: ['', 'none', 'ascending', 'descending'],
+			options: setStoryOptions(DATA_TABLE_SORT),
 			control: {
 				type: 'select',
 			},
-			description: "Définit l'état de tri d'une cellule d'en-tête.",
+			description: 'Définit l’état de tri d’une cellule d’en-tête.',
 		},
 		align: {
-			options: ['', 'start', 'center', 'end'],
+			options: setStoryOptions(DATA_TABLE_ALIGN),
 			control: {
 				type: 'select',
 			},
 			description: 'Aligne le contenu des cellules horizontalement.',
 		},
 		verticalAlign: {
-			options: ['', 'top', 'middle', 'bottom'],
+			options: setStoryOptions(DATA_TABLE_VERTICAL_ALIGN),
 			control: {
 				type: 'select',
 			},
@@ -45,19 +49,19 @@ export default {
 		},
 		inlineSize: {
 			if: { arg: 'layoutFixed', truthy: true },
-			description: "Modifie la largeur d'une colonne lorsque <code>layoutFixed</code> est activé.",
+			description: 'Modifie la largeur d’une colonne lorsque <code>layoutFixed</code> est activé.',
 		},
 		selected: {
 			if: { arg: 'selectable', truthy: true },
-			description: "Applique l'état actif à une ligne sélectionnable.",
+			description: 'Applique l’état actif à une ligne sélectionnable.',
 		},
 		selectedLabel: {
 			if: { arg: 'selectable', truthy: true },
-			description: "Texte alternatif restitué à la sélection d'une ligne.",
+			description: 'Texte alternatif restitué à la sélection d’une ligne.',
 		},
 		selectedLabelHead: {
 			if: { arg: 'selectable', truthy: true },
-			description: "Texte alternatif restitué à la sélection de l'ensemble des lignes.",
+			description: 'Texte alternatif restitué à la sélection de l’ensemble des lignes.',
 		},
 		disabled: {
 			if: { arg: 'selectable', truthy: true },
@@ -67,7 +71,7 @@ export default {
 		},
 		groupButtonAlt: {
 			if: { arg: 'group', truthy: true },
-			description: "Texte alternatif restitué au focus de l'action sur le groupe.",
+			description: 'Texte alternatif restitué au focus de l’action sur le groupe.',
 		},
 		expanded: {
 			if: { arg: 'group', truthy: true },
@@ -104,7 +108,7 @@ export default {
 			control: {
 				type: 'boolean',
 			},
-			description: "Applique une largeur fixe aux colonnes. La largeur d'une colonne peut être redéfinie via <code>fixedWidth</code>.",
+			description: 'Applique une largeur fixe aux colonnes. La largeur d’une colonne peut être redéfinie via <code>fixedWidth</code>.',
 		},
 		selectable: {
 			control: {
@@ -122,19 +126,19 @@ export default {
 			control: {
 				type: 'boolean',
 			},
-			description: 'Ajoute un champ de saisi dans une cellule.',
+			description: 'Ajoute un champ de saisie dans une cellule.',
 		},
 		nested: {
 			control: {
 				type: 'boolean',
 			},
-			description: "Réduit le <code>border-radius</code> du tableau pour l'imbriquer dans un composant structure.",
+			description: 'Réduit le <code>border-radius</code> du tableau pour l’imbriquer dans un composant structure.',
 		},
 		actions: {
 			control: {
 				type: 'boolean',
 			},
-			description: "Ajoute des actions rapides à droite d'une ligne.",
+			description: 'Ajoute des actions rapides à droite d’une ligne.',
 		},
 		pagination: {
 			control: {

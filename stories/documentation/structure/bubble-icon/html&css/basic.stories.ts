@@ -1,5 +1,8 @@
 import { IconsList } from '@/stories/icons-list';
+import { BUBBLE_ICON_DIRECTION, BUBBLE_ICON_SIZE } from '@lucca-front/ng/bubble-icon';
+import { DECORATIVE_PALETTE, PALETTE } from '@lucca/prisme/core';
 import { Meta, StoryObj } from '@storybook/angular';
+import { setStoryOptions } from 'stories/helpers/stories';
 
 interface BubbleIconBasicStory {
 	icon: string;
@@ -13,49 +16,21 @@ export default {
 	title: 'Documentation/Structure/Bubble icon/HTML&CSS/Basic',
 	argTypes: {
 		direction: {
-			options: ['', 'left', 'right', 'top', 'bottom'],
+			options: setStoryOptions(BUBBLE_ICON_DIRECTION),
 			control: {
 				type: 'select',
 			},
 			description: 'Définit une direction de la bulle. Aléatoire par défaut.',
 		},
 		size: {
-			options: ['S', '', 'L'],
+			options: setStoryOptions(BUBBLE_ICON_SIZE),
 			control: {
 				type: 'select',
 			},
 			description: 'Modifie la taille du composant.',
 		},
 		palette: {
-			options: [
-				// products
-				'product',
-				'pagga',
-				'poplee',
-				'coreHR',
-				'timmi',
-				'cleemy',
-				'cc',
-				'brand',
-				// states
-				'neutral',
-				'success',
-				'warning',
-				'critical',
-				// decoratives
-				'kiwi',
-				'lime',
-				'cucumber',
-				'mint',
-				'glacier',
-				'lagoon',
-				'blueberry',
-				'lavender',
-				'grape',
-				'watermelon',
-				'pumpkin',
-				'pineapple',
-			],
+			options: setStoryOptions([...PALETTE, ...DECORATIVE_PALETTE]),
 			control: {
 				type: 'select',
 			},
@@ -66,10 +41,10 @@ export default {
 			control: {
 				type: 'select',
 			},
-			description: "Modifie le glyphe de l'icône.",
+			description: 'Modifie le glyphe de l’icône.',
 		},
 		alt: {
-			description: "Information restituée par le lecteur d'écran.",
+			description: 'Information restituée par le lecteur d’écran.',
 		},
 	},
 } as Meta;

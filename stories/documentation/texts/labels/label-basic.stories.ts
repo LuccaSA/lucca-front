@@ -19,7 +19,7 @@ export default {
 			control: {
 				type: 'radio',
 			},
-			description: "Ne fonctionne qu'avec le mod-number",
+			description: 'Ne fonctionne qu’avec le mod-number',
 		},
 	},
 } as Meta;

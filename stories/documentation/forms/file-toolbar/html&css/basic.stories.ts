@@ -12,7 +12,7 @@ export default {
 	],
 	argTypes: {
 		size: {
-			options: ['S', null],
+			options: ['S', ''],
 			control: {
 				type: 'radio',
 			},
@@ -78,7 +78,6 @@ export default {
 
 export const Basic = {
 	args: {
-		size: null,
 		disablePositioning: false,
 		downloadAction: false,
 		deleteAction: true,

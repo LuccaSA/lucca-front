@@ -26,7 +26,7 @@ export default {
 		luPopoverTrigger: {
 			control: 'select',
 			options: ['click', 'click+hover', 'hover+focus'],
-			description: "Méthode d'ouverture du popover.",
+			description: 'Méthode d’ouverture du popover.',
 		},
 		luPopoverPosition: {
 			control: 'select',

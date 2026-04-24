@@ -1,10 +1,11 @@
 import { FormsModule } from '@angular/forms';
 import { BrowserAnimationsModule } from '@angular/platform-browser/animations';
 import { FormFieldComponent } from '@lucca-front/ng/form-field';
-import { DurationPickerComponent } from '@lucca-front/ng/time';
+import { INLINE_MESSAGE_STATE } from '@lucca-front/ng/inline-message';
+import { BASE_PICKER_SIZE, DurationPickerComponent } from '@lucca-front/ng/time';
 import { Meta, moduleMetadata, StoryObj } from '@storybook/angular';
 import { StoryModelDisplayComponent } from 'stories/helpers/story-model-display.component';
-import { cleanupTemplate, generateInputs } from '../../../helpers/stories';
+import { cleanupTemplate, generateInputs, setStoryOptions } from '../../../helpers/stories';
 
 export default {
 	title: 'Documentation/Forms/Time/Duration Picker/Angular Form',
@@ -15,7 +16,7 @@ export default {
 	],
 	argTypes: {
 		size: {
-			options: ['M', 'S'],
+			options: setStoryOptions(BASE_PICKER_SIZE),
 			control: {
 				type: 'select',
 			},
@@ -28,24 +29,24 @@ export default {
 			description: 'Ajoute un texte descriptif (aide, erreur, etc.) sous le champ de formulaire.',
 		},
 		inlineMessageState: {
-			options: ['default', 'success', 'warning', 'error'],
+			options: setStoryOptions(INLINE_MESSAGE_STATE),
 			control: {
 				type: 'select',
 			},
-			description: "Modifie l'état de l'inline message.",
+			description: 'Modifie l’état de l’inline message.',
 		},
 		tooltip: {
 			if: { arg: 'hiddenLabel', truthy: false },
 			description: 'Affiche une icône (?) associée à une info-bulle.',
 		},
 		hiddenLabel: {
-			description: "Masque le label en le conservant dans le DOM pour les lecteurs d'écrans.",
+			description: 'Masque le label en le conservant dans le DOM pour les lecteurs d’écran.',
 		},
 		label: {
 			control: {
 				type: 'text',
 			},
-			description: "Modifie le label de l'input.",
+			description: 'Modifie le label de l’input.',
 		},
 		required: {
 			control: {
@@ -63,7 +64,7 @@ export default {
 			control: {
 				type: 'boolean',
 			},
-			description: "Affiche les boutons d'incrémention.",
+			description: 'Affiche les boutons d’incrémentation.',
 		},
 		disabled: {
 			control: {
@@ -75,7 +76,7 @@ export default {
 			control: {
 				type: 'text',
 			},
-			description: "Modifie le pas d'incrémentation.",
+			description: 'Modifie le pas d’incrémentation.',
 		},
 		max: {
 			control: {

@@ -2,6 +2,7 @@ import { computed, Directive, inject, input, OnDestroy, untracked } from '@angul
 import { ɵeffectWithDeps } from '@lucca-front/ng/core';
 import { FormFieldComponent } from '@lucca-front/ng/form-field';
 import { filter, take } from 'rxjs/operators';
+import { FormFieldIdLabelledByStrategy } from './form-field.type';
 
 @Directive({
 	selector: '[luFormFieldId]',
@@ -12,9 +13,9 @@ import { filter, take } from 'rxjs/operators';
 export class FormFieldIdDirective implements OnDestroy {
 	#formFieldComponent = inject(FormFieldComponent);
 
-	readonly suffix = input.required<string>({ alias: 'luFormFieldId' });
+	readonly suffix = input('', { alias: 'luFormFieldId' });
 
-	readonly labelledByStrategy = input<'prepend' | 'append'>('append');
+	readonly labelledByStrategy = input<FormFieldIdLabelledByStrategy>('append');
 
 	readonly id = computed(() => `${this.#formFieldComponent.id()}-${this.suffix()}`);
 
@@ -24,7 +25,13 @@ export class FormFieldIdDirective implements OnDestroy {
 				this.#applyLabelledBy(this.id(), this.labelledByStrategy());
 			}
 		});
-		this.#formFieldComponent.ready$.pipe(filter(Boolean), take(1)).subscribe(() => untracked(() => this.#applyLabelledBy(this.id(), this.labelledByStrategy())));
+		this.#formFieldComponent.ready$.pipe(filter(Boolean), take(1)).subscribe(() => {
+			untracked(() => {
+				if (this.suffix()) {
+					this.#applyLabelledBy(this.id(), this.labelledByStrategy());
+				}
+			});
+		});
 	}
 
 	#applyLabelledBy(id: string, strategy: 'prepend' | 'append'): void {
@@ -32,6 +39,8 @@ export class FormFieldIdDirective implements OnDestroy {
 	}
 
 	ngOnDestroy(): void {
-		this.#formFieldComponent.removeLabelledBy(this.id());
+		if (this.suffix()) {
+			this.#formFieldComponent.removeLabelledBy(this.id());
+		}
 	}
 }

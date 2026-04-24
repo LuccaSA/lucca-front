@@ -1,4 +1,5 @@
 import { ChangeDetectionStrategy, Component, computed, input, ViewEncapsulation } from '@angular/core';
+import { FancyBoxSize } from './fancy-box.type';
 
 @Component({
 	selector: 'lu-fancy-box',
@@ -33,7 +34,7 @@ export class FancyBoxComponent {
 	/**
 	 * Which size should the callout be? Defaults to small
 	 */
-	readonly size = input<null | 'S'>(null);
+	readonly size = input<FancyBoxSize | null>(null);
 
 	readonly foregroundStyle = computed(() => this.#buildUrl(this.foreground()));
 	readonly backgroundLeftStyle = computed(() => this.#buildUrl(this.backgroundLeft()));

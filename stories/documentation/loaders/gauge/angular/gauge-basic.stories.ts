@@ -1,19 +1,20 @@
 import { GaugeComponent } from '@lucca-front/ng/gauge';
+import { PALETTE } from '@lucca/prisme/core';
 import { Meta, moduleMetadata, StoryObj } from '@storybook/angular';
-import { generateInputs } from 'stories/helpers/stories';
+import { generateInputs, setStoryOptions } from 'stories/helpers/stories';
 
 export default {
 	title: 'Documentation/Loaders/Gauge/Angular/Basic',
 	argTypes: {
 		palette: {
-			options: ['', 'product', 'neutral', 'success', 'warning', 'error'],
+			options: setStoryOptions(PALETTE),
 			control: {
 				type: 'select',
 			},
 			description: 'Applique une palette de couleurs à la jauge.',
 		},
 		thin: {
-			description: "Diminue l'épaisseur de la jauge.",
+			description: 'Diminue l’épaisseur de la jauge.',
 		},
 		animated: {
 			description: 'Ajoute une animation au chargement ou lorsque la valeur est modifiée.',
@@ -31,10 +32,10 @@ export default {
 			description: 'Valeur en pourcentage.',
 		},
 		alt: {
-			description: "Information restituée par le lecteur d'écran.",
+			description: 'Information restituée par le lecteur d’écran.',
 		},
 		noAlt: {
-			description: "Empêche la restitution par le lecteur d'écran. À n'utiliser que si l'information est déjà présente.",
+			description: 'Empêche la restitution par le lecteur d’écran. À n’utiliser que si l’information est déjà présente.',
 		},
 	},
 	decorators: [

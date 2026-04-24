@@ -63,7 +63,7 @@ export default {
 			control: {
 				type: 'boolean',
 			},
-			description: '[v18.3]',
+			description: '',
 		},
 	},
 } as Meta;

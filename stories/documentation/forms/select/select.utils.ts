@@ -129,7 +129,7 @@ export const colorPickerStory = {
 			description: 'Modifie la taille du composant.',
 		},
 		clearable: {
-			description: "Ajoute un bouton de suppression lorsqu'une couleur est sélectionnée",
+			description: 'Ajoute un bouton de suppression lorsqu’une couleur est sélectionnée',
 		},
 		colors: HiddenArgType,
 	},

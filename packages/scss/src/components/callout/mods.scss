@@ -1,5 +1,6 @@
 @use '@lucca-front/icons/src/icon/exports' as icons;
 @use '@lucca-front/scss/src/commons/utils/color';
+@use '@lucca-front/scss/src/commons/utils/a11y';
 @use '@lucca-front/scss/src/components/button/exports' as button;
 
 @mixin S {
@@ -47,6 +48,13 @@
 		@include color.palette('neutral');
 		@include button.S;
 
+		&.mod-outlined,
+		&.mod-ghost {
+			&:focus-visible {
+				@include a11y.focusVisible($offset: 3px, $color: var(--palettes-product-700));
+			}
+		}
+
 		&.mod-onlyIcon {
 			@include button.onlyIconS;
 		}
@@ -65,4 +73,9 @@
 			@include button.onlyIconXS;
 		}
 	}
+}
+
+@mixin actionsInlineS {
+	--components-callout-content-description-action-marginBlockStart: calc(var(--pr-t-spacings-25) * -1);
+	--components-callout-content-description-action-marginBlockEnd: calc(var(--pr-t-spacings-25) * -1);
 }
