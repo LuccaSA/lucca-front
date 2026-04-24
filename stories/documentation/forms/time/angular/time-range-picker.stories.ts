@@ -4,7 +4,10 @@ import { BrowserAnimationsModule } from '@angular/platform-browser/animations';
 import { FormFieldComponent } from '@lucca-front/ng/form-field';
 import { TimePickerComponent, TimeRangePickerComponent } from '@lucca-front/ng/time';
 import { Meta, moduleMetadata, StoryObj } from '@storybook/angular';
+import { createTestStory } from 'stories/helpers/stories';
 import { StoryModelDisplayComponent } from 'stories/helpers/story-model-display.component';
+import { clearInputs, expectNgModelDisplay, mapInputs, repeatKeyboardUserEvent, waitForAngular } from 'stories/helpers/test';
+import { expect, userEvent, within } from 'storybook/test';
 import { generateInputs } from '../../../../helpers/stories';
 
 export default {
@@ -99,10 +102,6 @@ export const Basic: StoryObj<TimePickerComponent & FormFieldComponent & { requir
 	<lu-time-range-picker label="${label}"${generateInputs(inputArgs, argTypes)} ${forceMeridiemDisplay !== null ? `[forceMeridiemDisplay]="${forceMeridiemDisplay}"` : ''} [(ngModel)]="example" />
 </lu-form-field>
 
-<ng-template #labelID>
-	<span aria-hidden="true">${label}</span>
-</ng-template>
-
 <pr-story-model-display>{{ example | json }}</pr-story-model-display>
 `,
 		};
@@ -122,3 +121,67 @@ export const Basic: StoryObj<TimePickerComponent & FormFieldComponent & { requir
 		presentation: false,
 	},
 };
+
+const basePlay = async ({ canvasElement, step, context }) => {
+	const canvas = within(canvasElement);
+	const inputs = canvas.getAllByRole('textbox');
+
+	// Map inputs to named references
+	const { startHours, startMinutes, endHours, endMinutes } = mapInputs(inputs, {
+		startHours: 0,
+		startMinutes: 1,
+		endHours: 2,
+		endMinutes: 3,
+	});
+
+	await step('Mouse interactions', async () => {
+		// Insert start value
+		await userEvent.click(startHours);
+		await waitForAngular();
+		await expect(startHours).toHaveFocus();
+		await userEvent.type(startHours, '09:00');
+		await waitForAngular();
+		await expectNgModelDisplay(context.canvasElement, '{ "start": "09:00:00" }');
+
+		// Insert end value
+		await userEvent.click(endHours);
+		await waitForAngular();
+		await expect(endHours).toHaveFocus();
+		await userEvent.type(endHours, '10:00');
+		await waitForAngular();
+		await expectNgModelDisplay(context.canvasElement, '{ "start": "09:00:00", "end": "10:00:00" }');
+	});
+
+	await step('Keyboard interactions', async () => {
+		await clearInputs(inputs);
+		await waitForAngular();
+
+		// Insert start value with keyboard
+		startHours.focus();
+		await userEvent.keyboard('{ArrowUp}');
+		await expect(startHours).toHaveFocus();
+		await waitForAngular();
+		await expectNgModelDisplay(context.canvasElement, '{ "start": "01:00:00", "end": "00:00:00" }');
+
+		await userEvent.keyboard('{ArrowRight}');
+		await repeatKeyboardUserEvent('{ArrowUp}', 2);
+		await waitForAngular();
+		await expectNgModelDisplay(context.canvasElement, '{ "start": "01:02:00", "end": "00:00:00" }');
+		await expect(startMinutes).toHaveFocus();
+
+		// Insert end value with keyboard
+		await userEvent.keyboard('{ArrowRight}');
+		await repeatKeyboardUserEvent('{ArrowUp}', 5);
+		await waitForAngular();
+		await expectNgModelDisplay(context.canvasElement, '{ "start": "01:02:00", "end": "05:00:00" }');
+		await expect(endHours).toHaveFocus();
+
+		await userEvent.keyboard('{ArrowRight}');
+		await repeatKeyboardUserEvent('{ArrowUp}', 15);
+		await waitForAngular();
+		await expectNgModelDisplay(context.canvasElement, '{ "start": "01:02:00", "end": "05:15:00" }');
+		await expect(endMinutes).toHaveFocus();
+	});
+};
+
+export const BasicTEST = createTestStory(Basic, basePlay);
