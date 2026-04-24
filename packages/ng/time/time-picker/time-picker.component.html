@@ -60,7 +60,7 @@
 						(ngModelChange)="switchMeridiem($event)"
 						(click)="$event.stopPropagation()"
 						(keydown.arrowleft)="$event.preventDefault(); focusPart('minutes')"
-						(keydown.arrowright)="$event.preventDefault()"
+						(keydown.arrowright)="$event.preventDefault(); nextPicker.emit()"
 					/>
 				</div>
 				<div class="timePicker-fieldset-meridiem-post">
