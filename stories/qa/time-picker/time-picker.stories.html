@@ -1,0 +1,45 @@
+<table class="demo-QAtable">
+	<tbody>
+		<tr>
+			<td></td>
+			<td>
+				<div class="demo-QAtable-list">Angular</div>
+			</td>
+		</tr>
+		<tr>
+			<td>Empty Model</td>
+			<td>
+				<lu-form-field label="Label" tooltip="Tooltip message" inlineMessage="Helper text" inlineMessageState="default">
+					<lu-time-picker [(ngModel)]="emptyTime" />
+				</lu-form-field>
+			</td>
+		</tr>
+		<tr>
+			<td>Filled Model</td>
+			<td>
+				<lu-form-field label="Label" tooltip="Tooltip message" inlineMessage="Helper text" inlineMessageState="default">
+					<lu-time-picker [(ngModel)]="filledTime" />
+				</lu-form-field>
+			</td>
+		</tr>
+		<tr>
+			<td>Empty Form</td>
+			<td>
+				<lu-form-field label="Label" tooltip="Tooltip message" inlineMessage="Helper text" inlineMessageState="default">
+					<lu-time-picker [formControl]="emptyTimeControl" />
+				</lu-form-field>
+			</td>
+		</tr>
+		<tr>
+			<td>Filled Form</td>
+			<td>
+				<lu-form-field label="Label" tooltip="Tooltip message" inlineMessage="Helper text" inlineMessageState="default">
+					<lu-time-picker [formControl]="filledTimeControl" />
+				</lu-form-field>
+			</td>
+		</tr>
+	</tbody>
+</table>
+
+<!-- To tell the ui-diff tool that the page has finished rendering -->
+<span id="ready"></span>
