@@ -6,6 +6,7 @@ import { ISO8601Duration, ISO8601Time } from '../core/date-primitives';
 import { isValidTimeRangePicker, MAX_TIME } from '../core/duration.utils';
 import { TimePickerComponent } from '../time-picker/time-picker.component';
 import { TimeRangePickerRange } from './time-range-picker';
+import { LU_TIME_RANGE_PICKER_INSTANCE } from './time-range-picker.token';
 import { LU_TIME_RANGE_PICKER_TRANSLATIONS } from './time-range-picker.translate';
 import { TimeRangePickerSize } from './time-range-picker.type';
 
@@ -26,6 +27,10 @@ import { TimeRangePickerSize } from './time-range-picker.type';
 			provide: NG_VALIDATORS,
 			useExisting: forwardRef(() => TimeRangePickerComponent),
 			multi: true,
+		},
+		{
+			provide: LU_TIME_RANGE_PICKER_INSTANCE,
+			useExisting: forwardRef(() => TimeRangePickerComponent),
 		},
 	],
 })
