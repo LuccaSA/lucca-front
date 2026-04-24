@@ -181,6 +181,11 @@ const basePlay = async ({ canvasElement, step, context }) => {
 		await waitForAngular();
 		await expectNgModelDisplay(context.canvasElement, '{ "start": "01:02:00", "end": "05:15:00" }');
 		await expect(endMinutes).toHaveFocus();
+
+		// Go back to start hours
+		await repeatKeyboardUserEvent('{ArrowLeft}', 4);
+		await waitForAngular();
+		await expect(startHours).toHaveFocus();
 	});
 };
 
