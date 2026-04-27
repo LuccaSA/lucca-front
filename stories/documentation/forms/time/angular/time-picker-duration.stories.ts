@@ -4,8 +4,8 @@ import { FormFieldComponent } from '@lucca-front/ng/form-field';
 import { INLINE_MESSAGE_STATE } from '@lucca-front/ng/inline-message';
 import { BASE_PICKER_SIZE, DurationPickerComponent } from '@lucca-front/ng/time';
 import { Meta, moduleMetadata, StoryObj } from '@storybook/angular';
+import { generateInputs, setStoryOptions } from 'stories/helpers/stories';
 import { StoryModelDisplayComponent } from 'stories/helpers/story-model-display.component';
-import { generateInputs, setStoryOptions } from '../../../helpers/stories';
 
 export default {
 	title: 'Documentation/Forms/Time/Angular/Duration',
