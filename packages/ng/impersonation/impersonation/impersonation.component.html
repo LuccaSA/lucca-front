@@ -36,6 +36,9 @@
 			<ng-container *luOption="let user; select: selectRef">
 				<div class="impersonation_popover-content-option">
 					<lu-user-picture aria-hidden="true" [user]="user" size="XS" softRounded />
+					@if (currentUserId === user.id) {
+						{{ usersIntl().me }}&ngsp;
+					}
 					<span translate="no">{{ user | luUserDisplay }}</span>
 					<!-- Handle homonyms -->
 					@if (user.additionalInformation) {

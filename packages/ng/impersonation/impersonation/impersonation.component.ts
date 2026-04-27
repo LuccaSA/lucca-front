@@ -1,29 +1,18 @@
 import { ConnectionPositionPair } from '@angular/cdk/overlay';
-import { ChangeDetectionStrategy, Component, effect, ElementRef, inject, model, output, signal, untracked, viewChild, ViewEncapsulation } from '@angular/core';
+import { ChangeDetectionStrategy, Component, computed, effect, ElementRef, inject, input, model, output, signal, untracked, viewChild, ViewEncapsulation } from '@angular/core';
 import { FormsModule } from '@angular/forms';
 import { ClearComponent } from '@lucca-front/ng/clear';
 import { LuOptionDirective } from '@lucca-front/ng/core-select';
-import { LuCoreSelectUsersDirective } from '@lucca-front/ng/core-select/user';
+import { LU_CORE_SELECT_USER_TRANSLATIONS, LuCoreSelectUsersDirective, ɵLU_CORE_SELECT_CURRENT_USER_ID } from '@lucca-front/ng/core-select/user';
 import { PopoverDirective } from '@lucca-front/ng/popover2';
 import { LuSimpleSelectInputComponent } from '@lucca-front/ng/simple-select';
 import { ILuUser, LuUserDisplayPipe, LuUserPictureComponent } from '@lucca-front/ng/user';
-import { ButtonComponent } from '@lucca/prisme/button';
 import { IconComponent } from '@lucca/prisme/icon';
+import { intlInputOptions } from '../../core/translate';
 
 @Component({
 	selector: 'lu-impersonation',
-	imports: [
-		ButtonComponent,
-		PopoverDirective,
-		FormsModule,
-		LuSimpleSelectInputComponent,
-		LuCoreSelectUsersDirective,
-		LuUserDisplayPipe,
-		LuOptionDirective,
-		LuUserPictureComponent,
-		IconComponent,
-		ClearComponent,
-	],
+	imports: [PopoverDirective, FormsModule, LuSimpleSelectInputComponent, LuCoreSelectUsersDirective, LuUserDisplayPipe, LuOptionDirective, LuUserPictureComponent, IconComponent, ClearComponent],
 	templateUrl: './impersonation.component.html',
 	styleUrl: './impersonation.component.scss',
 	encapsulation: ViewEncapsulation.None,
@@ -34,13 +23,15 @@ import { IconComponent } from '@lucca/prisme/icon';
 })
 export class ImpersonationComponent {
 	protected elementRef = inject(ElementRef);
+	readonly usersIntl = input(...intlInputOptions(LU_CORE_SELECT_USER_TRANSLATIONS));
+	protected currentUserId = inject(ɵLU_CORE_SELECT_CURRENT_USER_ID);
 
 	inputComponentRef = viewChild<LuSimpleSelectInputComponent<ILuUser>>(LuSimpleSelectInputComponent);
 
 	popoverRef = viewChild(PopoverDirective);
 
 	selectedUser = model<ILuUser>();
-	isNotMe = signal(false);
+	isNotMe = computed(() => this.selectedUser()?.id !== this.currentUserId);
 	clear = output<void>();
 
 	popoverPositions: ConnectionPositionPair[] = [
