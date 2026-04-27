@@ -106,11 +106,10 @@ export class TimePickerComponent extends BasePickerComponent {
 
 	constructor() {
 		super();
-		ɵeffectWithDeps([this.value], (value) => {
-			if (isNotNil(value) && value !== '––:––:––') {
-				this.hoursPart()?.isValueSet.set(true);
-				this.minutesPart()?.isValueSet.set(true);
-			}
+		ɵeffectWithDeps([this.value, this.hoursPart, this.minutesPart], (value, hoursPart, minutesPart) => {
+			const hasValue = isNotNil(value) && value !== DEFAULT_MIN_TIME;
+			hoursPart?.isValueSet.set(hasValue);
+			minutesPart?.isValueSet.set(hasValue);
 		});
 	}
 

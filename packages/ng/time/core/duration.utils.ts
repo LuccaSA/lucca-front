@@ -102,7 +102,7 @@ export const isValidTimeRangePicker = (time: TimeRangePickerRange): boolean => {
 
 export const isEndTimeBeforeStartTime = (time: TimeRangePickerRange): boolean => {
 	if (isNotNil(time?.end) && isNotNil(time?.start)) {
-		return getTotalSeconds(time.end) >= getTotalSeconds(time.start);
+		return getTotalSeconds(time.end) < getTotalSeconds(time.start);
 	}
 	return false;
 };

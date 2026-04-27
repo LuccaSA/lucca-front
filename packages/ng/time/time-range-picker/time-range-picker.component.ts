@@ -42,6 +42,7 @@ export class TimeRangePickerComponent implements ControlValueAccessor, OnInit, V
 
 	#onChange?: (value: TimeRangePickerRange | null) => void;
 	#onTouched?: () => void;
+	#disabledState = signal(false);
 
 	readonly value = signal<TimeRangePickerRange | null>(null);
 
@@ -52,6 +53,8 @@ export class TimeRangePickerComponent implements ControlValueAccessor, OnInit, V
 	readonly forceMeridiemDisplay = input(false, { transform: booleanAttribute });
 
 	readonly disabled = input(false, { transform: booleanAttribute });
+
+	readonly isDisabled = computed(() => this.disabled() || this.#disabledState());
 
 	readonly size = input<TimeRangePickerSize>();
 
@@ -89,6 +92,10 @@ export class TimeRangePickerComponent implements ControlValueAccessor, OnInit, V
 
 	registerOnTouched(fn: () => void): void {
 		this.#onTouched = fn;
+	}
+
+	setDisabledState(isDisabled: boolean): void {
+		this.#disabledState.set(isDisabled);
 	}
 
 	onStartChange(start: ISO8601Time): void {

@@ -92,7 +92,7 @@ describe('DurationUtils', () => {
 			const isBefore = isEndTimeBeforeStartTime(range);
 
 			// Assert
-			expect(isBefore).toBe(true);
+			expect(isBefore).toBe(false);
 		});
 
 		it('should return true when end time equals start time', () => {
@@ -106,7 +106,7 @@ describe('DurationUtils', () => {
 			const isBefore = isEndTimeBeforeStartTime(range);
 
 			// Assert
-			expect(isBefore).toBe(true);
+			expect(isBefore).toBe(false);
 		});
 
 		it('should return false when end time is before start time', () => {
@@ -120,7 +120,7 @@ describe('DurationUtils', () => {
 			const isBefore = isEndTimeBeforeStartTime(range);
 
 			// Assert
-			expect(isBefore).toBe(false);
+			expect(isBefore).toBe(true);
 		});
 	});
 });
