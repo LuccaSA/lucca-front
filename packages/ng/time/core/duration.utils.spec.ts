@@ -1,4 +1,5 @@
 import { TimeRangePickerRange } from '../time-range-picker/time-range-picker';
+import { ISO8601Time } from './date-primitives';
 import { getTotalSeconds, isEndTimeBeforeStartTime, isValidTimeRangePicker } from './duration.utils';
 
 describe('DurationUtils', () => {
