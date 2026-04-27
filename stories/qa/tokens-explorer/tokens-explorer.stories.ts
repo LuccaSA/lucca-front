@@ -1,11 +1,12 @@
 import { ChangeDetectionStrategy, Component, computed, signal } from '@angular/core';
 import { FormsModule } from '@angular/forms';
-import { FilterBarComponent, FilterPillAddonAfterDirective, FilterPillAddonBeforeDirective } from '@lucca-front/ng/filter-pills';
+import { FilterBarComponent, FilterPillAddonAfterDirective, FilterPillAddonBeforeDirective, FilterPillComponent } from '@lucca-front/ng/filter-pills';
 import { FormFieldComponent } from '@lucca-front/ng/form-field';
 import { TextInputComponent } from '@lucca-front/ng/forms';
 import { IconComponent } from '@lucca-front/ng/icon';
 import { NumericBadgeComponent } from '@lucca-front/ng/numeric-badge';
 import { SegmentedControlComponent, SegmentedControlFilterComponent } from '@lucca-front/ng/segmented-control';
+import { LuSimpleSelectInputComponent } from '@lucca-front/ng/simple-select';
 import { LuTooltipModule } from '@lucca-front/ng/tooltip';
 import { Meta, StoryObj } from '@storybook/angular';
 
@@ -14,6 +15,7 @@ type TokenPreview = 'swatch' | 'text' | 'spacing' | 'radius' | 'font' | 'fontSiz
 
 interface TokenEntry {
 	name: string;
+	previewVar?: string;
 	value: string;
 	category: TokenCategory;
 	group: string;
@@ -32,6 +34,7 @@ function buildPaletteTokens(): TokenEntry[] {
 		for (const shade of PALETTE_SHADES) {
 			out.push({
 				name: `--palettes-${palette}-${shade}`,
+				...(palette === 'product' ? { previewVar: `--palettes-${shade}` } : {}),
 				value: `Shade ${shade}`,
 				category: 'palette',
 				group: palette,
@@ -219,6 +222,15 @@ const ELEVATION_TOKENS: TokenEntry[] = [
 
 const ALL_TOKENS: TokenEntry[] = [...buildPaletteTokens(), ...SEMANTIC_COLOR_TOKENS, ...SPACING_TOKENS, ...RADIUS_TOKENS, ...TYPOGRAPHY_TOKENS, ...ELEVATION_TOKENS];
 
+const PRODUCT_OPTIONS: Array<{ value: string; name: string }> = [
+	{ value: 'pagga', name: 'Pagga' },
+	{ value: 'poplee', name: 'Poplee' },
+	{ value: 'coreHR', name: 'Core HR' },
+	{ value: 'timmi', name: 'Timmi' },
+	{ value: 'cleemy', name: 'Cleemy' },
+	{ value: 'cc', name: 'Cloud Control' },
+];
+
 @Component({
 	selector: 'tokens-explorer-stories',
 	templateUrl: './tokens-explorer.stories.html',
@@ -231,9 +243,11 @@ const ALL_TOKENS: TokenEntry[] = [...buildPaletteTokens(), ...SEMANTIC_COLOR_TOK
 		IconComponent,
 		LuTooltipModule,
 		FilterBarComponent,
+		FilterPillComponent,
 		FilterPillAddonBeforeDirective,
 		FilterPillAddonAfterDirective,
 		NumericBadgeComponent,
+		LuSimpleSelectInputComponent,
 	],
 	styles: [
 		`
@@ -468,7 +482,10 @@ const ALL_TOKENS: TokenEntry[] = [...buildPaletteTokens(), ...SEMANTIC_COLOR_TOK
 class TokensExplorerStory {
 	readonly search = signal('');
 	readonly category = signal<TokenCategory>('all');
+	readonly product = signal<{ value: string; name: string } | null>(null);
 	readonly copiedToken = signal<string | null>(null);
+
+	readonly productOptions = PRODUCT_OPTIONS;
 
 	protected readonly categoryOptions: Array<{ value: TokenCategory; label: string; count: number }> = [
 		{ value: 'all', label: 'Tous', count: ALL_TOKENS.length },
