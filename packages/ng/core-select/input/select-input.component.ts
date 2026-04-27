@@ -56,7 +56,6 @@ export abstract class ALuSelectInputComponent<TOption, TValue> implements OnDest
 	protected afterCloseFn?: () => void;
 	protected updatePositionFn?: () => void;
 	protected filterPillMode = false;
-	protected impersonationMode = false;
 
 	public ignorePresentation = input(false, { transform: booleanAttribute });
 
@@ -379,7 +378,7 @@ export abstract class ALuSelectInputComponent<TOption, TValue> implements OnDest
 	}
 
 	openPanel(clue: string = ''): void {
-		if (this.filterPillMode || this.impersonationMode || this.isPanelOpen || this.disabled$.value) {
+		if (this.filterPillMode || this.isPanelOpen || this.disabled$.value) {
 			return;
 		}
 
@@ -457,7 +456,7 @@ export abstract class ALuSelectInputComponent<TOption, TValue> implements OnDest
 		this.activeDescendant$.next('');
 		this.changeDetectorRef.markForCheck();
 		this.onTouched?.();
-		if (!this.filterPillMode && !this.impersonationMode) {
+		if (!this.filterPillMode) {
 			this.isPanelOpen$.next(false);
 			this.panelRef?.close();
 			this._panelRef = undefined;
@@ -494,15 +493,7 @@ export abstract class ALuSelectInputComponent<TOption, TValue> implements OnDest
 		this.afterCloseFn = closeFn;
 	}
 
-	registerImpersonationClosePopover(closeFn: () => void): void {
-		this.afterCloseFn = closeFn;
-	}
-
 	registerFilterPillUpdatePosition(updatePositionFn: () => void): void {
-		this.updatePositionFn = updatePositionFn;
-	}
-
-	registerImpersonationPosition(updatePositionFn: () => void): void {
 		this.updatePositionFn = updatePositionFn;
 	}
 
@@ -513,26 +504,11 @@ export abstract class ALuSelectInputComponent<TOption, TValue> implements OnDest
 		this.bindInputToPanelRefEvents();
 	}
 
-	enableImpersonationMode() {
-		this.impersonationMode = true;
-		this.#defaultFilterPillClearable.set(true);
-		this._panelRef?.closed.subscribe(this.afterCloseFn);
-		this.bindInputToPanelRefEvents();
-	}
-
 	onFilterPillOpened(): void {
 		this.isPanelOpen$.next(true);
 	}
 
-	onImpersonationOpened(): void {
-		this.isPanelOpen$.next(true);
-	}
-
 	onFilterPillClosed(): void {
-		this.isPanelOpen$.next(false);
-	}
-
-	onImpersonationClosed(): void {
 		this.isPanelOpen$.next(false);
 	}
 }

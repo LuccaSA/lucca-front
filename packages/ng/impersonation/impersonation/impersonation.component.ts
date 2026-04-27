@@ -1,5 +1,5 @@
 import { ConnectionPositionPair } from '@angular/cdk/overlay';
-import { ChangeDetectionStrategy, Component, effect, ElementRef, inject, model, untracked, viewChild, ViewEncapsulation } from '@angular/core';
+import { ChangeDetectionStrategy, Component, effect, ElementRef, inject, model, output, signal, untracked, viewChild, ViewEncapsulation } from '@angular/core';
 import { FormsModule } from '@angular/forms';
 import { ClearComponent } from '@lucca-front/ng/clear';
 import { LuOptionDirective } from '@lucca-front/ng/core-select';
@@ -40,6 +40,8 @@ export class ImpersonationComponent {
 	popoverRef = viewChild(PopoverDirective);
 
 	selectedUser = model<ILuUser>();
+	isNotMe = signal(false);
+	clear = output<void>();
 
 	popoverPositions: ConnectionPositionPair[] = [
 		new ConnectionPositionPair(
@@ -68,10 +70,10 @@ export class ImpersonationComponent {
 			// Because ref appears only when opening the panel, we're going to call the impersonation opened hook too
 			if (ref) {
 				untracked(() => {
-					ref.enableImpersonationMode();
-					ref.registerImpersonationClosePopover(this.closePopover);
-					ref.registerImpersonationPosition?.(this.updatePosition);
-					ref.onImpersonationOpened?.();
+					ref.enableFilterPillMode();
+					ref.registerFilterPillClosePopover(this.closePopover);
+					ref.registerFilterPillUpdatePosition?.(this.updatePosition);
+					ref.onFilterPillOpened?.();
 				});
 			}
 		});
@@ -79,7 +81,7 @@ export class ImpersonationComponent {
 
 	closePopover = () => {
 		this.popoverRef()?.close();
-		this.inputComponentRef()?.onImpersonationClosed?.();
+		this.inputComponentRef()?.onFilterPillClosed?.();
 	};
 
 	updatePosition = () => {

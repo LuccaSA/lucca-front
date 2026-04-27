@@ -103,30 +103,30 @@
 	}
 }
 
-@mixin notFullRoundedXXXL {
+@mixin softRoundedXXXL {
 	--components-avatar-borderRadius: var(--pr-t-border-radius-400);
 }
 
-@mixin notFullRoundedXXL {
+@mixin softRoundedXXL {
 	--components-avatar-borderRadius: var(--pr-t-border-radius-300);
 }
 
-@mixin notFullRoundedXL {
+@mixin softRoundedXL {
 	--components-avatar-borderRadius: var(--pr-t-border-radius-300);
 }
 
-@mixin notFullRoundedL {
+@mixin softRoundedL {
 	--components-avatar-borderRadius: var(--pr-t-border-radius-200);
 }
 
-@mixin notFullRounded {
+@mixin softRounded {
 	--components-avatar-borderRadius: var(--pr-t-border-radius-200);
 }
 
-@mixin notFullRoundedS {
+@mixin softRoundedS {
 	--components-avatar-borderRadius: var(--pr-t-border-radius-150);
 }
 
-@mixin notFullRoundedXS {
+@mixin softRoundedXS {
 	--components-avatar-borderRadius: var(--pr-t-border-radius-100);
 }

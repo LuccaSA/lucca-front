@@ -28,13 +28,13 @@
 	<div class="simpleSelect-field-value" [attr.id]="valueID">
 		<ng-container *ngTemplateOutlet="currentValueDisplayerTpl" />
 	</div>
-	@if (!filterPillMode && !impersonationMode) {
+	@if (!filterPillMode && !impersonation()) {
 		@if (clearable && hasValue() && (disabled$ | async) === false) {
 			<lu-clear class="simpleSelect-field-clear" (onClear)="clearValue($event); inputElement.focus()">{{ intl().clear }}</lu-clear>
 		}
 		<lu-icon icon="arrowChevronBottom" class="simpleSelect-field-icon" />
 	}
-	@if (impersonationMode || !filterPillMode) {
+	@if (impersonation() || !filterPillMode) {
 		<lu-icon icon="searchMagnifyingGlass" class="simpleSelect-field-icon mod-search" />
 	}
 </div>

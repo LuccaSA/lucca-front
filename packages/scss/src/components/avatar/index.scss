@@ -41,31 +41,31 @@
 			@include AI;
 		}
 
-		&.mod-notFullRounded {
+		&.mod-softRounded {
 			&.mod-XS {
-				@include notFullRoundedXS;
+				@include softRoundedXS;
 			}
 
 			&.mod-S {
-				@include notFullRoundedS;
+				@include softRoundedS;
 			}
 
-			@include notFullRounded;
+			@include softRounded;
 
 			&.mod-L {
-				@include notFullRoundedL;
+				@include softRoundedL;
 			}
 
 			&.mod-XL {
-				@include notFullRoundedXL;
+				@include softRoundedXL;
 			}
 
 			&.mod-XXL {
-				@include notFullRoundedXXL;
+				@include softRoundedXXL;
 			}
 
 			&.mod-XXXL {
-				@include notFullRoundedXXXL;
+				@include softRoundedXXXL;
 			}
 		}
 	}

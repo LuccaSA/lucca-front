@@ -1,7 +1,7 @@
 <button
 	type="button"
 	class="impersonation-trigger"
-	[class.is-active]="false"
+	[class.is-active]="isNotMe()"
 	[luPopover2]="impersonationPopover"
 	[luPopoverNoCloseButton]="true"
 	[customPositions]="popoverPositions"
@@ -11,23 +11,31 @@
 	(keydown.arrowDown)="$event.preventDefault(); popoverRef.openPopover(true)"
 	(keydown.arrowUp)="$event.preventDefault(); popoverRef.openPopover(true)"
 >
+	<!-- TODO trad -->
 	<span class="pr-u-mask">Changer de profil :</span>
+
 	@let user = selectedUser();
 	@if (user) {
-		<lu-user-picture aria-hidden="true" [user]="user" size="S" notFullRounded />
+		<lu-user-picture aria-hidden="true" [user]="user" size="S" softRounded />
 		{{ user | luUserDisplay }}
+	} @else {
+		<lu-user-picture placeholder aria-hidden="true" size="S" softRounded />
+		<div class="skeleton is-loading" style="inline-size: 5.5rem">
+			<span class="skeleton-item"></span>
+		</div>
 	}
+	<!-- TODO trad -->
 	<span class="pr-u-mask">– Le contenu de la page s’actualise dès que ce filtre est modifié</span>
 	<lu-icon class="impersonation-trigger-icon" icon="chevronBottom" />
 </button>
-<lu-clear class="impersonation-clear" />
+<lu-clear class="impersonation-clear" (onClear)="clear.emit()" /><!-- TODO intl avec « Revenir au profil par défaut » -->
 
 <ng-template #impersonationPopover>
 	<div class="impersonation_popover-content popover-contentOptional">
-		<lu-simple-select [(ngModel)]="selectedUser" users #selectRef>
+		<lu-simple-select impersonation [(ngModel)]="selectedUser" users #selectRef>
 			<ng-container *luOption="let user; select: selectRef">
 				<div class="impersonation_popover-content-option">
-					<lu-user-picture aria-hidden="true" [user]="user" size="XS" notFullRounded />
+					<lu-user-picture aria-hidden="true" [user]="user" size="XS" softRounded />
 					<span translate="no">{{ user | luUserDisplay }}</span>
 					<!-- Handle homonyms -->
 					@if (user.additionalInformation) {
