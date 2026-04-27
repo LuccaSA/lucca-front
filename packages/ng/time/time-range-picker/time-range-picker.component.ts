@@ -64,7 +64,7 @@ export class TimeRangePickerComponent implements ControlValueAccessor, OnInit, V
 
 	readonly startValue = computed(() => this.value()?.start ?? '––:––:––');
 	readonly endValue = computed(() => this.value()?.end ?? '––:––:––');
-	readonly formFieldLabel = computed(() => this.#formFieldRef?.label() ?? '');
+	readonly formFieldLabel = computed(() => this.#formFieldRef?.label());
 
 	ngOnInit() {
 		this.#ngControl = this.#injector.get(NgControl);

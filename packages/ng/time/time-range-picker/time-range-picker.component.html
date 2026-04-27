@@ -2,7 +2,7 @@
 	<div class="timePicker-fieldset">
 		<lu-time-picker
 			#timePickerStart
-			[label]="`${formFieldLabel()} (${intl().timeRangePickerStart})`"
+			[label]="`${formFieldLabel() ? formFieldLabel() + ' ' : ''}(${intl().timeRangePickerStart})`"
 			[value]="startValue()"
 			(valueChange)="onStartChange($event)"
 			[disabled]="isDisabled()"
@@ -19,7 +19,7 @@
 		</label>
 		<lu-time-picker
 			#timePickerEnd
-			[label]="`${formFieldLabel()} (${intl().timeRangePickerEnd})`"
+			[label]="`${formFieldLabel() ? formFieldLabel() + ' ' : ''}(${intl().timeRangePickerEnd})`"
 			[value]="endValue()"
 			(valueChange)="onEndChange($event)"
 			[disabled]="isDisabled()"
