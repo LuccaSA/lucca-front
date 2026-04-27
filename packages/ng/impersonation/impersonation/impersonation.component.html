@@ -1,7 +1,7 @@
 <button
 	type="button"
 	class="impersonation-trigger"
-	[class.is-active]="isNotMe()"
+	[class.is-active]="isNotMe() && selectedUser()"
 	[luPopover2]="impersonationPopover"
 	[luPopoverNoCloseButton]="true"
 	[customPositions]="popoverPositions"
