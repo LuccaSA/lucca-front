@@ -10,9 +10,9 @@ export class PortalDirective<T extends object = object> implements OnDestroy {
 	private templateRef = inject(TemplateRef);
 	private injector = inject(Injector);
 
-	luPortal = input.required<PortalContent<T>>();
+	readonly luPortal = input.required<PortalContent<T>>();
 
-	luPortalContext = input<T | null>(null);
+	readonly luPortalContext = input<T | null>(null);
 
 	private createdTextElement: Text | null = null;
 	private embeddedViewRef?: EmbeddedViewRef<T>;

@@ -16,7 +16,7 @@ interface TestEntity {
 	selector: 'lu-simple-select[testApi]',
 })
 class TestDirective extends ALuCoreSelectApiDirective<TestEntity> {
-	protected override params$ = this.clue$.pipe(
+	protected override readonly params$ = this.clue$.pipe(
 		map((clue) => ({
 			...(clue ? { clue } : {}),
 		})),

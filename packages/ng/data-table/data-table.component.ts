@@ -42,7 +42,7 @@ import { LU_DATA_TABLE_INSTANCE } from './data-table.token';
 })
 export class DataTableComponent implements OnInit {
 	#elementRef = inject<ElementRef<Element>>(ElementRef);
-	tableRef = viewChild<ElementRef<Element>>('tableRef');
+	readonly tableRef = viewChild<ElementRef<Element>>('tableRef');
 
 	readonly hover = input(false, { transform: booleanAttribute });
 	readonly selectable = input(false, { transform: booleanAttribute });
@@ -64,14 +64,14 @@ export class DataTableComponent implements OnInit {
 	readonly stickyColsStart = input(0, { transform: numberAttribute });
 	readonly stickyColsEnd = input(0, { transform: numberAttribute });
 
-	firstColumnVisibleAfterColsStart = signal(true);
-	lastColumnVisibleBeforeColsEnd = signal(false);
+	readonly firstColumnVisibleAfterColsStart = signal(true);
+	readonly lastColumnVisibleBeforeColsEnd = signal(false);
 
-	firstColumnVisible = signal(true);
-	lastColumnVisible = signal(false);
+	readonly firstColumnVisible = signal(true);
+	readonly lastColumnVisible = signal(false);
 
-	firstRowVisible = signal(true);
-	lastRowVisible = signal(false);
+	readonly firstRowVisible = signal(true);
+	readonly lastRowVisible = signal(false);
 
 	readonly cols = computed(() => this.header()?.cols());
 

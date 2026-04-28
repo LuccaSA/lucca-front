@@ -77,15 +77,15 @@ export class DateInputComponent extends AbstractDateComponent implements OnInit,
 
 	#luClass = inject(LuClass);
 
-	autocomplete = input<AutoFill>('off');
+	readonly autocomplete = input<AutoFill>('off');
 
-	placeholder = input<string>();
+	readonly placeholder = input<string>();
 
-	disableOverflow = input(false, { transform: booleanAttribute });
-	hideOverflow = input(false, { transform: booleanAttribute });
-	widthAuto = input(false, { transform: booleanAttribute });
+	readonly disableOverflow = input(false, { transform: booleanAttribute });
+	readonly hideOverflow = input(false, { transform: booleanAttribute });
+	readonly widthAuto = input(false, { transform: booleanAttribute });
 
-	filterPillDisabled = signal(false);
+	readonly filterPillDisabled = signal(false);
 
 	popoverPositions: ConnectionPositionPair[] = [
 		new ConnectionPositionPair({ originX: 'start', originY: 'bottom' }, { overlayX: 'start', overlayY: 'top' }, -8, 0),
@@ -100,18 +100,18 @@ export class DateInputComponent extends AbstractDateComponent implements OnInit,
 		),
 	];
 
-	inputFocused = signal(false);
+	readonly inputFocused = signal(false);
 
-	selectedDate = signal<Date | null>(null);
+	readonly selectedDate = signal<Date | null>(null);
 
-	initialValue = signal<Date | null | undefined>(undefined);
-	dateFromWriteValue = signal<Date | null>(null);
+	readonly initialValue = signal<Date | null | undefined>(undefined);
+	readonly dateFromWriteValue = signal<Date | null>(null);
 
-	calendar = viewChild(Calendar2Component);
+	readonly calendar = viewChild(Calendar2Component);
 
-	inputRef = viewChild<ElementRef<HTMLInputElement>>('date');
+	readonly inputRef = viewChild<ElementRef<HTMLInputElement>>('date');
 
-	displayValue = computed(() => {
+	readonly displayValue = computed(() => {
 		const textInput = this.userTextInput();
 		if (textInput !== 'ɵ') {
 			const parsedInput = parse(textInput, this.dateFormatWithMode(), startOfDay(new Date()));
@@ -143,7 +143,7 @@ export class DateInputComponent extends AbstractDateComponent implements OnInit,
 	});
 
 	// We need to use a "magic key" here to avoid sending a null value change on initialization
-	userTextInput = signal<string>('ɵ');
+	readonly userTextInput = signal<string>('ɵ');
 
 	combinedGetCellInfo = (date: Date, mode: CalendarMode): CellStatus => {
 		const infoFromInput = this.getCellInfo()?.(date, mode);
@@ -156,9 +156,9 @@ export class DateInputComponent extends AbstractDateComponent implements OnInit,
 		};
 	};
 
-	previousButton = viewChild<ElementRef<Element>>('previousButtonRef');
+	readonly previousButton = viewChild<ElementRef<Element>>('previousButtonRef');
 
-	nextButton = viewChild<ElementRef<Element>>('nextButtonRef');
+	readonly nextButton = viewChild<ElementRef<Element>>('nextButtonRef');
 
 	@HostBinding('class.mod-filterPill')
 	isFilterPill = false;
@@ -168,10 +168,10 @@ export class DateInputComponent extends AbstractDateComponent implements OnInit,
 		return this.widthAuto();
 	}
 
-	isFilterPillEmpty = computed(() => !this.selectedDate());
-	isFilterPillClearable = computed(() => this.clearable() ?? this.#defaultFilterPillClearable() ?? this.#defaultClearable);
+	readonly isFilterPillEmpty = computed(() => !this.selectedDate());
+	readonly isFilterPillClearable = computed(() => this.clearable() ?? this.#defaultFilterPillClearable() ?? this.#defaultClearable);
 	#defaultClearable = false;
-	#defaultFilterPillClearable = signal<boolean | null>(null);
+	readonly #defaultFilterPillClearable = signal<boolean | null>(null);
 
 	filterPillPopoverCloseFn?: () => void;
 

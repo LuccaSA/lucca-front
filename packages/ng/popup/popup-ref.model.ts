@@ -20,10 +20,10 @@ export interface ILuPopupRefFactory<TComponent = unknown, TConfig extends ILuPop
 }
 
 export abstract class ALuPopupRef<T = unknown, D = unknown, R = unknown, C extends ILuPopupConfig = ILuPopupConfig> implements ILuPopupRef<D, R> {
-	onOpen = new Subject<D | undefined>();
-	onClose = new Subject<R | undefined>();
-	onDismiss = new Subject<void>();
-	onBackdropClick = new Subject<void>();
+	readonly onOpen = new Subject<D | undefined>();
+	readonly onClose = new Subject<R | undefined>();
+	readonly onDismiss = new Subject<void>();
+	readonly onBackdropClick = new Subject<void>();
 
 	protected _overlayRef: OverlayRef;
 	protected _componentRef: ComponentRef<T>;

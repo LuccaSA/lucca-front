@@ -7,18 +7,18 @@ export const MAGIC_DEBOUNCE_DURATION = 250;
 
 @Directive()
 export abstract class ALuCoreSelectApiDirective<TOption, TParams = Record<string, string | number | boolean>> implements OnDestroy, OnInit {
-	protected destroy$ = new Subject<void>();
+	protected readonly destroy$ = new Subject<void>();
 	protected pageSize = LU_SELECT_MAGIC_PAGE_SIZE;
 	protected debounceDuration = MAGIC_DEBOUNCE_DURATION;
 
 	public select = inject<ALuSelectInputComponent<TOption, unknown>>(ALuSelectInputComponent);
 
-	protected page$ = this.select.nextPage$.pipe(
+	protected readonly page$ = this.select.nextPage$.pipe(
 		scan((page) => page + 1, 0),
 		startWith(0),
 	);
 
-	protected clue$ = this.select.clueChange$.pipe(debounceTime(this.debounceDuration), startWith(''));
+	protected readonly clue$ = this.select.clueChange$.pipe(debounceTime(this.debounceDuration), startWith(''));
 
 	/**
 	 * Create an object that will be used as params for the api call

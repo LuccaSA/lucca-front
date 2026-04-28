@@ -40,36 +40,36 @@ export class MultilanguageInputComponent implements ControlValueAccessor {
 
 	#intlDisplay = new Intl.DisplayNames([this.#localeId], { type: 'language' });
 
-	intl = input(...intlInputOptions(LU_MULTILANGUAGE_INPUT_TRANSLATIONS));
+	readonly intl = input(...intlInputOptions(LU_MULTILANGUAGE_INPUT_TRANSLATIONS));
 
 	#formFieldRef = inject(FORM_FIELD_INSTANCE);
 
-	formFieldSize = this.#formFieldRef.size;
+	readonly formFieldSize = this.#formFieldRef.size;
 
 	protected onTouched = () => {};
 
 	protected onChange = (_value: MultilanguageTranslation[]) => {};
 
-	placeholder = input('');
+	readonly placeholder = input('');
 
-	openOnFocus = input(false, { transform: booleanAttribute });
+	readonly openOnFocus = input(false, { transform: booleanAttribute });
 
-	autocomplete = input<AutoFill>('off');
+	readonly autocomplete = input<AutoFill>('off');
 
 	// Suffixed with Internal to avoid conflict with NgModel's disabled attribute
-	disabledInternal = signal(false);
+	readonly disabledInternal = signal(false);
 
-	model: WritableSignal<MultilanguageTranslation[]> = signal([] as MultilanguageTranslation[]);
+	readonly model: WritableSignal<MultilanguageTranslation[]> = signal([] as MultilanguageTranslation[]);
 
-	invariant = computed(() => {
+	readonly invariant = computed(() => {
 		return this.model().find((row) => row.cultureCode === INVARIANT_CULTURE_CODE) || { value: '' };
 	});
 
-	panelInputs = computed(() => {
+	readonly panelInputs = computed(() => {
 		return this.model().filter((row) => row.cultureCode !== INVARIANT_CULTURE_CODE);
 	});
 
-	presentationValue = computed(() => {
+	readonly presentationValue = computed(() => {
 		return this.model().find((row) => row.cultureCode === this.#localeId)?.value || this.invariant()?.value;
 	});
 

@@ -61,7 +61,7 @@ export class LuDepartmentSelectInputComponent<
 	@Input() filters: string[] = [];
 	@Input() uniqueOperation: number;
 
-	public intl = input(...intlInputOptions(LU_DEPARTMENT_SELECT_INPUT_TRANSLATIONS));
+	public readonly intl = input(...intlInputOptions(LU_DEPARTMENT_SELECT_INPUT_TRANSLATIONS));
 
 	constructor(
 		protected override _changeDetectorRef: ChangeDetectorRef,
