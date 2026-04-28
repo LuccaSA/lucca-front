@@ -63,7 +63,7 @@
 		--components-tag-boxShadow: none;
 		--components-tag-position: relative;
 
-		@include color.borderGradient($gradient: var(--palettes-ai-300), $radius: var(--pr-t-border-radius-small));
+		@include color.borderGradient($gradient: var(--pr-t-color-border-ai), $radius: var(--pr-t-border-radius-small));
 
 		.lucca-icon {
 			@include icons.AI;

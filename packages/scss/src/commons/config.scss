@@ -109,12 +109,18 @@ $borderRadiusTokens: (
 	'input': var(--pr-t-border-radius-default),
 );
 
+$colorAI: orchid, brand;
+
 $paletteAI: (
 	angle: 'to bottom right',
-	color1: orchid,
 	color1stop: 0%,
-	color2: brand,
 	color2stop: 80%,
+);
+
+$tokenAI: (
+	border: var(--palettes-ai-300),
+	background: var(--palettes-ai-50),
+	icon: var(--palettes-ai-600),
 );
 
 $product: 'brand' !default;
