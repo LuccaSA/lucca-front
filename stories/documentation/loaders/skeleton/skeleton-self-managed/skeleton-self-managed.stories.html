@@ -1,0 +1,29 @@
+<form luForm maxWidth>
+	<lu-fieldset heading="Fieldset title" helper="Helper message">
+		<lu-grid mode="form">
+			<lu-grid-column colspan="4">
+				<lu-form-field label="Label">
+					<lu-text-input ngModel [ngModelOptions]="{ standalone: true }" placeholder="Placeholder" />
+				</lu-form-field>
+			</lu-grid-column>
+			<lu-grid-column colspan="4" [responsive]="{ colspanAtMediaMinXXS: 2 }">
+				<lu-form-field label="Label">
+					<lu-text-input ngModel [ngModelOptions]="{ standalone: true }" placeholder="Placeholder" />
+				</lu-form-field>
+			</lu-grid-column>
+			<lu-grid-column colspan="4" [responsive]="{ colspanAtMediaMinXXS: 2 }">
+				<lu-form-field label="Label">
+					<lu-text-input ngModel [ngModelOptions]="{ standalone: true }" placeholder="Placeholder" />
+				</lu-form-field>
+			</lu-grid-column>
+			<lu-grid-column colspan="4">
+				<lu-form-field label="Label" inlineMessageState="default" counter="0">
+					<lu-textarea-input autoResize="false" required placeholder="Placeholder" rows="3" ngModel />
+				</lu-form-field>
+			</lu-grid-column>
+			<lu-grid-column colspan="4">
+				<button type="button" luButton state="default" palette="none">Submit</button>
+			</lu-grid-column>
+		</lu-grid>
+	</lu-fieldset>
+</form>
