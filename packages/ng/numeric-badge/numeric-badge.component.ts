@@ -1,5 +1,6 @@
 import { booleanAttribute, ChangeDetectionStrategy, Component, computed, inject, input, ViewEncapsulation } from '@angular/core';
 import { LuClass, Palette, ɵeffectWithDeps } from '@lucca-front/ng/core';
+import { SkeletonDisplayDirective } from '@lucca-front/ng/skeleton';
 import { LuTooltipModule } from '@lucca-front/ng/tooltip';
 import { NumericBadgeSize } from './numeric-badge.type';
 
@@ -8,7 +9,7 @@ import { NumericBadgeSize } from './numeric-badge.type';
 	templateUrl: './numeric-badge.component.html',
 	styleUrl: './numeric-badge.component.scss',
 	changeDetection: ChangeDetectionStrategy.OnPush,
-	imports: [LuTooltipModule],
+	imports: [LuTooltipModule, SkeletonDisplayDirective],
 	providers: [LuClass],
 	host: {
 		class: 'numericBadge',

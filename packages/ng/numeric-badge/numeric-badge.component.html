@@ -1,1 +1,5 @@
 <span class="numericBadge-value" [luTooltip]="value()" [luTooltipDisabled]="isDisabled()">{{ displayValue() }}</span>
+
+<ng-container *luSkeletonDisplay>
+	<span class="skeleton-item mod-square mod-S"></span>
+</ng-container>

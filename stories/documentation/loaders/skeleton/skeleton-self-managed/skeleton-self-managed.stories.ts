@@ -4,12 +4,26 @@ import { FormFieldComponent } from '@lucca-front/ng/form-field';
 import { FormHeaderComponent } from '@lucca-front/ng/form-header';
 import { FieldsetComponent, TextareaInputComponent, TextInputComponent } from '@lucca-front/ng/forms';
 import { GridColumnComponent, GridComponent } from '@lucca-front/ng/grid';
+import { NumericBadgeComponent } from '@lucca-front/ng/numeric-badge';
+import { SkeletonContainerDirective } from '@lucca-front/ng/skeleton';
 import { ButtonComponent } from '@lucca/prisme/button';
 import { Meta, StoryObj } from '@storybook/angular';
 
 @Component({
 	selector: 'skeleton-self-managed',
-	imports: [FormsModule, FormHeaderComponent, FieldsetComponent, GridComponent, GridColumnComponent, TextInputComponent, FormFieldComponent, TextareaInputComponent, ButtonComponent],
+	imports: [
+		FormsModule,
+		FormHeaderComponent,
+		FieldsetComponent,
+		GridComponent,
+		GridColumnComponent,
+		TextInputComponent,
+		FormFieldComponent,
+		TextareaInputComponent,
+		ButtonComponent,
+		NumericBadgeComponent,
+		SkeletonContainerDirective,
+	],
 	templateUrl: './skeleton-self-managed.stories.html',
 	changeDetection: ChangeDetectionStrategy.OnPush,
 })
