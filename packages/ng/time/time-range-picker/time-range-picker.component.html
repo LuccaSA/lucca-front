@@ -1,3 +1,6 @@
+@let startLabel = `${formFieldLabel() ? formFieldLabel() + " " : ""}(${intl().timeRangePickerStart})`;
+@let endLabel = `${formFieldLabel() ? formFieldLabel() + " " : ""}(${intl().timeRangePickerEnd})`;
+
 <div
 	class="timePicker"
 	[class.mod-stepper]="displayArrows()"
@@ -7,7 +10,7 @@
 	<div class="timePicker-fieldset">
 		<lu-time-picker
 			#timePickerStart
-			[label]="`${formFieldLabel() ? formFieldLabel() + ' ' : ''}(${intl().timeRangePickerStart})`"
+			[label]="startLabel"
 			[value]="startValue()"
 			(valueChange)="onStartChange($event)"
 			[disabled]="isDisabled()"
@@ -25,7 +28,7 @@
 		</label>
 		<lu-time-picker
 			#timePickerEnd
-			[label]="`${formFieldLabel() ? formFieldLabel() + ' ' : ''}(${intl().timeRangePickerEnd})`"
+			[label]="endLabel"
 			[value]="endValue()"
 			(valueChange)="onEndChange($event)"
 			[disabled]="isDisabled()"
@@ -40,3 +43,19 @@
 		/>
 	</div>
 </div>
+
+<ng-container *luPresentationDisplayDefault>
+	<span class="pr-u-mask">{{ startLabel }}</span>
+	@if (startValue()) {
+		{{ startValue() }}
+	} @else {
+		<span aria-hidden="true" data-content-before="–"></span>
+	}
+	<lu-icon [icon]="'arrowRight'" size="XS" />
+	<span class="pr-u-mask">{{ endLabel }}</span>
+	@if (endValue()) {
+		{{ endValue() }}
+	} @else {
+		<span aria-hidden="true" data-content-before="–"></span>
+	}
+</ng-container>
