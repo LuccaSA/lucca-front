@@ -1,4 +1,5 @@
-import { Directive, Input, TemplateRef } from '@angular/core';
+import { Directive, input, TemplateRef } from '@angular/core';
+import { syncInputSignal } from '@lucca-front/ng/core';
 import type { ALuSelectInputComponent } from '../input';
 import type { LuOptionContext } from '../select.model';
 
@@ -6,11 +7,11 @@ import type { LuOptionContext } from '../select.model';
 	selector: '[luOption]',
 })
 export class LuOptionDirective<TOption, TValue> {
-	@Input('luOptionSelect') set select(select: ALuSelectInputComponent<TOption, TValue>) {
-		select.optionTpl.set(this.templateRef);
-	}
+	readonly select = input<ALuSelectInputComponent<TOption, TValue>>(undefined, { alias: 'luOptionSelect' });
 
-	public constructor(private templateRef: TemplateRef<LuOptionContext<TOption>>) {}
+	public constructor(private templateRef: TemplateRef<LuOptionContext<TOption>>) {
+		syncInputSignal(this.select, (select) => select.optionTpl.set(this.templateRef));
+	}
 
 	public static ngTemplateContextGuard<TOption, TValue>(_dir: LuOptionDirective<TOption, TValue>, ctx: unknown): ctx is LuOptionContext<TOption> {
 		return true;

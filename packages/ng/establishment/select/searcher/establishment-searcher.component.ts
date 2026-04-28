@@ -1,5 +1,5 @@
 import { AsyncPipe } from '@angular/common';
-import { ChangeDetectionStrategy, Component, ElementRef, EventEmitter, forwardRef, HostBinding, Inject, Input, Optional, Output, Self, ViewChild } from '@angular/core';
+import { ChangeDetectionStrategy, Component, ElementRef, forwardRef, Inject, input, Optional, output, Self, viewChild } from '@angular/core';
 import { FormControl, ReactiveFormsModule } from '@angular/forms';
 import {
 	ALuOnCloseSubscriber,
@@ -9,6 +9,7 @@ import {
 	ILuOnOpenSubscriber,
 	ILuOnScrollBottomSubscriber,
 	isNotNilOrEmptyString,
+	syncInputSignal,
 } from '@lucca-front/ng/core';
 import { ALuOptionOperator, ILuOptionOperator, LuOptionPlaceholderComponent } from '@lucca-front/ng/option';
 import { Observable, of, Subject } from 'rxjs';
@@ -22,6 +23,9 @@ import { DEFAULT_ESTABLISHMENT_SERVICE } from '../establishment-select.token';
 	templateUrl: 'establishment-searcher.component.html',
 	styleUrl: 'establishment-searcher.component.scss',
 	changeDetection: ChangeDetectionStrategy.OnPush,
+	host: {
+		class: 'position-fixed',
+	},
 	imports: [AsyncPipe, ReactiveFormsModule, LuOptionPlaceholderComponent],
 	providers: [
 		{
@@ -51,27 +55,20 @@ import { DEFAULT_ESTABLISHMENT_SERVICE } from '../establishment-select.token';
 	],
 })
 export class LuEstablishmentSearcherComponent implements ILuOnOpenSubscriber, ILuOnScrollBottomSubscriber, ILuOnCloseSubscriber, ILuOptionOperator<ILuEstablishment> {
-	@Input() set filters(filters: string[]) {
-		this._service.filters = filters;
-	}
-	@Input() set appInstanceId(appId: number) {
-		this._service.appInstanceId = appId;
-	}
-	@Input() set operations(ops: number[]) {
-		this._service.operations = ops;
-	}
-	@Input() set sort(sort: string) {
-		this._service.sort = sort;
-	}
+	readonly filters = input<string[]>();
+
+	readonly appInstanceId = input<number>();
+
+	readonly operations = input<number[]>();
+
+	readonly sort = input<string>();
 
 	private _service: LuEstablishmentService;
 
-	@HostBinding('class.position-fixed') fixed = true;
-	@ViewChild('searchInput', { read: ElementRef, static: true })
-	readonly searchInput: ElementRef<HTMLElement>;
+	readonly searchInput = viewChild<ElementRef<HTMLElement>>('searchInput');
 
-	@Output()
-	isSearching = new EventEmitter<boolean>();
+	readonly isSearching = output<boolean>();
+
 	private _isSearching = false;
 
 	clueControl = new FormControl<string>('');
@@ -123,10 +120,15 @@ export class LuEstablishmentSearcherComponent implements ILuOnOpenSubscriber, IL
 		defaultService: LuEstablishmentService,
 	) {
 		this._service = customService || defaultService;
+
+		syncInputSignal(this.filters, (filters) => (this._service.filters = filters));
+		syncInputSignal(this.appInstanceId, (appInstanceId) => (this._service.appInstanceId = appInstanceId));
+		syncInputSignal(this.operations, (operations) => (this._service.operations = operations));
+		syncInputSignal(this.sort, (sort) => (this._service.sort = sort));
 	}
 
 	onOpen() {
-		this.searchInput.nativeElement.focus();
+		this.searchInput()?.nativeElement.focus();
 		this.reset();
 	}
 

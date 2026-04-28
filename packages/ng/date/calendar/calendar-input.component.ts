@@ -1,7 +1,7 @@
 import { FormStyle, getLocaleDayNames, getLocaleFirstDayOfWeek, TranslationWidth } from '@angular/common';
-import { ChangeDetectionStrategy, ChangeDetectorRef, Component, ElementRef, forwardRef, Inject, input, Input, LOCALE_ID, OnInit, Renderer2 } from '@angular/core';
+import { ChangeDetectionStrategy, ChangeDetectorRef, Component, ElementRef, forwardRef, Inject, input, LOCALE_ID, OnInit, Renderer2 } from '@angular/core';
 import { AbstractControl, ControlValueAccessor, FormsModule, NG_VALIDATORS, NG_VALUE_ACCESSOR, ValidationErrors, Validator } from '@angular/forms';
-import { ALuDateAdapter, ELuDateGranularity, intlInputOptions, LuDateGranularity } from '@lucca-front/ng/core';
+import { ALuDateAdapter, ELuDateGranularity, intlInputOptions, isNotNil, LuDateGranularity } from '@lucca-front/ng/core';
 import { ALuInput } from '@lucca-front/ng/input';
 import { LU_CALENDARINPUT_TRANSLATIONS } from './calendar-input.translate';
 import { LuCalendarItemFactory } from './calendar-item.factory';
@@ -30,10 +30,13 @@ import { ICalendarItem } from './calendar-item.interface';
 export class LuCalendarInputComponent<D> extends ALuInput<D> implements ControlValueAccessor, OnInit, Validator {
 	readonly intl = input(...intlInputOptions(LU_CALENDARINPUT_TRANSLATIONS));
 
-	@Input() min?: D;
-	@Input() max?: D;
-	@Input() granularity: LuDateGranularity = ELuDateGranularity.day;
-	@Input() startOn: D = this._adapter.forgeToday();
+	readonly min = input<D>();
+
+	readonly max = input<D>();
+
+	readonly granularity = input<LuDateGranularity>(ELuDateGranularity.day);
+
+	readonly startOn = input<D>();
 
 	viewGranularity: LuDateGranularity;
 	header: ICalendarItem<D>;
@@ -63,11 +66,12 @@ export class LuCalendarInputComponent<D> extends ALuInput<D> implements ControlV
 		super(_changeDetectorRef, _elementRef, _renderer);
 	}
 	ngOnInit() {
-		this.viewGranularity = this.granularity;
+		this.viewGranularity = this.granularity();
 		this.initDayLabels();
 	}
 	override writeValue(value?: D) {
-		const date = value && this._adapter.isValid(value) ? this._adapter.clone(value) : this.startOn;
+		const startOn = this.startOn() ?? this._adapter.forgeToday();
+		const date = value && this._adapter.isValid(value) ? this._adapter.clone(value) : startOn;
 		this.header = this._factory.forgeMonth(date);
 		super.writeValue(value);
 	}
@@ -141,8 +145,12 @@ export class LuCalendarInputComponent<D> extends ALuInput<D> implements ControlV
 	protected applyDailyMods() {
 		const month = this.header.date;
 		const today = this._adapter.forgeToday();
-		const min = this.min && this._adapter.isValid(this.min) ? this.min : undefined;
-		const max = this.max && this._adapter.isValid(this.max) ? this.max : undefined;
+		const minSignal = this.min();
+		const maxSignal = this.max();
+
+		const min = isNotNil(minSignal) && this._adapter.isValid(minSignal) ? minSignal : undefined;
+		const max = isNotNil(maxSignal) && this._adapter.isValid(maxSignal) ? maxSignal : undefined;
+
 		this.items.forEach((item) => {
 			const day = item.date;
 			if (this._adapter.compare(day, month, ELuDateGranularity.month) < 0) {
@@ -168,8 +176,12 @@ export class LuCalendarInputComponent<D> extends ALuInput<D> implements ControlV
 
 	protected applyMonthlyMods() {
 		const today = this._adapter.forgeToday();
-		const min = this.min && this._adapter.isValid(this.min) ? this.min : undefined;
-		const max = this.max && this._adapter.isValid(this.max) ? this.max : undefined;
+		const minSignal = this.min();
+		const maxSignal = this.max();
+
+		const min = isNotNil(minSignal) && this._adapter.isValid(minSignal) ? minSignal : undefined;
+		const max = isNotNil(maxSignal) && this._adapter.isValid(maxSignal) ? maxSignal : undefined;
+
 		this.items.forEach((item) => {
 			const month = item.date;
 			if (this._adapter.compare(month, today, ELuDateGranularity.month) === 0) {
@@ -189,8 +201,12 @@ export class LuCalendarInputComponent<D> extends ALuInput<D> implements ControlV
 
 	protected applyYearlyMods() {
 		const today = this._adapter.forgeToday();
-		const min = this.min && this._adapter.isValid(this.min) ? this.min : undefined;
-		const max = this.max && this._adapter.isValid(this.max) ? this.max : undefined;
+		const minSignal = this.min();
+		const maxSignal = this.max();
+
+		const min = isNotNil(minSignal) && this._adapter.isValid(minSignal) ? minSignal : undefined;
+		const max = maxSignal && this._adapter.isValid(maxSignal) ? maxSignal : undefined;
+
 		this.items.forEach((item) => {
 			const year = item.date;
 			if (this._adapter.compare(year, today, ELuDateGranularity.year) === 0) {
@@ -232,7 +248,7 @@ export class LuCalendarInputComponent<D> extends ALuInput<D> implements ControlV
 	}
 
 	protected selectMonth(item: ICalendarItem<D>) {
-		if (this.granularity === ELuDateGranularity.month) {
+		if (this.granularity() === ELuDateGranularity.month) {
 			this.setValue(item.date);
 		} else {
 			this.header = item;
@@ -242,7 +258,7 @@ export class LuCalendarInputComponent<D> extends ALuInput<D> implements ControlV
 	}
 
 	protected selectYear(item: ICalendarItem<D>) {
-		if (this.granularity === ELuDateGranularity.year) {
+		if (this.granularity() === ELuDateGranularity.year) {
 			this.setValue(item.date);
 		} else {
 			this.header = item;
@@ -328,10 +344,12 @@ export class LuCalendarInputComponent<D> extends ALuInput<D> implements ControlV
 		if (!this._adapter.isValid(d)) {
 			return { date: true };
 		}
-		if (!!this.min && this._adapter.isValid(this.min) && this._adapter.compare(this.min, d, ELuDateGranularity.day) > 0) {
+		const min = this.min();
+		if (!!min && this._adapter.isValid(min) && this._adapter.compare(min, d, ELuDateGranularity.day) > 0) {
 			return { min: true };
 		}
-		if (!!this.max && this._adapter.isValid(this.max) && this._adapter.compare(this.max, d, ELuDateGranularity.day) < 0) {
+		const max = this.max();
+		if (!!max && this._adapter.isValid(max) && this._adapter.compare(max, d, ELuDateGranularity.day) < 0) {
 			return { max: true };
 		}
 		return null;
