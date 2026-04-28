@@ -45,15 +45,16 @@
 </div>
 
 <ng-container *luPresentationDisplayDefault>
+	{{ intl().timeRangePickerFrom }}
 	<span class="pr-u-mask">{{ startLabel }}</span>
-	@if (startValue()) {
+	@if (startValue() && startValue() !== DEFAULT_TIME_VALUE) {
 		{{ startValue() }}
 	} @else {
 		<span aria-hidden="true" data-content-before="–"></span>
 	}
-	<lu-icon [icon]="'arrowRight'" size="XS" />
+	{{ intl().timeRangePickerAt }}
 	<span class="pr-u-mask">{{ endLabel }}</span>
-	@if (endValue()) {
+	@if (endValue() && endValue() !== DEFAULT_TIME_VALUE) {
 		{{ endValue() }}
 	} @else {
 		<span aria-hidden="true" data-content-before="–"></span>

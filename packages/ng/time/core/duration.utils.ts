@@ -16,6 +16,8 @@ type DateFnsDuration = Duration;
 
 export const MAX_TIME = '23:59:59';
 
+export const DEFAULT_TIME_VALUE = '––:––:––';
+
 const ISO8601DurationRegExp =
 	/^(?<sign>-)?P(?:(?<years>-?\d+)Y)?(?:(?<months>-?\d+)M)?(?:(?<weeks>-?\d+)W)?(?:(?<days>-?\d+)D)?(?:T(?:(?<hours>-?\d+)H)?(?:(?<minutes>-?\d+)M)?(?:(?<seconds>-?\d+(?:\.\d+)?)S)?)?$/;
 

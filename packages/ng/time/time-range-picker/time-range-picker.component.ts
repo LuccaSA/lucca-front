@@ -4,7 +4,7 @@ import { intlInputOptions, isNil } from '@lucca-front/ng/core';
 import { FORM_FIELD_INSTANCE, ɵPresentationDisplayDefaultDirective } from '@lucca-front/ng/form-field';
 import { IconComponent } from '@lucca/prisme/icon';
 import { ISO8601Duration, ISO8601Time } from '../core/date-primitives';
-import { isValidTimeRangePicker, MAX_TIME } from '../core/duration.utils';
+import { DEFAULT_TIME_VALUE, isValidTimeRangePicker, MAX_TIME } from '../core/duration.utils';
 import { TimePickerComponent } from '../time-picker/time-picker.component';
 import { TimeRangePickerRange } from './time-range-picker';
 import { LU_TIME_RANGE_PICKER_INSTANCE } from './time-range-picker.token';
@@ -64,9 +64,11 @@ export class TimeRangePickerComponent implements ControlValueAccessor, OnInit, V
 
 	keyPressed = signal(false);
 
-	readonly startValue = computed(() => this.value()?.start ?? '––:––:––');
-	readonly endValue = computed(() => this.value()?.end ?? '––:––:––');
+	readonly startValue = computed(() => this.value()?.start ?? DEFAULT_TIME_VALUE);
+	readonly endValue = computed(() => this.value()?.end ?? DEFAULT_TIME_VALUE);
 	readonly formFieldLabel = computed(() => this.#formFieldRef?.label());
+
+	DEFAULT_TIME_VALUE = DEFAULT_TIME_VALUE;
 
 	constructor() {
 		if (this.#formFieldRef) {
