@@ -1,6 +1,6 @@
 ﻿export const Translations = {
 	'nl-BE': {
-		placeholder: 'Selecteren...',
+		placeholder: 'Selecteren ...',
 		clear: 'Wissen',
 		clearSearch: 'Zoekopdracht leegmaken',
 		emptyResults: 'Uw zoekopdracht heeft geen resultaat opgeleverd.',
@@ -8,7 +8,7 @@
 		emptyOptions: 'Er zijn geen waarden beschikbaar. Neem contact op met uw beheerder voor meer informatie.',
 	},
 	nl: {
-		placeholder: 'Selecteren...',
+		placeholder: 'Selecteren ...',
 		clear: 'Wissen',
 		clearSearch: 'Zoekopdracht leegmaken',
 		emptyResults: 'Uw zoekopdracht heeft geen resultaat opgeleverd.',
@@ -16,7 +16,7 @@
 		emptyOptions: 'Er zijn geen waarden beschikbaar. Neem contact op met uw beheerder voor meer informatie.',
 	},
 	it: {
-		placeholder: 'Selezionare...',
+		placeholder: 'Selezionare…',
 		clear: 'Cancellare',
 		clearSearch: 'Cancellare la ricerca',
 		emptyResults: 'La ricerca non ha prodotto risultati.',
@@ -40,7 +40,7 @@
 		emptyOptions: 'Não existe nenhum valor disponível. Contacte o seu administrador para obter mais informações.',
 	},
 	es: {
-		placeholder: 'Seleccionar…',
+		placeholder: 'Seleccionar...',
 		clear: 'Eliminar',
 		clearSearch: 'Vaciar la búsqueda',
 		emptyResults: 'La búsqueda no ha dado ningún resultado.',
@@ -48,7 +48,7 @@
 		emptyOptions: 'No hay ningún valor disponible. Ponte en contacto con tu administrador para obtener más información.',
 	},
 	de: {
-		placeholder: 'Auswählen…',
+		placeholder: 'Auswählen ...',
 		clear: 'Löschen',
 		clearSearch: 'Suche leeren',
 		emptyResults: 'Ihre Suche hat keinen Treffer ergeben.',
