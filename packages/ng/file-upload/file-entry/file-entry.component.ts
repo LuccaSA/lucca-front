@@ -68,7 +68,7 @@ export class FileEntryComponent {
 
 	readonly fileSizeDisplay = computed(() => {
 		const fileSize = this.fileSize();
-		return isNotNil(fileSize) ? formatFileSize(this.#locale, fileSize) : null;
+		return isNotNil(fileSize) && fileSize > 0 ? formatFileSize(this.#locale, fileSize) : null;
 	});
 	readonly fileTypeDisplay = computed(() => {
 		const fileExtension: string = extractFileExtension(this.fileName(), this.fileType());
