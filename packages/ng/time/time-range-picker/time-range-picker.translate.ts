@@ -9,6 +9,8 @@ export const LU_TIME_RANGE_PICKER_TRANSLATIONS = new InjectionToken('LuTimeRange
 export type TimeRangePickerTranslations = {
 	timeRangePickerStart: string;
 	timeRangePickerEnd: string;
+	timeRangePickerFrom: string;
+	timeRangePickerAt: string;
 };
 
 export const luTimeRangePickerTranslations: LuTranslation<TimeRangePickerTranslations> = Translations;
