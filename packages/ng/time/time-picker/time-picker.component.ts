@@ -57,7 +57,7 @@ export class TimePickerComponent extends BasePickerComponent {
 
 	readonly forceMeridiemDisplay = input<boolean | null>(null);
 
-	#keyPressed = signal(false);
+	keyPressed = signal(false);
 
 	readonly enableMeridiemDisplay = computed(() => {
 		if (this.forceMeridiemDisplay() !== null) {
@@ -91,7 +91,7 @@ export class TimePickerComponent extends BasePickerComponent {
 			'mod-stepper': this.displayArrows() && isNil(this.#timeRangePicker),
 			'mod-stepperHover': this.displayArrows() && isNil(this.#timeRangePicker),
 			[`mod-${this.size()}`]: Boolean(this.size()),
-			'pr-u-animatedShake': this.#keyPressed() && isNil(this.#timeRangePicker),
+			'pr-u-animatedShake': this.keyPressed() && isNil(this.#timeRangePicker),
 		};
 	});
 	protected separator = computed(() => this.intl().timePickerTimeSeparator);
@@ -298,7 +298,7 @@ export class TimePickerComponent extends BasePickerComponent {
 
 	nonDigitKeyPressedHandler() {
 		if (isNil(this.#timeRangePicker)) {
-			this.#keyPressed.set(true);
+			this.keyPressed.set(true);
 		} else {
 			this.nonDigitKeyPressed.emit();
 		}
