@@ -13,6 +13,104 @@
 @use '@lucca-front/scss/src/commons/utils/container';
 @use '@lucca-front/scss/src/components/title/exports' as title;
 
+@mixin animated {
+	&FadeIn {
+		@extend %animatedFadeIn;
+	}
+
+	&ScaleIn {
+		@extend %animatedScaleIn;
+	}
+
+	&ScaleOut {
+		@extend %animatedScaleOut;
+	}
+
+	&ScaleInTop {
+		@extend %animatedScaleInTop;
+	}
+
+	&ScaleOutTop {
+		@extend %animatedScaleOutTop;
+	}
+
+	&ScaleInRight {
+		@extend %animatedScaleInRight;
+	}
+
+	&ScaleOutRight {
+		@extend %animatedScaleOutRight;
+	}
+
+	&ScaleInBottom {
+		@extend %animatedScaleInBottom;
+	}
+
+	&ScaleOutBottom {
+		@extend %animatedScaleOutBottom;
+	}
+
+	&ScaleInLeft {
+		@extend %animatedScaleInLeft;
+	}
+
+	&ScaleOutLeft {
+		@extend %animatedScaleOutLeft;
+	}
+
+	&SlideIn {
+		@extend %animatedSlideIn;
+	}
+
+	&SlideInTop {
+		@extend %animatedSlideInTop;
+	}
+
+	&SlideOut {
+		@extend %animatedSlideOut;
+	}
+
+	&SlideOutTop {
+		@extend %animatedSlideOutTop;
+	}
+
+	&SlideInRight {
+		@extend %animatedSlideInRight;
+	}
+
+	&SlideOutRight {
+		@extend %animatedSlideOutRight;
+	}
+
+	&SlideInBottom {
+		@extend %animatedSlideInBottom;
+	}
+
+	&SlideOutBottom {
+		@extend %animatedSlideOutBottom;
+	}
+
+	&SlideInLeft {
+		@extend %animatedSlideInLeft;
+	}
+
+	&SlideOutLeft {
+		@extend %animatedSlideOutLeft;
+	}
+
+	&Shake {
+		@extend %animatedShake;
+	}
+
+	&Pulse {
+		@extend %animatedPulse;
+	}
+
+	&FadeOut {
+		@extend %animatedFadeOut;
+	}
+}
+
 @layer utils {
 	%animatedAll {
 		animation-duration: var(--commons-animations-duration, var(--commons-animations-durations-standard));
@@ -47,7 +145,7 @@
 		&ScaleOutTop {
 			animation-name: scaleInTop;
 
-			@include keyframe.scaleIn;
+			@include keyframe.scaleInTop;
 		}
 
 		&ScaleInRight,
@@ -297,103 +395,7 @@
 	}
 
 	.pr-u-animated {
-		@extend %animated;
-
-		&FadeIn {
-			@extend %animatedFadeIn;
-		}
-
-		&ScaleIn {
-			@extend %animatedScaleIn;
-		}
-
-		&ScaleOut {
-			@extend %animatedScaleOut;
-		}
-
-		&ScaleInTop {
-			@extend %animatedScaleInTop;
-		}
-
-		&ScaleOutTop {
-			@extend %animatedScaleOutTop;
-		}
-
-		&ScaleInRight {
-			@extend %animatedScaleInRight;
-		}
-
-		&ScaleOutRight {
-			@extend %animatedScaleOutRight;
-		}
-
-		&ScaleInBottom {
-			@extend %animatedScaleInBottom;
-		}
-
-		&ScaleOutBottom {
-			@extend %animatedScaleOutBottom;
-		}
-
-		&ScaleInLeft {
-			@extend %animatedScaleInLeft;
-		}
-
-		&ScaleOutLeft {
-			@extend %animatedScaleOutLeft;
-		}
-
-		&SlideIn {
-			@extend %animatedSlideIn;
-		}
-
-		&SlideInTop  {
-			@extend %animatedSlideInTop;
-		}
-
-		&SlideOut {
-			@extend %animatedSlideOut;
-		}
-
-		&SlideOutTop {
-			@extend %animatedSlideOutTop;
-		}
-
-		&SlideInRight {
-			@extend %animatedSlideInRight;
-		}
-
-		&SlideOutRight {
-			@extend %animatedSlideOutRight;
-		}
-
-		&SlideInBottom {
-			@extend %animatedSlideInBottom;
-		}
-
-		&SlideOutBottom {
-			@extend %animatedSlideOutBottom;
-		}
-
-		&SlideInLeft {
-			@extend %animatedSlideInLeft;
-		}
-
-		&SlideOutLeft {
-			@extend %animatedSlideOutLeft;
-		}
-
-		&Shake {
-			@extend %animatedShake;
-		}
-
-		&Pulse {
-			@extend %animatedPulse;
-		}
-
-		&FadeOut {
-			@extend %animatedFadeOut;
-		}
+		@include animated;
 	}
 
 	.pr-u-mask {
@@ -672,7 +674,7 @@
 		}
 
 		.u-animated {
-			@extend %animated;
+			@include animated;
 		}
 
 		.u-mask {
