@@ -1,15 +1,15 @@
 import { ConnectionPositionPair } from '@angular/cdk/overlay';
-import { ChangeDetectionStrategy, Component, computed, effect, ElementRef, inject, input, model, output, untracked, viewChild, ViewEncapsulation } from '@angular/core';
+import { booleanAttribute, ChangeDetectionStrategy, Component, computed, effect, ElementRef, inject, input, model, output, untracked, viewChild, ViewEncapsulation } from '@angular/core';
 import { FormsModule } from '@angular/forms';
 import { ClearComponent } from '@lucca-front/ng/clear';
 import { LuOptionDirective } from '@lucca-front/ng/core-select';
-import { LU_CORE_SELECT_USER_TRANSLATIONS, LuCoreSelectUsersDirective, LuCoreSelectUserTranslations, ɵLU_CORE_SELECT_CURRENT_USER_ID } from '@lucca-front/ng/core-select/user';
+import { LU_CORE_SELECT_USER_TRANSLATIONS, LuCoreSelectUsersDirective, ɵLU_CORE_SELECT_CURRENT_USER_ID } from '@lucca-front/ng/core-select/user';
 import { PopoverDirective } from '@lucca-front/ng/popover2';
 import { LuSimpleSelectInputComponent } from '@lucca-front/ng/simple-select';
 import { ILuUser, LuUserDisplayPipe, LuUserPictureComponent } from '@lucca-front/ng/user';
 import { IconComponent } from '@lucca/prisme/icon';
 import { intlInputOptions } from '../../core/translate';
-import { LU_IMPERSONATION_TRANSLATIONS, LuImpersonationTranslations } from './impersonation.translate';
+import { LU_IMPERSONATION_TRANSLATIONS } from './impersonation.translate';
 
 @Component({
 	selector: 'lu-impersonation',
@@ -32,6 +32,9 @@ export class ImpersonationComponent {
 	popoverRef = viewChild(PopoverDirective);
 
 	selectedUser = model<ILuUser>();
+
+	enableFormerEmployees = input(false, { transform: booleanAttribute });
+
 	isNotMe = computed(() => this.selectedUser()?.id !== this.currentUserId);
 	clear = output<void>();
 
