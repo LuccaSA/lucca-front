@@ -11,8 +11,7 @@
 	(keydown.arrowDown)="$event.preventDefault(); popoverRef.openPopover(true)"
 	(keydown.arrowUp)="$event.preventDefault(); popoverRef.openPopover(true)"
 >
-	<!-- TODO trad -->
-	<span class="pr-u-mask">Changer de profil :</span>
+	<span class="pr-u-mask">{{ intl().switchProfile }}</span>
 
 	@let user = selectedUser();
 	@if (user) {
@@ -24,11 +23,10 @@
 			<span class="skeleton-item"></span>
 		</div>
 	}
-	<!-- TODO trad -->
-	<span class="pr-u-mask">– Le contenu de la page s’actualise dès que ce filtre est modifié</span>
+	<span class="pr-u-mask">{{ intl().a11yNavigationDescription }}</span>
 	<lu-icon class="impersonation-trigger-icon" icon="chevronBottom" />
 </button>
-<lu-clear class="impersonation-clear" (onClear)="clear.emit()" /><!-- TODO intl avec « Revenir au profil par défaut » -->
+<lu-clear class="impersonation-clear" (onClear)="clear.emit()" [intl]="{ clear: intl().clear }" />
 
 <ng-template #impersonationPopover>
 	<div class="impersonation_popover-content popover-contentOptional">
@@ -37,7 +35,7 @@
 				<div class="impersonation_popover-content-option">
 					<lu-user-picture aria-hidden="true" [user]="user" size="XS" softRounded />
 					@if (currentUserId === user.id) {
-						{{ usersIntl().me }}&ngsp;
+						{{ intl().me }}&ngsp;
 					}
 					<span translate="no">{{ user | luUserDisplay }}</span>
 					<!-- Handle homonyms -->
