@@ -13,6 +13,15 @@
 			}
 		</lu-segmented-control>
 
+		<lu-filter-pill label="Produit">
+			<lu-simple-select
+				[ngModel]="product()"
+				(ngModelChange)="product.set($event)"
+				[ngModelOptions]="{ standalone: true }"
+				[options]="productOptions"
+			/>
+		</lu-filter-pill>
+
 		<lu-form-field label="Rechercher un token" hiddenLabel>
 			<lu-text-input
 				[ngModel]="search()"
@@ -31,7 +40,7 @@
 		<div class="tokensExplorer-empty">Aucun token ne correspond à votre recherche.</div>
 	} @else {
 		@for (group of groupedTokens(); track group.label) {
-			<section class="tokensExplorer-group">
+			<section class="tokensExplorer-group" [class]="product() ? 'palette-' + product().value : ''">
 				@if (group.label) {
 					<h2 class="tokensExplorer-group-title">{{ group.label }}</h2>
 				}
@@ -46,7 +55,15 @@
 						>
 							@switch (token.preview) {
 								@case ("swatch") {
-									<div class="tokensExplorer-card-preview mod-swatch" [style.backgroundColor]="'var(' + token.name + ')'"></div>
+									<div
+										class="tokensExplorer-card-preview mod-swatch"
+										[class]="
+											'tokensExplorer-card-preview mod-swatch' + (token.previewVar && product() ? ' palette-' + product().value : '')
+										"
+										[style.backgroundColor]="
+											token.previewVar ? 'var(' + token.previewVar + ', var(' + token.name + '))' : 'var(' + token.name + ')'
+										"
+									></div>
 								}
 								@case ("text") {
 									<div class="tokensExplorer-card-preview">
