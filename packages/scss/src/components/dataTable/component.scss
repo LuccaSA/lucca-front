@@ -131,7 +131,7 @@
 
 		.dataTable-body-row-cell-expand-button.button {
 			vertical-align: top;
-			margin-left: calc(var(--pr-t-spacings-25) * -1);
+			margin-inline-start: calc(var(--pr-t-spacings-25) * -1);
 
 			.lucca-icon {
 				transform: rotate(var(--components-dataTable-expand-rotation));
