@@ -1,4 +1,4 @@
-<div [class]="pickerClasses()" (copy)="copyHandler($event)" (paste)="pasteHandler($event)">
+<div [class]="pickerClasses()" (copy)="copyHandler($event)" (paste)="pasteHandler($event)" (animationend)="keyPressed.set(false)">
 	<fieldset class="timePicker-fieldset" [disabled]="disabled()">
 		<legend>
 			<span class="pr-u-mask">{{ label() }}</span>
@@ -16,6 +16,7 @@
 			(valueChange)="hoursInputHandler($event)"
 			(nextRequest)="focusPart('minutes')"
 			(inputControlClick)="inputControlClickHandler('hours', $event)"
+			(nonDigitKeyPressed)="keyPressed.set(true)"
 		/>
 		<div aria-hidden="true" [class]="fieldsetSuffixClasses()" [attr.data-content-before]="separator()"></div>
 		<lu-time-picker-part
@@ -31,6 +32,7 @@
 			(valueChange)="minutesInputHandler($event)"
 			(prevRequest)="focusPart('hours')"
 			(inputControlClick)="inputControlClickHandler('minutes', $event)"
+			(nonDigitKeyPressed)="keyPressed.set(true)"
 		/>
 	</fieldset>
 </div>

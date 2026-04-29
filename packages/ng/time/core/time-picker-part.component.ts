@@ -60,6 +60,7 @@ export class TimePickerPartComponent {
 
 	prevRequest = output<void>();
 	nextRequest = output<void>();
+	nonDigitKeyPressed = output<void>();
 	inputControlClick = output<PickerControlDirection>();
 	touched = output<void>();
 
@@ -114,6 +115,7 @@ export class TimePickerPartComponent {
 		}
 
 		if (event.data && /\D+/.test(event.data)) {
+			this.nonDigitKeyPressed.emit();
 			event.target.value = String(this.value());
 			return;
 		}

@@ -62,6 +62,8 @@ export class TimeRangePickerComponent implements ControlValueAccessor, OnInit, V
 
 	readonly step = input<ISO8601Duration | null>(null);
 
+	keyPressed = signal(false);
+
 	readonly startValue = computed(() => this.value()?.start ?? '––:––:––');
 	readonly endValue = computed(() => this.value()?.end ?? '––:––:––');
 	readonly formFieldLabel = computed(() => this.#formFieldRef?.label());

@@ -1,4 +1,9 @@
-<div class="timePicker" [class.mod-stepper]="displayArrows()">
+<div
+	class="timePicker"
+	[class.mod-stepper]="displayArrows()"
+	[class.pr-u-animatedShake]="keyPressed()"
+	(animationend)="keyPressed.set(false)"
+>
 	<div class="timePicker-fieldset">
 		<lu-time-picker
 			#timePickerStart
@@ -13,6 +18,7 @@
 			[forceMeridiemDisplay]="forceMeridiemDisplay()"
 			(blur)="onTouched()"
 			(nextPicker)="timePickerEnd.focusPart('hours')"
+			(nonDigitKeyPressed)="keyPressed.set(true)"
 		/>
 		<label role="presentation" [attr.for]="timePickerEnd?.firstTimePickerInputId" class="timePicker-arrow">
 			<lu-icon class="timePicker-arrow-icon" icon="arrowRight" />
@@ -30,6 +36,7 @@
 			[forceMeridiemDisplay]="forceMeridiemDisplay()"
 			(blur)="onTouched()"
 			(prevPicker)="timePickerStart.focusPart(partToFocus())"
+			(nonDigitKeyPressed)="keyPressed.set(true)"
 		/>
 	</div>
 </div>
