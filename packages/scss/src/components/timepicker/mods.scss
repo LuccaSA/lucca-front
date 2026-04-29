@@ -1,13 +1,34 @@
 @use '@lucca-front/scss/src/commons/utils/a11y';
+@use '@lucca-front/icons/src/icon/exports' as icons;
 
 @mixin S {
 	--components-timepicker-font: var(--pr-t-font-body-S);
-	--components-timepicker-display-padding-inline: var(--pr-t-spacings-25);
-	--components-timepicker-display-padding-block: var(--pr-t-spacings-75);
-	--components-timepicker-input-padding-inline: var(--pr-t-spacings-75);
 	--components-timepicker-input-padding-block: var(--pr-t-spacings-25);
 	--components-timepicker-input-height: 1.75rem;
 	--components-timepicker-separator-left: 1.875rem;
+	--components-timepicker-start: var(--pr-t-spacings-25);
+	--components-timepicker-end: var(--pr-t-spacings-75);
+
+	.timePicker-arrow-icon .lucca-icon {
+		@include icons.XS;
+	}
+
+	.timePicker-fieldset-group {
+		--components-timepicker-input-padding-inline: var(--components-timepicker-start) var(--components-timepicker-end);
+		--components-timepicker-display-inset-inline: var(--components-timepicker-input-padding-inline);
+
+		~ .timePicker-fieldset-group {
+			--components-timepicker-input-padding-inline: var(--components-timepicker-end) var(--components-timepicker-start);
+		}
+	}
+
+	.timePicker-fieldset-meridiem {
+		inline-size: calc(var(--pr-t-spacings-50) + 2ch);
+
+		&::after {
+			inset-inline: var(--pr-t-spacings-25);
+		}
+	}
 }
 
 @mixin stepper {

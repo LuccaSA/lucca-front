@@ -1,0 +1,62 @@
+@let startLabel = `${formFieldLabel() ? formFieldLabel() + " " : ""}(${intl().timeRangePickerStart})`;
+@let endLabel = `${formFieldLabel() ? formFieldLabel() + " " : ""}(${intl().timeRangePickerEnd})`;
+
+<div
+	class="timePicker"
+	[class.mod-stepper]="displayArrows()"
+	[class.pr-u-animatedShake]="keyPressed()"
+	(animationend)="keyPressed.set(false)"
+>
+	<div class="timePicker-fieldset">
+		<lu-time-picker
+			#timePickerStart
+			[label]="startLabel"
+			[value]="startValue()"
+			(valueChange)="onStartChange($event)"
+			[disabled]="isDisabled()"
+			[max]="max()"
+			[step]="step()"
+			[size]="size()"
+			[displayArrows]="displayArrows()"
+			[forceMeridiemDisplay]="forceMeridiemDisplay()"
+			(blur)="onTouched()"
+			(nextPicker)="timePickerEnd.focusPart('hours')"
+			(nonDigitKeyPressed)="keyPressed.set(true)"
+		/>
+		<label role="presentation" [attr.for]="timePickerEnd?.firstTimePickerInputId" class="timePicker-arrow">
+			<lu-icon class="timePicker-arrow-icon" icon="arrowRight" />
+		</label>
+		<lu-time-picker
+			#timePickerEnd
+			[label]="endLabel"
+			[value]="endValue()"
+			(valueChange)="onEndChange($event)"
+			[disabled]="isDisabled()"
+			[max]="max()"
+			[step]="step()"
+			[size]="size()"
+			[displayArrows]="displayArrows()"
+			[forceMeridiemDisplay]="forceMeridiemDisplay()"
+			(blur)="onTouched()"
+			(prevPicker)="timePickerStart.focusPart(partToFocus())"
+			(nonDigitKeyPressed)="keyPressed.set(true)"
+		/>
+	</div>
+</div>
+
+<ng-container *luPresentationDisplayDefault>
+	{{ intl().timeRangePickerFrom }}
+	<span class="pr-u-mask">{{ startLabel }}</span>
+	@if (startValue() && startValue() !== DEFAULT_TIME_VALUE) {
+		{{ startValue() }}
+	} @else {
+		<span aria-hidden="true" data-content-before="–"></span>
+	}
+	{{ intl().timeRangePickerAt }}
+	<span class="pr-u-mask">{{ endLabel }}</span>
+	@if (endValue() && endValue() !== DEFAULT_TIME_VALUE) {
+		{{ endValue() }}
+	} @else {
+		<span aria-hidden="true" data-content-before="–"></span>
+	}
+</ng-container>

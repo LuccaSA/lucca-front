@@ -4,3 +4,8 @@ export * from './duration-picker/duration-picker.component';
 export * from './duration-picker/duration-picker.translate';
 export * from './time-picker/time-picker.component';
 export * from './time-picker/time-picker.translate';
+export * from './time-range-picker/time-range-picker';
+export * from './time-range-picker/time-range-picker.component';
+export * from './time-range-picker/time-range-picker.translate';
+export * from './time-range-picker/time-range-picker.type';
+export * from './time-range-picker/time-range-picker.validators';

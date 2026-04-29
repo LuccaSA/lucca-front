@@ -1,4 +1,4 @@
-import { booleanAttribute, ChangeDetectionStrategy, Component, computed, forwardRef, input, model, output, ViewEncapsulation } from '@angular/core';
+import { booleanAttribute, ChangeDetectionStrategy, Component, computed, forwardRef, input, model, output, signal, ViewEncapsulation } from '@angular/core';
 import { NG_VALUE_ACCESSOR } from '@angular/forms';
 import { intlInputOptions, isNil, isNotNil } from '@lucca-front/ng/core';
 import { BasePickerComponent } from '../core/base-picker.component';
@@ -40,6 +40,8 @@ export class DurationPickerComponent extends BasePickerComponent {
 
 	readonly durationChange = output<DurationChangeEvent>();
 
+	keyPressed = signal(false);
+
 	protected readonly hours = computed(() => getHoursPartFromDuration(this.value()));
 	protected readonly minutes = computed(() => getMinutesPartFromDuration(this.value()));
 	protected readonly shouldHideValue = computed(() => this.hideZeroValue() && this.hours() === 0 && this.minutes() === 0);
@@ -57,6 +59,7 @@ export class DurationPickerComponent extends BasePickerComponent {
 			'mod-stepper': this.displayArrows(),
 			'mod-stepperHover': this.displayArrows(),
 			[`mod-${this.size()}`]: Boolean(this.size()),
+			'pr-u-animatedShake': this.keyPressed(),
 		};
 	});
 	protected readonly fieldsetSuffixClasses = computed(() => {

@@ -2,16 +2,16 @@ import { FormsModule } from '@angular/forms';
 import { BrowserAnimationsModule } from '@angular/platform-browser/animations';
 import { FormFieldComponent } from '@lucca-front/ng/form-field';
 import { INLINE_MESSAGE_STATE } from '@lucca-front/ng/inline-message';
-import { BASE_PICKER_SIZE, DurationPickerComponent } from '@lucca-front/ng/time';
+import { BASE_PICKER_SIZE, TimePickerComponent } from '@lucca-front/ng/time';
 import { Meta, moduleMetadata, StoryObj } from '@storybook/angular';
+import { generateInputs, setStoryOptions } from 'stories/helpers/stories';
 import { StoryModelDisplayComponent } from 'stories/helpers/story-model-display.component';
-import { cleanupTemplate, generateInputs, setStoryOptions } from '../../../helpers/stories';
 
 export default {
-	title: 'Documentation/Forms/Time/Duration Picker/Angular Form',
+	title: 'Documentation/Forms/Time/Angular/Basic',
 	decorators: [
 		moduleMetadata({
-			imports: [DurationPickerComponent, FormFieldComponent, FormsModule, BrowserAnimationsModule, StoryModelDisplayComponent],
+			imports: [TimePickerComponent, FormFieldComponent, FormsModule, BrowserAnimationsModule, StoryModelDisplayComponent],
 		}),
 	],
 	argTypes: {
@@ -54,12 +54,6 @@ export default {
 			},
 			description: 'Marque le champ comme obligatoire.',
 		},
-		hideZeroValue: {
-			control: {
-				type: 'boolean',
-			},
-			description: 'Masque le contenu du champ lorsque sa valeur est nulle.',
-		},
 		displayArrows: {
 			control: {
 				type: 'boolean',
@@ -82,7 +76,14 @@ export default {
 			control: {
 				type: 'text',
 			},
-			description: '[v21.1] Définit une valeur maximale.',
+			description: 'Définit une valeur maximale.',
+		},
+		forceMeridiemDisplay: {
+			options: ['', false, true],
+			control: {
+				type: 'select',
+			},
+			description: 'Force l’affichage de l’indicateur AM/PM',
 		},
 		presentation: {
 			description: '[v21.1] Transforme le champ de formulaire en donnée textuelle non éditable.',
@@ -90,26 +91,20 @@ export default {
 	},
 } as Meta;
 
-export const Basic: StoryObj<DurationPickerComponent & FormFieldComponent & { required: boolean; presentation: boolean }> = {
+export const Basic: StoryObj<TimePickerComponent & FormFieldComponent & { required: boolean; presentation: boolean }> = {
 	render: (args, { argTypes }) => {
-		const { label, hiddenLabel, tooltip, inlineMessage, inlineMessageState, size, presentation, ...inputArgs } = args;
+		const { label, hiddenLabel, tooltip, inlineMessage, inlineMessageState, size, forceMeridiemDisplay, presentation, ...inputArgs } = args;
 		return {
-			template: cleanupTemplate(`<lu-form-field [rolePresentationLabel]="true" ${generateInputs(
-				{
-					label,
-					hiddenLabel,
-					tooltip,
-					inlineMessage,
-					inlineMessageState,
-					size,
-					presentation,
-				},
-				argTypes,
-			)}>
-	<lu-duration-picker label="${label}" ${generateInputs(inputArgs, argTypes)} [(ngModel)]="example">
-	</lu-duration-picker>
+			template: `
+<lu-form-field [label]="labelID" [rolePresentationLabel]="true"${generateInputs({ hiddenLabel, tooltip, inlineMessage, inlineMessageState, size, presentation }, argTypes)}>
+	<lu-time-picker label="${label}"${generateInputs(inputArgs, argTypes)} ${forceMeridiemDisplay !== null ? `[forceMeridiemDisplay]="${forceMeridiemDisplay}"` : ''} [(ngModel)]="example" />
+	<ng-template #labelID>
+		<span aria-hidden="true">${label}</span>
+	</ng-template>
 </lu-form-field>
-<pr-story-model-display>{{ example }}</pr-story-model-display>`),
+
+<pr-story-model-display>{{ example }}</pr-story-model-display>
+`,
 		};
 	},
 	args: {
@@ -119,11 +114,10 @@ export const Basic: StoryObj<DurationPickerComponent & FormFieldComponent & { re
 		required: true,
 		inlineMessage: 'Helper message',
 		inlineMessageState: 'default',
-		hideZeroValue: false,
 		displayArrows: false,
 		disabled: false,
-		presentation: false,
 		step: 'PT1M',
-		max: 'PT99H',
+		max: '23:59:59',
+		presentation: false,
 	},
 };
