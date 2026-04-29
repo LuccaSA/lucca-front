@@ -1,6 +1,6 @@
 ﻿export const Translations = {
 	'nl-BE': {
-		placeholder: 'Selecteren...',
+		placeholder: 'Selecteren ...',
 		search: 'Zoeken',
 		clear: 'Selectie leegmaken',
 		clearSearch: 'Zoekopdracht leegmaken',
@@ -15,7 +15,7 @@
 		selectCountOptions: 'Selecteer alle resultaten ({{optionsCount}})',
 	},
 	nl: {
-		placeholder: 'Selecteren...',
+		placeholder: 'Selecteren ...',
 		search: 'Zoeken',
 		clear: 'Selectie leegmaken',
 		clearSearch: 'Zoekopdracht leegmaken',
@@ -30,7 +30,7 @@
 		selectCountOptions: 'Selecteer alle resultaten ({{optionsCount}})',
 	},
 	it: {
-		placeholder: 'Selezionare...',
+		placeholder: 'Selezionare…',
 		search: 'Cercare',
 		clear: 'Cancellare la selezione',
 		clearSearch: 'Cancellare la ricerca',
@@ -42,7 +42,7 @@
 		unselectAll: 'Deselezionare tutto',
 		loading: 'Caricamento in corso...',
 		emptyOptions: 'Nessun valore è disponibile. Contatta l’amministratore per maggiori informazioni.',
-		selectCountOptions: 'Seleziona tutti i risultati ({{optionsCount}})',
+		selectCountOptions: 'Selezionare tutti i risultati ({{optionsCount}})',
 	},
 	fr: {
 		placeholder: 'Sélectionner…',
@@ -75,7 +75,7 @@
 		selectCountOptions: 'Selecionar todos os resultados ({{optionsCount}})',
 	},
 	es: {
-		placeholder: 'Seleccionar…',
+		placeholder: 'Seleccionar...',
 		search: 'Buscar',
 		clear: 'Vaciar la selección',
 		clearSearch: 'Vaciar la búsqueda',
@@ -87,10 +87,10 @@
 		unselectAll: 'Desmarcar todo',
 		loading: 'Cargando...',
 		emptyOptions: 'No hay ningún valor disponible. Ponte en contacto con tu administrador para obtener más información.',
-		selectCountOptions: 'Seleccione todos los resultados ({{optionsCount}})',
+		selectCountOptions: 'Seleccionar todos los resultados ({{optionsCount}})',
 	},
 	de: {
-		placeholder: 'Auswählen…',
+		placeholder: 'Auswählen ...',
 		search: 'Suchen',
 		clear: 'Auswahl leeren',
 		clearSearch: 'Suche leeren',
