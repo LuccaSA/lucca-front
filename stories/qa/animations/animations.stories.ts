@@ -23,6 +23,10 @@ import { Meta, StoryObj } from '@storybook/angular';
 				&.mod-vertical {
 					min-block-size: 10rem;
 				}
+
+				&.mod-horizontal {
+					min-inline-size: 10rem;
+				}
 			}
 
 			tr:not(:hover) .demo {
