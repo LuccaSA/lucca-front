@@ -1,4 +1,3 @@
-import { DOCUMENT } from '@angular/common';
 import { ChangeDetectionStrategy, Component, inject, input, ViewEncapsulation } from '@angular/core';
 import { intlInputOptions } from '@lucca-front/ng/core';
 import { SkipLinksService } from './skip-links.service';
@@ -12,16 +11,7 @@ import { LU_SKIP_LINKS_TRANSLATIONS } from './skip-links.translate';
 	encapsulation: ViewEncapsulation.None,
 })
 export class LuSkipLinksComponent {
-	#document = inject(DOCUMENT);
-
 	skipLinksService = inject(SkipLinksService);
 
 	readonly intl = input(...intlInputOptions(LU_SKIP_LINKS_TRANSLATIONS));
-
-	anchor(hash: string, e: Event) {
-		e.preventDefault();
-		document.getElementById(hash)?.focus();
-		this.#document.location.hash = '';
-		this.#document.location.hash = hash;
-	}
 }
