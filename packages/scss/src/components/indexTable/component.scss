@@ -257,8 +257,6 @@
 			}
 
 			.pagination {
-				position: sticky;
-				inset-inline-end: 0;
 				align-self: flex-end;
 				padding-block: var(--pr-t-spacings-50) 0;
 				padding-inline: 0;
@@ -267,12 +265,9 @@
 		}
 
 		.indexTableWrapper-pagination {
-			display: flex;
-			justify-content: flex-end;
-
-			lu-pagination {
-				display: contents;
-			}
+			position: sticky;
+			inset-inline-end: 0;
+			align-self: flex-end;
 
 			&:empty {
 				display: none;
