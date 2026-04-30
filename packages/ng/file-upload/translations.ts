@@ -13,13 +13,14 @@
 		deleteFile: 'Delete file "{{fileName}}"',
 		password: 'Password',
 		confirmPassword: 'Confirm password',
+		edit: 'Edit',
 	},
 	de: {
-		acceptedFormat: { one: 'Accepted format:', other: 'Accepted formats:' },
-		selectFile: { one: 'Select a file', other: 'Select files' },
+		acceptedFormat: { one: 'Akzeptiertes Format:', other: 'Akzeptierte Formate:' },
+		selectFile: { one: 'Eine Datei auswählen', other: 'Dateien auswählen' },
 		dropOrClick: { one: 'Drag and drop file here or <span>click to browse</span>.', other: 'Drag and drop files here or <span>click to browse</span>.' },
-		maxWeight: { one: 'Maximum size: {{maxSizeDisplay}}. ', other: 'Maximum file size: {{maxSizeDisplay}}. ' },
-		fileUploadedListed: { one: 'The submitted file is detailed below.', other: 'The submitted files are detailed below.' },
+		maxWeight: { one: 'Maximale Größe: {{maxSizeDisplay}}. ', other: 'Maximale Größe für eine Datei: {{maxSizeDisplay}}. ' },
+		fileUploadedListed: { one: 'Die bereits abgelegte Datei ist hier aufgeführt.', other: 'Die bereits abgelegten Dateien sind hier aufgeführt.' },
 		all: 'alle',
 		file: 'Datei {{fileTypeLastPart}}',
 		download: 'Download',
@@ -28,6 +29,7 @@
 		deleteFile: 'Die Datei „ {{fileName}} “ löschen',
 		password: 'Passwort',
 		confirmPassword: 'Passwort',
+		edit: 'Bearbeiten',
 	},
 	fr: {
 		acceptedFormat: { one: 'Format accepté :', other: 'Formats acceptés :' },
@@ -43,6 +45,7 @@
 		deleteFile: 'Supprimer le fichier « {{fileName}} »',
 		password: 'Mot de passe',
 		confirmPassword: 'Valider le mot de passe',
+		edit: 'Modifier',
 	},
 	it: {
 		acceptedFormat: { one: 'Formato accettato:', other: 'Formati accettati:' },
@@ -58,6 +61,7 @@
 		deleteFile: 'Eliminare il file "{{fileName}}"',
 		password: 'Password',
 		confirmPassword: 'Confermare la password',
+		edit: 'Modificare',
 	},
 	nl: {
 		acceptedFormat: { one: 'Goedgekeurd formaat:', other: 'Goedgekeurde formaten:' },
@@ -73,6 +77,7 @@
 		deleteFile: "Het bestand '{{fileName}}' verwijderen",
 		password: 'Wachtwoord',
 		confirmPassword: 'Wachtwoord valideren',
+		edit: 'Wijzigen',
 	},
 	'nl-BE': {
 		acceptedFormat: { one: 'Goedgekeurd formaat:', other: 'Goedgekeurde formaten:' },
@@ -88,6 +93,7 @@
 		deleteFile: "Het bestand '{{fileName}}' verwijderen",
 		password: 'Wachtwoord',
 		confirmPassword: 'Wachtwoord valideren',
+		edit: 'Wijzigen',
 	},
 	es: {
 		acceptedFormat: { one: 'Formato aceptado:', other: 'Formatos aceptados:' },
@@ -103,6 +109,7 @@
 		deleteFile: 'Eliminar el archivo «{{fileName}}»',
 		password: 'Contraseña',
 		confirmPassword: 'Validar la contraseña',
+		edit: 'Editar',
 	},
 	pt: {
 		acceptedFormat: { one: 'Formato aceite :', other: 'Formatos aceites :' },
@@ -118,5 +125,6 @@
 		deleteFile: 'Eliminar o ficheiro " {{fileName}} ',
 		password: 'Palavra-passe',
 		confirmPassword: 'Confirmar a palavra-passe',
+		edit: 'Modificar',
 	},
 };

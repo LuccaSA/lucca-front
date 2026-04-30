@@ -1,4 +1,6 @@
+import { PALETTE } from '@lucca/prisme/core';
 import { Meta, StoryObj } from '@storybook/angular';
+import { setStoryOptions } from 'stories/helpers/stories';
 
 interface GaugeBasicStory {
 	palette: string;
@@ -12,7 +14,7 @@ export default {
 	title: 'Documentation/Loaders/Gauge/HTML&CSS/Horizontal',
 	argTypes: {
 		palette: {
-			options: ['', 'product', 'neutral', 'success', 'warning', 'error'],
+			options: setStoryOptions(PALETTE),
 			control: {
 				type: 'select',
 			},

@@ -1,6 +1,9 @@
 import { FormsModule } from '@angular/forms';
 import { ButtonComponent } from '@lucca-front/ng/button';
 import {
+	DATA_TABLE_ALIGN,
+	DATA_TABLE_SORT,
+	DATA_TABLE_VERTICAL_ALIGN,
 	DataTableBodyComponent,
 	DataTableComponent,
 	DataTableFootComponent,
@@ -17,27 +20,28 @@ import { PaginationComponent } from '@lucca-front/ng/pagination';
 
 import { Meta, moduleMetadata, StoryObj } from '@storybook/angular';
 import { HiddenArgType } from 'stories/helpers/common-arg-types';
+import { setStoryOptions } from 'stories/helpers/stories';
 import { StoryModelDisplayComponent } from 'stories/helpers/story-model-display.component';
 
 export default {
 	title: 'Documentation/Listings/Data table/Angular/Basic',
 	argTypes: {
 		sort: {
-			options: ['', 'none', 'ascending', 'descending'],
+			options: setStoryOptions(DATA_TABLE_SORT),
 			control: {
 				type: 'select',
 			},
 			description: 'Définit l’état de tri d’une cellule d’en-tête.',
 		},
 		align: {
-			options: ['', 'start', 'center', 'end'],
+			options: setStoryOptions(DATA_TABLE_ALIGN),
 			control: {
 				type: 'select',
 			},
 			description: 'Aligne le contenu des cellules horizontalement.',
 		},
 		verticalAlign: {
-			options: ['', 'top', 'middle', 'bottom'],
+			options: setStoryOptions(DATA_TABLE_VERTICAL_ALIGN),
 			control: {
 				type: 'select',
 			},

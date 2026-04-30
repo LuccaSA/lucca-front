@@ -1,5 +1,6 @@
 import { NgTemplateOutlet } from '@angular/common';
 import { booleanAttribute, ChangeDetectionStrategy, Component, computed, input, ViewEncapsulation } from '@angular/core';
+import { FooterContainerMax, FooterNarrowAtMediaMax } from './footer.type';
 
 @Component({
 	selector: 'lu-footer',
@@ -17,13 +18,13 @@ export class FooterComponent {
 	 */
 	readonly container = input(false, { transform: booleanAttribute });
 
-	readonly containerMax = input<null | 'M' | 'L' | 'XL' | 'XXL' | 'XXXL'>();
+	readonly containerMax = input<FooterContainerMax | null>();
 
 	readonly forceNarrow = input(false, { transform: booleanAttribute });
 
 	readonly dialog = input(false, { transform: booleanAttribute });
 
-	readonly narrowAtMediaMax = input<'XXS' | 'XS' | 'S' | 'M'>('XXS');
+	readonly narrowAtMediaMax = input<FooterNarrowAtMediaMax>('XXS');
 
 	readonly breakpointClass = computed(() => (this.forceNarrow() ? 'mod-narrow' : { [`mod-narrowAtMediaMax${this.narrowAtMediaMax()}`]: !!this.narrowAtMediaMax() }));
 }

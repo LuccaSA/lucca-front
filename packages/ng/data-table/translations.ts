@@ -12,7 +12,7 @@
 		move: 'Move',
 	},
 	es: {
-		move: 'Desplazar',
+		move: 'Mover',
 	},
 	it: {
 		move: 'Spostare',
