@@ -1,8 +1,6 @@
 @use '@lucca-front/icons/src/commons/utils/icon';
 @use '@lucca-front/scss/src/commons/utils/reset';
 @use '@lucca-front/scss/src/commons/utils/a11y';
-@use '@lucca-front/scss/src/commons/utils/color';
-@use '@lucca-front/scss/src/components/button/exports' as button;
 @use '@lucca-front/scss/src/commons/utils/namespace';
 
 @mixin component($atRoot: namespace.$defaultAtRoot) {
@@ -51,13 +49,9 @@
 			display: flex;
 			gap: var(--pr-t-spacings-75);
 			margin-block-start: var(--components-callout-content-description-action-marginBlockStart);
+			margin-block-end: var(--components-callout-content-description-action-marginBlockEnd);
 			padding-block: var(--components-callout-content-description-action-paddingBlock);
 			padding-inline: 0;
-
-			.button {
-				@include color.palette('neutral');
-				@include button.S;
-			}
 		}
 
 		.callout-icon {

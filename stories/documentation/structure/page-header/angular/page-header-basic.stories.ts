@@ -16,13 +16,37 @@ export default {
 	title: 'Documentation/Structure/PageHeader/Angular/Basic',
 	argTypes: {
 		label: {
-			description: 'PortalContent',
+			description: 'Titre du composant. PortalContent.',
 		},
 		description: {
-			description: 'PortalContent',
+			description: 'Description du composant. PortalContent.',
 		},
 		container: {
 			description: '[v20.1] Applique un container autour du contenu de Page Header.',
+		},
+		sticky: {
+			description: '[v21.2] Applique un comportement sticky au Page Header quand celui ci n’est pas géré par le Main Layout',
+		},
+		breadcrumbs: {
+			description: 'Exemple avec fil d’Ariane.',
+		},
+		actions: {
+			description: 'Exemple avec des actions générales.',
+		},
+		titleActions: {
+			description: 'Exemple avec des actions spécifiques au titre.',
+		},
+		navigation: {
+			description: 'Exemple avec une navigation horizontale.',
+		},
+		backAction: {
+			description: 'Exemple avec une action de retour en arrière.',
+		},
+		leading: {
+			description: 'Ajout d’un slot avant le titre.',
+		},
+		trailing: {
+			description: 'Ajout d’un slot après le titre.',
 		},
 	},
 	decorators: [
@@ -49,59 +73,75 @@ export default {
 	render: (args, { argTypes }) => {
 		const { breadcrumbs, actions, navigation, backAction, titleActions, leading, trailing, ...otherArgs } = args;
 		const titleActionsContainer = titleActions
-			? `<ng-container pageHeaderTitleActions>
-	<button type="button" luButton="ghost" luTooltip="Modifier" luTooltipOnlyForDisplay><lu-icon icon="officePen" alt="Modifier" /></button>
-	<button type="button" luButton="ghost" luTooltip="Copier" luTooltipOnlyForDisplay><lu-icon icon="fileCopy" alt="Copier" /></button>
-	<button type="button" luButton="ghost" luTooltip="Supprimer" luTooltipOnlyForDisplay><lu-icon icon="trashDelete" alt="Supprimer" /></button>
-</ng-container>`
+			? `
+	<ng-container pageHeaderTitleActions>
+		<button type="button" luButton="ghost" luTooltip="Modifier" luTooltipOnlyForDisplay><lu-icon icon="officePen" alt="Modifier" /></button>
+		<button type="button" luButton="ghost" luTooltip="Copier" luTooltipOnlyForDisplay><lu-icon icon="fileCopy" alt="Copier" /></button>
+		<button type="button" luButton="ghost" luTooltip="Supprimer" luTooltipOnlyForDisplay><lu-icon icon="trashDelete" alt="Supprimer" /></button>
+	</ng-container>`
 			: ``;
 		const backActionContainer = backAction
-			? `<ng-container pageHeaderBackAction>
-	<a href="#" luButton>
-		<lu-icon icon="arrowLeft" alt="Retour" />
-	</a>
-</ng-container>`
+			? `
+	<ng-container pageHeaderBackAction>
+		<a href="#" luButton>
+			<lu-icon icon="arrowLeft" alt="Retour" />
+		</a>
+	</ng-container>`
 			: ``;
 		const navigationContainer = navigation
-			? `<ng-container pageHeaderNavigation>
-	<lu-horizontal-navigation >
-		<a *luHorizontalNavigationLink class="horizontalNavigation-list-item-action" href="#" aria-current="page">Page</a>
-		<a *luHorizontalNavigationLink class="horizontalNavigation-list-item-action" href="#">Page</a>
-		<a *luHorizontalNavigationLink class="horizontalNavigation-list-item-action" href="#">Page</a>
-	</lu-horizontal-navigation>
-</ng-container>`
+			? `
+	<ng-container pageHeaderNavigation>
+		<lu-horizontal-navigation >
+			<a *luHorizontalNavigationLink class="horizontalNavigation-list-item-action" href="#" aria-current="page">Page</a>
+			<a *luHorizontalNavigationLink class="horizontalNavigation-list-item-action" href="#">Page</a>
+			<a *luHorizontalNavigationLink class="horizontalNavigation-list-item-action" href="#">Page</a>
+		</lu-horizontal-navigation>
+	</ng-container>`
 			: ``;
 		const actionsContainer = actions
-			? `<ng-container pageHeaderActions>
-	<lu-form-field label="Label" hiddenLabel>
-		<lu-text-input
-			hasSearchIcon
-			type="text"
-			placeholder="ex : Mon précieux"
-			[(ngModel)]="example"
-		></lu-text-input>
-	</lu-form-field>
-	<button type="button" luButton>Button</button>
-	<button type="button" luButton="outlined">Button</button>
-	<button type="button" luButton="ghost"><lu-icon icon="menuDots" alt="Voir plus d’options" /></button>
-</ng-container>`
+			? `
+	<ng-container pageHeaderActions>
+		<lu-form-field label="Label" hiddenLabel>
+			<lu-text-input
+				hasSearchIcon
+				type="text"
+				placeholder="ex : Mon précieux"
+				[(ngModel)]="example"
+			></lu-text-input>
+		</lu-form-field>
+		<button type="button" luButton>Button</button>
+		<button type="button" luButton="outlined">Button</button>
+		<button type="button" luButton="ghost"><lu-icon icon="menuDots" alt="Voir plus d’options" /></button>
+	</ng-container>`
 			: ``;
 		const breadcrumbsContainer = breadcrumbs
-			? `<ng-container pageHeaderBreadcrumbs>
-	<lu-breadcrumbs>
-		<a *luBreadcrumbsLink class="breadcrumbs-list-item-action" routerLink="/" ariaCurrentWhenActive="page">Page 0</a>
-		<a *luBreadcrumbsLink class="breadcrumbs-list-item-action" ariaCurrentWhenActive="page" href="#2">Page 1</a>
-		<a *luBreadcrumbsLink class="breadcrumbs-list-item-action" aria-current="page">Page 2</a>
-	</lu-breadcrumbs>
-</ng-container>`
+			? `
+	<ng-container pageHeaderBreadcrumbs>
+		<lu-breadcrumbs>
+			<a *luBreadcrumbsLink class="breadcrumbs-list-item-action" routerLink="/" ariaCurrentWhenActive="page">Page 0</a>
+			<a *luBreadcrumbsLink class="breadcrumbs-list-item-action" ariaCurrentWhenActive="page" href="#2">Page 1</a>
+			<a *luBreadcrumbsLink class="breadcrumbs-list-item-action" aria-current="page">Page 2</a>
+		</lu-breadcrumbs>
+	</ng-container>`
 			: ``;
-		const leadingContainer = leading ? `<ng-container pageHeaderLeading>${leading}</ng-container>` : ``;
-		const trailingContainer = trailing ? `<ng-container pageHeaderTrailing>${trailing}</ng-container>` : ``;
-		return {
-			template: `<lu-page-header ${generateInputs(otherArgs, argTypes)}>
-${breadcrumbsContainer}${backActionContainer}${leadingContainer}${titleActionsContainer}${trailingContainer}${actionsContainer}${navigationContainer}
+		const leadingContainer = leading
+			? `
+	<ng-container pageHeaderLeading>${leading}</ng-container>`
+			: ``;
+		const trailingContainer = trailing
+			? `
+	<ng-container pageHeaderTrailing>${trailing}</ng-container>`
+			: ``;
+		if (breadcrumbsContainer || backActionContainer || leadingContainer || titleActionsContainer || trailingContainer || actionsContainer || navigationContainer) {
+			return {
+				template: `<lu-page-header${generateInputs(otherArgs, argTypes)}>${breadcrumbsContainer}${backActionContainer}${leadingContainer}${titleActionsContainer}${trailingContainer}${actionsContainer}${navigationContainer}
 </lu-page-header>`,
-		};
+			};
+		} else {
+			return {
+				template: `<lu-page-header${generateInputs(otherArgs, argTypes)} />`,
+			};
+		}
 	},
 } as Meta;
 
@@ -115,6 +155,7 @@ export const Basic = {
 		navigation: false,
 		backAction: false,
 		container: false,
+		sticky: false,
 		leading: '',
 		trailing: '',
 	},

@@ -34,9 +34,9 @@
 	--components-dialog-maxHeight: none;
 	--components-dialog-maxHeightFallback: var(--components-dialog-maxHeight);
 	--components-dialog-height: calc(100% - var(--pr-t-spacings-100) * 2);
-	--components-dialog-maxWidth: calc(100vw - var(--pr-t-spacings-200));
+	--components-dialog-maxWidth: calc(100vw - var(--pr-t-spacings-200) - var(--commons-pushPanel-inlineSize));
 	--components-dialog-borderRadius: var(--pr-t-border-radius-structure);
-	--components-dialog-inset: var(--pr-t-spacings-100) var(--pr-t-spacings-100) var(--pr-t-spacings-100) auto;
+	--components-dialog-inset: var(--pr-t-spacings-100) calc(var(--pr-t-spacings-100) + var(--commons-pushPanel-inlineSize)) var(--pr-t-spacings-100) auto;
 	--components-dialog-translateX: var(--components-dialog-translate);
 	--components-dialog-translateY: 0;
 	--components-dialog-translate-spacing: calc(var(--pr-t-spacings-500) * 2);
@@ -49,9 +49,9 @@
 	--components-dialog-maxHeight: calc(100dvh - var(--pr-t-spacings-200));
 	--components-dialog-maxHeightFallback: calc(100vh - var(--pr-t-spacings-200));
 	--components-dialog-maxWidth: none;
-	--components-dialog-inset: auto var(--pr-t-spacings-100) var(--pr-t-spacings-100) var(--pr-t-spacings-100);
+	--components-dialog-inset: auto calc(var(--pr-t-spacings-100) + var(--commons-pushPanel-inlineSize)) var(--pr-t-spacings-100) var(--pr-t-spacings-100);
 	--components-dialog-borderRadius: var(--pr-t-border-radius-structure);
-	--components-dialog-width: calc(100% - var(--pr-t-spacings-100) * 2);
+	--components-dialog-width: calc(100% - var(--pr-t-spacings-100) * 2 - var(--commons-pushPanel-inlineSize));
 	--components-dialog-height: fit-content;
 	--components-dialog-translateX: 0;
 	--components-dialog-translateY: var(--components-dialog-translate);
@@ -80,16 +80,14 @@
 }
 
 @mixin withCloseButton {
-	.dialog-inside-header-button {
-		@include button.ghost;
-		@include button.S;
-		@include button.onlyIconS;
+	@include button.ghost;
+	@include button.S;
+	@include button.onlyIconS;
 
-		align-self: start;
-		justify-self: end;
-		grid-area: close;
-		display: var(--components-dialog-insideHeaderButtonDisplay);
-	}
+	align-self: start;
+	justify-self: end;
+	grid-area: close;
+	display: var(--components-dialog-insideHeaderButtonDisplay);
 }
 
 @mixin withAction {
@@ -100,23 +98,29 @@
 @mixin fancy {
 	// padding and minimum height are in pixels because they correspond to the size of the image
 	--components-dialog-inside-paddingInlineEnd: 224px;
-	--components-dialog-minBlockSize: 288px;
+	--components-dialog-minBlockSize: calc(288px + var(--pr-t-spacings-200));
 	--components-dialog-inside-gridTemplateRows: auto auto auto;
 	--components-dialog-inside-alignContent: center;
 	--components-dialog-inside-header-boxShadow: none;
 	--components-dialog-inside-header-position: static;
 	--components-dialog-inside-header-paddingBlock: var(--pr-t-spacings-200) 0;
-	--components-dialog-insideContent-paddingBlock: var(--pr-t-spacings-50) var(--pr-t-spacings-200);
 	--components-dialog-inside-header-button-position: absolute;
 	--components-dialog-inside-header-button-insetBlockStart: var(--pr-t-spacings-100);
-	--components-dialog-inside-header-button-insetBlockEnd: var(--pr-t-spacings-100);
+	--components-dialog-inside-header-button-insetInlineEnd: var(--pr-t-spacings-100);
+	--components-dialog-insideContent-paddingBlock: var(--pr-t-spacings-50) var(--pr-t-spacings-200);
+	--components-dialog-inside-header-paddingInline: var(--pr-t-spacings-700) var(--pr-t-spacings-400);
+	--components-dialog-insideContent-paddingInline: var(--pr-t-spacings-700) var(--pr-t-spacings-400);
 
 	.dialog-inside-footer {
-		@include footer.fancy;
+		--components-footer-actions-margin: 0;
+		--components-footer-boxShadow: none;
+		--components-footer-paddingBlock: 0 var(--pr-t-spacings-150);
+		--components-footer-overflow: visible;
+		--components-footer-paddingInline: var(--pr-t-spacings-700) var(--pr-t-spacings-400);
 	}
 
 	.dialog-inside-header {
-		@include header.fancy;
+		--components-header-position: static;
 	}
 
 	.dialog-inside-header-button.button {
@@ -128,12 +132,19 @@
 @mixin fancySmall {
 	// padding and minimum height are in pixels because they correspond to the size of the image
 	--components-dialog-inside-paddingInlineEnd: 168px;
-	--components-dialog-minBlockSize: 216px;
+	--components-dialog-minBlockSize: calc(216px + var(--pr-t-spacings-200));
 }
 
 @mixin fancyNarrow {
 	--components-dialog-inside-header-paddingBlock: var(--pr-t-spacings-200);
-	--components-dialog-inside-header-paddingInline: var(--pr-t-spacings-300) calc(var(--pr-t-spacings-800) + var(--pr-t-spacings-200) + var(--pr-t-spacings-50));
+	--components-dialog-inside-header-paddingInline: var(--pr-t-spacings-150) calc(var(--pr-t-spacings-800) + var(--pr-t-spacings-250));
 	--components-dialog-inside-paddingInlineEnd: 0px;
 	--components-dialog-minBlockSize: 0px;
+	--components-dialog-insideContent-paddingInline: var(--pr-t-spacings-150);
+	--components-dialog-inside-header-button-insetBlockStart: calc(var(--pr-t-spacings-150) + var(--pr-t-spacings-25));
+	--components-dialog-inside-header-button-insetInlineEnd: var(--pr-t-spacings-150);
+
+	.dialog-inside-footer {
+		--components-footer-paddingInline: var(--pr-t-spacings-150);
+	}
 }

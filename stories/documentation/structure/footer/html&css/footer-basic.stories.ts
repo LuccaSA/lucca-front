@@ -4,6 +4,7 @@ interface FooterBasicStory {
 	sticky: boolean;
 	container: boolean;
 	responsive: string;
+	containerMax: string;
 }
 
 export default {
@@ -13,17 +14,26 @@ export default {
 			control: {
 				type: 'boolean',
 			},
+			description: 'Fige le footer lors du défilement vertical.',
 		},
 		responsive: {
 			options: ['', 'mod-narrow', 'mod-narrowAtMediaMaxM', 'mod-narrowAtMediaMaxS', 'mod-narrowAtMediaMaxXS'],
 			control: {
 				type: 'select',
 			},
-			description: '[v18.1] Modifie le breakpoint. Default: XXS',
+			description: 'Définit le breakpoint pour lequel le mode narrow (responsive) est appliqué.',
 		},
 		container: {
 			type: 'boolean',
-			description: '[v18.1]',
+			description: 'Applique un container autour du contenu du footer.',
+		},
+		containerMax: {
+			options: ['', 'M', 'L', 'XL', 'XXL', 'XXXL'],
+			control: {
+				type: 'select',
+			},
+			if: { arg: 'container', truthy: true },
+			description: 'Fixe une largeur maximum au container.',
 		},
 	},
 } as Meta;
@@ -32,9 +42,10 @@ function getTemplate(args: FooterBasicStory): string {
 	const sticky = args.sticky ? ` mod-sticky` : '';
 	const responsive = args.responsive;
 	const container = args.container;
+	const containerMax = args.containerMax !== '' ? ` mod-containerMax${args.containerMax}` : ``;
 	if (container) {
 		return `<footer class="footer${sticky}${responsive}">
-	<div class="footer-containerOptional">
+	<div class="footer-containerOptional${containerMax}">
 		<div class="footer-content">Content</div>
 		<div class="footer-actions">
 			<button type="button" class="button">Button</button>
@@ -60,6 +71,6 @@ const Template = (args: FooterBasicStory) => ({
 });
 
 export const Basic: StoryObj<FooterBasicStory> = {
-	args: { sticky: false, responsive: '', container: false },
+	args: { sticky: false, responsive: '', container: false, containerMax: '' },
 	render: Template,
 };

@@ -15,6 +15,9 @@
 	<div class="fileUpload-status">
 		<lu-bubble-illustration [illustration]="illus()" action size="L" />
 	</div>
+	@if (size() !== "S") {
+		<ng-content />
+	}
 	<div class="fileUpload-instruction" [attr.id]="'fileUpload-instruction-' + idSuffix">
 		<span class="fileUpload-instruction-action" aria-hidden="true" [innerHTML]="intl().dropOrClick.other"></span>
 		@if (acceptNames().length) {

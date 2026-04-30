@@ -10,7 +10,7 @@
 }
 
 @mixin S {
-	--components-loading-size: calc(var(--pr-t-spacings-200) + var(--pr-t-spacings-50));
+	--components-loading-size: var(--pr-t-spacings-250);
 }
 
 @mixin L {

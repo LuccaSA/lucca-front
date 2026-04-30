@@ -88,6 +88,7 @@
 	--commons-divider-border: var(--commons-divider-width) var(--commons-divider-style) var(--commons-divider-color);
 	--commons-border-100: var(--palettes-neutral-100);
 	--commons-border-200: var(--palettes-neutral-200);
+	--commons-pushPanel-inlineSize: 0px;
 
 	// Deprecated
 	--commons-font-family: '#{config.$fontFamily}', Tahoma, sans-serif;

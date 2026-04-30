@@ -79,10 +79,11 @@ export default {
 			control: {
 				type: 'select',
 			},
+			description: 'Permet d’afficher la fenêtre de dialogue en mode drawer.',
 		},
 		autoFocus: {
 			options: ['first-tabbable', 'first-input'],
-			description: 'Peut aussi être un sélecteur CSS',
+			description: 'Définit quel élément doit recevoir le focus lorsque la fenêtre de dialogue s’ouvre. Peut aussi être un sélecteur CSS.',
 			control: {
 				type: 'select',
 			},
@@ -92,9 +93,14 @@ export default {
 			control: {
 				type: 'select',
 			},
+			description: 'Largeur de la fenêtre de dialogue.',
 		},
 		panelClasses: {
-			description: '[v18.3] mod-neutralBackground',
+			description: 'Permet d’ajouter des classes CSS au composant. (ex : mod-neutralBackground)',
+		},
+		alert: {
+			description:
+				'Transforme la fenêtre de dialogue en alerte en obligeant l’utilisateur à faire un choix. L’utilisateur ne peut alors plus la fermer en cliquant sur le backdrop ou en appuyant sur la touche Échap.',
 		},
 		fancyIllustration: {
 			options: ['approval', 'checklist', 'email', 'install', 'mapping', 'save', 'users', 'welcome', 'payment-card'],
@@ -102,9 +108,11 @@ export default {
 				type: 'select',
 			},
 			if: { arg: 'mode', eq: 'fancy' },
+			description: 'Modifie l’illustration affichée dans la Fancy dialog.',
 		},
 		fancyIllustrationUrl: {
 			if: { arg: 'mode', eq: 'fancy' },
+			description: 'Surcharge l’illustration avec une URL personnalisée.',
 		},
 	},
 } as Meta;
@@ -240,6 +248,12 @@ export const WithAction: StoryObj = {
 };
 
 export const Fancy: StoryObj = {
+	argTypes: {
+		mode: { table: { disable: true } },
+		alert: { table: { disable: true } },
+		autoFocus: { table: { disable: true } },
+		panelClasses: { table: { disable: true } },
+	},
 	render: (args) => {
 		const fancyIllustrationParam = args['fancyIllustration'] ? ` fancyIllustration="${args['fancyIllustration']}"` : ``;
 		const fancyIllustrationURLParam = args['fancyIllustrationUrl'] ? ` fancyIllustrationUrl="${args['fancyIllustrationUrl']}"` : ``;
@@ -248,17 +262,17 @@ export const Fancy: StoryObj = {
 				config: args,
 			},
 			template: `
-<button luButton [luDialogOpen]="dialogTpl" [luDialogConfig]="config">Open Template-driven Fancy Dialog</button>
+<button luButton [luDialogOpen]="dialogTpl" [luDialogConfig]="{mode: 'fancy'}">Open Template-driven Fancy Dialog</button>
 
 <ng-template #dialogTpl>
 	<lu-dialog #dialog${fancyIllustrationParam}${fancyIllustrationURLParam}>
 		<lu-dialog-header>
-			<h1>Header</h1>
+			<h1>Félicitations, votre souscription est terminée</h1>
 		</lu-dialog-header>
-		<lu-dialog-content>Content</lu-dialog-content>
+		<lu-dialog-content>Votre contrat signé vous a été envoyé par email.</lu-dialog-content>
 		<lu-dialog-footer>
 			<div class="footer-actions">
-				<button type="button" luButton luDialogClose>Confirm</button>
+				<button type="button" luButton="outlined" luDialogClose>Fermer</button>
 			</div>
 		</lu-dialog-footer>
 	</lu-dialog>
@@ -267,9 +281,7 @@ export const Fancy: StoryObj = {
 	},
 	args: {
 		size: 'M',
-		alert: false,
-		mode: 'fancy',
-		fancyIllustration: 'welcome',
+		fancyIllustration: 'install',
 		fancyIllustrationUrl: '',
 	},
 };

@@ -11,9 +11,24 @@ export default {
 			control: {
 				type: 'select',
 			},
+			description: 'Définit le breakpoint pour lequel le mode narrow (responsive) est appliqué.',
 		},
 		container: {
-			description: 'Applique un container autour du contenu de Page Header.',
+			description: 'Applique un container autour du contenu du footer.',
+		},
+		containerMax: {
+			options: ['', 'M', 'L', 'XL', 'XXL', 'XXXL'],
+			control: {
+				type: 'select',
+			},
+			if: { arg: 'container', truthy: true },
+			description: 'Définit la largeur maximale du container.',
+		},
+		sticky: {
+			description: 'Fige le footer lors du défilement vertical.',
+		},
+		forceNarrow: {
+			description: 'Force le mode narrow (responsive) du footer.',
 		},
 	},
 	decorators: [
@@ -42,6 +57,7 @@ export const Basic = {
 	args: {
 		sticky: false,
 		container: false,
+		containerMax: '',
 		forceNarrow: false,
 		narrowAtMediaMax: 'XXS',
 	},

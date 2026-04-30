@@ -21,15 +21,19 @@ export const SoftwareIconList = [
 	'invoices',
 	'payment-methods',
 	'accounting-assistant',
+	'certified-einvoicing-platform',
 	// Compensation and Benefits
 	'compensation',
 	'payslip',
 	'benefits',
 	'payroll-assistant',
 	// Lucca
-
 	'administration',
 	'cloud-control',
+	'client-center',
+	'sandbox',
+	'store',
+	'ask-lucca',
 	'lucca',
 ] as const;
 

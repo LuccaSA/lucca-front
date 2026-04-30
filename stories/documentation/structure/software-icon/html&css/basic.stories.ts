@@ -40,6 +40,7 @@ export default {
 				'invoices',
 				'payment-methods',
 				'accounting-assistant',
+				'certified-einvoicing-platform',
 				// Compensation and Benefits
 				'compensation',
 				'payslip',
@@ -53,13 +54,14 @@ export default {
 			control: {
 				type: 'select',
 			},
-			description: "Modifie l'icône produit.",
+			description: 'Modifie l’icône produit.',
 		},
 		size: {
 			options: ['XXS', 'XS', 'S', '', 'L'],
 			control: {
 				type: 'select',
 			},
+			description: 'Modifie la taille du composant.',
 		},
 		disabled: {
 			description: 'Marque le produit comme inactif.',

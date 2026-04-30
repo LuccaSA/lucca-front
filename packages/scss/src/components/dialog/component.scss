@@ -136,16 +136,16 @@
 			grid-area: header;
 		}
 
-		.dialog-inside-header-button {
+		.dialog-inside-header-button.button {
 			position: var(--components-dialog-inside-header-button-position);
 			inset-block-start: var(--components-dialog-inside-header-button-insetBlockStart);
-			inset-inline-end: var(--components-dialog-inside-header-button-insetBlockEnd);
+			inset-inline-end: var(--components-dialog-inside-header-button-insetInlineEnd);
 		}
 
 		.dialog-inside-content {
 			background-color: var(--components-dialog-insideContent-background);
 			padding-block: var(--components-dialog-insideContent-paddingBlock);
-			padding-inline: var(--pr-t-spacings-300);
+			padding-inline: var(--components-dialog-insideContent-paddingInline);
 			grid-area: overflow;
 			overflow: auto;
 			outline: none;

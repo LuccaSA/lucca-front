@@ -4,15 +4,15 @@
 	background-color: var(--components-footer-backgroundColor);
 	padding-block: var(--components-footer-paddingBlock);
 	padding-inline: var(--components-footer-paddingInline);
-	display: flex;
-	justify-content: space-between;
-	gap: var(--pr-t-spacings-200);
-	align-items: var(--components-footer-alignItems);
 	box-shadow: var(--components-footer-boxShadow);
 	inset-block-end: 0;
 	position: var(--components-footer-position);
-	flex-direction: var(--components-footer-direction);
 	overflow: var(--components-footer-overflow);
+	display: var(--components-footer-display);
+	justify-content: var(--components-footer-justifyContent);
+	gap: var(--components-footer-gap);
+	align-items: var(--components-footer-alignItems);
+	flex-direction: var(--components-footer-direction);
 
 	@at-root ($atRoot) {
 		.footer-content {
@@ -27,14 +27,14 @@
 		}
 
 		.footer-containerOptional {
-			display: flex;
-			gap: var(--pr-t-spacings-200);
-			align-items: var(--components-footer-alignItems);
 			flex-grow: 1;
-			justify-content: space-between;
+			display: var(--components-footer-display);
+			justify-content: var(--components-footer-justifyContent);
+			gap: var(--components-footer-gap);
+			align-items: var(--components-footer-alignItems);
 			flex-direction: var(--components-footer-direction);
-			max-inline-size: var(--commons-container-maxWidth);
 			padding: var(--commons-container-padding);
+			max-inline-size: var(--components-footer-container-maxInlineSize);
 		}
 	}
 }

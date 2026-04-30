@@ -14,29 +14,40 @@ export default {
 	title: 'Documentation/Texts/Clear/HTML&CSS/Basic',
 	argTypes: {
 		S: {
+			description: 'Modifie la taille du bouton.',
 			control: {
 				type: 'boolean',
 			},
 		},
 		product: {
 			if: { arg: 'disabled', truthy: false },
+			description: 'Applique une palette de couleurs au bouton.',
 			control: {
 				type: 'boolean',
 			},
 		},
 		disabled: {
+			description: 'Désactive le bouton.',
 			control: {
 				type: 'boolean',
 			},
 		},
 		inverted: {
 			if: { arg: 'disabled', truthy: false },
+			description: 'Modifie les couleurs du bouton pour un usage sur fond foncé.',
 			control: {
 				type: 'boolean',
 			},
 		},
+		alt: {
+			description: 'Information restituée par le lecteur d’écran.',
+		},
+		hidden: {
+			description: 'Masque le bouton.',
+		},
 		link: {
 			if: { arg: 'disabled', truthy: false },
+			description: 'Utilise un élément <code>&lt;a&gt;</code> au lieu de <code>&lt;button&gt;</code>.',
 		},
 	},
 } as Meta;

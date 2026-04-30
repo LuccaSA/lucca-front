@@ -17,6 +17,8 @@ export class FooterComponent {
 	 */
 	readonly container = input(false, { transform: booleanAttribute });
 
+	readonly containerMax = input<null | 'M' | 'L' | 'XL' | 'XXL' | 'XXXL'>();
+
 	readonly forceNarrow = input(false, { transform: booleanAttribute });
 
 	readonly dialog = input(false, { transform: booleanAttribute });

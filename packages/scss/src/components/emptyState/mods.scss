@@ -2,6 +2,7 @@
 
 @mixin page {
 	--components-emptyState-container-maxWidth: var(--commons-container-maxWidth);
+	--components-emptyState-content-heading-font: var(--pr-t-font-heading-1);
 
 	background-image:
 		var(--components-emptyState-illustration-foreground-bottom-left),
@@ -33,14 +34,6 @@
 		padding: 0;
 	}
 
-	.emptyState-content-heading {
-		font: var(--pr-t-font-heading-1);
-
-		@include media.max('XXS') {
-			font: var(--pr-t-font-heading-2);
-		}
-	}
-
 	.emptyState-actions {
 		.button {
 			@include media.max('XXS') {
@@ -48,6 +41,10 @@
 			}
 		}
 	}
+}
+
+@mixin headingStyleH($level) {
+	--components-emptyState-content-heading-font: var(--pr-t-font-heading-#{$level});
 }
 
 @mixin center {
@@ -63,7 +60,6 @@
 }
 
 @mixin insideContainer {
-	--components-emptyState-container-maxWidth: none;
 	--components-emptyState-container-left: auto;
 }
 

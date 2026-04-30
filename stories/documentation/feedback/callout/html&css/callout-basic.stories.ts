@@ -13,12 +13,13 @@ export default {
 			control: {
 				type: 'select',
 			},
+			description: 'Applique une palette de couleurs au callout.',
 		},
 		s: {
 			control: {
 				type: 'boolean',
 			},
-			description: 'Taille : Small',
+			description: 'Modifie la taille du composant.',
 		},
 	},
 } as Meta;

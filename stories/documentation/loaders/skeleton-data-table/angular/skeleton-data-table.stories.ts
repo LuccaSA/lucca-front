@@ -9,16 +9,21 @@ export default {
 export const Template: StoryObj<SkeletonDataTableComponent> = {
 	argTypes: {
 		cols: {
+			description: 'Nombre de colonnes.',
 			control: {
 				type: 'number',
 				min: 1,
 			},
 		},
 		rows: {
+			description: 'Nombre de lignes.',
 			control: {
 				type: 'number',
 				min: 1,
 			},
+		},
+		colsAlign: {
+			description: 'Alignement horizontal du contenu des colonnes. La clé correspond au numéro de la colonne (en partant de 0).',
 		},
 	},
 

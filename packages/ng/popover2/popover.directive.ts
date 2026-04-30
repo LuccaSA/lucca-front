@@ -24,7 +24,7 @@ import {
 	ViewContainerRef,
 } from '@angular/core';
 import { takeUntilDestroyed, toObservable } from '@angular/core/rxjs-interop';
-import { intlInputOptions } from '@lucca-front/ng/core';
+import { intlInputOptions, isNotNil } from '@lucca-front/ng/core';
 import { combineLatest, debounce, filter, map, merge, Subject, switchMap, take, timer } from 'rxjs';
 import { PopoverContentComponent } from './content/popover-content/popover-content.component';
 import { POPOVER_CONFIG, PopoverConfig } from './popover-tokens';
@@ -90,7 +90,7 @@ export class PopoverDirective implements OnDestroy {
 	})
 	content: TemplateRef<unknown> | Type<unknown>;
 
-	luPopoverPosition = input<PopoverPosition>('above');
+	luPopoverPosition = input<PopoverPosition | null>(null);
 
 	@Input()
 	overlayScrollStrategy: 'reposition' | 'block' | 'close' = 'reposition';
@@ -122,7 +122,7 @@ export class PopoverDirective implements OnDestroy {
 
 	luPopoverCloseDelay: InputSignal<number> = input<number>(100);
 
-	luPopoverPositionRef = linkedSignal(() => this.luPopoverPosition());
+	luPopoverPositionRef = linkedSignal(() => this.luPopoverPosition() || 'above');
 
 	open$ = new Subject<'focus' | 'click' | 'hover'>();
 
@@ -237,7 +237,7 @@ export class PopoverDirective implements OnDestroy {
 	}
 
 	openPopover(withBackdrop = false, disableCloseButtonFocus = false, disableInitialTriggerFocus = false): void {
-		if (!this.opened() && !this.luPopoverDisabled) {
+		if (!this.opened() && !this.luPopoverDisabled && isNotNil(this.content)) {
 			this.opened.set(true);
 			this.luPopoverOpened.emit();
 			this.#overlayRef = this.overlay.create({

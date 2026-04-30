@@ -1,8 +1,8 @@
+import { LOCALE_ID } from '@angular/core';
 import { CommentBlockComponent, CommentChatComponent, CommentComponent } from '@lucca-front/ng/comment';
 import { LuUserPictureModule } from '@lucca-front/ng/user';
 import { applicationConfig, Meta, moduleMetadata, StoryObj } from '@storybook/angular';
 import { generateInputs } from '../../../../helpers/stories';
-import { LOCALE_ID } from '@angular/core';
 
 export default {
 	title: 'Documentation/Texts/Comment/Angular/Chat',
@@ -57,10 +57,10 @@ export default {
 	},
 	argTypes: {
 		noAvatar: {
-			description: "Masque l'avatar.",
+			description: 'Masque l’avatar.',
 		},
 		compact: {
-			description: "N'affiche l'auteur que sur le premier commentaire de <code><lu-comment-block></code>",
+			description: 'N’affiche l’auteur que sur le premier commentaire de <code><lu-comment-block></code>',
 		},
 		small: {
 			description: 'Modifie la taille du composant.',
@@ -69,13 +69,13 @@ export default {
 			description: 'Modifie la date du commentaire.',
 		},
 		datePipeFormat: {
-			description: "[v20.3] Modifie le format de date affiché, via <a href='https://angular.dev/api/common/DatePipe' target='_blank'>Angular DatePipe</a>. Exemples : 'mediumDate', 'YYYY', etc.",
+			description: "[v20.3] Modifie le format de date affiché, via <a href='https://angular.dev/api/common/DatePipe' target='_blank'>Angular DatePipe</a>. Exemples : 'mediumDate', 'YYYY', etc.",
 		},
 		firstName: {
-			description: "Modifie le prénom de l'auteur.",
+			description: 'Modifie le prénom de l’auteur.',
 		},
 		lastName: {
-			description: "Modifie le nom de l'auteur.",
+			description: 'Modifie le nom de l’auteur.',
 		},
 	},
 } as Meta;

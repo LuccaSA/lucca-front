@@ -26,15 +26,29 @@ export default {
 		luPopoverTrigger: {
 			control: 'select',
 			options: ['click', 'click+hover', 'hover+focus'],
-			description: '[v18.2] Hover + focus',
+			description: 'Méthode d’ouverture du popover.',
+		},
+		luPopoverPosition: {
+			control: 'select',
+			options: ['above', 'below', 'before', 'after'],
+			description: 'Position du popover par rapport à son déclencheur.',
+		},
+		luPopoverDisabled: {
+			description: 'Désactive le popover.',
+		},
+		luPopoverOpenDelay: {
+			description: 'Délai en millisecondes avant ouverture du popover.',
+		},
+		luPopoverCloseDelay: {
+			description: 'Délai en millisecondes avant fermeture du popover.',
 		},
 		overlayScrollStrategy: {
 			control: 'select',
 			options: ['reposition', 'block', 'close'],
-			description: '[v21.1]',
+			description: '[v21.1] Comportement du popover lors du scroll.',
 		},
 		luPopoverNoCloseButton: {
-			description: '[v18.2]',
+			description: 'Masque le bouton de fermeture du popover visible à la navigation clavier.',
 		},
 	},
 } as Meta;

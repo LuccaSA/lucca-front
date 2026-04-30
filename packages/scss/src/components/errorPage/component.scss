@@ -6,6 +6,7 @@
 	inline-size: 100vw;
 	line-height: 1.2;
 	overflow: hidden;
+	display: block;
 
 	@at-root ($atRoot) {
 		.errorPage-section {

@@ -36,6 +36,12 @@
 	// Deprecated
 	--components-button-font-size: var(--pr-t-font-body-S-fontSize);
 	--components-button-line-height: var(--pr-t-font-body-S-lineHeight);
+
+	// status icon
+	&::after {
+		font-size: var(--pr-t-font-body-S-lineHeight);
+		block-size: var(--pr-t-font-body-S-lineHeight);
+	}
 }
 
 @mixin XS {
@@ -54,6 +60,12 @@
 	// Deprecated
 	--components-button-font-size: var(--pr-t-font-body-XS-fontSize);
 	--components-button-line-height: var(--pr-t-font-body-XS-lineHeight);
+
+	// status icon
+	&::after {
+		font-size: var(--pr-t-font-body-XS-lineHeight);
+		block-size: var(--pr-t-font-body-XS-lineHeight);
+	}
 }
 
 @mixin onlyIcon {
@@ -248,7 +260,7 @@
 	}
 
 	&[aria-expanded='true'] {
-		--components-button-arrow-transform: rotate(-180deg);
+		--components-button-arrow-transform: rotate(180deg);
 	}
 }
 
@@ -282,7 +294,7 @@
 
 	background-image:
 		linear-gradient(
-			-135deg,
+			225deg,
 			color-mix(in srgb, var(--palettes-AI-500) var(--components-button-AI-background-opacity), transparent),
 			color-mix(in srgb, var(--palettes-brand-400) var(--components-button-AI-background-opacity), transparent)
 		);

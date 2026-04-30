@@ -12,7 +12,7 @@ export default {
 				max: 20,
 				step: 1,
 			},
-			description: "Modifie le nombre de lignes affichées à l'état replié.",
+			description: 'Modifie le nombre de lignes affichées à l’état replié.',
 		},
 		surface: {
 			options: [null, 'default', 'sunken', '#0b1732'],
@@ -29,6 +29,9 @@ export default {
 		},
 		innerContent: {
 			description: 'Permet de passer le contenu via un innerHTML',
+		},
+		content: {
+			table: { disable: true },
 		},
 	},
 	decorators: [

@@ -14,9 +14,10 @@ export default {
 		}),
 	],
 	render: (args, context) => {
-		const { palette, heading, actions, actionsInline, ...inputs } = args;
+		const { palette, heading, hx, actions, actionsInline, ...inputs } = args;
 		const paletteArg = palette !== 'none' && palette !== undefined ? ` palette="${palette}"` : ``;
 		const headingArg = heading ? ` heading="${heading}"` : ``;
+		const hxArg = heading && hx ? ` hx="${hx}"` : ``;
 
 		const actionsInlineArg = actionsInline ? ` inline` : ``;
 		const actionsTemplate = actions
@@ -28,7 +29,7 @@ export default {
 			: ``;
 
 		return {
-			template: `<lu-callout${headingArg}${paletteArg}${generateInputs(inputs, context.argTypes)}>
+			template: `<lu-callout${headingArg}${hxArg}${paletteArg}${generateInputs(inputs, context.argTypes)}>
 	<p>Feedback description</p>${actionsTemplate}
 </lu-callout>`,
 		};
@@ -57,7 +58,7 @@ export default {
 			description: 'Ajoute une icône au callout.',
 		},
 		iconAlt: {
-			description: "Information de l'icône restituée par le lecteur d'écran.",
+			description: 'Information de l’icône restituée par le lecteur d’écran.',
 			type: 'string',
 		},
 		state: {
@@ -78,6 +79,14 @@ export default {
 			type: 'string',
 			description: 'Ajoute un titre au callout.',
 		},
+		hx: {
+			options: [null, 1, 2, 3, 4, 5, 6],
+			control: {
+				type: 'select',
+			},
+			description: '[v21.4] Applique un niveau sémantique au titre.',
+			if: { arg: 'heading', truthy: true },
+		},
 		removedChange: HiddenArgType,
 		AI: {
 			description: '[v20.3] Applique les couleurs IA.',
@@ -86,7 +95,7 @@ export default {
 			},
 		},
 		actions: {
-			description: "[v20.3] Ajoute une liste d'actions sous la description.",
+			description: '[v20.3] Ajoute une liste d’actions sous la description.',
 		},
 		actionsInline: {
 			if: { arg: 'actions', truthy: true },
@@ -98,6 +107,7 @@ export default {
 export const Template: StoryObj<CalloutComponent & { actions: boolean; actionsInline: boolean }> = {
 	args: {
 		heading: '',
+		hx: null,
 		state: null,
 		icon: null,
 		palette: 'none',

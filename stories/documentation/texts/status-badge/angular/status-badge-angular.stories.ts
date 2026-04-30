@@ -28,7 +28,7 @@ export default {
 			control: {
 				type: 'select',
 			},
-			description: 'Modifie la taille de du composant.<br>[v20.2] Ajout de la taille <code>M</code>',
+			description: 'Modifie la taille du composant.<br>[v20.2] Ajout de la taille <code>M</code>',
 		},
 		label: {
 			control: {

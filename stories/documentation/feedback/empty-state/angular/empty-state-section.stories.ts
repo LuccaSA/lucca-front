@@ -24,7 +24,13 @@ export default {
 		};
 	},
 	argTypes: {
-		palette: PaletteArgType,
+		palette: { ...PaletteArgType, description: 'Applique une palette de couleurs au composant.' },
+		center: {
+			description: 'Centre le contenu horizontalement.',
+		},
+		action: {
+			description: 'Ajoute une icône (+) à l’illustration.',
+		},
 		illustration: {
 			options: [
 				'absence',
@@ -123,6 +129,7 @@ export default {
 			control: {
 				type: 'select',
 			},
+			description: 'Modifie l’illustration.',
 		},
 		hx: {
 			control: {
@@ -130,13 +137,13 @@ export default {
 				min: 1,
 				max: 6,
 			},
-			description: '[v18.1]',
+			description: 'Définit le niveau sémantique du titre.',
 		},
 		heading: {
-			description: '[v18.1] Optional',
+			description: 'Titre de l’empty state.',
 		},
 		description: {
-			description: '[v18.1] Optional',
+			description: 'Description de l’empty state.',
 		},
 	},
 } as Meta;

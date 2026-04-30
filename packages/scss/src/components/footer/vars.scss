@@ -8,4 +8,8 @@
 	--components-footer-boxShadow: var(--pr-t-elevation-shadow-overflow);
 	--components-footer-overflow: visible;
 	--components-footer-backgroundColor: var(--pr-t-elevation-surface-raised);
+	--components-footer-justifyContent: space-between;
+	--components-footer-gap: var(--pr-t-spacings-200);
+	--components-footer-display: flex;
+	--components-footer-container-maxInlineSize: var(--commons-container-maxWidth);
 }

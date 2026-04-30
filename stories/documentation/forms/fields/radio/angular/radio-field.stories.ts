@@ -26,10 +26,10 @@ export default {
 			control: {
 				type: 'select',
 			},
-			description: "Modifie l'état de l'inline message.",
+			description: 'Modifie l’état de l’inline message.',
 		},
 		hiddenLabel: {
-			description: "Masque le label en le conservant dans le DOM pour les lecteurs d'écrans",
+			description: 'Masque le label en le conservant dans le DOM pour les lecteurs d’écran',
 		},
 		tooltip: {
 			if: { arg: 'hiddenLabel', truthy: false },
@@ -39,7 +39,7 @@ export default {
 			control: {
 				type: 'text',
 			},
-			description: "Modifie le label de l'input.",
+			description: 'Modifie le label de l’input.',
 		},
 		required: {
 			control: {
@@ -55,6 +55,9 @@ export default {
 		},
 		presentation: {
 			description: '[v21.1] Transforme le champ de formulaire en donnée textuelle non éditable.',
+		},
+		inline: {
+			description: 'Affiche les différentes options sur un axe horizontal.',
 		},
 	},
 } as Meta;

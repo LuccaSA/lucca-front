@@ -282,7 +282,7 @@ export const BasicTEST = createTestStory(Basic, basePlay);
 export const WithMultiDisplayer = generateStory({
 	name: 'With MultiDisplayer',
 	description:
-		"Il est possible de personnaliser le contenu de la valeur sélectionnée en utilisant la directive `luMultiDisplayer`. Le *template* prend le tableau contenant l'ensemble des valeurs sélectionnées.",
+		'Il est possible de personnaliser le contenu de la valeur sélectionnée en utilisant la directive `luMultiDisplayer`. Le *template* prend le tableau contenant l’ensemble des valeurs sélectionnées.',
 	template: `<lu-multi-select
 	#selectRef
 	[clearable]="clearable"
@@ -309,7 +309,7 @@ export const WithMultiDisplayer = generateStory({
 
 export const AllAsDefaultValue = generateStory({
 	name: 'With ContentDisplayer',
-	description: "Il est possible de personnaliser le contenu du displayer en utilisant la directive `luMultiDisplayer`. Avec le `ContentDisplayer` il est possible de lui passer n'importe quel contenu",
+	description: 'Il est possible de personnaliser le contenu du displayer en utilisant la directive `luMultiDisplayer`. Avec le `ContentDisplayer` il est possible de lui passer n’importe quel contenu',
 	template: `<lu-multi-select
 	#selectRef
 	[clearable]="clearable"
@@ -348,7 +348,7 @@ export const AllAsDefaultValue = generateStory({
 export const WithDisplayer = generateStory({
 	name: 'With Displayer',
 	description:
-		"Il est possible de personnaliser le contenu des *chips* dans l'affichage de la valeur sélectionnée en utilisant la directive `luDisplayer`. Le *template* prend une option parmi les valeurs sélectionnées.",
+		'Il est possible de personnaliser le contenu des *chips* dans l’affichage de la valeur sélectionnée en utilisant la directive `luDisplayer`. Le *template* prend une option parmi les valeurs sélectionnées.',
 	template: `<lu-multi-select
 	#selectRef
 	[options]="legumes | filterLegumes:clue"
@@ -377,7 +377,7 @@ export const WithDisplayer = generateStory({
 
 export const WithPagination = generateStory({
 	name: 'Pagination',
-	description: "Il est possible de charger les options au fur et à mesure en écoutant l'évènement `(nextPage)`.",
+	description: 'Il est possible de charger les options au fur et à mesure en écoutant l’évènement `(nextPage)`.',
 	template: `<lu-multi-select
 	#selectRef
 	[(ngModel)]="selectedLegumes"
@@ -395,7 +395,7 @@ export const WithPagination = generateStory({
 
 export const WithDisabledOptions = generateStory({
 	name: 'Disabled options',
-	description: "Il est possible de désactiver certaines options en utilisant la directive `luDisabledOption` sur l'option.",
+	description: 'Il est possible de désactiver certaines options en utilisant la directive `luDisabledOption` sur l’option.',
 	template: `<lu-multi-select
 	#selectRef
 	[(ngModel)]="selectedLegumes"
@@ -419,7 +419,7 @@ export const WithDisabledOptions = generateStory({
 
 export const ApiV3 = generateStory({
 	name: 'Api V3',
-	description: "Pour récupérer automatiquement les options depuis une api V3 avec pagination et recherche, il suffit d'utiliser la directive `apiV3`.",
+	description: 'Pour récupérer automatiquement les options depuis une api V3 avec pagination et recherche, il suffit d’utiliser la directive `apiV3`.',
 	template: `<lu-multi-select
 	apiV3="/api/v3/axisSections"
 	withSelectAll
@@ -442,7 +442,7 @@ export const ApiV3 = generateStory({
 
 export const ApiV4 = generateStory({
 	name: 'Api V4',
-	description: "Pour récupérer automatiquement les options depuis une api V4 avec pagination et recherche, il suffit d'utiliser la directive `apiV4`.",
+	description: 'Pour récupérer automatiquement les options depuis une api V4 avec pagination et recherche, il suffit d’utiliser la directive `apiV4`.',
 	template: `<lu-multi-select
 	withSelectAll
 	withSelectAllDisplayerLabel="établissements"
@@ -465,7 +465,7 @@ export const ApiV4 = generateStory({
 
 export const Establishment = generateStory({
 	name: 'Establishment Select',
-	description: "Pour saisir un établissement, il suffit d'utiliser la directive `establishments`",
+	description: 'Pour saisir un établissement, il suffit d’utiliser la directive `establishments`',
 	template: `<lu-multi-select
 	establishments
 	[(ngModel)]="selectedEstablishments"
@@ -485,7 +485,7 @@ export const Establishment = generateStory({
 
 export const Department = generateStory({
 	name: 'Departement Select',
-	description: "Pour saisir un département, il suffit d'utiliser la directive `departments`",
+	description: 'Pour saisir un département, il suffit d’utiliser la directive `departments`',
 	template: `<lu-multi-select
 	departments
 	[(ngModel)]="selectedDepartements"
@@ -529,7 +529,7 @@ export const Tree = generateStory({
 
 export const User = generateStory({
 	name: 'User Select',
-	description: "Pour saisir des utilisateurs, il suffit d'utiliser la directive `users`",
+	description: 'Pour saisir des utilisateurs, il suffit d’utiliser la directive `users`',
 	template: `<lu-multi-select
 	users
 	[(ngModel)]="selectedUsers"
@@ -548,7 +548,7 @@ export const User = generateStory({
 
 export const UserWithSelectAll = generateStory({
 	name: 'User Select (select all)',
-	description: "Pour saisir des utilisateurs, il suffit d'utiliser la directive `users` et `withSelectAll`",
+	description: 'Pour saisir des utilisateurs, il suffit d’utiliser la directive `users` et `withSelectAll`',
 	template: `<lu-multi-select
 	users
 	withSelectAll
@@ -569,7 +569,7 @@ export const UserWithSelectAll = generateStory({
 
 export const FormerUser = generateStory({
 	name: 'User Select (with former)',
-	description: "Pour saisir des utilisateurs, il suffit d'utiliser la directive `users`",
+	description: 'Pour saisir des utilisateurs, il suffit d’utiliser la directive `users`',
 	template: `<lu-multi-select
 	users
 	enableFormerEmployees
@@ -589,7 +589,7 @@ export const FormerUser = generateStory({
 
 export const JobQualification = generateStory({
 	name: 'JobQualification Select',
-	description: "Pour saisir une qualification, il suffit d'utiliser la directive `jobQualifications`",
+	description: 'Pour saisir une qualification, il suffit d’utiliser la directive `jobQualifications`',
 	template: `<lu-multi-select
 	jobQualifications
 	[keepSearchAfterSelection]="keepSearchAfterSelection"
@@ -608,7 +608,7 @@ export const JobQualification = generateStory({
 
 export const OccupationCategory = generateStory({
 	name: 'OccupationCategory Select',
-	description: "Pour saisir une catégorie d'occupation, il suffit d'utiliser la directive `occupationCategories`",
+	description: 'Pour saisir une catégorie d’occupation, il suffit d’utiliser la directive `occupationCategories`',
 	template: `<lu-multi-select
 	placeholder="Placeholder..."
 	occupationCategories
@@ -622,7 +622,7 @@ export const OccupationCategory = generateStory({
 
 export const GroupBy = generateStory({
 	name: 'Group options',
-	description: "Pour grouper les options, il suffit d'utiliser la directive `luOptionGroup`.",
+	description: 'Pour grouper les options, il suffit d’utiliser la directive `luOptionGroup`.',
 	template: `<lu-multi-select
 	#selectRef
 	class="textfield-input"
@@ -667,7 +667,7 @@ export const GroupByTEST = createTestStory(GroupBy, async (context) => {
 
 export const GroupBySelectAll = generateStory({
 	name: 'Group options (with selectAll)',
-	description: "Pour grouper les options, il suffit d'utiliser la directive `luOptionGroup`.",
+	description: 'Pour grouper les options, il suffit d’utiliser la directive `luOptionGroup`.',
 	template: `<lu-multi-select
 	#selectRef
 	withSelectAll
@@ -732,7 +732,7 @@ export const TestDynamicDisabled = generateStory({
 
 export const AddOption = generateStory({
 	name: 'Add option',
-	description: "Pour ajouter une option, il suffit d'utiliser l'input `addOptionStrategy` et de s'abonner à l'output `addOption`. Le label est customisable via l'input `addOptionLabel`.",
+	description: 'Pour ajouter une option, il suffit d’utiliser l’input `addOptionStrategy` et de s’abonner à l’output `addOption`. Le label est customisable via l’input `addOptionLabel`.',
 	template: `<div class="pr-u-marginBlockEnd200">There is {{ legumes.length }} legumes in the list.</div>
 <lu-multi-select
 	#selectRef
@@ -749,8 +749,12 @@ export const AddOption = generateStory({
 	},
 	storyPartial: {
 		argTypes: {
-			addOptionLabel: { control: { type: 'text' } },
+			addOptionLabel: {
+				control: { type: 'text' },
+				description: 'Label affiché sur le bouton d’ajout d’option.',
+			},
 			addOptionStrategy: {
+				description: 'Définit les conditions pour afficher le bouton d’ajout d’option.',
 				control: {
 					type: 'select',
 					options: ['never', 'always', 'if-empty-clue', 'if-not-empty-clue'],
@@ -775,7 +779,7 @@ export const AddOption = generateStory({
 
 export const CustomPanelHeader = generateStory({
 	name: 'Custom Panel Header',
-	description: "Pour customiser l'en-tête du panel, il suffit d'utiliser la directive `luCoreSelectPanelHeader`.",
+	description: 'Pour customiser l’en-tête du panel, il suffit d’utiliser la directive `luCoreSelectPanelHeader`.',
 	template: `<lu-multi-select
 	#selectRef
 	[(ngModel)]="selectedLegume"

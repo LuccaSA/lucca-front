@@ -131,8 +131,8 @@ function getTemplate(args: ResourceCardAngularBasicStory) {
 		: ``;
 	const actionTpl =
 		args.actionType === 'a'
-			? `<a href="#" luResourceCardAction luTooltip luTooltipOnlyForDisplay luTooltipWhenEllipsis${disabledAttr}>${args.heading}</a>`
-			: `<button type="button" luResourceCardAction luTooltip luTooltipOnlyForDisplay luTooltipWhenEllipsis${disabledAttr}>${args.heading}</button>`;
+			? `<a href="#" luResourceCardAction luTooltip luTooltipWhenEllipsis${disabledAttr}>${args.heading}</a>`
+			: `<button type="button" luResourceCardAction luTooltip luTooltipWhenEllipsis${disabledAttr}>${args.heading}</button>`;
 	const headingLevelAttr = args.headingLevel !== 3 ? ` headingLevel="${args.headingLevel}"` : ``;
 	const headingInfosTpl = args.infos
 		? `

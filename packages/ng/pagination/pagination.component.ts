@@ -1,13 +1,14 @@
 import { booleanAttribute, ChangeDetectionStrategy, Component, effect, input, output, ViewEncapsulation } from '@angular/core';
 import { intlInputOptions, IntlParamsPipe } from '@lucca-front/ng/core';
 import { IconComponent } from '@lucca-front/ng/icon';
+import { ButtonComponent } from '@lucca-front/ng/button';
 import { LU_PAGINATION_TRANSLATIONS } from './pagination.translate';
 
 @Component({
 	selector: 'lu-pagination',
 	templateUrl: './pagination.component.html',
 	styleUrl: './pagination.component.scss',
-	imports: [IconComponent, IntlParamsPipe],
+	imports: [IconComponent, IntlParamsPipe, ButtonComponent],
 	changeDetection: ChangeDetectionStrategy.OnPush,
 	encapsulation: ViewEncapsulation.None,
 })

@@ -58,10 +58,6 @@
 			@include fullScreen;
 		}
 
-		&:has(.dialog-inside-header-button) {
-			@include withCloseButton;
-		}
-
 		&:has(.dialog-inside-header-actionOptional:not(:empty)) {
 			@include withAction;
 		}
@@ -76,6 +72,12 @@
 			@include media.max('XXS') {
 				@include fancyNarrow;
 			}
+		}
+	}
+
+	@layer mods {
+		.dialog-inside-header-button.button {
+			@include withCloseButton;
 		}
 	}
 }

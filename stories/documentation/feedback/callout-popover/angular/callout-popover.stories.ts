@@ -41,7 +41,7 @@ export default {
 				min: 1,
 			},
 			if: { arg: 'customText', truthy: false },
-			description: "Nombre d'éléments présentés dans la story.",
+			description: 'Nombre d’éléments présentés dans la story.',
 		},
 		buttonLabel: {
 			description: 'Label du bouton.',
@@ -54,6 +54,7 @@ export default {
 			control: {
 				type: 'select',
 			},
+			description: 'Position du popover par rapport au bouton de déclenchement.',
 		},
 		icon: {
 			options: [null, 'info', 'success', 'warning', 'error', 'help'],
@@ -78,7 +79,7 @@ export default {
 				type: 'boolean',
 			},
 			if: { arg: 'customText', truthy: false },
-			description: "Masque le titre si le popover ne contient qu'un élément.",
+			description: 'Masque le titre si le popover ne contient qu’un élément.',
 		},
 		palette: {
 			options: ['none', 'product', 'neutral'],
@@ -87,17 +88,25 @@ export default {
 			},
 			description: 'Applique une palette de couleurs au callout.',
 		},
+		popoverTrigger: {
+			options: ['click', 'click+hover', 'hover+focus'],
+			control: {
+				type: 'select',
+			},
+			description: 'Détermine le mode d’ouverture du popover.',
+		},
 		size: {
 			options: [null, 'XS', 'S', 'M'],
 			control: {
 				type: 'select',
 			},
+			description: 'Modifie la taille du composant.',
 		},
 		closeDelay: {
 			description: 'Délai nécessaire à la fermeture du popover.',
 		},
 		openDelay: {
-			description: "Délai nécessaire à l'ouverture du popover.",
+			description: 'Délai nécessaire à l’ouverture du popover.',
 		},
 		customText: {
 			description: 'Remplace la liste d’éléments par un texte personnalisé.',
@@ -105,7 +114,7 @@ export default {
 	},
 } as Meta;
 
-export const Template: StoryObj<CalloutPopoverComponent & { items: number; customText: string }> = {
+export const Template: StoryObj<CalloutPopoverComponent & { items: number; customText: string; popoverTrigger: 'click' | 'click+hover' | 'hover+focus' }> = {
 	args: {
 		icon: 'signInfo',
 		palette: 'none',
@@ -115,6 +124,7 @@ export const Template: StoryObj<CalloutPopoverComponent & { items: number; custo
 		buttonAlt: '2 errors',
 		customText: '',
 		heading: '',
+		popoverTrigger: null,
 		headingHiddenIfSingleItem: false,
 		items: 2,
 		closeDelay: 500,

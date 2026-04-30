@@ -29,6 +29,12 @@ export default {
 	title: 'Documentation/Listings/Index Table/Angular/Actions',
 	argTypes: {
 		bob: HiddenArgType,
+		layoutFixed: {
+			description: 'Applique une largeur fixe aux colonnes.',
+		},
+		dropdown: {
+			description: 'Remplace les boutons d’action par un menu déroulant.',
+		},
 	},
 	decorators: [
 		moduleMetadata({
