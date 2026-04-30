@@ -1,0 +1,37 @@
+{
+  "_ai_comment": "Choose an AI provider among the options below",
+
+  "_option_github_copilot": {
+    "_doc": "GitHub Models (recommandé si vous avez GitHub Copilot)",
+    "_how_to_get_token": "github.com/settings/tokens → New fine-grained token (aucune permission requise)",
+    "provider": "github-models",
+    "model": "gpt-4o-mini",
+    "apiKey": "github_pat_YOUR_TOKEN_HERE"
+  },
+
+  "_option_anthropic": {
+    "_doc": "Anthropic API — platform.anthropic.com/settings/api-keys",
+    "provider": "anthropic",
+    "model": "claude-sonnet-4-6",
+    "apiKey": "sk-ant-YOUR_KEY_HERE"
+  },
+
+  "_option_openai": {
+    "_doc": "OpenAI API — platform.openai.com/api-keys",
+    "provider": "openai",
+    "model": "gpt-4o",
+    "apiKey": "sk-YOUR_KEY_HERE"
+  },
+
+	"_figma_comment": "Go to your Figma Profile > Settings > Security > Personal access tokens (You need to create token) ",
+
+  "ai": {
+    "provider": "github-models",
+    "model": "claude-sonnet-4-6",
+    "apiKey": "github_pat_YOUR_TOKEN_HERE",
+    "concurrency": 3
+  },
+  "figma": {
+    "token": "figd_YOUR_FIGMA_TOKEN_HERE"
+  }
+}
