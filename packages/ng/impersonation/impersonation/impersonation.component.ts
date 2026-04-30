@@ -1,0 +1,85 @@
+import { ConnectionPositionPair } from '@angular/cdk/overlay';
+import { booleanAttribute, ChangeDetectionStrategy, Component, computed, effect, ElementRef, inject, input, model, output, untracked, viewChild, ViewEncapsulation } from '@angular/core';
+import { FormsModule } from '@angular/forms';
+import { ClearComponent } from '@lucca-front/ng/clear';
+import { LuOptionDirective } from '@lucca-front/ng/core-select';
+import { LU_CORE_SELECT_USER_TRANSLATIONS, LuCoreSelectUsersDirective, ɵLU_CORE_SELECT_CURRENT_USER_ID } from '@lucca-front/ng/core-select/user';
+import { PopoverDirective } from '@lucca-front/ng/popover2';
+import { LuSimpleSelectInputComponent } from '@lucca-front/ng/simple-select';
+import { ILuUser, LuUserDisplayPipe, LuUserPictureComponent } from '@lucca-front/ng/user';
+import { IconComponent } from '@lucca/prisme/icon';
+import { intlInputOptions } from '../../core/translate';
+import { LU_IMPERSONATION_TRANSLATIONS } from './impersonation.translate';
+
+@Component({
+	selector: 'lu-impersonation',
+	imports: [PopoverDirective, FormsModule, LuSimpleSelectInputComponent, LuCoreSelectUsersDirective, LuUserDisplayPipe, LuOptionDirective, LuUserPictureComponent, IconComponent, ClearComponent],
+	templateUrl: './impersonation.component.html',
+	styleUrl: './impersonation.component.scss',
+	encapsulation: ViewEncapsulation.None,
+	changeDetection: ChangeDetectionStrategy.OnPush,
+	host: {
+		class: 'impersonation',
+	},
+})
+export class ImpersonationComponent {
+	protected elementRef = inject(ElementRef);
+	readonly intl = input(...intlInputOptions(LU_CORE_SELECT_USER_TRANSLATIONS, LU_IMPERSONATION_TRANSLATIONS));
+	protected currentUserId = inject(ɵLU_CORE_SELECT_CURRENT_USER_ID);
+
+	inputComponentRef = viewChild<LuSimpleSelectInputComponent<ILuUser>>(LuSimpleSelectInputComponent);
+
+	popoverRef = viewChild(PopoverDirective);
+
+	selectedUser = model<ILuUser>();
+
+	enableFormerEmployees = input(false, { transform: booleanAttribute });
+
+	isNotMe = computed(() => this.selectedUser()?.id !== this.currentUserId);
+	clear = output<void>();
+
+	popoverPositions: ConnectionPositionPair[] = [
+		new ConnectionPositionPair(
+			{ originX: 'start', originY: 'bottom' },
+			{
+				overlayX: 'start',
+				overlayY: 'top',
+			},
+			-4,
+			0,
+		),
+		new ConnectionPositionPair(
+			{ originX: 'start', originY: 'top' },
+			{
+				overlayX: 'start',
+				overlayY: 'bottom',
+			},
+			-4,
+			0,
+		),
+	];
+
+	constructor() {
+		effect(() => {
+			const ref = this.inputComponentRef();
+			// Because ref appears only when opening the panel, we're going to call the impersonation opened hook too
+			if (ref) {
+				untracked(() => {
+					ref.enableFilterPillMode();
+					ref.registerFilterPillClosePopover(this.closePopover);
+					ref.registerFilterPillUpdatePosition?.(this.updatePosition);
+					ref.onFilterPillOpened?.();
+				});
+			}
+		});
+	}
+
+	closePopover = () => {
+		this.popoverRef()?.close();
+		this.inputComponentRef()?.onFilterPillClosed?.();
+	};
+
+	updatePosition = () => {
+		this.popoverRef()?.updatePosition();
+	};
+}

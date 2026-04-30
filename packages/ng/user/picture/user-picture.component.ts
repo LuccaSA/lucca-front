@@ -40,6 +40,8 @@ export const displayPictureFormatRecord: Record<LuDisplayFormat, LuDisplayInitia
 	host: {
 		class: 'avatar',
 		'[class.mod-AI]': 'AI()',
+		'[class.mod-softRounded]': 'softRounded()',
+		'[class.mod-placeholder]': 'placeholder()',
 		'[class.mod-XS]': 'size() === "XS"',
 		'[class.mod-S]': 'size() === "S"',
 		'[class.mod-M]': 'size() === "M"',
@@ -61,6 +63,10 @@ export class LuUserPictureComponent {
 	readonly user = input<LuUserPictureUserInput>();
 
 	readonly AI = input(false, { transform: booleanAttribute });
+
+	readonly placeholder = input(false, { transform: booleanAttribute });
+
+	readonly softRounded = input(false, { transform: booleanAttribute });
 
 	readonly size = input<UserPictureSize>('M');
 

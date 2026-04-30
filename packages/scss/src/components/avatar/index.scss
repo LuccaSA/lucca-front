@@ -36,10 +36,38 @@
 		&.mod-placeholder {
 			@include placeholder;
 		}
-	}
 
-	&.mod-AI {
-		@include AI;
+		&.mod-AI {
+			@include AI;
+		}
+
+		&.mod-softRounded {
+			&.mod-XS {
+				@include softRoundedXS;
+			}
+
+			&.mod-S {
+				@include softRoundedS;
+			}
+
+			@include softRounded;
+
+			&.mod-L {
+				@include softRoundedL;
+			}
+
+			&.mod-XL {
+				@include softRoundedXL;
+			}
+
+			&.mod-XXL {
+				@include softRoundedXXL;
+			}
+
+			&.mod-XXXL {
+				@include softRoundedXXXL;
+			}
+		}
 	}
 }
 

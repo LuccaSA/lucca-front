@@ -1,0 +1,49 @@
+<button
+	type="button"
+	class="impersonation-trigger"
+	[class.is-active]="isNotMe() && selectedUser()"
+	[luPopover2]="impersonationPopover"
+	[luPopoverNoCloseButton]="true"
+	[customPositions]="popoverPositions"
+	[luPopoverAnchor]="elementRef"
+	#popoverRef="luPopover2"
+	[attr.aria-expanded]="popoverRef.opened()"
+	(keydown.arrowDown)="$event.preventDefault(); popoverRef.openPopover(true)"
+	(keydown.arrowUp)="$event.preventDefault(); popoverRef.openPopover(true)"
+>
+	<span class="pr-u-mask">{{ intl().switchProfile }}</span>
+
+	@let user = selectedUser();
+	@if (user) {
+		<lu-user-picture aria-hidden="true" [user]="user" size="S" softRounded />
+		{{ user | luUserDisplay }}
+	} @else {
+		<lu-user-picture placeholder aria-hidden="true" size="S" softRounded />
+		<div class="skeleton is-loading" style="inline-size: 5.5rem">
+			<span class="skeleton-item"></span>
+		</div>
+	}
+	<span class="pr-u-mask">{{ intl().a11yNavigationDescription }}</span>
+	<lu-icon class="impersonation-trigger-icon" icon="chevronBottom" />
+</button>
+<lu-clear class="impersonation-clear" (onClear)="clear.emit()" [intl]="{ clear: intl().clear }" />
+
+<ng-template #impersonationPopover>
+	<div class="impersonation_popover-content popover-contentOptional">
+		<lu-simple-select impersonation [(ngModel)]="selectedUser" users [enableFormerEmployees]="enableFormerEmployees()" #selectRef>
+			<ng-container *luOption="let user; select: selectRef">
+				<div class="impersonation_popover-content-option">
+					<lu-user-picture aria-hidden="true" [user]="user" size="XS" softRounded />
+					@if (currentUserId === user.id) {
+						{{ intl().me }}&ngsp;
+					}
+					<span translate="no">{{ user | luUserDisplay }}</span>
+					<!-- Handle homonyms -->
+					@if (user.additionalInformation) {
+						<span> ({{ user.additionalInformation }})</span>
+					}
+				</div>
+			</ng-container>
+		</lu-simple-select>
+	</div>
+</ng-template>

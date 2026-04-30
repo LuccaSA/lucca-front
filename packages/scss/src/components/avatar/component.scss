@@ -10,6 +10,7 @@
 	aspect-ratio: 1;
 
 	@at-root ($atRoot) {
+		.picture,
 		.avatar-picture {
 			background-color: var(--components-avatar-picture-background);
 			border-radius: var(--components-avatar-borderRadius);
