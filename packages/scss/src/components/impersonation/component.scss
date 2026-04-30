@@ -41,7 +41,7 @@
 			position: absolute;
 			z-index: 1;
 			inset-inline-end: calc(var(--pr-t-spacings-400) + var(--pr-t-spacings-75));
-			inset-block-start: var(--pr-t-spacings-150);
+			inset-block-start: calc(var(--pr-t-spacings-150) + 1px);
 			display: var(--components-impersonation-clear-display);
 
 			@include clear.product;
