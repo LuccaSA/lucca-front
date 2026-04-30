@@ -12,7 +12,6 @@
 		@include numericBadge.inherit;
 
 		&.is-loading {
-			// Might be deletable after layers implementation
 			--components-numericBadge-loadingColor: var(--palettes-500, var(--palettes-product-500));
 			--components-numericBadge-color: transparent;
 		}
@@ -29,7 +28,6 @@
 		@include numericBadge.disabled;
 
 		&.is-loading {
-			// Might be deletable after layers implementation
 			--components-numericBadge-color: transparent;
 		}
 	}
