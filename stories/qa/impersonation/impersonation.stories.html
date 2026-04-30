@@ -1,0 +1,82 @@
+<table class="demo-QAtable">
+	<tbody>
+		<tr>
+			<td></td>
+			<td style="inline-size: 50%">HTML</td>
+			<td style="inline-size: 50%">Angular</td>
+		</tr>
+		<tr>
+			<td>Placeholder</td>
+			<td>
+				<div class="impersonation">
+					<button type="button" class="impersonation-trigger" aria-expanded="false" aria-controls="popover-content-0">
+						<span class="pr-u-mask">Switch profile:</span>
+						<div class="avatar mod-softRounded mod-S mod-placeholder">
+							<div class="avatar-picture"></div>
+						</div>
+						<div class="skeleton is-loading" style="inline-size: 5.5rem">
+							<span class="skeleton-item"></span>
+						</div>
+						<span class="pr-u-mask">– Page content updates as soon as this filter is changed</span>
+						<span class="impersonation-trigger-icon">
+							<span aria-hidden="true" class="lucca-icon icon-chevronBottom"></span>
+						</span>
+					</button>
+					<button class="clear impersonation-clear">
+						<span class="pr-u-mask">Back to default profile</span>
+					</button>
+				</div>
+			</td>
+			<td>
+				<lu-impersonation [(selectedUser)]="example" />
+			</td>
+		</tr>
+		<tr>
+			<td>Default</td>
+			<td>
+				<div class="impersonation">
+					<button type="button" class="impersonation-trigger" aria-expanded="false" aria-controls="popover-content-0">
+						<span class="pr-u-mask">Switch profile:</span>
+						<div class="avatar mod-softRounded mod-S">
+							<img alt="" class="avatar-picture" loading="lazy" src="https://cdn.lucca.fr/lucca-front/avatars/finn.png" />
+						</div>
+						Finn the Human
+						<span class="pr-u-mask">– Page content updates as soon as this filter is changed</span>
+						<span class="impersonation-trigger-icon">
+							<span aria-hidden="true" class="lucca-icon icon-chevronBottom"></span>
+						</span>
+					</button>
+					<button class="clear impersonation-clear">
+						<span class="pr-u-mask">Back to default profile</span>
+					</button>
+				</div>
+			</td>
+			<td></td>
+		</tr>
+		<tr>
+			<td>Active</td>
+			<td>
+				<div class="impersonation">
+					<button type="button" class="impersonation-trigger is-active" aria-expanded="false" aria-controls="popover-content-0">
+						<span class="pr-u-mask">Switch profile:</span>
+						<div class="avatar mod-softRounded mod-S">
+							<img alt="" class="avatar-picture" loading="lazy" src="https://cdn.lucca.fr/lucca-front/avatars/finn.png" />
+						</div>
+						Finn the Human
+						<span class="pr-u-mask">– Page content updates as soon as this filter is changed</span>
+						<span class="impersonation-trigger-icon">
+							<span aria-hidden="true" class="lucca-icon icon-chevronBottom"></span>
+						</span>
+					</button>
+					<button class="clear impersonation-clear">
+						<span class="pr-u-mask">Back to default profile</span>
+					</button>
+				</div>
+			</td>
+			<td></td>
+		</tr>
+	</tbody>
+</table>
+
+<!-- To tell the ui-diff tool that the page has finished rendering -->
+<span id="ready"></span>
