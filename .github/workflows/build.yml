@@ -14,3 +14,11 @@ jobs:
       - run: npm run build --if-present
       - run: npm run ci-test
       - run: npm run lint
+  run-qa:
+    if: ${{github.ref_type == 'tag'}}
+    uses: LuccaSA/actions/.github/workflows/lucca-ci.yml@b38408be3513da8b7cdd4ffc8a3c3deb9cb15224 # v2.7.4
+    needs: [build]
+    with:
+      cake-file: .cd/qa/run.cake
+      runs-on: ${{ github.event.inputs.runs-on || vars.CI_RUNNER || vars.DEFAULT_CI_RUNNER }}
+    secrets: inherit
