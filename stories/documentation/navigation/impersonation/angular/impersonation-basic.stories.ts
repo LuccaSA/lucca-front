@@ -6,6 +6,8 @@ import { applicationConfig, Meta, moduleMetadata } from '@storybook/angular';
 import { StoryModelDisplayComponent } from '../../../../helpers/story-model-display.component';
 import { generateInputs } from '../../../../helpers/stories';
 
+const me = { id: 66, picture: null, department: { id: 3, name: 'Commercial' }, firstName: 'Pierre', lastName: 'Durand' };
+
 export default {
 	title: 'Documentation/Navigation/Impersonation/Angular',
 	component: ImpersonationComponent,
@@ -25,10 +27,14 @@ export default {
 	],
 	render: (args, { argTypes }) => {
 		return {
-			template: `<lu-impersonation [(selectedUser)]="example" ${generateInputs(args, argTypes)} (clear)="example = null" />
+			template: `<lu-impersonation [(selectedUser)]="example" ${generateInputs(args, argTypes)} (clear)="example = me" />
 
 <pr-story-model-display>{{example | json}}</pr-story-model-display>
 `,
+			props: {
+				example: me,
+				me,
+			},
 		};
 	},
 } as Meta;

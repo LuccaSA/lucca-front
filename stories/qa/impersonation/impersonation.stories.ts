@@ -11,7 +11,10 @@ import { applicationConfig, Meta } from '@storybook/angular';
 	imports: [ImpersonationComponent],
 	changeDetection: ChangeDetectionStrategy.OnPush,
 })
-class ImpersonationStory {}
+class ImpersonationStory {
+	me = { id: 66, picture: null, department: { id: 3, name: 'Commercial' }, firstName: 'Pierre', lastName: 'Durand' };
+	chloe = { id: 1, picture: null, department: { id: 1, name: 'Direction' }, firstName: 'Chloe', lastName: 'Alibert', additionalInformation: 'Direction' };
+}
 
 export default {
 	title: 'QA/Impersonation',
