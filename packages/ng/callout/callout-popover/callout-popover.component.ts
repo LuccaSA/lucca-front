@@ -84,6 +84,11 @@ export class CalloutPopoverComponent {
 	 */
 	readonly customPopoverPositions = input<ConnectionPositionPair[]>();
 
+	/**
+	 * Disable callout popover apparition
+	 */
+	readonly popoverDisabled = input(false, { transform: booleanAttribute });
+
 	readonly feedbackItems = contentChildren(CalloutFeedbackItemComponent, { descendants: true });
 
 	readonly contentSize = computed<'S' | 'M' | undefined>(() => {
