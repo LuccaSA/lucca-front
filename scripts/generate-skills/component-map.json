@@ -1,0 +1,468 @@
+{
+  ".AssetsBanner": null,
+  "🎨 TemplateDataTable": {
+    "slug": "template-datatable",
+    "storybook": "Documentation/Listings/Data table/Angular/Basic"
+  },
+  "🎨 TemplateFancyBox": {
+    "slug": "template-fancybox",
+    "storybook": "Documentation/Structure/FancyBox/Angular/Basic"
+  },
+  "🎨 TemplateIndexTable": {
+    "slug": "template-index-table",
+    "storybook": "Documentation/Listings/Index Table/Angular/Basic"
+  },
+  "🎨 TemplateRichTextfield": {
+    "slug": "template-rich-textfield",
+    "storybook": "Documentation/Forms/Fields/RichTextInput/Angular"
+  },
+  "🧩 AssetsDataTable": {
+    "slug": "assets-data-table",
+    "storybook": "Documentation/Listings/Data table/Angular/Basic"
+  },
+  "🧩 AssetsIndexTable": {
+    "slug": "assets-index-table",
+    "storybook": "Documentation/Listings/Index Table/Angular/Basic"
+  },
+  "Assets": null,
+  "AssetsColorPicker": {
+    "slug": "color-picker",
+    "storybook": "Documentation/Forms/Fields/Color Picker"
+  },
+  "AssetsDialogs": {
+    "slug": "dialog",
+    "storybook": "Documentation/Overlays/Dialog/Angular"
+  },
+  "AssetsEmptyStateFull": {
+    "slug": "asset-empty-state-full",
+    "storybook": "Documentation/Feedback/Empty State/Angular"
+  },
+  "AssetsFieldset": {
+    "slug": "fieldset",
+    "storybook": "Documentation/Forms/Fieldset/Angular"
+  },
+  "AssetsFileUpload": {
+    "slug": "fileupload",
+    "storybook": "Documentation/File/FileUpload/Angular"
+  },
+  "AssetsFooter": {
+    "slug": "footer",
+    "storybook": "Documentation/Structure/Footer/Angular"
+  },
+  "AssetsFormLayout": {
+    "slug": "assets-form-layout",
+    "storybook": "Documentation/Forms/Examples/Angular"
+  },
+  "AssetsSelect": [
+    {
+      "slug": "multi-select",
+      "storybook": "Documentation/Forms/Fields/Multi Select/Angular"
+    },
+    {
+      "slug": "simple-select",
+      "storybook": "Documentation/Forms/Fields/Simple Select/Angular"
+    }
+  ],
+  "AssetsTextFlow": {
+    "slug": "text-flow",
+    "storybook": "Documentation/Texts/Text flow/Angular"
+  },
+  "AssetsTimeline": {
+    "slug": "timelines",
+    "storybook": "Documentation/Listings/Timelines"
+  },
+  "ConfirmationDialog": {
+    "slug": "dialog",
+    "storybook": "Documentation/Overlays/Dialog/Angular"
+  },
+  "DeleteDialog": {
+    "slug": "dialog",
+    "storybook": "Documentation/Overlays/Dialog/Angular"
+  },
+  "ExitDialog": {
+    "slug": "dialog",
+    "storybook": "Documentation/Overlays/Dialog/Angular"
+  },
+  "Group 1": null,
+  "MathSymbols  🚧": null,
+  "NavSideItemLarge": null,
+  "NavSideItemMobile": null,
+  "NavSideItemSmall": null,
+  "NavSideNavigationSelect": null,
+  "pr-AppDrawer": null,
+  "pr-AppLayout (1600)": {
+    "slug": "app-layout",
+    "storybook": "Documentation/Structure/App Layout/Angular",
+    "extraStories": ["Documentation/Structure/Main Layout/Angular"]
+  },
+  "pr-AppLayout (360)": {
+    "slug": "app-layout",
+    "storybook": "Documentation/Structure/App Layout/Angular",
+    "extraStories": ["Documentation/Structure/Main Layout/Angular"]
+  },
+  "pr-Avatar": {
+    "slug": "avatar",
+    "storybook": "Documentation/Users/Avatar/Angular"
+  },
+  "pr-AvatarWrapper (v17.3)": {
+    "slug": "avatar",
+    "storybook": "Documentation/Users/Avatar/Angular"
+  },
+  "pr-Banner": null,
+  "pr-Breadcrumbs": {
+    "slug": "breadcrumbs",
+    "storybook": "Documentation/Navigation/Breadcrumbs/Angular"
+  },
+  "pr-BubbleIcon": {
+    "slug": "bubble-icon",
+    "storybook": "Documentation/Structure/Bubble icon/Angular"
+  },
+  "pr-BubbleIllustration": {
+    "slug": "bubble-illustration",
+    "storybook": "Documentation/Structure/Bubble illustration/Angular"
+  },
+  "pr-Button": {
+    "slug": "button",
+    "storybook": "Documentation/Actions/Button/Angular"
+  },
+  "pr-ButtonGroup": {
+    "slug": "button",
+    "storybook": "Documentation/Actions/Button/Angular"
+  },
+  "pr-Calendar": {
+    "slug": "calendar",
+    "storybook": "Documentation/Forms/Date"
+  },
+  "pr-Callout": {
+    "slug": "callout",
+    "storybook": "Documentation/Feedback/Callout/Angular"
+  },
+  "pr-CalloutDisclosure": {
+    "slug": "callout-disclosure",
+    "storybook": "Documentation/Feedback/Callout Disclosure"
+  },
+  "pr-CalloutPopover": {
+    "slug": "callout-popover",
+    "storybook": "Documentation/Feedback/Callout Popover"
+  },
+  "pr-Checkbox": {
+    "slug": "checkbox",
+    "storybook": "Documentation/Forms/FiltersPills/Checkbox"
+  },
+  "pr-CheckboxFieldset": {
+    "slug": "checkbox",
+    "storybook": "Documentation/Forms/FiltersPills/Checkbox"
+  },
+  "pr-Chip": {
+    "slug": "chip",
+    "storybook": "Documentation/Listings/Chip/Angular"
+  },
+  "pr-Clear": {
+    "slug": "clear",
+    "storybook": "Documentation/Texts/Clear/Angular"
+  },
+  "pr-ColorPicker": {
+    "slug": "color-picker",
+    "storybook": "Documentation/Forms/Fields/Color Picker"
+  },
+  "pr-Comment": {
+    "slug": "comment",
+    "storybook": "Documentation/Texts/Comment/Angular"
+  },
+  "pr-CommentChat": null,
+  "pr-DataPresentation (v21.1)  🎉": {
+    "slug": "data-presentation",
+    "storybook": "Documentation/Forms/Data Presentation/Angular"
+  },
+  "pr-DataTable": {
+    "slug": "data-table",
+    "storybook": "Documentation/Listings/Data table/Angular"
+  },
+  "pr-DatePicker": {
+    "slug": "dateinput",
+    "storybook": "Documentation/Forms/Date2/DateInput"
+  },
+  "pr-DateRangePicker (v19.1)": {
+    "slug": "daterangeinput",
+    "storybook": "Documentation/Forms/Date2/DateRangeInput"
+  },
+  "pr-Dialog": {
+    "slug": "dialog",
+    "storybook": "Documentation/Overlays/Dialog/Angular"
+  },
+  "pr-Divider": {
+    "slug": "divider",
+    "storybook": "Documentation/Structure/Divider/Angular"
+  },
+  "pr-DotBadge": {
+    "slug": "statusbadge",
+    "storybook": "Documentation/Texts/StatusBadge"
+  },
+  "pr-DropdownMenu": {
+    "slug": "dropdown",
+    "storybook": "Documentation/Overlays/Dropdown/Angular"
+  },
+  "pr-DurationPicker": {
+    "slug": "duration-picker",
+    "storybook": "Documentation/Forms/Time/Duration Picker"
+  },
+  "pr-EmptyStateFull": {
+    "slug": "empty-state",
+    "storybook": "Documentation/Feedback/Empty State/Angular"
+  },
+  "pr-EmptyStateSection": {
+    "slug": "empty-state",
+    "storybook": "Documentation/Feedback/Empty State/Angular"
+  },
+  "pr-FancyBox (v19.1)": {
+    "slug": "fancybox",
+    "storybook": "Documentation/Structure/FancyBox/Angular"
+  },
+  "pr-Fieldset": {
+    "slug": "fieldset",
+    "storybook": "Documentation/Forms/Fieldset/Angular"
+  },
+  "pr-FileEntry (v19.3)": {
+    "slug": "fileentry",
+    "storybook": "Documentation/File/FileEntry/Angular"
+  },
+  "pr-FileUpload (v19.3)": {
+    "slug": "fileupload",
+    "storybook": "Documentation/File/FileUpload/Angular"
+  },
+  "pr-FilterBar (v19.2)": {
+    "slug": "filterbar",
+    "storybook": "Documentation/Forms/FiltersPills/FilterBar"
+  },
+  "pr-FilterPill (v19.2)": {
+    "slug": "filterpills",
+    "storybook": "Documentation/Forms/FiltersPills/FilterPills"
+  },
+  "pr-Footer": {
+    "slug": "footer",
+    "storybook": "Documentation/Structure/Footer/Angular"
+  },
+  "pr-FormField": {
+    "slug": "form-field",
+    "storybook": "Documentation/Forms/Fields"
+  },
+  "pr-FormLabel": null,
+  "pr-FormLayout": {
+    "slug": "assets-form-layout",
+    "storybook": "Documentation/Forms/Examples/Angular"
+  },
+  "pr-Gauge": {
+    "slug": "gauge",
+    "storybook": "Documentation/Loaders/Gauge/Angular"
+  },
+  "pr-HighlightData (v19.3)": {
+    "slug": "highlight-data",
+    "storybook": "Documentation/Structure/Highlight data/Angular"
+  },
+  "pr-HorizontalNavigation": {
+    "slug": "horizontalnavigation",
+    "storybook": "Documentation/Navigation/HorizontalNavigation"
+  },
+  "pr-Icon": {
+    "slug": "icons",
+    "storybook": "Documentation/Texts/Icons/Angular"
+  },
+  "pr-IndexTable": {
+    "slug": "index-table",
+    "storybook": "Documentation/Listings/Index Table/Angular"
+  },
+  "pr-InlineMessage": {
+    "slug": "inlinemessage",
+    "storybook": "Documentation/Forms/InlineMessage/Angular"
+  },
+  "pr-InputFramed (v20.1)": {
+    "slug": "input-framed",
+    "storybook": "Documentation/Forms/Input Framed/Angular"
+  },
+  "pr-Link": {
+    "slug": "link",
+    "storybook": "Documentation/Actions/Link/Angular"
+  },
+  "pr-Listing (v20.1)  🎉": {
+    "slug": "listing",
+    "storybook": "Documentation/Listings/Listing/Angular"
+  },
+  "pr-Loading": {
+    "slug": "loading",
+    "storybook": "Documentation/Loaders/Loading/Angular"
+  },
+  "pr-LuccaLogo": null,
+  "pr-MobileNavigation": {
+    "slug": "mobilenavigation",
+    "storybook": "Documentation/Navigation/MobileNavigation"
+  },
+  "pr-MobilePush (v20.1)": {
+    "slug": "mobile-push",
+    "storybook": "Documentation/Feedback/Mobile Push/Angular"
+  },
+  "pr-MultilanguageTextfield": {
+    "slug": "multilanguagefield",
+    "storybook": "Documentation/Forms/Fields/MultilanguageField/Angular"
+  },
+  "pr-NewBadge": {
+    "slug": "newbadge",
+    "storybook": "Documentation/Texts/NewBadge/Angular"
+  },
+  "pr-NumericBadge": {
+    "slug": "numericbadge",
+    "storybook": "Documentation/Texts/NumericBadge/Angular"
+  },
+  "pr-PageHeader": {
+    "slug": "pageheader",
+    "storybook": "Documentation/Structure/PageHeader/Angular"
+  },
+  "pr-Pagination": {
+    "slug": "pagination",
+    "storybook": "Documentation/Navigation/Pagination/Angular"
+  },
+  "pr-PhoneNumberField": {
+    "slug": "phonenumberfield",
+    "storybook": "Documentation/Forms/Fields/PhoneNumberField"
+  },
+  "pr-PLGPush": {
+    "slug": "plg-push",
+    "storybook": "Documentation/Feedback/PLG Push/Angular"
+  },
+  "pr-Popover": {
+    "slug": "popover",
+    "storybook": "Documentation/Overlays/Popover"
+  },
+  "pr-ProgressBar": {
+    "slug": "progress-bar",
+    "storybook": "Documentation/Loaders/Progress Bar/Angular"
+  },
+  "pr-Radio": {
+    "slug": "radiofield",
+    "storybook": "Documentation/Forms/Fields/RadioField/Angular"
+  },
+  "pr-RadioFieldset": {
+    "slug": "radiofield",
+    "storybook": "Documentation/Forms/Fields/RadioField/Angular"
+  },
+  "pr-ReadMore (v19.3)": {
+    "slug": "readmore",
+    "storybook": "Documentation/Texts/ReadMore/Angular"
+  },
+  "pr-ResourceCard (v21.0)  🧪": {
+    "slug": "resource-card",
+    "storybook": "Documentation/Structure/Resource Card/Angular"
+  },
+  "pr-ResourceCardWrapper (v21.0)  🧪": {
+    "slug": "resource-card",
+    "storybook": "Documentation/Structure/Resource Card/Angular"
+  },
+  "pr-RichTextfield (v19.3)": {
+    "slug": "richtextinput",
+    "storybook": "Documentation/Forms/Fields/RichTextInput/Angular"
+  },
+  "pr-SegmentedControl": {
+    "slug": "segmentedcontrol",
+    "storybook": "Documentation/Navigation/segmentedControl/Angular"
+  },
+  "pr-Select": [
+    {
+      "slug": "multi-select",
+      "storybook": "Documentation/Forms/Fields/Multi Select/Angular"
+    },
+    {
+      "slug": "simple-select",
+      "storybook": "Documentation/Forms/Fields/Simple Select/Angular"
+    }
+  ],
+  "pr-Skeleton": {
+    "slug": "skeleton",
+    "storybook": "Documentation/Loaders"
+  },
+  "pr-SkeletonButton (v18.1)": {
+    "slug": "skeleton-button",
+    "storybook": "Documentation/Loaders/Skeleton"
+  },
+  "pr-SkeletonFormField (v18.1)": {
+    "slug": "skeleton-field",
+    "storybook": "Documentation/Loaders/Skeleton/Skeleton Field"
+  },
+  "pr-SkeletonPageHeader (v18.1)": {
+    "slug": "skeleton-header",
+    "storybook": "Documentation/Loaders/Skeleton/Skeleton Header"
+  },
+  "pr-SoftwareIcon": {
+    "slug": "software-icon",
+    "storybook": "Documentation/Structure/Software icon/Angular"
+  },
+  "pr-SortableList": {
+    "slug": "sortable-list",
+    "storybook": "Documentation/Listings/Sortable List/Angular"
+  },
+  "pr-StatusBadge": {
+    "slug": "statusbadge",
+    "storybook": "Documentation/Texts/StatusBadge"
+  },
+  "pr-Switch": {
+    "slug": "switchfield",
+    "storybook": "Documentation/Forms/Fields/SwitchField/Angular"
+  },
+  "pr-Tag": {
+    "slug": "tags",
+    "storybook": "Documentation/Texts/Tags/Angular"
+  },
+  "pr-Textarea": {
+    "slug": "textareafield",
+    "storybook": "Documentation/Forms/Fields/TextAreaField/Angular"
+  },
+  "pr-Textfield": {
+    "slug": "textfield",
+    "storybook": "Documentation/Forms/Fields/TextField"
+  },
+  "pr-TextFlow (v19.2)": {
+    "slug": "text-flow",
+    "storybook": "Documentation/Texts/Text flow/Angular"
+  },
+  "pr-TimelineHorizontal": {
+    "slug": "timelines",
+    "storybook": "Documentation/Listings/Timelines"
+  },
+  "pr-TimelineVertical": {
+    "slug": "timelines",
+    "storybook": "Documentation/Listings/Timelines"
+  },
+  "pr-TimePicker": {
+    "slug": "time-picker",
+    "storybook": "Documentation/Forms/Time/Time Picker"
+  },
+  "pr-Toast": {
+    "slug": "toasts",
+    "storybook": "Documentation/Overlays/Toasts"
+  },
+  "pr-Toolbar  🚧": null,
+  "pr-Tooltip": {
+    "slug": "tooltip",
+    "storybook": "Documentation/Overlays/Tooltip"
+  },
+  "pr-UserPopover": {
+    "slug": "user-popover",
+    "storybook": "Documentation/Users/Popover/Angular"
+  },
+  "pr-UserTile": {
+    "slug": "tile",
+    "storybook": "Documentation/Users/Tile/Angular"
+  },
+  "pr-VerticalNavigation": {
+    "slug": "verticalnavigation",
+    "storybook": "Documentation/Navigation/VerticalNavigation/Angular"
+  },
+  "Scrollbar": {
+    "slug": "scrollbox",
+    "storybook": "Documentation/Structure/ScrollBox"
+  },
+  "SectionHeader  🚧": null,
+  "Slot": {
+    "slug": "float",
+    "storybook": "Documentation/Integration/Utilities"
+  },
+  "TemplateMail": null
+}
