@@ -32,16 +32,20 @@
 	<div class="impersonation_popover-content popover-contentOptional">
 		<lu-simple-select impersonation [(ngModel)]="selectedUser" users [enableFormerEmployees]="enableFormerEmployees()" #selectRef>
 			<ng-container *luOption="let user; select: selectRef">
-				<div class="impersonation_popover-content-option">
+				<div class="impersonation_popover-content-option" [class.mod-me]="currentUserId === user.id">
 					<lu-user-picture aria-hidden="true" [user]="user" size="XS" softRounded />
-					@if (currentUserId === user.id) {
-						{{ intl().me }}&ngsp;
-					}
-					<span translate="no">{{ user | luUserDisplay }}</span>
-					<!-- Handle homonyms -->
-					@if (user.additionalInformation) {
-						<span> ({{ user.additionalInformation }})</span>
-					}
+					<div>
+						@if (currentUserId === user.id) {
+							{{ intl().me }}&nbsp;
+						}
+						<span translate="no">{{ user | luUserDisplay }}</span>
+						<!-- Handle homonyms -->
+						@if (user.additionalInformation) {
+							<div class="option-additional">
+								{{ user.additionalInformation }}
+							</div>
+						}
+					</div>
 				</div>
 			</ng-container>
 		</lu-simple-select>

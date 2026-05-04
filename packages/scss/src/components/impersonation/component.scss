@@ -49,6 +49,11 @@
 
 		.impersonation_popover-content-option {
 			display: flex;
+			color: var(--pr-t-color-text);
+
+			&.mod-me {
+				font-weight: var(--pr-t-font-fontWeight-semibold);
+			}
 		}
 	}
 }
