@@ -5,6 +5,8 @@ import { intlInputOptions, IntlParamsPipe } from '@lucca-front/ng/core';
 import { FORM_FIELD_INSTANCE, FormFieldComponent, InputDirective, ɵPresentationDisplayDefaultDirective } from '@lucca-front/ng/form-field';
 import { PopoverDirective } from '@lucca-front/ng/popover2';
 import { LuTooltipTriggerDirective } from '@lucca-front/ng/tooltip';
+import { ButtonComponent } from '@lucca/prisme/button';
+import { IconComponent } from '@lucca/prisme/icon';
 import { TextInputComponent } from '../text-input/text-input.component';
 import { INVARIANT_CULTURE_CODE, MultilanguageTranslation } from './model/multilanguage-translation';
 import { LU_MULTILANGUAGE_INPUT_TRANSLATIONS } from './multilanguage-input.translate';
@@ -22,6 +24,8 @@ import { LU_MULTILANGUAGE_INPUT_TRANSLATIONS } from './multilanguage-input.trans
 		IntlParamsPipe,
 		LuTooltipTriggerDirective,
 		ɵPresentationDisplayDefaultDirective,
+		IconComponent,
+		ButtonComponent,
 	],
 	templateUrl: './multilanguage-input.component.html',
 	styleUrl: './multilanguage-input.component.scss',
@@ -74,8 +78,8 @@ export class MultilanguageInputComponent implements ControlValueAccessor {
 	});
 
 	popoverPositions: ConnectionPositionPair[] = [
-		new ConnectionPositionPair({ originX: 'end', originY: 'bottom' }, { overlayX: 'end', overlayY: 'top' }, 16, 6),
-		new ConnectionPositionPair({ originX: 'end', originY: 'top' }, { overlayX: 'end', overlayY: 'bottom' }, 16, -6),
+		new ConnectionPositionPair({ originX: 'end', originY: 'bottom' }, { overlayX: 'end', overlayY: 'top' }, 12, 6),
+		new ConnectionPositionPair({ originX: 'end', originY: 'top' }, { overlayX: 'end', overlayY: 'bottom' }, 12, -6),
 	];
 
 	getLocaleDisplayName(locale: string): string {

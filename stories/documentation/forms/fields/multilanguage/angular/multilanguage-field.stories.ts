@@ -142,7 +142,7 @@ export const Basic: StoryObj<
 			props: {
 				formControl,
 			},
-			template: cleanupTemplate(`<lu-form-field ${generateInputs(
+			template: cleanupTemplate(`<lu-form-field${generateInputs(
 				{
 					label,
 					hiddenLabel,
@@ -155,7 +155,7 @@ export const Basic: StoryObj<
 				},
 				argTypes,
 			)}>
-	<lu-multilanguage-input [formControl]="formControl" ${generateInputs(inputArgs, argTypes)} />
+	<lu-multilanguage-input [formControl]="formControl"${generateInputs(inputArgs, argTypes)} />
 </lu-form-field>
 <pr-story-model-display>{{ formControl.value | json }}</pr-story-model-display>`),
 		};

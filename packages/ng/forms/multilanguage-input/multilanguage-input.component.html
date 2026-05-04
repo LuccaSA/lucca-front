@@ -1,4 +1,18 @@
-<div class="textField">
+<div class="textField mod-multilanguage">
+	<!-- TODO invariant -->
+	@if (false) {
+		<div class="textField-prefix">
+			<div class="textField-prefix-lang">
+				<!-- TODO required -->
+				<!-- TODO locale -->
+				@if (true) {
+					XX<sup class="formLabel-required" aria-hidden="true">*</sup>
+				} @else {
+					XX
+				}
+			</div>
+		</div>
+	}
 	<div class="textField-input">
 		<input
 			luInput
@@ -21,27 +35,58 @@
 				luPopoverNoCloseButton
 				[customPositions]="popoverPositions"
 				[luTooltip]="intl().toggleMultilanguage"
+				luTooltipOnlyForDisplay
+				luButton
 				type="button"
-				class="button mod-onlyIcon mod-ghost textField-input-affix-toggle"
+				class="textField-input-affix-toggle"
 			>
-				<span aria-hidden="true" class="lucca-icon icon-signTranslation"></span>
+				<lu-icon icon="signTranslation" [alt]="intl().toggleMultilanguage" />
 			</button>
 			<ng-template #popoverMultilanguage>
-				<div class="popover-contentOptional multilanguage_popover-content" [style.width.px]="inputElement.clientWidth + 16">
+				<!-- TODO syle width -->
+				<div class="popover-contentOptional multilanguage_popover-content" [style.width.px]="inputElement.clientWidth + 72">
 					<div class="pr-u-displayFlex pr-u-gap100 pr-u-flexDirectionColumn">
 						@for (row of panelInputs(); track row.cultureCode) {
+							<ng-template #prefixLang>
+								<div class="textField-prefix-lang">
+									<!-- TODO required -->
+									@if (true) {
+										{{ row.cultureCode.slice(0, 2).toUpperCase() }}<sup class="formLabel-required" aria-hidden="true">*</sup>
+									} @else {
+										{{ row.cultureCode.slice(0, 2).toUpperCase() }}
+									}
+								</div>
+							</ng-template>
+							<ng-template #suffixIA>
+								<!-- TODO trad -->
+								<!-- TODO output -->
+								<button
+									type="button"
+									[size]="formFieldSize() === 'S' ? 'XS' : 'S'"
+									luButton="AI"
+									[luTooltip]="'Traduire avec l’assistant IA'"
+									luTooltipOnlyForDisplay
+									[disabled]="disabledInternal()"
+								>
+									<lu-icon icon="officePenStar" alt="Traduire avec l’assistant IA" />
+								</button>
+							</ng-template>
+							<!-- TODO label -->
 							<lu-form-field
 								[size]="formFieldSize()"
 								[label]="intl().translateTo | intlParams: { lang: getLocaleDisplayName(row.cultureCode) }"
 								hiddenLabel
 							>
+								<!-- TODO suffix -->
+								<!-- TODO required -->
 								<lu-text-input
-									[suffix]="{ content: row.cultureCode, ariaLabel: '' }"
+									[prefix]="{ content: prefixLang, ariaLabel: '' }"
 									[(ngModel)]="row.value"
 									(ngModelChange)="valueChange()"
 									[ngModelOptions]="{ standalone: true }"
 									[disabled]="disabledInternal()"
 									[autocomplete]="autocomplete()"
+									[suffix]="{ content: suffixIA, ariaLabel: '' }"
 								/>
 							</lu-form-field>
 						}
