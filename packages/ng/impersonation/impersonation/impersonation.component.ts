@@ -23,22 +23,22 @@ import { LU_IMPERSONATION_TRANSLATIONS } from './impersonation.translate';
 	},
 })
 export class ImpersonationComponent {
-	protected elementRef = inject(ElementRef);
+	protected readonly elementRef = inject(ElementRef);
 	readonly intl = input(...intlInputOptions(LU_CORE_SELECT_USER_TRANSLATIONS, LU_IMPERSONATION_TRANSLATIONS));
-	protected currentUserId = inject(ɵLU_CORE_SELECT_CURRENT_USER_ID);
+	protected readonly currentUserId = inject(ɵLU_CORE_SELECT_CURRENT_USER_ID);
 
-	inputComponentRef = viewChild<LuSimpleSelectInputComponent<ILuUser>>(LuSimpleSelectInputComponent);
+	readonly inputComponentRef = viewChild<LuSimpleSelectInputComponent<ILuUser>>(LuSimpleSelectInputComponent);
 
-	popoverRef = viewChild(PopoverDirective);
+	readonly popoverRef = viewChild(PopoverDirective);
 
-	selectedUser = model<ILuUser>();
+	readonly selectedUser = model<ILuUser>();
 
-	enableFormerEmployees = input(false, { transform: booleanAttribute });
+	readonly enableFormerEmployees = input(false, { transform: booleanAttribute });
 
-	isNotMe = computed(() => this.selectedUser()?.id !== this.currentUserId);
-	clear = output<void>();
+	readonly isNotMe = computed(() => this.selectedUser()?.id !== this.currentUserId);
+	readonly clear = output<void>();
 
-	popoverPositions: ConnectionPositionPair[] = [
+	readonly popoverPositions: ConnectionPositionPair[] = [
 		new ConnectionPositionPair(
 			{ originX: 'start', originY: 'bottom' },
 			{

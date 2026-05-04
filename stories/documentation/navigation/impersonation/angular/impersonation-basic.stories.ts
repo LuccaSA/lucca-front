@@ -4,19 +4,28 @@ import { provideCoreSelectCurrentUserId } from '@lucca-front/ng/core-select/user
 import { ImpersonationComponent } from '@lucca-front/ng/impersonation';
 import { applicationConfig, Meta, moduleMetadata } from '@storybook/angular';
 import { StoryModelDisplayComponent } from '../../../../helpers/story-model-display.component';
+import { generateInputs } from '../../../../helpers/stories';
 
 export default {
 	title: 'Documentation/Navigation/Impersonation/Angular',
 	component: ImpersonationComponent,
+	argTypes: {
+		enableFormerEmployees: {
+			control: {
+				type: 'boolean',
+			},
+			description: 'Inclus les collaborateurs partis',
+		},
+	},
 	decorators: [
 		moduleMetadata({
 			imports: [ImpersonationComponent, StoryModelDisplayComponent, JsonPipe],
 		}),
 		applicationConfig({ providers: [provideHttpClient(), provideCoreSelectCurrentUserId(() => 66)] }),
 	],
-	render: () => {
+	render: (args, { argTypes }) => {
 		return {
-			template: `<lu-impersonation [(selectedUser)]="example" />
+			template: `<lu-impersonation [(selectedUser)]="example" ${generateInputs(args, argTypes)} (clear)="example = null" />
 
 <pr-story-model-display>{{example | json}}</pr-story-model-display>
 `,
@@ -24,4 +33,6 @@ export default {
 	},
 } as Meta;
 
-export const Basic = {};
+export const Basic = {
+	args: { enableFormerEmployees: false },
+};
