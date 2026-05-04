@@ -1,4 +1,4 @@
-import { booleanAttribute, ChangeDetectionStrategy, Component, computed, forwardRef, inject, Injector, input, OnInit, signal, ViewEncapsulation } from '@angular/core';
+import { booleanAttribute, ChangeDetectionStrategy, Component, computed, forwardRef, inject, Injector, input, LOCALE_ID, OnInit, signal, ViewEncapsulation } from '@angular/core';
 import { AbstractControl, ControlValueAccessor, NG_VALIDATORS, NG_VALUE_ACCESSOR, NgControl, NgModel, ValidationErrors, Validator } from '@angular/forms';
 import { intlInputOptions, isNil } from '@lucca-front/ng/core';
 import { FORM_FIELD_INSTANCE, ɵPresentationDisplayDefaultDirective } from '@lucca-front/ng/form-field';
@@ -38,6 +38,7 @@ import { TimeRangePickerSize } from './time-range-picker.type';
 export class TimeRangePickerComponent implements ControlValueAccessor, OnInit, Validator {
 	#injector = inject(Injector);
 	#formFieldRef = inject(FORM_FIELD_INSTANCE, { optional: true });
+	#locale = inject(LOCALE_ID);
 	#ngControl: NgControl; // Initialized in ngOnInit
 
 	#onChange?: (value: TimeRangePickerRange | null) => void;
@@ -67,6 +68,7 @@ export class TimeRangePickerComponent implements ControlValueAccessor, OnInit, V
 	readonly startValue = computed(() => this.value()?.start ?? DEFAULT_TIME_VALUE);
 	readonly endValue = computed(() => this.value()?.end ?? DEFAULT_TIME_VALUE);
 	readonly formFieldLabel = computed(() => this.#formFieldRef?.label());
+	readonly isLocalFr = computed(() => this.#locale === 'fr');
 
 	DEFAULT_TIME_VALUE = DEFAULT_TIME_VALUE;
 

@@ -1,5 +1,5 @@
-@let startLabel = `${formFieldLabel() ? formFieldLabel() + " " : ""}(${intl().timeRangePickerStart})`;
-@let endLabel = `${formFieldLabel() ? formFieldLabel() + " " : ""}(${intl().timeRangePickerEnd})`;
+@let startLabel = `${formFieldLabel() && isLocalFr() ? formFieldLabel() + " " : ""}(${intl().timeRangePickerStart})`;
+@let endLabel = `${formFieldLabel() && isLocalFr() ? formFieldLabel() + " " : ""}(${intl().timeRangePickerEnd})`;
 
 <div
 	class="timePicker"
