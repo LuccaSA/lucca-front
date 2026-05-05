@@ -20,7 +20,7 @@
 	<div class="fileUpload-status">
 		<lu-bubble-illustration [illustration]="illus()" action size="L" />
 	</div>
-	@if (size() !== "S") {
+	@if (size() === "L") {
 		<ng-content />
 	}
 	<div class="fileUpload-instruction" [attr.id]="'fileUpload-instruction-' + idSuffix">
