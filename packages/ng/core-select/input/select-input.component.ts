@@ -17,7 +17,7 @@ import {
 	signal,
 	TemplateRef,
 	Type,
-	ViewChild,
+	viewChild,
 } from '@angular/core';
 import { outputFromObservable, toSignal } from '@angular/core/rxjs-interop';
 import { ControlValueAccessor } from '@angular/forms';
@@ -71,8 +71,7 @@ export abstract class ALuSelectInputComponent<TOption, TValue> implements OnDest
 
 	public readonly highlightedOption = output<TOption>();
 
-	@ViewChild('inputElement')
-	private readonly inputElementRef: ElementRef<HTMLInputElement>;
+	private readonly inputElementRef = viewChild<ElementRef<HTMLInputElement>>('inputElement');
 
 	readonly placeholder$ = new BehaviorSubject('');
 
@@ -372,7 +371,7 @@ export abstract class ALuSelectInputComponent<TOption, TValue> implements OnDest
 			event.stopPropagation();
 		}
 		this.updateValue(null, true);
-		this.inputElementRef.nativeElement.focus();
+		this.inputElementRef()?.nativeElement.focus();
 	}
 
 	openPanel(clue: string = ''): void {
@@ -433,8 +432,8 @@ export abstract class ALuSelectInputComponent<TOption, TValue> implements OnDest
 	}
 
 	focusInput(): void {
-		if (this.inputElementRef) {
-			this.inputElementRef.nativeElement.focus();
+		if (this.inputElementRef()) {
+			this.inputElementRef()?.nativeElement.focus();
 		}
 	}
 

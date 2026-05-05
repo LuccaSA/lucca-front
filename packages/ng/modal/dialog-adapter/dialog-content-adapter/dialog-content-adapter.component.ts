@@ -1,6 +1,6 @@
 import { ComponentType } from '@angular/cdk/overlay';
 import { AsyncPipe } from '@angular/common';
-import { ChangeDetectionStrategy, Component, DestroyRef, DoCheck, inject, Injector, OnInit, signal, ViewChild, ViewContainerRef, ViewEncapsulation } from '@angular/core';
+import { ChangeDetectionStrategy, Component, DestroyRef, DoCheck, inject, Injector, OnInit, signal, viewChild, ViewContainerRef, ViewEncapsulation } from '@angular/core';
 import { takeUntilDestroyed } from '@angular/core/rxjs-interop';
 import { ButtonComponent } from '@lucca-front/ng/button';
 import { getIntl, Palette } from '@lucca-front/ng/core';
@@ -29,8 +29,7 @@ interface AdapterData<D, C> {
 export class DialogContentAdapterComponent<D, C extends ILuModalContent> implements OnInit, DoCheck {
 	#destroyRef = inject(DestroyRef);
 
-	@ViewChild('contentProjectionRef', { read: ViewContainerRef, static: true })
-	readonly contentProjectionRef: ViewContainerRef;
+	readonly contentProjectionRef = viewChild.required('contentProjectionRef', { read: ViewContainerRef });
 
 	#contentComponentInstance: C;
 
@@ -118,7 +117,7 @@ export class DialogContentAdapterComponent<D, C extends ILuModalContent> impleme
 			],
 			parent: this.#injector,
 		});
-		this.#contentComponentInstance = this.contentProjectionRef.createComponent(this.dialogData.component, {
+		this.#contentComponentInstance = this.contentProjectionRef().createComponent(this.dialogData.component, {
 			injector,
 		}).instance;
 	}
