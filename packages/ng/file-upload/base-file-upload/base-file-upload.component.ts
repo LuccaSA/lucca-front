@@ -57,7 +57,7 @@ export abstract class BaseFileUploadComponent {
 
 	readonly maxSizeDisplay = computed(() => formatFileSize(this.locale, this.fileMaxSize()));
 
-	readonly size = input<'S' | null>(null);
+	readonly size = input<null | 'L'>(null);
 
 	readonly password = input(false, { transform: booleanAttribute });
 
