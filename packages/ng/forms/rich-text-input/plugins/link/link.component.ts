@@ -15,7 +15,7 @@ import { getSelectedNode } from '../../utils';
 import { LinkDialogComponent } from './link-dialog';
 import { FORMAT_LINK, registerLink, registerLinkSelectionChange } from './link.command';
 import { $createPopoverLinkNode, PopoverLinkNode } from './popover-link-node';
-import { $createPopoverAutoLinkNode, PopoverAutoLinkNode } from './popover-autolink-node';
+import { $createPopoverAutoLinkNode, $isPopoverAutoLinkNode, PopoverAutoLinkNode } from './popover-autolink-node';
 
 const URL_REGEX = /https?:\/\/(?:www\.)?[-a-zA-Z0-9@:%._+~#=]{1,256}\.[a-zA-Z0-9()]{1,6}\b(?:[-a-zA-Z0-9()@:%_+.~#?!&/=;,[\]]*)/;
 const EMAIL_REGEX = /(([^<>()[\]\\.,;:\s@"]+(\.[^<>()[\]\\.,;:\s@"]+)*)|(".+"))@((\[[0-9]{1,3}\.[0-9]{1,3}\.[0-9]{1,3}\.[0-9]{1,3}\])|(([a-zA-Z\-0-9]+\.)+[a-zA-Z]{2,}))/;
@@ -104,12 +104,14 @@ export class LinkComponent implements OnDestroy, RichTextPluginComponent {
 	dispatchCommand() {
 		this.#editor?.read(() => {
 			let url = '';
+			let canDelete = false;
 			const selection = $getSelection();
 			if ($isRangeSelection(selection)) {
 				const node = getSelectedNode(selection);
 				const parent = $getNearestNodeOfType(node, LinkNode);
 				if (parent) {
 					url = parent.getURL();
+					canDelete = !$isPopoverAutoLinkNode(parent);
 				}
 			}
 
@@ -117,7 +119,10 @@ export class LinkComponent implements OnDestroy, RichTextPluginComponent {
 				.open({
 					content: LinkDialogComponent,
 					size: 'S',
-					data: url,
+					data: {
+						url,
+						canDelete,
+					},
 				})
 				.result$.subscribe((href) => {
 					let newHref = href;

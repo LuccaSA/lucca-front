@@ -18,27 +18,27 @@ export default {
 			control: {
 				type: 'radio',
 			},
-			description: "Modifie l'état du composant.",
+			description: 'Modifie l’état du composant.',
 		},
 		previewUrl: {
-			description: "URL de prévisualisation de l'image uploadée.",
+			description: "URL de prévisualisation de l’image uploadée.",
 		},
 		displayFileName: {
 			if: { arg: 'media', truthy: true },
-			description: "Affiche le nom du fichier sous l'image en vue <code>media</code>.",
+			description: 'Affiche le nom du fichier sous l’image en vue <code>media</code>.',
 		},
 		media: {
 			description: 'Affiche le fichier avec une mise en forme adaptée aux visuels.',
 		},
 		iconOverride: {
 			if: { arg: 'previewUrl', truthy: false },
-			description: "Remplace l'icône de format de fichier.",
+			description: "Remplace l’icône de format de fichier.",
 		},
 		downloadURL: {
 			description: 'URL de téléchargement du fichier.',
 		},
 		inlineMessageError: {
-			description: "Message d'erreur affiché sous le composant.",
+			description: 'Message d’erreur affiché sous le composant.',
 		},
 		deletable: {
 			description: 'Affiche un bouton de suppression.',
@@ -58,6 +58,11 @@ export default {
 		structure: {
 			if: { arg: 'size', truthy: true },
 			description: "Augmente le border-radius du champ pour l'utiliser en élément de structure.",
+		withFileType: {
+			control: 'boolean',
+		},
+		withFileSize: {
+			control: 'boolean',
 		},
 	},
 	decorators: [
@@ -77,7 +82,7 @@ export default {
 			template: `<lu-file-entry${structureParam}${deletableParam}${withPasswordParam} [entry]="{
 			name: '${fileName}',
 			size: ${fileSize},
-			type: '${fileType}',
+			type: ${fileType && `'${fileType}'`},
 		}"  ${generateInputs(otherArgs, argTypes)} />`,
 		};
 	},
@@ -89,7 +94,9 @@ export const Basic = {
 		displayFileName: false,
 		size: null,
 		fileSize: 28420,
+		withFileSize: true,
 		fileType: 'image/png',
+		withFileType: true,
 		fileName: 'dummyimage.png',
 		previewUrl: 'https://dummyimage.com/500',
 		iconOverride: '',

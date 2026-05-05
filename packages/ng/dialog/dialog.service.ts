@@ -12,11 +12,15 @@ export class LuDialogService {
 	#injector = inject(Injector);
 
 	open<C, TData = LuDialogData<C>>(config: LuDialogConfig<C, NoInfer<TData>>): LuDialogRef<C, TData> {
-		let luDialogRef: LuDialogRef<C, TData>;
+		// Assigned synchronously inside the `providers` callback below, which CDK calls during `Dialog.open()`.
+		let luDialogRef!: LuDialogRef<C, TData>;
 		let modeClasses: string[] = [];
 		switch (config.mode) {
 			case 'drawer':
 				modeClasses = ['mod-drawer'];
+				break;
+			case 'fancy':
+				modeClasses = ['mod-fancy'];
 				break;
 			case 'drawer-from-bottom':
 				modeClasses = ['mod-drawer', 'mod-fromBottom'];
@@ -63,7 +67,7 @@ export class LuDialogService {
 				.pipe(
 					filter(() => config.canCloseWithBackdrop ?? true),
 					switchMap(() => {
-						const canClose = config.canClose?.(cdkRef.componentInstance) ?? true;
+						const canClose = cdkRef.componentInstance ? (config.canClose?.(cdkRef.componentInstance) ?? true) : true;
 						const canClose$ = isObservable(canClose) ? canClose : of(canClose);
 						return canClose$.pipe(take(1));
 					}),

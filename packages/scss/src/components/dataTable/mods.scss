@@ -95,10 +95,12 @@
 @mixin tree {
 	@include buttonExpand;
 
-	--components-dataTable-cell-paddingInlineStart: calc(
-		var(--components-dataTable-cell-padding-inline) + var(--pr-t-spacings-300) * calc(var(--components-dataTable-treeLevel) - 1) +
-			var(--components-dataTable-tree-extraPadding)
-	);
+	--components-dataTable-cell-paddingInlineStart:
+		calc(
+			var(--components-dataTable-cell-padding-inline)
+			+ var(--pr-t-spacings-300) * calc(var(--components-dataTable-treeLevel) - 1)
+			+ var(--components-dataTable-tree-extraPadding)
+		);
 }
 
 @mixin editable {
@@ -117,6 +119,13 @@
 		@include button.onlyIcon;
 		@include button.onlyIconS;
 		@include button.ghost;
+
+		// .mod-delete is deprecated
+		&.mod-critical,
+		&.mod-delete {
+			// For specificity purpose. Could be removed if we decide to remove automatic CSS imports in Angular components
+			@include button.critical;
+		}
 
 		transition-property: box-shadow, color;
 	}

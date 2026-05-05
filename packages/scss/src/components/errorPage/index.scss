@@ -12,6 +12,10 @@
 			@include compact;
 		}
 
+		@include media.max('XXS') {
+			@include narrow;
+		}
+
 		.appLayout & {
 			@include inAppLayout;
 		}

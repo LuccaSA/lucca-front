@@ -103,7 +103,7 @@ export const DualSelect = generateStory({
 
 export const SelectWithDisplayer = generateStory({
 	name: 'SelectWithDisplayer',
-	description: "Il est possible de modifier l'affichage de la valeur courant à l'aide d'un `luDisplayer` personnalisé.",
+	description: 'Il est possible de modifier l’affichage de la valeur courant à l’aide d’un `luDisplayer` personnalisé.',
 	template: `
 <label class="textfield">
 	<lu-date-select class="textfield-input" [(ngModel)]="selectedDate">
@@ -120,7 +120,7 @@ export const SelectWithDisplayer = generateStory({
 
 export const SelectMonthWithDisplayer = generateStory({
 	name: 'SelectMonthWithDisplayer',
-	description: "Il est possible de modifier l'affichage de la valeur courant à l'aide d'un `luDisplayer` personnalisé.",
+	description: 'Il est possible de modifier l’affichage de la valeur courant à l’aide d’un `luDisplayer` personnalisé.',
 	template: `
 <label class="textfield">
 	<lu-date-select class="textfield-input" [(ngModel)]="selectedDate" [granularity]="granularity">

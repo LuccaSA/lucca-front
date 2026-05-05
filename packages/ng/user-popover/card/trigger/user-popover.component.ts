@@ -28,13 +28,13 @@ export class LuUserPopoverComponent {
 
 	#service = inject(LuUserPopoverStore);
 
-	intl = input(...intlInputOptions(LU_POPUP_EMPLOYEE_TRANSLATIONS));
+	readonly intl = input(...intlInputOptions(LU_POPUP_EMPLOYEE_TRANSLATIONS));
 
-	#errorImage$ = new BehaviorSubject<boolean>(false);
+	readonly #errorImage$ = new BehaviorSubject<boolean>(false);
 
 	skeletonWidths = [this.getRandomPercent(), this.getRandomPercent(), this.getRandomPercent(), this.getRandomPercent()];
 
-	public employee$: Observable<LuUserPopover> = toObservable(this.luUser).pipe(
+	public readonly employee$: Observable<LuUserPopover> = toObservable(this.luUser).pipe(
 		switchMap((user) =>
 			this.#service.get(user.id).pipe(
 				catchError(() =>
@@ -51,7 +51,7 @@ export class LuUserPopoverComponent {
 		shareReplay(1),
 	);
 
-	public userPictureDisplay$ = combineLatest([this.employee$, this.#errorImage$]).pipe(
+	public readonly userPictureDisplay$ = combineLatest([this.employee$, this.#errorImage$]).pipe(
 		map(([employee, isError]) => {
 			if (employee.pictureHref && !isError) {
 				return 'img';
@@ -61,9 +61,9 @@ export class LuUserPopoverComponent {
 		}),
 	);
 
-	public userPictureHref$ = this.employee$.pipe(map((employee) => employee.pictureHref));
+	public readonly userPictureHref$ = this.employee$.pipe(map((employee) => employee.pictureHref));
 
-	public userInitials$ = this.employee$.pipe(
+	public readonly userInitials$ = this.employee$.pipe(
 		map((employee) => {
 			const initials = `${employee.firstName[0]}${employee.lastName[0]}`;
 

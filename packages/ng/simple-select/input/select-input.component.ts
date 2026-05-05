@@ -3,7 +3,7 @@ import { AsyncPipe, NgTemplateOutlet } from '@angular/common';
 import { ChangeDetectionStrategy, Component, forwardRef, HostBinding, inject, input, viewChild, ViewContainerRef, ViewEncapsulation } from '@angular/core';
 import { ControlValueAccessor, FormsModule, NG_VALUE_ACCESSOR } from '@angular/forms';
 import { ClearComponent } from '@lucca-front/ng/clear';
-import { intlInputOptions, PortalDirective } from '@lucca-front/ng/core';
+import { intlInputOptions, isNotNil, PortalDirective } from '@lucca-front/ng/core';
 import { ALuSelectInputComponent, LU_CORE_SELECT_TRANSLATIONS, LuSelectPanelRef, provideLuSelectLabelsAndIds, ɵLuOptionOutletDirective } from '@lucca-front/ng/core-select';
 import { FILTER_PILL_INPUT_COMPONENT, FilterPillDisplayerDirective } from '@lucca-front/ng/filter-pills';
 import { InputDirective, PresentationDisplayDirective, ɵPresentationDisplayDefaultDirective } from '@lucca-front/ng/form-field';
@@ -51,16 +51,16 @@ import { LuSimpleSelectPanelRefFactory } from './panel-ref.factory';
 	encapsulation: ViewEncapsulation.None,
 })
 export class LuSimpleSelectInputComponent<T> extends ALuSelectInputComponent<T, T> implements ControlValueAccessor {
-	intl = input(...intlInputOptions(LU_CORE_SELECT_TRANSLATIONS, LU_SIMPLE_SELECT_TRANSLATIONS));
+	readonly intl = input(...intlInputOptions(LU_CORE_SELECT_TRANSLATIONS, LU_SIMPLE_SELECT_TRANSLATIONS));
 
 	@HostBinding('class.mod-filterPill')
 	public get filterPillClass() {
 		return this.filterPillMode;
 	}
 
-	autocomplete = input<AutoFill>('off');
+	readonly autocomplete = input<AutoFill>('off');
 
-	filterPillPanelAnchorRef = viewChild('filterPillPanelAnchor', { read: ViewContainerRef });
+	readonly filterPillPanelAnchorRef = viewChild('filterPillPanelAnchor', { read: ViewContainerRef });
 
 	protected panelRefFactory = inject(LuSimpleSelectPanelRefFactory);
 
@@ -78,11 +78,14 @@ export class LuSimpleSelectInputComponent<T> extends ALuSelectInputComponent<T, 
 	}
 
 	protected hasValue(): boolean {
-		return this.value !== null && this.value !== undefined;
+		return isNotNil(this.value);
 	}
 
 	override enableFilterPillMode() {
-		this._panelRef = this.panelRefFactory.buildAndAttachPanelRef(this, this.filterPillPanelAnchorRef());
+		const host = this.filterPillPanelAnchorRef();
+		if (host) {
+			this._panelRef = this.panelRefFactory.buildAndAttachPanelRef(this, host);
+		}
 		super.enableFilterPillMode();
 	}
 }

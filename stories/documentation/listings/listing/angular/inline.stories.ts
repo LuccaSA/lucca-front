@@ -60,7 +60,7 @@ export const Template: StoryObj<ListingComponent & ListingItemComponent & { type
 				type: 'select',
 			},
 			if: { arg: 'type', eq: 'icons' },
-			description: "Modifie l'icône par défaut.",
+			description: 'Modifie l’icône par défaut.',
 		},
 		icon: {
 			options: IconsList.map((i) => i.icon),
@@ -68,7 +68,7 @@ export const Template: StoryObj<ListingComponent & ListingItemComponent & { type
 				type: 'select',
 			},
 			if: { arg: 'type', eq: 'icons' },
-			description: "Modifie l'icône d'un élément de la liste.",
+			description: 'Modifie l’icône d’un élément de la liste.',
 		},
 		palette: {
 			PaletteAllArgType,

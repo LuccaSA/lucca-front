@@ -2,18 +2,18 @@
 @use '@lucca-front/scss/src/commons/utils/media';
 
 @mixin stacked($level) {
-  $selector: '';
-  $string: '~ .cdk-global-overlay-wrapper.mod-stacked';
+	$selector: '';
+	$string: '~ .cdk-global-overlay-wrapper.mod-stacked';
 
 	@for $i from 1 through $level {
-    $selector: $selector + $string;
-  }
+		$selector: $selector + $string;
+	}
 
-  &:has(#{$selector}) {
+	&:has(#{$selector}) {
 		.dialog {
 			--components-dialog-level: #{$level};
 		}
-  }
+	}
 }
 
 .cdk-global-overlay-wrapper {

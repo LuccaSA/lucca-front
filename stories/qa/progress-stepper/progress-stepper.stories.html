@@ -1,0 +1,136 @@
+<table class="demo-QAtable">
+	<tbody>
+		<tr>
+			<td></td>
+			<td style="width: 50%">
+				<div class="demo-QAtable-list">HTML</div>
+			</td>
+			<td style="width: 50%">
+				<div class="demo-QAtable-list">Angular</div>
+			</td>
+		</tr>
+		<tr>
+			<td>Default</td>
+			<td>
+				@for (step of steps; track $index) {
+					<div class="progressStepper">
+						<ol class="progressStepper-list">
+							<li class="progressStepper-list-step" [aria-current]="step === 1 ? 'step' : ''">
+								<span class="progressStepper-list-step-number" aria-hidden="true"></span>
+								<span class="progressStepper-list-step-title"
+									><span class="progressStepper-list-step-title-content">Lorem ipsum 1</span></span
+								>
+							</li>
+							<li class="progressStepper-list-step" [aria-current]="step === 2 ? 'step' : ''">
+								<span class="progressStepper-list-step-number" aria-hidden="true"></span>
+								<span class="progressStepper-list-step-title"
+									><span class="progressStepper-list-step-title-content">Lorem ipsum 2</span></span
+								>
+							</li>
+							<li class="progressStepper-list-step" [aria-current]="step === 3 ? 'step' : ''">
+								<span class="progressStepper-list-step-number" aria-hidden="true"></span>
+								<span class="progressStepper-list-step-title"
+									><span class="progressStepper-list-step-title-content">Lorem ipsum 3</span></span
+								>
+							</li>
+						</ol>
+					</div>
+				}
+			</td>
+			<td>
+				@for (step of steps; track $index) {
+					<lu-progress-stepper steps="3" [current]="step">
+						<lu-progress-stepper-step label="Lorem ipsum 1" />
+						<lu-progress-stepper-step label="Lorem ipsum 2" />
+						<lu-progress-stepper-step label="Lorem ipsum 3" />
+					</lu-progress-stepper>
+				}
+			</td>
+		</tr>
+		<tr>
+			<td>State</td>
+			<td>
+				@for (step of steps; track $index) {
+					<div class="progressStepper">
+						<ol class="progressStepper-list">
+							<li class="progressStepper-list-step is-success" [aria-current]="step === 1 ? 'step' : ''">
+								<span class="progressStepper-list-step-number" aria-hidden="true"></span>
+								<span class="progressStepper-list-step-title"
+									><span class="progressStepper-list-step-title-content">Lorem ipsum 1</span></span
+								>
+							</li>
+							<li class="progressStepper-list-step" [aria-current]="step === 2 ? 'step' : ''">
+								<span class="progressStepper-list-step-number" aria-hidden="true"></span>
+								<span class="progressStepper-list-step-title"
+									><span class="progressStepper-list-step-title-content">Lorem ipsum 2</span></span
+								>
+							</li>
+							<li class="progressStepper-list-step is-critical" [aria-current]="step === 3 ? 'step' : ''">
+								<span class="progressStepper-list-step-number" aria-hidden="true"></span>
+								<span class="progressStepper-list-step-title"
+									><span class="progressStepper-list-step-title-content">Lorem ipsum 3</span></span
+								>
+							</li>
+						</ol>
+					</div>
+				}
+			</td>
+			<td>
+				@for (step of steps; track $index) {
+					<lu-progress-stepper steps="3" [current]="step">
+						<lu-progress-stepper-step label="Lorem ipsum 1" state="success" />
+						<lu-progress-stepper-step label="Lorem ipsum 2" />
+						<lu-progress-stepper-step label="Lorem ipsum 3" state="critical" />
+					</lu-progress-stepper>
+				}
+			</td>
+		</tr>
+		<tr>
+			<td>Link</td>
+			<td>
+				@for (step of steps; track $index) {
+					<div class="progressStepper">
+						<ol class="progressStepper-list">
+							<li class="progressStepper-list-step" [aria-current]="step === 1 ? 'step' : ''">
+								<a href="#" class="progressStepper-list-step-linkOptional">
+									<span class="progressStepper-list-step-number" aria-hidden="true"></span>
+									<span class="progressStepper-list-step-title"
+										><span class="progressStepper-list-step-title-content">Lorem ipsum 1</span></span
+									>
+								</a>
+							</li>
+							<li class="progressStepper-list-step" [aria-current]="step === 2 ? 'step' : ''">
+								<a href="#" class="progressStepper-list-step-linkOptional">
+									<span class="progressStepper-list-step-number" aria-hidden="true"></span>
+									<span class="progressStepper-list-step-title"
+										><span class="progressStepper-list-step-title-content">Lorem ipsum 2</span></span
+									>
+								</a>
+							</li>
+							<li class="progressStepper-list-step" [aria-current]="step === 3 ? 'step' : ''">
+								<a href="#" class="progressStepper-list-step-linkOptional">
+									<span class="progressStepper-list-step-number" aria-hidden="true"></span>
+									<span class="progressStepper-list-step-title"
+										><span class="progressStepper-list-step-title-content">Lorem ipsum 3</span></span
+									>
+								</a>
+							</li>
+						</ol>
+					</div>
+				}
+			</td>
+			<td>
+				@for (step of steps; track $index) {
+					<lu-progress-stepper steps="3" [current]="step">
+						<lu-progress-stepper-step label="Lorem ipsum 1" routerLinkParam="#" />
+						<lu-progress-stepper-step label="Lorem ipsum 2" routerLinkParam="#" />
+						<lu-progress-stepper-step label="Lorem ipsum 3" routerLinkParam="#" />
+					</lu-progress-stepper>
+				}
+			</td>
+		</tr>
+	</tbody>
+</table>
+
+<!-- To tell the ui-diff tool that the page has finished rendering -->
+<span id="ready"></span>

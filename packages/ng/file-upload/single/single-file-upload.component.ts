@@ -2,7 +2,6 @@ import { booleanAttribute, ChangeDetectionStrategy, Component, input, output, Vi
 import { BubbleIllustrationComponent } from '@lucca-front/ng/bubble-illustration';
 import { IntlParamsPipe } from '@lucca-front/ng/core';
 import { InputDirective } from '@lucca-front/ng/form-field';
-import { LuTooltipModule } from '@lucca-front/ng/tooltip';
 import { BaseFileUploadComponent } from '../base-file-upload/base-file-upload.component';
 import { FileEntryComponent } from '../file-entry/file-entry.component';
 import { FileEntry } from '../file-upload-entry';
@@ -12,7 +11,7 @@ import { FileEntry } from '../file-upload-entry';
 	templateUrl: './single-file-upload.component.html',
 	styleUrl: './single-file-upload.component.scss',
 	encapsulation: ViewEncapsulation.None,
-	imports: [InputDirective, LuTooltipModule, FileEntryComponent, IntlParamsPipe, BubbleIllustrationComponent],
+	imports: [InputDirective, FileEntryComponent, IntlParamsPipe, BubbleIllustrationComponent],
 	changeDetection: ChangeDetectionStrategy.OnPush,
 })
 export class SingleFileUploadComponent extends BaseFileUploadComponent {

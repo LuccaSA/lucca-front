@@ -34,19 +34,19 @@ export default {
 			control: {
 				type: 'select',
 			},
-			description: "Modifie l'état de l'inline message.",
+			description: 'Modifie l’état de l’inline message.',
 		},
 		label: {
 			description: 'Modifie le label de l’input.',
 		},
 		hiddenLabel: {
-			description: "Masque le label en le conservant dans le DOM pour les lecteurs d'écrans",
+			description: 'Masque le label en le conservant dans le DOM pour les lecteurs d’écran',
 		},
 		required: {
 			description: 'Marque le champ comme obligatoire.',
 		},
 		hasClearer: {
-			description: "Affiche un bouton pour vider le champ lorsque celui-ci est rempli. Il est alors conseillé de masquer les boutons d'incrémentation (noSpinButtons).",
+			description: 'Affiche un bouton pour vider le champ lorsque celui-ci est rempli. Il est alors conseillé de masquer les boutons d’incrémentation (noSpinButtons).',
 		},
 		disabled: {
 			description: 'Désactive le champ.',
@@ -55,7 +55,7 @@ export default {
 			description: 'Modifie le placeholder au champ.',
 		},
 		step: {
-			description: "Modifie le pas d'incrémentation.",
+			description: 'Modifie le pas d’incrémentation.',
 		},
 		min: {
 			description: 'Définit une valeur minimale.',
@@ -67,7 +67,7 @@ export default {
 			description: 'Aligne la valeur du champ à droite.',
 		},
 		noSpinButtons: {
-			description: "Masque les boutons d'incrémentation.",
+			description: 'Masque les boutons d’incrémentation.',
 		},
 	},
 } as Meta;

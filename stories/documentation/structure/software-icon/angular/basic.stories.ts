@@ -10,7 +10,7 @@ export default {
 			control: {
 				type: 'select',
 			},
-			description: "Modifie l'icône produit.",
+			description: 'Modifie l’icône produit.',
 		},
 		size: {
 			options: ['XXS', 'XS', 'S', '', 'L'],

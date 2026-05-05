@@ -41,7 +41,7 @@
 
 			&.mod-start {
 				--components-dateRangeField-content-width: calc(50% - var(--pr-t-spacings-300) - var(--pr-t-spacings-50));
-				--components-dateRangeField-content-inlineEnd: calc(var(--pr-t-spacings-200) + var(--pr-t-spacings-50));
+				--components-dateRangeField-content-inlineEnd: var(--pr-t-spacings-250);
 			}
 		}
 

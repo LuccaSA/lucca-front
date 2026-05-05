@@ -1,5 +1,5 @@
 @mixin autoResize {
-	--components-richTextField-minHeight: 3lh;
-	--components-richTextField-height: auto;
-	--components-richTextField-resize: none;
+	--components-richTextField-content-minHeight: calc(3lh + var(--pr-t-spacings-200));
+	--components-richTextField-content-height: auto;
+	--components-richTextField-content-resize: none;
 }

@@ -41,7 +41,7 @@ export default {
 			control: {
 				type: 'select',
 			},
-			description: "Change l'alignement horizontal d'une cellule",
+			description: 'Change l’alignement horizontal d’une cellule',
 		},
 		borderless: {
 			control: {

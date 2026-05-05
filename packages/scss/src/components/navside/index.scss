@@ -34,6 +34,7 @@
 						@include compactHover;
 					}
 
+					// .active is deprecated
 					&:is(.is-active, .active) {
 						@include compactActive;
 					}
@@ -93,6 +94,7 @@
 					@include sublinkHover;
 				}
 
+				// .active is deprecated
 				&:is(.is-active, .active) {
 					@include sublinkActive;
 				}
@@ -102,6 +104,7 @@
 
 	.navSide-item-subMenu-link,
 	.navSide-item-link {
+		// .active is deprecated
 		&:is(.is-active, .active) {
 			@include active;
 		}

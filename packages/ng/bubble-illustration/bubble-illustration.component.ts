@@ -19,7 +19,7 @@ export class BubbleIllustrationComponent {
 	readonly illustration = input.required<BubbleIllustration | string>();
 
 	readonly palette = input<Palette | DecorativePalette>('product');
-	readonly size = input<'S' | 'L' | ''>('');
+	readonly size = input<'S' | 'M' | 'L'>('M');
 	readonly action = input(false, { transform: booleanAttribute });
 
 	readonly illustrationUrl = computed(() => {

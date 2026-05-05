@@ -20,15 +20,15 @@ import { LuMultiSelectContentDisplayerComponent } from './content-displayer/cont
 	hostDirectives: [InputDirective],
 })
 export class LuMultiSelectDisplayerInputDirective<T> implements OnInit {
-	select = inject<LuMultiSelectInputComponent<T>>(LuMultiSelectInputComponent);
+	readonly select = inject<LuMultiSelectInputComponent<T>>(LuMultiSelectInputComponent);
 	readonly selectAllContext = inject(MULTI_SELECT_WITH_SELECT_ALL_CONTEXT, { optional: true });
-	contentDisplayer = inject(LuMultiSelectContentDisplayerComponent, { optional: true });
+	readonly contentDisplayer = inject(LuMultiSelectContentDisplayerComponent, { optional: true });
 
-	context = inject<ILuOptionContext<T[]>>(LU_OPTION_CONTEXT);
+	readonly context = inject<ILuOptionContext<T[]>>(LU_OPTION_CONTEXT);
 
-	elementRef = inject<ElementRef<HTMLInputElement>>(ElementRef);
+	readonly elementRef = inject<ElementRef<HTMLInputElement>>(ElementRef);
 
-	destroyRef = inject(DestroyRef);
+	readonly destroyRef = inject(DestroyRef);
 
 	@HostBinding('attr.aria-expanded')
 	get panelOpen() {
@@ -65,10 +65,10 @@ export class LuMultiSelectDisplayerInputDirective<T> implements OnInit {
 		this.select.clueChanged(this.elementRef.nativeElement.value);
 	}
 
-	#panelOpen = toSignal(this.select.isPanelOpen$);
-	#activeDescendant = toSignal(this.select.activeDescendant$);
-	#disabled = toSignal(this.select.disabled$);
-	#placeholder = toSignal(
+	readonly #panelOpen = toSignal(this.select.isPanelOpen$);
+	readonly #activeDescendant = toSignal(this.select.activeDescendant$);
+	readonly #disabled = toSignal(this.select.disabled$);
+	readonly #placeholder = toSignal(
 		this.context.option$.pipe(
 			startWith([]),
 			switchMap((options) => {

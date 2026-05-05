@@ -14,13 +14,13 @@ import { LU_RICH_TEXT_INPUT_TRANSLATIONS } from '../../../rich-text-input.transl
 	imports: [DialogComponent, DialogContentComponent, DialogFooterComponent, FormFieldComponent, TextInputComponent, ReactiveFormsModule, ButtonComponent, DialogDismissDirective],
 })
 export class LinkDialogComponent {
-	public readonly dialogData = injectDialogData<string>();
+	public readonly dialogData = injectDialogData<{ url: string; canDelete: boolean }>();
 	public readonly dialogRef = injectDialogRef<string | undefined>();
 
-	intl = input(...intlInputOptions(LU_RICH_TEXT_INPUT_TRANSLATIONS));
+	readonly intl = input(...intlInputOptions(LU_RICH_TEXT_INPUT_TRANSLATIONS));
 
 	public readonly formGroup = new FormGroup({
-		href: new FormControl<string>(this.dialogData, Validators.required),
+		href: new FormControl<string>(this.dialogData.url, Validators.required),
 	});
 
 	public save() {
@@ -29,7 +29,8 @@ export class LinkDialogComponent {
 			return;
 		}
 
-		this.dialogRef.close(encodeURI(this.formGroup.controls.href.value.trim()));
+		const hrefValue = this.formGroup.controls.href.value;
+		this.dialogRef.close(hrefValue ? encodeURI(hrefValue.trim()) : hrefValue);
 	}
 
 	public deleteLink() {

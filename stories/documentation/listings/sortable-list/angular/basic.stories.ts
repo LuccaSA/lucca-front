@@ -17,13 +17,13 @@ export default {
 			control: {
 				type: 'text',
 			},
-			description: "Modifie le texte principal d'un élément de liste.",
+			description: 'Modifie le texte principal d’un élément de liste.',
 		},
 		helperMessage: {
 			control: {
 				type: 'text',
 			},
-			description: "Ajoute un texte secondaire à l'élément de liste.",
+			description: 'Ajoute un texte secondaire à l’élément de liste.',
 		},
 		small: {
 			control: 'boolean',

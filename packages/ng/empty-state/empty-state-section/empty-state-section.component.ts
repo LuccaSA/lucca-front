@@ -48,14 +48,15 @@ export class EmptyStateSectionComponent {
 	readonly action = input(false, { transform: booleanAttribute });
 
 	readonly iconOrIllustration = computed(() => {
-		if (this.icon()) {
-			if (this.icon()?.includes('Success')) {
+		const icon = this.icon();
+		if (icon) {
+			if (icon.includes('Success')) {
 				return 'thumbUp';
 			}
-			if (this.icon()?.includes('Error')) {
+			if (icon.includes('Error')) {
 				return 'error';
 			}
-			const iconName = this.icon()?.split('/').pop()?.replace('.svg', '').replace('ActionError', '').replace('ActionSuccess', '').replace('Action', '').replace('icon', '');
+			const iconName = icon.split('/').pop()?.replace('.svg', '').replace('ActionError', '').replace('ActionSuccess', '').replace('Action', '').replace('icon', '') ?? '';
 
 			return ICON_TO_ILLUSTRATION[iconName];
 		}
@@ -87,4 +88,8 @@ export class EmptyStateSectionComponent {
 	readonly hx = input(3, { transform: numberAttribute as (value: Hx | `${Hx}`) => Hx });
 
 	readonly emptyStateClasses = computed(() => ({ [`palette-${this.palette()}`]: !!this.palette() }));
+
+	public isStringPortalContent(message: PortalContent): message is string {
+		return typeof message === 'string';
+	}
 }

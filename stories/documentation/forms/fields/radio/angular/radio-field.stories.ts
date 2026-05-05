@@ -3,7 +3,7 @@ import { BrowserAnimationsModule } from '@angular/platform-browser/animations';
 import { FormFieldComponent } from '@lucca-front/ng/form-field';
 import { RadioComponent, RadioGroupInputComponent } from '@lucca-front/ng/forms';
 import { Meta, StoryObj, moduleMetadata } from '@storybook/angular';
-import { cleanupTemplate, generateInputs } from 'stories/helpers/stories';
+import { generateInputs } from 'stories/helpers/stories';
 import { StoryModelDisplayComponent } from 'stories/helpers/story-model-display.component';
 
 export default {
@@ -26,10 +26,10 @@ export default {
 			control: {
 				type: 'select',
 			},
-			description: "Modifie l'état de l'inline message.",
+			description: 'Modifie l’état de l’inline message.',
 		},
 		hiddenLabel: {
-			description: "Masque le label en le conservant dans le DOM pour les lecteurs d'écrans",
+			description: 'Masque le label en le conservant dans le DOM pour les lecteurs d’écran',
 		},
 		tooltip: {
 			if: { arg: 'hiddenLabel', truthy: false },
@@ -39,7 +39,7 @@ export default {
 			control: {
 				type: 'text',
 			},
-			description: "Modifie le label de l'input.",
+			description: 'Modifie le label de l’input.',
 		},
 		required: {
 			control: {
@@ -69,7 +69,7 @@ export const Basic: StoryObj<RadioGroupInputComponent & FormFieldComponent & { r
 			props: {
 				example: 1,
 			},
-			template: cleanupTemplate(`<lu-form-field ${generateInputs(
+			template: `<lu-form-field${generateInputs(
 				{
 					label,
 					hiddenLabel,
@@ -82,15 +82,15 @@ export const Basic: StoryObj<RadioGroupInputComponent & FormFieldComponent & { r
 				},
 				argTypes,
 			)}>
-	<lu-radio-group-input ${generateInputs(inputArgs, argTypes)}
-	[(ngModel)]="example">
+	<lu-radio-group-input${generateInputs(inputArgs, argTypes)} [(ngModel)]="example">
 		<lu-radio [value]="1" inlineMessage="Option text">Option A</lu-radio>
 		<lu-radio [value]="2" inlineMessage="Option text">Option B</lu-radio>
+		<ng-template #template><strong>Option</strong> text</ng-template>
 		<lu-radio [value]="3" [inlineMessage]="template" disabled>Option C</lu-radio>
 	</lu-radio-group-input>
 </lu-form-field>
-<ng-template #template><strong>Option</strong> text</ng-template>
-<pr-story-model-display>{{ example }}</pr-story-model-display>`),
+
+<pr-story-model-display>{{ example }}</pr-story-model-display>`,
 		};
 	},
 	args: {

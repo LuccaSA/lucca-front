@@ -25,7 +25,7 @@ export default {
 		},
 		withAction: {
 			if: { arg: 'expandable', eq: false },
-			description: "Ajoute un bouton d'action à droite du titre.",
+			description: 'Ajoute un bouton d’action à droite du titre.',
 		},
 		expanded: {
 			control: {

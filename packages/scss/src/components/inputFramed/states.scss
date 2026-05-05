@@ -1,10 +1,9 @@
-
 @mixin hover {
 	--components-inputFramed-borderColor: var(--pr-t-color-input-border-hover);
 }
 
 @mixin disabled {
-	--components-inputFramed-header-backgroundColor: var(--palettes-neutral-25);
+
 	--components-inputFramed-header-borderColor: var(--palettes-neutral-50);
 	--components-inputFramed-borderColor: var(--palettes-neutral-300);
 	--components-inputFramed-header-info-color: var(--pr-t-color-input-text-disabled);
@@ -19,6 +18,10 @@
 
 @mixin checkedHover {
 	--components-inputFramed-borderColor: var(--pr-t-color-input-border-checked-hover);
+}
+
+@mixin disabledChecked {
+	--components-inputFramed-header-backgroundColor: var(--palettes-neutral-25);
 }
 
 @mixin critical {

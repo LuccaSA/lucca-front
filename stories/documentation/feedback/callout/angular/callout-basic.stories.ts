@@ -58,7 +58,7 @@ export default {
 			description: 'Ajoute une icône au callout.',
 		},
 		iconAlt: {
-			description: "Information de l'icône restituée par le lecteur d'écran.",
+			description: 'Information de l’icône restituée par le lecteur d’écran.',
 			type: 'string',
 		},
 		state: {
@@ -84,7 +84,7 @@ export default {
 			control: {
 				type: 'select',
 			},
-			description: '[v21.4] Optional',
+			description: '[v21.4] Applique un niveau sémantique au titre.',
 			if: { arg: 'heading', truthy: true },
 		},
 		removedChange: HiddenArgType,
@@ -95,7 +95,7 @@ export default {
 			},
 		},
 		actions: {
-			description: "[v20.3] Ajoute une liste d'actions sous la description.",
+			description: '[v20.3] Ajoute une liste d’actions sous la description.',
 		},
 		actionsInline: {
 			if: { arg: 'actions', truthy: true },

@@ -1,6 +1,6 @@
+import { LOCALE_ID } from '@angular/core';
 import { applicationConfig, Args, ArgTypes, StoryObj } from '@storybook/angular';
 import { PlayFunction, Renderer } from 'storybook/internal/types';
-import { LOCALE_ID } from '@angular/core';
 
 export interface StoryGeneratorArgs<TComponent> {
 	name: string;
@@ -13,6 +13,10 @@ export interface StoryGeneratorArgs<TComponent> {
 }
 
 export type StoryGenerator<TComponent> = (args: StoryGeneratorArgs<TComponent>) => StoryObj<TComponent>;
+
+export function setStoryOptions<T extends string>(list: readonly T[]): Array<T | ''> {
+	return ['', ...list];
+}
 
 export function generateMarkdownCodeBlock(lang: string, code: string): string {
 	return `
@@ -98,7 +102,7 @@ export function generateInputs(inputs: Record<string, unknown>, argTypes: ArgTyp
 		}
 
 		const defaultValue: unknown = argType['table']?.defaultValue?.summary;
-		if (value === defaultValue || value === null || value === undefined) {
+		if (value === defaultValue || value === null || value === undefined || (typeof value === 'string' && !value.length)) {
 			return acc;
 		}
 		// Let's treat boolean inputs as booleanAttributes for stories

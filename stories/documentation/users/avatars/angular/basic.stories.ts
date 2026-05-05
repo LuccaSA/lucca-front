@@ -38,7 +38,7 @@ export default {
 	},
 	argTypes: {
 		user: {
-			description: "[Story] Affiche la photo de l'utilisateur ou ses initiales.",
+			description: '[Story] Affiche la photo de l’utilisateur ou ses initiales.',
 			options: ['Avec image', 'Avec image erronée', 'Sans image'],
 			mapping: {
 				'Avec image': bob,
@@ -47,17 +47,17 @@ export default {
 			},
 		},
 		sizes: {
-			description: "Taille de l'avatar.",
+			description: 'Taille de l’avatar.',
 			options: ['XS', 'S', '', 'L', 'XL', 'XXL', 'XXXL'],
 			control: {
 				type: 'select',
 			},
 		},
 		displayFormat: {
-			description: "Format d'affichage des initiales. F pour prénom (firstname) L pour nom (lastname).",
+			description: 'Format d’affichage des initiales. F pour prénom (firstname) L pour nom (lastname).',
 		},
 		placeholder: {
-			description: "Applique un placeholder d'avatar.",
+			description: 'Applique un placeholder d’avatar.',
 			control: {
 				type: 'boolean',
 			},

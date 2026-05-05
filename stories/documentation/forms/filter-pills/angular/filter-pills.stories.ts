@@ -50,14 +50,14 @@ export default {
 			description: 'Modifie le label du filtre.',
 		},
 		filterPillLabelPlural: {
-			description: "Dans le cas d'un multi select, permet de définir le label lorsque plusieurs éléments sont sélectionnés.",
+			description: 'Dans le cas d’un multi select, permet de définir le label lorsque plusieurs éléments sont sélectionnés.',
 		},
 		optional: {
 			description:
-				"Rend disponible le filtre via le bouton d'ajout de filtre. Celui-ci est désactivé par défaut. Lorsque qu'un filtre est optionnel, celui-ci doit obligatoirement porter un attribut `name`. (Voir Filter bar)",
+				'Rend disponible le filtre via le bouton d’ajout de filtre. Celui-ci est désactivé par défaut. Lorsque qu’un filtre est optionnel, celui-ci doit obligatoirement porter un attribut `name`. (Voir Filter bar)',
 		},
 		name: {
-			description: "Dans le cas d'un filtre optionnel, permet de faire le lien entre la liste de filtres disponible et l'affichage du filtre.",
+			description: 'Dans le cas d’un filtre optionnel, permet de faire le lien entre la liste de filtres disponible et l’affichage du filtre.',
 		},
 		disabled: {
 			description: 'Désactive le filtre.',

@@ -1,21 +1,22 @@
 <table class="demo-QAtable">
 	<tbody>
 		<tr>
-			<td></td>
-			<td style="width: 50%">
-				<div class="demo-QAtable-list">HTML</div>
-			</td>
-			<td style="width: 50%">
-				<div class="demo-QAtable-list">Angular</div>
+			<td>Default HTML</td>
+			<td style="width: 100%">
+				<div class="container">
+					<div class="fakeContent">container</div>
+				</div>
+				<div class="container">
+					<div class="fakeContent">container</div>
+				</div>
+				<div class="container">
+					<span>Container with </span>
+					<span>multiple children</span>
+				</div>
 			</td>
 		</tr>
 		<tr>
-			<td>Default</td>
-			<td>
-				<div class="container fakeContent">container</div>
-				<div class="container fakeContent">container</div>
-				<div class="container fakeContent">container</div>
-			</td>
+			<td>Default Angular</td>
 			<td>
 				<lu-container>
 					<div class="fakeContent">container</div>
@@ -24,51 +25,70 @@
 					<div class="fakeContent">container</div>
 				</lu-container>
 				<lu-container>
-					<div class="fakeContent">container</div>
+					<span>Container with </span>
+					<span>multiple children</span>
 				</lu-container>
 			</td>
 		</tr>
 		<tr>
-			<td>Center</td>
+			<td>Center HTML</td>
 			<td>
-				<div class="container fakeContent mod-center">container</div>
-				<div class="container fakeContent mod-center">container</div>
-				<div class="container fakeContent mod-center">container</div>
+				<div class="container mod-center"><div class="fakeContent">Centered container</div></div>
+				<div class="container mod-center"><div class="fakeContent">Centered container</div></div>
+				<div class="container mod-center"><div class="fakeContent">Centered container</div></div>
 			</td>
+		</tr>
+		<tr>
+			<td>Center Angular</td>
 			<td>
 				<lu-container center>
-					<div class="fakeContent">container</div>
+					<div class="fakeContent">Centered container</div>
 				</lu-container>
 				<lu-container center>
-					<div class="fakeContent">container</div>
+					<div class="fakeContent">Centered container</div>
 				</lu-container>
 				<lu-container center>
-					<div class="fakeContent">container</div>
+					<div class="fakeContent">Centered container</div>
 				</lu-container>
 			</td>
 		</tr>
 		<tr>
-			<td>Size</td>
+			<td>Size HTML</td>
 			<td>
-				<div class="container fakeContent mod-S">container</div>
-				<div class="container fakeContent mod-S">container</div>
-				<div class="container fakeContent mod-S">container</div>
+				<div class="container mod-maxM">
+					<div class="fakeContent">Max M</div>
+				</div>
+				<div class="container mod-maxL">
+					<div class="fakeContent">Max L</div>
+				</div>
+				<div class="container mod-maxXL">
+					<div class="fakeContent">Max XL</div>
+				</div>
+				<div class="container mod-maxXXL">
+					<div class="fakeContent">Max XXL</div>
+				</div>
+				<div class="container mod-maxXXXL">
+					<div class="fakeContent">Max XXXL</div>
+				</div>
 			</td>
+		</tr>
+		<tr>
+			<td>Size Angular</td>
 			<td>
 				<lu-container max="M">
-					<div class="fakeContent">container</div>
+					<div class="fakeContent">Max M</div>
 				</lu-container>
 				<lu-container max="L">
-					<div class="fakeContent">container</div>
+					<div class="fakeContent">Max L</div>
 				</lu-container>
 				<lu-container max="XL">
-					<div class="fakeContent">container</div>
+					<div class="fakeContent">Max XL</div>
 				</lu-container>
 				<lu-container max="XXL">
-					<div class="fakeContent">container</div>
+					<div class="fakeContent">Max XXL</div>
 				</lu-container>
 				<lu-container max="XXXL">
-					<div class="fakeContent">container</div>
+					<div class="fakeContent">Max XXXL</div>
 				</lu-container>
 			</td>
 		</tr>

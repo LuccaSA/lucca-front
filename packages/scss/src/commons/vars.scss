@@ -22,16 +22,16 @@
 	@include core.cssvars('pr-t-font-fontWeight', config.$fontWeights);
 	@include core.cssvars('pr-t-font', config.$fontTokens);
 
-	--pr-t-font-heading-1: var(--pr-t-font-heading-1-fontWeight) var(--pr-t-font-heading-1-fontSize)/var(--pr-t-font-heading-1-lineHeight) var(--pr-t-font-family-brand);
-	--pr-t-font-heading-2: var(--pr-t-font-heading-2-fontWeight) var(--pr-t-font-heading-2-fontSize)/var(--pr-t-font-heading-2-lineHeight) var(--pr-t-font-family-brand);
-	--pr-t-font-heading-3: var(--pr-t-font-heading-3-fontWeight) var(--pr-t-font-heading-3-fontSize)/var(--pr-t-font-heading-3-lineHeight) var(--pr-t-font-family);
-	--pr-t-font-heading-4: var(--pr-t-font-heading-4-fontWeight) var(--pr-t-font-heading-4-fontSize)/var(--pr-t-font-heading-4-lineHeight) var(--pr-t-font-family);
-	--pr-t-font-highlight-XXL: var(--pr-t-font-highlight-XXL-fontWeight) var(--pr-t-font-highlight-XXL-fontSize)/var(--pr-t-font-highlight-XXL-lineHeight) var(--pr-t-font-family-brand);
-	--pr-t-font-highlight-XL: var(--pr-t-font-highlight-XL-fontWeight) var(--pr-t-font-highlight-XL-fontSize)/var(--pr-t-font-highlight-XL-lineHeight) var(--pr-t-font-family-brand);
-	--pr-t-font-highlight-L: var(--pr-t-font-highlight-L-fontWeight) var(--pr-t-font-highlight-L-fontSize)/var(--pr-t-font-highlight-L-lineHeight) var(--pr-t-font-family-brand);
-	--pr-t-font-body-M: var(--pr-t-font-body-M-fontSize)/var(--pr-t-font-body-M-lineHeight) var(--pr-t-font-family);
-	--pr-t-font-body-S: var(--pr-t-font-body-S-fontSize)/var(--pr-t-font-body-S-lineHeight) var(--pr-t-font-family);
-	--pr-t-font-body-XS: var(--pr-t-font-body-XS-fontSize)/var(--pr-t-font-body-XS-lineHeight) var(--pr-t-font-family);
+	--pr-t-font-heading-1: var(--pr-t-font-heading-1-fontWeight) var(--pr-t-font-heading-1-fontSize) / var(--pr-t-font-heading-1-lineHeight) var(--pr-t-font-family-brand);
+	--pr-t-font-heading-2: var(--pr-t-font-heading-2-fontWeight) var(--pr-t-font-heading-2-fontSize) / var(--pr-t-font-heading-2-lineHeight) var(--pr-t-font-family-brand);
+	--pr-t-font-heading-3: var(--pr-t-font-heading-3-fontWeight) var(--pr-t-font-heading-3-fontSize) / var(--pr-t-font-heading-3-lineHeight) var(--pr-t-font-family);
+	--pr-t-font-heading-4: var(--pr-t-font-heading-4-fontWeight) var(--pr-t-font-heading-4-fontSize) / var(--pr-t-font-heading-4-lineHeight) var(--pr-t-font-family);
+	--pr-t-font-highlight-XXL: var(--pr-t-font-highlight-XXL-fontWeight) var(--pr-t-font-highlight-XXL-fontSize) / var(--pr-t-font-highlight-XXL-lineHeight) var(--pr-t-font-family-brand);
+	--pr-t-font-highlight-XL: var(--pr-t-font-highlight-XL-fontWeight) var(--pr-t-font-highlight-XL-fontSize) / var(--pr-t-font-highlight-XL-lineHeight) var(--pr-t-font-family-brand);
+	--pr-t-font-highlight-L: var(--pr-t-font-highlight-L-fontWeight) var(--pr-t-font-highlight-L-fontSize) / var(--pr-t-font-highlight-L-lineHeight) var(--pr-t-font-family-brand);
+	--pr-t-font-body-M: var(--pr-t-font-body-M-fontSize) / var(--pr-t-font-body-M-lineHeight) var(--pr-t-font-family);
+	--pr-t-font-body-S: var(--pr-t-font-body-S-fontSize) / var(--pr-t-font-body-S-lineHeight) var(--pr-t-font-family);
+	--pr-t-font-body-XS: var(--pr-t-font-body-XS-fontSize) / var(--pr-t-font-body-XS-lineHeight) var(--pr-t-font-family);
 
 	// TOKENS : RADIUS
 
@@ -68,6 +68,17 @@
 		@include core.cssvars('palettes-#{$palette}', map.get(config.$palettesInterpolation, $palette));
 	}
 
+	// stylelint-disable custom-property-pattern
+	--palettes-assets-primary-lighter: var(--palettes-#{config.$product}-50);
+	--palettes-assets-primary-light: var(--palettes-#{config.$product}-100);
+	--palettes-assets-primary-dark: var(--palettes-#{config.$product}-200);
+	--palettes-assets-brand-lighter: var(--palettes-#{map.get(map.get(config.$palettesAssets, config.$product), 'brand')}-50);
+	--palettes-assets-brand-light: var(--palettes-#{map.get(map.get(config.$palettesAssets, config.$product), 'brand')}-100);
+	--palettes-assets-brand-dark: var(--palettes-#{map.get(map.get(config.$palettesAssets, config.$product), 'brand')}-200);
+	--palettes-assets-secondary-lighter: var(--palettes-#{map.get(map.get(config.$palettesAssets, config.$product), 'secondary')}-50);
+	--palettes-assets-secondary-light: var(--palettes-#{map.get(map.get(config.$palettesAssets, config.$product), 'secondary')}-100);
+	// stylelint-enable custom-property-pattern
+
 	@include core.cssvars('colors', config.$colors, '-color');
 	@include core.cssvars('colors', config.$colorsRgb, '-rgb');
 
@@ -77,6 +88,7 @@
 	--commons-divider-border: var(--commons-divider-width) var(--commons-divider-style) var(--commons-divider-color);
 	--commons-border-100: var(--palettes-neutral-100);
 	--commons-border-200: var(--palettes-neutral-200);
+	--commons-pushPanel-inlineSize: 0px;
 
 	// Deprecated
 	--commons-font-family: '#{config.$fontFamily}', Tahoma, sans-serif;

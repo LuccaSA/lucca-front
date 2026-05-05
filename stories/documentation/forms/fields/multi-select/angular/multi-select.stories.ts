@@ -53,10 +53,10 @@ export default {
 			control: {
 				type: 'select',
 			},
-			description: "Modifie l'état de l'inline message.",
+			description: 'Modifie l’état de l’inline message.',
 		},
 		hiddenLabel: {
-			description: "Masque le label en le conservant dans le DOM pour les lecteurs d'écrans",
+			description: 'Masque le label en le conservant dans le DOM pour les lecteurs d’écran',
 		},
 		clearable: {
 			description: 'Affiche un bouton pour vider le champ lorsque celui-ci est rempli.',
@@ -65,7 +65,7 @@ export default {
 			description: 'Permet de poursuivre la recherche après une sélection',
 		},
 		loading: {
-			description: "Applique l'état de chargement.",
+			description: 'Applique l’état de chargement.',
 		},
 		presentation: {
 			description: '[v21.1] Transforme le champ de formulaire en donnée textuelle non éditable.',

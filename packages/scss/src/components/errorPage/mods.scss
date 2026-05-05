@@ -18,6 +18,14 @@
 	}
 }
 
+@mixin narrow {
+	.errorPage-section-image {
+		inline-size: auto;
+		max-inline-size: 100%;
+		min-inline-size: 0;
+	}
+}
+
 @mixin inAppLayout {
 	&,
 	.errorPage-section {

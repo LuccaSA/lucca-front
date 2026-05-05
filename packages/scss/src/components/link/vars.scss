@@ -1,2 +1,8 @@
 @mixin vars {
+	--components-link-textDecoration: underline;
+	--components-link-text-textDecoration: underline;
+	--components-link-color: var(--commons-text-link-color);
+	--components-link-color-hover: var(--commons-text-link-hover);
+	--components-link-cursor: pointer;
+	--components-link-icon-marginInlineStart: 0;
 }

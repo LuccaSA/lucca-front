@@ -1,3 +1,4 @@
+@use '@lucca-front/scss/src/commons/utils/media';
 @use 'exports' as *;
 
 .emptyState {
@@ -9,6 +10,14 @@
 	@layer mods {
 		&.mod-page {
 			@include page;
+
+			@include media.max('XXS') {
+				@include headingStyleH(2);
+			}
+		}
+
+		&.mod-headingStyleH2 {
+			@include headingStyleH(2);
 		}
 
 		&.mod-center {
@@ -23,6 +32,20 @@
 
 		.container & {
 			@include insideContainer;
+		}
+
+		&:has(.emptyState-illustration:not(:empty)) {
+			@include hasIllustration;
+
+			@include media.max('S') {
+				@include hasIllustrationNarrow;
+			}
+		}
+
+		&:has(.emptyState-illustration-img) {
+			@include media.max('S') {
+				@include hasIllustrationImgNarrow;
+			}
 		}
 	}
 }

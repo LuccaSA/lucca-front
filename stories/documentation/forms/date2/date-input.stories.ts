@@ -36,7 +36,7 @@ export default {
 		},
 		clearable: {
 			control: 'boolean',
-			description: "Ajoute un bouton de suppression lorsqu'une date est sélectionnée.",
+			description: 'Ajoute un bouton de suppression lorsqu’une date est sélectionnée.',
 		},
 		clearBehavior: {
 			control: 'select',
@@ -51,11 +51,11 @@ export default {
 		mode: {
 			control: 'select',
 			options: ['day', 'month', 'year'],
-			description: "Modifie le mode de sélection au mois ou à l'année.",
+			description: 'Modifie le mode de sélection au mois ou à l’année.',
 		},
 		focusedDate: {
 			control: 'date',
-			description: "Définit la date préselectionnée à l'ouverture du calendrier.",
+			description: 'Définit la date préselectionnée à l’ouverture du calendrier.',
 		},
 		widthAuto: {
 			control: 'boolean',
@@ -68,7 +68,7 @@ export default {
 			description: 'Masque les jours du mois précédent ou suivant visibles sur le mois en cours.',
 		},
 		hideWeekend: {
-			description: "Retire l'effet grisé visible sur les jours du isWeekend.",
+			description: 'Retire l’effet grisé visible sur les jours du isWeekend.',
 		},
 		presentation: {
 			description: '[v21.1] Transforme le champ de formulaire en donnée textuelle non éditable.',

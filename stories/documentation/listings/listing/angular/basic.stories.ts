@@ -30,6 +30,7 @@ export default {
 		const { type, checklist, ordered, icons, defaultIcon, icon, start, reversed, palette, ...inputs } = args;
 		const checklistParam = args.type === 'checklist' ? ` checklist` : ``;
 		const orderedParam = args.type === 'ordered' ? ` ordered` : ``;
+		const orderedFancyParam = args.type === 'orderedFancy' ? ` orderedFancy` : ``;
 		const iconsParam = args.type === 'icons' ? ` icons` : ``;
 		const iconParam = args.type === 'icons' ? ` icon="${args.icon}"` : ``;
 		const defaultIconParam = args.type === 'icons' ? ` defaultIcon="${defaultIcon}"` : ``;
@@ -37,17 +38,18 @@ export default {
 		const reversedParam = args.reversed ? ` reversed` : ``;
 		const paletteParam = args.palette !== 'none' ? ` palette="${palette}"` : ``;
 		return {
-			template: `<lu-listing${checklistParam}${orderedParam}${startParam}${reversedParam}${iconsParam}${defaultIconParam}${paletteParam}${generateInputs(inputs, context.argTypes)}>
+			template: `<lu-listing${checklistParam}${orderedParam}${orderedFancyParam}${startParam}${reversedParam}${iconsParam}${defaultIconParam}${paletteParam}${generateInputs(inputs, context.argTypes)}>
 	<lu-listing-item>item</lu-listing-item>
 	<lu-listing-item${iconParam}>item</lu-listing-item>
 	<lu-listing-item>
 		item
-		<lu-listing${checklistParam}${orderedParam}${startParam}${iconsParam}${defaultIconParam}${paletteParam}${generateInputs(inputs, context.argTypes)}>
+		<lu-listing${checklistParam}${orderedParam}${orderedFancyParam}${startParam}${reversedParam}${iconsParam}${defaultIconParam}${paletteParam}${generateInputs(inputs, context.argTypes)}>
 			<lu-listing-item>item</lu-listing-item>
 			<lu-listing-item>item</lu-listing-item>
-			<lu-listing-item>item</lu-listing-item>
+			<lu-listing-item critical>item</lu-listing-item>
 		</lu-listing>
 	</lu-listing-item>
+	<lu-listing-item>item</lu-listing-item>
 </lu-listing>`,
 		};
 	},
@@ -56,18 +58,18 @@ export default {
 export const Template: StoryObj<ListingComponent & ListingItemComponent & { type: string }> = {
 	argTypes: {
 		type: {
-			options: ['', 'checklist', 'ordered', 'icons'],
+			options: ['', 'checklist', 'ordered', 'orderedFancy', 'icons'],
 			control: {
 				type: 'select',
 			},
-			description: 'Modifie le type de liste (ordonnée, checklist, icônes, etc.)',
+			description: 'Modifie le type de liste (ordonnée, checklist, icônes, etc.).<br>[v21.2] <code>orderedFancy</code>',
 		},
 		defaultIcon: {
 			options: IconsList.map((i) => i.icon),
 			control: {
 				type: 'select',
 			},
-			description: "Modifie l'icône par défaut.",
+			description: 'Modifie l’icône par défaut.',
 			if: { arg: 'type', eq: 'icons' },
 		},
 		icon: {
@@ -75,28 +77,21 @@ export const Template: StoryObj<ListingComponent & ListingItemComponent & { type
 			control: {
 				type: 'select',
 			},
-			description: "Modifie l'icône d'un élément de la liste.",
+			description: 'Modifie l’icône d’un élément de la liste.',
 			if: { arg: 'type', eq: 'icons' },
 		},
 		start: {
 			if: { arg: 'type', eq: 'ordered' },
-			control: {
-				type: 'select',
-			},
 			description: 'Modifie la valeur initiale de la liste.',
 		},
 		reversed: {
 			if: { arg: 'type', eq: 'ordered' },
-			description: 'Prédente la liste sous forme décroissante.',
+			description: 'Présente la liste sous forme décroissante.',
 		},
 		checklist: HiddenArgType,
 		icons: HiddenArgType,
 		ordered: HiddenArgType,
-		palette: {
-			PaletteAllArgType,
-			if: { arg: 'type', truthy: true },
-			description: 'Modifie la couleur des icônes.',
-		},
+		palette: PaletteAllArgType,
 	},
 
 	args: {

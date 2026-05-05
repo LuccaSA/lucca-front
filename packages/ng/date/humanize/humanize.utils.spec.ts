@@ -181,7 +181,9 @@ describe('HumanizeUtils', () => {
 		describe('future date', () => {
 			it('should emit immedialty', () => {
 				// Arrange
-				const date = Date.now() + 55_000;
+				const now = new Date().getTime();
+				const nowSpy = jest.spyOn(Date, 'now').mockReturnValue(now);
+				const date = now + 55_000;
 				const relativeTime$ = relativeTimeTimer(date);
 				const emittedValues = signal<LuRelativeTime[]>([]);
 
@@ -191,6 +193,7 @@ describe('HumanizeUtils', () => {
 				// Assert
 				expect(emittedValues()).toEqual([{ unit: 'second', value: 55 }]);
 				sub.unsubscribe();
+				nowSpy.mockRestore();
 			});
 
 			it('should emit each minute then each seconds', fakeAsync(() => {

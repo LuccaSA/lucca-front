@@ -14,7 +14,7 @@ import { LuCoreSelectNoClueDirective } from './no-clue.directive';
 	changeDetection: ChangeDetectionStrategy.OnPush,
 })
 class TestV3NoClueComponent {
-	select = viewChild.required(LuSimpleSelectInputComponent);
+	readonly select = viewChild.required(LuSimpleSelectInputComponent);
 }
 
 @Component({
@@ -24,7 +24,7 @@ class TestV3NoClueComponent {
 	changeDetection: ChangeDetectionStrategy.OnPush,
 })
 class TestV4NoClueComponent {
-	select = viewChild.required(LuSimpleSelectInputComponent);
+	readonly select = viewChild.required(LuSimpleSelectInputComponent);
 }
 
 describe('LuCoreSelectNoClueDirective', () => {

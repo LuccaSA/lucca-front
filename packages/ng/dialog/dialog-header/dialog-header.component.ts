@@ -28,7 +28,7 @@ export class DialogHeaderAction {}
 export class DialogHeaderComponent implements OnInit {
 	#ref = inject(LuDialogRef);
 
-	intl = input(...intlInputOptions(LU_DIALOG_HEADER_TRANSLATIONS));
+	readonly intl = input(...intlInputOptions(LU_DIALOG_HEADER_TRANSLATIONS));
 
 	dismissible = !this.#ref.config.alert;
 
@@ -40,7 +40,7 @@ export class DialogHeaderComponent implements OnInit {
 		this.#ref.dismiss();
 	}
 
-	optionalAction = contentChild(DialogHeaderAction);
+	readonly optionalAction = contentChild(DialogHeaderAction);
 
 	ngOnInit(): void {
 		// Using setTimeout here to make sure this will be handled in the next Cd cycle, not the current one.

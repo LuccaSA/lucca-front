@@ -28,7 +28,7 @@ import { ICalendarItem } from './calendar-item.interface';
 	],
 })
 export class LuCalendarInputComponent<D> extends ALuInput<D> implements ControlValueAccessor, OnInit, Validator {
-	intl = input(...intlInputOptions(LU_CALENDARINPUT_TRANSLATIONS));
+	readonly intl = input(...intlInputOptions(LU_CALENDARINPUT_TRANSLATIONS));
 
 	@Input() min?: D;
 	@Input() max?: D;
@@ -74,7 +74,10 @@ export class LuCalendarInputComponent<D> extends ALuInput<D> implements ControlV
 	initDayLabels() {
 		this.labels = [...getLocaleDayNames(this._locale, FormStyle.Standalone, TranslationWidth.Abbreviated)];
 		if (getLocaleFirstDayOfWeek(this._locale) === 1) {
-			this.labels.push(this.labels.shift());
+			const firstLabel = this.labels.shift();
+			if (firstLabel !== undefined) {
+				this.labels.push(firstLabel);
+			}
 		}
 	}
 	protected render() {

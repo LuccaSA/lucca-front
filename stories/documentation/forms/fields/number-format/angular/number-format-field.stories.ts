@@ -38,13 +38,13 @@ export default {
 			control: {
 				type: 'select',
 			},
-			description: "Modifie l'état de l'inline message.",
+			description: 'Modifie l’état de l’inline message.',
 		},
 		label: {
 			description: 'Modifie le label de l’input.',
 		},
 		hiddenLabel: {
-			description: "Masque le label en le conservant dans le DOM pour les lecteurs d'écrans",
+			description: 'Masque le label en le conservant dans le DOM pour les lecteurs d’écran',
 		},
 		required: {
 			description: 'Marque le champ comme obligatoire.',

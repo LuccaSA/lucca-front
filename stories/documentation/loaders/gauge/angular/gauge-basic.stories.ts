@@ -13,7 +13,7 @@ export default {
 			description: 'Applique une palette de couleurs à la jauge.',
 		},
 		thin: {
-			description: "Diminue l'épaisseur de la jauge.",
+			description: 'Diminue l’épaisseur de la jauge.',
 		},
 		animated: {
 			description: 'Ajoute une animation au chargement ou lorsque la valeur est modifiée.',
@@ -31,10 +31,10 @@ export default {
 			description: 'Valeur en pourcentage.',
 		},
 		alt: {
-			description: "Information restituée par le lecteur d'écran.",
+			description: 'Information restituée par le lecteur d’écran.',
 		},
 		noAlt: {
-			description: "Empêche la restitution par le lecteur d'écran. À n'utiliser que si l'information est déjà présente.",
+			description: 'Empêche la restitution par le lecteur d’écran. À n’utiliser que si l’information est déjà présente.',
 		},
 	},
 	decorators: [

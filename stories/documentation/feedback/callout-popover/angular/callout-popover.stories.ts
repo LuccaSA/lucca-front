@@ -41,13 +41,20 @@ export default {
 				min: 1,
 			},
 			if: { arg: 'customText', truthy: false },
-			description: "Nombre d'éléments présentés dans la story.",
+			description: 'Nombre d’éléments présentés dans la story.',
 		},
 		buttonLabel: {
 			description: 'Label du bouton.',
 		},
 		buttonAlt: {
 			description: 'Information restituée par le bouton.',
+		},
+		popoverPosition: {
+			options: [null, 'below', 'before', 'after'],
+			control: {
+				type: 'select',
+			},
+			description: 'Position du popover par rapport au bouton de déclenchement.',
 		},
 		icon: {
 			options: [null, 'info', 'success', 'warning', 'error', 'help'],
@@ -72,7 +79,7 @@ export default {
 				type: 'boolean',
 			},
 			if: { arg: 'customText', truthy: false },
-			description: "Masque le titre si le popover ne contient qu'un élément.",
+			description: 'Masque le titre si le popover ne contient qu’un élément.',
 		},
 		palette: {
 			options: ['none', 'product', 'neutral'],
@@ -86,7 +93,7 @@ export default {
 			control: {
 				type: 'select',
 			},
-			description: "Détermine le mode d'ouverture du popover.",
+			description: 'Détermine le mode d’ouverture du popover.',
 		},
 		size: {
 			options: [null, 'XS', 'S', 'M'],
@@ -99,7 +106,7 @@ export default {
 			description: 'Délai nécessaire à la fermeture du popover.',
 		},
 		openDelay: {
-			description: "Délai nécessaire à l'ouverture du popover.",
+			description: 'Délai nécessaire à l’ouverture du popover.',
 		},
 		customText: {
 			description: 'Remplace la liste d’éléments par un texte personnalisé.',
@@ -122,5 +129,6 @@ export const Template: StoryObj<CalloutPopoverComponent & { items: number; custo
 		items: 2,
 		closeDelay: 500,
 		openDelay: 50,
+		popoverPosition: null,
 	},
 };
