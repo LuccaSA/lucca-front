@@ -1,4 +1,4 @@
-@use '@lucca-front/scss/src/commons/config' with (
+@use '../packages/scss/src/commons/config' with (
 	$palettesOtherProduct: 'all',
 	$fontFamilyCursive: 'Caveat',
 );
@@ -49,7 +49,7 @@
 		border: 1px solid var(--commons-border-200);
 		border-collapse: collapse;
 
-		td {
+		> * > * > td {
 			border: 1px solid var(--commons-border-200);
 			padding: var(--pr-t-spacings-100) var(--pr-t-spacings-100);
 
