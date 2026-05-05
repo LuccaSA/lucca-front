@@ -33,7 +33,15 @@
 		<tr>
 			<td>Disabled</td>
 			<td>
-				<div class="demo-QAtable-list"></div>
+				<div class="demo-QAtable-list">
+					@for (softwareIcon of softwareIconList; track softwareIcon) {
+						<div
+							class="softwareIcon is-disabled"
+							aria-hidden="true"
+							[innerHtml]="'https://cdn.lucca.fr/transverse/prisme/visuals/software-icon/' + softwareIcon + '.svg' | luSafeExternalSvg"
+						></div>
+					}
+				</div>
 			</td>
 			<td>
 				<div class="demo-QAtable-list">
@@ -46,7 +54,33 @@
 		<tr>
 			<td>Size</td>
 			<td>
-				<div class="demo-QAtable-list"></div>
+				<div class="demo-QAtable-list">
+					<div
+						class="softwareIcon mod-XXS"
+						aria-hidden="true"
+						[innerHtml]="'https://cdn.lucca.fr/transverse/prisme/visuals/software-icon/invoices.svg' | luSafeExternalSvg"
+					></div>
+					<div
+						class="softwareIcon mod-XS"
+						aria-hidden="true"
+						[innerHtml]="'https://cdn.lucca.fr/transverse/prisme/visuals/software-icon/absences.svg' | luSafeExternalSvg"
+					></div>
+					<div
+						class="softwareIcon mod-XS"
+						aria-hidden="true"
+						[innerHtml]="'https://cdn.lucca.fr/transverse/prisme/visuals/software-icon/payslip.svg' | luSafeExternalSvg"
+					></div>
+					<div
+						class="softwareIcon"
+						aria-hidden="true"
+						[innerHtml]="'https://cdn.lucca.fr/transverse/prisme/visuals/software-icon/benefits.svg' | luSafeExternalSvg"
+					></div>
+					<div
+						class="softwareIcon mod-L"
+						aria-hidden="true"
+						[innerHtml]="'https://cdn.lucca.fr/transverse/prisme/visuals/software-icon/office.svg' | luSafeExternalSvg"
+					></div>
+				</div>
 			</td>
 			<td>
 				<div class="demo-QAtable-list">

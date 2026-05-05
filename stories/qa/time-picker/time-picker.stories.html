@@ -3,62 +3,11 @@
 		<tr>
 			<td></td>
 			<td>
-				<div class="demo-QAtable-list">lu-duration-picker</div>
+				<div class="demo-QAtable-list">Angular</div>
 			</td>
 		</tr>
 		<tr>
-			<td>ngModel empty</td>
-			<td>
-				<lu-form-field label="Label" tooltip="Tooltip message" inlineMessage="Helper text" inlineMessageState="default">
-					<lu-duration-picker [(ngModel)]="emptyDuration" />
-				</lu-form-field>
-			</td>
-		</tr>
-		<tr>
-			<td>ngModel filled</td>
-			<td>
-				<lu-form-field label="Label" tooltip="Tooltip message" inlineMessage="Helper text" inlineMessageState="default">
-					<lu-duration-picker [(ngModel)]="filledDuration" />
-				</lu-form-field>
-			</td>
-		</tr>
-		<tr>
-			<td>formControl empty</td>
-			<td>
-				<lu-form-field label="Label" tooltip="Tooltip message" inlineMessage="Helper text" inlineMessageState="default">
-					<lu-duration-picker [formControl]="emptyDurationControl" />
-				</lu-form-field>
-			</td>
-		</tr>
-		<tr>
-			<td>formControl filled</td>
-			<td>
-				<lu-form-field label="Label" tooltip="Tooltip message" inlineMessage="Helper text" inlineMessageState="default">
-					<lu-duration-picker [formControl]="filledDurationControl" />
-				</lu-form-field>
-			</td>
-		</tr>
-		<tr>
-			<td>formControl filled 1000h</td>
-			<td>
-				<lu-form-field label="Label" tooltip="Tooltip message" inlineMessage="Helper text" inlineMessageState="default">
-					<lu-duration-picker [formControl]="filledDuration1000hControl" max="PT9999H" />
-				</lu-form-field>
-			</td>
-		</tr>
-	</tbody>
-</table>
-
-<table class="demo-QAtable">
-	<tbody>
-		<tr>
-			<td></td>
-			<td>
-				<div class="demo-QAtable-list">lu-time-picker</div>
-			</td>
-		</tr>
-		<tr>
-			<td>ngModel empty</td>
+			<td>Empty Model</td>
 			<td>
 				<lu-form-field label="Label" tooltip="Tooltip message" inlineMessage="Helper text" inlineMessageState="default">
 					<lu-time-picker [(ngModel)]="emptyTime" />
@@ -66,7 +15,7 @@
 			</td>
 		</tr>
 		<tr>
-			<td>ngModel filled</td>
+			<td>Filled Model</td>
 			<td>
 				<lu-form-field label="Label" tooltip="Tooltip message" inlineMessage="Helper text" inlineMessageState="default">
 					<lu-time-picker [(ngModel)]="filledTime" />
@@ -74,7 +23,7 @@
 			</td>
 		</tr>
 		<tr>
-			<td>formControl empty</td>
+			<td>Empty Form</td>
 			<td>
 				<lu-form-field label="Label" tooltip="Tooltip message" inlineMessage="Helper text" inlineMessageState="default">
 					<lu-time-picker [formControl]="emptyTimeControl" />
@@ -82,10 +31,51 @@
 			</td>
 		</tr>
 		<tr>
-			<td>formControl filled</td>
+			<td>Filled Form</td>
 			<td>
 				<lu-form-field label="Label" tooltip="Tooltip message" inlineMessage="Helper text" inlineMessageState="default">
 					<lu-time-picker [formControl]="filledTimeControl" />
+				</lu-form-field>
+			</td>
+		</tr>
+		<tr>
+			<td>Size</td>
+			<td>
+				<lu-form-field label="Label" tooltip="Tooltip message" inlineMessage="Helper text" inlineMessageState="default">
+					<lu-time-picker [(ngModel)]="emptyTime" size="S" />
+				</lu-form-field>
+			</td>
+		</tr>
+		<tr>
+			<td>Disabled</td>
+			<td>
+				<lu-form-field label="Label" tooltip="Tooltip message" inlineMessage="Helper text" inlineMessageState="default">
+					<lu-time-picker [(ngModel)]="emptyTime" disabled />
+				</lu-form-field>
+				<lu-form-field label="Label" tooltip="Tooltip message" inlineMessage="Helper text" inlineMessageState="default">
+					<lu-time-picker [(ngModel)]="filledTime" disabled />
+				</lu-form-field>
+			</td>
+		</tr>
+		<tr>
+			<td>Display Arrows</td>
+			<td>
+				<lu-form-field label="Label" tooltip="Tooltip message" inlineMessage="Helper text" inlineMessageState="default">
+					<lu-time-picker [(ngModel)]="emptyTime" displayArrows />
+				</lu-form-field>
+				<lu-form-field label="Label" tooltip="Tooltip message" inlineMessage="Helper text" inlineMessageState="default">
+					<lu-time-picker [(ngModel)]="filledTime" displayArrows />
+				</lu-form-field>
+			</td>
+		</tr>
+		<tr>
+			<td>Meridiem Display</td>
+			<td>
+				<lu-form-field label="Label" tooltip="Tooltip message" inlineMessage="Helper text" inlineMessageState="default">
+					<lu-time-picker [(ngModel)]="emptyTime" [forceMeridiemDisplay]="true" />
+				</lu-form-field>
+				<lu-form-field label="Label" tooltip="Tooltip message" inlineMessage="Helper text" inlineMessageState="default">
+					<lu-time-picker [(ngModel)]="filledTime" [forceMeridiemDisplay]="true" />
 				</lu-form-field>
 			</td>
 		</tr>
