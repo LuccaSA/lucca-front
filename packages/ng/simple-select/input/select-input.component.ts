@@ -1,6 +1,6 @@
 import { OverlayModule } from '@angular/cdk/overlay';
 import { AsyncPipe, NgTemplateOutlet } from '@angular/common';
-import { ChangeDetectionStrategy, Component, forwardRef, HostBinding, inject, input, viewChild, ViewContainerRef, ViewEncapsulation } from '@angular/core';
+import { ChangeDetectionStrategy, Component, forwardRef, inject, input, viewChild, ViewContainerRef, ViewEncapsulation } from '@angular/core';
 import { ControlValueAccessor, FormsModule, NG_VALUE_ACCESSOR } from '@angular/forms';
 import { ClearComponent } from '@lucca-front/ng/clear';
 import { intlInputOptions, isNotNil, PortalDirective } from '@lucca-front/ng/core';
@@ -15,7 +15,10 @@ import { LuSimpleSelectPanelRefFactory } from './panel-ref.factory';
 	selector: 'lu-simple-select',
 	templateUrl: './select-input.component.html',
 	styleUrl: './select-input.component.scss',
-	host: { class: 'simpleSelect' },
+	host: {
+		class: 'simpleSelect',
+		'[class.mod-filterPill]': 'filterPillClass',
+	},
 	changeDetection: ChangeDetectionStrategy.OnPush,
 	imports: [
 		AsyncPipe,
@@ -53,7 +56,6 @@ import { LuSimpleSelectPanelRefFactory } from './panel-ref.factory';
 export class LuSimpleSelectInputComponent<T> extends ALuSelectInputComponent<T, T> implements ControlValueAccessor {
 	readonly intl = input(...intlInputOptions(LU_CORE_SELECT_TRANSLATIONS, LU_SIMPLE_SELECT_TRANSLATIONS));
 
-	@HostBinding('class.mod-filterPill')
 	public get filterPillClass() {
 		return this.filterPillMode;
 	}

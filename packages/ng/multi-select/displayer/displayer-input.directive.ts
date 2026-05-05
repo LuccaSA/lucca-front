@@ -1,4 +1,4 @@
-import { DestroyRef, Directive, ElementRef, HostBinding, HostListener, inject, OnInit } from '@angular/core';
+import { DestroyRef, Directive, ElementRef, inject, OnInit } from '@angular/core';
 import { takeUntilDestroyed, toSignal } from '@angular/core/rxjs-interop';
 import { isNotNil, ɵeffectWithDeps } from '@lucca-front/ng/core';
 import { ILuOptionContext, LU_OPTION_CONTEXT } from '@lucca-front/ng/core-select';
@@ -16,6 +16,13 @@ import { LuMultiSelectContentDisplayerComponent } from './content-displayer/cont
 		role: 'combobox',
 		class: 'multipleSelect-displayer-search',
 		type: 'text',
+		'[attr.aria-expanded]': 'panelOpen',
+		'[attr.aria-activedescendant]': 'activeDescendant',
+		'[attr.aria-controls]': 'controls',
+		'[disabled]': 'disabled',
+		'[placeholder]': 'placeholder',
+		'[readonly]': 'readonly',
+		'(input)': 'onInput()',
 	},
 	hostDirectives: [InputDirective],
 })
@@ -30,37 +37,30 @@ export class LuMultiSelectDisplayerInputDirective<T> implements OnInit {
 
 	readonly destroyRef = inject(DestroyRef);
 
-	@HostBinding('attr.aria-expanded')
 	get panelOpen() {
 		return this.#panelOpen();
 	}
 
-	@HostBinding('attr.aria-activedescendant')
 	get activeDescendant() {
 		return this.#activeDescendant();
 	}
 
-	@HostBinding('attr.aria-controls')
 	get controls() {
 		return this.select.ariaControls;
 	}
 
-	@HostBinding('disabled')
 	get disabled() {
 		return this.#disabled();
 	}
 
-	@HostBinding('placeholder')
 	get placeholder() {
 		return this.#placeholder();
 	}
 
-	@HostBinding('readonly')
 	get readonly() {
 		return !this.select.searchable;
 	}
 
-	@HostListener('input')
 	onInput() {
 		this.select.clueChanged(this.elementRef.nativeElement.value);
 	}
