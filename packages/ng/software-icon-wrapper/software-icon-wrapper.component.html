@@ -1,0 +1,23 @@
+<ul class="softwareIconWrapper">
+	<ng-content />
+
+	@if (hiddenCount() > 0 && !hasButtonMore()) {
+		<li class="softwareIconWrapper-item" role="presentation">
+			<button
+				type="button"
+				#wrapperButton
+				luSoftwareIconWrapperButton
+				[luPopover2]="softwareIconWrapperHiddenItem"
+				luPopoverTrigger="hover+focus"
+			></button>
+
+			<ng-template #softwareIconWrapperHiddenItem>
+				<div class="popover-contentOptional">
+					@for (icon of wrapperButton.hiddenIcons(); track $index) {
+						<lu-software-icon [icon]="icon.icon()" [size]="icon.size()" [disabled]="icon.disabled()" />
+					}
+				</div>
+			</ng-template>
+		</li>
+	}
+</ul>

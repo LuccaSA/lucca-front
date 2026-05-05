@@ -1,3 +1,12 @@
 @mixin vars {
 	--components-softwareIcon-size: var(--pr-t-spacings-500);
+	--components-softwareIcon-border: 3px;
+	--components-softwareIcon-background: var(--pr-t-elevation-surface-default);
+	--components-softwareIconWrapper-scale: 1;
+}
+
+@mixin varsWrapper {
+	@include vars;
+
+	--components-softwareIconWrapper-overlap: var(--pr-t-spacings-150);
 }

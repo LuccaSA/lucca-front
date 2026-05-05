@@ -28,3 +28,28 @@
 		}
 	}
 }
+
+.softwareIconWrapper {
+	@layer components {
+		@include varsWrapper;
+	}
+
+	@layer mods {
+		&.mod-XXS {
+			@include wrapperXXS;
+		}
+
+		&.mod-XS {
+			@include wrapperXS;
+		}
+
+		&.mod-S {
+			@include wrapperS;
+		}
+
+		&.mod-L {
+			@include wrapperL;
+		}
+	}
+}
+
