@@ -6,8 +6,6 @@ import {
 	Directive,
 	ElementRef,
 	EventEmitter,
-	HostBinding,
-	HostListener,
 	inject,
 	input,
 	Input,
@@ -40,6 +38,12 @@ export const coreSelectDefaultOptionKey: (option: unknown) => unknown = (option)
 	host: {
 		'[class.colorPicker]': 'colorPicker()',
 		'[class.mod-compact]': 'compact()',
+		'[class.is-clearable]': 'clearable',
+		'[class.is-selected]': 'isSelectedClass',
+		'[class.is-searchFilled]': 'isSearchFilledClass',
+		'[class.mod-noClueIcon]': 'isNoClueIconClass',
+		'(click)': 'onClickOpenPanel($event)',
+		'(keydown)': 'onKeyDownNavigation($event)',
 	},
 })
 export abstract class ALuSelectInputComponent<TOption, TValue> implements OnDestroy, OnInit, ControlValueAccessor, FilterPillInputComponent {
@@ -83,7 +87,6 @@ export abstract class ALuSelectInputComponent<TOption, TValue> implements OnDest
 	}
 
 	@Input({ transform: booleanAttribute })
-	@HostBinding('class.is-clearable')
 	set clearable(value: boolean) {
 		this.#inputClearable.set(value);
 	}
@@ -116,12 +119,10 @@ export abstract class ALuSelectInputComponent<TOption, TValue> implements OnDest
 		this.addOptionStrategy$.next(strategy);
 	}
 
-	@HostBinding('class.is-selected')
 	protected get isSelectedClass(): boolean {
 		return this.hasValue();
 	}
 
-	@HostBinding('class.is-searchFilled')
 	protected get isSearchFilledClass(): boolean {
 		return (this.clue?.length ?? 0) > 0;
 	}
@@ -176,7 +177,6 @@ export abstract class ALuSelectInputComponent<TOption, TValue> implements OnDest
 
 	readonly colorPicker = input(false, { transform: booleanAttribute });
 
-	@HostBinding('class.mod-noClueIcon')
 	protected get isNoClueIconClass(): boolean {
 		return this.noClueIcon();
 	}
@@ -284,7 +284,6 @@ export abstract class ALuSelectInputComponent<TOption, TValue> implements OnDest
 		}
 	}
 
-	@HostListener('click', ['$event'])
 	onClickOpenPanel($event: Event) {
 		if (!this.isPanelOpen) {
 			this.openPanel();
@@ -293,7 +292,6 @@ export abstract class ALuSelectInputComponent<TOption, TValue> implements OnDest
 		}
 	}
 
-	@HostListener('keydown', ['$event'])
 	onKeyDownNavigation(event: Event): void {
 		const $event = event as KeyboardEvent;
 		switch ($event.key) {

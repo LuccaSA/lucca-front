@@ -9,7 +9,6 @@ import {
 	effect,
 	ElementRef,
 	forwardRef,
-	HostBinding,
 	inject,
 	Injector,
 	input,
@@ -60,6 +59,8 @@ let nextId = 0;
 	styleUrl: './date-range-input.component.scss',
 	host: {
 		class: 'dateRangeField',
+		'[class.mod-filterPill]': 'isFilterPill',
+		'[class.mod-auto]': 'isWidthAuto',
 	},
 	encapsulation: ViewEncapsulation.None,
 	changeDetection: ChangeDetectionStrategy.OnPush,
@@ -216,10 +217,8 @@ export class DateRangeInputComponent extends AbstractDateComponent implements On
 
 	readonly focusedCalendar = computed(() => this.calendars()[this.focusedCalendarIndex()]);
 
-	@HostBinding('class.mod-filterPill')
 	isFilterPill = false;
 
-	@HostBinding('class.mod-auto')
 	get isWidthAuto() {
 		return this.widthAuto();
 	}
