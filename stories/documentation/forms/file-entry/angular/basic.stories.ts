@@ -21,7 +21,7 @@ export default {
 			description: 'Modifie l’état du composant.',
 		},
 		previewUrl: {
-			description: "URL de prévisualisation de l’image uploadée.",
+			description: 'URL de prévisualisation de l’image uploadée.',
 		},
 		displayFileName: {
 			if: { arg: 'media', truthy: true },
@@ -32,7 +32,7 @@ export default {
 		},
 		iconOverride: {
 			if: { arg: 'previewUrl', truthy: false },
-			description: "Remplace l’icône de format de fichier.",
+			description: 'Remplace l’icône de format de fichier.',
 		},
 		downloadURL: {
 			description: 'URL de téléchargement du fichier.',
@@ -57,7 +57,8 @@ export default {
 		},
 		structure: {
 			if: { arg: 'size', truthy: true },
-			description: "Augmente le border-radius du champ pour l'utiliser en élément de structure.",
+			description: 'Augmente le border-radius du champ pour l’utiliser en élément de structure.',
+		},
 		withFileType: {
 			control: 'boolean',
 		},
