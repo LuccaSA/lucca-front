@@ -53,6 +53,7 @@
 						<span class="tag mod-S mod-AI">
 							<span class="lucca-icon icon-heart" aria-hidden="true"></span> <span class="tag-content">Text</span>
 						</span>
+
 						<span class="tag palette-product">
 							<span class="lucca-icon icon-heart" aria-hidden="true"></span> <span class="tag-content">Text</span>
 						</span>
@@ -62,6 +63,7 @@
 						<span class="tag mod-AI">
 							<span class="lucca-icon icon-heart" aria-hidden="true"></span> <span class="tag-content">Text</span>
 						</span>
+
 						<span class="tag mod-L palette-product">
 							<span class="lucca-icon icon-heart" aria-hidden="true"></span> <span class="tag-content">Text</span>
 						</span>
@@ -76,19 +78,17 @@
 			</td>
 			<td>
 				<div class="demo-QAtable-list">
-					<lu-tag label="Text" palette="success" icon="heart" size="S" />
-					<lu-tag label="Text" palette="warning" icon="heart" size="S" />
-					<lu-tag label="Text" palette="error" icon="heart" size="S" />
-					<lu-tag label="Text" palette="neutral" icon="heart" />
-					<lu-tag label="Text" palette="success" icon="heart" />
-					<lu-tag label="Text" palette="warning" icon="heart" />
-					<lu-tag label="Text" palette="error" icon="heart" />
-					<lu-tag label="Text" palette="neutral" outlined icon="heart" />
-					<lu-tag label="Text" icon="heart" AI="true" />
-					<lu-tag label="Text" palette="success" icon="heart" size="L" />
-					<lu-tag label="Text" palette="warning" icon="heart" size="L" />
-					<lu-tag label="Text" palette="error" icon="heart" size="L" />
-					<lu-tag label="Text" icon="heart" AI="true" size="L" />
+					<lu-tag label="Text" palette="product" icon="heart" size="S" />
+					<lu-tag label="Text" palette="neutal" icon="heart" size="S" />
+					<lu-tag label="Text" AI icon="heart" size="S" />
+
+					<lu-tag label="Text" palette="product" icon="heart" />
+					<lu-tag label="Text" palette="neutal" icon="heart" />
+					<lu-tag label="Text" AI icon="heart" />
+
+					<lu-tag label="Text" palette="product" icon="heart" size="L" />
+					<lu-tag label="Text" palette="neutal" icon="heart" size="L" />
+					<lu-tag label="Text" AI icon="heart" size="L" />
 				</div>
 			</td>
 		</tr>
@@ -107,6 +107,7 @@
 					@for (palette of paletteOptions; track palette) {
 						<lu-tag label="Text" [palette]="palette" outlined />
 					}
+					<lu-tag label="Text" AI />
 				</div>
 			</td>
 		</tr>
@@ -123,7 +124,17 @@
 					<button type="button" class="tag mod-AI mod-clickable">Text</button>
 				</div>
 			</td>
-			<td></td>
+			<td>
+				<div class="demo-QAtable-list">
+					@for (palette of paletteOptions; track palette) {
+						<lu-tag label="Text" link="/" [palette]="palette" />
+					}
+					@for (palette of paletteOptions; track palette) {
+						<lu-tag label="Text" link="/" [palette]="palette" outlined />
+					}
+					<lu-tag label="Text" AI link="/" />
+				</div>
+			</td>
 		</tr>
 		<tr>
 			<td>Size</td>
@@ -140,6 +151,107 @@
 					<lu-tag label="Text" size="M" />
 					<lu-tag label="Text" size="L" />
 				</div>
+			</td>
+		</tr>
+		<tr>
+			<td>Alignment</td>
+			<td>
+				<span class="tag">Text</span> 
+				<span class="tag"><span class="lucca-icon icon-heart" aria-hidden="true"></span> <span class="tag-content">Text</span></span>
+			</td>
+			<td>
+				<lu-tag label="Text" /> 
+				<lu-tag icon="heart" label="Text" />
+			</td>
+		</tr>
+		<tr>
+			<td>Alignment inside h1</td>
+			<td>
+				<h1>
+					lorem
+					<span class="tag">Text</span>
+					ipsum
+					<span class="tag"><span class="lucca-icon icon-heart" aria-hidden="true"></span> <span class="tag-content">Text</span></span>
+					dolor
+				</h1>
+			</td>
+			<td>
+				<h1>
+					lorem
+					<lu-tag label="Text" />
+					ipsum
+					<lu-tag icon="heart" label="Text" />
+					dolor
+				</h1>
+			</td>
+		</tr>
+		<tr>
+			<td>
+				Alignment inside h1<br />
+				with flexbox
+			</td>
+			<td>
+				<h1 class="pr-u-displayFlex pr-u-gap100 pr-u-alignItemsCenter">
+					lorem
+					<span class="tag">Text</span>
+					ipsum
+					<span class="tag"><span class="lucca-icon icon-heart" aria-hidden="true"></span> <span class="tag-content">Text</span></span>
+					dolor
+				</h1>
+			</td>
+			<td>
+				<h1 class="pr-u-displayFlex pr-u-gap100 pr-u-alignItemsCenter">
+					lorem
+					<lu-tag label="Text" />
+					ipsum
+					<lu-tag icon="heart" label="Text" />
+					dolor
+				</h1>
+			</td>
+		</tr>
+		<tr>
+			<td>Alignment inside h4</td>
+			<td>
+				<h4>
+					lorem
+					<span class="tag">Text</span>
+					ipsum
+					<span class="tag"><span class="lucca-icon icon-heart" aria-hidden="true"></span> <span class="tag-content">Text</span></span>
+					dolor
+				</h4>
+			</td>
+			<td>
+				<h4>
+					lorem
+					<lu-tag label="Text" />
+					ipsum
+					<lu-tag icon="heart" label="Text" />
+					dolor
+				</h4>
+			</td>
+		</tr>
+		<tr>
+			<td>
+				Alignment inside h4<br />
+				with flexbox
+			</td>
+			<td>
+				<h4 class="pr-u-displayFlex pr-u-gap100 pr-u-alignItemsCenter">
+					lorem
+					<span class="tag">Text</span>
+					ipsum
+					<span class="tag"><span class="lucca-icon icon-heart" aria-hidden="true"></span> <span class="tag-content">Text</span></span>
+					dolor
+				</h4>
+			</td>
+			<td>
+				<h4 class="pr-u-displayFlex pr-u-gap100 pr-u-alignItemsCenter">
+					lorem
+					<lu-tag label="Text" />
+					ipsum
+					<lu-tag icon="heart" label="Text" />
+					dolor
+				</h4>
 			</td>
 		</tr>
 	</tbody>
