@@ -12,7 +12,7 @@
 		[attr.aria-activedescendant]="activeDescendant$ | async"
 		[attr.aria-expanded]="isPanelOpen"
 		[attr.aria-controls]="ariaControls"
-		placeholder="{{ inputPlaceholder ? inputPlaceholder : intl().placeholder }}"
+		[attr.placeholder]="inputPlaceholder ? inputPlaceholder : intl().placeholder"
 		[ngModel]="clue"
 		(ngModelChange)="clueChanged($event)"
 		[ngModelOptions]="{ standalone: true }"
@@ -25,9 +25,11 @@
 		[attr.tabindex]="inputTabindex()"
 		[attr.aria-labelledby]="valueID"
 	/>
-	<div class="simpleSelect-field-value" [attr.id]="valueID">
-		<ng-container *ngTemplateOutlet="currentValueDisplayerTpl" />
-	</div>
+	@if (!impersonation()) {
+		<div class="simpleSelect-field-value" [attr.id]="valueID">
+			<ng-container *ngTemplateOutlet="currentValueDisplayerTpl" />
+		</div>
+	}
 	@if (!filterPillMode && !impersonation()) {
 		@if (clearable && hasValue() && (disabled$ | async) === false) {
 			<lu-clear class="simpleSelect-field-clear" (onClear)="clearValue($event); inputElement.focus()">{{ intl().clear }}</lu-clear>
