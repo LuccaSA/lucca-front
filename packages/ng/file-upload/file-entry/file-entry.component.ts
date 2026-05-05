@@ -65,7 +65,7 @@ export class FileEntryComponent {
 
 	readonly fileName = computed(() => this.entry().name);
 	readonly fileType = computed<string>(() => this.entry().type ?? '');
-	readonly fileSize = computed<number>(() => this.entry().size ?? 0);
+	readonly fileSize = computed<number | null>(() => this.entry().size ?? null);
 
 	readonly fileSizeDisplay = computed(() => {
 		const fileSize = this.fileSize();
