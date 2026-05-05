@@ -10,8 +10,6 @@ import {
 	ElementRef,
 	EventEmitter,
 	forwardRef,
-	HostBinding,
-	HostListener,
 	Input,
 	OnDestroy,
 	Output,
@@ -25,14 +23,29 @@ import { ALuInputDisplayer, ILuInputDisplayer } from '@lucca-front/ng/input';
 import { ALuPickerPanel, ILuPickerPanel } from '@lucca-front/ng/picker';
 import { ALuSelectInput } from './select-input.model';
 
-@Directive()
+@Directive({
+	host: {
+		'[tabindex]': 'tabindex',
+		'[class.is-disabled]': 'isDisabled',
+		'[class.is-focused]': 'isFocused',
+		'[class.mod-multiple]': 'modMultiple',
+		'[class.is-clearable]': 'isClearable',
+		'(click)': 'onClick()',
+		'(mouseenter)': 'onMouseEnter()',
+		'(mouseleave)': 'onMouseLeave()',
+		'(focus)': 'onFocus()',
+		'(blur)': 'onBlur()',
+		'(keydown.space)': 'onKeydown($event)',
+		'(keydown.enter)': 'onKeydown($event)',
+	},
+})
 export abstract class ALuSelectInputComponent<T, TPicker extends ILuPickerPanel<T> = ILuPickerPanel<T>> extends ALuSelectInput<T, TPicker> implements ControlValueAccessor, AfterViewInit, OnDestroy {
 	@ViewChild('display', { read: ViewContainerRef, static: true })
 	protected set _vcDisplayContainer(vcr: ViewContainerRef) {
 		this.displayContainer = vcr;
 	}
 
-	@HostBinding('tabindex') tabindex = 0;
+	tabindex = 0;
 
 	@Input('pickerOverlap') set overlapInput(o: boolean) {
 		this.target.overlap = o;
@@ -67,7 +80,6 @@ export abstract class ALuSelectInputComponent<T, TPicker extends ILuPickerPanel<
 		super(_changeDetectorRef, _overlay, _elementRef, _viewContainerRef, _renderer);
 	}
 
-	@HostBinding('class.is-disabled')
 	get isDisabled() {
 		return this.disabled;
 	}
@@ -76,17 +88,14 @@ export abstract class ALuSelectInputComponent<T, TPicker extends ILuPickerPanel<
 		this._disabled = d;
 	}
 
-	@HostBinding('class.is-focused')
 	get isFocused() {
 		return this._popoverOpen && !this.target.overlap;
 	}
 
-	@HostBinding('class.mod-multiple')
 	get modMultiple() {
 		return this._multiple;
 	}
 
-	@HostBinding('class.is-clearable')
 	get isClearable() {
 		return !!this._clearer;
 	}
@@ -105,33 +114,26 @@ export abstract class ALuSelectInputComponent<T, TPicker extends ILuPickerPanel<
 	@ContentChild(ALuClear, { static: true }) readonly ccClearer: ILuClear<T>;
 	@ViewChild(ALuClear, { static: true }) readonly vcClearer: ILuClear<T>;
 
-	@HostListener('click')
 	override onClick() {
 		super.onClick();
 	}
 
-	@HostListener('mouseenter')
 	override onMouseEnter() {
 		super.onMouseEnter();
 	}
 
-	@HostListener('mouseleave')
 	override onMouseLeave() {
 		super.onMouseLeave();
 	}
 
-	@HostListener('focus')
 	override onFocus() {
 		super.onFocus();
 	}
 
-	@HostListener('blur')
 	override onBlur() {
 		super.onBlur();
 	}
 
-	@HostListener('keydown.space', ['$event'])
-	@HostListener('keydown.enter', ['$event'])
 	onKeydown($event: Event) {
 		if (!this._popoverOpen) {
 			this.openPopover();
@@ -196,6 +198,9 @@ export abstract class ALuSelectInputComponent<T, TPicker extends ILuPickerPanel<
 	templateUrl: './select-input.component.html',
 	styleUrl: './select-input.component.scss',
 	changeDetection: ChangeDetectionStrategy.OnPush,
+	host: {
+		'[class.mod-multipleView]': 'modMultipleView',
+	},
 	providers: [
 		{
 			provide: NG_VALUE_ACCESSOR,
@@ -205,7 +210,6 @@ export abstract class ALuSelectInputComponent<T, TPicker extends ILuPickerPanel<
 	],
 })
 export class LuSelectInputComponent<T> extends ALuSelectInputComponent<T> implements AfterViewInit {
-	@HostBinding('class.mod-multipleView')
 	get modMultipleView() {
 		return this.useMultipleViews();
 	}
