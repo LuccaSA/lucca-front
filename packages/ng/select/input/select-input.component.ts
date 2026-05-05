@@ -5,7 +5,7 @@ import {
 	ChangeDetectionStrategy,
 	ChangeDetectorRef,
 	Component,
-	ContentChild,
+	contentChild,
 	Directive,
 	ElementRef,
 	EventEmitter,
@@ -14,7 +14,7 @@ import {
 	OnDestroy,
 	Output,
 	Renderer2,
-	ViewChild,
+	viewChild,
 	ViewContainerRef,
 } from '@angular/core';
 import { ControlValueAccessor, NG_VALUE_ACCESSOR } from '@angular/forms';
@@ -40,10 +40,7 @@ import { ALuSelectInput } from './select-input.model';
 	},
 })
 export abstract class ALuSelectInputComponent<T, TPicker extends ILuPickerPanel<T> = ILuPickerPanel<T>> extends ALuSelectInput<T, TPicker> implements ControlValueAccessor, AfterViewInit, OnDestroy {
-	@ViewChild('display', { read: ViewContainerRef, static: true })
-	protected set _vcDisplayContainer(vcr: ViewContainerRef) {
-		this.displayContainer = vcr;
-	}
+	private readonly _vcDisplayContainer = viewChild('display', { read: ViewContainerRef });
 
 	tabindex = 0;
 
@@ -103,16 +100,14 @@ export abstract class ALuSelectInputComponent<T, TPicker extends ILuPickerPanel<
 	/**
 	 * popover trigger class extension
 	 */
-	@ContentChild(ALuPickerPanel, { static: true }) readonly ccPicker: TPicker;
-	@ViewChild(ALuPickerPanel, { static: true }) readonly vcPicker: TPicker;
+	readonly ccPicker = contentChild(ALuPickerPanel);
+	readonly vcPicker = viewChild(ALuPickerPanel);
 
-	@ContentChild(ALuInputDisplayer, { static: true })
-	readonly ccDisplayer: ILuInputDisplayer<T>;
-	@ViewChild(ALuInputDisplayer, { static: true })
-	readonly vcDisplayer: ILuInputDisplayer<T>;
+	readonly ccDisplayer = contentChild<ILuInputDisplayer<T>>(ALuInputDisplayer);
+	readonly vcDisplayer = viewChild<ILuInputDisplayer<T>>(ALuInputDisplayer);
 
-	@ContentChild(ALuClear, { static: true }) readonly ccClearer: ILuClear<T>;
-	@ViewChild(ALuClear, { static: true }) readonly vcClearer: ILuClear<T>;
+	readonly ccClearer = contentChild<ILuClear<T>>(ALuClear);
+	readonly vcClearer = viewChild<ILuClear<T>>(ALuClear);
 
 	override onClick() {
 		super.onClick();
@@ -143,18 +138,19 @@ export abstract class ALuSelectInputComponent<T, TPicker extends ILuPickerPanel<
 	}
 
 	ngAfterViewInit() {
+		this.displayContainer = this._vcDisplayContainer()!;
 		this._isContentInitialized = true;
 
 		// init picker and displayer and clearer
-		const picker = this.ccPicker || this.vcPicker;
+		const picker = this.ccPicker() || this.vcPicker();
 		if (picker) {
-			this._picker = picker;
+			this._picker = picker as unknown as TPicker;
 		}
-		const displayer = this.ccDisplayer || this.vcDisplayer;
+		const displayer = this.ccDisplayer() || this.vcDisplayer();
 		if (displayer) {
 			this._displayer = displayer;
 		}
-		const clearer = this.ccClearer || this.vcClearer;
+		const clearer = this.ccClearer() || this.vcClearer();
 		if (clearer) {
 			this._clearer = clearer;
 		}
@@ -225,14 +221,13 @@ export class LuSelectInputComponent<T> extends ALuSelectInputComponent<T> implem
 	}
 
 	// display clearer
-	@ContentChild(ALuClear, { read: ElementRef, static: false })
-	readonly clearerEltRef: ElementRef<HTMLElement>;
-	@ViewChild('suffix', { read: ElementRef, static: true })
-	readonly suffixEltRef: ElementRef<HTMLElement>;
+	readonly clearerEltRef = contentChild(ALuClear, { read: ElementRef });
+	readonly suffixEltRef = viewChild('suffix', { read: ElementRef });
 
 	displayClearer() {
-		if (this.clearerEltRef) {
-			this._renderer.appendChild(this.suffixEltRef.nativeElement, this.clearerEltRef.nativeElement);
+		const clearerEl = this.clearerEltRef();
+		if (clearerEl) {
+			this._renderer.appendChild(this.suffixEltRef()!.nativeElement, clearerEl.nativeElement);
 		}
 	}
 
