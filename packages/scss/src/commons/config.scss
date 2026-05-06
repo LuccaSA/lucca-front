@@ -109,10 +109,18 @@ $borderRadiusTokens: (
 	'input': var(--pr-t-border-radius-default),
 );
 
+$paletteAI: (
+	angle: 'to bottom right',
+	color1: orchid,
+	color1stop: 0%,
+	color2: brand,
+	color2stop: 80%,
+);
+
 $product: 'brand' !default;
 $palettesShades: text, 0, 25, 50, 100, 200, 300, 400, 500, 600, 700, 800, 900; // text is deprecated
 $palettesStates: 'critical', 'error', 'warning', 'success', 'successContrasted', 'warningContrasted';
-$palettesDefault: 'brand', 'brandContrasted', 'neutral', 'navigation', 'AI';
+$palettesDefault: 'brand', 'brandContrasted', 'neutral', 'navigation', 'orchid';
 $palettesProduct: 'product';
 $palettesOtherProduct: () !default;
 $palettesDecorative: 'kiwi', 'cucumber', 'mint', 'lagoon', 'blueberry', 'lavender', 'watermelon', 'pumpkin' !default;
@@ -149,9 +157,17 @@ $fieldsWidth: 20, 30, 40, 50, 60 !default;
 
 // Palettes
 
-$ai: (
-	500: #bc6fdd,
+$orchid: (
+	50: #f9ebff,
+	100: #f3d6ff,
+	200: #edc2ff,
+	300: #de9ff9,
+	400: #cc7ded,
+	500: #b95ae2,
 	600: #a440cf,
+	700: #8133a3,
+	800: #680094,
+	900: #4c006b,
 );
 
 $brand: (
@@ -559,7 +575,6 @@ $productsInterpolation: (
 );
 
 $palettesInterpolation: (
-	'AI': $ai,
 	'lucca': $brand,
 	'brand': $brand,
 	'brandContrasted': $brandContrasted,
@@ -569,6 +584,7 @@ $palettesInterpolation: (
 	'secondary': map.get($productsInterpolation, $product),
 	'product': map.get($productsInterpolation, $product),
 	'navigation': $navigation,
+	'orchid': $orchid,
 	'success': $success,
 	'successContrasted': $successContrasted,
 	'error': $critical,

@@ -1,7 +1,7 @@
 import { ChangeDetectionStrategy, Component, input, numberAttribute, ViewEncapsulation } from '@angular/core';
 import { PortalContent, PortalDirective } from '@lucca-front/ng/core';
 import { LuSafeExternalSvgPipe } from '@lucca-front/ng/safe-content';
-import { Hx, HxStyle } from '../empty-state.model';
+import { Hx, HxStyle } from '../empty-state.type';
 
 @Component({
 	selector: 'lu-empty-state-page',

@@ -1,4 +1,5 @@
 import { booleanAttribute, ChangeDetectionStrategy, Component, input } from '@angular/core';
+import { SkeletonButtonSize } from './skeleton-button.type';
 
 @Component({
 	selector: 'lu-skeleton-button',
@@ -15,5 +16,5 @@ export class SkeletonButtonComponent {
 	/**
 	 * Changes the size of the skeleton button
 	 */
-	readonly size = input<'XS' | 'S' | 'M'>();
+	readonly size = input<SkeletonButtonSize>();
 }

@@ -82,6 +82,19 @@
 	@include core.cssvars('colors', config.$colors, '-color');
 	@include core.cssvars('colors', config.$colorsRgb, '-rgb');
 
+	@include core.cssvars('palettes-ai', config.$paletteAI);
+
+	@each $shade in config.$palettesShades {
+		@if $shade != text and $shade != 0 and $shade != 25 {
+			--palettes-ai-#{$shade}:
+				linear-gradient(
+					var(--palettes-ai-angle),
+					var(#{'--palettes-'}#{map.get(config.$paletteAI, color1)}-#{$shade}) var(--palettes-ai-color1stop),
+					var(#{'--palettes-'}#{map.get(config.$paletteAI, color2)}-#{max($shade - 100, 50)}) var(--palettes-ai-color2stop)
+				);
+		}
+	}
+
 	--commons-banner-height: 50px;
 	--commons-divider-width: 1px;
 	--commons-divider-style: solid;

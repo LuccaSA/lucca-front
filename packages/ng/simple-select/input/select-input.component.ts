@@ -11,6 +11,8 @@ import { IconComponent } from '@lucca-front/ng/icon';
 import { LU_SIMPLE_SELECT_TRANSLATIONS } from '../select.translate';
 import { LuSimpleSelectPanelRefFactory } from './panel-ref.factory';
 
+let nextID = 0;
+
 @Component({
 	selector: 'lu-simple-select',
 	templateUrl: './select-input.component.html',
@@ -52,6 +54,8 @@ import { LuSimpleSelectPanelRefFactory } from './panel-ref.factory';
 })
 export class LuSimpleSelectInputComponent<T> extends ALuSelectInputComponent<T, T> implements ControlValueAccessor {
 	intl = input(...intlInputOptions(LU_CORE_SELECT_TRANSLATIONS, LU_SIMPLE_SELECT_TRANSLATIONS));
+
+	valueID = `value-${++nextID}`;
 
 	@HostBinding('class.mod-filterPill')
 	public get filterPillClass() {
