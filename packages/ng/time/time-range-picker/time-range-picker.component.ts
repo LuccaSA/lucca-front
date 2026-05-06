@@ -68,7 +68,7 @@ export class TimeRangePickerComponent implements ControlValueAccessor, OnInit, V
 	readonly startValue = computed(() => this.value()?.start ?? DEFAULT_TIME_VALUE);
 	readonly endValue = computed(() => this.value()?.end ?? DEFAULT_TIME_VALUE);
 	readonly formFieldLabel = computed(() => this.#formFieldRef?.label());
-	readonly isLocalFr = computed(() => this.#locale === 'fr');
+	readonly isLocaleFr = computed(() => this.#locale === 'fr');
 
 	DEFAULT_TIME_VALUE = DEFAULT_TIME_VALUE;
 
@@ -86,7 +86,7 @@ export class TimeRangePickerComponent implements ControlValueAccessor, OnInit, V
 		if (isNil(control.value)) {
 			return null;
 		}
-		return !isValidTimeRangePicker(control.value) ? { time: true } : null;
+		return isValidTimeRangePicker(control.value) ? null : { time: true };
 	}
 
 	writeValue(value: TimeRangePickerRange | null): void {
@@ -130,6 +130,7 @@ export class TimeRangePickerComponent implements ControlValueAccessor, OnInit, V
 
 	onTouched(): void {
 		this.#onTouched?.();
+		this.#ngControl?.control?.markAsTouched();
 	}
 
 	partToFocus(): 'meridiem' | 'minutes' {
