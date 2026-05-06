@@ -86,7 +86,7 @@
     "@angular-eslint/schematics": "^21.0.3",
     "@angular/cli": "^21.0.3",
     "@angular/compiler-cli": "^21.0.3",
-    "@anthropic-ai/sdk": "^0.80.0",
+    "@anthropic-ai/sdk": "^0.91.1",
     "@compodoc/compodoc": "^1.1.16",
     "@jsdevtools/coverage-istanbul-loader": "^3.0.5",
     "@lucca-front/eslint-plugin": "workspace:*",
