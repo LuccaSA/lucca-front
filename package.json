@@ -129,7 +129,7 @@
     "mini-css-extract-plugin": "^2.10.0",
     "msw": "^2.3.0",
     "ng-packagr": "^21.0.0",
-    "postcss": "8.5.3",
+    "postcss": "8.5.10",
     "postcss-scss": "^4.0.6",
     "postcss-selector-parser": "7.1.0",
     "postcss-value-parser": "^4.2.0",
