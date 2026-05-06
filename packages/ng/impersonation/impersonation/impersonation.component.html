@@ -36,9 +36,10 @@
 					<lu-user-picture aria-hidden="true" [user]="user" size="XS" softRounded />
 					<div>
 						@if (currentUserId === user.id) {
-							{{ intl().me }}
+							{{ intl().me }} <span translate="no">{{ user | luUserDisplay }}</span>
+						} @else {
+							<span translate="no">{{ user | luUserDisplay }}</span>
 						}
-						<span translate="no">{{ user | luUserDisplay }}</span>
 						<!-- Handle homonyms -->
 						@if (user.additionalInformation) {
 							<div class="option-additional">
