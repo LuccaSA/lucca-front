@@ -34,7 +34,7 @@
 	--components-callout-boxShadow: var(--pr-t-elevation-shadow-button);
 	--components-callout-backgroundColor: var(--pr-t-elevation-surface-raised);
 
-	@include color.borderGradient($gradient: var(--palettes-ai-300));
+	@include color.borderGradient($gradient: var(--pr-t-color-border-ai));
 
 	.callout-icon {
 		.lucca-icon {

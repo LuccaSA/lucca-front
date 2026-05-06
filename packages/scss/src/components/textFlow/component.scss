@@ -1,6 +1,8 @@
 @use '@lucca-front/scss/src/commons/utils/namespace';
 
 @mixin component($atRoot: namespace.$defaultAtRoot) {
+	overflow-wrap: anywhere;
+
 	h1 {
 		margin-block: var(--pr-t-spacings-300);
 	}

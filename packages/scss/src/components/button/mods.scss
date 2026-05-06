@@ -280,7 +280,7 @@
 	@include outlined;
 
 	&:not(:disabled) {
-		@include color.borderGradient($gradient: var(--palettes-ai-300));
+		@include color.borderGradient($gradient: var(--pr-t-color-border-ai));
 
 		&:not(.mod-invert) {
 			.lucca-icon {

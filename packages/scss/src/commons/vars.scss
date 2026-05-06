@@ -83,14 +83,15 @@
 	@include core.cssvars('colors', config.$colorsRgb, '-rgb');
 
 	@include core.cssvars('palettes-ai', config.$paletteAI);
+	@include core.cssvars('pr-t-color', config.$tokenAI, '-ai');
 
 	@each $shade in config.$palettesShades {
 		@if $shade != text and $shade != 0 and $shade != 25 {
 			--palettes-ai-#{$shade}:
 				linear-gradient(
 					var(--palettes-ai-angle),
-					var(#{'--palettes-'}#{map.get(config.$paletteAI, color1)}-#{$shade}) var(--palettes-ai-color1stop),
-					var(#{'--palettes-'}#{map.get(config.$paletteAI, color2)}-#{max($shade - 100, 50)}) var(--palettes-ai-color2stop)
+					var(#{'--palettes-'}#{list.nth(config.$colorAI, 1)}-#{$shade}) var(--palettes-ai-color1stop),
+					var(#{'--palettes-'}#{list.nth(config.$colorAI, 2)}-#{max($shade - 100, 50)}) var(--palettes-ai-color2stop)
 				);
 		}
 	}
