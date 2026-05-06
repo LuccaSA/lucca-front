@@ -8,8 +8,8 @@ import { PopoverDirective } from '@lucca-front/ng/popover2';
 import { LuSimpleSelectInputComponent } from '@lucca-front/ng/simple-select';
 import { ILuUser, LuUserDisplayPipe, LuUserPictureComponent } from '@lucca-front/ng/user';
 import { IconComponent } from '@lucca/prisme/icon';
-import { intlInputOptions } from '../../core/translate';
 import { LU_IMPERSONATION_TRANSLATIONS } from './impersonation.translate';
+import { intlInputOptions } from '@lucca-front/ng/core';
 
 @Component({
 	selector: 'lu-impersonation',
