@@ -82,7 +82,7 @@ class MockFileUploadService {
 		if (this.errorSettings === 'none' || (this.errorSettings === 'partial' && this.callNumber % 2 === 0)) {
 			return base.pipe(
 				map(() => ({
-					id: 'mockId' as LuccaFileUploadResultId,
+					id: 'mockId',
 					name: file.name,
 					contentLength: file.size,
 					contentType: file.type,

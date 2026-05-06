@@ -112,7 +112,7 @@ export class PortalDirective<T = unknown> implements OnDestroy {
 		}
 	}
 
-	public static ngTemplateContextGuard<T>(_dir: PortalDirective<T>, ctx: unknown): ctx is void {
+	public static ngTemplateContextGuard<T>(_dir: PortalDirective<T>, _ctx: unknown): _ctx is void {
 		return true;
 	}
 }

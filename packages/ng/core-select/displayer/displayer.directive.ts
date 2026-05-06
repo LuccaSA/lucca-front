@@ -12,7 +12,7 @@ export class LuDisplayerDirective<TOption, TValue> {
 
 	public constructor(private templateRef: TemplateRef<LuOptionContext<TOption>>) {}
 
-	public static ngTemplateContextGuard<TOption, TValue>(_dir: LuDisplayerDirective<TOption, TValue>, ctx: unknown): ctx is LuOptionContext<TOption> {
+	public static ngTemplateContextGuard<TOption, TValue>(_dir: LuDisplayerDirective<TOption, TValue>, _ctx: unknown): ctx is LuOptionContext<TOption> {
 		return true;
 	}
 }
