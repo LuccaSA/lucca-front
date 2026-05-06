@@ -297,6 +297,10 @@
 
 	.pr-u-animated {
 		@extend %animated;
+
+		&Shake {
+			@extend %animatedShake;
+		}
 	}
 
 	.pr-u-mask {
