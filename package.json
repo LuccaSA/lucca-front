@@ -99,7 +99,7 @@
     "@storybook/addon-mcp": "^0.4.1",
     "@storybook/angular": "^10.1.9",
     "@storybook/test-runner": "^0.24.2",
-    "@swc/core": "^1.13.5",
+    "@swc/core": "^1.15.8",
     "@testing-library/angular": "^18.1.1",
     "@testing-library/dom": "^10.4.0",
     "@testing-library/jest-dom": "^6.6.3",
