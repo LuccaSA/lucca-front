@@ -6,7 +6,7 @@ const LOCALES = ['fr-FR', 'en-US', 'es-ES', 'de-DE', 'it-IT', 'nl-NL', 'pt-PT', 
 // Reference Sunday: 2024-01-07
 const REFERENCE_SUNDAY = new Date(2024, 0, 7);
 
-function getDayNames(locale: string, style: 'long' | 'short'): string[] {
+function getDayNames(locale: string, style: 'long' | 'short' | 'narrow'): string[] {
 	return Array.from({ length: 7 }, (_, i) => {
 		const date = new Date(REFERENCE_SUNDAY);
 		date.setDate(REFERENCE_SUNDAY.getDate() + i);
@@ -25,6 +25,7 @@ interface LocaleData {
 	locale: string;
 	days: string[];
 	daysShort: string[];
+	daysNarrow: string[];
 	months: string[];
 	monthsShort: string[];
 }
@@ -33,6 +34,7 @@ const LOCALE_DATA: LocaleData[] = LOCALES.map((locale) => ({
 	locale,
 	days: getDayNames(locale, 'long'),
 	daysShort: getDayNames(locale, 'short'),
+	daysNarrow: getDayNames(locale, 'narrow'),
 	months: getMonthNames(locale, 'long'),
 	monthsShort: getMonthNames(locale, 'short'),
 }));
@@ -45,13 +47,14 @@ const LOCALE_DATA: LocaleData[] = LOCALES.map((locale) => ({
 				<tr>
 					<th rowspan="2">Locale</th>
 					<th colspan="2">Months</th>
-					<th colspan="2">Days</th>
+					<th colspan="3">Days</th>
 				</tr>
 				<tr>
 					<th>Long</th>
 					<th>Short</th>
 					<th>Long</th>
 					<th>Short</th>
+					<th>Narrow</th>
 				</tr>
 			</thead>
 			<tbody>
@@ -65,6 +68,7 @@ const LOCALE_DATA: LocaleData[] = LOCALES.map((locale) => ({
 							<td>{{ entry.monthsShort[i] }}</td>
 							<td>{{ i < 7 ? entry.days[i] : '' }}</td>
 							<td>{{ i < 7 ? entry.daysShort[i] : '' }}</td>
+							<td>{{ i < 7 ? entry.daysNarrow[i] : '' }}</td>
 						</tr>
 					}
 				}
