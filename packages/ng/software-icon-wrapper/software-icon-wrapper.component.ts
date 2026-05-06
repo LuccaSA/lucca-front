@@ -1,43 +1,33 @@
-import { ChangeDetectionStrategy, Component, computed, contentChild, contentChildren, effect, input, ViewEncapsulation } from '@angular/core';
-import { IntlParamsPipe } from '@lucca-front/ng/core';
-import { SoftwareIconComponent, SOFTWARE_ICON_WRAPPER } from '@lucca-front/ng/software-icon';
-import { SoftwareIconWrapperButtonMoreComponent } from './software-icon-button-more/software-icon-wrapper-button-more.component';
-import { isNotNil } from '../core/misc';
+import { ChangeDetectionStrategy, Component, computed, contentChildren, effect, input, numberAttribute, ViewEncapsulation } from '@angular/core';
+import { SoftwareIconComponent } from '@lucca-front/ng/software-icon';
 import { PopoverDirective } from '../popover2/popover.directive';
+import { intlInputOptions, IntlParamsPipe } from '../core/translate';
+import { LU_SOFTWARE_ICON_WRAPPER_TRANSLATIONS } from './software-icon-wrapper.translate';
 
 @Component({
 	selector: 'lu-software-icon-wrapper',
 	templateUrl: './software-icon-wrapper.component.html',
 	changeDetection: ChangeDetectionStrategy.OnPush,
 	encapsulation: ViewEncapsulation.None,
-	imports: [PopoverDirective, SoftwareIconComponent, SoftwareIconWrapperButtonMoreComponent],
-	providers: [
-		{
-			provide: SOFTWARE_ICON_WRAPPER,
-			useFactory: (component: SoftwareIconWrapperComponent) => ({
-				size: component.size,
-			}),
-			deps: [SoftwareIconWrapperComponent],
-		},
-	],
+	imports: [PopoverDirective, SoftwareIconComponent, IntlParamsPipe],
 })
 export class SoftwareIconWrapperComponent {
-	readonly max = input<number | null | undefined>(null);
+	readonly max = input(0, { transform: numberAttribute });
 	readonly size = input<'XXS' | 'XS' | 'S' | 'L' | ''>('');
+	readonly intl = input(...intlInputOptions(LU_SOFTWARE_ICON_WRAPPER_TRANSLATIONS));
 
 	protected readonly icons = contentChildren(SoftwareIconComponent);
-	protected readonly buttonMore = contentChild(SoftwareIconWrapperButtonMoreComponent);
 
 	readonly hiddenIcons = computed<SoftwareIconComponent[]>(() => {
-		const icons = this.icons();
 		const max = this.max();
-		return max == null || max <= 0 || icons.length <= max ? [] : [...icons].slice(max);
+		const icons = this.icons();
+		return max == null || max <= 0 || icons.length <= max ? [] : icons.slice(max);
 	});
 
 	readonly hiddenCount = computed(() => this.hiddenIcons().length);
-	readonly hasButtonMore = computed(() => isNotNil(this.buttonMore()));
 
 	constructor() {
+		effect(() => this.icons().forEach((i) => i.hasParent.set(true)));
 		effect(() => this.#toggleIconsVisibility(this.icons(), this.max()));
 	}
 

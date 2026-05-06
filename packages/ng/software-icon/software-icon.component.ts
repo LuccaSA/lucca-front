@@ -1,7 +1,6 @@
-import { booleanAttribute, ChangeDetectionStrategy, Component, computed, inject, input, signal, ViewEncapsulation } from '@angular/core';
+import { booleanAttribute, ChangeDetectionStrategy, Component, computed, input, signal, ViewEncapsulation } from '@angular/core';
 import { LuSafeExternalSvgPipe } from '@lucca-front/ng/safe-content';
 import { SoftwareIcon } from './software-icon';
-import { SOFTWARE_ICON_WRAPPER, SoftwareIconWrapperContext } from './software-icon-wrapper.context';
 
 @Component({
 	selector: 'lu-software-icon',
@@ -11,13 +10,11 @@ import { SOFTWARE_ICON_WRAPPER, SoftwareIconWrapperContext } from './software-ic
 	encapsulation: ViewEncapsulation.None,
 	imports: [LuSafeExternalSvgPipe],
 	host: {
-		'[class.softwareIconWrapper-item]': 'parent',
-		'[attr.role]': 'parent ? "listitem" : null',
+		'[class.softwareIconWrapper-item]': 'hasParent()',
+		'[attr.role]': 'hasParent() ? "listitem" : null',
 	},
 })
 export class SoftwareIconComponent {
-	readonly parent: SoftwareIconWrapperContext | null | undefined = inject(SOFTWARE_ICON_WRAPPER, { optional: true });
-
 	readonly domain = 'https://cdn.lucca.fr';
 	readonly path = '/transverse/prisme/visuals/software-icon/';
 	readonly extension = '.svg';
@@ -28,7 +25,6 @@ export class SoftwareIconComponent {
 	readonly size = input<'XXS' | 'XS' | 'S' | 'L' | ''>('');
 
 	readonly hidden = signal(false);
+	readonly hasParent = signal(false);
 	readonly iconUrl = computed(() => `${this.domain}${this.path}${this.icon()}${this.extension}`);
-
-	protected readonly _size = computed(() => (this.size() !== '' ? this.size() : (this.parent?.size?.() ?? '')));
 }

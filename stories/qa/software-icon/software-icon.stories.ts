@@ -2,11 +2,12 @@ import { ChangeDetectionStrategy, Component } from '@angular/core';
 import { LuSafeExternalSvgPipe } from '@lucca-front/ng/safe-content';
 import { SoftwareIconComponent, SoftwareIconList } from '@lucca-front/ng/software-icon';
 import { Meta, StoryObj, moduleMetadata } from '@storybook/angular';
+import { SoftwareIconWrapperComponent } from '@lucca-front/ng/software-icon-wrapper/software-icon-wrapper.component';
 
 @Component({
 	selector: 'software-icon-stories',
 	templateUrl: './software-icon.stories.html',
-	imports: [SoftwareIconComponent, LuSafeExternalSvgPipe],
+	imports: [SoftwareIconComponent, LuSafeExternalSvgPipe, SoftwareIconWrapperComponent],
 	changeDetection: ChangeDetectionStrategy.OnPush,
 })
 class SoftwareIconStory {
