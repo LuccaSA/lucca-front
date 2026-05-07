@@ -1,51 +1,43 @@
 @if (!isHidden()) {
 	@if (layout() === "default") {
-		<label [attr.for]="id" class="filterPill-label">
-			<ng-container
-				*ngTemplateOutlet="
-					labelTpl();
-					context: { label: label(), isEmpty: inputIsEmpty(), placeholder: placeholder(), colon: colonDisplay() }
-				"
-			/>
-		</label>
 		<button
-			[id]="id"
-			[attr.disabled]="disabled() ? 'disabled' : null"
-			class="filterPill-combobox"
 			type="button"
-			role="combobox"
-			[luPopover2]="pillContent"
-			[luPopoverNoCloseButton]="true"
-			[customPositions]="popoverPositions"
-			[luPopoverAnchor]="elementRef"
-			(luPopoverOpened)="popoverOpened()"
-			luTooltip
-			luTooltipWhenEllipsis
-			[luTooltipDisabled]="inputIsEmpty()"
-			#comboboxRef
-			#popoverRef="luPopover2"
+			class="filterPill"
+			[attr.disabled]="disabled() ? 'disabled' : null"
+			[class.is-filled]="!this.inputIsEmpty()"
 			[attr.aria-expanded]="popoverRef.opened()"
+			(click)="popoverRef.openPopover(true)"
 			(keydown.arrowDown)="$event.preventDefault(); popoverRef.openPopover(true)"
 			(keydown.arrowUp)="$event.preventDefault(); popoverRef.openPopover(true)"
+			[luPopover2]="pillContent"
+			[luPopoverAnchor]="elementRef"
+			[luPopoverNoCloseButton]="true"
+			[customPositions]="popoverPositions"
+			(luPopoverOpened)="popoverOpened()"
+			#filterPillRef
+			#popoverRef="luPopover2"
 		>
-			<ng-container *ngTemplateOutlet="pillTpl; context: { label: label(), isEmpty: inputIsEmpty() }" />
-			@if (inputIsEmpty() && !disabled()) {
-				{{ placeholder() }}
-			}
+			<span class="filterPill-label">
+				<ng-container
+					*ngTemplateOutlet="
+						labelTpl();
+						context: { label: label(), isEmpty: inputIsEmpty(), placeholder: placeholder(), colon: colonDisplay() }
+					"
+				/>
+			</span>
+			<span class="filterPill-value" luTooltip luTooltipWhenEllipsis [luTooltipDisabled]="inputIsEmpty()">
+				<ng-container *ngTemplateOutlet="pillTpl; context: { label: label(), isEmpty: inputIsEmpty() }" />
+				@if (inputIsEmpty() && !disabled()) {
+					{{ placeholder() }}
+				}
+			</span>
+			<span class="filterPill-toggle">
+				<lu-icon [icon]="displayedIcon()" size="S" />
+			</span>
 		</button>
 		@if (inputIsClearable()) {
-			<lu-clear class="filterPill-clear" (onClear)="clear(); comboboxRef.focus()">{{ intl().clear }}</lu-clear>
+			<lu-clear class="filterPill_clear" (onClear)="clear(); filterPillRef.focus()">{{ intl().clear }}</lu-clear>
 		}
-		<button
-			type="button"
-			aria-hidden="true"
-			tabindex="-1"
-			class="filterPill-toggle"
-			[attr.disabled]="disabled() ? 'disabled' : null"
-			(click)="popoverRef.openPopover(true)"
-		>
-			<lu-icon [icon]="displayedIcon()" size="S" />
-		</button>
 	} @else {
 		<ng-container
 			*ngTemplateOutlet="
