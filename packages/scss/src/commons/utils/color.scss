@@ -31,8 +31,8 @@
 	@include core.rosetta('--palettes-warning', '--palettes-warningContrasted', config.$palettesShades);
 }
 
-@mixin borderGradient($angle: 0, $color1: var(--palettes-neutral-0) , $color2:  var(--palettes-neutral-900), $radius: var(--pr-t-border-radius-default), $width: var(--commons-divider-width)) {
-	&::before {
+@mixin borderGradient($angle: 0, $color1: var(--palettes-neutral-0) , $color2:  var(--palettes-neutral-900), $radius: var(--pr-t-border-radius-default), $width: var(--commons-divider-width), $pseudo: '::before') {
+	&#{$pseudo} {
 		content: '';
 		pointer-events: none;
 		position: absolute;
