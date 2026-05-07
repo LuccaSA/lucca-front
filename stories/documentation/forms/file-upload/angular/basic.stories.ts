@@ -138,7 +138,6 @@ export default {
 		},
 		displayFileName: {
 			description: 'Affiche le nom des fichiers importés sous l’image en vue <code>media</code>.',
-			if: { arg: 'media', truthy: true },
 		},
 		structure: {
 			description: 'Augmente le border-radius du champ pour l’utiliser en élément de structure.',

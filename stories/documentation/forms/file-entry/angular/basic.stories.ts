@@ -21,6 +21,7 @@ export default {
 			description: 'Modifie l’état du composant.',
 		},
 		previewUrl: {
+			if: { arg: 'iconOverride', truthy: false },
 			description: 'URL de prévisualisation de l’image uploadée.',
 		},
 		displayFileName: {
@@ -31,7 +32,6 @@ export default {
 			description: 'Affiche le fichier avec une mise en forme adaptée aux visuels.',
 		},
 		iconOverride: {
-			if: { arg: 'previewUrl', truthy: false },
 			description: 'Remplace l’icône de format de fichier.',
 		},
 		downloadURL: {

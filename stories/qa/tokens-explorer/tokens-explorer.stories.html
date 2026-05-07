@@ -1,0 +1,148 @@
+<div class="tokensExplorer">
+	<lu-filter-bar>
+		<lu-segmented-control
+			*luFilterPillAddonBefore
+			class="filterBar-segmentedControl"
+			[ngModel]="category()"
+			(ngModelChange)="category.set($event)"
+			[ngModelOptions]="{ standalone: true }"
+		>
+			@for (option of categoryOptions; track option.value) {
+				<ng-template #label>{{ option.label }} <lu-numeric-badge [value]="option.count" /></ng-template>
+				<lu-segmented-control-filter [label]="label" [value]="option.value" />
+			}
+		</lu-segmented-control>
+
+		<lu-filter-pill label="Produit">
+			<lu-simple-select
+				[ngModel]="product()"
+				(ngModelChange)="product.set($event)"
+				[ngModelOptions]="{ standalone: true }"
+				[options]="productOptions"
+			/>
+		</lu-filter-pill>
+
+		<lu-form-field label="Rechercher un token" hiddenLabel>
+			<lu-text-input
+				[ngModel]="search()"
+				(ngModelChange)="search.set($event ?? '')"
+				[ngModelOptions]="{ standalone: true }"
+				placeholder="Rechercher…"
+				hasSearchIcon
+				hasClearer
+			/>
+		</lu-form-field>
+
+		<span *luFilterPillAddonAfter class="tokensExplorer-results">{{ filteredTokens().length }} résultat(s)</span>
+	</lu-filter-bar>
+
+	@if (filteredTokens().length === 0) {
+		<div class="tokensExplorer-empty">Aucun token ne correspond à votre recherche.</div>
+	} @else {
+		@for (group of groupedTokens(); track group.label) {
+			<section class="tokensExplorer-group" [class]="product() ? 'palette-' + product().value : ''">
+				@if (group.label) {
+					<h2 class="tokensExplorer-group-title">{{ group.label }}</h2>
+				}
+				<div class="tokensExplorer-grid">
+					@for (token of group.tokens; track token.name) {
+						<button
+							type="button"
+							class="tokensExplorer-card"
+							[class.is-copied]="copiedToken() === token.name"
+							[luTooltip]="copiedToken() === token.name ? 'Copié\u00a0!' : 'Copier'"
+							(click)="copyToken(token)"
+						>
+							@switch (token.preview) {
+								@case ("swatch") {
+									<div
+										class="tokensExplorer-card-preview mod-swatch"
+										[class]="
+											'tokensExplorer-card-preview mod-swatch' + (token.previewVar && product() ? ' palette-' + product().value : '')
+										"
+										[style.backgroundColor]="
+											token.previewVar ? 'var(' + token.previewVar + ', var(' + token.name + '))' : 'var(' + token.name + ')'
+										"
+									></div>
+								}
+								@case ("text") {
+									<div class="tokensExplorer-card-preview">
+										<span
+											class="tokensExplorer-card-preview-font"
+											[style.color]="'var(' + token.name + ')'"
+											[style.backgroundColor]="token.name === '--pr-t-color-text-reverse' ? 'var(--palettes-neutral-900)' : null"
+											>Aa</span
+										>
+									</div>
+								}
+								@case ("spacing") {
+									<div class="tokensExplorer-card-preview">
+										<div
+											class="tokensExplorer-card-preview-spacing"
+											[style.inlineSize]="'var(' + token.name + ')'"
+											[style.blockSize]="'var(' + token.name + ')'"
+											[style.minInlineSize]="'2px'"
+											[style.minBlockSize]="'2px'"
+										></div>
+									</div>
+								}
+								@case ("radius") {
+									<div class="tokensExplorer-card-preview mod-radius">
+										<div class="tokensExplorer-card-preview-radius" [style.borderRadius]="'var(' + token.name + ')'"></div>
+									</div>
+								}
+								@case ("font") {
+									<div class="tokensExplorer-card-preview">
+										<span class="tokensExplorer-card-preview-font" [style.font]="'var(' + token.name + ')'">Aa</span>
+									</div>
+								}
+								@case ("fontSize") {
+									<div class="tokensExplorer-card-preview">
+										<span class="tokensExplorer-card-preview-fontSize" [style.fontSize]="'var(' + token.name + ')'">Aa</span>
+									</div>
+								}
+								@case ("lineHeight") {
+									<div class="tokensExplorer-card-preview">
+										<span class="tokensExplorer-card-preview-lineHeight" [style.lineHeight]="'var(' + token.name + ')'">Ag</span>
+									</div>
+								}
+								@case ("fontWeight") {
+									<div class="tokensExplorer-card-preview">
+										<span class="tokensExplorer-card-preview-fontWeight" [style.fontWeight]="'var(' + token.name + ')'">Aa</span>
+									</div>
+								}
+								@case ("fontFamily") {
+									<div class="tokensExplorer-card-preview">
+										<span class="tokensExplorer-card-preview-fontFamily" [style.fontFamily]="'var(' + token.name + ')'">Aa</span>
+									</div>
+								}
+								@case ("shadow") {
+									<div class="tokensExplorer-card-preview mod-shadow" [style.boxShadow]="'var(' + token.name + ')'"></div>
+								}
+								@case ("surface") {
+									<div class="tokensExplorer-card-preview mod-surface" [style.backgroundColor]="'var(' + token.name + ')'"></div>
+								}
+								@default {
+									<div class="tokensExplorer-card-preview">
+										<span class="tokensExplorer-card-preview-raw">{{ token.value }}</span>
+									</div>
+								}
+							}
+
+							<div class="tokensExplorer-card-info">
+								<span class="tokensExplorer-card-name">{{ token.name }}</span>
+								<span class="tokensExplorer-card-value">{{ token.value }}</span>
+							</div>
+
+							<lu-icon class="tokensExplorer-card-icon" [icon]="copiedToken() === token.name ? 'tick' : 'copy'" />
+							<span class="pr-u-mask">Cliquer pour copier le token {{ token.name }}</span>
+						</button>
+					}
+				</div>
+			</section>
+		}
+	}
+</div>
+
+<!-- To tell the ui-diff tool that the page has finished rendering -->
+<span id="ready"></span>
