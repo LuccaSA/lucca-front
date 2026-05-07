@@ -198,7 +198,7 @@ export class FilterPillComponent {
 	}
 
 	closePopover = () => {
-		this.popoverRef().close();
+		this.popoverRef()?.close();
 		this.inputComponentRef()?.onFilterPillClosed?.();
 	};
 

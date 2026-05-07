@@ -102,3 +102,31 @@
 		}
 	}
 }
+
+@mixin softRoundedXXXL {
+	--components-avatar-borderRadius: var(--pr-t-border-radius-400);
+}
+
+@mixin softRoundedXXL {
+	--components-avatar-borderRadius: var(--pr-t-border-radius-300);
+}
+
+@mixin softRoundedXL {
+	--components-avatar-borderRadius: var(--pr-t-border-radius-300);
+}
+
+@mixin softRoundedL {
+	--components-avatar-borderRadius: var(--pr-t-border-radius-200);
+}
+
+@mixin softRounded {
+	--components-avatar-borderRadius: var(--pr-t-border-radius-200);
+}
+
+@mixin softRoundedS {
+	--components-avatar-borderRadius: var(--pr-t-border-radius-150);
+}
+
+@mixin softRoundedXS {
+	--components-avatar-borderRadius: var(--pr-t-border-radius-100);
+}

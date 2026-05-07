@@ -20,10 +20,10 @@ function getTemplate(args: ActivityFeedUpdatedStory): string {
 			<time datetime="2025-07-15 08:56" class="activityFeed-step-description-time"><abbr>Mar.</abbr> 15 juillet 2025 à 08:56</time>
 			<div class="activityFeed-content">
 				<div class="activityFeed-content-update">
-					<div class="activityFeed-content-update-before">1000&nbsp;€</div>
+					<div class="activityFeed-content-update-before">1000 €</div>
 					<span class="activityFeed-content-update-icon lucca-icon icon-arrowRight mod-XS" aria-hidden="true"></span>
 					<span class="pr-u-mask">a été remplacé par</span>
-					<div class="activityFeed-content-update-after">800&nbsp;€</div>
+					<div class="activityFeed-content-update-after">800 €</div>
 				</div>
 			</div>
 		</div>
