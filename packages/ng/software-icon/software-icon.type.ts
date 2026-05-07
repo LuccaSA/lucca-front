@@ -35,9 +35,12 @@ export const SOFTWARE_ICON = [
 	'benefits',
 	'payroll-assistant',
 	// Lucca
-
 	'administration',
 	'cloud-control',
+	'client-center',
+	'sandbox',
+	'store',
+	'ask-lucca',
 	'lucca',
 ] as const;
 

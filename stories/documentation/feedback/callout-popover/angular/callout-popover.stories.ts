@@ -103,6 +103,12 @@ export default {
 			},
 			description: 'Détermine le mode d’ouverture du popover.',
 		},
+		popoverDisabled: {
+			control: {
+				type: 'boolean',
+			},
+			description: 'Désactive l’apparition du popover.',
+		},
 		size: {
 			options: setStoryOptions(CALLOUT_POPOVER_SIZE),
 			control: {
@@ -131,6 +137,7 @@ export const Template: StoryObj<CalloutPopoverComponent & { items: number; custo
 		customText: '',
 		heading: '',
 		popoverTrigger: null,
+		popoverDisabled: false,
 		headingHiddenIfSingleItem: false,
 		items: 2,
 		closeDelay: 500,
