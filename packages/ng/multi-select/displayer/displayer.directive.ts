@@ -12,7 +12,7 @@ export class LuMultiDisplayerDirective<T> {
 
 	public constructor(private templateRef: TemplateRef<LuOptionContext<T[]>>) {}
 
-	public static ngTemplateContextGuard<T>(_dir: LuMultiDisplayerDirective<T>, ctx: unknown): ctx is LuOptionContext<T[]> {
+	public static ngTemplateContextGuard<T>(_dir: LuMultiDisplayerDirective<T>, _ctx: unknown): _ctx is LuOptionContext<T[]> {
 		return true;
 	}
 }
