@@ -1,7 +1,8 @@
 import { ButtonComponent } from '@lucca-front/ng/button';
-import { CalloutDisclosureComponent, CalloutFeedbackItemComponent, CalloutFeedbackItemDescriptionDirective, CalloutFeedbackListComponent } from '@lucca-front/ng/callout';
+import { CALLOUT_SIZE, CalloutDisclosureComponent, CalloutFeedbackItemComponent, CalloutFeedbackItemDescriptionDirective, CalloutFeedbackListComponent, CalloutStates } from '@lucca-front/ng/callout';
+import { PALETTE } from '@lucca/prisme/core';
 import { Meta, StoryObj, moduleMetadata } from '@storybook/angular';
-import { generateInputs } from 'stories/helpers/stories';
+import { generateInputs, setStoryOptions } from 'stories/helpers/stories';
 
 export default {
 	title: 'Documentation/Feedback/Callout Disclosure/Angular',
@@ -37,20 +38,21 @@ export default {
 	},
 	argTypes: {
 		icon: {
-			options: [null, 'signInfo', 'signSuccess', 'signWarning', 'signError', 'signHelp'],
+			options: ['', 'signInfo', 'signSuccess', 'signWarning', 'signError', 'signHelp'],
 			control: {
 				type: 'select',
 			},
 			description: 'Ajoute une icône au callout.',
 		},
 		state: {
-			options: [null, 'success', 'warning', 'error'],
+			options: setStoryOptions(CalloutStates),
 			control: {
 				type: 'select',
 			},
 			description: 'État du callout.',
 		},
 		size: {
+			options: setStoryOptions(CALLOUT_SIZE),
 			control: {
 				type: 'select',
 			},
@@ -60,7 +62,7 @@ export default {
 			description: 'Titre du callout.',
 		},
 		palette: {
-			options: ['none', 'product', 'neutral', 'success', 'warning', 'error'],
+			options: setStoryOptions(PALETTE),
 			control: {
 				type: 'select',
 			},
@@ -74,9 +76,7 @@ export default {
 
 export const Template: StoryObj<CalloutDisclosureComponent> = {
 	args: {
-		state: null,
 		heading: 'List title',
-		icon: null,
 		palette: 'none',
 		open: false,
 	},

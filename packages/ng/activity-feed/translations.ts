@@ -9,10 +9,10 @@
 		replaceByAlt: 'wurde ersetzt durch',
 	},
 	en: {
-		replaceByAlt: 'has been replaced by',
+		replaceByAlt: 'was replaced by',
 	},
 	es: {
-		replaceByAlt: 'ha sido sustituido por',
+		replaceByAlt: 'se ha sustituido por',
 	},
 	it: {
 		replaceByAlt: 'è stato sostituito da',

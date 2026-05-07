@@ -1,4 +1,6 @@
+import { FIELDSET_SIZE } from '@lucca-front/ng/forms';
 import { Meta, StoryObj } from '@storybook/angular';
+import { setStoryOptions } from 'stories/helpers/stories';
 
 interface FieldsetBasicStory {
 	horizontal: boolean;
@@ -34,7 +36,7 @@ export default {
 			description: 'Affiche le fieldset en vue dépliée.',
 		},
 		size: {
-			options: ['S', null],
+			options: setStoryOptions(FIELDSET_SIZE),
 			control: {
 				type: 'select',
 			},
@@ -123,7 +125,6 @@ export const Basic: StoryObj<FieldsetBasicStory> = {
 	args: {
 		heading: 'Title',
 		helper: '',
-		size: null,
 		expandable: false,
 		expanded: false,
 		horizontal: false,

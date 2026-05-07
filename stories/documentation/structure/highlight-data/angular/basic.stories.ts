@@ -1,9 +1,9 @@
 import { provideRouter } from '@angular/router';
 import { ButtonComponent } from '@lucca-front/ng/button';
-import { HighlightDataComponent } from '@lucca-front/ng/highlight-data';
+import { HIGHLIGHT_DATA_BUBBLE, HIGHLIGHT_DATA_ILLUSTRATION, HIGHLIGHT_DATA_PALETTE, HIGHLIGHT_DATA_SIZE, HIGHLIGHT_DATA_THEME, HighlightDataComponent } from '@lucca-front/ng/highlight-data';
 import { LinkComponent } from '@lucca-front/ng/link';
 import { applicationConfig, Meta, moduleMetadata, StoryObj } from '@storybook/angular';
-import { generateInputs } from 'stories/helpers/stories';
+import { generateInputs, setStoryOptions } from 'stories/helpers/stories';
 export default {
 	title: 'Documentation/Structure/Highlight data/Angular/Basic',
 	component: HighlightDataComponent,
@@ -44,28 +44,13 @@ export const Template: StoryObj<HighlightDataComponent & { action: string }> = {
 			type: 'string',
 		},
 		bubble: {
-			options: [1, 2, 3, 4, null],
+			options: setStoryOptions(HIGHLIGHT_DATA_BUBBLE),
 			control: {
 				type: 'select',
 			},
 		},
 		illustration: {
-			options: [
-				'calculator',
-				'calendar',
-				'cleemy-card',
-				'coffee',
-				'headphone',
-				'mail',
-				'magnifying-glass',
-				'mealvoucher-card',
-				'medallon',
-				'piggy-bank',
-				'polaroid-female',
-				'polaroid-male',
-				'polaroids',
-				null,
-			],
+			options: setStoryOptions(HIGHLIGHT_DATA_ILLUSTRATION),
 			control: {
 				type: 'select',
 			},
@@ -75,26 +60,26 @@ export const Template: StoryObj<HighlightDataComponent & { action: string }> = {
 			type: 'boolean',
 		},
 		size: {
-			options: [null, 'S', 'XS'],
+			options: setStoryOptions(HIGHLIGHT_DATA_SIZE),
 			control: {
 				type: 'select',
 			},
 		},
 		theme: {
-			options: [null, 'light', 'dark'],
+			options: setStoryOptions(HIGHLIGHT_DATA_THEME),
 			control: {
 				type: 'select',
 			},
 		},
 		palette: {
-			options: ['lucca', 'cleemy', 'timmi', 'poplee', 'coreHR', 'pagga', 'cc', 'success', 'warning', 'critical'],
+			options: setStoryOptions(HIGHLIGHT_DATA_PALETTE),
 			control: {
 				type: 'select',
 			},
 			description: 'La palette influençant également la couleur du SVG des bubbles et donc l’URL associée, il est nécessaire de renseigner la gamme.',
 		},
 		action: {
-			options: [null, 'button', 'link'],
+			options: ['', 'button', 'link'],
 			control: {
 				type: 'select',
 			},
@@ -107,10 +92,6 @@ export const Template: StoryObj<HighlightDataComponent & { action: string }> = {
 		bubble: 1,
 		illustration: 'piggy-bank',
 		valueFirst: false,
-		size: null,
-		theme: null,
-		palette: null,
-		action: null,
 		subText: null,
 	},
 };
