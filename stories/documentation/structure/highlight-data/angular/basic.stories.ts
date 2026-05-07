@@ -36,12 +36,15 @@ export const Template: StoryObj<HighlightDataComponent & { action: string }> = {
 	argTypes: {
 		heading: {
 			type: 'string',
+			description: 'Titre du composant. [PortalContent]',
 		},
 		value: {
 			type: 'string',
+			description: 'Valeur affichée. [PortalContent]',
 		},
 		subText: {
 			type: 'string',
+			description: 'Texte secondaire. [PortalContent]',
 		},
 		bubble: {
 			options: [1, 2, 3, 4, null],
