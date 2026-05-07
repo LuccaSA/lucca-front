@@ -52,7 +52,7 @@ export default {
 			description: 'Titre de l’empty state.',
 		},
 		description: {
-			description: 'Description de l’empty state.',
+			description: 'Description de l’empty state. [PortalContent]',
 		},
 	},
 } as Meta;
