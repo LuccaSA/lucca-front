@@ -13,7 +13,7 @@ export class LuDialogRef<C = unknown, TData = LuDialogData<C>> {
 	/**
 	 * Instance of the component that's inside the dialog
 	 */
-	get instance(): C {
+	get instance(): C | null {
 		return this.cdkRef.componentInstance;
 	}
 
@@ -60,7 +60,14 @@ export class LuDialogRef<C = unknown, TData = LuDialogData<C>> {
 		if (this.config.alert) {
 			return;
 		}
-		const canClose = this.config.canClose?.(this.instance) ?? true;
+		let canClose: boolean | Observable<boolean> = true;
+
+		try {
+			canClose = this.instance !== null ? (this.config.canClose?.(this.instance) ?? true) : true;
+		} catch {
+			canClose = true;
+		}
+
 		const canClose$ = isObservable(canClose) ? canClose : of(canClose);
 		canClose$.pipe(take(1)).subscribe((close) => {
 			if (close) {
@@ -86,4 +93,4 @@ export class LuDialogRef<C = unknown, TData = LuDialogData<C>> {
 	}
 }
 
-export type LuDialogSelfRef<R> = { dismiss(): void; close(res: R): void; resize(size: LuDialogSize): void };
+export type LuDialogSelfRef<R> = { dismiss(): void; close(res: R | null | undefined): void; resize(size: LuDialogSize): void };

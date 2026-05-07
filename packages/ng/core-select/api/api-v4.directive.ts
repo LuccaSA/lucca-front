@@ -18,16 +18,16 @@ import { ALuCoreSelectApiDirective } from './api.directive';
 	],
 })
 export class LuCoreSelectApiV4Directive<T extends ILuApiItem> extends ALuCoreSelectApiDirective<T> implements CoreSelectApiTotalCountProvider {
-	apiV4 = model.required<string>();
-	sort = input<string | null>('+name');
-	filters = input<Record<string, string | number | boolean>>({});
-	searchDelimiter = input<string>(' ');
+	readonly apiV4 = model.required<string>();
+	readonly sort = input<string | null>('+name');
+	readonly filters = input<Record<string, string | number | boolean>>({});
+	readonly searchDelimiter = input<string>(' ');
 
 	protected httpClient = inject(HttpClient);
 
-	protected clue = toSignal(this.clue$);
+	protected readonly clue = toSignal(this.clue$);
 
-	protected override params$: Observable<Record<string, string | number | boolean>> = toObservable(
+	protected override readonly params$: Observable<Record<string, string | number | boolean>> = toObservable(
 		computed(() => {
 			const sort = this.sort();
 			const clue = this.clue();
@@ -40,7 +40,7 @@ export class LuCoreSelectApiV4Directive<T extends ILuApiItem> extends ALuCoreSel
 		}),
 	);
 
-	public totalCount$ = toObservable(computed(() => ({ url: this.apiV4(), filters: this.filters() }))).pipe(
+	public readonly totalCount$ = toObservable(computed(() => ({ url: this.apiV4(), filters: this.filters() }))).pipe(
 		debounceTime(250),
 		switchMap(({ url, filters }) =>
 			this.httpClient.get<{ count: number }>(url, {

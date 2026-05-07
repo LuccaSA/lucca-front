@@ -1,6 +1,7 @@
 import { HttpClient } from '@angular/common/http';
 import { computed, Directive, forwardRef, inject, input, OnInit } from '@angular/core';
 import { toObservable } from '@angular/core/rxjs-interop';
+import { isNotNil } from '@lucca-front/ng/core';
 import { CORE_SELECT_API_TOTAL_COUNT_PROVIDER, CoreSelectApiTotalCountProvider, TreeNode } from '@lucca-front/ng/core-select';
 import { ALuCoreSelectApiDirective } from '@lucca-front/ng/core-select/api';
 import { ILuDepartment } from '@lucca-front/ng/department';
@@ -24,12 +25,12 @@ import { NoopTreeSelectDirective } from './noop-tree-select.directive';
 export class LuCoreSelectDepartmentsDirective<T extends ILuDepartment = ILuDepartment> extends ALuCoreSelectApiDirective<TreeNode<T>> implements OnInit, CoreSelectApiTotalCountProvider {
 	protected httpClient = inject(HttpClient);
 
-	url = input<string>('/organization/structure/api/departments/tree');
-	filters = input<Record<string, string | number | boolean> | null>(null);
-	operationIds = input<readonly number[] | null>(null);
-	uniqueOperationIds = input<readonly number[] | null>(null);
-	appInstanceId = input<number | null>(null);
-	searchDelimiter = input<string>(' ');
+	readonly url = input<string>('/organization/structure/api/departments/tree');
+	readonly filters = input<Record<string, string | number | boolean> | null>(null);
+	readonly operationIds = input<readonly number[] | null>(null);
+	readonly uniqueOperationIds = input<readonly number[] | null>(null);
+	readonly appInstanceId = input<number | null>(null);
+	readonly searchDelimiter = input<string>(' ');
 
 	public override ngOnInit(): void {
 		super.ngOnInit();
@@ -45,12 +46,12 @@ export class LuCoreSelectDepartmentsDirective<T extends ILuDepartment = ILuDepar
 
 	protected override getOptions(params: Record<string, string | number | boolean> | null): Observable<TreeNode<T>[]> {
 		return this.httpClient
-			.get<TreeNode<T>>(this.url(), {
-				params,
+			.get<{ children?: TreeNode<T>[] }>(this.url(), {
+				params: params ?? {},
 			})
 			.pipe(
 				map((data) => {
-					return data.children;
+					return data.children ?? [];
 				}),
 			);
 	}
@@ -67,10 +68,10 @@ export class LuCoreSelectDepartmentsDirective<T extends ILuDepartment = ILuDepar
 				}
 				return undefined;
 			})
-			.filter((o) => !!o);
+			.filter(isNotNil);
 	}
 
-	protected override params$: Observable<Record<string, string | number | boolean>> = toObservable(
+	protected override readonly params$: Observable<Record<string, string | number | boolean>> = toObservable(
 		computed(() => {
 			const operationIds = this.operationIds();
 			const uniqueOperationIds = this.uniqueOperationIds();
@@ -84,7 +85,7 @@ export class LuCoreSelectDepartmentsDirective<T extends ILuDepartment = ILuDepar
 		}),
 	);
 
-	public totalCount$ = this.select.options$.pipe(
+	public readonly totalCount$ = this.select.options$.pipe(
 		filter((opts) => opts.length > 0),
 		map((opts) => {
 			return opts.map((branch) => this.flattenTree(branch)).flat().length;
@@ -93,8 +94,9 @@ export class LuCoreSelectDepartmentsDirective<T extends ILuDepartment = ILuDepar
 
 	protected flattenTree(branch: TreeNode<T>): T[] {
 		const result: T[] = [branch.node];
-		if (branch.children.length > 0) {
-			result.push(...branch.children.map((child) => this.flattenTree(child)).flat());
+		const children = branch.children ?? [];
+		if (children.length > 0) {
+			result.push(...children.map((child) => this.flattenTree(child)).flat());
 		}
 		return result;
 	}

@@ -41,7 +41,7 @@ export class TagNode extends DecoratorNode<string> {
 		return self;
 	}
 
-	getViewContainerRef(): ViewContainerRef {
+	getViewContainerRef(): ViewContainerRef | undefined {
 		return this.#viewContainerRef;
 	}
 
@@ -73,7 +73,7 @@ export class TagNode extends DecoratorNode<string> {
 		return self;
 	}
 
-	getTagDescription(): string {
+	getTagDescription(): string | undefined {
 		return this.#tagDescription;
 	}
 

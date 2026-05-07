@@ -11,7 +11,16 @@ import tsParser from '@typescript-eslint/parser';
 
 export default defineConfig(
 	{
-		ignores: ['dist/', '.storybook/**', '**/schematics/**/tests/', 'node_modules/', '.angular/'],
+		ignores: [
+			'dist/',
+			'.storybook/**',
+			'**/schematics/**/tests/',
+			'node_modules/',
+			'.angular/',
+			// schematics && stories can be strictified
+			'packages/ng/schematics/**/*.ts',
+			'stories/**/*.ts',
+		],
 	},
 	{
 		linterOptions: {
@@ -59,6 +68,16 @@ export default defineConfig(
 			// This one is from Angular 20, we'll remove it eventually but legacy code makes it hard to do
 			'@angular-eslint/prefer-inject': 'off',
 			'@angular-eslint/prefer-on-push-component-change-detection': 'error',
+
+			'@angular-eslint/prefer-signals': [
+				'error',
+				{
+					preferReadonlySignalProperties: true,
+					preferInputSignals: false,
+					preferQuerySignals: false,
+					useTypeChecking: true,
+				},
+			],
 
 			'@typescript-eslint/explicit-function-return-type': 'off',
 			'@typescript-eslint/explicit-module-boundary-types': 'off', // on aimerait bien dire oui sauf pour void
@@ -138,6 +157,21 @@ export default defineConfig(
 			'@typescript-eslint/no-unsafe-return': 'warn',
 			'@typescript-eslint/no-unsafe-member-access': 'warn',
 			'@typescript-eslint/no-unsafe-call': 'warn',
+		},
+	},
+	{
+		files: ['**/*.ts'],
+		languageOptions: {
+			parser: tsParser,
+			parserOptions: {
+				project: ['tsconfig.lint.json', 'packages/ng/tsconfig.lint.json', '.storybook/tsconfig.lint.json'],
+			},
+		},
+		plugins: {
+			'@lucca-front': localRules,
+		},
+		rules: {
+			'@lucca-front/ts-error': 'error',
 		},
 	},
 	{

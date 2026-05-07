@@ -36,7 +36,7 @@ export abstract class ALuTreeOptionPickerComponent<T, O extends import('../item/
 		descendants: true,
 		read: ViewContainerRef,
 	})
-	optionsQLVR: QueryList<ViewContainerRef>;
+	readonly optionsQLVR: QueryList<ViewContainerRef>;
 
 	protected override set _options$(optionItems$: Observable<O[]>) {
 		// reapply selected when the options change

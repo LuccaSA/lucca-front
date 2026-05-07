@@ -30,21 +30,27 @@ import { LU_DATA_TABLE_CELL_INSTANCE } from '../data-table-cell.token';
 	changeDetection: ChangeDetectionStrategy.OnPush,
 })
 export class DataTableRowCellComponent extends BaseDataTableCell {
-	actions = input(false, { transform: booleanAttribute });
+	readonly actions = input(false, { transform: booleanAttribute });
 
-	isSticky = computed(() => {
+	readonly isSticky = computed(() => {
 		return this.isStickyStart() || this.isStickyEnd();
 	});
 
-	alignCol = computed(() => {
-		return this.tableRef?.header().cols()?.[this.position()]?.align();
+	readonly alignCol = computed(() => {
+		const cols = this.tableRef?.header()?.cols?.();
+		const position = this.position();
+		return position !== undefined ? cols?.[position]?.align?.() : undefined;
 	});
 
-	insetInlineStart = computed(() => {
-		return this.tableRef?.header()?.cols()?.[this.position()]?.insetInlineStart();
+	readonly insetInlineStart = computed(() => {
+		const cols = this.tableRef?.header()?.cols?.();
+		const position = this.position();
+		return position !== undefined ? cols?.[position]?.insetInlineStart?.() : undefined;
 	});
 
-	insetInlineEnd = computed(() => {
-		return this.tableRef?.header()?.cols()?.[this.position()]?.insetInlineEnd();
+	readonly insetInlineEnd = computed(() => {
+		const cols = this.tableRef?.header()?.cols?.();
+		const position = this.position();
+		return position !== undefined ? cols?.[position]?.insetInlineEnd?.() : undefined;
 	});
 }

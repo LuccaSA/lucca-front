@@ -37,10 +37,10 @@ export class LuCoreSelectApiV3Directive<T extends ILuApiItem> extends ALuCoreSel
 		this.filters$.next(value);
 	}
 
-	protected url$ = new ReplaySubject<string>(1);
-	protected fields$ = new BehaviorSubject<string>('id,name');
-	protected orderBy$ = new BehaviorSubject<string | null>('name,asc');
-	protected filters$ = new BehaviorSubject<Record<string, string | number | boolean>>({});
+	protected readonly url$ = new ReplaySubject<string>(1);
+	protected readonly fields$ = new BehaviorSubject<string>('id,name');
+	protected readonly orderBy$ = new BehaviorSubject<string | null>('name,asc');
+	protected readonly filters$ = new BehaviorSubject<Record<string, string | number | boolean>>({});
 
 	protected httpClient = inject(HttpClient);
 

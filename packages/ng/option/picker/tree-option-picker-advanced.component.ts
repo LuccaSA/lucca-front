@@ -83,7 +83,9 @@ export abstract class ALuTreeOptionPickerAdvancedComponent<T, O extends import('
 		let options$: Observable<ILuTree<T>[]>;
 		operators.forEach((operator) => {
 			operator.inOptions$ = options$;
-			options$ = operator.outOptions$;
+			if (operator.outOptions$) {
+				options$ = operator.outOptions$;
+			}
 		});
 		const lastOperator = operators[operators.length - 1];
 		if (lastOperator && lastOperator.outOptions$) {

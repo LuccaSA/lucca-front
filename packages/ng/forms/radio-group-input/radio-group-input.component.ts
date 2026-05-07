@@ -26,7 +26,7 @@ let nextId = 0;
 	],
 })
 export class RadioGroupInputComponent {
-	formField = inject<FormFieldComponent>(FORM_FIELD_INSTANCE, { optional: true });
+	readonly formField = inject<FormFieldComponent>(FORM_FIELD_INSTANCE, { optional: true });
 
 	ngControl = injectNgControl();
 

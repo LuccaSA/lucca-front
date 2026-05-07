@@ -1,6 +1,7 @@
 import { booleanAttribute, ChangeDetectionStrategy, Component, computed, effect, ElementRef, inject, input, LOCALE_ID, model, OnInit, output, viewChildren, ViewEncapsulation } from '@angular/core';
 import { intlInputOptions } from '@lucca-front/ng/core';
 import { LuTooltipTriggerDirective } from '@lucca-front/ng/tooltip';
+import type { Interval } from 'date-fns';
 import {
 	addHours,
 	addMonths,
@@ -28,7 +29,6 @@ import {
 	subYears,
 	WeekOptions,
 } from 'date-fns';
-import type { Interval } from 'date-fns';
 import { WEEK_INFO } from '../calendar.token';
 import { LU_DATE2_TRANSLATIONS } from '../date2.translate';
 import { RepeatTimesDirective } from '../repeat-times.directive';
@@ -40,7 +40,7 @@ import { CALENDAR_CELLS, CALENDAR_TABBABLE_DATE } from './calendar2.tokens';
 import { CellStatus } from './cell-status';
 import { DateRange } from './date-range';
 
-const MODE_HIERARCHY: CalendarMode[] = ['day', 'month', 'year'];
+const MODE_HIERARCHY: Array<CalendarMode | null> = ['day', 'month', 'year', null];
 
 @Component({
 	selector: 'lu-calendar2',
@@ -77,61 +77,61 @@ export class Calendar2Component implements OnInit {
 
 	#weekOptions: WeekOptions = { weekStartsOn: getJSFirstDayOfWeek(this.#weekInfo) };
 
-	intl = input(...intlInputOptions(LU_DATE2_TRANSLATIONS));
+	readonly intl = input(...intlInputOptions(LU_DATE2_TRANSLATIONS));
 
-	showOverflow = input(false, { transform: booleanAttribute });
+	readonly showOverflow = input(false, { transform: booleanAttribute });
 
-	enableOverflow = input(false, { transform: booleanAttribute });
+	readonly enableOverflow = input(false, { transform: booleanAttribute });
 
-	removeYearOverflow = input(false, { transform: booleanAttribute });
+	readonly removeYearOverflow = input(false, { transform: booleanAttribute });
 
-	hideToday = input(false, { transform: booleanAttribute });
+	readonly hideToday = input(false, { transform: booleanAttribute });
 
-	hasTodayButton = input(false, { transform: booleanAttribute });
+	readonly hasTodayButton = input(false, { transform: booleanAttribute });
 
-	hideWeekend = input(false, { transform: booleanAttribute });
+	readonly hideWeekend = input(false, { transform: booleanAttribute });
 
-	disableModeChange = input(false, { transform: booleanAttribute });
+	readonly disableModeChange = input(false, { transform: booleanAttribute });
 
 	// Date used to init the component and as internal focus model
-	date = model.required<Date>();
+	readonly date = model.required<Date>();
 
-	tabbableDate = model<Date | null>(null);
+	readonly tabbableDate = model<Date | null>(null);
 
-	mode = model<CalendarMode>('day');
+	readonly mode = model<CalendarMode>('day');
 
-	displayMode = model<CalendarMode | null>(null);
+	readonly displayMode = model<CalendarMode | null>(null);
 
-	ranges = input<readonly DateRange[]>([]);
+	readonly ranges = input<readonly DateRange[]>([]);
 
-	getCellInfo = input<(date: Date, displayMode: CalendarMode) => CellStatus>((_date: Date) => ({
+	readonly getCellInfo = input<(date: Date, displayMode: CalendarMode | null) => CellStatus>((_date: Date) => ({
 		classes: [],
 		disabled: false,
 	}));
 
-	month = computed(() => startOfMonth(this.date()));
+	readonly month = computed(() => startOfMonth(this.date()));
 
-	year = computed(() => startOfYear(this.date()));
+	readonly year = computed(() => startOfYear(this.date()));
 
-	decade = computed(() => startOfDecade(this.date()));
+	readonly decade = computed(() => startOfDecade(this.date()));
 
-	previousMonth = computed(() => subMonths(this.month(), 1));
+	readonly previousMonth = computed(() => subMonths(this.month(), 1));
 
-	nextMonth = computed(() => addMonths(this.month(), 1));
+	readonly nextMonth = computed(() => addMonths(this.month(), 1));
 
-	nextPage = output();
+	readonly nextPage = output();
 
-	previousPage = output();
+	readonly previousPage = output();
 
 	dateClicked = output<Date>();
 
-	dateHovered = model<Date | null>(null);
+	readonly dateHovered = model<Date | null>(null);
 
 	todayLabel = this.#intlRelativeDay.format(0, 'day');
 	thisMonthLabel = this.#intlRelativeDay.format(0, 'month');
 	thisYearLabel = this.#intlRelativeDay.format(0, 'year');
 
-	calendar2CellInstances = viewChildren(Calendar2CellDirective);
+	readonly calendar2CellInstances = viewChildren(Calendar2CellDirective);
 
 	daysOfWeek = eachDayOfInterval({
 		start: startOfWeek(new Date(), this.#weekOptions),
@@ -141,7 +141,7 @@ export class Calendar2Component implements OnInit {
 		short: this.#intlDaysShort.format(day),
 	}));
 
-	monthGridDisplay = computed(() => {
+	readonly monthGridDisplay = computed(() => {
 		const daysOfMonth: CalendarCellInfo[] = eachDayOfInterval({
 			start: this.month(),
 			end: endOfMonth(this.month()),
@@ -190,7 +190,7 @@ export class Calendar2Component implements OnInit {
 			.map((weekStart) => daysByWeek[+weekStart]);
 	});
 
-	yearGridDisplay = computed(() => {
+	readonly yearGridDisplay = computed(() => {
 		const monthsOfYear: Date[] = eachMonthOfInterval({
 			start: this.year(),
 			end: endOfYear(this.year()),
@@ -198,7 +198,6 @@ export class Calendar2Component implements OnInit {
 		return monthsOfYear
 			.map((month) => {
 				return {
-					date: month,
 					short: this.#intlMonthsShort.format(month),
 					long: this.#intlMonthsLong.format(month),
 					...this.dateToCellInfo(month),
@@ -212,7 +211,7 @@ export class Calendar2Component implements OnInit {
 			}, []);
 	});
 
-	decadeGridDisplay = computed(() => {
+	readonly decadeGridDisplay = computed(() => {
 		const yearsOfDecade: Date[] = eachYearOfInterval({
 			start: this.removeYearOverflow() ? this.decade() : subYears(this.decade(), 1),
 			end: this.removeYearOverflow() ? endOfDecade(this.decade()) : addYears(endOfDecade(this.decade()), 1),
@@ -220,11 +219,10 @@ export class Calendar2Component implements OnInit {
 		return yearsOfDecade
 			.map((year) => {
 				return {
-					date: year,
 					...this.dateToCellInfo(year),
 					name: this.#intlDateYear.format(year),
 					isCurrent: isSameYear(new Date(), year),
-				};
+				} as CalendarYearInfo;
 			})
 			.reduce<CalendarYearInfo[][]>((all, one, i) => {
 				const ch = Math.floor(i / 3);
@@ -233,15 +231,15 @@ export class Calendar2Component implements OnInit {
 			}, []);
 	});
 
-	currentMonthLabel = computed(() => {
+	readonly currentMonthLabel = computed(() => {
 		return this.#intlDateFormat.format(this.date());
 	});
 
-	currentYearLabel = computed(() => {
+	readonly currentYearLabel = computed(() => {
 		return this.#intlDateYear.format(this.date());
 	});
 
-	currentDecadeLabel = computed(() => {
+	readonly currentDecadeLabel = computed(() => {
 		return `${this.#intlDateYear.format(startOfDecade(this.decade()))} – ${this.#intlDateYear.format(endOfDecade(this.decade()))}`;
 	});
 
@@ -327,7 +325,7 @@ export class Calendar2Component implements OnInit {
 		// Is it weekend day? for is-dayOff class toggle
 		const isWeekend = isDayMode && this.#weekInfo.weekend.includes(getIntlWeekDay(date)) && !this.hideWeekend();
 		// Is it first day of month? Mostly used for overflow display logic
-		const isFirstDayOfMonth = isDayMode && isSameDay(startOfMonth(date), rangeInfo?.range.start);
+		const isFirstDayOfMonth = isDayMode && rangeInfo && isSameDay(startOfMonth(date), rangeInfo.range.start);
 
 		// Is this the current period? Will match if same day as today, or same month in month display, or same year if year display
 		const isCurrent = comparePeriods(this.displayMode(), new Date(), date) && !this.hideToday();
@@ -351,7 +349,7 @@ export class Calendar2Component implements OnInit {
 			}
 			const hoveredRange: Interval = {
 				start,
-				end: startOfDay(this.dateHovered()),
+				end: startOfDay(this.dateHovered() ?? 0),
 			};
 
 			// If start is after end, fix this by inverting the two, we always want to work with start before end
@@ -378,8 +376,8 @@ export class Calendar2Component implements OnInit {
 			isProgressEnd = !isOverflow && comparePeriods(this.displayMode(), date, hoveredRange.end as Date);
 
 			// This is the case where you clicked a first date and then are hovering it, which requires a specific case for CSS
-			if (isSameDay(rangeInfo.range.start, this.dateHovered())) {
-				isSingleDayInProgress = !isOverflow && isSameDay(hoveredRange.start, hoveredRange.end) && isSameDay(hoveredRange.start, this.dateHovered());
+			if (isSameDay(rangeInfo.range.start, this.dateHovered() ?? 0)) {
+				isSingleDayInProgress = !isOverflow && isSameDay(hoveredRange.start, hoveredRange.end) && isSameDay(hoveredRange.start, this.dateHovered() ?? 0);
 			}
 		}
 
@@ -402,8 +400,8 @@ export class Calendar2Component implements OnInit {
 				'is-daysOff': isWeekend,
 				'is-overflow': isOverflow,
 				'is-current': isCurrent,
-				'is-start': !isOverflow && (rangeInfo?.isStart || status.selected) && !isInProgress,
-				'is-end': !isOverflow && (rangeInfo?.isEnd || status.selected) && !isInProgress,
+				'is-start': Boolean(!isOverflow && (rangeInfo?.isStart || status.selected) && !isInProgress),
+				'is-end': Boolean(!isOverflow && (rangeInfo?.isEnd || status.selected) && !isInProgress),
 				'is-selected': isSelected,
 				// Range in progress statuses
 				'is-selectionInProgress': isProgressBody,
@@ -416,7 +414,7 @@ export class Calendar2Component implements OnInit {
 		};
 	}
 
-	getRangeInfo(date: Date, scope: CalendarMode, isOverflow = false) {
+	getRangeInfo(date: Date, scope: CalendarMode | null, isOverflow = false) {
 		const range: DateRange | undefined = this.ranges().find((range: DateRange) => {
 			const isSameScope = (range.scope || 'day') === scope;
 			if (isSameScope) {
@@ -427,15 +425,15 @@ export class Calendar2Component implements OnInit {
 					});
 				} else if (this.dateHovered() !== null) {
 					// Nominal case: end is after start
-					if (isAfter(this.dateHovered(), startOfDay(range.start))) {
+					if (isAfter(this.dateHovered() ?? 0, startOfDay(range.start))) {
 						return isWithinInterval(date, {
 							start: startOfDay(range.start),
-							end: endOfDay(this.dateHovered()),
+							end: endOfDay(this.dateHovered() ?? 0),
 						});
 					} else {
 						// When user clicked end date first and now wants to select a start date
 						return isWithinInterval(date, {
-							start: startOfDay(this.dateHovered()),
+							start: startOfDay(this.dateHovered() ?? 0),
 							end: endOfDay(range.start),
 						});
 					}
@@ -457,7 +455,7 @@ export class Calendar2Component implements OnInit {
 		}
 
 		const isStart: boolean = range && isSameDay(date, range.start);
-		const isEnd: boolean = range && range.end && isSameDay(date, range.end);
+		const isEnd: boolean = Boolean(range && range.end && isSameDay(date, range.end));
 
 		return {
 			range,
