@@ -113,7 +113,7 @@
     "@typescript-eslint/utils": "^8.26.1",
     "angular-eslint": "^21.1.0",
     "autoprefixer": "^10.4.14",
-    "eslint": "^9.28.0",
+    "eslint": "^9.39.2",
     "eslint-config-prettier": "^10.1.1",
     "eslint-import-resolver-typescript": "^4.4.4",
     "eslint-plugin-boundaries": "^6.0.2",
