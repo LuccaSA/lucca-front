@@ -1,4 +1,4 @@
-name: Deploy Storybook & Compodoc
+name: Deploy Lucca Front staging
 
 on:
   push:
@@ -10,11 +10,22 @@ on:
   pull_request:
 
 jobs:
-  build:
+  deploy:
     runs-on: ubuntu-latest
+    name: Deploy Lucca Front staging
+    environment: staging
+    permissions:
+      contents: read
     outputs:
       deploy-path: ${{ steps.vars.outputs.deploy-path }}
       major-minor: ${{ steps.vars.outputs.major-minor }}
+
+    env:
+      R2_ENDPOINT: ${{ vars.CLOUDFLARE_R2_ENDPOINT }}
+      R2_BUCKET: ${{ vars.CLOUDFLARE_R2_BUCKET_NAME }}
+      R2_ACCESS_KEY_ID: ${{ secrets.CLOUDFLARE_R2_ACCESS_KEY_ID }}
+      R2_SECRET_ACCESS_KEY: ${{ secrets.CLOUDFLARE_R2_SECRET_ACCESS_KEY }}
+
     steps:
       - id: vars
         run: |
@@ -29,60 +40,33 @@ jobs:
             echo "major-minor=$(echo "${{ github.ref_name }}" | grep -oP '^v\d+\.\d+')" >> $GITHUB_OUTPUT
           fi
 
-      - uses: actions/checkout@93cb6efe18208431cddfb8368fd83d5badbf9bfd  # v5.0.1
+      - name: Checkout
+        uses: actions/checkout@93cb6efe18208431cddfb8368fd83d5badbf9bfd
       - uses: actions/setup-node@49933ea5288caeca8642d1e84afbd3f7d6820020  # v4.4.0
         with:
           node-version: 24.13.0
 
       - run: npm ci
-      - run: npm run build-storybook -- --quiet
-      - run: npm run build-compodoc
+      - run: npm run build-storybook
+      - name: Install rclone
+        run: |
+          apt-get update
+          apt-get install -y rclone
 
-      - uses: actions/upload-artifact@v4
-        with:
-          name: storybook-static
-          path: storybook-static/
-      - uses: actions/upload-artifact@v4
-        with:
-          name: compodoc-static
-          path: compodoc-static/
+      - name: Install and configure rclone
+        run: |
+          mkdir -p ~/.config/rclone
+          cat > ~/.config/rclone/rclone.conf << EOF
+          [r2]
+          type = s3
+          provider = Cloudflare
+          access_key_id = $R2_ACCESS_KEY_ID
+          secret_access_key = $R2_SECRET_ACCESS_KEY
+          endpoint = $R2_ENDPOINT
+          acl = private
+          no_check_bucket = true
+          EOF
 
-  deploy:
-    needs: build
-    runs-on: ubuntu-latest
-    permissions:
-      contents: read
-      deployments: write
-      pull-requests: write
-    steps:
-      - uses: actions/download-artifact@v4
-        with:
-          name: storybook-static
-          path: deploy/storybook
-
-      - uses: actions/download-artifact@v4
-        with:
-          name: compodoc-static
-          path: deploy/compodoc
-
-      - name: Publish to Cloudflare Pages
-        uses: ryand56/r2-upload-action@latest
-        with:
-          r2-account-id: ${{ secrets.R2_ACCOUNT_ID }}
-          r2-access-key-id: ${{ secrets.R2_ACCESS_KEY }}
-          r2-secret-access-key: ${{ secrets.R2_SECRET_KEY }}
-          r2-bucket: https://pub-7f91998ed2f44626b0bae9020a095f27.r2.dev
-          source-dir: storybook-static/
-          destination-dir: ./${{steps.vars.outputs.deploy-path}}
-          keep-file-fresh: true
-
-      - name: Publish major.minor alias (release tags only)
-        if: needs.build.outputs.major-minor != ''
-        uses: ryand56/r2-upload-action@latest
-        with:
-          r2-account-id: ${{ secrets.R2_ACCOUNT_ID }}
-          r2-access-key-id: ${{ secrets.R2_ACCESS_KEY }}
-          r2-secret-access-key: ${{ secrets.R2_SECRET_KEY }}
-          r2-bucket: https://pub-7f91998ed2f44626b0bae9020a095f27.r2.dev
-          source-dir: storybook-static/
-          destination-dir: ./${{steps.vars.outputs.deploy-path}}
+      - name: Upload results to R2
+        run: |
+          rclone sync ./storybook-static/ "r2:${R2_BUCKET}/${{steps.vars.outputs.deploy-path}}" --fast-list --checksum --transfers 8 --checkers 8
