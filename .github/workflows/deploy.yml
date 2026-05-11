@@ -4,8 +4,9 @@ on:
   push:
     branches:
       - master
+    tags:
       - 'v[0-9]+.[0-9]+.[0-9]+'
-      - 'v[0-9]+.[0-9]+.[0-9]+-**'
+      - 'v[0-9]+.[0-9]+.[0-9]+-*'
   pull_request:
 
 jobs:
@@ -13,7 +14,7 @@ jobs:
     runs-on: ubuntu-latest
     outputs:
       deploy-path: ${{ steps.vars.outputs.deploy-path }}
-      storybook-url: ${{ steps.vars.outputs.storybook-url }}
+      major-minor: ${{ steps.vars.outputs.major-minor }}
     steps:
       - id: vars
         run: |
@@ -23,7 +24,10 @@ jobs:
             DEPLOY_PATH="${{ github.ref_name }}"
           fi
           echo "deploy-path=$DEPLOY_PATH" >> $GITHUB_OUTPUT
-          echo "storybook-url=https://lucca-front.lucca.tech/$DEPLOY_PATH/storybook" >> $GITHUB_OUTPUT
+          # Compute vX.Y alias only for non-pre-release tags (vX.Y.Z with no suffix)
+          if [[ "${{ github.ref_name }}" =~ ^v[0-9]+\.[0-9]+\.[0-9]+$ ]]; then
+            echo "major-minor=$(echo "${{ github.ref_name }}" | grep -oP '^v\d+\.\d+')" >> $GITHUB_OUTPUT
+          fi
 
       - uses: actions/checkout@93cb6efe18208431cddfb8368fd83d5badbf9bfd  # v5.0.1
       - uses: actions/setup-node@49933ea5288caeca8642d1e84afbd3f7d6820020  # v4.4.0
@@ -46,55 +50,38 @@ jobs:
   deploy:
     needs: build
     runs-on: ubuntu-latest
-    env:
-      AWS_ACCESS_KEY_ID: ${{ secrets.R2_ACCESS_KEY }}
-      AWS_SECRET_ACCESS_KEY: ${{ secrets.R2_SECRET_KEY }}
-      AWS_DEFAULT_REGION: auto
-      R2_ENDPOINT: https://pub-7f91998ed2f44626b0bae9020a095f27.r2.dev
-      DEPLOY_PATH: ${{ needs.build.outputs.deploy-path }}
+    permissions:
+      contents: read
+      deployments: write
+      pull-requests: write
     steps:
       - uses: actions/download-artifact@v4
         with:
           name: storybook-static
-          path: storybook-static
+          path: deploy/storybook
 
       - uses: actions/download-artifact@v4
         with:
           name: compodoc-static
-          path: compodoc-static
+          path: deploy/compodoc
 
-      - name: Deploy Storybook
-        run: |
-          aws s3 sync storybook-static/ s3://lucca-front/$DEPLOY_PATH/storybook/ \
-            --endpoint-url $R2_ENDPOINT --delete
-
-      - name: Deploy Compodoc
-        run: |
-          aws s3 sync compodoc-static/ s3://lucca-front/$DEPLOY_PATH/compodoc/ \
-            --endpoint-url $R2_ENDPOINT --delete
-
-      - name: Deploy to major.minor alias (release tags only)
-        if: github.ref_type == 'tag' && startsWith(github.ref_name, 'v') && !contains(github.ref_name, '-')
-        run: |
-          VERSION_PREFIX=$(echo "${{ github.ref_name }}" | grep -oP '^v\d+\.\d+')
-          aws s3 sync storybook-static/ s3://lucca-front/$VERSION_PREFIX/storybook/ \
-            --endpoint-url $R2_ENDPOINT --delete
-          aws s3 sync compodoc-static/ s3://lucca-front/$VERSION_PREFIX/compodoc/ \
-            --endpoint-url $R2_ENDPOINT --delete
-
-  comment-pr:
-    needs: [build, deploy]
-    if: github.event_name == 'pull_request'
-    runs-on: ubuntu-latest
-    permissions:
-      pull-requests: write
-    steps:
-      - uses: actions/github-script@v7
+      - name: Publish to Cloudflare Pages
+        uses: cloudflare/pages-action@v1
         with:
-          script: |
-            github.rest.issues.createComment({
-              issue_number: context.issue.number,
-              owner: context.repo.owner,
-              repo: context.repo.repo,
-              body: ':woman_cook: ${{ needs.build.outputs.storybook-url }}'
-            })
+          apiToken: ${{ secrets.CLOUDFLARE_API_TOKEN }}
+          accountId: ${{ secrets.CLOUDFLARE_ACCOUNT_ID }}
+          projectName: lucca-front
+          directory: deploy
+          branch: ${{ needs.build.outputs.deploy-path }}
+          gitHubToken: ${{ secrets.GITHUB_TOKEN }}
+
+      - name: Publish major.minor alias (release tags only)
+        if: needs.build.outputs.major-minor != ''
+        uses: cloudflare/pages-action@v1
+        with:
+          apiToken: ${{ secrets.CLOUDFLARE_API_TOKEN }}
+          accountId: ${{ secrets.CLOUDFLARE_ACCOUNT_ID }}
+          projectName: lucca-front
+          directory: deploy
+          branch: ${{ needs.build.outputs.major-minor }}
+          gitHubToken: ${{ secrets.GITHUB_TOKEN }}
