@@ -9,6 +9,10 @@ on:
 jobs:
   publish:
     runs-on: ubuntu-latest
+    environment: production
+    permissions:
+      contents: read
+      id-token: write
     steps:
       - uses: actions/checkout@93cb6efe18208431cddfb8368fd83d5badbf9bfd  # v5.0.1
       - uses: actions/setup-node@49933ea5288caeca8642d1e84afbd3f7d6820020  # v4.4.0
@@ -31,27 +35,17 @@ jobs:
             "
           done
 
-      - run: npm publish --access public
+      - run: npm publish --access public --provenance
         working-directory: dist/icons
-        env:
-          NODE_AUTH_TOKEN: ${{ secrets.NPM_TOKEN }}
 
-      - run: npm publish --access public
+      - run: npm publish --access public --provenance
         working-directory: dist/scss
-        env:
-          NODE_AUTH_TOKEN: ${{ secrets.NPM_TOKEN }}
 
-      - run: npm publish --access public
+      - run: npm publish --access public --provenance
         working-directory: dist/ng
-        env:
-          NODE_AUTH_TOKEN: ${{ secrets.NPM_TOKEN }}
 
-      - run: npm publish --access public
+      - run: npm publish --access public --provenance
         working-directory: dist/prisme
-        env:
-          NODE_AUTH_TOKEN: ${{ secrets.NPM_TOKEN }}
 
-      - run: npm publish --access public
+      - run: npm publish --access public --provenance
         working-directory: packages/stylelint-config
-        env:
-          NODE_AUTH_TOKEN: ${{ secrets.NPM_TOKEN }}
