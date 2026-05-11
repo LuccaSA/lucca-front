@@ -66,22 +66,23 @@ jobs:
           path: deploy/compodoc
 
       - name: Publish to Cloudflare Pages
-        uses: cloudflare/pages-action@v1
+        uses: ryand56/r2-upload-action@latest
         with:
-          apiToken: ${{ secrets.CLOUDFLARE_API_TOKEN }}
-          accountId: ${{ secrets.CLOUDFLARE_ACCOUNT_ID }}
-          projectName: lucca-front
-          directory: deploy
-          branch: ${{ needs.build.outputs.deploy-path }}
-          gitHubToken: ${{ secrets.GITHUB_TOKEN }}
+          r2-account-id: ${{ secrets.R2_ACCOUNT_ID }}
+          r2-access-key-id: ${{ secrets.R2_ACCESS_KEY }}
+          r2-secret-access-key: ${{ secrets.R2_SECRET_KEY }}
+          r2-bucket: https://pub-7f91998ed2f44626b0bae9020a095f27.r2.dev
+          source-dir: storybook-static/
+          destination-dir: ./${{steps.vars.outputs.deploy-path}}
+          keep-file-fresh: true
 
       - name: Publish major.minor alias (release tags only)
         if: needs.build.outputs.major-minor != ''
-        uses: cloudflare/pages-action@v1
+        uses: ryand56/r2-upload-action@latest
         with:
-          apiToken: ${{ secrets.CLOUDFLARE_API_TOKEN }}
-          accountId: ${{ secrets.CLOUDFLARE_ACCOUNT_ID }}
-          projectName: lucca-front
-          directory: deploy
-          branch: ${{ needs.build.outputs.major-minor }}
-          gitHubToken: ${{ secrets.GITHUB_TOKEN }}
+          r2-account-id: ${{ secrets.R2_ACCOUNT_ID }}
+          r2-access-key-id: ${{ secrets.R2_ACCESS_KEY }}
+          r2-secret-access-key: ${{ secrets.R2_SECRET_KEY }}
+          r2-bucket: https://pub-7f91998ed2f44626b0bae9020a095f27.r2.dev
+          source-dir: storybook-static/
+          destination-dir: ./${{steps.vars.outputs.deploy-path}}
