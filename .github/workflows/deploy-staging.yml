@@ -22,7 +22,7 @@ jobs:
 
     env:
       R2_ENDPOINT: ${{ vars.CLOUDFLARE_R2_ENDPOINT }}
-      R2_BUCKET: ${{ vars.CLOUDFLARE_R2_BUCKET_NAME }}
+      R2_BUCKET: ${{ vars.R2_BUCKET }}
       R2_ACCESS_KEY_ID: ${{ secrets.CLOUDFLARE_R2_ACCESS_KEY_ID }}
       R2_SECRET_ACCESS_KEY: ${{ secrets.CLOUDFLARE_R2_SECRET_ACCESS_KEY }}
 
