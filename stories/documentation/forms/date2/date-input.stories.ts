@@ -4,8 +4,10 @@ import { CALENDAR_MODE, DATE2_CLEAR_BEHAVIOR, DATE_FORMAT_CONST, DateInputCompon
 import { FormFieldComponent } from '@lucca-front/ng/form-field';
 import { IconComponent } from '@lucca-front/ng/icon';
 import { applicationConfig, Meta, moduleMetadata, StoryObj } from '@storybook/angular';
-import { generateInputs, setStoryOptions } from '../../../helpers/stories';
+import { expect, screen, userEvent, within } from 'storybook/test';
+import { createTestStory, generateInputs, setStoryOptions } from '../../../helpers/stories';
 import { StoryModelDisplayComponent } from '../../../helpers/story-model-display.component';
+import { expectNgModelDisplay, waitForAngular } from '../../../helpers/test';
 
 export default {
 	title: 'Documentation/Forms/Date2/DateInput',
@@ -133,3 +135,56 @@ export const StartFromYear: StoryObj<DateInputComponent & { selected: Date; pres
 		selected: null,
 	},
 };
+
+export const BasicTEST = createTestStory(Basic, async ({ canvasElement, step }) => {
+	const canvas = within(canvasElement);
+	await waitForAngular();
+	const input = canvas.getByTestId('lu-date-input');
+	const today = new Date();
+
+	await step('Open calendar and check current date', async () => {
+		await userEvent.click(input);
+		await waitForAngular();
+		const table = screen.getByRole('grid');
+		const calendarComponent = table.parentElement?.parentElement;
+		const calendar = within(calendarComponent);
+		await expect(calendar.getByText(today.getFullYear())).toBeInTheDocument();
+		await expect(calendar.getAllByText(today.getDate()).find((el) => !el.parentElement?.className.includes('is-overflow'))?.parentElement).toHaveAttribute('aria-selected', 'true');
+		await userEvent.keyboard('{Escape}');
+		await waitForAngular();
+	});
+
+	await step('Select a day', async () => {
+		const targetDay = today.getDate() === 15 ? 16 : 15;
+		await pickDay(input, targetDay);
+		await expectNgModelDisplay(canvasElement, new Date(today.getFullYear(), today.getMonth(), targetDay).toString());
+	});
+
+	await step('Invalid date', async () => {
+		await userEvent.clear(input);
+		await userEvent.type(input, 'not a date');
+		await userEvent.keyboard('{Escape}');
+		await expectNgModelDisplay(canvasElement, 'Invalid Date');
+		await expect(input).toHaveAttribute('aria-invalid', 'true');
+	});
+
+	await step('Select day after invalid selection', async () => {
+		await userEvent.clear(input);
+		const targetDay = today.getDate() === 15 ? 16 : 15;
+		const otherDay = targetDay - 1;
+		await pickDay(input, otherDay);
+		await expectNgModelDisplay(canvasElement, new Date(today.getFullYear(), today.getMonth(), otherDay).toString());
+		await pickDay(input, targetDay);
+		await expectNgModelDisplay(canvasElement, new Date(today.getFullYear(), today.getMonth(), targetDay).toString());
+	});
+});
+
+async function pickDay(input: HTMLElement, targetDay: number) {
+	await userEvent.click(input);
+	await waitForAngular();
+	const table = screen.getByRole('grid');
+	const calendarComponent = table.parentElement?.parentElement;
+	const calendar = within(calendarComponent);
+	await userEvent.click(calendar.getByText(targetDay.toString()));
+	await waitForAngular();
+}
