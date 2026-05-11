@@ -50,8 +50,8 @@ jobs:
       - run: npm run build-storybook
       - name: Install rclone
         run: |
-          apt-get update
-          apt-get install -y rclone
+          sudo apt-get update
+          sudo apt-get install -y rclone
 
       - name: Install and configure rclone
         run: |
