@@ -80,8 +80,8 @@
   },
   "devDependencies": {
     "@angular-devkit/architect": "0.2102.7",
-    "@angular-devkit/build-angular": "21.2.7",
-    "@angular-devkit/core": "21.2.7",
+    "@angular-devkit/build-angular": "21.2.10",
+    "@angular-devkit/core": "21.2.10",
     "@angular-devkit/schematics": "21.2.7",
     "@angular-eslint/schematics": "21.1.0",
     "@angular/cli": "21.2.7",
