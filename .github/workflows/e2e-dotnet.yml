@@ -35,14 +35,14 @@ jobs:
         run: dotnet restore LuccaFront.e2e.sln
         working-directory: e2e
 
-      - name: Build .NET E2E project
-        run: dotnet build LuccaFront.e2e.sln --no-restore
-        working-directory: e2e
-
       - name: Enable headless mode
         run: |
           echo '{"instanceUrl":"http://localhost:6006/","referenceUrl":"http://localhost:6006/","headless":"true"}' \
             > LuccaFront.Tests.e2e/testSettings.json
+        working-directory: e2e
+
+      - name: Build .NET E2E project
+        run: dotnet build LuccaFront.e2e.sln --no-restore
         working-directory: e2e
 
       - name: Serve Storybook and run .NET E2E tests
