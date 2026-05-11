@@ -92,6 +92,7 @@ export default {
 >Tooltip au survol</span>
 <h3>Tooltip et ellipse</h3>
 <div
+	data-testid="ellipsis-truncated"
 	class="pr-u-ellipsis"
 	style="inline-size: 10rem;"
 	luTooltip="Ce texte est trop long pour être affiché entièrement. Le tooltip apparait au survol."
@@ -99,13 +100,14 @@ export default {
 	[luTooltipWhenEllipsis]="true"
 >Ce texte est trop long pour être affiché entièrement. Le tooltip apparait au survol.</div>
 <div
+	data-testid="ellipsis-not-truncated"
 	class="pr-u-ellipsis"
 	luTooltip="Ce texte est affiché entièrement. Le tooltip n'apparait pas au survol."
 	${generateInputs(args, argTypes)}
 	[luTooltipWhenEllipsis]="true"
 >Ce texte est affiché entièrement. Le tooltip n'apparait pas au survol.</div>
 <h3>Tooltip et icône (avec alternative)</h3>
-<lu-icon icon="star" alt="Favoris" luTooltip="Favoris" luTooltipOnlyForDisplay="true" />
+<lu-icon data-testid="icon-tooltip" icon="star" alt="Favoris" luTooltip="Favoris" ${inputs} luTooltipOnlyForDisplay="true" />
 
 <h3>Tooltip affiché avec un host séparé</h3>
 <span class="pr-u-marginInlineEnd800" luTooltip="… mais apparait là !" [luTooltipAnchor]="target">Tooltip déclenché ici…</span><span aria-hidden="true" #target class="lucca-icon icon-target">
@@ -188,6 +190,59 @@ export const BasicTEST = createTestStory(
 				await waitForAngular();
 				await expect(screen.getByRole('tooltip')).toHaveTextContent('👋 Hello');
 				span.blur();
+				await waitForAngular();
+			});
+		});
+
+		await step('EllipsisTooltip', async () => {
+			const ellipsisWithTooltip = canvas.getByTestId('ellipsis-truncated');
+
+			await step('Focus', async () => {
+				ellipsisWithTooltip.focus();
+				await expect(ellipsisWithTooltip).toHaveFocus();
+				await waitForAngular();
+				await expect(screen.getByRole('tooltip')).toBeVisible();
+				ellipsisWithTooltip.blur();
+				await waitForAngular();
+			});
+
+			await step('Hover', async () => {
+				await userEvent.hover(ellipsisWithTooltip);
+				await waitForAngular();
+				await expect(screen.getByRole('tooltip')).toBeVisible();
+				await userEvent.unhover(ellipsisWithTooltip);
+				await waitForAngular();
+			});
+
+			await step('Content', async () => {
+				ellipsisWithTooltip.focus();
+				await waitForAngular();
+				await expect(screen.getByRole('tooltip')).toHaveTextContent('Ce texte est trop long pour être affiché entièrement. Le tooltip apparait au survol.');
+				ellipsisWithTooltip.blur();
+				await waitForAngular();
+			});
+		});
+
+		await step('IconTooltip', async () => {
+			const icon = canvas.getByTestId('icon-tooltip');
+
+			await step('Hover', async () => {
+				await userEvent.hover(icon);
+				await waitForAngular();
+				await expect(screen.getByRole('tooltip')).toBeVisible();
+			});
+
+			await step('Unhover', async () => {
+				await userEvent.unhover(icon);
+				await waitForAngular();
+				await expect(screen.queryByRole('tooltip')).toBeNull();
+			});
+
+			await step('Content', async () => {
+				await userEvent.hover(icon);
+				await waitForAngular();
+				await expect(screen.getByRole('tooltip')).toHaveTextContent('Favoris');
+				await userEvent.unhover(icon);
 				await waitForAngular();
 			});
 		});
