@@ -30,16 +30,20 @@ jobs:
 
     steps:
       - id: vars
+        env:
+          EVENT_NAME: ${{ github.event_name }}
+          PR_NUMBER: ${{ github.event.number }}
+          REF_NAME: ${{ github.ref_name }}
         run: |
-          if [ "${{ github.event_name }}" == "pull_request" ]; then
-            DEPLOY_PATH="PR-${{ github.event.number }}"
+          if [ "$EVENT_NAME" == "pull_request" ]; then
+            DEPLOY_PATH="PR-$PR_NUMBER"
           else
-            DEPLOY_PATH="${{ github.ref_name }}"
+            DEPLOY_PATH="$REF_NAME"
           fi
-          echo "deploy-path=$DEPLOY_PATH" >> $GITHUB_OUTPUT
+          echo "deploy-path=$DEPLOY_PATH" >> "$GITHUB_OUTPUT"
           # Compute vX.Y alias only for non-pre-release tags (vX.Y.Z with no suffix)
-          if [[ "${{ github.ref_name }}" =~ ^v[0-9]+\.[0-9]+\.[0-9]+$ ]]; then
-            echo "major-minor=$(echo "${{ github.ref_name }}" | grep -oP '^v\d+\.\d+')" >> $GITHUB_OUTPUT
+          if [[ "$REF_NAME" =~ ^v[0-9]+\.[0-9]+\.[0-9]+$ ]]; then
+            echo "major-minor=$(echo "$REF_NAME" | grep -oP '^v\d+\.\d+')" >> "$GITHUB_OUTPUT"
           fi
       - name: Checkout
         uses: actions/checkout@93cb6efe18208431cddfb8368fd83d5badbf9bfd
