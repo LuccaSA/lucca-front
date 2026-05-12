@@ -31,7 +31,7 @@ public class ScreenshotSteps
         }
         else
         {
-            await _navigation.Page.Locator(".innerZoomElementWrapper > div > div > div > *")
+            await _navigation.Page.Locator(".innerZoomElementWrapper > *")
                 .TakeScreenshotForUiDiffAsync(
                 _screenshotContext.NextScreenshotId.ToString()
             );

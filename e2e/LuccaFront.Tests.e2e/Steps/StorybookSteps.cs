@@ -20,10 +20,11 @@ public class StorybookSteps
     {
         var url = $"/iframe.html?id=documentation-{id.ToLowerInvariant().Replace(' ', '-')}&viewMode=docs";
         await _navigation.Page.GotoAsync(E2eConfiguration.GetUrl(url));
+        await _navigation.Page.WaitForLoadStateAsync(LoadState.NetworkIdle);
         await _navigation.Page.AddStyleTagAsync(
             new PageAddStyleTagOptions
             {
-                Content = @".innerZoomElementWrapper > div > div > div > * { display: inline-block; padding: 10px; } " +
+                Content = @".innerZoomElementWrapper > * { display: inline-block; padding: 10px; } " +
                           @".docs-story + div, .os-content, .docblock-code-toggle { visibility: hidden; } "
             }
         );
