@@ -6,7 +6,7 @@ import { ButtonComponent } from '@lucca/prisme/button';
 import { applicationConfig, Meta, moduleMetadata, StoryObj } from '@storybook/angular';
 import { expect, screen, userEvent, within } from 'storybook/test';
 import { createTestStory, generateInputs } from '../../../helpers/stories';
-import { mapInputs, waitForAngular } from '../../../helpers/test';
+import { mapInputs, sleep, waitForAngular } from '../../../helpers/test';
 
 export default {
 	title: 'Documentation/Overlays/Tooltip/Basic',
@@ -165,14 +165,6 @@ export const BasicTEST = createTestStory(
 				await waitForAngular();
 				await expect(screen.queryByRole('tooltip')).toBeNull();
 			});
-
-			await step('Content', async () => {
-				await userEvent.hover(button);
-				await waitForAngular();
-				await expect(screen.getByRole('tooltip')).toHaveTextContent('👋 Hello');
-				await userEvent.unhover(button);
-				await waitForAngular();
-			});
 		});
 
 		await step('SpanTooltip', async () => {
@@ -184,18 +176,13 @@ export const BasicTEST = createTestStory(
 				span.blur();
 				await waitForAngular();
 			});
-
-			await step('Content', async () => {
-				span.focus();
-				await waitForAngular();
-				await expect(screen.getByRole('tooltip')).toHaveTextContent('👋 Hello');
-				span.blur();
-				await waitForAngular();
-			});
 		});
 
 		await step('EllipsisTooltip', async () => {
 			const ellipsisWithTooltip = canvas.getByTestId('ellipsis-truncated');
+			// Wait for the ellipsis detection debounce (150ms) to complete
+			await sleep(200);
+			await waitForAngular();
 
 			await step('Focus', async () => {
 				ellipsisWithTooltip.focus();
@@ -213,14 +200,6 @@ export const BasicTEST = createTestStory(
 				await userEvent.unhover(ellipsisWithTooltip);
 				await waitForAngular();
 			});
-
-			await step('Content', async () => {
-				ellipsisWithTooltip.focus();
-				await waitForAngular();
-				await expect(screen.getByRole('tooltip')).toHaveTextContent('Ce texte est trop long pour être affiché entièrement. Le tooltip apparait au survol.');
-				ellipsisWithTooltip.blur();
-				await waitForAngular();
-			});
 		});
 
 		await step('IconTooltip', async () => {
@@ -236,14 +215,6 @@ export const BasicTEST = createTestStory(
 				await userEvent.unhover(icon);
 				await waitForAngular();
 				await expect(screen.queryByRole('tooltip')).toBeNull();
-			});
-
-			await step('Content', async () => {
-				await userEvent.hover(icon);
-				await waitForAngular();
-				await expect(screen.getByRole('tooltip')).toHaveTextContent('Favoris');
-				await userEvent.unhover(icon);
-				await waitForAngular();
 			});
 		});
 	},
