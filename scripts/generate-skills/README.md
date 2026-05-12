@@ -1,150 +1,213 @@
 ﻿# generate-skills
 
-TypeScript script that automatically generates `SKILL.md` files for each component of the Lucca Front design system. These files are used by **GitHub Copilot** (via VS Code Agent Skills) to answer questions about how to use Angular components.
+Pipeline **déterministe** (zéro IA) qui génère la documentation des composants Lucca Front pour les **GitHub Copilot Agent Skills**.
 
-Generated files are placed in `.github/skills/lucca-front/references/`.
+Chaque composant produit un ensemble de fichiers markdown versionnés dans `.github/skills/lucca-front/references/`.
 
-## Prerequisites
+## Prérequis
 
-- Node.js with `ts-node` (included in the project dependencies)
-- A Figma token (read access to the components file)
-- An API key for an AI provider (GitHub Models, Anthropic, or OpenAI)
-- The Zeroheight MCP configured in VS Code (optional  for Prisme guidelines)
-
-_Go to generate-skills-config.json.example for more instructions about API key for an AI provider and Figma Token_
+- Node.js ≥ 18 avec `ts-node` (inclus dans les dépendances du projet)
+- Accès aux git tags du repo (les API sont extraites directement depuis le code source via `git show`)
+- **Optionnel** : un Figma Personal Access Token (lecture seule) pour les design tokens
 
 ## Configuration
 
-Copy the example file and fill in your credentials:
+La configuration se fait par **variables d'environnement** ou via un fichier JSON optionnel :
 
 ```bash
+# Variable d'environnement (recommandé)
+export FIGMA_TOKEN=figd_...
+
+# Ou copier le fichier d'exemple
 cp scripts/generate-skills/generate-skills-config.json.example scripts/generate-skills/generate-skills-config.json
 ```
 
-```json
+`generate-skills-config.json` est gitignored. Le token Figma n'est nécessaire que pour générer les fichiers `.figma.md`.
+
+## Utilisation
+
+```bash
+# Générer un composant pour une version spécifique
+npx ts-node --project scripts/generate-skills/tsconfig.json \
+  scripts/generate-skills/index.ts --version 21.2.1 --component button
+
+# Générer tous les composants pour une version
+npx ts-node --project scripts/generate-skills/tsconfig.json \
+  scripts/generate-skills/index.ts --version 21.2.1
+
+# Sans Figma / ZeroHeight / Storybook
+npx ts-node ... --version 21.2.1 --skip-figma --skip-zeroheight
+
+# Mode dry-run (affiche ce qui serait généré)
+npx ts-node ... --version 21.2.1 --dry-run
+
+# Générer plusieurs versions à la fois
+npx ts-node ... --version 21.2.1 --version 21.1.4
+
+# Valider la couverture ZH (aucune génération)
+npx ts-node ... --validate
+```
+
+### Options
+
+| Flag | Description |
+|------|-------------|
+| `--version <M.m.p>` | Version à générer (ex: `21.2.1`). Répétable. **Requis.** |
+| `--component <slug>` | Générer uniquement ce composant |
+| `--skip-figma` | Ignorer la collecte Figma |
+| `--skip-zeroheight` | Ignorer la collecte ZeroHeight |
+| `--skip-storybook` | Ignorer la collecte Storybook |
+| `--skip-documentation` | Ignorer la collecte documentation (tokens, contenu, guidelines, patterns) |
+| `--skip-tools` | Ignorer la collecte outils (SCSS + Angular tools) |
+| `--documentation-only` | Ne collecter que la documentation et les outils (pas les composants) |
+| `--dry-run` | N'écrire aucun fichier |
+| `--validate` | Vérifier la couverture ZH de component-map.json (aucune génération) |
+
+## Sources de données
+
+Le pipeline agrège **4 sources**, toutes déterministes (pas d'IA) :
+
+| Source | Ce qu'elle fournit | Comment |
+|--------|-------------------|---------|
+| **AST extraction** | API Angular (inputs, outputs, selectors, types) | Regex sur `git show <tag>:<path>` — lit le code source directement depuis le git tag |
+| **ZeroHeight** | Guidelines design, contenu, accessibilité, changelog | Fetch direct du `.md` versionné par release (`/v/<releaseId>/p/<page>.md`) |
+| **Storybook** | Liens + code source des stories Angular et HTML/CSS | `index.json` versionné + `git show` pour les templates |
+| **Figma REST API** | Propriétés des variantes (taille, palette, état…) | API REST Figma — non versionné (état courant) |
+
+## Structure de sortie
+
+```
+.github/skills/lucca-front/
+├── SKILL.md                          # Table des matières + routing par version
+├── _versions.json                    # Manifeste des versions générées
+└── references/
+    ├── components/                   # Composants (versionnés par fix)
+    │   └── button/
+    │       ├── button.figma.md       # Tokens Figma (non versionné)
+    │       ├── button.changelog.md   # Changelog (non versionné)
+    │       ├── v21.2.1/
+    │       │   ├── button.md         # API Angular (~40 lignes)
+    │       │   ├── button.component.md
+    │       │   ├── design/
+    │       │   │   ├── _index.md
+    │       │   │   ├── design.md
+    │       │   │   └── content.md
+    │       │   └── stories/
+    │       │       ├── angular-basic.md
+    │       │       └── html-size.md
+    │       └── v21.2.0/
+    │           └── ...
+    ├── documentation/                # Documentation transverse (versionnée par mineure)
+    │   ├── tokens/v21.2/             # Couleurs, typo, espacements, élévations, arrondis
+    │   ├── content/v21.2/            # Règles de rédaction, contenu
+    │   ├── guidelines/v21.2/         # Guidelines dev UI
+    │   ├── patterns/v21.2/           # Design patterns (formulaires, responsive, IA…)
+    │   └── deprecated.md             # Liste des composants dépréciés + remplacements
+    └── tools/                        # Outils SCSS + Angular (versionnés par fix)
+        └── v21.2.1/
+            ├── animations.md         # Keyframes SCSS
+            ├── functions.md          # pxToRem, flatMap…
+            ├── mixins-*.md           # Mixins (a11y, media, color, text…)
+            ├── ng-animations.md      # Angular animations (fade, scale, slide)
+            └── ng-number.md          # LuNumberPipe
+```
+
+Le fichier principal `button.md` contient uniquement l'import, le basic usage, la table d'API et les liens vers les sous-fichiers. Cela minimise la consommation de tokens quand l'agent n'a besoin que de l'API.
+
+## Architecture du pipeline
+
+```
+scripts/generate-skills/
+├── index.ts                          # Point d'entrée, orchestration, CLI
+├── config.ts                         # Chargement config (env + JSON)
+├── types.ts                          # Types TypeScript partagés
+├── version-config.ts                 # Résolution version → tag, ZH releaseId, SB URL
+├── component-map.json                # Registre des 99 composants (slug, packages, Figma IDs…)
+├── documentation-map.json            # Registre des 48 pages documentation (tokens, contenu, etc.)
+│
+├── collectors/
+│   ├── ast-extractor.ts              # Extraction API Angular par regex depuis git tags
+│   ├── storybook.ts                  # Fetch index.json Storybook + groupement par slug
+│   ├── story-source.ts               # Lecture du code source des stories via git show
+│   ├── zeroheight-fetch.ts           # Fetch .md ZeroHeight (avec fallback HTML)
+│   ├── figma-connect.ts              # Fetch propriétés Figma via REST API
+│   ├── documentation.ts              # Collecte documentation transverse (tokens, contenu, patterns)
+│   └── tools.ts                      # Collecte outils SCSS + Angular depuis git tags
+│
+├── generators/
+│   ├── template-renderer.ts          # Rendu Handlebars + cleanZeroHeightMarkdown
+│   ├── skill-writer.ts               # Écriture des fichiers (components/ + documentation/ + tools/)
+│   └── toc-writer.ts                 # Génération du SKILL.md (TOC + routing)
+│
+└── templates/
+    ├── component.hbs                 # API Angular + liens
+    ├── design-index.hbs              # Index des sections design
+    ├── design-section.hbs            # Une section design
+    ├── component-page.hbs            # Page implémentation (notes + stories)
+    ├── example.hbs                   # Un story individuel
+    ├── changelog.hbs                 # Changelog
+    └── component-figma.hbs           # Tokens Figma
+```
+
+## Flux de génération
+
+```
+1. CLI parse (--version, --component, flags)
+2. Résolution version → git tag, ZH release ID, Storybook base URL
+3. Chargement component-map.json + documentation-map.json
+4. Documentation transverse (par version) :
+   a. ZeroHeight fetch      → tokens, contenu, guidelines, patterns (.md versionnés par mineure)
+   b. Écriture              → references/documentation/<category>/v<M>.<m>/
+5. Outils (par version) :
+   a. Git show              → SCSS mixins/keyframes/fonctions + Angular animations/pipes
+   b. Écriture              → references/tools/v<M>.<m>.<p>/
+6. Composants (par version) :
+   a. Fetch Storybook index.json (versionné)
+   b. Pour chaque composant :
+      i.   AST extraction        → PackageAPI (inputs, outputs, selectors, types)
+      ii.  ZeroHeight fetch      → markdown brut → split par H1 (design sections + changelog)
+      iii. Storybook match       → StorybookGroup (stories, docs entry)
+      iv.  Story source (git)    → StoryExample[] (code inline Angular + HTML/CSS)
+      v.   Basic usage extract   → template HTML minimal
+      vi.  Figma REST API        → FigmaDesignTokens (propriétés variantes)
+      vii. Rendu Handlebars      → fichiers .md
+      viii.Écriture disque       → references/components/<slug>/v<M>.<m>.<p>/
+7. Mise à jour _versions.json
+8. Mise à jour SKILL.md (TOC)
+```
+
+## component-map.json
+
+Registre central des composants. Chaque entrée est indexée par slug :
+
+```jsonc
 {
-  "ai": {
-    "provider": "github-models",
-    "model": "gpt-4o-mini",
-    "apiKey": "github_pat_...",
-    "concurrency": 1
-  },
-  "figma": {
-    "token": "figd_..."
+  "button": {
+    "storybookSlug": "button",
+    "zeroheightPagePath": "098404-button",
+    "ngPackage": "button",
+    "figmaNodeIds": ["6854:42773"],
+    "category": "Actions",
+    "since": "17.0.0"
   }
 }
 ```
 
-`generate-skills-config.json` is gitignored.
- Never share your `github_pat_` token. For security, delete it after use.
+| Champ | Description |
+|-------|-------------|
+| `storybookSlug` | Slug pour matcher dans l'index Storybook (optionnel si pas de stories) |
+| `zeroheightPagePath` | Segment de page ZeroHeight (stable entre versions) |
+| `ngPackage` | Nom du package Angular (optionnel pour les composants CSS-only) |
+| `figmaNodeIds` | Node IDs Figma pour les design tokens |
+| `figmaAliases` | Noms Figma alternatifs (many-to-one) |
+| `category` | Catégorie pour le TOC |
+| `since` / `until` | Plage de versions où le composant existe |
 
-### Supported AI providers
+## Versionnement
 
-| Provider | `provider` | Get a key |
-|---|---|---|
-| GitHub Models | `github-models` | [github.com/settings/tokens](https://github.com/settings/tokens)  no permissions required |
-| Anthropic | `anthropic` | [platform.anthropic.com/settings/api-keys](https://platform.anthropic.com/settings/api-keys) |
-| OpenAI | `openai` | [platform.openai.com/api-keys](https://platform.openai.com/api-keys) |
+- **ZeroHeight** : versionné par release mineure (ex: v21.2 = release ID `47452`). Mapping dans `version-config.ts`.
+- **Storybook** : versionné au fix près (`lucca-front.lucca.io/v21.2.1/storybook/`).
+- **AST** : versionné au fix près via git tags (`git show v21.2.1:packages/ng/button/...`).
+- **Figma** : non versionné (toujours l'état courant).
 
-
-## Usage
-
-```bash
-# Generate only missing SKILL.md files
-npm run skills:generate
-
-# Regenerate all SKILL.md files (including existing ones)
-npm run skills:generate -- --force
-
-# Print prompts without writing any files (debug)
-npm run skills:generate -- --dry-run
-
-# Regenerate a single component
-npm run skills:generate -- --force --component button
-
-# Re-detect Figma <-> Storybook associations automatically
-npm run skills:generate -- --refresh-map
-```
-
-
-## Architecture
-
-```
-scripts/generate-skills/
- index.ts                           # Entry point and orchestration
- config.ts                          # Config loading and validation
- types.ts                           # Shared TypeScript types
- component-map.json                 # Manual Figma <-> Storybook mapping
- generate-skills-config.json        # Credentials (gitignored)
- generate-skills-config.json.example
-
- collectors/
-    figma.ts                       # Fetches components from Figma
-    storybook.ts                   # Fetches and groups Storybook stories
-    zeroheight.ts                  # Fetches Prisme guidelines via MCP
-
- matchers/
-    component-matcher.ts           # Maps Figma <-> Storybook via component-map.json
-
- generators/
-     ai-client.ts                   # Multi-provider abstraction (GitHub Models / OpenAI / Anthropic)
-     prompt-builder.ts              # Builds the prompt sent to the AI
-     skill-writer.ts                # Writes SKILL.md files to disk
-     toc-writer.ts                  # Updates the SKILL.md table of contents
-```
-
-## Generation flow
-
-```
-Figma API 
-Storybook  component-matcher  prompt-builder  AI  skill-writer  SKILL.md
-Zeroheight MCP                                 
-packages/ng/ 
-(real selectors)
-```
-
-1. **Collection**  Fetches Figma components, the Storybook index (1,300+ stories), and Zeroheight guidelines in parallel.
-2. **Matching**  `component-map.json` maps each Figma component to one or more Storybook slugs. This is the central registry to maintain manually.
-3. **Prompt building**  For each component, the prompt includes Figma metadata, story links and Angular story source code, **real Angular selectors** extracted from `packages/ng/` (to prevent hallucinations), and Prisme guidelines.
-4. **AI generation**  The AI generates the SKILL.md following a strict format (YAML frontmatter, standardised sections, Angular examples only).
-5. **Writing**  The file is written to `.github/skills/lucca-front/references/<slug>.md` and the `SKILL.md` table of contents is updated.
-
-## component-map.json
-
-This file is the central registry of Figma <-> Storybook associations. It must be maintained manually when new components are added to the design system.
-
-```jsonc
-{
-  // Simple mapping
-  "pr-Button": { "slug": "button", "storybook": "Documentation/Actions/Button/Angular" },
-
-  // Multiple mapping (1 Figma component -> multiple SKILL.md files)
-  "pr-Select": [
-    { "slug": "multi-select", "storybook": "Documentation/Forms/Fields/Multi Select/Angular" },
-    { "slug": "simple-select", "storybook": "Documentation/Forms/Fields/Simple Select/Angular" }
-  ],
-
-  // No story available -> null
-  "pr-Banner": null
-}
-```
-
-To add a new component:
-1. Find the exact name in Figma
-2. Find the story path in Storybook (title in the `.stories.ts` file)
-3. Add the entry to `component-map.json`
-   (Tip: Copilot is great at this just ask!)
-
-```markdown
-Help me fill in `scripts/generate-skills/component-map.json`.
-
-1. Read the current `component-map.json` to identify entries that are `null` or missing a `storybook` path.
-2. Fetch the Storybook index at http://localhost:6006/index.json to get the full list of available stories.
-3. For each `null` or incomplete entry, search in the Storybook index for a story title that matches the Figma component name
-4. If a match is found, fill in `{ "slug": "<kebab-case-name>", "storybook": "<full story title path>" }`.
-5. If a single Figma component maps to multiple stories (e.g. multi-select + simple-select), use an array.
-6. If no story exists for a component, leave it as `null` (do not guess).
-7. Show me a diff of the proposed changes before writing anything, and ask for confirmation.
-```
-
-4. Run `npm run skills:generate -- --component <slug>`
+L'agent consommateur lit la version de `@lucca-front/ng` dans le `package.json` du projet et navigue vers le dossier correspondant.
