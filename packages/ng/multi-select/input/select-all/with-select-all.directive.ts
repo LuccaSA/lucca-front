@@ -1,5 +1,6 @@
 import { computed, Directive, effect, forwardRef, inject, input, signal } from '@angular/core';
 import { toSignal } from '@angular/core/rxjs-interop';
+import { isNil } from '@lucca-front/ng/core';
 import { CORE_SELECT_API_TOTAL_COUNT_PROVIDER, ɵIsSelectedStrategy } from '@lucca-front/ng/core-select';
 import { LuOptionComparer } from '@lucca-front/ng/option';
 import { LuMultiSelection, LuMultiSelectionMode } from '../../select.model';
@@ -34,7 +35,10 @@ export class LuMultiSelectWithSelectAllDirective<TValue> extends ɵIsSelectedStr
 	readonly mode = this.#mode.asReadonly();
 	readonly values = this.#values.asReadonly();
 	readonly totalCount = toSignal(inject(CORE_SELECT_API_TOTAL_COUNT_PROVIDER).totalCount$);
+	readonly clueChange = toSignal(this.select.clueChange$);
 
+	// only show panel header when no clue && values not empty
+	readonly #showPanelHeader = computed(() => isNil(this.clueChange()) || (this.clueChange()?.length === 0 && this.totalCount() !== 0));
 	readonly #hasValue = computed(() => this.mode() !== 'none');
 
 	readonly #valuesCount = computed(() => this.values().length);
@@ -66,12 +70,11 @@ export class LuMultiSelectWithSelectAllDirective<TValue> extends ɵIsSelectedStr
 	constructor() {
 		super();
 
-		const clueChange = toSignal(this.select.clueChange$);
 		effect(() => {
-			if (clueChange() || this.totalCount() === 0) {
-				this.select.panelHeaderTpl.set(null);
-			} else {
+			if (this.#showPanelHeader()) {
 				this.select.panelHeaderTpl.set(LuMultiSelectAllHeaderComponent);
+			} else {
+				this.select.panelHeaderTpl.set(null);
 			}
 		});
 
