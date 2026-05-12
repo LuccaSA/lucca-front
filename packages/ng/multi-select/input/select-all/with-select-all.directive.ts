@@ -68,7 +68,7 @@ export class LuMultiSelectWithSelectAllDirective<TValue> extends ɵIsSelectedStr
 
 		const clueChange = toSignal(this.select.clueChange$);
 		effect(() => {
-			if (clueChange()) {
+			if (clueChange() || this.totalCount() === 0) {
 				this.select.panelHeaderTpl.set(null);
 			} else {
 				this.select.panelHeaderTpl.set(LuMultiSelectAllHeaderComponent);
