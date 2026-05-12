@@ -1,4 +1,4 @@
-import { expect, userEvent, within } from 'storybook/test';
+import { expect, screen, userEvent, within } from 'storybook/test';
 
 export async function sleep(ms: number) {
 	await new Promise((resolve) => setTimeout(resolve, ms));
@@ -40,4 +40,14 @@ export function mapInputs<T extends Record<string, number>>(inputs: HTMLElement[
 		result[key] = inputs[index];
 	}
 	return result as Record<keyof T, HTMLElement>;
+}
+
+export async function pickDay(input: HTMLElement, targetDay: number, multipleGrid = false) {
+	await userEvent.click(input);
+	await waitForAngular();
+	const table = multipleGrid ? screen.getAllByRole('grid')[0] : screen.getByRole('grid');
+	const calendarComponent = table.parentElement?.parentElement;
+	const calendar = within(calendarComponent);
+	await userEvent.click(calendar.getByText(targetDay.toString()));
+	await waitForAngular();
 }
