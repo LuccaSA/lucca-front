@@ -49,4 +49,4 @@ jobs:
         run: |
           npx http-server storybook-static --port 6006 --silent &
           npx wait-on tcp:127.0.0.1:6006
-          dotnet test e2e/LuccaFront.e2e.sln --no-build --framework net6.0
+          dotnet test e2e/LuccaFront.e2e.sln
