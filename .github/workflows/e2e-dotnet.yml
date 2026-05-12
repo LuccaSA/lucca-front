@@ -9,6 +9,7 @@ on:
 jobs:
   test:
     runs-on: ubuntu-latest
+    timeout-minutes: 30
     container:
       image: mcr.microsoft.com/playwright@sha256:8a0360d39d1973be506dd59002904a774f6d697d4946c94063b3fd006461c8ff # v1.59.1-jammy
     steps:
@@ -38,8 +39,7 @@ jobs:
       - name: Enable headless mode
         run: |
           echo '{"instanceUrl":"http://localhost:6006/","referenceUrl":"http://localhost:6006/","headless":"true"}' \
-            > LuccaFront.Tests.e2e/testSettings.json
-        working-directory: e2e
+            > e2e/LuccaFront.Tests.e2e/testSettings.json
 
       - name: Build .NET E2E project
         run: dotnet build LuccaFront.e2e.sln --no-restore
