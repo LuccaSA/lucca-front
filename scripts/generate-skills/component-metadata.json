@@ -2,6 +2,9 @@
 	"activity-feed": {
 		"zeroheightPagePath": "3541ee"
 	},
+	"animations": {
+		"zeroheightPagePath": "85c178"
+	},
 	"app-layout": {
 		"zeroheightPagePath": "2615fa",
 		"figmaNodeIds": [

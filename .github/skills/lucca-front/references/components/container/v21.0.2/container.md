@@ -1,0 +1,21 @@
+# container
+
+## Import
+
+```typescript
+import { ContainerComponent } from '@lucca-front/ng/container';
+```
+
+## API Reference
+
+### ContainerComponent (component)
+
+**Selector:** `lu-container`
+
+## Related files
+
+- 📝 [Code & implementation](./container.component.md)
+- 🎨 [Design guidelines](./design/_index.md)
+
+- 📖 [Storybook documentation](https://lucca-front.lucca.io/v21.0.2/storybook/?path=/docs/documentation-navigation-horizontalnavigation-container--docs)
+- 📋 [Changelog](../container.changelog.md)
