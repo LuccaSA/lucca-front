@@ -1,46 +1,100 @@
 #!/usr/bin/env node
 
 /**
- * generate-skills — Generates SKILL.md files for VS Code Copilot for each component
- * of the Lucca Front design system, sourced from Figma, Storybook and Zeroheight.
+ * generate-skills — Generates deterministic SKILL.md files for each component
+ * of the Lucca Front design system.
+ *
+ * Sources:
+ * - AST extraction → Angular API (inputs, selectors, types)
+ * - ZeroHeight .md → Design guidelines
+ * - Storybook index.json → Story links + source code
+ * - Figma REST API → Design variant tokens (optional)
  *
  * Usage:
- *   ts-node scripts/generate-skills/index.ts [options]
- *   npm run skills:generate [-- options]
+ *   npx ts-node --project scripts/generate-skills/tsconfig.json scripts/generate-skills/index.ts [options]
  *
  * Options:
+ *   --version <tag>      Version(s) to generate (e.g. "21.2.1"), repeatable, required
  *   --component <slug>   Generate only the specified component
- *   --force              Regenerate even if the SKILL.md already exists
- *   --dry-run            Print the prompt without writing any files
+ *   --skip-figma         Skip Figma data collection
+ *   --skip-zeroheight    Skip ZeroHeight data collection
+ *   --skip-storybook     Skip Storybook data collection
+ *   --dry-run            Print what would be generated without writing files
+ *   --validate           Validate ZH coverage of component-map.json (no generation)
  */
 
-import fs from 'fs';
 import path from 'path';
-
-import { fetchFigmaComponents, groupFigmaComponentsBySet } from './collectors/figma';
+import { extractPackageAPI } from './collectors/ast-extractor';
+import { fetchFigmaDesignTokens } from './collectors/figma-connect';
 import { fetchStorybookIndex } from './collectors/storybook';
-import { fetchComponentGuidelines, initializeMcp } from './collectors/zeroheight';
+import { readStorySourceFromGit, extractBasicUsage, inferScssImports, formatStoryTemplates } from './collectors/story-source';
+import { fetchZeroHeightPage } from './collectors/zeroheight-fetch';
 import { loadConfig } from './config';
-import { createAiClient } from './generators/ai-client';
-import { buildPrompt } from './generators/prompt-builder';
-import { writeComponentResource } from './generators/skill-writer';
+import {
+	renderComponentMd,
+	splitDesignSections,
+	extractZhStoryNotes,
+	renderDesignIndexMd,
+	renderDesignSectionMd,
+	renderComponentPageMd,
+	renderStoryMd,
+	renderChangelogMd,
+	renderFigmaMd,
+	collectSharedTypeDefs,
+	renderSharedTypeMd,
+} from './generators/template-renderer';
+import {
+	writeVersionedSkill,
+	cleanVersionDirectory,
+	writeDesignIndex,
+	writeDesignSection,
+	writeComponentPage,
+	writeStory,
+	writeChangelog,
+	writeFigmaSkill,
+	writeVersionManifest,
+	writeSharedType,
+} from './generators/skill-writer';
 import { writeToc } from './generators/toc-writer';
-import { loadComponentMap, MAP_PATH, matchComponents, refreshMap, resetMap } from './matchers/component-matcher';
-import { MatchedEntry } from './types';
+import { writeVersionChangelog } from './generators/changelog-writer';
+import { resolveVersion } from './version-config';
+import { collectAllDocumentation } from './collectors/documentation';
+import { collectAllTools } from './collectors/tools';
+import { discoverComponents, DiscoveredComponent } from './collectors/component-discovery';
+import { syncMetadata } from './sync-metadata';
+import { ComponentData, ComponentEntry, ComponentMap, DesignSection, StorybookGroup } from './types';
 
 // ─── CLI flag parsing ──────────────────────────────────────────────────────────
 
 const args = process.argv.slice(2);
 
+function getFlag(name: string): string | null {
+	const idx = args.indexOf(`--${name}`);
+	return idx !== -1 && args[idx + 1] ? args[idx + 1] : null;
+}
+
+function getFlags(name: string): string[] {
+	const values: string[] = [];
+	for (let i = 0; i < args.length; i++) {
+		if (args[i] === `--${name}` && args[i + 1] && !args[i + 1].startsWith('--')) {
+			values.push(args[i + 1]);
+			i++;
+		}
+	}
+	return values;
+}
+
 const flags = {
-	force: args.includes('--force'),
+	versions: getFlags('version'),
+	component: getFlag('component'),
+	skipFigma: args.includes('--skip-figma'),
+	skipZeroheight: args.includes('--skip-zeroheight'),
+	skipStorybook: args.includes('--skip-storybook'),
+	skipDocumentation: args.includes('--skip-documentation'),
+	skipTools: args.includes('--skip-tools'),
+	documentationOnly: args.includes('--documentation-only'),
 	dryRun: args.includes('--dry-run'),
-	initMapForce: args.includes('--init-map-force'),
-	refreshMap: args.includes('--refresh-map'),
-	component: (() => {
-		const idx = args.indexOf('--component');
-		return idx !== -1 && args[idx + 1] ? args[idx + 1] : null;
-	})(),
+	validate: args.includes('--validate'),
 };
 
 // ─── Concurrency helper ────────────────────────────────────────────────────────
@@ -62,153 +116,438 @@ async function withConcurrency<T, R>(items: T[], limit: number, fn: (item: T) =>
 	return results;
 }
 
+// ─── Validation ────────────────────────────────────────────────────────────────
+
+/**
+ * Compares component-map.json against ZeroHeight pages from the Prisme MCP.
+ * Reports components present in ZH but missing from the map.
+ *
+ * ZH page IDs are hardcoded from the Prisme navigation — run `list-pages`
+ * in the Prisme MCP to refresh them if the ZH structure changes.
+ */
+async function validateZhCoverage(componentMap: ComponentMap): Promise<void> {
+	console.log('🔍 Validating ZeroHeight coverage...\n');
+
+	// Authoritative list of ZH component page paths (non-deprecated, non-tool pages)
+	const zhComponentPages: Record<string, string> = {
+		// Structure
+		'Footer': '419504', 'Filter bar': '13044b', 'Filter pill': '053be4',
+		'Section': '799d1e', 'Box': '1926ca', 'Page header': '6598e9',
+		'Fancy box': '19c95b', 'Divider': '22632c', 'Mobile header': '6771ab',
+		'App layout': '2615fa', 'Resource card': '44a682', 'Grid': '955d69',
+		'Container': '453b4f', 'Highlight data': '1827fe', 'Card': '878482',
+		// Iconographie
+		'Icon': '9826b3', 'Bubble illustration': '30a66f', 'Bubble icon': '00d34a',
+		'Software icon': '37e39b',
+		// Overlays
+		'Fancy dialog': '32b1a9', 'Popover': '129fae', 'Tooltip': '9285d2',
+		'Dropdown': '557682', 'Modal': '4068ed', 'Dialogs': '841b0b',
+		// Formulaires
+		'Input framed': '28896d', 'Select multiple': '927519', 'Listbox': '005487',
+		'Textfield': '459eda', 'Form label': '3491a2', 'Form field': '810797',
+		'Form layout': '36780d', 'Textarea': '60990a', 'Date range picker': '00bf9b',
+		'Color picker': '16e1d1', 'File upload': '8282a5', 'Switch': '39c7b7',
+		'Clear': '80fb2d', 'Multi language textfield': '5428d4', 'Radio': '45f82a',
+		'Inline message': '43a580', 'Fieldset': '431e99', 'Time and Duration picker': '2473a1',
+		'Data presentation': '02bfb1', 'Checkbox': '42c88e', 'Phone number field': '896abf',
+		'Date picker': '87a48d', 'Select simple': '587833', 'Rich textfield': '92f33b',
+		'Calendar': '76c144',
+		// Listes
+		'Sortable list': '883e34', 'Index table': '24fc14', 'Activity feed': '3541ee',
+		'Chip': '3960bc', 'Data table': '4263a5', 'Listing': '170797',
+		// Textes
+		'Numeric badge': '0548ef', 'Code': '85d53c', 'Mobile push': '268432',
+		'Read more': '5054f0', 'Tag': '6036ad', 'Status badge': '425d98',
+		'Title and text': '021fef', 'PLG Push': '6035eb', 'Comment': '08238a',
+		'New badge': '36bcdf', 'Text flow': '51e878',
+		// Feedbacks
+		'Onboarding empty state': '9490c7', 'Page empty state': '49b0ef',
+		'Section empty state': '97ca09', 'Callout': '64c8d8', 'Toast': '12eaab',
+		'Error page': '1622d2', 'Gauge': '75e507',
+		// Users
+		'Display name': '05750c', 'User tile': '56d611', 'Avatar': '42b330',
+		'User popover': '85b183',
+		// Loaders
+		'Progress bar': '916abd', 'Loading': '91e25d', 'Skeleton': '4819e2',
+		// Navigation
+		'Table of content': '05ca4d', 'Pagination': '093a9c', 'Mobile navigation': '337b80',
+		'Skip links': '48aefc', 'Segmented control': '88f854', 'Vertical navigation': '205934',
+		'Progress stepper': '8211e2', 'Horizontal navigation': '29aaef',
+		'Breadcrumbs': '691d7f', 'Side navigation': '160093', 'Timeline': '288e66',
+		// Actions
+		'Link': '95303b', 'Button': '098404',
+	};
+
+	const mappedPaths = new Set(
+		Object.values(componentMap)
+			.map((e) => e.zeroheightPagePath)
+			.filter(Boolean),
+	);
+
+	const missing: [string, string][] = [];
+	for (const [name, path] of Object.entries(zhComponentPages)) {
+		if (!mappedPaths.has(path)) {
+			missing.push([name, path]);
+		}
+	}
+
+	if (missing.length === 0) {
+		console.log(`✅ All ${Object.keys(zhComponentPages).length} ZH component pages are covered in component-map.json`);
+	} else {
+		console.error(`❌ ${missing.length} ZH pages missing from component-map.json:\n`);
+		for (const [name, path] of missing.sort()) {
+			console.error(`   ${name}: https://prisme.lucca.io/94310e217/v/latest/p/${path}`);
+		}
+		process.exit(1);
+	}
+
+	console.log(`\n📊 component-map.json: ${Object.keys(componentMap).length} entries, ${mappedPaths.size} with ZH pages`);
+}
+
 // ─── Main entry point ──────────────────────────────────────────────────────────
 
 async function main(): Promise<void> {
-	console.log('🚀 Lucca Front — Generating SKILL.md files\n');
-	console.log(`   Flags: ${JSON.stringify(flags)}\n`);
+	if (flags.validate) {
+		const componentMap: ComponentMap = require('./component-map.json');
+		await validateZhCoverage(componentMap);
+		return;
+	}
 
-	// 1. Load configuration
+	if (flags.versions.length === 0) {
+		console.error('❌ --version is required (e.g. --version 21.2.1 --version 21.1.0)');
+		process.exit(1);
+	}
+
 	const config = loadConfig();
 
-	// 2. Collect data (Figma + Storybook + MCP in parallel)
-	console.log('📥 Collecting data...\n');
+	let totalSuccess = 0;
+	let totalErrors = 0;
+	// Accumulated component map for TOC (built from all versions)
+	let latestComponentMap: ComponentMap = {};
 
-	const [figmaComponents, storybookGroups, mcpContext] = await Promise.all([
-		fetchFigmaComponents(config),
-		fetchStorybookIndex(config),
-		initializeMcp(config).catch((err: Error) => {
-			console.warn(`\n  ⚠️  MCP Zeroheight unavailable: ${err.message}`);
-			console.warn('     Prisme guidelines will be missing from the generated SKILL.md files.\n');
-			return null;
-		}),
-	]);
+	for (const versionStr of flags.versions) {
+		const version = resolveVersion(versionStr);
 
-	// 3. Match Figma ↔ Storybook
-	const figmaGroups = groupFigmaComponentsBySet(figmaComponents);
-
-	// --init-map-force mode: reset component-map.json entirely with algorithmic suggestions
-	if (flags.initMapForce) {
-		console.log(`\n🗺️  Resetting component-map.json...\n`);
-		const total = resetMap(figmaGroups, storybookGroups);
-		console.log(`\n  ✅ ${total} entries generated in ${MAP_PATH}`);
-		console.log('     ⚠️  All manual corrections have been overwritten.');
-		console.log('     Edit component-map.json to fix suggestions and map null entries.');
-		return;
-	}
-
-	// --refresh-map mode: add new entries + remove deleted ones, without touching existing ones
-	if (flags.refreshMap) {
-		console.log(`\n🗺️  Refreshing component-map.json...\n`);
-		const { added, removed } = refreshMap(figmaGroups, storybookGroups);
-		if (added === 0 && removed === 0) {
-			console.log('  ✅ No changes — map is up to date.');
-		} else {
-			if (added > 0) console.log(`\n  ✅ ${added} entr${added > 1 ? 'ies' : 'y'} added`);
-			if (removed > 0) console.log(`  🗑  ${removed} entr${removed > 1 ? 'ies' : 'y'} removed`);
-			console.log(`\n  File updated: ${MAP_PATH}`);
-		}
-		return;
-	}
-
-	const componentMap = loadComponentMap();
-	const matchResult = matchComponents(figmaGroups, storybookGroups, componentMap);
-	const { matched } = matchResult;
-
-	// 4. Filter by --component if requested
-	let targets: MatchedEntry[] = matched;
-	if (flags.component) {
-		targets = matched.filter((m) => m.slug === flags.component || m.storybook?.slug === flags.component);
-		if (targets.length === 0) {
-			console.error(`\n❌ Component "${flags.component}" not found in matched data.`);
-			console.log(
-				`   Available components:\n   ${matched
-					.map((m) => m.slug)
-					.sort()
-					.join(', ')}`,
-			);
-			process.exit(1);
-		}
-	}
-
-	// 5. Generate SKILL.md files via AI
-	console.log(`\n🤖 Generating ${targets.length} SKILL.md files...\n`);
-
-	const generateText = await createAiClient(config);
-
-	const results = await withConcurrency(targets, config.ai.concurrency, async (target) => {
-		const { slug } = target;
-		const skillPath = path.join(config.output.skillsDir, 'lucca-front', 'references', `${slug}.md`);
-
-		// Skip if the file already exists and --force is not set
-		if (fs.existsSync(skillPath) && !flags.force && !flags.dryRun) {
-			console.log(`  ⏭  ${slug} — skipped (already exists, use --force to overwrite)`);
-			return { slug, status: 'skipped' };
-		}
-
-		console.log(`  ⚙️  ${slug} — generating...`);
-
-		// Fetch Zeroheight guidelines for this component
-		let zeroheightData: Record<string, string> | null = null;
-		if (mcpContext) {
-			try {
-				zeroheightData = await fetchComponentGuidelines(mcpContext.mcpUrl, target.figma.figmaName);
-			} catch (err: any) {
-				console.warn(`     ⚠️  Zeroheight: ${err.message}`);
+		// Documentation collection (ZH pages: tokens, content, guidelines, patterns)
+		if (!flags.skipDocumentation && !flags.component) {
+			console.log(`\n📖 Collecting documentation for v${version.major}.${version.minor}...`);
+			if (flags.dryRun) {
+				const docMap = require('./documentation-map.json');
+				const total = Object.values(docMap).reduce((sum: number, arr: any) => sum + arr.length, 0);
+				console.log(`   DRY RUN — ${total} documentation pages would be fetched`);
+			} else {
+				const { written, errors } = await collectAllDocumentation(config.output.skillsDir, version);
+				console.log(`\n   📖 Documentation: ${written} written, ${errors} errors`);
+				totalSuccess += written;
+				totalErrors += errors;
 			}
 		}
 
-		// Build the prompt
-		const { systemPrompt, userPrompt } = buildPrompt({ matched: target, zeroheightData });
-
-		// --dry-run mode: print the prompt without calling the AI
-		if (flags.dryRun) {
-			const separator = '─'.repeat(60);
-			console.log(`\n${separator}\n// DRY RUN — ${slug}\n${separator}`);
-			console.log('SYSTEM (excerpt):\n', systemPrompt.slice(0, 300), '\n[...]\n');
-			console.log('USER (excerpt):\n', userPrompt.slice(0, 600), '\n[...]\n');
-			return { slug, status: 'dry-run' };
+		// Tools collection (ZeroHeight pages: utilities, mixins, animations, etc.)
+		// Runs with --documentation-only since tools are now ZH-based (not git source extraction).
+		if (!flags.skipTools && !flags.component) {
+			console.log(`\n🔧 Collecting tools for ${version.tag}...`);
+			if (flags.dryRun) {
+				const toolsMap = require('./tools-map.json');
+				console.log(`   DRY RUN — ${toolsMap.length} tool pages would be fetched from ZeroHeight`);
+			} else {
+				const { written, errors } = await collectAllTools(config.output.skillsDir, version, { skipStorybook: flags.skipStorybook });
+				console.log(`\n   🔧 Tools: ${written} written, ${errors} errors`);
+				totalSuccess += written;
+				totalErrors += errors;
+			}
 		}
 
-		// AI call
-		let content: string;
-		try {
-			content = await generateText({ systemPrompt, userPrompt });
-		} catch (err: any) {
-			console.error(`  ❌ ${slug} — AI error: ${err.message}`);
-			return { slug, status: 'error', error: err.message };
+		// Component collection (skip if --documentation-only)
+		if (!flags.documentationOnly) {
+			const { success, errors, componentMap } = await processVersion(versionStr, config);
+			totalSuccess += success;
+			totalErrors += errors;
+			// Always use the last version's component map for the TOC
+			if (componentMap && Object.keys(componentMap).length > 0) {
+				latestComponentMap = componentMap;
+			}
 		}
 
-		// Write the file
-		const category = target.storybook?.category ?? '';
-		const figmaName = target.figma?.figmaName ?? slug;
-		const storybookName = target.storybook?.storybookName ?? slug;
-		const result = writeComponentResource(config.output.skillsDir, slug, content, { category, figmaName, storybookName }, flags.force);
-		console.log(`  ✅ ${slug} — ${result.status}`);
-		return { slug, status: result.status };
-	});
-
-	// 6. Generate table of contents
-	if (!flags.dryRun) {
-		const tocPath = writeToc(config.output.skillsDir);
-		console.log(`\n📑 Table of contents: ${tocPath}`);
+		// Generate version changelog (diff vs previous version)
+		if (!flags.dryRun && !flags.component) {
+			const slugs = Object.keys(latestComponentMap);
+			const clPath = writeVersionChangelog(config.output.skillsDir, version, slugs);
+			if (clPath) {
+				console.log(`📝 Changelog: ${path.basename(clPath)}`);
+			}
+		}
 	}
 
-	// 7. Final summary
-	const summary = results.reduce(
-		(acc, r) => {
-			acc[r.status] = (acc[r.status] ?? 0) + 1;
-			return acc;
-		},
-		{} as Record<string, number>,
-	);
+	// Write TOC once (covers all versions)
+	if (!flags.dryRun && Object.keys(latestComponentMap).length > 0) {
+		const tocPath = writeToc(config.output.skillsDir, latestComponentMap);
+		console.log(`📑 Table of contents: ${tocPath}`);
+	}
 
-	console.log('\n🎉 Done!');
-	if (summary['created']) console.log(`   Created : ${summary['created']}`);
-	if (summary['updated']) console.log(`   Updated : ${summary['updated']}`);
-	if (summary['skipped']) console.log(`   Skipped : ${summary['skipped']}`);
-	if (summary['error']) console.log(`   Errors  : ${summary['error']}`);
-	if (summary['dry-run']) console.log(`   Dry-run : ${summary['dry-run']}`);
+	console.log(`\n🎉 All done! ${flags.versions.length} version(s), ${totalSuccess} generated, ${totalErrors} errors`);
+}
+
+async function processVersion(
+	versionStr: string,
+	config: ReturnType<typeof loadConfig>,
+): Promise<{ success: number; errors: number; componentMap: ComponentMap }> {
+	const version = resolveVersion(versionStr);
+
+	console.log(`\n🚀 Generating skills for Lucca Front ${version.tag}\n`);
+	console.log(`   ZeroHeight release: ${version.zhReleaseId ?? 'none'}`);
+	console.log(`   Storybook: ${version.storybookBaseUrl}`);
+	console.log(`   Flags: ${JSON.stringify({ ...flags, versions: undefined, version: versionStr })}\n`);
+
+	// Collect Storybook index (primary source for component discovery)
+	let storybookMap = new Map<string, StorybookGroup>();
+	if (!flags.skipStorybook) {
+		console.log('📥 Fetching Storybook index...');
+		try {
+			storybookMap = await fetchStorybookIndex(version);
+		} catch (err: any) {
+			console.warn(`  ⚠️  Storybook unavailable: ${err.message}`);
+		}
+	}
+
+	// Discover components dynamically (from Storybook + metadata, or metadata-only if Storybook unavailable)
+	// Sync metadata first to ensure it's up-to-date
+	if (!flags.component) {
+		console.log('🔄 Syncing component-metadata.json...');
+		const syncResult = syncMetadata(storybookMap, version);
+		if (syncResult.added.length) console.log(`   + ${syncResult.added.length} new entries`);
+		if (syncResult.updated.length) console.log(`   ~ ${syncResult.updated.length} updated entries`);
+		if (syncResult.warnings.length) console.log(`   ⚠️  ${syncResult.warnings.length} warnings`);
+	}
+
+	let discovered = discoverComponents(storybookMap, version);
+
+	// Filter by --component if requested (supports both hyphenated and concatenated forms)
+	if (flags.component) {
+		const targetCompact = flags.component.replace(/-/g, '');
+		discovered = discovered.filter(c => c.slug === flags.component || c.slug.replace(/-/g, '') === targetCompact);
+		if (discovered.length === 0) {
+			const all = discoverComponents(storybookMap, version).map(c => c.slug);
+			console.error(`❌ Component "${flags.component}" not found in ${version.tag}.`);
+			console.log(`   Available: ${all.join(', ')}`);
+			return { success: 0, errors: 1, componentMap: {} };
+		}
+	}
+
+	// Build ComponentMap from discovered list (for TOC + changelog)
+	const componentMap: ComponentMap = {};
+	for (const { slug, entry } of discovered) {
+		componentMap[slug] = entry;
+	}
+
+	// Process each component
+	const entries: [string, ComponentEntry][] = discovered.map(c => [c.slug, c.entry]);
+	console.log(`\n⚙️  Processing ${entries.length} components...\n`);
+
+	let successCount = 0;
+	let errorCount = 0;
+
+	const results = await withConcurrency(entries, config.concurrency, async ([slug, entry]: [string, ComponentEntry]) => {
+		try {
+			console.log(`  📦 ${slug}...`);
+
+			// 1. AST extraction (needs ngPackage — skip for CSS-only components)
+			const api = entry.ngPackage ? extractPackageAPI(entry.ngPackage, version) : null;
+			if (!api && entry.ngPackage) {
+				console.log(`     ⚠️  No API found for ${entry.ngPackage}`);
+			}
+
+			// 2. ZeroHeight guidelines
+			let zeroheight = null;
+			if (!flags.skipZeroheight && entry.zeroheightPagePath) {
+				try {
+					zeroheight = await fetchZeroHeightPage(entry.zeroheightPagePath, version.zhReleaseId);
+				} catch (err: any) {
+					console.warn(`     ⚠️  ZeroHeight: ${err.message}`);
+				}
+			}
+
+			// 3. Storybook match
+			const sbGroup = storybookMap.get(entry.storybookSlug) ?? null;
+
+			// 4. Story source code + input descriptions
+			const storyResult = readStorySourceFromGit(sbGroup, version);
+			const storyExamples = storyResult?.examples ?? null;
+
+			// Merge argType descriptions into API inputs
+			if (storyResult?.inputDescriptions && api) {
+				for (const apiClass of api.apis) {
+					for (const inp of apiClass.inputs) {
+						const desc = storyResult.inputDescriptions.get(inp.bindingName)
+							?? storyResult.inputDescriptions.get(inp.propName);
+						if (desc) inp.description = desc;
+					}
+				}
+			}
+
+			// 4b. Basic usage template (from "basic" story)
+			const basicUsage = extractBasicUsage(sbGroup, version);
+
+			// 4c. Enrich stories with ZH notes (imports + prose from <tab> blocks)
+			if (zeroheight && storyExamples && sbGroup) {
+				const zhNotes = extractZhStoryNotes(zeroheight.raw);
+				if (zhNotes.length > 0) {
+					// Build storyId → fileSlug mapping from the storybook index
+					const idToFileSlug = new Map<string, string>();
+					for (const story of sbGroup.stories) {
+						if (story.id && story.importPath) {
+							const filename = story.importPath.split('/').pop() ?? '';
+							const base = filename.replace(/\.stories\.ts$/, '');
+							const parts = base.split('-');
+							const suffix = parts.length > 1 ? parts.slice(1).join('-') : parts[0];
+							const prefix = story.framework === 'angular' ? 'angular' : 'html';
+							idToFileSlug.set(story.id, `${prefix}-${suffix}`);
+						}
+					}
+
+					// Map notes to story examples
+					for (const zhNote of zhNotes) {
+						for (const storyId of zhNote.storyIds) {
+							const fileSlug = idToFileSlug.get(storyId);
+							if (!fileSlug) continue;
+							const example = storyExamples.find((e) => e.fileSlug === fileSlug);
+							if (!example) continue;
+							if (zhNote.imports.length > 0) example.zhImports = zhNote.imports;
+							if (zhNote.note) example.zhNote = zhNote.note;
+						}
+					}
+				}
+			}
+
+			// 4d. Infer additional SCSS imports for HTML stories from template classes
+			if (storyExamples && entry.ngPackage) {
+				for (const ex of storyExamples) {
+					if (ex.framework !== 'html-css') continue;
+					// Skip if ZH already provided curated imports (they're authoritative)
+					if (ex.zhImports && ex.zhImports.length > 0) continue;
+					const extraScss = inferScssImports(ex.templates, entry.ngPackage, version.tag);
+					if (extraScss.length > 0) {
+						ex.zhImports = extraScss;
+					}
+				}
+			}
+
+			// 4e. Format HTML templates with prettier
+			if (storyExamples) {
+				await formatStoryTemplates(storyExamples);
+			}
+
+			// 5. Figma tokens (optional, unversioned)
+			let figmaTokens = null;
+			if (!flags.skipFigma && entry.figmaNodeIds && entry.figmaNodeIds.length > 0 && config.figma.token) {
+				try {
+					figmaTokens = await fetchFigmaDesignTokens(config.figma.fileKey, entry.figmaNodeIds[0], config.figma.token);
+				} catch (err: any) {
+					console.warn(`     ⚠️  Figma: ${err.message}`);
+				}
+			}
+
+			// Build component data
+			const data: ComponentData = {
+				slug,
+				entry,
+				version,
+				api,
+				zeroheight,
+				storybook: sbGroup,
+				storyExamples,
+				basicUsage,
+				figma: figmaTokens,
+			};
+
+			if (flags.dryRun) {
+				console.log(`     DRY RUN — ${slug}: API=${api ? api.apis.length + ' classes' : 'none'}, ZH=${zeroheight ? 'yes' : 'no'}, SB=${sbGroup ? sbGroup.stories.length + ' stories' : 'no'}`);
+				return { slug, status: 'dry-run' };
+			}
+
+			// ── Write all files ──────────────────────────────────────────
+
+			// Clean previous design/ and examples/ to avoid stale files
+			cleanVersionDirectory(config.output.skillsDir, slug, version);
+
+			// Main API reference
+			const mdContent = renderComponentMd(data);
+			const result = writeVersionedSkill(config.output.skillsDir, slug, version, mdContent);
+			console.log(`     ✅ ${slug}.md — ${result.status}`);
+
+			// Design guidelines (split by H1 sections, code sections go to examples)
+			const designResult = splitDesignSections(data);
+			let codeSections: DesignSection[] = [];
+			if (designResult) {
+				codeSections = designResult.codeSections;
+				if (designResult.designSections.length > 0) {
+					const indexMd = renderDesignIndexMd(slug, designResult.designSections, designResult.overviewContent, entry.zeroheightPagePath ?? '');
+					writeDesignIndex(config.output.skillsDir, slug, version, indexMd);
+					for (const section of designResult.designSections) {
+						const sectionMd = renderDesignSectionMd(slug, section);
+						writeDesignSection(config.output.skillsDir, slug, version, section.fileSlug, sectionMd);
+					}
+					console.log(`     ✅ ${designResult.designSections.length} design sections written`);
+				}
+			}
+
+			// Component page + individual stories (merged with ZH code sections)
+			const componentPageMd = renderComponentPageMd(data, codeSections);
+			if (componentPageMd) {
+				writeComponentPage(config.output.skillsDir, slug, version, componentPageMd);
+				if (storyExamples) {
+					const scssImport = entry.ngPackage
+						? `@forward '@lucca-front/scss/src/components/${entry.ngPackage}';`
+						: '';
+					for (const ex of storyExamples) {
+						const storyMd = renderStoryMd(slug, ex, scssImport);
+						writeStory(config.output.skillsDir, slug, version, ex.fileSlug, storyMd);
+					}
+				}
+				console.log(`     ✅ ${storyExamples?.length ?? 0} stories written`);
+			}
+
+			// Changelog (unversioned)
+			const clMd = renderChangelogMd(data);
+			if (clMd) {
+				writeChangelog(config.output.skillsDir, slug, clMd);
+			}
+
+			// Figma skill (unversioned)
+			if (figmaTokens) {
+				const figmaMd = renderFigmaMd(slug, [figmaTokens], config.figma.fileKey);
+				const figmaResult = writeFigmaSkill(config.output.skillsDir, slug, figmaMd);
+				console.log(`     ✅ ${slug}.figma.md — ${figmaResult.status}`);
+			}
+
+			successCount++;
+			return { slug, status: result.status, data };
+		} catch (err: any) {
+			console.error(`  ❌ ${slug}: ${err.message}`);
+			errorCount++;
+			return { slug, status: 'error', error: err.message, data: null };
+		}
+	});
+
+	// Write shared type definitions (deduplicated across all components)
+	if (!flags.dryRun) {
+		const allData = results.map(r => r.data).filter((d): d is ComponentData => d !== null);
+		const sharedTypes = collectSharedTypeDefs(allData);
+		for (const typeDef of sharedTypes) {
+			const typeMd = renderSharedTypeMd(typeDef);
+			const typeResult = writeSharedType(config.output.skillsDir, version, typeDef.typeName, typeMd);
+			console.log(`  📎 ${typeDef.typeName}.md — ${typeResult.status} (${typeDef.values.length} values)`);
+		}
+	}
+
+	// Write version manifest
+	if (!flags.dryRun) {
+		writeVersionManifest(config.output.skillsDir, version, successCount);
+		console.log(`\n📋 Version manifest updated`);
+	}
+
+	console.log(`\n✅ ${version.tag}: ${successCount} generated, ${errorCount} errors`);
+	return { success: successCount, errors: errorCount, componentMap };
 }
 
 main().catch((err: Error) => {

@@ -1,88 +1,107 @@
 ---
 name: lucca-front
-description: 'Table des matières du design system Lucca Front (Angular). Charge ce skill pour trouver le bon composant à utiliser. Composants disponibles : app-layout, avatar, breadcrumbs, bubble-icon, bubble-illustration, button, calendar, callout, callout-disclosure, callout-popover, checkbox, chip, clear, color-picker, comment, data-presentation, data-table, dateinput, daterangeinput, dialog, divider, dropdown, duration-picker, empty-state, fancybox, fieldset, fileentry, fileupload, filterbar, filterpills, float, footer, form-field, gauge, highlight-data, horizontalnavigation, icons, index-table, inlinemessage, input-framed, link, listing, loading, mobile-push, mobilenavigation, multi-select, multilanguagefield, newbadge, numericbadge, pageheader, et plus encore. Catégories : actions, formulaires, navigation, overlays, listes, structure, feedback, chargement, textes, utilisateurs.'
+description: >
+  Design system Lucca Front / Prisme (Angular). À charger pour tout fichier d'un projet qui dépend de @lucca-front/ng ou @lucca-front/scss, 
+  ou contenant des sélecteurs lu-*, pr-* ou des directives commençant par 'lu' (ex: luButton, luTooltip, luForm).
 ---
 
-## Composants
+# Design System Prisme — Lucca Front
 
-- **[pr-AppLayout (1600)](./references/app-layout.md)** — pr-AppLayout (1600), lu-app-layout, header, footer, sidebar, headerSticky, footerSticky, repeatContent, contentOverflowi
-- **[pr-AvatarWrapper (v17.3)](./references/avatar.md)** — Composant pr-AvatarWrapper, directives lu-user-picture et [luUserPopover], inputs sizes. Variantes: XS, S, M, L. Utilisa
-- **[pr-Breadcrumbs](./references/breadcrumbs.md)** — Composant de navigation à fil d'Ariane, sélecteurs : lu-breadcrumbs, [luBreadcrumbsLink]. Inputs principaux : ariaCurren
-- **[pr-BubbleIcon](./references/bubble-icon.md)** — Composant pr-BubbleIcon, sélecteur lu-bubble-icon. Inputs : direction, size, icon, alt. Variantes : Direction, Palette. 
-- **[pr-BubbleIllustration](./references/bubble-illustration.md)** — Composant pr-BubbleIllustration, sélecteur lu-bubble-illustration, inputs size et action, variantes Type=Error, Type=Suc
-- **[pr-ButtonGroup](./references/button.md)** — Composant pr-ButtonGroup, directive luButton, inputs : block, palette, state, disclosure, critical, size. Variantes : Fi
-- **[pr-Calendar](./references/calendar.md)** — Composant pr-Calendar, utilisé pour la sélection de dates. Éléments principaux : luCalendar. Variantes : Type=Day, Type=
-- **[pr-Callout](./references/callout.md)** — Composant Callout pour afficher des messages contextuels importants. Sélecteurs : lu-callout, lu-callout-actions, lu-fee
-- **[pr-CalloutDisclosure](./references/callout-disclosure.md)** — CalloutDisclosureComponent, lu-callout-disclosure, inputs: icon, state, size, heading, palette, open. Variantes disponib
-- **[pr-CalloutPopover](./references/callout-popover.md)** — Composant CalloutPopover, sélecteur lu-callout-popover, inputs items, buttonLabel, buttonAlt, icon, state, heading, head
-- **[pr-CheckboxFieldset](./references/checkbox.md)** — CheckboxFieldset, directives/Sélecteurs: lu-checkbox-input, Inputs: type, size, alignment, feedback; variantes: Default,
-- **[pr-Chip](./references/chip.md)** — ChipComponent, sélecteurs: lu-chip, button[luChip], a[luChip], inputs: unkillable, disabled, product, withEllipsis, smal
-- **[pr-Clear](./references/clear.md)** — Composant pr-Clear, sélecteur: lu-clear, inputs: disabled, palette, inverted, size, alt, hidden, variantes: 40 (ex: Size
-- **[AssetsColorPicker](./references/color-picker.md)** — Composant AssetsColorPicker, sélecteurs Angular : [luOption], lu-form-field, lu-color-input. Inputs principaux : label, 
-- **[pr-Comment](./references/comment.md)** — Composant pr-Comment, directives/sélecteurs Angular : lu-comment, lu-comment-block, lu-comment-chat. Inputs principaux :
-- **[pr-DataPresentation (v21.1)  🎉](./references/data-presentation.md)** — Composant Angular pour afficher une donnée avec son libellé descriptif. Directive/Component: <lu-data-presentation>, inp
-- **[pr-DataTable](./references/data-table.md)** — Composant Angular lu-data-table pour afficher des données tabulaires. Inclut tbody[luDataTableBody], lu-data-table, tfoo
-- **[pr-DatePicker](./references/dateinput.md)** — Composant pr-DatePicker, directives/sélecteurs Angular, inputs principaux : size, period, state, content, feedback, form
-- **[pr-DateRangePicker (v19.1)](./references/daterangeinput.md)** — Composant pr-DateRangePicker, directives/sélecteurs Angular non disponibles, inputs principaux non renseignés, variante
-- **[AssetsDialogs](./references/dialog.md)** — Composant AssetsDialogs, utilisé pour afficher des dialogues avec des variantes incluant AssetsDialogs et Backdrop.
-- **[pr-Divider](./references/divider.md)** — Composant Divider, sélecteur lu-divider, input separatorRole, variantes Horizontal, Horizontal - Content, Vertical.
-- **[pr-DropdownMenu](./references/dropdown.md)** — Dropdown, luDropdown, lu-dropdown-action, lu-dropdown-divider, lu-dropdown-group, lu-dropdown-item, lu-dropdown-menu. Ut
-- **[pr-DurationPicker](./references/duration-picker.md)** — Composant pr-DurationPicker, directives luDurationPicker, inputs size, type, state, feedback, presentation, variantes de
-- **[pr-EmptyStateFull](./references/empty-state.md)** — Composant pour afficher un état vide, avec les sélecteurs Angular lu-empty-state-page et lu-empty-state-section, inputs 
-- **[pr-FancyBox (v19.1)](./references/fancybox.md)** — Composant FancyBox, sélecteur `lu-fancy-box`, inputs principaux : `backgroundLeft`, `backgroundRight`, `foreground`, `si
-- **[AssetsFieldset](./references/fieldset.md)** — Composant AssetsFieldset, directives Angular lu-fieldset, lu-form-field, lu-text-input, lu-grid, lu-grid-column. Inputs 
-- **[pr-FileEntry (v19.3)](./references/fileentry.md)** — Composant pour afficher une entrée de fichier. Sélecteur : lu-file-entry. Inputs principaux : entry. Variantes : Default
-- **[AssetsFileUpload](./references/fileupload.md)** — Composant de téléchargement de fichiers, directives : lu-file-entry, lu-multi-file-upload, lu-single-file-upload, lu-for
-- **[pr-FilterBar (v19.2)](./references/filterbar.md)** — Composant FilterBar, sélecteur lu-filter-bar, directives luFilterPillAddonBefore, luFilterPillAddonAfter. Inputs princip
-- **[pr-FilterPill (v19.2)](./references/filterpills.md)** — Composant FilterPill, directives Angular lu-filter-pill, lu-simple-select, lu-multi-select, lu-date-input, lu-date-range
-- **[Slot](./references/float.md)** — Composant Slot, utilisé pour gérer des éléments flottants. Variantes: Type=Text, Type=Slot, Type=Slot - Mini. Sélecteurs
-- **[pr-Footer](./references/footer.md)** — Composant pr-Footer, sélecteur lu-footer, input container, variantes Screen Size=M, Screen Size=S, déclencheurs footerCo
-- **[pr-FormField](./references/form-field.md)** — Composant Angular pr-FormField pour structurer des champs de formulaire. Sélecteur Angular `<pr-FormField>`. Ce composan
-- **[pr-Gauge](./references/gauge.md)** — Composant pr-Gauge, sélecteur: lu-gauge. Inputs: palette, thin, animated, circular, size, value, alt, noAlt. Variantes: 
-- **[pr-HighlightData (v19.3)](./references/highlight-data.md)** — Composant pr-HighlightData, sélecteur lu-highlight-data, input principal palette, variantes Size, Theme, Data first, Fee
-- **[pr-HorizontalNavigation](./references/horizontalnavigation.md)** — Composant de navigation horizontal, sélecteurs : lu-horizontal-navigation, [luHorizontalNavigationLink]. Inputs : size, 
-- **[pr-Icon](./references/icons.md)** — Composant pr-Icon, utilisé pour afficher des icônes avec différentes tailles (XS, XXS, S, M, L, XL, XXL). Sélecteur : lu
-- **[pr-IndexTable](./references/index-table.md)** — pr-IndexTable, composant lu-index-table avec inputs empty, layoutFixed, selectable, action, hiddenLabel, expanded, group
-- **[pr-InlineMessage](./references/inlinemessage.md)** — Composant pr-InlineMessage, sélecteur Angular lu-inline-message, inputs : state, size, label, variantes : Critical, Defa
-- **[pr-InputFramed (v20.1)](./references/input-framed.md)** — Composant pr-InputFramed, sélecteur lu-input-framed, inputs : panel, illustration, info, tag, checkbox, center, inlineMe
-- **[pr-Link](./references/link.md)** — Composant pr-Link, directives/sélecteurs Angular, inputs principaux, variantes (Size, Underline, State, Palette), mots-c
-- **[pr-Listing (v20.1)  🎉](./references/listing.md)** — Composant pr-Listing (v20.1)  🎉, sélecteurs: lu-listing, lu-listing-item, inputs: defaultIcon, icon, start, reversed, p
-- **[pr-Loading](./references/loading.md)** — Composant de chargement, sélecteur Angular lu-loading, variantes Palette=Product, Size=S, Palette=Product, Size=XS, Pale
-- **[pr-MobilePush (v20.1)](./references/mobile-push.md)** — MobilePushComponent, sélecteur lu-mobile-push, inputs appStoreLinkClicked, googlePlayLinkClicked, variantes Badge Alignm
-- **[pr-MobileNavigation](./references/mobilenavigation.md)** — Composant pr-MobileNavigation, directives Angular, luMobileNavigation, variantes: Tab Count=2 Tabs, Tab Count=3 Tabs, Ta
-- **[AssetsSelect](./references/multi-select.md)** — Composant AssetsSelect, directives : [luOption], [lu-multi-select], inputs : tooltip, label, required, placeholder, size
-- **[pr-MultilanguageTextfield](./references/multilanguagefield.md)** — Composant pr-MultilanguageTextfield, sélecteurs Angular lu-form-field et lu-multilanguage-input, inputs : label, require
-- **[pr-NewBadge](./references/newbadge.md)** — Indique une fonctionnalité comme nouvelle dans une application. Composant Angular NewBadgeComponent, sélecteur lu-new-ba
-- **[pr-NumericBadge](./references/numericbadge.md)** — Composant pr-NumericBadge, sélecteur Angular lu-numeric-badge, inputs: value, maxValue, palette, size, loading, disableT
-- **[pr-PageHeader](./references/pageheader.md)** — Composant pr-PageHeader, sélecteur lu-page-header, directives lu-breadcrumbs, [luBreadcrumbsLink], lu-form-field, lu-tex
-- **[pr-Pagination](./references/pagination.md)** — Composant Angular pr-Pagination, sélecteur `lu-pagination`, permet de paginer un contenu ou des données en plusieurs pag
-- **[pr-PhoneNumberField](./references/phonenumberfield.md)** — Composant pour entrer un numéro de téléphone. Sélecteurs : lu-phone-number-input, lu-form-field. Inputs : disabled, labe
-- **[pr-PLGPush](./references/plg-push.md)** — Composant Angular `lu-plg-push` pour afficher une publicité within app sur une fonctionnalité ou solution Lucca. Inputs 
-- **[pr-Popover](./references/popover.md)** — Popover Angular Directive pour afficher un contenu supplémentaire en superposition, déclenché par interaction avec un él
-- **[pr-ProgressBar](./references/progress-bar.md)** — Composant de barre de progression, sélecteur Angular: lu-progress-bar, inputs: state, indeterminate, value. Variantes: S
-- **[pr-Radio](./references/radiofield.md)** — Composant pr-Radio, sélecteurs lu-radio, lu-radio-group-input, inputs: size, inlineMessageState, hiddenLabel, tooltip, l
-- **[pr-ReadMore (v19.3)](./references/readmore.md)** — Composant pr-ReadMore, sélecteur lu-read-more. Inputs principaux : lineClamp, surface, textFlow, openOnly, innerContent.
-- **[pr-ResourceCard (v21.0)  🧪](./references/resource-card.md)** — Carte de ressource, sélecteurs : lu-resource-card, button[luResourceCardAction], a[luResourceCardAction], lu-resource-ca
-- **[pr-RichTextfield (v19.3)](./references/richtextinput.md)** — Composant pr-RichTextfield, sélecteurs Angular lu-rich-text-input, lu-rich-text-input-toolbar, directives luWithHtmlForm
-- **[Scrollbar](./references/scrollbox.md)** — Scrollbar, directive `luScrollbox`, inputs principaux `type`, `direction`, variantes disponibles : PC Horizontal, Mac Ve
-- **[pr-SegmentedControl](./references/segmentedcontrol.md)** — Composant pr-SegmentedControl, directives: lu-segmented-control, lu-segmented-control-tabs, lu-segmented-control-filter,
-- **[pr-Select](./references/select.md)** — Composant pr-Select pour les sélections simples ou multiples, directives luSelect, input principal options, variantes di
-- **[pr-Skeleton](./references/skeleton.md)** — Composant pr-Skeleton pour afficher des éléments de chargement. Variantes incluent différents types de texte et styles. 
-- **[pr-SkeletonButton (v18.1)](./references/skeleton-button.md)** — Pr-SkeletonButton (v18.1), lu-skeleton-button, dark, size. Les Skeletons permettent de faire patienter l utilisateur en 
-- **[pr-SkeletonFormField (v18.1)](./references/skeleton-field.md)** — SkeletonFieldComponent, sélecteur lu-skeleton-field, inputs hiddenLabel et rows, variante pr-SkeletonFormField (v18.1), 
-- **[pr-SkeletonPageHeader (v18.1)](./references/skeleton-header.md)** — Composant pr-SkeletonPageHeader, directive lu-skeleton-header. Indique à l'utilisateur le type et la position des conten
-- **[pr-SoftwareIcon](./references/software-icon.md)** — Icône de logiciel pour représenter divers produits. Sélecteur : lu-software-icon. Inputs : icon, disabled. Variantes : 4
-- **[pr-SortableList](./references/sortable-list.md)** — Composant Angular pour des listes réordonnables avec les sélecteurs <lu-sortable-list> et <lu-sortable-list-item>. Input
-- **[pr-DotBadge](./references/statusbadge.md)** — Composant pr-DotBadge, sélecteur lu-status-badge, inputs : palette, size, label, withEllipsis. Variantes : Size=S, Size=
-- **[pr-Switch](./references/switchfield.md)** — Composant pr-Switch, directives Angular lu-form-field, lu-checkbox-input, lu-switch-input, inputs : size, inlineMessage,
-- **[pr-Tag](./references/tags.md)** — Composant pr-Tag, sélecteur `lu-tag`, inputs principaux : `size`, `outlined`, `icon`, `AI`, `withEllipsis`, `label`. Var
-- **[pr-TextFlow (v19.2)](./references/text-flow.md)** — Le composant Text flow (`lu-text-flow`) structure et stylise un contenu textuel en appliquant une hiérarchie visuelle (t
-- **[pr-Textarea](./references/textareafield.md)** — Composant pr-Textarea, directives lu-form-field et lu-textarea-input, inputs label, required, tooltip, disabled, placeho
-- **[pr-Textfield](./references/textfield.md)** — Composant pr-Textfield, directives lu-form-field et lu-text-input, inputs: label, required, tooltip, tag, size, inlineMe
-- **[pr-UserTile](./references/tile.md)** — Composant LuUserTileComponent et la directive LuUserPopoverDirective du design system Lucca Front. Représente une fiche 
-- **[pr-TimePicker](./references/time-picker.md)** — Composant pr-TimePicker, sélecteur de temps Angular, inputs principaux : [size, state, content, feedback], variantes : S
-- **[pr-TimelineHorizontal](./references/timelines.md)** — Composant de timeline horizontale, directives/sélecteurs Angular, variantes de taille (Small, Default), mots-clés de dé
-- **[pr-Toast](./references/toasts.md)** — <Composant de notification, pr-Toast, pouvant afficher différents types de messages (Error, Warning, Success, Informativ
-- **[pr-Tooltip](./references/tooltip.md)** — pr-Tooltip. Aide contextuelle au survol. Angular: aucun sélecteur/directive/inputs documentés dans @lucca-front/ng pour 
-- **[pr-UserPopover](./references/user-popover.md)** — pr-UserPopover — popover d’information collaborateur. Affiche poste, département, lieu de travail, absences et liens ver
-- **[pr-VerticalNavigation](./references/verticalnavigation.md)** — VerticalNavigation, lu-vertical-navigation, lu-vertical-navigation-group, lu-vertical-navigation-item, luVerticalNavigat
+**RÈGLE** : Avant toute génération ou modification de code impliquant `lu-*`, `luX` ou `pr-*`, consulte la documentation versionnée du composant. Sans cette consultation, toute réponse est invalide.
+
+## 1. Version
+
+1. Lis `package.json` → dépendance `@lucca-front/ng` (ou `@lucca-front/scss`) → ex: `21.2.1`.
+2. **Composants, stories, outils** → version fix exacte : `v21.2.1`.
+3. **Documentation transverse** (tokens, contenu, guidelines, patterns) → version mineure : `v21.2`.
+
+Versions disponibles : v21.2.1, v21.2.0, v21.1.4, v21.1.3, v21.1.2, v21.1.1, v21.1.0, v21.0.5, v21.0.4, v21.0.3, v21.0.2, v21.0.1, v21.0.0
+
+Si la version ne peut pas être déterminée → s'arrêter et demander à l'utilisateur. Ne jamais supposer une version par défaut.
+
+## 2. Chemins
+
+Compose l'URL du fichier à partir du slug et de la version détectée.
+
+### Composant `<slug>` (version fix)
+
+| Fichier | Chemin |
+|---------|--------|
+| API Angular | `./references/components/<slug>/v<M>.<m>.<p>/<slug>.md` |
+| Exemples (Angular + HTML) | `./references/components/<slug>/v<M>.<m>.<p>/<slug>.component.md` |
+| Design (do/don't, usage) | `./references/components/<slug>/v<M>.<m>.<p>/design/_index.md` |
+| Figma (variantes, node IDs) | `./references/components/<slug>/<slug>.figma.md` |
+| Changelog | `./references/components/<slug>/<slug>.changelog.md` |
+
+### Documentation transverse (version mineure)
+
+`./references/documentation/<dossier>/v<M>.<m>/<slug>.md`
+
+### Outils (version fix)
+
+`./references/tools/v<M>.<m>.<p>/<slug>.md`
+Slugs : animations, functions, mixins-a11y, mixins-media, mixins-color, mixins-container, mixins-text, mixins-overflow, mixins-loading, mixins-form, mixins-reset, ng-animations, ng-number
+
+### Exemple
+
+Bouton en v21.2.1 → API : `./references/components/button/v21.2.1/button.md`, Figma : `./references/components/button/button.figma.md`
+
+## 3. Quand consulter quoi
+
+| Cas d'usage | Consulter |
+|-------------|-----------|
+| Écrire du code Angular | API (.md) → Exemples (.component.md) → Changelog |
+| Intégrer depuis maquette Figma | Figma (.figma.md) → Tokens → Guidelines dev UI |
+| Créer une maquette Figma (Code → Figma) | Figma (.figma.md) → Design (design/_index.md) |
+| Review de code | API → Guidelines dev UI → Contenu (si textes) → Patterns (si UX) |
+| Conventions de rédaction | Contenu (dossier `content/`) |
+| Design patterns | Patterns (dossier `patterns/`) |
+| Tokens CSS | Tokens (dossier `tokens/`) |
+| Mixins / animations SCSS | Outils (dossier `tools/`) |
+| Composant déprécié | `./references/documentation/deprecated.md` |
+
+## 4. Workflow Code
+
+1. Détecte la version (§1).
+2. Lis l'API du composant (`<slug>.md`) — selectors, inputs, types exacts.
+3. Consulte les exemples (`<slug>.component.md`).
+4. Vérifie le changelog si comportement inattendu.
+
+⚠️ Ne te fie **jamais** à ta mémoire pour les noms de propriétés ou types. Seul le `.md` versionné fait foi.
+
+## 5. Workflow Code → Figma
+
+1. Lis le fichier Figma (`<slug>.figma.md`) — variantes, node IDs, liens Figma.
+2. Utilise les **noms Figma** (pas Angular) pour les propriétés. Ils peuvent différer.
+3. Pour les guidelines visuelles → `design/_index.md`.
+
+⚠️ Les `.figma.md` ne sont pas versionnés — ils reflètent l'état actuel de Figma.
+
+## 6. Composants
+
+- **Actions** : button, link
+- **Feedback** : callout, callout-disclosure, callout-popover, empty-state, errorpage, mobile-push, plg-push
+- **File** : fileentry, fileupload
+- **Formulaires** : calendar, checkbox, color-picker, data-presentation, date, dateinput, daterangeinput, duration-picker, fieldset, filterbar, filterpills, form-field, form-label, inlinemessage, input-framed, multi-select, multilanguagefield, phonenumberfield, radiofield, richtextinput, select, simple-select, switchfield, textareafield, textfield, time-picker, treeselect
+- **Listes** : activity-feed, card, chip, data-table, index-table, listing, sortable-list, timelines
+- **Loaders** : gauge, loading, progress-bar, skeleton
+- **Navigation** : breadcrumbs, horizontalnavigation, mobilenavigation, pagination, segmentedcontrol, sidepanel, skiplinks, tableofcontent, verticalnavigation
+- **Overlays** : dialog, dropdown, modal, popover, popover2, toasts, tooltip
+- **Progress stepper** : progress-stepper
+- **Structure** : app-layout, box, bubble-icon, bubble-illustration, container, divider, fancybox, footer, highlight-data, main-layout, mobileheader, pageheader, resource-card, scrollbox, software-icon
+- **Textes** : clear, code, comment, icons, newbadge, numericbadge, readmore, statusbadge, tags, text-flow
+- **Toolbox** : numbers
+- **Unknown** : fancy-dialog, grid, listbox, onboarding-empty-state, section-empty-state, title-and-text
+- **Users** : avatar, tile, userpopover
+
+## 7. Documentation transverse
+
+- **Tokens** (dossier `tokens/`) : Couleurs (`couleurs`), Typographie (`typographie`), Espacements (`espacements`), Élévations (`elevations`), Arrondis (`arrondis`), Design tokens (`design-tokens`), Noms de logiciels (`noms-de-logiciels`)
+- **Contenu & Rédaction** (dossier `content/`) : Notre voix, 100 % humaine (`voix-humaine`), Règles de ponctuation, de typographie (`ponctuation-typographie`), Grammaire, orthographe (`grammaire-orthographe`), Singulier ou pluriel ? (`singulier-pluriel`), Possessifs et pronoms (`possessifs-pronoms`), Infinitif ou impératif ? (`infinitif-imperatif`), Verbes d'action à utiliser (`verbes-action`), Nombres (`nombres`), Dates (`dates`), Accessibilité (`accessibilite-contenu`), 4 critères essentiels pour notre contenu (`criteres-essentiels`), Blocage sur le contenu ? (`blocage-contenu`), Face au jargon, que faire ? (`jargon`), Ressources pour définitions (`ressources-definitions`), Tester clarté et efficacité du contenu (`tester-clarte`), Messages d'erreur (`messages-erreur`)
+- **Guidelines** (dossier `guidelines/`) : Guidelines dev UI (`guidelines-dev-ui`)
+- **Design Patterns** (dossier `patterns/`) : Règles d'or (`regles-or`), Identification des pages (`identification-pages`), Card et box (`card-et-box`), Dialogs de confirmation (`dialogs-confirmation`), Actions de suppression (`actions-suppression`), Emails (`emails`), Feedback (`feedback`), Vues, filtres et navigation dans une page (`vues-filtres-navigation`), Structure en accordéon (`structure-accordeon`), Responsive design (`responsive-design`), Pattern IA (`pattern-ia`), Widgets (`widgets`), Parcours de création de ressource (`parcours-creation-ressource`), Conception d'un formulaire (`conception-formulaire`), Gestion des erreurs (`gestion-erreurs-formulaire`), Champs conditionnels (`champs-conditionnels`), Quitter un formulaire (`quitter-formulaire`), Aide contextuelle (`aide-contextuelle`), Champs effaçables (`champs-effacables`), Placeholders (`placeholders`), Modes d'affichage (`modes-affichage`), Traduction d'un formulaire (`traduction-formulaire`), Navigation mobile (`navigation-mobile`), Push Notification mobile (`push-notification-mobile`)
+
+## 8. Composants dépréciés
+
+Consulte `./references/documentation/deprecated.md` avant d'utiliser un composant inconnu.
+Ne génère **jamais** de code utilisant un composant déprécié — propose son remplacement.

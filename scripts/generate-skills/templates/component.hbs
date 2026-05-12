@@ -1,0 +1,79 @@
+# {{slug}}
+
+{{#if primaryImportPath}}
+## Import
+
+```typescript
+import { {{#each api.apis}}{{className}}{{#unless @last}}, {{/unless}}{{/each}} } from '{{primaryImportPath}}';
+```
+{{/if}}
+
+{{#if basicUsage}}
+## Basic Usage
+
+```html
+{{{basicUsage}}}
+```
+{{/if}}
+
+{{#if api}}
+## API Reference
+
+{{#each api.apis}}
+### {{className}} ({{kind}})
+
+**Selector{{#if (gt selectors.length 1)}}s{{/if}}:** `{{join selectors "`, `"}}`
+
+{{#if exportAs}}
+**exportAs:** `{{exportAs}}`
+{{/if}}
+
+{{#if inputs.length}}
+#### Inputs
+
+| Property | Binding name | Type | Default | Required | Transform | Description |
+|----------|-------------|------|---------|----------|-----------|-------------|
+{{#each inputs}}
+| `{{propName}}` | `{{bindingName}}` | `{{escapePipe type}}` | {{#if default}}`{{escapePipe default}}`{{else}}—{{/if}} | {{#if required}}✅{{else}}—{{/if}} | {{#if transform}}`{{transform}}`{{else}}—{{/if}} | {{#if description}}{{description}}{{else}}—{{/if}} |
+{{/each}}
+{{/if}}
+
+{{#if outputs.length}}
+#### Outputs
+
+| Property | Binding name | Type |
+|----------|-------------|------|
+{{#each outputs}}
+| `{{propName}}` | `{{bindingName}}` | `{{type}}` |
+{{/each}}
+{{/if}}
+
+{{#if models.length}}
+#### Models (two-way binding)
+
+| Property | Type | Required |
+|----------|------|----------|
+{{#each models}}
+| `{{propName}}` | `{{type}}` | {{#if required}}✅{{else}}—{{/if}} |
+{{/each}}
+{{/if}}
+
+{{/each}}
+{{/if}}
+
+{{#if expandedTypeDefs.length}}
+## Type definitions
+
+{{#each expandedTypeDefs}}
+- [`{{typeName}}`](../../../types/{{../version.tag}}/{{typeName}}.md) — {{count}} available values
+{{/each}}
+
+{{/if}}
+
+## Related files
+
+{{#if hasExamples}}- 📝 [Code & implementation](./{{slug}}.component.md){{/if}}
+{{#if hasDesign}}- 🎨 [Design guidelines](./design/_index.md){{/if}}
+{{#if hasFigma}}- 🎯 [Figma design tokens](../{{slug}}.figma.md){{/if}}
+{{#if storybook}}{{#if storybook.docsEntry}}- 📖 [Storybook documentation]({{storybook.docsEntry.url}}){{/if}}{{/if}}
+- 📋 [Changelog](../{{slug}}.changelog.md)

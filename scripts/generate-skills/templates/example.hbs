@@ -1,0 +1,26 @@
+# {{slug}} — {{name}} {{#if (eq framework "html-css")}}_(HTML/CSS)_{{else}}_(Angular)_{{/if}}
+
+{{#if zhNote}}
+{{{zhNote}}}
+
+{{/if}}
+{{#if scssImport}}
+```css
+{{{scssImport}}}
+```
+
+{{/if}}
+{{#if displayImports.length}}
+```js
+{{#each displayImports}}
+{{{this}}}
+{{/each}}
+```
+
+{{/if}}
+{{#each templates}}
+```html
+{{{this}}}
+```
+
+{{/each}}
