@@ -1,0 +1,1829 @@
+# Couleurs
+
+# Product
+
+## **Utilisation**
+
+Le nuancier “Product” correspond à la couleur principale du produit.
+
+Il en existe une par gamme de produit : Spend Management, Time and Activities, Talent Management, Compensation and Benefits, Cloud Control, Employee Administration).
+
+Ce nuancier définit donc le produit et permet de hiérarchiser l’information sur l’interface, notamment via les actions.
+
+### **Actions**
+
+La Product 700 est utilisée pour les actions principales (boutons, liens, etc.) ainsi que pour les éléments d’interactions comme les Checkboxes ou les Radios. Pour les interactions, on utilisera le Product 800 au survol et la 900 pour l’état “*active*”.
+
+Cette couleur est utilisée pour guider l’utilisateur sur l’interface, sur ce qu’il doit y faire.
+
+### **Arrière-plans**
+
+La Product 50 peut-être utilisée pour les arrière-plans, notamment sur une ligne sélectionnée dans un tableau. Comme le reste du nuancier Produit, elle sert à guider l’oeil de l’utilisateur sur où il se trouve et ce qu’il doit faire. La Product 100 est utilisée au survol de ces éléments.
+
+### Configuration CSS
+
+*Lucca Front* propose une configuration permettant d'appliquer la couleur du produit sur les différents composants ainsi qu'une sélection des palettes chargées, afin de réduire le poids du fichier CSS final.
+
+Par défaut, la couleur produit est le orange Lucca. Il est possible de remplacer cette palette par une couleur produit, fournie par Lucca Front :
+
+```css
+@use '@lucca-front/scss/src/commons/config' with (
+	$product: 'cleemy', /* pagga | timmi | poplee | cc | coreHR */
+);
+```
+
+Cette palette sera accessible via un lot de variables CSS (`--palettes-product-700`), une classe palette (`.palette-product`), ainsi qu'un lot d'utilitaires.
+
+#### **Palettes produits supplémentaires**
+
+Il est possible de charger une ou plusieurs palettes produits supplémentaires :
+
+```css
+@use '@lucca-front/scss/src/commons/config' with (
+	$palettesOtherProduct: ('pagga', 'timmi', 'poplee', 'cc', 'coreHR'), /* 'all' pour sélectionner toutes les palettes */
+);
+```
+
+Ces palettes seront accessibles via un lot de variables CSS (`--palettes-pagga-700`), une classe palette (`.palette-pagga`) applicable sur certains composants et via un jeu d'utilitaires.
+
+## **Palettes**
+
+### **Lucca**
+
+**50**
+
+| Property | Value |
+| :--- | :--- |
+| Hex | #FFF1EB |
+| RGB | rgb(255, 241, 235) |
+
+**100**
+
+| Property | Value |
+| :--- | :--- |
+| Hex | #FFE0D1 |
+| RGB | rgb(255, 224, 209) |
+
+**200**
+
+| Property | Value |
+| :--- | :--- |
+| Hex | #FFCCB3 |
+| RGB | rgb(255, 204, 179) |
+
+**300**
+
+| Property | Value |
+| :--- | :--- |
+| Hex | #FFBE9E |
+| RGB | rgb(255, 190, 158) |
+
+**400**
+
+| Property | Value |
+| :--- | :--- |
+| Hex | #FFAA80 |
+| RGB | rgb(255, 170, 128) |
+
+**500**
+
+| Property | Value |
+| :--- | :--- |
+| Hex | #FF9361 |
+| RGB | rgb(255, 147, 97) |
+
+**600**
+
+| Property | Value |
+| :--- | :--- |
+| Hex | #FF7B3D |
+| RGB | rgb(255, 123, 61) |
+
+**700**
+
+| Property | Value |
+| :--- | :--- |
+| Hex | #E06029 |
+| RGB | rgb(224, 96, 41) |
+
+**800**
+
+| Property | Value |
+| :--- | :--- |
+| Hex | #B43409 |
+| RGB | rgb(180, 52, 9) |
+
+**900**
+
+| Property | Value |
+| :--- | :--- |
+| Hex | #611405 |
+| RGB | rgb(97, 20, 5) |
+
+### **Spend Management**
+
+**50**
+
+| Property | Value |
+| :--- | :--- |
+| Hex | #ECF9F7 |
+| RGB | rgb(236, 249, 247) |
+
+**100**
+
+| Property | Value |
+| :--- | :--- |
+| Hex | #CEEEE9 |
+| RGB | rgb(206, 238, 233) |
+
+**200**
+
+| Property | Value |
+| :--- | :--- |
+| Hex | #A4E0DA |
+| RGB | rgb(164, 224, 218) |
+
+**300**
+
+| Property | Value |
+| :--- | :--- |
+| Hex | #7ACDC6 |
+| RGB | rgb(122, 205, 198) |
+
+**400**
+
+| Property | Value |
+| :--- | :--- |
+| Hex | #54BBB2 |
+| RGB | rgb(84, 187, 178) |
+
+**500**
+
+| Property | Value |
+| :--- | :--- |
+| Hex | #00ADA5 |
+| RGB | rgb(0, 173, 165) |
+
+**600**
+
+| Property | Value |
+| :--- | :--- |
+| Hex | #009491 |
+| RGB | rgb(0, 148, 145) |
+
+**700**
+
+| Property | Value |
+| :--- | :--- |
+| Hex | #007A78 |
+| RGB | rgb(0, 122, 120) |
+
+**800**
+
+| Property | Value |
+| :--- | :--- |
+| Hex | #00545C |
+| RGB | rgb(0, 84, 92) |
+
+**900**
+
+| Property | Value |
+| :--- | :--- |
+| Hex | #00333D |
+| RGB | rgb(0, 51, 61) |
+
+### **Cloud Control**
+
+**50**
+
+| Property | Value |
+| :--- | :--- |
+| Hex | #FEECF4 |
+| RGB | rgb(254, 236, 244) |
+
+**100**
+
+| Property | Value |
+| :--- | :--- |
+| Hex | #FCD9E9 |
+| RGB | rgb(252, 217, 233) |
+
+**200**
+
+| Property | Value |
+| :--- | :--- |
+| Hex | #F9B9D7 |
+| RGB | rgb(249, 185, 215) |
+
+**300**
+
+| Property | Value |
+| :--- | :--- |
+| Hex | #F49FC7 |
+| RGB | rgb(244, 159, 199) |
+
+**400**
+
+| Property | Value |
+| :--- | :--- |
+| Hex | #F084B7 |
+| RGB | rgb(240, 132, 183) |
+
+**500**
+
+| Property | Value |
+| :--- | :--- |
+| Hex | #E864A1 |
+| RGB | rgb(232, 100, 161) |
+
+**600**
+
+| Property | Value |
+| :--- | :--- |
+| Hex | #D63882 |
+| RGB | rgb(214, 56, 130) |
+
+**700**
+
+| Property | Value |
+| :--- | :--- |
+| Hex | #BC2069 |
+| RGB | rgb(188, 32, 105) |
+
+**800**
+
+| Property | Value |
+| :--- | :--- |
+| Hex | #930747 |
+| RGB | rgb(147, 7, 71) |
+
+**900**
+
+| Property | Value |
+| :--- | :--- |
+| Hex | #580B2F |
+| RGB | rgb(88, 11, 47) |
+
+### **Compensation and Benefits**
+
+**50**
+
+| Property | Value |
+| :--- | :--- |
+| Hex | #FBEFFA |
+| RGB | rgb(251, 239, 250) |
+
+**100**
+
+| Property | Value |
+| :--- | :--- |
+| Hex | #F5DBF4 |
+| RGB | rgb(245, 219, 244) |
+
+**200**
+
+| Property | Value |
+| :--- | :--- |
+| Hex | #EBC1E9 |
+| RGB | rgb(235, 193, 233) |
+
+**300**
+
+| Property | Value |
+| :--- | :--- |
+| Hex | #E1A8DF |
+| RGB | rgb(225, 168, 223) |
+
+**400**
+
+| Property | Value |
+| :--- | :--- |
+| Hex | #DA8BD6 |
+| RGB | rgb(218, 139, 214) |
+
+**500**
+
+| Property | Value |
+| :--- | :--- |
+| Hex | #D16BCC |
+| RGB | rgb(209, 107, 204) |
+
+**600**
+
+| Property | Value |
+| :--- | :--- |
+| Hex | #C94CC5 |
+| RGB | rgb(201, 76, 197) |
+
+**700**
+
+| Property | Value |
+| :--- | :--- |
+| Hex | #B413AC |
+| RGB | rgb(180, 19, 172) |
+
+**800**
+
+| Property | Value |
+| :--- | :--- |
+| Hex | #86147E |
+| RGB | rgb(134, 20, 126) |
+
+**900**
+
+| Property | Value |
+| :--- | :--- |
+| Hex | #61005C |
+| RGB | rgb(97, 0, 92) |
+
+### **Talent Management**
+
+**50**
+
+| Property | Value |
+| :--- | :--- |
+| Hex | #E6F6FE |
+| RGB | rgb(230, 246, 254) |
+
+**100**
+
+| Property | Value |
+| :--- | :--- |
+| Hex | #CBEAFB |
+| RGB | rgb(203, 234, 251) |
+
+**200**
+
+| Property | Value |
+| :--- | :--- |
+| Hex | #B1DEF6 |
+| RGB | rgb(177, 222, 246) |
+
+**300**
+
+| Property | Value |
+| :--- | :--- |
+| Hex | #98D2F1 |
+| RGB | rgb(152, 210, 241) |
+
+**400**
+
+| Property | Value |
+| :--- | :--- |
+| Hex | #7BC3EA |
+| RGB | rgb(123, 195, 234) |
+
+**500**
+
+| Property | Value |
+| :--- | :--- |
+| Hex | #62B7E4 |
+| RGB | rgb(98, 183, 228) |
+
+**600**
+
+| Property | Value |
+| :--- | :--- |
+| Hex | #3A9ED4 |
+| RGB | rgb(58, 158, 212) |
+
+**700**
+
+| Property | Value |
+| :--- | :--- |
+| Hex | #0B77B1 |
+| RGB | rgb(11, 119, 177) |
+
+**800**
+
+| Property | Value |
+| :--- | :--- |
+| Hex | #005685 |
+| RGB | rgb(0, 86, 133) |
+
+**900**
+
+| Property | Value |
+| :--- | :--- |
+| Hex | #003C5C |
+| RGB | rgb(0, 60, 92) |
+
+### **Time and Activities**
+
+**50**
+
+| Property | Value |
+| :--- | :--- |
+| Hex | #F0F1FE |
+| RGB | rgb(240, 241, 254) |
+
+**100**
+
+| Property | Value |
+| :--- | :--- |
+| Hex | #E0E1FF |
+| RGB | rgb(224, 225, 255) |
+
+**200**
+
+| Property | Value |
+| :--- | :--- |
+| Hex | #CAC9FD |
+| RGB | rgb(202, 201, 253) |
+
+**300**
+
+| Property | Value |
+| :--- | :--- |
+| Hex | #B9B2FA |
+| RGB | rgb(185, 178, 250) |
+
+**400**
+
+| Property | Value |
+| :--- | :--- |
+| Hex | #A69DF0 |
+| RGB | rgb(166, 157, 240) |
+
+**500**
+
+| Property | Value |
+| :--- | :--- |
+| Hex | #9989EC |
+| RGB | rgb(153, 137, 236) |
+
+**600**
+
+| Property | Value |
+| :--- | :--- |
+| Hex | #866CE4 |
+| RGB | rgb(134, 108, 228) |
+
+**700**
+
+| Property | Value |
+| :--- | :--- |
+| Hex | #6F52D1 |
+| RGB | rgb(111, 82, 209) |
+
+**800**
+
+| Property | Value |
+| :--- | :--- |
+| Hex | #5027A5 |
+| RGB | rgb(80, 39, 165) |
+
+**900**
+
+| Property | Value |
+| :--- | :--- |
+| Hex | #24075A |
+| RGB | rgb(36, 7, 90) |
+
+### **Employee Administration**
+
+**50**
+
+| Property | Value |
+| :--- | :--- |
+| Hex | #E6F2FE |
+| RGB | rgb(230, 242, 254) |
+
+**100**
+
+| Property | Value |
+| :--- | :--- |
+| Hex | #CBE3FB |
+| RGB | rgb(203, 227, 251) |
+
+**200**
+
+| Property | Value |
+| :--- | :--- |
+| Hex | #B0D3F7 |
+| RGB | rgb(176, 211, 247) |
+
+**300**
+
+| Property | Value |
+| :--- | :--- |
+| Hex | #96C4F3 |
+| RGB | rgb(150, 196, 243) |
+
+**400**
+
+| Property | Value |
+| :--- | :--- |
+| Hex | #78B2ED |
+| RGB | rgb(120, 178, 237) |
+
+**500**
+
+| Property | Value |
+| :--- | :--- |
+| Hex | #5EA3E8 |
+| RGB | rgb(94, 163, 232) |
+
+**600**
+
+| Property | Value |
+| :--- | :--- |
+| Hex | #3387DB |
+| RGB | rgb(51, 135, 219) |
+
+**700**
+
+| Property | Value |
+| :--- | :--- |
+| Hex | #0C63BB |
+| RGB | rgb(12, 99, 187) |
+
+**800**
+
+| Property | Value |
+| :--- | :--- |
+| Hex | #004285 |
+| RGB | rgb(0, 66, 133) |
+
+**900**
+
+| Property | Value |
+| :--- | :--- |
+| Hex | #002E5C |
+| RGB | rgb(0, 46, 92) |
+
+# Neutral
+
+## **Utilisation**
+
+Le nuancier “*Neutral*” est omniprésent dans les interfaces : arrière-plans, textes, bordures. Il ne sert pas particulièrement à mettre en avant des informations et reste très en retrait en comparaison du nuancier “*Product*”.
+
+### **Arrière-plans**
+
+Pour en savoir plus sur l'utilisation du nuancier Neutral pour les arrières-plan, vous pouvez regarder la guideline Élévations.
+
+### **Bordures**
+
+Neutral 200 est utilisée pour les bordures qui servent à construire les interfaces (Divider, Data table, etc.).
+
+Pour apporter plus de contraste, les champs de formulaires (Textfield, Select, etc.) utilisent une bordure en Neutral 300 (Neutral 400 au survol). Des tokens spécifiques aux champs de formulaire existent.
+
+### **Textes**
+
+Pour en savoir plus sur l'application du nuancier Neutral sur les textes, vous pouvez vous référer à la guideline dédiée à la typographie.
+
+## **Palette**
+
+**0**
+
+| Property | Value |
+| :--- | :--- |
+| Hex | #FFFFFF |
+| RGB | rgb(255, 255, 255) |
+
+**25**
+
+| Property | Value |
+| :--- | :--- |
+| Hex | #F3F6FC |
+| RGB | rgb(243, 246, 252) |
+
+**50**
+
+| Property | Value |
+| :--- | :--- |
+| Hex | #E7EDF9 |
+| RGB | rgb(231, 237, 249) |
+
+**100**
+
+| Property | Value |
+| :--- | :--- |
+| Hex | #DBE3F5 |
+| RGB | rgb(219, 227, 245) |
+
+**200**
+
+| Property | Value |
+| :--- | :--- |
+| Hex | #CED9EE |
+| RGB | rgb(206, 217, 238) |
+
+**300**
+
+| Property | Value |
+| :--- | :--- |
+| Hex | #BECBE4 |
+| RGB | rgb(190, 203, 228) |
+
+**400**
+
+| Property | Value |
+| :--- | :--- |
+| Hex | #ACBBD7 |
+| RGB | rgb(172, 187, 215) |
+
+**500**
+
+| Property | Value |
+| :--- | :--- |
+| Hex | #8396B9 |
+| RGB | rgb(131, 150, 185) |
+
+**600**
+
+| Property | Value |
+| :--- | :--- |
+| Hex | #586A8D |
+| RGB | rgb(88, 106, 141) |
+
+**700**
+
+| Property | Value |
+| :--- | :--- |
+| Hex | #445473 |
+| RGB | rgb(68, 84, 115) |
+
+**800**
+
+| Property | Value |
+| :--- | :--- |
+| Hex | #2A3551 |
+| RGB | rgb(42, 53, 81) |
+
+**900**
+
+| Property | Value |
+| :--- | :--- |
+| Hex | #0B1732 |
+| RGB | rgb(11, 23, 50) |
+
+# Semantics
+
+## **Utilisation**
+
+Les couleurs jouent un rôle essentiel dans la communication visuelle des interfaces utilisateur. Nous assignons des significations génériques à un ensemble de couleurs nommées “Semantics” pour garantir une expérience cohérente pour les utilisateurs.
+
+* Le nuancier **Success** utilise la couleur verte, couramment utilisée pour représenter les informations de succès dans les interfaces utilisateur. Elle est associée à des notions telles que la réussite, la validation et l'approbation et est utilisée en ce sens dans les interfaces Lucca.
+* Le nuancier **Warning** se base sur la couleur orange. Cette couleur est souvent utilisée pour représenter des informations de mise en garde ou d'avertissement dans les interfaces utilisateur. L'utilisation du orange pour mettre en évidence des éléments importants permet aux utilisateurs de se focaliser sur des informations ou des actions qui nécessitent une attention particulière.
+* Le nuancier **Critical** utilise la couleur rouge souvent utilisée pour représenter des informations d'erreur, d'avertissement ou d'échec dans les interfaces utilisateur. Elle est associée à des notions telles que le danger, l'erreur ou l'invalidité. L'utilisation du rouge permet de signaler des problèmes, des erreurs ou des actions incorrectes aux utilisateurs de manière visuellement saisissante. La couleur rouge attire l'attention et crée une sensation d'urgence, incitant les utilisateurs à prendre des mesures pour corriger les erreurs ou éviter les problèmes.
+
+### **Accessibilité**
+
+Il est essentiel d’associer ces couleurs sémantiques avec un texte explicatif ou une icône claire pour assurer une compréhension universelle. Cela garantit que les utilisateurs ayant des difficultés à distinguer les couleurs puissent également comprendre la signification de manière précise.
+
+## **Palettes**
+
+### **Success**
+
+**50**
+
+| Property | Value |
+| :--- | :--- |
+| Hex | #DBFAE0 |
+| RGB | rgb(219, 250, 224) |
+
+**100**
+
+| Property | Value |
+| :--- | :--- |
+| Hex | #BEF3C7 |
+| RGB | rgb(190, 243, 199) |
+
+**200**
+
+| Property | Value |
+| :--- | :--- |
+| Hex | #A2EBAF |
+| RGB | rgb(162, 235, 175) |
+
+**300**
+
+| Property | Value |
+| :--- | :--- |
+| Hex | #84E695 |
+| RGB | rgb(132, 230, 149) |
+
+**400**
+
+| Property | Value |
+| :--- | :--- |
+| Hex | #68D97B |
+| RGB | rgb(104, 217, 123) |
+
+**500**
+
+| Property | Value |
+| :--- | :--- |
+| Hex | #57C769 |
+| RGB | rgb(87, 199, 105) |
+
+**600**
+
+| Property | Value |
+| :--- | :--- |
+| Hex | #39B155 |
+| RGB | rgb(57, 177, 85) |
+
+**700**
+
+| Property | Value |
+| :--- | :--- |
+| Hex | #279B42 |
+| RGB | rgb(39, 155, 66) |
+
+**800**
+
+| Property | Value |
+| :--- | :--- |
+| Hex | #0A762E |
+| RGB | rgb(10, 118, 46) |
+
+**900**
+
+| Property | Value |
+| :--- | :--- |
+| Hex | #004D20 |
+| RGB | rgb(0, 77, 32) |
+
+### **Warning**
+
+**50**
+
+| Property | Value |
+| :--- | :--- |
+| Hex | #FFF2DB |
+| RGB | rgb(255, 242, 219) |
+
+**100**
+
+| Property | Value |
+| :--- | :--- |
+| Hex | #FFE9C2 |
+| RGB | rgb(255, 233, 194) |
+
+**200**
+
+| Property | Value |
+| :--- | :--- |
+| Hex | #FFDB9E |
+| RGB | rgb(255, 219, 158) |
+
+**300**
+
+| Property | Value |
+| :--- | :--- |
+| Hex | #FFD080 |
+| RGB | rgb(255, 208, 128) |
+
+**400**
+
+| Property | Value |
+| :--- | :--- |
+| Hex | #FFC35C |
+| RGB | rgb(255, 195, 92) |
+
+**500**
+
+| Property | Value |
+| :--- | :--- |
+| Hex | #FFB13D |
+| RGB | rgb(255, 177, 61) |
+
+**600**
+
+| Property | Value |
+| :--- | :--- |
+| Hex | #FF9D00 |
+| RGB | rgb(255, 157, 0) |
+
+**700**
+
+| Property | Value |
+| :--- | :--- |
+| Hex | #F08800 |
+| RGB | rgb(240, 136, 0) |
+
+**800**
+
+| Property | Value |
+| :--- | :--- |
+| Hex | #C25100 |
+| RGB | rgb(194, 81, 0) |
+
+**900**
+
+| Property | Value |
+| :--- | :--- |
+| Hex | #802A00 |
+| RGB | rgb(128, 42, 0) |
+
+### **Critical**
+
+**50**
+
+| Property | Value |
+| :--- | :--- |
+| Hex | #FFEBEC |
+| RGB | rgb(255, 235, 236) |
+
+**100**
+
+| Property | Value |
+| :--- | :--- |
+| Hex | #FFD2D4 |
+| RGB | rgb(255, 210, 212) |
+
+**200**
+
+| Property | Value |
+| :--- | :--- |
+| Hex | #FDBEBE |
+| RGB | rgb(253, 190, 190) |
+
+**300**
+
+| Property | Value |
+| :--- | :--- |
+| Hex | #FAA3A3 |
+| RGB | rgb(250, 163, 163) |
+
+**400**
+
+| Property | Value |
+| :--- | :--- |
+| Hex | #FA8989 |
+| RGB | rgb(250, 137, 137) |
+
+**500**
+
+| Property | Value |
+| :--- | :--- |
+| Hex | #F76E6E |
+| RGB | rgb(247, 110, 110) |
+
+**600**
+
+| Property | Value |
+| :--- | :--- |
+| Hex | #F15050 |
+| RGB | rgb(241, 80, 80) |
+
+**700**
+
+| Property | Value |
+| :--- | :--- |
+| Hex | #DA2F2F |
+| RGB | rgb(218, 47, 47) |
+
+**800**
+
+| Property | Value |
+| :--- | :--- |
+| Hex | #AA0E0E |
+| RGB | rgb(170, 14, 14) |
+
+**900**
+
+| Property | Value |
+| :--- | :--- |
+| Hex | #630303 |
+| RGB | rgb(99, 3, 3) |
+
+# Decoratives
+
+## **Utilisation**
+
+Les couleurs Decoratives jouent un rôle important au sein de notre palette visuelle, tant du point de vue esthétique que fonctionnel.
+
+Elles revêtent une importance capitale dans la catégorisation des données, que l’on retrouve de diverses façon sur les interfaces Lucca (graphiques, dashboard, tag, etc.). Ainsi, ces couleurs ajoutent une couche de signification supplémentaire à notre design, permettant aux utilisateurs de rapidement identifier et associer des informations, tout en contribuant à l'attrait esthétique global de nos produits.
+
+C’est couleurs ne peuvent pas vivre sans explication et doivent être systématiquement liées à une légende (texte, icône ou les deux).
+
+### Configuration CSS
+
+Toutes les palettes décoratives sont chargées par défaut. Afin d'alléger le poids du CSS en provenance de Lucca Front, il est possible de les retirer ou de n'appeler que celles nécessaires :
+
+```css
+@use '@lucca-front/scss/src/commons/config' with (
+	$palettesDecorative: ('mint', 'watermelon'),
+);
+```
+
+Ces palettes seront accessibles via un lot de variables CSS (`--palettes-mint-700`), une classe palette (`.palette-mint`) applicable sur certains composants et un via jeu d'utilitaires.
+
+## **Palettes**
+
+### **Kiwi**
+
+**50**
+
+| Property | Value |
+| :--- | :--- |
+| Hex | #ECF7DE |
+| RGB | rgb(236, 247, 222) |
+
+**100**
+
+| Property | Value |
+| :--- | :--- |
+| Hex | #D7EEB9 |
+| RGB | rgb(215, 238, 185) |
+
+**200**
+
+| Property | Value |
+| :--- | :--- |
+| Hex | #C7E79C |
+| RGB | rgb(199, 231, 156) |
+
+**300**
+
+| Property | Value |
+| :--- | :--- |
+| Hex | #AED57C |
+| RGB | rgb(174, 213, 124) |
+
+**400**
+
+| Property | Value |
+| :--- | :--- |
+| Hex | #96C856 |
+| RGB | rgb(150, 200, 86) |
+
+**500**
+
+| Property | Value |
+| :--- | :--- |
+| Hex | #7CBB2A |
+| RGB | rgb(124, 187, 42) |
+
+**600**
+
+| Property | Value |
+| :--- | :--- |
+| Hex | #68A716 |
+| RGB | rgb(104, 167, 22) |
+
+**700**
+
+| Property | Value |
+| :--- | :--- |
+| Hex | #4F840B |
+| RGB | rgb(79, 132, 11) |
+
+**800**
+
+| Property | Value |
+| :--- | :--- |
+| Hex | #3E6808 |
+| RGB | rgb(62, 104, 8) |
+
+**900**
+
+| Property | Value |
+| :--- | :--- |
+| Hex | #2D4B06 |
+| RGB | rgb(45, 75, 6) |
+
+### **Lime**
+
+**50**
+
+| Property | Value |
+| :--- | :--- |
+| Hex | #E2F7DF |
+| RGB | rgb(226, 247, 223) |
+
+**100**
+
+| Property | Value |
+| :--- | :--- |
+| Hex | #C5EEBE |
+| RGB | rgb(197, 238, 190) |
+
+**200**
+
+| Property | Value |
+| :--- | :--- |
+| Hex | #A7E69E |
+| RGB | rgb(167, 230, 158) |
+
+**300**
+
+| Property | Value |
+| :--- | :--- |
+| Hex | #88D57C |
+| RGB | rgb(136, 213, 124) |
+
+**400**
+
+| Property | Value |
+| :--- | :--- |
+| Hex | #74CB67 |
+| RGB | rgb(116, 203, 103) |
+
+**500**
+
+| Property | Value |
+| :--- | :--- |
+| Hex | #54BA45 |
+| RGB | rgb(84, 186, 69) |
+
+**600**
+
+| Property | Value |
+| :--- | :--- |
+| Hex | #45A437 |
+| RGB | rgb(69, 164, 55) |
+
+**700**
+
+| Property | Value |
+| :--- | :--- |
+| Hex | #1C7C0E |
+| RGB | rgb(28, 124, 14) |
+
+**800**
+
+| Property | Value |
+| :--- | :--- |
+| Hex | #16600B |
+| RGB | rgb(22, 96, 11) |
+
+**900**
+
+| Property | Value |
+| :--- | :--- |
+| Hex | #104508 |
+| RGB | rgb(16, 69, 8) |
+
+### **Cucumber**
+
+**50**
+
+| Property | Value |
+| :--- | :--- |
+| Hex | #DDF9EB |
+| RGB | rgb(221, 249, 235) |
+
+**100**
+
+| Property | Value |
+| :--- | :--- |
+| Hex | #C0F2D9 |
+| RGB | rgb(192, 242, 217) |
+
+**200**
+
+| Property | Value |
+| :--- | :--- |
+| Hex | #98ECC2 |
+| RGB | rgb(152, 236, 194) |
+
+**300**
+
+| Property | Value |
+| :--- | :--- |
+| Hex | #71DAA6 |
+| RGB | rgb(113, 218, 166) |
+
+**400**
+
+| Property | Value |
+| :--- | :--- |
+| Hex | #54C98F |
+| RGB | rgb(84, 201, 143) |
+
+**500**
+
+| Property | Value |
+| :--- | :--- |
+| Hex | #2DB973 |
+| RGB | rgb(45, 185, 115) |
+
+**600**
+
+| Property | Value |
+| :--- | :--- |
+| Hex | #12A55C |
+| RGB | rgb(18, 165, 92) |
+
+**700**
+
+| Property | Value |
+| :--- | :--- |
+| Hex | #008A45 |
+| RGB | rgb(0, 138, 69) |
+
+**800**
+
+| Property | Value |
+| :--- | :--- |
+| Hex | #006B36 |
+| RGB | rgb(0, 107, 54) |
+
+**900**
+
+| Property | Value |
+| :--- | :--- |
+| Hex | #005229 |
+| RGB | rgb(0, 82, 41) |
+
+### **Mint**
+
+**50**
+
+| Property | Value |
+| :--- | :--- |
+| Hex | #D9F7F1 |
+| RGB | rgb(217, 247, 241) |
+
+**100**
+
+| Property | Value |
+| :--- | :--- |
+| Hex | #BBF2E7 |
+| RGB | rgb(187, 242, 231) |
+
+**200**
+
+| Property | Value |
+| :--- | :--- |
+| Hex | #99EBDA |
+| RGB | rgb(153, 235, 218) |
+
+**300**
+
+| Property | Value |
+| :--- | :--- |
+| Hex | #68D9C3 |
+| RGB | rgb(104, 217, 195) |
+
+**400**
+
+| Property | Value |
+| :--- | :--- |
+| Hex | #31C4A6 |
+| RGB | rgb(49, 196, 166) |
+
+**500**
+
+| Property | Value |
+| :--- | :--- |
+| Hex | #0FB392 |
+| RGB | rgb(15, 179, 146) |
+
+**600**
+
+| Property | Value |
+| :--- | :--- |
+| Hex | #089B7E |
+| RGB | rgb(8, 155, 126) |
+
+**700**
+
+| Property | Value |
+| :--- | :--- |
+| Hex | #008A6E |
+| RGB | rgb(0, 138, 110) |
+
+**800**
+
+| Property | Value |
+| :--- | :--- |
+| Hex | #006B56 |
+| RGB | rgb(0, 107, 86) |
+
+**900**
+
+| Property | Value |
+| :--- | :--- |
+| Hex | #004D3D |
+| RGB | rgb(0, 77, 61) |
+
+### **Glacier**
+
+**50**
+
+| Property | Value |
+| :--- | :--- |
+| Hex | #E0F6F6 |
+| RGB | rgb(224, 246, 246) |
+
+**100**
+
+| Property | Value |
+| :--- | :--- |
+| Hex | #C4EDED |
+| RGB | rgb(196, 237, 237) |
+
+**200**
+
+| Property | Value |
+| :--- | :--- |
+| Hex | #A1E3E3 |
+| RGB | rgb(161, 227, 227) |
+
+**300**
+
+| Property | Value |
+| :--- | :--- |
+| Hex | #73D3D3 |
+| RGB | rgb(115, 211, 211) |
+
+**400**
+
+| Property | Value |
+| :--- | :--- |
+| Hex | #4DC7C7 |
+| RGB | rgb(77, 199, 199) |
+
+**500**
+
+| Property | Value |
+| :--- | :--- |
+| Hex | #20B6B6 |
+| RGB | rgb(32, 182, 182) |
+
+**600**
+
+| Property | Value |
+| :--- | :--- |
+| Hex | #08A0A0 |
+| RGB | rgb(8, 160, 160) |
+
+**700**
+
+| Property | Value |
+| :--- | :--- |
+| Hex | #008A8A |
+| RGB | rgb(0, 138, 138) |
+
+**800**
+
+| Property | Value |
+| :--- | :--- |
+| Hex | #006B6B |
+| RGB | rgb(0, 107, 107) |
+
+**900**
+
+| Property | Value |
+| :--- | :--- |
+| Hex | #005252 |
+| RGB | rgb(0, 82, 82) |
+
+### **Lagoon**
+
+**50**
+
+| Property | Value |
+| :--- | :--- |
+| Hex | #DFF3FB |
+| RGB | rgb(223, 243, 251) |
+
+**100**
+
+| Property | Value |
+| :--- | :--- |
+| Hex | #BFE7F8 |
+| RGB | rgb(191, 231, 248) |
+
+**200**
+
+| Property | Value |
+| :--- | :--- |
+| Hex | #9FDAF4 |
+| RGB | rgb(159, 218, 244) |
+
+**300**
+
+| Property | Value |
+| :--- | :--- |
+| Hex | #75C7EA |
+| RGB | rgb(117, 199, 234) |
+
+**400**
+
+| Property | Value |
+| :--- | :--- |
+| Hex | #49B5E4 |
+| RGB | rgb(73, 181, 228) |
+
+**500**
+
+| Property | Value |
+| :--- | :--- |
+| Hex | #28A3D7 |
+| RGB | rgb(40, 163, 215) |
+
+**600**
+
+| Property | Value |
+| :--- | :--- |
+| Hex | #148EC2 |
+| RGB | rgb(20, 142, 194) |
+
+**700**
+
+| Property | Value |
+| :--- | :--- |
+| Hex | #086C96 |
+| RGB | rgb(8, 108, 150) |
+
+**800**
+
+| Property | Value |
+| :--- | :--- |
+| Hex | #065374 |
+| RGB | rgb(6, 83, 116) |
+
+**900**
+
+| Property | Value |
+| :--- | :--- |
+| Hex | #05425C |
+| RGB | rgb(5, 66, 92) |
+
+### **Blueberry**
+
+**50**
+
+| Property | Value |
+| :--- | :--- |
+| Hex | #DFE8FB |
+| RGB | rgb(223, 232, 251) |
+
+**100**
+
+| Property | Value |
+| :--- | :--- |
+| Hex | #C8D8F9 |
+| RGB | rgb(200, 216, 249) |
+
+**200**
+
+| Property | Value |
+| :--- | :--- |
+| Hex | #B1C8F6 |
+| RGB | rgb(177, 200, 246) |
+
+**300**
+
+| Property | Value |
+| :--- | :--- |
+| Hex | #98B4EB |
+| RGB | rgb(152, 180, 235) |
+
+**400**
+
+| Property | Value |
+| :--- | :--- |
+| Hex | #769BE5 |
+| RGB | rgb(118, 155, 229) |
+
+**500**
+
+| Property | Value |
+| :--- | :--- |
+| Hex | #628CDF |
+| RGB | rgb(98, 140, 223) |
+
+**600**
+
+| Property | Value |
+| :--- | :--- |
+| Hex | #4777D7 |
+| RGB | rgb(71, 119, 215) |
+
+**700**
+
+| Property | Value |
+| :--- | :--- |
+| Hex | #295CC2 |
+| RGB | rgb(41, 92, 194) |
+
+**800**
+
+| Property | Value |
+| :--- | :--- |
+| Hex | #1B4498 |
+| RGB | rgb(27, 68, 152) |
+
+**900**
+
+| Property | Value |
+| :--- | :--- |
+| Hex | #153575 |
+| RGB | rgb(21, 53, 117) |
+
+### **Lavender**
+
+**50**
+
+| Property | Value |
+| :--- | :--- |
+| Hex | #EADFFB |
+| RGB | rgb(234, 223, 251) |
+
+**100**
+
+| Property | Value |
+| :--- | :--- |
+| Hex | #DFCDF9 |
+| RGB | rgb(223, 205, 249) |
+
+**200**
+
+| Property | Value |
+| :--- | :--- |
+| Hex | #D3BBF7 |
+| RGB | rgb(211, 187, 247) |
+
+**300**
+
+| Property | Value |
+| :--- | :--- |
+| Hex | #C3A8EB |
+| RGB | rgb(195, 168, 235) |
+
+**400**
+
+| Property | Value |
+| :--- | :--- |
+| Hex | #B493E6 |
+| RGB | rgb(180, 147, 230) |
+
+**500**
+
+| Property | Value |
+| :--- | :--- |
+| Hex | #A17CDA |
+| RGB | rgb(161, 124, 218) |
+
+**600**
+
+| Property | Value |
+| :--- | :--- |
+| Hex | #9165D2 |
+| RGB | rgb(145, 101, 210) |
+
+**700**
+
+| Property | Value |
+| :--- | :--- |
+| Hex | #7647BD |
+| RGB | rgb(118, 71, 189) |
+
+**800**
+
+| Property | Value |
+| :--- | :--- |
+| Hex | #5F369B |
+| RGB | rgb(95, 54, 155) |
+
+**900**
+
+| Property | Value |
+| :--- | :--- |
+| Hex | #4A2A79 |
+| RGB | rgb(74, 42, 121) |
+
+### **Grape**
+
+**50**
+
+| Property | Value |
+| :--- | :--- |
+| Hex | #F5E3FC |
+| RGB | rgb(245, 227, 252) |
+
+**100**
+
+| Property | Value |
+| :--- | :--- |
+| Hex | #EED0FB |
+| RGB | rgb(238, 208, 251) |
+
+**200**
+
+| Property | Value |
+| :--- | :--- |
+| Hex | #E9C2F9 |
+| RGB | rgb(233, 194, 249) |
+
+**300**
+
+| Property | Value |
+| :--- | :--- |
+| Hex | #D4A6E8 |
+| RGB | rgb(212, 166, 232) |
+
+**400**
+
+| Property | Value |
+| :--- | :--- |
+| Hex | #BA84D2 |
+| RGB | rgb(186, 132, 210) |
+
+**500**
+
+| Property | Value |
+| :--- | :--- |
+| Hex | #AD71C6 |
+| RGB | rgb(173, 113, 198) |
+
+**600**
+
+| Property | Value |
+| :--- | :--- |
+| Hex | #9A57B7 |
+| RGB | rgb(154, 87, 183) |
+
+**700**
+
+| Property | Value |
+| :--- | :--- |
+| Hex | #8133A3 |
+| RGB | rgb(129, 51, 163) |
+
+**800**
+
+| Property | Value |
+| :--- | :--- |
+| Hex | #620F85 |
+| RGB | rgb(98, 15, 133) |
+
+**900**
+
+| Property | Value |
+| :--- | :--- |
+| Hex | #470B60 |
+| RGB | rgb(71, 11, 96) |
+
+### **Watermelon**
+
+**50**
+
+| Property | Value |
+| :--- | :--- |
+| Hex | #F7DEE4 |
+| RGB | rgb(247, 222, 228) |
+
+**100**
+
+| Property | Value |
+| :--- | :--- |
+| Hex | #F1C1CD |
+| RGB | rgb(241, 193, 205) |
+
+**200**
+
+| Property | Value |
+| :--- | :--- |
+| Hex | #EAA4B5 |
+| RGB | rgb(234, 164, 181) |
+
+**300**
+
+| Property | Value |
+| :--- | :--- |
+| Hex | #E48BA1 |
+| RGB | rgb(228, 139, 161) |
+
+**400**
+
+| Property | Value |
+| :--- | :--- |
+| Hex | #DB6683 |
+| RGB | rgb(219, 102, 131) |
+
+**500**
+
+| Property | Value |
+| :--- | :--- |
+| Hex | #D4496C |
+| RGB | rgb(212, 73, 108) |
+
+**600**
+
+| Property | Value |
+| :--- | :--- |
+| Hex | #BE2D51 |
+| RGB | rgb(190, 45, 81) |
+
+**700**
+
+| Property | Value |
+| :--- | :--- |
+| Hex | #A7163A |
+| RGB | rgb(167, 22, 58) |
+
+**800**
+
+| Property | Value |
+| :--- | :--- |
+| Hex | #8D0729 |
+| RGB | rgb(141, 7, 41) |
+
+**900**
+
+| Property | Value |
+| :--- | :--- |
+| Hex | #6F0620 |
+| RGB | rgb(111, 6, 32) |
+
+### **Pumpkin**
+
+**50**
+
+| Property | Value |
+| :--- | :--- |
+| Hex | #FDECD8 |
+| RGB | rgb(253, 236, 216) |
+
+**100**
+
+| Property | Value |
+| :--- | :--- |
+| Hex | #FBDDBC |
+| RGB | rgb(251, 221, 188) |
+
+**200**
+
+| Property | Value |
+| :--- | :--- |
+| Hex | #F9CF9F |
+| RGB | rgb(249, 207, 159) |
+
+**300**
+
+| Property | Value |
+| :--- | :--- |
+| Hex | #F4B771 |
+| RGB | rgb(244, 183, 113) |
+
+**400**
+
+| Property | Value |
+| :--- | :--- |
+| Hex | #EF9C3E |
+| RGB | rgb(239, 156, 62) |
+
+**500**
+
+| Property | Value |
+| :--- | :--- |
+| Hex | #EB8E24 |
+| RGB | rgb(235, 142, 36) |
+
+**600**
+
+| Property | Value |
+| :--- | :--- |
+| Hex | #DB7500 |
+| RGB | rgb(219, 117, 0) |
+
+**700**
+
+| Property | Value |
+| :--- | :--- |
+| Hex | #C26700 |
+| RGB | rgb(194, 103, 0) |
+
+**800**
+
+| Property | Value |
+| :--- | :--- |
+| Hex | #8F4C00 |
+| RGB | rgb(143, 76, 0) |
+
+**900**
+
+| Property | Value |
+| :--- | :--- |
+| Hex | #5C3100 |
+| RGB | rgb(92, 49, 0) |
+
+### **Pineapple**
+
+**50**
+
+| Property | Value |
+| :--- | :--- |
+| Hex | #FDF8E3 |
+| RGB | rgb(253, 248, 227) |
+
+**100**
+
+| Property | Value |
+| :--- | :--- |
+| Hex | #FAF2C6 |
+| RGB | rgb(250, 242, 198) |
+
+**200**
+
+| Property | Value |
+| :--- | :--- |
+| Hex | #F8EAA5 |
+| RGB | rgb(248, 234, 165) |
+
+**300**
+
+| Property | Value |
+| :--- | :--- |
+| Hex | #F9E16C |
+| RGB | rgb(249, 225, 108) |
+
+**400**
+
+| Property | Value |
+| :--- | :--- |
+| Hex | #F8DC4F |
+| RGB | rgb(248, 220, 79) |
+
+**500**
+
+| Property | Value |
+| :--- | :--- |
+| Hex | #E7C623 |
+| RGB | rgb(231, 198, 35) |
+
+**600**
+
+| Property | Value |
+| :--- | :--- |
+| Hex | #D6B300 |
+| RGB | rgb(214, 179, 0) |
+
+**700**
+
+| Property | Value |
+| :--- | :--- |
+| Hex | #C29E00 |
+| RGB | rgb(194, 158, 0) |
+
+**800**
+
+| Property | Value |
+| :--- | :--- |
+| Hex | #9E8100 |
+| RGB | rgb(158, 129, 0) |
+
+**900**
+
+| Property | Value |
+| :--- | :--- |
+| Hex | #7A6400 |
+| RGB | rgb(122, 100, 0) |
+
+# Accessibilité
+
+## **Accessibilité**
+
+Dans le cadre des recommandations sur l’accessibilité, nous avons travaillé à la création d’une grille de contraste. Cette dernière permet d’établir une liste de contrastes entre deux couleurs suffisamment bons pour être utilisés dans nos interfaces.
+
+Cette grille à pour but d’aider les designers lors de la conception, notamment des composants et est valable pour l’ensemble des couleurs “Product” ce qui garanti une homogénéité.
+
+## Grilles
+
+### **Neutral vs Product**
+
+### **Product vs Product**
+
+### Neutral vs Neutral
+
+# Tokens
+
+## Text
+
+| Token | Valeur |
+| --- | --- |
+| `--pr-t-color-text` | Neutral 800 |
+| `--pr-t-color-text-heading` | Neutral 900 |
+| `--pr-t-color-text-subtle` | Neutral 600 |
+| `--pr-t-color-text-highlight` | Neutral 900 |
+| `--pr-t-color-text-reverse` | Neutral 0 |
+| `--pr-t-color-text-success` | Success 700 |
+| `--pr-t-color-text-warning` | Warning 700 |
+| `--pr-t-color-text-critical` | Critical 700 |
+
+## Input
+
+| Token | Valeur |
+| --- | --- |
+| `--pr-t-color-input-background` | Neutral 0 |
+| `--pr-t-color-input-background-critical` | Critical 50 |
+| `--pr-t-color-input-background-disabled` | Neutral 100 |
+| `--pr-t-color-input-border` | Neutral 300 |
+| `--pr-t-color-input-border-hover` | Neutral 400 |
+| `--pr-t-color-input-border-critical` | Critical 400 |
+| `--pr-t-color-input-border-critical-hover` | Critical 600 |
+| `--pr-t-color-input-text` | Neutral 800 |
+| `--pr-t-color-input-text-placeholder` | Neutral 400 |
+| `--pr-t-color-input-text-placeholder-critical` | Critical 400 |
+| `--pr-t-color-input-text-suffix` | Neutral 600 |
+| `--pr-t-color-input-text-disabled` | Neutral 700 |
+| `--pr-t-color-input-icon` | Neutral 600 |
+| `--pr-t-color-input-icon-disabled` | Neutral 500 |

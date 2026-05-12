@@ -1,7 +1,7 @@
 ---
 name: lucca-front
 description: >
-  Design system Lucca Front / Prisme (Angular). À charger pour tout fichier d'un projet qui dépend de @lucca-front/ng ou @lucca-front/scss, 
+  Design system Lucca Front / Prisme (Angular). À charger pour tout fichier d'un projet qui dépend de @lucca-front/ng ou @lucca-front/scss,
   ou contenant des sélecteurs lu-*, pr-* ou des directives commençant par 'lu' (ex: luButton, luTooltip, luForm).
 ---
 
@@ -15,7 +15,7 @@ description: >
 2. **Composants, stories, outils** → version fix exacte : `v21.2.1`.
 3. **Documentation transverse** (tokens, contenu, guidelines, patterns) → version mineure : `v21.2`.
 
-Versions disponibles : v21.2.1, v21.2.0, v21.1.4, v21.1.3, v21.1.2, v21.1.1, v21.1.0, v21.0.5, v21.0.4, v21.0.3, v21.0.2, v21.0.1, v21.0.0
+Versions disponibles : v21.2.2, v21.2.1, v21.2.0, v21.1.4, v21.1.3, v21.1.2, v21.1.1, v21.1.0, v21.0.5, v21.0.4, v21.0.3, v21.0.2, v21.0.1, v21.0.0
 
 Si la version ne peut pas être déterminée → s'arrêter et demander à l'utilisateur. Ne jamais supposer une version par défaut.
 
@@ -90,7 +90,7 @@ Bouton en v21.2.1 → API : `./references/components/button/v21.2.1/button.md`, 
 - **Progress stepper** : progress-stepper
 - **Structure** : app-layout, box, bubble-icon, bubble-illustration, container, divider, fancybox, footer, highlight-data, main-layout, mobileheader, pageheader, resource-card, scrollbox, software-icon
 - **Textes** : clear, code, comment, icons, newbadge, numericbadge, readmore, statusbadge, tags, text-flow
-- **Toolbox** : numbers
+- **Toolbox** : animations, numbers
 - **Unknown** : fancy-dialog, grid, listbox, onboarding-empty-state, section-empty-state, title-and-text
 - **Users** : avatar, tile, userpopover
 
