@@ -50,7 +50,7 @@ export class LuMultiSelectDisplayerInputDirective<T> implements OnInit {
 	}
 
 	get disabled() {
-		return this.#disabled();
+		return this.#disabled() || null;
 	}
 
 	get placeholder() {
