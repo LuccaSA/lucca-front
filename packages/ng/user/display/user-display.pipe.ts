@@ -44,22 +44,12 @@ export function luUserDisplay(user?: LuUserDisplayInput, format: LuDisplayFormat
 	}
 
 	if (isNil(user?.lastName)) {
-		if (format.includes('f')) {
-			return formatUser[LuDisplayFullname.first](user);
-		} else if (format.includes('F')) {
-			return formatUser[LuDisplayInitials.first](user);
-		} else {
-			return formatUser[format === format.toLowerCase() ? LuDisplayFullname.first : LuDisplayInitials.first](user);
-		}
+		const useFull = format.includes('f') || format === format.toLowerCase();
+		return formatUser[useFull ? LuDisplayFullname.first : LuDisplayInitials.first](user);
 	}
 	if (isNil(user?.firstName)) {
-		if (format.includes('l')) {
-			return formatUser[LuDisplayFullname.last](user);
-		} else if (format.includes('L')) {
-			return formatUser[LuDisplayInitials.last](user);
-		} else {
-			return formatUser[format === format.toLowerCase() ? LuDisplayFullname.last : LuDisplayInitials.last](user);
-		}
+		const useFull = format.includes('l') || format === format.toLowerCase();
+		return formatUser[useFull ? LuDisplayFullname.last : LuDisplayInitials.last](user);
 	}
 	return formatUser[format](user);
 }
