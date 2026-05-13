@@ -8,5 +8,5 @@
 @mixin varsWrapper {
 	@include vars;
 
-	--components-softwareIconWrapper-overlap: var(--pr-t-spacings-150);
+	--components-softwareIconWrapper-overlap: var(--pr-t-spacings-75);
 }

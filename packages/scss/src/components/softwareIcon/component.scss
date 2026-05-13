@@ -7,25 +7,33 @@
 	inline-size: var(--components-softwareIcon-size);
 	block-size: var(--components-softwareIcon-size);
 
-	svg {
-		display: block;
-		inline-size: 100%;
-		block-size: 100%;
-	}
 
 	@at-root ($atRoot) {
-		.softwareIconWrapper {
-			@include reset.list;
 
-			display: inline-flex;
+		svg {
+			display: block;
+			inline-size: 100%;
+			block-size: 100%;
+			overflow: visible;
+		}
+
+		.softwareIconWrapper {
+			display: flex;
 			flex-wrap: nowrap;
 			align-items: center;
 			gap: 0;
 
-			.softwareIcon {
-				box-shadow: 0 0 0 var(--components-softwareIcon-border) var(--components-softwareIcon-background);
-				border-radius: var(--pr-t-border-radius-full);
-				background-color: var(--components-softwareIcon-background);
+			.softwareIcon, .softwareIconWrapper-action {
+				transform: scale(var(--components-softwareIconWrapper-scale));
+				transition: transform var(--commons-animations-durations-fast), z-index var(--commons-animations-durations-fast);
+				svg path:first-child {
+					stroke: var(--palettes-neutral-0);
+					stroke-width: 4px;
+				}
+				&:hover, &:focus {
+					z-index: 1;
+					--components-softwareIconWrapper-scale: 1.1;
+				}
 			}
 		}
 
@@ -33,46 +41,29 @@
 			display: inline-flex;
 			align-items: center;
 			justify-content: center;
-
-			&:not(:first-child) {
-				margin-inline-start: calc(var(--components-softwareIconWrapper-overlap) * -1);
+			inline-size: var(--components-softwareIcon-size);
+			block-size: var(--components-softwareIcon-size);
+			.softwareIcon {
+				margin-inline-end: calc(var(--components-softwareIconWrapper-overlap) * -1);
 			}
 		}
 
-		.softwareIconWrapper-item-action {
+
+		.softwareIconWrapper-action {
 			@include reset.button;
 
 			display: flex;
-			transition: transform var(--commons-animations-durations-fast);
-			transform: scale(var(--components-softwareIconWrapper-scale));
-
-			&:focus-visible {
-				@include a11y.focusVisible($borderRadius: var(--pr-t-border-radius-default));
-			}
-		}
-
-		.softwareIconWrapper-item-action-more {
-			// Variables numericBadge copiées pour correspondre au style
-			--components-numericBadge-background: var(--palettes-200, var(--palettes-neutral-200));
-			--components-numericBadge-color: var(--palettes-800, var(--palettes-neutral-700));
-			--components-numericBadge-borderRadius: var(--pr-t-border-radius-default);
-
-			box-shadow: 0 0 0 var(--components-softwareIcon-border) var(--components-softwareIcon-background);
-			border-radius: var(--components-numericBadge-borderRadius);
-			display: flex;
 			align-items: center;
 			justify-content: center;
-			background-color: var(--components-numericBadge-background);
-			color: var(--components-numericBadge-color);
-			padding-inline: var(--pr-t-spacings-200);
-			padding-block: var(--pr-t-spacings-150);
-			min-inline-size: 2.5rem;
+			inline-size: var(--components-softwareIcon-size);
 			block-size: var(--components-softwareIcon-size);
-			font-size: var(--pr-t-typography-fontSize-300);
+		}
+
+		.softwareIconWrapper-action-more {
+			position: absolute;
+			font-family: var(--pr-t-font-family-brand);
+			font-size: var(--pr-t-font-fontSize-200);
 			font-weight: var(--pr-t-font-fontWeight-semibold);
-			line-height: 1;
-			white-space: nowrap;
-			margin-inline-start: var(--pr-t-spacings-100);
 		}
 	}
 }
