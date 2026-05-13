@@ -1,6 +1,6 @@
 import { createPipeFactory, SpectatorPipe } from '@ngneat/spectator/jest';
 import { LU_DEFAULT_DISPLAY_POLICY, LuDisplayFullname, LuDisplayHybrid, LuDisplayInitials } from './display-format.model';
-import { luUserDisplay, LuUserDisplayPipe } from './user-display.pipe';
+import { luUserDisplay, LuUserDisplayInput, LuUserDisplayPipe } from './user-display.pipe';
 
 describe(LuUserDisplayPipe.name, () => {
 	const users = [
@@ -11,10 +11,10 @@ describe(LuUserDisplayPipe.name, () => {
 	const user = users[0];
 	const userFirst = { firstName: user.firstName, lastName: '' };
 	const userLast = { firstName: '', lastName: user.lastName };
-	const userWithNullLastName = { firstName: 'John', lastName: null } as unknown as { firstName: string; lastName: string };
-	const userWithNullFirstName = { firstName: null, lastName: 'Doe' } as unknown as { firstName: string; lastName: string };
-	const userWithNoLastName = { firstName: 'John' } as unknown as { firstName: string; lastName: string };
-	const userWithNoFirstName = { lastName: 'Doe' } as unknown as { firstName: string; lastName: string };
+	const userWithNullLastName = { firstName: 'John', lastName: null } as unknown as LuUserDisplayInput;
+	const userWithNullFirstName = { firstName: null, lastName: 'Doe' } as unknown as LuUserDisplayInput;
+	const userWithNoLastName = { firstName: 'John' } as unknown as LuUserDisplayInput;
+	const userWithNoFirstName = { lastName: 'Doe' } as unknown as LuUserDisplayInput;
 
 	describe('luUserDisplay()', () => {
 		describe('fallback when lastName is missing', () => {
