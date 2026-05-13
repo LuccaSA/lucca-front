@@ -1,4 +1,5 @@
 import { inject, Pipe, PipeTransform } from '@angular/core';
+import { isNil } from '@lucca-front/ng/core';
 import { LU_DEFAULT_DISPLAY_POLICY, LuDisplayFormat, LuDisplayFullname, LuDisplayHybrid, LuDisplayInitials } from './display-format.model';
 
 function getFirstCharacter([firstCharacter]: string): string {
@@ -34,7 +35,7 @@ const formatUser: Record<LuDisplayFormat, (user: LuUserDisplayInput) => string> 
  * F for first initial, l for last name, L for last initial.
  */
 export function luUserDisplay(user?: LuUserDisplayInput, format: LuDisplayFormat = LuDisplayFullname.lastfirst): string {
-	if (!user) {
+	if (isNil(user)) {
 		return '';
 	}
 	return formatUser[format](user);
