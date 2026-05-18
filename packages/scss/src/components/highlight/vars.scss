@@ -1,0 +1,3 @@
+@mixin vars {
+	--components-highlight-color: var(--palettes-300, var(--palettes-product-300));
+}

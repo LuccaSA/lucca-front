@@ -1,0 +1,19 @@
+@use '@lucca-front/scss/src/commons/utils/namespace';
+
+@mixin component($atRoot: namespace.$defaultAtRoot) {
+	background-image:
+		radial-gradient(0.5em circle at calc(0% + 0.25em) calc(100% - 0.25em), var(--components-highlight-color) 50%, transparent 50%),
+		radial-gradient(0.5em circle at calc(100% - 0.25em) calc(100% - 0.25em), var(--components-highlight-color) 50%, transparent 50%),
+		linear-gradient(var(--components-highlight-color));
+	background-size: 1em 1em, 1em 1em, calc(100% - 0.5em) 0.5em;
+	background-position: 0 100%, 100% 100%, 50% 100%;
+	padding-inline: 0.25em;
+	margin-inline: -0.25em;
+	background-repeat: no-repeat;
+	box-decoration-break: clone;
+	font-weight: inherit;
+
+	@at-root ($atRoot) {
+
+	}
+}
