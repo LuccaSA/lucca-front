@@ -1,6 +1,6 @@
 import { createPipeFactory, SpectatorPipe } from '@ngneat/spectator/jest';
 import { LU_DEFAULT_DISPLAY_POLICY, LuDisplayFullname, LuDisplayHybrid, LuDisplayInitials } from './display-format.model';
-import { luUserDisplay, LuUserDisplayPipe } from './user-display.pipe';
+import { luUserDisplay, LuUserDisplayInput, LuUserDisplayPipe } from './user-display.pipe';
 
 describe(LuUserDisplayPipe.name, () => {
 	const users = [
@@ -11,8 +11,60 @@ describe(LuUserDisplayPipe.name, () => {
 	const user = users[0];
 	const userFirst = { firstName: user.firstName, lastName: '' };
 	const userLast = { firstName: '', lastName: user.lastName };
+	const userWithNullLastName = { firstName: 'John', lastName: null } as unknown as LuUserDisplayInput;
+	const userWithNullFirstName = { firstName: null, lastName: 'Doe' } as unknown as LuUserDisplayInput;
+	const userWithNoLastName = { firstName: 'John' } as unknown as LuUserDisplayInput;
+	const userWithNoFirstName = { lastName: 'Doe' } as unknown as LuUserDisplayInput;
 
 	describe('luUserDisplay()', () => {
+		describe('fallback when lastName is missing', () => {
+			it('should fallback to first name (full) for fullname formats', () => {
+				expect(luUserDisplay(userWithNullLastName, LuDisplayFullname.lastfirst)).toBe('John');
+				expect(luUserDisplay(userWithNoLastName, LuDisplayFullname.firstlast)).toBe('John');
+				expect(luUserDisplay(userWithNullLastName, LuDisplayFullname.last)).toBe('John');
+			});
+
+			it('should fallback to first name (initial) for initials formats', () => {
+				expect(luUserDisplay(userWithNullLastName, LuDisplayInitials.lastfirst)).toBe('J');
+				expect(luUserDisplay(userWithNoLastName, LuDisplayInitials.firstlast)).toBe('J');
+				expect(luUserDisplay(userWithNullLastName, LuDisplayInitials.last)).toBe('J');
+			});
+
+			it('should fallback to first name (full) for hybrid formats containing f', () => {
+				expect(luUserDisplay(userWithNullLastName, LuDisplayHybrid.lastIfirstFull)).toBe('John');
+				expect(luUserDisplay(userWithNoLastName, LuDisplayHybrid.firstFulllastI)).toBe('John');
+			});
+
+			it('should fallback to first name (initial) for hybrid formats without f', () => {
+				expect(luUserDisplay(userWithNullLastName, LuDisplayHybrid.firstIlastFull)).toBe('J');
+				expect(luUserDisplay(userWithNoLastName, LuDisplayHybrid.lastFullfirstI)).toBe('J');
+			});
+		});
+
+		describe('fallback when firstName is missing', () => {
+			it('should fallback to last name (full) for fullname formats', () => {
+				expect(luUserDisplay(userWithNullFirstName, LuDisplayFullname.lastfirst)).toBe('Doe');
+				expect(luUserDisplay(userWithNoFirstName, LuDisplayFullname.firstlast)).toBe('Doe');
+				expect(luUserDisplay(userWithNullFirstName, LuDisplayFullname.first)).toBe('Doe');
+			});
+
+			it('should fallback to last name (initial) for initials formats', () => {
+				expect(luUserDisplay(userWithNullFirstName, LuDisplayInitials.lastfirst)).toBe('D');
+				expect(luUserDisplay(userWithNoFirstName, LuDisplayInitials.firstlast)).toBe('D');
+				expect(luUserDisplay(userWithNullFirstName, LuDisplayInitials.first)).toBe('D');
+			});
+
+			it('should fallback to last name (full) for hybrid formats containing l', () => {
+				expect(luUserDisplay(userWithNullFirstName, LuDisplayHybrid.firstIlastFull)).toBe('Doe');
+				expect(luUserDisplay(userWithNoFirstName, LuDisplayHybrid.lastFullfirstI)).toBe('Doe');
+			});
+
+			it('should fallback to last name (initial) for hybrid formats without l', () => {
+				expect(luUserDisplay(userWithNullFirstName, LuDisplayHybrid.lastIfirstFull)).toBe('D');
+				expect(luUserDisplay(userWithNoFirstName, LuDisplayHybrid.firstFulllastI)).toBe('D');
+			});
+		});
+
 		it("should return the right value with 'lf' format", () => {
 			expect(luUserDisplay(user, LuDisplayFullname.lastfirst)).toBe('Doe John');
 			expect(luUserDisplay(userFirst, LuDisplayFullname.lastfirst)).toBe('John');
