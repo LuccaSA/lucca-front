@@ -222,7 +222,7 @@ export class DateInputComponent extends AbstractDateComponent implements OnInit,
 		effect(() => {
 			if (!this.#safeCompareDate(untracked(this.dateFromWriteValue), this.selectedDate())) {
 				this.#onChange?.(this.selectedDate());
-				this.dateFromWriteValue.set(null);
+				this.dateFromWriteValue.set(this.selectedDate());
 			}
 		});
 
