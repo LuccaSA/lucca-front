@@ -1,6 +1,6 @@
 import { A11yModule } from '@angular/cdk/a11y';
 import { NgTemplateOutlet } from '@angular/common';
-import { AfterViewInit, ChangeDetectionStrategy, Component, computed, effect, forwardRef, inject, signal } from '@angular/core';
+import { AfterViewInit, ChangeDetectionStrategy, Component, computed, forwardRef, inject, signal } from '@angular/core';
 import { toSignal } from '@angular/core/rxjs-interop';
 import { FormsModule } from '@angular/forms';
 import { PortalDirective } from '@lucca-front/ng/core';
@@ -62,8 +62,6 @@ export class LuSelectPanelComponent<T> implements AfterViewInit, CoreSelectPanel
 	public intl = this.selectInput.intl;
 
 	readonly dataSourceOptions = this.selectInput.dataSourceOptions;
-	a = effect(() => console.log('dataSourceOptions', this.dataSourceOptions()));
-
 	readonly grouping = this.selectInput.groupingSignal;
 	treeGenerator = this.selectInput.treeGenerator;
 	readonly loading = this.selectInput.loading;

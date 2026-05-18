@@ -42,6 +42,7 @@ import {
 	takeUntil,
 	takeWhile,
 	tap,
+	timer,
 } from 'rxjs';
 import { LuSimpleSelectDefaultOptionComponent } from '../option';
 import { LuSelectPanelRef } from '../panel';
@@ -200,7 +201,7 @@ export abstract class ALuSelectInputComponent<TOption, TValue> implements OnDest
 	treeGenerator?: TreeGenerator<TOption, TreeNode<TOption>>;
 
 	readonly clueChange$ = new Subject<string>();
-	clueChange = outputFromObservable(this.clueChange$);
+	readonly clueChange = output<string>();
 	readonly nextPage$ = new Subject<void>();
 	nextPage = outputFromObservable(this.nextPage$);
 	readonly addOption = output<string>();
@@ -231,6 +232,7 @@ export abstract class ALuSelectInputComponent<TOption, TValue> implements OnDest
 			this.openPanel(clue);
 		} else if (this.lastEmittedClue !== clue) {
 			this.clueChange$.next(clue);
+			this.clueChange.emit(clue);
 			this.lastEmittedClue = clue;
 		}
 	}
@@ -408,6 +410,11 @@ export abstract class ALuSelectInputComponent<TOption, TValue> implements OnDest
 			distinctUntilChanged(),
 		);
 
+		// If a debounce is specified:
+		// - empty clue ('' ) passes through immediately (initial state / clear)
+		// - non-empty clue is debounced (user is typing)
+		const debouncedClue$ = ds.clueDebounceMs ? clue$.pipe(switchMap((clue) => (clue ? timer(ds.clueDebounceMs!).pipe(map(() => clue)) : of(clue)))) : clue$;
+
 		return this.isPanelOpen$.pipe(
 			distinctUntilChanged(),
 			switchMap((isOpen) => {
@@ -415,7 +422,7 @@ export abstract class ALuSelectInputComponent<TOption, TValue> implements OnDest
 					return of([] as readonly TOption[]);
 				}
 
-				return clue$.pipe(
+				return debouncedClue$.pipe(
 					switchMap((clue) =>
 						page$.pipe(
 							concatMap((page) => {
@@ -480,10 +487,11 @@ export abstract class ALuSelectInputComponent<TOption, TValue> implements OnDest
 				return;
 			}
 
+			const isSearchable = this.searchable;
 			this.isPanelOpen$.next(true);
 			this.panelOpened.emit();
 
-			if (this.searchable) {
+			if (isSearchable) {
 				this.clueChanged(clue);
 			}
 

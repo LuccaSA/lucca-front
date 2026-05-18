@@ -2,7 +2,7 @@ import { ChangeDetectionStrategy, Component, Directive } from '@angular/core';
 import { ComponentFixture, TestBed, fakeAsync, tick } from '@angular/core/testing';
 import { By } from '@angular/platform-browser';
 import { LuSimpleSelectInputComponent } from '@lucca-front/ng/simple-select';
-import { Observable, map, of } from 'rxjs';
+import { NEVER, Observable, map, of } from 'rxjs';
 import { MAGIC_OPTION_SCROLL_DELAY } from '../option/option.component';
 import { ALuCoreSelectApiDirective, MAGIC_DEBOUNCE_DURATION } from './api.directive';
 
@@ -16,6 +16,8 @@ interface TestEntity {
 	selector: 'lu-simple-select[testApi]',
 })
 class TestDirective extends ALuCoreSelectApiDirective<TestEntity> {
+	public override totalCount$ = NEVER;
+
 	protected override readonly params$ = this.clue$.pipe(
 		map((clue) => ({
 			...(clue ? { clue } : {}),
@@ -166,8 +168,8 @@ describe('ALuCoreSelectApiDirective', () => {
 		expect(testApi.getOptions).toHaveBeenCalledTimes(3);
 
 		let options: readonly TestEntity[] = [];
-		fixture.detectChanges();
-		select.options$.subscribe((o) => (options = o));
+
+		options = select.dataSourceOptions();
 
 		expect(options).toEqual([
 			{ id: 1, name: 'test 1' },
@@ -212,8 +214,7 @@ describe('ALuCoreSelectApiDirective', () => {
 
 		// Assert
 		let options: readonly TestEntity[] = [];
-		fixture.detectChanges();
-		select.options$.subscribe((o) => (options = o));
+		options = select.dataSourceOptions();
 		expect(options).toEqual([
 			{ id: 1, name: 'test 1' },
 			{ id: 2, name: 'test 2' },

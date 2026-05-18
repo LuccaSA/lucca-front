@@ -9,6 +9,8 @@ export interface SelectDataSourceParams {
 
 export interface SelectDataSource<TOption, TGroup = never> {
 	paramsChange?: Observable<unknown>;
+	/** Optional debounce in ms for clue-based re-queries (useful for API data sources) */
+	clueDebounceMs?: number;
 	getOptions(params: SelectDataSourceParams): Observable<readonly TOption[]>;
 	getTotalCount?(params: SelectDataSourceParams): Observable<number>;
 	getGroupOptions?: [TGroup] extends [never] ? never : (group: TGroup) => Observable<TOption[]>;
