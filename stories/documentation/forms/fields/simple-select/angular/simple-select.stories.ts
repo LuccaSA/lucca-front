@@ -77,7 +77,6 @@ export default {
 		valueTpl: HiddenArgType,
 		clueChange: HiddenArgType,
 		nextPage: HiddenArgType,
-		previousPage: HiddenArgType,
 	},
 } as Meta;
 

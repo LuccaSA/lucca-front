@@ -1,6 +1,6 @@
 import { Directive, inject, OnDestroy, OnInit } from '@angular/core';
-import { ALuSelectInputComponent, coreSelectDefaultOptionComparer, coreSelectDefaultOptionKey, LuOptionComparer } from '@lucca-front/ng/core-select';
-import { catchError, combineLatest, concatMap, debounceTime, distinctUntilChanged, map, merge, Observable, of, pairwise, scan, startWith, Subject, switchMap, takeUntil, tap } from 'rxjs';
+import { ALuSelectInputComponent, coreSelectDefaultOptionComparer, coreSelectDefaultOptionKey, LuOptionComparer, SelectDataSource } from '@lucca-front/ng/core-select';
+import { catchError, combineLatest, concatMap, debounceTime, distinctUntilChanged, map, merge, Observable, of, pairwise, scan, startWith, Subject, switchMap, take, takeUntil, tap } from 'rxjs';
 
 export const LU_SELECT_MAGIC_PAGE_SIZE = 20;
 export const MAGIC_DEBOUNCE_DURATION = 250;
@@ -49,10 +49,23 @@ export abstract class ALuCoreSelectApiDirective<TOption, TParams = Record<string
 			this.select.optionKey.set(this.optionKey);
 		}
 
-		this.buildOptions()
-			.pipe(takeUntil(this.destroy$))
-			.subscribe((options) => this.select.options.set(options));
+		const dataSource: SelectDataSource<TOption> = {
+			paramsChange: this.params$,
+			getTotalCount: () => this.totalCount$,
+			getOptions: ({ page }) =>
+				this.params$.pipe(
+					take(1),
+					switchMap((params) => this.getOptions(params, page)),
+				),
+		};
+
+		// this.buildOptions()
+		// 	.pipe(takeUntil(this.destroy$))
+		// 	.subscribe((options) => (this.select.options = options));
+		this.select.dataSource.set(dataSource);
 	}
+
+	public abstract totalCount$: Observable<number>;
 
 	protected buildOptions(): Observable<TOption[]> {
 		// Prevent a double call to getOptions when the clue is changed while the panel is closed
@@ -102,11 +115,8 @@ export abstract class ALuCoreSelectApiDirective<TOption, TParams = Record<string
 	}
 
 	protected getOptionsPage(params: TParams, page: number): Observable<{ items: TOption[]; isLastPage: boolean }> {
-		this.select.loading.set(true);
-
 		return this.getOptions(params, page).pipe(
 			catchError(() => of([] as TOption[])),
-			tap(() => this.select.loading.set(false)),
 			map((items) => ({ items, isLastPage: items.length < this.pageSize })),
 		);
 	}
