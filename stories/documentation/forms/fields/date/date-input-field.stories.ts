@@ -6,7 +6,7 @@ import { applicationConfig, Meta, moduleMetadata, StoryObj } from '@storybook/an
 import { expect, screen, userEvent, within } from 'storybook/test';
 import { cleanupTemplate, createTestStory, generateInputs, setStoryOptions } from '../../../../helpers/stories';
 import { StoryModelDisplayComponent } from '../../../../helpers/story-model-display.component';
-import { expectNgModelDisplay, waitForAngular } from '../../../../helpers/test';
+import { expectNgModelDisplay, pickDay, waitForAngular } from '../../../../helpers/test';
 
 export default {
 	title: 'Documentation/Forms/Fields/DateInput/Angular',
@@ -152,12 +152,3 @@ export const BasicTEST = createTestStory(Basic, async ({ canvasElement, args, co
 	});
 	await waitForAngular();
 });
-
-async function pickDay(input: HTMLElement, targetDay: number) {
-	await userEvent.click(input);
-	await waitForAngular();
-	const table = screen.getByRole('grid');
-	const calendarComponent = table.parentElement?.parentElement;
-	const calendar = within(calendarComponent);
-	await userEvent.click(calendar.getByText(targetDay.toString()));
-}

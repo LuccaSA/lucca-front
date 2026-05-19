@@ -3,8 +3,10 @@ import { FormsModule } from '@angular/forms';
 import { CALENDAR_MODE, CalendarShortcut, DATE2_CLEAR_BEHAVIOR, DATE_FORMAT_CONST, DateRange, DateRangeInputComponent, PremadeShortcuts } from '@lucca-front/ng/date2';
 import { FormFieldComponent } from '@lucca-front/ng/form-field';
 import { applicationConfig, Meta, moduleMetadata, StoryObj } from '@storybook/angular';
-import { cleanupTemplate, generateInputs, setStoryOptions } from '../../../helpers/stories';
+import { expect, userEvent, within } from 'storybook/test';
+import { cleanupTemplate, createTestStory, generateInputs, setStoryOptions } from '../../../helpers/stories';
 import { StoryModelDisplayComponent } from '../../../helpers/story-model-display.component';
+import { expectNgModelDisplay, pickDay, waitForAngular } from '../../../helpers/test';
 
 export default {
 	title: 'Documentation/Forms/Date2/DateRangeInput',
@@ -164,3 +166,40 @@ export const WithShortcuts: StoryObj<DateRangeInputComponent & { selected: DateR
 		selected: { start: new Date(), end: null },
 	},
 };
+
+export const BasicTEST = createTestStory(Basic, async ({ canvasElement, step }) => {
+	const canvas = within(canvasElement);
+	await waitForAngular();
+	const startInput = canvas.getByLabelText('Start');
+	const endInput = canvas.getByLabelText('End');
+	const today = new Date();
+
+	await step('Select start and end date', async () => {
+		const targetStartDay = today.getDate() === 15 ? 16 : 15;
+		const expectedStart = new Date(today.getFullYear(), today.getMonth(), targetStartDay);
+		const targetEndDay = today.getDate() === 20 ? 21 : 20;
+		const expectedEnd = new Date(today.getFullYear(), today.getMonth(), targetEndDay);
+
+		await step('Start', async () => {
+			const targetDay = today.getDate() === 15 ? 16 : 15;
+			await pickDay(startInput, targetDay, true);
+			await waitForAngular();
+			await expectNgModelDisplay(canvasElement, `{ "start": "${expectedStart.toISOString()}", "end": null, "scope": "day" }`);
+		});
+
+		await step('End', async () => {
+			const targetDay = today.getDate() === 20 ? 21 : 20;
+			await pickDay(endInput, targetDay, true);
+			await waitForAngular();
+			await expectNgModelDisplay(canvasElement, `{ "start": "${expectedStart.toISOString()}", "end": "${expectedEnd.toISOString()}", "scope": "day" }`);
+		});
+	});
+
+	await step('Invalid date', async () => {
+		await userEvent.clear(startInput);
+		await userEvent.type(startInput, 'not a date');
+		await userEvent.keyboard('{Escape}');
+		await waitForAngular();
+		await expect(startInput).toHaveAttribute('aria-invalid', 'true');
+	});
+});
