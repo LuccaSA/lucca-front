@@ -1,9 +1,0 @@
-@mixin vars {
-	--components-highlight-backgroundColor: var(--palettes-300, var(--palettes-product-300));
-	--components-highlight-backgroundDiameter: 0.25em;
-	--components-highlight-backgroundBlockSize: 0.5em;
-
-	--components-highlight-backgroundRadius: calc(var(--components-highlight-backgroundDiameter) / 2);
-	--components-highlight-backgroundStart: var(--components-highlight-backgroundRadius);
-	--components-highlight-backgroundEnd: calc(100% - var(--components-highlight-backgroundRadius));
-}

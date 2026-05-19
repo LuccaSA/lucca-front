@@ -3,12 +3,12 @@ import { Meta, StoryObj } from '@storybook/angular';
 interface TextHighlightStory {}
 
 export default {
-	title: 'Documentation/Texts/Highlight/HTML&CSS/Basic',
+	title: 'Documentation/Texts/Highlight Text/HTML&CSS/Basic',
 	argTypes: {},
 } as Meta;
 
 function getTemplate(args: TextHighlightStory): string {
-	return `<h1>Lorem <strong class="highlight">ipsum</strong> dolor</h1>`;
+	return `<h1>Lorem <strong class="highlightText">ipsum</strong> dolor</h1>`;
 }
 
 const Template = (args: TextHighlightStory) => ({

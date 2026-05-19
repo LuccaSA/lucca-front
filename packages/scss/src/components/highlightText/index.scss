@@ -1,12 +1,8 @@
 @use 'exports' as *;
 
-.highlight {
+.highlightText {
 	@layer components {
 		@include vars;
 		@include component;
-	}
-
-	@layer mods {
-
 	}
 }

@@ -2,14 +2,14 @@ import { ChangeDetectionStrategy, Component, computed, input, ViewEncapsulation 
 import { DecorativePalette, Palette } from '@lucca/prisme/core';
 
 @Component({
-	selector: 'lu-highlight',
+	selector: 'lu-highlight-text',
 	template: '<ng-content />',
-	styleUrl: './highlight.component.scss',
+	styleUrl: './highlight-text.component.scss',
 	encapsulation: ViewEncapsulation.None,
 	changeDetection: ChangeDetectionStrategy.OnPush,
 	host: {
 		role: 'strong',
-		class: 'highlight',
+		class: 'highlightText',
 		'[class]': 'paletteClass()',
 	},
 })
