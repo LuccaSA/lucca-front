@@ -7,9 +7,7 @@
 	inline-size: var(--components-softwareIcon-size);
 	block-size: var(--components-softwareIcon-size);
 
-
 	@at-root ($atRoot) {
-
 		svg {
 			display: block;
 			inline-size: 100%;
@@ -17,53 +15,55 @@
 			overflow: visible;
 		}
 
+		.softwareIcon {
+			margin-inline-end: 0;
+			margin-block-end: 0;
+		}
+
 		.softwareIconWrapper {
 			display: flex;
-			flex-wrap: nowrap;
+			flex-wrap: wrap;
 			align-items: center;
 			gap: 0;
 
-			.softwareIcon, .softwareIconWrapper-action {
+			.softwareIconWrapper-action {
+				@include reset.button;
+
+				display: flex;
+				align-items: center;
+				justify-content: center;
+
+				.softwareIconWrapper-action-more {
+					position: absolute;
+					font-family: var(--pr-t-font-family-brand);
+					font-size: var(--pr-t-font-fontSize-200);
+					font-weight: var(--pr-t-font-fontWeight-semibold);
+				}
+			}
+
+			.softwareIcon,
+			.softwareIconWrapper-action {
+				margin-inline-end: var(--components-softwareIconWrapper-overlap);
+				margin-block-end: var(--components-softwareIconWrapper-overlap);
 				transform: scale(var(--components-softwareIconWrapper-scale));
-				transition: transform var(--commons-animations-durations-fast), z-index var(--commons-animations-durations-fast);
+				transition:
+					transform var(--commons-animations-durations-fast),
+					z-index var(--commons-animations-durations-fast);
+				inline-size: var(--components-softwareIcon-size);
+				block-size: var(--components-softwareIcon-size);
+
 				svg path:first-child {
 					stroke: var(--palettes-neutral-0);
 					stroke-width: 4px;
 				}
-				&:hover, &:focus {
-					z-index: 1;
+
+				&:hover,
+				&:focus {
 					--components-softwareIconWrapper-scale: 1.1;
+
+					z-index: 1;
 				}
 			}
-		}
-
-		.softwareIconWrapper-item {
-			display: inline-flex;
-			align-items: center;
-			justify-content: center;
-			inline-size: var(--components-softwareIcon-size);
-			block-size: var(--components-softwareIcon-size);
-			.softwareIcon {
-				margin-inline-end: calc(var(--components-softwareIconWrapper-overlap) * -1);
-			}
-		}
-
-
-		.softwareIconWrapper-action {
-			@include reset.button;
-
-			display: flex;
-			align-items: center;
-			justify-content: center;
-			inline-size: var(--components-softwareIcon-size);
-			block-size: var(--components-softwareIcon-size);
-		}
-
-		.softwareIconWrapper-action-more {
-			position: absolute;
-			font-family: var(--pr-t-font-family-brand);
-			font-size: var(--pr-t-font-fontSize-200);
-			font-weight: var(--pr-t-font-fontWeight-semibold);
 		}
 	}
 }

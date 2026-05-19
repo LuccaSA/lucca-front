@@ -1,7 +1,9 @@
 import { ChangeDetectionStrategy, Component, computed, contentChildren, effect, input, numberAttribute, ViewEncapsulation } from '@angular/core';
+import { GridColumnComponent } from '@lucca-front/ng/grid';
 import { SoftwareIconComponent } from '@lucca-front/ng/software-icon';
-import { PopoverDirective } from '../popover2/popover.directive';
 import { intlInputOptions, IntlParamsPipe } from '../core/translate';
+import { GridComponent } from '../grid/grid.component';
+import { PopoverDirective } from '../popover2/popover.directive';
 import { LU_SOFTWARE_ICON_WRAPPER_TRANSLATIONS } from './software-icon-wrapper.translate';
 
 @Component({
@@ -9,7 +11,7 @@ import { LU_SOFTWARE_ICON_WRAPPER_TRANSLATIONS } from './software-icon-wrapper.t
 	templateUrl: './software-icon-wrapper.component.html',
 	changeDetection: ChangeDetectionStrategy.OnPush,
 	encapsulation: ViewEncapsulation.None,
-	imports: [PopoverDirective, SoftwareIconComponent, IntlParamsPipe],
+	imports: [PopoverDirective, SoftwareIconComponent, IntlParamsPipe, GridComponent, GridColumnComponent],
 })
 export class SoftwareIconWrapperComponent {
 	readonly max = input(0, { transform: numberAttribute });

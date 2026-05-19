@@ -15,30 +15,29 @@
 }
 
 @mixin wrapperXXS {
-	.softwareIcon,
-	.softwareIconWrapper-item-action {
+	&,
+	.softwareIcon {
 		@include XXS;
 	}
 }
 
 @mixin wrapperXS {
-	.softwareIcon,
-	.softwareIconWrapper-item-action {
+	&,
+	.softwareIcon {
 		@include XS;
 	}
 }
 
 @mixin wrapperS {
-	.softwareIcon,
-	.softwareIconWrapper-item-action {
+	&,
+	.softwareIcon {
 		@include S;
 	}
 }
 
 @mixin wrapperL {
-	.softwareIcon,
-	.softwareIconWrapper-item-action {
+	&,
+	.softwareIcon {
 		@include L;
 	}
 }
-
