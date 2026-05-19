@@ -2,7 +2,8 @@
 /* eslint-disable @angular-eslint/no-output-on-prefix */
 /* eslint-disable @angular-eslint/no-output-native */
 import { A11yModule } from '@angular/cdk/a11y';
-import { ChangeDetectionStrategy, Component, EventEmitter, forwardRef, input, Output, TemplateRef, viewChild } from '@angular/core';
+import { ChangeDetectionStrategy, Component, EventEmitter, forwardRef, input, TemplateRef, viewChild } from '@angular/core';
+import { outputFromObservable } from '@angular/core/rxjs-interop';
 import { FormsModule } from '@angular/forms';
 import { ALuDateAdapter, ELuDateGranularity, LuDateGranularity, ɵeffectWithDeps } from '@lucca-front/ng/core';
 import { ALuPickerPanel } from '@lucca-front/ng/picker';
@@ -35,10 +36,15 @@ export class LuDatePickerComponent<D = Date> extends ALuPickerPanel<D> {
 
 	readonly startOn = input<D>();
 
-	@Output() override close = new EventEmitter<void>();
-	@Output() override open = new EventEmitter<void>();
-	@Output() override hovered = new EventEmitter<boolean>();
-	@Output() override onSelectValue = new EventEmitter<D>();
+	override close = new EventEmitter<void>();
+	override open = new EventEmitter<void>();
+	override hovered = new EventEmitter<boolean>();
+	override onSelectValue = new EventEmitter<D>();
+
+	protected readonly closeOutput = outputFromObservable(this.close, { alias: 'close' });
+	protected readonly openOutput = outputFromObservable(this.open, { alias: 'open' });
+	protected readonly hoveredOutput = outputFromObservable(this.hovered, { alias: 'hovered' });
+	protected readonly onSelectValueOutput = outputFromObservable(this.onSelectValue, { alias: 'onSelectValue' });
 
 	private readonly vcTemplateRef = viewChild.required<TemplateRef<unknown>>(TemplateRef);
 
@@ -90,7 +96,4 @@ export class LuDatePickerComponent<D = Date> extends ALuPickerPanel<D> {
 				break;
 		}
 	}
-	// ngAfterViewInit() {
-	// 	this._dateInput.nativeElement.focus();
-	// }
 }
