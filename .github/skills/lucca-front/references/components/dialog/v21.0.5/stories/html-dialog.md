@@ -1,22 +1,20 @@
 # dialog — Dialog _(HTML/CSS)_
 
-# Documentation Dialog
-
 `LuDialogService` sert à ouvrir des dialog à travers vos applications, avec tous les attributs et la structure nécessaires à une bonne accessibilité.
 
 Il peut être utilisé de deux manières principales: via le service ou via les directives (template-driven)
 
-## Imports et providers
+### Imports et providers
 
-Afin de pouvoir utiliser `LuDialogService` , vous devez appeler la fonction `configureLuDialog`  en tant qu’`EnvironmentProvider` , idéalement dans `bootstrapApplication`:
+Afin de pouvoir utiliser `LuDialogService` , vous devez appeler la fonction `configureLuDialog` en tant qu’`EnvironmentProvider` , idéalement dans `bootstrapApplication`:
 
 Puis dans le composant qui va ouvrir votre dialog box, appelez `provideLuDialog` dans les providers:
 
-## Via le service
+### Via le service
 
 Pour ouvrir une dialog via le service, vous pouvez simplement appeler la méthode `LuDialogService.open(options: LuDialogConfig)`:
 
-### Envoyer des données à la dialog
+#### Envoyer des données à la dialog
 
 Le système de dialog propose une approche qui se repose sur le composant qui contient le contenu du dialog, ce qui signifie que tout le typage se passe à un seul endroit: dans le composant.
 
@@ -24,7 +22,7 @@ La fonction `injectDialogData` sert à récupérer les données et sert au servi
 
 Une fois le composant créé, la méthode `LuDialogService.open(options: LuDialogConfig)` vérifiera à la compilation que les options sont conformes:
 
-### Récupérer le résultat du dialog
+#### Récupérer le résultat du dialog
 
 `LuDialogRef` possède trois observables qui permettent de réagir aux résultats possibles de l'ouverture d'une dialog:
 
@@ -34,7 +32,7 @@ Une fois le composant créé, la méthode `LuDialogService.open(options: LuDialo
 
 Gardons `MyDialogComponent` comme exemple:
 
-## Via le template
+### Via le template
 
 Pour créer et ouvrir une dialog depuis le template, vous pouvez utiliser les directives et composants mises à disposition:
 
@@ -43,16 +41,16 @@ Pour créer et ouvrir une dialog depuis le template, vous pouvez utiliser les di
 - `luDialogClose` pour fermer la dialog via la méthode `close` lors du click sur son élément hôte.
 - `luDialogDismiss` pour fermer la dialog via la méthode `dismiss` lors du click sur son élément hôte.
 
-### Exemple:
+#### Exemple:
 
-### Envoyer et reçevoir des données en Template-driven
+#### Envoyer et reçevoir des données en Template-driven
 
 Du fait que tout soit géré depuis le template, vous pouvez totalement ignorer la partie transmission de données car par définition,
 la dialog box a accès à tout ce que le composant expose au template, fonctions et propriétés.
 
-## Utilisation des formulaires
+### Utilisation des formulaires
 
-Dans le cas où vous souhaitez utiliser un formulaire au sein d’une dialog box, il vous suffit de placer la balise `form` avec une classe `dialog-formOptionnal` autour du contenu de votre dialog, que celle-ci soit template-driven ou non:
+Dans le cas où vous souhaitez utiliser un formulaire au sein d’une [dialog box](https://prisme.lucca.io/94310e217/p/841b0b-dialogs), il vous suffit de placer la balise `form` avec une classe `dialog-inside-formOptional` autour du contenu de votre dialog, que celle-ci soit template-driven ou non :
 
 ```css
 @forward '@lucca-front/scss/src/components/dialog';

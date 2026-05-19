@@ -7,4 +7,3 @@
 | Section | Description | File |
 |---------|-------------|------|
 | Vue d'ensemble | — | [vue-d-ensemble.md](./vue-d-ensemble.md) |
-| Documentation User Popover | — | [documentation-user-popover.md](./documentation-user-popover.md) |

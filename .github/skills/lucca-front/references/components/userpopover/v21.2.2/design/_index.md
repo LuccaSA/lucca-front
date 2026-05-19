@@ -7,4 +7,3 @@
 | Section | Description | File |
 |---------|-------------|------|
 | Design | Usage guidelines, visual hierarchy, spacing, states, and do/don't rules. | [design.md](./design.md) |
-| Documentation User Popover | — | [documentation-user-popover.md](./documentation-user-popover.md) |
