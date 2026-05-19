@@ -1,5 +1,5 @@
 import { Highlightable } from '@angular/cdk/a11y';
-import { computed, Directive, ElementRef, inject, input, model, OnDestroy, output, signal } from '@angular/core';
+import { computed, Directive, ElementRef, inject, input, linkedSignal, model, OnDestroy, output, signal } from '@angular/core';
 import { ALuSelectInputComponent } from '../input/select-input.component';
 import { CoreSelectPanelInstance, SELECT_PANEL_INSTANCE } from './panel.instance';
 
@@ -32,12 +32,18 @@ export class CoreSelectPanelElement<T> implements Highlightable, OnDestroy {
 
 	readonly disabledInput = input<boolean>(false, { alias: 'disabled' });
 
+	readonly disabledRef = linkedSignal(() => this.disabledInput());
+
 	readonly isHighlighted = signal(false);
 
 	selected = output<void>();
 
 	get disabled() {
-		return this.disabledInput();
+		return this.disabledRef();
+	}
+
+	set disabled(disabled: boolean) {
+		this.disabledRef.set(disabled);
 	}
 
 	constructor() {
