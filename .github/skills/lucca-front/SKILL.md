@@ -58,7 +58,7 @@ Bouton en v21.2.1 → API : `./references/components/button/v21.2.1/button.md`, 
 | Design patterns | Patterns (dossier `patterns/`) |
 | Tokens CSS | Tokens (dossier `tokens/`) |
 | Mixins / animations SCSS | Outils (dossier `tools/`) |
-| Composant déprécié | `./references/documentation/deprecated.md` |
+| Composant déprécié | `./references/documentation/deprecated/v<M>.<m>/deprecated.md` |
 
 ## 4. Workflow Code
 
@@ -103,5 +103,5 @@ Bouton en v21.2.1 → API : `./references/components/button/v21.2.1/button.md`, 
 
 ## 8. Composants dépréciés
 
-Consulte `./references/documentation/deprecated.md` avant d'utiliser un composant inconnu.
+Consulte `./references/documentation/deprecated/v<M>.<m>/deprecated.md` avant d'utiliser un composant inconnu.
 Ne génère **jamais** de code utilisant un composant déprécié — propose son remplacement.

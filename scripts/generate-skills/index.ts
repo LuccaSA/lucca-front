@@ -59,6 +59,7 @@ import { writeToc } from './generators/toc-writer';
 import { writeVersionChangelog } from './generators/changelog-writer';
 import { resolveVersion } from './version-config';
 import { collectAllDocumentation } from './collectors/documentation';
+import { collectDeprecated } from './collectors/deprecated';
 import { collectAllTools } from './collectors/tools';
 import { discoverComponents, DiscoveredComponent } from './collectors/component-discovery';
 import { syncMetadata } from './sync-metadata';
@@ -240,6 +241,19 @@ async function main(): Promise<void> {
 				console.log(`\n   📖 Documentation: ${written} written, ${errors} errors`);
 				totalSuccess += written;
 				totalErrors += errors;
+			}
+		}
+
+		// Deprecated components collection (ZH "Cycle de vie des composants" page)
+		if (!flags.skipDocumentation && !flags.component) {
+			console.log(`\n💀 Collecting deprecated documentation for v${version.major}.${version.minor}...`);
+			if (!flags.dryRun) {
+				const { written, errors } = await collectDeprecated(config.output.skillsDir, version);
+				console.log(`\n   💀 Deprecated: ${written} written, ${errors} errors`);
+				totalSuccess += written;
+				totalErrors += errors;
+			} else {
+				console.log('   DRY RUN — deprecated page would be fetched from ZeroHeight');
 			}
 		}
 
