@@ -12,11 +12,11 @@ import {
 	forwardRef,
 	Input,
 	OnDestroy,
-	Output,
 	Renderer2,
 	viewChild,
 	ViewContainerRef,
 } from '@angular/core';
+import { outputFromObservable } from '@angular/core/rxjs-interop';
 import { ControlValueAccessor, NG_VALUE_ACCESSOR } from '@angular/forms';
 import { ALuClear, ILuClear } from '@lucca-front/ng/clear';
 import { ALuInputDisplayer, ILuInputDisplayer } from '@lucca-front/ng/input';
@@ -62,10 +62,13 @@ export abstract class ALuSelectInputComponent<T, TPicker extends ILuPickerPanel<
 		}
 	}
 
+	readonly onOpen = new EventEmitter<void>();
+	readonly onClose = new EventEmitter<void>();
+
 	/** Event emitted when the associated popover is opened. */
-	@Output() onOpen = new EventEmitter<void>();
+	protected readonly onOpenOutput = outputFromObservable(this.onOpen, { alias: 'onOpen' });
 	/** Event emitted when the associated popover is closed. */
-	@Output() onClose = new EventEmitter<void>();
+	protected readonly onCloseOutput = outputFromObservable(this.onClose, { alias: 'onClose' });
 
 	constructor(
 		protected override _changeDetectorRef: ChangeDetectorRef,
