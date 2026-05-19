@@ -134,10 +134,10 @@ Compose l'URL du fichier à partir du slug et de la version détectée.
 
 \`./references/documentation/<dossier>/v<M>.<m>/<slug>.md\`
 
-### Outils (version fix)
+### Outils (version mineure)
 
-\`./references/tools/v<M>.<m>.<p>/<slug>.md\`
-Slugs : animations, functions, mixins-a11y, mixins-media, mixins-color, mixins-container, mixins-text, mixins-overflow, mixins-loading, mixins-form, mixins-reset, ng-animations, ng-number
+\`./references/tools/v<M>.<m>/<slug>.md\`
+Slugs : animations, mixins, numbers, scrollbox, utilitaires
 
 ### Exemple
 
@@ -155,7 +155,7 @@ Bouton en v21.2.1 → API : \`./references/components/button/v21.2.1/button.md\`
 | Design patterns | Patterns (dossier \`patterns/\`) |
 | Tokens CSS | Tokens (dossier \`tokens/\`) |
 | Mixins / animations SCSS | Outils (dossier \`tools/\`) |
-| Composant déprécié | \`./references/documentation/deprecated.md\` |
+| Composant déprécié | \`./references/documentation/deprecated/v<M>.<m>/deprecated.md\` |
 
 ## 4. Workflow Code
 
@@ -182,7 +182,7 @@ ${compactComponentLines}
 ${compactDocLines || '_(aucune documentation générée)_'}
 ## 8. Composants dépréciés
 
-Consulte \`./references/documentation/deprecated.md\` avant d'utiliser un composant inconnu.
+Consulte \`./references/documentation/deprecated/v<M>.<m>/deprecated.md\` avant d'utiliser un composant inconnu.
 Ne génère **jamais** de code utilisant un composant déprécié — propose son remplacement.
 `;
 
