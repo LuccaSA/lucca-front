@@ -1,0 +1,52 @@
+name: Publish npm packages
+
+on:
+  push:
+    tags:
+      - 'v[0-9]+.[0-9]+.[0-9]+'
+      - 'v[0-9]+.[0-9]+.[0-9]+-*'
+
+jobs:
+  publish:
+    runs-on: ubuntu-latest
+    environment: production
+    permissions:
+      contents: read
+      id-token: write
+    steps:
+      - uses: actions/checkout@93cb6efe18208431cddfb8368fd83d5badbf9bfd  # v5.0.1
+      - uses: actions/setup-node@49933ea5288caeca8642d1e84afbd3f7d6820020  # v4.4.0
+        with:
+          node-version: 24.13.0
+          registry-url: 'https://registry.npmjs.org'
+
+      - run: npm ci
+      - run: npm run build
+
+      - name: Set version in dist packages
+        env:
+          REF_NAME: ${{ github.ref_name }}
+        run: |
+          VERSION="${REF_NAME#v}"
+          for pkg in dist/icons dist/scss dist/ng dist/prisme; do
+            node -e "
+              const fs = require('fs');
+              const content = fs.readFileSync('$pkg/package.json', 'utf8');
+              fs.writeFileSync('$pkg/package.json', content.replace(/\"\*\"/g, '\"$VERSION\"'));
+            "
+          done
+
+      - run: npm publish --access public --provenance
+        working-directory: dist/icons
+
+      - run: npm publish --access public --provenance
+        working-directory: dist/scss
+
+      - run: npm publish --access public --provenance
+        working-directory: dist/ng
+
+      - run: npm publish --access public --provenance
+        working-directory: dist/prisme
+
+      - run: npm publish --access public --provenance
+        working-directory: packages/stylelint-config
