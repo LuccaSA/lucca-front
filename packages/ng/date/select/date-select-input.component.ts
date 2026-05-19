@@ -1,8 +1,8 @@
 import { Overlay, OverlayModule } from '@angular/cdk/overlay';
-import { AfterViewInit, ChangeDetectionStrategy, ChangeDetectorRef, Component, ElementRef, forwardRef, Input, input, Renderer2, ViewContainerRef } from '@angular/core';
+import { AfterViewInit, ChangeDetectionStrategy, ChangeDetectorRef, Component, ElementRef, forwardRef, input, Renderer2, ViewContainerRef } from '@angular/core';
 import { AbstractControl, ControlValueAccessor, NG_VALIDATORS, NG_VALUE_ACCESSOR, ValidationErrors, Validator } from '@angular/forms';
 import { ClearComponent } from '@lucca-front/ng/clear';
-import { ALuDateAdapter, ELuDateGranularity, LuDateGranularity, syncInputSignal } from '@lucca-front/ng/core';
+import { ALuDateAdapter, ELuDateGranularity, LuDateGranularity, syncInputSignal, ɵeffectWithDeps } from '@lucca-front/ng/core';
 import { LuInputDisplayerDirective } from '@lucca-front/ng/input';
 import { ILuInputWithPicker } from '@lucca-front/ng/picker';
 import { ALuSelectInputComponent } from '@lucca-front/ng/select';
@@ -35,7 +35,9 @@ export class LuDateSelectInputComponent<D> extends ALuSelectInputComponent<D> im
 
 	readonly granularity = input<LuDateGranularity>(ELuDateGranularity.day);
 
-	@Input('placeholder') override set inputPlaceholder(p: string) {
+	readonly placeHolderInput = input<string>('', { alias: 'placeholder' });
+
+	override set inputPlaceholder(p: string) {
 		this._placeholder = p;
 	}
 
@@ -70,6 +72,12 @@ export class LuDateSelectInputComponent<D> extends ALuSelectInputComponent<D> im
 
 		syncInputSignal(this.startOn, (s) => {
 			this._startOn = s ?? this._adapter.forgeToday();
+		});
+
+		ɵeffectWithDeps([this.placeHolderInput], (placeHolderInput) => {
+			if (placeHolderInput) {
+				this._placeholder = placeHolderInput;
+			}
 		});
 	}
 
