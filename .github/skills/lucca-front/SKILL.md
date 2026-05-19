@@ -37,10 +37,10 @@ Compose l'URL du fichier à partir du slug et de la version détectée.
 
 `./references/documentation/<dossier>/v<M>.<m>/<slug>.md`
 
-### Outils (version fix)
+### Outils (version mineure)
 
-`./references/tools/v<M>.<m>.<p>/<slug>.md`
-Slugs : animations, functions, mixins-a11y, mixins-media, mixins-color, mixins-container, mixins-text, mixins-overflow, mixins-loading, mixins-form, mixins-reset, ng-animations, ng-number
+`./references/tools/v<M>.<m>/<slug>.md`
+Slugs : animations, mixins, numbers, scrollbox, utilitaires
 
 ### Exemple
 
