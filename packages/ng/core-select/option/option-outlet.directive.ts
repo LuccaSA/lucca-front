@@ -67,7 +67,7 @@ export class LuOptionOutletDirective<T> implements OnChanges, OnDestroy {
 		}
 	}
 
-	public static ngTemplateContextGuard<T>(_dir: LuOptionOutletDirective<T>, ctx: unknown): ctx is void {
+	public static ngTemplateContextGuard<T>(_dir: LuOptionOutletDirective<T>, _ctx: unknown): _ctx is void {
 		return true;
 	}
 }

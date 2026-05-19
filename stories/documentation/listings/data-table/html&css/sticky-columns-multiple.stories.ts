@@ -8,7 +8,7 @@ export default {
 } as Meta;
 
 function getTemplate(args: StickyColumnsMultipleStory): string {
-	return `<div class="dataTableWrapper" style="width: 30rem">
+	return `<div class="dataTableWrapper" style="inline-size: 30rem">
 	<table class="dataTable mod-layoutFixed" [attr.style]="'--dataTable-layoutFixed-width: 5.5rem'">
 		<thead class="dataTable-head">
 			<tr class="dataTable-head-row">

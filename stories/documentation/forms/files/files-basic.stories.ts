@@ -25,7 +25,7 @@ function getTemplate(args: FilesBasicStory): string {
 			<span class="pr-u-mask"> – </span>
 			<span class="file-formats pr-u-marginBlockStart100">Supported file formats: .xls, .xlsx .csv</span>
 			<span class="file-progress progress">
-				<span class="progress-bar" style="width: 50%"></span>
+				<span class="progress-bar" style="inline-size: 50%"></span>
 			</span>
 		</span>
 	</label>
@@ -42,7 +42,7 @@ function getTemplate(args: FilesBasicStory): string {
 			</span>
 			<span class="file-button button mod-outlined mod-S">browse files</span>
 			<span class="file-progress progress">
-				<span class="progress-bar" style="width: 50%"></span>
+				<span class="progress-bar" style="inline-size: 50%"></span>
 			</span>
 		</span>
 	</label>

@@ -6,24 +6,32 @@ import { ChipComponent } from '@lucca-front/ng/chip';
 import { intlInputOptions } from '@lucca-front/ng/core';
 import { ILuOptionContext, LU_OPTION_CONTEXT, ɵLuOptionOutletDirective } from '@lucca-front/ng/core-select';
 import { LuTooltipModule } from '@lucca-front/ng/tooltip';
+import { IconComponent } from '@lucca/prisme/icon';
 import { map } from 'rxjs/operators';
 import { LuMultiSelectInputComponent } from '../input/select-input.component';
 import { LU_MULTI_SELECT_DISPLAYER_TRANSLATIONS } from './default-displayer.translate';
 import { LuMultiSelectDisplayerInputDirective } from './displayer-input.directive';
 
+let nextID = 0;
+
 @Component({
 	selector: 'lu-multi-select-default-displayer',
-	imports: [AsyncPipe, LuTooltipModule, ɵLuOptionOutletDirective, FormsModule, LuMultiSelectDisplayerInputDirective, ChipComponent],
+	imports: [AsyncPipe, LuTooltipModule, ɵLuOptionOutletDirective, FormsModule, LuMultiSelectDisplayerInputDirective, ChipComponent, IconComponent],
 	template: `
 		<div class="multipleSelect-displayer">
-			<input autocomplete="off" #inputElement (keydown.backspace)="inputBackspace()" (keydown.space)="inputSpace($event)" luMultiSelectDisplayerInput />
-			@for (option of displayedOptions$ | async; track option; let index = $index) {
-				<lu-chip class="multipleSelect-displayer-chip" withEllipsis (kill)="unselectOption(option, $event)" [unkillable]="select.disabled$ | async">
-					<ng-container *luOptionOutlet="select.displayerTpl(); value: option" />
-				</lu-chip>
-			}
-			@if (overflowOptions$ | async; as overflow) {
-				<lu-chip class="multipleSelect-displayer-chip" unkillable>+ {{ overflow }}</lu-chip>
+			<input [attr.aria-labelledby]="valueID" autocomplete="off" #inputElement (keydown.backspace)="inputBackspace()" (keydown.space)="inputSpace($event)" luMultiSelectDisplayerInput />
+			<div [attr.id]="valueID" class="multipleSelect-displayer-value">
+				@for (option of displayedOptions$ | async; track option; let index = $index) {
+					<lu-chip class="multipleSelect-displayer-chip" withEllipsis (kill)="unselectOption(option, $event)" [unkillable]="select.disabled$ | async">
+						<ng-container *luOptionOutlet="select.displayerTpl(); value: option" />
+					</lu-chip>
+				}
+				@if (overflowOptions$ | async; as overflow) {
+					<lu-chip class="multipleSelect-displayer-chip" unkillable>+ {{ overflow }}</lu-chip>
+				}
+			</div>
+			@if (select.filterPillMode) {
+				<lu-icon icon="searchMagnifyingGlass" class="multiSelect-field-icon mod-search" />
 			}
 		</div>
 	`,
@@ -33,6 +41,8 @@ import { LuMultiSelectDisplayerInputDirective } from './displayer-input.directiv
 export class LuMultiSelectDefaultDisplayerComponent<T> implements OnInit {
 	select = inject<LuMultiSelectInputComponent<T>>(LuMultiSelectInputComponent);
 	intl = input(...intlInputOptions(LU_MULTI_SELECT_DISPLAYER_TRANSLATIONS));
+
+	valueID = `value-${++nextID}`;
 
 	protected destroyRef = inject(DestroyRef);
 

@@ -46,6 +46,7 @@
 		.presentation-definition {
 			margin: 0;
 			color: var(--pr-t-color-text);
+			overflow-wrap: anywhere;
 
 			> *:not(:has(.lucca-icon), .presentation-definition-link) {
 				color: var(--pr-t-color-text);

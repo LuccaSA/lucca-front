@@ -1,5 +1,4 @@
 import { InjectionToken } from '@angular/core';
-import { LuTranslation } from '@lucca-front/ng/core';
 import { Translations } from './translations';
 
 export interface LuMultilanguageInputTranslations {
@@ -9,5 +8,5 @@ export interface LuMultilanguageInputTranslations {
 }
 
 export const LU_MULTILANGUAGE_INPUT_TRANSLATIONS = new InjectionToken('LuMultilanguageInputTranslations', {
-	factory: () => Translations as LuTranslation<LuMultilanguageInputTranslations>,
+	factory: () => Translations,
 });
