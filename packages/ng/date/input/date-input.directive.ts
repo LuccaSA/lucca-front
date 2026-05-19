@@ -1,6 +1,6 @@
-import { ChangeDetectorRef, Directive, ElementRef, forwardRef, Input, input, OnInit, Renderer2 } from '@angular/core';
+import { ChangeDetectorRef, Directive, ElementRef, forwardRef, input, Renderer2 } from '@angular/core';
 import { AbstractControl, NG_VALIDATORS, NG_VALUE_ACCESSOR, ValidationErrors, Validator } from '@angular/forms';
-import { ALuDateAdapter, ELuDateGranularity, intlInputOptions, isNotNil, LuDateGranularity } from '@lucca-front/ng/core';
+import { ALuDateAdapter, ELuDateGranularity, intlInputOptions, isNotNil, LuDateGranularity, ɵeffectWithDeps } from '@lucca-front/ng/core';
 import { ALuInput } from '@lucca-front/ng/input';
 import { LU_DATE_INPUT_TRANSLATIONS } from './date-input.translate';
 
@@ -24,7 +24,7 @@ import { LU_DATE_INPUT_TRANSLATIONS } from './date-input.translate';
 		},
 	],
 })
-export class LuDateInputDirective<D> extends ALuInput<D, HTMLInputElement> implements Validator, OnInit {
+export class LuDateInputDirective<D> extends ALuInput<D, HTMLInputElement> implements Validator {
 	private _focused = false;
 
 	readonly min = input<D>();
@@ -33,7 +33,9 @@ export class LuDateInputDirective<D> extends ALuInput<D, HTMLInputElement> imple
 
 	readonly granularity = input<LuDateGranularity>(ELuDateGranularity.day);
 
-	@Input() override set placeholder(p: string) {
+	readonly placeHolderInput = input<string>('', { alias: 'placeholder' });
+
+	override set placeholder(p: string) {
 		this._elementRef.nativeElement.placeholder = p;
 	}
 
@@ -45,20 +47,24 @@ export class LuDateInputDirective<D> extends ALuInput<D, HTMLInputElement> imple
 		private _adapter: ALuDateAdapter<D>,
 	) {
 		super(_changeDetectorRef, _elementRef, _renderer);
-	}
-	ngOnInit() {
-		switch (this.granularity()) {
-			case ELuDateGranularity.year:
-				this._elementRef.nativeElement.placeholder = this.intl().placeholderYear;
-				break;
-			case ELuDateGranularity.month:
-				this._elementRef.nativeElement.placeholder = this.intl().placeholderMonth;
-				break;
-			case ELuDateGranularity.day:
-			default:
-				this._elementRef.nativeElement.placeholder = this.intl().placeholderDay;
-				break;
-		}
+		ɵeffectWithDeps([this.placeHolderInput, this.granularity, this.intl], (placeHolderInput, granularity, intl) => {
+			if (placeHolderInput) {
+				this._elementRef.nativeElement.placeholder = placeHolderInput;
+			} else {
+				switch (granularity) {
+					case ELuDateGranularity.year:
+						this._elementRef.nativeElement.placeholder = intl.placeholderYear;
+						break;
+					case ELuDateGranularity.month:
+						this._elementRef.nativeElement.placeholder = intl.placeholderMonth;
+						break;
+					case ELuDateGranularity.day:
+					default:
+						this._elementRef.nativeElement.placeholder = intl.placeholderDay;
+						break;
+				}
+			}
+		});
 	}
 	protected render() {
 		if (this._focused) {
