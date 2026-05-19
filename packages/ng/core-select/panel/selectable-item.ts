@@ -1,5 +1,5 @@
 import { Highlightable } from '@angular/cdk/a11y';
-import { computed, Directive, ElementRef, inject, Input, input, model, OnDestroy, output, signal } from '@angular/core';
+import { computed, Directive, ElementRef, inject, input, model, OnDestroy, output, signal } from '@angular/core';
 import { ALuSelectInputComponent } from '../input/select-input.component';
 import { CoreSelectPanelInstance, SELECT_PANEL_INSTANCE } from './panel.instance';
 
@@ -30,13 +30,15 @@ export class CoreSelectPanelElement<T> implements Highlightable, OnDestroy {
 
 	readonly option = input<T>();
 
+	readonly disabledInput = input<boolean>(false, { alias: 'disabled' });
+
 	readonly isHighlighted = signal(false);
 
 	selected = output<void>();
 
-	// We have to use input here because this is consumed by ActiveKeyManager, which doesn't use a signal
-	@Input()
-	disabled: boolean;
+	get disabled() {
+		return this.disabledInput();
+	}
 
 	constructor() {
 		this.#panelRef.options.set([...this.#panelRef.options(), this]);
