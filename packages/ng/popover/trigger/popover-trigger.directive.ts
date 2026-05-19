@@ -1,5 +1,6 @@
 import { Overlay } from '@angular/cdk/overlay';
-import { AfterViewInit, Directive, ElementRef, EventEmitter, input, OnDestroy, Output, ViewContainerRef } from '@angular/core';
+import { AfterViewInit, Directive, ElementRef, EventEmitter, input, OnDestroy, ViewContainerRef } from '@angular/core';
+import { outputFromObservable } from '@angular/core/rxjs-interop';
 import { syncInputSignal } from '@lucca-front/ng/core';
 import { ILuPopoverPanel } from '../panel/index';
 import { ILuPopoverTarget, LuPopoverAlignment, LuPopoverPosition, LuPopoverTarget } from '../target/index';
@@ -32,13 +33,15 @@ export class LuPopoverTriggerDirective<TPanel extends ILuPopoverPanel = ILuPopov
 	/** References the popover target instance that the trigger is associated with. */
 	readonly inputTriggerEvent = input<LuPopoverTriggerEvent>(undefined, { alias: 'luPopoverTrigger' });
 
-	/** Event emitted when the associated popover is opened. */
-	// eslint-disable-next-line @angular-eslint/no-output-on-prefix
-	@Output('luPopoverOnOpen') onOpen = new EventEmitter<void>();
+	readonly onOpen = new EventEmitter<void>();
+
+	readonly onClose = new EventEmitter<void>();
 
 	/** Event emitted when the associated popover is closed. */
-	// eslint-disable-next-line @angular-eslint/no-output-on-prefix
-	@Output('luPopoverOnClose') onClose = new EventEmitter<void>();
+	protected readonly onCloseOutput = outputFromObservable(this.onClose, { alias: 'luPopoverOnClose' });
+
+	/** Event emitted when the associated popover is opened. */
+	protected readonly onOpenOutput = outputFromObservable(this.onOpen, { alias: 'luPopoverOnOpen' });
 
 	/** how you want to position the panel relative to the target, allowed values: above, below, before, after */
 	readonly inputPosition = input<LuPopoverPosition>(undefined, { alias: 'luPopoverPosition' });

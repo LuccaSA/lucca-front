@@ -1,7 +1,8 @@
 import { A11yModule } from '@angular/cdk/a11y';
 import { OverlayModule } from '@angular/cdk/overlay';
 import { NgTemplateOutlet } from '@angular/common';
-import { ChangeDetectionStrategy, Component, EventEmitter, input, OnDestroy, Output, TemplateRef, viewChild } from '@angular/core';
+import { ChangeDetectionStrategy, Component, EventEmitter, input, OnDestroy, TemplateRef, viewChild } from '@angular/core';
+import { outputFromObservable } from '@angular/core/rxjs-interop';
 import { isNotNil, syncInputSignal, ɵeffectWithDeps } from '@lucca-front/ng/core';
 import { luTransformPopover } from '../animation/index';
 import { ALuPopoverPanel, ILuPopoverPanel, LuPopoverScrollStrategy } from './popover-panel.model';
@@ -60,11 +61,16 @@ export class LuPopoverPanelComponent extends ALuPopoverPanel implements ILuPopov
 	 */
 	readonly inputContentClasses = input<string>('', { alias: 'content-classes' });
 
+	override readonly close = new EventEmitter<void>();
+	override readonly open = new EventEmitter<void>();
+	override readonly hovered = new EventEmitter<boolean>();
+
 	/** Event emitted when the popover is closed. */
-	// eslint-disable-next-line @angular-eslint/no-output-native
-	@Output() override close = new EventEmitter<void>();
-	@Output() override open = new EventEmitter<void>();
-	@Output() override hovered = new EventEmitter<boolean>();
+	protected readonly closeOutput = outputFromObservable(this.close, { alias: 'close' });
+	/** Event emitted when the popover is open. */
+	protected readonly openOutput = outputFromObservable(this.open, { alias: 'open' });
+	/** Event emitted when the popover is hovered. */
+	protected readonly hoveredOutput = outputFromObservable(this.hovered, { alias: 'hovered' });
 
 	readonly vcTemplateRef = viewChild(TemplateRef);
 
