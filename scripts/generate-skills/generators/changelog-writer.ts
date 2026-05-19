@@ -235,13 +235,29 @@ function countLines(filePath: string): number {
 }
 
 /**
+ * Discovers component slugs from disk by scanning the references/components directory
+ * for subdirectories that contain a versioned folder matching the given tag.
+ */
+function discoverComponentSlugsFromDisk(baseDir: string, versionTag: string): string[] {
+	const componentsDir = path.join(baseDir, 'references', 'components');
+	if (!fs.existsSync(componentsDir)) return [];
+
+	return fs.readdirSync(componentsDir, { withFileTypes: true })
+		.filter(entry => entry.isDirectory())
+		.filter(entry => fs.existsSync(path.join(componentsDir, entry.name, versionTag)))
+		.map(entry => entry.name)
+		.sort();
+}
+
+/**
  * Generates a changelog comparing the current version against the previous one.
+ * Discovers component slugs from the filesystem rather than relying on caller input.
  * Returns the path to the written changelog file, or null if skipped.
  */
 export function writeVersionChangelog(
 	skillsDir: string,
 	version: VersionConfig,
-	componentSlugs: string[],
+	componentSlugs?: string[],
 ): string | null {
 	const baseDir = path.resolve(skillsDir, SKILLS_BASE);
 	const manifestPath = path.join(baseDir, '_versions.json');
@@ -262,9 +278,14 @@ export function writeVersionChangelog(
 	fs.mkdirSync(changelogDir, { recursive: true });
 	const changelogPath = path.join(changelogDir, `${version.tag}.md`);
 
+	// Discover component slugs from filesystem if not provided or empty
+	const slugs = componentSlugs && componentSlugs.length > 0
+		? componentSlugs
+		: discoverComponentSlugsFromDisk(baseDir, version.tag);
+
 	// First generation — no previous version to compare
 	if (!prevVersionKey) {
-		const content = `# ${version.tag} — Première génération\n\nAucune version précédente. ${componentSlugs.length} composants générés.\n`;
+		const content = `# ${version.tag} — Première génération\n\nAucune version précédente. ${slugs.length} composants générés.\n`;
 		fs.writeFileSync(changelogPath, content, 'utf-8');
 		return changelogPath;
 	}
@@ -274,7 +295,7 @@ export function writeVersionChangelog(
 
 	// ── Components diff ──────────────────────────────────────────────────────
 	const componentDiffs: FileDiff[] = [];
-	for (const slug of componentSlugs) {
+	for (const slug of slugs) {
 		const prevDir = path.join(baseDir, 'references', 'components', slug, prevTag);
 		const currDir = path.join(baseDir, 'references', 'components', slug, version.tag);
 
@@ -295,10 +316,14 @@ export function writeVersionChangelog(
 	}
 
 	// ── Tools diff ───────────────────────────────────────────────────────────
-	const prevToolsDir = path.join(baseDir, 'references', 'tools', prevTag);
-	const currToolsDir = path.join(baseDir, 'references', 'tools', version.tag);
+	const currMinor = `${version.major}.${version.minor}`;
+	const [prevMaj, prevMin] = prevVersionKey.split('.').map(Number);
+	const prevMinor = `${prevMaj}.${prevMin}`;
 
-	if (fs.existsSync(currToolsDir)) {
+	const prevToolsDir = path.join(baseDir, 'references', 'tools', `v${prevMinor}`);
+	const currToolsDir = path.join(baseDir, 'references', 'tools', `v${currMinor}`);
+
+	if (fs.existsSync(currToolsDir) && currMinor !== prevMinor) {
 		const toolDiffs = diffDirectories(
 			fs.existsSync(prevToolsDir) ? prevToolsDir : null,
 			currToolsDir,
@@ -309,13 +334,10 @@ export function writeVersionChangelog(
 	}
 
 	// ── Documentation diff ───────────────────────────────────────────────────
-	const currMinor = `${version.major}.${version.minor}`;
-	const [prevMaj, prevMin] = prevVersionKey.split('.').map(Number);
-	const prevMinor = `${prevMaj}.${prevMin}`;
 
 	if (currMinor !== prevMinor) {
 		// Minor changed — compare documentation directories
-		const docCategories = ['tokens', 'content', 'guidelines', 'patterns'];
+		const docCategories = ['tokens', 'content', 'guidelines', 'patterns', 'deprecated'];
 		const docDiffs: FileDiff[] = [];
 
 		for (const cat of docCategories) {

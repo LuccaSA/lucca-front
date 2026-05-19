@@ -286,7 +286,7 @@ async function main(): Promise<void> {
 		// Generate version changelog (diff vs previous version)
 		if (!flags.dryRun && !flags.component) {
 			const slugs = Object.keys(latestComponentMap);
-			const clPath = writeVersionChangelog(config.output.skillsDir, version, slugs);
+			const clPath = writeVersionChangelog(config.output.skillsDir, version, slugs.length > 0 ? slugs : undefined);
 			if (clPath) {
 				console.log(`📝 Changelog: ${path.basename(clPath)}`);
 			}
