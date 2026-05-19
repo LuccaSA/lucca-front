@@ -8,7 +8,7 @@ RichTextInput (`lu-rich-text-input`) est basé sur [Lexical](https://lexical.dev
 
 Component selector : `lu-rich-text-input`
 
-### Configuration
+### Dépendances
 
 Avant toute utilisation de `lu-rich-text-input`, il est nécessaire d'ajouter les `peerDependencies` suivantes à votre projet :
 
@@ -18,22 +18,33 @@ En fonction du format désiré en entrée / sortie du composant, les dépendance
 
 - Markdown
 
-- Plain text (dépendance sur markdown pour les Transformers, dans la version actuelle)
+- Plain text
 
+### Formats d'entrée/sortie
 Avant toute utilisation du composant, il est nécessaire de définir le formateur à utiliser.
-Trois formateurs par défaut sont disponibles, à provide au niveau du composant parent de l'input :
 
-- HTML
+Trois formateurs par défaut sont disponibles : sous forme de directives ou de services à provide au niveau du composant parent.
 
-- Markdown
+#### HTML
 
-Ce formateur accepte en paramètres une liste optionnelle de `Transformer` markdown pour les noeuds custom
+#### Markdown
 
-- Plain Text
+* Directives disponibles :
+  * `luWithMarkdownFormatter` : formateur markdown classique, avec les balises markdown standards.
+  * `luWithMarkdownTagsFormatter` : formateur markdown avec support des [tags personnalisés](#TagTool).
 
-Ce formateur accepte en paramètres une liste optionnelle de `Transformer` markdown pour les noeuds custom
+* Providers
 
-Exemple d'utilisation :
+#### Plain Text
+
+Ce formateur accepte en paramètres une liste optionnelle de `PlainTextTransformer` pour les noeuds custom.
+
+Il peut être utilisé dans des contextes où le formatage riche n'est pas désiré, mais où l'on souhaite tout de même bénéficier d'un outil en particulier (l'outil [Tags](#TagTool) par exemple).
+
+En conséquent:
+- La plupart des outils n'auront aucun effet sur le contenu de l'éditeur.
+- Il n'intègre pas les raccourcis clavier de formatage de texte (gras, italique, listes, etc...).
+- La récupération du contenu se fait en texte brut lors du copier/coller.
 
 ### Barre d'outils
 
@@ -42,6 +53,9 @@ La barre d'outils du `lu-rich-text-input` est configuré directement depuis le t
 Pour plus de simplicité, une barre d'outil par défaut est mise à disposition.
 
 Il est aussi possible de créer une barre d'outil personnalisée en assemblant les outils existant et en y ajoutant de nouvelles fonctionnalités.
+
+Il est nécessaire d'avoir la barre d'outil pour utiliser les noeuds Lexical correspondants aux outils.
+Pour cacher la barre d'outil tout en gardant les fonctionnalités, il est possible d'utiliser le composant `lu-rich-text-input` avec l'attribut `hideToolbar`.
 
 #### Styles
 
@@ -65,7 +79,7 @@ Il est aussi possible de créer une barre d'outil personnalisée en assemblant l
 
 - Outil individuel
 
-#### Tag
+#### <a id="TagTool"></a>Tag
 
 - Outil individuel
 
@@ -78,7 +92,7 @@ Si la description n'est pas fournie, la clé sera utilisée à la place.
 Les tags ont la forme `{{tag.key}}` dans le contenu brut en entrée/sortie de l'éditeur.
 Si le contenu en entrée de l'éditeur contient des tags non reconnus par l'outil, ils seront automatiquement supprimés.
 
-Pour gérer les tags en markdown, il est nécessaire de fournir le transformer `TAGS` au formateur.
+Pour gérer les tags en markdown ou en plain-text, il est nécessaire de fournir le transformer approprié.
 
 ### Ajout d'outils personnalisés
 

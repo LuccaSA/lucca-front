@@ -9,7 +9,7 @@
 Le composant est disponible en deux tailles :
 
 * La **taille S**, la plus courante, doit être utilisée dans la majorité des formulaires. Elle permet de sélectionner un fichier ou plusieurs en les présentant directement sous le champ. Cette taille ne doit pas être utilisée pour afficher un aperçu du document sélectionné.
-* La **taille M**, moins utilisée, principalement en début de parcours lorsque l'import d'un document lance un processus d'analyse. Cette taille peut aussi être utilisé dans les formulaire, s'il est intéressant de visualiser un aperçu du fichier sélectionné (une image ou un pdf).
+* La **taille M**, moins utilisée, principalement en début de parcours lorsque l'import d'un document lance un processus d'analyse. Cette taille peut aussi être utilisée dans les formulaire, s'il est intéressant de visualiser un aperçu du fichier sélectionné (une image ou un pdf).
 
 <notes>
 
