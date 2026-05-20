@@ -7,6 +7,7 @@ import { map } from 'rxjs/operators';
 import { LuOptionPlaceholderComponent } from '../../placeholder';
 import { ALuTreeOptionOperator, ILuTreeOptionOperator } from '../tree-option-operator.model';
 
+/* eslint-disable @angular-eslint/prefer-signals */
 /**
  * @deprecated
  */

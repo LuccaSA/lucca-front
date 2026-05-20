@@ -19,6 +19,7 @@ import { ALuSelectInputComponent } from '@lucca-front/ng/select';
 import { LuDepartmentFeederComponent } from '../feeder';
 import { LU_DEPARTMENT_SELECT_INPUT_TRANSLATIONS } from './department-select-input.translate';
 
+/* eslint-disable @angular-eslint/prefer-signals */
 /**
  * @deprecated
  */

@@ -3,6 +3,7 @@ import { FormControl, ReactiveFormsModule } from '@angular/forms';
 import { FieldTypeConfig, FieldWrapper, FormlyFieldConfig } from '@ngx-formly/core';
 import { buildAddWrapperExtension } from '../formly.utils';
 
+/* eslint-disable @angular-eslint/prefer-signals */
 // component that display the right error message
 @Component({
 	selector: 'lu-formly-error-message',

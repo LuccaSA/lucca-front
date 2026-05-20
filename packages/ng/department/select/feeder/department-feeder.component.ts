@@ -5,6 +5,7 @@ import { Observable, Subject } from 'rxjs';
 import { ILuDepartment } from '../../department.model';
 import { ALuDepartmentService, LuDepartmentV4Service } from '../../service/index';
 
+/* eslint-disable @angular-eslint/prefer-signals */
 /**
  * @deprecated
  */

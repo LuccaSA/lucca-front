@@ -11,6 +11,7 @@ import { ALuTreeOptionOperator, ILuTreeOptionOperator } from '../operator/index'
 import { ALuTreeOptionSelector, ILuTreeOptionSelector } from '../selector/index';
 import { ALuTreeOptionPickerComponent } from './tree-option-picker.component';
 
+/* eslint-disable @angular-eslint/prefer-signals */
 /**
  * @deprecated
  */
