@@ -15,9 +15,12 @@
 	--components-calendar-table-body-row-cell-actionTextDecoration: none;
 	--components-calendar-table-body-row-cellSelectedBeforeContent: none;
 	--components-calendar-table-body-row-cellSelectedBeforeBorderRadius: 0;
-	--components-calendar-table-body-row-cell-actionDisplay: block;
+	--components-calendar-table-body-row-cellSelectedBeforeBackgroundColor: var(--palettes-50, var(--palettes-product-50));
+	--components-calendar-table-body-row-cellSelectedBeforeInset: var(--pr-t-spacings-25) 0;
+	--components-calendar-table-body-row-cell-actionDisplay: grid;
 	--components-calendar-table-body-row-cell-action-stripesDisplay: block;
 	--components-calendarBackground: var(--components-calendarWrapperBackground, var(--palettes-neutral-0));
 	--components-calendarWidth: var(--components-calendarWrapperWidth, 17.25rem);
 	--components-calendarBorderSpacing: 0;
+	--components-calendar-table-body-row-cell-action-week-outlineColor: var(--palettes-neutral-200);
 }
