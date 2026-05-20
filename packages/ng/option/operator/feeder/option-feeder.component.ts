@@ -1,6 +1,6 @@
 import { ChangeDetectionStrategy, Component, forwardRef, input } from '@angular/core';
-import { syncInputSignal } from '@lucca-front/ng/core';
-import { BehaviorSubject } from 'rxjs';
+import { toObservable } from '@angular/core/rxjs-interop';
+import { Observable } from 'rxjs';
 import { ALuOptionOperator, ILuOptionOperator } from '../option-operator.model';
 
 @Component({
@@ -16,11 +16,7 @@ import { ALuOptionOperator, ILuOptionOperator } from '../option-operator.model';
 	],
 })
 export class LuOptionFeederComponent<T> implements ILuOptionOperator<T> {
-	readonly outOptions$ = new BehaviorSubject<T[]>([]);
-
 	readonly options = input<T[]>([]);
 
-	constructor() {
-		syncInputSignal(this.options, (options) => this.outOptions$.next(options));
-	}
+	readonly outOptions$: Observable<T[]> = toObservable(this.options);
 }
