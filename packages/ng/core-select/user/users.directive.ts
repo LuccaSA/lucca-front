@@ -187,13 +187,13 @@ export class LuCoreSelectUsersDirective<T extends LuCoreSelectUser = LuCoreSelec
 		const displayMe = this.displayMeOption() && !hasClue;
 		const prependMe = displayMe && page === 0;
 
-		this.select.loading = true;
+		this.select.loadingRef.set(true);
 
 		const me$ = prependMe ? this.getMe() : of(null);
 
 		const users$ = this.getOptions(params, page).pipe(
 			map((users) => ({ items: users, isLastPage: users.length < this.pageSize })),
-			tap(() => (this.select.loading = false)),
+			tap(() => this.select.loadingRef.set(false)),
 		);
 
 		const page$ = combineLatest([me$, users$]).pipe(

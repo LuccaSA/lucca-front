@@ -8,7 +8,7 @@ import {
 	EventEmitter,
 	inject,
 	input,
-	Input,
+	linkedSignal,
 	model,
 	OnDestroy,
 	OnInit,
@@ -21,7 +21,7 @@ import {
 } from '@angular/core';
 import { outputFromObservable, toSignal } from '@angular/core/rxjs-interop';
 import { ControlValueAccessor } from '@angular/forms';
-import { PortalContent } from '@lucca-front/ng/core';
+import { isNotNil, PortalContent, syncInputSignal, ɵeffectWithDeps } from '@lucca-front/ng/core';
 import { FILTER_PILL_HOST_COMPONENT, FILTER_PILL_INPUT_COMPONENT, FilterPillInputComponent } from '@lucca-front/ng/filter-pills';
 import { BehaviorSubject, defer, map, Observable, of, ReplaySubject, startWith, Subject, switchMap, take } from 'rxjs';
 import { LuSimpleSelectDefaultOptionComponent } from '../option';
@@ -73,25 +73,19 @@ export abstract class ALuSelectInputComponent<TOption, TValue> implements OnDest
 
 	private readonly inputElementRef = viewChild<ElementRef<HTMLInputElement>>('inputElement');
 
-	readonly placeholder$ = new BehaviorSubject('');
-
 	readonly disabled$ = new BehaviorSubject(false);
 	readonly filterPillDisabled = toSignal(this.disabled$, { initialValue: false });
 
 	readonly prefix = input<PortalContent | null>(null);
 
-	@Input()
-	set placeholder(value: string) {
-		this.placeholder$.next(value);
-	}
+	readonly placeholder = input<string>();
 
-	@Input({ transform: booleanAttribute })
-	set clearable(value: boolean) {
-		this.#inputClearable.set(value);
-	}
+	readonly clearableInput = input(false, { transform: booleanAttribute, alias: 'clearable' });
+
 	get clearable(): boolean {
 		return this.#clearable();
 	}
+
 	readonly #clearable = computed(() => this.#inputClearable() ?? this.#defaultFilterPillClearable() ?? this.#defaultClearable);
 	readonly #defaultFilterPillClearable = signal<boolean | null>(null);
 	readonly #inputClearable = signal<boolean | null>(null);
@@ -104,19 +98,13 @@ export abstract class ALuSelectInputComponent<TOption, TValue> implements OnDest
 	readonly #addOptionLabelInput = signal<PortalContent | null>(null);
 	protected readonly computedAddOptionLabel = computed(() => this.#addOptionLabelInput() ?? this.intl().addOption);
 
-	@Input()
-	set addOptionLabel(label: PortalContent) {
-		this.#addOptionLabelInput.set(label);
-	}
+	readonly addOptionLabelInput = input<PortalContent | null>(null, { alias: 'addOptionLabel' });
 
 	get addOptionLabel(): PortalContent {
 		return this.computedAddOptionLabel();
 	}
 
-	@Input()
-	set addOptionStrategy(strategy: CoreSelectAddOptionStrategy) {
-		this.addOptionStrategy$.next(strategy);
-	}
+	readonly addOptionStrategy = input<CoreSelectAddOptionStrategy>();
 
 	protected get isSelectedClass(): boolean {
 		return this.hasValue();
@@ -140,34 +128,15 @@ export abstract class ALuSelectInputComponent<TOption, TValue> implements OnDest
 		return this.overlayContainerRef.id;
 	}
 
-	@Input()
-	overlayConfig?: OverlayConfig = {
-		hasBackdrop: true,
-		backdropClass: 'cdk-overlay-transparent-backdrop',
-	};
+	readonly overlayConfig = input<OverlayConfig>({ hasBackdrop: true, backdropClass: 'cdk-overlay-transparent-backdrop' });
 
-	@Input() set loading(value: boolean) {
-		if (value !== this.loading) {
-			this.loading$.next(value);
-		}
-	}
+	readonly loading = input<boolean>(false);
 
-	@Input() set options(options: readonly TOption[]) {
-		this.options$.next(options);
-		if (this.panelRef) {
-			// We have to put it in a setTimeout so it'll be triggered AFTER the DOM is updated and not right now,
-			// which is before the panel size has been modified by the arrival of the new options
-			setTimeout(() => {
-				this.panelRef?.updatePosition();
-				this.updatePositionFn?.();
-				// If no fixes are found, last resort fix is here
-				// window.dispatchEvent(new Event('resize'));
-			});
-		}
-	}
+	readonly options = input<TOption[]>();
 
-	@Input() optionComparer: LuOptionComparer<TOption> = coreSelectDefaultOptionComparer;
-	@Input() optionKey: (option: TOption) => unknown = coreSelectDefaultOptionKey;
+	readonly optionComparer = input<LuOptionComparer<TOption>>(coreSelectDefaultOptionComparer);
+
+	readonly optionKey = input<(option: TOption) => unknown>(coreSelectDefaultOptionKey);
 
 	readonly noClueIcon = input(false, { transform: booleanAttribute });
 	readonly inputTabindex = input<number>(0);
@@ -179,6 +148,12 @@ export abstract class ALuSelectInputComponent<TOption, TValue> implements OnDest
 	protected get isNoClueIconClass(): boolean {
 		return this.noClueIcon();
 	}
+
+	readonly optionsRef = linkedSignal(() => this.options());
+	readonly loadingRef = linkedSignal(() => this.loading());
+	readonly clearableRef = linkedSignal(() => this.clearableInput());
+	readonly optionComparerRef = linkedSignal(() => this.optionComparer());
+	readonly optionKeyRef = linkedSignal(() => this.optionKey());
 
 	readonly optionTpl = model<TemplateRef<LuOptionContext<TOption>> | Type<unknown>>(LuSimpleSelectDefaultOptionComponent);
 	readonly valueTpl = model<TemplateRef<LuOptionContext<TOption>> | Type<unknown> | undefined>();
@@ -226,8 +201,8 @@ export abstract class ALuSelectInputComponent<TOption, TValue> implements OnDest
 		this.changeDetectorRef.markForCheck();
 	}
 
-	public get inputPlaceholder(): string | null {
-		return this.value ? null : this.placeholder$.value;
+	public get inputPlaceholder(): string | null | undefined {
+		return this.value ? null : this.placeholder();
 	}
 
 	public clueChanged(clue: string, skipPanelOpen = false): void {
@@ -281,6 +256,27 @@ export abstract class ALuSelectInputComponent<TOption, TValue> implements OnDest
 		if (this.filterPillHost) {
 			this.filterPillHost.registerInput(this);
 		}
+
+		syncInputSignal(this.addOptionStrategy, (strategy) => this.addOptionStrategy$.next(strategy));
+
+		ɵeffectWithDeps([this.loadingRef], (loading) => this.loading$.next(loading));
+		ɵeffectWithDeps([this.clearableRef], (clearable) => this.#inputClearable.set(clearable));
+		ɵeffectWithDeps([this.addOptionLabelInput], (addOptionLabel) => this.#addOptionLabelInput.set(addOptionLabel));
+		ɵeffectWithDeps([this.optionsRef], (options) => {
+			if (isNotNil(options)) {
+				this.options$.next(options);
+				if (this.panelRef) {
+					// We have to put it in a setTimeout so it'll be triggered AFTER the DOM is updated and not right now,
+					// which is before the panel size has been modified by the arrival of the new options
+					setTimeout(() => {
+						this.panelRef?.updatePosition();
+						this.updatePositionFn?.();
+						// If no fixes are found, last resort fix is here
+						// window.dispatchEvent(new Event('resize'));
+					});
+				}
+			}
+		});
 	}
 
 	onClickOpenPanel($event: Event) {

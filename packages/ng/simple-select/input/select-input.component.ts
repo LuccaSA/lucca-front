@@ -67,7 +67,7 @@ export class LuSimpleSelectInputComponent<T> extends ALuSelectInputComponent<T, 
 	protected panelRefFactory = inject(LuSimpleSelectPanelRefFactory);
 
 	protected buildPanelRef(): LuSelectPanelRef<T, T> {
-		return this.panelRefFactory.buildPanelRef(this, this.overlayConfig);
+		return this.panelRefFactory.buildPanelRef(this, this.overlayConfig());
 	}
 
 	inputSpace(event: Event): void {

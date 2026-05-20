@@ -85,7 +85,7 @@ export function runALuSelectInputComponentTestSuite<TValue>(config: LuSelectInpu
 
 	it('should not open the panel when clicking the clearer', () => {
 		// Arrange
-		component.clearable = true;
+		component.clearableRef.set(true);
 		component.writeValue(config.exampleValue);
 		fixture.detectChanges();
 

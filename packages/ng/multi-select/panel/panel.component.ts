@@ -65,8 +65,8 @@ export class LuMultiSelectPanelComponent<T> implements AfterViewInit, CoreSelect
 	treeGenerator = this.selectInput.treeGenerator;
 	readonly loading$ = this.selectInput.loading$;
 	searchable = this.selectInput.searchable;
-	optionComparer = this.selectInput.optionComparer;
-	optionKey = this.selectInput.optionKey;
+	readonly optionComparer = this.selectInput.optionComparer();
+	readonly optionKey = this.selectInput.optionKey();
 	intl = this.selectInput.intl;
 
 	trackOptionsBy: TrackByFunction<T> = (_, option) => this.optionKey(option);

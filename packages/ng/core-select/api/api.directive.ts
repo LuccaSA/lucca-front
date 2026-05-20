@@ -41,17 +41,17 @@ export abstract class ALuCoreSelectApiDirective<TOption, TParams = Record<string
 	protected abstract getOptions(params: TParams, page: number): Observable<TOption[]>;
 
 	public ngOnInit(): void {
-		if (this.select.optionComparer === coreSelectDefaultOptionComparer) {
-			this.select.optionComparer = this.optionComparer;
+		if (this.select.optionComparerRef() === coreSelectDefaultOptionComparer) {
+			this.select.optionComparerRef.set(this.optionComparer);
 		}
 
-		if (this.select.optionKey === coreSelectDefaultOptionKey) {
-			this.select.optionKey = this.optionKey;
+		if (this.select.optionKeyRef() === coreSelectDefaultOptionKey) {
+			this.select.optionKeyRef.set(this.optionKey);
 		}
 
 		this.buildOptions()
 			.pipe(takeUntil(this.destroy$))
-			.subscribe((options) => (this.select.options = options));
+			.subscribe((options) => this.select.optionsRef.set(options));
 	}
 
 	protected buildOptions(): Observable<TOption[]> {
@@ -64,7 +64,7 @@ export abstract class ALuCoreSelectApiDirective<TOption, TParams = Record<string
 			tap(([[wasOpen], [isOpen, clueIsPendingDebounce]]) => {
 				// Start the loader as soon as the panel is opened to avoid a short display of the "no result" message
 				if (!wasOpen && isOpen && clueIsPendingDebounce) {
-					this.select.loading = true;
+					this.select.loadingRef.set(true);
 				}
 			}),
 			map(([[wasOpen], [isOpen, clueIsPendingDebounce]]) => (isOpen && !wasOpen ? !clueIsPendingDebounce : isOpen)),
@@ -102,11 +102,11 @@ export abstract class ALuCoreSelectApiDirective<TOption, TParams = Record<string
 	}
 
 	protected getOptionsPage(params: TParams, page: number): Observable<{ items: TOption[]; isLastPage: boolean }> {
-		this.select.loading = true;
+		this.select.loadingRef.set(true);
 
 		return this.getOptions(params, page).pipe(
 			catchError(() => of([] as TOption[])),
-			tap(() => (this.select.loading = false)),
+			tap(() => this.select.loadingRef.set(false)),
 			map((items) => ({ items, isLastPage: items.length < this.pageSize })),
 		);
 	}
