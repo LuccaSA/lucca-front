@@ -56,7 +56,7 @@ export class LuUserMeOptionDirective<U extends ILuUser = ILuUser> implements ILu
 		this._service = hostService || selfService;
 
 		ɵeffectWithDeps([this.luUserMeOptionClue], (clue) => {
-			if (isNotNil(clue)) {
+			if (isNotNil(clue) && clue.length > 0) {
 				this.hideMe();
 			} else {
 				this.displayMe();

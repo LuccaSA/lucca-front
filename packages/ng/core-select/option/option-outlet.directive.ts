@@ -3,8 +3,8 @@ import { isNotNil, ɵeffectWithDeps } from '@lucca-front/ng/core';
 import { LuOptionContext } from '../select.model';
 import { LU_OPTION_CONTEXT, provideOptionContext } from './option.token';
 
-function hasRenderableValue<T>(value: T | undefined): value is T {
-	return isNotNil(value);
+function hasRenderableValue<T>(value: T | undefined, showNull: boolean): value is T {
+	return showNull ? value !== undefined : isNotNil(value);
 }
 
 @Directive({
@@ -27,15 +27,15 @@ export class LuOptionOutletDirective<T> implements OnDestroy {
 	constructor() {
 		let previousOutlet: Type<unknown> | TemplateRef<LuOptionContext<T>> | undefined;
 
-		ɵeffectWithDeps([this.luOptionOutlet, this.luOptionOutletValue], (outlet, value) => {
+		ɵeffectWithDeps([this.luOptionOutlet, this.luOptionOutletValue, this.luOptionShowNull], (outlet, value, showNull) => {
 			const outletChanged = outlet !== previousOutlet;
 			previousOutlet = outlet;
 
-			if (outletChanged || !hasRenderableValue(value)) {
+			if (outletChanged || !hasRenderableValue(value, showNull)) {
 				this.clearContainer();
 			}
 
-			if (outlet && hasRenderableValue(value)) {
+			if (outlet && hasRenderableValue(value, showNull)) {
 				if (!(this.embeddedViewRef || this.componentRef)) {
 					if (outlet instanceof TemplateRef) {
 						this.embeddedViewRef = this.viewContainerRef.createEmbeddedView(outlet, { $implicit: value }, { injector: this.injector });
