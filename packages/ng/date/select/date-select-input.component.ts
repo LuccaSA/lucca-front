@@ -37,10 +37,6 @@ export class LuDateSelectInputComponent<D> extends ALuSelectInputComponent<D> im
 
 	readonly placeHolderInput = input<string>('', { alias: 'placeholder' });
 
-	override set inputPlaceholder(p: string) {
-		this._placeholder = p;
-	}
-
 	readonly hideClearer = input<boolean>(false);
 
 	readonly startOn = input<D>();
@@ -68,7 +64,7 @@ export class LuDateSelectInputComponent<D> extends ALuSelectInputComponent<D> im
 		private _adapter: ALuDateAdapter<D>,
 	) {
 		super(_changeDetectorRef, _overlay, _elementRef, _viewContainerRef, _renderer);
-		this.overlapInput = true;
+		this.pickerOverlapRef.set(true);
 
 		syncInputSignal(this.startOn, (s) => {
 			this._startOn = s ?? this._adapter.forgeToday();
