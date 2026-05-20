@@ -781,8 +781,8 @@ const meta: Meta<LuSimpleSelectInputStoryComponent> = {
 	],
 	args: {
 		legumes: allLegumes,
-		clearable: true,
-		loading: false,
+		clearableInput: true,
+		loadingInput: false,
 		page: 1,
 	},
 	parameters: {

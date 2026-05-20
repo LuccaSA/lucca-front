@@ -871,9 +871,9 @@ const meta: Meta<LuMultiSelectInputStoryComponent> = {
 	],
 	args: {
 		legumes: allLegumes,
-		clearable: true,
+		clearableInput: true,
 		keepSearchAfterSelection: false,
-		loading: false,
+		loadingInput: false,
 		maxValuesShown: 500,
 		selectedLegumes: [],
 		page: 1,
