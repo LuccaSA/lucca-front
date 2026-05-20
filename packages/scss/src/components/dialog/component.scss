@@ -130,7 +130,7 @@
 			grid-template-areas: var(--components-dialog-insideHeaderAreas);
 			grid-template-columns: var(--components-dialog-insideHeaderColumns);
 			box-shadow: var(--components-dialog-inside-header-boxShadow);
-			gap: var(--pr-t-spacings-200);
+			gap: 0 var(--pr-t-spacings-200);
 			position: var(--components-dialog-inside-header-position);
 			z-index: 1;
 			grid-area: header;
@@ -140,6 +140,14 @@
 			position: var(--components-dialog-inside-header-button-position);
 			inset-block-start: var(--components-dialog-inside-header-button-insetBlockStart);
 			inset-inline-end: var(--components-dialog-inside-header-button-insetInlineEnd);
+		}
+
+		.dialog-inside-header-content {
+			grid-area: content;
+
+			&:empty {
+				display: none;
+			}
 		}
 
 		.dialog-inside-content {
