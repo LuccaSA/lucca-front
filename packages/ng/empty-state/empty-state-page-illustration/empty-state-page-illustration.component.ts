@@ -11,5 +11,5 @@ import { ChangeDetectionStrategy, Component, input, ViewEncapsulation } from '@a
 })
 export class EmptyStatePageIllustration {
 	readonly src = input<string | null>(null);
-	readonly alt = input<string | null>(null);
+	readonly alt = input<string | null>('');
 }
