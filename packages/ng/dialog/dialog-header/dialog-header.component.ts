@@ -1,7 +1,7 @@
 import { CdkDialogContainer } from '@angular/cdk/dialog';
 import { ChangeDetectionStrategy, Component, contentChild, Directive, ElementRef, inject, input, OnInit, Renderer2, ViewEncapsulation } from '@angular/core';
 import { ButtonComponent } from '@lucca-front/ng/button';
-import { intlInputOptions } from '@lucca-front/ng/core';
+import { intlInputOptions, PortalContent, PortalDirective } from '@lucca-front/ng/core';
 import { IconComponent } from '@lucca-front/ng/icon';
 import { LuDialogRef } from '../model';
 import { LU_DIALOG_HEADER_TRANSLATIONS } from './dialog-header.translate';
@@ -17,7 +17,7 @@ export class DialogHeaderAction {}
 @Component({
 	selector: 'lu-dialog-header',
 	standalone: true,
-	imports: [IconComponent, ButtonComponent],
+	imports: [IconComponent, ButtonComponent, PortalDirective],
 	templateUrl: './dialog-header.component.html',
 	changeDetection: ChangeDetectionStrategy.OnPush,
 	encapsulation: ViewEncapsulation.None,
@@ -41,6 +41,8 @@ export class DialogHeaderComponent implements OnInit {
 	}
 
 	optionalAction = contentChild(DialogHeaderAction);
+
+	readonly subtitle = input<PortalContent | null>(null);
 
 	ngOnInit(): void {
 		// Using setTimeout here to make sure this will be handled in the next Cd cycle, not the current one.

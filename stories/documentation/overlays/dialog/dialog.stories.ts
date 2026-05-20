@@ -57,9 +57,8 @@ export default {
 
 <ng-template #dialogTpl>
 	<lu-dialog #dialog${fancyIllustrationParam}>
-		<lu-dialog-header>
+		<lu-dialog-header subtitle="Subtitle">
 			<h1>Template driven header</h1>
-			<p class="dialog-inside-header-container-subtitle">Subtitle</p>
 			<p dialogHeaderContent>You can also add more content in header</p>
 		</lu-dialog-header>
 

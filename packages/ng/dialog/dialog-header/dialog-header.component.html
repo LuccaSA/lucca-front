@@ -9,6 +9,11 @@
 
 <div class="dialog-inside-header-container">
 	<ng-content />
+	@if (subtitle()) {
+		<p class="dialog-inside-header-container-subtitle">
+			<ng-container *luPortal="subtitle()" />
+		</p>
+	}
 </div>
 
 <div class="dialog-inside-header-content">
