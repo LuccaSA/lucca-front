@@ -2,6 +2,7 @@
 import { Overlay } from '@angular/cdk/overlay';
 import {
 	AfterViewInit,
+	booleanAttribute,
 	ChangeDetectionStrategy,
 	ChangeDetectorRef,
 	Component,
@@ -10,7 +11,8 @@ import {
 	ElementRef,
 	EventEmitter,
 	forwardRef,
-	Input,
+	input,
+	linkedSignal,
 	OnDestroy,
 	Renderer2,
 	viewChild,
@@ -19,6 +21,7 @@ import {
 import { outputFromObservable } from '@angular/core/rxjs-interop';
 import { ControlValueAccessor, NG_VALUE_ACCESSOR } from '@angular/forms';
 import { ALuClear, ILuClear } from '@lucca-front/ng/clear';
+import { isNotNil, ɵeffectWithDeps } from '@lucca-front/ng/core';
 import { ALuInputDisplayer, ILuInputDisplayer } from '@lucca-front/ng/input';
 import { ALuPickerPanel, ILuPickerPanel } from '@lucca-front/ng/picker';
 import { ALuSelectInput } from './select-input.model';
@@ -26,7 +29,7 @@ import { ALuSelectInput } from './select-input.model';
 @Directive({
 	host: {
 		'[tabindex]': 'tabindex',
-		'[class.is-disabled]': 'isDisabled',
+		'[class.is-disabled]': 'disabledInput()',
 		'[class.is-focused]': 'isFocused',
 		'[class.mod-multiple]': 'modMultiple',
 		'[class.is-clearable]': 'isClearable',
@@ -44,23 +47,15 @@ export abstract class ALuSelectInputComponent<T, TPicker extends ILuPickerPanel<
 
 	tabindex = 0;
 
-	@Input('pickerOverlap') set overlapInput(o: boolean) {
-		this.target.overlap = o;
-	}
+	readonly pickerOverlap = input(false, { transform: booleanAttribute });
 
-	@Input('placeholder') set inputPlaceholder(p: string) {
-		this._placeholder = p;
-	}
+	readonly placeholderInput = input<string>('', { alias: 'placeholder' });
 
-	@Input('multiple') set inputMultiple(m: boolean | string) {
-		if (m === '') {
-			// allows to have multiple = true when writing
-			// <lu-select multiple>
-			this.multiple = true;
-		} else {
-			this.multiple = !!m;
-		}
-	}
+	readonly multipleInput = input<boolean | string>(false, { alias: 'multiple' });
+
+	readonly disabledInput = input<boolean>(false, { alias: 'disabled' });
+
+	readonly pickerOverlapRef = linkedSignal(() => this.pickerOverlap());
 
 	readonly onOpen = new EventEmitter<void>();
 	readonly onClose = new EventEmitter<void>();
@@ -78,14 +73,22 @@ export abstract class ALuSelectInputComponent<T, TPicker extends ILuPickerPanel<
 		protected override _renderer: Renderer2,
 	) {
 		super(_changeDetectorRef, _overlay, _elementRef, _viewContainerRef, _renderer);
-	}
 
-	get isDisabled() {
-		return this.disabled;
-	}
-
-	@Input('disabled') set inputDisabled(d: boolean) {
-		this._disabled = d;
+		ɵeffectWithDeps([this.pickerOverlapRef], (pickerOverlap) => (this.target.overlap = pickerOverlap));
+		ɵeffectWithDeps([this.placeholderInput], (placeholder) => {
+			if (isNotNil(placeholder) && placeholder) {
+				this._placeholder = placeholder;
+			}
+		});
+		ɵeffectWithDeps([this.multipleInput], (multiple) => {
+			if (multiple === '') {
+				// allows to have multiple = true when writing
+				// <lu-select multiple>
+				this.multiple = true;
+			} else {
+				this.multiple = !!multiple;
+			}
+		});
 	}
 
 	get isFocused() {

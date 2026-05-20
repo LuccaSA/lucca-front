@@ -2,7 +2,7 @@ import { Overlay, OverlayModule } from '@angular/cdk/overlay';
 import { AfterViewInit, ChangeDetectionStrategy, ChangeDetectorRef, Component, ElementRef, forwardRef, input, Input, Renderer2, ViewContainerRef } from '@angular/core';
 import { ControlValueAccessor, NG_VALUE_ACCESSOR } from '@angular/forms';
 import { ClearComponent } from '@lucca-front/ng/clear';
-import { intlInputOptions } from '@lucca-front/ng/core';
+import { intlInputOptions, isNotNil, ɵeffectWithDeps } from '@lucca-front/ng/core';
 import { LuInputDisplayerDirective } from '@lucca-front/ng/input';
 import { LuForOptionsDirective, LuOptionComparer, LuOptionItemComponent, LuOptionPickerAdvancedComponent } from '@lucca-front/ng/option';
 import { ILuInputWithPicker } from '@lucca-front/ng/picker';
@@ -49,10 +49,7 @@ export class LuUserSelectInputComponent<U extends import('../../user.model').ILu
 {
 	searchFormat = LuDisplayFullname.lastfirst;
 
-	@Input('placeholder')
-	override set inputPlaceholder(p: string) {
-		this._placeholder = p;
-	}
+	readonly inputPlaceholder = input<string>('', { alias: 'placeholder' });
 
 	@Input() fields: string;
 	@Input() filters: string[];
@@ -76,5 +73,11 @@ export class LuUserSelectInputComponent<U extends import('../../user.model').ILu
 		protected override _renderer: Renderer2,
 	) {
 		super(_changeDetectorRef, _overlay, _elementRef, _viewContainerRef, _renderer);
+
+		ɵeffectWithDeps([this.inputPlaceholder], (placeholder) => {
+			if (isNotNil(placeholder) && placeholder) {
+				this._placeholder = placeholder;
+			}
+		});
 	}
 }
