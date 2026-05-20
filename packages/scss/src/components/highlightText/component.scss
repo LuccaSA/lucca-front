@@ -1,0 +1,30 @@
+@use '@lucca-front/scss/src/commons/utils/namespace';
+
+@mixin component($atRoot: namespace.$defaultAtRoot) {
+	padding-inline: 0.125em;
+	margin-inline: -0.125em;
+	background-repeat: no-repeat;
+	box-decoration-break: clone;
+	font-weight: inherit;
+	background-image:
+		linear-gradient(var(--components-highlightText-backgroundColor)),
+		linear-gradient(var(--components-highlightText-backgroundColor)),
+		radial-gradient(var(--components-highlightText-backgroundDiameter) circle at var(--components-highlightText-backgroundStart) var(--components-highlightText-backgroundEnd), var(--components-highlightText-backgroundColor) calc(50% - 1px), transparent 50%),
+		radial-gradient(var(--components-highlightText-backgroundDiameter) circle at var(--components-highlightText-backgroundEnd) var(--components-highlightText-backgroundEnd), var(--components-highlightText-backgroundColor) calc(50% - 1px), transparent 50%),
+		radial-gradient(var(--components-highlightText-backgroundDiameter) circle at var(--components-highlightText-backgroundStart) calc(100% - var(--components-highlightText-backgroundBlockSize) + var(--components-highlightText-backgroundRadius)), var(--components-highlightText-backgroundColor) calc(50% - 1px), transparent 50%),
+		radial-gradient(var(--components-highlightText-backgroundDiameter) circle at var(--components-highlightText-backgroundEnd) calc(100% - var(--components-highlightText-backgroundBlockSize) + var(--components-highlightText-backgroundRadius)), var(--components-highlightText-backgroundColor) calc(50% - 1px), transparent 50%);
+	background-size:
+		100% calc(var(--components-highlightText-backgroundBlockSize) - var(--components-highlightText-backgroundDiameter)),
+		calc(100% - var(--components-highlightText-backgroundDiameter)) var(--components-highlightText-backgroundBlockSize),
+		100% 100%,
+		100% 100%,
+		100% 100%,
+		100% 100%;
+	background-position:
+		50% calc(100% - var(--components-highlightText-backgroundRadius)),
+		50% 100%,
+		0 0,
+		0 0,
+		0 0,
+		0 0;
+}
