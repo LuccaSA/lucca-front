@@ -66,8 +66,8 @@ export class LuMultiSelectPanelComponent<T> implements AfterViewInit, CoreSelect
 	readonly loading = toSignal(this.selectInput.loading$);
 	readonly loading$ = this.selectInput.loading$;
 	searchable = this.selectInput.searchable;
-	optionComparer = this.selectInput.optionComparer;
-	optionKey = this.selectInput.optionKey;
+	readonly optionComparer = this.selectInput.optionComparer();
+	readonly optionKey = this.selectInput.optionKey();
 	intl = this.selectInput.intl;
 
 	trackOptionsBy: TrackByFunction<T> = (_, option) => this.optionKey(option);

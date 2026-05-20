@@ -159,7 +159,7 @@ export class LuMultiSelectInputComponent<T> extends ALuSelectInputComponent<T, T
 	}
 
 	protected override buildPanelRef(): LuMultiSelectPanelRef<T> {
-		return this.panelRefFactory.buildPanelRef(this, this.overlayConfig);
+		return this.panelRefFactory.buildPanelRef(this, this.overlayConfig());
 	}
 
 	protected override bindInputToPanelRefEvents(): void {
