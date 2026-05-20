@@ -1,5 +1,5 @@
 import { Directive, input, TemplateRef } from '@angular/core';
-import { syncInputSignal } from '@lucca-front/ng/core';
+import { ɵeffectWithDeps } from '@lucca-front/ng/core';
 import type { ALuSelectInputComponent } from '../input';
 import type { LuOptionContext } from '../select.model';
 
@@ -10,7 +10,7 @@ export class LuOptionDirective<TOption, TValue> {
 	readonly select = input<ALuSelectInputComponent<TOption, TValue>>(undefined, { alias: 'luOptionSelect' });
 
 	public constructor(private templateRef: TemplateRef<LuOptionContext<TOption>>) {
-		syncInputSignal(this.select, (select) => select.optionTpl.set(this.templateRef));
+		ɵeffectWithDeps([this.select], (select) => select?.optionTpl.set(this.templateRef));
 	}
 
 	public static ngTemplateContextGuard<TOption, TValue>(_dir: LuOptionDirective<TOption, TValue>, _ctx: unknown): _ctx is LuOptionContext<TOption> {
