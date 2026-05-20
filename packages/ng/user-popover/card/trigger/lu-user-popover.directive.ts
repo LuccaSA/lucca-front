@@ -22,15 +22,15 @@ export class LuUserPopoverDirective extends PopoverDirective {
 	constructor() {
 		super();
 		ɵeffectWithDeps([this.luUserPopoverDisabled], (luUserPopoverDisabled) => {
-			this.luPopoverDisabled = luUserPopoverDisabled;
+			this.luPopoverDisabledRef.set(luUserPopoverDisabled);
 		});
-		this.customPositions = [
+
+		this.customPositionsRef.set([
 			{ overlayX: 'start', overlayY: 'bottom', originX: 'start', originY: 'top' },
 			{ overlayX: 'start', overlayY: 'top', originX: 'start', originY: 'bottom' },
-		];
-
+		]);
 		this.luPopoverTrigger.set('hover+focus');
-		this.luPopoverNoCloseButton = true;
-		this.content = LuUserPopoverComponent;
+		this.luPopoverNoCloseButtonRef.set(true);
+		this.contentRef.set(LuUserPopoverComponent);
 	}
 }
