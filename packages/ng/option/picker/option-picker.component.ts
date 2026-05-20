@@ -29,6 +29,7 @@ import { delay, map, share } from 'rxjs/operators';
 import { ALuOptionItem } from '../item/option-item.model';
 import { ALuOptionPicker, ILuOptionPickerPanel, LuOptionComparer } from './option-picker.model';
 
+/* eslint-disable @angular-eslint/prefer-signals */
 /**
  * @deprecated
  */

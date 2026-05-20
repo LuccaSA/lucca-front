@@ -13,6 +13,7 @@ import { LuUserMeOptionDirective } from '../me';
 import { LuUserPagedSearcherComponent } from '../searcher';
 import { LU_USER_SELECT_INPUT_TRANSLATIONS } from './user-select-input.translate';
 
+/* eslint-disable @angular-eslint/prefer-signals */
 /**
  * @deprecated prefer SimpleSelect or MultipleSelect with luCustomUsers directive
  */
