@@ -28,7 +28,7 @@ export class LuDropdownTriggerDirective<_T> implements OnInit {
 
 	constructor() {
 		this.popover2.luPopoverNoCloseButtonRef.set(true);
-		if (!this.popover2.customPositionsRef() || this.popover2.customPositions.length === 0) {
+		if (!this.popover2.customPositionsRef()?.length) {
 			effect(() => {
 				this.popover2.customPositionsRef.set(this.legacyPositionBuilder(this.popover2.luPopoverPositionRef()));
 			});

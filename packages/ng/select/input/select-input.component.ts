@@ -89,6 +89,9 @@ export abstract class ALuSelectInputComponent<T, TPicker extends ILuPickerPanel<
 				this.multiple = !!multiple;
 			}
 		});
+		ɵeffectWithDeps([this.disabledInput], (disabled) => {
+			this.setDisabledState(disabled);
+		});
 	}
 
 	get isFocused() {
