@@ -59,6 +59,7 @@ export default {
 	<lu-dialog #dialog${fancyIllustrationParam}>
 		<lu-dialog-header>
 			<h1>Template driven header</h1>
+			<p class="dialog-inside-header-container-subtitle">Subtitle</p>
 			<p dialogHeaderContent>You can also add more content in header</p>
 		</lu-dialog-header>
 
