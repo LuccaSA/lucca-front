@@ -91,9 +91,9 @@ export const Basic: StoryObj<PopoverDirective> = {
 		luPopoverTrigger: 'click',
 		luPopoverCloseDelay: 300,
 		luPopoverOpenDelay: 300,
-		luPopoverDisabled: false,
+		luPopoverDisabledInput: false,
 		luPopoverPosition: 'above',
-		luPopoverNoCloseButton: false,
+		luPopoverNoCloseButtonInput: false,
 	},
 };
 export const CustomPosition: StoryObj<PopoverDirective> = {
@@ -177,9 +177,9 @@ export const CustomPosition: StoryObj<PopoverDirective> = {
 		luPopoverTrigger: 'click',
 		luPopoverCloseDelay: 300,
 		luPopoverOpenDelay: 300,
-		luPopoverDisabled: false,
+		luPopoverDisabledInput: false,
 		luPopoverPosition: 'above',
-		luPopoverNoCloseButton: false,
+		luPopoverNoCloseButtonInput: false,
 		overlayScrollStrategy: 'reposition',
 	},
 };

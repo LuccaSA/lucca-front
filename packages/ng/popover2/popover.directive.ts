@@ -95,16 +95,16 @@ export class PopoverDirective implements OnDestroy {
 
 	readonly overlayScrollStrategy = input<'reposition' | 'block' | 'close'>('reposition');
 
-	readonly luPopoverDisabled = input(false, { transform: booleanAttribute });
+	readonly luPopoverDisabledInput = input(false, { transform: booleanAttribute, alias: 'luPopoverDisabled' });
 
 	readonly luPopoverTrigger = model<'click' | 'click+hover' | 'hover+focus'>('click');
 
-	readonly customPositions = input<ConnectionPositionPair[]>();
+	readonly customPositionsInput = input<ConnectionPositionPair[] | null>(null, { alias: 'customPositions' });
 
 	/**
 	 * Removes close button entirely, this is bad for a11y but sometimes we want it.
 	 */
-	readonly luPopoverNoCloseButton = input(false, { transform: booleanAttribute });
+	readonly luPopoverNoCloseButtonInput = input(false, { transform: booleanAttribute, alias: 'luPopoverNoCloseButton' });
 
 	/**
 	 * Allows to anchor the popover to another element instead of the trigger one
@@ -127,10 +127,10 @@ export class PopoverDirective implements OnDestroy {
 
 	readonly luPopoverOpened = output<void>();
 
-	readonly contentRef = linkedSignal(() => this.luPopover2());
-	readonly luPopoverDisabledRef = linkedSignal(() => this.luPopoverDisabled());
-	readonly customPositionsRef = linkedSignal(() => this.customPositions());
-	readonly luPopoverNoCloseButtonRef = linkedSignal(() => this.luPopoverNoCloseButton());
+	readonly content = linkedSignal(() => this.luPopover2());
+	readonly luPopoverDisabled = linkedSignal(() => this.luPopoverDisabledInput());
+	readonly customPositions = linkedSignal(() => this.customPositionsInput());
+	readonly luPopoverNoCloseButton = linkedSignal(() => this.luPopoverNoCloseButtonInput());
 
 	#listenToMouseLeave = false;
 	#listenToMouseEnter = true;
@@ -232,16 +232,16 @@ export class PopoverDirective implements OnDestroy {
 	}
 
 	openPopover(withBackdrop = false, disableCloseButtonFocus = false, disableInitialTriggerFocus = false): void {
-		const content = this.contentRef();
+		const content = this.content();
 
-		if (!this.opened() && !this.luPopoverDisabledRef() && isNotNil(content)) {
+		if (!this.opened() && !this.luPopoverDisabled() && isNotNil(content)) {
 			this.opened.set(true);
 			this.luPopoverOpened.emit();
 			this.#overlayRef = this.overlay.create({
 				positionStrategy: this.overlay
 					.position()
 					.flexibleConnectedTo(this.luPopoverAnchor())
-					.withPositions(this.customPositionsRef() || this.#buildPositions()),
+					.withPositions(this.customPositions() || this.#buildPositions()),
 				scrollStrategy: this.overlay.scrollStrategies[this.overlayScrollStrategy() ?? 'reposition'](),
 				hasBackdrop: withBackdrop,
 				backdropClass: '',
@@ -262,7 +262,7 @@ export class PopoverDirective implements OnDestroy {
 				triggerElement: this.elementRef.nativeElement,
 				disableCloseButtonFocus: disableCloseButtonFocus,
 				disableInitialTriggerFocus: disableInitialTriggerFocus,
-				noCloseButton: this.luPopoverNoCloseButtonRef(),
+				noCloseButton: this.luPopoverNoCloseButton(),
 			};
 			this.#componentRef = this.#overlayRef.attach(
 				new ComponentPortal(
