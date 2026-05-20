@@ -27,10 +27,10 @@ export class LuDropdownTriggerDirective<_T> implements OnInit {
 	readonly inputPanel = input<TemplateRef<unknown> | Type<unknown> | ALuPopoverPanel>(undefined, { alias: 'luDropdown' });
 
 	constructor() {
-		this.popover2.luPopoverNoCloseButtonRef.set(true);
-		if (!this.popover2.customPositionsRef()?.length) {
+		this.popover2.luPopoverNoCloseButton.set(true);
+		if (!this.popover2.customPositions()?.length) {
 			effect(() => {
-				this.popover2.customPositionsRef.set(this.legacyPositionBuilder(this.popover2.luPopoverPositionRef()));
+				this.popover2.customPositions.set(this.legacyPositionBuilder(this.popover2.luPopoverPositionRef()));
 			});
 		}
 
@@ -40,10 +40,10 @@ export class LuDropdownTriggerDirective<_T> implements OnInit {
 			}
 
 			if (p instanceof ALuPopoverPanel) {
-				this.popover2.contentRef.set(p.templateRef);
+				this.popover2.content.set(p.templateRef);
 				p.close.pipe(takeUntilDestroyed(this.#destroyRef)).subscribe(() => this.popover2.close());
 			} else {
-				this.popover2.contentRef.set(p);
+				this.popover2.content.set(p);
 			}
 		});
 	}
