@@ -38,10 +38,10 @@ describe('CoreSelectApiV3Directive', () => {
 			nextPage$: new Subject<void>(),
 			clueChange$: new Subject<string>(),
 			loading$: new BehaviorSubject(false),
-			optionComparerRef: signal(coreSelectDefaultOptionComparer),
-			optionKeyRef: signal(coreSelectDefaultOptionKey),
-			optionsRef: signal([]),
-			loadingRef: signal(false),
+			optionComparer: signal(coreSelectDefaultOptionComparer),
+			optionKey: signal(coreSelectDefaultOptionKey),
+			options: signal([]),
+			loading: signal(false),
 		} as unknown as LuSimpleSelectInputComponent<ILuApiItem>;
 
 		TestBed.configureTestingModule({
@@ -104,7 +104,7 @@ describe('CoreSelectApiV3Directive', () => {
 		});
 		tick();
 
-		expect(selectMock.optionsRef()).toEqual(itemsMocks.slice(0, LU_SELECT_MAGIC_PAGE_SIZE * 2));
+		expect(selectMock.options()).toEqual(itemsMocks.slice(0, LU_SELECT_MAGIC_PAGE_SIZE * 2));
 	}));
 
 	it('should call http.get when clue changes and reset options and page', fakeAsync(() => {
@@ -136,6 +136,6 @@ describe('CoreSelectApiV3Directive', () => {
 		});
 		tick();
 
-		expect(selectMock.optionsRef()).toEqual(itemsMocks.slice(0, 5));
+		expect(selectMock.options()).toEqual(itemsMocks.slice(0, 5));
 	}));
 });

@@ -19,9 +19,9 @@ import {
 	Type,
 	viewChild,
 } from '@angular/core';
-import { outputFromObservable, toSignal } from '@angular/core/rxjs-interop';
+import { outputFromObservable, toObservable, toSignal } from '@angular/core/rxjs-interop';
 import { ControlValueAccessor } from '@angular/forms';
-import { isNotNil, PortalContent, syncInputSignal, ɵeffectWithDeps } from '@lucca-front/ng/core';
+import { isNotNil, PortalContent, ɵeffectWithDeps } from '@lucca-front/ng/core';
 import { FILTER_PILL_HOST_COMPONENT, FILTER_PILL_INPUT_COMPONENT, FilterPillInputComponent } from '@lucca-front/ng/filter-pills';
 import { BehaviorSubject, defer, map, Observable, of, ReplaySubject, startWith, Subject, switchMap, take } from 'rxjs';
 import { LuSimpleSelectDefaultOptionComponent } from '../option';
@@ -38,7 +38,7 @@ export const coreSelectDefaultOptionKey: (option: unknown) => unknown = (option)
 	host: {
 		'[class.colorPicker]': 'colorPicker()',
 		'[class.mod-compact]': 'compact()',
-		'[class.is-clearable]': 'clearable',
+		'[class.is-clearable]': 'isClearable()',
 		'[class.is-selected]': 'isSelectedClass',
 		'[class.is-searchFilled]': 'isSearchFilledClass',
 		'[class.mod-noClueIcon]': 'isNoClueIconClass',
@@ -82,21 +82,15 @@ export abstract class ALuSelectInputComponent<TOption, TValue> implements OnDest
 
 	readonly clearableInput = input(false, { transform: booleanAttribute, alias: 'clearable' });
 
-	get clearable(): boolean {
-		return this.#clearable();
-	}
-
-	readonly #clearable = computed(() => this.#inputClearable() ?? this.#defaultFilterPillClearable() ?? this.#defaultClearable);
+	readonly isClearable = computed(() => this.clearableInput() ?? this.#defaultFilterPillClearable() ?? this.#defaultClearable);
 	readonly #defaultFilterPillClearable = signal<boolean | null>(null);
-	readonly #inputClearable = signal<boolean | null>(null);
 	#defaultClearable = false;
 
 	get searchable(): boolean {
 		return this.clueChange$.observed;
 	}
 
-	readonly #addOptionLabelInput = signal<PortalContent | null>(null);
-	protected readonly computedAddOptionLabel = computed(() => this.#addOptionLabelInput() ?? this.intl().addOption);
+	protected readonly computedAddOptionLabel = computed(() => this.addOptionLabelInput() ?? this.intl().addOption);
 
 	readonly addOptionLabelInput = input<PortalContent | null>(null, { alias: 'addOptionLabel' });
 
@@ -104,7 +98,7 @@ export abstract class ALuSelectInputComponent<TOption, TValue> implements OnDest
 		return this.computedAddOptionLabel();
 	}
 
-	readonly addOptionStrategy = input<CoreSelectAddOptionStrategy>();
+	readonly addOptionStrategy = input<CoreSelectAddOptionStrategy>('never');
 
 	protected get isSelectedClass(): boolean {
 		return this.hasValue();
@@ -130,15 +124,16 @@ export abstract class ALuSelectInputComponent<TOption, TValue> implements OnDest
 
 	readonly overlayConfig = input<OverlayConfig>({ hasBackdrop: true, backdropClass: 'cdk-overlay-transparent-backdrop' });
 
-	readonly loading = input<boolean>(false);
+	readonly loadingInput = input<boolean>(false, { alias: 'loading' });
 
-	readonly options = input<TOption[]>();
+	readonly optionsInput = input<TOption[] | null>(null, { alias: 'options' });
 
-	readonly optionComparer = input<LuOptionComparer<TOption>>(coreSelectDefaultOptionComparer);
+	readonly optionComparerInput = input<LuOptionComparer<TOption>>(coreSelectDefaultOptionComparer, { alias: 'optionComparer' });
 
-	readonly optionKey = input<(option: TOption) => unknown>(coreSelectDefaultOptionKey);
+	readonly optionKeyInput = input<(option: TOption) => unknown>(coreSelectDefaultOptionKey, { alias: 'optionKey' });
 
 	readonly noClueIcon = input(false, { transform: booleanAttribute });
+
 	readonly inputTabindex = input<number>(0);
 
 	readonly compact = input(false, { transform: booleanAttribute });
@@ -149,11 +144,11 @@ export abstract class ALuSelectInputComponent<TOption, TValue> implements OnDest
 		return this.noClueIcon();
 	}
 
-	readonly optionsRef = linkedSignal(() => this.options());
-	readonly loadingRef = linkedSignal(() => this.loading());
-	readonly clearableRef = linkedSignal(() => this.clearableInput());
-	readonly optionComparerRef = linkedSignal(() => this.optionComparer());
-	readonly optionKeyRef = linkedSignal(() => this.optionKey());
+	readonly options = linkedSignal(() => this.optionsInput());
+	readonly loading = linkedSignal(() => this.loadingInput());
+	readonly clearable = linkedSignal(() => this.clearableInput());
+	readonly optionComparer = linkedSignal(() => this.optionComparerInput());
+	readonly optionKey = linkedSignal(() => this.optionKeyInput());
 
 	readonly optionTpl = model<TemplateRef<LuOptionContext<TOption>> | Type<unknown>>(LuSimpleSelectDefaultOptionComponent);
 	readonly valueTpl = model<TemplateRef<LuOptionContext<TOption>> | Type<unknown> | undefined>();
@@ -188,7 +183,7 @@ export abstract class ALuSelectInputComponent<TOption, TValue> implements OnDest
 
 	public readonly valueSignal = signal<TValue | null>(null);
 	readonly isFilterPillEmpty = computed(() => this.valueSignal() === null);
-	readonly isFilterPillClearable = computed(() => this.#clearable());
+	readonly isFilterPillClearable = computed(() => this.isClearable());
 
 	public get value(): TValue | null {
 		return this._value;
@@ -219,14 +214,14 @@ export abstract class ALuSelectInputComponent<TOption, TValue> implements OnDest
 	protected _value: TValue | null = null;
 
 	readonly options$ = new ReplaySubject<readonly TOption[]>(1);
-	readonly loading$ = new BehaviorSubject(false);
+	readonly loading$ = toObservable(this.loading);
+
 	clue: string | null = null;
 	// This is the clue stored after we selected an option to know if we should emit an empty clue on open or not
 	lastEmittedClue: string = '';
 	readonly clue$ = defer(() => this.clueChange$.pipe(startWith(this.clue)));
 
-	readonly addOptionStrategy$ = new BehaviorSubject<CoreSelectAddOptionStrategy>('never');
-	shouldDisplayAddOption$ = this.addOptionStrategy$.pipe(
+	shouldDisplayAddOption$ = toObservable(this.addOptionStrategy).pipe(
 		switchMap((strategy) => {
 			switch (strategy) {
 				case 'always':
@@ -257,12 +252,7 @@ export abstract class ALuSelectInputComponent<TOption, TValue> implements OnDest
 			this.filterPillHost.registerInput(this);
 		}
 
-		syncInputSignal(this.addOptionStrategy, (strategy) => this.addOptionStrategy$.next(strategy));
-
-		ɵeffectWithDeps([this.loadingRef], (loading) => this.loading$.next(loading));
-		ɵeffectWithDeps([this.clearableRef], (clearable) => this.#inputClearable.set(clearable));
-		ɵeffectWithDeps([this.addOptionLabelInput], (addOptionLabel) => this.#addOptionLabelInput.set(addOptionLabel));
-		ɵeffectWithDeps([this.optionsRef], (options) => {
+		ɵeffectWithDeps([this.options], (options) => {
 			if (isNotNil(options)) {
 				this.options$.next(options);
 				if (this.panelRef) {
