@@ -7,19 +7,46 @@
 	inline-size: var(--components-softwareIcon-size);
 	block-size: var(--components-softwareIcon-size);
 
-	svg {
-		display: block;
-		inline-size: 100%;
-		block-size: 100%;
-		overflow: visible;
-	}
-
 	@at-root ($atRoot) {
+		.softwareIcon-illustration-bubble {
+			stroke: var(--components-softwareIcon-illustration-bubble-stoke);
+			stroke-width: var(--components-softwareIcon-illustration-bubble-stokeWidth);
+		}
+
 		.softwareIconWrapper {
 			display: flex;
 			flex-wrap: wrap;
 			align-items: center;
-			gap: 0;
+
+			.softwareIcon,
+			.softwareIconWrapper-action {
+				--components-softwareIcon-illustration-bubble-stoke: var(--palettes-neutral-0);
+				--components-softwareIcon-illustration-bubble-stokeWidth: 4px;
+
+				// à déplacer sur les li ?
+				margin-inline-end: var(--components-softwareIconWrapper-overlap);
+				transform: scale(var(--components-softwareIconWrapper-scale));
+				transition-property: transform;
+				transition-duration: var(--commons-animations-durations-fast);
+				display: block;
+
+				// à supprimer
+				svg {
+					overflow: visible;
+
+					path:first-child {
+						stroke: var(--palettes-neutral-0);
+						stroke-width: 4px;
+					}
+				}
+
+				// à déporter dans states
+				&:hover {
+					--components-softwareIconWrapper-scale: 1.1;
+
+					z-index: 1;
+				}
+			}
 		}
 
 		.softwareIconWrapper-action-illustration {
@@ -29,38 +56,18 @@
 		.softwareIconWrapper-action {
 			@include reset.button;
 
-			display: flex;
-			align-items: center;
-			justify-content: center;
+			// à ajuster
+			border-radius: 68% 35% 45% 55% / 40% 40% 64% 60%;
 		}
 
 		.softwareIconWrapper-action-more {
 			position: absolute;
+			inset: 0;
+			display: grid;
+			place-items: center;
 			font-family: var(--pr-t-font-family-brand);
 			font-size: var(--pr-t-font-fontSize-200);
 			font-weight: var(--pr-t-font-fontWeight-semibold);
-		}
-
-		.softwareIcon,
-		.softwareIconWrapper-action {
-			margin-inline-end: var(--components-softwareIconWrapper-overlap);
-			margin-block-end: var(--components-softwareIconWrapper-overlap);
-			transform: scale(var(--components-softwareIconWrapper-scale));
-			transition:
-				transform var(--commons-animations-durations-fast),
-				z-index var(--commons-animations-durations-fast);
-
-			svg path:first-child {
-				stroke: var(--palettes-neutral-0);
-				stroke-width: 4px;
-			}
-
-			&:hover,
-			&:focus {
-				--components-softwareIconWrapper-scale: 1.1;
-
-				z-index: 1;
-			}
 		}
 
 		.softwareIconWrapper-action {
@@ -68,9 +75,18 @@
 			block-size: var(--components-softwareIcon-size);
 		}
 
-		.popover-contentOptional {
+		.softwareIconWrapper_popover {
+			@include reset.list;
+
 			display: grid;
-			grid-template-columns: repeat(8, 1fr);
+			max-inline-size: calc((var(--components-softwareIcon-size) + var(--pr-t-spacings-50)) * 8 - var(--pr-t-spacings-50));
+			box-sizing: content-box;
+			gap: var(--pr-t-spacings-50);
+			grid-template-columns: repeat(auto-fit, minmax(var(--components-softwareIcon-size), 1fr));
+
+			.softwareIcon {
+				display: block;
+			}
 		}
 	}
 }

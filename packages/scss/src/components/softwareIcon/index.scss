@@ -53,12 +53,47 @@
 	}
 }
 
-@layer mods {
-	.softwareIcon,
-	.softwareIconWrapper-action {
+.softwareIcon,
+.softwareIconWrapper-action {
+	@layer mods {
 		&:hover {
-			--components-softwareIconWrapper-scale: 1.1;
-			--components-softwareIcon-zIndex: 1;
+			@include hover;
+		}
+	}
+}
+
+.softwareIconWrapper_popover {
+	@layer components {
+		@include varsPopover;
+	}
+
+	@layer mods {
+		&.mod-XXS {
+			&,
+			.softwareIcon {
+				@include XXS;
+			}
+		}
+
+		&.mod-XS {
+			&,
+			.softwareIcon {
+				@include XS;
+			}
+		}
+
+		&.mod-S {
+			&,
+			.softwareIcon {
+				@include S;
+			}
+		}
+
+		&.mod-L {
+			&,
+			.softwareIcon {
+				@include L;
+			}
 		}
 	}
 }

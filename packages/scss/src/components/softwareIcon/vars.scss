@@ -1,5 +1,7 @@
 @mixin vars {
 	--components-softwareIcon-size: var(--pr-t-spacings-500);
+	--components-softwareIcon-illustration-bubble-stoke: transparent;
+	--components-softwareIcon-illustration-bubble-stokeWidth: 0px;
 }
 
 @mixin varsWrapper {
@@ -7,4 +9,8 @@
 	--components-softwareIconWrapper-scale: 1;
 	--components-softwareIconWrapper-overlap: calc(var(--pr-t-spacings-75) * -1);
 	--components-softwareIcon-zIndex: auto;
+}
+
+@mixin varsPopover {
+	--components-softwareIcon-size: var(--pr-t-spacings-500);
 }

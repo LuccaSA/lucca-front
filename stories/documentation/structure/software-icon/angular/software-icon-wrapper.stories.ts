@@ -19,7 +19,7 @@ export default {
 			description: "Nombre maximum d'icônes à afficher. Les icônes supplémentaires sont cachées.",
 		},
 		size: {
-			options: ['XXS', 'XS', 'S', 'L'],
+			options: ['XXS', 'XS', 'S', '', 'L'],
 			control: {
 				type: 'select',
 			},
@@ -39,18 +39,18 @@ export const Basic: StoryObj<SoftwareIconWrapperComponent> = {
 		},
 		template: `
 			<lu-software-icon-wrapper [max]="max" [size]="size">
-				<lu-software-icon icon="analytics" />
-				<lu-software-icon icon="ask-lucca" />
-				<lu-software-icon icon="office" />
-				<lu-software-icon icon="absences" />
-				<lu-software-icon icon="lucca" />
-				<lu-software-icon icon="analytics" />
-				<lu-software-icon icon="mood" />
-				<lu-software-icon icon="client-center" />
-				<lu-software-icon icon="cloud-control" />
-				<lu-software-icon icon="engagement" />
-				<lu-software-icon icon="timesheet" />
-				<lu-software-icon icon="compensation" />
+				<li><lu-software-icon icon="analytics" /></li>
+				<li><lu-software-icon icon="ask-lucca" /></li>
+				<li><lu-software-icon icon="office" /></li>
+				<li><lu-software-icon icon="absences" /></li>
+				<li><lu-software-icon icon="lucca" /></li>
+				<li><lu-software-icon icon="analytics" /></li>
+				<li><lu-software-icon icon="mood" /></li>
+				<li><lu-software-icon icon="client-center" /></li>
+				<li><lu-software-icon icon="cloud-control" /></li>
+				<li><lu-software-icon icon="engagement" /></li>
+				<li><lu-software-icon icon="timesheet" /></li>
+				<li><lu-software-icon icon="compensation" /></li>
 			</lu-software-icon-wrapper>
 		`,
 	}),
