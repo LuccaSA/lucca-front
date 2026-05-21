@@ -57,7 +57,7 @@ git show <hash> -- packages/prisme/<composant>/ packages/ng/<composant>/ package
 
 Ignorer les commits de type : merge, fix conflicts, stories, linter, tests, build.
 
-### 4. Classer les changements
+### 3. Classer les changements
 
 Pour chaque commit ou diff relevé, le classer dans la bonne section :
 
@@ -71,7 +71,7 @@ Pour chaque commit ou diff relevé, le classer dans la bonne section :
 
 N'inclure que les sections qui ont du contenu.
 
-### 5. Rédiger les entrées
+### 4. Rédiger les entrées
 
 - Écrire en anglais.
 - Commencer par le nom de la fonctionnalité concernée en backticks (ex. `` `critical` input ``), suivi d'une description courte et claire.
