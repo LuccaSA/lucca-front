@@ -8,5 +8,13 @@
   },
   "minor": {
     "enabled": false
-  }
+  },
+  "packageRules": [
+    {
+      "description": "Disable pinning for npm dependencies (override best-practices)",
+      "matchManagers": ["npm"],
+      "matchPackageNames": ["*"],
+      "rangeStrategy": "in-range-only"
+    }
+  ]
 }
