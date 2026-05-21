@@ -48,15 +48,15 @@
     "i18n:update": "lucca translate && prettier --write 'packages/ng/**/translations.ts'"
   },
   "dependencies": {
-    "@angular/animations": "^21.0.5",
+    "@angular/animations": "^22.0.0-rc.1",
     "@angular/cdk": "^21.0.3",
-    "@angular/common": "^21.0.5",
-    "@angular/compiler": "^21.0.5",
-    "@angular/core": "^21.0.5",
-    "@angular/forms": "^21.0.5",
-    "@angular/platform-browser": "^21.0.5",
-    "@angular/platform-browser-dynamic": "^21.0.5",
-    "@angular/router": "^21.0.5",
+    "@angular/common": "^22.0.0-rc.1",
+    "@angular/compiler": "^22.0.0-rc.1",
+    "@angular/core": "^22.0.0-rc.1",
+    "@angular/forms": "^22.0.0-rc.1",
+    "@angular/platform-browser": "^22.0.0-rc.1",
+    "@angular/platform-browser-dynamic": "^22.0.0-rc.1",
+    "@angular/router": "^22.0.0-rc.1",
     "@lexical/history": "^0.42.0",
     "@lexical/html": "^0.42.0",
     "@lexical/link": "^0.42.0",
@@ -78,13 +78,13 @@
     "zone.js": "~0.15.0"
   },
   "devDependencies": {
-    "@angular-devkit/architect": "^0.2102.0",
-    "@angular-devkit/build-angular": "^21.0.3",
-    "@angular-devkit/core": "^21.0.3",
-    "@angular-devkit/schematics": "^21.0.3",
+    "@angular-devkit/architect": "^0.2200.0-rc.0",
+    "@angular-devkit/build-angular": "^22.0.0-rc.0",
+    "@angular-devkit/core": "^22.0.0-rc.0",
+    "@angular-devkit/schematics": "^22.0.0-rc.0",
     "@angular-eslint/schematics": "^21.0.3",
-    "@angular/cli": "^21.0.3",
-    "@angular/compiler-cli": "^21.0.3",
+    "@angular/cli": "^22.0.0-rc.0",
+    "@angular/compiler-cli": "^22.0.0-rc.1",
     "@compodoc/compodoc": "^1.1.16",
     "@jsdevtools/coverage-istanbul-loader": "^3.0.5",
     "@lucca-front/eslint-plugin": "workspace:*",
@@ -126,7 +126,7 @@
     "mdx-loader": "^1.1.1",
     "mini-css-extract-plugin": "^2.10.0",
     "msw": "^2.3.0",
-    "ng-packagr": "^21.0.0",
+    "ng-packagr": "^22.0.0-rc.0",
     "postcss": "8.5.3",
     "postcss-scss": "^4.0.6",
     "postcss-selector-parser": "7.1.0",
@@ -136,7 +136,7 @@
     "storybook": "^10.1.9",
     "stylelint": "^17.4.0",
     "ts-node": "~10.9.1",
-    "typescript": "5.9.3",
+    "typescript": "6.0.3",
     "typescript-eslint": "^8.49.0"
   },
   "optionalDependencies": {
@@ -146,7 +146,7 @@
     "@nx/nx-win32-x64-msvc": "^21.2.0"
   },
   "volta": {
-    "node": "24.13.0"
+    "node": "24.15.0"
   },
   "msw": {
     "workerDirectory": ".storybook/public"
