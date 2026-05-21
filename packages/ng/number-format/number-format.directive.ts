@@ -1,12 +1,11 @@
 // Based on Intl number input
 // (more info: https://dm4t2.github.io/)
 
-import { computed, Directive, ElementRef, forwardRef, inject, input, Renderer2, signal } from '@angular/core';
-import type { ControlValueAccessor } from '@angular/forms';
-import { NG_VALUE_ACCESSOR } from '@angular/forms';
+import { computed, Directive, ElementRef, inject, input, model, Renderer2, signal } from '@angular/core';
+import { FormValueControl } from '@angular/forms/signals';
 import { NumberFormat } from './number-format';
 import { NumberFormatOptions } from './number-format.models';
-
+//		'
 @Directive({
 	selector: 'input[luNumberFormatInput]',
 	host: {
@@ -14,56 +13,31 @@ import { NumberFormatOptions } from './number-format.models';
 		'(blur)': 'lostFocus()',
 		'(input)': 'input()',
 	},
-	providers: [
-		{
-			provide: NG_VALUE_ACCESSOR,
-			useExisting: forwardRef(() => NumberFormatDirective),
-			multi: true,
-		},
-	],
 })
-export class NumberFormatDirective implements ControlValueAccessor {
+export class NumberFormatDirective implements FormValueControl<number | null> {
 	readonly #inputElement = inject<ElementRef<HTMLInputElement>>(ElementRef<HTMLInputElement>).nativeElement;
 	readonly #renderer = inject(Renderer2);
 
-	readonly #value = signal<number | undefined | null>(null);
+	readonly value = model(null);
+	readonly touched = model<boolean>(false);
 	readonly #isFocused = signal<boolean>(false);
 
 	readonly formatOptions = input.required<NumberFormatOptions>();
-	readonly #numberFormat = computed(() => {
-		return new NumberFormat(this.formatOptions());
-	});
-
-	onChange: (_value: number | undefined | null) => void = () => {};
-
-	onTouched: () => void = (): void => {};
-
-	writeValue(value: number | undefined | null): void {
-		value = this.#numberFormat().applyRange(value);
-		this.#value.set(value);
-		this.#inputElement.value = this.#isFocused() ? this.#numberFormat().getFocusFormat(value) : this.#numberFormat().getBlurFormat(value);
-	}
-
-	registerOnChange(fn: (_value: number | undefined | null) => void): void {
-		this.onChange = fn;
-	}
-
-	registerOnTouched(fn: () => void): void {
-		this.onTouched = fn;
-	}
+	readonly #numberFormat = computed(() => new NumberFormat(this.formatOptions()));
 
 	setDisabledState(isDisabled: boolean): void {
 		this.#renderer.setProperty(this.#inputElement, 'disabled', isDisabled);
 	}
+
 	focus(): void {
 		this.#isFocused.set(true);
-		this.#inputElement.value = this.#numberFormat().getFocusFormat(this.#value());
+		this.#inputElement.value = this.#numberFormat().getFocusFormat(this.value());
 	}
 
 	lostFocus(): void {
 		this.#isFocused.set(false);
-		this.#inputElement.value = this.#numberFormat().getBlurFormat(this.#value());
-		this.onTouched();
+		this.#inputElement.value = this.#numberFormat().getBlurFormat(this.value());
+		this.touched.set(true);
 	}
 
 	input(): void {
@@ -71,8 +45,6 @@ export class NumberFormatDirective implements ControlValueAccessor {
 
 		this.#inputElement.value = parsedInput.cleanInput;
 
-		this.#value.set(parsedInput.value);
-
-		this.onChange?.(parsedInput.value);
+		this.value.set(parsedInput.value);
 	}
 }

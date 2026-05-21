@@ -38,13 +38,17 @@
 	}
 
 	<div class="textField-input">
+		<!--
+			The input used to work with type="text"
+			 If we keep the text type the first keyboard entry is inserted into the ngModel
+		-->
 		<input
 			luInput
 			luNumberFormatInput
 			[formatOptions]="formatOptions()"
 			[min]="min()"
 			[max]="max()"
-			type="text"
+			type="number"
 			inputmode="decimal"
 			class="textField-input-value"
 			[placeholder]="placeholder()"
