@@ -2,7 +2,7 @@ import { JsonPipe } from '@angular/common';
 import { ChangeDetectionStrategy, Component, signal } from '@angular/core';
 import { toSignal } from '@angular/core/rxjs-interop';
 import { FormControl, ReactiveFormsModule } from '@angular/forms';
-import { form, FormField } from '@angular/forms/signals';
+import { form, FormField, required } from '@angular/forms/signals';
 import { FormFieldComponent, InputDirective } from '@lucca-front/ng/form-field';
 import {
 	CheckboxInputComponent,
@@ -40,6 +40,7 @@ import { StoryModelDisplayComponent } from 'stories/helpers/story-model-display.
 		RadioComponent,
 		SegmentedControlComponent,
 		SegmentedControlFilterComponent,
+		FormField,
 		// Compat directives
 		// TextInputCompatDirective,
 		// TextareaInputCompatDirective,
@@ -68,7 +69,9 @@ class SignalFormFieldStory {
 	compatTextareaForm = new FormControl('Textarea compat');
 	compatNumberForm = new FormControl<number | null>(42);
 	compatNumberFormatForm = new FormControl<number | null>(1234.56);
-	compatSwitchForm = new FormControl(false);
+	switchForm = form(signal(false), (schemaPath) => {
+		required(schemaPath, { message: 'This switch field is required' });
+	});
 	compatCheckboxForm = new FormControl(false);
 	compatRadioForm = new FormControl<string | null>(null);
 	compatSegmentedForm = new FormControl<string | null>(null);
