@@ -9,8 +9,8 @@
     <ItemGroup>
         <PackageReference Include="Lucca.Tests.E2e.Abstractions" Version="2.4.1" />
         <PackageReference Include="Lucca.Tests.E2e.Playwright" Version="2.4.1" />
-        <PackageReference Include="Microsoft.Extensions.Configuration" Version="6.0.0" />
-        <PackageReference Include="Microsoft.Extensions.Configuration.Json" Version="6.0.0" />
+        <PackageReference Include="Microsoft.Extensions.Configuration" Version="6.0.2" />
+        <PackageReference Include="Microsoft.Extensions.Configuration.Json" Version="6.0.1" />
         <PackageReference Include="Microsoft.Playwright.NUnit" Version="1.20.2" />
         <PackageReference Include="NUnit" Version="3.13.3" />
         <PackageReference Include="NUnit3TestAdapter" Version="4.2.0" />
