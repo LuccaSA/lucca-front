@@ -1,6 +1,6 @@
 import { ConnectionPositionPair } from '@angular/cdk/overlay';
-import { booleanAttribute, ChangeDetectionStrategy, Component, computed, forwardRef, inject, input, LOCALE_ID, signal, ViewEncapsulation, WritableSignal } from '@angular/core';
-import { ControlValueAccessor, FormsModule, NG_VALUE_ACCESSOR, ReactiveFormsModule } from '@angular/forms';
+import { booleanAttribute, ChangeDetectionStrategy, Component, computed, forwardRef, inject, input, LOCALE_ID, model, signal, ViewEncapsulation } from '@angular/core';
+import { FormsModule, NG_VALUE_ACCESSOR, ReactiveFormsModule } from '@angular/forms';
 import { intlInputOptions, IntlParamsPipe } from '@lucca-front/ng/core';
 import { FORM_FIELD_INSTANCE, FormFieldComponent, InputDirective, ɵPresentationDisplayDefaultDirective } from '@lucca-front/ng/form-field';
 import { PopoverDirective } from '@lucca-front/ng/popover2';
@@ -8,6 +8,7 @@ import { LuTooltipTriggerDirective } from '@lucca-front/ng/tooltip';
 import { TextInputComponent } from '../text-input/text-input.component';
 import { INVARIANT_CULTURE_CODE, MultilanguageTranslation } from './model/multilanguage-translation';
 import { LU_MULTILANGUAGE_INPUT_TRANSLATIONS } from './multilanguage-input.translate';
+import { FormValueControl } from '@angular/forms/signals';
 
 @Component({
 	selector: 'lu-multilanguage-input',
@@ -35,7 +36,7 @@ import { LU_MULTILANGUAGE_INPUT_TRANSLATIONS } from './multilanguage-input.trans
 	encapsulation: ViewEncapsulation.None,
 	changeDetection: ChangeDetectionStrategy.OnPush,
 })
-export class MultilanguageInputComponent implements ControlValueAccessor {
+export class MultilanguageInputComponent implements FormValueControl<MultilanguageTranslation[]> {
 	#localeId = inject(LOCALE_ID);
 
 	#intlDisplay = new Intl.DisplayNames([this.#localeId], { type: 'language' });
@@ -59,18 +60,19 @@ export class MultilanguageInputComponent implements ControlValueAccessor {
 	// Suffixed with Internal to avoid conflict with NgModel's disabled attribute
 	readonly disabledInternal = signal(false);
 
-	readonly model: WritableSignal<MultilanguageTranslation[]> = signal([] as MultilanguageTranslation[]);
+	// readonly model: WritableSignal<MultilanguageTranslation[]> = signal([] as MultilanguageTranslation[]);
+	readonly value = model<MultilanguageTranslation[]>([]);
 
 	readonly invariant = computed(() => {
-		return this.model().find((row) => row.cultureCode === INVARIANT_CULTURE_CODE) || { value: '' };
+		return this.value().find((row) => row.cultureCode === INVARIANT_CULTURE_CODE) || { value: '' };
 	});
 
 	readonly panelInputs = computed(() => {
-		return this.model().filter((row) => row.cultureCode !== INVARIANT_CULTURE_CODE);
+		return this.value().filter((row) => row.cultureCode !== INVARIANT_CULTURE_CODE);
 	});
 
 	readonly presentationValue = computed(() => {
-		return this.model().find((row) => row.cultureCode === this.#localeId)?.value || this.invariant()?.value;
+		return this.value().find((row) => row.cultureCode === this.#localeId)?.value || this.invariant()?.value;
 	});
 
 	popoverPositions: ConnectionPositionPair[] = [
@@ -90,7 +92,7 @@ export class MultilanguageInputComponent implements ControlValueAccessor {
 			if (!value.some((row) => row.cultureCode === INVARIANT_CULTURE_CODE)) {
 				throw new Error('Please provide an invariant translation in translation array');
 			}
-			this.model.set(value);
+			this.value.set(value);
 		}
 	}
 
@@ -107,6 +109,6 @@ export class MultilanguageInputComponent implements ControlValueAccessor {
 	}
 
 	valueChange(): void {
-		this.onChange?.(this.model());
+		this.onChange?.(this.value());
 	}
 }

@@ -6,12 +6,15 @@ import { MultilanguageInputComponent, MultiLanguageInputValidators, Multilanguag
 import { applicationConfig, Meta, moduleMetadata, StoryObj } from '@storybook/angular';
 import { cleanupTemplate, generateInputs } from 'stories/helpers/stories';
 import { StoryModelDisplayComponent } from 'stories/helpers/story-model-display.component';
+import {
+	MultilanguageSignalFieldComponent
+} from '@/stories/forms/fields/multilanguage/multilanguage-signal-field/multilanguage-signal-field.component';
 
 export default {
 	title: 'Documentation/Forms/Fields/MultilanguageField/Angular',
 	decorators: [
 		moduleMetadata({
-			imports: [MultilanguageInputComponent, FormFieldComponent, ReactiveFormsModule, BrowserAnimationsModule, StoryModelDisplayComponent, FormsModule],
+			imports: [MultilanguageInputComponent, MultilanguageSignalFieldComponent, FormFieldComponent, ReactiveFormsModule, BrowserAnimationsModule, StoryModelDisplayComponent, FormsModule],
 		}),
 		applicationConfig({
 			providers: [{ provide: LOCALE_ID, useValue: 'fr-FR' }],
@@ -156,7 +159,11 @@ export const Basic: StoryObj<
 			)}>
 	<lu-multilanguage-input [formControl]="formControl" ${generateInputs(inputArgs, argTypes)} />
 </lu-form-field>
-<pr-story-model-display>{{ formControl.value | json }}</pr-story-model-display>`),
+<pr-story-model-display>{{ formControl.value | json }}</pr-story-model-display>
+<br />
+<lu-form-field label="With formField">
+	<multilanguage-signal-field />
+</lu-form-field>`),
 		};
 	},
 	args: {

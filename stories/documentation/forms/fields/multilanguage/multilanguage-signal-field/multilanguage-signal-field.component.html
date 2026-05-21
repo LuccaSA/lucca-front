@@ -1,0 +1,11 @@
+<lu-multilanguage-input [formField]="formField" />
+<br />
+
+<lu-callout [icon]="'settings'" size="S">
+	<p>
+		<strong>Multilanguage Signal Field Value</strong>
+	</p>
+	<lu-code>
+		{{ formField().value() | json }}
+	</lu-code>
+</lu-callout>
