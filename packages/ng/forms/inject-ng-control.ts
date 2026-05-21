@@ -1,8 +1,9 @@
 //Source: https://netbasal.com/forwarding-form-controls-to-custom-control-components-in-angular-701e8406cc55
 // Heavily modified to handle ngModel properly
-import { FormControlDirective, FormControlName, NgControl, NgModel } from '@angular/forms';
 import { DestroyRef, inject } from '@angular/core';
 import { takeUntilDestroyed } from '@angular/core/rxjs-interop';
+import { FormControlDirective, FormControlName, NgControl, NgModel } from '@angular/forms';
+import { FormField } from '@angular/forms/signals';
 
 export function injectNgControl() {
 	const ngControl = inject(NgControl, { self: true, optional: true });
@@ -22,6 +23,11 @@ export function injectNgControl() {
 	}
 
 	if (ngControl instanceof FormControlDirective || ngControl instanceof FormControlName) {
+		return ngControl;
+	}
+
+	const field = inject(FormField);
+	if (field) {
 		return ngControl;
 	}
 
