@@ -21,6 +21,7 @@ import {
 	ViewEncapsulation,
 } from '@angular/core';
 import { AbstractControl, NgControl, ReactiveFormsModule, RequiredValidator, Validators } from '@angular/forms';
+import { FormField } from '@angular/forms/signals';
 import { SafeHtml } from '@angular/platform-browser';
 import { intlInputOptions, LuClass, PortalContent, PortalDirective, ɵeffectWithDeps } from '@lucca-front/ng/core';
 import { LU_FORM_INSTANCE } from '@lucca-front/ng/form';
@@ -70,12 +71,15 @@ export class FormFieldComponent implements OnDestroy, DoCheck {
 
 	readonly requiredValidators = contentChildren(RequiredValidator, { descendants: true });
 	readonly ngControls = contentChildren(NgControl, { descendants: true });
+	readonly ngFormFields = contentChildren(FormField, { descendants: true });
 
 	readonly ignoredRequiredValidators = computed(() => new Set(this.formFieldChildren().flatMap((f) => f.requiredValidators())));
 	readonly ignoredControls = computed(() => new Set(this.formFieldChildren().flatMap((f) => f.ngControls())));
+	readonly ignoredFormFields = computed(() => new Set(this.formFieldChildren().flatMap((f) => f.ngFormFields())));
 
 	readonly ownRequiredValidators = computed(() => this.requiredValidators().filter((c) => !this.ignoredRequiredValidators().has(c)));
 	readonly ownControls = computed(() => this.ngControls().filter((c) => !this.ignoredControls().has(c)));
+	readonly ownFormFields = computed(() => this.ngFormFields().filter((c) => !this.ignoredFormFields().has(c)));
 
 	#hasInputRequired = signal(false);
 	forceInputRequired = signal(false);
@@ -257,7 +261,8 @@ export class FormFieldComponent implements OnDestroy, DoCheck {
 	#isInputRequired(): boolean {
 		const hasRequiredFormControl = this.ownControls().some((c) => c.control?.hasValidator(Validators.required));
 		const hasRequiredNgModel = this.ownRequiredValidators().some((c) => booleanAttribute(c.required));
-		return hasRequiredNgModel || hasRequiredFormControl;
+		const hasRequiredFormField = this.ownFormFields().some((c) => c.state().required());
+		return hasRequiredFormField || hasRequiredNgModel || hasRequiredFormControl;
 	}
 
 	#hasInvalidStatus(): boolean {
