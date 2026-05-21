@@ -1,6 +1,12 @@
 {
   "$schema": "https://docs.renovatebot.com/renovate-schema.json",
-  "extends": [
-    "local>LuccaSA/renovate-config"
-  ]
+  "extends": ["local>LuccaSA/renovate-config", ":disableMajorUpdates"],
+  "baseBranches": ["$default", "rc"],
+  "lockFileMaintenance": {
+    "enabled": true,
+    "automerge": true
+  },
+  "minor": {
+    "enabled": false
+  }
 }
