@@ -44,6 +44,13 @@ export const Basic: StoryObj<SoftwareIconWrapperComponent> = {
 				<lu-software-icon icon="office" />
 				<lu-software-icon icon="absences" />
 				<lu-software-icon icon="lucca" />
+				<lu-software-icon icon="analytics" />
+				<lu-software-icon icon="mood" />
+				<lu-software-icon icon="client-center" />
+				<lu-software-icon icon="cloud-control" />
+				<lu-software-icon icon="engagement" />
+				<lu-software-icon icon="timesheet" />
+				<lu-software-icon icon="compensation" />
 			</lu-software-icon-wrapper>
 		`,
 	}),

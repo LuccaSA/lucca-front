@@ -11,7 +11,14 @@
 
 	@if (hiddenCount() > 0) {
 		<button class="softwareIconWrapper-action" type="button" [luPopover2]="softwareIconWrapperHiddenItem" luPopoverTrigger="hover+focus">
-			<svg viewBox="0 0 48 48" fill="none" xmlns="http://www.w3.org/2000/svg" paint-order="stroke" aria-hidden="true">
+			<svg
+				class="softwareIconWrapper-action-illustration"
+				viewBox="0 0 48 48"
+				fill="none"
+				xmlns="http://www.w3.org/2000/svg"
+				paint-order="stroke"
+				aria-hidden="true"
+			>
 				<path
 					d="M47.6677 25.9005C43.138 55.002 18.7131 49.2779 9.33095 42.5981C-0.0511509 35.9202 -8.30233 13.9734 15.8 3.00001C37.6385 -6.86008 50.2542 9.36062 47.6657 25.9005"
 					fill="var(--palettes-neutral-200)"
@@ -25,13 +32,11 @@
 
 		<ng-template #softwareIconWrapperHiddenItem>
 			<div class="popover-contentOptional">
-				<lu-grid columns="8" gap="50" mode="auto">
-					@for (icon of hiddenIcons(); track icon) {
-						<lu-grid-column
-							><lu-software-icon [icon]="icon.icon()" [size]="icon.size() ?? size()" [disabled]="icon.disabled()"
-						/></lu-grid-column>
-					}
-				</lu-grid>
+				@for (icon of hiddenIcons(); track icon) {
+					<div class="">
+						<lu-software-icon class="pr-u-displayBlock" [icon]="icon.icon()" [size]="icon.size() ?? size()" [disabled]="icon.disabled()" />
+					</div>
+				}
 			</div>
 		</ng-template>
 	}

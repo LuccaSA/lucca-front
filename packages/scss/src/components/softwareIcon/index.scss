@@ -52,3 +52,13 @@
 		}
 	}
 }
+
+@layer mods {
+	.softwareIcon,
+	.softwareIconWrapper-action {
+		&:hover {
+			--components-softwareIconWrapper-scale: 1.1;
+			--components-softwareIcon-zIndex: 1;
+		}
+	}
+}

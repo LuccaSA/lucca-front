@@ -1,9 +1,10 @@
 @mixin vars {
 	--components-softwareIcon-size: var(--pr-t-spacings-500);
-	--components-softwareIconWrapper-scale: 1;
 }
 
 @mixin varsWrapper {
 	@include vars;
+	--components-softwareIconWrapper-scale: 1;
 	--components-softwareIconWrapper-overlap: calc(var(--pr-t-spacings-75) * -1);
+	--components-softwareIcon-zIndex: auto;
 }
