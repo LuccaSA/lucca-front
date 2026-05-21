@@ -28,6 +28,48 @@
 		&:has(.calendar-table-body-row-cell:nth-child(3):last-child) {
 			@include third;
 		}
+
+		&:has(.calendar-table-body-row-cell-action-week) {
+			@include week;
+
+			.calendar-table-body-row-cell {
+				&.is-selected {
+					@include weekSelected;
+				}
+			}
+
+			.calendar-table-body-row {
+				&:has(.calendar-table-body-row-cell-action:focus-visible) {
+					@include weekFocusVisible;
+				}
+			}
+
+			.calendar-table-body-row {
+				&:not(:has(.calendar-table-body-row-cell.is-selected)) {
+					&:hover {
+						@include weekHover;
+					}
+
+					&:active {
+						@include weekActive;
+					}
+				}
+
+				&:has(.calendar-table-body-row-cell.is-selected) {
+					&:hover {
+						@include weekSelectedHover;
+					}
+
+					&:active {
+						@include weekSelectedActive;
+					}
+
+					&:has(.calendar-table-body-row-cell-action:focus-visible) {
+						@include weekSelectedFocusVisible;
+					}
+				}
+			}
+		}
 	}
 }
 
