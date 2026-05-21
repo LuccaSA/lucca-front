@@ -5,13 +5,17 @@
 	inline-size: var(--components-softwareIcon-size);
 	block-size: var(--components-softwareIcon-size);
 
-	svg {
-		display: block;
-		inline-size: 100%;
-		block-size: 100%;
-	}
-
 	@at-root ($atRoot) {
+		.softwareIcon-illustration {
+			display: block;
+			inline-size: 100%;
+			block-size: 100%;
+			overflow: visible;
+		}
 
+		.softwareIcon-illustration-bubble {
+			stroke: var(--components-softwareIcon-illustration-stroke);
+			stroke-width: var(--components-softwareIcon-illustration-strokeWidth);
+		}
 	}
 }
