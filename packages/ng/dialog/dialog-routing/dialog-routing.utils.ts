@@ -88,35 +88,37 @@ export function dialogLazyRouteFactory<C>(loadComponent: () => Promise<Component
 		});
 }
 
-function mergeRouteConfig<C>(config1: Partial<DialogRouteConfig<C>>, config2: Partial<DialogRouteConfig<C>>): Partial<DialogRouteConfig<C>> {
-	if (!config1) {
+function mergeRouteConfig<C>(config1: Partial<DialogRouteConfig<C>> | undefined, config2: Partial<DialogRouteConfig<C>> | undefined): Partial<DialogRouteConfig<C>> {
+	if (!config1 && config2) {
 		return config2;
 	}
 
-	if (!config2) {
+	if (!config2 && config1) {
 		return config1;
 	}
 
 	const result: Partial<DialogRouteConfig<C>> = { ...config1, ...config2 };
 
-	// If both configs have the same key, we merge the arrays
-	const mergedArrays = (['providers', 'canActivate', 'children', 'canDeactivate', 'canLoad', 'canActivateChild'] as const satisfies Array<keyof Route>).filter(
-		(key) => key in config1 && key in config2,
-	);
+	if (config1 && config2) {
+		// If both configs have the same key, we merge the arrays
+		const mergedArrays = (['providers', 'canActivate', 'children', 'canDeactivate', 'canLoad', 'canActivateChild'] as const satisfies Array<keyof Route>).filter(
+			(key) => key in config1 && key in config2,
+		);
 
-	for (const key of mergedArrays) {
-		// eslint-disable-next-line @typescript-eslint/no-explicit-any
-		result[key] = [...(config1[key] ?? []), ...(config2[key] ?? [])] as any[];
-	}
+		for (const key of mergedArrays) {
+			// eslint-disable-next-line @typescript-eslint/no-explicit-any
+			result[key] = [...(config1[key] ?? []), ...(config2[key] ?? [])] as any[];
+		}
 
-	// If both configs have the same data key, we merge the objects
-	if (config1.data && config2.data) {
-		result.data = { ...config1.data, ...config2.data };
-	}
+		// If both configs have the same data key, we merge the objects
+		if (config1.data && config2.data) {
+			result.data = { ...config1.data, ...config2.data };
+		}
 
-	// If both configs have the same resolve key, we merge the objects
-	if (config1.resolve && config2.resolve) {
-		result.resolve = { ...config1.resolve, ...config2.resolve };
+		// If both configs have the same resolve key, we merge the objects
+		if (config1.resolve && config2.resolve) {
+			result.resolve = { ...config1.resolve, ...config2.resolve };
+		}
 	}
 
 	return result;

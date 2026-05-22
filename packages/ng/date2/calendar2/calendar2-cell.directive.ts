@@ -1,6 +1,6 @@
 import { computed, Directive, ElementRef, HostBinding, HostListener, inject, input } from '@angular/core';
-import { add, addMonths, addYears, endOfWeek, startOfWeek, sub, subMonths, subYears } from 'date-fns';
 import type { Duration } from 'date-fns';
+import { add, addMonths, addYears, endOfWeek, startOfWeek, sub, subMonths, subYears } from 'date-fns';
 import { WEEK_INFO } from '../calendar.token';
 import { comparePeriods, getJSFirstDayOfWeek } from '../utils';
 import { CalendarMode } from './calendar-mode';
@@ -18,22 +18,22 @@ const modeToDurationKey: Record<CalendarMode, keyof Duration> = {
 export class Calendar2CellDirective {
 	#host = inject<ElementRef<HTMLButtonElement>>(ElementRef);
 
-	#tabbableDate = inject(CALENDAR_TABBABLE_DATE);
+	readonly #tabbableDate = inject(CALENDAR_TABBABLE_DATE);
 	#weekInfo = inject(WEEK_INFO);
 
 	// Index of this day in the current week display row, not depending on locale, 0 is first day of week and 6 is last
-	luCalendar2Cell = input.required<number>();
+	readonly luCalendar2Cell = input.required<number>();
 
-	luCalendar2Mode = input.required<CalendarMode>();
+	readonly luCalendar2Mode = input.required<CalendarMode>();
 
-	luCalendar2Date = input.required<Date>();
+	readonly luCalendar2Date = input.required<Date>();
 
 	@HostBinding('tabindex')
 	get tabindex(): 0 | -1 {
 		return this.isTabbableDate() ? 0 : -1;
 	}
 
-	isTabbableDate = computed(() => {
+	readonly isTabbableDate = computed(() => {
 		return comparePeriods(this.luCalendar2Mode(), this.luCalendar2Date(), this.#tabbableDate());
 	});
 

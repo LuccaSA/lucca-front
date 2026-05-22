@@ -31,21 +31,21 @@ import { LuMultiSelectDisplayerInputDirective } from './displayer-input.directiv
 	changeDetection: ChangeDetectionStrategy.OnPush,
 })
 export class LuMultiSelectDefaultDisplayerComponent<T> implements OnInit {
-	select = inject<LuMultiSelectInputComponent<T>>(LuMultiSelectInputComponent);
-	intl = input(...intlInputOptions(LU_MULTI_SELECT_DISPLAYER_TRANSLATIONS));
+	readonly select = inject<LuMultiSelectInputComponent<T>>(LuMultiSelectInputComponent);
+	readonly intl = input(...intlInputOptions(LU_MULTI_SELECT_DISPLAYER_TRANSLATIONS));
 
 	protected destroyRef = inject(DestroyRef);
 
 	@ViewChild('inputElement')
-	inputElementRef: ElementRef<HTMLInputElement>;
+	readonly inputElementRef: ElementRef<HTMLInputElement>;
 
 	get value(): T[] {
 		return this.select.value || [];
 	}
 
-	context = inject<ILuOptionContext<T[]>>(LU_OPTION_CONTEXT);
+	readonly context = inject<ILuOptionContext<T[]>>(LU_OPTION_CONTEXT);
 
-	displayedOptions$ = this.context.option$.pipe(
+	readonly displayedOptions$ = this.context.option$.pipe(
 		map((options) => {
 			if (this.select.maxValuesShown) {
 				return (options || []).slice(0, this.select.maxValuesShown);
@@ -54,7 +54,7 @@ export class LuMultiSelectDefaultDisplayerComponent<T> implements OnInit {
 		}),
 	);
 
-	overflowOptions$ = this.context.option$.pipe(
+	readonly overflowOptions$ = this.context.option$.pipe(
 		map((options) => {
 			return Math.max(0, (options || []).length - this.select.maxValuesShown);
 		}),

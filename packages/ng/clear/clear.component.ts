@@ -75,7 +75,7 @@ export class ClearComponent<T> extends ALuClear<T> implements ILuClear<T> {
 	// eslint-disable-next-line @angular-eslint/no-output-on-prefix
 	@Output() override onClear = new EventEmitter<T>();
 
-	contentRef = contentChildren<ElementRef>('content');
+	readonly contentRef = contentChildren<ElementRef>('content');
 
 	constructor() {
 		super();

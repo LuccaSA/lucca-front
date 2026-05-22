@@ -48,7 +48,7 @@ export class CommentComponent {
 
 	readonly size = computed(() => this.#parentBlock?.size());
 
-	readonly contentIsPortal = computed(() => !this.isStringPortalContent(this.content()));
+	readonly contentIsPortal = computed(() => !this.isStringPortalContent(this.content() ?? ''));
 
 	readonly contentIsHTML = computed(() => !this.contentIsPortal() && /<\/?[a-z][\s\S]*>/i.test(this.content() as string));
 

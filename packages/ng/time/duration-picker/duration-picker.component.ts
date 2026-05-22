@@ -29,7 +29,7 @@ import { LU_DURATION_PICKER_TRANSLATIONS } from './duration-picker.translate';
 export class DurationPickerComponent extends BasePickerComponent {
 	readonly intl = input(...intlInputOptions(LU_DURATION_PICKER_TRANSLATIONS));
 
-	value = model<ISO8601Duration>('PT0S');
+	readonly value = model<ISO8601Duration>('PT0S');
 	readonly max = input<ISO8601Duration>('PT99H');
 
 	readonly displayArrows = input(false, { transform: booleanAttribute });
@@ -65,7 +65,7 @@ export class DurationPickerComponent extends BasePickerComponent {
 			'pr-u-visibilityHidden': this.shouldHideValue(),
 		};
 	});
-	protected separator = computed(() => this.intl().timePickerTimeSeparator);
+	protected readonly separator = computed(() => this.intl().timePickerTimeSeparator);
 
 	protected hoursDecimalConf = DEFAULT_TIME_DECIMAL_PIPE_FORMAT;
 
@@ -107,10 +107,10 @@ export class DurationPickerComponent extends BasePickerComponent {
 	}
 
 	protected pasteHandler(event: ClipboardEvent): void {
+		let value: ISO8601Duration | null = null;
 		event.preventDefault();
 		const pastedValue = event.clipboardData?.getData('text/plain');
 		if (isNotNil(pastedValue)) {
-			let value: ISO8601Duration;
 			// If it's an iso duration, handle as-is
 			if (isISO8601Duration(pastedValue)) {
 				value = pastedValue;
