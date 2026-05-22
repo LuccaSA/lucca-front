@@ -41,7 +41,7 @@
 			}
 
 			.form-field:has(.fileUpload) + & {
-				margin-top: var(--pr-t-spacings-100);
+				margin-block-start: var(--pr-t-spacings-100);
 			}
 		}
 
@@ -176,7 +176,7 @@
 		}
 
 		.fileEntry_box.box {
-			margin-top: var(--pr-t-spacings-150);
+			margin-block-start: var(--pr-t-spacings-150);
 		}
 
 		.fileEntry_box-field {
