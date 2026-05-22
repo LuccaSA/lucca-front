@@ -47,7 +47,7 @@ export function matchComponents(figmaGroups: Map<string, FigmaGroup>, storybookG
 		// Supports both formats: string "button" or object { slug: "button", storybook: "..." }
 		// and arrays for the 1-to-n case
 		const normalizeEntry = (v: string | ComponentMapEntry): string | null => (typeof v === 'object' && v !== null && !Array.isArray(v) ? v.slug : (v as string));
-		const rawSlugs = Array.isArray(sbValue) ? sbValue : [sbValue as string | ComponentMapEntry];
+		const rawSlugs = Array.isArray(sbValue) ? sbValue : [sbValue];
 		const slugs = rawSlugs.map(normalizeEntry).filter(Boolean) as string[];
 		const primarySlug = slugs[0];
 

@@ -16,7 +16,7 @@ export class RepeatTimesDirective {
 		}
 	}
 
-	public static ngTemplateContextGuard(_dir: RepeatTimesDirective, ctx: unknown): ctx is void {
+	public static ngTemplateContextGuard(_dir: RepeatTimesDirective, _ctx: unknown): _ctx is void {
 		return true;
 	}
 }

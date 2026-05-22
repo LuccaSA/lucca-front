@@ -21,7 +21,7 @@ export class FilterPillDisplayerDirective {
 		}
 	}
 
-	public static ngTemplateContextGuard(_dir: FilterPillDisplayerDirective, ctx: unknown): ctx is FilterPillDisplayerContext {
+	public static ngTemplateContextGuard(_dir: FilterPillDisplayerDirective, _ctx: unknown): _ctx is FilterPillDisplayerContext {
 		return true;
 	}
 }

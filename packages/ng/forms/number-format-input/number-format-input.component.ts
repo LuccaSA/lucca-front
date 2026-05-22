@@ -73,7 +73,7 @@ export class NumberFormatInputComponent implements AfterViewInit {
 		return {
 			content,
 			ariaLabel: content,
-		} as TextInputAddon;
+		};
 	});
 	readonly suffixAddon = computed(() => {
 		if (this.useAutoPrefixSuffix() === false) {
@@ -86,7 +86,7 @@ export class NumberFormatInputComponent implements AfterViewInit {
 		return {
 			content,
 			ariaLabel: content,
-		} as TextInputAddon;
+		};
 	});
 
 	readonly formatOptions = computed(
