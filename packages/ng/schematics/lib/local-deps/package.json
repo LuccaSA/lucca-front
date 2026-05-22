@@ -11,7 +11,7 @@
   "author": "",
   "license": "ISC",
   "devDependencies": {
-    "postcss": "8.5.3",
+    "postcss": "8.5.10",
     "postcss-scss": "4.0.9",
     "postcss-selector-parser": "7.1.0",
     "postcss-value-parser": "4.2.0"
