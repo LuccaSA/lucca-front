@@ -58,13 +58,19 @@
 .softwareIconWrapper_popover {
 	@layer components {
 		@include varsPopover;
-
-		.softwareIcon {
-			@include block;
-		}
 	}
 
 	@layer mods {
+		.softwareIcon,
+		.softwareIconWrapper-action {
+			@include block;
+
+			&:hover,
+			&:focus {
+				@include insideWrapperHover;
+			}
+		}
+
 		&.mod-XS {
 			&,
 			.softwareIcon {

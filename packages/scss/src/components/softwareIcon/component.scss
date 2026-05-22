@@ -8,6 +8,9 @@
 	block-size: var(--components-softwareIcon-size);
 	z-index: var(--components-softwareIcon-zIndex);
 	position: relative;
+	transform: scale(var(--components-softwareIcon-transformScale));
+	transition-property: transform;
+	transition-duration: var(--commons-animations-durations-fast);
 
 	&:focus-visible {
 		outline: none;
@@ -19,21 +22,14 @@
 		}
 
 		.softwareIcon-illustration-bubble {
-			stroke: var(--components-softwareIcon-illustration-bubble-stoke);
-			stroke-width: var(--components-softwareIcon-illustration-bubble-stokeWidth);
+			stroke: var(--components-softwareIcon-illustration-bubble-stroke);
+			stroke-width: var(--components-softwareIcon-illustration-bubble-strokeWidth);
 		}
 
 		.softwareIconWrapper {
 			display: flex;
 			flex-wrap: wrap;
 			align-items: center;
-
-			.softwareIcon,
-			.softwareIconWrapper-action {
-				transform: scale(var(--components-softwareIconWrapper-scale));
-				transition-property: transform;
-				transition-duration: var(--commons-animations-durations-fast);
-			}
 		}
 
 		.softwareIconWrapper-list {
@@ -43,7 +39,7 @@
 		}
 
 		.softwareIconWrapper-list-item {
-			margin-inline-end: var(--components-softwareIconWrapper-overlap);
+			margin-inline-end: var(--components-softwareIconWrapper-list-item-marginInlineEnd);
 		}
 
 		.softwareIconWrapper-action {
@@ -53,9 +49,10 @@
 			background-color: var(--palettes-neutral-200);
 			inline-size: var(--components-softwareIcon-size);
 			block-size: var(--components-softwareIcon-size);
-
-			// TODO
-			box-shadow: 0 0 0 2px var(--palettes-neutral-0);
+			transform: scale(var(--components-softwareIcon-transformScale));
+			transition-property: transform;
+			transition-duration: var(--commons-animations-durations-fast);
+			box-shadow: 0 0 0 var(--components-softwareIcon-action-boxShadowSpread) var(--palettes-neutral-0);
 		}
 
 		.softwareIconWrapper-action-more {

@@ -8,6 +8,6 @@
 }
 
 @mixin insideWrapperHover {
-	--components-softwareIconWrapper-scale: 1.1;
+	--components-softwareIcon-transformScale: 1.1;
 	--components-softwareIcon-zIndex: 1;
 }
