@@ -93,66 +93,202 @@
 			</td>
 		</tr>
 		<tr>
-			<td>Default wrapper</td>
+			<td>Wrapper</td>
 			<td>
-				<div class="demo-QAtable-list">
-					<!-- [TODO][Céleste] when UI should be OK-->
+				<div class="softwareIconWrapper">
+					<ul class="softwareIconWrapper-list">
+						<li class="softwareIconWrapper-list-item">
+							<div
+								class="softwareIcon"
+								aria-hidden="true"
+								[innerHtml]="'https://cdn.lucca.fr/transverse/prisme/visuals/software-icon/invoices.svg' | luSafeExternalSvg"
+							></div>
+						</li>
+						<li class="softwareIconWrapper-list-item">
+							<div
+								class="softwareIcon"
+								aria-hidden="true"
+								[innerHtml]="'https://cdn.lucca.fr/transverse/prisme/visuals/software-icon/absences.svg' | luSafeExternalSvg"
+							></div>
+						</li>
+						<li class="softwareIconWrapper-list-item">
+							<div
+								class="softwareIcon"
+								aria-hidden="true"
+								[innerHtml]="'https://cdn.lucca.fr/transverse/prisme/visuals/software-icon/payslip.svg' | luSafeExternalSvg"
+							></div>
+						</li>
+					</ul>
+					<button class="softwareIconWrapper-action" type="button" [luPopover2]="softwareIconWrapperPopover" luPopoverTrigger="click+hover">
+						<div class="softwareIconWrapper-action-more">
+							<span aria-hidden="true" data-content-before="+2"></span>
+							<span class="pr-u-mask">See 2 more software</span>
+						</div>
+					</button>
+					<ng-template #softwareIconWrapperPopover>
+						<ul class="popover-contentOptional softwareIconWrapper_popover">
+							<li class="softwareIconWrapper_popover-item">
+								<div
+									class="softwareIcon"
+									aria-hidden="true"
+									[innerHtml]="'https://cdn.lucca.fr/transverse/prisme/visuals/software-icon/benefits.svg' | luSafeExternalSvg"
+								></div>
+							</li>
+							<li class="softwareIconWrapper_popover-item">
+								<div
+									class="softwareIcon"
+									aria-hidden="true"
+									[innerHtml]="'https://cdn.lucca.fr/transverse/prisme/visuals/software-icon/office.svg' | luSafeExternalSvg"
+								></div>
+							</li>
+						</ul>
+					</ng-template>
 				</div>
 			</td>
 			<td>
 				<div class="demo-QAtable-list">
 					<lu-software-icon-wrapper max="3">
-						<li><lu-software-icon [icon]="'invoices'" /></li>
-						<li><lu-software-icon [icon]="'absences'" /></li>
-						<li><lu-software-icon [icon]="'payslip'" /></li>
-						<li><lu-software-icon [icon]="'benefits'" /></li>
-						<li><lu-software-icon [icon]="'office'" /></li>
+						<lu-software-icon *luSoftwareIconWrapperItem [icon]="'invoices'" />
+						<lu-software-icon *luSoftwareIconWrapperItem [icon]="'absences'" />
+						<lu-software-icon *luSoftwareIconWrapperItem [icon]="'payslip'" />
+						<lu-software-icon *luSoftwareIconWrapperItem [icon]="'benefits'" />
+						<lu-software-icon *luSoftwareIconWrapperItem [icon]="'office'" />
 					</lu-software-icon-wrapper>
 				</div>
 			</td>
 		</tr>
 
 		<tr>
-			<td>Size wrapper</td>
+			<td>Wrapper sizes</td>
 			<td>
-				<div class="demo-QAtable-list">
-					<!-- [TODO][Céleste] when UI should be OK-->
+				<div class="softwareIconWrapper mod-S">
+					<ul class="softwareIconWrapper-list">
+						<li class="softwareIconWrapper-list-item">
+							<div
+								class="softwareIcon"
+								aria-hidden="true"
+								[innerHtml]="'https://cdn.lucca.fr/transverse/prisme/visuals/software-icon/invoices.svg' | luSafeExternalSvg"
+							></div>
+						</li>
+						<li class="softwareIconWrapper-list-item">
+							<div
+								class="softwareIcon"
+								aria-hidden="true"
+								[innerHtml]="'https://cdn.lucca.fr/transverse/prisme/visuals/software-icon/absences.svg' | luSafeExternalSvg"
+							></div>
+						</li>
+						<li class="softwareIconWrapper-list-item">
+							<div
+								class="softwareIcon"
+								aria-hidden="true"
+								[innerHtml]="'https://cdn.lucca.fr/transverse/prisme/visuals/software-icon/payslip.svg' | luSafeExternalSvg"
+							></div>
+						</li>
+					</ul>
+					<button
+						class="softwareIconWrapper-action"
+						type="button"
+						[luPopover2]="softwareIconWrapperPopoverS"
+						luPopoverTrigger="click+hover"
+					>
+						<div class="softwareIconWrapper-action-more">
+							<span aria-hidden="true" data-content-before="+2"></span>
+							<span class="pr-u-mask">See 2 more software</span>
+						</div>
+					</button>
+					<ng-template #softwareIconWrapperPopoverS>
+						<ul class="popover-contentOptional softwareIconWrapper_popover mod-S">
+							<li class="softwareIconWrapper_popover-item">
+								<div
+									class="softwareIcon"
+									aria-hidden="true"
+									[innerHtml]="'https://cdn.lucca.fr/transverse/prisme/visuals/software-icon/benefits.svg' | luSafeExternalSvg"
+								></div>
+							</li>
+							<li class="softwareIconWrapper_popover-item">
+								<div
+									class="softwareIcon"
+									aria-hidden="true"
+									[innerHtml]="'https://cdn.lucca.fr/transverse/prisme/visuals/software-icon/office.svg' | luSafeExternalSvg"
+								></div>
+							</li>
+						</ul>
+					</ng-template>
+				</div>
+				<br />
+				<div class="softwareIconWrapper mod-XS">
+					<ul class="softwareIconWrapper-list">
+						<li class="softwareIconWrapper-list-item">
+							<div
+								class="softwareIcon"
+								aria-hidden="true"
+								[innerHtml]="'https://cdn.lucca.fr/transverse/prisme/visuals/software-icon/invoices.svg' | luSafeExternalSvg"
+							></div>
+						</li>
+						<li class="softwareIconWrapper-list-item">
+							<div
+								class="softwareIcon"
+								aria-hidden="true"
+								[innerHtml]="'https://cdn.lucca.fr/transverse/prisme/visuals/software-icon/absences.svg' | luSafeExternalSvg"
+							></div>
+						</li>
+						<li class="softwareIconWrapper-list-item">
+							<div
+								class="softwareIcon"
+								aria-hidden="true"
+								[innerHtml]="'https://cdn.lucca.fr/transverse/prisme/visuals/software-icon/payslip.svg' | luSafeExternalSvg"
+							></div>
+						</li>
+					</ul>
+					<button
+						class="softwareIconWrapper-action"
+						type="button"
+						[luPopover2]="softwareIconWrapperPopoverXS"
+						luPopoverTrigger="click+hover"
+					>
+						<div class="softwareIconWrapper-action-more">
+							<span aria-hidden="true" data-content-before="+2"></span>
+							<span class="pr-u-mask">See 2 more software</span>
+						</div>
+					</button>
+					<ng-template #softwareIconWrapperPopoverXS>
+						<ul class="popover-contentOptional softwareIconWrapper_popover mod-XS">
+							<li class="softwareIconWrapper_popover-item">
+								<div
+									class="softwareIcon"
+									aria-hidden="true"
+									[innerHtml]="'https://cdn.lucca.fr/transverse/prisme/visuals/software-icon/benefits.svg' | luSafeExternalSvg"
+								></div>
+							</li>
+							<li class="softwareIconWrapper_popover-item">
+								<div
+									class="softwareIcon"
+									aria-hidden="true"
+									[innerHtml]="'https://cdn.lucca.fr/transverse/prisme/visuals/software-icon/office.svg' | luSafeExternalSvg"
+								></div>
+							</li>
+						</ul>
+					</ng-template>
 				</div>
 			</td>
 			<td>
-				<div class="demo-QAtable-list">
-					<lu-software-icon-wrapper max="3" size="XXS">
-						<li><lu-software-icon [icon]="'invoices'" /></li>
-						<li><lu-software-icon [icon]="'absences'" /></li>
-						<li><lu-software-icon [icon]="'payslip'" /></li>
-						<li><lu-software-icon [icon]="'benefits'" /></li>
-						<li><lu-software-icon [icon]="'office'" /></li>
-					</lu-software-icon-wrapper>
+				<lu-software-icon-wrapper max="3" size="S">
+					<lu-software-icon *luSoftwareIconWrapperItem [icon]="'invoices'" />
+					<lu-software-icon *luSoftwareIconWrapperItem [icon]="'absences'" />
+					<lu-software-icon *luSoftwareIconWrapperItem [icon]="'payslip'" />
+					<lu-software-icon *luSoftwareIconWrapperItem [icon]="'benefits'" />
+					<lu-software-icon *luSoftwareIconWrapperItem [icon]="'office'" />
+				</lu-software-icon-wrapper>
 
-					<lu-software-icon-wrapper max="3" size="XS">
-						<li><lu-software-icon [icon]="'invoices'" /></li>
-						<li><lu-software-icon [icon]="'absences'" /></li>
-						<li><lu-software-icon [icon]="'payslip'" /></li>
-						<li><lu-software-icon [icon]="'benefits'" /></li>
-						<li><lu-software-icon [icon]="'office'" /></li>
-					</lu-software-icon-wrapper>
+				<br />
 
-					<lu-software-icon-wrapper max="3" size="S">
-						<li><lu-software-icon [icon]="'invoices'" /></li>
-						<li><lu-software-icon [icon]="'absences'" /></li>
-						<li><lu-software-icon [icon]="'payslip'" /></li>
-						<li><lu-software-icon [icon]="'benefits'" /></li>
-						<li><lu-software-icon [icon]="'office'" /></li>
-					</lu-software-icon-wrapper>
-
-					<lu-software-icon-wrapper max="3" size="L">
-						<li><lu-software-icon [icon]="'invoices'" /></li>
-						<li><lu-software-icon [icon]="'absences'" /></li>
-						<li><lu-software-icon [icon]="'payslip'" /></li>
-						<li><lu-software-icon [icon]="'benefits'" /></li>
-						<li><lu-software-icon [icon]="'office'" /></li>
-					</lu-software-icon-wrapper>
-				</div>
+				<lu-software-icon-wrapper max="3" size="XS">
+					<lu-software-icon *luSoftwareIconWrapperItem [icon]="'invoices'" />
+					<lu-software-icon *luSoftwareIconWrapperItem [icon]="'absences'" />
+					<lu-software-icon *luSoftwareIconWrapperItem [icon]="'payslip'" />
+					<lu-software-icon *luSoftwareIconWrapperItem [icon]="'benefits'" />
+					<lu-software-icon *luSoftwareIconWrapperItem [icon]="'office'" />
+				</lu-software-icon-wrapper>
 			</td>
 		</tr>
 	</tbody>

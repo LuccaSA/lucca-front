@@ -19,6 +19,5 @@ export class SoftwareIconComponent {
 
 	readonly disabled = input(false, { transform: booleanAttribute });
 	readonly size = input<'XXS' | 'XS' | 'S' | 'L' | ''>('');
-
 	readonly iconUrl = computed(() => `${this.domain}${this.path}${this.icon()}${this.extension}`);
 }

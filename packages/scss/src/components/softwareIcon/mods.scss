@@ -14,14 +14,9 @@
 	--components-softwareIcon-size: var(--pr-t-spacings-600);
 }
 
-@mixin wrapperXXS {
-	&,
-	.softwareIcon {
-		@include XXS;
-	}
-}
-
 @mixin wrapperXS {
+	--components-softwareIconWrapper-action-more-fontSize: var(--pr-t-font-fontSize-150);
+
 	&,
 	.softwareIcon {
 		@include XS;
@@ -29,15 +24,21 @@
 }
 
 @mixin wrapperS {
+	--components-softwareIconWrapper-action-more-fontSize: var(--pr-t-font-fontSize-200);
+
 	&,
 	.softwareIcon {
 		@include S;
 	}
 }
 
-@mixin wrapperL {
-	&,
-	.softwareIcon {
-		@include L;
-	}
+@mixin insideWrapper {
+	--components-softwareIcon-illustration-bubble-stoke: var(--palettes-neutral-0);
+	--components-softwareIcon-illustration-bubble-stokeWidth: 4px;
+
+	@include block;
+}
+
+@mixin block {
+	--components-softwareIcon-display: block;
 }

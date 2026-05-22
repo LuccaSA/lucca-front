@@ -3,11 +3,15 @@
 @use '@lucca-front/scss/src/commons/utils/a11y';
 
 @mixin component($atRoot: namespace.$defaultAtRoot) {
-	display: inline-block;
+	display: var(--components-softwareIcon-display);
 	inline-size: var(--components-softwareIcon-size);
 	block-size: var(--components-softwareIcon-size);
 
 	@at-root ($atRoot) {
+		.softwareIcon-illustration {
+			overflow: visible;
+		}
+
 		.softwareIcon-illustration-bubble {
 			stroke: var(--components-softwareIcon-illustration-bubble-stoke);
 			stroke-width: var(--components-softwareIcon-illustration-bubble-stokeWidth);
@@ -20,73 +24,50 @@
 
 			.softwareIcon,
 			.softwareIconWrapper-action {
-				--components-softwareIcon-illustration-bubble-stoke: var(--palettes-neutral-0);
-				--components-softwareIcon-illustration-bubble-stokeWidth: 4px;
-
-				// à déplacer sur les li ?
-				margin-inline-end: var(--components-softwareIconWrapper-overlap);
 				transform: scale(var(--components-softwareIconWrapper-scale));
 				transition-property: transform;
 				transition-duration: var(--commons-animations-durations-fast);
-				display: block;
-
-				// à supprimer
-				svg {
-					overflow: visible;
-
-					path:first-child {
-						stroke: var(--palettes-neutral-0);
-						stroke-width: 4px;
-					}
-				}
-
-				// à déporter dans states
-				&:hover {
-					--components-softwareIconWrapper-scale: 1.1;
-
-					z-index: 1;
-				}
 			}
 		}
 
-		.softwareIconWrapper-action-illustration {
-			overflow: visible;
+		.softwareIconWrapper-list {
+			@include reset.list;
+
+			display: contents;
+		}
+
+		.softwareIconWrapper-list-item {
+			margin-inline-end: var(--components-softwareIconWrapper-overlap);
 		}
 
 		.softwareIconWrapper-action {
 			@include reset.button;
 
-			// à ajuster
-			border-radius: 68% 35% 45% 55% / 40% 40% 64% 60%;
+			border-radius: var(--pr-t-border-radius-bubble3);
+			background-color: var(--palettes-neutral-200);
+			inline-size: var(--components-softwareIcon-size);
+			block-size: var(--components-softwareIcon-size);
+
+			// TODO
+			box-shadow: 0 0 0 2px var(--palettes-neutral-0);
 		}
 
 		.softwareIconWrapper-action-more {
-			position: absolute;
-			inset: 0;
 			display: grid;
 			place-items: center;
 			font-family: var(--pr-t-font-family-brand);
-			font-size: var(--pr-t-font-fontSize-200);
+			font-size: var(--components-softwareIconWrapper-action-more-fontSize);
 			font-weight: var(--pr-t-font-fontWeight-semibold);
-		}
-
-		.softwareIconWrapper-action {
-			inline-size: var(--components-softwareIcon-size);
-			block-size: var(--components-softwareIcon-size);
 		}
 
 		.softwareIconWrapper_popover {
 			@include reset.list;
 
 			display: grid;
-			max-inline-size: calc((var(--components-softwareIcon-size) + var(--pr-t-spacings-50)) * 8 - var(--pr-t-spacings-50));
+			max-inline-size: calc((var(--components-softwareIcon-size) * 8) + (var(--pr-t-spacings-50) * 7));
 			box-sizing: content-box;
 			gap: var(--pr-t-spacings-50);
 			grid-template-columns: repeat(auto-fit, minmax(var(--components-softwareIcon-size), 1fr));
-
-			.softwareIcon {
-				display: block;
-			}
 		}
 	}
 }

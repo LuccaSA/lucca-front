@@ -1,5 +1,5 @@
-import { ChangeDetectionStrategy, Component, computed, contentChildren, input, numberAttribute, ViewEncapsulation } from '@angular/core';
-import { SoftwareIconComponent } from '@lucca-front/ng/software-icon';
+import { NgTemplateOutlet } from '@angular/common';
+import { ChangeDetectionStrategy, Component, computed, contentChildren, input, numberAttribute, TemplateRef, ViewEncapsulation } from '@angular/core';
 import { intlInputOptions, IntlParamsPipe } from '../core/translate';
 import { PopoverDirective } from '../popover2/popover.directive';
 import { LU_SOFTWARE_ICON_WRAPPER_TRANSLATIONS } from './software-icon-wrapper.translate';
@@ -9,27 +9,26 @@ import { LU_SOFTWARE_ICON_WRAPPER_TRANSLATIONS } from './software-icon-wrapper.t
 	templateUrl: './software-icon-wrapper.component.html',
 	changeDetection: ChangeDetectionStrategy.OnPush,
 	encapsulation: ViewEncapsulation.None,
-	imports: [PopoverDirective, SoftwareIconComponent, IntlParamsPipe],
+	imports: [PopoverDirective, IntlParamsPipe, NgTemplateOutlet],
 	host: {
 		class: 'softwareIconWrapper',
-		'[class.mod-XXS]': 'size() === "XXS"',
 		'[class.mod-XS]': 'size() === "XS"',
 		'[class.mod-S]': 'size() === "S"',
-		'[class.mod-L]': 'size() === "L"',
 	},
 })
 export class SoftwareIconWrapperComponent {
 	readonly max = input(0, { transform: numberAttribute });
-	readonly size = input<'XXS' | 'XS' | 'S' | 'L' | ''>('');
+	readonly size = input<'XS' | 'S' | ''>('');
 	readonly intl = input(...intlInputOptions(LU_SOFTWARE_ICON_WRAPPER_TRANSLATIONS));
 
-	// TODO
-	protected readonly icons = contentChildren(SoftwareIconComponent);
+	protected readonly items = contentChildren(TemplateRef, { descendants: true });
 
-	readonly hiddenIcons = computed<SoftwareIconComponent[]>(() => {
-		const max = this.max();
-		const icons = this.icons();
-		return max == null || max <= 0 || icons.length <= max ? [] : icons.slice(max);
+	readonly hiddenIcons = computed<readonly TemplateRef<unknown>[]>(() => {
+		return this.max() == null || this.max() <= 0 || this.items().length < this.max() ? [] : this.items().slice(this.max());
+	});
+
+	readonly visibleIcons = computed<readonly TemplateRef<unknown>[]>(() => {
+		return this.max() == null || this.max() <= 0 || this.items().length < this.max() ? this.items() : this.items().slice(0, this.hiddenCount() > 1 ? this.max() : this.max() + 1);
 	});
 
 	readonly hiddenCount = computed(() => this.hiddenIcons().length);

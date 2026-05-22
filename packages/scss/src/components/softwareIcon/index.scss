@@ -35,10 +35,6 @@
 	}
 
 	@layer mods {
-		&.mod-XXS {
-			@include wrapperXXS;
-		}
-
 		&.mod-XS {
 			@include wrapperXS;
 		}
@@ -47,17 +43,13 @@
 			@include wrapperS;
 		}
 
-		&.mod-L {
-			@include wrapperL;
-		}
-	}
-}
+		.softwareIcon,
+		.softwareIconWrapper-action {
+			@include insideWrapper;
 
-.softwareIcon,
-.softwareIconWrapper-action {
-	@layer mods {
-		&:hover {
-			@include hover;
+			&:hover {
+				@include insideWrapperHover;
+			}
 		}
 	}
 }
@@ -65,16 +57,13 @@
 .softwareIconWrapper_popover {
 	@layer components {
 		@include varsPopover;
+
+		.softwareIcon {
+			@include block;
+		}
 	}
 
 	@layer mods {
-		&.mod-XXS {
-			&,
-			.softwareIcon {
-				@include XXS;
-			}
-		}
-
 		&.mod-XS {
 			&,
 			.softwareIcon {
@@ -86,13 +75,6 @@
 			&,
 			.softwareIcon {
 				@include S;
-			}
-		}
-
-		&.mod-L {
-			&,
-			.softwareIcon {
-				@include L;
 			}
 		}
 	}

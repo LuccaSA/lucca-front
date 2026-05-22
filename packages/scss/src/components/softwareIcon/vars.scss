@@ -2,13 +2,16 @@
 	--components-softwareIcon-size: var(--pr-t-spacings-500);
 	--components-softwareIcon-illustration-bubble-stoke: transparent;
 	--components-softwareIcon-illustration-bubble-stokeWidth: 0px;
+	--components-softwareIcon-display: inline-block;
 }
 
 @mixin varsWrapper {
 	@include vars;
+
 	--components-softwareIconWrapper-scale: 1;
 	--components-softwareIconWrapper-overlap: calc(var(--pr-t-spacings-75) * -1);
 	--components-softwareIcon-zIndex: auto;
+	--components-softwareIconWrapper-action-more-fontSize: var(--pr-t-font-fontSize-225);
 }
 
 @mixin varsPopover {
