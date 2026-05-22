@@ -18,6 +18,10 @@ import { TimeRangePickerSize } from './time-range-picker.type';
 	changeDetection: ChangeDetectionStrategy.OnPush,
 	encapsulation: ViewEncapsulation.None,
 	imports: [IconComponent, TimePickerComponent, ɵPresentationDisplayDefaultDirective],
+	host: {
+		'(focusin)': 'onFocusIn()',
+		'(focusout)': 'onFocusOut()',
+	},
 	providers: [
 		{
 			provide: NG_VALUE_ACCESSOR,
@@ -44,6 +48,8 @@ export class TimeRangePickerComponent implements ControlValueAccessor, OnInit, V
 	#onChange?: (value: TimeRangePickerRange | null) => void;
 	#onTouched?: () => void;
 	#disabledState = signal(false);
+
+	readonly inputFocused = signal(false);
 
 	readonly value = signal<TimeRangePickerRange | null>(null);
 
@@ -128,9 +134,18 @@ export class TimeRangePickerComponent implements ControlValueAccessor, OnInit, V
 		this.#onChange?.(newValue);
 	}
 
-	onTouched(): void {
-		this.#onTouched?.();
-		this.#ngControl?.control?.markAsTouched();
+	onFocusIn(): void {
+		this.inputFocused.set(true);
+	}
+
+	onFocusOut(): void {
+		this.inputFocused.set(false);
+		setTimeout(() => {
+			if (!this.inputFocused()) {
+				this.#onTouched?.();
+				this.#ngControl?.control?.markAsTouched();
+			}
+		});
 	}
 
 	partToFocus(): 'meridiem' | 'minutes' {
