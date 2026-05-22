@@ -3,8 +3,7 @@
   "extends": ["local>LuccaSA/renovate-config", ":disableMajorUpdates"],
   "baseBranchPatterns": ["$default", "rc", "/^v\\d+-lts$/"],
   "lockFileMaintenance": {
-    "enabled": true,
-    "automerge": true
+    "enabled": true
   },
   "minor": {
     "enabled": false
