@@ -16,7 +16,7 @@
 
 @mixin wrapperXS {
 	--components-softwareIconWrapper-action-more-fontSize: var(--pr-t-font-fontSize-150);
-	--components-softwareIconWrapper-list-item-marginInlineEnd: calc(var(--pr-t-spacings-50) * -1);
+	--components-softwareIconWrapper-list-item-marginInlineStart: calc(var(--pr-t-spacings-50) * -1);
 	--components-softwareIcon-action-boxShadowSpread: 1px;
 
 	&,
@@ -27,7 +27,7 @@
 
 @mixin wrapperS {
 	--components-softwareIconWrapper-action-more-fontSize: var(--pr-t-font-fontSize-200);
-	--components-softwareIconWrapper-list-item-marginInlineEnd: calc(var(--pr-t-spacings-50) * -1);
+	--components-softwareIconWrapper-list-item-marginInlineStart: calc(var(--pr-t-spacings-50) * -1);
 
 	&,
 	.softwareIcon {

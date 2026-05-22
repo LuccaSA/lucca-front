@@ -28,12 +28,12 @@ export const SoftwareIconList = [
 	'benefits',
 	'payroll-assistant',
 	// Lucca
-	'administration',
 	'cloud-control',
+	'ask-lucca',
+	'administration',
 	'client-center',
 	'sandbox',
 	'store',
-	'ask-lucca',
 	'lucca',
 ] as const;
 

@@ -11,7 +11,7 @@
 @mixin varsWrapper {
 	@include vars;
 
-	--components-softwareIconWrapper-list-item-marginInlineEnd: calc(var(--pr-t-spacings-75) * -1);
+	--components-softwareIconWrapper-list-item-marginInlineStart: calc(var(--pr-t-spacings-75) * -1);
 	--components-softwareIconWrapper-action-more-fontSize: var(--pr-t-font-fontSize-225);
 }
 
