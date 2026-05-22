@@ -47,7 +47,8 @@
 		.softwareIconWrapper-action {
 			@include insideWrapper;
 
-			&:hover {
+			&:hover,
+			&:focus {
 				@include insideWrapperHover;
 			}
 		}

@@ -6,6 +6,7 @@ interface SoftwareIconBasicStory {
 	icon: string;
 	disabled: boolean;
 	size: string;
+	iconAlt: string;
 }
 
 export default {
@@ -66,6 +67,9 @@ export default {
 		disabled: {
 			description: 'Marque le produit comme inactif.',
 		},
+		iconAlt: {
+			description: 'Texte alternatif de l’illustration restitué par les lecteurs d’écran.',
+		},
 	},
 } as Meta;
 
@@ -75,7 +79,11 @@ function getTemplate(args: SoftwareIconBasicStory): string {
 	const domain = 'https://cdn.lucca.fr';
 	const path = '/transverse/prisme/visuals/software-icon/';
 	const extension = '.svg';
-	return `<div class="softwareIcon${disabled}${size}" aria-hidden="true" [innerHtml]="'${domain}${path}${args.icon}${extension}' | luSafeExternalSvg"></div>`;
+	const iconAlt = args.iconAlt
+		? `
+	<span class="pr-u-mask">${args.iconAlt}</span>`
+		: ``;
+	return `<div class="softwareIcon${disabled}${size}" aria-hidden="true" [innerHtml]="'${domain}${path}${args.icon}${extension}' | luSafeExternalSvg"></div>${iconAlt}`;
 }
 
 const Template = (args: SoftwareIconBasicStory) => ({
@@ -88,6 +96,7 @@ export const Basic: StoryObj<SoftwareIconBasicStory> = {
 		icon: 'absences',
 		disabled: false,
 		size: '',
+		iconAlt: 'Absences',
 	},
 	render: Template,
 };

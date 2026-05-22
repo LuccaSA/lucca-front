@@ -32,18 +32,18 @@ export default {
 		const sizeArg = size ? ` size="${size}"` : ``;
 		return {
 			template: `<lu-software-icon-wrapper${maxArg}${sizeArg}>
-				<lu-software-icon *luSoftwareIconWrapperItem icon="analytics" />
-				<lu-software-icon *luSoftwareIconWrapperItem icon="ask-lucca" />
-				<lu-software-icon *luSoftwareIconWrapperItem icon="office" />
-				<lu-software-icon *luSoftwareIconWrapperItem icon="sandbox" />
-				<lu-software-icon *luSoftwareIconWrapperItem icon="absences" />
-				<lu-software-icon *luSoftwareIconWrapperItem icon="analytics" />
-				<lu-software-icon *luSoftwareIconWrapperItem icon="mood" />
-				<lu-software-icon *luSoftwareIconWrapperItem icon="client-center" />
-				<lu-software-icon *luSoftwareIconWrapperItem icon="cloud-control" />
-				<lu-software-icon *luSoftwareIconWrapperItem icon="engagement" />
-				<lu-software-icon *luSoftwareIconWrapperItem icon="timesheet" />
-				<lu-software-icon *luSoftwareIconWrapperItem icon="compensation" />
+				<lu-software-icon *luSoftwareIconWrapperItem icon="faces" iconAlt="Faces" />
+				<lu-software-icon *luSoftwareIconWrapperItem icon="ask-lucca" iconAlt="Ask Lucca" />
+				<lu-software-icon *luSoftwareIconWrapperItem icon="office" iconAlt="Office" />
+				<lu-software-icon *luSoftwareIconWrapperItem icon="sandbox" iconAlt="Sandbox" />
+				<lu-software-icon *luSoftwareIconWrapperItem icon="absences" iconAlt="Absences" />
+				<lu-software-icon *luSoftwareIconWrapperItem icon="business-expenses" iconAlt="Expenses" />
+				<lu-software-icon *luSoftwareIconWrapperItem icon="mood" iconAlt="Mood" />
+				<lu-software-icon *luSoftwareIconWrapperItem icon="invoices" iconAlt="Invoices" />
+				<lu-software-icon *luSoftwareIconWrapperItem icon="engagement" iconAlt="Engagement" />
+				<lu-software-icon *luSoftwareIconWrapperItem icon="timesheet" iconAlt="Timesheet" />
+				<lu-software-icon *luSoftwareIconWrapperItem icon="compensation" iconAlt="Compensation" />
+				<lu-software-icon *luSoftwareIconWrapperItem icon="store" iconAlt="Store" />
 			</lu-software-icon-wrapper>`,
 		};
 	},

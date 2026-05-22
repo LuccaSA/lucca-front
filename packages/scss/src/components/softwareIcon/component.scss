@@ -6,6 +6,12 @@
 	display: var(--components-softwareIcon-display);
 	inline-size: var(--components-softwareIcon-size);
 	block-size: var(--components-softwareIcon-size);
+	z-index: var(--components-softwareIcon-zIndex);
+	position: relative;
+
+	&:focus-visible {
+		outline: none;
+	}
 
 	@at-root ($atRoot) {
 		.softwareIcon-illustration {
