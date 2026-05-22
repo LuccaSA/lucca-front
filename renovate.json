@@ -13,8 +13,8 @@
     "enabled": false
   },
   "patch": {
-    "schedule": ["at any time"],
-    "rangeStrategy": "in-range-only"
+    "rangeStrategy": "in-range-only",
+    "automerge": true
   },
   "packageRules": [
     {
@@ -22,8 +22,7 @@
       "matchBaseBranches": ["$default"],
       "matchUpdateTypes": ["minor"],
       "enabled": true,
-      "rangeStrategy": "in-range-only",
-      "automerge": false
+      "rangeStrategy": "in-range-only"
     }
   ]
 }
