@@ -1,19 +1,19 @@
 {
   "$schema": "https://docs.renovatebot.com/renovate-schema.json",
-  "extends": ["local>LuccaSA/renovate-config", ":disableMajorUpdates"],
+  "extends": [
+    "local>LuccaSA/renovate-config",
+    "local>LuccaSA/renovate-config//helpers/npm-frontend",
+    ":disableMajorUpdates"
+  ],
   "baseBranchPatterns": ["$default", "rc", "/^v\\d+-lts$/"],
   "lockFileMaintenance": {
-    "enabled": true
+    "enabled": false
   },
   "minor": {
     "enabled": false
   },
-  "packageRules": [
-    {
-      "description": "Disable pinning for npm dependencies (override best-practices)",
-      "matchManagers": ["npm"],
-      "matchPackageNames": ["*"],
-      "rangeStrategy": "in-range-only"
-    }
-  ]
+  "patch": {
+    "schedule": ["at any time"],
+    "rangeStrategy": "in-range-only"
+  }
 }
