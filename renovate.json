@@ -15,5 +15,15 @@
   "patch": {
     "schedule": ["at any time"],
     "rangeStrategy": "in-range-only"
-  }
+  },
+  "packageRules": [
+    {
+      "description": "Allow in-range minor updates on default branch only",
+      "matchBaseBranches": ["$default"],
+      "matchUpdateTypes": ["minor"],
+      "enabled": true,
+      "rangeStrategy": "in-range-only",
+      "automerge": false
+    }
+  ]
 }
