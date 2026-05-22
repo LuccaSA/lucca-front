@@ -1,7 +1,7 @@
 // Based on Intl number input
 // (more info: https://dm4t2.github.io/)
 
-import { computed, Directive, ElementRef, forwardRef, HostListener, inject, input, Renderer2, signal } from '@angular/core';
+import { computed, Directive, ElementRef, forwardRef, inject, input, Renderer2, signal } from '@angular/core';
 import type { ControlValueAccessor } from '@angular/forms';
 import { NG_VALUE_ACCESSOR } from '@angular/forms';
 import { NumberFormat } from './number-format';
@@ -9,6 +9,11 @@ import { NumberFormatOptions } from './number-format.models';
 
 @Directive({
 	selector: 'input[luNumberFormatInput]',
+	host: {
+		'(focus)': 'focus()',
+		'(blur)': 'lostFocus()',
+		'(input)': 'input()',
+	},
 	providers: [
 		{
 			provide: NG_VALUE_ACCESSOR,
@@ -50,18 +55,18 @@ export class NumberFormatDirective implements ControlValueAccessor {
 	setDisabledState(isDisabled: boolean): void {
 		this.#renderer.setProperty(this.#inputElement, 'disabled', isDisabled);
 	}
-	@HostListener('focus') focus(): void {
+	focus(): void {
 		this.#isFocused.set(true);
 		this.#inputElement.value = this.#numberFormat().getFocusFormat(this.#value());
 	}
 
-	@HostListener('blur') lostFocus(): void {
+	lostFocus(): void {
 		this.#isFocused.set(false);
 		this.#inputElement.value = this.#numberFormat().getBlurFormat(this.#value());
 		this.onTouched();
 	}
 
-	@HostListener('input') input(): void {
+	input(): void {
 		const parsedInput = this.#numberFormat().parse(this.#inputElement.value);
 
 		this.#inputElement.value = parsedInput.cleanInput;

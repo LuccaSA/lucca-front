@@ -1,4 +1,4 @@
-import { booleanAttribute, ChangeDetectionStrategy, Component, computed, ElementRef, inject, input, OnChanges, ViewChild, ViewEncapsulation } from '@angular/core';
+import { booleanAttribute, ChangeDetectionStrategy, Component, computed, ElementRef, inject, input, OnChanges, viewChild, ViewEncapsulation } from '@angular/core';
 import { LuClass } from '@lucca-front/ng/core';
 
 @Component({
@@ -17,7 +17,7 @@ import { LuClass } from '@lucca-front/ng/core';
 export class DividerComponent implements OnChanges {
 	#luClass = inject(LuClass);
 
-	@ViewChild('content') readonly content: ElementRef;
+	readonly content = viewChild<ElementRef>('content');
 
 	/**
 	 * Allows rendering the Divider as a native separator

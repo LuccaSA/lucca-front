@@ -22,7 +22,7 @@
 <ng-container *luFilterPillLabel="let label = label; let colon = colon">
 	@let minCount = useSingleOptionDisplayer() ? 1 : 0;
 	@if (valueLength() > minCount) {
-		<span class="multipleSelect-pill-displayer-label">{{ valueLength() }}&nbsp;{{ filterPillLabelPlural }}</span>
+		<span class="multipleSelect-pill-displayer-label">{{ valueLength() }}&nbsp;{{ filterPillLabelPlural() }}</span>
 	} @else {
 		{{ label }}
 		@if (valueLength() === 1) {

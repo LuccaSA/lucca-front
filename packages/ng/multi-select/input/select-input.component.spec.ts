@@ -137,7 +137,7 @@ describe('LuMultiSelectInputComponent', () => {
 					}
 				});
 
-				componentInstance.options = options;
+				componentInstance.options.set(options);
 
 				fixture.componentRef.setInput('totalCount', options.length);
 				fixture.componentRef.setInput('withSelectAllDisplayerLabel', 'Displayer Label');

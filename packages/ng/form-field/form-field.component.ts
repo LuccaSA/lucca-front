@@ -195,7 +195,7 @@ export class FormFieldComponent implements OnDestroy, DoCheck {
 			this.#ariaLabelledBy = [...this.#ariaLabelledBy, id];
 		}
 		this.#inputs.forEach((input) => {
-			if (!input.standalone) {
+			if (!input.standalone()) {
 				this.#renderer.setAttribute(input.host.nativeElement, 'aria-labelledby', this.#ariaLabelledBy.join(' '));
 			}
 		});
@@ -210,7 +210,7 @@ export class FormFieldComponent implements OnDestroy, DoCheck {
 			throw new Error('Missing input for form field, make sure to set `luInput` to your input inside lu-form-field');
 		}
 		this.inputs
-			.filter((input) => !input.standalone)
+			.filter((input) => !input.standalone())
 			.forEach((input) => {
 				const inputId = `${input.host.nativeElement.tagName.toLowerCase()}-${++nextId}`;
 				this.#renderer.setAttribute(input.host.nativeElement, 'id', inputId);
@@ -225,7 +225,7 @@ export class FormFieldComponent implements OnDestroy, DoCheck {
 		this.#inputs.forEach((input) => {
 			this.#renderer.setAttribute(input.host.nativeElement, 'aria-invalid', this.invalidStatus()?.toString());
 			this.#renderer.setAttribute(input.host.nativeElement, 'aria-required', this.isInputRequired()?.toString());
-			if (!input.standalone) {
+			if (!input.standalone()) {
 				let ariaDescribedBy = `${input.host.nativeElement.id}-message`;
 				if (this.extraDescribedBy()) {
 					ariaDescribedBy += ` ${this.extraDescribedBy()}`;

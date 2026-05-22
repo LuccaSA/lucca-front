@@ -1,7 +1,8 @@
-/* eslint-disable @angular-eslint/no-output-on-prefix */
 import { ChangeDetectionStrategy, ChangeDetectorRef, Component, ElementRef, EventEmitter, forwardRef, Input, Output, ViewChild } from '@angular/core';
 import { ALuOptionItem, ILuOptionItem } from './option-item.model';
 
+/* eslint-disable @angular-eslint/no-output-on-prefix */
+/* eslint-disable @angular-eslint/prefer-signals */
 /**
  * @deprecated
  */

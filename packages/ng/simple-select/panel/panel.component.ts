@@ -68,8 +68,8 @@ export class LuSelectPanelComponent<T> implements AfterViewInit, CoreSelectPanel
 	readonly loading = toSignal(this.selectInput.loading$);
 	readonly loading$ = this.selectInput.loading$;
 	searchable = this.selectInput.searchable;
-	optionComparer = this.selectInput.optionComparer;
-	optionKey = this.selectInput.optionKey;
+	readonly optionComparer = this.selectInput.optionComparer();
+	readonly optionKey = this.selectInput.optionKey();
 	colorPanel = this.selectInput.colorPicker;
 
 	trackOptionsBy: TrackByFunction<T> = (_, option) => this.optionKey(option);

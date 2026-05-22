@@ -5,6 +5,7 @@ import { LuTooltipTriggerDirective } from '@lucca-front/ng/tooltip';
 import { ALuTreeOptionItem, ILuTreeOptionItem } from './tree-option-item.model';
 import { LU_TREE_OPTION_ITEM_TRANSLATIONS } from './tree-option-item.translate';
 
+/* eslint-disable @angular-eslint/prefer-signals */
 /**
  * @deprecated
  */
