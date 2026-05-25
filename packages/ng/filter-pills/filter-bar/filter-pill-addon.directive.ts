@@ -9,7 +9,7 @@ export class FilterPillAddonBeforeDirective {
 		inject(FilterBarComponent).addonBefore.set(inject(TemplateRef));
 	}
 
-	public static ngTemplateContextGuard(_dir: FilterPillAddonBeforeDirective, ctx: unknown): ctx is void {
+	public static ngTemplateContextGuard(_dir: FilterPillAddonBeforeDirective, _ctx: unknown): _ctx is void {
 		return true;
 	}
 }
@@ -22,7 +22,7 @@ export class FilterPillAddonAfterDirective {
 		inject(FilterBarComponent).addonAfter.set(inject(TemplateRef));
 	}
 
-	public static ngTemplateContextGuard(_dir: FilterPillAddonAfterDirective, ctx: unknown): ctx is void {
+	public static ngTemplateContextGuard(_dir: FilterPillAddonAfterDirective, _ctx: unknown): _ctx is void {
 		return true;
 	}
 }

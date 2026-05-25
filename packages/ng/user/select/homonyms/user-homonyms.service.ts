@@ -37,7 +37,7 @@ export class LuUserHomonymsService<U extends ILuUser = ILuUser> extends ALuUserH
 
 	enrichHomonyms(homonyms: U[]): Observable<U[]> {
 		if (!homonyms || homonyms.length === 0) {
-			return of([]) as Observable<U[]>;
+			return of([]);
 		}
 		return this._http
 			.get<IV3CollectionResponse<{ id: number; department: { name: string } }>>(`/api/v3/users`, {

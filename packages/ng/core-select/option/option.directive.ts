@@ -12,7 +12,7 @@ export class LuOptionDirective<TOption, TValue> {
 
 	public constructor(private templateRef: TemplateRef<LuOptionContext<TOption>>) {}
 
-	public static ngTemplateContextGuard<TOption, TValue>(_dir: LuOptionDirective<TOption, TValue>, ctx: unknown): ctx is LuOptionContext<TOption> {
+	public static ngTemplateContextGuard<TOption, TValue>(_dir: LuOptionDirective<TOption, TValue>, _ctx: unknown): _ctx is LuOptionContext<TOption> {
 		return true;
 	}
 }

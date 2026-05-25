@@ -23,7 +23,7 @@ export class PresentationDisplayDirective implements OnInit {
 		this.#vcr.clear();
 	}
 
-	public static ngTemplateContextGuard(_dir: PresentationDisplayDirective, ctx: unknown): ctx is void {
+	public static ngTemplateContextGuard(_dir: PresentationDisplayDirective, _ctx: unknown): _ctx is void {
 		return true;
 	}
 }
