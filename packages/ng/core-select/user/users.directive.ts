@@ -228,7 +228,7 @@ export class LuCoreSelectUserOptionDirective<T extends LuCoreSelectUser = LuCore
 			}
 		});
 	}
-	public static ngTemplateContextGuard<T extends LuCoreSelectUser>(_dir: LuCoreSelectUserOptionDirective<T>, ctx: unknown): ctx is { $implicit: T } {
+	public static ngTemplateContextGuard<T extends LuCoreSelectUser>(_dir: LuCoreSelectUserOptionDirective<T>, _ctx: unknown): _ctx is { $implicit: T } {
 		return true;
 	}
 }

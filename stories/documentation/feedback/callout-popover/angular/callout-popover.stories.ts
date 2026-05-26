@@ -71,7 +71,7 @@ export default {
 			description: 'État du callout.',
 		},
 		heading: {
-			description: 'Ajoute un titre au popover.',
+			description: 'Ajoute un titre au popover. [PortalContent]',
 			if: { arg: 'customText', truthy: false },
 		},
 		headingHiddenIfSingleItem: {
@@ -94,6 +94,12 @@ export default {
 				type: 'select',
 			},
 			description: 'Détermine le mode d’ouverture du popover.',
+		},
+		popoverDisabled: {
+			control: {
+				type: 'boolean',
+			},
+			description: 'Désactive l’apparition du popover.',
 		},
 		size: {
 			options: [null, 'XS', 'S', 'M'],
@@ -125,6 +131,7 @@ export const Template: StoryObj<CalloutPopoverComponent & { items: number; custo
 		customText: '',
 		heading: '',
 		popoverTrigger: null,
+		popoverDisabled: false,
 		headingHiddenIfSingleItem: false,
 		items: 2,
 		closeDelay: 500,

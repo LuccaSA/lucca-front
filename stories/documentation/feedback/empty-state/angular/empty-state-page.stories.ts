@@ -189,10 +189,10 @@ export default {
 			description: 'Titre du composant.',
 		},
 		description: {
-			description: 'Description du composant.',
+			description: 'Description du composant. [PortalContent]',
 		},
 		slotTop: {
-			description: '[v19.3] Ajout d’un slot au dessus du titre.',
+			description: '[v19.3] Ajout d’un slot au dessus du titre. [PortalContent]',
 		},
 	},
 } as Meta;

@@ -18,7 +18,7 @@ export class LuOptionGroupDirective<TOption, TValue, TGroup> implements LuOption
 
 	readonly content = inject<TemplateRef<LuOptionGroupByContext<TOption, TGroup>>>(TemplateRef);
 
-	public static ngTemplateContextGuard<TOption, TValue, TGroup>(_dir: LuOptionGroupDirective<TOption, TValue, TGroup>, ctx: unknown): ctx is LuOptionGroupByContext<TOption, TGroup> {
+	public static ngTemplateContextGuard<TOption, TValue, TGroup>(_dir: LuOptionGroupDirective<TOption, TValue, TGroup>, _ctx: unknown): _ctx is LuOptionGroupByContext<TOption, TGroup> {
 		return true;
 	}
 

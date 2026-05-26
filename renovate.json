@@ -1,0 +1,21 @@
+{
+  "$schema": "https://docs.renovatebot.com/renovate-schema.json",
+  "extends": ["local>LuccaSA/renovate-config", "local>LuccaSA/renovate-config//helpers/npm-frontend", ":disableMajorUpdates"],
+  "baseBranchPatterns": ["$default", "rc", "/^v\\d+-lts$/"],
+  "lockFileMaintenance": {
+    "enabled": true
+  },
+  "minor": {
+    "enabled": false
+  },
+  "packageRules": [
+    {
+      "description": "Allow minor updates on default branch only",
+      "matchBaseBranches": ["$default"],
+      "matchUpdateTypes": ["minor"],
+      "enabled": true,
+      "rangeStrategy": "bump",
+      "automerge": true
+    }
+  ]
+}

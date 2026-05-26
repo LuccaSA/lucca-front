@@ -30,6 +30,7 @@ export const SoftwareIconList = [
 	// Lucca
 	'cloud-control',
 	'ask-lucca',
+	'calendar',
 	'administration',
 	'client-center',
 	'sandbox',

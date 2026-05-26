@@ -11,7 +11,7 @@ export class DialogRefAdapter<D, T extends ILuModalContent> implements ILuModalR
 	modalClasses: LuModalClasses;
 
 	onOpen: Observable<D> = of(this.dialogRef.instance.dialogData.data);
-	onClose: Observable<LuModalContentResult<T>> = this.dialogRef.result$ as Observable<LuModalContentResult<T>>;
+	onClose: Observable<LuModalContentResult<T>> = this.dialogRef.result$;
 	onDismiss: Observable<void> = this.dialogRef.dismissed$;
 	onBackdropClick: Observable<void> = this.dialogRef.cdkRef.backdropClick.pipe(map(() => {}));
 

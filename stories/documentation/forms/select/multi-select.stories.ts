@@ -37,7 +37,7 @@ import { startWith } from 'rxjs/operators';
 import { HiddenArgType } from 'stories/helpers/common-arg-types';
 import { createTestStory, getStoryGenerator } from 'stories/helpers/stories';
 import { StoryModelDisplayComponent } from 'stories/helpers/story-model-display.component';
-import { expect, screen, userEvent, within } from 'storybook/test';
+import { expect, screen, userEvent, waitFor, within } from 'storybook/test';
 import { sleep, waitForAngular } from '../../../helpers/test';
 import { allLegumes, colorNameByColor, coreSelectStory, FilterLegumesPipe, ILegume, LuCoreSelectInputStoryComponent, SortLegumesPipe } from './select.utils';
 
@@ -108,7 +108,9 @@ const basePlay = async ({ canvasElement, step }) => {
 	await userEvent.click(options[3]);
 	await userEvent.keyboard('{Escape}');
 	await waitForAngular();
-	await expect(screen.queryByText('listbox')).toBeNull();
+	await waitFor(() => {
+		expect(screen.queryByRole('listbox')).not.toBeInTheDocument();
+	});
 	await checkValues(input, optionValues);
 	if (isBadgeDisplayer) {
 		await step('Clear and remove values using mouse', async () => {
@@ -122,7 +124,9 @@ const basePlay = async ({ canvasElement, step }) => {
 			await userEvent.click(options[1]);
 			await userEvent.keyboard('{Escape}');
 			await waitForAngular();
-			await expect(screen.queryByText('listbox')).toBeNull();
+			await waitFor(() => {
+				expect(screen.queryByRole('listbox')).not.toBeInTheDocument();
+			});
 			await expect(input.parentElement).not.toHaveTextContent(optionValues[1]);
 		});
 	}
@@ -140,7 +144,9 @@ const basePlay = async ({ canvasElement, step }) => {
 		await expect(screen.getByRole('listbox')).toBeVisible();
 		await userEvent.keyboard('{Escape}');
 		await waitForAngular();
-		await expect(screen.queryByText('listbox')).toBeNull();
+		await waitFor(() => {
+			expect(screen.queryByRole('listbox')).not.toBeInTheDocument();
+		});
 		await waitForAngular();
 		await expect(input).toHaveFocus();
 		// Broken but fixed in current master, TODO uncomment
