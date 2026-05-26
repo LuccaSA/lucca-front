@@ -123,7 +123,7 @@ export const Basic: StoryObj<
 					value: 'Valeur en français',
 				},
 				{
-					cultureCode: 'en-EN',
+					cultureCode: 'en-US',
 					value: 'English value',
 				},
 				{

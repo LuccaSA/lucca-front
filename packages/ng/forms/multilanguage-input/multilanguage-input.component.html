@@ -43,8 +43,8 @@
 				<lu-icon icon="signTranslation" [alt]="intl().toggleMultilanguage" />
 			</button>
 			<ng-template #popoverMultilanguage>
-				<!-- TODO syle width -->
-				<div class="popover-contentOptional multilanguage_popover-content" [style.width.px]="inputElement.clientWidth + 72">
+				<!-- TODO syle width: if has invariant, +72, else +0 -->
+				<div class="popover-contentOptional multilanguage_popover-content" [style.width.px]="inputElement.clientWidth + 32">
 					<div class="pr-u-displayFlex pr-u-gap100 pr-u-flexDirectionColumn">
 						@for (row of panelInputs(); track row.cultureCode) {
 							<ng-template #prefixLang>
@@ -71,11 +71,9 @@
 									<lu-icon icon="officePenStar" alt="Traduire avec l’assistant IA" />
 								</button>
 							</ng-template>
-							<!-- TODO label -->
 							<lu-form-field
 								[size]="formFieldSize()"
 								[label]="intl().translateTo | intlParams: { lang: getLocaleDisplayName(row.cultureCode) }"
-								hiddenLabel
 							>
 								<!-- TODO suffix -->
 								<!-- TODO required -->
