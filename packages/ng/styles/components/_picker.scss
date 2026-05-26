@@ -41,7 +41,7 @@
 		}
 
 		lu-tree-branch .optionItem-value {
-			--components-options-item-padding-horizontal: calc(var(--pr-t-spacings-100) + var(--pr-t-spacings-100) * var(--components-treeBranch-level)) var(--pr-t-spacings-100);
+			--components-options-item-padding-horizontal: calc(var(--pr-t-spacings-250) + var(--pr-t-spacings-100) * calc(var(--components-treeBranch-level) - 1)) var(--pr-t-spacings-100);
 		}
 	}
 
