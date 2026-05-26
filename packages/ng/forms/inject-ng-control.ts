@@ -29,55 +29,13 @@ export function injectNgControl() {
 
 	const field = inject(FormField, { optional: true });
 	if (field) {
-		hack(ngControl);
-		const control = new FormControl();
-
-		// eslint-disable-next-line
-		(ngControl as any).control = control;
-
-		// Value | Field -> Control
-		effect(() => control.setValue(field.state().value(), { emitEvent: false }));
-
-		// Value | Control -> Field
-		control.valueChanges.pipe(takeUntilDestroyed()).subscribe((v) => field.state().value.set(v));
-
-		// Touched | Control -> Field
-		control.statusChanges
-			.pipe(
-				map(() => control.touched),
-				distinctUntilChanged(),
-				takeUntilDestroyed(),
-			)
-			.subscribe((touched) => touched && field.state().markAsTouched());
-
-		// Touched | Field -> Control
-		effect(() => (field.state().touched() ? control.markAsTouched() : control.markAsUntouched()));
-
-		// Dirty | Field -> Control
-		effect(() => (field.state().dirty() ? control.markAllAsDirty() : control.markAsPristine()));
-
-		// Disabled | Field -> Control
-		effect(() => (field.state().disabled() ? control.disable() : control.enable()));
-
-		// Error | Field -> Control
-		effect(() => control.setErrors(field.state().errors()));
-
-		ngControl.registerOnChange ??= () => {};
-		ngControl.markAsTouched ??= () => {};
-		ngControl.registerOnDisabledChange ??= () => {};
-		ngControl._unregisterOnChange ??= () => {};
-		ngControl._unregisterOnDisabledChange ??= () => {};
-		ngControl._registerOnCollectionChange ??= () => {};
-		ngControl._unregisterOnCollectionChange ??= () => {};
-
-		// eslint-disable-next-line
-		return ngControl as NgControl & { control: FormControl<any> };
+		return generateMirrorControl(ngControl, field);
 	}
 
 	throw new Error(`NgControl is not an instance of InteropNgControl, FormControlDirective, FormControlName or NgModel`);
 }
 
-type LFCompat = {
+type LFCompatControl = {
 	// eslint-disable-next-line
 	control: FormControl<any>;
 	markAsTouched: () => void;
@@ -88,4 +46,54 @@ type LFCompat = {
 	_registerOnCollectionChange: () => void;
 	_unregisterOnCollectionChange: () => void;
 } & NgControl;
-function hack(ctrl: NgControl): asserts ctrl is LFCompat {}
+
+/**
+ * Ensure that all needed method are present.
+ *
+ * @experimental
+ */
+// eslint-disable-next-line @typescript-eslint/no-explicit-any
+function generateMirrorControl(_ngControl: NgControl, field: FormField<unknown>): NgControl & { control: FormControl<any> } {
+	const control = new FormControl();
+	const ngControl = _ngControl as unknown as LFCompatControl;
+
+	ngControl.control = control;
+
+	// Value | Field -> Control
+	effect(() => control.setValue(field.state().value(), { emitEvent: false }));
+
+	// Value | Control -> Field
+	control.valueChanges.pipe(takeUntilDestroyed()).subscribe((v) => field.state().value.set(v));
+
+	// Touched | Control -> Field
+	control.statusChanges
+		.pipe(
+			map(() => control.touched),
+			distinctUntilChanged(),
+			takeUntilDestroyed(),
+		)
+		.subscribe((touched) => touched && field.state().markAsTouched());
+
+	// Touched | Field -> Control
+	effect(() => (field.state().touched() ? control.markAsTouched() : control.markAsUntouched()));
+
+	// Dirty | Field -> Control
+	effect(() => (field.state().dirty() ? control.markAllAsDirty() : control.markAsPristine()));
+
+	// Disabled | Field -> Control
+	effect(() => (field.state().disabled() ? control.disable() : control.enable()));
+
+	// Error | Field -> Control
+	effect(() => control.setErrors(field.state().errors()));
+
+	ngControl.registerOnChange ??= () => {};
+	ngControl.markAsTouched ??= () => {};
+	ngControl.registerOnDisabledChange ??= () => {};
+	ngControl._unregisterOnChange ??= () => {};
+	ngControl._unregisterOnDisabledChange ??= () => {};
+	ngControl._registerOnCollectionChange ??= () => {};
+	ngControl._unregisterOnCollectionChange ??= () => {};
+
+	// eslint-disable-next-line
+	return ngControl as NgControl & { control: FormControl<any> };
+}
