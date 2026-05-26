@@ -36,17 +36,17 @@ jobs:
             "
           done
 
-      - run: npm publish --access public --provenance
+      - run: npm stage publish --access public --provenance
         working-directory: dist/icons
 
-      - run: npm publish --access public --provenance
+      - run: npm stage publish --access public --provenance
         working-directory: dist/scss
 
-      - run: npm publish --access public --provenance
+      - run: npm stage publish --access public --provenance
         working-directory: dist/ng
 
-      - run: npm publish --access public --provenance
+      - run: npm stage publish --access public --provenance
         working-directory: dist/prisme
 
-      - run: npm publish --access public --provenance
+      - run: npm stage publish --access public --provenance
         working-directory: packages/stylelint-config
