@@ -69,13 +69,17 @@ export function injectNgControl() {
 		ngControl._unregisterOnDisabledChange ??= () => {};
 		ngControl._registerOnCollectionChange ??= () => {};
 		ngControl._unregisterOnCollectionChange ??= () => {};
-		return ngControl;
+
+		// eslint-disable-next-line
+		return ngControl as NgControl & { control: FormControl<any> };
 	}
 
 	throw new Error(`NgControl is not an instance of InteropNgControl, FormControlDirective, FormControlName or NgModel`);
 }
 
 type LFCompat = {
+	// eslint-disable-next-line
+	control: FormControl<any>;
 	markAsTouched: () => void;
 	registerOnChange: () => void;
 	registerOnDisabledChange: () => void;
