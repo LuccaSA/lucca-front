@@ -42,7 +42,7 @@ import { LU_MULTILANGUAGE_INPUT_TRANSLATIONS } from './multilanguage-input.trans
 export class MultilanguageInputComponent implements ControlValueAccessor {
 	#localeId = inject(LOCALE_ID);
 
-	#intlDisplay = new Intl.DisplayNames([this.#localeId], { type: 'language' });
+	#intlDisplay = new Intl.DisplayNames([this.#localeId], { type: 'language', languageDisplay: 'dialect' });
 
 	intl = input(...intlInputOptions(LU_MULTILANGUAGE_INPUT_TRANSLATIONS));
 
