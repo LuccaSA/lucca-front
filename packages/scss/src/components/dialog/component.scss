@@ -117,6 +117,8 @@
 
 		.dialog-inside-footer {
 			grid-area: footer;
+			position: relative;
+			z-index: 1;
 
 			&.footer {
 				@include footer.insideDialog;
@@ -156,6 +158,8 @@
 			padding-inline: var(--components-dialog-insideContent-paddingInline);
 			grid-area: overflow;
 			overflow: auto;
+			position: relative;
+			z-index: 0;
 			outline: none;
 		}
 
