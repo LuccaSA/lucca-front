@@ -39,6 +39,10 @@
 		.optionItem-value {
 			--components-options-item-padding-horizontal: var(--pr-t-spacings-250) var(--pr-t-spacings-100);
 		}
+
+		lu-tree-branch .optionItem-value {
+			--components-options-item-padding-horizontal: calc(var(--pr-t-spacings-100) + var(--pr-t-spacings-100) * var(--components-treeBranch-level)) var(--pr-t-spacings-100);
+		}
 	}
 
 	.lu-picker-content-option-group-title {
