@@ -47,22 +47,6 @@ export default {
 	<lu-horizontal-navigation-tab label="Tab 3">Contenu 3</lu-horizontal-navigation-tab>
 	<lu-horizontal-navigation-tab label="Tab 4"${disabledParam}>Contenu 4</lu-horizontal-navigation-tab>
 </lu-horizontal-navigation>
-
-<div id="panel-1" aria-labelledby="tab-1" role="tabpanel" tabindex="0" class="horizontalNavigation_panel is-active">
-	<p>Contenu 1</p>
-</div>
-
-<div id="panel-2" aria-labelledby="tab-2" role="tabpanel" tabindex="0" class="horizontalNavigation_panel">
-	<p>Contenu 2</p>
-</div>
-
-<div id="panel-3" aria-labelledby="tab-3" role="tabpanel" tabindex="0" class="horizontalNavigation_panel">
-	<p>Contenu 3</p>
-</div>
-
-<div id="panel-4" aria-labelledby="tab-4" role="tabpanel" tabindex="0" class="horizontalNavigation_panel">
-	<p>Contenu 4</p>
-</div>
 `,
 		};
 	},
