@@ -1,23 +1,23 @@
 export const Translations = {
 	de: {
-		seeMore: 'Weitere {{count}} Produkte anzeigen',
+		seeMore: 'Weitere {{count}} Programme anzeigen',
 	},
 	en: {
-		seeMore: 'See {{count}} more software',
+		seeMore: 'See the {{count}} additional software programs',
 	},
 	es: {
-		seeMore: 'Ver {{count}} productos más',
+		seeMore: 'Ver los {{count}} programas adicionales',
 	},
 	fr: {
-		seeMore: 'Voir les {{count}} produits supplémentaires',
+		seeMore: 'Voir les {{count}} logiciels supplémentaires',
 	},
 	it: {
-		seeMore: 'Vedi altri {{count}} prodotti',
+		seeMore: 'Vedi i {{count}} programmi aggiuntivi',
 	},
 	nl: {
-		seeMore: '{{count}} meer producten bekijken',
+		seeMore: 'Bekijk de {{count}} extra programma’s',
 	},
 	pt: {
-		seeMore: 'Ver mais {{count}} produtos',
+		seeMore: 'Ver os {{count}} programas adicionais',
 	},
 };

@@ -47,7 +47,7 @@
 		.softwareIconWrapper-action {
 			@include reset.button;
 
-			border-radius: var(--pr-t-border-radius-bubble3);
+			border-radius: 68% 35% 45% 55% / 40% 40% 64% 60%;
 			background-color: var(--palettes-neutral-200);
 			inline-size: var(--components-softwareIcon-size);
 			block-size: var(--components-softwareIcon-size);

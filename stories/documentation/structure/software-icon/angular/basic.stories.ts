@@ -25,17 +25,21 @@ export default {
 		iconAlt: {
 			description: 'Texte alternatif de l’illustration restitué par les lecteurs d’écran.',
 		},
+		withTooltip: {
+			description: 'Ajoute une info-bulle qui reprend l’alternative textuelle de l’icône. (Ce paramètre est automatiquement activé quand l’icône est dans son wrapper.)',
+		},
 	},
 	decorators: [
 		moduleMetadata({
 			imports: [SoftwareIconComponent],
 		}),
 	],
-	render: ({ disabled, size, ...args }, { argTypes }) => {
+	render: ({ disabled, size, withTooltip, ...args }, { argTypes }) => {
 		const disabledArg = disabled ? ` disabled` : ``;
 		const sizeArg = size !== '' ? ` size="${size}"` : ``;
+		const tooltipArg = withTooltip ? ` withTooltip` : ``;
 		return {
-			template: `<lu-software-icon${sizeArg}${disabledArg}${generateInputs(args, argTypes)} />`,
+			template: `<lu-software-icon${tooltipArg}${sizeArg}${disabledArg}${generateInputs(args, argTypes)} />`,
 		};
 	},
 } as Meta;
@@ -46,5 +50,6 @@ export const Basic: StoryObj<SoftwareIconComponent> = {
 		disabled: false,
 		size: '',
 		iconAlt: 'Absences',
+		withTooltip: false,
 	},
 };

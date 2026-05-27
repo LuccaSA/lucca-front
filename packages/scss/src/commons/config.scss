@@ -107,10 +107,6 @@ $borderRadiusTokens: (
 	'small': var(--pr-t-border-radius-75),
 	'full': '9999px',
 	'input': var(--pr-t-border-radius-default),
-	'bubble1': 39% 61% 50% 47% / 35% 50% 53% 65%,
-	'bubble2': 46% 57% 65% 47% / 54% 45% 65% 50%,
-	'bubble3': 68% 35% 45% 55% / 40% 40% 64% 60%,
-	'bubble4': 70% 70% 65% 60% / 82% 80% 60% 60%,
 );
 
 $product: 'brand' !default;
