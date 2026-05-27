@@ -3,7 +3,7 @@ name: generate-version-changelog-markdown
 description: 'Génère un markdown pour une version spécifique à destination du changelog GitHub.'
 ---
 
-# Skill : generate-version-changelog-markdowng
+# Skill : generate-version-changelog-markdown
 
 Génère le corps markdown d'une GitHub Release pour lucca-front, à partir d'une liste de PRs associée à une version spécifique (mergées ou non). Le markdown suit une structure précise avec des sections dédiées aux actions de mise à jour, aux nouvelles fonctionnalités, aux corrections, etc. Chaque entrée est formatée de manière concise avec un lien vers la PR correspondante.
 
