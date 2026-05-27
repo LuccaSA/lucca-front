@@ -18,6 +18,11 @@ export class SkeletonFieldComponent {
 	readonly hiddenLabel = input<boolean, boolean | `${boolean}`>(false, { transform: booleanAttribute });
 
 	/**
+	 * Changes the size of the skeleton field
+	 */
+	readonly size = input<'XS' | 'S' | 'M'>();
+
+	/**
 	 * Defines the number of row
 	 */
 	readonly rows = input<number, number | `${number}`>(1, { transform: numberAttribute });
