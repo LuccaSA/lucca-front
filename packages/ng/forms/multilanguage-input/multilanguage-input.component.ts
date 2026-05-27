@@ -1,5 +1,5 @@
 import { ConnectionPositionPair } from '@angular/cdk/overlay';
-import { booleanAttribute, ChangeDetectionStrategy, Component, computed, forwardRef, inject, input, LOCALE_ID, signal, ViewEncapsulation, WritableSignal } from '@angular/core';
+import { booleanAttribute, ChangeDetectionStrategy, Component, computed, forwardRef, inject, input, LOCALE_ID, output, signal, ViewEncapsulation, WritableSignal } from '@angular/core';
 import { ControlValueAccessor, FormsModule, NG_VALUE_ACCESSOR, ReactiveFormsModule } from '@angular/forms';
 import { intlInputOptions, IntlParamsPipe } from '@lucca-front/ng/core';
 import { FORM_FIELD_INSTANCE, FormFieldComponent, InputDirective, ɵPresentationDisplayDefaultDirective } from '@lucca-front/ng/form-field';
@@ -60,13 +60,23 @@ export class MultilanguageInputComponent implements ControlValueAccessor {
 
 	autocomplete = input<AutoFill>('off');
 
+	noInvariant = input(false, { transform: booleanAttribute });
+
+	displayLocale = input('');
+
+	translateWithAI = output<string>();
+
 	// Suffixed with Internal to avoid conflict with NgModel's disabled attribute
 	disabledInternal = signal(false);
 
 	model: WritableSignal<MultilanguageTranslation[]> = signal([] as MultilanguageTranslation[]);
 
-	invariant = computed(() => {
-		return this.model().find((row) => row.cultureCode === INVARIANT_CULTURE_CODE) || { value: '' };
+	displayRow = computed(() => {
+		if (this.noInvariant()) {
+			return this.model().find((row) => row.cultureCode === this.displayLocale()) || { value: '', required: false, cultureCode: this.displayLocale() };
+		} else {
+			return this.model().find((row) => row.cultureCode === INVARIANT_CULTURE_CODE) || { value: '', required: false, cultureCode: INVARIANT_CULTURE_CODE };
+		}
 	});
 
 	panelInputs = computed(() => {
@@ -74,7 +84,7 @@ export class MultilanguageInputComponent implements ControlValueAccessor {
 	});
 
 	presentationValue = computed(() => {
-		return this.model().find((row) => row.cultureCode === this.#localeId)?.value || this.invariant()?.value;
+		return this.model().find((row) => row.cultureCode === this.#localeId)?.value || this.displayRow()?.value;
 	});
 
 	popoverPositions: ConnectionPositionPair[] = [
