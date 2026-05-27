@@ -1,6 +1,6 @@
 import { SoftwareIconComponent, SoftwareIconList } from '@lucca-front/ng/software-icon';
 import { Meta, moduleMetadata, StoryObj } from '@storybook/angular';
-import { cleanupTemplate, generateInputs } from 'stories/helpers/stories';
+import { generateInputs } from 'stories/helpers/stories';
 
 export default {
 	title: 'Documentation/Structure/Software icon/Angular/Basic',
@@ -22,17 +22,24 @@ export default {
 		disabled: {
 			description: 'Marque le produit comme inactif.',
 		},
+		iconAlt: {
+			description: 'Texte alternatif de l’illustration restitué par les lecteurs d’écran.',
+		},
+		withTooltip: {
+			description: 'Ajoute une info-bulle qui reprend l’alternative textuelle de l’icône. (Ce paramètre est automatiquement activé quand l’icône est dans son wrapper.)',
+		},
 	},
 	decorators: [
 		moduleMetadata({
 			imports: [SoftwareIconComponent],
 		}),
 	],
-	render: ({ disabled, size, ...args }, { argTypes }) => {
+	render: ({ disabled, size, withTooltip, ...args }, { argTypes }) => {
 		const disabledArg = disabled ? ` disabled` : ``;
 		const sizeArg = size !== '' ? ` size="${size}"` : ``;
+		const tooltipArg = withTooltip ? ` withTooltip` : ``;
 		return {
-			template: cleanupTemplate(`<lu-software-icon${sizeArg}${disabledArg}${generateInputs(args, argTypes)} />`),
+			template: `<lu-software-icon${tooltipArg}${sizeArg}${disabledArg}${generateInputs(args, argTypes)} />`,
 		};
 	},
 } as Meta;
@@ -42,5 +49,7 @@ export const Basic: StoryObj<SoftwareIconComponent> = {
 		icon: 'absences',
 		disabled: false,
 		size: '',
+		iconAlt: 'Absences',
+		withTooltip: false,
 	},
 };
