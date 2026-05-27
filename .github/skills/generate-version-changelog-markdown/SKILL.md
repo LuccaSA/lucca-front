@@ -58,6 +58,7 @@ Toujours inclure dans cet ordre (y compris si vide, avec la mention `None`) :
 La liste des PRs à inclure est déterminée par le **milestone GitHub** correspondant à la version (ex. : `21.2.3`), accessible via :
 
 ```
+https://github.com/LuccaSA/lucca-front/milestone/<id>
 https://github.com/LuccaSA/lucca-front/milestone/<id>?closed=1
 ```
 
