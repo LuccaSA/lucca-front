@@ -9,6 +9,9 @@
 
 <div class="dialog-inside-header-container">
 	<ng-content />
+	@if (optionalSubtitle()) {
+		<div class="dialog-inside-header-container-subtitle"><ng-content select="[dialogHeaderSubtitle]" /></div>
+	}
 </div>
 
 <div class="dialog-inside-header-content">
