@@ -69,6 +69,7 @@ const defaultPositionPairs: Record<PopoverPosition, ConnectionPositionPair> = {
 	selector: '[luPopover2]',
 	host: {
 		'[attr.aria-expanded]': 'opened()',
+		'[attr.tabindex]': 'tabIndexAttr',
 	},
 	exportAs: 'luPopover2',
 })
@@ -149,6 +150,8 @@ export class PopoverDirective implements OnDestroy {
 
 	#screenReaderDescription?: HTMLSpanElement;
 
+	readonly tabIndexAttr = this.#shouldSetTabIndex(this.elementRef.nativeElement) ? '0' : null;
+
 	// For when we need to extend this popover and add some extra providers to the panel
 	protected additionalProviders: Provider[] = [];
 
@@ -219,6 +222,38 @@ export class PopoverDirective implements OnDestroy {
 
 	@HostListener('click')
 	click(): void {
+		this.#togglePopoverFromTrigger();
+	}
+
+	@HostListener('keydown.enter')
+	onEnterKeyDown(): void {
+		if (!this.#isUsingSyntheticTabIndex()) {
+			return;
+		}
+
+		this.#togglePopoverFromTrigger();
+	}
+
+	@HostListener('keydown.space', ['$event'])
+	onSpaceKeyDown(event: Event): void {
+		if (!this.#isUsingSyntheticTabIndex()) {
+			return;
+		}
+
+		event.preventDefault();
+	}
+
+	@HostListener('keyup.space', ['$event'])
+	onSpaceKeyUp(event: Event): void {
+		if (!this.#isUsingSyntheticTabIndex()) {
+			return;
+		}
+
+		event.preventDefault();
+		this.#togglePopoverFromTrigger();
+	}
+
+	#togglePopoverFromTrigger(): void {
 		if (this.opened()) {
 			this.#componentRef?.close();
 			this.#listenToMouseLeave = true;
@@ -310,6 +345,40 @@ export class PopoverDirective implements OnDestroy {
 
 	updatePosition() {
 		this.#overlayRef?.updatePosition();
+	}
+
+	#isUsingSyntheticTabIndex(): boolean {
+		return this.tabIndexAttr === '0';
+	}
+
+	#shouldSetTabIndex(element: HTMLElement): boolean {
+		if (element.hasAttribute('tabindex')) {
+			return false;
+		}
+
+		return !this.#isNativelyFocusable(element);
+	}
+
+	#isNativelyFocusable(element: HTMLElement): boolean {
+		const tag = element.tagName.toLowerCase();
+
+		if (element.isContentEditable) {
+			return true;
+		}
+
+		if (tag === 'a') {
+			return element.hasAttribute('href');
+		}
+
+		if (tag === 'button' || tag === 'select' || tag === 'textarea') {
+			return !element.hasAttribute('disabled');
+		}
+
+		if (tag === 'input') {
+			return !element.hasAttribute('disabled') && (element as HTMLInputElement).type !== 'hidden';
+		}
+
+		return false;
 	}
 
 	#buildPositions(): ConnectedPosition[] {
