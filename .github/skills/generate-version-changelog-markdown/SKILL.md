@@ -141,7 +141,7 @@ None
 
 ### 🎉 Features
 
-- [Color picker] New component [#4333](https://github.com/LuccaSA/lucca-front/pull/4333)
+- [ColorPicker] New component [#4333](https://github.com/LuccaSA/lucca-front/pull/4333)
 - [Dialog] Add resize method [#3968](https://github.com/LuccaSA/lucca-front/pull/3968)
 
 ### 🎨 UI update
