@@ -36,7 +36,7 @@ Ne contiennent que les sections pertinentes (omettre celles qui sont vides) :
 ### 🔨 Technical
 ```
 
-### Versions mineure (x.**Y**.0)
+### Versions mineures (x.**Y**.0)
 
 Toujours inclure dans cet ordre (y compris si vide, avec la mention `None`) :
 
