@@ -3,7 +3,6 @@ import { ConnectionPositionPair } from '@angular/cdk/overlay';
 import { NgTemplateOutlet } from '@angular/common';
 import {
 	afterNextRender,
-	booleanAttribute,
 	ChangeDetectionStrategy,
 	Component,
 	computed,
@@ -24,7 +23,7 @@ import { toSignal } from '@angular/core/rxjs-interop';
 import { AbstractControl, ControlValueAccessor, FormsModule, NG_VALIDATORS, NG_VALUE_ACCESSOR, NgControl, NgModel, ValidationErrors, Validator } from '@angular/forms';
 import { LuccaIcon } from '@lucca-front/icons';
 import { ClearComponent } from '@lucca-front/ng/clear';
-import { isNil, isNotNil, LuClass, PortalContent, PortalDirective, ɵeffectWithDeps } from '@lucca-front/ng/core';
+import { isNil, isNotNil, luBooleanAttribute, LuClass, PortalContent, PortalDirective, ɵeffectWithDeps } from '@lucca-front/ng/core';
 import { FILTER_PILL_INPUT_COMPONENT, FilterPillDisplayerDirective, FilterPillInputComponent } from '@lucca-front/ng/filter-pills';
 import { FORM_FIELD_INSTANCE, InputDirective, ɵPresentationDisplayDefaultDirective } from '@lucca-front/ng/form-field';
 import { IconComponent } from '@lucca-front/ng/icon';
@@ -113,7 +112,7 @@ export class DateRangeInputComponent extends AbstractDateComponent implements On
 
 	readonly placeholder = input<string>();
 
-	readonly widthAuto = input(false, { transform: booleanAttribute });
+	readonly widthAuto = input(false, { transform: luBooleanAttribute });
 
 	readonly label: Signal<PortalContent | undefined> = signal('');
 

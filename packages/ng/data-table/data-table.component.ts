@@ -1,6 +1,5 @@
 import {
 	afterNextRender,
-	booleanAttribute,
 	ChangeDetectionStrategy,
 	Component,
 	computed,
@@ -11,13 +10,12 @@ import {
 	forwardRef,
 	inject,
 	input,
-	numberAttribute,
 	OnInit,
 	signal,
 	viewChild,
 	ViewEncapsulation,
 } from '@angular/core';
-import { ResponsiveConfig, ɵeffectWithDeps } from '@lucca-front/ng/core';
+import { luBooleanAttribute, luNumberAttribute, ResponsiveConfig, ɵeffectWithDeps } from '@lucca-front/ng/core';
 import { DataTableHeadComponent } from './data-table-head/data-table-head.component';
 import { DataTableRowComponent } from './data-table-row/data-table-row.component';
 import { LU_DATA_TABLE_INSTANCE } from './data-table.token';
@@ -47,13 +45,13 @@ export class DataTableComponent implements OnInit {
 	readonly tableRef = viewChild<ElementRef<Element>>('tableRef');
 	#destroyRef = inject(DestroyRef);
 
-	readonly hover = input(false, { transform: booleanAttribute });
-	readonly selectable = input(false, { transform: booleanAttribute });
-	readonly layoutFixed = input(false, { transform: booleanAttribute });
-	readonly cellBorder = input(false, { transform: booleanAttribute });
-	readonly nested = input(false, { transform: booleanAttribute });
-	readonly drag = input(false, { transform: booleanAttribute });
-	readonly noOverflow = input(false, { transform: booleanAttribute });
+	readonly hover = input(false, { transform: luBooleanAttribute });
+	readonly selectable = input(false, { transform: luBooleanAttribute });
+	readonly layoutFixed = input(false, { transform: luBooleanAttribute });
+	readonly cellBorder = input(false, { transform: luBooleanAttribute });
+	readonly nested = input(false, { transform: luBooleanAttribute });
+	readonly drag = input(false, { transform: luBooleanAttribute });
+	readonly noOverflow = input(false, { transform: luBooleanAttribute });
 
 	readonly responsive = input<ResponsiveConfig<'layoutFixed', true>>({});
 
@@ -64,8 +62,8 @@ export class DataTableComponent implements OnInit {
 
 	readonly stickyHeader = computed(() => this.header()?.sticky());
 
-	readonly stickyColsStart = input(0, { transform: numberAttribute });
-	readonly stickyColsEnd = input(0, { transform: numberAttribute });
+	readonly stickyColsStart = input(0, { transform: luNumberAttribute });
+	readonly stickyColsEnd = input(0, { transform: luNumberAttribute });
 
 	readonly firstColumnVisibleAfterColsStart = signal(true);
 	readonly lastColumnVisibleBeforeColsEnd = signal(false);

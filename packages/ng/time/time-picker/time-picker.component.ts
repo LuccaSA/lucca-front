@@ -1,6 +1,6 @@
-import { booleanAttribute, ChangeDetectionStrategy, Component, computed, ElementRef, forwardRef, inject, input, LOCALE_ID, model, output, signal, viewChild, ViewEncapsulation } from '@angular/core';
+import { ChangeDetectionStrategy, Component, computed, ElementRef, forwardRef, inject, input, LOCALE_ID, model, output, signal, viewChild, ViewEncapsulation } from '@angular/core';
 import { FormsModule, NG_VALUE_ACCESSOR } from '@angular/forms';
-import { intlInputOptions, isNil, isNotNil, ɵeffectWithDeps } from '@lucca-front/ng/core';
+import { intlInputOptions, isNil, isNotNil, luBooleanAttribute, luNullableBooleanAttribute, ɵeffectWithDeps } from '@lucca-front/ng/core';
 import { BasePickerComponent } from '../core/base-picker.component';
 import { ISO8601Time } from '../core/date-primitives';
 import {
@@ -53,9 +53,9 @@ export class TimePickerComponent extends BasePickerComponent {
 
 	readonly max = input<ISO8601Time>(MAX_TIME);
 
-	readonly displayArrows = input(false, { transform: booleanAttribute });
+	readonly displayArrows = input(false, { transform: luBooleanAttribute });
 
-	readonly forceMeridiemDisplay = input<boolean | null>(null);
+	readonly forceMeridiemDisplay = input(null, { transform: luNullableBooleanAttribute });
 
 	readonly keyPressed = signal(false);
 
