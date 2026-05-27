@@ -1,6 +1,6 @@
-import { booleanAttribute, ChangeDetectionStrategy, Component, computed, forwardRef, input, model, output, signal, ViewEncapsulation } from '@angular/core';
+import { ChangeDetectionStrategy, Component, computed, forwardRef, input, model, output, signal, ViewEncapsulation } from '@angular/core';
 import { NG_VALUE_ACCESSOR } from '@angular/forms';
-import { intlInputOptions, isNil, isNotNil } from '@lucca-front/ng/core';
+import { intlInputOptions, isNil, isNotNil, luBooleanAttribute } from '@lucca-front/ng/core';
 import { BasePickerComponent } from '../core/base-picker.component';
 import { ISO8601Duration } from '../core/date-primitives';
 import { createDurationFromHoursAndMinutes, getHoursPartFromDuration, getMinutesPartFromDuration, isISO8601Duration, isoDurationToDateFnsDuration, isoDurationToSeconds } from '../core/duration.utils';
@@ -32,11 +32,11 @@ export class DurationPickerComponent extends BasePickerComponent {
 	readonly value = model<ISO8601Duration>('PT0S');
 	readonly max = input<ISO8601Duration>('PT99H');
 
-	readonly displayArrows = input(false, { transform: booleanAttribute });
+	readonly displayArrows = input(false, { transform: luBooleanAttribute });
 
 	readonly label = input<string>();
 
-	readonly hideZeroValue = input(false, { transform: booleanAttribute });
+	readonly hideZeroValue = input(false, { transform: luBooleanAttribute });
 
 	readonly durationChange = output<DurationChangeEvent>();
 

@@ -13,7 +13,6 @@ import {
 	Injector,
 	input,
 	model,
-	numberAttribute,
 	OnDestroy,
 	Renderer2,
 	signal,
@@ -23,7 +22,18 @@ import {
 import { AbstractControl, NgControl, ReactiveFormsModule, RequiredValidator, Validators } from '@angular/forms';
 import { FormField } from '@angular/forms/signals';
 import { SafeHtml } from '@angular/platform-browser';
-import { intlInputOptions, isNotNil, LuClass, PortalContent, PortalDirective, ɵeffectWithDeps } from '@lucca-front/ng/core';
+import {
+	intlInputOptions,
+	isNotNil,
+	luBooleanAttribute,
+	LuClass,
+	luNullableBooleanAttribute,
+	luNullableNumberAttribute,
+	luNumberAttribute,
+	PortalContent,
+	PortalDirective,
+	ɵeffectWithDeps,
+} from '@lucca-front/ng/core';
 import { LU_FORM_INSTANCE } from '@lucca-front/ng/form';
 import { FormLabelComponent } from '@lucca-front/ng/form-label';
 import { IconComponent } from '@lucca-front/ng/icon';
@@ -90,13 +100,13 @@ export class FormFieldComponent implements OnDestroy, DoCheck {
 	/**
 	 * Hide field label, while keeping it in DOM for screen readers
 	 */
-	readonly hiddenLabel = input(false, { transform: booleanAttribute });
+	readonly hiddenLabel = input(false, { transform: luBooleanAttribute });
 
 	readonly rolePresentationLabel = model(false);
 
 	readonly labelIsPresentation = computed(() => this.rolePresentationLabel() || this.presentation());
 
-	readonly inline = input(false, { transform: booleanAttribute });
+	readonly inline = input(false, { transform: luBooleanAttribute });
 
 	readonly statusControl = input<AbstractControl | null>(null);
 
@@ -104,18 +114,16 @@ export class FormFieldComponent implements OnDestroy, DoCheck {
 
 	readonly tag = input<string | null>(null);
 
-	readonly AI = input(false, { transform: booleanAttribute });
+	readonly AI = input(false, { transform: luBooleanAttribute });
 	readonly iconAItooltip = input<string | null>(null);
 	readonly iconAIalt = input<string | null>(null);
 
-	readonly width = input<FormFieldWidth | null, FormFieldWidth | `${FormFieldWidth}` | null>(null, {
-		transform: numberAttribute as (value: FormFieldWidth | `${FormFieldWidth}`) => FormFieldWidth,
-	});
+	readonly width = input(null, { transform: luNullableNumberAttribute<FormFieldWidth> });
 
 	readonly #invalidStatus = signal(false);
 	invalidStatus = this.#invalidStatus.asReadonly();
 
-	readonly invalid = input<boolean | null, boolean>(null, { transform: booleanAttribute });
+	readonly invalid = input(null, { transform: luNullableBooleanAttribute });
 
 	readonly inlineMessage = input<PortalContent | null>(null);
 
@@ -143,11 +151,11 @@ export class FormFieldComponent implements OnDestroy, DoCheck {
 	/**
 	 * Max amount of characters allowed, defaults to 0, which means hidden, no maximum
 	 */
-	readonly counter = input<number>(0);
+	readonly counter = input(0, { transform: luNumberAttribute });
 
 	readonly contentLength = signal<number>(0);
 
-	readonly presentation = input(false, { transform: booleanAttribute });
+	readonly presentation = input(false, { transform: luBooleanAttribute });
 
 	readonly presentationMode = computed(() => this.parentForm?.presentation() || this.presentation());
 

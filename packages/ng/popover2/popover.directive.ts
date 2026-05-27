@@ -1,14 +1,13 @@
 import { ConnectedPosition, ConnectionPositionPair, FlexibleConnectedPositionStrategyOrigin, Overlay, OverlayRef } from '@angular/cdk/overlay';
 import { ComponentPortal } from '@angular/cdk/portal';
 import {
-	booleanAttribute,
 	DestroyRef,
 	Directive,
 	ElementRef,
 	inject,
 	Injector,
 	input,
-	InputSignal,
+	InputSignalWithTransform,
 	linkedSignal,
 	model,
 	OnDestroy,
@@ -21,7 +20,7 @@ import {
 	ViewContainerRef,
 } from '@angular/core';
 import { takeUntilDestroyed, toObservable } from '@angular/core/rxjs-interop';
-import { getPushPanelViewportMargin, intlInputOptions, isNotNil } from '@lucca-front/ng/core';
+import { getPushPanelViewportMargin, intlInputOptions, isNotNil, luBooleanAttribute, luNumberAttribute } from '@lucca-front/ng/core';
 import { combineLatest, debounce, filter, map, merge, Subject, switchMap, take, timer } from 'rxjs';
 import { PopoverContentComponent } from './content/popover-content/popover-content.component';
 import { POPOVER_CONFIG, PopoverConfig } from './popover-tokens';
@@ -106,7 +105,7 @@ export class PopoverDirective implements OnDestroy {
 
 	readonly overlayScrollStrategy = input<'reposition' | 'block' | 'close'>('reposition');
 
-	readonly luPopoverDisabledInput = input(false, { transform: booleanAttribute, alias: 'luPopoverDisabled' });
+	readonly luPopoverDisabledInput = input(false, { transform: luBooleanAttribute, alias: 'luPopoverDisabled' });
 
 	readonly luPopoverTrigger = model<'click' | 'click+hover' | 'hover+focus'>('click');
 
@@ -115,7 +114,7 @@ export class PopoverDirective implements OnDestroy {
 	/**
 	 * Removes close button entirely, this is bad for a11y but sometimes we want it.
 	 */
-	readonly luPopoverNoCloseButtonInput = input(false, { transform: booleanAttribute, alias: 'luPopoverNoCloseButton' });
+	readonly luPopoverNoCloseButtonInput = input(false, { transform: luBooleanAttribute, alias: 'luPopoverNoCloseButton' });
 
 	/**
 	 * Allows to anchor the popover to another element instead of the trigger one
@@ -131,9 +130,9 @@ export class PopoverDirective implements OnDestroy {
 	readonly luPopoverIgnoredOutsidePointerTargets = input<HTMLElement | HTMLElement[] | null>(null);
 
 	// We have to type these two for Compodoc to find the right type and tell Storybook these aren't strings
-	readonly luPopoverOpenDelay: InputSignal<number> = input<number>(300);
+	readonly luPopoverOpenDelay: InputSignalWithTransform<number, number | `${number}`> = input(300, { transform: luNumberAttribute });
 
-	readonly luPopoverCloseDelay: InputSignal<number> = input<number>(100);
+	readonly luPopoverCloseDelay: InputSignalWithTransform<number, number | `${number}`> = input(100, { transform: luNumberAttribute });
 
 	readonly luPopoverPositionRef = linkedSignal(() => this.luPopoverPosition() || 'above');
 

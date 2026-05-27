@@ -1,6 +1,6 @@
 import { NgTemplateOutlet } from '@angular/common';
-import { booleanAttribute, ChangeDetectionStrategy, Component, computed, contentChildren, forwardRef, inject, input, TemplateRef, ViewEncapsulation } from '@angular/core';
-import { PortalContent } from '@lucca-front/ng/core';
+import { ChangeDetectionStrategy, Component, computed, contentChildren, forwardRef, inject, input, TemplateRef, ViewEncapsulation } from '@angular/core';
+import { luBooleanAttribute, PortalContent } from '@lucca-front/ng/core';
 import { CommentBlockSize } from '../comment.type';
 import { CommentComponent } from '../comment/comment.component';
 import { COMMENT_BLOCK_INSTANCE, COMMENT_CHAT_INSTANCE } from '../token';
@@ -26,16 +26,16 @@ export class CommentBlockComponent {
 
 	readonly comments = contentChildren(CommentComponent, { read: CommentComponent, descendants: true });
 
-	readonly compact = input(false, { transform: booleanAttribute });
+	readonly compact = input(false, { transform: luBooleanAttribute });
 
 	/**
 	 * Small is a shorthand to set the size to small
 	 *
 	 * If the size input is filled along with the small input, their values will have the priority
 	 */
-	readonly small = input(false, { transform: booleanAttribute });
+	readonly small = input(false, { transform: luBooleanAttribute });
 
-	readonly chatAnswer = input(false, { transform: booleanAttribute });
+	readonly chatAnswer = input(false, { transform: luBooleanAttribute });
 
 	readonly authorName = input<PortalContent>();
 

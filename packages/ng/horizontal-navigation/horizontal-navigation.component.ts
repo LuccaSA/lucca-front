@@ -1,6 +1,6 @@
 import { NgTemplateOutlet } from '@angular/common';
-import { booleanAttribute, ChangeDetectionStrategy, Component, computed, contentChildren, effect, ElementRef, forwardRef, inject, input, model, viewChildren, ViewEncapsulation } from '@angular/core';
-import { DecorativePalette, isNil, isNotNil, Palette, PortalDirective } from '@lucca-front/ng/core';
+import { ChangeDetectionStrategy, Component, computed, contentChildren, effect, ElementRef, forwardRef, inject, input, model, viewChildren, ViewEncapsulation } from '@angular/core';
+import { DecorativePalette, isNil, isNotNil, luBooleanAttribute, Palette, PortalDirective } from '@lucca-front/ng/core';
 import { LuDialogRef } from '@lucca-front/ng/dialog';
 import { HorizontalNavigationLinkDirective } from './horizontal-navigation-link.directive';
 import { HorizontalNavigationTabComponent } from './horizontal-navigation-tab.component';
@@ -33,11 +33,11 @@ export class HorizontalNavigationComponent {
 
 	readonly buttons = viewChildren<ElementRef<HTMLButtonElement>>('tabButton');
 
-	readonly noBorder = input(false, { transform: booleanAttribute });
+	readonly noBorder = input(false, { transform: luBooleanAttribute });
 
-	readonly container = input(false, { transform: booleanAttribute });
+	readonly container = input(false, { transform: luBooleanAttribute });
 
-	readonly vertical = input(false, { transform: booleanAttribute });
+	readonly vertical = input(false, { transform: luBooleanAttribute });
 
 	readonly palette = input<Palette | DecorativePalette | null>(null);
 	readonly paletteClass = computed(() => ({ [`palette-${this.palette()}`]: !!this.palette() }));

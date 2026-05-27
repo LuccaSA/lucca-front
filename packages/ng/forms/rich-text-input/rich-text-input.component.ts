@@ -1,7 +1,6 @@
 import { CdkPortalOutlet, DomPortal } from '@angular/cdk/portal';
 import { CommonModule } from '@angular/common';
 import {
-	booleanAttribute,
 	ChangeDetectionStrategy,
 	Component,
 	computed,
@@ -24,7 +23,7 @@ import { ControlValueAccessor, NG_VALUE_ACCESSOR } from '@angular/forms';
 import { createEmptyHistoryState, registerHistory } from '@lexical/history';
 import { $canShowPlaceholderCurry, $isRootTextContentEmpty } from '@lexical/text';
 import { mergeRegister } from '@lexical/utils';
-import { isNil } from '@lucca-front/ng/core';
+import { isNil, luBooleanAttribute } from '@lucca-front/ng/core';
 import { FormFieldComponent, InputDirective, ɵPresentationDisplayDefaultDirective } from '@lucca-front/ng/form-field';
 import { $getRoot, createEditor, Klass, LexicalEditor, LexicalNode, LexicalNodeReplacement, SKIP_DOM_SELECTION_TAG, UpdateListenerPayload } from 'lexical';
 import { RICH_TEXT_FORMATTER, RichTextFormatter } from './formatters';
@@ -68,9 +67,9 @@ export class RichTextInputComponent implements OnInit, OnDestroy, ControlValueAc
 	readonly #formField = inject(FormFieldComponent, { optional: true });
 
 	readonly placeholder = input<string>('');
-	readonly disableSpellcheck = input(false, { transform: booleanAttribute });
-	readonly autoResize = input(false, { transform: booleanAttribute });
-	readonly hideToolbar = input(false, { transform: booleanAttribute });
+	readonly disableSpellcheck = input(false, { transform: luBooleanAttribute });
+	readonly autoResize = input(false, { transform: luBooleanAttribute });
+	readonly hideToolbar = input(false, { transform: luBooleanAttribute });
 
 	readonly content = viewChild<string, ElementRef<HTMLElement>>('content', {
 		read: ElementRef,

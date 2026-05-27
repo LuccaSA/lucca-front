@@ -1,5 +1,6 @@
-import { booleanAttribute, ChangeDetectionStrategy, Component, forwardRef, inject, input, ViewEncapsulation } from '@angular/core';
+import { ChangeDetectionStrategy, Component, forwardRef, inject, input, ViewEncapsulation } from '@angular/core';
 import { ReactiveFormsModule } from '@angular/forms';
+import { luBooleanAttribute } from '@lucca-front/ng/core';
 import { FORM_FIELD_INSTANCE, FormFieldComponent } from '@lucca-front/ng/form-field';
 import { injectNgControl } from '../inject-ng-control';
 import { NoopValueAccessorDirective } from '../noop-value-accessor.directive';
@@ -34,9 +35,9 @@ export class RadioGroupInputComponent {
 
 	readonly size = input<RadioGroupInputSize>();
 
-	readonly framed = input(false, { transform: booleanAttribute });
+	readonly framed = input(false, { transform: luBooleanAttribute });
 
-	readonly framedCenter = input(false, { transform: booleanAttribute });
+	readonly framedCenter = input(false, { transform: luBooleanAttribute });
 
 	readonly framedSize = input<RadioGroupInputFramedSize | null>(null);
 

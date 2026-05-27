@@ -1,6 +1,6 @@
-import { ChangeDetectionStrategy, Component, ViewEncapsulation, booleanAttribute, computed, input, numberAttribute } from '@angular/core';
+import { ChangeDetectionStrategy, Component, computed, input, ViewEncapsulation } from '@angular/core';
 import { BubbleIllustration, BubbleIllustrationComponent } from '@lucca-front/ng/bubble-illustration';
-import { Palette, PortalContent, PortalDirective } from '@lucca-front/ng/core';
+import { luBooleanAttribute, luNumberAttribute, Palette, PortalContent, PortalDirective } from '@lucca-front/ng/core';
 import { Hx, ICON_TO_ILLUSTRATION } from '../empty-state.type';
 
 @Component({
@@ -17,7 +17,7 @@ export class EmptyStateSectionComponent {
 	readonly actionIllustration = computed(() => this.action() || this.icon()?.includes('Action.svg'));
 
 	readonly illustration = input<BubbleIllustration | string | null>(null);
-	readonly action = input(false, { transform: booleanAttribute });
+	readonly action = input(false, { transform: luBooleanAttribute });
 
 	readonly iconOrIllustration = computed(() => {
 		const icon = this.icon();
@@ -42,7 +42,7 @@ export class EmptyStateSectionComponent {
 	 */
 	readonly palette = input<Palette>('none');
 
-	readonly center = input(false, { transform: booleanAttribute });
+	readonly center = input(false, { transform: luBooleanAttribute });
 
 	/**
 	 * The title of the empty state section
@@ -57,7 +57,7 @@ export class EmptyStateSectionComponent {
 	/**
 	 * Define the aria level of the title
 	 */
-	readonly hx = input(3, { transform: numberAttribute as (value: Hx | `${Hx}`) => Hx });
+	readonly hx = input(3, { transform: luNumberAttribute<Hx> });
 
 	readonly emptyStateClasses = computed(() => ({ [`palette-${this.palette()}`]: !!this.palette() }));
 

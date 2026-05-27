@@ -1,8 +1,8 @@
-import { booleanAttribute, ChangeDetectionStrategy, Component, computed, HostListener, input, Signal, signal, ViewEncapsulation } from '@angular/core';
+import { ChangeDetectionStrategy, Component, computed, HostListener, input, Signal, signal, ViewEncapsulation } from '@angular/core';
 import { toSignal } from '@angular/core/rxjs-interop';
 import { ReactiveFormsModule } from '@angular/forms';
 import { ColorComponent } from '@lucca-front/ng/color';
-import { intlInputOptions } from '@lucca-front/ng/core';
+import { intlInputOptions, luBooleanAttribute } from '@lucca-front/ng/core';
 import { LuCoreSelectNoClueDirective, LuDisplayerDirective, LuOptionDirective } from '@lucca-front/ng/core-select';
 import { ɵPresentationDisplayDefaultDirective } from '@lucca-front/ng/form-field';
 import { LuSimpleSelectInputComponent } from '@lucca-front/ng/simple-select';
@@ -37,8 +37,8 @@ export class ColorInputComponent {
 
 	readonly clue = signal<string>('');
 	readonly colors = input.required<ColorOption[]>();
-	readonly clearable = input(false, { transform: booleanAttribute });
-	readonly compact = input(false, { transform: booleanAttribute });
+	readonly clearable = input(false, { transform: luBooleanAttribute });
+	readonly compact = input(false, { transform: luBooleanAttribute });
 
 	ngControl = injectNgControl();
 
