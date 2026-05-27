@@ -1,6 +1,7 @@
 import { NgTemplateOutlet } from '@angular/common';
-import { booleanAttribute, ChangeDetectionStrategy, Component, contentChildren, ElementRef, forwardRef, inject, input, model, numberAttribute, ViewEncapsulation } from '@angular/core';
+import { ChangeDetectionStrategy, Component, contentChildren, ElementRef, forwardRef, inject, input, model, ViewEncapsulation } from '@angular/core';
 import { FormsModule } from '@angular/forms';
+import { luBooleanAttribute, luNumberAttribute } from '@lucca-front/ng/core';
 import { FormFieldComponent } from '@lucca-front/ng/form-field';
 import { CheckboxInputComponent } from '@lucca-front/ng/forms';
 import { LuTooltipAnchorRef } from '@lucca-front/ng/tooltip';
@@ -51,7 +52,7 @@ export class IndexTableRowComponent implements LuTooltipAnchorRef {
 
 	readonly selected = model<boolean>(false);
 	readonly selectedLabel = input<string | null>(null);
-	readonly disabled = input(false, { transform: booleanAttribute });
-	readonly mixed = input(false, { transform: booleanAttribute });
-	readonly stack = input(1, { transform: numberAttribute });
+	readonly disabled = input(false, { transform: luBooleanAttribute });
+	readonly mixed = input(false, { transform: luBooleanAttribute });
+	readonly stack = input(1, { transform: luNumberAttribute });
 }

@@ -1,5 +1,5 @@
-import { booleanAttribute, ChangeDetectionStrategy, Component, computed, effect, inject, input, ViewEncapsulation } from '@angular/core';
-import { LuClass, PortalContent, PortalDirective } from '@lucca-front/ng/core';
+import { ChangeDetectionStrategy, Component, computed, effect, inject, input, ViewEncapsulation } from '@angular/core';
+import { luBooleanAttribute, LuClass, luOptionalNumberAttribute, PortalContent, PortalDirective } from '@lucca-front/ng/core';
 import { HighlightDataBubble, HighlightDataIllustration, HighlightDataPalette, HighlightDataSize, HighlightDataTheme } from './highlight-data.type';
 
 @Component({
@@ -37,7 +37,7 @@ export class HighlightDataComponent {
 	/**
 	 * Define a bubble style based on the CDN image bubble number
 	 */
-	readonly bubble = input<HighlightDataBubble | number>();
+	readonly bubble = input<HighlightDataBubble | number>(undefined, { transform: luOptionalNumberAttribute });
 
 	/**
 	 * Define a specific them white light or dark. (White by default)
@@ -64,12 +64,12 @@ export class HighlightDataComponent {
 	/**
 	 * Adjust layout to text value
 	 */
-	readonly valueFirst = input(false, { transform: booleanAttribute });
+	readonly valueFirst = input(false, { transform: luBooleanAttribute });
 
 	/**
 	 * Displayed in nested mode
 	 */
-	readonly nested = input(false, { transform: booleanAttribute });
+	readonly nested = input(false, { transform: luBooleanAttribute });
 
 	get lightClass() {
 		return this.theme() === 'light';

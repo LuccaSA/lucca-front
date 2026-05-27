@@ -1,4 +1,5 @@
-import { booleanAttribute, ChangeDetectionStrategy, Component, input, ViewEncapsulation } from '@angular/core';
+import { ChangeDetectionStrategy, Component, input, ViewEncapsulation } from '@angular/core';
+import { luBooleanAttribute } from '@lucca-front/ng/core';
 
 @Component({
 	selector: 'lu-main-layout',
@@ -17,10 +18,10 @@ export class MainLayoutComponent {
 	/**
 	 * Sticks header on the screen
 	 */
-	readonly headerSticky = input(false, { transform: booleanAttribute });
+	readonly headerSticky = input(false, { transform: luBooleanAttribute });
 
 	/**
 	 * Sticks footer on the screen
 	 */
-	readonly footerSticky = input(false, { transform: booleanAttribute });
+	readonly footerSticky = input(false, { transform: luBooleanAttribute });
 }

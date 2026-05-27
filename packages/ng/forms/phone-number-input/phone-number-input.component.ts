@@ -1,5 +1,6 @@
 import { ChangeDetectionStrategy, Component, computed, forwardRef, inject, input, LOCALE_ID, output, signal, ViewEncapsulation } from '@angular/core';
 import { AbstractControl, ControlValueAccessor, FormsModule, NG_VALIDATORS, NG_VALUE_ACCESSOR, ValidationErrors, Validator } from '@angular/forms';
+import { luBooleanAttribute } from '@lucca-front/ng/core';
 import { LuDisplayerDirective, LuOptionDirective } from '@lucca-front/ng/core-select';
 import { InputDirective, ɵPresentationDisplayDefaultDirective } from '@lucca-front/ng/form-field';
 import { LuSimpleSelectInputComponent } from '@lucca-front/ng/simple-select';
@@ -74,7 +75,7 @@ export class PhoneNumberInputComponent implements ControlValueAccessor, Validato
 	 */
 	readonly allowedCountries = input<ReadonlyArray<CountryCode | string>>([]);
 
-	readonly noAutoPlaceholder = input<boolean>(false);
+	readonly noAutoPlaceholder = input(false, { transform: luBooleanAttribute });
 
 	readonly defaultCountryCode = input<CountryCode>(undefined, { alias: 'country' });
 

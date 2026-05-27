@@ -1,5 +1,5 @@
-import { booleanAttribute, computed, Directive, effect, inject, input, LOCALE_ID, output } from '@angular/core';
-import { intlInputOptions } from '@lucca-front/ng/core';
+import { computed, Directive, effect, inject, input, LOCALE_ID, output } from '@angular/core';
+import { intlInputOptions, luBooleanAttribute, luNumberAttribute } from '@lucca-front/ng/core';
 import { FORM_FIELD_INSTANCE } from '@lucca-front/ng/form-field';
 import { LU_FILE_UPLOAD_TRANSLATIONS } from '../file-upload.translate';
 import { FileUploadSize } from '../file-upload.type';
@@ -52,15 +52,15 @@ export abstract class BaseFileUploadComponent {
 		return this.acceptAttribute().some((str) => str.includes('*'));
 	});
 
-	readonly structure = input(false, { transform: booleanAttribute });
+	readonly structure = input(false, { transform: luBooleanAttribute });
 
-	readonly fileMaxSize = input<number>(80 * MEGA_BYTE);
+	readonly fileMaxSize = input(80 * MEGA_BYTE, { transform: luNumberAttribute });
 
 	readonly maxSizeDisplay = computed(() => formatFileSize(this.locale, this.fileMaxSize()));
 
 	readonly size = input<FileUploadSize | null>(null);
 
-	readonly password = input(false, { transform: booleanAttribute });
+	readonly password = input(false, { transform: luBooleanAttribute });
 
 	readonly illustration = input<
 		/** @deprecated use 'invoice' instead */
@@ -77,9 +77,9 @@ export abstract class BaseFileUploadComponent {
 		}
 	});
 
-	readonly required = input(false, { transform: booleanAttribute });
+	readonly required = input(false, { transform: luBooleanAttribute });
 
-	readonly buttonFilled = input(false, { transform: booleanAttribute });
+	readonly buttonFilled = input(false, { transform: luBooleanAttribute });
 
 	constructor() {
 		effect(() => {

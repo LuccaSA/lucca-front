@@ -1,5 +1,6 @@
-import { booleanAttribute, ChangeDetectionStrategy, Component, inject, input, output, TemplateRef, Type, viewChild, ViewEncapsulation } from '@angular/core';
+import { ChangeDetectionStrategy, Component, inject, input, output, TemplateRef, Type, viewChild, ViewEncapsulation } from '@angular/core';
 import { takeUntilDestroyed } from '@angular/core/rxjs-interop';
+import { luBooleanAttribute, luNumberAttribute } from '@lucca-front/ng/core';
 import { ALuSelectInputComponent, LuIsOptionSelectedPipe, LuOptionComparer, LuOptionContext, TreeNode, ɵCoreSelectPanelElement, ɵLuOptionComponent } from '@lucca-front/ng/core-select';
 
 @Component({
@@ -31,9 +32,9 @@ export class TreeBranchComponent<T> {
 
 	unselectMany = output<T[]>();
 
-	readonly simpleMode = input(false, { transform: booleanAttribute });
+	readonly simpleMode = input(false, { transform: luBooleanAttribute });
 
-	readonly depth = input(1);
+	readonly depth = input(1, { transform: luNumberAttribute });
 
 	constructor() {
 		if (this.selectInputComponent.selectChildren$) {

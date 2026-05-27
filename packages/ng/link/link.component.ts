@@ -1,7 +1,7 @@
 import { Location } from '@angular/common';
 import { afterNextRender, booleanAttribute, ChangeDetectionStrategy, Component, effect, ElementRef, inject, Injector, input, ViewEncapsulation } from '@angular/core';
 import { Router, UrlTree } from '@angular/router';
-import { intlInputOptions } from '@lucca-front/ng/core';
+import { intlInputOptions, luBooleanAttribute } from '@lucca-front/ng/core';
 import { LU_INDEX_TABLE_INSTANCE } from '@lucca-front/ng/index-table';
 
 import { LU_DATA_TABLE_INSTANCE } from '@lucca-front/ng/data-table';
@@ -58,17 +58,17 @@ export class LinkComponent {
 	/**
 	 * Disables the link
 	 */
-	readonly disabled = input(false, { transform: booleanAttribute });
+	readonly disabled = input(false, { transform: luBooleanAttribute });
 
 	/**
 	 * Underlines the link only on hover
 	 */
-	readonly decorationHover = input(false, { transform: booleanAttribute });
+	readonly decorationHover = input(false, { transform: luBooleanAttribute });
 
 	/**
 	 * Indicates that the link will open in a new tab
 	 */
-	readonly external = input(false, { transform: booleanAttribute });
+	readonly external = input(false, { transform: luBooleanAttribute });
 
 	/**
 	 * External icon only visible on hover/focus
