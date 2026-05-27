@@ -1,8 +1,8 @@
 import { Overlay, OverlayModule } from '@angular/cdk/overlay';
-import { AfterViewInit, ChangeDetectionStrategy, ChangeDetectorRef, Component, ElementRef, Input, Renderer2, ViewContainerRef, forwardRef } from '@angular/core';
+import { AfterViewInit, ChangeDetectionStrategy, ChangeDetectorRef, Component, ElementRef, forwardRef, Input, Renderer2, ViewContainerRef } from '@angular/core';
 import { AbstractControl, ControlValueAccessor, NG_VALIDATORS, NG_VALUE_ACCESSOR, ValidationErrors, Validator } from '@angular/forms';
 import { ClearComponent } from '@lucca-front/ng/clear';
-import { ALuDateAdapter, ELuDateGranularity, LuDateGranularity } from '@lucca-front/ng/core';
+import { ALuDateAdapter, ELuDateGranularity, luBooleanAttribute, LuDateGranularity } from '@lucca-front/ng/core';
 import { LuInputDisplayerDirective } from '@lucca-front/ng/input';
 import { ILuInputWithPicker } from '@lucca-front/ng/picker';
 import { ALuSelectInputComponent } from '@lucca-front/ng/select';
@@ -35,7 +35,7 @@ export class LuDateSelectInputComponent<D> extends ALuSelectInputComponent<D> im
 	@Input('placeholder') override set inputPlaceholder(p: string) {
 		this._placeholder = p;
 	}
-	@Input() hideClearer = false;
+	@Input({ transform: luBooleanAttribute }) hideClearer = false;
 	protected _startOn: D = this._adapter.forgeToday();
 	@Input() set startOn(s: D) {
 		this._startOn = s ?? this._adapter.forgeToday();

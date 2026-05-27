@@ -1,7 +1,7 @@
 import { ConnectionPositionPair } from '@angular/cdk/overlay';
-import { booleanAttribute, ChangeDetectionStrategy, Component, computed, contentChildren, input, numberAttribute, ViewEncapsulation } from '@angular/core';
+import { ChangeDetectionStrategy, Component, computed, contentChildren, input, ViewEncapsulation } from '@angular/core';
 import { LuccaIcon } from '@lucca-front/icons';
-import { Palette, PortalContent, PortalDirective } from '@lucca-front/ng/core';
+import { luBooleanAttribute, luNumberAttribute, Palette, PortalContent, PortalDirective } from '@lucca-front/ng/core';
 import { IconComponent } from '@lucca-front/ng/icon';
 import { PopoverDirective, PopoverPosition } from '@lucca-front/ng/popover2';
 import { CalloutFeedbackItemComponent } from '../callout-feedback-item/callout-feedback-item.component';
@@ -21,12 +21,12 @@ export class CalloutPopoverComponent {
 	/**
 	 * Debounce for the popover to open (mouse will have to be on the element fox openDelay milliseconds for popover to show)
 	 */
-	readonly openDelay = input(50, { transform: numberAttribute });
+	readonly openDelay = input(50, { transform: luNumberAttribute });
 
 	/**
 	 * Debounce for the popover to close (mouse will have to be out of both popover and trigger for closeDelay milliseconds for it to close)
 	 */
-	readonly closeDelay = input(500, { transform: numberAttribute });
+	readonly closeDelay = input(500, { transform: luNumberAttribute });
 
 	/**
 	 * Label (visual only) to put inside the button, often used to show just a number
@@ -41,7 +41,7 @@ export class CalloutPopoverComponent {
 	/**
 	 * Hide callout popover title if there is only one item
 	 */
-	readonly headingHiddenIfSingleItem = input(false, { transform: booleanAttribute });
+	readonly headingHiddenIfSingleItem = input(false, { transform: luBooleanAttribute });
 
 	readonly popoverTrigger = input<'click' | 'click+hover' | 'hover+focus'>('click+hover');
 
@@ -87,7 +87,7 @@ export class CalloutPopoverComponent {
 	/**
 	 * Disable callout popover apparition
 	 */
-	readonly popoverDisabled = input(false, { transform: booleanAttribute });
+	readonly popoverDisabled = input(false, { transform: luBooleanAttribute });
 
 	readonly feedbackItems = contentChildren(CalloutFeedbackItemComponent, { descendants: true });
 

@@ -1,7 +1,6 @@
 import { ConnectedPosition, ConnectionPositionPair, FlexibleConnectedPositionStrategyOrigin, Overlay, OverlayRef } from '@angular/cdk/overlay';
 import { ComponentPortal } from '@angular/cdk/portal';
 import {
-	booleanAttribute,
 	DestroyRef,
 	Directive,
 	ElementRef,
@@ -11,7 +10,7 @@ import {
 	Injector,
 	input,
 	Input,
-	InputSignal,
+	InputSignalWithTransform,
 	linkedSignal,
 	model,
 	OnDestroy,
@@ -24,7 +23,7 @@ import {
 	ViewContainerRef,
 } from '@angular/core';
 import { takeUntilDestroyed, toObservable } from '@angular/core/rxjs-interop';
-import { intlInputOptions, isNotNil } from '@lucca-front/ng/core';
+import { intlInputOptions, isNotNil, luBooleanAttribute, luNumberAttribute } from '@lucca-front/ng/core';
 import { combineLatest, debounce, filter, map, merge, Subject, switchMap, take, timer } from 'rxjs';
 import { PopoverContentComponent } from './content/popover-content/popover-content.component';
 import { POPOVER_CONFIG, PopoverConfig } from './popover-tokens';
@@ -95,9 +94,7 @@ export class PopoverDirective implements OnDestroy {
 	@Input()
 	overlayScrollStrategy: 'reposition' | 'block' | 'close' = 'reposition';
 
-	@Input({
-		transform: booleanAttribute,
-	})
+	@Input({ transform: luBooleanAttribute })
 	luPopoverDisabled = false;
 
 	readonly luPopoverTrigger = model<'click' | 'click+hover' | 'hover+focus'>('click');
@@ -105,7 +102,7 @@ export class PopoverDirective implements OnDestroy {
 	@Input()
 	customPositions?: ConnectionPositionPair[];
 
-	@Input({ transform: booleanAttribute })
+	@Input({ transform: luBooleanAttribute })
 	/**
 	 * Removes close button entirely, this is bad for a11y but sometimes we want it.
 	 */
@@ -118,9 +115,9 @@ export class PopoverDirective implements OnDestroy {
 	readonly luPopoverAnchor = input<FlexibleConnectedPositionStrategyOrigin>(this.elementRef);
 
 	// We have to type these two for Compodoc to find the right type and tell Storybook these aren't strings
-	readonly luPopoverOpenDelay: InputSignal<number> = input<number>(300);
+	readonly luPopoverOpenDelay: InputSignalWithTransform<number, number | `${number}`> = input(300, { transform: luNumberAttribute });
 
-	readonly luPopoverCloseDelay: InputSignal<number> = input<number>(100);
+	readonly luPopoverCloseDelay: InputSignalWithTransform<number, number | `${number}`> = input(100, { transform: luNumberAttribute });
 
 	readonly luPopoverPositionRef = linkedSignal(() => this.luPopoverPosition() || 'above');
 

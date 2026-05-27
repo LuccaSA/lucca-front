@@ -1,5 +1,5 @@
-import { booleanAttribute, ChangeDetectionStrategy, Component, computed, input, ViewEncapsulation } from '@angular/core';
-import { DecorativePalette, Palette } from '@lucca-front/ng/core';
+import { ChangeDetectionStrategy, Component, computed, input, ViewEncapsulation } from '@angular/core';
+import { DecorativePalette, luBooleanAttribute, Palette } from '@lucca-front/ng/core';
 import { LuSafeExternalSvgPipe } from '@lucca-front/ng/safe-content';
 import { BubbleIllustration } from './bubble-illustration';
 
@@ -20,7 +20,7 @@ export class BubbleIllustrationComponent {
 
 	readonly palette = input<Palette | DecorativePalette>('product');
 	readonly size = input<'S' | 'M' | 'L'>('M');
-	readonly action = input(false, { transform: booleanAttribute });
+	readonly action = input(false, { transform: luBooleanAttribute });
 
 	readonly illustrationUrl = computed(() => {
 		if (this.illustration().startsWith('https://') || this.illustration().startsWith('/')) {

@@ -1,5 +1,6 @@
 import { NgTemplateOutlet } from '@angular/common';
-import { booleanAttribute, ChangeDetectionStrategy, Component, contentChildren, input, ViewEncapsulation } from '@angular/core';
+import { ChangeDetectionStrategy, Component, contentChildren, input, ViewEncapsulation } from '@angular/core';
+import { luBooleanAttribute } from '@lucca-front/ng/core';
 import { HorizontalNavigationLinkDirective } from './horizontal-navigation-link.directive';
 
 @Component({
@@ -19,11 +20,11 @@ import { HorizontalNavigationLinkDirective } from './horizontal-navigation-link.
 export class HorizontalNavigationComponent {
 	readonly links = contentChildren(HorizontalNavigationLinkDirective);
 
-	readonly noBorder = input(false, { transform: booleanAttribute });
+	readonly noBorder = input(false, { transform: luBooleanAttribute });
 
-	readonly container = input(false, { transform: booleanAttribute });
+	readonly container = input(false, { transform: luBooleanAttribute });
 
-	readonly vertical = input(false, { transform: booleanAttribute });
+	readonly vertical = input(false, { transform: luBooleanAttribute });
 
 	/**
 	 * Which size should the horizontal navigation be? Defaults and small

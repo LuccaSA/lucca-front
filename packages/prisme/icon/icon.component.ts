@@ -34,7 +34,7 @@ export class IconComponent {
 	/**
 	 * Display icon in AI mode
 	 */
-	readonly AI = input(false, { transform: booleanAttribute });
+	readonly AI = input<boolean, boolean | `${boolean}`>(false, { transform: booleanAttribute });
 
 	readonly iconClasses = computed(() => {
 		const size = this.size();

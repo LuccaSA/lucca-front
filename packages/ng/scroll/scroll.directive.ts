@@ -1,5 +1,6 @@
 /* eslint-disable @angular-eslint/no-output-on-prefix */
 import { Directive, ElementRef, input, OnInit, output } from '@angular/core';
+import { luNumberAttribute } from '@lucca-front/ng/core';
 import { Subject } from 'rxjs';
 import { debounceTime } from 'rxjs/operators';
 import { ILuScrollable } from './scroll.model';
@@ -15,7 +16,7 @@ import { ILuScrollable } from './scroll.model';
 	},
 })
 export class LuScrollDirective implements ILuScrollable, OnInit {
-	readonly debounceTime = input<number>(100);
+	readonly debounceTime = input(100, { transform: luNumberAttribute });
 	readonly onScroll = output<Event>();
 	readonly onScrollTop = output<Event>();
 	readonly onScrollBottom = output<Event>();

@@ -1,7 +1,7 @@
-import { booleanAttribute, ChangeDetectionStrategy, Component, computed, input, ViewEncapsulation } from '@angular/core';
+import { ChangeDetectionStrategy, Component, computed, input, ViewEncapsulation } from '@angular/core';
 import { RouterLink } from '@angular/router';
 import { LuccaIcon } from '@lucca-front/icons';
-import { DecorativePalette, Palette } from '@lucca-front/ng/core';
+import { DecorativePalette, luBooleanAttribute, Palette } from '@lucca-front/ng/core';
 import { IconComponent } from '@lucca-front/ng/icon';
 import { LuTooltipModule } from '@lucca-front/ng/tooltip';
 
@@ -33,7 +33,7 @@ export class TagComponent {
 	/**
 	 * Should display be outlined?
 	 */
-	readonly outlined = input(false, { transform: booleanAttribute });
+	readonly outlined = input(false, { transform: luBooleanAttribute });
 
 	/**
 	 * For routerLink usage
@@ -49,12 +49,12 @@ export class TagComponent {
 	/**
 	 * Truncates the text with an ellipsis and adds a tooltip when the label is too long
 	 */
-	readonly withEllipsis = input(false, { transform: booleanAttribute });
+	readonly withEllipsis = input(false, { transform: luBooleanAttribute });
 
 	/**
 	 * Applies AI colors
 	 */
-	readonly AI = input(false, { transform: booleanAttribute });
+	readonly AI = input(false, { transform: luBooleanAttribute });
 
 	readonly tagClasses = computed(() => {
 		const size = this.size();

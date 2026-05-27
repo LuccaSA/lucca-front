@@ -1,6 +1,5 @@
 import {
 	AfterViewInit,
-	booleanAttribute,
 	ChangeDetectionStrategy,
 	ChangeDetectorRef,
 	Component,
@@ -17,7 +16,7 @@ import {
 	Type,
 	ViewChild,
 } from '@angular/core';
-import { intlInputOptions, PortalDirective } from '@lucca-front/ng/core';
+import { intlInputOptions, luBooleanAttribute, luOptionalNumberAttribute, PortalDirective } from '@lucca-front/ng/core';
 import { LuTooltipTriggerDirective } from '@lucca-front/ng/tooltip';
 import { asyncScheduler, observeOn, Subscription } from 'rxjs';
 import { GroupTemplateLocation } from '../panel/panel.utils';
@@ -51,11 +50,11 @@ export class LuOptionComponent<T> implements AfterViewInit, OnDestroy, OnInit {
 	@Input() option?: T;
 	@Input() grouping?: LuOptionGrouping<T, unknown>;
 
-	readonly hasChildren = input(false, { transform: booleanAttribute });
+	readonly hasChildren = input(false, { transform: luBooleanAttribute });
 	onlyParent = output<void>();
 	onlyChildren = output<void>();
 
-	readonly groupIndex = input<number>();
+	readonly groupIndex = input(undefined, { transform: luOptionalNumberAttribute });
 
 	public readonly optionIndex = input.required({ transform: (value: string | number) => `${value}` });
 

@@ -1,4 +1,5 @@
-import { booleanAttribute, ChangeDetectionStrategy, Component, input } from '@angular/core';
+import { ChangeDetectionStrategy, Component, input } from '@angular/core';
+import { luBooleanAttribute } from '@lucca-front/ng/core';
 
 @Component({
 	selector: 'lu-skeleton-button',
@@ -10,7 +11,7 @@ export class SkeletonButtonComponent {
 	/**
 	 * Applies dark color for skeleton
 	 */
-	readonly dark = input(false, { transform: booleanAttribute });
+	readonly dark = input(false, { transform: luBooleanAttribute });
 
 	/**
 	 * Changes the size of the skeleton button

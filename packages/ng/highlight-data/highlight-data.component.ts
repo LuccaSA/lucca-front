@@ -1,5 +1,5 @@
-import { booleanAttribute, ChangeDetectionStrategy, Component, computed, effect, inject, input, ViewEncapsulation } from '@angular/core';
-import { LuClass, PortalContent, PortalDirective } from '@lucca-front/ng/core';
+import { ChangeDetectionStrategy, Component, computed, effect, inject, input, ViewEncapsulation } from '@angular/core';
+import { luBooleanAttribute, LuClass, luOptionalNumberAttribute, PortalContent, PortalDirective } from '@lucca-front/ng/core';
 
 type IllustrationType =
 	| 'calculator'
@@ -53,7 +53,7 @@ export class HighlightDataComponent {
 	/**
 	 * Define a bubble style based on the CDN image bubble number
 	 */
-	readonly bubble = input<1 | 2 | 3 | 4 | number>();
+	readonly bubble = input(undefined, { transform: luOptionalNumberAttribute });
 
 	/**
 	 * Define a specific them white light or dark. (White by default)
@@ -80,12 +80,12 @@ export class HighlightDataComponent {
 	/**
 	 * Adjust layout to text value
 	 */
-	readonly valueFirst = input(false, { transform: booleanAttribute });
+	readonly valueFirst = input(false, { transform: luBooleanAttribute });
 
 	/**
 	 * Displayed in nested mode
 	 */
-	readonly nested = input(false, { transform: booleanAttribute });
+	readonly nested = input(false, { transform: luBooleanAttribute });
 
 	get lightClass() {
 		return this.theme() === 'light';

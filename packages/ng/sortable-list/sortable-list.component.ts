@@ -1,4 +1,5 @@
-import { booleanAttribute, ChangeDetectionStrategy, Component, contentChildren, input, ViewEncapsulation } from '@angular/core';
+import { ChangeDetectionStrategy, Component, contentChildren, input, ViewEncapsulation } from '@angular/core';
+import { luBooleanAttribute } from '@lucca-front/ng/core';
 import { SortableListItemComponent } from './sortable-list-item';
 
 @Component({
@@ -13,7 +14,7 @@ export class SortableListComponent {
 	/**
 	 * Applies small size to sortable list
 	 */
-	readonly small = input(false, { transform: booleanAttribute });
+	readonly small = input(false, { transform: luBooleanAttribute });
 
 	readonly sortableListItems = contentChildren(SortableListItemComponent, { descendants: true });
 }

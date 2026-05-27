@@ -1,7 +1,7 @@
 import { HttpClient } from '@angular/common/http';
 import { computed, Directive, forwardRef, inject, input, OnInit } from '@angular/core';
 import { toObservable } from '@angular/core/rxjs-interop';
-import { isNotNil } from '@lucca-front/ng/core';
+import { isNotNil, luNullableNumberAttribute } from '@lucca-front/ng/core';
 import { CORE_SELECT_API_TOTAL_COUNT_PROVIDER, CoreSelectApiTotalCountProvider, TreeNode } from '@lucca-front/ng/core-select';
 import { ALuCoreSelectApiDirective } from '@lucca-front/ng/core-select/api';
 import { ILuDepartment } from '@lucca-front/ng/department';
@@ -29,7 +29,7 @@ export class LuCoreSelectDepartmentsDirective<T extends ILuDepartment = ILuDepar
 	readonly filters = input<Record<string, string | number | boolean> | null>(null);
 	readonly operationIds = input<readonly number[] | null>(null);
 	readonly uniqueOperationIds = input<readonly number[] | null>(null);
-	readonly appInstanceId = input<number | null>(null);
+	readonly appInstanceId = input(null, { transform: luNullableNumberAttribute });
 	readonly searchDelimiter = input<string>(' ');
 
 	public override ngOnInit(): void {

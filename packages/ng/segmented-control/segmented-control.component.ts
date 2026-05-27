@@ -1,5 +1,6 @@
-import { booleanAttribute, ChangeDetectionStrategy, Component, forwardRef, input, ViewEncapsulation } from '@angular/core';
+import { ChangeDetectionStrategy, Component, forwardRef, input, ViewEncapsulation } from '@angular/core';
 import { ReactiveFormsModule } from '@angular/forms';
+import { luBooleanAttribute } from '@lucca-front/ng/core';
 import { injectNgControl, NoopValueAccessorDirective } from '@lucca-front/ng/forms';
 import { LU_SEGMENTEDCONTROL_INSTANCE } from './segmented-control.token';
 
@@ -32,12 +33,12 @@ export class SegmentedControlComponent {
 	/**
 	 * Applies small size to segmented control
 	 */
-	readonly small = input(false, { transform: booleanAttribute });
+	readonly small = input(false, { transform: luBooleanAttribute });
 
 	/**
 	 * Display segmented control vertically
 	 */
-	readonly vertical = input(false, { transform: booleanAttribute });
+	readonly vertical = input(false, { transform: luBooleanAttribute });
 
 	readonly id = `segmentedControl${nextId++}`;
 }

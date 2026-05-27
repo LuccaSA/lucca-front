@@ -1,4 +1,5 @@
-import { booleanAttribute, ChangeDetectionStrategy, Component, computed, input, numberAttribute } from '@angular/core';
+import { ChangeDetectionStrategy, Component, computed, input } from '@angular/core';
+import { luBooleanAttribute, luNumberAttribute } from '@lucca-front/ng/core';
 
 @Component({
 	selector: 'lu-skeleton-field',
@@ -10,17 +11,17 @@ export class SkeletonFieldComponent {
 	/**
 	 * Applies dark color for skeleton
 	 */
-	readonly dark = input<boolean, boolean | `${boolean}`>(false, { transform: booleanAttribute });
+	readonly dark = input(false, { transform: luBooleanAttribute });
 
 	/**
 	 * Hide the field label skeleton
 	 */
-	readonly hiddenLabel = input<boolean, boolean | `${boolean}`>(false, { transform: booleanAttribute });
+	readonly hiddenLabel = input(false, { transform: luBooleanAttribute });
 
 	/**
 	 * Defines the number of row
 	 */
-	readonly rows = input<number, number | `${number}`>(1, { transform: numberAttribute });
+	readonly rows = input(1, { transform: luNumberAttribute });
 
 	readonly lines = computed(() => Array.from({ length: this.rows() }));
 

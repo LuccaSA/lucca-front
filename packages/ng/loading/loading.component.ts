@@ -1,5 +1,5 @@
-import { booleanAttribute, ChangeDetectionStrategy, Component, effect, inject, input, ViewEncapsulation } from '@angular/core';
-import { LuClass } from '@lucca-front/ng/core';
+import { ChangeDetectionStrategy, Component, effect, inject, input, ViewEncapsulation } from '@angular/core';
+import { luBooleanAttribute, LuClass } from '@lucca-front/ng/core';
 
 type DisplayMode =
 	| 'popin'
@@ -28,11 +28,11 @@ export class LoadingComponent {
 
 	readonly size = input<'L' | null>(null);
 
-	readonly invert = input(false, { transform: booleanAttribute });
+	readonly invert = input(false, { transform: luBooleanAttribute });
 
-	readonly block = input(false, { transform: booleanAttribute });
+	readonly block = input(false, { transform: luBooleanAttribute });
 
-	readonly hiddenLabel = input(false, { transform: booleanAttribute });
+	readonly hiddenLabel = input(false, { transform: luBooleanAttribute });
 
 	readonly template = input<DisplayMode | null>(null);
 

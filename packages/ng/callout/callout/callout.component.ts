@@ -1,6 +1,6 @@
-import { booleanAttribute, ChangeDetectionStrategy, Component, computed, input, linkedSignal, numberAttribute, output, ViewEncapsulation } from '@angular/core';
+import { ChangeDetectionStrategy, Component, computed, input, linkedSignal, output, ViewEncapsulation } from '@angular/core';
 import { LuccaIcon } from '@lucca-front/icons';
-import { intlInputOptions, Palette, PortalContent, PortalDirective } from '@lucca-front/ng/core';
+import { intlInputOptions, luBooleanAttribute, luNumberAttribute, Palette, PortalContent, PortalDirective } from '@lucca-front/ng/core';
 import { IconComponent } from '@lucca-front/ng/icon';
 import { CalloutIconPipe } from '../callout-icon.pipe';
 import { CalloutState } from '../callout-state';
@@ -30,7 +30,7 @@ export class CalloutComponent {
 	/**
 	 * Define the aria level of the title
 	 */
-	readonly hx = input(null, { transform: numberAttribute as (value: Hx | `${Hx}`) => Hx });
+	readonly hx = input(null, { transform: luNumberAttribute<Hx> });
 
 	/**
 	 * Which palette should be used for the entire callout.
@@ -61,12 +61,12 @@ export class CalloutComponent {
 	/**
 	 * Should we display the remove icon?
 	 */
-	readonly removable = input(false, { transform: booleanAttribute });
+	readonly removable = input(false, { transform: luBooleanAttribute });
 
 	/**
 	 * Is the callout removed? Works with two way binding too.
 	 */
-	readonly removed = input(false, { transform: booleanAttribute });
+	readonly removed = input(false, { transform: luBooleanAttribute });
 
 	/**
 	 * Defines the icon’s alt attribute used for accessibility
@@ -76,7 +76,7 @@ export class CalloutComponent {
 	/**
 	 * Displayed in AI mode
 	 */
-	readonly AI = input(false, { transform: booleanAttribute });
+	readonly AI = input(false, { transform: luBooleanAttribute });
 
 	/**
 	 * Emit event when button removed is click

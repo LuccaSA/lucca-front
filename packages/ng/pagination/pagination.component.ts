@@ -1,7 +1,7 @@
-import { booleanAttribute, ChangeDetectionStrategy, Component, effect, input, output, ViewEncapsulation } from '@angular/core';
-import { intlInputOptions, IntlParamsPipe } from '@lucca-front/ng/core';
-import { IconComponent } from '@lucca-front/ng/icon';
+import { ChangeDetectionStrategy, Component, effect, input, output, ViewEncapsulation } from '@angular/core';
 import { ButtonComponent } from '@lucca-front/ng/button';
+import { intlInputOptions, IntlParamsPipe, luBooleanAttribute, luOptionalNullableNumberAttribute } from '@lucca-front/ng/core';
+import { IconComponent } from '@lucca-front/ng/icon';
 import { LU_PAGINATION_TRANSLATIONS } from './pagination.translate';
 
 @Component({
@@ -18,27 +18,27 @@ export class PaginationComponent {
 	/**
 	 * Disabled the previous page arrow
 	 */
-	readonly isFirstPage = input(false, { transform: booleanAttribute });
+	readonly isFirstPage = input(false, { transform: luBooleanAttribute });
 
 	/**
 	 * Disabled the next page arrow
 	 */
-	readonly isLastPage = input(false, { transform: booleanAttribute });
+	readonly isLastPage = input(false, { transform: luBooleanAttribute });
 
 	/**
 	 * Where the pagination start
 	 */
-	readonly from = input<number | null>();
+	readonly from = input(undefined, { transform: luOptionalNullableNumberAttribute });
 
 	/**
 	 * Where the pagination end
 	 */
-	readonly to = input<number | null>();
+	readonly to = input(undefined, { transform: luOptionalNullableNumberAttribute });
 
 	/**
 	 * Total number of items in the pagination
 	 */
-	readonly itemsCount = input<number | null>();
+	readonly itemsCount = input(undefined, { transform: luOptionalNullableNumberAttribute });
 
 	/**
 	 * Pagination mod (default or compact)

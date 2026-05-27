@@ -1,19 +1,5 @@
-import {
-	booleanAttribute,
-	ChangeDetectionStrategy,
-	Component,
-	contentChildren,
-	effect,
-	ElementRef,
-	EventEmitter,
-	forwardRef,
-	inject,
-	input,
-	Output,
-	untracked,
-	ViewEncapsulation,
-} from '@angular/core';
-import { intlInputOptions, LuClass, Palette } from '@lucca-front/ng/core';
+import { ChangeDetectionStrategy, Component, contentChildren, effect, ElementRef, EventEmitter, forwardRef, inject, input, Output, untracked, ViewEncapsulation } from '@angular/core';
+import { intlInputOptions, luBooleanAttribute, LuClass, Palette } from '@lucca-front/ng/core';
 import { ALuClear, ILuClear } from './clear.model';
 import { LU_CLEAR_TRANSLATIONS } from './clear.translate';
 
@@ -57,7 +43,7 @@ export class ClearComponent<T> extends ALuClear<T> implements ILuClear<T> {
 	/**
 	 * Disabled the clear
 	 */
-	readonly disabled = input(false, { transform: booleanAttribute });
+	readonly disabled = input(false, { transform: luBooleanAttribute });
 
 	/**
 	 * Which palette should be used for the entire clear
@@ -67,7 +53,7 @@ export class ClearComponent<T> extends ALuClear<T> implements ILuClear<T> {
 	/**
 	 * Change the clear colors for use on a dark background
 	 */
-	readonly inverted = input(false, { transform: booleanAttribute });
+	readonly inverted = input(false, { transform: luBooleanAttribute });
 
 	/**
 	 * Emit event when button clear is click
