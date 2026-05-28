@@ -76,8 +76,10 @@
 					border-end-end-radius: var(--pr-t-border-radius-default);
 				}
 
-				&:hover {
-					background-color: var(--palettes-100, var(--palettes-product-100));
+				:host-context(.lu-picker-panel.is-withPointerNavigation) & {
+					&:hover {
+						background-color: var(--palettes-100, var(--palettes-product-100));
+					}
 				}
 
 				&:active {
@@ -85,27 +87,21 @@
 				}
 
 				:host-context(.is-highlighted) & {
-					background-color: var(--palettes-100, var(--palettes-product-100));
-
-					&:hover {
-						background-color: var(--palettes-200, var(--palettes-product-200));
+					:host-context(.lu-picker-panel:not(.is-withPointerNavigation)) & {
+						background-color: var(--palettes-100, var(--palettes-product-100));
 					}
 				}
 			}
 
-			&:hover {
-				background-color: var(--palettes-neutral-50);
-			}
-
-			:host-context(.is-highlighted) & {
-				background-color: var(--palettes-neutral-50);
-
+			:host-context(.lu-picker-panel.is-withPointerNavigation) & {
 				&:hover {
 					background-color: var(--palettes-neutral-50);
 				}
+			}
 
-				&:active {
-					background-color: var(--palettes-neutral-100);
+			:host-context(.is-highlighted) & {
+				:host-context(.lu-picker-panel:not(.is-withPointerNavigation)) & {
+					background-color: var(--palettes-neutral-50);
 				}
 			}
 
