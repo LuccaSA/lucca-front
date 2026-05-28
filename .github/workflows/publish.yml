@@ -37,8 +37,10 @@ jobs:
           done
 
       - name: Resolve publish mode from tag
+        env:
+          REF_NAME: ${{ github.ref_name }}
         run: |
-          TAG="${{ github.ref_name }}"
+          TAG="$REF_NAME"
           VERSION="${TAG#v}"
 
           if [[ "$VERSION" =~ -rc(\.|$) ]]; then
