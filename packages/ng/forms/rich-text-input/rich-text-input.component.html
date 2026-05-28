@@ -23,17 +23,17 @@
 		[attr.aria-labelledby]="formFieldId() + '-label'"
 		[attr.aria-controls]="formFieldId()"
 	>
-		<ng-container *ngTemplateOutlet="toolsProjection" />
+		<ng-container *cdkPortalOutlet="toolsPortal()" />
 	</div>
 </div>
 
 <ng-container *luPresentationDisplayDefault>
 	<span class="pr-u-displayNone">
-		<ng-container *ngTemplateOutlet="toolsProjection" />
+		<ng-container *cdkPortalOutlet="toolsPortal()" />
 	</span>
 	<div #contentPresentation class="textFlow"></div>
 </ng-container>
 
-<ng-template #toolsProjection>
+<span #toolsProjection>
 	<ng-content />
-</ng-template>
+</span>
