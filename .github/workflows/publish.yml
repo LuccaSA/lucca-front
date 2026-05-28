@@ -36,17 +36,30 @@ jobs:
             "
           done
 
-      - run: npm stage publish --access public --provenance
+      - name: Resolve publish mode from tag
+        run: |
+          TAG="${{ github.ref_name }}"
+          VERSION="${TAG#v}"
+
+          if [[ "$VERSION" =~ -rc(\.|$) ]]; then
+            echo "NPM_PUBLISH_COMMAND=npm publish --access public --provenance" >> "$GITHUB_ENV"
+            echo "Publish mode: direct (RC tag detected: $TAG)"
+          else
+            echo "NPM_PUBLISH_COMMAND=npm stage publish --access public --provenance" >> "$GITHUB_ENV"
+            echo "Publish mode: staged (tag: $TAG)"
+          fi
+
+      - run: $NPM_PUBLISH_COMMAND
         working-directory: dist/icons
 
-      - run: npm stage publish --access public --provenance
+      - run: $NPM_PUBLISH_COMMAND
         working-directory: dist/scss
 
-      - run: npm stage publish --access public --provenance
+      - run: $NPM_PUBLISH_COMMAND
         working-directory: dist/ng
 
-      - run: npm stage publish --access public --provenance
+      - run: $NPM_PUBLISH_COMMAND
         working-directory: dist/prisme
 
-      - run: npm stage publish --access public --provenance
+      - run: $NPM_PUBLISH_COMMAND
         working-directory: packages/stylelint-config
