@@ -1,9 +1,28 @@
 //Source: https://netbasal.com/forwarding-form-controls-to-custom-control-components-in-angular-701e8406cc55
 // Heavily modified to handle ngModel properly
-import { FormControlDirective, FormControlName, NgControl, NgModel } from '@angular/forms';
-import { DestroyRef, inject } from '@angular/core';
+import { DestroyRef, inject, Injector, runInInjectionContext, signal, untracked } from '@angular/core';
 import { takeUntilDestroyed } from '@angular/core/rxjs-interop';
+import { FormControl, FormControlDirective, FormControlName, NgControl, NgModel } from '@angular/forms';
+import { FieldTree, FormField } from '@angular/forms/signals';
+import { compatForm } from '@angular/forms/signals/compat';
 
+export function injectFormField<T>(): () => FieldTree<T> | FieldTree<FormControl<T>> {
+	const field = inject<FormField<T>>(FormField, { optional: true });
+	if (field) {
+		return field.formField;
+	}
+
+	const ngControl = injectNgControl();
+	const injector = inject(Injector);
+	let form: FieldTree<FormControl<T>> | null;
+	return () => {
+		if (!form) {
+			const wrapper = signal(ngControl.control as FormControl<T>);
+			form = untracked(() => runInInjectionContext(injector, () => compatForm(wrapper)));
+		}
+		return form;
+	};
+}
 export function injectNgControl() {
 	const ngControl = inject(NgControl, { self: true, optional: true });
 
