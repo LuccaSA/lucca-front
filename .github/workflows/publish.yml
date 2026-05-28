@@ -51,7 +51,7 @@ jobs:
           VERSION="${TAG#v}"
 
           if [[ "$VERSION" =~ -rc(\.|$) ]]; then
-            echo "NPM_PUBLISH_COMMAND=npm publish --access public --provenance" >> "$GITHUB_ENV"
+            echo "NPM_PUBLISH_COMMAND=npm publish --access public --provenance --tag rc" >> "$GITHUB_ENV"
             echo "Publish mode: direct (RC tag detected: $TAG)"
           else
             echo "NPM_PUBLISH_COMMAND=npm stage publish --access public --provenance" >> "$GITHUB_ENV"
