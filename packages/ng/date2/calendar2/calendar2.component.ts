@@ -203,7 +203,7 @@ export class Calendar2Component implements OnInit {
 					long: this.#intlMonthsLong.format(month),
 					...this.dateToCellInfo(month),
 					isCurrent: isSameMonth(new Date(), month),
-				} as CalendarMonthInfo;
+				};
 			})
 			.reduce<CalendarMonthInfo[][]>((all, one, i) => {
 				const ch = Math.floor(i / 3);

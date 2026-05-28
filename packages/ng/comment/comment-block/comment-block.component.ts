@@ -1,6 +1,7 @@
 import { NgTemplateOutlet } from '@angular/common';
 import { booleanAttribute, ChangeDetectionStrategy, Component, computed, contentChildren, forwardRef, inject, input, TemplateRef, ViewEncapsulation } from '@angular/core';
 import { PortalContent } from '@lucca-front/ng/core';
+import { CommentBlockSize } from '../comment.type';
 import { CommentComponent } from '../comment/comment.component';
 import { COMMENT_BLOCK_INSTANCE, COMMENT_CHAT_INSTANCE } from '../token';
 
@@ -43,7 +44,7 @@ export class CommentBlockComponent {
 	/**
 	 * Which size should the block comment be? Defaults or small
 	 */
-	readonly size = input<'S' | 'M'>();
+	readonly size = input<CommentBlockSize>();
 
 	readonly noAvatar = computed(() => !this.avatar());
 	readonly isSingleComment = computed(() => this.comments().length === 1);

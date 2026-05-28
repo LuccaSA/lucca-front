@@ -1,6 +1,6 @@
 import { HttpClientModule } from '@angular/common/http';
 import { ButtonComponent } from '@lucca-front/ng/button';
-import { EmptyStatePageComponent } from '@lucca-front/ng/empty-state';
+import { EMPTY_STATE_HX, EMPTY_STATE_HX_STYLE, EmptyStatePageComponent } from '@lucca-front/ng/empty-state';
 import { Meta, moduleMetadata, StoryObj } from '@storybook/angular';
 
 export default {
@@ -88,6 +88,7 @@ export default {
 				'timmi/bubbles-top-right-03',
 			],
 			control: 'select',
+			description: 'Illustration de fond dans le coin supérieur droit.',
 		},
 		topRightForeground: {
 			options: [
@@ -104,6 +105,7 @@ export default {
 				'generic/plug-01',
 			],
 			control: 'select',
+			description: 'Illustration de premier plan dans le coin supérieur droit.',
 		},
 		bottomLeftBackground: {
 			options: [
@@ -124,6 +126,7 @@ export default {
 				'timmi/bubbles-bottom-left-03',
 			],
 			control: 'select',
+			description: 'Illustration de fond dans le coin inférieur gauche.',
 		},
 		bottomLeftForeground: {
 			options: [
@@ -151,42 +154,45 @@ export default {
 				'timmi/timesheet-01',
 			],
 			control: 'select',
+			description: 'Illustration de premier plan dans le coin inférieur gauche.',
 		},
 		icon: {
 			options: ['', 'medal-01', 'post-it-01'],
 			control: {
 				type: 'select',
 			},
+			description: 'Affiche une illustration au dessus du titre.',
 		},
 		contentBackgroundColor: {
 			control: {
 				type: 'text',
 			},
+			description: 'Modifie la couleur de fond du contenu (variable CSS, couleur hexadécimale, etc.).',
 		},
 		hx: {
 			control: {
 				type: 'number',
-				min: 1,
-				max: 6,
+				min: EMPTY_STATE_HX.at(0),
+				max: EMPTY_STATE_HX.at(EMPTY_STATE_HX.length - 1),
 			},
-			description: '[v18.1]',
+			description: 'Niveau de titre (sémantique).',
 		},
 		hxStyle: {
 			control: {
 				type: 'number',
-				min: 1,
-				max: 2,
+				min: EMPTY_STATE_HX_STYLE.at(0),
+				max: EMPTY_STATE_HX_STYLE.at(EMPTY_STATE_HX_STYLE.length - 1),
 			},
-			description: '[v21.2]',
+			description: '[v21.2] Niveau du titre (style).',
 		},
 		heading: {
-			description: '[v18.1] Optional',
+			description: 'Titre du composant.',
 		},
 		description: {
-			description: '[v18.1] Optional',
+			description: 'Description du composant.',
 		},
 		slotTop: {
-			description: '[v19.3] Optional, Add content above heading.',
+			description: '[v19.3] Ajout d’un slot au dessus du titre.',
 		},
 	},
 } as Meta;

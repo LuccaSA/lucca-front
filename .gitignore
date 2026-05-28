@@ -43,6 +43,9 @@ compodoc-static
 # lucca stuff
 .lokalise.logs
 
+# skills generator — local credentials
+scripts/generate-skills/generate-skills-config.json
+
 # Playwright
 /test-results/
 /playwright-report/

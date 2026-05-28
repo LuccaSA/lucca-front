@@ -26,19 +26,19 @@ export default {
 			control: {
 				type: 'text',
 			},
-			description: "URL de l'image en arrière plan à gauche (200x160). Via <code>--components-fancyBox-background-left</code>.",
+			description: 'URL de l’image en arrière plan à gauche (200x160). Via <code>--components-fancyBox-background-left</code>.',
 		},
 		backgroundRight: {
 			control: {
 				type: 'text',
 			},
-			description: "URL de l'image en arrière plan à droite (200x160). Via <code>--components-fancyBox-background-right</code>.",
+			description: 'URL de l’image en arrière plan à droite (200x160). Via <code>--components-fancyBox-background-right</code>.',
 		},
 		foreground: {
 			control: {
 				type: 'text',
 			},
-			description: "URL de l'image en premier plan (200x160). Via <code>--components-fancyBox-foreground</code>.",
+			description: 'URL de l’image en premier plan (200x160). Via <code>--components-fancyBox-foreground</code>.',
 		},
 		size: {
 			options: ['', 'S'],
@@ -92,7 +92,6 @@ export const Basic: StoryObj<FancyBoxBasicStory> = {
 		backgroundLeft: 'https://cdn.lucca.fr/transverse/prisme/visuals/fancy-box/background-left-plant.svg',
 		backgroundRight: 'https://cdn.lucca.fr/transverse/prisme/visuals/fancy-box/background-right-candies.svg',
 		foreground: 'https://cdn.lucca.fr/transverse/prisme/visuals/fancy-box/foreground-right-pizza.svg',
-		size: null,
 	},
 	render: Template,
 };

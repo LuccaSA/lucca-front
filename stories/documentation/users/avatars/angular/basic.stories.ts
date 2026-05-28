@@ -1,8 +1,9 @@
 import { provideHttpClient } from '@angular/common/http';
 import { provideAnimations } from '@angular/platform-browser/animations';
-import { LuDisplayInitials, LuUserPictureComponent } from '@lucca-front/ng/user';
+import { LuDisplayInitials, LuUserPictureComponent, USER_PICTURE_SIZE } from '@lucca-front/ng/user';
 import { LuUserPopoverDirective } from '@lucca-front/ng/user-popover';
 import { applicationConfig, Meta, moduleMetadata, StoryObj } from '@storybook/angular';
+import { setStoryOptions } from 'stories/helpers/stories';
 import { bob, georges, squidwards } from '../../user.mocks';
 
 export default {
@@ -38,7 +39,7 @@ export default {
 	},
 	argTypes: {
 		user: {
-			description: "[Story] Affiche la photo de l'utilisateur ou ses initiales.",
+			description: '[Story] Affiche la photo de l’utilisateur ou ses initiales.',
 			options: ['Avec image', 'Avec image erronée', 'Sans image'],
 			mapping: {
 				'Avec image': bob,
@@ -48,16 +49,16 @@ export default {
 		},
 		sizes: {
 			description: "Taille de l'avatar.",
-			options: ['XS', 'S', '', 'L', 'XL', 'XXL', 'XXXL'],
+			options: setStoryOptions(USER_PICTURE_SIZE),
 			control: {
 				type: 'select',
 			},
 		},
 		displayFormat: {
-			description: "Format d'affichage des initiales. F pour prénom (firstname) L pour nom (lastname).",
+			description: 'Format d’affichage des initiales. F pour prénom (firstname) L pour nom (lastname).',
 		},
 		placeholder: {
-			description: "Applique un placeholder d'avatar.",
+			description: 'Applique un placeholder d’avatar.',
 			control: {
 				type: 'boolean',
 			},

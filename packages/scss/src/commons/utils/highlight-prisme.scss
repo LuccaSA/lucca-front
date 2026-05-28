@@ -30,8 +30,11 @@
 	// Lists
 	.chip,
 	.indexTable,
+	.indexTable-body-row,
 	.sortableList,
 	.listing,
+	.activityFeed,
+	.activityFeed-step,
 
 	// Forms
 	.calendar,
@@ -48,7 +51,6 @@
 	.fieldset,
 	.fileUpload,
 	.fileEntry,
-	.fileToolbar,
 	.formLabel,
 	.inlineMessage,
 	.inputFramed,
@@ -72,17 +74,15 @@
 	.mobileNavigation,
 	.navside,
 	.pagination,
+	.progressStepper,
 	.segmentedControl,
 	.skipLinks,
-	.horizontalNavigation,
 	.timeline,
 	.tableOfContent,
-	.verticalNavigation,
 
 	// Overlays
 	.popover,
 	.dropdown,
-	.dialog,
 	.tooltip,
 
 	// Structure
@@ -94,7 +94,6 @@
 	.fancyBox,
 	.filterPill,
 	.filterBar,
-	.footer,
 	.grid,
 	.highlightData,
 	.mobileHeader,
@@ -111,7 +110,6 @@
 	// Loaders
 	.loading,
 	.progress,
-	.skeleton,
 
 	// Misc & oldies
 	.scrollBox,
@@ -126,19 +124,25 @@
 
 	// HTML COMPONENTS INSIDE
 
-	.dataTable {
+	.dialog,
+	.dataTable-head-row,
+	.dataTable-body-row,
+	.dataTable-foot-row,
+	.footer,
+	.horizontalNavigation,
+	.verticalNavigation {
 		outline: 2px dashed springgreen;
 		outline-offset: -3px;
 	}
 
-	// ANGULAR COMPONENTS
+	// ANGULAR COMPONENTS OUTSIDE
 
 	[luButton],
 	[luLink],
 
 	// Icons
-	lu-bubble-illustration,
-	lu-bubble-icon,
+	lu-bubble-illustration .bubbleIllustration,
+	lu-bubble-icon .bubbleIcon,
 	lu-software-icon .softwareIcon,
 	lu-icon .lucca-icon,
 
@@ -147,7 +151,7 @@
 	lu-comment,
 	lu-new-badge,
 	lu-numeric-badge,
-	lu-plg-push,
+	lu-plg-push .plgPush,
 	lu-read-more,
 	lu-status-badge,
 	lu-tag .tag,
@@ -158,15 +162,19 @@
 	// Lists
 	lu-chip,
 	[luChip],
-	lu-data-table .dataTable,
 	lu-index-table,
+	[luindextablerow],
 	lu-sortable-list .sortableList,
 	lu-listing-item,
+	lu-activity-feed,
+	lu-activity-feed-step,
 
 	// Forms
+	[luFormLabel],
 	lu-form-field,
+	[luFormLabel],
 	lu-color-input,
-	lu-text-input,
+	lu-text-input .textField,
 	lu-checkbox-input,
 	lu-switch-input,
 	lu-radio-input,
@@ -177,9 +185,9 @@
 	lu-duration-picker,
 	[luForm],
 	lu-fieldset,
-	lu-single-file-upload,
-	lu-multi-file-upload,
-	lu-file-entry,
+	lu-single-file-upload .fileUpload,
+	lu-multi-file-upload .fileUpload,
+	lu-file-entry .fileEntry,
 	lu-inline-message,
 	lu-input-framed,
 	lu-rich-text-input,
@@ -192,6 +200,7 @@
 	lu-callout-disclosure,
 	lu-callout-popover,
 	lu-callout-feedback-list,
+	lu-error-page,
 	lu-gauge .gauge,
 	lu-toasts,
 
@@ -199,19 +208,15 @@
 	lu-breadcrumbs,
 	lu-mobile-navigation,
 	lu-pagination,
+	lu-progress-stepper,
 	lu-segmented-control,
 	lu-skip-links,
-	lu-horizontal-navigation,
 	lu-table-of-content,
-	lu-vertical-navigation,
 
 	// Overlays
 	lu-popover-content,
+	lu-dropdown-menu .dropdown,
 	lu-dropdown-item,
-	lu-dialog,
-	lu-dialog-header,
-	lu-dialog-content,
-	lu-dialog-footer,
 	lu-tooltip-panel,
 
 	// Structure
@@ -219,11 +224,10 @@
 	lu-container,
 	lu-divider,
 	lu-empty-state-page,
-	lu-empty-state-section,
+	lu-empty-state-section .emptyState,
 	lu-fancy-box,
 	lu-filter-pill,
 	lu-filter-bar,
-	lu-footer,
 	lu-grid,
 	lu-highlight-data,
 	lu-mobile-header,
@@ -249,6 +253,20 @@
 	lu-scroll-box {
 		outline: 2px solid springgreen !important;
 		outline-offset: 3px;
+	}
+
+	// ANGULAR COMPONENTS INSIDE
+
+	lu-dialog,
+	lu-dialog-header,
+	lu-dialog-content,
+	lu-dialog-footer,
+	lu-footer .footer,
+	lu-horizontal-navigation,
+	lu-vertical-navigation,
+	[luDataTableRow] {
+		outline: 2px solid springgreen;
+		outline-offset: -4px;
 	}
 
 	// DEPRECATED COMPONENTS

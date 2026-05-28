@@ -1,8 +1,8 @@
 import { IconsList } from '@/stories/icons-list';
-import { TagComponent } from '@lucca-front/ng/tag';
+import { TAG_SIZE, TagComponent } from '@lucca-front/ng/tag';
 import { Meta, StoryObj } from '@storybook/angular';
 import { HiddenArgType, PaletteAllArgType } from 'stories/helpers/common-arg-types';
-import { generateInputs } from 'stories/helpers/stories';
+import { generateInputs, setStoryOptions } from 'stories/helpers/stories';
 
 export default {
 	title: 'Documentation/Texts/Tags/Angular/Basic',
@@ -17,7 +17,7 @@ export default {
 export const Template: StoryObj<TagComponent> = {
 	argTypes: {
 		size: {
-			options: ['S', 'M', 'L'],
+			options: setStoryOptions(TAG_SIZE),
 			control: {
 				type: 'select',
 			},
@@ -52,7 +52,6 @@ export const Template: StoryObj<TagComponent> = {
 
 	args: {
 		label: 'Text',
-		palette: null,
 		outlined: false,
 		icon: null,
 		withEllipsis: false,

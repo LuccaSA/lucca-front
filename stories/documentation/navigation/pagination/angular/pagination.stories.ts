@@ -1,6 +1,6 @@
-import { PaginationComponent } from '@lucca-front/ng/pagination';
+import { PAGINATION_MOD, PaginationComponent } from '@lucca-front/ng/pagination';
 import { Meta, moduleMetadata, StoryObj } from '@storybook/angular';
-import { cleanupTemplate, generateInputs } from 'stories/helpers/stories';
+import { cleanupTemplate, generateInputs, setStoryOptions } from 'stories/helpers/stories';
 
 export default {
 	title: 'Documentation/Navigation/Pagination/Angular',
@@ -28,10 +28,10 @@ export default {
 		},
 		itemsCount: {
 			type: 'number',
-			description: "Nombre total d'éléments.",
+			description: 'Nombre total d’éléments.',
 		},
 		mod: {
-			options: ['default', 'compact'],
+			options: setStoryOptions(PAGINATION_MOD),
 			control: {
 				type: 'select',
 			},

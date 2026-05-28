@@ -28,11 +28,11 @@ export default {
 			control: { type: 'range', min: 2, max: 8 },
 		},
 		stickyColsStart: {
-			description: "Nombre de colonnes figées depuis la gauche. Non compatible avec l'usage de colspan.",
+			description: 'Nombre de colonnes figées depuis la gauche. Non compatible avec l’usage de colspan.',
 			control: { type: 'range', min: 0, max: 4 },
 		},
 		stickyColsEnd: {
-			description: "Nombre de colonnes figées depuis la droite. Non compatible avec l'usage de colspan.",
+			description: 'Nombre de colonnes figées depuis la droite. Non compatible avec l’usage de colspan.',
 			control: { type: 'range', min: 0, max: 4 },
 		},
 		noOverflow: {

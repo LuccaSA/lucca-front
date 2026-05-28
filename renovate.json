@@ -1,0 +1,226 @@
+{
+  "$schema": "https://docs.renovatebot.com/renovate-schema.json",
+  "extends": [
+    "local>LuccaSA/renovate-config"
+  ],
+  "dependencyDashboard": true,
+  "packageRules": [
+    {
+      "matchManagers": [
+        "npm"
+      ],
+      "rangeStrategy": "pin",
+      "addLabels": [
+        "front"
+      ]
+    },
+    {
+      "groupName": "All dependencies patches releases",
+      "matchManagers": [
+        "npm"
+      ],
+      "matchFileNames": [
+        "package.json"
+      ],
+      "matchDepTypes": [
+        "dependencies"
+      ],
+      "matchUpdateTypes": [
+        "patch"
+      ],
+      "platformAutomerge": false,
+      "automerge": true,
+      "automergeSchedule": [
+        "at any time"
+      ],
+      "matchPackageNames": [
+        "!@lucca/**",
+        "!@angular/**",
+        "!@schematics/angular",
+        "!angular-eslint",
+        "!@angular-devkit/**",
+        "!@lexical/**",
+        "!lexical"
+      ]
+    },
+    {
+      "groupName": "Angular tooling minor & patches auto-updates",
+      "matchManagers": [
+        "npm"
+      ],
+      "matchFileNames": [
+        "package.json"
+      ],
+      "matchPackageNames": [
+        "@schematics/angular",
+        "angular-eslint"
+      ],
+      "matchUpdateTypes": [
+        "minor",
+        "patch"
+      ],
+      "platformAutomerge": false,
+      "automerge": true,
+      "automergeSchedule": [
+        "at any time"
+      ]
+    },
+    {
+      "groupName": "Angular minor & patches auto-updates",
+      "matchManagers": [
+        "npm"
+      ],
+      "matchFileNames": [
+        "package.json"
+      ],
+      "matchPackageNames": [
+        "@angular/**",
+        "@angular-devkit/**"
+      ],
+      "matchUpdateTypes": [
+        "minor",
+        "patch"
+      ],
+      "platformAutomerge": false,
+      "automerge": true,
+      "automergeSchedule": [
+        "at any time"
+      ]
+    },
+    {
+      "groupName": "Lexical updates",
+      "matchManagers": [
+        "npm"
+      ],
+      "matchFileNames": [
+        "package.json"
+      ],
+      "matchPackageNames": [
+        "@lexical/**",
+        "lexical"
+      ],
+      "matchUpdateTypes": [
+        "patch",
+        "minor",
+        "major"
+      ],
+      "platformAutomerge": false,
+      "automerge": false
+    },
+    {
+      "groupName": "All devDependencies minor & patches auto-updates",
+      "matchManagers": [
+        "npm"
+      ],
+      "matchFileNames": [
+        "package.json"
+      ],
+      "matchDepTypes": [
+        "devDependencies"
+      ],
+      "matchUpdateTypes": [
+        "minor",
+        "patch"
+      ],
+      "platformAutomerge": false,
+      "automerge": true,
+      "automergeSchedule": [
+        "at any time"
+      ],
+      "matchPackageNames": [
+        "!@angular/**",
+        "!@schematics/angular",
+        "!angular-eslint",
+        "!@angular-devkit/**",
+        "!@lexical/**",
+        "!lexical"
+      ]
+    },
+    {
+      "groupName": "All dependencies minor releases",
+      "matchManagers": [
+        "npm"
+      ],
+      "matchFileNames": [
+        "package.json"
+      ],
+      "matchDepTypes": [
+        "dependencies"
+      ],
+      "matchUpdateTypes": [
+        "minor"
+      ],
+      "platformAutomerge": false,
+      "automerge": false,
+      "matchPackageNames": [
+        "!@angular/**",
+        "!@schematics/angular",
+        "!angular-eslint",
+        "!@angular-devkit/**",
+        "!@lexical/**",
+        "!lexical"
+      ]
+    },
+    {
+      "groupName": "Angular tooling major updates",
+      "matchManagers": [
+        "npm"
+      ],
+      "matchFileNames": [
+        "package.json"
+      ],
+      "matchPackageNames": [
+        "@schematics/angular",
+        "angular-eslint"
+      ],
+      "matchUpdateTypes": [
+        "major"
+      ],
+      "platformAutomerge": false,
+      "automerge": false
+    },
+    {
+      "groupName": "Angular major updates",
+      "matchManagers": [
+        "npm"
+      ],
+      "matchFileNames": [
+        "package.json"
+      ],
+      "matchPackageNames": [
+        "@angular/**",
+        "@angular-devkit/**"
+      ],
+      "matchUpdateTypes": [
+        "major"
+      ],
+      "platformAutomerge": false,
+      "automerge": false
+    },
+    {
+      "groupName": "All devDependencies major releases",
+      "matchManagers": [
+        "npm"
+      ],
+      "matchFileNames": [
+        "package.json"
+      ],
+      "matchDepTypes": [
+        "devDependencies"
+      ],
+      "matchUpdateTypes": [
+        "major"
+      ],
+      "platformAutomerge": false,
+      "automerge": false,
+      "matchPackageNames": [
+        "!@angular/**",
+        "!@schematics/angular",
+        "!angular-eslint",
+        "!@angular-devkit/**",
+        "!@lexical/**",
+        "!lexical"
+      ]
+    }
+  ]
+}

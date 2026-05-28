@@ -1,9 +1,10 @@
 import { FormsModule, ReactiveFormsModule } from '@angular/forms';
 import { BrowserAnimationsModule } from '@angular/platform-browser/animations';
-import { FormFieldComponent } from '@lucca-front/ng/form-field';
+import { FORM_FIELD_SIZE, FormFieldComponent } from '@lucca-front/ng/form-field';
 import { TextareaInputComponent } from '@lucca-front/ng/forms';
+import { INLINE_MESSAGE_STATE } from '@lucca-front/ng/inline-message';
 import { Meta, moduleMetadata, StoryObj } from '@storybook/angular';
-import { cleanupTemplate, generateInputs } from 'stories/helpers/stories';
+import { cleanupTemplate, generateInputs, setStoryOptions } from 'stories/helpers/stories';
 
 export default {
 	title: 'Documentation/Forms/Fields/TextAreaField/Angular',
@@ -17,7 +18,7 @@ export default {
 			control: {
 				type: 'text',
 			},
-			description: "Modifie le label de l'input.",
+			description: 'Modifie le label de l’input.',
 		},
 		required: {
 			control: {
@@ -36,7 +37,7 @@ export default {
 			description: 'Applique un placeholder au champ.',
 		},
 		size: {
-			options: ['M', 'S', 'XS'],
+			options: setStoryOptions(FORM_FIELD_SIZE),
 			control: {
 				type: 'select',
 			},
@@ -49,33 +50,33 @@ export default {
 			description: 'Ajoute un texte descriptif (aide, erreur, etc.) sous le champ de formulaire.',
 		},
 		inlineMessageState: {
-			options: ['default', 'success', 'warning', 'error'],
+			options: setStoryOptions(INLINE_MESSAGE_STATE),
 			control: {
 				type: 'select',
 			},
-			description: "Modifie l'état de l'inline message.",
+			description: 'Modifie l’état de l’inline message.',
 		},
 		rows: {
 			control: { type: 'number' },
-			description: '[v18.1] Nombre de lignes visibles par défaut.',
+			description: 'Nombre de lignes visibles par défaut.',
 		},
 		autoResize: {
 			type: 'boolean',
-			description: "[v18.3] Active l'autoresize du champ.",
+			description: 'Active l’autoresize du champ.',
 		},
 		autoResizeScrollIntoView: {
 			type: 'boolean',
 			if: { arg: 'autoResize', truthy: true },
-			description: "[v18.3] Assure que le curseur de saisie soit toujours visible à l'écran en appliquant un scroll.",
+			description: 'Assure que le curseur de saisie soit toujours visible à l’écran en appliquant un scroll.',
 		},
 		hiddenLabel: {
-			description: "Masque le label en le conservant dans le DOM pour les lecteurs d'écrans",
+			description: 'Masque le label en le conservant dans le DOM pour les lecteurs d’écran',
 		},
 		counter: {
-			description: 'Indique le nombre de caractères maximum du champ. Cette information n’est présente qu’à titre indicatif. La longueur du champ doit également être limité via formControl.',
+			description: 'Indique le nombre de caractères maximum du champ. Cette information n’est présente qu’à titre indicatif. La longueur du champ doit également être limitée via formControl.',
 		},
 		disableSpellcheck: {
-			description: "Désactive le correcteur d'orthographe.",
+			description: 'Désactive le correcteur d’orthographe.',
 		},
 		presentation: {
 			description: '[v21.1] Transforme le champ de formulaire en donnée textuelle non éditable.',

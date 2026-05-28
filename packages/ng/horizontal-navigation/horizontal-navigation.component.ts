@@ -4,6 +4,7 @@ import { HorizontalNavigationLinkDirective } from './horizontal-navigation-link.
 import { HorizontalNavigationTabComponent } from './horizontal-navigation-tab.component';
 import { LU_HORIZONTALNAVIGATION_INSTANCE } from './horizontal-navigation.token';
 import { PortalDirective } from '@lucca-front/ng/core';
+import { HorizontalNavigationSize } from './horizontal-navigation.type';
 
 @Component({
 	selector: 'lu-horizontal-navigation',
@@ -35,7 +36,7 @@ export class HorizontalNavigationComponent {
 	/**
 	 * Which size should the horizontal navigation be? Defaults and small
 	 */
-	readonly size = input<null | 'S'>(null);
+  readonly size = input<HorizontalNavigationSize | null>(null);
 
 	readonly tablist = input(false, { transform: booleanAttribute });
 

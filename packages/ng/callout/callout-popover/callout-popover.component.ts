@@ -6,7 +6,7 @@ import { IconComponent } from '@lucca-front/ng/icon';
 import { PopoverDirective, PopoverPosition } from '@lucca-front/ng/popover2';
 import { CalloutFeedbackItemComponent } from '../callout-feedback-item/callout-feedback-item.component';
 import { CalloutIconPipe } from '../callout-icon.pipe';
-import { CalloutState } from '../callout-state';
+import { CalloutPopoverSize, CalloutState } from '../callout.type';
 import { getCalloutPalette } from '../callout.utils';
 
 @Component({
@@ -53,7 +53,7 @@ export class CalloutPopoverComponent {
 	/**
 	 * Size for both button and popover content
 	 */
-	readonly size = input<'M' | 'S' | 'XS'>();
+	readonly size = input<CalloutPopoverSize>();
 
 	/**
 	 * Icon shows in button and next to popover's title
@@ -83,6 +83,11 @@ export class CalloutPopoverComponent {
 	 * Defines custom callout popover open position override popoverPosition
 	 */
 	readonly customPopoverPositions = input<ConnectionPositionPair[]>();
+
+	/**
+	 * Disable callout popover apparition
+	 */
+	readonly popoverDisabled = input(false, { transform: booleanAttribute });
 
 	readonly feedbackItems = contentChildren(CalloutFeedbackItemComponent, { descendants: true });
 

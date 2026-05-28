@@ -41,6 +41,10 @@
 			}
 		}
 
+		&:has(.inputFramed-header-input:disabled:checked) {
+			@include disabledChecked;
+		}
+
 		&.mod-center {
 			@include center;
 		}

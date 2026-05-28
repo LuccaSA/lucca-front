@@ -1,27 +1,34 @@
 import { ButtonComponent } from '@lucca-front/ng/button';
-import { FooterComponent } from '@lucca-front/ng/footer';
+import { FOOTER_CONTAINER_MAX, FOOTER_NARROW_AT_MEDIA_MAX, FooterComponent } from '@lucca-front/ng/footer';
 import { Meta, moduleMetadata } from '@storybook/angular';
-import { generateInputs } from 'stories/helpers/stories';
+import { generateInputs, setStoryOptions } from 'stories/helpers/stories';
 
 export default {
 	title: 'Documentation/Structure/Footer/Angular/Basic',
 	argTypes: {
 		narrowAtMediaMax: {
-			options: ['XXS', 'XS', 'S', 'M'],
+			options: setStoryOptions(FOOTER_NARROW_AT_MEDIA_MAX),
 			control: {
 				type: 'select',
 			},
+			description: 'Définit le breakpoint pour lequel le mode narrow (responsive) est appliqué.',
+		},
+		container: {
+			description: 'Applique un container autour du contenu du footer.',
 		},
 		containerMax: {
-			options: ['', 'M', 'L', 'XL', 'XXL', 'XXXL'],
+			options: setStoryOptions(FOOTER_CONTAINER_MAX),
 			control: {
 				type: 'select',
 			},
 			if: { arg: 'container', truthy: true },
-			description: 'Fixe une largeur maximum au container.',
+			description: 'Définit la largeur maximale du container.',
 		},
-		container: {
-			description: 'Applique un container autour du contenu de Page Header.',
+		sticky: {
+			description: 'Fige le footer lors du défilement vertical.',
+		},
+		forceNarrow: {
+			description: 'Force le mode narrow (responsive) du footer.',
 		},
 	},
 	decorators: [

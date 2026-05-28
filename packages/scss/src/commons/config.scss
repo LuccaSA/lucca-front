@@ -3,7 +3,7 @@
 
 @use '@lucca-front/scss/src/commons/function';
 
-$layers: 'reset, base, components, mods, product, utils' !default;
+$layers: 'reset, base, components, mods, product, utils';
 
 $isNamespaced: false !default;
 $deprecatedSpacings: false !default;
@@ -73,7 +73,7 @@ $fontTokens: (
 	highlight-XXL-lineHeight: var(--pr-t-font-lineHeight-400),
 	highlight-XXL-fontWeight: var(--pr-t-font-fontWeight-black),
 	highlight-XL-fontSize: var(--pr-t-font-fontSize-275),
-	highlight-XL-lineHeight: var(--pr-t-font-lineHeight-350),
+	highlight-XL-lineHeight: var(--pr-t-font-lineHeight-300),
 	highlight-XL-fontWeight: var(--pr-t-font-fontWeight-bold),
 	highlight-L-fontSize: var(--pr-t-font-fontSize-225),
 	highlight-L-lineHeight: var(--pr-t-font-lineHeight-300),
@@ -109,10 +109,24 @@ $borderRadiusTokens: (
 	'input': var(--pr-t-border-radius-default),
 );
 
+$colorAI: orchid, brand;
+
+$paletteAI: (
+	angle: 'to bottom right',
+	color1stop: 0%,
+	color2stop: 80%,
+);
+
+$tokenAI: (
+	border: var(--palettes-ai-300),
+	background: var(--palettes-ai-50),
+	icon: var(--palettes-ai-600),
+);
+
 $product: 'brand' !default;
 $palettesShades: text, 0, 25, 50, 100, 200, 300, 400, 500, 600, 700, 800, 900; // text is deprecated
 $palettesStates: 'critical', 'error', 'warning', 'success', 'successContrasted', 'warningContrasted';
-$palettesDefault: 'brand', 'brandContrasted', 'neutral', 'navigation', 'AI';
+$palettesDefault: 'brand', 'brandContrasted', 'neutral', 'navigation', 'orchid';
 $palettesProduct: 'product';
 $palettesOtherProduct: () !default;
 $palettesDecorative: 'kiwi', 'cucumber', 'mint', 'lagoon', 'blueberry', 'lavender', 'watermelon', 'pumpkin' !default;
@@ -149,9 +163,17 @@ $fieldsWidth: 20, 30, 40, 50, 60 !default;
 
 // Palettes
 
-$ai: (
-	500: #bc6fdd,
+$orchid: (
+	50: #f9ebff,
+	100: #f3d6ff,
+	200: #edc2ff,
+	300: #de9ff9,
+	400: #cc7ded,
+	500: #b95ae2,
 	600: #a440cf,
+	700: #8133a3,
+	800: #680094,
+	900: #4c006b,
 );
 
 $brand: (
@@ -378,7 +400,7 @@ $critical: (
 	text: #ffffff,
 	0: #ffffff,
 	50: #ffebec,
-	100: #ffd6d8,
+	100: #ffd2d4,
 	200: #fdbebe,
 	300: #faa3a3,
 	400: #fa8989,
@@ -492,7 +514,7 @@ $lavender: (
 	600: #9165d2,
 	700: #7647bd,
 	800: #5f369b,
-	900: #4a2a79,
+	900: #24075a,
 ) !default;
 
 $grape: (
@@ -559,7 +581,6 @@ $productsInterpolation: (
 );
 
 $palettesInterpolation: (
-	'AI': $ai,
 	'lucca': $brand,
 	'brand': $brand,
 	'brandContrasted': $brandContrasted,
@@ -569,6 +590,7 @@ $palettesInterpolation: (
 	'secondary': map.get($productsInterpolation, $product),
 	'product': map.get($productsInterpolation, $product),
 	'navigation': $navigation,
+	'orchid': $orchid,
 	'success': $success,
 	'successContrasted': $successContrasted,
 	'error': $critical,

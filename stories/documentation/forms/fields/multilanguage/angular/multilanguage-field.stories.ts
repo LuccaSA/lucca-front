@@ -1,10 +1,11 @@
 import { LOCALE_ID } from '@angular/core';
 import { FormControl, FormsModule, ReactiveFormsModule } from '@angular/forms';
 import { BrowserAnimationsModule } from '@angular/platform-browser/animations';
-import { FormFieldComponent } from '@lucca-front/ng/form-field';
+import { FORM_FIELD_SIZE, FORM_FIELD_WIDTH, FormFieldComponent } from '@lucca-front/ng/form-field';
 import { MultilanguageInputComponent, MultiLanguageInputValidators, MultilanguageTranslation } from '@lucca-front/ng/forms';
+import { INLINE_MESSAGE_STATE } from '@lucca-front/ng/inline-message';
 import { applicationConfig, Meta, moduleMetadata, StoryObj } from '@storybook/angular';
-import { cleanupTemplate, generateInputs } from 'stories/helpers/stories';
+import { cleanupTemplate, generateInputs, setStoryOptions } from 'stories/helpers/stories';
 import { StoryModelDisplayComponent } from 'stories/helpers/story-model-display.component';
 
 export default {
@@ -49,14 +50,14 @@ export default {
 			description: `[v21.1] Ajoute le validateur marquant l'invariant comme obligatoire.`,
 		},
 		size: {
-			options: ['M', 'S'],
+			options: setStoryOptions(FORM_FIELD_SIZE),
 			control: {
 				type: 'select',
 			},
 			description: 'Modifie la taille de la checkbox.',
 		},
 		hiddenLabel: {
-			description: "Masque le label en le conservant dans le DOM pour les lecteurs d'écrans",
+			description: 'Masque le label en le conservant dans le DOM pour les lecteurs d’écran',
 		},
 		inlineMessage: {
 			control: {
@@ -65,11 +66,11 @@ export default {
 			description: 'Ajoute un texte descriptif (aide, erreur, etc.) sous le champ de formulaire.',
 		},
 		inlineMessageState: {
-			options: ['default', 'success', 'warning', 'error'],
+			options: setStoryOptions(INLINE_MESSAGE_STATE),
 			control: {
 				type: 'select',
 			},
-			description: "Modifie l'état de l'inline message.",
+			description: 'Modifie l’état de l’inline message.',
 		},
 		placeholder: {
 			description: 'Modifie le placeholder au champ.',
@@ -82,11 +83,11 @@ export default {
 			description: 'Ouvre le panel automatiquement au focus du champ.',
 		},
 		width: {
-			options: [null, 20, 30, 40, 50, 60],
+			options: setStoryOptions(FORM_FIELD_WIDTH),
 			control: {
 				type: 'select',
 			},
-			description: "[v19.2] Applique une largeur fixe au champ. A n'utiliser que lorsque la grille de formulaire n'est pas adaptée.",
+			description: '[v19.2] Applique une largeur fixe au champ. À n’utiliser que lorsque la grille de formulaire n’est pas adaptée.',
 		},
 		autocomplete: {
 			control: {

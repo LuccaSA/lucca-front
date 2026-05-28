@@ -1,10 +1,10 @@
 import { LOCALE_ID } from '@angular/core';
 import { FormsModule } from '@angular/forms';
-import { DateInputComponent } from '@lucca-front/ng/date2';
+import { CALENDAR_MODE, DATE2_CLEAR_BEHAVIOR, DATE_FORMAT_CONST, DateInputComponent } from '@lucca-front/ng/date2';
 import { FormFieldComponent } from '@lucca-front/ng/form-field';
 import { IconComponent } from '@lucca-front/ng/icon';
 import { applicationConfig, Meta, moduleMetadata, StoryObj } from '@storybook/angular';
-import { generateInputs } from '../../../helpers/stories';
+import { generateInputs, setStoryOptions } from '../../../helpers/stories';
 import { StoryModelDisplayComponent } from '../../../helpers/story-model-display.component';
 
 export default {
@@ -36,26 +36,26 @@ export default {
 		},
 		clearable: {
 			control: 'boolean',
-			description: "Ajoute un bouton de suppression lorsqu'une date est sélectionnée.",
+			description: 'Ajoute un bouton de suppression lorsqu’une date est sélectionnée.',
 		},
 		clearBehavior: {
 			control: 'select',
-			options: ['clear', 'reset'],
+			options: setStoryOptions(DATE2_CLEAR_BEHAVIOR),
 			description: '[v20.1] Change le comportement au clic sur la croix de suppression',
 		},
 		format: {
 			control: 'select',
-			options: ['date', 'date-iso'],
+			options: setStoryOptions(DATE_FORMAT_CONST),
 			description: 'Modifie le format de date.',
 		},
 		mode: {
 			control: 'select',
-			options: ['day', 'month', 'year'],
+			options: setStoryOptions(CALENDAR_MODE),
 			description: "Modifie le mode de sélection au mois ou à l'année.",
 		},
 		focusedDate: {
 			control: 'date',
-			description: "Définit la date préselectionnée à l'ouverture du calendrier.",
+			description: 'Définit la date préselectionnée à l’ouverture du calendrier.',
 		},
 		widthAuto: {
 			control: 'boolean',
@@ -68,7 +68,7 @@ export default {
 			description: 'Masque les jours du mois précédent ou suivant visibles sur le mois en cours.',
 		},
 		hideWeekend: {
-			description: "Retire l'effet grisé visible sur les jours du isWeekend.",
+			description: 'Retire l’effet grisé visible sur les jours du isWeekend.',
 		},
 		presentation: {
 			description: '[v21.1] Transforme le champ de formulaire en donnée textuelle non éditable.',

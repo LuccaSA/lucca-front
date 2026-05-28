@@ -1,0 +1,9 @@
+@mixin vars {
+	--components-highlightText-backgroundColor: var(--palettes-300, var(--palettes-product-300));
+	--components-highlightText-backgroundDiameter: 0.25em;
+	--components-highlightText-backgroundBlockSize: 0.5em;
+
+	--components-highlightText-backgroundRadius: calc(var(--components-highlightText-backgroundDiameter) / 2);
+	--components-highlightText-backgroundStart: var(--components-highlightText-backgroundRadius);
+	--components-highlightText-backgroundEnd: calc(100% - var(--components-highlightText-backgroundRadius));
+}

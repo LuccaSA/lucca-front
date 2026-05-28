@@ -6,6 +6,7 @@ import { ChipComponent } from '@lucca-front/ng/chip';
 import { intlInputOptions } from '@lucca-front/ng/core';
 import { ILuOptionContext, LU_OPTION_CONTEXT, ɵLuOptionOutletDirective } from '@lucca-front/ng/core-select';
 import { LuTooltipModule } from '@lucca-front/ng/tooltip';
+import { IconComponent } from '@lucca/prisme/icon';
 import { map } from 'rxjs/operators';
 import { LuMultiSelectInputComponent } from '../input/select-input.component';
 import { LU_MULTI_SELECT_DISPLAYER_TRANSLATIONS } from './default-displayer.translate';
@@ -15,7 +16,7 @@ let nextID = 0;
 
 @Component({
 	selector: 'lu-multi-select-default-displayer',
-	imports: [AsyncPipe, LuTooltipModule, ɵLuOptionOutletDirective, FormsModule, LuMultiSelectDisplayerInputDirective, ChipComponent],
+	imports: [AsyncPipe, LuTooltipModule, ɵLuOptionOutletDirective, FormsModule, LuMultiSelectDisplayerInputDirective, ChipComponent, IconComponent],
 	template: `
 		<div class="multipleSelect-displayer">
 			<input [attr.aria-labelledby]="valueID" autocomplete="off" #inputElement (keydown.backspace)="inputBackspace()" (keydown.space)="inputSpace($event)" luMultiSelectDisplayerInput />
@@ -29,6 +30,9 @@ let nextID = 0;
 					<lu-chip class="multipleSelect-displayer-chip" unkillable>+ {{ overflow }}</lu-chip>
 				}
 			</div>
+			@if (select.filterPillMode) {
+				<lu-icon icon="searchMagnifyingGlass" class="multiSelect-field-icon mod-search" />
+			}
 		</div>
 	`,
 	styleUrl: './default-displayer.component.scss',

@@ -1,26 +1,27 @@
 import { EmbeddedViewRef, TemplateRef, ViewContainerRef } from '@angular/core';
 import { LinkAttributes, LinkNode, SerializedLinkNode } from '@lexical/link';
 import { DOMExportOutput, EditorConfig, LexicalEditor, type NodeKey } from 'lexical';
+import { LinkTemplateContext } from './link-template-context';
 
 export class PopoverLinkNode extends LinkNode {
 	#viewContainerRef?: ViewContainerRef;
-	#templateRef?: TemplateRef<{ href?: string; title?: string; target?: string }>;
-	#view?: EmbeddedViewRef<{ href?: string; title?: string; target?: string }>;
+	#templateRef?: TemplateRef<LinkTemplateContext>;
+	#view?: EmbeddedViewRef<LinkTemplateContext>;
 
 	setViewContainerRef(vcr: ViewContainerRef): this {
 		const self = this.getWritable();
 		self.#viewContainerRef = vcr;
 		return self;
 	}
-	getViewContainerRef(): ViewContainerRef {
+	getViewContainerRef(): ViewContainerRef | undefined {
 		return this.#viewContainerRef;
 	}
-	setTemplateRef(vcr: TemplateRef<{ href?: string; title?: string; target?: string }>): this {
+	setTemplateRef(templateRef: TemplateRef<LinkTemplateContext>): this {
 		const self = this.getWritable();
-		self.#templateRef = vcr;
+		self.#templateRef = templateRef;
 		return self;
 	}
-	getTemplateRef(): TemplateRef<{ href?: string; title?: string; target?: string }> {
+	getTemplateRef(): TemplateRef<LinkTemplateContext> | undefined {
 		return this.#templateRef;
 	}
 
@@ -28,7 +29,7 @@ export class PopoverLinkNode extends LinkNode {
 		return 'popoverlink';
 	}
 
-	constructor(url?: string, attributes?: LinkAttributes & { viewContainerRef: ViewContainerRef; templateRef: TemplateRef<{ href?: string; title?: string; target?: string }> }, key?: NodeKey) {
+	constructor(url?: string, attributes?: LinkAttributes & { viewContainerRef?: ViewContainerRef; templateRef?: TemplateRef<LinkTemplateContext> }, key?: NodeKey) {
 		super(url, attributes, key);
 		this.#viewContainerRef = attributes?.viewContainerRef;
 		this.#templateRef = attributes?.templateRef;
@@ -41,14 +42,14 @@ export class PopoverLinkNode extends LinkNode {
 				title: this.__title,
 				target: this.__target,
 				key: this.__key,
+				isAutoLink: false,
 			};
+			// if view already exists, destroy it. Can't reuse it since Lexical injects HTML content inside afterward (link text).
 			if (this.#view) {
-				this.#view.context = context;
-				this.#view.markForCheck();
-			} else {
-				// Create the view
-				this.#view = this.#viewContainerRef.createEmbeddedView(this.#templateRef, context);
+				this.#view.destroy();
 			}
+			// Create the view
+			this.#view = this.#viewContainerRef.createEmbeddedView(this.#templateRef, context);
 
 			// Return the template DOM element
 			return this.#view.rootNodes[0] as HTMLElement;
@@ -83,13 +84,13 @@ export class PopoverLinkNode extends LinkNode {
 	}
 
 	static override clone(node: PopoverLinkNode): PopoverLinkNode {
-		return new PopoverLinkNode(node.__url, { target: node.__target, rel: node.__rel, title: node.__title, templateRef: node.#templateRef, viewContainerRef: node.#viewContainerRef }, node.__key);
+		return $createPopoverLinkNode(node.__url, { target: node.__target, rel: node.__rel, title: node.__title, templateRef: node.#templateRef, viewContainerRef: node.#viewContainerRef }, node.__key);
 	}
 }
 
 export function $createPopoverLinkNode(
 	url?: string,
-	attributes?: LinkAttributes & { viewContainerRef: ViewContainerRef; templateRef: TemplateRef<{ href?: string; title?: string; target?: string }> },
+	attributes?: LinkAttributes & { viewContainerRef?: ViewContainerRef; templateRef?: TemplateRef<LinkTemplateContext> },
 	key?: NodeKey,
 ): PopoverLinkNode {
 	return new PopoverLinkNode(url, attributes, key);

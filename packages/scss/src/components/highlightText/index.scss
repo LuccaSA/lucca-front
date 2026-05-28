@@ -1,0 +1,8 @@
+@use 'exports' as *;
+
+.highlightText {
+	@layer components {
+		@include vars;
+		@include component;
+	}
+}

@@ -9,7 +9,7 @@ export default [
 			/\.label/,
 			/\.mod-delete/,
 			/\.mod-link/,
-			/\.mod-outline/,
+			/\.mod-outline\b/,
 			/\.success/,
 			/\.u-textLight/,
 		],
