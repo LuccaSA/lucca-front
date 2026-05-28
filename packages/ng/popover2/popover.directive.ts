@@ -70,6 +70,7 @@ const defaultPositionPairs: Record<PopoverPosition, ConnectionPositionPair> = {
 	host: {
 		'[attr.aria-expanded]': 'opened()',
 		'[attr.tabindex]': 'tabIndexAttr',
+		'[attr.role]': 'roleAttr',
 	},
 	exportAs: 'luPopover2',
 })
@@ -151,6 +152,7 @@ export class PopoverDirective implements OnDestroy {
 	#screenReaderDescription?: HTMLSpanElement;
 
 	readonly tabIndexAttr = this.#shouldSetTabIndex(this.elementRef.nativeElement) ? '0' : null;
+	readonly roleAttr = this.#shouldSetRole(this.elementRef.nativeElement) ? 'button' : null;
 
 	// For when we need to extend this popover and add some extra providers to the panel
 	protected additionalProviders: Provider[] = [];
@@ -357,6 +359,14 @@ export class PopoverDirective implements OnDestroy {
 		}
 
 		return !this.#isNativelyFocusable(element);
+	}
+
+	#shouldSetRole(element: HTMLElement): boolean {
+		if (element.hasAttribute('role')) {
+			return false;
+		}
+
+		return this.#shouldSetTabIndex(element);
 	}
 
 	#isNativelyFocusable(element: HTMLElement): boolean {
