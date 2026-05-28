@@ -1,4 +1,5 @@
-import { booleanAttribute, ChangeDetectionStrategy, Component, inject, input, ViewEncapsulation } from '@angular/core';
+import { ChangeDetectionStrategy, Component, inject, input, ViewEncapsulation } from '@angular/core';
+import { luBooleanAttribute } from '@lucca-front/ng/core';
 import { PopoverContentComponent } from '@lucca-front/ng/popover2';
 
 @Component({
@@ -17,8 +18,8 @@ import { PopoverContentComponent } from '@lucca-front/ng/popover2';
 export class DropdownActionComponent {
 	#popoverContentRef = inject(PopoverContentComponent, { optional: true });
 
-	readonly disabled = input(false, { transform: booleanAttribute });
-	readonly critical = input(false, { transform: booleanAttribute });
+	readonly disabled = input(false, { transform: luBooleanAttribute });
+	readonly critical = input(false, { transform: luBooleanAttribute });
 
 	closePanel() {
 		if (this.#popoverContentRef) {

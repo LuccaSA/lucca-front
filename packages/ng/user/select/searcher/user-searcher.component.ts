@@ -1,7 +1,16 @@
 import { AsyncPipe } from '@angular/common';
 import { ChangeDetectionStrategy, Component, ElementRef, forwardRef, HostBinding, Inject, input, Input, OnDestroy, OnInit, Optional, Output, Self, SkipSelf, ViewChild } from '@angular/core';
 import { FormControl, FormGroup, ReactiveFormsModule } from '@angular/forms';
-import { ALuOnCloseSubscriber, ALuOnOpenSubscriber, ALuOnScrollBottomSubscriber, ILuOnCloseSubscriber, ILuOnOpenSubscriber, ILuOnScrollBottomSubscriber, intlInputOptions } from '@lucca-front/ng/core';
+import {
+	ALuOnCloseSubscriber,
+	ALuOnOpenSubscriber,
+	ALuOnScrollBottomSubscriber,
+	ILuOnCloseSubscriber,
+	ILuOnOpenSubscriber,
+	ILuOnScrollBottomSubscriber,
+	intlInputOptions,
+	luBooleanAttribute,
+} from '@lucca-front/ng/core';
 import { ALuOptionOperator, LuOptionPlaceholderComponent } from '@lucca-front/ng/option';
 import { BehaviorSubject, combineLatest, merge, Observable, of, Subject, Subscription } from 'rxjs';
 import { catchError, debounceTime, filter, map, scan, share, startWith, switchMap } from 'rxjs/operators';
@@ -70,7 +79,7 @@ export class LuUserPagedSearcherComponent<U extends ILuUser = ILuUser> implement
 	@Input() set operations(operations: number[]) {
 		this._service.operations = operations;
 	}
-	@Input() enableFormerEmployees = false;
+	@Input({ transform: luBooleanAttribute }) enableFormerEmployees = false;
 
 	@Output() clueChange: Observable<string>;
 

@@ -1,6 +1,5 @@
 import { OverlayConfig, OverlayContainer } from '@angular/cdk/overlay';
 import {
-	booleanAttribute,
 	ChangeDetectorRef,
 	computed,
 	Directive,
@@ -23,7 +22,7 @@ import {
 } from '@angular/core';
 import { outputFromObservable, toSignal } from '@angular/core/rxjs-interop';
 import { ControlValueAccessor } from '@angular/forms';
-import { PortalContent } from '@lucca-front/ng/core';
+import { luBooleanAttribute, luNumberAttribute, PortalContent } from '@lucca-front/ng/core';
 import { FILTER_PILL_HOST_COMPONENT, FILTER_PILL_INPUT_COMPONENT, FilterPillInputComponent } from '@lucca-front/ng/filter-pills';
 import { BehaviorSubject, defer, map, Observable, of, ReplaySubject, startWith, Subject, switchMap, take } from 'rxjs';
 import { LuOptionGrouping, LuSimpleSelectDefaultOptionComponent } from '../option';
@@ -57,7 +56,7 @@ export abstract class ALuSelectInputComponent<TOption, TValue> implements OnDest
 	protected updatePositionFn?: () => void;
 	protected filterPillMode = false;
 
-	public readonly ignorePresentation = input(false, { transform: booleanAttribute });
+	public readonly ignorePresentation = input(false, { transform: luBooleanAttribute });
 
 	public selectParent$?: Subject<void>;
 	public selectChildren$?: Subject<void>;
@@ -82,7 +81,7 @@ export abstract class ALuSelectInputComponent<TOption, TValue> implements OnDest
 		this.placeholder$.next(value);
 	}
 
-	@Input({ transform: booleanAttribute })
+	@Input({ transform: luBooleanAttribute })
 	@HostBinding('class.is-clearable')
 	set clearable(value: boolean) {
 		this.#inputClearable.set(value);
@@ -169,12 +168,12 @@ export abstract class ALuSelectInputComponent<TOption, TValue> implements OnDest
 	@Input() optionComparer: LuOptionComparer<TOption> = coreSelectDefaultOptionComparer;
 	@Input() optionKey: (option: TOption) => unknown = coreSelectDefaultOptionKey;
 
-	readonly noClueIcon = input(false, { transform: booleanAttribute });
-	readonly inputTabindex = input<number>(0);
+	readonly noClueIcon = input(false, { transform: luBooleanAttribute });
+	readonly inputTabindex = input(0, { transform: luNumberAttribute });
 
-	readonly compact = input(false, { transform: booleanAttribute });
+	readonly compact = input(false, { transform: luBooleanAttribute });
 
-	readonly colorPicker = input(false, { transform: booleanAttribute });
+	readonly colorPicker = input(false, { transform: luBooleanAttribute });
 
 	@HostBinding('class.mod-noClueIcon')
 	protected get isNoClueIconClass(): boolean {

@@ -1,6 +1,6 @@
-import { booleanAttribute, ChangeDetectionStrategy, Component, input, output, ViewEncapsulation } from '@angular/core';
+import { ChangeDetectionStrategy, Component, input, output, ViewEncapsulation } from '@angular/core';
 import { BubbleIllustrationComponent } from '@lucca-front/ng/bubble-illustration';
-import { IntlParamsPipe } from '@lucca-front/ng/core';
+import { IntlParamsPipe, luBooleanAttribute } from '@lucca-front/ng/core';
 import { InputDirective } from '@lucca-front/ng/form-field';
 import { BaseFileUploadComponent } from '../base-file-upload/base-file-upload.component';
 import { FileEntryComponent } from '../file-entry/file-entry.component';
@@ -25,5 +25,5 @@ export class SingleFileUploadComponent extends BaseFileUploadComponent {
 
 	readonly deleteFile = output<void>();
 
-	readonly displayFileName = input(false, { transform: booleanAttribute });
+	readonly displayFileName = input(false, { transform: luBooleanAttribute });
 }

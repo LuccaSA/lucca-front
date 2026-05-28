@@ -1,5 +1,5 @@
 import { ComponentRef, Directive, EmbeddedViewRef, inject, Injector, Input, OnChanges, OnDestroy, SimpleChanges, TemplateRef, Type, ViewContainerRef } from '@angular/core';
-import { isNotNil } from '@lucca-front/ng/core';
+import { isNotNil, luBooleanAttribute } from '@lucca-front/ng/core';
 import { LuOptionContext } from '../select.model';
 import { LU_OPTION_CONTEXT, provideOptionContext } from './option.token';
 
@@ -14,7 +14,7 @@ function hasRenderableValue<T>(value: T | undefined): value is T {
 export class LuOptionOutletDirective<T> implements OnChanges, OnDestroy {
 	@Input() luOptionOutlet?: Type<unknown> | TemplateRef<LuOptionContext<T>>;
 	@Input() luOptionOutletValue: T | undefined;
-	@Input() luOptionShowNull = false;
+	@Input({ transform: luBooleanAttribute }) luOptionShowNull = false;
 
 	private viewContainerRef = inject(ViewContainerRef);
 	private injector = inject(Injector);

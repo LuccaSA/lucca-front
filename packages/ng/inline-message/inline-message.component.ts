@@ -1,5 +1,5 @@
-import { booleanAttribute, ChangeDetectionStrategy, Component, inject, input, ViewEncapsulation } from '@angular/core';
-import { LuClass, PortalContent, PortalDirective, ɵeffectWithDeps } from '@lucca-front/ng/core';
+import { ChangeDetectionStrategy, Component, inject, input, ViewEncapsulation } from '@angular/core';
+import { luBooleanAttribute, LuClass, PortalContent, PortalDirective, ɵeffectWithDeps } from '@lucca-front/ng/core';
 import { LuTooltipModule } from '@lucca-front/ng/tooltip';
 import { InlineMessageState } from './inline-message-state';
 
@@ -36,7 +36,7 @@ export class InlineMessageComponent {
 	/**
 	 * Defines whether a tooltip is used in the inline message component
 	 */
-	readonly withTooltip = input(false, { transform: booleanAttribute });
+	readonly withTooltip = input(false, { transform: luBooleanAttribute });
 
 	constructor() {
 		ɵeffectWithDeps([this.size, this.state], (size, state) => {

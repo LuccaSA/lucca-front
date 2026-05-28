@@ -1,7 +1,8 @@
 import { NgTemplateOutlet } from '@angular/common';
-import { booleanAttribute, ChangeDetectionStrategy, Component, ElementRef, forwardRef, inject, input, model, numberAttribute, ViewEncapsulation } from '@angular/core';
+import { ChangeDetectionStrategy, Component, ElementRef, forwardRef, inject, input, model, ViewEncapsulation } from '@angular/core';
 import { FormsModule } from '@angular/forms';
 import { ButtonComponent } from '@lucca-front/ng/button';
+import { luBooleanAttribute, luNumberAttribute } from '@lucca-front/ng/core';
 import { IconComponent } from '@lucca-front/ng/icon';
 import { BaseIndexTableCell } from '../base-index-table-cell';
 import { LU_INDEX_TABLE_CELL_INSTANCE } from '../index-table-cell.token';
@@ -41,10 +42,10 @@ export class IndexTableRowCellHeaderComponent extends BaseIndexTableCell {
 	readonly elementRef = inject<ElementRef<HTMLTableCellElement>>(ElementRef);
 
 	readonly sort = model<null | 'none' | 'ascending' | 'descending'>(null);
-	readonly selectable = input(false, { transform: booleanAttribute });
-	readonly hiddenLabel = input(false, { transform: booleanAttribute });
-	readonly actions = input(false, { transform: booleanAttribute });
-	readonly inlineSize = input(0, { transform: numberAttribute });
+	readonly selectable = input(false, { transform: luBooleanAttribute });
+	readonly hiddenLabel = input(false, { transform: luBooleanAttribute });
+	readonly actions = input(false, { transform: luBooleanAttribute });
+	readonly inlineSize = input(0, { transform: luNumberAttribute });
 
 	toggleSort(): void {
 		if (this.sort()) {

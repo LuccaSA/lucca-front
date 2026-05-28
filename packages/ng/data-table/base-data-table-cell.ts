@@ -1,5 +1,5 @@
-import { booleanAttribute, ChangeDetectionStrategy, Component, computed, inject, input } from '@angular/core';
-import { isNotNil } from '@lucca-front/ng/core';
+import { ChangeDetectionStrategy, Component, computed, inject, input } from '@angular/core';
+import { isNotNil, luBooleanAttribute } from '@lucca-front/ng/core';
 import { LU_DATA_TABLE_BODY_INSTANCE } from './data-table-body/data-table-body.token';
 import { LU_DATA_TABLE_FOOT_INSTANCE } from './data-table-foot/data-table-foot.token';
 import { LU_DATA_TABLE_HEAD_INSTANCE } from './data-table-head/data-table-head.token';
@@ -18,7 +18,7 @@ export abstract class BaseDataTableCell {
 	readonly footRef = inject(LU_DATA_TABLE_FOOT_INSTANCE, { optional: true });
 	readonly rowRef = inject(LU_DATA_TABLE_ROW_INSTANCE, { optional: true });
 
-	readonly editable = input(false, { transform: booleanAttribute });
+	readonly editable = input(false, { transform: luBooleanAttribute });
 	readonly align = input<null | 'start' | 'center' | 'end'>(null);
 
 	readonly isStickyStart = computed(() => {

@@ -1,5 +1,5 @@
-import { booleanAttribute, ChangeDetectionStrategy, Component, computed, inject, input, ViewEncapsulation } from '@angular/core';
-import { LuClass, Palette, ɵeffectWithDeps } from '@lucca-front/ng/core';
+import { ChangeDetectionStrategy, Component, computed, inject, input, ViewEncapsulation } from '@angular/core';
+import { luBooleanAttribute, LuClass, luNumberAttribute, Palette, ɵeffectWithDeps } from '@lucca-front/ng/core';
 import { LuTooltipModule } from '@lucca-front/ng/tooltip';
 
 @Component({
@@ -37,17 +37,17 @@ export class NumericBadgeComponent {
 	/**
 	 * Applies the loading state
 	 */
-	readonly loading = input(false, { transform: booleanAttribute });
+	readonly loading = input(false, { transform: luBooleanAttribute });
 
 	/**
 	 * Indicates the maximum value of number for the numeric badge
 	 */
-	readonly maxValue = input<number>(999);
+	readonly maxValue = input(999, { transform: luNumberAttribute });
 
 	/**
 	 * Disabled tooltip on numeric badge
 	 */
-	readonly disableTooltip = input(false, { transform: booleanAttribute });
+	readonly disableTooltip = input(false, { transform: luBooleanAttribute });
 
 	readonly numericBadgeClasses = computed(() => {
 		const palette = this.palette();

@@ -1,4 +1,6 @@
-import { booleanAttribute, Directive, ElementRef, inject, Input, OnInit } from '@angular/core';
+import { Directive, ElementRef, inject, Input, OnInit } from '@angular/core';
+
+import { luBooleanAttribute } from '@lucca-front/ng/core';
 import { FORM_FIELD_INSTANCE } from './form-field.token';
 
 @Directive({
@@ -16,7 +18,7 @@ export class InputDirective implements OnInit {
 	/**
 	 * Prevents message and label ids from being propagated, useful if the input holds its own message and label (like for radios)
 	 */
-	@Input({ transform: booleanAttribute, alias: 'luInputStandalone' })
+	@Input({ transform: luBooleanAttribute, alias: 'luInputStandalone' })
 	standalone = false;
 
 	ngOnInit(): void {

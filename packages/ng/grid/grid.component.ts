@@ -1,6 +1,6 @@
 import { NgTemplateOutlet } from '@angular/common';
-import { booleanAttribute, ChangeDetectionStrategy, Component, computed, forwardRef, input, numberAttribute, ViewEncapsulation } from '@angular/core';
-import { ResponsiveProperty } from '@lucca-front/ng/core';
+import { ChangeDetectionStrategy, Component, computed, forwardRef, input, ViewEncapsulation } from '@angular/core';
+import { luBooleanAttribute, luNullableNumberAttribute, ResponsiveProperty } from '@lucca-front/ng/core';
 import { LU_GRID_INSTANCE } from './grid.token';
 
 @Component({
@@ -18,13 +18,13 @@ import { LU_GRID_INSTANCE } from './grid.token';
 	],
 })
 export class GridComponent {
-	readonly container = input(false, { transform: booleanAttribute });
+	readonly container = input(false, { transform: luBooleanAttribute });
 
-	readonly columns = input(null, { transform: numberAttribute });
+	readonly columns = input(null, { transform: luNullableNumberAttribute });
 
-	readonly colspan = input(null, { transform: numberAttribute });
+	readonly colspan = input(null, { transform: luNullableNumberAttribute });
 
-	readonly rowspan = input(null, { transform: numberAttribute });
+	readonly rowspan = input(null, { transform: luNullableNumberAttribute });
 
 	readonly mode = input<'form' | 'auto' | ResponsiveProperty<'auto'> | null>(null);
 

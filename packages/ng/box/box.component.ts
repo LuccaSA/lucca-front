@@ -1,5 +1,6 @@
-import { booleanAttribute, ChangeDetectionStrategy, Component, input, output, ViewEncapsulation } from '@angular/core';
+import { ChangeDetectionStrategy, Component, input, output, ViewEncapsulation } from '@angular/core';
 import { ButtonComponent } from '@lucca-front/ng/button';
+import { luBooleanAttribute } from '@lucca-front/ng/core';
 import { IconComponent } from '@lucca-front/ng/icon';
 
 @Component({
@@ -17,13 +18,13 @@ import { IconComponent } from '@lucca-front/ng/icon';
 	},
 })
 export class BoxComponent {
-	readonly toggle = input(false, { transform: booleanAttribute });
+	readonly toggle = input(false, { transform: luBooleanAttribute });
 
-	readonly neutral = input(false, { transform: booleanAttribute });
+	readonly neutral = input(false, { transform: luBooleanAttribute });
 
-	readonly killable = input(false, { transform: booleanAttribute });
+	readonly killable = input(false, { transform: luBooleanAttribute });
 
-	readonly withArrow = input(false, { transform: booleanAttribute });
+	readonly withArrow = input(false, { transform: luBooleanAttribute });
 
 	readonly killed = output();
 }

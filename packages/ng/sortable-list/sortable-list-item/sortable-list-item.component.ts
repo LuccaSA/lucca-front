@@ -1,6 +1,7 @@
 import { CdkDragHandle } from '@angular/cdk/drag-drop';
-import { booleanAttribute, ChangeDetectionStrategy, Component, input, output, ViewEncapsulation } from '@angular/core';
+import { ChangeDetectionStrategy, Component, input, output, ViewEncapsulation } from '@angular/core';
 import { ClearComponent } from '@lucca-front/ng/clear';
+import { luBooleanAttribute } from '@lucca-front/ng/core';
 import { IconComponent } from '@lucca-front/ng/icon';
 import { LuTooltipModule } from '@lucca-front/ng/tooltip';
 
@@ -33,22 +34,22 @@ export class SortableListItemComponent {
 	/**
 	 * Sortable list item can be clickable
 	 */
-	readonly clickable = input(false, { transform: booleanAttribute });
+	readonly clickable = input(false, { transform: luBooleanAttribute });
 
 	/**
 	 * Disabled the possibility to clear the sortable list item
 	 */
-	readonly unclearable = input(false, { transform: booleanAttribute });
+	readonly unclearable = input(false, { transform: luBooleanAttribute });
 
 	/**
 	 * Sortable list item can be draggable
 	 */
-	readonly drag = input(false, { transform: booleanAttribute });
+	readonly drag = input(false, { transform: luBooleanAttribute });
 
 	/**
 	 * Applies small size to segmented control tabs
 	 */
-	readonly small = input(false, { transform: booleanAttribute });
+	readonly small = input(false, { transform: luBooleanAttribute });
 
 	/**
 	 * Emit event when click on clear

@@ -1,4 +1,5 @@
-import { AfterViewInit, booleanAttribute, ChangeDetectionStrategy, Component, computed, ElementRef, inject, input, ViewEncapsulation } from '@angular/core';
+import { AfterViewInit, ChangeDetectionStrategy, Component, computed, ElementRef, inject, input, ViewEncapsulation } from '@angular/core';
+import { luBooleanAttribute } from '@lucca-front/ng/core';
 import { LuSafeExternalSvgPipe } from '@lucca-front/ng/safe-content';
 import { LuDialogRef } from '../model';
 
@@ -17,7 +18,7 @@ import { LuDialogRef } from '../model';
 export class DialogComponent implements AfterViewInit {
 	public readonly dialogRef = inject<LuDialogRef>(LuDialogRef);
 
-	readonly stacked = input(false, { transform: booleanAttribute });
+	readonly stacked = input(false, { transform: luBooleanAttribute });
 	readonly fancyIllustration = input<'approval' | 'checklist' | 'email' | 'install' | 'mapping' | 'save' | 'users' | 'welcome' | 'payment-card'>('welcome');
 	readonly fancyIllustrationUrl = input<string | null>(null);
 

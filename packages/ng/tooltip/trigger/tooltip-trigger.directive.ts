@@ -9,10 +9,10 @@ import {
 	VerticalConnectionPos,
 } from '@angular/cdk/overlay';
 import { ComponentPortal } from '@angular/cdk/portal';
-import { booleanAttribute, computed, DestroyRef, Directive, effect, EffectRef, ElementRef, inject, Injector, input, linkedSignal, numberAttribute, OnDestroy, Renderer2, signal } from '@angular/core';
+import { computed, DestroyRef, Directive, effect, EffectRef, ElementRef, inject, Injector, input, linkedSignal, OnDestroy, Renderer2, signal } from '@angular/core';
 import { takeUntilDestroyed, toObservable, toSignal } from '@angular/core/rxjs-interop';
 import { SafeHtml } from '@angular/platform-browser';
-import { isNotNil, ɵeffectWithDeps } from '@lucca-front/ng/core';
+import { isNotNil, luBooleanAttribute, luNumberAttribute, ɵeffectWithDeps } from '@lucca-front/ng/core';
 import { LuPopoverPosition } from '@lucca-front/ng/popover';
 import { from, of, startWith, switchMap, timer } from 'rxjs';
 import { debounce, debounceTime, filter, map, tap } from 'rxjs/operators';
@@ -44,13 +44,13 @@ export class LuTooltipTriggerDirective implements OnDestroy {
 	readonly luTooltipInput = input<string | SafeHtml>('', { alias: 'luTooltip' });
 	readonly luTooltip = linkedSignal<string | SafeHtml>(() => this.luTooltipInput());
 
-	readonly luTooltipEnterDelay = input(300, { transform: numberAttribute });
-	readonly luTooltipLeaveDelay = input(100, { transform: numberAttribute });
-	readonly luTooltipDisabled = input(false, { transform: booleanAttribute });
-	readonly luTooltipOnlyForDisplay = input(false, { transform: booleanAttribute });
+	readonly luTooltipEnterDelay = input(300, { transform: luNumberAttribute });
+	readonly luTooltipLeaveDelay = input(100, { transform: luNumberAttribute });
+	readonly luTooltipDisabled = input(false, { transform: luBooleanAttribute });
+	readonly luTooltipOnlyForDisplay = input(false, { transform: luBooleanAttribute });
 	readonly luTooltipPosition = input<LuPopoverPosition>('above');
 
-	readonly luTooltipWhenEllipsisInput = input(false, { alias: 'luTooltipWhenEllipsis', transform: booleanAttribute });
+	readonly luTooltipWhenEllipsisInput = input(false, { alias: 'luTooltipWhenEllipsis', transform: luBooleanAttribute });
 	readonly luTooltipWhenEllipsis = linkedSignal(() => this.luTooltipWhenEllipsisInput());
 
 	readonly luTooltipAnchor = input<FlexibleConnectedPositionStrategyOrigin>(this.#host);

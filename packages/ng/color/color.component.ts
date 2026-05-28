@@ -1,4 +1,5 @@
-import { booleanAttribute, ChangeDetectionStrategy, Component, input, ViewEncapsulation } from '@angular/core';
+import { ChangeDetectionStrategy, Component, input, ViewEncapsulation } from '@angular/core';
+import { luBooleanAttribute } from '@lucca-front/ng/core';
 
 @Component({
 	selector: 'lu-color',
@@ -16,5 +17,5 @@ export class ColorComponent {
 	readonly value = input<string | null>(null);
 	readonly borderColor = input<string | null>(null);
 	readonly size = input<'L' | 'XL' | null>(null);
-	readonly hiddenName = input(false, { transform: booleanAttribute });
+	readonly hiddenName = input(false, { transform: luBooleanAttribute });
 }

@@ -1,9 +1,9 @@
 import { NgTemplateOutlet } from '@angular/common';
-import { booleanAttribute, ChangeDetectionStrategy, Component, computed, ElementRef, input, output, signal, viewChild, ViewEncapsulation } from '@angular/core';
+import { ChangeDetectionStrategy, Component, computed, ElementRef, input, output, signal, viewChild, ViewEncapsulation } from '@angular/core';
 import { ReactiveFormsModule } from '@angular/forms';
 import { LuccaIcon } from '@lucca-front/icons';
 import { ClearComponent } from '@lucca-front/ng/clear';
-import { intlInputOptions } from '@lucca-front/ng/core';
+import { intlInputOptions, luBooleanAttribute } from '@lucca-front/ng/core';
 import { InputDirective, ɵPresentationDisplayDefaultDirective } from '@lucca-front/ng/form-field';
 import { NgxMaskDirective, provideNgxMask } from 'ngx-mask';
 import { FormFieldIdDirective } from '../form-field-id.directive';
@@ -35,11 +35,11 @@ export class TextInputComponent {
 
 	readonly autocomplete = input<AutoFill>('off');
 
-	readonly hasClearer = input(false, { transform: booleanAttribute });
+	readonly hasClearer = input(false, { transform: luBooleanAttribute });
 
-	readonly hasSearchIcon = input(false, { transform: booleanAttribute });
+	readonly hasSearchIcon = input(false, { transform: luBooleanAttribute });
 
-	readonly valueAlignRight = input(false, { transform: booleanAttribute });
+	readonly valueAlignRight = input(false, { transform: luBooleanAttribute });
 
 	readonly prefix = input<TextInputAddon>();
 

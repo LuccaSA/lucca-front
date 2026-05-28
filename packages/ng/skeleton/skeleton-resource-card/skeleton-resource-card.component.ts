@@ -1,4 +1,5 @@
-import { ChangeDetectionStrategy, Component, computed, input, numberAttribute } from '@angular/core';
+import { ChangeDetectionStrategy, Component, computed, input } from '@angular/core';
+import { luNumberAttribute } from '@lucca-front/ng/core';
 
 @Component({
 	selector: 'lu-skeleton-resource-card',
@@ -10,7 +11,7 @@ export class SkeletonResourceCardComponent {
 	/**
 	 * Defines the number of description lines in resource card
 	 */
-	readonly descriptionLines = input(0, { transform: numberAttribute });
+	readonly descriptionLines = input(0, { transform: luNumberAttribute });
 
 	readonly lines = computed(() => Array.from({ length: this.descriptionLines() }));
 

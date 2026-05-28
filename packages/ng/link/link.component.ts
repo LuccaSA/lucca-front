@@ -1,7 +1,7 @@
 import { Location } from '@angular/common';
-import { afterNextRender, booleanAttribute, ChangeDetectionStrategy, Component, effect, inject, Injector, input, ViewEncapsulation } from '@angular/core';
+import { afterNextRender, ChangeDetectionStrategy, Component, effect, inject, Injector, input, ViewEncapsulation } from '@angular/core';
 import { Router, UrlTree } from '@angular/router';
-import { intlInputOptions } from '@lucca-front/ng/core';
+import { intlInputOptions, luBooleanAttribute } from '@lucca-front/ng/core';
 import { LU_LINK_TRANSLATIONS } from './link.translate';
 import { LuRouterLink } from './lu-router-link';
 
@@ -51,17 +51,17 @@ export class LinkComponent {
 	/**
 	 * Disables the link
 	 */
-	readonly disabled = input(false, { transform: booleanAttribute });
+	readonly disabled = input(false, { transform: luBooleanAttribute });
 
 	/**
 	 * Underlines the link only on hover
 	 */
-	readonly decorationHover = input(false, { transform: booleanAttribute });
+	readonly decorationHover = input(false, { transform: luBooleanAttribute });
 
 	/**
 	 * Indicates that the link will open in a new tab
 	 */
-	readonly external = input(false, { transform: booleanAttribute });
+	readonly external = input(false, { transform: luBooleanAttribute });
 
 	hrefBackup: string;
 

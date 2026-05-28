@@ -1,5 +1,6 @@
 import { NgTemplateOutlet } from '@angular/common';
-import { booleanAttribute, ChangeDetectionStrategy, Component, computed, input, ViewEncapsulation } from '@angular/core';
+import { ChangeDetectionStrategy, Component, computed, input, ViewEncapsulation } from '@angular/core';
+import { luBooleanAttribute } from '@lucca-front/ng/core';
 
 @Component({
 	selector: 'lu-footer',
@@ -10,18 +11,18 @@ import { booleanAttribute, ChangeDetectionStrategy, Component, computed, input, 
 	changeDetection: ChangeDetectionStrategy.OnPush,
 })
 export class FooterComponent {
-	readonly sticky = input(false, { transform: booleanAttribute });
+	readonly sticky = input(false, { transform: luBooleanAttribute });
 
 	/**
 	 * Applies a container around the Page Header content
 	 */
-	readonly container = input(false, { transform: booleanAttribute });
+	readonly container = input(false, { transform: luBooleanAttribute });
 
 	readonly containerMax = input<null | 'M' | 'L' | 'XL' | 'XXL' | 'XXXL'>();
 
-	readonly forceNarrow = input(false, { transform: booleanAttribute });
+	readonly forceNarrow = input(false, { transform: luBooleanAttribute });
 
-	readonly dialog = input(false, { transform: booleanAttribute });
+	readonly dialog = input(false, { transform: luBooleanAttribute });
 
 	readonly narrowAtMediaMax = input<'XXS' | 'XS' | 'S' | 'M'>('XXS');
 

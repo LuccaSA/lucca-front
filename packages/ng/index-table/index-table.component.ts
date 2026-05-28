@@ -1,5 +1,5 @@
-import { booleanAttribute, ChangeDetectionStrategy, Component, computed, contentChild, contentChildren, ElementRef, forwardRef, input, viewChild, ViewEncapsulation } from '@angular/core';
-import { ResponsiveConfig } from '@lucca-front/ng/core';
+import { ChangeDetectionStrategy, Component, computed, contentChild, contentChildren, ElementRef, forwardRef, input, viewChild, ViewEncapsulation } from '@angular/core';
+import { luBooleanAttribute, ResponsiveConfig } from '@lucca-front/ng/core';
 
 import { IndexTableHeadComponent } from './index-table-head/index-table-head.component';
 import { IndexTableRowComponent } from './index-table-row/index-table-row.component';
@@ -25,9 +25,9 @@ import { LU_INDEX_TABLE_INSTANCE } from './index-table.token';
 export class IndexTableComponent {
 	readonly tableRef = viewChild<ElementRef<Element>>('tableRef');
 
-	readonly selectable = input(false, { transform: booleanAttribute });
-	readonly layoutFixed = input(false, { transform: booleanAttribute });
-	readonly empty = input(false, { transform: booleanAttribute });
+	readonly selectable = input(false, { transform: luBooleanAttribute });
+	readonly layoutFixed = input(false, { transform: luBooleanAttribute });
+	readonly empty = input(false, { transform: luBooleanAttribute });
 
 	readonly responsive = input<ResponsiveConfig<'layoutFixed', true>>({});
 

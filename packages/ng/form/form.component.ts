@@ -1,4 +1,5 @@
-import { booleanAttribute, ChangeDetectionStrategy, Component, forwardRef, input, ViewEncapsulation } from '@angular/core';
+import { ChangeDetectionStrategy, Component, forwardRef, input, ViewEncapsulation } from '@angular/core';
+import { luBooleanAttribute } from '@lucca-front/ng/core';
 import { LU_FORM_INSTANCE } from './form-instance';
 
 @Component({
@@ -21,7 +22,7 @@ import { LU_FORM_INSTANCE } from './form-instance';
 	],
 })
 export class FormComponent {
-	readonly maxWidth = input(false, { transform: booleanAttribute });
+	readonly maxWidth = input(false, { transform: luBooleanAttribute });
 
-	readonly presentation = input(false, { transform: booleanAttribute });
+	readonly presentation = input(false, { transform: luBooleanAttribute });
 }

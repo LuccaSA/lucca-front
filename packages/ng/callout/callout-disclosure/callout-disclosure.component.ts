@@ -1,6 +1,6 @@
-import { ChangeDetectionStrategy, Component, ViewEncapsulation, booleanAttribute, computed, input, output } from '@angular/core';
+import { ChangeDetectionStrategy, Component, computed, input, output, ViewEncapsulation } from '@angular/core';
 import { LuccaIcon } from '@lucca-front/icons';
-import { Palette, PortalContent, PortalDirective } from '@lucca-front/ng/core';
+import { luBooleanAttribute, Palette, PortalContent, PortalDirective } from '@lucca-front/ng/core';
 import { IconComponent } from '@lucca-front/ng/icon';
 import { CalloutIconPipe } from '../callout-icon.pipe';
 import { CalloutState } from '../callout-state';
@@ -49,7 +49,7 @@ export class CalloutDisclosureComponent {
 	/**
 	 * Is the disclosure callout is open by default
 	 */
-	readonly open = input(false, { transform: booleanAttribute });
+	readonly open = input(false, { transform: luBooleanAttribute });
 
 	/**
 	 * Emit boolean event when toggle disclosure callout opened
