@@ -69,8 +69,8 @@ const defaultPositionPairs: Record<PopoverPosition, ConnectionPositionPair> = {
 	selector: '[luPopover2]',
 	host: {
 		'[attr.aria-expanded]': 'opened()',
-		'[attr.tabindex]': 'tabIndexAttr',
-		'[attr.role]': 'roleAttr',
+		'[attr.tabindex]': 'luPopoverDisabled ? null : tabIndexAttr',
+		'[attr.role]': 'luPopoverDisabled ? null : roleAttr',
 	},
 	exportAs: 'luPopover2',
 })
