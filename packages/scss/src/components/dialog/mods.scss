@@ -148,3 +148,9 @@
 		--components-footer-paddingInline: var(--pr-t-spacings-150);
 	}
 }
+
+@mixin withHorizontalNavigation {
+	--components-dialog-insideContent-overflow: none;
+	--components-dialog-inside-header-boxShadow: none;
+	--components-dialog-inside-header-paddingBlock: var(--pr-t-spacings-200) 0;
+}
