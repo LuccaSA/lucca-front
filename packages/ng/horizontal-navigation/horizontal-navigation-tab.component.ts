@@ -8,11 +8,11 @@ import { LU_HORIZONTALNAVIGATION_INSTANCE } from './horizontal-navigation.token'
 	template: '<ng-content/>',
 	host: {
 		class: 'horizontalNavigation_panel',
-		'[class.is-active]': 'selected()',
 		role: 'tabpanel',
+		tabindex: '0',
+		'[class.is-active]': 'selected()',
 		'[id]': "'panel-' + index()",
 		'[aria-labelledby]': "'tab-' + index()",
-		tabindex: '0',
 	},
 })
 export class HorizontalNavigationTabComponent {
@@ -21,5 +21,5 @@ export class HorizontalNavigationTabComponent {
 	readonly label = input.required<PortalContent>();
 	readonly disabled = input(false, { transform: booleanAttribute });
 	readonly index = computed(() => this.horizontalNavigationRef.getTabIndex(this));
-	readonly selected = computed(() => this.index() === this.horizontalNavigationRef.selected());
+	readonly selected = computed(() => !this.disabled() && this.index() === this.horizontalNavigationRef.selectedIndex());
 }

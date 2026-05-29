@@ -15,6 +15,7 @@ import {
 import { FormComponent } from '@lucca-front/ng/form';
 import { FormFieldComponent } from '@lucca-front/ng/form-field';
 import { CheckboxInputComponent, TextInputComponent } from '@lucca-front/ng/forms';
+import { HorizontalNavigationComponent, HorizontalNavigationTabComponent } from '@lucca-front/ng/horizontal-navigation';
 import { IconComponent } from '@lucca-front/ng/icon';
 import { applicationConfig, Meta, moduleMetadata, StoryObj } from '@storybook/angular';
 import { createTestStory, setStoryOptions } from 'stories/helpers/stories';
@@ -45,6 +46,8 @@ export default {
 				IconComponent,
 				DialogHeaderAction,
 				FormComponent,
+				HorizontalNavigationComponent,
+				HorizontalNavigationTabComponent,
 			],
 		}),
 	],
@@ -286,6 +289,56 @@ export const Fancy: StoryObj = {
 		size: 'M',
 		fancyIllustration: 'install',
 		fancyIllustrationUrl: '',
+	},
+};
+
+export const WithTabs: StoryObj = {
+	render: (args) => {
+		return {
+			props: {
+				config: args,
+			},
+			template: `
+<button luButton [luDialogOpen]="dialogTpl" [luDialogConfig]="config">Open Template-driven Dialog with tabs</button>
+
+<ng-template #dialogTpl>
+	<lu-dialog #dialog>
+		<lu-dialog-header>
+			<h1>Title</h1>
+		</lu-dialog-header>
+
+		<lu-horizontal-navigation>
+			<lu-horizontal-navigation-tab label="Tab 1">
+				<lu-dialog-content>
+					Content 1
+				</lu-dialog-content>
+			</lu-horizontal-navigation-tab>
+			<lu-horizontal-navigation-tab label="Tab 2">
+				<lu-dialog-content>
+					Content 2
+				</lu-dialog-content>
+			</lu-horizontal-navigation-tab>
+			<lu-horizontal-navigation-tab label="Tab 3">
+				<lu-dialog-content>
+					Content 3
+				</lu-dialog-content>
+			</lu-horizontal-navigation-tab>
+		</lu-horizontal-navigation>
+
+		<lu-dialog-footer>
+			<div class="footer-actions">
+				<button type="button" luButton luDialogClose>Confirm</button>
+				<button type="button" luButton="ghost" luDialogDismiss>Cancel</button>
+			</div>
+		</lu-dialog-footer>
+	</lu-dialog>
+</ng-template>`,
+		};
+	},
+	args: {
+		size: 'S',
+		alert: false,
+		mode: 'default',
 	},
 };
 

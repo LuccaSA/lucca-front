@@ -21,6 +21,10 @@
 			@include noBorder;
 		}
 
+		.dialog & {
+			@include insideDialog;
+		}
+
 		&.mod-vertical {
 			@include vertical;
 
@@ -37,6 +41,18 @@
 			&.mod-S {
 				@include verticalS;
 			}
+		}
+	}
+}
+
+.horizontalNavigation_panel {
+	@layer components {
+		@include varsPanel;
+	}
+
+	@layer mods {
+		.dialog & {
+			@include insideDialogPanel;
 		}
 	}
 }

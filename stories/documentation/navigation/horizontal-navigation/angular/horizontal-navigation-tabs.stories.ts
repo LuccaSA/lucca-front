@@ -21,9 +21,8 @@ export default {
 		},
 		selected: {
 			control: {
-				type: 'range',
 				min: 1,
-				max: 3,
+				max: 4,
 			},
 		},
 	},
@@ -41,11 +40,11 @@ export default {
 		const selectedParam = selected !== 1 ? ` [selected]="${selected}"` : ``;
 
 		return {
-			template: `<lu-horizontal-navigation${selectedParam} tablist${generateInputs(otherArgs, argTypes)}>
-	<lu-horizontal-navigation-tab label="Tab 1">Contenu 1</lu-horizontal-navigation-tab>
-	<lu-horizontal-navigation-tab label="Tab 2">Contenu 2</lu-horizontal-navigation-tab>
-	<lu-horizontal-navigation-tab label="Tab 3">Contenu 3</lu-horizontal-navigation-tab>
-	<lu-horizontal-navigation-tab label="Tab 4"${disabledParam}>Contenu 4</lu-horizontal-navigation-tab>
+			template: `<lu-horizontal-navigation${selectedParam}${generateInputs(otherArgs, argTypes)}>
+	<lu-horizontal-navigation-tab label="Tab 1">Content 1</lu-horizontal-navigation-tab>
+	<lu-horizontal-navigation-tab label="Tab 2">Content 2</lu-horizontal-navigation-tab>
+	<lu-horizontal-navigation-tab label="Tab 3">Content 3</lu-horizontal-navigation-tab>
+	<lu-horizontal-navigation-tab label="Tab 4"${disabledParam}>Content 4</lu-horizontal-navigation-tab>
 </lu-horizontal-navigation>
 `,
 		};

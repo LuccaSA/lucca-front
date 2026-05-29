@@ -1,5 +1,12 @@
-<div class="horizontalNavigation" [class.mod-noBorder]="noBorder()" [class.mod-S]="size() === `S`" [class.mod-vertical]="vertical()">
-	@if (container()) {
+<div
+	class="horizontalNavigation"
+	[class]="paletteClass()"
+	[class.mod-noBorder]="noBorder()"
+	[class.mod-S]="size() === `S`"
+	[class.mod-vertical]="vertical()"
+	[class.mod-header]="header()"
+>
+	@if (container() || isInsideDialog()) {
 		<div class="horizontalNavigation-containerOptional">
 			<ng-container *ngTemplateOutlet="horizontalNavigationList" />
 		</div>
@@ -8,19 +15,19 @@
 	}
 </div>
 
-@if (tablist()) {
+@if (isTablist()) {
 	<ng-content />
 }
 
 <ng-template #horizontalNavigationList>
-	<ul class="horizontalNavigation-list" [attr.role]="tablist() ? 'tablist' : null">
-		@if (tablist()) {
+	<ul class="horizontalNavigation-list" [attr.role]="isTablist() ? 'tablist' : null">
+		@if (isTablist()) {
 			@for (tab of tabs(); track $index) {
 				<li class="horizontalNavigation-list-item">
 					<button
 						#tabButton
-						[attr.tabindex]="selected() !== $index ? '-1' : null"
-						[attr.aria-selected]="selected() === $index"
+						[attr.tabindex]="selectedIndex() !== $index ? '-1' : null"
+						[attr.aria-selected]="selectedIndex() === $index"
 						[attr.disabled]="tab.disabled() ? 'disabled' : null"
 						aria-controls="panel-{{ tab.index() }}"
 						id="tab-{{ tab.index() }}"
