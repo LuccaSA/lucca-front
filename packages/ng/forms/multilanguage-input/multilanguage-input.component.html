@@ -1,11 +1,22 @@
-<div class="textField">
+<div class="textField mod-multilanguage">
+	@if (noInvariant()) {
+		<div class="textField-prefix">
+			<div class="textField-prefix-lang">
+				@if (displayRow().required) {
+					{{ displayRow().cultureCode }}<sup class="formLabel-required" aria-hidden="true">*</sup>
+				} @else {
+					{{ displayRow().cultureCode }}
+				}
+			</div>
+		</div>
+	}
 	<div class="textField-input">
 		<input
 			luInput
 			type="text"
 			class="textField-input-value"
 			[placeholder]="placeholder()"
-			[(ngModel)]="invariant().value"
+			[(ngModel)]="displayRow().value"
 			(ngModelChange)="valueChange()"
 			[ngModelOptions]="{ standalone: true }"
 			(blur)="onTouched?.()"
@@ -21,27 +32,55 @@
 				luPopoverNoCloseButton
 				[customPositions]="popoverPositions"
 				[luTooltip]="intl().toggleMultilanguage"
+				luTooltipOnlyForDisplay
+				luButton
 				type="button"
-				class="button mod-onlyIcon mod-ghost textField-input-affix-toggle"
+				class="textField-input-affix-toggle"
 			>
-				<span aria-hidden="true" class="lucca-icon icon-signTranslation"></span>
+				<lu-icon icon="signTranslation" [alt]="intl().toggleMultilanguage" />
 			</button>
 			<ng-template #popoverMultilanguage>
-				<div class="popover-contentOptional multilanguage_popover-content" [style.width.px]="inputElement.clientWidth + 16">
+				<div
+					class="popover-contentOptional multilanguage_popover-content"
+					[style.width.px]="noInvariant() ? inputElement.clientWidth : inputElement.clientWidth + 32"
+				>
 					<div class="pr-u-displayFlex pr-u-gap100 pr-u-flexDirectionColumn">
 						@for (row of panelInputs(); track row.cultureCode) {
+							<ng-template #prefixLang>
+								<div class="textField-prefix-lang">
+									@if (row.required) {
+										{{ row.cultureCode.slice(0, 2).toUpperCase() }}<sup class="formLabel-required" aria-hidden="true">*</sup>
+									} @else {
+										{{ row.cultureCode.slice(0, 2).toUpperCase() }}
+									}
+								</div>
+							</ng-template>
+							<ng-template #aiSuffix>
+								<button
+									type="button"
+									[size]="formFieldSize() === 'S' ? 'XS' : 'S'"
+									luButton="AI"
+									[luTooltip]="intl().translateWithAI"
+									luTooltipOnlyForDisplay
+									[disabled]="disabledInternal()"
+									(click)="translateWithAI.emit(row.cultureCode)"
+								>
+									<lu-icon icon="officePenStar" alt="intl().translateWithAI" />
+								</button>
+							</ng-template>
 							<lu-form-field
 								[size]="formFieldSize()"
 								[label]="intl().translateTo | intlParams: { lang: getLocaleDisplayName(row.cultureCode) }"
-								hiddenLabel
 							>
 								<lu-text-input
-									[suffix]="{ content: row.cultureCode, ariaLabel: '' }"
+									[prefix]="{ content: prefixLang, ariaLabel: '' }"
 									[(ngModel)]="row.value"
+									[required]="row.required"
 									(ngModelChange)="valueChange()"
 									[ngModelOptions]="{ standalone: true }"
 									[disabled]="disabledInternal()"
 									[autocomplete]="autocomplete()"
+									[suffix]="{ content: aiSuffix, ariaLabel: '' }"
 								/>
 							</lu-form-field>
 						}
