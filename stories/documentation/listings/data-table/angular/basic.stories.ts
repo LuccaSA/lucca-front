@@ -15,7 +15,7 @@ import { IconComponent } from '@lucca-front/ng/icon';
 import { NumericBadgeComponent } from '@lucca-front/ng/numeric-badge';
 import { PaginationComponent } from '@lucca-front/ng/pagination';
 
-import { Meta, moduleMetadata, StoryObj } from '@storybook/angular';
+import { Meta, moduleMetadata, StoryObj } from '@storybook/angular-vite';
 import { HiddenArgType } from 'stories/helpers/common-arg-types';
 import { StoryModelDisplayComponent } from 'stories/helpers/story-model-display.component';
 

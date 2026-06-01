@@ -1,5 +1,5 @@
 import { StatusBadgeComponent } from '@lucca-front/ng/status-badge';
-import { Meta, moduleMetadata, StoryObj } from '@storybook/angular';
+import { Meta, moduleMetadata, StoryObj } from '@storybook/angular-vite';
 
 interface StatusBadgeBasicStory {
 	label: string;

@@ -1,7 +1,7 @@
 import { HttpClientModule } from '@angular/common/http';
 import { ButtonComponent } from '@lucca-front/ng/button';
 import { EmptyStatePageComponent } from '@lucca-front/ng/empty-state';
-import { Meta, moduleMetadata, StoryObj } from '@storybook/angular';
+import { Meta, moduleMetadata, StoryObj } from '@storybook/angular-vite';
 
 export default {
 	title: 'Documentation/Feedback/Empty State/Angular/Page',

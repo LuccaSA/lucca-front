@@ -8,7 +8,7 @@ import { NumericBadgeComponent } from '@lucca-front/ng/numeric-badge';
 import { SegmentedControlComponent, SegmentedControlFilterComponent } from '@lucca-front/ng/segmented-control';
 import { LuSimpleSelectInputComponent } from '@lucca-front/ng/simple-select';
 import { LuTooltipModule } from '@lucca-front/ng/tooltip';
-import { Meta, StoryObj } from '@storybook/angular';
+import { Meta, StoryObj } from '@storybook/angular-vite';
 
 type TokenCategory = 'all' | 'palette' | 'color' | 'spacing' | 'radius' | 'typography' | 'elevation';
 type TokenPreview = 'swatch' | 'text' | 'spacing' | 'radius' | 'font' | 'fontSize' | 'lineHeight' | 'fontWeight' | 'fontFamily' | 'shadow' | 'surface' | 'raw';

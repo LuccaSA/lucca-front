@@ -1,6 +1,6 @@
 import { IconComponent } from '@lucca-front/ng/icon';
 import { PLGPushComponent } from '@lucca-front/ng/plg-push';
-import { Meta, StoryObj, moduleMetadata } from '@storybook/angular';
+import { Meta, StoryObj, moduleMetadata } from '@storybook/angular-vite';
 import { generateInputs } from 'stories/helpers/stories';
 
 export default {

@@ -1,7 +1,7 @@
 import { ChangeDetectionStrategy, Component, LOCALE_ID } from '@angular/core';
 import { DateInputComponent } from '@lucca-front/ng/date2';
 import { FormFieldComponent } from '@lucca-front/ng/form-field';
-import { applicationConfig, Meta } from '@storybook/angular';
+import { applicationConfig, Meta } from '@storybook/angular-vite';
 
 @Component({
 	selector: 'date-input-stories',

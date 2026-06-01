@@ -1,5 +1,5 @@
 import { DataPresentationComponent } from '@lucca-front/ng/form-field';
-import { Meta, StoryObj } from '@storybook/angular';
+import { Meta, StoryObj } from '@storybook/angular-vite';
 
 export default {
 	title: 'Documentation/Forms/Data Presentation/Angular/Basic',

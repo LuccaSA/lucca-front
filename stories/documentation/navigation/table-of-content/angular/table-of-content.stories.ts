@@ -1,5 +1,5 @@
 import { TableOfContentComponent, TableOfContentLinkDirective } from '@lucca-front/ng/table-of-content';
-import { Meta, moduleMetadata } from '@storybook/angular';
+import { Meta, moduleMetadata } from '@storybook/angular-vite';
 import { cleanupTemplate } from 'stories/helpers/stories';
 
 interface TableOfContentBasicStory {

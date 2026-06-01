@@ -1,7 +1,7 @@
 //import { DecorativeIconComponent } from '@lucca-front/ng/';
 import { IconsList } from '@/stories/icons-list';
 import { BubbleIconComponent } from '@lucca-front/ng/bubble-icon';
-import { Meta, moduleMetadata, StoryObj } from '@storybook/angular';
+import { Meta, moduleMetadata, StoryObj } from '@storybook/angular-vite';
 import { generateInputs } from 'stories/helpers/stories';
 
 export default {

@@ -1,6 +1,6 @@
 import { IndexTableComponent, IndexTableHeadComponent, IndexTableRowCellHeaderComponent, IndexTableRowComponent } from '@lucca-front/ng/index-table';
 import { SkeletonIndexTableComponent } from '@lucca-front/ng/skeleton';
-import { Meta, moduleMetadata, StoryObj } from '@storybook/angular';
+import { Meta, moduleMetadata, StoryObj } from '@storybook/angular-vite';
 
 interface SkeletonIndexTableStory {}
 

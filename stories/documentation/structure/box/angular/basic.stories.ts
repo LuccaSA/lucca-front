@@ -1,5 +1,5 @@
 import { BoxComponent } from '@lucca-front/ng/box';
-import { Meta, moduleMetadata, StoryObj } from '@storybook/angular';
+import { Meta, moduleMetadata, StoryObj } from '@storybook/angular-vite';
 import { cleanupTemplate, generateInputs } from 'stories/helpers/stories';
 
 export default {

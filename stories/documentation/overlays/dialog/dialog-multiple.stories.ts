@@ -14,7 +14,7 @@ import {
 import { FormFieldComponent } from '@lucca-front/ng/form-field';
 import { CheckboxInputComponent, TextInputComponent } from '@lucca-front/ng/forms';
 import { IconComponent } from '@lucca-front/ng/icon';
-import { applicationConfig, Meta, moduleMetadata, StoryObj } from '@storybook/angular';
+import { applicationConfig, Meta, moduleMetadata, StoryObj } from '@storybook/angular-vite';
 import { HiddenArgType } from 'stories/helpers/common-arg-types';
 import { createTestStory } from 'stories/helpers/stories';
 import { waitForAngular } from 'stories/helpers/test';

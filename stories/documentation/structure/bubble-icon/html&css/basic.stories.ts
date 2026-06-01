@@ -1,5 +1,5 @@
 import { IconsList } from '@/stories/icons-list';
-import { Meta, StoryObj } from '@storybook/angular';
+import { Meta, StoryObj } from '@storybook/angular-vite';
 
 interface BubbleIconBasicStory {
 	icon: string;

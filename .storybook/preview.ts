@@ -1,4 +1,4 @@
-import type { Preview } from '@storybook/angular';
+import type { Preview } from '@storybook/angular-vite';
 import DocumentationTemplate from './DocumentationTemplate.mdx';
 import { setCompodocJson } from '@storybook/addon-docs/angular';
 import docJson from './documentation.json';

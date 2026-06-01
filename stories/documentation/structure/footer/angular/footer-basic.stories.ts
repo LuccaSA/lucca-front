@@ -1,6 +1,6 @@
 import { ButtonComponent } from '@lucca-front/ng/button';
 import { FooterComponent } from '@lucca-front/ng/footer';
-import { Meta, moduleMetadata } from '@storybook/angular';
+import { Meta, moduleMetadata } from '@storybook/angular-vite';
 import { generateInputs } from 'stories/helpers/stories';
 
 export default {

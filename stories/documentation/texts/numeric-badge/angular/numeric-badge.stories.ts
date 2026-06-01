@@ -1,5 +1,5 @@
 import { NumericBadgeComponent } from '@lucca-front/ng/numeric-badge';
-import { Meta, moduleMetadata, StoryObj } from '@storybook/angular';
+import { Meta, moduleMetadata, StoryObj } from '@storybook/angular-vite';
 import { generateInputs } from 'stories/helpers/stories';
 
 export default {
