@@ -31,7 +31,7 @@ export class CalloutPopoverComponent {
 	/**
 	 * Label (visual only) to put inside the button, often used to show just a number
 	 */
-	readonly buttonLabel = input<string>();
+	readonly buttonLabel = input<string | number>();
 
 	/**
 	 * Alternative for the button

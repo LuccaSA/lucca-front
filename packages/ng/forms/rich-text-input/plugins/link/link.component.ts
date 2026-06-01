@@ -48,6 +48,7 @@ export class LinkComponent implements OnDestroy, RichTextPluginComponent {
 	readonly active = signal(false);
 	readonly isDisabled = signal(false);
 	readonly intl = input(...intlInputOptions(LU_RICH_TEXT_INPUT_TRANSLATIONS));
+	readonly isEditable = signal(false);
 
 	#editor?: LexicalEditor;
 
@@ -55,6 +56,7 @@ export class LinkComponent implements OnDestroy, RichTextPluginComponent {
 
 	setEditorInstance(editor: LexicalEditor) {
 		this.#editor = editor;
+		this.isEditable.set(editor.isEditable());
 		this.#registeredCommands = mergeRegister(
 			registerLink(editor),
 			registerLinkSelectionChange(editor, (isLink) => this.active.set(isLink)),
@@ -63,6 +65,7 @@ export class LinkComponent implements OnDestroy, RichTextPluginComponent {
 				changeHandlers: [],
 				excludeParents: [],
 			}),
+			this.#editor.registerEditableListener((editable) => this.isEditable.set(editable)),
 		);
 	}
 

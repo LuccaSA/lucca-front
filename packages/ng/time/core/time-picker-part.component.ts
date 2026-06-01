@@ -86,6 +86,8 @@ export class TimePickerPartComponent {
 		return this.showZero() ? label : label.replace(/^0/, '');
 	});
 
+	readonly currentValue = computed(() => (this.hideValue() || !this.isValueSet() ? null : this.value()));
+
 	readonly inputId = `time-picker-part-${nextId++}`;
 
 	constructor(@Inject(LOCALE_ID) private locale: string) {

@@ -15,7 +15,15 @@
 </button>
 
 <ng-template #linkNodeTemplate let-href="href" let-title="title" let-target="target" let-isAutoLink="isAutoLink">
-	<a [href]="href" [attr.title]="title" [attr.target]="target" [luPopover2]="popover" rel="noopener noreferrer" #trigger="luPopover2"></a>
+	<a
+		[href]="href"
+		[attr.title]="title"
+		[attr.target]="target"
+		[luPopover2]="popover"
+		[luPopoverDisabled]="!isEditable()"
+		rel="noopener noreferrer"
+		#trigger="luPopover2"
+	></a>
 	<ng-template #popover>
 		<div class="popover-contentOptional linkPopover">
 			<a [href]="href" luLink external class="pr-u-ellipsis">{{ href }}</a>

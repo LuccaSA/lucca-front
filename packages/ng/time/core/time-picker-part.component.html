@@ -11,7 +11,7 @@
 			class="timePicker-fieldset-group-textfield-input"
 			[attr.aria-labelledby]="inputId + '-label'"
 			autocomplete="off"
-			[value]="hideValue() ? null : value()"
+			[value]="currentValue()"
 			(input)="keysInputHandler($event)"
 			(click)="clickHandler($event)"
 			(keydown)="keydownHandler($event)"

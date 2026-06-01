@@ -78,7 +78,7 @@ export default {
 		},
 		heading: {
 			type: 'string',
-			description: 'Ajoute un titre au callout.',
+			description: 'Ajoute un titre au callout. [PortalContent]',
 		},
 		hx: {
 			options: setStoryOptions(CALLOUT_HX),

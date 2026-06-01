@@ -59,7 +59,7 @@ export default {
 			description: 'Modifie la taille du callout.',
 		},
 		heading: {
-			description: 'Titre du callout.',
+			description: 'Titre du callout. [PortalContent]',
 		},
 		palette: {
 			options: setStoryOptions(PALETTE),

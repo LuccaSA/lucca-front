@@ -16,10 +16,10 @@ export default {
 	title: 'Documentation/Structure/PageHeader/Angular/Basic',
 	argTypes: {
 		label: {
-			description: 'Titre du composant. PortalContent.',
+			description: 'Titre du composant. [PortalContent]',
 		},
 		description: {
-			description: 'Description du composant. PortalContent.',
+			description: 'Description du composant. [PortalContent]',
 		},
 		container: {
 			description: '[v20.1] Applique un container autour du contenu de Page Header.',

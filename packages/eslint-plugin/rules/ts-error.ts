@@ -193,7 +193,7 @@ function findMemberExpressionAccessingErrorRegion(
 			if (objStart <= errorStart && objEnd >= errorEnd) {
 				const esNode = parserServices.tsNodeToESTreeNodeMap.get(node);
 				if (esNode && esNode.type === 'MemberExpression') {
-					const memberNode = esNode as TSESTree.MemberExpression;
+					const memberNode = esNode;
 					if (!bestMatch || node.getEnd() - node.getStart() < bestMatch.range[1] - bestMatch.range[0]) {
 						bestMatch = memberNode;
 					}

@@ -18,7 +18,7 @@ export default {
 			control: {
 				type: 'text',
 			},
-			description: 'Modifie le label de l’input.',
+			description: 'Modifie le label de l’input. [PortalContent]',
 		},
 		required: {
 			control: {
@@ -33,7 +33,7 @@ export default {
 			control: {
 				type: 'text',
 			},
-			description: 'Ajoute un texte indicatif sous le champ de formulaire.',
+			description: 'Ajoute un texte indicatif sous le champ de formulaire. [PortalContent]',
 		},
 		inlineMessageState: {
 			options: setStoryOptions(INLINE_MESSAGE_STATE),
@@ -43,7 +43,7 @@ export default {
 			description: 'Modifie l’état de l’inline message.',
 		},
 		errorInlineMessage: {
-			description: 'Ajoute un texte d’erreur sous le champ de formulaire lorsque celui-ci est en erreur.',
+			description: 'Ajoute un texte d’erreur sous le champ de formulaire lorsque celui-ci est en erreur. [PortalContent]',
 		},
 		tooltip: {
 			if: { arg: 'hiddenLabel', truthy: false },

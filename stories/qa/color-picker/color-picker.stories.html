@@ -1,0 +1,65 @@
+<table class="demo-QAtable">
+	<tbody>
+		<tr>
+			<td></td>
+			<td style="width: 100%">
+				<div class="demo-QAtable-list">Angular</div>
+			</td>
+		</tr>
+		<tr>
+			<td>Default</td>
+			<td>
+				<div class="demo-QAtable-list">
+					<lu-form-field label="Couleur" inlineMessage="Helper text">
+						<lu-color-input [colors]="colorDecoratives500" [ngModel]="null" />
+					</lu-form-field>
+					<lu-form-field label="Couleur" inlineMessage="Helper text">
+						<lu-color-input [colors]="colorDecoratives500" [(ngModel)]="selectedColor" />
+					</lu-form-field>
+				</div>
+			</td>
+		</tr>
+		<tr>
+			<td>Compact</td>
+			<td>
+				<div class="demo-QAtable-list">
+					<lu-form-field label="Couleur">
+						<lu-color-input compact [colors]="colorDecoratives500" [ngModel]="null" />
+					</lu-form-field>
+					<lu-form-field label="Couleur">
+						<lu-color-input compact [colors]="colorDecoratives500" [(ngModel)]="selectedColor" />
+					</lu-form-field>
+				</div>
+			</td>
+		</tr>
+		<tr>
+			<td>Clearable</td>
+			<td>
+				<div class="demo-QAtable-list">
+					<lu-form-field label="Couleur">
+						<lu-color-input clearable [colors]="colorDecoratives500" [(ngModel)]="selectedColor" />
+					</lu-form-field>
+					<lu-form-field label="Couleur">
+						<lu-color-input clearable compact [colors]="colorDecoratives500" [(ngModel)]="selectedColor" />
+					</lu-form-field>
+				</div>
+			</td>
+		</tr>
+		<tr>
+			<td>Avec bordures</td>
+			<td>
+				<div class="demo-QAtable-list">
+					<lu-form-field label="Couleur">
+						<lu-color-input [colors]="colorDecoratives50" [ngModel]="null" />
+					</lu-form-field>
+					<lu-form-field label="Couleur">
+						<lu-color-input [colors]="colorDecoratives50" [(ngModel)]="selectedBorderColor" />
+					</lu-form-field>
+				</div>
+			</td>
+		</tr>
+	</tbody>
+</table>
+
+<!-- To tell the ui-diff tool that the page has finished rendering -->
+<span id="ready"></span>

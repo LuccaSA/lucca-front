@@ -79,7 +79,7 @@ export default {
 			description: 'État du callout.',
 		},
 		heading: {
-			description: 'Ajoute un titre au popover.',
+			description: 'Ajoute un titre au popover. [PortalContent]',
 			if: { arg: 'customText', truthy: false },
 		},
 		headingHiddenIfSingleItem: {
