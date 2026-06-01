@@ -2,6 +2,10 @@
 
 # Principes
 
+<design figma-url="https://www.figma.com/design/i5JVSEVXAUyXiDewcxWGRp/?node-id=602:795">
+
+</design>
+
 ### **1. System**
 
 Indique qu’il s’agit d’un Design Token spécifique à Prisme : `—pr-t-`.

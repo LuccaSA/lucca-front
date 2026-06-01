@@ -20,6 +20,10 @@ Ces différents états sont gérés grâce aux états `touched`/`invalid` des ch
 
 Une directive disponible prochainement dans Lucca Front, à placer sur les différents champs de formulaires, permettra de gérer le premier exemple du visuel ci-dessus.
 
+<design figma-url="https://www.figma.com/design/4vzJER8uY9Mh5wntlaLylH/?node-id=4066:80722">
+
+</design>
+
 ### À la soumission du formulaire
 
 Dans l’idée d’un design optimiste, le bouton de validation d’un formulaire [doit toujours être actif](https://www.smashingmagazine.com/2021/08/frustrating-design-patterns-disabled-buttons/). On laisse la possibilité à l’utilisateur de cliquer dessus, quand bien même le formulaire n’est pas complet. Les erreurs sont alors remontées à l’utilisateur pour qu’il puisse les corriger.
@@ -39,6 +43,10 @@ Un message adapté est affiché à côté de chaque champ en erreur en tâchant 
 
 Les messages d’erreurs sont supprimés au *change* dès que les champs repassent à un état valide.
 
+<design figma-url="https://www.figma.com/design/4vzJER8uY9Mh5wntlaLylH/?node-id=4066:80783">
+
+</design>
+
 ### Au niveau du formulaire
 
 Lorsqu'une ou plusieurs erreurs sont remontées dans le formulaires, nous affichons un Callout popover dans le Footer, précisant le nombre d’erreur dans l’ensemble du formulaire.
@@ -46,3 +54,7 @@ Lorsqu'une ou plusieurs erreurs sont remontées dans le formulaires, nous affich
 Il n'apparaît qu'à la soumission du formulaire et disparaît lorsque l’utilisateur corriges les erreurs remontées. Son contenu change au fur et à mesure que l'utilisateur corrige les erreurs.
 
 Le premier champ du formulaire en erreur doit prendre le focus ce qui permettra au navigateur de positionner la barre de défilement afin de rendre visible l’élément en question. Cette animation sur la barre de défilement doit se faire doucement afin d’éviter un saut visuel.
+
+<design figma-url="https://www.figma.com/design/4vzJER8uY9Mh5wntlaLylH/?node-id=4066:80820">
+
+</design>

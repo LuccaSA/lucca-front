@@ -467,9 +467,21 @@ Cette grille à pour but d’aider les designers lors de la conception, notammen
 
 ### **Neutral vs Product**
 
+<design figma-url="https://www.figma.com/design/i5JVSEVXAUyXiDewcxWGRp/?node-id=208:3446">
+
+</design>
+
 ### **Product vs Product**
 
+<design figma-url="https://www.figma.com/design/i5JVSEVXAUyXiDewcxWGRp/?node-id=208:3605">
+
+</design>
+
 ### Neutral vs Neutral
+
+<design figma-url="https://www.figma.com/design/i5JVSEVXAUyXiDewcxWGRp/?node-id=208:3740">
+
+</design>
 
 # Tokens
 

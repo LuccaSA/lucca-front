@@ -123,7 +123,7 @@ Un composant peut cependant en contenir un autre.
 
 ### **Layers**
 
-Afin de structurer le CSS de Lucca Front et d'optimiser la spécificité de ses sélecteurs, des [layers CSS](https://developer.mozilla.org/fr/docs/Web/CSS/@layer) sont utilisés. Ils sont organisés ainsi, de la priorité la plus basse à la plus haute : 
+Afin de structurer le CSS de Lucca Front et d'optimiser la spécificité de ses sélecteurs, des [layers CSS](https://developer.mozilla.org/fr/docs/Web/CSS/@layer)  (`@layer`) sont utilisés. Ils sont organisés ainsi, de la priorité la plus basse à la plus haute : 
 
 ```css
 reset → base → components → mods → product → utils

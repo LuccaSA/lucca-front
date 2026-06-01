@@ -10,6 +10,10 @@ Nous utilisons trois polices de caractères complémentaires, chacune avec un r�
 * **Source Sans Pro :** la police par défaut pour le texte courant sur nos interfaces.
 * **Caveat :** aussi utilisé par l’équipe Brand, cette police de caractère manuscrite apporte un ton plus humain lorsqu’on l’utilise dans des illustrations (Empty state par exemple).
 
+<design figma-url="https://www.figma.com/design/i5JVSEVXAUyXiDewcxWGRp/?node-id=595:19032">
+
+</design>
+
 ### Configuration CSS
 
 La police Caveat n'étant pas chargée par défaut, elle nécessite un import supplémentaire :

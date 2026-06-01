@@ -10,11 +10,19 @@ C’est la plus basse élévation disponible. Elle est utilisée pour créer un 
 
 Il s’agit du style :`--pr-t-elevation-surface-sunken`
 
+<design figma-url="https://www.figma.com/design/i5JVSEVXAUyXiDewcxWGRp/?node-id=517:15750">
+
+</design>
+
 ### **Default**
 
 Il s’agit de l’arrière-plan par défaut des interfaces Lucca.
 
 Il s’agit du tokens :`--pr-t-elevation-surface-default`
+
+<design figma-url="https://www.figma.com/design/i5JVSEVXAUyXiDewcxWGRp/?node-id=517:15769">
+
+</design>
 
 ### **Raised**
 
@@ -24,11 +32,15 @@ Ce niveau d’élévation combine les tokens :`--pr-t-elevation-surface-raised``
 
 Au survol, ce niveau d’élévation reprend les tokens :`--pr-t-elevation-surface-raised``--pr-t-elevation-shadow-overlay`
 
+<design figma-url="https://www.figma.com/design/i5JVSEVXAUyXiDewcxWGRp/?node-id=517:15796">
+
 <notes>
 
 ## 
 
 </notes>
+
+</design>
 
 ### **Overflow**
 
@@ -36,11 +48,19 @@ L'overflow indique que le contenu a défilé en-dessous d’une surface. Il peut
 
 Il s’agit du token :`--pr-t-elevation-shadow-overflow`
 
+<design figma-url="https://www.figma.com/design/i5JVSEVXAUyXiDewcxWGRp/?node-id=517:15831">
+
+</design>
+
 ### **Overlay**
 
 C’est le niveau d’élévation le plus haut possible. Il est réservé à des éléments qui se superposent au reste de l’interface, comme les dialogs, dropdowns, popovers, etc.
 
 Ce niveau d’élévation combine les tokens :`--pr-t-elevation-surface-raised``--pr-t-elevation-shadow-overlay`
+
+<design figma-url="https://www.figma.com/design/i5JVSEVXAUyXiDewcxWGRp/?node-id=517:15968">
+
+</design>
 
 Un backdrop s’ajoute automatiquement à l’ouverture d’une dialog. Il s’agit d’une ombre de la taille de la zone d’affichage.
 
@@ -48,13 +68,19 @@ Ce niveau d’élévation porte le token :`--pr-t-elevation-surface-backdrop`
 
 À noter que ce token n'existe pas sur Figma puisque le backdrop est directement porté parle composant Dialog.
 
+<design figma-url="https://www.figma.com/design/i5JVSEVXAUyXiDewcxWGRp/?node-id=517:15982">
+
+</design>
+
 ### Button
 
 Les boutons utilisent un tokens d'élévation spécifique. Ce token s'applique aux Button et aux Filter pills.
 
 Il s’agit du tokens :`--pr-t-elevation-shadow-button`
 
----
+<design figma-url="https://www.figma.com/design/i5JVSEVXAUyXiDewcxWGRp/?node-id=620:37146">
+
+</design>
 
 ## Comportement
 

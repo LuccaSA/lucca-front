@@ -20,6 +20,10 @@ Chaque composant du Design System possède un radius défini en fonction de son 
 
 Certains composants peuvent voir leur radius s’adapter ponctuellement en fonction de leur niveau d’imbrication dans l’interface.
 
+<design figma-url="https://www.figma.com/design/i5JVSEVXAUyXiDewcxWGRp/?node-id=623:17834">
+
+</design>
+
 #### Imbrication d’éléments structurants
 
 Un composant structurant avec un radius de 12px (`--pr-t-border-radius-structure`) peut adopter un radius réduit à 8px (`--pr-t-border-adius-default`) lorsqu’il est imbriqué dans un autre conteneur, pour éviter une accumulation visuelle d’arrondis. C’est par exemple le cas des Highlight data ou des Cards lorsqu’elles sont regroupées ou imbriquées dans un kanban.
