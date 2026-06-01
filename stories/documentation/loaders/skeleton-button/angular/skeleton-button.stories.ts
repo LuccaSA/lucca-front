@@ -1,5 +1,6 @@
-import { SkeletonButtonComponent } from '@lucca-front/ng/skeleton';
+import { SKELETON_BUTTON_SIZE, SkeletonButtonComponent } from '@lucca-front/ng/skeleton';
 import { Meta, StoryObj } from '@storybook/angular';
+import { setStoryOptions } from 'stories/helpers/stories';
 
 export default {
 	title: 'Documentation/Loaders/Skeleton/Skeleton Button',
@@ -12,7 +13,7 @@ export default {
 			description: 'Applique un style foncé pour un usage sur fond gris.',
 		},
 		size: {
-			options: ['', 'S', 'XS'],
+			options: setStoryOptions(SKELETON_BUTTON_SIZE),
 			control: {
 				type: 'select',
 			},

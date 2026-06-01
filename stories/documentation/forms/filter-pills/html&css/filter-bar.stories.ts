@@ -85,72 +85,41 @@ function getTemplate(args: FilterBarBasicStory): string {
 						</li>
 					</ul>
 
-					<lu-divider class="filterBar-divider" />
+					<div class="divider filterBar-divider"></div>
 
-					<button class="filterPill mod-button" type="button" luTooltip="Filtres supplémentaires" luTooltipOnlyForDisplay [luPopover2]="contentOptions">
-						<lu-icon class="filterPill-icon" icon="filtersDescending" alt="Filtres supplémentaires" />
-					</button>
-
-					<div class="filterPill">
-						<label for="input1" class="filterPill-label" luTooltip="Inclure les collaborateurs partis" luTooltipWhenEllipsis="true">
-							Inclure les collaborateurs partis
-							<span class="filterPill-label-placeholder" aria-hidden="true" data-content-before="Inclure les collaborateurs partis"></span>
-						</label>
+					<button type="button" class="filterPill mod-checkbox">
 						<span class="filterPill-checkbox">
-							<input type="checkbox" id="input1" class="filterPill-checkbox-input" />
+							<span class="filterPill-checkbox-input"></span>
 							<span class="filterPill-checkbox-icon" aria-hidden="true">
 								<span class="filterPill-checkbox-icon-check"></span>
 							</span>
 						</span>
+						<span class="filterPill-label" luTooltip="Inclure les collaborateurs partis" luTooltipWhenEllipsis>
+							Inclure les collaborateurs partis
+							<span class="filterPill-label-placeholder" aria-hidden="true" data-content-before="Inclure les collaborateurs partis"></span>
+						</span>
+					</button>
+
+					<div class="filterPillWrapper">
+						<button type="button" class="filterPill" aria-expanded="false" aria-controls="panel">
+							<span class="filterPill-label">Département</span>
+							<span class="filterPill-value"></span>
+							<span class="filterPill-toggle">
+								<span class="lucca-icon icon-arrowChevronBottom mod-S"></span>
+							</span>
+						</button>
+						<button type="button" class="filterPill_clear clear"><span class="pr-u-mask">Vider ce champ</span></button>
 					</div>
 
-					<div class="filterPill is-filled">
-						<label for="input1" class="filterPill-label" luTooltip="Département" luTooltipWhenEllipsis="true">Équipe :</label>
-						<button class="filterPill-combobox" type="button" id="input1" role="combobox" aria-expanded="false" luTooltipWhenEllipsis="true">
-							Finance
-						</button>
-						<button type="button" class="filterPill-clear clear"><span class="pr-u-mask">Vider ce champ</span></button>
-						<button type="button" aria-hidden="true" tabindex="-1" class="filterPill-toggle">
-							<lu-icon icon="arrowChevronBottom" size="S" />
-						</button>
-					</div>
-
-					<lu-filter-pill label="Échéance"><lu-date-input [ngModel]="example6" [ngModelOptions]="{ standalone: true }" /></lu-filter-pill>
-
-					<lu-form-field label="Test" hiddenLabel>
-						<lu-text-input [ngModel]="example10" [ngModelOptions]="{ standalone: true }" hasSearchIcon hasClearer />
-					</lu-form-field>
-
-					<button type="submit" size="S" luButton="ghost" palette="product">Appliquer les filtres</button>
-
+					<button type="submit" class="button mod-ghost mod-S palette-product">Appliquer les filtres</button>
 				</div>
 				<div class="filterBar-scrollBox-export">
-					<button type="submit" size="S" luButton="outlined">Exporter</button>
+					<button type="submit" class="button mod-S mod-outlined">Exporter</button>
 				</div>
 			</lu-scroll-box>
 		</div>
 
 	</form>
-
-	<ng-template #contentOptions>
-		<form class="filterPill_popover-content popover-contentOptional">
-			<lu-form-field label="Inclure les collaborateurs partis" class="filterPill_popover-content-formField mod-selectOption">
-				<lu-checkbox-input [ngModel]="true" [ngModelOptions]="{ standalone: true }" />
-			</lu-form-field>
-			<lu-form-field label="Équipe" class="filterPill_popover-content-formField mod-selectOption">
-				<lu-checkbox-input [ngModel]="true" [ngModelOptions]="{ standalone: true }" />
-			</lu-form-field>
-			<lu-form-field label="Statut" class="filterPill_popover-content-formField mod-selectOption">
-				<lu-checkbox-input [ngModel]="false" [ngModelOptions]="{ standalone: true }" />
-			</lu-form-field>
-			<lu-form-field label="Échéance" class="filterPill_popover-content-formField mod-selectOption">
-				<lu-checkbox-input [ngModel]="true" [ngModelOptions]="{ standalone: true }" />
-			</lu-form-field>
-			<lu-form-field label="Fréquence de facturation" class="filterPill_popover-content-formField mod-selectOption">
-				<lu-checkbox-input [ngModel]="false" [ngModelOptions]="{ standalone: true }"  />
-			</lu-form-field>
-		</form>
-	</ng-template>
 `;
 }
 

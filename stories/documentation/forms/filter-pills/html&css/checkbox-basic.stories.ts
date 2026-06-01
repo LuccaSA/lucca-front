@@ -3,7 +3,7 @@ import { Meta, moduleMetadata, StoryObj } from '@storybook/angular';
 
 interface CheckboxBasicStory {
 	label: string;
-	checked: boolean;
+	pressed: boolean;
 	mixed: boolean;
 	disabled: boolean;
 }
@@ -15,35 +15,26 @@ export default {
 			imports: [LuTooltipModule],
 		}),
 	],
-	argTypes: {
-		label: {
-			control: 'text',
-		},
-		checked: {
-			control: 'boolean',
-		},
-		disabled: {
-			control: 'boolean',
-		},
-	},
+	argTypes: {},
 } as Meta;
 
 function getTemplate(args: CheckboxBasicStory): string {
-	const checkedAttr = args.checked ? `checked="checked"` : ``;
-	const disabledAttr = args.disabled ? `disabled="disabled"` : ``;
+	const checkedAttr = args.pressed ? ` checked="checked"` : ``;
+	const disabledAttr = args.disabled ? ` disabled="disabled"` : ``;
+	const pressedAttr = args.pressed ? ` aria-pressed="true"` : ``;
 
-	return `<div class="filterPill">
-	<label for="input1" class="filterPill-label" luTooltip="${args.label}" luTooltipWhenEllipsis="true">
+	return `<button type="button" class="filterPill mod-checkbox"${pressedAttr}${disabledAttr}>
+	<span class="filterPill-checkbox">
+		<span class="filterPill-checkbox-input"></span>
+		<span class="filterPill-checkbox-icon" aria-hidden="true">
+			<span class="filterPill-checkbox-icon-check"></span>
+		</span>
+	</span>
+	<span class="filterPill-label" luTooltip="${args.label}" luTooltipWhenEllipsis>
 		${args.label}
 		<span class="filterPill-label-placeholder" aria-hidden="true" data-content-before="${args.label}"></span>
-	</label>
-	<span class="filterPill-checkbox">
-		<input type="checkbox" id="input1" class="filterPill-checkbox-input" ${checkedAttr} ${disabledAttr} />
-    	<span class="filterPill-checkbox-icon" aria-hidden="true">
-      		<span class="filterPill-checkbox-icon-check"></span>
-		</span>
-    </span>
-</div>`;
+	</span>
+</button>`;
 }
 
 const Template = (args: CheckboxBasicStory) => ({
@@ -54,7 +45,7 @@ const Template = (args: CheckboxBasicStory) => ({
 export const Basic: StoryObj<CheckboxBasicStory> = {
 	args: {
 		label: 'Lorem ipsum dolor',
-		checked: false,
+		pressed: false,
 		disabled: false,
 	},
 	render: Template,

@@ -1,5 +1,7 @@
+import { RESOURCE_CARD_SIZE } from '@lucca-front/ng/resource-card';
 import { LuTooltipModule } from '@lucca-front/ng/tooltip';
 import { Meta, moduleMetadata, StoryObj } from '@storybook/angular';
+import { setStoryOptions } from 'stories/helpers/stories';
 
 interface ResourceCardHTMLBasicStory {
 	action: boolean;
@@ -13,7 +15,7 @@ export default {
 	title: 'Documentation/Structure/Resource Card/HTML&CSS/Drag and drop',
 	argTypes: {
 		size: {
-			options: ['', 'S'],
+			options: setStoryOptions(RESOURCE_CARD_SIZE),
 			control: {
 				type: 'select',
 			},

@@ -1,6 +1,7 @@
 import { NgTemplateOutlet } from '@angular/common';
 import { booleanAttribute, ChangeDetectionStrategy, Component, contentChildren, input, ViewEncapsulation } from '@angular/core';
 import { HorizontalNavigationLinkDirective } from './horizontal-navigation-link.directive';
+import { HorizontalNavigationSize } from './horizontal-navigation.type';
 
 @Component({
 	selector: 'lu-horizontal-navigation',
@@ -28,5 +29,5 @@ export class HorizontalNavigationComponent {
 	/**
 	 * Which size should the horizontal navigation be? Defaults and small
 	 */
-	readonly size = input<null | 'S'>(null);
+	readonly size = input<HorizontalNavigationSize | null>(null);
 }

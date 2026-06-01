@@ -92,7 +92,6 @@ export const Basic: StoryObj<FancyBoxBasicStory> = {
 		backgroundLeft: 'https://cdn.lucca.fr/transverse/prisme/visuals/fancy-box/background-left-plant.svg',
 		backgroundRight: 'https://cdn.lucca.fr/transverse/prisme/visuals/fancy-box/background-right-candies.svg',
 		foreground: 'https://cdn.lucca.fr/transverse/prisme/visuals/fancy-box/foreground-right-pizza.svg',
-		size: null,
 	},
 	render: Template,
 };

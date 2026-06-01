@@ -1,6 +1,8 @@
-import { GridColumnComponent, GridComponent } from '@lucca-front/ng/grid';
+import { GRID_COLUMN_ALIGNMENT, GRID_GAP, GRID_MODE, GridColumnComponent, GridComponent } from '@lucca-front/ng/grid';
 import { Meta, moduleMetadata, StoryObj } from '@storybook/angular';
-import { cleanupTemplate, generateInputs } from 'stories/helpers/stories';
+import { cleanupTemplate, generateInputs, setStoryOptions } from 'stories/helpers/stories';
+
+const OTHER_GAP = ['1px', '2em', '3%'];
 
 export default {
 	title: 'Documentation/Structure/Grids/Angular/Basic',
@@ -46,37 +48,37 @@ export default {
 				type: 'select',
 			},
 
-			options: ['0', '25', '50', '75', '100', '150', '200', '300', '400', '500', '600', '700', '800', '1px', '2em', '3%'],
+			options: setStoryOptions([...GRID_GAP, ...OTHER_GAP]),
 		},
 		columnGap: {
 			control: {
 				type: 'select',
 			},
-			options: ['0', '25', '50', '75', '100', '150', '200', '300', '400', '500', '600', '700', '800', '1px', '2em', '3%'],
+			options: setStoryOptions([...GRID_GAP, ...OTHER_GAP]),
 		},
 		rowGap: {
 			control: {
 				type: 'select',
 			},
-			options: ['0', '25', '50', '75', '100', '150', '200', '300', '400', '500', '600', '700', '800', '1px', '2em', '3%'],
+			options: setStoryOptions([...GRID_GAP, ...OTHER_GAP]),
 		},
 		align: {
 			control: {
 				type: 'select',
 			},
-			options: [null, 'start', 'center', 'end'],
+			options: setStoryOptions(GRID_COLUMN_ALIGNMENT),
 		},
 		justify: {
 			control: {
 				type: 'select',
 			},
-			options: [null, 'start', 'center', 'end'],
+			options: setStoryOptions(GRID_COLUMN_ALIGNMENT),
 		},
 		mode: {
 			control: {
 				type: 'select',
 			},
-			options: [null, 'form', 'auto'],
+			options: setStoryOptions(GRID_MODE),
 		},
 
 		repeatCols: {
@@ -154,15 +156,9 @@ export const Basic: StoryObj<GridComponent & GridColumnComponent & { repeatCols:
 		semantic: false,
 		columns: 6,
 		repeatCols: 10,
-		mode: null,
-		gap: null,
-		columnGap: null,
-		rowGap: null,
 		colspan: 1,
 		rowspan: 1,
 		column: 0,
 		row: 0,
-		align: null,
-		justify: null,
 	},
 };

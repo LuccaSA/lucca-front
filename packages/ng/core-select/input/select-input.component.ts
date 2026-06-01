@@ -55,7 +55,7 @@ export abstract class ALuSelectInputComponent<TOption, TValue> implements OnDest
 	protected filterPillHost = inject(FILTER_PILL_HOST_COMPONENT, { optional: true });
 	protected afterCloseFn?: () => void;
 	protected updatePositionFn?: () => void;
-	protected filterPillMode = false;
+	public filterPillMode = false;
 
 	public ignorePresentation = input(false, { transform: booleanAttribute });
 

@@ -1,5 +1,6 @@
-import { ChipComponent } from '@lucca-front/ng/chip';
+import { CHIP_STATE, ChipComponent } from '@lucca-front/ng/chip';
 import { Meta, moduleMetadata, StoryObj } from '@storybook/angular';
+import { setStoryOptions } from 'stories/helpers/stories';
 
 interface ChipBasicStory {
 	unkillable: boolean;
@@ -41,8 +42,8 @@ export default {
 			description: 'Modifie la taille du composant.',
 		},
 		feedback: {
-			description: '[20.1] Donne une information sur l’état du composant.',
-			options: ['', 'warning', 'critical'],
+			description: "[20.1] Donne une information sur l'état du composant.",
+			options: setStoryOptions(CHIP_STATE),
 			control: {
 				type: 'select',
 			},
