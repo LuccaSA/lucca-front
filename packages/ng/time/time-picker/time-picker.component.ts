@@ -79,6 +79,7 @@ export class TimePickerComponent extends BasePickerComponent {
 	readonly prevPicker = output<void>();
 	readonly nextPicker = output<void>();
 	readonly nonDigitKeyPressed = output<void>();
+	readonly touched = output<void>();
 
 	protected readonly hoursDisplay = computed(() => getHoursDisplayPartFromIsoTime(this.value(), this.enableMeridiemDisplay()));
 	protected readonly minutesDisplay = computed(() => getMinutesDisplayPartFromIsoTime(this.value()));

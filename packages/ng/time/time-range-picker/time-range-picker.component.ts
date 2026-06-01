@@ -1,4 +1,4 @@
-import { booleanAttribute, ChangeDetectionStrategy, Component, computed, forwardRef, inject, Injector, input, LOCALE_ID, OnInit, signal, ViewEncapsulation } from '@angular/core';
+import { afterNextRender, booleanAttribute, ChangeDetectionStrategy, Component, computed, forwardRef, inject, Injector, input, LOCALE_ID, OnInit, signal, ViewEncapsulation } from '@angular/core';
 import { AbstractControl, ControlValueAccessor, NG_VALIDATORS, NG_VALUE_ACCESSOR, NgControl, NgModel, ValidationErrors, Validator } from '@angular/forms';
 import { intlInputOptions, isNil } from '@lucca-front/ng/core';
 import { FORM_FIELD_INSTANCE, ɵPresentationDisplayDefaultDirective } from '@lucca-front/ng/form-field';
@@ -140,12 +140,15 @@ export class TimeRangePickerComponent implements ControlValueAccessor, OnInit, V
 
 	onFocusOut(): void {
 		this.inputFocused.set(false);
-		setTimeout(() => {
-			if (!this.inputFocused()) {
-				this.#onTouched?.();
-				this.#ngControl?.control?.markAsTouched();
-			}
-		});
+		afterNextRender(
+			() => {
+				if (!this.inputFocused()) {
+					this.#onTouched?.();
+					this.#ngControl?.control?.markAsTouched();
+				}
+			},
+			{ injector: this.#injector },
+		);
 	}
 
 	partToFocus(): 'meridiem' | 'minutes' {
