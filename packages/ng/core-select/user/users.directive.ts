@@ -145,14 +145,14 @@ export class LuCoreSelectUsersDirective<T extends LuCoreSelectUser = LuCoreSelec
 	public totalCount$ = toObservable(computed(() => ({ url: this.urlOrDefault(), filters: this.filters() }))).pipe(
 		debounceTime(250),
 		switchMap(({ url, filters }) =>
-			this.httpClient.get<{ count: number }>(url, {
+			this.httpClient.get<{ data: { count: number } } | { count: number }>(url, {
 				params: {
 					...filters,
 					fields: 'collection.count',
 				},
 			}),
 		),
-		map((res) => res?.count ?? 0),
+		map((res) => ('data' in res ? (res?.data.count ?? 0) : (res?.count ?? 0))),
 	);
 
 	protected getMe(): Observable<T | null> {
