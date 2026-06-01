@@ -1,6 +1,6 @@
 import { NgTemplateOutlet } from '@angular/common';
 import { booleanAttribute, ChangeDetectionStrategy, Component, computed, contentChildren, effect, ElementRef, forwardRef, inject, input, model, viewChildren, ViewEncapsulation } from '@angular/core';
-import { DecorativePalette, Palette, PortalDirective } from '@lucca-front/ng/core';
+import { DecorativePalette, isNil, isNotNil, Palette, PortalDirective } from '@lucca-front/ng/core';
 import { LuDialogRef } from '@lucca-front/ng/dialog';
 import { HorizontalNavigationLinkDirective } from './horizontal-navigation-link.directive';
 import { HorizontalNavigationTabComponent } from './horizontal-navigation-tab.component';
@@ -61,7 +61,7 @@ export class HorizontalNavigationComponent {
 		const normalizedIndex = ((requestedIndex % tabCount) + tabCount) % tabCount;
 
 		const requestedTab = this.tabs()[normalizedIndex];
-		if (requestedTab && !requestedTab.disabled()) {
+		if (isNotNil(requestedTab) && !requestedTab.disabled()) {
 			return normalizedIndex;
 		}
 
@@ -71,7 +71,7 @@ export class HorizontalNavigationComponent {
 	constructor() {
 		effect(() => {
 			const normalizedIndex = this.selectedIndex();
-			if (normalizedIndex === null) {
+			if (isNil(normalizedIndex)) {
 				return;
 			}
 
@@ -83,7 +83,7 @@ export class HorizontalNavigationComponent {
 
 	navigateToFirstEnabledTab(): void {
 		const firstEnabledIndex = this.findAccessibleTabIndex(0, 1);
-		if (firstEnabledIndex !== null) {
+		if (isNotNil(firstEnabledIndex)) {
 			this.currentIndex.set(firstEnabledIndex);
 			this.buttons()[firstEnabledIndex].nativeElement.focus();
 		}
@@ -94,7 +94,7 @@ export class HorizontalNavigationComponent {
 		if (lastTabIndex < 0) return;
 
 		const lastEnabledIndex = this.findAccessibleTabIndex(lastTabIndex, -1);
-		if (lastEnabledIndex !== null) {
+		if (isNotNil(lastEnabledIndex)) {
 			this.currentIndex.set(lastEnabledIndex);
 			this.buttons()[lastEnabledIndex].nativeElement.focus();
 		}
@@ -125,7 +125,7 @@ export class HorizontalNavigationComponent {
 
 		while (attempts < tabCount) {
 			const tab = tabs[currentIndex];
-			if (tab && !tab.disabled()) {
+			if (isNotNil(tab) && !tab.disabled()) {
 				return currentIndex;
 			}
 
@@ -142,13 +142,13 @@ export class HorizontalNavigationComponent {
 		if (key === 'ArrowLeft' || key === 'ArrowUp') {
 			event.preventDefault();
 			const nextEnabledIndex = this.findAccessibleTabIndex(currentIndex - 1, -1);
-			if (nextEnabledIndex !== null) {
+			if (isNotNil(nextEnabledIndex)) {
 				this.navigateToTabByIndex(nextEnabledIndex);
 			}
 		} else if (key === 'ArrowRight' || key === 'ArrowDown') {
 			event.preventDefault();
 			const nextEnabledIndex = this.findAccessibleTabIndex(currentIndex + 1, 1);
-			if (nextEnabledIndex !== null) {
+			if (isNotNil(nextEnabledIndex)) {
 				this.navigateToTabByIndex(nextEnabledIndex);
 			}
 		} else if (key === 'Home') {
