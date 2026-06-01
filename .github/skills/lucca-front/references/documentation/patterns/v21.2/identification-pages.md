@@ -13,9 +13,13 @@ Le favicon doit contenir le logo Lucca en blanc sur fond coloré. Le fond doit �
 
 L’utilisateur peut alors identifier rapidement les onglets et la marque Lucca parmi d’autres, tout en rattachant ces onglets à un produit à l’aide de la couleur.
 
+<design figma-url="https://www.figma.com/design/4vzJER8uY9Mh5wntlaLylH/?node-id=3784:148576">
+
 **Favicon**
 
 **Favicon**
+
+</design>
 
 ## Titres & URL
 
@@ -46,33 +50,53 @@ Exemples :
 * Rôles – Organisation – Administration – Lucca
 * Croissance – Tableaux de bord – Lucca
 
+<design figma-url="https://www.figma.com/design/4vzJER8uY9Mh5wntlaLylH/?node-id=3784:148628">
+
 **Format**
 
 **Format**
+
+</design>
 
 #### Regroupement de modules
 
 Le regroupement de plusieurs modules ont un impact sur le sitemap et donc sur le titre de la page. Même s’il n’existe pas d’interface à proprement parler pour les regroupements, il est nécessaire de les faire figurer dans le titre.
 
+<design figma-url="https://www.figma.com/design/4vzJER8uY9Mh5wntlaLylH/?node-id=3784:148687">
+
 **Sidenav - Poplee**
 
 **Sidenav - Poplee**
+
+</design>
+
+<design figma-url="https://www.figma.com/design/4vzJER8uY9Mh5wntlaLylH/?node-id=3784:148718">
 
 **Sidenav - Timmi**
 
 **Sidenav - Timmi**
+
+</design>
 
 #### Navigation dans un module
 
 Le composant Horizontal navigation utilise un pattern de navigation : l’URL et le titre de la page s’en trouvent donc impactés.
 
+<design figma-url="https://www.figma.com/design/4vzJER8uY9Mh5wntlaLylH/?node-id=3784:148812">
+
 **Tabs - Cleemy**
 
 **Tabs - Cleemy**
+
+</design>
+
+<design figma-url="https://www.figma.com/design/4vzJER8uY9Mh5wntlaLylH/?node-id=3784:148749">
 
 **Tabs - Poplee**
 
 **Tabs - Poplee**
+
+</design>
 
 #### Dialogs
 
@@ -82,9 +106,13 @@ Les Dialogs ne doivent pas être considérés comme des pages à part entière e
 
 Dans certains cas, l’information permettant de différencier plusieurs onglets n’est pas l’objet le plus précis. Il est alors possible d’intervertir des données dans le titre pour identifier plus rapidement le bon onglet. C’est notamment le cas sur le Dossier RH où le nom du collaborateur reste le meilleur moyen d’identifier une page.
 
+<design figma-url="https://www.figma.com/design/4vzJER8uY9Mh5wntlaLylH/?node-id=3784:148875">
+
 **Dossier RH**
 
 **Dossier RH**
+
+</design>
 
 ### Chargement et internationalisation
 
@@ -92,9 +120,13 @@ Au chargement d’une application, la localisation et donc la langue ne sont pas
 
 Une fois l’application chargée, le titre de la page s’adapte en fonction de la localisation.
 
+<design figma-url="https://www.figma.com/design/4vzJER8uY9Mh5wntlaLylH/?node-id=3784:148920">
+
 **Loading**
 
 **Loading**
+
+</design>
 
 # Angular
 

@@ -15,7 +15,7 @@ description: >
 2. **Composants, stories, outils** → version fix exacte : `v21.2.1`.
 3. **Documentation transverse** (tokens, contenu, guidelines, patterns) → version mineure : `v21.2`.
 
-Versions disponibles : v21.2.2, v21.2.1, v21.2.0, v21.1.4, v21.1.3, v21.1.2, v21.1.1, v21.1.0, v21.0.5, v21.0.4, v21.0.3, v21.0.2, v21.0.1, v21.0.0
+Versions disponibles : v21.2.3, v21.2.2, v21.2.1, v21.2.0, v21.1.4, v21.1.3, v21.1.2, v21.1.1, v21.1.0, v21.0.5, v21.0.4, v21.0.3, v21.0.2, v21.0.1, v21.0.0
 
 Si la version ne peut pas être déterminée → s'arrêter et demander à l'utilisateur. Ne jamais supposer une version par défaut.
 

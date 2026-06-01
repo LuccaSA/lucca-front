@@ -1,5 +1,5 @@
 {
-  "latest": "21.2.2",
+  "latest": "21.2.3",
   "versions": {
     "21.0.0": {
       "tag": "v21.0.0",
@@ -97,6 +97,13 @@
       "zhReleaseId": 47452,
       "storybookBaseUrl": "https://lucca-front.lucca.io/v21.2.2/storybook",
       "generatedAt": "2026-05-19T14:31:53.695Z",
+      "componentCount": 103
+    },
+    "21.2.3": {
+      "tag": "v21.2.3",
+      "zhReleaseId": 47452,
+      "storybookBaseUrl": "https://lucca-front.lucca.io/v21.2.3/storybook",
+      "generatedAt": "2026-06-01T12:47:49.463Z",
       "componentCount": 103
     }
   }

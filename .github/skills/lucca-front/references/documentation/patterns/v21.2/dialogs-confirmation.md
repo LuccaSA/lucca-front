@@ -18,11 +18,19 @@ Le contenu s'adapte au niveau de criticité de l'action et de ses conséquences 
 * **Description :** "*Si vous supprimez l’import Competences3000.csv, 54 compétences ne seront plus disponibles.*"
 * **Boutons :** "*Supprimer l'import*" / "*Annuler*"
 
+<design figma-url="https://www.figma.com/design/4vzJER8uY9Mh5wntlaLylH/?node-id=4535:25252">
+
+</design>
+
 ### Niveau 2 : impact moyen
 
 * **Titre :** "*Supprimer l’import ?*"
 * **Description :** "***La suppression est définitive.*** *Si vous supprimez l’import Competences3000.csv, 54 compétences ne seront plus disponibles.*"
 * **Boutons :** "*Supprimer l'import*" / "*Annuler*"
+
+<design figma-url="https://www.figma.com/design/4vzJER8uY9Mh5wntlaLylH/?node-id=4537:1274">
+
+</design>
 
 ### Niveau 3 : impact élevé
 
@@ -30,6 +38,10 @@ Le contenu s'adapte au niveau de criticité de l'action et de ses conséquences 
 * **Description :** "***La suppression est définitive.*** *Si vous supprimez l’import Competences3000.csv, 54 compétences ne seront plus disponibles.*"
 * **Case à cocher :** "*J'ai bien compris les risques.*"
 * **Boutons :** "*Supprimer l'import*" / "*Annuler*"
+
+<design figma-url="https://www.figma.com/design/4vzJER8uY9Mh5wntlaLylH/?node-id=4537:1565">
+
+</design>
 
 ### Bonnes pratiques de rédaction
 
@@ -59,6 +71,10 @@ L’objectif est d’éviter toute **perte involontaire de données**, en inform
 * **Description :** "*Si vous quittez, les modifications non enregistrées seront supprimées.*"
 * **Boutons :** "*Quitter sans enregistrer*" / "*Reprendre les modifications*"
 
+<design figma-url="https://www.figma.com/design/4vzJER8uY9Mh5wntlaLylH/?node-id=4535:19439">
+
+</design>
+
 ### Bonnes pratiques de rédaction
 
 * Écrivons le titre sous forme de question commençant par **{Quitter}**. Pourquoi ?
@@ -82,11 +98,19 @@ Elles peuvent aussi interpeller l'utilisateur après la modification de paramèt
 * **Description :** "*Si vous modifiez ces paramètres, vous risquez des incohérences dans le suivi des absences et des temps déclarés.*"
 * **Boutons :** "*Modifier les paramètres*" / "*Annuler*"
 
+<design figma-url="https://www.figma.com/design/4vzJER8uY9Mh5wntlaLylH/?node-id=4537:1867">
+
+</design>
+
 ### Niveau 2 : impact moyen
 
 * **Titre :** "*Modifier les paramètres de la modalité ?*"
 * **Description :** "***Cette action est irréversible.*** *Si vous modifiez ces paramètres, vous risquez des incohérences dans le suivi des absences et des temps déclarés.*"
 * **Boutons :** "*Modifier les paramètres*" / "*Annuler*"
+
+<design figma-url="https://www.figma.com/design/4vzJER8uY9Mh5wntlaLylH/?node-id=4537:1869">
+
+</design>
 
 ### Niveau 3 : impact élevé
 
@@ -94,6 +118,10 @@ Elles peuvent aussi interpeller l'utilisateur après la modification de paramèt
 * **Description :** "***Cette action est irréversible.*** *Si vous modifiez ces paramètres, vous risquez des incohérences dans le suivi des absences et des temps déclarés.*"
 * **Case à cocher :** "*J'ai bien compris les risques.*"
 * **Boutons :** "*Modifier les paramètres*" / "*Annuler*"
+
+<design figma-url="https://www.figma.com/design/4vzJER8uY9Mh5wntlaLylH/?node-id=4537:1871">
+
+</design>
 
 ### Bonnes pratiques de rédaction
 

@@ -16,6 +16,10 @@ Afin de faciliter la création d'objets multilingues, nous permettons à l'utili
 
 Ceux-ci sont appliqués automatiquement à chaque nouvelle ressource, garantissant ainsi une cohérence globale et un gain de temps significatif. Ces réglages sont regroupés au sein d'une page **Langues** dédié dans la configuration du logiciel et dispensent l'utilisateur de configurations répétitives à chaque création d'objet.
 
+<design figma-url="https://www.figma.com/design/4vzJER8uY9Mh5wntlaLylH/?node-id=5019:51528">
+
+</design>
+
 ### Anatomie
 
 Les paramètres sont **initialisés automatiquement par le système lors du déploiement**, avant même que l'utilisateur ne consulte la page. Pour pré-remplir ces configurations, le système s'appuie sur :
@@ -29,6 +33,8 @@ La définition d'une langue de fallback dans les paramètres exclut l'usage d'in
 
 Les paramètres généraux de langues s'appliquent à l'ensemble des utilisateurs de l'instance. Toutefois, comme les utilisateurs ne parlent pas tous la même langue, la langue de rédaction ne peut pas être définie comme un paramètre général. Elle doit rester propre à chaque utilisateur pour s'adapter à sa langue de travail.
 
+<design figma-url="https://www.figma.com/design/4vzJER8uY9Mh5wntlaLylH/?node-id=5019:51520">
+
 <notes>
 
 1. Langues disponibles à traduire 
@@ -37,23 +43,45 @@ Les paramètres généraux de langues s'appliquent à l'ensemble des utilisateur
 
 </notes>
 
+</design>
+
 ### Comportement
 
 Les langues disponibles sont classées par ordre alphabétique. Seules les langues préalablement sélectionnées dans la liste des langues disponibles peuvent être choisies comme langue de fallback.
 
+<design figma-url="https://www.figma.com/design/4vzJER8uY9Mh5wntlaLylH/?node-id=5019:51525">
+
+</design>
+
 Afin de prévenir toute erreur, il est impossible de supprimer une langue si celle-ci est définie comme langue de fallback. Par conséquent, les champs de configuration ne peuvent jamais être vides.
 
----
+<design figma-url="https://www.figma.com/design/4vzJER8uY9Mh5wntlaLylH/?node-id=5019:51515">
+
+</design>
 
 ## Création d'une ressource
 
 À la création d’une ressource, les paramètres de langue sont pré-remplis avec les paramètres par défaut, tout en permettant une édition à la demande. Ces paramètres s'affichent par défaut via le composant Data presentation.
 
+<design figma-url="https://www.figma.com/design/4vzJER8uY9Mh5wntlaLylH/?node-id=5019:51504">
+
+</design>
+
 Si la configuration des paramètres de généraux est monolingue, l'encart "Paramètres par défaut" est masqué afin de ne pas encombrer l'interface.
+
+<design figma-url="https://www.figma.com/design/4vzJER8uY9Mh5wntlaLylH/?node-id=5020:26798">
+
+</design>
 
 L'utilisateur ne peut pas supprimer une langue disponible si celle-ci est définie comme langue de fallback ou comme langue de rédaction.
 
+<design figma-url="https://www.figma.com/design/4vzJER8uY9Mh5wntlaLylH/?node-id=5019:51465">
+
+</design>
+
 Il a également la possibilité d'enregistrer ses réglages actuels en tant que paramètres généraux. cette option n'apparaît que si une modification a été apportée aux langues disponibles ou à la langue de fallback. La langue de rédaction est exclue de ces paramètres généraux : les réglages étant valables pour l'ensemble des utilisateurs de l'instance, et chacun ne parlant pas nécessairement la même langue, ce paramètre doit rester individuel et associé à une ressource.
+
+<design figma-url="https://www.figma.com/design/4vzJER8uY9Mh5wntlaLylH/?node-id=5021:24702">
 
 <notes>
 
@@ -61,15 +89,23 @@ Une modification a été apportée aux langues disponibles ou à la langue de fa
 
 </notes>
 
+</design>
+
+<design figma-url="https://www.figma.com/design/4vzJER8uY9Mh5wntlaLylH/?node-id=5019:51453">
+
 <notes>
 
 Aucune modification apportée aux langues disponibles ou à la langue de fallback.
 
 </notes>
 
+</design>
+
 Une fois l'objet créé, l'utilisateur peut modifier les paramètres à tout moment.
 
----
+<design figma-url="https://www.figma.com/design/4vzJER8uY9Mh5wntlaLylH/?node-id=5019:51761">
+
+</design>
 
 ## Traduire un formulaire
 
@@ -77,7 +113,13 @@ Dans le formulaire, l'utilisateur navigue entre les différentes langues via un 
 
 Dès lors que l'utilisateur sélectionne des langues disponibles pour les collaborateurs, la traduction de la ressource dans ces langues devient obligatoire.
 
+<design figma-url="https://www.figma.com/design/4vzJER8uY9Mh5wntlaLylH/?node-id=5019:51756">
+
+</design>
+
 Ce composant doit être positionné à proximité immédiate des champs concernés : soit à droite du titre d'un Fieldset, soit dans l'en-tête d'une Dialog ou d’un drawer (à condition de laisser le header fixe).
+
+<design figma-url="https://www.figma.com/design/4vzJER8uY9Mh5wntlaLylH/?node-id=5021:33266">
 
 <notes>
 
@@ -85,15 +127,27 @@ Positionnement du Segmented control dans le header d’un drawer.
 
 </notes>
 
+</design>
+
+<design figma-url="https://www.figma.com/design/4vzJER8uY9Mh5wntlaLylH/?node-id=5021:38415">
+
 <notes>
 
 Positionnement du segmented control à droite du Fieldset title.
 
 </notes>
 
+</design>
+
 À partir de cinq langues sélectionnées, l'affichage bascule automatiquement vers un Select pour optimiser l'espace.
 
+<design figma-url="https://www.figma.com/design/4vzJER8uY9Mh5wntlaLylH/?node-id=5019:51860">
+
+</design>
+
 Les langues affichées dans le Segmented control se limiteront au code de la langue, sans distinction de culture (variantes régionales). En pratique, l'usage d'une langue générique (par exemple un seul anglais) est privilégié pour simplifier le travail de traduction de l’utilisateur. Dans le cas d'un Select, nous affichons le nom complet de la langue suivi de son code entre parenthèses, par exemple : “Français (FR)”.
+
+<design figma-url="https://www.figma.com/design/4vzJER8uY9Mh5wntlaLylH/?node-id=5019:51855">
 
 <notes>
 
@@ -103,7 +157,7 @@ Les langues affichées dans le Segmented control se limiteront au code de la lan
 
 </notes>
 
----
+</design>
 
 ## Champs traduisibles
 
@@ -113,6 +167,8 @@ Chaque champ de saisie multilingue est identifiable par le rappel du code de la 
 
 #### Langue de rédaction sélectionnée
 
+<design figma-url="https://www.figma.com/design/4vzJER8uY9Mh5wntlaLylH/?node-id=5019:51866">
+
 <notes>
 
 1. Label (Code de la langue) 
@@ -121,7 +177,11 @@ Chaque champ de saisie multilingue est identifiable par le rappel du code de la 
 
 </notes>
 
+</design>
+
 #### Langue à traduire sélectionnée
+
+<design figma-url="https://www.figma.com/design/4vzJER8uY9Mh5wntlaLylH/?node-id=5019:51850">
 
 <notes>
 
@@ -133,21 +193,39 @@ Chaque champ de saisie multilingue est identifiable par le rappel du code de la 
 
 </notes>
 
+</design>
+
 ### Cas particulier
 
 La structure mentionnée précédemment ne s'applique pas aux composants de saisie de texte long (Textarea, Rich textfield). En effet, la longueur du contenu ne permet pas de garantir la visibilité permanente d'un Inline message pour rappeler la langue de rédaction. Par conséquent, nous n'utiliserons pas d’Inline message dans ce cas précis.
+
+<design figma-url="https://www.figma.com/design/4vzJER8uY9Mh5wntlaLylH/?node-id=5021:39730">
+
+</design>
 
 ### Traductions incomplètes
 
 Si l'utilisateur tente de soumettre le formulaire sans avoir complété toutes les **traductions** **obligatoires** alors nous lui proposons de générer automatiquement l'intégralité des traductions manquantes avant de finaliser l'enregistrement. Cela permet de prévenir toute erreur liée au processus de traduction.
 
+<design figma-url="https://www.figma.com/design/4vzJER8uY9Mh5wntlaLylH/?node-id=5019:51800">
+
+</design>
+
 Si l'utilisateur choisit la traduction manuelle, nous le redirigions automatiquement vers le premier champ non traduit du formulaire. Une icône d'erreur s'affiche dans le Segmented control au niveau des langues concernés, accompagnée d'un Callout popover pour signaler précisément les langues où les traductions font défaut.
 
----
+<design figma-url="https://www.figma.com/design/4vzJER8uY9Mh5wntlaLylH/?node-id=5022:20381">
+
+</design>
+
+<design figma-url="https://www.figma.com/design/4vzJER8uY9Mh5wntlaLylH/?node-id=5022:22840">
+
+</design>
 
 Dans le cas où le traitement des données serait long, l'affichage d'une barre de progression sera nécessaire pour permettre à l'utilisateur de suivre l'avancement.
 
----
+<design figma-url="https://www.figma.com/design/4vzJER8uY9Mh5wntlaLylH/?node-id=5022:24516">
+
+</design>
 
 ## Traduire un champ
 
@@ -158,11 +236,17 @@ Lorsqu'un formulaire ne contient qu'un seul champ nécessitant une traduction, i
 
 Cette règle ne s'applique pas si le champ est un Textarea ou Rich textfield. Pour ces composants, on utilisera un Segmented control positionné à droite du titre du fieldset.
 
----
+<design figma-url="https://www.figma.com/design/4vzJER8uY9Mh5wntlaLylH/?node-id=5019:51573">
+
+</design>
 
 ## Traduction automatique
 
 Pour garantir une expérience fluide, les traductions sont générées automatiquement dans les champs vides dès que l'utilisateur sélectionne une langue dans le Segmented control. Ce mécanisme permet un gain de temps considérable : l'utilisateur a la liberté de modifier le contenu ou de le remplacer intégralement si nécessaire.
+
+<design figma-url="https://www.figma.com/design/4vzJER8uY9Mh5wntlaLylH/?node-id=5022:32296">
+
+</design>
 
 ### Relancer une traduction
 
@@ -170,10 +254,26 @@ Si tous les champs dans la langue à traduire sont déjà renseignés, la traduc
 
 En fonction de la place disponible, il est possible d’utiliser le bouton un label “traduire”, ou bouton icône.
 
+<design figma-url="https://www.figma.com/design/4vzJER8uY9Mh5wntlaLylH/?node-id=5019:51564">
+
+</design>
+
 ### Modification d'un champ dans la langue de rédaction
 
 Si l'utilisateur modifie un champ dans la langue de rédaction alors que des traductions ont déjà été générées, un callout avec le style IA doit apparaître sous le champ. Ce message incite l'utilisateur à vérifier ou à mettre à jour les traductions existantes pour garantir la cohérence des contenus.
 
+<design figma-url="https://www.figma.com/design/4vzJER8uY9Mh5wntlaLylH/?node-id=5022:46683">
+
+</design>
+
 ### Animation de chargement
 
 Afin d'indiquer qu'une traduction est en cours, le texte de la langue de rédaction est temporairement dupliqué dans le champ cible avec une animation de balayage brillant. Ce dégradé, utilisant les codes couleurs associés à l'IA, signale visuellement le processus de génération automatique.
+
+<design figma-url="https://www.figma.com/design/4vzJER8uY9Mh5wntlaLylH/?node-id=5019:51562">
+
+</design>
+
+<design figma-url="https://www.figma.com/design/4vzJER8uY9Mh5wntlaLylH/?node-id=5022:24516">
+
+</design>

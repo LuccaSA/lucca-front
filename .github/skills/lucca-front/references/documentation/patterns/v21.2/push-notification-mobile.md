@@ -4,6 +4,8 @@
 
 ## Anatomie
 
+<design figma-url="https://www.figma.com/design/ud1QBuvu6PMBaMRljCZVYV/?node-id=5032:3223">
+
 **Anatomie**
 
 **Anatomie**
@@ -18,13 +20,17 @@
 
 </notes>
 
----
+</design>
 
 ## Comportement 
 
+<design figma-url="https://www.figma.com/design/ud1QBuvu6PMBaMRljCZVYV/?node-id=5153:8104">
+
 **Expanded comportement**
 
 **Expanded comportement**
+
+</design>
 
 ### Appui sur la notification
 
@@ -57,9 +63,13 @@ Pourquoi ? Pour éviter la troncature du texte sur les petits appareils. Les v
 * L'utilisateur n'a pas besoin de lire la Body pour comprendre le contenu du Title. 
 * Nous évitons les phrase du type “Afficher les informations sur l’application” ou “Ouvrir l’application pour...”.
 
+<design figma-url="https://www.figma.com/design/ud1QBuvu6PMBaMRljCZVYV/?node-id=5048:3959">
+
 **Section 3**
 
 **Section 3**
+
+</design>
 
 | ✅ | ❌ |
 | --- | --- |

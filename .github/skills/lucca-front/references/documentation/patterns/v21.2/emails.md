@@ -77,9 +77,13 @@ La catégorie permet d'identifier **instantanément** le type d'action ou d’in
 
 **Action possible :** depuis le mail ou en se connectant au logiciel.
 
+<design figma-url="https://www.figma.com/design/4vzJER8uY9Mh5wntlaLylH/?node-id=3785:440">
+
 **Mail - Dépenses pro**
 
 **Mail - Dépenses pro**
+
+</design>
 
 ### Mail d’information
 
@@ -92,9 +96,13 @@ La catégorie permet d'identifier **instantanément** le type d'action ou d’in
 
 **Caractéristiques :** destinataire unique. Le message se suffit généralement en lui-même.
 
+<design figma-url="https://www.figma.com/design/4vzJER8uY9Mh5wntlaLylH/?node-id=3785:13689">
+
 **Mail - Avantages**
 
 **Mail - Avantages**
+
+</design>
 
 ### Mail d'information ou d’action pour une groupe
 

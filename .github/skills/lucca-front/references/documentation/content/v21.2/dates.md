@@ -10,6 +10,10 @@ Nous l’utilisons notamment dans les tableaux (Index tables et Data tables) mai
 
 Chaque locale a ses propres conventions (format et séparateur). L'objet `Intl.DateTimeFormat` permet le [formatage des dates et heures](https://developer.mozilla.org/fr/docs/Web/JavaScript/Reference/Global_Objects/Intl/DateTimeFormat) sensible à la langue.
 
+<design figma-url="https://www.figma.com/design/UlH9yiGkWUQFlpJvKBp3bV/?node-id=1022:23167">
+
+</design>
+
 | **Locale** | **Format** | **Séparateur** | **Exemple** |
 | --- | --- | --- | --- |
 | fr-FR | `JJ/MM/AAAA` | `/` | 01/04/2026 |
@@ -27,6 +31,10 @@ Chaque locale a ses propres conventions (format et séparateur). L'objet `Intl.
 ## Format long avec horodatage
 
 Ce format est à privilégier lorsque la temporalité et le contexte temporel sont importants pour l’utilisateur. C’est le cas dans les historiques (Activity feed) ou pour les commentaires (Comment, Chat).
+
+<design figma-url="https://www.figma.com/design/UlH9yiGkWUQFlpJvKBp3bV/?node-id=1022:23126">
+
+</design>
 
 ### Règles d'affichage selon l'ancienneté
 
@@ -74,3 +82,7 @@ Dans les calendriers, il est utile d’utiliser les abréviations des mois ou de
 
 * pour les jours de la semaine, nous privilégions la valeur `narrow`
 * pour les mois, nous utilisons la valeur `short`
+
+<design figma-url="https://www.figma.com/design/UlH9yiGkWUQFlpJvKBp3bV/?node-id=1022:24327">
+
+</design>
