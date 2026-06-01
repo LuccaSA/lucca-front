@@ -14,7 +14,7 @@ import { HorizontalNavigationSize } from './horizontal-navigation.type';
 	encapsulation: ViewEncapsulation.None,
 	changeDetection: ChangeDetectionStrategy.OnPush,
 	host: {
-		'[class.horizontalNavigationWrapper]': 'isInsideDialog()',
+		'[class.horizontalNavigationWrapper]': 'this.dialogRef !== null',
 	},
 	imports: [NgTemplateOutlet, PortalDirective],
 	providers: [
@@ -35,15 +35,9 @@ export class HorizontalNavigationComponent {
 
 	readonly noBorder = input(false, { transform: booleanAttribute });
 
-	readonly insideDialog = input(false, { transform: booleanAttribute });
-
-	readonly isInsideDialog = computed(() => this.insideDialog() || this.dialogRef !== null);
-
 	readonly container = input(false, { transform: booleanAttribute });
 
 	readonly vertical = input(false, { transform: booleanAttribute });
-
-	readonly header = input(false, { transform: booleanAttribute });
 
 	readonly palette = input<Palette | DecorativePalette>('product');
 	readonly paletteClass = computed(() => ({ [`palette-${this.palette()}`]: !!this.palette() }));
@@ -55,7 +49,7 @@ export class HorizontalNavigationComponent {
 
 	readonly isTablist = computed(() => this.tabs().length > 0);
 
-	readonly selected = model<number>(1);
+	readonly currentIndex = model<number>(0);
 
 	readonly selectedIndex = computed(() => {
 		const tabCount = this.tabs().length;
@@ -63,8 +57,7 @@ export class HorizontalNavigationComponent {
 			return null;
 		}
 
-		const requestedSelected = this.selected();
-		const requestedIndex = requestedSelected <= 0 ? 0 : requestedSelected - 1;
+		const requestedIndex = this.currentIndex();
 		const normalizedIndex = ((requestedIndex % tabCount) + tabCount) % tabCount;
 
 		const requestedTab = this.tabs()[normalizedIndex];
@@ -77,14 +70,13 @@ export class HorizontalNavigationComponent {
 
 	constructor() {
 		effect(() => {
-			const normalizedSelectedIndex = this.selectedIndex();
-			if (normalizedSelectedIndex === null) {
+			const normalizedIndex = this.selectedIndex();
+			if (normalizedIndex === null) {
 				return;
 			}
 
-			const normalizedSelected = normalizedSelectedIndex + 1;
-			if (this.selected() !== normalizedSelected) {
-				this.selected.set(normalizedSelected);
+			if (this.currentIndex() !== normalizedIndex) {
+				this.currentIndex.set(normalizedIndex);
 			}
 		});
 	}
@@ -92,7 +84,7 @@ export class HorizontalNavigationComponent {
 	navigateToFirstEnabledTab(): void {
 		const firstEnabledIndex = this.findAccessibleTabIndex(0, 1);
 		if (firstEnabledIndex !== null) {
-			this.selected.set(firstEnabledIndex + 1);
+			this.currentIndex.set(firstEnabledIndex);
 			this.buttons()[firstEnabledIndex].nativeElement.focus();
 		}
 	}
@@ -103,7 +95,7 @@ export class HorizontalNavigationComponent {
 
 		const lastEnabledIndex = this.findAccessibleTabIndex(lastTabIndex, -1);
 		if (lastEnabledIndex !== null) {
-			this.selected.set(lastEnabledIndex + 1);
+			this.currentIndex.set(lastEnabledIndex);
 			this.buttons()[lastEnabledIndex].nativeElement.focus();
 		}
 	}
@@ -118,7 +110,7 @@ export class HorizontalNavigationComponent {
 			return;
 		}
 
-		this.selected.set(index + 1);
+		this.currentIndex.set(index);
 		this.buttons()[index].nativeElement.focus();
 	}
 

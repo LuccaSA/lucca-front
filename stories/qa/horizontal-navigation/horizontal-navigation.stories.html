@@ -109,25 +109,28 @@
 				</lu-horizontal-navigation>
 			</td>
 		</tr>
+
 		<tr>
-			<td>Header</td>
+			<td>Container</td>
 			<td>
-				<div class="horizontalNavigation mod-header">
-					<ul class="horizontalNavigation-list">
-						<li class="horizontalNavigation-list-item">
-							<a class="horizontalNavigation-list-item-action" href="#" aria-current="page">Page</a>
-						</li>
-						<li class="horizontalNavigation-list-item">
-							<a class="horizontalNavigation-list-item-action" href="#">Page</a>
-						</li>
-						<li class="horizontalNavigation-list-item">
-							<a class="horizontalNavigation-list-item-action" href="#">Page</a>
-						</li>
-					</ul>
+				<div class="horizontalNavigation">
+					<div class="horizontalNavigation-containerOptional">
+						<ul class="horizontalNavigation-list">
+							<li class="horizontalNavigation-list-item">
+								<a class="horizontalNavigation-list-item-action" href="#" aria-current="page">Page</a>
+							</li>
+							<li class="horizontalNavigation-list-item">
+								<a class="horizontalNavigation-list-item-action" href="#">Page</a>
+							</li>
+							<li class="horizontalNavigation-list-item">
+								<a class="horizontalNavigation-list-item-action" href="#">Page</a>
+							</li>
+						</ul>
+					</div>
 				</div>
 			</td>
 			<td>
-				<lu-horizontal-navigation header>
+				<lu-horizontal-navigation container>
 					<a *luHorizontalNavigationLink class="horizontalNavigation-list-item-action" href="#" aria-current="page">Page</a>
 					<a *luHorizontalNavigationLink class="horizontalNavigation-list-item-action" href="#">Page</a>
 					<a *luHorizontalNavigationLink class="horizontalNavigation-list-item-action" href="#">Page</a>
@@ -237,6 +240,25 @@
 					<lu-horizontal-navigation-tab label="Tab 3">Content 3</lu-horizontal-navigation-tab>
 				</lu-horizontal-navigation>
 			</td>
+		</tr>
+		<tr>
+			<td>Header (legacy)</td>
+			<td>
+				<div class="horizontalNavigation mod-header">
+					<ul class="horizontalNavigation-list">
+						<li class="horizontalNavigation-list-item">
+							<a class="horizontalNavigation-list-item-action" href="#" aria-current="page">Page</a>
+						</li>
+						<li class="horizontalNavigation-list-item">
+							<a class="horizontalNavigation-list-item-action" href="#">Page</a>
+						</li>
+						<li class="horizontalNavigation-list-item">
+							<a class="horizontalNavigation-list-item-action" href="#">Page</a>
+						</li>
+					</ul>
+				</div>
+			</td>
+			<td></td>
 		</tr>
 		<tr>
 			<td>Horizontal navigation (legacy menu)</td>

@@ -19,10 +19,10 @@ export default {
 		container: {
 			description: 'Applique un container autour des liens pour aligner le composant avec le contenu de la page.',
 		},
-		selected: {
+		currentIndex: {
 			control: {
-				min: 1,
-				max: 4,
+				min: 0,
+				max: 3,
 			},
 		},
 	},
@@ -35,12 +35,12 @@ export default {
 		}),
 	],
 	render: (args, { argTypes }) => {
-		const { numericBadge, disabled, selected, ...otherArgs } = args;
+		const { numericBadge, disabled, currentIndex, ...otherArgs } = args;
 		const disabledParam = disabled ? ` disabled` : ``;
-		const selectedParam = selected !== 1 ? ` [selected]="${selected}"` : ``;
+		const currentIndexParam = currentIndex !== 0 ? ` [currentIndex]="${currentIndex}"` : ``;
 
 		return {
-			template: `<lu-horizontal-navigation${selectedParam}${generateInputs(otherArgs, argTypes)}>
+			template: `<lu-horizontal-navigation${currentIndexParam}${generateInputs(otherArgs, argTypes)}>
 	<lu-horizontal-navigation-tab label="Tab 1">Content 1</lu-horizontal-navigation-tab>
 	<lu-horizontal-navigation-tab label="Tab 2">Content 2</lu-horizontal-navigation-tab>
 	<lu-horizontal-navigation-tab label="Tab 3">Content 3</lu-horizontal-navigation-tab>
@@ -57,6 +57,6 @@ export const Basic = {
 		container: false,
 		size: null,
 		disabled: false,
-		selected: 1,
+		currentIndex: 0,
 	},
 };
