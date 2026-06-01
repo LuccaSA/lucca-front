@@ -34,18 +34,20 @@ export class FileEntryComponent {
 
 	readonly displayFileName = input(false, { transform: booleanAttribute });
 
+	readonly structure = input(false, { transform: booleanAttribute });
+
 	readonly inlineMessageError = input<string | null>(null);
 
 	readonly entry = input.required<FileEntry>();
 
-	readonly size = input<'S' | null>(null);
+	readonly size = input<null | 'L'>(null);
 
 	readonly iconOverride = input('');
 
 	readonly downloadURL = input('');
 
 	readonly password = input('');
-	passwordChange$ = new Subject<string>();
+	readonly passwordChange$ = new Subject<string>();
 	passwordChange = outputFromObservable(this.passwordChange$);
 
 	get withPassword() {
@@ -54,7 +56,7 @@ export class FileEntryComponent {
 
 	readonly media = input(false, { transform: booleanAttribute });
 
-	deleteFile$ = new Subject<void>();
+	readonly deleteFile$ = new Subject<void>();
 
 	deleteFile = outputFromObservable(this.deleteFile$);
 
@@ -111,11 +113,11 @@ export class FileEntryComponent {
 			}
 		}
 
-		if (!this.media() && this.size() === null) {
+		if (!this.media() && this.size() === 'L') {
 			return null;
 		}
 
-		if (this.size() === 'S' && !this.media()) {
+		if (this.size() === null && !this.media()) {
 			return this.fileTypeDisplay() + fileSize;
 		}
 

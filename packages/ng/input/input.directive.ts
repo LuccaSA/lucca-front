@@ -1,5 +1,6 @@
 import { Directive, ElementRef, OnInit, Renderer2 } from '@angular/core';
 import { NgControl } from '@angular/forms';
+import { isNil } from '@lucca-front/ng/core';
 
 /**
  * adds class is-filled when model is empty
@@ -17,7 +18,7 @@ export class LuInputDirective implements OnInit {
 		if (typeof value === 'string') {
 			return value === '';
 		}
-		return value === null || value === undefined;
+		return isNil(value);
 	}
 	protected applyClasses(value) {
 		if (this.isEmpty(value)) {
@@ -27,7 +28,7 @@ export class LuInputDirective implements OnInit {
 		}
 	}
 	ngOnInit() {
-		this._ngControl.valueChanges.subscribe((v) => this.applyClasses(v));
+		this._ngControl.valueChanges?.subscribe((v) => this.applyClasses(v));
 		const val: unknown = this._ngControl.value;
 		this.applyClasses(val);
 	}

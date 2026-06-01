@@ -55,7 +55,7 @@ export class LuOptionItemComponent<T> extends ALuOptionItem<T> implements ILuOpt
 		this._disabled = d;
 	}
 
-	@ViewChild('element', { read: ElementRef, static: true }) element: ElementRef;
+	@ViewChild('element', { read: ElementRef, static: true }) readonly element: ElementRef;
 	constructor(private _cdr: ChangeDetectorRef) {
 		super();
 	}

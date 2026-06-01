@@ -34,7 +34,7 @@ export class LuTreeOptionPagerComponent<T> extends ALuTreeOptionOperator<T> impl
 			}),
 		);
 	}
-	paging$ = new BehaviorSubject<number>(MAGIC_STEP);
+	readonly paging$ = new BehaviorSubject<number>(MAGIC_STEP);
 	next() {
 		this.paging$.next(this.paging$.value + MAGIC_STEP);
 	}

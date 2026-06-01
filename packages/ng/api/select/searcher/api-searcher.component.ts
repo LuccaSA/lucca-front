@@ -33,7 +33,7 @@ import { ALuApiOptionPagedSearcher, ALuApiOptionSearcher } from './api-searcher.
 })
 export class LuApiSearcherComponent<T extends import('../../api.model').ILuApiItem = import('../../api.model').ILuApiItem> extends ALuApiOptionSearcher<T, LuApiHybridService<T>> implements OnInit {
 	@ViewChild('searchInput', { read: ElementRef, static: true })
-	searchInput: ElementRef<HTMLElement>;
+	readonly searchInput: ElementRef<HTMLElement>;
 
 	@Input() set standard(standard: 'v3' | 'v4') {
 		this._service.standard = standard;
@@ -118,7 +118,7 @@ export class LuApiPagedSearcherComponent<T extends import('../../api.model').ILu
 	implements OnInit
 {
 	@ViewChild('searchInput', { read: ElementRef, static: true })
-	searchInput: ElementRef<HTMLElement>;
+	readonly searchInput: ElementRef<HTMLElement>;
 	@Input() set standard(standard: 'v3' | 'v4') {
 		this._service.standard = standard;
 	}
