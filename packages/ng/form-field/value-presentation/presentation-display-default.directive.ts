@@ -12,7 +12,7 @@ export class ɵPresentationDisplayDefaultDirective {
 		this.#displayDirectiveRef.defaultDisplay.set(true);
 	}
 
-	public static ngTemplateContextGuard(_dir: ɵPresentationDisplayDefaultDirective, ctx: unknown): ctx is void {
+	public static ngTemplateContextGuard(_dir: ɵPresentationDisplayDefaultDirective, _ctx: unknown): _ctx is void {
 		return true;
 	}
 }

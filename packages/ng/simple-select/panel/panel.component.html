@@ -14,7 +14,7 @@
 					<ng-container *luPortal="tpl" />
 				</div>
 			}
-			<div role="listbox">
+			<div role="listbox" class="lu-picker-content-option">
 				@if (grouping() && ctx.groupTemplateLocation === "group-header") {
 					@for (
 						group of ctx.options | luOptionGroup: grouping().selector;

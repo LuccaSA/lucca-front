@@ -1,7 +1,9 @@
 import { ButtonComponent } from '@lucca-front/ng/button';
+import { FILE_ENTRY_SIZE } from '@lucca-front/ng/file-upload/file-entry/file-entry.type';
 import { IconComponent } from '@lucca-front/ng/icon';
 import { LuTooltipModule } from '@lucca-front/ng/tooltip';
 import { Meta, moduleMetadata } from '@storybook/angular';
+import { setStoryOptions } from 'stories/helpers/stories';
 
 export default {
 	title: 'Documentation/File/FileToolbar/HTML&CSS/Basic',
@@ -12,7 +14,7 @@ export default {
 	],
 	argTypes: {
 		size: {
-			options: [null, 'L'],
+			options: setStoryOptions(FILE_ENTRY_SIZE),
 			control: {
 				type: 'radio',
 			},

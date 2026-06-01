@@ -211,6 +211,18 @@ export default defineConfig(
 			'@angular-eslint/template/button-has-type': 'off',
 		},
 	},
+	// Scripts: generate-skills is tooling code, downgrade strict rules to warn
+	{
+		files: ['scripts/generate-skills/**/*.ts'],
+		rules: {
+			'no-console': 'warn',
+			'@typescript-eslint/no-explicit-any': 'warn',
+			'@typescript-eslint/no-unused-vars': 'warn',
+			'@typescript-eslint/no-unsafe-argument': 'warn',
+			'@typescript-eslint/restrict-template-expressions': 'warn',
+			'@typescript-eslint/require-await': 'warn',
+		},
+	},
 	prettier,
 	storybook.configs['flat/recommended'],
 );

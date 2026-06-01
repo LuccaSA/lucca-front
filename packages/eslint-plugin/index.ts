@@ -1,3 +1,4 @@
+// eslint-disable-next-line @lucca-front/ts-error
 import tsErrorRule, { RULE_NAME as tsErrorRuleName } from './rules/ts-error.ts';
 
 const plugin = {

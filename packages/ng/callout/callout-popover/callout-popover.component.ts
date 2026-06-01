@@ -6,7 +6,7 @@ import { IconComponent } from '@lucca-front/ng/icon';
 import { PopoverDirective, PopoverPosition } from '@lucca-front/ng/popover2';
 import { CalloutFeedbackItemComponent } from '../callout-feedback-item/callout-feedback-item.component';
 import { CalloutIconPipe } from '../callout-icon.pipe';
-import { CalloutState } from '../callout-state';
+import { CalloutPopoverSize, CalloutState } from '../callout.type';
 import { getCalloutPalette } from '../callout.utils';
 
 @Component({
@@ -31,7 +31,7 @@ export class CalloutPopoverComponent {
 	/**
 	 * Label (visual only) to put inside the button, often used to show just a number
 	 */
-	readonly buttonLabel = input<string>();
+	readonly buttonLabel = input<string | number>();
 
 	/**
 	 * Alternative for the button
@@ -53,7 +53,7 @@ export class CalloutPopoverComponent {
 	/**
 	 * Size for both button and popover content
 	 */
-	readonly size = input<'M' | 'S' | 'XS'>();
+	readonly size = input<CalloutPopoverSize>();
 
 	/**
 	 * Icon shows in button and next to popover's title

@@ -5,6 +5,7 @@ import { LU_INDEX_TABLE_FOOT_INSTANCE } from './index-table-foot/index-table-foo
 import { LU_INDEX_TABLE_HEAD_INSTANCE } from './index-table-head/index-table-head.token';
 import { LU_INDEX_TABLE_ROW_INSTANCE } from './index-table-row/index-table-row.token';
 import { LU_INDEX_TABLE_INSTANCE } from './index-table.token';
+import { IndexTableAlign } from './index-table.type';
 
 @Component({
 	selector: 'lu-base-index-table-cell',
@@ -18,7 +19,7 @@ export abstract class BaseIndexTableCell {
 	readonly footRef = inject(LU_INDEX_TABLE_FOOT_INSTANCE, { optional: true });
 	readonly rowRef = inject(LU_INDEX_TABLE_ROW_INSTANCE);
 
-	readonly align = input<null | 'start' | 'center' | 'end'>(null);
+	readonly align = input<IndexTableAlign | null>(null);
 
 	readonly alignCol = computed(() => {
 		return this.tableRef.header()?.cols()[this.position()].align();

@@ -1,6 +1,7 @@
-import { ClearComponent } from '@lucca-front/ng/clear';
+import { CLEAR_SIZE, ClearComponent } from '@lucca-front/ng/clear';
+import { PALETTE } from '@lucca/prisme/core';
 import { Meta, moduleMetadata, StoryObj } from '@storybook/angular';
-import { generateInputs } from 'stories/helpers/stories';
+import { generateInputs, setStoryOptions } from 'stories/helpers/stories';
 
 export default {
 	title: 'Documentation/Texts/Clear/Angular/Basic',
@@ -27,7 +28,7 @@ export const Template: StoryObj = {
 			description: 'Désactive le bouton.',
 		},
 		palette: {
-			options: ['', 'success', 'warning', 'error', 'product', 'brand', 'neutral', 'none', 'primary', 'grey'],
+			options: setStoryOptions(PALETTE),
 			control: {
 				type: 'select',
 			},
@@ -38,7 +39,7 @@ export const Template: StoryObj = {
 			description: 'Modifie les couleurs du bouton pour un usage sur fond foncé.',
 		},
 		size: {
-			options: ['', 'S'],
+			options: setStoryOptions(CLEAR_SIZE),
 			control: {
 				type: 'select',
 			},

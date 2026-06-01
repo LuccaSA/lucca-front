@@ -2,6 +2,7 @@ import { booleanAttribute, ChangeDetectionStrategy, Component, computed, input, 
 import { DecorativePalette, Palette } from '@lucca-front/ng/core';
 import { LuSafeExternalSvgPipe } from '@lucca-front/ng/safe-content';
 import { BubbleIllustration } from './bubble-illustration';
+import { BubbleIllustrationSize } from './bubble-illustration.type';
 
 @Component({
 	selector: 'lu-bubble-illustration',
@@ -19,7 +20,9 @@ export class BubbleIllustrationComponent {
 	readonly illustration = input.required<BubbleIllustration | string>();
 
 	readonly palette = input<Palette | DecorativePalette>('product');
-	readonly size = input<'S' | 'M' | 'L'>('M');
+
+	readonly size = input<BubbleIllustrationSize>('M');
+
 	readonly action = input(false, { transform: booleanAttribute });
 
 	readonly illustrationUrl = computed(() => {

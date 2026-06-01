@@ -265,6 +265,10 @@
 		}
 
 		.indexTableWrapper-pagination {
+			position: sticky;
+			inset-inline-end: 0;
+			align-self: flex-end;
+
 			&:empty {
 				display: none;
 			}

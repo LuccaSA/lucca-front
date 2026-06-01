@@ -2,6 +2,7 @@ import { FormControl, FormGroup, FormsModule, ReactiveFormsModule, Validators } 
 import { ButtonComponent } from '@lucca-front/ng/button';
 import {
 	configureLuDialog,
+	DIALOG_FANCY_ILLUSTRATION,
 	DialogCloseDirective,
 	DialogComponent,
 	DialogContentComponent,
@@ -9,13 +10,15 @@ import {
 	DialogFooterComponent,
 	DialogHeaderAction,
 	DialogHeaderComponent,
+	DialogHeaderSubtitle,
 	DialogOpenDirective,
 } from '@lucca-front/ng/dialog';
+import { FormComponent } from '@lucca-front/ng/form';
 import { FormFieldComponent } from '@lucca-front/ng/form-field';
 import { CheckboxInputComponent, TextInputComponent } from '@lucca-front/ng/forms';
 import { IconComponent } from '@lucca-front/ng/icon';
 import { applicationConfig, Meta, moduleMetadata, StoryObj } from '@storybook/angular';
-import { createTestStory } from 'stories/helpers/stories';
+import { createTestStory, setStoryOptions } from 'stories/helpers/stories';
 import { waitForAngular } from 'stories/helpers/test';
 import { expect, screen, userEvent, within } from 'storybook/test';
 
@@ -42,6 +45,8 @@ export default {
 				ReactiveFormsModule,
 				IconComponent,
 				DialogHeaderAction,
+				DialogHeaderSubtitle,
+				FormComponent,
 			],
 		}),
 	],
@@ -58,7 +63,9 @@ export default {
 <ng-template #dialogTpl>
 	<lu-dialog #dialog${fancyIllustrationParam}>
 		<lu-dialog-header>
-			<h1>Template driven header</h1> You can also add more content in header
+			<h1>Template driven header</h1>
+			<p dialogHeaderSubtitle>Subtitle</p>
+			<p dialogHeaderContent>You can also add more content in header</p>
 		</lu-dialog-header>
 
 		<lu-dialog-content>Template-driven content</lu-dialog-content>
@@ -103,7 +110,7 @@ export default {
 				'Transforme la fenêtre de dialogue en alerte en obligeant l’utilisateur à faire un choix. L’utilisateur ne peut alors plus la fermer en cliquant sur le backdrop ou en appuyant sur la touche Échap.',
 		},
 		fancyIllustration: {
-			options: ['approval', 'checklist', 'email', 'install', 'mapping', 'save', 'users', 'welcome', 'payment-card'],
+			options: setStoryOptions(DIALOG_FANCY_ILLUSTRATION),
 			control: {
 				type: 'select',
 			},
@@ -182,7 +189,7 @@ export const WithForm: StoryObj = {
 <!--form = new FormGroup({
 			example: new FormControl('', Validators.required)
 		})-->
-		<form [formGroup]="form" class="dialog-inside-formOptional">
+		<form luForm [formGroup]="form">
 			<lu-dialog-header>Template driven header with Form inside</lu-dialog-header>
 
 			<lu-dialog-content>

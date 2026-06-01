@@ -4,15 +4,21 @@ import { Meta, StoryObj } from '@storybook/angular';
 export default {
 	title: 'Documentation/Forms/Data Presentation/Angular/Basic',
 	component: DataPresentationComponent,
-	render: (args, context) => {
+	argTypes: {
+		label: {
+			control: { type: 'text' },
+			description: 'Valeur affichée. [PortalContent]',
+		},
+	},
+	render: (args, { argTypes }) => {
 		return {
-			template: `<lu-data-presentation label="label">Value</lu-data-presentation>`,
+			template: `<lu-data-presentation label="${args['label']}">Value</lu-data-presentation>`,
 		};
 	},
 } as Meta;
 
 export const Template: StoryObj<DataPresentationComponent> = {
-	argTypes: {},
-
-	args: {},
+	args: {
+		label: 'Label',
+	},
 };

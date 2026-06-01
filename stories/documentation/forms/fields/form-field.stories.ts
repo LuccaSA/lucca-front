@@ -1,8 +1,9 @@
 import { FormsModule } from '@angular/forms';
 import { BrowserAnimationsModule } from '@angular/platform-browser/animations';
-import { FormFieldComponent, InputDirective } from '@lucca-front/ng/form-field';
+import { FORM_FIELD_WIDTH, FormFieldComponent, InputDirective } from '@lucca-front/ng/form-field';
+import { INLINE_MESSAGE_STATE } from '@lucca-front/ng/inline-message';
 import { Meta, moduleMetadata, StoryObj } from '@storybook/angular';
-import { generateInputs } from '../../../helpers/stories';
+import { generateInputs, setStoryOptions } from '../../../helpers/stories';
 
 export default {
 	title: 'Documentation/Forms/Fields/Form Field',
@@ -17,7 +18,7 @@ export default {
 			control: {
 				type: 'text',
 			},
-			description: 'Modifie le label de l’input.',
+			description: 'Modifie le label de l’input. [PortalContent]',
 		},
 		required: {
 			control: {
@@ -32,17 +33,17 @@ export default {
 			control: {
 				type: 'text',
 			},
-			description: 'Ajoute un texte indicatif sous le champ de formulaire.',
+			description: 'Ajoute un texte indicatif sous le champ de formulaire. [PortalContent]',
 		},
 		inlineMessageState: {
-			options: ['default', 'success', 'warning', 'error'],
+			options: setStoryOptions(INLINE_MESSAGE_STATE),
 			control: {
 				type: 'select',
 			},
 			description: 'Modifie l’état de l’inline message.',
 		},
 		errorInlineMessage: {
-			description: 'Ajoute un texte d’erreur sous le champ de formulaire lorsque celui-ci est en erreur.',
+			description: 'Ajoute un texte d’erreur sous le champ de formulaire lorsque celui-ci est en erreur. [PortalContent]',
 		},
 		tooltip: {
 			if: { arg: 'hiddenLabel', truthy: false },
@@ -62,7 +63,7 @@ export default {
 				'Nombre de caractères maximum autorisés pour un champ de type texte. A seulement un impact sur l’interface et doit être complété à un réglage au niveau de <code>FormControl</code>.',
 		},
 		width: {
-			options: [null, 20, 30, 40, 50, 60],
+			options: setStoryOptions(FORM_FIELD_WIDTH),
 			control: {
 				type: 'select',
 			},
@@ -105,6 +106,5 @@ export const Template: StoryObj<FormFieldComponent & { required: boolean }> = {
 		invalid: false,
 		counter: null,
 		rolePresentationLabel: false,
-		width: null,
 	},
 };

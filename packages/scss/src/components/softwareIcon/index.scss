@@ -28,3 +28,61 @@
 		}
 	}
 }
+
+.softwareIconWrapper {
+	@layer components {
+		@include varsWrapper;
+	}
+
+	@layer mods {
+		&.mod-XS {
+			@include wrapperXS;
+		}
+
+		&.mod-S {
+			@include wrapperS;
+		}
+
+		.softwareIcon,
+		.softwareIconWrapper-action {
+			@include insideWrapper;
+
+			&:hover,
+			&:focus {
+				@include insideWrapperHover;
+			}
+		}
+	}
+}
+
+.softwareIconWrapper_popover {
+	@layer components {
+		@include varsPopover;
+	}
+
+	@layer mods {
+		.softwareIcon,
+		.softwareIconWrapper-action {
+			@include block;
+
+			&:hover,
+			&:focus {
+				@include insideWrapperHover;
+			}
+		}
+
+		&.mod-XS {
+			&,
+			.softwareIcon {
+				@include XS;
+			}
+		}
+
+		&.mod-S {
+			&,
+			.softwareIcon {
+				@include S;
+			}
+		}
+	}
+}

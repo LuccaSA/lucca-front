@@ -1,11 +1,14 @@
 import { HttpClientModule } from '@angular/common/http';
 import { LuSafeExternalSvgPipe } from '@lucca-front/ng/safe-content';
+import { SOFTWARE_ICON, SOFTWARE_ICON_SIZE } from '@lucca-front/ng/software-icon';
 import { Meta, moduleMetadata, StoryObj } from '@storybook/angular';
+import { setStoryOptions } from 'stories/helpers/stories';
 
 interface SoftwareIconBasicStory {
 	icon: string;
 	disabled: boolean;
 	size: string;
+	iconAlt: string;
 }
 
 export default {
@@ -17,47 +20,14 @@ export default {
 	],
 	argTypes: {
 		icon: {
-			options: [
-				// Time and Activities
-				'absences',
-				'timesheet',
-				'office',
-				'projects',
-				'shifts',
-				// Talent Management
-				'performance',
-				'engagement',
-				'training',
-				'recruitment',
-				'mood',
-				// Employee Administration
-				'analytics',
-				'employee-administration',
-				'shared-documents',
-				'faces',
-				// Spend Management
-				'business-expenses',
-				'invoices',
-				'payment-methods',
-				'accounting-assistant',
-				'certified-einvoicing-platform',
-				// Compensation and Benefits
-				'compensation',
-				'payslip',
-				'benefits',
-				'payroll-assistant',
-				// Lucca
-				'administration',
-				'cloud-control',
-				'lucca',
-			],
+			options: setStoryOptions(SOFTWARE_ICON),
 			control: {
 				type: 'select',
 			},
 			description: 'Modifie l’icône produit.',
 		},
 		size: {
-			options: ['XXS', 'XS', 'S', '', 'L'],
+			options: setStoryOptions(SOFTWARE_ICON_SIZE),
 			control: {
 				type: 'select',
 			},
@@ -65,6 +35,9 @@ export default {
 		},
 		disabled: {
 			description: 'Marque le produit comme inactif.',
+		},
+		iconAlt: {
+			description: 'Texte alternatif de l’illustration restitué par les lecteurs d’écran.',
 		},
 	},
 } as Meta;
@@ -75,7 +48,11 @@ function getTemplate(args: SoftwareIconBasicStory): string {
 	const domain = 'https://cdn.lucca.fr';
 	const path = '/transverse/prisme/visuals/software-icon/';
 	const extension = '.svg';
-	return `<div class="softwareIcon${disabled}${size}" aria-hidden="true" [innerHtml]="'${domain}${path}${args.icon}${extension}' | luSafeExternalSvg"></div>`;
+	const iconAlt = args.iconAlt
+		? `
+	<span class="pr-u-mask">${args.iconAlt}</span>`
+		: ``;
+	return `<div class="softwareIcon${disabled}${size}" aria-hidden="true" [innerHtml]="'${domain}${path}${args.icon}${extension}' | luSafeExternalSvg"></div>${iconAlt}`;
 }
 
 const Template = (args: SoftwareIconBasicStory) => ({
@@ -88,6 +65,7 @@ export const Basic: StoryObj<SoftwareIconBasicStory> = {
 		icon: 'absences',
 		disabled: false,
 		size: '',
+		iconAlt: 'Absences',
 	},
 	render: Template,
 };

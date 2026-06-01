@@ -1,6 +1,6 @@
 import { LOCALE_ID } from '@angular/core';
 import { applicationConfig, Args, ArgTypes, StoryObj } from '@storybook/angular';
-import { PlayFunction, Renderer } from 'storybook/internal/types';
+
 
 export interface StoryGeneratorArgs<TComponent> {
 	name: string;
@@ -14,8 +14,9 @@ export interface StoryGeneratorArgs<TComponent> {
 
 export type StoryGenerator<TComponent> = (args: StoryGeneratorArgs<TComponent>) => StoryObj<TComponent>;
 
-export function setStoryOptions<T extends string>(list: readonly T[]): Array<T | ''> {
-	return ['', ...list];
+export function setStoryOptions<T extends string | number>(list: readonly T[]): Array<T | ''> {
+	const hasEmpty = list.includes('' as T);
+	return hasEmpty ? [...list] : ['', ...list];
 }
 
 export function generateMarkdownCodeBlock(lang: string, code: string): string {
@@ -116,7 +117,7 @@ export function generateInputs(inputs: Record<string, unknown>, argTypes: ArgTyp
 	}, '');
 }
 
-export function createTestStory<TRenderer extends Renderer, TArgs = Args>(story: StoryObj<TArgs>, test: PlayFunction<TRenderer, TArgs>): StoryObj {
+export function createTestStory<TArgs = Args>(story: StoryObj<TArgs>, test: StoryObj<TArgs>['play']): StoryObj<TArgs> {
 	// We don't handle function decorators at all
 	const storyDecorators = typeof story.decorators === 'function' ? [] : story.decorators;
 	return {
