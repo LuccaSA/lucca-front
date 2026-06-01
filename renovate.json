@@ -20,6 +20,20 @@
       "matchManagers": ["npm"],
       "matchUpdateTypes": ["major"],
       "enabled": false
+    },
+    {
+      "description": "On LTS branches, disable minor and major updates (patch only)",
+      "matchBaseBranches": ["v20-lts"],
+      "matchUpdateTypes": ["minor", "major"],
+      "enabled": false
+    },
+    {
+      "description": "Auto-merge patch updates on LTS branches",
+      "matchBaseBranches": ["v20-lts"],
+      "matchUpdateTypes": ["patch"],
+      "rangeStrategy": "bump",
+      "automerge": true,
+      "automergeSchedule": ["at any time"]
     }
   ]
 }
