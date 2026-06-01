@@ -69,9 +69,9 @@
 	}
 
 	// stylelint-disable custom-property-pattern
-	--palettes-assets-primary-lighter: var(--palettes-#{config.$product}-50);
-	--palettes-assets-primary-light: var(--palettes-#{config.$product}-100);
-	--palettes-assets-primary-dark: var(--palettes-#{config.$product}-200);
+	--palettes-assets-primary-lighter: var(--palettes-#{config.$product}-50, var(--palettes-50));
+	--palettes-assets-primary-light: var(--palettes-#{config.$product}-100, var(--palettes-100));
+	--palettes-assets-primary-dark: var(--palettes-#{config.$product}-200, var(--palettes-200));
 	--palettes-assets-brand-lighter: var(--palettes-#{map.get(map.get(config.$palettesAssets, config.$product), 'brand')}-50);
 	--palettes-assets-brand-light: var(--palettes-#{map.get(map.get(config.$palettesAssets, config.$product), 'brand')}-100);
 	--palettes-assets-brand-dark: var(--palettes-#{map.get(map.get(config.$palettesAssets, config.$product), 'brand')}-200);
