@@ -35,6 +35,7 @@ import { LuPopoverPosition } from '@lucca-front/ng/popover';
 import { startWith, timer } from 'rxjs';
 import { debounce, filter, map, tap } from 'rxjs/operators';
 import { LuTooltipPanelComponent } from '../panel';
+import { TooltipVisibilityObserver } from './tooltip-visibility.observer';
 
 let nextId = 0;
 
@@ -57,6 +58,7 @@ export class LuTooltipTriggerDirective implements OnDestroy {
 	readonly #document = inject(DOCUMENT);
 	readonly #injector = inject(Injector);
 	readonly #destroyRef = inject(DestroyRef);
+	readonly #visibilityObserver = inject(TooltipVisibilityObserver);
 
 	readonly luTooltipInput = input<string | SafeHtml>('', { alias: 'luTooltip' });
 	readonly luTooltip = linkedSignal<string | SafeHtml>(() => this.luTooltipInput());
@@ -82,10 +84,16 @@ export class LuTooltipTriggerDirective implements OnDestroy {
 
 	overlayRef?: OverlayRef;
 
-	readonly #isVisible = signal(false);
-
-	// bumped by the resize/mutation observers to ask for a re-measurement
+	// 0 until the element first appears; bumped for the initial measurement and on every real
+	// size/content change. Scrolling in and out of view does NOT bump it (see #armMeasurementObservers).
 	readonly #measureTrigger = signal(0);
+
+	// guards the one-time setup of the persistent resize/mutation observers
+	#measurementObserversArmed = false;
+
+	// the IntersectionObserver callback can fire after the view is destroyed; avoid touching
+	// the destroyed injector (NG0911) when that happens
+	#destroyed = false;
 
 	// written only from the `read` phase of the afterRenderEffect below
 	readonly #hasEllipsis = signal(false);
@@ -118,6 +126,8 @@ export class LuTooltipTriggerDirective implements OnDestroy {
 	#effectRef?: EffectRef;
 
 	constructor() {
+		this.#destroyRef.onDestroy(() => (this.#destroyed = true));
+
 		// Action debounce pipeline — kept as Observable since signals can't debounce
 		toObservable(this.#realAction)
 			.pipe(
@@ -142,39 +152,18 @@ export class LuTooltipTriggerDirective implements OnDestroy {
 			}
 		});
 
+		// Defer the first measurement until the element is near the viewport, then stop tracking
+		// visibility: scrolling must not re-measure, so we arm the resize/mutation observers once.
+		// A single shared IntersectionObserver handles every tooltip (see TooltipVisibilityObserver).
 		effect((onCleanup) => {
-			if (!this.luTooltipWhenEllipsis() || this.luTooltipDisabled()) {
-				this.#isVisible.set(false);
-				return;
-			}
-
-			const observer = new IntersectionObserver((entries) => this.#isVisible.set(entries.some((e) => e.isIntersecting)), { rootMargin: '100px' });
-			observer.observe(this.#host.nativeElement);
-
-			onCleanup(() => observer.disconnect());
-		});
-
-		effect((onCleanup) => {
-			if (!this.#isVisible() || !this.luTooltipWhenEllipsis() || this.luTooltipDisabled()) {
+			if (!this.luTooltipWhenEllipsis() || this.luTooltipDisabled() || this.#measurementObserversArmed) {
 				return;
 			}
 
 			const el = this.#host.nativeElement;
-			const bump = () => this.#measureTrigger.update((v) => v + 1);
+			this.#visibilityObserver.observeOnce(el, () => this.#armMeasurementObservers());
 
-			const resizeObserver = new ResizeObserver(() => bump());
-			resizeObserver.observe(el);
-
-			const mutationObserver = new MutationObserver(() => bump());
-			mutationObserver.observe(el, { characterData: true, subtree: true, childList: true });
-
-			// Initial check when element becomes visible — prevents regression where tooltips never appear
-			bump();
-
-			onCleanup(() => {
-				resizeObserver.disconnect();
-				mutationObserver.disconnect();
-			});
+			onCleanup(() => this.#visibilityObserver.unobserve(el));
 		});
 
 		// Ellipsis measurement, split across afterRenderEffect phases so that — across every tooltip
@@ -182,11 +171,12 @@ export class LuTooltipTriggerDirective implements OnDestroy {
 		// This keeps the whole batch to a single forced reflow instead of one reflow per element.
 		afterRenderEffect({
 			earlyRead: () => {
-				const shouldMeasure = !this.luTooltipDisabled() && this.luTooltipWhenEllipsis() && this.#isVisible();
+				// reading the trigger registers the dependency; 0 means "not measured yet"
+				const measured = this.#measureTrigger() > 0;
+				const shouldMeasure = measured && !this.luTooltipDisabled() && this.luTooltipWhenEllipsis();
 				if (!shouldMeasure) {
 					return { measure: false } as const;
 				}
-				this.#measureTrigger(); // re-measure whenever the observers bump
 				const host = this.#host.nativeElement;
 				const hostStyle = getComputedStyle(host);
 				if (hostStyle.textOverflow !== 'ellipsis') {
@@ -218,6 +208,33 @@ export class LuTooltipTriggerDirective implements OnDestroy {
 		});
 
 		this.#destroyRef.onDestroy(() => this.#clone?.remove());
+	}
+
+	// Set up — once — the observers that ask for a re-measurement on real size/content changes.
+	// They stay connected for the directive lifetime (even off-screen), so scrolling never
+	// re-measures; only an actual resize/mutation does.
+	#armMeasurementObservers(): void {
+		if (this.#measurementObserversArmed || this.#destroyed) {
+			return;
+		}
+		this.#measurementObserversArmed = true;
+
+		const el = this.#host.nativeElement;
+		const bump = () => this.#measureTrigger.update((v) => v + 1);
+
+		const resizeObserver = new ResizeObserver(() => bump());
+		resizeObserver.observe(el);
+
+		const mutationObserver = new MutationObserver(() => bump());
+		mutationObserver.observe(el, { characterData: true, subtree: true, childList: true });
+
+		this.#destroyRef.onDestroy(() => {
+			resizeObserver.disconnect();
+			mutationObserver.disconnect();
+		});
+
+		// initial measurement now that the element has appeared
+		bump();
 	}
 
 	#createClone(): HTMLDivElement {
