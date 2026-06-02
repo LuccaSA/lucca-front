@@ -332,7 +332,7 @@ export class LuTooltipTriggerDirective implements OnDestroy {
 
 		return this.#overlay
 			.position()
-			.flexibleConnectedTo(this.luTooltipAnchor())
+			.flexibleConnectedTo(this.luTooltipAnchor() ?? this.#host)
 			.withPositions([
 				{
 					originX: connectionPosition.originX,
