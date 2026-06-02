@@ -1,5 +1,5 @@
 import { NgTemplateOutlet } from '@angular/common';
-import { booleanAttribute, ChangeDetectionStrategy, Component, contentChildren, forwardRef, inject, input, model, numberAttribute, ViewEncapsulation } from '@angular/core';
+import { booleanAttribute, ChangeDetectionStrategy, Component, contentChildren, ElementRef, forwardRef, inject, input, model, numberAttribute, ViewEncapsulation } from '@angular/core';
 import { FormsModule } from '@angular/forms';
 import { FormFieldComponent } from '@lucca-front/ng/form-field';
 import { CheckboxInputComponent } from '@lucca-front/ng/forms';
@@ -37,6 +37,8 @@ export class IndexTableRowComponent {
 	bodyRef = inject(LU_INDEX_TABLE_BODY_INSTANCE, { optional: true });
 	headRef = inject(LU_INDEX_TABLE_HEAD_INSTANCE, { optional: true });
 	footRef = inject(LU_INDEX_TABLE_FOOT_INSTANCE, { optional: true });
+
+	readonly elementRef = inject<ElementRef<HTMLElement>>(ElementRef);
 
 	public readonly cells = contentChildren(LU_INDEX_TABLE_CELL_INSTANCE);
 
