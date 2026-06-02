@@ -1,8 +1,8 @@
 <div class="textField mod-multilanguage">
-	@if (noInvariant()) {
+	@if (hasNoInvariant()) {
 		<div class="textField-prefix">
 			<div class="textField-prefix-lang">
-				@if (displayRow().required) {
+				@if (formFieldRef.isInputRequired()) {
 					{{ displayRow().cultureCode }}<sup class="formLabel-required" aria-hidden="true">*</sup>
 				} @else {
 					{{ displayRow().cultureCode }}
@@ -20,7 +20,7 @@
 			(ngModelChange)="valueChange()"
 			[ngModelOptions]="{ standalone: true }"
 			(blur)="onTouched?.()"
-			(focus)="openOnFocus() ? popoverRef.openPopover(true, true, true) : null"
+			(focus)="shouldOpenOnFocus() ? popoverRef.openPopover(true, true, true) : null"
 			[disabled]="disabledInternal()"
 			[autocomplete]="autocomplete()"
 			#inputElement
@@ -42,13 +42,16 @@
 			<ng-template #popoverMultilanguage>
 				<div
 					class="popover-contentOptional multilanguage_popover-content"
-					[style.width.px]="noInvariant() ? inputElement.clientWidth : inputElement.clientWidth + 32"
+					[style.width.px]="hasNoInvariant() ? inputElement.clientWidth : inputElement.clientWidth + 32"
 				>
 					<div class="pr-u-displayFlex pr-u-gap100 pr-u-flexDirectionColumn">
+						@if (!hasNoInvariant()) {
+							<span>{{ intl().invariantInfo }}</span>
+						}
 						@for (row of panelInputs(); track row.cultureCode) {
 							<ng-template #prefixLang>
 								<div class="textField-prefix-lang">
-									@if (row.required) {
+									@if (formFieldRef.isInputRequired()) {
 										{{ row.cultureCode.slice(0, 2).toUpperCase() }}<sup class="formLabel-required" aria-hidden="true">*</sup>
 									} @else {
 										{{ row.cultureCode.slice(0, 2).toUpperCase() }}
@@ -75,7 +78,7 @@
 								<lu-text-input
 									[prefix]="{ content: prefixLang, ariaLabel: '' }"
 									[(ngModel)]="row.value"
-									[required]="row.required"
+									[required]="formFieldRef.isInputRequired()"
 									(ngModelChange)="valueChange()"
 									[ngModelOptions]="{ standalone: true }"
 									[disabled]="disabledInternal()"

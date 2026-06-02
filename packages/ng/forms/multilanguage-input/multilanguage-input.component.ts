@@ -1,5 +1,5 @@
 import { ConnectionPositionPair } from '@angular/cdk/overlay';
-import { booleanAttribute, ChangeDetectionStrategy, Component, computed, forwardRef, inject, input, LOCALE_ID, output, signal, ViewEncapsulation, WritableSignal } from '@angular/core';
+import { booleanAttribute, ChangeDetectionStrategy, Component, computed, effect, forwardRef, inject, input, LOCALE_ID, output, signal, ViewEncapsulation, WritableSignal } from '@angular/core';
 import { ControlValueAccessor, FormsModule, NG_VALUE_ACCESSOR, ReactiveFormsModule } from '@angular/forms';
 import { intlInputOptions, IntlParamsPipe } from '@lucca-front/ng/core';
 import { FORM_FIELD_INSTANCE, FormFieldComponent, InputDirective, ɵPresentationDisplayDefaultDirective } from '@lucca-front/ng/form-field';
@@ -46,9 +46,9 @@ export class MultilanguageInputComponent implements ControlValueAccessor {
 
 	intl = input(...intlInputOptions(LU_MULTILANGUAGE_INPUT_TRANSLATIONS));
 
-	#formFieldRef = inject(FORM_FIELD_INSTANCE);
+	protected formFieldRef = inject(FORM_FIELD_INSTANCE);
 
-	formFieldSize = this.#formFieldRef.size;
+	formFieldSize = this.formFieldRef.size;
 
 	protected onTouched = () => {};
 
@@ -60,11 +60,13 @@ export class MultilanguageInputComponent implements ControlValueAccessor {
 
 	autocomplete = input<AutoFill>('off');
 
-	noInvariant = input(false, { transform: booleanAttribute });
+	hasNoInvariant = input(false, { transform: booleanAttribute });
 
 	displayLocale = input('');
 
 	translateWithAI = output<string>();
+
+	shouldOpenOnFocus = computed(() => this.openOnFocus() || this.hasNoInvariant());
 
 	// Suffixed with Internal to avoid conflict with NgModel's disabled attribute
 	disabledInternal = signal(false);
@@ -72,7 +74,7 @@ export class MultilanguageInputComponent implements ControlValueAccessor {
 	model: WritableSignal<MultilanguageTranslation[]> = signal([] as MultilanguageTranslation[]);
 
 	displayRow = computed(() => {
-		if (this.noInvariant()) {
+		if (this.hasNoInvariant()) {
 			return this.model().find((row) => row.cultureCode === this.displayLocale()) || { value: '', required: false, cultureCode: this.displayLocale() };
 		} else {
 			return this.model().find((row) => row.cultureCode === INVARIANT_CULTURE_CODE) || { value: '', required: false, cultureCode: INVARIANT_CULTURE_CODE };
@@ -80,7 +82,7 @@ export class MultilanguageInputComponent implements ControlValueAccessor {
 	});
 
 	panelInputs = computed(() => {
-		return this.model().filter((row) => row.cultureCode !== INVARIANT_CULTURE_CODE);
+		return this.model().filter((row) => (this.hasNoInvariant() ? row.cultureCode !== this.displayLocale() && row.cultureCode !== INVARIANT_CULTURE_CODE : row.cultureCode !== INVARIANT_CULTURE_CODE));
 	});
 
 	presentationValue = computed(() => {
@@ -91,6 +93,17 @@ export class MultilanguageInputComponent implements ControlValueAccessor {
 		new ConnectionPositionPair({ originX: 'end', originY: 'bottom' }, { overlayX: 'end', overlayY: 'top' }, 12, 6),
 		new ConnectionPositionPair({ originX: 'end', originY: 'top' }, { overlayX: 'end', overlayY: 'bottom' }, 12, -6),
 	];
+
+	constructor() {
+		effect(() => {
+			if (this.hasNoInvariant() && !this.formFieldRef.isInputRequired()) {
+				console.warn('[Multilanguage Input] Input with no invariant should be required, make sure you make the corresponding form field (or NgModel) required.');
+			}
+			if (this.hasNoInvariant() && !this.displayLocale()) {
+				console.warn('[Multilanguage Input] Input with no invariant should have `displayLocale` input filled.');
+			}
+		});
+	}
 
 	getLocaleDisplayName(locale: string): string {
 		return this.#intlDisplay.of(locale);
