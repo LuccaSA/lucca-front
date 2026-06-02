@@ -9,15 +9,32 @@ import {
 	VerticalConnectionPos,
 } from '@angular/cdk/overlay';
 import { ComponentPortal } from '@angular/cdk/portal';
-import { booleanAttribute, computed, DestroyRef, Directive, effect, EffectRef, ElementRef, inject, Injector, input, linkedSignal, numberAttribute, OnDestroy, Renderer2, signal } from '@angular/core';
-import { takeUntilDestroyed, toObservable, toSignal } from '@angular/core/rxjs-interop';
+import { DOCUMENT } from '@angular/common';
+import {
+	afterRenderEffect,
+	booleanAttribute,
+	computed,
+	DestroyRef,
+	Directive,
+	effect,
+	EffectRef,
+	ElementRef,
+	inject,
+	Injector,
+	input,
+	linkedSignal,
+	numberAttribute,
+	OnDestroy,
+	Renderer2,
+	signal,
+} from '@angular/core';
+import { takeUntilDestroyed, toObservable } from '@angular/core/rxjs-interop';
 import { SafeHtml } from '@angular/platform-browser';
 import { isNotNil, ɵeffectWithDeps } from '@lucca-front/ng/core';
 import { LuPopoverPosition } from '@lucca-front/ng/popover';
-import { from, of, startWith, switchMap, timer } from 'rxjs';
-import { debounce, debounceTime, filter, map, tap } from 'rxjs/operators';
+import { startWith, timer } from 'rxjs';
+import { debounce, filter, map, tap } from 'rxjs/operators';
 import { LuTooltipPanelComponent } from '../panel';
-import { EllipsisRuler } from './ellipsis.ruler';
 
 let nextId = 0;
 
@@ -37,7 +54,7 @@ export class LuTooltipTriggerDirective implements OnDestroy {
 	readonly #overlay = inject(Overlay);
 	readonly #host = inject<ElementRef<HTMLElement>>(ElementRef);
 	readonly #renderer = inject(Renderer2);
-	readonly #ruler = inject(EllipsisRuler);
+	readonly #document = inject(DOCUMENT);
 	readonly #injector = inject(Injector);
 	readonly #destroyRef = inject(DestroyRef);
 
@@ -67,20 +84,14 @@ export class LuTooltipTriggerDirective implements OnDestroy {
 
 	readonly #isVisible = signal(false);
 
-	readonly #ellipsisTrigger = signal(0);
+	// bumped by the resize/mutation observers to ask for a re-measurement
+	readonly #measureTrigger = signal(0);
 
-	readonly #hasEllipsis = toSignal(
-		toObservable(this.#ellipsisTrigger).pipe(
-			debounceTime(150),
-			switchMap(() => {
-				if (!this.luTooltipWhenEllipsis() || this.luTooltipDisabled()) {
-					return of(false);
-				}
-				return from(this.#ruler.hasEllipsis(this.#host.nativeElement));
-			}),
-		),
-		{ initialValue: false },
-	);
+	// written only from the `read` phase of the afterRenderEffect below
+	readonly #hasEllipsis = signal(false);
+
+	// reusable hidden clone, one per directive, used to measure the unconstrained width
+	#clone?: HTMLDivElement;
 
 	readonly #action = signal<'open' | 'close' | null>(null);
 	readonly #realAction = linkedSignal<'open' | 'close' | null, 'open' | 'close' | null>({
@@ -149,7 +160,7 @@ export class LuTooltipTriggerDirective implements OnDestroy {
 			}
 
 			const el = this.#host.nativeElement;
-			const bump = () => this.#ellipsisTrigger.update((v) => v + 1);
+			const bump = () => this.#measureTrigger.update((v) => v + 1);
 
 			const resizeObserver = new ResizeObserver(() => bump());
 			resizeObserver.observe(el);
@@ -165,6 +176,66 @@ export class LuTooltipTriggerDirective implements OnDestroy {
 				mutationObserver.disconnect();
 			});
 		});
+
+		// Ellipsis measurement, split across afterRenderEffect phases so that — across every tooltip
+		// on the page — all DOM writes happen together, then all geometry reads happen together.
+		// This keeps the whole batch to a single forced reflow instead of one reflow per element.
+		afterRenderEffect({
+			earlyRead: () => {
+				const shouldMeasure = !this.luTooltipDisabled() && this.luTooltipWhenEllipsis() && this.#isVisible();
+				if (!shouldMeasure) {
+					return { measure: false } as const;
+				}
+				this.#measureTrigger(); // re-measure whenever the observers bump
+				const host = this.#host.nativeElement;
+				const hostStyle = getComputedStyle(host);
+				if (hostStyle.textOverflow !== 'ellipsis') {
+					return { measure: false } as const;
+				}
+				return { measure: true, host, hostStyle } as const;
+			},
+			write: (earlyReadResult) => {
+				const snapshot = earlyReadResult();
+				if (!snapshot.measure) {
+					return { measure: false } as const;
+				}
+				const clone = (this.#clone ??= this.#createClone());
+				this.#applyClonedStyles(clone, snapshot.hostStyle);
+				clone.innerHTML = snapshot.host.innerHTML;
+				return { measure: true, host: snapshot.host, clone } as const;
+			},
+			read: (writeResult) => {
+				const measurement = writeResult();
+				if (!measurement.measure) {
+					this.#hasEllipsis.set(false);
+					return;
+				}
+				const cloneWidth = measurement.clone.getBoundingClientRect().width;
+				const hostWidth = measurement.host.getBoundingClientRect().width;
+				// rounded to 3 decimals to ignore sub-pixel noise
+				this.#hasEllipsis.set(Math.round(cloneWidth * 1000) > Math.round(hostWidth * 1000));
+			},
+		});
+
+		this.#destroyRef.onDestroy(() => this.#clone?.remove());
+	}
+
+	#createClone(): HTMLDivElement {
+		const clone = this.#document.createElement('div');
+		clone.setAttribute('aria-hidden', 'true');
+		Object.assign(clone.style, {
+			inlineSize: 'fit-content',
+			whiteSpace: 'nowrap',
+			position: 'absolute',
+			visibility: 'hidden',
+		});
+		this.#document.body.appendChild(clone);
+		return clone;
+	}
+
+	#applyClonedStyles(clone: HTMLDivElement, hostStyle: CSSStyleDeclaration): void {
+		const { padding, borderWidth, borderStyle, boxSizing, fontFamily, fontWeight, fontStyle, fontSize } = hostStyle;
+		Object.assign(clone.style, { padding, borderWidth, borderStyle, boxSizing, fontFamily, fontWeight, fontStyle, fontSize });
 	}
 
 	onMouseEnter() {
