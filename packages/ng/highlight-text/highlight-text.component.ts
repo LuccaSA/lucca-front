@@ -13,7 +13,7 @@ import { DecorativePalette, Palette } from '@lucca/prisme/core';
 		'[class]': 'paletteClass()',
 	},
 })
-export class HighlightComponent {
+export class HighlightTextComponent {
 	readonly palette = input<Palette | DecorativePalette>('product');
 	readonly paletteClass = computed(() => ({ [`palette-${this.palette()}`]: !!this.palette() }));
 }

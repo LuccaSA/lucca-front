@@ -1,4 +1,4 @@
-import { HighlightComponent } from '@lucca-front/ng/highlight-text';
+import { HighlightTextComponent } from '@lucca-front/ng/highlight-text';
 import { Meta, moduleMetadata } from '@storybook/angular';
 import { PaletteAllArgType } from 'stories/helpers/common-arg-types';
 
@@ -13,7 +13,7 @@ export default {
 	},
 	decorators: [
 		moduleMetadata({
-			imports: [HighlightComponent],
+			imports: [HighlightTextComponent],
 		}),
 	],
 	render: (args: HighlightBasicStory) => {

@@ -1,5 +1,5 @@
 import { ChangeDetectionStrategy, Component } from '@angular/core';
-import { HighlightComponent } from '@lucca-front/ng/highlight-text';
+import { HighlightTextComponent } from '@lucca-front/ng/highlight-text';
 
 import { Meta, StoryObj } from '@storybook/angular';
 import { PaletteAllArgType } from 'stories/helpers/common-arg-types';
@@ -7,7 +7,7 @@ import { PaletteAllArgType } from 'stories/helpers/common-arg-types';
 @Component({
 	selector: 'highlight-stories',
 	templateUrl: './highlight-text.stories.html',
-	imports: [HighlightComponent],
+	imports: [HighlightTextComponent],
 	changeDetection: ChangeDetectionStrategy.OnPush,
 })
 class HighlightTextStory {
