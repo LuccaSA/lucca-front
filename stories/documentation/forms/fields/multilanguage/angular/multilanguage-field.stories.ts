@@ -1,8 +1,8 @@
 import { LOCALE_ID } from '@angular/core';
-import { FormControl, FormsModule, ReactiveFormsModule, Validators } from '@angular/forms';
+import { FormControl, FormsModule, ReactiveFormsModule } from '@angular/forms';
 import { BrowserAnimationsModule } from '@angular/platform-browser/animations';
-import { FORM_FIELD_SIZE, FORM_FIELD_WIDTH, FormFieldComponent } from '@lucca-front/ng/form-field';
-import { MultilanguageInputComponent, MultiLanguageInputValidators, MultilanguageTranslation } from '@lucca-front/ng/forms';
+import { FORM_FIELD_WIDTH, FormFieldComponent } from '@lucca-front/ng/form-field';
+import { MultilanguageInputComponent, MultilanguageTranslation } from '@lucca-front/ng/forms';
 import { INLINE_MESSAGE_STATE } from '@lucca-front/ng/inline-message';
 import { applicationConfig, Meta, moduleMetadata, StoryObj } from '@storybook/angular';
 import { cleanupTemplate, generateInputs, setStoryOptions } from 'stories/helpers/stories';
@@ -38,7 +38,7 @@ export default {
 			description: 'Marque le champ comme obligatoire.',
 		},
 		size: {
-			options: setStoryOptions(FORM_FIELD_SIZE),
+			options: ['S', 'M'],
 			control: {
 				type: 'select',
 			},
