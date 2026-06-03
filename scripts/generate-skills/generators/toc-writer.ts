@@ -3,19 +3,6 @@ import path from 'path';
 import { ComponentMap, DocumentationMap, VersionManifest } from '../types';
 
 /**
- * Category display normalization: merges similar ZeroHeight categories into canonical labels.
- */
-const CATEGORY_NORMALIZE: Record<string, string> = {
-	Feedback: 'Feedback',
-	Feedbacks: 'Feedback',
-	Forms: 'Formulaires',
-	Textes: 'Textes',
-	Texts: 'Textes',
-	Listes: 'Listes',
-	Listings: 'Listes',
-};
-
-/**
  * Writes the main SKILL.md — the entry point for the Copilot agent skill.
  *
  * This file is loaded automatically when the agent encounters `lu-*` or `luX` prefixed
@@ -35,20 +22,23 @@ export function writeToc(skillsDir: string, componentMap: ComponentMap): string 
 		}
 	}
 
-	// ── Build component list grouped by normalized category ─────────────────
-	const byCategory = new Map<string, string[]>();
-	for (const [slug, entry] of Object.entries(componentMap)) {
-		const rawCat = entry.category ?? 'Other';
-		const cat = CATEGORY_NORMALIZE[rawCat] ?? rawCat;
-		if (!byCategory.has(cat)) byCategory.set(cat, []);
-		byCategory.get(cat)!.push(slug);
+	// ── Build component list: flat, alphabetical, sourced from generated folders ──
+	// The directories under references/components/ are the source of truth: every listed slug
+	// is a navigable path. The previous ZeroHeight-derived category grouping was unreliable —
+	// miscategorized entries, an "Unknown" bucket, and slug/registry-key mismatches that silently
+	// dropped real components (e.g. error-page). A flat list also makes update diffs obvious.
+	const componentsDir = path.join(luccaDir, 'references', 'components');
+	let componentSlugs: string[] = [];
+	if (fs.existsSync(componentsDir)) {
+		componentSlugs = fs
+			.readdirSync(componentsDir, { withFileTypes: true })
+			.filter((d) => d.isDirectory())
+			.map((d) => d.name)
+			// keep only components that actually have at least one versioned folder
+			.filter((slug) => fs.readdirSync(path.join(componentsDir, slug)).some((f) => /^v\d/.test(f)))
+			.sort((a, b) => a.localeCompare(b));
 	}
-
-	// Compact component lines: one line per category with comma-separated slugs
-	let compactComponentLines = '';
-	for (const [category, slugs] of [...byCategory.entries()].sort((a, b) => a[0].localeCompare(b[0]))) {
-		compactComponentLines += `- **${category}** : ${slugs.sort().join(', ')}\n`;
-	}
+	const compactComponentLines = componentSlugs.map((slug) => `- ${slug}`).join('\n') + '\n';
 
 	// Build version list
 	const sortedVersions = Object.keys(manifest.versions).sort((a, b) => {
