@@ -15,6 +15,32 @@ import { FigmaDesignTokens, FigmaProperty } from '../types';
 
 const FIGMA_API_BASE = 'https://api.figma.com/v1';
 
+/**
+ * Process-wide cache of fetched node responses, keyed by `fileKey:nodeId`.
+ * Figma is unversioned, so the same node is requested once per version (15×) during a
+ * full run — the cache collapses that to a single network call and keeps link emission
+ * consistent across versions. A failed fetch is NOT cached, so a later version can retry.
+ */
+const figmaCache = new Map<string, FigmaDesignTokens | null>();
+
+const sleep = (ms: number) => new Promise<void>((resolve) => setTimeout(resolve, ms));
+
+/**
+ * Fetches a Figma URL, retrying on 429 (Too Many Requests) with backoff that honours the
+ * `Retry-After` header. Returns the final Response (caller handles non-429 errors).
+ */
+async function figmaFetch(url: string, token: string, maxRetries = 6): Promise<Response> {
+	for (let attempt = 0; ; attempt++) {
+		const response = await fetch(url, { headers: { 'X-Figma-Token': token } });
+		if (response.status !== 429 || attempt >= maxRetries) return response;
+
+		const retryAfter = Number(response.headers.get('retry-after'));
+		const backoffMs = retryAfter > 0 ? retryAfter * 1000 : Math.min(1000 * 2 ** attempt, 30000);
+		console.warn(`  ⏳ Figma 429 — retry ${attempt + 1}/${maxRetries} in ${Math.round(backoffMs / 1000)}s`);
+		await sleep(backoffMs);
+	}
+}
+
 interface FigmaNodeResponse {
 	nodes: Record<
 		string,
@@ -43,17 +69,20 @@ interface FigmaNodeResponse {
  * @param token — Figma Personal Access Token
  */
 export async function fetchFigmaDesignTokens(fileKey: string, nodeId: string, token: string): Promise<FigmaDesignTokens | null> {
+	const cacheKey = `${fileKey}:${nodeId}`;
+	if (figmaCache.has(cacheKey)) return figmaCache.get(cacheKey)!;
+
 	const url = `${FIGMA_API_BASE}/files/${fileKey}/nodes?ids=${encodeURIComponent(nodeId)}`;
 
-	const response = await fetch(url, {
-		headers: {
-			'X-Figma-Token': token,
-		},
-	});
+	const response = await figmaFetch(url, token);
 
 	if (!response.ok) {
-		if (response.status === 404) return null;
-		console.warn(`  ⚠️  Figma API error for node ${nodeId}: ${response.status} ${response.statusText}`);
+		if (response.status === 404) {
+			figmaCache.set(cacheKey, null); // definitive: node doesn't exist, don't retry
+		} else {
+			// transient (429 exhausted, 5xx…): do NOT cache, let a later version retry
+			console.warn(`  ⚠️  Figma API error for node ${nodeId}: ${response.status} ${response.statusText}`);
+		}
 		return null;
 	}
 
@@ -62,31 +91,27 @@ export async function fetchFigmaDesignTokens(fileKey: string, nodeId: string, to
 
 	if (!nodeData?.document) {
 		console.warn(`  ⚠️  Figma node ${nodeId} not found in response`);
+		figmaCache.set(cacheKey, null); // definitive: node absent from a 200 response
 		return null;
 	}
 
 	const doc = nodeData.document;
 	const propDefs = doc.componentPropertyDefinitions;
 
-	if (!propDefs) {
-		return {
-			componentName: doc.name,
-			nodeId,
-			properties: [],
-		};
-	}
-
-	const properties: FigmaProperty[] = Object.entries(propDefs).map(([name, def]) => ({
-		name: cleanPropertyName(name),
-		type: mapFigmaType(def.type),
-		variantOptions: def.variantOptions ?? undefined,
-	}));
-
-	return {
+	const result: FigmaDesignTokens = {
 		componentName: doc.name,
 		nodeId,
-		properties,
+		properties: propDefs
+			? Object.entries(propDefs).map(([name, def]) => ({
+					name: cleanPropertyName(name),
+					type: mapFigmaType(def.type),
+					variantOptions: def.variantOptions ?? undefined,
+				}))
+			: [],
 	};
+
+	figmaCache.set(cacheKey, result);
+	return result;
 }
 
 /**
