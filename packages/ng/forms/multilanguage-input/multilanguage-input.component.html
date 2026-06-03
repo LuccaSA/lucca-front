@@ -29,10 +29,7 @@
 				<lu-icon icon="signTranslation" [alt]="intl().toggleMultilanguage" />
 			</button>
 			<ng-template #popoverMultilanguage>
-				<div
-					class="popover-contentOptional multilanguage_popover-content"
-					[style.inlineSize.rem]="hasNoInvariant() ? inputElement.clientWidth / 16 + 7 : inputElement.clientWidth / 16 + 4"
-				>
+				<div class="popover-contentOptional multilanguage_popover-content" [style.inlineSize.rem]="inputElement.clientWidth / 16 + 4">
 					<div class="pr-u-displayFlex pr-u-gap100 pr-u-flexDirectionColumn">
 						@if (!hasNoInvariant()) {
 							<p class="pr-u-colorTextSubtle" [class]="formFieldSize() === 'S' ? 'pr-u-bodyXS' : 'pr-u-bodyS'">
