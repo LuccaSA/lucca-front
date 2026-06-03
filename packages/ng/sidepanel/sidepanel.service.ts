@@ -14,6 +14,6 @@ export class LuSidepanel extends LuModal {
 	 * @deprecated Use LuModal with `modal.open(component, data, { mode: 'sidepanel' })` instead.
 	 */
 	override open<T extends ILuModalContent, D>(component: ComponentType<T>, data: D | undefined = undefined, config: Partial<LuModalConfig> = {}): ILuSidepanelRef<D, LuModalContentResult<T>> {
-		return super.open(component, data, config);
+		return super.open(component, data, config) as ILuSidepanelRef<D, LuModalContentResult<T>>;
 	}
 }

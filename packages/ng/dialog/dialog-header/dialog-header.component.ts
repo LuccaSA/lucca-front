@@ -14,6 +14,12 @@ let nextId = 0;
 })
 export class DialogHeaderAction {}
 
+@Directive({
+	// eslint-disable-next-line @angular-eslint/directive-selector
+	selector: '[dialogHeaderSubtitle]',
+})
+export class DialogHeaderSubtitle {}
+
 @Component({
 	selector: 'lu-dialog-header',
 	standalone: true,
@@ -41,6 +47,8 @@ export class DialogHeaderComponent implements OnInit {
 	}
 
 	readonly optionalAction = contentChild(DialogHeaderAction);
+
+	readonly optionalSubtitle = contentChild(DialogHeaderSubtitle);
 
 	ngOnInit(): void {
 		// Using setTimeout here to make sure this will be handled in the next Cd cycle, not the current one.

@@ -9,6 +9,7 @@ import {
 	DialogFooterComponent,
 	DialogHeaderAction,
 	DialogHeaderComponent,
+	DialogHeaderSubtitle,
 	DialogOpenDirective,
 } from '@lucca-front/ng/dialog';
 import { FormFieldComponent } from '@lucca-front/ng/form-field';
@@ -42,6 +43,7 @@ export default {
 				ReactiveFormsModule,
 				IconComponent,
 				DialogHeaderAction,
+				DialogHeaderSubtitle,
 			],
 		}),
 	],
@@ -58,7 +60,9 @@ export default {
 <ng-template #dialogTpl>
 	<lu-dialog #dialog${fancyIllustrationParam}>
 		<lu-dialog-header>
-			<h1>Template driven header</h1> You can also add more content in header
+			<h1>Template driven header</h1>
+			<p dialogHeaderSubtitle>Subtitle</p>
+			<p dialogHeaderContent>You can also add more content in header</p>
 		</lu-dialog-header>
 
 		<lu-dialog-content>Template-driven content</lu-dialog-content>

@@ -202,11 +202,11 @@ export class Calendar2Component implements OnInit {
 					long: this.#intlMonthsLong.format(month),
 					...this.dateToCellInfo(month),
 					isCurrent: isSameMonth(new Date(), month),
-				} as CalendarMonthInfo;
+				};
 			})
 			.reduce<CalendarMonthInfo[][]>((all, one, i) => {
 				const ch = Math.floor(i / 3);
-				all[ch] = [...(all[ch] || []), one];
+				all[ch] = [...(all[ch] || []), one as CalendarMonthInfo];
 				return all;
 			}, []);
 	});

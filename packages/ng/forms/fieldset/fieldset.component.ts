@@ -2,6 +2,7 @@ import { NgTemplateOutlet } from '@angular/common';
 import { booleanAttribute, ChangeDetectionStrategy, Component, input, model, ViewEncapsulation } from '@angular/core';
 import { PortalContent, PortalDirective } from '@lucca-front/ng/core';
 import { IconComponent } from '@lucca-front/ng/icon';
+import { ButtonComponent } from '@lucca/prisme/button';
 
 let nextId = 0;
 
@@ -10,7 +11,7 @@ let nextId = 0;
 	templateUrl: './fieldset.component.html',
 	styleUrl: './fieldset.component.scss',
 	encapsulation: ViewEncapsulation.None,
-	imports: [PortalDirective, NgTemplateOutlet, IconComponent],
+	imports: [PortalDirective, NgTemplateOutlet, IconComponent, ButtonComponent],
 	changeDetection: ChangeDetectionStrategy.OnPush,
 })
 export class FieldsetComponent {

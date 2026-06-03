@@ -69,7 +69,7 @@ function groupStoriesByComponent(entries: any[], baseUrl: string): Map<string, S
 					id,
 					title,
 					url: `${baseUrl}/?path=/docs/${id}`,
-				} as StorybookDocsEntry;
+				};
 			}
 		} else if (type === 'story') {
 			group.stories.push({
@@ -80,7 +80,7 @@ function groupStoriesByComponent(entries: any[], baseUrl: string): Map<string, S
 				importPath,
 				componentPath,
 				framework: importPath?.includes('/angular/') ? 'angular' : 'html-css',
-			} as StorybookStory);
+			});
 		}
 	}
 

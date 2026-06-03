@@ -1,6 +1,10 @@
-<div class="form-field skeleton is-loading" [class.mod-dark]="dark()" inert="inert">
+<div class="form-field skeleton is-loading" [class.mod-dark]="dark()" [class]="size() ? 'mod-' + size() : null" inert="inert">
 	@if (!hiddenLabel()) {
-		<span class="skeleton-item" [style.--components-skeleton-text-width]="getRandomPercent()"></span>
+		<span
+			class="skeleton-item"
+			[class]="size() ? 'pr-u-body' + size() : null"
+			[style.--components-skeleton-text-width]="getRandomPercent()"
+		></span>
 	}
 	<div class="textField">
 		<div class="textField-input">
@@ -8,6 +12,7 @@
 				@for (line of lines(); track $index) {
 					<span
 						class="skeleton-item"
+						[class]="size() ? 'pr-u-body' + size() : null"
 						[style.--components-skeleton-text-width]="$last ? getRandomPercent() : getRandomPercent(98, 100)"
 					></span>
 				}

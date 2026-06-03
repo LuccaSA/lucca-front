@@ -91,7 +91,9 @@
 }
 
 @mixin withAction {
-	--components-dialog-insideHeaderAreas: 'container action close';
+	--components-dialog-insideHeaderAreas:
+		'container action close'
+		'content content content';
 	--components-dialog-insideHeaderColumns: 1fr auto auto;
 }
 

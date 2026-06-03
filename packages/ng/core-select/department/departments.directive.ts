@@ -5,7 +5,7 @@ import { isNotNil } from '@lucca-front/ng/core';
 import { CORE_SELECT_API_TOTAL_COUNT_PROVIDER, CoreSelectApiTotalCountProvider, TreeNode } from '@lucca-front/ng/core-select';
 import { ALuCoreSelectApiDirective } from '@lucca-front/ng/core-select/api';
 import { ILuDepartment } from '@lucca-front/ng/department';
-import { combineLatest, map, Observable } from 'rxjs';
+import { combineLatest, map, Observable, of } from 'rxjs';
 import { filter } from 'rxjs/operators';
 import { NoopTreeSelectDirective } from './noop-tree-select.directive';
 
@@ -42,6 +42,14 @@ export class LuCoreSelectDepartmentsDirective<T extends ILuDepartment = ILuDepar
 				return this.trim(data, clue);
 			}),
 		);
+	}
+
+	protected override getOptionsPage(params: Record<string, string | number | boolean> | null, page: number): Observable<{ items: TreeNode<T>[]; isLastPage: boolean }> {
+		if (page > 0) {
+			return of({ items: [], isLastPage: true });
+		}
+
+		return super.getOptionsPage(params, page).pipe(map((result) => ({ ...result, isLastPage: true })));
 	}
 
 	protected override getOptions(params: Record<string, string | number | boolean> | null): Observable<TreeNode<T>[]> {

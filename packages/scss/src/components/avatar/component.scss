@@ -74,11 +74,9 @@
 
 		.avatarWrapper-item-action-more {
 			box-shadow: 0 0 0 var(--components-avatar-border) var(--components-avatar-background);
-			border-radius: var(--pr-t-border-radius-full);
 			display: flex;
 			align-items: center;
 			justify-content: center;
-			background-color: var(--palettes-neutral-200);
 			inline-size: var(--components-avatar-size);
 			block-size: var(--components-avatar-size);
 			font-size: var(--components-avatarWrapper-fontSize);

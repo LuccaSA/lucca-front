@@ -45,13 +45,13 @@ export default {
 			control: {
 				type: 'text',
 			},
-			description: 'Titre du fieldset.',
+			description: 'Titre du fieldset. [PortalContent]',
 		},
 		helper: {
 			control: {
 				type: 'text',
 			},
-			description: 'Ajoute un sous-titre au fieldset.',
+			description: 'Ajoute un sous-titre au fieldset. [PortalContent]',
 		},
 		presentation: {
 			description: '[v21.1] Transforme le champ de formulaire en donnée textuelle non éditable.',

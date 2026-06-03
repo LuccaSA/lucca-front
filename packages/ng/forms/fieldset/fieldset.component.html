@@ -15,7 +15,7 @@
 				(click)="expanded.set(!expanded())"
 			>
 				<ng-container *ngTemplateOutlet="titleContent" />
-				<lu-icon icon="arrowChevronBottom" />
+				<span luButton="ghost" size="S"><lu-icon icon="arrowChevronBottom" /></span>
 			</button>
 		} @else if (action()) {
 			<span class="fieldset-title-content">

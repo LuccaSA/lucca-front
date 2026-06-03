@@ -127,10 +127,28 @@ export class DialogRoutingContainerComponent<C> implements OnDestroy, OnInit {
 			content: this.dialogTemplate(),
 			data,
 			canClose: this.#getCanCloseFn(dialogConfig),
+			canDismiss: this.#getCanDismissFn(),
 		});
 
 		this.#ref.result$.pipe(takeUntilDestroyed(this.#destroyRef)).subscribe((result) => this.#onDialogClosed(result));
 		this.#ref.dismissed$.pipe(takeUntilDestroyed(this.#destroyRef)).subscribe(() => this.#onDialogDismissed());
+	}
+
+	#getCanDismissFn(): (() => Observable<boolean>) | undefined {
+		if (!this.config.canDeactivate?.length) {
+			return undefined;
+		}
+
+		return () => {
+			// If already in a navigation-triggered destroy, allow dismiss without guards
+			if (this.#closeTrigger) {
+				return of(true);
+			}
+
+			const results$ = this.config.canDeactivate!.map((cD) => this.callCanDeactivateFn(cD));
+
+			return concat(...results$).pipe(map((guardResult) => (typeof guardResult === 'boolean' ? guardResult : true)));
+		};
 	}
 
 	#getCanCloseFn(config: DialogRouteDialogConfig<C>): ((c: C) => Observable<boolean>) | boolean {
