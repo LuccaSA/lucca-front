@@ -29,6 +29,7 @@
 	@include core.rosetta('--palettes-brand', '--palettes-brandContrasted', config.$palettesShades);
 	@include core.rosetta('--palettes-success', '--palettes-successContrasted', config.$palettesShades);
 	@include core.rosetta('--palettes-warning', '--palettes-warningContrasted', config.$palettesShades);
+	@include core.rosetta('--palettes-pineapple', '--palettes-pineappleContrasted', config.$palettesShades);
 }
 
 @mixin borderGradient($angle: 0, $color1: var(--palettes-neutral-0) , $color2:  var(--palettes-neutral-900), $radius: var(--pr-t-border-radius-default), $width: var(--commons-divider-width)) {
