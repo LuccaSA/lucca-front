@@ -14,7 +14,7 @@ export class LuModal {
 	protected _config = inject(LU_MODAL_CONFIG);
 	protected luDialogService = inject(LuDialogService);
 
-	open<T extends ILuModalContent, D>(component: ComponentType<T>, data: D | undefined = undefined, config: Partial<LuModalConfig> = {}): ILuModalRef<D, LuModalContentResult<T>> {
+	open<T extends ILuModalContent, D>(component: ComponentType<T>, data: D, config: Partial<LuModalConfig> = {}): ILuModalRef<D, LuModalContentResult<T>> {
 		const extendedConfig = { ...this._config, ...config } as LuModalConfig;
 		const mode = extendedConfig.mode === 'sidepanel' ? 'drawer' : 'default';
 		const dialogRef = this.luDialogService.open({
@@ -32,10 +32,10 @@ export class LuModal {
 		return new DialogRefAdapter<D, T>(dialogRef);
 	}
 
-	legacyOpen<T extends ILuModalContent, D>(component: ComponentType<T>, data: D | undefined = undefined, config: Partial<LuModalConfig> = {}): ILuModalRef<D, LuModalContentResult<T>> {
+	legacyOpen<T extends ILuModalContent, D>(component: ComponentType<T>, data: D, config: Partial<LuModalConfig> = {}): ILuModalRef<D, LuModalContentResult<T>> {
 		const extendedConfig = { ...this._config, ...config } as LuModalConfig;
 		const ref = this._factory.forge<T, LuModalConfig, D>(component, extendedConfig);
-		ref.open(data as D);
+		ref.open(data);
 		return ref;
 	}
 }

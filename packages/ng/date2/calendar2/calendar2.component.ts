@@ -206,7 +206,7 @@ export class Calendar2Component implements OnInit {
 			})
 			.reduce<CalendarMonthInfo[][]>((all, one, i) => {
 				const ch = Math.floor(i / 3);
-				all[ch] = [...(all[ch] || []), one];
+				all[ch] = [...(all[ch] || []), one as CalendarMonthInfo];
 				return all;
 			}, []);
 	});

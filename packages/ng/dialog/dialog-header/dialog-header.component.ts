@@ -48,7 +48,7 @@ export class DialogHeaderComponent implements OnInit {
 
 	readonly optionalAction = contentChild(DialogHeaderAction);
 
-	optionalSubtitle = contentChild(DialogHeaderSubtitle);
+	readonly optionalSubtitle = contentChild(DialogHeaderSubtitle);
 
 	ngOnInit(): void {
 		// Using setTimeout here to make sure this will be handled in the next Cd cycle, not the current one.

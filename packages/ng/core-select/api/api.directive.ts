@@ -6,7 +6,7 @@ export const LU_SELECT_MAGIC_PAGE_SIZE = 20;
 export const MAGIC_DEBOUNCE_DURATION = 250;
 
 @Directive()
-export abstract class ALuCoreSelectApiDirective<TOption, TParams = Record<string, string | number | boolean>> implements OnDestroy, OnInit {
+export abstract class ALuCoreSelectApiDirective<TOption, TParams = Record<string, string | number | boolean> | null> implements OnDestroy, OnInit {
 	protected readonly destroy$ = new Subject<void>();
 	protected pageSize = LU_SELECT_MAGIC_PAGE_SIZE;
 	protected debounceDuration = MAGIC_DEBOUNCE_DURATION;
