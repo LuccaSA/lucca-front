@@ -52,7 +52,10 @@ export function renderComponentMd(data: ComponentData): string {
 		version: data.version,
 		hasExamples: data.storyExamples && data.storyExamples.length > 0,
 		hasDesign: data.zeroheight !== null,
-		hasFigma: data.entry.figmaNodeIds && data.entry.figmaNodeIds.length > 0,
+		// Only emit the Figma link when the .figma.md was actually generated (i.e. tokens were
+		// fetched). Keying on figmaNodeIds alone produced dead links whenever FIGMA_TOKEN was absent
+		// at generation time — index.ts:531 writes the file only when figmaTokens is truthy.
+		hasFigma: data.figma != null,
 		expandedTypeDefs: collectExpandedTypeDefs(data),
 	};
 
@@ -372,6 +375,12 @@ export function cleanZeroHeightMarkdown(md: string): string {
 
 	// Remove <shortcut_tiles> blocks
 	result = result.replace(/<shortcut_tiles>[\s\S]*?<\/shortcut_tiles>/g, '');
+
+	// Remove <design> embed blocks — empty Figma preview frames carrying only a figma-url
+	// attribute and no text. Figma links belong in the component's .figma.md, not here.
+	result = result.replace(/<design\b[^>]*>[\s\S]*?<\/design>/g, '');
+	// Also drop any stray self-closing or unmatched <design> tags.
+	result = result.replace(/<\/?design\b[^>]*>/g, '');
 
 	// Remove "Contenus associés" sections (heading + everything until next ## or end)
 	result = result.replace(/^##\s+Contenus\s+associés[\s\S]*?(?=\n##\s|$)/gm, '');
