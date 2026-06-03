@@ -28,6 +28,7 @@ import { extractPackageAPI } from './collectors/ast-extractor';
 import { fetchFigmaDesignTokens } from './collectors/figma-connect';
 import { fetchStorybookIndex } from './collectors/storybook';
 import { readStorySourceFromGit, extractBasicUsage, inferScssImports, formatStoryTemplates } from './collectors/story-source';
+import { buildInputDefaults } from './collectors/story-eval';
 import { fetchZeroHeightPage } from './collectors/zeroheight-fetch';
 import { loadConfig } from './config';
 import {
@@ -384,8 +385,11 @@ async function processVersion(
 			// 3. Storybook match
 			const sbGroup = storybookMap.get(entry.storybookSlug) ?? null;
 
-			// 4. Story source code + input descriptions
-			const storyResult = readStorySourceFromGit(sbGroup, version);
+			// 4. Story source code + input descriptions.
+			// Component input defaults feed the story renderer's generateInputs, so default-valued
+			// args are correctly omitted from rendered templates (matching Storybook output).
+			const componentDefaults = buildInputDefaults(api?.apis.flatMap((a) => a.inputs) ?? []);
+			const storyResult = readStorySourceFromGit(sbGroup, version, componentDefaults);
 			const storyExamples = storyResult?.examples ?? null;
 
 			// Merge argType descriptions into API inputs
@@ -400,7 +404,7 @@ async function processVersion(
 			}
 
 			// 4b. Basic usage template (from "basic" story)
-			const basicUsage = extractBasicUsage(sbGroup, version);
+			const basicUsage = extractBasicUsage(sbGroup, version, componentDefaults);
 
 			// 4c. Enrich stories with ZH notes (imports + prose from <tab> blocks)
 			if (zeroheight && storyExamples && sbGroup) {

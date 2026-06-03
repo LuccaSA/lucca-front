@@ -9,6 +9,7 @@
 import { execFileSync, execSync } from 'child_process';
 import path from 'path';
 import { StorybookGroup, StoryExample, StoryCollectionResult, VersionConfig } from '../types';
+import { renderStoryTemplates, renderBasicStoryTemplate } from './story-eval';
 
 const WORKSPACE_ROOT = path.join(__dirname, '..', '..', '..');
 
@@ -21,7 +22,12 @@ const WORKSPACE_ROOT = path.join(__dirname, '..', '..', '..');
  * @param extraGroups — Additional storybook groups to include
  * @returns Structured result with examples and descriptions, or null
  */
-export function readStorySourceFromGit(storybook: StorybookGroup | null, version: VersionConfig, extraGroups?: StorybookGroup[]): StoryCollectionResult | null {
+export function readStorySourceFromGit(
+	storybook: StorybookGroup | null,
+	version: VersionConfig,
+	componentDefaults: Map<string, string> = new Map(),
+	extraGroups?: StorybookGroup[],
+): StoryCollectionResult | null {
 	const allGroups = [storybook, ...(extraGroups ?? [])].filter(Boolean) as StorybookGroup[];
 	if (allGroups.length === 0) return null;
 
@@ -54,8 +60,17 @@ export function readStorySourceFromGit(storybook: StorybookGroup | null, version
 				}
 			}
 
+			// Resolve interpolations by evaluating the story's render() at default args.
+			// Static extraction can only leave an opaque `${…}` placeholder; only fall back to it
+			// when evaluation yields nothing usable, so we never emit worse code than before.
+			let templates = extracted.templates;
+			if (templates.some((t) => t.includes('${'))) {
+				const rendered = renderStoryTemplates(content, componentDefaults);
+				if (rendered && rendered.length > 0) templates = rendered;
+			}
+
 			// Skip stories with no templates (nothing useful to show)
-			if (extracted.templates.length === 0 && extracted.imports.length === 0) continue;
+			if (templates.length === 0 && extracted.imports.length === 0) continue;
 
 			// Derive a file slug from the import path
 			const fileSlug = deriveFileSlug(story.importPath, story.framework);
@@ -67,7 +82,7 @@ export function readStorySourceFromGit(storybook: StorybookGroup | null, version
 				framework: story.framework,
 				importPath: story.importPath,
 				imports: extracted.imports,
-				templates: extracted.templates,
+				templates,
 			});
 		} catch {
 			// File doesn't exist in this tag — skip
@@ -320,7 +335,11 @@ function skipInterpolation(content: string, startPos: number): number {
  * template literal, then strips Storybook interpolations (`${…}`) to produce
  * a clean, working HTML snippet.
  */
-export function extractBasicUsage(storybook: StorybookGroup | null, version: VersionConfig): string | null {
+export function extractBasicUsage(
+	storybook: StorybookGroup | null,
+	version: VersionConfig,
+	componentDefaults: Map<string, string> = new Map(),
+): string | null {
 	if (!storybook) return null;
 
 	// Find the "basic" angular story
@@ -336,10 +355,16 @@ export function extractBasicUsage(storybook: StorybookGroup | null, version: Ver
 		const content = gitShowFile(version.tag, normalizedImport);
 		if (!content) return null;
 
+		// Prefer the evaluated render — it produces a real, fully-resolved snippet.
+		const rendered = renderBasicStoryTemplate(content, componentDefaults);
+		if (rendered) {
+			const cleaned = cleanBasicTemplate(rendered);
+			if (cleaned) return cleaned;
+		}
+
+		// Fallback: static extraction + placeholder stripping.
 		const templates = extractTemplateLiterals(content);
 		if (templates.length === 0) return null;
-
-		// Take the first template and clean it
 		return cleanBasicTemplate(templates[0]);
 	} catch {
 		return null;
