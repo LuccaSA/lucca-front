@@ -9,7 +9,7 @@ import { FormLabelComponent } from '@lucca-front/ng/form-label';
 ## Basic Usage
 
 ```html
-<label luFormLabel for >Label</label>
+<label luFormLabel for="inputID">Label</label>
 ```
 
 ## API Reference

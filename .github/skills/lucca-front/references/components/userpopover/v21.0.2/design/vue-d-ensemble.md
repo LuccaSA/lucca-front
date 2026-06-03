@@ -6,18 +6,6 @@ Laisser un commentaire sur Figma ou contactez-nous sur Slack :*#design-system-pu
 
 ## **Anatomie**
 
-<notes>
-
-1. Avatar
-2. Identité cliquable
-3. Intitulé de poste
-4. Département
-5. Lieu de travail / Présence ou absence cliquable
-
-</notes>
-
----
-
 ## **Options et permissions**
 
 ### **Avatar**
@@ -64,8 +52,6 @@ S’il s’agit d’un collaborateur ayant quitté l’entreprise, alors le ment
 
 Cette ligne d’information n’est pas cliquable.
 
----
-
 ## **Comportement**
 
 ### **Affichage**
@@ -79,8 +65,6 @@ Un article sur [NNGroup](https://www.nngroup.com/articles/timing-exposing-conten
 La largeur du composant est fixé à 360px. Celle-ci reste toujours la même, peu importe le contenu, qu’il soit plus petit ou plus grand.
 
 Lorsque le nom du collaborateur ou du site est long, il se trouve tronqué. L’information complète est visible via un Tooltip au survol.
-
----
 
 ## **Exemples d'utilisation**
 

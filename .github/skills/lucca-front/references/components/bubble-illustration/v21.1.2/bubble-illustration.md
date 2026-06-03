@@ -6,6 +6,12 @@
 import { BubbleIllustrationComponent } from '@lucca-front/ng/bubble-illustration';
 ```
 
+## Basic Usage
+
+```html
+<lu-bubble-illustration illustration="anniversary" />
+```
+
 ## API Reference
 
 ### BubbleIllustrationComponent (component)

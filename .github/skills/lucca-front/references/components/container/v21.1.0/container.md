@@ -6,6 +6,17 @@
 import { ContainerComponent } from '@lucca-front/ng/container';
 ```
 
+## Basic Usage
+
+```html
+<lu-container> <div class="fakeContent">container</div>
+</lu-container>
+<lu-container> <div class="fakeContent">container</div>
+</lu-container>
+<lu-container> <div class="fakeContent">container</div>
+</lu-container>
+```
+
 ## API Reference
 
 ### ContainerComponent (component)

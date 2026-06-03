@@ -6,17 +6,6 @@
 
 ## Anatomie
 
-<notes>
-
-1. **Label :** Le label doit indiquer quel type d’information est filtrée.
-2. **Valeur :** La valeur s’affiche juste après le Label.
-3. **Bouton Effacer (Clear) :** Le bouton efface les valeurs contenues dans la Filter Pill.
-4. **Menu déroulant (Dropdown) : **Le menu contient la liste de toutes les valeurs sélectionnables. Son contenu varie en fonction du type de filtre.
-
-</notes>
-
----
-
 ## Options
 
 ### Sélection simple et multiple
@@ -49,10 +38,6 @@ Il n’y a pas de champ de recherche dans le Popover.
 
 De la même manière, il est possible d’utiliser une Filter pill pour regrouper les données. Le label doit indiquer une valeur comme “Grouper par”.
 
----
-
 ## Cas d'usage
 
 Les Filter pills ne peuvent être utilisé en dehors du composant Filter bar. Ce composant permet de filtrer le contenu d’une interface pour en affiner les résultats.
-
----

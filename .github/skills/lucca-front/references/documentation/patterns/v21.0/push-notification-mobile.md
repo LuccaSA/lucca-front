@@ -4,27 +4,7 @@
 
 ## Anatomie
 
-**Anatomie**
-
-**Anatomie**
-
-<notes>
-
-* **Icône :** elle est automatiquement appelée, c’est la même icône que l’application concernée.
-* **Titre 1/2 :** nous incluons “Lucca” uniquement ici, pas dans le reste du texte. Sur Android : “Lucca” est mis automatiquement.
-* **Titre 2/2 : **il contient l’information indispensable, qui peut être une action à effectuer.
-* **Description :** elle offre les informations complémentaires et utiles pour l'utilisateur.   Sur Android, il y a la version Collapsed Body et l'Expanded Body.
-* **Indication temporelle : **indique à quel moment la notification a été envoyée.
-
-</notes>
-
----
-
 ## Comportement 
-
-**Expanded comportement**
-
-**Expanded comportement**
 
 ### Appui sur la notification
 
@@ -56,10 +36,6 @@ Pourquoi ? Pour éviter la troncature du texte sur les petits appareils. Les v
 * Nous n’utilisons jamais de point d’exclamation, de point d’interrogation ni d’emojis.
 * L'utilisateur n'a pas besoin de lire la Body pour comprendre le contenu du Title. 
 * Nous évitons les phrase du type “Afficher les informations sur l’application” ou “Ouvrir l’application pour...”.
-
-**Section 3**
-
-**Section 3**
 
 | ✅ | ❌ |
 | --- | --- |

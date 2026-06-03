@@ -9,7 +9,7 @@ import { SoftwareIconComponent } from '@lucca-front/ng/software-icon';
 ## Basic Usage
 
 ```html
-<lu-software-icon />
+<lu-software-icon icon="absences" iconAlt="Absences" />
 ```
 
 ## API Reference

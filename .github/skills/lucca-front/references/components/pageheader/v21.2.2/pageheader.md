@@ -9,8 +9,7 @@ import { PageHeaderComponent } from '@lucca-front/ng/page-header';
 ## Basic Usage
 
 ```html
-<lu-page-header>
-</lu-page-header>
+<lu-page-header label="H1. Page title" description="Lorem ipsum dolor sit amet, consectetur adipiscing elit. Sed ac justo scelerisque, blandit nibh quis, imperdiet justo. Nullam condimentum nulla et neque ultricies bibendum." />
 ```
 
 ## API Reference

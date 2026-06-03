@@ -22,49 +22,25 @@ Exemples : « Sélectionnez », « Consultez ».
 
 Le composant permet de déclencher une action.
 
-**Button Do Don't - Picture**
-
-**Button Do Don't - Picture**
-
 ### Callout : impératif
 
 Le composant permet de déclencher une action.
-
-**Callout - Do Don't - Picture**
-
-**Callout - Do Don't - Picture**
 
 ### Checkbox : infinitif
 
 Le composant permet de déclencher une action.
 
-**Checkbox - Do Don't - Picture**
-
-**Checkbox - Do Don't - Picture**
-
 ### Description : impératif
 
 Lucca s’adresse de manière directe à l’utilisateur, pour le guider.
-
-**Description - Do Don't - Picture**
-
-**Description - Do Don't - Picture**
 
 ### Empty State : impératif
 
 Le composant permet de déclencher une action.
 
-**Empty - Do Don't - Picture**
-
-**Empty - Do Don't - Picture**
-
 ### Link : infinitif
 
 Le composant permet de déclencher une action.
-
-**Link - Do Don't - Picture**
-
-**Link - Do Don't - Picture**
 
 ### Placeholder : infinitif
 
@@ -74,33 +50,13 @@ L'impératif utilisé de manière répétée dans ce composant peut être perçu
 
 Choisissons donc l'infinitif, pour éviter un ton “donneur d’ordre”.
 
-**Plaholder - Do Don't - Picture**
-
-**Plaholder - Do Don't - Picture**
-
 ### Titre : infinitif ou impératif
 
 On utilise l'impératif seulement si l’utilisateur doit effectuer une action pour continuer le parcours ou si on lui pose une question (titre de Callout par exemple).
 
-**Title - Do Don't - Picture**
-
-**Title - Do Don't - Picture**
-
-**Title page - Do Don't - Picture**
-
-**Title page - Do Don't - Picture**
-
 ### Toggle, icône : infinitif
 
 Le composant permet de déclencher une action.
-
-**Toggle - Do Don't - Picture**
-
-**Toggle - Do Don't - Picture**
-
-**Buttons Tooltip Do Don't - Picture**
-
-**Buttons Tooltip Do Don't - Picture**
 
 *Luccasien·ne, avez-vous des questions, des remarques, un témoignage ?* 
 

@@ -12,9 +12,7 @@ import { LuTooltipTriggerDirective } from '@lucca-front/ng/tooltip';
 ```
 
 ```html
-<lu-resource-card-wrapper${…}${…}${…}>${…}${…}</lu-resource-card-wrapper>
-```
-
-```html
-${…}
+<lu-resource-card>
+	<a href="#" luResourceCardAction luTooltip luTooltipOnlyForDisplay luTooltipWhenEllipsis>Lorem ipsum dolor</a>
+</lu-resource-card>
 ```

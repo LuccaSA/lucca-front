@@ -11,8 +11,8 @@ import { generateInputs } from '../../../../../helpers/stories';
 ```
 
 ```html
-<lu-form-field ${…}>
-	<lu-color-input [(ngModel)]="example" [colors]="colors" ${…} />
+<lu-form-field label="Label" tooltip="Tooltip message" inlineMessage="Helper text" inlineMessageState="default">
+	<lu-color-input [(ngModel)]="example" [colors]="colors" clearable />
 </lu-form-field>
 <pr-story-model-display>{{ example | json }}</pr-story-model-display>
 ```

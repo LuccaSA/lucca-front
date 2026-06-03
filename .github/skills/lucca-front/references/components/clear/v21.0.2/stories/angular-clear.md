@@ -5,5 +5,5 @@ import { ClearComponent } from '@lucca-front/ng/clear';
 ```
 
 ```html
-<lu-clear${…}${…}${…}${…}>${…}</lu-clear>
+<lu-clear>Clear</lu-clear>
 ```

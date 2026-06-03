@@ -6,5 +6,5 @@ import { MobilePushComponent } from '@lucca-front/ng/mobile-push';
 ```
 
 ```html
-<lu-mobile-push ${…}>Posez une absence depuis n’importe où avec l’application Lucca.</lu-mobile-push>
+<lu-mobile-push>Posez une absence depuis n’importe où avec l’application Lucca.</lu-mobile-push>
 ```

@@ -6,8 +6,8 @@
 
 ```html
 <div
-	class="bubbleIllustration${…}${…}${…}"
+	class="bubbleIllustration"
 	aria-hidden="true"
-	[innerHtml]="'${…}${…}${…}${…}' | luSafeExternalSvg"
+	[innerHtml]="'https://cdn.lucca.fr/transverse/prisme/visuals/bubble-illustration/anniversary.svg' | luSafeExternalSvg"
 ></div>
 ```

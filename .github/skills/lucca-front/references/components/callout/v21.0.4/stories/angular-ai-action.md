@@ -7,8 +7,12 @@ import { IconComponent } from '@lucca-front/ng/icon';
 ```
 
 ```html
-<lu-callout AI iconAlt="${…}" ${…}>
-	<p>${…}</p>
+<lu-callout AI iconAlt="Assistant IA" icon="weatherStars">
+	<p>
+		<strong>Achat détecté :</strong>
+		la facture correspond à l’
+		<a href="#">achat nº 832</a>
+	</p>
 	<lu-callout-actions>
 		<button luButton="outlined">Associer</button>
 		<button luButton="outlined">Refuser</button>

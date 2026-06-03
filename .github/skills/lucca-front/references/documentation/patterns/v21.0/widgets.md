@@ -4,16 +4,6 @@
 
 ## Anatomie
 
-<notes>
-
-1. **Entête :** l'entête du widget indique son nom ainsi que les options possibles (navigation, filtres, etc.).
-2. **Message d'aide :**  Actions et options disponibles
-3. **Contenu :** le contenu est spécifique au widget. Il peut contenir des actions ou des liens en plus des informations mises en avant.
-
-</notes>
-
----
-
 ## Options
 
 ### Filtres
@@ -56,14 +46,6 @@ Suite au clique la consultation se fait dans le même onglet.
 Les widgets sont conçus pour être utilisés uniquement sur la page d'accueil et non à l'intérieur des solutions. L'affichage des widgets sur la page d'accueil peut se faire en colonne ou en grille.
 
 L’espacement entre ces widgets est de 16px horizontalement et verticalement.
-
-**Positionnement en colonne**
-
-**Positionnement en colonne**
-
-**Positionnement en grille**
-
-**Positionnement en grille**
 
 # Content
 

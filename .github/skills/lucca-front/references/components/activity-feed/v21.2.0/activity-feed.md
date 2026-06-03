@@ -9,7 +9,7 @@ import { ActivityFeedStepComponent, ActivityFeedUpdateComponent } from '@lucca-f
 ## Basic Usage
 
 ```html
-<lu-activity-feed> <lu-activity-feed-step [user]="user" [date]="date" label="Lorem ipsum dolor." />
+<lu-activity-feed> <lu-activity-feed-step [user]="user" [date]="date" label="Lorem ipsum dolor." /> <lu-activity-feed-step [user]="user" [date]="date" label="Lorem ipsum dolor." />
 </lu-activity-feed>
 ```
 

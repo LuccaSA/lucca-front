@@ -5,14 +5,16 @@
 ```
 
 ```html
-<lu-form-field label="Date input example" inlineMessage="Inline message example" ${…}>
+<lu-form-field label="Date input example" inlineMessage="Inline message example">
 	<lu-date-input
 		[(ngModel)]="selected"
 		[min]="min"
 		[max]="max"
 		[focusedDate]="focusedDate"
 		autocomplete="off"
-		${…}
+		clearBehavior="clear"
+		mode="day"
+		format="date"
 	/>
 </lu-form-field>
 

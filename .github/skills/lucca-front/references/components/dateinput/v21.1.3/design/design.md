@@ -2,17 +2,6 @@
 
 ## Anatomie
 
-<notes>
-
-1. **Label :** Le label du champ doit indiquer quel type d'information le champ requiert.
-2. **Champ de saisie :** Le champ dans lequel les utilisateurs cliquent pour saisir les dates. La saisie peut se faire directement en saisissant les dates au clavier ou via le calendrier qui s’affiche.
-3. **Calendrier :** La calendrier s’affiche et permet à l’utilisateur de sélectionner une date.
-4. **Tout effacer :** La croix efface tout dans le champ de saisie. Il n'apparaît que lorsqu’une le champ est optionnel et qu’une valeur est renseignée.
-
-</notes>
-
----
-
 ## Options
 
 ### Affichage des jours chômés
@@ -41,15 +30,11 @@ De la même manière que la sélection en mois, il peut être utile de sélectio
 
 Une option permet d’afficher un bouton sous forme de lien permettant à l’utilisateur de sélectionner la date du jour. Ce bouton reste visible même si l’utilisateur navigue de mois en mois dans le calendrier.
 
----
-
 ## Comportement
 
 ### Sélection d’une date loin dans le passé
 
 Il est parfois demandé de sélectionner des dates lointaines dans le passé, par exemple pour une date de naissance. dans ce cas, il est possible d’ouvrir le calendrier en affichage décennie. De cette manière, il est plus simple pour l’utilisateur de saisir une date lointaine.
-
----
 
 ## Règles d'utilisation
 

@@ -28,8 +28,6 @@ Un champ en présentation affiche la donnée sous forme de texte dur, c’est-à
 
 Ce mode s'active via la propriété `presentation` à placer sur Form field (champ unique) ou Form (formulaire dans son intégralité). Le composant Data Presentation permet d'exploiter directement cette mise en forme sans passer par des champs de formulaire (exemple : Mode mixte).
 
----
-
 ## Modes d'affichage des formulaires
 
 ### Mode édition

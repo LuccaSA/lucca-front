@@ -6,11 +6,5 @@ import { FormLabelComponent } from '@lucca-front/ng/form-label';
 ```
 
 ```html
-<label
-	luFormLabel
-	for="${…}"
-	${…}${…}${…}${…}${…}${…}${…}${…}${…}
->
-	Label
-</label>
+<label luFormLabel for="inputID">Label</label>
 ```

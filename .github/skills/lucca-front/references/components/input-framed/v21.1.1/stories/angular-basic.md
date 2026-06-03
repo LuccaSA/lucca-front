@@ -9,31 +9,12 @@ import { IconComponent } from '@lucca-front/ng/icon';
 ```
 
 ```html
-<lu-form-field label="Label" layout="fieldset" ${…}>
-	<div class="inputFramedWrapper">
-		<lu-grid columns="2">${…}</lu-grid>
-	</div>
-</lu-form-field>
-```
-
-```html
-<lu-form-field label="Label" layout="fieldset" ${…}>
-	<div class="inputFramedWrapper">${…}</div>
-</lu-form-field>
-```
-
-```html
-<lu-form-field label="Label" errorInlineMessage="Error inline message" ${…}>
-	<lu-radio-group-input [(ngModel)]="example" framed required${…}${…}>
-		<lu-grid columns="2">${…}</lu-grid>
-	</lu-radio-group-input>
-</lu-form-field>
-```
-
-```html
-<lu-form-field label="Label" errorInlineMessage="Error inline message" ${…}>
-	<lu-radio-group-input [(ngModel)]="example" framed required${…}${…}>
-		${…}
+<lu-form-field label="Label" errorInlineMessage="Error inline message">
+	<lu-radio-group-input [(ngModel)]="example" framed required>
+		<lu-radio value="A">Option A</lu-radio>
+		<lu-radio value="B">Option B</lu-radio>
+		<lu-radio value="C" disabled>Option C</lu-radio>
+		<lu-radio value="D">Option D</lu-radio>
 	</lu-radio-group-input>
 </lu-form-field>
 ```

@@ -6,10 +6,6 @@
 
 Dans de nombreux cas, le feedback peut être intégré directement dans l'interface par l'apparition ou la disparition d'objets suite à une création, suppression ou un traitement spécifique sur l’objet. Cela permet une expérience plus fluide et évite la surcharge d'informations.
 
-<design figma-url="https://www.figma.com/design/4vzJER8uY9Mh5wntlaLylH/?node-id=3900:5197">
-
-</design>
-
 ## Button
 
 **Quand l'utiliser :**
@@ -25,10 +21,6 @@ Dans de nombreux cas, le feedback peut être intégré directement dans l'interf
 
 Pour en savoir plus, vous pouvez consulter la guideline sur le composant Button.
 
-<design figma-url="https://www.figma.com/design/4vzJER8uY9Mh5wntlaLylH/?node-id=3787:9848">
-
-</design>
-
 ## Inline message
 
 **Quand l'utiliser :**
@@ -42,10 +34,6 @@ Pour en savoir plus, vous pouvez consulter la guideline sur le composant Button.
 * Gardez le message concis et clair, en fournissant des indications précises sur la façon de corriger une erreur
 
 Pour en savoir plus, vous pouvez consulter la guideline sur le composant Inline message.
-
-<design figma-url="https://www.figma.com/design/4vzJER8uY9Mh5wntlaLylH/?node-id=3787:9855">
-
-</design>
 
 ## Dialog
 
@@ -62,10 +50,6 @@ Pour en savoir plus, vous pouvez consulter la guideline sur le composant Inline 
 
 Pour en savoir plus, vous pouvez consulter la guideline sur le composant Dialog. Si vous voulez en savoir plus sur les comportements attendus lorsqu’un objet est supprimé, vous pouvez consulter la guideline à ce sujet.
 
-<design figma-url="https://www.figma.com/design/4vzJER8uY9Mh5wntlaLylH/?node-id=3787:9859">
-
-</design>
-
 ## Callout
 
 **Quand l'utiliser :**
@@ -80,10 +64,6 @@ Pour en savoir plus, vous pouvez consulter la guideline sur le composant Dialog.
 * Utilisez des couleurs et des icônes pour attirer l'attention sans perturber l'utilisateur.
 
 Pour en savoir plus, vous pouvez consulter la guideline sur le composant Callout.
-
-<design figma-url="https://www.figma.com/design/4vzJER8uY9Mh5wntlaLylH/?node-id=3787:9861">
-
-</design>
 
 ## Empty state
 
@@ -103,10 +83,6 @@ Pour en savoir plus, vous pouvez consulter la guideline sur le composant Callout
 
 Pour en savoir plus, vous pouvez consulter la guideline sur le composant Empty state.
 
-<design figma-url="https://www.figma.com/design/4vzJER8uY9Mh5wntlaLylH/?node-id=3787:10872">
-
-</design>
-
 ## Toast
 
 **Quand l'utiliser :**
@@ -122,7 +98,3 @@ Pour en savoir plus, vous pouvez consulter la guideline sur le composant Empty s
 * Le Toast doit disparaître automatiquement après quelques secondes, mais permettre une fermeture manuelle est souhaitable. Dans le cas d’une erreur, il est préférable de ne pas le faire disparaître automatiquement
 
 Pour en savoir plus, vous pouvez consulter la guideline sur le composant Toast.
-
-<design figma-url="https://www.figma.com/design/4vzJER8uY9Mh5wntlaLylH/?node-id=3787:9872">
-
-</design>

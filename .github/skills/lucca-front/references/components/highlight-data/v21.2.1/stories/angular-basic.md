@@ -8,5 +8,5 @@ import { LinkComponent } from '@lucca-front/ng/link';
 ```
 
 ```html
-<lu-highlight-data ${…}>${…}</lu-highlight-data>
+<lu-highlight-data heading="Title" value="Content" bubble="1" illustration="piggy-bank"></lu-highlight-data>
 ```

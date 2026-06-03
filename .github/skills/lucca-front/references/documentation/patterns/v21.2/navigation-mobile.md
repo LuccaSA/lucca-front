@@ -8,22 +8,6 @@ La page principale est le premier niveau de navigation dans l’application. Il 
 
 ## Anatomie
 
-<design figma-url="https://www.figma.com/design/4vzJER8uY9Mh5wntlaLylH/?node-id=4183:55061">
-
-**Anatomie - Page principale**
-
-**Anatomie - Page principale**
-
-<notes>
-
-1. Barre de navigation
-2. Contenu
-3. Menu
-
-</notes>
-
-</design>
-
 ## Comportement
 
 ### Navigation entre des pages principales
@@ -52,23 +36,6 @@ La page secondaire est le second niveau de navigation dans l’application. Elle
 
 ## Anatomie
 
-<design figma-url="https://www.figma.com/design/4vzJER8uY9Mh5wntlaLylH/?node-id=4183:55195">
-
-**Anatomie - Page secondaire**
-
-**Anatomie - Page secondaire**
-
-<notes>
-
-1. Barre de navigation
-2. Contenu
-3. Menu
-4. Bouton "Retour"
-
-</notes>
-
-</design>
-
 ## Comportement
 
 ### Retour à la page précédente
@@ -79,23 +46,7 @@ L’utilisateur peut revenir à la page précédente au swipe sur le bord gauche
 
 Les objets en lecture seule sont affichés dans une page secondaire.
 
-<design figma-url="https://www.figma.com/design/4vzJER8uY9Mh5wntlaLylH/?node-id=4183:54515">
-
-**Exemples - Page secondaire - 1**
-
-**Exemples - Page secondaire - 1**
-
-</design>
-
 La page secondaire permet d’afficher tous les éléments d’une liste lorsqu’une pagination est mise en place.
-
-<design figma-url="https://www.figma.com/design/4vzJER8uY9Mh5wntlaLylH/?node-id=4183:55034">
-
-**Exemples - Page secondaire - 2**
-
-**Exemples - Page secondaire - 2**
-
-</design>
 
 ## Règles d'utilisation
 
@@ -115,22 +66,6 @@ La Fullscreen cover apparaît au dessus d’une page et occupe toute la hauteur 
 
 ## Anatomie
 
-<design figma-url="https://www.figma.com/design/4vzJER8uY9Mh5wntlaLylH/?node-id=4183:55251">
-
-**Anatomie - Fullscreen Cover**
-
-**Anatomie - Fullscreen Cover**
-
-<notes>
-
-1. Barre de navigation
-2. Bouton "Annuler"
-3. Contenu
-
-</notes>
-
-</design>
-
 ## Comportement
 
 ### Retour à la page précédente
@@ -147,33 +82,9 @@ Des messages standards de confirmation sont disponibles dans la section Contenu.
 
 Un formulaire complexe comme la déclaration d’un frais kilométrique doit être affiché dans une vue en plein écran pour éviter de perdre des modifications au retour à la page précédente.
 
-<design figma-url="https://www.figma.com/design/4vzJER8uY9Mh5wntlaLylH/?node-id=4183:55029">
-
-**Exemples - Fullscreen Cover - 2**
-
-**Exemples - Fullscreen Cover - 2**
-
-</design>
-
 L’affichage d’un bulletin de paie se fait en plein écran pour que l’utilisateur puisse zoomer ou se déplacer dans l’image.
 
-<design figma-url="https://www.figma.com/design/4vzJER8uY9Mh5wntlaLylH/?node-id=4183:54603">
-
-**Exemples - Fullscreen Cover - 1**
-
-**Exemples - Fullscreen Cover - 1**
-
-</design>
-
 La Fullscreen cover permet aussi de bloquer l’utilisateur sur une page spécifique, par exemple lors d’une erreur globale sur l’application. Dans ce cas, la barre de navigation n’est pas affichée.
-
-<design figma-url="https://www.figma.com/design/4vzJER8uY9Mh5wntlaLylH/?node-id=4183:55032">
-
-**Exemples - Fullscreen Cover - 3**
-
-**Exemples - Fullscreen Cover - 3**
-
-</design>
 
 Ce format doit être utilisé avec parcimonie pour éviter de bloquer totalement l’utilisateur. Une porte de sortie doit toujours être proposée sur ce type d’écran.
 
@@ -187,22 +98,6 @@ Ce composant n’est pas disponible sur Android. Pour des cas d’usage similair
 
 ## Anatomie
 
-<design figma-url="https://www.figma.com/design/4vzJER8uY9Mh5wntlaLylH/?node-id=4183:55305">
-
-**Anatomie - Fullscreen Sheet**
-
-**Anatomie - Fullscreen Sheet**
-
-<notes>
-
-1. Barre de navigation
-2. Bouton "Annuler"
-3. Contenu
-
-</notes>
-
-</design>
-
 ## Comportement
 
 ### Fermeture de la page
@@ -215,45 +110,13 @@ Il est possible de bloquer le swipe pour éviter que l’utilisateur quitte la p
 
 Il est possible de naviguer au sein d’une même Fullscreen sheet. Dans ce cas, le titre de la barre de navigation peut changer et le bouton "Annuler" est remplacé par un bouton "Retour" indiquant qu'il est possible de revenir à l'étape précédente.
 
-<design figma-url="https://www.figma.com/design/4vzJER8uY9Mh5wntlaLylH/?node-id=4183:55186">
-
-**Comportement - Fullscreen Sheet - 3**
-
-**Comportement - Fullscreen Sheet - 3**
-
-</design>
-
 ## Exemples d'usage
 
 La sélection d’une option parmi une liste longue est idéale dans une Fullscreen sheet. La barre de navigation peut y accueillir des filtres ou une barre de recherche.
 
-<design figma-url="https://www.figma.com/design/4vzJER8uY9Mh5wntlaLylH/?node-id=4183:54615">
-
-**Exemples - Fullscreen Sheet - 1**
-
-**Exemples - Fullscreen Sheet - 1**
-
-</design>
-
 Les formulaires courts peuvent être affichés dans une Fullscreen sheet, tant que leur contenu ne dépasse pas la hauteur de l’écran.
 
-<design figma-url="https://www.figma.com/design/4vzJER8uY9Mh5wntlaLylH/?node-id=4183:54606">
-
-**Exemples - Fullscreen Sheet - 2**
-
-**Exemples - Fullscreen Sheet - 2**
-
-</design>
-
 Certains parcours peuvent être découpés en plusieurs étapes d’une même Fullscreen sheet.
-
-<design figma-url="https://www.figma.com/design/4vzJER8uY9Mh5wntlaLylH/?node-id=4183:54698">
-
-**Exemples - Fullscreen Sheet - 3**
-
-**Exemples - Fullscreen Sheet - 3**
-
-</design>
 
 ## Règles d'utilisation
 
@@ -268,22 +131,6 @@ Certains parcours peuvent être découpés en plusieurs étapes d’une même Fu
 La Bottom sheet est affichée au dessus d’une page, mais ne masque pas le contenu derrière. Elle permet d’afficher de brèves informations supplémentaires
 
 ## Anatomie
-
-<design figma-url="https://www.figma.com/design/4vzJER8uY9Mh5wntlaLylH/?node-id=4183:55091">
-
-**Anatomie - Bottom Sheet**
-
-**Anatomie - Bottom Sheet**
-
-<notes>
-
-1. Barre de navigation (facultatif)
-2. Contenu
-3. Grabber (facultatif sur iOS)
-
-</notes>
-
-</design>
 
 ## Comportement
 
@@ -305,33 +152,9 @@ Cette option est recommandée lorsque la Bottom sheet comporte un contenu long o
 
 La Bottom sheet est principalement utilisée pour afficher des informations complémentaires sur un objet ou un utilisateur.
 
-<design figma-url="https://www.figma.com/design/4vzJER8uY9Mh5wntlaLylH/?node-id=4183:54617">
-
-**Exemples - Bottom Sheet - 1**
-
-**Exemples - Bottom Sheet - 1**
-
-</design>
-
 Les informations textuelles simples comme des instructions sont affichées dans une Bottom sheet.
 
-<design figma-url="https://www.figma.com/design/4vzJER8uY9Mh5wntlaLylH/?node-id=4183:54664">
-
-**Exemples - Bottom Sheet - 2**
-
-**Exemples - Bottom Sheet - 2**
-
-</design>
-
 La Bottom sheet peut aussi être utilisée pour informer l’utilisateur lors de la confirmation d’une action importante.
-
-<design figma-url="https://www.figma.com/design/4vzJER8uY9Mh5wntlaLylH/?node-id=4183:54680">
-
-**Exemples - Bottom Sheet - 3**
-
-**Exemples - Bottom Sheet - 3**
-
-</design>
 
 ## Règles d'utilisation
 

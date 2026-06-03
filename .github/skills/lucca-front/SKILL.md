@@ -79,20 +79,110 @@ Bouton en v21.2.1 → API : `./references/components/button/v21.2.1/button.md`, 
 
 ## 6. Composants
 
-- **Actions** : button, link
-- **Feedback** : callout, callout-disclosure, callout-popover, empty-state, errorpage, mobile-push, plg-push
-- **File** : fileentry, fileupload
-- **Formulaires** : calendar, checkbox, color-picker, data-presentation, date, dateinput, daterangeinput, duration-picker, fieldset, filterbar, filterpills, form-field, form-label, inlinemessage, input-framed, multi-select, multilanguagefield, phonenumberfield, radiofield, richtextinput, select, simple-select, switchfield, textareafield, textfield, time-picker, treeselect
-- **Listes** : activity-feed, card, chip, data-table, index-table, listing, sortable-list, timelines
-- **Loaders** : gauge, loading, progress-bar, skeleton
-- **Navigation** : breadcrumbs, horizontalnavigation, mobilenavigation, pagination, segmentedcontrol, sidepanel, skiplinks, tableofcontent, verticalnavigation
-- **Overlays** : dialog, dropdown, modal, popover, popover2, toasts, tooltip
-- **Progress stepper** : progress-stepper
-- **Structure** : app-layout, box, bubble-icon, bubble-illustration, container, divider, fancybox, footer, highlight-data, main-layout, mobileheader, pageheader, resource-card, scrollbox, software-icon
-- **Textes** : clear, code, comment, icons, newbadge, numericbadge, readmore, statusbadge, tags, text-flow
-- **Toolbox** : animations, numbers
-- **Unknown** : fancy-dialog, grid, listbox, onboarding-empty-state, section-empty-state, title-and-text
-- **Users** : avatar, tile, userpopover
+- activity-feed
+- animations
+- app-layout
+- avatar
+- box
+- breadcrumbs
+- bubble-icon
+- bubble-illustration
+- button
+- calendar
+- callout
+- callout-disclosure
+- callout-popover
+- card
+- checkbox
+- chip
+- clear
+- code
+- color-picker
+- colorpicker
+- comment
+- container
+- data-presentation
+- data-table
+- date
+- dateinput
+- daterangeinput
+- dialog
+- divider
+- dropdown
+- duration-picker
+- empty-state
+- errorpage
+- fancy-dialog
+- fancybox
+- fieldset
+- fileentry
+- fileupload
+- filterbar
+- filterpills
+- footer
+- form-field
+- form-label
+- gauge
+- grid
+- highlight-data
+- horizontalnavigation
+- icons
+- index-table
+- inlinemessage
+- input-framed
+- link
+- listbox
+- listing
+- loading
+- main-layout
+- mobile-push
+- mobileheader
+- mobilenavigation
+- modal
+- multi-select
+- multilanguagefield
+- newbadge
+- numbers
+- numericbadge
+- onboarding-empty-state
+- pageheader
+- pagination
+- phonenumberfield
+- plg-push
+- popover
+- popover2
+- progress-bar
+- progress-stepper
+- radiofield
+- readmore
+- resource-card
+- richtextinput
+- scrollbox
+- section-empty-state
+- segmentedcontrol
+- select
+- sidepanel
+- simple-select
+- skeleton
+- skiplinks
+- software-icon
+- sortable-list
+- statusbadge
+- switchfield
+- tableofcontent
+- tags
+- text-flow
+- textareafield
+- textfield
+- tile
+- time-picker
+- timelines
+- title-and-text
+- toasts
+- tooltip
+- treeselect
+- userpopover
+- verticalnavigation
 
 ## 7. Documentation transverse
 

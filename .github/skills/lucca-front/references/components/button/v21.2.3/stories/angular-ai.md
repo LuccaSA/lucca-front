@@ -7,7 +7,7 @@ import { IconComponent } from '@lucca-front/ng/icon';
 
 ```html
 <button type="button" luButton="AI">
-	<lu-icon icon="${…}" alt="${…}" />
-	${…}
+	<lu-icon icon="officePenStar" alt="Assistant IA" />
+	Reformuler
 </button>
 ```

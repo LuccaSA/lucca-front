@@ -6,16 +6,6 @@ Laisser un commentaire sur Figma ou contactez-nous sur Slack :*#design-system-pu
 
 ## Anatomie
 
-<notes>
-
-1. **Icône :** l’icône de fusée est utilisée comme marqueur des publicités.
-2. **Message :** il doit expliciter le bénéfice concret apporté par la solution.
-3. **Lien de redirection **: il redirige vers le fiche du Store Lucca.
-
-</notes>
-
----
-
 ## Options
 
 ### Publicité effaçable
@@ -28,8 +18,6 @@ Dans certains cas, il doit être possible pour l’utilisateur de supprimer la c
     * 1re fermeture : réapparition après 14 jours.
     * 2e fermeture : réapparition après 60 jours.
 * **La complétion :** si l'utilisateur clique sur le lien, le PLG Push ne doit plus jamais apparaître pour cette fonctionnalité spécifique.
-
----
 
 ## Règles d'utilisation
 

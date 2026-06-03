@@ -6,7 +6,7 @@ import { CommentBlockComponent, CommentChatComponent, CommentComponent } from '@
 
 ```html
 <lu-comment-chat>
-	<lu-comment-block ${…} ${…} authorName="${…} ${…}">
+	<lu-comment-block [avatar]="avatarTpl" authorName="Marie Bragoulet">
 		<ng-template #avatarTpl>
 			<lu-user-picture [user]="{ firstName: 'Marie', lastName: 'Bragoulet' }" />
 		</ng-template>
@@ -15,9 +15,17 @@ import { CommentBlockComponent, CommentChatComponent, CommentComponent } from '@
 			content="Lorem ipsum dolor sit amet, consectetur adipisicing elit. Temporibus a veniam necessitatibus aut facilis repellendus provident nulla iste neque ex?"
 		/>
 		<lu-comment [date]="date" content="Lorem ipsum dolor sit amet." />
-		<lu-comment [date]="date" content="${…}" />
+		<lu-comment
+			[date]="date"
+			content="<h3>Lorem, ipsum.</h3>
+	<p>
+		Lorem ipsum, dolor sit amet consectetur adipisicing elit. <strong>Facilis voluptates ex</strong> qui iste libero suscipit cum
+		earum harum animi praesentium, quidem non incidunt vel illum sunt nihil reprehenderit a itaque.
+	</p>
+	<p>Lorem ipsum dolor sit amet consectetur adipisicing elit. Cumque numquam itaque at facilis iusto inventore.</p>"
+		/>
 	</lu-comment-block>
-	<lu-comment-block [chatAnswer]="true" ${…} ${…} authorName="Chloé Alibert">
+	<lu-comment-block [chatAnswer]="true" [avatar]="avatarTpl2" authorName="Chloé Alibert">
 		<ng-template #avatarTpl2>
 			<lu-user-picture [user]="{ firstName: 'Chloé', lastName: 'Alibert' }" />
 		</ng-template>

@@ -6,17 +6,6 @@
 
 ## Anatomie
 
-<notes>
-
-1. **Label :** Le label du champ doit indiquer quel type d'information le champ requiert.
-2. **Champ de saisie :** Le champ dans lequel les utilisateurs cliquent pour saisir les dates. La saisie peut se faire directement en saisissant les dates au clavier ou via le calendrier qui s’affiche.
-3. **Calendrier :** La calendrier s’affiche et permet à l’utilisateur de sélectionner une date de début et de fin. Il s’affiche sur en deux partie, facilitant ainsi la saisie.
-4. **Tout effacer :** La croix efface tout dans le champ de saisie. Il n'apparaît que lorsqu’une le champ est optionnel et qu’une valeur est renseignée.
-
-</notes>
-
----
-
 ## Options
 
 ### Affichage des jours chômés
@@ -44,8 +33,6 @@ De la même manière que la période en mois, il peut être utile de sélectionn
 ### Périodes pré-définies
 
 L’ajout de périodes prédéfinies dans le Date range picker simplifie l’expérience utilisateur en proposant des sélections rapides pour des périodes fréquemment utilisées. Ces dernières s’affichent sur la gauche du calendrier.
-
----
 
 ## Règles d'utilisation
 

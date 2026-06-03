@@ -1,9 +1,5 @@
 # button — Design
 
-<design figma-url="https://www.figma.com/design/ud1QBuvu6PMBaMRljCZVYV/?node-id=5891:23625">
-
-</design>
-
 ## Usage
 
 ### Hiérarchie
@@ -16,10 +12,6 @@ Les boutons emploient la couleur et le contraste pour établir quatre niveaux d'
 * `Ghost`.
 
 Cette hiérarchie met en évidence l'action la plus importante dans un contexte donné, permettant à l'utilisateur d'agir rapidement.
-
-<design figma-url="https://www.figma.com/design/ud1QBuvu6PMBaMRljCZVYV/?node-id=5777:26406">
-
-</design>
 
 #### Primary
 
@@ -59,15 +51,7 @@ Une variante spécifique du bouton doit être utilisée pour toute action aux co
 
 Ce bouton critique est identifiable par sa couleur `Critical` et peut nécessiter une friction supplémentaire dans l'interface.
 
-<design figma-url="https://www.figma.com/design/ud1QBuvu6PMBaMRljCZVYV/?node-id=5777:26363">
-
-</design>
-
 Dans certains contexte, il est préférable de mettre en retrait l’action de suppression. Pour cela il existe un `mod-critical` permettant de n’avoir l’aspect critique seulement au survol du composant. Ce mode est utilisable sur les boutons`Outlined`et `Ghost`en palette`Neutral`.
-
-<design figma-url="https://www.figma.com/design/ud1QBuvu6PMBaMRljCZVYV/?node-id=5777:26335">
-
-</design>
 
 - **Do** : Utilisons le bouton Outlined en palette Critical pour les boutons de suppression et les boutons de confirmation de suppression.
 - **Don't** : Nous évitons le bouton Filled en couleur Critical pour les actions de suppression.
@@ -87,10 +71,6 @@ Elles ne doivent pas utiliser ni la palette `Critical`, ni le `mod-critical`. Ce
 
 Le composant Button group permet d'afficher plusieurs boutons sous forme de groupe.
 
-<design figma-url="https://www.figma.com/design/ud1QBuvu6PMBaMRljCZVYV/?node-id=6518:53853">
-
-</design>
-
 ## Comportement
 
 ### États
@@ -102,27 +82,15 @@ Le bouton réagit à différents états d’interaction.
 * Pour faciliter la navigation au clavier et l’accessibilité, au `:focus-visible` le bouton reprend le style commun à tous les composants.
 * À l’état `:active`, son apparence s’assombrit ou s’enfonce légèrement.
 
-<design figma-url="https://www.figma.com/design/ud1QBuvu6PMBaMRljCZVYV/?node-id=5777:26302">
-
-</design>
-
 #### Chargement
 
 Lorsqu’une action est en cours de traitement, le bouton peut afficher un indicateur de chargement à la place du label ou de l’icône. La largeur du bouton ne change pas à l’état de chargement.
 
 Cette animation empêche l’utilisateur de cliquer plusieurs fois et informe que l’action est en cours.
 
-<design figma-url="https://www.figma.com/design/ud1QBuvu6PMBaMRljCZVYV/?node-id=5777:26279">
-
-</design>
-
 #### Succès
 
 Un bouton déclenche une action qui aboutit ou échoue. Le feedback de succès est affiché directement dans le composant. En revanche, le feedback d’erreur est affiché à travers d’autres composants (Toast, Callout, Inline message), et non directement sur le bouton lui-même.
-
-<design figma-url="https://www.figma.com/design/ud1QBuvu6PMBaMRljCZVYV/?node-id=5777:26260">
-
-</design>
 
 - **Do** : Utilisons l’état succès du bouton pour indiquer à l’utilisateur la réussite de l’action réalisée.
 - **Don't** : Nous évitons l'aplat en couleur Success pour indiquer l'état de succès : c'est visuellement très lourd et ça ne fonctionne pas dans tous les cas (exemple : avec un bouton de confirmation critique).
@@ -178,15 +146,7 @@ Le bouton principal est placé à gauche du groupe, suivi de l’action secondai
 
 L’action de fermeture est toujours placée à l'extrême droite du Footer, en style `Ghost`.
 
-<design figma-url="https://www.figma.com/design/ud1QBuvu6PMBaMRljCZVYV/?node-id=7097:373238">
-
-</design>
-
 En l’absence d’action métier forte, il se peut que le ou le bouton d’action principal porte le style `Outlined`en couleur `Product`.
-
-<design figma-url="https://www.figma.com/design/ud1QBuvu6PMBaMRljCZVYV/?node-id=7097:373502">
-
-</design>
 
 #### La zone de rupture (alignement à gauche)
 
@@ -194,27 +154,15 @@ Cette zone accueille les actions qui sortent l'utilisateur du parcours de saisie
 
 Dans un parcours en étapes, le bouton pour revenir à l’étape précédente se trouve dans cette zone. Cela respecte la métaphore spatiale de lecture (gauche pour le passé, droite pour le futur).
 
-<design figma-url="https://www.figma.com/design/ud1QBuvu6PMBaMRljCZVYV/?node-id=7097:377656">
-
-</design>
-
 L’actions de destruction doit être systématiquement isolée à l'extrême gauche. Cette rupture d'alignement sert de garde-fou visuel et physique (Fitts's Law) pour prévenir toute perte de donnée accidentelle.
 
 Ce bouton doit être en `Outlined` et utiliser la palette `Critical`. L’intitulé du bouton doit être “Supprimer” accompagné de l’icône `trash-delete`.
-
-<design figma-url="https://www.figma.com/design/ud1QBuvu6PMBaMRljCZVYV/?node-id=7097:377883">
-
-</design>
 
 #### Gestion de l’encombrement
 
 Lorsque le nombre d'actions risque de nuire à la lisibilité ou de manquer d'espace, il est recommandé de ne garder visibles que les actions prioritaires et l'action de fermeture.
 
 Les actions secondaires sont regroupées dans un menu contextuel.
-
-<design figma-url="https://www.figma.com/design/ud1QBuvu6PMBaMRljCZVYV/?node-id=7113:378745">
-
-</design>
 
 ### Position
 
@@ -226,29 +174,17 @@ Ce positionnement est utilisé pour les actions **ayant un impact sur le contenu
 
 *Ce positionnement suit le pattern de lecture en Z et permet de rendre visibles les boutons juste après le titre de l’interface.*
 
-<design figma-url="https://www.figma.com/design/ud1QBuvu6PMBaMRljCZVYV/?node-id=6806:14142">
-
-</design>
-
 #### En bas de page
 
 Nous plaçons les boutons en bas, dans un Footer, lorsqu’il s’agit **d’actions “finales”**, c’est-à-dire liées à un contenu que l’utilisateur vient de consulter, remplir ou sélectionner. Plus d’informations à ce sujet sur la page du composant Footer.
 
 *Ce positionnement suit le pattern de lecture en Z et s’inscrit dans une logique de complétion de tâche.*
 
-<design figma-url="https://www.figma.com/design/ud1QBuvu6PMBaMRljCZVYV/?node-id=6806:103025">
-
-</design>
-
 #### En bas de liste
 
 Lorsqu'une liste d'objet est affichée et qu'il est possible d'ajouter des objets à cette liste, nous plaçons un bouton d'ajout directement sous la liste, positionné à gauche.
 
 Dans ce cas, il faut utiliser un bouton `Outlined` en couleur `Product`.
-
-<design figma-url="https://www.figma.com/design/ud1QBuvu6PMBaMRljCZVYV/?node-id=6822:121411">
-
-</design>
 
 ### Utilisation des icônes
 

@@ -6,22 +6,6 @@
 
 ## Anatomie
 
-**Anatomie**
-
-**Anatomie**
-
-<notes>
-
-1. Conteneur 
-
-2. Label 
-
-3. Ligne de liaison
-
-</notes>
-
----
-
 ## Nombre d'étapes
 
 Le choix du nombre d'étapes est crucial pour maintenir l'engagement de l'utilisateur sans le décourager.
@@ -31,8 +15,6 @@ Le Stepper doit comporter au minimum 2 étapes et au maximum 6 étapes.
 Au-delà de 6 étapes la charge cognitive devient trop élevée pour l'utilisateur. Il est impératif de simplifier le processus ou de le découper en sous-tâches plus petites au sein des étapes existantes.
 
 Pour en savoir plus, consulter la guideline sur les parcours de création de ressource.
-
----
 
 ## États
 
@@ -53,8 +35,6 @@ C’est l'étape où se trouve l'utilisateur. Il peut y avoir qu’une seule ét
 ### Étapes futures
 
 Ce sont les étapes non encore atteintes, elles peuvent parfois être déjà validés car elle ne nécessite pas d’action de l’utilisateur.
-
----
 
 ## Comportement
 

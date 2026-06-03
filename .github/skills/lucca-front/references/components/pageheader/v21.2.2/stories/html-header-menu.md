@@ -7,7 +7,7 @@
 ```
 
 ```html
-<header class="pageHeader mod-withHorizontalNavigation ${…}">
+<header class="pageHeader mod-withHorizontalNavigation">
 	<div class="pageHeader-content">
 		<div class="pageHeader-content-title">
 			<h1 class="pr-u-margin0">H1. Page title</h1>

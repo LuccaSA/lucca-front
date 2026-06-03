@@ -5,5 +5,5 @@ import { NumericBadgeComponent } from '@lucca-front/ng/numeric-badge';
 ```
 
 ```html
-<lu-numeric-badge ${…} [value]="${…}" />
+<lu-numeric-badge maxValue="999" [value]="7" />
 ```

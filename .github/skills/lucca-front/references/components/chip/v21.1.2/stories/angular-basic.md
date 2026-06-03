@@ -5,5 +5,5 @@ import { ChipComponent } from '@lucca-front/ng/chip';
 ```
 
 ```html
-<lu-chip${…}${…}${…}${…}${…}${…}>Label</lu-chip>
+<lu-chip>Label</lu-chip>
 ```

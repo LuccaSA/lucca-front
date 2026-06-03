@@ -1,9 +1,5 @@
 # fileupload — Design
 
-<design figma-url="https://www.figma.com/design/ud1QBuvu6PMBaMRljCZVYV/?node-id=5601:161452">
-
-</design>
-
 **Mots-clés :**upload, téléchargement, fichier, pièce jointe
 
 **Des questions, commentaires ou retours ?**Laisser un commentaire sur Figma ou contactez-nous sur Slack :*#design-system-public*
@@ -15,34 +11,15 @@ Le composant est disponible en deux tailles :
 * La **taille S**, la plus courante, doit être utilisée dans la majorité des formulaires. Elle permet de sélectionner un fichier ou plusieurs en les présentant directement sous le champ. Cette taille ne doit pas être utilisée pour afficher un aperçu du document sélectionné.
 * La **taille M**, moins utilisée, principalement en début de parcours lorsque l'import d'un document lance un processus d'analyse. Cette taille peut aussi être utilisée dans les formulaire, s'il est intéressant de visualiser un aperçu du fichier sélectionné (une image ou un pdf).
 
-<design figma-url="https://www.figma.com/design/ud1QBuvu6PMBaMRljCZVYV/?node-id=5590:118637">
-
-<notes>
-
-1. **Label :** Le label du champ doit indiquer quel type d'information le champ requiert.
-2. **Zone d’ajout du fichier :** La zone définit permet de déposer un fichier à la souris ou de cliquer sur le bouton pour ouvrir le sélecteur de fichier.
-
-</notes>
-
-</design>
-
 ## Cas d’usage
 
 ### Formulaire
 
 Utilisé dans un formulaire, le composant File upload nécessite un bouton de validation en bas du formulaire. La **taille S** est a privilégier pour gagner en densité.
 
-<design figma-url="https://www.figma.com/design/ud1QBuvu6PMBaMRljCZVYV/?node-id=5590:118619">
-
-</design>
-
 Lorsque l’import de fichier est l’élément central d’une interface ou d’un formulaire, il est possible d’utiliser la **taille M** pour lui donner plus d’importance. Il peut aussi être positionné sur la gauche du formulaire.
 
 Cette spécificité est intéressante pour pouvoir afficher un document de type média, consultable par l’utilisateur.
-
-<design figma-url="https://www.figma.com/design/ud1QBuvu6PMBaMRljCZVYV/?node-id=5590:118621">
-
-</design>
 
 #### Import de fichier unique
 
@@ -50,53 +27,25 @@ Lorsqu’un fichier est importé, il est représenté par le composant File entr
 
 Si l’utilisateur souhaite changer de fichier, il doit supprimer le fichier chargé pour en sélectionner un nouveau.
 
-<design figma-url="https://www.figma.com/design/ud1QBuvu6PMBaMRljCZVYV/?node-id=5590:118623">
-
-</design>
-
 Lorsque le contexte requiert un affichage du fichier importé, celui-ci s’affiche toujours via le composant File entry mais sous la forme de média.
 
 À noter que si l’affichage du fichier requiert une navigation entre plusieurs pages ou encore une gestion du zoom, il s’agit alors d’un composant autre que File entry.
 
-<design figma-url="https://www.figma.com/design/ud1QBuvu6PMBaMRljCZVYV/?node-id=5590:118625">
-
-</design>
-
 Si le format et/ou le poids du fichier sélectionné ne correspond pas aux critères requis, le fichier n’est pas importé et le champ s’affiche en erreur. Un message d’erreur permet d’expliquer à l’utilisateur les raisons de cette erreur.
-
-<design figma-url="https://www.figma.com/design/ud1QBuvu6PMBaMRljCZVYV/?node-id=5590:118627">
-
-</design>
 
 #### Import de plusieurs fichiers
 
 Lorsqu’il est possible d’importer plusieurs fichiers, le comportement est différent. Les fichiers s'affichent en-dessous de la zone d’import dans l'ordre de sélection. L’utilisateur peut à tout moment cliquer sur la zone d’import pour ajouter un ou plusieurs autres fichiers.
 
-<design figma-url="https://www.figma.com/design/ud1QBuvu6PMBaMRljCZVYV/?node-id=5590:118629">
-
-</design>
-
 Un affichage spécifique en grille est possible quand on attend de l’utilisateur qu’il importe des images. Cela permet de donner un aperçu plus explicite des images sélectionnées et potentiellement de les réordonner.
 
 Il est possible d’afficher les images dans un ordre chronologique si l’ordre à une importance dans un contexte donné.
 
-<design figma-url="https://www.figma.com/design/ud1QBuvu6PMBaMRljCZVYV/?node-id=5590:131632">
-
-</design>
-
 En cas d'erreur sur le chargement d'un fichier (poids, format, erreur de connexion, etc.), le message d’erreur est porté par le fichier lui-même et non la zone d’import. L'utilisateur peut le supprimer manuellement et en importer un nouveau. S'il ne le supprime pas, une Dialog apparaitra à la soumission du formulaire pour indiquer que le ou les fichiers en erreurs ne seront pas importés.
-
-<design figma-url="https://www.figma.com/design/ud1QBuvu6PMBaMRljCZVYV/?node-id=5590:118631">
-
-</design>
 
 #### Champ obligatoire
 
 Si le champ est obligatoire et que l'utilisateur n’a importé aucun fichier, le champ s’affiche en erreur à la soumission du formulaire.
-
-<design figma-url="https://www.figma.com/design/ud1QBuvu6PMBaMRljCZVYV/?node-id=5590:118633">
-
-</design>
 
 #### Fichier protégé
 
@@ -104,43 +53,19 @@ En cas de fichier protégé, l’utilisateur doit saisir et valider le mot de pa
 
 Une fois le mot de passe validé, le fieldset contextuel disparait. Si le mot de passe saisi est erroné, un message d’erreur s’affiche sous le champ.
 
-<design figma-url="https://www.figma.com/design/ud1QBuvu6PMBaMRljCZVYV/?node-id=5590:118635">
-
-</design>
-
 ### Parcours d’analyse de document
 
 L’import de fichier peut être le point de départ d’un parcours utilisateur, notamment dans le cas d’un import et d’une analyse de fichier. Dans ce contexte, la **taille M** est privilégiée, le composant pouvant prendre la largeur de l’interface.
 
-<design figma-url="https://www.figma.com/design/ud1QBuvu6PMBaMRljCZVYV/?node-id=5590:118642">
-
-</design>
-
 L’analyse du document se lance automatiquement une fois le fichier sélectionné ou déposé dans la zone.
 
-<design figma-url="https://www.figma.com/design/ud1QBuvu6PMBaMRljCZVYV/?node-id=5590:118654">
-
-</design>
-
 Des informations supplémentaires peuvent être demandées, ce cas d’usage se rapproche d’une utilisation dans un formulaire. Un bouton de soumission permet de lancer l’analyse du document importé.
-
-<design figma-url="https://www.figma.com/design/ud1QBuvu6PMBaMRljCZVYV/?node-id=5590:118680">
-
-</design>
 
 ## Illustrations
 
 Le File upload utilise les Bubble Illustrations, permettant de guider l’utilisateur en illustrant clairement la zone d’upload et dynamiser l’interface pour rendre l’action plus engageante.
 
-<design figma-url="https://www.figma.com/design/ud1QBuvu6PMBaMRljCZVYV/?node-id=7389:19724">
-
-</design>
-
 Cette illustration peut être modifiée en fonction de la nature des fichiers à importer (photographie, justificatif de dépense, archive, bulletins de paie, etc.).
-
-<design figma-url="https://www.figma.com/design/ud1QBuvu6PMBaMRljCZVYV/?node-id=7389:19726">
-
-</design>
 
 ## Comportement
 

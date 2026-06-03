@@ -12,7 +12,9 @@
 		[max]="max"
 		[focusedDate]="focusedDate"
 		autocomplete="off"
-		${…}
+		clearBehavior="clear"
+		mode="day"
+		format="date"
 	/>
 </lu-form-field>
 

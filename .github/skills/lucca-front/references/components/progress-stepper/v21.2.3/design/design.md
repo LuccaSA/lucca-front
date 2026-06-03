@@ -1,32 +1,10 @@
 # progress-stepper — Design
 
-<design figma-url="https://www.figma.com/design/ud1QBuvu6PMBaMRljCZVYV/?node-id=7768:6519">
-
-</design>
-
 **Mots-clés :**timeline, steps, étapes
 
 **Des questions, commentaires ou retours ?**Laisser un commentaire sur Figma ou contactez-nous sur Slack :*#design-system-public*
 
 ## Anatomie
-
-<design figma-url="https://www.figma.com/design/ud1QBuvu6PMBaMRljCZVYV/?node-id=7763:15623">
-
-**Anatomie**
-
-**Anatomie**
-
-<notes>
-
-1. Conteneur 
-
-2. Label 
-
-3. Ligne de liaison
-
-</notes>
-
-</design>
 
 ## Nombre d'étapes
 
@@ -38,10 +16,6 @@ Au-delà de 6 étapes la charge cognitive devient trop élevée pour l'utilisate
 
 Pour en savoir plus, consulter la guideline sur les parcours de création de ressource.
 
-<design figma-url="https://www.figma.com/design/ud1QBuvu6PMBaMRljCZVYV/?node-id=7763:15628">
-
-</design>
-
 ## États
 
 ### Étapes passées
@@ -52,17 +26,9 @@ L'utilisateur a déjà visité cette étape.
 * En attente (*pending*) : si l'utilisateur quitte une étape sans la terminer complètement, elle conserve son numéro mais affiche un style "visité" pour indiquer qu'elle est incomplète.
 * En erreur : si l’utilisateur change d’étape et qu'une erreur critique est détectée après coup, le numéro est remplacé par une icône "Exit" rouge.
 
-<design figma-url="https://www.figma.com/design/ud1QBuvu6PMBaMRljCZVYV/?node-id=7763:15634">
-
-</design>
-
 ### Étape actuelle
 
 C’est l'étape où se trouve l'utilisateur. Il peut y avoir qu’une seule étape actuelle à la fois.
-
-<design figma-url="https://www.figma.com/design/ud1QBuvu6PMBaMRljCZVYV/?node-id=7763:15651">
-
-</design>
 
 - **Do** : La première étape doit être immédiatement en état current dès l'ouverture du parcours.
 
@@ -70,19 +36,11 @@ C’est l'étape où se trouve l'utilisateur. Il peut y avoir qu’une seule ét
 
 Ce sont les étapes non encore atteintes, elles peuvent parfois être déjà validés car elle ne nécessite pas d’action de l’utilisateur.
 
-<design figma-url="https://www.figma.com/design/ud1QBuvu6PMBaMRljCZVYV/?node-id=7763:15653">
-
-</design>
-
 ## Comportement
 
 ### Navigation
 
 L’utilisateur peut revenir aux étapes précédentes en cliquant sur l’étape dans le stepper. Il peut également peut naviguer dans le futur avec la stepper si celui-ci est inscrit dans un parcours non-linéaire.
-
-<design figma-url="https://www.figma.com/design/ud1QBuvu6PMBaMRljCZVYV/?node-id=7763:15641">
-
-</design>
 
 ### Ellipse
 

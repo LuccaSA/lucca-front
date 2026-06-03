@@ -6,18 +6,6 @@ Laisser un commentaire sur Figma ou contactez-nous sur Slack :*#design-system-pu
 
 ## Anatomie
 
-<notes>
-
-1. **Label :** le label du champ doit indiquer quel type d'information le champ requiert.
-2. **Champ de saisie :** l’utilisateur y clique pour afficher les options qu’il peut choisir. Une fois sélectionnée, chaque option s'affiche dans le champ de saisie.
-3. **Options sélectionnées :** l’utilisateur peut y supprimer les sélections en cliquant sur la croix.
-4. **Tout effacer :** la croix efface tout dans le champ de saisie. Il n'apparaît que lorsqu’une option au moins a été sélectionnée.
-5. **Menu déroulant :** il contient la liste de toutes les options sélectionnables.
-
-</notes>
-
----
-
 ## Options
 
 ### Placeholder
@@ -74,8 +62,6 @@ Pour les cas où l'option n'est pas affichée par défaut, l'utilisateur a la po
 
 Si une saisie est détectée, le bouton "Ajouter [Terme recherché]" apparaît, permettant de créer une nouvelle option et pré-remplissant automatiquement son nom.
 
----
-
 ## Comportement
 
 ### Affichage des résultats
@@ -119,8 +105,6 @@ Si un message d'aide était présent, le texte du message d'erreur doit fournir 
 #### Option sélectionnée en alerte ou erreur
 
 Il est possible que certaines alertes ou erreurs soient liées à une ou plusieurs options sélectionnées par l'utilisateur. Dans ce cas, la Chip correspondant à cette valeur porte le feedback d'alerte ou d'erreur (couleur + icône).
-
----
 
 ## Règles d'utilisation
 

@@ -10,8 +10,6 @@ Il existe 5 variantes : neutre, informative, succès, alerte et erreur. Pour cha
 * **Variante “Alerte”** pour avertir l’utilisateur d'une situation qui pourrait nécessiter une intervention prochaine mais non-critique dans son utilisation de l’outil.
 * **Variante “Erreur”** pour indiquer une erreur ou un échec, ou pour transmettre quelque chose qui doit être immédiatement reconnu ou résolu.
 
----
-
 ## Callout default
 
 Le Callout default est la forme la plus classique et la plus utilisée du composant.
@@ -37,8 +35,6 @@ Il est possible de supprimer le Callout si l’utilisateur juge l’information 
 
 Une variante spécifique permet d'afficher un contenu lié à l'IA. Pour en savoir plus, vous pouvez consulter la guideline dédiée.
 
----
-
 ## **Callout popover**
 
 Ce format permet de gagner un maximum de place. Il comprend juste l’icône et le nombre d’informations qu’il contient. Ces informations sont accessibles au survol via un Popover.
@@ -57,8 +53,6 @@ Cependant, il est également possible d’afficher un texte personnalisé, au li
 
 Le Callout popover peut aussi être utilisé pour afficher un message de manière très discrète, en ne montrant que l’icône sans texte. Cette approche est utile pour signaler une information liée à une donnée précise, sans prendre de place.
 
----
-
 ## Callout disclosure
 
 Le Callout disclosure est conçu pour gérer des messages plus complexes ou multiples, offrant une interface compacte qui peut se déplier pour afficher des informations détaillées.
@@ -74,5 +68,3 @@ Chaque message informatif peut contenir ou non une action, via un Button qui s'a
 Il est possible de remplacer les boutons d'action par un lien si le but est de renvoyer l'utilisateur vers un contenu externe au logiciel.
 
 Le lien dans les Callout doit utiliser la couleur Neutral et non pas la couleur Product.
-
----

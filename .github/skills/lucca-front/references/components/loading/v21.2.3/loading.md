@@ -6,6 +6,12 @@
 import { LoadingComponent } from '@lucca-front/ng/loading';
 ```
 
+## Basic Usage
+
+```html
+<lu-loading hiddenLabel>Chargement…</lu-loading>
+```
+
 ## API Reference
 
 ### LoadingComponent (component)
@@ -26,6 +32,6 @@ import { LoadingComponent } from '@lucca-front/ng/loading';
 
 - 📝 [Code & implementation](./loading.component.md)
 - 🎨 [Design guidelines](./design/_index.md)
-- 🎯 [Figma design tokens](../loading.figma.md)
+
 - 📖 [Storybook documentation](https://lucca-front.lucca.io/v21.2.3/storybook/?path=/docs/documentation-loaders-loading-angular-basic--docs)
 - 📋 [Changelog](../loading.changelog.md)

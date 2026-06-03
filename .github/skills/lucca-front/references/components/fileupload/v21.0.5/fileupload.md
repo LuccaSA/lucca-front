@@ -9,7 +9,7 @@ import { FileEntryComponent, SingleFileUploadComponent } from '@lucca-front/ng/f
 ## Basic Usage
 
 ```html
-<lu-form-field label="Label"> <lu-multi-file-upload (filePicked)="fileUploadFeature.uploadFiles([$event])" /> </lu-form-field> <div class="fileEntryDisplayWrapper"> @for(fileUpload of fileUploadFeature.fileUploads(); track $index) { <lu-file-entry [entry]="fileUpload | fileUploadToLFEntry" [state]="fileUpload.state" [previewUrl]="getPreviewUrl(fileUpload)" [inlineMessageError]="fileUpload.error?.detail" (deleteFile)="deleteFile(fileUpload)" /> } </div>
+<lu-form-field label="Label"> <lu-multi-file-upload fileMaxSize="5000000" illustration="paper" (filePicked)="fileUploadFeature.uploadFiles([$event])" /> </lu-form-field> <div class="fileEntryDisplayWrapper"> @for(fileUpload of fileUploadFeature.fileUploads(); track $index) { <lu-file-entry [entry]="fileUpload | fileUploadToLFEntry" [state]="fileUpload.state" [previewUrl]="getPreviewUrl(fileUpload)" [inlineMessageError]="fileUpload.error?.detail" (deleteFile)="deleteFile(fileUpload)" /> } </div>
 ```
 
 ## API Reference

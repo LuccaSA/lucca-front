@@ -9,7 +9,7 @@ import { FormFieldComponent, InputFramedComponent, InputDirective, PresentationD
 ## Basic Usage
 
 ```html
-<lu-data-presentation label >Value</lu-data-presentation>
+<lu-data-presentation label="Label">Value</lu-data-presentation>
 ```
 
 ## API Reference

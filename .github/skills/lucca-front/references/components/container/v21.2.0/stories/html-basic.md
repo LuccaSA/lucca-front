@@ -5,7 +5,5 @@
 ```
 
 ```html
-<div class="container${…}${…}${…}">
-	Ce container est responsive et sert à placer le contenu de votre page.
-</div>
+<div class="container">Ce container est responsive et sert à placer le contenu de votre page.</div>
 ```

@@ -7,5 +7,5 @@ import { ButtonComponent } from "@lucca-front/ng/button";
 ```
 
 ```html
-<button type="button" luButton${…}${…}>Button${…}</button>
+<button type="button" luButton>Button</button>
 ```

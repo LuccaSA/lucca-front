@@ -7,8 +7,10 @@ import { IconComponent } from '@lucca-front/ng/icon';
 ```
 
 ```html
-<lu-callout AI iconAlt="${…}" ${…}>
-	<p>${…}</p>
-	${…}
+<lu-callout AI iconAlt="Assistant IA" icon="weatherStars">
+	<p>Fixer des objectifs SMART</p>
+	<lu-callout-actions inline>
+		<button luButton="outlined">Reformuler les objectifs</button>
+	</lu-callout-actions>
 </lu-callout>
 ```

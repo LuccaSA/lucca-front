@@ -5,9 +5,22 @@
 ```
 
 ```html
-<div class="resourceCardWrapper${…}">${…}${…}</div>
-```
-
-```html
-${…}
+<section class="resourceCard" #resourceCard1>
+	<div class="resourceCard-layout">
+		<header class="resourceCard-layout-header">
+			<h3 class="resourceCard-layout-header-title">
+				<a
+					href="#"
+					luTooltip
+					luTooltipOnlyForDisplay
+					luTooltipWhenEllipsis
+					[luTooltipAnchor]="resourceCard1"
+					class="resourceCard-layout-header-title-action"
+				>
+					Lorem ipsum dolor
+				</a>
+			</h3>
+		</header>
+	</div>
+</section>
 ```

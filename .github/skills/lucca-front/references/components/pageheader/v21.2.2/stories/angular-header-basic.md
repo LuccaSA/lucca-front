@@ -15,10 +15,8 @@ import { LuTooltipModule } from '@lucca-front/ng/tooltip';
 ```
 
 ```html
-<lu-page-header${…}>${…}${…}${…}${…}${…}${…}${…}
-</lu-page-header>
-```
-
-```html
-<lu-page-header${…} />
+<lu-page-header
+	label="H1. Page title"
+	description="Lorem ipsum dolor sit amet, consectetur adipiscing elit. Sed ac justo scelerisque, blandit nibh quis, imperdiet justo. Nullam condimentum nulla et neque ultricies bibendum."
+/>
 ```

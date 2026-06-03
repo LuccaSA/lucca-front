@@ -6,15 +6,6 @@ Laisser un commentaire sur Figma ou contactez-nous sur Slack :*#design-system-pu
 
 ## Anatomie
 
-<notes>
-
-1. **Sélecteur :** il représente la case à cocher. Il peut être dans trois états : vide (non cochée), cochée, ou indéterminée. Il doit être facilement identifiable et cliquable.
-2. **Label **: il décrit clairement l’action ou l’option liée à la case. Il doit être concis, explicite, et positionné à droite de la Checkbox
-
-</notes>
-
----
-
 ## Options
 
 ### Message d’aide
@@ -44,8 +35,6 @@ Si ces conditions ne sont pas remplies, l’affiche horizontal rend la lecture d
 Une version checklist est disponible. Cette version doit être utilisé comme une *to do list*, lorsque l'utilisateur coche quelque chose pour signifier que c'est réalisé.
 
 La coche peut aussi être utilisée seule en début de ligne dans un Index table ou une Card.
-
----
 
 ## Comportement
 

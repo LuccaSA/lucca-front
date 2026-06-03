@@ -6,17 +6,6 @@
 
 ## Anatomie
 
-<notes>
-
-1. **Label :** le label du champ doit indiquer quel type d'information le champ requiert.
-2. **Champ de saisie :** l’utilisateur y clique pour afficher les options qu’il peut choisir.
-3. **Tout effacer :** la croix efface tout dans le champ de saisie. Il n'apparaît que lorsqu’une option au moins a été sélectionnée.
-4. **Menu déroulant :** il contient la liste de toutes les options sélectionnables.
-
-</notes>
-
----
-
 ## Options
 
 ### Placeholder
@@ -115,8 +104,6 @@ Si un message d'aide était présent, le texte du message d’avertissement doit
 Lorsque le nom d’une option sélectionnée est trop long, le texte est tronqué.
 
 Le texte est tout de même visible dans son entièreté à l’intérieur du menu déroulant. Dans le cas d’un Select peu large, le menu déroulant peut avoir une largeur plus importante si les options qu’il contient sont longues. La largeur maximal du menu déroulant est de 560px.
-
----
 
 ## Règles d'utilisation
 

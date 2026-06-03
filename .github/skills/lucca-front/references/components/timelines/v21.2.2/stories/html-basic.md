@@ -6,7 +6,7 @@
 ```
 
 ```html
-<ol class="timeline ${…} ${…}">
+<ol class="timeline">
 	<li class="timeline-step">
 		<span class="timeline-step-title">
 			<a href="#" class="timeline-step-title-action">Previous step</a>

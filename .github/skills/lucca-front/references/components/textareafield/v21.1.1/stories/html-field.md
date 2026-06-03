@@ -10,9 +10,8 @@
 ```html
 <div class="form-field">
 	<label class="formLabel" id="IDlabel" for="ID">Label</label>
-	<div class="textField ${…}">
+	<div class="textField">
 		<div class="textField-input">
-			${…}
 			<textarea
 				rows="3"
 				id="ID"
@@ -21,7 +20,6 @@
 				aria-describedby="IDmessage"
 				placeholder="Placeholder"
 				aria-invalid="false"
-				${…}
 			></textarea>
 		</div>
 	</div>

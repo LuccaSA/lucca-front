@@ -6,6 +6,12 @@
 import { LoadingComponent } from '@lucca-front/ng/loading';
 ```
 
+## Basic Usage
+
+```html
+<lu-loading />
+```
+
 ## API Reference
 
 ### LoadingComponent (component)

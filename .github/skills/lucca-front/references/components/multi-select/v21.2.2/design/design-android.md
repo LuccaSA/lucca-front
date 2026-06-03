@@ -2,16 +2,6 @@
 
 ## Anatomie
 
-<notes>
-
-1. **Label :** le label du champ doit indiquer quel type d'information le champ requiert.
-2. **Champ de saisie :** l’utilisateur y clique pour ouvrir l’écran de sélection. Une fois sélectionnée, chaque option se rajoute dans le champ de saisie.
-3. **Options sélectionnées :** l’utilisateur peut y supprimer les sélections en cliquant sur la croix.
-4. **Tout effacer :** la croix efface tout dans le champ de saisie. Elle n'apparaît que lorsqu’une option au moins a été sélectionnée.
-5. **Écran de sélection :** il contient la liste de toutes les options sélectionnables.
-
-</notes>
-
 ## Options
 
 ### Bouton d'ajout d'option

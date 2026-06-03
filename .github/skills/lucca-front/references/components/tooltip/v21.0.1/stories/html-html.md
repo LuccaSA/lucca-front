@@ -5,5 +5,5 @@
 ```
 
 ```html
-<div class="tooltip${…}${…}">{{ content }}</div>
+<div class="tooltip">{{ content }}</div>
 ```

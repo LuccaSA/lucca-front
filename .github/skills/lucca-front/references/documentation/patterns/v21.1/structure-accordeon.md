@@ -27,8 +27,6 @@ Toutefois, si le panneau s’ouvre vers le haut plutôt que vers le bas, le sens
 
 Cette convention suit [les recommandations de NNGroup](https://www.nngroup.com/articles/accordion-icons/) afin d’améliorer la compréhension des interactions.
 
----
-
 ## Comportement
 
 ### Navigation à la souris

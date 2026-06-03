@@ -6,10 +6,8 @@ import { FooterComponent } from '@lucca-front/ng/footer';
 ```
 
 ```html
-<lu-footer${…}${…}${…}>
-	<ng-container footerContent>
-		Content
-	</ng-container>
+<lu-footer narrowAtMediaMax="XXS">
+	<ng-container footerContent>Content</ng-container>
 	<button type="button" luButton>Button</button>
 	<button type="button" luButton="outlined">Button</button>
 </lu-footer>

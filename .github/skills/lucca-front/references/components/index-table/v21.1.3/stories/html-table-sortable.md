@@ -9,8 +9,8 @@
 <table class="indexTable">
 	<thead class="indexTable-head">
 		<tr class="indexTable-head-row">
-			<th class="indexTable-head-row-cell ${…}" scope="col">Not sortable</th>
-			<th class="indexTable-head-row-cell ${…}" scope="col">
+			<th class="indexTable-head-row-cell" scope="col">Not sortable</th>
+			<th class="indexTable-head-row-cell" scope="col">
 				<button type="button" class="tableSortable button">
 					Sortable
 					<span class="tableSortable-arrows">
@@ -19,7 +19,7 @@
 					</span>
 				</button>
 			</th>
-			<th class="indexTable-head-row-cell ${…}" scope="col" aria-sort="ascending">
+			<th class="indexTable-head-row-cell" scope="col" aria-sort="ascending">
 				<button type="button" class="tableSortable button">
 					Sorted ascending
 					<span class="tableSortable-arrows">
@@ -28,7 +28,7 @@
 					</span>
 				</button>
 			</th>
-			<th class="indexTable-head-row-cell ${…}" scope="col" aria-sort="descending">
+			<th class="indexTable-head-row-cell" scope="col" aria-sort="descending">
 				<button type="button" class="tableSortable button">
 					Sorted descending
 					<span class="tableSortable-arrows">
@@ -37,7 +37,7 @@
 					</span>
 				</button>
 			</th>
-			<th class="indexTable-head-row-cell ${…}" scope="col" aria-sort="none">
+			<th class="indexTable-head-row-cell" scope="col" aria-sort="none">
 				<button
 					type="button"
 					class="tableSortable button"
@@ -65,22 +65,22 @@
 	</thead>
 	<tbody class="indexTable-body">
 		<tr class="indexTable-body-row">
-			<td class="indexTable-body-row-cell ${…}">
+			<td class="indexTable-body-row-cell">
 				<a href="#" class="indexTable-body-row-cell-link">Content</a>
 			</td>
-			<td class="indexTable-body-row-cell ${…}">Content</td>
-			<td class="indexTable-body-row-cell ${…}">Content</td>
-			<td class="indexTable-body-row-cell ${…}">Content</td>
-			<td class="indexTable-body-row-cell ${…}">Content</td>
+			<td class="indexTable-body-row-cell">Content</td>
+			<td class="indexTable-body-row-cell">Content</td>
+			<td class="indexTable-body-row-cell">Content</td>
+			<td class="indexTable-body-row-cell">Content</td>
 		</tr>
 		<tr class="indexTable-body-row">
-			<td class="indexTable-body-row-cell ${…}">
+			<td class="indexTable-body-row-cell">
 				<a href="#" class="indexTable-body-row-cell-link">Content</a>
 			</td>
-			<td class="indexTable-body-row-cell ${…}">Content</td>
-			<td class="indexTable-body-row-cell ${…}">Content</td>
-			<td class="indexTable-body-row-cell ${…}">Content</td>
-			<td class="indexTable-body-row-cell ${…}">Content</td>
+			<td class="indexTable-body-row-cell">Content</td>
+			<td class="indexTable-body-row-cell">Content</td>
+			<td class="indexTable-body-row-cell">Content</td>
+			<td class="indexTable-body-row-cell">Content</td>
 		</tr>
 	</tbody>
 </table>

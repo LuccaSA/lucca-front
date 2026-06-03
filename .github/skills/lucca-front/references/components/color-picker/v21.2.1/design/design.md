@@ -6,16 +6,6 @@
 
 ## Anatomie
 
-<notes>
-
-1. **Label :** Le label du champ est obligatoirement “Couleur”
-2. **Champ de saisie :** l’utilisateur clique pour afficher la palette de couleurs qu’il peut choisir. Lorsqu’une couleur est sélectionnée, elle apparait ici, avec ou sans son nom.
-3. **Menu déroulant :** il contient la liste de toutes les couleurs sélectionnables. Le nom de la couleur se met à jour lorsque l’utilisateur navigue à la souris ou au clavier.
-
-</notes>
-
----
-
 ## Options
 
 ### Version par défaut
@@ -25,8 +15,6 @@ Conçue pour offrir plus de clarté, elle affiche à la fois l’aperçu et le n
 ### Version compacte
 
 Idéale pour les interfaces où l’espace est limité, elle affiche uniquement l’aperçu de la couleur. Le nom de la couleur reste visible dans le panel de sélection.
-
----
 
 ## Palettes
 

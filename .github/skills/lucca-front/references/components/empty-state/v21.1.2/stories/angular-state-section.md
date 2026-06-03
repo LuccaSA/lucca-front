@@ -9,11 +9,10 @@ import { PaletteArgType } from '../../../../helpers/common-arg-types';
 
 ```html
 <lu-empty-state-section
-	illustration="${…}"
-	hx="${…}"
-	heading="${…}"
-	description="${…}"
-	${…}${…}${…}
+	illustration="rocket"
+	hx="3"
+	heading="Empty state section"
+	description="Description can be a string or a ng-template"
 >
 	<button luButton type="button" palette="product">Button</button>
 	<button luButton="outlined" type="button">Button</button>

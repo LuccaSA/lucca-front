@@ -5,5 +5,5 @@ import { SoftwareIconComponent, SoftwareIconList } from '@lucca-front/ng/softwar
 ```
 
 ```html
-<lu-software-icon${…}${…}${…}${…} />
+<lu-software-icon icon="absences" iconAlt="Absences" />
 ```

@@ -5,7 +5,7 @@
 ```
 
 ```html
-@let config = ${…};
+@let config = {"mode":"drawer","autoFocus":".open"};
 
 <button class="open" luButton="outlined" [luDialogOpen]="dialogTpl1" [luDialogConfig]="config">Open Dialog</button>
 

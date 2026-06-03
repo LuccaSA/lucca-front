@@ -1,24 +1,6 @@
 # userpopover — Design
 
-<design figma-url="https://www.figma.com/design/ud1QBuvu6PMBaMRljCZVYV/?node-id=5605:32000">
-
-</design>
-
 ## **Anatomie**
-
-<design figma-url="https://www.figma.com/design/ud1QBuvu6PMBaMRljCZVYV/?node-id=2197:1177">
-
-<notes>
-
-1. Avatar
-2. Identité cliquable
-3. Intitulé de poste
-4. Département
-5. Lieu de travail / Présence ou absence cliquable
-
-</notes>
-
-</design>
 
 ## **Options et permissions**
 
@@ -26,25 +8,13 @@
 
 Si le collaborateur n’a pas de photo, ce sont les initiales qui sont affichées.
 
-<design figma-url="https://www.figma.com/design/ud1QBuvu6PMBaMRljCZVYV/?node-id=2197:16099">
-
-</design>
-
 ### **Accès au trombinoscope**
 
 Si l’utilisateur a accès au trombinoscope, le lien renvoie sur le Dossier RH. En revanche si l’utilisateur n’a accès ni au trombinoscope, ni au Dossier RH, alors le prénom et le nom ne sont pas interactifs.
 
-<design figma-url="https://www.figma.com/design/ud1QBuvu6PMBaMRljCZVYV/?node-id=2197:15990">
-
-</design>
-
 ### **Visibilité du poste**
 
 Si l’utilisateur n’a pas accès au poste du collaborateur, alors celui-ci n’est pas affiché.
-
-<design figma-url="https://www.figma.com/design/ud1QBuvu6PMBaMRljCZVYV/?node-id=2197:15859">
-
-</design>
 
 ### **Accès au planning**
 
@@ -58,10 +28,6 @@ Lorsque le collaborateur est absent, la mention “Absent(e)” est indiquée ai
 
 Cette ligne d’information est cliquable et redirige l’utilisateur vers le planning **Lucca Office**.
 
-<design figma-url="https://www.figma.com/design/ud1QBuvu6PMBaMRljCZVYV/?node-id=2197:16223">
-
-</design>
-
 #### **Accès à Lucca Absences seulement**
 
 Lorsque le collaborateur est absent, la mention “Absent(e)” est indiquée ainsi que la date de fin de l’absence.
@@ -70,17 +36,9 @@ Si le collaborateur n’est pas absent alors le mention “Présent(e)” est in
 
 Cette ligne d’information est cliquable et redirige l’utilisateur vers le planning **Lucca Absences**.
 
-<design figma-url="https://www.figma.com/design/ud1QBuvu6PMBaMRljCZVYV/?node-id=2207:20950">
-
-</design>
-
 #### **Accès ni à Lucca Office, ni à Lucca Absences**
 
 La ligne mentionnant le lieu de travail ou la présence/absence n’est pas affichée.
-
-<design figma-url="https://www.figma.com/design/ud1QBuvu6PMBaMRljCZVYV/?node-id=2197:1252">
-
-</design>
 
 #### Futurs et anciens collaborateurs
 
@@ -89,10 +47,6 @@ Dans le cas d’un futur collaborateur, la mention “Arrivée prévue le”, su
 S’il s’agit d’un collaborateur ayant quitté l’entreprise, alors le mention “Parti(e)” est indiquée.
 
 Cette ligne d’information n’est pas cliquable.
-
-<design figma-url="https://www.figma.com/design/ud1QBuvu6PMBaMRljCZVYV/?node-id=2197:1260">
-
-</design>
 
 ## **Comportement**
 
@@ -107,10 +61,6 @@ Un article sur [NNGroup](https://www.nngroup.com/articles/timing-exposing-conten
 La largeur du composant est fixé à 360px. Celle-ci reste toujours la même, peu importe le contenu, qu’il soit plus petit ou plus grand.
 
 Lorsque le nom du collaborateur ou du site est long, il se trouve tronqué. L’information complète est visible via un Tooltip au survol.
-
-<design figma-url="https://www.figma.com/design/ud1QBuvu6PMBaMRljCZVYV/?node-id=2216:29936">
-
-</design>
 
 ## **Exemples d'utilisation**
 

@@ -25,7 +25,6 @@ import { StoryModelDisplayComponent } from '../../../../helpers/story-model-disp
 <lu-filter-pill label="With Select all" name="legume">
 	<lu-multi-select
 		[ngModel]="{ mode: 'none' }"
-		${…}
 		[options]="legumes | filterLegumes: clue"
 		[totalCount]="legumes.length"
 		(clueChange)="clue = $event"
@@ -35,26 +34,26 @@ import { StoryModelDisplayComponent } from '../../../../helpers/story-model-disp
 	/>
 </lu-filter-pill>
 <lu-filter-pill label="Département" name="department">
-	<lu-simple-select [ngModel]="null" ${…} departments></lu-simple-select>
+	<lu-simple-select [ngModel]="null" departments></lu-simple-select>
 </lu-filter-pill>
 <lu-filter-pill label="Départements" name="departments">
-	<lu-multi-select [ngModel]="[]" ${…}filterPillLabelPlural="départements" departments />
+	<lu-multi-select [ngModel]="[]" filterPillLabelPlural="départements" departments />
 </lu-filter-pill>
 <lu-filter-pill label="Tree simple">
-	<lu-simple-select [ngModel]="null" ${…}[treeSelect]="groupingFn" [options]="legumes"></lu-simple-select>
+	<lu-simple-select [ngModel]="null" [treeSelect]="groupingFn" [options]="legumes"></lu-simple-select>
 </lu-filter-pill>
 <lu-filter-pill label="Tree multi">
 	<lu-multi-select
 		[ngModel]="[]"
-		${…}filterPillLabelPlural="légumes"
+		filterPillLabelPlural="légumes"
 		[treeSelect]="groupingFn"
 		[options]="legumes"
 	></lu-multi-select>
 </lu-filter-pill>
 <lu-filter-pill label="Date de début">
-	<lu-date-input [ngModel]="null" ${…} />
+	<lu-date-input [ngModel]="null" />
 </lu-filter-pill>
 <lu-filter-pill label="Période">
-	<lu-date-range-input [ngModel]="null" ${…}[(ngModel)]="dateRange" />
+	<lu-date-range-input [ngModel]="null" [(ngModel)]="dateRange" />
 </lu-filter-pill>
 ```

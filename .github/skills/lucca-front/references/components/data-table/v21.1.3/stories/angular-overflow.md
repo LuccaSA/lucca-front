@@ -11,14 +11,40 @@ import { PaginationComponent } from '@lucca-front/ng/pagination';
 ```
 
 ```html
-<lu-data-table${…}${…}${…}>
-	<thead luDataTableHead${…}>
+<lu-data-table>
+	<thead luDataTableHead>
 		<tr luDataTableRow>
-			<th luDataTableCell>${…}</th>${…}
-			<th luDataTableCell>${…}</th>
+			<th luDataTableCell>header</th>
+			<th luDataTableCell>header</th>
+			<th luDataTableCell>header</th>
+			<th luDataTableCell>header</th>
+			<th luDataTableCell>header</th>
+			<th luDataTableCell>header</th>
+			<th luDataTableCell>header</th>
+			<th luDataTableCell>header</th>
 		</tr>
 	</thead>
-	<tbody luDataTableBody>${…}
-	</tbody>${…}
+	<tbody luDataTableBody>
+		<tr luDataTableRow>
+			<th luDataTableCell>header</th>
+			<td luDataTableCell>cell</td>
+			<td luDataTableCell>cell</td>
+			<td luDataTableCell>cell</td>
+			<td luDataTableCell>cell</td>
+			<td luDataTableCell>cell</td>
+			<td luDataTableCell>cell</td>
+			<td luDataTableCell>cell</td>
+		</tr>
+		<tr luDataTableRow>
+			<th luDataTableCell>header</th>
+			<td luDataTableCell>cell</td>
+			<td luDataTableCell>cell</td>
+			<td luDataTableCell>cell</td>
+			<td luDataTableCell>cell</td>
+			<td luDataTableCell>cell</td>
+			<td luDataTableCell>cell</td>
+			<td luDataTableCell>cell</td>
+		</tr>
+	</tbody>
 </lu-data-table>
 ```

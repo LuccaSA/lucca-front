@@ -6,16 +6,6 @@ Laisser un commentaire sur Figma ou contactez-nous sur Slack :*#design-system-pu
 
 ## Anatomie
 
-<notes>
-
-1. **Icône et couleur de fond :** la combinaison de l'icône et de la couleur de fond indique le type de message (erreur, avertissement ou succès).
-2. **Description :** elle explicite l’information ou le problème.
-3. **Bouton de fermeture :** la croix de fermeture permet à l’utilisateur de fermer le toast.
-
-</notes>
-
----
-
 ## Cas d'usage
 
 ### Annulation d’une action

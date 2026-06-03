@@ -1,38 +1,16 @@
 # multi-select — Design
 
-<design figma-url="https://www.figma.com/design/ud1QBuvu6PMBaMRljCZVYV/?node-id=6510:28528">
-
-</design>
-
 **Mots-clés :**multi-select, sélection, multiple
 
 **Des questions, commentaires ou retours ?**Laisser un commentaire sur Figma ou contactez-nous sur Slack :*#design-system-public*
 
 ## Anatomie
 
-<design figma-url="https://www.figma.com/design/ud1QBuvu6PMBaMRljCZVYV/?node-id=6510:28759">
-
-<notes>
-
-1. **Label :** le label du champ doit indiquer quel type d'information le champ requiert.
-2. **Champ de saisie :** l’utilisateur y clique pour afficher les options qu’il peut choisir. Une fois sélectionnée, chaque option s'affiche dans le champ de saisie.
-3. **Options sélectionnées :** l’utilisateur peut y supprimer les sélections en cliquant sur la croix.
-4. **Tout effacer :** la croix efface tout dans le champ de saisie. Il n'apparaît que lorsqu’une option au moins a été sélectionnée.
-5. **Menu déroulant :** il contient la liste de toutes les options sélectionnables.
-
-</notes>
-
-</design>
-
 ## Options
 
 ### Placeholder
 
 Le placeholder "**Sélectionner…**" est obligatoire. Il incite l'utilisateur à choisir une option dans le menu de sélection et disparaît une fois que l'utilisateur a fait son choix.
-
-<design figma-url="https://www.figma.com/design/ud1QBuvu6PMBaMRljCZVYV/?node-id=6510:28521">
-
-</design>
 
 - **Do** : Utilisons seulement "Sélectionner…" comme placeholder dans les Select.
 - **Don't** : N’utilisons pas de placeholder pour indiquer un état vide dans un Select.
@@ -45,10 +23,6 @@ Un champ désactivé indique que l’utilisateur ne peut pas interagir avec : il
 
 Un Tooltip doit s'afficher au survol, indiquant à l'utilisateur les raisons de cet état.
 
-<design figma-url="https://www.figma.com/design/ud1QBuvu6PMBaMRljCZVYV/?node-id=6606:43123">
-
-</design>
-
 - **Don't** : Un champ désactivé vide ne doit pas afficher de placeholder.
 - **Don't** : Un champ désactivé rempli ne doit pas afficher de Clear. L'utilisateur ne peut pas interagir avec le champ.
 
@@ -60,17 +34,9 @@ Si **aucune option n'est sélectionnée**, toutes les options disponibles sont i
 
 Afin de refléter ce comportement par défaut, nous utilisons un faux indicateur de sélection en lieu et place du placeholder classique.
 
-<design figma-url="https://www.figma.com/design/ud1QBuvu6PMBaMRljCZVYV/?node-id=6518:38456">
-
-</design>
-
 ### Tout sélectionner
 
 Lorsque nécéssaire, une option "Tout sélectionner" est affichée en première dans le menu déroulant. Ce raccourci permet de sélectionner toutes les options en un clic.
-
-<design figma-url="https://www.figma.com/design/ud1QBuvu6PMBaMRljCZVYV/?node-id=6510:59592">
-
-</design>
 
 ### Regroupements d'options
 
@@ -78,15 +44,7 @@ Les options sélectionnables peuvent être regroupées en catégories.
 
 Un titre vient alors se positionner en en-tête de la catégorie ainsi qu'un bouton "Tout sélectionner" pour sélectionner toutes les options de cette catégorie.
 
-<design figma-url="https://www.figma.com/design/ud1QBuvu6PMBaMRljCZVYV/?node-id=6510:59324">
-
-</design>
-
 Si l'utilisateur effectue une recherche, l'affichage dans le menu déroulant est modifié. Le nom de la catégorie est affiché en texte secondaire sous l'option.
-
-<design figma-url="https://www.figma.com/design/ud1QBuvu6PMBaMRljCZVYV/?node-id=6518:38559">
-
-</design>
 
 ### **Structure arborescente**
 
@@ -94,27 +52,15 @@ Cette option permet d'afficher une relation de parenté entre plusieurs options.
 
 Lors d’une recherche, on affiche l’intégralité de l’arborescence (parents et enfants).
 
-<design figma-url="https://www.figma.com/design/ud1QBuvu6PMBaMRljCZVYV/?node-id=6510:61691">
-
-</design>
-
 ### Bouton d'ajout d'option
 
 Lorsque la création est une action fréquente, l'option "+ Ajouter une nouvelle option" est affichée en permanence en fin de liste.
 
 Si le contenu dépasse la zone d'affichage, cette option devient sticky pour rester toujours visible au bas du menu déroulant.
 
-<design figma-url="https://www.figma.com/design/ud1QBuvu6PMBaMRljCZVYV/?node-id=6524:56432">
-
-</design>
-
 Pour les cas où l'option n'est pas affichée par défaut, l'utilisateur a la possibilité d'ajouter une nouvelle option après avoir saisi une recherche.
 
 Si une saisie est détectée, le bouton "Ajouter [Terme recherché]" apparaît, permettant de créer une nouvelle option et pré-remplissant automatiquement son nom.
-
-<design figma-url="https://www.figma.com/design/ud1QBuvu6PMBaMRljCZVYV/?node-id=6527:58125">
-
-</design>
 
 ### Sélection d'un collaborateur
 
@@ -122,25 +68,13 @@ Si une saisie est détectée, le bouton "Ajouter [Terme recherché]" apparaît, 
 
 Cette option permet d'inclure dans la liste des collaborateurs sélectionnables les collaborateurs ayant quitté l'entreprise (anciens collaborateurs). Par défaut, seuls les collaborateurs actifs sont affichés. En cochant cette case, la liste s'étend pour afficher aussi les collaborateurs partis.
 
-<design figma-url="https://www.figma.com/design/ud1QBuvu6PMBaMRljCZVYV/?node-id=7324:51011">
-
-</design>
-
 #### Mise en avant de l'utilisateur
 
 Cette option met en avant l'utilisateur courant dans la liste des collaborateurs. Le nom de l'utilisateur connecté est affiché en premier, précédé de la mention "Moi :". Cela facilite la sélection rapide de soi-même dans la liste.
 
-<design figma-url="https://www.figma.com/design/ud1QBuvu6PMBaMRljCZVYV/?node-id=7324:51013">
-
-</design>
-
 #### Affichage de l'avatar des collaborateurs
 
 Cette option affiche un avatar (ou les initiales) à côté du nom de chaque collaborateur dans la liste déroulante.
-
-<design figma-url="https://www.figma.com/design/ud1QBuvu6PMBaMRljCZVYV/?node-id=7324:51015">
-
-</design>
 
 ## Comportement
 
@@ -150,15 +84,7 @@ Les valeurs sélectionnées s’affichent avec le composant Chip à l’intérie
 
 Il est possible d'afficher un nombre maximum de Chips. Au delà, on affiche un compteur à la suite de la dernière Chip indiquant le nombre d'option sélectionnées en plus.
 
-<design figma-url="https://www.figma.com/design/ud1QBuvu6PMBaMRljCZVYV/?node-id=6510:63729">
-
-</design>
-
 Lorsque l'option "Tout sélectionner" est activée, il n'est techniquement pas possible d'afficher l'entièreté des Chips dans le Select. L'affichage s'en trouve donc modifié, le Select affiche un compteur sous forme de Chip unique.
-
-<design figma-url="https://www.figma.com/design/ud1QBuvu6PMBaMRljCZVYV/?node-id=6579:39992">
-
-</design>
 
 ### Recherche
 
@@ -166,41 +92,21 @@ La recherche se fait directement dans le champ de saisie. Le menu déroulant se 
 
 Par défaut, lorsque l'utilisateur sélectionne une option, la recherche se réinitialise et le menu déroulant affiche l’ensemble des options.
 
-<design figma-url="https://www.figma.com/design/ud1QBuvu6PMBaMRljCZVYV/?node-id=6527:58540">
-
-</design>
-
 Une option `keepSearchAfterSelection` permet de ne pas réinitialiser la recherche après la sélection.
 
 C'est intéressant pour des données comme les métiers ou les qualifications, quand l'utilisateur peut vouloir sélectionner plusieurs options correspondants à sa recherche.
-
-<design figma-url="https://www.figma.com/design/ud1QBuvu6PMBaMRljCZVYV/?node-id=6527:60344">
-
-</design>
 
 ### État vide
 
 Le contenu du menu déroulant peut être vide lorsqu'il n'existe aucune donnée disponible ou qu'une recherche ne donne aucun résultat. Le message doit être adapté pour chacun de ces cas.
 
-<design figma-url="https://www.figma.com/design/ud1QBuvu6PMBaMRljCZVYV/?node-id=6524:54074">
-
-</design>
-
 Cet état peut être cumulé avec l'ajout d'option. C'est notamment pratique pour pouvoir créer une nouvelle donnée directement depuis le Select ou via une Dialog.
-
-<design figma-url="https://www.figma.com/design/ud1QBuvu6PMBaMRljCZVYV/?node-id=6533:64756">
-
-</design>
 
 ### Chargement
 
 L'indication de chargement s'affiche pour prévenir l'utilisateur que le champ est en train de charger une ou plusieurs données.
 
 Cela peut se produire à l’ouverture du menu déroulant, lorsque l’utilisateur effectue une recherche ou quand il scroll et qu’une quantité de donnée est chargée.
-
-<design figma-url="https://www.figma.com/design/ud1QBuvu6PMBaMRljCZVYV/?node-id=6524:56054">
-
-</design>
 
 ### États spécifiques
 
@@ -210,17 +116,9 @@ Un message d'erreur s'affiche sous le champ lorsque les exigences du Select ne s
 
 Si un message d'aide était présent, le texte du message d'erreur doit fournir les mêmes informations que le message d'aide, en plus d’expliciter l’erreur.
 
-<design figma-url="https://www.figma.com/design/ud1QBuvu6PMBaMRljCZVYV/?node-id=6624:123510">
-
-</design>
-
 #### Option sélectionnée en alerte ou erreur
 
 Il est possible que certaines alertes ou erreurs soient liées à une ou plusieurs options sélectionnées par l'utilisateur. Dans ce cas, la Chip correspondant à cette valeur porte le feedback d'alerte ou d'erreur (couleur + icône).
-
-<design figma-url="https://www.figma.com/design/ud1QBuvu6PMBaMRljCZVYV/?node-id=6624:123512">
-
-</design>
 
 ## Règles d'utilisation
 

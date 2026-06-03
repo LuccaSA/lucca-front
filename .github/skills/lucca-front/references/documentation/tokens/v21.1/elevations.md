@@ -24,12 +24,6 @@ Ce niveau d’élévation combine les tokens :`--pr-t-elevation-surface-raised``
 
 Au survol, ce niveau d’élévation reprend les tokens :`--pr-t-elevation-surface-raised``--pr-t-elevation-shadow-overlay`
 
-<notes>
-
-## 
-
-</notes>
-
 ### **Overflow**
 
 L'overflow indique que le contenu a défilé en-dessous d’une surface. Il peut être utilisé pour le défilement vertical ou horizontal. Il est utilisé pour les composants comme le banner ou le footer, mais aussi pour le défilement horizontal de certains tableaux.
@@ -53,8 +47,6 @@ Ce niveau d’élévation porte le token :`--pr-t-elevation-surface-backdrop`
 Les boutons utilisent un tokens d'élévation spécifique. Ce token s'applique aux Button et aux Filter pills.
 
 Il s’agit du tokens :`--pr-t-elevation-shadow-button`
-
----
 
 ## Comportement
 

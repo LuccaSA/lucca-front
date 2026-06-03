@@ -6,8 +6,8 @@
 
 ```html
 Angular Navigation side:
-<a luLink="${…}" ${…}${…}${…}>${…}</a>
+<a luLink="./#example">Text link</a>
 <br />
 Browser Navigation side:
-<a href="${…}" luLink${…}${…}${…}>${…}</a>
+<a href="https://www.example.org" luLink>Text link</a>
 ```

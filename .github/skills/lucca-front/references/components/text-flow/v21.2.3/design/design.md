@@ -36,7 +36,3 @@ Un Heading 2 suivi d’un paragraphe
 * Heading 2 : Marge inférieure : 12px
 * Paragraphe : Marge supérieure : 8px
 * Résultat appliqué : 12 px et non 20 px
-
-<design figma-url="https://www.figma.com/design/ud1QBuvu6PMBaMRljCZVYV/?node-id=4885:8653">
-
-</design>

@@ -36,10 +36,6 @@ Si le Link se trouve à la fin d'une phrase ou d'un paragraphe, assurons-nous qu
 
 Le texte du Link et les éléments à proximité permettent de comprendre la fonction et la destination. Parfois, il est important de clarifier la redirection via un Tooltip au survol du lien.
 
-<design figma-url="https://www.figma.com/design/ud1QBuvu6PMBaMRljCZVYV/?node-id=6223:27650">
-
-</design>
-
 ### Link ou Button ?
 
 Le Link n’a pas le rôle d’un Button : le Button est destiné à effectuer des actions précises, et non à rediriger les utilisateurs vers une autre page. L'action du Button se produit sur la même page.

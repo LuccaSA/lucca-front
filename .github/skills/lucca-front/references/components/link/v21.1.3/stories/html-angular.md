@@ -6,14 +6,14 @@
 
 ```html
 Routing application :
-<a luLink="${…}" ${…}${…}>${…}</a>
+<a luLink="./#example">Text link</a>
 <br />
 Routing application (nouvelle fenêtre) :
-<a luLink="${…}" external${…}${…}>${…}</a>
+<a luLink="./#example" external>Text link</a>
 <br />
 Lien hors application :
-<a href="${…}" luLink${…}${…}>${…}</a>
+<a href="https://www.example.org" luLink>Text link</a>
 <br />
 Lien hors application (nouvelle fenêtre) :
-<a href="${…}" luLink external${…}${…}>${…}</a>
+<a href="https://www.example.org" luLink external>Text link</a>
 ```

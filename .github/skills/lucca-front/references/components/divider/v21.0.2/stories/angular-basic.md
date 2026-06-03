@@ -7,13 +7,5 @@ import { IconComponent } from '@lucca-front/ng/icon';
 ```
 
 ```html
-<lu-divider ${…} ${…} ${…}><lu-icon icon="heart" /></lu-divider>
-```
-
-```html
-<lu-divider ${…} ${…} ${…}><button luButton>${…}</button></lu-divider>
-```
-
-```html
-<lu-divider ${…} ${…} ${…}>${…}</lu-divider>
+<lu-divider>Text</lu-divider>
 ```

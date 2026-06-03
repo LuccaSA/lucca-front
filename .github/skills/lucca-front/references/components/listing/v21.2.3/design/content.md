@@ -25,19 +25,3 @@
 **Bien noter :** chaque élément doit être cohérent avec les autres, avec la même formulation, le même niveau d'information.
 
 ## Exemples
-
-<design figma-url="https://www.figma.com/design/UlH9yiGkWUQFlpJvKBp3bV/?node-id=942:9316">
-
-**list-variantes-1**
-
-**list-variantes-1**
-
-</design>
-
-<design figma-url="https://www.figma.com/design/UlH9yiGkWUQFlpJvKBp3bV/?node-id=985:4188">
-
-**list-variantes-2**
-
-**list-variantes-2**
-
-</design>

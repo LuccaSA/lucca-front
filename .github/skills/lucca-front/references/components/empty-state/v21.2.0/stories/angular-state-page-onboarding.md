@@ -11,11 +11,11 @@ import { TagComponent } from '@lucca-front/ng/tag';
 ```html
 <lu-empty-state-page
 	class="palette-pagga"
-	heading="${…}"
+	heading="Augmentez vos collaborateurs en 3 étapes"
 	[slotTop]="slotTop"
 	[illustration]="illustration"
 	[description]="description"
-	hx="${…}"
+	hx="1"
 >
 	<button luButton type="button">Créer une campagne</button>
 </lu-empty-state-page>
@@ -29,6 +29,8 @@ import { TagComponent } from '@lucca-front/ng/tag';
 	</lu-listing>
 </ng-template>
 <ng-template #illustration>
-	<lu-empty-state-page-illustration${…}${…} />
+	<lu-empty-state-page-illustration
+		src="https://cdn.lucca.fr/transverse/prisme/visuals/empty-states/pagga/mealvoucher-icecream.svg"
+	/>
 </ng-template>
 ```

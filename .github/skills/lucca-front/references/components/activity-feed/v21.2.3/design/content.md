@@ -4,10 +4,6 @@
 
 ### En-tête
 
-<design figma-url="https://www.figma.com/design/ud1QBuvu6PMBaMRljCZVYV/?node-id=7763:13630">
-
-</design>
-
 ### Description d'une action
 
 L'entête se lit comme une phrase simple : **[Auteur] + [Verbe d'action] + [Objet]**.

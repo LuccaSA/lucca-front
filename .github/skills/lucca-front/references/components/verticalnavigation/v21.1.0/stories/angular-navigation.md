@@ -5,7 +5,7 @@ import { VerticalNavigationComponent, VerticalNavigationGroupComponent, Vertical
 ```
 
 ```html
-<lu-vertical-navigation${…}>
+<lu-vertical-navigation heading="Section">
 	<lu-vertical-navigation-group label="Group 1" icon="heart">
 		<lu-vertical-navigation-item>
 			<a luVerticalNavigationLink href="#">Item 1</a>
@@ -17,7 +17,7 @@ import { VerticalNavigationComponent, VerticalNavigationGroupComponent, Vertical
 			<a luVerticalNavigationLink href="#">Item 3</a>
 		</lu-vertical-navigation-item>
 	</lu-vertical-navigation-group>
- 	<lu-vertical-navigation-item>
+	<lu-vertical-navigation-item>
 		<a luVerticalNavigationLink href="#" icon="heartFilled">Item 4</a>
 	</lu-vertical-navigation-item>
 </lu-vertical-navigation>

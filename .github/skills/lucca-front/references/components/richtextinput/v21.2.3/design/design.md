@@ -1,25 +1,8 @@
 # richtextinput — Design
 
-<design figma-url="https://www.figma.com/design/ud1QBuvu6PMBaMRljCZVYV/?node-id=5530:9393">
-
-</design>
-
 **Des questions, commentaires ou retours ?**Laisser un commentaire sur Figma ou contactez-nous sur Slack :*#design-system-public*
 
 ## Anatomie
-
-<design figma-url="https://www.figma.com/design/ud1QBuvu6PMBaMRljCZVYV/?node-id=5365:5027">
-
-<notes>
-
-1. **Label :** Le label du champ doit indiquer quel type d'information le champ requiert.
-2. **Champ de saisie :** Le champ dans lequel les utilisateurs cliquent pour saisir du texte.
-3. **Barre d’outils :** L’espace dans lequel se retrouve les outils pour personnaliser le texte.
-4. **Inline message :** Le message d’aide est optionnel. Il permet de fournir des informations supplémentaires à l’utilisateur pour l’aider à compléter le champ.
-
-</notes>
-
-</design>
 
 ## Options
 
@@ -29,33 +12,17 @@ Les champs obligatoires doivent être signalés explicitement aux utilisateurs. 
 
 Si un champ obligatoire n’est pas renseigné, une erreur sera remontée à la soumission du formulaire. Pour en savoir plus, vous pouvez vous référer à la guideline sur les erreurs dans les formulaires.
 
-<design figma-url="https://www.figma.com/design/ud1QBuvu6PMBaMRljCZVYV/?node-id=5364:3955">
-
-</design>
-
 ### Balises
 
 Il est possible d’afficher une liste de balises, via le composant Tag, que l’utilisateur pourra sélectionner pour les intégrer dans son corps de texte. Ces balises font appel à des données de l’utilisateur ou de l’entreprise (prénom, nom, poste, coordonnées, etc.).
 
 La liste des balises est définie et personnalisées en fonction du contexte.
 
-<design figma-url="https://www.figma.com/design/ud1QBuvu6PMBaMRljCZVYV/?node-id=5364:3957">
-
-</design>
-
 ### Mention d’un collaborateur (non disponible pour le moment)
 
 Un bouton “@” permet de mentionner un collaborateur. La mention s’affiche au format “@Prénom” dans le corps de texte.
 
-<design figma-url="https://www.figma.com/design/ud1QBuvu6PMBaMRljCZVYV/?node-id=5364:3959">
-
-</design>
-
 Il est aussi possible de mentionner une personne en écrivant “@” dans le corps de texte. Une liste apparait alors et se filtre au fur et à mesure que l’utilisateur saisit le nom du collaborateur.
-
-<design figma-url="https://www.figma.com/design/ud1QBuvu6PMBaMRljCZVYV/?node-id=5364:3963">
-
-</design>
 
 ## Comportement
 
@@ -63,25 +30,13 @@ Il est aussi possible de mentionner une personne en écrivant “@” dans le co
 
 Les styles de texte sont définis par le composant Text flow. Les styles appliquées seront les styles utilisés lorsque le texte sera affiché dans un autre contexte (WYSIWYG : “What you see is what you get”).
 
-<design figma-url="https://www.figma.com/design/ud1QBuvu6PMBaMRljCZVYV/?node-id=5364:3966">
-
-</design>
-
 ### Redimensionnement
 
 #### Hauteur par défaut
 
 La hauteur du Rich textfield est fixe par défaut. Cette hauteur correspond à 3 lignes de texte (hauteur minimale) mais peut-être personnalisée en fonction du contexte.
 
-<design figma-url="https://www.figma.com/design/ud1QBuvu6PMBaMRljCZVYV/?node-id=5364:3968">
-
-</design>
-
 Lorsque le contenu est plus long, une barre de scroll s’affiche dans le composant permettant ainsi à l’utilisateur de consulter l’entièreté du message.
-
-<design figma-url="https://www.figma.com/design/ud1QBuvu6PMBaMRljCZVYV/?node-id=5364:3970">
-
-</design>
 
 #### Redimensionnement manuel
 
@@ -89,25 +44,13 @@ S’il le souhaite, l’utilisateur peut manuellement agrandir le champ vertical
 
 L’utilisateur ne pourra pas donner une hauteur plus petite que celle par défaut (3 lignes de texte).
 
-<design figma-url="https://www.figma.com/design/ud1QBuvu6PMBaMRljCZVYV/?node-id=5364:3972">
-
-</design>
-
 #### Redimensionnement automatique
 
 Dans certains contexte, il est possible d’activer cette option. Le Rich textfield se redimensionne automatiquement lorsque l’utilisateur saisit son texte.
 
-<design figma-url="https://www.figma.com/design/ud1QBuvu6PMBaMRljCZVYV/?node-id=5364:3975">
-
-</design>
-
 ### Champ en erreur
 
 Le message d'erreur s'affiche lorsque les exigences du champ ne sont pas remplies, incitant l'utilisateur à corriger ou à modifier sa saisie initiale. Si un message d'aide était présent, le texte du message d'erreur doit fournir les mêmes informations que le message d'aide, en plus d’expliciter l’erreur.
-
-<design figma-url="https://www.figma.com/design/ud1QBuvu6PMBaMRljCZVYV/?node-id=5364:3977">
-
-</design>
 
 ## Règles d’utilisation
 

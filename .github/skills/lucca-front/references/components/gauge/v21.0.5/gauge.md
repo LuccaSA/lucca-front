@@ -9,7 +9,7 @@ import { GaugeComponent } from '@lucca-front/ng/gauge';
 ## Basic Usage
 
 ```html
-<lu-gauge />
+<lu-gauge size="40" value="33" />
 ```
 
 ## API Reference

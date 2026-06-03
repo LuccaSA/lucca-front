@@ -6,15 +6,25 @@
 
 ```html
 <h3>Tooltip simple</h3>
-<button id="random-story-id" type="button" luButton luTooltip="👋 Hello" ${…}>Tooltip au survol</button>
+<button
+	id="random-story-id"
+	type="button"
+	luButton
+	luTooltip="👋 Hello"
+	luTooltipEnterDelay="300"
+	luTooltipLeaveDelay="100"
+>
+	Tooltip au survol
+</button>
 <h3>Tooltip sur un texte</h3>
-<span luTooltip="👋 Hello" ${…}>Tooltip au survol</span>
+<span luTooltip="👋 Hello" luTooltipEnterDelay="300" luTooltipLeaveDelay="100">Tooltip au survol</span>
 <h3>Tooltip et ellipse</h3>
 <div
 	class="pr-u-ellipsis"
 	style="width: 10rem"
 	luTooltip="Ce texte est trop long pour être affiché entièrement. Le tooltip apparait au survol."
-	${…}
+	luTooltipEnterDelay="300"
+	luTooltipLeaveDelay="100"
 	[luTooltipWhenEllipsis]="true"
 >
 	Ce texte est trop long pour être affiché entièrement. Le tooltip apparait au survol.
@@ -22,7 +32,8 @@
 <div
 	class="pr-u-ellipsis"
 	luTooltip="Ce texte est affiché entièrement. Le tooltip n'apparait pas au survol."
-	${…}
+	luTooltipEnterDelay="300"
+	luTooltipLeaveDelay="100"
 	[luTooltipWhenEllipsis]="true"
 >
 	Ce texte est affiché entièrement. Le tooltip n'apparait pas au survol.

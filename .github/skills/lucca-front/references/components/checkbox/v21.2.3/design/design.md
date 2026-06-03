@@ -1,25 +1,10 @@
 # checkbox — Design
 
-<design figma-url="https://www.figma.com/design/ud1QBuvu6PMBaMRljCZVYV/?node-id=5578:106727">
-
-</design>
-
 **Mots-clés :**case, coche, toggle, boolean
 
 **Des questions, commentaires ou retours ?**Laisser un commentaire sur Figma ou contactez-nous sur Slack :*#design-system-public*
 
 ## Anatomie
-
-<design figma-url="https://www.figma.com/design/ud1QBuvu6PMBaMRljCZVYV/?node-id=5406:130879">
-
-<notes>
-
-1. **Sélecteur :** il représente la case à cocher. Il peut être dans trois états : vide (non cochée), cochée, ou indéterminée. Il doit être facilement identifiable et cliquable.
-2. **Label **: il décrit clairement l’action ou l’option liée à la case. Il doit être concis, explicite, et positionné à droite de la Checkbox
-
-</notes>
-
-</design>
 
 ## Options
 
@@ -27,19 +12,11 @@
 
 Chaque bouton Radio peut afficher un message d’aide spécifique, placé sous son Label, pour donner une information jugée indispensable sur l’option.
 
-<design figma-url="https://www.figma.com/design/ud1QBuvu6PMBaMRljCZVYV/?node-id=5406:130895">
-
-</design>
-
 ### Champ obligatoire
 
 Les champs obligatoires doivent être signalés explicitement aux utilisateurs. C’est à la fois une recommandation d’accessibilité et d’ergonomie : les utilisateurs complètent ainsi les formulaires sans avoir de doute sur le caractère obligatoire ou optionnel de chaque champ.
 
 Si un champ obligatoire n’est pas renseigné, une erreur sera remontée à la soumission du formulaire.
-
-<design figma-url="https://www.figma.com/design/ud1QBuvu6PMBaMRljCZVYV/?node-id=5406:133707">
-
-</design>
 
 ### Groupe de Checkbox
 
@@ -53,19 +30,11 @@ Par défaut, les groupes de Checkbox sont verticaux. Il est possible d’utilise
 
 Si ces conditions ne sont pas remplies, l’affiche horizontal rend la lecture difficile.
 
-<design figma-url="https://www.figma.com/design/ud1QBuvu6PMBaMRljCZVYV/?node-id=5406:130890">
-
-</design>
-
 ### Checklist
 
 Une version checklist est disponible. Cette version doit être utilisé comme une *to do list*, lorsque l'utilisateur coche quelque chose pour signifier que c'est réalisé.
 
 La coche peut aussi être utilisée seule en début de ligne dans un Index table ou une Card.
-
-<design figma-url="https://www.figma.com/design/ud1QBuvu6PMBaMRljCZVYV/?node-id=5767:173953">
-
-</design>
 
 ## Comportement
 
@@ -80,17 +49,9 @@ Le composant Checkbox est entièrement navigable au clavier :
 
 Si le Label ou le contenu des messages d’aide est plus long que l’espace disponible, le texte passe naturellement à la ligne.
 
-<design figma-url="https://www.figma.com/design/ud1QBuvu6PMBaMRljCZVYV/?node-id=5406:130901">
-
-</design>
-
 ### Champ en erreur
 
 Un message d'erreur s'affiche lorsque le champ est indiqué comme obligatoire et qu’il n’est pas sélectionné. La Checkbox porte la couleur Critical.
-
-<design figma-url="https://www.figma.com/design/ud1QBuvu6PMBaMRljCZVYV/?node-id=5406:130903">
-
-</design>
 
 ### Zone interactive
 

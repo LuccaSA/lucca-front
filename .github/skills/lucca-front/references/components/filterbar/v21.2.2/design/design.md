@@ -6,16 +6,6 @@
 
 ## Anatomie
 
-<notes>
-
-1. **Vues :** Elles permettent d’afficher des contenus prédéfinis pour simplifier l’expérience de l’utilisateur. C’est le composant Segmented control qui est utilisé.
-2. **Bouton d’ajout de filtres :** Ce bouton permet d’afficher une liste filtres masqués par défaut. L’utilisateur peut alors sélectionner les filtres qu’il souhaite utiliser pour affiner les résultats. Cette option est détaillé plus bas.
-3. **Filtres :** La liste des filtres avec lesquels l’utilisateur peut interagir pour affiner sa recherche. Chaque filtre est représenté par une Filter pill.
-4. **Barre de recherche :** La barre de recherche fonctionne comme un filtre supplémentaire. Elle permet de rechercher un contenu spécifique au sein des données déjà filtrées. Elle se positionne toujours en dernière.
-5. **Actions associées :** Les boutons d’action associées, typiquement pour exporter ou télécharger le contenu filtré sous un format spécifique, sont toujours placés à droite de la Filter bar. Cette option est détaillé plus bas.
-
-</notes>
-
 ☝️ Si vous souhaitez en savoir plus sur son utilisation au sein d’une interface, son positionnement et les spécifications Design, rendez-vous en bas de cette page.
 
 ## Comportement
@@ -26,8 +16,6 @@ Lorsqu’un compteur est affiché dans le Segmented control utilisé pour les vu
 
 Si des filtres sont appliqués, cela n’a pas d’impact sur le nombre indiqué dans le Numeric badge.
 
----
-
 ### Ajout de filtres supplémentaires
 
 Des filtres supplémentaires, masqués derrière un bouton, peuvent être affichés si l’utilisateur souhaite affiner les résultats.
@@ -35,6 +23,8 @@ Des filtres supplémentaires, masqués derrière un bouton, peuvent être affich
 Les Filter pills ajoutés s’affichent au fur et à mesure que l’utilisateur les sélectionne. Si la liste de filtres affichés est longue, les Filter pills passent automatiquement à la ligne.
 
 Il n’est pas possible de masquer un filtre affiché par défaut. Ces derniers ne sont donc pas présent dans la liste des filtres.
+
+Si l'utilisateur décide de masquer un filtre actif, ce dernier sera désactivé.
 
 ### Actions associées
 
@@ -64,8 +54,6 @@ Lorsque vues et Filter pills sont cumulés, les Filter pills sont, par défaut, 
 
 Cependant, dans de rares cas, nous souhaitons restreindre les options de filtrages pour certaines vues. Dans ce cas, les Filter pills peuvent alors s’afficher ou se masquer en fonction de la vue sélectionnée par l’utilisateur.
 
----
-
 ### Filtres, tableau, pagination et sélection
 
 Lorsque des filtres sont appliqués sur un tableau paginé, ils restent appliqués lorsque l’utilisateur navigue de page en page.
@@ -88,13 +76,9 @@ La Filter bar est positionnée sur une ligne dédiée. Elle peut se trouver :
 * Directement entre l’entête et le contenu de la page, son impact aura un effet sur l’ensemble de la page.
 * Dans une section spécifique de l’interface, auquel cas son impact sera restreint à cette section.
 
----
-
 ### Petits écrans et mobile
 
 L’affichage de la Filter bar s’adapte en fonction de l’espace disponible et du device.
 
 * Sur un écran de petite taille, sans écran tactile, les Filter pills passent automatiquement à la ligne en fonction de l’espace disponible.
 * Lorsqu’il s’agit d’un écran tactile, les Filter pills restent affichées sur une seule et même ligne. L’utilisateur peut alors scroller horizontalement pour parcourir les filtres disponibles. Cela se rapproche d’un comportement plus commun de navigation sur téléphone.
-
----

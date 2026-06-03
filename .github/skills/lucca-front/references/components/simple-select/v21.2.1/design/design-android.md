@@ -2,17 +2,6 @@
 
 ## Anatomie
 
-<notes>
-
-1. **Label :** Le label du champ doit indiquer quel type d'information le champ requiert.
-2. **Champ de sélection :** l’utilisateur y clique pour ouvrir l’écran de sélection.
-3. **Tout effacer :** La croix efface tout dans le champ de saisie. Elle n'apparaît que lorsqu’une option au moins a été sélectionnée.
-4. **Écran de sélection (Select Dialog) :** L’écran de sélection contient la liste de toutes les options sélectionnables.
-
-</notes>
-
----
-
 ## Options
 
 ### Regroupement des options
@@ -27,8 +16,6 @@ Lorsque la création est une action fréquente, l'option d’ajout est affichée
 
 L'utilisateur a la possibilité d'ajouter une nouvelle option après avoir saisi une recherche, si celle-ci n’a donné aucun résultat.
 
----
-
 ## Comportement
 
 ### Recherche
@@ -42,8 +29,6 @@ Il est possible de quitter le contexte de recherche en appuyant sur le bouton *C
 Le contenu de l’écran de sélection se transforme en *empty state* lorsqu'il n'existe aucune option disponible ou qu'une recherche ne donne aucun résultat. Le message doit être adapté pour chacun de ces cas.
 
 Cet état peut être cumulé avec l'ajout d'options. C'est notamment pratique pour pouvoir créer une nouvelle donnée directement via une Fullscreen Cover.
-
----
 
 ## Règles d'utilisation
 

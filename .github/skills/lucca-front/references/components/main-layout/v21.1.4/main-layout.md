@@ -9,7 +9,7 @@ import { MainLayoutBlockComponent, MainLayoutComponent } from '@lucca-front/ng/m
 ## Basic Usage
 
 ```html
-<lu-main-layout> </lu-main-layout>
+<lu-main-layout footerSticky> <ng-container mainLayoutHeader> <lu-container> <div class="fakeContent">header</div> </lu-container> </ng-container> <lu-main-layout-block> <lu-container> <div class="fakeContent">content</div> </lu-container> </lu-main-layout-block> <ng-container mainLayoutFooter> <lu-container> <div class="fakeContent">footer</div> </lu-container> </ng-container> </lu-main-layout>
 ```
 
 ## API Reference

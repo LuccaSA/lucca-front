@@ -6,6 +6,12 @@
 import { SoftwareIconComponent } from '@lucca-front/ng/software-icon';
 ```
 
+## Basic Usage
+
+```html
+<lu-software-icon icon="absences" />
+```
+
 ## API Reference
 
 ### SoftwareIconComponent (component)
