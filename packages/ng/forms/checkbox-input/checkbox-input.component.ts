@@ -1,10 +1,8 @@
 import { booleanAttribute, ChangeDetectionStrategy, Component, forwardRef, inject, input, signal, Signal, ViewEncapsulation } from '@angular/core';
-import { ReactiveFormsModule } from '@angular/forms';
+import { ControlValueAccessor, NG_VALUE_ACCESSOR } from '@angular/forms';
 import { FILTER_PILL_INPUT_COMPONENT, FilterPillInputComponent, FilterPillLabelDirective, FilterPillLayout } from '@lucca-front/ng/filter-pills';
 import { FORM_FIELD_INSTANCE, FormFieldComponent, INPUT_FRAMED_INSTANCE, InputDirective, ɵPresentationDisplayDefaultDirective } from '@lucca-front/ng/form-field';
 import { LuTooltipTriggerDirective } from '@lucca-front/ng/tooltip';
-import { injectNgControl } from '../inject-ng-control';
-import { NoopValueAccessorDirective } from '../noop-value-accessor.directive';
 import { CHECKBOX_INPUT_TRANSLATIONS } from './checkbox-input.translate';
 import { getIntl } from '@lucca-front/ng/core';
 
@@ -12,13 +10,17 @@ let nextId = 0;
 
 @Component({
 	selector: 'lu-checkbox-input',
-	imports: [ReactiveFormsModule, InputDirective, FilterPillLabelDirective, LuTooltipTriggerDirective, ɵPresentationDisplayDefaultDirective],
-	hostDirectives: [NoopValueAccessorDirective],
+	imports: [InputDirective, FilterPillLabelDirective, LuTooltipTriggerDirective, ɵPresentationDisplayDefaultDirective],
 	templateUrl: './checkbox-input.component.html',
 	styleUrl: './checkbox-input.component.scss',
 	encapsulation: ViewEncapsulation.None,
 	changeDetection: ChangeDetectionStrategy.OnPush,
 	providers: [
+		{
+			provide: NG_VALUE_ACCESSOR,
+			multi: true,
+			useExisting: forwardRef(() => CheckboxInputComponent),
+		},
 		{
 			provide: FILTER_PILL_INPUT_COMPONENT,
 			useExisting: forwardRef(() => CheckboxInputComponent),
@@ -29,7 +31,7 @@ let nextId = 0;
 		'[class.mod-checklist]': 'checklist()',
 	},
 })
-export class CheckboxInputComponent implements FilterPillInputComponent {
+export class CheckboxInputComponent implements ControlValueAccessor, FilterPillInputComponent {
 	framed = inject(INPUT_FRAMED_INSTANCE, { optional: true }) !== null;
 	parentInput = inject(FILTER_PILL_INPUT_COMPONENT, { optional: true, skipSelf: true });
 	formField = inject<FormFieldComponent>(FORM_FIELD_INSTANCE, { optional: true });
@@ -51,12 +53,42 @@ export class CheckboxInputComponent implements FilterPillInputComponent {
 	hideCombobox: Signal<boolean> = signal(true);
 	showColon: Signal<boolean> = signal(false);
 
-	ngControl = injectNgControl();
+	readonly value = signal<boolean>(false);
+	readonly disabled = signal<boolean>(false);
+
+	#onChange?: (value: boolean) => void;
+	#onTouched?: () => void;
 
 	constructor() {
 		if (this.formField) {
 			this.formField.layout.set('checkable');
 		}
+	}
+
+	writeValue(value: boolean): void {
+		this.value.set(value);
+	}
+
+	registerOnChange(fn: (value: boolean) => void): void {
+		this.#onChange = fn;
+	}
+
+	registerOnTouched(fn: () => void): void {
+		this.#onTouched = fn;
+	}
+
+	setDisabledState(isDisabled: boolean): void {
+		this.disabled.set(isDisabled);
+	}
+
+	onCheckboxChange(event: Event): void {
+		const checked = (event.target as HTMLInputElement).checked;
+		this.value.set(checked);
+		this.#onChange?.(checked);
+	}
+
+	onTouched(): void {
+		this.#onTouched?.();
 	}
 
 	clearFilterPillValue(): void {

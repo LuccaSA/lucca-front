@@ -322,7 +322,15 @@
 					</div>
 				</div>
 			</td>
-			<td></td>
+			<td>
+				<lu-form-field label="Label" tooltip="Tooltip" errorInlineMessage="Helper text">
+					<lu-checkbox-input [formControl]="invalidControl" />
+				</lu-form-field>
+
+				<lu-form-field label="Label" tooltip="Tooltip" errorInlineMessage="Helper text">
+					<lu-checkbox-input [formControl]="invalidCheckedControl" />
+				</lu-form-field>
+			</td>
 		</tr>
 		<tr>
 			<td>Checklist</td>
