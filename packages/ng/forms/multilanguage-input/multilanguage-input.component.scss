@@ -5,6 +5,12 @@
 		max-block-size: 20rem;
 		max-inline-size: 100%;
 		overflow: auto;
+
+		.textField:not(:focus-within, :hover) {
+			.button.mod-AI {
+				@include a11y.mask;
+			}
+		}
 	}
 
 	@layer mods {
