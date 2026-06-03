@@ -86,6 +86,11 @@
       "factory": "./lu-container/index",
       "schema": "./lu-container/schema.json"
     },
+    "lu-grid": {
+      "description": "Migrate HTML grid to the new lu-grid component",
+      "factory": "./lu-grid/index",
+      "schema": "./lu-grid/schema.json"
+    },
     "lu-button": {
       "description": "Migrate CSS-only buttons to the new luButton component",
       "factory": "./lu-button/index",
