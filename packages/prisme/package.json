@@ -4,7 +4,8 @@
   "description": "Design system made by @lucca",
   "repository": {
     "type": "git",
-    "url": "git+https://github.com/LuccaSA/lucca-front.git"
+    "url": "git+https://github.com/LuccaSA/lucca-front.git",
+    "directory": "packages/prisme"
   },
   "license": "MIT",
   "public": true,
