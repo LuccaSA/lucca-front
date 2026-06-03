@@ -243,8 +243,14 @@ export class LuTooltipTriggerDirective implements OnDestroy {
 		Object.assign(clone.style, {
 			inlineSize: 'fit-content',
 			whiteSpace: 'nowrap',
-			position: 'absolute',
+			// `fixed` + pinned origin keeps the (potentially very wide) clone out of the
+			// document's scrollable overflow, so measuring never flashes a scrollbar.
+			position: 'fixed',
+			insetBlockStart: '0',
+			insetInlineStart: '0',
 			visibility: 'hidden',
+			pointerEvents: 'none',
+			contain: 'layout',
 		});
 		this.#document.body.appendChild(clone);
 		return clone;
