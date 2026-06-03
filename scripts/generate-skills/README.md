@@ -103,13 +103,13 @@ Le pipeline agrège **4 sources**, toutes déterministes (pas d'IA) :
     │   ├── guidelines/v21.2/         # Guidelines dev UI
     │   ├── patterns/v21.2/           # Design patterns (formulaires, responsive, IA…)
     │   └── deprecated.md             # Liste des composants dépréciés + remplacements
-    └── tools/                        # Outils SCSS + Angular (versionnés par fix)
-        └── v21.2.1/
-            ├── animations.md         # Keyframes SCSS
-            ├── functions.md          # pxToRem, flatMap…
-            ├── mixins-*.md           # Mixins (a11y, media, color, text…)
-            ├── ng-animations.md      # Angular animations (fade, scale, slide)
-            └── ng-number.md          # LuNumberPipe
+    └── tools/                        # Outils SCSS + Angular (versionnés par mineure)
+        └── v21.2/
+            ├── animations.md         # Keyframes / animations SCSS
+            ├── mixins.md             # Mixins (a11y, media, color, text…)
+            ├── numbers.md            # Helpers nombres (LuNumberPipe…)
+            ├── scrollbox.md          # Scrollbox
+            └── utilitaires.md        # Classes utilitaires
 ```
 
 Le fichier principal `button.md` contient uniquement l'import, le basic usage, la table d'API et les liens vers les sous-fichiers. Cela minimise la consommation de tokens quand l'agent n'a besoin que de l'API.
@@ -122,8 +122,9 @@ scripts/generate-skills/
 ├── config.ts                         # Chargement config (env + JSON)
 ├── types.ts                          # Types TypeScript partagés
 ├── version-config.ts                 # Résolution version → tag, ZH releaseId, SB URL
-├── component-map.json                # Registre des 99 composants (slug, packages, Figma IDs…)
-├── documentation-map.json            # Registre des 48 pages documentation (tokens, contenu, etc.)
+├── component-metadata.json           # Métadonnées par composant (ZH path, Figma node IDs/name/aliases)
+├── component-map.json                # Registre legacy — utilisé uniquement par --validate (couverture ZH)
+├── documentation-map.json            # Registre des pages documentation (tokens, contenu, etc.)
 │
 ├── collectors/
 │   ├── ast-extractor.ts              # Extraction API Angular par regex depuis git tags
@@ -154,13 +155,13 @@ scripts/generate-skills/
 ```
 1. CLI parse (--version, --component, flags)
 2. Résolution version → git tag, ZH release ID, Storybook base URL
-3. Chargement component-map.json + documentation-map.json
+3. Découverte dynamique des composants (index Storybook + packages git) + métadonnées (component-metadata.json) + documentation-map.json
 4. Documentation transverse (par version) :
    a. ZeroHeight fetch      → tokens, contenu, guidelines, patterns (.md versionnés par mineure)
    b. Écriture              → references/documentation/<category>/v<M>.<m>/
 5. Outils (par version) :
    a. Git show              → SCSS mixins/keyframes/fonctions + Angular animations/pipes
-   b. Écriture              → references/tools/v<M>.<m>.<p>/
+   b. Écriture              → references/tools/v<M>.<m>/
 6. Composants (par version) :
    a. Fetch Storybook index.json (versionné)
    b. Pour chaque composant :
@@ -176,32 +177,35 @@ scripts/generate-skills/
 8. Mise à jour SKILL.md (TOC)
 ```
 
-## component-map.json
+## Découverte des composants & métadonnées
 
-Registre central des composants. Chaque entrée est indexée par slug :
+La liste des composants n'est plus maintenue à la main : elle est **découverte dynamiquement** par `collectors/component-discovery.ts` en croisant l'index Storybook (versionné) et les packages Angular présents au git tag. Le slug d'un composant est son slug Storybook (ex: `userpopover`, `errorpage`) — c'est aussi le nom du dossier généré.
+
+`component-metadata.json` ne fait qu'**enrichir** cette découverte. Chaque entrée est indexée par slug (aligné sur le dossier) :
 
 ```jsonc
 {
-  "button": {
-    "storybookSlug": "button",
-    "zeroheightPagePath": "098404-button",
-    "ngPackage": "button",
-    "figmaNodeIds": ["6854:42773"],
-    "category": "Actions",
-    "since": "17.0.0"
+  "userpopover": {
+    "zeroheightPagePath": "85b183",
+    "figmaNodeIds": ["18202:1181"],
+    "figmaName": "pr-UserPopover"
   }
 }
 ```
 
 | Champ | Description |
 |-------|-------------|
-| `storybookSlug` | Slug pour matcher dans l'index Storybook (optionnel si pas de stories) |
 | `zeroheightPagePath` | Segment de page ZeroHeight (stable entre versions) |
-| `ngPackage` | Nom du package Angular (optionnel pour les composants CSS-only) |
 | `figmaNodeIds` | Node IDs Figma pour les design tokens |
+| `figmaName` | Nom du composant dans Figma (peut différer du slug Angular) |
 | `figmaAliases` | Noms Figma alternatifs (many-to-one) |
-| `category` | Catégorie pour le TOC |
-| `since` / `until` | Plage de versions où le composant existe |
+| `ngPackageOverride` | Force le mapping vers un package Angular si l'heuristique échoue |
+
+> La résolution slug → clé tolère les écarts de tirets : `findMetadata` compare en forme compacte (sans tirets), donc `userpopover` retrouve une clé `user-popover` et inversement.
+
+### component-map.json (legacy)
+
+Ancien registre central, conservé uniquement pour `--validate` (couverture ZeroHeight). Seules ses **valeurs** `zeroheightPagePath` sont lues ; ses clés ne servent plus à la génération. Ses champs `since`/`category` reflètent la version design-system d'origine (ex: `19.1`), pas la plage de versions couverte par la skill.
 
 ## Versionnement
 
