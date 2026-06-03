@@ -6,17 +6,6 @@ Laisser un commentaire sur Figma ou contactez-nous sur Slack :*#design-system-pu
 
 ## Anatomie
 
-<notes>
-
-1. En-tête
-2. Avatar et nom du collaborateur
-3. Date
-4. Corps du commentaire
-
-</notes>
-
----
-
 ## Options
 
 ### Avec label
@@ -34,8 +23,6 @@ Le texte affiché dans le Comment peut provenir d’un éditeur de texte riche. 
 ### Pièces-jointes
 
 L’utilisateur peut parfois joindre un document à son commentaire. Dans ce cas, on affichera le fichier joint dans le corps du commentaire, sous le texte rédigé par l’utilisateur.
-
----
 
 ## Cas d'usage
 

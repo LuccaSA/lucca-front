@@ -9,7 +9,10 @@ import { BubbleIconComponent } from '@lucca-front/ng/bubble-icon';
 ## Basic Usage
 
 ```html
-<lu-bubble-icon />\n
+<lu-bubble-icon icon="app" />
+<lu-bubble-icon icon="app" />
+<lu-bubble-icon icon="app" />
+<lu-bubble-icon icon="app" />
 ```
 
 ## API Reference

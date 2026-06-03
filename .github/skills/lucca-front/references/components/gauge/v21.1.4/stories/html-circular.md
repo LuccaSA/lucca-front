@@ -6,13 +6,13 @@
 
 ```html
 <svg
-	class="gauge${…}${…}${…}"
-	width="${…}"
-	height="${…}"
-	viewBox="0 0 ${…} ${…}"
-	${…}
+	class="gauge"
+	width="40"
+	height="40"
+	viewBox="0 0 40 40"
+	[attr.style]="'--components-gauge-value: 33; --components-gauge-circleR: 16px'"
 >
-	<circle class="gauge-circleBackground" cx="${…}" cy="${…}" r="${…}"></circle>
-	<circle class="gauge-circleBar" cx="${…}" cy="${…}" r="${…}"></circle>
+	<circle class="gauge-circleBackground" cx="20" cy="20" r="16"></circle>
+	<circle class="gauge-circleBar" cx="20" cy="20" r="16"></circle>
 </svg>
 ```

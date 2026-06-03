@@ -38,16 +38,6 @@ Découpons un formulaire en Fieldsets pour structurer efficacement des formulair
 
 ### Anatomie
 
-<notes>
-
-1. Form layout
-2. Fieldset
-3. Titre du Fieldset
-4. Ligne
-5. Séparateur entre deux Fieldset
-
-</notes>
-
 ### Séparations des Fieldsets
 
 Pour séparer deux Fieldsets, nous utilisons toujours un Divider. Il permet de structurer visuellement le formulaire et d'améliorer sa lisibilité.
@@ -89,8 +79,6 @@ Un astérisque s’affiche dans le titre du Fieldset (non répété sur les cham
 En cas d’oubli, une erreur identique est affichée sur chaque champ du Fieldset, listant les options possibles. Elle disparaît dès qu’un champ est renseigné.
 
 Si tous les champs d’un Fieldset sont obligatoires, alors l’astérisque doit se trouver à côté du label de chacun des champs.
-
----
 
 ## **Découpage en é**tapes
 

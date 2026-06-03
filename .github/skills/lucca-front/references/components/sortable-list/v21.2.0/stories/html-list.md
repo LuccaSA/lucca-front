@@ -7,8 +7,8 @@
 ```
 
 ```html
-<ul class="sortableList${…}">
-	<li class="sortableList-item${…}">
+<ul class="sortableList">
+	<li class="sortableList-item">
 		<span class="sortableList-item-handler button">
 			<span class="lucca-icon icon-drag" aria-hidden="true"></span>
 			<span class="pr-u-mask">Position 1. Utilisez les touches directionnelles pour réordonner</span>
@@ -21,7 +21,7 @@
 			<span class="pr-u-mask">Delete</span>
 		</button>
 	</li>
-	<li class="sortableList-item${…}">
+	<li class="sortableList-item">
 		<span class="sortableList-item-handler button">
 			<span class="lucca-icon icon-drag" aria-hidden="true"></span>
 			<span class="pr-u-mask">Position 1. Utilisez les touches directionnelles pour réordonner</span>
@@ -34,7 +34,7 @@
 			<span class="pr-u-mask">Delete</span>
 		</button>
 	</li>
-	<li class="sortableList-item${…}">
+	<li class="sortableList-item">
 		<span class="sortableList-item-handler button">
 			<span class="lucca-icon icon-drag" aria-hidden="true"></span>
 			<span class="pr-u-mask">Position 1. Utilisez les touches directionnelles pour réordonner</span>

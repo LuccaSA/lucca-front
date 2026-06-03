@@ -5,5 +5,5 @@ import { StatusBadgeComponent } from '@lucca-front/ng/status-badge';
 ```
 
 ```html
-<lu-status-badge label="${…}" ${…}${…}${…} />
+<lu-status-badge label="Status" />
 ```

@@ -29,21 +29,11 @@ La définition d'une langue de fallback dans les paramètres exclut l'usage d'in
 
 Les paramètres généraux de langues s'appliquent à l'ensemble des utilisateurs de l'instance. Toutefois, comme les utilisateurs ne parlent pas tous la même langue, la langue de rédaction ne peut pas être définie comme un paramètre général. Elle doit rester propre à chaque utilisateur pour s'adapter à sa langue de travail.
 
-<notes>
-
-1. Langues disponibles à traduire 
-
-2. Langue de fallback
-
-</notes>
-
 ### Comportement
 
 Les langues disponibles sont classées par ordre alphabétique. Seules les langues préalablement sélectionnées dans la liste des langues disponibles peuvent être choisies comme langue de fallback.
 
 Afin de prévenir toute erreur, il est impossible de supprimer une langue si celle-ci est définie comme langue de fallback. Par conséquent, les champs de configuration ne peuvent jamais être vides.
-
----
 
 ## Création d'une ressource
 
@@ -55,21 +45,7 @@ L'utilisateur ne peut pas supprimer une langue disponible si celle-ci est défin
 
 Il a également la possibilité d'enregistrer ses réglages actuels en tant que paramètres généraux. cette option n'apparaît que si une modification a été apportée aux langues disponibles ou à la langue de fallback. La langue de rédaction est exclue de ces paramètres généraux : les réglages étant valables pour l'ensemble des utilisateurs de l'instance, et chacun ne parlant pas nécessairement la même langue, ce paramètre doit rester individuel et associé à une ressource.
 
-<notes>
-
-Une modification a été apportée aux langues disponibles ou à la langue de fallback.
-
-</notes>
-
-<notes>
-
-Aucune modification apportée aux langues disponibles ou à la langue de fallback.
-
-</notes>
-
 Une fois l'objet créé, l'utilisateur peut modifier les paramètres à tout moment.
-
----
 
 ## Traduire un formulaire
 
@@ -79,31 +55,9 @@ Dès lors que l'utilisateur sélectionne des langues disponibles pour les collab
 
 Ce composant doit être positionné à proximité immédiate des champs concernés : soit à droite du titre d'un Fieldset, soit dans l'en-tête d'une Dialog ou d’un drawer (à condition de laisser le header fixe).
 
-<notes>
-
-Positionnement du Segmented control dans le header d’un drawer.
-
-</notes>
-
-<notes>
-
-Positionnement du segmented control à droite du Fieldset title.
-
-</notes>
-
 À partir de cinq langues sélectionnées, l'affichage bascule automatiquement vers un Select pour optimiser l'espace.
 
 Les langues affichées dans le Segmented control se limiteront au code de la langue, sans distinction de culture (variantes régionales). En pratique, l'usage d'une langue générique (par exemple un seul anglais) est privilégié pour simplifier le travail de traduction de l’utilisateur. Dans le cas d'un Select, nous affichons le nom complet de la langue suivi de son code entre parenthèses, par exemple : “Français (FR)”.
-
-<notes>
-
-1. Code de la langue 
-
-2. Langue suivi de son code
-
-</notes>
-
----
 
 ## Champs traduisibles
 
@@ -113,25 +67,7 @@ Chaque champ de saisie multilingue est identifiable par le rappel du code de la 
 
 #### Langue de rédaction sélectionnée
 
-<notes>
-
-1. Label (Code de la langue) 
-
-2. Champ
-
-</notes>
-
 #### Langue à traduire sélectionnée
-
-<notes>
-
-1. Label (Code de la langue) 
-
-2. Champ 
-
-3. Inline message : Code de la langue : Contenu rédigé dans la langue de rédaction.
-
-</notes>
 
 ### Cas particulier
 
@@ -143,11 +79,7 @@ Si l'utilisateur tente de soumettre le formulaire sans avoir complété toutes l
 
 Si l'utilisateur choisit la traduction manuelle, nous le redirigions automatiquement vers le premier champ non traduit du formulaire. Une icône d'erreur s'affiche dans le Segmented control au niveau des langues concernés, accompagnée d'un Callout popover pour signaler précisément les langues où les traductions font défaut.
 
----
-
 Dans le cas où le traitement des données serait long, l'affichage d'une barre de progression sera nécessaire pour permettre à l'utilisateur de suivre l'avancement.
-
----
 
 ## Traduire un champ
 
@@ -157,8 +89,6 @@ Lorsqu'un formulaire ne contient qu'un seul champ nécessitant une traduction, i
 - **Don't** : N’utilisons pas de Segmented Control.
 
 Cette règle ne s'applique pas si le champ est un Textarea ou Rich textfield. Pour ces composants, on utilisera un Segmented control positionné à droite du titre du fieldset.
-
----
 
 ## Traduction automatique
 

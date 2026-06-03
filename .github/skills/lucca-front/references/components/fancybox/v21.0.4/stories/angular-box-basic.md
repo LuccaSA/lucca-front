@@ -5,7 +5,11 @@ import { FancyBoxComponent } from '@lucca-front/ng/fancy-box';
 ```
 
 ```html
-<lu-fancy-box${…}${…}${…}${…}>
-		Content
-	</lu-fancy-box>
+<lu-fancy-box
+	backgroundLeft="https://cdn.lucca.fr/transverse/prisme/visuals/fancy-box/background-left-plant.svg"
+	backgroundRight="https://cdn.lucca.fr/transverse/prisme/visuals/fancy-box/background-right-candies.svg"
+	foreground="https://cdn.lucca.fr/transverse/prisme/visuals/fancy-box/foreground-right-pizza.svg"
+>
+	Content
+</lu-fancy-box>
 ```

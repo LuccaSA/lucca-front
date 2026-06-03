@@ -7,15 +7,6 @@ Le composant est disponible en deux tailles :
 * La **taille S**, la plus courante, doit être utilisée dans la majorité des formulaires. Elle permet de sélectionner un fichier ou plusieurs en les présentant directement sous le champ. Cette taille ne doit pas être utilisée pour afficher un aperçu du document sélectionné.
 * La **taille M**, moins utilisée, principalement en début de parcours lorsque l'import d'un document lance un processus d'analyse. Cette taille peut aussi être utilisé dans les formulaire, s'il est intéressant de visualiser un aperçu du fichier sélectionné (une image ou un pdf).
 
-<notes>
-
-1. **Label :** Le label du champ doit indiquer quel type d'information le champ requiert.
-2. **Zone d’ajout du fichier :** La zone définit permet de déposer un fichier à la souris ou de cliquer sur le bouton pour ouvrir le sélecteur de fichier.
-
-</notes>
-
----
-
 ## Cas d’usage
 
 ### Formulaire
@@ -66,15 +57,11 @@ L’analyse du document se lance automatiquement une fois le fichier sélectionn
 
 Des informations supplémentaires peuvent être demandées, ce cas d’usage se rapproche d’une utilisation dans un formulaire. Un bouton de soumission permet de lancer l’analyse du document importé.
 
----
-
 ## Illustrations
 
 Le File upload utilise les Bubble Illustrations, permettant de guider l’utilisateur en illustrant clairement la zone d’upload et dynamiser l’interface pour rendre l’action plus engageante.
 
 Cette illustration peut être modifiée en fonction de la nature des fichiers à importer (photographie, justificatif de dépense, archive, bulletins de paie, etc.).
-
----
 
 ## Comportement
 

@@ -25,11 +25,3 @@
 **Bien noter :** chaque élément doit être cohérent avec les autres, avec la même formulation, le même niveau d'information.
 
 ## Exemples
-
-**list-variantes-1**
-
-**list-variantes-1**
-
-**list-variantes-2**
-
-**list-variantes-2**

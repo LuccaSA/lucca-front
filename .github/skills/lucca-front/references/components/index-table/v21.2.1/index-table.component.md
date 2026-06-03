@@ -6,6 +6,8 @@
 
 Component selector : `lu-index-table`
 
+Le comportement *responsive* du composant n’est pas encore pris en charge dans sa version Angular.
+
 | Example | File |
 |---------|------|
 | Actions | [angular-actions.md](./stories/angular-actions.md) |

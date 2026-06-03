@@ -2,38 +2,19 @@
 
 ## Anatomie
 
-**Anatomie**
-
-**Anatomie**
-
-<notes>
-
-1. **Point :** Il marque l’aspect “statut” et indique à l’utilisateur que l’objet s’inscrit dans un processus.
-2. **Texte :** Le texte doit indiquer clairement le statut de l’objet et son positionnement dans le processus.
-
-</notes>
-
 ## Options
 
 ### Plusieurs tailles disponibles
 
 Le composant existe en deux tailles. La taille par défaut est la plus petite, c’est celle utilisée dans la grande majorité des cas. Lorsqu’un *status-badge* doit se placer à côté d’un titre de niveau 1 ou 2 (titre de page ou de section), il est conseillé d’utiliser la plus grande taille pour garantir une meilleure lisibilité.
 
-**Sizes**
-
-**Sizes**
-
 ### Des couleurs sémantiques
 
 Le *status-badge* doit être utilisé avec les couleurs proposées. Chaque couleur à une signification et appuie le message porté par le statut.
 
-**Colors**
-
-**Colors**
-
 | Neutral | État inactif, l'utilisateur n'a rien à faire. Cela peut correspondre à un état final d’un processus annulé ou refusé. |
 | --- | --- |
-| Ongoing / Pending | Processus en cours, nécessite une action d’un utilisateur pour continuer le processus. Il peut s’agir de l’utilisateur connecté ou d’un autre collaborateur. Le texte marque la différence entre les deux statuts. |
+| Ongoing / Pending | Processus en cours, nécessite une action d’un utilisateur pour continuer le processus. Il peut s’agir de l’utilisateur connecté ou d’un autre collaborateur. Le texte marque la différence entre les deux statuts. Le composant utilise la palette `product`. |
 | Warning | Processus en cours mais la ressource nécessite une attention particulière. |
 | Error  | Processus bloqué en raison d’une erreur. La ressource nécessite une correction de la part de l’utilisateur. |
 | Success | Étape finale d’un processus dans son bon déroulement. |
@@ -44,39 +25,19 @@ Le *status-badge* doit être utilisé avec les couleurs proposées. Chaque coule
 
 Le *status badge* ne peut vivre qu’avec le design proposé par le Design System. Il est interdit de le faire vivre sans son point ni sans son texte. De la même manière, le fond de couleur appuie le message, il est donc conseillé de ne pas l’enlever.
 
-**Design**
-
-**Design**
-
 ### Un seul statut par ressource
 
 Une ressource ne peut porter qu’un seul statut. Si cette ressource s’inscrit simultanément dans plusieurs processus ou états, il peut-être utile de différencier les deux états en utilisant des onglets.
 
-**Tabs**
-
-**Tabs**
-
 Lorsqu'un index table est affiché dans une vue filtrée sur un statut, il ne faut pas répéter ce dernier dans le tableau afin d'éviter une surcharge et une redondance d'informations.
-
-**Tabs - Status**
-
-**Tabs - Status**
 
 ### Positionnement dans un tableau
 
 Dans le cas d’un *index table*, le statut doit être porté dans une colonne prévue à cette effet. Cette colonne doit se trouver vers la gauche du tableau, proche de l’identifiant de la ressource.
 
-**Position - Table**
-
-**Position - Table**
-
 ### Positionnement en dehors d’un tableau
 
 Le statut doit systématiquement être juxtaposé au nom de la ressource qui le porte. Cela facilite la lecture et permet de rapidement lier la ressource et son statut.
-
-**Position - List**
-
-**Position - List**
 
 ### Comportement
 

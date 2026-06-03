@@ -6,22 +6,6 @@
 
 ## Anatomie
 
-**Anatomie**
-
-**Anatomie**
-
-<notes>
-
-1. **Label :** Le label du champ doit indiquer quel type d'information le champ requiert.
-2. **Champ de saisie :** Le champ dans lequel les utilisateurs cliquent pour saisir du texte. La valeur saisie dans ce champ sera appliquée pour les langues qui ne sont pas renseignées dans le Popover.
-3. **Message d’aide (Inline message) :** Le message d’aide est optionnel. Il permet de fournir des informations supplémentaires à l’utilisateur pour l’aider à compléter le champ.
-4. **Bouton :** Le bouton placé dans le champ permet d’ouvrir un Popover.
-5. **Popover :** Le Popover contient un ensemble de Textfield. Chaque Textfield correspond à une locale traduisible.
-
-</notes>
-
----
-
 ## Options
 
 ### Champ obligatoire
@@ -43,8 +27,6 @@ Le bouton dans le champ reste cliquable pour permettre à l’utilisateur de con
 ### Ouverture du popover
 
 Par défaut, le popover de traduction s'ouvre au clic sur l'icône dédiée. Une option `openOnFocus` permet l'affichage automatique du popover dès que le champ reçoit le focus, afin d’améliorer la découvrabilité des autres langues à traduire.
-
----
 
 ## Règles d'utilisation 
 

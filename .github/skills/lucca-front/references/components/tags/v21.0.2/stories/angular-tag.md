@@ -6,5 +6,5 @@ import { TagComponent } from '@lucca-front/ng/tag';
 ```
 
 ```html
-<lu-tag${…} />
+<lu-tag label="Text" />
 ```

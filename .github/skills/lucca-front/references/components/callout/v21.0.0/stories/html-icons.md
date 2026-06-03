@@ -18,9 +18,9 @@
 ```
 
 ```html
-<div class="callout${…}${…}">
+<div class="callout">
 	<div class="callout-icon">
-		<span aria-hidden="true" class="lucca-icon${…}"></span>
+		<span aria-hidden="true" class="lucca-icon icon-signHelp"></span>
 	</div>
 	<div class="callout-content">
 		<div class="callout-content-description">Feedback description</div>

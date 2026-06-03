@@ -6,7 +6,7 @@
 ```
 
 ```html
-<div class="box ${…}">
+<div class="box">
 	<div class="box-close">
 		<button type="button" class="button mod-onlyIcon mod-ghost">
 			<span aria-hidden="true" class="lucca-icon icon-signClose"></span>

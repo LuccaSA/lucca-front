@@ -32,7 +32,3 @@ De manière générale, le Clear n’apparaît que lorsqu’une valeur est saisi
 #### Alternative "valeur nulle"
 
 Pour éviter d'afficher un Clear dans un Select, si beaucoup de champs sont présents sur une interface ou dans un formulaire, il est possible d'afficher une valeur nulle parmi les options. Le champ est alors obligatoire.
-
-<design figma-url="https://www.figma.com/design/ud1QBuvu6PMBaMRljCZVYV/?node-id=6223:675">
-
-</design>

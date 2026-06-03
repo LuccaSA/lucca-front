@@ -6,6 +6,12 @@
 import { BoxComponent } from '@lucca-front/ng/box';
 ```
 
+## Basic Usage
+
+```html
+<lu-box >Lorem ipsum dolor sit amet</lu-box>
+```
+
 ## API Reference
 
 ### BoxComponent (component)

@@ -6,6 +6,13 @@
 import { AppLayoutComponent } from '@lucca-front/ng/app-layout';
 ```
 
+## Basic Usage
+
+```html
+<lu-app-layout> <ng-container appLayoutBanner>banner</ng-container> <ng-container appLayoutNavSide>navSide</ng-container> main
+</lu-app-layout>
+```
+
 ## API Reference
 
 ### AppLayoutComponent (component)

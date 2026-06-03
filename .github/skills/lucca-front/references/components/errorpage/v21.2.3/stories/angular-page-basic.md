@@ -6,7 +6,7 @@ import { ErrorPageComponent } from '@lucca-front/ng/error-page';
 ```
 
 ```html
-<lu-error-page${…}>
+<lu-error-page heading="Erreur 404" illustration="404">
 	<p>La page que vous cherchez n’existe pas.</p>
 	<p><a href="#">Revenir à la page précédente</a></p>
 </lu-error-page>

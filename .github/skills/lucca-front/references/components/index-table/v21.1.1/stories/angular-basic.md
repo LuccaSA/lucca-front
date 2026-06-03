@@ -13,16 +13,30 @@ import { LuUserPopoverComponent, LuUserPopoverDirective, provideLuUserPopover } 
 ```
 
 ```html
-<lu-index-table${…}${…}${…}>
+<lu-index-table>
 	<thead luIndexTableHead>
-		<tr luIndexTableRow${…}>
+		<tr luIndexTableRow>
 			<th luIndexTableCell>Label</th>
-			<th luIndexTableCell${…}>Label</th>
-			<th luIndexTableCell${…}${…}>Label</th>
+			<th luIndexTableCell>Label</th>
+			<th luIndexTableCell>Label</th>
 		</tr>
 	</thead>
-	<tbody luIndexTableBody${…}${…}${…}>
-		${…}
-	</tbody>${…}${…}
-</lu-index-table>${…}
+	<tbody luIndexTableBody>
+		<tr luIndexTableRow>
+			<th luIndexTableCell>
+				<a luIndexTableAction href="#">link</a>
+			</th>
+			<td luIndexTableCell>Content</td>
+			<td luIndexTableCell>Content</td>
+		</tr>
+		<tr luIndexTableRow>
+			<td luIndexTableCell colspan="3">Content</td>
+		</tr>
+		<tr luIndexTableRow>
+			<th luIndexTableCell><a href="#" luIndexTableAction>Content</a></th>
+			<td luIndexTableCell>Content</td>
+			<td luIndexTableCell>Content Content Content</td>
+		</tr>
+	</tbody>
+</lu-index-table>
 ```

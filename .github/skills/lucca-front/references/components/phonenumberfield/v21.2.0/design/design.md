@@ -6,17 +6,6 @@
 
 ## Anatomie
 
-<notes>
-
-1. **Label **: il doit indiquer quel type d'information le champ requiert. Il est aligné à gauche, directement au-dessus de la zone de saisie.
-2. **Sélection de l’indicatif :** il permet de choisir le pays correspondant à son numéro. C’est ce qui détermine le préfixe qui sera sauvegardé.
-3. **Champs de saisie du numéro :** il permet de saisir le numéro de téléphone.
-4. **Message d’aide (Inline message) :** le message d’aide est optionnel. Il permet de fournir des informations supplémentaires à l’utilisateur.
-
-</notes>
-
----
-
 ## Option
 
 ### Message d'aide

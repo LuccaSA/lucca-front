@@ -6,6 +6,6 @@
 
 ```html
 Lorem
-<code class="code ${…}">ipsum dolor sit</code>
+<code class="code">ipsum dolor sit</code>
 amet
 ```

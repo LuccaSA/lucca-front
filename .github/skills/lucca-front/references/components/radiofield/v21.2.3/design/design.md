@@ -1,25 +1,10 @@
 # radiofield — Design
 
-<design figma-url="https://www.figma.com/design/ud1QBuvu6PMBaMRljCZVYV/?node-id=5573:105266">
-
-</design>
-
 **Mots-clés :**bouton radio, radio button, option
 
 **Des questions, commentaires ou retours ?**Laisser un commentaire sur Figma ou contactez-nous sur Slack :*#design-system-public*
 
 ## Anatomie
-
-<design figma-url="https://www.figma.com/design/ud1QBuvu6PMBaMRljCZVYV/?node-id=5405:130797">
-
-<notes>
-
-1. **Label :** Le label du champ doit indiquer quel type d'information demandée et si le champ est obligatoire. L’utilisation d’une icône juxtaposée au label permet de clarifier l'intitulé du champ via un Tooltip.
-2. **Options :** L’option sélectionnée se différencie des autres. L’utilisation d’un message d’aide au niveau de chacune des options permet d’expliciter l’option ou d’en donner plus d’information. L’option sélectionnée se distingue des autre.
-
-</notes>
-
-</design>
 
 ## Options
 
@@ -35,19 +20,11 @@ Il est possible d’utiliser un affichage horizontal si ces conditions sont réu
 
 Si ces conditions ne sont pas remplies, l’affiche horizontal rend la lecture difficile.
 
-<design figma-url="https://www.figma.com/design/ud1QBuvu6PMBaMRljCZVYV/?node-id=5402:30970">
-
-</design>
-
 ### Tag
 
 Le Radio peut porter un Tag, notamment pour indiquer une option recommandée. Ce Tag est positionnée près du label et porte la couleur Product.
 
 Seule une des options peut porter un Tag pour la distinguer des autres.
-
-<design figma-url="https://www.figma.com/design/ud1QBuvu6PMBaMRljCZVYV/?node-id=5402:30973">
-
-</design>
 
 ### Message d’aide
 
@@ -57,17 +34,9 @@ Un message d’aide peut être utilisé pour apporter un complément d’informa
 
 Un message d’aide global permet de contextualiser l’ensemble du choix (expliquer les conséquences du choix, les critères à prendre en compte).
 
-<design figma-url="https://www.figma.com/design/ud1QBuvu6PMBaMRljCZVYV/?node-id=5402:31526">
-
-</design>
-
 #### Au niveau de chaque option
 
 Chaque bouton Radio peut afficher un message d’aide spécifique, placé sous son Label, pour donner plus d’information sur l’option.
-
-<design figma-url="https://www.figma.com/design/ud1QBuvu6PMBaMRljCZVYV/?node-id=5402:31632">
-
-</design>
 
 ## Comportement
 
@@ -84,17 +53,9 @@ Ces comportements sont natifs au navigateur et l’état focus vient s’ajouter
 
 Si les Labels ou le contenu des messages d’aide sont plus longs que l’espace disponible, le texte passe naturellement à la ligne.
 
-<design figma-url="https://www.figma.com/design/ud1QBuvu6PMBaMRljCZVYV/?node-id=5402:30980">
-
-</design>
-
 ### Champ en erreur
 
 Un message d'erreur s'affiche lorsque le champ est indiqué comme obligatoire et qu’aucune option n’est sélectionnée. Les Radio portent la couleur Critical.
-
-<design figma-url="https://www.figma.com/design/ud1QBuvu6PMBaMRljCZVYV/?node-id=5402:30982">
-
-</design>
 
 ### Zone interactive
 

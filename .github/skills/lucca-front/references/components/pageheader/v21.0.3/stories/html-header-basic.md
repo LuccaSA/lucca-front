@@ -6,7 +6,7 @@
 ```
 
 ```html
-<header class="pageHeader ${…}">
+<header class="pageHeader">
 	<div class="pageHeader-content">
 		<div class="pageHeader-content-title">
 			<h1 class="pr-u-margin0">H1. Page title</h1>

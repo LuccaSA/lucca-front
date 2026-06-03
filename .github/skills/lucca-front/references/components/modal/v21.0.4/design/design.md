@@ -2,10 +2,6 @@
 
 🚧 Modal utilise aujourd'hui le nouveau service Dialog par défaut. Il est prévu de la conserver en tant qu'outil permettant de créer rapidement une fenêtre de dialogue et sera ainsi renommée dans le futur.
 
-**pr-Dialog**
-
-**pr-Dialog**
-
 ## Accessibilité
 
 Les recommandations concernent les modales qui nécessitent le blocage de l’arrière-plan en termes d’intéraction. Cela implique l’impossibilité de naviguer dans le body en dehors de la modale, le focus est contenu dans la modale :

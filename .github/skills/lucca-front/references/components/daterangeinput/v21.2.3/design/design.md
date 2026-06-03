@@ -1,27 +1,10 @@
 # daterangeinput — Design
 
-<design figma-url="https://www.figma.com/design/ud1QBuvu6PMBaMRljCZVYV/?node-id=5509:139445">
-
-</design>
-
 **Mots-clés :**plage, range, date range, période
 
 **Des questions, commentaires ou retours ?**Laisser un commentaire sur Figma ou contactez-nous sur Slack :*#design-system-public*
 
 ## Anatomie
-
-<design figma-url="https://www.figma.com/design/ud1QBuvu6PMBaMRljCZVYV/?node-id=5509:136942">
-
-<notes>
-
-1. **Label :** Le label du champ doit indiquer quel type d'information le champ requiert.
-2. **Champ de saisie :** Le champ dans lequel les utilisateurs cliquent pour saisir les dates. La saisie peut se faire directement en saisissant les dates au clavier ou via le calendrier qui s’affiche.
-3. **Calendrier :** La calendrier s’affiche et permet à l’utilisateur de sélectionner une date de début et de fin. Il s’affiche sur en deux partie, facilitant ainsi la saisie.
-4. **Tout effacer :** La croix efface tout dans le champ de saisie. Il n'apparaît que lorsqu’une le champ est optionnel et qu’une valeur est renseignée.
-
-</notes>
-
-</design>
 
 ## Options
 
@@ -31,49 +14,25 @@ Une option permet d’activer un affichage différent des jours chômés dans le
 
 Cette option est désactivée par défaut mais peut être activée selon le contexte ou les besoins spécifiques de l’utilisateur.
 
-<design figma-url="https://www.figma.com/design/ud1QBuvu6PMBaMRljCZVYV/?node-id=6648:143622">
-
-</design>
-
 ### Restriction de la plage de sélection
 
 Cette fonctionnalité permet de définir des bornes minimale et/ou maximale de la période de sélection de dates. Les jours qui tombent en dehors de ces restrictions sont affichés comme inactifs (grisés, barrés et non sélectionnables).
-
-<design figma-url="https://www.figma.com/design/ud1QBuvu6PMBaMRljCZVYV/?node-id=6652:150916">
-
-</design>
 
 ### Période en jours
 
 Dans son état par défaut, le Date range picker permet de sélectionner une période en jours. L’utilisateur peut donc sélectionner le premier et le dernier jour pour définir la période.
 
-<design figma-url="https://www.figma.com/design/ud1QBuvu6PMBaMRljCZVYV/?node-id=5509:136954">
-
-</design>
-
 ### Période en mois
 
 Dans certains contexte, il peut être utile de sélectionner une période en mois. Dans ce cas, le Date range picker permet de naviguer d’année en année pour sélectionner le premier et le dernier mois de la période.
-
-<design figma-url="https://www.figma.com/design/ud1QBuvu6PMBaMRljCZVYV/?node-id=5509:136957">
-
-</design>
 
 ### Période en années
 
 De la même manière que la période en mois, il peut être utile de sélectionner une période en années. Dans ce cas, le Date range picker permet de naviguer de décennie en décennie pour sélectionner la première et la dernière année de la période.
 
-<design figma-url="https://www.figma.com/design/ud1QBuvu6PMBaMRljCZVYV/?node-id=5509:136960">
-
-</design>
-
 ### Périodes pré-définies
 
 L’ajout de périodes prédéfinies dans le Date range picker simplifie l’expérience utilisateur en proposant des sélections rapides pour des périodes fréquemment utilisées. Ces dernières s’affichent sur la gauche du calendrier.
-
-<design figma-url="https://www.figma.com/design/ud1QBuvu6PMBaMRljCZVYV/?node-id=5509:136963">
-
-</design>
 
 ## Règles d'utilisation
 

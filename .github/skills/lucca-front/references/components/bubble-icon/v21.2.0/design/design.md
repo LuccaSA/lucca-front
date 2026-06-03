@@ -24,8 +24,6 @@ Si le besoin d'apporter plus de dynamisme dans l'interface se fait ressentir, il
 
 Il est possible d’appliquer les couleurs de feedback dans certains contextes pour appuyer visuellement l’intention sur l’impact de l’interaction par l’utilisateur.
 
----
-
 ## Cas d'usage
 
 Les Bubbles icons sont utilisées pour illustrer et dynamiser des zones spécifiques de l’interface où l’utilisateur peut interagir. Elles apportent une dimension visuelle claire et attractive, facilitant la compréhension et l’utilisation des fonctionnalités.

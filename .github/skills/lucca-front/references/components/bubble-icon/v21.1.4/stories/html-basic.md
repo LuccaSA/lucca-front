@@ -5,7 +5,7 @@
 ```
 
 ```html
-<div class="bubbleIcon${…}${…} mod-${…}">
+<div class="bubbleIcon mod-left">
 	<svg
 		class="bubbleIcon-bubble"
 		xmlns="http://www.w3.org/2000/svg"
@@ -24,8 +24,7 @@
 		/>
 	</svg>
 	<span class="bubbleIcon-icon">
-		<span aria-hidden="true" class="lucca-icon icon-${…}"></span>
-		${…}
+		<span aria-hidden="true" class="lucca-icon icon-app"></span>
 	</span>
 </div>
 ```

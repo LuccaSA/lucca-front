@@ -13,8 +13,6 @@ Elle peut apparaître :
 
 L’objectif est d’éviter toute **perte involontaire de données**, en informant l’utilisateur des conséquences de son action avant qu’elle ne soit confirmée.
 
----
-
 ## Contenu et rédaction
 
 * **Titre :** Quitter sans enregistrer ?

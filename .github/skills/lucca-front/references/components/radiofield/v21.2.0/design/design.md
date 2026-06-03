@@ -6,15 +6,6 @@
 
 ## Anatomie
 
-<notes>
-
-1. **Label :** Le label du champ doit indiquer quel type d'information demandée et si le champ est obligatoire. L’utilisation d’une icône juxtaposée au label permet de clarifier l'intitulé du champ via un Tooltip.
-2. **Options :** L’option sélectionnée se différencie des autres. L’utilisation d’un message d’aide au niveau de chacune des options permet d’expliciter l’option ou d’en donner plus d’information. L’option sélectionnée se distingue des autre.
-
-</notes>
-
----
-
 ## Options
 
 ### Orientation
@@ -46,8 +37,6 @@ Un message d’aide global permet de contextualiser l’ensemble du choix (expli
 #### Au niveau de chaque option
 
 Chaque bouton Radio peut afficher un message d’aide spécifique, placé sous son Label, pour donner plus d’information sur l’option.
-
----
 
 ## Comportement
 

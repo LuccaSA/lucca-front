@@ -20,8 +20,6 @@ Ces suggestions s’affichent via le composant Callout.
 
 Lorsque l’utilisateur survole les boutons pour confirmer ou non la proposition, le texte du champ ou celui du Callout s’affiche en barré.
 
----
-
 ## Analyse de contenu
 
 L’analyse de contenu utilise l’IA pour extraire automatiquement des informations des documents importés ou analyser des données renseignées dans les logiciels.
@@ -69,8 +67,6 @@ Nous utiliserons plutôt un **indicateur local** pour mettre en avant les champs
 L’analyse peut servir à rapprocher un nouveau contenu ou document d’un élément déjà existant dans le logiciel. L’IA identifie des correspondances pertinentes et les met en évidence dans l’interface. L’utilisateur peut alors valider ou non le rapprochement.
 
 Ce message s’affiche via le composant Callout.
-
----
 
 ## Assistant conversationnel
 

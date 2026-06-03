@@ -71,8 +71,6 @@ Elles ne doivent pas utiliser ni la palette `Critical`, ni le `mod-critical`. Ce
 
 Le composant Button group permet d'afficher plusieurs boutons sous forme de groupe.
 
----
-
 ## Comportement
 
 ### États

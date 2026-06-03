@@ -8,11 +8,14 @@ import { RadioComponent, RadioGroupInputComponent } from '@lucca-front/ng/forms'
 ```
 
 ```html
-<lu-form-field${…}>
-	<lu-radio-group-input${…} [(ngModel)]="example">
+<lu-form-field label="Label" tooltip="Tooltip message" inlineMessage="Helper message" inlineMessageState="default">
+	<lu-radio-group-input required [(ngModel)]="example">
 		<lu-radio [value]="1" inlineMessage="Option text">Option A</lu-radio>
 		<lu-radio [value]="2" inlineMessage="Option text">Option B</lu-radio>
-		<ng-template #template><strong>Option</strong> text</ng-template>
+		<ng-template #template>
+			<strong>Option</strong>
+			 text
+		</ng-template>
 		<lu-radio [value]="3" [inlineMessage]="template" disabled>Option C</lu-radio>
 	</lu-radio-group-input>
 </lu-form-field>

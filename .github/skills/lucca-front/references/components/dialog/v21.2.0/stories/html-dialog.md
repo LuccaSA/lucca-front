@@ -58,12 +58,12 @@ import {DialogHeaderAction} from '@lucca-front/ng/dialog';
 ```
 
 ```html
-<!-- config: ${…} -->
+<!-- config: {"size":"M","alert":false,"mode":"default","panelClasses":[]} -->
 
 <button luButton [luDialogOpen]="dialogTpl" [luDialogConfig]="config">Open Template-driven Dialog</button>
 
 <ng-template #dialogTpl>
-	<lu-dialog #dialog${…}>
+	<lu-dialog #dialog>
 		<lu-dialog-header>
 			<h1>Template driven header</h1>
 			You can also add more content in header
@@ -82,7 +82,7 @@ import {DialogHeaderAction} from '@lucca-front/ng/dialog';
 ```
 
 ```html
-<!-- config: ${…} -->
+<!-- config: {"size":"S","alert":false,"mode":"default","autoFocus":"first-tabbable"} -->
 
 <button luButton [luDialogOpen]="dialogTpl" [luDialogConfig]="config">Open Template-driven Dialog</button>
 
@@ -107,7 +107,7 @@ import {DialogHeaderAction} from '@lucca-front/ng/dialog';
 ```
 
 ```html
-<!-- config: ${…} -->
+<!-- config: {"size":"S","alert":false,"mode":"default","autoFocus":"first-tabbable"} -->
 
 <button luButton [luDialogOpen]="dialogTpl" [luDialogConfig]="config">
 	Open Template-driven Dialog with Form inside
@@ -169,7 +169,7 @@ import {DialogHeaderAction} from '@lucca-front/ng/dialog';
 <button luButton [luDialogOpen]="dialogTpl" [luDialogConfig]="config">Open Template-driven Fancy Dialog</button>
 
 <ng-template #dialogTpl>
-	<lu-dialog #dialog${…}${…}>
+	<lu-dialog #dialog fancyIllustration="welcome">
 		<lu-dialog-header>
 			<h1>Header</h1>
 		</lu-dialog-header>

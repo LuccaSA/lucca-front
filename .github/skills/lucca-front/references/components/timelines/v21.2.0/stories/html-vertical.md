@@ -12,7 +12,7 @@ Vous pouvez modifier le niveau des titres en l’adaptant à votre plan document
 ```
 
 ```html
-<ol class="timeline mod-vertical ${…} ${…}">
+<ol class="timeline mod-vertical">
 	<li class="timeline-step">
 		<div class="timeline-step-title">
 			<a href="#" class="timeline-step-title-action">Previous step</a>

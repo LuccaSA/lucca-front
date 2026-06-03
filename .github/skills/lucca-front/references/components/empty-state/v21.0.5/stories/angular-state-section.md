@@ -9,12 +9,11 @@ import { PaletteArgType } from '../../../../helpers/common-arg-types';
 
 ```html
 <lu-empty-state-section
-	hx="${…}"
-	${…}
-	heading="${…}"
-	description="${…}"
-	palette="${…}"
-	${…}
+	hx="3"
+	icon="https://cdn.lucca.fr/lucca-front/assets/empty-states/icons/iconRocket.svg"
+	heading="Empty state section"
+	description="Description can be a string or a ng-template"
+	palette="none"
 >
 	<button luButton type="button" palette="product">Button</button>
 	<button luButton="outlined" type="button">Button</button>

@@ -1,9 +1,5 @@
 # tooltip — Design
 
-<design figma-url="https://www.figma.com/design/ud1QBuvu6PMBaMRljCZVYV/?node-id=6229:20532">
-
-</design>
-
 Mots-clés : info-bulle, infobulle, aide, survol
 
 #### Des questions, commentaires ou retours ?
@@ -28,41 +24,21 @@ Laisser un commentaire sur Figma ou contactez-nous sur Slack :*#design-system-pu
 
 Les Tooltips sont importants pour apporter une information, concernant les boutons d’interaction. C’est le cas pour les boutons de type “Icon” dans lesquels il n’est affiché aucun libellé.
 
-<design figma-url="https://www.figma.com/design/ud1QBuvu6PMBaMRljCZVYV/?node-id=6229:20571">
-
-</design>
-
 ### Information contextuelle
 
 Pour les icônes `sign-help` ou encore `sign-info`, un Tooltip est affiché au survol pour afficher une information complémentaire.
-
-<design figma-url="https://www.figma.com/design/ud1QBuvu6PMBaMRljCZVYV/?node-id=6229:20581">
-
-</design>
 
 ### Interaction inactive
 
 Lorsqu’une interaction est inactive (bouton, champ de formulaire, etc.), le Tooltip peut en expliquer les raisons.
 
-<design figma-url="https://www.figma.com/design/ud1QBuvu6PMBaMRljCZVYV/?node-id=6229:20588">
-
-</design>
-
 ### Texte tronqué
 
 Le Tooltip peut-être utilisé pour afficher l’intégralité d’un texte tronqué. Par exemple lorsque le nom d’une donnée est trop long pour être affiché dans une colonne de tableau.
 
-<design figma-url="https://www.figma.com/design/ud1QBuvu6PMBaMRljCZVYV/?node-id=6229:21622">
-
-</design>
-
 ### Liens explicités
 
 Nous pouvons clarifier la redirection d’un lien au survol avec un Tooltip.
-
-<design figma-url="https://www.figma.com/design/ud1QBuvu6PMBaMRljCZVYV/?node-id=6229:21251">
-
-</design>
 
 ### **Tooltip ou Popover ?**
 

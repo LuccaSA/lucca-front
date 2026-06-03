@@ -13,10 +13,6 @@ Elle peut apparaître :
 
 L’objectif est d’éviter toute **perte involontaire de données**, en informant l’utilisateur des conséquences de son action avant qu’elle ne soit confirmée.
 
-<design figma-url="https://www.figma.com/design/4vzJER8uY9Mh5wntlaLylH/?node-id=4064:79939">
-
-</design>
-
 ## Contenu et rédaction
 
 * **Titre :** Quitter sans enregistrer ?

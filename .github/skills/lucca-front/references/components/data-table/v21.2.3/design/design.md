@@ -1,27 +1,10 @@
 # data-table — Design
 
-<design figma-url="https://www.figma.com/design/ud1QBuvu6PMBaMRljCZVYV/?node-id=5758:122804">
-
-</design>
-
 **Mots-clés :**tableau, données
 
 **Des questions, commentaires ou retours ?**Laisser un commentaire sur Figma ou contactez-nous sur Slack :*#design-system-public*
 
 ## Anatomie
-
-<design figma-url="https://www.figma.com/design/ud1QBuvu6PMBaMRljCZVYV/?node-id=5755:113359">
-
-<notes>
-
-1. **Entête** : regroupe l’ensemble des cellules d’en-tête.
-2. **Cellule d’entête** : affiche le titre d’une colonne, souvent avec des options de tri.
-3. **Ligne** : correspond à une entrée du tableau, composée de plusieurs cellules.
-4. **Cellule de ligne** : affiche une donnée pour une colonne donnée.
-
-</notes>
-
-</design>
 
 ## Options
 
@@ -31,49 +14,25 @@ Si le parcours utilisateur permet des actions groupées, une case cocher s’aff
 
 Dans un tableau avec pagination, la sélection est conservée lorsque l’utilisateur navigue entre les pages.
 
-<design figma-url="https://www.figma.com/design/ud1QBuvu6PMBaMRljCZVYV/?node-id=5755:113366">
-
-</design>
-
 ### Lignes éditables
 
 Des champs de formulaire (Textfield, Select, DatePicker, etc.) peuvent se trouver dans le tableau. L’utilisateur peut alors directement saisir quelque chose pour compléter le tableau.
-
-<design figma-url="https://www.figma.com/design/ud1QBuvu6PMBaMRljCZVYV/?node-id=5755:113368">
-
-</design>
 
 ### Colonnes obligatoires
 
 L'indication de champ obligatoire se matérialise par un astérisque (*) placé dans la cellule d’en-tête de la colonne, à droite du libellé.
 
-<design figma-url="https://www.figma.com/design/ud1QBuvu6PMBaMRljCZVYV/?node-id=7339:10875">
-
-</design>
-
 ### Arborescence
 
 Il est possible de regrouper des données au sein d’un tableau. Pour cela, une ligne parent permet d’afficher ou masquer toutes les données qu’il contient. Cette ligne parent peut contenir d’autres informations comme des totaux.
-
-<design figma-url="https://www.figma.com/design/ud1QBuvu6PMBaMRljCZVYV/?node-id=5755:113370">
-
-</design>
 
 ### Regroupement
 
 Pour faciliter la lecture d’un tableau, il est possible de regrouper certaines lignes. Si c’est le cas, alors une ligne ne peut pas vivre seule, en dehors d’un groupe.
 
-<design figma-url="https://www.figma.com/design/ud1QBuvu6PMBaMRljCZVYV/?node-id=5755:113375">
-
-</design>
-
 ### Liens de redirection
 
 Certaines données peuvent être des liens de redirection, notamment lorsque une des propriétés mentionne une ressource présente sur une autre interface.
-
-<design figma-url="https://www.figma.com/design/ud1QBuvu6PMBaMRljCZVYV/?node-id=5755:113377">
-
-</design>
 
 ### Bordures sur les cellules
 
@@ -81,17 +40,9 @@ Cette option renforce la séparation entre chaque cellule, offrant une lecture p
 
 Il est possible d’appliquer des bordures uniquement sur certaines zones du tableau pour mettre en évidence des regroupements de colonnes. Cette approche est utile pour souligner des relations ou des catégories dans les données.
 
-<design figma-url="https://www.figma.com/design/ud1QBuvu6PMBaMRljCZVYV/?node-id=5755:113379">
-
-</design>
-
 ### Actions rapides
 
 Des actions rapides en bout de ligne permettent aux utilisateurs d’effectuer des tâches directement liées aux données affichées, sans quitter le contexte du tableau.
-
-<design figma-url="https://www.figma.com/design/ud1QBuvu6PMBaMRljCZVYV/?node-id=5755:113381">
-
-</design>
 
 ## Comportement
 
@@ -105,31 +56,15 @@ Si des filtres sont appliqués sur le contenu du tableau, ils restent appliqués
 
 Dans un tableau avec des lignes sélectionnables, si des lignes sont sélectionnées, la sélection est conservée lorsque l’utilisateur navigue entre les pages.
 
-<design figma-url="https://www.figma.com/design/ud1QBuvu6PMBaMRljCZVYV/?node-id=5755:113383">
-
-</design>
-
 ### Empty state
 
 Si un tableau est vide, il faut utiliser le composant EmptyStateSection. Il indique à l’utilisateur qu’aucune donnée n’existe.
 
-<design figma-url="https://www.figma.com/design/ud1QBuvu6PMBaMRljCZVYV/?node-id=5755:113385">
-
-</design>
-
 Dans le cas où l’utilisateur filtre le tableau, le composant EmptyStateSection doit être utilisé à l’intérieur du tableau. Cela permet de garder le contexte, avec notamment l’affichage des entêtes de colonne.
-
-<design figma-url="https://www.figma.com/design/ud1QBuvu6PMBaMRljCZVYV/?node-id=5755:113391">
-
-</design>
 
 ### Affichage en plein écran
 
 Il est possible d’afficher le tableau en plein écran pour immerger l’utilisateur et lui permettre de travailler avec une meilleure visibilité sur l’ensemble du tableau.
-
-<design figma-url="https://www.figma.com/design/ud1QBuvu6PMBaMRljCZVYV/?node-id=5755:113394">
-
-</design>
 
 ## **Règles d’utilisation**
 

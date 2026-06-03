@@ -8,8 +8,8 @@ import { CheckboxInputComponent, SwitchInputComponent } from '@lucca-front/ng/fo
 ```
 
 ```html
-<lu-form-field${…}>
-	<lu-switch-input [(ngModel)]="example"${…} />
+<lu-form-field label="Label" tooltip="Tooltip message" inlineMessage="Helper text" inlineMessageState="default">
+	<lu-switch-input [(ngModel)]="example" required />
 </lu-form-field>
 <pr-story-model-display>{{ example }}</pr-story-model-display>
 ```

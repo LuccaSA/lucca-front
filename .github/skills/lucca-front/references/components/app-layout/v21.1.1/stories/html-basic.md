@@ -5,7 +5,7 @@
 ```
 
 ```html
-<div class="appLayout${…}">
+<div class="appLayout">
 	<div class="appLayout-banner">banner</div>
 	<div class="appLayout-navSide">navSide</div>
 	<div class="appLayout-main">main</div>

@@ -6,6 +6,13 @@
 import { SortableListComponent } from '@lucca-front/ng/sortable-list';
 ```
 
+## Basic Usage
+
+```html
+<lu-sortable-list> <lu-sortable-list-item label="Label" helperMessage="Helper message" /> <lu-sortable-list-item label="Label" helperMessage="Helper message" /> <lu-sortable-list-item label="Label" helperMessage="Helper message" />
+</lu-sortable-list>
+```
+
 ## API Reference
 
 ### SortableListComponent (component)

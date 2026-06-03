@@ -6,9 +6,10 @@ import { LuSimpleSelectInputComponent } from '@lucca-front/ng/simple-select';
 ```
 
 ```html
-<lu-form-field ${…}>
+<lu-form-field label="Label" tooltip="Tooltip message" inlineMessage="Helper text" inlineMessageState="default">
 	<lu-simple-select
-		${…}
+		placeholder="Placeholder"
+		clearable
 		[options]="legumes | filterLegumes: clue"
 		(clueChange)="clue = $event"
 		[(ngModel)]="example"

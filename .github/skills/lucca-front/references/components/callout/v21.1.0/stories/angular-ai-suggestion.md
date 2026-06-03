@@ -14,9 +14,9 @@ import { IconComponent } from '@lucca-front/ng/icon';
 	<lu-form-field label="Intitulé" class="suggestion-form-field">
 		<lu-text-input required type="text" [(ngModel)]="example" />
 	</lu-form-field>
-	<lu-callout AI iconAlt="${…}" ${…} class="suggestion-callout">
+	<lu-callout AI iconAlt="Assistant IA" icon="weatherStars" class="suggestion-callout">
 		<div class="suggestion-callout-text">
-			<p>${…}</p>
+			<p>Optimiser l’utilisation des composants de formulaire selon les besoins</p>
 		</div>
 		<lu-callout-actions inline>
 			<button luButton="outlined" class="suggestion-callout-accept">

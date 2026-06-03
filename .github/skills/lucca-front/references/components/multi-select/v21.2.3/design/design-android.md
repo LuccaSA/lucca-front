@@ -1,24 +1,6 @@
 # multi-select — Design (Android)
 
-<design figma-url="https://www.figma.com/design/ud1QBuvu6PMBaMRljCZVYV/?node-id=7493:27160">
-
-</design>
-
 ## Anatomie
-
-<design figma-url="https://www.figma.com/design/ud1QBuvu6PMBaMRljCZVYV/?node-id=7493:27513">
-
-<notes>
-
-1. **Label :** le label du champ doit indiquer quel type d'information le champ requiert.
-2. **Champ de saisie :** l’utilisateur y clique pour ouvrir l’écran de sélection. Une fois sélectionnée, chaque option se rajoute dans le champ de saisie.
-3. **Options sélectionnées :** l’utilisateur peut y supprimer les sélections en cliquant sur la croix.
-4. **Tout effacer :** la croix efface tout dans le champ de saisie. Elle n'apparaît que lorsqu’une option au moins a été sélectionnée.
-5. **Écran de sélection :** il contient la liste de toutes les options sélectionnables.
-
-</notes>
-
-</design>
 
 ## Options
 
@@ -26,15 +8,7 @@
 
 Lorsque la création est une action fréquente, l'option d’ajout est affichée en permanence en haut à droite de l’écran.
 
-<design figma-url="https://www.figma.com/design/ud1QBuvu6PMBaMRljCZVYV/?node-id=7494:9786">
-
-</design>
-
 L'utilisateur a la possibilité d'ajouter une nouvelle option après avoir saisi une recherche, si celle-ci n’a donné aucun résultat.
-
-<design figma-url="https://www.figma.com/design/ud1QBuvu6PMBaMRljCZVYV/?node-id=7494:10629">
-
-</design>
 
 ## Comportement
 
@@ -44,23 +18,11 @@ La recherche se fait depuis la barre de recherche en haut de l’écran de séle
 
 Lorsque l’utilisateur sélectionne une option, il reste dans le contexte de recherche. 
 
-<design figma-url="https://www.figma.com/design/ud1QBuvu6PMBaMRljCZVYV/?node-id=7495:13036">
-
-</design>
-
 ### État vide
 
 Le contenu de l’écran de sélection se transforme en *empty state* lorsqu'il n'existe aucune donnée disponible ou qu'une recherche ne donne aucun résultat. Le message doit être adapté pour chacun de ces cas.
 
-<design figma-url="https://www.figma.com/design/ud1QBuvu6PMBaMRljCZVYV/?node-id=7495:15630">
-
-</design>
-
 Cet état peut être cumulé avec l'ajout de option. C'est notamment pratique pour pouvoir créer une nouvelle donnée directement via une Fullscreen Cover.
-
-<design figma-url="https://www.figma.com/design/ud1QBuvu6PMBaMRljCZVYV/?node-id=7495:15154">
-
-</design>
 
 ### Nombre d'options sélectionnées
 
@@ -68,19 +30,11 @@ Le nombre d’options sélectionnées est affiché dans un compteur à côté du
 
 Si aucune option n’est sélectionnée, le compteur n’est pas affiché.
 
-<design figma-url="https://www.figma.com/design/ud1QBuvu6PMBaMRljCZVYV/?node-id=7495:17081">
-
-</design>
-
 ### Affichage des résultats
 
 Les options sélectionnées s’affichent avec le composant Chip à l’intérieur du Select, sur une seule ligne. Un effet de débordement est présent si les résultats dépassent de la largeur du Select.
 
 Il est possible de voir les options suivantes à l’aide du swipe.
-
-<design figma-url="https://www.figma.com/design/ud1QBuvu6PMBaMRljCZVYV/?node-id=7495:18096">
-
-</design>
 
 ## Règles d'utilisation
 

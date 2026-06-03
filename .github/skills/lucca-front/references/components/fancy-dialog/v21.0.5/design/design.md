@@ -4,15 +4,6 @@
 
 ## Anatomie
 
-<notes>
-
-1. **Titre :** il informe l’utilisateur de l’action accomplie
-2. **Description :** sous forme de texte ou de liste, elle permet de donner plus de détail sur les actions réalisées.
-3. **Actions :** il ne doit y avoir que deux actions au maximum.
-4. **Illustration :** elle appuie le message.
-
-</notes>
-
 ### Tailles
 
 La Fancy dialog peut être utilisée en **deux tailles : M et L**.
@@ -40,8 +31,6 @@ Si l’utilisateur doit agir dès cette étape, alors on lui indique un bouton e
 ### Installation ou souscription à un logiciel Lucca
 
 Lorsqu’un utilisateur finalise l’installation d’un logiciel ou la souscription à une offre Lucca, nous le félicitons de cette action et nous lui proposons toujours une première action concrète à réaliser dans ce logiciel.
-
----
 
 ## Spécifications
 

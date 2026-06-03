@@ -8,10 +8,13 @@ import { EmptyStatePageComponent } from '@lucca-front/ng/empty-state';
 
 ```html
 <lu-empty-state-page
-	heading="${…}"
-	slotTop="${…}"
-	description="${…}"
-	${…}${…}${…}${…}${…}${…}${…}
+	heading="Empty state page"
+	slotTop=""
+	description="Description can be a string or a ng-template"
+	topRightBackground="https://cdn.lucca.fr/lucca-front/assets/empty-states/poplee/bubbles-top-right-01.svg"
+	topRightForeground="https://cdn.lucca.fr/lucca-front/assets/empty-states/generic/coffee-01.svg"
+	bottomLeftBackground="https://cdn.lucca.fr/lucca-front/assets/empty-states/poplee/bubbles-bottom-left-01.svg"
+	bottomLeftForeground="https://cdn.lucca.fr/lucca-front/assets/empty-states/poplee/core-hr-01.svg"
 >
 	<button luButton type="button" palette="product">Button</button>
 	<button luButton="outlined" type="button">Button</button>

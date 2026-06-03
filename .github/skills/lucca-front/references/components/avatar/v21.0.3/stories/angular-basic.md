@@ -15,7 +15,6 @@ import { bob, georges, squidwards } from '../../user.mocks';
 		[displayFormat]="displayFormat"
 		data-testid="lu-user-picture"
 		[class.mod-placeholder]="placeholder"
-		${…}${…}
 	/>
 </button>
 ```

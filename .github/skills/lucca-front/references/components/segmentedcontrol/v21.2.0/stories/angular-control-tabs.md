@@ -5,10 +5,8 @@ import { SegmentedControlTabsComponent, SegmentedControlTabsPanelComponent } fro
 ```
 
 ```html
-<ng-template #label>
-	Lorem${…}
-</ng-template>
-<lu-segmented-control-tabs${…}${…}>
+<ng-template #label>Lorem</ng-template>
+<lu-segmented-control-tabs>
 	<lu-segmented-control-tabs-panel [label]="label" value="0">
 		<div class="demo">Content Lorem</div>
 	</lu-segmented-control-tabs-panel>

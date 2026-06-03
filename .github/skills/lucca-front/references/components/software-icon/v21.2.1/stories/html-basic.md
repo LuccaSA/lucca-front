@@ -6,8 +6,8 @@
 
 ```html
 <div
-	class="softwareIcon${…}${…}"
+	class="softwareIcon"
 	aria-hidden="true"
-	[innerHtml]="'${…}${…}${…}${…}' | luSafeExternalSvg"
+	[innerHtml]="'https://cdn.lucca.fr/transverse/prisme/visuals/software-icon/absences.svg' | luSafeExternalSvg"
 ></div>
 ```

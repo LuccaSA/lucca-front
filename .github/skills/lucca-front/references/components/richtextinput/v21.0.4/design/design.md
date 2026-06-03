@@ -6,17 +6,6 @@ Laisser un commentaire sur Figma ou contactez-nous sur Slack :*#design-system-pu
 
 ## Anatomie
 
-<notes>
-
-1. **Label :** Le label du champ doit indiquer quel type d'information le champ requiert.
-2. **Champ de saisie :** Le champ dans lequel les utilisateurs cliquent pour saisir du texte.
-3. **Barre d’outils :** L’espace dans lequel se retrouve les outils pour personnaliser le texte.
-4. **Inline message :** Le message d’aide est optionnel. Il permet de fournir des informations supplémentaires à l’utilisateur pour l’aider à compléter le champ.
-
-</notes>
-
----
-
 ## Options
 
 ### Champs obligatoire
@@ -36,8 +25,6 @@ La liste des balises est définie et personnalisées en fonction du contexte.
 Un bouton “@” permet de mentionner un collaborateur. La mention s’affiche au format “@Prénom” dans le corps de texte.
 
 Il est aussi possible de mentionner une personne en écrivant “@” dans le corps de texte. Une liste apparait alors et se filtre au fur et à mesure que l’utilisateur saisit le nom du collaborateur.
-
----
 
 ## Comportement
 
@@ -66,8 +53,6 @@ Dans certains contexte, il est possible d’activer cette option. Le Rich textfi
 ### Champ en erreur
 
 Le message d'erreur s'affiche lorsque les exigences du champ ne sont pas remplies, incitant l'utilisateur à corriger ou à modifier sa saisie initiale. Si un message d'aide était présent, le texte du message d'erreur doit fournir les mêmes informations que le message d'aide, en plus d’expliciter l’erreur.
-
----
 
 ## Règles d’utilisation
 

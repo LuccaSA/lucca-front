@@ -1,27 +1,10 @@
 # phonenumberfield — Design
 
-<design figma-url="https://www.figma.com/design/ud1QBuvu6PMBaMRljCZVYV/?node-id=6229:138699">
-
-</design>
-
 **Mots-clés :**téléphone, numéro, phone, indicateur
 
 **Des questions, commentaires ou retours ?**Laisser un commentaire sur Figma ou contactez-nous sur Slack :*#design-system-public*
 
 ## Anatomie
-
-<design figma-url="https://www.figma.com/design/ud1QBuvu6PMBaMRljCZVYV/?node-id=6229:128229">
-
-<notes>
-
-1. **Label **: il doit indiquer quel type d'information le champ requiert. Il est aligné à gauche, directement au-dessus de la zone de saisie.
-2. **Sélection de l’indicatif :** il permet de choisir le pays correspondant à son numéro. C’est ce qui détermine le préfixe qui sera sauvegardé.
-3. **Champs de saisie du numéro :** il permet de saisir le numéro de téléphone.
-4. **Message d’aide (Inline message) :** le message d’aide est optionnel. Il permet de fournir des informations supplémentaires à l’utilisateur.
-
-</notes>
-
-</design>
 
 ## Option
 
@@ -30,10 +13,6 @@
 Situé sous le champ, le message d’aide explique **pourquoi le numéro de téléphone est nécessaire** et à quoi il servira.
 
 Ce message d’aide peut limiter les questionnements chez l’utilisateur et doit être affiché lorsque le champ est obligatoire.
-
-<design figma-url="https://www.figma.com/design/ud1QBuvu6PMBaMRljCZVYV/?node-id=6229:138812">
-
-</design>
 
 ### Inactif
 
@@ -52,10 +31,6 @@ Les indicatifs sont affichés dans la langue de l’utilisateur et rangés par o
 
 Pour rechercher un indicatif, l’utilisateur peut rechercher directement le numéro ou le nom du pays. Le défilement est automatique jusqu’au premier élément de la liste qui correspond à la recherche. Ce élément de liste est affiché en surbrillance. L’utilisateur peut le sélectionner directement avec la touche “Entrée” du clavier.
 
-<design figma-url="https://www.figma.com/design/ud1QBuvu6PMBaMRljCZVYV/?node-id=6229:128250">
-
-</design>
-
 - **Do** : Le sélecteur d'indicatif n'affiche que le drapeau du pays sélectionné.
 - **Don't** : Nous n'affichons pas l'indicatif dans le sélecteur. Cela perturbe la compréhension du champ et l'utilisateur se questionne sur ce qu'il doit saisir.
 
@@ -63,38 +38,18 @@ Pour rechercher un indicatif, l’utilisateur peut rechercher directement le num
 
 Le placeholder est modifié au changement de pays. Cela permet de donner une information supplémentaire à l’utilisateur sur le format attendu. Le *placeholder* ne doit pas mentionner l’indicatif.
 
-<design figma-url="https://www.figma.com/design/ud1QBuvu6PMBaMRljCZVYV/?node-id=6229:128281">
-
-</design>
-
 ### Formatage du numéro
 
 Si l’utilisateur saisit le numéro sans espaces, les espaces sont automatiquement insérés **lorsqu’il sort du champ**. Cela permet une meilleure lisibilité. L’utilisateur se pose moins de questions sur le format attendu.
 
-<design figma-url="https://www.figma.com/design/ud1QBuvu6PMBaMRljCZVYV/?node-id=6229:128290">
-
-</design>
-
 L'indicatif change automatiquement en fonction de ce qui est saisi dans le champ. Si l'utilisateur saisi manuellement ou copie-colle un numéro, le drapeau change automatiquement.
-
-<design figma-url="https://www.figma.com/design/ud1QBuvu6PMBaMRljCZVYV/?node-id=6229:128303">
-
-</design>
 
 ### Numéro non valide
 
 Dans le cas d’un numéro non valide, le formatage du numéro ne peut pas fonctionner. Le champ peut donc présenter une erreur.
-
-<design figma-url="https://www.figma.com/design/ud1QBuvu6PMBaMRljCZVYV/?node-id=6229:128311">
-
-</design>
 
 ### Affichage en texte
 
 Dans ce cas, on affiche le préfixe pour des raisons d’accessibilité. Le numéro de téléphone est cliquable pour permettre à l’utilisateur de téléphoner directement.
 
 Au survol, un bouton apparaît pour copier le numéro au format international.
-
-<design figma-url="https://www.figma.com/design/ud1QBuvu6PMBaMRljCZVYV/?node-id=6229:128313">
-
-</design>

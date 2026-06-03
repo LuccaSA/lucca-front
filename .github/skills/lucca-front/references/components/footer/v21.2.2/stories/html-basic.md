@@ -6,19 +6,7 @@
 ```
 
 ```html
-<footer class="footer${…}${…}">
-	<div class="footer-containerOptional${…}">
-		<div class="footer-content">Content</div>
-		<div class="footer-actions">
-			<button type="button" class="button">Button</button>
-			<button type="button" class="button mod-outlined">Button</button>
-		</div>
-	</div>
-</footer>
-```
-
-```html
-<footer class="footer${…}${…}">
+<footer class="footer">
 	<div class="footer-content">Content</div>
 	<div class="footer-actions">
 		<button type="button" class="button">Button</button>

@@ -9,7 +9,7 @@ import { FileEntryComponent, SingleFileUploadComponent } from '@lucca-front/ng/f
 ## Basic Usage
 
 ```html
-<lu-file-entry [entry]="{ name: '', size: , type: '', }" />
+<lu-file-entry (deleteFile)="deleteFile()" [entry]="{ name: 'dummyimage.png', size: 28420, type: 'image/png', }" previewUrl="https://dummyimage.com/500" inlineMessageError="Virus détecté dans le fichier." />
 ```
 
 ## API Reference

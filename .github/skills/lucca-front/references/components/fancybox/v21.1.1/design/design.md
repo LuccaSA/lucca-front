@@ -2,14 +2,6 @@
 
 ## Anatomie
 
-<notes>
-
-1. **Contenu de la box :** C’est le contenu important qui doit être mis en avant sur l’interface.
-2. **Illustration gauche :** Elle est placée en bas à gauche de la box. Elle peut être découpée en deux illustrations, une en arrière-plan et une au premier plan.
-3. **Illustration droite :** Elle est placée en haut à droite de la box. Elle peut être découpée en deux illustrations, une en arrière-plan et une au premier plan.
-
-</notes>
-
 Le composant est disponible en deux tailles :
 
 * La **taille M**, la plus courante, doit être utilisée dans la majorité des interfaces, en pleine page, pour afficher une information importante.
@@ -30,8 +22,6 @@ De la même manière, ce composant peut être utilisé pour mettre en avant une 
 ### Action importante
 
 Le composant Fancy box est idéal pour mettre en avant une action importante. Il attire l’attention sur une interaction clé, peut-être la seule possible sur l’interface.
-
----
 
 ## Règles d’utilisation
 
@@ -55,13 +45,9 @@ Pour éviter de surcharger la Box, il est recommandé de n’afficher qu’un se
 
 Il est possible de prévoir plusieurs illustrations qui peuvent s’adapter en fonction du contenu de la box, notamment lorsqu’il s’agit d’un solde.
 
----
-
 ### Petits écrans et mobile
 
 L’affichage de la Fancy box s’adapte sur les petits écrans et mobiles. Les illustrations sont réduites en gardant le même ratio, ce qui les rend plus discrètes.
-
----
 
 ## Spécifications
 

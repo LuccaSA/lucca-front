@@ -9,7 +9,7 @@ import { LuInputClearerComponent, LuInputDisplayerDirective, LuInputDirective } 
 ## Basic Usage
 
 ```html
-<lu-form-field label="Label" layout="fieldset"> <div class="inputFramedWrapper"> <lu-grid columns="2"></lu-grid> </div> </lu-form-field>
+<lu-form-field label="Label" errorInlineMessage="Error inline message"> <lu-radio-group-input [(ngModel)]="example" framed required> <lu-radio value="A"> Option A </lu-radio> <lu-radio value="B"> Option B </lu-radio> <lu-radio value="C" disabled> Option C </lu-radio> <lu-radio value="D"> Option D </lu-radio> </lu-radio-group-input> </lu-form-field>
 ```
 
 ## API Reference

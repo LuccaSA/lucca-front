@@ -19,10 +19,6 @@
 
 La grille, via le composant Grid, permet de structurer efficacement la disposition des champs. Son objectif principal est de garantir un alignement cohérent, une lisibilité optimale et une adaptabilité parfaite en responsive.
 
-<design figma-url="https://www.figma.com/design/4vzJER8uY9Mh5wntlaLylH/?node-id=4007:24816">
-
-</design>
-
 ### Bonnes pratiques
 
 * La grille se compose de **4 colonnes**. De manière générale, il n’est pas recommandé d’avoir plus de 2 champs sur une même ligne.
@@ -41,20 +37,6 @@ La grille, via le composant Grid, permet de structurer efficacement la dispositi
 Découpons un formulaire en Fieldsets pour structurer efficacement des formulaires longs. Cela permet de regrouper logiquement les champs lorsque l'utilisateur renseigne un seul objet principal qui comporte de nombreux champs.
 
 ### Anatomie
-
-<design figma-url="https://www.figma.com/design/4vzJER8uY9Mh5wntlaLylH/?node-id=4007:24848">
-
-<notes>
-
-1. Form layout
-2. Fieldset
-3. Titre du Fieldset
-4. Ligne
-5. Séparateur entre deux Fieldset
-
-</notes>
-
-</design>
 
 ### Séparations des Fieldsets
 
@@ -82,19 +64,11 @@ Cela permet de ne pas afficher certains champs lors de la première lecture pour
 
 Un fieldset rétractable ne **doit pas comporter de champs obligatoires**.
 
-<design figma-url="https://www.figma.com/design/4vzJER8uY9Mh5wntlaLylH/?node-id=4007:24865">
-
-</design>
-
 ### Fieldset narratif
 
 Le Fieldset narratif présente les champs du formulaire directement intégrés dans une phrase. L’utilisateur construit ainsi une règle ou une condition sous une forme proche du langage naturel. Cela rend la logique métier plus claire et lisible.
 
 À utiliser **uniquement en dernier recours.** 
-
-<design figma-url="https://www.figma.com/design/4vzJER8uY9Mh5wntlaLylH/?node-id=4007:24867">
-
-</design>
 
 ### Fieldset requis
 
@@ -105,10 +79,6 @@ Un astérisque s’affiche dans le titre du Fieldset (non répété sur les cham
 En cas d’oubli, une erreur identique est affichée sur chaque champ du Fieldset, listant les options possibles. Elle disparaît dès qu’un champ est renseigné.
 
 Si tous les champs d’un Fieldset sont obligatoires, alors l’astérisque doit se trouver à côté du label de chacun des champs.
-
-<design figma-url="https://www.figma.com/design/4vzJER8uY9Mh5wntlaLylH/?node-id=4007:24887">
-
-</design>
 
 ## **Découpage en é**tapes
 
@@ -138,10 +108,6 @@ L’utilisateur doit pouvoir revenir en arrière sans perte de données.
 * Limiter le nombre d’étapes pour ne pas alourdir le parcours (idéalement 3 à 5).
 * L’intitulé de chaque étape se limite à 1-2 mots-clefs explicites.
 * Éviter les titres génériques comme « Étape 1 », « Paramètres », qui n’apportent pas de sens.
-
-<design figma-url="https://www.figma.com/design/ud1QBuvu6PMBaMRljCZVYV/?node-id=5532:1256">
-
-</design>
 
 ⚠️ Travail complémentaire en cours pour définir le fonctionnement standardisé de formulaires en étapes.
 

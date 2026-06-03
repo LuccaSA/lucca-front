@@ -95,8 +95,6 @@ Dans ce cas, aucune validation n'est effectuée pendant les étapes intermédiai
 
 Exception faite pour certains champs avec un format spécifique imposé (email, url, etc.), les erreurs peuvent être déclenchées au `blur` lorsque le format n'est pas respecté. Cela aide l'utilisateur à corriger immédiatement sans attendre la fin du parcours.
 
----
-
 ## Enregistrement
 
 Un enregistrement de la ressource est effectué à chaque étape, lorsque l’utilisateur change d’étape, via le bouton « Étape suivante » ou via le Progress stepper. Le bouton « Étape suivante » passe en état `loading` le temps de l'enregistrement.
@@ -115,8 +113,6 @@ Un bouton est toujours présent dans l'entête de la Dialog pour que l'utilisate
 * supprimer la ressource en cours de création.
 
 Des actions spécifiques à la ressource peuvent aussi y trouver place.
-
----
 
 ## Affichage des ressources
 

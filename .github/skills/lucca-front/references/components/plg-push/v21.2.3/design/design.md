@@ -1,22 +1,6 @@
 # plg-push — Design
 
-<design figma-url="https://www.figma.com/design/ud1QBuvu6PMBaMRljCZVYV/?node-id=6422:12546">
-
-</design>
-
 ## Anatomie
-
-<design figma-url="https://www.figma.com/design/ud1QBuvu6PMBaMRljCZVYV/?node-id=6422:12540">
-
-<notes>
-
-1. **Icône :** l’icône de fusée est utilisée comme marqueur des publicités.
-2. **Message :** il doit expliciter le bénéfice concret apporté par la solution.
-3. **Lien de redirection **: il redirige vers le fiche du Store Lucca.
-
-</notes>
-
-</design>
 
 ## Options
 
@@ -30,10 +14,6 @@ Dans certains cas, il doit être possible pour l’utilisateur de supprimer la c
     * 1re fermeture : réapparition après 14 jours.
     * 2e fermeture : réapparition après 60 jours.
 * **La complétion :** si l'utilisateur clique sur le lien, le PLG Push ne doit plus jamais apparaître pour cette fonctionnalité spécifique.
-
-<design figma-url="https://www.figma.com/design/ud1QBuvu6PMBaMRljCZVYV/?node-id=6422:46012">
-
-</design>
 
 ## Règles d'utilisation
 

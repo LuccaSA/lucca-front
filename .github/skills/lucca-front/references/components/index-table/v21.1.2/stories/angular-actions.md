@@ -14,12 +14,12 @@ import { LuUserPopoverComponent, LuUserPopoverDirective } from '@lucca-front/ng/
 ```
 
 ```html
-<lu-index-table${…}>
+<lu-index-table>
 	<thead luIndexTableHead>
 		<tr luIndexTableRow>
 			<th luIndexTableCell>Label</th>
 			<th luIndexTableCell>Label</th>
-			<th luIndexTableCell actions${…}>Label</th>
+			<th luIndexTableCell actions>Label</th>
 		</tr>
 	</thead>
 	<tbody luIndexTableBody>
@@ -27,9 +27,14 @@ import { LuUserPopoverComponent, LuUserPopoverDirective } from '@lucca-front/ng/
 			<th luIndexTableCell><a href="#" luIndexTableAction>Content</a></th>
 			<td luIndexTableCell>Content Content Content</td>
 			<td luIndexTableCell align="end">
-				${…}
+				<button type="button" luButton luTooltip="Supprimer" luTooltipOnlyForDisplay>
+					<lu-icon icon="trash" alt="Supprimer" />
+				</button>
+				<button type="button" luButton luTooltip="Modifier" luTooltipOnlyForDisplay>
+					<lu-icon icon="officePen" alt="Modifier" />
+				</button>
 			</td>
 		</tr>
 	</tbody>
-</lu-index-table>${…}
+</lu-index-table>
 ```

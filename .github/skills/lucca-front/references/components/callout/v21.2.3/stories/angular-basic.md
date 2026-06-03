@@ -8,7 +8,7 @@ import { CalloutActionsComponent } from '@lucca-front/ng/callout'; /* [v20.3] Si
 ```
 
 ```html
-<lu-callout${…}${…}${…}${…}>
-	<p>Feedback description</p>${…}
+<lu-callout>
+	<p>Feedback description</p>
 </lu-callout>
 ```

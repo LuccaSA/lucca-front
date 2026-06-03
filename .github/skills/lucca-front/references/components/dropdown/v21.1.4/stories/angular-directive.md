@@ -9,7 +9,7 @@ import { PopoverPosition } from '@lucca-front/ng/popover2';
 
 ```html
 <div class="demo">
-	<button type="button" luButton disclosure [luDropdown]="dropdownSample" ${…}>
+	<button type="button" luButton disclosure [luDropdown]="dropdownSample">
 		Dropdown
 		<lu-icon icon="arrowChevronBottom" />
 	</button>

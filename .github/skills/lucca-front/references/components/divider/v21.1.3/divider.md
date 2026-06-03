@@ -9,7 +9,7 @@ import { DividerComponent } from '@lucca-front/ng/divider';
 ## Basic Usage
 
 ```html
-<lu-divider ><lu-icon icon="heart" /></lu-divider>
+<lu-divider >Text</lu-divider>
 ```
 
 ## API Reference

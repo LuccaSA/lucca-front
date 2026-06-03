@@ -2,43 +2,7 @@
 
 ## **Anatomie**
 
-<design figma-url="https://www.figma.com/design/ud1QBuvu6PMBaMRljCZVYV/?node-id=2175:19378">
-
-**Anatomie**
-
-**Anatomie**
-
-<notes>
-
-1. En-tête
-2. Cellule d’en-tête
-3. Lignes
-4. Cellule de ligne
-
-</notes>
-
-</design>
-
 ### **Cellules**
-
-<design figma-url="https://www.figma.com/design/ud1QBuvu6PMBaMRljCZVYV/?node-id=2317:86181">
-
-**Anatomie des cellules**
-
-**Anatomie des cellules**
-
-<notes>
-
-1. Texte. Il est possible d’ajouter des icônes avant ou après le texte ainsi qu’une ligne de texte secondaire.
-2. Statut
-3. Utilisateur
-4. Équipe
-5. Tag
-6. Actions
-
-</notes>
-
-</design>
 
 ## **Options**
 
@@ -48,37 +12,13 @@ Lorsqu’il est possible de sélectionner une ressource, alors une case à coche
 
 Dans un tableau avec pagination, la sélection est conservée lorsque l’utilisateur navigue entre les pages.
 
-<design figma-url="https://www.figma.com/design/ud1QBuvu6PMBaMRljCZVYV/?node-id=2175:19394">
-
-**Multi selection**
-
-**Multi selection**
-
-</design>
-
 ### **Regroupement**
 
 Il est possible de regrouper des ressources au sein d’un tableau. Pour cela, une ligne parent permet d’afficher ou masquer toutes les ressources qu’il contient. Cette ligne parent peut contenir d’autres informations comme des totaux, des statuts ou des actions rapides. Pour ouvrir ou fermer un groupe, la ligne de groupe est entièrement cliquable.
 
 Lorsqu'un groupe ne contient aucune ressource, il n'est pas nécessaire de l'afficher.
 
-<design figma-url="https://www.figma.com/design/ud1QBuvu6PMBaMRljCZVYV/?node-id=2175:19429">
-
-**Tree table - Default**
-
-**Tree table - Default**
-
-</design>
-
 Il est tout à fait possible de cumuler l’arborescence et l’option sélectionnable. Dans ce cas, chaque groupe est sélectionnable indépendamment.
-
-<design figma-url="https://www.figma.com/design/ud1QBuvu6PMBaMRljCZVYV/?node-id=2175:37530">
-
-**Tree table - Checkbox**
-
-**Tree table - Checkbox**
-
-</design>
 
 ### **Affichage d’une ligne de total**
 
@@ -86,49 +26,17 @@ Il est possible d’afficher une ligne lorsque l’on souhaite communiquer à l�
 
 L’affichage de la pagination n’étant pas possible avec l’affichage d’un total, il est conseillé de recourir à l’infinite scroll.
 
-<design figma-url="https://www.figma.com/design/ud1QBuvu6PMBaMRljCZVYV/?node-id=2175:19459">
-
-**Total - Default**
-
-**Total - Default**
-
-</design>
-
 De la même manière, il est possible d’afficher un sous-total par groupe. Lorsqu’il est fermé, le sous-total s’affiche sur la ligne du groupe et non pas à la suite des ressources.
-
-<design figma-url="https://www.figma.com/design/ud1QBuvu6PMBaMRljCZVYV/?node-id=2175:19472">
-
-**Total - Group by**
-
-**Total - Group by**
-
-</design>
 
 ### **Empilement**
 
 Lorsqu’une ligne représente un ensemble de ressource, il est possible de représenter un empilement pour appuyer cet ensemble. Le clic sur la ligne redirige l’utilisateur vers une vue plus détaillée de cet ensemble de ressource.
-
-<design figma-url="https://www.figma.com/design/ud1QBuvu6PMBaMRljCZVYV/?node-id=2175:19508">
-
-**Stacked**
-
-**Stacked**
-
-</design>
 
 ## **Comportement**
 
 ### **Interactions**
 
 Chaque ligne est une Card représentant un objet. Les interactions en reprennent donc les principes détaillés dans la guideline de ce composant. La ligne s’élargit et s’agrandit pour appuyer l’effet de survol et son potentiel cliquable.
-
-<design figma-url="https://www.figma.com/design/ud1QBuvu6PMBaMRljCZVYV/?node-id=2175:19637">
-
-**Interactions**
-
-**Interactions**
-
-</design>
 
 ### **Pagination**
 
@@ -140,35 +48,11 @@ Si des filtres sont appliqués sur le contenu du tableau, ils restent appliqués
 
 Dans un tableau avec des lignes sélectionnables, si des lignes sont sélectionnées, la sélection est conservée lorsque l’utilisateur navigue entre les pages.
 
-<design figma-url="https://www.figma.com/design/ud1QBuvu6PMBaMRljCZVYV/?node-id=2175:19686">
-
-**Paging**
-
-**Paging**
-
-</design>
-
 ### **Empty state**
 
 Si un tableau est vide, il faut utiliser le composant EmptyStateSection. Il indique à l’utilisateur qu’aucune donnée n’existe. S’il est possible de créer une ressource, un bouton doit permettre à l’utilisateur de le faire directement à la suite du message.
 
-<design figma-url="https://www.figma.com/design/ud1QBuvu6PMBaMRljCZVYV/?node-id=4048:29623">
-
-**Empty states - Section**
-
-**Empty states - Section**
-
-</design>
-
 Dans le cas où l’utilisateur filtre le tableau, le composant EmptyStateSection doit être utilisé à l’intérieur du tableau. Cela permet de garder le contexte, avec notamment l’affichage des entêtes de colonne.
-
-<design figma-url="https://www.figma.com/design/ud1QBuvu6PMBaMRljCZVYV/?node-id=4048:29630">
-
-**Empty states - Search**
-
-**Empty states - Search**
-
-</design>
 
 ### **Débordement**
 
@@ -178,39 +62,15 @@ Dans un espace restreint, la valeur des cellules peut ne pas tenir sur une seule
 
 S’il est important de garder une homogénéité entre les lignes, notamment pour faciliter la lecture du tableau par l’utilisateur, alors il est préférable d’ellipser le contenu des cellules. Si l’utilisateur veut consulter les données dans leur ensemble, il peut ouvrir la ressource pour en afficher une vue détaillée.
 
-<design figma-url="https://www.figma.com/design/ud1QBuvu6PMBaMRljCZVYV/?node-id=2181:30563">
-
-**Overflow - Ellipsis**
-
-**Overflow - Ellipsis**
-
-</design>
-
 #### **Adapter la hauteur des lignes au contenu**
 
 Si une différence de hauteur entre les lignes importe peu, alors celle-ci peut être fluide en fonction de son contenu.
-
-<design figma-url="https://www.figma.com/design/ud1QBuvu6PMBaMRljCZVYV/?node-id=2181:32497">
-
-**Overflow - Multi-lines**
-
-**Overflow - Multi-lines**
-
-</design>
 
 #### **Défilement horizontal**
 
 S’il faut garder la même hauteur pour chacune des ligne mais qu’on ne veut pas ellipser le contenu des cellules, alors il est possible de faire défiler le contenu du tableau de manière horizontale.
 
 Il n’est pas possible de fixer une ou plusieurs colonnes du tableau.
-
-<design figma-url="https://www.figma.com/design/ud1QBuvu6PMBaMRljCZVYV/?node-id=2175:19701">
-
-**Overflow - Scroll**
-
-**Overflow - Scroll**
-
-</design>
 
 ### **Sélection en masse**
 
@@ -220,27 +80,11 @@ Dans un tableau avec pagination, la sélection est conservée lorsque l’utilis
 
 Le survol de la case à cocher dans l’en-tête doit afficher un tooltip au survol indiquant “Tout sélectionner” ou “Tout désélectionner” en fonction du comportement attendu.
 
-<design figma-url="https://www.figma.com/design/ud1QBuvu6PMBaMRljCZVYV/?node-id=4119:18930">
-
-**Multi selection - All**
-
-**Multi selection - All**
-
-</design>
-
 #### Utilisation des filtres
 
 Lorsque l’utilisateur applique un filtre après avoir fait une sélection globale, cette sélection est réinitialisée. Toutes les ressources précédemment sélectionnées seront donc désélectionnées, le tableau se mettra à jour en fonction du nouveau filtre.
 
 Cette réinitialisation garantit que seules les ressources correspondant aux critères du filtre sont prises en compte pour la sélection.
-
-<design figma-url="https://www.figma.com/design/ud1QBuvu6PMBaMRljCZVYV/?node-id=4119:18936">
-
-**Multi selection - Filters**
-
-**Multi selection - Filters**
-
-</design>
 
 ### **Actions**
 
@@ -250,14 +94,6 @@ Si la ressource ne propose aucune action spécifique en dehors de la consultatio
 
 Le clic sur la ligne demeure l'unique point d'entrée.
 
-<design figma-url="https://www.figma.com/design/ud1QBuvu6PMBaMRljCZVYV/?node-id=7071:18274">
-
-**Actions - Default**
-
-**Actions - Default**
-
-</design>
-
 #### Action rapide
 
 Si une ressource ne possède qu'une seule action métier spécifique et fréquente (ex : « Marquer comme traitée », « Valider »), celle-ci doit être affichée via un bouton en bout de ligne.
@@ -265,14 +101,6 @@ Si une ressource ne possède qu'une seule action métier spécifique et fréquen
 Dans ce cas, on n'affiche pas de menu contextuel. L'action est disponible en un clic, et l’action de consultation reste portée par le clic sur la ligne.
 
 Si l'action dépend d'une propriété spécifique à la ressource, il est possible de ne l'afficher que sur les lignes concernées.
-
-<design figma-url="https://www.figma.com/design/ud1QBuvu6PMBaMRljCZVYV/?node-id=7071:18498">
-
-**Actions - Quick actions**
-
-**Actions - Quick actions**
-
-</design>
 
 #### Le menu contextuel
 
@@ -282,51 +110,19 @@ Si le menu contextuel est présent, il doit obligatoirement inclure l'action de 
 
 Si une **action est critique, comme la suppression**, elle doit toujours être placée en dernière position dans un menu contextuel, même si elle est seule, afin d'éviter les clics accidentels.
 
-<design figma-url="https://www.figma.com/design/ud1QBuvu6PMBaMRljCZVYV/?node-id=7071:18748">
-
-**Actions - Contextual menu**
-
-**Actions - Contextual menu**
-
-</design>
-
 #### Cas hybride : action rapide et menu contextuel
 
 Lorsque le contexte nécessite d’afficher une action rapide pour optimiser l’expérience utilisateur, on affiche une action métier prioritaire en bouton direct, suivie d'un menu contextuel pour le reste des actions.
 
 Si l'action dépend d'une propriété spécifique à la ressource, il est possible de ne l'afficher que sur les lignes concernées.
 
-<design figma-url="https://www.figma.com/design/ud1QBuvu6PMBaMRljCZVYV/?node-id=7071:19768">
-
-**Actions - Quick and contextual menu**
-
-**Actions - Quick and contextual menu**
-
-</design>
-
 #### Action critique
 
 Si une **action est critique, comme la suppression**, elle doit toujours être placée en dernière position dans un menu contextuel, même si elle est seule, afin d'éviter les clics accidentels.
 
-<design figma-url="https://www.figma.com/design/ud1QBuvu6PMBaMRljCZVYV/?node-id=7158:33844">
-
-**Actions - Critical**
-
-**Actions - Critical**
-
-</design>
-
 #### Actions en masse
 
 Dans le cas où de la sélection est possible, le ou les boutons sont automatiquement masqués dès lors que l’utilisateur sélectionne une ligne. On considère que l’utilisateur passe dans un mode “Action en masse”.
-
-<design figma-url="https://www.figma.com/design/ud1QBuvu6PMBaMRljCZVYV/?node-id=3635:136357">
-
-**Quick actions - Selection**
-
-**Quick actions - Selection**
-
-</design>
 
 ### **Tri**
 
@@ -334,25 +130,9 @@ Les colonnes peuvent être triées par ordre croissant ou décroissant. Les bout
 
 Flèche vers le haut signifie un triage ascendant, c'est-à-dire que les valeurs vont croissant vers le bas de la colonne. Flèche vers le bas signifie triage descendant, c'est-à-dire que les valeurs vont en décroissant vers le bas de la colonne.
 
-<design figma-url="https://www.figma.com/design/ud1QBuvu6PMBaMRljCZVYV/?node-id=2175:19726">
-
-**Order by**
-
-**Order by**
-
-</design>
-
 ### **Petits écrans et mobile**
 
 Sur les petits écrans et mobile, le tableau change d’apparence et affiche les ressources sous forme de liste. Chacune des ressources reprend les informations présentent dans le tableau mais affichées de manière différente.
-
-<design figma-url="https://www.figma.com/design/ud1QBuvu6PMBaMRljCZVYV/?node-id=2175:19775">
-
-**Small screens**
-
-**Small screens**
-
-</design>
 
 ## **Règles d’utilisation**
 
@@ -385,83 +165,27 @@ Limitons l'utilisation des doubles lignes, envisageons-les comme une solution d'
 * étape de workflow, statut,
 * donnée dynamique (qui change fréquemment ou en temps réel).
 
-<design figma-url="https://www.figma.com/design/ud1QBuvu6PMBaMRljCZVYV/?node-id=5146:25198">
-
-**Two text lines - Picture**
-
-**Two text lines - Picture**
-
-</design>
-
 ### **Alignements des en-têtes**
 
 De manière générale, il est conseillé de ne pas avoir un en-tête de tableau sur plusieurs lignes. Dans le cas où le texte se retrouve sur plusieurs lignes, ils doivent être alignés par le bas pour faciliter la lisibilité.
-
-<design figma-url="https://www.figma.com/design/ud1QBuvu6PMBaMRljCZVYV/?node-id=5111:26075">
-
-**Head alignment**
-
-**Head alignment**
-
-</design>
 
 ### **Alignement des données**
 
 La majorité des données doit être ferrée à gauche. C’est le cas pour les données textuelles, y compris les dates et les numéro de téléphone. Les données numériques (prix, pourcentages, etc.) doivent être ferrées à droite. Il est aussi recommandé d’ajouter les décimales, même quand celles-ci sont de “,00” pour ne pas casser l’alignement des données.
 
-<design figma-url="https://www.figma.com/design/ud1QBuvu6PMBaMRljCZVYV/?node-id=2181:23958">
-
-**Cell alignment**
-
-**Cell alignment**
-
-</design>
-
 ### **Alignement des cases à cocher**
 
 L’alignement des cases à cocher se fait systématiquement avec la première ligne de texte.
-
-<design figma-url="https://www.figma.com/design/ud1QBuvu6PMBaMRljCZVYV/?node-id=2175:19854">
-
-**Checkbox alignment**
-
-**Checkbox alignment**
-
-</design>
 
 ### **Arborescence**
 
 Dans le cas d’un tableau contenant une arborescence, il est impératif d’aligner le contenu des lignes enfants avec celui de la ligne parent. On appliquera cette règle même lorsqu’il y a une arborescence plus profonde (2 ou 3 niveaux).
 
-<design figma-url="https://www.figma.com/design/ud1QBuvu6PMBaMRljCZVYV/?node-id=2181:27105">
-
-**Tree table - Default**
-
-**Tree table - Default**
-
-</design>
-
 Les cases à cocher ne suivent pas l’arborescence. Cela permet de les garder alignées pour optimiser la multi-sélection.
-
-<design figma-url="https://www.figma.com/design/ud1QBuvu6PMBaMRljCZVYV/?node-id=2181:28115">
-
-**Tree table - Checkbox**
-
-**Tree table - Checkbox**
-
-</design>
 
 ### **Défilement vertical**
 
 La hauteur d’un Index table ne doit jamais être fixé, elle s’adapte au contenu. De ce fait, lorsqu’il contient une très grande quantité de ressources, il faut utiliser la pagination pour éviter le scroll vertical à l’intérieur du tableau.
-
-<design figma-url="https://www.figma.com/design/ud1QBuvu6PMBaMRljCZVYV/?node-id=2181:29108">
-
-**Scroll**
-
-**Scroll**
-
-</design>
 
 ## **Contenu & rédaction**
 
@@ -469,25 +193,9 @@ La hauteur d’un Index table ne doit jamais être fixé, elle s’adapte au con
 
 L’intitulé des en-tête doit toujours être au singulier.
 
-<design figma-url="https://www.figma.com/design/ud1QBuvu6PMBaMRljCZVYV/?node-id=2183:17301">
-
-**Head**
-
-**Head**
-
-</design>
-
 ### **Noms et prénoms**
 
 Pour faciliter la lecture d’un tableau, il est conseillé de toujours appliquer le format “Nom Prénom” pour citer des utilisateurs dans un tableau.
-
-<design figma-url="https://www.figma.com/design/ud1QBuvu6PMBaMRljCZVYV/?node-id=2183:20013">
-
-**Users names**
-
-**Users names**
-
-</design>
 
 ### **Emphase**
 
@@ -495,34 +203,10 @@ Le contenu de certaines colonnes peut être mis en avant en utilisant une graiss
 
 L’utilisation de la couleur peut-être une bonne solution pour appuyer une information, comme une somme négative ou positive.
 
-<design figma-url="https://www.figma.com/design/ud1QBuvu6PMBaMRljCZVYV/?node-id=2181:29505">
-
-**Emphasis**
-
-**Emphasis**
-
-</design>
-
 ### **Valeurs manquantes**
 
 L’absence de donnée doit être matérialisée par un tiret demi-cadratin (–). Afin que les lecteurs d'écrans restituent correctement l'absence de données, il est conseillé d'appliquer le tiret via le code HTML suivant : `<span aria-hidden="true" data-content-before="–"></span>`.
 
-<design figma-url="https://www.figma.com/design/ud1QBuvu6PMBaMRljCZVYV/?node-id=2181:29913">
-
-**Empty cells**
-
-**Empty cells**
-
-</design>
-
 ### **Séparateurs verticaux**
 
 Il n’est pas recommandé d’utiliser des séparateurs verticaux dans le tableau. Pour mettre en avant une colonne et des données, on peut utiliser l’emphase.
-
-<design figma-url="https://www.figma.com/design/ud1QBuvu6PMBaMRljCZVYV/?node-id=2183:17313">
-
-**Dividers**
-
-**Dividers**
-
-</design>

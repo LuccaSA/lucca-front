@@ -5,5 +5,5 @@
 ```
 
 ```html
-<div class="gauge${…}${…}${…}${…}" ${…}></div>
+<div class="gauge" [attr.style]="'--components-gauge-value: 33%'"></div>
 ```

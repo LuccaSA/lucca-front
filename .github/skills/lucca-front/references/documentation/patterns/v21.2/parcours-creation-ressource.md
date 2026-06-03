@@ -21,15 +21,7 @@ L'étape d'initialisation est **obligatoire** dans ce type de parcours. Elle per
 
 Cette première étape contient **deux à trois champs essentiels** pour identifier la ressource
 
-<design figma-url="https://www.figma.com/design/4vzJER8uY9Mh5wntlaLylH/?node-id=5026:45277">
-
-</design>
-
 Si le parcours de création nécessite de traduire le contenu en plusieurs langues, les paramètres des langues sont accessibles depuis cette première étape d’initialisation. Pour en savoir plus, consultez la guideline sur les traductions de formulaire.
-
-<design figma-url="https://www.figma.com/design/4vzJER8uY9Mh5wntlaLylH/?node-id=5026:65744">
-
-</design>
 
 #### Contenu et rédaction
 
@@ -46,10 +38,6 @@ Une fois la ressource créée via l’étape d’initialisation, l'utilisateur c
 Chaque étape traite un aspect spécifique de la ressource, ce qui permet de focaliser l'attention de l'utilisateur sur un point précis.
 
 Dans ce contexte de création de ressource, la complétion des étapes peut être séquentielle (l’utilisateur doit suivre un ordre définit) ou libre (l’utilisateur peut naviguer entre les étapes à sa guise).
-
-<design figma-url="https://www.figma.com/design/4vzJER8uY9Mh5wntlaLylH/?node-id=5026:51890">
-
-</design>
 
 #### Contenu et rédaction
 
@@ -69,19 +57,11 @@ Ces ressources enfants sont créées dans une Dialog latérale (`drawer`) superp
 
 La Dialog enfant se ferme après validation, ramenant l'utilisateur à la Dialog parente.
 
-<design figma-url="https://www.figma.com/design/4vzJER8uY9Mh5wntlaLylH/?node-id=5026:69516">
-
-</design>
-
 ### Étape récapitulative
 
 Cette étape récapitulative est **optionnelle**. L'ajout d'un récapitulatif dépend de la criticité de l'action, ses conséquences en cas d'erreur, la difficulté à corriger et le stress généré pour l'utilisateur.
 
 Une fois toutes les étapes complétées, l'utilisateur accède à un écran présentant l'ensemble des informations saisies avant la validation finale. Cet écran permet de vérifier les paramètres configurés et de les corriger si nécessaire avant de confirmer l'action.
-
-<design figma-url="https://www.figma.com/design/4vzJER8uY9Mh5wntlaLylH/?node-id=5026:70495">
-
-</design>
 
 #### Contenu et rédaction
 
@@ -105,10 +85,6 @@ La validation des données est **manuelle** et se fait à chaque changement d’
 
 Le composant Progress stepper indique un état « Succès » pour les étapes validées.
 
-<design figma-url="https://www.figma.com/design/4vzJER8uY9Mh5wntlaLylH/?node-id=5026:37573">
-
-</design>
-
 ### Complétion libre
 
 Dans ce contexte de création de ressource, la complétion des paramètres est guidée mais n’est pas imposée. C’est à dire que l’utilisateur peut naviguer entre les étapes, même si des informations ne sont pas renseignées.
@@ -119,17 +95,9 @@ Dans ce cas, aucune validation n'est effectuée pendant les étapes intermédiai
 
 Exception faite pour certains champs avec un format spécifique imposé (email, url, etc.), les erreurs peuvent être déclenchées au `blur` lorsque le format n'est pas respecté. Cela aide l'utilisateur à corriger immédiatement sans attendre la fin du parcours.
 
-<design figma-url="https://www.figma.com/design/4vzJER8uY9Mh5wntlaLylH/?node-id=5026:37571">
-
-</design>
-
 ## Enregistrement
 
 Un enregistrement de la ressource est effectué à chaque étape, lorsque l’utilisateur change d’étape, via le bouton « Étape suivante » ou via le Progress stepper. Le bouton « Étape suivante » passe en état `loading` le temps de l'enregistrement.
-
-<design figma-url="https://www.figma.com/design/4vzJER8uY9Mh5wntlaLylH/?node-id=5026:37465">
-
-</design>
 
 Un bouton « **Continuer plus tard** » est proposé à chaque étape pour permettre à l’utilisateur de quitter le parcours à tout moment tout en sauvegardant l’état actuel de sa saisie. La ressource reste alors en statut « En cours de création ».
 
@@ -145,10 +113,6 @@ Un bouton est toujours présent dans l'entête de la Dialog pour que l'utilisate
 * supprimer la ressource en cours de création.
 
 Des actions spécifiques à la ressource peuvent aussi y trouver place.
-
-<design figma-url="https://www.figma.com/design/4vzJER8uY9Mh5wntlaLylH/?node-id=5096:7366">
-
-</design>
 
 ## Affichage des ressources
 
@@ -212,10 +176,6 @@ Le formulaire est présenté dans une Dialog centrée. L’utilisateur voit tous
 
 La ressource est immédiatement créée à la validation du formulaire.
 
-<design figma-url="https://www.figma.com/design/4vzJER8uY9Mh5wntlaLylH/?node-id=5027:85272">
-
-</design>
-
 #### Contenu et rédaction
 
 | Élément | Contenu |
@@ -227,10 +187,6 @@ La ressource est immédiatement créée à la validation du formulaire.
 ### Formulaire long
 
 Au-delà de 3 champs, si les informations demandés ne nécessitent pas de découpage en étape, l’utilisation d’un formulaire long est approprié. Ce formulaire présenté dans une Dialog latérale (`drawer`) peut être structuré en plusieurs fieldsets pour maintenir une bonne lisibilité.
-
-<design figma-url="https://www.figma.com/design/4vzJER8uY9Mh5wntlaLylH/?node-id=5027:90257">
-
-</design>
 
 #### Contenu et rédaction
 
@@ -245,10 +201,6 @@ Au-delà de 3 champs, si les informations demandés ne nécessitent pas de déco
 Une découpage du formulaire en étapes s'impose lorsque la complexité des Fieldsets devient trop importante. Chaque étape traite un aspect spécifique de la ressource, ce qui permet de focaliser l'attention de l'utilisateur sur un point précis.
 
 Le parcours se déroule dans une Dialog latérale (`drawer`) avec un Progress stepper visible indiquant la progression.
-
-<design figma-url="https://www.figma.com/design/4vzJER8uY9Mh5wntlaLylH/?node-id=5027:91498">
-
-</design>
 
 #### Contenu et rédaction
 
@@ -296,10 +248,6 @@ Une fois créée, une ressource peut être consultée et modifiée par l'utilisa
 
 Ce mode d’affichage convient pour les parcours de création simple ou long, sans étapes et lorsqu’aucune information supplémentaire n’est attendue ou ne peut être ajoutée après la création. L'utilisateur clique sur la ressource et accède directement à une **Dialog en mode édition ou présentation**, similaire au parcours de création.
 
-<design figma-url="https://www.figma.com/design/4vzJER8uY9Mh5wntlaLylH/?node-id=5041:14567">
-
-</design>
-
 #### Consultation en pleine page
 
 Ce mode d’affichage doit être privilégié pour les ressources issues d’un parcours de création en étapes ou si des données supplémentaires peuvent être renseignées après la création initiale, alors ce mode d’affichage doit aussi être utilisé.
@@ -308,12 +256,4 @@ L'utilisateur clique sur la ressource et accède à une **pleine page dédiée**
 
 Chaque section peut être modifiée individuellement, offrant une vue d'ensemble tout en permettant des modifications ciblées.
 
-<design figma-url="https://www.figma.com/design/4vzJER8uY9Mh5wntlaLylH/?node-id=5027:91507">
-
-</design>
-
 Certaines données, non demandées lors du parcours de création, peuvent être ajoutées à posteriori dans la vue détaillée. L'interface affiche un Empty state section tant que l'utilisateur n'y a rien renseigné.
-
-<design figma-url="https://www.figma.com/design/4vzJER8uY9Mh5wntlaLylH/?node-id=5027:91516">
-
-</design>

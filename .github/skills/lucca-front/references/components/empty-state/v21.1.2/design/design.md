@@ -6,16 +6,6 @@
 
 ## **Anatomie**
 
-<notes>
-
-1. **Titre** du message
-2. **Description** permettant à l’utilisateur de comprendre ce qu’il se passe et ce qu’il doit faire
-3. **Boutons d’action** permettant à l’utilisateur d’interagir avec l’application
-
-</notes>
-
----
-
 ## Illustrations
 
 Les illustrations d'Empty state sont composées de deux types d'éléments visuels superposés qui créent de la profondeur et du contexte : les bulles et les illustrations métier.
@@ -29,8 +19,6 @@ Le composant prévoit plusieurs illustrations génériques mais il est tout à f
 * l’illustration ne doit pas dépasser **248 x 232px pour**`bottomLeftForeground` et **216 x 232px** pour `topRightForeground` ,
 * l’illustration comporte **entre 1 et 3 objets**.
 * ces objets représentent le contexte de l’utilisateur à ce moment du parcours,
-
----
 
 ## Typologie des messages
 

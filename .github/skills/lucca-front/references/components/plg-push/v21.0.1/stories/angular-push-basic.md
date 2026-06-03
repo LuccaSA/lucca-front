@@ -6,7 +6,7 @@ import { PLGPushComponent } from '@lucca-front/ng/plg-push';
 ```
 
 ```html
-<lu-plg-push ${…}${…}>
+<lu-plg-push>
 	Bénéficiez de toutes les options liées au télétravail avec Timmi Office.
 	<a class="link mod-icon" href="#" target="_blank" rel="noopener noreferrer">
 		<span class="link-text">Demander un essai gratuit</span>

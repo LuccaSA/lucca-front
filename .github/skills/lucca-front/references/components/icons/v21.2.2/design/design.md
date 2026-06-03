@@ -84,8 +84,6 @@ On distingue 4 structures principales :
 * **Horizontale :** 16x20px
 * **Cercle :** 20x20px
 
----
-
 Si nécessaire, les grilles 16x20 et 20x16 peuvent être étendues à 18x20 et 20x18 afin de garantir une homogénéité dans l'espace occupé par les icônes.
 
 Une cinquième structure existe pour les éléments fins et penchés. On utilisera un cercle de 24x24px pour définir ces icônes.
@@ -118,5 +116,3 @@ Pour appuyer le style de nos icônes et apporter du dynamisme, il est possible d
 ### Remplissage
 
 Quand certaines zones sont trop petites pour être compréhensibles, il est possible de les remplir. Attention cette zone ne doit pas être trop grande pour ne pas prendre trop d'importance visuellement.
-
----

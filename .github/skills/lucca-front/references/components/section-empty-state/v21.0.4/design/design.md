@@ -6,22 +6,9 @@
 
 ## **Anatomie**
 
-<notes>
-
-1. **Illustration** adapté au contexte de l’interface et du message
-2. **Titre** du message
-3. **Description** permettant à l’utilisateur de comprendre ce qu’il se passe et ce qu’il doit faire
-4. **Boutons d’action** permettant à l’utilisateur d’interagir avec l’application
-
-</notes>
-
----
-
 ## Illustrations
 
 Les Bubbles illustrations doivent s'adapter automatiquement à la palette de couleurs du logiciel. Cela garantit une intégration harmonieuse et cohérente avec le reste de l'interface.
-
----
 
 ## Typologie des messages
 

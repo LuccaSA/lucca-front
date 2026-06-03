@@ -6,20 +6,6 @@
 
 ## Anatomie
 
-**Anatomie**
-
-**Anatomie**
-
-<notes>
-
-1. Fil d’activité 
-
-2. Une étape
-
-</notes>
-
----
-
 ## Options
 
 ### Commentaire
@@ -36,8 +22,6 @@ Cette option permet d'afficher les fichiers importés par un utilisateur lors d'
 
 Cette option est utilisée lorsqu'une action entraîne la modification d'une propriété de la ressource. Elle permet d'afficher côte à côte l'ancienne valeur et la nouvelle valeur pour une compréhension immédiate de l'évolution.
 
----
-
 ## États
 
 ### Étape en cours
@@ -52,8 +36,6 @@ Utilisez le jalon de succès pour marquer la fin positive d'un processus de déc
 
 Le jalon de refus marque la clôture d'un workflow avec une issue négative. Il utilise les codes visuels d’erreur pour signaler que la ressource n'a pas atteint l'objectif escompté.
 
----
-
 ## Comportement
 
 ### Ordre d'affichage
@@ -63,8 +45,6 @@ Par défaut, l'ordre est antéchronologique. Les événements les plus récents 
 ### Chargement
 
 Le bouton de chargement est utilisé lorsque le fil d'activité dépasse un certains nombre d'entrées. Il permet de ne pas surcharger la page au chargement initial et d'optimiser les performances techniques.
-
----
 
 ## Règles d'utilisation
 

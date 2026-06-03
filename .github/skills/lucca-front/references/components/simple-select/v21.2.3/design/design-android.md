@@ -1,23 +1,6 @@
 # simple-select — Design (Android)
 
-<design figma-url="https://www.figma.com/design/ud1QBuvu6PMBaMRljCZVYV/?node-id=6694:10800">
-
-</design>
-
 ## Anatomie
-
-<design figma-url="https://www.figma.com/design/ud1QBuvu6PMBaMRljCZVYV/?node-id=6343:20238">
-
-<notes>
-
-1. **Label :** Le label du champ doit indiquer quel type d'information le champ requiert.
-2. **Champ de sélection :** l’utilisateur y clique pour ouvrir l’écran de sélection.
-3. **Tout effacer :** La croix efface tout dans le champ de saisie. Elle n'apparaît que lorsqu’une option au moins a été sélectionnée.
-4. **Écran de sélection (Select Dialog) :** L’écran de sélection contient la liste de toutes les options sélectionnables.
-
-</notes>
-
-</design>
 
 ## Options
 
@@ -27,23 +10,11 @@ Les options sélectionnables peuvent être regroupées en sous-catégories. Pour
 
 Au scroll, le titre reste fixé en dessous de la *Top App Bar* jusqu’à ce qu’il soit remplacé par la catégorie suivante.
 
-<design figma-url="https://www.figma.com/design/ud1QBuvu6PMBaMRljCZVYV/?node-id=6343:28891">
-
-</design>
-
 ### Bouton d'ajout d'options
 
 Lorsque la création est une action fréquente, l'option d’ajout est affichée en permanence en haut à droite de l’écran.
 
-<design figma-url="https://www.figma.com/design/ud1QBuvu6PMBaMRljCZVYV/?node-id=6348:11817">
-
-</design>
-
 L'utilisateur a la possibilité d'ajouter une nouvelle option après avoir saisi une recherche, si celle-ci n’a donné aucun résultat.
-
-<design figma-url="https://www.figma.com/design/ud1QBuvu6PMBaMRljCZVYV/?node-id=6694:13319">
-
-</design>
 
 ## Comportement
 
@@ -53,23 +24,11 @@ La recherche se fait depuis la barre de recherche en haut de l’écran de séle
 
 Il est possible de quitter le contexte de recherche en appuyant sur le bouton *Clear* dans la barre de recherche.
 
-<design figma-url="https://www.figma.com/design/ud1QBuvu6PMBaMRljCZVYV/?node-id=6348:14714">
-
-</design>
-
 ### État vide
 
 Le contenu de l’écran de sélection se transforme en *empty state* lorsqu'il n'existe aucune option disponible ou qu'une recherche ne donne aucun résultat. Le message doit être adapté pour chacun de ces cas.
 
-<design figma-url="https://www.figma.com/design/ud1QBuvu6PMBaMRljCZVYV/?node-id=6350:20964">
-
-</design>
-
 Cet état peut être cumulé avec l'ajout d'options. C'est notamment pratique pour pouvoir créer une nouvelle donnée directement via une Fullscreen Cover.
-
-<design figma-url="https://www.figma.com/design/ud1QBuvu6PMBaMRljCZVYV/?node-id=6694:14081">
-
-</design>
 
 ## Règles d'utilisation
 

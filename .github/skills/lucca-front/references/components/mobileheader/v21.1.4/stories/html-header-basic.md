@@ -1,7 +1,7 @@
 # mobileheader — Header basic _(HTML/CSS)_
 
 ```html
-<div class="mobileHeader ${…}">
+<div class="mobileHeader">
 	<a href="#" class="link mod-decorationHover">Text link</a>
 	<div class="mobileHeader-title">
 		<h1 class="mobileHeader-title-main">Title</h1>

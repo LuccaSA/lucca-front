@@ -7,7 +7,7 @@
 ```
 
 ```html
-<header class="pageHeader mod-withBreadcrumbs ${…}">
+<header class="pageHeader mod-withBreadcrumbs">
 	<nav class="breadcrumbs" aria-describedby="breadcrumbs-title">
 		<p id="breadcrumbs-title" class="pr-u-mask">Breadcrumbs</p>
 		<ol class="breadcrumbs-list">

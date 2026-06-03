@@ -13,5 +13,69 @@ import { LuTooltipModule } from '@lucca-front/ng/tooltip';
 ```
 
 ```html
-<lu-resource-card-wrapper cdkDropList draggable${…}>${…}</lu-resource-card-wrapper>
+<lu-resource-card-wrapper cdkDropList draggable>
+	<lu-resource-card cdkDrag>
+		<a href="#" luResourceCardAction>Lorem ipsum dolor</a>
+		<ng-container resourceCardInfos>
+			<lu-status-badge label="Status" />
+			<lu-status-badge label="Status" />
+		</ng-container>
+		<ng-container resourceCardIllustration>
+			<div
+				class="pr-u-inlineSize100% pr-u-blockSize100% pr-u-borderRadiusDefault"
+				style="background-color: var(--palettes-lavender-100)"
+			></div>
+		</ng-container>
+		<ng-container resourceCardAction>
+			<button type="button" luButton>Lorem ipsum</button>
+		</ng-container>
+		<ng-container resourceCardContent>
+			Lorem
+			<a href="#" luLink>ipsum</a>
+			dolor sit amet, consectetur adipiscing elit, sed do.
+		</ng-container>
+	</lu-resource-card>
+	<lu-resource-card cdkDrag>
+		<a href="#" luResourceCardAction>Lorem ipsum dolor</a>
+		<ng-container resourceCardInfos>
+			<lu-status-badge label="Status" />
+			<lu-status-badge label="Status" />
+		</ng-container>
+		<ng-container resourceCardIllustration>
+			<div
+				class="pr-u-inlineSize100% pr-u-blockSize100% pr-u-borderRadiusDefault"
+				style="background-color: var(--palettes-lavender-100)"
+			></div>
+		</ng-container>
+		<ng-container resourceCardAction>
+			<button type="button" luButton>Lorem ipsum</button>
+		</ng-container>
+		<ng-container resourceCardContent>
+			Lorem
+			<a href="#" luLink>ipsum</a>
+			dolor sit amet, consectetur adipiscing elit, sed do.
+		</ng-container>
+	</lu-resource-card>
+	<lu-resource-card cdkDrag>
+		<a href="#" luResourceCardAction>Lorem ipsum dolor</a>
+		<ng-container resourceCardInfos>
+			<lu-status-badge label="Status" />
+			<lu-status-badge label="Status" />
+		</ng-container>
+		<ng-container resourceCardIllustration>
+			<div
+				class="pr-u-inlineSize100% pr-u-blockSize100% pr-u-borderRadiusDefault"
+				style="background-color: var(--palettes-lavender-100)"
+			></div>
+		</ng-container>
+		<ng-container resourceCardAction>
+			<button type="button" luButton>Lorem ipsum</button>
+		</ng-container>
+		<ng-container resourceCardContent>
+			Lorem
+			<a href="#" luLink>ipsum</a>
+			dolor sit amet, consectetur adipiscing elit, sed do.
+		</ng-container>
+	</lu-resource-card>
+</lu-resource-card-wrapper>
 ```

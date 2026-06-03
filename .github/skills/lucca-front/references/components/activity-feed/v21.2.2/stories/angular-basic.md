@@ -14,6 +14,6 @@ import { ButtonComponent } from '@lucca/prisme/button';
 ```html
 <lu-activity-feed>
 	<lu-activity-feed-step [user]="user" [date]="date" label="Lorem ipsum dolor." />
-	${…}${…}${…}${…}${…}
+	<lu-activity-feed-step [user]="user" [date]="date" label="Lorem ipsum dolor." />
 </lu-activity-feed>
 ```

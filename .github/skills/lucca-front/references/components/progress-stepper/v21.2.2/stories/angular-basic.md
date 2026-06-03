@@ -6,9 +6,11 @@ import { ProgressStepperComponent, ProgressStepperStepComponent } from '@lucca-f
 ```
 
 ```html
-<lu-progress-stepper current="${…}">
-	<lu-progress-stepper-step [routerLinkParam]="'./route/step-1'" label="Step" ${…} />
-	<lu-progress-stepper-step [routerLinkParam]="'./route/step-2'" label="Step" ${…} />
-	${…}
+<lu-progress-stepper current="3">
+	<lu-progress-stepper-step [routerLinkParam]="'./route/step-1'" label="Step" />
+	<lu-progress-stepper-step [routerLinkParam]="'./route/step-2'" label="Step" />
+	<lu-progress-stepper-step label="Step" />
+	<lu-progress-stepper-step label="Step" />
+	<lu-progress-stepper-step label="Step" />
 </lu-progress-stepper>
 ```

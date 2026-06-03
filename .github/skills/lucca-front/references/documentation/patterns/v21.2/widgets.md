@@ -4,18 +4,6 @@
 
 ## Anatomie
 
-<design figma-url="https://www.figma.com/design/4vzJER8uY9Mh5wntlaLylH/?node-id=3917:109985">
-
-<notes>
-
-1. **Entête :** l'entête du widget indique son nom ainsi que les options possibles (navigation, filtres, etc.).
-2. **Message d'aide :**  Actions et options disponibles
-3. **Contenu :** le contenu est spécifique au widget. Il peut contenir des actions ou des liens en plus des informations mises en avant.
-
-</notes>
-
-</design>
-
 ## Options
 
 ### Filtres
@@ -24,17 +12,9 @@ L’option filtres permet à l’utilisateur de filtrer les données affichées 
 
 Il est recommandé de persister les filtres sélectionnés (le filtre est mémorisé et appliqué à la prochaine visite), mais ce comportement est laissé à l’appréciation de chaque équipe.
 
-<design figma-url="https://www.figma.com/design/4vzJER8uY9Mh5wntlaLylH/?node-id=3916:118889">
-
-</design>
-
 ### Pagination
 
 L’option pagination permet à l’utilisateur de faire **défiler horizontalement** une liste d’objets identiques dans un widget.
-
-<design figma-url="https://www.figma.com/design/4vzJER8uY9Mh5wntlaLylH/?node-id=3916:118892">
-
-</design>
 
 ### Déploiement
 
@@ -44,15 +24,7 @@ La hauteur maximum du widget lors du déploiement est de 320px.
 
 ⚠️ Cette option est à utiliser avec précaution pour éviter d'afficher trop d'informations et de surcharger la page d'accueil.
 
-<design figma-url="https://www.figma.com/design/4vzJER8uY9Mh5wntlaLylH/?node-id=3916:118894">
-
-</design>
-
 Dans le cas où des filtres appliqués ne donnent aucun résultat, l’icône de déploiement est maintenue pour éviter les sauts de mise en page.
-
-<design figma-url="https://www.figma.com/design/4vzJER8uY9Mh5wntlaLylH/?node-id=3916:118897">
-
-</design>
 
 - **Don't** : L’option pagination et déploiement ne peuvent pas cohabiter.
 
@@ -74,22 +46,6 @@ Suite au clique la consultation se fait dans le même onglet.
 Les widgets sont conçus pour être utilisés uniquement sur la page d'accueil et non à l'intérieur des solutions. L'affichage des widgets sur la page d'accueil peut se faire en colonne ou en grille.
 
 L’espacement entre ces widgets est de 16px horizontalement et verticalement.
-
-<design figma-url="https://www.figma.com/design/4vzJER8uY9Mh5wntlaLylH/?node-id=3916:118899">
-
-**Positionnement en colonne**
-
-**Positionnement en colonne**
-
-</design>
-
-<design figma-url="https://www.figma.com/design/4vzJER8uY9Mh5wntlaLylH/?node-id=3916:118904">
-
-**Positionnement en grille**
-
-**Positionnement en grille**
-
-</design>
 
 # Content
 

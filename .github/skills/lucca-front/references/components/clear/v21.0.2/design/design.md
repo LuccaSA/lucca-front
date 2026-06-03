@@ -27,6 +27,4 @@ De manière générale, le Clear n’apparaît que lorsqu’une valeur est saisi
 
 Pour éviter d'afficher un Clear dans un Select, si beaucoup de champs sont présents sur une interface ou dans un formulaire, il est possible d'afficher une valeur nulle parmi les options. Le champ est alors obligatoire.
 
----
-
 ## Composants associés

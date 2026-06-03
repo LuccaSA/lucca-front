@@ -58,7 +58,7 @@ import {DialogHeaderAction} from '@lucca-front/ng/dialog';
 ```
 
 ```html
-<!-- config: ${…} -->
+<!-- config: {"size":"S","alert":false,"mode":"default","panelClasses":["mod-neutralBackground"]} -->
 
 <button luButton [luDialogOpen]="dialogTpl" [luDialogConfig]="config">Open Template-driven Dialog</button>
 
@@ -83,7 +83,7 @@ import {DialogHeaderAction} from '@lucca-front/ng/dialog';
 ```
 
 ```html
-<!-- config: ${…} -->
+<!-- config: {"size":"S","alert":false,"mode":"default","autoFocus":"first-tabbable"} -->
 
 <button luButton [luDialogOpen]="dialogTpl" [luDialogConfig]="config">Open Template-driven Dialog</button>
 
@@ -109,7 +109,7 @@ import {DialogHeaderAction} from '@lucca-front/ng/dialog';
 ```
 
 ```html
-<!-- config: ${…} -->
+<!-- config: {"size":"S","alert":false,"mode":"default","autoFocus":"first-tabbable"} -->
 
 <button luButton [luDialogOpen]="dialogTpl" [luDialogConfig]="config">
 	Open Template-driven Dialog with Form inside

@@ -18,7 +18,7 @@
 ```
 
 ```html
-<div class="callout${…}${…}">
+<div class="callout">
 	<div class="callout-content">
 		<div class="callout-content-description">Feedback description</div>
 	</div>

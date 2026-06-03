@@ -2,16 +2,6 @@
 
 ## Anatomie
 
-<notes>
-
-1. **Label :** Le label du champ doit indiquer quel type d'information le champ requiert.
-2. **Champ de saisie :** Le champ dans lequel les utilisateurs cliquent pour saisir du texte.
-3. **Message d’aide (Inline message) :** Le message d’aide est optionnel. Il permet de fournir des informations supplémentaires à l’utilisateur pour l’aider à compléter le champ.
-
-</notes>
-
----
-
 ## Options
 
 ### Placeholder
@@ -48,8 +38,6 @@ L’affichage en read-only d’un Textarea peut se faire de plusieurs manière :
 
 * Via le composant Comment si le Textarea permettait à l’utilisateur de commenter quelque chose (une dépense, une saisie des temps, etc.).
 
----
-
 ## Comportement
 
 ### Hauteur par défaut
@@ -71,8 +59,6 @@ Il est possible de donner une hauteur spécifique au composant si cela est néce
 ### Redimensionnement automatique
 
 Dans certains contexte, il est possible d’activer cette option. Le Textarea se redimensionne automatiquement lorsque l’utilisateur saisit son texte.
-
----
 
 ## Règles d'utilisation
 

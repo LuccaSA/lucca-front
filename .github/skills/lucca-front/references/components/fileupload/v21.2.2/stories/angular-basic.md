@@ -8,24 +8,15 @@ import { MultiFileUploadComponent } from '@lucca-front/ng/file-upload';
 
 ```html
 <lu-form-field label="Label">
-		<lu-multi-file-upload${…}${…} (filePicked)="fileUploadFeature.uploadFiles([$event])">
-			<lu-tag icon="weatherStars" label="Scan intelligent" AI />
-		</lu-multi-file-upload>
-	</lu-form-field>
-	<div class="fileEntryDisplayWrapper">
-		@for(fileUpload of fileUploadFeature.fileUploads(); track $index) {
-			<lu-file-entry${…}${…}${…} [entry]="fileUpload | fileUploadToLFEntry" [state]="fileUpload.state" [previewUrl]="getPreviewUrl(fileUpload)" [inlineMessageError]="fileUpload.error?.detail" (deleteFile)="deleteFile(fileUpload)" />
-		}
-	</div>
-```
-
-```html
-<lu-form-field label="Label">
-	<lu-multi-file-upload${…}${…} (filePicked)="fileUploadFeature.uploadFiles([$event])" />
+	<lu-multi-file-upload
+		fileMaxSize="5000000"
+		illustration="paper"
+		(filePicked)="fileUploadFeature.uploadFiles([$event])"
+	/>
 </lu-form-field>
 <div class="fileEntryDisplayWrapper">
 	@for (fileUpload of fileUploadFeature.fileUploads(); track $index) {
-		<lu-file-entry${…}${…}${…}
+		<lu-file-entry
 			[entry]="fileUpload | fileUploadToLFEntry"
 			[state]="fileUpload.state"
 			[previewUrl]="getPreviewUrl(fileUpload)"
@@ -40,25 +31,8 @@ import { MultiFileUploadComponent } from '@lucca-front/ng/file-upload';
 @let fileUpload = fileUploadFeature.fileUploads()[0];
 <lu-form-field label="Label">
 	<lu-single-file-upload
-		${…}
-		[accept]="accept"
-		(filePicked)="fileUploadFeature.uploadFiles([$event])"
-		[entry]="fileUpload | fileUploadToLFEntry"
-		[state]="fileUpload?.state"
-		[previewUrl]="getPreviewUrl(fileUpload)"
-		[inlineMessageError]="fileUpload?.error?.detail"
-		(deleteFile)="deleteFile(fileUpload)"
-	>
-		<lu-tag icon="weatherStars" label="Scan intelligent" AI />
-	</lu-single-file-upload>
-</lu-form-field>
-```
-
-```html
-@let fileUpload = fileUploadFeature.fileUploads()[0];
-<lu-form-field label="Label">
-	<lu-single-file-upload
-		${…}
+		fileMaxSize="5000000"
+		illustration="invoice"
 		[accept]="accept"
 		(filePicked)="fileUploadFeature.uploadFiles([$event])"
 		[entry]="fileUpload | fileUploadToLFEntry"

@@ -5,5 +5,5 @@ import { GaugeComponent } from '@lucca-front/ng/gauge';
 ```
 
 ```html
-<lu-gauge${…}${…}${…}${…} />
+<lu-gauge size="40" value="33" />
 ```

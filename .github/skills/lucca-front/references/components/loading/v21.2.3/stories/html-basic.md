@@ -5,7 +5,7 @@
 ```
 
 ```html
-<div class="loading${…}${…}${…}${…}${…}">
-	<span class="loading-label">${…}</span>
+<div class="loading mod-hiddenLabel">
+	<span class="loading-label">Chargement…</span>
 </div>
 ```

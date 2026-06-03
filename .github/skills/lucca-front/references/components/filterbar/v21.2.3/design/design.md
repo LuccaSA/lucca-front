@@ -1,28 +1,10 @@
 # filterbar — Design
 
-<design figma-url="https://www.figma.com/design/ud1QBuvu6PMBaMRljCZVYV/?node-id=5585:27518">
-
-</design>
-
 **Mots-clés :**barre, filtres, pills
 
 **Des questions, commentaires ou retours ?**Laisser un commentaire sur Figma ou contactez-nous sur Slack :*#design-system-public*
 
 ## Anatomie
-
-<design figma-url="https://www.figma.com/design/ud1QBuvu6PMBaMRljCZVYV/?node-id=5580:21878">
-
-<notes>
-
-1. **Vues :** Elles permettent d’afficher des contenus prédéfinis pour simplifier l’expérience de l’utilisateur. C’est le composant Segmented control qui est utilisé.
-2. **Bouton d’ajout de filtres :** Ce bouton permet d’afficher une liste filtres masqués par défaut. L’utilisateur peut alors sélectionner les filtres qu’il souhaite utiliser pour affiner les résultats. Cette option est détaillé plus bas.
-3. **Filtres :** La liste des filtres avec lesquels l’utilisateur peut interagir pour affiner sa recherche. Chaque filtre est représenté par une Filter pill.
-4. **Barre de recherche :** La barre de recherche fonctionne comme un filtre supplémentaire. Elle permet de rechercher un contenu spécifique au sein des données déjà filtrées. Elle se positionne toujours en dernière.
-5. **Actions associées :** Les boutons d’action associées, typiquement pour exporter ou télécharger le contenu filtré sous un format spécifique, sont toujours placés à droite de la Filter bar. Cette option est détaillé plus bas.
-
-</notes>
-
-</design>
 
 ☝️ Si vous souhaitez en savoir plus sur son utilisation au sein d’une interface, son positionnement et les spécifications Design, rendez-vous en bas de cette page.
 
@@ -34,14 +16,6 @@ Lorsqu’un compteur est affiché dans le Segmented control utilisé pour les vu
 
 Si des filtres sont appliqués, cela n’a pas d’impact sur le nombre indiqué dans le Numeric badge.
 
-<design figma-url="https://www.figma.com/design/ud1QBuvu6PMBaMRljCZVYV/?node-id=5580:21887">
-
-</design>
-
-<design figma-url="https://www.figma.com/design/ud1QBuvu6PMBaMRljCZVYV/?node-id=5580:21896">
-
-</design>
-
 ### Ajout de filtres supplémentaires
 
 Des filtres supplémentaires, masqués derrière un bouton, peuvent être affichés si l’utilisateur souhaite affiner les résultats.
@@ -52,19 +26,11 @@ Il n’est pas possible de masquer un filtre affiché par défaut. Ces derniers 
 
 Si l'utilisateur décide de masquer un filtre actif, ce dernier sera désactivé.
 
-<design figma-url="https://www.figma.com/design/ud1QBuvu6PMBaMRljCZVYV/?node-id=5580:21905">
-
-</design>
-
 ### Actions associées
 
 Les boutons d’action, typiquement pour exporter ou télécharger le contenu filtré sous un format spécifique, sont toujours placés à droite de la Filter bar.
 
 Ces actions sont ferrées à droite de l’interface, pour les détacher des filtres.
-
-<design figma-url="https://www.figma.com/design/ud1QBuvu6PMBaMRljCZVYV/?node-id=5580:21916">
-
-</design>
 
 ### Application des filtres
 
@@ -72,17 +38,9 @@ Par défaut, les filtres **s’appliquent automatiquement** lorsque l’utilisat
 
 Dans certains cas, en raison de contraintes techniques, les filtres nécessitent un bouton pour être appliqués. Ce bouton s’affiche à la toute fin de la FilterBar.
 
-<design figma-url="https://www.figma.com/design/ud1QBuvu6PMBaMRljCZVYV/?node-id=5580:21936">
-
-</design>
-
 ### Affichage du nombre de résultats
 
 Lorsqu’il est intéressant d’indiquer à l’utilisateur le nombre de résultats, cette information peut être affichée à la toute fin de la Filter bar.
-
-<design figma-url="https://www.figma.com/design/ud1QBuvu6PMBaMRljCZVYV/?node-id=5580:21946">
-
-</design>
 
 ### Vues et filtres inactifs
 
@@ -90,23 +48,11 @@ Lorsqu’une vue représente un état prédéfini des données, basé sur un ens
 
 Une vue “Tous” doit être disponible pour que l’utilisateur puisse filtrer comme il l’entend parmi l’ensemble des données.
 
-<design figma-url="https://www.figma.com/design/ud1QBuvu6PMBaMRljCZVYV/?node-id=5580:21956">
-
-</design>
-
 ### Filtres dépendants d’une vue
 
 Lorsque vues et Filter pills sont cumulés, les Filter pills sont, par défaut, visibles pour chacune des vues disponibles.
 
 Cependant, dans de rares cas, nous souhaitons restreindre les options de filtrages pour certaines vues. Dans ce cas, les Filter pills peuvent alors s’afficher ou se masquer en fonction de la vue sélectionnée par l’utilisateur.
-
-<design figma-url="https://www.figma.com/design/ud1QBuvu6PMBaMRljCZVYV/?node-id=5580:21966">
-
-</design>
-
-<design figma-url="https://www.figma.com/design/ud1QBuvu6PMBaMRljCZVYV/?node-id=5580:21976">
-
-</design>
 
 ### Filtres, tableau, pagination et sélection
 
@@ -130,21 +76,9 @@ La Filter bar est positionnée sur une ligne dédiée. Elle peut se trouver :
 * Directement entre l’entête et le contenu de la page, son impact aura un effet sur l’ensemble de la page.
 * Dans une section spécifique de l’interface, auquel cas son impact sera restreint à cette section.
 
-<design figma-url="https://www.figma.com/design/ud1QBuvu6PMBaMRljCZVYV/?node-id=5580:21986">
-
-</design>
-
-<design figma-url="https://www.figma.com/design/ud1QBuvu6PMBaMRljCZVYV/?node-id=5580:21999">
-
-</design>
-
 ### Petits écrans et mobile
 
 L’affichage de la Filter bar s’adapte en fonction de l’espace disponible et du device.
 
 * Sur un écran de petite taille, sans écran tactile, les Filter pills passent automatiquement à la ligne en fonction de l’espace disponible.
 * Lorsqu’il s’agit d’un écran tactile, les Filter pills restent affichées sur une seule et même ligne. L’utilisateur peut alors scroller horizontalement pour parcourir les filtres disponibles. Cela se rapproche d’un comportement plus commun de navigation sur téléphone.
-
-<design figma-url="https://www.figma.com/design/ud1QBuvu6PMBaMRljCZVYV/?node-id=5580:22011">
-
-</design>

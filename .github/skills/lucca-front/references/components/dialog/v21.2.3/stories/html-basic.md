@@ -8,12 +8,7 @@
 
 ```html
 <div class="dialog_backdrop"></div>
-<div
-	role="dialog"
-	aria-modal="true"
-	aria-labelledby="dialogInsideHeaderTitle1"
-	class="dialog${…} ${…}"
->
+<div role="dialog" aria-modal="true" aria-labelledby="dialogInsideHeaderTitle1" class="dialog">
 	<div class="dialog-inside">
 		<form class="dialog-inside-formOptional">
 			<header class="dialog-inside-header">

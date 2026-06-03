@@ -6,8 +6,8 @@
 ```
 
 ```html
-<ul class="sortableList ${…}">
-	<li class="sortableList-item ${…}">
+<ul class="sortableList">
+	<li class="sortableList-item">
 		<div class="sortableList-item-handler"></div>
 		<div class="sortableList-item-content">
 			<p class="sortableList-item-content-description">Label</p>
@@ -18,7 +18,7 @@
 			<span class="pr-u-mask">Delete</span>
 		</button>
 	</li>
-	<li class="sortableList-item ${…}">
+	<li class="sortableList-item">
 		<div class="sortableList-item-handler"></div>
 		<div class="sortableList-item-content">
 			<p class="sortableList-item-content-description">Label</p>
@@ -29,7 +29,7 @@
 			<span class="pr-u-mask">Delete</span>
 		</button>
 	</li>
-	<li class="sortableList-item ${…}">
+	<li class="sortableList-item">
 		<div class="sortableList-item-handler"></div>
 		<div class="sortableList-item-content">
 			<p class="sortableList-item-content-description">Label</p>

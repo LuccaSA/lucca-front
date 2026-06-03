@@ -1,9 +1,5 @@
 # icons — Design
 
-<design figma-url="https://www.figma.com/design/ud1QBuvu6PMBaMRljCZVYV/?node-id=7393:66786">
-
-</design>
-
 **Mots-clés :**Icône, picrogramme, glyphe
 
 **Des questions, commentaires ou retours ?**Laisser un commentaire sur Figma ou contactez-nous sur Slack :*#design-system-public*
@@ -16,10 +12,6 @@ Les icônes d’interface sont des repères visuels universels qui doivent être
 
 Toute action générique (ex : Supprimer, Copier, Dupliquer, Créer) **doit obligatoirement utiliser la même icône** sur tous les logiciels. Cette cohérence renforce les repères utilisateurs établis, facilitant la reconnaissance et l’apprentissage.
 
-<design figma-url="https://www.figma.com/design/ud1QBuvu6PMBaMRljCZVYV/?node-id=7388:17805">
-
-</design>
-
 ### Icônes sans libellé
 
 Certaines icônes peuvent être utilisées sans libellé dans les interfaces Lucca lorsque leur signification est largement connue des utilisateurs (ex. : cœur, croix, flèche).
@@ -27,10 +19,6 @@ Certaines icônes peuvent être utilisées sans libellé dans les interfaces Luc
 Ce choix permet d’optimiser l’espace et la densité d’information, notamment dans des contextes à forte densité comme les index tables.
 
 **Accessibilité :** toute icône sans libellé doit impérativement comporter une **Tooltip** affichée au survol, explicitant l’action ou la fonction associée.
-
-<design figma-url="https://www.figma.com/design/ud1QBuvu6PMBaMRljCZVYV/?node-id=7388:17533">
-
-</design>
 
 ### Dans les boutons
 
@@ -85,10 +73,6 @@ Pour renforcer cette distinction, les actions de suppression sont mise en avant 
 
 L'ensemble des icônes doit être réalisé dans un espace de construction défini. Cet espace est un carré de 20x20px contenu dans une frame de 24x24px. Il est important de bien aligner les éléments sur la grille pour éviter les effets de flou à l'affichage.
 
-<design figma-url="https://www.figma.com/design/ud1QBuvu6PMBaMRljCZVYV/?node-id=7388:17479">
-
-</design>
-
 ### Structure
 
 Plusieurs structures sont définies à l'intérieur de la grille pour faciliter la construction des icônes. Ces structures vous permettrons de garder une cohérence de proportions entre les différentes formes.
@@ -100,49 +84,17 @@ On distingue 4 structures principales :
 * **Horizontale :** 16x20px
 * **Cercle :** 20x20px
 
-<design figma-url="https://www.figma.com/design/ud1QBuvu6PMBaMRljCZVYV/?node-id=7388:17476">
-
-</design>
-
-<design figma-url="https://www.figma.com/design/ud1QBuvu6PMBaMRljCZVYV/?node-id=7388:17473">
-
-</design>
-
-<design figma-url="https://www.figma.com/design/ud1QBuvu6PMBaMRljCZVYV/?node-id=7388:17470">
-
-</design>
-
-<design figma-url="https://www.figma.com/design/ud1QBuvu6PMBaMRljCZVYV/?node-id=7388:17467">
-
-</design>
-
 Si nécessaire, les grilles 16x20 et 20x16 peuvent être étendues à 18x20 et 20x18 afin de garantir une homogénéité dans l'espace occupé par les icônes.
 
-<design figma-url="https://www.figma.com/design/ud1QBuvu6PMBaMRljCZVYV/?node-id=7388:17454">
-
-</design>
-
 Une cinquième structure existe pour les éléments fins et penchés. On utilisera un cercle de 24x24px pour définir ces icônes.
-
-<design figma-url="https://www.figma.com/design/ud1QBuvu6PMBaMRljCZVYV/?node-id=7388:17464">
-
-</design>
 
 ### Angles
 
 Tous les icônes ne sont pas nécessairement rectangles ou carrés. Dans certains cas, il est possible d'ajouter une rotation dans la construction. Pour cela il est conseillé d'utiliser des angles à 45 degrés.
 
-<design figma-url="https://www.figma.com/design/ud1QBuvu6PMBaMRljCZVYV/?node-id=7388:17229">
-
-</design>
-
 ### Épaisseur
 
 L'épaisseur des icônes est définie à 2px. Il est nécessaire de respecter cette épaisseur pour garder une cohérence graphique entre tous les icônes de notre kit.
-
-<design figma-url="https://www.figma.com/design/ud1QBuvu6PMBaMRljCZVYV/?node-id=7388:17401">
-
-</design>
 
 ### Arrondis
 
@@ -153,30 +105,14 @@ L'arrondi des formes fait partie intégrante du style que l'on veut donner à no
 
 Dans d'autres cas, l'arrondi peut être ajusté optiquement pour une meilleure lisibilité.
 
-<design figma-url="https://www.figma.com/design/ud1QBuvu6PMBaMRljCZVYV/?node-id=7388:17346">
-
-</design>
-
 ### Tracés arrondis
 
 Le style de nos icônes est très arrondi, jusque dans les tracés de nos formes.
-
-<design figma-url="https://www.figma.com/design/ud1QBuvu6PMBaMRljCZVYV/?node-id=7388:17292">
-
-</design>
 
 ### Découpe
 
 Pour appuyer le style de nos icônes et apporter du dynamisme, il est possible d'intégrer une découpe dans la forme. Cette découpe peut être utilisée pour faire ressortir un élément, pour appuyer une perspective ou encore pour séparer plusieurs éléments de l'objet représenté.
 
-<design figma-url="https://www.figma.com/design/ud1QBuvu6PMBaMRljCZVYV/?node-id=7388:17239">
-
-</design>
-
 ### Remplissage
 
 Quand certaines zones sont trop petites pour être compréhensibles, il est possible de les remplir. Attention cette zone ne doit pas être trop grande pour ne pas prendre trop d'importance visuellement.
-
-<design figma-url="https://www.figma.com/design/ud1QBuvu6PMBaMRljCZVYV/?node-id=7388:17174">
-
-</design>

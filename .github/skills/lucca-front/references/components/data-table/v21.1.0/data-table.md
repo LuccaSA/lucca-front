@@ -9,7 +9,7 @@ import { DataTableBodyComponent, DataTableRowCellHeaderComponent, DataTableRowCe
 ## Basic Usage
 
 ```html
-<lu-data-table> <thead luDataTableHead> <tr luDataTableRow> <th luDataTableCell></th> <th luDataTableCell></th> </tr> </thead> <tbody luDataTableBody> <tr luDataTableRow> <th luDataTableCell></th> <td luDataTableCell></td> </tr> <tr luDataTableRow> <th luDataTableCell></th> <td luDataTableCell></td> </tr> </tbody>
+<lu-data-table> <thead luDataTableHead> <tr luDataTableRow> <th luDataTableCell>header</th> <th luDataTableCell>header</th> </tr> </thead> <tbody luDataTableBody> <tr luDataTableRow> <th luDataTableCell>header</th> <td luDataTableCell>cell</td> </tr> <tr luDataTableRow> <th luDataTableCell>header</th> <td luDataTableCell>cell</td> </tr> </tbody>
 </lu-data-table>
 ```
 

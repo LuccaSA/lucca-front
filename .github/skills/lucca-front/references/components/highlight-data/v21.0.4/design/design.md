@@ -6,13 +6,6 @@ Laisser un commentaire sur Figma ou contactez-nous sur Slack :*#design-system-pu
 
 ## Anatomie
 
-<notes>
-
-1. **Contenu :** Il peut s’agir d’une donnée numérique ou textuelle.
-2. **Ornements** (illustration et bubbles) OU action
-
-</notes>
-
 ☝️ Si vous souhaitez en savoir plus sur son utilisation au sein d’une interface, son positionnement et les spécifications Design, rendez-vous en bas de cette page.
 
 ## Options
@@ -52,8 +45,6 @@ L’ornementation ne doit pas entrer en conflit avec le contenu. Si un bouton ou
 
 Le composant est disponible en **trois tailles (M, S et XS)** pour donner plus de flexibilité en fonction de la densité recherchée.
 
----
-
 ## Règles d’utilisation
 
 ### Mise en exergue
@@ -80,15 +71,11 @@ Quand plusieurs blocs sont juxtaposés, leur contenu respecte la même hiérarch
 
 Sur les petits écrans et mobile, les Highlight data s’affichent les uns en dessous des autres. Les illustrations peuvent être masquées si la largeur est trop petite et que cela nuit à la lisibilité.
 
----
-
 ## Spécifications
 
 Plusieurs Highlight data peuvent être affichés les uns à côté des autres, **dans un maximum de quatre**. Il faut alors les **espacer de 12px** pour garantir une bonne lisibilité.
 
 Ils ne doivent pas systématiquement avoir la même largeur. Il est possible que l’un des Highlight data prenne plus de place pour mettre en avant la donnée qu’il contient.
-
----
 
 Dans une Dialog, le composant peut prendre toute la largeur disponible.
 

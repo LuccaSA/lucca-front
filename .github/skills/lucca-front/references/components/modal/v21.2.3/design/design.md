@@ -2,14 +2,6 @@
 
 🚧 Modal utilise aujourd'hui le nouveau service Dialog par défaut. Il est prévu de la conserver en tant qu'outil permettant de créer rapidement une fenêtre de dialogue et sera ainsi renommée dans le futur.
 
-<design figma-url="https://www.figma.com/design/PQEOcUF9CYfKNqaejAGLWP/?node-id=5640:33370">
-
-**pr-Dialog**
-
-**pr-Dialog**
-
-</design>
-
 ## Accessibilité
 
 Les recommandations concernent les modales qui nécessitent le blocage de l’arrière-plan en termes d’intéraction. Cela implique l’impossibilité de naviguer dans le body en dehors de la modale, le focus est contenu dans la modale :

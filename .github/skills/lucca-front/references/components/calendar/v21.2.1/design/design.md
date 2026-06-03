@@ -6,18 +6,6 @@
 
 ## Anatomie
 
-<notes>
-
-1. **Flèche de navigation :** Elles permettent de naviguer dans le calendrier, de mois en mois, d’année en année ou de décennie en décennie.
-2. **Période affichée :** Il permet d’indiquer à l’utilisateur la période affichée dans le calendrier. Il peut s’agit d’un mois, d’une année ou d’une décennie.
-3. **Jours de la semaine :** On affiche les jours de la semaine en utilisant la première lettre de chacun des jours. L’ordre des jours s’adapte en fonction de la locale.
-4. **Semaines et jours :** Le calendrier s’affiche sur 5 ou 6 lignes, chaque ligne représentant une semaine.
-5. **Aujourd’hui :** Le jour en cours est mis en avant dans le calendrier, en gras et en couleur.
-
-</notes>
-
----
-
 ## Options
 
 ### Affichage des jours chômés
@@ -31,8 +19,6 @@ Cette option est désactivé par défaut mais peut être activée selon le conte
 Une option permet d’afficher les jours des mois précédents et suivants dans le calendrier, afin de donner un aperçu complet. Les jours des mois adjacents apparaissent avec un style différent (couleur plus claire) pour indiquer qu’ils ne font pas partie du mois affiché.
 
 Ces jours sont tout de même interactifs et permettent de sélectionner rapidement sans avoir à naviguer sur le mois suivant ou précédent.
-
----
 
 ## Cas d'usage
 

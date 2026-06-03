@@ -77,10 +77,6 @@ La catégorie permet d'identifier **instantanément** le type d'action ou d’in
 
 **Action possible :** depuis le mail ou en se connectant au logiciel.
 
-**Mail - Dépenses pro**
-
-**Mail - Dépenses pro**
-
 ### Mail d’information
 
 **Objectif :** transmettre une information sur un événement.
@@ -91,10 +87,6 @@ La catégorie permet d'identifier **instantanément** le type d'action ou d’in
 * Carte expédiée.
 
 **Caractéristiques :** destinataire unique. Le message se suffit généralement en lui-même.
-
-**Mail - Avantages**
-
-**Mail - Avantages**
 
 ### Mail d'information ou d’action pour une groupe
 

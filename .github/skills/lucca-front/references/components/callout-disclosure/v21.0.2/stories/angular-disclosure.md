@@ -5,7 +5,7 @@ import { CalloutDisclosureComponent, CalloutFeedbackListComponent, CalloutFeedba
 ```
 
 ```html
-<lu-callout-disclosure ${…}>
+<lu-callout-disclosure heading="List title" icon="signInfo">
 	<ul lu-callout-feedback-list palette="neutral">
 		<li lu-callout-feedback-item>
 			<lu-feedback-item-description>Feedback description.</lu-feedback-item-description>

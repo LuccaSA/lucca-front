@@ -8,7 +8,7 @@
 <lu-scroll-box
 	[attr.style]="'--components-scrollBox-gap: 0px; --components-scrollBox-paddingInline: 0px; --components-scrollBox-marginInline: calc(var(--pr-t-spacings-200) * -1)'"
 >
-	<div class="horizontalNavigation ${…} ${…} ${…}">
+	<div class="horizontalNavigation">
 		<ul class="horizontalNavigation-list">
 			<li class="horizontalNavigation-list-item">
 				<a href="#" class="horizontalNavigation-list-item-action" aria-current="page">Page 1</a>

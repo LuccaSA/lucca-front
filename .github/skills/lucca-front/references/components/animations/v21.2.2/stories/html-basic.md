@@ -5,5 +5,5 @@
 ```
 
 ```html
-<div class="demo${…}"></div>
+<div class="demo"></div>
 ```

@@ -5,7 +5,7 @@
 ```
 
 ```html
-<ul class="segmentedControl${…}${…}" role="tablist">
+<ul class="segmentedControl" role="tablist">
 	<li class="segmentedControl-item" role="presentation">
 		<button
 			class="segmentedControl-item-action"
@@ -29,7 +29,7 @@
 			[attr.aria-selected]="tabActive === 2"
 			[attr.tabindex]="tabActive === 2 ? null : '-1'"
 		>
-			Ipsum${…}
+			Ipsum
 		</button>
 	</li>
 	<li class="segmentedControl-item" role="presentation">

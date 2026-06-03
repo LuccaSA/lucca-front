@@ -10,23 +10,26 @@ import { IconComponent } from '@lucca-front/ng/icon';
 ```
 
 ```html
-${…}
-<lu-data-table${…}${…}${…}${…}${…}${…} [responsive]="layoutfixed">
-	<thead luDataTableHead${…}>
+@let layoutfixed =
+	{
+		layoutFixedAtMediaMinS: true,
+	};
+<lu-data-table [responsive]="layoutfixed">
+	<thead luDataTableHead>
 		<tr luDataTableRow>
-			<th luDataTableCell>${…} ${…} ${…}</th>${…}
-			<th luDataTableCell${…}${…}${…}>${…}</th>
+			<th luDataTableCell>header header header</th>
+			<th luDataTableCell>header</th>
 		</tr>
 	</thead>
-	<tbody luDataTableBody${…}${…}>${…}
+	<tbody luDataTableBody>
 		<tr luDataTableRow>
-			<th luDataTableCell>${…}${…}</th>${…}
-			<td luDataTableCell${…}${…}>${…}</td>
+			<th luDataTableCell>header</th>
+			<td luDataTableCell>cell</td>
 		</tr>
-		<tr luDataTableRow${…}${…}>
-			<th luDataTableCell>${…}</th>${…}
-			<td luDataTableCell${…}${…}>${…}</td>
+		<tr luDataTableRow>
+			<th luDataTableCell>header</th>
+			<td luDataTableCell>cell</td>
 		</tr>
-	</tbody>${…}
+	</tbody>
 </lu-data-table>
 ```

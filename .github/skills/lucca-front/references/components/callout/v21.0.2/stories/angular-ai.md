@@ -7,5 +7,5 @@ import { IconComponent } from '@lucca-front/ng/icon';
 ```
 
 ```html
-<lu-callout AI iconAlt="${…}" ${…}>${…}</lu-callout>
+<lu-callout AI iconAlt="Assistant IA" icon="weatherStars">Des champs ont été pré-remplis après analyse.</lu-callout>
 ```

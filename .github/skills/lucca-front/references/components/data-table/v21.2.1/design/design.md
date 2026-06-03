@@ -6,17 +6,6 @@
 
 ## Anatomie
 
-<notes>
-
-1. **Entête** : regroupe l’ensemble des cellules d’en-tête.
-2. **Cellule d’entête** : affiche le titre d’une colonne, souvent avec des options de tri.
-3. **Ligne** : correspond à une entrée du tableau, composée de plusieurs cellules.
-4. **Cellule de ligne** : affiche une donnée pour une colonne donnée.
-
-</notes>
-
----
-
 ## Options
 
 ### Lignes sélectionnables
@@ -55,8 +44,6 @@ Il est possible d’appliquer des bordures uniquement sur certaines zones du tab
 
 Des actions rapides en bout de ligne permettent aux utilisateurs d’effectuer des tâches directement liées aux données affichées, sans quitter le contexte du tableau.
 
----
-
 ## Comportement
 
 ### Pagination
@@ -78,8 +65,6 @@ Dans le cas où l’utilisateur filtre le tableau, le composant EmptyStateSectio
 ### Affichage en plein écran
 
 Il est possible d’afficher le tableau en plein écran pour immerger l’utilisateur et lui permettre de travailler avec une meilleure visibilité sur l’ensemble du tableau.
-
----
 
 ## **Règles d’utilisation**
 

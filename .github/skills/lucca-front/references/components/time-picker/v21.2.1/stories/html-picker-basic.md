@@ -7,19 +7,17 @@
 ```
 
 ```html
-<div class="form-field ${…}">
+<div class="form-field">
 	<label for="hour-input" class="formLabel" role="presentation">
 		<span aria-hidden="true">Label</span>
 	</label>
-	<div class="timePicker ${…} ${…}">
+	<div class="timePicker">
 		<fieldset class="timePicker-fieldset">
 			<legend><span class="pr-u-mask">Label</span></legend>
 			<div class="timePicker-fieldset-group">
 				<label class="formLabel pr-u-mask" id="hour-label" for="hour-input">hours</label>
 				<div class="timePicker-fieldset-group-textfield">
 					<input
-						${…}
-						${…}
 						type="text"
 						autocomplete="off"
 						inputmode="numeric"
@@ -33,15 +31,12 @@
 					/>
 					<span aria-hidden="true" class="timePicker-fieldset-group-textfield-display">12</span>
 				</div>
-				${…}
 			</div>
 			<div aria-hidden="true" class="timePicker-fieldset-groupSeparator">:</div>
 			<div class="timePicker-fieldset-group">
 				<label class="formLabel pr-u-mask" id="minutes-label" for="minutes-input">minutes</label>
 				<div class="timePicker-fieldset-group-textfield">
 					<input
-						${…}
-						${…}
 						type="text"
 						autocomplete="off"
 						inputmode="numeric"
@@ -54,7 +49,6 @@
 					/>
 					<span aria-hidden="true" class="timePicker-fieldset-group-textfield-display">12</span>
 				</div>
-				${…}
 			</div>
 		</fieldset>
 	</div>

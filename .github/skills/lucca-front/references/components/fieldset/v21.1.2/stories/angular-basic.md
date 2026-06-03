@@ -10,16 +10,16 @@ import { GridColumnComponent, GridComponent } from '@lucca-front/ng/grid';
 
 ```html
 @let column = { colspanAtMediaMinXXS: 2 };
-${…}
-<lu-fieldset${…}${…}${…}${…}${…}>
+
+<lu-fieldset heading="Title">
 	<lu-grid mode="form">
 		<lu-grid-column colspan="4" [responsive]="column">
-			<lu-form-field label="Label"${…}>
+			<lu-form-field label="Label">
 				<lu-text-input type="text" [(ngModel)]="example1" />
 			</lu-form-field>
 		</lu-grid-column>
 		<lu-grid-column colspan="4" [responsive]="column">
-			<lu-form-field label="Label"${…}>
+			<lu-form-field label="Label">
 				<lu-text-input type="text" [(ngModel)]="example2" />
 			</lu-form-field>
 		</lu-grid-column>

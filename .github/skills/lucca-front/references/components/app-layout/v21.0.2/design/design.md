@@ -8,8 +8,6 @@ Le layout de base d’une application Lucca, `AppLayout`, est composé de trois 
 * **Side navigation** : menu de navigation latéral, fixe à gauche de l’écran permettant de naviguer entre les différentes sections d’une application.
 * **Main layout** : zone principale de l’interface avec laquelle l’utilisateur interagit pour réaliser ses tâches.
 
----
-
 ## Principes de construction du layout
 
 ### Marges
