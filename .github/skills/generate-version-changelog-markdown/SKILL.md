@@ -89,8 +89,42 @@ Toujours encadrer le résultat dans un bloc de code markdown :
 - **Description** : phrase courte, commencer par un verbe à l'infinitif ou un nom (`Add`, `Fix`, `New component`, `Improve`…).
 - **Majuscule** uniquement sur le premier mot de la description (après le préfixe de composant).
 - Ne pas mettre de point final.
+- Les noms de propriétés (`input`, `output`, attribut, option, variable) doivent être écrits au format code inline : `` `propertyName` ``.
 - Pour `✅ Actions required to update` et `🧹 Actions suggested` : écrire `None` si aucune action n'est requise.
 - Pour `🤖 Schematics` : format `- Description \`ng g @lucca-front/ng:commande\` [#XXXX](url)`.
+
+## Ordre des PRs dans une section
+
+Les PRs doivent être triées **par importance métier**, pas par numéro.
+
+- `🎉 Features` : mettre en premier les **nouveaux composants** (`New component`), puis les nouvelles capacités majeures, puis les améliorations mineures.
+- `🩹 Fixes` : mettre en premier les corrections avec impact utilisateur fort (bug bloquant, régression, accessibilité), puis les corrections secondaires.
+- `🎨 UI update` : mettre en premier les changements visuels structurants, puis les ajustements cosmétiques.
+- `📖 Documentation` : mettre en premier la doc des nouveaux composants/features, puis les compléments et clarifications.
+- `🔨 Technical` : mettre en premier les changements de build/CI/release ayant un impact global, puis le refactoring et la maintenance.
+
+### Détection des nouveaux composants
+
+Ne pas se baser uniquement sur le titre de PR. Une PR doit être considérée comme **nouveau composant** si au moins un signal fort est présent :
+
+- Le titre ou la description mentionne explicitement `new component`, `nouveau composant`, `add component`.
+- Le scope ou le préfixe de PR correspond à un composant inédit dans la version (ex. `[Impersonation]`, `[Highlight]`) et le contenu montre une création initiale.
+- La PR ajoute la structure complète d'un composant (stories, styles, API, docs, exports).
+- Les changelogs/fichiers de doc associés décrivent une première disponibilité du composant.
+
+En cas de doute, privilégier l'interprétation **nouveau composant** si les artefacts de la PR montrent une création initiale.
+
+### Priorité stricte dans `🎉 Features`
+
+Dans `🎉 Features`, appliquer ce tri dans cet ordre :
+
+1. Nouveaux composants
+2. Nouvelles capacités majeures sur composants existants
+3. Améliorations mineures
+
+Si plusieurs nouveaux composants existent, les placer en tête puis les ordonner de manière stable (par exemple numéro de PR croissant).
+
+Si deux PRs ont une importance similaire, conserver un ordre stable (par exemple le numéro de PR croissant).
 
 ### Sections `✅ Actions required to update` et `🧹 Actions suggested`
 
