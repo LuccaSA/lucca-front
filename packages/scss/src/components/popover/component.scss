@@ -33,6 +33,15 @@
 	}
 
 	@at-root ($atRoot) {
+		.popover-content {
+			overflow: auto;
+			max-block-size: min(var(--components-popover-content-maxBlockSize), calc(100dvh - var(--pr-t-spacings-200)));
+
+			&:focus-visible {
+				@include a11y.focusVisible($borderRadius: var(--pr-t-border-radius-default));
+			}
+		}
+
 		.popover-contentOptional {
 			padding: var(--components-popover-padding);
 		}
