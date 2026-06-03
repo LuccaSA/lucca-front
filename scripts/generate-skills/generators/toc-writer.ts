@@ -2,6 +2,37 @@ import fs from 'fs';
 import path from 'path';
 import { ComponentMap, DocumentationMap, VersionManifest } from '../types';
 
+/** Parse a version tag like "v21.2.0" into a numeric [major, minor, patch] tuple. */
+function parseTag(tag: string): [number, number, number] {
+	const [maj, min, pat] = tag.replace(/^v/, '').split('.').map(Number);
+	return [maj || 0, min || 0, pat || 0];
+}
+
+/** Ascending comparator for version tags. */
+function compareTagAsc(a: string, b: string): number {
+	const [aMaj, aMin, aPat] = parseTag(a);
+	const [bMaj, bMin, bPat] = parseTag(b);
+	return aMaj !== bMaj ? aMaj - bMaj : aMin !== bMin ? aMin - bMin : aPat - bPat;
+}
+
+/**
+ * Formats the version availability of a component that is NOT present in every version.
+ * Returns a contiguous range `(v… → v…)` when the versions form an unbroken span of the
+ * global list, otherwise an explicit comma-separated list so the signal is never misleading.
+ */
+function formatVersionRange(versionTags: string[], allTagsAsc: string[]): string {
+	const sorted = versionTags.slice().sort(compareTagAsc);
+	const min = sorted[0];
+	const max = sorted[sorted.length - 1];
+	const idxMin = allTagsAsc.indexOf(min);
+	const idxMax = allTagsAsc.indexOf(max);
+	const contiguous = idxMin !== -1 && idxMax !== -1 && idxMax - idxMin + 1 === sorted.length;
+	if (contiguous) {
+		return min === max ? `_(${min} uniquement)_` : `_(${min} → ${max})_`;
+	}
+	return `_(${sorted.join(', ')})_`;
+}
+
 /**
  * Writes the main SKILL.md — the entry point for the Copilot agent skill.
  *
@@ -28,17 +59,35 @@ export function writeToc(skillsDir: string, componentMap: ComponentMap): string 
 	// miscategorized entries, an "Unknown" bucket, and slug/registry-key mismatches that silently
 	// dropped real components (e.g. error-page). A flat list also makes update diffs obvious.
 	const componentsDir = path.join(luccaDir, 'references', 'components');
-	let componentSlugs: string[] = [];
+	// Full set of versions, used to flag components that don't span every version.
+	const allTagsAsc = Object.keys(manifest.versions)
+		.map((v) => `v${v}`)
+		.sort(compareTagAsc);
+	const totalVersionCount = allTagsAsc.length;
+
+	let componentInfos: { slug: string; versions: string[] }[] = [];
 	if (fs.existsSync(componentsDir)) {
-		componentSlugs = fs
+		componentInfos = fs
 			.readdirSync(componentsDir, { withFileTypes: true })
 			.filter((d) => d.isDirectory())
-			.map((d) => d.name)
-			// keep only components that actually have at least one versioned folder
-			.filter((slug) => fs.readdirSync(path.join(componentsDir, slug)).some((f) => /^v\d/.test(f)))
-			.sort((a, b) => a.localeCompare(b));
+			.map((d) => ({
+				slug: d.name,
+				// keep only the versioned folders (v21.x.x)
+				versions: fs.readdirSync(path.join(componentsDir, d.name)).filter((f) => /^v\d/.test(f)),
+			}))
+			.filter((c) => c.versions.length > 0)
+			.sort((a, b) => a.slug.localeCompare(b.slug));
 	}
-	const compactComponentLines = componentSlugs.map((slug) => `- ${slug}`).join('\n') + '\n';
+	// Annotate components absent from some versions with their availability range, so a path
+	// composed on an unavailable version is recognised as a non-existent file, not a silent 404.
+	const compactComponentLines =
+		componentInfos
+			.map(({ slug, versions }) =>
+				totalVersionCount === 0 || versions.length === totalVersionCount
+					? `- ${slug}`
+					: `- ${slug} ${formatVersionRange(versions, allTagsAsc)}`,
+			)
+			.join('\n') + '\n';
 
 	// Build version list
 	const sortedVersions = Object.keys(manifest.versions).sort((a, b) => {
@@ -109,6 +158,7 @@ Si la version ne peut pas être déterminée → s'arrêter et demander à l'uti
 ## 2. Chemins
 
 Compose l'URL du fichier à partir du slug et de la version détectée.
+**Ne devine jamais un chemin** : seuls les fichiers réellement présents font foi. Si un chemin composé n'existe pas, ne le remplace pas par une supposition — vérifie le slug dans la liste §6 (qui signale les composants absents de certaines versions) et les versions disponibles (§1).
 
 ### Composant \`<slug>\` (version fix)
 
@@ -119,6 +169,14 @@ Compose l'URL du fichier à partir du slug et de la version détectée.
 | Design (do/don't, usage) | \`./references/components/<slug>/v<M>.<m>.<p>/design/_index.md\` |
 | Figma (variantes, node IDs) | \`./references/components/<slug>/<slug>.figma.md\` |
 | Changelog | \`./references/components/<slug>/<slug>.changelog.md\` |
+
+### Types partagés (version fix)
+
+Certaines propriétés d'API référencent un type énuméré documenté à part (ex: \`LuccaIcon\`, \`BubbleIllustration\`) :
+
+\`./references/types/v<M>.<m>.<p>/<TypeName>.md\`
+
+Le lien exact (nom et chemin du type) est donné dans la section « Type definitions » du fichier API du composant. Tous les composants n'ont pas de types partagés.
 
 ### Documentation transverse (version mineure)
 

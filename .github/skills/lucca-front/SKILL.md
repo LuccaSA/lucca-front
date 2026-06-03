@@ -22,6 +22,7 @@ Si la version ne peut pas être déterminée → s'arrêter et demander à l'uti
 ## 2. Chemins
 
 Compose l'URL du fichier à partir du slug et de la version détectée.
+**Ne devine jamais un chemin** : seuls les fichiers réellement présents font foi. Si un chemin composé n'existe pas, ne le remplace pas par une supposition — vérifie le slug dans la liste §6 (qui signale les composants absents de certaines versions) et les versions disponibles (§1).
 
 ### Composant `<slug>` (version fix)
 
@@ -32,6 +33,14 @@ Compose l'URL du fichier à partir du slug et de la version détectée.
 | Design (do/don't, usage) | `./references/components/<slug>/v<M>.<m>.<p>/design/_index.md` |
 | Figma (variantes, node IDs) | `./references/components/<slug>/<slug>.figma.md` |
 | Changelog | `./references/components/<slug>/<slug>.changelog.md` |
+
+### Types partagés (version fix)
+
+Certaines propriétés d'API référencent un type énuméré documenté à part (ex: `LuccaIcon`, `BubbleIllustration`) :
+
+`./references/types/v<M>.<m>.<p>/<TypeName>.md`
+
+Le lien exact (nom et chemin du type) est donné dans la section « Type definitions » du fichier API du composant. Tous les composants n'ont pas de types partagés.
 
 ### Documentation transverse (version mineure)
 
@@ -79,14 +88,14 @@ Bouton en v21.2.1 → API : `./references/components/button/v21.2.1/button.md`, 
 
 ## 6. Composants
 
-- activity-feed
+- activity-feed _(v21.2.0 → v21.2.3)_
 - animations
 - app-layout
 - avatar
 - box
 - breadcrumbs
-- bubble-icon
-- bubble-illustration
+- bubble-icon _(v21.1.0 → v21.2.3)_
+- bubble-illustration _(v21.1.0 → v21.2.3)_
 - button
 - calendar
 - callout
@@ -97,8 +106,8 @@ Bouton en v21.2.1 → API : `./references/components/button/v21.2.1/button.md`, 
 - chip
 - clear
 - code
-- color-picker
-- colorpicker
+- color-picker _(v21.1.2 → v21.2.3)_
+- colorpicker _(v21.1.0 → v21.1.1)_
 - comment
 - container
 - data-presentation
@@ -111,7 +120,7 @@ Bouton en v21.2.1 → API : `./references/components/button/v21.2.1/button.md`, 
 - dropdown
 - duration-picker
 - empty-state
-- errorpage
+- errorpage _(v21.2.0 → v21.2.3)_
 - fancy-dialog
 - fancybox
 - fieldset
@@ -121,7 +130,7 @@ Bouton en v21.2.1 → API : `./references/components/button/v21.2.1/button.md`, 
 - filterpills
 - footer
 - form-field
-- form-label
+- form-label _(v21.2.0 → v21.2.3)_
 - gauge
 - grid
 - highlight-data
@@ -152,7 +161,7 @@ Bouton en v21.2.1 → API : `./references/components/button/v21.2.1/button.md`, 
 - popover
 - popover2
 - progress-bar
-- progress-stepper
+- progress-stepper _(v21.2.0 → v21.2.3)_
 - radiofield
 - readmore
 - resource-card
@@ -165,7 +174,7 @@ Bouton en v21.2.1 → API : `./references/components/button/v21.2.1/button.md`, 
 - simple-select
 - skeleton
 - skiplinks
-- software-icon
+- software-icon _(v21.1.0 → v21.2.3)_
 - sortable-list
 - statusbadge
 - switchfield
