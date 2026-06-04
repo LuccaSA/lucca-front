@@ -109,14 +109,13 @@
 	--components-dialog-inside-header-button-position: absolute;
 	--components-dialog-inside-header-button-insetBlockStart: var(--pr-t-spacings-100);
 	--components-dialog-inside-header-button-insetInlineEnd: var(--pr-t-spacings-100);
-	--components-dialog-insideContent-paddingBlock: var(--pr-t-spacings-50) var(--pr-t-spacings-200);
+	--components-dialog-insideContent-paddingBlock: var(--pr-t-spacings-50) 0;
 	--components-dialog-inside-header-paddingInline: var(--pr-t-spacings-700) var(--pr-t-spacings-400);
 	--components-dialog-insideContent-paddingInline: var(--pr-t-spacings-700) var(--pr-t-spacings-400);
 
 	.dialog-inside-footer {
 		--components-footer-actions-margin: 0;
 		--components-footer-boxShadow: none;
-		--components-footer-paddingBlock: 0 var(--pr-t-spacings-150);
 		--components-footer-overflow: visible;
 		--components-footer-paddingInline: var(--pr-t-spacings-700) var(--pr-t-spacings-400);
 	}
