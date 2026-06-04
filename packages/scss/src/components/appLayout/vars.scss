@@ -1,5 +1,5 @@
 @mixin vars {
-	--components-appLayout-blockSize: 100dvh;
+
 	--components-appLayout-inlineSize: 100%;
 	--components-appLayout-navSide-overflowX: hidden;
 	--components-appLayout-navSide-overflowY: auto;
@@ -7,4 +7,8 @@
 		'banner ' var(--commons-banner-height)
 		'navSide' auto
 		'main   ' 1fr;
+
+	@media screen {
+		--components-appLayout-blockSize: 100dvh;
+	}
 }
