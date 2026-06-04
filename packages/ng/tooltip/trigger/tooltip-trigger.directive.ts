@@ -20,7 +20,7 @@ import { LuTooltipPanelComponent } from '../panel';
 import { EllipsisRuler } from './ellipsis.ruler';
 
 export interface LuTooltipAnchorRef {
-	elementRef: ElementRef<HTMLElement>;
+	elementRef: ElementRef;
 }
 
 let nextId = 0;
@@ -57,7 +57,7 @@ export class LuTooltipTriggerDirective implements OnDestroy {
 	readonly luTooltipWhenEllipsisInput = input(false, { alias: 'luTooltipWhenEllipsis', transform: booleanAttribute });
 	readonly luTooltipWhenEllipsis = linkedSignal(() => this.luTooltipWhenEllipsisInput());
 
-	readonly luTooltipAnchor = input<FlexibleConnectedPositionStrategyOrigin | LuTooltipAnchorRef>(this.#host);
+	readonly luTooltipAnchor = input<FlexibleConnectedPositionStrategyOrigin | LuTooltipAnchorRef | null | undefined>(this.#host);
 	readonly id = input<string>(`${this.#host.nativeElement.tagName.toLowerCase()}-tooltip-${nextId++}`);
 
 	readonly ariaDescribedBy = computed(() => {

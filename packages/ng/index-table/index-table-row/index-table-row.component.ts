@@ -38,7 +38,7 @@ export class IndexTableRowComponent {
 	headRef = inject(LU_INDEX_TABLE_HEAD_INSTANCE, { optional: true });
 	footRef = inject(LU_INDEX_TABLE_FOOT_INSTANCE, { optional: true });
 
-	readonly elementRef = inject<ElementRef<HTMLElement>>(ElementRef);
+	readonly elementRef = inject<ElementRef<HTMLTableRowElement>>(ElementRef);
 
 	public readonly cells = contentChildren(LU_INDEX_TABLE_CELL_INSTANCE);
 
