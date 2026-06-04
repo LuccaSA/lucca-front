@@ -7,7 +7,7 @@ import { LuMultiSelectInputComponent } from '@lucca-front/ng/multi-select';
 import { Meta, moduleMetadata, StoryObj } from '@storybook/angular';
 import { StoryModelDisplayComponent } from 'stories/helpers/story-model-display.component';
 import { HiddenArgType } from '../../../../../helpers/common-arg-types';
-import { generateInputs } from '../../../../../helpers/stories';
+import { generateInputs, InputAlias, SelectCommonAliasInput } from '../../../../../helpers/stories';
 
 export default {
 	title: 'Documentation/Forms/Fields/Multi Select/Angular',
@@ -81,7 +81,7 @@ export default {
 	},
 } as Meta;
 
-export const Basic: StoryObj<LuMultiSelectInputComponent<unknown> & FormFieldComponent & { required: boolean }> = {
+export const Basic: StoryObj<InputAlias<LuMultiSelectInputComponent<unknown> & FormFieldComponent & { required: boolean }, SelectCommonAliasInput>> = {
 	render: (args, { argTypes }) => {
 		const { label, hiddenLabel, tooltip, inlineMessage, inlineMessageState, size, width, presentation, ...inputArgs } = args;
 		return {
@@ -113,10 +113,10 @@ export const Basic: StoryObj<LuMultiSelectInputComponent<unknown> & FormFieldCom
 		tooltip: 'Tooltip message',
 		required: false,
 		placeholder: 'Placeholder',
-		clearableInput: true,
+		clearable: true,
 		inlineMessage: 'Helper text',
 		inlineMessageState: 'default',
-		loadingInput: false,
+		loading: false,
 		keepSearchAfterSelection: false,
 		presentation: false,
 	},

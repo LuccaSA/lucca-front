@@ -25,6 +25,7 @@ import { applicationConfig, Meta, moduleMetadata } from '@storybook/angular';
 import { HiddenArgType } from 'stories/helpers/common-arg-types';
 import { createTestStory, getStoryGenerator, useDocumentationStory } from 'stories/helpers/stories';
 import { expect, screen, userEvent, within } from 'storybook/test';
+import { InputAlias, SelectCommonAliasInput } from '../../../helpers/stories';
 import { waitForAngular } from '../../../helpers/test';
 import { LuCoreSelectLegumesDirective } from './custom-api-example.component';
 import { LuCoreSelectCustomEstablishmentsDirective } from './custom-establishment-example.component';
@@ -743,7 +744,7 @@ export const IntlOverride = generateStory({
 	},
 });
 
-const meta: Meta<LuSimpleSelectInputStoryComponent> = {
+const meta: Meta<InputAlias<LuSimpleSelectInputStoryComponent, SelectCommonAliasInput>> = {
 	title: 'Documentation/Forms/SimpleSelect',
 	component: LuSimpleSelectInputComponent,
 	decorators: [
@@ -781,8 +782,8 @@ const meta: Meta<LuSimpleSelectInputStoryComponent> = {
 	],
 	args: {
 		legumes: allLegumes,
-		clearableInput: true,
-		loadingInput: false,
+		clearable: true,
+		loading: false,
 		page: 1,
 	},
 	parameters: {
