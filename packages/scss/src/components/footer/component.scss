@@ -2,7 +2,7 @@
 
 @mixin component($atRoot: namespace.$defaultAtRoot) {
 	background-color: var(--components-footer-backgroundColor);
-	padding-block: var(--pr-t-spacings-150);
+	padding-block: var(--components-footer-paddingBlock);
 	padding-inline: var(--components-footer-paddingInline);
 	box-shadow: var(--components-footer-boxShadow);
 	inset-block-end: 0;
