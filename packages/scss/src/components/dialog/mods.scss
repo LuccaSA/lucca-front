@@ -112,6 +112,8 @@
 	--components-dialog-insideContent-paddingBlock: var(--pr-t-spacings-50) 0;
 	--components-dialog-inside-header-paddingInline: var(--pr-t-spacings-700) var(--pr-t-spacings-400);
 	--components-dialog-insideContent-paddingInline: var(--pr-t-spacings-700) var(--pr-t-spacings-400);
+	--components-dialog-inside-header-marginBlock: 40px 0;
+	--components-dialog-inside-footer-marginBlock: 0 40px;
 
 	.dialog-inside-footer {
 		--components-footer-actions-margin: 0;
