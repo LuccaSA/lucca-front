@@ -2,7 +2,7 @@ import { NgModule } from '@angular/core';
 import { LuInputClearerComponent } from './clearer.component';
 
 /**
- * @deprecated use `ClearComponent` instead
+ * @deprecated use `LuInputClearerComponent` instead
  */
 @NgModule({
 	imports: [LuInputClearerComponent],

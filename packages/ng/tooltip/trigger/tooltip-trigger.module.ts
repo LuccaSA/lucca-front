@@ -3,7 +3,7 @@ import { NgModule } from '@angular/core';
 import { LuTooltipTriggerDirective } from './tooltip-trigger.directive';
 
 /**
- * @deprecated use `LuTooltipTriggerDirective, OverlayModule` instead
+ * @deprecated use `LuTooltipTriggerDirective` instead
  */
 @NgModule({
 	imports: [LuTooltipTriggerDirective, OverlayModule],
