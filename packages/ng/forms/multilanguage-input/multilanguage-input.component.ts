@@ -68,6 +68,8 @@ export class MultilanguageInputComponent implements ControlValueAccessor {
 
 	shouldOpenOnFocus = computed(() => this.openOnFocus() || this.hasNoInvariant());
 
+	protected readonly isFirefox = !!navigator.userAgent.match(/firefox/i);
+
 	// Suffixed with Internal to avoid conflict with NgModel's disabled attribute
 	disabledInternal = signal(false);
 

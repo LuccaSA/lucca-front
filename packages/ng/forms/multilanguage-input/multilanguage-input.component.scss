@@ -6,6 +6,10 @@
 		max-inline-size: 100%;
 		overflow: auto;
 
+		.button.mod-AI {
+			padding: var(--pr-t-spacings-50);
+		}
+
 		.textField:not(:focus-within, :hover) {
 			.button.mod-AI {
 				@include a11y.mask;
