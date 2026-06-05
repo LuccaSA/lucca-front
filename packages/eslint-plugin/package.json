@@ -1,5 +1,10 @@
 {
   "name": "@lucca-front/eslint-plugin",
+  "repository": {
+    "type": "git",
+    "url": "git+https://github.com/LuccaSA/lucca-front.git",
+    "directory": "packages/eslint-plugin"
+  },
   "version": "1.0.0",
   "type": "module",
   "description": "Custom ESLint rules for Lucca Front",

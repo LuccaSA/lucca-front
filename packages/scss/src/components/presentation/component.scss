@@ -3,10 +3,11 @@
 
 @mixin component($atRoot: namespace.$defaultAtRoot) {
 	margin: 0;
+	font: var(--components-presentation-font);
 
 	@at-root ($atRoot) {
 		.presentation-term {
-			font: var(--pr-t-font-body-S);
+			font: var(--components-presentation-term-font);
 			color: var(--pr-t-color-text-subtle);
 			display: flex;
 			align-items: center;

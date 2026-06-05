@@ -4,7 +4,8 @@
   "description": "Lucca Front stylelint configuration",
   "repository": {
     "type": "git",
-    "url": "git+https://github.com/LuccaSA/lucca-front.git"
+    "url": "git+https://github.com/LuccaSA/lucca-front.git",
+    "directory": "packages/stylelint-config"
   },
   "main": "stylelint.config.mjs",
   "keywords": [
