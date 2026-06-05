@@ -19,7 +19,6 @@
 			[size]="size()"
 			[displayArrows]="displayArrows()"
 			[forceMeridiemDisplay]="forceMeridiemDisplay()"
-			(touched)="onTouched()"
 			(nextPicker)="timePickerEnd.focusPart('hours')"
 			(nonDigitKeyPressed)="keyPressed.set(true)"
 		/>
@@ -37,7 +36,6 @@
 			[size]="size()"
 			[displayArrows]="displayArrows()"
 			[forceMeridiemDisplay]="forceMeridiemDisplay()"
-			(touched)="onTouched()"
 			(prevPicker)="timePickerStart.focusPart(partToFocus())"
 			(nonDigitKeyPressed)="keyPressed.set(true)"
 		/>

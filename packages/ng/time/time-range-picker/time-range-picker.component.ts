@@ -1,4 +1,4 @@
-import { booleanAttribute, ChangeDetectionStrategy, Component, computed, forwardRef, inject, Injector, input, LOCALE_ID, OnInit, signal, ViewEncapsulation } from '@angular/core';
+import { afterNextRender, booleanAttribute, ChangeDetectionStrategy, Component, computed, forwardRef, inject, Injector, input, LOCALE_ID, OnInit, signal, ViewEncapsulation } from '@angular/core';
 import { AbstractControl, ControlValueAccessor, NG_VALIDATORS, NG_VALUE_ACCESSOR, NgControl, NgModel, ValidationErrors, Validator } from '@angular/forms';
 import { intlInputOptions, isNil } from '@lucca-front/ng/core';
 import { FORM_FIELD_INSTANCE, ɵPresentationDisplayDefaultDirective } from '@lucca-front/ng/form-field';
@@ -18,6 +18,10 @@ import { TimeRangePickerSize } from './time-range-picker.type';
 	changeDetection: ChangeDetectionStrategy.OnPush,
 	encapsulation: ViewEncapsulation.None,
 	imports: [IconComponent, TimePickerComponent, ɵPresentationDisplayDefaultDirective],
+	host: {
+		'(focusin)': 'onFocusIn()',
+		'(focusout)': 'onFocusOut()',
+	},
 	providers: [
 		{
 			provide: NG_VALUE_ACCESSOR,
@@ -44,6 +48,8 @@ export class TimeRangePickerComponent implements ControlValueAccessor, OnInit, V
 	#onChange?: (value: TimeRangePickerRange | null) => void;
 	#onTouched?: () => void;
 	#disabledState = signal(false);
+
+	readonly inputFocused = signal(false);
 
 	readonly value = signal<TimeRangePickerRange | null>(null);
 
@@ -128,9 +134,21 @@ export class TimeRangePickerComponent implements ControlValueAccessor, OnInit, V
 		this.#onChange?.(newValue);
 	}
 
-	onTouched(): void {
-		this.#onTouched?.();
-		this.#ngControl?.control?.markAsTouched();
+	onFocusIn(): void {
+		this.inputFocused.set(true);
+	}
+
+	onFocusOut(): void {
+		this.inputFocused.set(false);
+		afterNextRender(
+			() => {
+				if (!this.inputFocused()) {
+					this.#onTouched?.();
+					this.#ngControl?.control?.markAsTouched();
+				}
+			},
+			{ injector: this.#injector },
+		);
 	}
 
 	partToFocus(): 'meridiem' | 'minutes' {
