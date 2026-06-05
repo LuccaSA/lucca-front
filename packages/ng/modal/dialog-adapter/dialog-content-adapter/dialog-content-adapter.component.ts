@@ -1,6 +1,6 @@
 import { ComponentType } from '@angular/cdk/overlay';
 import { AsyncPipe } from '@angular/common';
-import { ChangeDetectionStrategy, Component, DestroyRef, DoCheck, inject, Injector, OnInit, signal, viewChild, ViewContainerRef, ViewEncapsulation } from '@angular/core';
+import { AfterViewInit, ChangeDetectionStrategy, Component, DestroyRef, DoCheck, inject, Injector, signal, viewChild, ViewContainerRef, ViewEncapsulation } from '@angular/core';
 import { takeUntilDestroyed } from '@angular/core/rxjs-interop';
 import { ButtonComponent } from '@lucca-front/ng/button';
 import { getIntl, Palette } from '@lucca-front/ng/core';
@@ -26,7 +26,7 @@ interface AdapterData<D, C> {
 	encapsulation: ViewEncapsulation.None,
 	imports: [DialogComponent, DialogHeaderComponent, DialogContentComponent, DialogFooterComponent, AsyncPipe, ButtonComponent, NumericBadgeComponent],
 })
-export class DialogContentAdapterComponent<D, C extends ILuModalContent> implements OnInit, DoCheck {
+export class DialogContentAdapterComponent<D, C extends ILuModalContent> implements AfterViewInit, DoCheck {
 	#destroyRef = inject(DestroyRef);
 
 	readonly contentProjectionRef = viewChild.required('contentProjectionRef', { read: ViewContainerRef });
@@ -109,7 +109,7 @@ export class DialogContentAdapterComponent<D, C extends ILuModalContent> impleme
 		this.doCheck$.next();
 	}
 
-	ngOnInit(): void {
+	ngAfterViewInit(): void {
 		const injector = Injector.create({
 			providers: [
 				{ provide: ALuModalRef, useValue: this },

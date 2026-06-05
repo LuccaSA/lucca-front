@@ -1,5 +1,4 @@
-import { Directive, input } from '@angular/core';
-import { ɵeffectWithDeps } from '@lucca-front/ng/core';
+import { Directive, input, linkedSignal } from '@angular/core';
 import { PopoverDirective } from '@lucca-front/ng/popover2';
 import { ILuUser } from '@lucca-front/ng/user';
 import { LU_USER_POPOVER_USER } from '../../user-popover.providers';
@@ -17,14 +16,12 @@ export class LuUserPopoverDirective extends PopoverDirective {
 
 	readonly luUserPopoverDisabled = input<boolean>(false);
 
+	override readonly luPopoverDisabled = linkedSignal(() => this.luUserPopoverDisabled());
+
 	override readonly additionalProviders = [{ provide: LU_USER_POPOVER_USER, useValue: this.luUserPopover }];
 
 	constructor() {
 		super();
-		ɵeffectWithDeps([this.luUserPopoverDisabled], (luUserPopoverDisabled) => {
-			this.luPopoverDisabled.set(luUserPopoverDisabled);
-		});
-
 		this.customPositions.set([
 			{ overlayX: 'start', overlayY: 'bottom', originX: 'start', originY: 'top' },
 			{ overlayX: 'start', overlayY: 'top', originX: 'start', originY: 'bottom' },

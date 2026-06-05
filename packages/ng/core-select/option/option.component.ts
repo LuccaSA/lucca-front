@@ -1,23 +1,7 @@
-import {
-	AfterViewInit,
-	booleanAttribute,
-	ChangeDetectionStrategy,
-	ChangeDetectorRef,
-	Component,
-	effect,
-	ElementRef,
-	inject,
-	input,
-	OnDestroy,
-	OnInit,
-	output,
-	TemplateRef,
-	Type,
-	viewChild,
-} from '@angular/core';
-import { intlInputOptions, isNil, PortalDirective } from '@lucca-front/ng/core';
+import { booleanAttribute, ChangeDetectionStrategy, ChangeDetectorRef, Component, ElementRef, inject, input, OnInit, output, TemplateRef, Type, viewChild } from '@angular/core';
+import { intlInputOptions, isNil, PortalDirective, ɵeffectWithDeps } from '@lucca-front/ng/core';
 import { LuTooltipTriggerDirective } from '@lucca-front/ng/tooltip';
-import { asyncScheduler, observeOn, Subscription } from 'rxjs';
+import { asyncScheduler, observeOn } from 'rxjs';
 import { GroupTemplateLocation } from '../panel/panel.utils';
 import { CoreSelectPanelElement } from '../panel/selectable-item';
 import { LuOptionContext, LuOptionGrouping, SELECT_ID } from '../select.model';
@@ -38,7 +22,7 @@ export const MAGIC_OPTION_SCROLL_DELAY = 15;
 	changeDetection: ChangeDetectionStrategy.OnPush,
 	imports: [LuOptionOutletDirective, PortalDirective, LuOptionGroupPipe, LuTooltipTriggerDirective],
 })
-export class LuOptionComponent<T> implements AfterViewInit, OnDestroy, OnInit {
+export class LuOptionComponent<T> implements OnInit {
 	protected selectableItem = inject(CoreSelectPanelElement);
 	readonly intl = input(...intlInputOptions(LU_OPTION_TRANSLATIONS));
 
@@ -65,7 +49,6 @@ export class LuOptionComponent<T> implements AfterViewInit, OnDestroy, OnInit {
 	readonly optionContext = viewChild(LU_OPTION_CONTEXT);
 
 	private cdr = inject(ChangeDetectorRef);
-	private subscription?: Subscription;
 
 	get id(): string {
 		const groupPart = this.groupIndex() === undefined ? `` : `-group-${this.groupIndex()}`;
@@ -77,33 +60,29 @@ export class LuOptionComponent<T> implements AfterViewInit, OnDestroy, OnInit {
 	protected selectId = inject(SELECT_ID);
 
 	constructor() {
-		effect(() => {
-			if (this.selectableItem.isHighlighted()) {
+		ɵeffectWithDeps([this.selectableItem.isHighlighted], (isHighlighted) => {
+			if (isHighlighted) {
 				setTimeout(() => {
 					this.elementRef.nativeElement.scrollIntoView(this.scrollIntoViewOptions());
 				}, MAGIC_OPTION_SCROLL_DELAY);
 			}
 		});
+
+		ɵeffectWithDeps([this.optionContext], (optionContext, onCleanup) => {
+			if (isNil(optionContext)) {
+				return;
+			}
+
+			const subscription = optionContext.isDisabled$.pipe(observeOn(asyncScheduler)).subscribe((isDisabled) => {
+				this.selectableItem.disabled = isDisabled;
+				this.cdr.markForCheck();
+			});
+			onCleanup(() => subscription.unsubscribe());
+		});
 	}
 
 	ngOnInit(): void {
 		this.selectableItem.id.set(this.id);
-	}
-
-	ngOnDestroy(): void {
-		this.subscription?.unsubscribe();
-	}
-
-	ngAfterViewInit(): void {
-		const optionContext = this.optionContext();
-		if (isNil(optionContext)) {
-			return;
-		}
-
-		this.subscription = optionContext.isDisabled$.pipe(observeOn(asyncScheduler)).subscribe((isDisabled) => {
-			this.selectableItem.disabled = isDisabled;
-			this.cdr.markForCheck();
-		});
 	}
 
 	selectOption($event: Event): void {

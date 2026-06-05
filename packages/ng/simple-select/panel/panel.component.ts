@@ -68,13 +68,13 @@ export class LuSelectPanelComponent<T> implements AfterViewInit, CoreSelectPanel
 	readonly loading = toSignal(this.selectInput.loading$);
 	readonly loading$ = this.selectInput.loading$;
 	searchable = this.selectInput.searchable;
-	readonly optionComparer = this.selectInput.optionComparer();
-	readonly optionKey = this.selectInput.optionKey();
+	readonly optionComparer = this.selectInput.optionComparer;
+	readonly optionKey = this.selectInput.optionKey;
 	colorPanel = this.selectInput.colorPicker;
 
-	trackOptionsBy: TrackByFunction<T> = (_, option) => this.optionKey(option);
+	trackOptionsBy: TrackByFunction<T> = (_, option) => this.optionKey()(option);
 	trackGroupsBy: TrackByFunction<LuOptionGroup<T, unknown>> = (_, group) => group.key;
-	trackBranchesBy: TrackByFunction<TreeNode<T>> = (_, option) => this.optionKey(option.node);
+	trackBranchesBy: TrackByFunction<TreeNode<T>> = (_, option) => this.optionKey()(option.node);
 
 	initialValue: T | null = this.selectInput.value;
 	readonly optionTpl = this.selectInput.optionTpl;
@@ -108,7 +108,7 @@ export class LuSelectPanelComponent<T> implements AfterViewInit, CoreSelectPanel
 		this.keyManager.init({
 			queryList: this.options,
 			options$: this.options$,
-			optionComparer: this.optionComparer,
+			optionComparer: this.optionComparer(),
 			activeOptionIdChanged$: this.panelRef.activeOptionIdChanged,
 			clueChange$: this.selectInput.searchable ? this.selectInput.clueChange$ : EMPTY,
 		});
