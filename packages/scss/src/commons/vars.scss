@@ -159,4 +159,8 @@
 			@extend %prefersContrastMore;
 		}
 	}
+
+	html:has(.lucca-banner-wrapper.pr-u-prefersContrastMore) {
+		@extend %prefersContrastMore;
+	}
 }
