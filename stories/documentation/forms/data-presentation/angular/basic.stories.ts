@@ -9,10 +9,17 @@ export default {
 			control: { type: 'text' },
 			description: 'Valeur affichée. [PortalContent]',
 		},
+		size: {
+			options: [null, 'S'],
+			control: { type: 'select' },
+			description: 'Taille du composant.',
+		},
 	},
 	render: (args, { argTypes }) => {
+		const sizeAttr = args['size'] ? ` size="${args['size']}"` : '';
+
 		return {
-			template: `<lu-data-presentation label="${args['label']}">Value</lu-data-presentation>`,
+			template: `<lu-data-presentation label="${args['label']}"${sizeAttr}>Value</lu-data-presentation>`,
 		};
 	},
 } as Meta;
@@ -20,5 +27,6 @@ export default {
 export const Template: StoryObj<DataPresentationComponent> = {
 	args: {
 		label: 'Label',
+		size: null,
 	},
 };

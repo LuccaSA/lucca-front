@@ -130,7 +130,7 @@ $palettesDefault: 'brand', 'brandContrasted', 'neutral', 'navigation', 'orchid';
 $palettesProduct: 'product';
 $palettesOtherProduct: () !default;
 $palettesDecorative: 'kiwi', 'cucumber', 'mint', 'lagoon', 'blueberry', 'lavender', 'watermelon', 'pumpkin' !default;
-$palettesDecorativeMandatory: 'pineapple', 'lime', 'grape', 'glacier';
+$palettesDecorativeMandatory: 'pineapple', 'lime', 'grape', 'glacier', 'pineappleContrasted';
 
 // pineapple, lime, grape, glacier
 $palettesDeprecated: ('lucca', 'grey', 'primary', 'secondary') !default;
@@ -569,6 +569,19 @@ $pineapple: (
 	900: #665400,
 ) !default;
 
+$pineappleContrasted: (
+	50: #fef7d7,
+	100: #fbf1b6,
+	200: #fae999,
+	300: #f9e16c,
+	400: #f8dc4f,
+	500: #e7c623,
+	600: #b89600,
+	700: #8f7500,
+	800: #7b6500,
+	900: #665400,
+) !default;
+
 // https://sass-lang.com/documentation/variables/#advanced-variable-functions
 $productsInterpolation: (
 	'brand': $brand,
@@ -609,6 +622,7 @@ $palettesInterpolation: (
 	'watermelon': $watermelon,
 	'pumpkin': $pumpkin,
 	'pineapple': $pineapple,
+	'pineappleContrasted': $pineappleContrasted,
 	'pagga': $pagga,
 	'poplee': $poplee,
 	'coreHR': $coreHR,
