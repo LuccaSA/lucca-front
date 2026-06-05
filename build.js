@@ -85,6 +85,11 @@ runTask('Lucca Front compilation', async () => {
 			output: OUTPUT_SCHEMATICS,
 		});
 
+		// ng-packagr sets "type": "module" in dist/ng/package.json.
+		// Schematics are compiled as CommonJS, so we need to override the module
+		// type locally to prevent Node.js from treating .js files as ES modules.
+		writeFile(path.join(OUTPUT_SCHEMATICS, 'package.json'), JSON.stringify({ type: 'commonjs' }, null, '\t'));
+
 		const npmIgnoreFile = path.join(OUTPUT_NG, '.npmignore');
 		const toIgnore = '!/schematics/lib/local-deps/package.json';
 		addLineToFile(npmIgnoreFile, toIgnore);
