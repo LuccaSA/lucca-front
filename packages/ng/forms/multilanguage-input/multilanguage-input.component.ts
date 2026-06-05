@@ -68,8 +68,6 @@ export class MultilanguageInputComponent implements ControlValueAccessor {
 
 	shouldOpenOnFocus = computed(() => this.openOnFocus() || this.hasNoInvariant());
 
-	protected readonly isFirefox = !!navigator.userAgent.match(/firefox/i);
-
 	// Suffixed with Internal to avoid conflict with NgModel's disabled attribute
 	disabledInternal = signal(false);
 
@@ -108,7 +106,14 @@ export class MultilanguageInputComponent implements ControlValueAccessor {
 	}
 
 	getLocaleDisplayName(locale: string): string {
-		return this.#intlDisplay.of(locale);
+		return this.#intlDisplay.of(locale) ?? locale;
+	}
+
+	protected getPopoverInlineSizeRem(inputElement: HTMLInputElement): number {
+		const inputContainer = inputElement.closest('.textField-input');
+		const referenceWidth = (inputContainer instanceof HTMLElement ? inputContainer : inputElement).getBoundingClientRect().width;
+
+		return referenceWidth / 16 + 1;
 	}
 
 	writeValue(value: MultilanguageTranslation[]): void {
