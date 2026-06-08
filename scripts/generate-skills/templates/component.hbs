@@ -65,7 +65,7 @@ import { {{#each api.apis}}{{className}}{{#unless @last}}, {{/unless}}{{/each}} 
 ## Type definitions
 
 {{#each expandedTypeDefs}}
-- [`{{typeName}}`](../../../types/{{../version.tag}}/{{typeName}}.md) — {{count}} available values
+- [`{{typeName}}`](../../types/{{typeName}}.md) — {{count}} available values
 {{/each}}
 
 {{/if}}
@@ -74,6 +74,6 @@ import { {{#each api.apis}}{{className}}{{#unless @last}}, {{/unless}}{{/each}} 
 
 {{#if hasExamples}}- 📝 [Code & implementation](./{{slug}}.component.md){{/if}}
 {{#if hasDesign}}- 🎨 [Design guidelines](./design/_index.md){{/if}}
-{{#if hasFigma}}- 🎯 [Figma design tokens](../{{slug}}.figma.md){{/if}}
+{{#if hasFigma}}- 🎯 [Figma design tokens](./{{slug}}.figma.md){{/if}}
 {{#if storybook}}{{#if storybook.docsEntry}}- 📖 [Storybook documentation]({{storybook.docsEntry.url}}){{/if}}{{/if}}
-- 📋 [Changelog](../{{slug}}.changelog.md)
+{{#if hasChangelog}}- 📋 [Changelog](./{{slug}}.changelog.md){{/if}}

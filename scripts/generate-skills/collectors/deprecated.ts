@@ -32,7 +32,6 @@ export async function collectDeprecated(
 	skillsDir: string,
 	version: VersionConfig,
 ): Promise<{ written: number; errors: number }> {
-	const minorVersion = `${version.major}.${version.minor}`;
 	const parts: string[] = [];
 
 	// Fetch the "deprecated list" tab
@@ -76,7 +75,7 @@ export async function collectDeprecated(
 
 	const content = parts.join('\n\n---\n\n');
 
-	const result = writeDocumentationPage(skillsDir, 'deprecated', minorVersion, 'deprecated.md', content);
+	const result = writeDocumentationPage(skillsDir, version, 'deprecated', 'deprecated.md', content);
 	console.log(`     ✅ deprecated/deprecated.md — ${result.status}`);
 	return { written: 1, errors: 0 };
 }

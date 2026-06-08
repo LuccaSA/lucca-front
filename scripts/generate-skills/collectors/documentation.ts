@@ -35,7 +35,6 @@ export async function collectDocumentation(
 	category: DocCategory,
 	entries: DocumentationEntry[],
 ): Promise<{ written: number; errors: number }> {
-	const minorVersion = `${version.major}.${version.minor}`;
 	let written = 0;
 	let errors = 0;
 
@@ -58,7 +57,7 @@ export async function collectDocumentation(
 			}
 
 			const content = `# ${entry.title}\n\n${cleaned}\n`;
-			const result = writeDocumentationPage(skillsDir, category, minorVersion, `${entry.slug}.md`, content);
+			const result = writeDocumentationPage(skillsDir, version, category, `${entry.slug}.md`, content);
 			console.log(`     ✅ ${category}/${entry.slug}.md — ${result.status}`);
 			written++;
 		} catch (err: any) {
