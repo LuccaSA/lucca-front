@@ -30,12 +30,16 @@ import {
 } from '@angular/core';
 import { takeUntilDestroyed, toObservable } from '@angular/core/rxjs-interop';
 import { SafeHtml } from '@angular/platform-browser';
-import { isNotNil, ɵeffectWithDeps } from '@lucca-front/ng/core';
+import { isNil, isNotNil, ɵeffectWithDeps } from '@lucca-front/ng/core';
 import { LuPopoverPosition } from '@lucca-front/ng/popover';
 import { startWith, timer } from 'rxjs';
 import { debounce, filter, map, tap } from 'rxjs/operators';
 import { LuTooltipPanelComponent } from '../panel';
 import { TooltipVisibilityObserver } from './tooltip-visibility.observer';
+
+export interface LuTooltipAnchorRef {
+	getElementRef(): ElementRef;
+}
 
 let nextId = 0;
 
@@ -72,7 +76,7 @@ export class LuTooltipTriggerDirective implements OnDestroy {
 	readonly luTooltipWhenEllipsisInput = input(false, { alias: 'luTooltipWhenEllipsis', transform: booleanAttribute });
 	readonly luTooltipWhenEllipsis = linkedSignal(() => this.luTooltipWhenEllipsisInput());
 
-	readonly luTooltipAnchor = input<FlexibleConnectedPositionStrategyOrigin>(this.#host);
+	readonly luTooltipAnchor = input<FlexibleConnectedPositionStrategyOrigin | LuTooltipAnchorRef | null | undefined>(this.#host);
 	readonly id = input<string>(`${this.#host.nativeElement.tagName.toLowerCase()}-tooltip-${nextId++}`);
 
 	readonly ariaDescribedBy = computed(() => {
@@ -426,7 +430,7 @@ export class LuTooltipTriggerDirective implements OnDestroy {
 
 		return this.#overlay
 			.position()
-			.flexibleConnectedTo(this.luTooltipAnchor())
+			.flexibleConnectedTo(this.#resolveAnchor())
 			.withPositions([
 				{
 					originX: connectionPosition.originX,
@@ -453,6 +457,18 @@ export class LuTooltipTriggerDirective implements OnDestroy {
 					overlayY: this.invertVerticalPos(overlayPosition.overlayY),
 				},
 			]);
+	}
+
+	#resolveAnchor(): FlexibleConnectedPositionStrategyOrigin {
+		const anchor = this.luTooltipAnchor();
+
+		if (isNil(anchor)) {
+			return this.#host;
+		} else if ('getElementRef' in anchor) {
+			return anchor.getElementRef();
+		} else {
+			return anchor;
+		}
 	}
 
 	private invertVerticalPos(y: VerticalConnectionPos): VerticalConnectionPos {
