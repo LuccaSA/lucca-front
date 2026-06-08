@@ -143,7 +143,7 @@ export async function collectAllTools(
 			}
 
 			const content = `# ${tool.title}\n\n${cleaned}\n`;
-			const result = writeToolsPage(skillsDir, minorVersion, `${tool.slug}.md`, content);
+			const result = writeToolsPage(skillsDir, version, `${tool.slug}.md`, content);
 			console.log(`     ✅ ${tool.slug}.md — ${result.status}`);
 			written++;
 		} catch (err: any) {

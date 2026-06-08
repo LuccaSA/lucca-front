@@ -7,6 +7,7 @@
  * - Git tags for source code access
  */
 
+import { execSync } from 'child_process';
 import { VersionConfig } from './types';
 
 // ─── ZeroHeight release IDs (per minor) ──────────────────────────────────────
@@ -83,6 +84,40 @@ export function getZeroHeightUrl(pagePath: string, zhReleaseId: number | null): 
 		return `https://prisme.lucca.io/${ZH_STYLEGUIDE_TOKEN}/v/${zhReleaseId}/p/${pagePath}.md`;
 	}
 	return `https://prisme.lucca.io/${ZH_STYLEGUIDE_TOKEN}/p/${pagePath}.md`;
+}
+
+/** Numeric comparison of two version tags ("v21.2.3" or "21.2.3"). */
+export function compareTags(a: string, b: string): number {
+	const pa = parseVersion(a);
+	const pb = parseVersion(b);
+	if (!pa || !pb) return 0;
+	return pa.major - pb.major || pa.minor - pb.minor || pa.patch - pb.patch;
+}
+
+const stableTagCache = new Map<number, string[]>();
+
+/**
+ * Lists the **stable** release git tags for a major (e.g. v21.0.0 … v21.2.4), ascending.
+ * Excludes pre-releases (-rc, -experimental, -split, …). Sourced from git, cached per major.
+ * Used to walk the real release history for the per-component changelog.
+ */
+export function listStableTags(major: number): string[] {
+	const cached = stableTagCache.get(major);
+	if (cached) return cached;
+
+	let tags: string[] = [];
+	try {
+		const out = execSync(`git tag -l 'v${major}.*'`, { encoding: 'utf-8', maxBuffer: 10 * 1024 * 1024 });
+		tags = out
+			.split('\n')
+			.map((t) => t.trim())
+			.filter((t) => /^v\d+\.\d+\.\d+$/.test(t)); // stable only
+	} catch {
+		tags = [];
+	}
+	tags.sort(compareTags);
+	stableTagCache.set(major, tags);
+	return tags;
 }
 
 /**

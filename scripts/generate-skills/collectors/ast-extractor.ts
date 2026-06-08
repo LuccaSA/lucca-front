@@ -28,13 +28,13 @@ const WORKSPACE_ROOT = path.join(__dirname, '..', '..', '..');
  * @param ngPackage — Package name, e.g. "button"
  * @param version — Version config (for the git tag)
  */
-export function extractPackageAPI(ngPackage: string, version: VersionConfig): PackageAPI | null {
+export function extractPackageAPI(ngPackage: string, version: VersionConfig, silent = false): PackageAPI | null {
 	// Start from the public API entrypoint
 	const publicApiPath = `packages/ng/${ngPackage}/public-api.ts`;
 	const publicApiContent = gitShow(version.tag, publicApiPath);
 
 	if (!publicApiContent) {
-		console.warn(`  ⚠️  No public-api.ts found for ${ngPackage} at ${version.tag}`);
+		if (!silent) console.warn(`  ⚠️  No public-api.ts found for ${ngPackage} at ${version.tag}`);
 		return null;
 	}
 
@@ -42,7 +42,7 @@ export function extractPackageAPI(ngPackage: string, version: VersionConfig): Pa
 	const implFiles = resolveImplementationFiles(publicApiContent, ngPackage, version.tag);
 
 	if (implFiles.length === 0) {
-		console.warn(`  ⚠️  No implementation files found for ${ngPackage} at ${version.tag}`);
+		if (!silent) console.warn(`  ⚠️  No implementation files found for ${ngPackage} at ${version.tag}`);
 		return null;
 	}
 

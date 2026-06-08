@@ -5,30 +5,45 @@ import { VersionConfig, VersionManifest, VersionManifestEntry, WriteResult } fro
 const SKILLS_BASE = 'lucca-front';
 
 /**
- * New directory structure per component:
+ * Flat, self-contained per-version layout. Each version is a complete skill:
  *
- * references/components/<slug>/
- * ├── <slug>.figma.md          (unversioned)
- * ├── <slug>.changelog.md      (unversioned)
- * ├── v21.2.1/
- * │   ├── <slug>.md
- * │   ├── <slug>.design.md
- * │   └── stories/
- * │       ├── angular-basic.md
- * │       └── html-size.md
- * └── v21.2.0/
- *     └── ...
+ * lucca-front/<version>/                 (e.g. lucca-front/21.2.3/ — bare, matches the APM path)
+ * ├── SKILL.md
+ * └── references/
+ *     ├── components/<slug>/
+ *     │   ├── <slug>.md
+ *     │   ├── <slug>.component.md
+ *     │   ├── <slug>.figma.md
+ *     │   ├── <slug>.changelog.md
+ *     │   ├── design/{_index.md, <section>.md}
+ *     │   └── stories/<fileSlug>.md
+ *     ├── types/<TypeName>.md
+ *     ├── documentation/<category>/<file>.md
+ *     └── tools/<file>.md
+ *
+ * No interior version segments: the version lives once, at the top folder. A consumer
+ * installs a single version, so cross-version dedup is irrelevant.
  */
 
+/** Bare version folder name, e.g. "21.2.3" — matches the APM path segment. */
+function versionFolder(version: VersionConfig): string {
+	return `${version.major}.${version.minor}.${version.patch}`;
+}
+
+/** Root of a single self-contained version skill: lucca-front/<version>/ */
+export function versionRoot(skillsDir: string, version: VersionConfig): string {
+	return path.resolve(skillsDir, SKILLS_BASE, versionFolder(version));
+}
+
 /**
- * Cleans the versioned output directory (design/ and stories/) before a fresh generation.
- * Prevents stale files from previous runs (e.g., code sections moved to stories).
+ * Cleans the component's multi-file subdirectories (design/, stories/, examples/) before a
+ * fresh generation, to prevent stale files (e.g. code sections moved to stories).
  */
 export function cleanVersionDirectory(skillsDir: string, slug: string, version: VersionConfig): void {
 	validateSlug(slug);
-	const versionDir = componentVersionDir(skillsDir, slug, version);
+	const compDir = componentBaseDir(skillsDir, version, slug);
 	for (const subDir of ['design', 'stories', 'examples']) {
-		const dir = path.join(versionDir, subDir);
+		const dir = path.join(compDir, subDir);
 		if (fs.existsSync(dir)) {
 			fs.rmSync(dir, { recursive: true });
 		}
@@ -36,77 +51,74 @@ export function cleanVersionDirectory(skillsDir: string, slug: string, version: 
 }
 
 /**
- * Writes the main versioned component skill markdown.
- * Output: references/components/<slug>/<version>/<slug>.md
+ * Writes the main component API skill markdown.
+ * Output: <version>/references/components/<slug>/<slug>.md
  */
 export function writeVersionedSkill(skillsDir: string, slug: string, version: VersionConfig, content: string): WriteResult {
 	validateSlug(slug);
-	const versionDir = componentVersionDir(skillsDir, slug, version);
-	return writeFile(versionDir, `${slug}.md`, content);
+	return writeFile(componentBaseDir(skillsDir, version, slug), `${slug}.md`, content);
 }
 
 /**
  * Writes the design index.
- * Output: references/components/<slug>/<version>/design/_index.md
+ * Output: <version>/references/components/<slug>/design/_index.md
  */
 export function writeDesignIndex(skillsDir: string, slug: string, version: VersionConfig, content: string): WriteResult {
 	validateSlug(slug);
-	const designDir = path.join(componentVersionDir(skillsDir, slug, version), 'design');
+	const designDir = path.join(componentBaseDir(skillsDir, version, slug), 'design');
 	return writeFile(designDir, '_index.md', content);
 }
 
 /**
  * Writes an individual design section file.
- * Output: references/components/<slug>/<version>/design/<sectionSlug>.md
+ * Output: <version>/references/components/<slug>/design/<sectionSlug>.md
  */
 export function writeDesignSection(skillsDir: string, slug: string, version: VersionConfig, sectionSlug: string, content: string): WriteResult {
 	validateSlug(slug);
-	const designDir = path.join(componentVersionDir(skillsDir, slug, version), 'design');
+	const designDir = path.join(componentBaseDir(skillsDir, version, slug), 'design');
 	return writeFile(designDir, `${sectionSlug}.md`, content);
 }
 
 /**
  * Writes the component page (implementation notes + stories listing).
- * Output: references/components/<slug>/<version>/<slug>.component.md
+ * Output: <version>/references/components/<slug>/<slug>.component.md
  */
 export function writeComponentPage(skillsDir: string, slug: string, version: VersionConfig, content: string): WriteResult {
 	validateSlug(slug);
-	const versionDir = componentVersionDir(skillsDir, slug, version);
-	return writeFile(versionDir, `${slug}.component.md`, content);
+	return writeFile(componentBaseDir(skillsDir, version, slug), `${slug}.component.md`, content);
 }
 
 /**
  * Writes an individual story file.
- * Output: references/components/<slug>/<version>/stories/<fileSlug>.md
+ * Output: <version>/references/components/<slug>/stories/<fileSlug>.md
  */
 export function writeStory(skillsDir: string, slug: string, version: VersionConfig, fileSlug: string, content: string): WriteResult {
 	validateSlug(slug);
-	const storiesDir = path.join(componentVersionDir(skillsDir, slug, version), 'stories');
+	const storiesDir = path.join(componentBaseDir(skillsDir, version, slug), 'stories');
 	return writeFile(storiesDir, `${fileSlug}.md`, content);
 }
 
 /**
- * Writes the changelog markdown (unversioned, per component).
- * Output: references/components/<slug>/<slug>.changelog.md
+ * Writes the changelog markdown, per component.
+ * Output: <version>/references/components/<slug>/<slug>.changelog.md
  */
-export function writeChangelog(skillsDir: string, slug: string, content: string): WriteResult {
+export function writeChangelog(skillsDir: string, slug: string, version: VersionConfig, content: string): WriteResult {
 	validateSlug(slug);
-	const compDir = componentBaseDir(skillsDir, slug);
-	return writeFile(compDir, `${slug}.changelog.md`, content);
+	return writeFile(componentBaseDir(skillsDir, version, slug), `${slug}.changelog.md`, content);
 }
 
 /**
- * Writes a Figma design tokens file (unversioned, per component).
- * Output: references/components/<slug>/<slug>.figma.md
+ * Writes a Figma design tokens file, per component.
+ * Output: <version>/references/components/<slug>/<slug>.figma.md
  */
-export function writeFigmaSkill(skillsDir: string, slug: string, content: string): WriteResult {
+export function writeFigmaSkill(skillsDir: string, slug: string, version: VersionConfig, content: string): WriteResult {
 	validateSlug(slug);
-	const compDir = componentBaseDir(skillsDir, slug);
-	return writeFile(compDir, `${slug}.figma.md`, content);
+	return writeFile(componentBaseDir(skillsDir, version, slug), `${slug}.figma.md`, content);
 }
 
 /**
- * Writes/updates the _versions.json manifest.
+ * Writes/updates the _versions.json manifest at the dist root (lucca-front/_versions.json).
+ * Generator/dist metadata — not part of any single version skill, not fetched by APM.
  */
 export function writeVersionManifest(skillsDir: string, version: VersionConfig, componentCount: number): void {
 	const manifestPath = path.resolve(skillsDir, SKILLS_BASE, '_versions.json');
@@ -148,61 +160,58 @@ export function writeVersionManifest(skillsDir: string, version: VersionConfig, 
 // ─── Shared type writers ──────────────────────────────────────────────────────
 
 /**
- * Writes a shared type definition file (versioned, shared across components).
- * Output: references/types/<version>/<TypeName>.md
+ * Writes a shared type definition file (shared across components within a version).
+ * Output: <version>/references/types/<TypeName>.md
  */
 export function writeSharedType(skillsDir: string, version: VersionConfig, typeName: string, content: string): WriteResult {
-	const dir = path.resolve(skillsDir, SKILLS_BASE, 'references', 'types', version.tag);
+	const dir = path.join(versionRoot(skillsDir, version), 'references', 'types');
 	return writeFile(dir, `${typeName}.md`, content);
+}
+
+/**
+ * Writes the migrations page (ng update schematics) for a version.
+ * Output: <version>/references/migrations.md
+ */
+export function writeMigrationsPage(skillsDir: string, version: VersionConfig, content: string): WriteResult {
+	const dir = path.join(versionRoot(skillsDir, version), 'references');
+	return writeFile(dir, 'migrations.md', content);
 }
 
 // ─── Documentation writers ────────────────────────────────────────────────────
 
 /**
- * Writes a documentation page (tokens, content, guidelines, patterns).
- * Output: references/documentation/<category>/v<M>.<m>/<filename>.md
- *
- * @param category — e.g. "tokens", "content", "guidelines", "patterns"
- * @param minorVersion — e.g. "21.2" (ZH versioned by minor)
- * @param filename — e.g. "couleurs.md", "typographie.md"
+ * Writes a documentation page (tokens, content, guidelines, patterns, deprecated).
+ * Output: <version>/references/documentation/<category>/<filename>.md
  */
 export function writeDocumentationPage(
 	skillsDir: string,
+	version: VersionConfig,
 	category: string,
-	minorVersion: string,
 	filename: string,
 	content: string,
 ): WriteResult {
-	const dir = path.resolve(skillsDir, SKILLS_BASE, 'references', 'documentation', category, `v${minorVersion}`);
+	const dir = path.join(versionRoot(skillsDir, version), 'references', 'documentation', category);
 	return writeFile(dir, filename, content);
 }
 
 /**
  * Writes a tools page (mixins, animations, utilities).
- * Output: references/tools/v<M>.<m>/<filename>.md
- *
- * Versioned by **minor** (same as documentation) since ZeroHeight has one release per minor.
- *
- * @param minorVersion — e.g. "21.2"
+ * Output: <version>/references/tools/<filename>.md
  */
 export function writeToolsPage(
 	skillsDir: string,
-	minorVersion: string,
+	version: VersionConfig,
 	filename: string,
 	content: string,
 ): WriteResult {
-	const dir = path.resolve(skillsDir, SKILLS_BASE, 'references', 'tools', `v${minorVersion}`);
+	const dir = path.join(versionRoot(skillsDir, version), 'references', 'tools');
 	return writeFile(dir, filename, content);
 }
 
 // ─── Helpers ──────────────────────────────────────────────────────────────────
 
-function componentBaseDir(skillsDir: string, slug: string): string {
-	return path.resolve(skillsDir, SKILLS_BASE, 'references', 'components', slug);
-}
-
-function componentVersionDir(skillsDir: string, slug: string, version: VersionConfig): string {
-	return path.join(componentBaseDir(skillsDir, slug), version.tag);
+function componentBaseDir(skillsDir: string, version: VersionConfig, slug: string): string {
+	return path.join(versionRoot(skillsDir, version), 'references', 'components', slug);
 }
 
 function writeFile(dir: string, filename: string, content: string): WriteResult {

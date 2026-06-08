@@ -57,10 +57,12 @@ import {
 	writeSharedType,
 } from './generators/skill-writer';
 import { writeToc } from './generators/toc-writer';
-import { writeVersionChangelog } from './generators/changelog-writer';
+import { buildComponentChangelog } from './generators/changelog-writer';
+import { writeVersionChangelog } from './generators/version-diff-writer';
 import { resolveVersion } from './version-config';
 import { collectAllDocumentation } from './collectors/documentation';
 import { collectDeprecated } from './collectors/deprecated';
+import { collectSchematics } from './collectors/schematics';
 import { collectAllTools } from './collectors/tools';
 import { discoverComponents, DiscoveredComponent } from './collectors/component-discovery';
 import { syncMetadata } from './sync-metadata';
@@ -94,6 +96,7 @@ const flags = {
 	skipStorybook: args.includes('--skip-storybook'),
 	skipDocumentation: args.includes('--skip-documentation'),
 	skipTools: args.includes('--skip-tools'),
+	skipSchematics: args.includes('--skip-schematics'),
 	documentationOnly: args.includes('--documentation-only'),
 	dryRun: args.includes('--dry-run'),
 	validate: args.includes('--validate'),
@@ -224,11 +227,11 @@ async function main(): Promise<void> {
 
 	let totalSuccess = 0;
 	let totalErrors = 0;
-	// Accumulated component map for TOC (built from all versions)
-	let latestComponentMap: ComponentMap = {};
 
-	for (const versionStr of flags.versions) {
+	for (let vi = 0; vi < flags.versions.length; vi++) {
+		const versionStr = flags.versions[vi];
 		const version = resolveVersion(versionStr);
+		console.log(`\n━━━━━━ Version ${vi + 1}/${flags.versions.length} : ${version.tag} ━━━━━━`);
 
 		// Documentation collection (ZH pages: tokens, content, guidelines, patterns)
 		if (!flags.skipDocumentation && !flags.component) {
@@ -258,6 +261,18 @@ async function main(): Promise<void> {
 			}
 		}
 
+		// Schematics / migrations (ng update) — read from git at the target tag
+		if (!flags.skipSchematics && !flags.component) {
+			console.log(`\n🧭 Collecting schematics/migrations for ${version.tag}...`);
+			if (!flags.dryRun) {
+				const { written, errors } = collectSchematics(config.output.skillsDir, version);
+				totalSuccess += written;
+				totalErrors += errors;
+			} else {
+				console.log('   DRY RUN — migrations.json would be read from git');
+			}
+		}
+
 		// Tools collection (ZeroHeight pages: utilities, mixins, animations, etc.)
 		// Runs with --documentation-only since tools are now ZH-based (not git source extraction).
 		if (!flags.skipTools && !flags.component) {
@@ -275,29 +290,26 @@ async function main(): Promise<void> {
 
 		// Component collection (skip if --documentation-only)
 		if (!flags.documentationOnly) {
-			const { success, errors, componentMap } = await processVersion(versionStr, config);
+			const { success, errors } = await processVersion(versionStr, config);
 			totalSuccess += success;
 			totalErrors += errors;
-			// Always use the last version's component map for the TOC
-			if (componentMap && Object.keys(componentMap).length > 0) {
-				latestComponentMap = componentMap;
-			}
 		}
 
-		// Generate version changelog (diff vs previous version)
+		// Per-version SKILL.md (entry point) — written after this version's files exist on disk
 		if (!flags.dryRun && !flags.component) {
-			const slugs = Object.keys(latestComponentMap);
-			const clPath = writeVersionChangelog(config.output.skillsDir, version, slugs.length > 0 ? slugs : undefined);
-			if (clPath) {
-				console.log(`📝 Changelog: ${path.basename(clPath)}`);
-			}
+			const tocPath = writeToc(config.output.skillsDir, version);
+			console.log(`📑 SKILL.md: ${path.relative(config.output.skillsDir, tocPath)}`);
 		}
 	}
 
-	// Write TOC once (covers all versions)
-	if (!flags.dryRun && Object.keys(latestComponentMap).length > 0) {
-		const tocPath = writeToc(config.output.skillsDir, latestComponentMap);
-		console.log(`📑 Table of contents: ${tocPath}`);
+	// Version-level review changelog (human PR-aid, not consumed by the skill) — run after the
+	// loop so every target version's folder is on disk to diff against its predecessor.
+	if (!flags.dryRun && !flags.component) {
+		for (const versionStr of flags.versions) {
+			const v = resolveVersion(versionStr);
+			const clPath = writeVersionChangelog(config.output.skillsDir, v);
+			if (clPath) console.log(`📝 Review changelog: ${path.relative(config.output.skillsDir, clPath)}`);
+		}
 	}
 
 	console.log(`\n🎉 All done! ${flags.versions.length} version(s), ${totalSuccess} generated, ${totalErrors} errors`);
@@ -361,16 +373,14 @@ async function processVersion(
 
 	let successCount = 0;
 	let errorCount = 0;
+	const totalComponents = entries.length;
+	let processed = 0;
 
 	const results = await withConcurrency(entries, config.concurrency, async ([slug, entry]: [string, ComponentEntry]) => {
 		try {
-			console.log(`  📦 ${slug}...`);
 
 			// 1. AST extraction (needs ngPackage — skip for CSS-only components)
 			const api = entry.ngPackage ? extractPackageAPI(entry.ngPackage, version) : null;
-			if (!api && entry.ngPackage) {
-				console.log(`     ⚠️  No API found for ${entry.ngPackage}`);
-			}
 
 			// 2. ZeroHeight guidelines
 			let zeroheight = null;
@@ -488,13 +498,22 @@ async function processVersion(
 			// Clean previous design/ and examples/ to avoid stale files
 			cleanVersionDirectory(config.output.skillsDir, slug, version);
 
-			// Main API reference
-			const mdContent = renderComponentMd(data);
-			const result = writeVersionedSkill(config.output.skillsDir, slug, version, mdContent);
-			console.log(`     ✅ ${slug}.md — ${result.status}`);
-
-			// Design guidelines (split by H1 sections, code sections go to examples)
+			// Pre-compute design split + changelog so the API file links only to files actually
+			// written (avoids dead ./design/_index.md and ./<slug>.changelog.md).
 			const designResult = splitDesignSections(data);
+			const hasDesign = !!designResult && designResult.designSections.length > 0;
+			const clMd = buildComponentChangelog({
+				slug,
+				ngPackage: entry.ngPackage ?? null,
+				version,
+				zhProse: renderChangelogMd(data),
+			});
+
+			// Main API reference
+			const mdContent = renderComponentMd(data, { hasDesign, hasChangelog: clMd !== null });
+			const result = writeVersionedSkill(config.output.skillsDir, slug, version, mdContent);
+
+			// Design guidelines (designResult computed above)
 			let codeSections: DesignSection[] = [];
 			if (designResult) {
 				codeSections = designResult.codeSections;
@@ -505,7 +524,6 @@ async function processVersion(
 						const sectionMd = renderDesignSectionMd(slug, section);
 						writeDesignSection(config.output.skillsDir, slug, version, section.fileSlug, sectionMd);
 					}
-					console.log(`     ✅ ${designResult.designSections.length} design sections written`);
 				}
 			}
 
@@ -522,26 +540,28 @@ async function processVersion(
 						writeStory(config.output.skillsDir, slug, version, ex.fileSlug, storyMd);
 					}
 				}
-				console.log(`     ✅ ${storyExamples?.length ?? 0} stories written`);
 			}
 
-			// Changelog (unversioned)
-			const clMd = renderChangelogMd(data);
+			// Changelog — structural API diff (cumulative, from git tags) + optional ZH prose layer
 			if (clMd) {
-				writeChangelog(config.output.skillsDir, slug, clMd);
+				writeChangelog(config.output.skillsDir, slug, version, clMd);
 			}
 
-			// Figma skill (unversioned)
+			// Figma skill
 			if (figmaTokens) {
 				const figmaMd = renderFigmaMd(slug, [figmaTokens], config.figma.fileKey);
-				const figmaResult = writeFigmaSkill(config.output.skillsDir, slug, figmaMd);
-				console.log(`     ✅ ${slug}.figma.md — ${figmaResult.status}`);
+				writeFigmaSkill(config.output.skillsDir, slug, version, figmaMd);
 			}
 
+			const nDesign = hasDesign && designResult ? designResult.designSections.length : 0;
+			const nStories = storyExamples?.length ?? 0;
+			processed++;
+			console.log(`  [${processed}/${totalComponents}] ✅ ${slug} — ${nStories} stories, ${nDesign} design${figmaTokens ? ', figma' : ''}`);
 			successCount++;
 			return { slug, status: result.status, data };
 		} catch (err: any) {
-			console.error(`  ❌ ${slug}: ${err.message}`);
+			processed++;
+			console.error(`  [${processed}/${totalComponents}] ❌ ${slug}: ${err.message}`);
 			errorCount++;
 			return { slug, status: 'error', error: err.message, data: null };
 		}
