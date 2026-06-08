@@ -15,7 +15,7 @@ export default {
 			description: 'Définit une direction de la bulle. Aléatoire par défaut.',
 		},
 		size: {
-			options: ['S', 'M', 'L'],
+			options: ['XS', 'S', '', 'L'],
 			control: {
 				type: 'select',
 			},
