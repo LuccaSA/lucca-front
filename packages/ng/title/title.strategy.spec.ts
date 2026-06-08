@@ -1,3 +1,4 @@
+import { LiveAnnouncer } from '@angular/cdk/a11y';
 import { Location } from '@angular/common';
 import { ChangeDetectionStrategy, Component, Inject, OnInit } from '@angular/core';
 import { Title } from '@angular/platform-browser';
@@ -82,11 +83,13 @@ export class OverrideTitlePartComponent implements OnInit {
 describe('TitleStrategy', () => {
 	let spectator: SpectatorRouting<AppComponent>;
 	let pageTitleService: LuTitleStrategy;
+	let liveAnnouncer: LiveAnnouncer;
 
 	const createComponent = createRoutingFactory({
 		component: AppComponent,
 		providers: [
 			mockProvider(Title),
+			mockProvider(LiveAnnouncer),
 			provideLuTitleStrategy({
 				appTitle: () => 'BU',
 				translateService: () => new TranslateService(),
@@ -152,6 +155,7 @@ describe('TitleStrategy', () => {
 
 	beforeEach(() => {
 		spectator = createComponent();
+		liveAnnouncer = spectator.inject(LiveAnnouncer);
 		pageTitleService = spectator.inject(TitleStrategy) as unknown as LuTitleStrategy;
 	});
 
@@ -220,5 +224,98 @@ describe('TitleStrategy', () => {
 		spectator.click('.link-7');
 		await spectator.fixture.whenStable();
 		expect(resultTitle).toEqual(`Stubs' child Name 1${TitleSeparator}Stub${TitleSeparator}Lucca BU`);
+	});
+
+	it('should not announce title via LiveAnnouncer when not enabled', async () => {
+		await spectator.fixture.whenStable();
+		expect(liveAnnouncer.announce).not.toHaveBeenCalled();
+	});
+});
+
+describe('TitleStrategy readTitleByLiveAnnouncer enabled', () => {
+	let spectator: SpectatorRouting<AppComponent>;
+	let liveAnnouncer: LiveAnnouncer;
+
+	const createComponent = createRoutingFactory({
+		component: AppComponent,
+		providers: [
+			mockProvider(Title),
+			mockProvider(LiveAnnouncer),
+			provideLuTitleStrategy({
+				appTitle: () => 'BU',
+				translateService: () => new TranslateService(),
+				readTitleByLiveAnnouncer: true,
+			}),
+		],
+		stubsEnabled: false,
+		routes: [
+			{
+				path: '',
+				title: 'Stub',
+				component: StubComponent,
+				children: [
+					{
+						path: 'first',
+						component: StubComponent,
+						children: [
+							{
+								path: ':id',
+								title: `Stubs' child {{id}}`,
+								component: StubComponent,
+							},
+						],
+					},
+				],
+			},
+		],
+	});
+
+	beforeEach(() => {
+		spectator = createComponent();
+		liveAnnouncer = spectator.inject(LiveAnnouncer);
+	});
+
+	it('should announce the title via LiveAnnouncer on navigation', async () => {
+		await spectator.fixture.whenStable();
+		expect(liveAnnouncer.announce).toHaveBeenCalledWith(`Stub${TitleSeparator}Lucca BU`, 'polite');
+	});
+
+	it('should announce updated title on subsequent navigation', async () => {
+		await spectator.fixture.whenStable();
+		jest.clearAllMocks();
+
+		spectator.click('.link-3');
+		await spectator.fixture.whenStable();
+		expect(liveAnnouncer.announce).toHaveBeenCalledWith(`Stubs' child 1${TitleSeparator}Stub${TitleSeparator}Lucca BU`, 'polite');
+	});
+});
+
+describe('TitleStrategy readTitleByLiveAnnouncer disabled', () => {
+	let spectator: SpectatorRouting<AppComponent>;
+	let liveAnnouncer: LiveAnnouncer;
+
+	const createComponent = createRoutingFactory({
+		component: AppComponent,
+		providers: [
+			mockProvider(Title),
+			mockProvider(LiveAnnouncer),
+			provideLuTitleStrategy({
+				appTitle: () => 'BU',
+				translateService: () => new TranslateService(),
+				readTitleByLiveAnnouncer: false,
+			}),
+		],
+		stubsEnabled: false,
+		routes: [{ path: '', title: 'Stub', component: StubComponent }],
+	});
+
+	beforeEach(() => {
+		spectator = createComponent();
+		liveAnnouncer = spectator.inject(LiveAnnouncer);
+	});
+
+	it('should not announce title via LiveAnnouncer when disabled', async () => {
+		await spectator.fixture.whenStable();
+		expect(liveAnnouncer.announce).not.toHaveBeenCalled();
 	});
 });
