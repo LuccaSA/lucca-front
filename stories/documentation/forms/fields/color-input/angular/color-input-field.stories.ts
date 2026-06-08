@@ -4,7 +4,7 @@ import { BrowserAnimationsModule } from '@angular/platform-browser/animations';
 import { LuOptionDirective } from '@lucca-front/ng/core-select';
 import { FormFieldComponent } from '@lucca-front/ng/form-field';
 import { ColorInputComponent } from '@lucca-front/ng/forms';
-import { Meta, moduleMetadata, StoryObj } from '@storybook/angular';
+import { Meta, moduleMetadata, StoryObj } from '@storybook/angular-vite';
 import { StoryModelDisplayComponent } from 'stories/helpers/story-model-display.component';
 import { generateInputs } from '../../../../../helpers/stories';
 

@@ -63,50 +63,28 @@
           }
         },
         "storybook": {
-          "builder": "@storybook/angular:start-storybook",
+          "builder": "@storybook/angular-vite:start-storybook",
           "options": {
             "configDir": ".storybook",
-            "browserTarget": "ng:build",
             "compodoc": true,
-            "compodocArgs": [
-
-              "-e",
-              "json",
-              "-d",
-              ".storybook"
-            ],
+            "compodocArgs": ["-e", "json", "-d", ".storybook"],
             "port": 6006,
-            "styles": [
-              ".storybook/styles.scss"
-            ],
+            "styles": [".storybook/styles.scss"],
             "stylePreprocessorOptions": {
-              "includePaths": [
-                "packages/ng/styles",
-                "node_modules"
-              ]
+              "includePaths": ["packages/ng/styles", "node_modules"]
             }
           }
         },
         "build-storybook": {
-          "builder": "@storybook/angular:build-storybook",
-          "options": {"configDir": ".storybook",
-            "browserTarget": "ng:build",
+          "builder": "@storybook/angular-vite:build-storybook",
+          "options": {
+            "configDir": ".storybook",
             "compodoc": true,
-            "compodocArgs": [
-
-              "-e",
-              "json",
-              "-d",
-              ".storybook"
-            ],"outputDir": "storybook-static",
-            "styles": [
-              ".storybook/styles.scss"
-            ],
+            "compodocArgs": ["-e", "json", "-d", ".storybook"],
+            "outputDir": "storybook-static",
+            "styles": [".storybook/styles.scss"],
             "stylePreprocessorOptions": {
-              "includePaths": [
-                "packages/ng/styles",
-                "node_modules"
-              ]
+              "includePaths": ["packages/ng/styles", "node_modules"]
             }
           }
         }

@@ -1,5 +1,5 @@
 import { TextFlowComponent } from '@lucca-front/ng/text-flow';
-import { Meta, moduleMetadata, StoryObj } from '@storybook/angular';
+import { Meta, moduleMetadata, StoryObj } from '@storybook/angular-vite';
 
 interface TextFlowBasicStory {}
 

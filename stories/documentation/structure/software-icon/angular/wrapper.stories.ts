@@ -1,7 +1,7 @@
 import { SoftwareIconComponent } from '@lucca-front/ng/software-icon';
 import { SoftwareIconWrapperComponent, SoftwareIconWrapperItemDirective } from '@lucca-front/ng/software-icon-wrapper';
 import { LuTooltipTriggerDirective } from '@lucca-front/ng/tooltip';
-import { Meta, moduleMetadata, StoryObj } from '@storybook/angular';
+import { Meta, moduleMetadata, StoryObj } from '@storybook/angular-vite';
 
 export default {
 	title: 'Documentation/Structure/Software icon/Angular/Wrapper',

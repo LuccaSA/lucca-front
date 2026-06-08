@@ -1,6 +1,6 @@
 import { LOCALE_ID } from '@angular/core';
 import { FormLabelComponent } from '@lucca-front/ng/form-label';
-import { applicationConfig, Meta, moduleMetadata, StoryObj } from '@storybook/angular';
+import { applicationConfig, Meta, moduleMetadata, StoryObj } from '@storybook/angular-vite';
 
 interface FormLabelBasicStory {
 	for: string;

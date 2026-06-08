@@ -6,7 +6,7 @@ import { ResourceCardButtonComponent, ResourceCardComponent, ResourceCardLinkCom
 import { StatusBadgeComponent } from '@lucca-front/ng/status-badge';
 import { TagComponent } from '@lucca-front/ng/tag';
 import { LuTooltipTriggerDirective } from '@lucca-front/ng/tooltip';
-import { applicationConfig, Meta, moduleMetadata, StoryObj } from '@storybook/angular';
+import { applicationConfig, Meta, moduleMetadata, StoryObj } from '@storybook/angular-vite';
 
 interface ResourceCardAngularBasicStory {
 	wrapper: boolean;

@@ -1,6 +1,6 @@
 import { ButtonComponent } from '@lucca-front/ng/button';
 import { IconComponent } from '@lucca-front/ng/icon';
-import { Meta, moduleMetadata, StoryObj } from '@storybook/angular';
+import { Meta, moduleMetadata, StoryObj } from '@storybook/angular-vite';
 
 export default {
 	title: 'Documentation/Actions/Button/Angular/AI',

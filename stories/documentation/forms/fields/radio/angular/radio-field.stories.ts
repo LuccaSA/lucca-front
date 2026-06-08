@@ -2,7 +2,7 @@ import { FormsModule } from '@angular/forms';
 import { BrowserAnimationsModule } from '@angular/platform-browser/animations';
 import { FormFieldComponent } from '@lucca-front/ng/form-field';
 import { RadioComponent, RadioGroupInputComponent } from '@lucca-front/ng/forms';
-import { Meta, StoryObj, moduleMetadata } from '@storybook/angular';
+import { Meta, StoryObj, moduleMetadata } from '@storybook/angular-vite';
 import { generateInputs } from 'stories/helpers/stories';
 import { StoryModelDisplayComponent } from 'stories/helpers/story-model-display.component';
 

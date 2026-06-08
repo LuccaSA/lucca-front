@@ -3,7 +3,7 @@ import { ChangeDetectionStrategy, Component, input } from '@angular/core';
 import { provideAnimations } from '@angular/platform-browser/animations';
 import { ILuUser } from '@lucca-front/ng/user';
 import { LuUserPopoverDirective } from '@lucca-front/ng/user-popover';
-import { applicationConfig, Meta, StoryObj } from '@storybook/angular';
+import { applicationConfig, Meta, StoryObj } from '@storybook/angular-vite';
 
 @Component({
 	selector: 'user-popover-story',

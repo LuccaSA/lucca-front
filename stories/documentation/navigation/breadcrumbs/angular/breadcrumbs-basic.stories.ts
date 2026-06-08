@@ -1,5 +1,5 @@
 import { BreadcrumbsComponent, BreadcrumbsLinkDirective } from '@lucca-front/ng/breadcrumbs';
-import { Meta, moduleMetadata } from '@storybook/angular';
+import { Meta, moduleMetadata } from '@storybook/angular-vite';
 import { generateInputs } from 'stories/helpers/stories';
 
 export default {

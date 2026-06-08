@@ -2,7 +2,7 @@ import { ChangeDetectionStrategy, Component, OnDestroy, OnInit, TemplateRef } fr
 import { FormsModule } from '@angular/forms';
 import { provideAnimations } from '@angular/platform-browser/animations';
 import { LuToastInput, LuToastType, LuToastsComponent, LuToastsService, defaultToastDuration } from '@lucca-front/ng/toast';
-import { Meta, StoryObj, applicationConfig } from '@storybook/angular';
+import { Meta, StoryObj, applicationConfig } from '@storybook/angular-vite';
 import { Observable, ReplaySubject, Subject } from 'rxjs';
 import { map } from 'rxjs/operators';
 

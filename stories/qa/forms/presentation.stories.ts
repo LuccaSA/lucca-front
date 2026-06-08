@@ -21,7 +21,7 @@ import { RichTextInputComponent, RichTextInputToolbarComponent, RichTextPluginTa
 import { provideLuRichTextMarkdownFormatter } from '@lucca-front/ng/forms/rich-text-input/formatters/markdown';
 import { LuMultiSelectInputComponent } from '@lucca-front/ng/multi-select';
 import { LuSimpleSelectInputComponent } from '@lucca-front/ng/simple-select';
-import { applicationConfig, Meta, moduleMetadata, StoryObj } from '@storybook/angular';
+import { applicationConfig, Meta, moduleMetadata, StoryObj } from '@storybook/angular-vite';
 import { cleanupTemplate, generateInputs } from 'stories/helpers/stories';
 
 export default {

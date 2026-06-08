@@ -1,6 +1,6 @@
 import { ChangeDetectionStrategy, Component } from '@angular/core';
 import { BubbleIllustrationComponent, BubbleIllustrationList } from '@lucca-front/ng/bubble-illustration';
-import { Meta, StoryObj } from '@storybook/angular';
+import { Meta, StoryObj } from '@storybook/angular-vite';
 import { PaletteAllArgType } from 'stories/helpers/common-arg-types';
 
 @Component({

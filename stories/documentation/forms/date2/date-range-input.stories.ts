@@ -2,7 +2,7 @@ import { LOCALE_ID } from '@angular/core';
 import { FormsModule } from '@angular/forms';
 import { CalendarShortcut, DateRange, DateRangeInputComponent, PremadeShortcuts } from '@lucca-front/ng/date2';
 import { FormFieldComponent } from '@lucca-front/ng/form-field';
-import { applicationConfig, Meta, moduleMetadata, StoryObj } from '@storybook/angular';
+import { applicationConfig, Meta, moduleMetadata, StoryObj } from '@storybook/angular-vite';
 import { cleanupTemplate, generateInputs } from '../../../helpers/stories';
 import { StoryModelDisplayComponent } from '../../../helpers/story-model-display.component';
 

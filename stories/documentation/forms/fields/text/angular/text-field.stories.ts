@@ -4,7 +4,7 @@ import { FormsModule, ReactiveFormsModule } from '@angular/forms';
 import { BrowserAnimationsModule } from '@angular/platform-browser/animations';
 import { FormFieldComponent } from '@lucca-front/ng/form-field';
 import { TextInputComponent } from '@lucca-front/ng/forms';
-import { applicationConfig, Meta, moduleMetadata, StoryObj } from '@storybook/angular';
+import { applicationConfig, Meta, moduleMetadata, StoryObj } from '@storybook/angular-vite';
 import { HiddenArgType } from 'stories/helpers/common-arg-types';
 import { cleanupTemplate, createTestStory, generateInputs } from 'stories/helpers/stories';
 import { StoryModelDisplayComponent } from 'stories/helpers/story-model-display.component';

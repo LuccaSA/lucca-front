@@ -3,7 +3,7 @@ import { FormFieldComponent, InputFramedComponent } from '@lucca-front/ng/form-f
 import { CheckboxInputComponent, RadioComponent, RadioGroupInputComponent } from '@lucca-front/ng/forms';
 import { GridColumnComponent, GridComponent } from '@lucca-front/ng/grid';
 import { IconComponent } from '@lucca-front/ng/icon';
-import { Meta, moduleMetadata } from '@storybook/angular';
+import { Meta, moduleMetadata } from '@storybook/angular-vite';
 
 interface InputFramedBasicStory {
 	grid: boolean;

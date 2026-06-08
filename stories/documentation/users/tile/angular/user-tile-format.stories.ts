@@ -1,7 +1,7 @@
 import { ChangeDetectionStrategy, Component } from '@angular/core';
 import { provideAnimations } from '@angular/platform-browser/animations';
 import { LuUserDisplayModule, LuUserPictureModule, LuUserTileComponent, LuUserTileModule } from '@lucca-front/ng/user';
-import { applicationConfig, Meta, StoryObj } from '@storybook/angular';
+import { applicationConfig, Meta, StoryObj } from '@storybook/angular-vite';
 import { bob, patrick, squidwards } from '../../user.mocks';
 
 @Component({

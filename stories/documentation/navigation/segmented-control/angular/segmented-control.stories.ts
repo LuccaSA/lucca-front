@@ -1,7 +1,7 @@
 import { FormsModule } from '@angular/forms';
 import { NumericBadgeComponent } from '@lucca-front/ng/numeric-badge';
 import { SegmentedControlComponent, SegmentedControlFilterComponent } from '@lucca-front/ng/segmented-control';
-import { Meta, moduleMetadata, StoryObj } from '@storybook/angular';
+import { Meta, moduleMetadata, StoryObj } from '@storybook/angular-vite';
 import { StoryModelDisplayComponent } from 'stories/helpers/story-model-display.component';
 
 interface segmentedControlBasicStory {

@@ -1,4 +1,4 @@
-import { applicationConfig, Meta } from '@storybook/angular';
+import { applicationConfig, Meta } from '@storybook/angular-vite';
 import { LuMultiSelectInputComponent } from '@lucca-front/ng/multi-select';
 import { ChangeDetectionStrategy, Component, LOCALE_ID } from '@angular/core';
 import { provideAnimations } from '@angular/platform-browser/animations';

@@ -1,7 +1,7 @@
 import { provideRouter } from '@angular/router';
 import { HorizontalNavigationComponent, HorizontalNavigationLinkDirective } from '@lucca-front/ng/horizontal-navigation';
 import { NumericBadgeComponent } from '@lucca-front/ng/numeric-badge';
-import { applicationConfig, Meta, moduleMetadata } from '@storybook/angular';
+import { applicationConfig, Meta, moduleMetadata } from '@storybook/angular-vite';
 import { generateInputs } from 'stories/helpers/stories';
 
 export default {

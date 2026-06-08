@@ -3,7 +3,7 @@ import { provideAnimations } from '@angular/platform-browser/animations';
 import { IconComponent } from '@lucca-front/ng/icon';
 import { LuTooltipPanelComponent, LuTooltipTriggerDirective } from '@lucca-front/ng/tooltip';
 import { ButtonComponent } from '@lucca/prisme/button';
-import { applicationConfig, Meta, moduleMetadata, StoryObj } from '@storybook/angular';
+import { applicationConfig, Meta, moduleMetadata, StoryObj } from '@storybook/angular-vite';
 import { generateInputs } from '../../../helpers/stories';
 
 export default {

@@ -21,7 +21,7 @@ import { IconComponent } from '@lucca-front/ng/icon';
 import { LuSimpleSelectInputComponent } from '@lucca-front/ng/simple-select';
 import { TreeSelectDirective } from '@lucca-front/ng/tree-select';
 import { LuUserDisplayPipe, LuUserPictureComponent } from '@lucca-front/ng/user';
-import { applicationConfig, Meta, moduleMetadata } from '@storybook/angular';
+import { applicationConfig, Meta, moduleMetadata } from '@storybook/angular-vite';
 import { HiddenArgType } from 'stories/helpers/common-arg-types';
 import { createTestStory, getStoryGenerator, useDocumentationStory } from 'stories/helpers/stories';
 import { expect, screen, userEvent, within } from 'storybook/test';

@@ -4,7 +4,7 @@ import { BrowserAnimationsModule } from '@angular/platform-browser/animations';
 import { LuOptionDirective } from '@lucca-front/ng/core-select';
 import { FormFieldComponent } from '@lucca-front/ng/form-field';
 import { LuMultiSelectInputComponent } from '@lucca-front/ng/multi-select';
-import { Meta, moduleMetadata, StoryObj } from '@storybook/angular';
+import { Meta, moduleMetadata, StoryObj } from '@storybook/angular-vite';
 import { StoryModelDisplayComponent } from 'stories/helpers/story-model-display.component';
 import { HiddenArgType } from '../../../../../helpers/common-arg-types';
 import { generateInputs } from '../../../../../helpers/stories';

@@ -2,7 +2,7 @@ import { FormsModule } from '@angular/forms';
 import { BrowserAnimationsModule } from '@angular/platform-browser/animations';
 import { FormFieldComponent } from '@lucca-front/ng/form-field';
 import { TimePickerComponent } from '@lucca-front/ng/time';
-import { Meta, moduleMetadata, StoryObj } from '@storybook/angular';
+import { Meta, moduleMetadata, StoryObj } from '@storybook/angular-vite';
 import { StoryModelDisplayComponent } from 'stories/helpers/story-model-display.component';
 import { cleanupTemplate, generateInputs } from '../../../helpers/stories';
 

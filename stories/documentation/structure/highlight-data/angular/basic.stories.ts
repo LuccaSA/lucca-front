@@ -2,7 +2,7 @@ import { provideRouter } from '@angular/router';
 import { ButtonComponent } from '@lucca-front/ng/button';
 import { HighlightDataComponent } from '@lucca-front/ng/highlight-data';
 import { LinkComponent } from '@lucca-front/ng/link';
-import { applicationConfig, Meta, moduleMetadata, StoryObj } from '@storybook/angular';
+import { applicationConfig, Meta, moduleMetadata, StoryObj } from '@storybook/angular-vite';
 import { generateInputs } from 'stories/helpers/stories';
 export default {
 	title: 'Documentation/Structure/Highlight data/Angular/Basic',
