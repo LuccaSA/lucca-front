@@ -126,7 +126,7 @@ export abstract class ALuSelectInputComponent<TOption, TValue> implements OnDest
 
 	readonly loadingInput = input<boolean>(false, { alias: 'loading' });
 
-	readonly optionsInput = input<TOption[] | null>(null, { alias: 'options' });
+	readonly optionsInput = input<readonly TOption[] | null>(null, { alias: 'options' });
 
 	readonly optionComparerInput = input<LuOptionComparer<TOption>>(coreSelectDefaultOptionComparer, { alias: 'optionComparer' });
 
