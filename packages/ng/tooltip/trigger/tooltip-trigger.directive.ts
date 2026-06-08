@@ -20,7 +20,7 @@ import { LuTooltipPanelComponent } from '../panel';
 import { EllipsisRuler } from './ellipsis.ruler';
 
 export interface LuTooltipAnchorRef {
-	elementRef: ElementRef;
+	getElementRef(): ElementRef;
 }
 
 let nextId = 0;
@@ -370,8 +370,8 @@ export class LuTooltipTriggerDirective implements OnDestroy {
 
 		if (isNil(anchor)) {
 			return this.#host;
-		} else if ('elementRef' in anchor) {
-			return anchor.elementRef;
+		} else if ('getElementRef' in anchor) {
+			return anchor.getElementRef();
 		} else {
 			return anchor;
 		}
