@@ -91,8 +91,13 @@ runTask('Lucca Front compilation', async () => {
 		writeFile(path.join(OUTPUT_SCHEMATICS, 'package.json'), JSON.stringify({ type: 'commonjs' }, null, '\t'));
 
 		const npmIgnoreFile = path.join(OUTPUT_NG, '.npmignore');
-		const toIgnore = '!/schematics/lib/local-deps/package.json';
-		addLineToFile(npmIgnoreFile, toIgnore);
+		// ng-packagr generates `.npmignore` with `**/package.json` to strip nested
+		// package.json files used only for development. We need to negate that rule
+		// for the two package.json files that must ship with the published package:
+		// - schematics/package.json  → CommonJS module type override
+		// - schematics/lib/local-deps/package.json  → runtime dependency manifest for `npm ci`
+		addLineToFile(npmIgnoreFile, '!/schematics/package.json');
+		addLineToFile(npmIgnoreFile, '!/schematics/lib/local-deps/package.json');
 	});
 });
 
