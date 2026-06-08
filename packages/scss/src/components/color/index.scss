@@ -23,8 +23,8 @@
 			@include selected;
 		}
 
-		.optionItem.is-highlighted &,
-		[role='listbox'] .optionItem:hover & {
+		.lu-picker-panel:not(.is-withPointerNavigation) .optionItem.is-highlighted &,
+		.lu-picker-panel.is-withPointerNavigation [role='listbox'] .optionItem:hover & {
 			@include highlighted;
 		}
 	}
