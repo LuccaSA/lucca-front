@@ -90,7 +90,6 @@
     "@lucca-front/eslint-plugin": "workspace:*",
     "@lucca/stylelint-config-prisme": "file:packages/stylelint-config",
     "@mdx-js/loader": "^3.1.1",
-    "@ngneat/spectator": "^22.1.0",
     "@storybook/addon-a11y": "~10.1.9",
     "@storybook/addon-coverage": "~3.0.0",
     "@storybook/addon-docs": "~10.1.9",
