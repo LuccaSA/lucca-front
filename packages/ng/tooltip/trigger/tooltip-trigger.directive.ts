@@ -280,7 +280,7 @@ export class LuTooltipTriggerDirective implements OnDestroy {
 		this.#action.set('close');
 	}
 
-	onEscape(event: KeyboardEvent) {
+	onEscape(event: Event) {
 		event.stopPropagation();
 		this.#action.set(null);
 		this.closeTooltip();
