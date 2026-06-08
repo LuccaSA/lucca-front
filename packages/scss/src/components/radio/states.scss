@@ -4,7 +4,7 @@
 		cursor: default;
 
 		&::before {
-			border-color: var(--palettes-neutral-500);
+			border-color: var(--palettes-neutral-300);
 			border-width: 2px;
 			border-style: solid;
 		}
@@ -18,13 +18,13 @@
 @mixin disabledChecked {
 	~ .radio-label {
 		&::before {
-			border-color: var(--palettes-neutral-500); // disabled token candidate
+			border-color: var(--palettes-neutral-300); // disabled token candidate
 			border-width: 2px;
 			border-style: solid;
 		}
 
 		&::after {
-			background-color: var(--palettes-neutral-500); // disabled token candidate
+			background-color: var(--palettes-neutral-300); // disabled token candidate
 		}
 	}
 }
