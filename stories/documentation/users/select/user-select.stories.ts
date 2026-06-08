@@ -4,6 +4,9 @@ import { FormsModule } from '@angular/forms';
 import { provideAnimations } from '@angular/platform-browser/animations';
 import { ILuUser, LuUserSelectModule } from '@lucca-front/ng/user';
 import { applicationConfig, Meta, StoryObj } from '@storybook/angular';
+import { createTestStory } from 'stories/helpers/stories';
+import { waitForAngular } from 'stories/helpers/test';
+import { expect, userEvent, within } from 'storybook/test';
 
 @Component({
 	selector: 'user-select-stories',
@@ -67,3 +70,24 @@ Basic.parameters = {
 		},
 	},
 };
+
+export const BasicTEST = createTestStory(Basic, async ({ canvasElement, step }) => {
+	await waitForAngular();
+	const canvas = within(canvasElement);
+
+	await step('Vérifie le rendu initial', async () => {
+		const combobox = canvas.getByRole('combobox');
+		await expect(combobox).toBeVisible();
+	});
+
+	await step('Interaction clavier', async () => {
+		const combobox = canvas.getByRole('combobox');
+		combobox.focus();
+		await expect(combobox).toHaveFocus();
+		await userEvent.keyboard('{ArrowDown}');
+		await waitForAngular();
+		await userEvent.keyboard('{Escape}');
+		await waitForAngular();
+		await expect(combobox).toBeVisible();
+	});
+});

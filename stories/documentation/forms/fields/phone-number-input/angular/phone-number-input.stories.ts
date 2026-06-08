@@ -5,7 +5,9 @@ import { FORM_FIELD_SIZE, FormFieldComponent } from '@lucca-front/ng/form-field'
 import { PHONE_NUMBER_INPUT_AUTOCOMPLETE, PhoneNumberInputComponent } from '@lucca-front/ng/forms/phone-number-input';
 import { INLINE_MESSAGE_STATE } from '@lucca-front/ng/inline-message';
 import { applicationConfig, Meta, moduleMetadata, StoryObj } from '@storybook/angular';
-import { cleanupTemplate, generateInputs, setStoryOptions } from 'stories/helpers/stories';
+import { cleanupTemplate, createTestStory, generateInputs, setStoryOptions } from 'stories/helpers/stories';
+import { waitForAngular } from 'stories/helpers/test';
+import { expect, userEvent, within } from 'storybook/test';
 import { StoryModelDisplayComponent } from 'stories/helpers/story-model-display.component';
 
 export default {
@@ -127,3 +129,28 @@ export const Basic: StoryObj<PhoneNumberInputComponent & FormFieldComponent & { 
 		presentation: false,
 	},
 };
+
+export const BasicTEST = createTestStory(Basic, async ({ canvasElement, step }) => {
+	await waitForAngular();
+	const canvas = within(canvasElement);
+
+	await step('Vérifie le rendu initial', async () => {
+		const input = canvas.getByRole('textbox');
+		await expect(input).toBeVisible();
+	});
+
+	await step('Interaction souris - saisir un numéro de téléphone', async () => {
+		const input = canvas.getByRole('textbox');
+		await userEvent.clear(input);
+		await userEvent.type(input, '2125550199');
+		await waitForAngular();
+	});
+
+	await step('Interaction clavier - focus et saisie', async () => {
+		const input = canvas.getByRole('textbox');
+		await userEvent.clear(input);
+		input.focus();
+		await userEvent.keyboard('9876543210');
+		await waitForAngular();
+	});
+});

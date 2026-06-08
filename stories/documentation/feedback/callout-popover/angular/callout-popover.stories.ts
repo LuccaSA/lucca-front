@@ -1,4 +1,4 @@
-import { BrowserAnimationsModule } from '@angular/platform-browser/animations';
+﻿import { BrowserAnimationsModule } from '@angular/platform-browser/animations';
 import { ButtonComponent } from '@lucca-front/ng/button';
 import {
 	CALLOUT_POPOVER_SIZE,
@@ -10,7 +10,9 @@ import {
 } from '@lucca-front/ng/callout';
 import { PALETTE } from '@lucca/prisme/core';
 import { Meta, moduleMetadata, StoryObj } from '@storybook/angular';
-import { generateInputs, setStoryOptions } from 'stories/helpers/stories';
+import { createTestStory, generateInputs, setStoryOptions } from 'stories/helpers/stories';
+import { waitForAngular } from 'stories/helpers/test';
+import { expect, screen, userEvent, within } from 'storybook/test';
 
 export default {
 	title: 'Documentation/Feedback/Callout Popover/Angular',
@@ -144,3 +146,44 @@ export const Template: StoryObj<CalloutPopoverComponent & { items: number; custo
 		openDelay: 50,
 	},
 };
+
+export const TemplateTEST = createTestStory(Template, async ({ canvasElement, step }) => {
+	await waitForAngular();
+	const canvas = within(canvasElement);
+
+	await step('Vérifie le rendu initial du bouton déclencheur', async () => {
+		const button = canvas.getByRole('button');
+		await expect(button).toBeVisible();
+	});
+
+	await step('Interaction souris - ouverture du popover', async () => {
+		const button = canvas.getByRole('button');
+		await userEvent.click(button);
+		await waitForAngular();
+		const popoverContent = screen.getByRole('list');
+		await expect(popoverContent).toBeVisible();
+	});
+
+	await step('Interaction souris - fermeture du popover', async () => {
+		const button = canvas.getByRole('button');
+		await userEvent.click(button);
+		await waitForAngular();
+		await expect(screen.queryByRole('list')).not.toBeInTheDocument();
+	});
+
+	await step('Interaction clavier - ouverture avec Entrée', async () => {
+		const button = canvas.getByRole('button');
+		button.focus();
+		await expect(button).toHaveFocus();
+		await userEvent.keyboard('{Enter}');
+		await waitForAngular();
+		const popoverContent = screen.getByRole('list');
+		await expect(popoverContent).toBeVisible();
+	});
+
+	await step('Interaction clavier - fermeture avec Escape', async () => {
+		await userEvent.keyboard('{Escape}');
+		await waitForAngular();
+		await expect(screen.queryByRole('list')).not.toBeInTheDocument();
+	});
+});

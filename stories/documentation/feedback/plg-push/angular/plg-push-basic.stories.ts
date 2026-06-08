@@ -1,7 +1,9 @@
 import { IconComponent } from '@lucca-front/ng/icon';
 import { PLGPushComponent } from '@lucca-front/ng/plg-push';
-import { Meta, StoryObj, moduleMetadata } from '@storybook/angular';
-import { generateInputs } from 'stories/helpers/stories';
+import { Meta, moduleMetadata, StoryObj } from '@storybook/angular';
+import { createTestStory, generateInputs } from 'stories/helpers/stories';
+import { waitForAngular } from 'stories/helpers/test';
+import { expect, userEvent, within } from 'storybook/test';
 
 export default {
 	title: 'Documentation/Feedback/PLG Push/Angular/Basic',
@@ -41,3 +43,26 @@ export const Template: StoryObj<PLGPushComponent> = {
 		heading: ``,
 	},
 };
+
+export const TemplateTEST = createTestStory({ ...Template, args: { ...Template.args, removable: true } }, async ({ canvasElement, step }) => {
+	await waitForAngular();
+	const canvas = within(canvasElement);
+
+	await step('Vérifie le rendu du composant', async () => {
+		const plgPush = canvasElement.querySelector('lu-plg-push');
+		await expect(plgPush).toBeInTheDocument();
+		await expect(canvas.getByText(/Bénéficiez de toutes les options/)).toBeVisible();
+	});
+
+	await step('Vérifie le bouton de fermeture (removable)', async () => {
+		const closeButton = canvas.getByRole('button');
+		await expect(closeButton).toBeVisible();
+	});
+
+	await step('Interaction souris - fermeture du composant', async () => {
+		const closeButton = canvas.getByRole('button');
+		await userEvent.click(closeButton);
+		await waitForAngular();
+		await expect(canvasElement.querySelector('.plgPush')).not.toBeInTheDocument();
+	});
+});

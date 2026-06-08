@@ -386,6 +386,34 @@ export const AI: StoryObj<FormFieldComponent & TextInputComponent> = {
 	},
 };
 
+export const BasicTEST = createTestStory(Basic, async ({ canvasElement, step }) => {
+	await waitForAngular();
+	const canvas = within(canvasElement);
+
+	await step('Vérifie le rendu initial', async () => {
+		const input = canvas.getByRole('textbox');
+		await expect(input).toBeVisible();
+		await expect(input).toHaveValue('Example value');
+	});
+
+	await step('Interaction souris - saisir du texte', async () => {
+		const input = canvas.getByRole('textbox');
+		await userEvent.clear(input);
+		await userEvent.type(input, 'Nouveau texte');
+		await waitForAngular();
+		await expect(input).toHaveValue('Nouveau texte');
+	});
+
+	await step('Interaction clavier - focus et saisie', async () => {
+		const input = canvas.getByRole('textbox');
+		await userEvent.clear(input);
+		input.focus();
+		await userEvent.keyboard('Texte clavier');
+		await waitForAngular();
+		await expect(input).toHaveValue('Texte clavier');
+	});
+});
+
 export const BasicPasswordVisibilityTEST = createTestStory(PasswordVisiblity, async (context) => {
 	const canvas = within(context.canvasElement);
 	await waitForAngular();

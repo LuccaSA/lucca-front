@@ -1,8 +1,10 @@
 import { ButtonComponent } from '@lucca-front/ng/button';
 import { CALLOUT_SIZE, CalloutDisclosureComponent, CalloutFeedbackItemComponent, CalloutFeedbackItemDescriptionDirective, CalloutFeedbackListComponent, CalloutStates } from '@lucca-front/ng/callout';
 import { PALETTE } from '@lucca/prisme/core';
-import { Meta, StoryObj, moduleMetadata } from '@storybook/angular';
-import { generateInputs, setStoryOptions } from 'stories/helpers/stories';
+import { Meta, moduleMetadata, StoryObj } from '@storybook/angular';
+import { createTestStory, generateInputs, setStoryOptions } from 'stories/helpers/stories';
+import { waitForAngular } from 'stories/helpers/test';
+import { expect, userEvent, within } from 'storybook/test';
 
 export default {
 	title: 'Documentation/Feedback/Callout Disclosure/Angular',
@@ -81,3 +83,49 @@ export const Template: StoryObj<CalloutDisclosureComponent> = {
 		open: false,
 	},
 };
+
+export const TemplateTEST = createTestStory(Template, async ({ canvasElement, step }) => {
+	await waitForAngular();
+	const canvas = within(canvasElement);
+
+	await step('Vérifie le rendu initial (fermé)', async () => {
+		const summary = canvas.getByRole('button');
+		await expect(summary).toBeVisible();
+		const details = canvasElement.querySelector('details');
+		await expect(details).not.toHaveAttribute('open');
+	});
+
+	await step('Interaction souris - ouverture', async () => {
+		const summary = canvas.getByRole('button');
+		await userEvent.click(summary);
+		await waitForAngular();
+		const details = canvasElement.querySelector('details');
+		await expect(details).toHaveAttribute('open');
+	});
+
+	await step('Interaction souris - fermeture', async () => {
+		const summary = canvas.getByRole('button');
+		await userEvent.click(summary);
+		await waitForAngular();
+		const details = canvasElement.querySelector('details');
+		await expect(details).not.toHaveAttribute('open');
+	});
+
+	await step('Interaction clavier - ouverture avec Entrée', async () => {
+		const summary = canvas.getByRole('button');
+		summary.focus();
+		await expect(summary).toHaveFocus();
+		await userEvent.keyboard('{Enter}');
+		await waitForAngular();
+		const details = canvasElement.querySelector('details');
+		await expect(details).toHaveAttribute('open');
+	});
+
+	await step('Interaction clavier - fermeture avec Entrée', async () => {
+		const summary = canvas.getByRole('button');
+		await userEvent.keyboard('{Enter}');
+		await waitForAngular();
+		const details = canvasElement.querySelector('details');
+		await expect(details).not.toHaveAttribute('open');
+	});
+});

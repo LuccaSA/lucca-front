@@ -1,10 +1,13 @@
 import { ChangeDetectionStrategy, Component, OnDestroy, OnInit, TemplateRef } from '@angular/core';
 import { FormsModule } from '@angular/forms';
 import { provideAnimations } from '@angular/platform-browser/animations';
-import { LuToastInput, LuToastType, LuToastsComponent, LuToastsService, defaultToastDuration } from '@lucca-front/ng/toast';
-import { Meta, StoryObj, applicationConfig } from '@storybook/angular';
+import { defaultToastDuration, LuToastInput, LuToastsComponent, LuToastsService, LuToastType } from '@lucca-front/ng/toast';
+import { applicationConfig, Meta, StoryObj } from '@storybook/angular';
 import { Observable, ReplaySubject, Subject } from 'rxjs';
 import { map } from 'rxjs/operators';
+import { createTestStory } from 'stories/helpers/stories';
+import { waitForAngular } from 'stories/helpers/test';
+import { expect, userEvent, within } from 'storybook/test';
 
 @Component({
 	selector: 'toasts-stories',
@@ -46,6 +49,10 @@ class ToastsStory implements OnInit, OnDestroy {
 		this.error$.next(this.getRandomMessage());
 	}
 
+	onClickButtonInsideToast() {
+		this.createToast('Info');
+	}
+
 	private getRandomMessage(): string {
 		const toastsValues = [
 			'Lorem ipsum',
@@ -63,10 +70,6 @@ class ToastsStory implements OnInit, OnDestroy {
 
 		const random = Math.floor(Math.random() * toastsValues.length);
 		return toastsValues[random];
-	}
-
-	onClickButtonInsideToast() {
-		this.createToast('Info');
 	}
 }
 
@@ -124,3 +127,20 @@ Basic.parameters = {
 	},
 	controls: { include: [] },
 };
+
+export const BasicTEST = createTestStory(Basic, async ({ canvasElement, step }) => {
+	await waitForAngular();
+	const canvas = within(canvasElement);
+
+	await step('Affiche un toast persistant', async () => {
+		await userEvent.click(canvas.getByRole('button', { name: 'Toast sans auto kill' }));
+		await waitForAngular();
+		await expect(canvas.getByRole('button', { name: 'Fermer' })).toBeVisible();
+	});
+
+	await step('Ferme le toast', async () => {
+		await userEvent.click(canvas.getByRole('button', { name: 'Fermer' }));
+		await waitForAngular();
+		await expect(canvas.queryByRole('button', { name: 'Fermer' })).not.toBeInTheDocument();
+	});
+});

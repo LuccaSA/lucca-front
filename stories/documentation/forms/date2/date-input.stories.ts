@@ -4,8 +4,10 @@ import { CALENDAR_MODE, DATE2_CLEAR_BEHAVIOR, DATE_FORMAT_CONST, DateInputCompon
 import { FormFieldComponent } from '@lucca-front/ng/form-field';
 import { IconComponent } from '@lucca-front/ng/icon';
 import { applicationConfig, Meta, moduleMetadata, StoryObj } from '@storybook/angular';
-import { generateInputs, setStoryOptions } from '../../../helpers/stories';
+import { createTestStory, generateInputs, setStoryOptions } from '../../../helpers/stories';
 import { StoryModelDisplayComponent } from '../../../helpers/story-model-display.component';
+import { waitForAngular } from '../../../helpers/test';
+import { expect, screen, userEvent, within } from 'storybook/test';
 
 export default {
 	title: 'Documentation/Forms/Date2/DateInput',
@@ -133,3 +135,31 @@ export const StartFromYear: StoryObj<DateInputComponent & { selected: Date; pres
 		selected: null,
 	},
 };
+
+export const BasicTEST = createTestStory(Basic, async ({ canvasElement, step }) => {
+	await waitForAngular();
+	const canvas = within(canvasElement);
+	const input = canvas.getByTestId('lu-date-input');
+
+	await step('Vérifie le rendu initial', async () => {
+		await expect(input).toBeVisible();
+	});
+
+	await step('Interaction souris - ouverture du calendrier', async () => {
+		await userEvent.click(input);
+		await waitForAngular();
+		await expect(screen.getByRole('grid')).toBeVisible();
+		await userEvent.keyboard('{Escape}');
+		await waitForAngular();
+	});
+
+	await step('Interaction clavier - ouverture du calendrier', async () => {
+		input.focus();
+		await expect(input).toHaveFocus();
+		await userEvent.keyboard('{ArrowDown}');
+		await waitForAngular();
+		await expect(screen.getByRole('grid')).toBeVisible();
+		await userEvent.keyboard('{Escape}');
+		await waitForAngular();
+	});
+});

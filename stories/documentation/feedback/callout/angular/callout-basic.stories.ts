@@ -4,7 +4,9 @@ import { IconComponent } from '@lucca-front/ng/icon';
 import { PALETTE } from '@lucca/prisme/core';
 import { Meta, moduleMetadata, StoryObj } from '@storybook/angular';
 import { HiddenArgType } from 'stories/helpers/common-arg-types';
-import { generateInputs, setStoryOptions } from 'stories/helpers/stories';
+import { createTestStory, generateInputs, setStoryOptions } from 'stories/helpers/stories';
+import { waitForAngular } from 'stories/helpers/test';
+import { expect, userEvent, within } from 'storybook/test';
 
 export default {
 	title: 'Documentation/Feedback/Callout/Angular/Basic',
@@ -116,3 +118,26 @@ export const Template: StoryObj<CalloutComponent & { actions: boolean; actionsIn
 		actionsInline: false,
 	},
 };
+
+export const TemplateTEST = createTestStory({ ...Template, args: { ...Template.args, removable: true } }, async ({ canvasElement, step }) => {
+	await waitForAngular();
+	const canvas = within(canvasElement);
+
+	await step('Vérifie le rendu initial', async () => {
+		const callout = canvasElement.querySelector('lu-callout');
+		await expect(callout).toBeInTheDocument();
+		await expect(canvas.getByText('Feedback description')).toBeVisible();
+	});
+
+	await step('Vérifie le bouton de fermeture (removable)', async () => {
+		const closeButton = canvas.getByRole('button');
+		await expect(closeButton).toBeVisible();
+	});
+
+	await step('Interaction souris - fermeture du callout', async () => {
+		const closeButton = canvas.getByRole('button');
+		await userEvent.click(closeButton);
+		await waitForAngular();
+		await expect(canvasElement.querySelector('.callout')).not.toBeInTheDocument();
+	});
+});
