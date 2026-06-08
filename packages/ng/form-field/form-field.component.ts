@@ -22,7 +22,7 @@ import {
 } from '@angular/core';
 import { AbstractControl, NgControl, ReactiveFormsModule, RequiredValidator, Validators } from '@angular/forms';
 import { SafeHtml } from '@angular/platform-browser';
-import { intlInputOptions, LuClass, PortalContent, PortalDirective, ɵeffectWithDeps } from '@lucca-front/ng/core';
+import { intlInputOptions, isNotNil, LuClass, PortalContent, PortalDirective, ɵeffectWithDeps } from '@lucca-front/ng/core';
 import { LU_FORM_INSTANCE } from '@lucca-front/ng/form';
 import { FormLabelComponent } from '@lucca-front/ng/form-label';
 import { IconComponent } from '@lucca-front/ng/icon';
@@ -65,7 +65,7 @@ export class FormFieldComponent implements OnDestroy, DoCheck {
 	#renderer = inject(Renderer2);
 	protected parentForm = inject(LU_FORM_INSTANCE, { optional: true });
 
-	framed = inject(INPUT_FRAMED_INSTANCE, { optional: true }) !== null;
+	readonly framed = inject(INPUT_FRAMED_INSTANCE, { optional: true }) !== null;
 
 	readonly formFieldChildren = contentChildren(FormFieldComponent, { descendants: true });
 
@@ -78,8 +78,8 @@ export class FormFieldComponent implements OnDestroy, DoCheck {
 	readonly ownRequiredValidators = computed(() => this.requiredValidators().filter((c) => !this.ignoredRequiredValidators().has(c)));
 	readonly ownControls = computed(() => this.ngControls().filter((c) => !this.ignoredControls().has(c)));
 
-	#hasInputRequired = signal(false);
-	forceInputRequired = signal(false);
+	readonly #hasInputRequired = signal(false);
+	readonly forceInputRequired = signal(false);
 	readonly isInputRequired = computed(() => this.forceInputRequired() || this.#hasInputRequired());
 
 	readonly label = input.required<PortalContent>();
@@ -89,9 +89,9 @@ export class FormFieldComponent implements OnDestroy, DoCheck {
 	 */
 	readonly hiddenLabel = input(false, { transform: booleanAttribute });
 
-	rolePresentationLabel = model(false);
+	readonly rolePresentationLabel = model(false);
 
-	labelIsPresentation = computed(() => this.rolePresentationLabel() || this.presentation());
+	readonly labelIsPresentation = computed(() => this.rolePresentationLabel() || this.presentation());
 
 	readonly inline = input(false, { transform: booleanAttribute });
 
@@ -105,14 +105,14 @@ export class FormFieldComponent implements OnDestroy, DoCheck {
 	readonly iconAItooltip = input<string | null>(null);
 	readonly iconAIalt = input<string | null>(null);
 
-	readonly width = input<FormFieldWidth, FormFieldWidth | `${FormFieldWidth}` | null>(null, {
+	readonly width = input<FormFieldWidth | null, FormFieldWidth | `${FormFieldWidth}` | null>(null, {
 		transform: numberAttribute as (value: FormFieldWidth | `${FormFieldWidth}`) => FormFieldWidth,
 	});
 
-	#invalidStatus = signal(false);
+	readonly #invalidStatus = signal(false);
 	invalidStatus = this.#invalidStatus.asReadonly();
 
-	invalid = input<boolean | null, boolean>(null, { transform: booleanAttribute });
+	readonly invalid = input<boolean | null, boolean>(null, { transform: booleanAttribute });
 
 	readonly inlineMessage = input<PortalContent | null>(null);
 
@@ -164,9 +164,9 @@ export class FormFieldComponent implements OnDestroy, DoCheck {
 		return this.#inputs;
 	}
 
-	id = signal<string>('');
+	readonly id = signal<string>('');
 
-	ready$ = new BehaviorSubject<boolean>(false);
+	readonly ready$ = new BehaviorSubject<boolean>(false);
 
 	public get ready(): boolean {
 		return this.ready$.value;
@@ -262,9 +262,9 @@ export class FormFieldComponent implements OnDestroy, DoCheck {
 	}
 
 	#hasInvalidStatus(): boolean {
-		const isInvalidOverride = this.invalid() !== undefined && this.invalid() !== null;
+		const isInvalidOverride = isNotNil(this.invalid());
 		if (isInvalidOverride) {
-			return this.invalid();
+			return this.invalid() ?? false;
 		}
 		const statusControlOverride = this.statusControl();
 		if (statusControlOverride) {

@@ -48,7 +48,7 @@ export class TimePickerComponent extends BasePickerComponent {
 
 	readonly postMeridiemRef = viewChild<ElementRef<HTMLInputElement>>('postMeridiemRef');
 
-	value = model<ISO8601Time>('--:--:--');
+	readonly value = model<ISO8601Time>('--:--:--');
 	readonly max = input<ISO8601Time>(MAX_TIME);
 
 	readonly displayArrows = input(false, { transform: booleanAttribute });
@@ -72,7 +72,7 @@ export class TimePickerComponent extends BasePickerComponent {
 
 	readonly timeChange = output<TimeChangeEvent>();
 
-	protected readonly hoursDisplay = computed(() => getHoursDisplayPartFromIsoTime(this.value(), this.enableMeridiemDisplay()));
+	protected readonly hoursDisplay = computed(() => getHoursDisplayPartFromIsoTime(this.value(), this.enableMeridiemDisplay() ?? false));
 	protected readonly minutesDisplay = computed(() => getMinutesDisplayPartFromIsoTime(this.value()));
 
 	protected readonly hours = computed(() => getHoursPartFromIsoTime(this.value()));
@@ -85,7 +85,7 @@ export class TimePickerComponent extends BasePickerComponent {
 			[`mod-${this.size()}`]: Boolean(this.size()),
 		};
 	});
-	protected separator = computed(() => this.intl().timePickerTimeSeparator);
+	protected readonly separator = computed(() => this.intl().timePickerTimeSeparator);
 
 	protected hoursDecimalConf = DEFAULT_TIME_DECIMAL_PIPE_FORMAT;
 

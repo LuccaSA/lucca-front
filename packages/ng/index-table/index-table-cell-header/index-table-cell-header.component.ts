@@ -38,17 +38,17 @@ const SORT_VALUES = ['none', 'ascending', 'descending'] as const;
 	changeDetection: ChangeDetectionStrategy.OnPush,
 })
 export class IndexTableRowCellHeaderComponent extends BaseIndexTableCell {
-	elementRef = inject<ElementRef<HTMLTableCellElement>>(ElementRef);
+	readonly elementRef = inject<ElementRef<HTMLTableCellElement>>(ElementRef);
 
-	sort = model<null | 'none' | 'ascending' | 'descending'>(null);
-	selectable = input(false, { transform: booleanAttribute });
-	hiddenLabel = input(false, { transform: booleanAttribute });
-	actions = input(false, { transform: booleanAttribute });
-	inlineSize = input(0, { transform: numberAttribute });
+	readonly sort = model<null | 'none' | 'ascending' | 'descending'>(null);
+	readonly selectable = input(false, { transform: booleanAttribute });
+	readonly hiddenLabel = input(false, { transform: booleanAttribute });
+	readonly actions = input(false, { transform: booleanAttribute });
+	readonly inlineSize = input(0, { transform: numberAttribute });
 
 	toggleSort(): void {
 		if (this.sort()) {
-			this.sort.set(SORT_VALUES[(SORT_VALUES.indexOf(this.sort()) + 1) % SORT_VALUES.length]);
+			this.sort.set(SORT_VALUES[(SORT_VALUES.indexOf(this.sort() ?? 'none') + 1) % SORT_VALUES.length]);
 		}
 	}
 }

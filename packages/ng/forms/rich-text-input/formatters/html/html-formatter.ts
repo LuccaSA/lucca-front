@@ -11,25 +11,26 @@ export class HtmlFormatter extends RichTextFormatter {
 	}
 
 	override parse(editor: LexicalEditor, htmlString?: string | null): void {
-		const parser = new DOMParser();
-		const dom = parser.parseFromString(
-			DOMPurify.sanitize(htmlString, {
-				FORBID_ATTR: ['style', 'class'],
-			}),
-			'text/html',
-		);
+		if (htmlString) {
+			const parser = new DOMParser();
+			const dom = parser.parseFromString(
+				DOMPurify.sanitize(htmlString, {
+					FORBID_ATTR: ['style', 'class'],
+				}),
+				'text/html',
+			);
+			editor.update(() => {
+				// Once you have the DOM instance it's easy to generate LexicalNodes.
+				const nodes = $generateNodesFromDOM(editor, dom);
 
-		editor.update(() => {
-			// Once you have the DOM instance it's easy to generate LexicalNodes.
-			const nodes = $generateNodesFromDOM(editor, dom);
+				// Select the root
+				$getRoot().clear();
+				$getRoot().select();
 
-			// Select the root
-			$getRoot().clear();
-			$getRoot().select();
-
-			// Insert them at a selection.
-			$insertNodes(nodes);
-		});
+				// Insert them at a selection.
+				$insertNodes(nodes);
+			});
+		}
 	}
 
 	override format(editor: LexicalEditor): string {

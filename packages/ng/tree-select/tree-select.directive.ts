@@ -8,9 +8,9 @@ import { ALuSelectInputComponent, TreeGenerator, TreeGroupingFn, TreeNode } from
 export class TreeSelectDirective<T, V> implements TreeGenerator<T, TreeNode<T>> {
 	#select = inject<ALuSelectInputComponent<T, V>>(ALuSelectInputComponent);
 
-	groupingFnInput = input.required<TreeGroupingFn<T>>({ alias: 'treeSelect' });
+	readonly groupingFnInput = input.required<TreeGroupingFn<T>>({ alias: 'treeSelect' });
 
-	groupingFn = linkedSignal(() => this.groupingFnInput());
+	readonly groupingFn = linkedSignal(() => this.groupingFnInput());
 
 	constructor() {
 		this.#select.treeGenerator = this;
@@ -29,9 +29,9 @@ export class TreeSelectDirective<T, V> implements TreeGenerator<T, TreeNode<T>> 
 					// item already in resultset
 					continue;
 				}
-				let parent: T | null;
+				let parent: T | null = null;
 				if (parentCache.has(item)) {
-					parent = parentCache.get(item);
+					parent = parentCache.get(item) ?? null;
 				} else {
 					parent = this.groupingFn()(item, items);
 					parentCache.set(item, parent);
@@ -46,9 +46,10 @@ export class TreeSelectDirective<T, V> implements TreeGenerator<T, TreeNode<T>> 
 					itemToNode.set(item, itemNode);
 					handled.push(item);
 				} else {
+					const parentNode = itemToNode.get(parent);
 					// If the parent is already in the resultset, we can add this
-					if (itemToNode.has(parent)) {
-						itemToNode.get(parent).children.push(itemNode);
+					if (parentNode) {
+						parentNode.children?.push(itemNode);
 						itemToNode.set(item, itemNode);
 						handled.push(item);
 					}
