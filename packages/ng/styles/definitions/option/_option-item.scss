@@ -76,33 +76,17 @@
 					border-end-end-radius: var(--pr-t-border-radius-default);
 				}
 
-				:host-context(.lu-picker-panel.is-withPointerNavigation) & {
-					&:hover {
-						background-color: var(--palettes-100, var(--palettes-product-100));
-					}
+				:host-context(.is-highlighted) & {
+					background-color: var(--palettes-100, var(--palettes-product-100));
 				}
 
 				&:active {
 					background-color: var(--palettes-200, var(--palettes-product-200));
 				}
-
-				:host-context(.is-highlighted) & {
-					:host-context(.lu-picker-panel:not(.is-withPointerNavigation)) & {
-						background-color: var(--palettes-100, var(--palettes-product-100));
-					}
-				}
-			}
-
-			:host-context(.lu-picker-panel.is-withPointerNavigation) & {
-				&:hover {
-					background-color: var(--palettes-neutral-50);
-				}
 			}
 
 			:host-context(.is-highlighted) & {
-				:host-context(.lu-picker-panel:not(.is-withPointerNavigation)) & {
-					background-color: var(--palettes-neutral-50);
-				}
+				background-color: var(--palettes-neutral-50);
 			}
 
 			&:active {
@@ -202,19 +186,9 @@
 					--components-options-checkbox-border-color: var(--palettes-neutral-500); // disabled token candidate
 				}
 
-				&:not(.is-disabled):hover {
-					:host-context(.lu-picker-panel.is-withPointerNavigation) & {
-						&::before {
-							box-shadow: inset 0 0 0 2px var(--components-options-checkbox-color);
-						}
-					}
-				}
-
-				:host-context(.is-highlighted) & {
-					:host-context(.lu-picker-panel:not(.is-withPointerNavigation)) & {
-						&::before {
-							box-shadow: inset 0 0 0 2px var(--components-options-checkbox-color);
-						}
+				:host-context(.is-highlighted) &:not(.is-disabled) {
+					&::before {
+						box-shadow: inset 0 0 0 2px var(--components-options-checkbox-color);
 					}
 				}
 			}
