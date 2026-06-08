@@ -76,7 +76,7 @@
 					border-end-end-radius: var(--pr-t-border-radius-default);
 				}
 
-				:host-context(.is-highlighted) & {
+				:host-context(.optionItem.is-highlighted) & {
 					background-color: var(--palettes-100, var(--palettes-product-100));
 				}
 
@@ -85,7 +85,7 @@
 				}
 			}
 
-			:host-context(.is-highlighted) & {
+			:host-context(.optionItem.is-highlighted) & {
 				background-color: var(--palettes-neutral-50);
 			}
 
@@ -112,7 +112,7 @@
 
 			@layer mods {
 				&:hover,
-				:host-context(.is-highlighted) & {
+				:host-context(.optionItem.is-highlighted) & {
 					background-color: inherit;
 				}
 			}
@@ -186,7 +186,7 @@
 					--components-options-checkbox-border-color: var(--palettes-neutral-500); // disabled token candidate
 				}
 
-				:host-context(.is-highlighted) &:not(.is-disabled) {
+				:host-context(.optionItem.is-highlighted) &:not(.is-disabled) {
 					&::before {
 						box-shadow: inset 0 0 0 2px var(--components-options-checkbox-color);
 					}

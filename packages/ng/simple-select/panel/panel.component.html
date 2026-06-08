@@ -7,7 +7,7 @@
 	};
 	as ctx
 ) {
-	<div class="lu-picker-panel lu-option-picker-panel" [class.is-withPointerNavigation]="pointerNavigation()" cdkTrapFocus>
+	<div class="lu-picker-panel lu-option-picker-panel" cdkTrapFocus>
 		<div class="lu-picker-content" [class.is-loading]="loading()" (scroll)="onScroll($event)">
 			@if (selectInput.panelHeaderTpl(); as tpl) {
 				<div>
