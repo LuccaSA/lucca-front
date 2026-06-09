@@ -35,3 +35,11 @@
 @mixin narrow {
 	--components-fieldset-title-content-flexWrap: wrap;
 }
+
+@mixin hiddenLegend {
+	--components-fieldset-gap: 0;
+
+	.fieldset-title-content-text {
+		@include a11y.mask;
+	}
+}

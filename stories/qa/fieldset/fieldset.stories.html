@@ -16,60 +16,64 @@
 					<fieldset class="fieldset" aria-labelledby="fieldsetTitleContent">
 						<legend class="fieldset-title">
 							<span class="fieldset-title-content" id="fieldsetTitleContent">
+								<span class="fieldset-title-content-text">Fieldset title</span>
+							</span>
+						</legend>
+						<div class="fieldset-content">Content</div>
+					</fieldset>
+				</div>
+			</td>
+			<td>
+				<div class="demo-QAtable-list">
+					<lu-fieldset heading="Fieldset title">Content</lu-fieldset>
+				</div>
+			</td>
+		</tr>
+		<tr>
+			<td>Helper</td>
+			<td>
+				<div class="demo-QAtable-list">
+					<fieldset class="fieldset" aria-labelledby="fieldsetTitleContent">
+						<legend class="fieldset-title">
+							<span class="fieldset-title-content" id="fieldsetTitleContent">
 								<span class="fieldset-title-content-text">
 									Fieldset title
 									<span class="fieldset-title-content-text-helper">Helper message</span>
 								</span>
 							</span>
 						</legend>
-						<div class="fieldset-content">
-							<div class="grid mod-form">
-								<div class="grid-column" style="--grid-colspanAtMediaMinXXS: 2">
-									<div class="form-field">
-										<label class="formLabel" id="IDlabel1" for="ID1">Label</label>
-										<div class="textField">
-											<div class="textField-input">
-												<input type="text" id="ID1" class="textField-input-value" aria-labelledby="IDlabel1" />
-											</div>
-										</div>
-									</div>
-								</div>
-								<div class="grid-column" style="--grid-colspanAtMediaMinXXS: 2">
-									<div class="form-field">
-										<label class="formLabel" id="IDlabel2" for="ID2">Label</label>
-										<div class="textField">
-											<div class="textField-input">
-												<input type="text" id="ID2" class="textField-input-value" aria-labelledby="IDlabel2" />
-											</div>
-										</div>
-									</div>
-								</div>
-							</div>
-						</div>
+						<div class="fieldset-content">Content</div>
 					</fieldset>
 				</div>
 			</td>
 			<td>
 				<div class="demo-QAtable-list">
-					<lu-fieldset helper="Helper message" heading="Fieldset title">
-						<div class="grid mod-form">
-							<div class="grid-column" style="--grid-colspanAtMediaMinXXS: 2">
-								<lu-form-field label="Label">
-									<lu-text-input ngModel />
-								</lu-form-field>
-							</div>
-							<div class="grid-column" style="--grid-colspanAtMediaMinXXS: 2">
-								<lu-form-field label="Label">
-									<lu-text-input ngModel />
-								</lu-form-field>
-							</div>
-						</div>
-					</lu-fieldset>
+					<lu-fieldset helper="Helper message" heading="Fieldset title">Content</lu-fieldset>
 				</div>
 			</td>
 		</tr>
 		<tr>
-			<td>Small</td>
+			<td>Hidden Legend</td>
+			<td>
+				<div class="demo-QAtable-list">
+					<fieldset class="fieldset mod-hiddenLegend" aria-labelledby="fieldsetTitleContent">
+						<legend class="fieldset-title">
+							<span class="fieldset-title-content" id="fieldsetTitleContent">
+								<span class="fieldset-title-content-text">Fieldset title</span>
+							</span>
+						</legend>
+						<div class="fieldset-content">Content</div>
+					</fieldset>
+				</div>
+			</td>
+			<td>
+				<div class="demo-QAtable-list">
+					<lu-fieldset heading="Fieldset title" hiddenLegend>Content</lu-fieldset>
+				</div>
+			</td>
+		</tr>
+		<tr>
+			<td>Small and helper</td>
 			<td>
 				<div class="demo-QAtable-list">
 					<fieldset class="fieldset mod-S" aria-labelledby="fieldsetTitleContentSmall">
@@ -81,49 +85,13 @@
 								</span>
 							</span>
 						</legend>
-						<div class="fieldset-content">
-							<div class="grid mod-form">
-								<div class="grid-column" style="--grid-colspanAtMediaMinXXS: 2">
-									<div class="form-field">
-										<label class="formLabel" id="IDlabel1" for="ID1">Label</label>
-										<div class="textField">
-											<div class="textField-input">
-												<input type="text" id="ID1" class="textField-input-value" aria-labelledby="IDlabel1" />
-											</div>
-										</div>
-									</div>
-								</div>
-								<div class="grid-column" style="--grid-colspanAtMediaMinXXS: 2">
-									<div class="form-field">
-										<label class="formLabel" id="IDlabel2" for="ID2">Label</label>
-										<div class="textField">
-											<div class="textField-input">
-												<input type="text" id="ID2" class="textField-input-value" aria-labelledby="IDlabel2" />
-											</div>
-										</div>
-									</div>
-								</div>
-							</div>
-						</div>
+						<div class="fieldset-content">Content</div>
 					</fieldset>
 				</div>
 			</td>
 			<td>
 				<div class="demo-QAtable-list">
-					<lu-fieldset size="S" helper="Helper message" heading="Fieldset title">
-						<div class="grid mod-form">
-							<div class="grid-column" style="--grid-colspanAtMediaMinXXS: 2">
-								<lu-form-field label="Label">
-									<lu-text-input ngModel />
-								</lu-form-field>
-							</div>
-							<div class="grid-column" style="--grid-colspanAtMediaMinXXS: 2">
-								<lu-form-field label="Label">
-									<lu-text-input ngModel />
-								</lu-form-field>
-							</div>
-						</div>
-					</lu-fieldset>
+					<lu-fieldset size="S" helper="Helper message" heading="Fieldset title">Content</lu-fieldset>
 				</div>
 			</td>
 		</tr>
@@ -140,49 +108,13 @@
 								</span>
 							</span>
 						</legend>
-						<div class="fieldset-content">
-							<div class="grid mod-form">
-								<div class="grid-column" style="--grid-colspanAtMediaMinXXS: 2">
-									<div class="form-field">
-										<label class="formLabel" id="IDlabel1" for="ID1">Label</label>
-										<div class="textField">
-											<div class="textField-input">
-												<input type="text" id="ID1" class="textField-input-value" aria-labelledby="IDlabel1" />
-											</div>
-										</div>
-									</div>
-								</div>
-								<div class="grid-column" style="--grid-colspanAtMediaMinXXS: 2">
-									<div class="form-field">
-										<label class="formLabel" id="IDlabel2" for="ID2">Label</label>
-										<div class="textField">
-											<div class="textField-input">
-												<input type="text" id="ID2" class="textField-input-value" aria-labelledby="IDlabel2" />
-											</div>
-										</div>
-									</div>
-								</div>
-							</div>
-						</div>
+						<div class="fieldset-content">Content</div>
 					</fieldset>
 				</div>
 			</td>
 			<td>
 				<div class="demo-QAtable-list">
-					<lu-fieldset helper="Helper message" heading="Fieldset title" horizontal>
-						<div class="grid mod-form">
-							<div class="grid-column" style="--grid-colspanAtMediaMinXXS: 2">
-								<lu-form-field label="Label">
-									<lu-text-input ngModel />
-								</lu-form-field>
-							</div>
-							<div class="grid-column" style="--grid-colspanAtMediaMinXXS: 2">
-								<lu-form-field label="Label">
-									<lu-text-input ngModel />
-								</lu-form-field>
-							</div>
-						</div>
-					</lu-fieldset>
+					<lu-fieldset helper="Helper message" heading="Fieldset title" horizontal>Content</lu-fieldset>
 				</div>
 			</td>
 		</tr>
@@ -192,7 +124,7 @@
 				<div class="demo-QAtable-list">
 					<fieldset class="fieldset mod-expandable" aria-labelledby="fieldsetTitleContentExpandable">
 						<legend class="fieldset-title">
-							<button type="button" class="fieldset-title-content" id="fieldsetTitleContentExpandable" [attr.aria-expanded]="expanded">
+							<button type="button" class="fieldset-title-content" id="fieldsetTitleContentExpandable" aria-expanded="false">
 								<span class="fieldset-title-content-text">
 									Fieldset title
 									<span class="fieldset-title-content-text-helper">Helper message</span>
@@ -202,49 +134,39 @@
 								></span>
 							</button>
 						</legend>
-						<div class="fieldset-content">
-							<div class="grid mod-form">
-								<div class="grid-column" style="--grid-colspanAtMediaMinXXS: 2">
-									<div class="form-field">
-										<label class="formLabel" id="IDlabel1" for="ID1">Label</label>
-										<div class="textField">
-											<div class="textField-input">
-												<input type="text" id="ID1" class="textField-input-value" aria-labelledby="IDlabel1" />
-											</div>
-										</div>
-									</div>
-								</div>
-								<div class="grid-column" style="--grid-colspanAtMediaMinXXS: 2">
-									<div class="form-field">
-										<label class="formLabel" id="IDlabel2" for="ID2">Label</label>
-										<div class="textField">
-											<div class="textField-input">
-												<input type="text" id="ID2" class="textField-input-value" aria-labelledby="IDlabel2" />
-											</div>
-										</div>
-									</div>
-								</div>
-							</div>
-						</div>
+						<div class="fieldset-content" [attr.style]="'display: none'">Content</div>
 					</fieldset>
 				</div>
 			</td>
 			<td>
 				<div class="demo-QAtable-list">
-					<lu-fieldset helper="Helper message" heading="Fieldset title" expandable>
-						<div class="grid mod-form">
-							<div class="grid-column" style="--grid-colspanAtMediaMinXXS: 2">
-								<lu-form-field label="Label">
-									<lu-text-input ngModel />
-								</lu-form-field>
-							</div>
-							<div class="grid-column" style="--grid-colspanAtMediaMinXXS: 2">
-								<lu-form-field label="Label">
-									<lu-text-input ngModel />
-								</lu-form-field>
-							</div>
-						</div>
-					</lu-fieldset>
+					<lu-fieldset helper="Helper message" heading="Fieldset title" expandable>Content</lu-fieldset>
+				</div>
+			</td>
+		</tr>
+		<tr>
+			<td>Expanded</td>
+			<td>
+				<div class="demo-QAtable-list">
+					<fieldset class="fieldset mod-expandable" aria-labelledby="fieldsetTitleContentExpandable">
+						<legend class="fieldset-title">
+							<button type="button" class="fieldset-title-content" id="fieldsetTitleContentExpandable" aria-expanded="true">
+								<span class="fieldset-title-content-text">
+									Fieldset title
+									<span class="fieldset-title-content-text-helper">Helper message</span>
+								</span>
+								<span class="button mod-ghost mod-S mod-onlyIcon"
+									><span class="lucca-icon icon-arrowChevronBottom" aria-hidden="true"></span
+								></span>
+							</button>
+						</legend>
+						<div class="fieldset-content">Content</div>
+					</fieldset>
+				</div>
+			</td>
+			<td>
+				<div class="demo-QAtable-list">
+					<lu-fieldset helper="Helper message" heading="Fieldset title" expandable [expanded]="true">Content</lu-fieldset>
 				</div>
 			</td>
 		</tr>

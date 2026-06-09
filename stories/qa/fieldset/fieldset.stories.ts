@@ -13,7 +13,7 @@ import { Meta, StoryObj } from '@storybook/angular';
 class fieldsetStory {}
 
 export default {
-	title: 'QA/fieldset',
+	title: 'QA/Fieldset',
 	component: fieldsetStory,
 } as Meta;
 
