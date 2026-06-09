@@ -7,7 +7,7 @@ const testsRoot = path.join(__dirname, 'tests');
 const files = fs.readdirSync(testsRoot);
 
 describe('Deprecated Resolver Migration', () => {
-	it('should rename deprecated module and type identifiers', async () => {
+	it('should rename deprecated module, type identifiers and inputOutput ', async () => {
 		// Arrange
 		const tree = createTreeFromFiles(testsRoot, files, '.input.');
 		const expectedTree = createTreeFromFiles(testsRoot, files, '.output.');
