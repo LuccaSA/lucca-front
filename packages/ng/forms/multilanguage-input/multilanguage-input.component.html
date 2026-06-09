@@ -63,6 +63,7 @@
 								[size]="formFieldSize()"
 								[label]="intl().translateTo | intlParams: { lang: getLocaleDisplayName(row.cultureCode) }"
 								hiddenLabel
+								[errorInlineMessage]="formFieldRef.isInputRequired() && !row.value ? intl().requiredError : ''"
 							>
 								<lu-text-input
 									[prefix]="{ content: prefixLang, ariaLabel: '' }"

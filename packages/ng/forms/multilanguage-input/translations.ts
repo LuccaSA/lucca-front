@@ -5,6 +5,7 @@ export const Translations = {
 		translateTo: 'Translate to {{lang}}',
 		translateWithAI: 'Translate using AI',
 		invariantInfo: '',
+		requiredError: 'This translation is required',
 	},
 	fr: {
 		clear: 'Vider ce champ',
@@ -12,5 +13,6 @@ export const Translations = {
 		translateTo: 'Traduire en {{lang}}',
 		translateWithAI: 'Traduire avec l’assistant IA',
 		invariantInfo: 'Sans traduction renseignée, la valeur principale sera utilisée.',
+		requiredError: 'La traduction est obligatoire',
 	},
 };
