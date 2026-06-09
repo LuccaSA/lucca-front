@@ -1,6 +1,7 @@
 import { booleanAttribute, ChangeDetectionStrategy, Component, computed, contentChild, contentChildren, ElementRef, forwardRef, input, viewChild, ViewEncapsulation } from '@angular/core';
 import { ResponsiveConfig } from '@lucca-front/ng/core';
 
+import { LU_LINK_INSTANCE } from '../link/link.token';
 import { IndexTableHeadComponent } from './index-table-head/index-table-head.component';
 import { IndexTableRowComponent } from './index-table-row/index-table-row.component';
 import { LU_INDEX_TABLE_INSTANCE } from './index-table.token';
@@ -18,6 +19,10 @@ import { LU_INDEX_TABLE_INSTANCE } from './index-table.token';
 		{
 			provide: LU_INDEX_TABLE_INSTANCE,
 			useExisting: forwardRef(() => IndexTableComponent),
+		},
+		{
+			provide: LU_LINK_INSTANCE,
+			useValue: true,
 		},
 	],
 	changeDetection: ChangeDetectionStrategy.OnPush,

@@ -37,6 +37,9 @@
 	@at-root ($atRoot) {
 		.link-icon {
 			white-space: nowrap;
+			opacity: var(--components-link-icon-opacity);
+			transition-property: opacity;
+			transition-duration: var(--commons-animations-durations-fast);
 
 			&::before {
 				content: ' ' / '';

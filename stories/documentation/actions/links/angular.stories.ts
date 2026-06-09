@@ -3,6 +3,7 @@ import { provideRouter, RouterLink } from '@angular/router';
 import { LinkComponent } from '@lucca-front/ng/link';
 import { applicationConfig, Meta, moduleMetadata, StoryObj } from '@storybook/angular';
 import { timer } from 'rxjs';
+import { HiddenArgType } from 'stories/helpers/common-arg-types';
 
 export default {
 	title: 'Documentation/Actions/Link/Angular/Basic',
@@ -24,10 +25,13 @@ export default {
 			props: {
 				tick$: timer(0, 1000),
 			},
-			template: `Routing application : <a luLink="${routerLink}"${disable}${decoration}>${label}</a><br>
-Routing application (nouvelle fenêtre) : <a luLink="${routerLink}" external${disable}${decoration}>${label}</a><br>
-Lien hors application : <a href="${href}" luLink${disable}${decoration}>${label}</a><br>
-Lien hors application (nouvelle fenêtre) : <a href="${href}" luLink external${disable}${decoration}>${label}</a>`,
+			template: `Routing : <a luLink="${routerLink}"${disable}${decoration}>${label}</a><br />
+Routing (nouvelle fenêtre) : <a luLink="${routerLink}" external${disable}${decoration}>${label}</a><br />
+Routing (nouvelle fenêtre) uniquement au survol/focus/touch : <a luLink="${routerLink}" external iconHidden${disable}${decoration}>${label}</a><br />
+<br />
+Lien : <a href="${href}" luLink${disable}${decoration}>${label}</a><br />
+Lien (nouvelle fenêtre) : <a href="${href}" luLink external${disable}${decoration}>${label}</a><br />
+Lien (nouvelle fenêtre) uniquement au survol/focus/touch : <a href="${href}" luLink external iconHidden${disable}${decoration}>${label}</a><br />`,
 		};
 	},
 	argTypes: {
@@ -35,10 +39,7 @@ Lien hors application (nouvelle fenêtre) : <a href="${href}" luLink external${d
 			description: 'Désactive le lien.',
 			type: 'boolean',
 		},
-		external: {
-			description: 'Précise que le lien va s’ouvrir dans un nouvel onglet.',
-			type: 'boolean',
-		},
+		external: HiddenArgType,
 		label: {
 			type: 'string',
 			description: '[Story] Modifie le label du lien.',

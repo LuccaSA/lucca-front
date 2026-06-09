@@ -2,6 +2,7 @@ import { Location } from '@angular/common';
 import { afterNextRender, booleanAttribute, ChangeDetectionStrategy, Component, effect, inject, Injector, input, ViewEncapsulation } from '@angular/core';
 import { Router, UrlTree } from '@angular/router';
 import { intlInputOptions } from '@lucca-front/ng/core';
+import { LU_LINK_INSTANCE } from './link.token';
 import { LU_LINK_TRANSLATIONS } from './link.translate';
 import { LuRouterLink } from './lu-router-link';
 
@@ -17,6 +18,7 @@ import { LuRouterLink } from './lu-router-link';
 		'[attr.href]': 'routerLink.publicReactiveHref()',
 		'[class.mod-decorationHover]': 'decorationHover()',
 		'[class.mod-icon]': 'external()',
+		'[class.mod-iconHidden]': 'iconHidden() || this.inTableContext',
 		'[class.is-disabled]': 'this.disabled()',
 		'[attr.rel]': 'external() && !disabled() ? "noopener noreferrer" : null',
 		'[attr.target]': 'external() && !disabled() ? "_blank" : null',
@@ -37,6 +39,7 @@ export class LinkComponent {
 	#injector = inject(Injector);
 	router = inject(Router);
 	location = inject(Location);
+	inTableContext = inject(LU_LINK_INSTANCE, { optional: true });
 
 	/**
 	 * Target page address. Use only for external links or pages not recognized by the router.
@@ -62,6 +65,11 @@ export class LinkComponent {
 	 * Indicates that the link will open in a new tab
 	 */
 	readonly external = input(false, { transform: booleanAttribute });
+
+	/**
+	 * External icon only visible on hover/focus
+	 */
+	readonly iconHidden = input(false, { transform: booleanAttribute });
 
 	hrefBackup: string;
 

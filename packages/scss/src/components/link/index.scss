@@ -1,4 +1,5 @@
 @use 'exports' as *;
+@use '@lucca-front/scss/src/commons/utils/media';
 
 .link {
 	@layer components {
@@ -15,6 +16,14 @@
 
 				&:not(:has(.link-text)) {
 					@include decorationHoverHoveredLegacy;
+				}
+			}
+		}
+
+		@include media.isNotTouchDevice {
+			&.mod-iconHidden {
+				&:not(:hover, :focus-visible) {
+					@include iconHidden;
 				}
 			}
 		}
