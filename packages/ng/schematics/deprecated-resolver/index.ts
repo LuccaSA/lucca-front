@@ -19,13 +19,18 @@ export interface DeprecatedResolverOptions extends SchematicContextOpts {
 	types?: Record<string, string>;
 }
 
-export default (options: DeprecatedResolverOptions): Rule => {
+export default (options: SchematicContextOpts): Rule => {
 	return async (tree, context) => {
 		await currentSchematicContext.init(context, options);
 
 		new DeprecatedMapper(tree, {
-			modules: options.modules ?? {},
-			types: options.types ?? {},
+			modules: {
+					LuDateSelectInputModule: 'LuDateSelectInputComponent',
+					LuUserSelectInputModule: 'LuUserSelectInputComponent',
+				},
+				types: {
+					ILuTranslation: 'LuTranslation',
+				},
 		}).run();
 	};
 };
