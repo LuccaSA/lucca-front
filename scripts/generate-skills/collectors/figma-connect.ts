@@ -15,9 +15,17 @@ import { FigmaDesignTokens, FigmaProperty } from '../types';
 import { TransientFetchError } from './fetch-failures';
 
 const FIGMA_API_BASE = 'https://api.figma.com/v1';
-const MAX_RETRIES = 6;
-/** Cap concurrent Figma calls — the storm of parallel requests is what triggers 429s. */
-const MAX_CONCURRENT = 4;
+/**
+ * Figma's REST rate limit is per-time-window (requests/min) and stateful, not a concurrent-
+ * connection cap — so throttling by concurrency alone doesn't prevent 429s. The reliable recipe:
+ *   • serialize (1 in-flight) + a minimum interval between request starts → stay under the quota;
+ *   • honour the server's Retry-After and retry generously → survive the whole throttling window.
+ * Every node then eventually succeeds within the run (output complete & reproducible). All three
+ * are overridable via env for tuning.
+ */
+const MAX_RETRIES = Math.max(1, Number(process.env.FIGMA_MAX_RETRIES) || 10);
+const MAX_CONCURRENT = Math.max(1, Number(process.env.FIGMA_MAX_CONCURRENT) || 1);
+const MIN_INTERVAL_MS = Number(process.env.FIGMA_MIN_INTERVAL_MS) || 200;
 
 /**
  * Process-wide cache of fetched node responses, keyed by `fileKey:nodeId`.
@@ -29,16 +37,23 @@ const figmaCache = new Map<string, FigmaDesignTokens | null>();
 
 const sleep = (ms: number) => new Promise<void>((resolve) => setTimeout(resolve, ms));
 
-// ── Tiny semaphore to throttle concurrent Figma requests ────────────────────────
+// ── Throttle: cap concurrency AND space request starts by a minimum interval ─────
 let active = 0;
 const waiters: (() => void)[] = [];
+let nextAllowedStart = 0;
+
 async function acquire(): Promise<void> {
 	if (active < MAX_CONCURRENT) {
 		active++;
-		return;
+	} else {
+		await new Promise<void>((resolve) => waiters.push(resolve));
+		active++;
 	}
-	await new Promise<void>((resolve) => waiters.push(resolve));
-	active++;
+	// Pace request starts: never fire two within MIN_INTERVAL_MS of each other.
+	const now = Date.now();
+	const wait = Math.max(0, nextAllowedStart - now);
+	nextAllowedStart = Math.max(now, nextAllowedStart) + MIN_INTERVAL_MS;
+	if (wait > 0) await sleep(wait);
 }
 function release(): void {
 	active--;
