@@ -31,6 +31,22 @@ function dotted(v: VersionConfig): string {
 }
 
 /**
+ * Lists the version strings ("21.2.4") whose per-version skill folder exists on disk.
+ * Used to rebuild the aggregate from whatever is present (e.g. after a replay run that
+ * only touched a subset of versions).
+ */
+export function listGeneratedVersionStrings(skillsDir: string): string[] {
+	const base = path.resolve(skillsDir, SKILLS_BASE);
+	if (!fs.existsSync(base)) return [];
+	const out: string[] = [];
+	for (const d of fs.readdirSync(base, { withFileTypes: true })) {
+		const m = d.isDirectory() && d.name.match(/^lucca-front-(\d+)-(\d+)-(\d+)$/);
+		if (m) out.push(`${m[1]}.${m[2]}.${m[3]}`);
+	}
+	return out.sort((a, b) => a.localeCompare(b, undefined, { numeric: true }));
+}
+
+/**
  * Builds the aggregate skill from the per-version folders already on disk.
  * Returns the SKILL.md path and the number of bundled versions.
  */

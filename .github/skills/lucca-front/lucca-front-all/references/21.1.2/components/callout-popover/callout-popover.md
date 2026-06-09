@@ -101,7 +101,7 @@ import { CalloutActionsComponent, CalloutDisclosureComponent, CalloutFeedbackLis
 ## Related files
 
 - 📝 [Code & implementation](./callout-popover.component.md)
-
+- 🎨 [Design guidelines](./design/_index.md)
 - 🎯 [Figma design tokens](./callout-popover.figma.md)
 - 📖 [Storybook documentation](https://lucca-front.lucca.io/v21.1.2/storybook/?path=/docs/documentation-feedback-callout-popover-angular--docs)
 - 📋 [Changelog](./callout-popover.changelog.md)

@@ -1,8 +1,9 @@
 # callout-disclosure — Disclosure _(Angular)_
 
+Component selector : `lu-callout-disclosure`
+
 ```js
-import { ButtonComponent } from '@lucca-front/ng/button';
-import { CalloutDisclosureComponent, CalloutFeedbackItemComponent, CalloutFeedbackItemDescriptionDirective, CalloutFeedbackListComponent } from '@lucca-front/ng/callout';
+import { CalloutDisclosureComponent, CalloutFeedbackListComponent, CalloutFeedbackItemComponent, CalloutFeedbackItemDescriptionDirective } from "@lucca-front/ng/callout";
 ```
 
 ```html

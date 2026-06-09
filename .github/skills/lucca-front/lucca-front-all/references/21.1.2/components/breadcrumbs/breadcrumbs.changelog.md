@@ -11,3 +11,8 @@
 
 Composant introduit (`BreadcrumbsLinkDirective`, `BreadcrumbsComponent`).
 
+## Notes de release (ZeroHeight)
+
+# breadcrumbs — Changelog
+
+_No changelog available._

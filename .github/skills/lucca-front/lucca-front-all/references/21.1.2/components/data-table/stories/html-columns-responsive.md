@@ -1,5 +1,7 @@
 # data-table — Columns responsive _(HTML/CSS)_
 
+### Responsive
+
 ```css
 @forward '@lucca-front/scss/src/components/data-table';
 ```

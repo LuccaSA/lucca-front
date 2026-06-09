@@ -1,9 +1,9 @@
 # callout-popover — Popover _(Angular)_
 
+Component selector : `lu-callout-popover`
+
 ```js
-import { BrowserAnimationsModule } from '@angular/platform-browser/animations';
-import { ButtonComponent } from '@lucca-front/ng/button';
-import { CalloutFeedbackItemComponent, CalloutFeedbackItemDescriptionDirective, CalloutFeedbackListComponent, CalloutPopoverComponent } from '@lucca-front/ng/callout';
+import { CalloutPopoverComponent, CalloutFeedbackListComponent, CalloutFeedbackItemComponent, CalloutFeedbackItemDescriptionDirective } from "@lucca-front/ng/callout";
 ```
 
 ```html

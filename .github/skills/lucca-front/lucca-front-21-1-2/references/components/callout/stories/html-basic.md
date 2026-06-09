@@ -1,6 +1,19 @@
 # callout — Basic _(HTML/CSS)_
 
+### Sans icône
+
+### Description
+
+### AI `v20.3`
+
+### Actions
+
+### Actions inline
+
+### Supprimable
+
 ```css
+@forward '@lucca-front/scss/src/components/callout';
 @forward '@lucca-front/scss/src/components/callout';
 ```
 

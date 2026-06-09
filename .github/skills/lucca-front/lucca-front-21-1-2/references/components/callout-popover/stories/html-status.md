@@ -1,5 +1,9 @@
 # callout-popover — Status _(HTML/CSS)_
 
+### Tailles
+
+### Statuts
+
 ```css
 @forward '@lucca-front/scss/src/components/callout';
 @forward '@lucca-front/scss/src/components/calloutPopover';

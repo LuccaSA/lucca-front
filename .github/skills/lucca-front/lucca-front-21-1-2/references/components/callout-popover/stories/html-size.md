@@ -1,9 +1,11 @@
 # callout-popover — Size _(HTML/CSS)_
 
+### Tailles
+
+### Statuts
+
 ```css
 @forward '@lucca-front/scss/src/components/callout';
-@forward '@lucca-front/scss/src/components/button';
-@forward '@lucca-front/scss/src/components/calloutFeedbackList';
 @forward '@lucca-front/scss/src/components/calloutPopover';
 ```
 

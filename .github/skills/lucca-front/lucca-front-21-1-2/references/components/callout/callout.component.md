@@ -4,6 +4,8 @@
 
 ## Angular
 
+## Callout Angular
+
 | Example | File |
 |---------|------|
 | Ai action | [angular-ai-action.md](./stories/angular-ai-action.md) |
@@ -13,6 +15,8 @@
 | Basic | [angular-basic.md](./stories/angular-basic.md) |
 
 ## HTML/CSS
+
+## Callout HTML
 
 | Example | File |
 |---------|------|

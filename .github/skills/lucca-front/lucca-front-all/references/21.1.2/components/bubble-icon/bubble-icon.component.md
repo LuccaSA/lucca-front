@@ -4,6 +4,8 @@
 
 ## Angular
 
+Component selector : `lu-bubble-icon`
+
 | Example | File |
 |---------|------|
 | Basic | [angular-basic.md](./stories/angular-basic.md) |

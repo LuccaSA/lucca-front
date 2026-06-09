@@ -30,6 +30,14 @@ import { fetchStorybookIndex } from './collectors/storybook';
 import { readStorySourceFromGit, extractBasicUsage, inferScssImports, formatStoryTemplates } from './collectors/story-source';
 import { buildInputDefaults } from './collectors/story-eval';
 import { fetchZeroHeightPage } from './collectors/zeroheight-fetch';
+import {
+	TransientFetchError,
+	recordFailure,
+	clearFailures,
+	reportFailures,
+	writeFailureManifest,
+	readFailureManifest,
+} from './collectors/fetch-failures';
 import { loadConfig } from './config';
 import {
 	renderComponentMd,
@@ -59,7 +67,7 @@ import {
 import { writeToc } from './generators/toc-writer';
 import { buildComponentChangelog } from './generators/changelog-writer';
 import { writeVersionChangelog } from './generators/version-diff-writer';
-import { writeAggregateSkill } from './generators/aggregate-writer';
+import { writeAggregateSkill, listGeneratedVersionStrings } from './generators/aggregate-writer';
 import { resolveVersion } from './version-config';
 import { collectAllDocumentation } from './collectors/documentation';
 import { collectDeprecated } from './collectors/deprecated';
@@ -102,6 +110,7 @@ const flags = {
 	documentationOnly: args.includes('--documentation-only'),
 	dryRun: args.includes('--dry-run'),
 	validate: args.includes('--validate'),
+	retryFailed: args.includes('--retry-failed'),
 };
 
 // ─── Concurrency helper ────────────────────────────────────────────────────────
@@ -220,12 +229,21 @@ async function main(): Promise<void> {
 		return;
 	}
 
+	const config = loadConfig();
+	const FAILURES_MANIFEST = path.join(config.output.skillsDir, '_fetch-failures.json');
+
+	// Replay only the fetches that failed in a previous run (from the manifest).
+	if (flags.retryFailed) {
+		await retryFailedRun(config, FAILURES_MANIFEST);
+		return;
+	}
+
 	if (flags.versions.length === 0) {
 		console.error('❌ --version is required (e.g. --version 21.2.1 --version 21.1.0)');
 		process.exit(1);
 	}
 
-	const config = loadConfig();
+	clearFailures();
 
 	let totalSuccess = 0;
 	let totalErrors = 0;
@@ -323,14 +341,70 @@ async function main(): Promise<void> {
 		console.log(`📦 Aggregate: ${path.relative(config.output.skillsDir, skillPath)} (${versionCount} versions)`);
 	}
 
+	// Surface ZH/Figma fetch failures (content missing) and persist them for replay.
+	if (!flags.dryRun && !flags.component) {
+		reportFailures();
+		writeFailureManifest(FAILURES_MANIFEST);
+	}
+
 	console.log(`\n🎉 All done! ${flags.versions.length} version(s), ${totalSuccess} generated, ${totalErrors} errors`);
+}
+
+/**
+ * Replays only the components whose ZH/Figma fetch failed in a previous run (read from the
+ * manifest), then refreshes the per-version SKILL.md of the touched versions and the aggregate.
+ * Rewrites the manifest with whatever still fails — so it can be replayed again until empty.
+ */
+async function retryFailedRun(config: ReturnType<typeof loadConfig>, manifestPath: string): Promise<void> {
+	const prev = readFailureManifest(manifestPath);
+	if (prev.length === 0) {
+		console.log('✅ Aucun échec à rejouer (manifeste vide ou absent).');
+		return;
+	}
+
+	clearFailures();
+
+	// Group failed slugs by version.
+	const byVersion = new Map<string, Set<string>>();
+	for (const f of prev) {
+		const set = byVersion.get(f.version) ?? new Set<string>();
+		set.add(f.slug);
+		byVersion.set(f.version, set);
+	}
+
+	console.log(`↻ Rejeu : ${prev.length} échec(s) sur ${byVersion.size} version(s)\n`);
+	const touchedVersions: string[] = [];
+	for (const [versionStr, slugs] of byVersion) {
+		console.log(`\n━━━━━━ Rejeu ${versionStr} (${slugs.size} composant·s) ━━━━━━`);
+		await processVersion(versionStr, config, slugs);
+		touchedVersions.push(versionStr);
+	}
+
+	// Refresh the touched versions' SKILL.md, then rebuild the aggregate from all on-disk versions.
+	if (!flags.dryRun) {
+		for (const versionStr of touchedVersions) {
+			writeToc(config.output.skillsDir, resolveVersion(versionStr));
+		}
+		if (!flags.skipAggregate) {
+			const all = listGeneratedVersionStrings(config.output.skillsDir).map(resolveVersion);
+			const { versionCount } = writeAggregateSkill(config.output.skillsDir, all);
+			console.log(`\n📦 Agrégat reconstruit (${versionCount} versions)`);
+		}
+	}
+
+	reportFailures();
+	writeFailureManifest(manifestPath);
 }
 
 async function processVersion(
 	versionStr: string,
 	config: ReturnType<typeof loadConfig>,
+	replaySlugs?: Set<string>,
 ): Promise<{ success: number; errors: number; componentMap: ComponentMap }> {
 	const version = resolveVersion(versionStr);
+	// Component-scoped run = single --component OR a replay of specific failed slugs. In both
+	// cases we touch only those components and skip metadata sync / TOC rewrites.
+	const componentScoped = !!flags.component || (!!replaySlugs && replaySlugs.size > 0);
 
 	console.log(`\n🚀 Generating skills for Lucca Front ${version.tag}\n`);
 	console.log(`   ZeroHeight release: ${version.zhReleaseId ?? 'none'}`);
@@ -350,7 +424,7 @@ async function processVersion(
 
 	// Discover components dynamically (from Storybook + metadata, or metadata-only if Storybook unavailable)
 	// Sync metadata first to ensure it's up-to-date
-	if (!flags.component) {
+	if (!componentScoped) {
 		console.log('🔄 Syncing component-metadata.json...');
 		const syncResult = syncMetadata(storybookMap, version);
 		if (syncResult.added.length) console.log(`   + ${syncResult.added.length} new entries`);
@@ -370,6 +444,13 @@ async function processVersion(
 			console.log(`   Available: ${all.join(', ')}`);
 			return { success: 0, errors: 1, componentMap: {} };
 		}
+	}
+
+	// Replay mode: restrict to the failed slugs for this version.
+	if (replaySlugs && replaySlugs.size > 0) {
+		discovered = discovered.filter((c) => replaySlugs.has(c.slug));
+		if (discovered.length === 0) return { success: 0, errors: 0, componentMap: {} };
+		console.log(`   ↻ Rejeu de ${discovered.length} composant(s) : ${discovered.map((c) => c.slug).join(', ')}`);
 	}
 
 	// Build ComponentMap from discovered list (for TOC + changelog)
@@ -399,6 +480,16 @@ async function processVersion(
 				try {
 					zeroheight = await fetchZeroHeightPage(entry.zeroheightPagePath, version.zhReleaseId);
 				} catch (err: any) {
+					if (err instanceof TransientFetchError) {
+						recordFailure({
+							source: 'zeroheight',
+							slug,
+							version: `${version.major}.${version.minor}.${version.patch}`,
+							ref: entry.zeroheightPagePath,
+							status: err.status,
+							reason: err.message,
+						});
+					}
 					console.warn(`     ⚠️  ZeroHeight: ${err.message}`);
 				}
 			}
@@ -482,6 +573,16 @@ async function processVersion(
 				try {
 					figmaTokens = await fetchFigmaDesignTokens(config.figma.fileKey, entry.figmaNodeIds[0], config.figma.token);
 				} catch (err: any) {
+					if (err instanceof TransientFetchError) {
+						recordFailure({
+							source: 'figma',
+							slug,
+							version: `${version.major}.${version.minor}.${version.patch}`,
+							ref: entry.figmaNodeIds[0],
+							status: err.status,
+							reason: err.message,
+						});
+					}
 					console.warn(`     ⚠️  Figma: ${err.message}`);
 				}
 			}

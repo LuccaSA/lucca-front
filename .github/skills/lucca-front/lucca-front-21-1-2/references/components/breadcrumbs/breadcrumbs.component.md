@@ -4,6 +4,8 @@
 
 ## Angular
 
+Component selector : `lu-breadcrumbs`
+
 | Example | File |
 |---------|------|
 | Basic | [angular-basic.md](./stories/angular-basic.md) |
