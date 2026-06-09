@@ -6,3 +6,8 @@
 
 Composant introduit (`BubbleIconComponent`).
 
+## Notes de release (ZeroHeight)
+
+# bubble-icon — Changelog
+
+_No changelog available._

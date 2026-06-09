@@ -2,9 +2,6 @@
 
 ```js
 import { CommentBlockComponent, CommentChatComponent, CommentComponent } from '@lucca-front/ng/comment';
-import { LuUserPictureModule } from '@lucca-front/ng/user';
-import { generateInputs } from '../../../../helpers/stories';
-import { LOCALE_ID } from '@angular/core';
 ```
 
 ```html

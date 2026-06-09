@@ -2,6 +2,7 @@
 
 ```css
 @forward '@lucca-front/scss/src/components/data-table';
+@forward '@lucca-front/scss/src/components/dataTableSticked'; // Import additionnel
 ```
 
 ```html

@@ -1,9 +1,10 @@
 # callout — Basic _(Angular)_
 
+Component selector : `lu-callout`
+
 ```js
-import { ButtonComponent } from '@lucca-front/ng/button';
-import { CalloutActionsComponent, CalloutComponent, CalloutFeedbackItemComponent, CalloutFeedbackListComponent } from '@lucca-front/ng/callout';
-import { IconComponent } from '@lucca-front/ng/icon';
+import { CalloutComponent } from "@lucca-front/ng/callout";
+import { CalloutActionsComponent } from '@lucca-front/ng/callout'; /* [v20.3] Si <lu-callout-action> est utilisé */
 ```
 
 ```html

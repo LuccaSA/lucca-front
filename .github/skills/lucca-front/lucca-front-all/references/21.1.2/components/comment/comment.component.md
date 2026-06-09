@@ -4,6 +4,10 @@
 
 ## Angular
 
+Component selector : `lu-comment`
+
+###
+
 | Example | File |
 |---------|------|
 | Ai | [angular-ai.md](./stories/angular-ai.md) |

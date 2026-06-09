@@ -38,7 +38,7 @@ import { BubbleIconComponent } from '@lucca-front/ng/bubble-icon';
 ## Related files
 
 - 📝 [Code & implementation](./bubble-icon.component.md)
-
+- 🎨 [Design guidelines](./design/_index.md)
 - 🎯 [Figma design tokens](./bubble-icon.figma.md)
 - 📖 [Storybook documentation](https://lucca-front.lucca.io/v21.1.2/storybook/?path=/docs/documentation-structure-bubble-icon-angular-basic--docs)
 - 📋 [Changelog](./bubble-icon.changelog.md)

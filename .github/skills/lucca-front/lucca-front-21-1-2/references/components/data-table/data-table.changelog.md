@@ -6,3 +6,8 @@
 
 Composant introduit (`DataTableBodyComponent`, `DataTableRowCellHeaderComponent`, `DataTableRowCellComponent`, `DataTableHeadComponent`, `DataTableRowComponent`, `DataTableComponent`).
 
+## Notes de release (ZeroHeight)
+
+# data-table — Changelog
+
+_No changelog available._

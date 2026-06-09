@@ -12,8 +12,12 @@
  */
 
 import { FigmaDesignTokens, FigmaProperty } from '../types';
+import { TransientFetchError } from './fetch-failures';
 
 const FIGMA_API_BASE = 'https://api.figma.com/v1';
+const MAX_RETRIES = 6;
+/** Cap concurrent Figma calls — the storm of parallel requests is what triggers 429s. */
+const MAX_CONCURRENT = 4;
 
 /**
  * Process-wide cache of fetched node responses, keyed by `fileKey:nodeId`.
@@ -25,20 +29,69 @@ const figmaCache = new Map<string, FigmaDesignTokens | null>();
 
 const sleep = (ms: number) => new Promise<void>((resolve) => setTimeout(resolve, ms));
 
+// ── Tiny semaphore to throttle concurrent Figma requests ────────────────────────
+let active = 0;
+const waiters: (() => void)[] = [];
+async function acquire(): Promise<void> {
+	if (active < MAX_CONCURRENT) {
+		active++;
+		return;
+	}
+	await new Promise<void>((resolve) => waiters.push(resolve));
+	active++;
+}
+function release(): void {
+	active--;
+	waiters.shift()?.();
+}
+
+interface FigmaResult {
+	ok: boolean;
+	json?: any;
+	status?: string;
+	reason?: string;
+}
+
 /**
- * Fetches a Figma URL, retrying on 429 (Too Many Requests) with backoff that honours the
- * `Retry-After` header. Returns the final Response (caller handles non-429 errors).
+ * One throttled Figma request. Retries 429 / 5xx / network errors with backoff (honouring
+ * `Retry-After`). Returns the parsed JSON on success, or a failure when retries are exhausted.
+ * A non-retryable HTTP status (e.g. 403) is returned as a failure too (caller decides).
  */
-async function figmaFetch(url: string, token: string, maxRetries = 6): Promise<Response> {
-	for (let attempt = 0; ; attempt++) {
-		const response = await fetch(url, { headers: { 'X-Figma-Token': token } });
-		if (response.status !== 429 || attempt >= maxRetries) return response;
+async function figmaRequest(url: string, token: string): Promise<FigmaResult> {
+	let lastStatus = 'unknown';
+	let lastReason = '';
+
+	for (let attempt = 0; attempt <= MAX_RETRIES; attempt++) {
+		await acquire();
+		let response: Response;
+		try {
+			response = await fetch(url, { headers: { 'X-Figma-Token': token } });
+		} catch (err: any) {
+			release();
+			lastStatus = 'network';
+			lastReason = err?.message ?? 'fetch failed';
+			if (attempt >= MAX_RETRIES) break;
+			console.warn(`  ⏳ Figma réseau — retry ${attempt + 1}/${MAX_RETRIES}`);
+			await sleep(Math.min(1000 * 2 ** attempt, 30000));
+			continue;
+		}
+		release();
+
+		if (response.ok) return { ok: true, json: await response.json() };
+
+		lastStatus = String(response.status);
+		lastReason = response.statusText || 'HTTP error';
+
+		const retryable = response.status === 429 || response.status >= 500;
+		if (!retryable || attempt >= MAX_RETRIES) return { ok: false, status: lastStatus, reason: lastReason };
 
 		const retryAfter = Number(response.headers.get('retry-after'));
 		const backoffMs = retryAfter > 0 ? retryAfter * 1000 : Math.min(1000 * 2 ** attempt, 30000);
-		console.warn(`  ⏳ Figma 429 — retry ${attempt + 1}/${maxRetries} in ${Math.round(backoffMs / 1000)}s`);
+		console.warn(`  ⏳ Figma ${response.status} — retry ${attempt + 1}/${MAX_RETRIES} in ${Math.round(backoffMs / 1000)}s`);
 		await sleep(backoffMs);
 	}
+
+	return { ok: false, status: lastStatus, reason: lastReason };
 }
 
 interface FigmaNodeResponse {
@@ -74,23 +127,21 @@ export async function fetchFigmaDesignTokens(fileKey: string, nodeId: string, to
 
 	const url = `${FIGMA_API_BASE}/files/${fileKey}/nodes?ids=${encodeURIComponent(nodeId)}`;
 
-	const response = await figmaFetch(url, token);
+	const res = await figmaRequest(url, token);
 
-	if (!response.ok) {
-		if (response.status === 404) {
+	if (!res.ok) {
+		if (res.status === '404') {
 			figmaCache.set(cacheKey, null); // definitive: node doesn't exist, don't retry
-		} else {
-			// transient (429 exhausted, 5xx…): do NOT cache, let a later version retry
-			console.warn(`  ⚠️  Figma API error for node ${nodeId}: ${response.status} ${response.statusText}`);
+			return null;
 		}
-		return null;
+		// transient (429/5xx/network exhausted) or non-retryable error: NOT cached, surfaced as a failure
+		throw new TransientFetchError(res.status ?? 'unknown', `Figma node ${nodeId}: ${res.reason ?? 'erreur'} (après ${MAX_RETRIES} retries)`);
 	}
 
-	const data = (await response.json()) as FigmaNodeResponse;
+	const data = res.json as FigmaNodeResponse;
 	const nodeData = data.nodes[nodeId];
 
 	if (!nodeData?.document) {
-		console.warn(`  ⚠️  Figma node ${nodeId} not found in response`);
 		figmaCache.set(cacheKey, null); // definitive: node absent from a 200 response
 		return null;
 	}

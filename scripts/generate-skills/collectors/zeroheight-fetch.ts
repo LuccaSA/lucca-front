@@ -14,66 +14,85 @@
 
 import { ZeroHeightData } from '../types';
 import { getZeroHeightUrl } from '../version-config';
+import { TransientFetchError } from './fetch-failures';
+
+const MAX_RETRIES = 4;
+const isHtml = (s: string) => s.trimStart().startsWith('<!DOCTYPE') || s.trimStart().startsWith('<html');
+const sleep = (ms: number) => new Promise<void>((resolve) => setTimeout(resolve, ms));
 
 /**
  * Fetches a ZeroHeight page as markdown and parses it into sections.
  *
+ * Retries transient problems (network, 5xx, HTML-instead-of-markdown, empty body) with backoff.
+ * On 404 → null (page legitimately absent). On transient failure after all retries →
+ * throws `TransientFetchError` so the caller records it for reporting / replay.
+ *
  * @param pagePath — e.g. "098404-button"
  * @param zhReleaseId — ZeroHeight release ID (null = latest)
- * @returns Parsed ZeroHeight data, or null if the page doesn't exist
+ * @returns Parsed ZeroHeight data, or null if the page doesn't exist (404)
  */
 export async function fetchZeroHeightPage(pagePath: string, zhReleaseId: number | null): Promise<ZeroHeightData | null> {
+	let lastReason = '';
+	let lastStatus = 'unknown';
+
+	for (let attempt = 0; attempt <= MAX_RETRIES; attempt++) {
+		if (attempt > 0) {
+			await sleep(Math.min(600 * 2 ** (attempt - 1), 10000));
+			console.warn(`  ⏳ ZeroHeight retry ${attempt}/${MAX_RETRIES} pour ${pagePath} (${lastStatus})`);
+		}
+
+		const raw = await tryFetchMd(pagePath, zhReleaseId);
+		if (raw === NOT_FOUND) return null; // 404: definitive absence
+		if (typeof raw === 'object') {
+			lastStatus = raw.status;
+			lastReason = raw.reason;
+			continue; // transient: retry
+		}
+
+		const cleaned = stripImages(raw);
+		return { raw: cleaned, sections: parseSections(cleaned) };
+	}
+
+	throw new TransientFetchError(lastStatus, `ZeroHeight ${pagePath}: ${lastReason} (après ${MAX_RETRIES} retries)`);
+}
+
+const NOT_FOUND = Symbol('not-found');
+type FetchProblem = { status: string; reason: string };
+
+/** One fetch attempt. Returns md string on success, NOT_FOUND on 404, or a FetchProblem (retryable). */
+async function tryFetchMd(pagePath: string, zhReleaseId: number | null): Promise<string | typeof NOT_FOUND | FetchProblem> {
 	const url = getZeroHeightUrl(pagePath, zhReleaseId);
 
 	let res: Response;
 	try {
-		res = await fetch(url, {
-			headers: { Accept: 'text/plain, text/markdown' },
-		});
+		res = await fetch(url, { headers: { Accept: 'text/plain, text/markdown' } });
 	} catch (err: any) {
-		console.warn(`  ⚠️  ZeroHeight fetch failed for ${pagePath}: ${err.message}`);
-		return null;
+		return { status: 'network', reason: err?.message ?? 'fetch failed' };
 	}
 
-	if (!res.ok) {
-		if (res.status === 404) return null;
-		console.warn(`  ⚠️  ZeroHeight HTTP ${res.status} for ${pagePath}`);
-		return null;
-	}
+	if (res.status === 404) return NOT_FOUND;
+	if (!res.ok) return { status: String(res.status), reason: res.statusText || 'HTTP error' };
 
 	let raw = await res.text();
 
-	// ZeroHeight returns HTML instead of markdown for the "default" release.
-	// Fallback: retry with /v/0/ (latest) or without version prefix.
-	if (raw.trimStart().startsWith('<!DOCTYPE') || raw.trimStart().startsWith('<html')) {
+	// ZeroHeight sometimes returns HTML instead of markdown — try the latest-release fallback URL.
+	if (isHtml(raw)) {
 		const fallbackUrl = zhReleaseId ? getZeroHeightUrl(pagePath, 0) : getZeroHeightUrl(pagePath, null);
 		try {
-			const fallbackRes = await fetch(fallbackUrl, {
-				headers: { Accept: 'text/plain, text/markdown' },
-			});
-			if (fallbackRes.ok) {
-				const fallbackRaw = await fallbackRes.text();
-				if (!fallbackRaw.trimStart().startsWith('<!DOCTYPE') && !fallbackRaw.trimStart().startsWith('<html')) {
-					raw = fallbackRaw;
-				}
+			const fb = await fetch(fallbackUrl, { headers: { Accept: 'text/plain, text/markdown' } });
+			if (fb.ok) {
+				const fbRaw = await fb.text();
+				if (!isHtml(fbRaw)) raw = fbRaw;
 			}
 		} catch {
-			// Ignore fallback errors, use whatever we have
+			// fall through to the HTML check below
 		}
 	}
 
-	// If still HTML after fallback, skip this content
-	if (raw.trimStart().startsWith('<!DOCTYPE') || raw.trimStart().startsWith('<html')) {
-		console.warn(`  ⚠️  ZeroHeight returned HTML instead of markdown for ${pagePath}`);
-		return null;
-	}
+	if (isHtml(raw)) return { status: 'html', reason: 'HTML reçu au lieu de markdown' };
+	if (!raw.trim()) return { status: 'empty', reason: 'réponse vide' };
 
-	if (!raw.trim()) return null;
-
-	const cleaned = stripImages(raw);
-	const sections = parseSections(cleaned);
-
-	return { raw: cleaned, sections };
+	return raw;
 }
 
 /**

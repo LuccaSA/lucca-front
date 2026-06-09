@@ -44,7 +44,7 @@ import { CommentBlockComponent, CommentComponent } from '@lucca-front/ng/comment
 ## Related files
 
 - 📝 [Code & implementation](./comment.component.md)
-
+- 🎨 [Design guidelines](./design/_index.md)
 - 🎯 [Figma design tokens](./comment.figma.md)
 - 📖 [Storybook documentation](https://lucca-front.lucca.io/v21.1.2/storybook/?path=/docs/documentation-texts-comment-angular-ai--docs)
 - 📋 [Changelog](./comment.changelog.md)

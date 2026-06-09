@@ -70,7 +70,7 @@ import { DataTableBodyComponent, DataTableRowCellHeaderComponent, DataTableRowCe
 ## Related files
 
 - 📝 [Code & implementation](./data-table.component.md)
-
+- 🎨 [Design guidelines](./design/_index.md)
 - 🎯 [Figma design tokens](./data-table.figma.md)
 - 📖 [Storybook documentation](https://lucca-front.lucca.io/v21.1.2/storybook/?path=/docs/documentation-listings-data-table-angular-basic--docs)
 - 📋 [Changelog](./data-table.changelog.md)

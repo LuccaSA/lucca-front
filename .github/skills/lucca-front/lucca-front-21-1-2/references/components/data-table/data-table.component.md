@@ -4,6 +4,14 @@
 
 ## Angular
 
+Component selector : `lu-data-table`
+
+### Sélection
+
+L'option `selected` ajoute seulement une checkbox à l'ensemble des lignes du tableau. La sélection en elle-même n'est pas couverte par Lucca Front. 
+
+`lucca-cdk` propose des outils de sélection, via [withSelectionFeature](https://github.com/LuccaSA/lucca-cdk/blob/c155fc21f98c9cac93e7b193046729702096966a/docs/src/content/docs/features/signal-store.md#withselectionfeature-exp%C3%A9rimental).
+
 | Example | File |
 |---------|------|
 | Basic | [angular-basic.md](./stories/angular-basic.md) |

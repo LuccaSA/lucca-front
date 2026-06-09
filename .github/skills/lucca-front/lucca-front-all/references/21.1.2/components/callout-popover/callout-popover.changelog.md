@@ -16,3 +16,8 @@
 
 Composant introduit (`CalloutActionsComponent`, `CalloutDisclosureComponent`, `CalloutFeedbackListComponent`, `CalloutPopoverComponent`, `CalloutComponent`).
 
+## Notes de release (ZeroHeight)
+
+# callout-popover — Changelog
+
+_No changelog available._

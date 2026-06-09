@@ -13,3 +13,8 @@
 
 Composant introduit (`CommentBlockComponent`, `CommentComponent`).
 
+## Notes de release (ZeroHeight)
+
+# comment — Changelog
+
+_No changelog available._

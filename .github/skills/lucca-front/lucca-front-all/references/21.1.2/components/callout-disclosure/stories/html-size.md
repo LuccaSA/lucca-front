@@ -1,10 +1,14 @@
 # callout-disclosure — Size _(HTML/CSS)_
 
+### Sans icône
+
+### Tailles
+
+### Status
+
 ```css
 @forward '@lucca-front/scss/src/components/callout';
-@forward '@lucca-front/scss/src/components/button';
 @forward '@lucca-front/scss/src/components/calloutDisclosure';
-@forward '@lucca-front/scss/src/components/calloutFeedbackList';
 ```
 
 ```html

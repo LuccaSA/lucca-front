@@ -33,7 +33,7 @@ import { BreadcrumbsLinkDirective, BreadcrumbsComponent } from '@lucca-front/ng/
 ## Related files
 
 - 📝 [Code & implementation](./breadcrumbs.component.md)
-
+- 🎨 [Design guidelines](./design/_index.md)
 - 🎯 [Figma design tokens](./breadcrumbs.figma.md)
 - 📖 [Storybook documentation](https://lucca-front.lucca.io/v21.1.2/storybook/?path=/docs/documentation-navigation-breadcrumbs-angular-basic--docs)
 - 📋 [Changelog](./breadcrumbs.changelog.md)

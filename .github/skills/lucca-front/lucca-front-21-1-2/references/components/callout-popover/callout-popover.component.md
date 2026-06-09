@@ -4,11 +4,15 @@
 
 ## Angular
 
+## Callout Angular
+
 | Example | File |
 |---------|------|
 | Popover | [angular-popover.md](./stories/angular-popover.md) |
 
 ## HTML/CSS
+
+## Callout HTML
 
 | Example | File |
 |---------|------|

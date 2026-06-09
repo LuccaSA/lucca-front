@@ -101,7 +101,7 @@ import { CalloutActionsComponent, CalloutDisclosureComponent, CalloutFeedbackLis
 ## Related files
 
 - 📝 [Code & implementation](./callout-disclosure.component.md)
-
+- 🎨 [Design guidelines](./design/_index.md)
 - 🎯 [Figma design tokens](./callout-disclosure.figma.md)
 - 📖 [Storybook documentation](https://lucca-front.lucca.io/v21.1.2/storybook/?path=/docs/documentation-feedback-callout-disclosure-angular--docs)
 - 📋 [Changelog](./callout-disclosure.changelog.md)
