@@ -156,7 +156,7 @@ Pour les champs numeriques, tenir compte des references Prisme suivantes :
 Regles de migration pour `type="number"` :
 - migrer vers `lu-number-input` (et non `lu-text-input`)
 - conserver les contraintes numeriques : `min`, `max`, `step`
-- conserver les bindings/attributs fonctionnels (`formControlName`, `[formControl]`, `[(ngModel)]`, `disabled`, `readonly`, `name`, `id`)
+- conserver les bindings/attributs fonctionnels (`formControlName`, `[formControl]`, `[(ngModel)]`, `disabled`) — si `readonly` / `name` / `id` sont utilises, classer le cas en migration manuelle (non supportes nativement + `lu-form-field` regenere l’`id`)
 - conserver la logique de validation existante (messages, etat invalide, required)
 - en cas d'ambiguite fonctionnelle par rapport aux variantes Prisme ci-dessus, ne pas migrer automatiquement et classer le cas en manuel
 
