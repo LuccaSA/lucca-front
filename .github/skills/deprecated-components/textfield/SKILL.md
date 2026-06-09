@@ -106,7 +106,7 @@ Utiliser `ng-template` uniquement pour un label riche (ex: icone, contenu struct
 - `type` (`text`, `email`, `password`, `url`) -> conserver
 - `autocomplete` -> conserver
 - `disabled` -> conserver
-- pour les champs `type="number"`, conserver aussi `min`, `max`, `step`, `inputmode` et les bindings associes
+- pour les champs `type="number"`, conserver aussi `min`, `max`, `step` et les bindings associes (si `inputmode` est present et important, classer le cas en migration manuelle : `lu-number-input` ne l’expose pas)
 - en cas de classe legacy `mod-search`, utiliser `hasSearchIcon` sur `lu-text-input`
 - en cas de classe legacy `mod-compact`, ne pas migrer automatiquement le style ; proposer une migration optionnelle et prevenir explicitement que le rendu UI sera different si l'utilisateur accepte
 - lors du remplacement d'un wrapper legacy `textfield`, supprimer la classe `mod-block`,sans ajouter de classe utilitaire de remplacement
