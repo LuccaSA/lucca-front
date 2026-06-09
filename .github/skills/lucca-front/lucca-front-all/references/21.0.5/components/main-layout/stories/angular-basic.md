@@ -1,0 +1,29 @@
+# main-layout — Basic _(Angular)_
+
+```js
+import { AppLayoutComponent } from '@lucca-front/ng/app-layout';
+import { ContainerComponent } from '@lucca-front/ng/container';
+import { MainLayoutBlockComponent, MainLayoutComponent } from '@lucca-front/ng/main-layout';
+```
+
+```html
+<lu-main-layout footerSticky>
+	<ng-container mainLayoutHeader>
+		<lu-container>
+			<div class="fakeContent">header</div>
+		</lu-container>
+	</ng-container>
+
+	<lu-main-layout-block>
+		<lu-container>
+			<div class="fakeContent">content</div>
+		</lu-container>
+	</lu-main-layout-block>
+
+	<ng-container mainLayoutFooter>
+		<lu-container>
+			<div class="fakeContent">footer</div>
+		</lu-container>
+	</ng-container>
+</lu-main-layout>
+```

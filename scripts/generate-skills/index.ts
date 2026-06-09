@@ -59,6 +59,7 @@ import {
 import { writeToc } from './generators/toc-writer';
 import { buildComponentChangelog } from './generators/changelog-writer';
 import { writeVersionChangelog } from './generators/version-diff-writer';
+import { writeAggregateSkill } from './generators/aggregate-writer';
 import { resolveVersion } from './version-config';
 import { collectAllDocumentation } from './collectors/documentation';
 import { collectDeprecated } from './collectors/deprecated';
@@ -97,6 +98,7 @@ const flags = {
 	skipDocumentation: args.includes('--skip-documentation'),
 	skipTools: args.includes('--skip-tools'),
 	skipSchematics: args.includes('--skip-schematics'),
+	skipAggregate: args.includes('--skip-aggregate'),
 	documentationOnly: args.includes('--documentation-only'),
 	dryRun: args.includes('--dry-run'),
 	validate: args.includes('--validate'),
@@ -310,6 +312,15 @@ async function main(): Promise<void> {
 			const clPath = writeVersionChangelog(config.output.skillsDir, v);
 			if (clPath) console.log(`📝 Review changelog: ${path.relative(config.output.skillsDir, clPath)}`);
 		}
+	}
+
+	// Aggregate "all versions" skill (lucca-front-all): bundles every generated version + a router
+	// SKILL.md that detects the project's LF version and delegates to the matching version folder.
+	// Built after all per-version folders are on disk. Skipped for single-component or partial runs.
+	if (!flags.dryRun && !flags.component && !flags.skipAggregate) {
+		const bundled = flags.versions.map((v) => resolveVersion(v));
+		const { skillPath, versionCount } = writeAggregateSkill(config.output.skillsDir, bundled);
+		console.log(`📦 Aggregate: ${path.relative(config.output.skillsDir, skillPath)} (${versionCount} versions)`);
 	}
 
 	console.log(`\n🎉 All done! ${flags.versions.length} version(s), ${totalSuccess} generated, ${totalErrors} errors`);
