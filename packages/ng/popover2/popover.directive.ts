@@ -71,6 +71,9 @@ const defaultPositionPairs: Record<PopoverPosition, ConnectionPositionPair> = {
 		'[attr.aria-expanded]': 'opened()',
 		'[attr.tabindex]': 'luPopoverDisabled ? null : tabIndexAttr',
 		'[attr.role]': 'luPopoverDisabled ? null : roleAttr',
+		'(keydown.enter)': 'onEnterKeyDown()',
+		'(keydown.space)': 'onSpaceKeyDown($event)',
+		'(keyup.space)': 'onSpaceKeyUp($event)',
 	},
 	exportAs: 'luPopover2',
 })
@@ -227,7 +230,6 @@ export class PopoverDirective implements OnDestroy {
 		this.#togglePopoverFromTrigger();
 	}
 
-	@HostListener('keydown.enter')
 	onEnterKeyDown(): void {
 		if (!this.#isUsingSyntheticTabIndex()) {
 			return;
@@ -236,7 +238,6 @@ export class PopoverDirective implements OnDestroy {
 		this.#togglePopoverFromTrigger();
 	}
 
-	@HostListener('keydown.space', ['$event'])
 	onSpaceKeyDown(event: Event): void {
 		if (!this.#isUsingSyntheticTabIndex()) {
 			return;
@@ -245,7 +246,6 @@ export class PopoverDirective implements OnDestroy {
 		event.preventDefault();
 	}
 
-	@HostListener('keyup.space', ['$event'])
 	onSpaceKeyUp(event: Event): void {
 		if (!this.#isUsingSyntheticTabIndex()) {
 			return;
