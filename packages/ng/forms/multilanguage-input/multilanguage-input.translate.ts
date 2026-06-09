@@ -7,6 +7,7 @@ export interface LuMultilanguageInputTranslations {
 	translateTo: string;
 	translateWithAI: string;
 	invariantInfo: string;
+	requiredError: string;
 }
 
 export const LU_MULTILANGUAGE_INPUT_TRANSLATIONS = new InjectionToken('LuMultilanguageInputTranslations', {
