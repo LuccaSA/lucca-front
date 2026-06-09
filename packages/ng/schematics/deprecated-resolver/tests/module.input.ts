@@ -1,6 +1,6 @@
 import { Component } from '@angular/core';
 import { LuDateSelectInputModule } from '@lucca-front/ng/date';
-import { LuUserSelectInputModule, LuEstablishmentSelectInputModule } from '@lucca-front/ng/user';
+import { LuUserSelectInputModule } from '@lucca-front/ng/user';
 
 @Component({
 	selector: 'my-component',
