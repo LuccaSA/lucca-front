@@ -1,7 +1,7 @@
 import fs from 'fs';
 import path from 'path';
 import { DocumentationMap, VersionConfig } from '../types';
-import { versionRoot } from './skill-writer';
+import { versionRoot, versionFolder } from './skill-writer';
 
 /**
  * Writes the per-version SKILL.md — the entry point of a single self-contained version skill.
@@ -16,6 +16,7 @@ import { versionRoot } from './skill-writer';
 export function writeToc(skillsDir: string, version: VersionConfig): string {
 	const root = versionRoot(skillsDir, version);
 	const bareVersion = `${version.major}.${version.minor}.${version.patch}`;
+	const skillName = versionFolder(version);
 
 	// ── Build component list: flat, alphabetical, sourced from generated folders ──
 	const componentsDir = path.join(root, 'references', 'components');
@@ -61,7 +62,7 @@ export function writeToc(skillsDir: string, version: VersionConfig): string {
 	// ── Build the SKILL.md content ─────────────────────────────────────────
 
 	const content = `---
-name: lucca-front
+name: ${skillName}
 description: >
   Design system Lucca Front / Prisme (Angular). À charger pour tout fichier d'un projet qui dépend de @lucca-front/ng ou @lucca-front/scss,
   ou contenant des sélecteurs lu-*, pr-* ou des directives commençant par 'lu' (ex: luButton, luTooltip, luForm).

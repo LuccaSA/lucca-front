@@ -1,109 +1,109 @@
 {
   "latest": "21.2.4",
   "versions": {
-    "21.2.1": {
-      "tag": "v21.2.1",
-      "zhReleaseId": 47452,
-      "storybookBaseUrl": "https://lucca-front.lucca.io/v21.2.1/storybook",
-      "generatedAt": "2026-06-08T09:59:14.695Z",
-      "componentCount": 103
-    },
-    "21.2.0": {
-      "tag": "v21.2.0",
-      "zhReleaseId": 47452,
-      "storybookBaseUrl": "https://lucca-front.lucca.io/v21.2.0/storybook",
-      "generatedAt": "2026-06-08T10:00:25.619Z",
-      "componentCount": 103
-    },
-    "21.1.4": {
-      "tag": "v21.1.4",
-      "zhReleaseId": 60527,
-      "storybookBaseUrl": "https://lucca-front.lucca.io/v21.1.4/storybook",
-      "generatedAt": "2026-06-08T10:01:35.450Z",
-      "componentCount": 99
-    },
-    "21.1.3": {
-      "tag": "v21.1.3",
-      "zhReleaseId": 60527,
-      "storybookBaseUrl": "https://lucca-front.lucca.io/v21.1.3/storybook",
-      "generatedAt": "2026-06-08T10:02:43.297Z",
-      "componentCount": 99
-    },
-    "21.1.2": {
-      "tag": "v21.1.2",
-      "zhReleaseId": 60527,
-      "storybookBaseUrl": "https://lucca-front.lucca.io/v21.1.2/storybook",
-      "generatedAt": "2026-06-08T10:03:48.975Z",
-      "componentCount": 99
-    },
-    "21.1.1": {
-      "tag": "v21.1.1",
-      "zhReleaseId": 60527,
-      "storybookBaseUrl": "https://lucca-front.lucca.io/v21.1.1/storybook",
-      "generatedAt": "2026-06-08T10:04:55.882Z",
-      "componentCount": 99
-    },
-    "21.1.0": {
-      "tag": "v21.1.0",
-      "zhReleaseId": 60527,
-      "storybookBaseUrl": "https://lucca-front.lucca.io/v21.1.0/storybook",
-      "generatedAt": "2026-06-08T10:06:05.531Z",
-      "componentCount": 99
-    },
-    "21.0.5": {
-      "tag": "v21.0.5",
+    "21.0.0": {
+      "tag": "v21.0.0",
       "zhReleaseId": 59269,
-      "storybookBaseUrl": "https://lucca-front.lucca.io/v21.0.5/storybook",
-      "generatedAt": "2026-06-08T10:07:10.678Z",
-      "componentCount": 95
-    },
-    "21.0.4": {
-      "tag": "v21.0.4",
-      "zhReleaseId": 59269,
-      "storybookBaseUrl": "https://lucca-front.lucca.io/v21.0.4/storybook",
-      "generatedAt": "2026-06-08T10:08:14.073Z",
-      "componentCount": 95
-    },
-    "21.0.3": {
-      "tag": "v21.0.3",
-      "zhReleaseId": 59269,
-      "storybookBaseUrl": "https://lucca-front.lucca.io/v21.0.3/storybook",
-      "generatedAt": "2026-06-08T10:09:17.036Z",
-      "componentCount": 95
-    },
-    "21.0.2": {
-      "tag": "v21.0.2",
-      "zhReleaseId": 59269,
-      "storybookBaseUrl": "https://lucca-front.lucca.io/v21.0.2/storybook",
-      "generatedAt": "2026-06-08T10:10:20.203Z",
+      "storybookBaseUrl": "https://lucca-front.lucca.io/v21.0.0/storybook",
+      "generatedAt": "2026-06-09T06:39:01.992Z",
       "componentCount": 95
     },
     "21.0.1": {
       "tag": "v21.0.1",
       "zhReleaseId": 59269,
       "storybookBaseUrl": "https://lucca-front.lucca.io/v21.0.1/storybook",
-      "generatedAt": "2026-06-08T10:11:22.953Z",
+      "generatedAt": "2026-06-09T06:40:51.417Z",
       "componentCount": 95
     },
-    "21.0.0": {
-      "tag": "v21.0.0",
+    "21.0.2": {
+      "tag": "v21.0.2",
       "zhReleaseId": 59269,
-      "storybookBaseUrl": "https://lucca-front.lucca.io/v21.0.0/storybook",
-      "generatedAt": "2026-06-08T10:12:27.385Z",
+      "storybookBaseUrl": "https://lucca-front.lucca.io/v21.0.2/storybook",
+      "generatedAt": "2026-06-09T06:42:39.180Z",
       "componentCount": 95
+    },
+    "21.0.3": {
+      "tag": "v21.0.3",
+      "zhReleaseId": 59269,
+      "storybookBaseUrl": "https://lucca-front.lucca.io/v21.0.3/storybook",
+      "generatedAt": "2026-06-09T06:44:28.663Z",
+      "componentCount": 95
+    },
+    "21.0.4": {
+      "tag": "v21.0.4",
+      "zhReleaseId": 59269,
+      "storybookBaseUrl": "https://lucca-front.lucca.io/v21.0.4/storybook",
+      "generatedAt": "2026-06-09T06:46:17.097Z",
+      "componentCount": 95
+    },
+    "21.0.5": {
+      "tag": "v21.0.5",
+      "zhReleaseId": 59269,
+      "storybookBaseUrl": "https://lucca-front.lucca.io/v21.0.5/storybook",
+      "generatedAt": "2026-06-09T06:47:59.439Z",
+      "componentCount": 95
+    },
+    "21.1.0": {
+      "tag": "v21.1.0",
+      "zhReleaseId": 60527,
+      "storybookBaseUrl": "https://lucca-front.lucca.io/v21.1.0/storybook",
+      "generatedAt": "2026-06-09T06:49:55.413Z",
+      "componentCount": 99
+    },
+    "21.1.1": {
+      "tag": "v21.1.1",
+      "zhReleaseId": 60527,
+      "storybookBaseUrl": "https://lucca-front.lucca.io/v21.1.1/storybook",
+      "generatedAt": "2026-06-09T06:51:44.549Z",
+      "componentCount": 99
+    },
+    "21.1.2": {
+      "tag": "v21.1.2",
+      "zhReleaseId": 60527,
+      "storybookBaseUrl": "https://lucca-front.lucca.io/v21.1.2/storybook",
+      "generatedAt": "2026-06-09T07:46:33.171Z",
+      "componentCount": 99
+    },
+    "21.1.3": {
+      "tag": "v21.1.3",
+      "zhReleaseId": 60527,
+      "storybookBaseUrl": "https://lucca-front.lucca.io/v21.1.3/storybook",
+      "generatedAt": "2026-06-09T07:48:37.331Z",
+      "componentCount": 99
+    },
+    "21.1.4": {
+      "tag": "v21.1.4",
+      "zhReleaseId": 60527,
+      "storybookBaseUrl": "https://lucca-front.lucca.io/v21.1.4/storybook",
+      "generatedAt": "2026-06-09T07:50:40.699Z",
+      "componentCount": 99
+    },
+    "21.2.0": {
+      "tag": "v21.2.0",
+      "zhReleaseId": 47452,
+      "storybookBaseUrl": "https://lucca-front.lucca.io/v21.2.0/storybook",
+      "generatedAt": "2026-06-09T07:53:34.476Z",
+      "componentCount": 103
+    },
+    "21.2.1": {
+      "tag": "v21.2.1",
+      "zhReleaseId": 47452,
+      "storybookBaseUrl": "https://lucca-front.lucca.io/v21.2.1/storybook",
+      "generatedAt": "2026-06-09T07:55:44.802Z",
+      "componentCount": 103
     },
     "21.2.2": {
       "tag": "v21.2.2",
       "zhReleaseId": 47452,
       "storybookBaseUrl": "https://lucca-front.lucca.io/v21.2.2/storybook",
-      "generatedAt": "2026-06-08T13:50:09.728Z",
+      "generatedAt": "2026-06-09T07:57:37.818Z",
       "componentCount": 103
     },
     "21.2.4": {
       "tag": "v21.2.4",
       "zhReleaseId": 47452,
       "storybookBaseUrl": "https://lucca-front.lucca.io/v21.2.4/storybook",
-      "generatedAt": "2026-06-08T13:52:04.527Z",
+      "generatedAt": "2026-06-09T08:00:05.239Z",
       "componentCount": 103
     }
   }

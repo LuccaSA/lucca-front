@@ -1,0 +1,16 @@
+# callout — Ia _(HTML/CSS)_
+
+```css
+@forward '@lucca-front/scss/src/components/callout';
+```
+
+```html
+<div class="callout mod-AI">
+	<div class="callout-icon">
+		<span aria-hidden="true" class="lucca-icon icon-weatherStars"></span>
+	</div>
+	<div class="callout-content">
+		<p class="callout-content-description">Feedback description</p>
+	</div>
+</div>
+```

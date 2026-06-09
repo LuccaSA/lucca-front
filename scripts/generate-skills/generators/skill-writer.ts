@@ -25,9 +25,15 @@ const SKILLS_BASE = 'lucca-front';
  * installs a single version, so cross-version dedup is irrelevant.
  */
 
-/** Bare version folder name, e.g. "21.2.3" — matches the APM path segment. */
-function versionFolder(version: VersionConfig): string {
-	return `${version.major}.${version.minor}.${version.patch}`;
+/**
+ * Version skill folder/name, e.g. "lucca-front-21-2-3".
+ *
+ * Dashes (not dots): APM reads a dotted leaf segment as a file extension and rejects it, and the
+ * install dir is named from this leaf — so folder = skill name = APM install dir, all aligned.
+ * Distinct per-version names let a monorepo install several versions side by side without collision.
+ */
+export function versionFolder(version: VersionConfig): string {
+	return `${SKILLS_BASE}-${version.major}-${version.minor}-${version.patch}`;
 }
 
 /** Root of a single self-contained version skill: lucca-front/<version>/ */
