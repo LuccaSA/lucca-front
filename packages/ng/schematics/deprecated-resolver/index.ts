@@ -5,20 +5,6 @@ import { currentSchematicContext, DeprecatedMapper, SchematicContextOpts } from 
 // eslint-disable-next-line @typescript-eslint/no-require-imports
 require('@angular-devkit/schematics');
 
-export interface DeprecatedResolverOptions extends SchematicContextOpts {
-	/**
-	 * Mapping of deprecated NgModule names to their replacement standalone component/directive names.
-	 * @example { "LuDateSelectInputModule": "LuDateSelectInputComponent" }
-	 */
-	modules?: Record<string, string>;
-
-	/**
-	 * Mapping of deprecated type/interface names to their replacement names.
-	 * @example { "ILuTranslation": "LuTranslation" }
-	 */
-	types?: Record<string, string>;
-}
-
 export default (options: SchematicContextOpts): Rule => {
 	return async (tree, context) => {
 		await currentSchematicContext.init(context, options);
