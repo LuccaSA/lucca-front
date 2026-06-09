@@ -1,5 +1,5 @@
 ---
-name: replace-deprecated-textfield
+name: textfield
 description: 'Migre le Deprecated Textfield vers le Textfield Angular moderne de Lucca Front, avec stratégie anti-régression.'
 ---
 
@@ -42,7 +42,7 @@ Chercher en priorite les patterns suivants :
 - usage de `formControlName`, `[formControl]`, `[(ngModel)]`, `placeholder`, `aria-required`
 - pattern 2 : container legacy `div.textfield` avec composant custom interne (ex: `app-i18n-input`, `app-form-input-*`) et messages `textfield-messages`
 - pattern 3 : variantes sans label visible (`mod-noLabel`) ou label masque (`.textfield-label.pr-u-mask`)
-- pattern 4 : pattern hybride legacy + nouveau (ex: `lu-form-field` avec `[hiddenLabel]="true"` et `[label]="''"` + `label.textfield-label` externe)
+- pattern 4 : pattern hybride legacy + nouveau (ex: `lu-form-field` avec `hiddenLabel` et `[label]="''"` + `label.textfield-label` externe)
 
 ### Cas a exclure de la migration automatique
 
@@ -84,19 +84,29 @@ Utiliser `ng-template` uniquement pour un label riche (ex: icone, contenu struct
 - `type` (`text`, `email`, `password`, `url`) -> conserver
 - `autocomplete` -> conserver
 - `disabled` -> conserver
+- en cas de classe legacy `mod-search`, utiliser `hasSearchIcon` sur `lu-text-input`
+- lors du remplacement d'un wrapper legacy `textfield`, supprimer la classe `mod-block`
+- lors du remplacement d'un wrapper legacy `textfield`, supprimer la classe `mod-outlined`
+- lors du remplacement d'un wrapper legacy `textfield`, supprimer la classe `palette-neutral`
+- lors du remplacement d'un wrapper legacy `textfield`, supprimer la classe `mod-white`
 
 ### 3.3 Couverture des patterns dominants 2, 3, 4
 
 - pattern 2 (composant custom interne) :
 	- migrer le composant interne vers un controle Angular LF equivalent quand possible (`lu-text-input`, `lu-number-input`, `lu-textarea-input`)
 	- si non possible, conserver le composant interne mais remplacer le wrapper legacy `textfield` par `lu-form-field`
+	- en cas de classe legacy `mod-search`, ajouter `hasSearchIcon` sur le `lu-text-input` migre
+	- supprimer `mod-block` du wrapper legacy lors de la migration
+	- supprimer `mod-outlined` du wrapper legacy lors de la migration
+	- supprimer `palette-neutral` du wrapper legacy lors de la migration
+	- supprimer `mod-white` du wrapper legacy lors de la migration
 	- conserver strictement les bindings/evenements existants (`[(ngModel)]`, `formControlName`, `(ngModelChange)`, `(blur)`)
 - pattern 3 (noLabel / label masque) :
 	- si label masque (`.textfield-label.pr-u-mask`) existe, reutiliser son contenu comme `label` de `lu-form-field`
 	- si `mod-noLabel`, migrer vers `hiddenLabel` avec un label technique non vide
 - pattern 4 (hybride legacy + nouveau) :
 	- supprimer les doublons de label et ne garder qu'une seule source de verite : `label` de `lu-form-field`
-	- remplacer `[label]="''" [hiddenLabel]="true"` + label externe par `label="..." [hiddenLabel]="true`
+	- remplacer `[label]="''" hiddenLabel` + label externe par `label="..." hiddenLabel`
 	- retirer les `label.textfield-label` externes devenus redondants
 
 ### 3.4 Imports TypeScript
@@ -115,7 +125,7 @@ En standalone Angular, ajouter ces composants dans `imports` du composant.
 Quand le textfield legacy n'a pas de label exploitable, la migration reste possible :
 
 ```html
-<lu-form-field label="Champ sans label visible" [hiddenLabel]="true">
+<lu-form-field label="Champ sans label visible" hiddenLabel>
 	<lu-text-input [placeholder]="placeholder" formControlName="name" />
 </lu-form-field>
 ```
