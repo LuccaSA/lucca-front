@@ -60,13 +60,13 @@ export default (options: SchematicContextOpts): Rule => {
 			types: {
 				ILuTranslation: 'LuTranslation',
 			},
-				inputsOutputs: {
-					'lu-divider': { withRole: '' },
-					'button': { delete: 'critical' },
-					'lu-loading': { type: { fullpage: 'fullPage' } },
-					'lu-single-file-upload': { illustration: { paper: 'invoice' } },
-					'lu-highlight-data': { icon: { 'manifying-glass': 'magnifying-glass' } },
-				},
+			inputsOutputs: {
+				'lu-divider': { withRole: '' },
+				'button': { delete: 'critical' },
+				'lu-loading': { type: { fullpage: 'fullPage' } },
+				'lu-single-file-upload': { illustration: { paper: 'invoice' } },
+				'lu-highlight-data': { icon: { 'manifying-glass': 'magnifying-glass' } },
+			},
 		}).run();
 	};
 };
