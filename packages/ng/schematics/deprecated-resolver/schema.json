@@ -18,22 +18,6 @@
       "type": "boolean",
       "description": "Enable verbose logging.",
       "default": false
-    },
-    "modules": {
-      "type": "object",
-      "description": "Mapping of deprecated NgModule names to their replacement standalone component/directive names. The identifier is renamed everywhere it appears; the import path is kept unchanged.",
-      "additionalProperties": {
-        "type": "string"
-      },
-      "default": {}
-    },
-    "types": {
-      "type": "object",
-      "description": "Mapping of deprecated type/interface names to their replacement names. The identifier is renamed everywhere it appears; the import path is kept unchanged.",
-      "additionalProperties": {
-        "type": "string"
-      },
-      "default": {}
     }
   }
 }
