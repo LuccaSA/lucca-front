@@ -5,20 +5,30 @@ description: 'Migre le Deprecated Textfield vers le Textfield Angular moderne de
 
 # textfield
 
-Ce skill permet de migrer les anciens textfields (markup CSS legacy) vers la version Angular moderne basee sur `lu-form-field` + `lu-text-input`, en minimisant les regressions.
+Ce skill migre les anciens textfields (markup CSS legacy) vers les composants Angular modernes Lucca Front, en minimisant les regressions.
 
 Le composant cible Angular est :
 - `FormFieldComponent` depuis `@lucca-front/ng/form-field`
 - `TextInputComponent` depuis `@lucca-front/ng/forms`
+- `NumberInputComponent` depuis `@lucca-front/ng/forms` (pour les champs numeriques)
 
 ---
 
 ## Objectif
 
 1. Detecter les textfields legacy dans les templates Angular (`.html` et templates inline TS).
-2. Migrer automatiquement les cas simples vers `lu-form-field` + `lu-text-input`.
+2. Migrer automatiquement uniquement les cas simples.
 3. Isoler les cas complexes necessitant une intervention humaine.
 4. Verifier la non-regression fonctionnelle (binding, validation, accessibilite, UX).
+
+---
+
+## Principes directeurs
+
+- Ne pas utiliser de schematic pour cette migration.
+- Migrer fichier par fichier avec un controle fin.
+- Ne jamais migrer automatiquement un cas ambigu ou complexe.
+- Si un cas est complexe : ne pas modifier le code, annoter et classer en manuel.
 
 ---
 
@@ -39,6 +49,7 @@ Chercher en priorite les patterns suivants :
 
 - classes `textfield`, `textfield-input`, `textfield-label`, `textfield-messages`
 - wrapper `<label class="textfield ...">` avec `input` texte natif
+- wrapper `<label class="textfield ...">` avec `input[type="number"]`
 - usage de `formControlName`, `[formControl]`, `[(ngModel)]`, `placeholder`, `aria-required`
 - pattern 2 : container legacy `div.textfield` avec composant custom interne (ex: `app-i18n-input`, `app-form-input-*`) et messages `textfield-messages`
 - pattern 3 : variantes sans label visible (`mod-noLabel`) ou label masque (`.textfield-label.pr-u-mask`)
@@ -47,13 +58,13 @@ Chercher en priorite les patterns suivants :
 ### Cas a exclure de la migration automatique
 
 - champs multiline (`textarea`)
+- wrappers `textfield` contenant un `select` (natif ou composant de selection, incluant `simple-select`, `lu-select`, `multi-select`)
+- wrappers `textfield` contenant un selecteur de date (ex: `lu-date-input`, `lu-date-range-input`, `input[type="date"]`, composants date custom)
 - wrappers contenant une logique supplementaire (control flow, contenu additionnel complexe)
 
 ---
 
 ## Etape 2 - Migration manuelle guidee
-
-Ne pas utiliser de schematic pour cette migration.
 
 Appliquer directement les regles de transformation ci-dessous, fichier par fichier, pour conserver un controle fin et eviter les regressions.
 
@@ -63,9 +74,19 @@ Appliquer directement les regles de transformation ci-dessous, fichier par fichi
 
 ### 3.1 Template cible de reference
 
+Cas texte :
+
 ```html
 <lu-form-field label="Mon label">
   <lu-text-input [placeholder]="placeholder" formControlName="name" />
+</lu-form-field>
+```
+
+Cas numerique :
+
+```html
+<lu-form-field label="Montant">
+	<lu-number-input formControlName="amount" [min]="0" [step]="1" />
 </lu-form-field>
 ```
 
@@ -75,24 +96,86 @@ Utiliser `ng-template` uniquement pour un label riche (ex: icone, contenu struct
 ### 3.2 Mapping minimal sans regression
 
 - `input[type="text"]` legacy -> `lu-text-input`
+- `input[type="number"]` legacy -> `lu-number-input`
 - `span.textfield-label` -> `label` de `lu-form-field` (chaine directe en priorite)
 - si aucun label exploitable n'est disponible : utiliser `hiddenLabel` sur `lu-form-field` avec un label technique non vide
-- `placeholder` -> conserver tel quel sur `lu-text-input`
-- `formControlName` -> conserver sur `lu-text-input`
-- `[formControl]` -> conserver sur `lu-text-input`
-- `[(ngModel)]` -> conserver sur `lu-text-input`
+- `placeholder` -> conserver tel quel sur le controle cible
+- `formControlName` -> conserver sur le controle cible
+- `[formControl]` -> conserver sur le controle cible
+- `[(ngModel)]` -> conserver sur le controle cible
 - `type` (`text`, `email`, `password`, `url`) -> conserver
 - `autocomplete` -> conserver
 - `disabled` -> conserver
+- pour les champs `type="number"`, conserver aussi `min`, `max`, `step`, `inputmode` et les bindings associes
 - en cas de classe legacy `mod-search`, utiliser `hasSearchIcon` sur `lu-text-input`
-- lors du remplacement d'un wrapper legacy `textfield`, supprimer la classe `mod-block`
+- en cas de classe legacy `mod-compact`, ne pas migrer automatiquement le style ; proposer une migration optionnelle et prevenir explicitement que le rendu UI sera different si l'utilisateur accepte
+- lors du remplacement d'un wrapper legacy `textfield`, supprimer la classe `mod-block`,sans ajouter de classe utilitaire de remplacement
 - lors du remplacement d'un wrapper legacy `textfield`, supprimer la classe `mod-outlined`
 - lors du remplacement d'un wrapper legacy `textfield`, supprimer la classe `palette-neutral`
 - lors du remplacement d'un wrapper legacy `textfield`, supprimer la classe `mod-white`
 
+#### 3.2.1 Correspondance width : Deprecated textfield -> `lu-form-field`
+
+Les largeurs legacy textfield sont definies en `rem`.
+Les largeurs `lu-form-field` sont discretes via `width` (`20`, `30`, `40`, `50`, `60`) et correspondent a :
+- `20` -> `10rem`
+- `30` -> `15rem`
+- `40` -> `20rem`
+- `50` -> `25rem`
+- `60` -> `30rem`
+
+Table de migration recommandee (valeur la plus proche visuellement) :
+
+| Deprecated textfield | Largeur legacy | `lu-form-field` `width` | Largeur cible |
+| --- | --- | --- | --- |
+| `mod-shortest` | `3rem` | `20` | `10rem` |
+| `mod-shorter` | `6rem` | `20` | `10rem` |
+| `mod-short` | `9rem` | `20` | `10rem` |
+| `mod-standard` / `mod-default` | `13rem` | `30` | `15rem` |
+| `mod-long` | `17rem` | `30` | `15rem` |
+| `mod-longer` | `22rem` | `40` | `20rem` |
+| `mod-longest` | `28rem` | `60` | `30rem` |
+
+Regles pratiques :
+- supprimer les classes legacy de width (`mod-shortest`, `mod-shorter`, `mod-short`, `mod-standard`, `mod-default`, `mod-long`, `mod-longer`, `mod-longest`) apres migration
+- porter la largeur sur `lu-form-field` via l'input `width` (ex: `<lu-form-field width="30" ...>`)
+
+Cas particulier `mod-compact` :
+- detecter la presence de `mod-compact` et ouvrir une decision explicite avec l'utilisateur
+- proposer 2 options :
+	- option A (recommandee anti-regression visuelle) : conserver le markup legacy pour ce champ et annoter en migration manuelle
+	- option B (migration acceptee) : migrer vers `lu-form-field` + controle LF en supprimant `mod-compact`
+- avant d'appliquer l'option B, afficher un avertissement clair : "Le rendu visuel sera different apres suppression de `mod-compact`"
+
+#### 3.2.2 Cas des textfields de type number
+
+Pour les champs numeriques, tenir compte des references Prisme suivantes :
+- https://prisme.lucca.io/94310e217/p/459eda-textfield/b/284b5f
+- https://prisme.lucca.io/94310e217/p/459eda-textfield/b/394429
+
+Regles de migration pour `type="number"` :
+- migrer vers `lu-number-input` (et non `lu-text-input`)
+- conserver les contraintes numeriques : `min`, `max`, `step`
+- conserver les bindings/attributs fonctionnels (`formControlName`, `[formControl]`, `[(ngModel)]`, `disabled`, `readonly`, `name`, `id`)
+- conserver la logique de validation existante (messages, etat invalide, required)
+- en cas d'ambiguite fonctionnelle par rapport aux variantes Prisme ci-dessus, ne pas migrer automatiquement et classer le cas en manuel
+
+#### 3.2.3 Cas des textfields de type textarea
+
+Pour les champs multiline, tenir compte de la reference Prisme suivante :
+- https://prisme.lucca.io/94310e217/p/60990a-textarea/b/65eb4b
+
+Regles de migration pour `textarea` :
+- ne jamais migrer un `textarea` vers `lu-text-input`
+- utiliser `lu-textarea-input` quand la migration est validee manuellement
+- conserver les attributs et bindings utiles (`formControlName`, `[formControl]`, `[(ngModel)]`, `placeholder`, `rows`, `maxlength`, `disabled`, `readonly`, `name`, `id`)
+- conserver la logique de validation existante (messages, etat invalide, required)
+- en cas d'ambiguite fonctionnelle (auto-resize, comportement specifique non couvert, prefix/suffix complexe), classer le cas en migration manuelle
+
 ### 3.3 Couverture des patterns dominants 2, 3, 4
 
 - pattern 2 (composant custom interne) :
+	- si le composant interne est un selecteur (`select`, `simple-select`, `lu-select`, `multi-select`) ou un selecteur de date, ne pas migrer et classer en manuel
 	- migrer le composant interne vers un controle Angular LF equivalent quand possible (`lu-text-input`, `lu-number-input`, `lu-textarea-input`)
 	- si non possible, conserver le composant interne mais remplacer le wrapper legacy `textfield` par `lu-form-field`
 	- en cas de classe legacy `mod-search`, ajouter `hasSearchIcon` sur le `lu-text-input` migre
@@ -115,7 +198,7 @@ Ajouter si necessaire :
 
 ```ts
 import { FormFieldComponent } from '@lucca-front/ng/form-field';
-import { TextInputComponent } from '@lucca-front/ng/forms';
+import { NumberInputComponent, TextInputComponent, TextareaInputComponent } from '@lucca-front/ng/forms';
 ```
 
 En standalone Angular, ajouter ces composants dans `imports` du composant.
@@ -145,7 +228,7 @@ Toujours respecter les contraintes suivantes :
 1. Ne jamais supprimer ou modifier la logique de formulaire existante (`FormControl`, `FormGroup`, validators, observables).
 2. Ne pas changer les noms de controles (`formControlName`) ni les modeles (`ngModel`).
 3. Conserver les attributs fonctionnels (`placeholder`, `type`, `autocomplete`, `disabled`, `readonly`, `name`, `id`).
-4. Ne pas migrer automatiquement les `textarea` vers `lu-text-input`.
+4. Ne pas migrer automatiquement les `textarea` vers `lu-text-input` ; utiliser `lu-textarea-input` uniquement en migration validee.
 5. Si le label visuel est absent, activer `hiddenLabel` et renseigner un label technique non vide.
 6. Conserver les messages d'erreur et d'aide :
 	- si possible mapper vers `inlineMessage` / `errorInlineMessage` de `lu-form-field`
@@ -154,6 +237,9 @@ Toujours respecter les contraintes suivantes :
 8. Pour les composants custom internes (`app-i18n-input`, `app-form-input-*`), conserver la semantique de validation/evenements lors de la migration du wrapper.
 9. Pour les labels masques (`pr-u-mask`), conserver l'intention accessibilite en la transferant dans `label` + `hiddenLabel` si necessaire.
 10. Pour les patterns hybrides, supprimer les labels externes `textfield-label` apres migration pour eviter les divergences.
+11. Pour les champs legacy `mod-compact`, ne migrer vers le rendu moderne qu'apres validation explicite de l'utilisateur, avec avertissement sur le changement visuel.
+12. Pour tout wrapper `textfield` contenant un selecteur (`select`, `simple-select`) un selecteur de date ou un selecteur angular de type `lu-*`, ne faire aucune modification automatique.
+13. Pour tout cas complexe ou ambigu, ne pas transformer le markup : laisser le code tel quel et basculer en migration manuelle.
 
 ---
 
@@ -167,6 +253,17 @@ Marquer comme manuel si l'un des points suivants est detecte :
 - prefix/suffix iconographiques non standards
 - composant custom interne dont l'equivalent LF n'est pas clairement etabli
 - label resolu dynamiquement et non determinable statiquement
+- champ legacy avec `mod-compact` non valide explicitement par l'utilisateur
+- wrapper `textfield` contenant un `select` (natif ou composant de selection, incluant `simple-select`)
+- wrapper `textfield` contenant un selecteur de date
+- champ `type="number"` ambigu par rapport aux references Prisme `284b5f` et `394429`
+- champ `textarea` ambigu par rapport a la reference Prisme `65eb4b`
+
+Regle stricte pour ces cas :
+- ne pas migrer automatiquement
+- demander explicitement a l'utilisateur : "Ce cas est complexe ([raison courte]). Souhaitez-vous tenter la migration malgre tout, ou laisser ce code tel quel avec une annotation ?"
+- si l'utilisateur repond non (ou ne sait pas) : laisser le code intact et ajouter uniquement l'annotation ci-dessous
+- si l'utilisateur repond oui : tenter une migration au mieux en signalant clairement les points incertains, puis demander a l'utilisateur de verifier le resultat
 
 Annotation recommandee a ajouter a proximite du code :
 
@@ -190,7 +287,15 @@ Apres migration, executer ces controles :
 	- focus
 	- affichage erreur/inline message
 	- clear/search/password visibility si utilises
-4. Verification reactive forms et template-driven forms sur les vues migrées.
+4. Verification specifique des champs numeriques :
+	- bornes `min`/`max`
+	- pas `step`
+	- comportement saisie/clavier
+5. Verification specifique des champs multiline (`textarea`) :
+	- comportement de saisie multi-ligne
+	- `rows`/`maxlength`/`readonly`
+	- affichage des messages d'erreur
+6. Verification reactive forms et template-driven forms sur les vues migrees.
 
 ---
 
