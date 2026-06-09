@@ -2,7 +2,14 @@
 
 Pipeline **déterministe** (zéro IA) qui génère la documentation des composants Lucca Front pour les **Agent Skills**.
 
-Chaque version produit une **skill self-contained** sous `.github/skills/lucca-front/<version>/` : un `SKILL.md` + tous les fichiers `references/` de cette version. Un projet n'installe qu'**une** version (cf. distribution APM, voir `.github/skills/UPDATE.md`).
+Chaque version produit une **skill self-contained** sous `.github/skills/lucca-front/lucca-front-<M>-<m>-<p>/` : un `SKILL.md` + tous les fichiers `references/` de cette version. Le nom du dossier (tirets, pas de point) = `name:` du SKILL.md = dossier d'install APM (leaf), pour un shorthand APM sur une ligne sans collision entre versions.
+
+Une passe finale assemble une skill **agrégat** `lucca-front-all/` : **un seul** `SKILL.md` routeur + le `references/` de chaque version sous `references/<version>/` (sans les SKILL.md par version, pour ne pas dupliquer les descriptions). Le routeur détecte la version de `@lucca-front/ng` (node_modules puis `package.json`) et compose les chemins vers `references/<version>/…`. Deux usages couverts :
+
+- **install global** (machine) : installer `lucca-front-all` → n'importe quel repo obtient la bonne version automatiquement ;
+- **install par repo** : installer une/deux `lucca-front-<M>-<m>-<p>` précises (fetch plus léger, version figée).
+
+Distribution via APM (voir `.github/skills/UPDATE.md`).
 
 ## Prérequis
 
@@ -54,6 +61,7 @@ npx ts-node ... --validate
 | `--skip-documentation` | Ignorer la doc transverse (tokens, contenu, guidelines, patterns, deprecated) |
 | `--skip-tools` | Ignorer les outils (SCSS + Angular tools) |
 | `--skip-schematics` | Ignorer les migrations (`migrations.json` git) |
+| `--skip-aggregate` | Ne pas (ré)assembler la skill agrégat `lucca-front-all/` |
 | `--documentation-only` | Ne collecter que doc/outils/schematics (pas les composants) |
 | `--dry-run` | N'écrire aucun fichier |
 | `--validate` | Vérifier la couverture ZH de `component-map.json` (aucune génération) |
@@ -78,7 +86,13 @@ Layout **flat self-contained par version** (aucun segment de version interne) :
 ```
 .github/skills/lucca-front/
 ├── _versions.json                    # Manifeste des versions générées (métadonnée dist, hors skill)
-├── 21.2.3/                           # Une skill complète (dossier = version bare, cf. path APM)
+├── changelog/<version>.md            # Diff de review humain entre versions (hors skill, non distribué)
+├── lucca-front-all/                  # Skill agrégat : UN seul SKILL.md + references/ par version
+│   ├── SKILL.md                      # Détecte la version (node_modules/package.json) → compose les chemins
+│   └── references/
+│       ├── 21.2.4/{components,documentation,tools,types,migrations.md}
+│       └── 21.2.2/  …                # references/ de chaque version (sans son SKILL.md)
+├── lucca-front-21-2-4/               # Une skill complète (dossier = name = leaf APM)
 │   ├── SKILL.md                      # Point d'entrée : version implicite, chemins relatifs
 │   └── references/
 │       ├── components/
@@ -95,7 +109,7 @@ Layout **flat self-contained par version** (aucun segment de version interne) :
 │       │   └── deprecated/deprecated.md
 │       ├── tools/{animations,mixins,numbers,scrollbox,utilitaires}.md
 │       └── migrations.md             # Migrations ng update cumulatives ≤ cette version
-└── 21.2.2/
+└── lucca-front-21-2-2/
     └── …
 ```
 
@@ -214,4 +228,9 @@ Ancien registre central, conservé uniquement pour `--validate` (couverture Zero
 - **AST / stories / migrations** : versionné au fix près via git tags.
 - **Figma** : reflète l'état courant.
 
-Côté consommateur, la version n'est **plus détectée** : chaque skill installée **est** une version donnée (dossier `<version>/`), distribuée via APM. La distribution et la mise à jour sont décrites dans `.github/skills/UPDATE.md`.
+Côté consommateur, deux modèles :
+
+- **skill par version** (`lucca-front-<M>-<m>-<p>`) : la version n'est **pas détectée**, la skill installée **est** une version donnée. Pour un repo qui fige une/deux versions.
+- **skill agrégat** (`lucca-front-all`) : embarque toutes les versions sous `references/<version>/`, son unique `SKILL.md` **détecte** la version (`node_modules/@lucca-front/ng` puis `package.json`) et compose les chemins. Pour une install globale machine qui sert n'importe quel repo. C'est le seul cas où le check `package.json` est réintroduit (garde-fou « stop si version indéterminée »).
+
+La distribution et la mise à jour sont décrites dans `.github/skills/UPDATE.md`.
