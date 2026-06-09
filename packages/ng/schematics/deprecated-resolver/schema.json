@@ -1,0 +1,39 @@
+{
+  "$schema": "http://json-schema.org/draft-07/schema",
+  "$id": "LuccaFrontDeprecatedResolver",
+  "title": "Lucca Front Deprecated Resolver Schema",
+  "type": "object",
+  "properties": {
+    "dryRun": {
+      "type": "boolean",
+      "description": "Run through the migration without making any changes.",
+      "default": false
+    },
+    "skipInstall": {
+      "type": "boolean",
+      "description": "Skip installing dependencies.",
+      "default": false
+    },
+    "verbose": {
+      "type": "boolean",
+      "description": "Enable verbose logging.",
+      "default": false
+    },
+    "modules": {
+      "type": "object",
+      "description": "Mapping of deprecated NgModule names to their replacement standalone component/directive names. The identifier is renamed everywhere it appears; the import path is kept unchanged.",
+      "additionalProperties": {
+        "type": "string"
+      },
+      "default": {}
+    },
+    "types": {
+      "type": "object",
+      "description": "Mapping of deprecated type/interface names to their replacement names. The identifier is renamed everywhere it appears; the import path is kept unchanged.",
+      "additionalProperties": {
+        "type": "string"
+      },
+      "default": {}
+    }
+  }
+}
