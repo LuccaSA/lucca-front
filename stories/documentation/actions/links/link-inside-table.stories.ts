@@ -80,14 +80,14 @@ export default {
     <tbody luIndexTableBody>
         <tr luIndexTableRow>
             <th luIndexTableCell>
-                <a luIndexTableAction href="#">header</a>
+                <a luIndexTableAction href="#">action</a>
             </th>
             <td luIndexTableCell><a luLink href="https://www.example.org" external>External link</a></td>
             <td luIndexTableCell>cell</td>
         </tr>
         <tr luIndexTableRow>
             <th luIndexTableCell>
-                <a luIndexTableAction href="#">header</a>
+                <a luIndexTableAction href="#">action</a>
             </th>
             <td luIndexTableCell><a luLink href="https://www.example.org" external>External link</a></td>
             <td luIndexTableCell>cell</td>

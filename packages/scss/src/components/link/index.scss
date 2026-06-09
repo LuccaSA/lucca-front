@@ -21,9 +21,9 @@
 		}
 
 		@include media.isNotTouchDevice {
-			&.mod-iconHidden {
+			&.mod-hiddenIcon {
 				&:not(:hover, :focus-visible) {
-					@include iconHidden;
+					@include hiddenIcon;
 				}
 			}
 		}

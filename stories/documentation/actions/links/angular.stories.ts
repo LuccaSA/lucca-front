@@ -27,11 +27,11 @@ export default {
 			},
 			template: `Routing : <a luLink="${routerLink}"${disable}${decoration}>${label}</a><br />
 Routing (nouvelle fenêtre) : <a luLink="${routerLink}" external${disable}${decoration}>${label}</a><br />
-Routing (nouvelle fenêtre) uniquement au survol/focus/touch : <a luLink="${routerLink}" external iconHidden${disable}${decoration}>${label}</a><br />
+Routing (nouvelle fenêtre) uniquement au survol/focus/touch : <a luLink="${routerLink}" external hiddenIcon${disable}${decoration}>${label}</a><br />
 <br />
 Lien : <a href="${href}" luLink${disable}${decoration}>${label}</a><br />
 Lien (nouvelle fenêtre) : <a href="${href}" luLink external${disable}${decoration}>${label}</a><br />
-Lien (nouvelle fenêtre) uniquement au survol/focus/touch : <a href="${href}" luLink external iconHidden${disable}${decoration}>${label}</a><br />`,
+Lien (nouvelle fenêtre) uniquement au survol/focus/touch : <a href="${href}" luLink external hiddenIcon${disable}${decoration}>${label}</a><br />`,
 		};
 	},
 	argTypes: {

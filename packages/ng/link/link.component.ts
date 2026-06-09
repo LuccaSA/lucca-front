@@ -18,7 +18,7 @@ import { LuRouterLink } from './lu-router-link';
 		'[attr.href]': 'routerLink.publicReactiveHref()',
 		'[class.mod-decorationHover]': 'decorationHover()',
 		'[class.mod-icon]': 'external()',
-		'[class.mod-iconHidden]': 'iconHidden() || this.inTableContext',
+		'[class.mod-hiddenIcon]': 'hiddenIcon() || (this.inTableContext && external())',
 		'[class.is-disabled]': 'this.disabled()',
 		'[attr.rel]': 'external() && !disabled() ? "noopener noreferrer" : null',
 		'[attr.target]': 'external() && !disabled() ? "_blank" : null',
@@ -69,7 +69,7 @@ export class LinkComponent {
 	/**
 	 * External icon only visible on hover/focus
 	 */
-	readonly iconHidden = input(false, { transform: booleanAttribute });
+	readonly hiddenIcon = input(false, { transform: booleanAttribute });
 
 	hrefBackup: string;
 
