@@ -269,7 +269,7 @@ Annotation recommandee a ajouter a proximite du code :
 
 ```html
 <!--
-  IA replace-deprecated-textfield
+  IA textfield
   migration partielle : verification manuelle requise
 -->
 ```
