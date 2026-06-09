@@ -60,7 +60,7 @@ npx ts-node ... --validate
 | `--skip-storybook` | Ignorer la collecte Storybook |
 | `--skip-documentation` | Ignorer la doc transverse (tokens, contenu, guidelines, patterns, deprecated) |
 | `--skip-tools` | Ignorer les outils (SCSS + Angular tools) |
-| `--skip-schematics` | Ignorer les migrations (`migrations.json` git) |
+| `--skip-schematics` | Ignorer les codemods de migration (`collection.json` git) |
 | `--skip-aggregate` | Ne pas (ré)assembler la skill agrégat `lucca-front-all/` |
 | `--documentation-only` | Ne collecter que doc/outils/schematics (pas les composants) |
 | `--dry-run` | N'écrire aucun fichier |
@@ -77,7 +77,7 @@ Le pipeline agrège des sources **toutes déterministes** (pas d'IA) :
 | **ZeroHeight** | Guidelines design, contenu, accessibilité, dépréciations, prose changelog | Fetch du `.md` versionné par release (`/v/<releaseId>/p/<page>.md`) |
 | **Storybook** | Liens + code source des stories Angular et HTML/CSS | `index.json` versionné + `git show` pour les templates |
 | **Figma REST API** | Propriétés des variantes (taille, palette, état…) | API REST Figma — reflète l'état courant |
-| **Schematics (git)** | Migrations `ng update` | `git show <tag>:packages/ng/schematics/migrations.json` |
+| **Schematics (git)** | Codemods de migration (`ng generate`) | `git show <tag>:packages/ng/schematics/collection.json` |
 
 ## Structure de sortie
 
@@ -108,7 +108,7 @@ Layout **flat self-contained par version** (aucun segment de version interne) :
 │       │   ├── tokens/  content/  guidelines/  patterns/
 │       │   └── deprecated/deprecated.md
 │       ├── tools/{animations,mixins,numbers,scrollbox,utilitaires}.md
-│       └── migrations.md             # Migrations ng update cumulatives ≤ cette version
+│       └── migrations.md             # Codemods de migration (ng generate) cumulatifs ≤ cette version
 └── lucca-front-21-2-2/
     └── …
 ```
@@ -143,7 +143,7 @@ scripts/generate-skills/
 │   ├── documentation.ts              # Doc transverse (tokens, contenu, guidelines, patterns)
 │   ├── deprecated.ts                 # Page "Cycle de vie" ZH (dépréciés + prose schematics)
 │   ├── tools.ts                      # Outils SCSS + Angular depuis git tags
-│   └── schematics.ts                 # Migrations ng update depuis migrations.json (git)
+│   └── schematics.ts                 # Codemods de migration depuis collection.json (git), version d'intro par diff de tags
 │
 ├── generators/
 │   ├── template-renderer.ts          # Rendu Handlebars + cleanZeroHeightMarkdown
@@ -168,7 +168,7 @@ scripts/generate-skills/
 2. Résolution version → git tag, ZH release ID, Storybook base URL
 3. Doc transverse        → references/documentation/<category>/   (ZH fetch)
 4. Dépréciés             → references/documentation/deprecated/deprecated.md  (ZH "Cycle de vie")
-5. Schematics            → references/migrations.md                (git migrations.json, cumulatif ≤ cible)
+5. Schematics            → references/migrations.md                (git collection.json, codemods cumulatifs ≤ cible)
 6. Outils                → references/tools/                       (git + ZH)
 7. Composants (découverte Storybook + git) — pour chacun :
    a. AST extraction          → PackageAPI (inputs, outputs, models, selectors, types)
