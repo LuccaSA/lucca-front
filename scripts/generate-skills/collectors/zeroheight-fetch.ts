@@ -17,8 +17,20 @@ import { getZeroHeightUrl } from '../version-config';
 import { TransientFetchError } from './fetch-failures';
 
 const MAX_RETRIES = 4;
+/**
+ * ZeroHeight occasionally serves a valid 200 with **less** content than usual (a section missing,
+ * or a near-empty stub) — not an error, so it can't be caught like one. We retry such "thin"
+ * responses hoping for the full one, keeping the richest seen. If every attempt is thin we ACCEPT
+ * the best (a genuinely small page is legitimate — we never fail on thinness). This catches gross
+ * truncation; it cannot detect a single missing section on an otherwise normal-sized page.
+ */
+const RICH_MIN_CHARS = 200;
 const isHtml = (s: string) => s.trimStart().startsWith('<!DOCTYPE') || s.trimStart().startsWith('<html');
 const sleep = (ms: number) => new Promise<void>((resolve) => setTimeout(resolve, ms));
+
+function isRich(data: ZeroHeightData): boolean {
+	return data.raw.length >= RICH_MIN_CHARS && Object.keys(data.sections).length >= 1;
+}
 
 /**
  * Fetches a ZeroHeight page as markdown and parses it into sections.
@@ -34,6 +46,7 @@ const sleep = (ms: number) => new Promise<void>((resolve) => setTimeout(resolve,
 export async function fetchZeroHeightPage(pagePath: string, zhReleaseId: number | null): Promise<ZeroHeightData | null> {
 	let lastReason = '';
 	let lastStatus = 'unknown';
+	let best: ZeroHeightData | null = null; // richest 200 seen so far
 
 	for (let attempt = 0; attempt <= MAX_RETRIES; attempt++) {
 		if (attempt > 0) {
@@ -46,12 +59,21 @@ export async function fetchZeroHeightPage(pagePath: string, zhReleaseId: number 
 		if (typeof raw === 'object') {
 			lastStatus = raw.status;
 			lastReason = raw.reason;
-			continue; // transient: retry
+			continue; // hard transient (network/5xx/HTML/empty): retry
 		}
 
 		const cleaned = stripImages(raw);
-		return { raw: cleaned, sections: parseSections(cleaned) };
+		const data: ZeroHeightData = { raw: cleaned, sections: parseSections(cleaned) };
+		if (!best || cleaned.length > best.raw.length) best = data;
+		if (isRich(data)) return data;
+
+		// 200 but suspiciously thin — retry hoping for the full page, keep the richest.
+		lastStatus = 'thin';
+		lastReason = `200 incomplet (${cleaned.length} car., ${Object.keys(data.sections).length} sections)`;
 	}
+
+	// Accept the richest 200 we got (a genuinely small page is valid — never fail on thinness).
+	if (best) return best;
 
 	throw new TransientFetchError(lastStatus, `ZeroHeight ${pagePath}: ${lastReason} (après ${MAX_RETRIES} retries)`);
 }
