@@ -4,7 +4,14 @@ import { Meta } from '@storybook/angular';
 @Component({
 	selector: 'popover-stories',
 	templateUrl: './popover.stories.html',
-
+	styles: [
+		`
+			.popover {
+				inline-size: fit-content;
+				block-size: fit-content;
+			}
+		`,
+	],
 	changeDetection: ChangeDetectionStrategy.OnPush,
 })
 class PopoverStory {}

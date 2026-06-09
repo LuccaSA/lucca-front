@@ -47,21 +47,10 @@
 		<tr>
 			<td>With scrollbar</td>
 			<td>
-				<div class="popover" [attr.style]="'--components-popover-content-maxBlockSize: 5rem'">
-					<div>
-						<button type="button" lubutton="" class="button popover-close mod-onlyIcon">
-							<span aria-hidden="true" class="lucca-icon icon-signClose"></span>
-							<span class="pr-u-mask">Close</span>
-						</button>
-					</div>
-					<div class="popover-content">popover<br />popover<br />popover<br />popover<br />popover<br />popover</div>
-				</div>
-			</td>
-		</tr>
-		<tr>
-			<td>With scrollbar and<br />optional content</td>
-			<td>
-				<div class="popover" [attr.style]="'--components-popover-content-maxBlockSize: 5rem'">
+				<div
+					class="popover"
+					[attr.style]="'--components-popover-content-maxBlockSize: 10rem; --components-popover-content-maxInlineSize: 10rem'"
+				>
 					<div>
 						<button type="button" lubutton="" class="button popover-close mod-onlyIcon">
 							<span aria-hidden="true" class="lucca-icon icon-signClose"></span>
@@ -69,7 +58,34 @@
 						</button>
 					</div>
 					<div class="popover-content">
-						<div class="popover-contentOptional">popover<br />popover<br />popover<br />popover<br />popover<br />popover</div>
+						popover popover popover<br />
+						popover popover popover<br />
+						popover popover popover<br />
+						popover popover popover<br />
+					</div>
+				</div>
+			</td>
+		</tr>
+		<tr>
+			<td>With scrollbar and<br />optional content</td>
+			<td>
+				<div
+					class="popover"
+					[attr.style]="'--components-popover-content-maxBlockSize: 10rem; --components-popover-content-maxInlineSize: 10rem'"
+				>
+					<div>
+						<button type="button" lubutton="" class="button popover-close mod-onlyIcon">
+							<span aria-hidden="true" class="lucca-icon icon-signClose"></span>
+							<span class="pr-u-mask">Close</span>
+						</button>
+					</div>
+					<div class="popover-content">
+						<div class="popover-contentOptional">
+							popover popover popover<br />
+							popover popover popover<br />
+							popover popover popover<br />
+							popover popover popover<br />
+						</div>
 					</div>
 				</div>
 			</td>

@@ -50,6 +50,14 @@ export default {
 		luPopoverNoCloseButton: {
 			description: 'Masque le bouton de fermeture du popover visible à la navigation clavier.',
 		},
+		luPopoverMaxBlockSize: {
+			control: 'text',
+			description: 'Modifie la hauteur max de la popover.',
+		},
+		luPopoverMaxInlineSize: {
+			control: 'text',
+			description: 'Modifie la largeur max de la popover.',
+		},
 	},
 } as Meta;
 
@@ -108,6 +116,8 @@ export const Basic: StoryObj<PopoverDirective> = {
 		luPopoverDisabled: false,
 		luPopoverPosition: 'above',
 		luPopoverNoCloseButton: false,
+		luPopoverMaxBlockSize: '',
+		luPopoverMaxInlineSize: '',
 	},
 };
 export const CustomPosition: StoryObj<PopoverDirective> = {

@@ -36,6 +36,7 @@
 		.popover-content {
 			overflow: auto;
 			max-block-size: min(var(--components-popover-content-maxBlockSize), calc(100dvh - var(--pr-t-spacings-200)));
+			max-inline-size: min(var(--components-popover-content-maxInlineSize), calc(100dvw - var(--pr-t-spacings-400)));
 
 			&:focus-visible {
 				@include a11y.focusVisible($borderRadius: var(--pr-t-border-radius-default));
