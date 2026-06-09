@@ -55,7 +55,7 @@ Slugs : animations, mixins, numbers, scrollbox, utilitaires
 
 ### Migrations (montée de version)
 
-`./references/<version>/migrations.md` — migrations `ng update` cumulatives jusqu'à cette version.
+`./references/<version>/migrations.md` — codemods de migration (`ng generate @lucca-front/ng:<nom>`) cumulatifs jusqu'à cette version, avec leur version d'introduction.
 
 ### Exemple
 

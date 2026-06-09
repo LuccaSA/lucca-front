@@ -1,77 +1,124 @@
 /**
- * Schematics / migrations collector (piste B — git source).
+ * Schematics / migrations collector (git source).
  *
- * Reads `@lucca-front/ng`'s ng-update migration collection at the target git tag and writes a
- * cumulative `migrations.md` listing every migration whose version is ≤ the target. The update
- * skill (separate) points to this file; the consumer picks the (from → to] range that applies.
+ * Reads `@lucca-front/ng`'s **schematics collection** at the target git tag and writes a
+ * cumulative `migrations.md` listing every codemod available up to that version. These are the
+ * manual transformations a developer runs to absorb a breaking change in bulk:
  *
- * Source: packages/ng/schematics/migrations.json (declared as `ng-update.migrations` in
- * packages/ng/package.json), read via `git show <tag>:<path>` — layout-agnostic, no AI.
+ *   ng generate @lucca-front/ng:<name>
  *
- * NOTE: this collection is currently sparse (LF ships few automated ng-update migrations);
- * the richer migration guidance is prose on ZeroHeight, captured separately in deprecated.md.
+ * They complement the per-component changelog: the changelog *describes* what changed (API diff),
+ * a codemod *executes* the fix across the whole project. The update skill (separate) consumes this.
+ *
+ * Source: packages/ng/schematics/collection.json, read via `git show <tag>:<path>` — layout-
+ * agnostic, no AI. Codemods carry no version field, so the **introduction version** is derived by
+ * diffing the codemod set across consecutive stable 21.x tags (first tag where a name appears).
+ *
+ * NB: `migrations.json` (the `ng update` auto-migration list) is intentionally ignored — LF ships
+ * almost none (a single pre-21 entry), so it added no value. Prose guidance lives in deprecated.md.
  */
 
 import { execSync } from 'child_process';
 import { VersionConfig } from '../types';
 import { writeMigrationsPage } from '../generators/skill-writer';
+import { listStableTags, compareTags } from '../version-config';
 
-const MIGRATIONS_PATH = 'packages/ng/schematics/migrations.json';
+const COLLECTION_PATH = 'packages/ng/schematics/collection.json';
 
-interface MigrationEntry {
-	version: string;
-	description?: string;
-	factory?: string;
-}
+/** Codemods that are not migrations (setup/install) — excluded from the catalogue. */
+const NON_MIGRATION = new Set(['ng-add']);
 
-/** Parses leading major.minor.patch from a (possibly pre-release) version string. */
-function parseMmp(v: string): [number, number, number] {
-	const m = v.match(/(\d+)\.(\d+)\.(\d+)/);
-	return m ? [Number(m[1]), Number(m[2]), Number(m[3])] : [0, 0, 0];
-}
+/** Run-level cache: each tag's collection is read/parsed once. */
+const collectionCache = new Map<string, Map<string, string>>();
 
-function compareMmp(a: string, b: string): number {
-	const [a1, a2, a3] = parseMmp(a);
-	const [b1, b2, b3] = parseMmp(b);
-	return a1 - b1 || a2 - b2 || a3 - b3;
+/** Returns a map of codemod name → description at a tag (migrations only), or empty if absent. */
+function collectionAt(tag: string): Map<string, string> {
+	const cached = collectionCache.get(tag);
+	if (cached) return cached;
+
+	const map = new Map<string, string>();
+	let raw: string;
+	try {
+		raw = execSync(`git show ${tag}:${COLLECTION_PATH}`, { encoding: 'utf-8', maxBuffer: 10 * 1024 * 1024 });
+	} catch {
+		collectionCache.set(tag, map);
+		return map;
+	}
+
+	try {
+		const parsed = JSON.parse(raw) as { schematics?: Record<string, { description?: string }> };
+		for (const [name, e] of Object.entries(parsed.schematics ?? {})) {
+			if (NON_MIGRATION.has(name)) continue;
+			map.set(name, (e.description ?? '').trim());
+		}
+	} catch {
+		// leave empty
+	}
+
+	collectionCache.set(tag, map);
+	return map;
 }
 
 export function collectSchematics(skillsDir: string, version: VersionConfig): { written: number; errors: number } {
-	let raw: string;
-	try {
-		raw = execSync(`git show ${version.tag}:${MIGRATIONS_PATH}`, { encoding: 'utf-8', maxBuffer: 10 * 1024 * 1024 });
-	} catch {
-		console.warn(`  ⚠️  ${MIGRATIONS_PATH} absent au tag ${version.tag}`);
+	const target = collectionAt(version.tag);
+	if (target.size === 0) {
+		console.warn(`  ⚠️  ${COLLECTION_PATH} absent ou vide au tag ${version.tag}`);
 		return { written: 0, errors: 0 };
 	}
 
-	let parsed: { schematics?: Record<string, MigrationEntry> };
-	try {
-		parsed = JSON.parse(raw);
-	} catch {
-		console.warn(`  ⚠️  ${MIGRATIONS_PATH} illisible (JSON)`);
-		return { written: 0, errors: 1 };
+	// Stable 21.x tags up to the target, ascending — for introduction-version diffing.
+	const tags = listStableTags(version.major).filter((t) => compareTags(t, version.tag) <= 0);
+	const isFirstTag = tags.length > 0 && tags[0] === version.tag;
+	const predecessor = (() => {
+		const i = tags.indexOf(version.tag);
+		return i > 0 ? tags[i - 1] : null;
+	})();
+
+	// Introduction tag of each codemod = first stable 21.x tag where it appears. Codemods present
+	// at the earliest walked tag predate the 21.x branch → no reliable in-range version (null).
+	function introTag(name: string): string | null {
+		for (const t of tags) {
+			if (collectionAt(t).has(name)) {
+				return t === tags[0] ? null : t;
+			}
+		}
+		return null;
 	}
 
-	const migrations = Object.entries(parsed.schematics ?? {})
-		.map(([name, e]) => ({ name, ...e }))
-		.filter((e) => compareMmp(e.version, version.tag) <= 0)
-		.sort((a, b) => compareMmp(a.version, b.version) || a.name.localeCompare(b.name));
+	const names = [...target.keys()].sort((a, b) => a.localeCompare(b));
 
-	if (migrations.length === 0) {
-		console.warn(`  ⚠️  aucune migration ≤ ${version.tag}`);
-		return { written: 0, errors: 0 };
+	// "New in this version" = present now, absent in the immediate predecessor stable tag.
+	const prev = predecessor ? collectionAt(predecessor) : null;
+	const nouveaux = prev ? names.filter((n) => !prev.has(n)) : [];
+
+	const cmd = (n: string) => `\`ng generate @lucca-front/ng:${n}\``;
+
+	let md = `# Migrations Lucca Front — jusqu'à ${version.tag}\n\n`;
+	md += `> Codemods exécutables via \`ng generate @lucca-front/ng:<nom>\`. Ils réécrivent automatiquement le code (templates, SCSS, imports) pour absorber un changement d'API, là où le changelog par composant ne fait que **décrire** le changement.\n`;
+	md += `> Source : \`${COLLECTION_PATH}\` au tag ${version.tag}. Liste cumulative.\n`;
+	md += `> Guidance prose (étapes manuelles, contexte) : \`./documentation/deprecated/deprecated.md\`.\n\n`;
+
+	if (nouveaux.length > 0) {
+		md += `## 🆕 Nouveaux codemods en ${version.major}.${version.minor}.${version.patch}\n\n`;
+		md += `À envisager en montant **vers** cette version :\n\n`;
+		md += `| Codemod | Commande | Effet |\n|---------|----------|-------|\n`;
+		for (const n of nouveaux) {
+			md += `| ${n} | ${cmd(n)} | ${target.get(n) || '_(pas de description)_'} |\n`;
+		}
+		md += `\n`;
+	} else if (isFirstTag) {
+		md += `_Catalogue de base de la branche 21.x (pas de diff de prédécesseur)._\n\n`;
 	}
 
-	let md = `# Migrations Lucca Front (ng update) — jusqu'à ${version.tag}\n\n`;
-	md += `> Migrations automatiques exécutées par \`ng update @lucca-front/ng\`. Source : \`${MIGRATIONS_PATH}\` au tag ${version.tag}.\n`;
-	md += `> Liste cumulative. Lors d'une montée, seules les migrations dont la version est dans la plage (départ → cible] s'appliquent.\n`;
-	md += `> La guidance prose (commandes, étapes manuelles) est dans \`./documentation/deprecated/deprecated.md\`.\n\n`;
-	for (const e of migrations) {
-		md += `## ${e.version} — \`${e.name}\`\n\n${e.description ?? '_(pas de description)_'}\n\n`;
+	md += `## Catalogue complet (cumulatif ≤ ${version.tag})\n\n`;
+	md += `| Codemod | Commande | Effet | Introduit |\n|---------|----------|-------|-----------|\n`;
+	for (const n of names) {
+		const intro = introTag(n);
+		md += `| ${n} | ${cmd(n)} | ${target.get(n) || '_(pas de description)_'} | ${intro ? intro.replace(/^v/, '') : '—'} |\n`;
 	}
+	md += `\n`;
 
 	const result = writeMigrationsPage(skillsDir, version, md);
-	console.log(`     ✅ migrations.md — ${result.status} (${migrations.length} migration(s))`);
+	console.log(`     ✅ migrations.md — ${result.status} (${names.length} codemod(s), ${nouveaux.length} nouveau(x))`);
 	return { written: 1, errors: 0 };
 }
