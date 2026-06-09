@@ -30,7 +30,7 @@
 						let groupIndex = $index
 					) {
 						<div class="lu-picker-content-group" role="group" attr.aria-labelledby="lu-select-{{ selectId }}-group-{{ groupIndex }}">
-							@let groupCtx = group.options | luOptionsGroupContext: selectedOptions : optionComparer;
+							@let groupCtx = group.options | luOptionsGroupContext: selectedOptions : optionComparer();
 							<div
 								luCoreSelectPanelElement
 								elementId="lu-select-{{ selectId }}-group-{{ groupIndex }}"
@@ -89,7 +89,7 @@
 								[groupIndex]="groupIndex"
 								[groupTemplateLocation]="ctx.groupTemplateLocation"
 								[scrollIntoViewOptions]="{ block: 'nearest' }"
-								[isSelected]="option | luIsOptionSelected: optionComparer : selectedOptions"
+								[isSelected]="option | luIsOptionSelected: optionComparer() : selectedOptions"
 								(selected)="toggleOption(option)"
 								(click)="toggleOption(option)"
 								[class.withAddOption]="ctx.shouldDisplayAddOption"
