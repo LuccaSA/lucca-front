@@ -11,12 +11,55 @@ export default (options: SchematicContextOpts): Rule => {
 
 		new DeprecatedMapper(tree, {
 			modules: {
-					LuDateSelectInputModule: 'LuDateSelectInputComponent',
-					LuUserSelectInputModule: 'LuUserSelectInputComponent',
-				},
-				types: {
-					ILuTranslation: 'LuTranslation',
-				},
+				// LuDateModule
+				LuDatePickerModule: 'LuDatePickerComponent',
+				LuDateSelectInputModule: 'LuDateSelectInputComponent',
+				LuDateAdapterModule: 'LuDateAdapterPipe',
+				// LuApiModule
+				LuApiSelectInputModule: 'LuApiSelectInputComponent',
+				// LuDropdownModule
+				LuDropdownPanelModule: 'LuDropdownPanelComponent',
+				LuDropdownItemModule: 'LuDropdownItemDirective',
+				LuDropdownTriggerModule: 'LuDropdownTriggerDirective',
+				// LuDepartmentModule
+				LuDepartmentSelectInputModule: 'LuDepartmentSelectInputComponent',
+				// LuEstablishmentModule
+				LuEstablishmentSelectInputModule: 'LuEstablishmentSelectInputComponent',
+				// LuUserModule
+				LuUserSelectInputModule: 'LuUserSelectInputComponent',
+				LuUserDisplayModule: 'LuUserDisplayPipe',
+				LuUserPictureModule: 'LuUserPictureComponent',
+				LuUserTileModule: 'LuUserTileComponent',
+				LuUserMeOptionModule: 'LuUserMeOptionDirective',
+				LuUserSearcherModule: 'LuUserPagedSearcherComponent',
+				// LuOptionModule
+				LuOptionItemModule: 'LuOptionItemComponent',
+				LuOptionFeederModule: 'LuOptionFeederComponent',
+				LuOptionPagerModule: 'LuOptionPagerComponent',
+				LuOptionSearcherModule: 'LuOptionSearcherComponent',
+				LuOptionSelectAllModule: 'LuOptionSelectAllComponent',
+				LuForOptionsModule: 'LuForOptionsDirective',
+				// LuTreeOptionModule
+				LuTreeOptionItemModule: 'LuTreeOptionItemComponent',
+				LuTreeOptionFeederModule: 'LuTreeOptionFeederComponent',
+				LuForTreeOptionsModule: 'LuForTreeOptionsDirective',
+				LuTreeOptionSearcherModule: 'LuTreeOptionSearcherComponent',
+				// LuPopoverModule
+				LuPopoverPanelModule: 'LuPopoverPanelComponent',
+				// LuTooltipModule
+				LuTooltipTriggerModule: 'LuTooltipTriggerDirective',
+				// LuInputModule
+				LuInputClearerModule: 'LuInputClearerComponent',
+				LuInputDisplayerModule: 'LuInputDisplayerDirective',
+				// NgModules simples
+				LuToastsModule: 'LuToastsComponent',
+				LuNumberModule: 'LuNumberPipe',
+				LuScrollModule: 'LuScrollDirective',
+				LuSafeContentModule: 'LuSafeHtmlPipe',
+			},
+			types: {
+				ILuTranslation: 'LuTranslation',
+			},
 		}).run();
 	};
 };
