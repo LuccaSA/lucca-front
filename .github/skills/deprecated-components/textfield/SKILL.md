@@ -168,7 +168,7 @@ Pour les champs multiline, tenir compte de la reference Prisme suivante :
 Regles de migration pour `textarea` :
 - ne jamais migrer un `textarea` vers `lu-text-input`
 - utiliser `lu-textarea-input` quand la migration est validee manuellement
-- conserver les attributs et bindings utiles (`formControlName`, `[formControl]`, `[(ngModel)]`, `placeholder`, `rows`, `maxlength`, `disabled`, `readonly`, `name`, `id`)
+- conserver les attributs et bindings utiles (`formControlName`, `[formControl]`, `[(ngModel)]`, `placeholder`, `rows`, `maxlength`, `disabled`) — si `readonly` / `name` / `id` sont utilises, classer le cas en migration manuelle (non supportes nativement)
 - conserver la logique de validation existante (messages, etat invalide, required)
 - en cas d'ambiguite fonctionnelle (auto-resize, comportement specifique non couvert, prefix/suffix complexe), classer le cas en migration manuelle
 
