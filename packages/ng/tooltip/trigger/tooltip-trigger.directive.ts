@@ -53,6 +53,7 @@ let nextId = 0;
 		'(mouseleave)': 'onMouseLeave()',
 		'(focus)': 'onFocus()',
 		'(blur)': 'onBlur()',
+		'(keydown.escape)': 'onEscape($event)',
 	},
 })
 export class LuTooltipTriggerDirective implements OnDestroy {
@@ -281,6 +282,12 @@ export class LuTooltipTriggerDirective implements OnDestroy {
 
 	onBlur() {
 		this.#action.set('close');
+	}
+
+	onEscape(event: Event) {
+		event.stopPropagation();
+		this.#action.set(null);
+		this.closeTooltip();
 	}
 
 	requestOpen() {
