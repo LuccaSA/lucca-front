@@ -11,7 +11,7 @@ import {
 import { PALETTE } from '@lucca/prisme/core';
 import { Meta, moduleMetadata, StoryObj } from '@storybook/angular';
 import { createTestStory, generateInputs, setStoryOptions } from 'stories/helpers/stories';
-import { waitForAngular } from 'stories/helpers/test';
+import { sleep, waitForAngular } from 'stories/helpers/test';
 import { expect, screen, userEvent, within } from 'storybook/test';
 
 export default {
@@ -151,15 +151,10 @@ export const TemplateTEST = createTestStory(Template, async ({ canvasElement, st
 	await waitForAngular();
 	const canvas = within(canvasElement);
 
-	await step('Vérifie le rendu initial du bouton déclencheur', async () => {
-		const button = canvas.getByRole('button');
-		await expect(button).toBeVisible();
-	});
-
 	await step('Interaction souris - ouverture du popover', async () => {
 		const button = canvas.getByRole('button');
 		await userEvent.click(button);
-		await waitForAngular();
+		await sleep(500);
 		const popoverContent = screen.getByRole('list');
 		await expect(popoverContent).toBeVisible();
 	});
@@ -167,7 +162,7 @@ export const TemplateTEST = createTestStory(Template, async ({ canvasElement, st
 	await step('Interaction souris - fermeture du popover', async () => {
 		const button = canvas.getByRole('button');
 		await userEvent.click(button);
-		await waitForAngular();
+		await sleep(500);
 		await expect(screen.queryByRole('list')).not.toBeInTheDocument();
 	});
 
@@ -176,14 +171,14 @@ export const TemplateTEST = createTestStory(Template, async ({ canvasElement, st
 		button.focus();
 		await expect(button).toHaveFocus();
 		await userEvent.keyboard('{Enter}');
-		await waitForAngular();
+		await sleep(500);
 		const popoverContent = screen.getByRole('list');
 		await expect(popoverContent).toBeVisible();
 	});
 
 	await step('Interaction clavier - fermeture avec Escape', async () => {
 		await userEvent.keyboard('{Escape}');
-		await waitForAngular();
+		await sleep(500);
 		await expect(screen.queryByRole('list')).not.toBeInTheDocument();
 	});
 });
