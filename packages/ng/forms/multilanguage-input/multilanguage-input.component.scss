@@ -6,12 +6,12 @@
 		max-inline-size: 100%;
 		overflow: auto;
 
-		.button.mod-AI {
+		.multilanguage_popover-content-button {
 			padding: var(--pr-t-spacings-50);
 		}
 
 		.textField:not(:focus-within, :hover) {
-			.button.mod-AI {
+			.multilanguage_popover-content-button {
 				@include a11y.mask;
 			}
 		}
