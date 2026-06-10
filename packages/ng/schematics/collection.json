@@ -41,6 +41,11 @@
       "factory": "./component-path/index",
       "schema": "./component-path/schema.json"
     },
+    "deprecated-resolver": {
+      "description": "Migrate deprecated NgModules, types and input output.",
+      "factory": "./deprecated-resolver/index",
+      "schema": "./deprecated-resolver/schema.json"
+    },
     "tokens-typo": {
       "description": "Replace typography tokens with new names.",
       "factory": "./tokens-typo/index",
