@@ -2,6 +2,9 @@ import { ChangeDetectionStrategy, Component, input } from '@angular/core';
 import { provideAnimations } from '@angular/platform-browser/animations';
 import { LuPopoverAlignment, LuPopoverModule, LuPopoverPosition, LuPopoverTriggerEvent } from '@lucca-front/ng/popover';
 import { applicationConfig, Meta, StoryObj } from '@storybook/angular';
+import { createTestStory } from 'stories/helpers/stories';
+import { sleep, waitForAngular } from 'stories/helpers/test';
+import { expect, screen, userEvent, within } from 'storybook/test';
 
 @Component({
 	selector: 'popover-story',
@@ -63,3 +66,20 @@ Basic.parameters = {
 		},
 	},
 };
+
+export const BasicTEST = createTestStory(Basic, async ({ canvasElement, step }) => {
+	await waitForAngular();
+	const canvas = within(canvasElement);
+
+	await step('Ouvre le popover', async () => {
+		await userEvent.click(canvas.getByRole('button'));
+		await sleep(500);
+		await expect(screen.getByText('🎉 popover content 🏖️')).toBeVisible();
+	});
+
+	await step('Ferme avec Escape', async () => {
+		await userEvent.keyboard('{Escape}');
+		await sleep(500);
+		await expect(screen.queryByText('🎉 popover content 🏖️')).not.toBeInTheDocument();
+	});
+});

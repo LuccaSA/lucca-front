@@ -3,7 +3,9 @@ import { BrowserAnimationsModule } from '@angular/platform-browser/animations';
 import { FORM_FIELD_WIDTH, FormFieldComponent, InputDirective } from '@lucca-front/ng/form-field';
 import { INLINE_MESSAGE_STATE } from '@lucca-front/ng/inline-message';
 import { Meta, moduleMetadata, StoryObj } from '@storybook/angular';
-import { generateInputs, setStoryOptions } from '../../../helpers/stories';
+import { createTestStory, generateInputs, setStoryOptions } from '../../../helpers/stories';
+import { waitForAngular } from '../../../helpers/test';
+import { expect, userEvent, within } from 'storybook/test';
 
 export default {
 	title: 'Documentation/Forms/Fields/Form Field',
@@ -108,3 +110,22 @@ export const Template: StoryObj<FormFieldComponent & { required: boolean }> = {
 		rolePresentationLabel: false,
 	},
 };
+
+export const TemplateTEST = createTestStory(Template, async ({ canvasElement, step }) => {
+	await waitForAngular();
+	const canvas = within(canvasElement);
+
+	await step('Vérifie le rendu initial', async () => {
+		await expect(canvas.getByText('Label')).toBeVisible();
+		await expect(canvas.getByRole('textbox')).toBeVisible();
+	});
+
+	await step('Interaction clavier', async () => {
+		const textarea = canvas.getByRole('textbox');
+		textarea.focus();
+		await expect(textarea).toHaveFocus();
+		await userEvent.type(textarea, 'test input');
+		await waitForAngular();
+		await expect(textarea).toHaveValue('test input');
+	});
+});

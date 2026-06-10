@@ -134,6 +134,9 @@ export abstract class ALuSelectInputComponent<TOption, TValue> implements OnDest
 
 	public isPanelOpen$ = new BehaviorSubject(false);
 
+	// TODO Might be temporary, check after merging signalize PR
+	public panelOpenSignal = toSignal(this.isPanelOpen$);
+
 	public activeDescendant$ = new BehaviorSubject('');
 
 	get ariaControls(): string {
