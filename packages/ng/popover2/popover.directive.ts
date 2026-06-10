@@ -154,7 +154,7 @@ export class PopoverDirective implements OnDestroy {
 
 	#screenReaderDescription?: HTMLSpanElement;
 
-	readonly tabIndexAttr = this.#shouldSetTabIndex(this.elementRef.nativeElement) ? '0' : null;
+	readonly tabIndexAttr = this.#shouldSetTabIndex(this.elementRef.nativeElement) ? 0 : null;
 	readonly roleAttr = this.#shouldSetRole(this.elementRef.nativeElement) ? 'button' : null;
 
 	// For when we need to extend this popover and add some extra providers to the panel
@@ -350,7 +350,7 @@ export class PopoverDirective implements OnDestroy {
 	}
 
 	#isUsingSyntheticTabIndex(): boolean {
-		return this.tabIndexAttr === '0';
+		return this.tabIndexAttr === 0;
 	}
 
 	#shouldSetTabIndex(element: HTMLElement): boolean {
@@ -376,19 +376,18 @@ export class PopoverDirective implements OnDestroy {
 			return true;
 		}
 
-		if (tag === 'a') {
-			return element.hasAttribute('href');
+		switch (tag) {
+			case 'a':
+				return element.hasAttribute('href');
+			case 'button':
+			case 'select':
+			case 'textarea':
+				return !element.hasAttribute('disabled');
+			case 'input':
+				return !element.hasAttribute('disabled') && (element as HTMLInputElement).type !== 'hidden';
+			default:
+				return false;
 		}
-
-		if (tag === 'button' || tag === 'select' || tag === 'textarea') {
-			return !element.hasAttribute('disabled');
-		}
-
-		if (tag === 'input') {
-			return !element.hasAttribute('disabled') && (element as HTMLInputElement).type !== 'hidden';
-		}
-
-		return false;
 	}
 
 	#buildPositions(): ConnectedPosition[] {
