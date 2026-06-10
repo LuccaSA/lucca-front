@@ -130,6 +130,22 @@
 			}
 		}
 
+		.textField-prefix-lang {
+			min-inline-size: calc(var(--pr-t-spacings-300) + var(--pr-t-spacings-50));
+			position: relative;
+
+			&::after {
+				content: '';
+				position: absolute;
+				inset: var(--pr-t-spacings-25) 0;
+				border-right: 1px solid var(--palettes-neutral-200);
+			}
+
+			&:has(.formLabel-required) {
+				min-inline-size: calc(var(--pr-t-spacings-400) + var(--pr-t-spacings-50));
+			}
+		}
+
 		.textField-suffix {
 			display: inline-flex;
 			padding-inline-end: var(--component-textField-padding);
