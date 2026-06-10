@@ -12,3 +12,7 @@
 | Property | Type | Values |
 |----------|------|--------|
 | `Size` | VARIANT | `Default` · `Small` |
+| `Helper text` | BOOLEAN | — |
+| `Slot content` | INSTANCE_SWAP | — |
+| `Title value` | TEXT | — |
+| `↪️ Helper text value` | TEXT | — |

@@ -14,3 +14,5 @@
 | `size` | VARIANT | `XS` · `S` · `M` · `L` · `XL` · `2XL` · `3XL` |
 | `identity` | VARIANT | `None` · `[ES] Cabrero Lucia` · `[ES] Cortes Mateo` · `[ES] Delgado Juan` · `[ES] Fernández Carmen` · `[ES] Pérez Sofia` · `[ES] Suarez Gabriela` · `[FR] Alibert Chloé` · `[FR] Archer Marie-Françoise` · `[FR] Bart Maurice` · `[FR] Beaulinette Antoine` · `[FR] Bragoulet Marie` · `[FR] Bresnier Valentin` · `[FR] Clisson Brigitte` · `[FR] Flantier Noël` · `[FR] Geste Florence` · `[FR] Hernandez Daniel` · `[FR] Pichou Olivier` · `[FR] Épineau Cécile` · `[UK] Benton Peter` · `[UK] Berry Jessica` · `[UK] Brown Chloe` · `[UK] Cox Adam` · `[UK] Doherty Alexander` · `[UK] Douglas Rebecca` |
 | `placeholder` | VARIANT | `false` · `true` |
+| `more` | BOOLEAN | — |
+| `sizes` | VARIANT | `L` · `M` · `S` · `XS` · `XL` |

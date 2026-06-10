@@ -27,6 +27,10 @@ import { BubbleIllustrationComponent } from '@lucca-front/ng/bubble-illustration
 | `size` | `size` | `'S' \| 'M' \| 'L'` | `'M'` | — | — | Modifie la taille du composant. |
 | `action` | `action` | `boolean` | `false` | — | `booleanAttribute` | Ajoute une icône d’action (+) à l’illustration. |
 
+## Type definitions
+
+- [`BubbleIllustration`](../../types/BubbleIllustration.md) — 102 available values
+
 ## Related files
 
 - 📝 [Code & implementation](./bubble-illustration.component.md)

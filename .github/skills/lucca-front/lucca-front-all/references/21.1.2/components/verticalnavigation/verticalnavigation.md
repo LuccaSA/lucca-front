@@ -66,6 +66,10 @@ import { VerticalNavigationLinkComponent, VerticalNavigationComponent, VerticalN
 |----------|------|----------|
 | `expanded` | `unknown` | — |
 
+## Type definitions
+
+- [`LuccaIcon`](../../types/LuccaIcon.md) — 569 available values
+
 ## Related files
 
 - 📝 [Code & implementation](./verticalnavigation.component.md)
