@@ -13,6 +13,8 @@ export default {
 				// Disable for now because of bugs with SCSS files.
 				// SEE https://github.com/stylelint-scss/stylelint-config-standard-scss/issues/269
 				'no-invalid-position-declaration': null,
+				// TODO: Check which units need to be physical or logical.
+				'unit-layout-mappings': null,
 			},
 		},
 		{
@@ -171,7 +173,9 @@ export default {
 				ignorePseudoElements: ['ng-deep'],
 			},
 		],
+		'unit-layout-mappings': 'flow-relative',
 		'value-keyword-case': null,
+		'value-keyword-layout-mappings': ['flow-relative', { severity: 'warning' }],
 
 		// Formatting with @stylistic
 		// SEE: https://github.com/stylelint-stylistic/stylelint-stylistic/blob/main/docs/user-guide/rules.md
