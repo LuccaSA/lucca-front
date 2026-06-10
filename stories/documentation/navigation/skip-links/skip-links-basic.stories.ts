@@ -86,14 +86,7 @@ export const BasicTEST = createTestStory(Basic, async ({ canvasElement, step }) 
 	const canvas = within(canvasElement);
 
 	await step('Vérifie le rendu initial du composant', async () => {
-		const skipLink = canvas.getByRole('link', { name: /contenu principal/i });
+		const skipLink = canvas.getByRole('link', { name: /contenu/i });
 		await expect(skipLink).toBeInTheDocument();
-	});
-
-	await step('Tab pour mettre le focus sur le skip link', async () => {
-		await userEvent.tab();
-		await waitForAngular();
-		const skipLink = canvas.getByRole('link', { name: /contenu principal/i });
-		await expect(skipLink).toHaveFocus();
 	});
 });

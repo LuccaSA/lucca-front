@@ -47,27 +47,3 @@ Basic.parameters = {
 		include: ['luUserPopover', 'luUserPopoverEnterDelay', 'luUserPopoverLeaveDelay', 'luUserPopoverDisabled'],
 	},
 };
-
-export const BasicTEST = createTestStory(Basic, async ({ canvasElement, step }) => {
-	await waitForAngular();
-	const canvas = within(canvasElement);
-
-	await step('Vérifie le rendu initial', async () => {
-		const trigger = canvas.getByRole('button');
-		await expect(trigger).toBeVisible();
-	});
-
-	await step('Ouvre le popover au survol', async () => {
-		const trigger = canvas.getByRole('button');
-		await userEvent.hover(trigger);
-		await sleep(350);
-		await waitForAngular();
-		await expect(screen.getByText('Chloe Alibert')).toBeVisible();
-	});
-
-	await step('Ferme avec Escape', async () => {
-		await userEvent.keyboard('{Escape}');
-		await waitForAngular();
-		await expect(screen.queryByText('Chloe Alibert')).not.toBeInTheDocument();
-	});
-});

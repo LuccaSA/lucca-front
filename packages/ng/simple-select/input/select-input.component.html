@@ -10,7 +10,7 @@
 		role="combobox"
 		aria-haspopup="listbox"
 		[attr.aria-activedescendant]="activeDescendant$ | async"
-		[attr.aria-expanded]="isPanelOpen"
+		[attr.aria-expanded]="panelOpenSignal()"
 		[attr.aria-controls]="ariaControls"
 		[attr.placeholder]="inputPlaceholder ? inputPlaceholder : intl().placeholder"
 		[ngModel]="clue"

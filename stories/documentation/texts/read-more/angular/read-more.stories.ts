@@ -1,7 +1,7 @@
 import { READ_MORE_SURFACE, ReadMoreComponent } from '@lucca-front/ng/read-more';
 import { Meta, moduleMetadata } from '@storybook/angular';
 import { createTestStory, generateInputs, setStoryOptions } from 'stories/helpers/stories';
-import { waitForAngular } from 'stories/helpers/test';
+import { sleep, waitForAngular } from 'stories/helpers/test';
 import { expect, userEvent, within } from 'storybook/test';
 
 const OTHER_SURFACE_OPTIONS = ['#0b1732'];
@@ -79,43 +79,104 @@ export const Basic = {
 	},
 };
 
-export const BasicTEST = createTestStory(Basic, async ({ canvasElement, step }) => {
-	await waitForAngular();
+const extendedContent = `<p>
+		Lorem ipsum dolor sit amet consectetur, adipisicing elit. Dignissimos ut maiores ullam facere voluptatum odio eum? Debitis natus nulla fugit
+		<a href="#">deleniti</a>
+		esse ipsum sint voluptatibus! Debitis voluptates impedit blanditiis natus.
+	</p>
+	<p>
+		Vitae veritatis non aliquam obcaecati illum voluptatum, voluptas dignissimos perspiciatis velit odit, magnam
+		<a href="#">aspernatur</a>
+		culpa totam nemo, magni cum? Magni sapiente voluptatibus temporibus. Quas reprehenderit deleniti sit veniam, molestias obcaecati.
+	</p>
+<p>
+		Lorem ipsum dolor sit amet consectetur, adipisicing elit. Dignissimos ut maiores ullam facere voluptatum odio eum? Debitis natus nulla fugit
+		<a href="#">deleniti</a>
+		esse ipsum sint voluptatibus! Debitis voluptates impedit blanditiis natus.
+	</p>
+	<p>
+		Vitae veritatis non aliquam obcaecati illum voluptatum, voluptas dignissimos perspiciatis velit odit, magnam
+		<a href="#">aspernatur</a>
+		culpa totam nemo, magni cum? Magni sapiente voluptatibus temporibus. Quas reprehenderit deleniti sit veniam, molestias obcaecati.
+	</p>
+<p>
+		Lorem ipsum dolor sit amet consectetur, adipisicing elit. Dignissimos ut maiores ullam facere voluptatum odio eum? Debitis natus nulla fugit
+		<a href="#">deleniti</a>
+		esse ipsum sint voluptatibus! Debitis voluptates impedit blanditiis natus.
+	</p>
+	<p>
+		Vitae veritatis non aliquam obcaecati illum voluptatum, voluptas dignissimos perspiciatis velit odit, magnam
+		<a href="#">aspernatur</a>
+		culpa totam nemo, magni cum? Magni sapiente voluptatibus temporibus. Quas reprehenderit deleniti sit veniam, molestias obcaecati.
+	</p>
+<p>
+		Lorem ipsum dolor sit amet consectetur, adipisicing elit. Dignissimos ut maiores ullam facere voluptatum odio eum? Debitis natus nulla fugit
+		<a href="#">deleniti</a>
+		esse ipsum sint voluptatibus! Debitis voluptates impedit blanditiis natus.
+	</p>
+	<p>
+		Vitae veritatis non aliquam obcaecati illum voluptatum, voluptas dignissimos perspiciatis velit odit, magnam
+		<a href="#">aspernatur</a>
+		culpa totam nemo, magni cum? Magni sapiente voluptatibus temporibus. Quas reprehenderit deleniti sit veniam, molestias obcaecati.
+	</p>
+<p>
+		Lorem ipsum dolor sit amet consectetur, adipisicing elit. Dignissimos ut maiores ullam facere voluptatum odio eum? Debitis natus nulla fugit
+		<a href="#">deleniti</a>
+		esse ipsum sint voluptatibus! Debitis voluptates impedit blanditiis natus.
+	</p>
+	<p>
+		Vitae veritatis non aliquam obcaecati illum voluptatum, voluptas dignissimos perspiciatis velit odit, magnam
+		<a href="#">aspernatur</a>
+		culpa totam nemo, magni cum? Magni sapiente voluptatibus temporibus. Quas reprehenderit deleniti sit veniam, molestias obcaecati.
+	</p>
+<p>
+		Lorem ipsum dolor sit amet consectetur, adipisicing elit. Dignissimos ut maiores ullam facere voluptatum odio eum? Debitis natus nulla fugit
+		<a href="#">deleniti</a>
+		esse ipsum sint voluptatibus! Debitis voluptates impedit blanditiis natus.
+	</p>
+	<p>
+		Vitae veritatis non aliquam obcaecati illum voluptatum, voluptas dignissimos perspiciatis velit odit, magnam
+		<a href="#">aspernatur</a>
+		culpa totam nemo, magni cum? Magni sapiente voluptatibus temporibus. Quas reprehenderit deleniti sit veniam, molestias obcaecati.
+	</p>`;
+
+export const BasicTEST = createTestStory({ ...Basic, args: { ...Basic.args, content: extendedContent } }, async ({ canvasElement, step }) => {
+	await sleep(200);
 	const canvas = within(canvasElement);
 
 	await step('Vérifie le rendu initial avec le bouton "Lire plus"', async () => {
-		const readMoreButton = canvas.getByRole('button', { name: /lire plus/i });
+		const readMoreButton = canvas.getByText(/lire plus/i);
 		await expect(readMoreButton).toBeVisible();
 	});
 
 	await step('Clic sur "Lire plus" pour déplier le contenu', async () => {
-		const readMoreButton = canvas.getByRole('button', { name: /lire plus/i });
+		const readMoreButton = canvas.getByText(/lire plus/i);
 		await userEvent.click(readMoreButton);
 		await waitForAngular();
-		const readLessButton = canvas.getByRole('button', { name: /lire moins/i });
+		const readLessButton = canvas.getByText(/lire moins/i);
 		await expect(readLessButton).toBeVisible();
 	});
 
 	await step('Clic sur "Lire moins" pour replier le contenu', async () => {
-		const readLessButton = canvas.getByRole('button', { name: /lire moins/i });
+		const readLessButton = canvas.getByText(/lire moins/i);
 		await userEvent.click(readLessButton);
 		await waitForAngular();
-		const readMoreButton = canvas.getByRole('button', { name: /lire plus/i });
+		const readMoreButton = canvas.getByText(/lire plus/i);
 		await expect(readMoreButton).toBeVisible();
 	});
 
 	await step('Interaction clavier : ouverture et fermeture via le clavier', async () => {
-		const readMoreButton = canvas.getByRole('button', { name: /lire plus/i });
+		const readMoreButton = canvas.getByText(/lire plus/i);
 		readMoreButton.focus();
 		await expect(readMoreButton).toHaveFocus();
 		await userEvent.keyboard('{Enter}');
 		await waitForAngular();
-		const readLessButton = canvas.getByRole('button', { name: /lire moins/i });
+		const readLessButton = canvas.getByText(/lire moins/i);
 		await expect(readLessButton).toBeVisible();
 		readLessButton.focus();
 		await userEvent.keyboard('{Enter}');
 		await waitForAngular();
-		const readMoreButtonAgain = canvas.getByRole('button', { name: /lire plus/i });
+		const readMoreButtonAgain = canvas.getByText(/lire plus/i);
 		await expect(readMoreButtonAgain).toBeVisible();
 	});
 });

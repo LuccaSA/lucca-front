@@ -56,7 +56,7 @@ export const BasicTEST = createTestStory(Basic, async ({ canvasElement, step }) 
 	const canvas = within(canvasElement);
 
 	await step('Vérifie le rendu initial', async () => {
-		const nav = canvas.getByRole('navigation');
+		const nav = canvas.getByRole('nav');
 		await expect(nav).toBeVisible();
 	});
 

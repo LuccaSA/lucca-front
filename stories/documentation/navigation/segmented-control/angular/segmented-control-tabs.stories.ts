@@ -91,10 +91,10 @@ export const BasicTEST = createTestStory(Basic, async ({ canvasElement, step }) 
 
 	await step('Navigation clavier entre les onglets', async () => {
 		const tabs = canvas.getAllByRole('tab');
-		tabs[0].focus();
-		await expect(tabs[0]).toHaveFocus();
+		tabs[1].focus();
+		await expect(tabs[1]).toHaveFocus();
 		await userEvent.keyboard('{ArrowRight}');
 		await waitForAngular();
-		await expect(tabs[1]).toHaveFocus();
+		await expect(tabs[2]).toHaveFocus();
 	});
 });

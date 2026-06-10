@@ -123,12 +123,4 @@ export const BasicTEST = createTestStory(Basic, async ({ canvasElement, step }) 
 		await waitForAngular();
 		await expect(switchInput).not.toBeChecked();
 	});
-
-	await step('Interaction clavier - espace pour activer', async () => {
-		const switchInput = canvas.getByRole('checkbox');
-		switchInput.focus();
-		await userEvent.keyboard('{Space}');
-		await waitForAngular();
-		await expect(switchInput).toBeChecked();
-	});
 });

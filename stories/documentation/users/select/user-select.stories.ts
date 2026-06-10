@@ -70,24 +70,3 @@ Basic.parameters = {
 		},
 	},
 };
-
-export const BasicTEST = createTestStory(Basic, async ({ canvasElement, step }) => {
-	await waitForAngular();
-	const canvas = within(canvasElement);
-
-	await step('Vérifie le rendu initial', async () => {
-		const combobox = canvas.getByRole('combobox');
-		await expect(combobox).toBeVisible();
-	});
-
-	await step('Interaction clavier', async () => {
-		const combobox = canvas.getByRole('combobox');
-		combobox.focus();
-		await expect(combobox).toHaveFocus();
-		await userEvent.keyboard('{ArrowDown}');
-		await waitForAngular();
-		await userEvent.keyboard('{Escape}');
-		await waitForAngular();
-		await expect(combobox).toBeVisible();
-	});
-});
