@@ -525,9 +525,11 @@ function collectExpandedTypeDefs(data: ComponentData): Array<SharedTypeDef & { c
 	const result: Array<SharedTypeDef & { count: number }> = [];
 	for (const api of data.api.apis) {
 		for (const input of api.inputs) {
-			if (input.expandedValues && !seen.has(input.type)) {
-				seen.add(input.type);
-				result.push({ typeName: input.type, values: input.expandedValues, count: input.expandedValues.length });
+			// expandedTypeName: the alias the values belong to (input.type may be a wider union)
+			const typeName = input.expandedTypeName ?? input.type;
+			if (input.expandedValues && !seen.has(typeName)) {
+				seen.add(typeName);
+				result.push({ typeName, values: input.expandedValues, count: input.expandedValues.length });
 			}
 		}
 	}
@@ -543,8 +545,9 @@ export function collectSharedTypeDefs(allData: ComponentData[]): SharedTypeDef[]
 		if (!data.api) continue;
 		for (const api of data.api.apis) {
 			for (const input of api.inputs) {
-				if (input.expandedValues && !seen.has(input.type)) {
-					seen.set(input.type, { typeName: input.type, values: input.expandedValues });
+				const typeName = input.expandedTypeName ?? input.type;
+				if (input.expandedValues && !seen.has(typeName)) {
+					seen.set(typeName, { typeName, values: input.expandedValues });
 				}
 			}
 		}

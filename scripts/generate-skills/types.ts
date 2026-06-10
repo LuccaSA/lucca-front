@@ -113,6 +113,12 @@ export interface ExtractedInput {
 	 * When set, `type` keeps the alias name and these values are listed in a dedicated section.
 	 */
 	expandedValues?: string[];
+	/**
+	 * Name of the alias the expandedValues belong to. Equals `type` for a pure alias, or the
+	 * union member that was expanded when the declared type is wider (e.g. "BubbleIllustration"
+	 * for `BubbleIllustration | string | null`).
+	 */
+	expandedTypeName?: string;
 }
 
 export interface ExtractedOutput {

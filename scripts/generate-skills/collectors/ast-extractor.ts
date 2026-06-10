@@ -264,18 +264,15 @@ function extractSignalInputs(classBody: string, typeContext: string): ExtractedI
 		const argsStr = match[3]?.trim() ?? '';
 		const isRequired = match[0].includes('.required');
 
-		// Parse the type — resolve type aliases from imports
+		// Parse the type — resolve type aliases (pure alias or named member of a union)
 		let type = genericType || inferTypeFromDefault(argsStr);
 		let expandedValues: string[] | undefined;
-		const resolvedType = resolveTypeAlias(type, typeContext);
-		if (resolvedType) {
-			const values = extractStringUnionValues(resolvedType);
-			if (values && values.length > 10) {
-				// Keep the alias name in `type` for brevity, expose values separately
-				expandedValues = values;
-			} else {
-				type = resolvedType;
-			}
+		let expandedTypeName: string | undefined;
+		const expansion = resolveTypeExpansion(type, typeContext);
+		if (expansion) {
+			type = expansion.type;
+			expandedValues = expansion.expandedValues;
+			expandedTypeName = expansion.expandedTypeName;
 		}
 
 		// Extract alias from options
@@ -304,6 +301,7 @@ function extractSignalInputs(classBody: string, typeContext: string): ExtractedI
 			transform,
 			source: 'signal',
 			expandedValues,
+			expandedTypeName,
 		});
 	}
 
@@ -552,6 +550,54 @@ function inferTypeFromDefault(argsStr: string): string {
  *
  * Returns the resolved type string (e.g. "'M' | 'S' | 'XS'") or null.
  */
+/**
+ * Resolves type aliases in a declared input type, in two shapes:
+ *
+ * - **Pure alias** (`ButtonSize`): historic behavior — substituted inline when it resolves to a
+ *   short literal union (≤ 10 values), or kept by name with its values expanded apart (> 10,
+ *   e.g. `LuccaIcon`).
+ * - **Union** (`BubbleIllustration | string | null`): each named member is resolved individually;
+ *   the first member resolving to a large literal union (> 10) is expanded apart while the
+ *   declared union is kept as-is in the table. Without this, widening an input type (the common
+ *   `Alias | string` autocomplete-friendly idiom) silently drops the documented value list.
+ *
+ * Returns null when nothing resolves (type left untouched by the caller).
+ */
+function resolveTypeExpansion(
+	type: string,
+	typeContext: string,
+): { type: string; expandedValues?: string[]; expandedTypeName?: string } | null {
+	if (!type) return null;
+
+	// Pure alias.
+	const resolved = resolveTypeAlias(type, typeContext);
+	if (resolved) {
+		const values = extractStringUnionValues(resolved);
+		if (values && values.length > 10) {
+			// Keep the alias name in `type` for brevity, expose values separately
+			return { type, expandedValues: values, expandedTypeName: type.trim() };
+		}
+		return { type: resolved };
+	}
+
+	// Union: try each named member individually. Only the first large alias is expanded (one
+	// expandedValues per input). Short members are NOT substituted inline — the declared union
+	// stays readable as written in the source.
+	if (type.includes('|')) {
+		for (const member of type.split('|').map((m) => m.trim())) {
+			if (!/^[A-Za-z_]\w*$/.test(member)) continue;
+			const memberResolved = resolveTypeAlias(member, typeContext);
+			if (!memberResolved) continue;
+			const values = extractStringUnionValues(memberResolved);
+			if (values && values.length > 10) {
+				return { type, expandedValues: values, expandedTypeName: member };
+			}
+		}
+	}
+
+	return null;
+}
+
 function resolveTypeAlias(type: string, fullContent: string): string | null {
 	if (!type || type === 'unknown' || type.includes('|') || type.includes("'") || type.includes('"')) {
 		return null;
