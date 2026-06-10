@@ -2,7 +2,8 @@ import { Location } from '@angular/common';
 import { afterNextRender, booleanAttribute, ChangeDetectionStrategy, Component, effect, inject, Injector, input, ViewEncapsulation } from '@angular/core';
 import { Router, UrlTree } from '@angular/router';
 import { intlInputOptions } from '@lucca-front/ng/core';
-import { LU_LINK_INSTANCE } from './link.token';
+import { LU_DATA_TABLE_INSTANCE } from '../data-table/data-table.token';
+import { LU_INDEX_TABLE_INSTANCE } from '../index-table/index-table.token';
 import { LU_LINK_TRANSLATIONS } from './link.translate';
 import { LuRouterLink } from './lu-router-link';
 
@@ -18,7 +19,7 @@ import { LuRouterLink } from './lu-router-link';
 		'[attr.href]': 'routerLink.publicReactiveHref()',
 		'[class.mod-decorationHover]': 'decorationHover()',
 		'[class.mod-icon]': 'external()',
-		'[class.mod-hiddenIcon]': 'hiddenIcon() || (this.inTableContext && external())',
+		'[class.mod-hiddenIcon]': 'hiddenIcon() || (this.insideIndexTable && external()) || (this.insideDataTable && external())',
 		'[class.is-disabled]': 'this.disabled()',
 		'[attr.rel]': 'external() && !disabled() ? "noopener noreferrer" : null',
 		'[attr.target]': 'external() && !disabled() ? "_blank" : null',
@@ -39,7 +40,8 @@ export class LinkComponent {
 	#injector = inject(Injector);
 	router = inject(Router);
 	location = inject(Location);
-	inTableContext = inject(LU_LINK_INSTANCE, { optional: true });
+	insideIndexTable = inject(LU_INDEX_TABLE_INSTANCE, { optional: true });
+	insideDataTable = inject(LU_DATA_TABLE_INSTANCE, { optional: true });
 
 	/**
 	 * Target page address. Use only for external links or pages not recognized by the router.

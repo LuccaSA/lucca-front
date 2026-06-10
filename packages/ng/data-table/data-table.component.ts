@@ -17,11 +17,10 @@ import {
 	ViewEncapsulation,
 } from '@angular/core';
 import { ResponsiveConfig, ɵeffectWithDeps } from '@lucca-front/ng/core';
-import { LU_LINK_INSTANCE } from '@lucca-front/ng/link';
 import { DataTableHeadComponent } from './data-table-head/data-table-head.component';
 import { DataTableRowComponent } from './data-table-row/data-table-row.component';
-import { DataTableVerticalAlign } from './data-table.type';
 import { LU_DATA_TABLE_INSTANCE } from './data-table.token';
+import { DataTableVerticalAlign } from './data-table.type';
 
 @Component({
 	selector: 'lu-data-table',
@@ -38,10 +37,6 @@ import { LU_DATA_TABLE_INSTANCE } from './data-table.token';
 		{
 			provide: LU_DATA_TABLE_INSTANCE,
 			useExisting: forwardRef(() => DataTableComponent),
-		},
-		{
-			provide: LU_LINK_INSTANCE,
-			useValue: true,
 		},
 	],
 	changeDetection: ChangeDetectionStrategy.OnPush,
