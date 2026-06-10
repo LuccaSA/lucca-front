@@ -15,11 +15,13 @@ import {
 	output,
 	TemplateRef,
 	Type,
+	untracked,
 	ViewChild,
 } from '@angular/core';
 import { intlInputOptions, PortalDirective } from '@lucca-front/ng/core';
 import { LuTooltipTriggerDirective } from '@lucca-front/ng/tooltip';
 import { asyncScheduler, observeOn, Subscription } from 'rxjs';
+import { CoreSelectPanelInstance, SELECT_PANEL_INSTANCE } from '../panel/panel.instance';
 import { GroupTemplateLocation } from '../panel/panel.utils';
 import { CoreSelectPanelElement } from '../panel/selectable-item';
 import { LuOptionContext, SELECT_ID } from '../select.model';
@@ -39,6 +41,8 @@ export const MAGIC_OPTION_SCROLL_DELAY = 15;
 	imports: [LuOptionOutletDirective, PortalDirective, LuOptionGroupPipe, LuTooltipTriggerDirective],
 })
 export class LuOptionComponent<T> implements AfterViewInit, OnDestroy, OnInit {
+	readonly #panelRef = inject<CoreSelectPanelInstance<T>>(SELECT_PANEL_INSTANCE);
+
 	protected selectableItem = inject(CoreSelectPanelElement);
 	readonly intl = input(...intlInputOptions(LU_OPTION_TRANSLATIONS));
 
@@ -81,7 +85,7 @@ export class LuOptionComponent<T> implements AfterViewInit, OnDestroy, OnInit {
 
 	constructor() {
 		effect(() => {
-			if (this.selectableItem.isHighlighted()) {
+			if (this.selectableItem.isHighlighted() && !untracked(this.#panelRef.pointerNavigation)) {
 				setTimeout(() => {
 					this.elementRef.nativeElement.scrollIntoView(this.scrollIntoViewOptions);
 				}, MAGIC_OPTION_SCROLL_DELAY);
@@ -98,6 +102,10 @@ export class LuOptionComponent<T> implements AfterViewInit, OnDestroy, OnInit {
 	}
 
 	ngAfterViewInit(): void {
+		if (!this.optionContext) {
+			return;
+		}
+
 		this.subscription = this.optionContext.isDisabled$.pipe(observeOn(asyncScheduler)).subscribe((isDisabled) => {
 			this.selectableItem.disabled = isDisabled;
 			this.cdr.markForCheck();

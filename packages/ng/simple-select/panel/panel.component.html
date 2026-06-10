@@ -58,7 +58,7 @@
 								[groupTemplateLocation]="ctx.groupTemplateLocation"
 								[groupIndex]="groupIndex"
 								[grouping]="grouping()"
-								[scrollIntoViewOptions]="{ block: 'center' }"
+								[scrollIntoViewOptions]="{ block: 'nearest' }"
 								[isSelected]="option | luIsOptionSelected: optionComparer : selected()"
 								[class.withAddOption]="ctx.shouldDisplayAddOption"
 								(selected)="panelRef.emitValue(option)"

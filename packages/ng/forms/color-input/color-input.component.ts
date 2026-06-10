@@ -1,4 +1,4 @@
-import { booleanAttribute, ChangeDetectionStrategy, Component, computed, input, Signal, signal, ViewEncapsulation } from '@angular/core';
+import { booleanAttribute, ChangeDetectionStrategy, Component, computed, HostListener, input, Signal, signal, ViewEncapsulation } from '@angular/core';
 import { ReactiveFormsModule } from '@angular/forms';
 import { ColorComponent } from '@lucca-front/ng/color';
 import { intlInputOptions } from '@lucca-front/ng/core';
@@ -10,7 +10,7 @@ import { ColorOption } from './color';
 import { LU_COLOR_TRANSLATIONS } from './color.translate';
 import { ɵPresentationDisplayDefaultDirective } from '@lucca-front/ng/form-field';
 import { toSignal } from '@angular/core/rxjs-interop';
-import { startWith } from 'rxjs';
+import { of, startWith } from 'rxjs';
 
 @Component({
 	selector: 'lu-color-input',
@@ -24,9 +24,16 @@ import { startWith } from 'rxjs';
 export class ColorInputComponent {
 	intl = input(...intlInputOptions(LU_COLOR_TRANSLATIONS));
 
+	pointerNavigation = signal(false);
 	mouseHighlighted = signal<string>('');
 	keyboardHighlighted = signal<string>('');
-	highlighted = computed(() => this.mouseHighlighted() || this.keyboardHighlighted());
+	highlighted = computed(() => {
+		if (!this.pointerNavigation()) {
+			return this.keyboardHighlighted();
+		}
+
+		return this.mouseHighlighted() || this.keyboardHighlighted();
+	});
 
 	clue = signal<string>('');
 	colors = input.required<ColorOption[]>();
@@ -39,7 +46,8 @@ export class ColorInputComponent {
 
 	constructor() {
 		if (this.ngControl) {
-			const controlValueSignal = toSignal(this.ngControl.valueChanges?.pipe(startWith(this.ngControl.value)));
+			const valueChanges$ = this.ngControl.valueChanges ?? of(this.ngControl.value);
+			const controlValueSignal = toSignal(valueChanges$.pipe(startWith(this.ngControl.value)));
 			this.currentColorPresentation = computed(() => {
 				return this.colors().find((c) => c.background === controlValueSignal()) || null;
 			});
@@ -52,4 +60,14 @@ export class ColorInputComponent {
 		}
 		return this.colors();
 	});
+
+	@HostListener('document:keydown')
+	onKeydown(): void {
+		this.pointerNavigation.set(false);
+	}
+
+	@HostListener('document:mousemove')
+	onMousemove(): void {
+		this.pointerNavigation.set(true);
+	}
 }
