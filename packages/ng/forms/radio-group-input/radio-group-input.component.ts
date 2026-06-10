@@ -16,6 +16,7 @@ let nextId = 0;
 	styleUrl: './radio-group-input.component.scss',
 	host: {
 		'[class.inputFramedWrapper]': 'framed()',
+		role: 'radiogroup',
 	},
 	encapsulation: ViewEncapsulation.None,
 	changeDetection: ChangeDetectionStrategy.OnPush,

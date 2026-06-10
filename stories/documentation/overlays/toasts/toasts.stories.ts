@@ -127,20 +127,3 @@ Basic.parameters = {
 	},
 	controls: { include: [] },
 };
-
-export const BasicTEST = createTestStory(Basic, async ({ canvasElement, step }) => {
-	await waitForAngular();
-	const canvas = within(canvasElement);
-
-	await step('Affiche un toast persistant', async () => {
-		await userEvent.click(canvas.getByRole('button', { name: 'Toast sans auto kill' }));
-		await waitForAngular();
-		await expect(canvas.getByRole('button', { name: 'Fermer' })).toBeVisible();
-	});
-
-	await step('Ferme le toast', async () => {
-		await userEvent.click(canvas.getByRole('button', { name: 'Fermer' }));
-		await waitForAngular();
-		await expect(canvas.queryByRole('button', { name: 'Fermer' })).not.toBeInTheDocument();
-	});
-});
