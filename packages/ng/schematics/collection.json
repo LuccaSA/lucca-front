@@ -41,13 +41,8 @@
       "factory": "./component-path/index",
       "schema": "./component-path/schema.json"
     },
-    "depreacted-resolver": {
-      "description": "Migrate deprecated NgModules and types to their standalone equivalents.",
-      "factory": "./deprecated-resolver/index",
-      "schema": "./deprecated-resolver/schema.json"
-    },
     "deprecated-resolver": {
-      "description": "Migrate deprecated NgModules and types to their standalone equivalents.",
+      "description": "Migrate deprecated NgModules, types and input output.",
       "factory": "./deprecated-resolver/index",
       "schema": "./deprecated-resolver/schema.json"
     },
