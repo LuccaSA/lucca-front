@@ -195,9 +195,9 @@
 			color: var(--palettes-neutral-700);
 
 			&::before {
-				background-color: var(--palettes-50, var(--palettes-product-50));
+				background-color: var(--components-calendar-table-body-row-cellSelectedBeforeBackgroundColor);
 				position: absolute;
-				inset: var(--pr-t-spacings-25) 0;
+				inset: var(--components-calendar-table-body-row-cellSelectedBeforeInset);
 				content: var(--components-calendar-table-body-row-cellSelectedBeforeContent);
 				border-radius: var(--components-calendar-table-body-row-cellSelectedBeforeBorderRadius);
 			}
@@ -217,7 +217,8 @@
 			display: var(--components-calendar-table-body-row-cell-actionDisplay);
 			block-size: 100%;
 			text-transform: lowercase;
-			cursor: var(--components-calendar-table-body-row-cell-actionCursor);
+			place-items: center;
+			cursor: default;
 
 			/* autoprefixer: off */
 			text-decoration: var(--components-calendar-table-body-row-cell-actionTextDecoration);
@@ -225,29 +226,38 @@
 				0 0 0 1px var(--components-calendar-table-body-row-cell-actionHighlight),
 				0 0 0 1px var(--components-calendar-table-body-row-cell-actionHighlight) inset;
 
-			&:not(:disabled, [aria-disabled='true']) {
-				&:hover {
-					@include a11y.focusVisible;
+			&:is(button) {
+				cursor: var(--components-calendar-table-body-row-cell-actionCursor);
 
-					outline-width: var(--components-calendar-table-body-row-cell-actionOutlineWidth);
-					outline-offset: var(--components-calendar-table-body-row-cell-actionOutlineOffset);
-					outline-color: var(--palettes-700, var(--palettes-product-700));
+				&:not(:disabled, [aria-disabled='true']) {
+					&:hover {
+						@include a11y.focusVisible($offset: var(--components-calendar-table-body-row-cell-actionOutlineOffset), $color: var(--palettes-700, var(--palettes-product-700)), $width: var(--components-calendar-table-body-row-cell-actionOutlineWidth));
+					}
+
+					&:active {
+						outline: 2px solid var(--palettes-800, var(--palettes-product-800));
+						background-color: var(--palettes-800, var(--palettes-product-800));
+						color: var(--palettes-0, var(--palettes-product-0));
+					}
 				}
 
-				&:active {
-					outline: 2px solid var(--palettes-800, var(--palettes-product-800));
-					background-color: var(--palettes-800, var(--palettes-product-800));
-					color: var(--palettes-0, var(--palettes-product-0));
+				&:focus-visible {
+					&:not(:has(.calendar-table-body-row-cell-action-week)) {
+						@include a11y.focusVisible($offset: var(--components-calendar-table-body-row-cell-actionOutlineOffset), $color: var(--palettes-700, var(--palettes-product-700)), $width: var(--components-calendar-table-body-row-cell-actionOutlineWidth));
+					}
+
+					&:has(.calendar-table-body-row-cell-action-week) {
+						outline: none;
+					}
 				}
 			}
+		}
 
-			&:focus-visible {
-				@include a11y.focusVisible;
-
-				outline-width: var(--components-calendar-table-body-row-cell-actionOutlineWidth);
-				outline-offset: var(--components-calendar-table-body-row-cell-actionOutlineOffset);
-				outline-color: var(--palettes-700, var(--palettes-product-700));
-			}
+		.calendar-table-body-row-cell-action-week {
+			outline: 1px solid var(--components-calendar-table-body-row-cell-action-week-outlineColor);
+			padding: var(--pr-t-spacings-25) var(--pr-t-spacings-50);
+			line-height: var(--pr-t-font-body-XS-lineHeight);
+			border-radius: var(--pr-t-border-radius-small);
 		}
 
 		.calendar-table-body-row-cell-action-stripes {
