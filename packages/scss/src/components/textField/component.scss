@@ -138,7 +138,7 @@
 				content: '';
 				position: absolute;
 				inset: var(--pr-t-spacings-25) 0;
-				border-right: 1px solid var(--palettes-neutral-200);
+				border-inline-end: 1px solid var(--palettes-neutral-200);
 			}
 
 			&:has(.formLabel-required) {
