@@ -1,13 +1,13 @@
 import { Meta, StoryObj } from '@storybook/angular';
 
-interface AlignementVerticalStory {}
+interface AlignmentVerticalStory {}
 
 export default {
-	title: 'Documentation/Listings/Data table/HTML&CSS/Vertical alignement',
+	title: 'Documentation/Listings/Data table/HTML&CSS/Vertical alignment',
 	argTypes: {},
 } as Meta;
 
-function getTemplate(args: AlignementVerticalStory): string {
+function getTemplate(args: AlignmentVerticalStory): string {
 	return `<div class="dataTableWrapper">
 	<table class="dataTable mod-alignTop">
 		<thead class="dataTable-head">
@@ -30,12 +30,12 @@ function getTemplate(args: AlignementVerticalStory): string {
 </div>`;
 }
 
-const Template = (args: AlignementVerticalStory) => ({
+const Template = (args: AlignmentVerticalStory) => ({
 	props: args,
 	template: getTemplate(args),
 });
 
-export const AlignementVertical: StoryObj<AlignementVerticalStory> = {
+export const AlignmentVertical: StoryObj<AlignmentVerticalStory> = {
 	args: {},
 	render: Template,
 };
