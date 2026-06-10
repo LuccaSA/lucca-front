@@ -39,7 +39,7 @@ function getTemplate(name: string): HandlebarsTemplateDelegate {
 /**
  * Renders the main component skill markdown (API + Basic Usage + links).
  */
-export function renderComponentMd(data: ComponentData, opts?: { hasDesign?: boolean; hasChangelog?: boolean }): string {
+export function renderComponentMd(data: ComponentData, opts?: { hasDesign?: boolean; hasChangelog?: boolean; hasFigma?: boolean }): string {
 	const template = getTemplate('component');
 
 	const context = {
@@ -55,8 +55,10 @@ export function renderComponentMd(data: ComponentData, opts?: { hasDesign?: bool
 		// not merely the presence of ZH data — otherwise the link is dead for components whose ZH
 		// content is code-only. The caller passes the real value (from splitDesignSections).
 		hasDesign: opts?.hasDesign ?? (data.zeroheight !== null),
-		// Only emit the Figma link when the .figma.md was actually generated (tokens fetched).
-		hasFigma: data.figma != null,
+		// Emit the Figma link when the .figma.md is generated this run OR already on disk from a
+		// previous run (the caller passes the real value) — a --skip-figma/no-token run must not
+		// silently drop the link.
+		hasFigma: opts?.hasFigma ?? (data.figma != null),
 		// Only emit the Changelog link when the file is actually written (buildComponentChangelog
 		// returns null for CSS-only components with no API history and no ZH prose).
 		hasChangelog: opts?.hasChangelog ?? true,

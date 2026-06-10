@@ -11,21 +11,27 @@
  * then parses the componentPropertyDefinitions for variant options.
  */
 
+import fs from 'fs';
+import path from 'path';
 import { FigmaDesignTokens, FigmaProperty } from '../types';
-import { TransientFetchError } from './fetch-failures';
+import { TransientFetchError, recordWarning } from './fetch-failures';
 
 const FIGMA_API_BASE = 'https://api.figma.com/v1';
 /**
- * Figma's REST rate limit is per-time-window (requests/min) and stateful, not a concurrent-
- * connection cap — so throttling by concurrency alone doesn't prevent 429s. The reliable recipe:
- *   • serialize (1 in-flight) + a minimum interval between request starts → stay under the quota;
- *   • honour the server's Retry-After and retry generously → survive the whole throttling window.
+ * `GET /v1/files/:key/nodes` is a Tier 1 endpoint (the most rate-limited: ~10-20 req/min depending
+ * on plan/seat). The primary defense is therefore to make FEW requests, not to pace many:
+ *   • `prefetchFigmaNodes` batches all node ids into a handful of requests (the `ids` param takes
+ *     a comma-separated list) and `depth=1` keeps payloads small (we only read the root node);
+ *   • the remaining safety net: serialize (1 in-flight) + a minimum interval between request
+ *     starts, honour the server's Retry-After and retry generously.
  * Every node then eventually succeeds within the run (output complete & reproducible). All three
- * are overridable via env for tuning.
+ * knobs are overridable via env for tuning.
  */
 const MAX_RETRIES = Math.max(1, Number(process.env.FIGMA_MAX_RETRIES) || 10);
 const MAX_CONCURRENT = Math.max(1, Number(process.env.FIGMA_MAX_CONCURRENT) || 1);
 const MIN_INTERVAL_MS = Number(process.env.FIGMA_MIN_INTERVAL_MS) || 200;
+/** Node ids per batched prefetch request (the URL stays well under length limits). */
+const PREFETCH_CHUNK_SIZE = Math.max(1, Number(process.env.FIGMA_PREFETCH_CHUNK) || 40);
 
 /**
  * Process-wide cache of fetched node responses, keyed by `fileKey:nodeId`.
@@ -109,61 +115,130 @@ async function figmaRequest(url: string, token: string): Promise<FigmaResult> {
 	return { ok: false, status: lastStatus, reason: lastReason };
 }
 
-interface FigmaNodeResponse {
-	nodes: Record<
+interface FigmaNodeDoc {
+	name: string;
+	type: string;
+	componentPropertyDefinitions?: Record<
 		string,
 		{
-			document: {
-				name: string;
-				type: string;
-				componentPropertyDefinitions?: Record<
-					string,
-					{
-						type: string;
-						defaultValue: string;
-						variantOptions?: string[];
-					}
-				>;
-			};
+			type: string;
+			defaultValue: string;
+			variantOptions?: string[];
 		}
 	>;
 }
 
-/**
- * Fetches Figma design tokens for a component.
- *
- * @param fileKey — Figma file key (e.g. "PQEOcUF9CYfKNqaejAGLWP")
- * @param nodeId — Node ID of the component set (e.g. "6854:42773")
- * @param token — Figma Personal Access Token
- */
-export async function fetchFigmaDesignTokens(fileKey: string, nodeId: string, token: string): Promise<FigmaDesignTokens | null> {
-	const cacheKey = `${fileKey}:${nodeId}`;
-	if (figmaCache.has(cacheKey)) return figmaCache.get(cacheKey)!;
+interface FigmaNodeResponse {
+	nodes: Record<string, { document: FigmaNodeDoc } | null>;
+}
 
-	const url = `${FIGMA_API_BASE}/files/${fileKey}/nodes?ids=${encodeURIComponent(nodeId)}`;
+// ─── Shrink-guard baseline (report-only) ─────────────────────────────────────
+//
+// Last-known property set per node, persisted across runs (COMMITTED — shared across machines,
+// like the ZH baseline). Unlike the ZH baseline it never replaces the output: a 200 from the
+// Figma API is authoritative (a property removed there IS removed). It only reports
+// disappearances (properties or variant options gone vs the last generation) so a
+// legitimate-but-uncommon deletion gets a human look. `--accept-shrink` updates the baseline
+// and silences the warning.
 
-	const res = await figmaRequest(url, token);
+interface FigmaBaselineEntry {
+	componentName: string;
+	/** Property name → variant options (null for non-variant properties). */
+	properties: Record<string, string[] | null>;
+}
 
-	if (!res.ok) {
-		if (res.status === '404') {
-			figmaCache.set(cacheKey, null); // definitive: node doesn't exist, don't retry
-			return null;
+const BASELINE_FILE = path.join(__dirname, '..', 'baselines', 'figma.json');
+
+let acceptShrink = false;
+
+/** Set by the CLI when `--accept-shrink` is passed: disappearances update the baseline silently. */
+export function setAcceptShrink(value: boolean): void {
+	acceptShrink = value;
+}
+
+let baselineMap: Record<string, FigmaBaselineEntry> | null = null;
+
+function loadBaseline(): Record<string, FigmaBaselineEntry> {
+	if (baselineMap) return baselineMap;
+	try {
+		baselineMap = JSON.parse(fs.readFileSync(BASELINE_FILE, 'utf-8'));
+	} catch {
+		baselineMap = {};
+	}
+	return baselineMap!;
+}
+
+function saveBaseline(): void {
+	if (!baselineMap) return;
+	fs.mkdirSync(path.dirname(BASELINE_FILE), { recursive: true });
+	fs.writeFileSync(BASELINE_FILE, JSON.stringify(baselineMap, null, '\t') + '\n', 'utf-8');
+}
+
+function toBaselineEntry(tokens: FigmaDesignTokens): FigmaBaselineEntry {
+	const properties: Record<string, string[] | null> = {};
+	for (const p of tokens.properties) {
+		properties[p.name] = p.variantOptions ?? null;
+	}
+	return { componentName: tokens.componentName, properties };
+}
+
+/** Compares fresh tokens against the node's baseline; reports disappearances (report-only). */
+function checkBaseline(nodeId: string, tokens: FigmaDesignTokens | null): void {
+	const baseline = loadBaseline();
+	const prev = baseline[nodeId];
+
+	if (tokens === null) {
+		if (prev) {
+			recordWarning({
+				source: 'figma',
+				label: `${prev.componentName} (${nodeId})`,
+				reason: 'node absent de la réponse Figma alors qu’il existait au run précédent',
+			});
+			if (acceptShrink) {
+				delete baseline[nodeId];
+				saveBaseline();
+			}
 		}
-		// transient (429/5xx/network exhausted) or non-retryable error: NOT cached, surfaced as a failure
-		throw new TransientFetchError(res.status ?? 'unknown', `Figma node ${nodeId}: ${res.reason ?? 'erreur'} (après ${MAX_RETRIES} retries)`);
+		return;
 	}
 
-	const data = res.json as FigmaNodeResponse;
-	const nodeData = data.nodes[nodeId];
+	if (prev) {
+		const freshProps = new Map(tokens.properties.map((p) => [p.name, p.variantOptions ?? null]));
+		const lost: string[] = [];
+		for (const [name, prevOptions] of Object.entries(prev.properties)) {
+			const freshOptions = freshProps.get(name);
+			if (freshOptions === undefined) {
+				lost.push(`propriété « ${name} » disparue`);
+			} else if (prevOptions) {
+				const gone = prevOptions.filter((o) => !(freshOptions ?? []).includes(o));
+				if (gone.length > 0) lost.push(`variante(s) disparue(s) sur « ${name} » : ${gone.join(', ')}`);
+			}
+		}
+		if (lost.length > 0 && !acceptShrink) {
+			recordWarning({
+				source: 'figma',
+				label: `${tokens.componentName} (${nodeId})`,
+				reason: `${lost.join(' ; ')} — le contenu frais est écrit ; --accept-shrink met à jour la référence`,
+			});
+			return; // keep the previous baseline so the warning persists until accepted
+		}
+	}
 
-	if (!nodeData?.document) {
+	baseline[nodeId] = toBaselineEntry(tokens);
+	saveBaseline();
+}
+
+/** Parses a node document into design tokens and runs the baseline check. Caches the result. */
+function parseAndCacheNode(fileKey: string, nodeId: string, doc: FigmaNodeDoc | undefined): FigmaDesignTokens | null {
+	const cacheKey = `${fileKey}:${nodeId}`;
+
+	if (!doc) {
 		figmaCache.set(cacheKey, null); // definitive: node absent from a 200 response
+		checkBaseline(nodeId, null);
 		return null;
 	}
 
-	const doc = nodeData.document;
 	const propDefs = doc.componentPropertyDefinitions;
-
 	const result: FigmaDesignTokens = {
 		componentName: doc.name,
 		nodeId,
@@ -177,54 +252,97 @@ export async function fetchFigmaDesignTokens(fileKey: string, nodeId: string, to
 	};
 
 	figmaCache.set(cacheKey, result);
+	checkBaseline(nodeId, result);
 	return result;
 }
 
+/** Node request URL. `depth=1`: we only read the root node (name + componentPropertyDefinitions). */
+function nodesUrl(fileKey: string, nodeIds: string[]): string {
+	return `${FIGMA_API_BASE}/files/${fileKey}/nodes?ids=${nodeIds.map(encodeURIComponent).join(',')}&depth=1`;
+}
+
 /**
- * Fetches Figma tokens for multiple node IDs (e.g. when a component has aliases).
- * Merges properties from all nodes, deduplicating by name.
+ * Batched prefetch: fetches all uncached node ids in chunks of PREFETCH_CHUNK_SIZE and fills the
+ * cache. With ~90 distinct nodes this is 2-3 Tier-1 requests instead of 90 — the actual fix for
+ * Figma's per-minute quota. A failed chunk is only logged: the per-component fetch falls back to
+ * individual (retried, failure-recorded) requests for the missing nodes.
  */
-export async function fetchFigmaDesignTokensMulti(
+export async function prefetchFigmaNodes(fileKey: string, nodeIds: string[], token: string): Promise<void> {
+	const pending = [...new Set(nodeIds)].filter((id) => !figmaCache.has(`${fileKey}:${id}`));
+	if (pending.length === 0) return;
+
+	const chunks: string[][] = [];
+	for (let i = 0; i < pending.length; i += PREFETCH_CHUNK_SIZE) {
+		chunks.push(pending.slice(i, i + PREFETCH_CHUNK_SIZE));
+	}
+
+	console.log(`🎨 Prefetch Figma : ${pending.length} node(s) en ${chunks.length} requête(s)...`);
+	for (const chunk of chunks) {
+		const res = await figmaRequest(nodesUrl(fileKey, chunk), token);
+		if (!res.ok) {
+			console.warn(`  ⚠️  Prefetch Figma (${chunk.length} nodes) : ${res.status} ${res.reason ?? ''} — fallback unitaire`);
+			continue;
+		}
+		const data = res.json as FigmaNodeResponse;
+		for (const nodeId of chunk) {
+			parseAndCacheNode(fileKey, nodeId, data.nodes[nodeId]?.document);
+		}
+	}
+}
+
+/**
+ * Fetches Figma design tokens for a single node (cache-first — a prior `prefetchFigmaNodes`
+ * normally makes this a no-op network-wise).
+ *
+ * @param fileKey — Figma file key (e.g. "PQEOcUF9CYfKNqaejAGLWP")
+ * @param nodeId — Node ID of the component set (e.g. "6854:42773")
+ * @param token — Figma Personal Access Token
+ */
+export async function fetchFigmaDesignTokens(fileKey: string, nodeId: string, token: string): Promise<FigmaDesignTokens | null> {
+	const cacheKey = `${fileKey}:${nodeId}`;
+	if (figmaCache.has(cacheKey)) return figmaCache.get(cacheKey)!;
+
+	const res = await figmaRequest(nodesUrl(fileKey, [nodeId]), token);
+
+	if (!res.ok) {
+		if (res.status === '404') {
+			figmaCache.set(cacheKey, null); // definitive: node doesn't exist, don't retry
+			return null;
+		}
+		// transient (429/5xx/network exhausted) or non-retryable error: NOT cached, surfaced as a failure
+		throw new TransientFetchError(res.status ?? 'unknown', `Figma node ${nodeId}: ${res.reason ?? 'erreur'} (après ${MAX_RETRIES} retries)`);
+	}
+
+	const data = res.json as FigmaNodeResponse;
+	return parseAndCacheNode(fileKey, nodeId, data.nodes[nodeId]?.document);
+}
+
+/**
+ * Fetches and merges Figma tokens for ALL of a component's node ids (e.g. aliases or split
+ * component sets like dialog/skeleton). Properties are deduplicated by name; the component name
+ * comes from the first node that resolves. Throws `TransientFetchError` if any node fetch fails.
+ */
+export async function fetchFigmaDesignTokensMerged(
 	fileKey: string,
 	nodeIds: string[],
 	token: string,
 ): Promise<FigmaDesignTokens | null> {
 	if (nodeIds.length === 0) return null;
 
-	// Batch request — Figma API supports comma-separated IDs
-	const url = `${FIGMA_API_BASE}/files/${fileKey}/nodes?ids=${nodeIds.map(encodeURIComponent).join(',')}`;
-
-	const response = await fetch(url, {
-		headers: { 'X-Figma-Token': token },
-	});
-
-	if (!response.ok) {
-		console.warn(`  ⚠️  Figma API error: ${response.status} ${response.statusText}`);
-		return null;
-	}
-
-	const data = (await response.json()) as FigmaNodeResponse;
 	const allProperties = new Map<string, FigmaProperty>();
 	let componentName = '';
+	let firstNodeId = '';
 
 	for (const nodeId of nodeIds) {
-		const nodeData = data.nodes[nodeId];
-		if (!nodeData?.document) continue;
+		const tokens = await fetchFigmaDesignTokens(fileKey, nodeId, token);
+		if (!tokens) continue;
 
-		if (!componentName) componentName = nodeData.document.name;
-
-		const propDefs = nodeData.document.componentPropertyDefinitions;
-		if (!propDefs) continue;
-
-		for (const [name, def] of Object.entries(propDefs)) {
-			const cleanName = cleanPropertyName(name);
-			if (!allProperties.has(cleanName)) {
-				allProperties.set(cleanName, {
-					name: cleanName,
-					type: mapFigmaType(def.type),
-					variantOptions: def.variantOptions ?? undefined,
-				});
-			}
+		if (!componentName) {
+			componentName = tokens.componentName;
+			firstNodeId = tokens.nodeId;
+		}
+		for (const prop of tokens.properties) {
+			if (!allProperties.has(prop.name)) allProperties.set(prop.name, prop);
 		}
 	}
 
@@ -232,7 +350,7 @@ export async function fetchFigmaDesignTokensMulti(
 
 	return {
 		componentName,
-		nodeId: nodeIds[0],
+		nodeId: firstNodeId,
 		properties: [...allProperties.values()],
 	};
 }

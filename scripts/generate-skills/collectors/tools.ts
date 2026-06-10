@@ -12,7 +12,8 @@
 import fs from 'fs';
 import path from 'path';
 import { VersionConfig } from '../types';
-import { fetchZeroHeightPage } from './zeroheight-fetch';
+import { fetchZeroHeightPageGuarded } from './zeroheight-fetch';
+import { TransientFetchError, recordFailure } from './fetch-failures';
 import { readStoryTemplates } from './story-source';
 import { cleanZeroHeightMarkdown } from '../generators/template-renderer';
 import { writeToolsPage } from '../generators/skill-writer';
@@ -101,14 +102,17 @@ function buildExampleBlock(label: string, storyId: string, version: VersionConfi
 /**
  * Collects all tools for a version by fetching their ZeroHeight pages
  * and embedding story source code in place of storybook iframe links.
+ *
+ * @param only — Optional replay filter: restrict to these tool slugs.
  */
 export async function collectAllTools(
 	skillsDir: string,
 	version: VersionConfig,
-	{ skipStorybook = false }: { skipStorybook?: boolean } = {},
+	{ skipStorybook = false, only }: { skipStorybook?: boolean; only?: Set<string> } = {},
 ): Promise<{ written: number; errors: number }> {
-	const tools = loadToolsMap();
+	const tools = only ? loadToolsMap().filter((t) => only.has(t.slug)) : loadToolsMap();
 	const minorVersion = `${version.major}.${version.minor}`;
+	const bareVersion = `${version.major}.${version.minor}.${version.patch}`;
 	let written = 0;
 	let errors = 0;
 
@@ -122,7 +126,11 @@ export async function collectAllTools(
 
 	for (const tool of tools) {
 		try {
-			const zhData = await fetchZeroHeightPage(tool.zhPagePath, version.zhReleaseId);
+			const zhData = await fetchZeroHeightPageGuarded(tool.zhPagePath, version.zhReleaseId, {
+				scope: 'tools',
+				slug: tool.slug,
+				version: bareVersion,
+			});
 
 			if (!zhData) {
 				console.warn(`  ⚠️  No ZH content for tools/${tool.slug}`);
@@ -147,6 +155,18 @@ export async function collectAllTools(
 			console.log(`     ✅ ${tool.slug}.md — ${result.status}`);
 			written++;
 		} catch (err: any) {
+			// Transient ZH failure: record it so `--retry-failed` can replay this tool page.
+			if (err instanceof TransientFetchError) {
+				recordFailure({
+					source: 'zeroheight',
+					scope: 'tools',
+					slug: tool.slug,
+					version: bareVersion,
+					ref: tool.zhPagePath,
+					status: err.status,
+					reason: err.message,
+				});
+			}
 			console.warn(`  ⚠️  Error processing tools/${tool.slug}: ${err.message}`);
 			errors++;
 		}

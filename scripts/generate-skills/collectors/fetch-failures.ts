@@ -26,36 +26,68 @@ export class TransientFetchError extends Error {
 	}
 }
 
+/** What kind of generation unit the failed fetch belongs to — drives `--retry-failed` replay. */
+export type FetchScope = 'component' | 'documentation' | 'tools' | 'deprecated';
+
 export interface FetchFailure {
 	source: 'zeroheight' | 'figma';
-	/** Component slug the fetch was for. */
+	/**
+	 * Replay scope. Absent in manifests written before this field existed — treat as 'component'.
+	 */
+	scope?: FetchScope;
+	/** Slug of the failed unit: component slug, "category/page" for documentation, tool slug. */
 	slug: string;
 	/** Bare version, e.g. "21.1.2". */
 	version: string;
 	/** What was requested: ZH page path or Figma node id. */
 	ref: string;
-	/** HTTP status or a symbolic code ("network", "html", "empty"). */
+	/** HTTP status or a symbolic code ("network", "html", "empty", "shrink"). */
 	status: string;
 	/** Human-readable reason. */
 	reason: string;
 }
 
+/**
+ * Report-only anomaly: surfaced at the end of the run but NOT written to the replay manifest
+ * (replaying wouldn't fix it — e.g. a property genuinely removed in Figma).
+ */
+export interface FetchWarning {
+	source: 'zeroheight' | 'figma';
+	/** What the warning is about (slug, page path or node id). */
+	label: string;
+	/** Human-readable reason. */
+	reason: string;
+}
+
 let failures: FetchFailure[] = [];
+let warnings: FetchWarning[] = [];
 
 export function clearFailures(): void {
 	failures = [];
+	warnings = [];
 }
 
 export function recordFailure(f: FetchFailure): void {
 	failures.push(f);
 }
 
+export function recordWarning(w: FetchWarning): void {
+	warnings.push(w);
+}
+
 export function getFailures(): FetchFailure[] {
 	return failures;
 }
 
-/** Prints a grouped, readable summary of the failures collected this run. */
+/** Prints a grouped, readable summary of the failures and warnings collected this run. */
 export function reportFailures(): void {
+	if (warnings.length > 0) {
+		console.warn(`\n🔎 ${warnings.length} anomalie(s) signalée(s) (rapport seul, non rejouable) :\n`);
+		for (const w of warnings.sort((a, b) => a.label.localeCompare(b.label))) {
+			console.warn(`    • [${w.source}] ${w.label} : ${w.reason}`);
+		}
+	}
+
 	if (failures.length === 0) {
 		console.log('\n✅ Aucune récupération ZH/Figma en échec.');
 		return;
@@ -67,10 +99,15 @@ export function reportFailures(): void {
 		if (group.length === 0) continue;
 		console.warn(`  ${source} (${group.length}) :`);
 		for (const f of group.sort((a, b) => a.version.localeCompare(b.version) || a.slug.localeCompare(b.slug))) {
-			console.warn(`    • ${f.version} ${f.slug} — ${f.status} (${f.ref}) : ${f.reason}`);
+			const scope = f.scope && f.scope !== 'component' ? ` [${f.scope}]` : '';
+			console.warn(`    • ${f.version}${scope} ${f.slug} — ${f.status} (${f.ref}) : ${f.reason}`);
 		}
 	}
-	console.warn(`\n  → Rejoue ces composants : npm run skills:generate -- --retry-failed`);
+	const hasShrink = failures.some((f) => f.status === 'shrink');
+	console.warn(`\n  → Rejoue ces unités : npm run skills:generate -- --retry-failed`);
+	if (hasShrink) {
+		console.warn(`  → Rétrécissement légitime (suppression assumée côté source) : ajouter --accept-shrink`);
+	}
 }
 
 /** Writes the failure manifest (or removes it when there are no failures). */
