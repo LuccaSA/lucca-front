@@ -19,3 +19,4 @@
 | `state` | VARIANT | `default` · `hover` · `focus` · `active` · `loading` · `disabled` · `success` |
 | `palette` | VARIANT | `product` · `neutral` · `critical` · `AI` · `AI-invert` |
 | `critical` | VARIANT | `false` · `true` |
+| `number` | VARIANT | `2` · `3` · `4` |

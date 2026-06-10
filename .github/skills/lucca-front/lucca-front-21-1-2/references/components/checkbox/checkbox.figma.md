@@ -19,3 +19,4 @@
 | `state` | VARIANT | `default` · `hover` · `focus` · `active` · `disabled` |
 | `error` | VARIANT | `false` · `true` |
 | `presentation` | VARIANT | `false` · `true` |
+| `alignment` | VARIANT | `vertical` · `horizontal` |

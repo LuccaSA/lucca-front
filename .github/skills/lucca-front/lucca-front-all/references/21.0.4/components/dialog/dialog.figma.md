@@ -21,3 +21,5 @@
 | `size` | VARIANT | `XS` · `S` · `M` · `L` · `XL` · `XXL` · `maxContent` · `fullScreen` |
 | `mode` | VARIANT | `default` · `drawer` · `drawer-from-bottom` · `fancy` |
 | `stacked` | VARIANT | `none` · `level 1` · `level 2` |
+| `criticity` | VARIANT | `low` · `high` · `higher` |
+| `type` | VARIANT | `default` |

@@ -18,3 +18,4 @@
 | `state` | VARIANT | `default` · `hover` · `focus` · `active` · `disable` |
 | `error` | VARIANT | `false` · `true` |
 | `presentation` | VARIANT | `false` · `true` |
+| `alignment` | VARIANT | `vertical` · `horizontal` |

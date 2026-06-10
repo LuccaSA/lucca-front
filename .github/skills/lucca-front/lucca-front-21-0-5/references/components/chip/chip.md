@@ -36,6 +36,10 @@ import { ChipComponent } from '@lucca-front/ng/chip';
 |----------|-------------|------|
 | `kill` | `kill` | `Event` |
 
+## Type definitions
+
+- [`LuccaIcon`](../../types/LuccaIcon.md) — 569 available values
+
 ## Related files
 
 - 📝 [Code & implementation](./chip.component.md)

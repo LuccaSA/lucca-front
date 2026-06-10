@@ -25,6 +25,10 @@ import { TagComponent } from '@lucca-front/ng/tag';
 | `withEllipsis` | `withEllipsis` | `boolean` | `false` | — | `booleanAttribute` | [v20.3] Ellipse le texte et ajoute une tooltip lorsque le label est trop long. |
 | `AI` | `AI` | `boolean` | `false` | — | `booleanAttribute` | [v20.3] Applique les couleurs IA. |
 
+## Type definitions
+
+- [`LuccaIcon`](../../types/LuccaIcon.md) — 571 available values
+
 ## Related files
 
 - 📝 [Code & implementation](./tags.component.md)
