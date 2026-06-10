@@ -21,16 +21,23 @@
  *   --skip-storybook     Skip Storybook data collection
  *   --dry-run            Print what would be generated without writing files
  *   --validate           Validate ZH coverage of component-map.json (no generation)
+ *   --retry-failed       Replay only the units whose ZH/Figma fetch failed in a previous run
+ *   --accept-shrink      Accept content regressions vs the baselines (legitimate deletions)
  */
 
 import path from 'path';
 import { extractPackageAPI } from './collectors/ast-extractor';
-import { fetchFigmaDesignTokens } from './collectors/figma-connect';
+import {
+	fetchFigmaDesignTokensMerged,
+	prefetchFigmaNodes,
+	setAcceptShrink as setFigmaAcceptShrink,
+} from './collectors/figma-connect';
 import { fetchStorybookIndex } from './collectors/storybook';
 import { readStorySourceFromGit, extractBasicUsage, inferScssImports, formatStoryTemplates } from './collectors/story-source';
 import { buildInputDefaults } from './collectors/story-eval';
-import { fetchZeroHeightPage } from './collectors/zeroheight-fetch';
+import { fetchZeroHeightPageGuarded, setAcceptShrink as setZhAcceptShrink } from './collectors/zeroheight-fetch';
 import {
+	FetchFailure,
 	TransientFetchError,
 	recordFailure,
 	clearFailures,
@@ -61,6 +68,7 @@ import {
 	writeStory,
 	writeChangelog,
 	writeFigmaSkill,
+	figmaSkillExists,
 	writeVersionManifest,
 	writeSharedType,
 } from './generators/skill-writer';
@@ -111,6 +119,7 @@ const flags = {
 	dryRun: args.includes('--dry-run'),
 	validate: args.includes('--validate'),
 	retryFailed: args.includes('--retry-failed'),
+	acceptShrink: args.includes('--accept-shrink'),
 };
 
 // ─── Concurrency helper ────────────────────────────────────────────────────────
@@ -232,6 +241,11 @@ async function main(): Promise<void> {
 	const config = loadConfig();
 	const FAILURES_MANIFEST = path.join(config.output.skillsDir, '_fetch-failures.json');
 
+	// Shrink policy: with --accept-shrink, a content regression vs the baseline is taken as a
+	// legitimate deletion (fresh content written, baselines updated) instead of being held back.
+	setZhAcceptShrink(flags.acceptShrink);
+	setFigmaAcceptShrink(flags.acceptShrink);
+
 	// Replay only the fetches that failed in a previous run (from the manifest).
 	if (flags.retryFailed) {
 		await retryFailedRun(config, FAILURES_MANIFEST);
@@ -351,8 +365,9 @@ async function main(): Promise<void> {
 }
 
 /**
- * Replays only the components whose ZH/Figma fetch failed in a previous run (read from the
- * manifest), then refreshes the per-version SKILL.md of the touched versions and the aggregate.
+ * Replays only the units whose ZH/Figma fetch failed in a previous run (read from the manifest):
+ * components, documentation pages, tool pages and the deprecated page — each through its own
+ * collector. Then refreshes the per-version SKILL.md of the touched versions and the aggregate.
  * Rewrites the manifest with whatever still fails — so it can be replayed again until empty.
  */
 async function retryFailedRun(config: ReturnType<typeof loadConfig>, manifestPath: string): Promise<void> {
@@ -364,19 +379,40 @@ async function retryFailedRun(config: ReturnType<typeof loadConfig>, manifestPat
 
 	clearFailures();
 
-	// Group failed slugs by version.
-	const byVersion = new Map<string, Set<string>>();
+	// Group failures by version (scope read per failure; absent = 'component', pre-scope manifests).
+	const byVersion = new Map<string, FetchFailure[]>();
 	for (const f of prev) {
-		const set = byVersion.get(f.version) ?? new Set<string>();
-		set.add(f.slug);
-		byVersion.set(f.version, set);
+		const list = byVersion.get(f.version) ?? [];
+		list.push(f);
+		byVersion.set(f.version, list);
 	}
 
 	console.log(`↻ Rejeu : ${prev.length} échec(s) sur ${byVersion.size} version(s)\n`);
 	const touchedVersions: string[] = [];
-	for (const [versionStr, slugs] of byVersion) {
-		console.log(`\n━━━━━━ Rejeu ${versionStr} (${slugs.size} composant·s) ━━━━━━`);
-		await processVersion(versionStr, config, slugs);
+	for (const [versionStr, items] of byVersion) {
+		const version = resolveVersion(versionStr);
+		const componentSlugs = new Set(items.filter((f) => (f.scope ?? 'component') === 'component').map((f) => f.slug));
+		const docSlugs = new Set(items.filter((f) => f.scope === 'documentation').map((f) => f.slug));
+		const toolSlugs = new Set(items.filter((f) => f.scope === 'tools').map((f) => f.slug));
+		const hasDeprecated = items.some((f) => f.scope === 'deprecated');
+
+		console.log(`\n━━━━━━ Rejeu ${versionStr} (${items.length} échec·s) ━━━━━━`);
+
+		if (docSlugs.size > 0 && !flags.dryRun) {
+			console.log(`\n📖 Rejeu documentation (${docSlugs.size} page·s)...`);
+			await collectAllDocumentation(config.output.skillsDir, version, docSlugs);
+		}
+		if (hasDeprecated && !flags.dryRun) {
+			console.log(`\n💀 Rejeu de la page deprecated...`);
+			await collectDeprecated(config.output.skillsDir, version);
+		}
+		if (toolSlugs.size > 0 && !flags.dryRun) {
+			console.log(`\n🔧 Rejeu tools (${toolSlugs.size} page·s)...`);
+			await collectAllTools(config.output.skillsDir, version, { skipStorybook: flags.skipStorybook, only: toolSlugs });
+		}
+		if (componentSlugs.size > 0) {
+			await processVersion(versionStr, config, componentSlugs);
+		}
 		touchedVersions.push(versionStr);
 	}
 
@@ -461,6 +497,16 @@ async function processVersion(
 
 	// Process each component
 	const entries: [string, ComponentEntry][] = discovered.map(c => [c.slug, c.entry]);
+
+	// Batched Figma prefetch: all node ids in a handful of Tier-1 requests, filling the process
+	// cache so the per-component fetches below are network no-ops (cache persists across versions).
+	if (!flags.skipFigma && config.figma.token) {
+		const allNodeIds = entries.flatMap(([, entry]) => entry.figmaNodeIds ?? []);
+		if (allNodeIds.length > 0) {
+			await prefetchFigmaNodes(config.figma.fileKey, allNodeIds, config.figma.token);
+		}
+	}
+
 	console.log(`\n⚙️  Processing ${entries.length} components...\n`);
 
 	let successCount = 0;
@@ -474,11 +520,15 @@ async function processVersion(
 			// 1. AST extraction (needs ngPackage — skip for CSS-only components)
 			const api = entry.ngPackage ? extractPackageAPI(entry.ngPackage, version) : null;
 
-			// 2. ZeroHeight guidelines
+			// 2. ZeroHeight guidelines (guarded: run cache + baseline shrink-guard)
 			let zeroheight = null;
 			if (!flags.skipZeroheight && entry.zeroheightPagePath) {
 				try {
-					zeroheight = await fetchZeroHeightPage(entry.zeroheightPagePath, version.zhReleaseId);
+					zeroheight = await fetchZeroHeightPageGuarded(entry.zeroheightPagePath, version.zhReleaseId, {
+						scope: 'component',
+						slug,
+						version: `${version.major}.${version.minor}.${version.patch}`,
+					});
 				} catch (err: any) {
 					if (err instanceof TransientFetchError) {
 						recordFailure({
@@ -567,18 +617,18 @@ async function processVersion(
 				await formatStoryTemplates(storyExamples);
 			}
 
-			// 5. Figma tokens (optional, unversioned)
+			// 5. Figma tokens (optional, unversioned) — ALL node ids merged (aliases, split sets)
 			let figmaTokens = null;
 			if (!flags.skipFigma && entry.figmaNodeIds && entry.figmaNodeIds.length > 0 && config.figma.token) {
 				try {
-					figmaTokens = await fetchFigmaDesignTokens(config.figma.fileKey, entry.figmaNodeIds[0], config.figma.token);
+					figmaTokens = await fetchFigmaDesignTokensMerged(config.figma.fileKey, entry.figmaNodeIds, config.figma.token);
 				} catch (err: any) {
 					if (err instanceof TransientFetchError) {
 						recordFailure({
 							source: 'figma',
 							slug,
 							version: `${version.major}.${version.minor}.${version.patch}`,
-							ref: entry.figmaNodeIds[0],
+							ref: entry.figmaNodeIds.join(','),
 							status: err.status,
 							reason: err.message,
 						});
@@ -621,8 +671,10 @@ async function processVersion(
 				zhProse: renderChangelogMd(data),
 			});
 
-			// Main API reference
-			const mdContent = renderComponentMd(data, { hasDesign, hasChangelog: clMd !== null });
+			// Main API reference. hasFigma: tokens fetched this run, or a .figma.md kept from a
+			// previous run (figma skipped/unavailable) — the link must survive either way.
+			const hasFigma = figmaTokens !== null || figmaSkillExists(config.output.skillsDir, slug, version);
+			const mdContent = renderComponentMd(data, { hasDesign, hasChangelog: clMd !== null, hasFigma });
 			const result = writeVersionedSkill(config.output.skillsDir, slug, version, mdContent);
 
 			// Design guidelines (designResult computed above)
@@ -690,8 +742,9 @@ async function processVersion(
 		}
 	}
 
-	// Write version manifest
-	if (!flags.dryRun) {
+	// Write version manifest — full runs only: a component-scoped run (--component or replay)
+	// would overwrite componentCount with the partial count of this run.
+	if (!flags.dryRun && !componentScoped) {
 		writeVersionManifest(config.output.skillsDir, version, successCount);
 		console.log(`\n📋 Version manifest updated`);
 	}

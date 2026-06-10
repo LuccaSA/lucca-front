@@ -65,6 +65,8 @@ npx ts-node ... --validate
 | `--documentation-only` | Ne collecter que doc/outils/schematics (pas les composants) |
 | `--dry-run` | N'écrire aucun fichier |
 | `--validate` | Vérifier la couverture ZH de `component-map.json` (aucune génération) |
+| `--retry-failed` | Rejouer uniquement les unités (composants, pages doc/outils, deprecated) dont le fetch a échoué au run précédent (manifeste `_fetch-failures.json`) |
+| `--accept-shrink` | Entériner les régressions de contenu vs les baselines (suppression légitime côté ZH/Figma) |
 
 ## Sources de données
 
@@ -76,8 +78,38 @@ Le pipeline agrège des sources **toutes déterministes** (pas d'IA) :
 | **AST diff** | Changelog structurel par composant | Diff de l'API entre tags stables consécutifs (`collectors/api-diff.ts`) |
 | **ZeroHeight** | Guidelines design, contenu, accessibilité, dépréciations, prose changelog | Fetch du `.md` versionné par release (`/v/<releaseId>/p/<page>.md`) |
 | **Storybook** | Liens + code source des stories Angular et HTML/CSS | `index.json` versionné + `git show` pour les templates |
-| **Figma REST API** | Propriétés des variantes (taille, palette, état…) | API REST Figma — reflète l'état courant |
+| **Figma REST API** | Propriétés des variantes (taille, palette, état…) | API REST Figma — reflète l'état courant. Prefetch **batché** (`ids` groupés, `depth=1`) : ~90 nodes en 2-3 requêtes Tier 1 |
 | **Schematics (git)** | Codemods de migration (`ng generate`) | `git show <tag>:packages/ng/schematics/collection.json` |
+
+## Fiabilité des fetchs (cache, baselines, rejeu)
+
+Trois mécanismes garantissent un rendu reproductible malgré des sources distantes faillibles :
+
+1. **Cache de run ZeroHeight** (mémoire, clé `(releaseId, pagePath)`) : ZH est versionné par mineure,
+   donc un run multi-versions fetch chaque page **une seule fois** — les patches d'une même mineure
+   obtiennent un contenu identique octet pour octet. Jamais persisté : un run ultérieur re-fetch
+   toujours frais (les éditions ZH au sein d'une release sont prises en compte).
+2. **Baselines anti-régression** (`scripts/generate-skills/baselines/`, **committées**) : le dernier
+   contenu connu par page ZH (`zeroheight/<releaseId>/<page>.md`) / node Figma (`figma.json`).
+   Committées pour que la protection ne dépende pas de la machine qui génère (un poste vierge serait
+   sans garde au premier run) et qu'un `--accept-shrink` entériné vaille pour tout le monde — leur
+   diff dans une PR montre au passage le contenu source brut qui a changé. Jamais utilisées comme
+   source — uniquement comme oracle :
+   - **ZH** : si le contenu frais *rétrécit* (section H1 disparue, ou taille < 80 % de la baseline),
+     la baseline est conservée en sortie et un échec `shrink` est enregistré (rejouable). Un ajout ou
+     une modification passe silencieusement et met à jour la baseline.
+   - **Figma** : une réponse 200 fait foi (le frais est toujours écrit) ; la disparition de
+     propriétés/variantes est seulement **signalée** dans le rapport de fin de run.
+   - `--accept-shrink` entérine : le frais est accepté et les baselines mises à jour.
+3. **Manifeste d'échecs + rejeu ciblé** : les échecs transients épuisés (réseau, 5xx, 429, HTML,
+   shrink) sont écrits dans `.github/skills/_fetch-failures.json` avec leur *scope* (composant, page
+   doc, outil, deprecated). `--retry-failed` rejoue uniquement ces unités via leur collecteur, puis
+   rafraîchit SKILL.md et l'agrégat. Itérable jusqu'à manifeste vide ; seuls les `shrink` légitimes
+   nécessitent un `--accept-shrink` humain.
+
+Côté Figma, la défense principale contre le rate limit (Tier 1 : ~10-20 req/min) est le **prefetch
+batché** ; la sérialisation + cadence + retries `Retry-After` ne restent qu'en filet de sécurité
+(fallback unitaire si un chunk échoue).
 
 ## Structure de sortie
 

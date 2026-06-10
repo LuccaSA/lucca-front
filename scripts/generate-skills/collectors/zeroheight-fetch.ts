@@ -12,9 +12,11 @@
  * - Content/wording guidelines
  */
 
+import fs from 'fs';
+import path from 'path';
 import { ZeroHeightData } from '../types';
 import { getZeroHeightUrl } from '../version-config';
-import { TransientFetchError } from './fetch-failures';
+import { FetchScope, TransientFetchError, recordFailure, recordWarning } from './fetch-failures';
 
 const MAX_RETRIES = 4;
 /**
@@ -30,6 +32,148 @@ const sleep = (ms: number) => new Promise<void>((resolve) => setTimeout(resolve,
 
 function isRich(data: ZeroHeightData): boolean {
 	return data.raw.length >= RICH_MIN_CHARS && Object.keys(data.sections).length >= 1;
+}
+
+// ─── Run cache & shrink-guard baseline ───────────────────────────────────────
+//
+// Two complementary layers around the raw fetch:
+//
+// • Run cache (memory, scope = one process): a ZH release is keyed by (releaseId, pagePath), so
+//   when several patches of the same minor are generated in one run, the page is fetched ONCE and
+//   all patches get byte-identical content. Never persists across runs — a later run always
+//   re-fetches, so ZH edits within a release are picked up.
+//
+// • Baseline (disk, COMMITTED — scope = repo): the last-known-good raw markdown per
+//   (releaseId, pagePath). It is NEVER used as a source — every run fetches fresh. It is only an
+//   oracle: if the fresh content *shrinks* suspiciously (lost H1 sections, or large size drop),
+//   we keep the baseline content for output and record a 'shrink' failure for human review.
+//   `--accept-shrink` accepts the fresh content and updates the baseline (a deletion can be
+//   legitimate, just uncommon). Additions/modifications always pass through silently and refresh
+//   the baseline. Committed so the guard does not depend on which machine generated last, and an
+//   accepted shrink is accepted for everyone.
+
+const runCache = new Map<string, ZeroHeightData | null>();
+
+/** Minimum size drop (vs baseline) considered suspicious when no section disappeared. */
+const SHRINK_RATIO = 0.8;
+
+const BASELINE_DIR = path.join(__dirname, '..', 'baselines', 'zeroheight');
+
+let acceptShrink = false;
+
+/** Set by the CLI when `--accept-shrink` is passed: fresh content always wins and updates baselines. */
+export function setAcceptShrink(value: boolean): void {
+	acceptShrink = value;
+}
+
+function baselineFile(pagePath: string, zhReleaseId: number | null): string {
+	// pagePath may contain '/' (e.g. tab paths like "40c515-…/b/95175f") — flatten it.
+	const flat = pagePath.replace(/\//g, '__');
+	return path.join(BASELINE_DIR, String(zhReleaseId ?? 'latest'), `${flat}.md`);
+}
+
+function readBaseline(pagePath: string, zhReleaseId: number | null): string | null {
+	try {
+		return fs.readFileSync(baselineFile(pagePath, zhReleaseId), 'utf-8');
+	} catch {
+		return null;
+	}
+}
+
+function writeBaseline(pagePath: string, zhReleaseId: number | null, raw: string): void {
+	const file = baselineFile(pagePath, zhReleaseId);
+	fs.mkdirSync(path.dirname(file), { recursive: true });
+	fs.writeFileSync(file, raw, 'utf-8');
+}
+
+function removeBaseline(pagePath: string, zhReleaseId: number | null): void {
+	try {
+		fs.rmSync(baselineFile(pagePath, zhReleaseId));
+	} catch {
+		// already absent
+	}
+}
+
+/** Returns a human-readable reason if `fresh` is a suspicious regression vs the baseline, else null. */
+function shrinkReason(baselineRaw: string, fresh: ZeroHeightData): string | null {
+	const baseSections = Object.keys(parseSections(baselineRaw));
+	const missing = baseSections.filter((s) => !(s in fresh.sections));
+	if (missing.length > 0) {
+		return `section(s) disparue(s) : ${missing.join(', ')}`;
+	}
+	if (fresh.raw.length < baselineRaw.length * SHRINK_RATIO) {
+		const pct = Math.round((1 - fresh.raw.length / baselineRaw.length) * 100);
+		return `contenu réduit de ${baselineRaw.length} à ${fresh.raw.length} caractères (−${pct} %)`;
+	}
+	return null;
+}
+
+/** Caller context used to record a replayable 'shrink' failure. */
+export interface ZhFetchContext {
+	scope: FetchScope;
+	/** Replay slug: component slug, "category/page" for documentation, tool slug. */
+	slug: string;
+	/** Bare version, e.g. "21.2.4". */
+	version: string;
+}
+
+/**
+ * Guarded ZH fetch — the entry point all collectors should use.
+ *
+ * Wraps `fetchZeroHeightPage` with the run cache and the baseline shrink-guard (see above).
+ * Transient failures still throw `TransientFetchError` (caller records them as before).
+ */
+export async function fetchZeroHeightPageGuarded(
+	pagePath: string,
+	zhReleaseId: number | null,
+	ctx: ZhFetchContext,
+): Promise<ZeroHeightData | null> {
+	const cacheKey = `${zhReleaseId ?? 'latest'}:${pagePath}`;
+	if (runCache.has(cacheKey)) return runCache.get(cacheKey)!;
+
+	const fresh = await fetchZeroHeightPage(pagePath, zhReleaseId);
+	const baselineRaw = readBaseline(pagePath, zhReleaseId);
+
+	let result: ZeroHeightData | null;
+	if (fresh === null) {
+		// 404 while a baseline exists for this release: a deletion is possible but uncommon —
+		// keep the baseline and ask for confirmation.
+		if (baselineRaw !== null && !acceptShrink) {
+			recordFailure({
+				source: 'zeroheight',
+				scope: ctx.scope,
+				slug: ctx.slug,
+				version: ctx.version,
+				ref: pagePath,
+				status: 'shrink',
+				reason: 'page 404 alors qu’une baseline existe pour cette release — baseline conservée (--accept-shrink pour entériner)',
+			});
+			result = { raw: baselineRaw, sections: parseSections(baselineRaw) };
+		} else {
+			if (baselineRaw !== null) removeBaseline(pagePath, zhReleaseId);
+			result = null;
+		}
+	} else {
+		const reason = baselineRaw !== null ? shrinkReason(baselineRaw, fresh) : null;
+		if (reason && !acceptShrink) {
+			recordFailure({
+				source: 'zeroheight',
+				scope: ctx.scope,
+				slug: ctx.slug,
+				version: ctx.version,
+				ref: pagePath,
+				status: 'shrink',
+				reason: `${reason} — baseline conservée (--accept-shrink pour entériner)`,
+			});
+			result = { raw: baselineRaw!, sections: parseSections(baselineRaw!) };
+		} else {
+			writeBaseline(pagePath, zhReleaseId, fresh.raw);
+			result = fresh;
+		}
+	}
+
+	runCache.set(cacheKey, result);
+	return result;
 }
 
 /**
@@ -98,13 +242,23 @@ async function tryFetchMd(pagePath: string, zhReleaseId: number | null): Promise
 	let raw = await res.text();
 
 	// ZeroHeight sometimes returns HTML instead of markdown — try the latest-release fallback URL.
-	if (isHtml(raw)) {
-		const fallbackUrl = zhReleaseId ? getZeroHeightUrl(pagePath, 0) : getZeroHeightUrl(pagePath, null);
+	// This silently mixes versions (latest content served for an old release), so it is logged
+	// and surfaced as a warning in the end-of-run report.
+	if (isHtml(raw) && zhReleaseId !== null) {
+		const fallbackUrl = getZeroHeightUrl(pagePath, null);
 		try {
 			const fb = await fetch(fallbackUrl, { headers: { Accept: 'text/plain, text/markdown' } });
 			if (fb.ok) {
 				const fbRaw = await fb.text();
-				if (!isHtml(fbRaw)) raw = fbRaw;
+				if (!isHtml(fbRaw)) {
+					raw = fbRaw;
+					console.warn(`  ⚠️  ZeroHeight ${pagePath} : HTML reçu sur l'URL versionnée (release ${zhReleaseId}) — contenu « latest » substitué`);
+					recordWarning({
+						source: 'zeroheight',
+						label: pagePath,
+						reason: `HTML reçu sur l'URL versionnée (release ${zhReleaseId}) — contenu « latest » substitué`,
+					});
+				}
 			}
 		} catch {
 			// fall through to the HTML check below

@@ -123,6 +123,16 @@ export function writeFigmaSkill(skillsDir: string, slug: string, version: Versio
 }
 
 /**
+ * Whether a `<slug>.figma.md` from a previous run exists on disk. Used so a run without Figma
+ * (--skip-figma, missing token, transient failure) keeps linking the existing file instead of
+ * silently dropping the link from `<slug>.md`.
+ */
+export function figmaSkillExists(skillsDir: string, slug: string, version: VersionConfig): boolean {
+	validateSlug(slug);
+	return fs.existsSync(path.join(componentBaseDir(skillsDir, version, slug), `${slug}.figma.md`));
+}
+
+/**
  * Writes/updates the _versions.json manifest at the dist root (lucca-front/_versions.json).
  * Generator/dist metadata — not part of any single version skill, not fetched by APM.
  */

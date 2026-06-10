@@ -14,7 +14,8 @@
  */
 
 import { VersionConfig } from '../types';
-import { fetchZeroHeightPage } from './zeroheight-fetch';
+import { fetchZeroHeightPageGuarded } from './zeroheight-fetch';
+import { TransientFetchError, recordFailure } from './fetch-failures';
 import { cleanZeroHeightMarkdown } from '../generators/template-renderer';
 import { writeDocumentationPage } from '../generators/skill-writer';
 
@@ -26,46 +27,62 @@ const ZH_REMOVED_TAB = '40c515-cycle-de-vie-des-composants/b/16627d';
  * Fetches both deprecated & removed tabs from ZeroHeight and combines them
  * into a single `deprecated.md` documentation page.
  *
+ * The page is written ONLY when no tab failed transiently: a half-fetched page must never
+ * overwrite a previously complete `deprecated.md`. A 404 tab is a legitimate absence and
+ * doesn't block the write. Transient failures are recorded for `--retry-failed`.
+ *
  * @returns Result summary with written/error counts
  */
 export async function collectDeprecated(
 	skillsDir: string,
 	version: VersionConfig,
 ): Promise<{ written: number; errors: number }> {
+	const bareVersion = `${version.major}.${version.minor}.${version.patch}`;
 	const parts: string[] = [];
+	let transientFailures = 0;
 
-	// Fetch the "deprecated list" tab
-	try {
-		const deprecatedData = await fetchZeroHeightPage(ZH_DEPRECATED_TAB, version.zhReleaseId);
-		if (deprecatedData) {
-			const cleaned = cleanZeroHeightMarkdown(deprecatedData.raw);
-			if (cleaned.trim()) {
-				parts.push(cleaned);
+	const tabs: { label: string; pagePath: string }[] = [
+		{ label: 'deprecated', pagePath: ZH_DEPRECATED_TAB },
+		{ label: 'removed', pagePath: ZH_REMOVED_TAB },
+	];
+
+	for (const tab of tabs) {
+		try {
+			const data = await fetchZeroHeightPageGuarded(tab.pagePath, version.zhReleaseId, {
+				scope: 'deprecated',
+				slug: 'deprecated',
+				version: bareVersion,
+			});
+			if (data) {
+				const cleaned = cleanZeroHeightMarkdown(data.raw);
+				if (cleaned.trim()) {
+					parts.push(cleaned);
+				} else {
+					console.warn(`  ⚠️  Empty content after cleaning for ${tab.label} tab`);
+				}
 			} else {
-				console.warn('  ⚠️  Empty content after cleaning for deprecated tab');
+				console.warn(`  ⚠️  No ZH content for ${tab.label} tab`);
 			}
-		} else {
-			console.warn('  ⚠️  No ZH content for deprecated tab');
+		} catch (err: any) {
+			transientFailures++;
+			if (err instanceof TransientFetchError) {
+				recordFailure({
+					source: 'zeroheight',
+					scope: 'deprecated',
+					slug: 'deprecated',
+					version: bareVersion,
+					ref: tab.pagePath,
+					status: err.status,
+					reason: err.message,
+				});
+			}
+			console.warn(`  ⚠️  Error fetching ${tab.label} tab: ${err.message}`);
 		}
-	} catch (err: any) {
-		console.warn(`  ⚠️  Error fetching deprecated tab: ${err.message}`);
 	}
 
-	// Fetch the "removed elements" tab
-	try {
-		const removedData = await fetchZeroHeightPage(ZH_REMOVED_TAB, version.zhReleaseId);
-		if (removedData) {
-			const cleaned = cleanZeroHeightMarkdown(removedData.raw);
-			if (cleaned.trim()) {
-				parts.push(cleaned);
-			} else {
-				console.warn('  ⚠️  Empty content after cleaning for removed tab');
-			}
-		} else {
-			console.warn('  ⚠️  No ZH content for removed elements tab');
-		}
-	} catch (err: any) {
-		console.warn(`  ⚠️  Error fetching removed elements tab: ${err.message}`);
+	if (transientFailures > 0) {
+		console.warn('  ⚠️  Page deprecated incomplète — fichier non écrit (le précédent est conservé). Rejouable via --retry-failed.');
+		return { written: 0, errors: 1 };
 	}
 
 	if (parts.length === 0) {

@@ -11,7 +11,8 @@
 import fs from 'fs';
 import path from 'path';
 import { DocumentationMap, DocumentationEntry, VersionConfig } from '../types';
-import { fetchZeroHeightPage } from './zeroheight-fetch';
+import { fetchZeroHeightPageGuarded } from './zeroheight-fetch';
+import { TransientFetchError, recordFailure } from './fetch-failures';
 import { cleanZeroHeightMarkdown } from '../generators/template-renderer';
 import { writeDocumentationPage } from '../generators/skill-writer';
 
@@ -37,10 +38,16 @@ export async function collectDocumentation(
 ): Promise<{ written: number; errors: number }> {
 	let written = 0;
 	let errors = 0;
+	const bareVersion = `${version.major}.${version.minor}.${version.patch}`;
 
 	for (const entry of entries) {
+		const replaySlug = `${category}/${entry.slug}`;
 		try {
-			const zhData = await fetchZeroHeightPage(entry.zhPagePath, version.zhReleaseId);
+			const zhData = await fetchZeroHeightPageGuarded(entry.zhPagePath, version.zhReleaseId, {
+				scope: 'documentation',
+				slug: replaySlug,
+				version: bareVersion,
+			});
 
 			if (!zhData) {
 				console.warn(`  ⚠️  No ZH content for ${category}/${entry.slug}`);
@@ -61,6 +68,19 @@ export async function collectDocumentation(
 			console.log(`     ✅ ${category}/${entry.slug}.md — ${result.status}`);
 			written++;
 		} catch (err: any) {
+			// Transient ZH failure: record it so `--retry-failed` can replay this page. The
+			// previously generated file (if any) is left in place.
+			if (err instanceof TransientFetchError) {
+				recordFailure({
+					source: 'zeroheight',
+					scope: 'documentation',
+					slug: replaySlug,
+					version: bareVersion,
+					ref: entry.zhPagePath,
+					status: err.status,
+					reason: err.message,
+				});
+			}
 			console.warn(`  ⚠️  Error processing ${category}/${entry.slug}: ${err.message}`);
 			errors++;
 		}
@@ -71,17 +91,21 @@ export async function collectDocumentation(
 
 /**
  * Collects all documentation categories for a version.
+ *
+ * @param only — Optional replay filter: restrict to these "category/slug" entries.
  */
 export async function collectAllDocumentation(
 	skillsDir: string,
 	version: VersionConfig,
+	only?: Set<string>,
 ): Promise<{ written: number; errors: number }> {
 	const docMap = loadDocumentationMap();
 	let totalWritten = 0;
 	let totalErrors = 0;
 
 	for (const category of Object.keys(docMap) as DocCategory[]) {
-		const entries = docMap[category];
+		let entries = docMap[category];
+		if (only) entries = entries.filter((e) => only.has(`${category}/${e.slug}`));
 		if (entries.length === 0) continue;
 
 		console.log(`\n  📖 ${category} (${entries.length} pages)...`);
