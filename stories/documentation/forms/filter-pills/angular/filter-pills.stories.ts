@@ -127,6 +127,6 @@ export const Basic: StoryObj<FilterPillComponent & { clearable: boolean; filterP
 	args: {
 		clearable: true,
 		label: 'Légume',
-		filterPillLabelPlural: 'Légumes',
+		filterPillLabelPlural: 'légumes',
 	},
 };

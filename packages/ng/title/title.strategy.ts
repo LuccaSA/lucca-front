@@ -1,6 +1,8 @@
+import { LiveAnnouncer } from '@angular/cdk/a11y';
 import { inject, Injectable, InjectionToken, Provider } from '@angular/core';
 import { Title } from '@angular/platform-browser';
 import { ActivatedRouteSnapshot, RouterStateSnapshot, TitleStrategy } from '@angular/router';
+import { isNotNil } from '@lucca-front/ng/core';
 import { BehaviorSubject, combineLatest, isObservable, Observable, ObservableInput, of } from 'rxjs';
 import { distinctUntilChanged, map, switchMap, tap } from 'rxjs/operators';
 import { ILuTitleTranslateService, LU_TITLE_TRANSLATE_SERVICE } from './title-translate.service';
@@ -9,6 +11,7 @@ import { PageTitle, TitleSeparator } from './title.model';
 export const ɵAPP_TITLE = new InjectionToken<string | Observable<string>>('APP_TITLE');
 export type LuTitleNamingStrategy = 'product' | 'other';
 export const ɵNAMING_STRATEGY = new InjectionToken<LuTitleNamingStrategy>('NAMING_STRATEGY', { factory: () => 'product' });
+export const ɵREAD_TITLE_BY_LIVE_ANNOUNCER = new InjectionToken<boolean>('READ_TITLE_BY_LIVE_ANNOUNCEMENT', { factory: () => false });
 
 /**
  * @deprecated Use `provideLuTitleStrategy` instead.
@@ -23,6 +26,8 @@ export class LuTitleStrategy extends TitleStrategy {
 	private translateService = inject<ILuTitleTranslateService>(LU_TITLE_TRANSLATE_SERVICE, { optional: true });
 	private appTitle = inject(ɵAPP_TITLE);
 	private namingStrategy = inject(ɵNAMING_STRATEGY);
+	private readTitleByLiveAnnouncer = inject(ɵREAD_TITLE_BY_LIVE_ANNOUNCER);
+	private liveAnnouncer = inject(LiveAnnouncer);
 
 	private luccaTitle$ = isObservable(this.appTitle) ? this.appTitle.pipe(map((title) => this.#luccaTitle(title))) : of(this.#luccaTitle(this.appTitle));
 
@@ -35,7 +40,16 @@ export class LuTitleStrategy extends TitleStrategy {
 	);
 	constructor() {
 		super();
-		this.title$.pipe(tap((title) => this.title.setTitle(title))).subscribe();
+		this.title$
+			.pipe(
+				tap((title) => {
+					this.title.setTitle(title);
+					if (this.readTitleByLiveAnnouncer) {
+						void this.liveAnnouncer.announce(title, 'polite');
+					}
+				}),
+			)
+			.subscribe();
 	}
 
 	override updateTitle(routerState: RouterStateSnapshot) {
@@ -84,6 +98,7 @@ export interface LuTitleStrategyOptions {
 	appTitle?: () => string | Observable<string>;
 	translateService?: () => ILuTitleTranslateService;
 	namingStrategy?: LuTitleNamingStrategy;
+	readTitleByLiveAnnouncer?: boolean;
 }
 
 export function provideLuTitleStrategy(options: LuTitleStrategyOptions): Provider[] {
@@ -97,6 +112,9 @@ export function provideLuTitleStrategy(options: LuTitleStrategyOptions): Provide
 	}
 	if (options.namingStrategy) {
 		providers.push({ provide: ɵNAMING_STRATEGY, useValue: options.namingStrategy });
+	}
+	if (isNotNil(options.readTitleByLiveAnnouncer)) {
+		providers.push({ provide: ɵREAD_TITLE_BY_LIVE_ANNOUNCER, useValue: options.readTitleByLiveAnnouncer });
 	}
 
 	return providers;

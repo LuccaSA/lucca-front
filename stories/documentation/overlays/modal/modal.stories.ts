@@ -5,7 +5,9 @@ import { ILuModalContent, LU_MODAL_DATA, LuModal, LuModalConfig, LuModalModule }
 import { LuToastsModule, LuToastsService } from '@lucca-front/ng/toast';
 import { applicationConfig, Meta, moduleMetadata } from '@storybook/angular';
 import { map, shareReplay, timer } from 'rxjs';
-import { generateMarkdownCodeBlock, getStoryGenerator, useDocumentationStory } from 'stories/helpers/stories';
+import { createTestStory, generateMarkdownCodeBlock, getStoryGenerator, useDocumentationStory } from 'stories/helpers/stories';
+import { waitForAngular } from 'stories/helpers/test';
+import { expect, screen, userEvent, within } from 'storybook/test';
 
 type StoryComponent = LuModalConfig & { useDynamicContent: boolean; message: string };
 
@@ -322,3 +324,20 @@ const meta: Meta<StoryComponent> = {
 };
 
 export default meta;
+
+export const ModalTEST = createTestStory(Modal, async ({ canvasElement, step }) => {
+	await waitForAngular();
+	const canvas = within(canvasElement);
+
+	await step('Ouvre la modale', async () => {
+		await userEvent.click(canvas.getByRole('button', { name: 'Open' }));
+		await waitForAngular();
+		await expect(screen.getByRole('dialog')).toBeVisible();
+	});
+
+	await step('Ferme avec Escape', async () => {
+		await userEvent.keyboard('{Escape}');
+		await waitForAngular();
+		await expect(screen.queryByRole('dialog')).not.toBeInTheDocument();
+	});
+});

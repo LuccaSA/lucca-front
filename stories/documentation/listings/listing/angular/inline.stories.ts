@@ -2,7 +2,9 @@ import { IconsList } from '@/stories/icons-list';
 import { ListingComponent, ListingItemComponent } from '@lucca-front/ng/listing';
 import { Meta, moduleMetadata, StoryObj } from '@storybook/angular';
 import { HiddenArgType, PaletteAllArgType } from 'stories/helpers/common-arg-types';
-import { generateInputs } from 'stories/helpers/stories';
+import { createTestStory, generateInputs } from 'stories/helpers/stories';
+import { waitForAngular } from 'stories/helpers/test';
+import { expect, within } from 'storybook/test';
 
 interface ListingBasicStory {
 	checklist: boolean;
@@ -91,3 +93,21 @@ export const Template: StoryObj<ListingComponent & ListingItemComponent & { type
 		icon: 'foodCroissant',
 	},
 };
+
+export const TemplateTEST = createTestStory(Template, async ({ canvasElement, step }) => {
+	await waitForAngular();
+	const canvas = within(canvasElement);
+
+	await step('Vérifie le rendu de la liste inline', async () => {
+		const list = canvas.getByRole('list');
+		await expect(list).toBeVisible();
+	});
+
+	await step('Vérifie que les éléments de liste sont visibles', async () => {
+		const items = canvas.getAllByRole('listitem');
+		await expect(items.length).toBeGreaterThan(0);
+		for (const item of items) {
+			await expect(item).toBeVisible();
+		}
+	});
+});

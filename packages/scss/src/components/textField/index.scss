@@ -13,6 +13,10 @@
 
 		&.mod-S {
 			@include S;
+
+			&.mod-multilanguage {
+				@include multilanguageS;
+			}
 		}
 
 		&.mod-XS {
@@ -21,6 +25,10 @@
 
 		&.mod-valueAlignRight {
 			@include valueAlignRight;
+		}
+
+		&.mod-multilanguage {
+			@include multilanguage;
 		}
 
 		&.is-invalid,
@@ -35,6 +43,10 @@
 		&.is-disabled,
 		&:has(.textField-input-value:disabled) {
 			@include disabled;
+
+			&.mod-multilanguage {
+				@include multilanguageDisabled;
+			}
 		}
 
 		&.mod-autoResize {

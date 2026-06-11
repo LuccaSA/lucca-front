@@ -21,6 +21,7 @@ import {
 	ViewEncapsulation,
 } from '@angular/core';
 import { AbstractControl, NgControl, ReactiveFormsModule, RequiredValidator, Validators } from '@angular/forms';
+import { FormField } from '@angular/forms/signals';
 import { SafeHtml } from '@angular/platform-browser';
 import { intlInputOptions, LuClass, PortalContent, PortalDirective, ɵeffectWithDeps } from '@lucca-front/ng/core';
 import { LU_FORM_INSTANCE } from '@lucca-front/ng/form';
@@ -30,14 +31,13 @@ import { InlineMessageComponent, InlineMessageState } from '@lucca-front/ng/inli
 import { LuTooltipModule } from '@lucca-front/ng/tooltip';
 import { BehaviorSubject } from 'rxjs';
 import { FormFieldSize } from './form-field-size';
+import { FormFieldLayout, FormFieldWidth } from './form-field.type';
 import { FORM_FIELD_INSTANCE } from './form-field.token';
 import { LU_FORM_FIELD_TRANSLATIONS } from './form-field.translate';
 import { InputDirective } from './input.directive';
 import { INPUT_FRAMED_INSTANCE } from './public-api';
 
 let nextId = 0;
-
-type FormFieldWidth = 20 | 30 | 40 | 50 | 60;
 
 @Component({
 	selector: 'lu-form-field',
@@ -71,12 +71,15 @@ export class FormFieldComponent implements OnDestroy, DoCheck {
 
 	readonly requiredValidators = contentChildren(RequiredValidator, { descendants: true });
 	readonly ngControls = contentChildren(NgControl, { descendants: true });
+	readonly ngFormFields = contentChildren(FormField, { descendants: true });
 
 	readonly ignoredRequiredValidators = computed(() => new Set(this.formFieldChildren().flatMap((f) => f.requiredValidators())));
 	readonly ignoredControls = computed(() => new Set(this.formFieldChildren().flatMap((f) => f.ngControls())));
+	readonly ignoredFormFields = computed(() => new Set(this.formFieldChildren().flatMap((f) => f.ngFormFields())));
 
 	readonly ownRequiredValidators = computed(() => this.requiredValidators().filter((c) => !this.ignoredRequiredValidators().has(c)));
 	readonly ownControls = computed(() => this.ngControls().filter((c) => !this.ignoredControls().has(c)));
+	readonly ownFormFields = computed(() => this.ngFormFields().filter((c) => !this.ignoredFormFields().has(c)));
 
 	#hasInputRequired = signal(false);
 	forceInputRequired = signal(false);
@@ -133,7 +136,7 @@ export class FormFieldComponent implements OnDestroy, DoCheck {
 	 */
 	readonly extraDescribedBy = input<string>('');
 
-	readonly layout = model<'default' | 'checkable' | 'fieldset'>('default');
+	readonly layout = model<FormFieldLayout>('default');
 
 	#inputs: InputDirective[] = [];
 
@@ -258,7 +261,8 @@ export class FormFieldComponent implements OnDestroy, DoCheck {
 	#isInputRequired(): boolean {
 		const hasRequiredFormControl = this.ownControls().some((c) => c.control?.hasValidator(Validators.required));
 		const hasRequiredNgModel = this.ownRequiredValidators().some((c) => booleanAttribute(c.required));
-		return hasRequiredNgModel || hasRequiredFormControl;
+		const hasRequiredFormField = this.ownFormFields().some((c) => c.state().required());
+		return hasRequiredFormField || hasRequiredNgModel || hasRequiredFormControl;
 	}
 
 	#hasInvalidStatus(): boolean {

@@ -3,6 +3,7 @@
 		<span
 			class="skeleton-item"
 			[class]="size() ? 'pr-u-body' + size() : null"
+			[class.mod-dark]="dark()"
 			[style.--components-skeleton-text-width]="getRandomPercent()"
 		></span>
 	}

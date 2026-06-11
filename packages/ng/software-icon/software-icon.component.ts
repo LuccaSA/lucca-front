@@ -1,8 +1,8 @@
 import { booleanAttribute, ChangeDetectionStrategy, Component, computed, inject, input, ViewEncapsulation } from '@angular/core';
 import { LuSafeExternalSvgPipe } from '@lucca-front/ng/safe-content';
 import { LuTooltipTriggerDirective } from '@lucca-front/ng/tooltip';
-import { SoftwareIcon } from './software-icon';
 import { LU_SOFTWARE_ICON_WRAPPER } from './software-icon-wrapper.token';
+import { SoftwareIcon, SoftwareIconSize } from './software-icon.type';
 
 @Component({
 	selector: 'lu-software-icon',
@@ -24,6 +24,6 @@ export class SoftwareIconComponent {
 	readonly disabled = input(false, { transform: booleanAttribute });
 	readonly withTooltip = input(false, { transform: booleanAttribute });
 	readonly iconAlt = input<string>('');
-	readonly size = input<'XXS' | 'XS' | 'S' | 'L' | ''>('');
+	readonly size = input<SoftwareIconSize | ''>('');
 	readonly iconUrl = computed(() => `${this.domain}${this.path}${this.icon()}${this.extension}`);
 }

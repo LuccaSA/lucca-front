@@ -60,6 +60,7 @@ export class TimePickerPartComponent {
 
 	prevRequest = output<void>();
 	nextRequest = output<void>();
+	nonDigitKeyPressed = output<void>();
 	inputControlClick = output<PickerControlDirection>();
 	touched = output<void>();
 
@@ -87,7 +88,7 @@ export class TimePickerPartComponent {
 
 	readonly currentValue = computed(() => (this.hideValue() || !this.isValueSet() ? null : this.value()));
 
-	protected inputId = `time-picker-part-${nextId++}`;
+	readonly inputId = `time-picker-part-${nextId++}`;
 
 	constructor(@Inject(LOCALE_ID) private locale: string) {
 		ɵeffectWithDeps([this.valueLabel], (valueLabel) => {
@@ -116,6 +117,7 @@ export class TimePickerPartComponent {
 		}
 
 		if (event.data && /\D+/.test(event.data)) {
+			this.nonDigitKeyPressed.emit();
 			event.target.value = String(this.value());
 			return;
 		}

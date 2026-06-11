@@ -1,31 +1,15 @@
+import { DECORATIVE_PALETTE, PALETTE } from '@lucca/prisme/core';
+import { setStoryOptions } from './stories';
+
 export const PaletteArgType = {
-	options: ['none', 'product', 'neutral', 'success', 'warning', 'error'],
+	options: setStoryOptions(PALETTE),
 	control: {
 		type: 'select',
 	},
 } as const;
 
 export const PaletteAllArgType = {
-	options: [
-		'none',
-		'product',
-		'neutral',
-		'success',
-		'warning',
-		'error',
-		'kiwi',
-		'lime',
-		'cucumber',
-		'mint',
-		'glacier',
-		'lagoon',
-		'blueberry',
-		'lavender',
-		'grape',
-		'watermelon',
-		'pumpkin',
-		'pineapple',
-	],
+	options: setStoryOptions([...PALETTE, ...DECORATIVE_PALETTE]),
 	control: {
 		type: 'select',
 	},
@@ -40,5 +24,5 @@ export const HiddenArgType = {
 };
 
 export const stateArgType = {
-	options: ['default', 'success', 'warning', 'error'],
+	options: setStoryOptions(['default', 'success', 'warning', 'error']),
 };

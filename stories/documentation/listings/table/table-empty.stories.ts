@@ -1,6 +1,6 @@
+import { ButtonComponent } from '@lucca-front/ng/button';
 import { EmptyStateSectionComponent } from '@lucca-front/ng/empty-state';
 import { Meta, moduleMetadata, StoryObj } from '@storybook/angular';
-import { ButtonComponent } from '@lucca-front/ng/button';
 
 interface TableBasicStory {
 	withOverflow: boolean;
@@ -23,7 +23,7 @@ export default {
 } as Meta;
 
 function getTemplate(args: TableBasicStory): string {
-	const style = args.withOverflow ? ` style="width: 200vw"` : '';
+	const style = args.withOverflow ? ` style="inline-size: 200vw"` : '';
 	const compact = args.navSideCompact ? ` mod-compact` : '';
 	const navsideTpl = args.navSide
 		? `<div class="navSide mod-withBanner${compact}"></div>

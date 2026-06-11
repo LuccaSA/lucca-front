@@ -1,6 +1,9 @@
 import { ChangeDetectionStrategy, Component } from '@angular/core';
 import { LuSkipLinksComponent } from '@lucca-front/ng/a11y';
 import { Meta, StoryObj } from '@storybook/angular';
+import { createTestStory } from 'stories/helpers/stories';
+import { waitForAngular } from 'stories/helpers/test';
+import { expect, userEvent, within } from 'storybook/test';
 
 @Component({
 	selector: 'skip-links-story',
@@ -77,3 +80,13 @@ Basic.parameters = {
 		},
 	},
 };
+
+export const BasicTEST = createTestStory(Basic, async ({ canvasElement, step }) => {
+	await waitForAngular();
+	const canvas = within(canvasElement);
+
+	await step('Vérifie le rendu initial du composant', async () => {
+		const skipLink = canvas.getByRole('link', { name: /contenu/i });
+		await expect(skipLink).toBeInTheDocument();
+	});
+});

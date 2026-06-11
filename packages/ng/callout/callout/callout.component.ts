@@ -3,9 +3,8 @@ import { LuccaIcon } from '@lucca-front/icons';
 import { intlInputOptions, Palette, PortalContent, PortalDirective } from '@lucca-front/ng/core';
 import { IconComponent } from '@lucca-front/ng/icon';
 import { CalloutIconPipe } from '../callout-icon.pipe';
-import { CalloutState } from '../callout-state';
-import { Hx } from '../callout.model';
 import { LU_CALLOUT_TRANSLATIONS } from '../callout.translate';
+import { CalloutHx, CalloutSize, CalloutState } from '../callout.type';
 import { getCalloutPalette } from '../callout.utils';
 
 @Component({
@@ -30,7 +29,7 @@ export class CalloutComponent {
 	/**
 	 * Define the aria level of the title
 	 */
-	readonly hx = input(null, { transform: numberAttribute as (value: Hx | `${Hx}`) => Hx });
+	readonly hx = input(null, { transform: numberAttribute as (value: CalloutHx | `${CalloutHx}`) => CalloutHx });
 
 	/**
 	 * Which palette should be used for the entire callout.
@@ -41,7 +40,7 @@ export class CalloutComponent {
 	/**
 	 * Which size should the callout be? Defaults to medium
 	 */
-	readonly size = input<'M' | 'S'>();
+	readonly size = input<CalloutSize>();
 
 	/**
 	 * State is a shorthand to set the icon and the palette to the recommended values for the icon and palette based on

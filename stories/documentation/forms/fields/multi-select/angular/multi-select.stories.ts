@@ -2,12 +2,15 @@ import { allLegumes, FilterLegumesPipe } from '@/stories/forms/select/select.uti
 import { FormsModule } from '@angular/forms';
 import { BrowserAnimationsModule } from '@angular/platform-browser/animations';
 import { LuOptionDirective } from '@lucca-front/ng/core-select';
-import { FormFieldComponent } from '@lucca-front/ng/form-field';
+import { FORM_FIELD_SIZE, FORM_FIELD_WIDTH, FormFieldComponent } from '@lucca-front/ng/form-field';
+import { INLINE_MESSAGE_STATE } from '@lucca-front/ng/inline-message';
 import { LuMultiSelectInputComponent } from '@lucca-front/ng/multi-select';
 import { Meta, moduleMetadata, StoryObj } from '@storybook/angular';
 import { StoryModelDisplayComponent } from 'stories/helpers/story-model-display.component';
 import { HiddenArgType } from '../../../../../helpers/common-arg-types';
-import { generateInputs } from '../../../../../helpers/stories';
+import { createTestStory, generateInputs, setStoryOptions } from '../../../../../helpers/stories';
+import { waitForAngular } from '../../../../../helpers/test';
+import { expect, screen, userEvent, within } from 'storybook/test';
 
 export default {
 	title: 'Documentation/Forms/Fields/Multi Select/Angular',
@@ -32,14 +35,14 @@ export default {
 			description: 'Modifie le placeholder au champ.',
 		},
 		size: {
-			options: ['M', 'S'],
+			options: setStoryOptions(FORM_FIELD_SIZE),
 			control: {
 				type: 'select',
 			},
 			description: 'Modifie la taille du champ.',
 		},
 		width: {
-			options: [null, 20, 30, 40, 50, 60],
+			options: setStoryOptions(FORM_FIELD_WIDTH),
 			control: {
 				type: 'select',
 			},
@@ -49,7 +52,7 @@ export default {
 			description: 'Ajoute un texte descriptif (aide, erreur, etc.) sous le champ de formulaire.',
 		},
 		inlineMessageState: {
-			options: ['default', 'success', 'warning', 'error'],
+			options: setStoryOptions(INLINE_MESSAGE_STATE),
 			control: {
 				type: 'select',
 			},
@@ -121,3 +124,50 @@ export const Basic: StoryObj<LuMultiSelectInputComponent<unknown> & FormFieldCom
 		presentation: false,
 	},
 };
+
+export const BasicTEST = createTestStory(Basic, async ({ canvasElement, step }) => {
+	await waitForAngular();
+	const canvas = within(canvasElement);
+
+	await step('Vérifie le rendu initial', async () => {
+		const combobox = canvas.getByRole('combobox');
+		await expect(combobox).toBeVisible();
+		await expect(combobox).toHaveAttribute('aria-expanded', 'false');
+	});
+
+	await step('Interaction souris - ouvrir la liste', async () => {
+		const combobox = canvas.getByRole('combobox');
+		await userEvent.click(combobox);
+		await waitForAngular();
+		await expect(combobox).toHaveAttribute('aria-expanded', 'true');
+		const listbox = screen.getByRole('listbox');
+		await expect(listbox).toBeVisible();
+	});
+
+	await step('Interaction souris - sélectionner une option', async () => {
+		const options = screen.getAllByRole('option');
+		await userEvent.click(options[0]);
+		await waitForAngular();
+	});
+
+	await step('Interaction clavier - fermer avec Escape', async () => {
+		await userEvent.keyboard('{Escape}');
+		await waitForAngular();
+		const combobox = canvas.getByRole('combobox');
+		await expect(combobox).toHaveAttribute('aria-expanded', 'false');
+	});
+
+	await step('Interaction clavier - ouvrir et naviguer', async () => {
+		const combobox = canvas.getByRole('combobox');
+		combobox.focus();
+		await userEvent.keyboard('{ArrowDown}');
+		await waitForAngular();
+		await expect(screen.getByRole('listbox')).toBeVisible();
+		await userEvent.keyboard('{ArrowDown}');
+		await waitForAngular();
+		await userEvent.keyboard('{Enter}');
+		await waitForAngular();
+		await userEvent.keyboard('{Escape}');
+		await waitForAngular();
+	});
+});

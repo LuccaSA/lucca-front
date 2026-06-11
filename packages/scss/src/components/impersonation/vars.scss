@@ -1,0 +1,11 @@
+@mixin vars {
+	--components-impersonation-trigger-borderColor: var(--palettes-neutral-100);
+	--components-impersonation-trigger-icon-rotate: 0deg;
+	--components-impersonation-trigger-backgroundColor: var(--palettes-neutral-0);
+	--components-impersonation-trigger-fontWeight: var(--pr-t-font-fontWeight-regular);
+	--components-impersonation-trigger-color: var(--pr-t-color-text);
+	--components-impersonation-trigger-icon-color: var(--pr-t-color-text-subtle);
+	--components-impersonation-trigger-boxShadow: none;
+	--components-impersonation-clear-display: none;
+	--components-impersonation-trigger-icon-marginInlineStart: auto;
+}

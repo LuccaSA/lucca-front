@@ -47,15 +47,15 @@
     "skills:generate": "ts-node --project scripts/generate-skills/tsconfig.json scripts/generate-skills/index.ts"
   },
   "dependencies": {
-    "@angular/animations": "^21.0.5",
-    "@angular/cdk": "^21.0.3",
-    "@angular/common": "^21.0.5",
-    "@angular/compiler": "^21.0.5",
-    "@angular/core": "^21.0.5",
-    "@angular/forms": "^21.0.5",
-    "@angular/platform-browser": "^21.0.5",
-    "@angular/platform-browser-dynamic": "^21.0.5",
-    "@angular/router": "^21.0.5",
+    "@angular/animations": "^21.2.9",
+    "@angular/cdk": "^21.2.9",
+    "@angular/common": "^21.2.9",
+    "@angular/compiler": "^21.2.9",
+    "@angular/core": "^21.2.9",
+    "@angular/forms": "^21.2.9",
+    "@angular/platform-browser": "^21.2.9",
+    "@angular/platform-browser-dynamic": "^21.2.9",
+    "@angular/router": "^21.2.9",
     "@lexical/history": "^0.42.0",
     "@lexical/html": "^0.42.0",
     "@lexical/link": "^0.42.0",
@@ -77,16 +77,16 @@
     "zone.js": "~0.15.0"
   },
   "devDependencies": {
-    "@angular-devkit/architect": "^0.2102.0",
-    "@angular-devkit/build-angular": "^21.0.3",
-    "@angular-devkit/core": "^21.0.3",
-    "@angular-devkit/schematics": "^21.0.3",
-    "@angular-eslint/schematics": "^21.0.3",
-    "@angular/cli": "^21.0.3",
-    "@angular/compiler-cli": "^21.0.3",
-    "@anthropic-ai/sdk": "^0.80.0",
-    "@compodoc/compodoc": "^1.1.16",
-    "@jsdevtools/coverage-istanbul-loader": "^3.0.5",
+    "@angular-devkit/architect": "0.2102.7",
+    "@angular-devkit/build-angular": "21.2.7",
+    "@angular-devkit/core": "21.2.7",
+    "@angular-devkit/schematics": "21.2.7",
+    "@angular-eslint/schematics": "21.1.0",
+    "@angular/cli": "21.2.7",
+    "@angular/compiler-cli": "^21.2.9",
+    "@anthropic-ai/sdk": "^0.91.1",
+    "@compodoc/compodoc": "1.1.16",
+    "@jsdevtools/coverage-istanbul-loader": "3.0.5",
     "@lucca-front/eslint-plugin": "workspace:*",
     "@lucca/stylelint-config-prisme": "file:packages/stylelint-config",
     "@mdx-js/loader": "^3.1.1",
@@ -126,7 +126,7 @@
     "mini-css-extract-plugin": "^2.10.0",
     "msw": "^2.3.0",
     "ng-packagr": "^21.0.0",
-    "postcss": "8.5.3",
+    "postcss": "8.5.10",
     "postcss-scss": "^4.0.6",
     "postcss-selector-parser": "7.1.0",
     "postcss-value-parser": "^4.2.0",
@@ -139,7 +139,7 @@
     "typescript-eslint": "~8.59.4"
   },
   "volta": {
-    "node": "24.16.0"
+    "node": "24.13.0"
   },
   "msw": {
     "workerDirectory": ".storybook/public"

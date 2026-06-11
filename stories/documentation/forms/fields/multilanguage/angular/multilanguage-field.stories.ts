@@ -1,10 +1,11 @@
 import { LOCALE_ID } from '@angular/core';
 import { FormControl, FormsModule, ReactiveFormsModule } from '@angular/forms';
 import { BrowserAnimationsModule } from '@angular/platform-browser/animations';
-import { FormFieldComponent } from '@lucca-front/ng/form-field';
-import { MultilanguageInputComponent, MultiLanguageInputValidators, MultilanguageTranslation } from '@lucca-front/ng/forms';
+import { FORM_FIELD_WIDTH, FormFieldComponent } from '@lucca-front/ng/form-field';
+import { MultilanguageInputComponent, MultilanguageTranslation } from '@lucca-front/ng/forms';
+import { INLINE_MESSAGE_STATE } from '@lucca-front/ng/inline-message';
 import { applicationConfig, Meta, moduleMetadata, StoryObj } from '@storybook/angular';
-import { cleanupTemplate, generateInputs } from 'stories/helpers/stories';
+import { cleanupTemplate, generateInputs, setStoryOptions } from 'stories/helpers/stories';
 import { StoryModelDisplayComponent } from 'stories/helpers/story-model-display.component';
 
 export default {
@@ -36,20 +37,8 @@ export default {
 			},
 			description: 'Marque le champ comme obligatoire.',
 		},
-		allLanguagesRequired: {
-			control: {
-				type: 'boolean',
-			},
-			description: 'Ajoute le validateur marquant toutes les traductions comme obligatoires.',
-		},
-		invariantRequired: {
-			control: {
-				type: 'boolean',
-			},
-			description: `[v21.1] Ajoute le validateur marquant l'invariant comme obligatoire.`,
-		},
 		size: {
-			options: ['M', 'S'],
+			options: ['S', 'M'],
 			control: {
 				type: 'select',
 			},
@@ -65,7 +54,7 @@ export default {
 			description: 'Ajoute un texte descriptif (aide, erreur, etc.) sous le champ de formulaire.',
 		},
 		inlineMessageState: {
-			options: ['default', 'success', 'warning', 'error'],
+			options: setStoryOptions(INLINE_MESSAGE_STATE),
 			control: {
 				type: 'select',
 			},
@@ -82,7 +71,7 @@ export default {
 			description: 'Ouvre le panel automatiquement au focus du champ.',
 		},
 		width: {
-			options: [null, 20, 30, 40, 50, 60],
+			options: setStoryOptions(FORM_FIELD_WIDTH),
 			control: {
 				type: 'select',
 			},
@@ -97,6 +86,12 @@ export default {
 		presentation: {
 			description: '[v21.1] Transforme le champ de formulaire en donnée textuelle non éditable.',
 		},
+		hasNoInvariant: {
+			description: "[v21.3] Supprime la notion d'invariant du champ, nécessite d'être associé à un Validateur required et l'utilisation de `displayLocale`.",
+		},
+		displayLocale: {
+			description: '[v21.3] Locale à utiliser comme valeur affichée dans le champ en version collapsed lorsque `hasNoInvariant` est active.',
+		},
 	},
 } as Meta;
 
@@ -105,35 +100,28 @@ export const Basic: StoryObj<
 		FormFieldComponent & {
 			disabled: boolean;
 			required: boolean;
-			allLanguagesRequired: boolean;
-			invariantRequired: boolean;
 		}
 > = {
 	render: (args, { argTypes }) => {
-		const { label, hiddenLabel, tooltip, inlineMessage, inlineMessageState, size, width, allLanguagesRequired, invariantRequired, presentation, disabled, ...inputArgs } = args;
-		const formControl = new FormControl<MultilanguageTranslation[]>(
-			[
-				{
-					cultureCode: 'invariant',
-					value: 'Invariant value',
-				},
-				{
-					cultureCode: 'fr-FR',
-					value: 'Valeur en français',
-				},
-				{
-					cultureCode: 'en-EN',
-					value: 'English value',
-				},
-				{
-					cultureCode: 'de-DE',
-					value: "I don't speak German",
-				},
-			],
+		const { label, hiddenLabel, tooltip, inlineMessage, inlineMessageState, size, width, presentation, disabled, ...inputArgs } = args;
+		const formControl = new FormControl<MultilanguageTranslation[]>([
 			{
-				validators: allLanguagesRequired ? MultiLanguageInputValidators.allLanguagesRequired : invariantRequired ? MultiLanguageInputValidators.invariantRequired : undefined,
+				cultureCode: 'invariant',
+				value: 'Invariant value',
 			},
-		);
+			{
+				cultureCode: 'fr-FR',
+				value: 'Valeur en français',
+			},
+			{
+				cultureCode: 'en-US',
+				value: 'English value',
+			},
+			{
+				cultureCode: 'de-DE',
+				value: "I don't speak German",
+			},
+		]);
 		if (disabled) {
 			formControl.disable();
 		}
@@ -141,7 +129,7 @@ export const Basic: StoryObj<
 			props: {
 				formControl,
 			},
-			template: cleanupTemplate(`<lu-form-field ${generateInputs(
+			template: cleanupTemplate(`<lu-form-field${generateInputs(
 				{
 					label,
 					hiddenLabel,
@@ -154,7 +142,7 @@ export const Basic: StoryObj<
 				},
 				argTypes,
 			)}>
-	<lu-multilanguage-input [formControl]="formControl" ${generateInputs(inputArgs, argTypes)} />
+	<lu-multilanguage-input [formControl]="formControl"${generateInputs(inputArgs, argTypes)} />
 </lu-form-field>
 <pr-story-model-display>{{ formControl.value | json }}</pr-story-model-display>`),
 		};
@@ -171,7 +159,7 @@ export const Basic: StoryObj<
 		openOnFocus: false,
 		presentation: false,
 		autocomplete: 'off',
-		allLanguagesRequired: false,
-		invariantRequired: false,
+		hasNoInvariant: false,
+		displayLocale: 'en-US',
 	},
 };
