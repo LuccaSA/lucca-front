@@ -153,6 +153,7 @@ export class PopoverDirective implements OnDestroy {
 	protected additionalProviders: Provider[] = [];
 
 	constructor() {
+		this.#validateTriggerElement();
 		combineLatest([toObservable(this.luPopoverOpenDelay), toObservable(this.luPopoverCloseDelay), toObservable(this.luPopoverTrigger)])
 			.pipe(
 				filter(([, , trigger]) => {
@@ -219,6 +220,10 @@ export class PopoverDirective implements OnDestroy {
 
 	@HostListener('click')
 	click(): void {
+		this.#togglePopoverFromTrigger();
+	}
+
+	#togglePopoverFromTrigger(): void {
 		if (this.opened()) {
 			this.#componentRef?.close();
 			this.#listenToMouseLeave = true;
@@ -310,6 +315,31 @@ export class PopoverDirective implements OnDestroy {
 
 	updatePosition() {
 		this.#overlayRef?.updatePosition();
+	}
+
+	#isInteractiveElement(element: HTMLElement): boolean {
+		const tag = element.tagName.toLowerCase();
+
+		switch (tag) {
+			case 'a':
+				return element.hasAttribute('href');
+			case 'button':
+			case 'select':
+			case 'textarea':
+				return !element.hasAttribute('disabled');
+			case 'input':
+				return !element.hasAttribute('disabled') && (element as HTMLInputElement).type !== 'hidden';
+			default:
+				return false;
+		}
+	}
+
+	#validateTriggerElement(): void {
+		if (!this.#isInteractiveElement(this.elementRef.nativeElement)) {
+			console.warn(`[luPopover2] Warning: The popover trigger element should be a native interactive element (button, input, textarea, select, or a with href).
+Current element: ${this.elementRef.nativeElement.tagName.toLowerCase()}.
+Consider wrapping your popover trigger in a native interactive element for proper keyboard accessibility.`);
+		}
 	}
 
 	#buildPositions(): ConnectedPosition[] {
