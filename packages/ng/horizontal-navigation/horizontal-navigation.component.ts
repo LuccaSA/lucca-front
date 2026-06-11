@@ -39,7 +39,7 @@ export class HorizontalNavigationComponent {
 
 	readonly vertical = input(false, { transform: booleanAttribute });
 
-	readonly palette = input<Palette | DecorativePalette>('product');
+	readonly palette = input<Palette | DecorativePalette | null>(null);
 	readonly paletteClass = computed(() => ({ [`palette-${this.palette()}`]: !!this.palette() }));
 
 	/**

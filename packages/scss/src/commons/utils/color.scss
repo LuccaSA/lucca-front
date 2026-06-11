@@ -12,14 +12,18 @@
 	@return color-mix(in $space, $color $amount, transparent);
 }
 
-@mixin palette($name, $shades: config.$palettesShades, $palette: false) {
+@mixin palette($name: '', $shades: config.$palettesShades, $palette: false) {
+	@if $name != '' {
+		$name: '-' + $name;
+	}
+
 	@each $shade in $shades {
 		@if $palette {
 			@if map.get($palette, $shade) {
-				--palettes-#{$shade}: var(--palettes-#{$name}-#{$shade});
+				--palettes-#{$shade}: var(--palettes#{$name}-#{$shade});
 			}
 		} @else {
-			--palettes-#{$shade}: var(--palettes-#{$name}-#{$shade});
+			--palettes-#{$shade}: var(--palettes#{$name}-#{$shade});
 		}
 	}
 }
