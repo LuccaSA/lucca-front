@@ -80,6 +80,8 @@
 			inline-size: var(--components-avatar-size);
 			block-size: var(--components-avatar-size);
 			font-size: var(--components-avatarWrapper-fontSize);
+			border-radius: var(--pr-t-border-radius-full);
+			background-color: var(--palettes-neutral-200);
 		}
 	}
 }
