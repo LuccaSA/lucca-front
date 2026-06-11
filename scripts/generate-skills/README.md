@@ -13,21 +13,35 @@ Distribution via APM (voir `.github/skills/UPDATE.md`).
 
 ## Prérequis
 
-- Node.js ≥ 18 avec `ts-node` (inclus dans les dépendances du projet)
+- Node.js ≥ 18 avec `ts-node` (inclus dans les dépendances du projet ; le repo est calé sur Node 24 via Volta)
 - Accès aux git tags du repo (les API, stories, migrations sont extraites depuis le code source via `git show`)
-- **Optionnel** : un Figma Personal Access Token (lecture seule) pour les design tokens
+- Un **Figma Personal Access Token** (lecture seule) — voir [Configuration](#configuration) : requis pour produire les `.figma.md`, le pipeline tourne sans mais saute alors silencieusement la collecte Figma
+
+ZeroHeight et Storybook ne demandent **aucun token** : les URL publiques suffisent (le token de partage ZeroHeight est codé en dur dans `version-config.ts`).
 
 ## Configuration
 
+Seul le token Figma se configure. Deux moyens, au choix :
+
 ```bash
-# Variable d'environnement (recommandé)
+# Variable d'environnement
 export FIGMA_TOKEN=figd_...
 
-# Ou copier le fichier d'exemple
+# Ou fichier de config local (gitignored, prioritaire sur la variable d'environnement)
 cp scripts/generate-skills/generate-skills-config.json.example scripts/generate-skills/generate-skills-config.json
 ```
 
-`generate-skills-config.json` est gitignored. Le token Figma n'est nécessaire que pour générer les fichiers `.figma.md`.
+Pour créer le token : Figma → Profil → Settings → Security → **Personal access tokens** (la lecture seule suffit).
+
+### Comportement sans token
+
+Sans token, la collecte Figma est sautée **sans erreur ni avertissement** (équivalent `--skip-figma`) :
+
+- les fichiers `.figma.md` (design tokens des variantes) ne sont **ni générés ni rafraîchis** ;
+- un `.figma.md` issu d'un run précédent est conservé sur disque et reste lié depuis `<slug>.md` ;
+- un composant jamais généré avec token n'aura **aucune** donnée Figma.
+
+Le token est donc optionnel pour développer ou tester le pipeline (AST, ZeroHeight et Storybook fonctionnent sans), mais **requis pour une génération complète destinée à être committée et distribuée**.
 
 ## Utilisation
 
@@ -53,7 +67,7 @@ npx ts-node ... --validate
 
 | Flag | Description |
 |------|-------------|
-| `--version <M.m.p>` | Version à générer (ex: `21.2.3`). Répétable. **Requis.** |
+| `--version <M.m.p>` | Version à générer (ex: `21.2.3`). Répétable. **Requis** (sauf avec `--validate` et `--retry-failed`). |
 | `--component <slug>` | Générer uniquement ce composant (n'écrit pas le SKILL.md ni la doc transverse) |
 | `--skip-figma` | Ignorer la collecte Figma |
 | `--skip-zeroheight` | Ignorer la collecte ZeroHeight |
