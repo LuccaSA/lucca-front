@@ -117,6 +117,7 @@
 
 		.dialog-inside-footer {
 			grid-area: footer;
+			margin-block: var(--components-dialog-inside-footer-marginBlock);
 
 			&.footer {
 				@include footer.insideDialog;
@@ -125,6 +126,7 @@
 
 		.dialog-inside-header {
 			display: grid;
+			margin-block: var(--components-dialog-inside-header-marginBlock);
 			padding-block: var(--components-dialog-inside-header-paddingBlock);
 			padding-inline: var(--components-dialog-inside-header-paddingInline);
 			grid-template-areas: var(--components-dialog-insideHeaderAreas);

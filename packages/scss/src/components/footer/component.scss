@@ -13,6 +13,7 @@
 	gap: var(--components-footer-gap);
 	align-items: var(--components-footer-alignItems);
 	flex-direction: var(--components-footer-direction);
+	isolation: var(--components-footer-isolation);
 
 	@at-root ($atRoot) {
 		.footer-content {

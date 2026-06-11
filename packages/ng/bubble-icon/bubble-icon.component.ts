@@ -16,6 +16,7 @@ import { BubbleIconSize } from './bubble-icon.type';
 		'[class.mod-right]': 'direction() === 2',
 		'[class.mod-top]': 'direction() === 3',
 		'[class.mod-bottom]': 'direction() === 4',
+		'[class.mod-XS]': 'size() === "XS"',
 		'[class.mod-S]': 'size() === "S"',
 		'[class.mod-L]': 'size() === "L"',
 	},

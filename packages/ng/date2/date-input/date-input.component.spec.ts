@@ -1,17 +1,38 @@
-import { LOCALE_ID } from '@angular/core';
-import { fakeAsync } from '@angular/core/testing';
+import { ChangeDetectionStrategy, Component, LOCALE_ID } from '@angular/core';
+import { ComponentFixture, TestBed, fakeAsync, tick } from '@angular/core/testing';
 import { FormControl, FormsModule, ReactiveFormsModule } from '@angular/forms';
-import { createHostFactory, SpectatorHost } from '@ngneat/spectator/jest';
 import { DateInputComponent } from './date-input.component';
 
-describe('DateInputComponent', () => {
-	let spectator: SpectatorHost<DateInputComponent>;
+@Component({
+	template: `<lu-date-input [formControl]="formControl" />`,
+	imports: [FormsModule, ReactiveFormsModule, DateInputComponent],
+	changeDetection: ChangeDetectionStrategy.OnPush,
+})
+class HostComponent {
+	formControl = new FormControl<Date | null>(null);
+}
 
-	const createHost = createHostFactory({
-		component: DateInputComponent,
-		imports: [FormsModule, ReactiveFormsModule],
-		providers: [{ provide: LOCALE_ID, useValue: 'fr-FR' }],
-	});
+describe('DateInputComponent', () => {
+	let fixture: ComponentFixture<HostComponent>;
+
+	function createHost(formControl: FormControl<Date | null>): HTMLInputElement {
+		TestBed.configureTestingModule({
+			imports: [HostComponent],
+			providers: [{ provide: LOCALE_ID, useValue: 'fr-FR' }],
+		});
+
+		fixture = TestBed.createComponent(HostComponent);
+		fixture.componentInstance.formControl = formControl;
+		fixture.detectChanges();
+
+		return (fixture.nativeElement as HTMLElement).querySelector('[data-testid="lu-date-input"]') as HTMLInputElement;
+	}
+
+	function typeInElement(value: string, input: HTMLInputElement): void {
+		input.value = value;
+		input.dispatchEvent(new Event('input'));
+		fixture.detectChanges();
+	}
 
 	it('should emit null when user clear the input', () => {
 		const valueChanges = jest.fn();
@@ -21,14 +42,10 @@ describe('DateInputComponent', () => {
 			valueChanges(value);
 		});
 
-		spectator = createHost(`<lu-date-input [formControl]="formControl"></lu-date-input>`, {
-			hostProps: { formControl },
-		});
-
-		const input = spectator.query('[data-testid="lu-date-input"]') as HTMLInputElement;
+		const input = createHost(formControl);
 		expect(input).toBeTruthy();
 
-		spectator.typeInElement('', input);
+		typeInElement('', input);
 
 		expect(formControl.value).toBeNull();
 	});
@@ -41,14 +58,10 @@ describe('DateInputComponent', () => {
 			valueChanges(value);
 		});
 
-		spectator = createHost(`<lu-date-input [formControl]="formControl"></lu-date-input>`, {
-			hostProps: { formControl },
-		});
-
-		const input = spectator.query('[data-testid="lu-date-input"]') as HTMLInputElement;
+		const input = createHost(formControl);
 		expect(input).toBeTruthy();
 
-		spectator.typeInElement('12', input);
+		typeInElement('12', input);
 
 		expect(valueChanges).toHaveBeenCalledTimes(1);
 		expect(formControl.errors).toEqual({ date: true });
@@ -62,11 +75,9 @@ describe('DateInputComponent', () => {
 			valueChanges(value);
 		});
 
-		spectator = createHost(`<lu-date-input [formControl]="formControl"></lu-date-input>`, {
-			hostProps: { formControl },
-		});
+		createHost(formControl);
 
-		spectator.tick();
+		tick();
 		expect(valueChanges).toHaveBeenCalledTimes(0);
 	}));
 
@@ -78,11 +89,9 @@ describe('DateInputComponent', () => {
 			valueChanges(value);
 		});
 
-		spectator = createHost(`<lu-date-input [formControl]="formControl"></lu-date-input>`, {
-			hostProps: { formControl },
-		});
+		createHost(formControl);
 
-		spectator.tick();
+		tick();
 		expect(valueChanges).toHaveBeenCalledTimes(0);
 	}));
 });

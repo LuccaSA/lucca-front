@@ -47,7 +47,7 @@ export default {
 	],
 	render: ({ bubbleDirection, alt, palette, size, ...args }, { argTypes }) => {
 		const sizeArg = size === 'M' ? `` : ` size="${size}"`;
-		const directionArg = bubbleDirection === 'random' ? `` : ` bubbleDirection="${bubbleDirection}"`;
+		const directionArg = bubbleDirection === 'random' || bubbleDirection === '' ? `` : ` bubbleDirection="${bubbleDirection}"`;
 		const altArg = alt === '' ? `` : ` alt="${alt}"`;
 		const paletteArg = palette === 'product' ? `` : ` palette="${palette}"`;
 		return {

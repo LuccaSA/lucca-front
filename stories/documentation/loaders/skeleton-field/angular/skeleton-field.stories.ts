@@ -31,7 +31,7 @@ export const Template: StoryObj<SkeletonFieldComponent> = {
 			control: {
 				type: 'select',
 			},
-			description: 'Modifie la taille du composant.',
+			description: '[v21.2.4] Modifie la taille du composant.',
 		},
 	},
 
