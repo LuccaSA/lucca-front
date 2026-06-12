@@ -120,8 +120,8 @@ export class LuCoreSelectUsersDirective<T extends LuCoreSelectUser = LuCoreSelec
 		computed(() => ({
 			fields: this.#userFields,
 			...this.filters(),
-			...(this.uniqueOperationIds() ? { uniqueOperations: this.uniqueOperationIds().join(',') } : {}),
-			...(this.operationIds() ? { operations: this.operationIds().join(',') } : {}),
+			...(this.uniqueOperationIds() ? { uniqueOperations: this.uniqueOperationIds()?.join(',') } : {}),
+			...(this.operationIds() ? { operations: this.operationIds()?.join(',') } : {}),
 			...(this.appInstanceId() ? { appInstanceId: this.appInstanceId() } : {}),
 			id: this.currentUserId,
 		})),

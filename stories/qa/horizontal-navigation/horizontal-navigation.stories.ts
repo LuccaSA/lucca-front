@@ -1,12 +1,12 @@
 import { ChangeDetectionStrategy, Component } from '@angular/core';
-import { HorizontalNavigationComponent, HorizontalNavigationLinkDirective } from '@lucca-front/ng/horizontal-navigation';
+import { HorizontalNavigationComponent, HorizontalNavigationLinkDirective, HorizontalNavigationTabComponent } from '@lucca-front/ng/horizontal-navigation';
 import { NumericBadgeComponent } from '@lucca-front/ng/numeric-badge';
 import { Meta, StoryObj } from '@storybook/angular';
 
 @Component({
 	selector: 'horizontal-navigation-stories',
 	templateUrl: './horizontal-navigation.stories.html',
-	imports: [HorizontalNavigationComponent, HorizontalNavigationLinkDirective, NumericBadgeComponent],
+	imports: [HorizontalNavigationComponent, HorizontalNavigationLinkDirective, NumericBadgeComponent, HorizontalNavigationTabComponent],
 	changeDetection: ChangeDetectionStrategy.OnPush,
 })
 class HorizontalNavigationStory {}

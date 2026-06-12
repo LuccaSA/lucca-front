@@ -1,12 +1,13 @@
 import { GaugeComponent } from '@lucca-front/ng/gauge';
+import { PALETTE } from '@lucca/prisme/core';
 import { Meta, moduleMetadata, StoryObj } from '@storybook/angular';
-import { generateInputs } from 'stories/helpers/stories';
+import { generateInputs, setStoryOptions } from 'stories/helpers/stories';
 
 export default {
 	title: 'Documentation/Loaders/Gauge/Angular/Basic',
 	argTypes: {
 		palette: {
-			options: ['', 'product', 'neutral', 'success', 'warning', 'error'],
+			options: setStoryOptions(PALETTE),
 			control: {
 				type: 'select',
 			},

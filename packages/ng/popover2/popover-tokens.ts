@@ -6,6 +6,8 @@ export interface PopoverConfig {
 	content: TemplateRef<unknown> | Type<unknown>;
 	ref: OverlayRef;
 	contentId: string;
+	maxBlockSize: string | null;
+	maxInlineSize: string | null;
 	disableCloseButtonFocus: boolean;
 	disableInitialTriggerFocus: boolean;
 	noCloseButton: boolean;

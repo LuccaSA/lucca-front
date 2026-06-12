@@ -52,7 +52,7 @@ export class CoreSelectKeyManager<T> {
 	}
 
 	get activeItem(): CoreSelectPanelElement<T> | undefined {
-		return this.#cdkKeyManager?.activeItem;
+		return this.#cdkKeyManager?.activeItem ?? undefined;
 	}
 
 	get activeItemIndex(): number {
@@ -61,6 +61,13 @@ export class CoreSelectKeyManager<T> {
 
 	setActiveItem(index: number): void {
 		this.#cdkKeyManager?.setActiveItem(index);
+	}
+
+	setActiveItemByElement(item: CoreSelectPanelElement<T>): void {
+		const index = this.#queryList().indexOf(item);
+		if (index !== -1) {
+			this.#cdkKeyManager?.setActiveItem(index);
+		}
 	}
 
 	highlightOption(option: T): void {
@@ -93,9 +100,14 @@ export class CoreSelectKeyManager<T> {
 	}
 
 	#bindActiveOptionIdChanged(activeOptionIdChanged$: EventEmitter<string>): void {
-		this.#cdkKeyManager.change
+		const keyManager = this.#cdkKeyManager;
+		if (!keyManager) {
+			return;
+		}
+
+		keyManager.change
 			.pipe(
-				map(() => this.#cdkKeyManager.activeItem?.idAttribute()),
+				map(() => keyManager.activeItem?.idAttribute()),
 				takeUntilDestroyed(this.#destroyRef),
 			)
 			.subscribe((activeDescendant) => activeOptionIdChanged$.emit(activeDescendant));
@@ -108,6 +120,11 @@ export class CoreSelectKeyManager<T> {
 	 * 	- set to first item if no active item
 	 */
 	#bindOptionsChange({ options$ }: CoreSelectKeyManagerOptions<T>): void {
+		const keyManager = this.#cdkKeyManager;
+		if (!keyManager) {
+			return;
+		}
+
 		options$
 			.pipe(
 				debounceTime(0), // Wait until QueryList is updated
@@ -115,12 +132,12 @@ export class CoreSelectKeyManager<T> {
 			)
 			.subscribe(() => {
 				if (this.#queryList().length === 0) {
-					this.#cdkKeyManager.setActiveItem(-1);
+					keyManager.setActiveItem(-1);
 				} else if (this.#hasSearchChanged) {
 					this.#hasSearchChanged = false;
-					this.#cdkKeyManager.setFirstItemActive();
-				} else if (!this.#cdkKeyManager.activeItem) {
-					this.#cdkKeyManager.setFirstItemActive();
+					keyManager.setFirstItemActive();
+				} else if (!keyManager.activeItem) {
+					keyManager.setFirstItemActive();
 				}
 			});
 	}

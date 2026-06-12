@@ -1,7 +1,8 @@
 import { HttpClientModule } from '@angular/common/http';
 import { LuSafeExternalSvgPipe } from '@lucca-front/ng/safe-content';
-import { SoftwareIconList } from '@lucca-front/ng/software-icon';
+import { SOFTWARE_ICON, SOFTWARE_ICON_SIZE } from '@lucca-front/ng/software-icon';
 import { Meta, moduleMetadata, StoryObj } from '@storybook/angular';
+import { setStoryOptions } from 'stories/helpers/stories';
 
 interface SoftwareIconBasicStory {
 	icon: string;
@@ -19,14 +20,14 @@ export default {
 	],
 	argTypes: {
 		icon: {
-			options: SoftwareIconList,
+			options: setStoryOptions(SOFTWARE_ICON),
 			control: {
 				type: 'select',
 			},
 			description: 'Modifie l’icône produit.',
 		},
 		size: {
-			options: ['XXS', 'XS', 'S', '', 'L'],
+			options: setStoryOptions(SOFTWARE_ICON_SIZE),
 			control: {
 				type: 'select',
 			},

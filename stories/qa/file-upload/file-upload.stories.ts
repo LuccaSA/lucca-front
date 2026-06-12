@@ -16,7 +16,7 @@ import { Meta, StoryObj, moduleMetadata } from '@storybook/angular';
 				inline-size: 100%;
 			}
 			.demo-QAtable {
-				width: 100%;
+				inline-size: 100%;
 				table-layout: fixed;
 			}
 		`,

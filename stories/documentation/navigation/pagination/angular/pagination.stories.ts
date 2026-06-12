@@ -1,6 +1,8 @@
-import { PaginationComponent } from '@lucca-front/ng/pagination';
+import { PAGINATION_MOD, PaginationComponent } from '@lucca-front/ng/pagination';
 import { Meta, moduleMetadata, StoryObj } from '@storybook/angular';
-import { cleanupTemplate, generateInputs } from 'stories/helpers/stories';
+import { cleanupTemplate, createTestStory, generateInputs, setStoryOptions } from 'stories/helpers/stories';
+import { waitForAngular } from 'stories/helpers/test';
+import { expect, userEvent, within } from 'storybook/test';
 
 export default {
 	title: 'Documentation/Navigation/Pagination/Angular',
@@ -31,7 +33,7 @@ export default {
 			description: 'Nombre total d’éléments.',
 		},
 		mod: {
-			options: ['default', 'compact'],
+			options: setStoryOptions(PAGINATION_MOD),
 			control: {
 				type: 'select',
 			},
@@ -54,3 +56,35 @@ export const Basic: StoryObj<PaginationComponent & { isFirstPage: boolean; isLas
 		isLastPage: false,
 	},
 };
+
+export const BasicTEST = createTestStory(Basic, async ({ canvasElement, step }) => {
+	await waitForAngular();
+	const canvas = within(canvasElement);
+
+	await step('Vérifie le rendu initial', async () => {
+		const nav = canvas.getByRole('navigation');
+		await expect(nav).toBeVisible();
+	});
+
+	await step('Vérifie les boutons de navigation', async () => {
+		const buttons = canvas.getAllByRole('button');
+		await expect(buttons.length).toBeGreaterThan(0);
+	});
+
+	await step('Clique sur le bouton page suivante', async () => {
+		const buttons = canvas.getAllByRole('button');
+		const nextButton = buttons[buttons.length - 1];
+		await expect(nextButton).not.toBeDisabled();
+		await userEvent.click(nextButton);
+		await waitForAngular();
+	});
+
+	await step('Navigation clavier sur la pagination', async () => {
+		const buttons = canvas.getAllByRole('button');
+		const nextButton = buttons[buttons.length - 1];
+		nextButton.focus();
+		await expect(nextButton).toHaveFocus();
+		await userEvent.keyboard('{Enter}');
+		await waitForAngular();
+	});
+});

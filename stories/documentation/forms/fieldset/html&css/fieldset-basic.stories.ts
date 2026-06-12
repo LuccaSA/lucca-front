@@ -1,4 +1,6 @@
+import { FIELDSET_SIZE } from '@lucca-front/ng/forms';
 import { Meta, StoryObj } from '@storybook/angular';
+import { setStoryOptions } from 'stories/helpers/stories';
 
 interface FieldsetBasicStory {
 	horizontal: boolean;
@@ -7,6 +9,7 @@ interface FieldsetBasicStory {
 	helper: string;
 	heading: string;
 	size: string;
+	hiddenLegend: boolean;
 }
 
 export default {
@@ -33,8 +36,15 @@ export default {
 			if: { arg: 'expandable', truthy: true },
 			description: 'Affiche le fieldset en vue dépliée.',
 		},
+		hiddenLegend: {
+			control: {
+				type: 'boolean',
+			},
+			if: { arg: 'expandable', truthy: false },
+			description: 'Masque la légende en la conservant dans le DOM pour les lecteurs d’écrans. ',
+		},
 		size: {
-			options: ['S', null],
+			options: setStoryOptions(FIELDSET_SIZE),
 			control: {
 				type: 'select',
 			},
@@ -57,6 +67,7 @@ export default {
 
 function getTemplate(args: FieldsetBasicStory): string {
 	const horizontal = args.horizontal ? ` mod-horizontal` : ``;
+	const hiddenLegend = args.hiddenLegend ? ` mod-hiddenLegend` : ``;
 	const s = args.size === 'S' ? ` mod-S` : ``;
 	const helper = args.helper
 		? `
@@ -101,7 +112,7 @@ function getTemplate(args: FieldsetBasicStory): string {
 	</div>
 </fieldset>`;
 	else
-		return `<fieldset class="fieldset${horizontal}${s}" aria-labelledby="fieldsetTitleContent1">
+		return `<fieldset class="fieldset${hiddenLegend}${horizontal}${s}" aria-labelledby="fieldsetTitleContent1">
 	<legend class="fieldset-title">
 		<span class="fieldset-title-content" id="fieldsetTitleContent1">
 			<span class="fieldset-title-content-text">
@@ -123,10 +134,10 @@ export const Basic: StoryObj<FieldsetBasicStory> = {
 	args: {
 		heading: 'Title',
 		helper: '',
-		size: null,
 		expandable: false,
 		expanded: false,
 		horizontal: false,
+		hiddenLegend: false,
 	},
 	render: Template,
 };

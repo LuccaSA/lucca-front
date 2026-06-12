@@ -580,6 +580,10 @@
 	@include core.classes('text-decoration', core.$decoration);
 	@include core.classes('overflow', core.$overflow);
 
+	.pr-u-overflowWrapAnywhere {
+		overflow-wrap: anywhere !important;
+	}
+
 	@media (prefers-reduced-motion: no-preference) {
 		@include core.classes('scroll-behavior', core.$scrollBehavior);
 	}

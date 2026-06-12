@@ -1,9 +1,12 @@
 import { FormsModule } from '@angular/forms';
 import { BrowserAnimationsModule } from '@angular/platform-browser/animations';
 import { FormFieldComponent } from '@lucca-front/ng/form-field';
-import { RadioComponent, RadioGroupInputComponent } from '@lucca-front/ng/forms';
-import { Meta, StoryObj, moduleMetadata } from '@storybook/angular';
-import { generateInputs } from 'stories/helpers/stories';
+import { RADIO_GROUP_INPUT_SIZE, RadioComponent, RadioGroupInputComponent } from '@lucca-front/ng/forms';
+import { INLINE_MESSAGE_STATE } from '@lucca-front/ng/inline-message';
+import { Meta, moduleMetadata, StoryObj } from '@storybook/angular';
+import { createTestStory, generateInputs, setStoryOptions } from 'stories/helpers/stories';
+import { waitForAngular } from 'stories/helpers/test';
+import { expect, userEvent, within } from 'storybook/test';
 import { StoryModelDisplayComponent } from 'stories/helpers/story-model-display.component';
 
 export default {
@@ -15,14 +18,14 @@ export default {
 	],
 	argTypes: {
 		size: {
-			options: ['M', 'S'],
+			options: setStoryOptions(RADIO_GROUP_INPUT_SIZE),
 			control: {
 				type: 'select',
 			},
 			description: 'Modifie la taille du radio.',
 		},
 		inlineMessageState: {
-			options: ['default', 'success', 'warning', 'error'],
+			options: setStoryOptions(INLINE_MESSAGE_STATE),
 			control: {
 				type: 'select',
 			},
@@ -104,3 +107,30 @@ export const Basic: StoryObj<RadioGroupInputComponent & FormFieldComponent & { r
 		presentation: false,
 	},
 };
+
+export const BasicTEST = createTestStory(Basic, async ({ canvasElement, step }) => {
+	await waitForAngular();
+	const canvas = within(canvasElement);
+
+	await step('Vérifie le rendu initial', async () => {
+		const radios = canvas.getAllByRole('radio');
+		await expect(radios.length).toBeGreaterThanOrEqual(2);
+		await expect(radios[0]).toBeChecked();
+	});
+
+	await step('Interaction souris - sélectionner option B', async () => {
+		const radios = canvas.getAllByRole('radio');
+		await userEvent.click(radios[1]);
+		await waitForAngular();
+		await expect(radios[1]).toBeChecked();
+		await expect(radios[0]).not.toBeChecked();
+	});
+
+	await step('Interaction clavier - naviguer avec les flèches', async () => {
+		const radios = canvas.getAllByRole('radio');
+		radios[1].focus();
+		await userEvent.keyboard('{ArrowUp}');
+		await waitForAngular();
+		await expect(radios[0]).toBeChecked();
+	});
+});

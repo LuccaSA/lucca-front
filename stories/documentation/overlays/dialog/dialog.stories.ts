@@ -2,6 +2,7 @@ import { FormControl, FormGroup, FormsModule, ReactiveFormsModule, Validators } 
 import { ButtonComponent } from '@lucca-front/ng/button';
 import {
 	configureLuDialog,
+	DIALOG_FANCY_ILLUSTRATION,
 	DialogCloseDirective,
 	DialogComponent,
 	DialogContentComponent,
@@ -12,11 +13,13 @@ import {
 	DialogHeaderSubtitle,
 	DialogOpenDirective,
 } from '@lucca-front/ng/dialog';
+import { FormComponent } from '@lucca-front/ng/form';
 import { FormFieldComponent } from '@lucca-front/ng/form-field';
 import { CheckboxInputComponent, TextInputComponent } from '@lucca-front/ng/forms';
+import { HorizontalNavigationComponent, HorizontalNavigationTabComponent } from '@lucca-front/ng/horizontal-navigation';
 import { IconComponent } from '@lucca-front/ng/icon';
 import { applicationConfig, Meta, moduleMetadata, StoryObj } from '@storybook/angular';
-import { createTestStory } from 'stories/helpers/stories';
+import { createTestStory, setStoryOptions } from 'stories/helpers/stories';
 import { waitForAngular } from 'stories/helpers/test';
 import { expect, screen, userEvent, within } from 'storybook/test';
 
@@ -44,6 +47,9 @@ export default {
 				IconComponent,
 				DialogHeaderAction,
 				DialogHeaderSubtitle,
+				FormComponent,
+				HorizontalNavigationComponent,
+				HorizontalNavigationTabComponent,
 			],
 		}),
 	],
@@ -107,7 +113,7 @@ export default {
 				'Transforme la fenêtre de dialogue en alerte en obligeant l’utilisateur à faire un choix. L’utilisateur ne peut alors plus la fermer en cliquant sur le backdrop ou en appuyant sur la touche Échap.',
 		},
 		fancyIllustration: {
-			options: ['approval', 'checklist', 'email', 'install', 'mapping', 'save', 'users', 'welcome', 'payment-card'],
+			options: setStoryOptions(DIALOG_FANCY_ILLUSTRATION),
 			control: {
 				type: 'select',
 			},
@@ -186,7 +192,7 @@ export const WithForm: StoryObj = {
 <!--form = new FormGroup({
 			example: new FormControl('', Validators.required)
 		})-->
-		<form [formGroup]="form" class="dialog-inside-formOptional">
+		<form luForm [formGroup]="form">
 			<lu-dialog-header>Template driven header with Form inside</lu-dialog-header>
 
 			<lu-dialog-content>
@@ -287,6 +293,56 @@ export const Fancy: StoryObj = {
 		size: 'M',
 		fancyIllustration: 'install',
 		fancyIllustrationUrl: '',
+	},
+};
+
+export const WithTabs: StoryObj = {
+	render: (args) => {
+		return {
+			props: {
+				config: args,
+			},
+			template: `
+<button luButton [luDialogOpen]="dialogTpl" [luDialogConfig]="config">Open Template-driven Dialog with tabs</button>
+
+<ng-template #dialogTpl>
+	<lu-dialog #dialog>
+		<lu-dialog-header>
+			<h1>Title</h1>
+		</lu-dialog-header>
+
+		<lu-horizontal-navigation>
+			<lu-horizontal-navigation-tab label="Tab 1">
+				<lu-dialog-content>
+					Content 1
+				</lu-dialog-content>
+			</lu-horizontal-navigation-tab>
+			<lu-horizontal-navigation-tab label="Tab 2">
+				<lu-dialog-content>
+					Content 2
+				</lu-dialog-content>
+			</lu-horizontal-navigation-tab>
+			<lu-horizontal-navigation-tab label="Tab 3">
+				<lu-dialog-content>
+					Content 3
+				</lu-dialog-content>
+			</lu-horizontal-navigation-tab>
+		</lu-horizontal-navigation>
+
+		<lu-dialog-footer>
+			<div class="footer-actions">
+				<button type="button" luButton luDialogClose>Confirm</button>
+				<button type="button" luButton="ghost" luDialogDismiss>Cancel</button>
+			</div>
+		</lu-dialog-footer>
+	</lu-dialog>
+</ng-template>`,
+		};
+	},
+	args: {
+		size: 'S',
+		alert: false,
+		mode: 'default',
 	},
 };
 

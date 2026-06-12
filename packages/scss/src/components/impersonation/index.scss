@@ -1,0 +1,22 @@
+@use 'exports' as *;
+
+.impersonation {
+	@layer components {
+		@include vars;
+		@include component;
+	}
+
+	@layer mods {
+		&:has(.impersonation-trigger.is-active) {
+			@include triggerActive;
+		}
+
+		&:has(.impersonation-trigger:hover) {
+			@include triggerHover;
+		}
+
+		&:has(.impersonation-trigger[aria-expanded='true']) {
+			@include triggerExpanded;
+		}
+	}
+}

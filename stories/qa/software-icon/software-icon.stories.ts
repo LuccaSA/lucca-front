@@ -1,7 +1,7 @@
 import { ChangeDetectionStrategy, Component } from '@angular/core';
 import { PopoverDirective } from '@lucca-front/ng/popover2';
 import { LuSafeExternalSvgPipe } from '@lucca-front/ng/safe-content';
-import { SoftwareIconComponent, SoftwareIconList } from '@lucca-front/ng/software-icon';
+import { SOFTWARE_ICON, SoftwareIconComponent } from '@lucca-front/ng/software-icon';
 import { SoftwareIconWrapperItemDirective } from '@lucca-front/ng/software-icon-wrapper';
 import { SoftwareIconWrapperComponent } from '@lucca-front/ng/software-icon-wrapper/software-icon-wrapper.component';
 import { Meta, StoryObj, moduleMetadata } from '@storybook/angular';
@@ -13,7 +13,7 @@ import { Meta, StoryObj, moduleMetadata } from '@storybook/angular';
 	changeDetection: ChangeDetectionStrategy.OnPush,
 })
 class SoftwareIconStory {
-	softwareIconList = SoftwareIconList;
+	softwareIconList = SOFTWARE_ICON;
 }
 
 export default {

@@ -9,8 +9,6 @@ import {
 	effect,
 	ElementRef,
 	forwardRef,
-	HostBinding,
-	HostListener,
 	inject,
 	input,
 	LOCALE_ID,
@@ -31,8 +29,6 @@ import { LuTooltipModule } from '@lucca-front/ng/tooltip';
 import { FILTER_PILL_HOST_COMPONENT, FILTER_PILL_INPUT_COMPONENT, FilterPillInputComponent } from '../core';
 import { LU_FILTER_PILLS_TRANSLATIONS } from '../filter-pills.translate';
 
-let nextId = 0;
-
 @Component({
 	selector: 'lu-filter-pill',
 	imports: [PopoverDirective, FormsModule, IconComponent, NgTemplateOutlet, LuTooltipModule, ClearComponent],
@@ -47,7 +43,9 @@ let nextId = 0;
 		},
 	],
 	host: {
-		class: 'filterPill',
+		class: 'filterPillWrapper',
+		'[class.is-hidden]': 'this.isHidden()',
+		'(click)': 'hostClick()',
 	},
 })
 export class FilterPillComponent {
@@ -56,8 +54,6 @@ export class FilterPillComponent {
 	#locale = inject(LOCALE_ID);
 
 	elementRef = inject(ElementRef);
-
-	id = `filterPill-combobox-${nextId++}`;
 
 	layout = computed(() => this.inputComponentRef()?.filterPillLayout?.() || 'default');
 
@@ -85,11 +81,6 @@ export class FilterPillComponent {
 	optional = input(false, { transform: booleanAttribute });
 
 	disabled = computed(() => this.inputComponentRef()?.filterPillDisabled?.() || false);
-
-	@HostBinding('class.is-hidden')
-	get isHiddenClass() {
-		return this.isHidden();
-	}
 
 	displayed = model(false);
 
@@ -146,21 +137,6 @@ export class FilterPillComponent {
 
 	modCheckbox = computed(() => this.layout() === 'checkable');
 
-	@HostBinding('class.mod-checkbox')
-	get isModCheckbox() {
-		return this.modCheckbox();
-	}
-
-	@HostBinding('class.is-filled')
-	get isFilled() {
-		return !this.inputIsEmpty();
-	}
-
-	@HostBinding('class.is-comboboxHidden')
-	get hideCombobox() {
-		return this.shouldHideCombobox();
-	}
-
 	constructor() {
 		effect(() => {
 			const ref = this.inputComponentRef();
@@ -188,7 +164,6 @@ export class FilterPillComponent {
 		});
 	}
 
-	@HostListener('click')
 	hostClick(): void {
 		this.inputComponentRef()?.onFilterPillClick?.();
 	}
@@ -198,7 +173,7 @@ export class FilterPillComponent {
 	}
 
 	closePopover = () => {
-		this.popoverRef().close();
+		this.popoverRef()?.close();
 		this.inputComponentRef()?.onFilterPillClosed?.();
 	};
 

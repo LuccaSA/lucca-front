@@ -1,14 +1,16 @@
 import { provideRouter } from '@angular/router';
-import { HorizontalNavigationComponent, HorizontalNavigationLinkDirective } from '@lucca-front/ng/horizontal-navigation';
+import { HORIZONTAL_NAVIGATION_SIZE, HorizontalNavigationComponent, HorizontalNavigationLinkDirective } from '@lucca-front/ng/horizontal-navigation';
 import { NumericBadgeComponent } from '@lucca-front/ng/numeric-badge';
 import { applicationConfig, Meta, moduleMetadata } from '@storybook/angular';
-import { generateInputs } from 'stories/helpers/stories';
+import { createTestStory, generateInputs, setStoryOptions } from 'stories/helpers/stories';
+import { waitForAngular } from 'stories/helpers/test';
+import { expect, userEvent, within } from 'storybook/test';
 
 export default {
 	title: 'Documentation/Navigation/HorizontalNavigation/Angular',
 	argTypes: {
 		size: {
-			options: [null, 'S'],
+			options: setStoryOptions(HORIZONTAL_NAVIGATION_SIZE),
 			control: {
 				type: 'select',
 			},
@@ -50,7 +52,6 @@ export const Basic = {
 	args: {
 		noBorder: false,
 		container: false,
-		size: null,
 		numericBadge: false,
 	},
 };
