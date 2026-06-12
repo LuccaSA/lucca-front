@@ -25,7 +25,7 @@ interface TokenEntry {
 const PALETTE_SHADES = ['50', '100', '200', '300', '400', '500', '600', '700', '800', '900'] as const;
 const PALETTES_FULL = ['brand', 'brandContrasted', 'neutral', 'product', 'success', 'successContrasted', 'warning', 'warningContrasted', 'critical'] as const;
 const PALETTES_NAVIGATION = ['700', '800', '900'] as const;
-const PALETTES_DECORATIVE = ['kiwi', 'lime', 'cucumber', 'mint', 'glacier', 'lagoon', 'blueberry', 'lavender', 'grape', 'watermelon', 'pumpkin', 'pineapple'] as const;
+const PALETTES_DECORATIVE = ['kiwi', 'lime', 'cucumber', 'mint', 'glacier', 'lagoon', 'blueberry', 'lavender', 'grape', 'watermelon', 'pumpkin', 'pineapple', 'pineappleContrasted'] as const;
 
 function buildPaletteTokens(): TokenEntry[] {
 	const out: TokenEntry[] = [];
@@ -65,10 +65,15 @@ function buildPaletteTokens(): TokenEntry[] {
 		}
 	}
 
-	out.push(
-		{ name: '--palettes-AI-500', value: 'AI 500', category: 'palette', group: 'AI', preview: 'swatch' },
-		{ name: '--palettes-AI-600', value: 'AI 600', category: 'palette', group: 'AI', preview: 'swatch' },
-	);
+	for (const shade of PALETTE_SHADES) {
+		out.push({
+			name: `--palettes-ai-${shade}`,
+			value: `AI ${shade}`,
+			category: 'palette',
+			group: 'AI',
+			preview: 'swatch',
+		});
+	}
 
 	return out;
 }
@@ -547,17 +552,17 @@ class TokensExplorerStory {
 			case 'palette':
 				return 'Palettes';
 			case 'color':
-				return 'Colors';
+				return 'Couleurs';
 			case 'spacing':
-				return 'Spacings';
+				return 'Espacements';
 			case 'radius':
-				return 'Radius';
+				return 'Arrondis';
 			case 'typography':
-				return 'Typography';
+				return 'Typographie';
 			case 'elevation':
-				return 'Elevation';
+				return 'Élévations';
 			default:
-				return 'All';
+				return 'Tous';
 		}
 	}
 }
