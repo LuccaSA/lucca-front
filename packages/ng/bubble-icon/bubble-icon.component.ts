@@ -26,7 +26,6 @@ import { BubbleIconSize } from './bubble-icon.type';
 export class BubbleIconComponent {
 	readonly icon = input.required<LuccaIcon>();
 	readonly alt = input<string | null>(null);
-
 	readonly size = input<BubbleIconSize>('M');
 
 	readonly palette = input<Palette | DecorativePalette>('product');
