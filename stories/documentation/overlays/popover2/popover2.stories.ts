@@ -120,6 +120,51 @@ export const Basic: StoryObj<PopoverDirective> = {
 		luPopoverMaxInlineSize: '',
 	},
 };
+
+export const NeutralElement: StoryObj<PopoverDirective> = {
+	render: (args, { argTypes }) => {
+		const action = args.luPopoverTrigger === 'click' ? 'Cliquez-moi' : 'Cliquez ou survolez-moi';
+		let openDelay = '';
+		if (args.luPopoverTrigger !== 'click') {
+			openDelay = ' ' + args.luPopoverOpenDelay + 'ms';
+		}
+		return {
+			template: `<div class="demo">
+	<div class="pr-u-focusVisible pr-u-borderRadiusSmall" luButton [luPopover2]="contentRef" ${generateInputs(args, argTypes)}>${action}${openDelay} !</div>
+	<ng-template #contentRef>
+		<div class="popover-contentOptional">
+			<h3>Title</h3>
+			<lu-divider />
+			<lu-listing checklist palette="success">
+				<lu-listing-item>item item item item item item item item item item item</lu-listing-item>
+				<lu-listing-item>item</lu-listing-item>
+				<lu-listing-item>item</lu-listing-item>
+			</lu-listing>
+		</div>
+	</ng-template>
+</div>
+`,
+			styles: [
+				`
+	.demo {
+		display: flex;
+		min-block-size: 20rem;
+		align-items: center;
+		justify-content: center;
+	}`,
+			],
+		};
+	},
+	args: {
+		luPopoverTrigger: 'click',
+		luPopoverCloseDelay: 300,
+		luPopoverOpenDelay: 300,
+		luPopoverDisabled: false,
+		luPopoverPosition: 'above',
+		luPopoverNoCloseButton: false,
+	},
+};
+
 export const CustomPosition: StoryObj<PopoverDirective> = {
 	render: (_args, { argTypes }) => {
 		const { luPopoverPosition, ...args } = _args;
