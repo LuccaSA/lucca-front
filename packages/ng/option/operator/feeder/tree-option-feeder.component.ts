@@ -2,6 +2,8 @@ import { ChangeDetectionStrategy, Component, forwardRef, Input } from '@angular/
 import { ILuTree } from '@lucca-front/ng/core';
 import { BehaviorSubject } from 'rxjs';
 import { ALuTreeOptionOperator, ILuTreeOptionOperator } from '../tree-option-operator.model';
+
+/* eslint-disable @angular-eslint/prefer-signals */
 /**
  * @deprecated
  */

@@ -66,13 +66,13 @@ export class LuMultiSelectPanelComponent<T> implements AfterViewInit, CoreSelect
 	readonly loading = toSignal(this.selectInput.loading$);
 	readonly loading$ = this.selectInput.loading$;
 	searchable = this.selectInput.searchable;
-	optionComparer = this.selectInput.optionComparer;
-	optionKey = this.selectInput.optionKey;
+	readonly optionComparer = this.selectInput.optionComparer;
+	readonly optionKey = this.selectInput.optionKey;
 	intl = this.selectInput.intl;
 
-	trackOptionsBy: TrackByFunction<T> = (_, option) => this.optionKey(option);
+	trackOptionsBy: TrackByFunction<T> = (_, option) => this.optionKey()(option);
 	trackGroupsBy: TrackByFunction<LuOptionGroup<T, unknown>> = (_, group) => group.key;
-	trackBranchesBy: TrackByFunction<TreeNode<T>> = (_, option) => this.optionKey(option.node);
+	trackBranchesBy: TrackByFunction<TreeNode<T>> = (_, option) => this.optionKey()(option.node);
 
 	selectedOptions: T[] = this.selectInput.value || [];
 	readonly optionTpl = this.selectInput.optionTpl;
@@ -86,8 +86,8 @@ export class LuMultiSelectPanelComponent<T> implements AfterViewInit, CoreSelect
 				.filter((o) => o.disabled)
 				.map((o) => o.option())
 				.filter(isNotNil)
-				.map((option) => this.optionKey(option));
-			return groupOptions.some((option) => !disabledOptionIds.includes(this.optionKey(option)));
+				.map((option) => this.optionKey()(option));
+			return groupOptions.some((option) => !disabledOptionIds.includes(this.optionKey()(option)));
 		};
 	});
 
@@ -121,7 +121,7 @@ export class LuMultiSelectPanelComponent<T> implements AfterViewInit, CoreSelect
 	}
 
 	toggleOption(option: T): void {
-		const matchingOption = this.selectedOptions.find((o) => this.optionComparer(o, option));
+		const matchingOption = this.selectedOptions.find((o) => this.optionComparer()(o, option));
 		this.selectedOptions = matchingOption && option ? this.selectedOptions.filter((o) => o !== matchingOption) : [...this.selectedOptions, option];
 		this.panelRef.emitValue(this.selectedOptions);
 		setTimeout(() => this.panelRef.updatePosition());
@@ -133,16 +133,16 @@ export class LuMultiSelectPanelComponent<T> implements AfterViewInit, CoreSelect
 			.filter((o) => o.disabled)
 			.map((o) => o.option())
 			.filter(isNotNil)
-			.map((option) => this.optionKey(option));
-		const enabledNotSelectedOptions = notSelectedOptions.filter((o) => !disabledOptionIds.includes(this.optionKey(o)));
-		const enabledGroupOptions = groupOptions.filter((o) => !disabledOptionIds.includes(this.optionKey(o)));
+			.map((option) => this.optionKey()(option));
+		const enabledNotSelectedOptions = notSelectedOptions.filter((o) => !disabledOptionIds.includes(this.optionKey()(o)));
+		const enabledGroupOptions = groupOptions.filter((o) => !disabledOptionIds.includes(this.optionKey()(o)));
 
 		if (enabledNotSelectedOptions.length) {
 			// If some options are not selected, select them all
 			this.selectedOptions = [...this.selectedOptions, ...enabledNotSelectedOptions];
 		} else {
 			// If all options are already selected, unselect them all
-			this.selectedOptions = this.selectedOptions.filter((o) => !enabledGroupOptions.some((so) => this.optionComparer(so, o)));
+			this.selectedOptions = this.selectedOptions.filter((o) => !enabledGroupOptions.some((so) => this.optionComparer()(so, o)));
 		}
 
 		this.panelRef.emitValue(this.selectedOptions);
@@ -153,7 +153,7 @@ export class LuMultiSelectPanelComponent<T> implements AfterViewInit, CoreSelect
 		this.keyManager.init({
 			queryList: this.options,
 			options$: this.options$,
-			optionComparer: this.optionComparer,
+			optionComparer: this.optionComparer(),
 			activeOptionIdChanged$: this.panelRef.activeOptionIdChanged,
 			clueChange$: this.selectInput.searchable ? this.selectInput.clueChange$ : EMPTY,
 		});

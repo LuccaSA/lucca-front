@@ -1,4 +1,5 @@
-import { Directive, forwardRef, HostListener, Inject, Input, OnDestroy, Optional, Self } from '@angular/core';
+import { Directive, forwardRef, Inject, input, OnDestroy, Optional, Self } from '@angular/core';
+import { syncInputSignal } from '@lucca-front/ng/core';
 import { ALuOptionSelector, ILuOptionSelector } from '@lucca-front/ng/option';
 import { Subject, Subscription } from 'rxjs';
 import { ILuEstablishment, ILuLegalUnit } from '../../establishment.model';
@@ -6,6 +7,9 @@ import { ALuEstablishmentService, LuEstablishmentService } from '../../service/i
 import { DEFAULT_ESTABLISHMENT_SERVICE } from '../establishment-select.token';
 
 @Directive({
+	host: {
+		'(click)': 'onClick()',
+	},
 	selector: '[luLegalUnitSelector]',
 	providers: [
 		{
@@ -20,22 +24,21 @@ import { DEFAULT_ESTABLISHMENT_SERVICE } from '../establishment-select.token';
 	],
 })
 export class LuLegalUnitSelectorDirective implements ILuOptionSelector<ILuEstablishment>, OnDestroy {
-	multiple = true;
 	readonly onSelectValue = new Subject<ILuEstablishment[]>();
 	private _values: ILuEstablishment[];
 	private _service: LuEstablishmentService;
 	private _subs = new Subscription();
 
-	@Input('luLegalUnitSelector') legalUnit: ILuLegalUnit;
-	@Input('luLegalUnitSelectorFilters') set filters(filters: string[]) {
-		this._service.filters = filters;
-	}
-	@Input('luLegalUnitSelectorAppInstanceId') set appInstanceId(appId: number) {
-		this._service.appInstanceId = appId;
-	}
-	@Input('luLegalUnitSelectorOperations') set operations(ops: number[]) {
-		this._service.operations = ops;
-	}
+	readonly legalUnit = input<ILuLegalUnit>(undefined, { alias: 'luLegalUnitSelector' });
+
+	readonly filters = input<string[]>(undefined, { alias: 'luLegalUnitSelectorFilters' });
+
+	readonly appInstanceId = input<number>(undefined, { alias: 'luLegalUnitSelectorAppInstanceId' });
+
+	readonly operations = input<number[]>(undefined, { alias: 'luLegalUnitSelectorOperations' });
+
+	multiple = true;
+
 	constructor(
 		@Inject(ALuEstablishmentService)
 		@Optional()
@@ -45,11 +48,17 @@ export class LuLegalUnitSelectorDirective implements ILuOptionSelector<ILuEstabl
 		defaultService: LuEstablishmentService,
 	) {
 		this._service = customService || defaultService;
+
+		syncInputSignal(this.filters, (filters) => (this._service.filters = filters));
+		syncInputSignal(this.appInstanceId, (appInstanceId) => (this._service.appInstanceId = appInstanceId));
+		syncInputSignal(this.operations, (operations) => (this._service.operations = operations));
 	}
 
-	@HostListener('click')
 	onClick(): void {
-		const sub = this._service.getAll([`legalUnitId=${this.legalUnit.id}`]).subscribe((establishments) => {
+		const legalUnit = this.legalUnit();
+		if (!legalUnit) return;
+
+		const sub = this._service.getAll([`legalUnitId=${legalUnit.id}`]).subscribe((establishments) => {
 			if (this.shouldAdd(establishments)) {
 				const selectedEstablishmentIds = new Set<number>((this._values ?? []).map((ets) => ets.id));
 				this.onSelectValue.next(Array.from([...(this._values ?? []), ...establishments.filter((ets) => !selectedEstablishmentIds.has(ets.id))]));
@@ -70,7 +79,10 @@ export class LuLegalUnitSelectorDirective implements ILuOptionSelector<ILuEstabl
 	}
 
 	private shouldAdd(establishments: ILuEstablishment[]): boolean {
-		const selectedCount = (this._values ?? []).filter((ets) => ets.legalUnitId === this.legalUnit.id).length;
+		const legalUnit = this.legalUnit();
+		if (!legalUnit) return false;
+
+		const selectedCount = (this._values ?? []).filter((ets) => ets.legalUnitId === legalUnit.id).length;
 		return establishments.length > selectedCount;
 	}
 }

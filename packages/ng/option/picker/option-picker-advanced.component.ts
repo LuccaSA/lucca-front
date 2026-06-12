@@ -12,6 +12,7 @@ import { ALuOptionOperator, ILuOptionOperator } from '../operator/index';
 import { ALuOptionSelector, ILuOptionSelector } from '../selector/index';
 import { ALuOptionPickerComponent } from './option-picker.component';
 
+/* eslint-disable @angular-eslint/prefer-signals */
 /**
  * @deprecated
  */

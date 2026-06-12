@@ -1,11 +1,16 @@
-import { ChangeDetectorRef, Directive, ElementRef, forwardRef, HostListener, input, Input, OnInit, Renderer2 } from '@angular/core';
+import { ChangeDetectorRef, Directive, ElementRef, forwardRef, input, Renderer2 } from '@angular/core';
 import { AbstractControl, NG_VALIDATORS, NG_VALUE_ACCESSOR, ValidationErrors, Validator } from '@angular/forms';
-import { ALuDateAdapter, ELuDateGranularity, intlInputOptions, isNotNil, LuDateGranularity } from '@lucca-front/ng/core';
+import { ALuDateAdapter, ELuDateGranularity, intlInputOptions, isNotNil, LuDateGranularity, ɵeffectWithDeps } from '@lucca-front/ng/core';
 import { ALuInput } from '@lucca-front/ng/input';
 import { LU_DATE_INPUT_TRANSLATIONS } from './date-input.translate';
 
 @Directive({
 	selector: 'input[luDateInput]',
+	host: {
+		'(input)': 'onInput($event)',
+		'(focus)': 'onFocus()',
+		'(blur)': 'onBlur()',
+	},
 	providers: [
 		{
 			provide: NG_VALUE_ACCESSOR,
@@ -19,15 +24,21 @@ import { LU_DATE_INPUT_TRANSLATIONS } from './date-input.translate';
 		},
 	],
 })
-export class LuDateInputDirective<D> extends ALuInput<D, HTMLInputElement> implements Validator, OnInit {
+export class LuDateInputDirective<D> extends ALuInput<D, HTMLInputElement> implements Validator {
 	private _focused = false;
-	@Input() min?: D;
-	@Input() max?: D;
-	@Input() granularity: LuDateGranularity = ELuDateGranularity.day;
 
-	@Input() override set placeholder(p: string) {
+	readonly min = input<D>();
+
+	readonly max = input<D>();
+
+	readonly granularity = input<LuDateGranularity>(ELuDateGranularity.day);
+
+	readonly placeHolderInput = input<string>('', { alias: 'placeholder' });
+
+	override set placeholder(p: string) {
 		this._elementRef.nativeElement.placeholder = p;
 	}
+
 	public readonly intl = input(...intlInputOptions(LU_DATE_INPUT_TRANSLATIONS));
 	constructor(
 		_changeDetectorRef: ChangeDetectorRef,
@@ -36,27 +47,31 @@ export class LuDateInputDirective<D> extends ALuInput<D, HTMLInputElement> imple
 		private _adapter: ALuDateAdapter<D>,
 	) {
 		super(_changeDetectorRef, _elementRef, _renderer);
-	}
-	ngOnInit() {
-		switch (this.granularity) {
-			case ELuDateGranularity.year:
-				this.placeholder = this.intl().placeholderYear;
-				break;
-			case ELuDateGranularity.month:
-				this.placeholder = this.intl().placeholderMonth;
-				break;
-			case ELuDateGranularity.day:
-			default:
-				this.placeholder = this.intl().placeholderDay;
-				break;
-		}
+		ɵeffectWithDeps([this.placeHolderInput, this.granularity, this.intl], (placeHolderInput, granularity, intl) => {
+			if (placeHolderInput) {
+				this._elementRef.nativeElement.placeholder = placeHolderInput;
+			} else {
+				switch (granularity) {
+					case ELuDateGranularity.year:
+						this._elementRef.nativeElement.placeholder = intl.placeholderYear;
+						break;
+					case ELuDateGranularity.month:
+						this._elementRef.nativeElement.placeholder = intl.placeholderMonth;
+						break;
+					case ELuDateGranularity.day:
+					default:
+						this._elementRef.nativeElement.placeholder = intl.placeholderDay;
+						break;
+				}
+			}
+		});
 	}
 	protected render() {
 		if (this._focused) {
 			return;
 		}
 		let format: string;
-		switch (this.granularity) {
+		switch (this.granularity()) {
 			case ELuDateGranularity.year:
 				format = 'y';
 				break;
@@ -71,7 +86,7 @@ export class LuDateInputDirective<D> extends ALuInput<D, HTMLInputElement> imple
 		const text = this.value && this._adapter.isValid(this.value) ? this._adapter.format(this.value, format) : '';
 		this._elementRef.nativeElement.value = text;
 	}
-	@HostListener('input', ['$event'])
+
 	onInput(event) {
 		// FIXME
 		// eslint-disable-next-line @typescript-eslint/no-unsafe-member-access
@@ -81,18 +96,20 @@ export class LuDateInputDirective<D> extends ALuInput<D, HTMLInputElement> imple
 			this.setValue(value);
 		}
 	}
+
 	private parse(text: string): D | undefined {
-		return this._adapter.parse(text, this.granularity);
+		return this._adapter.parse(text, this.granularity());
 	}
-	@HostListener('focus')
+
 	onFocus() {
 		this._focused = true;
 	}
-	@HostListener('blur')
+
 	onBlur() {
 		this._focused = false;
 		this.render();
 	}
+
 	validate(control: AbstractControl): ValidationErrors | null {
 		const d = control.value as D;
 		if (!d) {
@@ -101,10 +118,12 @@ export class LuDateInputDirective<D> extends ALuInput<D, HTMLInputElement> imple
 		if (!this._adapter.isValid(d)) {
 			return { date: true };
 		}
-		if (!!this.min && this._adapter.isValid(this.min) && this._adapter.compare(this.min, d, ELuDateGranularity.day) > 0) {
+		const min = this.min();
+		if (!!min && this._adapter.isValid(min) && this._adapter.compare(min, d, ELuDateGranularity.day) > 0) {
 			return { min: true };
 		}
-		if (!!this.max && this._adapter.isValid(this.max) && this._adapter.compare(this.max, d, ELuDateGranularity.day) < 0) {
+		const max = this.max();
+		if (!!max && this._adapter.isValid(max) && this._adapter.compare(max, d, ELuDateGranularity.day) < 0) {
 			return { max: true };
 		}
 		return null;

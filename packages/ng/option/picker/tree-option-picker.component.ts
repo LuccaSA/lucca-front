@@ -16,6 +16,7 @@ enum ToggleMode {
 	children,
 }
 
+/* eslint-disable @angular-eslint/prefer-signals */
 /**
  * @deprecated
  */

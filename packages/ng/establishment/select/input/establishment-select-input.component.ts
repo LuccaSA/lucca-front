@@ -16,6 +16,7 @@ import { LuEstablishmentSearcherComponent } from '../searcher';
 import { LuEstablishmentSelectAllComponent } from '../select-all';
 import { LU_ESTABLISHMENT_SELECT_INPUT_TRANSLATIONS } from './establishment-select-input.translate';
 
+/* eslint-disable @angular-eslint/prefer-signals */
 /**
  * @deprecated prefer SimpleSelect or MultipleSelect with establishments directive
  */

@@ -1,18 +1,5 @@
-import {
-	booleanAttribute,
-	ChangeDetectionStrategy,
-	Component,
-	contentChildren,
-	effect,
-	ElementRef,
-	EventEmitter,
-	forwardRef,
-	inject,
-	input,
-	Output,
-	untracked,
-	ViewEncapsulation,
-} from '@angular/core';
+import { booleanAttribute, ChangeDetectionStrategy, Component, contentChildren, effect, ElementRef, EventEmitter, forwardRef, inject, input, untracked, ViewEncapsulation } from '@angular/core';
+import { outputFromObservable } from '@angular/core/rxjs-interop';
 import { intlInputOptions, LuClass, Palette } from '@lucca-front/ng/core';
 import { ALuClear, ILuClear } from './clear.model';
 import { LU_CLEAR_TRANSLATIONS } from './clear.translate';
@@ -69,11 +56,12 @@ export class ClearComponent<T> extends ALuClear<T> implements ILuClear<T> {
 	 */
 	readonly inverted = input(false, { transform: booleanAttribute });
 
+	override readonly onClear = new EventEmitter<T>();
+
 	/**
 	 * Emit event when button clear is click
 	 */
-	// eslint-disable-next-line @angular-eslint/no-output-on-prefix
-	@Output() override onClear = new EventEmitter<T>();
+	protected readonly onClearOutput = outputFromObservable(this.onClear, { alias: 'onClear' });
 
 	readonly contentRef = contentChildren<ElementRef>('content');
 

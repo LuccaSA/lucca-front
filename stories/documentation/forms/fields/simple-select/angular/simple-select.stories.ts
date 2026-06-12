@@ -7,7 +7,7 @@ import { LuSimpleSelectInputComponent } from '@lucca-front/ng/simple-select';
 import { Meta, moduleMetadata, StoryObj } from '@storybook/angular';
 import { StoryModelDisplayComponent } from 'stories/helpers/story-model-display.component';
 import { HiddenArgType } from '../../../../../helpers/common-arg-types';
-import { generateInputs } from '../../../../../helpers/stories';
+import { generateInputs, InputAlias, SelectCommonAliasInput } from '../../../../../helpers/stories';
 
 export default {
 	title: 'Documentation/Forms/Fields/Simple Select/Angular',
@@ -79,10 +79,13 @@ export default {
 } as Meta;
 
 export const Basic: StoryObj<
-	LuSimpleSelectInputComponent<unknown> &
-		FormFieldComponent & {
-			disabled: boolean;
-		}
+	InputAlias<
+		LuSimpleSelectInputComponent<unknown> &
+			FormFieldComponent & {
+				disabled: boolean;
+			},
+		SelectCommonAliasInput
+	>
 > = {
 	render: (args, { argTypes }) => {
 		const { label, hiddenLabel, tooltip, inlineMessage, inlineMessageState, size, width, presentation, ...inputArgs } = args;
