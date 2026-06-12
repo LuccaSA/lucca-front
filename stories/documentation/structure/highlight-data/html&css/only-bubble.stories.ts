@@ -1,10 +1,17 @@
-import { Meta, StoryObj } from '@storybook/angular';
+import { HttpClientModule } from '@angular/common/http';
+import { LuSafeExternalSvgPipe } from '@lucca-front/ng/safe-content';
+import { Meta, moduleMetadata, StoryObj } from '@storybook/angular';
 
 interface OnlyBubbleStory {}
 
 export default {
 	title: 'Documentation/Structure/Highlight data/HTML&CSS/Only bubble',
 	argTypes: {},
+	decorators: [
+		moduleMetadata({
+			imports: [LuSafeExternalSvgPipe, HttpClientModule],
+		}),
+	],
 } as Meta;
 
 function getTemplate(args: OnlyBubbleStory): string {
@@ -14,11 +21,7 @@ function getTemplate(args: OnlyBubbleStory): string {
 		<dd class="highlightData-content-value">Content</dd>
 	</dl>
 	<div class="highlightData-illustrations">
-		<img
-			alt=""
-			class="highlightData-illustrations-back"
-			src="https://cdn.lucca.fr/transverse/prisme/visuals/highlight-data/lucca/bubbles-light-1.svg"
-		/>
+		<div class="highlightData-illustrations-back" aria-hidden="true" [innerHtml]="'https://cdn.lucca.fr/transverse/prisme/visuals/highlight-data/bubbles/1.svg' | luSafeExternalSvg"></div>
 	</div>
 </div>`;
 }

@@ -3,12 +3,13 @@ import { provideRouter } from '@angular/router';
 import { ButtonComponent } from '@lucca-front/ng/button';
 import { HighlightDataComponent } from '@lucca-front/ng/highlight-data';
 import { LinkComponent } from '@lucca-front/ng/link';
+import { LuSafeExternalSvgPipe } from '@lucca-front/ng/safe-content';
 import { applicationConfig, Meta, StoryObj } from '@storybook/angular';
 
 @Component({
 	selector: 'highlight-data-stories',
 	templateUrl: './highlight-data.stories.html',
-	imports: [HighlightDataComponent, ButtonComponent, LinkComponent],
+	imports: [HighlightDataComponent, ButtonComponent, LinkComponent, LuSafeExternalSvgPipe],
 	changeDetection: ChangeDetectionStrategy.OnPush,
 })
 class HighlightDataStory {}

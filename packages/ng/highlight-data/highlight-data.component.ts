@@ -1,5 +1,6 @@
 import { booleanAttribute, ChangeDetectionStrategy, Component, computed, effect, inject, input, ViewEncapsulation } from '@angular/core';
 import { LuClass, PortalContent, PortalDirective } from '@lucca-front/ng/core';
+import { LuSafeExternalSvgPipe } from '@lucca-front/ng/safe-content';
 import { HighlightDataBubble, HighlightDataIllustration, HighlightDataPalette, HighlightDataSize, HighlightDataTheme } from './highlight-data.type';
 
 @Component({
@@ -8,12 +9,15 @@ import { HighlightDataBubble, HighlightDataIllustration, HighlightDataPalette, H
 	styleUrl: './highlight-data.component.scss',
 	changeDetection: ChangeDetectionStrategy.OnPush,
 	encapsulation: ViewEncapsulation.None,
-	imports: [PortalDirective],
+	imports: [PortalDirective, LuSafeExternalSvgPipe],
 	providers: [LuClass],
 	host: {
 		class: 'highlightData',
 		'[class.mod-light]': 'lightClass',
 		'[class.mod-dark]': 'darkClass',
+		'[class.mod-success]': 'palette() === "success"',
+		'[class.mod-warning]': 'palette() === "warning"',
+		'[class.mod-critical]': 'palette() === "critical"',
 	},
 })
 export class HighlightDataComponent {
@@ -79,13 +83,11 @@ export class HighlightDataComponent {
 		return this.theme() === 'dark';
 	}
 
-	readonly illustrationSrc = computed(() =>
-		this.illustration().includes('/') ? this.illustration() : `https://cdn.lucca.fr/transverse/prisme/visuals/highlight-data/generic/${this.illustration()}.svg`,
-	);
+	readonly path = `https://cdn.lucca.fr/transverse/prisme/visuals/highlight-data/`;
 
-	readonly bubbleSrc = computed(() => `https://cdn.lucca.fr/transverse/prisme/visuals/highlight-data/${this.palette()}/bubbles-${this.bubbleTheme()}-${this.bubble()}.svg`);
+	readonly illustrationSrc = computed(() => (this.illustration()?.includes('/') ? this.illustration() : `${this.path}generic/${this.illustration()}.svg`));
 
-	readonly bubbleTheme = computed(() => (this.theme() === 'dark' ? 'dark' : 'light'));
+	readonly bubbleSrc = computed(() => `${this.path}bubbles/${this.bubble()}.svg`);
 
 	constructor() {
 		effect(() => {

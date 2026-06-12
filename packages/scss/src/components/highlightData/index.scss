@@ -7,12 +7,40 @@
 	}
 
 	@layer mods {
+		&:not(.mod-light, .mod-dark) {
+			@include noTheme;
+		}
+
 		&.mod-light {
 			@include light;
 		}
 
 		&.mod-dark {
 			@include dark;
+		}
+
+		&.mod-success {
+			@include success;
+
+			&.mod-dark {
+				@include successDark;
+			}
+		}
+
+		&.mod-warning {
+			@include warning;
+
+			&.mod-dark {
+				@include warningDark;
+			}
+		}
+
+		&.mod-critical {
+			@include critical;
+
+			&.mod-dark {
+				@include criticalDark;
+			}
 		}
 
 		&.mod-valueFirst {

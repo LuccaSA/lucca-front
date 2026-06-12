@@ -70,9 +70,16 @@
 
 		.highlightData-illustrations-back,
 		.highlightData-illustrations-front {
-			grid-area: 1 / 1;
-			block-size: var(--components-highlightData-illustrations-height);
-			inline-size: var(--components-highlightData-illustrations-width);
+			&,
+			svg {
+				grid-area: 1 / 1;
+				block-size: var(--components-highlightData-illustrations-height);
+				inline-size: var(--components-highlightData-illustrations-width);
+			}
+
+			&:is(div) {
+				display: contents;
+			}
 		}
 	}
 }

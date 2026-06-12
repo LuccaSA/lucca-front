@@ -1,0 +1,35 @@
+@mixin success {
+	--palettes-assets-primary: var(--palettes-success-100);
+	--palettes-assets-secondary: var(--palettes-brand-300);
+	--palettes-assets-brand: var(--palettes-assets-brand-dark);
+}
+
+@mixin successDark {
+	--palettes-assets-primary: var(--palettes-success-300);
+	--palettes-assets-secondary: var(--palettes-brand-100);
+	--palettes-assets-brand: var(--palettes-assets-primary-light);
+}
+
+@mixin warning {
+	--palettes-assets-primary: var(--palettes-warning-100);
+	--palettes-assets-secondary: var(--palettes-brand-300);
+	--palettes-assets-brand: var(--palettes-assets-brand-dark);
+}
+
+@mixin warningDark {
+	--palettes-assets-primary: var(--palettes-warning-300);
+	--palettes-assets-secondary: var(--palettes-assets-brand-lighter);
+	--palettes-assets-brand: var(--palettes-assets-primary-dark);
+}
+
+@mixin critical {
+	--palettes-assets-primary: var(--palettes-critical-100);
+	--palettes-assets-secondary: var(--palettes-brand-300);
+	--palettes-assets-brand: var(--palettes-assets-brand-dark);
+}
+
+@mixin criticalDark {
+	--palettes-assets-primary: var(--palettes-critical-300);
+	--palettes-assets-secondary: var(--palettes-assets-brand-lighter);
+	--palettes-assets-brand: var(--palettes-brand-300);
+}

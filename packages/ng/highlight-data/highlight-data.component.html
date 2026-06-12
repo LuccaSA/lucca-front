@@ -10,10 +10,10 @@
 @if (bubble() || illustration()) {
 	<div class="highlightData-illustrations">
 		@if (bubble()) {
-			<img alt="" class="highlightData-illustrations-back" [attr.src]="bubbleSrc()" />
+			<div class="highlightData-illustrations-back" aria-hidden="true" [innerHtml]="bubbleSrc() | luSafeExternalSvg"></div>
 		}
 		@if (illustration()) {
-			<img alt="" class="highlightData-illustrations-front" [attr.src]="illustrationSrc()" />
+			<div class="highlightData-illustrations-front" aria-hidden="true" [innerHtml]="illustrationSrc() | luSafeExternalSvg"></div>
 		}
 	</div>
 }

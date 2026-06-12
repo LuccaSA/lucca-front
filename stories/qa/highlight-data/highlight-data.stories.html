@@ -18,16 +18,16 @@
 						<dd class="highlightData-content-value">Content</dd>
 					</dl>
 					<div class="highlightData-illustrations">
-						<img
-							alt=""
+						<div
 							class="highlightData-illustrations-back"
-							src="https://cdn.lucca.fr/transverse/prisme/visuals/highlight-data/lucca/bubbles-light-1.svg"
-						/>
-						<img
-							alt=""
-							class="highlightData-illustrations-front"
-							src="https://cdn.lucca.fr/transverse/prisme/visuals/highlight-data/generic/piggy-bank.svg"
-						/>
+							aria-hidden="true"
+							[innerHtml]="'https://cdn.lucca.fr/transverse/prisme/visuals/highlight-data/bubbles/1.svg' | luSafeExternalSvg"
+						></div>
+						<div
+							class="highlightData-illustrations-back"
+							aria-hidden="true"
+							[innerHtml]="'https://cdn.lucca.fr/transverse/prisme/visuals/highlight-data/generic/piggy-bank.svg' | luSafeExternalSvg"
+						></div>
 					</div>
 				</div>
 			</td>
@@ -44,11 +44,11 @@
 						<dd class="highlightData-content-value">Content</dd>
 					</dl>
 					<div class="highlightData-illustrations">
-						<img
-							alt=""
+						<div
 							class="highlightData-illustrations-back"
-							src="https://cdn.lucca.fr/transverse/prisme/visuals/highlight-data/lucca/bubbles-light-1.svg"
-						/>
+							aria-hidden="true"
+							[innerHtml]="'https://cdn.lucca.fr/transverse/prisme/visuals/highlight-data/bubbles/1.svg' | luSafeExternalSvg"
+						></div>
 					</div>
 				</div>
 			</td>
@@ -76,21 +76,21 @@
 						<dd class="highlightData-content-action"><button type="button" class="button mod-outlined">Action</button></dd>
 					</dl>
 					<div class="highlightData-illustrations">
-						<img
-							alt=""
+						<div
 							class="highlightData-illustrations-back"
-							src="https://cdn.lucca.fr/transverse/prisme/visuals/highlight-data/lucca/bubbles-light-1.svg"
-						/>
-						<img
-							alt=""
-							class="highlightData-illustrations-front"
-							src="https://cdn.lucca.fr/transverse/prisme/visuals/highlight-data/generic/polaroid-male.svg"
-						/>
+							aria-hidden="true"
+							[innerHtml]="'https://cdn.lucca.fr/transverse/prisme/visuals/highlight-data/bubbles/1.svg' | luSafeExternalSvg"
+						></div>
+						<div
+							class="highlightData-illustrations-back"
+							aria-hidden="true"
+							[innerHtml]="'https://cdn.lucca.fr/transverse/prisme/visuals/highlight-data/generic/piggy-bank.svg' | luSafeExternalSvg"
+						></div>
 					</div>
 				</div>
 			</td>
 			<td>
-				<lu-highlight-data heading="Title" value="Content" bubble="1" illustration="polaroid-male"
+				<lu-highlight-data heading="Title" value="Content" bubble="1" illustration="piggy-bank"
 					><button luButton="outlined" type="button">Action</button></lu-highlight-data
 				>
 			</td>
@@ -135,16 +135,16 @@
 							<dd class="highlightData-content-value">Content</dd>
 						</dl>
 						<div class="highlightData-illustrations">
-							<img
-								alt=""
+							<div
 								class="highlightData-illustrations-back"
-								src="https://cdn.lucca.fr/transverse/prisme/visuals/highlight-data/lucca/bubbles-light-1.svg"
-							/>
-							<img
-								alt=""
-								class="highlightData-illustrations-front"
-								src="https://cdn.lucca.fr/transverse/prisme/visuals/highlight-data/generic/piggy-bank.svg"
-							/>
+								aria-hidden="true"
+								[innerHtml]="'https://cdn.lucca.fr/transverse/prisme/visuals/highlight-data/bubbles/1.svg' | luSafeExternalSvg"
+							></div>
+							<div
+								class="highlightData-illustrations-back"
+								aria-hidden="true"
+								[innerHtml]="'https://cdn.lucca.fr/transverse/prisme/visuals/highlight-data/generic/piggy-bank.svg' | luSafeExternalSvg"
+							></div>
 						</div>
 					</div>
 				</div>
@@ -183,21 +183,73 @@
 						<dd class="highlightData-content-value">Content</dd>
 					</dl>
 					<div class="highlightData-illustrations">
-						<img
-							alt=""
+						<div
 							class="highlightData-illustrations-back"
-							src="https://cdn.lucca.fr/transverse/prisme/visuals/highlight-data/lucca/bubbles-dark-1.svg"
-						/>
-						<img
-							alt=""
-							class="highlightData-illustrations-front"
-							src="https://cdn.lucca.fr/transverse/prisme/visuals/highlight-data/generic/piggy-bank.svg"
-						/>
+							aria-hidden="true"
+							[innerHtml]="'https://cdn.lucca.fr/transverse/prisme/visuals/highlight-data/bubbles/1.svg' | luSafeExternalSvg"
+						></div>
+						<div
+							class="highlightData-illustrations-back"
+							aria-hidden="true"
+							[innerHtml]="'https://cdn.lucca.fr/transverse/prisme/visuals/highlight-data/generic/piggy-bank.svg' | luSafeExternalSvg"
+						></div>
 					</div>
 				</div>
 			</td>
 			<td>
 				<lu-highlight-data heading="Title" value="Content" bubble="1" illustration="piggy-bank" theme="dark" />
+			</td>
+		</tr>
+		<tr>
+			<td>Palette</td>
+			<td>
+				<div class="highlightData mod-dark palette-cc">
+					<dl class="highlightData-content">
+						<dt class="highlightData-content-title">Title</dt>
+						<dd class="highlightData-content-value">Content</dd>
+					</dl>
+					<div class="highlightData-illustrations">
+						<div
+							class="highlightData-illustrations-back"
+							aria-hidden="true"
+							[innerHtml]="'https://cdn.lucca.fr/transverse/prisme/visuals/highlight-data/bubbles/1.svg' | luSafeExternalSvg"
+						></div>
+						<div
+							class="highlightData-illustrations-back"
+							aria-hidden="true"
+							[innerHtml]="'https://cdn.lucca.fr/transverse/prisme/visuals/highlight-data/generic/piggy-bank.svg' | luSafeExternalSvg"
+						></div>
+					</div>
+				</div>
+			</td>
+			<td>
+				<lu-highlight-data heading="Title" value="Content" bubble="1" illustration="piggy-bank" theme="dark" palette="cc" />
+			</td>
+		</tr>
+		<tr>
+			<td>State</td>
+			<td>
+				<div class="highlightData mod-dark palette-critical">
+					<dl class="highlightData-content">
+						<dt class="highlightData-content-title">Title</dt>
+						<dd class="highlightData-content-value">Content</dd>
+					</dl>
+					<div class="highlightData-illustrations">
+						<div
+							class="highlightData-illustrations-back"
+							aria-hidden="true"
+							[innerHtml]="'https://cdn.lucca.fr/transverse/prisme/visuals/highlight-data/bubbles/1.svg' | luSafeExternalSvg"
+						></div>
+						<div
+							class="highlightData-illustrations-back"
+							aria-hidden="true"
+							[innerHtml]="'https://cdn.lucca.fr/transverse/prisme/visuals/highlight-data/generic/piggy-bank.svg' | luSafeExternalSvg"
+						></div>
+					</div>
+				</div>
+			</td>
+			<td>
+				<lu-highlight-data heading="Title" value="Content" bubble="1" illustration="piggy-bank" theme="dark" palette="critical" />
 			</td>
 		</tr>
 		<tr>
@@ -209,16 +261,16 @@
 						<dd class="highlightData-content-value">Content</dd>
 					</dl>
 					<div class="highlightData-illustrations">
-						<img
-							alt=""
+						<div
 							class="highlightData-illustrations-back"
-							src="https://cdn.lucca.fr/transverse/prisme/visuals/highlight-data/lucca/bubbles-light-1.svg"
-						/>
-						<img
-							alt=""
-							class="highlightData-illustrations-front"
-							src="https://cdn.lucca.fr/transverse/prisme/visuals/highlight-data/generic/piggy-bank.svg"
-						/>
+							aria-hidden="true"
+							[innerHtml]="'https://cdn.lucca.fr/transverse/prisme/visuals/highlight-data/bubbles/1.svg' | luSafeExternalSvg"
+						></div>
+						<div
+							class="highlightData-illustrations-back"
+							aria-hidden="true"
+							[innerHtml]="'https://cdn.lucca.fr/transverse/prisme/visuals/highlight-data/generic/piggy-bank.svg' | luSafeExternalSvg"
+						></div>
 					</div>
 				</div>
 			</td>
@@ -235,16 +287,16 @@
 						<dd class="highlightData-content-value">Content</dd>
 					</dl>
 					<div class="highlightData-illustrations">
-						<img
-							alt=""
+						<div
 							class="highlightData-illustrations-back"
-							src="https://cdn.lucca.fr/transverse/prisme/visuals/highlight-data/lucca/bubbles-light-1.svg"
-						/>
-						<img
-							alt=""
-							class="highlightData-illustrations-front"
-							src="https://cdn.lucca.fr/transverse/prisme/visuals/highlight-data/generic/piggy-bank.svg"
-						/>
+							aria-hidden="true"
+							[innerHtml]="'https://cdn.lucca.fr/transverse/prisme/visuals/highlight-data/bubbles/1.svg' | luSafeExternalSvg"
+						></div>
+						<div
+							class="highlightData-illustrations-back"
+							aria-hidden="true"
+							[innerHtml]="'https://cdn.lucca.fr/transverse/prisme/visuals/highlight-data/generic/piggy-bank.svg' | luSafeExternalSvg"
+						></div>
 					</div>
 				</div>
 			</td>
@@ -272,16 +324,16 @@
 							<dd class="highlightData-content-value">Content</dd>
 						</dl>
 						<div class="highlightData-illustrations">
-							<img
-								alt=""
+							<div
 								class="highlightData-illustrations-back"
-								src="https://cdn.lucca.fr/transverse/prisme/visuals/highlight-data/lucca/bubbles-light-1.svg"
-							/>
-							<img
-								alt=""
-								class="highlightData-illustrations-front"
-								src="https://cdn.lucca.fr/transverse/prisme/visuals/highlight-data/generic/piggy-bank.svg"
-							/>
+								aria-hidden="true"
+								[innerHtml]="'https://cdn.lucca.fr/transverse/prisme/visuals/highlight-data/bubbles/1.svg' | luSafeExternalSvg"
+							></div>
+							<div
+								class="highlightData-illustrations-back"
+								aria-hidden="true"
+								[innerHtml]="'https://cdn.lucca.fr/transverse/prisme/visuals/highlight-data/generic/piggy-bank.svg' | luSafeExternalSvg"
+							></div>
 						</div>
 					</div>
 
@@ -291,16 +343,16 @@
 							<dd class="highlightData-content-value">Content</dd>
 						</dl>
 						<div class="highlightData-illustrations">
-							<img
-								alt=""
+							<div
 								class="highlightData-illustrations-back"
-								src="https://cdn.lucca.fr/transverse/prisme/visuals/highlight-data/lucca/bubbles-light-1.svg"
-							/>
-							<img
-								alt=""
-								class="highlightData-illustrations-front"
-								src="https://cdn.lucca.fr/transverse/prisme/visuals/highlight-data/generic/piggy-bank.svg"
-							/>
+								aria-hidden="true"
+								[innerHtml]="'https://cdn.lucca.fr/transverse/prisme/visuals/highlight-data/bubbles/1.svg' | luSafeExternalSvg"
+							></div>
+							<div
+								class="highlightData-illustrations-back"
+								aria-hidden="true"
+								[innerHtml]="'https://cdn.lucca.fr/transverse/prisme/visuals/highlight-data/generic/piggy-bank.svg' | luSafeExternalSvg"
+							></div>
 						</div>
 					</div>
 				</div>
@@ -321,16 +373,16 @@
 						<dd class="highlightData-content-value">Content</dd>
 					</dl>
 					<div class="highlightData-illustrations">
-						<img
-							alt=""
+						<div
 							class="highlightData-illustrations-back"
-							src="https://cdn.lucca.fr/transverse/prisme/visuals/highlight-data/lucca/bubbles-light-1.svg"
-						/>
-						<img
-							alt=""
-							class="highlightData-illustrations-front"
-							src="https://cdn.lucca.fr/transverse/prisme/visuals/highlight-data/generic/piggy-bank.svg"
-						/>
+							aria-hidden="true"
+							[innerHtml]="'https://cdn.lucca.fr/transverse/prisme/visuals/highlight-data/bubbles/1.svg' | luSafeExternalSvg"
+						></div>
+						<div
+							class="highlightData-illustrations-back"
+							aria-hidden="true"
+							[innerHtml]="'https://cdn.lucca.fr/transverse/prisme/visuals/highlight-data/generic/piggy-bank.svg' | luSafeExternalSvg"
+						></div>
 					</div>
 				</div>
 			</td>
@@ -348,16 +400,16 @@
 						<dd class="highlightData-content-subText">Subtext</dd>
 					</dl>
 					<div class="highlightData-illustrations">
-						<img
-							alt=""
+						<div
 							class="highlightData-illustrations-back"
-							src="https://cdn.lucca.fr/transverse/prisme/visuals/highlight-data/lucca/bubbles-light-1.svg"
-						/>
-						<img
-							alt=""
-							class="highlightData-illustrations-front"
-							src="https://cdn.lucca.fr/transverse/prisme/visuals/highlight-data/generic/piggy-bank.svg"
-						/>
+							aria-hidden="true"
+							[innerHtml]="'https://cdn.lucca.fr/transverse/prisme/visuals/highlight-data/bubbles/1.svg' | luSafeExternalSvg"
+						></div>
+						<div
+							class="highlightData-illustrations-back"
+							aria-hidden="true"
+							[innerHtml]="'https://cdn.lucca.fr/transverse/prisme/visuals/highlight-data/generic/piggy-bank.svg' | luSafeExternalSvg"
+						></div>
 					</div>
 				</div>
 			</td>
@@ -374,20 +426,19 @@
 						<dt class="highlightData-content-title">Title</dt>
 						<dd class="highlightData-content-value">
 							Content Content Content Content Content Content Content Content Content Content Content Content Content Content
-							<br />Content<br />Content
 						</dd>
 					</dl>
 					<div class="highlightData-illustrations">
-						<img
-							alt=""
+						<div
 							class="highlightData-illustrations-back"
-							src="https://cdn.lucca.fr/transverse/prisme/visuals/highlight-data/lucca/bubbles-light-1.svg"
-						/>
-						<img
-							alt=""
-							class="highlightData-illustrations-front"
-							src="https://cdn.lucca.fr/transverse/prisme/visuals/highlight-data/generic/piggy-bank.svg"
-						/>
+							aria-hidden="true"
+							[innerHtml]="'https://cdn.lucca.fr/transverse/prisme/visuals/highlight-data/bubbles/1.svg' | luSafeExternalSvg"
+						></div>
+						<div
+							class="highlightData-illustrations-back"
+							aria-hidden="true"
+							[innerHtml]="'https://cdn.lucca.fr/transverse/prisme/visuals/highlight-data/generic/piggy-bank.svg' | luSafeExternalSvg"
+						></div>
 					</div>
 				</div>
 			</td>
