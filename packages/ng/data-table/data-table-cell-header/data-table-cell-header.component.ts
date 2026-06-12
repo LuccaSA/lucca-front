@@ -9,6 +9,8 @@ import { BaseDataTableCell } from '../base-data-table-cell';
 import { LU_DATA_TABLE_CELL_INSTANCE } from '../data-table-cell.token';
 import { DataTableSort } from '../data-table.type';
 
+const SORT_VALUES = ['none', 'ascending', 'descending'] as const;
+
 @Component({
 	// eslint-disable-next-line @angular-eslint/component-selector
 	selector: 'th[luDataTableCell]',
@@ -84,5 +86,11 @@ export class DataTableRowCellHeaderComponent extends BaseDataTableCell implement
 		new ResizeObserver(() => {
 			this.#inlineSizePx$.next(this.elementRef.nativeElement.clientWidth);
 		}).observe(this.elementRef.nativeElement);
+	}
+
+	toggleSort(): void {
+		if (this.sort()) {
+			this.sort.set(SORT_VALUES[(SORT_VALUES.indexOf(this.sort()) + 1) % SORT_VALUES.length]);
+		}
 	}
 }
