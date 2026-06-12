@@ -60,11 +60,12 @@ export class LuOptionComponent<T> implements OnInit {
 	protected selectId = inject(SELECT_ID);
 
 	constructor() {
-		ɵeffectWithDeps([this.selectableItem.isHighlighted], (isHighlighted) => {
+		ɵeffectWithDeps([this.selectableItem.isHighlighted], (isHighlighted, onCleanup) => {
 			if (isHighlighted) {
-				setTimeout(() => {
+				const timeoutId = setTimeout(() => {
 					this.elementRef.nativeElement.scrollIntoView(this.scrollIntoViewOptions());
 				}, MAGIC_OPTION_SCROLL_DELAY);
+				onCleanup(() => clearTimeout(timeoutId));
 			}
 		});
 

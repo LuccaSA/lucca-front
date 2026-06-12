@@ -252,18 +252,19 @@ export abstract class ALuSelectInputComponent<TOption, TValue> implements OnDest
 			this.filterPillHost.registerInput(this);
 		}
 
-		ɵeffectWithDeps([this.options], (options) => {
+		ɵeffectWithDeps([this.options], (options, onCleanup) => {
 			if (isNotNil(options)) {
 				this.options$.next(options);
 				if (this.panelRef) {
 					// We have to put it in a setTimeout so it'll be triggered AFTER the DOM is updated and not right now,
 					// which is before the panel size has been modified by the arrival of the new options
-					setTimeout(() => {
+					const timeoutId = setTimeout(() => {
 						this.panelRef?.updatePosition();
 						this.updatePositionFn?.();
 						// If no fixes are found, last resort fix is here
 						// window.dispatchEvent(new Event('resize'));
 					});
+					onCleanup(() => clearTimeout(timeoutId));
 				}
 			}
 		});
