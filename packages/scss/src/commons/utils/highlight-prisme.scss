@@ -26,6 +26,7 @@
 	.textFlow,
 	.mobilePush,
 	.presentation,
+	.highlightText,
 
 	// Lists
 	.chip,
@@ -106,6 +107,7 @@
 	.avatar,
 	.userPopover,
 	.userTile,
+	.impersonation,
 
 	// Loaders
 	.loading,
@@ -142,7 +144,7 @@
 
 	// Icons
 	lu-bubble-illustration .bubbleIllustration,
-	lu-bubble-icon .bubbleIcon,
+	lu-bubble-icon,
 	lu-software-icon .softwareIcon,
 	lu-icon .lucca-icon,
 
@@ -158,6 +160,7 @@
 	lu-text-flow,
 	lu-mobile-push,
 	lu-data-presentation,
+	lu-highlight-text,
 
 	// Lists
 	lu-chip,
@@ -239,6 +242,7 @@
 	// Users
 	lu-user-picture,
 	lu-user-tile,
+	lu-impersonation,
 
 	// Loaders
 	lu-loading,
@@ -262,7 +266,7 @@
 	lu-dialog-content,
 	lu-dialog-footer,
 	lu-footer .footer,
-	lu-horizontal-navigation,
+	lu-horizontal-navigation .horizontalNavigation,
 	lu-vertical-navigation,
 	[luDataTableRow] {
 		outline: 2px solid springgreen;
