@@ -25,6 +25,9 @@ import { GridColumnComponent } from '@lucca-front/ng/grid';
 			<lu-grid-column colspan="12" [responsive]="{ colspanAtMediaMinXS: 4 }">col</lu-grid-column>
 			<lu-grid-column colspan="12" [responsive]="{ colspanAtMediaMinXS: 8 }">col</lu-grid-column>
 		</lu-grid>
+		<lu-grid mode="form">
+			<lu-grid-column><div class="gridDemo">form</div></lu-grid-column>
+		</lu-grid>
 	`,
 	imports: [
 		ButtonComponent, GridComponent, GridColumnComponent
