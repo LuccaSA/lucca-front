@@ -20,16 +20,22 @@ let nextID = 0;
 	template: `
 		<div class="multipleSelect-displayer">
 			<input [attr.aria-labelledby]="valueID" autocomplete="off" #inputElement (keydown.backspace)="inputBackspace()" (keydown.space)="inputSpace($event)" luMultiSelectDisplayerInput />
-			<div [attr.id]="valueID" class="multipleSelect-displayer-value">
+			<div [attr.id]="valueID" class="pr-u-mask">
 				@for (option of displayedOptions$ | async; track option; let index = $index) {
-					<lu-chip class="multipleSelect-displayer-chip" withEllipsis (kill)="unselectOption(option, $event)" [unkillable]="select.disabled$ | async">
-						<ng-container *luOptionOutlet="select.displayerTpl(); value: option" />
-					</lu-chip>
+					<ng-container *luOptionOutlet="select.displayerTpl(); value: option" />
 				}
 				@if (overflowOptions$ | async; as overflow) {
-					<lu-chip class="multipleSelect-displayer-chip" unkillable>+ {{ overflow }}</lu-chip>
+					+ {{ overflow }}
 				}
 			</div>
+			@for (option of displayedOptions$ | async; track option; let index = $index) {
+				<lu-chip aria-hidden="true" class="multipleSelect-displayer-chip" withEllipsis (kill)="unselectOption(option, $event)" [unkillable]="select.disabled$ | async">
+					<ng-container *luOptionOutlet="select.displayerTpl(); value: option" />
+				</lu-chip>
+			}
+			@if (overflowOptions$ | async; as overflow) {
+				<lu-chip aria-hidden="true" class="multipleSelect-displayer-chip" unkillable>+ {{ overflow }}</lu-chip>
+			}
 			@if (select.filterPillMode) {
 				<lu-icon icon="searchMagnifyingGlass" class="multiSelect-field-icon mod-search" />
 			}
