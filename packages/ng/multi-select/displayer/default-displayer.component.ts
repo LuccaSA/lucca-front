@@ -27,7 +27,7 @@ let nextID = 0;
 			</div>
 			<div [attr.id]="valueID" class="pr-u-mask">
 				@for (option of displayedOptions$ | async; track option; let index = $index) {
-					<ng-container *luOptionOutlet="select.displayerTpl(); value: option" />
+					<ng-container *luOptionOutlet="select.displayerTpl(); value: option" />&ngsp;
 				}
 				@if (overflowOptions$ | async; as overflow) {
 					+ {{ overflow }}
