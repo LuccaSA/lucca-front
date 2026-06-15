@@ -1,4 +1,4 @@
-name: Deploy Lucca Front staging
+name: Deploy Lucca Front
 
 on:
   push:
