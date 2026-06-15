@@ -20,6 +20,7 @@ import { ResponsiveConfig, ɵeffectWithDeps } from '@lucca-front/ng/core';
 import { DataTableHeadComponent } from './data-table-head/data-table-head.component';
 import { DataTableRowComponent } from './data-table-row/data-table-row.component';
 import { LU_DATA_TABLE_INSTANCE } from './data-table.token';
+import { DataTableVerticalAlign } from './data-table.type';
 
 @Component({
 	selector: 'lu-data-table',
@@ -54,7 +55,7 @@ export class DataTableComponent implements OnInit {
 
 	readonly responsive = input<ResponsiveConfig<'layoutFixed', true>>({});
 
-	readonly verticalAlign = input<null | 'top' | 'middle' | 'bottom'>(null);
+	readonly verticalAlign = input<DataTableVerticalAlign | null>(null);
 
 	readonly rows = contentChildren(DataTableRowComponent, { descendants: true });
 	readonly header = contentChild(DataTableHeadComponent, { descendants: true });

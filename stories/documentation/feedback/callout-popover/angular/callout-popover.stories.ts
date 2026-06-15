@@ -1,8 +1,18 @@
-import { BrowserAnimationsModule } from '@angular/platform-browser/animations';
+﻿import { BrowserAnimationsModule } from '@angular/platform-browser/animations';
 import { ButtonComponent } from '@lucca-front/ng/button';
-import { CalloutFeedbackItemComponent, CalloutFeedbackItemDescriptionDirective, CalloutFeedbackListComponent, CalloutPopoverComponent } from '@lucca-front/ng/callout';
+import {
+	CALLOUT_POPOVER_SIZE,
+	CalloutFeedbackItemComponent,
+	CalloutFeedbackItemDescriptionDirective,
+	CalloutFeedbackListComponent,
+	CalloutPopoverComponent,
+	CalloutStates,
+} from '@lucca-front/ng/callout';
+import { PALETTE } from '@lucca/prisme/core';
 import { Meta, moduleMetadata, StoryObj } from '@storybook/angular';
-import { generateInputs } from 'stories/helpers/stories';
+import { createTestStory, generateInputs, setStoryOptions } from 'stories/helpers/stories';
+import { sleep, waitForAngular } from 'stories/helpers/test';
+import { expect, screen, userEvent, within } from 'storybook/test';
 
 export default {
 	title: 'Documentation/Feedback/Callout Popover/Angular',
@@ -41,7 +51,7 @@ export default {
 				min: 1,
 			},
 			if: { arg: 'customText', truthy: false },
-			description: "Nombre d'éléments présentés dans la story.",
+			description: 'Nombre d’éléments présentés dans la story.',
 		},
 		buttonLabel: {
 			description: 'Label du bouton.',
@@ -49,22 +59,29 @@ export default {
 		buttonAlt: {
 			description: 'Information restituée par le bouton.',
 		},
+		popoverPosition: {
+			options: ['', 'below', 'before', 'after'],
+			control: {
+				type: 'select',
+			},
+			description: 'Position du popover par rapport au bouton de déclenchement.',
+		},
 		icon: {
-			options: [null, 'info', 'success', 'warning', 'error', 'help'],
+			options: ['', 'info', 'success', 'warning', 'error', 'help'],
 			control: {
 				type: 'select',
 			},
 			description: 'Ajoute une icône au callout.',
 		},
 		state: {
-			options: [null, 'success', 'warning', 'error'],
+			options: setStoryOptions(CalloutStates),
 			control: {
 				type: 'select',
 			},
 			description: 'État du callout.',
 		},
 		heading: {
-			description: 'Ajoute un titre au popover.',
+			description: 'Ajoute un titre au popover. [PortalContent]',
 			if: { arg: 'customText', truthy: false },
 		},
 		headingHiddenIfSingleItem: {
@@ -72,10 +89,10 @@ export default {
 				type: 'boolean',
 			},
 			if: { arg: 'customText', truthy: false },
-			description: "Masque le titre si le popover ne contient qu'un élément.",
+			description: 'Masque le titre si le popover ne contient qu’un élément.',
 		},
 		palette: {
-			options: ['none', 'product', 'neutral'],
+			options: setStoryOptions(PALETTE),
 			control: {
 				type: 'select',
 			},
@@ -86,10 +103,16 @@ export default {
 			control: {
 				type: 'select',
 			},
-			description: "Détermine le mode d'ouverture du popover.",
+			description: 'Détermine le mode d’ouverture du popover.',
+		},
+		popoverDisabled: {
+			control: {
+				type: 'boolean',
+			},
+			description: 'Désactive l’apparition du popover.',
 		},
 		size: {
-			options: [null, 'XS', 'S', 'M'],
+			options: setStoryOptions(CALLOUT_POPOVER_SIZE),
 			control: {
 				type: 'select',
 			},
@@ -99,7 +122,7 @@ export default {
 			description: 'Délai nécessaire à la fermeture du popover.',
 		},
 		openDelay: {
-			description: "Délai nécessaire à l'ouverture du popover.",
+			description: 'Délai nécessaire à l’ouverture du popover.',
 		},
 		customText: {
 			description: 'Remplace la liste d’éléments par un texte personnalisé.',
@@ -111,16 +134,51 @@ export const Template: StoryObj<CalloutPopoverComponent & { items: number; custo
 	args: {
 		icon: 'signInfo',
 		palette: 'none',
-		state: null,
-		size: null,
 		buttonLabel: '2',
 		buttonAlt: '2 errors',
 		customText: '',
 		heading: '',
 		popoverTrigger: null,
+		popoverDisabled: false,
 		headingHiddenIfSingleItem: false,
 		items: 2,
 		closeDelay: 500,
 		openDelay: 50,
 	},
 };
+
+export const TemplateTEST = createTestStory(Template, async ({ canvasElement, step }) => {
+	await waitForAngular();
+	const canvas = within(canvasElement);
+
+	await step('Interaction souris - ouverture du popover', async () => {
+		const button = canvas.getByRole('button');
+		await userEvent.click(button);
+		await sleep(500);
+		const popoverContent = screen.getByRole('list');
+		await expect(popoverContent).toBeVisible();
+	});
+
+	await step('Interaction souris - fermeture du popover', async () => {
+		const button = canvas.getByRole('button');
+		await userEvent.click(button);
+		await sleep(500);
+		await expect(screen.queryByRole('list')).not.toBeInTheDocument();
+	});
+
+	await step('Interaction clavier - ouverture avec Entrée', async () => {
+		const button = canvas.getByRole('button');
+		button.focus();
+		await expect(button).toHaveFocus();
+		await userEvent.keyboard('{Enter}');
+		await sleep(500);
+		const popoverContent = screen.getByRole('list');
+		await expect(popoverContent).toBeVisible();
+	});
+
+	await step('Interaction clavier - fermeture avec Escape', async () => {
+		await userEvent.keyboard('{Escape}');
+		await sleep(500);
+		await expect(screen.queryByRole('list')).not.toBeInTheDocument();
+	});
+});

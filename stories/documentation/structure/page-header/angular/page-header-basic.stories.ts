@@ -1,28 +1,62 @@
+import { JsonPipe } from '@angular/common';
+import { provideHttpClient } from '@angular/common/http';
 import { FormsModule } from '@angular/forms';
 import { provideRouter } from '@angular/router';
 import { BreadcrumbsComponent, BreadcrumbsLinkDirective } from '@lucca-front/ng/breadcrumbs';
 import { ButtonComponent } from '@lucca-front/ng/button';
+import { provideCoreSelectCurrentUserId } from '@lucca-front/ng/core-select/user';
 import { FormFieldComponent } from '@lucca-front/ng/form-field';
 import { TextInputComponent } from '@lucca-front/ng/forms';
 import { HorizontalNavigationComponent, HorizontalNavigationLinkDirective } from '@lucca-front/ng/horizontal-navigation';
 import { IconComponent } from '@lucca-front/ng/icon';
+import { ImpersonationComponent } from '@lucca-front/ng/impersonation';
 import { LinkComponent } from '@lucca-front/ng/link';
 import { PageHeaderComponent } from '@lucca-front/ng/page-header';
 import { LuTooltipModule } from '@lucca-front/ng/tooltip';
 import { applicationConfig, Meta, moduleMetadata } from '@storybook/angular';
 import { generateInputs } from 'stories/helpers/stories';
 
+const me = { id: 66, picture: null, department: { id: 3, name: 'Commercial' }, firstName: 'Pierre', lastName: 'Durand' };
+
 export default {
 	title: 'Documentation/Structure/PageHeader/Angular/Basic',
 	argTypes: {
 		label: {
-			description: 'PortalContent',
+			description: 'Titre du composant. [PortalContent]',
 		},
 		description: {
-			description: 'PortalContent',
+			description: 'Description du composant. [PortalContent]',
 		},
 		container: {
 			description: '[v20.1] Applique un container autour du contenu de Page Header.',
+		},
+		sticky: {
+			description: '[v21.2] Applique un comportement sticky au Page Header quand celui ci n’est pas géré par le Main Layout',
+		},
+		breadcrumbs: {
+			description: 'Exemple avec fil d’Ariane.',
+		},
+		actions: {
+			description: 'Exemple avec des actions générales.',
+		},
+		titleActions: {
+			description: 'Exemple avec des actions spécifiques au titre.',
+		},
+		navigation: {
+			description: 'Exemple avec une navigation horizontale.',
+		},
+		backAction: {
+			description: 'Exemple avec une action de retour en arrière.',
+		},
+		leading: {
+			description: 'Ajout d’un slot avant le titre.',
+		},
+		trailing: {
+			if: { arg: 'trailingWithImpersonation', truthy: false },
+			description: 'Ajout d’un slot après le titre.',
+		},
+		trailingWithImpersonation: {
+			description: 'Utilisation du slot après le titre pour passer l’impersonation',
 		},
 	},
 	decorators: [
@@ -40,68 +74,94 @@ export default {
 				HorizontalNavigationLinkDirective,
 				BreadcrumbsComponent,
 				BreadcrumbsLinkDirective,
+				ImpersonationComponent,
+				JsonPipe,
 			],
 		}),
+
 		applicationConfig({
-			providers: [provideRouter([{ path: 'iframe.html', redirectTo: '', pathMatch: 'full' }])],
+			providers: [provideRouter([{ path: 'iframe.html', redirectTo: '', pathMatch: 'full' }]), provideHttpClient(), provideCoreSelectCurrentUserId(() => 66)],
 		}),
 	],
 	render: (args, { argTypes }) => {
-		const { breadcrumbs, actions, navigation, backAction, titleActions, leading, trailing, ...otherArgs } = args;
+		const { breadcrumbs, actions, navigation, backAction, titleActions, leading, trailing, trailingWithImpersonation, ...otherArgs } = args;
 		const titleActionsContainer = titleActions
-			? `<ng-container pageHeaderTitleActions>
-	<button type="button" luButton="ghost" luTooltip="Modifier" luTooltipOnlyForDisplay><lu-icon icon="officePen" alt="Modifier" /></button>
-	<button type="button" luButton="ghost" luTooltip="Copier" luTooltipOnlyForDisplay><lu-icon icon="fileCopy" alt="Copier" /></button>
-	<button type="button" luButton="ghost" luTooltip="Supprimer" luTooltipOnlyForDisplay><lu-icon icon="trashDelete" alt="Supprimer" /></button>
-</ng-container>`
+			? `
+	<ng-container pageHeaderTitleActions>
+		<button type="button" luButton="ghost" luTooltip="Modifier" luTooltipOnlyForDisplay><lu-icon icon="officePen" alt="Modifier" /></button>
+		<button type="button" luButton="ghost" luTooltip="Copier" luTooltipOnlyForDisplay><lu-icon icon="fileCopy" alt="Copier" /></button>
+		<button type="button" luButton="ghost" luTooltip="Supprimer" luTooltipOnlyForDisplay><lu-icon icon="trashDelete" alt="Supprimer" /></button>
+	</ng-container>`
 			: ``;
 		const backActionContainer = backAction
-			? `<ng-container pageHeaderBackAction>
-	<a href="#" luButton>
-		<lu-icon icon="arrowLeft" alt="Retour" />
-	</a>
-</ng-container>`
+			? `
+	<ng-container pageHeaderBackAction>
+		<a href="#" luButton>
+			<lu-icon icon="arrowLeft" alt="Retour" />
+		</a>
+	</ng-container>`
 			: ``;
 		const navigationContainer = navigation
-			? `<ng-container pageHeaderNavigation>
-	<lu-horizontal-navigation >
-		<a *luHorizontalNavigationLink class="horizontalNavigation-list-item-action" href="#" aria-current="page">Page</a>
-		<a *luHorizontalNavigationLink class="horizontalNavigation-list-item-action" href="#">Page</a>
-		<a *luHorizontalNavigationLink class="horizontalNavigation-list-item-action" href="#">Page</a>
-	</lu-horizontal-navigation>
-</ng-container>`
+			? `
+	<ng-container pageHeaderNavigation>
+		<lu-horizontal-navigation >
+			<a *luHorizontalNavigationLink class="horizontalNavigation-list-item-action" href="#" aria-current="page">Page</a>
+			<a *luHorizontalNavigationLink class="horizontalNavigation-list-item-action" href="#">Page</a>
+			<a *luHorizontalNavigationLink class="horizontalNavigation-list-item-action" href="#">Page</a>
+		</lu-horizontal-navigation>
+	</ng-container>`
 			: ``;
 		const actionsContainer = actions
-			? `<ng-container pageHeaderActions>
-	<lu-form-field label="Label" hiddenLabel>
-		<lu-text-input
-			hasSearchIcon
-			type="text"
-			placeholder="ex : Mon précieux"
-			[(ngModel)]="example"
-		></lu-text-input>
-	</lu-form-field>
-	<button type="button" luButton>Button</button>
-	<button type="button" luButton="outlined">Button</button>
-	<button type="button" luButton="ghost"><lu-icon icon="menuDots" alt="Voir plus d’options" /></button>
-</ng-container>`
+			? `
+	<ng-container pageHeaderActions>
+		<lu-form-field label="Label" hiddenLabel>
+			<lu-text-input
+				hasSearchIcon
+				type="text"
+				placeholder="ex : Mon précieux"
+				[(ngModel)]="example"
+			></lu-text-input>
+		</lu-form-field>
+		<button type="button" luButton>Button</button>
+		<button type="button" luButton="outlined">Button</button>
+		<button type="button" luButton="ghost"><lu-icon icon="menuDots" alt="Voir plus d’options" /></button>
+	</ng-container>`
 			: ``;
 		const breadcrumbsContainer = breadcrumbs
-			? `<ng-container pageHeaderBreadcrumbs>
-	<lu-breadcrumbs>
-		<a *luBreadcrumbsLink class="breadcrumbs-list-item-action" routerLink="/" ariaCurrentWhenActive="page">Page 0</a>
-		<a *luBreadcrumbsLink class="breadcrumbs-list-item-action" ariaCurrentWhenActive="page" href="#2">Page 1</a>
-		<a *luBreadcrumbsLink class="breadcrumbs-list-item-action" aria-current="page">Page 2</a>
-	</lu-breadcrumbs>
-</ng-container>`
+			? `
+	<ng-container pageHeaderBreadcrumbs>
+		<lu-breadcrumbs>
+			<a *luBreadcrumbsLink class="breadcrumbs-list-item-action" routerLink="/" ariaCurrentWhenActive="page">Page 0</a>
+			<a *luBreadcrumbsLink class="breadcrumbs-list-item-action" ariaCurrentWhenActive="page" href="#2">Page 1</a>
+			<a *luBreadcrumbsLink class="breadcrumbs-list-item-action" aria-current="page">Page 2</a>
+		</lu-breadcrumbs>
+	</ng-container>`
 			: ``;
-		const leadingContainer = leading ? `<ng-container pageHeaderLeading>${leading}</ng-container>` : ``;
-		const trailingContainer = trailing ? `<ng-container pageHeaderTrailing>${trailing}</ng-container>` : ``;
-		return {
-			template: `<lu-page-header ${generateInputs(otherArgs, argTypes)}>
-${breadcrumbsContainer}${backActionContainer}${leadingContainer}${titleActionsContainer}${trailingContainer}${actionsContainer}${navigationContainer}
+		const leadingContainer = leading
+			? `
+	<ng-container pageHeaderLeading>${leading}</ng-container>`
+			: ``;
+		const trailingContainer =
+			trailing || trailingWithImpersonation
+				? `
+	<ng-container pageHeaderTrailing>
+	${trailingWithImpersonation ? `	<lu-impersonation [(selectedUser)]="example" (clear)="example = me" />` : trailing}
+	</ng-container>`
+				: ``;
+		if (breadcrumbsContainer || backActionContainer || leadingContainer || titleActionsContainer || trailingContainer || trailingWithImpersonation || actionsContainer || navigationContainer) {
+			return {
+				template: `<lu-page-header${generateInputs(otherArgs, argTypes)}>${breadcrumbsContainer}${backActionContainer}${leadingContainer}${titleActionsContainer}${trailingContainer}${actionsContainer}${navigationContainer}
 </lu-page-header>`,
-		};
+				props: {
+					example: me,
+					me,
+				},
+			};
+		} else {
+			return {
+				template: `<lu-page-header${generateInputs(otherArgs, argTypes)} />`,
+			};
+		}
 	},
 } as Meta;
 
@@ -115,7 +175,9 @@ export const Basic = {
 		navigation: false,
 		backAction: false,
 		container: false,
-		leading: '',
+		sticky: false,
+		trailingWithImpersonation: false,
 		trailing: '',
+		leading: '',
 	},
 };

@@ -20,7 +20,7 @@
 		inset: auto 0 0;
 	}
 
-	// .label is deprecated
+	// stylelint-disable-next-line selector-disallowed-list -- .label is deprecated
 	.label {
 		margin-inline-end: 0;
 		background-color: var(--palettes-neutral-100);
@@ -28,16 +28,23 @@
 	}
 
 	@at-root ($atRoot) {
-		// .menu-containerOptional is deprecated
-		.horizontalNavigation-containerOptional,
-		.menu-containerOptional {
-			max-inline-size: var(--commons-container-maxWidth);
-			padding: var(--commons-container-padding);
+		.horizontalNavigationWrapper {
+			grid-area: overflow;
+			min-block-size: 0;
+			display: flex;
+			flex-direction: column;
 		}
 
-		// .menu-list is deprecated
-		.horizontalNavigation-list,
-		.menu-list {
+		// stylelint-disable-next-line selector-disallowed-list -- .menu-containerOptional is deprecated
+		.menu-containerOptional,
+		.horizontalNavigation-containerOptional {
+			max-inline-size: var(--commons-container-maxWidth);
+			padding: var(--components-horizontalNavigation-containerOptional-padding);
+		}
+
+		// stylelint-disable-next-line selector-disallowed-list -- .menu-list is deprecated
+		.menu-list,
+		.horizontalNavigation-list {
 			@include reset.list;
 
 			align-items: var(--components-horizontalNavigation-listAlign);
@@ -52,11 +59,9 @@
 			}
 		}
 
-		// .menu-link is deprecated
-		// .menu-list-item-action is deprecated
-		.horizontalNavigation-list-item-action,
-		.menu-list-item-action,
-		.menu-link {
+		.menu-link, // stylelint-disable-line selector-disallowed-list -- .menu-list is deprecated
+		.menu-list-item-action, // stylelint-disable-line selector-disallowed-list -- .menu-link-item-action is deprecated
+		.horizontalNavigation-list-item-action {
 			@include reset.button;
 
 			font: var(--components-horizontalNavigation-listItemActionFont);
@@ -112,7 +117,7 @@
 						color: var(--palettes-neutral-900);
 					}
 
-					// .label is deprecated
+					// stylelint-disable-next-line selector-disallowed-list -- .label is deprecated
 					.label {
 						background-color: var(--palettes-100, var(--palettes-product-100));
 						color: var(--palettes-700, var(--palettes-product-700));
@@ -129,15 +134,30 @@
 			}
 		}
 
-		// .menu-link-placeholder is deprecated
-		.horizontalNavigation-link-placeholder,
-		.menu-link-placeholder {
+		// stylelint-disable-next-line selector-disallowed-list -- .menu-link-placeholder is deprecated
+		.menu-link-placeholder,
+		.horizontalNavigation-link-placeholder {
 			&::after {
 				content: attr(data-content-after);
 				display: block;
 				block-size: 0;
 				overflow: hidden;
 				font-weight: var(--pr-t-font-fontWeight-semibold);
+			}
+		}
+
+		.horizontalNavigation_panel {
+			display: var(--components-horizontalNavigation-panel-display);
+			overflow: var(--components-horizontalNavigation-panel-overflow);
+			min-height: 0;
+			flex-direction: column;
+
+			&:focus-visible {
+				@include a11y.focusVisible($offset: -2px, $borderRadius: var(--pr-t-border-radius-small));
+			}
+
+			&:not(.is-active) {
+				display: none;
 			}
 		}
 	}

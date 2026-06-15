@@ -34,7 +34,7 @@ describe('actionIcon Migration', () => {
 			...glob.sync('packages/scss/**/*.scss', { cwd: lfRoot, nodir: true }),
 			...glob.sync('packages/ng/**/*', { cwd: lfRoot, nodir: true, ignore: ['**/schematics/**'] }),
 			...glob.sync('stories/**', { cwd: lfRoot, nodir: true }),
-		];
+		] as string[];
 
 		const treeOriginalTree = createTreeFromFiles(lfRoot, lfFiles, '.');
 		const tree = createTreeFromFiles(lfRoot, lfFiles, '.');

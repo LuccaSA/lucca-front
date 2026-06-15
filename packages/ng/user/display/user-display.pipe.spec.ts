@@ -1,6 +1,18 @@
-import { createPipeFactory, SpectatorPipe } from '@ngneat/spectator/jest';
+import { ChangeDetectionStrategy, Component, Provider, input } from '@angular/core';
+import { TestBed } from '@angular/core/testing';
 import { LU_DEFAULT_DISPLAY_POLICY, LuDisplayFullname, LuDisplayHybrid, LuDisplayInitials } from './display-format.model';
-import { luUserDisplay, LuUserDisplayPipe } from './user-display.pipe';
+import { luUserDisplay, LuUserDisplayInput, LuUserDisplayPipe } from './user-display.pipe';
+
+@Component({
+	template: ``,
+	imports: [LuUserDisplayPipe],
+	changeDetection: ChangeDetectionStrategy.OnPush,
+})
+class HostComponent {
+	readonly user = input<LuUserDisplayInput>();
+	readonly users = input<LuUserDisplayInput[]>();
+	readonly formatter = input<Intl.ListFormat>();
+}
 
 describe(LuUserDisplayPipe.name, () => {
 	const users = [
@@ -11,8 +23,60 @@ describe(LuUserDisplayPipe.name, () => {
 	const user = users[0];
 	const userFirst = { firstName: user.firstName, lastName: '' };
 	const userLast = { firstName: '', lastName: user.lastName };
+	const userWithNullLastName = { firstName: 'John', lastName: null } as unknown as LuUserDisplayInput;
+	const userWithNullFirstName = { firstName: null, lastName: 'Doe' } as unknown as LuUserDisplayInput;
+	const userWithNoLastName = { firstName: 'John' } as unknown as LuUserDisplayInput;
+	const userWithNoFirstName = { lastName: 'Doe' } as unknown as LuUserDisplayInput;
 
 	describe('luUserDisplay()', () => {
+		describe('fallback when lastName is missing', () => {
+			it('should fallback to first name (full) for fullname formats', () => {
+				expect(luUserDisplay(userWithNullLastName, LuDisplayFullname.lastfirst)).toBe('John');
+				expect(luUserDisplay(userWithNoLastName, LuDisplayFullname.firstlast)).toBe('John');
+				expect(luUserDisplay(userWithNullLastName, LuDisplayFullname.last)).toBe('John');
+			});
+
+			it('should fallback to first name (initial) for initials formats', () => {
+				expect(luUserDisplay(userWithNullLastName, LuDisplayInitials.lastfirst)).toBe('J');
+				expect(luUserDisplay(userWithNoLastName, LuDisplayInitials.firstlast)).toBe('J');
+				expect(luUserDisplay(userWithNullLastName, LuDisplayInitials.last)).toBe('J');
+			});
+
+			it('should fallback to first name (full) for hybrid formats containing f', () => {
+				expect(luUserDisplay(userWithNullLastName, LuDisplayHybrid.lastIfirstFull)).toBe('John');
+				expect(luUserDisplay(userWithNoLastName, LuDisplayHybrid.firstFulllastI)).toBe('John');
+			});
+
+			it('should fallback to first name (initial) for hybrid formats without f', () => {
+				expect(luUserDisplay(userWithNullLastName, LuDisplayHybrid.firstIlastFull)).toBe('J');
+				expect(luUserDisplay(userWithNoLastName, LuDisplayHybrid.lastFullfirstI)).toBe('J');
+			});
+		});
+
+		describe('fallback when firstName is missing', () => {
+			it('should fallback to last name (full) for fullname formats', () => {
+				expect(luUserDisplay(userWithNullFirstName, LuDisplayFullname.lastfirst)).toBe('Doe');
+				expect(luUserDisplay(userWithNoFirstName, LuDisplayFullname.firstlast)).toBe('Doe');
+				expect(luUserDisplay(userWithNullFirstName, LuDisplayFullname.first)).toBe('Doe');
+			});
+
+			it('should fallback to last name (initial) for initials formats', () => {
+				expect(luUserDisplay(userWithNullFirstName, LuDisplayInitials.lastfirst)).toBe('D');
+				expect(luUserDisplay(userWithNoFirstName, LuDisplayInitials.firstlast)).toBe('D');
+				expect(luUserDisplay(userWithNullFirstName, LuDisplayInitials.first)).toBe('D');
+			});
+
+			it('should fallback to last name (full) for hybrid formats containing l', () => {
+				expect(luUserDisplay(userWithNullFirstName, LuDisplayHybrid.firstIlastFull)).toBe('Doe');
+				expect(luUserDisplay(userWithNoFirstName, LuDisplayHybrid.lastFullfirstI)).toBe('Doe');
+			});
+
+			it('should fallback to last name (initial) for hybrid formats without l', () => {
+				expect(luUserDisplay(userWithNullFirstName, LuDisplayHybrid.lastIfirstFull)).toBe('D');
+				expect(luUserDisplay(userWithNoFirstName, LuDisplayHybrid.firstFulllastI)).toBe('D');
+			});
+		});
+
 		it("should return the right value with 'lf' format", () => {
 			expect(luUserDisplay(user, LuDisplayFullname.lastfirst)).toBe('Doe John');
 			expect(luUserDisplay(userFirst, LuDisplayFullname.lastfirst)).toBe('John');
@@ -87,83 +151,60 @@ describe(LuUserDisplayPipe.name, () => {
 	});
 
 	describe('| luUserDisplay', () => {
-		let spectator: SpectatorPipe<LuUserDisplayPipe>;
-		const createPipe = createPipeFactory(LuUserDisplayPipe);
+		function createPipe(template: string, inputs: Partial<{ user: LuUserDisplayInput; users: LuUserDisplayInput[]; formatter: Intl.ListFormat }>, providers: Provider[] = []): string {
+			TestBed.configureTestingModule({
+				imports: [HostComponent],
+				providers,
+			});
+			TestBed.overrideComponent(HostComponent, { set: { template } });
+
+			const fixture = TestBed.createComponent(HostComponent);
+			if (inputs.user) {
+				fixture.componentRef.setInput('user', inputs.user);
+			}
+			if (inputs.users) {
+				fixture.componentRef.setInput('users', inputs.users);
+			}
+			if (inputs.formatter) {
+				fixture.componentRef.setInput('formatter', inputs.formatter);
+			}
+			fixture.detectChanges();
+
+			return (fixture.nativeElement as HTMLElement).textContent?.trim() ?? '';
+		}
 
 		it(`should return the right single value with default 'lf' format`, () => {
-			spectator = createPipe(`{{ user | luUserDisplay }}`, {
-				hostProps: {
-					user,
-				},
-			});
-			expect(spectator.element).toHaveText('Doe John');
+			expect(createPipe(`{{ user() | luUserDisplay }}`, { user })).toBe('Doe John');
 		});
 
 		it(`should return the right single value with provide 'fl' format`, () => {
 			const provider = { provide: LU_DEFAULT_DISPLAY_POLICY, useValue: LuDisplayFullname.firstlast };
-			spectator = createPipe(`{{ user | luUserDisplay }}`, {
-				hostProps: {
-					user,
-				},
-				providers: [provider],
-			});
-			expect(spectator.element).toHaveText('John Doe');
+			expect(createPipe(`{{ user() | luUserDisplay }}`, { user }, [provider])).toBe('John Doe');
 		});
 
 		it(`should return the right single value with specify 'FL' format`, () => {
-			spectator = createPipe(`{{ user | luUserDisplay:'FL' }}`, {
-				hostProps: {
-					user,
-				},
-			});
-			expect(spectator.element).toHaveText('JD');
+			expect(createPipe(`{{ user() | luUserDisplay:'FL' }}`, { user })).toBe('JD');
 		});
 
 		it(`should return the right multiple value with default 'lf' format and default ', ' separator`, () => {
-			spectator = createPipe(`{{ users | luUserDisplay }}`, {
-				hostProps: {
-					users,
-				},
-			});
-			expect(spectator.element).toHaveText('Doe John, Scott Michael, Schrute Dwight');
+			expect(createPipe(`{{ users() | luUserDisplay }}`, { users })).toBe('Doe John, Scott Michael, Schrute Dwight');
 		});
 
 		it(`should return the right multiple value with default 'lf' format and '; ' separator`, () => {
-			spectator = createPipe(`{{ users | luUserDisplay:{ separator: '; ' } }}`, {
-				hostProps: {
-					users,
-				},
-			});
-			expect(spectator.element).toHaveText('Doe John; Scott Michael; Schrute Dwight');
+			expect(createPipe(`{{ users() | luUserDisplay:{ separator: '; ' } }}`, { users })).toBe('Doe John; Scott Michael; Schrute Dwight');
 		});
 
 		it(`should return the right multiple value with default 'Lf' format and default ', ' separator`, () => {
-			spectator = createPipe(`{{ users | luUserDisplay:{ format: 'Lf' } }}`, {
-				hostProps: {
-					users,
-				},
-			});
-			expect(spectator.element).toHaveText('D. John, S. Michael, S. Dwight');
+			expect(createPipe(`{{ users() | luUserDisplay:{ format: 'Lf' } }}`, { users })).toBe('D. John, S. Michael, S. Dwight');
 		});
 
 		it(`should return the right multiple value with specify 'Fl' format and ' ' separator`, () => {
-			spectator = createPipe(`{{ users | luUserDisplay:{ format: 'Fl', separator: ' ' } }}`, {
-				hostProps: {
-					users,
-				},
-			});
-			expect(spectator.element).toHaveText('J. Doe M. Scott D. Schrute');
+			expect(createPipe(`{{ users() | luUserDisplay:{ format: 'Fl', separator: ' ' } }}`, { users })).toBe('J. Doe M. Scott D. Schrute');
 		});
 
 		it(`should return the right multiple value with specify 'fL' format and formatter`, () => {
 			const formatter = new Intl.ListFormat('en', { style: 'long', type: 'conjunction' });
-			spectator = createPipe(`{{ users | luUserDisplay:{ format: 'fL', formatter } }}`, {
-				hostProps: {
-					users,
-					formatter,
-				},
-			});
-			expect(spectator.element).toHaveText('John D., Michael S., and Dwight S.');
+			expect(createPipe(`{{ users() | luUserDisplay:{ format: 'fL', formatter: formatter() } }}`, { users, formatter })).toBe('John D., Michael S., and Dwight S.');
 		});
 	});
 });

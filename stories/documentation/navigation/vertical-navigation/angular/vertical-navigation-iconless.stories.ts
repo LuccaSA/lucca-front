@@ -34,7 +34,8 @@ export default {
 		<lu-vertical-navigation-item>
 			<a luVerticalNavigationLink href="#">Item 3</a>
 		</lu-vertical-navigation-item>
-	</lu-vertical-navigation-group>`,
+	</lu-vertical-navigation-group>
+</lu-vertical-navigation>`,
 		};
 	},
 } as Meta;

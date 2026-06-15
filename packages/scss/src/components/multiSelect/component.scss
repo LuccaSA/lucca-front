@@ -32,6 +32,13 @@
 			flex: 1;
 		}
 
+		.multipleSelect-displayer-suffix {
+			display: var(--components-multiSelect-displayer-suffix-display);
+			gap: var(--pr-t-spacings-50);
+			flex: 1;
+			order: 1;
+		}
+
 		.multipleSelect-displayer-chip.chip {
 			min-inline-size: 0;
 
@@ -91,6 +98,10 @@
 
 		.multipleSelect-pill-displayer-label {
 			font-weight: var(--pr-t-font-fontWeight-semibold);
+		}
+
+		.multiSelect-field-icon {
+			order: 1;
 		}
 	}
 }

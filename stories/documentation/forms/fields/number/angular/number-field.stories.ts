@@ -1,9 +1,12 @@
 import { FormsModule, ReactiveFormsModule } from '@angular/forms';
 import { BrowserAnimationsModule } from '@angular/platform-browser/animations';
-import { FormFieldComponent } from '@lucca-front/ng/form-field';
+import { FORM_FIELD_SIZE, FormFieldComponent } from '@lucca-front/ng/form-field';
 import { NumberInputComponent } from '@lucca-front/ng/forms';
+import { INLINE_MESSAGE_STATE } from '@lucca-front/ng/inline-message';
 import { Meta, moduleMetadata, StoryObj } from '@storybook/angular';
-import { cleanupTemplate, generateInputs } from 'stories/helpers/stories';
+import { cleanupTemplate, createTestStory, generateInputs, setStoryOptions } from 'stories/helpers/stories';
+import { waitForAngular } from 'stories/helpers/test';
+import { expect, userEvent, within } from 'storybook/test';
 import { StoryModelDisplayComponent } from 'stories/helpers/story-model-display.component';
 
 export default {
@@ -20,7 +23,7 @@ export default {
 			if: { arg: 'hiddenLabel', truthy: false },
 		},
 		size: {
-			options: ['M', 'S', 'XS'],
+			options: setStoryOptions(FORM_FIELD_SIZE),
 			control: {
 				type: 'select',
 			},
@@ -30,23 +33,23 @@ export default {
 			description: 'Ajoute un texte descriptif (aide, erreur, etc.) sous le champ de formulaire.',
 		},
 		inlineMessageState: {
-			options: ['default', 'success', 'warning', 'error'],
+			options: setStoryOptions(INLINE_MESSAGE_STATE),
 			control: {
 				type: 'select',
 			},
-			description: "Modifie l'état de l'inline message.",
+			description: 'Modifie l’état de l’inline message.',
 		},
 		label: {
 			description: 'Modifie le label de l’input.',
 		},
 		hiddenLabel: {
-			description: "Masque le label en le conservant dans le DOM pour les lecteurs d'écrans",
+			description: 'Masque le label en le conservant dans le DOM pour les lecteurs d’écran',
 		},
 		required: {
 			description: 'Marque le champ comme obligatoire.',
 		},
 		hasClearer: {
-			description: "Affiche un bouton pour vider le champ lorsque celui-ci est rempli. Il est alors conseillé de masquer les boutons d'incrémentation (noSpinButtons).",
+			description: 'Affiche un bouton pour vider le champ lorsque celui-ci est rempli. Il est alors conseillé de masquer les boutons d’incrémentation (noSpinButtons).',
 		},
 		disabled: {
 			description: 'Désactive le champ.',
@@ -55,7 +58,7 @@ export default {
 			description: 'Modifie le placeholder au champ.',
 		},
 		step: {
-			description: "Modifie le pas d'incrémentation.",
+			description: 'Modifie le pas d’incrémentation.',
 		},
 		min: {
 			description: 'Définit une valeur minimale.',
@@ -67,7 +70,7 @@ export default {
 			description: 'Aligne la valeur du champ à droite.',
 		},
 		noSpinButtons: {
-			description: "Masque les boutons d'incrémentation.",
+			description: 'Masque les boutons d’incrémentation.',
 		},
 	},
 } as Meta;
@@ -173,3 +176,30 @@ export const WithPrefixAndSuffix: StoryObj<
 		valueAlignRight: false,
 	},
 };
+
+export const BasicTEST = createTestStory(Basic, async ({ canvasElement, step }) => {
+	await waitForAngular();
+	const canvas = within(canvasElement);
+
+	await step('Vérifie le rendu initial', async () => {
+		const input = canvas.getByRole('spinbutton');
+		await expect(input).toBeVisible();
+	});
+
+	await step('Interaction souris - saisir un nombre', async () => {
+		const input = canvas.getByRole('spinbutton');
+		await userEvent.clear(input);
+		await userEvent.type(input, '42');
+		await waitForAngular();
+		await expect(input).toHaveValue(42);
+	});
+
+	await step('Interaction clavier - focus et saisie', async () => {
+		const input = canvas.getByRole('spinbutton');
+		await userEvent.clear(input);
+		input.focus();
+		await userEvent.keyboard('123');
+		await waitForAngular();
+		await expect(input).toHaveValue(123);
+	});
+});

@@ -1,9 +1,12 @@
 import { FormsModule } from '@angular/forms';
 import { BrowserAnimationsModule } from '@angular/platform-browser/animations';
-import { FormFieldComponent } from '@lucca-front/ng/form-field';
+import { FORM_FIELD_SIZE, FormFieldComponent } from '@lucca-front/ng/form-field';
 import { CheckboxInputComponent } from '@lucca-front/ng/forms';
+import { INLINE_MESSAGE_STATE } from '@lucca-front/ng/inline-message';
 import { Meta, moduleMetadata, StoryObj } from '@storybook/angular';
-import { cleanupTemplate, generateInputs } from 'stories/helpers/stories';
+import { cleanupTemplate, createTestStory, generateInputs, setStoryOptions } from 'stories/helpers/stories';
+import { sleep, waitForAngular } from 'stories/helpers/test';
+import { expect, userEvent, within } from 'storybook/test';
 import { StoryModelDisplayComponent } from 'stories/helpers/story-model-display.component';
 
 export default {
@@ -15,21 +18,21 @@ export default {
 	],
 	argTypes: {
 		size: {
-			options: ['M', 'S'],
+			options: setStoryOptions(FORM_FIELD_SIZE),
 			control: {
 				type: 'select',
 			},
 			description: 'Modifie la taille de la checkbox.',
 		},
 		inlineMessageState: {
-			options: ['default', 'success', 'warning', 'error'],
+			options: setStoryOptions(INLINE_MESSAGE_STATE),
 			control: {
 				type: 'select',
 			},
-			description: "Modifie l'état de l'inline message.",
+			description: 'Modifie l’état de l’inline message.',
 		},
 		hiddenLabel: {
-			description: "Masque le label en le conservant dans le DOM pour les lecteurs d'écrans",
+			description: 'Masque le label en le conservant dans le DOM pour les lecteurs d’écran',
 		},
 		tooltip: {
 			if: { arg: 'hiddenLabel', truthy: false },
@@ -39,13 +42,13 @@ export default {
 			control: {
 				type: 'boolean',
 			},
-			description: "[v20.2] Présente la checkbox sous la forme d'un élément d'une liste de tâches.",
+			description: '[v20.2] Présente la checkbox sous la forme d’un élément d’une liste de tâches.',
 		},
 		label: {
 			control: {
 				type: 'text',
 			},
-			description: "Modifie le label de l'input.",
+			description: 'Modifie le label de l’input.',
 		},
 		required: {
 			control: {
@@ -78,7 +81,7 @@ export const Basic: StoryObj<CheckboxInputComponent & FormFieldComponent & { req
 			props: {
 				example: false,
 			},
-			template: cleanupTemplate(`<lu-form-field ${generateInputs(
+			template: cleanupTemplate(`<lu-form-field${generateInputs(
 				{
 					label,
 					hiddenLabel,
@@ -110,3 +113,37 @@ export const Basic: StoryObj<CheckboxInputComponent & FormFieldComponent & { req
 		presentation: false,
 	},
 };
+
+export const BasicTEST = createTestStory(Basic, async ({ canvasElement, step }) => {
+	await waitForAngular();
+	const canvas = within(canvasElement);
+
+	await step('Vérifie le rendu initial', async () => {
+		const checkbox = canvas.getByRole('checkbox');
+		await expect(checkbox).toBeVisible();
+		await expect(checkbox).not.toBeChecked();
+	});
+
+	await step('Interaction souris - cocher', async () => {
+		const checkbox = canvas.getByRole('checkbox');
+		await userEvent.click(checkbox);
+		await sleep(200);
+		await expect(checkbox).toBeChecked();
+	});
+
+	await step('Interaction souris - décocher', async () => {
+		const checkbox = canvas.getByRole('checkbox');
+		await userEvent.click(checkbox);
+		await waitForAngular();
+		await expect(checkbox).not.toBeChecked();
+	});
+
+	// We have issues with keyboard interactions testing in general
+	// await step('Interaction clavier - espace pour cocher', async () => {
+	// 	const checkbox = canvas.getByRole('checkbox');
+	// 	checkbox.focus();
+	// 	await userEvent.keyboard('{Space}');
+	// 	await waitForAngular();
+	// 	await expect(checkbox).toBeChecked();
+	// });
+});

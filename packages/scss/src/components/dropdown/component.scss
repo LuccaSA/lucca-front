@@ -13,9 +13,9 @@
 	overflow-y: auto;
 
 	@at-root ($atRoot) {
-		// .lu-dropdown-options is deprecated
-		.dropdown-list,
-		.lu-dropdown-options {
+		// stylelint-disable-next-line selector-disallowed-list -- .lu-dropdown-options is deprecated
+		.lu-dropdown-options,
+		.dropdown-list {
 			list-style-type: none;
 			padding-block: var(--pr-t-spacings-50);
 			padding-inline: 0;
@@ -29,9 +29,9 @@
 			}
 		}
 
-		// .lu-dropdown-options-item is deprecated
-		.dropdown-list-option,
-		.lu-dropdown-options-item {
+		// stylelint-disable-next-line selector-disallowed-list -- .lu-dropdown-options-item is deprecated
+		.lu-dropdown-options-item,
+		.dropdown-list-option {
 			padding-block: 0;
 
 			&:not(:has(.divider.dropdown-list-option-divider, .dropdown-list-option), &.mod-divider) {
@@ -55,9 +55,9 @@
 			}
 		}
 
-		// .lu-dropdown-options-item-action is deprecated
-		.dropdown-list-option-action,
-		.lu-dropdown-options-item-action {
+		// stylelint-disable-next-line selector-disallowed-list -- .lu-dropdown-options-item-action is deprecated
+		.lu-dropdown-options-item-action,
+		.dropdown-list-option-action {
 			border: 0;
 			border-radius: var(--pr-t-border-radius-default);
 			background-color: var(--components-dropdown-list-option-action-backgroundColor);

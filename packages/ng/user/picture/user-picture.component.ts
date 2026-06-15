@@ -2,6 +2,7 @@ import { NgStyle } from '@angular/common';
 import { booleanAttribute, ChangeDetectionStrategy, Component, computed, inject, input, linkedSignal, ViewEncapsulation } from '@angular/core';
 import { isNotNilOrEmptyString } from '@lucca-front/ng/core';
 import { LU_DEFAULT_DISPLAY_POLICY, LuDisplayFormat, LuDisplayFullname, LuDisplayHybrid, LuDisplayInitials, luUserDisplay } from '../display';
+import { UserPictureSize } from './user-picture.type';
 
 export interface LuUserPictureUserInput {
 	picture?: { href: string } | null;
@@ -39,6 +40,8 @@ export const displayPictureFormatRecord: Record<LuDisplayFormat, LuDisplayInitia
 	host: {
 		class: 'avatar',
 		'[class.mod-AI]': 'AI()',
+		'[class.mod-softRounded]': 'softRounded()',
+		'[class.mod-placeholder]': 'placeholder()',
 		'[class.mod-XS]': 'size() === "XS"',
 		'[class.mod-S]': 'size() === "S"',
 		'[class.mod-M]': 'size() === "M"',
@@ -61,7 +64,11 @@ export class LuUserPictureComponent {
 
 	readonly AI = input(false, { transform: booleanAttribute });
 
-	readonly size = input<'XS' | 'S' | 'M' | 'L' | 'XL' | 'XXL' | 'XXXL'>('M');
+	readonly placeholder = input(false, { transform: booleanAttribute });
+
+	readonly softRounded = input(false, { transform: booleanAttribute });
+
+	readonly size = input<UserPictureSize>('M');
 
 	/**
 	 * Image loading attribute
@@ -74,12 +81,9 @@ export class LuUserPictureComponent {
 	readonly initials = computed(() => luUserDisplay(this.user(), this.displayFormat()));
 	readonly modSize = computed(() => `mod-${this.size()}`);
 	readonly hasPicture = linkedSignal(() => isNotNilOrEmptyString(this.pictureHref()));
-	readonly pictureHref = computed(() => {
+	readonly pictureHref = linkedSignal(() => {
 		const user = this.user();
-		if (user) {
-			return user?.picture?.href || user?.pictureHref;
-		}
-		return null;
+		return user?.picture?.href || user?.pictureHref || null;
 	});
 	readonly style = linkedSignal(() => {
 		if (!this.hasPicture()) {
@@ -98,6 +102,15 @@ export class LuUserPictureComponent {
 	});
 
 	pictureError() {
+		const user = this.user();
+		const currentHref = this.pictureHref();
+		const fallbackHref = user?.pictureHref;
+
+		if (isNotNilOrEmptyString(fallbackHref) && fallbackHref !== currentHref) {
+			this.pictureHref.set(fallbackHref);
+			return;
+		}
+
 		this.hasPicture.set(false);
 		const hsl = this.#getNameHue();
 		this.style.set({ 'background-color': `hsl(${hsl}, 60%, 60%)` });

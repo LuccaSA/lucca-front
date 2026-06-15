@@ -163,7 +163,9 @@
 			}
 
 			&:last-child {
-				--components-dataTable-cell-shadow: 0 1px inset var(--commons-border-200), 1px 0 inset var(--commons-border-200),
+				--components-dataTable-cell-shadow:
+					0 1px inset var(--commons-border-200),
+					1px 0 inset var(--commons-border-200),
 					1px 0 var(--palettes-neutral-0); // white shadow is for Chrome
 			}
 		}

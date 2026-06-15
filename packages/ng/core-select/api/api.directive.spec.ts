@@ -1,7 +1,7 @@
 import { ChangeDetectionStrategy, Component, Directive } from '@angular/core';
-import { fakeAsync } from '@angular/core/testing';
+import { ComponentFixture, TestBed, fakeAsync, tick } from '@angular/core/testing';
+import { By } from '@angular/platform-browser';
 import { LuSimpleSelectInputComponent } from '@lucca-front/ng/simple-select';
-import { Spectator, createComponentFactory } from '@ngneat/spectator/jest';
 import { Observable, map, of } from 'rxjs';
 import { MAGIC_OPTION_SCROLL_DELAY } from '../option/option.component';
 import { ALuCoreSelectApiDirective, MAGIC_DEBOUNCE_DURATION } from './api.directive';
@@ -51,72 +51,84 @@ class TestDirective extends ALuCoreSelectApiDirective<TestEntity> {
 class HostComponent {}
 
 describe('ALuCoreSelectApiDirective', () => {
-	let spectator: Spectator<HostComponent>;
+	let fixture: ComponentFixture<HostComponent>;
+	let selectElement: HTMLElement;
 	let select: LuSimpleSelectInputComponent<TestEntity>;
 	let testApi: TestDirective;
 	let getOptionsSpy: jest.SpyInstance<Observable<TestEntity[]>, []>;
 
-	const createComponent = createComponentFactory<HostComponent>({
-		component: HostComponent,
-	});
-
 	beforeEach(() => {
-		spectator = createComponent({ detectChanges: false });
-		testApi = spectator.query(TestDirective);
-		select = spectator.query<LuSimpleSelectInputComponent<TestEntity>>(LuSimpleSelectInputComponent);
+		TestBed.configureTestingModule({
+			imports: [HostComponent],
+		});
+
+		fixture = TestBed.createComponent(HostComponent);
+
+		const selectDebugElement = fixture.debugElement.query(By.directive(LuSimpleSelectInputComponent));
+		selectElement = selectDebugElement.nativeElement as HTMLElement;
+		select = selectDebugElement.componentInstance as LuSimpleSelectInputComponent<TestEntity>;
+		testApi = fixture.debugElement.query(By.directive(TestDirective)).injector.get(TestDirective);
+
 		getOptionsSpy = jest.spyOn(testApi, 'getOptions');
 	});
 
 	it('should query options when clicking on the select', fakeAsync(() => {
-		spectator.click('lu-simple-select');
-		spectator.tick(MAGIC_OPTION_SCROLL_DELAY); // Avoid "1 periodic timer(s) still in the queue." because of the setTimeout in the option component
+		selectElement.click();
+		fixture.detectChanges();
+		tick(MAGIC_OPTION_SCROLL_DELAY); // Avoid "1 periodic timer(s) still in the queue." because of the setTimeout in the option component
 
 		expect(testApi.getOptions).toHaveBeenCalledTimes(1);
 		expect(testApi.getOptions).toHaveBeenCalledWith({}, 0);
 	}));
 
 	it('should query options when ArrowDown keydown on the select', fakeAsync(() => {
-		spectator.dispatchKeyboardEvent('lu-simple-select', 'keydown', 'ArrowDown');
-		spectator.tick(10); // Wait for panel to be opened
-		spectator.tick(MAGIC_OPTION_SCROLL_DELAY); // Avoid "1 periodic timer(s) still in the queue." because of the setTimeout in the option component
+		selectElement.dispatchEvent(new KeyboardEvent('keydown', { key: 'ArrowDown' }));
+		fixture.detectChanges();
+		tick(10); // Wait for panel to be opened
+		tick(MAGIC_OPTION_SCROLL_DELAY); // Avoid "1 periodic timer(s) still in the queue." because of the setTimeout in the option component
 
 		expect(testApi.getOptions).toHaveBeenCalledTimes(1);
 		expect(testApi.getOptions).toHaveBeenCalledWith({}, 0);
 	}));
 
 	it('should query options once when searching while the select is closed', fakeAsync(() => {
-		spectator.tick(); // Component initialization uses a setTimeout :see_no_evil:
+		tick(); // Component initialization uses a setTimeout :see_no_evil:
 		select.clueChanged('test');
-		spectator.tick(10); // Wait for panel to be opened
-		spectator.tick(MAGIC_DEBOUNCE_DURATION);
-		spectator.tick();
+		fixture.detectChanges();
+		tick(10); // Wait for panel to be opened
+		tick(MAGIC_DEBOUNCE_DURATION);
+		tick();
 
 		expect(testApi.getOptions).toHaveBeenCalledTimes(1);
 		expect(testApi.getOptions).toHaveBeenCalledWith({ clue: 'test' }, 0);
 
-		spectator.tick(); // Avoid "1 periodic timer(s) still in the queue." because of the debounceTime(0) in the ALuCoreSelectApiDirective
+		tick(); // Avoid "1 periodic timer(s) still in the queue." because of the debounceTime(0) in the ALuCoreSelectApiDirective
 	}));
 
 	it('should debounce clue options', fakeAsync(() => {
-		spectator.tick(); // Component initialization uses a setTimeout :see_no_evil:
+		tick(); // Component initialization uses a setTimeout :see_no_evil:
+		fixture.detectChanges();
 
 		select.clueChanged('h');
-		spectator.tick(MAGIC_DEBOUNCE_DURATION - 1);
+		fixture.detectChanges();
+		tick(MAGIC_DEBOUNCE_DURATION - 1);
 		select.clueChanged('he');
-		spectator.tick(MAGIC_DEBOUNCE_DURATION - 1);
+		fixture.detectChanges();
+		tick(MAGIC_DEBOUNCE_DURATION - 1);
 		select.clueChanged('hey');
-		spectator.tick(MAGIC_DEBOUNCE_DURATION);
-		spectator.tick(MAGIC_OPTION_SCROLL_DELAY);
+		fixture.detectChanges();
+		tick(MAGIC_DEBOUNCE_DURATION);
+		tick(MAGIC_OPTION_SCROLL_DELAY);
 
 		expect(testApi.getOptions).toHaveBeenCalledTimes(1);
 		expect(testApi.getOptions).toHaveBeenCalledWith({ clue: 'hey' }, 0);
 
-		spectator.tick(); // Avoid "1 periodic timer(s) still in the queue." because of the debounceTime(0) in the ALuCoreSelectApiDirective
+		tick(); // Avoid "1 periodic timer(s) still in the queue." because of the debounceTime(0) in the ALuCoreSelectApiDirective
 	}));
 
 	it('should call each page will page not full', fakeAsync(() => {
 		// Arrange
-		spectator.tick(); // Component initialization uses a setTimeout :see_no_evil:
+		tick(); // Component initialization uses a setTimeout :see_no_evil:
 		testApi.setPageSize(2);
 
 		// Act (Page 1)
@@ -128,9 +140,9 @@ describe('ALuCoreSelectApiDirective', () => {
 		);
 
 		select.clueChanged('test');
-		spectator.tick(10); // Wait for panel to be opened
-		spectator.tick(MAGIC_DEBOUNCE_DURATION);
-		spectator.tick();
+		fixture.detectChanges();
+		tick(10); // Wait for panel to be opened
+		tick(MAGIC_DEBOUNCE_DURATION);
 
 		// Act (Page 2)
 		getOptionsSpy.mockReturnValue(
@@ -140,14 +152,12 @@ describe('ALuCoreSelectApiDirective', () => {
 			]),
 		);
 		select.nextPage$.next();
-		spectator.tick(MAGIC_OPTION_SCROLL_DELAY);
-		spectator.tick();
+		tick(MAGIC_OPTION_SCROLL_DELAY);
 
 		// // Act (Page 3)
 		getOptionsSpy.mockReturnValue(of([{ id: 5, name: 'test 5' }]));
 		select.nextPage$.next();
-		spectator.tick(MAGIC_OPTION_SCROLL_DELAY);
-		spectator.tick();
+		tick(MAGIC_OPTION_SCROLL_DELAY);
 
 		// Act (do nothing)
 		select.nextPage$.next();
@@ -171,7 +181,7 @@ describe('ALuCoreSelectApiDirective', () => {
 
 	it('should allow multiple emission on same page', fakeAsync(() => {
 		// Arrange
-		spectator.tick(); // Component initialization uses a setTimeout :see_no_evil:
+		tick(); // Component initialization uses a setTimeout :see_no_evil:
 		testApi.setPageSize(2);
 
 		const getPageSpy = jest.spyOn(testApi, 'getOptionsPage');
@@ -194,11 +204,12 @@ describe('ALuCoreSelectApiDirective', () => {
 
 		// Act (Page 1)
 		select.openPanel();
-		spectator.tick(MAGIC_OPTION_SCROLL_DELAY);
+		fixture.detectChanges();
+		tick(MAGIC_OPTION_SCROLL_DELAY);
 
 		// Act (Page 2)
 		select.nextPage$.next();
-		spectator.tick(MAGIC_OPTION_SCROLL_DELAY);
+		tick(MAGIC_OPTION_SCROLL_DELAY);
 
 		// Assert
 		let options: readonly TestEntity[];

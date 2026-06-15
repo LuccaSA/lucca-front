@@ -108,9 +108,10 @@
 			text-decoration: line-through;
 			cursor: default;
 
-			&:hover, &:active {
+			&:hover,
+			&:active {
 				.calendar-grid-item-content {
-					background-color: transparent
+					background-color: transparent;
 				}
 			}
 		}

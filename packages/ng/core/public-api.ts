@@ -4,6 +4,7 @@ export * from './group/index';
 export * from './id/index';
 export * from './misc';
 export * from './portal/index';
+export * from './route';
 export * from './signal';
 export * from './tools/class';
 export * from './translate/index';

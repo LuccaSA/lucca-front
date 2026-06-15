@@ -19,12 +19,11 @@
 			@include XL;
 		}
 
-		[aria-selected="true"] & {
+		[aria-selected='true'] & {
 			@include selected;
 		}
 
-		.optionItem.is-highlighted &,
-		[role="listbox"] .optionItem:hover & {
+		.lu-picker-panel .optionItem.is-highlighted & {
 			@include highlighted;
 		}
 	}

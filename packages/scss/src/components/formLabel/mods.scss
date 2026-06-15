@@ -1,4 +1,5 @@
 @use '@lucca-front/icons/src/icon/exports' as icons;
+@use '@lucca-front/scss/src/components/tag/exports' as tag;
 
 @mixin S {
 	--components-formLabel-font: var(--pr-t-font-body-S);
@@ -8,6 +9,10 @@
 	// Deprecated
 	--components-formLabel-fontSize: var(--pr-t-font-body-S-fontSize);
 	--components-formLabel-lineHeight: var(--pr-t-font-body-S-lineHeight);
+
+	.tag {
+		@include tag.S;
+	}
 }
 
 @mixin XS {
@@ -18,6 +23,10 @@
 	// Deprecated
 	--components-formLabel-fontSize: var(--pr-t-font-body-XS-fontSize);
 	--components-formLabel-lineHeight: var(--pr-t-font-body-XS-lineHeight);
+
+	.tag {
+		@include tag.S;
+	}
 }
 
 @mixin label {

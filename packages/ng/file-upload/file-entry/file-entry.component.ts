@@ -2,24 +2,25 @@ import { booleanAttribute, ChangeDetectionStrategy, Component, computed, inject,
 import { outputFromObservable } from '@angular/core/rxjs-interop';
 import { FormsModule } from '@angular/forms';
 import { ButtonComponent } from '@lucca-front/ng/button';
-import { intlInputOptions, IntlParamsPipe } from '@lucca-front/ng/core';
+import { intlInputOptions, IntlParamsPipe, isNotNil } from '@lucca-front/ng/core';
 import { DividerComponent } from '@lucca-front/ng/divider';
 import { FormFieldComponent } from '@lucca-front/ng/form-field';
 import { TextInputComponent } from '@lucca-front/ng/forms';
 import { IconComponent } from '@lucca-front/ng/icon';
 import { InlineMessageComponent } from '@lucca-front/ng/inline-message';
-import { LuTooltipModule } from '@lucca-front/ng/tooltip';
+import { LuTooltipTriggerDirective } from '@lucca-front/ng/tooltip';
 import { Subject } from 'rxjs';
 import { FileEntry } from '../file-upload-entry';
 import { LU_FILE_UPLOAD_TRANSLATIONS } from '../file-upload.translate';
 import { formatFileSize } from '../formatter';
+import { FileEntrySize, FileEntryState } from './file-entry.type';
 
 @Component({
 	selector: 'lu-file-entry',
 	templateUrl: './file-entry.component.html',
 	styleUrl: './file-entry.component.scss',
 	encapsulation: ViewEncapsulation.None,
-	imports: [IconComponent, LuTooltipModule, ButtonComponent, InlineMessageComponent, DividerComponent, FormFieldComponent, TextInputComponent, FormsModule, IntlParamsPipe],
+	imports: [IconComponent, ButtonComponent, InlineMessageComponent, DividerComponent, FormFieldComponent, TextInputComponent, FormsModule, IntlParamsPipe, LuTooltipTriggerDirective],
 	host: {
 		class: 'pr-u-displayContents',
 	},
@@ -30,7 +31,7 @@ export class FileEntryComponent {
 
 	readonly intl = input(...intlInputOptions(LU_FILE_UPLOAD_TRANSLATIONS));
 
-	readonly state = input<'success' | 'loading' | 'error' | 'default'>('default');
+	readonly state = input<FileEntryState>('default');
 
 	readonly displayFileName = input(false, { transform: booleanAttribute });
 
@@ -38,7 +39,7 @@ export class FileEntryComponent {
 
 	readonly entry = input.required<FileEntry>();
 
-	readonly size = input<'S' | null>(null);
+	readonly size = input<FileEntrySize | null>(null);
 
 	readonly iconOverride = input('');
 
@@ -63,12 +64,15 @@ export class FileEntryComponent {
 	}
 
 	readonly fileName = computed(() => this.entry().name);
-	readonly fileType = computed(() => this.entry().type);
-	readonly fileSize = computed(() => this.entry().size);
+	readonly fileType = computed<string>(() => this.entry().type ?? '');
+	readonly fileSize = computed<number | null>(() => this.entry().size ?? null);
 
-	readonly fileSizeDisplay = computed(() => formatFileSize(this.#locale, this.fileSize()));
+	readonly fileSizeDisplay = computed(() => {
+		const fileSize = this.fileSize();
+		return isNotNil(fileSize) ? formatFileSize(this.#locale, fileSize) : null;
+	});
 	readonly fileTypeDisplay = computed(() => {
-		const fileExtension: string = extractFileExtension(this.fileType());
+		const fileExtension: string = extractFileExtension(this.fileName(), this.fileType());
 
 		return this.intl().file.replace('{{fileTypeLastPart}}', fileExtension);
 	});
@@ -99,11 +103,12 @@ export class FileEntryComponent {
 	});
 
 	readonly tooltip = computed(() => {
+		const fileSize = this.fileSizeDisplay() ? ` – ${this.fileSizeDisplay()}` : '';
 		if (this.state() === 'error') {
 			if (!this.media()) {
 				return null;
 			} else {
-				return this.fileName() + ' — ' + this.fileSizeDisplay();
+				return this.fileName() + fileSize;
 			}
 		}
 
@@ -112,10 +117,10 @@ export class FileEntryComponent {
 		}
 
 		if (this.size() === 'S' && !this.media()) {
-			return this.fileTypeDisplay() + ' – ' + this.fileSizeDisplay();
+			return this.fileTypeDisplay() + fileSize;
 		}
 
-		return this.fileName() + ' – ' + this.fileTypeDisplay() + ' – ' + this.fileSizeDisplay();
+		return this.fileName() + ' – ' + this.fileTypeDisplay() + fileSize;
 	});
 
 	readonly dlClasses = computed(() => ({
@@ -124,7 +129,11 @@ export class FileEntryComponent {
 	}));
 }
 
-function extractFileExtension(type: string): string {
+function extractFileExtension(fileName: string, type?: string): string {
+	if (!type) {
+		return fileName.split('.')[1]?.toUpperCase() || '';
+	}
+
 	switch (type) {
 		case 'application/vnd.ms-excel':
 			return 'XLS';

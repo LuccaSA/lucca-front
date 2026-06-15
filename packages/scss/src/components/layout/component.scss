@@ -13,27 +13,27 @@
 		grid-template-columns: var(--commons-navSide-width) 1fr var(--components-aside-width);
 		grid-template-rows: var(--commons-banner-height) 1fr;
 		grid-template-areas:
-			'banner banner banner'
-			'navside content aside';
+			'banner  banner  banner'
+			'navside content aside ';
 	}
 
 	@include media.max('L') {
 		grid-template-columns: var(--commons-navSide-width) 1fr;
 		grid-template-rows: var(--commons-banner-height) 1fr auto;
 		grid-template-areas:
-			'banner banner'
+			'banner  banner '
 			'navside content'
-			'navside aside';
+			'navside aside  ';
 	}
 
 	@include media.max('S') {
 		grid-template-columns: 1fr;
 		grid-template-rows: var(--commons-banner-height) auto 1fr auto;
 		grid-template-areas:
-			'banner'
+			'banner '
 			'navside'
 			'content'
-			'aside';
+			'aside  ';
 	}
 
 	@at-root ($atRoot) {

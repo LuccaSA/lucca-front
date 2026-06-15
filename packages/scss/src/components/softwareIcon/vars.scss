@@ -1,3 +1,20 @@
 @mixin vars {
 	--components-softwareIcon-size: var(--pr-t-spacings-500);
+	--components-softwareIcon-illustration-bubble-stroke: transparent;
+	--components-softwareIcon-illustration-bubble-strokeWidth: 0px;
+	--components-softwareIcon-display: inline-block;
+	--components-softwareIcon-action-boxShadowSpread: 2px;
+	--components-softwareIcon-zIndex: auto;
+	--components-softwareIcon-transformScale: 1;
+}
+
+@mixin varsWrapper {
+	@include vars;
+
+	--components-softwareIconWrapper-list-item-marginInlineStart: calc(var(--pr-t-spacings-75) * -1);
+	--components-softwareIconWrapper-action-more-fontSize: var(--pr-t-font-fontSize-225);
+}
+
+@mixin varsPopover {
+	--components-softwareIcon-size: var(--pr-t-spacings-500);
 }

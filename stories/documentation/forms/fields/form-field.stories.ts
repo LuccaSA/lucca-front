@@ -1,8 +1,11 @@
 import { FormsModule } from '@angular/forms';
 import { BrowserAnimationsModule } from '@angular/platform-browser/animations';
-import { FormFieldComponent, InputDirective } from '@lucca-front/ng/form-field';
+import { FORM_FIELD_WIDTH, FormFieldComponent, InputDirective } from '@lucca-front/ng/form-field';
+import { INLINE_MESSAGE_STATE } from '@lucca-front/ng/inline-message';
 import { Meta, moduleMetadata, StoryObj } from '@storybook/angular';
-import { generateInputs } from '../../../helpers/stories';
+import { createTestStory, generateInputs, setStoryOptions } from '../../../helpers/stories';
+import { waitForAngular } from '../../../helpers/test';
+import { expect, userEvent, within } from 'storybook/test';
 
 export default {
 	title: 'Documentation/Forms/Fields/Form Field',
@@ -17,7 +20,7 @@ export default {
 			control: {
 				type: 'text',
 			},
-			description: "Modifie le label de l'input.",
+			description: 'Modifie le label de l’input. [PortalContent]',
 		},
 		required: {
 			control: {
@@ -26,23 +29,23 @@ export default {
 			description: 'Marque le champ comme obligatoire.',
 		},
 		hiddenLabel: {
-			description: "Masque le label en le conservant dans le DOM pour les lecteurs d'écrans",
+			description: 'Masque le label en le conservant dans le DOM pour les lecteurs d’écran',
 		},
 		inlineMessage: {
 			control: {
 				type: 'text',
 			},
-			description: 'Ajoute un texte indicatif sous le champ de formulaire.',
+			description: 'Ajoute un texte indicatif sous le champ de formulaire. [PortalContent]',
 		},
 		inlineMessageState: {
-			options: ['default', 'success', 'warning', 'error'],
+			options: setStoryOptions(INLINE_MESSAGE_STATE),
 			control: {
 				type: 'select',
 			},
-			description: "Modifie l'état de l'inline message.",
+			description: 'Modifie l’état de l’inline message.',
 		},
 		errorInlineMessage: {
-			description: "Ajoute un texte d'erreur sous le champ de formulaire lorsque celui-ci est en erreur.",
+			description: 'Ajoute un texte d’erreur sous le champ de formulaire lorsque celui-ci est en erreur. [PortalContent]',
 		},
 		tooltip: {
 			if: { arg: 'hiddenLabel', truthy: false },
@@ -52,23 +55,24 @@ export default {
 			control: {
 				type: 'boolean',
 			},
-			description: "Applique l'état invalide au champ.",
+			description: 'Applique l’état invalide au champ.',
 		},
 		counter: {
 			control: {
 				type: 'number',
 			},
-			description: "Nombre de caractère maximum autorisés pour un champ de type texte. A seulement un impact sur l'interface et doit être complé à un réglage au niveau de <code>FormControl</code>.",
+			description:
+				'Nombre de caractères maximum autorisés pour un champ de type texte. A seulement un impact sur l’interface et doit être complété à un réglage au niveau de <code>FormControl</code>.',
 		},
 		width: {
-			options: [null, 20, 30, 40, 50, 60],
+			options: setStoryOptions(FORM_FIELD_WIDTH),
 			control: {
 				type: 'select',
 			},
-			description: "Applique une largeur fixe au champ. A n'utiliser que lorsque la grille de formulaire n'est pas adaptée.",
+			description: 'Applique une largeur fixe au champ. À n’utiliser que lorsque la grille de formulaire n’est pas adaptée.',
 		},
 		rolePresentationLabel: {
-			description: "Applique role='presentation' au label du champ dans le cas où celui-ci ne doit pas être lu par les lecteurs d'écran.",
+			description: "Applique role='presentation' au label du champ dans le cas où celui-ci ne doit pas être lu par le lecteur d’écran.",
 		},
 	},
 	render: (args, { argTypes }) => {
@@ -104,6 +108,24 @@ export const Template: StoryObj<FormFieldComponent & { required: boolean }> = {
 		invalid: false,
 		counter: null,
 		rolePresentationLabel: false,
-		width: null,
 	},
 };
+
+export const TemplateTEST = createTestStory(Template, async ({ canvasElement, step }) => {
+	await waitForAngular();
+	const canvas = within(canvasElement);
+
+	await step('Vérifie le rendu initial', async () => {
+		await expect(canvas.getByText('Label')).toBeVisible();
+		await expect(canvas.getByRole('textbox')).toBeVisible();
+	});
+
+	await step('Interaction clavier', async () => {
+		const textarea = canvas.getByRole('textbox');
+		textarea.focus();
+		await expect(textarea).toHaveFocus();
+		await userEvent.type(textarea, 'test input');
+		await waitForAngular();
+		await expect(textarea).toHaveValue('test input');
+	});
+});

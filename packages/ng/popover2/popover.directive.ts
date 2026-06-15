@@ -90,7 +90,10 @@ export class PopoverDirective implements OnDestroy {
 	})
 	content: TemplateRef<unknown> | Type<unknown>;
 
-	luPopoverPosition = input<PopoverPosition>('above');
+	luPopoverPosition = input<PopoverPosition | null>(null);
+
+	luPopoverMaxBlockSize = input<string | null>(null);
+	luPopoverMaxInlineSize = input<string | null>(null);
 
 	@Input()
 	overlayScrollStrategy: 'reposition' | 'block' | 'close' = 'reposition';
@@ -122,7 +125,7 @@ export class PopoverDirective implements OnDestroy {
 
 	luPopoverCloseDelay: InputSignal<number> = input<number>(100);
 
-	luPopoverPositionRef = linkedSignal(() => this.luPopoverPosition());
+	luPopoverPositionRef = linkedSignal(() => this.luPopoverPosition() || 'above');
 
 	open$ = new Subject<'focus' | 'click' | 'hover'>();
 
@@ -263,6 +266,8 @@ export class PopoverDirective implements OnDestroy {
 				ref: this.#overlayRef,
 				contentId: this.ariaControls,
 				triggerElement: this.elementRef.nativeElement,
+				maxBlockSize: this.luPopoverMaxBlockSize(),
+				maxInlineSize: this.luPopoverMaxInlineSize(),
 				disableCloseButtonFocus: disableCloseButtonFocus,
 				disableInitialTriggerFocus: disableInitialTriggerFocus,
 				noCloseButton: this.luPopoverNoCloseButton,

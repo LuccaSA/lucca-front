@@ -26,6 +26,13 @@ export const Template: StoryObj<SkeletonFieldComponent> = {
 				type: 'number',
 			},
 		},
+		size: {
+			options: ['', 'S', 'XS'],
+			control: {
+				type: 'select',
+			},
+			description: '[v21.2.4] Modifie la taille du composant.',
+		},
 	},
 
 	args: {

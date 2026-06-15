@@ -1,11 +1,12 @@
+import { ConnectionPositionPair } from '@angular/cdk/overlay';
 import { booleanAttribute, ChangeDetectionStrategy, Component, computed, contentChildren, input, numberAttribute, ViewEncapsulation } from '@angular/core';
 import { LuccaIcon } from '@lucca-front/icons';
 import { Palette, PortalContent, PortalDirective } from '@lucca-front/ng/core';
 import { IconComponent } from '@lucca-front/ng/icon';
-import { PopoverDirective } from '@lucca-front/ng/popover2';
+import { PopoverDirective, PopoverPosition } from '@lucca-front/ng/popover2';
 import { CalloutFeedbackItemComponent } from '../callout-feedback-item/callout-feedback-item.component';
 import { CalloutIconPipe } from '../callout-icon.pipe';
-import { CalloutState } from '../callout-state';
+import { CalloutPopoverSize, CalloutState } from '../callout.type';
 import { getCalloutPalette } from '../callout.utils';
 
 @Component({
@@ -30,7 +31,7 @@ export class CalloutPopoverComponent {
 	/**
 	 * Label (visual only) to put inside the button, often used to show just a number
 	 */
-	readonly buttonLabel = input<string>();
+	readonly buttonLabel = input<string | number>();
 
 	/**
 	 * Alternative for the button
@@ -52,7 +53,7 @@ export class CalloutPopoverComponent {
 	/**
 	 * Size for both button and popover content
 	 */
-	readonly size = input<'M' | 'S' | 'XS'>();
+	readonly size = input<CalloutPopoverSize>();
 
 	/**
 	 * Icon shows in button and next to popover's title
@@ -72,6 +73,21 @@ export class CalloutPopoverComponent {
 	 * Heading for the details popover
 	 */
 	readonly heading = input<PortalContent>();
+
+	/**
+	 * Defines callout popover open position above by default
+	 */
+	readonly popoverPosition = input<PopoverPosition>('above');
+
+	/**
+	 * Defines custom callout popover open position override popoverPosition
+	 */
+	readonly customPopoverPositions = input<ConnectionPositionPair[]>();
+
+	/**
+	 * Disable callout popover apparition
+	 */
+	readonly popoverDisabled = input(false, { transform: booleanAttribute });
 
 	readonly feedbackItems = contentChildren(CalloutFeedbackItemComponent, { descendants: true });
 

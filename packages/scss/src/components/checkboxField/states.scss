@@ -70,7 +70,7 @@
 	cursor: default;
 
 	~ .checkboxField-icon {
-		--component-checkboxField-borderColor: var(--palettes-neutral-500);
+		--component-checkboxField-borderColor: var(--palettes-neutral-300);
 	}
 }
 
@@ -113,7 +113,6 @@
 		--component-checkboxField-borderColor: var(--palettes-error-900);
 	}
 }
-
 
 @mixin checklistHover {
 	~ .checkboxField-icon {

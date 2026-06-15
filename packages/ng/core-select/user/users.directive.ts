@@ -80,7 +80,7 @@ export class LuCoreSelectUsersDirective<T extends LuCoreSelectUser = LuCoreSelec
 
 		effect(() => {
 			const enableFormerEmployees = this.enableFormerEmployees();
-			if (this.clue() || !enableFormerEmployees) {
+			if (!enableFormerEmployees) {
 				untracked(() => this.select.panelHeaderTpl.set(null));
 			} else {
 				untracked(() => this.select.panelHeaderTpl.set(LuCoreSelectFormerEmployeesComponent));
@@ -120,8 +120,8 @@ export class LuCoreSelectUsersDirective<T extends LuCoreSelectUser = LuCoreSelec
 		computed(() => ({
 			fields: this.#userFields,
 			...this.filters(),
-			...(this.uniqueOperationIds() ? { uniqueOperations: this.uniqueOperationIds().join(',') } : {}),
-			...(this.operationIds() ? { operations: this.operationIds().join(',') } : {}),
+			...(this.uniqueOperationIds() ? { uniqueOperations: this.uniqueOperationIds()?.join(',') } : {}),
+			...(this.operationIds() ? { operations: this.operationIds()?.join(',') } : {}),
 			...(this.appInstanceId() ? { appInstanceId: this.appInstanceId() } : {}),
 			id: this.currentUserId,
 		})),
@@ -145,14 +145,14 @@ export class LuCoreSelectUsersDirective<T extends LuCoreSelectUser = LuCoreSelec
 	public totalCount$ = toObservable(computed(() => ({ url: this.urlOrDefault(), filters: this.filters() }))).pipe(
 		debounceTime(250),
 		switchMap(({ url, filters }) =>
-			this.httpClient.get<{ count: number }>(url, {
+			this.httpClient.get<{ data: { count: number } } | { count: number }>(url, {
 				params: {
 					...filters,
 					fields: 'collection.count',
 				},
 			}),
 		),
-		map((res) => res?.count ?? 0),
+		map((res) => ('data' in res ? (res?.data.count ?? 0) : (res?.count ?? 0))),
 	);
 
 	protected getMe(): Observable<T | null> {
@@ -228,7 +228,7 @@ export class LuCoreSelectUserOptionDirective<T extends LuCoreSelectUser = LuCore
 			}
 		});
 	}
-	public static ngTemplateContextGuard<T extends LuCoreSelectUser>(_dir: LuCoreSelectUserOptionDirective<T>, ctx: unknown): ctx is { $implicit: T } {
+	public static ngTemplateContextGuard<T extends LuCoreSelectUser>(_dir: LuCoreSelectUserOptionDirective<T>, _ctx: unknown): _ctx is { $implicit: T } {
 		return true;
 	}
 }

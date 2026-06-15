@@ -63,6 +63,8 @@
 			padding-inline: var(--component-textField-padding) var(--component-textField-affix-padding);
 			background-color: transparent;
 			color: var(--component-textField-color);
+
+			/* autoprefixer: off */
 			text-decoration: var(--component-textField-textDecoration);
 			text-overflow: ellipsis;
 
@@ -125,6 +127,22 @@
 			~ .textField-input {
 				border-start-start-radius: 0;
 				border-end-start-radius: 0;
+			}
+		}
+
+		.textField-prefix-lang {
+			min-inline-size: calc(var(--pr-t-spacings-300) + var(--pr-t-spacings-50));
+			position: relative;
+
+			&::after {
+				content: '';
+				position: absolute;
+				inset: var(--pr-t-spacings-25) 0;
+				border-right: 1px solid var(--palettes-neutral-200);
+			}
+
+			&:has(.formLabel-required) {
+				min-inline-size: calc(var(--pr-t-spacings-400) + var(--pr-t-spacings-50));
 			}
 		}
 

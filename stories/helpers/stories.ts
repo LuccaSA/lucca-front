@@ -1,6 +1,6 @@
-import { applicationConfig, Args, ArgTypes, StoryObj } from '@storybook/angular';
-import { PlayFunction, Renderer } from 'storybook/internal/types';
 import { LOCALE_ID } from '@angular/core';
+import { applicationConfig, Args, ArgTypes, StoryObj } from '@storybook/angular';
+
 
 export interface StoryGeneratorArgs<TComponent> {
 	name: string;
@@ -13,6 +13,11 @@ export interface StoryGeneratorArgs<TComponent> {
 }
 
 export type StoryGenerator<TComponent> = (args: StoryGeneratorArgs<TComponent>) => StoryObj<TComponent>;
+
+export function setStoryOptions<T extends string | number>(list: readonly T[]): Array<T | ''> {
+	const hasEmpty = list.includes('' as T);
+	return hasEmpty ? [...list] : ['', ...list];
+}
 
 export function generateMarkdownCodeBlock(lang: string, code: string): string {
 	return `
@@ -98,7 +103,7 @@ export function generateInputs(inputs: Record<string, unknown>, argTypes: ArgTyp
 		}
 
 		const defaultValue: unknown = argType['table']?.defaultValue?.summary;
-		if (value === defaultValue || value === null || value === undefined) {
+		if (value === defaultValue || value === null || value === undefined || (typeof value === 'string' && !value.length)) {
 			return acc;
 		}
 		// Let's treat boolean inputs as booleanAttributes for stories
@@ -112,7 +117,7 @@ export function generateInputs(inputs: Record<string, unknown>, argTypes: ArgTyp
 	}, '');
 }
 
-export function createTestStory<TRenderer extends Renderer, TArgs = Args>(story: StoryObj<TArgs>, test: PlayFunction<TRenderer, TArgs>): StoryObj {
+export function createTestStory<TArgs = Args>(story: StoryObj<TArgs>, test: StoryObj<TArgs>['play']): StoryObj<TArgs> {
 	// We don't handle function decorators at all
 	const storyDecorators = typeof story.decorators === 'function' ? [] : story.decorators;
 	return {

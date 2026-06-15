@@ -3,7 +3,8 @@
 	--components-horizontalNavigation-listPadding: 0;
 	--components-horizontalNavigation-listItemActionPaddingBlock: var(--pr-t-spacings-200);
 	--components-horizontalNavigation-listItemActionPaddingInline: 0px;
-	--components-horizontalNavigation-listItemActionPadding: var(--components-horizontalNavigation-listItemActionPaddingBlock)
+	--components-horizontalNavigation-listItemActionPadding:
+		var(--components-horizontalNavigation-listItemActionPaddingBlock)
 		var(--components-horizontalNavigation-listItemActionPaddingInline);
 	--components-horizontalNavigation-listGap: 0 var(--pr-t-spacings-400);
 	--components-horizontalNavigation-listDirection: row;
@@ -17,4 +18,11 @@
 	--components-horizontalNavigation-listItemActionRadius: var(--pr-t-border-radius-default) var(--pr-t-border-radius-default) 0 0;
 	--components-horizontalNavigation-listItemActionRadiusWidth: auto;
 	--components-horizontalNavigation-listItemActionRadiusHeight: var(--components-horizontalNavigation-listItemActionSize);
+
+	--components-horizontalNavigation-containerOptional-padding: var(--commons-container-padding);
+}
+
+@mixin varsPanel {
+	--components-horizontalNavigation-panel-display: block;
+	--components-horizontalNavigation-panel-overflow: visible;
 }

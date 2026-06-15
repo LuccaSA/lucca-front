@@ -1,9 +1,12 @@
 import { FormsModule } from '@angular/forms';
-import { FormFieldComponent, InputFramedComponent } from '@lucca-front/ng/form-field';
+import { FormFieldComponent, INPUT_FRAMED_SIZE, InputFramedComponent } from '@lucca-front/ng/form-field';
 import { CheckboxInputComponent, RadioComponent, RadioGroupInputComponent } from '@lucca-front/ng/forms';
 import { GridColumnComponent, GridComponent } from '@lucca-front/ng/grid';
 import { IconComponent } from '@lucca-front/ng/icon';
 import { Meta, moduleMetadata } from '@storybook/angular';
+import { createTestStory, setStoryOptions } from 'stories/helpers/stories';
+import { waitForAngular } from 'stories/helpers/test';
+import { expect, userEvent, within } from 'storybook/test';
 
 interface InputFramedBasicStory {
 	grid: boolean;
@@ -43,7 +46,7 @@ export default {
 			description: 'Ajoute une section visible lorsque le champ est sélectionné.',
 		},
 		illustration: {
-			description: "Slot dédié à l'ajout d'illustrations.",
+			description: 'Slot dédié à l’ajout d’illustrations.',
 		},
 		info: {
 			description: 'Ajoute une section informative toujours visible sous le champ.',
@@ -65,7 +68,7 @@ export default {
 			description: 'Affiche les différentes options dans une grille.',
 		},
 		size: {
-			options: ['', 'L'],
+			options: setStoryOptions(INPUT_FRAMED_SIZE),
 			control: {
 				type: 'select',
 			},
@@ -254,3 +257,30 @@ export const Basic = {
 		presentation: false,
 	},
 };
+
+export const BasicTEST = createTestStory(Basic, async ({ canvasElement, step }) => {
+	await waitForAngular();
+	const canvas = within(canvasElement);
+
+	await step('Vérifie le rendu initial', async () => {
+		await expect(canvas.getByRole('radiogroup')).toBeVisible();
+		await expect(canvas.getByText('Option A')).toBeVisible();
+		await expect(canvas.getByText('Option B')).toBeVisible();
+	});
+
+	await step('Interaction souris', async () => {
+		await userEvent.click(canvas.getByText('Option A'));
+		await waitForAngular();
+		const radios = canvas.getAllByRole('radio');
+		await expect(radios[0]).toBeChecked();
+	});
+
+	await step('Interaction clavier', async () => {
+		const radios = canvas.getAllByRole('radio');
+		radios[0].focus();
+		await expect(radios[0]).toHaveFocus();
+		await userEvent.keyboard('{ArrowDown}');
+		await waitForAngular();
+		await expect(radios[1]).toBeChecked();
+	});
+});

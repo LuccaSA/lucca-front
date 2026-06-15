@@ -2,6 +2,7 @@ import { FormControl, FormGroup, FormsModule, ReactiveFormsModule, Validators } 
 import { ButtonComponent } from '@lucca-front/ng/button';
 import {
 	configureLuDialog,
+	DIALOG_FANCY_ILLUSTRATION,
 	DialogCloseDirective,
 	DialogComponent,
 	DialogContentComponent,
@@ -9,13 +10,16 @@ import {
 	DialogFooterComponent,
 	DialogHeaderAction,
 	DialogHeaderComponent,
+	DialogHeaderSubtitle,
 	DialogOpenDirective,
 } from '@lucca-front/ng/dialog';
+import { FormComponent } from '@lucca-front/ng/form';
 import { FormFieldComponent } from '@lucca-front/ng/form-field';
 import { CheckboxInputComponent, TextInputComponent } from '@lucca-front/ng/forms';
+import { HorizontalNavigationComponent, HorizontalNavigationTabComponent } from '@lucca-front/ng/horizontal-navigation';
 import { IconComponent } from '@lucca-front/ng/icon';
 import { applicationConfig, Meta, moduleMetadata, StoryObj } from '@storybook/angular';
-import { createTestStory } from 'stories/helpers/stories';
+import { createTestStory, setStoryOptions } from 'stories/helpers/stories';
 import { waitForAngular } from 'stories/helpers/test';
 import { expect, screen, userEvent, within } from 'storybook/test';
 
@@ -42,10 +46,15 @@ export default {
 				ReactiveFormsModule,
 				IconComponent,
 				DialogHeaderAction,
+				DialogHeaderSubtitle,
+				FormComponent,
+				HorizontalNavigationComponent,
+				HorizontalNavigationTabComponent,
 			],
 		}),
 	],
 	render: (args) => {
+		const fancyIllustrationParam = args['fancyIllustration'] ? ` fancyIllustration="${args['fancyIllustration']}"` : ``;
 		return {
 			props: {
 				config: args,
@@ -55,15 +64,16 @@ export default {
 <button luButton [luDialogOpen]="dialogTpl" [luDialogConfig]="config">Open Template-driven Dialog</button>
 
 <ng-template #dialogTpl>
-	<lu-dialog #dialog>
+	<lu-dialog #dialog${fancyIllustrationParam}>
 		<lu-dialog-header>
-			<h1>Template driven header</h1> You can also add more content in header
+			<h1>Template driven header</h1>
+			<p dialogHeaderSubtitle>Subtitle</p>
+			<p dialogHeaderContent>You can also add more content in header</p>
 		</lu-dialog-header>
 
 		<lu-dialog-content>Template-driven content</lu-dialog-content>
 
 		<lu-dialog-footer>
-			<div class="footer-content">Optional footer text</div>
 			<div class="footer-actions">
 				<button type="button" luButton luDialogClose>Confirm</button>
 				<button type="button" luButton="ghost" luDialogDismiss>Cancel</button>
@@ -75,15 +85,15 @@ export default {
 	},
 	argTypes: {
 		mode: {
-			options: ['default', 'drawer', 'drawer-from-bottom'],
+			options: ['default', 'drawer', 'drawer-from-bottom', 'fancy'],
 			control: {
 				type: 'select',
 			},
-			description: "Permet d'afficher la fenêtre de dialogue en mode drawer.",
+			description: 'Permet d’afficher la fenêtre de dialogue en mode drawer.',
 		},
 		autoFocus: {
 			options: ['first-tabbable', 'first-input'],
-			description: "Définit quel élément doit recevoir le focus lorsque la fenêtre de dialogue s'ouvre. Peut aussi être un sélecteur CSS.",
+			description: 'Définit quel élément doit recevoir le focus lorsque la fenêtre de dialogue s’ouvre. Peut aussi être un sélecteur CSS.',
 			control: {
 				type: 'select',
 			},
@@ -96,21 +106,33 @@ export default {
 			description: 'Largeur de la fenêtre de dialogue.',
 		},
 		panelClasses: {
-			description: "Permet d'ajouter des classes CSS au composant. (ex : mod-neutralBackground)",
+			description: 'Permet d’ajouter des classes CSS au composant. (ex : mod-neutralBackground)',
 		},
 		alert: {
 			description:
-				"Transforme la fenêtre de dialogue en alerte en obligeant l'utilisateur à faire un choix. L'utilisateur ne peut alors plus la fermer en cliquant sur le backdrop ou en appuyant sur la touche Échap.",
+				'Transforme la fenêtre de dialogue en alerte en obligeant l’utilisateur à faire un choix. L’utilisateur ne peut alors plus la fermer en cliquant sur le backdrop ou en appuyant sur la touche Échap.',
+		},
+		fancyIllustration: {
+			options: setStoryOptions(DIALOG_FANCY_ILLUSTRATION),
+			control: {
+				type: 'select',
+			},
+			if: { arg: 'mode', eq: 'fancy' },
+			description: 'Modifie l’illustration affichée dans la Fancy dialog.',
+		},
+		fancyIllustrationUrl: {
+			if: { arg: 'mode', eq: 'fancy' },
+			description: 'Surcharge l’illustration avec une URL personnalisée.',
 		},
 	},
 } as Meta;
 
 export const Basic: StoryObj = {
 	args: {
-		size: 'S',
+		size: 'M',
 		alert: false,
 		mode: 'default',
-		panelClasses: ['mod-neutralBackground'],
+		panelClasses: [],
 	},
 };
 
@@ -135,7 +157,6 @@ export const Focus: StoryObj = {
 		</lu-dialog-content>
 
 		<lu-dialog-footer>
-			<div class="footer-content">Optional footer text</div>
 			<div class="footer-actions">
 				<button type="button" luButton luDialogClose>Confirm</button>
 				<button type="button" luButton="ghost" luDialogDismiss>Cancel</button>
@@ -171,7 +192,7 @@ export const WithForm: StoryObj = {
 <!--form = new FormGroup({
 			example: new FormControl('', Validators.required)
 		})-->
-		<form [formGroup]="form" class="dialog-inside-formOptional">
+		<form luForm [formGroup]="form">
 			<lu-dialog-header>Template driven header with Form inside</lu-dialog-header>
 
 			<lu-dialog-content>
@@ -181,7 +202,6 @@ export const WithForm: StoryObj = {
 			</lu-dialog-content>
 
 			<lu-dialog-footer>
-				<div class="footer-content">Optional footer text</div>
 				<div class="footer-actions">
 					<button type="submit" luButton [disabled]="!form.valid" luDialogClose>Submit</button>
 					<button type="button" luButton="ghost" luDialogDismiss>Cancel</button>
@@ -221,7 +241,95 @@ export const WithAction: StoryObj = {
 		<lu-dialog-content>Template-driven content</lu-dialog-content>
 
 		<lu-dialog-footer>
-			<div class="footer-content">Optional footer text</div>
+			<div class="footer-actions">
+				<button type="button" luButton luDialogClose>Confirm</button>
+				<button type="button" luButton="ghost" luDialogDismiss>Cancel</button>
+			</div>
+		</lu-dialog-footer>
+	</lu-dialog>
+</ng-template>`,
+		};
+	},
+	args: {
+		size: 'S',
+		alert: false,
+		mode: 'default',
+	},
+};
+
+export const Fancy: StoryObj = {
+	argTypes: {
+		mode: { table: { disable: true } },
+		alert: { table: { disable: true } },
+		autoFocus: { table: { disable: true } },
+		panelClasses: { table: { disable: true } },
+	},
+	render: (args) => {
+		const fancyIllustrationParam = args['fancyIllustration'] ? ` fancyIllustration="${args['fancyIllustration']}"` : ``;
+		const fancyIllustrationURLParam = args['fancyIllustrationUrl'] ? ` fancyIllustrationUrl="${args['fancyIllustrationUrl']}"` : ``;
+		return {
+			props: {
+				config: args,
+			},
+			template: `
+<button luButton [luDialogOpen]="dialogTpl" [luDialogConfig]="{mode: 'fancy'}">Open Template-driven Fancy Dialog</button>
+
+<ng-template #dialogTpl>
+	<lu-dialog #dialog${fancyIllustrationParam}${fancyIllustrationURLParam}>
+		<lu-dialog-header>
+			<h1>Félicitations, votre souscription est terminée</h1>
+		</lu-dialog-header>
+		<lu-dialog-content>Votre contrat signé vous a été envoyé par email.</lu-dialog-content>
+		<lu-dialog-footer>
+			<div class="footer-actions">
+				<button type="button" luButton="outlined" luDialogClose>Fermer</button>
+			</div>
+		</lu-dialog-footer>
+	</lu-dialog>
+</ng-template>`,
+		};
+	},
+	args: {
+		size: 'M',
+		fancyIllustration: 'install',
+		fancyIllustrationUrl: '',
+	},
+};
+
+export const WithTabs: StoryObj = {
+	render: (args) => {
+		return {
+			props: {
+				config: args,
+			},
+			template: `
+<button luButton [luDialogOpen]="dialogTpl" [luDialogConfig]="config">Open Template-driven Dialog with tabs</button>
+
+<ng-template #dialogTpl>
+	<lu-dialog #dialog>
+		<lu-dialog-header>
+			<h1>Title</h1>
+		</lu-dialog-header>
+
+		<lu-horizontal-navigation>
+			<lu-horizontal-navigation-tab label="Tab 1">
+				<lu-dialog-content>
+					Content 1
+				</lu-dialog-content>
+			</lu-horizontal-navigation-tab>
+			<lu-horizontal-navigation-tab label="Tab 2">
+				<lu-dialog-content>
+					Content 2
+				</lu-dialog-content>
+			</lu-horizontal-navigation-tab>
+			<lu-horizontal-navigation-tab label="Tab 3">
+				<lu-dialog-content>
+					Content 3
+				</lu-dialog-content>
+			</lu-horizontal-navigation-tab>
+		</lu-horizontal-navigation>
+
+		<lu-dialog-footer>
 			<div class="footer-actions">
 				<button type="button" luButton luDialogClose>Confirm</button>
 				<button type="button" luButton="ghost" luDialogDismiss>Cancel</button>

@@ -21,6 +21,10 @@
 			@include expandable;
 		}
 
+		&.mod-hiddenLegend {
+			@include hiddenLegend;
+		}
+
 		&:has(.fieldset-title-content[aria-expanded='true']) {
 			@include expanded;
 		}
@@ -28,7 +32,6 @@
 		&:has(.fieldset-title-content-action:not(:empty)) {
 			@include withAction;
 		}
-
 
 		@include media.max('XXS') {
 			@include narrow;

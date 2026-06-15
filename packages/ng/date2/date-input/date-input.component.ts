@@ -212,7 +212,6 @@ export class DateInputComponent extends AbstractDateComponent implements OnInit,
 					this.currentDate.set(startOfDay(parsed));
 					this.tabbableDate.set(startOfDay(parsed));
 				} else if (!this.isFilterPill) {
-					this.onTouched?.();
 					this.selectedDate.set(parsed);
 				}
 			} else {
@@ -223,7 +222,7 @@ export class DateInputComponent extends AbstractDateComponent implements OnInit,
 		effect(() => {
 			if (!this.#safeCompareDate(untracked(this.dateFromWriteValue), this.selectedDate())) {
 				this.#onChange?.(this.selectedDate());
-				this.dateFromWriteValue.set(null);
+				this.dateFromWriteValue.set(this.selectedDate());
 			}
 		});
 

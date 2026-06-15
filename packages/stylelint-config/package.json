@@ -4,7 +4,8 @@
   "description": "Lucca Front stylelint configuration",
   "repository": {
     "type": "git",
-    "url": "git+https://github.com/LuccaSA/lucca-front.git"
+    "url": "git+https://github.com/LuccaSA/lucca-front.git",
+    "directory": "packages/stylelint-config"
   },
   "main": "stylelint.config.mjs",
   "keywords": [
@@ -22,8 +23,9 @@
   },
   "homepage": "https://github.com/LuccaSA/lucca-front#readme",
   "peerDependencies": {
-    "stylelint": "^16.23.1",
-    "stylelint-config-prettier-scss": "^1.0.0",
-    "stylelint-config-standard-scss": "^15.0.1"
+    "@stylistic/stylelint-config": "^4.0.0 || ^5.0.0",
+    "@stylistic/stylelint-plugin": "^5.0.0",
+    "stylelint": "^17.4.0",
+    "stylelint-config-standard-scss": "^17.0.0"
   }
 }

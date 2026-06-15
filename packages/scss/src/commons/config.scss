@@ -3,7 +3,7 @@
 
 @use '@lucca-front/scss/src/commons/function';
 
-$layers: 'reset, base, components, mods, product, utils' !default;
+$layers: 'reset, base, components, mods, product, utils';
 
 $isNamespaced: false !default;
 $deprecatedSpacings: false !default;
@@ -73,7 +73,7 @@ $fontTokens: (
 	highlight-XXL-lineHeight: var(--pr-t-font-lineHeight-400),
 	highlight-XXL-fontWeight: var(--pr-t-font-fontWeight-black),
 	highlight-XL-fontSize: var(--pr-t-font-fontSize-275),
-	highlight-XL-lineHeight: var(--pr-t-font-lineHeight-350),
+	highlight-XL-lineHeight: var(--pr-t-font-lineHeight-300),
 	highlight-XL-fontWeight: var(--pr-t-font-fontWeight-bold),
 	highlight-L-fontSize: var(--pr-t-font-fontSize-225),
 	highlight-L-lineHeight: var(--pr-t-font-lineHeight-300),
@@ -109,15 +109,30 @@ $borderRadiusTokens: (
 	'input': var(--pr-t-border-radius-default),
 );
 
+$colorAI: orchid, brand;
+
+$paletteAI: (
+	angle: 'to bottom right',
+	color1stop: 0%,
+	color2stop: 80%,
+);
+
+$tokenAI: (
+	border: var(--palettes-ai-300),
+	background: var(--palettes-ai-50),
+	icon: var(--palettes-ai-600),
+);
 
 $product: 'brand' !default;
 $palettesShades: text, 0, 25, 50, 100, 200, 300, 400, 500, 600, 700, 800, 900; // text is deprecated
 $palettesStates: 'critical', 'error', 'warning', 'success', 'successContrasted', 'warningContrasted';
-$palettesDefault: 'brand', 'brandContrasted', 'neutral', 'navigation', 'AI';
+$palettesDefault: 'brand', 'brandContrasted', 'neutral', 'navigation', 'orchid';
 $palettesProduct: 'product';
 $palettesOtherProduct: () !default;
-$palettesDecorative: 'kiwi', 'lime', 'cucumber', 'mint', 'glacier', 'lagoon', 'blueberry', 'lavender', 'grape', 'watermelon', 'pumpkin',
-	'pineapple' !default;
+$palettesDecorative: 'kiwi', 'cucumber', 'mint', 'lagoon', 'blueberry', 'lavender', 'watermelon', 'pumpkin' !default;
+$palettesDecorativeMandatory: 'pineapple', 'lime', 'grape', 'glacier', 'pineappleContrasted';
+
+// pineapple, lime, grape, glacier
 $palettesDeprecated: ('lucca', 'grey', 'primary', 'secondary') !default;
 
 @if $palettesOtherProduct == 'all' {
@@ -130,16 +145,35 @@ $palettesAll: function.flatMap(
 	$palettesProduct,
 	$palettesOtherProduct,
 	$palettesDecorative,
+	$palettesDecorativeMandatory,
 	$palettesDeprecated
+);
+
+$palettesAssets: (
+	'brand': ('brand': 'pineapple', 'secondary': 'lime'),
+	'cc': ('brand': 'brand', 'secondary': 'lime'),
+	'pagga': ('brand': 'brand', 'secondary': 'lime'),
+	'poplee': ('brand': 'brand', 'secondary': 'pineapple'),
+	'coreHR': ('brand': 'brand', 'secondary': 'pineapple'),
+	'cleemy': ('brand': 'brand', 'secondary': 'grape'),
+	'timmi': ('brand': 'brand', 'secondary': 'glacier')
 );
 
 $fieldsWidth: 20, 30, 40, 50, 60 !default;
 
 // Palettes
 
-$ai: (
-	500: #BC6FDD,
-	600: #A440CF,
+$orchid: (
+	50: #f9ebff,
+	100: #f3d6ff,
+	200: #edc2ff,
+	300: #de9ff9,
+	400: #cc7ded,
+	500: #b95ae2,
+	600: #a440cf,
+	700: #8133a3,
+	800: #680094,
+	900: #4c006b,
 );
 
 $brand: (
@@ -348,17 +382,17 @@ $warning: (
 $warningContrasted: (
 	// text is deprecated
 	text: #ffffff,
-	0: #FFFFFF,
-	50: #FFF2DB,
-	100: #FFE9C2,
-	200: #FFDB9E,
-	300: #FFD080,
-	400: #FFC35C,
-	500: #FFB13D,
+	0: #ffffff,
+	50: #fff2db,
+	100: #ffe9c2,
+	200: #ffdb9e,
+	300: #ffd080,
+	400: #ffc35c,
+	500: #ffb13d,
 	600: #d97e26,
-	700: #B34B0F,
-	800: #9A3B08,
-	900: #802A00
+	700: #b34b0f,
+	800: #9a3b08,
+	900: #802a00
 );
 
 $critical: (
@@ -366,7 +400,7 @@ $critical: (
 	text: #ffffff,
 	0: #ffffff,
 	50: #ffebec,
-	100: #ffd6d8,
+	100: #ffd2d4,
 	200: #fdbebe,
 	300: #faa3a3,
 	400: #fa8989,
@@ -480,7 +514,7 @@ $lavender: (
 	600: #9165d2,
 	700: #7647bd,
 	800: #5f369b,
-	900: #4a2a79,
+	900: #24075a,
 ) !default;
 
 $grape: (
@@ -535,6 +569,19 @@ $pineapple: (
 	900: #665400,
 ) !default;
 
+$pineappleContrasted: (
+	50: #fef7d7,
+	100: #fbf1b6,
+	200: #fae999,
+	300: #f9e16c,
+	400: #f8dc4f,
+	500: #e7c623,
+	600: #b89600,
+	700: #8f7500,
+	800: #7b6500,
+	900: #665400,
+) !default;
+
 // https://sass-lang.com/documentation/variables/#advanced-variable-functions
 $productsInterpolation: (
 	'brand': $brand,
@@ -547,7 +594,6 @@ $productsInterpolation: (
 );
 
 $palettesInterpolation: (
-	'AI': $ai,
 	'lucca': $brand,
 	'brand': $brand,
 	'brandContrasted': $brandContrasted,
@@ -557,6 +603,7 @@ $palettesInterpolation: (
 	'secondary': map.get($productsInterpolation, $product),
 	'product': map.get($productsInterpolation, $product),
 	'navigation': $navigation,
+	'orchid': $orchid,
 	'success': $success,
 	'successContrasted': $successContrasted,
 	'error': $critical,
@@ -575,6 +622,7 @@ $palettesInterpolation: (
 	'watermelon': $watermelon,
 	'pumpkin': $pumpkin,
 	'pineapple': $pineapple,
+	'pineappleContrasted': $pineappleContrasted,
 	'pagga': $pagga,
 	'poplee': $poplee,
 	'coreHR': $coreHR,
@@ -592,13 +640,10 @@ $elevation: (
 		'backdrop': color-mix(in srgb, var(--palettes-neutral-400) 40%, transparent),
 	),
 	shadow: (
-		'raised':
-			'0 0 0 1px color-mix(in srgb, var(--palettes-neutral-400) 8%, transparent), 0 1px 2px color-mix(in srgb, var(--palettes-neutral-400) 40%, transparent), 0 2px 4px color-mix(in srgb, var(--palettes-neutral-400) 20%, transparent)',
+		'raised': '0 0 0 1px color-mix(in srgb, var(--palettes-neutral-400) 8%, transparent), 0 1px 2px color-mix(in srgb, var(--palettes-neutral-400) 40%, transparent), 0 2px 4px color-mix(in srgb, var(--palettes-neutral-400) 20%, transparent)',
 		'button': '0 2px 2px 0 color-mix(in srgb, var(--palettes-neutral-900) 4%, transparent)',
-		'overflow':
-			'0 0 0 1px color-mix(in srgb, var(--palettes-neutral-400) 8%, transparent), 0 0 4px color-mix(in srgb, var(--palettes-neutral-400) 32%, transparent), 0 0 8px color-mix(in srgb, var(--palettes-neutral-400) 24%, transparent)',
-		'overlay':
-			'0 0 0 1px color-mix(in srgb, var(--palettes-neutral-400) 8%, transparent), 0 4px 8px color-mix(in srgb, var(--palettes-neutral-400) 24%, transparent), 0 4px 12px 2px color-mix(in srgb, var(--palettes-neutral-400) 8%, transparent)',
+		'overflow': '0 0 0 1px color-mix(in srgb, var(--palettes-neutral-400) 8%, transparent), 0 0 4px color-mix(in srgb, var(--palettes-neutral-400) 32%, transparent), 0 0 8px color-mix(in srgb, var(--palettes-neutral-400) 24%, transparent)',
+		'overlay': '0 0 0 1px color-mix(in srgb, var(--palettes-neutral-400) 8%, transparent), 0 4px 8px color-mix(in srgb, var(--palettes-neutral-400) 24%, transparent), 0 4px 12px 2px color-mix(in srgb, var(--palettes-neutral-400) 8%, transparent)',
 	),
 );
 

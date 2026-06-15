@@ -18,7 +18,7 @@ export const FORMER_EMPLOYEES_CONTEXT = new InjectionToken<FormerEmployeesContex
 	hostDirectives: [ɵCoreSelectPanelElement],
 	template: `
 		<div class="formerEmployeeDisplayer optionItem">
-			<div class="optionItem-value" [class.is-selected]="context.includeFormerEmployees()" (click)="context.includeFormerEmployees.set(!context.includeFormerEmployees())">
+			<div class="optionItem-value" [class.is-selected]="context.includeFormerEmployees()" (mousedown)="onMouseDown($event)">
 				{{ intl().includeFormerEmployees }}
 			</div>
 		</div>
@@ -37,5 +37,11 @@ export class LuCoreSelectFormerEmployeesComponent {
 			.subscribe(() => {
 				this.context.includeFormerEmployees.set(!this.context.includeFormerEmployees());
 			});
+	}
+
+	onMouseDown($event: MouseEvent): void {
+		this.context.includeFormerEmployees.set(!this.context.includeFormerEmployees());
+		$event.preventDefault();
+		$event.stopPropagation();
 	}
 }

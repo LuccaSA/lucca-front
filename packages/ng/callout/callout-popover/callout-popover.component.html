@@ -5,9 +5,12 @@
 	class="calloutPopover"
 	[class]="calloutClasses()"
 	[luPopover2]="overlayContentRef"
+	[luPopoverPosition]="popoverPosition()"
+	[customPositions]="customPopoverPositions()"
 	[luPopoverTrigger]="popoverTrigger()"
 	[luPopoverOpenDelay]="openDelay()"
 	[luPopoverCloseDelay]="closeDelay()"
+	[luPopoverDisabled]="popoverDisabled()"
 	#overlayOriginRef
 >
 	@if (calloutIcon) {

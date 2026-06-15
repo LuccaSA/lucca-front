@@ -11,7 +11,7 @@ import tsParser from '@typescript-eslint/parser';
 
 export default defineConfig(
 	{
-		ignores: ['dist/', '.storybook/**', '**/schematics/**/tests/', 'node_modules/', '.angular/'],
+		ignores: ['dist/', '.storybook/**', '**/schematics/**/tests/', 'node_modules/', '.angular/', '**/stories/**'],
 	},
 	{
 		linterOptions: {
@@ -72,7 +72,7 @@ export default defineConfig(
 			'@typescript-eslint/no-restricted-imports': [
 				'error',
 				{
-					paths: ['rxjs/Rx', '@ngneat/spectator', '@lucca-front/ng'],
+					paths: ['rxjs/Rx', '@lucca-front/ng'],
 					patterns: [
 						{
 							regex: 'dist\/ng',
@@ -175,6 +175,18 @@ export default defineConfig(
 			'@angular-eslint/template/prefer-self-closing-tags': 'off',
 			// TODO A lot of issues currently so a lot of rules are turned off. Would be nice to enable them but requires a lot of fixes
 			'@angular-eslint/template/button-has-type': 'off',
+		},
+	},
+	// Scripts: generate-skills is tooling code, downgrade strict rules to warn
+	{
+		files: ['scripts/generate-skills/**/*.ts'],
+		rules: {
+			'no-console': 'warn',
+			'@typescript-eslint/no-explicit-any': 'warn',
+			'@typescript-eslint/no-unused-vars': 'warn',
+			'@typescript-eslint/no-unsafe-argument': 'warn',
+			'@typescript-eslint/restrict-template-expressions': 'warn',
+			'@typescript-eslint/require-await': 'warn',
 		},
 	},
 	prettier,

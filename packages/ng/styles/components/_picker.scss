@@ -21,6 +21,8 @@
 		}
 	}
 
+	lu-tree-branch,
+	.lu-picker-content-option-group,
 	.lu-picker-content-option {
 		display: flex;
 		flex-direction: column;
@@ -30,7 +32,6 @@
 	.lu-picker-content-option-emptyState {
 		color: var(--palettes-neutral-600);
 		padding-inline: var(--pr-t-spacings-100);
-		text-align: center;
 	}
 
 	.lu-picker-content-option-group {
@@ -38,6 +39,10 @@
 
 		.optionItem-value {
 			--components-options-item-padding-horizontal: var(--pr-t-spacings-250) var(--pr-t-spacings-100);
+		}
+
+		lu-tree-branch .optionItem-value {
+			--components-options-item-padding-horizontal: calc(var(--pr-t-spacings-250) + var(--pr-t-spacings-100) * calc(var(--components-treeBranch-level) - 1)) var(--pr-t-spacings-100);
 		}
 	}
 

@@ -26,6 +26,8 @@ export class PageHeaderComponent {
 	 */
 	readonly container = input(false, { transform: booleanAttribute });
 
+	readonly sticky = input(false, { transform: booleanAttribute });
+
 	readonly descriptionIsString = computed(() => this.isStringPortalContent(this.description()));
 	readonly labelIsString = computed(() => this.isStringPortalContent(this.label()));
 

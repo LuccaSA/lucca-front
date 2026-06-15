@@ -1,4 +1,4 @@
-import { ChangeDetectionStrategy, Component, inject, input, ViewEncapsulation } from '@angular/core';
+import { booleanAttribute, ChangeDetectionStrategy, Component, inject, input, ViewEncapsulation } from '@angular/core';
 import { LuccaIcon } from '@lucca-front/icons';
 import { IconComponent } from '@lucca-front/ng/icon';
 import { LU_LISTING_INSTANCE } from '../listing.token';
@@ -21,4 +21,6 @@ export class ListingItemComponent {
 	 * Adds an icon to the listing item
 	 */
 	readonly icon = input<LuccaIcon | null>(null);
+
+	readonly critical = input(false, { transform: booleanAttribute });
 }

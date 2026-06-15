@@ -1,56 +1,29 @@
 //import { DecorativeIconComponent } from '@lucca-front/ng/';
 import { IconsList } from '@/stories/icons-list';
-import { BubbleIconComponent } from '@lucca-front/ng/bubble-icon';
+import { BUBBLE_ICON_DIRECTION, BUBBLE_ICON_SIZE, BubbleIconComponent } from '@lucca-front/ng/bubble-icon';
+import { DECORATIVE_PALETTE, PALETTE } from '@lucca/prisme/core';
 import { Meta, moduleMetadata, StoryObj } from '@storybook/angular';
-import { generateInputs } from 'stories/helpers/stories';
+import { generateInputs, setStoryOptions } from 'stories/helpers/stories';
 
 export default {
 	title: 'Documentation/Structure/Bubble icon/Angular/Basic',
 	argTypes: {
 		direction: {
-			options: ['', 'left', 'right', 'top', 'bottom'],
+			options: setStoryOptions(BUBBLE_ICON_DIRECTION),
 			control: {
 				type: 'select',
 			},
 			description: 'Définit une direction de la bulle. Aléatoire par défaut.',
 		},
 		size: {
-			options: ['S', '', 'L'],
+			options: setStoryOptions(BUBBLE_ICON_SIZE),
 			control: {
 				type: 'select',
 			},
 			description: 'Modifie la taille du composant.',
 		},
 		palette: {
-			options: [
-				// products
-				'product',
-				'pagga',
-				'poplee',
-				'coreHR',
-				'timmi',
-				'cleemy',
-				'cc',
-				'brand',
-				// states
-				'neutral',
-				'success',
-				'warning',
-				'critical',
-				// decoratives
-				'kiwi',
-				'lime',
-				'cucumber',
-				'mint',
-				'glacier',
-				'lagoon',
-				'blueberry',
-				'lavender',
-				'grape',
-				'watermelon',
-				'pumpkin',
-				'pineapple',
-			],
+			options: setStoryOptions([...PALETTE, ...DECORATIVE_PALETTE]),
 			control: {
 				type: 'select',
 			},
@@ -61,10 +34,10 @@ export default {
 			control: {
 				type: 'select',
 			},
-			description: "Modifie le glyphe de l'icône.",
+			description: 'Modifie le glyphe de l’icône.',
 		},
 		alt: {
-			description: "Information restituée par le lecteur d'écran.",
+			description: 'Information restituée par le lecteur d’écran.',
 		},
 	},
 	decorators: [
@@ -72,9 +45,9 @@ export default {
 			imports: [BubbleIconComponent],
 		}),
 	],
-	render: ({ direction, alt, palette, size, ...args }, { argTypes }) => {
-		const sizeArg = size !== '' ? ` size="${size}"` : ``;
-		const directionArg = direction === null || direction === '' ? `` : ` bubbleDirection="${direction}"`;
+	render: ({ bubbleDirection, alt, palette, size, ...args }, { argTypes }) => {
+		const sizeArg = size === 'M' ? `` : ` size="${size}"`;
+		const directionArg = bubbleDirection === 'random' || bubbleDirection === '' ? `` : ` bubbleDirection="${bubbleDirection}"`;
 		const altArg = alt === '' ? `` : ` alt="${alt}"`;
 		const paletteArg = palette === 'product' ? `` : ` palette="${palette}"`;
 		return {
@@ -87,9 +60,9 @@ export default {
 export const Basic: StoryObj<BubbleIconComponent & { palette: string }> = {
 	args: {
 		icon: 'app',
-		direction: null,
+		bubbleDirection: 'random',
 		palette: 'product',
-		size: '',
+		size: 'M',
 		alt: '',
 	},
 };

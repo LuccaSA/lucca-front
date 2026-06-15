@@ -1,5 +1,6 @@
 import { signal } from '@angular/core';
 import { fakeAsync, tick } from '@angular/core/testing';
+import { CALENDAR_MODE } from '@lucca-front/ng/date2';
 import { LuRelativeTime, LuRelativeTimeFormatUnit } from './humanize.model';
 import { getRelativeTime, relativeTimeTimer } from './humanize.utils';
 
@@ -66,7 +67,7 @@ describe('HumanizeUtils', () => {
 				const durationInMs = 20 * hour;
 
 				// Act
-				const { unit, value } = getRelativeTime(reference + durationInMs, reference, ['day', 'month', 'year']);
+				const { unit, value } = getRelativeTime(reference + durationInMs, reference, CALENDAR_MODE);
 
 				// Assert
 				expect(unit).toBe('day');
@@ -181,7 +182,9 @@ describe('HumanizeUtils', () => {
 		describe('future date', () => {
 			it('should emit immedialty', () => {
 				// Arrange
-				const date = Date.now() + 55_000;
+				const now = new Date().getTime();
+				const nowSpy = jest.spyOn(Date, 'now').mockReturnValue(now);
+				const date = now + 55_000;
 				const relativeTime$ = relativeTimeTimer(date);
 				const emittedValues = signal<LuRelativeTime[]>([]);
 
@@ -191,6 +194,7 @@ describe('HumanizeUtils', () => {
 				// Assert
 				expect(emittedValues()).toEqual([{ unit: 'second', value: 55 }]);
 				sub.unsubscribe();
+				nowSpy.mockRestore();
 			});
 
 			it('should emit each minute then each seconds', fakeAsync(() => {

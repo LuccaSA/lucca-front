@@ -41,6 +41,11 @@
       "factory": "./component-path/index",
       "schema": "./component-path/schema.json"
     },
+    "deprecated-resolver": {
+      "description": "Migrate deprecated NgModules, types and input output.",
+      "factory": "./deprecated-resolver/index",
+      "schema": "./deprecated-resolver/schema.json"
+    },
     "tokens-typo": {
       "description": "Replace typography tokens with new names.",
       "factory": "./tokens-typo/index",
@@ -85,6 +90,11 @@
       "description": "Migrate HTML container to the new lu-container component",
       "factory": "./lu-container/index",
       "schema": "./lu-container/schema.json"
+    },
+    "lu-grid": {
+      "description": "Migrate HTML grid to the new lu-grid component",
+      "factory": "./lu-grid/index",
+      "schema": "./lu-grid/schema.json"
     },
     "lu-button": {
       "description": "Migrate CSS-only buttons to the new luButton component",

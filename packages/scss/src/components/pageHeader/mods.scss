@@ -1,11 +1,11 @@
-@use "@lucca-front/scss/src/components/button/exports" as button;
+@use '@lucca-front/scss/src/components/button/exports' as button;
 
 @mixin horizontalNavigation {
 	padding-block-end: 0;
 
-	// .menu is deprecated
-	.horizontalNavigation,
-	.menu {
+	// stylelint-disable-next-line selector-disallowed-list -- .menu is deprecated
+	.menu,
+	.horizontalNavigation {
 		margin-block-start: var(--pr-t-spacings-50);
 	}
 }
@@ -36,6 +36,8 @@
 }
 
 @mixin wide {
+	--components-pageHeader-content-action-flexShrink: 0;
+	--components-pageHeader-content-flexWrap: nowrap;
 	--components-pageHeader-padding: var(--pr-t-spacings-300) var(--pr-t-spacings-400);
 }
 

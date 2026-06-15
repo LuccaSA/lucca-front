@@ -7,6 +7,9 @@ import { IconComponent } from '@lucca-front/ng/icon';
 import { ReplaySubject } from 'rxjs';
 import { BaseDataTableCell } from '../base-data-table-cell';
 import { LU_DATA_TABLE_CELL_INSTANCE } from '../data-table-cell.token';
+import { DataTableSort } from '../data-table.type';
+
+const SORT_VALUES = ['none', 'ascending', 'descending'] as const;
 
 @Component({
 	// eslint-disable-next-line @angular-eslint/component-selector
@@ -41,12 +44,13 @@ import { LU_DATA_TABLE_CELL_INSTANCE } from '../data-table-cell.token';
 export class DataTableRowCellHeaderComponent extends BaseDataTableCell implements AfterContentInit {
 	elementRef = inject<ElementRef<HTMLTableCellElement>>(ElementRef);
 
-	sort = model<null | 'none' | 'ascending' | 'descending'>(null);
+	sort = model<DataTableSort | null>(null);
 	fixedWidth = input<string | null>(null);
 	inlineSize = input<string | null>(null);
 
 	insetInlineStart = computed(() => {
-		if (!this.isStickyStart() || !this.headRef) {
+		const isFirstOrLastCol = this.position() === 0 || this.position() === (this.rowRef?.cells().length ?? 0) - 1;
+		if (isFirstOrLastCol || !this.isStickyStart() || !this.headRef) {
 			return '';
 		}
 		return (
@@ -60,7 +64,8 @@ export class DataTableRowCellHeaderComponent extends BaseDataTableCell implement
 	});
 
 	insetInlineEnd = computed(() => {
-		if (!this.isStickyEnd() || !this.headRef) {
+		const isFirstOrLastCol = this.position() === 0 || this.position() === (this.rowRef?.cells().length ?? 0) - 1;
+		if (isFirstOrLastCol || !this.isStickyEnd() || !this.headRef) {
 			return '';
 		}
 		return (
@@ -81,5 +86,11 @@ export class DataTableRowCellHeaderComponent extends BaseDataTableCell implement
 		new ResizeObserver(() => {
 			this.#inlineSizePx$.next(this.elementRef.nativeElement.clientWidth);
 		}).observe(this.elementRef.nativeElement);
+	}
+
+	toggleSort(): void {
+		if (this.sort()) {
+			this.sort.set(SORT_VALUES[(SORT_VALUES.indexOf(this.sort()) + 1) % SORT_VALUES.length]);
+		}
 	}
 }

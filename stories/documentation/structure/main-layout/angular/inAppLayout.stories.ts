@@ -36,7 +36,7 @@ export default {
 		},
 		repeatContent: {
 			control: { type: 'range', min: 1, max: 10 },
-			description: "[Story] Modifie le nombre d'éléments <lu-main-layout-block>",
+			description: '[Story] Modifie le nombre d’éléments <lu-main-layout-block>',
 		},
 		repeatOverflow: {
 			control: { type: 'range', min: 1, max: 10 },
@@ -148,8 +148,8 @@ export default {
 				content: '';
 				position: absolute;
 				inset-inline-start: var(--pr-t-spacings-100);
-				width: 122px;
-				height: 32px;
+				inline-size: 122px;
+				block-size: 32px;
 				background-color: var(--palettes-neutral-50);
 				border-radius: var(--pr-t-border-radius-50);
 			}
@@ -158,8 +158,8 @@ export default {
 				content: '';
 				position: absolute;
 				inset-inline-end: var(--pr-t-spacings-100);
-				width: 32px;
-				height: 32px;
+				inline-size: 32px;
+				block-size: 32px;
 				background-color: var(--palettes-neutral-200);
 				border-radius: var(--pr-t-border-radius-full);
 			}

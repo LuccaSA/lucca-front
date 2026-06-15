@@ -1,6 +1,7 @@
 import { afterNextRender, booleanAttribute, ChangeDetectionStrategy, Component, computed, DestroyRef, ElementRef, inject, input, signal, viewChild, ViewEncapsulation } from '@angular/core';
 import { intlInputOptions, isNil } from '@lucca-front/ng/core';
 import { LU_READMORE_TRANSLATIONS } from './read-more.translate';
+import { ReadMoreSurface } from './read-more.type';
 
 @Component({
 	selector: 'lu-read-more',
@@ -11,7 +12,7 @@ import { LU_READMORE_TRANSLATIONS } from './read-more.translate';
 	host: {
 		class: 'readMore',
 		'[style.--components-readMore-lineClamp]': 'lineClamp()',
-		'[style.--components-readMore-content-lastChild-content]': 'labelReadLess',
+		'[style.--components-readMore-content-lastChild-content]': '`"${labelReadLess()}"`',
 		'[class.is-disabled]': '!expanded() && !isClamped()',
 		'[class.mod-openOnly]': 'openOnly()',
 		'[class.mod-sunken]': 'surface() === `sunken`',
@@ -40,7 +41,7 @@ export class ReadMoreComponent {
 	/**
 	 * Apply the spacing of the Text Flow component
 	 */
-	readonly surface = input<null | 'sunken' | 'default' | string>(null);
+	readonly surface = input<ReadMoreSurface | string | null>(null);
 
 	/**
 	 * Allow content to be passed via innerHTML

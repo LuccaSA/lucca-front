@@ -34,7 +34,7 @@ export class IndexTableComponent {
 	rows = contentChildren(IndexTableRowComponent, { descendants: true });
 	header = contentChild(IndexTableHeadComponent, { descendants: true });
 
-	cols = computed(() => this.header().cols());
+	cols = computed(() => this.header()?.cols());
 
 	classMods = computed(() => {
 		return {

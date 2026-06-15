@@ -6,7 +6,7 @@ export default {
 
 function getTemplate(): string {
 	return `<dl class="presentation">
-	<dt class="presentation-term">label</dt>
+	<dt class="presentation-term">Label</dt>
 	<dd class="presentation-definition">Value</dd>
 </dl>`;
 }

@@ -1,11 +1,13 @@
 import { LOCALE_ID } from '@angular/core';
 import { FormsModule } from '@angular/forms';
-import { DateInputComponent } from '@lucca-front/ng/date2';
+import { CALENDAR_MODE, DATE2_CLEAR_BEHAVIOR, DATE_FORMAT_CONST, DateInputComponent } from '@lucca-front/ng/date2';
 import { FormFieldComponent } from '@lucca-front/ng/form-field';
 import { IconComponent } from '@lucca-front/ng/icon';
 import { applicationConfig, Meta, moduleMetadata, StoryObj } from '@storybook/angular';
-import { generateInputs } from '../../../helpers/stories';
+import { createTestStory, generateInputs, setStoryOptions } from '../../../helpers/stories';
 import { StoryModelDisplayComponent } from '../../../helpers/story-model-display.component';
+import { waitForAngular } from '../../../helpers/test';
+import { expect, screen, userEvent, within } from 'storybook/test';
 
 export default {
 	title: 'Documentation/Forms/Date2/DateInput',
@@ -36,26 +38,26 @@ export default {
 		},
 		clearable: {
 			control: 'boolean',
-			description: "Ajoute un bouton de suppression lorsqu'une date est sélectionnée.",
+			description: 'Ajoute un bouton de suppression lorsqu’une date est sélectionnée.',
 		},
 		clearBehavior: {
 			control: 'select',
-			options: ['clear', 'reset'],
+			options: setStoryOptions(DATE2_CLEAR_BEHAVIOR),
 			description: '[v20.1] Change le comportement au clic sur la croix de suppression',
 		},
 		format: {
 			control: 'select',
-			options: ['date', 'date-iso'],
+			options: setStoryOptions(DATE_FORMAT_CONST),
 			description: 'Modifie le format de date.',
 		},
 		mode: {
 			control: 'select',
-			options: ['day', 'month', 'year'],
+			options: setStoryOptions(CALENDAR_MODE),
 			description: "Modifie le mode de sélection au mois ou à l'année.",
 		},
 		focusedDate: {
 			control: 'date',
-			description: "Définit la date préselectionnée à l'ouverture du calendrier.",
+			description: 'Définit la date préselectionnée à l’ouverture du calendrier.',
 		},
 		widthAuto: {
 			control: 'boolean',
@@ -68,7 +70,7 @@ export default {
 			description: 'Masque les jours du mois précédent ou suivant visibles sur le mois en cours.',
 		},
 		hideWeekend: {
-			description: "Retire l'effet grisé visible sur les jours du isWeekend.",
+			description: 'Retire l’effet grisé visible sur les jours du isWeekend.',
 		},
 		presentation: {
 			description: '[v21.1] Transforme le champ de formulaire en donnée textuelle non éditable.',
@@ -133,3 +135,31 @@ export const StartFromYear: StoryObj<DateInputComponent & { selected: Date; pres
 		selected: null,
 	},
 };
+
+export const BasicTEST = createTestStory(Basic, async ({ canvasElement, step }) => {
+	await waitForAngular();
+	const canvas = within(canvasElement);
+	const input = canvas.getByTestId('lu-date-input');
+
+	await step('Vérifie le rendu initial', async () => {
+		await expect(input).toBeVisible();
+	});
+
+	await step('Interaction souris - ouverture du calendrier', async () => {
+		await userEvent.click(input);
+		await waitForAngular();
+		await expect(screen.getByRole('grid')).toBeVisible();
+		await userEvent.keyboard('{Escape}');
+		await waitForAngular();
+	});
+
+	await step('Interaction clavier - ouverture du calendrier', async () => {
+		input.focus();
+		await expect(input).toHaveFocus();
+		await userEvent.keyboard('{ArrowDown}');
+		await waitForAngular();
+		await expect(screen.getByRole('grid')).toBeVisible();
+		await userEvent.keyboard('{Escape}');
+		await waitForAngular();
+	});
+});

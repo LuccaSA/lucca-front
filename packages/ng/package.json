@@ -4,7 +4,8 @@
   "description": "A library of icons made by the team @Lucca",
   "repository": {
     "type": "git",
-    "url": "git+https://github.com/LuccaSA/lucca-front.git"
+    "url": "git+https://github.com/LuccaSA/lucca-front.git",
+    "directory": "packages/ng"
   },
   "schematics": "./schematics/collection.json",
   "ng-update": {
@@ -24,7 +25,7 @@
   "author": "Guilde Front Lucca <guilde-front@lucca.fr>",
   "peerDependencies": {
     "@angular/common": "^21.0.0",
-    "@angular/core": "^21.0.0",
+    "@angular/core": "^21.2.4",
     "@angular/cdk": "^21.0.0",
     "@angular/animations": "^21.0.0",
     "@lucca-front/icons": "*",

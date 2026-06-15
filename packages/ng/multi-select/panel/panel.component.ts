@@ -1,7 +1,7 @@
 import { A11yModule } from '@angular/cdk/a11y';
 import { AsyncPipe, NgTemplateOutlet } from '@angular/common';
-import { AfterViewInit, ChangeDetectionStrategy, Component, computed, forwardRef, inject, signal, TrackByFunction } from '@angular/core';
-import { toObservable } from '@angular/core/rxjs-interop';
+import { AfterViewInit, ChangeDetectionStrategy, Component, computed, forwardRef, HostListener, inject, signal, TrackByFunction } from '@angular/core';
+import { toObservable, toSignal } from '@angular/core/rxjs-interop';
 import { FormsModule } from '@angular/forms';
 import { PortalDirective } from '@lucca-front/ng/core';
 import {
@@ -63,6 +63,7 @@ export class LuMultiSelectPanelComponent<T> implements AfterViewInit, CoreSelect
 	options$ = this.selectInput.options$;
 	grouping = this.selectInput.groupingSignal;
 	treeGenerator = this.selectInput.treeGenerator;
+	loading = toSignal(this.selectInput.loading$);
 	loading$ = this.selectInput.loading$;
 	searchable = this.selectInput.searchable;
 	optionComparer = this.selectInput.optionComparer;
@@ -77,6 +78,17 @@ export class LuMultiSelectPanelComponent<T> implements AfterViewInit, CoreSelect
 	optionTpl = this.selectInput.optionTpl;
 
 	options = signal<ɵCoreSelectPanelElement<T>[]>([]);
+	pointerNavigation = signal(false);
+
+	@HostListener('document:keydown')
+	onKeydown(): void {
+		this.pointerNavigation.set(false);
+	}
+
+	@HostListener('document:mousemove')
+	onMousemove(): void {
+		this.pointerNavigation.set(true);
+	}
 	keyManager = inject<CoreSelectKeyManager<T>>(CoreSelectKeyManager);
 
 	someGroupOptionEnabled = computed(() => {

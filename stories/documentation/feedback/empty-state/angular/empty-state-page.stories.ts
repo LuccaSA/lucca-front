@@ -1,6 +1,6 @@
 import { HttpClientModule } from '@angular/common/http';
 import { ButtonComponent } from '@lucca-front/ng/button';
-import { EmptyStatePageComponent } from '@lucca-front/ng/empty-state';
+import { EMPTY_STATE_HX, EMPTY_STATE_HX_STYLE, EmptyStatePageComponent } from '@lucca-front/ng/empty-state';
 import { Meta, moduleMetadata, StoryObj } from '@storybook/angular';
 
 export default {
@@ -12,12 +12,42 @@ export default {
 		}),
 	],
 	render: (args) => {
-		const { heading, description, slotTop, hx } = args;
-		const paramIcon = args['icon'] === '' ? '' : 'icon="https://cdn.lucca.fr/lucca-front/assets/empty-states/message/' + args['icon'] + '.svg"';
-		const paramTopRightBackground = args['topRightBackground'] === '' ? '' : 'topRightBackground="https://cdn.lucca.fr/lucca-front/assets/empty-states/' + args['topRightBackground'] + '.svg"';
-		const paramTopRightForeground = args['topRightForeground'] === '' ? '' : 'topRightForeground="https://cdn.lucca.fr/lucca-front/assets/empty-states/' + args['topRightForeground'] + '.svg"';
-		const paramBottomLeftBackground = args['bottomLeftBackground'] === '' ? '' : 'bottomLeftBackground="https://cdn.lucca.fr/lucca-front/assets/empty-states/' + args['bottomLeftBackground'] + '.svg"';
-		const paramBottomLeftForeground = args['bottomLeftForeground'] === '' ? '' : 'bottomLeftForeground="https://cdn.lucca.fr/lucca-front/assets/empty-states/' + args['bottomLeftForeground'] + '.svg"';
+		const { heading, description, slotTop } = args;
+		const paramHx =
+			args['hx'] === 1
+				? ``
+				: `
+	hx="${args['hx']}"`;
+		const paramHxStyle =
+			args['hxStyle'] === 1
+				? ``
+				: `
+	hxStyle="${args['hxStyle']}"`;
+		const paramIcon =
+			args['icon'] === ''
+				? ``
+				: `
+	icon="https://cdn.lucca.fr/lucca-front/assets/empty-states/message/${args['icon']}.svg"`;
+		const paramTopRightBackground =
+			args['topRightBackground'] === ''
+				? ``
+				: `
+	topRightBackground="https://cdn.lucca.fr/lucca-front/assets/empty-states/${args['topRightBackground']}.svg"`;
+		const paramTopRightForeground =
+			args['topRightForeground'] === ''
+				? ``
+				: `
+	topRightForeground="https://cdn.lucca.fr/lucca-front/assets/empty-states/${args['topRightForeground']}.svg"`;
+		const paramBottomLeftBackground =
+			args['bottomLeftBackground'] === ''
+				? ``
+				: `
+	bottomLeftBackground="https://cdn.lucca.fr/lucca-front/assets/empty-states/${args['bottomLeftBackground']}.svg"`;
+		const paramBottomLeftForeground =
+			args['bottomLeftForeground'] === ''
+				? ``
+				: `
+	bottomLeftForeground="https://cdn.lucca.fr/lucca-front/assets/empty-states/${args['bottomLeftForeground']}.svg"`;
 		return {
 			styles: [
 				`
@@ -31,13 +61,7 @@ export default {
 			template: `<lu-empty-state-page
 	heading="${heading}"
 	slotTop="${slotTop}"
-	description="${description}"
-	${paramIcon}
-	${paramTopRightBackground}
-	${paramTopRightForeground}
-	${paramBottomLeftBackground}
-	${paramBottomLeftForeground}
-	hx="${hx}"
+	description="${description}"${paramIcon}${paramTopRightBackground}${paramTopRightForeground}${paramBottomLeftBackground}${paramBottomLeftForeground}${paramHx}${paramHxStyle}
 >
 	<button luButton type="button" palette="product">Button</button>
 	<button luButton="outlined" type="button">Button</button>
@@ -64,6 +88,7 @@ export default {
 				'timmi/bubbles-top-right-03',
 			],
 			control: 'select',
+			description: 'Illustration de fond dans le coin supérieur droit.',
 		},
 		topRightForeground: {
 			options: [
@@ -80,6 +105,7 @@ export default {
 				'generic/plug-01',
 			],
 			control: 'select',
+			description: 'Illustration de premier plan dans le coin supérieur droit.',
 		},
 		bottomLeftBackground: {
 			options: [
@@ -100,6 +126,7 @@ export default {
 				'timmi/bubbles-bottom-left-03',
 			],
 			control: 'select',
+			description: 'Illustration de fond dans le coin inférieur gauche.',
 		},
 		bottomLeftForeground: {
 			options: [
@@ -127,34 +154,45 @@ export default {
 				'timmi/timesheet-01',
 			],
 			control: 'select',
+			description: 'Illustration de premier plan dans le coin inférieur gauche.',
 		},
 		icon: {
 			options: ['', 'medal-01', 'post-it-01'],
 			control: {
 				type: 'select',
 			},
+			description: 'Affiche une illustration au dessus du titre.',
 		},
 		contentBackgroundColor: {
 			control: {
 				type: 'text',
 			},
+			description: 'Modifie la couleur de fond du contenu (variable CSS, couleur hexadécimale, etc.).',
 		},
 		hx: {
 			control: {
 				type: 'number',
-				min: 1,
-				max: 6,
+				min: EMPTY_STATE_HX.at(0),
+				max: EMPTY_STATE_HX.at(EMPTY_STATE_HX.length - 1),
 			},
-			description: '[v18.1]',
+			description: 'Niveau de titre (sémantique).',
+		},
+		hxStyle: {
+			control: {
+				type: 'number',
+				min: EMPTY_STATE_HX_STYLE.at(0),
+				max: EMPTY_STATE_HX_STYLE.at(EMPTY_STATE_HX_STYLE.length - 1),
+			},
+			description: '[v21.2] Niveau du titre (style).',
 		},
 		heading: {
-			description: '[v18.1] Optional',
+			description: 'Titre du composant.',
 		},
 		description: {
-			description: '[v18.1] Optional',
+			description: 'Description du composant. [PortalContent]',
 		},
 		slotTop: {
-			description: '[v19.3] Optional, Add content above heading.',
+			description: '[v19.3] Ajout d’un slot au dessus du titre. [PortalContent]',
 		},
 	},
 } as Meta;
@@ -171,5 +209,6 @@ export const Page: StoryObj<EmptyStatePageComponent> = {
 		bottomLeftForeground: 'poplee/core-hr-01',
 		contentBackgroundColor: 'var(--pr-t-elevation-surface-default)',
 		hx: 1,
+		hxStyle: 1,
 	},
 };

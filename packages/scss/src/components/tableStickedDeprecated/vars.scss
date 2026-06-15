@@ -1,8 +1,3 @@
 @mixin vars {
-	// --components-table-sticky-column-max-offset: 50;
-	// --components-tableFixed-column-min-col-width: 2;
-	// --components-tableFixed-column-max-col-width: 20;
-	// --components-tableFixed-column-sticky-shadow-color: #2a3551;
-
-	--components-tableFixed-column-sticky-shadow-width: 0.625rem;
+	--components-tableFixed-column-sticky-shadow-width: calc(var(--pr-t-spacings-100) + var(--pr-t-spacings-25));
 }

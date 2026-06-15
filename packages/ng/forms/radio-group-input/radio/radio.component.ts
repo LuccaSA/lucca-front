@@ -3,6 +3,7 @@ import { booleanAttribute, ChangeDetectionStrategy, ChangeDetectorRef, Component
 import { ReactiveFormsModule } from '@angular/forms';
 import { LuClass, PortalContent, ɵeffectWithDeps } from '@lucca-front/ng/core';
 import { InputDirective, InputFramedComponent, ɵPresentationDisplayDefaultDirective } from '@lucca-front/ng/form-field';
+import { FormLabelComponent } from '@lucca-front/ng/form-label';
 import { InlineMessageComponent } from '@lucca-front/ng/inline-message';
 import { RADIO_GROUP_INSTANCE } from '../radio-group-token';
 import { takeUntilDestroyed } from '@angular/core/rxjs-interop';
@@ -11,7 +12,7 @@ let nextId = 0;
 
 @Component({
 	selector: 'lu-radio',
-	imports: [ReactiveFormsModule, InlineMessageComponent, NgTemplateOutlet, InputDirective, InputFramedComponent, ɵPresentationDisplayDefaultDirective],
+	imports: [ReactiveFormsModule, InlineMessageComponent, NgTemplateOutlet, InputDirective, InputFramedComponent, FormLabelComponent, ɵPresentationDisplayDefaultDirective],
 	templateUrl: './radio.component.html',
 	styleUrl: './radio.component.scss',
 	host: {

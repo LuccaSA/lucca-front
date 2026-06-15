@@ -22,8 +22,10 @@ function getTemplate(args: ErrorBasicStory): string {
 										<section class="errorPage-section">
 											<div class="errorPage-section-info">
 												<h1 class="errorPage-section-info-title">Titre de l’erreur</h1>
-												<p class="errorPage-section-info-text">Vous n’êtes pas autorisé à consulter cette page ou cette ressource.</p>
-												<p><a href="#" class="errorPage-section-info-link">Revenir à la page précédente</a></p>
+												<div class="textFlow">
+													<p>Vous n’êtes pas autorisé à consulter cette page ou cette ressource.</p>
+													<p><a href="#" class="errorPage-section-info-link">Revenir à la page précédente</a></p>
+												</div>
 											</div>
 											<img src="https://cdn.lucca.fr/errors/svg/403-lucca.svg" alt="Erreur 403" class="errorPage-section-image">
 										</section>
@@ -81,8 +83,8 @@ const Template = (args: ErrorBasicStory) => ({
 			content: '';
 			position: absolute;
 			inset-inline-start: var(--pr-t-spacings-100);
-			width: 122px;
-			height: 32px;
+			inline-size: 122px;
+			block-size: 32px;
 			background-color: var(--palettes-neutral-50);
 			border-radius: var(--pr-t-border-radius-50);
 		}
@@ -91,8 +93,8 @@ const Template = (args: ErrorBasicStory) => ({
 			content: '';
 			position: absolute;
 			inset-inline-end: var(--pr-t-spacings-100);
-			width: 32px;
-			height: 32px;
+			inline-size: 32px;
+			block-size: 32px;
 			background-color: var(--palettes-neutral-200);
 			border-radius: var(--pr-t-border-radius-full);
 		}

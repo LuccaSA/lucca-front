@@ -1,7 +1,8 @@
-import { ButtonComponent } from '@lucca-front/ng/button';
+import { BUTTON_SIZE, BUTTON_STATE, BUTTON_TYPE, ButtonComponent } from '@lucca-front/ng/button';
 import { IconComponent } from '@lucca-front/ng/icon';
+import { PALETTE } from '@lucca/prisme/core';
 import { Meta, moduleMetadata, StoryObj } from '@storybook/angular';
-import { createTestStory, generateInputs } from 'stories/helpers/stories';
+import { createTestStory, generateInputs, setStoryOptions } from 'stories/helpers/stories';
 import { expect, within } from 'storybook/test';
 import { BasicTEST as ButtonBasic } from './button-basic.stories';
 
@@ -32,10 +33,10 @@ export default {
 export const Basic: StoryObj<ButtonComponent & { label: string }> = {
 	argTypes: {
 		label: {
-			description: '[Story] Modifie le label du boutton.',
+			description: '[Story] Modifie le label du bouton.',
 		},
 		luButton: {
-			options: ['', 'outlined', 'ghost', 'ghost-invert', 'AI', 'AI-invert'],
+			options: setStoryOptions(BUTTON_TYPE),
 			control: {
 				type: 'select',
 			},
@@ -47,13 +48,14 @@ export const Basic: StoryObj<ButtonComponent & { label: string }> = {
 		palette: {
 			if: { arg: 'luButton', neq: 'AI' },
 			description: 'Applique une palette de couleurs au bouton.',
-			options: ['', 'product', 'neutral', 'success', 'warning', 'critical'],
+			options: setStoryOptions(PALETTE),
 			control: {
 				type: 'select',
 			},
 		},
 		state: {
-			description: "Modifie l'état du bouton.",
+			description: 'Modifie l’état du bouton.',
+			options: setStoryOptions(BUTTON_STATE),
 			control: {
 				type: 'select',
 			},
@@ -62,13 +64,14 @@ export const Basic: StoryObj<ButtonComponent & { label: string }> = {
 			description: '[v20.2] Marque une action aux conséquences importantes ou irréversibles au survol et focus. Seulement compatible avec <code>outlined</code> et <code>ghost</code>.',
 		},
 		disclosure: {
-			description: "Indique le présence d'un menu.",
+			description: 'Indique la présence d’un menu.',
 		},
 		delete: {
 			description: '[Deprecated] Remplacé par <code>critical</code>.',
 		},
 		size: {
 			description: 'Modifie la taille du composant.',
+			options: setStoryOptions(BUTTON_SIZE),
 			control: {
 				type: 'select',
 			},

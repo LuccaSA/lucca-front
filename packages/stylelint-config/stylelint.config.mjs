@@ -5,8 +5,16 @@ import LFDeprecatedSelectors from './LFDeprecatedSelectors.mjs';
 import { getDisallowedObjects, getDisallowedData } from './stylelintForLF.mjs';
 
 export default {
-	extends: ['stylelint-config-standard-scss', 'stylelint-config-prettier-scss'],
+	extends: ['@stylistic/stylelint-config', 'stylelint-config-standard-scss'],
 	overrides: [
+		{
+			files: ['**/*.scss'],
+			rules: {
+				// Disable for now because of bugs with SCSS files.
+				// SEE https://github.com/stylelint-scss/stylelint-config-standard-scss/issues/252
+				'no-invalid-position-declaration': null,
+			},
+		},
 		{
 			// Allow common component files to be empty.
 			files: ['**/vars.scss'],
@@ -45,6 +53,7 @@ export default {
 				message: (variable) => `Expected "${variable}" to match pattern $foo(-bar(Baz)*)*`,
 			},
 		],
+		'scss/operator-no-newline-before': null,
 		'scss/percent-placeholder-pattern': [
 			'^([a-z][a-zA-Z0-9]*)((-(([a-z0-9]+[a-zA-Z0-9]*)|([A-Z]+))+)*)$',
 			{
@@ -155,5 +164,25 @@ export default {
 			},
 		],
 		'value-keyword-case': null,
+
+		// Formatting with @stylistic
+		// SEE: https://github.com/stylelint-stylistic/stylelint-stylistic/blob/main/docs/user-guide/rules.md
+		// ============================================================================================
+
+		'@stylistic/block-closing-brace-newline-after': [
+			'always-multi-line',
+			{
+				ignoreAtRules: ['if', 'else'],
+			},
+		],
+		'@stylistic/indentation': 'tab',
+		'@stylistic/max-line-length': null,
+		'@stylistic/named-grid-areas-alignment': [
+			true,
+			{
+				alignQuotes: true,
+			},
+		],
+		'@stylistic/string-quotes': 'single',
 	},
 };

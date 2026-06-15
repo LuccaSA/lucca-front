@@ -1,4 +1,6 @@
+import { INLINE_MESSAGE_STATE } from '@lucca-front/ng/inline-message';
 import { Meta, StoryObj } from '@storybook/angular';
+import { setStoryOptions } from 'stories/helpers/stories';
 
 interface CheckboxBasicStory {
 	disabled: boolean;
@@ -70,7 +72,7 @@ export default {
 			},
 		},
 		messageState: {
-			options: ['', 'error', 'warning', 'success'],
+			options: setStoryOptions(INLINE_MESSAGE_STATE),
 			control: {
 				type: 'select',
 			},
@@ -139,7 +141,6 @@ export const Basic: StoryObj<CheckboxBasicStory> = {
 		mixed: false,
 		invalid: false,
 		help: false,
-		messageState: '',
 		id: 'field1',
 		label: 'Label',
 		message: 'Helper text',
