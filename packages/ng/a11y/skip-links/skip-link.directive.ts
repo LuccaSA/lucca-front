@@ -21,8 +21,8 @@ export class SkipLinkDirective implements OnDestroy {
 
 	#link = computed(() => {
 		return {
-			id: this.linkTarget(),
 			label: this.luSkipLinkLabel(),
+			id: this.linkTarget(),
 			host: this.#host.nativeElement,
 		};
 	});
