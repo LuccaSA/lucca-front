@@ -85,6 +85,8 @@ export class TimePickerComponent extends BasePickerComponent {
 	protected readonly minutesDisplay = computed(() => getMinutesDisplayPartFromIsoTime(this.value()));
 
 	protected readonly hours = computed(() => getHoursPartFromIsoTime(this.value()));
+	// Empty must stay '––', not 0, or typing "0" is a deduped no-op.
+	protected readonly hoursInputValue = computed<number | '––'>(() => getHoursDisplayPartFromIsoTime(this.value()));
 	protected readonly minutes = computed(() => getMinutesPartFromIsoTime(this.value()));
 	protected readonly pickerClasses = computed(() => {
 		return {
