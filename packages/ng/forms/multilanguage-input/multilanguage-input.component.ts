@@ -127,7 +127,7 @@ export class MultilanguageInputComponent implements ControlValueAccessor {
 			value = [];
 		}
 		if (value.length > 0) {
-			if (!value.some((row) => row.cultureCode === INVARIANT_CULTURE_CODE)) {
+			if (!this.hasNoInvariant() && !value.some((row) => row.cultureCode === INVARIANT_CULTURE_CODE)) {
 				throw new Error('Please provide an invariant translation in translation array');
 			}
 			this.model.set(value);
