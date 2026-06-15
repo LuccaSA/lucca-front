@@ -139,7 +139,7 @@ const basePlay = async ({ canvasElement, step, context }) => {
 		await userEvent.click(startHours);
 		await waitForAngular();
 		await expect(startHours).toHaveFocus();
-		await userEvent.type(startHours, '09:00');
+		await userEvent.type(startHours, '9');
 		await waitForAngular();
 		await expectNgModelDisplay(context.canvasElement, '{ "start": "09:00:00" }');
 
@@ -147,7 +147,7 @@ const basePlay = async ({ canvasElement, step, context }) => {
 		await userEvent.click(endHours);
 		await waitForAngular();
 		await expect(endHours).toHaveFocus();
-		await userEvent.type(endHours, '10:00');
+		await userEvent.type(endHours, '10');
 		await waitForAngular();
 		await expectNgModelDisplay(context.canvasElement, '{ "start": "09:00:00", "end": "10:00:00" }');
 	});

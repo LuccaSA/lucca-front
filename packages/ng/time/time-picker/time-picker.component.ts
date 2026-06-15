@@ -135,7 +135,7 @@ export class TimePickerComponent extends BasePickerComponent {
 	}
 
 	writeValue(value: ISO8601Time): void {
-		this.value.set(value || '––:––:––');
+		this.value.set(value || DEFAULT_MIN_TIME);
 		if (value) {
 			this.hoursPart()?.isValueSet.set(true);
 			this.minutesPart()?.isValueSet.set(true);
