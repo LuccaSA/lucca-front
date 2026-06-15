@@ -11,7 +11,7 @@ import { PopoverDirective } from '@lucca-front/ng/popover2';
 import { ScrollBoxComponent } from '@lucca-front/ng/scroll-box';
 import { LuTooltipModule } from '@lucca-front/ng/tooltip';
 import { applicationConfig, Meta, moduleMetadata, StoryObj } from '@storybook/angular';
-import { StoryModelDisplayComponent } from 'stories/helpers/story-model-display.component';
+import { StoryModelDisplayComponent } from '@/helpers/story-model-display.component';
 
 interface FilterBarBasicStory {
 	label: string;

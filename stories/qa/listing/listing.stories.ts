@@ -1,7 +1,7 @@
 import { ChangeDetectionStrategy, Component } from '@angular/core';
 import { ListingComponent, ListingItemComponent } from '@lucca-front/ng/listing';
 import { Meta, StoryObj } from '@storybook/angular';
-import { PaletteAllArgType } from 'stories/helpers/common-arg-types';
+import { PaletteAllArgType } from '@/helpers/common-arg-types';
 
 @Component({
 	selector: 'listing-stories',

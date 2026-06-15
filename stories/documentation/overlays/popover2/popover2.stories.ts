@@ -5,7 +5,7 @@ import { IconComponent } from '@lucca-front/ng/icon';
 import { ListingComponent, ListingItemComponent } from '@lucca-front/ng/listing';
 import { configureLuPopover, PopoverDirective } from '@lucca-front/ng/popover2';
 import { applicationConfig, Meta, moduleMetadata, StoryObj } from '@storybook/angular';
-import { waitForAngular } from 'stories/helpers/test';
+import { waitForAngular } from '@/helpers/test';
 import { expect, screen, userEvent, within } from 'storybook/test';
 import { HiddenArgType } from '../../../helpers/common-arg-types';
 import { cleanupTemplate, createTestStory, generateInputs } from '../../../helpers/stories';

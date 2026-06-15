@@ -2,7 +2,7 @@ import { IconsList } from '@/stories/icons-list';
 import { BUBBLE_ICON_DIRECTION, BUBBLE_ICON_SIZE } from '@lucca-front/ng/bubble-icon';
 import { DECORATIVE_PALETTE, PALETTE } from '@lucca/prisme/core';
 import { Meta, StoryObj } from '@storybook/angular';
-import { setStoryOptions } from 'stories/helpers/stories';
+import { setStoryOptions } from '@/helpers/stories';
 
 interface BubbleIconBasicStory {
 	icon: string;

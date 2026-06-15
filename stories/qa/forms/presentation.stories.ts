@@ -22,7 +22,7 @@ import { provideLuRichTextMarkdownFormatter } from '@lucca-front/ng/forms/rich-t
 import { LuMultiSelectInputComponent } from '@lucca-front/ng/multi-select';
 import { LuSimpleSelectInputComponent } from '@lucca-front/ng/simple-select';
 import { applicationConfig, Meta, moduleMetadata, StoryObj } from '@storybook/angular';
-import { cleanupTemplate, generateInputs } from 'stories/helpers/stories';
+import { cleanupTemplate, generateInputs } from '@/helpers/stories';
 
 export default {
 	title: 'QA/Forms/Presentation',

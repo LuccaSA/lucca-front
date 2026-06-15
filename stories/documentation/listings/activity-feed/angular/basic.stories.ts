@@ -1,4 +1,5 @@
-import { finn } from '@/stories/users/user.mocks';
+import { createTestStory } from '@/helpers/stories';
+import { waitForAngular } from '@/helpers/test';
 import { LOCALE_ID } from '@angular/core';
 import { ActivityFeedComponent, ActivityFeedStepComponent, ActivityFeedUpdateComponent } from '@lucca-front/ng/activity-feed';
 import { CommentComponent } from '@lucca-front/ng/comment';
@@ -7,8 +8,6 @@ import { ReadMoreComponent } from '@lucca-front/ng/read-more';
 import { StatusBadgeComponent } from '@lucca-front/ng/status-badge';
 import { ButtonComponent } from '@lucca/prisme/button';
 import { applicationConfig, Meta, moduleMetadata, StoryObj } from '@storybook/angular';
-import { createTestStory } from 'stories/helpers/stories';
-import { waitForAngular } from 'stories/helpers/test';
 import { expect, within } from 'storybook/test';
 
 interface ActivityFeedBasicStory {

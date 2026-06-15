@@ -14,7 +14,7 @@ import { LinkComponent } from '@lucca-front/ng/link';
 import { PageHeaderComponent } from '@lucca-front/ng/page-header';
 import { LuTooltipModule } from '@lucca-front/ng/tooltip';
 import { applicationConfig, Meta, moduleMetadata } from '@storybook/angular';
-import { generateInputs } from 'stories/helpers/stories';
+import { generateInputs } from '@/helpers/stories';
 
 const me = { id: 66, picture: null, department: { id: 3, name: 'Commercial' }, firstName: 'Pierre', lastName: 'Durand' };
 

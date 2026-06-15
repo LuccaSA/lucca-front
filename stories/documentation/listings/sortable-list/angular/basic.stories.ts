@@ -1,6 +1,6 @@
 import { SortableListComponent, SortableListItemComponent } from '@lucca-front/ng/sortable-list';
 import { Meta, moduleMetadata } from '@storybook/angular';
-import { cleanupTemplate } from 'stories/helpers/stories';
+import { cleanupTemplate } from '@/helpers/stories';
 
 interface SortableListBasicStories {
 	label: string;

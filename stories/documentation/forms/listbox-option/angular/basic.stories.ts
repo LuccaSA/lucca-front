@@ -1,6 +1,6 @@
 import { LISTBOX_STATE, ListboxComponent, OptionComponent } from '@lucca-front/ng/listbox';
 import { Meta, moduleMetadata } from '@storybook/angular';
-import { cleanupTemplate, setStoryOptions } from 'stories/helpers/stories';
+import { cleanupTemplate, setStoryOptions } from '@/helpers/stories';
 
 interface OptionBasicStory {
 	multiple: boolean;

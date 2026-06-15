@@ -4,9 +4,9 @@ import { BrowserAnimationsModule } from '@angular/platform-browser/animations';
 import { FormFieldComponent } from '@lucca-front/ng/form-field';
 import { TimePickerComponent, TimeRangePickerComponent } from '@lucca-front/ng/time';
 import { Meta, moduleMetadata, StoryObj } from '@storybook/angular';
-import { createTestStory } from 'stories/helpers/stories';
-import { StoryModelDisplayComponent } from 'stories/helpers/story-model-display.component';
-import { clearInputs, expectNgModelDisplay, mapInputs, repeatKeyboardUserEvent, waitForAngular } from 'stories/helpers/test';
+import { createTestStory } from '@/helpers/stories';
+import { StoryModelDisplayComponent } from '@/helpers/story-model-display.component';
+import { clearInputs, expectNgModelDisplay, mapInputs, repeatKeyboardUserEvent, waitForAngular } from '@/helpers/test';
 import { expect, userEvent, within } from 'storybook/test';
 import { generateInputs } from '../../../../helpers/stories';
 

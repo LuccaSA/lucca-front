@@ -1,9 +1,9 @@
 import { HighlightTextComponent } from '@lucca-front/ng/highlight-text';
 import { Meta, moduleMetadata } from '@storybook/angular';
-import { PaletteAllArgType } from 'stories/helpers/common-arg-types';
+import { PaletteAllArgType } from '@/helpers/common-arg-types';
 
-import { cleanupTemplate, createTestStory } from 'stories/helpers/stories';
-import { waitForAngular } from 'stories/helpers/test';
+import { cleanupTemplate, createTestStory } from '@/helpers/stories';
+import { waitForAngular } from '@/helpers/test';
 import { expect, within } from 'storybook/test';
 
 interface HighlightBasicStory {}

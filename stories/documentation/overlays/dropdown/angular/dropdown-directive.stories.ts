@@ -3,8 +3,8 @@ import { DropdownActionComponent, DropdownDividerComponent, DropdownGroupCompone
 import { IconComponent } from '@lucca-front/ng/icon';
 import { PopoverPosition } from '@lucca-front/ng/popover2';
 import { Meta, moduleMetadata, StoryObj } from '@storybook/angular';
-import { createTestStory } from 'stories/helpers/stories';
-import { waitForAngular } from 'stories/helpers/test';
+import { createTestStory } from '@/helpers/stories';
+import { waitForAngular } from '@/helpers/test';
 import { expect, screen, userEvent, within } from 'storybook/test';
 
 interface DropdownBasicStory {

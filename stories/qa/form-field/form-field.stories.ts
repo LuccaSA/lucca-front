@@ -3,7 +3,7 @@ import { FormsModule } from '@angular/forms';
 import { FormFieldComponent, InputDirective } from '@lucca-front/ng/form-field';
 import { TextInputComponent } from '@lucca-front/ng/forms';
 import { Meta, moduleMetadata, StoryObj } from '@storybook/angular';
-import { stateArgType } from 'stories/helpers/common-arg-types';
+import { stateArgType } from '@/helpers/common-arg-types';
 
 @Component({
 	selector: 'form-field-stories',

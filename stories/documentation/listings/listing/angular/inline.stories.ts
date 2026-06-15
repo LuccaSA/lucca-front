@@ -1,9 +1,9 @@
 import { IconsList } from '@/stories/icons-list';
 import { ListingComponent, ListingItemComponent } from '@lucca-front/ng/listing';
 import { Meta, moduleMetadata, StoryObj } from '@storybook/angular';
-import { HiddenArgType, PaletteAllArgType } from 'stories/helpers/common-arg-types';
-import { createTestStory, generateInputs } from 'stories/helpers/stories';
-import { waitForAngular } from 'stories/helpers/test';
+import { HiddenArgType, PaletteAllArgType } from '@/helpers/common-arg-types';
+import { createTestStory, generateInputs } from '@/helpers/stories';
+import { waitForAngular } from '@/helpers/test';
 import { expect, within } from 'storybook/test';
 
 interface ListingBasicStory {

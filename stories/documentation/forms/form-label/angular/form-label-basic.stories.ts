@@ -1,7 +1,7 @@
 import { LOCALE_ID } from '@angular/core';
 import { FORM_LABEL_SIZE, FormLabelComponent } from '@lucca-front/ng/form-label';
 import { applicationConfig, Meta, moduleMetadata, StoryObj } from '@storybook/angular';
-import { setStoryOptions } from 'stories/helpers/stories';
+import { setStoryOptions } from '@/helpers/stories';
 
 interface FormLabelBasicStory {
 	for: string;

@@ -1,6 +1,10 @@
 import { HIGHLIGHT_DATA_PALETTE } from '@lucca-front/ng/highlight-data';
 import { Meta, StoryObj } from '@storybook/angular';
 
+interface TextHighlightStory {
+	palette: string;
+}
+
 export default {
 	title: 'Documentation/Texts/Highlight Text/HTML&CSS/Palettes',
 } as Meta;

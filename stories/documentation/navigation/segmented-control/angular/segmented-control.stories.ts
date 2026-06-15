@@ -2,9 +2,9 @@ import { FormsModule } from '@angular/forms';
 import { NumericBadgeComponent } from '@lucca-front/ng/numeric-badge';
 import { SegmentedControlComponent, SegmentedControlFilterComponent } from '@lucca-front/ng/segmented-control';
 import { Meta, moduleMetadata, StoryObj } from '@storybook/angular';
-import { createTestStory } from 'stories/helpers/stories';
-import { expectNgModelDisplay, waitForAngular } from 'stories/helpers/test';
-import { StoryModelDisplayComponent } from 'stories/helpers/story-model-display.component';
+import { createTestStory } from '@/helpers/stories';
+import { expectNgModelDisplay, waitForAngular } from '@/helpers/test';
+import { StoryModelDisplayComponent } from '@/helpers/story-model-display.component';
 import { expect, userEvent, within } from 'storybook/test';
 
 interface segmentedControlBasicStory {

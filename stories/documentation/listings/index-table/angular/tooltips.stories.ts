@@ -13,7 +13,7 @@ import {
 } from '@lucca-front/ng/index-table';
 import { LuTooltipModule } from '@lucca-front/ng/tooltip';
 import { Meta, moduleMetadata, StoryObj } from '@storybook/angular';
-import { HiddenArgType } from 'stories/helpers/common-arg-types';
+import { HiddenArgType } from '@/helpers/common-arg-types';
 
 interface BasicStory {}
 

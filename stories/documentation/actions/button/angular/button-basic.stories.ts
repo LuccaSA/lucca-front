@@ -1,7 +1,7 @@
 import { BUTTON_SIZE, BUTTON_STATE, BUTTON_TYPE, ButtonComponent } from '@lucca/prisme/button';
 import { PALETTE } from '@lucca/prisme/core';
 import { Meta, StoryObj } from '@storybook/angular';
-import { createTestStory, generateInputs, setStoryOptions } from 'stories/helpers/stories';
+import { createTestStory, generateInputs, setStoryOptions } from '@/helpers/stories';
 import { expect, within } from 'storybook/test';
 
 export default {
