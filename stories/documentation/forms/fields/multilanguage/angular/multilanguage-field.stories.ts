@@ -89,6 +89,9 @@ export default {
 		hasNoInvariant: {
 			description: "[v21.3] Supprime la notion d'invariant du champ, nécessite d'être associé à un Validateur required et l'utilisation de `displayLocale`.",
 		},
+		hasAIButtons: {
+			description: "[v21.3] Ajoute les boutons 'translate with ai', qui émettent la locale à traduire via l'output `translateWithAI`",
+		},
 		displayLocale: {
 			description: '[v21.3] Locale à utiliser comme valeur affichée dans le champ en version collapsed lorsque `hasNoInvariant` est active.',
 		},
@@ -160,6 +163,7 @@ export const Basic: StoryObj<
 		presentation: false,
 		autocomplete: 'off',
 		hasNoInvariant: false,
+		hasAIButtons: false,
 		displayLocale: 'en-US',
 	},
 };

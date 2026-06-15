@@ -62,6 +62,8 @@ export class MultilanguageInputComponent implements ControlValueAccessor {
 
 	hasNoInvariant = input(false, { transform: booleanAttribute });
 
+	hasAIButtons = input(false, { transform: booleanAttribute });
+
 	displayLocale = input('');
 
 	translateWithAI = output<string>();
@@ -79,6 +81,10 @@ export class MultilanguageInputComponent implements ControlValueAccessor {
 		} else {
 			return this.model().find((row) => row.cultureCode === INVARIANT_CULTURE_CODE) || { value: '', required: false, cultureCode: INVARIANT_CULTURE_CODE };
 		}
+	});
+
+	cultureCodeDisplay = computed(() => {
+		return this.displayLocale().split('-')[0]?.toUpperCase();
 	});
 
 	panelInputs = computed(() => {
@@ -121,7 +127,7 @@ export class MultilanguageInputComponent implements ControlValueAccessor {
 			value = [];
 		}
 		if (value.length > 0) {
-			if (!value.some((row) => row.cultureCode === INVARIANT_CULTURE_CODE)) {
+			if (!this.hasNoInvariant() && !value.some((row) => row.cultureCode === INVARIANT_CULTURE_CODE)) {
 				throw new Error('Please provide an invariant translation in translation array');
 			}
 			this.model.set(value);
