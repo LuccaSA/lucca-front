@@ -1,10 +1,9 @@
 import { ChangeDetectionStrategy, Component } from '@angular/core';
 import { LuSkipLinksComponent, SkipLinkDirective, SkipLinksService } from '@lucca-front/ng/a11y';
 import { applicationConfig, Meta, StoryObj } from '@storybook/angular';
-import { Meta, StoryObj } from '@storybook/angular';
 import { createTestStory } from 'stories/helpers/stories';
 import { waitForAngular } from 'stories/helpers/test';
-import { expect, userEvent, within } from 'storybook/test';
+import { expect, within } from 'storybook/test';
 
 @Component({
 	selector: 'skip-links-story',
