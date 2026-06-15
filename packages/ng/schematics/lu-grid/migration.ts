@@ -177,7 +177,7 @@ function migrateGridNode(grid: HtmlGrid, templateUpdate: any): void {
 	// Modify class attribute — remove 'grid' and mode-related classes
 	if (classesNode && classesNode.keySpan) {
 		const classes = classesNode.value;
-		const cleanedClasses = classes.split(' ').filter((c) => c !== 'grid' && c !== 'mod-auto').join(' ');
+		const cleanedClasses = classes.split(' ').filter((c) => c !== 'grid' && c !== 'mod-auto' && c !== 'mod-form').join(' ');
 		templateUpdate.remove(nodeOffset + classesNode.keySpan.start.offset - 1, classesNode.sourceSpan.toString().length + 1);
 		if (cleanedClasses) {
 			templateUpdate.insertRight(nodeOffset + classesNode.keySpan.start.offset, ` class="${cleanedClasses}"`);
@@ -275,7 +275,7 @@ function findHTMLGrids(sourceFile: SourceFile, basePath: string, tree: Tree): Ht
 	ngTemplates.forEach((template) => {
 		const htmlAst = new HtmlAst(template.content);
 		htmlAst.visitNodes((node) => {
-			if (!isInterestingNode(node)) {
+			if (!isInterestingNode(node) || node.name !== 'div') {
 				return;
 			}
 			const classes = node.attributes.find((attr) => attr.name === 'class')?.value;
@@ -287,10 +287,10 @@ function findHTMLGrids(sourceFile: SourceFile, basePath: string, tree: Tree): Ht
 			const cssProps = parseCssCustomProperties(styleAttr);
 
 			const classParts = classes.split(' ');
-			const extraClasses = classParts.filter((c) => c !== 'grid' && c !== 'mod-auto').join(' ');
+			const extraClasses = classParts.filter((c) => c !== 'grid' && c !== 'mod-auto' && c !== 'mod-form').join(' ');
 
 			const inputs: GridInputs = {
-				mode: classParts.includes('mod-auto') ? 'auto' : undefined,
+				mode: classParts.includes('mod-auto') ? 'auto' : classParts.includes('mod-form') ? 'form' : undefined,
 				columns: cssProps['--grid-columns'],
 				extraClasses: extraClasses || undefined,
 			};
