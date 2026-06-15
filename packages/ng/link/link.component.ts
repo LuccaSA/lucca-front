@@ -2,8 +2,9 @@ import { Location } from '@angular/common';
 import { afterNextRender, booleanAttribute, ChangeDetectionStrategy, Component, effect, inject, Injector, input, ViewEncapsulation } from '@angular/core';
 import { Router, UrlTree } from '@angular/router';
 import { intlInputOptions } from '@lucca-front/ng/core';
-import { LU_DATA_TABLE_INSTANCE } from '../data-table/data-table.token';
-import { LU_INDEX_TABLE_INSTANCE } from '../index-table/index-table.token';
+import { LU_INDEX_TABLE_INSTANCE } from '@lucca-front/ng/index-table';
+
+import { LU_DATA_TABLE_INSTANCE } from '@lucca-front/ng/data-table';
 import { LU_LINK_TRANSLATIONS } from './link.translate';
 import { LuRouterLink } from './lu-router-link';
 
