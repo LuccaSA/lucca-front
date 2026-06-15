@@ -3,7 +3,7 @@ import { provideAnimations } from '@angular/platform-browser/animations';
 import { LuDisplayInitials, LuUserPictureComponent, USER_PICTURE_SIZE } from '@lucca-front/ng/user';
 import { LuUserPopoverDirective } from '@lucca-front/ng/user-popover';
 import { applicationConfig, Meta, moduleMetadata, StoryObj } from '@storybook/angular';
-import { setStoryOptions } from 'stories/helpers/stories';
+import { setStoryOptions } from '@/helpers/stories';
 import { bob, georges, squidwards } from '../../user.mocks';
 
 export default {

@@ -3,9 +3,9 @@ import { CALLOUT_HX, CALLOUT_SIZE, CalloutActionsComponent, CalloutComponent, Ca
 import { IconComponent } from '@lucca-front/ng/icon';
 import { PALETTE } from '@lucca/prisme/core';
 import { Meta, moduleMetadata, StoryObj } from '@storybook/angular';
-import { HiddenArgType } from 'stories/helpers/common-arg-types';
-import { createTestStory, generateInputs, setStoryOptions } from 'stories/helpers/stories';
-import { waitForAngular } from 'stories/helpers/test';
+import { HiddenArgType } from '@/helpers/common-arg-types';
+import { createTestStory, generateInputs, setStoryOptions } from '@/helpers/stories';
+import { waitForAngular } from '@/helpers/test';
 import { expect, userEvent, within } from 'storybook/test';
 
 export default {

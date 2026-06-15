@@ -2,7 +2,7 @@ import { HttpClientModule } from '@angular/common/http';
 import { LuSafeExternalSvgPipe } from '@lucca-front/ng/safe-content';
 import { SOFTWARE_ICON, SOFTWARE_ICON_SIZE } from '@lucca-front/ng/software-icon';
 import { Meta, moduleMetadata, StoryObj } from '@storybook/angular';
-import { setStoryOptions } from 'stories/helpers/stories';
+import { setStoryOptions } from '@/helpers/stories';
 
 interface SoftwareIconBasicStory {
 	icon: string;

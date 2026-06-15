@@ -1,7 +1,7 @@
 import { ButtonComponent } from '@lucca-front/ng/button';
 import { FOOTER_CONTAINER_MAX, FOOTER_NARROW_AT_MEDIA_MAX, FooterComponent } from '@lucca-front/ng/footer';
 import { Meta, moduleMetadata } from '@storybook/angular';
-import { generateInputs, setStoryOptions } from 'stories/helpers/stories';
+import { generateInputs, setStoryOptions } from '@/helpers/stories';
 
 export default {
 	title: 'Documentation/Structure/Footer/Angular/Basic',

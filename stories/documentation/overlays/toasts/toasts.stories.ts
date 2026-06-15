@@ -5,8 +5,8 @@ import { defaultToastDuration, LuToastInput, LuToastsComponent, LuToastsService,
 import { applicationConfig, Meta, StoryObj } from '@storybook/angular';
 import { Observable, ReplaySubject, Subject } from 'rxjs';
 import { map } from 'rxjs/operators';
-import { createTestStory } from 'stories/helpers/stories';
-import { waitForAngular } from 'stories/helpers/test';
+import { createTestStory } from '@/helpers/stories';
+import { waitForAngular } from '@/helpers/test';
 import { expect, userEvent, within } from 'storybook/test';
 
 @Component({

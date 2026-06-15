@@ -6,7 +6,7 @@ import { FORM_FIELD_SIZE, FORM_FIELD_WIDTH, FormFieldComponent } from '@lucca-fr
 import { ColorInputComponent } from '@lucca-front/ng/forms';
 import { INLINE_MESSAGE_STATE } from '@lucca-front/ng/inline-message';
 import { Meta, moduleMetadata, StoryObj } from '@storybook/angular';
-import { StoryModelDisplayComponent } from 'stories/helpers/story-model-display.component';
+import { StoryModelDisplayComponent } from '@/helpers/story-model-display.component';
 import { createTestStory, generateInputs, setStoryOptions } from '../../../../../helpers/stories';
 import { waitForAngular } from '../../../../../helpers/test';
 import { expect, screen, userEvent, within } from 'storybook/test';

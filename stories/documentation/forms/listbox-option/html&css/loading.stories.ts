@@ -1,6 +1,6 @@
 import { LoadingComponent } from '@lucca-front/ng/loading';
 import { Meta, moduleMetadata } from '@storybook/angular';
-import { cleanupTemplate } from 'stories/helpers/stories';
+import { cleanupTemplate } from '@/helpers/stories';
 
 interface OptionBasicStory {
 	multiple: boolean;

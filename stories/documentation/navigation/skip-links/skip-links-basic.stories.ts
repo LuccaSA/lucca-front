@@ -1,8 +1,8 @@
 import { ChangeDetectionStrategy, Component } from '@angular/core';
 import { LuSkipLinksComponent } from '@lucca-front/ng/a11y';
 import { Meta, StoryObj } from '@storybook/angular';
-import { createTestStory } from 'stories/helpers/stories';
-import { waitForAngular } from 'stories/helpers/test';
+import { createTestStory } from '@/helpers/stories';
+import { waitForAngular } from '@/helpers/test';
 import { expect, userEvent, within } from 'storybook/test';
 
 @Component({

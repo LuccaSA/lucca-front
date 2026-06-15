@@ -8,7 +8,7 @@ import { StatusBadgeComponent } from '@lucca-front/ng/status-badge';
 import { TagComponent } from '@lucca-front/ng/tag';
 import { LuTooltipModule } from '@lucca-front/ng/tooltip';
 import { applicationConfig, Meta, moduleMetadata, StoryObj } from '@storybook/angular';
-import { setStoryOptions } from 'stories/helpers/stories';
+import { setStoryOptions } from '@/helpers/stories';
 
 interface ResourceCardAngularBasicStory {
 	wrapperDraggable: boolean;

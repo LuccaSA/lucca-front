@@ -2,7 +2,7 @@ import { HttpClientModule } from '@angular/common/http';
 import { DIALOG_FANCY_ILLUSTRATION } from '@lucca-front/ng/dialog';
 import { LuSafeExternalSvgPipe } from '@lucca-front/ng/safe-content';
 import { Meta, moduleMetadata, StoryObj } from '@storybook/angular';
-import { setStoryOptions } from 'stories/helpers/stories';
+import { setStoryOptions } from '@/helpers/stories';
 
 interface DialogFancyStory {
 	size: string;

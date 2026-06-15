@@ -1,7 +1,7 @@
 import { TableOfContentComponent, TableOfContentLinkDirective } from '@lucca-front/ng/table-of-content';
 import { Meta, moduleMetadata } from '@storybook/angular';
-import { cleanupTemplate, createTestStory } from 'stories/helpers/stories';
-import { waitForAngular } from 'stories/helpers/test';
+import { cleanupTemplate, createTestStory } from '@/helpers/stories';
+import { waitForAngular } from '@/helpers/test';
 import { expect, userEvent, within } from 'storybook/test';
 
 interface TableOfContentBasicStory {

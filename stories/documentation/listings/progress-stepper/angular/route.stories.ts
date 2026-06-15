@@ -1,7 +1,7 @@
 import { provideRouter, RouterLink } from '@angular/router';
 import { ProgressStepperComponent, ProgressStepperStepComponent } from '@lucca-front/ng/progress-stepper';
 import { applicationConfig, Meta, moduleMetadata } from '@storybook/angular';
-import { cleanupTemplate } from 'stories/helpers/stories';
+import { cleanupTemplate } from '@/helpers/stories';
 
 export default {
 	title: 'Documentation/Progress stepper/Angular/Route',

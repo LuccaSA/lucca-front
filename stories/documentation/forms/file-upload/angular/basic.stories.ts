@@ -8,7 +8,7 @@ import { LuInputDirective } from '@lucca-front/ng/input';
 import { TagComponent } from '@lucca-front/ng/tag';
 import { applicationConfig, Meta, moduleMetadata } from '@storybook/angular';
 import { map, Observable, switchMap, throwError, timer } from 'rxjs';
-import { generateInputs, setStoryOptions } from 'stories/helpers/stories';
+import { generateInputs, setStoryOptions } from '@/helpers/stories';
 
 type LuccaFileUploadResultId = string;
 

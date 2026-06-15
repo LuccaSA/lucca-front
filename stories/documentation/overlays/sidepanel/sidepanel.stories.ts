@@ -5,8 +5,8 @@ import { LuSidepanel, LuSidepanelModule } from '@lucca-front/ng/sidepanel';
 import { LuToastsModule, LuToastsService } from '@lucca-front/ng/toast';
 import { applicationConfig, Meta, StoryObj } from '@storybook/angular';
 import { map, shareReplay, timer } from 'rxjs';
-import { createTestStory } from 'stories/helpers/stories';
-import { waitForAngular } from 'stories/helpers/test';
+import { createTestStory } from '@/helpers/stories';
+import { waitForAngular } from '@/helpers/test';
 import { expect, screen, userEvent, within } from 'storybook/test';
 
 @Component({

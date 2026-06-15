@@ -1,7 +1,7 @@
 import { provideRouter } from '@angular/router';
 import { ERROR_PAGE_ILLUSTRATION, ErrorPageComponent } from '@lucca-front/ng/error-page';
 import { applicationConfig, Meta, moduleMetadata, StoryObj } from '@storybook/angular';
-import { generateInputs, setStoryOptions } from 'stories/helpers/stories';
+import { generateInputs, setStoryOptions } from '@/helpers/stories';
 
 export default {
 	title: 'Documentation/Feedback/ErrorPage/Angular/Basic',

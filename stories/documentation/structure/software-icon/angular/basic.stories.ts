@@ -1,6 +1,6 @@
 import { SOFTWARE_ICON, SOFTWARE_ICON_SIZE, SoftwareIconComponent } from '@lucca-front/ng/software-icon';
 import { Meta, moduleMetadata, StoryObj } from '@storybook/angular';
-import { generateInputs, setStoryOptions } from 'stories/helpers/stories';
+import { generateInputs, setStoryOptions } from '@/helpers/stories';
 
 export default {
 	title: 'Documentation/Structure/Software icon/Angular/Basic',

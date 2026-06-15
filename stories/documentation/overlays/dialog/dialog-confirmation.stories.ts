@@ -18,7 +18,7 @@ import { CheckboxInputComponent, TextInputComponent } from '@lucca-front/ng/form
 import { IconComponent } from '@lucca-front/ng/icon';
 import { Meta, StoryObj } from '@storybook/angular';
 
-import { HiddenArgType } from 'stories/helpers/common-arg-types';
+import { HiddenArgType } from '@/helpers/common-arg-types';
 
 @Component({
 	selector: 'dialog-confirmation-story',

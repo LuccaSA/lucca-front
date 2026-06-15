@@ -1,8 +1,8 @@
 import { IconComponent } from '@lucca-front/ng/icon';
 import { PLGPushComponent } from '@lucca-front/ng/plg-push';
 import { Meta, moduleMetadata, StoryObj } from '@storybook/angular';
-import { createTestStory, generateInputs } from 'stories/helpers/stories';
-import { waitForAngular } from 'stories/helpers/test';
+import { createTestStory, generateInputs } from '@/helpers/stories';
+import { waitForAngular } from '@/helpers/test';
 import { expect, userEvent, within } from 'storybook/test';
 
 export default {

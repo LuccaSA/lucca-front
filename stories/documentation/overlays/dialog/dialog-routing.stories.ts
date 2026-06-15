@@ -24,7 +24,7 @@ import { CheckboxInputComponent, NumberInputComponent, TextInputComponent } from
 import { LinkComponent } from '@lucca-front/ng/link';
 import { applicationConfig, Meta, StoryObj } from '@storybook/angular';
 import { map } from 'rxjs';
-import { StoryModelDisplayComponent } from 'stories/helpers/story-model-display.component';
+import { StoryModelDisplayComponent } from '@/helpers/story-model-display.component';
 @Injectable()
 class DataProvider {
 	dummy = signal(42);

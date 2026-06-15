@@ -1,6 +1,6 @@
 import { INLINE_MESSAGE_SIZE, INLINE_MESSAGE_STATE, InlineMessageComponent } from '@lucca-front/ng/inline-message';
 import { Meta, StoryObj } from '@storybook/angular';
-import { setStoryOptions } from 'stories/helpers/stories';
+import { setStoryOptions } from '@/helpers/stories';
 
 export default {
 	title: 'Documentation/Forms/InlineMessage/Angular/Basic',

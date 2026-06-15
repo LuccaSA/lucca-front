@@ -4,7 +4,7 @@ import { ALuDateAdapter, ELuDateGranularity, LuStringDateAdapter } from '@lucca-
 import { LuDateSelectInputComponent } from '@lucca-front/ng/date';
 import { LuInputDisplayerDirective } from '@lucca-front/ng/input';
 import { Meta, applicationConfig, moduleMetadata } from '@storybook/angular';
-import { generateMarkdownCodeBlock, getStoryGenerator, useDocumentationStory } from 'stories/helpers/stories';
+import { generateMarkdownCodeBlock, getStoryGenerator, useDocumentationStory } from '@/helpers/stories';
 
 type StoryComponent = LuDateSelectInputComponent<string> & { selectedDate: string; secondSelectedDate: string };
 

@@ -5,8 +5,8 @@ import { ILuModalContent, LU_MODAL_DATA, LuModal, LuModalConfig, LuModalModule }
 import { LuToastsModule, LuToastsService } from '@lucca-front/ng/toast';
 import { applicationConfig, Meta, moduleMetadata } from '@storybook/angular';
 import { map, shareReplay, timer } from 'rxjs';
-import { createTestStory, generateMarkdownCodeBlock, getStoryGenerator, useDocumentationStory } from 'stories/helpers/stories';
-import { waitForAngular } from 'stories/helpers/test';
+import { createTestStory, generateMarkdownCodeBlock, getStoryGenerator, useDocumentationStory } from '@/helpers/stories';
+import { waitForAngular } from '@/helpers/test';
 import { expect, screen, userEvent, within } from 'storybook/test';
 
 type StoryComponent = LuModalConfig & { useDynamicContent: boolean; message: string };

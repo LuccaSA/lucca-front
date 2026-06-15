@@ -4,8 +4,8 @@ import { CheckboxInputComponent, RadioComponent, RadioGroupInputComponent } from
 import { GridColumnComponent, GridComponent } from '@lucca-front/ng/grid';
 import { IconComponent } from '@lucca-front/ng/icon';
 import { Meta, moduleMetadata } from '@storybook/angular';
-import { createTestStory, setStoryOptions } from 'stories/helpers/stories';
-import { waitForAngular } from 'stories/helpers/test';
+import { createTestStory, setStoryOptions } from '@/helpers/stories';
+import { waitForAngular } from '@/helpers/test';
 import { expect, userEvent, within } from 'storybook/test';
 
 interface InputFramedBasicStory {
