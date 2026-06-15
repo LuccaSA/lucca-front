@@ -1,4 +1,5 @@
 import { Injectable, InjectionToken } from '@angular/core';
+import { PortalContent } from '@lucca-front/ng/core';
 import { Observable } from 'rxjs';
 
 export interface LuOptionContext<T> {
@@ -7,6 +8,11 @@ export interface LuOptionContext<T> {
 
 export interface LuOptionGroupByContext<T, TGroup> {
 	$implicit: LuOptionGroup<T, TGroup>;
+}
+
+export interface LuOptionGrouping<TOption, TGroup> {
+	selector: (option: TOption) => TGroup;
+	content: PortalContent<LuOptionGroupByContext<TOption, TGroup>>;
 }
 
 export interface LuOptionGroup<T, TGroup> {

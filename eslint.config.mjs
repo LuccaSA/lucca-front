@@ -69,15 +69,7 @@ export default defineConfig(
 			'@angular-eslint/prefer-inject': 'off',
 			'@angular-eslint/prefer-on-push-component-change-detection': 'error',
 
-			'@angular-eslint/prefer-signals': [
-				'error',
-				{
-					preferReadonlySignalProperties: true,
-					preferInputSignals: false,
-					preferQuerySignals: false,
-					useTypeChecking: true,
-				},
-			],
+			'@angular-eslint/prefer-signals': 'error',
 
 			'@typescript-eslint/explicit-function-return-type': 'off',
 			'@typescript-eslint/explicit-module-boundary-types': 'off', // on aimerait bien dire oui sauf pour void

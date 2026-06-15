@@ -1,32 +1,13 @@
-import {
-	AfterViewInit,
-	booleanAttribute,
-	ChangeDetectionStrategy,
-	ChangeDetectorRef,
-	Component,
-	effect,
-	ElementRef,
-	HostBinding,
-	inject,
-	Input,
-	input,
-	OnDestroy,
-	OnInit,
-	output,
-	TemplateRef,
-	Type,
-	ViewChild,
-} from '@angular/core';
-import { intlInputOptions, PortalDirective } from '@lucca-front/ng/core';
+import { booleanAttribute, ChangeDetectionStrategy, ChangeDetectorRef, Component, ElementRef, inject, input, OnInit, output, TemplateRef, Type, viewChild } from '@angular/core';
+import { intlInputOptions, isNil, PortalDirective, ɵeffectWithDeps } from '@lucca-front/ng/core';
 import { LuTooltipTriggerDirective } from '@lucca-front/ng/tooltip';
-import { asyncScheduler, observeOn, Subscription } from 'rxjs';
+import { asyncScheduler, observeOn } from 'rxjs';
 import { GroupTemplateLocation } from '../panel/panel.utils';
 import { CoreSelectPanelElement } from '../panel/selectable-item';
-import { LuOptionContext, SELECT_ID } from '../select.model';
-import { LuOptionGrouping } from './group.directive';
+import { LuOptionContext, LuOptionGrouping, SELECT_ID } from '../select.model';
 import { LuOptionGroupPipe } from './group.pipe';
 import { LuOptionOutletDirective } from './option-outlet.directive';
-import { ILuOptionContext, LU_OPTION_CONTEXT } from './option.token';
+import { LU_OPTION_CONTEXT } from './option.token';
 import { LU_OPTION_TRANSLATIONS } from './option.translate';
 
 export const MAGIC_OPTION_SCROLL_DELAY = 15;
@@ -35,40 +16,39 @@ export const MAGIC_OPTION_SCROLL_DELAY = 15;
 	selector: 'lu-select-option',
 	templateUrl: './option.component.html',
 	styleUrl: './option.component.scss',
+	host: {
+		class: 'optionItem',
+	},
 	changeDetection: ChangeDetectionStrategy.OnPush,
 	imports: [LuOptionOutletDirective, PortalDirective, LuOptionGroupPipe, LuTooltipTriggerDirective],
 })
-export class LuOptionComponent<T> implements AfterViewInit, OnDestroy, OnInit {
+export class LuOptionComponent<T> implements OnInit {
 	protected selectableItem = inject(CoreSelectPanelElement);
 	readonly intl = input(...intlInputOptions(LU_OPTION_TRANSLATIONS));
 
-	@HostBinding('class.optionItem')
-	public hasOptionItemClass = true;
+	readonly optionTpl = input<TemplateRef<LuOptionContext<T>> | Type<unknown>>();
 
-	@Input()
-	public optionTpl: TemplateRef<LuOptionContext<T>> | Type<unknown> | undefined;
+	readonly option = input<T>();
 
-	@Input() option?: T;
-	@Input() grouping?: LuOptionGrouping<T, unknown>;
+	readonly grouping = input<LuOptionGrouping<T, unknown>>();
 
 	readonly hasChildren = input(false, { transform: booleanAttribute });
-	onlyParent = output<void>();
-	onlyChildren = output<void>();
+
+	readonly onlyParent = output<void>();
+
+	readonly onlyChildren = output<void>();
 
 	readonly groupIndex = input<number>();
 
 	public readonly optionIndex = input.required({ transform: (value: string | number) => `${value}` });
 
-	@Input()
-	scrollIntoViewOptions: ScrollIntoViewOptions = {};
+	readonly scrollIntoViewOptions = input<ScrollIntoViewOptions>({});
 
 	readonly groupTemplateLocation = input<GroupTemplateLocation>();
 
-	@ViewChild(LuOptionOutletDirective, { read: LU_OPTION_CONTEXT, static: true })
-	private readonly optionContext?: ILuOptionContext<T>;
+	readonly optionContext = viewChild(LU_OPTION_CONTEXT);
 
 	private cdr = inject(ChangeDetectorRef);
-	private subscription?: Subscription;
 
 	get id(): string {
 		const groupPart = this.groupIndex() === undefined ? `` : `-group-${this.groupIndex()}`;
@@ -80,32 +60,30 @@ export class LuOptionComponent<T> implements AfterViewInit, OnDestroy, OnInit {
 	protected selectId = inject(SELECT_ID);
 
 	constructor() {
-		effect(() => {
-			if (this.selectableItem.isHighlighted()) {
-				setTimeout(() => {
-					this.elementRef.nativeElement.scrollIntoView(this.scrollIntoViewOptions);
+		ɵeffectWithDeps([this.selectableItem.isHighlighted], (isHighlighted, onCleanup) => {
+			if (isHighlighted) {
+				const timeoutId = setTimeout(() => {
+					this.elementRef.nativeElement.scrollIntoView(this.scrollIntoViewOptions());
 				}, MAGIC_OPTION_SCROLL_DELAY);
+				onCleanup(() => clearTimeout(timeoutId));
 			}
+		});
+
+		ɵeffectWithDeps([this.optionContext], (optionContext, onCleanup) => {
+			if (isNil(optionContext)) {
+				return;
+			}
+
+			const subscription = optionContext.isDisabled$.pipe(observeOn(asyncScheduler)).subscribe((isDisabled) => {
+				this.selectableItem.disabled = isDisabled;
+				this.cdr.markForCheck();
+			});
+			onCleanup(() => subscription.unsubscribe());
 		});
 	}
 
 	ngOnInit(): void {
 		this.selectableItem.id.set(this.id);
-	}
-
-	ngOnDestroy(): void {
-		this.subscription?.unsubscribe();
-	}
-
-	ngAfterViewInit(): void {
-		if (!this.optionContext) {
-			return;
-		}
-
-		this.subscription = this.optionContext.isDisabled$.pipe(observeOn(asyncScheduler)).subscribe((isDisabled) => {
-			this.selectableItem.disabled = isDisabled;
-			this.cdr.markForCheck();
-		});
 	}
 
 	selectOption($event: Event): void {

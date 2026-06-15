@@ -1,10 +1,8 @@
-import { DestroyRef, Directive, ElementRef, HostBinding, HostListener, inject, OnInit } from '@angular/core';
+import { computed, DestroyRef, Directive, ElementRef, inject, OnInit } from '@angular/core';
 import { takeUntilDestroyed, toSignal } from '@angular/core/rxjs-interop';
 import { isNotNil, ɵeffectWithDeps } from '@lucca-front/ng/core';
 import { ILuOptionContext, LU_OPTION_CONTEXT } from '@lucca-front/ng/core-select';
 import { InputDirective } from '@lucca-front/ng/form-field';
-import { of } from 'rxjs';
-import { map, startWith, switchMap } from 'rxjs/operators';
 import { LuMultiSelectInputComponent } from '../input';
 import { MULTI_SELECT_WITH_SELECT_ALL_CONTEXT } from '../input/select-all/select-all.models';
 import { LuMultiSelectContentDisplayerComponent } from './content-displayer/content-displayer.component';
@@ -16,6 +14,13 @@ import { LuMultiSelectContentDisplayerComponent } from './content-displayer/cont
 		role: 'combobox',
 		class: 'multipleSelect-displayer-search',
 		type: 'text',
+		'[attr.aria-expanded]': 'panelOpen',
+		'[attr.aria-activedescendant]': 'activeDescendant',
+		'[attr.aria-controls]': 'controls',
+		'[attr.disabled]': 'disabled',
+		'[attr.placeholder]': 'placeholder',
+		'[attr.readonly]': 'readonly',
+		'(input)': 'onInput()',
 	},
 	hostDirectives: [InputDirective],
 })
@@ -30,37 +35,30 @@ export class LuMultiSelectDisplayerInputDirective<T> implements OnInit {
 
 	readonly destroyRef = inject(DestroyRef);
 
-	@HostBinding('attr.aria-expanded')
 	get panelOpen() {
 		return this.#panelOpen();
 	}
 
-	@HostBinding('attr.aria-activedescendant')
 	get activeDescendant() {
 		return this.#activeDescendant();
 	}
 
-	@HostBinding('attr.aria-controls')
 	get controls() {
 		return this.select.ariaControls;
 	}
 
-	@HostBinding('disabled')
 	get disabled() {
-		return this.#disabled();
+		return this.#disabled() || null;
 	}
 
-	@HostBinding('placeholder')
 	get placeholder() {
 		return this.#placeholder();
 	}
 
-	@HostBinding('readonly')
 	get readonly() {
 		return !this.select.searchable;
 	}
 
-	@HostListener('input')
 	onInput() {
 		this.select.clueChanged(this.elementRef.nativeElement.value);
 	}
@@ -68,17 +66,15 @@ export class LuMultiSelectDisplayerInputDirective<T> implements OnInit {
 	readonly #panelOpen = toSignal(this.select.isPanelOpen$);
 	readonly #activeDescendant = toSignal(this.select.activeDescendant$);
 	readonly #disabled = toSignal(this.select.disabled$);
-	readonly #placeholder = toSignal(
-		this.context.option$.pipe(
-			startWith([]),
-			switchMap((options) => {
-				if ((options || []).length > 0 || this.selectAllContext?.mode() === 'all') {
-					return of('');
-				}
-				return this.select.placeholder$.pipe(map((placeholder) => ((isNotNil(placeholder) && placeholder.length > 0) || this.contentDisplayer ? placeholder : this.select.intl().placeholder)));
-			}),
-		),
-	);
+	readonly #options = toSignal(this.context.option$, { initialValue: [] as T[] });
+	readonly #placeholder = computed(() => {
+		const options = this.#options();
+		if ((options || []).length > 0 || this.selectAllContext?.mode() === 'all') {
+			return '';
+		}
+		const placeholder = this.select.placeholder();
+		return (isNotNil(placeholder) && placeholder.length > 0) || this.contentDisplayer ? placeholder : this.select.intl().placeholder;
+	});
 
 	constructor() {
 		if (this.selectAllContext) {

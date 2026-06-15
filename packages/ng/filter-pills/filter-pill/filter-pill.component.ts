@@ -9,8 +9,6 @@ import {
 	effect,
 	ElementRef,
 	forwardRef,
-	HostBinding,
-	HostListener,
 	inject,
 	input,
 	LOCALE_ID,
@@ -48,6 +46,11 @@ let nextId = 0;
 	],
 	host: {
 		class: 'filterPill',
+		'[class.is-hidden]': 'isHiddenClass',
+		'[class.mod-checkbox]': 'isModCheckbox',
+		'[class.is-filled]': 'isFilled',
+		'[class.is-comboboxHidden]': 'hideCombobox',
+		'(click)': 'hostClick()',
 	},
 })
 export class FilterPillComponent {
@@ -86,7 +89,6 @@ export class FilterPillComponent {
 
 	readonly disabled = computed(() => this.inputComponentRef()?.filterPillDisabled?.() || false);
 
-	@HostBinding('class.is-hidden')
 	get isHiddenClass() {
 		return this.isHidden();
 	}
@@ -146,17 +148,14 @@ export class FilterPillComponent {
 
 	readonly modCheckbox = computed(() => this.layout() === 'checkable');
 
-	@HostBinding('class.mod-checkbox')
 	get isModCheckbox() {
 		return this.modCheckbox();
 	}
 
-	@HostBinding('class.is-filled')
 	get isFilled() {
 		return !this.inputIsEmpty();
 	}
 
-	@HostBinding('class.is-comboboxHidden')
 	get hideCombobox() {
 		return this.shouldHideCombobox();
 	}
@@ -188,7 +187,6 @@ export class FilterPillComponent {
 		});
 	}
 
-	@HostListener('click')
 	hostClick(): void {
 		this.inputComponentRef()?.onFilterPillClick?.();
 	}

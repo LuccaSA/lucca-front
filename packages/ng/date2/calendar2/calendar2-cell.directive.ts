@@ -1,4 +1,4 @@
-import { computed, Directive, ElementRef, HostBinding, HostListener, inject, input } from '@angular/core';
+import { computed, Directive, ElementRef, inject, input } from '@angular/core';
 import type { Duration } from 'date-fns';
 import { add, addMonths, addYears, endOfWeek, startOfWeek, sub, subMonths, subYears } from 'date-fns';
 import { WEEK_INFO } from '../calendar.token';
@@ -14,6 +14,10 @@ const modeToDurationKey: Record<CalendarMode, keyof Duration> = {
 
 @Directive({
 	selector: '[luCalendar2Cell]',
+	host: {
+		'[tabindex]': 'tabindex',
+		'(keydown)': 'keydown($event)',
+	},
 })
 export class Calendar2CellDirective {
 	#host = inject<ElementRef<HTMLButtonElement>>(ElementRef);
@@ -28,7 +32,6 @@ export class Calendar2CellDirective {
 
 	readonly luCalendar2Date = input.required<Date>();
 
-	@HostBinding('tabindex')
 	get tabindex(): 0 | -1 {
 		return this.isTabbableDate() ? 0 : -1;
 	}
@@ -37,7 +40,6 @@ export class Calendar2CellDirective {
 		return comparePeriods(this.luCalendar2Mode(), this.luCalendar2Date(), this.#tabbableDate());
 	});
 
-	@HostListener('keydown', ['$event'])
 	keydown($event: Event): void {
 		// See https://www.w3.org/WAI/ARIA/apg/patterns/dialog-modal/examples/datepicker-dialog/#ex_label for keyboard
 		// navigation standards on date pickers
