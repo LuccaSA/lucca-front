@@ -3,7 +3,7 @@ import { AsyncPipe, NgTemplateOutlet } from '@angular/common';
 import { AfterViewInit, ChangeDetectionStrategy, Component, computed, forwardRef, inject, signal, TrackByFunction } from '@angular/core';
 import { toObservable, toSignal } from '@angular/core/rxjs-interop';
 import { FormsModule } from '@angular/forms';
-import { PortalDirective } from '@lucca-front/ng/core';
+import { isNotNil, PortalDirective } from '@lucca-front/ng/core';
 import {
 	CoreSelectKeyManager,
 	CoreSelectPanelInstance,
@@ -56,15 +56,15 @@ import { LuOptionsGroupContextPipe } from './option-group-context.pipe';
 	],
 })
 export class LuMultiSelectPanelComponent<T> implements AfterViewInit, CoreSelectPanelInstance {
-	protected selectInput = inject<LuMultiSelectInputComponent<T>>(MULTI_SELECT_INPUT);
-	panelRef = inject<LuMultiSelectPanelRef<T>>(LuMultiSelectPanelRef);
-	selectId = inject(SELECT_ID);
+	protected readonly selectInput = inject<LuMultiSelectInputComponent<T>>(MULTI_SELECT_INPUT);
+	readonly panelRef = inject<LuMultiSelectPanelRef<T>>(LuMultiSelectPanelRef);
+	readonly selectId = inject(SELECT_ID);
 
-	options$ = this.selectInput.options$;
-	grouping = this.selectInput.groupingSignal;
+	readonly options$ = this.selectInput.options$;
+	readonly grouping = this.selectInput.groupingSignal;
 	treeGenerator = this.selectInput.treeGenerator;
-	loading = toSignal(this.selectInput.loading$);
-	loading$ = this.selectInput.loading$;
+	readonly loading = toSignal(this.selectInput.loading$);
+	readonly loading$ = this.selectInput.loading$;
 	searchable = this.selectInput.searchable;
 	optionComparer = this.selectInput.optionComparer;
 	optionKey = this.selectInput.optionKey;
@@ -75,25 +75,27 @@ export class LuMultiSelectPanelComponent<T> implements AfterViewInit, CoreSelect
 	trackBranchesBy: TrackByFunction<TreeNode<T>> = (_, option) => this.optionKey(option.node);
 
 	selectedOptions: T[] = this.selectInput.value || [];
-	optionTpl = this.selectInput.optionTpl;
+	readonly optionTpl = this.selectInput.optionTpl;
 
-	options = signal<ɵCoreSelectPanelElement<T>[]>([]);
+	readonly options = signal<ɵCoreSelectPanelElement<T>[]>([]);
 	keyManager = inject<CoreSelectKeyManager<T>>(CoreSelectKeyManager);
 
-	someGroupOptionEnabled = computed(() => {
+	readonly someGroupOptionEnabled = computed(() => {
 		return (groupOptions: T[]) => {
 			const disabledOptionIds = this.options()
 				.filter((o) => o.disabled)
-				.map((o) => this.optionKey(o.option()));
+				.map((o) => o.option())
+				.filter(isNotNil)
+				.map((option) => this.optionKey(option));
 			return groupOptions.some((option) => !disabledOptionIds.includes(this.optionKey(option)));
 		};
 	});
 
-	hasGrouping$ = toObservable(this.grouping).pipe(map((grouping) => !!grouping));
-	public clueChange$ = this.selectInput.clue$;
-	public shouldDisplayAddOption$ = this.selectInput.shouldDisplayAddOption$;
+	readonly hasGrouping$ = toObservable(this.grouping).pipe(map((grouping) => !!grouping));
+	public readonly clueChange$ = this.selectInput.clue$.pipe(map((clue) => clue ?? ''));
+	public readonly shouldDisplayAddOption$ = this.selectInput.shouldDisplayAddOption$;
 
-	groupTemplateLocation$ = ɵgetGroupTemplateLocation(this.hasGrouping$, this.clueChange$, this.options$, this.searchable);
+	readonly groupTemplateLocation$ = ɵgetGroupTemplateLocation(this.hasGrouping$, this.clueChange$, this.options$, this.searchable);
 
 	onScroll(evt: Event): void {
 		if (!(evt.target instanceof HTMLElement)) {
@@ -129,7 +131,9 @@ export class LuMultiSelectPanelComponent<T> implements AfterViewInit, CoreSelect
 		// Filter out disabled options
 		const disabledOptionIds = this.options()
 			.filter((o) => o.disabled)
-			.map((o) => this.optionKey(o.option()));
+			.map((o) => o.option())
+			.filter(isNotNil)
+			.map((option) => this.optionKey(option));
 		const enabledNotSelectedOptions = notSelectedOptions.filter((o) => !disabledOptionIds.includes(this.optionKey(o)));
 		const enabledGroupOptions = groupOptions.filter((o) => !disabledOptionIds.includes(this.optionKey(o)));
 
@@ -155,7 +159,10 @@ export class LuMultiSelectPanelComponent<T> implements AfterViewInit, CoreSelect
 		});
 
 		if (this.selectedOptions?.length) {
-			this.keyManager.highlightOption(this.selectedOptions[0]);
+			const firstSelectedOption = this.selectedOptions[0];
+			if (firstSelectedOption !== undefined) {
+				this.keyManager.highlightOption(firstSelectedOption);
+			}
 		}
 	}
 }

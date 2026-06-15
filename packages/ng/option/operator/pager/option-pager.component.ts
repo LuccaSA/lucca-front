@@ -30,7 +30,7 @@ export class LuOptionPagerComponent<T> extends ALuOptionOperator<T> implements I
 			}),
 		);
 	}
-	paging$ = new BehaviorSubject<number>(MAGIC_STEP);
+	readonly paging$ = new BehaviorSubject<number>(MAGIC_STEP);
 	next() {
 		this.paging$.next(this.paging$.value + MAGIC_STEP);
 	}

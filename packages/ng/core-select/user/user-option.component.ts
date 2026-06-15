@@ -46,9 +46,9 @@ export class LuUserOptionComponent {
 	protected context = inject<ILuOptionContext<LuCoreSelectWithAdditionnalInformation<LuCoreSelectUser>>>(LU_OPTION_CONTEXT);
 	protected userDirective = inject(LuCoreSelectUsersDirective);
 	readonly intl = input(...intlInputOptions(LU_CORE_SELECT_USER_TRANSLATIONS));
-	protected hasEmptyClue$ = this.userDirective.select.clueChange$.pipe(
+	protected readonly hasEmptyClue$ = this.userDirective.select.clueChange$.pipe(
 		startWith(this.userDirective.select.clue),
 		map((clue) => !clue),
 	);
-	protected customUserOptionTpl = this.userDirective.customUserOptionTpl;
+	protected readonly customUserOptionTpl = this.userDirective.customUserOptionTpl;
 }

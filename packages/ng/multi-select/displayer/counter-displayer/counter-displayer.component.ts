@@ -33,19 +33,19 @@ import { LuMultiSelectDisplayerInputDirective } from '../displayer-input.directi
 	changeDetection: ChangeDetectionStrategy.OnPush,
 })
 export class LuMultiSelectCounterDisplayerComponent<T> implements OnInit {
-	select = inject<LuMultiSelectInputComponent<T>>(LuMultiSelectInputComponent);
-	context = inject<ILuOptionContext<T[]>>(LU_OPTION_CONTEXT);
+	readonly select = inject<LuMultiSelectInputComponent<T>>(LuMultiSelectInputComponent);
+	readonly context = inject<ILuOptionContext<T[]>>(LU_OPTION_CONTEXT);
 
 	protected destroyRef = inject(DestroyRef);
 
 	@ViewChild('inputElement')
-	inputElementRef: ElementRef<HTMLInputElement>;
+	readonly inputElementRef: ElementRef<HTMLInputElement>;
 
 	get value(): T[] {
 		return this.select.value || [];
 	}
 
-	selectedOptions$ = new BehaviorSubject<T[]>([]);
+	readonly selectedOptions$ = new BehaviorSubject<T[]>([]);
 
 	@Input()
 	set selected(options: T[]) {

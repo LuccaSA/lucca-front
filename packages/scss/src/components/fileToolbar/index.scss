@@ -10,8 +10,8 @@
 		&.mod-disablePositioning {
 			@include disablePositioning;
 
-			&.mod-S {
-				@include disablePositioningS;
+			&.mod-L {
+				@include disablePositioningL;
 			}
 		}
 	}

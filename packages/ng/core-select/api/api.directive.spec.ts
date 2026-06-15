@@ -16,7 +16,7 @@ interface TestEntity {
 	selector: 'lu-simple-select[testApi]',
 })
 class TestDirective extends ALuCoreSelectApiDirective<TestEntity> {
-	protected override params$ = this.clue$.pipe(
+	protected override readonly params$ = this.clue$.pipe(
 		map((clue) => ({
 			...(clue ? { clue } : {}),
 		})),
@@ -68,7 +68,6 @@ describe('ALuCoreSelectApiDirective', () => {
 		selectElement = selectDebugElement.nativeElement as HTMLElement;
 		select = selectDebugElement.componentInstance as LuSimpleSelectInputComponent<TestEntity>;
 		testApi = fixture.debugElement.query(By.directive(TestDirective)).injector.get(TestDirective);
-
 		getOptionsSpy = jest.spyOn(testApi, 'getOptions');
 	});
 
@@ -166,7 +165,7 @@ describe('ALuCoreSelectApiDirective', () => {
 		// // Assert
 		expect(testApi.getOptions).toHaveBeenCalledTimes(3);
 
-		let options: readonly TestEntity[];
+		let options: readonly TestEntity[] = [];
 
 		select.options$.subscribe((o) => (options = o));
 
@@ -212,7 +211,7 @@ describe('ALuCoreSelectApiDirective', () => {
 		tick(MAGIC_OPTION_SCROLL_DELAY);
 
 		// Assert
-		let options: readonly TestEntity[];
+		let options: readonly TestEntity[] = [];
 		select.options$.subscribe((o) => (options = o));
 		expect(options).toEqual([
 			{ id: 1, name: 'test 1' },

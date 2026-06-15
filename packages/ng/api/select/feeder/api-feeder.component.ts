@@ -27,7 +27,7 @@ import { ALuApiOptionFeeder } from './api-feeder.model';
 	],
 })
 export class LuApiFeederComponent<T extends ILuApiItem = ILuApiItem> extends ALuApiOptionFeeder<T, LuApiHybridService<T>> implements ILuOptionOperator<T>, ILuOnOpenSubscriber {
-	override outOptions$ = new BehaviorSubject<T[]>([]);
+	override readonly outOptions$ = new BehaviorSubject<T[]>([]);
 	constructor(
 		@Inject(ALuApiService)
 		@Optional()

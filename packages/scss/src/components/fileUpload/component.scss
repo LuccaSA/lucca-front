@@ -5,7 +5,8 @@
 @use '@lucca-front/scss/src/components/button/exports' as button;
 
 @mixin component($atRoot: namespace.$defaultAtRoot) {
-	position: relative;
+	position: var(--components-fileUpload-position);
+	inset: var(--components-fileUpload-inset);
 	border: 1px var(--components-fileUpload-borderStyle) var(--components-fileUpload-borderColor);
 	overflow: hidden;
 	border-radius: var(--components-fileUpload-borderRadius);

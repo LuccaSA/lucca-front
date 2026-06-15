@@ -20,7 +20,7 @@ import { LU_READMORE_TRANSLATIONS } from './read-more.translate';
 	},
 })
 export class ReadMoreComponent {
-	intl = input(...intlInputOptions(LU_READMORE_TRANSLATIONS));
+	readonly intl = input(...intlInputOptions(LU_READMORE_TRANSLATIONS));
 
 	/**
 	 * Change the number of lines displayed when collapsed
@@ -47,15 +47,15 @@ export class ReadMoreComponent {
 	 */
 	readonly innerContent = input<null | string>(null);
 
-	labelReadMore = computed(() => this.intl().readMore);
-	labelReadLess = computed(() => this.intl().readLess);
+	readonly labelReadMore = computed(() => this.intl().readMore);
+	readonly labelReadLess = computed(() => this.intl().readLess);
 
-	label = computed(() => (this.expanded() ? this.labelReadLess() : this.labelReadMore()));
+	readonly label = computed(() => (this.expanded() ? this.labelReadLess() : this.labelReadMore()));
 
 	readonly contentRef = viewChild<ElementRef<HTMLDivElement>>('content');
 
-	expanded = signal(false);
-	isClamped = signal(false);
+	readonly expanded = signal(false);
+	readonly isClamped = signal(false);
 
 	readonly backgroundColor = computed(() => {
 		if (this.surface() === 'sunken' || this.surface() === 'default' || this.surface() === null) {

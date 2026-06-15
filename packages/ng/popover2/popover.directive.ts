@@ -73,9 +73,9 @@ const defaultPositionPairs: Record<PopoverPosition, ConnectionPositionPair> = {
 	exportAs: 'luPopover2',
 })
 export class PopoverDirective implements OnDestroy {
-	overlay = inject(Overlay);
+	readonly overlay = inject(Overlay);
 
-	elementRef = inject<ElementRef<HTMLElement>>(ElementRef);
+	readonly elementRef = inject<ElementRef<HTMLElement>>(ElementRef);
 
 	#vcr = inject(ViewContainerRef);
 
@@ -83,14 +83,14 @@ export class PopoverDirective implements OnDestroy {
 
 	#renderer = inject(Renderer2);
 
-	intl = input(...intlInputOptions(LU_POPOVER2_TRANSLATIONS));
+	readonly intl = input(...intlInputOptions(LU_POPOVER2_TRANSLATIONS));
 
 	@Input({
 		alias: 'luPopover2',
 	})
 	content: TemplateRef<unknown> | Type<unknown>;
 
-	luPopoverPosition = input<PopoverPosition | null>(null);
+	readonly luPopoverPosition = input<PopoverPosition | null>(null);
 
 	@Input()
 	overlayScrollStrategy: 'reposition' | 'block' | 'close' = 'reposition';
@@ -100,7 +100,7 @@ export class PopoverDirective implements OnDestroy {
 	})
 	luPopoverDisabled = false;
 
-	luPopoverTrigger = model<'click' | 'click+hover' | 'hover+focus'>('click');
+	readonly luPopoverTrigger = model<'click' | 'click+hover' | 'hover+focus'>('click');
 
 	@Input()
 	customPositions?: ConnectionPositionPair[];
@@ -115,22 +115,22 @@ export class PopoverDirective implements OnDestroy {
 	 * Allows to anchor the popover to another element instead of the trigger one
 	 * for placement purpose
 	 */
-	luPopoverAnchor = input<FlexibleConnectedPositionStrategyOrigin>(this.elementRef);
+	readonly luPopoverAnchor = input<FlexibleConnectedPositionStrategyOrigin>(this.elementRef);
 
 	// We have to type these two for Compodoc to find the right type and tell Storybook these aren't strings
-	luPopoverOpenDelay: InputSignal<number> = input<number>(300);
+	readonly luPopoverOpenDelay: InputSignal<number> = input<number>(300);
 
-	luPopoverCloseDelay: InputSignal<number> = input<number>(100);
+	readonly luPopoverCloseDelay: InputSignal<number> = input<number>(100);
 
-	luPopoverPositionRef = linkedSignal(() => this.luPopoverPosition() || 'above');
+	readonly luPopoverPositionRef = linkedSignal(() => this.luPopoverPosition() || 'above');
 
-	open$ = new Subject<'focus' | 'click' | 'hover'>();
+	readonly open$ = new Subject<'focus' | 'click' | 'hover'>();
 
-	close$ = new Subject<void>();
+	readonly close$ = new Subject<void>();
 
-	luPopoverClosed = output<void>();
+	readonly luPopoverClosed = output<void>();
 
-	luPopoverOpened = output<void>();
+	readonly luPopoverOpened = output<void>();
 
 	#listenToMouseLeave = false;
 	#listenToMouseEnter = true;
@@ -142,7 +142,7 @@ export class PopoverDirective implements OnDestroy {
 
 	positionPairs: Record<PopoverPosition, ConnectionPositionPair> = defaultPositionPairs;
 
-	opened = signal(false);
+	readonly opened = signal(false);
 
 	@HostBinding('attr.aria-controls')
 	ariaControls = `popover-content-${nextId++}`;

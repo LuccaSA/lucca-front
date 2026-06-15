@@ -154,5 +154,14 @@ describe(LuUserDisplayPipe.name, () => {
 			const formatter = new Intl.ListFormat('en', { style: 'long', type: 'conjunction' });
 			expect(createPipe(`{{ users() | luUserDisplay:{ format: 'fL', formatter: formatter() } }}`, { users, formatter })).toBe('John D., Michael S., and Dwight S.');
 		});
+
+		it(`should return the right multiple value with default separator when formatter is undefined`, () => {
+			spectator = createPipe(`{{ users | luUserDisplay:{ format: 'fL', formatter: undefined } }}`, {
+				hostProps: {
+					users,
+				},
+			});
+			expect(spectator.element).toHaveText('John D., Michael S., Dwight S.');
+		});
 	});
 });

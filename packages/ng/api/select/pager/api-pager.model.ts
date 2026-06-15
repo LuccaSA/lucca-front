@@ -17,13 +17,13 @@ export interface ILuApiPagerService<T extends ILuApiItem = ILuApiItem> {
 export abstract class ALuApiOptionPager<T extends ILuApiItem = ILuApiItem, S extends ILuApiService<T> = ILuApiService<T>>
 	implements ILuApiOptionPager<T>, ILuOnOpenSubscriber, ILuOnScrollBottomSubscriber
 {
-	outOptions$ = new Subject<T[]>();
+	readonly outOptions$ = new Subject<T[]>();
 	loading$: Observable<boolean>;
 
 	protected _loading = false;
 	protected _results$: Observable<{ items: T[]; strategy: Strategy }>;
 	protected _options: T[] = [];
-	protected _page$ = new Subject<number>();
+	protected readonly _page$ = new Subject<number>();
 	protected _page: number;
 	protected _initialized = false;
 	constructor(protected _service: S) {}
