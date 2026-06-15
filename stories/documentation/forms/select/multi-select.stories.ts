@@ -80,7 +80,7 @@ async function checkValues(input: HTMLElement, values: string[]) {
 		await expect(counter).toHaveTextContent(values.length.toString());
 	} else {
 		for (const value of values) {
-			await expect(input.parentElement).toHaveTextContent(value.trim());
+			await expect(input.parentElement.parentElement).toHaveTextContent(value.trim());
 		}
 	}
 }
