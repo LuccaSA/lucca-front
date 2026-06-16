@@ -24,6 +24,12 @@
 	@layer mods {
 		&.mod-cellBorder {
 			@include cellBorder;
+
+			:is(.dataTable-head-row-cell, .dataTable-body-row-cell, .dataTable-foot-row-cell) {
+				&.mod-editable {
+					@include cellBorderEditable;
+				}
+			}
 		}
 
 		&.mod-alignTop,
