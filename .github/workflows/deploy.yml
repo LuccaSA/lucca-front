@@ -7,6 +7,12 @@ on:
     tags:
       - 'v[0-9]+.[0-9]+.[0-9]+'
       - 'v[0-9]+.[0-9]+.[0-9]+-*'
+  workflow_dispatch:
+    inputs:
+      ref:
+        description: 'Tag or branch to deploy (e.g. v21.1.3 or master)'
+        required: true
+        default: master
 
 jobs:
   deploy:
@@ -16,8 +22,8 @@ jobs:
     permissions:
       contents: read
     outputs:
-      deploy-path: ${{ steps.vars.outputs.deploy-path }}
-      major-minor: ${{ steps.vars.outputs.major-minor }}
+      primary-path: ${{ steps.vars.outputs.primary-path }}
+      alias-path: ${{ steps.vars.outputs.alias-path }}
 
     env:
       R2_ENDPOINT: ${{ vars.CLOUDFLARE_R2_ENDPOINT }}
@@ -29,17 +35,50 @@ jobs:
     steps:
       - name: Checkout
         uses: actions/checkout@93cb6efe18208431cddfb8368fd83d5badbf9bfd
+        with:
+          ref: ${{ github.event.inputs.ref || github.ref }}
+
       - uses: actions/setup-node@49933ea5288caeca8642d1e84afbd3f7d6820020  # v4.4.0
         with:
           node-version: 24.13.0
 
+      - name: Compute deploy paths
+        id: vars
+        run: |
+          RAW="${{ github.event.inputs.ref }}"
+          if [ -z "$RAW" ]; then
+            RAW="${GITHUB_REF#refs/*/}"          # refs/tags/v21.1.3 -> v21.1.3 ; refs/heads/master -> master
+          fi
+
+          if [[ "$RAW" =~ ^v[0-9]+\.[0-9]+\.[0-9]+ ]]; then
+            # Full semver tag: always deploy to the exact tag folder.
+            PRIMARY="${RAW}/storybook"                          # e.g. v21.1.3/storybook
+            if [[ "$RAW" == *-* ]]; then
+              # Prerelease (e.g. v21.1.1-beta): own folder only, do NOT move the major.minor alias.
+              ALIAS=""
+            else
+              MM="$(echo "$RAW" | grep -oE '^v[0-9]+\.[0-9]+')" # v21.1
+              ALIAS="${MM}/storybook"                           # v21.1/storybook
+            fi
+          else
+            # Branch (e.g. master): single folder, no alias.
+            PRIMARY="${RAW}/storybook"
+            ALIAS=""
+          fi
+
+          echo "primary-path=${PRIMARY}" >> "$GITHUB_OUTPUT"
+          echo "alias-path=${ALIAS}" >> "$GITHUB_OUTPUT"
+          echo "Primary: ${PRIMARY}    Alias: ${ALIAS:-<none>}"
+
       - run: npm ci
       - run: npm run build-storybook
+
       - name: Install rclone
         run: |
           sudo apt-get update
           sudo apt-get install -y rclone
-      - name: Install and configure rclone
+
+      - name: Configure rclone
         run: |
           mkdir -p ~/.config/rclone
           cat > ~/.config/rclone/rclone.conf << EOF
@@ -52,6 +91,19 @@ jobs:
           acl = private
           no_check_bucket = true
           EOF
+
       - name: Upload results to R2
         run: |
-          rclone sync ./storybook-static/ "r2:${R2_BUCKET}/storybook/${{steps.vars.outputs.major-minor}}" --fast-list --checksum --transfers 8 --checkers 8
+          set -euo pipefail
+          PRIMARY="${{ steps.vars.outputs.primary-path }}"
+          ALIAS="${{ steps.vars.outputs.alias-path }}"
+
+          echo "Uploading build -> ${PRIMARY}"
+          rclone sync ./storybook-static/ "r2:${R2_BUCKET}/${PRIMARY}" \
+            --fast-list --checksum --transfers 8 --checkers 8
+
+          if [ -n "$ALIAS" ]; then
+            echo "Updating alias ${ALIAS} -> ${PRIMARY} (server-side copy)"
+            rclone sync "r2:${R2_BUCKET}/${PRIMARY}" "r2:${R2_BUCKET}/${ALIAS}" \
+              --fast-list --checksum --transfers 8 --checkers 8
+          fi
