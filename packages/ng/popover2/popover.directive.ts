@@ -29,6 +29,13 @@ import { LU_POPOVER2_TRANSLATIONS } from './popover2.translate';
 
 export type PopoverPosition = 'above' | 'below' | 'before' | 'after';
 
+export interface PopoverOpenOptions {
+	/** Prevents focusing the close button (or first focusable element) when the popover opens. */
+	disableCloseButtonFocus?: boolean;
+	/** Prevents giving the focus back to the trigger element when the popover closes. */
+	disableInitialTriggerFocus?: boolean;
+}
+
 let nextId = 0;
 
 const defaultPositionPairs: Record<PopoverPosition, ConnectionPositionPair> = {
@@ -172,7 +179,7 @@ export class PopoverDirective implements OnDestroy {
 			)
 			.subscribe(([event, type]: ['open' | 'close', 'focus' | 'click' | 'hover']) => {
 				if (event === 'open') {
-					this.openPopover(true, type === 'hover');
+					this.openPopover({ disableCloseButtonFocus: true, disableInitialTriggerFocus: type === 'hover' });
 					this.#listenToMouseLeave = type !== 'click';
 					if (type === 'focus' && !this.#screenReaderDescription) {
 						this.#screenReaderDescription = this.#renderer.createElement('span') as HTMLSpanElement;
@@ -235,14 +242,21 @@ export class PopoverDirective implements OnDestroy {
 		}
 	}
 
-	openPopover(disableCloseButtonFocus?: boolean, disableInitialTriggerFocus?: boolean): void;
-	/** @deprecated `withBackdrop` is no longer used: the popover no longer creates a blocking backdrop. Use `openPopover(disableCloseButtonFocus, disableInitialTriggerFocus)`. */
-	openPopover(withBackdrop: boolean, disableCloseButtonFocus?: boolean, disableInitialTriggerFocus?: boolean): void;
-	openPopover(arg1 = false, arg2 = false, arg3?: boolean): void {
-		// Reconcile the canonical 2-arg signature with the deprecated 3-arg one:
-		// when 3 args are passed, the first (withBackdrop) is ignored.
-		const disableCloseButtonFocus = arg3 === undefined ? arg1 : arg2;
-		const disableInitialTriggerFocus = arg3 === undefined ? arg2 : arg3;
+	openPopover(options?: PopoverOpenOptions): void;
+	/**
+	 * @deprecated The boolean signature is kept only for backward compatibility. `withBackdrop` is now ignored
+	 * (the popover no longer creates a blocking backdrop). Prefer `openPopover({ disableCloseButtonFocus, disableInitialTriggerFocus })`.
+	 */
+	openPopover(withBackdrop?: boolean, disableCloseButtonFocus?: boolean, disableInitialTriggerFocus?: boolean): void;
+	openPopover(optionsOrWithBackdrop?: PopoverOpenOptions | boolean, disableCloseButtonFocusArg?: boolean, disableInitialTriggerFocusArg?: boolean): void {
+		// New options-object form vs deprecated boolean form. With the boolean form the first
+		// positional argument is the now-ignored `withBackdrop`, so the focus flags shift by one.
+		const options: PopoverOpenOptions =
+			typeof optionsOrWithBackdrop === 'object' && optionsOrWithBackdrop !== null
+				? optionsOrWithBackdrop
+				: { disableCloseButtonFocus: disableCloseButtonFocusArg, disableInitialTriggerFocus: disableInitialTriggerFocusArg };
+		const disableCloseButtonFocus = options.disableCloseButtonFocus ?? false;
+		const disableInitialTriggerFocus = options.disableInitialTriggerFocus ?? false;
 		const content = this.content();
 
 		if (!this.opened() && !this.luPopoverDisabled() && isNotNil(content)) {
