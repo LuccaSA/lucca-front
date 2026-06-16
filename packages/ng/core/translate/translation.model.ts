@@ -13,14 +13,7 @@ export interface ILuTranslation<T> {
 
 export type LuTranslation<T> = Record<string, T>;
 
-export interface LuPluralForms {
-	zero?: string;
-	one?: string;
-	two?: string;
-	few?: string;
-	many?: string;
-	other: string;
-}
+export type LuPluralForms = Partial<Record<Intl.LDMLPluralRule, string>>;
 
 export function getIntlPluralLabel(pluralForms: Intl.PluralRules, label: LuPluralForms, count: number): string {
 	const pluralForm = pluralForms.select(count);
