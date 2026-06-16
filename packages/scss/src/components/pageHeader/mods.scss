@@ -36,8 +36,6 @@
 }
 
 @mixin wide {
-	--components-pageHeader-content-action-flexShrink: 0;
-	--components-pageHeader-content-flexWrap: nowrap;
 	--components-pageHeader-padding: var(--pr-t-spacings-300) var(--pr-t-spacings-400);
 }
 
