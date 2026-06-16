@@ -29,7 +29,22 @@ export class LinkDialogComponent {
 			return;
 		}
 
-		this.dialogRef.close(encodeURI(this.formGroup.controls.href.value.trim()));
+		this.dialogRef.close(this.#encodeHref(this.formGroup.controls.href.value.trim()));
+	}
+
+	/**
+	 * Encodes a href without double-encoding URLs that are already (partially) encoded.
+	 * Pasted URLs (e.g. SharePoint links) often already contain percent-encoded characters
+	 * like `%20`; applying `encodeURI` directly would re-encode the `%` into `%25`.
+	 * We first decode to get back the raw URL, then re-encode it so the result is idempotent.
+	 */
+	#encodeHref(href: string): string {
+		try {
+			return encodeURI(decodeURI(href));
+		} catch {
+			// Malformed URI sequence (e.g. a lone `%`): fall back to encoding as-is.
+			return encodeURI(href);
+		}
 	}
 
 	public deleteLink() {
