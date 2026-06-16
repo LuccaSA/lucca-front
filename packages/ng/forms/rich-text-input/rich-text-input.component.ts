@@ -25,12 +25,11 @@ import { $canShowPlaceholderCurry, $isRootTextContentEmpty } from '@lexical/text
 import { mergeRegister } from '@lexical/utils';
 import { isNil } from '@lucca-front/ng/core';
 import { FormFieldComponent, InputDirective, ɵPresentationDisplayDefaultDirective } from '@lucca-front/ng/form-field';
-import { $getRoot, createEditor, Klass, LexicalEditor, LexicalNode, LexicalNodeReplacement, UpdateListenerPayload } from 'lexical';
+import { $getRoot, createEditor, Klass, LexicalEditor, LexicalNode, LexicalNodeReplacement, SKIP_DOM_SELECTION_TAG, UpdateListenerPayload } from 'lexical';
 import { RICH_TEXT_FORMATTER, RichTextFormatter } from './formatters';
+import { CdkPortalOutlet, DomPortal } from '@angular/cdk/portal';
 
 export const INITIAL_UPDATE_TAG = 'initial-update';
-// TODO replace by lexical import when upgrade lexical
-export const SKIP_DOM_SELECTION_TAG = 'skip-dom-selection';
 
 export interface RichTextPluginComponent {
 	setEditorInstance(editor: LexicalEditor): void;
@@ -51,7 +50,7 @@ export const RICH_TEXT_PLUGIN_COMPONENT = new InjectionToken<RichTextPluginCompo
 
 @Component({
 	selector: 'lu-rich-text-input',
-	imports: [InputDirective, CommonModule, ɵPresentationDisplayDefaultDirective],
+	imports: [InputDirective, CommonModule, ɵPresentationDisplayDefaultDirective, CdkPortalOutlet],
 	templateUrl: './rich-text-input.component.html',
 	styleUrl: './rich-text-input.component.scss',
 	encapsulation: ViewEncapsulation.None,
@@ -80,10 +79,12 @@ export class RichTextInputComponent implements OnInit, OnDestroy, ControlValueAc
 		read: ElementRef,
 	});
 	readonly pluginComponents = contentChildren(RICH_TEXT_PLUGIN_COMPONENT, { descendants: true });
+	readonly toolsProjection = viewChild.required<ElementRef<HTMLElement>>('toolsProjection');
 
 	readonly currentCanShowPlaceholder = signal(false);
 	readonly isDisabled = signal(false);
 	readonly formFieldId = computed(() => this.#formField?.id());
+	readonly toolsPortal = computed(() => new DomPortal(this.toolsProjection()));
 
 	readonly #customNodes = computed(() =>
 		this.pluginComponents()

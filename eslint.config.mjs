@@ -83,7 +83,7 @@ export default defineConfig(
 			'@typescript-eslint/no-restricted-imports': [
 				'error',
 				{
-					paths: ['rxjs/Rx', '@ngneat/spectator', '@lucca-front/ng'],
+					paths: ['rxjs/Rx', '@lucca-front/ng'],
 					patterns: [
 						{
 							regex: 'dist\/ng',

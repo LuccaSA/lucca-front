@@ -1,8 +1,7 @@
-import { Location } from '@angular/common';
 import { ChangeDetectionStrategy, Component, Injectable, OnInit } from '@angular/core';
+import { ComponentFixture, TestBed } from '@angular/core/testing';
 import { Title } from '@angular/platform-browser';
-import { ActivatedRouteSnapshot, Resolve, RouterLink, RouterOutlet } from '@angular/router';
-import { SpectatorRouting, createRoutingFactory, mockProvider } from '@ngneat/spectator/jest';
+import { ActivatedRouteSnapshot, Resolve, Router, RouterLink, RouterOutlet, Routes, provideRouter } from '@angular/router';
 import { Observable, of, timer } from 'rxjs';
 import { map, skip } from 'rxjs/operators';
 import { ILuTitleTranslateService, LU_TITLE_TRANSLATE_SERVICE } from './title-translate.service';
@@ -91,150 +90,153 @@ export class OverrideTitlePartComponent implements OnInit {
 }
 
 describe('TitleService', () => {
-	let spectator: SpectatorRouting<AppComponent>;
+	let fixture: ComponentFixture<AppComponent>;
 
-	const createComponent = createRoutingFactory({
-		component: AppComponent,
-		providers: [
-			LuTitleService,
-			mockProvider(Title),
-			{
-				provide: LU_TITLE_TRANSLATE_SERVICE,
-				useClass: TranslateService,
-			},
-		],
-		stubsEnabled: false,
-		routes: [
-			{
-				path: '',
-				data: { title: 'Stub' },
-				component: StubComponent,
-				children: [
-					{
-						path: 'first',
-						component: StubComponent,
-						children: [
-							{
-								path: ':id',
-								data: { title: `Stubs' child {{id}}` },
-								component: StubComponent,
-								children: [
-									{
-										path: 'last',
-										data: { title: `` },
-										component: OverrideTitleComponent,
-									},
-									{
-										path: 'end',
-										data: { title: `Old title part` },
-										component: OverrideTitlePartComponent,
-									},
-									{
-										path: 'delayed',
-										data: { title: `` },
-										component: DelayedOverrideTitleComponent,
-										children: [
-											{
-												path: '',
-												component: OverrideTitleComponent,
-											},
-										],
-									},
-								],
-							},
-						],
-					},
-					{
-						path: 'second',
-						component: StubComponent,
-						children: [
-							{
-								path: ':id',
-								resolve: { name: TestNameResolver },
-								data: { title: `Stubs' child {{name}}` },
-								component: StubComponent,
-							},
-						],
-					},
-				],
-			},
-		],
+	const routes: Routes = [
+		{
+			path: '',
+			data: { title: 'Stub' },
+			component: StubComponent,
+			children: [
+				{
+					path: 'first',
+					component: StubComponent,
+					children: [
+						{
+							path: ':id',
+							data: { title: `Stubs' child {{id}}` },
+							component: StubComponent,
+							children: [
+								{
+									path: 'last',
+									data: { title: `` },
+									component: OverrideTitleComponent,
+								},
+								{
+									path: 'end',
+									data: { title: `Old title part` },
+									component: OverrideTitlePartComponent,
+								},
+								{
+									path: 'delayed',
+									data: { title: `` },
+									component: DelayedOverrideTitleComponent,
+									children: [
+										{
+											path: '',
+											component: OverrideTitleComponent,
+										},
+									],
+								},
+							],
+						},
+					],
+				},
+				{
+					path: 'second',
+					component: StubComponent,
+					children: [
+						{
+							path: ':id',
+							resolve: { name: TestNameResolver },
+							data: { title: `Stubs' child {{name}}` },
+							component: StubComponent,
+						},
+					],
+				},
+			],
+		},
+	];
+
+	async function clickLink(selector: string): Promise<void> {
+		(fixture.nativeElement as HTMLElement).querySelector<HTMLAnchorElement>(selector)!.click();
+		fixture.detectChanges();
+		await fixture.whenStable();
+	}
+
+	beforeEach(async () => {
+		TestBed.configureTestingModule({
+			imports: [AppComponent],
+			providers: [
+				provideRouter(routes),
+				LuTitleService,
+				{ provide: Title, useValue: { setTitle: jest.fn(), getTitle: jest.fn().mockReturnValue('') } },
+				{
+					provide: LU_TITLE_TRANSLATE_SERVICE,
+					useClass: TranslateService,
+				},
+			],
+		});
+
+		fixture = TestBed.createComponent(AppComponent);
+		fixture.detectChanges();
+		await TestBed.inject(Router).navigateByUrl('/');
+		fixture.detectChanges();
 	});
-
-	beforeEach(() => (spectator = createComponent()));
 
 	it('should set title', async () => {
 		let resultTitle = '';
-		spectator.inject(LuTitleService).title$.subscribe((title) => (resultTitle = title));
+		TestBed.inject(LuTitleService).title$.subscribe((title) => (resultTitle = title));
 
-		await spectator.fixture.whenStable();
-		expect(spectator.inject(Location).path()).toBe('/');
+		await fixture.whenStable();
+		expect(TestBed.inject(Router).url).toBe('/');
 		expect(resultTitle).toEqual(`Stub${TitleSeparator}BU${TitleSeparator}Lucca`);
 	});
 
 	it('should ignore empty or absent titles', async () => {
 		let resultTitle = '';
-		spectator.inject(LuTitleService).title$.subscribe((title) => (resultTitle = title));
+		TestBed.inject(LuTitleService).title$.subscribe((title) => (resultTitle = title));
 
-		spectator.click('.link-2');
-		await spectator.fixture.whenStable();
+		await clickLink('.link-2');
 		expect(resultTitle).toEqual(`Stub${TitleSeparator}BU${TitleSeparator}Lucca`);
 	});
 
 	it('should include named params in title', async () => {
 		let resultTitle = '';
-		spectator.inject(LuTitleService).title$.subscribe((title) => (resultTitle = title));
+		TestBed.inject(LuTitleService).title$.subscribe((title) => (resultTitle = title));
 
-		spectator.click('.link-3');
-		await spectator.fixture.whenStable();
+		await clickLink('.link-3');
 		expect(resultTitle).toEqual(`Stubs' child 1${TitleSeparator}Stub${TitleSeparator}BU${TitleSeparator}Lucca`);
 	});
 
 	it('should prepend title when a component forces its own title', async () => {
 		let resultTitle = '';
-		spectator
-			.inject(LuTitleService)
+		TestBed.inject(LuTitleService)
 			// We need to skip first value because the title is overridden by the component's ngOnInit
 			.title$.pipe(skip(1))
 			.subscribe((title) => (resultTitle = title));
 
-		spectator.click('.link-4');
-		await spectator.fixture.whenStable();
+		await clickLink('.link-4');
 		expect(resultTitle).toEqual(`Overridden title${TitleSeparator}Stubs' child 1${TitleSeparator}Stub${TitleSeparator}BU${TitleSeparator}Lucca`);
 	});
 
 	it('should override title part when a component forces its own title part', async () => {
 		let resultTitle = '';
-		spectator
-			.inject(LuTitleService)
+		TestBed.inject(LuTitleService)
 			// We need to skip first value because the title is overridden by the component's ngOnInit
 			.title$.pipe(skip(1))
 			.subscribe((title) => (resultTitle = title));
 
-		spectator.click('.link-5');
-		await spectator.fixture.whenStable();
+		await clickLink('.link-5');
 		expect(resultTitle).toEqual(`New title part${TitleSeparator}Stubs' child 1${TitleSeparator}Stub${TitleSeparator}BU${TitleSeparator}Lucca`);
 	});
 
 	it('should handle observable inputs', async () => {
 		let resultTitle = '';
-		spectator
-			.inject(LuTitleService)
+		TestBed.inject(LuTitleService)
 			// We need to skip first value because the title is overridden by the component's ngOnInit
 			.title$.pipe(skip(1))
 			.subscribe((title) => (resultTitle = title));
 
-		spectator.click('.link-6');
-		await spectator.fixture.whenStable();
+		await clickLink('.link-6');
 		expect(resultTitle).toEqual(`Overridden title${TitleSeparator}Delayed part${TitleSeparator}Stubs' child 1${TitleSeparator}Stub${TitleSeparator}BU${TitleSeparator}Lucca`);
 	});
 
 	it('should include named params in title', async () => {
 		let resultTitle = '';
-		spectator.inject(LuTitleService).title$.subscribe((title) => (resultTitle = title));
+		TestBed.inject(LuTitleService).title$.subscribe((title) => (resultTitle = title));
 
-		spectator.click('.link-7');
-		await spectator.fixture.whenStable();
+		await clickLink('.link-7');
 		expect(resultTitle).toEqual(`Stubs' child Name 1${TitleSeparator}Stub${TitleSeparator}BU${TitleSeparator}Lucca`);
 	});
 });
