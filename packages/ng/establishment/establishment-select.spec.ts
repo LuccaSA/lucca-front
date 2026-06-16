@@ -86,8 +86,8 @@ describe('establishment select', () => {
 			expect(luSelectElement).toBeInTheDocument();
 			fireEvent.click(luSelectElement);
 			tick(100); // debouncetime du composant
-			expect(mockEstablishment.searchPaged).toHaveBeenCalledWith(null, 0);
-			mockEstablishment.searchPaged.mockClear();
+			expect(mockEstablishment.searchPaged).toHaveBeenCalledWith('', 0);
+			vi.mocked(mockEstablishment.searchPaged).mockClear();
 			const input: HTMLInputElement = await screen.findByRole('textbox');
 			fireEvent.input(input, { target: { value: 'FR' } });
 			tick(100); // debouncetime du composant

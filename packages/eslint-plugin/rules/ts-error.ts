@@ -11,6 +11,33 @@ export const messageIds = {
 	tsError: 'tsError',
 };
 
+/**
+ * Vitest globals that are available in spec files when `globals: true` is set in vitest config.
+ * These names cause TS2304/TS2582 errors when the lint tsconfig doesn't include vitest types.
+ */
+const VITEST_GLOBALS = new Set(['describe', 'it', 'test', 'expect', 'vi', 'beforeAll', 'beforeEach', 'afterAll', 'afterEach', 'suite', 'bench']);
+
+/**
+ * TS error codes related to missing names/test runners that are expected in spec files
+ * when vitest globals are enabled but not declared in the lint tsconfig.
+ */
+const VITEST_IGNORED_ERROR_CODES = new Set([
+	2304, // Cannot find name 'X'
+	2582, // Cannot find name 'X'. Do you need to install type definitions for a test runner?
+	2593, // Cannot find name 'X'. Do you need to install type definitions for a test runner? (variant)
+]);
+
+function isVitestGlobalError(error: ts.Diagnostic, sourceFile: ts.SourceFile): boolean {
+	if (!VITEST_IGNORED_ERROR_CODES.has(error.code)) {
+		return false;
+	}
+	if (error.start === undefined || error.length === undefined) {
+		return false;
+	}
+	const errorText = sourceFile.text.slice(error.start, error.start + error.length);
+	return VITEST_GLOBALS.has(errorText);
+}
+
 export default createRule({
 	create: (context) => {
 		const parserServices = ESLintUtils.getParserServices(context);
@@ -23,6 +50,8 @@ export default createRule({
 					return;
 				}
 
+				const isSpecFile = tsNode.fileName.includes('.spec.');
+
 				const uniqueErrors = new Map<string, ts.Diagnostic>();
 				for (const error of semErrors) {
 					if (!error.file || error.file.fileName !== tsNode.fileName) {
@@ -31,6 +60,9 @@ export default createRule({
 					if (error.reportsUnnecessary) continue;
 					if (error.category !== DiagnosticCategory.Error) continue;
 					if (error.start === undefined || error.length === undefined) {
+						continue;
+					}
+					if (isSpecFile && isVitestGlobalError(error, error.file)) {
 						continue;
 					}
 
