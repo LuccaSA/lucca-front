@@ -4,18 +4,19 @@ import '@analogjs/vitest-angular/setup-zone';
 import '@angular/compiler';
 
 import { setupTestBed } from '@analogjs/vitest-angular/setup-testbed';
-import { TestBed } from '@angular/core/testing';
 import '@testing-library/jest-dom/vitest';
 import { toHaveNoViolations } from 'jest-axe';
 import { afterEach, vi } from 'vitest';
 
 setupTestBed({ zoneless: false });
 
+process.env['TZ'] = 'UTC';
+
 expect.extend(toHaveNoViolations);
 
 afterEach(() => {
-	vi.resetAllMocks();
-	TestBed.resetTestingModule();
+	vi.clearAllMocks();
+	vi.restoreAllMocks();
 });
 
 Element.prototype.scrollIntoView = () => {};
