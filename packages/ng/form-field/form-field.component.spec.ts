@@ -2,6 +2,7 @@ import { ChangeDetectionStrategy, Component, computed, input, viewChild } from '
 import { ComponentFixture, TestBed } from '@angular/core/testing';
 import { FormControl, ReactiveFormsModule, Validators } from '@angular/forms';
 import { FormFieldIdDirective, TextInputComponent } from '@lucca-front/ng/forms';
+import { vi } from 'vitest';
 import { FormFieldComponent } from './form-field.component';
 
 @Component({
@@ -53,8 +54,9 @@ describe('FormFieldComponent', () => {
 		fixture.detectChanges();
 
 		// Assert
-		await new Promise((r) => setTimeout(r, 1));
-		expect(isInputRequired()).toBe(true);
+		await vi.waitFor(() => {
+			expect(isInputRequired()).toBe(true);
+		});
 	});
 
 	it('should handle required when going from normal to required', async () => {
@@ -66,8 +68,9 @@ describe('FormFieldComponent', () => {
 		fixture.detectChanges();
 
 		// Assert
-		await new Promise((r) => setTimeout(r, 1));
-		expect(isInputRequired()).toBe(true);
+		await vi.waitFor(() => {
+			expect(isInputRequired()).toBe(true);
+		});
 	});
 
 	it('should handle required when going from normal to required', async () => {
@@ -80,7 +83,8 @@ describe('FormFieldComponent', () => {
 		fixture.detectChanges();
 
 		// Assert
-		await new Promise((r) => setTimeout(r, 1));
-		expect(isInputRequired()).toBe(false);
+		await vi.waitFor(() => {
+			expect(isInputRequired()).toBe(false);
+		});
 	});
 });

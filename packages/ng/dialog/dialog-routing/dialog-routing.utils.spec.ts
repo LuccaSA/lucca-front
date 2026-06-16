@@ -5,6 +5,7 @@ import { injectDialogData, LuDialogRef } from '../model';
 
 import { By } from '@angular/platform-browser';
 import { Subject } from 'rxjs';
+import { vi } from 'vitest';
 import { LuDialogService } from '../dialog.service';
 import { dialogLazyRouteFactory, dialogRouteFactory } from './dialog-routing.utils';
 
@@ -278,11 +279,12 @@ describe('dialog-routing.utils', () => {
 			vi.useRealTimers();
 			$dialogRef().dismiss();
 			await fixture.whenStable();
-			await new Promise((r) => setTimeout(r, 0));
 
 			// Assert
-			expect(canDeactivateGuard).toHaveBeenCalledTimes(1);
-			expect($dialogRef().dismiss).toHaveBeenCalledTimes(1);
+			await vi.waitFor(() => {
+				expect(canDeactivateGuard).toHaveBeenCalledTimes(1);
+				expect($dialogRef().dismiss).toHaveBeenCalledTimes(1);
+			});
 		});
 
 		it('should not call canDeactivate when dialog is closed', async () => {
@@ -308,11 +310,12 @@ describe('dialog-routing.utils', () => {
 			vi.useRealTimers();
 			$dialogRef().close();
 			await fixture.whenStable();
-			await new Promise((r) => setTimeout(r, 0));
 
 			// Assert
-			expect(canDeactivateGuard).toHaveBeenCalledTimes(0);
-			expect($dialogRef().close).toHaveBeenCalledTimes(1);
+			await vi.waitFor(() => {
+				expect(canDeactivateGuard).toHaveBeenCalledTimes(0);
+				expect($dialogRef().close).toHaveBeenCalledTimes(1);
+			});
 		});
 
 		it('should keep dialog opened when canDeactivate return false', async () => {
