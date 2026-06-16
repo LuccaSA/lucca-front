@@ -11,7 +11,18 @@ import tsParser from '@typescript-eslint/parser';
 
 export default defineConfig(
 	{
-		ignores: ['dist/', '.storybook/**', '**/schematics/**/tests/', 'node_modules/', '.angular/', '**/stories/**'],
+		ignores: [
+			'dist/',
+			'.storybook/**',
+			'**/schematics/**/tests/',
+			'node_modules/',
+			'.angular/',
+			'vitest.config.ts',
+			'vitest.shared-config.ts',
+			// schematics && stories can be strictified
+			'packages/ng/schematics/**/*.ts',
+			'stories/**/*.ts',
+		],
 	},
 	{
 		linterOptions: {

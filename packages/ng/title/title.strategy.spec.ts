@@ -152,7 +152,7 @@ describe('TitleStrategy', () => {
 			providers: [
 				{ provide: LiveAnnouncer, useValue: { announce: jest.fn() } },
 				provideRouter(routes),
-				{ provide: Title, useValue: { setTitle: jest.fn(), getTitle: jest.fn().mockReturnValue('') } },
+				{ provide: Title, useValue: { setTitle: vi.fn(), getTitle: vi.fn().mockReturnValue('') } },
 				provideLuTitleStrategy({
 					appTitle: () => 'BU',
 					translateService: () => new TranslateService(),
@@ -218,6 +218,7 @@ describe('TitleStrategy', () => {
 		pageTitleService.title$.pipe(skip(1)).subscribe((title) => (resultTitle = title));
 
 		await clickLink('.link-6');
+		await new Promise((r) => setTimeout(r, 150));
 		expect(resultTitle).toEqual(`Overridden title${TitleSeparator}Delayed part${TitleSeparator}Stubs' child 1${TitleSeparator}Stub${TitleSeparator}Lucca BU`);
 	});
 

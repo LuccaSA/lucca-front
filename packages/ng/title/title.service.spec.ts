@@ -160,7 +160,7 @@ describe('TitleService', () => {
 			providers: [
 				provideRouter(routes),
 				LuTitleService,
-				{ provide: Title, useValue: { setTitle: jest.fn(), getTitle: jest.fn().mockReturnValue('') } },
+				{ provide: Title, useValue: { setTitle: vi.fn(), getTitle: vi.fn().mockReturnValue('') } },
 				{
 					provide: LU_TITLE_TRANSLATE_SERVICE,
 					useClass: TranslateService,
@@ -229,6 +229,7 @@ describe('TitleService', () => {
 			.subscribe((title) => (resultTitle = title));
 
 		await clickLink('.link-6');
+		await new Promise((r) => setTimeout(r, 150));
 		expect(resultTitle).toEqual(`Overridden title${TitleSeparator}Delayed part${TitleSeparator}Stubs' child 1${TitleSeparator}Stub${TitleSeparator}BU${TitleSeparator}Lucca`);
 	});
 

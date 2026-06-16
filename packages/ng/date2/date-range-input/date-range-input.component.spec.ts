@@ -32,7 +32,7 @@ describe('DateRangeInputComponent', () => {
 	}
 
 	it('should not called ngModelChange at init if null value', () => {
-		const ngModelChangeCallback = jest.fn();
+		const ngModelChangeCallback = vi.fn();
 
 		TestBed.configureTestingModule({
 			imports: [NgModelHostComponent],
@@ -48,7 +48,7 @@ describe('DateRangeInputComponent', () => {
 	});
 
 	it('should not called ngModelChange at init if there is a value', fakeAsync(() => {
-		const ngModelChangeCallback = jest.fn();
+		const ngModelChangeCallback = vi.fn();
 
 		const today = new Date();
 
@@ -72,7 +72,7 @@ describe('DateRangeInputComponent', () => {
 	}));
 
 	it('should called ngModelChange when the user enter a date with a keyboard', () => {
-		const ngModelChangeCallback = jest.fn();
+		const ngModelChangeCallback = vi.fn();
 
 		TestBed.configureTestingModule({
 			imports: [NgModelHostComponent],
@@ -91,13 +91,13 @@ describe('DateRangeInputComponent', () => {
 
 		expect(ngModelChangeCallback).toHaveBeenCalledTimes(1);
 		expect(ngModelChangeCallback).toHaveBeenCalledWith({
-			start: new Date('2025-06-18T00:00:00.000Z'),
+			start: new Date(2025, 5, 18),
 			scope: 'day',
 		});
 	});
 
 	it('should not emit value at init if null value with reactive forms', fakeAsync(() => {
-		const valueChanges = jest.fn();
+		const valueChanges = vi.fn();
 
 		const formControl = new FormControl(null);
 		formControl.valueChanges.subscribe((value) => {
@@ -118,7 +118,7 @@ describe('DateRangeInputComponent', () => {
 	}));
 
 	it('should not emit value at init if there is a value with reactive forms', fakeAsync(() => {
-		const valueChanges = jest.fn();
+		const valueChanges = vi.fn();
 
 		const today = new Date();
 
@@ -146,7 +146,7 @@ describe('DateRangeInputComponent', () => {
 	}));
 
 	it('should emit value when the user enter a date with a keyboard with reactive forms', () => {
-		const valueChanges = jest.fn();
+		const valueChanges = vi.fn();
 
 		const formControl = new FormControl(null);
 		formControl.valueChanges.subscribe((value) => {
@@ -169,7 +169,7 @@ describe('DateRangeInputComponent', () => {
 
 		expect(valueChanges).toHaveBeenCalledTimes(1);
 		expect(valueChanges).toHaveBeenCalledWith({
-			start: new Date('2025-06-18T00:00:00.000Z'),
+			start: new Date(2025, 5, 18),
 			scope: 'day',
 		});
 	});

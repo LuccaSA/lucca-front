@@ -89,7 +89,7 @@ describe('LuMultiSelectInputComponent', () => {
 				const hostFixture = TestBed.createComponent(MultiSelectNgModelHostComponent);
 				const hostComponent = hostFixture.componentInstance;
 
-				jest.spyOn(hostComponent, 'setSelectedOptions');
+				vi.spyOn(hostComponent, 'setSelectedOptions');
 
 				// Act
 				hostComponent.selectedOptions = { mode: 'include', values: [options[0]] };
@@ -105,7 +105,7 @@ describe('LuMultiSelectInputComponent', () => {
 				const hostComponent = hostFixture.componentInstance;
 				hostFixture.detectChanges();
 
-				const onChange = jest.fn();
+				const onChange = vi.fn();
 				hostComponent.formControl.valueChanges.subscribe(onChange);
 
 				// Act

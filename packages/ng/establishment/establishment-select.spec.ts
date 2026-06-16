@@ -1,8 +1,6 @@
 import { HttpClientModule } from '@angular/common/http';
 import { discardPeriodicTasks, fakeAsync, tick } from '@angular/core/testing';
 import { RenderTemplateOptions, fireEvent, render, screen } from '@testing-library/angular';
-import { createMock } from '@testing-library/angular/jest-utils';
-import '@testing-library/jest-dom';
 import userEvent from '@testing-library/user-event';
 import { axe } from 'jest-axe';
 import { of } from 'rxjs';
@@ -34,13 +32,15 @@ const estMock: ILuEstablishment[] = [
 	},
 ];
 
-const mockEstablishment = createMock(LuEstablishmentService);
-mockEstablishment.searchPaged = jest.fn(() => of(estMock));
-mockEstablishment.getAll = jest.fn(() => of(estMock));
-mockEstablishment.count = jest.fn(() => of(3));
-const mockLegalUnit = createMock(LuLegalUnitService);
-mockLegalUnit.getAll = jest.fn(() => of([]));
-mockLegalUnit.count = jest.fn(() => of(0));
+const mockEstablishment = {
+	searchPaged: vi.fn(() => of(estMock)),
+	getAll: vi.fn(() => of(estMock)),
+	count: vi.fn(() => of(3)),
+} as Partial<LuEstablishmentService> as LuEstablishmentService;
+const mockLegalUnit = {
+	getAll: vi.fn(() => of([])),
+	count: vi.fn(() => of(0)),
+} as Partial<LuLegalUnitService> as LuLegalUnitService;
 
 describe('establishment select', () => {
 	const testingStoryTemplate = `<label class="textfield mod-inline pr-u-marginInlineEnd200">

@@ -1,16 +1,15 @@
 import { provideHttpClient } from '@angular/common/http';
 import { fakeAsync, tick } from '@angular/core/testing';
 import { fireEvent, render, screen } from '@testing-library/angular';
-import { createMock } from '@testing-library/angular/jest-utils';
-import '@testing-library/jest-dom';
 import userEvent from '@testing-library/user-event';
 import { axe } from 'jest-axe';
 import { of } from 'rxjs';
 import { LuApiSelectInputComponent } from './select';
 import { ALuApiService, LuApiV3Service } from './service';
 
-const mock = createMock(LuApiV3Service);
-mock.searchPaged = jest.fn(() => of([]));
+const mock = {
+	searchPaged: vi.fn(() => of([])),
+} as Partial<LuApiV3Service> as LuApiV3Service;
 
 describe('lu-api-select', () => {
 	const apiSelectStoryTemplate = `
