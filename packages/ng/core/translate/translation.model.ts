@@ -30,5 +30,5 @@ export function getIntlPluralLabel(pluralForms: Intl.PluralRules, label: LuPlura
 			return label.many ?? label.other ?? '';
 		default:
 			return label.other ?? '';
-	}
+	return label[pluralForm] ?? label.other ?? '';
 }
