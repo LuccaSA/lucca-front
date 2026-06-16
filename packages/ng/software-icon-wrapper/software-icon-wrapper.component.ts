@@ -2,7 +2,7 @@ import { NgTemplateOutlet } from '@angular/common';
 import { ChangeDetectionStrategy, Component, computed, contentChildren, input, numberAttribute, TemplateRef, ViewEncapsulation } from '@angular/core';
 import { LU_SOFTWARE_ICON_WRAPPER } from '@lucca-front/ng/software-icon';
 
-import { intlInputOptions, IntlParamsPipe } from '@lucca-front/ng/core';
+import { intlInputOptions, IntlParamsPipe, isNil } from '@lucca-front/ng/core';
 import { PopoverDirective } from '@lucca-front/ng/popover2';
 import { LU_SOFTWARE_ICON_WRAPPER_TRANSLATIONS } from './software-icon-wrapper.translate';
 
@@ -27,11 +27,11 @@ export class SoftwareIconWrapperComponent {
 	protected readonly items = contentChildren(TemplateRef, { descendants: true });
 
 	readonly hiddenIcons = computed<readonly TemplateRef<unknown>[]>(() => {
-		return this.max() == null || this.max() <= 0 || this.items().length < this.max() ? [] : this.items().slice(this.max());
+		return isNil(this.max()) || this.max() <= 0 || this.items().length < this.max() ? [] : this.items().slice(this.max());
 	});
 
 	readonly visibleIcons = computed<readonly TemplateRef<unknown>[]>(() => {
-		return this.max() == null || this.max() <= 0 || this.items().length < this.max() ? this.items() : this.items().slice(0, this.hiddenCount() > 1 ? this.max() : this.max() + 1);
+		return isNil(this.max()) || this.max() <= 0 || this.items().length < this.max() ? this.items() : this.items().slice(0, this.hiddenCount() > 1 ? this.max() : this.max() + 1);
 	});
 
 	readonly hiddenCount = computed(() => this.hiddenIcons().length);

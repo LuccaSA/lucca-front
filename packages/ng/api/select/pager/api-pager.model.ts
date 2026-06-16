@@ -1,4 +1,4 @@
-import { ILuOnOpenSubscriber, ILuOnScrollBottomSubscriber } from '@lucca-front/ng/core';
+import { ILuOnOpenSubscriber, ILuOnScrollBottomSubscriber, isNil } from '@lucca-front/ng/core';
 import { ILuOptionOperator } from '@lucca-front/ng/option';
 import { merge, Observable, of, Subject } from 'rxjs';
 import { catchError, distinctUntilChanged, map, switchMap, tap } from 'rxjs/operators';
@@ -49,7 +49,7 @@ export abstract class ALuApiOptionPager<T extends ILuApiItem = ILuApiItem, S ext
 			distinctUntilChanged(),
 			tap((p) => (this._page = p)),
 			switchMap((page) => {
-				if (page === undefined) {
+				if (isNil(page)) {
 					return of({ items: [] as T[], strategy: Strategy.replace });
 				}
 				return this._service.getPaged(page).pipe(

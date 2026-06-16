@@ -1,4 +1,5 @@
 import { Directive, ElementRef, OnDestroy, OnInit, output } from '@angular/core';
+import { isNil, isNotNil } from '@lucca-front/ng/core';
 
 const INITIAL_INTERVAL = 500;
 
@@ -9,7 +10,7 @@ export class RepeatOnHoldDirective implements OnDestroy, OnInit {
 	hold = output<void>();
 
 	onMouseDown = () => {
-		if (this.startTime !== undefined) {
+		if (isNotNil(this.startTime)) {
 			return;
 		}
 
@@ -46,11 +47,11 @@ export class RepeatOnHoldDirective implements OnDestroy, OnInit {
 	}
 
 	private animationFrameHandler = (time: number): void => {
-		if (this.startTime === undefined) {
+		if (isNil(this.startTime)) {
 			this.startTime = time;
 		}
 
-		if (this.previousTime === undefined) {
+		if (isNil(this.previousTime)) {
 			this.previousTime = time;
 		}
 

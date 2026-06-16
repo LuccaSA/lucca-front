@@ -1,5 +1,6 @@
 import { Highlightable } from '@angular/cdk/a11y';
 import { computed, Directive, ElementRef, inject, input, linkedSignal, model, OnDestroy, output, signal } from '@angular/core';
+import { isNotNil } from '@lucca-front/ng/core';
 import { ALuSelectInputComponent } from '../input/select-input.component';
 import { CoreSelectPanelInstance, SELECT_PANEL_INSTANCE } from './panel.instance';
 
@@ -57,7 +58,7 @@ export class CoreSelectPanelElement<T> implements Highlightable, OnDestroy {
 	setActiveStyles(): void {
 		this.isHighlighted.set(true);
 		const option = this.option();
-		if (option !== undefined) {
+		if (isNotNil(option)) {
 			this.#selectRef.highlightedOption.emit(option);
 		}
 	}

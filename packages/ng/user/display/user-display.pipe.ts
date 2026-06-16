@@ -1,4 +1,5 @@
 import { inject, Pipe, PipeTransform } from '@angular/core';
+import { isNil } from '@lucca-front/ng/core';
 import { LU_DEFAULT_DISPLAY_POLICY, LuDisplayFormat, LuDisplayFullname, LuDisplayHybrid, LuDisplayInitials } from './display-format.model';
 
 function getFirstCharacter([firstCharacter]: string): string {
@@ -72,7 +73,7 @@ export class LuUserDisplayPipe implements PipeTransform {
 	public transform<T extends LuUserDisplayInput>(user: T, options?: Partial<LuUserDisplaySingleOptions>): string;
 	public transform<T extends LuUserDisplayInput>(users: T[], options?: Partial<LuUserDisplayMultipleOptions>): string;
 	public transform<T extends LuUserDisplayInput>(userOrUsers: T | T[], options?: Partial<LuUserDisplaySingleOptions> | Partial<LuUserDisplayMultipleOptions>): string {
-		if (userOrUsers == null) {
+		if (isNil(userOrUsers)) {
 			throw new Error("Parameter 'userOrUsers' must be a user or a user array");
 		}
 

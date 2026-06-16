@@ -1,6 +1,6 @@
 import { formatNumber } from '@angular/common';
 import { ChangeDetectionStrategy, Component, ElementRef, Inject, LOCALE_ID, ModelSignal, booleanAttribute, computed, input, model, numberAttribute, output, viewChild } from '@angular/core';
-import { ɵeffectWithDeps } from '@lucca-front/ng/core';
+import { isNotNil, ɵeffectWithDeps } from '@lucca-front/ng/core';
 import { InputDirective } from '@lucca-front/ng/form-field';
 import { FormLabelComponent } from '@lucca-front/ng/form-label';
 import { PickerControlDirection } from './misc.utils';
@@ -69,7 +69,7 @@ export class TimePickerPartComponent {
 		if (this.hideValue()) {
 			return '  ';
 		}
-		if (this.display() !== undefined) {
+		if (isNotNil(this.display())) {
 			return this.display();
 		}
 		const value = this.value();
