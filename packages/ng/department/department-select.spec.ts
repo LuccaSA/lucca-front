@@ -32,7 +32,7 @@ describe('department select', () => {
 		[operations]="[1]"
 		[filters]="['isactive=false']"
 		data-testid="lu-select"
-	></lu-department-select>
+	/>
 </label>`;
 
 	it('should display dialog with a click on a lu select ', async () => {
