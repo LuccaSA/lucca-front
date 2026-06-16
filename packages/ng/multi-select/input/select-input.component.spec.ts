@@ -1,7 +1,9 @@
 import { ChangeDetectionStrategy, Component } from '@angular/core';
 import { ComponentFixture, MetadataOverride, TestBed } from '@angular/core/testing';
 import { FormControl, FormsModule, NgControl, ReactiveFormsModule } from '@angular/forms';
+import { isNotNil } from '@lucca-front/ng/core';
 import { LuCoreSelectTotalCountDirective } from '@lucca-front/ng/core-select';
+import { vi } from 'vitest';
 import { TestEntity, runALuSelectInputComponentTestSuite } from '../../core-select/input/select-input.component.spec';
 import { LuMultiSelection } from '../select.model';
 import { LuMultiSelectWithSelectAllDirective } from './select-all';
@@ -144,7 +146,7 @@ describe('LuMultiSelectInputComponent', () => {
 				// Arrange
 				const { componentInstance } = fixture;
 				componentInstance.openPanel();
-				await waitForPanel();
+				await waitForPanel(componentInstance);
 				componentInstance.panelRef?.changeDetectorRef?.detectChanges();
 
 				// Act
@@ -158,7 +160,7 @@ describe('LuMultiSelectInputComponent', () => {
 				// Arrange
 				const { componentInstance } = fixture;
 				componentInstance.openPanel();
-				await waitForPanel();
+				await waitForPanel(componentInstance);
 				componentInstance.panelRef?.changeDetectorRef?.detectChanges();
 
 				// Act
@@ -173,7 +175,7 @@ describe('LuMultiSelectInputComponent', () => {
 				// Arrange
 				const { componentInstance } = fixture;
 				componentInstance.openPanel();
-				await waitForPanel();
+				await waitForPanel(componentInstance);
 				componentInstance.panelRef?.changeDetectorRef?.detectChanges();
 
 				// Act
@@ -190,7 +192,7 @@ describe('LuMultiSelectInputComponent', () => {
 				// Arrange
 				const { componentInstance } = fixture;
 				componentInstance.openPanel();
-				await waitForPanel();
+				await waitForPanel(componentInstance);
 				componentInstance.panelRef?.changeDetectorRef?.detectChanges();
 
 				// Act
@@ -205,7 +207,7 @@ describe('LuMultiSelectInputComponent', () => {
 				// Arrange
 				const { componentInstance } = fixture;
 				componentInstance.openPanel();
-				await waitForPanel();
+				await waitForPanel(componentInstance);
 				componentInstance.panelRef?.changeDetectorRef?.detectChanges();
 
 				// Act
@@ -222,7 +224,7 @@ describe('LuMultiSelectInputComponent', () => {
 				// Arrange
 				const { componentInstance } = fixture;
 				componentInstance.openPanel();
-				await waitForPanel();
+				await waitForPanel(componentInstance);
 				componentInstance.panelRef?.changeDetectorRef?.detectChanges();
 
 				// Act
@@ -247,7 +249,7 @@ describe('LuMultiSelectInputComponent', () => {
 			it('should emit mode all when clicking on each option', async () => {
 				const { componentInstance } = fixture;
 				componentInstance.openPanel();
-				await waitForPanel();
+				await waitForPanel(componentInstance);
 				componentInstance.panelRef?.changeDetectorRef?.detectChanges();
 
 				// Act
@@ -262,7 +264,7 @@ describe('LuMultiSelectInputComponent', () => {
 				// Arrange
 				const { componentInstance } = fixture;
 				componentInstance.openPanel();
-				await waitForPanel();
+				await waitForPanel(componentInstance);
 				componentInstance.panelRef?.changeDetectorRef?.detectChanges();
 
 				// Act
@@ -281,7 +283,7 @@ describe('LuMultiSelectInputComponent', () => {
 				// Arrange
 				const { componentInstance } = fixture;
 				componentInstance.openPanel();
-				await waitForPanel();
+				await waitForPanel(componentInstance);
 				componentInstance.panelRef?.changeDetectorRef?.detectChanges();
 
 				// Act
@@ -327,6 +329,7 @@ function createComponent(override?: MetadataOverride<Component>) {
 	return TestBed.createComponent<LuMultiSelectInputComponent<Entity>>(LuMultiSelectInputComponent);
 }
 
-function waitForPanel() {
-	return new Promise((resolve) => setTimeout(resolve));
+// openPanel() defers panel creation via setTimeout, wait until panelRef is set
+function waitForPanel(componentInstance: LuMultiSelectInputComponent<Entity>) {
+	return vi.waitUntil(() => isNotNil(componentInstance.panelRef));
 }
