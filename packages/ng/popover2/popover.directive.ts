@@ -172,7 +172,7 @@ export class PopoverDirective implements OnDestroy {
 			)
 			.subscribe(([event, type]: ['open' | 'close', 'focus' | 'click' | 'hover']) => {
 				if (event === 'open') {
-					this.openPopover(type === 'focus', true, type === 'hover');
+					this.openPopover(true, type === 'hover');
 					this.#listenToMouseLeave = type !== 'click';
 					if (type === 'focus' && !this.#screenReaderDescription) {
 						this.#screenReaderDescription = this.#renderer.createElement('span') as HTMLSpanElement;
@@ -222,7 +222,7 @@ export class PopoverDirective implements OnDestroy {
 			this.#componentRef?.close();
 			this.#listenToMouseLeave = true;
 		} else {
-			this.openPopover(true);
+			this.openPopover();
 			this.#listenToMouseLeave = false;
 			this.#listenToMouseEnter = false;
 		}
@@ -235,7 +235,14 @@ export class PopoverDirective implements OnDestroy {
 		}
 	}
 
-	openPopover(withBackdrop = false, disableCloseButtonFocus = false, disableInitialTriggerFocus = false): void {
+	openPopover(disableCloseButtonFocus?: boolean, disableInitialTriggerFocus?: boolean): void;
+	/** @deprecated `withBackdrop` is no longer used: the popover no longer creates a blocking backdrop. Use `openPopover(disableCloseButtonFocus, disableInitialTriggerFocus)`. */
+	openPopover(withBackdrop: boolean, disableCloseButtonFocus?: boolean, disableInitialTriggerFocus?: boolean): void;
+	openPopover(arg1 = false, arg2 = false, arg3?: boolean): void {
+		// Reconcile the canonical 2-arg signature with the deprecated 3-arg one:
+		// when 3 args are passed, the first (withBackdrop) is ignored.
+		const disableCloseButtonFocus = arg3 === undefined ? arg1 : arg2;
+		const disableInitialTriggerFocus = arg3 === undefined ? arg2 : arg3;
 		const content = this.content();
 
 		if (!this.opened() && !this.luPopoverDisabled() && isNotNil(content)) {
@@ -247,15 +254,19 @@ export class PopoverDirective implements OnDestroy {
 					.flexibleConnectedTo(this.luPopoverAnchor())
 					.withPositions(this.customPositions() || this.#buildPositions()),
 				scrollStrategy: this.overlay.scrollStrategies[this.overlayScrollStrategy() ?? 'reposition'](),
-				hasBackdrop: withBackdrop,
-				backdropClass: '',
 				disposeOnNavigation: true,
 			});
-			// Close on backdrop click even if backdrop is invisible
+			// Close on outside interaction WITHOUT a blocking backdrop that would
+			// intercept pointer events on the rest of the page.
 			this.#overlayRef
-				.backdropClick()
+				.outsidePointerEvents()
 				.pipe(takeUntilDestroyed(this.#destroyRef))
-				.subscribe(() => {
+				.subscribe((event) => {
+					// Re-clicking the trigger is handled by the click() HostListener (toggle).
+					// Ignore it here, otherwise we'd close then immediately reopen.
+					if (this.elementRef.nativeElement.contains(event.target as Node)) {
+						return;
+					}
 					this.#componentRef?.close();
 					this.#listenToMouseLeave = true;
 				});
