@@ -29,6 +29,6 @@ export function getIntlPluralLabel(pluralForms: Intl.PluralRules, label: LuPlura
 		case 'many':
 			return label.many ?? label.other ?? '';
 		default:
-			return label.other ?? '';
-	return label[pluralForm] ?? label.other ?? '';
+			return label[pluralForm] ?? label.other ?? '';
+	}
 }
