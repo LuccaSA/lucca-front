@@ -26,7 +26,7 @@ export class FormLabelComponent {
 	protected readonly intl = input(...intlInputOptions(LU_FORM_LABEL_TRANSLATIONS));
 
 	readonly locale = inject(LOCALE_ID);
-	readonly pluralRules = new Intl.PluralRules(this.locale);
+	readonly pluralRules = inject(LOCALE_PLURAL_RULES);
 	readonly counterAltLabel = computed(() => getIntlPluralLabel(this.pluralRules, this.intl().counterAlt, this.counterStatus()));
 
 	readonly required = input(false, { transform: booleanAttribute });
