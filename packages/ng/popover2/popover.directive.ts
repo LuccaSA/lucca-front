@@ -276,9 +276,12 @@ export class PopoverDirective implements OnDestroy {
 				.outsidePointerEvents()
 				.pipe(takeUntilDestroyed(this.#destroyRef))
 				.subscribe((event) => {
-					// Re-clicking the trigger is handled by the click() HostListener (toggle).
-					// Ignore it here, otherwise we'd close then immediately reopen.
-					if (this.elementRef.nativeElement.contains(event.target as Node)) {
+					// Re-opening from the trigger (or from the anchor element, which may be a wrapper
+					// containing other interactive parts) is handled by their own open handlers (e.g. the
+					// click() HostListener). Ignore those here, otherwise we'd close on pointerdown then
+					// immediately reopen on click.
+					const target = event.target as Node;
+					if (this.elementRef.nativeElement.contains(target) || this.#anchorElement?.contains(target)) {
 						return;
 					}
 					this.#componentRef?.close();
@@ -336,6 +339,21 @@ export class PopoverDirective implements OnDestroy {
 
 	updatePosition() {
 		this.#overlayRef?.updatePosition();
+	}
+
+	/**
+	 * Resolves the anchor to its native element, when it is one. The anchor can be an ElementRef,
+	 * an Element or a plain coordinate (Point); only element-based anchors can contain a pointer target.
+	 */
+	get #anchorElement(): Element | null {
+		const anchor = this.luPopoverAnchor();
+		if (anchor instanceof ElementRef) {
+			return anchor.nativeElement as Element;
+		}
+		if (anchor instanceof Element) {
+			return anchor;
+		}
+		return null;
 	}
 
 	#buildPositions(): ConnectedPosition[] {
