@@ -54,4 +54,4 @@ jobs:
 
       - name: Upload results to R2
         run: |
-          rclone sync ./storybook-static/ "r2:${R2_BUCKET}" --fast-list --checksum --transfers 8 --checkers 8
+          rclone sync ./storybook-static/ "r2:${R2_BUCKET}/storybook" --fast-list --checksum --transfers 8 --checkers 8
