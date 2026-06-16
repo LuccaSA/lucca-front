@@ -45,11 +45,14 @@ jobs:
 
       - name: Compute deploy paths
         id: vars
+        env:
+          # Pass untrusted input via env, NOT directly into the run block (prevents code injection).
+          INPUT_REF: ${{ github.event.inputs.ref }}
         run: |
           set -euo pipefail
 
           # Source the ref from the manual input, else the triggering ref.
-          RAW="${{ github.event.inputs.ref }}"
+          RAW="$INPUT_REF"
           if [ -z "$RAW" ]; then
             RAW="${GITHUB_REF#refs/*/}"   # refs/tags/v21.1.3 -> v21.1.3 ; refs/heads/master -> master
           else
@@ -80,6 +83,11 @@ jobs:
           sudo apt-get install -y rclone
 
       - name: Configure rclone
+        env:
+          # Secrets/vars via env, not interpolated into the script.
+          R2_ACCESS_KEY_ID: ${{ secrets.R2_ACCESS_KEY }}
+          R2_SECRET_ACCESS_KEY: ${{ secrets.R2_SECRET_KEY }}
+          R2_ENDPOINT: ${{ vars.CLOUDFLARE_R2_ENDPOINT }}
         run: |
           mkdir -p ~/.config/rclone
           cat > ~/.config/rclone/rclone.conf << EOF
@@ -94,10 +102,12 @@ jobs:
           EOF
 
       - name: Upload results to R2
+        env:
+          # Step outputs are derived from untrusted input -> pass via env, don't interpolate.
+          PRIMARY: ${{ steps.vars.outputs.primary-path }}
+          ALIAS: ${{ steps.vars.outputs.alias-path }}
         run: |
           set -euo pipefail
-          PRIMARY="${{ steps.vars.outputs.primary-path }}"
-          ALIAS="${{ steps.vars.outputs.alias-path }}"
 
           echo "Uploading build -> ${PRIMARY}"
           rclone sync ./storybook-static/ "r2:${R2_BUCKET}/${PRIMARY}" \
