@@ -21,8 +21,5 @@
   "exclude": [
     "src/test.ts",
     "**/*.spec.ts",
-    "vitest.config.ts",
-    "vitest.shared-config.ts",
-    "vitest.setup.ts"
   ]
 }
