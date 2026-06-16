@@ -1,6 +1,6 @@
 import { booleanAttribute, ChangeDetectionStrategy, Component, computed, inject, input, LOCALE_ID, numberAttribute, ViewEncapsulation } from '@angular/core';
 import { SafeHtml } from '@angular/platform-browser';
-import { getIntlPluralLabel, intlInputOptions, IntlParamsPipe } from '@lucca-front/ng/core';
+import { getIntlPluralLabel, intlInputOptions, IntlParamsPipe, LOCALE_PLURAL_RULES } from '@lucca-front/ng/core';
 import { IconComponent } from '@lucca-front/ng/icon';
 import { TagComponent } from '@lucca-front/ng/tag';
 import { LuTooltipTriggerDirective } from '@lucca-front/ng/tooltip';
@@ -26,7 +26,7 @@ export class FormLabelComponent {
 	protected readonly intl = input(...intlInputOptions(LU_FORM_LABEL_TRANSLATIONS));
 
 	readonly locale = inject(LOCALE_ID);
-	readonly pluralRules = new Intl.PluralRules(this.locale);
+	readonly pluralRules = inject(LOCALE_PLURAL_RULES);
 	readonly counterAltLabel = computed(() => getIntlPluralLabel(this.pluralRules, this.intl().counterAlt, this.counterStatus()));
 
 	readonly required = input(false, { transform: booleanAttribute });
