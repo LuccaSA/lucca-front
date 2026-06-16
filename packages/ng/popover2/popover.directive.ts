@@ -280,8 +280,8 @@ export class PopoverDirective implements OnDestroy {
 					// containing other interactive parts) is handled by their own open handlers (e.g. the
 					// click() HostListener). Ignore those here, otherwise we'd close on pointerdown then
 					// immediately reopen on click.
-					const target = event.target as Node;
-					if (this.elementRef.nativeElement.contains(target) || this.#anchorElement?.contains(target)) {
+					const target = event.target;
+					if (target instanceof Node && (this.elementRef.nativeElement.contains(target) || this.#anchorElement?.contains(target))) {
 						return;
 					}
 					this.#componentRef?.close();
