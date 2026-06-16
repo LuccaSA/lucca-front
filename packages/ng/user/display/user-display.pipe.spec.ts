@@ -1,4 +1,4 @@
-import { ChangeDetectionStrategy, Component, Provider, input } from '@angular/core';
+import { ChangeDetectionStrategy, Component, input, Provider } from '@angular/core';
 import { TestBed } from '@angular/core/testing';
 import { LU_DEFAULT_DISPLAY_POLICY, LuDisplayFullname, LuDisplayHybrid, LuDisplayInitials } from './display-format.model';
 import { luUserDisplay, LuUserDisplayInput, LuUserDisplayPipe } from './user-display.pipe';
@@ -156,12 +156,7 @@ describe(LuUserDisplayPipe.name, () => {
 		});
 
 		it(`should return the right multiple value with default separator when formatter is undefined`, () => {
-			spectator = createPipe(`{{ users | luUserDisplay:{ format: 'fL', formatter: undefined } }}`, {
-				hostProps: {
-					users,
-				},
-			});
-			expect(spectator.element).toHaveText('John D., Michael S., Dwight S.');
+			expect(createPipe(`{{ users() | luUserDisplay:{ format: 'fL', formatter: undefined } }}`, { users })).toBe('John D., Michael S., Dwight S.');
 		});
 	});
 });
