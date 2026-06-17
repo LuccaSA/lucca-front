@@ -66,6 +66,12 @@ export default {
 		presentation: {
 			description: '[v21.1] Transforme le champ de formulaire en donnée textuelle non éditable.',
 		},
+		maxWidth: {
+			control: {
+				type: 'boolean',
+			},
+			description: "Applique la largeur maximale d'un formulaire au fieldset (cette largeur maximale est généralement appliquée par le formulaire lui-même).",
+		},
 	},
 	decorators: [
 		moduleMetadata({
