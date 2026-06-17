@@ -6,7 +6,7 @@ export class SkipLinksService {
 	#links = signal<LuSkipLink[]>([]);
 
 	links = computed(() => {
-		return [...untracked(this.#links)].sort((a, b) => {
+		return [...this.#links()].sort((a, b) => {
 			const pos = a.host.compareDocumentPosition(b.host);
 			if (pos & Node.DOCUMENT_POSITION_PRECEDING) return 1;
 			if (pos & Node.DOCUMENT_POSITION_FOLLOWING) return -1;
