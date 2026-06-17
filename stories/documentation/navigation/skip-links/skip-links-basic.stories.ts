@@ -1,5 +1,8 @@
-import { ChangeDetectionStrategy, Component } from '@angular/core';
+import { ChangeDetectionStrategy, Component, Input } from '@angular/core';
 import { LuSkipLinksComponent, SkipLinkDirective } from '@lucca-front/ng/a11y';
+import { AppLayoutComponent } from '@lucca-front/ng/app-layout';
+import { ContainerComponent } from '@lucca-front/ng/container';
+import { MainLayoutBlockComponent, MainLayoutComponent } from '@lucca-front/ng/main-layout';
 import { Meta, StoryObj } from '@storybook/angular';
 import { createTestStory } from 'stories/helpers/stories';
 import { waitForAngular } from 'stories/helpers/test';
@@ -7,81 +10,179 @@ import { expect, within } from 'storybook/test';
 
 @Component({
 	selector: 'skip-links-story',
-	imports: [LuSkipLinksComponent, SkipLinkDirective],
+	imports: [LuSkipLinksComponent, SkipLinkDirective, AppLayoutComponent, MainLayoutComponent, MainLayoutBlockComponent, ContainerComponent],
 	template: `
 		<lu-skip-links />
-
-		<div><input id="showSkipLinks" type="checkbox" />&ngsp;<label for="showSkipLinks">Show skip links</label></div>
-		<div id="lucca-banner-solutions-container" class="skipLinks_target" tabindex="-1">Banner <a href="#">Banner</a> Banner</div>
-		<div id="navSide" class="skipLinks_target" tabindex="-1">NavSide <a href="#">NavSide</a> NavSide</div>
-		<div id="main-content" class="skipLinks_target" tabindex="-1">Content <a href="#">Content</a> Content</div>
-
-		<div luSkipLinkTarget luSkipLinkLabel="A – Go to custom element (without ID)">A – Custom <a href="#">element</a> (without ID)</div>
-
-		<div class="skipLinks_target" tabindex="-1" luSkipLinkTarget="customElementWithIDAsParameter" luSkipLinkLabel="B – Go to custom element (with ID as parameter)">
-			B – Custom <a href="#">element</a> (with ID as parameter)
-		</div>
-
-		<div id="customElementWithIDInHTML" luSkipLinkTarget luSkipLinkLabel="C – Go to custom element (with ID in HTML)">C – Custom <a href="#">element</a> (with ID in HTML)</div>
-
-		<div
-			class="skipLinks_target"
-			tabindex="-1"
-			id="elementWithDifferentIDinTheHTMLandParameter"
-			luSkipLinkTarget="customElementWithDifferentIDinTheHTMLandParameter"
-			luSkipLinkLabel="D – Go to custom element (with different ID in the HTML and parameter)"
-		>
-			D – Custom <a href="#">element</a> (with different ID in the HTML and parameter)
-		</div>
-
-		<div
-			id="customElementWithIdenticalIDinTheHTMLandParameter"
-			luSkipLinkTarget="customElementWithIdenticalIDinTheHTMLandParameter"
-			luSkipLinkLabel="E – Go to custom element (with identical ID in the HTML and parameter)"
-		>
-			E – Custom <a href="#">element</a> (with identical ID in the HTML and parameter)
-		</div>
-
-		<div class="pr-u-inlineSizeFitContent" tabindex="0" luSkipLinkTarget="customElementWithTabindex" luSkipLinkLabel="F – Go to custom element with tabindex">
-			F – Custom <a href="#">element</a> with tabindex
-		</div>
-
-		<button class="button mod-outlined pr-u-inlineSizeFitContent" type="button" luSkipLinkTarget="customElementFocusable" luSkipLinkLabel="G – Go to custom element focusable">
-			G – Custom element focusable
-		</button>
+		<lu-app-layout>
+			<ng-container appLayoutBanner>
+				<div id="lucca-banner-solutions-container" tabindex="-1">
+					<a href="#">banner</a>
+				</div>
+			</ng-container>
+			<ng-container appLayoutNavSide>
+				<div id="navSide" tabindex="-1">
+					<a href="#">navside</a>
+					<a href="#">navside</a>
+					<a href="#">navside</a>
+					<a href="#">navside</a>
+					<a href="#">navside</a>
+				</div>
+			</ng-container>
+			<lu-main-layout>
+				<lu-main-layout-block>
+					<lu-container>
+						<div class="fakeContent"><a href="#">content</a></div>
+					</lu-container>
+				</lu-main-layout-block>
+				<lu-main-layout-block>
+					<lu-container>
+						<div class="fakeContent"><a href="#">content</a></div>
+					</lu-container>
+				</lu-main-layout-block>
+				<lu-main-layout-block>
+					<lu-container>
+						<div class="fakeContent"><a href="#">content</a></div>
+					</lu-container>
+				</lu-main-layout-block>
+				@if (showCustomSkipLinkTarget) {
+					<lu-main-layout-block>
+						<lu-container>
+							<div luSkipLinkTarget luSkipLinkLabel="Go to custom skip link target" class="fakeContent"><a href="#">custom skip link target</a></div>
+						</lu-container>
+					</lu-main-layout-block>
+				}
+				<lu-main-layout-block>
+					<lu-container>
+						<div class="fakeContent"><a href="#">content</a></div>
+					</lu-container>
+				</lu-main-layout-block>
+			</lu-main-layout>
+		</lu-app-layout>
 	`,
 	styles: [
 		`
-			:host:has(#showSkipLinks:checked) ::ng-deep .skipLinks {
-				position: static;
-			}
+			@layer components {
+				:host ::ng-deep {
+					.appLayout {
+						--components-appLayout-blockSize: 100%;
+						--components-appLayout-inlineSize: 100%;
+						overflow: hidden;
+						min-block-size: 394px;
+						border-radius: var(--pr-t-border-radius-100);
+						border: 1px solid var(--palettes-neutral-200);
 
-			:host:has(#showSkipLinks:checked) ::ng-deep .skipLinks-action {
-				position: unset;
-				inline-size: unset;
-				block-size: unset;
-				clip-path: unset;
-				padding-block: var(--pr-t-spacings-50);
-				padding-inline: var(--pr-t-spacings-100);
-				margin: 0;
-				opacity: 0.25;
-				pointer-events: none;
+						> * {
+							font-family: monospace;
 
-				&:focus-visible {
-					opacity: 1;
+							&.appLayout-banner {
+								padding-block: 0;
+							}
+						}
+					}
+
+					#lucca-banner-solutions-container {
+						background-color: var(--pr-t-elevation-surface-raised);
+						box-shadow: var(--pr-t-elevation-shadow-overflow);
+						position: relative;
+						z-index: 2;
+						block-size: 50px;
+						display: grid;
+						place-items: center;
+
+						&:focus-visible {
+							outline: 2px solid var(--palettes-700, var(--palettes-product-700));
+							outline-offset: -4px;
+							border-radius: var(--pr-t-border-radius-default);
+						}
+
+						&::before {
+							content: '';
+							position: absolute;
+							inset-block-start: var(--pr-t-spacings-100);
+							inset-inline-start: var(--pr-t-spacings-100);
+							inline-size: 122px;
+							block-size: 32px;
+							background-color: var(--palettes-neutral-50);
+							border-radius: var(--pr-t-border-radius-50);
+						}
+
+						&::after {
+							content: '';
+							position: absolute;
+							inset-inline-end: var(--pr-t-spacings-100);
+							inset-block-start: var(--pr-t-spacings-100);
+							inline-size: 32px;
+							block-size: 32px;
+							background-color: var(--palettes-neutral-200);
+							border-radius: var(--pr-t-border-radius-full);
+						}
+					}
+
+					#navSide {
+						background-color: var(--palettes-neutral-500);
+						padding: var(--pr-t-spacings-150) var(--pr-t-spacings-400);
+						block-size: 100%;
+						display: grid;
+						place-items: center;
+
+						&:focus-visible {
+							outline: 2px solid var(--palettes-700, var(--palettes-product-700));
+							outline-offset: -4px;
+							border-radius: var(--pr-t-border-radius-default);
+						}
+
+						a {
+							color: var(--pr-t-color-text);
+						}
+					}
+
+					.mainLayout-sidebar {
+						background-color: var(--palettes-neutral-50);
+						align-items: center;
+						justify-content: center;
+						display: flex;
+						flex-direction: column;
+						color: var(--palettes-brand-700);
+						font-family: monospace;
+
+						&:not(:empty) {
+							padding: var(--pr-t-spacings-150);
+						}
+					}
+
+					.mainLayout-content-inside {
+						gap: var(--pr-t-spacings-100);
+					}
+
+					.container {
+						--commons-container-maxWidth: 50rem;
+					}
+
+					.fakeContent {
+						background-color: var(--pr-t-elevation-surface-raised);
+						border: 1px solid var(--palettes-neutral-50);
+						padding: var(--pr-t-spacings-150);
+						align-items: center;
+						justify-content: center;
+						display: flex;
+						flex-direction: column;
+						color: var(--palettes-brand-700);
+						font-family: monospace;
+						white-space: nowrap;
+					}
 				}
 			}
 
-			:host {
-				display: flex;
-				flex-direction: column;
-				gap: var(--pr-t-spacings-200);
+			:host ::ng-deep .skipLinks {
+				inset-block-start: 1.75rem;
 			}
 		`,
 	],
 	changeDetection: ChangeDetectionStrategy.OnPush,
 })
-class SkipLinksStory {}
+class SkipLinksStory {
+	@Input() showCustomSkipLinkTarget = false;
+}
 
 export default {
 	title: 'Documentation/Navigation/SkipLinks/Basic',
@@ -95,18 +196,26 @@ import { LuSkipLinksComponent } from '@lucca-front/ng/a11y';
 @Component({
 	imports: [LuSkipLinksComponent],
 	selector: 'app-component',
-	template: \`<lu-skip-links />\`,
+	template: \`<lu-skip-links />
+
+<div luSkipLinkTarget luSkipLinkLabel="Go to custom skip link target">custom skip link target</div>\`,
 })
 class AppComponent {
 }`;
 
 export const Basic: StoryObj<SkipLinksStory> = {
-	args: {},
+	args: {
+		showCustomSkipLinkTarget: false,
+	},
+	argTypes: {
+		showCustomSkipLinkTarget: {
+			control: { type: 'boolean' },
+		},
+	},
 	render: Template,
 };
 Basic.parameters = {
-	// Disable controls as they are not modifiable because of ComponentWrapper
-	controls: { include: [] },
+	controls: { include: ['showCustomSkipLinkTarget'] },
 	docs: {
 		source: {
 			language: 'ts',
