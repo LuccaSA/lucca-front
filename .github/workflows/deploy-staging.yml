@@ -110,11 +110,13 @@ jobs:
         env:
           QA_WEBSERVICE_URL: ${{ secrets.QA_WEBSERVICE_URL }}
           QA_WEBSERVICE_TOKEN: ${{ secrets.QA_WEBSERVICE_TOKEN }}
+          HEAD_REF: ${{ github.head_ref }}
+          AUTHOR_GITHUB_LOGIN: ${{ github.event.pull_request.user.login }}
         run: |
           payload=$(jq -n \
-            --arg branch "${{ github.head_ref }}" \
+            --arg branch "$HEAD_REF" \
             --argjson pullRequestNumber '${{ github.event.number }}' \
-            --arg authorGithubLogin "${{ github.event.pull_request.user.login }}" \
+            --arg authorGithubLogin "$AUTHOR_GITHUB_LOGIN" \
             --arg executorSource "${{ github.server_url }}/${{ github.repository }}/actions/runs/${{ github.run_id }}" \
             '{
               branch: $branch,
