@@ -1,6 +1,6 @@
 import { ChangeDetectionStrategy, Component } from '@angular/core';
-import { LuSkipLinksComponent, SkipLinksService } from '@lucca-front/ng/a11y';
-import { applicationConfig, Meta, StoryObj } from '@storybook/angular';
+import { LuSkipLinksComponent } from '@lucca-front/ng/a11y';
+import { Meta, StoryObj } from '@storybook/angular';
 
 @Component({
 	selector: 'skip-links-stories',
@@ -13,11 +13,6 @@ class SkipLinksStory {}
 export default {
 	title: 'QA/SkipLinks',
 	component: SkipLinksStory,
-	decorators: [
-		applicationConfig({
-			providers: [SkipLinksService],
-		}),
-	],
 } as Meta;
 
 const template = () => ({});

@@ -1,7 +1,7 @@
 import { computed, Injectable, signal, untracked } from '@angular/core';
 import { LuSkipLink } from './skip-link';
 
-@Injectable()
+@Injectable({ providedIn: 'root' })
 export class SkipLinksService {
 	#links = signal<LuSkipLink[]>([]);
 
