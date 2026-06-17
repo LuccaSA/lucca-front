@@ -189,11 +189,11 @@ export const WithForm: StoryObj = {
 
 <ng-template #dialogTpl>
 	<lu-dialog #dialog>
-<!--form = new FormGroup({
+		<!--form = new FormGroup({
 			example: new FormControl('', Validators.required)
 		})-->
 		<form luForm [formGroup]="form">
-			<lu-dialog-header>Template driven header with Form inside</lu-dialog-header>
+			<lu-dialog-header><h1>Template driven header</h1></lu-dialog-header>
 
 			<lu-dialog-content>
 				<lu-form-field label="Example input">
@@ -203,7 +203,7 @@ export const WithForm: StoryObj = {
 
 			<lu-dialog-footer>
 				<div class="footer-actions">
-					<button type="submit" luButton [disabled]="!form.valid" luDialogClose>Submit</button>
+					<button type="submit" luButton luDialogClose>Submit</button>
 					<button type="button" luButton="ghost" luDialogDismiss>Cancel</button>
 				</div>
 			</lu-dialog-footer>
