@@ -22,6 +22,7 @@
 		stylesStrikethrough: 'Doorgehaald',
 		linksPlaceholder: 'https://www.nomDuSite.com',
 		insertTag: 'Invoegen:',
+		selectTag: 'Een tag toevoegen',
 	},
 	fr: {
 		clearFormat: 'Effacer la mise en forme',
@@ -46,6 +47,7 @@
 		stylesStrikethrough: 'Barré',
 		linksPlaceholder: 'https://www.nomDuSite.com',
 		insertTag: 'Insérer :',
+		selectTag: 'Ajouter une balise',
 	},
 	en: {
 		clearFormat: 'Delete formatting',
@@ -70,6 +72,7 @@
 		stylesStrikethrough: 'Strikethrough',
 		linksPlaceholder: 'https://www.SiteName.com',
 		insertTag: 'Insert:',
+		selectTag: 'Add a tag',
 	},
 	de: {
 		clearFormat: 'Formatierung löschen',
@@ -94,6 +97,7 @@
 		stylesStrikethrough: 'Durchgestrichen',
 		linksPlaceholder: 'https://www.NameDerSeite.com',
 		insertTag: 'Einfügen:',
+		selectTag: 'Ein Tag hinzufügen',
 	},
 	it: {
 		clearFormat: 'Cancellare la formattazione',
@@ -118,6 +122,7 @@
 		stylesStrikethrough: 'Barrato',
 		linksPlaceholder: 'https://www.nomDuSite.com',
 		insertTag: 'Inserire:',
+		selectTag: 'Aggiungi un tag',
 	},
 	nl: {
 		clearFormat: 'Opmaak wissen',
@@ -142,6 +147,7 @@
 		stylesStrikethrough: 'Doorgehaald',
 		linksPlaceholder: 'https://www.nomDuSite.com',
 		insertTag: 'Invoegen:',
+		selectTag: 'Een tag toevoegen',
 	},
 	es: {
 		clearFormat: 'Borrar formato',
@@ -166,6 +172,7 @@
 		stylesStrikethrough: 'Tachado',
 		linksPlaceholder: 'https://www.nomDuSite.com',
 		insertTag: 'Introducir:',
+		selectTag: 'Añadir una etiqueta',
 	},
 	pt: {
 		clearFormat: 'Eliminar a formatação',
@@ -190,5 +197,6 @@
 		stylesStrikethrough: 'Barré',
 		linksPlaceholder: 'https://www.nomeDoSitio.com/',
 		insertTag: 'Inserir:',
+		selectTag: 'Adicionar uma etiqueta',
 	},
 };
