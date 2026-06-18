@@ -12,9 +12,6 @@ import { FileUploadState } from '../file-upload.type';
 	templateUrl: './single-file-upload.component.html',
 	styleUrl: './single-file-upload.component.scss',
 	encapsulation: ViewEncapsulation.None,
-	host: {
-		'[class.mod-structure]': 'structure()',
-	},
 	imports: [InputDirective, FileEntryComponent, IntlParamsPipe, BubbleIllustrationComponent],
 	changeDetection: ChangeDetectionStrategy.OnPush,
 })

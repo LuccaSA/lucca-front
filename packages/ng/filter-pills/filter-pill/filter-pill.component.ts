@@ -44,47 +44,54 @@ import { LU_FILTER_PILLS_TRANSLATIONS } from '../filter-pills.translate';
 	],
 	host: {
 		class: 'filterPillWrapper',
-		'[class.is-hidden]': 'this.isHidden()',
+		'[class.is-hidden]': 'isHiddenClass',
+		'[class.mod-checkbox]': 'isModCheckbox',
+		'[class.is-filled]': 'isFilled',
+		'[class.is-comboboxHidden]': 'hideCombobox',
 		'(click)': 'hostClick()',
 	},
 })
 export class FilterPillComponent {
-	intl = input(...intlInputOptions(LU_FILTER_PILLS_TRANSLATIONS));
+	readonly intl = input(...intlInputOptions(LU_FILTER_PILLS_TRANSLATIONS));
 
 	#locale = inject(LOCALE_ID);
 
-	elementRef = inject(ElementRef);
+	readonly elementRef = inject(ElementRef);
 
-	layout = computed(() => this.inputComponentRef()?.filterPillLayout?.() || 'default');
+	readonly layout = computed(() => this.inputComponentRef()?.filterPillLayout?.() || 'default');
 
 	// The easy way to grab input component, will work in most cases
-	childInputComponentRef = contentChild(FILTER_PILL_INPUT_COMPONENT);
+	readonly childInputComponentRef = contentChild(FILTER_PILL_INPUT_COMPONENT);
 
 	// The harder way, because child has to register itself to the host, might become the default approach if this is required too much
 	// (like when child isn't created when component inits or it's too deep)
-	registeredInputComponentRef = signal<FilterPillInputComponent | null>(null);
+	readonly registeredInputComponentRef = signal<FilterPillInputComponent | null>(null);
 
-	inputComponentRef = computed(() => this.registeredInputComponentRef() || this.childInputComponentRef());
+	readonly inputComponentRef = computed(() => this.registeredInputComponentRef() || this.childInputComponentRef());
 
-	popoverRef = viewChild(PopoverDirective);
+	readonly popoverRef = viewChild(PopoverDirective);
 
 	pillTpl: TemplateRef<unknown>;
 
-	labelTpl = computed(() => this.customLabelTpl() || this.defaultLabelTpl());
+	readonly labelTpl = computed(() => this.customLabelTpl() || this.defaultLabelTpl());
 
-	defaultLabelTpl = viewChild<TemplateRef<unknown>>('defaultLabel');
+	readonly defaultLabelTpl = viewChild<TemplateRef<unknown>>('defaultLabel');
 
-	customLabelTpl = signal<TemplateRef<unknown> | null>(null);
+	readonly customLabelTpl = signal<TemplateRef<unknown> | null>(null);
 
-	name = input<string>();
+	readonly name = input<string>();
 
-	optional = input(false, { transform: booleanAttribute });
+	readonly optional = input(false, { transform: booleanAttribute });
 
-	disabled = computed(() => this.inputComponentRef()?.filterPillDisabled?.() || false);
+	readonly disabled = computed(() => this.inputComponentRef()?.filterPillDisabled?.() || false);
 
-	displayed = model(false);
+	get isHiddenClass() {
+		return this.isHidden();
+	}
 
-	protected isHidden = computed(() => this.optional() && !this.displayed());
+	readonly displayed = model(false);
+
+	protected readonly isHidden = computed(() => this.optional() && !this.displayed());
 
 	popoverPositions: ConnectionPositionPair[] = [
 		new ConnectionPositionPair(
@@ -107,25 +114,25 @@ export class FilterPillComponent {
 		),
 	];
 
-	label = input.required<string>();
+	readonly label = input.required<string>();
 
-	placeholder = computed(() => this.placeholderOverride() ?? this.intl().placeholder);
-	placeholderOverride = input<string | null>(null, { alias: 'placeholder' });
+	readonly placeholder = computed(() => this.placeholderOverride() ?? this.intl().placeholder);
+	readonly placeholderOverride = input<string | null>(null, { alias: 'placeholder' });
 
-	icon = input<LuccaIcon>();
+	readonly icon = input<LuccaIcon>();
 
-	defaultIcon = computed<LuccaIcon>(() => this.inputComponentRef()?.getDefaultFilterPillIcon?.() ?? 'arrowChevronBottom');
+	readonly defaultIcon = computed<LuccaIcon>(() => this.inputComponentRef()?.getDefaultFilterPillIcon?.() ?? 'arrowChevronBottom');
 
-	displayedIcon = computed(() => this.icon() || this.defaultIcon());
+	readonly displayedIcon = computed(() => this.icon() || this.defaultIcon());
 
-	shouldHideCombobox = computed(() => this.inputComponentRef()?.hideCombobox?.() ?? false);
+	readonly shouldHideCombobox = computed(() => this.inputComponentRef()?.hideCombobox?.() ?? false);
 
-	inputIsEmpty = computed(() => this.inputComponentRef()?.isFilterPillEmpty() ?? true);
-	inputIsClearable = computed(() => this.inputComponentRef()?.isFilterPillClearable() ?? false);
+	readonly inputIsEmpty = computed(() => this.inputComponentRef()?.isFilterPillEmpty() ?? true);
+	readonly inputIsClearable = computed(() => this.inputComponentRef()?.isFilterPillClearable() ?? false);
 
-	shouldShowColon = computed(() => this.inputComponentRef()?.showColon?.() || !this.inputIsEmpty());
+	readonly shouldShowColon = computed(() => this.inputComponentRef()?.showColon?.() || !this.inputIsEmpty());
 
-	colonDisplay = computed(() => {
+	readonly colonDisplay = computed(() => {
 		if (!this.shouldShowColon()) {
 			return '';
 		}
@@ -135,14 +142,26 @@ export class FilterPillComponent {
 		return ':';
 	});
 
-	modCheckbox = computed(() => this.layout() === 'checkable');
+	readonly modCheckbox = computed(() => this.layout() === 'checkable');
+
+	get isModCheckbox() {
+		return this.modCheckbox();
+	}
+
+	get isFilled() {
+		return !this.inputIsEmpty();
+	}
+
+	get hideCombobox() {
+		return this.shouldHideCombobox();
+	}
 
 	constructor() {
 		effect(() => {
 			const ref = this.inputComponentRef();
 			if (ref) {
 				untracked(() => {
-					ref.enableFilterPillMode();
+					ref.enableFilterPillMode?.();
 					ref.registerFilterPillClosePopover(this.closePopover);
 					ref.registerFilterPillUpdatePosition?.(this.updatePosition);
 				});

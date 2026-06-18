@@ -15,20 +15,12 @@
 			@include structure;
 		}
 
-		&.mod-S {
-			@include S;
-
-			&.is-loading {
-				@include loadingS;
-			}
+		&.mod-L {
+			@include L;
 		}
 
 		&:hover {
 			@include hover;
-		}
-
-		&.is-loading {
-			@include loading;
 		}
 
 		&.is-hidden {

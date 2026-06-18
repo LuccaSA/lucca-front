@@ -70,6 +70,12 @@ type BaseLuDialogConfig<C, TData = LuDialogData<C>> = {
 	canClose?: (comp: C) => boolean | Observable<boolean>;
 
 	/**
+	 * A hook function to determine if the current dialog can be dismissed or not.
+	 * Unlike `canClose`, this does not require a component instance and is suitable for template-based dialogs.
+	 */
+	canDismiss?: () => boolean | Observable<boolean>;
+
+	/**
 	 * Determine if the current dialog can be close by a click on backdrop or escape key
 	 */
 	canCloseWithBackdrop?: boolean;

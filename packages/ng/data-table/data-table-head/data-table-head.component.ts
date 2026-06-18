@@ -26,5 +26,5 @@ export class DataTableHeadComponent {
 	readonly sticky = input(false, { transform: booleanAttribute });
 	readonly isFirstVisible = signal(false);
 
-	cols = contentChildren(DataTableRowCellHeaderComponent, { descendants: true });
+	readonly cols = contentChildren(DataTableRowCellHeaderComponent, { descendants: true });
 }

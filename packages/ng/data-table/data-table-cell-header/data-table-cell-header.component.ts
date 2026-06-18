@@ -42,13 +42,13 @@ const SORT_VALUES = ['none', 'ascending', 'descending'] as const;
 	changeDetection: ChangeDetectionStrategy.OnPush,
 })
 export class DataTableRowCellHeaderComponent extends BaseDataTableCell implements AfterContentInit {
-	elementRef = inject<ElementRef<HTMLTableCellElement>>(ElementRef);
+	readonly elementRef = inject<ElementRef<HTMLTableCellElement>>(ElementRef);
 
-	sort = model<DataTableSort | null>(null);
-	fixedWidth = input<string | null>(null);
-	inlineSize = input<string | null>(null);
+	readonly sort = model<DataTableSort | null>(null);
+	readonly fixedWidth = input<string | null>(null);
+	readonly inlineSize = input<string | null>(null);
 
-	insetInlineStart = computed(() => {
+	readonly insetInlineStart = computed(() => {
 		const isFirstOrLastCol = this.position() === 0 || this.position() === (this.rowRef?.cells().length ?? 0) - 1;
 		if (isFirstOrLastCol || !this.isStickyStart() || !this.headRef) {
 			return '';
@@ -58,12 +58,12 @@ export class DataTableRowCellHeaderComponent extends BaseDataTableCell implement
 				.cols()
 				.slice(0, this.position())
 				.reduce((acc, col) => {
-					return acc + col.inlineSizePx();
+					return acc + (col.inlineSizePx() ?? 0);
 				}, 0) + 'px'
 		);
 	});
 
-	insetInlineEnd = computed(() => {
+	readonly insetInlineEnd = computed(() => {
 		const isFirstOrLastCol = this.position() === 0 || this.position() === (this.rowRef?.cells().length ?? 0) - 1;
 		if (isFirstOrLastCol || !this.isStickyEnd() || !this.headRef) {
 			return '';
@@ -71,16 +71,16 @@ export class DataTableRowCellHeaderComponent extends BaseDataTableCell implement
 		return (
 			this.headRef
 				.cols()
-				.slice(this.position() + 1)
+				.slice((this.position() ?? 0) + 1)
 				.reduce((acc, col) => {
-					return acc + col.inlineSizePx();
+					return acc + (col.inlineSizePx() ?? 0);
 				}, 0) + 'px'
 		);
 	});
 
-	#inlineSizePx$ = new ReplaySubject<number>();
+	readonly #inlineSizePx$ = new ReplaySubject<number>();
 
-	inlineSizePx = toSignal(this.#inlineSizePx$);
+	readonly inlineSizePx = toSignal(this.#inlineSizePx$);
 
 	ngAfterContentInit(): void {
 		new ResizeObserver(() => {

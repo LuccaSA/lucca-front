@@ -20,11 +20,11 @@ export class LuStringDateAdapter extends ALuDateAdapter<string> implements ILuDa
 	}
 
 	forge(year: number, month: number, date: number): string {
-		return this.dateToString(this._nativeAdapter.forge(year, month, date));
+		return this.dateToString(this._nativeAdapter.forge(year, month, date)) ?? '';
 	}
 
 	forgeToday(): string {
-		return this.dateToString(this._nativeAdapter.forgeToday());
+		return this.dateToString(this._nativeAdapter.forgeToday()) ?? '';
 	}
 
 	forgeInvalid(): string {
@@ -47,7 +47,7 @@ export class LuStringDateAdapter extends ALuDateAdapter<string> implements ILuDa
 	}
 
 	parse(text: string, granularity: LuDateGranularity): string {
-		return this.dateToString(this._nativeAdapter.parse(text, granularity));
+		return this.dateToString(this._nativeAdapter.parse(text, granularity)) ?? '';
 	}
 
 	format(d: string, format: string): string {
@@ -75,18 +75,18 @@ export class LuStringDateAdapter extends ALuDateAdapter<string> implements ILuDa
 	}
 
 	add(d: string, count: number, granularity: LuDateGranularity): string {
-		return this.dateToString(this._nativeAdapter.add(this.stringToDate(d), count, granularity));
+		return this.dateToString(this._nativeAdapter.add(this.stringToDate(d), count, granularity)) ?? '';
 	}
 
 	protected stringToDate(s: string): Date {
 		return new Date(`${s}T00:00:00Z`);
 	}
 
-	protected dateToString(d: Date): string {
+	protected dateToString(d: Date | undefined): string | undefined {
 		let result: string;
 
 		if (d === undefined) {
-			result = undefined;
+			return undefined;
 		} else if (!this._nativeAdapter.isValid(d)) {
 			result = this.forgeInvalid();
 		} else {

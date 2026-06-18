@@ -23,10 +23,10 @@ import { LU_DATA_TABLE_BODY_INSTANCE } from './data-table-body.token';
 	changeDetection: ChangeDetectionStrategy.OnPush,
 })
 export class DataTableBodyComponent {
-	group = input<PortalContent | null>(null);
-	groupButtonAlt = input<string | null>(null);
+	readonly group = input<PortalContent | null>(null);
+	readonly groupButtonAlt = input<string | null>(null);
 
-	expanded = model(false);
+	readonly expanded = model(false);
 
 	expandedToggle() {
 		this.expanded.set(!this.expanded());
@@ -34,5 +34,11 @@ export class DataTableBodyComponent {
 
 	protected tableRef = inject(LU_DATA_TABLE_INSTANCE, { optional: true });
 
-	colspan = computed(() => this.tableRef?.cols().length + (this.tableRef?.selectable() ? 1 : 0));
+	readonly colspan = computed(() => {
+		if (!this.tableRef) {
+			return 0;
+		}
+
+		return (this.tableRef.cols()?.length ?? 0) + (this.tableRef.selectable() ? 1 : 0);
+	});
 }

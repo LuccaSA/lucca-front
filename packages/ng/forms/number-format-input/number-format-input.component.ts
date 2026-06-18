@@ -57,9 +57,9 @@ export class NumberFormatInputComponent implements AfterViewInit {
 
 	readonly valueAlignRight = input(false, { transform: booleanAttribute });
 
-	inputElementRef = viewChild<ElementRef<HTMLInputElement>>('inputElement');
+	readonly inputElementRef = viewChild<ElementRef<HTMLInputElement>>('inputElement');
 
-	#suffixPrefixValue = signal(1);
+	readonly #suffixPrefixValue = signal(1);
 
 	readonly #numberFormat = computed(() => new NumberFormat(this.formatOptions()));
 	readonly prefixAddon = computed(() => {
@@ -103,7 +103,7 @@ export class NumberFormatInputComponent implements AfterViewInit {
 			}) satisfies NumberFormatOptions,
 	);
 
-	formattedValue = computed(() => this.#numberFormat().getBlurFormat(this.#suffixPrefixValue()));
+	readonly formattedValue = computed(() => this.#numberFormat().getBlurFormat(this.#suffixPrefixValue()));
 
 	readonly intl = input(...intlInputOptions(LU_NUMBERFORMATFIELD_TRANSLATIONS));
 

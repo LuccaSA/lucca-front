@@ -41,7 +41,7 @@
 							<lu-tree-branch
 								[branch]="branch"
 								[optionTpl]="optionTpl()"
-								[optionComparer]="optionComparer"
+								[optionComparer]="optionComparer()"
 								[selectedOptions]="[selected()]"
 								[optionIndex]="index"
 								(toggleOne)="panelRef.emitValue($event)"
@@ -59,7 +59,7 @@
 								[groupIndex]="groupIndex"
 								[grouping]="grouping()"
 								[scrollIntoViewOptions]="{ block: 'nearest' }"
-								[isSelected]="option | luIsOptionSelected: optionComparer : selected()"
+								[isSelected]="option | luIsOptionSelected: optionComparer() : selected()"
 								[class.withAddOption]="ctx.shouldDisplayAddOption"
 								(selected)="panelRef.emitValue(option)"
 								(click)="panelRef.emitValue(option)"

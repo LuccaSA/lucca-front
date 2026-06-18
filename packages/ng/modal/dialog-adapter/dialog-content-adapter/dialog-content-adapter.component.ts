@@ -1,6 +1,6 @@
 import { ComponentType } from '@angular/cdk/overlay';
 import { AsyncPipe } from '@angular/common';
-import { ChangeDetectionStrategy, Component, DestroyRef, DoCheck, inject, Injector, OnInit, signal, ViewChild, ViewContainerRef, ViewEncapsulation } from '@angular/core';
+import { AfterViewInit, ChangeDetectionStrategy, Component, DestroyRef, DoCheck, inject, Injector, signal, viewChild, ViewContainerRef, ViewEncapsulation } from '@angular/core';
 import { takeUntilDestroyed } from '@angular/core/rxjs-interop';
 import { ButtonComponent } from '@lucca-front/ng/button';
 import { getIntl, Palette } from '@lucca-front/ng/core';
@@ -15,7 +15,7 @@ import { LU_MODAL_TRANSLATIONS } from '../../modal.translate';
 
 interface AdapterData<D, C> {
 	component: ComponentType<C>;
-	data: D;
+	data: D | undefined;
 }
 
 @Component({
@@ -26,11 +26,10 @@ interface AdapterData<D, C> {
 	encapsulation: ViewEncapsulation.None,
 	imports: [DialogComponent, DialogHeaderComponent, DialogContentComponent, DialogFooterComponent, AsyncPipe, ButtonComponent, NumericBadgeComponent],
 })
-export class DialogContentAdapterComponent<D, C extends ILuModalContent> implements OnInit, DoCheck {
+export class DialogContentAdapterComponent<D, C extends ILuModalContent> implements AfterViewInit, DoCheck {
 	#destroyRef = inject(DestroyRef);
 
-	@ViewChild('contentProjectionRef', { read: ViewContainerRef, static: true })
-	contentProjectionRef: ViewContainerRef;
+	readonly contentProjectionRef = viewChild.required('contentProjectionRef', { read: ViewContainerRef });
 
 	#contentComponentInstance: C;
 
@@ -38,21 +37,21 @@ export class DialogContentAdapterComponent<D, C extends ILuModalContent> impleme
 
 	dialogData = injectDialogData<AdapterData<D, C>>();
 
-	ref = injectDialogRef<LuModalContentResult<C>>();
+	ref = injectDialogRef<LuModalContentResult<C> | undefined>();
 
-	submitClass = signal('');
-	error$ = new Subject();
+	readonly submitClass = signal('');
+	readonly error$ = new Subject();
 
-	protected doCheck$ = new ReplaySubject<void>(1);
+	protected readonly doCheck$ = new ReplaySubject<void>(1);
 
 	public intl = getIntl(LU_MODAL_TRANSLATIONS);
-	protected title$ = this.observeValue(() => this.#contentComponentInstance.title);
-	protected submitLabel$ = this.observeValue(() => this.#contentComponentInstance.submitLabel || this.intl.submit);
-	protected cancelLabel$ = this.observeValue(() => this.#contentComponentInstance.cancelLabel || this.intl.cancel);
-	protected submitCounter$ = this.observeValue(() => this.#contentComponentInstance.submitCounter);
-	protected submitDisabled$ = this.observeValue(() => this.#contentComponentInstance.submitDisabled);
-	protected hasSubmitCounter$ = this.submitCounter$.pipe(map(Boolean));
-	protected hasSubmit$ = this.observeValue(() => this.#contentComponentInstance.submitAction).pipe(map(Boolean));
+	protected readonly title$ = this.observeValue(() => this.#contentComponentInstance.title);
+	protected readonly submitLabel$ = this.observeValue(() => this.#contentComponentInstance.submitLabel || this.intl.submit);
+	protected readonly cancelLabel$ = this.observeValue(() => this.#contentComponentInstance.cancelLabel || this.intl.cancel);
+	protected readonly submitCounter$ = this.observeValue(() => this.#contentComponentInstance.submitCounter);
+	protected readonly submitDisabled$ = this.observeValue(() => this.#contentComponentInstance.submitDisabled);
+	protected readonly hasSubmitCounter$ = this.submitCounter$.pipe(map(Boolean));
+	protected readonly hasSubmit$ = this.observeValue(() => this.#contentComponentInstance.submitAction).pipe(map(Boolean));
 
 	get submitPalette() {
 		return (this.#contentComponentInstance.submitPalette || 'product') as Palette;
@@ -80,7 +79,7 @@ export class DialogContentAdapterComponent<D, C extends ILuModalContent> impleme
 						takeUntilDestroyed(this.#destroyRef),
 					)
 					.subscribe({
-						next: (res) => this.ref.close(res as LuModalContentResult<C>),
+						next: (res: LuModalContentResult<C>) => this.ref.close(res),
 						error: (err) => {
 							this.submitClass.set('is-error');
 							this.error$.next(err);
@@ -110,7 +109,7 @@ export class DialogContentAdapterComponent<D, C extends ILuModalContent> impleme
 		this.doCheck$.next();
 	}
 
-	ngOnInit(): void {
+	ngAfterViewInit(): void {
 		const injector = Injector.create({
 			providers: [
 				{ provide: ALuModalRef, useValue: this },
@@ -118,7 +117,7 @@ export class DialogContentAdapterComponent<D, C extends ILuModalContent> impleme
 			],
 			parent: this.#injector,
 		});
-		this.#contentComponentInstance = this.contentProjectionRef.createComponent(this.dialogData.component, {
+		this.#contentComponentInstance = this.contentProjectionRef().createComponent(this.dialogData.component, {
 			injector,
 		}).instance;
 	}

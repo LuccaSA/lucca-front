@@ -10,7 +10,7 @@ export class SkeletonResourceCardComponent {
 	/**
 	 * Defines the number of description lines in resource card
 	 */
-	descriptionLines = input(0, { transform: numberAttribute });
+	readonly descriptionLines = input(0, { transform: numberAttribute });
 
 	readonly lines = computed(() => Array.from({ length: this.descriptionLines() }));
 

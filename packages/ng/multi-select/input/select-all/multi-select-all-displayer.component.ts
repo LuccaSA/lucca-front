@@ -53,10 +53,7 @@ export class LuMultiSelectAllDisplayerComponent<TValue> {
 	unselectOption(option: TValue, $event: Event): void {
 		$event.stopPropagation();
 		$event.preventDefault();
-		this.select.updateValue(
-			this.select.value.filter((o) => o !== option),
-			true,
-		);
+		this.select.updateValue(this.select.value?.filter((o) => o !== option) ?? [], true);
 		setTimeout(() => {
 			this.select.panelRef?.updatePosition();
 			this.inputElementRef().nativeElement.focus();

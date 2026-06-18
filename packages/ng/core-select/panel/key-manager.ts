@@ -22,6 +22,7 @@ export class CoreSelectKeyManager<T> {
 	#options?: CoreSelectKeyManagerOptions<T>;
 	#injector = inject(Injector);
 
+	// eslint-disable-next-line @angular-eslint/prefer-signals
 	#queryList: Signal<CoreSelectPanelElement<T>[]>;
 	#queryList$: Observable<CoreSelectPanelElement<T>[]>;
 
@@ -107,7 +108,7 @@ export class CoreSelectKeyManager<T> {
 
 		keyManager.change
 			.pipe(
-				map(() => keyManager.activeItem?.idAttribute()),
+				map(() => keyManager.activeItem?.idAttribute() ?? ''),
 				takeUntilDestroyed(this.#destroyRef),
 			)
 			.subscribe((activeDescendant) => activeOptionIdChanged$.emit(activeDescendant));
