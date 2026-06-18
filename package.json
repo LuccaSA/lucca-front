@@ -48,7 +48,7 @@
   },
   "dependencies": {
     "@angular/animations": "^22.0.1",
-    "@angular/cdk": "^21.2.9",
+    "@angular/cdk": "^22.0.2",
     "@angular/common": "^22.0.1",
     "@angular/compiler": "^22.0.1",
     "@angular/core": "^22.0.1",
@@ -82,7 +82,7 @@
     "@angular-devkit/architect": "0.2200.1",
     "@angular-devkit/core": "22.0.1",
     "@angular-devkit/schematics": "22.0.1",
-    "@angular-eslint/schematics": "21.4.0",
+    "@angular-eslint/schematics": "22.0.0",
     "@angular/build": "^22.0.1",
     "@angular/cli": "22.0.1",
     "@angular/compiler-cli": "^22.0.1",
@@ -111,7 +111,7 @@
     "@typescript-eslint/parser": "~8.59.4",
     "@typescript-eslint/rule-tester": "~8.59.4",
     "@typescript-eslint/utils": "~8.59.4",
-    "angular-eslint": "~21.1.0",
+    "angular-eslint": "~22.0.0",
     "autoprefixer": "^10.4.14",
     "eslint": "~9.28.0",
     "eslint-config-prettier": "~10.1.1",
@@ -123,7 +123,7 @@
     "jest": "^30.2.0",
     "jest-axe": "^10.0.0",
     "jest-environment-jsdom": "^30.2.0",
-    "jest-preset-angular": "^16.0.0",
+    "jest-preset-angular": "^17.0.0",
     "jsdom": "^27.3.0",
     "mdx-loader": "^1.1.1",
     "mini-css-extract-plugin": "^2.10.0",
@@ -151,6 +151,25 @@
   "overrides": {
     "@compodoc/compodoc": {
       "pdfjs-dist": "4.2.67"
+    },
+    "@analogjs/storybook-angular": {
+      "@angular-devkit/build-angular": ">=22.0.0",
+      "@angular-devkit/core": ">=22.0.0",
+      "@angular-devkit/architect": ">=0.2200.1"
+    },
+    "@storybook/angular": {
+      "@angular-devkit/build-angular": ">=22.0.0",
+      "@angular-devkit/core": ">=22.0.0",
+      "@angular/animations": ">=22.0.0",
+      "@angular/cli": ">=22.0.0",
+      "@angular/common": ">=22.0.0",
+      "@angular/compiler": ">=22.0.0",
+      "@angular/compiler-cli": ">=22.0.0",
+      "@angular/core": ">=22.0.0",
+      "@angular/platform-browser": ">=22.0.0",
+      "@angular/platform-browser-dynamic": ">=22.0.0",
+      "@angular-devkit/architect": ">=0.2200.1",
+      "typescript": "6.0.3"
     }
   }
 }
