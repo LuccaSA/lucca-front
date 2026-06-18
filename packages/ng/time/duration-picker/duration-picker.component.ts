@@ -40,7 +40,7 @@ export class DurationPickerComponent extends BasePickerComponent {
 
 	readonly durationChange = output<DurationChangeEvent>();
 
-	keyPressed = signal(false);
+	readonly keyPressed = signal(false);
 
 	protected readonly hours = computed(() => getHoursPartFromDuration(this.value()));
 	protected readonly minutes = computed(() => getMinutesPartFromDuration(this.value()));

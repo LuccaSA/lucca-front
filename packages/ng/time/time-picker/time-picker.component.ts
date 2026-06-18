@@ -57,7 +57,7 @@ export class TimePickerComponent extends BasePickerComponent {
 
 	readonly forceMeridiemDisplay = input<boolean | null>(null);
 
-	keyPressed = signal(false);
+	readonly keyPressed = signal(false);
 
 	readonly enableMeridiemDisplay = computed(() => {
 		if (this.forceMeridiemDisplay() !== null) {

@@ -46,9 +46,9 @@ export class MultilanguageInputComponent implements ControlValueAccessor {
 
 	readonly intl = input(...intlInputOptions(LU_MULTILANGUAGE_INPUT_TRANSLATIONS));
 
-	readonly #formFieldRef = inject(FORM_FIELD_INSTANCE, { optional: true });
+	readonly formFieldRef = inject(FORM_FIELD_INSTANCE, { optional: true });
 
-	readonly formFieldSize = this.#formFieldRef?.size;
+	readonly formFieldSize = this.formFieldRef?.size;
 
 	protected onTouched = () => {};
 
@@ -102,7 +102,7 @@ export class MultilanguageInputComponent implements ControlValueAccessor {
 
 	constructor() {
 		effect(() => {
-			if (this.hasNoInvariant() && !this.#formFieldRef?.isInputRequired()) {
+			if (this.hasNoInvariant() && !this.formFieldRef?.isInputRequired()) {
 				console.warn('[Multilanguage Input] Input with no invariant should be required, make sure you make the corresponding form field (or NgModel) required.');
 			}
 			if (this.hasNoInvariant() && !this.displayLocale()) {
