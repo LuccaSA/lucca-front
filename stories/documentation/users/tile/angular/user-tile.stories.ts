@@ -118,40 +118,47 @@ export const Basic: StoryObj<UserTileStoryArgs> = {
 	},
 	argTypes: {
 		selectedUser: {
+			description: '[Story] Utilisateur affiché.',
 			options: ['finn', 'marceline', 'jake'],
 			control: {
 				type: 'select',
 			},
 		},
 		size: {
+			description: 'Taille du composant.',
 			options: ['XS', 'S', 'M', 'L'],
 			control: {
 				type: 'select',
 			},
 		},
 		role: {
+			description: 'Rôle de l’utilisateur affiché sous son nom.',
 			control: {
 				type: 'text',
 			},
 		},
 		firstNameFormat: {
+			description: '[Story] Format d’affichage du prénom.',
 			options: ['full', 'abbreviated', 'hidden'],
 			control: {
 				type: 'select',
 			},
 		},
 		lastNameFormat: {
+			description: '[Story] Format d’affichage du nom de famille.',
 			options: ['full', 'abbreviated', 'hidden'],
 			control: {
 				type: 'select',
 			},
 		},
 		lastNameFirst: {
+			description: '[Story] Affiche le nom de famille avant le prénom.',
 			control: {
 				type: 'boolean',
 			},
 		},
 		withPopover: {
+			description: '[Story] Affiche UserPopover au survol du composant.',
 			control: {
 				type: 'boolean',
 			},
