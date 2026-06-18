@@ -1,4 +1,4 @@
-import { bob } from '@/stories/users/user.mocks';
+import { finn } from '@/stories/users/user.mocks';
 import { ChangeDetectionStrategy, Component } from '@angular/core';
 import { ActivityFeedComponent, ActivityFeedStepComponent, ActivityFeedUpdateComponent } from '@lucca-front/ng/activity-feed';
 import { CommentComponent } from '@lucca-front/ng/comment';
@@ -12,7 +12,7 @@ import { Meta, StoryObj } from '@storybook/angular';
 	changeDetection: ChangeDetectionStrategy.OnPush,
 })
 class ActivityFeedStory {
-	user = bob;
+	user = finn;
 	date = new Date();
 }
 
