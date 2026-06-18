@@ -4,7 +4,7 @@
   "compilerOptions": {
     "declarationMap": false,
     "paths": {
-      "@lucca/prisme/*": ["dist/prisme/*", "dist/prisme"]
+      "@lucca/prisme/*": ["../../dist/prisme/*", "../../dist/prisme"]
     }
   },
   "angularCompilerOptions": {
