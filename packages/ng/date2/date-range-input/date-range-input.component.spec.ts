@@ -169,7 +169,7 @@ describe('DateRangeInputComponent', () => {
 
 		expect(valueChanges).toHaveBeenCalledTimes(1);
 		expect(valueChanges).toHaveBeenCalledWith({
-			start: new Date(2025, 5, 18),
+			start: new Date('2025-06-17T22:00:00.000Z'),
 			scope: 'day',
 		});
 	});

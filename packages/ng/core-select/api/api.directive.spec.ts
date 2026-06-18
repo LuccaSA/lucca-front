@@ -56,7 +56,7 @@ describe('ALuCoreSelectApiDirective', () => {
 	let selectElement: HTMLElement;
 	let select: LuSimpleSelectInputComponent<TestEntity>;
 	let testApi: TestDirective;
-	let getOptionsSpy: ReturnType<typeof vi.spyOn<TestDirective, 'getOptions'>>;
+	let getOptionsSpy: MockInstance;
 
 	beforeEach(() => {
 		TestBed.configureTestingModule({

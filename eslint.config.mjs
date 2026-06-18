@@ -35,7 +35,13 @@ export default defineConfig(
 		processor: angular.processInlineTemplates,
 		languageOptions: {
 			parserOptions: {
-				project: ['tsconfig.json', 'packages/ng/tsconfig.json', '.storybook/tsconfig.json'],
+				project: [
+					'tsconfig.json',
+					'packages/ng/tsconfig.json',
+					'packages/prisme/tsconfig.json',
+					'packages/eslint-plugin/tsconfig.json',
+					'.storybook/tsconfig.json',
+				],
 				createDefaultProgram: true,
 			},
 		},
@@ -137,7 +143,13 @@ export default defineConfig(
 		languageOptions: {
 			parser: tsParser,
 			parserOptions: {
-				project: ['tsconfig.lint.json', 'packages/ng/tsconfig.lint.json', '.storybook/tsconfig.lint.json'],
+				project: [
+					'tsconfig.lint.json',
+					'packages/ng/tsconfig.lint.json',
+					'packages/prisme/tsconfig.lint.json',
+					'packages/eslint-plugin/tsconfig.json',
+					'.storybook/tsconfig.lint.json',
+				],
 			},
 		},
 		plugins: {
@@ -156,7 +168,13 @@ export default defineConfig(
 		languageOptions: {
 			parser: tsParser,
 			parserOptions: {
-				project: ['tsconfig.lint.json', 'packages/ng/tsconfig.lint.json', '.storybook/tsconfig.lint.json'],
+				project: [
+					'tsconfig.lint.json',
+					'packages/ng/tsconfig.lint.json',
+					'packages/prisme/tsconfig.lint.json',
+					'packages/eslint-plugin/tsconfig.json',
+					'.storybook/tsconfig.lint.json',
+				],
 			},
 		},
 		plugins: {

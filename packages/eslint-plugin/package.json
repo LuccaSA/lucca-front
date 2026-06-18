@@ -10,8 +10,8 @@
   "description": "Custom ESLint rules for Lucca Front",
   "exports": "./index.ts",
   "scripts": {
-    "test": "vitest run --config vitest.config.ts",
-    "test:watch": "vitest --config vitest.config.ts"
+    "test": "vitest run",
+    "test:watch": "vitest"
   },
   "keywords": [
     "eslint",
