@@ -3,6 +3,7 @@ import { AfterContentInit, ChangeDetectionStrategy, Component, computed, Element
 import { toSignal } from '@angular/core/rxjs-interop';
 import { FormsModule } from '@angular/forms';
 import { ButtonComponent } from '@lucca-front/ng/button';
+import { isNotNil } from '@lucca-front/ng/core';
 import { IconComponent } from '@lucca-front/ng/icon';
 import { ReplaySubject } from 'rxjs';
 import { BaseDataTableCell } from '../base-data-table-cell';
@@ -89,8 +90,9 @@ export class DataTableRowCellHeaderComponent extends BaseDataTableCell implement
 	}
 
 	toggleSort(): void {
-		if (this.sort()) {
-			this.sort.set(SORT_VALUES[(SORT_VALUES.indexOf(this.sort()) + 1) % SORT_VALUES.length]);
+		const sort = this.sort();
+		if (isNotNil(sort)) {
+			this.sort.set(SORT_VALUES[(SORT_VALUES.indexOf(sort) + 1) % SORT_VALUES.length]);
 		}
 	}
 }
