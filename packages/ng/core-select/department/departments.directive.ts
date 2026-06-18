@@ -4,8 +4,7 @@ import { toObservable } from '@angular/core/rxjs-interop';
 import { CORE_SELECT_API_TOTAL_COUNT_PROVIDER, CoreSelectApiTotalCountProvider, TreeNode } from '@lucca-front/ng/core-select';
 import { ALuCoreSelectApiDirective } from '@lucca-front/ng/core-select/api';
 import { ILuDepartment } from '@lucca-front/ng/department';
-import { combineLatest, map, Observable, of } from 'rxjs';
-import { filter } from 'rxjs/operators';
+import { combineLatest, map, Observable, of, switchMap } from 'rxjs';
 import { NoopTreeSelectDirective } from './noop-tree-select.directive';
 
 @Directive({
@@ -92,8 +91,8 @@ export class LuCoreSelectDepartmentsDirective<T extends ILuDepartment = ILuDepar
 		}),
 	);
 
-	public totalCount$ = this.select.options$.pipe(
-		filter((opts) => opts.length > 0),
+	public totalCount$ = this.params$.pipe(
+		switchMap((params) => this.getOptions(params)),
 		map((opts) => {
 			return opts.map((branch) => this.flattenTree(branch)).flat().length;
 		}),
