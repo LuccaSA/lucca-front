@@ -32,6 +32,10 @@ import { LuOptionsGroupContextPipe } from './option-group-context.pipe';
 	templateUrl: './panel.component.html',
 	styleUrl: './panel.component.scss',
 	changeDetection: ChangeDetectionStrategy.OnPush,
+	host: {
+		'(document:keydown)': 'onKeydown()',
+		'(document:mousemove)': 'onMousemove()',
+	},
 	imports: [
 		A11yModule,
 		AsyncPipe,
@@ -78,7 +82,17 @@ export class LuMultiSelectPanelComponent<T> implements AfterViewInit, CoreSelect
 	readonly optionTpl = this.selectInput.optionTpl;
 
 	readonly options = signal<ɵCoreSelectPanelElement<T>[]>([]);
-	keyManager = inject<CoreSelectKeyManager<T>>(CoreSelectKeyManager);
+	readonly pointerNavigation = signal(false);
+
+	readonly keyManager = inject<CoreSelectKeyManager<T>>(CoreSelectKeyManager);
+
+	onKeydown(): void {
+		this.pointerNavigation.set(false);
+	}
+
+	onMousemove(): void {
+		this.pointerNavigation.set(true);
+	}
 
 	readonly someGroupOptionEnabled = computed(() => {
 		return (groupOptions: T[]) => {

@@ -5,6 +5,9 @@ import { LuSidepanel, LuSidepanelModule } from '@lucca-front/ng/sidepanel';
 import { LuToastsModule, LuToastsService } from '@lucca-front/ng/toast';
 import { applicationConfig, Meta, StoryObj } from '@storybook/angular';
 import { map, shareReplay, timer } from 'rxjs';
+import { createTestStory } from 'stories/helpers/stories';
+import { waitForAngular } from 'stories/helpers/test';
+import { expect, screen, userEvent, within } from 'storybook/test';
 
 @Component({
 	selector: 'sidepanel-content',
@@ -137,3 +140,20 @@ class SidepanelContentComponent implements ILuModalContent {
 		},
 	},
 };
+
+export const BasicTEST = createTestStory(Basic, async ({ canvasElement, step }) => {
+	await waitForAngular();
+	const canvas = within(canvasElement);
+
+	await step('Ouvre le sidepanel', async () => {
+		await userEvent.click(canvas.getByRole('button', { name: 'Open' }));
+		await waitForAngular();
+		await expect(screen.getByRole('dialog')).toBeVisible();
+	});
+
+	await step('Ferme avec Escape', async () => {
+		await userEvent.keyboard('{Escape}');
+		await waitForAngular();
+		await expect(screen.queryByRole('dialog')).not.toBeInTheDocument();
+	});
+});

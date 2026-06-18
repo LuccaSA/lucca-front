@@ -39,7 +39,6 @@ export default {
 			control: {
 				type: 'boolean',
 			},
-			table: { disable: true },
 		},
 	},
 } as Meta;

@@ -166,7 +166,7 @@ describe('ALuCoreSelectApiDirective', () => {
 		expect(testApi.getOptions).toHaveBeenCalledTimes(3);
 
 		let options: readonly TestEntity[] = [];
-
+		fixture.detectChanges();
 		select.options$.subscribe((o) => (options = o));
 
 		expect(options).toEqual([
@@ -212,6 +212,7 @@ describe('ALuCoreSelectApiDirective', () => {
 
 		// Assert
 		let options: readonly TestEntity[] = [];
+		fixture.detectChanges();
 		select.options$.subscribe((o) => (options = o));
 		expect(options).toEqual([
 			{ id: 1, name: 'test 1' },

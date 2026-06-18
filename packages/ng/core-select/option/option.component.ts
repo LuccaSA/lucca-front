@@ -1,7 +1,8 @@
-import { booleanAttribute, ChangeDetectionStrategy, ChangeDetectorRef, Component, ElementRef, inject, input, OnInit, output, TemplateRef, Type, viewChild } from '@angular/core';
+import { booleanAttribute, ChangeDetectionStrategy, ChangeDetectorRef, Component, ElementRef, inject, input, OnInit, output, TemplateRef, Type, untracked, viewChild } from '@angular/core';
 import { intlInputOptions, isNil, PortalDirective, ɵeffectWithDeps } from '@lucca-front/ng/core';
 import { LuTooltipTriggerDirective } from '@lucca-front/ng/tooltip';
 import { asyncScheduler, observeOn } from 'rxjs';
+import { CoreSelectPanelInstance, SELECT_PANEL_INSTANCE } from '../panel/panel.instance';
 import { GroupTemplateLocation } from '../panel/panel.utils';
 import { CoreSelectPanelElement } from '../panel/selectable-item';
 import { LuOptionContext, LuOptionGrouping, SELECT_ID } from '../select.model';
@@ -23,6 +24,7 @@ export const MAGIC_OPTION_SCROLL_DELAY = 15;
 	imports: [LuOptionOutletDirective, PortalDirective, LuOptionGroupPipe, LuTooltipTriggerDirective],
 })
 export class LuOptionComponent<T> implements OnInit {
+	readonly #panelRef = inject<CoreSelectPanelInstance<T>>(SELECT_PANEL_INSTANCE);
 	protected selectableItem = inject(CoreSelectPanelElement);
 	readonly intl = input(...intlInputOptions(LU_OPTION_TRANSLATIONS));
 
@@ -61,7 +63,7 @@ export class LuOptionComponent<T> implements OnInit {
 
 	constructor() {
 		ɵeffectWithDeps([this.selectableItem.isHighlighted], (isHighlighted, onCleanup) => {
-			if (isHighlighted) {
+			if (isHighlighted && !untracked(this.#panelRef.pointerNavigation)) {
 				const timeoutId = setTimeout(() => {
 					this.elementRef.nativeElement.scrollIntoView(this.scrollIntoViewOptions());
 				}, MAGIC_OPTION_SCROLL_DELAY);

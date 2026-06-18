@@ -7,6 +7,8 @@
 
 @mixin horizontal {
 	grid-template-columns: 1fr auto;
+
+	--components-form-maxWidth: initial;
 }
 
 @mixin expandable {
@@ -32,4 +34,12 @@
 
 @mixin narrow {
 	--components-fieldset-title-content-flexWrap: wrap;
+}
+
+@mixin hiddenLegend {
+	--components-fieldset-gap: 0;
+
+	.fieldset-title-content-text {
+		@include a11y.mask;
+	}
 }

@@ -19,7 +19,7 @@ export class VerticalNavigationComponent {
 	/**
 	 * Changes the heading title displayed by the vertical navigation
 	 */
-	readonly heading = input.required<PortalContent>();
+	readonly heading = input<PortalContent | null>(null);
 
 	/**
 	 * Defines aria level for heading title

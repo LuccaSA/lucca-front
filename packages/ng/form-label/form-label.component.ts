@@ -1,9 +1,10 @@
-import { booleanAttribute, ChangeDetectionStrategy, Component, input, numberAttribute, ViewEncapsulation } from '@angular/core';
+import { booleanAttribute, ChangeDetectionStrategy, Component, computed, inject, input, LOCALE_ID, numberAttribute, ViewEncapsulation } from '@angular/core';
 import { SafeHtml } from '@angular/platform-browser';
-import { intlInputOptions, IntlParamsPipe } from '@lucca-front/ng/core';
+import { getIntlPluralLabel, intlInputOptions, IntlParamsPipe, LOCALE_PLURAL_RULES } from '@lucca-front/ng/core';
 import { IconComponent } from '@lucca-front/ng/icon';
 import { TagComponent } from '@lucca-front/ng/tag';
 import { LuTooltipTriggerDirective } from '@lucca-front/ng/tooltip';
+import { FormLabelSize } from './form-label.type';
 import { LU_FORM_LABEL_TRANSLATIONS } from './form-label.translate';
 
 @Component({
@@ -25,11 +26,15 @@ import { LU_FORM_LABEL_TRANSLATIONS } from './form-label.translate';
 export class FormLabelComponent {
 	protected readonly intl = input(...intlInputOptions(LU_FORM_LABEL_TRANSLATIONS));
 
+	readonly locale = inject(LOCALE_ID);
+	readonly pluralRules = inject(LOCALE_PLURAL_RULES);
+	readonly counterAltLabel = computed(() => getIntlPluralLabel(this.pluralRules, this.intl().counterAlt, this.counterStatus()));
+
 	readonly required = input(false, { transform: booleanAttribute });
 	readonly error = input(false, { transform: booleanAttribute });
 	readonly tooltip = input<string | SafeHtml | null>(null);
 	readonly tag = input<string | null>(null);
-	readonly size = input<'XS' | 'S' | null>(null);
+	readonly size = input<FormLabelSize | null>(null);
 	readonly counterStatus = input(0, { transform: numberAttribute });
 	readonly counterMax = input(0, { transform: numberAttribute });
 	readonly counterId = input<string | null>(null);

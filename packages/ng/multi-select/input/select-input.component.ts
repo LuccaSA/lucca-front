@@ -26,6 +26,7 @@ import { ALuSelectInputComponent, LU_CORE_SELECT_TRANSLATIONS, LuOptionContext, 
 import { FILTER_PILL_INPUT_COMPONENT, FilterPillDisplayerDirective, FilterPillLabelDirective } from '@lucca-front/ng/filter-pills';
 import { PresentationDisplayDirective, ɵPresentationDisplayDefaultDirective } from '@lucca-front/ng/form-field';
 import { LuTooltipModule } from '@lucca-front/ng/tooltip';
+import { IconComponent } from '@lucca/prisme/icon';
 import { Subject } from 'rxjs';
 import { LuMultiSelectDefaultDisplayerComponent } from '../displayer';
 import { LU_MULTI_SELECT_TRANSLATIONS } from '../select.translate';
@@ -47,6 +48,7 @@ import { LuMultiSelectPanelRef } from './panel.model';
 		PresentationDisplayDirective,
 		CommonModule,
 		ɵPresentationDisplayDefaultDirective,
+		IconComponent,
 	],
 	providers: [
 		{

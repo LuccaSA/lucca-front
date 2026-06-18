@@ -1,8 +1,11 @@
 import { FormsModule } from '@angular/forms';
 import { BrowserAnimationsModule } from '@angular/platform-browser/animations';
-import { FormFieldComponent, InputDirective } from '@lucca-front/ng/form-field';
+import { FORM_FIELD_WIDTH, FormFieldComponent, InputDirective } from '@lucca-front/ng/form-field';
+import { INLINE_MESSAGE_STATE } from '@lucca-front/ng/inline-message';
 import { Meta, moduleMetadata, StoryObj } from '@storybook/angular';
-import { generateInputs } from '../../../helpers/stories';
+import { createTestStory, generateInputs, setStoryOptions } from '../../../helpers/stories';
+import { waitForAngular } from '../../../helpers/test';
+import { expect, userEvent, within } from 'storybook/test';
 
 export default {
 	title: 'Documentation/Forms/Fields/Form Field',
@@ -35,7 +38,7 @@ export default {
 			description: 'Ajoute un texte indicatif sous le champ de formulaire. [PortalContent]',
 		},
 		inlineMessageState: {
-			options: ['default', 'success', 'warning', 'error'],
+			options: setStoryOptions(INLINE_MESSAGE_STATE),
 			control: {
 				type: 'select',
 			},
@@ -62,7 +65,7 @@ export default {
 				'Nombre de caractères maximum autorisés pour un champ de type texte. A seulement un impact sur l’interface et doit être complété à un réglage au niveau de <code>FormControl</code>.',
 		},
 		width: {
-			options: [null, 20, 30, 40, 50, 60],
+			options: setStoryOptions(FORM_FIELD_WIDTH),
 			control: {
 				type: 'select',
 			},
@@ -105,6 +108,24 @@ export const Template: StoryObj<FormFieldComponent & { required: boolean }> = {
 		invalid: false,
 		counter: null,
 		rolePresentationLabel: false,
-		width: null,
 	},
 };
+
+export const TemplateTEST = createTestStory(Template, async ({ canvasElement, step }) => {
+	await waitForAngular();
+	const canvas = within(canvasElement);
+
+	await step('Vérifie le rendu initial', async () => {
+		await expect(canvas.getByText('Label')).toBeVisible();
+		await expect(canvas.getByRole('textbox')).toBeVisible();
+	});
+
+	await step('Interaction clavier', async () => {
+		const textarea = canvas.getByRole('textbox');
+		textarea.focus();
+		await expect(textarea).toHaveFocus();
+		await userEvent.type(textarea, 'test input');
+		await waitForAngular();
+		await expect(textarea).toHaveValue('test input');
+	});
+});

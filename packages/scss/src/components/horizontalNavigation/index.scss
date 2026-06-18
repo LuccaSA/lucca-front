@@ -1,3 +1,4 @@
+@use '@lucca-front/scss/src/commons/utils/color';
 @use 'exports' as *;
 
 // stylelint-disable-next-line selector-disallowed-list -- .menu is deprecated
@@ -21,6 +22,10 @@
 			@include noBorder;
 		}
 
+		.dialog & {
+			@include insideDialog;
+		}
+
 		&.mod-vertical {
 			@include vertical;
 
@@ -28,6 +33,7 @@
 			.menu-list-item-action,
 			.horizontalNavigation-list-item-action {
 				&[aria-current='page'],
+				&[aria-selected='true'],
 				&.is-active {
 					@include activeVertical;
 				}
@@ -40,6 +46,18 @@
 	}
 }
 
+.horizontalNavigation_panel {
+	@layer components {
+		@include varsPanel;
+	}
+
+	@layer mods {
+		.dialog & {
+			@include insideDialogPanel;
+		}
+	}
+}
+
 .menu-link, // stylelint-disable-line selector-disallowed-list -- .menu-link is deprecated
 .menu-list-item-action, // stylelint-disable-line selector-disallowed-list -- .menu-list-item-action is deprecated
 .horizontalNavigation-list-item-action {
@@ -47,12 +65,20 @@
 		// .active is deprecated
 		&.active,
 		&[aria-current='page'],
+		&[aria-selected='true'],
 		&.is-active {
 			@include active;
 		}
 
+		// .active is deprecated
+		&:not(.active, [aria-current='page'], [aria-selected='true']) {
+			.numericBadge {
+				@include color.palette;
+			}
+		}
+
 		&.disabled, // .disabled is deprecated
-		&[disabled], // [disabled] is deprecated
+		&[disabled],
 		&.is-disabled {
 			@include disabled;
 		}

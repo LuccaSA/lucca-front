@@ -93,6 +93,10 @@ export class PopoverDirective implements OnDestroy {
 
 	readonly luPopoverPosition = input<PopoverPosition | null>(null);
 
+	readonly luPopoverMaxBlockSize = input<string | null>(null);
+
+	readonly luPopoverMaxInlineSize = input<string | null>(null);
+
 	readonly overlayScrollStrategy = input<'reposition' | 'block' | 'close'>('reposition');
 
 	readonly luPopoverDisabledInput = input(false, { transform: booleanAttribute, alias: 'luPopoverDisabled' });
@@ -260,6 +264,8 @@ export class PopoverDirective implements OnDestroy {
 				ref: this.#overlayRef,
 				contentId: this.ariaControls,
 				triggerElement: this.elementRef.nativeElement,
+				maxBlockSize: this.luPopoverMaxBlockSize(),
+				maxInlineSize: this.luPopoverMaxInlineSize(),
 				disableCloseButtonFocus: disableCloseButtonFocus,
 				disableInitialTriggerFocus: disableInitialTriggerFocus,
 				noCloseButton: this.luPopoverNoCloseButton(),

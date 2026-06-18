@@ -1,4 +1,5 @@
 import { AbstractControl, ValidatorFn } from '@angular/forms';
+import { isNil } from '@lucca-front/ng/core';
 import { INVARIANT_CULTURE_CODE, MultilanguageTranslation } from './model/multilanguage-translation';
 
 export function areAllLanguagesFilled(model: MultilanguageTranslation[]): boolean {
@@ -7,7 +8,7 @@ export function areAllLanguagesFilled(model: MultilanguageTranslation[]): boolea
 
 export function isInvariantFilled(model: MultilanguageTranslation[]): boolean {
 	const invariantTranslation = model.find((row) => row.cultureCode === INVARIANT_CULTURE_CODE);
-	return (invariantTranslation?.value?.length ?? 0) > 0;
+	return !isNil(invariantTranslation) && invariantTranslation.value?.length > 0;
 }
 
 export const MultiLanguageInputValidators: Record<'allLanguagesRequired' | 'invariantRequired', ValidatorFn> = {

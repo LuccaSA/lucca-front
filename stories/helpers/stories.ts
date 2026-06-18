@@ -13,13 +13,14 @@ export interface StoryGeneratorArgs<TComponent> {
 
 export type StoryGenerator<TComponent> = (args: StoryGeneratorArgs<TComponent>) => StoryObj<TComponent>;
 
+export function setStoryOptions<T extends string | number>(list: readonly T[]): Array<T | ''> {
+	const hasEmpty = list.includes('' as T);
+	return hasEmpty ? [...list] : ['', ...list];
+}
+
 export type InputAlias<T, A extends Partial<Record<keyof T, string>>> = Omit<T, keyof A | A[keyof A]> & { [K in keyof A as A[K]]: T[K & keyof T] };
 
 export type SelectCommonAliasInput = { clearableInput: 'clearable'; loadingInput: 'loading' };
-
-export function setStoryOptions<T extends string>(list: readonly T[]): Array<T | ''> {
-	return ['', ...list];
-}
 
 export function generateMarkdownCodeBlock(lang: string, code: string): string {
 	return `

@@ -1,5 +1,6 @@
 import { booleanAttribute, ChangeDetectionStrategy, Component, computed, forwardRef, input, ViewEncapsulation } from '@angular/core';
 
+import { isNotNil } from '@lucca-front/ng/core';
 import { BaseDataTableCell } from '../base-data-table-cell';
 import { LU_DATA_TABLE_CELL_INSTANCE } from '../data-table-cell.token';
 
@@ -43,14 +44,16 @@ export class DataTableRowCellComponent extends BaseDataTableCell {
 	});
 
 	readonly insetInlineStart = computed(() => {
-		const cols = this.tableRef?.header()?.cols?.();
+		const isFirstOrLastCol = this.position() === 0 || this.position() === (this.rowRef?.cells().length ?? 0) - 1;
+		if (isFirstOrLastCol) return null;
 		const position = this.position();
-		return position !== undefined ? cols?.[position]?.insetInlineStart?.() : undefined;
+		return isNotNil(position) ? this.tableRef?.header()?.cols()?.[position]?.insetInlineStart() : undefined;
 	});
 
 	readonly insetInlineEnd = computed(() => {
-		const cols = this.tableRef?.header()?.cols?.();
+		const isFirstOrLastCol = this.position() === 0 || this.position() === (this.rowRef?.cells().length ?? 0) - 1;
+		if (isFirstOrLastCol) return null;
 		const position = this.position();
-		return position !== undefined ? cols?.[position]?.insetInlineEnd?.() : undefined;
+		return isNotNil(position) ? this.tableRef?.header()?.cols()?.[position]?.insetInlineEnd() : undefined;
 	});
 }

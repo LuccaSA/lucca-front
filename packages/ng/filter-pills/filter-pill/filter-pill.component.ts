@@ -29,8 +29,6 @@ import { LuTooltipModule } from '@lucca-front/ng/tooltip';
 import { FILTER_PILL_HOST_COMPONENT, FILTER_PILL_INPUT_COMPONENT, FilterPillInputComponent } from '../core';
 import { LU_FILTER_PILLS_TRANSLATIONS } from '../filter-pills.translate';
 
-let nextId = 0;
-
 @Component({
 	selector: 'lu-filter-pill',
 	imports: [PopoverDirective, FormsModule, IconComponent, NgTemplateOutlet, LuTooltipModule, ClearComponent],
@@ -45,7 +43,7 @@ let nextId = 0;
 		},
 	],
 	host: {
-		class: 'filterPill',
+		class: 'filterPillWrapper',
 		'[class.is-hidden]': 'isHiddenClass',
 		'[class.mod-checkbox]': 'isModCheckbox',
 		'[class.is-filled]': 'isFilled',
@@ -59,8 +57,6 @@ export class FilterPillComponent {
 	#locale = inject(LOCALE_ID);
 
 	readonly elementRef = inject(ElementRef);
-
-	id = `filterPill-combobox-${nextId++}`;
 
 	readonly layout = computed(() => this.inputComponentRef()?.filterPillLayout?.() || 'default');
 

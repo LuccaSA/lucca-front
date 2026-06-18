@@ -34,7 +34,7 @@
 
 	@at-root ($atRoot) {
 		.dialog-inside {
-			&:has(.dialog-inside-formOptional, .dialog-formOptional, .dialog-form) {
+			&:has(> .dialog-inside-formOptional, > .dialog-formOptional, > .dialog-form) {
 				display: contents;
 
 				.dialog-formOptional, // stylelint-disable-line selector-disallowed-list -- .dialog-formOptional is deprecated
@@ -62,7 +62,7 @@
 				}
 			}
 
-			&:not(:has(.dialog-inside-formOptional, .dialog-formOptional, .dialog-form)) {
+			&:not(:has(> .dialog-inside-formOptional, > .dialog-formOptional, > .dialog-form)) {
 				display: grid;
 				grid-template-areas:
 					'header  '
@@ -108,7 +108,7 @@
 		}
 
 		.dialog-inside-header-actionOptional {
-			margin-right: calc(var(--pr-t-spacings-100) * -1);
+			margin-inline-end: calc(var(--pr-t-spacings-100) * -1);
 
 			&:empty {
 				display: none;
@@ -157,7 +157,8 @@
 			padding-block: var(--components-dialog-insideContent-paddingBlock);
 			padding-inline: var(--components-dialog-insideContent-paddingInline);
 			grid-area: overflow;
-			overflow: auto;
+			overflow: var(--components-dialog-insideContent-overflow);
+			display: block;
 			outline: none;
 		}
 

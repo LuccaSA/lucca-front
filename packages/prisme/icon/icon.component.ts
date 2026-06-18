@@ -1,5 +1,6 @@
 import { NgClass } from '@angular/common';
 import { booleanAttribute, ChangeDetectionStrategy, Component, computed, input, ViewEncapsulation } from '@angular/core';
+import { IconColor, IconSize } from './icon.type';
 import type { LuccaIcon } from './icons';
 
 @Component({
@@ -24,12 +25,12 @@ export class IconComponent {
 	/**
 	 * Which size should the icon be? XXS to XXL
 	 */
-	readonly size = input<'XXS' | 'XS' | 'S' | 'M' | 'L' | 'XL' | 'XXL'>();
+	readonly size = input<IconSize>();
 
 	/**
 	 * Changes the color of the icon (inherit by default)
 	 */
-	readonly color = input<'primary' | 'secondary' | 'product' | 'error' | 'warning' | 'success' | 'light' | 'placeholder' | 'inherit'>('inherit');
+	readonly color = input<IconColor>('inherit');
 
 	/**
 	 * Display icon in AI mode

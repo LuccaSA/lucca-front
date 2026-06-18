@@ -1,0 +1,132 @@
+name: Deploy Lucca Front staging
+
+on:
+  push:
+    branches:
+      - master
+    tags:
+      - 'v[0-9]+.[0-9]+.[0-9]+'
+      - 'v[0-9]+.[0-9]+.[0-9]+-*'
+  pull_request:
+
+jobs:
+  deploy:
+    runs-on: ubuntu-latest
+    name: Deploy Lucca Front staging
+    environment: staging
+    permissions:
+      contents: read
+      pull-requests: write
+    outputs:
+      deploy-path: ${{ steps.vars.outputs.deploy-path }}
+      major-minor: ${{ steps.vars.outputs.major-minor }}
+
+    env:
+      R2_ENDPOINT: ${{ vars.CLOUDFLARE_R2_ENDPOINT }}
+      R2_BUCKET: ${{ vars.R2_BUCKET }}
+      R2_ACCESS_KEY_ID: ${{ secrets.R2_ACCESS_KEY }}
+      R2_SECRET_ACCESS_KEY: ${{ secrets.R2_SECRET_KEY }}
+      R2_PUBLIC_DOMAIN: ${{ vars.R2_PUBLIC_DOMAIN }}
+
+    steps:
+      - id: vars
+        env:
+          EVENT_NAME: ${{ github.event_name }}
+          PR_NUMBER: ${{ github.event.number }}
+          REF_NAME: ${{ github.ref_name }}
+        run: |
+          if [ "$EVENT_NAME" == "pull_request" ]; then
+            DEPLOY_PATH="PR-$PR_NUMBER"
+          else
+            DEPLOY_PATH="$REF_NAME"
+          fi
+          echo "deploy-path=$DEPLOY_PATH" >> "$GITHUB_OUTPUT"
+          # Compute vX.Y alias only for non-pre-release tags (vX.Y.Z with no suffix)
+          if [[ "$REF_NAME" =~ ^v[0-9]+\.[0-9]+\.[0-9]+$ ]]; then
+            echo "major-minor=$(echo "$REF_NAME" | grep -oP '^v\d+\.\d+')" >> "$GITHUB_OUTPUT"
+          fi
+      - name: Checkout
+        uses: actions/checkout@93cb6efe18208431cddfb8368fd83d5badbf9bfd
+      - uses: actions/setup-node@49933ea5288caeca8642d1e84afbd3f7d6820020  # v4.4.0
+        with:
+          node-version: 24.13.0
+
+      - run: npm ci
+      - run: npm run build-storybook
+      - name: Install rclone
+        run: |
+          sudo apt-get update
+          sudo apt-get install -y rclone
+      - name: Install and configure rclone
+        run: |
+          mkdir -p ~/.config/rclone
+          cat > ~/.config/rclone/rclone.conf << EOF
+          [r2]
+          type = s3
+          provider = Cloudflare
+          access_key_id = $R2_ACCESS_KEY_ID
+          secret_access_key = $R2_SECRET_ACCESS_KEY
+          endpoint = $R2_ENDPOINT
+          acl = private
+          no_check_bucket = true
+          EOF
+      - name: Upload results to R2
+        run: |
+          rclone sync ./storybook-static/ "r2:${R2_BUCKET}/${{steps.vars.outputs.deploy-path}}" --fast-list --checksum --transfers 8 --checkers 8
+      - name: Comment PR with preview URL
+        if: github.event_name == 'pull_request'
+        uses: actions/github-script@60a0d83039c74a4aee543508d2ffcb1c3799cdea  # v7.0.1
+        with:
+          script: |
+            const body = `🚀 Storybook preview deployed: ${process.env.R2_PUBLIC_DOMAIN}/${{steps.vars.outputs.deploy-path}}/index.html`;
+            const { data: comments } = await github.rest.issues.listComments({
+              owner: context.repo.owner,
+              repo: context.repo.repo,
+              issue_number: context.issue.number,
+            });
+            const existing = comments.find(c => c.body.includes('Storybook preview deployed'));
+            if (existing) {
+              await github.rest.issues.updateComment({
+                owner: context.repo.owner,
+                repo: context.repo.repo,
+                comment_id: existing.id,
+                body,
+              });
+            } else {
+              await github.rest.issues.createComment({
+                owner: context.repo.owner,
+                repo: context.repo.repo,
+                issue_number: context.issue.number,
+                body,
+              });
+            }
+
+  qa:
+    if: ${{ github.event_name == 'pull_request' }}
+    runs-on: ubuntu-latest
+    needs: [deploy]
+    steps:
+      - name: Trigger QA webservice
+        env:
+          QA_WEBSERVICE_URL: ${{ secrets.QA_WEBSERVICE_URL }}
+          QA_WEBSERVICE_TOKEN: ${{ secrets.QA_WEBSERVICE_TOKEN }}
+          HEAD_REF: ${{ github.head_ref }}
+          AUTHOR_GITHUB_LOGIN: ${{ github.event.pull_request.user.login }}
+        run: |
+          payload=$(jq -n \
+            --arg branch "$HEAD_REF" \
+            --argjson pullRequestNumber '${{ github.event.number }}' \
+            --arg authorGithubLogin "$AUTHOR_GITHUB_LOGIN" \
+            --arg executorSource "${{ github.server_url }}/${{ github.repository }}/actions/runs/${{ github.run_id }}" \
+            '{
+              branch: $branch,
+              pullRequestNumber: $pullRequestNumber,
+              qaJsonBranch: null,
+              authorGithubLogin: $authorGithubLogin,
+              executorSource: $executorSource,
+              stepsToRun: "all"
+            }')
+          curl --fail-with-body -sS -X POST "$QA_WEBSERVICE_URL" \
+            -H "Authorization: Bearer $QA_WEBSERVICE_TOKEN" \
+            -H "Content-Type: application/json" \
+            -d "$payload"

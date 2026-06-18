@@ -1,22 +1,6 @@
 import { booleanAttribute, ChangeDetectionStrategy, Component, computed, effect, inject, input, ViewEncapsulation } from '@angular/core';
 import { LuClass, PortalContent, PortalDirective } from '@lucca-front/ng/core';
-
-type IllustrationType =
-	| 'calculator'
-	| 'calendar'
-	| 'cleemy-card'
-	| 'coffee'
-	| 'headphone'
-	| 'mail'
-	| 'magnifying-glass'
-	/** @deprecated use 'magnifying-glass' instead */
-	| 'manifying-glass'
-	| 'medallon'
-	| 'piggy-bank'
-	| 'polaroid-female'
-	| 'polaroid-male'
-	| 'polaroids'
-	| string;
+import { HighlightDataBubble, HighlightDataIllustration, HighlightDataPalette, HighlightDataSize, HighlightDataTheme } from './highlight-data.type';
 
 @Component({
 	selector: 'lu-highlight-data',
@@ -53,29 +37,29 @@ export class HighlightDataComponent {
 	/**
 	 * Define a bubble style based on the CDN image bubble number
 	 */
-	readonly bubble = input<1 | 2 | 3 | 4 | number>();
+	readonly bubble = input<HighlightDataBubble | number>();
 
 	/**
 	 * Define a specific them white light or dark. (White by default)
 	 */
-	readonly theme = input<'white' | 'light' | 'dark'>('white');
+	readonly theme = input<HighlightDataTheme>('white');
 
 	/**
 	 * Apply product name to illustration URL and CSS component palette
 	 * This specific palette must be set up on config.scss
 	 */
-	readonly palette = input<'lucca' | 'cleemy' | 'timmi' | 'poplee' | 'coreHR' | 'pagga' | 'cc' | 'success' | 'warning' | 'critical' | string>('lucca');
+	readonly palette = input<HighlightDataPalette | string>('lucca');
 
 	/**
 	 * Main illustration
 	 * An URL can be apply for custom images
 	 */
-	readonly illustration = input<IllustrationType>();
+	readonly illustration = input<HighlightDataIllustration | string>();
 
 	/**
 	 * Which size should the highlight data be? XS to medium
 	 */
-	readonly size = input<'XS' | 'S' | 'M' | null>(null);
+	readonly size = input<HighlightDataSize | null>(null);
 
 	/**
 	 * Adjust layout to text value

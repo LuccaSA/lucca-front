@@ -69,9 +69,9 @@
 	}
 
 	// stylelint-disable custom-property-pattern
-	--palettes-assets-primary-lighter: var(--palettes-#{config.$product}-50, var(--palettes-50));
-	--palettes-assets-primary-light: var(--palettes-#{config.$product}-100, var(--palettes-100));
-	--palettes-assets-primary-dark: var(--palettes-#{config.$product}-200, var(--palettes-200));
+	--palettes-assets-primary-lighter: var(--palettes-product-50);
+	--palettes-assets-primary-light: var(--palettes-product-100);
+	--palettes-assets-primary-dark: var(--palettes-product-200);
 	--palettes-assets-brand-lighter: var(--palettes-#{map.get(map.get(config.$palettesAssets, config.$product), 'brand')}-50);
 	--palettes-assets-brand-light: var(--palettes-#{map.get(map.get(config.$palettesAssets, config.$product), 'brand')}-100);
 	--palettes-assets-brand-dark: var(--palettes-#{map.get(map.get(config.$palettesAssets, config.$product), 'brand')}-200);
@@ -81,6 +81,20 @@
 
 	@include core.cssvars('colors', config.$colors, '-color');
 	@include core.cssvars('colors', config.$colorsRgb, '-rgb');
+
+	@include core.cssvars('palettes-ai', config.$paletteAI);
+	@include core.cssvars('pr-t-color', config.$tokenAI, '-ai');
+
+	@each $shade in config.$palettesShades {
+		@if $shade != text and $shade != 0 and $shade != 25 {
+			--palettes-ai-#{$shade}:
+				linear-gradient(
+					var(--palettes-ai-angle),
+					var(#{'--palettes-'}#{list.nth(config.$colorAI, 1)}-#{$shade}) var(--palettes-ai-color1stop),
+					var(#{'--palettes-'}#{list.nth(config.$colorAI, 2)}-#{max($shade - 100, 50)}) var(--palettes-ai-color2stop)
+				);
+		}
+	}
 
 	--commons-banner-height: 50px;
 	--commons-divider-width: 1px;

@@ -1,9 +1,12 @@
 import { FormsModule } from '@angular/forms';
 import { BrowserAnimationsModule } from '@angular/platform-browser/animations';
-import { FormFieldComponent } from '@lucca-front/ng/form-field';
+import { FORM_FIELD_SIZE, FormFieldComponent } from '@lucca-front/ng/form-field';
 import { CheckboxInputComponent, SwitchInputComponent } from '@lucca-front/ng/forms';
+import { INLINE_MESSAGE_STATE } from '@lucca-front/ng/inline-message';
 import { Meta, moduleMetadata, StoryObj } from '@storybook/angular';
-import { generateInputs } from 'stories/helpers/stories';
+import { createTestStory, generateInputs, setStoryOptions } from 'stories/helpers/stories';
+import { waitForAngular } from 'stories/helpers/test';
+import { expect, userEvent, within } from 'storybook/test';
 import { StoryModelDisplayComponent } from 'stories/helpers/story-model-display.component';
 
 export default {
@@ -15,7 +18,7 @@ export default {
 	],
 	argTypes: {
 		size: {
-			options: ['M', 'S'],
+			options: setStoryOptions(FORM_FIELD_SIZE),
 			control: {
 				type: 'select',
 			},
@@ -28,7 +31,7 @@ export default {
 			description: 'Ajoute un texte descriptif (aide, erreur, etc.) sous le champ de formulaire.',
 		},
 		inlineMessageState: {
-			options: ['default', 'success', 'warning', 'error'],
+			options: setStoryOptions(INLINE_MESSAGE_STATE),
 			control: {
 				type: 'select',
 			},
@@ -96,3 +99,28 @@ export const Basic: StoryObj<SwitchInputComponent & FormFieldComponent & { requi
 		presentation: false,
 	},
 };
+
+export const BasicTEST = createTestStory(Basic, async ({ canvasElement, step }) => {
+	await waitForAngular();
+	const canvas = within(canvasElement);
+
+	await step('Vérifie le rendu initial', async () => {
+		const switchInput = canvas.getByRole('checkbox');
+		await expect(switchInput).toBeVisible();
+		await expect(switchInput).not.toBeChecked();
+	});
+
+	await step('Interaction souris - activer', async () => {
+		const switchInput = canvas.getByRole('checkbox');
+		await userEvent.click(switchInput);
+		await waitForAngular();
+		await expect(switchInput).toBeChecked();
+	});
+
+	await step('Interaction souris - désactiver', async () => {
+		const switchInput = canvas.getByRole('checkbox');
+		await userEvent.click(switchInput);
+		await waitForAngular();
+		await expect(switchInput).not.toBeChecked();
+	});
+});

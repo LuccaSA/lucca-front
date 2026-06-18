@@ -1,4 +1,4 @@
-import { bob } from '@/stories/users/user.mocks';
+import { finn } from '@/stories/users/user.mocks';
 import { LOCALE_ID } from '@angular/core';
 import { ActivityFeedComponent, ActivityFeedStepComponent, ActivityFeedUpdateComponent } from '@lucca-front/ng/activity-feed';
 import { CommentComponent } from '@lucca-front/ng/comment';
@@ -7,6 +7,9 @@ import { ReadMoreComponent } from '@lucca-front/ng/read-more';
 import { StatusBadgeComponent } from '@lucca-front/ng/status-badge';
 import { ButtonComponent } from '@lucca/prisme/button';
 import { applicationConfig, Meta, moduleMetadata, StoryObj } from '@storybook/angular';
+import { createTestStory } from 'stories/helpers/stories';
+import { waitForAngular } from 'stories/helpers/test';
+import { expect, within } from 'storybook/test';
 
 interface ActivityFeedBasicStory {
 	statusStep: boolean;
@@ -114,7 +117,7 @@ const Template = (args: ActivityFeedBasicStory) => ({
 
 export const Basic: StoryObj<ActivityFeedBasicStory> = {
 	args: {
-		user: bob,
+		user: finn,
 		statusStep: false,
 		pendingStep: false,
 		updated: false,
@@ -123,3 +126,21 @@ export const Basic: StoryObj<ActivityFeedBasicStory> = {
 	},
 	render: Template,
 };
+
+export const BasicTEST = createTestStory(Basic, async ({ canvasElement, step }) => {
+	await waitForAngular();
+	const canvas = within(canvasElement);
+
+	await step("Vérifie le rendu initial du fil d'activité", async () => {
+		const list = canvas.getByRole('list');
+		await expect(list).toBeVisible();
+	});
+
+	await step('Vérifie que les étapes sont visibles', async () => {
+		const items = canvas.getAllByRole('listitem');
+		await expect(items.length).toBeGreaterThan(0);
+		for (const item of items) {
+			await expect(item).toBeVisible();
+		}
+	});
+});

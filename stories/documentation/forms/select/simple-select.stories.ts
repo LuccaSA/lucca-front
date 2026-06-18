@@ -436,7 +436,7 @@ export const UserCustom = generateStory({
 		👉👉👉 <span translate="no">{{ user | luUserDisplay }}</span> 👈👈👈
 	</ng-container>
 	<ng-container *luOption="let user; select: usersRef.select">
-		<span translate="no">{{ user | luUserDisplay }}</span>&ngsp;<span class="pr-u-textLight">(Random {{ user.myCustomProperty }})</span>
+		<span translate="no">{{ user | luUserDisplay }}</span> <span class="pr-u-textLight">(Random {{ user.myCustomProperty }})</span>
 
 		<!-- Handle homonyms -->
 		@if (user.additionalInformation) {
@@ -527,7 +527,7 @@ export const EstablishmentCustom = generateStory({
 		👉👉👉 <span translate="no">{{ establishment.name }}</span> 👈👈👈
 	</ng-container>
 	<ng-container *luOption="let establishment; select: establishmentsRef.select">
-		<span translate="no">{{ establishment.name }}</span> <span class="pr-u-textLight">(Random {{ establishment.myCustomProperty }})</span>
+		<span translate="no">{{ establishment.name }}</span> <span class="pr-u-textLight">(Random {{ establishment.myCustomProperty }})</span>
 	</ng-container>
 </lu-simple-select>`,
 	neededImports: {

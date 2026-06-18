@@ -64,6 +64,13 @@ export class CoreSelectKeyManager<T> {
 		this.#cdkKeyManager?.setActiveItem(index);
 	}
 
+	setActiveItemByElement(item: CoreSelectPanelElement<T>): void {
+		const index = this.#queryList().indexOf(item);
+		if (index !== -1) {
+			this.#cdkKeyManager?.setActiveItem(index);
+		}
+	}
+
 	highlightOption(option: T): void {
 		if (!this.#options) {
 			return;

@@ -1,12 +1,13 @@
 import { inject, Pipe, PipeTransform } from '@angular/core';
+import { isNil, isNotNil } from '@lucca-front/ng/core';
 import { LU_DEFAULT_DISPLAY_POLICY, LuDisplayFormat, LuDisplayFullname, LuDisplayHybrid, LuDisplayInitials } from './display-format.model';
 
-function getFirstCharacter([firstCharacter]: string): string {
-	return firstCharacter ?? '';
+function getFirstCharacter(value: string | null | undefined): string {
+	return value?.at(0) ?? '';
 }
 
-function isNotEmptyString(value: string): boolean {
-	return value?.length > 0;
+function isNotNilAndEmptyString(value: string | null | undefined): boolean {
+	return isNotNil(value) && value.length > 0;
 }
 
 export interface LuUserDisplayInput {
@@ -15,18 +16,22 @@ export interface LuUserDisplayInput {
 }
 
 const formatUser: Record<LuDisplayFormat, (user: LuUserDisplayInput) => string> = {
-	[LuDisplayFullname.lastfirst]: ({ firstName, lastName }) => [lastName, firstName].filter(isNotEmptyString).join(' '),
-	[LuDisplayFullname.firstlast]: ({ firstName, lastName }) => [firstName, lastName].filter(isNotEmptyString).join(' '),
-	[LuDisplayFullname.first]: ({ firstName }) => firstName,
-	[LuDisplayFullname.last]: ({ lastName }) => lastName,
-	[LuDisplayInitials.lastfirst]: ({ firstName, lastName }) => [getFirstCharacter(lastName), getFirstCharacter(firstName)].filter(isNotEmptyString).join(''),
-	[LuDisplayInitials.firstlast]: ({ firstName, lastName }) => [getFirstCharacter(firstName), getFirstCharacter(lastName)].filter(isNotEmptyString).join(''),
-	[LuDisplayInitials.first]: ({ firstName }) => getFirstCharacter(firstName),
-	[LuDisplayInitials.last]: ({ lastName }) => getFirstCharacter(lastName),
-	[LuDisplayHybrid.lastIfirstFull]: ({ firstName, lastName }) => [isNotEmptyString(lastName) ? getFirstCharacter(lastName) + '.' : '', firstName].filter(isNotEmptyString).join(' '),
-	[LuDisplayHybrid.firstIlastFull]: ({ firstName, lastName }) => [isNotEmptyString(firstName) ? getFirstCharacter(firstName) + '.' : '', lastName].filter(isNotEmptyString).join(' '),
-	[LuDisplayHybrid.lastFullfirstI]: ({ firstName, lastName }) => [lastName, firstName ? getFirstCharacter(firstName) + '.' : ''].filter(isNotEmptyString).join(' '),
-	[LuDisplayHybrid.firstFulllastI]: ({ firstName, lastName }) => [firstName, lastName ? getFirstCharacter(lastName) + '.' : ''].filter(isNotEmptyString).join(' '),
+	[LuDisplayFullname.lastfirst]: ({ firstName, lastName }) => [lastName, firstName].filter(isNotNilAndEmptyString).join(' '),
+	[LuDisplayFullname.firstlast]: ({ firstName, lastName }) => [firstName, lastName].filter(isNotNilAndEmptyString).join(' '),
+	[LuDisplayFullname.first]: ({ firstName }) => (isNotNilAndEmptyString(firstName) ? firstName : ''),
+	[LuDisplayFullname.last]: ({ lastName }) => (isNotNilAndEmptyString(lastName) ? lastName : ''),
+	[LuDisplayInitials.lastfirst]: ({ firstName, lastName }) => [getFirstCharacter(lastName), getFirstCharacter(firstName)].filter(isNotNilAndEmptyString).join(''),
+	[LuDisplayInitials.firstlast]: ({ firstName, lastName }) => [getFirstCharacter(firstName), getFirstCharacter(lastName)].filter(isNotNilAndEmptyString).join(''),
+	[LuDisplayInitials.first]: ({ firstName }) => (isNotNilAndEmptyString(firstName) ? getFirstCharacter(firstName) : ''),
+	[LuDisplayInitials.last]: ({ lastName }) => (isNotNilAndEmptyString(lastName) ? getFirstCharacter(lastName) : ''),
+	[LuDisplayHybrid.lastIfirstFull]: ({ firstName, lastName }) =>
+		[isNotNilAndEmptyString(lastName) ? getFirstCharacter(lastName) + '.' : '', isNotNilAndEmptyString(firstName) ? firstName : ''].filter(isNotNilAndEmptyString).join(' '),
+	[LuDisplayHybrid.firstIlastFull]: ({ firstName, lastName }) =>
+		[isNotNilAndEmptyString(firstName) ? getFirstCharacter(firstName) + '.' : '', isNotNilAndEmptyString(lastName) ? lastName : ''].filter(isNotNilAndEmptyString).join(' '),
+	[LuDisplayHybrid.lastFullfirstI]: ({ firstName, lastName }) =>
+		[isNotNilAndEmptyString(lastName) ? lastName : '', isNotNilAndEmptyString(firstName) ? getFirstCharacter(firstName) + '.' : ''].filter(isNotNilAndEmptyString).join(' '),
+	[LuDisplayHybrid.firstFulllastI]: ({ firstName, lastName }) =>
+		[isNotNilAndEmptyString(firstName) ? firstName : '', isNotNilAndEmptyString(lastName) ? getFirstCharacter(lastName) + '.' : ''].filter(isNotNilAndEmptyString).join(' '),
 };
 
 /**
@@ -34,8 +39,17 @@ const formatUser: Record<LuDisplayFormat, (user: LuUserDisplayInput) => string> 
  * F for first initial, l for last name, L for last initial.
  */
 export function luUserDisplay(user?: LuUserDisplayInput, format: LuDisplayFormat = LuDisplayFullname.lastfirst): string {
-	if (!user) {
+	if (isNil(user)) {
 		return '';
+	}
+
+	if (isNil(user?.lastName)) {
+		const useFull = format.includes('f') || format === format.toLowerCase();
+		return formatUser[useFull ? LuDisplayFullname.first : LuDisplayInitials.first](user);
+	}
+	if (isNil(user?.firstName)) {
+		const useFull = format.includes('l') || format === format.toLowerCase();
+		return formatUser[useFull ? LuDisplayFullname.last : LuDisplayInitials.last](user);
 	}
 	return formatUser[format](user);
 }

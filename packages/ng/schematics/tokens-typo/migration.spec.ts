@@ -1,7 +1,7 @@
 import * as fs from 'fs';
 import * as glob from 'glob';
 import * as path from 'path';
-import { createTreeFromFiles, expectTree, runSchematic } from '../lib';
+import { createTreeFromFiles,expectTree,runSchematic } from '../lib';
 
 const collectionPath = path.normalize(path.join(__dirname, '..', 'collection.json'));
 const testsRoot = path.join(__dirname, 'tests');
@@ -34,7 +34,7 @@ describe('Tokens typo Migration', () => {
 			...glob.sync('packages/scss/**/*.scss', { cwd: lfRoot, nodir: true }),
 			...glob.sync('packages/ng/**/*', { cwd: lfRoot, nodir: true, ignore: ['**/schematics/**'] }),
 			...glob.sync('stories/**', { cwd: lfRoot, nodir: true }),
-		];
+		] as string[];
 
 		const treeOriginalTree = createTreeFromFiles(lfRoot, lfFiles, '.');
 		const tree = createTreeFromFiles(lfRoot, lfFiles, '.');

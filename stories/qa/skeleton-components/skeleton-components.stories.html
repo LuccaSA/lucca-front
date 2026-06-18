@@ -1,0 +1,113 @@
+<table class="demo-QAtable">
+	<tbody>
+		<tr>
+			<td></td>
+			<td style="inline-size: 50%">
+				<div class="demo-QAtable-list">Light</div>
+			</td>
+			<td style="inline-size: 50%">
+				<div class="demo-QAtable-list">Dark</div>
+			</td>
+		</tr>
+		<tr>
+			<td>Button</td>
+			<td style="background-color: white">
+				<lu-skeleton-button />
+				<br />
+				<lu-skeleton-button size="S" />
+				<br />
+				<lu-skeleton-button size="XS" />
+			</td>
+			<td>
+				<lu-skeleton-button dark />
+				<br />
+				<lu-skeleton-button dark size="S" />
+				<br />
+				<lu-skeleton-button dark size="XS" />
+			</td>
+		</tr>
+		<tr>
+			<td>Field</td>
+			<td style="background-color: white">
+				<lu-skeleton-field />
+				<br />
+				<lu-skeleton-field rows="2" />
+				<br />
+				<lu-skeleton-field hiddenLabel rows="3" />
+			</td>
+			<td>
+				<lu-skeleton-field dark />
+				<br />
+				<lu-skeleton-field dark rows="2" />
+				<br />
+				<lu-skeleton-field dark hiddenLabel rows="3" />
+			</td>
+		</tr>
+		<tr>
+			<td>IndexTable</td>
+			<td style="background-color: white">
+				<lu-skeleton-index-table [cols]="3" [rows]="3" [colsAlign]="{ '1': 'center', '2': 'end' }" />
+				<br />
+				<lu-index-table inert="inert">
+					<thead luIndexTableHead>
+						<tr luIndexTableRow>
+							<th luIndexTableCell>Label</th>
+							<th luIndexTableCell align="center">Label</th>
+							<th luIndexTableCell align="end">Label</th>
+						</tr>
+					</thead>
+					<lu-skeleton-index-table tableBodyOnly [cols]="3" [rows]="3" [colsAlign]="{ '1': 'center', '2': 'end' }" />
+				</lu-index-table>
+			</td>
+			<td></td>
+		</tr>
+		<tr>
+			<td>DataTable</td>
+			<td style="background-color: white">
+				<lu-skeleton-data-table [cols]="3" [rows]="3" [colsAlign]="{ '1': 'center', '2': 'end' }" />
+				<br />
+				<div class="dataTableWrapper">
+					<table class="dataTable skeleton is-loading" inert="inert">
+						<thead class="dataTable-head">
+							<tr class="dataTable-head-row">
+								<th class="dataTable-head-row-cell">Lorem</th>
+								<th class="dataTable-head-row-cell mod-alignCenter">Ipsum</th>
+								<th class="dataTable-head-row-cell mod-alignEnd">Dolor</th>
+							</tr>
+						</thead>
+						<lu-skeleton-data-table dataTableBodyOnly [cols]="3" [rows]="3" [colsAlign]="{ '1': 'center', '2': 'end' }" />
+					</table>
+				</div>
+			</td>
+			<td></td>
+		</tr>
+		<tr>
+			<td>Table</td>
+			<td style="background-color: white">
+				<lu-skeleton-table [cols]="3" [rows]="3" [colsAlign]="{ '1': 'center', '2': 'end' }" />
+				<br />
+				<table class="table skeleton is-loading" inert="inert">
+					<thead class="table-head">
+						<tr class="table-head-row">
+							<th class="table-head-row-cell">Lorem</th>
+							<th class="table-head-row-cell mod-alignCenter">Ipsum</th>
+							<th class="table-head-row-cell mod-alignRight">Dolor</th>
+						</tr>
+					</thead>
+					<lu-skeleton-table tableBodyOnly [cols]="3" [rows]="3" [colsAlign]="{ '1': 'center', '2': 'end' }" />
+				</table>
+			</td>
+			<td></td>
+		</tr>
+		<tr>
+			<td>User popover</td>
+			<td style="background-color: white">
+				<lu-skeleton-user-popover />
+			</td>
+			<td></td>
+		</tr>
+	</tbody>
+</table>
+
+<!-- To tell the ui-diff tool that the page has finished rendering -->
+<span id="ready"></span>

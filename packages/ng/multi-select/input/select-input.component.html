@@ -5,8 +5,8 @@
 		<lu-clear class="multipleSelect-clear" (onClear)="clearValue($event)">{{ intl().clear }}</lu-clear>
 	}
 
-	<span aria-hidden="true" class="multipleSelect-arrow lucca-icon icon-arrowChevronBottom"></span>
-	<span aria-hidden="true" class="multipleSelect-searchIcon lucca-icon icon-searchMagnifyingGlass"></span>
+	<lu-icon icon="arrowChevronBottom" class="multipleSelect-arrow" />
+	<lu-icon icon="searchMagnifyingGlass" class="multipleSelect-searchIcon" />
 }
 
 <ng-container #filterPillPanelAnchor />

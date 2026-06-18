@@ -1,34 +1,711 @@
-<div style="height: 20rem">
-	<div class="dialog_backdrop"></div>
-	<div
-		role="dialog"
-		aria-modal="true"
-		aria-labelledby="dialogInsideHeaderTitle1"
-		class="dialog"
-		[attr.style]="'--components-dialog-maxHeight: 15rem'"
-	>
-		<div class="dialog-inside">
-			<form class="dialog-inside-formOptional">
-				<header class="dialog-inside-header">
-					<button type="button" class="dialog-inside-header-button button">
-						<span class="lucca-icon icon-signClose" aria-hidden="true"></span>
-						<span class="pr-u-mask">Fermer</span>
-					</button>
-					<div class="dialog-inside-header-container">
-						<h1 class="dialog-inside-header-container-title" id="dialogInsideHeaderTitle1">Title</h1>
+<!-- eslint-disable prettier/prettier -->
+<table class="demo-QAtable">
+	<tbody>
+		<tr>
+			<td></td>
+			<td style="inline-size: 50%">
+				<div class="demo-QAtable-list">Default</div>
+			</td>
+			<td style="inline-size: 50%">
+				<div class="demo-QAtable-list">Drawer</div>
+			</td>
+		</tr>
+		<tr>
+			<td>Default</td>
+			<td>
+				<div style="block-size: 15rem; position: relative; overflow: hidden">
+					<div class="dialog_backdrop"></div>
+					<div role="dialog" aria-modal="true" aria-labelledby="dialogInsideHeaderTitle-default-default" class="dialog">
+						<div class="dialog-inside">
+							<header class="dialog-inside-header">
+								<button type="button" class="dialog-inside-header-button button">
+									<span class="lucca-icon icon-signClose" aria-hidden="true"></span>
+									<span class="pr-u-mask">Close</span>
+								</button>
+								<div class="dialog-inside-header-container">
+									<h1 class="dialog-inside-header-container-title" id="dialogInsideHeaderTitle-default-default">Title</h1>
+								</div>
+							</header>
+							<div class="dialog-inside-content">dialog</div>
+							<footer class="dialog-inside-footer footer">
+								<div class="footer-actions">
+									<button type="button" class="button">Action</button>
+									<button type="button" class="button mod-ghost">Action</button>
+								</div>
+							</footer>
+						</div>
 					</div>
-				</header>
-				<div class="dialog-inside-content">dialog<br />dialog<br />dialog<br />dialog</div>
-				<footer class="dialog-inside-footer footer">
-					<div class="footer-actions">
-						<button type="submit" class="button">Action</button>
-						<button type="button" class="button mod-ghost">Action</button>
+				</div>
+			</td>
+			<td>
+				<div style="block-size: 15rem; position: relative; overflow: hidden">
+					<div class="dialog_backdrop"></div>
+					<div role="dialog" aria-modal="true" aria-labelledby="dialogInsideHeaderTitle-default-drawer" class="dialog mod-drawer">
+						<div class="dialog-inside">
+							<header class="dialog-inside-header">
+								<button type="button" class="dialog-inside-header-button button">
+									<span class="lucca-icon icon-signClose" aria-hidden="true"></span>
+									<span class="pr-u-mask">Close</span>
+								</button>
+								<div class="dialog-inside-header-container">
+									<h1 class="dialog-inside-header-container-title" id="dialogInsideHeaderTitle-default-drawer">Title</h1>
+								</div>
+							</header>
+							<div class="dialog-inside-content">dialog</div>
+							<footer class="dialog-inside-footer footer">
+								<div class="footer-actions">
+									<button type="button" class="button">Action</button>
+									<button type="button" class="button mod-ghost">Action</button>
+								</div>
+							</footer>
+						</div>
 					</div>
-				</footer>
-			</form>
-		</div>
-	</div>
-</div>
+				</div>
+			</td>
+		</tr>
+		<tr>
+			<td>Scroll</td>
+			<td>
+				<div style="block-size: 15rem; position: relative; overflow: hidden">
+					<div class="dialog_backdrop"></div>
+					<div
+						role="dialog"
+						aria-modal="true"
+						aria-labelledby="dialogInsideHeaderTitle-scroll-default"
+						class="dialog"
+						[attr.style]="'--components-dialog-maxHeight: 12rem'"
+					>
+						<div class="dialog-inside">
+							<header class="dialog-inside-header">
+								<button type="button" class="dialog-inside-header-button button">
+									<span class="lucca-icon icon-signClose" aria-hidden="true"></span>
+									<span class="pr-u-mask">Close</span>
+								</button>
+								<div class="dialog-inside-header-container">
+									<h1 class="dialog-inside-header-container-title" id="dialogInsideHeaderTitle-scroll-default">Title</h1>
+								</div>
+							</header>
+							<div class="dialog-inside-content">dialog<br />dialog<br />dialog<br />dialog<br />dialog<br />dialog</div>
+							<footer class="dialog-inside-footer footer">
+								<div class="footer-actions">
+									<button type="button" class="button">Action</button>
+									<button type="button" class="button mod-ghost">Action</button>
+								</div>
+							</footer>
+						</div>
+					</div>
+				</div>
+			</td>
+			<td>
+				<div style="block-size: 15rem; position: relative; overflow: hidden">
+					<div class="dialog_backdrop"></div>
+					<div role="dialog" aria-modal="true" aria-labelledby="dialogInsideHeaderTitle-scroll-drawer" class="dialog mod-drawer">
+						<div class="dialog-inside">
+							<header class="dialog-inside-header">
+								<button type="button" class="dialog-inside-header-button button">
+									<span class="lucca-icon icon-signClose" aria-hidden="true"></span>
+									<span class="pr-u-mask">Close</span>
+								</button>
+								<div class="dialog-inside-header-container">
+									<h1 class="dialog-inside-header-container-title" id="dialogInsideHeaderTitle-scroll-drawer">Title</h1>
+								</div>
+							</header>
+							<div class="dialog-inside-content">dialog<br />dialog<br />dialog<br />dialog<br />dialog<br />dialog</div>
+							<footer class="dialog-inside-footer footer">
+								<div class="footer-actions">
+									<button type="button" class="button">Action</button>
+									<button type="button" class="button mod-ghost">Action</button>
+								</div>
+							</footer>
+						</div>
+					</div>
+				</div>
+			</td>
+		</tr>
+		<tr>
+			<td>Header content</td>
+			<td>
+				<div style="block-size: 15rem; position: relative; overflow: hidden">
+					<div class="dialog_backdrop"></div>
+					<div role="dialog" aria-modal="true" aria-labelledby="dialogInsideHeaderTitle-header-content-default" class="dialog">
+						<div class="dialog-inside">
+							<header class="dialog-inside-header">
+								<button type="button" class="dialog-inside-header-button button">
+									<span class="lucca-icon icon-signClose" aria-hidden="true"></span>
+									<span class="pr-u-mask">Close</span>
+								</button>
+								<div class="dialog-inside-header-container">
+									<h1 class="dialog-inside-header-container-title" id="dialogInsideHeaderTitle-header-content-default">Title</h1>
+									<p>Subtitle</p>
+								</div>
+							</header>
+							<div class="dialog-inside-content">dialog</div>
+							<footer class="dialog-inside-footer footer">
+								<div class="footer-actions">
+									<button type="button" class="button">Action</button>
+									<button type="button" class="button mod-ghost">Action</button>
+								</div>
+							</footer>
+						</div>
+					</div>
+				</div>
+			</td>
+			<td>
+				<div style="block-size: 15rem; position: relative; overflow: hidden">
+					<div class="dialog_backdrop"></div>
+					<div role="dialog" aria-modal="true" aria-labelledby="dialogInsideHeaderTitle-header-content-drawer" class="dialog mod-drawer">
+						<div class="dialog-inside">
+							<header class="dialog-inside-header">
+								<button type="button" class="dialog-inside-header-button button">
+									<span class="lucca-icon icon-signClose" aria-hidden="true"></span>
+									<span class="pr-u-mask">Close</span>
+								</button>
+								<div class="dialog-inside-header-container">
+									<h1 class="dialog-inside-header-container-title" id="dialogInsideHeaderTitle-header-content-drawer">Title</h1>
+									<p>Subtitle</p>
+								</div>
+							</header>
+							<div class="dialog-inside-content">dialog</div>
+							<footer class="dialog-inside-footer footer">
+								<div class="footer-actions">
+									<button type="button" class="button">Action</button>
+									<button type="button" class="button mod-ghost">Action</button>
+								</div>
+							</footer>
+						</div>
+					</div>
+				</div>
+			</td>
+		</tr>
+		<tr>
+			<td>Header action</td>
+			<td>
+				<div style="block-size: 15rem; position: relative; overflow: hidden">
+					<div class="dialog_backdrop"></div>
+					<div role="dialog" aria-modal="true" aria-labelledby="dialogInsideHeaderTitle-header-action-default" class="dialog">
+						<div class="dialog-inside">
+							<header class="dialog-inside-header">
+								<button type="button" class="dialog-inside-header-button button">
+									<span class="lucca-icon icon-signClose" aria-hidden="true"></span>
+									<span class="pr-u-mask">Close</span>
+								</button>
+								<div class="dialog-inside-header-actionOptional">
+									<button size="S" class="button mod-S mod-onlyIcon mod-iconOnLeft mod-iconOnRight mod-ghost">
+										<span aria-hidden="true" class="lucca-icon icon-menuDots icon-color-inherit"></span>
+										<span class="pr-u-mask">More options</span>
+									</button>
+								</div>
+								<div class="dialog-inside-header-container">
+									<h1 class="dialog-inside-header-container-title" id="dialogInsideHeaderTitle-header-action-default">Title</h1>
+								</div>
+							</header>
+							<div class="dialog-inside-content">dialog</div>
+							<footer class="dialog-inside-footer footer">
+								<div class="footer-actions">
+									<button type="button" class="button">Action</button>
+									<button type="button" class="button mod-ghost">Action</button>
+								</div>
+							</footer>
+						</div>
+					</div>
+				</div>
+			</td>
+			<td>
+				<div style="block-size: 15rem; position: relative; overflow: hidden">
+					<div class="dialog_backdrop"></div>
+					<div role="dialog" aria-modal="true" aria-labelledby="dialogInsideHeaderTitle-header-action-drawer" class="dialog mod-drawer">
+						<div class="dialog-inside">
+							<header class="dialog-inside-header">
+								<button type="button" class="dialog-inside-header-button button">
+									<span class="lucca-icon icon-signClose" aria-hidden="true"></span>
+									<span class="pr-u-mask">Close</span>
+								</button>
+								<div class="dialog-inside-header-actionOptional">
+									<button size="S" class="button mod-S mod-onlyIcon mod-iconOnLeft mod-iconOnRight mod-ghost">
+										<span aria-hidden="true" class="lucca-icon icon-menuDots icon-color-inherit"></span>
+										<span class="pr-u-mask">More options</span>
+									</button>
+								</div>
+								<div class="dialog-inside-header-container">
+									<h1 class="dialog-inside-header-container-title" id="dialogInsideHeaderTitle-header-action-drawer">Title</h1>
+								</div>
+							</header>
+							<div class="dialog-inside-content">dialog</div>
+							<footer class="dialog-inside-footer footer">
+								<div class="footer-actions">
+									<button type="button" class="button">Action</button>
+									<button type="button" class="button mod-ghost">Action</button>
+								</div>
+							</footer>
+						</div>
+					</div>
+				</div>
+			</td>
+		</tr>
+		<tr>
+			<td>With form</td>
+			<td>
+				<div style="block-size: 15rem; position: relative; overflow: hidden">
+					<div class="dialog_backdrop"></div>
+					<div role="dialog" aria-modal="true" aria-labelledby="dialogInsideHeaderTitle-form-default" class="dialog">
+						<div class="dialog-inside">
+							<form class="dialog-inside-formOptional">
+								<header class="dialog-inside-header">
+									<button type="button" class="dialog-inside-header-button button">
+										<span class="lucca-icon icon-signClose" aria-hidden="true"></span>
+										<span class="pr-u-mask">Close</span>
+									</button>
+									<div class="dialog-inside-header-container">
+										<h1 class="dialog-inside-header-container-title" id="dialogInsideHeaderTitle-form-default">Title</h1>
+									</div>
+								</header>
+								<div class="dialog-inside-content">dialog</div>
+								<footer class="dialog-inside-footer footer">
+									<div class="footer-actions">
+										<button type="submit" class="button">Submit</button>
+										<button type="button" class="button mod-ghost">Action</button>
+									</div>
+								</footer>
+							</form>
+						</div>
+					</div>
+				</div>
+			</td>
+			<td>
+				<div style="block-size: 15rem; position: relative; overflow: hidden">
+					<div class="dialog_backdrop"></div>
+					<div role="dialog" aria-modal="true" aria-labelledby="dialogInsideHeaderTitle-form-drawer" class="dialog mod-drawer">
+						<div class="dialog-inside">
+							<form class="dialog-inside-formOptional">
+								<header class="dialog-inside-header">
+									<button type="button" class="dialog-inside-header-button button">
+										<span class="lucca-icon icon-signClose" aria-hidden="true"></span>
+										<span class="pr-u-mask">Close</span>
+									</button>
+									<div class="dialog-inside-header-container">
+										<h1 class="dialog-inside-header-container-title" id="dialogInsideHeaderTitle-form-drawer">Title</h1>
+									</div>
+								</header>
+								<div class="dialog-inside-content">dialog</div>
+								<footer class="dialog-inside-footer footer">
+									<div class="footer-actions">
+										<button type="submit" class="button">Submit</button>
+										<button type="button" class="button mod-ghost">Action</button>
+									</div>
+								</footer>
+							</form>
+						</div>
+					</div>
+				</div>
+			</td>
+		</tr>
+		<tr>
+			<td>With tabs</td>
+			<td>
+				<div style="block-size: 18rem; position: relative; overflow: hidden">
+					<div class="dialog_backdrop"></div>
+					<div
+						role="dialog"
+						aria-modal="true"
+						aria-labelledby="dialogInsideHeaderTitle-tabs-default"
+						class="dialog"
+						[attr.style]="'--components-dialog-maxHeight: 15rem'"
+					>
+						<div class="dialog-inside">
+							<header class="dialog-inside-header">
+								<button type="button" class="dialog-inside-header-button button">
+									<span class="lucca-icon icon-signClose" aria-hidden="true"></span>
+									<span class="pr-u-mask">Close</span>
+								</button>
+								<div class="dialog-inside-header-container">
+									<h1 id="dialogInsideHeaderTitle-tabs-default" class="dialog-inside-header-container-title">Title</h1>
+								</div>
+							</header>
+							<div class="horizontalNavigationWrapper">
+								<div class="horizontalNavigation palette-product">
+									<div class="horizontalNavigation-containerOptional">
+										<ul class="horizontalNavigation-list" role="tablist">
+											<li class="horizontalNavigation-list-item">
+												<button
+													role="tab"
+													type="button"
+													class="horizontalNavigation-list-item-action"
+													aria-controls="panel-0"
+													id="tab-0"
+													aria-selected="true"
+												>
+													Tab 1
+												</button>
+											</li>
+											<li class="horizontalNavigation-list-item">
+												<button
+													role="tab"
+													type="button"
+													class="horizontalNavigation-list-item-action"
+													aria-controls="panel-1"
+													id="tab-1"
+													tabindex="-1"
+													aria-selected="false"
+												>
+													Tab 2
+												</button>
+											</li>
+											<li class="horizontalNavigation-list-item">
+												<button
+													role="tab"
+													type="button"
+													class="horizontalNavigation-list-item-action"
+													aria-controls="panel-2"
+													id="tab-2"
+													tabindex="-1"
+													aria-selected="false"
+												>
+													Tab 3
+												</button>
+											</li>
+										</ul>
+									</div>
+								</div>
+								<div role="tabpanel" tabindex="0" class="horizontalNavigation_panel is-active" id="panel-0" aria-labelledby="tab-0">
+									<div class="dialog-inside-content">Content 1<br />Content 1<br />Content 1<br />Content 1<br />Content 1<br /></div>
+								</div>
+								<div role="tabpanel" tabindex="0" class="horizontalNavigation_panel" id="panel-1" aria-labelledby="tab-1">
+									<div class="dialog-inside-content">Content 2</div>
+								</div>
+								<div role="tabpanel" tabindex="0" class="horizontalNavigation_panel" id="panel-2" aria-labelledby="tab-2">
+									<div class="dialog-inside-content">Content 3</div>
+								</div>
+							</div>
+							<footer class="dialog-inside-footer footer">
+								<div class="footer-actions">
+									<button type="button" class="button">Action</button>
+									<button type="button" class="button mod-ghost">Action</button>
+								</div>
+							</footer>
+						</div>
+					</div>
+				</div>
+			</td>
+			<td>
+				<div style="block-size: 18rem; position: relative; overflow: hidden">
+					<div class="dialog_backdrop"></div>
+					<div role="dialog" aria-modal="true" aria-labelledby="dialogInsideHeaderTitle-tabs-drawer" class="dialog mod-drawer">
+						<div class="dialog-inside">
+							<header class="dialog-inside-header">
+								<button type="button" class="dialog-inside-header-button button">
+									<span class="lucca-icon icon-signClose" aria-hidden="true"></span>
+									<span class="pr-u-mask">Close</span>
+								</button>
+								<div class="dialog-inside-header-container">
+									<h1 id="dialogInsideHeaderTitle-tabs-drawer" class="dialog-inside-header-container-title">Title</h1>
+								</div>
+							</header>
+							<div class="horizontalNavigationWrapper">
+								<div class="horizontalNavigation palette-product">
+									<div class="horizontalNavigation-containerOptional">
+										<ul class="horizontalNavigation-list" role="tablist">
+											<li class="horizontalNavigation-list-item">
+												<button
+													role="tab"
+													type="button"
+													class="horizontalNavigation-list-item-action"
+													aria-controls="panel-0"
+													id="tab-0"
+													aria-selected="true"
+												>
+													Tab 1
+												</button>
+											</li>
+											<li class="horizontalNavigation-list-item">
+												<button
+													role="tab"
+													type="button"
+													class="horizontalNavigation-list-item-action"
+													aria-controls="panel-1"
+													id="tab-1"
+													tabindex="-1"
+													aria-selected="false"
+												>
+													Tab 2
+												</button>
+											</li>
+											<li class="horizontalNavigation-list-item">
+												<button
+													role="tab"
+													type="button"
+													class="horizontalNavigation-list-item-action"
+													aria-controls="panel-2"
+													id="tab-2"
+													tabindex="-1"
+													aria-selected="false"
+												>
+													Tab 3
+												</button>
+											</li>
+										</ul>
+									</div>
+								</div>
+								<div role="tabpanel" tabindex="0" class="horizontalNavigation_panel is-active" id="panel-0" aria-labelledby="tab-0">
+									<div class="dialog-inside-content">Content 1<br />Content 1<br />Content 1<br />Content 1<br />Content 1<br /></div>
+								</div>
+								<div role="tabpanel" tabindex="0" class="horizontalNavigation_panel" id="panel-1" aria-labelledby="tab-1">
+									<div class="dialog-inside-content">Content 2</div>
+								</div>
+								<div role="tabpanel" tabindex="0" class="horizontalNavigation_panel" id="panel-2" aria-labelledby="tab-2">
+									<div class="dialog-inside-content">Content 3</div>
+								</div>
+							</div>
+							<footer class="dialog-inside-footer footer">
+								<div class="footer-actions">
+									<button type="button" class="button">Action</button>
+									<button type="button" class="button mod-ghost">Action</button>
+								</div>
+							</footer>
+						</div>
+					</div>
+				</div>
+			</td>
+		</tr>
+		<tr>
+			<td>Stacked</td>
+			<td>
+				<div style="block-size: 22rem; position: relative; overflow: hidden">
+					<div class="cdk-global-overlay-wrapper mod-stacked">
+						<div class="dialog_backdrop"></div>
+						<div role="dialog" aria-modal="true" aria-labelledby="dialogInsideHeaderTitle-stacked-default-1" class="dialog">
+							<div class="dialog-inside">
+								<header class="dialog-inside-header">
+									<button type="button" class="dialog-inside-header-button button">
+										<span class="lucca-icon icon-signClose" aria-hidden="true"></span>
+										<span class="pr-u-mask">Close</span>
+									</button>
+									<div class="dialog-inside-header-container">
+										<h1 class="dialog-inside-header-container-title" id="dialogInsideHeaderTitle-stacked-default-1">Title</h1>
+									</div>
+								</header>
+								<div class="dialog-inside-content">dialog</div>
+								<footer class="dialog-inside-footer footer">
+									<div class="footer-actions">
+										<button type="button" class="button">Action</button>
+										<button type="button" class="button mod-ghost">Action</button>
+									</div>
+								</footer>
+							</div>
+						</div>
+					</div>
+					<div class="cdk-global-overlay-wrapper mod-stacked">
+						<div class="dialog_backdrop"></div>
+						<div role="dialog" aria-modal="true" aria-labelledby="dialogInsideHeaderTitle-stacked-default-2" class="dialog">
+							<div class="dialog-inside">
+								<header class="dialog-inside-header">
+									<button type="button" class="dialog-inside-header-button button">
+										<span class="lucca-icon icon-signClose" aria-hidden="true"></span>
+										<span class="pr-u-mask">Close</span>
+									</button>
+									<div class="dialog-inside-header-container">
+										<h1 class="dialog-inside-header-container-title" id="dialogInsideHeaderTitle-stacked-default-2">Title</h1>
+									</div>
+								</header>
+								<div class="dialog-inside-content">dialog</div>
+								<footer class="dialog-inside-footer footer">
+									<div class="footer-actions">
+										<button type="button" class="button">Action</button>
+										<button type="button" class="button mod-ghost">Action</button>
+									</div>
+								</footer>
+							</div>
+						</div>
+					</div>
+					<div class="cdk-global-overlay-wrapper mod-stacked">
+						<div class="dialog_backdrop"></div>
+						<div role="dialog" aria-modal="true" aria-labelledby="dialogInsideHeaderTitle-stacked-default-3" class="dialog">
+							<div class="dialog-inside">
+								<header class="dialog-inside-header">
+									<button type="button" class="dialog-inside-header-button button">
+										<span class="lucca-icon icon-signClose" aria-hidden="true"></span>
+										<span class="pr-u-mask">Close</span>
+									</button>
+									<div class="dialog-inside-header-container">
+										<h1 class="dialog-inside-header-container-title" id="dialogInsideHeaderTitle-stacked-default-3">Title</h1>
+									</div>
+								</header>
+								<div class="dialog-inside-content">dialog</div>
+								<footer class="dialog-inside-footer footer">
+									<div class="footer-actions">
+										<button type="button" class="button">Action</button>
+										<button type="button" class="button mod-ghost">Action</button>
+									</div>
+								</footer>
+							</div>
+						</div>
+					</div>
+				</div>
+			</td>
+			<td>
+				<div style="block-size: 22rem; position: relative; overflow: hidden">
+					<div class="cdk-global-overlay-wrapper mod-stacked">
+						<div class="dialog_backdrop"></div>
+						<div role="dialog" aria-modal="true" aria-labelledby="dialogInsideHeaderTitle-stacked-drawer-1" class="dialog mod-drawer">
+							<div class="dialog-inside">
+								<header class="dialog-inside-header">
+									<button type="button" class="dialog-inside-header-button button">
+										<span class="lucca-icon icon-signClose" aria-hidden="true"></span>
+										<span class="pr-u-mask">Close</span>
+									</button>
+									<div class="dialog-inside-header-container">
+										<h1 class="dialog-inside-header-container-title" id="dialogInsideHeaderTitle-stacked-drawer-1">Title</h1>
+									</div>
+								</header>
+								<div class="dialog-inside-content">dialog</div>
+								<footer class="dialog-inside-footer footer">
+									<div class="footer-actions">
+										<button type="button" class="button">Action</button>
+										<button type="button" class="button mod-ghost">Action</button>
+									</div>
+								</footer>
+							</div>
+						</div>
+					</div>
+					<div class="cdk-global-overlay-wrapper mod-stacked">
+						<div class="dialog_backdrop"></div>
+						<div role="dialog" aria-modal="true" aria-labelledby="dialogInsideHeaderTitle-stacked-drawer-2" class="dialog mod-drawer">
+							<div class="dialog-inside">
+								<header class="dialog-inside-header">
+									<button type="button" class="dialog-inside-header-button button">
+										<span class="lucca-icon icon-signClose" aria-hidden="true"></span>
+										<span class="pr-u-mask">Close</span>
+									</button>
+									<div class="dialog-inside-header-container">
+										<h1 class="dialog-inside-header-container-title" id="dialogInsideHeaderTitle-stacked-drawer-2">Title</h1>
+									</div>
+								</header>
+								<div class="dialog-inside-content">dialog</div>
+								<footer class="dialog-inside-footer footer">
+									<div class="footer-actions">
+										<button type="button" class="button">Action</button>
+										<button type="button" class="button mod-ghost">Action</button>
+									</div>
+								</footer>
+							</div>
+						</div>
+					</div>
+					<div class="cdk-global-overlay-wrapper mod-stacked">
+						<div class="dialog_backdrop"></div>
+						<div role="dialog" aria-modal="true" aria-labelledby="dialogInsideHeaderTitle-stacked-drawer-3" class="dialog mod-drawer">
+							<div class="dialog-inside">
+								<header class="dialog-inside-header">
+									<button type="button" class="dialog-inside-header-button button">
+										<span class="lucca-icon icon-signClose" aria-hidden="true"></span>
+										<span class="pr-u-mask">Close</span>
+									</button>
+									<div class="dialog-inside-header-container">
+										<h1 class="dialog-inside-header-container-title" id="dialogInsideHeaderTitle-stacked-drawer-3">Title</h1>
+									</div>
+								</header>
+								<div class="dialog-inside-content">dialog</div>
+								<footer class="dialog-inside-footer footer">
+									<div class="footer-actions">
+										<button type="button" class="button">Action</button>
+										<button type="button" class="button mod-ghost">Action</button>
+									</div>
+								</footer>
+							</div>
+						</div>
+					</div>
+				</div>
+			</td>
+		</tr>
+		<tr>
+			<td>Fancy</td>
+			<td>
+				<div style="block-size: 22rem; position: relative; overflow: hidden">
+					<div class="dialog_backdrop"></div>
+					<div role="dialog" aria-modal="true" aria-labelledby="dialogInsideHeaderTitle-fancy-default" class="dialog mod-fancy">
+						<div
+							class="dialog-inside"
+							[attr.style]="'--components-dialog-inside-backgroundImage: url(https://cdn.lucca.fr/transverse/prisme/visuals/fancy-dialog/foreground-welcome.svg)'"
+						>
+							<div class="dialog-inside-fancyIllustrations">
+								<svg width="224" height="288" xmlns="http://www.w3.org/2000/svg" fill="none" viewBox="0 0 224 288">
+									<path
+										fill="var(--palettes-assets-primary-light, #ffe0d1)"
+										d="M378.678 94.3715C335.464-73.9119 182.043-54.622 133.887-9.43784 85.7193 35.7527 25.9992 211.072 161 234.442c135.001 23.369 242.358-43.922 217.678-140.0705"
+									></path>
+									<path
+										fill="var(--palettes-assets-brand-dark, #fae999)"
+										d="M35.123 46.4324c-7.7896-22.1584-18.8773-13.9017-24.5271-7.2528-5.64979 6.649-19.66829 27.0905-1.86443 28.6618C26.5353 69.4127 39.5722 59.0901 35.123 46.4324"
+									></path>
+									<path
+										fill="var(--palettes-assets-secondary-light, #c5eebe)"
+										d="M108.123 267.434c-14.1609 32.841-30.165 19.049-38.1252 8.361-7.9601-10.774-27.1484-43.356.1676-43.787 27.2322-.431 46.0016 16.636 37.9576 35.426"
+									></path>
+								</svg>
+							</div>
+							<header class="dialog-inside-header">
+								<button type="button" class="dialog-inside-header-button button">
+									<span class="lucca-icon icon-signClose" aria-hidden="true"></span>
+									<span class="pr-u-mask">Close</span>
+								</button>
+								<div class="dialog-inside-header-container">
+									<h1 id="dialogInsideHeaderTitle-fancy-default" class="dialog-inside-header-container-title">Title</h1>
+								</div>
+							</header>
+							<div class="dialog-inside-content">dialog</div>
+							<footer class="dialog-inside-footer footer">
+								<div class="footer-actions">
+									<button type="button" class="button mod-outlined">Action</button>
+								</div>
+							</footer>
+						</div>
+					</div>
+				</div>
+			</td>
+			<td>
+				<div style="block-size: 22rem; position: relative; overflow: hidden">
+					<div class="dialog_backdrop"></div>
+					<div role="dialog" aria-modal="true" aria-labelledby="dialogInsideHeaderTitle-fancy-drawer" class="dialog mod-fancy mod-drawer">
+						<div
+							class="dialog-inside"
+							[attr.style]="'--components-dialog-inside-backgroundImage: url(https://cdn.lucca.fr/transverse/prisme/visuals/fancy-dialog/foreground-welcome.svg)'"
+						>
+							<div class="dialog-inside-fancyIllustrations">
+								<svg width="224" height="288" xmlns="http://www.w3.org/2000/svg" fill="none" viewBox="0 0 224 288">
+									<path
+										fill="var(--palettes-assets-primary-light, #ffe0d1)"
+										d="M378.678 94.3715C335.464-73.9119 182.043-54.622 133.887-9.43784 85.7193 35.7527 25.9992 211.072 161 234.442c135.001 23.369 242.358-43.922 217.678-140.0705"
+									></path>
+									<path
+										fill="var(--palettes-assets-brand-dark, #fae999)"
+										d="M35.123 46.4324c-7.7896-22.1584-18.8773-13.9017-24.5271-7.2528-5.64979 6.649-19.66829 27.0905-1.86443 28.6618C26.5353 69.4127 39.5722 59.0901 35.123 46.4324"
+									></path>
+									<path
+										fill="var(--palettes-assets-secondary-light, #c5eebe)"
+										d="M108.123 267.434c-14.1609 32.841-30.165 19.049-38.1252 8.361-7.9601-10.774-27.1484-43.356.1676-43.787 27.2322-.431 46.0016 16.636 37.9576 35.426"
+									></path>
+								</svg>
+							</div>
+							<header class="dialog-inside-header">
+								<button type="button" class="dialog-inside-header-button button">
+									<span class="lucca-icon icon-signClose" aria-hidden="true"></span>
+									<span class="pr-u-mask">Close</span>
+								</button>
+								<div class="dialog-inside-header-container">
+									<h1 id="dialogInsideHeaderTitle-fancy-drawer" class="dialog-inside-header-container-title">Title</h1>
+								</div>
+							</header>
+							<div class="dialog-inside-content">dialog</div>
+							<footer class="dialog-inside-footer footer">
+								<div class="footer-actions">
+									<button type="button" class="button mod-outlined">Action</button>
+								</div>
+							</footer>
+						</div>
+					</div>
+				</div>
+			</td>
+		</tr>
+	</tbody>
+</table>
 
 <!-- To tell the ui-diff tool that the page has finished rendering -->
 <span id="ready"></span>

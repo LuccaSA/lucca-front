@@ -1,0 +1,18 @@
+@mixin triggerHover {
+	--components-impersonation-trigger-borderColor: var(--palettes-product-400);
+	--components-impersonation-trigger-shadow: var(--pr-t-elevation-shadow-button);
+}
+
+@mixin triggerExpanded {
+	--components-impersonation-trigger-icon-rotate: 180deg;
+}
+
+@mixin triggerActive {
+	--components-impersonation-trigger-backgroundColor: var(--palettes-product-50);
+	--components-impersonation-trigger-borderColor: var(--palettes-product-200);
+	--components-impersonation-trigger-fontWeight: var(--pr-t-font-fontWeight-semibold);
+	--components-impersonation-trigger-color: var(--palettes-product-800);
+	--components-impersonation-trigger-icon-color: var(--palettes-product-700);
+	--components-impersonation-clear-display: grid;
+	--components-impersonation-trigger-icon-marginInlineStart: var(--pr-t-spacings-250);
+}

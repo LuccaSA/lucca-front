@@ -1,7 +1,8 @@
+import { LiveAnnouncer } from '@angular/cdk/a11y';
 import { ChangeDetectionStrategy, Component, Inject, OnInit } from '@angular/core';
 import { ComponentFixture, TestBed } from '@angular/core/testing';
 import { Title } from '@angular/platform-browser';
-import { ActivatedRouteSnapshot, Router, RouterLink, RouterOutlet, Routes, TitleStrategy, provideRouter } from '@angular/router';
+import { ActivatedRouteSnapshot, provideRouter, Router, RouterLink, RouterOutlet, Routes, TitleStrategy } from '@angular/router';
 import { of, timer } from 'rxjs';
 import { map, skip } from 'rxjs/operators';
 import { ILuTitleTranslateService } from './title-translate.service';
@@ -81,6 +82,7 @@ export class OverrideTitlePartComponent implements OnInit {
 describe('TitleStrategy', () => {
 	let fixture: ComponentFixture<AppComponent>;
 	let pageTitleService: LuTitleStrategy;
+	let liveAnnouncer: LiveAnnouncer;
 
 	const routes: Routes = [
 		{
@@ -148,6 +150,7 @@ describe('TitleStrategy', () => {
 		TestBed.configureTestingModule({
 			imports: [AppComponent],
 			providers: [
+				{ provide: LiveAnnouncer, useValue: { announce: jest.fn() } },
 				provideRouter(routes),
 				{ provide: Title, useValue: { setTitle: jest.fn(), getTitle: jest.fn().mockReturnValue('') } },
 				provideLuTitleStrategy({
@@ -158,6 +161,7 @@ describe('TitleStrategy', () => {
 		});
 
 		fixture = TestBed.createComponent(AppComponent);
+		liveAnnouncer = TestBed.inject(LiveAnnouncer);
 		pageTitleService = TestBed.inject(TitleStrategy) as unknown as LuTitleStrategy;
 		fixture.detectChanges();
 		await TestBed.inject(Router).navigateByUrl('/');
@@ -223,5 +227,205 @@ describe('TitleStrategy', () => {
 
 		await clickLink('.link-7');
 		expect(resultTitle).toEqual(`Stubs' child Name 1${TitleSeparator}Stub${TitleSeparator}Lucca BU`);
+	});
+
+	it('should not announce title via LiveAnnouncer when not enabled', async () => {
+		await fixture.whenStable();
+		expect(liveAnnouncer.announce).not.toHaveBeenCalled();
+	});
+});
+
+describe('TitleStrategy readTitleByLiveAnnouncer enabled', () => {
+	let fixture: ComponentFixture<AppComponent>;
+	let liveAnnouncer: LiveAnnouncer;
+
+	const routes: Routes = [
+		{
+			path: '',
+			title: 'Stub',
+			component: StubComponent,
+			children: [
+				{
+					path: 'first',
+					component: StubComponent,
+					children: [
+						{
+							path: ':id',
+							title: `Stubs' child {{id}}`,
+							component: StubComponent,
+							children: [
+								{
+									path: 'last',
+									title: ``,
+									component: OverrideTitleComponent,
+								},
+								{
+									path: 'end',
+									title: `Old title part`,
+									component: OverrideTitlePartComponent,
+								},
+								{
+									path: 'delayed',
+									title: ``,
+									component: DelayedOverrideTitleComponent,
+									children: [
+										{
+											path: '',
+											component: OverrideTitleComponent,
+										},
+									],
+								},
+							],
+						},
+					],
+				},
+				{
+					path: 'second',
+					component: StubComponent,
+					children: [
+						{
+							path: ':id',
+							title: `Stubs' child {{name}}`,
+							resolve: { name: (route: ActivatedRouteSnapshot) => of(`Name ${route.paramMap.get('id')}`) },
+							component: StubComponent,
+						},
+					],
+				},
+			],
+		},
+	];
+
+	async function clickLink(selector: string): Promise<void> {
+		(fixture.nativeElement as HTMLElement).querySelector<HTMLAnchorElement>(selector)!.click();
+		fixture.detectChanges();
+		await fixture.whenStable();
+	}
+
+	beforeEach(async () => {
+		TestBed.configureTestingModule({
+			imports: [AppComponent],
+			providers: [
+				{ provide: LiveAnnouncer, useValue: { announce: jest.fn() } },
+				provideRouter(routes),
+				{ provide: Title, useValue: { setTitle: jest.fn(), getTitle: jest.fn().mockReturnValue('') } },
+				provideLuTitleStrategy({
+					appTitle: () => 'BU',
+					translateService: () => new TranslateService(),
+					readTitleByLiveAnnouncer: true,
+				}),
+			],
+		});
+
+		fixture = TestBed.createComponent(AppComponent);
+		liveAnnouncer = TestBed.inject(LiveAnnouncer);
+		fixture.detectChanges();
+		await TestBed.inject(Router).navigateByUrl('/');
+		fixture.detectChanges();
+	});
+
+	it('should announce the title via LiveAnnouncer on navigation', async () => {
+		await fixture.whenStable();
+		expect(liveAnnouncer.announce).toHaveBeenCalledWith(`Stub${TitleSeparator}Lucca BU`, 'polite');
+	});
+
+	it('should announce updated title on subsequent navigation', async () => {
+		await fixture.whenStable();
+		jest.clearAllMocks();
+
+		await clickLink('.link-3');
+		await fixture.whenStable();
+		expect(liveAnnouncer.announce).toHaveBeenCalledWith(`Stubs' child 1${TitleSeparator}Stub${TitleSeparator}Lucca BU`, 'polite');
+	});
+});
+
+describe('TitleStrategy readTitleByLiveAnnouncer disabled', () => {
+	let fixture: ComponentFixture<AppComponent>;
+	let liveAnnouncer: LiveAnnouncer;
+
+	const routes: Routes = [
+		{
+			path: '',
+			title: 'Stub',
+			component: StubComponent,
+			children: [
+				{
+					path: 'first',
+					component: StubComponent,
+					children: [
+						{
+							path: ':id',
+							title: `Stubs' child {{id}}`,
+							component: StubComponent,
+							children: [
+								{
+									path: 'last',
+									title: ``,
+									component: OverrideTitleComponent,
+								},
+								{
+									path: 'end',
+									title: `Old title part`,
+									component: OverrideTitlePartComponent,
+								},
+								{
+									path: 'delayed',
+									title: ``,
+									component: DelayedOverrideTitleComponent,
+									children: [
+										{
+											path: '',
+											component: OverrideTitleComponent,
+										},
+									],
+								},
+							],
+						},
+					],
+				},
+				{
+					path: 'second',
+					component: StubComponent,
+					children: [
+						{
+							path: ':id',
+							title: `Stubs' child {{name}}`,
+							resolve: { name: (route: ActivatedRouteSnapshot) => of(`Name ${route.paramMap.get('id')}`) },
+							component: StubComponent,
+						},
+					],
+				},
+			],
+		},
+	];
+
+	beforeEach(async () => {
+		TestBed.configureTestingModule({
+			imports: [AppComponent],
+			providers: [
+				{ provide: LiveAnnouncer, useValue: { announce: jest.fn() } },
+				provideRouter(routes),
+				{ provide: Title, useValue: { setTitle: jest.fn(), getTitle: jest.fn().mockReturnValue('') } },
+				provideLuTitleStrategy({
+					appTitle: () => 'BU',
+					translateService: () => new TranslateService(),
+					readTitleByLiveAnnouncer: false,
+				}),
+			],
+		});
+
+		fixture = TestBed.createComponent(AppComponent);
+		liveAnnouncer = TestBed.inject(LiveAnnouncer);
+		fixture.detectChanges();
+		await TestBed.inject(Router).navigateByUrl('/');
+		fixture.detectChanges();
+	});
+
+	beforeEach(() => {
+		liveAnnouncer = TestBed.inject(LiveAnnouncer);
+	});
+
+	it('should not announce title via LiveAnnouncer when disabled', async () => {
+		await fixture.whenStable();
+		expect(liveAnnouncer.announce).not.toHaveBeenCalled();
 	});
 });

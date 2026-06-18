@@ -1,7 +1,8 @@
 import { ButtonComponent } from '@lucca-front/ng/button';
-import { DividerComponent } from '@lucca-front/ng/divider';
+import { DIVIDER_SIZE, DividerComponent } from '@lucca-front/ng/divider';
 import { IconComponent } from '@lucca-front/ng/icon';
 import { Meta, moduleMetadata, StoryObj } from '@storybook/angular';
+import { setStoryOptions } from 'stories/helpers/stories';
 
 interface DividerBasicStory {
 	size: string;
@@ -26,7 +27,7 @@ export default {
 			},
 		},
 		size: {
-			options: ['', 'S', 'M'],
+			options: setStoryOptions(DIVIDER_SIZE),
 			control: {
 				type: 'select',
 			},

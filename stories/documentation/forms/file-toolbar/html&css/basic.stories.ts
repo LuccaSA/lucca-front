@@ -12,7 +12,7 @@ export default {
 	],
 	argTypes: {
 		size: {
-			options: [null, 'L'],
+			options: ['', 'L'],
 			control: {
 				type: 'radio',
 			},

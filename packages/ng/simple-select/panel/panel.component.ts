@@ -33,6 +33,8 @@ import { LuIsOptionSelectedPipe } from './option-selected.pipe';
 	changeDetection: ChangeDetectionStrategy.OnPush,
 	host: {
 		'[class.colorPanel]': 'colorPanel()',
+		'(document:keydown)': 'onKeydown()',
+		'(document:mousemove)': 'onMousemove()',
 	},
 	imports: [
 		A11yModule,
@@ -80,8 +82,17 @@ export class LuSelectPanelComponent<T> implements AfterViewInit, CoreSelectPanel
 	readonly optionTpl = this.selectInput.optionTpl;
 
 	readonly options = signal<ɵCoreSelectPanelElement<T>[]>([]);
+	readonly pointerNavigation = signal(false);
 
-	public keyManager = inject<CoreSelectKeyManager<T>>(CoreSelectKeyManager);
+	onKeydown(): void {
+		this.pointerNavigation.set(false);
+	}
+
+	onMousemove(): void {
+		this.pointerNavigation.set(true);
+	}
+
+	public readonly keyManager = inject<CoreSelectKeyManager<T>>(CoreSelectKeyManager);
 
 	public readonly selected = computed(() => this.selectInput.valueSignal());
 

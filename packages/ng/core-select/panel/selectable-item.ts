@@ -1,6 +1,7 @@
 import { Highlightable } from '@angular/cdk/a11y';
-import { computed, Directive, ElementRef, inject, input, linkedSignal, model, OnDestroy, output, signal } from '@angular/core';
+import { computed, Directive, ElementRef, inject, input, linkedSignal, model, OnDestroy, output, signal, untracked } from '@angular/core';
 import { ALuSelectInputComponent } from '../input/select-input.component';
+import { CoreSelectKeyManager } from './key-manager';
 import { CoreSelectPanelInstance, SELECT_PANEL_INSTANCE } from './panel.instance';
 
 @Directive({
@@ -10,6 +11,7 @@ import { CoreSelectPanelInstance, SELECT_PANEL_INSTANCE } from './panel.instance
 		'[attr.id]': 'idAttribute()',
 		'[attr.aria-selected]': 'isSelected()',
 		'[class.is-highlighted]': 'isHighlighted()',
+		'(mouseenter)': 'onMouseEnter()',
 		role: 'option',
 	},
 })
@@ -17,6 +19,7 @@ export class CoreSelectPanelElement<T> implements Highlightable, OnDestroy {
 	readonly elementRef = inject<ElementRef<HTMLElement>>(ElementRef);
 
 	readonly #panelRef = inject<CoreSelectPanelInstance<T>>(SELECT_PANEL_INSTANCE);
+	readonly #keyManager = inject<CoreSelectKeyManager<T>>(CoreSelectKeyManager, { optional: true });
 
 	readonly #selectRef = inject<ALuSelectInputComponent<T, T>>(ALuSelectInputComponent);
 
@@ -64,5 +67,13 @@ export class CoreSelectPanelElement<T> implements Highlightable, OnDestroy {
 
 	setInactiveStyles(): void {
 		this.isHighlighted.set(false);
+	}
+
+	onMouseEnter(): void {
+		if (!this.#keyManager || this.disabled || !untracked(this.#panelRef.pointerNavigation)) {
+			return;
+		}
+
+		this.#keyManager.setActiveItemByElement(this);
 	}
 }

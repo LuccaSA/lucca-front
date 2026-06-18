@@ -50,6 +50,14 @@ export default {
 		luPopoverNoCloseButton: {
 			description: 'Masque le bouton de fermeture du popover visible à la navigation clavier.',
 		},
+		luPopoverMaxBlockSize: {
+			control: 'text',
+			description: 'Modifie la hauteur max de la popover.',
+		},
+		luPopoverMaxInlineSize: {
+			control: 'text',
+			description: 'Modifie la largeur max de la popover.',
+		},
 	},
 } as Meta;
 
@@ -69,6 +77,20 @@ export const Basic: StoryObj<PopoverDirective> = {
 			<lu-divider />
 			<lu-listing checklist palette="success">
 				<lu-listing-item>item item item item item item item item item item item</lu-listing-item>
+				<lu-listing-item>item</lu-listing-item>
+				<lu-listing-item>item</lu-listing-item>
+				<lu-listing-item>item</lu-listing-item>
+				<lu-listing-item>item</lu-listing-item>
+				<lu-listing-item>item</lu-listing-item>
+				<lu-listing-item>item</lu-listing-item>
+				<lu-listing-item>item</lu-listing-item>
+				<lu-listing-item>item</lu-listing-item>
+				<lu-listing-item>item</lu-listing-item>
+				<lu-listing-item>item</lu-listing-item>
+				<lu-listing-item>item</lu-listing-item>
+				<lu-listing-item>item</lu-listing-item>
+				<lu-listing-item>item</lu-listing-item>
+				<lu-listing-item>item</lu-listing-item>
 				<lu-listing-item>item</lu-listing-item>
 				<lu-listing-item>item</lu-listing-item>
 			</lu-listing>
@@ -94,6 +116,8 @@ export const Basic: StoryObj<PopoverDirective> = {
 		luPopoverDisabledInput: false,
 		luPopoverPosition: 'above',
 		luPopoverNoCloseButtonInput: false,
+		luPopoverMaxBlockSize: '',
+		luPopoverMaxInlineSize: '',
 	},
 };
 export const CustomPosition: StoryObj<PopoverDirective> = {
