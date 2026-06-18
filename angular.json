@@ -57,30 +57,26 @@
           }
         },
         "storybook": {
-          "builder": "@storybook/angular:start-storybook",
+          "builder": "@analogjs/storybook-angular:start-storybook",
           "options": {
             "configDir": ".storybook",
-            "browserTarget": "ng:build",
-            "compodoc": true,
+            "compodoc": false,
             "compodocArgs": ["-e", "json", "-d", ".storybook"],
             "port": 6006,
-            "styles": [".storybook/styles.scss"],
             "stylePreprocessorOptions": {
-              "includePaths": ["packages/ng/styles", "node_modules"]
+              "loadPaths": ["packages/ng/styles", "node_modules"]
             }
           }
         },
         "build-storybook": {
-          "builder": "@storybook/angular:build-storybook",
+          "builder": "@analogjs/storybook-angular:build-storybook",
           "options": {
             "configDir": ".storybook",
-            "browserTarget": "ng:build",
-            "compodoc": true,
+            "compodoc": false,
             "compodocArgs": ["-e", "json", "-d", ".storybook"],
             "outputDir": "storybook-static",
-            "styles": [".storybook/styles.scss"],
             "stylePreprocessorOptions": {
-              "includePaths": ["packages/ng/styles", "node_modules"]
+              "loadPaths": ["packages/ng/styles", "node_modules"]
             }
           }
         }
