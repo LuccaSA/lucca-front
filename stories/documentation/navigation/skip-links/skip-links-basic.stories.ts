@@ -1,4 +1,4 @@
-import { ChangeDetectionStrategy, Component, Input } from '@angular/core';
+import { ChangeDetectionStrategy, Component } from '@angular/core';
 import { LuSkipLinksComponent, SkipLinkDirective } from '@lucca-front/ng/a11y';
 import { AppLayoutComponent } from '@lucca-front/ng/app-layout';
 import { ContainerComponent } from '@lucca-front/ng/container';
@@ -44,13 +44,11 @@ import { expect, within } from 'storybook/test';
 						<div class="fakeContent"><a href="#">content</a></div>
 					</lu-container>
 				</lu-main-layout-block>
-				@if (showCustomSkipLinkTarget) {
-					<lu-main-layout-block>
-						<lu-container>
-							<div luSkipLinkTarget luSkipLinkLabel="Go to custom skip link target" class="fakeContent"><a href="#">custom skip link target</a></div>
-						</lu-container>
-					</lu-main-layout-block>
-				}
+				<lu-main-layout-block>
+					<lu-container>
+						<div luSkipLinkTarget luSkipLinkLabel="Go to custom skip link target" class="fakeContent"><a href="#">custom skip link target</a></div>
+					</lu-container>
+				</lu-main-layout-block>
 				<lu-main-layout-block>
 					<lu-container>
 						<div class="fakeContent"><a href="#">content</a></div>
@@ -173,16 +171,21 @@ import { expect, within } from 'storybook/test';
 				}
 			}
 
+			:host {
+				position: relative;
+				display: block;
+			}
+
 			:host ::ng-deep .skipLinks {
-				inset-block-start: 1.75rem;
+				position: absolute;
+				inset-block-start: 0.825rem;
+				inset-inline: 50%;
 			}
 		`,
 	],
 	changeDetection: ChangeDetectionStrategy.OnPush,
 })
-class SkipLinksStory {
-	@Input() showCustomSkipLinkTarget = false;
-}
+class SkipLinksStory {}
 
 export default {
 	title: 'Documentation/Navigation/SkipLinks/Basic',
@@ -196,26 +199,21 @@ import { LuSkipLinksComponent } from '@lucca-front/ng/a11y';
 @Component({
 	imports: [LuSkipLinksComponent],
 	selector: 'app-component',
-	template: \`<lu-skip-links />
+	template: \`
+<!-- Place this at the very top of the body (before the banner) -->
+<lu-skip-links />
 
+<!-- Use this if you want to add a skip link, and place it on the desired target within the page -->
 <div luSkipLinkTarget luSkipLinkLabel="Go to custom skip link target">custom skip link target</div>\`,
 })
 class AppComponent {
 }`;
 
 export const Basic: StoryObj<SkipLinksStory> = {
-	args: {
-		showCustomSkipLinkTarget: false,
-	},
-	argTypes: {
-		showCustomSkipLinkTarget: {
-			control: { type: 'boolean' },
-		},
-	},
+	argTypes: {},
 	render: Template,
 };
 Basic.parameters = {
-	controls: { include: ['showCustomSkipLinkTarget'] },
 	docs: {
 		source: {
 			language: 'ts',
