@@ -151,7 +151,7 @@ describe('TitleStrategy', () => {
 		TestBed.configureTestingModule({
 			imports: [AppComponent],
 			providers: [
-				{ provide: LiveAnnouncer, useValue: { announce: jest.fn() } },
+				{ provide: LiveAnnouncer, useValue: { announce: vi.fn() } },
 				provideRouter(routes),
 				{ provide: Title, useValue: { setTitle: vi.fn(), getTitle: vi.fn().mockReturnValue('') } },
 				provideLuTitleStrategy({
@@ -308,9 +308,9 @@ describe('TitleStrategy readTitleByLiveAnnouncer enabled', () => {
 		TestBed.configureTestingModule({
 			imports: [AppComponent],
 			providers: [
-				{ provide: LiveAnnouncer, useValue: { announce: jest.fn() } },
+				{ provide: LiveAnnouncer, useValue: { announce: vi.fn() } },
 				provideRouter(routes),
-				{ provide: Title, useValue: { setTitle: jest.fn(), getTitle: jest.fn().mockReturnValue('') } },
+				{ provide: Title, useValue: { setTitle: vi.fn(), getTitle: vi.fn().mockReturnValue('') } },
 				provideLuTitleStrategy({
 					appTitle: () => 'BU',
 					translateService: () => new TranslateService(),
@@ -333,7 +333,7 @@ describe('TitleStrategy readTitleByLiveAnnouncer enabled', () => {
 
 	it('should announce updated title on subsequent navigation', async () => {
 		await fixture.whenStable();
-		jest.clearAllMocks();
+		vi.clearAllMocks();
 
 		await clickLink('.link-3');
 		await fixture.whenStable();
@@ -405,9 +405,9 @@ describe('TitleStrategy readTitleByLiveAnnouncer disabled', () => {
 		TestBed.configureTestingModule({
 			imports: [AppComponent],
 			providers: [
-				{ provide: LiveAnnouncer, useValue: { announce: jest.fn() } },
+				{ provide: LiveAnnouncer, useValue: { announce: vi.fn() } },
 				provideRouter(routes),
-				{ provide: Title, useValue: { setTitle: jest.fn(), getTitle: jest.fn().mockReturnValue('') } },
+				{ provide: Title, useValue: { setTitle: vi.fn(), getTitle: vi.fn().mockReturnValue('') } },
 				provideLuTitleStrategy({
 					appTitle: () => 'BU',
 					translateService: () => new TranslateService(),

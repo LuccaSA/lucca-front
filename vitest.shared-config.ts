@@ -4,6 +4,8 @@ import type { UserConfig } from 'vite';
 import tsconfigPaths from 'vite-tsconfig-paths';
 import { defineConfig, type Plugin } from 'vitest/config';
 
+process.env['TZ'] = 'UTC';
+
 /**
  * Resolves `describe(Xxx.name, ...)` into `describe('Xxx', ...)` after compilation.
  * This is semantically identical (X.name === 'X') and fixes the Vitest VS Code
@@ -37,6 +39,9 @@ export function createBaseConfig(projectRoot: string): UserConfig {
 			pool: 'threads',
 			globals: true,
 			environment: 'happy-dom',
+			env: {
+				TZ: 'UTC',
+			},
 			include: ['packages/**/src/**/*.spec.ts', 'packages/**/*.spec.ts', 'stories/**/*.spec.ts'],
 			setupFiles: [join(projectRoot, 'vitest.pre-setup.ts'), join(projectRoot, 'vitest.setup.ts')],
 			reporters: ['default'],

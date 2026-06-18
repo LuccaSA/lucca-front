@@ -10,8 +10,6 @@ import { afterEach, vi } from 'vitest';
 
 setupTestBed({ zoneless: false });
 
-process.env['TZ'] = 'UTC';
-
 expect.extend(toHaveNoViolations);
 
 afterEach(() => {
