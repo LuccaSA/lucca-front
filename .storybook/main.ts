@@ -1,8 +1,8 @@
-import type { StorybookConfig } from '@storybook/angular';
+import { StorybookConfig } from '@analogjs/storybook-angular';
+import viteTsConfigPaths from 'vite-tsconfig-paths';
+import { UserConfig, mergeConfig } from 'vite';
 
 import { dirname } from 'path';
-
-import MiniCssExtractPlugin from 'mini-css-extract-plugin';
 
 import { fileURLToPath } from 'url';
 
@@ -13,22 +13,20 @@ import { fileURLToPath } from 'url';
 function getAbsolutePath(value: string): any {
 	return dirname(fileURLToPath(import.meta.resolve(`${value}/package.json`)));
 }
+
 const config: StorybookConfig = {
-	stories: ['../stories/**/*.mdx', '../stories/**/*.stories.@(js|jsx|mjs|ts|tsx)'],
+	stories: ['../stories/**/*.stories.@(js|jsx|mjs|ts|tsx)'],
 	addons: [getAbsolutePath('@storybook/addon-a11y'), getAbsolutePath('@storybook/addon-docs'), getAbsolutePath('@storybook/addon-mcp')],
 	framework: {
-		name: '@storybook/angular',
-		options: { fastRefresh: !process.env['CI'] },
+		name: '@analogjs/storybook-angular',
+		options: {},
 	},
 	logLevel: process.env['CI'] ? 'error' : 'info',
 	staticDirs: ['./public'],
-	webpackFinal: async (config) => {
-		config.plugins?.push(
-			new MiniCssExtractPlugin({
-				filename: 'main.css',
-			}),
-		);
-		return config;
+	viteFinal: async (config: UserConfig) => {
+		return mergeConfig(config, {
+			plugins: [viteTsConfigPaths()],
+		});
 	},
 };
 export default config;
