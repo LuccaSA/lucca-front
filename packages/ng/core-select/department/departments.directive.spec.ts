@@ -54,7 +54,7 @@ describe('LuCoreSelectDepartmentsDirective', () => {
 
 	it('should emit the flattened total count without opening the panel', fakeAsync(() => {
 		let emittedCount: number | undefined;
-		directive.totalCount$.subscribe((count) => (emittedCount = count));
+		const subscription = directive.totalCount$.subscribe((count) => (emittedCount = count));
 
 		TestBed.flushEffects();
 		tick();
@@ -63,5 +63,25 @@ describe('LuCoreSelectDepartmentsDirective', () => {
 		expect(emittedCount).toBe(5);
 
 		httpTestingController.verify();
+		subscription.unsubscribe();
+	}));
+
+	it('should emit 0 instead of erroring when the tree request fails', fakeAsync(() => {
+		let emittedCount: number | undefined;
+		let errored = false;
+		const subscription = directive.totalCount$.subscribe({
+			next: (count) => (emittedCount = count),
+			error: () => (errored = true),
+		});
+
+		TestBed.flushEffects();
+		tick();
+		httpTestingController.expectOne(url).flush('failure', { status: 500, statusText: 'Server Error' });
+
+		expect(emittedCount).toBe(0);
+		expect(errored).toBe(false);
+
+		httpTestingController.verify();
+		subscription.unsubscribe();
 	}));
 });
