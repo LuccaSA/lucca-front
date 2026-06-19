@@ -161,7 +161,7 @@ export class LuMultiSelectPanelComponent<T> implements AfterViewInit, CoreSelect
 		}
 
 		this.panelRef.emitValue(this.selectedOptions);
-		setTimeout(() => this.panelRef.updatePosition());
+		afterNextRender(() => this.panelRef.updatePosition(), { injector: this.#injector });
 	}
 
 	protected initKeyManager(): void {
