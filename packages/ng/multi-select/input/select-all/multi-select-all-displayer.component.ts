@@ -1,4 +1,4 @@
-import { ChangeDetectionStrategy, Component, computed, ElementRef, inject, input, viewChild } from '@angular/core';
+import { afterNextRender, ChangeDetectionStrategy, Component, computed, ElementRef, inject, Injector, input, viewChild } from '@angular/core';
 import { toSignal } from '@angular/core/rxjs-interop';
 import { ChipComponent } from '@lucca-front/ng/chip';
 import { intlInputOptions } from '@lucca-front/ng/core';
@@ -39,6 +39,7 @@ import { MULTI_SELECT_WITH_SELECT_ALL_CONTEXT } from './select-all.models';
 export class LuMultiSelectAllDisplayerComponent<TValue> {
 	readonly selectAllContext = inject(MULTI_SELECT_WITH_SELECT_ALL_CONTEXT);
 	readonly select = inject<LuMultiSelectInputComponent<TValue>>(LuMultiSelectInputComponent);
+	#injector = inject(Injector);
 
 	readonly isFilled = computed(() => this.selectAllContext.mode() !== 'none');
 	readonly isIncludeMode = computed(() => this.selectAllContext.mode() === 'include');
@@ -54,9 +55,12 @@ export class LuMultiSelectAllDisplayerComponent<TValue> {
 		$event.stopPropagation();
 		$event.preventDefault();
 		this.select.updateValue(this.select.value?.filter((o) => o !== option) ?? [], true);
-		setTimeout(() => {
-			this.select.panelRef?.updatePosition();
-			this.inputElementRef().nativeElement.focus();
-		});
+		afterNextRender(
+			() => {
+				this.select.panelRef?.updatePosition();
+				this.inputElementRef().nativeElement.focus();
+			},
+			{ injector: this.#injector },
+		);
 	}
 }
