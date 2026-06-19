@@ -320,9 +320,15 @@ npx ts-node … --version 21.4.0 --zh-latest 21.4 --zh-id 21.3=<releaseId>
 Il est **opaque** (non déductible du repo, de git ou de npm) :
 
 1. MCP ZeroHeight `list-releases` (la source qui a initialisé la table) ; **ou**
-2. le **sélecteur de versions Prisme** : sélectionner une release met son ID dans l'URL sous la forme `/v/<releaseId>/` (accessible sans backoffice).
+2. le **sélecteur de versions Prisme** (accessible sans backoffice) — ouvrir le styleguide, choisir la release, lire l'ID dans l'URL sous la forme `/v/<releaseId>/` :
+
+   👉 **https://prisme.lucca.io/94310e217/** → menu des versions → sélectionner la mineure → l'URL devient `…/v/<ID>/…`.
+
+   (`94310e217` est le token de partage du styleguide, défini par `ZH_STYLEGUIDE_TOKEN` dans `version-config.ts`.)
 
 > Un simple fetch HTTP public ne suffit pas : la landing n'expose pas la table complète et l'API releases de ZeroHeight (`/api/styleguide/<id>/releases`) exige un token d'authentification (401).
+
+**✅ À faire dès qu'une version est publiée** : récupérer son ID (méthode ci-dessus) et l'ajouter dans `zh-release-ids.json` (clé `"major.minor"`). Une mineure déjà pinnée **ne déclenche jamais le garde-fou** — pinner de façon proactive évite d'avoir à passer `--zh-latest` / `--zh-id` (ou de répondre au prompt) aux régénérations suivantes.
 
 Côté consommateur, deux modèles :
 
