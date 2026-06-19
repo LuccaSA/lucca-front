@@ -1,5 +1,6 @@
 import { OverlayConfig, OverlayContainer } from '@angular/cdk/overlay';
 import {
+	afterNextRender,
 	booleanAttribute,
 	ChangeDetectorRef,
 	computed,
@@ -7,6 +8,7 @@ import {
 	ElementRef,
 	EventEmitter,
 	inject,
+	Injector,
 	input,
 	linkedSignal,
 	model,
@@ -50,6 +52,7 @@ export abstract class ALuSelectInputComponent<TOption, TValue> implements OnDest
 	public parentInput = inject(FILTER_PILL_INPUT_COMPONENT, { optional: true, skipSelf: true });
 	protected changeDetectorRef = inject(ChangeDetectorRef);
 	protected overlayContainerRef: HTMLElement = inject(OverlayContainer).getContainerElement();
+	readonly #injector = inject(Injector);
 
 	protected labelElement: HTMLElement | undefined = inject(SELECT_LABEL);
 	protected labelId: string = inject(SELECT_LABEL_ID);
@@ -259,15 +262,14 @@ export abstract class ALuSelectInputComponent<TOption, TValue> implements OnDest
 			if (isNotNil(options)) {
 				this.options$.next(options);
 				if (this.panelRef) {
-					// We have to put it in a setTimeout so it'll be triggered AFTER the DOM is updated and not right now,
-					// which is before the panel size has been modified by the arrival of the new options
-					const timeoutId = setTimeout(() => {
-						this.panelRef?.updatePosition();
-						this.updatePositionFn?.();
-						// If no fixes are found, last resort fix is here
-						// window.dispatchEvent(new Event('resize'));
-					});
-					onCleanup(() => clearTimeout(timeoutId));
+					const renderRef = afterNextRender(
+						() => {
+							this.panelRef?.updatePosition();
+							this.updatePositionFn?.();
+						},
+						{ injector: this.#injector },
+					);
+					onCleanup(() => renderRef.destroy());
 				}
 			}
 		});
@@ -380,21 +382,24 @@ export abstract class ALuSelectInputComponent<TOption, TValue> implements OnDest
 		 *
 		 * The only easy solution is this (or store yet another boolean like "isOpeningPanel" which is, imo, equally ugly.
 		 */
-		setTimeout(() => {
-			if (this.isPanelOpen) {
-				return;
-			}
+		afterNextRender(
+			() => {
+				if (this.isPanelOpen) {
+					return;
+				}
 
-			this.isPanelOpen$.next(true);
-			this.panelOpened.emit();
+				this.isPanelOpen$.next(true);
+				this.panelOpened.emit();
 
-			if (this.searchable) {
-				this.clueChanged(clue);
-			}
+				if (this.searchable) {
+					this.clueChanged(clue);
+				}
 
-			this._panelRef = this.buildPanelRef();
-			this.bindInputToPanelRefEvents();
-		});
+				this._panelRef = this.buildPanelRef();
+				this.bindInputToPanelRefEvents();
+			},
+			{ injector: this.#injector },
+		);
 	}
 
 	emitAddOption(): void {
