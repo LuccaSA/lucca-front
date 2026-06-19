@@ -1,5 +1,5 @@
 import { CdkDialogContainer } from '@angular/cdk/dialog';
-import { ChangeDetectionStrategy, Component, contentChild, Directive, ElementRef, inject, input, OnInit, Renderer2, ViewEncapsulation } from '@angular/core';
+import { afterNextRender, ChangeDetectionStrategy, Component, contentChild, Directive, ElementRef, inject, input, Renderer2, ViewEncapsulation } from '@angular/core';
 import { ButtonComponent } from '@lucca-front/ng/button';
 import { intlInputOptions } from '@lucca-front/ng/core';
 import { IconComponent } from '@lucca-front/ng/icon';
@@ -31,7 +31,7 @@ export class DialogHeaderSubtitle {}
 		class: 'dialog-inside-header',
 	},
 })
-export class DialogHeaderComponent implements OnInit {
+export class DialogHeaderComponent {
 	#ref = inject(LuDialogRef);
 
 	readonly intl = input(...intlInputOptions(LU_DIALOG_HEADER_TRANSLATIONS));
@@ -50,9 +50,9 @@ export class DialogHeaderComponent implements OnInit {
 
 	readonly optionalSubtitle = contentChild(DialogHeaderSubtitle);
 
-	ngOnInit(): void {
-		// Using setTimeout here to make sure this will be handled in the next Cd cycle, not the current one.
-		setTimeout(() => {
+	constructor() {
+		// Using afterNextRender here to make sure this will be handled in the next Cd cycle, not the current one.
+		afterNextRender(() => {
 			const header = this.#elementRef.nativeElement.querySelector('h1');
 			const id = header?.id || `lu-dialog-header-${nextId++}`;
 			if (header) {
