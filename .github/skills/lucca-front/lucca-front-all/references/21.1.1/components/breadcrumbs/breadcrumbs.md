@@ -27,7 +27,7 @@ import { BreadcrumbsLinkDirective, BreadcrumbsComponent } from '@lucca-front/ng/
 
 | Property | Binding name | Type | Default | Required | Transform | Description |
 |----------|-------------|------|---------|----------|-----------|-------------|
-| `intl` | `intl` | `unknown` | `...intlInputOptions(LU_BREADCRUMBS_TRANSLATIONS` | — | — | — |
+| `intl` | `intl` | `unknown` | — | — | — | — |
 | `disableCompact` | `disableCompact` | `boolean` | `false` | — | `booleanAttribute` | — |
 
 ## Related files

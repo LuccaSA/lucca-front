@@ -4,7 +4,7 @@
 
 ## 21.0.0
 
-Composant introduit (`LuInputClearerComponent`, `LuInputDisplayerDirective`, `LuInputDirective`).
+Composant introduit (`ClearFormatComponent`, `HeadingsComponent`, `LinkComponent`, `ListStyleToolbarComponent`, `RichTextPluginTagComponent`, `TextStyleComponent`, `TextStyleToolbarComponent`, `RichTextInputToolbarComponent`, `RichTextInputComponent`).
 
 ## Notes de release (ZeroHeight)
 

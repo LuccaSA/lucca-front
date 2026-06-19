@@ -13,7 +13,7 @@ Component selector : `lu-new-badge`
 import { NewBadgeComponent } from "@lucca-front/ng/new-badge";
 ```
 
-[Template](https://lucca-front.lucca.io/storybook/iframe.html?id=documentation-texts-newbadge-angular-basic--template)
+[Template](https://lucca-front.lucca.io/master/storybook/iframe.html?id=documentation-texts-newbadge-angular-basic--template)
 
 # HTML
 
@@ -23,4 +23,4 @@ import { NewBadgeComponent } from "@lucca-front/ng/new-badge";
 @forward '@lucca-front/scss/src/components/newBadge';
 ```
 
-[Basic](https://lucca-front.lucca.io/storybook/iframe.html?id=documentation-texts-newbadge-html-css-basic--basic)
+[Basic](https://lucca-front.lucca.io/master/storybook/iframe.html?id=documentation-texts-newbadge-html-css-basic--basic)

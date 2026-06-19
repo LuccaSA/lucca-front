@@ -19,6 +19,13 @@ import { MobilePushComponent } from '@lucca-front/ng/mobile-push';
 
 **Selector:** `lu-mobile-push`
 
+#### Outputs
+
+| Property | Binding name | Type |
+|----------|-------------|------|
+| `appStoreLinkClicked` | `appStoreLinkClicked` | `void` |
+| `googlePlayLinkClicked` | `googlePlayLinkClicked` | `void` |
+
 ## Related files
 
 - 📝 [Code & implementation](./mobile-push.component.md)

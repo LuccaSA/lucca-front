@@ -4,7 +4,7 @@
 
 ## 21.0.0
 
-Composant introduit (`DropdownActionComponent`, `DropdownGroupComponent`, `LuDropdownItemDirective`, `LuDropdownPanelComponent`, `LuDropdownTriggerDirective`).
+Composant introduit (`DropdownActionComponent`, `DropdownDividerComponent`, `DropdownGroupComponent`, `DropdownItemComponent`, `DropdownMenuComponent`, `LuDropdownItemDirective`, `LuDropdownPanelComponent`, `LuDropdownTriggerDirective`).
 
 ## Notes de release (ZeroHeight)
 

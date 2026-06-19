@@ -25,13 +25,7 @@ import { TextInputComponent } from '@lucca-front/ng/forms';
 	iconAItooltip="Donnée remplie automatiquement"
 	iconAIalt="Assistant IA"
 >
-	<lu-text-input
-		required
-		searchIcon="searchMagnifyingGlass"
-		type="text"
-		placeholder="Placeholder"
-		[(ngModel)]="example"
-	></lu-text-input>
+	<lu-text-input required placeholder="Placeholder" [(ngModel)]="example"></lu-text-input>
 </lu-form-field>
 <pr-story-model-display>{{ example }}</pr-story-model-display>
 ```
@@ -46,8 +40,6 @@ import { TextInputComponent } from '@lucca-front/ng/forms';
 >
 	<lu-text-input
 		required
-		searchIcon="searchMagnifyingGlass"
-		type="text"
 		placeholder="Placeholder"
 		[(ngModel)]="example"
 		mask="SS00 AAAA 0000 0000 0000 9999 9999 9999 99"
@@ -64,14 +56,7 @@ import { TextInputComponent } from '@lucca-front/ng/forms';
 	inlineMessageState="default"
 	counter="0"
 >
-	<lu-text-input
-		required
-		hasClearer
-		searchIcon="searchMagnifyingGlass"
-		placeholder="Placeholder"
-		type="password"
-		[(ngModel)]="example"
-	></lu-text-input>
+	<lu-text-input required hasClearer placeholder="Placeholder" type="password" [(ngModel)]="example"></lu-text-input>
 </lu-form-field>
 <pr-story-model-display>{{ example }}</pr-story-model-display>
 ```
@@ -86,9 +71,7 @@ import { TextInputComponent } from '@lucca-front/ng/forms';
 >
 	<lu-text-input
 		required
-		type="text"
 		placeholder="Placeholder"
-		searchIcon="searchMagnifyingGlass"
 		[prefix]="prefix"
 		[suffix]="suffix"
 		[(ngModel)]="example"

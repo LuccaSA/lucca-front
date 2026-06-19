@@ -29,6 +29,7 @@ import { SkeletonButtonComponent, SkeletonDataTableComponent, SkeletonFieldCompo
 |----------|-------------|------|---------|----------|-----------|-------------|
 | `dataTableBodyOnly` | `dataTableBodyOnly` | `boolean` | `false` | — | `booleanAttribute` | — |
 | `cols` | `cols` | `number` | `5` | — | — | — |
+| `colsAlign` | `colsAlign` | `Record<number, ColAlignDataTable>` | — | — | — | — |
 | `rows` | `rows` | `number` | `8` | — | — | — |
 
 ### SkeletonFieldComponent (component)
@@ -63,11 +64,18 @@ import { SkeletonButtonComponent, SkeletonDataTableComponent, SkeletonFieldCompo
 |----------|-------------|------|---------|----------|-----------|-------------|
 | `tableBodyOnly` | `tableBodyOnly` | `boolean` | `false` | — | `booleanAttribute` | — |
 | `cols` | `cols` | `number` | `5` | — | — | — |
+| `colsAlign` | `colsAlign` | `Record<number, ColAlignIndexTable>` | — | — | — | — |
 | `rows` | `rows` | `number` | `8` | — | — | — |
 
 ### SkeletonResourceCardComponent (component)
 
 **Selector:** `lu-skeleton-resource-card`
+
+#### Inputs
+
+| Property | Binding name | Type | Default | Required | Transform | Description |
+|----------|-------------|------|---------|----------|-----------|-------------|
+| `descriptionLines` | `descriptionLines` | `number` | `0` | — | `numberAttribute` | — |
 
 ### SkeletonTableComponent (component)
 
@@ -79,12 +87,13 @@ import { SkeletonButtonComponent, SkeletonDataTableComponent, SkeletonFieldCompo
 |----------|-------------|------|---------|----------|-----------|-------------|
 | `tableBodyOnly` | `tableBodyOnly` | `boolean` | `false` | — | `booleanAttribute` | — |
 | `cols` | `cols` | `number` | `5` | — | — | — |
+| `colsAlign` | `colsAlign` | `Record<number, ColAlignTable>` | — | — | — | — |
 | `rows` | `rows` | `number` | `8` | — | — | — |
 
 ## Related files
 
 - 📝 [Code & implementation](./skeleton.component.md)
-
+- 🎨 [Design guidelines](./design/_index.md)
 - 🎯 [Figma design tokens](./skeleton.figma.md)
 - 📖 [Storybook documentation](https://lucca-front.lucca.io/v21.2.2/storybook/?path=/docs/documentation-loaders-skeleton--docs)
 - 📋 [Changelog](./skeleton.changelog.md)

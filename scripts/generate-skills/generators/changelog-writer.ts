@@ -18,17 +18,17 @@ import { extractPackageAPI } from '../collectors/ast-extractor';
 import { diffPackageApi } from '../collectors/api-diff';
 import { resolveVersion, listStableTags, compareTags } from '../version-config';
 
-/** Run-level cache: each (ngPackage, tag) API is extracted once, reused across target versions. */
+/** Run-level cache: each (ngPackage, selectors, tag) API is extracted once, reused across target versions. */
 const apiCache = new Map<string, PackageAPI | null>();
 
-function getApi(ngPackage: string, tag: string): PackageAPI | null {
-	const key = `${ngPackage}@${tag}`;
+function getApi(ngPackage: string, tag: string, selectorFilter?: string[]): PackageAPI | null {
+	const key = `${ngPackage}|${(selectorFilter ?? []).join(',')}@${tag}`;
 	const cached = apiCache.get(key);
 	if (cached !== undefined) return cached;
 
 	let api: PackageAPI | null = null;
 	try {
-		api = extractPackageAPI(ngPackage, resolveVersion(tag), true); // silent: tag-walk misses are expected (component not yet introduced)
+		api = extractPackageAPI(ngPackage, resolveVersion(tag), true, selectorFilter); // silent: tag-walk misses are expected (component not yet introduced)
 	} catch {
 		api = null;
 	}
@@ -40,6 +40,8 @@ export interface ChangelogInput {
 	slug: string;
 	/** ng package name, or null for CSS-only components (no API to diff). */
 	ngPackage: string | null;
+	/** Restrict the diff to these selectors (scope one component out of a multi-component package). */
+	ngSelectors?: string[];
 	version: VersionConfig;
 	/** Optional ZeroHeight prose changelog (release-notes layer). */
 	zhProse?: string | null;
@@ -50,7 +52,7 @@ export interface ChangelogInput {
  * (no API history and no ZH prose).
  */
 export function buildComponentChangelog(input: ChangelogInput): string | null {
-	const { slug, ngPackage, version, zhProse } = input;
+	const { slug, ngPackage, ngSelectors, version, zhProse } = input;
 
 	const entries: { version: string; lines: string[] }[] = [];
 
@@ -61,7 +63,7 @@ export function buildComponentChangelog(input: ChangelogInput): string | null {
 		let prevApi: PackageAPI | null = null;
 		let seen = false;
 		for (const tag of tags) {
-			const api = getApi(ngPackage, tag);
+			const api = getApi(ngPackage, tag, ngSelectors);
 			if (!api && !seen) continue; // component not introduced yet at this tag
 
 			const delta = diffPackageApi(prevApi, api);

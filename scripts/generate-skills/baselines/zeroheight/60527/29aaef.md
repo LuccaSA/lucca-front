@@ -13,7 +13,7 @@ Component selector : `lu-horizontal-navigation`
 import { HorizontalNavigationComponent, HorizontalNavigationLinkDirective } from '@lucca-front/ng/horizontal-navigation';
 ```
 
-[Basic](https://lucca-front.lucca.io/storybook/iframe.html?id=documentation-navigation-horizontalnavigation-angular--basic)
+[Basic](https://lucca-front.lucca.io/master/storybook/iframe.html?id=documentation-navigation-horizontalnavigation-angular--basic)
 
 # HTML
 
@@ -28,14 +28,14 @@ import { HorizontalNavigationComponent, HorizontalNavigationLinkDirective } from
 
 <tab-title>**Base**</tab-title>
 
-[Basic](https://lucca-front.lucca.io/storybook/iframe.html?id=documentation-navigation-horizontalnavigation-html-css-basic--basic)
+[Basic](https://lucca-front.lucca.io/master/storybook/iframe.html?id=documentation-navigation-horizontalnavigation-html-css-basic--basic)
 
 </tab>
 <tab>
 
 <tab-title>**Compteur**</tab-title>
 
-[Count](https://lucca-front.lucca.io/storybook/iframe.html?id=documentation-navigation-horizontalnavigation-html-css-count--count)
+[Count](https://lucca-front.lucca.io/master/storybook/iframe.html?id=documentation-navigation-horizontalnavigation-html-css-count--count)
 
 </tab>
 <tab>
@@ -44,14 +44,14 @@ import { HorizontalNavigationComponent, HorizontalNavigationLinkDirective } from
 
 Ce menu intègre un `container` pour s'aligner horizontalement au contenu de la page.
 
-[Container](https://lucca-front.lucca.io/storybook/iframe.html?id=documentation-navigation-horizontalnavigation-html-css-container--container)
+[Container](https://lucca-front.lucca.io/master/storybook/iframe.html?id=documentation-navigation-horizontalnavigation-html-css-container--container)
 
 </tab>
 <tab>
 
 <tab-title>**Scrollbox**</tab-title>
 
-[Scrollbox](https://lucca-front.lucca.io/storybook/iframe.html?id=documentation-navigation-horizontalnavigation-html-css-scrollbox--scrollbox)
+[Scrollbox](https://lucca-front.lucca.io/master/storybook/iframe.html?id=documentation-navigation-horizontalnavigation-html-css-scrollbox--scrollbox)
 
 </tab>
 </tabs>

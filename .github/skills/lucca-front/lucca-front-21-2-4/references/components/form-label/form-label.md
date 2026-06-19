@@ -22,7 +22,7 @@ import { FormLabelComponent } from '@lucca-front/ng/form-label';
 
 | Property | Binding name | Type | Default | Required | Transform | Description |
 |----------|-------------|------|---------|----------|-----------|-------------|
-| `intl` | `intl` | `unknown` | `...intlInputOptions(LU_FORM_LABEL_TRANSLATIONS` | — | — | — |
+| `intl` | `intl` | `unknown` | — | — | — | — |
 | `required` | `required` | `boolean` | `false` | — | `booleanAttribute` | Marque le champ comme obligatoire. |
 | `error` | `error` | `boolean` | `false` | — | `booleanAttribute` | Applique l’état d’erreur au label. |
 | `tooltip` | `tooltip` | `string \| SafeHtml \| null` | `null` | — | — | Affiche une icône (?) associée à une info-bulle. |

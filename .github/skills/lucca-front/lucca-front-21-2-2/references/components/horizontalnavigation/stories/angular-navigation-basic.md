@@ -1,9 +1,7 @@
 # horizontalnavigation — Navigation basic _(Angular)_
 
 ```js
-import { provideRouter } from '@angular/router';
 import { HorizontalNavigationComponent, HorizontalNavigationLinkDirective } from '@lucca-front/ng/horizontal-navigation';
-import { NumericBadgeComponent } from '@lucca-front/ng/numeric-badge';
 ```
 
 ```html

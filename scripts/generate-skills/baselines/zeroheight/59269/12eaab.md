@@ -245,4 +245,4 @@ N’employons pas de ton encourageant ni décontracté, restons très direct.
 
 Les toasts servent à afficher une information ou un callback dans un coin de l'application.
 
-[Basic](https://lucca-front.lucca.io/storybook/iframe.html?id=documentation-overlays-toasts--basic)
+[Basic](https://lucca-front.lucca.io/master/storybook/iframe.html?id=documentation-overlays-toasts--basic)

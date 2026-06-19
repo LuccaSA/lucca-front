@@ -3,7 +3,7 @@
 ## Import
 
 ```typescript
-import { FileEntryComponent, SingleFileUploadComponent } from '@lucca-front/ng/file-upload';
+import { FileDropzoneComponent, FileEntryComponent, MultiFileUploadComponent, SingleFileUploadComponent } from '@lucca-front/ng/file-upload';
 ```
 
 ## Basic Usage
@@ -13,6 +13,10 @@ import { FileEntryComponent, SingleFileUploadComponent } from '@lucca-front/ng/f
 ```
 
 ## API Reference
+
+### FileDropzoneComponent (component)
+
+**Selector:** `lu-file-dropzone`
 
 ### FileEntryComponent (component)
 
@@ -32,6 +36,17 @@ import { FileEntryComponent, SingleFileUploadComponent } from '@lucca-front/ng/f
 | `password` | `password` | `string` | `''` | — | — | — |
 | `media` | `media` | `boolean` | `false` | — | `booleanAttribute` | — |
 | `previewUrl` | `previewUrl` | `string` | `''` | — | — | — |
+
+#### Outputs
+
+| Property | Binding name | Type |
+|----------|-------------|------|
+| `passwordChange` | `passwordChange` | `void` |
+| `deleteFile` | `deleteFile` | `void` |
+
+### MultiFileUploadComponent (component)
+
+**Selector:** `lu-multi-file-upload`
 
 ### SingleFileUploadComponent (component)
 

@@ -3,24 +3,24 @@
 ## Import
 
 ```typescript
-import { LuInputClearerComponent, LuInputDisplayerDirective, LuInputDirective } from '@lucca-front/ng/input';
+import { TextareaInputComponent } from '@lucca-front/ng/forms';
 ```
 
 ## API Reference
 
-### LuInputClearerComponent (component)
+### TextareaInputComponent (component)
 
-**Selector:** `lu-input-clearer`
+**Selector:** `lu-textarea-input`
 
-**exportAs:** `luClearer`
+#### Inputs
 
-### LuInputDisplayerDirective (directive)
-
-**Selector:** `[luDisplayer]`
-
-### LuInputDirective (directive)
-
-**Selector:** `[luInput]`
+| Property | Binding name | Type | Default | Required | Transform | Description |
+|----------|-------------|------|---------|----------|-----------|-------------|
+| `placeholder` | `placeholder` | `string` | `''` | — | — | Applique un placeholder au champ. |
+| `rows` | `rows` | `number` | `3` | — | — | — |
+| `autoResize` | `autoResize` | `boolean` | `false` | — | `booleanAttribute` | — |
+| `autoResizeScrollIntoView` | `autoResizeScrollIntoView` | `boolean` | `false` | — | `booleanAttribute` | — |
+| `disableSpellcheck` | `disableSpellcheck` | `boolean` | `false` | — | `booleanAttribute` | — |
 
 ## Related files
 

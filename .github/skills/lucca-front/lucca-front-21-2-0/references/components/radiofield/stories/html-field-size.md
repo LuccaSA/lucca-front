@@ -1,7 +1,7 @@
 # radiofield — Field size _(HTML/CSS)_
 
 ```css
-@forward '@lucca-front/scss/src/components/form-field';
+@forward '@lucca-front/scss/src/components/forms';
 @forward '@lucca-front/scss/src/components/formLabel';
 @forward '@lucca-front/scss/src/components/inlineMessage';
 @forward '@lucca-front/scss/src/components/radioField';

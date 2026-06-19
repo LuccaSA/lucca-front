@@ -12,6 +12,12 @@ import { LuSkipLinksComponent } from '@lucca-front/ng/a11y';
 
 **Selector:** `lu-skip-links`
 
+#### Inputs
+
+| Property | Binding name | Type | Default | Required | Transform | Description |
+|----------|-------------|------|---------|----------|-----------|-------------|
+| `intl` | `intl` | `unknown` | — | — | — | — |
+
 ## Related files
 
 - 📝 [Code & implementation](./skiplinks.component.md)

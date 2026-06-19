@@ -30,7 +30,7 @@ import { LuTooltipPanelComponent, LuTooltipTriggerDirective } from '@lucca-front
 | `luTooltipPosition` | `luTooltipPosition` | `LuPopoverPosition` | `'above'` | — | — | — |
 | `luTooltipWhenEllipsis` | `luTooltipWhenEllipsis` | `boolean` | `false` | — | `booleanAttribute` | — |
 | `luTooltipAnchor` | `luTooltipAnchor` | `FlexibleConnectedPositionStrategyOrigin` | `this.#host` | — | — | — |
-| `id` | `id` | `string` | ``${this.#host.nativeElement.tagName.toLowerCase(` | — | — | — |
+| `id` | `id` | `string` | ``${this.#host.nativeElement.tagName.toLowerCase()}-tooltip-${nextId++}`` | — | — | — |
 
 ## Related files
 

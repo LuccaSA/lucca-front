@@ -12,6 +12,13 @@ import { LuSimpleSelectInputComponent, LuSelectPanelComponent } from '@lucca-fro
 
 **Selector:** `lu-simple-select`
 
+#### Inputs
+
+| Property | Binding name | Type | Default | Required | Transform | Description |
+|----------|-------------|------|---------|----------|-----------|-------------|
+| `intl` | `intl` | `unknown` | — | — | — | — |
+| `autocomplete` | `autocomplete` | `AutoFill` | `'off'` | — | — | — |
+
 ### LuSelectPanelComponent (component)
 
 **Selector:** `lu-select-panel`

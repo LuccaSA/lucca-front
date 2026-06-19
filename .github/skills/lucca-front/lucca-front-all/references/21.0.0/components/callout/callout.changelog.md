@@ -4,7 +4,7 @@
 
 ## 21.0.0
 
-Composant introduit (`CalloutActionsComponent`, `CalloutDisclosureComponent`, `CalloutFeedbackListComponent`, `CalloutPopoverComponent`, `CalloutComponent`).
+Composant introduit (`CalloutActionsComponent`, `CalloutFeedbackItemDescriptionDirective`, `CalloutFeedbackItemComponent`, `CalloutFeedbackListComponent`, `CalloutComponent`).
 
 ## Notes de release (ZeroHeight)
 

@@ -3,7 +3,7 @@
 ## Import
 
 ```typescript
-import { CommentBlockComponent, CommentComponent } from '@lucca-front/ng/comment';
+import { CommentBlockComponent, CommentChatComponent, CommentComponent } from '@lucca-front/ng/comment';
 ```
 
 ## Basic Usage
@@ -27,7 +27,12 @@ import { CommentBlockComponent, CommentComponent } from '@lucca-front/ng/comment
 | `small` | `small` | `boolean` | `false` | — | `booleanAttribute` | Modifie la taille du composant. |
 | `chatAnswer` | `chatAnswer` | `boolean` | `false` | — | `booleanAttribute` | — |
 | `authorName` | `authorName` | `PortalContent` | — | — | — | — |
+| `avatar` | `avatar` | `TemplateRef<unknown>` | — | — | — | — |
 | `size` | `size` | `'S' \| 'M'` | — | — | — | — |
+
+### CommentChatComponent (component)
+
+**Selector:** `lu-comment-chat`
 
 ### CommentComponent (component)
 

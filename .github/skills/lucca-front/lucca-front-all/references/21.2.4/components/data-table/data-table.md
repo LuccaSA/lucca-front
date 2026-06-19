@@ -3,7 +3,7 @@
 ## Import
 
 ```typescript
-import { DataTableBodyComponent, DataTableRowCellHeaderComponent, DataTableRowCellComponent, DataTableHeadComponent, DataTableRowComponent, DataTableComponent } from '@lucca-front/ng/data-table';
+import { DataTableBodyComponent, DataTableRowCellHeaderComponent, DataTableRowCellComponent, DataTableFootComponent, DataTableHeadComponent, DataTableRowComponent, DataTableComponent } from '@lucca-front/ng/data-table';
 ```
 
 ## Basic Usage
@@ -19,13 +19,49 @@ import { DataTableBodyComponent, DataTableRowCellHeaderComponent, DataTableRowCe
 
 **Selector:** `tbody[luDataTableBody]`
 
+#### Inputs
+
+| Property | Binding name | Type | Default | Required | Transform | Description |
+|----------|-------------|------|---------|----------|-----------|-------------|
+| `group` | `group` | `PortalContent \| null` | `null` | — | — | — |
+| `groupButtonAlt` | `groupButtonAlt` | `string \| null` | `null` | — | — | Texte alternatif restitué au focus de l’action sur le groupe. |
+
+#### Models (two-way binding)
+
+| Property | Type | Required |
+|----------|------|----------|
+| `expanded` | `unknown` | — |
+
 ### DataTableRowCellHeaderComponent (component)
 
 **Selector:** `th[luDataTableCell]`
 
+#### Inputs
+
+| Property | Binding name | Type | Default | Required | Transform | Description |
+|----------|-------------|------|---------|----------|-----------|-------------|
+| `fixedWidth` | `fixedWidth` | `string \| null` | `null` | — | — | — |
+| `inlineSize` | `inlineSize` | `string \| null` | `null` | — | — | Modifie la largeur d’une colonne lorsque layoutFixed est activé. |
+
+#### Models (two-way binding)
+
+| Property | Type | Required |
+|----------|------|----------|
+| `sort` | `null | 'none' | 'ascending' | 'descending'` | — |
+
 ### DataTableRowCellComponent (component)
 
 **Selector:** `td[luDataTableCell]`
+
+#### Inputs
+
+| Property | Binding name | Type | Default | Required | Transform | Description |
+|----------|-------------|------|---------|----------|-----------|-------------|
+| `actions` | `actions` | `boolean` | `false` | — | `booleanAttribute` | — |
+
+### DataTableFootComponent (component)
+
+**Selector:** `tfoot[luDataTableFoot]`
 
 ### DataTableHeadComponent (component)
 
@@ -45,8 +81,15 @@ import { DataTableBodyComponent, DataTableRowCellHeaderComponent, DataTableRowCe
 
 | Property | Binding name | Type | Default | Required | Transform | Description |
 |----------|-------------|------|---------|----------|-----------|-------------|
+| `intl` | `intl` | `unknown` | — | — | — | — |
 | `selectedLabel` | `selectedLabel` | `string \| null` | `null` | — | — | Texte alternatif restitué à la sélection d’une ligne. |
 | `disabled` | `disabled` | `boolean` | `false` | — | `booleanAttribute` | — |
+
+#### Models (two-way binding)
+
+| Property | Type | Required |
+|----------|------|----------|
+| `selected` | `boolean` | — |
 
 ### DataTableComponent (component)
 
@@ -63,6 +106,7 @@ import { DataTableBodyComponent, DataTableRowCellHeaderComponent, DataTableRowCe
 | `nested` | `nested` | `boolean` | `false` | — | `booleanAttribute` | — |
 | `drag` | `drag` | `boolean` | `false` | — | `booleanAttribute` | — |
 | `noOverflow` | `noOverflow` | `boolean` | `false` | — | `booleanAttribute` | Désactive le défilement horizontal du tableau. Celui-ci prendra alors la place nécessaire pour afficher tout son contenu… |
+| `responsive` | `responsive` | `ResponsiveConfig<'layoutFixed', true>` | — | — | — | — |
 | `verticalAlign` | `verticalAlign` | `null \| 'top' \| 'middle' \| 'bottom'` | `null` | — | — | Aligne le contenu des cellules verticalement. |
 | `stickyColsStart` | `stickyColsStart` | `number` | `0` | — | `numberAttribute` | Nombre de colonnes figées depuis la gauche. Non compatible avec l’usage de colspan. |
 | `stickyColsEnd` | `stickyColsEnd` | `number` | `0` | — | `numberAttribute` | Nombre de colonnes figées depuis la droite. Non compatible avec l’usage de colspan. |

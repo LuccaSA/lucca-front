@@ -4,7 +4,7 @@
 
 ## 21.0.0
 
-Composant introduit (`DataTableBodyComponent`, `DataTableRowCellHeaderComponent`, `DataTableRowCellComponent`, `DataTableHeadComponent`, `DataTableRowComponent`, `DataTableComponent`).
+Composant introduit (`DataTableBodyComponent`, `DataTableRowCellHeaderComponent`, `DataTableRowCellComponent`, `DataTableFootComponent`, `DataTableHeadComponent`, `DataTableRowComponent`, `DataTableComponent`).
 
 ## Notes de release (ZeroHeight)
 

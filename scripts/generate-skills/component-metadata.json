@@ -5,6 +5,12 @@
 	"animations": {
 		"zeroheightPagePath": "85c178"
 	},
+	"api-select": {
+		"ngPackageOverride": "api",
+		"ngSelectors": [
+			"lu-api-select"
+		]
+	},
 	"app-layout": {
 		"zeroheightPagePath": "2615fa",
 		"figmaNodeIds": [
@@ -28,7 +34,10 @@
 			"pr-Avatar",
 			"pr-AvatarWrapper (v17.3)"
 		],
-		"ngPackageOverride": "user"
+		"ngPackageOverride": "user",
+		"ngSelectors": [
+			"lu-user-picture"
+		]
 	},
 	"box": {
 		"zeroheightPagePath": "1926ca"
@@ -72,14 +81,30 @@
 			"24071:83910"
 		],
 		"figmaName": "pr-Calendar",
-		"ngPackageOverride": "date"
+		"ngPackageOverride": "date",
+		"ngSelectors": [
+			"lu-calendar"
+		]
+	},
+	"calendar2": {
+		"ngPackageOverride": "date2",
+		"ngSelectors": [
+			"lu-calendar2"
+		]
 	},
 	"callout": {
 		"zeroheightPagePath": "64c8d8",
 		"figmaNodeIds": [
 			"5882:32057"
 		],
-		"figmaName": "pr-Callout"
+		"figmaName": "pr-Callout",
+		"ngSelectors": [
+			"lu-callout",
+			"lu-callout-actions",
+			"ul[lu-callout-feedback-list]",
+			"lu-feedback-item-description",
+			"li[lu-callout-feedback-item]"
+		]
 	},
 	"callout-disclosure": {
 		"zeroheightPagePath": "64c8d8",
@@ -87,7 +112,10 @@
 			"14686:61370"
 		],
 		"figmaName": "pr-CalloutDisclosure",
-		"ngPackageOverride": "callout"
+		"ngPackageOverride": "callout",
+		"ngSelectors": [
+			"lu-callout-disclosure"
+		]
 	},
 	"callout-popover": {
 		"zeroheightPagePath": "64c8d8",
@@ -95,7 +123,10 @@
 			"14695:2444"
 		],
 		"figmaName": "pr-CalloutPopover",
-		"ngPackageOverride": "callout"
+		"ngPackageOverride": "callout",
+		"ngSelectors": [
+			"lu-callout-popover"
+		]
 	},
 	"card": {
 		"zeroheightPagePath": "878482"
@@ -111,7 +142,10 @@
 			"pr-Checkbox",
 			"pr-CheckboxFieldset"
 		],
-		"ngPackageOverride": "form-field"
+		"ngPackageOverride": "forms",
+		"ngSelectors": [
+			"lu-checkbox-input"
+		]
 	},
 	"chip": {
 		"zeroheightPagePath": "3960bc",
@@ -129,6 +163,17 @@
 	},
 	"code": {
 		"zeroheightPagePath": "85d53c"
+	},
+	"color": {
+		"ngSelectors": [
+			"lu-color"
+		]
+	},
+	"color-input": {
+		"ngPackageOverride": "forms",
+		"ngSelectors": [
+			"lu-color-input"
+		]
 	},
 	"color-picker": {
 		"zeroheightPagePath": "16e1d1",
@@ -154,13 +199,47 @@
 	"container": {
 		"zeroheightPagePath": "453b4f"
 	},
+	"core-select-department": {
+		"ngPackageOverride": "core-select/department",
+		"ngSelectors": [
+			"lu-simple-select[departments]"
+		]
+	},
+	"core-select-establishment": {
+		"ngPackageOverride": "core-select/establishment",
+		"ngSelectors": [
+			"lu-simple-select[establishments]"
+		]
+	},
+	"core-select-job-qualification": {
+		"ngPackageOverride": "core-select/job-qualification",
+		"ngSelectors": [
+			"lu-simple-select[jobQualifications]"
+		]
+	},
+	"core-select-occupation-category": {
+		"ngPackageOverride": "core-select/occupation-category",
+		"ngSelectors": [
+			"lu-simple-select[occupationCategories]"
+		]
+	},
+	"core-select-user": {
+		"ngPackageOverride": "core-select/user",
+		"ngSelectors": [
+			"lu-simple-select[users]",
+			"[luUserOption]"
+		]
+	},
 	"data-presentation": {
 		"zeroheightPagePath": "02bfb1",
 		"figmaNodeIds": [
 			"34358:99807"
 		],
 		"figmaName": "pr-DataPresentation (v21.1)  🎉",
-		"ngPackageOverride": "form-field"
+		"ngPackageOverride": "form-field",
+		"ngSelectors": [
+			"lu-data-presentation"
+		]
 	},
 	"data-table": {
 		"zeroheightPagePath": "4263a5",
@@ -175,7 +254,10 @@
 			"6119:38876"
 		],
 		"figmaName": "pr-DatePicker",
-		"ngPackageOverride": "date2"
+		"ngPackageOverride": "date2",
+		"ngSelectors": [
+			"lu-date-input"
+		]
 	},
 	"daterangeinput": {
 		"zeroheightPagePath": "00bf9b",
@@ -183,7 +265,22 @@
 			"24071:83969"
 		],
 		"figmaName": "pr-DateRangePicker (v19.1)",
-		"ngPackageOverride": "date2"
+		"ngPackageOverride": "date2",
+		"ngSelectors": [
+			"lu-date-range-input"
+		]
+	},
+	"department-select": {
+		"ngPackageOverride": "department",
+		"ngSelectors": [
+			"lu-department-select"
+		]
+	},
+	"departmentselect": {
+		"ngPackageOverride": "department",
+		"ngSelectors": [
+			"lu-department-select"
+		]
 	},
 	"dialog": {
 		"zeroheightPagePath": "841b0b",
@@ -224,7 +321,10 @@
 			"8221:36924"
 		],
 		"figmaName": "pr-DurationPicker",
-		"ngPackageOverride": "time"
+		"ngPackageOverride": "time",
+		"ngSelectors": [
+			"lu-duration-picker"
+		]
 	},
 	"empty-state": {
 		"zeroheightPagePath": "49b0ef",
@@ -235,10 +335,26 @@
 		"figmaAliases": [
 			"pr-EmptyStateFull",
 			"pr-EmptyStateSection"
+		],
+		"ngSelectors": [
+			"lu-empty-state-page",
+			"lu-empty-state-page-illustration"
 		]
 	},
 	"errorpage": {
 		"zeroheightPagePath": "1622d2"
+	},
+	"establishment-select": {
+		"ngPackageOverride": "establishment",
+		"ngSelectors": [
+			"lu-establishment-select"
+		]
+	},
+	"establishmentselect": {
+		"ngPackageOverride": "establishment",
+		"ngSelectors": [
+			"lu-establishment-select"
+		]
 	},
 	"fancy-dialog": {
 		"zeroheightPagePath": "32b1a9",
@@ -257,7 +373,22 @@
 			"35511:3867"
 		],
 		"figmaName": "pr-Fieldset",
-		"ngPackageOverride": "form-field"
+		"ngPackageOverride": "forms",
+		"ngSelectors": [
+			"lu-fieldset"
+		]
+	},
+	"file-dropzone": {
+		"ngPackageOverride": "file-upload",
+		"ngSelectors": [
+			"lu-file-dropzone"
+		]
+	},
+	"filedropzone": {
+		"ngPackageOverride": "file-upload",
+		"ngSelectors": [
+			"lu-file-dropzone"
+		]
 	},
 	"fileentry": {
 		"zeroheightPagePath": "8282a5",
@@ -296,12 +427,28 @@
 		],
 		"figmaName": "pr-Footer"
 	},
+	"form": {
+		"ngSelectors": [
+			"form[luForm]"
+		]
+	},
 	"form-field": {
 		"zeroheightPagePath": "810797",
 		"figmaNodeIds": [
 			"28461:196506"
 		],
-		"figmaName": "pr-FormField"
+		"figmaName": "pr-FormField",
+		"ngSelectors": [
+			"lu-form-field",
+			"[luInput]",
+			"[luPresentationDisplay]",
+			"[luPresentationDisplayDefault]"
+		]
+	},
+	"form-header": {
+		"ngSelectors": [
+			"lu-form-header]"
+		]
 	},
 	"form-label": {
 		"zeroheightPagePath": "3491a2"
@@ -361,7 +508,10 @@
 			"29856:17750"
 		],
 		"figmaName": "pr-InputFramed (v20.1)",
-		"ngPackageOverride": "input"
+		"ngPackageOverride": "form-field",
+		"ngSelectors": [
+			"lu-input-framed"
+		]
 	},
 	"link": {
 		"zeroheightPagePath": "95303b",
@@ -402,8 +552,7 @@
 		"figmaNodeIds": [
 			"8399:38417"
 		],
-		"figmaName": "pr-MobileNavigation",
-		"ngPackageOverride": "mobile-push"
+		"figmaName": "pr-MobileNavigation"
 	},
 	"modal": {
 		"zeroheightPagePath": "4068ed"
@@ -421,7 +570,10 @@
 			"23179:39143"
 		],
 		"figmaName": "pr-MultilanguageTextfield",
-		"ngPackageOverride": "input"
+		"ngPackageOverride": "forms",
+		"ngSelectors": [
+			"lu-multilanguage-input"
+		]
 	},
 	"newbadge": {
 		"zeroheightPagePath": "36bcdf",
@@ -429,6 +581,18 @@
 			"8174:35724"
 		],
 		"figmaName": "pr-NewBadge"
+	},
+	"number-format-input": {
+		"ngPackageOverride": "forms",
+		"ngSelectors": [
+			"lu-number-format-input"
+		]
+	},
+	"number-input": {
+		"ngPackageOverride": "forms",
+		"ngSelectors": [
+			"lu-number-input"
+		]
 	},
 	"numbers": {
 		"zeroheightPagePath": "49fa5a"
@@ -442,7 +606,10 @@
 	},
 	"onboarding-empty-state": {
 		"zeroheightPagePath": "9490c7",
-		"ngPackageOverride": "empty-state"
+		"ngPackageOverride": "empty-state",
+		"ngSelectors": [
+			"lu-empty-state-page"
+		]
 	},
 	"pageheader": {
 		"zeroheightPagePath": "6598e9",
@@ -464,7 +631,7 @@
 			"18201:22261"
 		],
 		"figmaName": "pr-PhoneNumberField",
-		"ngPackageOverride": "input"
+		"ngPackageOverride": "forms/phone-number-input"
 	},
 	"plg-push": {
 		"zeroheightPagePath": "6035eb",
@@ -501,7 +668,11 @@
 			"pr-Radio",
 			"pr-RadioFieldset"
 		],
-		"ngPackageOverride": "form-field"
+		"ngPackageOverride": "forms",
+		"ngSelectors": [
+			"lu-radio-group-input",
+			"lu-radio"
+		]
 	},
 	"readmore": {
 		"zeroheightPagePath": "5054f0",
@@ -528,7 +699,12 @@
 			"6946:36398"
 		],
 		"figmaName": "pr-RichTextfield (v19.3)",
-		"ngPackageOverride": "input"
+		"ngPackageOverride": "forms/rich-text-input"
+	},
+	"scroll": {
+		"ngSelectors": [
+			"[luScroll]"
+		]
 	},
 	"scrollbox": {
 		"zeroheightPagePath": "866ad0",
@@ -542,7 +718,16 @@
 	},
 	"section-empty-state": {
 		"zeroheightPagePath": "97ca09",
-		"ngPackageOverride": "empty-state"
+		"ngPackageOverride": "empty-state",
+		"ngSelectors": [
+			"lu-empty-state-section"
+		]
+	},
+	"segmented-control-tabs": {
+		"ngSelectors": [
+			"lu-segmented-control-tabs",
+			"lu-segmented-control-tabs-panel"
+		]
 	},
 	"segmentedcontrol": {
 		"zeroheightPagePath": "88f854",
@@ -550,6 +735,17 @@
 			"17121:6916"
 		],
 		"figmaName": "pr-SegmentedControl"
+	},
+	"select-templating": {
+		"ngPackageOverride": "core-select",
+		"ngSelectors": [
+			"[luOption]",
+			"[luOptionGroup]",
+			"[luDisabledOption]",
+			"[luSelectPanelHeader]",
+			"lu-simple-select[totalCount]",
+			"lu-simple-select[noClue]"
+		]
 	},
 	"side-navigation": {
 		"zeroheightPagePath": "160093"
@@ -613,7 +809,10 @@
 			"20183:78344"
 		],
 		"figmaName": "pr-Switch",
-		"ngPackageOverride": "form-field"
+		"ngPackageOverride": "forms",
+		"ngSelectors": [
+			"lu-switch-input"
+		]
 	},
 	"tableofcontent": {
 		"zeroheightPagePath": "05ca4d"
@@ -639,7 +838,10 @@
 			"6119:39816"
 		],
 		"figmaName": "pr-Textarea",
-		"ngPackageOverride": "input"
+		"ngPackageOverride": "forms",
+		"ngSelectors": [
+			"lu-textarea-input"
+		]
 	},
 	"textfield": {
 		"zeroheightPagePath": "459eda",
@@ -647,7 +849,10 @@
 			"6119:36364"
 		],
 		"figmaName": "pr-Textfield",
-		"ngPackageOverride": "input"
+		"ngPackageOverride": "forms",
+		"ngSelectors": [
+			"lu-text-input"
+		]
 	},
 	"tile": {
 		"zeroheightPagePath": "56d611",
@@ -655,7 +860,10 @@
 			"6053:35161"
 		],
 		"figmaName": "pr-UserTile",
-		"ngPackageOverride": "user"
+		"ngPackageOverride": "user",
+		"ngSelectors": [
+			"lu-user-tile"
+		]
 	},
 	"time-picker": {
 		"zeroheightPagePath": "2473a1",
@@ -663,7 +871,10 @@
 			"20952:3023"
 		],
 		"figmaName": "pr-TimePicker",
-		"ngPackageOverride": "time"
+		"ngPackageOverride": "time",
+		"ngSelectors": [
+			"lu-time-picker"
+		]
 	},
 	"timelines": {
 		"zeroheightPagePath": "288e66",
@@ -675,8 +886,7 @@
 		"figmaAliases": [
 			"pr-TimelineHorizontal",
 			"pr-TimelineVertical"
-		],
-		"ngPackageOverride": "time"
+		]
 	},
 	"title-and-text": {
 		"zeroheightPagePath": "021fef",
@@ -696,6 +906,12 @@
 			"5639:31388"
 		],
 		"figmaName": "pr-Tooltip"
+	},
+	"user-select": {
+		"ngPackageOverride": "user",
+		"ngSelectors": [
+			"lu-user-select"
+		]
 	},
 	"userpopover": {
 		"zeroheightPagePath": "85b183",

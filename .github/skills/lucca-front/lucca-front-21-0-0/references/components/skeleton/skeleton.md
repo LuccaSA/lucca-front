@@ -69,6 +69,12 @@ import { SkeletonButtonComponent, SkeletonDataTableComponent, SkeletonFieldCompo
 
 **Selector:** `lu-skeleton-resource-card`
 
+#### Inputs
+
+| Property | Binding name | Type | Default | Required | Transform | Description |
+|----------|-------------|------|---------|----------|-----------|-------------|
+| `descriptionLines` | `descriptionLines` | `number` | `0` | — | `numberAttribute` | — |
+
 ### SkeletonTableComponent (component)
 
 **Selector:** `lu-skeleton-table`

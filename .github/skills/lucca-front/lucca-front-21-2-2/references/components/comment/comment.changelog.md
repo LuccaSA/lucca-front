@@ -8,16 +8,9 @@
   + `noInfos` : boolean
   ~ `content` : string → PortalContent, devient requis
 
-## 21.0.3
-
-`CommentComponent` :
-  + `content` : string
-  + `date` : Date
-  + `datePipeFormat` : string | undefined
-
 ## 21.0.0
 
-Composant introduit (`CommentBlockComponent`, `CommentComponent`).
+Composant introduit (`CommentBlockComponent`, `CommentChatComponent`, `CommentComponent`).
 
 ## Notes de release (ZeroHeight)
 

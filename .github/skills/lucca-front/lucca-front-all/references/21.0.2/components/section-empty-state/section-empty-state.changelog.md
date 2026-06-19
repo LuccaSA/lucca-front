@@ -4,7 +4,7 @@
 
 ## 21.0.0
 
-Composant introduit (`EmptyStatePageComponent`, `EmptyStateSectionComponent`).
+Composant introduit (`EmptyStateSectionComponent`).
 
 ## Notes de release (ZeroHeight)
 

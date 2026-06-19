@@ -3,7 +3,7 @@
 ## Import
 
 ```typescript
-import { LuCalendarInputComponent, LuDateInputDirective, LuDatePickerComponent, LuDateSelectInputComponent } from '@lucca-front/ng/date';
+import { LuCalendarInputComponent } from '@lucca-front/ng/date';
 ```
 
 ## API Reference
@@ -16,52 +16,11 @@ import { LuCalendarInputComponent, LuDateInputDirective, LuDatePickerComponent, 
 
 | Property | Binding name | Type | Default | Required | Transform | Description |
 |----------|-------------|------|---------|----------|-----------|-------------|
+| `intl` | `intl` | `unknown` | — | — | — | — |
 | `min` | `min` | `unknown` | — | — | — | — |
 | `max` | `max` | `unknown` | — | — | — | — |
 | `granularity` | `granularity` | `LuDateGranularity` | `ELuDateGranularity.day` | — | — | — |
 | `startOn` | `startOn` | `D` | `this._adapter.forgeToday()` | — | — | — |
-
-### LuDateInputDirective (directive)
-
-**Selector:** `input[luDateInput]`
-
-#### Inputs
-
-| Property | Binding name | Type | Default | Required | Transform | Description |
-|----------|-------------|------|---------|----------|-----------|-------------|
-| `min` | `min` | `unknown` | — | — | — | — |
-| `max` | `max` | `unknown` | — | — | — | — |
-| `granularity` | `granularity` | `LuDateGranularity` | `ELuDateGranularity.day` | — | — | — |
-| `override` | `override` | `unknown` | — | — | — | — |
-
-### LuDatePickerComponent (component)
-
-**Selector:** `lu-date-picker`
-
-**exportAs:** `LuDatePicker`
-
-#### Inputs
-
-| Property | Binding name | Type | Default | Required | Transform | Description |
-|----------|-------------|------|---------|----------|-----------|-------------|
-| `min` | `min` | `unknown` | — | — | — | — |
-| `max` | `max` | `unknown` | — | — | — | — |
-| `granularity` | `granularity` | `LuDateGranularity` | `ELuDateGranularity.day` | — | — | — |
-| `startOn` | `startOn` | `D` | `this._adapter.forgeToday()` | — | — | — |
-
-### LuDateSelectInputComponent (component)
-
-**Selector:** `lu-date-select`
-
-#### Inputs
-
-| Property | Binding name | Type | Default | Required | Transform | Description |
-|----------|-------------|------|---------|----------|-----------|-------------|
-| `min` | `min` | `unknown` | — | — | — | — |
-| `max` | `max` | `unknown` | — | — | — | — |
-| `granularity` | `granularity` | `LuDateGranularity` | `ELuDateGranularity.day` | — | — | — |
-| `override` | `placeholder` | `unknown` | — | — | — | — |
-| `hideClearer` | `hideClearer` | `boolean` | `false` | — | — | — |
 
 ## Related files
 

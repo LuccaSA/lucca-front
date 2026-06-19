@@ -20,7 +20,7 @@ En l’absence d’action métier forte, il se peut que le ou le bouton d’acti
 
 #### La zone de rupture (alignement à gauche)
 
-Cette zone accueille les actions qui sortent l'utilisateur du parcours de saisie actuel ou qui impactent l'existence même de l'objet.
+Cette zone accueille les actions qui sortent l'utilisateur du parcours de saisie actuel ou qui impactent l'existence même de la ressource.
 
 Dans un parcours en étapes, le bouton pour revenir à l’étape précédente se trouve dans cette zone. Cela respecte la métaphore spatiale de lecture (gauche pour le passé, droite pour le futur).
 
@@ -59,18 +59,52 @@ Nous utilisons le verbe « **Fermer** » + la croix de fermeture pour que l’
 
 Nous évitons « OK », ni « Compris ! » : ce n’est pas une action.
 
-### Formulaire simple
+### Parcours de création de ressource
 
-Le formulaire simple permet de demander des informations à l’utilisateur en une seule étape.
+#### Sans action de diffusion
 
-Ce Footer comporte en général deux boutons : 
+Un **parcours de création en formulaire simple ou long** permet de demander des informations à l’utilisateur en une seule étape.
 
-* « **Enregistrer + {objet}** » en Product700.
+Dans ce contexte le Footer comporte en général deux boutons : 
+
+* « **{Infinitif} le/la {ressource}** » en `filled`
 * « **Annuler** » pour que l’utilisateur puisse quitter le formulaire de suite.
 
 Si l’utilisateur a complété des informations et qu'il souhaite quitter, une Dialog de confirmation apparaît.
 
 N’utilisons pas « Enregistrer et quitter », ni « Quitter » dans un Footer : cela porterait à confusion sur le rôle de la croix de fermeture et sur celui de « Annuler »
+
+Un **parcours de création en étapes** permet de répartir une collecte d'informations en plusieurs étapes. Cela implique une navigation entre les différentes étapes et une validation finale.
+
+Le Footer comporte en général plusieurs boutons : 
+
+* «  **Étape précédente** » en `leftIcon` `outlined`Iavec l'cône `arrow-left`
+* «  **Étape suivante** » en `filled`
+* « **Annuler** » pour que l’utilisateur puisse quitter le formulaire à tout moment.
+
+N’utilisons pas de bouton « {Infinitif} le/la {ressource} » à chaque étape, cela peut perturber l’utilisateur le laissant penser qu’il doit systématiquement enregistrer avant de passer à l'étape suivante. Signifions l'enregistrement de manière implicite : il s'effectue à chaque clic sur « Étape suivante ».
+
+Vérifier l'accent sur la majuscule du mot « Étape » pour l'accessibilité.
+
+Pour l'étape finale du parcours, tout Footer contient un bouton de validation à la place du bouton pour passer à l'étape suivante :
+
+* «  **Étape précédente** » en `leftIcon` `outlined`Iavec l'cône `arrow-left`
+* « **{Infinitif} le/la {ressource}** » en `filled`.
+* « **Annuler** » pour que l’utilisateur puisse quitter le formulaire à tout moment.
+
+#### Avec action de diffusion
+
+Dans un parcours de création de ressource avec action de diffusion, le contenu du Footer change. L'utilisateur a la possibilité d'enregistrer la ressource pour y revenir plus tard :
+
+* «  **Étape précédente** » en `leftIcon` `outlined`Iavec l'cône `arrow-left`
+* «  **Étape suivante** » en `filled`
+* « **Continuer plus tard** » en `outlined` et palette `product`
+
+Pour l'étape finale du parcours, le Footer doit exposer l'action de diffusion à la place du bouton pour passer à l'étape suivante :
+
+* «  **Étape précédente** » en `leftIcon` `outlined`Iavec l'cône `arrow-left`
+* « **{Infinitif} le/la {ressource}** » en `filled`.
+* « **Continuer plus tard** » en `outlined` et palette `product`
 
 #### Affichage des erreurs
 
@@ -80,10 +114,10 @@ Se référer à la guideline Erreurs dans les formulaires.
 
 #### Création en chaîne
 
-Pour permettre à l’utilisateur de créer plusieurs objets à la suite, il suffit de lui proposer un bouton d’action clair. Cette approche simple évite toute complexité dans l’interface
+Pour permettre à l’utilisateur de créer plusieurs ressources à la suite, il suffit de lui proposer un bouton d’action clair. Cette approche simple évite toute complexité dans l’interface
 
-- **Do** : Si l’utilisateur souhaite créer plusieurs objets à la suite, il peut recommencer le processus de création autant de fois qu’il le souhaite.
-- **Don't** : Nous évitons la case à cocher ou le bouton du type « Ajouter et nouveau » ou « Créer un objet »: ces intitulés créent de la confusion.
+- **Do** : Si l’utilisateur souhaite créer plusieurs ressource à la suite, il peut recommencer le processus de création autant de fois qu’il le souhaite.
+- **Don't** : Nous évitons la case à cocher ou le bouton du type « Ajouter et nouveau » ou « Créer un/une {ressource} »: ces intitulés créent de la confusion.
 
 #### Actions claires et distinctes
 
@@ -94,31 +128,11 @@ Nous évitons d’utiliser deux fois le même verbe dans des boutons voisins, po
 - **Do** : N'utilisons qu'un seul verbe dans le bouton.
 - **Don't** : Nous évitons d'utiliser deux verbes d'actions dans un même bouton : cela créerait une confusion pour l'utilisateur sur ce qui va réellement se produire.
 
-### Formulaire en plusieurs étapes
-
-Ce parcours permet de répartir une collecte d'informations en plusieurs étapes. Cela implique une navigation entre les différentes étapes et une validation finale.
-
-Ce Footer comporte en général plusieurs boutons : 
-
-* « **Étape précédente** » , avec l'icône `arrow-left`, positionné sur la gauche du Footer
-* « **Étape suivante** » en Product700
-* « **Annuler** » pour que l’utilisateur puisse quitter le formulaire à tout moment.
-
-N’utilisons pas de bouton « Enregistrer + {objet} » cela peut perturber l’utilisateur le laissant penser qu’il doit systématiquement enregistrer à chaque étape. Signifions l'enregistrement de manière implicite : il s'effectue à chaque clic sur « Étape suivante ».
-
-Vérifier l'accent sur la majuscule du mot « Étape » pour l'accessibilité.
-
-Le Footer traitant d'actions répétées, ou similaires sur un même objet (ex : contrôle de bulletins de paie), comportent un bouton « **Enregistrer et continuer** » et un bouton « **Annuler** ».
-
-Mais il ne comporte pas « Étape précédente / Étape suivante ».
-
-Pour l'étape finale du parcours, tout Footer contient un bouton d'action principale « **Verbe + {objet}** » . Si l'objet existe déjà avant cette étape finale, utilisons plutôt « **Enregistrer + {objet}** ».
-
 ### Dialog de confirmation d'abandon
 
 Lorsque l’utilisateur quitte un formulaire en cours de modification, une Dialog s’affiche pour qu’il confirme son intention. Le Footer de cette Dialog propose des boutons d'action clairs et sans ambiguïté :
 
-* « **Quitter sans enregistrer** »
+* « **Quitter sans enregistrer** » en `filled`
 * « **Annuler** »
 
 Pour le contenu complet de cette Dialog, consulter les messages standards de confirmation.
@@ -127,19 +141,19 @@ Pour le contenu complet de cette Dialog, consulter les messages standards de con
 
 Certains logiciels proposent un enregistrement qui se déclenche dès la saisie des informations. Le Footer relaie la confirmation de l’enregistrement.
 
-### Sélection d'objets
+### Actions en masse
 
-Dans certains contexte, le Footer peut-être utilisé pour réaliser des actions sur une sélection d’objets (IndexTable par exemple).
+Dans certains contexte, le Footer peut-être utilisé pour réaliser des actions en masse sur une sélection de ressources (IndexTable par exemple).
 
-Le Footer est affiché par défaut sur l’interface, avant même la sélection d’un premier objet. Cela permet de donner une information à l’utilisateur sur ce qu’il peut faire.
+Le Footer est affiché par défaut sur l’interface, avant même la sélection de la première ressource. Cela permet de donner une information à l’utilisateur sur ce qu’il peut faire.
 
-Utilisons « **{verbe} + {objet}** » pour les actions liées à la sélection.
+Utilisons « **{Infinitif} + {ressource}** » en `filled`pour les actions liées à la sélection.
 
 Des infos complémentaires peuvent être affichées pour aider à la décision.
 
 Pour des actions secondaires, connues de l’utilisateur, le bouton menu peut être utilisé.
 
-Si plusieurs actions sont possibles sur l’ensemble des objets sélectionnés, il est préférable d’afficher le nombre d’objet en information supplémentaire plutôt que de répéter l’information via le Numeric badge de chaque bouton.
+Si plusieurs actions sont possibles sur l’ensemble des ressources sélectionnées, il est préférable d’afficher leur nombre en information supplémentaire plutôt que de répéter l’information via le Numeric badge de chaque bouton.
 
-- **Do** : Affichons le nombre d'objets sélectionnés dans l'espace dédié.
+- **Do** : Affichons le nombre de ressources sélectionnées dans l'espace dédié.
 - **Don't** : N'affichons pas un Numeric badge dans chaque bouton d'action.

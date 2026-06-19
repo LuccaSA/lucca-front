@@ -13,7 +13,6 @@
 		luPopoverTrigger="click"
 		luPopoverCloseDelay="300"
 		luPopoverOpenDelay="300"
-		luPopoverPosition="above"
 	>
 		Cliquez-moi !
 	</button>

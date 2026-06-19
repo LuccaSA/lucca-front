@@ -9,11 +9,32 @@ description: Le composant Horizontal navigation permet une navigation facile et 
 
 Component selector : `lu-horizontal-navigation`
 
+<tabs>
+<tab>
+
+<tab-title>**Navigation**</tab-title>
+
 ```ts
 import { HorizontalNavigationComponent, HorizontalNavigationLinkDirective } from '@lucca-front/ng/horizontal-navigation';
 ```
 
-[Basic](https://lucca-front.lucca.io/storybook/iframe.html?id=documentation-navigation-horizontalnavigation-angular--basic)
+[Basic](https://lucca-front.lucca.io/master/storybook/iframe.html?id=documentation-navigation-horizontalnavigation-angular--basic)
+
+</tab>
+<tab>
+
+<tab-title>**Onglets [v21.3]**</tab-title>
+
+```ts
+import { HorizontalNavigationComponent, HorizontalNavigationTabComponent } from '@lucca-front/ng/horizontal-navigation';
+```
+
+[Basic](https://lucca-front.lucca.io/master/storybook/iframe.html?id=documentation-navigation-horizontalnavigation-angular-tabs--basic)
+
+</tab>
+</tabs>
+
+---
 
 # HTML
 
@@ -30,14 +51,14 @@ Classe CSS : `.horizontalNavigation`
 
 <tab-title>**Base**</tab-title>
 
-[Basic](https://lucca-front.lucca.io/storybook/iframe.html?id=documentation-navigation-horizontalnavigation-html-css-basic--basic)
+[Basic](https://lucca-front.lucca.io/master/storybook/iframe.html?id=documentation-navigation-horizontalnavigation-html-css-basic--basic)
 
 </tab>
 <tab>
 
 <tab-title>**Compteur**</tab-title>
 
-[Count](https://lucca-front.lucca.io/storybook/iframe.html?id=documentation-navigation-horizontalnavigation-html-css-count--count)
+[Count](https://lucca-front.lucca.io/master/storybook/iframe.html?id=documentation-navigation-horizontalnavigation-html-css-count--count)
 
 </tab>
 <tab>
@@ -46,14 +67,14 @@ Classe CSS : `.horizontalNavigation`
 
 Ce menu intègre un `container` pour s'aligner horizontalement au contenu de la page.
 
-[Container](https://lucca-front.lucca.io/storybook/iframe.html?id=documentation-navigation-horizontalnavigation-html-css-container--container)
+[Container](https://lucca-front.lucca.io/master/storybook/iframe.html?id=documentation-navigation-horizontalnavigation-html-css-container--container)
 
 </tab>
 <tab>
 
 <tab-title>**Scrollbox**</tab-title>
 
-[Scrollbox](https://lucca-front.lucca.io/storybook/iframe.html?id=documentation-navigation-horizontalnavigation-html-css-scrollbox--scrollbox)
+[Scrollbox](https://lucca-front.lucca.io/master/storybook/iframe.html?id=documentation-navigation-horizontalnavigation-html-css-scrollbox--scrollbox)
 
 </tab>
 </tabs>

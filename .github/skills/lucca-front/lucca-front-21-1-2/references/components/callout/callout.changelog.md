@@ -7,14 +7,9 @@
 `CalloutComponent` :
   + `intl` : unknown
 
-## 21.0.3
-
-`CalloutDisclosureComponent` :
-  + (output) `openChange` : boolean
-
 ## 21.0.0
 
-Composant introduit (`CalloutActionsComponent`, `CalloutDisclosureComponent`, `CalloutFeedbackListComponent`, `CalloutPopoverComponent`, `CalloutComponent`).
+Composant introduit (`CalloutActionsComponent`, `CalloutFeedbackItemDescriptionDirective`, `CalloutFeedbackItemComponent`, `CalloutFeedbackListComponent`, `CalloutComponent`).
 
 ## Notes de release (ZeroHeight)
 

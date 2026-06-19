@@ -7,7 +7,7 @@ Les champs de formulaires sont pensés pour être utilisés dans une [grille](ht
 </callout>
 
 ```css
-@forward '@lucca-front/scss/src/components/input';
+@forward '@lucca-front/scss/src/components/forms';
 @forward '@lucca-front/scss/src/components/formLabel';
 @forward '@lucca-front/scss/src/components/inlineMessage';
 @forward '@lucca-front/scss/src/components/textField';

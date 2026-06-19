@@ -16,7 +16,7 @@ import { PaginationComponent } from '@lucca-front/ng/pagination';
 
 | Property | Binding name | Type | Default | Required | Transform | Description |
 |----------|-------------|------|---------|----------|-----------|-------------|
-| `intl` | `intl` | `unknown` | `...intlInputOptions(LU_PAGINATION_TRANSLATIONS` | — | — | — |
+| `intl` | `intl` | `unknown` | — | — | — | — |
 | `isFirstPage` | `isFirstPage` | `boolean` | `false` | — | `booleanAttribute` | Désactive le bouton précédent. |
 | `isLastPage` | `isLastPage` | `boolean` | `false` | — | `booleanAttribute` | Désactive le bouton suivant. |
 | `from` | `from` | `number \| null` | — | — | — | Numéro du dernier élément affiché. |

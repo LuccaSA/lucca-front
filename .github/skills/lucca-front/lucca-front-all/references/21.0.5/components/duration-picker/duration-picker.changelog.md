@@ -4,7 +4,7 @@
 
 ## 21.0.0
 
-Composant introduit (`DurationPickerComponent`, `TimePickerComponent`).
+Composant introduit (`DurationPickerComponent`).
 
 ## Notes de release (ZeroHeight)
 

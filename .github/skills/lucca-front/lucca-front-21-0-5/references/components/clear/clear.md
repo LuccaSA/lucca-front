@@ -23,6 +23,12 @@ import { ClearComponent } from '@lucca-front/ng/clear';
 | `palette` | `palette` | `Palette` | `'none'` | — | — | Applique une palette de couleurs au bouton. |
 | `inverted` | `inverted` | `boolean` | `false` | — | `booleanAttribute` | Modifie les couleurs du bouton pour un usage sur fond foncé. |
 
+#### Outputs
+
+| Property | Binding name | Type |
+|----------|-------------|------|
+| `onClear` | `onClear` | `T` |
+
 ## Related files
 
 - 📝 [Code & implementation](./clear.component.md)

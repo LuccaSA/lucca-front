@@ -14,31 +14,31 @@ Le contenu s'adapte au niveau de criticité de l'action et de ses conséquences 
 
 ### Niveau 1 : impact faible
 
-* **Titre :** "*Supprimer l’import ?*"
-* **Description :** "*Si vous supprimez l’import Competences3000.csv, 54 compétences ne seront plus disponibles.*"
-* **Boutons :** "*Supprimer l'import*" / "*Annuler*"
+* **Titre :** « Supprimer le/la {ressource} ? »
+* **Description :** « Si vous supprimez la/la {ressource}, {description des conséquences}. »
+* **Boutons :** « Supprimer le/la {ressource} »
 
 ### Niveau 2 : impact moyen
 
-* **Titre :** "*Supprimer l’import ?*"
-* **Description :** "***La suppression est définitive.*** *Si vous supprimez l’import Competences3000.csv, 54 compétences ne seront plus disponibles.*"
-* **Boutons :** "*Supprimer l'import*" / "*Annuler*"
+* **Titre :** « Supprimer le/la {ressource} ? »
+* **Description :** « **La suppression est définitive.** Si vous supprimez la/la {ressource}, {description des conséquences}. »
+* **Boutons :** « Supprimer le/la {ressource} »
 
 ### Niveau 3 : impact élevé
 
-* **Titre :** "*Supprimer l’import ?*"
-* **Description :** "***La suppression est définitive.*** *Si vous supprimez l’import Competences3000.csv, 54 compétences ne seront plus disponibles.*"
-* **Case à cocher :** "*J'ai bien compris les risques.*"
-* **Boutons :** "*Supprimer l'import*" / "*Annuler*"
+* **Titre :** « Supprimer le/la {ressource} ? »
+* **Description :** « **La suppression est définitive.** Si vous supprimez la/la {ressource}, {description des conséquences}. »
+* **Case à cocher :**  « J'ai bien compris les risques. »
+* **Boutons :** « Supprimer le/la {ressource} »
 
 ### Bonnes pratiques de rédaction
 
-* Écrivons le titre sous forme de question commençant par **{Supprimer}**. Pourquoi ?
+* Écrivons le titre sous forme de question commençant par « **Supprimer** ». Pourquoi ?
     * Une question interpelle davantage qu'une phrase affirmative.
     * Une question encourage l'utilisateur à comprendre l'enjeu du son choix.
 * Dans la description, utilisons le conditionnel (« Si... ») et le futur de l'indicatif, pour expliquer les conséquences de l'action. Cela rassure l'utilisateur sur le fait que l'action n'a pas encore été effectuée.
 * Si besoin, les conséquences peuvent être affichées sous forme de liste.
-* La phrase "La suppression est définitive." doit être en gras. Un saut de ligne la sépare de la description qui suit.
+* La phrase « **La suppression est définitive.** » doit être en gras. Un saut de ligne la sépare de la description qui suit.
 
 # Modifications non sauvegardées
 
@@ -48,20 +48,20 @@ Cette Dialog s’affiche lorsque l’utilisateur tente de quitter un formulaire 
 
 Elle peut apparaître :
 
-* après un clic sur “Annuler” ou sur la croix de fermeture,
+* après un clic sur « Annuler » ou sur la croix de fermeture,
 * lors d’un changement de page interrompant une action en cours.
 
 L’objectif est d’éviter toute **perte involontaire de données**, en informant l’utilisateur des conséquences de son action avant qu’elle ne soit confirmée.
 
 ## Contenu et rédaction
 
-* **Titre :** "*Quitter sans enregistrer ?*"
-* **Description :** "*Si vous quittez, les modifications non enregistrées seront supprimées.*"
-* **Boutons :** "*Quitter sans enregistrer*" / "*Reprendre les modifications*"
+* **Titre :** « Quitter sans enregistrer ? »
+* **Description :** « Si vous quittez, les modifications non enregistrées seront supprimées. »
+* **Boutons :** « Quitter sans enregistrer » / « Reprendre les modifications »
 
 ### Bonnes pratiques de rédaction
 
-* Écrivons le titre sous forme de question commençant par **{Quitter}**. Pourquoi ?
+* Écrivons le titre sous forme de question commençant par « **Quitter** ». Pourquoi ?
     * Une question interpelle davantage qu'une phrase affirmative.
     * Une question encourage l'utilisateur à comprendre l'enjeu du son choix.
 * Dans la description, utilisons le conditionnel (« Si... ») et le futur de l'indicatif, pour expliquer les conséquences de l'action. Cela rassure l'utilisateur sur le fait que l'action n'a pas encore été effectuée.
@@ -78,31 +78,31 @@ Elles peuvent aussi interpeller l'utilisateur après la modification de paramèt
 
 ### Niveau 1 : impact faible
 
-* **Titre :** "*Modifier les paramètres de la modalité ?*"
-* **Description :** "*Si vous modifiez ces paramètres, vous risquez des incohérences dans le suivi des absences et des temps déclarés.*"
-* **Boutons :** "*Modifier les paramètres*" / "*Annuler*"
+* **Titre :** « Modifier le/la {ressource} ? »
+* **Description :** « Si vous modifiez la/la {ressource}, {description des conséquences}. »
+* **Boutons :** « Modifier le/la {ressource} » / « Annuler »
 
 ### Niveau 2 : impact moyen
 
-* **Titre :** "*Modifier les paramètres de la modalité ?*"
-* **Description :** "***Cette action est irréversible.*** *Si vous modifiez ces paramètres, vous risquez des incohérences dans le suivi des absences et des temps déclarés.*"
-* **Boutons :** "*Modifier les paramètres*" / "*Annuler*"
+* **Titre :** « Modifier le/la {ressource} ? »
+* **Description :** « **Cette action est irréversible.** Si vous modifiez la/la {ressource}, {description des conséquences}. »
+* **Boutons :** « Modifier le/la {ressource} » / « Annuler »
 
 ### Niveau 3 : impact élevé
 
-* **Titre :** "*Modifier les paramètres de la modalité ?*"
-* **Description :** "***Cette action est irréversible.*** *Si vous modifiez ces paramètres, vous risquez des incohérences dans le suivi des absences et des temps déclarés.*"
-* **Case à cocher :** "*J'ai bien compris les risques.*"
-* **Boutons :** "*Modifier les paramètres*" / "*Annuler*"
+* **Titre :** « Modifier le/la {ressource} ? »
+* **Description :** « **Cette action est irréversible.** Si vous modifiez la/la {ressource}, {description des conséquences}. »
+* **Case à cocher :** « J'ai bien compris les risques. »
+* **Boutons :** « Modifier le/la {ressource} » / « Annuler »
 
 ### Bonnes pratiques de rédaction
 
-* Écrivons le titre sous forme de question du type {verbe à l'infinitif} + {objet}. 
+* Écrivons le titre sous forme de question du type **{verbe à l'infinitif} + {objet}**. 
     * Une question interpelle davantage qu'une phrase affirmative.
     * Une question encourage l'utilisateur à comprendre l'enjeu du son choix.
 * Dans la description, utilisons le conditionnel (« Si... ») et le futur de l'indicatif, pour expliquer les conséquences de l'action. Cela rassure l'utilisateur sur le fait que l'action n'a pas encore été effectuée.
 * Si besoin, les conséquences peuvent être affichées sous forme de liste.
-* La phrase "Cette action est irréversible." doit être en gras. Un saut de ligne la sépare de la description qui suit.
+* La phrase « **Cette action est irréversible.** » doit être en gras. Un saut de ligne la sépare de la description qui suit.
 
 ## Règles d'utilisation
 

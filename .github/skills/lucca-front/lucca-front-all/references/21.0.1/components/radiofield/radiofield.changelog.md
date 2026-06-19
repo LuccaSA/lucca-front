@@ -4,7 +4,7 @@
 
 ## 21.0.0
 
-Composant introduit (`FormFieldComponent`, `InputFramedComponent`, `InputDirective`).
+Composant introduit (`RadioGroupInputComponent`, `RadioComponent`).
 
 ## Notes de release (ZeroHeight)
 

@@ -4,7 +4,7 @@
 
 ## 21.0.0
 
-Composant introduit (`LuCalendarInputComponent`, `LuDateInputDirective`, `LuDatePickerComponent`, `LuDateSelectInputComponent`).
+Composant introduit (`LuCalendarInputComponent`).
 
 ## Notes de release (ZeroHeight)
 

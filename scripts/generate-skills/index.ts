@@ -518,7 +518,7 @@ async function processVersion(
 		try {
 
 			// 1. AST extraction (needs ngPackage — skip for CSS-only components)
-			const api = entry.ngPackage ? extractPackageAPI(entry.ngPackage, version) : null;
+			const api = entry.ngPackage ? extractPackageAPI(entry.ngPackage, version, false, entry.ngSelectors) : null;
 
 			// 2. ZeroHeight guidelines (guarded: run cache + baseline shrink-guard)
 			let zeroheight = null;
@@ -667,6 +667,7 @@ async function processVersion(
 			const clMd = buildComponentChangelog({
 				slug,
 				ngPackage: entry.ngPackage ?? null,
+				ngSelectors: entry.ngSelectors,
 				version,
 				zhProse: renderChangelogMd(data),
 			});

@@ -3,7 +3,7 @@
 ## Import
 
 ```typescript
-import { LuUserTileComponent, LuUserSelectInputComponent, LuUserMeOptionDirective, LuUserPagedSearcherComponent, LuUserHomonymsComponent } from '@lucca-front/ng/user';
+import { LuUserPictureComponent } from '@lucca-front/ng/user';
 ```
 
 ## Basic Usage
@@ -15,53 +15,19 @@ import { LuUserTileComponent, LuUserSelectInputComponent, LuUserMeOptionDirectiv
 
 ## API Reference
 
-### LuUserTileComponent (component)
+### LuUserPictureComponent (component)
 
-**Selector:** `lu-user-tile`
-
-#### Inputs
-
-| Property | Binding name | Type | Default | Required | Transform | Description |
-|----------|-------------|------|---------|----------|-----------|-------------|
-| `user` | `user` | `LuUserTileUserInput` | — | — | — | — |
-| `displayFormat` | `displayFormat` | `LuDisplayFormat` | — | — | — | — |
-| `role` | `role` | `string` | — | — | — | — |
-| `size` | `size` | `'L' \| 'M' \| 'S' \| 'XS'` | — | — | — | — |
-
-### LuUserSelectInputComponent (component)
-
-**Selector:** `lu-user-select`
+**Selector:** `lu-user-picture`
 
 #### Inputs
 
 | Property | Binding name | Type | Default | Required | Transform | Description |
 |----------|-------------|------|---------|----------|-----------|-------------|
-| `override` | `placeholder` | `unknown` | — | — | — | — |
-| `fields` | `fields` | `string` | — | — | — | — |
-| `filters` | `filters` | `string[]` | — | — | — | — |
-| `orderBy` | `orderBy` | `string` | — | — | — | — |
-| `appInstanceId` | `appInstanceId` | `number \| string` | — | — | — | — |
-| `operations` | `operations` | `number[]` | — | — | — | — |
-| `enableFormerEmployees` | `enableFormerEmployees` | `boolean` | `false` | — | — | — |
-| `disablePrincipal` | `disablePrincipal` | `boolean` | `false` | — | — | — |
-
-### LuUserMeOptionDirective (directive)
-
-**Selector:** `[luUserMeOption]`
-
-### LuUserPagedSearcherComponent (component)
-
-**Selector:** `lu-user-paged-searcher`
-
-#### Inputs
-
-| Property | Binding name | Type | Default | Required | Transform | Description |
-|----------|-------------|------|---------|----------|-----------|-------------|
-| `enableFormerEmployees` | `enableFormerEmployees` | `boolean` | `false` | — | — | — |
-
-### LuUserHomonymsComponent (component)
-
-**Selector:** `lu-user-homonyms`
+| `displayFormat` | `displayFormat` | `LuDisplayInitials` | `displayPictureFormatRecord[inject(LU_DEFAULT_DISPLAY_POLICY)]` | — | — | — |
+| `user` | `user` | `LuUserPictureUserInput` | — | — | — | — |
+| `AI` | `AI` | `boolean` | `false` | — | `booleanAttribute` | — |
+| `size` | `size` | `'XS' \| 'S' \| 'M' \| 'L' \| 'XL' \| 'XXL' \| 'XXXL'` | `'M'` | — | — | — |
+| `imageLoadingAttribute` | `imageLoadingAttribute` | `HTMLImageElement['loading']` | `'lazy'` | — | — | — |
 
 ## Related files
 

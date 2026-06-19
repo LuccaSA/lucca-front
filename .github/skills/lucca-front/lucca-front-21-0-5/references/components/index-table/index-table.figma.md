@@ -11,8 +11,8 @@
 
 | Property | Type | Values |
 |----------|------|--------|
-| `Overflow` | BOOLEAN | — |
-| `↪️ Left overflow` | BOOLEAN | — |
-| `↪️ Right overflow` | BOOLEAN | — |
-| `Content` | INSTANCE_SWAP | — |
-| `Pagination` | BOOLEAN | — |
+| `overflow` | BOOLEAN | — |
+| `↪️ leftOverflow` | BOOLEAN | — |
+| `↪️ rightOverflow` | BOOLEAN | — |
+| `tableContent` | INSTANCE_SWAP | — |
+| `pagination` | BOOLEAN | — |

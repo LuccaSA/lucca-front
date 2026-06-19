@@ -9,7 +9,7 @@ description: Les utilitaires sont des classes universelles à ajouter sur vos co
 
 Les utilitaires de tailles sont basés sur les tokens "[Shorthands](https://prisme.lucca.io/94310e217/p/73bd2f-typographie/t/9c01d01bdf)" et agissent donc sur les propriétés `font-size`, `line-height`, `font-weight` et `font-family`.
 
-[Text Size](https://lucca-front.lucca.io/storybook/iframe.html?id=documentation-integration-utilities-textsize--text-size)
+[Text Size](https://lucca-front.lucca.io/master/storybook/iframe.html?id=documentation-integration-utilities-textsize--text-size)
 
 ## Graisse
 
@@ -23,7 +23,7 @@ Les utilitaires de tailles sont basés sur les tokens "[Shorthands](https://pris
 
 ## Couleurs
 
-[Text Color](https://lucca-front.lucca.io/storybook/iframe.html?id=documentation-integration-utilities-textcolor--text-color)
+[Text Color](https://lucca-front.lucca.io/master/storybook/iframe.html?id=documentation-integration-utilities-textcolor--text-color)
 
 ### Couleurs produits
 
@@ -48,7 +48,7 @@ Applique la couleur produit à un texte. Nécessite une [configuration](https://
 
 ## Style
 
-[Text Style](https://lucca-front.lucca.io/storybook/iframe.html?id=documentation-integration-utilities-textstyle--text-style)
+[Text Style](https://lucca-front.lucca.io/master/storybook/iframe.html?id=documentation-integration-utilities-textstyle--text-style)
 
 <callout background="2" fullWidth="true">
 
@@ -60,7 +60,7 @@ Attention à faire la distinction entre les styles visuels et la sémantique en 
 
 Cache une partie du texte. Une largeur est nécessaire sur le conteneur pour que l'ellipse fonctionne.
 
-[Ellipsis](https://lucca-front.lucca.io/storybook/iframe.html?id=documentation-integration-utilities-ellipsis--ellipsis)
+[Ellipsis](https://lucca-front.lucca.io/master/storybook/iframe.html?id=documentation-integration-utilities-ellipsis--ellipsis)
 
 # Spacings
 
@@ -390,11 +390,11 @@ Cache une partie du texte. Une largeur est nécessaire sur le conteneur pour que
 
 ## Border radius
 
-[Border Radius](https://lucca-front.lucca.io/storybook/iframe.html?id=documentation-integration-utilities-borderradius--border-radius)
+[Border Radius](https://lucca-front.lucca.io/master/storybook/iframe.html?id=documentation-integration-utilities-borderradius--border-radius)
 
 ## Suppression de bordures
 
-[Border](https://lucca-front.lucca.io/storybook/iframe.html?id=documentation-integration-utilities-border--border)
+[Border](https://lucca-front.lucca.io/master/storybook/iframe.html?id=documentation-integration-utilities-border--border)
 
 # Display
 
@@ -589,7 +589,7 @@ Modifie le display d'un élément pour l'impression.
 
 Change l'alignement des contenus de type block.
 
-[Float](https://lucca-front.lucca.io/storybook/iframe.html?id=documentation-integration-utilities-float--float)
+[Float](https://lucca-front.lucca.io/master/storybook/iframe.html?id=documentation-integration-utilities-float--float)
 
 Vous pouvez stopper le float en utilisant un utilitaire clear :
 
@@ -607,7 +607,7 @@ Vous pouvez stopper le float en utilisant un utilitaire clear :
 
 Change l'alignement des contenus de type inline.
 
-[Vertical Align](https://lucca-front.lucca.io/storybook/iframe.html?id=documentation-integration-utilities-verticalalign--vertical-align)
+[Vertical Align](https://lucca-front.lucca.io/master/storybook/iframe.html?id=documentation-integration-utilities-verticalalign--vertical-align)
 
 ## Vertical
 
@@ -678,7 +678,7 @@ Ajoute une animation lors de l'apparition de l'élément. Pour des animations pl
 
 Réinitialise l’affichage des listes et des boutons.
 
-[Reset](https://lucca-front.lucca.io/storybook/iframe.html?id=documentation-integration-utilities-reset--reset)
+[Reset](https://lucca-front.lucca.io/master/storybook/iframe.html?id=documentation-integration-utilities-reset--reset)
 
 # Divers
 
@@ -696,13 +696,13 @@ Modifie la manière dont les retours à la ligne sont réalisés.
 
 Retire les flèches incrémentales d'un input number.
 
-[Spin](https://lucca-front.lucca.io/storybook/iframe.html?id=documentation-integration-utilities-spin--spin)
+[Spin](https://lucca-front.lucca.io/master/storybook/iframe.html?id=documentation-integration-utilities-spin--spin)
 
 ## Aide
 
 Permet de créer le style et l'espacement nécessaire aux icônes d'aide inline.
 
-[Help](https://lucca-front.lucca.io/storybook/iframe.html?id=documentation-integration-utilities-help--help)
+[Help](https://lucca-front.lucca.io/master/storybook/iframe.html?id=documentation-integration-utilities-help--help)
 
 ## Pointer event
 
@@ -754,7 +754,7 @@ Permet d'appliquer le style focus commun.
 
 Permet d'ajouter du contenu généré par CSS au début ou à la fin d'un élément.
 
-[Content](https://lucca-front.lucca.io/storybook/iframe.html?id=documentation-integration-utilities-content--content)
+[Content](https://lucca-front.lucca.io/master/storybook/iframe.html?id=documentation-integration-utilities-content--content)
 
 ## Curseur
 

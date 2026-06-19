@@ -4,7 +4,7 @@
 
 ## 21.0.0
 
-Composant introduit (`ListboxComponent`, `OptionComponent`).
+Composant introduit (`ListboxComponent`, `Treeitem`, `OptionComponent`).
 
 ## Notes de release (ZeroHeight)
 

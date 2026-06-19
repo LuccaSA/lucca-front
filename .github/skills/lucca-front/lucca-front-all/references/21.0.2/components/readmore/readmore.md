@@ -20,6 +20,7 @@ import { ReadMoreComponent } from '@lucca-front/ng/read-more';
 | `openOnly` | `openOnly` | `boolean` | `false` | — | `booleanAttribute` | Empêche la fermeture du composant en masquant le bouton "Lire moins" |
 | `textFlow` | `textFlow` | `boolean` | `false` | — | `booleanAttribute` | Applique les espacements du composant Text flow |
 | `surface` | `surface` | `null \| 'sunken' \| 'default' \| string` | `null` | — | — | Modifie la couleur de fond sous le bouton "Lire plus / moins" |
+| `innerContent` | `innerContent` | `null \| string` | `null` | — | — | Permet de passer le contenu via un innerHTML |
 
 ## Related files
 

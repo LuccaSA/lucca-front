@@ -14,17 +14,63 @@ import { LuPopoverPanelComponent, LuPopoverTargetDirective, LuPopoverTriggerDire
 
 **exportAs:** `LuPopoverPanel`
 
+#### Inputs
+
+| Property | Binding name | Type | Default | Required | Transform | Description |
+|----------|-------------|------|---------|----------|-----------|-------------|
+| `template` | `template` | `TemplateRef<unknown>` | — | — | — | — |
+| `templateContext` | `template-context` | `unknown` | — | — | — | — |
+| `inputCloseOnClick` | `close-on-click` | `boolean` | — | — | — | — |
+| `inputTrapFocus` | `trap-focus` | `boolean` | — | — | — | — |
+| `inputScrollStrategy` | `scroll-strategy` | `LuPopoverScrollStrategy` | — | — | — | — |
+| `inputPanelClasses` | `panel-classes` | `string` | — | — | — | — |
+| `inputContentClasses` | `content-classes` | `string` | — | — | — | — |
+
+#### Outputs
+
+| Property | Binding name | Type |
+|----------|-------------|------|
+| `close` | `close` | `void` |
+| `open` | `open` | `void` |
+| `hovered` | `hovered` | `boolean` |
+
 ### LuPopoverTargetDirective (directive)
 
 **Selector:** `[luPopoverTarget]`
 
 **exportAs:** `LuPopoverTarget`
 
+#### Inputs
+
+| Property | Binding name | Type | Default | Required | Transform | Description |
+|----------|-------------|------|---------|----------|-----------|-------------|
+| `inputPosition` | `luPopoverPosition` | `LuPopoverPosition` | — | — | — | — |
+| `inputAlignment` | `luPopoverAlignment` | `LuPopoverAlignment` | — | — | — | — |
+| `inputOverlap` | `luPopoverOverlap` | `boolean` | — | — | — | — |
+| `inputOffsetX` | `luPopoverOffsetX` | `number` | — | — | — | — |
+| `inputOffsetY` | `luPopoverOffsetY` | `number` | — | — | — | — |
+
 ### LuPopoverTriggerDirective (directive)
 
 **Selector:** `[luPopover]`
 
 **exportAs:** `LuPopoverTrigger`
+
+#### Inputs
+
+| Property | Binding name | Type | Default | Required | Transform | Description |
+|----------|-------------|------|---------|----------|-----------|-------------|
+| `inputPanel` | `luPopover` | `TPanel` | — | — | — | — |
+| `inputTarget` | `luPopoverTarget` | `TTarget` | — | — | — | — |
+| `inputTriggerEvent` | `luPopoverTrigger` | `LuPopoverTriggerEvent` | — | — | — | — |
+| `inputPosition` | `luPopoverPosition` | `LuPopoverPosition` | — | — | — | — |
+| `inputAlignment` | `luPopoverAlignment` | `LuPopoverAlignment` | — | — | — | — |
+| `inputEnterDelay` | `luPopoverEnterDelay` | `number` | — | — | — | — |
+| `inputLeaveDelay` | `luPopoverLeaveDelay` | `number` | — | — | — | — |
+| `inputDisabled` | `luPopoverDisabled` | `boolean` | — | — | — | — |
+| `inputOverlap` | `luPopoverOverlap` | `boolean` | — | — | — | — |
+| `inputOffsetX` | `luPopoverOffsetX` | `number` | — | — | — | — |
+| `inputOffsetY` | `luPopoverOffsetY` | `number` | — | — | — | — |
 
 #### Outputs
 

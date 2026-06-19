@@ -4,7 +4,7 @@
 
 ## 21.0.0
 
-Composant introduit (`SortableListComponent`).
+Composant introduit (`SortableListItemComponent`, `SortableListComponent`).
 
 ## Notes de release (ZeroHeight)
 

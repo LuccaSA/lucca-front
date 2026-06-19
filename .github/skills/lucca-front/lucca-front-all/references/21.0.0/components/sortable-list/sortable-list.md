@@ -3,7 +3,7 @@
 ## Import
 
 ```typescript
-import { SortableListComponent } from '@lucca-front/ng/sortable-list';
+import { SortableListItemComponent, SortableListComponent } from '@lucca-front/ng/sortable-list';
 ```
 
 ## Basic Usage
@@ -15,9 +15,36 @@ import { SortableListComponent } from '@lucca-front/ng/sortable-list';
 
 ## API Reference
 
+### SortableListItemComponent (component)
+
+**Selector:** `lu-sortable-list-item`
+
+#### Inputs
+
+| Property | Binding name | Type | Default | Required | Transform | Description |
+|----------|-------------|------|---------|----------|-----------|-------------|
+| `label` | `label` | `string` | — | ✅ | — | — |
+| `helperMessage` | `helperMessage` | `string` | — | — | — | — |
+| `clickable` | `clickable` | `boolean` | `false` | — | `booleanAttribute` | Rend un élément de la liste cliquable. |
+| `unclearable` | `unclearable` | `boolean` | `false` | — | `booleanAttribute` | — |
+| `drag` | `drag` | `boolean` | `false` | — | `booleanAttribute` | — |
+| `small` | `small` | `boolean` | `false` | — | `booleanAttribute` | Modifie la taille de la liste. |
+
+#### Outputs
+
+| Property | Binding name | Type |
+|----------|-------------|------|
+| `delete` | `delete` | `void` |
+
 ### SortableListComponent (component)
 
 **Selector:** `lu-sortable-list`
+
+#### Inputs
+
+| Property | Binding name | Type | Default | Required | Transform | Description |
+|----------|-------------|------|---------|----------|-----------|-------------|
+| `small` | `small` | `boolean` | `false` | — | `booleanAttribute` | Modifie la taille de la liste. |
 
 ## Related files
 

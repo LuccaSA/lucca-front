@@ -1,11 +1,5 @@
 # animations
 
-## Import
-
-```typescript
-import {  } from '@lucca-front/ng/animations';
-```
-
 ## Related files
 
 - 📝 [Code & implementation](./animations.component.md)

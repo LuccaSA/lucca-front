@@ -16,7 +16,7 @@ import { LuSkipLinksComponent } from '@lucca-front/ng/a11y';
 
 | Property | Binding name | Type | Default | Required | Transform | Description |
 |----------|-------------|------|---------|----------|-----------|-------------|
-| `intl` | `intl` | `unknown` | `...intlInputOptions(LU_SKIP_LINKS_TRANSLATIONS` | — | — | — |
+| `intl` | `intl` | `unknown` | — | — | — | — |
 
 ## Related files
 

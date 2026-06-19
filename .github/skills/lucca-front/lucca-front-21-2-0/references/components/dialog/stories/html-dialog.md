@@ -50,11 +50,13 @@ la dialog box a accès à tout ce que le composant expose au template, fonctions
 
 ### Utilisation des formulaires
 
-Dans le cas où vous souhaitez utiliser un formulaire au sein d’une [dialog box](https://prisme.lucca.io/94310e217/p/841b0b-dialogs), il vous suffit de placer la balise `form` avec une classe `dialog-inside-formOptional` autour du contenu de votre dialog, que celle-ci soit template-driven ou non :
+Dans le cas où vous souhaitez utiliser un formulaire au sein d’une [dialog box](https://prisme.lucca.io/94310e217/p/841b0b-dialogs), il vous suffit de placer la balise `form` avec un attribut `luForm` autour du contenu de votre dialog, que celle-ci soit template-driven ou non :
 
 ```css
 @forward '@lucca-front/scss/src/components/dialog';
-import {DialogHeaderAction} from '@lucca-front/ng/dialog';
+import { FormComponent } from '@lucca-front/ng/form';
+import { FormFieldComponent } from '@lucca-front/ng/form-field';
+import { CheckboxInputComponent, TextInputComponent } from '@lucca-front/ng/forms';
 ```
 
 ```html

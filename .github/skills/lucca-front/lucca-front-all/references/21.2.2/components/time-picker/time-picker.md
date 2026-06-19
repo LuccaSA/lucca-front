@@ -3,30 +3,10 @@
 ## Import
 
 ```typescript
-import { DurationPickerComponent, TimePickerComponent } from '@lucca-front/ng/time';
+import { TimePickerComponent } from '@lucca-front/ng/time';
 ```
 
 ## API Reference
-
-### DurationPickerComponent (component)
-
-**Selector:** `lu-duration-picker`
-
-#### Inputs
-
-| Property | Binding name | Type | Default | Required | Transform | Description |
-|----------|-------------|------|---------|----------|-----------|-------------|
-| `intl` | `intl` | `unknown` | `...intlInputOptions(LU_DURATION_PICKER_TRANSLATIONS` | — | — | — |
-| `max` | `max` | ``${string}P${string}`` | `'PT99H'` | — | — | — |
-| `displayArrows` | `displayArrows` | `boolean` | `false` | — | `booleanAttribute` | Affiche les boutons d’incrémentation. |
-| `label` | `label` | `string` | — | — | — | Modifie le label de l’input. |
-| `hideZeroValue` | `hideZeroValue` | `boolean` | `false` | — | `booleanAttribute` | — |
-
-#### Outputs
-
-| Property | Binding name | Type |
-|----------|-------------|------|
-| `durationChange` | `durationChange` | `DurationChangeEvent` |
 
 ### TimePickerComponent (component)
 
@@ -36,7 +16,7 @@ import { DurationPickerComponent, TimePickerComponent } from '@lucca-front/ng/ti
 
 | Property | Binding name | Type | Default | Required | Transform | Description |
 |----------|-------------|------|---------|----------|-----------|-------------|
-| `intl` | `intl` | `unknown` | `...intlInputOptions(LU_TIME_PICKER_TRANSLATIONS` | — | — | — |
+| `intl` | `intl` | `unknown` | — | — | — | — |
 | `max` | `max` | ``${string}:${string}:${string}`` | `MAX_TIME` | — | — | — |
 | `displayArrows` | `displayArrows` | `boolean` | `false` | — | `booleanAttribute` | Affiche les boutons d’incrémentation. |
 | `forceMeridiemDisplay` | `forceMeridiemDisplay` | `boolean \| null` | `null` | — | — | — |
@@ -47,6 +27,12 @@ import { DurationPickerComponent, TimePickerComponent } from '@lucca-front/ng/ti
 | Property | Binding name | Type |
 |----------|-------------|------|
 | `timeChange` | `timeChange` | `TimeChangeEvent` |
+
+#### Models (two-way binding)
+
+| Property | Type | Required |
+|----------|------|----------|
+| `value` | `ISO8601Time` | — |
 
 ## Related files
 

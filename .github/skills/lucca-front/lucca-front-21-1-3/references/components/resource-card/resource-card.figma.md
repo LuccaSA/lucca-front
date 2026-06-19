@@ -27,5 +27,7 @@
 | `size` | VARIANT | `M` · `S` |
 | `grid` | VARIANT | `true` · `false` |
 | `illustration` | VARIANT | `false` · `true` |
-| `fakeCard` | BOOLEAN | — |
 | `addResource` | BOOLEAN | — |
+| `stackContent` | VARIANT | — |
+| `gridContent` | VARIANT | — |
+| `type` | VARIANT | `stack` · `grid` · `🧪 grid [BÊTA]` |

@@ -1,6 +1,10 @@
 # text-flow — Changelog
 
-_Aucun changement d'API détecté sur l'historique stable jusqu'à v21.1.2._
+> Diff structurel de l'API (selectors, inputs, outputs, models) entre versions stables, jusqu'à `v21.1.2`. Les versions sans changement d'API sont omises.
+
+## 21.1.0
+
+Composant introduit (`TextFlowComponent`).
 
 ## Notes de release (ZeroHeight)
 

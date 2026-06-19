@@ -3,7 +3,7 @@
 ## Import
 
 ```typescript
-import { EmptyStatePageComponent, EmptyStateSectionComponent } from '@lucca-front/ng/empty-state';
+import { EmptyStatePageComponent } from '@lucca-front/ng/empty-state';
 ```
 
 ## API Reference
@@ -21,26 +21,11 @@ import { EmptyStatePageComponent, EmptyStateSectionComponent } from '@lucca-fron
 | `topRightForeground` | `topRightForeground` | `string` | `'https://cdn.lucca.fr/lucca-front/assets/empty-states/generic/coffee-01.svg'` | — | — | — |
 | `bottomLeftBackground` | `bottomLeftBackground` | `string` | `'https://cdn.lucca.fr/lucca-front/assets/empty-states/poplee/bubbles-bottom-left-01.svg'` | — | — | — |
 | `bottomLeftForeground` | `bottomLeftForeground` | `string` | `'https://cdn.lucca.fr/lucca-front/assets/empty-states/poplee/core-hr-01.svg'` | — | — | — |
-| `contentBackgroundColor` | `contentBackgroundColor` | `string` | `'var(--pr-t-elevation-surface-default` | — | — | — |
+| `contentBackgroundColor` | `contentBackgroundColor` | `string` | `'var(--pr-t-elevation-surface-default)'` | — | — | — |
 | `slotTop` | `slotTop` | `PortalContent` | — | — | — | [v19.3] Optional, Add content above heading. |
 | `heading` | `heading` | `string` | — | — | — | [v18.1] Optional |
 | `description` | `description` | `PortalContent` | — | — | — | [v18.1] Optional |
 | `hx` | `hx` | `number` | `1` | — | `numberAttribute` | [v18.1] |
-
-### EmptyStateSectionComponent (component)
-
-**Selector:** `lu-empty-state-section`
-
-#### Inputs
-
-| Property | Binding name | Type | Default | Required | Transform | Description |
-|----------|-------------|------|---------|----------|-----------|-------------|
-| `icon` | `icon` | `string` | `'https://cdn.lucca.fr/lucca-front/assets/empty-states/icons/iconBanknote.svg'` | — | — | — |
-| `palette` | `palette` | `Palette` | `'none'` | — | — | — |
-| `center` | `center` | `boolean` | `false` | — | `booleanAttribute` | — |
-| `heading` | `heading` | `string` | — | — | — | [v18.1] Optional |
-| `description` | `description` | `PortalContent` | — | — | — | [v18.1] Optional |
-| `hx` | `hx` | `number` | `3` | — | `numberAttribute` | [v18.1] |
 
 ## Related files
 

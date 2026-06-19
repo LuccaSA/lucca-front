@@ -15,7 +15,7 @@ En navigant uniquement au clavier, il est nécessaire de passer par chaque élé
 
 </callout>
 
-[Basic](https://lucca-front.lucca.io/storybook/iframe.html?id=documentation-navigation-skiplinks-basic--basic)
+[Basic](https://lucca-front.lucca.io/master/storybook/iframe.html?id=documentation-navigation-skiplinks-basic--basic)
 
 ## Mise en place
 

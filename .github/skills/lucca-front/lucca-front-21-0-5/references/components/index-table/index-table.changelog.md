@@ -4,7 +4,7 @@
 
 ## 21.0.0
 
-Composant introduit (`IndexTableBodyComponent`, `IndexTableRowCellHeaderComponent`, `IndexTableRowCellComponent`, `IndexTableHeadComponent`, `IndexTableRowComponent`, `IndexTableComponent`).
+Composant introduit (`IndexTableActionFileComponent`, `IndexTableActionComponent`, `IndexTableBodyComponent`, `IndexTableRowCellHeaderComponent`, `IndexTableRowCellComponent`, `IndexTableFootComponent`, `IndexTableHeadComponent`, `IndexTableRowComponent`, `IndexTableComponent`).
 
 ## Notes de release (ZeroHeight)
 

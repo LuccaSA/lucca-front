@@ -10,4 +10,4 @@ title: Scrollbox
 import { ScrollBoxComponent } from '@lucca-front/ng/scroll-box';
 ```
 
-[Basic](https://lucca-front.lucca.io/storybook/iframe.html?id=documentation-structure-scrollbox--basic)
+[Basic](https://lucca-front.lucca.io/master/storybook/iframe.html?id=documentation-structure-scrollbox--basic)

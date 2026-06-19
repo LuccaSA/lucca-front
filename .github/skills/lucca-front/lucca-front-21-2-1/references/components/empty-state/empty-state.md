@@ -3,7 +3,7 @@
 ## Import
 
 ```typescript
-import { EmptyStatePageIllustration, EmptyStatePageComponent, EmptyStateSectionComponent } from '@lucca-front/ng/empty-state';
+import { EmptyStatePageIllustration, EmptyStatePageComponent } from '@lucca-front/ng/empty-state';
 ```
 
 ## API Reference
@@ -32,30 +32,13 @@ import { EmptyStatePageIllustration, EmptyStatePageComponent, EmptyStateSectionC
 | `topRightForeground` | `topRightForeground` | `string` | `'https://cdn.lucca.fr/lucca-front/assets/empty-states/generic/coffee-01.svg'` | — | — | Illustration de premier plan dans le coin supérieur droit. |
 | `bottomLeftBackground` | `bottomLeftBackground` | `string` | `'https://cdn.lucca.fr/lucca-front/assets/empty-states/poplee/bubbles-bottom-left-01.svg'` | — | — | — |
 | `bottomLeftForeground` | `bottomLeftForeground` | `string` | `'https://cdn.lucca.fr/lucca-front/assets/empty-states/poplee/core-hr-01.svg'` | — | — | — |
-| `contentBackgroundColor` | `contentBackgroundColor` | `string` | `'var(--pr-t-elevation-surface-default` | — | — | Modifie la couleur de fond du contenu (variable CSS, couleur hexadécimale, etc.). |
+| `contentBackgroundColor` | `contentBackgroundColor` | `string` | `'var(--pr-t-elevation-surface-default)'` | — | — | Modifie la couleur de fond du contenu (variable CSS, couleur hexadécimale, etc.). |
 | `slotTop` | `slotTop` | `PortalContent` | — | — | — | [v19.3] Ajout d’un slot au dessus du titre. |
 | `illustration` | `illustration` | `PortalContent` | — | — | — | — |
 | `heading` | `heading` | `string` | — | — | — | Titre de l’empty state. |
 | `description` | `description` | `PortalContent` | — | — | — | Description du composant. |
 | `hx` | `hx` | `number` | `1` | — | `numberAttribute` | Définit le niveau sémantique du titre. |
 | `hxStyle` | `hxStyle` | `number` | `1` | — | `numberAttribute` | [v21.2] Niveau du titre (style). |
-
-### EmptyStateSectionComponent (component)
-
-**Selector:** `lu-empty-state-section`
-
-#### Inputs
-
-| Property | Binding name | Type | Default | Required | Transform | Description |
-|----------|-------------|------|---------|----------|-----------|-------------|
-| `icon` | `icon` | `string \| null` | `null` | — | — | Affiche une illustration au dessus du titre. |
-| `illustration` | `illustration` | `BubbleIllustration \| string \| null` | `null` | — | — | — |
-| `action` | `action` | `boolean` | `false` | — | `booleanAttribute` | Ajoute une icône (+) à l’illustration. |
-| `palette` | `palette` | `Palette` | `'none'` | — | — | — |
-| `center` | `center` | `boolean` | `false` | — | `booleanAttribute` | Centre le contenu horizontalement. |
-| `heading` | `heading` | `string` | — | — | — | Titre de l’empty state. |
-| `description` | `description` | `PortalContent` | — | — | — | Description du composant. |
-| `hx` | `hx` | `number` | `3` | — | `numberAttribute` | Définit le niveau sémantique du titre. |
 
 ## Related files
 

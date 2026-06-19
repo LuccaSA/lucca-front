@@ -4,7 +4,7 @@
 
 ## 21.0.0
 
-Composant introduit (`FileEntryComponent`, `SingleFileUploadComponent`).
+Composant introduit (`FileDropzoneComponent`, `FileEntryComponent`, `MultiFileUploadComponent`, `SingleFileUploadComponent`).
 
 ## Notes de release (ZeroHeight)
 

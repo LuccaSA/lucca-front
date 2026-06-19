@@ -4,7 +4,7 @@
 
 ## 21.0.0
 
-Composant introduit (`Calendar2Component`, `DateInputComponent`, `DateRangeInputComponent`).
+Composant introduit (`DateRangeInputComponent`).
 
 ## Notes de release (ZeroHeight)
 

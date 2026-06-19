@@ -3,7 +3,7 @@
 ## Import
 
 ```typescript
-import { IndexTableBodyComponent, IndexTableRowCellHeaderComponent, IndexTableRowCellComponent, IndexTableHeadComponent, IndexTableRowComponent, IndexTableComponent } from '@lucca-front/ng/index-table';
+import { IndexTableActionFileComponent, IndexTableActionComponent, IndexTableBodyComponent, IndexTableRowCellHeaderComponent, IndexTableRowCellComponent, IndexTableFootComponent, IndexTableHeadComponent, IndexTableRowComponent, IndexTableComponent } from '@lucca-front/ng/index-table';
 ```
 
 ## Basic Usage
@@ -15,17 +15,64 @@ import { IndexTableBodyComponent, IndexTableRowCellHeaderComponent, IndexTableRo
 
 ## API Reference
 
+### IndexTableActionFileComponent (component)
+
+**Selector:** `input[luIndexTableAction]`
+
+### IndexTableActionComponent (component)
+
+**Selectors:** `button[luIndexTableAction]`, `a[luIndexTableAction]`, `label[luIndexTableAction]`
+
 ### IndexTableBodyComponent (component)
 
 **Selector:** `tbody[luIndexTableBody]`
+
+#### Inputs
+
+| Property | Binding name | Type | Default | Required | Transform | Description |
+|----------|-------------|------|---------|----------|-----------|-------------|
+| `group` | `group` | `PortalContent \| null` | `null` | — | — | — |
+| `groupButtonAlt` | `groupButtonAlt` | `string \| null` | `null` | — | — | — |
+
+#### Models (two-way binding)
+
+| Property | Type | Required |
+|----------|------|----------|
+| `expanded` | `unknown` | — |
 
 ### IndexTableRowCellHeaderComponent (component)
 
 **Selector:** `th[luIndexTableCell]`
 
+#### Inputs
+
+| Property | Binding name | Type | Default | Required | Transform | Description |
+|----------|-------------|------|---------|----------|-----------|-------------|
+| `selectable` | `selectable` | `boolean` | `false` | — | `booleanAttribute` | — |
+| `hiddenLabel` | `hiddenLabel` | `boolean` | `false` | — | `booleanAttribute` | — |
+| `actions` | `actions` | `boolean` | `false` | — | `booleanAttribute` | — |
+| `inlineSize` | `inlineSize` | `number` | `0` | — | `numberAttribute` | — |
+
+#### Models (two-way binding)
+
+| Property | Type | Required |
+|----------|------|----------|
+| `sort` | `null | 'none' | 'ascending' | 'descending'` | — |
+
 ### IndexTableRowCellComponent (component)
 
 **Selector:** `td[luIndexTableCell]`
+
+#### Inputs
+
+| Property | Binding name | Type | Default | Required | Transform | Description |
+|----------|-------------|------|---------|----------|-----------|-------------|
+| `allowTextSelection` | `allowTextSelection` | `boolean` | `false` | — | `booleanAttribute` | — |
+| `tfoot` | `tfoot` | `boolean` | `false` | — | `booleanAttribute` | — |
+
+### IndexTableFootComponent (component)
+
+**Selector:** `tfoot[luIndexTableFoot]`
 
 ### IndexTableHeadComponent (component)
 
@@ -35,9 +82,32 @@ import { IndexTableBodyComponent, IndexTableRowCellHeaderComponent, IndexTableRo
 
 **Selector:** `tr[luIndexTableRow]`
 
+#### Inputs
+
+| Property | Binding name | Type | Default | Required | Transform | Description |
+|----------|-------------|------|---------|----------|-----------|-------------|
+| `selectedLabel` | `selectedLabel` | `string \| null` | `null` | — | — | — |
+| `disabled` | `disabled` | `boolean` | `false` | — | `booleanAttribute` | — |
+| `stack` | `stack` | `number` | `1` | — | `numberAttribute` | — |
+
+#### Models (two-way binding)
+
+| Property | Type | Required |
+|----------|------|----------|
+| `selected` | `boolean` | — |
+
 ### IndexTableComponent (component)
 
 **Selector:** `lu-index-table`
+
+#### Inputs
+
+| Property | Binding name | Type | Default | Required | Transform | Description |
+|----------|-------------|------|---------|----------|-----------|-------------|
+| `selectable` | `selectable` | `boolean` | `false` | — | `booleanAttribute` | — |
+| `layoutFixed` | `layoutFixed` | `boolean` | `false` | — | `booleanAttribute` | — |
+| `empty` | `empty` | `boolean` | `false` | — | `booleanAttribute` | — |
+| `responsive` | `responsive` | `ResponsiveConfig<'layoutFixed', true>` | — | — | — | — |
 
 ## Related files
 

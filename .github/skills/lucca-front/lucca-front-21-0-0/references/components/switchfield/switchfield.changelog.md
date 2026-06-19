@@ -4,7 +4,7 @@
 
 ## 21.0.0
 
-Composant introduit (`FormFieldComponent`, `InputFramedComponent`, `InputDirective`).
+Composant introduit (`SwitchInputComponent`).
 
 ## Notes de release (ZeroHeight)
 

@@ -22,7 +22,7 @@ import { ChipComponent } from '@lucca-front/ng/chip';
 
 | Property | Binding name | Type | Default | Required | Transform | Description |
 |----------|-------------|------|---------|----------|-----------|-------------|
-| `intl` | `intl` | `unknown` | `...intlInputOptions(LU_CHIP_TRANSLATIONS` | — | — | — |
+| `intl` | `intl` | `unknown` | — | — | — | — |
 | `withEllipsis` | `withEllipsis` | `boolean` | `false` | — | `booleanAttribute` | [20.1] Ellipse le texte et ajoute une tooltip lorsque le label est trop long. |
 | `unkillable` | `unkillable` | `boolean` | `false` | — | `booleanAttribute` | Rend le chip non supprimable. |
 | `palette` | `palette` | `string` | — | — | — | — |

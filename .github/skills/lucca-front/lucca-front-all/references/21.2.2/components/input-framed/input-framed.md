@@ -3,7 +3,7 @@
 ## Import
 
 ```typescript
-import { LuInputClearerComponent, LuInputDisplayerDirective, LuInputDirective } from '@lucca-front/ng/input';
+import { InputFramedComponent } from '@lucca-front/ng/form-field';
 ```
 
 ## Basic Usage
@@ -14,19 +14,17 @@ import { LuInputClearerComponent, LuInputDisplayerDirective, LuInputDirective } 
 
 ## API Reference
 
-### LuInputClearerComponent (component)
+### InputFramedComponent (component)
 
-**Selector:** `lu-input-clearer`
+**Selector:** `lu-input-framed`
 
-**exportAs:** `luClearer`
+#### Inputs
 
-### LuInputDisplayerDirective (directive)
-
-**Selector:** `[luDisplayer]`
-
-### LuInputDirective (directive)
-
-**Selector:** `[luInput]`
+| Property | Binding name | Type | Default | Required | Transform | Description |
+|----------|-------------|------|---------|----------|-----------|-------------|
+| `framedPortal` | `framedPortal` | `PortalContent \| null` | `null` | — | — | — |
+| `center` | `center` | `boolean` | `false` | — | `booleanAttribute` | Aligne le champ et son illustration verticalement lorsque le label est trop court. |
+| `size` | `size` | `'L' \| null` | `null` | — | — | — |
 
 ## Related files
 

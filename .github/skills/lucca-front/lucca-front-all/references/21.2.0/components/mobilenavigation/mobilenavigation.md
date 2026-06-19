@@ -1,17 +1,5 @@
 # mobilenavigation
 
-## Import
-
-```typescript
-import { MobilePushComponent } from '@lucca-front/ng/mobile-push';
-```
-
-## API Reference
-
-### MobilePushComponent (component)
-
-**Selector:** `lu-mobile-push`
-
 ## Related files
 
 - 📝 [Code & implementation](./mobilenavigation.component.md)

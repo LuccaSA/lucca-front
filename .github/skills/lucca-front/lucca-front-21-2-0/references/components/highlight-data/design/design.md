@@ -14,9 +14,9 @@
 
 Plusieurs thèmes existent pour que le composant puisse s’utiliser sur différentes couleurs d’arrière-plan :
 
-* “**Dark**” : utilisé sur fond gris (--pr-t-elevation-surface-default) et sur fond blanc (`--pr-t-elevation-surface-raised`),
-* “**White**” : utilisé sur fond gris (`--pr-t-elevation-surface-default`),
-* “**Light**” : utilisé sur fond blanc (`--pr-t-elevation-surface-raised`).
+* « **Dark** » : utilisé sur fond gris (`--pr-t-elevation-surface-default`) et sur fond blanc (`--pr-t-elevation-surface-raised`),
+* « **Light** » : utilisé sur fond blanc (`--pr-t-elevation-surface-raised`).
+* « **White** » : utilisé sur fond gris (`--pr-t-elevation-surface-default`),
 
 La couleur des bulles constituants l’ornementation s’adapte au thème utilisé.
 

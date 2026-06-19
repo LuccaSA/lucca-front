@@ -3,22 +3,23 @@
 ## Import
 
 ```typescript
-import { Calendar2Component, DateInputComponent, DateRangeInputComponent } from '@lucca-front/ng/date2';
+import { DateRangeInputComponent } from '@lucca-front/ng/date2';
 ```
 
 ## API Reference
 
-### Calendar2Component (component)
-
-**Selector:** `lu-calendar2`
-
-### DateInputComponent (component)
-
-**Selector:** `lu-date-input`
-
 ### DateRangeInputComponent (component)
 
 **Selector:** `lu-date-range-input`
+
+#### Inputs
+
+| Property | Binding name | Type | Default | Required | Transform | Description |
+|----------|-------------|------|---------|----------|-----------|-------------|
+| `placeholder` | `placeholder` | `string` | — | — | — | — |
+| `widthAuto` | `widthAuto` | `boolean` | `false` | — | `booleanAttribute` | Applique une pleine largeur au composant. |
+| `shortcuts` | `shortcuts` | `readonly CalendarShortcut[]` | — | — | — | — |
+| `autocomplete` | `autocomplete` | `AutoFill` | `'off'` | — | — | — |
 
 ## Related files
 

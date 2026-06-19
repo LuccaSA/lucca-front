@@ -1,7 +1,7 @@
 # input-framed — Grid _(HTML/CSS)_
 
 ```css
-@forward '@lucca-front/scss/src/components/input';
+@forward '@lucca-front/scss/src/components/form-field';
 @forward '@lucca-front/scss/src/components/formLabel';
 @forward '@lucca-front/scss/src/components/grid';
 @forward '@lucca-front/scss/src/components/inputFramed';

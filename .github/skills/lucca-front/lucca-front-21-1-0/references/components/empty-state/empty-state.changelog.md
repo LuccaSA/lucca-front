@@ -2,16 +2,9 @@
 
 > Diff structurel de l'API (selectors, inputs, outputs, models) entre versions stables, jusqu'à `v21.1.0`. Les versions sans changement d'API sont omises.
 
-## 21.1.0
-
-`EmptyStateSectionComponent` :
-  + `illustration` : BubbleIllustration | null
-  + `action` : boolean
-  ~ `icon` : string → string | null, défaut 'https://cdn.lucca.fr/lucca-front/assets/empty-states/icons/iconBanknote.svg' → null
-
 ## 21.0.0
 
-Composant introduit (`EmptyStatePageComponent`, `EmptyStateSectionComponent`).
+Composant introduit (`EmptyStatePageComponent`).
 
 ## Notes de release (ZeroHeight)
 

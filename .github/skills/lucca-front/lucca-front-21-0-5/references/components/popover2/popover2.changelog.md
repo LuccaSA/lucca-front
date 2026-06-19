@@ -5,7 +5,7 @@
 ## 21.0.4
 
 `PopoverDirective` :
-  - `luPopoverPosition`
+  ~ `luPopoverPosition` : PopoverPosition → 'above' | 'below' | 'before' | 'after'
 
 ## 21.0.3
 

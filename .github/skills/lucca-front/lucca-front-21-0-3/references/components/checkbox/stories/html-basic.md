@@ -1,7 +1,7 @@
 # checkbox — Basic _(HTML/CSS)_
 
 ```css
-@forward '@lucca-front/scss/src/components/form-field';
+@forward '@lucca-front/scss/src/components/forms';
 @forward '@lucca-front/scss/src/components/filterPill';
 ```
 

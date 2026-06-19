@@ -3,7 +3,7 @@
 ## Import
 
 ```typescript
-import { FileEntryComponent, SingleFileUploadComponent } from '@lucca-front/ng/file-upload';
+import { FileDropzoneComponent, FileEntryComponent, MultiFileUploadComponent, SingleFileUploadComponent } from '@lucca-front/ng/file-upload';
 ```
 
 ## Basic Usage
@@ -14,6 +14,10 @@ import { FileEntryComponent, SingleFileUploadComponent } from '@lucca-front/ng/f
 
 ## API Reference
 
+### FileDropzoneComponent (component)
+
+**Selector:** `lu-file-dropzone`
+
 ### FileEntryComponent (component)
 
 **Selector:** `lu-file-entry`
@@ -22,7 +26,7 @@ import { FileEntryComponent, SingleFileUploadComponent } from '@lucca-front/ng/f
 
 | Property | Binding name | Type | Default | Required | Transform | Description |
 |----------|-------------|------|---------|----------|-----------|-------------|
-| `intl` | `intl` | `unknown` | `...intlInputOptions(LU_FILE_UPLOAD_TRANSLATIONS` | — | — | — |
+| `intl` | `intl` | `unknown` | — | — | — | — |
 | `state` | `state` | `'success' \| 'loading' \| 'error' \| 'default'` | `'default'` | — | — | Modifie l’état du composant. |
 | `displayFileName` | `displayFileName` | `boolean` | `false` | — | `booleanAttribute` | Affiche le nom du fichier sous l’image en vue media. |
 | `inlineMessageError` | `inlineMessageError` | `string \| null` | `null` | — | — | Message d’erreur affiché sous le composant. |
@@ -33,6 +37,17 @@ import { FileEntryComponent, SingleFileUploadComponent } from '@lucca-front/ng/f
 | `password` | `password` | `string` | `''` | — | — | — |
 | `media` | `media` | `boolean` | `false` | — | `booleanAttribute` | Affiche le fichier avec une mise en forme adaptée aux visuels. |
 | `previewUrl` | `previewUrl` | `string` | `''` | — | — | URL de prévisualisation de l’image uploadée. |
+
+#### Outputs
+
+| Property | Binding name | Type |
+|----------|-------------|------|
+| `passwordChange` | `passwordChange` | `void` |
+| `deleteFile` | `deleteFile` | `void` |
+
+### MultiFileUploadComponent (component)
+
+**Selector:** `lu-multi-file-upload`
 
 ### SingleFileUploadComponent (component)
 

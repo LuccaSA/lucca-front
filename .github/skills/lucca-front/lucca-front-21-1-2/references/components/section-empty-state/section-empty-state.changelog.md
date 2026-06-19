@@ -4,19 +4,17 @@
 
 ## 21.1.1
 
-`EmptyStateSectionComponent` :
-  ~ `illustration` : BubbleIllustration | null → BubbleIllustration | string | null
+~ `illustration` : BubbleIllustration | null → BubbleIllustration | string | null
 
 ## 21.1.0
 
-`EmptyStateSectionComponent` :
-  + `illustration` : BubbleIllustration | null
-  + `action` : boolean
-  ~ `icon` : string → string | null, défaut 'https://cdn.lucca.fr/lucca-front/assets/empty-states/icons/iconBanknote.svg' → null
++ `illustration` : BubbleIllustration | null
++ `action` : boolean
+~ `icon` : string → string | null, défaut 'https://cdn.lucca.fr/lucca-front/assets/empty-states/icons/iconBanknote.svg' → null
 
 ## 21.0.0
 
-Composant introduit (`EmptyStatePageComponent`, `EmptyStateSectionComponent`).
+Composant introduit (`EmptyStateSectionComponent`).
 
 ## Notes de release (ZeroHeight)
 

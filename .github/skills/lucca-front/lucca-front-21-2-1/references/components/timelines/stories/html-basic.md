@@ -1,10 +1,5 @@
 # timelines — Basic _(HTML/CSS)_
 
-```css
-@forward '@lucca-front/scss/src/components/time';
-@forward '@lucca-front/scss/src/components/timeline';
-```
-
 ```html
 <ol class="timeline">
 	<li class="timeline-step">

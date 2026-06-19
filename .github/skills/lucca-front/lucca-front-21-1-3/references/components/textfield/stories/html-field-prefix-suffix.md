@@ -1,7 +1,7 @@
 # textfield — Field prefix suffix _(HTML/CSS)_
 
 ```css
-@forward '@lucca-front/scss/src/components/input';
+@forward '@lucca-front/scss/src/components/forms';
 @forward '@lucca-front/scss/src/components/formLabel';
 @forward '@lucca-front/scss/src/components/textField';
 ```

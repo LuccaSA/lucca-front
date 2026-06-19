@@ -3,46 +3,10 @@
 ## Import
 
 ```typescript
-import { CalloutActionsComponent, CalloutDisclosureComponent, CalloutFeedbackListComponent, CalloutPopoverComponent, CalloutComponent } from '@lucca-front/ng/callout';
+import { CalloutPopoverComponent } from '@lucca-front/ng/callout';
 ```
 
 ## API Reference
-
-### CalloutActionsComponent (component)
-
-**Selector:** `lu-callout-actions`
-
-#### Inputs
-
-| Property | Binding name | Type | Default | Required | Transform | Description |
-|----------|-------------|------|---------|----------|-----------|-------------|
-| `inline` | `inline` | `boolean` | `false` | — | `booleanAttribute` | — |
-
-### CalloutDisclosureComponent (component)
-
-**Selector:** `lu-callout-disclosure`
-
-#### Inputs
-
-| Property | Binding name | Type | Default | Required | Transform | Description |
-|----------|-------------|------|---------|----------|-----------|-------------|
-| `heading` | `heading` | `PortalContent` | — | ✅ | — | Ajoute un titre au popover. |
-| `icon` | `icon` | `LuccaIcon` | — | — | — | Ajoute une icône au callout. |
-| `palette` | `palette` | `Palette` | `'none'` | — | — | Applique une palette de couleurs au callout. |
-| `size` | `size` | `'M' \| 'S'` | `'M'` | — | — | — |
-| `state` | `state` | `'success' \| 'warning' \| 'error'` | — | — | — | État du callout. |
-| `open` | `open` | `boolean` | `false` | — | `booleanAttribute` | — |
-
-### CalloutFeedbackListComponent (component)
-
-**Selector:** `ul[lu-callout-feedback-list]`
-
-#### Inputs
-
-| Property | Binding name | Type | Default | Required | Transform | Description |
-|----------|-------------|------|---------|----------|-----------|-------------|
-| `palette` | `palette` | `Palette` | — | — | — | Applique une palette de couleurs au callout. |
-| `size` | `size` | `'M' \| 'S'` | — | — | — | — |
 
 ### CalloutPopoverComponent (component)
 
@@ -62,30 +26,6 @@ import { CalloutActionsComponent, CalloutDisclosureComponent, CalloutFeedbackLis
 | `icon` | `icon` | `LuccaIcon` | — | — | — | Ajoute une icône au callout. |
 | `state` | `state` | `'success' \| 'warning' \| 'error'` | — | — | — | État du callout. |
 | `heading` | `heading` | `PortalContent` | — | — | — | Ajoute un titre au popover. |
-
-### CalloutComponent (component)
-
-**Selector:** `lu-callout`
-
-#### Inputs
-
-| Property | Binding name | Type | Default | Required | Transform | Description |
-|----------|-------------|------|---------|----------|-----------|-------------|
-| `heading` | `heading` | `PortalContent` | — | — | — | Ajoute un titre au popover. |
-| `palette` | `palette` | `Palette` | `'none'` | — | — | Applique une palette de couleurs au callout. |
-| `size` | `size` | `'M' \| 'S'` | — | — | — | — |
-| `state` | `state` | `'success' \| 'warning' \| 'error'` | — | — | — | État du callout. |
-| `icon` | `icon` | `LuccaIcon` | — | — | — | Ajoute une icône au callout. |
-| `removable` | `removable` | `boolean` | `false` | — | `booleanAttribute` | — |
-| `removed` | `removed` | `boolean` | `false` | — | `booleanAttribute` | — |
-| `iconAlt` | `iconAlt` | `string \| null` | `null` | — | — | — |
-| `AI` | `AI` | `boolean` | `false` | — | `booleanAttribute` | — |
-
-#### Outputs
-
-| Property | Binding name | Type |
-|----------|-------------|------|
-| `removedChange` | `removedChange` | `boolean` |
 
 ## Type definitions
 

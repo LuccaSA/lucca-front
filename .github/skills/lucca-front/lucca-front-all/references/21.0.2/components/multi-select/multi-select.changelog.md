@@ -4,7 +4,7 @@
 
 ## 21.0.0
 
-Composant introduit (`LuMultiSelectContentDisplayerComponent`, `LuMultiSelectCounterDisplayerComponent`, `LuMultiSelectDefaultDisplayerComponent`, `LuMultiSelectDisplayerInputDirective`, `LuMultiDisplayerDirective`, `LuMultiSelectInputComponent`).
+Composant introduit (`LuMultiSelectContentDisplayerComponent`, `LuMultiSelectCounterDisplayerComponent`, `LuMultiSelectDefaultDisplayerComponent`, `LuMultiSelectDisplayerInputDirective`, `LuMultiDisplayerDirective`, `LuMultiSelectWithSelectAllDirective`, `LuMultiSelectInputComponent`).
 
 ## Notes de release (ZeroHeight)
 

@@ -14,6 +14,21 @@ import { ClearComponent } from '@lucca-front/ng/clear';
 
 **exportAs:** `luClearer`
 
+#### Inputs
+
+| Property | Binding name | Type | Default | Required | Transform | Description |
+|----------|-------------|------|---------|----------|-----------|-------------|
+| `size` | `size` | `'S' \| null` | `null` | — | — | Modifie la taille du bouton. |
+| `disabled` | `disabled` | `boolean` | `false` | — | `booleanAttribute` | Désactive le bouton. |
+| `palette` | `palette` | `Palette` | `'none'` | — | — | Applique une palette de couleurs au bouton. |
+| `inverted` | `inverted` | `boolean` | `false` | — | `booleanAttribute` | Modifie les couleurs du bouton pour un usage sur fond foncé. |
+
+#### Outputs
+
+| Property | Binding name | Type |
+|----------|-------------|------|
+| `onClear` | `onClear` | `T` |
+
 ## Related files
 
 - 📝 [Code & implementation](./clear.component.md)

@@ -3,14 +3,30 @@
 ## Import
 
 ```typescript
-import { DialogHeaderComponent, DialogComponent, DialogCloseDirective, DialogDismissDirective, DialogOpenDirective } from '@lucca-front/ng/dialog';
+import { DialogContentComponent, DialogFooterComponent, DialogHeaderAction, DialogHeaderComponent, DialogRoutingContainerComponent, DialogComponent, DialogCloseDirective, DialogDismissDirective, DialogOpenDirective } from '@lucca-front/ng/dialog';
 ```
 
 ## API Reference
 
+### DialogContentComponent (component)
+
+**Selector:** `lu-dialog-content`
+
+### DialogFooterComponent (component)
+
+**Selector:** `lu-dialog-footer`
+
+### DialogHeaderAction (directive)
+
+**Selector:** `[dialogHeaderAction]`
+
 ### DialogHeaderComponent (component)
 
 **Selector:** `lu-dialog-header`
+
+### DialogRoutingContainerComponent (component)
+
+**Selector:** `lu-dialog-routing-container`
 
 ### DialogComponent (component)
 
@@ -33,6 +49,13 @@ import { DialogHeaderComponent, DialogComponent, DialogCloseDirective, DialogDis
 ### DialogOpenDirective (directive)
 
 **Selector:** `[luDialogOpen]`
+
+#### Inputs
+
+| Property | Binding name | Type | Default | Required | Transform | Description |
+|----------|-------------|------|---------|----------|-----------|-------------|
+| `dialog` | `luDialogOpen` | `TemplateRef<void>` | — | ✅ | — | — |
+| `luDialogConfig` | `luDialogConfig` | `LuDialogConfig<unknown>` | — | — | — | — |
 
 ## Related files
 

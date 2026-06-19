@@ -3,7 +3,7 @@
 ## Import
 
 ```typescript
-import { ListboxComponent, OptionComponent } from '@lucca-front/ng/listbox';
+import { ListboxComponent, Treeitem, OptionComponent } from '@lucca-front/ng/listbox';
 ```
 
 ## API Reference
@@ -20,6 +20,10 @@ import { ListboxComponent, OptionComponent } from '@lucca-front/ng/listbox';
 | `tree` | `tree` | `boolean` | `false` | — | `booleanAttribute` | — |
 | `state` | `state` | `'loading' \| 'empty' \| null` | `null` | — | — | — |
 | `statusMsg` | `statusMsg` | `string \| null` | `null` | — | — | — |
+
+### Treeitem (directive)
+
+**Selector:** `[treeitem]`
 
 ### OptionComponent (component)
 

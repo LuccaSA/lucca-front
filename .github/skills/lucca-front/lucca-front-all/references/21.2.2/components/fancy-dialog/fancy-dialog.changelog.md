@@ -8,9 +8,14 @@
   + `fancyIllustration` : 'approval' | 'checklist' | 'email' | 'install' | 'mapping' | 'save' | 'users' | 'welcome' | 'payment-card'
   + `fancyIllustrationUrl` : string | null
 
+## 21.1.0
+
+`DialogHeaderComponent` :
+  + `intl` : unknown
+
 ## 21.0.0
 
-Composant introduit (`DialogHeaderComponent`, `DialogComponent`, `DialogCloseDirective`, `DialogDismissDirective`, `DialogOpenDirective`).
+Composant introduit (`DialogContentComponent`, `DialogFooterComponent`, `DialogHeaderAction`, `DialogHeaderComponent`, `DialogRoutingContainerComponent`, `DialogComponent`, `DialogCloseDirective`, `DialogDismissDirective`, `DialogOpenDirective`).
 
 ## Notes de release (ZeroHeight)
 

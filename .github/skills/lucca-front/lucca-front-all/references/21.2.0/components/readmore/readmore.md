@@ -16,6 +16,7 @@ import { ReadMoreComponent } from '@lucca-front/ng/read-more';
 
 | Property | Binding name | Type | Default | Required | Transform | Description |
 |----------|-------------|------|---------|----------|-----------|-------------|
+| `intl` | `intl` | `unknown` | — | — | — | — |
 | `lineClamp` | `lineClamp` | `number` | `5` | — | — | Modifie le nombre de lignes affichées à l'état replié. |
 | `openOnly` | `openOnly` | `boolean` | `false` | — | `booleanAttribute` | Empêche la fermeture du composant en masquant le bouton "Lire moins" |
 | `textFlow` | `textFlow` | `boolean` | `false` | — | `booleanAttribute` | Applique les espacements du composant Text flow |

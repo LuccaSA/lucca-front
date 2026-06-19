@@ -40,4 +40,4 @@ De la même manière, il est possible d’utiliser une Filter pill pour regroupe
 
 ## Cas d'usage
 
-Les Filter pills ne peuvent être utilisé en dehors du composant Filter bar. Ce composant permet de filtrer le contenu d’une interface pour en affiner les résultats.
+Les Filter pills ne peuvent être utilisées en dehors du composant Filter bar. Ce composant permet de filtrer le contenu d’une interface pour en affiner les résultats.

@@ -3,7 +3,7 @@
 ## Import
 
 ```typescript
-import { FormFieldComponent, InputFramedComponent, InputDirective, PresentationDisplayDirective, DataPresentationComponent } from '@lucca-front/ng/form-field';
+import { FormFieldComponent, InputDirective, PresentationDisplayDirective } from '@lucca-front/ng/form-field';
 ```
 
 ## API Reference
@@ -16,7 +16,7 @@ import { FormFieldComponent, InputFramedComponent, InputDirective, PresentationD
 
 | Property | Binding name | Type | Default | Required | Transform | Description |
 |----------|-------------|------|---------|----------|-----------|-------------|
-| `intl` | `intl` | `unknown` | `...intlInputOptions(LU_FORM_FIELD_TRANSLATIONS` | — | — | — |
+| `intl` | `intl` | `unknown` | — | — | — | — |
 | `label` | `label` | `PortalContent` | — | ✅ | — | Modifie le label de l’input. [PortalContent] |
 | `hiddenLabel` | `hiddenLabel` | `boolean` | `false` | — | `booleanAttribute` | Masque le label en le conservant dans le DOM pour les lecteurs d’écran |
 | `inline` | `inline` | `boolean` | `false` | — | `booleanAttribute` | — |
@@ -27,6 +27,7 @@ import { FormFieldComponent, InputFramedComponent, InputDirective, PresentationD
 | `iconAItooltip` | `iconAItooltip` | `string \| null` | `null` | — | — | — |
 | `iconAIalt` | `iconAIalt` | `string \| null` | `null` | — | — | — |
 | `width` | `width` | `FormFieldWidth, FormFieldWidth \| `${FormFieldWidth}` \| null` | `null` | — | `numberAttribute` | — |
+| `invalid` | `invalid` | `boolean \| null, boolean` | `null` | — | `booleanAttribute` | Applique l’état invalide au champ. |
 | `inlineMessage` | `inlineMessage` | `PortalContent \| null` | `null` | — | — | Ajoute un texte indicatif sous le champ de formulaire. [PortalContent] |
 | `errorInlineMessage` | `errorInlineMessage` | `PortalContent \| null` | `null` | — | — | Ajoute un texte d’erreur sous le champ de formulaire lorsque celui-ci est en erreur. [PortalContent] |
 | `inlineMessageState` | `inlineMessageState` | `InlineMessageState \| null` | `null` | — | — | Modifie l’état de l’inline message. |
@@ -39,19 +40,8 @@ import { FormFieldComponent, InputFramedComponent, InputDirective, PresentationD
 
 | Property | Type | Required |
 |----------|------|----------|
+| `rolePresentationLabel` | `unknown` | — |
 | `layout` | `'default' | 'checkable' | 'fieldset'` | — |
-
-### InputFramedComponent (component)
-
-**Selector:** `lu-input-framed`
-
-#### Inputs
-
-| Property | Binding name | Type | Default | Required | Transform | Description |
-|----------|-------------|------|---------|----------|-----------|-------------|
-| `framedPortal` | `framedPortal` | `PortalContent \| null` | `null` | — | — | — |
-| `center` | `center` | `boolean` | `false` | — | `booleanAttribute` | — |
-| `size` | `size` | `'L' \| null` | `null` | — | — | — |
 
 ### InputDirective (directive)
 
@@ -66,18 +56,6 @@ import { FormFieldComponent, InputFramedComponent, InputDirective, PresentationD
 ### PresentationDisplayDirective (directive)
 
 **Selector:** `[luPresentationDisplay]`
-
-### DataPresentationComponent (component)
-
-**Selector:** `lu-data-presentation`
-
-#### Inputs
-
-| Property | Binding name | Type | Default | Required | Transform | Description |
-|----------|-------------|------|---------|----------|-----------|-------------|
-| `label` | `label` | `PortalContent` | — | ✅ | — | Modifie le label de l’input. [PortalContent] |
-| `noValue` | `noValue` | `boolean` | `false` | — | `booleanAttribute` | — |
-| `size` | `size` | `'S' \| null` | `null` | — | — | — |
 
 ## Related files
 

@@ -4,7 +4,7 @@
 
 ## 21.0.0
 
-Composant introduit (`LuInputClearerComponent`, `LuInputDisplayerDirective`, `LuInputDirective`).
+Composant introduit (`MultilanguageInputComponent`).
 
 ## Notes de release (ZeroHeight)
 

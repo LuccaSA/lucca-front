@@ -25,10 +25,13 @@ const WORKSPACE_ROOT = path.join(__dirname, '..', '..', '..');
 /**
  * Extracts the full API for an Angular package from a specific git tag.
  *
- * @param ngPackage — Package name, e.g. "button"
+ * @param ngPackage — Package name, e.g. "button" (or a secondary entrypoint like "forms/phone-number-input")
  * @param version — Version config (for the git tag)
+ * @param silent — Suppress warnings (used during tag-walks where misses are expected)
+ * @param selectorFilter — When set, keep only classes whose selector is listed. Scopes one component
+ *                          out of a multi-component package (e.g. "lu-text-input" from "forms").
  */
-export function extractPackageAPI(ngPackage: string, version: VersionConfig, silent = false): PackageAPI | null {
+export function extractPackageAPI(ngPackage: string, version: VersionConfig, silent = false, selectorFilter?: string[]): PackageAPI | null {
 	// Start from the public API entrypoint
 	const publicApiPath = `packages/ng/${ngPackage}/public-api.ts`;
 	const publicApiContent = gitShow(version.tag, publicApiPath);
@@ -56,9 +59,48 @@ export function extractPackageAPI(ngPackage: string, version: VersionConfig, sil
 		apis.push(...extracted);
 	}
 
-	if (apis.length === 0) return null;
+	let scoped = apis;
+	if (selectorFilter && selectorFilter.length > 0) {
+		const wanted = new Set(selectorFilter);
+		scoped = apis.filter((a) => a.selectors.some((s) => wanted.has(s)));
+		if (scoped.length === 0) {
+			if (!silent) console.warn(`  ⚠️  selectorFilter [${selectorFilter.join(', ')}] matched no class in ${ngPackage} at ${version.tag}`);
+			return null;
+		}
+	}
 
-	return { ngPackage, apis };
+	if (scoped.length === 0) return null;
+
+	return { ngPackage, apis: scoped };
+}
+
+/**
+ * Returns the relative specifiers re-exported by a barrel file, covering both
+ * `export * from './x'` and named `export { Foo } from './x'` / `export type { Foo } from './x'`.
+ * Only relative paths (./ or ../) are returned; bare and scoped-package specifiers are ignored.
+ */
+function collectReExportTargets(content: string): string[] {
+	const targets: string[] = [];
+	const re = /export\s+(?:\*|type\s+\{[^}]*\}|\{[^}]*\})\s+from\s+['"](\.\.?\/[^'"]+)['"]/g;
+	let m: RegExpExecArray | null;
+	while ((m = re.exec(content)) !== null) {
+		targets.push(m[1]);
+	}
+	return targets;
+}
+
+/**
+ * Resolves a re-export target (path without guaranteed extension) to the actual source file,
+ * trying `<base>.ts`, then directory barrels `<base>/index.ts` and `<base>/public-api.ts`.
+ * Needed because barrels re-export directories (`export * from './plugins/clear-format'`), not files.
+ */
+function gitResolveModule(tag: string, base: string): { path: string; content: string } | null {
+	const stem = base.replace(/\.ts$/, '');
+	for (const cand of [`${stem}.ts`, `${stem}/index.ts`, `${stem}/public-api.ts`]) {
+		const content = gitShow(tag, cand);
+		if (content) return { path: cand, content };
+	}
+	return null;
 }
 
 /**
@@ -75,37 +117,38 @@ function resolveImplementationFiles(publicApiContent: string, ngPackage: string,
 
 		while ((match = reExportRe.exec(content)) !== null) {
 			const importPath = match[1];
-			let resolvedPath: string;
+			let base: string;
 
 			if (importPath.startsWith('@lucca/prisme/')) {
 				// @lucca/prisme/button → packages/prisme/button/public-api.ts
 				const subPkg = importPath.replace('@lucca/prisme/', '');
-				resolvedPath = `packages/prisme/${subPkg}/public-api.ts`;
+				base = `packages/prisme/${subPkg}/public-api.ts`;
 			} else if (importPath.startsWith('./') || importPath.startsWith('../')) {
 				// Relative import
-				const dir = path.dirname(basePath);
-				resolvedPath = path.posix.normalize(`${dir}/${importPath}`);
-				if (!resolvedPath.endsWith('.ts')) resolvedPath += '.ts';
+				base = path.posix.normalize(`${path.dirname(basePath)}/${importPath}`);
 			} else {
 				continue;
 			}
 
+			const resolved = gitResolveModule(tag, base);
+			if (!resolved) continue;
+			const resolvedPath = resolved.path;
+
 			if (visited.has(resolvedPath)) continue;
 			visited.add(resolvedPath);
 
-			const fileContent = gitShow(tag, resolvedPath);
-			if (!fileContent) continue;
+			const fileContent = resolved.content;
 
 			// If this file re-exports further, follow it
 			if (fileContent.includes('export *')) {
 				resolve(fileContent, resolvedPath);
 			}
 
-			// Collect all .ts exports (component/directive files)
-			const namedExportRe = /export\s+\*\s+from\s+['"]\.\/([^'"]+)['"]/g;
-			let namedMatch: RegExpExecArray | null;
-			while ((namedMatch = namedExportRe.exec(fileContent)) !== null) {
-				const relPath = namedMatch[1];
+			// Collect all .ts exports (component/directive files), from both wildcard and named
+			// re-exports — `export * from './x'` AND `export { Foo } from './x'`. Index barrels mix
+			// both styles (e.g. user/picture/index.ts uses named re-exports), so following only
+			// wildcards silently drops their components.
+			for (const relPath of collectReExportTargets(fileContent)) {
 				const dir = path.dirname(resolvedPath);
 				let fullPath = path.posix.normalize(`${dir}/${relPath}`);
 				if (!fullPath.endsWith('.ts')) fullPath += '.ts';
@@ -122,25 +165,19 @@ function resolveImplementationFiles(publicApiContent: string, ngPackage: string,
 			}
 		}
 
-		// Also handle direct exports from the public-api.ts itself
-		const directExportRe = /export\s+\*\s+from\s+['"]\.\/([^'"]+)['"]/g;
-		let directMatch: RegExpExecArray | null;
-		while ((directMatch = directExportRe.exec(content)) !== null) {
-			const relPath = directMatch[1];
-			const dir = path.dirname(basePath);
-			let fullPath = path.posix.normalize(`${dir}/${relPath}`);
-			if (!fullPath.endsWith('.ts')) fullPath += '.ts';
+		// Also handle direct exports from the public-api.ts itself (wildcard + named re-exports)
+		for (const relPath of collectReExportTargets(content)) {
+			const base = path.posix.normalize(`${path.dirname(basePath)}/${relPath}`);
+			const resolved = gitResolveModule(tag, base);
+			if (!resolved) continue;
 
-			if (!visited.has(fullPath)) {
-				visited.add(fullPath);
-				const fileContent = gitShow(tag, fullPath);
-				if (fileContent) {
-					if (fileContent.includes('@Component') || fileContent.includes('@Directive')) {
-						files.push(fullPath);
-					}
-					if (fileContent.includes('export *')) {
-						resolve(fileContent, fullPath);
-					}
+			if (!visited.has(resolved.path)) {
+				visited.add(resolved.path);
+				if (resolved.content.includes('@Component') || resolved.content.includes('@Directive')) {
+					files.push(resolved.path);
+				}
+				if (resolved.content.includes('export *') || /export\s+(?:type\s+)?\{/.test(resolved.content)) {
+					resolve(resolved.content, resolved.path);
 				}
 			}
 		}
@@ -172,7 +209,7 @@ function extractFromFile(content: string, ngPackage: string, filePath: string, t
 		// Find the class body (from the class declaration to the end)
 		const classStart = classMatch.index + classMatch[0].length;
 		const classBody = extractClassBody(content, classStart);
-		if (!classBody) continue;
+		if (classBody === null) continue; // null = unbalanced/not found; '' = empty body (e.g. `class X extends Y {}`) is valid
 
 		// Extract decorator metadata
 		const selectors = extractSelectors(decoratorBody);
@@ -247,22 +284,89 @@ function extractExportAs(decoratorBody: string): string | null {
 	return match?.[1] ?? null;
 }
 
+// ─── Shared signal-member scanner ────────────────────────────────────────────
+
+/**
+ * Reads from an opening delimiter at `openIdx` to its matching close, string-aware.
+ * Returns the index of the matching close char, or -1.
+ */
+function readBalancedDelim(s: string, openIdx: number, open: string, close: string): number {
+	let depth = 0;
+	let q: string | null = null;
+	for (let i = openIdx; i < s.length; i++) {
+		const c = s[i];
+		if (q) { if (c === q && s[i - 1] !== '\\') q = null; continue; }
+		if (c === '"' || c === "'" || c === '`') { q = c; continue; }
+		// Ignore the `>` of an arrow `=>` so function-typed generics like `input<(x) => Y>()` balance.
+		if (close === '>' && c === '>' && s[i - 1] === '=') continue;
+		if (c === open) depth++;
+		else if (c === close) { depth--; if (depth === 0) return i; }
+	}
+	return -1;
+}
+
+export interface SignalMember {
+	propName: string;
+	generic?: string;
+	argsStr: string;
+	isRequired: boolean;
+}
+
+/**
+ * Finds signal members `[modifiers] name = <fn>[.required][<...>](...)` in a class body.
+ *
+ * Unlike the historic regexes this does NOT require the `readonly` modifier (most LF components
+ * declare `name = input()` without it), and it balances nested generics and parenthesised args
+ * so function-call / spread defaults (e.g. `input(...intlInputOptions(...))`) don't truncate.
+ * Line-anchored so member-access assignments (`this.x = input(...)`) are not matched.
+ */
+function findSignalMembers(classBody: string, fnName: string): SignalMember[] {
+	const out: SignalMember[] = [];
+	// Optional `: Type` annotation between the member name and `=` (e.g. `x: InputSignal<number> = input(…)`).
+	const re = new RegExp(
+		`(?:^|[\\n;{])[ \\t]*(?:(?:readonly|public|private|protected|override|declare|static)\\s+)*([A-Za-z_$][\\w$]*)\\s*(?::\\s*[^=;\\n]+)?\\s*=\\s*${fnName}\\b`,
+		'g',
+	);
+	let m: RegExpExecArray | null;
+	while ((m = re.exec(classBody)) !== null) {
+		let i = m.index + m[0].length; // just after fnName
+		let isRequired = false;
+		const reqMatch = /^\s*\.\s*required\b/.exec(classBody.slice(i));
+		if (reqMatch) { isRequired = true; i += reqMatch[0].length; }
+
+		// optional balanced generic <...>
+		let generic: string | undefined;
+		const ltMatch = /^\s*</.exec(classBody.slice(i));
+		if (ltMatch) {
+			const ltIdx = i + ltMatch[0].length - 1;
+			const gtIdx = readBalancedDelim(classBody, ltIdx, '<', '>');
+			if (gtIdx !== -1) { generic = classBody.slice(ltIdx + 1, gtIdx).trim(); i = gtIdx + 1; }
+		}
+
+		// required '(' then balanced args
+		const parenMatch = /^\s*\(/.exec(classBody.slice(i));
+		if (!parenMatch) continue;
+		const openIdx = i + parenMatch[0].length - 1;
+		const closeIdx = readBalancedDelim(classBody, openIdx, '(', ')');
+		if (closeIdx === -1) continue;
+
+		out.push({ propName: m[1], generic, argsStr: classBody.slice(openIdx + 1, closeIdx).trim(), isRequired });
+	}
+	return out;
+}
+
 // ─── Signal inputs: input<Type>(), input(default, opts), input.required<Type>() ─
 
 function extractSignalInputs(classBody: string, typeContext: string): ExtractedInput[] {
 	const inputs: ExtractedInput[] = [];
 
-	// Pattern: readonly propName = input<Type>(default, { alias, transform })
-	// Also: readonly propName = input(default, { transform: fn })
-	// Also: readonly propName = input.required<Type>({ alias, transform })
-	const inputRe = /readonly\s+(\w+)\s*=\s*input(?:\s*\.\s*required)?(?:\s*<([^>]*)>)?\s*\(([^)]*)\)/g;
-	let match: RegExpExecArray | null;
-
-	while ((match = inputRe.exec(classBody)) !== null) {
-		const propName = match[1];
-		const genericType = match[2]?.trim();
-		const argsStr = match[3]?.trim() ?? '';
-		const isRequired = match[0].includes('.required');
+	// Matches `[modifiers] propName = input[.required][<Type>](default, { alias, transform })`,
+	// with or without `readonly`, balancing nested generics and parenthesised args.
+	for (const member of findSignalMembers(classBody, 'input')) {
+		const propName = member.propName;
+		const genericType = member.generic;
+		const argsStr = member.argsStr;
+		const isRequired = member.isRequired;
 
 		// Parse the type — resolve type aliases (pure alias or named member of a union)
 		let type = genericType || inferTypeFromDefault(argsStr);
@@ -283,11 +387,12 @@ function extractSignalInputs(classBody: string, typeContext: string): ExtractedI
 		const transformMatch = argsStr.match(/transform\s*:\s*(\w+)/);
 		const transform = transformMatch?.[1];
 
-		// Extract default value (first argument before options object)
+		// Extract default value (first argument before options object).
+		// Skip spreads like `...intlInputOptions(...)` — that's an options factory, not a literal default.
 		let defaultVal: string | undefined;
-		if (!isRequired && argsStr) {
+		if (!isRequired && argsStr && !argsStr.startsWith('...')) {
 			const firstArg = argsStr.split(',')[0]?.trim();
-			if (firstArg && !firstArg.startsWith('{')) {
+			if (firstArg && !firstArg.startsWith('{') && !firstArg.startsWith('...')) {
 				defaultVal = firstArg;
 			}
 		}
@@ -334,16 +439,36 @@ function extractDecoratorInputs(classBody: string): ExtractedInput[] {
 
 		const argsContent = classBody.slice(startIdx, i - 1).trim();
 
-		// After the closing ), find the property declaration
-		const afterDecorator = classBody.slice(i);
-		const propMatch = afterDecorator.match(/^\s*(?:\/\*[\s\S]*?\*\/\s*)?(?:readonly\s+)?(\w+)\s*(?::\s*([^=;\n]+))?\s*(?:=\s*([^;\n]+))?/);
-		if (!propMatch) continue;
+		// After the closing ), find the property/accessor declaration.
+		// Strip leading comments and member modifiers (readonly/override/public/… — `override` in
+		// particular was previously captured as the property name, yielding a phantom `override` input).
+		let after = classBody.slice(i).replace(/^\s*(?:\/\*[\s\S]*?\*\/\s*|\/\/[^\n]*\n\s*)*/, '');
+		after = after.replace(/^(?:(?:readonly|override|public|private|protected|declare|static|abstract)\s+)*/, '');
 
-		const propName = propMatch[1];
-		if (['class', 'static', 'get', 'set', 'if', 'return', 'const', 'let', 'var'].includes(propName)) continue;
+		let propName: string;
+		let type = 'unknown';
+		let defaultVal: string | undefined;
 
-		const type = propMatch[2]?.trim() ?? 'unknown';
-		const defaultVal = propMatch[3]?.trim();
+		// Accessor input: `@Input('alias') set name(p: Type)` / `get name(): Type` (binding = alias).
+		const accMatch = after.match(/^(get|set)\s+(\w+)/);
+		if (accMatch) {
+			propName = accMatch[2];
+			const rest = after.slice(accMatch[0].length);
+			if (accMatch[1] === 'set') {
+				const pm = rest.match(/^\s*\(\s*\w+\s*\??\s*:\s*([^)]+)\)/);
+				if (pm) type = pm[1].trim();
+			} else {
+				const pm = rest.match(/^\s*\(\s*\)\s*:\s*([^={;\n]+)/);
+				if (pm) type = pm[1].trim();
+			}
+		} else {
+			const propMatch = after.match(/^(\w+)\s*(?::\s*([^=;\n]+))?\s*(?:=\s*([^;\n]+))?/);
+			if (!propMatch) continue;
+			propName = propMatch[1];
+			if (['class', 'if', 'return', 'const', 'let', 'var', 'function', 'constructor'].includes(propName)) continue;
+			type = propMatch[2]?.trim() ?? 'unknown';
+			defaultVal = propMatch[3]?.trim();
+		}
 
 		// Parse the args
 		let bindingName = propName;
@@ -394,16 +519,16 @@ function extractDecoratorInputs(classBody: string): ExtractedInput[] {
 function extractSignalOutputs(classBody: string): ExtractedOutput[] {
 	const outputs: ExtractedOutput[] = [];
 
-	const outputRe = /readonly\s+(\w+)\s*=\s*output(?:\s*<([^>]*)>)?\s*\(/g;
-	let match: RegExpExecArray | null;
-
-	while ((match = outputRe.exec(classBody)) !== null) {
-		outputs.push({
-			propName: match[1],
-			bindingName: match[1],
-			type: match[2]?.trim() || 'void',
-			source: 'signal',
-		});
+	// `[modifiers] name = output<Type>()` or `outputFromObservable<Type>(...)`, with or without `readonly`.
+	for (const fn of ['output', 'outputFromObservable']) {
+		for (const member of findSignalMembers(classBody, fn)) {
+			outputs.push({
+				propName: member.propName,
+				bindingName: member.propName,
+				type: member.generic || 'void',
+				source: 'signal',
+			});
+		}
 	}
 
 	return outputs;
@@ -414,7 +539,7 @@ function extractSignalOutputs(classBody: string): ExtractedOutput[] {
 function extractDecoratorOutputs(classBody: string): ExtractedOutput[] {
 	const outputs: ExtractedOutput[] = [];
 
-	const decoratorRe = /@Output\s*\(\s*(?:'([^']*)')?\s*\)\s*(?:readonly\s+)?(\w+)\s*=\s*new\s+EventEmitter\s*(?:<([^>]*)>)?\s*\(/g;
+	const decoratorRe = /@Output\s*\(\s*(?:'([^']*)')?\s*\)\s*(?:(?:readonly|override|public|private|protected|declare|static)\s+)*(\w+)\s*=\s*new\s+EventEmitter\s*(?:<([^>]*)>)?\s*\(/g;
 	let match: RegExpExecArray | null;
 
 	while ((match = decoratorRe.exec(classBody)) !== null) {
@@ -434,15 +559,13 @@ function extractDecoratorOutputs(classBody: string): ExtractedOutput[] {
 function extractModels(classBody: string): ExtractedModel[] {
 	const models: ExtractedModel[] = [];
 
-	const modelRe = /readonly\s+(\w+)\s*=\s*model(?:\s*\.\s*required)?(?:\s*<([^>]*)>)?\s*\(/g;
-	let match: RegExpExecArray | null;
-
-	while ((match = modelRe.exec(classBody)) !== null) {
+	// `[modifiers] name = model[.required][<Type>](default)`, with or without `readonly`.
+	for (const member of findSignalMembers(classBody, 'model')) {
 		models.push({
-			propName: match[1],
-			bindingName: match[1],
-			type: match[2]?.trim() || 'unknown',
-			required: match[0].includes('.required'),
+			propName: member.propName,
+			bindingName: member.propName,
+			type: member.generic || 'unknown',
+			required: member.isRequired,
 		});
 	}
 

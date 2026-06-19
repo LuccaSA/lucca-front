@@ -13,7 +13,7 @@
 |----------|------|--------|
 | `popoverBottom` | BOOLEAN | — |
 | `popoverTop` | BOOLEAN | — |
-| `labelValue` | TEXT | — |
+| `buttonLabel` | TEXT | — |
 | `label` | BOOLEAN | — |
 | `size` | VARIANT | `M` · `S` · `XS` |
 | `palette` | VARIANT | `success` · `warning` · `critical` · `product` · `neutral` |

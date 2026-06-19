@@ -12,6 +12,12 @@ import { ScrollBoxComponent } from '@lucca-front/ng/scroll-box';
 
 **Selector:** `lu-scroll-box`
 
+#### Inputs
+
+| Property | Binding name | Type | Default | Required | Transform | Description |
+|----------|-------------|------|---------|----------|-----------|-------------|
+| `vertical` | `vertical` | `boolean` | `false` | — | `booleanAttribute` | — |
+
 ## Related files
 
 - 📝 [Code & implementation](./scrollbox.component.md)

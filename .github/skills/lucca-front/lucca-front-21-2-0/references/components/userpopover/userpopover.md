@@ -12,11 +12,24 @@ import { LuUserPopoverComponent, LuUserPopoverDirective } from '@lucca-front/ng/
 
 **Selector:** `lu-user-popover-content`
 
+#### Inputs
+
+| Property | Binding name | Type | Default | Required | Transform | Description |
+|----------|-------------|------|---------|----------|-----------|-------------|
+| `intl` | `intl` | `unknown` | — | — | — | — |
+
 ### LuUserPopoverDirective (directive)
 
 **Selector:** `[luUserPopover]`
 
 **exportAs:** `LuUserPopoverDirective`
+
+#### Inputs
+
+| Property | Binding name | Type | Default | Required | Transform | Description |
+|----------|-------------|------|---------|----------|-----------|-------------|
+| `luUserPopover` | `luUserPopover` | `ILuUser` | — | ✅ | — | — |
+| `luUserPopoverDisabled` | `luUserPopoverDisabled` | `boolean` | — | — | — | — |
 
 ## Related files
 

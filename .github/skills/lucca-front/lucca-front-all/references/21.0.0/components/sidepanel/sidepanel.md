@@ -1,11 +1,5 @@
 # sidepanel
 
-## Import
-
-```typescript
-import {  } from '@lucca-front/ng/sidepanel';
-```
-
 ## Related files
 
 - 📝 [Code & implementation](./sidepanel.component.md)

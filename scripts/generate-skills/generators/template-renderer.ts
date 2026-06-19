@@ -46,7 +46,10 @@ export function renderComponentMd(data: ComponentData, opts?: { hasDesign?: bool
 		slug: data.slug,
 		entry: data.entry,
 		api: data.api,
-		primaryImportPath: data.api?.apis[0]?.importPath ?? (data.entry.ngPackage ? `@lucca-front/ng/${data.entry.ngPackage}` : undefined),
+		// Only when actual API classes were extracted — otherwise the import block would render an
+		// empty `import {  } from …` (no class names exist). Covers CSS-only components, packages whose
+		// API the extractor can't reach, and a selector filter that matched nothing in this version.
+		primaryImportPath: data.api?.apis[0]?.importPath,
 		storybook: data.storybook,
 		basicUsage: data.basicUsage,
 		version: data.version,

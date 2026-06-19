@@ -12,6 +12,22 @@ import { FilterPillComponent, FilterBarComponent, FilterPillAddonBeforeDirective
 
 **Selector:** `lu-filter-pill`
 
+#### Inputs
+
+| Property | Binding name | Type | Default | Required | Transform | Description |
+|----------|-------------|------|---------|----------|-----------|-------------|
+| `name` | `name` | `string` | — | — | — | — |
+| `optional` | `optional` | `boolean` | `false` | — | `booleanAttribute` | — |
+| `label` | `label` | `string` | — | ✅ | — | — |
+| `placeholder` | `placeholder` | `string` | `this.intl.placeholder` | — | — | — |
+| `icon` | `icon` | `LuccaIcon` | — | — | — | — |
+
+#### Models (two-way binding)
+
+| Property | Type | Required |
+|----------|------|----------|
+| `displayed` | `unknown` | — |
+
 ### FilterBarComponent (component)
 
 **Selector:** `lu-filter-bar`
@@ -31,6 +47,10 @@ import { FilterPillComponent, FilterBarComponent, FilterPillAddonBeforeDirective
 ### FilterPillLabelDirective (directive)
 
 **Selector:** `[luFilterPillLabel]`
+
+## Type definitions
+
+- [`LuccaIcon`](../../types/LuccaIcon.md) — 569 available values
 
 ## Related files
 

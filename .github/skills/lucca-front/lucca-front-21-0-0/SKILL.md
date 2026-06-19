@@ -86,12 +86,14 @@ Bouton → API : `./references/components/button/button.md`, Figma : `./referenc
 ## 6. Composants
 
 - animations
+- api-select
 - app-layout
 - avatar
 - box
 - breadcrumbs
 - button
 - calendar
+- calendar2
 - callout
 - callout-disclosure
 - callout-popover
@@ -100,27 +102,38 @@ Bouton → API : `./references/components/button/button.md`, Figma : `./referenc
 - chip
 - clear
 - code
+- color-input
 - comment
 - container
+- core-select-department
+- core-select-establishment
+- core-select-job-qualification
+- core-select-occupation-category
+- core-select-user
 - data-presentation
 - data-table
 - date
 - dateinput
 - daterangeinput
+- departmentselect
 - dialog
 - divider
 - dropdown
 - duration-picker
 - empty-state
+- establishmentselect
 - fancy-dialog
 - fancybox
 - fieldset
+- filedropzone
 - fileentry
 - fileupload
 - filterbar
 - filterpills
 - footer
+- form
 - form-field
+- form-header
 - gauge
 - grid
 - highlight-data
@@ -141,6 +154,8 @@ Bouton → API : `./references/components/button/button.md`, Figma : `./referenc
 - multi-select
 - multilanguagefield
 - newbadge
+- number-format-input
+- number-input
 - numbers
 - numericbadge
 - onboarding-empty-state
@@ -155,10 +170,13 @@ Bouton → API : `./references/components/button/button.md`, Figma : `./referenc
 - readmore
 - resource-card
 - richtextinput
+- scroll
 - scrollbox
 - section-empty-state
+- segmented-control-tabs
 - segmentedcontrol
 - select
+- select-templating
 - sidepanel
 - simple-select
 - skeleton
@@ -178,6 +196,7 @@ Bouton → API : `./references/components/button/button.md`, Figma : `./referenc
 - toasts
 - tooltip
 - treeselect
+- user-select
 - userpopover
 - verticalnavigation
 

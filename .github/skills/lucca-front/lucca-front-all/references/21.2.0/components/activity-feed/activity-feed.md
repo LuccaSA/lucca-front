@@ -3,7 +3,7 @@
 ## Import
 
 ```typescript
-import { ActivityFeedStepComponent, ActivityFeedUpdateComponent } from '@lucca-front/ng/activity-feed';
+import { ActivityFeedStepComponent, ActivityFeedUpdateComponent, ActivityFeedComponent } from '@lucca-front/ng/activity-feed';
 ```
 
 ## Basic Usage
@@ -23,7 +23,7 @@ import { ActivityFeedStepComponent, ActivityFeedUpdateComponent } from '@lucca-f
 
 | Property | Binding name | Type | Default | Required | Transform | Description |
 |----------|-------------|------|---------|----------|-----------|-------------|
-| `intl` | `intl` | `unknown` | `...intlInputOptions(LU_ACTIVITY_FEED_TRANSLATIONS` | — | — | — |
+| `intl` | `intl` | `unknown` | — | — | — | — |
 | `label` | `label` | `PortalContent \| null` | `null` | — | — | — |
 | `user` | `user` | `ILuUser \| null` | `null` | — | — | Permet de définir l'utilisateur présenté dans l'avatar |
 | `status` | `status` | `'success' \| 'critical' \| 'pending' \| null` | `null` | — | — | — |
@@ -38,7 +38,11 @@ import { ActivityFeedStepComponent, ActivityFeedUpdateComponent } from '@lucca-f
 
 | Property | Binding name | Type | Default | Required | Transform | Description |
 |----------|-------------|------|---------|----------|-----------|-------------|
-| `intl` | `intl` | `unknown` | `...intlInputOptions(LU_ACTIVITY_FEED_TRANSLATIONS` | — | — | — |
+| `intl` | `intl` | `unknown` | — | — | — | — |
+
+### ActivityFeedComponent (component)
+
+**Selector:** `lu-activity-feed`
 
 ## Related files
 

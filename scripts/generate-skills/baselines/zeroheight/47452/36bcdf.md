@@ -15,7 +15,29 @@ Component selector : `lu-new-badge`
 import { NewBadgeComponent } from "@lucca-front/ng/new-badge";
 ```
 
-[Template](https://lucca-front.lucca.io/storybook/iframe.html?id=documentation-texts-newbadge-angular-basic--template)
+[Template](https://lucca-front.lucca.io/master/storybook/iframe.html?id=documentation-texts-newbadge-angular-basic--template)
+
+# Content
+
+## Contenu et rédaction
+
+### Libellés standards
+
+N'affichons jamais plus de 2 intitulés de badge différents sur un même menu de navigation.
+
+| Libellé | Cas d'usage |
+| --- | --- |
+| [Nouveau] | Fonctionnalité récemment intégrée. |
+| [À Découvrir] | Offre à explorer pour nouveaux clients. |
+| [Bêta] | Fonctionnalité en phase test |
+
+### Principes de rédaction
+
+| Critère | Règle | Validation |
+| --- | --- | --- |
+| **Concision** | Max 1–2 mots. | ✅ "À Découvrir" (2) vs ❌ "Nouvelle fonctionnalité à explorer" |
+| **Clarté** | Compris dès 1ère lecture, sans tooltip obligatoire. | ✅ "Bêta" univoque. |
+| **Précision** | Termes distincts les uns des autres. | ✅ Trois concepts différents |
 
 # HTML
 
@@ -27,4 +49,4 @@ Classe CSS : `.newBadge`
 @forward '@lucca-front/scss/src/components/newBadge';
 ```
 
-[Basic](https://lucca-front.lucca.io/storybook/iframe.html?id=documentation-texts-newbadge-html-css-basic--basic)
+[Basic](https://lucca-front.lucca.io/master/storybook/iframe.html?id=documentation-texts-newbadge-html-css-basic--basic)

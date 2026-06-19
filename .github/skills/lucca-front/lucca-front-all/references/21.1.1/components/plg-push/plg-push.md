@@ -23,7 +23,7 @@ import { PLGPushComponent } from '@lucca-front/ng/plg-push';
 
 | Property | Binding name | Type | Default | Required | Transform | Description |
 |----------|-------------|------|---------|----------|-----------|-------------|
-| `intl` | `intl` | `unknown` | `...intlInputOptions(LU_PLG_PUSH_TRANSLATIONS` | — | — | — |
+| `intl` | `intl` | `unknown` | — | — | — | — |
 | `heading` | `heading` | `string` | `''` | — | — | Ajoute un titre au composant. |
 | `removable` | `removable` | `boolean` | `false` | — | `booleanAttribute` | Rend le composant supprimable. |
 

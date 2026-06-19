@@ -4,7 +4,7 @@
 
 ## 21.2.0
 
-Composant introduit (`ActivityFeedStepComponent`, `ActivityFeedUpdateComponent`).
+Composant introduit (`ActivityFeedStepComponent`, `ActivityFeedUpdateComponent`, `ActivityFeedComponent`).
 
 ## Notes de release (ZeroHeight)
 

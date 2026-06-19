@@ -3,7 +3,7 @@
 ## Import
 
 ```typescript
-import { DropdownActionComponent, DropdownGroupComponent, LuDropdownItemDirective, LuDropdownPanelComponent, LuDropdownTriggerDirective } from '@lucca-front/ng/dropdown';
+import { DropdownActionComponent, DropdownDividerComponent, DropdownGroupComponent, DropdownItemComponent, DropdownMenuComponent, LuDropdownItemDirective, LuDropdownPanelComponent, LuDropdownTriggerDirective } from '@lucca-front/ng/dropdown';
 ```
 
 ## API Reference
@@ -19,6 +19,10 @@ import { DropdownActionComponent, DropdownGroupComponent, LuDropdownItemDirectiv
 | `disabled` | `disabled` | `boolean` | `false` | — | `booleanAttribute` | — |
 | `critical` | `critical` | `boolean` | `false` | — | `booleanAttribute` | — |
 
+### DropdownDividerComponent (component)
+
+**Selector:** `lu-dropdown-divider`
+
 ### DropdownGroupComponent (component)
 
 **Selector:** `lu-dropdown-group`
@@ -28,6 +32,14 @@ import { DropdownActionComponent, DropdownGroupComponent, LuDropdownItemDirectiv
 | Property | Binding name | Type | Default | Required | Transform | Description |
 |----------|-------------|------|---------|----------|-----------|-------------|
 | `label` | `label` | `string \| null` | `null` | — | — | — |
+
+### DropdownItemComponent (component)
+
+**Selector:** `lu-dropdown-item`
+
+### DropdownMenuComponent (component)
+
+**Selector:** `lu-dropdown-menu`
 
 ### LuDropdownItemDirective (directive)
 
@@ -47,11 +59,32 @@ import { DropdownActionComponent, DropdownGroupComponent, LuDropdownItemDirectiv
 
 **exportAs:** `LuDropdownPanel`
 
+#### Inputs
+
+| Property | Binding name | Type | Default | Required | Transform | Description |
+|----------|-------------|------|---------|----------|-----------|-------------|
+| `inputPanelClasses` | `panel-classes` | `string` | — | — | — | — |
+| `inputContentClasses` | `content-classes` | `string` | — | — | — | — |
+
+#### Outputs
+
+| Property | Binding name | Type |
+|----------|-------------|------|
+| `close` | `close` | `void` |
+| `open` | `open` | `void` |
+| `hovered` | `hovered` | `boolean` |
+
 ### LuDropdownTriggerDirective (directive)
 
 **Selector:** `[luDropdown]`
 
 **exportAs:** `LuDropdownTrigger`
+
+#### Inputs
+
+| Property | Binding name | Type | Default | Required | Transform | Description |
+|----------|-------------|------|---------|----------|-----------|-------------|
+| `inputPanel` | `luDropdown` | `TemplateRef<unknown> \| Type<unknown> \| ALuPopoverPanel` | — | — | — | — |
 
 ## Related files
 

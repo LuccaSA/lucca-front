@@ -1,7 +1,7 @@
 # textfield — Field valueAlignRight _(HTML/CSS)_
 
 ```css
-@forward '@lucca-front/scss/src/components/input';
+@forward '@lucca-front/scss/src/components/forms';
 @forward '@lucca-front/scss/src/components/formLabel';
 @forward '@lucca-front/scss/src/components/inlineMessage';
 @forward '@lucca-front/scss/src/components/textField';

@@ -3,7 +3,7 @@
 ## Import
 
 ```typescript
-import { FormFieldComponent, InputFramedComponent, InputDirective } from '@lucca-front/ng/form-field';
+import { FieldsetComponent } from '@lucca-front/ng/forms';
 ```
 
 ## Basic Usage
@@ -15,52 +15,26 @@ import { FormFieldComponent, InputFramedComponent, InputDirective } from '@lucca
 
 ## API Reference
 
-### FormFieldComponent (component)
+### FieldsetComponent (component)
 
-**Selector:** `lu-form-field`
-
-#### Inputs
-
-| Property | Binding name | Type | Default | Required | Transform | Description |
-|----------|-------------|------|---------|----------|-----------|-------------|
-| `label` | `label` | `PortalContent` | — | ✅ | — | — |
-| `hiddenLabel` | `hiddenLabel` | `boolean` | `false` | — | `booleanAttribute` | — |
-| `inline` | `inline` | `boolean` | `false` | — | `booleanAttribute` | — |
-| `statusControl` | `statusControl` | `AbstractControl \| null` | `null` | — | — | — |
-| `tooltip` | `tooltip` | `string \| SafeHtml \| null` | `null` | — | — | — |
-| `tag` | `tag` | `string \| null` | `null` | — | — | — |
-| `AI` | `AI` | `boolean` | `false` | — | `booleanAttribute` | — |
-| `iconAItooltip` | `iconAItooltip` | `string \| null` | `null` | — | — | — |
-| `iconAIalt` | `iconAIalt` | `string \| null` | `null` | — | — | — |
-| `width` | `width` | `FormFieldWidth, FormFieldWidth \| `${FormFieldWidth}`` | `null` | — | `numberAttribute` | — |
-| `inlineMessage` | `inlineMessage` | `PortalContent \| null` | `null` | — | — | — |
-| `errorInlineMessage` | `errorInlineMessage` | `PortalContent \| null` | `null` | — | — | — |
-| `inlineMessageState` | `inlineMessageState` | `InlineMessageState \| null` | `null` | — | — | — |
-| `size` | `size` | `FormFieldSize \| null` | `null` | — | — | Modifie la taille du fieldset. |
-| `extraDescribedBy` | `extraDescribedBy` | `string` | `''` | — | — | — |
-| `counter` | `counter` | `number` | `0` | — | — | — |
-
-### InputFramedComponent (component)
-
-**Selector:** `lu-input-framed`
+**Selector:** `lu-fieldset`
 
 #### Inputs
 
 | Property | Binding name | Type | Default | Required | Transform | Description |
 |----------|-------------|------|---------|----------|-----------|-------------|
-| `framedPortal` | `framedPortal` | `PortalContent \| null` | `null` | — | — | — |
-| `center` | `center` | `boolean` | `false` | — | `booleanAttribute` | — |
-| `size` | `size` | `'L' \| null` | `null` | — | — | Modifie la taille du fieldset. |
+| `heading` | `heading` | `PortalContent \| null` | `null` | — | — | Titre du fieldset. |
+| `helper` | `helper` | `PortalContent \| null` | `null` | — | — | Ajoute un sous-titre au fieldset. |
+| `action` | `action` | `PortalContent \| null` | `null` | — | — | — |
+| `size` | `size` | `'S' \| null` | `null` | — | — | Modifie la taille du fieldset. |
+| `horizontal` | `horizontal` | `boolean` | `false` | — | `booleanAttribute` | Place le titre du fieldset à gauche des champs. |
+| `expandable` | `expandable` | `boolean` | `false` | — | `booleanAttribute` | Permet au fieldset de se replier. |
 
-### InputDirective (directive)
+#### Models (two-way binding)
 
-**Selector:** `[luInput]`
-
-#### Inputs
-
-| Property | Binding name | Type | Default | Required | Transform | Description |
-|----------|-------------|------|---------|----------|-----------|-------------|
-| `standalone` | `luInputStandalone` | `boolean` | `false` | — | `booleanAttribute` | — |
+| Property | Type | Required |
+|----------|------|----------|
+| `expanded` | `unknown` | — |
 
 ## Related files
 

@@ -3,24 +3,40 @@
 ## Import
 
 ```typescript
-import { LuInputClearerComponent, LuInputDisplayerDirective, LuInputDirective } from '@lucca-front/ng/input';
+import { TextInputComponent } from '@lucca-front/ng/forms';
 ```
 
 ## API Reference
 
-### LuInputClearerComponent (component)
+### TextInputComponent (component)
 
-**Selector:** `lu-input-clearer`
+**Selector:** `lu-text-input`
 
-**exportAs:** `luClearer`
+#### Inputs
 
-### LuInputDisplayerDirective (directive)
+| Property | Binding name | Type | Default | Required | Transform | Description |
+|----------|-------------|------|---------|----------|-----------|-------------|
+| `intl` | `intl` | `unknown` | — | — | — | — |
+| `mask` | `mask` | `string \| null` | `null` | — | — | — |
+| `placeholder` | `placeholder` | `string` | `''` | — | — | — |
+| `autocomplete` | `autocomplete` | `AutoFill` | `'off'` | — | — | — |
+| `hasClearer` | `hasClearer` | `boolean` | `false` | — | `booleanAttribute` | — |
+| `hasSearchIcon` | `hasSearchIcon` | `boolean` | `false` | — | `booleanAttribute` | — |
+| `valueAlignRight` | `valueAlignRight` | `boolean` | `false` | — | `booleanAttribute` | [v18.1] Aligne la valeur du champ à droite. |
+| `prefix` | `prefix` | `TextfieldIconAddon \| TextfieldTextAddon` | — | — | — | — |
+| `suffix` | `suffix` | `TextfieldIconAddon \| TextfieldTextAddon` | — | — | — | — |
+| `searchIcon` | `searchIcon` | `LuccaIcon` | `'searchMagnifyingGlass'` | — | — | — |
+| `type` | `type` | `TextFieldType` | `'text'` | — | — | — |
 
-**Selector:** `[luDisplayer]`
+#### Outputs
 
-### LuInputDirective (directive)
+| Property | Binding name | Type |
+|----------|-------------|------|
+| `blur` | `blur` | `FocusEvent` |
 
-**Selector:** `[luInput]`
+## Type definitions
+
+- [`LuccaIcon`](../../types/LuccaIcon.md) — 569 available values
 
 ## Related files
 

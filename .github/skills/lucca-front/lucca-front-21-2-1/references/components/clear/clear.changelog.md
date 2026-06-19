@@ -6,13 +6,6 @@
 
 + `intl` : unknown
 
-## 21.0.3
-
-+ `size` : 'S' | null
-+ `disabled` : boolean
-+ `palette` : Palette
-+ `inverted` : boolean
-
 ## 21.0.0
 
 Composant introduit (`ClearComponent`).

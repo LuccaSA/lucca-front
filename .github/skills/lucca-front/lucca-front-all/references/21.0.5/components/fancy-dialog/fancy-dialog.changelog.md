@@ -4,7 +4,7 @@
 
 ## 21.0.0
 
-Composant introduit (`DialogHeaderComponent`, `DialogComponent`, `DialogCloseDirective`, `DialogDismissDirective`, `DialogOpenDirective`).
+Composant introduit (`DialogContentComponent`, `DialogFooterComponent`, `DialogHeaderAction`, `DialogHeaderComponent`, `DialogRoutingContainerComponent`, `DialogComponent`, `DialogCloseDirective`, `DialogDismissDirective`, `DialogOpenDirective`).
 
 ## Notes de release (ZeroHeight)
 

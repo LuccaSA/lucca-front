@@ -16,6 +16,7 @@ import { LinkComponent, LuRouterLink } from '@lucca-front/ng/link';
 
 | Property | Binding name | Type | Default | Required | Transform | Description |
 |----------|-------------|------|---------|----------|-----------|-------------|
+| `intl` | `intl` | `unknown` | — | — | — | — |
 | `luHref` | `href` | `string` | `''` | — | — | Adresse de la page cible. A n'utiliser qu'en lien externe ou non connu par le routeur. |
 | `routerLinkCommands` | `luLink` | `LuRouterLink['routerLink'] \| null` | `null` | — | — | — |
 | `disabled` | `disabled` | `boolean` | `false` | — | `booleanAttribute` | Désactive le lien. |

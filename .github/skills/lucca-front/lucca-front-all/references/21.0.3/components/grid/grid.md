@@ -22,6 +22,7 @@ import { GridColumnComponent, GridComponent } from '@lucca-front/ng/grid';
 | `row` | `row` | `unknown` | `null` | — | `numberAttribute` | — |
 | `align` | `align` | `'start' \| 'center' \| 'end' \| 'auto' \| null` | `null` | — | — | — |
 | `justify` | `justify` | `'start' \| 'center' \| 'end' \| 'auto' \| null` | `null` | — | — | — |
+| `responsive` | `responsive` | `ResponsiveConfig<'row' \| 'column' \| 'rowspan' \| 'colspan', number>` | — | — | — | — |
 
 ### GridComponent (component)
 
@@ -35,6 +36,7 @@ import { GridColumnComponent, GridComponent } from '@lucca-front/ng/grid';
 | `columns` | `columns` | `unknown` | `null` | — | `numberAttribute` | — |
 | `colspan` | `colspan` | `unknown` | `null` | — | `numberAttribute` | — |
 | `rowspan` | `rowspan` | `unknown` | `null` | — | `numberAttribute` | — |
+| `mode` | `mode` | `'form' \| 'auto' \| ResponsiveProperty<'auto'> \| null` | `null` | — | — | — |
 | `gap` | `gap` | `Gap \| null` | `null` | — | — | — |
 | `columnGap` | `columnGap` | `Gap \| null` | `null` | — | — | — |
 | `rowGap` | `rowGap` | `Gap \| null` | `null` | — | — | — |

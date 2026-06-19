@@ -1,6 +1,6 @@
 # daterangeinput — Design
 
-**Mots-clés :**plage, range, date range, période
+**Mots-clés :**plage, range, date range, DateRange période
 
 **Des questions, commentaires ou retours ?**Laisser un commentaire sur Figma ou contactez-nous sur Slack :*#design-system-public*
 

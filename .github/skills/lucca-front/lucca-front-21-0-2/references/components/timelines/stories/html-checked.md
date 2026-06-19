@@ -1,10 +1,5 @@
 # timelines — Checked _(HTML/CSS)_
 
-```css
-@forward '@lucca-front/scss/src/components/time';
-@forward '@lucca-front/scss/src/components/timeline';
-```
-
 ```html
 <ol class="timeline mod-checkedPastStep mod-number">
 	<li class="timeline-step">

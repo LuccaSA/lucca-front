@@ -3,7 +3,7 @@
 ## Import
 
 ```typescript
-import { FormFieldComponent, InputFramedComponent, InputDirective } from '@lucca-front/ng/form-field';
+import { FormFieldComponent, InputDirective } from '@lucca-front/ng/form-field';
 ```
 
 ## API Reference
@@ -26,6 +26,7 @@ import { FormFieldComponent, InputFramedComponent, InputDirective } from '@lucca
 | `iconAItooltip` | `iconAItooltip` | `string \| null` | `null` | — | — | — |
 | `iconAIalt` | `iconAIalt` | `string \| null` | `null` | — | — | — |
 | `width` | `width` | `FormFieldWidth, FormFieldWidth \| `${FormFieldWidth}`` | `null` | — | `numberAttribute` | — |
+| `invalid` | `invalid` | `boolean \| null, boolean` | `null` | — | `booleanAttribute` | Applique l'état invalide au champ. |
 | `inlineMessage` | `inlineMessage` | `PortalContent \| null` | `null` | — | — | Ajoute un texte indicatif sous le champ de formulaire. |
 | `errorInlineMessage` | `errorInlineMessage` | `PortalContent \| null` | `null` | — | — | Ajoute un texte d'erreur sous le champ de formulaire lorsque celui-ci est en erreur. |
 | `inlineMessageState` | `inlineMessageState` | `InlineMessageState \| null` | `null` | — | — | Modifie l'état de l'inline message. |
@@ -33,17 +34,12 @@ import { FormFieldComponent, InputFramedComponent, InputDirective } from '@lucca
 | `extraDescribedBy` | `extraDescribedBy` | `string` | `''` | — | — | — |
 | `counter` | `counter` | `number` | `0` | — | — | — |
 
-### InputFramedComponent (component)
+#### Models (two-way binding)
 
-**Selector:** `lu-input-framed`
-
-#### Inputs
-
-| Property | Binding name | Type | Default | Required | Transform | Description |
-|----------|-------------|------|---------|----------|-----------|-------------|
-| `framedPortal` | `framedPortal` | `PortalContent \| null` | `null` | — | — | — |
-| `center` | `center` | `boolean` | `false` | — | `booleanAttribute` | — |
-| `size` | `size` | `'L' \| null` | `null` | — | — | — |
+| Property | Type | Required |
+|----------|------|----------|
+| `rolePresentationLabel` | `unknown` | — |
+| `layout` | `'default' | 'checkable' | 'fieldset'` | — |
 
 ### InputDirective (directive)
 

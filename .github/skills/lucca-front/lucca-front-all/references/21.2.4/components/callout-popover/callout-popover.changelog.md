@@ -4,40 +4,24 @@
 
 ## 21.2.4
 
-`CalloutPopoverComponent` :
-  ~ `buttonLabel` : string → string | number
+~ `buttonLabel` : string → string | number
 
 ## 21.2.2
 
-`CalloutPopoverComponent` :
-  + `popoverDisabled` : boolean
++ `popoverDisabled` : boolean
 
 ## 21.2.0
 
-`CalloutPopoverComponent` :
-  + `popoverPosition` : PopoverPosition
-  + `customPopoverPositions` : ConnectionPositionPair[]
++ `popoverPosition` : PopoverPosition
++ `customPopoverPositions` : ConnectionPositionPair[]
 
 ## 21.1.4
 
-`CalloutPopoverComponent` :
-  + `popoverTrigger` : 'click' | 'click+hover' | 'hover+focus'
-`CalloutComponent` :
-  + `hx` : unknown
-
-## 21.1.0
-
-`CalloutComponent` :
-  + `intl` : unknown
-
-## 21.0.3
-
-`CalloutDisclosureComponent` :
-  + (output) `openChange` : boolean
++ `popoverTrigger` : 'click' | 'click+hover' | 'hover+focus'
 
 ## 21.0.0
 
-Composant introduit (`CalloutActionsComponent`, `CalloutDisclosureComponent`, `CalloutFeedbackListComponent`, `CalloutPopoverComponent`, `CalloutComponent`).
+Composant introduit (`CalloutPopoverComponent`).
 
 ## Notes de release (ZeroHeight)
 

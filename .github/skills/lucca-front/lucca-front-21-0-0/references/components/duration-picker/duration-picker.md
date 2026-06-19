@@ -3,7 +3,7 @@
 ## Import
 
 ```typescript
-import { DurationPickerComponent, TimePickerComponent } from '@lucca-front/ng/time';
+import { DurationPickerComponent } from '@lucca-front/ng/time';
 ```
 
 ## API Reference
@@ -27,24 +27,11 @@ import { DurationPickerComponent, TimePickerComponent } from '@lucca-front/ng/ti
 |----------|-------------|------|
 | `durationChange` | `durationChange` | `DurationChangeEvent` |
 
-### TimePickerComponent (component)
+#### Models (two-way binding)
 
-**Selector:** `lu-time-picker`
-
-#### Inputs
-
-| Property | Binding name | Type | Default | Required | Transform | Description |
-|----------|-------------|------|---------|----------|-----------|-------------|
-| `max` | `max` | ``${string}:${string}:${string}`` | `MAX_TIME` | — | — | — |
-| `displayArrows` | `displayArrows` | `boolean` | `false` | — | `booleanAttribute` | — |
-| `forceMeridiemDisplay` | `forceMeridiemDisplay` | `boolean \| null` | `null` | — | — | — |
-| `label` | `label` | `string` | — | — | — | Modifie le label de l'input. |
-
-#### Outputs
-
-| Property | Binding name | Type |
-|----------|-------------|------|
-| `timeChange` | `timeChange` | `TimeChangeEvent` |
+| Property | Type | Required |
+|----------|------|----------|
+| `value` | `ISO8601Duration` | — |
 
 ## Related files
 

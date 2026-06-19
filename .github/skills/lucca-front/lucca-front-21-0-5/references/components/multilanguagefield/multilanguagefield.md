@@ -3,24 +3,22 @@
 ## Import
 
 ```typescript
-import { LuInputClearerComponent, LuInputDisplayerDirective, LuInputDirective } from '@lucca-front/ng/input';
+import { MultilanguageInputComponent } from '@lucca-front/ng/forms';
 ```
 
 ## API Reference
 
-### LuInputClearerComponent (component)
+### MultilanguageInputComponent (component)
 
-**Selector:** `lu-input-clearer`
+**Selector:** `lu-multilanguage-input`
 
-**exportAs:** `luClearer`
+#### Inputs
 
-### LuInputDisplayerDirective (directive)
-
-**Selector:** `[luDisplayer]`
-
-### LuInputDirective (directive)
-
-**Selector:** `[luInput]`
+| Property | Binding name | Type | Default | Required | Transform | Description |
+|----------|-------------|------|---------|----------|-----------|-------------|
+| `placeholder` | `placeholder` | `string` | `''` | — | — | Modifie le placeholder au champ. |
+| `openOnFocus` | `openOnFocus` | `boolean` | `false` | — | `booleanAttribute` | — |
+| `autocomplete` | `autocomplete` | `AutoFill` | `'off'` | — | — | — |
 
 ## Related files
 

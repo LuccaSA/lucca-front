@@ -4,8 +4,6 @@
 
 ## 21.1.4
 
-`CalloutPopoverComponent` :
-  + `popoverTrigger` : 'click' | 'click+hover' | 'hover+focus'
 `CalloutComponent` :
   + `hx` : unknown
 
@@ -14,14 +12,9 @@
 `CalloutComponent` :
   + `intl` : unknown
 
-## 21.0.3
-
-`CalloutDisclosureComponent` :
-  + (output) `openChange` : boolean
-
 ## 21.0.0
 
-Composant introduit (`CalloutActionsComponent`, `CalloutDisclosureComponent`, `CalloutFeedbackListComponent`, `CalloutPopoverComponent`, `CalloutComponent`).
+Composant introduit (`CalloutActionsComponent`, `CalloutFeedbackItemDescriptionDirective`, `CalloutFeedbackItemComponent`, `CalloutFeedbackListComponent`, `CalloutComponent`).
 
 ## Notes de release (ZeroHeight)
 

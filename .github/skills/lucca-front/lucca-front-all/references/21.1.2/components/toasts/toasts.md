@@ -17,7 +17,8 @@ import { LuToastsComponent } from '@lucca-front/ng/toast';
 | Property | Binding name | Type | Default | Required | Transform | Description |
 |----------|-------------|------|---------|----------|-----------|-------------|
 | `bottom` | `bottom` | `boolean` | `false` | — | — | — |
-| `intl` | `intl` | `unknown` | `...intlInputOptions(LU_TOAST_TRANSLATIONS` | — | — | — |
+| `sources` | `sources` | `Array<Observable<LuToastInput>>` | — | — | — | — |
+| `intl` | `intl` | `unknown` | — | — | — | — |
 
 ## Related files
 

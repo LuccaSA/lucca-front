@@ -25,8 +25,11 @@ export interface ComponentMetadata {
 	/** Figma component name(s). */
 	figmaName?: string;
 	figmaAliases?: string[];
-	/** Override ngPackage name (for irregular slug → package mappings). */
+	/** Override ngPackage name (for irregular slug → package mappings).
+	 * May be a secondary entrypoint path with a slash, e.g. "forms/phone-number-input". */
 	ngPackageOverride?: string;
+	/** Restrict the extracted API to these selectors (scope one component out of a multi-component package). */
+	ngSelectors?: string[];
 }
 
 export type MetadataMap = Record<string, ComponentMetadata>;
@@ -73,7 +76,11 @@ export function listNgPackages(tag: string): Set<string> {
 export function resolveNgPackage(slug: string, ngPackages: Set<string>, metadata?: ComponentMetadata): string | undefined {
 	// 1. Metadata override (highest priority)
 	if (metadata?.ngPackageOverride) {
-		return ngPackages.has(metadata.ngPackageOverride) ? metadata.ngPackageOverride : undefined;
+		const override = metadata.ngPackageOverride;
+		// Secondary entrypoint (e.g. "forms/phone-number-input"): not a top-level package dir, so trust it
+		// as-is — extractPackageAPI resolves its public-api.ts via git and degrades to no API if absent.
+		if (override.includes('/')) return override;
+		return ngPackages.has(override) ? override : undefined;
 	}
 
 	// 2. Exact match
@@ -169,6 +176,7 @@ export function discoverComponents(
 			storybookPath: group.docsEntry?.title,
 			category: group.category,
 			ngPackage,
+			ngSelectors: meta?.ngSelectors,
 			zeroheightPagePath: meta?.zeroheightPagePath,
 			figmaNodeIds: meta?.figmaNodeIds,
 			figmaName: meta?.figmaName,
@@ -196,6 +204,7 @@ export function discoverComponents(
 		const entry: ComponentEntry = {
 			category: 'Unknown',
 			ngPackage,
+			ngSelectors: meta.ngSelectors,
 			zeroheightPagePath: meta.zeroheightPagePath,
 			figmaNodeIds: meta.figmaNodeIds,
 			figmaName: meta.figmaName,

@@ -3,24 +3,30 @@
 ## Import
 
 ```typescript
-import { LuInputClearerComponent, LuInputDisplayerDirective, LuInputDirective } from '@lucca-front/ng/input';
+import { PhoneNumberInputComponent } from '@lucca-front/ng/forms/phone-number-input';
 ```
 
 ## API Reference
 
-### LuInputClearerComponent (component)
+### PhoneNumberInputComponent (component)
 
-**Selector:** `lu-input-clearer`
+**Selector:** `lu-phone-number-input`
 
-**exportAs:** `luClearer`
+#### Inputs
 
-### LuInputDisplayerDirective (directive)
+| Property | Binding name | Type | Default | Required | Transform | Description |
+|----------|-------------|------|---------|----------|-----------|-------------|
+| `label` | `label` | `string` | — | — | — | Modifie le label du champ. |
+| `autocomplete` | `autocomplete` | `'off' \| 'tel'` | — | — | — | — |
+| `allowedCountries` | `allowedCountries` | `ReadonlyArray<CountryCode \| string>` | `[]` | — | — | — |
+| `noAutoPlaceholder` | `noAutoPlaceholder` | `boolean` | `false` | — | — | — |
+| `defaultCountryCode` | `country` | `CountryCode` | `undefined` | — | — | — |
 
-**Selector:** `[luDisplayer]`
+#### Outputs
 
-### LuInputDirective (directive)
-
-**Selector:** `[luInput]`
+| Property | Binding name | Type |
+|----------|-------------|------|
+| `countryChange` | `countryChange` | `CountryCode` |
 
 ## Related files
 

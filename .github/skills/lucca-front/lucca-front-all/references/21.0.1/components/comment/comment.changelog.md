@@ -4,7 +4,7 @@
 
 ## 21.0.0
 
-Composant introduit (`CommentBlockComponent`, `CommentComponent`).
+Composant introduit (`CommentBlockComponent`, `CommentChatComponent`, `CommentComponent`).
 
 ## Notes de release (ZeroHeight)
 

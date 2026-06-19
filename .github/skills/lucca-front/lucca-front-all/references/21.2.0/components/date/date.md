@@ -16,6 +16,7 @@ import { LuCalendarInputComponent, LuDateInputDirective, LuDatePickerComponent, 
 
 | Property | Binding name | Type | Default | Required | Transform | Description |
 |----------|-------------|------|---------|----------|-----------|-------------|
+| `intl` | `intl` | `unknown` | — | — | — | — |
 | `min` | `min` | `unknown` | — | — | — | — |
 | `max` | `max` | `unknown` | — | — | — | — |
 | `granularity` | `granularity` | `LuDateGranularity` | `ELuDateGranularity.day` | — | — | — |
@@ -29,10 +30,11 @@ import { LuCalendarInputComponent, LuDateInputDirective, LuDatePickerComponent, 
 
 | Property | Binding name | Type | Default | Required | Transform | Description |
 |----------|-------------|------|---------|----------|-----------|-------------|
+| `intl` | `intl` | `unknown` | — | — | — | — |
 | `min` | `min` | `unknown` | — | — | — | — |
 | `max` | `max` | `unknown` | — | — | — | — |
 | `granularity` | `granularity` | `LuDateGranularity` | `ELuDateGranularity.day` | — | — | — |
-| `override` | `override` | `unknown` | — | — | — | — |
+| `placeholder` | `placeholder` | `string` | — | — | — | — |
 
 ### LuDatePickerComponent (component)
 
@@ -49,6 +51,15 @@ import { LuCalendarInputComponent, LuDateInputDirective, LuDatePickerComponent, 
 | `granularity` | `granularity` | `LuDateGranularity` | `ELuDateGranularity.day` | — | — | — |
 | `startOn` | `startOn` | `D` | `this._adapter.forgeToday()` | — | — | — |
 
+#### Outputs
+
+| Property | Binding name | Type |
+|----------|-------------|------|
+| `close` | `close` | `void` |
+| `open` | `open` | `void` |
+| `hovered` | `hovered` | `boolean` |
+| `onSelectValue` | `onSelectValue` | `D` |
+
 ### LuDateSelectInputComponent (component)
 
 **Selector:** `lu-date-select`
@@ -60,8 +71,9 @@ import { LuCalendarInputComponent, LuDateInputDirective, LuDatePickerComponent, 
 | `min` | `min` | `unknown` | — | — | — | — |
 | `max` | `max` | `unknown` | — | — | — | — |
 | `granularity` | `granularity` | `LuDateGranularity` | `ELuDateGranularity.day` | — | — | — |
-| `override` | `placeholder` | `unknown` | — | — | — | — |
+| `inputPlaceholder` | `placeholder` | `string` | — | — | — | — |
 | `hideClearer` | `hideClearer` | `boolean` | `false` | — | — | — |
+| `startOn` | `startOn` | `D` | — | — | — | — |
 
 ## Related files
 

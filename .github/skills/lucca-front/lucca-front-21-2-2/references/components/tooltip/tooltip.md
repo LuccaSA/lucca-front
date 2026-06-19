@@ -30,7 +30,7 @@ import { LuTooltipPanelComponent, LuTooltipTriggerDirective } from '@lucca-front
 | `luTooltipPosition` | `luTooltipPosition` | `LuPopoverPosition` | `'above'` | — | — | Position du tooltip par rapport à son élément déclencheur. |
 | `luTooltipWhenEllipsisInput` | `luTooltipWhenEllipsis` | `boolean` | `false` | — | `booleanAttribute` | N’affiche le tooltip que lorsque le contenu de l’élément déclencheur est tronqué par une ellipse. |
 | `luTooltipAnchor` | `luTooltipAnchor` | `FlexibleConnectedPositionStrategyOrigin` | `this.#host` | — | — | — |
-| `id` | `id` | `string` | ``${this.#host.nativeElement.tagName.toLowerCase(` | — | — | — |
+| `id` | `id` | `string` | ``${this.#host.nativeElement.tagName.toLowerCase()}-tooltip-${nextId++}`` | — | — | — |
 
 ## Related files
 

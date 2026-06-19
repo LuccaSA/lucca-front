@@ -17,6 +17,7 @@ import { LuToastsComponent } from '@lucca-front/ng/toast';
 | Property | Binding name | Type | Default | Required | Transform | Description |
 |----------|-------------|------|---------|----------|-----------|-------------|
 | `bottom` | `bottom` | `boolean` | `false` | — | — | — |
+| `sources` | `sources` | `Array<Observable<LuToastInput>>` | — | — | — | — |
 
 ## Related files
 

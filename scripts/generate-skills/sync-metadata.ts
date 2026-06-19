@@ -324,8 +324,8 @@ export function syncMetadata(
 		if (needsOverride) {
 			// Try to find the right package by checking existing override or known mappings
 			const currentOverride = entry.ngPackageOverride;
-			if (currentOverride && ngPackages.has(currentOverride)) {
-				// Keep existing valid override
+			if (currentOverride && (currentOverride.includes('/') || ngPackages.has(currentOverride))) {
+				// Keep existing valid override (slash form = secondary entrypoint, validated at extraction)
 			} else {
 				// No valid override — remove stale one
 				delete entry.ngPackageOverride;

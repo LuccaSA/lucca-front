@@ -3,7 +3,7 @@
 ## Import
 
 ```typescript
-import { LuMultiSelectContentDisplayerComponent, LuMultiSelectCounterDisplayerComponent, LuMultiSelectDefaultDisplayerComponent, LuMultiSelectDisplayerInputDirective, LuMultiDisplayerDirective, LuMultiSelectInputComponent } from '@lucca-front/ng/multi-select';
+import { LuMultiSelectContentDisplayerComponent, LuMultiSelectCounterDisplayerComponent, LuMultiSelectDefaultDisplayerComponent, LuMultiSelectDisplayerInputDirective, LuMultiDisplayerDirective, LuMultiSelectWithSelectAllDirective, LuMultiSelectInputComponent } from '@lucca-front/ng/multi-select';
 ```
 
 ## API Reference
@@ -20,6 +20,7 @@ import { LuMultiSelectContentDisplayerComponent, LuMultiSelectCounterDisplayerCo
 
 | Property | Binding name | Type | Default | Required | Transform | Description |
 |----------|-------------|------|---------|----------|-----------|-------------|
+| `selected` | `selected` | `T[]` | — | — | — | — |
 | `label` | `label` | `string` | — | ✅ | — | Modifie le label du champ. |
 
 ### LuMultiSelectDefaultDisplayerComponent (component)
@@ -34,6 +35,22 @@ import { LuMultiSelectContentDisplayerComponent, LuMultiSelectCounterDisplayerCo
 
 **Selector:** `[luMultiDisplayer]`
 
+#### Inputs
+
+| Property | Binding name | Type | Default | Required | Transform | Description |
+|----------|-------------|------|---------|----------|-----------|-------------|
+| `select` | `luMultiDisplayerSelect` | `LuMultiSelectInputComponent<T>` | — | — | — | — |
+
+### LuMultiSelectWithSelectAllDirective (directive)
+
+**Selector:** `lu-multi-select[withSelectAll]`
+
+#### Inputs
+
+| Property | Binding name | Type | Default | Required | Transform | Description |
+|----------|-------------|------|---------|----------|-----------|-------------|
+| `displayerLabel` | `withSelectAllDisplayerLabel` | `string` | — | ✅ | — | — |
+
 ### LuMultiSelectInputComponent (component)
 
 **Selector:** `lu-multi-select`
@@ -45,6 +62,12 @@ import { LuMultiSelectContentDisplayerComponent, LuMultiSelectCounterDisplayerCo
 | `maxValuesShown` | `maxValuesShown` | `number` | `500` | — | `numberAttribute` | — |
 | `keepSearchAfterSelection` | `keepSearchAfterSelection` | `boolean` | `false` | — | `booleanAttribute` | — |
 | `filterPillLabelPlural` | `filterPillLabelPlural` | `string` | — | — | — | — |
+
+#### Models (two-way binding)
+
+| Property | Type | Required |
+|----------|------|----------|
+| `valuesTpl` | `TemplateRef<LuOptionContext<T[]>> | Type<unknown>` | — |
 
 ## Related files
 

@@ -1,11 +1,5 @@
 # mobilenavigation — Navigation basic _(HTML/CSS)_
 
-```css
-@forward '@lucca-front/scss/src/components/mobile-push';
-@forward '@lucca-front/scss/src/components/mobileNavigation';
-@forward '@lucca-front/scss/src/components/numericBadge';
-```
-
 ```html
 <nav class="mobileNavigation">
 	<ul class="mobileNavigation-list">

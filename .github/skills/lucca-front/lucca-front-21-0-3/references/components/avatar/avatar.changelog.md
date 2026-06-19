@@ -4,7 +4,7 @@
 
 ## 21.0.0
 
-Composant introduit (`LuUserTileComponent`, `LuUserSelectInputComponent`, `LuUserMeOptionDirective`, `LuUserPagedSearcherComponent`, `LuUserHomonymsComponent`).
+Composant introduit (`LuUserPictureComponent`).
 
 ## Notes de release (ZeroHeight)
 

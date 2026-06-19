@@ -51,8 +51,12 @@ export interface ComponentEntry {
 	storybookPath?: string;
 	/** ZeroHeight page path segment, e.g. "098404-button". Stable across releases. */
 	zeroheightPagePath?: string;
-	/** Angular package name (from @lucca-front/ng/<package>), e.g. "button". Omit for CSS-only components. */
+	/** Angular package name (from @lucca-front/ng/<package>), e.g. "button". Omit for CSS-only components.
+	 * May be a secondary entrypoint path, e.g. "forms/phone-number-input". */
 	ngPackage?: string;
+	/** Restrict the extracted API to components/directives whose selector is in this list. Use to scope a
+	 * single component out of a multi-component package (e.g. "lu-text-input" from the "forms" package). */
+	ngSelectors?: string[];
 	/** Primary Figma component name, e.g. "pr-Button". */
 	figmaName?: string;
 	/** All Figma names that map to this slug (many-to-one). */
