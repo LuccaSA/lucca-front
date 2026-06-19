@@ -1,6 +1,7 @@
 /* eslint-disable @angular-eslint/no-output-on-prefix */
 import { Overlay } from '@angular/cdk/overlay';
 import {
+	afterNextRender,
 	AfterViewInit,
 	booleanAttribute,
 	ChangeDetectionStrategy,
@@ -11,7 +12,9 @@ import {
 	ElementRef,
 	EventEmitter,
 	forwardRef,
+	inject,
 	input,
+	Injector,
 	linkedSignal,
 	OnDestroy,
 	Renderer2,
@@ -64,6 +67,8 @@ export abstract class ALuSelectInputComponent<T, TPicker extends ILuPickerPanel<
 	protected readonly onOpenOutput = outputFromObservable(this.onOpen, { alias: 'onOpen' });
 	/** Event emitted when the associated popover is closed. */
 	protected readonly onCloseOutput = outputFromObservable(this.onClose, { alias: 'onClose' });
+
+	readonly #injector = inject(Injector);
 
 	constructor(
 		protected override _changeDetectorRef: ChangeDetectorRef,
@@ -167,13 +172,7 @@ export abstract class ALuSelectInputComponent<T, TPicker extends ILuPickerPanel<
 		this.render();
 		this._picker.setValue(this.value);
 
-		// strange bug where the view renderred in the displayer was only injected after a hover
-		// no matter how many cdr.markforchack i added
-		// but with a timeout it works
-		// shrug emoji
-		setTimeout(() => {
-			this._changeDetectorRef.markForCheck();
-		}, 1);
+		afterNextRender(() => this._changeDetectorRef.markForCheck(), { injector: this.#injector });
 	}
 
 	ngOnDestroy() {
