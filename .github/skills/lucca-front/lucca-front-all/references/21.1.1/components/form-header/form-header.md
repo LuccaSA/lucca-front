@@ -10,7 +10,7 @@ import { FormHeaderComponent } from '@lucca-front/ng/form-header';
 
 ### FormHeaderComponent (component)
 
-**Selector:** `lu-form-header]`
+**Selector:** `lu-form-header`
 
 #### Inputs
 

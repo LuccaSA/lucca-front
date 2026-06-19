@@ -447,7 +447,7 @@
 	},
 	"form-header": {
 		"ngSelectors": [
-			"lu-form-header]"
+			"lu-form-header"
 		]
 	},
 	"form-label": {

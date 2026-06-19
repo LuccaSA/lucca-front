@@ -276,7 +276,25 @@ function extractClassBody(content: string, startIdx: number): string | null {
 function extractSelectors(decoratorBody: string): string[] {
 	const match = decoratorBody.match(/selector\s*:\s*['"`]([^'"`]+)['"`]/);
 	if (!match) return [];
-	return match[1].split(',').map((s) => s.trim()).filter(Boolean);
+	return match[1].split(',').map((s) => sanitizeSelector(s.trim())).filter(Boolean);
+}
+
+/**
+ * Documents the *effective* selector Angular resolves, not the raw source string. Angular's
+ * `CssSelector.parse` silently drops characters it cannot tokenize, so a stray unmatched `]`
+ * (e.g. the upstream typo `selector: 'lu-form-header]'`) is ignored at runtime — the usable
+ * selector is `lu-form-header`. We mirror that by dropping unmatched `]` while keeping real
+ * attribute selectors (`[attr]`) intact, so consumers never copy a broken `<lu-form-header]>`.
+ */
+function sanitizeSelector(selector: string): string {
+	let depth = 0;
+	let out = '';
+	for (const c of selector) {
+		if (c === '[') { depth++; out += c; }
+		else if (c === ']') { if (depth > 0) { depth--; out += c; } /* else: unmatched, drop */ }
+		else out += c;
+	}
+	return out.trim();
 }
 
 function extractExportAs(decoratorBody: string): string | null {
