@@ -31,9 +31,9 @@ import { InlineMessageComponent, InlineMessageState } from '@lucca-front/ng/inli
 import { LuTooltipModule } from '@lucca-front/ng/tooltip';
 import { BehaviorSubject } from 'rxjs';
 import { FormFieldSize } from './form-field-size';
-import { FormFieldLayout, FormFieldWidth } from './form-field.type';
 import { FORM_FIELD_INSTANCE } from './form-field.token';
 import { LU_FORM_FIELD_TRANSLATIONS } from './form-field.translate';
+import { FormFieldLayout, FormFieldWidth } from './form-field.type';
 import { InputDirective } from './input.directive';
 import { INPUT_FRAMED_INSTANCE } from './public-api';
 
@@ -158,9 +158,7 @@ export class FormFieldComponent implements OnDestroy, DoCheck {
 		/* We have to put this in the next cycle to make sure it'll be applied properly
 		 * and that it won't trigger a change detection error
 		 */
-		setTimeout(() => {
-			this.prepareInput();
-		});
+		afterNextRender(() => this.prepareInput(), { injector: this.#injector });
 	}
 
 	public get inputs(): InputDirective[] {
