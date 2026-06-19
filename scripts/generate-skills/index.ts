@@ -350,7 +350,10 @@ async function main(): Promise<void> {
 	// SKILL.md that detects the project's LF version and delegates to the matching version folder.
 	// Built after all per-version folders are on disk. Skipped for single-component or partial runs.
 	if (!flags.dryRun && !flags.component && !flags.skipAggregate) {
-		const bundled = flags.versions.map((v) => resolveVersion(v));
+		// Bundle EVERY version present on disk, not just this run's — writeAggregateSkill wipes the
+		// aggregate before rebuilding, so passing only flags.versions would drop the other versions
+		// (a single-version run must not nuke the others from lucca-front-all).
+		const bundled = listGeneratedVersionStrings(config.output.skillsDir).map(resolveVersion);
 		const { skillPath, versionCount } = writeAggregateSkill(config.output.skillsDir, bundled);
 		console.log(`📦 Aggregate: ${path.relative(config.output.skillsDir, skillPath)} (${versionCount} versions)`);
 	}
