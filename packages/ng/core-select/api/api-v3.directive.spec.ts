@@ -1,32 +1,52 @@
 import { provideHttpClient } from '@angular/common/http';
 import { HttpTestingController, provideHttpClientTesting } from '@angular/common/http/testing';
-import { TestBed, fakeAsync, tick } from '@angular/core/testing';
+import { ChangeDetectionStrategy, Component, signal } from '@angular/core';
+import { ComponentFixture, TestBed, fakeAsync, tick } from '@angular/core/testing';
 import { ILuApiItem } from '@lucca-front/ng/api';
-import { ALuSelectInputComponent } from '@lucca-front/ng/core-select';
+import { ALuSelectInputComponent, coreSelectDefaultOptionComparer, coreSelectDefaultOptionKey } from '@lucca-front/ng/core-select';
 import { LuSimpleSelectInputComponent } from '@lucca-front/ng/simple-select';
-import { BehaviorSubject, ReplaySubject, Subject, first } from 'rxjs';
+import { BehaviorSubject, Subject } from 'rxjs';
 import { LuCoreSelectApiV3Directive } from './api-v3.directive';
 import { LU_SELECT_MAGIC_PAGE_SIZE, MAGIC_DEBOUNCE_DURATION } from './api.directive';
 
 const itemsMocks = Array.from({ length: LU_SELECT_MAGIC_PAGE_SIZE * 2 + 5 }, (_, i) => ({ id: i, name: `item ${i}` }));
 
+@Component({
+	selector: 'lu-simple-select',
+	template: '',
+	changeDetection: ChangeDetectionStrategy.OnPush,
+})
+class MockSelectComponent {}
+
+@Component({
+	template: `<lu-simple-select [apiV3]="url" />`,
+	imports: [MockSelectComponent, LuCoreSelectApiV3Directive],
+	changeDetection: ChangeDetectionStrategy.OnPush,
+})
+class TestHostComponent {
+	url = '/api/v3/axisSections';
+}
+
 describe('CoreSelectApiV3Directive', () => {
-	let directive: LuCoreSelectApiV3Directive<ILuApiItem>;
 	let selectMock: LuSimpleSelectInputComponent<ILuApiItem>;
 	let httpTestingController: HttpTestingController;
+	let fixture: ComponentFixture<TestHostComponent>;
 
 	beforeEach(() => {
 		selectMock = {
 			isPanelOpen$: new BehaviorSubject(false),
 			nextPage$: new Subject<void>(),
 			clueChange$: new Subject<string>(),
-			options$: new ReplaySubject(1),
 			loading$: new BehaviorSubject(false),
-		} as LuSimpleSelectInputComponent<ILuApiItem>;
+			optionComparer: signal(coreSelectDefaultOptionComparer),
+			optionKey: signal(coreSelectDefaultOptionKey),
+			options: signal([]),
+			loading: signal(false),
+		} as unknown as LuSimpleSelectInputComponent<ILuApiItem>;
 
 		TestBed.configureTestingModule({
+			imports: [TestHostComponent],
 			providers: [
-				LuCoreSelectApiV3Directive,
 				{
 					provide: ALuSelectInputComponent,
 					useValue: selectMock,
@@ -36,17 +56,13 @@ describe('CoreSelectApiV3Directive', () => {
 			],
 		});
 
-		directive = TestBed.inject<LuCoreSelectApiV3Directive<ILuApiItem>>(LuCoreSelectApiV3Directive);
+		fixture = TestBed.createComponent(TestHostComponent);
 		httpTestingController = TestBed.inject(HttpTestingController);
-	});
-
-	it('should create an instance', () => {
-		expect(directive).toBeTruthy();
 	});
 
 	it('should not call http.get on init', fakeAsync(() => {
 		// Act
-		directive.ngOnInit();
+		fixture.detectChanges();
 		tick(MAGIC_DEBOUNCE_DURATION);
 
 		// Assert
@@ -55,8 +71,7 @@ describe('CoreSelectApiV3Directive', () => {
 
 	it('should call http.get on open', fakeAsync(() => {
 		// Arrange
-		directive.apiV3 = '/api/v3/axisSections';
-		directive.ngOnInit();
+		fixture.detectChanges();
 		tick(MAGIC_DEBOUNCE_DURATION);
 
 		// Act
@@ -69,11 +84,10 @@ describe('CoreSelectApiV3Directive', () => {
 
 	it('should call http.get when page changes and aggregate options', fakeAsync(() => {
 		// Arrange
-		directive.apiV3 = '/api/v3/axisSections';
-		directive.ngOnInit();
+		fixture.detectChanges();
 		tick(MAGIC_DEBOUNCE_DURATION);
 		selectMock.isPanelOpen$.next(true);
-		tick();
+		tick(MAGIC_DEBOUNCE_DURATION);
 
 		httpTestingController.expectOne('/api/v3/axisSections?fields=id,name&orderBy=name,asc&paging=0,20').flush({
 			data: { items: itemsMocks.slice(0, LU_SELECT_MAGIC_PAGE_SIZE) },
@@ -82,25 +96,23 @@ describe('CoreSelectApiV3Directive', () => {
 
 		// Act
 		selectMock.nextPage$.next();
+		tick();
 
 		// Assert
 		httpTestingController.expectOne('/api/v3/axisSections?fields=id,name&orderBy=name,asc&paging=20,20').flush({
 			data: { items: itemsMocks.slice(LU_SELECT_MAGIC_PAGE_SIZE, LU_SELECT_MAGIC_PAGE_SIZE * 2) },
 		});
-
-		selectMock.options$.pipe(first()).subscribe((options) => {
-			expect(options).toEqual(itemsMocks.slice(0, LU_SELECT_MAGIC_PAGE_SIZE * 2));
-		});
 		tick();
+
+		expect(selectMock.options()).toEqual(itemsMocks.slice(0, LU_SELECT_MAGIC_PAGE_SIZE * 2));
 	}));
 
 	it('should call http.get when clue changes and reset options and page', fakeAsync(() => {
 		// Arrange
-		directive.apiV3 = '/api/v3/axisSections';
-		directive.ngOnInit();
+		fixture.detectChanges();
 		tick(MAGIC_DEBOUNCE_DURATION);
 		selectMock.isPanelOpen$.next(true);
-		tick();
+		tick(MAGIC_DEBOUNCE_DURATION);
 
 		httpTestingController.expectOne('/api/v3/axisSections?fields=id,name&orderBy=name,asc&paging=0,20').flush({
 			data: { items: itemsMocks.slice(0, LU_SELECT_MAGIC_PAGE_SIZE) },
@@ -108,9 +120,11 @@ describe('CoreSelectApiV3Directive', () => {
 		tick();
 
 		selectMock.nextPage$.next();
+		tick();
 		httpTestingController.expectOne('/api/v3/axisSections?fields=id,name&orderBy=name,asc&paging=20,20').flush({
 			data: { items: itemsMocks.slice(LU_SELECT_MAGIC_PAGE_SIZE, LU_SELECT_MAGIC_PAGE_SIZE * 2) },
 		});
+		tick();
 
 		// Act
 		selectMock.clueChange$.next('bob');
@@ -120,10 +134,8 @@ describe('CoreSelectApiV3Directive', () => {
 		httpTestingController.expectOne('/api/v3/axisSections?fields=id,name&orderBy=name,asc&name=like,bob&paging=0,20').flush({
 			data: { items: itemsMocks.slice(0, 5) },
 		});
-
-		selectMock.options$.pipe(first()).subscribe((options) => {
-			expect(options).toEqual(itemsMocks.slice(0, 5));
-		});
 		tick();
+
+		expect(selectMock.options()).toEqual(itemsMocks.slice(0, 5));
 	}));
 });

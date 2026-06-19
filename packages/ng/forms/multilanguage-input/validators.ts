@@ -1,6 +1,6 @@
-import { INVARIANT_CULTURE_CODE, MultilanguageTranslation } from './model/multilanguage-translation';
 import { AbstractControl, ValidatorFn } from '@angular/forms';
 import { isNil } from '@lucca-front/ng/core';
+import { INVARIANT_CULTURE_CODE, MultilanguageTranslation } from './model/multilanguage-translation';
 
 export function areAllLanguagesFilled(model: MultilanguageTranslation[]): boolean {
 	return model.every((row) => row.value?.length > 0);

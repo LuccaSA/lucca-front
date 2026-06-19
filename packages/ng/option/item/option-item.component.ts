@@ -1,7 +1,8 @@
-/* eslint-disable @angular-eslint/no-output-on-prefix */
 import { ChangeDetectionStrategy, ChangeDetectorRef, Component, ElementRef, EventEmitter, forwardRef, Input, Output, ViewChild } from '@angular/core';
 import { ALuOptionItem, ILuOptionItem } from './option-item.model';
 
+/* eslint-disable @angular-eslint/no-output-on-prefix */
+/* eslint-disable @angular-eslint/prefer-signals */
 /**
  * @deprecated
  */
@@ -55,7 +56,7 @@ export class LuOptionItemComponent<T> extends ALuOptionItem<T> implements ILuOpt
 		this._disabled = d;
 	}
 
-	@ViewChild('element', { read: ElementRef, static: true }) element: ElementRef;
+	@ViewChild('element', { read: ElementRef, static: true }) readonly element: ElementRef;
 	constructor(private _cdr: ChangeDetectorRef) {
 		super();
 	}

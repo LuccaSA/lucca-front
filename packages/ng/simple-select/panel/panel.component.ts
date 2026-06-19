@@ -1,6 +1,6 @@
 import { A11yModule } from '@angular/cdk/a11y';
 import { AsyncPipe, NgTemplateOutlet } from '@angular/common';
-import { AfterViewInit, ChangeDetectionStrategy, Component, computed, forwardRef, HostListener, inject, signal, TrackByFunction } from '@angular/core';
+import { AfterViewInit, ChangeDetectionStrategy, Component, computed, forwardRef, inject, signal, TrackByFunction } from '@angular/core';
 import { toObservable, toSignal } from '@angular/core/rxjs-interop';
 import { FormsModule } from '@angular/forms';
 import { PortalDirective } from '@lucca-front/ng/core';
@@ -33,6 +33,8 @@ import { LuIsOptionSelectedPipe } from './option-selected.pipe';
 	changeDetection: ChangeDetectionStrategy.OnPush,
 	host: {
 		'[class.colorPanel]': 'colorPanel()',
+		'(document:keydown)': 'onKeydown()',
+		'(document:mousemove)': 'onMousemove()',
 	},
 	imports: [
 		A11yModule,
@@ -62,42 +64,40 @@ export class LuSelectPanelComponent<T> implements AfterViewInit, CoreSelectPanel
 	public selectId = inject(SELECT_ID);
 	public intl = this.selectInput.intl;
 
-	options$ = this.selectInput.options$;
-	grouping = this.selectInput.groupingSignal;
+	readonly options$ = this.selectInput.options$;
+	readonly grouping = this.selectInput.groupingSignal;
 	treeGenerator = this.selectInput.treeGenerator;
-	loading = toSignal(this.selectInput.loading$);
-	loading$ = this.selectInput.loading$;
+	readonly loading = toSignal(this.selectInput.loading$);
+	readonly loading$ = this.selectInput.loading$;
 	searchable = this.selectInput.searchable;
-	optionComparer = this.selectInput.optionComparer;
-	optionKey = this.selectInput.optionKey;
+	readonly optionComparer = this.selectInput.optionComparer;
+	readonly optionKey = this.selectInput.optionKey;
 	colorPanel = this.selectInput.colorPicker;
 
-	trackOptionsBy: TrackByFunction<T> = (_, option) => this.optionKey(option);
+	trackOptionsBy: TrackByFunction<T> = (_, option) => this.optionKey()(option);
 	trackGroupsBy: TrackByFunction<LuOptionGroup<T, unknown>> = (_, group) => group.key;
-	trackBranchesBy: TrackByFunction<TreeNode<T>> = (_, option) => this.optionKey(option.node);
+	trackBranchesBy: TrackByFunction<TreeNode<T>> = (_, option) => this.optionKey()(option.node);
 
-	initialValue: T | undefined = this.selectInput.value;
-	optionTpl = this.selectInput.optionTpl;
+	initialValue: T | null = this.selectInput.value;
+	readonly optionTpl = this.selectInput.optionTpl;
 
-	options = signal<ɵCoreSelectPanelElement<T>[]>([]);
-	pointerNavigation = signal(false);
+	readonly options = signal<ɵCoreSelectPanelElement<T>[]>([]);
+	readonly pointerNavigation = signal(false);
 
-	@HostListener('document:keydown')
 	onKeydown(): void {
 		this.pointerNavigation.set(false);
 	}
 
-	@HostListener('document:mousemove')
 	onMousemove(): void {
 		this.pointerNavigation.set(true);
 	}
 
-	public keyManager = inject<CoreSelectKeyManager<T>>(CoreSelectKeyManager);
+	public readonly keyManager = inject<CoreSelectKeyManager<T>>(CoreSelectKeyManager);
 
-	public selected = computed(() => this.selectInput.valueSignal());
+	public readonly selected = computed(() => this.selectInput.valueSignal());
 
-	hasGrouping$ = toObservable(this.grouping).pipe(map((grouping) => !!grouping));
-	public clueChange$ = this.selectInput.clue$;
+	readonly hasGrouping$ = toObservable(this.grouping).pipe(map((grouping) => !!grouping));
+	public clueChange$ = this.selectInput.clue$.pipe(map((clue) => clue ?? ''));
 	public shouldDisplayAddOption$ = this.selectInput.shouldDisplayAddOption$;
 	public groupTemplateLocation$ = ɵgetGroupTemplateLocation(this.hasGrouping$, this.clueChange$, this.options$, this.searchable);
 
@@ -119,12 +119,12 @@ export class LuSelectPanelComponent<T> implements AfterViewInit, CoreSelectPanel
 		this.keyManager.init({
 			queryList: this.options,
 			options$: this.options$,
-			optionComparer: this.optionComparer,
+			optionComparer: this.optionComparer(),
 			activeOptionIdChanged$: this.panelRef.activeOptionIdChanged,
 			clueChange$: this.selectInput.searchable ? this.selectInput.clueChange$ : EMPTY,
 		});
 
-		if (this.initialValue && !this.selectInput.clue) {
+		if (this.initialValue !== null && !this.selectInput.clue) {
 			this.keyManager.highlightOption(this.initialValue);
 		}
 	}

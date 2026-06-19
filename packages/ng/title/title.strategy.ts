@@ -29,11 +29,11 @@ export class LuTitleStrategy extends TitleStrategy {
 	private readTitleByLiveAnnouncer = inject(ɵREAD_TITLE_BY_LIVE_ANNOUNCER);
 	private liveAnnouncer = inject(LiveAnnouncer);
 
-	private luccaTitle$ = isObservable(this.appTitle) ? this.appTitle.pipe(map((title) => this.#luccaTitle(title))) : of(this.#luccaTitle(this.appTitle));
+	private readonly luccaTitle$ = isObservable(this.appTitle) ? this.appTitle.pipe(map((title) => this.#luccaTitle(title))) : of(this.#luccaTitle(this.appTitle));
 
 	private titlePartsSubject = new BehaviorSubject<Array<string | ObservableInput<string>>>([Lucca]);
-	titleParts$ = this.titlePartsSubject.asObservable();
-	title$ = this.titleParts$.pipe(
+	readonly titleParts$ = this.titlePartsSubject.asObservable();
+	readonly title$ = this.titleParts$.pipe(
 		switchMap((titleParts) => combineLatest(titleParts.map((part) => (typeof part === 'string' ? of(part) : part)))),
 		map((parts) => parts.join(TitleSeparator)),
 		distinctUntilChanged(),

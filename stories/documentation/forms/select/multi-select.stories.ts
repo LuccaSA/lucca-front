@@ -38,6 +38,7 @@ import { HiddenArgType } from 'stories/helpers/common-arg-types';
 import { createTestStory, getStoryGenerator } from 'stories/helpers/stories';
 import { StoryModelDisplayComponent } from 'stories/helpers/story-model-display.component';
 import { expect, screen, userEvent, waitFor, within } from 'storybook/test';
+import { InputAlias, SelectCommonAliasInput } from '../../../helpers/stories';
 import { sleep, waitForAngular } from '../../../helpers/test';
 import { allLegumes, colorNameByColor, coreSelectStory, FilterLegumesPipe, ILegume, LuCoreSelectInputStoryComponent, SortLegumesPipe } from './select.utils';
 
@@ -843,7 +844,7 @@ export const IntlOverride = generateStory({
 	},
 });
 
-const meta: Meta<LuMultiSelectInputStoryComponent> = {
+const meta: Meta<InputAlias<LuMultiSelectInputStoryComponent, SelectCommonAliasInput>> = {
 	title: 'Documentation/Forms/MultiSelect',
 	component: LuMultiSelectInputComponent,
 	decorators: [

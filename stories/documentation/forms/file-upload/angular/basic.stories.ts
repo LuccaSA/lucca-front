@@ -144,8 +144,12 @@ export default {
 		},
 		buttonFilled: {
 			description: 'Affiche le bouton comme action principale de la page.',
+			if: { arg: 'size', truthy: true },
 		},
 		accept: {
+			control: {
+				type: 'object',
+			},
 			description: 'Liste des formats de fichiers acceptés.',
 		},
 		AItag: {
@@ -175,7 +179,7 @@ export default {
 
 export const Multi = {
 	render: (args, { argTypes }) => {
-		const { media, size, displayFileName, ...mainArgs } = args;
+		const { media, size, displayFileName, accept, ...mainArgs } = args;
 		const service = new MockFileUploadService();
 		const uploads = signal([] as FileUpload<LuccaFileUploadResult>[]);
 		const fileUploadFeature = {
@@ -211,8 +215,8 @@ export const Multi = {
 		const previewCache = new Map<File, string>();
 		const mediaParam = media ? ` media` : ``;
 		const displayFileNameParam = displayFileName && media ? ` displayFileName` : ``;
-		const sizeSFileUploadParam = size ? ` size="S"` : ``;
-		const sizeSFileEntryParam = media ? ` size="S"` : sizeSFileUploadParam;
+		const sizeLFileUploadParam = size ? ` size="L"` : ``;
+		const sizeLFileEntryParam = media ? `` : sizeLFileUploadParam;
 
 		if (args.AItag) {
 			return {
@@ -236,13 +240,13 @@ export const Multi = {
 					},
 				},
 				template: `<lu-form-field label="Label">
-		<lu-multi-file-upload${sizeSFileUploadParam}${generateInputs(mainArgs, argTypes)} (filePicked)="fileUploadFeature.uploadFiles([$event])">
+		<lu-multi-file-upload${sizeLFileUploadParam}${generateInputs(mainArgs, argTypes)} (filePicked)="fileUploadFeature.uploadFiles([$event])">
 			<lu-tag icon="weatherStars" label="Scan intelligent" AI />
 		</lu-multi-file-upload>
 	</lu-form-field>
 	<div class="fileEntryDisplayWrapper">
 		@for(fileUpload of fileUploadFeature.fileUploads(); track $index) {
-			<lu-file-entry${sizeSFileEntryParam}${displayFileNameParam}${mediaParam} [entry]="fileUpload | fileUploadToLFEntry" [state]="fileUpload.state" [previewUrl]="getPreviewUrl(fileUpload)" [inlineMessageError]="fileUpload.error?.detail" (deleteFile)="deleteFile(fileUpload)" />
+			<lu-file-entry${sizeLFileEntryParam}${displayFileNameParam}${mediaParam} [entry]="fileUpload | fileUploadToLFEntry" [state]="fileUpload.state" [previewUrl]="getPreviewUrl(fileUpload)" [inlineMessageError]="fileUpload.error?.detail" (deleteFile)="deleteFile(fileUpload)" />
 		}
 	</div>`,
 			};
@@ -268,11 +272,11 @@ export const Multi = {
 					},
 				},
 				template: `<lu-form-field label="Label">
-		<lu-multi-file-upload${sizeSFileUploadParam}${generateInputs(mainArgs, argTypes)} (filePicked)="fileUploadFeature.uploadFiles([$event])" />
+		<lu-multi-file-upload${sizeLFileUploadParam}${generateInputs(mainArgs, argTypes)} (filePicked)="fileUploadFeature.uploadFiles([$event])" />
 	</lu-form-field>
 	<div class="fileEntryDisplayWrapper">
 		@for(fileUpload of fileUploadFeature.fileUploads(); track $index) {
-			<lu-file-entry${sizeSFileEntryParam}${displayFileNameParam}${mediaParam} [entry]="fileUpload | fileUploadToLFEntry" [state]="fileUpload.state" [previewUrl]="getPreviewUrl(fileUpload)" [inlineMessageError]="fileUpload.error?.detail" (deleteFile)="deleteFile(fileUpload)" />
+			<lu-file-entry${sizeLFileEntryParam}${displayFileNameParam}${mediaParam} [entry]="fileUpload | fileUploadToLFEntry" [state]="fileUpload.state" [previewUrl]="getPreviewUrl(fileUpload)" [inlineMessageError]="fileUpload.error?.detail" (deleteFile)="deleteFile(fileUpload)" />
 		}
 	</div>`,
 			};
@@ -285,6 +289,12 @@ export const Multi = {
 		illustration: 'paper',
 		structure: false,
 		buttonFilled: false,
+		accept: [
+			{
+				format: 'image/*',
+				name: 'tous les formats d’images',
+			},
+		],
 		AItag: false,
 	},
 };

@@ -1,5 +1,6 @@
 import { booleanAttribute, ChangeDetectionStrategy, Component, computed, forwardRef, input, ViewEncapsulation } from '@angular/core';
 
+import { isNotNil } from '@lucca-front/ng/core';
 import { BaseDataTableCell } from '../base-data-table-cell';
 import { LU_DATA_TABLE_CELL_INSTANCE } from '../data-table-cell.token';
 
@@ -30,25 +31,29 @@ import { LU_DATA_TABLE_CELL_INSTANCE } from '../data-table-cell.token';
 	changeDetection: ChangeDetectionStrategy.OnPush,
 })
 export class DataTableRowCellComponent extends BaseDataTableCell {
-	actions = input(false, { transform: booleanAttribute });
+	readonly actions = input(false, { transform: booleanAttribute });
 
-	isSticky = computed(() => {
+	readonly isSticky = computed(() => {
 		return this.isStickyStart() || this.isStickyEnd();
 	});
 
-	alignCol = computed(() => {
-		return this.tableRef?.header().cols()?.[this.position()]?.align();
+	readonly alignCol = computed(() => {
+		const cols = this.tableRef?.header()?.cols?.();
+		const position = this.position();
+		return position !== undefined ? cols?.[position]?.align?.() : undefined;
 	});
 
-	insetInlineStart = computed(() => {
+	readonly insetInlineStart = computed(() => {
 		const isFirstOrLastCol = this.position() === 0 || this.position() === (this.rowRef?.cells().length ?? 0) - 1;
 		if (isFirstOrLastCol) return null;
-		return this.tableRef?.header()?.cols()?.[this.position()]?.insetInlineStart();
+		const position = this.position();
+		return isNotNil(position) ? this.tableRef?.header()?.cols()?.[position]?.insetInlineStart() : undefined;
 	});
 
-	insetInlineEnd = computed(() => {
+	readonly insetInlineEnd = computed(() => {
 		const isFirstOrLastCol = this.position() === 0 || this.position() === (this.rowRef?.cells().length ?? 0) - 1;
 		if (isFirstOrLastCol) return null;
-		return this.tableRef?.header()?.cols()?.[this.position()]?.insetInlineEnd();
+		const position = this.position();
+		return isNotNil(position) ? this.tableRef?.header()?.cols()?.[position]?.insetInlineEnd() : undefined;
 	});
 }

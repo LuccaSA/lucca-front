@@ -12,8 +12,8 @@ import { PageTitle, TitleSeparator } from './title.model';
 @Injectable()
 export class LuTitleService {
 	private titlePartsSubject = new BehaviorSubject<Array<string | ObservableInput<string>>>(['Lucca']);
-	titleParts$ = this.titlePartsSubject.asObservable();
-	title$ = this.titleParts$.pipe(
+	readonly titleParts$ = this.titlePartsSubject.asObservable();
+	readonly title$ = this.titleParts$.pipe(
 		switchMap((titleParts) => combineLatest(titleParts.map((part) => (typeof part === 'string' ? of(part) : part)))),
 		map((parts) => parts.join(TitleSeparator)),
 	);

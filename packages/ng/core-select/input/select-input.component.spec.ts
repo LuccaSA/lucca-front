@@ -10,7 +10,7 @@ export type TestEntity = { id: number; name: string };
 type LuSelectInputComponentTestSuiteConfig<TValue> = {
 	getFixture: () => ComponentFixture<ALuSelectInputComponent<TestEntity, TValue>>;
 	exampleValue: TValue;
-	emptyValue: TValue;
+	emptyValue: TValue | null;
 	clearerSelector: string;
 };
 
@@ -85,7 +85,7 @@ export function runALuSelectInputComponentTestSuite<TValue>(config: LuSelectInpu
 
 	it('should not open the panel when clicking the clearer', () => {
 		// Arrange
-		component.clearable = true;
+		component.clearable.set(true);
 		component.writeValue(config.exampleValue);
 		fixture.detectChanges();
 
@@ -114,5 +114,16 @@ export function runALuSelectInputComponentTestSuite<TValue>(config: LuSelectInpu
 		// Assert
 		expect(component.isPanelOpen).toBe(false);
 		expect(clueChangeSpy).not.toHaveBeenCalled();
+	});
+
+	it('should update filter pill disabled signal when disabled state changes', () => {
+		// Assert initial state
+		expect(component.filterPillDisabled?.()).toBe(false);
+
+		// Act
+		component.setDisabledState(true);
+
+		// Assert
+		expect(component.filterPillDisabled?.()).toBe(true);
 	});
 }

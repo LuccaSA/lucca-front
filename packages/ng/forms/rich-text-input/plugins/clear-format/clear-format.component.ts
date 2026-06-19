@@ -44,7 +44,7 @@ export class ClearFormatComponent implements RichTextPluginComponent, OnDestroy 
 	}
 
 	dispatchCommand() {
-		this.#editor.dispatchCommand(CLEAR_FORMAT, undefined);
+		this.#editor?.dispatchCommand(CLEAR_FORMAT, undefined);
 	}
 
 	setDisabledState(isDisabled: boolean) {

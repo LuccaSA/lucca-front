@@ -17,19 +17,19 @@
 					(ngModelChange)="_onInput($event)"
 					[ngModelOptions]="{ standalone: true }"
 					(keydown.enter)="_onEnter()"
-					[min]="min"
-					[max]="max"
-					[granularity]="granularity"
+					[min]="min()"
+					[max]="max()"
+					[granularity]="granularity()"
 				/>
 			</label>
 			<lu-calendar
 				[ngModel]="_value"
 				(ngModelChange)="_onCalendar($event)"
 				[ngModelOptions]="{ standalone: true }"
-				[min]="min"
-				[max]="max"
-				[granularity]="granularity"
-				[startOn]="startOn"
+				[min]="min()"
+				[max]="max()"
+				[granularity]="granularity()"
+				[startOn]="startOn()"
 			/>
 		</div>
 	</div>

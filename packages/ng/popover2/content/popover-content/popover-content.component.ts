@@ -1,5 +1,5 @@
 import { CdkObserveContent } from '@angular/cdk/observers';
-import { AfterViewInit, ChangeDetectionStrategy, Component, DestroyRef, ElementRef, HostBinding, HostListener, inject, input, OnDestroy, ViewEncapsulation } from '@angular/core';
+import { AfterViewInit, ChangeDetectionStrategy, Component, DestroyRef, ElementRef, inject, input, OnDestroy, ViewEncapsulation } from '@angular/core';
 import { ButtonComponent } from '@lucca-front/ng/button';
 import { intlInputOptions, PortalDirective } from '@lucca-front/ng/core';
 import { IconComponent } from '@lucca-front/ng/icon';
@@ -13,40 +13,42 @@ import { LU_POPOVER2_TRANSLATIONS } from '../../popover.translate';
 	imports: [ButtonComponent, IconComponent, CdkObserveContent, PortalDirective],
 	templateUrl: './popover-content.component.html',
 	styleUrl: './popover-content.component.scss',
-
+	host: {
+		'[attr.id]': 'contentId',
+		'(mouseenter)': 'mouseEnter()',
+		'(mouseleave)': 'mouseLeave()',
+		'(window:keydown.escape)': 'close()',
+	},
 	encapsulation: ViewEncapsulation.None,
 	changeDetection: ChangeDetectionStrategy.OnPush,
 })
 export class PopoverContentComponent implements AfterViewInit, OnDestroy {
-	intl = input(...intlInputOptions(LU_POPOVER2_TRANSLATIONS));
+	readonly intl = input(...intlInputOptions(LU_POPOVER2_TRANSLATIONS));
 
 	#elementRef = inject<ElementRef<HTMLElement>>(ElementRef);
 
-	config = inject(POPOVER_CONFIG);
+	readonly config = inject(POPOVER_CONFIG);
 
-	destroyRef = inject(DestroyRef);
+	readonly destroyRef = inject(DestroyRef);
 
-	@HostBinding('attr.id')
 	contentId = this.config.contentId;
 
 	content = this.config.content;
 
 	#focusManager = new PopoverFocusTrap(this.#elementRef.nativeElement, this.config.triggerElement);
 
-	closed$ = new Subject<void>();
+	readonly closed$ = new Subject<void>();
 
 	contentChangedDebounceTime = 100;
 
-	mouseEnter$ = new Subject<void>();
+	readonly mouseEnter$ = new Subject<void>();
 
-	@HostListener('mouseenter')
 	mouseEnter(): void {
 		this.mouseEnter$.next();
 	}
 
-	mouseLeave$ = new Subject<void>();
+	readonly mouseLeave$ = new Subject<void>();
 
-	@HostListener('mouseleave')
 	mouseLeave(): void {
 		this.mouseLeave$.next();
 	}
@@ -71,7 +73,6 @@ export class PopoverContentComponent implements AfterViewInit, OnDestroy {
 		this.#focusManager.focusInitialElement();
 	}
 
-	@HostListener('window:keydown.escape')
 	close(): void {
 		if (!this.config.disableInitialTriggerFocus) {
 			// Focus initial trigger element
