@@ -234,24 +234,32 @@ export const SelectAllTEST = createTestStory(SelectAll, async (context) => {
 		const clearButton = buttons.find((button) => button.className.includes('multipleSelect-clear'));
 		if (clearButton) {
 			await userEvent.click(clearButton);
+			await waitForAngular();
 		}
 	}
 	await userEvent.click(input);
-	await sleep(200);
+	await waitForAngular();
 	const panel = within(screen.getByRole('listbox'));
 	const selectAllCheckbox = panel.getByLabelText('Tout sélectionner');
 	await userEvent.click(selectAllCheckbox);
-	const options = await panel.findAllByRole('option').then((options) => options.filter((el) => !el.id.includes('select-all')));
+	await waitForAngular();
+	const options = await panel.findAllByRole('option').then((opts) => opts.filter((el) => !el.id.includes('select-all')));
 	const optionValues = options.map((option) => option.textContent);
-	await checkValues(input, optionValues);
 	await userEvent.keyboard('{Escape}');
-	context.step('Select all keyboard interactions', async () => {
+	await waitFor(() => expect(screen.queryByRole('listbox')).not.toBeInTheDocument());
+	await waitForAngular();
+	await waitFor(async () => {
+		await checkValues(input, optionValues);
+	});
+	await context.step('Select all keyboard interactions', async () => {
 		input.focus();
 		await userEvent.keyboard('{ArrowDown}');
 		await waitForAngular();
 		await userEvent.keyboard('{Enter}');
-		// We should have unselected everything with this keyboard input sequence
-		await checkValues(input, []);
+		await waitForAngular();
+		await waitFor(async () => {
+			await checkValues(input, []);
+		});
 	});
 });
 
