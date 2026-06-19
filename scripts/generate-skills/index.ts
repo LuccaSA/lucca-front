@@ -76,6 +76,7 @@ import { writeToc } from './generators/toc-writer';
 import { buildComponentChangelog } from './generators/changelog-writer';
 import { writeVersionChangelog } from './generators/version-diff-writer';
 import { writeAggregateSkill, listGeneratedVersionStrings } from './generators/aggregate-writer';
+import { ensureZhReleaseIds } from './zh-release-guard';
 import { resolveVersion } from './version-config';
 import { collectAllDocumentation } from './collectors/documentation';
 import { collectDeprecated } from './collectors/deprecated';
@@ -120,6 +121,14 @@ const flags = {
 	validate: args.includes('--validate'),
 	retryFailed: args.includes('--retry-failed'),
 	acceptShrink: args.includes('--accept-shrink'),
+	// ZeroHeight release-ID guard: supply IDs / assert "latest" non-interactively (CI).
+	zhIds: Object.fromEntries(
+		getFlags('zh-id')
+			.map((s) => s.split('='))
+			.filter(([m, id]) => m && id && Number.isInteger(Number(id)))
+			.map(([m, id]) => [m, Number(id)]),
+	) as Record<string, number>,
+	zhLatest: new Set(getFlags('zh-latest')),
 };
 
 // ─── Concurrency helper ────────────────────────────────────────────────────────
@@ -259,6 +268,18 @@ async function main(): Promise<void> {
 
 	clearFailures();
 
+	// Pre-flight: every minor that will fetch ZeroHeight must have a pinned release ID, unless it is
+	// the confirmed latest online. Aborts before any heavy work if an unpinned, superseded minor is
+	// unresolved (would otherwise pull "latest" = a newer version and corrupt its design sections).
+	if (!flags.skipZeroheight && !flags.dryRun) {
+		try {
+			await ensureZhReleaseIds(flags.versions, config.output.skillsDir, { zhIds: flags.zhIds, zhLatest: flags.zhLatest });
+		} catch (err: any) {
+			console.error(`\n❌ Garde-fou ZeroHeight : ${err.message}`);
+			process.exit(1);
+		}
+	}
+
 	let totalSuccess = 0;
 	let totalErrors = 0;
 
@@ -266,18 +287,6 @@ async function main(): Promise<void> {
 		const versionStr = flags.versions[vi];
 		const version = resolveVersion(versionStr);
 		console.log(`\n━━━━━━ Version ${vi + 1}/${flags.versions.length} : ${version.tag} ━━━━━━`);
-
-		// ZeroHeight content is version-pinned ONLY when the minor has a release ID in
-		// ZH_RELEASE_IDS. Without it, ZH falls back to "latest" (a moving target): fine for a
-		// brand-new version generated now, but a LATER regen would pull newer content and drift.
-		// Pin the ID as soon as it's available — see README "IDs de release ZeroHeight".
-		if (!flags.skipZeroheight && version.zhReleaseId === null) {
-			console.warn(
-				`  ⚠️  ZeroHeight: aucune release ID pinnée pour la mineure ${version.major}.${version.minor} ` +
-					`→ contenu tiré en « latest » (NON reproductible à la régénération). ` +
-					`Ajoute l'ID dans ZH_RELEASE_IDS (version-config.ts) dès que possible — cf. README.`,
-			);
-		}
 
 		// Documentation collection (ZH pages: tokens, content, guidelines, patterns)
 		if (!flags.skipDocumentation && !flags.component) {
@@ -403,6 +412,18 @@ async function retryFailedRun(config: ReturnType<typeof loadConfig>, manifestPat
 	}
 
 	console.log(`↻ Rejeu : ${prev.length} échec(s) sur ${byVersion.size} version(s)\n`);
+
+	// Same ZeroHeight release-ID guard as the main path: a retry re-fetches ZH, so an unpinned,
+	// superseded minor must be resolved first (the newest minor needs --zh-latest or interactive y).
+	if (!flags.skipZeroheight && !flags.dryRun) {
+		try {
+			await ensureZhReleaseIds([...byVersion.keys()], config.output.skillsDir, { zhIds: flags.zhIds, zhLatest: flags.zhLatest });
+		} catch (err: any) {
+			console.error(`\n❌ Garde-fou ZeroHeight : ${err.message}`);
+			process.exit(1);
+		}
+	}
+
 	const touchedVersions: string[] = [];
 	for (const [versionStr, items] of byVersion) {
 		const version = resolveVersion(versionStr);

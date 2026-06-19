@@ -81,6 +81,8 @@ npx ts-node ... --validate
 | `--validate` | Vérifier la couverture ZH de `component-map.json` (aucune génération) |
 | `--retry-failed` | Rejouer uniquement les unités (composants, pages doc/outils, deprecated) dont le fetch a échoué au run précédent (manifeste `_fetch-failures.json`) |
 | `--accept-shrink` | Entériner les régressions de contenu vs les baselines (suppression légitime côté ZH/Figma) |
+| `--zh-latest <minor>` | Affirme que `<minor>` (ex. `21.3`) est la dernière version en ligne → autorisée en « latest » non pinné. Répétable. Cf. garde-fou ZeroHeight. |
+| `--zh-id <minor>=<id>` | Fournit l'ID de release ZeroHeight d'une mineure (ex. `21.3=61234`), validé puis persisté dans `zh-release-ids.json`. Répétable. |
 
 ## Sources de données
 
@@ -171,6 +173,8 @@ scripts/generate-skills/
 ├── config.ts                         # Chargement config (env + JSON)
 ├── types.ts                          # Types TypeScript partagés
 ├── version-config.ts                 # version → tag, ZH releaseId, SB URL ; listStableTags/compareTags
+├── zh-release-ids.json               # Table mineure → ID de release ZeroHeight (writable)
+├── zh-release-guard.ts               # Garde-fou pré-flight : exige un ID pour toute mineure supersédée
 ├── sync-metadata.ts                  # Synchronise component-metadata.json depuis Storybook
 ├── component-metadata.json           # Métadonnées par slug (ZH path, Figma node IDs/name/aliases)
 ├── component-map.json                # Registre legacy — uniquement pour --validate
@@ -276,23 +280,49 @@ Ancien registre central, conservé uniquement pour `--validate` (couverture Zero
 
 ### IDs de release ZeroHeight (`ZH_RELEASE_IDS`)
 
-Le contenu ZeroHeight (guidelines, accessibilité, dépréciations, prose changelog) n'est **reproductible que si la mineure est pinnée** dans la table `ZH_RELEASE_IDS` de `version-config.ts`.
+Le contenu ZeroHeight (guidelines, accessibilité, dépréciations, prose changelog) n'est **reproductible que si la mineure est pinnée** dans **`zh-release-ids.json`** (la table, chargée et tenue à jour par `version-config.ts` ; écrite par le garde-fou).
 
 - **Mineure pinnée** → URL `prisme.lucca.io/<token>/v/<releaseId>/p/<page>.md`, **immuable** : régénérer cette version donne toujours le même contenu.
 - **Mineure absente** → `zhReleaseId = null` → URL sans `/v/<id>/` = contenu **« latest »**, **cible mouvante**.
-  - ✅ OK pour **générer une version qui vient de sortir** (latest ≈ cette version) ;
-  - ❌ **piège à la régénération** : régénérer une ancienne version plus tard tirerait le « latest » du moment (donc une version postérieure) → dérive silencieuse des sections design. Le reste (API, sélecteurs, stories, changelog structurel) reste correct car versionné par tag git + URL Storybook.
 
-La génération **avertit** quand une mineure n'est pas pinnée (`⚠️ aucune release ID pinnée…`).
+npm et ZeroHeight sortent **ensemble** : une mineure est donc sûre en « latest » **uniquement tant qu'elle est la version la plus récente publiée**. Le piège est de **régénérer une mineure plus ancienne** non pinnée (ex. une re-génération globale après une amélioration du générateur) : elle tirerait le « latest » du moment (= une version postérieure) → **corruption silencieuse** des sections design. Le reste (API, sélecteurs, stories, changelog structurel) reste correct car versionné par tag git + URL Storybook.
 
-**Obtenir un ID de release** (il est **opaque** — non déductible du repo, de git ou de npm) :
+> Pinner ≠ corriger l'existant. Comme npm/ZH sont en lockstep, le contenu capté à la première génération est déjà correct ; pinner l'ID sert à la **reproductibilité future** (et range la baseline ZH de `zeroheight/latest/` vers `zeroheight/<id>/`). Régénérer n'est pas requis pour « réparer ».
+
+#### Garde-fou pré-flight (`zh-release-guard.ts`)
+
+Avant toute génération, le pipeline applique l'invariant :
+
+> Une mineure ne peut être (re)générée **non pinnée** que si c'est **la plus récente** parmi celles concernées (run ∪ disque).
+
+- **Mineure supersédée non pinnée** (une plus récente existe) → **bloque** : il faut son ID.
+- **Mineure la plus récente, (re)générée, non pinnée** → demande de confirmer que c'est bien la **dernière version en ligne** (ZH peut être en avance sur ce qui a été généré).
+
+Résolution :
+
+| Contexte | Comportement |
+|---|---|
+| **Interactif (TTY)** | Pose `Est-ce la dernière version en ligne ? (y/n)`. `y` → contenu « latest ». `n` → demande l'ID. Pour une mineure supersédée : demande directement l'ID. L'ID saisi est **validé** (fetch `/v/<id>/`) puis **persisté** dans `zh-release-ids.json`. |
+| **Non-interactif / CI** | `--zh-latest <minor>` pour affirmer « c'est la dernière en ligne » ; `--zh-id <minor>=<releaseId>` pour fournir un ID. Sans l'un ni l'autre quand c'est requis → **échec** (exit ≠ 0), aucune génération. |
+
+Exemples :
+
+```bash
+# 21.3 vient de sortir et c'est la dernière en ligne :
+npx ts-node … --version 21.3.0 --zh-latest 21.3
+
+# 21.4 sort ; on régénère 21.3 (désormais supersédée) → il FAUT son ID :
+npx ts-node … --version 21.4.0 --zh-latest 21.4 --zh-id 21.3=<releaseId>
+```
+
+#### Obtenir un ID de release
+
+Il est **opaque** (non déductible du repo, de git ou de npm) :
 
 1. MCP ZeroHeight `list-releases` (la source qui a initialisé la table) ; **ou**
-2. le **sélecteur de versions / backoffice** Prisme : l'URL d'une release contient l'ID sous la forme `/v/<releaseId>/`.
+2. le **sélecteur de versions Prisme** : sélectionner une release met son ID dans l'URL sous la forme `/v/<releaseId>/` (accessible sans backoffice).
 
 > Un simple fetch HTTP public ne suffit pas : la landing n'expose pas la table complète et l'API releases de ZeroHeight (`/api/styleguide/<id>/releases`) exige un token d'authentification (401).
-
-**Ajouter une nouvelle mineure** : récupérer l'ID (méthode 1 ou 2), ajouter la ligne `'21.3': <ID>,` dans `ZH_RELEASE_IDS`, puis **régénérer** la/les version(s) concernée(s) pour repinner leur contenu ZH.
 
 Côté consommateur, deux modèles :
 
