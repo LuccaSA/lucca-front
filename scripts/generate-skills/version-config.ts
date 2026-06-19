@@ -11,10 +11,25 @@ import { execSync } from 'child_process';
 import { VersionConfig } from './types';
 
 // ─── ZeroHeight release IDs (per minor) ──────────────────────────────────────
-// Fetched via MCP `list-releases` on 2026-04-28.
+//
+// Maps each "major.minor" to its ZeroHeight release ID. The ID pins the ZH design content to that
+// release: `prisme.lucca.io/<token>/v/<releaseId>/p/<page>.md` is immutable, so a pinned minor is
+// fully reproducible — regenerating it any time yields the same guidelines.
+//
+// A minor ABSENT from this map resolves to `zhReleaseId === null` → the URL drops `/v/<id>/` and
+// fetches the CURRENT ("latest") content, a moving target. Acceptable when first generating a
+// brand-new version (latest ≈ that version), but a LATER regen would pull newer content and drift.
+// So pin every minor here as soon as its release ID is known.
+//
+// How to obtain a release ID (it is opaque — NOT derivable from git/npm/repo):
+//   1. ZeroHeight MCP `list-releases` (the source used to seed this map on 2026-04-28); or
+//   2. the prisme version switcher / backoffice — the release URL embeds it as `/v/<releaseId>/`.
+// The public ZH API (`/api/styleguide/<id>/releases`) requires an auth token, so a plain web fetch
+// cannot recover it. See README → "IDs de release ZeroHeight (ZH_RELEASE_IDS)".
+//
 // Key format: "major.minor"
-
 const ZH_RELEASE_IDS: Record<string, number> = {
+	// '21.3': <ID>, // TODO: à pinner — ID non encore récupérable (génération en « latest » d'ici là).
 	'21.2': 47452,
 	'21.1': 60527,
 	'21.0': 59269,

@@ -267,6 +267,18 @@ async function main(): Promise<void> {
 		const version = resolveVersion(versionStr);
 		console.log(`\n━━━━━━ Version ${vi + 1}/${flags.versions.length} : ${version.tag} ━━━━━━`);
 
+		// ZeroHeight content is version-pinned ONLY when the minor has a release ID in
+		// ZH_RELEASE_IDS. Without it, ZH falls back to "latest" (a moving target): fine for a
+		// brand-new version generated now, but a LATER regen would pull newer content and drift.
+		// Pin the ID as soon as it's available — see README "IDs de release ZeroHeight".
+		if (!flags.skipZeroheight && version.zhReleaseId === null) {
+			console.warn(
+				`  ⚠️  ZeroHeight: aucune release ID pinnée pour la mineure ${version.major}.${version.minor} ` +
+					`→ contenu tiré en « latest » (NON reproductible à la régénération). ` +
+					`Ajoute l'ID dans ZH_RELEASE_IDS (version-config.ts) dès que possible — cf. README.`,
+			);
+		}
+
 		// Documentation collection (ZH pages: tokens, content, guidelines, patterns)
 		if (!flags.skipDocumentation && !flags.component) {
 			console.log(`\n📖 Collecting documentation for v${version.major}.${version.minor}...`);

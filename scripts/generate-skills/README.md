@@ -269,10 +269,30 @@ Ancien registre central, conservé uniquement pour `--validate` (couverture Zero
 
 ## Versionnement & consommation
 
-- **ZeroHeight** : versionné par release mineure (mapping `version-config.ts`).
+- **ZeroHeight** : versionné par release mineure (mapping `ZH_RELEASE_IDS` dans `version-config.ts` — voir ci-dessous).
 - **Storybook** : versionné au fix près (`lucca-front.lucca.io/v21.2.3/storybook/`).
 - **AST / stories / migrations** : versionné au fix près via git tags.
 - **Figma** : reflète l'état courant.
+
+### IDs de release ZeroHeight (`ZH_RELEASE_IDS`)
+
+Le contenu ZeroHeight (guidelines, accessibilité, dépréciations, prose changelog) n'est **reproductible que si la mineure est pinnée** dans la table `ZH_RELEASE_IDS` de `version-config.ts`.
+
+- **Mineure pinnée** → URL `prisme.lucca.io/<token>/v/<releaseId>/p/<page>.md`, **immuable** : régénérer cette version donne toujours le même contenu.
+- **Mineure absente** → `zhReleaseId = null` → URL sans `/v/<id>/` = contenu **« latest »**, **cible mouvante**.
+  - ✅ OK pour **générer une version qui vient de sortir** (latest ≈ cette version) ;
+  - ❌ **piège à la régénération** : régénérer une ancienne version plus tard tirerait le « latest » du moment (donc une version postérieure) → dérive silencieuse des sections design. Le reste (API, sélecteurs, stories, changelog structurel) reste correct car versionné par tag git + URL Storybook.
+
+La génération **avertit** quand une mineure n'est pas pinnée (`⚠️ aucune release ID pinnée…`).
+
+**Obtenir un ID de release** (il est **opaque** — non déductible du repo, de git ou de npm) :
+
+1. MCP ZeroHeight `list-releases` (la source qui a initialisé la table) ; **ou**
+2. le **sélecteur de versions / backoffice** Prisme : l'URL d'une release contient l'ID sous la forme `/v/<releaseId>/`.
+
+> Un simple fetch HTTP public ne suffit pas : la landing n'expose pas la table complète et l'API releases de ZeroHeight (`/api/styleguide/<id>/releases`) exige un token d'authentification (401).
+
+**Ajouter une nouvelle mineure** : récupérer l'ID (méthode 1 ou 2), ajouter la ligne `'21.3': <ID>,` dans `ZH_RELEASE_IDS`, puis **régénérer** la/les version(s) concernée(s) pour repinner leur contenu ZH.
 
 Côté consommateur, deux modèles :
 
