@@ -580,4 +580,8 @@ export type LuccaIcon =
 	| 'weatherStorm'
 	| 'weatherSunny'
 	| 'weatherSun'
-	| 'weight';
+	| 'weight'
+	| 'window'
+	| 'windowAside'
+	| 'windowCornerBottom'
+	| 'windowCornerTop';
