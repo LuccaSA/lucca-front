@@ -1,5 +1,17 @@
 import { isNil } from '@lucca-front/ng/core';
-import { Day, format, isSameDay, isSameMonth, isSameYear, parse, startOfDecade, startOfMonth, startOfYear } from 'date-fns';
+import {
+	Day,
+	format,
+	isSameDay,
+	isSameMonth,
+	isSameWeek,
+	isSameYear,
+	parse,
+	startOfDecade,
+	startOfMonth,
+	startOfWeek,
+	startOfYear
+} from "date-fns";
 import { CalendarWeekDay, CalendarWeekInfo } from './calendar.token';
 import { CalendarMode } from './calendar2/calendar-mode';
 import { DateRange, DateRangeInput } from './calendar2/date-range';
@@ -15,18 +27,21 @@ export function getJSFirstDayOfWeek(weekInfo: CalendarWeekInfo): Day {
 
 const modeToComparator: Record<CalendarMode, (a: Date, b: Date) => boolean> = {
 	day: isSameDay,
+	week: isSameWeek,
 	month: isSameMonth,
 	year: isSameYear,
 };
 
 const modeToCalendarComparator: Record<CalendarMode, (a: Date, b: Date) => boolean> = {
 	day: isSameMonth,
+	week: isSameWeek,
 	month: isSameYear,
 	year: (a, b) => Math.floor(a.getFullYear() / 10) === Math.floor(b.getFullYear() / 10),
 };
 
 const modeToPeriodStart: Record<CalendarMode, (date: Date) => Date> = {
 	day: startOfMonth,
+	week: startOfWeek,
 	month: startOfYear,
 	year: startOfDecade,
 };

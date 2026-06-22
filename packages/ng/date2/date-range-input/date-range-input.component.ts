@@ -146,6 +146,7 @@ export class DateRangeInputComponent extends AbstractDateComponent implements On
 	protected readonly currentStartDisplayDate = computed(() => {
 		switch (this.mode()) {
 			case 'day':
+			case 'week':
 				return startOfMonth(this.currentDate());
 			case 'month':
 				return startOfYear(this.currentDate());
@@ -157,6 +158,7 @@ export class DateRangeInputComponent extends AbstractDateComponent implements On
 	protected readonly currentEndDisplayDate = computed(() => {
 		switch (this.mode()) {
 			case 'day':
+			case 'week':
 				return endOfMonth(this.currentRightDate());
 			case 'month':
 				return endOfYear(this.currentRightDate());
@@ -296,6 +298,7 @@ export class DateRangeInputComponent extends AbstractDateComponent implements On
 	getNextCalendarDate(date: Date): Date {
 		switch (this.mode()) {
 			case 'day':
+			case 'week':
 				return startOfMonth(addMonths(date, 1));
 			case 'month':
 				return startOfYear(addYears(date, 1));
@@ -500,6 +503,9 @@ export class DateRangeInputComponent extends AbstractDateComponent implements On
 		switch (this.mode()) {
 			case 'day':
 				return this.intlDateTimeFormat.format(date);
+			case 'week':
+				// TODO
+				return date.toString();
 			case 'month':
 				return this.intlDateTimeFormatMonth.format(date);
 			case 'year':
