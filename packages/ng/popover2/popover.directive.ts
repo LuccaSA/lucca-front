@@ -29,6 +29,13 @@ import { LU_POPOVER2_TRANSLATIONS } from './popover2.translate';
 
 export type PopoverPosition = 'above' | 'below' | 'before' | 'after';
 
+export interface PopoverOpenOptions {
+	/** Prevents focusing the close button (or first focusable element) when the popover opens. */
+	disableCloseButtonFocus?: boolean;
+	/** Prevents giving the focus back to the trigger element when the popover closes. */
+	disableInitialTriggerFocus?: boolean;
+}
+
 let nextId = 0;
 
 const defaultPositionPairs: Record<PopoverPosition, ConnectionPositionPair> = {
@@ -116,6 +123,13 @@ export class PopoverDirective implements OnDestroy {
 	 */
 	readonly luPopoverAnchor = input<FlexibleConnectedPositionStrategyOrigin>(this.elementRef);
 
+	/**
+	 * Extra element(s) to treat as "inside" the popover for outside-pointer detection. Pointer events
+	 * originating from them won't close the popover. Useful when an external control opens the popover
+	 * (e.g. an input opening it on focus) and clicking it again should not trigger a close-then-reopen.
+	 */
+	readonly luPopoverIgnoredOutsidePointerTargets = input<HTMLElement | HTMLElement[] | null>(null);
+
 	// We have to type these two for Compodoc to find the right type and tell Storybook these aren't strings
 	readonly luPopoverOpenDelay: InputSignal<number> = input<number>(300);
 
@@ -172,7 +186,7 @@ export class PopoverDirective implements OnDestroy {
 			)
 			.subscribe(([event, type]: ['open' | 'close', 'focus' | 'click' | 'hover']) => {
 				if (event === 'open') {
-					this.openPopover(type === 'focus', true, type === 'hover');
+					this.openPopover({ disableCloseButtonFocus: true, disableInitialTriggerFocus: type === 'hover' });
 					this.#listenToMouseLeave = type !== 'click';
 					if (type === 'focus' && !this.#screenReaderDescription) {
 						this.#screenReaderDescription = this.#renderer.createElement('span') as HTMLSpanElement;
@@ -222,7 +236,7 @@ export class PopoverDirective implements OnDestroy {
 			this.#componentRef?.close();
 			this.#listenToMouseLeave = true;
 		} else {
-			this.openPopover(true);
+			this.openPopover();
 			this.#listenToMouseLeave = false;
 			this.#listenToMouseEnter = false;
 		}
@@ -235,7 +249,21 @@ export class PopoverDirective implements OnDestroy {
 		}
 	}
 
-	openPopover(withBackdrop = false, disableCloseButtonFocus = false, disableInitialTriggerFocus = false): void {
+	openPopover(options?: PopoverOpenOptions): void;
+	/**
+	 * @deprecated The boolean signature is kept only for backward compatibility. `withBackdrop` is now ignored
+	 * (the popover no longer creates a blocking backdrop). Prefer `openPopover({ disableCloseButtonFocus, disableInitialTriggerFocus })`.
+	 */
+	openPopover(withBackdrop?: boolean, disableCloseButtonFocus?: boolean, disableInitialTriggerFocus?: boolean): void;
+	openPopover(optionsOrWithBackdrop?: PopoverOpenOptions | boolean, disableCloseButtonFocusArg?: boolean, disableInitialTriggerFocusArg?: boolean): void {
+		// New options-object form vs deprecated boolean form. With the boolean form the first
+		// positional argument is the now-ignored `withBackdrop`, so the focus flags shift by one.
+		const options: PopoverOpenOptions =
+			typeof optionsOrWithBackdrop === 'object' && optionsOrWithBackdrop !== null
+				? optionsOrWithBackdrop
+				: { disableCloseButtonFocus: disableCloseButtonFocusArg, disableInitialTriggerFocus: disableInitialTriggerFocusArg };
+		const disableCloseButtonFocus = options.disableCloseButtonFocus ?? false;
+		const disableInitialTriggerFocus = options.disableInitialTriggerFocus ?? false;
 		const content = this.content();
 
 		if (!this.opened() && !this.luPopoverDisabled() && isNotNil(content)) {
@@ -247,15 +275,23 @@ export class PopoverDirective implements OnDestroy {
 					.flexibleConnectedTo(this.luPopoverAnchor())
 					.withPositions(this.customPositions() || this.#buildPositions()),
 				scrollStrategy: this.overlay.scrollStrategies[this.overlayScrollStrategy() ?? 'reposition'](),
-				hasBackdrop: withBackdrop,
-				backdropClass: '',
 				disposeOnNavigation: true,
 			});
-			// Close on backdrop click even if backdrop is invisible
+			// Close on outside interaction WITHOUT a blocking backdrop that would
+			// intercept pointer events on the rest of the page.
 			this.#overlayRef
-				.backdropClick()
+				.outsidePointerEvents()
 				.pipe(takeUntilDestroyed(this.#destroyRef))
-				.subscribe(() => {
+				.subscribe((event) => {
+					// Re-opening from the trigger (or from the anchor element, which may be a wrapper
+					// containing other interactive parts), as well as from explicitly ignored external
+					// controls, is handled by their own open handlers (e.g. the click() HostListener or
+					// an input opening on focus). Ignore those here, otherwise we'd close on pointerdown
+					// then immediately reopen on click.
+					const target = event.target;
+					if (target instanceof Node && (this.elementRef.nativeElement.contains(target) || this.#anchorElement?.contains(target) || this.#isIgnoredOutsidePointerTarget(target))) {
+						return;
+					}
 					this.#componentRef?.close();
 					this.#listenToMouseLeave = true;
 				});
@@ -311,6 +347,29 @@ export class PopoverDirective implements OnDestroy {
 
 	updatePosition() {
 		this.#overlayRef?.updatePosition();
+	}
+
+	#isIgnoredOutsidePointerTarget(target: Node): boolean {
+		const ignored = this.luPopoverIgnoredOutsidePointerTargets();
+		if (!ignored) {
+			return false;
+		}
+		return (Array.isArray(ignored) ? ignored : [ignored]).some((element) => element.contains(target));
+	}
+
+	/**
+	 * Resolves the anchor to its native element, when it is one. The anchor can be an ElementRef,
+	 * an Element or a plain coordinate (Point); only element-based anchors can contain a pointer target.
+	 */
+	get #anchorElement(): Element | null {
+		const anchor = this.luPopoverAnchor();
+		if (anchor instanceof ElementRef) {
+			return anchor.nativeElement as Element;
+		}
+		if (anchor instanceof Element) {
+			return anchor;
+		}
+		return null;
 	}
 
 	#buildPositions(): ConnectedPosition[] {
