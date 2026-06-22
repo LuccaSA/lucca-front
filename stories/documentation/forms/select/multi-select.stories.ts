@@ -240,7 +240,7 @@ export const SelectAllTEST = createTestStory(SelectAll, async (context) => {
 	await userEvent.click(input);
 	await waitForAngular();
 	const panel = within(screen.getByRole('listbox'));
-	const selectAllCheckbox = panel.getByLabelText('Tout sélectionner');
+	const selectAllCheckbox = await panel.findByLabelText('Tout sélectionner');
 	await userEvent.click(selectAllCheckbox);
 	await waitForAngular();
 	const options = await panel.findAllByRole('option').then((opts) => opts.filter((el) => !el.id.includes('select-all')));
@@ -248,18 +248,14 @@ export const SelectAllTEST = createTestStory(SelectAll, async (context) => {
 	await userEvent.keyboard('{Escape}');
 	await waitFor(() => expect(screen.queryByRole('listbox')).not.toBeInTheDocument());
 	await waitForAngular();
-	await waitFor(async () => {
-		await checkValues(input, optionValues);
-	});
+	await waitFor(() => checkValues(input, optionValues));
 	await context.step('Select all keyboard interactions', async () => {
 		input.focus();
 		await userEvent.keyboard('{ArrowDown}');
 		await waitForAngular();
 		await userEvent.keyboard('{Enter}');
 		await waitForAngular();
-		await waitFor(async () => {
-			await checkValues(input, []);
-		});
+		await waitFor(() => checkValues(input, []));
 	});
 });
 
