@@ -128,7 +128,7 @@ export class PopoverDirective implements OnDestroy {
 	 * originating from them won't close the popover. Useful when an external control opens the popover
 	 * (e.g. an input opening it on focus) and clicking it again should not trigger a close-then-reopen.
 	 */
-	luPopoverIgnoredOutsidePointerTargets = input<HTMLElement | HTMLElement[] | null>(null);
+	readonly luPopoverIgnoredOutsidePointerTargets = input<HTMLElement | HTMLElement[] | null>(null);
 
 	// We have to type these two for Compodoc to find the right type and tell Storybook these aren't strings
 	readonly luPopoverOpenDelay: InputSignal<number> = input<number>(300);
