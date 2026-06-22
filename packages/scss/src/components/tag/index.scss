@@ -38,10 +38,8 @@
 			@include focusVisible;
 		}
 
-		@if not config.$deprecatedTagAlignment {
-			&:has(.lucca-icon) {
-				@include withIcon;
-			}
+		&:has(.lucca-icon) {
+			@include withIcon;
 		}
 	}
 }

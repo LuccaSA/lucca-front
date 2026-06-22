@@ -1,8 +1,6 @@
 @use '@lucca-front/scss/src/commons/config';
 @use '@lucca-front/scss/src/components/tag';
 
-@if not config.$deprecatedTagAlignment {
-	lu-tag {
-		display: contents;
-	}
+lu-tag {
+	display: contents;
 }
