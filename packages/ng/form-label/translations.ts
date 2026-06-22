@@ -1,24 +1,17 @@
 ﻿export const Translations = {
-	'nl-BE': {
+	en: {
 		counterAlt: {
-			one: 'Uw bericht bevat {{counterStatus}} teken. Het maximum aantal is {{counterMax}}.',
-			other: 'Uw bericht bevat {{counterStatus}} tekens. Het maximum aantal is {{counterMax}}.',
+			one: 'Your message contains {{counterStatus}} character. A maximum of {{counterMax}} are permitted.',
+			other: 'Your message contains {{counterStatus}} characters. A maximum of {{counterMax}} are permitted.',
 		},
-		tooltipAlt: 'Aanvullende informatie',
+		tooltipAlt: 'Additional info',
 	},
-	nl: {
+	de: {
 		counterAlt: {
-			one: 'Uw bericht bevat {{counterStatus}} teken. Het maximum aantal is {{counterMax}}.',
-			other: 'Uw bericht bevat {{counterStatus}} tekens. Het maximum aantal is {{counterMax}}.',
+			one: 'Ihre Nachricht ist {{counterStatus}} Zeichen lang. Maximal {{counterMax}} sind erlaubt.',
+			other: 'Ihre Nachricht ist {{counterStatus}} Zeichen lang. Maximal {{counterMax}} sind erlaubt.',
 		},
-		tooltipAlt: 'Aanvullende informatie',
-	},
-	it: {
-		counterAlt: {
-			one: 'Il tuo messaggio contiene {{counterStatus}} carattere. Sono consentiti al massimo {{counterMax}}.',
-			other: 'Il tuo messaggio è lungo {{counterStatus}} caratteri. Sono consentiti al massimo {{counterMax}}.',
-		},
-		tooltipAlt: 'Informazioni aggiuntive',
+		tooltipAlt: 'Zusätzliche Informationen',
 	},
 	fr: {
 		counterAlt: {
@@ -27,32 +20,48 @@
 		},
 		tooltipAlt: 'Info supplémentaire',
 	},
-	pt: {
+	it: {
 		counterAlt: {
-			one: 'A sua mensagem tem {{counterStatus}} caractere. São permitidos no máximo {{counterMax}}.',
-			other: 'A sua mensagem tem {{counterStatus}} caracteres. São permitidos no máximo {{counterMax}}.',
+			one: 'Il tuo messaggio è lungo {{counterStatus}} carattere. È consentito un massimo di {{counterMax}} caratteri.',
+			other: 'Il tuo messaggio è lungo {{counterStatus}} caratteri. È consentito un massimo di {{counterMax}} caratteri.',
 		},
-		tooltipAlt: 'Informações adicionais',
+		tooltipAlt: 'Informazione supplementare',
+	},
+	nl: {
+		counterAlt: {
+			one: 'Uw bericht is {{counterStatus}} teken te lang. Een maximum van {{counterMax}} is toegestaan.',
+			other: 'Uw bericht is {{counterStatus}} tekens te lang. Een maximum van {{counterMax}} is toegestaan.',
+		},
+		tooltipAlt: 'Aanvullende informatie',
+	},
+	'nl-BE': {
+		counterAlt: {
+			one: 'Uw bericht is {{counterStatus}} teken te lang. Een maximum van {{counterMax}} is toegestaan.',
+			other: 'Uw bericht is {{counterStatus}} tekens te lang. Een maximum van {{counterMax}} is toegestaan.',
+		},
+		tooltipAlt: 'Aanvullende informatie',
 	},
 	es: {
 		counterAlt: {
-			one: 'Tu mensaje tiene {{counterStatus}} carácter. Se permite un máximo de {{counterMax}}.',
-			other: 'Tu mensaje tiene {{counterStatus}} caracteres. Se permite un máximo de {{counterMax}}.',
+			one: 'Su mensaje tiene {{counterStatus}} caracteres. Se permite un máximo de {{counterMax}}.',
+			other: 'Su mensaje tiene {{counterStatus}} caracteres. Se permite un máximo de {{counterMax}}.',
 		},
-		tooltipAlt: 'Información complementaria',
+		tooltipAlt: 'Información adicional',
 	},
-	de: {
+	pt: {
 		counterAlt: {
-			one: 'Ihre Nachricht enthält {{counterStatus}} Zeichen. Die maximale Anzahl beträgt {{counterMax}}.',
-			other: 'Ihre Nachricht enthält {{counterStatus}} Zeichen. Die maximale Anzahl beträgt {{counterMax}}.',
+			one: 'A sua mensagem tem {{counterStatus}} caracteres. É permitido um máximo de {{counterMax}} .',
+			other: 'A sua mensagem tem {{counterStatus}} caracteres. É permitido um máximo de {{counterMax}} .',
 		},
-		tooltipAlt: 'Zusätzliche Info',
+		tooltipAlt: 'Informações adicionais',
 	},
-	en: {
+	pl: {
 		counterAlt: {
-			one: 'Your message is {{counterStatus}} character long. A maximum of {{counterMax}} are allowed.',
-			other: 'Your message is {{counterStatus}} characters long. A maximum of {{counterMax}} are allowed.',
+			one: 'Wiadomość zawiera {{counterStatus}} znak. Dozwolonych jest maksymalnie {{counterMax}} znaków.',
+			few: 'Wiadomość zawiera {{counterStatus}} znaki. Dozwolonych jest maksymalnie {{counterMax}} znaków.',
+			many: 'Wiadomość zawiera {{counterStatus}} znaków. Dozwolonych jest maksymalnie {{counterMax}} znaków.',
+			other: 'Wiadomość zawiera {{counterStatus}} znaków. Dozwolonych jest maksymalnie {{counterMax}} znaków.',
 		},
-		tooltipAlt: 'Additional info',
+		tooltipAlt: 'Dodatkowe informacje',
 	},
 };
