@@ -1,7 +1,7 @@
 import { booleanAttribute, ChangeDetectionStrategy, Component, computed, effect, ElementRef, inject, input, LOCALE_ID, model, OnInit, output, viewChildren, ViewEncapsulation } from '@angular/core';
 import { intlInputOptions } from '@lucca-front/ng/core';
 import { LuTooltipTriggerDirective } from '@lucca-front/ng/tooltip';
-import type { Interval } from 'date-fns';
+import { getWeek, Interval } from "date-fns";
 import {
 	addHours,
 	addMonths,
@@ -385,6 +385,7 @@ export class Calendar2Component implements OnInit {
 
 		return {
 			day: date.getDate(),
+			week: getWeek(date),
 			status,
 			label: status.label || rangeInfo?.label,
 			date,

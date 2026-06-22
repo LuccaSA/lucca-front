@@ -126,6 +126,7 @@ export class DateInputComponent extends AbstractDateComponent implements OnInit,
 			let formatter: Intl.DateTimeFormat;
 			switch (this.mode()) {
 				case 'day':
+				case 'week':
 					formatter = this.intlDateTimeFormat;
 					break;
 				case 'month':
