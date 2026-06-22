@@ -36,7 +36,9 @@
 			</span>
 		</button>
 		@if (inputIsClearable()) {
-			<lu-clear class="filterPill_clear" (onClear)="clear(); filterPillRef.focus()">{{ intl().clear }}</lu-clear>
+			<lu-clear class="filterPill_clear" (onClear)="clear(); popoverRef.opened() ? null : filterPillRef.focus()">{{
+				intl().clear
+			}}</lu-clear>
 		}
 	} @else {
 		<ng-container

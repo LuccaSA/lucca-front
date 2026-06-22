@@ -123,6 +123,13 @@ export class PopoverDirective implements OnDestroy {
 	 */
 	readonly luPopoverAnchor = input<FlexibleConnectedPositionStrategyOrigin>(this.elementRef);
 
+	/**
+	 * Extra element(s) to treat as "inside" the popover for outside-pointer detection. Pointer events
+	 * originating from them won't close the popover. Useful when an external control opens the popover
+	 * (e.g. an input opening it on focus) and clicking it again should not trigger a close-then-reopen.
+	 */
+	luPopoverIgnoredOutsidePointerTargets = input<HTMLElement | HTMLElement[] | null>(null);
+
 	// We have to type these two for Compodoc to find the right type and tell Storybook these aren't strings
 	readonly luPopoverOpenDelay: InputSignal<number> = input<number>(300);
 
@@ -277,11 +284,12 @@ export class PopoverDirective implements OnDestroy {
 				.pipe(takeUntilDestroyed(this.#destroyRef))
 				.subscribe((event) => {
 					// Re-opening from the trigger (or from the anchor element, which may be a wrapper
-					// containing other interactive parts) is handled by their own open handlers (e.g. the
-					// click() HostListener). Ignore those here, otherwise we'd close on pointerdown then
-					// immediately reopen on click.
+					// containing other interactive parts), as well as from explicitly ignored external
+					// controls, is handled by their own open handlers (e.g. the click() HostListener or
+					// an input opening on focus). Ignore those here, otherwise we'd close on pointerdown
+					// then immediately reopen on click.
 					const target = event.target;
-					if (target instanceof Node && (this.elementRef.nativeElement.contains(target) || this.#anchorElement?.contains(target))) {
+					if (target instanceof Node && (this.elementRef.nativeElement.contains(target) || this.#anchorElement?.contains(target) || this.#isIgnoredOutsidePointerTarget(target))) {
 						return;
 					}
 					this.#componentRef?.close();
@@ -339,6 +347,14 @@ export class PopoverDirective implements OnDestroy {
 
 	updatePosition() {
 		this.#overlayRef?.updatePosition();
+	}
+
+	#isIgnoredOutsidePointerTarget(target: Node): boolean {
+		const ignored = this.luPopoverIgnoredOutsidePointerTargets();
+		if (!ignored) {
+			return false;
+		}
+		return (Array.isArray(ignored) ? ignored : [ignored]).some((element) => element.contains(target));
 	}
 
 	/**
