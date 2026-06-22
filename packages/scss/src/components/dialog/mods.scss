@@ -75,7 +75,7 @@
 	--components-dialog-inset: 0;
 }
 
-@mixin neutralBackground {
+@mixin surfaceDefault {
 	--components-dialog-insideContent-background: var(--pr-t-elevation-surface-default);
 }
 

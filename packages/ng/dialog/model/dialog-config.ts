@@ -98,7 +98,7 @@ type BaseLuDialogConfig<C, TData = LuDialogData<C>> = {
 	/**
 	 * Should the dialog have a neutral background?
 	 */
-	neutralBackground?: boolean;
+	surfaceDefault?: boolean;
 };
 
 export type LuDialogConfig<T, TData = LuDialogData<T>> = [TData] extends [never] ? Omit<BaseLuDialogConfig<T, TData>, 'data'> : BaseLuDialogConfig<T, TData>;

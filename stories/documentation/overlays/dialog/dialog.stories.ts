@@ -139,7 +139,7 @@ export const Basic: StoryObj = {
 		alert: false,
 		mode: 'default',
 		panelClasses: [],
-		neutralBackground: false,
+		surfaceDefault: false,
 	},
 };
 

@@ -35,7 +35,7 @@ export class LuDialogService {
 			role: config.alert ? 'alertdialog' : 'dialog',
 			restoreFocus: true,
 			backdropClass: 'dialog_backdrop',
-			panelClass: ['dialog', `mod-${config.size || 'M'}`, ...modeClasses, ...(config.neutralBackground ? ['mod-neutralBackground'] : []), ...(config.panelClasses || [])],
+			panelClass: ['dialog', `mod-${config.size || 'M'}`, ...modeClasses, ...(config.surfaceDefault ? ['mod-surfaceDefault'] : []), ...(config.panelClasses || [])],
 
 			ariaLabel: config.ariaLabel,
 			// Handle manually
