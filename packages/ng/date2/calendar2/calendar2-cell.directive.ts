@@ -8,6 +8,7 @@ import { CALENDAR_TABBABLE_DATE } from './calendar2.tokens';
 
 const modeToDurationKey: Record<CalendarMode, keyof Duration> = {
 	day: 'days',
+	week: 'weeks',
 	month: 'months',
 	year: 'years',
 };
