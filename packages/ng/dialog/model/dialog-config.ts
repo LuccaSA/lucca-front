@@ -94,6 +94,11 @@ type BaseLuDialogConfig<C, TData = LuDialogData<C>> = {
 	 * Classes to add to the panel
 	 */
 	panelClasses?: string[];
+
+	/**
+	 * Should the dialog have a neutral background?
+	 */
+	neutralBackground?: boolean;
 };
 
 export type LuDialogConfig<T, TData = LuDialogData<T>> = [TData] extends [never] ? Omit<BaseLuDialogConfig<T, TData>, 'data'> : BaseLuDialogConfig<T, TData>;

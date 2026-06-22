@@ -106,7 +106,7 @@ export default {
 			description: 'Largeur de la fenêtre de dialogue.',
 		},
 		panelClasses: {
-			description: 'Permet d’ajouter des classes CSS au composant. (ex : mod-neutralBackground)',
+			description: 'Permet d’ajouter des classes CSS au composant.',
 		},
 		alert: {
 			description:
@@ -124,6 +124,12 @@ export default {
 			if: { arg: 'mode', eq: 'fancy' },
 			description: 'Surcharge l’illustration avec une URL personnalisée.',
 		},
+		neutralBackground: {
+			control: {
+				type: 'boolean',
+			},
+			description: 'Applique un fond gris au contenu de la fenêtre de dialogue.',
+		},
 	},
 } as Meta;
 
@@ -133,6 +139,7 @@ export const Basic: StoryObj = {
 		alert: false,
 		mode: 'default',
 		panelClasses: [],
+		neutralBackground: false,
 	},
 };
 
