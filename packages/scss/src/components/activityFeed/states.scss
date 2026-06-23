@@ -2,11 +2,11 @@
 @use '@lucca-front/icons/src/commons/utils/icon';
 
 @mixin empty {
-	--components-activityFeed-content-update-display: none;
+	--components-activityFeed-content-group-update-display: none;
 }
 
 @mixin single {
-	--components-activityFeed-content-update-icon-display: none;
+	--components-activityFeed-content-group-update-icon-display: none;
 }
 
 @mixin success {

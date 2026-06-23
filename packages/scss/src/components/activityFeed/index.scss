@@ -34,13 +34,13 @@
 		@include critical;
 	}
 
-	.activityFeed-content-update {
-		&:has(.activityFeed-content-update-before:empty, .activityFeed-content-update-after:empty) {
+	.activityFeed-content-group-update {
+		&:has(.activityFeed-content-group-update-before:empty, .activityFeed-content-group-update-after:empty) {
 			@include single;
 		}
 
-		&:has(.activityFeed-content-update-before:empty) {
-			&:has(.activityFeed-content-update-after:empty) {
+		&:has(.activityFeed-content-group-update-before:empty) {
+			&:has(.activityFeed-content-group-update-after:empty) {
 				@include empty;
 			}
 		}

@@ -1,11 +1,11 @@
-<div class="activityFeed-content-update-before">
-	<ng-container *ngTemplateOutlet="content" />
+<div class="activityFeed-content-group-update-object">
+	{{ label() }}
+	{{ colonDisplay() }}
 </div>
-<lu-icon class="activityFeed-content-update-icon" size="XS" icon="arrowRight" [alt]="intl().replaceByAlt" />
-<div class="activityFeed-content-update-after">
+<div class="activityFeed-content-group-update-before">
+	<ng-content select="[activityFeedUpdateBefore]" />
+</div>
+<lu-icon class="activityFeed-content-group-update-icon" size="XS" icon="arrowRight" [alt]="intl().replaceByAlt" />
+<div class="activityFeed-content-group-update-after">
 	<ng-content select="[activityFeedUpdateAfter]" />
 </div>
-
-<ng-template #content>
-	<ng-content select="[activityFeedUpdateBefore]" />
-</ng-template>
