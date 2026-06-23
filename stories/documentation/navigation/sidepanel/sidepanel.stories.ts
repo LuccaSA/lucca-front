@@ -2,7 +2,7 @@ import { ChangeDetectionStrategy, Component } from '@angular/core';
 import { provideAnimations } from '@angular/platform-browser/animations';
 import { ILuModalContent } from '@lucca-front/ng/modal';
 import { LuSidepanel, LuSidepanelModule } from '@lucca-front/ng/sidepanel';
-import { applicationConfig, Meta, StoryObj } from '@storybook/angular';
+import { applicationConfig, Meta, StoryObj } from '@storybook/angular-vite';
 
 @Component({
 	selector: 'sidepanel-content',

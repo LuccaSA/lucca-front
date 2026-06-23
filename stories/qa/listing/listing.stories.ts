@@ -1,6 +1,6 @@
 import { ChangeDetectionStrategy, Component } from '@angular/core';
 import { ListingComponent, ListingItemComponent } from '@lucca-front/ng/listing';
-import { Meta, StoryObj } from '@storybook/angular';
+import { Meta, StoryObj } from '@storybook/angular-vite';
 import { PaletteAllArgType } from '@/helpers/common-arg-types';
 
 @Component({

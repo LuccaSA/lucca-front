@@ -1,5 +1,5 @@
 import { READ_MORE_SURFACE, ReadMoreComponent } from '@lucca-front/ng/read-more';
-import { Meta, moduleMetadata } from '@storybook/angular';
+import { Meta, moduleMetadata } from '@storybook/angular-vite';
 import { createTestStory, generateInputs, setStoryOptions } from '@/helpers/stories';
 import { sleep, waitForAngular } from '@/helpers/test';
 import { expect, userEvent, within } from 'storybook/test';

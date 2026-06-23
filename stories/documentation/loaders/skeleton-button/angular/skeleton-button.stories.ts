@@ -1,5 +1,5 @@
 import { SKELETON_BUTTON_SIZE, SkeletonButtonComponent } from '@lucca-front/ng/skeleton';
-import { Meta, StoryObj } from '@storybook/angular';
+import { Meta, StoryObj } from '@storybook/angular-vite';
 import { setStoryOptions } from '@/helpers/stories';
 
 export default {

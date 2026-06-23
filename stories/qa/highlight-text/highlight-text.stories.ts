@@ -1,7 +1,7 @@
 import { ChangeDetectionStrategy, Component } from '@angular/core';
 import { HighlightTextComponent } from '@lucca-front/ng/highlight-text';
 
-import { Meta, StoryObj } from '@storybook/angular';
+import { Meta, StoryObj } from '@storybook/angular-vite';
 import { PaletteAllArgType } from '@/helpers/common-arg-types';
 
 @Component({

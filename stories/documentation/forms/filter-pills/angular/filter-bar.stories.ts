@@ -12,7 +12,7 @@ import { LuMultiSelectInputComponent } from '@lucca-front/ng/multi-select';
 import { NumericBadgeComponent } from '@lucca-front/ng/numeric-badge';
 import { SegmentedControlComponent, SegmentedControlFilterComponent } from '@lucca-front/ng/segmented-control';
 import { LuSimpleSelectInputComponent } from '@lucca-front/ng/simple-select';
-import { applicationConfig, Meta, moduleMetadata, StoryObj } from '@storybook/angular';
+import { applicationConfig, Meta, moduleMetadata, StoryObj } from '@storybook/angular-vite';
 
 export default {
 	title: 'Documentation/Forms/FiltersPills/FilterBar/Angular',

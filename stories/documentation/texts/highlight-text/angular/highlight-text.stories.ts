@@ -1,5 +1,5 @@
 import { HighlightTextComponent } from '@lucca-front/ng/highlight-text';
-import { Meta, moduleMetadata } from '@storybook/angular';
+import { Meta, moduleMetadata } from '@storybook/angular-vite';
 import { PaletteAllArgType } from '@/helpers/common-arg-types';
 
 import { cleanupTemplate, createTestStory } from '@/helpers/stories';

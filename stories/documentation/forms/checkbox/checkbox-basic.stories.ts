@@ -1,5 +1,5 @@
 import { INLINE_MESSAGE_STATE } from '@lucca-front/ng/inline-message';
-import { Meta, StoryObj } from '@storybook/angular';
+import { Meta, StoryObj } from '@storybook/angular-vite';
 import { setStoryOptions } from '@/helpers/stories';
 
 interface CheckboxBasicStory {

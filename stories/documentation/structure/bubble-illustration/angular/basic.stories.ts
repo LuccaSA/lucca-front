@@ -1,6 +1,6 @@
 import { BUBBLE_ILLUSTRATION, BUBBLE_ILLUSTRATION_SIZE, BubbleIllustrationComponent } from '@lucca-front/ng/bubble-illustration';
 import { DECORATIVE_PALETTE, PALETTE } from '@lucca/prisme/core';
-import { Meta, moduleMetadata, StoryObj } from '@storybook/angular';
+import { Meta, moduleMetadata, StoryObj } from '@storybook/angular-vite';
 import { cleanupTemplate, generateInputs, setStoryOptions } from '@/helpers/stories';
 
 export default {

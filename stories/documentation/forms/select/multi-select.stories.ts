@@ -31,7 +31,7 @@ import {
 } from '@lucca-front/ng/multi-select';
 import { LuTooltipModule } from '@lucca-front/ng/tooltip';
 import { TreeSelectDirective } from '@lucca-front/ng/tree-select';
-import { applicationConfig, Meta, moduleMetadata } from '@storybook/angular';
+import { applicationConfig, Meta, moduleMetadata } from '@storybook/angular-vite';
 import { interval, map } from 'rxjs';
 import { startWith } from 'rxjs/operators';
 import { HiddenArgType } from '@/helpers/common-arg-types';

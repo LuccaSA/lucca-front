@@ -1,5 +1,5 @@
 import { LISTBOX_STATE, ListboxComponent, OptionComponent } from '@lucca-front/ng/listbox';
-import { Meta, moduleMetadata } from '@storybook/angular';
+import { Meta, moduleMetadata } from '@storybook/angular-vite';
 import { cleanupTemplate, setStoryOptions } from '@/helpers/stories';
 
 interface OptionBasicStory {

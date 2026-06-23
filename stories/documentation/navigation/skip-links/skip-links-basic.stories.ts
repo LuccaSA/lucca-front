@@ -5,7 +5,7 @@ import { LuSkipLinksComponent, SkipLinkDirective } from '@lucca-front/ng/a11y';
 import { AppLayoutComponent } from '@lucca-front/ng/app-layout';
 import { ContainerComponent } from '@lucca-front/ng/container';
 import { MainLayoutBlockComponent, MainLayoutComponent } from '@lucca-front/ng/main-layout';
-import { Meta, StoryObj } from '@storybook/angular';
+import { Meta, StoryObj } from '@storybook/angular-vite';
 import { expect, within } from 'storybook/test';
 
 @Component({

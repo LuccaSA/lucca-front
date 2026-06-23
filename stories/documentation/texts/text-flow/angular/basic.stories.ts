@@ -1,5 +1,5 @@
 import { TextFlowComponent } from '@lucca-front/ng/text-flow';
-import { Meta, moduleMetadata, StoryObj } from '@storybook/angular';
+import { Meta, moduleMetadata, StoryObj } from '@storybook/angular-vite';
 import { createTestStory } from '@/helpers/stories';
 import { waitForAngular } from '@/helpers/test';
 import { expect, within } from 'storybook/test';

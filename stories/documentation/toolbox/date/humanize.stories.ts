@@ -3,7 +3,7 @@ import { ChangeDetectionStrategy, Component, Directive, Injector, LOCALE_ID, OnC
 import { ButtonComponent } from '@lucca-front/ng/button';
 import { CalloutComponent } from '@lucca-front/ng/callout';
 import { LuHumanizeDateFormatter, LuHumanizeDatePipe, LuRelativeTime, LuRelativeTimeFormatUnit } from '@lucca-front/ng/date';
-import { Meta, StoryObj, applicationConfig } from '@storybook/angular';
+import { Meta, StoryObj, applicationConfig } from '@storybook/angular-vite';
 
 @Directive({
 	selector: '[fakeLocaleId]',

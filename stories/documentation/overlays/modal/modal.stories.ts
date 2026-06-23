@@ -3,7 +3,7 @@ import { provideAnimations } from '@angular/platform-browser/animations';
 import { ButtonComponent } from '@lucca-front/ng/button';
 import { ILuModalContent, LU_MODAL_DATA, LuModal, LuModalConfig, LuModalModule } from '@lucca-front/ng/modal';
 import { LuToastsModule, LuToastsService } from '@lucca-front/ng/toast';
-import { applicationConfig, Meta, moduleMetadata } from '@storybook/angular';
+import { applicationConfig, Meta, moduleMetadata } from '@storybook/angular-vite';
 import { map, shareReplay, timer } from 'rxjs';
 import { createTestStory, generateMarkdownCodeBlock, getStoryGenerator, useDocumentationStory } from '@/helpers/stories';
 import { waitForAngular } from '@/helpers/test';

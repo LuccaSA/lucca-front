@@ -6,7 +6,7 @@ import { BrowserAnimationsModule } from '@angular/platform-browser/animations';
 import { FORM_FIELD_SIZE, FormFieldComponent } from '@lucca-front/ng/form-field';
 import { CheckboxInputComponent } from '@lucca-front/ng/forms';
 import { INLINE_MESSAGE_STATE } from '@lucca-front/ng/inline-message';
-import { Meta, moduleMetadata, StoryObj } from '@storybook/angular';
+import { Meta, moduleMetadata, StoryObj } from '@storybook/angular-vite';
 import { expect, userEvent, within } from 'storybook/test';
 
 export default {

@@ -1,7 +1,7 @@
 import { BUTTON_SIZE, BUTTON_STATE, BUTTON_TYPE, ButtonComponent } from '@lucca-front/ng/button';
 import { NumericBadgeComponent } from '@lucca-front/ng/numeric-badge';
 import { PALETTE } from '@lucca/prisme/core';
-import { Meta, moduleMetadata, StoryObj } from '@storybook/angular';
+import { Meta, moduleMetadata, StoryObj } from '@storybook/angular-vite';
 import { createTestStory, generateInputs, setStoryOptions } from '@/helpers/stories';
 import { expect, within } from 'storybook/test';
 import { BasicTEST as ButtonBasic } from './button-basic.stories';

@@ -5,7 +5,7 @@ import { provideAnimations } from '@angular/platform-browser/animations';
 import { LuCoreSelectApiV4Directive } from '@lucca-front/ng/core-select/api';
 import { FormFieldComponent } from '@lucca-front/ng/form-field';
 import { LuMultiSelectInputComponent } from '@lucca-front/ng/multi-select';
-import { applicationConfig, Meta } from '@storybook/angular';
+import { applicationConfig, Meta } from '@storybook/angular-vite';
 
 @Component({
 	selector: 'multi-select-onpush',

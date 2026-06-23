@@ -1,5 +1,5 @@
 import { CHIP_STATE, ChipComponent } from '@lucca-front/ng/chip';
-import { Meta, moduleMetadata, StoryObj } from '@storybook/angular';
+import { Meta, moduleMetadata, StoryObj } from '@storybook/angular-vite';
 import { setStoryOptions } from '@/helpers/stories';
 
 interface ChipBasicStory {

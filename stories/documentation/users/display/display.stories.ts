@@ -1,7 +1,6 @@
 import { ChangeDetectionStrategy, Component, input } from '@angular/core';
 import { ILuUser, LuDisplayFormat, LuDisplayFullname, LuDisplayHybrid, LuDisplayInitials, LuUserDisplayModule } from '@lucca-front/ng/user';
-import { Meta, StoryObj } from '@storybook/angular';
-import { finn, marceline } from '../user.mocks';
+import { Meta, StoryObj } from '@storybook/angular-vite';
 
 const formatters = {
 	enLongConjFormatter: new Intl.ListFormat('en', { style: 'long', type: 'conjunction' }),

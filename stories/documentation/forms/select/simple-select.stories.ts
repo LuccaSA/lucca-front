@@ -23,7 +23,7 @@ import { IconComponent } from '@lucca-front/ng/icon';
 import { LuSimpleSelectInputComponent } from '@lucca-front/ng/simple-select';
 import { TreeSelectDirective } from '@lucca-front/ng/tree-select';
 import { LuUserDisplayPipe, LuUserPictureComponent } from '@lucca-front/ng/user';
-import { applicationConfig, Meta, moduleMetadata } from '@storybook/angular';
+import { applicationConfig, Meta, moduleMetadata } from '@storybook/angular-vite';
 import { expect, screen, userEvent, within } from 'storybook/test';
 import { waitForAngular } from '../../../helpers/test';
 import { LuCoreSelectLegumesDirective } from './custom-api-example.component';

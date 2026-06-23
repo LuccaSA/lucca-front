@@ -1,5 +1,4 @@
-import { HIGHLIGHT_DATA_PALETTE } from '@lucca-front/ng/highlight-data';
-import { Meta, StoryObj } from '@storybook/angular';
+import { Meta, StoryObj } from '@storybook/angular-vite';
 
 interface TextHighlightStory {
 	palette: string;

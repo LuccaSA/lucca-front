@@ -1,6 +1,6 @@
 import { IconsList } from '@/stories/icons-list';
 import { ListingComponent, ListingItemComponent } from '@lucca-front/ng/listing';
-import { Meta, moduleMetadata, StoryObj } from '@storybook/angular';
+import { Meta, moduleMetadata, StoryObj } from '@storybook/angular-vite';
 import { HiddenArgType, PaletteAllArgType } from '@/helpers/common-arg-types';
 import { generateInputs } from '@/helpers/stories';
 

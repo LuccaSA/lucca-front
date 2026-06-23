@@ -6,7 +6,7 @@ import { FormFieldComponent } from '@lucca-front/ng/form-field';
 import { ColorInputComponent, ColorOption } from '@lucca-front/ng/forms';
 import { LuSimpleSelectInputComponent } from '@lucca-front/ng/simple-select';
 import { LuTooltipTriggerDirective } from '@lucca-front/ng/tooltip';
-import { applicationConfig, Meta, moduleMetadata } from '@storybook/angular';
+import { applicationConfig, Meta, moduleMetadata } from '@storybook/angular-vite';
 import { HiddenArgType } from '@/helpers/common-arg-types';
 import { createTestStory, getStoryGenerator, useDocumentationStory } from '@/helpers/stories';
 import { expect, screen, userEvent, within } from 'storybook/test';

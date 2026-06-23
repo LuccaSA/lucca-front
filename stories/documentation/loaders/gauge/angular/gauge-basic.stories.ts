@@ -1,6 +1,6 @@
 import { GaugeComponent } from '@lucca-front/ng/gauge';
 import { PALETTE } from '@lucca/prisme/core';
-import { Meta, moduleMetadata, StoryObj } from '@storybook/angular';
+import { Meta, moduleMetadata, StoryObj } from '@storybook/angular-vite';
 import { generateInputs, setStoryOptions } from '@/helpers/stories';
 
 export default {

@@ -5,7 +5,7 @@ import { BrowserAnimationsModule } from '@angular/platform-browser/animations';
 import { FORM_FIELD_SIZE, FORM_FIELD_WIDTH, FormFieldComponent } from '@lucca-front/ng/form-field';
 import { TextInputComponent } from '@lucca-front/ng/forms';
 import { INLINE_MESSAGE_STATE } from '@lucca-front/ng/inline-message';
-import { applicationConfig, Meta, moduleMetadata, StoryObj } from '@storybook/angular';
+import { applicationConfig, Meta, moduleMetadata, StoryObj } from '@storybook/angular-vite';
 import { HiddenArgType } from '@/helpers/common-arg-types';
 import { cleanupTemplate, createTestStory, generateInputs, setStoryOptions } from '@/helpers/stories';
 import { StoryModelDisplayComponent } from '@/helpers/story-model-display.component';

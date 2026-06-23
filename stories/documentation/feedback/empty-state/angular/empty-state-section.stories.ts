@@ -2,7 +2,7 @@ import { HttpClientModule } from '@angular/common/http';
 import { BUBBLE_ILLUSTRATION } from '@lucca-front/ng/bubble-illustration';
 import { ButtonComponent } from '@lucca-front/ng/button';
 import { EMPTY_STATE_HX, EmptyStateSectionComponent } from '@lucca-front/ng/empty-state';
-import { Meta, moduleMetadata, StoryObj } from '@storybook/angular';
+import { Meta, moduleMetadata, StoryObj } from '@storybook/angular-vite';
 import { setStoryOptions } from '@/helpers/stories';
 import { PaletteArgType } from '../../../../helpers/common-arg-types';
 

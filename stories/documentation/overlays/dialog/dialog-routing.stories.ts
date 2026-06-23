@@ -22,7 +22,7 @@ import { FormComponent } from '@lucca-front/ng/form';
 import { FormFieldComponent } from '@lucca-front/ng/form-field';
 import { CheckboxInputComponent, NumberInputComponent, TextInputComponent } from '@lucca-front/ng/forms';
 import { LinkComponent } from '@lucca-front/ng/link';
-import { applicationConfig, Meta, StoryObj } from '@storybook/angular';
+import { applicationConfig, Meta, StoryObj } from '@storybook/angular-vite';
 import { map } from 'rxjs';
 import { StoryModelDisplayComponent } from '@/helpers/story-model-display.component';
 @Injectable()

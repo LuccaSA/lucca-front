@@ -4,7 +4,7 @@ import { ButtonComponent } from '@lucca-front/ng/button';
 import { CALLOUT_HX, CALLOUT_SIZE, CalloutActionsComponent, CalloutComponent, CalloutFeedbackItemComponent, CalloutFeedbackListComponent, CalloutStates } from '@lucca-front/ng/callout';
 import { IconComponent } from '@lucca-front/ng/icon';
 import { PALETTE } from '@lucca/prisme/core';
-import { Meta, moduleMetadata, StoryObj } from '@storybook/angular';
+import { Meta, moduleMetadata, StoryObj } from '@storybook/angular-vite';
 import { expect, userEvent, within } from 'storybook/test';
 
 export default {

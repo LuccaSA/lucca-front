@@ -1,7 +1,7 @@
 import { AsyncPipe } from '@angular/common';
 import { provideRouter, RouterLink } from '@angular/router';
 import { LinkComponent } from '@lucca-front/ng/link';
-import { applicationConfig, Meta, moduleMetadata, StoryObj } from '@storybook/angular';
+import { applicationConfig, Meta, moduleMetadata, StoryObj } from '@storybook/angular-vite';
 import { timer } from 'rxjs';
 import { HiddenArgType } from 'stories/helpers/common-arg-types';
 

@@ -1,6 +1,6 @@
 import { provideHttpClient } from '@angular/common/http';
 import { FILE_ENTRY_SIZE, FILE_ENTRY_STATE, FileEntryComponent } from '@lucca-front/ng/file-upload';
-import { applicationConfig, Meta, moduleMetadata } from '@storybook/angular';
+import { applicationConfig, Meta, moduleMetadata } from '@storybook/angular-vite';
 import { generateInputs, setStoryOptions } from '@/helpers/stories';
 
 export default {

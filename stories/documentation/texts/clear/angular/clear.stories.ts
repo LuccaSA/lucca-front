@@ -1,6 +1,6 @@
 import { CLEAR_SIZE, ClearComponent } from '@lucca-front/ng/clear';
 import { PALETTE } from '@lucca/prisme/core';
-import { Meta, moduleMetadata, StoryObj } from '@storybook/angular';
+import { Meta, moduleMetadata, StoryObj } from '@storybook/angular-vite';
 import { generateInputs, setStoryOptions } from '@/helpers/stories';
 
 export default {

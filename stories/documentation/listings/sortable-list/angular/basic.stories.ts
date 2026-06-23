@@ -1,5 +1,5 @@
 import { SortableListComponent, SortableListItemComponent } from '@lucca-front/ng/sortable-list';
-import { Meta, moduleMetadata } from '@storybook/angular';
+import { Meta, moduleMetadata } from '@storybook/angular-vite';
 import { cleanupTemplate } from '@/helpers/stories';
 
 interface SortableListBasicStories {

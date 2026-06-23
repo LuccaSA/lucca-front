@@ -1,6 +1,6 @@
 import { NUMERIC_BADGE_SIZE, NumericBadgeComponent } from '@lucca-front/ng/numeric-badge';
 import { PALETTE } from '@lucca/prisme/core';
-import { Meta, moduleMetadata, StoryObj } from '@storybook/angular';
+import { Meta, moduleMetadata, StoryObj } from '@storybook/angular-vite';
 import { generateInputs, setStoryOptions } from '@/helpers/stories';
 
 export default {

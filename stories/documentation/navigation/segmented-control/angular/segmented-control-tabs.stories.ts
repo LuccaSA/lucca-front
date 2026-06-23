@@ -1,6 +1,6 @@
 import { NumericBadgeComponent } from '@lucca-front/ng/numeric-badge';
 import { SegmentedControlTabsComponent, SegmentedControlTabsPanelComponent } from '@lucca-front/ng/segmented-control-tabs';
-import { Meta, moduleMetadata, StoryObj } from '@storybook/angular';
+import { Meta, moduleMetadata, StoryObj } from '@storybook/angular-vite';
 import { createTestStory } from '@/helpers/stories';
 import { waitForAngular } from '@/helpers/test';
 import { expect, userEvent, within } from 'storybook/test';
