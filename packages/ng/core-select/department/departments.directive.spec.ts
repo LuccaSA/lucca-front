@@ -58,8 +58,9 @@ describe('LuCoreSelectDepartmentsDirective', () => {
 
 		TestBed.flushEffects();
 		tick();
-		httpTestingController.expectOne(url).flush(treeMock);
+		httpTestingController.expectOne((req) => req.url === url).flush(treeMock);
 
+		// 5 departments below root: Lucca France + Tech + Admin + Lucca UK + Support
 		expect(emittedCount).toBe(5);
 
 		httpTestingController.verify();
@@ -76,7 +77,7 @@ describe('LuCoreSelectDepartmentsDirective', () => {
 
 		TestBed.flushEffects();
 		tick();
-		httpTestingController.expectOne(url).flush('failure', { status: 500, statusText: 'Server Error' });
+		httpTestingController.expectOne((req) => req.url === url).flush('failure', { status: 500, statusText: 'Server Error' });
 
 		expect(emittedCount).toBe(0);
 		expect(errored).toBe(false);

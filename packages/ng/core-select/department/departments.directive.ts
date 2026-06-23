@@ -91,11 +91,17 @@ export class LuCoreSelectDepartmentsDirective<T extends ILuDepartment = ILuDepar
 		}),
 	);
 
+	// The /departments/tree endpoint does not expose a `fields.root=count`, so the total is
+	// computed with a dedicated call fetching the tree and flattening it (every department,
+	// all levels included). This is independent of getOptions (the panel options loader).
 	public totalCount$ = combineLatest([this.params$, toObservable(this.url)]).pipe(
-		switchMap(([params]) => this.getOptions(params).pipe(catchError(() => of([] as TreeNode<T>[])))),
-		map((opts) => {
-			return opts.map((branch) => this.flattenTree(branch)).flat().length;
-		}),
+		switchMap(([params, url]) =>
+			this.httpClient.get<TreeNode<T>>(url, { params }).pipe(
+				map((data) => data.children ?? []),
+				catchError(() => of([] as TreeNode<T>[])),
+			),
+		),
+		map((branches) => branches.map((branch) => this.flattenTree(branch)).flat().length),
 	);
 
 	protected flattenTree(branch: TreeNode<T>): T[] {
