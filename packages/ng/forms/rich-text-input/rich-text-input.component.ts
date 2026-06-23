@@ -91,6 +91,7 @@ export class RichTextInputComponent implements OnInit, OnDestroy, ControlValueAc
 	#cleanup?: () => void;
 	#focusedPlugin: number = 0;
 	#editor?: LexicalEditor;
+	#pendingValue: string | null = null;
 
 	ngOnInit(): void {
 		this.#editor = createEditor({
@@ -125,6 +126,10 @@ export class RichTextInputComponent implements OnInit, OnDestroy, ControlValueAc
 		if (this.#allPlugins().length > 0) {
 			this.#allPlugins()[this.#focusedPlugin].tabindex?.set(0);
 		}
+
+		if (this.#pendingValue) {
+			this.writeValue(this.#pendingValue);
+		}
 	}
 
 	ngOnDestroy(): void {
@@ -132,16 +137,22 @@ export class RichTextInputComponent implements OnInit, OnDestroy, ControlValueAc
 	}
 
 	writeValue(value: string | null): void {
+		const editorRef = this.#editor;
+		if (!editorRef) {
+			this.#pendingValue = value;
+			return;
+		}
+
 		const updateTags = [SKIP_DOM_SELECTION_TAG, INITIAL_UPDATE_TAG];
 		if (value) {
-			this.#editor?.update(
+			editorRef.update(
 				() => {
-					this.#richTextFormatter.parse(this.#editor, value);
+					this.#richTextFormatter.parse(editorRef, value);
 				},
 				{ tag: updateTags },
 			);
-		} else if (!this.#editor?.getEditorState().isEmpty()) {
-			this.#editor.update(
+		} else if (!editorRef.getEditorState().isEmpty()) {
+			editorRef.update(
 				() => {
 					const root = $getRoot();
 					root.clear();
