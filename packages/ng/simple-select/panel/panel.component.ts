@@ -5,16 +5,16 @@ import { toSignal } from '@angular/core/rxjs-interop';
 import { FormsModule } from '@angular/forms';
 import { PortalDirective } from '@lucca-front/ng/core';
 import {
-    CoreSelectKeyManager,
-    CoreSelectPanelInstance,
-    LuSelectPanelRef,
-    SELECT_ID,
-    SELECT_PANEL_INSTANCE,
-    TreeDisplayPipe,
-    ɵCoreSelectPanelElement,
-    ɵgetGroupTemplateLocation,
-    ɵLuOptionComponent,
-    ɵLuOptionGroupPipe,
+	CoreSelectKeyManager,
+	CoreSelectPanelInstance,
+	LuSelectPanelRef,
+	SELECT_ID,
+	SELECT_PANEL_INSTANCE,
+	TreeDisplayPipe,
+	ɵCoreSelectPanelElement,
+	ɵgetGroupTemplateLocation,
+	ɵLuOptionComponent,
+	ɵLuOptionGroupPipe,
 } from '@lucca-front/ng/core-select';
 import { IconComponent } from '@lucca-front/ng/icon';
 import { TreeBranchComponent } from '@lucca-front/ng/tree-select';
