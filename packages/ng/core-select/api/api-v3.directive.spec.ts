@@ -1,6 +1,6 @@
 import { provideHttpClient } from '@angular/common/http';
 import { HttpTestingController, provideHttpClientTesting } from '@angular/common/http/testing';
-import { ChangeDetectionStrategy, Component, signal } from '@angular/core';
+import { ChangeDetectionStrategy, Component } from '@angular/core';
 import { ComponentFixture, TestBed, fakeAsync, tick } from '@angular/core/testing';
 import { ILuApiItem } from '@lucca-front/ng/api';
 import { ALuSelectInputComponent, SelectDataSource, coreSelectDefaultOptionComparer, coreSelectDefaultOptionKey } from '@lucca-front/ng/core-select';
@@ -41,7 +41,6 @@ describe('CoreSelectApiV3Directive', () => {
 			clueChange$: new Subject<string>(),
 			optionComparer: coreSelectDefaultOptionComparer,
 			optionKey: coreSelectDefaultOptionKey,
-			options: signal([]),
 			dataSource: {
 				set: (ds: SelectDataSource<ILuApiItem>) => {
 					capturedDataSource = ds;
