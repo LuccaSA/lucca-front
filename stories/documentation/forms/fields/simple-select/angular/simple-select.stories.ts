@@ -5,7 +5,7 @@ import { LuOptionDirective } from '@lucca-front/ng/core-select';
 import { FORM_FIELD_SIZE, FORM_FIELD_WIDTH, FormFieldComponent } from '@lucca-front/ng/form-field';
 import { INLINE_MESSAGE_STATE } from '@lucca-front/ng/inline-message';
 import { LuSimpleSelectInputComponent } from '@lucca-front/ng/simple-select';
-import { Meta, moduleMetadata, StoryObj } from '@storybook/angular';
+import { Meta, moduleMetadata, StoryObj } from '@storybook/angular-vite';
 import { StoryModelDisplayComponent } from '@/helpers/story-model-display.component';
 import { HiddenArgType } from '../../../../../helpers/common-arg-types';
 import { createTestStory, generateInputs, setStoryOptions } from '../../../../../helpers/stories';

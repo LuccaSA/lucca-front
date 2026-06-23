@@ -1,6 +1,5 @@
 import { LOCALE_ID } from '@angular/core';
-import { applicationConfig, Args, ArgTypes, StoryObj } from '@storybook/angular';
-
+import { applicationConfig, Args, ArgTypes, StoryObj } from '@storybook/angular-vite';
 
 export interface StoryGeneratorArgs<TComponent> {
 	name: string;

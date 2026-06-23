@@ -77,8 +77,6 @@
     "zone.js": "~0.15.0"
   },
   "devDependencies": {
-    "@analogjs/vite-plugin-angular": "^2.6.1",
-    "@analogjs/storybook-angular": "^2.6.1",
     "@angular-devkit/architect": "0.2200.1",
     "@angular-devkit/core": "22.0.1",
     "@angular-devkit/schematics": "22.0.1",
@@ -96,7 +94,7 @@
     "@storybook/addon-coverage": "~3.0.0",
     "@storybook/addon-docs": "~10.1.9",
     "@storybook/addon-mcp": "~0.4.1",
-    "@storybook/angular": "~10.4.6",
+    "@storybook/angular-vite": "0.0.0-pr-35259-sha-edb47cf4",
     "sass-embedded": "^1.100.0",
     "@storybook/test-runner": "~0.24.2",
     "@swc/core": "^1.13.5",
@@ -151,25 +149,6 @@
   "overrides": {
     "@compodoc/compodoc": {
       "pdfjs-dist": "4.2.67"
-    },
-    "@analogjs/storybook-angular": {
-      "@angular-devkit/build-angular": ">=22.0.0",
-      "@angular-devkit/core": ">=22.0.0",
-      "@angular-devkit/architect": ">=0.2200.1"
-    },
-    "@storybook/angular": {
-      "@angular-devkit/build-angular": ">=22.0.0",
-      "@angular-devkit/core": ">=22.0.0",
-      "@angular/animations": ">=22.0.0",
-      "@angular/cli": ">=22.0.0",
-      "@angular/common": ">=22.0.0",
-      "@angular/compiler": ">=22.0.0",
-      "@angular/compiler-cli": ">=22.0.0",
-      "@angular/core": ">=22.0.0",
-      "@angular/platform-browser": ">=22.0.0",
-      "@angular/platform-browser-dynamic": ">=22.0.0",
-      "@angular-devkit/architect": ">=0.2200.1",
-      "typescript": "6.0.3"
     }
   }
 }

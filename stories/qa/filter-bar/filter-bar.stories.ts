@@ -11,7 +11,7 @@ import { LuMultiSelectInputComponent } from '@lucca-front/ng/multi-select';
 import { NumericBadgeComponent } from '@lucca-front/ng/numeric-badge';
 import { SegmentedControlComponent, SegmentedControlFilterComponent } from '@lucca-front/ng/segmented-control';
 import { LuSimpleSelectInputComponent } from '@lucca-front/ng/simple-select';
-import { applicationConfig, Meta, StoryObj } from '@storybook/angular';
+import { applicationConfig, Meta, StoryObj } from '@storybook/angular-vite';
 import { StoryModelDisplayComponent } from '@/helpers/story-model-display.component';
 
 @Component({

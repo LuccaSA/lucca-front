@@ -1,6 +1,6 @@
-import { StorybookConfig } from '@analogjs/storybook-angular';
+import { StorybookConfig } from '@storybook/angular-vite';
 import viteTsConfigPaths from 'vite-tsconfig-paths';
-import { UserConfig, mergeConfig } from 'vite';
+import { mergeConfig } from 'vite';
 
 import { dirname } from 'path';
 
@@ -18,12 +18,12 @@ const config: StorybookConfig = {
 	stories: ['../stories/**/*.stories.@(js|jsx|mjs|ts|tsx)'],
 	addons: [getAbsolutePath('@storybook/addon-a11y'), getAbsolutePath('@storybook/addon-docs'), getAbsolutePath('@storybook/addon-mcp')],
 	framework: {
-		name: '@analogjs/storybook-angular',
+		name: '@storybook/angular-vite',
 		options: {},
 	},
 	logLevel: process.env['CI'] ? 'error' : 'info',
 	staticDirs: ['./public'],
-	viteFinal: async (config: UserConfig) => {
+	viteFinal: async (config) => {
 		return mergeConfig(config, {
 			plugins: [viteTsConfigPaths()],
 		});

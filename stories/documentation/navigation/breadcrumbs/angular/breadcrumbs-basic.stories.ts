@@ -1,5 +1,5 @@
 import { BreadcrumbsComponent, BreadcrumbsLinkDirective } from '@lucca-front/ng/breadcrumbs';
-import { Meta, moduleMetadata } from '@storybook/angular';
+import { Meta, moduleMetadata } from '@storybook/angular-vite';
 import { createTestStory, generateInputs } from '@/helpers/stories';
 import { waitForAngular } from '@/helpers/test';
 import { expect, userEvent, within } from 'storybook/test';

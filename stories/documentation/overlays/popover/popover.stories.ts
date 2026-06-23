@@ -1,7 +1,7 @@
 import { ChangeDetectionStrategy, Component, input } from '@angular/core';
 import { provideAnimations } from '@angular/platform-browser/animations';
 import { LuPopoverAlignment, LuPopoverModule, LuPopoverPosition, LuPopoverTriggerEvent } from '@lucca-front/ng/popover';
-import { applicationConfig, Meta, StoryObj } from '@storybook/angular';
+import { applicationConfig, Meta, StoryObj } from '@storybook/angular-vite';
 import { createTestStory } from '@/helpers/stories';
 import { sleep, waitForAngular } from '@/helpers/test';
 import { expect, screen, userEvent, within } from 'storybook/test';

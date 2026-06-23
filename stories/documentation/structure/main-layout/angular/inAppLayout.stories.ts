@@ -1,7 +1,7 @@
 import { AppLayoutComponent } from '@lucca-front/ng/app-layout';
 import { ContainerComponent } from '@lucca-front/ng/container';
 import { MainLayoutBlockComponent, MainLayoutComponent } from '@lucca-front/ng/main-layout';
-import { Meta, moduleMetadata } from '@storybook/angular';
+import { Meta, moduleMetadata } from '@storybook/angular-vite';
 
 interface MainLayoutAngularInAppLayoutStory {
 	header: boolean;

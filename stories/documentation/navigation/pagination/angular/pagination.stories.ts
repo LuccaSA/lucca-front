@@ -1,5 +1,5 @@
 import { PAGINATION_MOD, PaginationComponent } from '@lucca-front/ng/pagination';
-import { Meta, moduleMetadata, StoryObj } from '@storybook/angular';
+import { Meta, moduleMetadata, StoryObj } from '@storybook/angular-vite';
 import { cleanupTemplate, createTestStory, generateInputs, setStoryOptions } from '@/helpers/stories';
 import { waitForAngular } from '@/helpers/test';
 import { expect, userEvent, within } from 'storybook/test';

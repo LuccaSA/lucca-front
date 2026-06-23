@@ -1,5 +1,5 @@
 import { PROGRESS_BAR_STATE, ProgressBarComponent } from '@lucca-front/ng/progress-bar';
-import { Meta, moduleMetadata } from '@storybook/angular';
+import { Meta, moduleMetadata } from '@storybook/angular-vite';
 import { cleanupTemplate, setStoryOptions } from '@/helpers/stories';
 
 interface ProgressBarBasicStory {

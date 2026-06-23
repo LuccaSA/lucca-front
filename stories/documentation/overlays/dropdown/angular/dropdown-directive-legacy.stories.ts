@@ -1,7 +1,7 @@
 import { ButtonComponent } from '@lucca-front/ng/button';
 import { LuDropdownModule, LuDropdownTriggerDirective } from '@lucca-front/ng/dropdown';
 import { IconComponent } from '@lucca-front/ng/icon';
-import { Meta, StoryObj } from '@storybook/angular';
+import { Meta, StoryObj } from '@storybook/angular-vite';
 
 export default {
 	title: 'Documentation/Overlays/Dropdown/Angular/Directive Legacy',

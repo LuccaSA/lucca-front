@@ -3,7 +3,7 @@ import { FormFieldComponent, INPUT_FRAMED_SIZE, InputFramedComponent } from '@lu
 import { CheckboxInputComponent, RadioComponent, RadioGroupInputComponent } from '@lucca-front/ng/forms';
 import { GridColumnComponent, GridComponent } from '@lucca-front/ng/grid';
 import { IconComponent } from '@lucca-front/ng/icon';
-import { Meta, moduleMetadata } from '@storybook/angular';
+import { Meta, moduleMetadata } from '@storybook/angular-vite';
 import { createTestStory, setStoryOptions } from '@/helpers/stories';
 import { waitForAngular } from '@/helpers/test';
 import { expect, userEvent, within } from 'storybook/test';

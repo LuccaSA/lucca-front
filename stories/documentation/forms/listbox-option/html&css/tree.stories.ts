@@ -1,4 +1,4 @@
-import { Meta } from '@storybook/angular';
+import { Meta } from '@storybook/angular-vite';
 import { cleanupTemplate } from '@/helpers/stories';
 
 interface OptionBasicStory {

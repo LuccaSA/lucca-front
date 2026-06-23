@@ -1,7 +1,7 @@
 import { ButtonComponent } from '@lucca-front/ng/button';
 import { CalloutActionsComponent, CalloutComponent, CalloutFeedbackItemComponent, CalloutFeedbackListComponent } from '@lucca-front/ng/callout';
 import { IconComponent } from '@lucca-front/ng/icon';
-import { Meta, moduleMetadata, StoryObj } from '@storybook/angular';
+import { Meta, moduleMetadata, StoryObj } from '@storybook/angular-vite';
 import { generateInputs } from '@/helpers/stories';
 
 export default {

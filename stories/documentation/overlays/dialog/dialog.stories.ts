@@ -18,7 +18,7 @@ import { FormFieldComponent } from '@lucca-front/ng/form-field';
 import { CheckboxInputComponent, TextInputComponent } from '@lucca-front/ng/forms';
 import { HorizontalNavigationComponent, HorizontalNavigationTabComponent } from '@lucca-front/ng/horizontal-navigation';
 import { IconComponent } from '@lucca-front/ng/icon';
-import { applicationConfig, Meta, moduleMetadata, StoryObj } from '@storybook/angular';
+import { applicationConfig, Meta, moduleMetadata, StoryObj } from '@storybook/angular-vite';
 import { createTestStory, setStoryOptions } from '@/helpers/stories';
 import { waitForAngular } from '@/helpers/test';
 import { expect, screen, userEvent, within } from 'storybook/test';

@@ -1,5 +1,5 @@
 import { DECORATIVE_PALETTE, PALETTE } from '@lucca/prisme/core';
-import { Meta, StoryObj } from '@storybook/angular';
+import { Meta, StoryObj } from '@storybook/angular-vite';
 import { setStoryOptions } from '@/helpers/stories';
 
 interface TextHighlightStory {

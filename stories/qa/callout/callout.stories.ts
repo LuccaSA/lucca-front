@@ -9,7 +9,7 @@ import {
 	CalloutFeedbackListComponent,
 	CalloutPopoverComponent,
 } from '@lucca-front/ng/callout';
-import { Meta, StoryObj } from '@storybook/angular';
+import { Meta, StoryObj } from '@storybook/angular-vite';
 
 @Component({
 	selector: 'callout-stories',

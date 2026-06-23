@@ -3,7 +3,7 @@ import { provideAnimations } from '@angular/platform-browser/animations';
 import { ALuDateAdapter, ELuDateGranularity, LuStringDateAdapter } from '@lucca-front/ng/core';
 import { LuDateSelectInputComponent } from '@lucca-front/ng/date';
 import { LuInputDisplayerDirective } from '@lucca-front/ng/input';
-import { Meta, applicationConfig, moduleMetadata } from '@storybook/angular';
+import { Meta, applicationConfig, moduleMetadata } from '@storybook/angular-vite';
 import { generateMarkdownCodeBlock, getStoryGenerator, useDocumentationStory } from '@/helpers/stories';
 
 type StoryComponent = LuDateSelectInputComponent<string> & { selectedDate: string; secondSelectedDate: string };

@@ -1,5 +1,5 @@
 import { SOFTWARE_ICON, SOFTWARE_ICON_SIZE, SoftwareIconComponent } from '@lucca-front/ng/software-icon';
-import { Meta, moduleMetadata, StoryObj } from '@storybook/angular';
+import { Meta, moduleMetadata, StoryObj } from '@storybook/angular-vite';
 import { generateInputs, setStoryOptions } from '@/helpers/stories';
 
 export default {

@@ -4,7 +4,7 @@ import { FormComponent } from '@lucca-front/ng/form';
 import { FormFieldComponent } from '@lucca-front/ng/form-field';
 import { FIELDSET_SIZE, FieldsetComponent, TextInputComponent } from '@lucca-front/ng/forms';
 import { GridColumnComponent, GridComponent } from '@lucca-front/ng/grid';
-import { Meta, moduleMetadata, StoryObj } from '@storybook/angular';
+import { Meta, moduleMetadata, StoryObj } from '@storybook/angular-vite';
 import { createTestStory, generateInputs, setStoryOptions } from '@/helpers/stories';
 import { waitForAngular } from '@/helpers/test';
 import { expect, userEvent, within } from 'storybook/test';

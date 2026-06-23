@@ -1,7 +1,7 @@
 import { FormsModule } from '@angular/forms';
 import { NumericBadgeComponent } from '@lucca-front/ng/numeric-badge';
 import { SegmentedControlComponent, SegmentedControlFilterComponent } from '@lucca-front/ng/segmented-control';
-import { Meta, moduleMetadata, StoryObj } from '@storybook/angular';
+import { Meta, moduleMetadata, StoryObj } from '@storybook/angular-vite';
 import { createTestStory } from '@/helpers/stories';
 import { expectNgModelDisplay, waitForAngular } from '@/helpers/test';
 import { StoryModelDisplayComponent } from '@/helpers/story-model-display.component';

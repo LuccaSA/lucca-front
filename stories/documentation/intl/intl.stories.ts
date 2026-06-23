@@ -1,4 +1,4 @@
-import { Meta, StoryObj } from '@storybook/angular';
+import { Meta, StoryObj } from '@storybook/angular-vite';
 
 import { ChangeDetectionStrategy, Component, input } from '@angular/core';
 import { PaginationComponent } from '@lucca-front/ng/pagination';
