@@ -69,7 +69,9 @@
 									<div class="tokensExplorer-card-preview">
 										<span
 											class="tokensExplorer-card-preview-font"
-											[style.color]="'var(' + token.name + ')'"
+											[style.color]="
+												token.fallbackVar ? 'var(' + token.name + ', var(' + token.fallbackVar + '))' : 'var(' + token.name + ')'
+											"
 											[style.backgroundColor]="token.name === '--pr-t-color-text-reverse' ? 'var(--palettes-neutral-900)' : null"
 											>Aa</span
 										>
@@ -114,6 +116,27 @@
 								@case ("fontFamily") {
 									<div class="tokensExplorer-card-preview">
 										<span class="tokensExplorer-card-preview-fontFamily" [style.fontFamily]="'var(' + token.name + ')'">Aa</span>
+									</div>
+								}
+								@case ("border") {
+									<div
+										class="tokensExplorer-card-preview mod-border"
+										[style.--tokensExplorer-preview-gradient]="
+											token.fallbackVar ? 'var(' + token.name + ', var(' + token.fallbackVar + '))' : 'var(' + token.name + ')'
+										"
+									>
+										<div class="tokensExplorer-card-preview-border"></div>
+									</div>
+								}
+								@case ("gradient-text") {
+									<div class="tokensExplorer-card-preview">
+										<span
+											class="tokensExplorer-card-preview-gradient-text"
+											[style.--tokensExplorer-preview-gradient]="
+												token.fallbackVar ? 'var(' + token.name + ', var(' + token.fallbackVar + '))' : 'var(' + token.name + ')'
+											"
+											>Aa</span
+										>
 									</div>
 								}
 								@case ("shadow") {
