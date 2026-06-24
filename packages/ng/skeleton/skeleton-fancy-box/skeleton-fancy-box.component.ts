@@ -1,7 +1,7 @@
 import { ChangeDetectionStrategy, Component } from '@angular/core';
 
 @Component({
-	selector: '<lu-skeleton-fancy-box',
+	selector: 'lu-skeleton-fancy-box',
 	templateUrl: './skeleton-fancy-box.component.html',
 	styleUrl: './skeleton-fancy-box.component.scss',
 	changeDetection: ChangeDetectionStrategy.OnPush,

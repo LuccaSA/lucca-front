@@ -1,7 +1,7 @@
 import { booleanAttribute, ChangeDetectionStrategy, Component, input } from '@angular/core';
 
 @Component({
-	selector: '<lu-skeleton-highlight-data',
+	selector: 'lu-skeleton-highlight-data',
 	templateUrl: './skeleton-highlight-data.component.html',
 	styleUrl: './skeleton-highlight-data.component.scss',
 	changeDetection: ChangeDetectionStrategy.OnPush,

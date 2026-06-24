@@ -6,8 +6,7 @@
 @mixin component($atRoot: namespace.$defaultAtRoot) {
 	inline-size: 23.5rem;
 	max-inline-size: calc(100vw - var(--pr-t-spacings-200) * 2);
-	padding-block: var(--pr-t-spacings-100);
-	padding-inline: var(--pr-t-spacings-200);
+	padding: var(--pr-t-spacings-200) !important;
 
 	@at-root ($atRoot) {
 		.userPopover_trigger {
