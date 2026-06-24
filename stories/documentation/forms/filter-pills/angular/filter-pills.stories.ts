@@ -13,7 +13,10 @@ import { LuMultiSelectInputComponent, LuMultiSelectWithSelectAllDirective } from
 import { LuSimpleSelectInputComponent } from '@lucca-front/ng/simple-select';
 import { TreeSelectDirective } from '@lucca-front/ng/tree-select';
 import { applicationConfig, Meta, moduleMetadata, StoryObj } from '@storybook/angular';
+import { expect, screen, userEvent, within } from 'storybook/test';
+import { createTestStory } from '../../../../helpers/stories';
 import { StoryModelDisplayComponent } from '../../../../helpers/story-model-display.component';
+import { waitForAngular } from '../../../../helpers/test';
 
 export default {
 	title: 'Documentation/Forms/FiltersPills/FilterPills/Angular',
@@ -130,3 +133,120 @@ export const Basic: StoryObj<FilterPillComponent & { clearable: boolean; filterP
 		filterPillLabelPlural: 'légumes',
 	},
 };
+
+const CLEAR_BTN_NAME = 'Vider ce champ';
+const getWrapper = (btn: HTMLElement): HTMLElement => btn.closest('.filterPillWrapper') as HTMLElement;
+
+export const BasicTEST = createTestStory(Basic, async ({ canvasElement, step }) => {
+	await waitForAngular();
+	const canvas = within(canvasElement);
+
+	await step('Simple select — set and clear via mouse', async () => {
+		const pillBtn = canvas.getByRole('button', { name: /Legume \(simple\)/ });
+		const wrapper = getWrapper(pillBtn);
+
+		await userEvent.click(pillBtn);
+		await waitForAngular();
+		// Panel opens automatically when filter pill opens
+		await userEvent.click(within(screen.getByRole('listbox')).getAllByRole('option')[0]);
+		await waitForAngular();
+		// Filter pill auto-closes after simple-select picks a value
+
+		const clearBtn = within(wrapper).getByRole('button', { name: CLEAR_BTN_NAME });
+		await expect(clearBtn).toBeVisible();
+		await userEvent.click(clearBtn);
+		await waitForAngular();
+		await expect(clearBtn).not.toBeVisible();
+	});
+
+	await step('Simple select — set and clear via keyboard', async () => {
+		const pillBtn = canvas.getByRole('button', { name: /Legume \(simple\)/ });
+		const wrapper = getWrapper(pillBtn);
+
+		pillBtn.focus();
+		await expect(pillBtn).toHaveFocus();
+		await userEvent.keyboard('{Enter}');
+		await waitForAngular();
+		await userEvent.keyboard('{ArrowDown}');
+		await waitForAngular();
+		await userEvent.keyboard('{Enter}');
+		await waitForAngular();
+
+		const clearBtn = within(wrapper).getByRole('button', { name: CLEAR_BTN_NAME });
+		await expect(clearBtn).toBeVisible();
+		clearBtn.focus();
+		await expect(clearBtn).toHaveFocus();
+		await userEvent.keyboard('{Enter}');
+		await waitForAngular();
+		await expect(clearBtn).not.toBeVisible();
+	});
+
+	await step('Multi select — set and clear via mouse', async () => {
+		const pillBtn = canvas.getByRole('button', { name: /Légume \(multi\)/ });
+		const wrapper = getWrapper(pillBtn);
+
+		await userEvent.click(pillBtn);
+		await waitForAngular();
+		// Panel opens automatically; skip select-all option if present
+		const options = within(screen.getByRole('listbox'))
+			.getAllByRole('option')
+			.filter((o) => !o.id.includes('select-all'));
+		await userEvent.click(options[0]);
+		await waitForAngular();
+		// Escape closes the select panel, which also closes the filter pill popover
+		await userEvent.keyboard('{Escape}');
+		await waitForAngular();
+
+		const clearBtn = within(wrapper).getByRole('button', { name: CLEAR_BTN_NAME });
+		await expect(clearBtn).toBeVisible();
+		await userEvent.click(clearBtn);
+		await waitForAngular();
+		await expect(clearBtn).not.toBeVisible();
+	});
+
+	await step('Date — set and clear via mouse', async () => {
+		const pillBtn = canvas.getByRole('button', { name: /Date de début/ });
+		const wrapper = getWrapper(pillBtn);
+
+		await userEvent.click(pillBtn);
+		await waitForAngular();
+		// Calendar renders inline inside the filter pill popover (no second overlay)
+		const grid = screen.getByRole('grid');
+		const today = new Date();
+		const targetDay = today.getDate() === 15 ? 16 : 15;
+		const calWrapper = grid.closest('.calendarWrapper') as HTMLElement;
+		await userEvent.click(within(calWrapper).getByText(targetDay.toString()));
+		await waitForAngular();
+		// Filter pill auto-closes after date selection
+
+		const clearBtn = within(wrapper).getByRole('button', { name: CLEAR_BTN_NAME });
+		await expect(clearBtn).toBeVisible();
+		await userEvent.click(clearBtn);
+		await waitForAngular();
+		await expect(clearBtn).not.toBeVisible();
+	});
+
+	await step('Date range — set and clear via mouse', async () => {
+		const pillBtn = canvas.getByRole('button', { name: /Période/ });
+		const wrapper = getWrapper(pillBtn);
+
+		await userEvent.click(pillBtn);
+		await waitForAngular();
+		// Two calendar grids render inline; pick start then end in the first grid
+		const today = new Date();
+		const startDay = today.getDate() === 10 ? 11 : 10;
+		const endDay = today.getDate() === 20 ? 21 : 20;
+		const firstGrid = screen.getAllByRole('grid')[0];
+		await userEvent.click(within(firstGrid as HTMLElement).getByText(startDay.toString()));
+		await waitForAngular();
+		await userEvent.click(within(firstGrid as HTMLElement).getByText(endDay.toString()));
+		await waitForAngular();
+		// Filter pill auto-closes after end date selection
+
+		const clearBtn = within(wrapper).getByRole('button', { name: CLEAR_BTN_NAME });
+		await expect(clearBtn).toBeVisible();
+		await userEvent.click(clearBtn);
+		await waitForAngular();
+		await expect(clearBtn).not.toBeVisible();
+	});
+});

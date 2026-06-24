@@ -80,7 +80,7 @@ export abstract class ALuSelectInputComponent<TOption, TValue> implements OnDest
 
 	readonly placeholder = input<string>();
 
-	readonly clearableInput = input(false, { transform: booleanAttribute, alias: 'clearable' });
+	readonly clearableInput = input<boolean | null>(null, { transform: booleanAttribute, alias: 'clearable' });
 
 	readonly isClearable = computed(() => this.clearableInput() ?? this.#defaultFilterPillClearable() ?? this.#defaultClearable);
 	readonly #defaultFilterPillClearable = signal<boolean | null>(null);
