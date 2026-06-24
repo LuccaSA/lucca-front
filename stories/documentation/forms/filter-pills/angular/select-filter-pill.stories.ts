@@ -2,7 +2,6 @@ import { allLegumes, FilterLegumesPipe } from '@/stories/forms/select/select.uti
 import { JsonPipe } from '@angular/common';
 import { provideHttpClient } from '@angular/common/http';
 import { FormsModule } from '@angular/forms';
-import { provideAnimations } from '@angular/platform-browser/animations';
 import { LuCoreSelectUsersDirective, provideCoreSelectCurrentUserId } from '@lucca-front/ng/core-select/user';
 import { FilterPillComponent } from '@lucca-front/ng/filter-pills';
 import { LuMultiSelectInputComponent } from '@lucca-front/ng/multi-select';
@@ -13,7 +12,7 @@ import { StoryModelDisplayComponent } from '../../../../helpers/story-model-disp
 export default {
 	title: 'Documentation/Forms/FiltersPills/Select/Angular',
 	decorators: [
-		applicationConfig({ providers: [provideAnimations(), provideHttpClient()] }),
+		applicationConfig({ providers: [provideHttpClient()] }),
 		moduleMetadata({
 			imports: [FilterPillComponent, LuSimpleSelectInputComponent, LuMultiSelectInputComponent, FormsModule, StoryModelDisplayComponent, JsonPipe, FilterLegumesPipe, LuCoreSelectUsersDirective],
 			providers: [provideCoreSelectCurrentUserId(() => 66)],

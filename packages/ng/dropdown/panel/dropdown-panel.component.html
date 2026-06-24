@@ -9,7 +9,8 @@
 		(mousedown)="onMouseDown()"
 		[attr.id]="panelId"
 		[attr.aria-labelledby]="triggerId"
-		[@transformPopover]="'enter'"
+		animate.enter="lu-popover-enter"
+		animate.leave="lu-popover-leave"
 	>
 		<div class="lu-popover-content dropdown" [class]="contentClassesMap">
 			<ul class="dropdown-list">

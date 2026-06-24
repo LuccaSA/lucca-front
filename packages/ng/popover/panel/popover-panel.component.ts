@@ -2,7 +2,6 @@ import { A11yModule } from '@angular/cdk/a11y';
 import { OverlayModule } from '@angular/cdk/overlay';
 import { NgTemplateOutlet } from '@angular/common';
 import { ChangeDetectionStrategy, Component, EventEmitter, Input, OnDestroy, Output, TemplateRef, ViewChild } from '@angular/core';
-import { luTransformPopover } from '../animation/index';
 import { ALuPopoverPanel, ILuPopoverPanel, LuPopoverScrollStrategy } from './popover-panel.model';
 
 // import { standardPopoverTemplate } from './popover.template';
@@ -10,8 +9,8 @@ import { ALuPopoverPanel, ILuPopoverPanel, LuPopoverScrollStrategy } from './pop
 @Component({
 	selector: 'lu-popover',
 	templateUrl: './popover-panel.component.html',
+	styleUrl: './popover-panel.component.scss',
 	changeDetection: ChangeDetectionStrategy.OnPush,
-	animations: [luTransformPopover],
 	imports: [NgTemplateOutlet, OverlayModule, A11yModule],
 	exportAs: 'LuPopoverPanel',
 })

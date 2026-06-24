@@ -1,5 +1,4 @@
 import { provideHttpClient } from '@angular/common/http';
-import { provideAnimations } from '@angular/platform-browser/animations';
 import { LuDisplayInitials, LuUserPictureComponent, USER_PICTURE_SIZE } from '@lucca-front/ng/user';
 import { LuUserPopoverDirective } from '@lucca-front/ng/user-popover';
 import { applicationConfig, Meta, moduleMetadata, StoryObj } from '@storybook/angular';
@@ -13,7 +12,7 @@ export default {
 			imports: [LuUserPictureComponent, LuUserPopoverDirective],
 		}),
 		applicationConfig({
-			providers: [provideAnimations(), provideHttpClient()],
+			providers: [provideHttpClient()],
 		}),
 	],
 	render: ({ user, sizes, placeholder, displayFormat, AI }) => {

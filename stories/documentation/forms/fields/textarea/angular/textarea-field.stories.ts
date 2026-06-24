@@ -1,5 +1,4 @@
 import { FormsModule, ReactiveFormsModule } from '@angular/forms';
-import { BrowserAnimationsModule } from '@angular/platform-browser/animations';
 import { FORM_FIELD_SIZE, FormFieldComponent } from '@lucca-front/ng/form-field';
 import { TextareaInputComponent } from '@lucca-front/ng/forms';
 import { INLINE_MESSAGE_STATE } from '@lucca-front/ng/inline-message';
@@ -12,7 +11,7 @@ export default {
 	title: 'Documentation/Forms/Fields/TextAreaField/Angular',
 	decorators: [
 		moduleMetadata({
-			imports: [TextareaInputComponent, FormFieldComponent, FormsModule, ReactiveFormsModule, BrowserAnimationsModule],
+			imports: [TextareaInputComponent, FormFieldComponent, FormsModule, ReactiveFormsModule],
 		}),
 	],
 	argTypes: {
@@ -113,7 +112,7 @@ export const Basic: StoryObj<TextareaInputComponent & { disabled: boolean; requi
 </lu-form-field>
 `),
 			moduleMetadata: {
-				imports: [TextareaInputComponent, FormFieldComponent, FormsModule, BrowserAnimationsModule],
+				imports: [TextareaInputComponent, FormFieldComponent, FormsModule],
 			},
 		};
 	},

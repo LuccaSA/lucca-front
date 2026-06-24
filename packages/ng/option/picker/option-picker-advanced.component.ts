@@ -4,7 +4,6 @@ import { AsyncPipe, DOCUMENT } from '@angular/common';
 import { AfterViewInit, ChangeDetectionStrategy, ChangeDetectorRef, Component, ContentChildren, Directive, forwardRef, Inject, QueryList } from '@angular/core';
 import { ALuOnCloseSubscriber, ALuOnOpenSubscriber, ALuOnScrollBottomSubscriber, ILuOnCloseSubscriber, ILuOnOpenSubscriber, ILuOnScrollBottomSubscriber } from '@lucca-front/ng/core';
 import { ALuPickerPanel } from '@lucca-front/ng/picker';
-import { luTransformPopover } from '@lucca-front/ng/popover';
 import { LuScrollDirective } from '@lucca-front/ng/scroll';
 import { merge, Observable } from 'rxjs';
 import { first, map, mergeAll, shareReplay, startWith } from 'rxjs/operators';
@@ -126,7 +125,6 @@ export abstract class ALuOptionPickerAdvancedComponent<T, O extends import('../i
 	selector: 'lu-option-picker-advanced',
 	templateUrl: './option-picker-advanced.component.html',
 	changeDetection: ChangeDetectionStrategy.OnPush,
-	animations: [luTransformPopover],
 	exportAs: 'LuOptionPickerAdvanced',
 	imports: [AsyncPipe, OverlayModule, LuScrollDirective, A11yModule],
 	providers: [

@@ -1,6 +1,5 @@
 import { JsonPipe } from '@angular/common';
 import { FormsModule } from '@angular/forms';
-import { BrowserAnimationsModule } from '@angular/platform-browser/animations';
 import { FormFieldComponent } from '@lucca-front/ng/form-field';
 import { TimePickerComponent, TimeRangePickerComponent } from '@lucca-front/ng/time';
 import { Meta, moduleMetadata, StoryObj } from '@storybook/angular';
@@ -14,7 +13,7 @@ export default {
 	title: 'Documentation/Forms/Time/Angular/TimeRangePicker',
 	decorators: [
 		moduleMetadata({
-			imports: [TimePickerComponent, FormFieldComponent, FormsModule, BrowserAnimationsModule, StoryModelDisplayComponent, TimeRangePickerComponent, JsonPipe],
+			imports: [TimePickerComponent, FormFieldComponent, FormsModule, StoryModelDisplayComponent, TimeRangePickerComponent, JsonPipe],
 		}),
 	],
 	argTypes: {

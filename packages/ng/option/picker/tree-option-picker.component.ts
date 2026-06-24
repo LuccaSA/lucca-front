@@ -3,7 +3,6 @@ import { DOCUMENT } from '@angular/common';
 import { AfterViewInit, ChangeDetectionStrategy, ChangeDetectorRef, Component, ContentChildren, Directive, forwardRef, Inject, OnDestroy, QueryList, ViewContainerRef } from '@angular/core';
 import { takeUntilDestroyed } from '@angular/core/rxjs-interop';
 import { ALuPickerPanel } from '@lucca-front/ng/picker';
-import { luTransformPopover } from '@lucca-front/ng/popover';
 import { merge, Observable } from 'rxjs';
 import { delay, map, startWith, switchMap } from 'rxjs/operators';
 import { ALuTreeOptionItem } from '../item/index';
@@ -162,7 +161,6 @@ export abstract class ALuTreeOptionPickerComponent<T, O extends import('../item/
 	selector: 'lu-tree-option-picker',
 	templateUrl: './tree-option-picker.component.html',
 	changeDetection: ChangeDetectionStrategy.OnPush,
-	animations: [luTransformPopover],
 	exportAs: 'LuTreeOptionPicker',
 	imports: [A11yModule],
 	providers: [

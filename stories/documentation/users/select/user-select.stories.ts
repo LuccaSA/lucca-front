@@ -1,7 +1,6 @@
 import { provideHttpClient } from '@angular/common/http';
 import { ChangeDetectionStrategy, Component, input } from '@angular/core';
 import { FormsModule } from '@angular/forms';
-import { provideAnimations } from '@angular/platform-browser/animations';
 import { ILuUser, LuUserSelectModule } from '@lucca-front/ng/user';
 import { applicationConfig, Meta, StoryObj } from '@storybook/angular';
 import { createTestStory } from 'stories/helpers/stories';
@@ -22,7 +21,7 @@ class UserSelectStory {
 export default {
 	title: 'Documentation/Users/Select/Basique',
 	component: UserSelectStory,
-	decorators: [applicationConfig({ providers: [provideAnimations(), provideHttpClient()] })],
+	decorators: [applicationConfig({ providers: [provideHttpClient()] })],
 } as Meta;
 
 const code = `

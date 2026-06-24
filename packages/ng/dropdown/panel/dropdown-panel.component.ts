@@ -13,7 +13,7 @@ import {
 	ViewChild,
 	ViewEncapsulation,
 } from '@angular/core';
-import { ALuPopoverPanel, ILuPopoverPanel, luTransformPopover } from '@lucca-front/ng/popover';
+import { ALuPopoverPanel, ILuPopoverPanel } from '@lucca-front/ng/popover';
 import { PopoverContentComponent } from '@lucca-front/ng/popover2';
 import { merge, Observable, Subscription } from 'rxjs';
 import { debounceTime, delay, map, share, startWith, switchMap } from 'rxjs/operators';
@@ -27,7 +27,6 @@ import { ALuDropdownItem, ILuDropdownItem } from '../item/index';
 	templateUrl: './dropdown-panel.component.html',
 	styleUrl: './dropdown-panel.component.scss',
 	changeDetection: ChangeDetectionStrategy.OnPush,
-	animations: [luTransformPopover],
 	exportAs: 'LuDropdownPanel',
 	encapsulation: ViewEncapsulation.None,
 })
