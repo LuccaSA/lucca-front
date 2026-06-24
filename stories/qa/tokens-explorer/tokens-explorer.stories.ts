@@ -66,16 +66,6 @@ function buildPaletteTokens(): TokenEntry[] {
 		}
 	}
 
-	for (const shade of PALETTE_SHADES) {
-		out.push({
-			name: `--palettes-ai-${shade}`,
-			value: `AI ${shade}`,
-			category: 'palette',
-			group: 'AI',
-			preview: 'swatch',
-		});
-	}
-
 	return out;
 }
 
