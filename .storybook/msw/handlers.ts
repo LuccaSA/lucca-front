@@ -147,6 +147,14 @@ export const handlers = [
 		});
 	}),
 
+	http.get('/organization/structure/api/departments', async () => {
+		await delay(300);
+		const countNodes = (nodes: { children?: unknown[] }[]): number => nodes.reduce((acc, branch) => acc + 1 + countNodes((branch.children ?? []) as { children?: unknown[] }[]), 0);
+		return HttpResponse.json({
+			count: countNodes(mockDepartmentsTree),
+		});
+	}),
+
 	http.get('/api/v3/departments/scopedtree', async () => {
 		await delay(300);
 		return HttpResponse.json({
