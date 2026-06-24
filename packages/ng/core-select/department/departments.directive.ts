@@ -100,6 +100,7 @@ export class LuCoreSelectDepartmentsDirective<T extends ILuDepartment = ILuDepar
 			this.httpClient.get<{ count: number }>(url, {
 				params: {
 					...filters,
+					limit: 0,
 					['fields.root']: 'count',
 				},
 			}),
