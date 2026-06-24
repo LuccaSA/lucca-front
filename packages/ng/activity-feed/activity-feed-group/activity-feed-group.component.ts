@@ -1,4 +1,3 @@
-import { NgTemplateOutlet } from '@angular/common';
 import { ChangeDetectionStrategy, Component, ViewEncapsulation } from '@angular/core';
 
 @Component({
@@ -6,7 +5,6 @@ import { ChangeDetectionStrategy, Component, ViewEncapsulation } from '@angular/
 	template: '<ng-content />',
 	encapsulation: ViewEncapsulation.None,
 	changeDetection: ChangeDetectionStrategy.OnPush,
-	imports: [NgTemplateOutlet],
 	host: {
 		class: 'activityFeed-content-group',
 	},
