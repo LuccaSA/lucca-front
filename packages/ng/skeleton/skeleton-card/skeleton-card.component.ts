@@ -1,16 +1,16 @@
 import { ChangeDetectionStrategy, Component, computed, input, numberAttribute } from '@angular/core';
 
 @Component({
-	selector: 'lu-skeleton-resource-card',
-	templateUrl: './skeleton-resource-card.component.html',
-	styleUrl: './skeleton-resource-card.component.scss',
+	selector: 'lu-skeleton-card',
+	templateUrl: './skeleton-card.component.html',
+	styleUrl: './skeleton-card.component.scss',
 	changeDetection: ChangeDetectionStrategy.OnPush,
 })
-export class SkeletonResourceCardComponent {
+export class SkeletonCardComponent {
 	/**
-	 * Defines the number of description lines in resource card
+	 * Defines the number of description lines in card
 	 */
-	readonly descriptionLines = input(0, { transform: numberAttribute });
+	readonly descriptionLines = input(1, { transform: numberAttribute });
 
 	readonly lines = computed(() => Array.from({ length: this.descriptionLines() }));
 
