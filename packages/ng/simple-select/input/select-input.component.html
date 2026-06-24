@@ -29,7 +29,7 @@
 		<ng-container *ngTemplateOutlet="currentValueDisplayerTpl" />
 	</div>
 	@if (!filterPillMode && !impersonation()) {
-		@if (clearable && hasValue() && (disabled$ | async) === false) {
+		@if (clearable() && hasValue() && (disabled$ | async) === false) {
 			<lu-clear class="simpleSelect-field-clear" (onClear)="clearValue($event); inputElement.focus()">{{ intl().clear }}</lu-clear>
 		}
 		<lu-icon icon="arrowChevronBottom" class="simpleSelect-field-icon" />

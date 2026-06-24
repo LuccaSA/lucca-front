@@ -1,7 +1,7 @@
 <ng-container *luOptionOutlet="valuesTpl(); value: value || []" />
 
 @if (!filterPillMode) {
-	@if (hasValue() && clearable && (disabled$ | async) === false) {
+	@if (hasValue() && clearable() && (disabled$ | async) === false) {
 		<lu-clear class="multipleSelect-clear" (onClear)="clearValue($event)">{{ intl().clear }}</lu-clear>
 	}
 
