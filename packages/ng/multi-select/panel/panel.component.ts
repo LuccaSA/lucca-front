@@ -136,10 +136,14 @@ export class LuMultiSelectPanelComponent<T> implements AfterViewInit, CoreSelect
 		const dataSource = this.selectInput.dataSource();
 		if (groupKey !== undefined && dataSource.getGroupOptions) {
 			this.groupLoadingKey.set(groupKey);
-			void firstValueFrom(dataSource.getGroupOptions(groupKey)).then((allGroupOptions) => {
-				this.groupLoadingKey.set(null);
-				this.#applyGroupToggle(allGroupOptions, allGroupOptions);
-			});
+			void firstValueFrom(dataSource.getGroupOptions(groupKey))
+				.then((allGroupOptions) => {
+					this.groupLoadingKey.set(null);
+					this.#applyGroupToggle(allGroupOptions, allGroupOptions);
+				})
+				.catch(() => {
+					this.groupLoadingKey.set(null);
+				});
 			return;
 		}
 		this.#applyGroupToggle(notSelectedOptions, groupOptions);
