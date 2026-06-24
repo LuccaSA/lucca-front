@@ -133,8 +133,19 @@ export const WithTagPluginWithNoInitialValue: StoryObj<RichTextInputComponent & 
 																			description: 'Tag 2',
 																		},
 																		{
-																			key: 'tag3',
-																			description: 'Tag 3',
+																			key: 'tag4',
+																			description: 'Tag 4',
+																			secondary: true,
+																		},
+																		{
+																			key: 'tag5',
+																			description: 'Prénom',
+																			secondary: true,
+																		},
+																		{
+																			key: 'tag6',
+																			description: 'Téléphone',
+																			secondary: true,
 																		},
 																	]" />
 		</lu-rich-text-input>
@@ -210,6 +221,24 @@ export const WithTagPlugin: StoryObj<RichTextInputComponent & { value: string; d
 																			key: 'tag3',
 																			description: 'Tag 3',
 																		},
+																		{
+																		key: 'tag4',
+																		description: 'Tag 4',
+																		secondary: true,
+																			group: 'Groupe 2'
+																		},
+																		{
+																			key: 'tag6',
+																			description: 'Téléphone',
+																			secondary: true,
+																			group: 'Groupe 2'
+																		},
+																		{
+																			key: 'tag5',
+																			description: 'Prénom',
+																			secondary: true,
+																			group: 'Groupe 1'
+																		},
 																	]" />
 		</lu-rich-text-input>
 </lu-form-field>
@@ -255,6 +284,21 @@ export const WithTagPluginMarkdown: StoryObj<RichTextInputComponent & { value: s
 																		key: 'tag3',
 																		description: 'Tag 3',
 																	},
+																	{
+																		key: 'tag4',
+																		description: 'Tag 4',
+																		secondary: true,
+																	},
+																	{
+																		key: 'tag5',
+																		description: 'Prénom',
+																		secondary: true,
+																	},
+																	{
+																		key: 'tag6',
+																		description: 'Téléphone',
+																		secondary: true,
+																	},
 																]" />
 	</lu-rich-text-input>
 </lu-form-field>
@@ -265,7 +309,7 @@ export const WithTagPluginMarkdown: StoryObj<RichTextInputComponent & { value: s
 		};
 	},
 	args: {
-		value: 'Lorem **ipsum** dolor {{tag1}} *italic* {{unregisteredTag}} and regular {{tag2}} trailing text\nLine 2\n\nParagraph 2\n\n\n\nParagraph 3',
+		value: 'Lorem **ipsum** dolor {{tag1}} *italic* {{unregisteredTag}} and {{tag4}} regular {{tag2}} trailing text\nLine 2\n\nParagraph 2\n\n\n\nParagraph 3',
 		placeholder: 'Placeholder…',
 		disabled: false,
 		required: false,
@@ -347,6 +391,21 @@ export const WithTagPluginMarkdownContentChange: StoryObj<RichTextInputComponent
 																	{
 																		key: 'tag3',
 																		description: 'Tag 3',
+																	},
+																	{
+																		key: 'tag4',
+																		description: 'Tag 4',
+																		secondary: true,
+																	},
+																	{
+																		key: 'tag5',
+																		description: 'Prénom',
+																		secondary: true,
+																	},
+																	{
+																		key: 'tag6',
+																		description: 'Téléphone',
+																		secondary: true,
 																	},
 																]"/>
 	</lu-rich-text-input>
