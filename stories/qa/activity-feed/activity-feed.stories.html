@@ -75,15 +75,15 @@
 									><abbr>Mar.</abbr> 15 juillet 2025 à 08:56</time
 								>
 								<div class="activityFeed-content">
-									<div class="activityFeed-content-group">
-										<div class="activityFeed-content-group-update">
-											<div class="activityFeed-content-group-update-object">Statut :</div>
-											<div class="activityFeed-content-group-update-before"><div class="statusBadge palette-critical">Refusé</div></div>
-											<span class="activityFeed-content-group-update-icon lucca-icon icon-arrowRight mod-XS" aria-hidden="true"></span>
+									<ul class="activityFeed-content-update">
+										<li class="activityFeed-content-update-item">
+											<div class="activityFeed-content-update-item-object">Statut :</div>
+											<div class="activityFeed-content-update-item-before"><div class="statusBadge palette-critical">Refusé</div></div>
+											<span class="activityFeed-content-update-item-icon lucca-icon icon-arrowRight mod-XS" aria-hidden="true"></span>
 											<span class="pr-u-mask">a été remplacé par</span>
-											<div class="activityFeed-content-group-update-after"><div class="statusBadge palette-success">Approuvé</div></div>
-										</div>
-									</div>
+											<div class="activityFeed-content-update-item-after"><div class="statusBadge palette-success">Approuvé</div></div>
+										</li>
+									</ul>
 									<div class="commentWrapper-item" role="listitem">
 										<div class="comment mod-noAvatar">
 											<blockquote class="comment-content">
@@ -106,12 +106,14 @@
 									><abbr>Mar.</abbr> 15 juillet 2025 à 08:56</time
 								>
 								<div class="activityFeed-content">
-									<div class="activityFeed-content-group-update">
-										<div class="activityFeed-content-group-update-before">1000 €</div>
-										<span class="activityFeed-content-group-update-icon lucca-icon icon-arrowRight mod-XS" aria-hidden="true"></span>
-										<span class="pr-u-mask">a été remplacé par</span>
-										<div class="activityFeed-content-group-update-after">800 €</div>
-									</div>
+									<ul class="activityFeed-content-update">
+										<li class="activityFeed-content-update-item">
+											<div class="activityFeed-content-update-item-before">1000 €</div>
+											<span class="activityFeed-content-update-item-icon lucca-icon icon-arrowRight mod-XS" aria-hidden="true"></span>
+											<span class="pr-u-mask">a été remplacé par</span>
+											<div class="activityFeed-content-update-item-after">800 €</div>
+										</li>
+									</ul>
 								</div>
 							</div>
 						</li>
@@ -122,18 +124,20 @@
 				<div class="demo-QAtable-list">
 					<lu-activity-feed>
 						<lu-activity-feed-step [user]="user" [date]="date" label="Finn Mertens a modifié une demande.">
-							<lu-activity-feed-group>
-								<lu-activity-feed-update label="Statut">
+							<lu-activity-feed-update>
+								<lu-activity-feed-update-item label="Statut">
 									<lu-status-badge activityFeedUpdateBefore palette="critical" label="Refusé" />
 									<lu-status-badge activityFeedUpdateAfter palette="success" label="Approuvé" />
-								</lu-activity-feed-update>
-							</lu-activity-feed-group>
+								</lu-activity-feed-update-item>
+							</lu-activity-feed-update>
 							<lu-comment noInfos content="Lorem ipsum dolor sit amet, consectetur adipiscing elit. Sed vestibulum velit nec leo tempor." />
 						</lu-activity-feed-step>
 						<lu-activity-feed-step [user]="user" [date]="date" label="Finn Mertens a modifié le budget.">
-							<lu-activity-feed-update label="Montant">
-								<ng-container activityFeedUpdateBefore>1000 €</ng-container>
-								<ng-container activityFeedUpdateAfter>800 €</ng-container>
+							<lu-activity-feed-update>
+								<lu-activity-feed-update-item label="Montant">
+									<ng-container activityFeedUpdateBefore>1000 €</ng-container>
+									<ng-container activityFeedUpdateAfter>800 €</ng-container>
+								</lu-activity-feed-update-item>
 							</lu-activity-feed-update>
 						</lu-activity-feed-step>
 					</lu-activity-feed>

@@ -1,4 +1,5 @@
 @use '@lucca-front/scss/src/commons/utils/namespace';
+@use '@lucca-front/scss/src/commons/utils/reset';
 
 @mixin component($atRoot: namespace.$defaultAtRoot) {
 	list-style-type: '';
@@ -65,29 +66,32 @@
 			display: block;
 		}
 
-		.activityFeed-content-group-update-icon {
-			display: var(--components-activityFeed-content-group-update-icon-display);
+		.activityFeed-content-update-item-icon {
+			display: var(--components-activityFeed-content-update-item-icon-display);
 		}
 
-		.activityFeed-content-group {
+		.activityFeed-content-update {
+			@include reset.list;
+
 			padding: var(--pr-t-spacings-100) var(--pr-t-spacings-150);
 			border-radius: var(--pr-t-border-radius-structure);
-			border: 1px solid var(--palettes-neutral-300);
+			border: 1px solid var(--pr-t-color-input-border);
 			display: flex;
 			flex-direction: column;
 			gap: var(--pr-t-spacings-50);
 		}
 
-		.activityFeed-content-group-update {
-			display: var(--components-activityFeed-content-group-update-display);
+		.activityFeed-content-update-item {
+			display: var(--components-activityFeed-content-update-item-display);
 			align-items: center;
-			gap: var(--pr-t-spacings-100);
+			gap: var(--pr-t-spacings-75);
 			min-block-size: var(--pr-t-spacings-300);
 		}
 
-		.activityFeed-content-group-update-object {
-			margin-inline-end: calc(var(--pr-t-spacings-100) * -1);
+		.activityFeed-content-update-item-object {
+			margin-inline-end: calc(var(--pr-t-spacings-75) * -1);
 			color: var(--pr-t-color-text-subtle);
+			display: flex;
 
 			&::after {
 				content: ' ';
@@ -98,8 +102,8 @@
 			}
 		}
 
-		.activityFeed-content-group-update-before,
-		.activityFeed-content-group-update-after {
+		.activityFeed-content-update-item-before,
+		.activityFeed-content-update-item-after {
 			display: flex;
 
 			&:empty {

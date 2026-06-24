@@ -1,6 +1,6 @@
 import { finn } from '@/stories/users/user.mocks';
 import { LOCALE_ID } from '@angular/core';
-import { ActivityFeedComponent, ActivityFeedStepComponent, ActivityFeedUpdateComponent, ActivityFeedUpdateGroupComponent } from '@lucca-front/ng/activity-feed';
+import { ActivityFeedComponent, ActivityFeedStepComponent, ActivityFeedUpdateComponent, ActivityFeedUpdateItemComponent } from '@lucca-front/ng/activity-feed';
 import { CommentComponent } from '@lucca-front/ng/comment';
 import { FileEntryComponent } from '@lucca-front/ng/file-upload';
 import { ReadMoreComponent } from '@lucca-front/ng/read-more';
@@ -33,7 +33,7 @@ export default {
 		},
 		updated: {
 			control: 'boolean',
-			description: 'Présente une étape avec des valeurs modifiées grâce au sous-composant <code>lu-activity-feed-update</code>.',
+			description: 'Présente une étape avec des valeurs modifiées grâce aux sous-composant <code>lu-activity-feed-update</code> et <code>lu-activity-feed-update-item</code>.',
 		},
 		attachedContent: {
 			options: ['none', 'file', 'readMore'],
@@ -51,7 +51,7 @@ export default {
 	decorators: [
 		moduleMetadata({
 			imports: [
-				ActivityFeedUpdateGroupComponent,
+				ActivityFeedUpdateItemComponent,
 				ActivityFeedComponent,
 				ActivityFeedStepComponent,
 				ActivityFeedUpdateComponent,
@@ -81,16 +81,16 @@ function getTemplate(args: ActivityFeedBasicStory): string {
 	const updatedStep = args.updated
 		? `
 	<lu-activity-feed-step [user]="user" [date]="date" label="Daniel Hernandez a modifié une demande.">
-		<lu-activity-feed-group>
-			<lu-activity-feed-update label="Statut">
+		<lu-activity-feed-update>
+			<lu-activity-feed-update-item label="Statut">
 				<lu-status-badge activityFeedUpdateBefore palette="critical" label="Refusé" />
 				<lu-status-badge activityFeedUpdateAfter palette="success" label="Approuvé" />
-			</lu-activity-feed-update>
-			<lu-activity-feed-update label="Montant">
+			</lu-activity-feed-update-item>
+			<lu-activity-feed-update-item label="Montant">
 				<ng-container activityFeedUpdateBefore>1000 €</ng-container>
 				<ng-container activityFeedUpdateAfter>500 €</ng-container>
-			</lu-activity-feed-update>
-		</lu-activity-feed-group>
+			</lu-activity-feed-update-item>
+		</lu-activity-feed-update>
 		<lu-comment noInfos content="Lorem ipsum dolor sit amet, consectetur adipiscing elit. Sed vestibulum velit nec leo tempor." />
 	</lu-activity-feed-step>`
 		: '';
