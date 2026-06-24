@@ -33,11 +33,11 @@
 								<button
 									type="button"
 									class="link"
-									[disabled]="groupLoadingKey() === group.key"
+									[disabled]="groupLoadingKeys().has(group.key)"
 									(click)="toggleOptions(groupCtx.notSelectedOptions, group.options, group.key)"
 									[id]="selectId + '-group-' + group.key"
 								>
-									@if (groupLoadingKey() === group.key) {
+									@if (groupLoadingKeys().has(group.key)) {
 										<span class="loading"></span>
 									} @else {
 										<span class="pr-u-mask">{{ groupingTitleRef.innerText }}&nbsp;– </span

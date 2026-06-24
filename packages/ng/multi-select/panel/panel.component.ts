@@ -98,7 +98,7 @@ export class LuMultiSelectPanelComponent<T> implements AfterViewInit, CoreSelect
 		};
 	});
 
-	readonly groupLoadingKey = signal<unknown>(null);
+	readonly groupLoadingKeys = signal<Set<unknown>>(new Set());
 
 	readonly hasGrouping = computed(() => !!this.grouping());
 	public readonly clue = toSignal(this.selectInput.clue$.pipe(map((clue) => clue ?? '')), { initialValue: '' });
@@ -135,14 +135,22 @@ export class LuMultiSelectPanelComponent<T> implements AfterViewInit, CoreSelect
 	toggleOptions(notSelectedOptions: T[], groupOptions: T[], groupKey?: unknown): void {
 		const dataSource = this.selectInput.dataSource();
 		if (groupKey !== undefined && dataSource.getGroupOptions) {
-			this.groupLoadingKey.set(groupKey);
+			this.groupLoadingKeys.update((keys) => new Set(keys).add(groupKey));
 			void firstValueFrom(dataSource.getGroupOptions(groupKey))
 				.then((allGroupOptions) => {
-					this.groupLoadingKey.set(null);
-					this.#applyGroupToggle(allGroupOptions, allGroupOptions);
+					this.groupLoadingKeys.update((keys) => {
+						const s = new Set(keys);
+						s.delete(groupKey);
+						return s;
+					});
+					this.#applyGroupToggle(allGroupOptions as T[], allGroupOptions as T[]);
 				})
 				.catch(() => {
-					this.groupLoadingKey.set(null);
+					this.groupLoadingKeys.update((keys) => {
+						const s = new Set(keys);
+						s.delete(groupKey);
+						return s;
+					});
 				});
 			return;
 		}
