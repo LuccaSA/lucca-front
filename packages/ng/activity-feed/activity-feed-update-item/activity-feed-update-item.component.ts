@@ -1,4 +1,3 @@
-import { NgTemplateOutlet } from '@angular/common';
 import { ChangeDetectionStrategy, Component, computed, inject, input, LOCALE_ID, ViewEncapsulation } from '@angular/core';
 import { intlInputOptions } from '@lucca-front/ng/core';
 import { IconComponent } from '@lucca/prisme/icon';
@@ -9,7 +8,7 @@ import { LU_ACTIVITY_FEED_TRANSLATIONS } from '../activity-feed.translate';
 	templateUrl: './activity-feed-update-item.component.html',
 	encapsulation: ViewEncapsulation.None,
 	changeDetection: ChangeDetectionStrategy.OnPush,
-	imports: [IconComponent, NgTemplateOutlet],
+	imports: [IconComponent],
 	host: {
 		role: 'listitem',
 		class: 'activityFeed-content-update-item',
