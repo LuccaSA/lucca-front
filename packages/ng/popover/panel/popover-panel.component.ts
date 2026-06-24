@@ -4,7 +4,6 @@ import { NgTemplateOutlet } from '@angular/common';
 import { ChangeDetectionStrategy, Component, EventEmitter, input, OnDestroy, TemplateRef, viewChild } from '@angular/core';
 import { outputFromObservable } from '@angular/core/rxjs-interop';
 import { isNotNil, syncInputSignal, ɵeffectWithDeps } from '@lucca-front/ng/core';
-import { luTransformPopover } from '../animation/index';
 import { ALuPopoverPanel, ILuPopoverPanel, LuPopoverScrollStrategy } from './popover-panel.model';
 
 // import { standardPopoverTemplate } from './popover.template';
@@ -12,8 +11,8 @@ import { ALuPopoverPanel, ILuPopoverPanel, LuPopoverScrollStrategy } from './pop
 @Component({
 	selector: 'lu-popover',
 	templateUrl: './popover-panel.component.html',
+	styleUrl: './popover-panel.component.scss',
 	changeDetection: ChangeDetectionStrategy.OnPush,
-	animations: [luTransformPopover],
 	imports: [NgTemplateOutlet, OverlayModule, A11yModule],
 	exportAs: 'LuPopoverPanel',
 })

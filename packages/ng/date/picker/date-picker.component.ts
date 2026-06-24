@@ -7,7 +7,6 @@ import { outputFromObservable } from '@angular/core/rxjs-interop';
 import { FormsModule } from '@angular/forms';
 import { ALuDateAdapter, ELuDateGranularity, LuDateGranularity, ɵeffectWithDeps } from '@lucca-front/ng/core';
 import { ALuPickerPanel } from '@lucca-front/ng/picker';
-import { luTransformPopover } from '@lucca-front/ng/popover';
 import { LuCalendarInputComponent } from '../calendar';
 import { LuDateInputDirective } from '../input';
 
@@ -16,7 +15,6 @@ import { LuDateInputDirective } from '../input';
 	templateUrl: './date-picker.component.html',
 	changeDetection: ChangeDetectionStrategy.OnPush,
 	exportAs: 'LuDatePicker',
-	animations: [luTransformPopover],
 	imports: [FormsModule, LuCalendarInputComponent, LuDateInputDirective, A11yModule],
 	providers: [
 		{

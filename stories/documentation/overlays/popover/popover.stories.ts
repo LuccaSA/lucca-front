@@ -1,5 +1,4 @@
 import { ChangeDetectionStrategy, Component, input } from '@angular/core';
-import { provideAnimations } from '@angular/platform-browser/animations';
 import { LuPopoverAlignment, LuPopoverModule, LuPopoverPosition, LuPopoverTriggerEvent } from '@lucca-front/ng/popover';
 import { applicationConfig, Meta, StoryObj } from '@storybook/angular';
 import { createTestStory } from 'stories/helpers/stories';
@@ -25,7 +24,7 @@ class PopoverStory {
 export default {
 	title: 'Documentation/Overlays/Popover',
 	component: PopoverStory,
-	decorators: [applicationConfig({ providers: [provideAnimations()] })],
+	decorators: [applicationConfig({ providers: [] })],
 } as Meta;
 
 const code = `

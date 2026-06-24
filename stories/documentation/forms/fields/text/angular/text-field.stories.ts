@@ -1,7 +1,6 @@
 import { AsyncPipe } from '@angular/common';
 import { LOCALE_ID } from '@angular/core';
 import { FormsModule, ReactiveFormsModule } from '@angular/forms';
-import { BrowserAnimationsModule } from '@angular/platform-browser/animations';
 import { FORM_FIELD_SIZE, FORM_FIELD_WIDTH, FormFieldComponent } from '@lucca-front/ng/form-field';
 import { TextInputComponent } from '@lucca-front/ng/forms';
 import { INLINE_MESSAGE_STATE } from '@lucca-front/ng/inline-message';
@@ -16,7 +15,7 @@ export default {
 	title: 'Documentation/Forms/Fields/TextField/Angular',
 	decorators: [
 		moduleMetadata({
-			imports: [TextInputComponent, FormFieldComponent, FormsModule, ReactiveFormsModule, BrowserAnimationsModule, AsyncPipe, StoryModelDisplayComponent],
+			imports: [TextInputComponent, FormFieldComponent, FormsModule, ReactiveFormsModule, AsyncPipe, StoryModelDisplayComponent],
 		}),
 		applicationConfig({
 			providers: [{ provide: LOCALE_ID, useValue: 'fr-FR' }],
@@ -152,7 +151,7 @@ export const Basic: StoryObj<TextInputComponent & { disabled: boolean; required:
 </lu-form-field>
 <pr-story-model-display>{{ example }}</pr-story-model-display>`),
 			moduleMetadata: {
-				imports: [TextInputComponent, FormFieldComponent, FormsModule, BrowserAnimationsModule],
+				imports: [TextInputComponent, FormFieldComponent, FormsModule],
 			},
 		};
 	},
@@ -205,7 +204,7 @@ export const IBANFormat: StoryObj<TextInputComponent & { disabled: boolean; requ
 </lu-form-field>
 {{example}}`),
 			moduleMetadata: {
-				imports: [TextInputComponent, FormFieldComponent, FormsModule, BrowserAnimationsModule],
+				imports: [TextInputComponent, FormFieldComponent, FormsModule],
 			},
 		};
 	},
@@ -260,7 +259,7 @@ export const PasswordVisiblity: StoryObj<
 </lu-form-field>
 <pr-story-model-display>{{ example }}</pr-story-model-display>`,
 			moduleMetadata: {
-				imports: [TextInputComponent, FormFieldComponent, FormsModule, BrowserAnimationsModule],
+				imports: [TextInputComponent, FormFieldComponent, FormsModule],
 			},
 		};
 	},
@@ -315,7 +314,7 @@ export const WithPrefixAndSuffix: StoryObj<
 </lu-form-field>
 <pr-story-model-display>{{ example }}</pr-story-model-display>`),
 			moduleMetadata: {
-				imports: [TextInputComponent, FormFieldComponent, FormsModule, BrowserAnimationsModule],
+				imports: [TextInputComponent, FormFieldComponent, FormsModule],
 			},
 		};
 	},
@@ -375,7 +374,7 @@ export const AI: StoryObj<FormFieldComponent & TextInputComponent> = {
 <pr-story-model-display>{{example}}</pr-story-model-display>
 `),
 			moduleMetadata: {
-				imports: [TextInputComponent, FormFieldComponent, FormsModule, BrowserAnimationsModule],
+				imports: [TextInputComponent, FormFieldComponent, FormsModule],
 			},
 		};
 	},
