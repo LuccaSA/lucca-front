@@ -1,7 +1,6 @@
 import { StoryModelDisplayComponent } from '@/helpers/story-model-display.component';
 import { allLegumes, FilterLegumesPipe } from '@/stories/forms/select/select.utils';
 import { FormsModule } from '@angular/forms';
-import { BrowserAnimationsModule } from '@angular/platform-browser/animations';
 import { LuOptionDirective } from '@lucca-front/ng/core-select';
 import { FORM_FIELD_SIZE, FORM_FIELD_WIDTH, FormFieldComponent } from '@lucca-front/ng/form-field';
 import { INLINE_MESSAGE_STATE } from '@lucca-front/ng/inline-message';
@@ -16,7 +15,7 @@ export default {
 	title: 'Documentation/Forms/Fields/Multi Select/Angular',
 	decorators: [
 		moduleMetadata({
-			imports: [LuMultiSelectInputComponent, FormsModule, BrowserAnimationsModule, LuOptionDirective, FilterLegumesPipe, StoryModelDisplayComponent],
+			imports: [LuMultiSelectInputComponent, FormsModule, LuOptionDirective, FilterLegumesPipe, StoryModelDisplayComponent],
 		}),
 	],
 	argTypes: {
@@ -111,7 +110,7 @@ export const Basic: StoryObj<InputAlias<LuMultiSelectInputComponent<unknown> & F
 </lu-form-field>
 <pr-story-model-display>{{ example | json }}</pr-story-model-display>`,
 			moduleMetadata: {
-				imports: [LuMultiSelectInputComponent, FormFieldComponent, FormsModule, BrowserAnimationsModule],
+				imports: [LuMultiSelectInputComponent, FormFieldComponent, FormsModule],
 			},
 		};
 	},

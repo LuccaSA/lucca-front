@@ -1,5 +1,4 @@
 import { ChangeDetectionStrategy, Component } from '@angular/core';
-import { provideAnimations } from '@angular/platform-browser/animations';
 import { ILuModalContent } from '@lucca-front/ng/modal';
 import { LuSidepanel, LuSidepanelModule } from '@lucca-front/ng/sidepanel';
 import { applicationConfig, Meta, StoryObj } from '@storybook/angular-vite';
@@ -35,7 +34,7 @@ class SidePanelStory {
 export default {
 	title: 'Documentation/Navigation/Sidepanel',
 	component: SidePanelStory,
-	decorators: [applicationConfig({ providers: [provideAnimations()] })],
+	decorators: [applicationConfig({ providers: [] })],
 } as Meta;
 
 const template = (args: SidePanelStory) => ({

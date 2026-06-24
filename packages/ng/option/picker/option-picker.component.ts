@@ -23,7 +23,6 @@ import {
 } from '@angular/core';
 import { takeUntilDestroyed } from '@angular/core/rxjs-interop';
 import { ALuPickerPanel } from '@lucca-front/ng/picker';
-import { luTransformPopover } from '@lucca-front/ng/popover';
 import { merge, of } from 'rxjs';
 import { delay, map, share } from 'rxjs/operators';
 import { ALuOptionItem } from '../item/option-item.model';
@@ -337,7 +336,6 @@ export abstract class ALuOptionPickerComponent<T, O extends import('../item/opti
 	selector: 'lu-option-picker',
 	templateUrl: './option-picker.component.html',
 	changeDetection: ChangeDetectionStrategy.OnPush,
-	animations: [luTransformPopover],
 	exportAs: 'LuOptionPicker',
 	imports: [OverlayModule, A11yModule],
 	providers: [

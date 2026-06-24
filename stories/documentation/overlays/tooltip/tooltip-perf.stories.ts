@@ -1,4 +1,3 @@
-import { provideAnimations } from '@angular/platform-browser/animations';
 import { ButtonComponent } from '@lucca-front/ng/button';
 import { LuTooltipModule, LuTooltipTriggerDirective } from '@lucca-front/ng/tooltip';
 import { applicationConfig, Meta, moduleMetadata, StoryObj } from '@storybook/angular-vite';
@@ -6,7 +5,7 @@ import { applicationConfig, Meta, moduleMetadata, StoryObj } from '@storybook/an
 export default {
 	title: 'Documentation/Overlays/Tooltip/Performance',
 	decorators: [
-		applicationConfig({ providers: [provideAnimations()] }),
+		applicationConfig({ providers: [] }),
 		moduleMetadata({
 			imports: [LuTooltipModule, ButtonComponent],
 		}),

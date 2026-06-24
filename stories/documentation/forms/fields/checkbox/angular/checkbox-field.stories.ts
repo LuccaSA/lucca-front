@@ -2,7 +2,6 @@ import { cleanupTemplate, createTestStory, generateInputs, setStoryOptions } fro
 import { StoryModelDisplayComponent } from '@/helpers/story-model-display.component';
 import { waitForAngular } from '@/helpers/test';
 import { FormsModule } from '@angular/forms';
-import { BrowserAnimationsModule } from '@angular/platform-browser/animations';
 import { FORM_FIELD_SIZE, FormFieldComponent } from '@lucca-front/ng/form-field';
 import { CheckboxInputComponent } from '@lucca-front/ng/forms';
 import { INLINE_MESSAGE_STATE } from '@lucca-front/ng/inline-message';
@@ -97,7 +96,7 @@ export const Basic: StoryObj<CheckboxInputComponent & FormFieldComponent & { req
 </lu-form-field>
 <pr-story-model-display>{{ example }}</pr-story-model-display>`),
 			moduleMetadata: {
-				imports: [CheckboxInputComponent, FormsModule, BrowserAnimationsModule],
+				imports: [CheckboxInputComponent, FormsModule],
 			},
 		};
 	},

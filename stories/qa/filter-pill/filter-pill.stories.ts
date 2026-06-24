@@ -2,7 +2,6 @@ import { allLegumes, FilterLegumesPipe, ILegume } from '@/stories/forms/select/s
 import { provideHttpClient } from '@angular/common/http';
 import { ChangeDetectionStrategy, Component, LOCALE_ID } from '@angular/core';
 import { FormsModule } from '@angular/forms';
-import { provideAnimations } from '@angular/platform-browser/animations';
 import { LuCoreSelectDepartmentsDirective } from '@lucca-front/ng/core-select/department'; // v20.2
 import { DateInputComponent, DateRangeInputComponent } from '@lucca-front/ng/date2';
 import { FancyBoxComponent } from '@lucca-front/ng/fancy-box';
@@ -45,7 +44,7 @@ class FilterPillStory {
 export default {
 	title: 'QA/FilterPill',
 	component: FilterPillStory,
-	decorators: [applicationConfig({ providers: [{ provide: LOCALE_ID, useValue: 'fr-FR' }, provideAnimations(), provideHttpClient()] })],
+	decorators: [applicationConfig({ providers: [{ provide: LOCALE_ID, useValue: 'fr-FR' }, provideHttpClient()] })],
 } as Meta;
 
 const template = () => ({});

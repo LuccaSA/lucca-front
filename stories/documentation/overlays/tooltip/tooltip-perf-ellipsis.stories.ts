@@ -1,11 +1,10 @@
-import { provideAnimations } from '@angular/platform-browser/animations';
 import { LuTooltipModule, LuTooltipTriggerDirective } from '@lucca-front/ng/tooltip';
 import { applicationConfig, Meta, moduleMetadata, StoryObj } from '@storybook/angular-vite';
 
 export default {
 	title: 'Documentation/Overlays/Tooltip/Performance ellipsis',
 	decorators: [
-		applicationConfig({ providers: [provideAnimations()] }),
+		applicationConfig({ providers: [] }),
 		moduleMetadata({
 			imports: [LuTooltipModule],
 		}),

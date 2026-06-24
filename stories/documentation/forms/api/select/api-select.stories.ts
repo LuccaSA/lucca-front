@@ -1,6 +1,5 @@
 import { provideHttpClient } from '@angular/common/http';
 import { ChangeDetectionStrategy, Component } from '@angular/core';
-import { provideAnimations } from '@angular/platform-browser/animations';
 import { LuApiSelectInputComponent } from '@lucca-front/ng/api';
 import { applicationConfig, Meta, StoryObj } from '@storybook/angular-vite';
 
@@ -33,7 +32,7 @@ class ApiSelectStory {
 export default {
 	title: 'Documentation/Forms/Api/Select',
 	component: ApiSelectStory,
-	decorators: [applicationConfig({ providers: [provideAnimations(), provideHttpClient()] })],
+	decorators: [applicationConfig({ providers: [provideHttpClient()] })],
 } as Meta;
 
 const Template = (args: ApiSelectStory) => ({

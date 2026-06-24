@@ -1,6 +1,5 @@
 import { finn } from '@/stories/users/user.mocks';
 import { provideHttpClient } from '@angular/common/http';
-import { provideAnimations } from '@angular/platform-browser/animations';
 import { ButtonComponent } from '@lucca-front/ng/button';
 import { LuUserDisplayModule } from '@lucca-front/ng/user';
 import { LuUserPopoverDirective } from '@lucca-front/ng/user-popover';
@@ -13,7 +12,7 @@ export default {
 			imports: [LuUserPopoverDirective, LuUserDisplayModule, ButtonComponent],
 		}),
 		applicationConfig({
-			providers: [provideAnimations(), provideHttpClient()],
+			providers: [provideHttpClient()],
 		}),
 	],
 	render: () => {

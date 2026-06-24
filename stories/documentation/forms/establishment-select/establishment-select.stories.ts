@@ -1,6 +1,5 @@
 import { provideHttpClient } from '@angular/common/http';
 import { ChangeDetectionStrategy, Component, input } from '@angular/core';
-import { provideAnimations } from '@angular/platform-browser/animations';
 import { LuEstablishmentSelectInputComponent } from '@lucca-front/ng/establishment';
 import { applicationConfig, Meta, StoryObj } from '@storybook/angular-vite';
 @Component({
@@ -25,7 +24,7 @@ class EstablishmentSelectStory {
 export default {
 	title: 'Documentation/Forms/EstablishmentSelect',
 	component: EstablishmentSelectStory,
-	decorators: [applicationConfig({ providers: [provideAnimations(), provideHttpClient()] })],
+	decorators: [applicationConfig({ providers: [provideHttpClient()] })],
 } as Meta;
 
 export const Basic: StoryObj<EstablishmentSelectStory> = {

@@ -2,7 +2,6 @@ import { registerLocaleData } from '@angular/common';
 import localesFr from '@angular/common/locales/fr';
 import { ChangeDetectionStrategy, Component, LOCALE_ID } from '@angular/core';
 import { FormsModule } from '@angular/forms';
-import { provideAnimations } from '@angular/platform-browser/animations';
 import { ALuDateAdapter, LuNativeDateAdapter } from '@lucca-front/ng/core';
 import { LuCalendarInputComponent, LuDateAdapterPipe } from '@lucca-front/ng/date';
 import { applicationConfig, Meta, StoryObj } from '@storybook/angular-vite';
@@ -36,7 +35,7 @@ export default {
 	component: CalendarStory,
 	decorators: [
 		applicationConfig({
-			providers: [provideAnimations(), { provide: LOCALE_ID, useValue: 'en-US' }],
+			providers: [{ provide: LOCALE_ID, useValue: 'en-US' }],
 		}),
 	],
 } as Meta;

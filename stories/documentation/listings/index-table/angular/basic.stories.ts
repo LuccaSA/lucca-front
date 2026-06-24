@@ -1,5 +1,4 @@
 import { HttpClientModule, provideHttpClient } from '@angular/common/http';
-import { provideAnimations } from '@angular/platform-browser/animations';
 import { ButtonComponent } from '@lucca-front/ng/button';
 import { EmptyStateSectionComponent } from '@lucca-front/ng/empty-state';
 import {
@@ -121,7 +120,7 @@ export default {
 			],
 		}),
 		applicationConfig({
-			providers: [provideAnimations(), provideHttpClient()],
+			providers: [provideHttpClient()],
 		}),
 	],
 	render: (args, { argTypes }) => {

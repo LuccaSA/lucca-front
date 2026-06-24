@@ -1,5 +1,4 @@
 import { FormsModule } from '@angular/forms';
-import { BrowserAnimationsModule } from '@angular/platform-browser/animations';
 import { BoxComponent } from '@lucca-front/ng/box';
 import { FormFieldComponent } from '@lucca-front/ng/form-field';
 import { RadioComponent, RadioGroupInputComponent } from '@lucca-front/ng/forms';
@@ -14,7 +13,7 @@ export default {
 	title: 'Documentation/Structure/Box/HTML&CSS/Arrow/Angular',
 	decorators: [
 		moduleMetadata({
-			imports: [RadioGroupInputComponent, RadioComponent, FormFieldComponent, FormsModule, BoxComponent, BrowserAnimationsModule],
+			imports: [RadioGroupInputComponent, RadioComponent, FormFieldComponent, FormsModule, BoxComponent],
 		}),
 	],
 	argTypes: {

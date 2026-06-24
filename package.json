@@ -49,7 +49,6 @@
     "skills:generate": "ts-node --project scripts/generate-skills/tsconfig.json scripts/generate-skills/index.ts"
   },
   "dependencies": {
-    "@angular/animations": "^22.0.1",
     "@angular/cdk": "^22.0.2",
     "@angular/common": "^22.0.1",
     "@angular/compiler": "^22.0.1",
