@@ -26,11 +26,17 @@
 	translate: var(--components-dialog-translateX) var(--components-dialog-translateY);
 	scale: var(--components-dialog-scale);
 
+	&.mod-closing {
+		animation-name: var(--components-dialog-animationClosing);
+		animation-fill-mode: forwards;
+	}
+
 	@supports not (height: 1dvh) {
 		--components-dialog-maxHeight: var(--components-dialog-maxHeightFallback);
 	}
 
 	@include keyframe.scaleIn;
+	@include keyframe.scaleOut;
 
 	@at-root ($atRoot) {
 		.dialog-inside {

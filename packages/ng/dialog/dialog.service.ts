@@ -3,7 +3,6 @@ import { inject, Injectable, Injector, Renderer2 } from '@angular/core';
 import { isObservable, merge, of, take } from 'rxjs';
 import { filter, switchMap, takeUntil } from 'rxjs/operators';
 import { LuDialogConfig, LuDialogData, LuDialogRef, LuDialogResult } from './model';
-import { DISMISSED_VALUE } from './model/dialog-ref';
 
 @Injectable()
 export class LuDialogService {
@@ -74,8 +73,7 @@ export class LuDialogService {
 				)
 				.subscribe((canClose) => {
 					if (canClose) {
-						luDialogRef.detachSubscription?.unsubscribe();
-						cdkRef.close(DISMISSED_VALUE);
+						luDialogRef.animateAndDismiss();
 					}
 				});
 		}

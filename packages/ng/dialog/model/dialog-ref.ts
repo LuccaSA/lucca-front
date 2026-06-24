@@ -1,4 +1,5 @@
 import { DialogRef } from '@angular/cdk/dialog';
+import { waitForAnimations } from '@lucca-front/ng/core';
 import { isObservable, Observable, of, Subscription, take } from 'rxjs';
 import { filter, map, takeUntil } from 'rxjs/operators';
 import { LuDialogConfig, LuDialogData, LuDialogResult, LuDialogSize } from './dialog-config';
@@ -64,15 +65,39 @@ export class LuDialogRef<C = unknown, TData = LuDialogData<C>> {
 		const canClose$ = isObservable(canClose) ? canClose : of(canClose);
 		canClose$.pipe(take(1)).subscribe((close) => {
 			if (close) {
-				this.detachSubscription?.unsubscribe();
-				this.cdkRef.close(DISMISSED_VALUE);
+				this.animateAndDismiss();
 			}
 		});
 	}
 
 	close(res: LuDialogResult<C>): void {
 		this.detachSubscription?.unsubscribe();
-		this.cdkRef.close(res);
+		this.#playCloseAnimation(() => this.cdkRef.close(res));
+	}
+
+	/**
+	 * Plays the closing animation then dismisses the dialog with the DISMISSED_VALUE.
+	 * Used by the dismiss flows (close button, backdrop click, escape key).
+	 */
+	animateAndDismiss(): void {
+		this.detachSubscription?.unsubscribe();
+		this.#playCloseAnimation(() => this.cdkRef.close(DISMISSED_VALUE));
+	}
+
+	/**
+	 * Adds the `mod-closing` class on the dialog panel to trigger its closing animation,
+	 * then performs the actual close once the animation is done. Resolves immediately
+	 * when no animation runs (reduced motion, …).
+	 */
+	#playCloseAnimation(performClose: () => void): void {
+		const panel = this.cdkRef.overlayRef.overlayElement;
+		if (!panel) {
+			performClose();
+			return;
+		}
+
+		panel.classList.add('mod-closing');
+		void waitForAnimations(panel).then(performClose);
 	}
 
 	resize(size: LuDialogSize): void {

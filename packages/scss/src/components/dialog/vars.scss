@@ -8,6 +8,7 @@
 	--components-dialog-borderRadius: var(--pr-t-border-radius-structure);
 	--components-dialog-inset: 0 var(--commons-pushPanel-inlineSize) 0 0;
 	--components-dialog-animationOpening: scaleIn;
+	--components-dialog-animationClosing: scaleOut;
 	--components-dialog-insideHeaderAreas:
 		'container close'
 		'content content';

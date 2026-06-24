@@ -40,8 +40,10 @@
 	--components-dialog-translateX: var(--components-dialog-translate);
 	--components-dialog-translateY: 0;
 	--components-dialog-translate-spacing: calc(var(--pr-t-spacings-500) * 2);
+	--components-dialog-animationClosing: slideToRight;
 
 	@include keyframe.slideFromRight;
+	@include keyframe.slideToRight;
 }
 
 @mixin fromBottom {
@@ -56,8 +58,10 @@
 	--components-dialog-translateX: 0;
 	--components-dialog-translateY: var(--components-dialog-translate);
 	--components-dialog-translate-spacing: var(--pr-t-spacings-500);
+	--components-dialog-animationClosing: slideToBottom;
 
 	@include keyframe.slideFromBottom;
+	@include keyframe.slideToBottom;
 }
 
 @mixin maxContent {
