@@ -1,0 +1,35 @@
+# {{slug}} — Code & Implementation
+
+{{#if storybook}}{{#if storybook.docsEntry}}📖 [Storybook documentation]({{storybook.docsEntry.url}}){{/if}}{{/if}}
+
+{{#if hasAngular}}
+## Angular
+
+{{#if zhAngularNotes}}
+{{{zhAngularNotes}}}
+
+{{/if}}
+{{#if angularExamples.length}}
+| Example | File |
+|---------|------|
+{{#each angularExamples}}
+| {{name}} | [{{fileSlug}}.md](./stories/{{fileSlug}}.md) |
+{{/each}}
+{{/if}}
+{{/if}}
+
+{{#if hasHtml}}
+## HTML/CSS
+
+{{#if zhHtmlNotes}}
+{{{zhHtmlNotes}}}
+
+{{/if}}
+{{#if htmlExamples.length}}
+| Example | File |
+|---------|------|
+{{#each htmlExamples}}
+| {{name}} | [{{fileSlug}}.md](./stories/{{fileSlug}}.md) |
+{{/each}}
+{{/if}}
+{{/if}}

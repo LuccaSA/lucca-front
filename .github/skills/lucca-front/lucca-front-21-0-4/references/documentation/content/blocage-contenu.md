@@ -1,0 +1,49 @@
+# Blocage sur le contenu ?
+
+# Content
+
+## Incarnons les produits Lucca
+
+Et imaginons l'utilisateur en face de nous.
+
+Ce sont souvent **nos propres mots à l’oral, clairs et simples**, qui expliquent le mieux les messages problématiques.
+
+* Nous aidons, guidons l’utilisateur : **que lui disons-nous ?** 
+* Qu’est-ce que nous lui proposons ? À quel(s) moment(s) du parcours ? 
+* **Dans quel ordre** énonçons-nous les informations ? L'information la plus importante arrive en premier.
+* Qu’est-ce qui compte vraiment pour l’utilisateur ? 
+
+Dès la phase de recherche, **enregistrons-nous, écrivons, tel quel, ce que nous disons à voix haute**. 
+
+**Idem durant nos tests utilisateur** : les verbatims offrent une formidable richesse de vocabulaire, d'inspirations.
+
+**Ce n'est pas assez "bien dit", assez bien écrit ?** 
+
+Il faut bien commencer quelque part, partir de brouillons, et itérer. Ce qui compte, c'est le sens à y mettre. 
+
+Nous pouvons retravailler la forme ensuite.
+
+## Replongeons dans les recherches
+
+Encore à sec ? 
+
+Le déclic se niche sûrement dans notre documentation, notre recherche :
+
+* Synthèses, verbatims de tests utilisateur, 
+* Comptes rendus de réunions, 
+* Benchmarks, glossaire... 
+
+Une idée, une notion ou une phrase qui frappe, inspire ? Surlignons-la, reportons-la dans un fichier Figma. Ou sur un moodboard - pourquoi pas affiché au mur, pour échanger dessus avec les équipes ? 
+
+## Laissons reposer le contenu une journée (ou une nuit) avant de... 
+
+* Le relire **à voix haute** (pour la longueur des phrases, les coquilles, les mots compliqués ou inutiles).
+* Le **couper, l'élaguer.**
+* **Le faire éditer**, c’est-à-dire demander à quelqu’un de rodé à l’exercice d’identifier les manques de clarté, les incompréhensions, le style. **Ce qui est clair pour nous ne l’est peut-être pas pour quelqu’un d’autre**. 
+* **Le laisser reposer à nouveau avant tests** utilisateurs et delivery. 
+
+Ce temps de repos permet d'effacer tout regret et d'aborder votre design de contenu avec fraîcheur, pragmatisme et lucidité. 
+
+*Luccasien·ne, avez-vous des questions, des remarques, un témoignage ?* 
+
+*Envoyez un DM sur Slack à Anne-Laure ou sur #ux-writing.*
