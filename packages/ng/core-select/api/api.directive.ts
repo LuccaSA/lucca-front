@@ -68,7 +68,8 @@ export abstract class ALuCoreSelectApiDirective<TOption, TParams = Record<string
 	 */
 	protected abstract getOptions(params: TParams, page: number): Observable<TOption[]>;
 
-	readonly #lastPageByClue = new Map<string, number>();
+	#lastClue?: string;
+	#lastPage?: number;
 
 	public ngOnInit(): void {
 		if (this.select.optionComparer() === coreSelectDefaultOptionComparer) {
@@ -82,16 +83,16 @@ export abstract class ALuCoreSelectApiDirective<TOption, TParams = Record<string
 		// Subscribe to clueChange$ to (1) keep the select in searchable mode and (2) drive currentClue$
 		this.select.clueChange$.pipe(takeUntil(this.destroy$)).subscribe((clue) => {
 			this.currentClue$.next(clue);
-			this.#lastPageByClue.clear();
+			this.clearLastPageByClue();
 		});
 
 		const dataSource: SelectDataSource<TOption> = {
 			paramsChange: this.params$,
 			clueDebounceMs: this.debounceDuration,
 			getTotalCount: () => this.totalCount$,
-			reset: () => this.#lastPageByClue.clear(),
+			reset: () => this.clearLastPageByClue(),
 			getOptions: ({ clue, page }) => {
-				const lastPage = this.#lastPageByClue.get(clue);
+				const lastPage = clue === this.#lastClue ? this.#lastPage : undefined;
 				if (lastPage !== undefined && page > lastPage) {
 					return of([] as readonly TOption[]);
 				}
@@ -101,7 +102,8 @@ export abstract class ALuCoreSelectApiDirective<TOption, TParams = Record<string
 						this.getOptionsPage(params, page).pipe(
 							tap(({ isLastPage }) => {
 								if (isLastPage) {
-									this.#lastPageByClue.set(clue, page);
+									this.#lastClue = clue;
+									this.#lastPage = page;
 								}
 							}),
 							map(({ items }) => items as readonly TOption[]),
@@ -166,6 +168,11 @@ export abstract class ALuCoreSelectApiDirective<TOption, TParams = Record<string
 					: of([] as TOption[]);
 			}),
 		);
+	}
+
+	protected clearLastPageByClue() {
+		this.#lastClue = undefined;
+		this.#lastPage = undefined;
 	}
 
 	protected getOptionsPage(params: TParams, page: number): Observable<{ items: TOption[]; isLastPage: boolean }> {
