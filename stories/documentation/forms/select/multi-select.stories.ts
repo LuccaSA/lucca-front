@@ -391,8 +391,9 @@ export const WithPagination = generateStory({
 	template: `<lu-multi-select
 	#selectRef
 	[(ngModel)]="selectedLegumes"
-	[options]="legumes.slice(0, page * 10)"
+	[options]="(legumes | filterLegumes:clue).slice(0, page * 10)"
 	(nextPage)="page = page + 1"
+	(clueChange)="clue = $event"
 	[maxValuesShown]="maxValuesShown"
 >
 	<ng-container *luOption="let legume; select: selectRef">{{ legume.name }}</ng-container>
@@ -516,7 +517,8 @@ export const Tree = generateStory({
 	name: 'Tree Select',
 	description: '',
 	template: `<lu-multi-select
-	[options]="legumes"
+	[options]="legumes | filterLegumes:clue"
+	(clueChange)="clue = $event"
 	[treeSelect]="groupingFn"
 	[(ngModel)]="selectedTree"
 />{{ selectedTree | json }}`,
