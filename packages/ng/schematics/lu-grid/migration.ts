@@ -98,6 +98,13 @@ function extractGridColumnInputs(style: string): { inputs: GridColumnInputs; rem
 	return { inputs, remainingStyle: remaining.join('; ') };
 }
 
+const NEUTRAL_HTML_ELEMENTS = ['div', 'span', 'section'] as const;
+type NeutralHtmlElement = (typeof NEUTRAL_HTML_ELEMENTS)[number];
+
+function isNeutralElement(name: string): name is NeutralHtmlElement {
+	return (NEUTRAL_HTML_ELEMENTS as readonly string[]).includes(name);
+}
+
 // --- Main migration ---
 
 export function migrateComponent(sourceFile: SourceFile, path: string, tree: Tree): string {
@@ -142,7 +149,7 @@ export function migrateComponent(sourceFile: SourceFile, path: string, tree: Tre
 // eslint-disable-next-line @typescript-eslint/no-explicit-any
 function migrateGridNode(grid: HtmlGrid, templateUpdate: any): void {
 	const { node, nodeOffset, inputs } = grid;
-	const divLength = node.name.length; // 'div' or 'span'
+	const divLength = node.name.length;
 	const classesNode = node.attributes.find((attr) => attr.name === 'class');
 	const styleNode = node.attributes.find((attr) => attr.name === 'style');
 
@@ -201,7 +208,7 @@ function migrateGridNode(grid: HtmlGrid, templateUpdate: any): void {
 // eslint-disable-next-line @typescript-eslint/no-explicit-any
 function migrateGridColumnNode(col: HtmlGridColumn, templateUpdate: any): void {
 	const { node, nodeOffset, inputs, remainingStyle, extraClasses } = col;
-	const divLength = node.name.length; // 'div' or 'span'
+	const divLength = node.name.length;
 	const classesNode = node.attributes.find((attr) => attr.name === 'class');
 	const styleNode = node.attributes.find((attr) => attr.name === 'style');
 
@@ -275,7 +282,7 @@ function findHTMLGrids(sourceFile: SourceFile, basePath: string, tree: Tree): Ht
 	ngTemplates.forEach((template) => {
 		const htmlAst = new HtmlAst(template.content);
 		htmlAst.visitNodes((node) => {
-			if (!isInterestingNode(node) || (node.name !== 'div' && node.name !== 'span')) {
+			if (!isInterestingNode(node) || !isNeutralElement(node.name)) {
 				return;
 			}
 			const classes = node.attributes.find((attr) => attr.name === 'class')?.value;
@@ -314,12 +321,21 @@ function findHTMLGridColumns(sourceFile: SourceFile, basePath: string, tree: Tre
 
 	ngTemplates.forEach((template) => {
 		const htmlAst = new HtmlAst(template.content);
-		htmlAst.visitNodes((node) => {
-			if (!isInterestingNode(node) || (node.name !== 'div' && node.name !== 'span')) {
+		htmlAst.visitNodes((node, parent) => {
+			if (!isInterestingNode(node) || !isNeutralElement(node.name)) {
 				return;
 			}
 			const classes = node.attributes.find((attr) => attr.name === 'class')?.value;
 			if (!classes?.match(/(^|\s)grid-column(\s|$)/)) {
+				return;
+			}
+
+			// Only migrate grid-column if its parent grid container is also being migrated
+			if (!isInterestingNode(parent) || !isNeutralElement(parent.name)) {
+				return;
+			}
+			const parentClasses = parent.attributes.find((attr) => attr.name === 'class')?.value;
+			if (!parentClasses?.match(/(^|\s)grid(\s|$)/)) {
 				return;
 			}
 
