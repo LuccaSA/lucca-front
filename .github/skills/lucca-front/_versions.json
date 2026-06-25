@@ -106,11 +106,18 @@
       "generatedAt": "2026-06-19T09:11:25.989Z",
       "componentCount": 123
     },
+    "21.2.5": {
+      "tag": "v21.2.5",
+      "zhReleaseId": 62049,
+      "storybookBaseUrl": "https://lucca-front.lucca.io/v21.2.5/storybook",
+      "generatedAt": "2026-06-25T13:36:12.389Z",
+      "componentCount": 123
+    },
     "21.3.0": {
       "tag": "v21.3.0",
       "zhReleaseId": null,
       "storybookBaseUrl": "https://lucca-front.lucca.io/v21.3.0/storybook",
-      "generatedAt": "2026-06-19T10:16:14.463Z",
+      "generatedAt": "2026-06-25T13:40:47.866Z",
       "componentCount": 126
     }
   }

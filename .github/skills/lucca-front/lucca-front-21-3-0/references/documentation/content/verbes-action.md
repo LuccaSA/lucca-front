@@ -15,10 +15,8 @@
 ### **Ajouter / Créer / Générer**
 
 * **« Ajouter »** : s'utilise lorsqu'on apporte une nouvelle information à une liste ou un tableau. On ne peut ajouter que des objets déjà renseignés.
-
 * **« Créer »** : l'action nécessite une action manuelle de la part de l'utilisateur. Une création est forcément *ex nihilo*.
     * Ne pas l'associer au terme « nouveau », ce qui créerait un pléonasme (terme ou expression qui répète ce qui vient d'être énoncé). 
-
 * **« Générer »** : fait référence à la notion d'automatisation. Le terme décrit une action qui ne nécessite pas d'action particulière de l'utilisateur. C'est la machine qui fait le travail. 
 
 | ✅ | ❌ |
@@ -30,19 +28,14 @@
 ### **Archiver / Retirer / Supprimer** 
 
 * **« Archiver » :** la donnée n'est pas supprimable, on a besoin de la conserver mais on ne l'affiche pas à l'utilisateur.
-
 * **« Retirer » :** l'action ne détruit pas l'objet, mais le retire d'un contexte précis. C'est le pendant de « Ajouter ».
-
 * **On utilise « Supprimer » dans tous les autres cas**, quand des données sont en jeu. Si c'est au contraire une action qui est en jeu, on utilise **«** **Annuler** **».**
 
 ### **Annuler / Fermer / Ignorer / Quitter**
 
 * **« Annuler »** : on arrête une action spécifique, ou un processus. « Annuler » doit être associé à un bouton d'action primaire ou à un bouton d'enregistrement.
-
 * **« Fermer »** n'existe que dans le cadre d'une dialog de lecture seule, sans bouton d'action associé.
-
 * **« Ignorer »** : exclusivement utilisé dans un contexte où la complétion de la dialog est optionnelle.
-
 * **« Quitter »** : c’est abandonner un processus entamé sans que cela entraîne un non-enregistrement, ou le renoncement à une action décisive. Contrairement à « Annuler ». 
 
 « Quitter », c’est aussi revenir à un écran précédent. 
@@ -51,7 +44,7 @@
 
 * **« Continuer »** : permet de signifier qu'on aborde un enchaînement d'actions. 
 
-Il n'entraîne pas d'action d'enregistrement, qui devrait être explicitée ("Enregistrer et continuer"). 
+Il n'entraîne pas d'action d'enregistrement, qui devrait être explicitée ("Enregistrer et continuer").
 
 * **Évitons d’utiliser « Poursuivre ».** 
 
@@ -75,25 +68,21 @@ Le sens de “poursuivre” est “continuer sans relâche.”
 ### **Enregistrer / Envoyer**
 
 * **« Enregistrer »** : si on envoie un message au serveur, on utilise cette terminologie.
-
 * **« Envoyer » :** s'utilise lorsque l'on s'adresse à une seule personne.
 
 ### **Déléguer / Transférer**
 
 * **« Déléguer » :** désigne une action qu'une personne peut ou doit réaliser au nom de l'utilisateur.
-
 * **« Transférer » :** indique une transmission d'information qui ne nécessite pas forcément d'action de la part de la personne qui la reçoit. L'information est transmise telle quelle, sans transformation.
 
 ### **Lancer**
 
 * **« Lancer une campagne »** : désigne le fait de rendre publique une enquête collaborateur.
-
 * **Évitons l'utilisation du verbe « démarrer »** car il appartient au registre familier employé dans le sens de « mettre en train quelque chose, le lancer, le commencer, l'entreprendre ».
 
 ### **Marquer / Indiquer**
 
 * **« Marquer comme » :** on effectue une action pour soi ou son "futur" soi.
-
 * **« Indiquer » :** s'adresse à une autre personne.
 
 ### **Modifier**
@@ -103,9 +92,7 @@ Le sens de “poursuivre” est “continuer sans relâche.”
 ### **Sélectionner / Choisir**
 
 * **« Sélectionner » :** on manipule un ou plusieurs objets similaires.
-
 * **« Choisir » :** l'action porte sur une multitude de formats différents.
-
 * **Évitons l'utilisation du verbe « récupérer »** car il appartient au registre familier employé dans le sens de **« sélectionner, choisir »** un élément pour baser une opération (exemple : sélectionner les résultats d'une enquête collaborateur pour justifier une augmentation de son salaire).
 
 *Luccasien·ne, avez-vous des questions, des remarques, un témoignage ?* 

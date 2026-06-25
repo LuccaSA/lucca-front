@@ -170,6 +170,10 @@ export function writeVersionManifest(skillsDir: string, version: VersionConfig, 
 	});
 	manifest.latest = allVersions[0] ?? versionKey;
 
+	// Re-emit versions in chronological (ascending) order — insertion order would otherwise drift
+	// whenever a patch of an older minor is (re)generated after a newer version (ends up last).
+	manifest.versions = Object.fromEntries([...allVersions].reverse().map((v) => [v, manifest.versions[v]]));
+
 	fs.writeFileSync(manifestPath, JSON.stringify(manifest, null, 2) + '\n', 'utf-8');
 }
 

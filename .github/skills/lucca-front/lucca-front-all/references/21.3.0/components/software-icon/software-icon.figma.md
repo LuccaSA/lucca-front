@@ -11,5 +11,5 @@
 
 | Property | Type | Values |
 |----------|------|--------|
-| `icon` | VARIANT | `absences` · `timesheet` · `projects` · `office` · `shifts` · `performance` · `engagement` · `training` · `recruitment` · `mood` · `employee-administration` · `shared-documents` · `analytics` · `faces` · `business-expenses` · `invoices` · `payment-methods` · `accounting-assistant` · `certified-einvoicing-platform` · `compensation` · `payslip` · `benefits` · `payroll-assistant` · `administration` · `cloud-control` · `lucca` · `sandbox` · `clientCenter` · `store` · `ask-lucca` · `calendar` |
+| `icon` | VARIANT | `absences` · `timesheet` · `projects` · `office` · `shifts` · `performance` · `engagement` · `training` · `recruitment` · `mood` · `employee-administration` · `shared-documents` · `analytics` · `faces` · `business-expenses` · `invoices` · `payment-methods` · `accounting-assistant` · `certified-einvoicing-platform` · `compensation` · `payslip` · `benefits` · `payroll-assistant` · `administration` · `cloud-control` · `lucca` · `sandbox` · `clientCenter` · `store` · `calendar` · `ask-lucca` · `ask-salesforce` |
 | `disabled` | VARIANT | `true` · `false` |
