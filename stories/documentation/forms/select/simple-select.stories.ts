@@ -92,7 +92,6 @@ export const Basic = generateStory({
 	[clearable]="clearable"
 	[loading]="loading"
 	[(ngModel)]="selectedLegume"
-	noClue
 >
 	<ng-container *luOption="let legume; select: selectRef">{{ legume.name }}</ng-container>
 </lu-simple-select>`,
@@ -235,9 +234,9 @@ export const WithPagination = generateStory({
 	template: `<lu-simple-select
 	#selectRef
 	[(ngModel)]="selectedLegume"
-	[options]="legumes | slice : 0 : page * 10"
+	[options]="legumes | filterLegumes:clue | slice : 0 : page * 10"
 	(nextPage)="page = page + 1"
-	noClue
+	(clueChange)="clue = $event"
 >
 	<ng-container *luOption="let legume; select: selectRef">{{ legume.name }}</ng-container>
 </lu-simple-select>`,
@@ -255,7 +254,8 @@ export const WithClearer = generateStory({
 	template: `<lu-simple-select
 	#selectRef
 	[(ngModel)]="selectedLegume"
-	[options]="legumes"
+	[options]="legumes | filterLegumes:clue"
+	(clueChange)="clue = $event"
 	clearable
 />`,
 	neededImports: {
@@ -283,7 +283,8 @@ export const WithDisabledOptions = generateStory({
 	template: `<lu-simple-select
 	#selectRef
 	[(ngModel)]="selectedLegume"
-	[options]="legumes"
+	[options]="legumes | filterLegumes:clue"
+	(clueChange)="clue = $event"
 >
 	<ng-container *luOption="let legume; select: selectRef" [luDisabledOption]="legume.index % 2 === 0">{{ legume.name }}</ng-container>
 </lu-simple-select>`,
@@ -545,7 +546,8 @@ export const Tree = generateStory({
 	description: '',
 	template: `<lu-simple-select
 	[treeSelect]="groupingFn"
-	[options]="legumes"
+	[options]="legumes | filterLegumes:clue"
+	(clueChange)="clue = $event"
 	[(ngModel)]="selectedTree"
 ></lu-simple-select>`,
 	neededImports: {
