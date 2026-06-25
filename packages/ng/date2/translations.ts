@@ -7,6 +7,7 @@
 		previous: 'Précédent',
 		next: 'Suivant',
 		clear: 'Vider ce champ',
+		weekNumber: 'Numéro de semaine',
 	},
 	en: {
 		from: 'From',
@@ -16,5 +17,6 @@
 		previous: 'Previous',
 		next: 'Next',
 		clear: 'Clear',
+		weekNumber: 'Week number',
 	},
 };

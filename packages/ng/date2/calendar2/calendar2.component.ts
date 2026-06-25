@@ -17,6 +17,7 @@ import {
 	isAfter,
 	isSameDay,
 	isSameMonth,
+	isSameWeek,
 	isSameYear,
 	isWithinInterval,
 	lastDayOfMonth,
@@ -41,6 +42,7 @@ import { CellStatus } from './cell-status';
 import { DateRange } from './date-range';
 
 const MODE_HIERARCHY: Array<CalendarMode | null> = ['day', 'month', 'year', null];
+const WEEK_MODE_HIERARCHY: Array<CalendarMode | null> = ['week', 'month', 'year', null];
 
 @Component({
 	selector: 'lu-calendar2',
@@ -278,14 +280,16 @@ export class Calendar2Component implements OnInit {
 		// On cell clicked, if display mode is same as mode, emit value
 		// Else, zoom in to new mode
 		if (this.displayMode() === this.mode()) {
-			this.dateClicked.emit(date);
+			const emittedDate = this.mode() === 'week' ? startOfWeek(date, this.#weekOptions) : date;
+			this.dateClicked.emit(emittedDate);
 		} else {
 			// Check that we are able to zoom in
-			const maxZoomLevel = MODE_HIERARCHY.indexOf(this.mode());
-			const currentZoomLevel = MODE_HIERARCHY.indexOf(this.displayMode());
+			const hierarchy = this.mode() === 'week' ? WEEK_MODE_HIERARCHY : MODE_HIERARCHY;
+			const maxZoomLevel = hierarchy.indexOf(this.mode());
+			const currentZoomLevel = hierarchy.indexOf(this.displayMode());
 			const targetZoomLevel = currentZoomLevel - 1;
 			if (targetZoomLevel >= 0 && targetZoomLevel >= maxZoomLevel) {
-				const newZoomLevel = MODE_HIERARCHY[targetZoomLevel];
+				const newZoomLevel = hierarchy[targetZoomLevel];
 				switch (newZoomLevel) {
 					case 'year':
 						this.date.set(startOfDecade(date));
@@ -293,6 +297,7 @@ export class Calendar2Component implements OnInit {
 					case 'month':
 						this.date.set(startOfYear(date));
 						break;
+					case 'week':
 					case 'day':
 						this.date.set(startOfMonth(date));
 				}
@@ -328,7 +333,7 @@ export class Calendar2Component implements OnInit {
 		const isFirstDayOfMonth = isDayMode && rangeInfo && isSameDay(startOfMonth(date), rangeInfo.range.start);
 
 		// Is this the current period? Will match if same day as today, or same month in month display, or same year if year display
-		const isCurrent = comparePeriods(this.displayMode(), new Date(), date) && !this.hideToday();
+		const isCurrent = comparePeriods(this.displayMode(), new Date(), date, this.#weekOptions) && !this.hideToday();
 
 		// Are we currently in a range that's being created (start date selected, end date is being hovered)
 		const isInProgress = rangeInfo?.range && !rangeInfo.range.end && this.dateHovered() !== null;
@@ -372,8 +377,8 @@ export class Calendar2Component implements OnInit {
 			// We're progress body if middle of day is in the current range
 			isProgressBody = isWithinInterval(addHours(startOfDay(date), 12), hoveredRange);
 			// Overflow cannot be start status for CSS, same for end
-			isProgressStart = !isOverflow && comparePeriods(this.displayMode(), date, hoveredRange.start as Date);
-			isProgressEnd = !isOverflow && comparePeriods(this.displayMode(), date, hoveredRange.end as Date);
+			isProgressStart = !isOverflow && comparePeriods(this.displayMode(), date, hoveredRange.start as Date, this.#weekOptions);
+			isProgressEnd = !isOverflow && comparePeriods(this.displayMode(), date, hoveredRange.end as Date, this.#weekOptions);
 
 			// This is the case where you clicked a first date and then are hovering it, which requires a specific case for CSS
 			if (isSameDay(rangeInfo.range.start, this.dateHovered() ?? 0)) {
@@ -415,6 +420,19 @@ export class Calendar2Component implements OnInit {
 		};
 	}
 
+	getWeekRowClasses(week: CalendarCellInfo[]): Record<string, boolean> {
+		const firstDay = week[0];
+		return {
+			'is-selected': firstDay?.isSelected ?? false,
+			'is-start': firstDay?.classes['is-start'] ?? false,
+		};
+	}
+
+	getWeekDayCellClasses(day: CalendarCellInfo, isLastDay: boolean): Record<string, boolean> {
+		const { 'is-start': _start, 'is-end': isEnd, ...rest } = day.classes;
+		return isLastDay ? { ...rest, 'is-end': isEnd } : rest;
+	}
+
 	getRangeInfo(date: Date, scope: CalendarMode | null, isOverflow = false) {
 		const range: DateRange | undefined = this.ranges().find((range: DateRange) => {
 			const isSameScope = (range.scope || 'day') === scope;
@@ -442,6 +460,8 @@ export class Calendar2Component implements OnInit {
 					switch (this.mode()) {
 						case 'day':
 							return isSameDay(date, range.start);
+						case 'week':
+							return isSameWeek(date, range.start, this.#weekOptions);
 						case 'month':
 							return isSameMonth(date, range.start);
 						case 'year':

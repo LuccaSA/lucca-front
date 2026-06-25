@@ -38,13 +38,13 @@ export class Calendar2CellDirective {
 	}
 
 	readonly isTabbableDate = computed(() => {
-		return comparePeriods(this.luCalendar2Mode(), this.luCalendar2Date(), this.#tabbableDate());
+		return comparePeriods(this.luCalendar2Mode(), this.luCalendar2Date(), this.#tabbableDate(), { weekStartsOn: getJSFirstDayOfWeek(this.#weekInfo) });
 	});
 
 	keydown($event: Event): void {
 		// See https://www.w3.org/WAI/ARIA/apg/patterns/dialog-modal/examples/datepicker-dialog/#ex_label for keyboard
 		// navigation standards on date pickers
-		const cellsPerRow = this.luCalendar2Mode() === 'day' ? 7 : 3;
+		const cellsPerRow = this.luCalendar2Mode() === 'day' ? 7 : this.luCalendar2Mode() === 'week' ? 1 : 3;
 		const datePropertyToEdit = modeToDurationKey[this.luCalendar2Mode()];
 		switch (($event as KeyboardEvent).key) {
 			case 'ArrowRight':
@@ -76,7 +76,7 @@ export class Calendar2CellDirective {
 				}
 				break;
 			case 'PageUp':
-				if (this.luCalendar2Mode() === 'day') {
+				if (this.luCalendar2Mode() === 'day' || this.luCalendar2Mode() === 'week') {
 					if (($event as KeyboardEvent).shiftKey) {
 						this.#tabbableDate.set(subYears(this.luCalendar2Date(), 1));
 					} else {
@@ -86,7 +86,7 @@ export class Calendar2CellDirective {
 				}
 				break;
 			case 'PageDown':
-				if (this.luCalendar2Mode() === 'day') {
+				if (this.luCalendar2Mode() === 'day' || this.luCalendar2Mode() === 'week') {
 					if (($event as KeyboardEvent).shiftKey) {
 						this.#tabbableDate.set(addYears(this.luCalendar2Date(), 1));
 					} else {

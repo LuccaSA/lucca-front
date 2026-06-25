@@ -115,8 +115,7 @@
 			<table class="calendar-table" role="grid" aria-labelledby="calendar-week-name">
 				<thead class="calendar-table-head">
 				<tr class="calendar-table-head-row">
-					<!-- TODO i18n -->
-					<th scope="col" class="calendar-table-head-row-cell"><span class="pr-u-mask">Numéro de semaine</span></th>
+					<th scope="col" class="calendar-table-head-row-cell"><span class="pr-u-mask">{{ intl().weekNumber }}</span></th>
 					@for (day of daysOfWeek; track day.long) {
 						<th class="calendar-table-head-row-cell" scope="col">
 							<span [attr.data-content-after]="day.short.substring(0, 1)" aria-hidden="true"></span>
@@ -128,18 +127,31 @@
 				<tbody class="calendar-table-body">
 					@for (week of monthGridDisplay(); track $index; let isLastWeek = $last) {
 						<tr class="calendar-table-body-row">
-							<th scope="row" class="calendar-table-body-cell">
-								<button type="button" class="calendar-table-body-row-cell-action" tabindex="-1">
+							<th scope="row"
+								class="calendar-table-body-row-cell"
+								[class]="getWeekRowClasses(week)"
+								[attr.aria-selected]="week[0].isSelected || null">
+								<button
+									type="button"
+									class="calendar-table-body-row-cell-action"
+									[luCalendar2Cell]="0"
+									[luCalendar2Date]="week[0].date"
+									luCalendar2Mode="week"
+									[attr.aria-disabled]="week[0].disabled ? 'true' : null"
+									(click)="!week[0].disabled ? onCellClicked(week[0].date) : null"
+									(keydown.space)="!week[0].disabled ? onCellClicked(week[0].date) : null"
+									(focus)="dateHovered.set(week[0].date)"
+									(blur)="dateHovered.set(null)"
+								>
 									<span class="calendar-table-body-row-cell-action-week">{{ week[0]?.week }}</span>
 								</button>
 							</th>
-							@for (day of week; track dayIndex; let dayIndex = $index) {
+							@for (day of week; track dayIndex; let dayIndex = $index; let isLastDay = $last) {
 								<td
 									class="calendar-table-body-row-cell"
 									(mouseenter)="day.isOverflow ? null : dateHovered.set(day.date)"
 									(mouseleave)="day.isOverflow ? null : dateHovered.set(null)"
-									[attr.aria-selected]="day.isSelected && !day.isOverflow"
-									[class]="day.classes"
+									[class]="getWeekDayCellClasses(day, isLastDay)"
 								>
 									@if (!day.noButton) {
 										<button

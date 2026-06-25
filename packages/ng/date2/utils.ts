@@ -10,7 +10,8 @@ import {
 	startOfDecade,
 	startOfMonth,
 	startOfWeek,
-	startOfYear
+	startOfYear,
+	WeekOptions,
 } from "date-fns";
 import { CalendarWeekDay, CalendarWeekInfo } from './calendar.token';
 import { CalendarMode } from './calendar2/calendar-mode';
@@ -41,13 +42,15 @@ const modeToCalendarComparator: Record<CalendarMode, (a: Date, b: Date) => boole
 
 const modeToPeriodStart: Record<CalendarMode, (date: Date) => Date> = {
 	day: startOfMonth,
-	week: startOfWeek,
+	week: startOfMonth, // week mode pages by month (the grid shows a full month of weeks)
 	month: startOfYear,
 	year: startOfDecade,
 };
 
-export function comparePeriods(mode: CalendarMode | null, a: Date, b: Date): boolean {
-	return mode ? modeToComparator[mode](a, b) : false;
+export function comparePeriods(mode: CalendarMode | null, a: Date, b: Date, weekOptions?: WeekOptions): boolean {
+	if (!mode) return false;
+	if (mode === 'week') return isSameWeek(a, b, weekOptions);
+	return modeToComparator[mode](a, b);
 }
 
 export function compareCalendarPeriods(mode: CalendarMode, a: Date, b: Date): boolean {
