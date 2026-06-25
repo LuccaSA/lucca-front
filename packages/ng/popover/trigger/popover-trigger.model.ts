@@ -12,7 +12,7 @@ import {
 } from '@angular/cdk/overlay';
 import { ComponentPortal, TemplatePortal } from '@angular/cdk/portal';
 import { ElementRef, ViewContainerRef } from '@angular/core';
-import { generateId } from '@lucca-front/ng/core';
+import { generateId, waitForAnimations } from '@lucca-front/ng/core';
 import { Observable, Subject, Subscription, timer } from 'rxjs';
 import { debounce, distinctUntilChanged, map } from 'rxjs/operators';
 import { ILuPopoverPanel, LuPopoverScrollStrategy } from '../panel/index';
@@ -232,7 +232,7 @@ export abstract class ALuPopoverTrigger<TPanel extends ILuPopoverPanel = ILuPopo
 		if (this._overlayRef) {
 			/** Overlay can still be attached if close has been triggered by mouse leave. */
 			if (this._overlayRef.hasAttached()) {
-				this._overlayRef.detach();
+				this._playLeaveAnimationThenDetach(this._overlayRef);
 			}
 
 			/** unsubscribe to backdrop click if it was defined */
@@ -244,6 +244,27 @@ export abstract class ALuPopoverTrigger<TPanel extends ILuPopoverPanel = ILuPopo
 			this._resetPopover();
 			this._emitClose();
 		}
+	}
+
+	/**
+	 * Plays the panel's leave animation (CSS class `lu-popover-leave`) and detaches the
+	 * overlay once it's done. The CDK detaches the portal synchronously, which would
+	 * prevent any leave animation from being visible, so we keep the element in the DOM
+	 * until the animation finishes. Resolves immediately under reduced motion.
+	 */
+	protected _playLeaveAnimationThenDetach(overlayRef: OverlayRef): void {
+		const panel = overlayRef.overlayElement.querySelector<HTMLElement>('.lu-popover-panel');
+		if (!panel) {
+			overlayRef.detach();
+			return;
+		}
+
+		panel.classList.add('lu-popover-leave');
+		void waitForAnimations(panel).then(() => {
+			if (overlayRef.hasAttached()) {
+				overlayRef.detach();
+			}
+		});
 	}
 
 	/** Removes the popover from the DOM. */
