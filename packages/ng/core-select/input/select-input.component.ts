@@ -201,7 +201,7 @@ export abstract class ALuSelectInputComponent<TOption, TValue> implements OnDest
 	treeGenerator?: TreeGenerator<TOption, TreeNode<TOption>>;
 
 	readonly clueChange$ = new Subject<string>();
-	readonly clueChange = output<string>();
+	clueChange = outputFromObservable(this.clueChange$);
 	readonly nextPage$ = new Subject<void>();
 	nextPage = outputFromObservable(this.nextPage$);
 	readonly addOption = output<string>();
@@ -232,7 +232,6 @@ export abstract class ALuSelectInputComponent<TOption, TValue> implements OnDest
 			this.openPanel(clue);
 		} else if (this.lastEmittedClue !== clue) {
 			this.clueChange$.next(clue);
-			this.clueChange.emit(clue);
 			this.lastEmittedClue = clue;
 		}
 	}
