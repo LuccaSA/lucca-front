@@ -1,5 +1,7 @@
 # loading — Design
 
+**Mots-clés**chargement, spinner, loader, attente
+
 ## Règles d'usage
 
 ### Positionnement

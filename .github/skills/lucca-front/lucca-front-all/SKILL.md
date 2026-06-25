@@ -17,7 +17,7 @@ description: >
 2. Le segment de version est ce numéro (ex: `21.2.1`). Tous les chemins ci-dessous en dépendent.
 3. Si la version exacte est absente de la liste, prends le **plus haut patch disponible ≤** la version installée, **dans la même mineure**.
 
-**Versions disponibles** : 21.3.0, 21.2.4, 21.2.2, 21.2.1, 21.2.0, 21.1.4, 21.1.3, 21.1.2, 21.1.1, 21.1.0, 21.0.5, 21.0.4, 21.0.3, 21.0.2, 21.0.1, 21.0.0
+**Versions disponibles** : 21.3.0, 21.2.5, 21.2.4, 21.2.2, 21.2.1, 21.2.0, 21.1.4, 21.1.3, 21.1.2, 21.1.1, 21.1.0, 21.0.5, 21.0.4, 21.0.3, 21.0.2, 21.0.1, 21.0.0
 
 Si la version ne peut pas être déterminée → **s'arrêter et demander à l'utilisateur**. Ne jamais supposer une version par défaut.
 

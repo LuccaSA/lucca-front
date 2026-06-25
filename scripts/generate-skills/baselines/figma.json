@@ -1744,8 +1744,9 @@
 				"sandbox",
 				"clientCenter",
 				"store",
+				"calendar",
 				"ask-lucca",
-				"calendar"
+				"ask-salesforce"
 			],
 			"disabled": [
 				"true",
