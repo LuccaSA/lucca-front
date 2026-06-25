@@ -79,8 +79,6 @@
 	--palettes-assets-secondary-light: var(--palettes-#{map.get(map.get(config.$palettesAssets, config.$product), 'secondary')}-100);
 	// stylelint-enable custom-property-pattern
 
-	@include core.cssvars('colors', config.$colorsRgb, '-rgb');
-
 	@include core.cssvars('palettes-ai', config.$paletteAI);
 	@include core.cssvars('pr-t-color', config.$tokenAI, '-ai');
 
