@@ -422,8 +422,9 @@ export abstract class ALuSelectInputComponent<TOption, TValue> implements OnDest
 				}
 
 				return debouncedClue$.pipe(
-					switchMap((clue) =>
-						page$.pipe(
+					switchMap((clue) => {
+						ds.reset?.();
+						return page$.pipe(
 							concatMap((page) => {
 								this.loading.set(true);
 								return ds.getOptions({ clue, page }).pipe(
@@ -450,8 +451,8 @@ export abstract class ALuSelectInputComponent<TOption, TValue> implements OnDest
 							}),
 							map((pages) => Object.values(pages).flat()),
 							finalize(() => this.loading.set(false)), // Avoid infinite loading on complete API or error
-						),
-					),
+						);
+					}),
 				);
 			}),
 		);
