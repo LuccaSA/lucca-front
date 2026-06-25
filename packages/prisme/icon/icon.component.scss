@@ -5,10 +5,6 @@ lu-icon {
 }
 
 @layer mods {
-	// .icon-color-primary is deprecated
-	// .icon-color-secondary is deprecated
-	.icon-color-primary,
-	.icon-color-secondary,
 	.icon-color-product {
 		color: var(--palettes-product-700);
 	}

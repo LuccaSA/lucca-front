@@ -132,9 +132,6 @@ $palettesOtherProduct: () !default;
 $palettesDecorative: 'kiwi', 'cucumber', 'mint', 'lagoon', 'blueberry', 'lavender', 'watermelon', 'pumpkin' !default;
 $palettesDecorativeMandatory: 'pineapple', 'lime', 'grape', 'glacier', 'pineappleContrasted';
 
-// pineapple, lime, grape, glacier
-$palettesDeprecated: ('lucca', 'grey', 'primary', 'secondary') !default;
-
 @if $palettesOtherProduct == 'all' {
 	$palettesOtherProduct: ('pagga', 'poplee', 'coreHR', 'timmi', 'cleemy', 'cc');
 }
@@ -146,7 +143,6 @@ $palettesAll: function.flatMap(
 	$palettesOtherProduct,
 	$palettesDecorative,
 	$palettesDecorativeMandatory,
-	$palettesDeprecated
 );
 
 $palettesAssets: (
@@ -594,13 +590,9 @@ $productsInterpolation: (
 );
 
 $palettesInterpolation: (
-	'lucca': $brand,
 	'brand': $brand,
 	'brandContrasted': $brandContrasted,
-	'grey': $neutral,
 	'neutral': $neutral,
-	'primary': map.get($productsInterpolation, $product),
-	'secondary': map.get($productsInterpolation, $product),
 	'product': map.get($productsInterpolation, $product),
 	'navigation': $navigation,
 	'orchid': $orchid,
@@ -789,19 +781,10 @@ $textLink: (
 
 // Deprecated
 
-// $colors are deprecated
-$colors: (
-	'white': #ffffff,
-	'black': #121212,
-);
-
 // $colorsRgb are deprecated
 $colorsRgb: (
-	'white': '255, 255, 255',
 	'neutral-400': '172, 187, 215',
 	'neutral-900': '19, 29, 53',
-	'grey-400': '172, 187, 215',
-	'grey-900': '19, 29, 53',
 ) !default;
 
 // $borderRadius are deprecated
