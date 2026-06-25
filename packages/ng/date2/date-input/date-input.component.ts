@@ -153,7 +153,7 @@ export class DateInputComponent extends AbstractDateComponent implements OnInit,
 		return {
 			classes: [...(infoFromInput?.classes || [])],
 			disabled: infoFromInput?.disabled || !this.isInMinMax(date, mode),
-			selected: isNotNil(selectedDate) && this.calendarMode() === mode && comparePeriods(mode, date, selectedDate),
+			selected: isNotNil(selectedDate) && this.calendarMode() === mode && comparePeriods(mode, date, selectedDate, this.weekOptions),
 			label: infoFromInput?.label,
 		};
 	};
@@ -232,6 +232,7 @@ export class DateInputComponent extends AbstractDateComponent implements OnInit,
 		effect(() => {
 			this.#luClass.setState({
 				'mod-day': this.mode() === 'day',
+				'mod-week': this.mode() === 'week',
 				'mod-month': this.mode() === 'month',
 				'mod-year': this.mode() === 'year',
 			});
@@ -244,7 +245,7 @@ export class DateInputComponent extends AbstractDateComponent implements OnInit,
 		});
 
 		ɵeffectWithDeps([this.calendarMode, this.tabbableDate], (calendarMode, tabbableDate) => {
-			if (tabbableDate && !comparePeriods(calendarMode ?? null, tabbableDate, this.currentDate())) {
+			if (tabbableDate && !comparePeriods(calendarMode ?? null, tabbableDate, this.currentDate(), this.weekOptions)) {
 				this.currentDate.set(startOfPeriod(calendarMode ?? null, tabbableDate));
 			}
 			if (!this.isNavigationButtonFocused && !this.inputFocused()) {

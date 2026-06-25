@@ -163,3 +163,76 @@ export const BasicTEST = createTestStory(Basic, async ({ canvasElement, step }) 
 		await waitForAngular();
 	});
 });
+
+export const Week: StoryObj<DateInputComponent & { selected: Date; presentation: boolean }> = {
+	name: 'Week',
+	args: {
+		disableOverflow: false,
+		hideOverflow: false,
+		hideToday: false,
+		hideWeekend: false,
+		clearable: false,
+		clearBehavior: 'clear',
+		widthAuto: false,
+		mode: 'week',
+		format: 'date',
+		presentation: false,
+		selected: null,
+		focusedDate: new Date('2024-10-14'),
+	},
+};
+
+export const WeekTEST = createTestStory(Week, async ({ canvasElement, step }) => {
+	const canvas = within(canvasElement);
+	const input = canvas.getByRole('combobox');
+
+	await step('Souris : ouvrir le calendrier et sélectionner une semaine', async () => {
+		await userEvent.click(input);
+		await waitForAngular();
+
+		const rowheaders = within(screen.getByRole('grid')).getAllByRole('rowheader');
+		await userEvent.click(within(rowheaders[2]).getByRole('button'));
+		await waitForAngular();
+
+		// Le popover se ferme et l'input affiche la semaine sélectionnée
+		await expect(input).not.toHaveValue('');
+
+		// Réouverture : exactement une ligne de semaine doit être sélectionnée
+		await userEvent.click(input);
+		await waitForAngular();
+		const selectedWeeks = within(screen.getByRole('grid'))
+			.getAllByRole('rowheader')
+			.filter((th) => th.getAttribute('aria-selected') === 'true');
+		await expect(selectedWeeks).toHaveLength(1);
+
+		await userEvent.keyboard('{Escape}');
+		await waitForAngular();
+	});
+
+	await step('Clavier : naviguer dans le calendrier et sélectionner une semaine', async () => {
+		await userEvent.click(input);
+		await waitForAngular();
+		// Le focus est sur le bouton de la semaine tabbable
+
+		// Descendre d'une semaine
+		await userEvent.keyboard('{ArrowDown}');
+		await waitForAngular();
+
+		// Sélectionner avec Entrée
+		await userEvent.keyboard('{Enter}');
+		await waitForAngular();
+
+		await expect(input).not.toHaveValue('');
+
+		// Réouverture : exactement une ligne de semaine doit être sélectionnée
+		await userEvent.click(input);
+		await waitForAngular();
+		const selectedWeeks = within(screen.getByRole('grid'))
+			.getAllByRole('rowheader')
+			.filter((th) => th.getAttribute('aria-selected') === 'true');
+		await expect(selectedWeeks).toHaveLength(1);
+
+		await userEvent.keyboard('{Escape}');
+		await waitForAngular();
+	});
+});

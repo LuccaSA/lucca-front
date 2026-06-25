@@ -4,7 +4,7 @@ export function getDateFormat(locale: string, mode: CalendarMode = 'day'): strin
 	return new Intl.DateTimeFormat(locale)
 		.formatToParts(new Date('01/01/2024'))
 		.reduce((acc, part) => {
-			if (part.type === 'day' && mode === 'day') {
+			if (part.type === 'day' && (mode === 'day' || mode === 'week')) {
 				return `${acc}${'d'.repeat(part.value.length)}`;
 			}
 			if (part.type === 'month' && mode !== 'year') {
@@ -35,11 +35,11 @@ export function getLocalizedDateFormat(locale: string, period: CalendarMode = 'd
 		year: 'numeric',
 	};
 
-	if (period === 'month' || period === 'day') {
+	if (period === 'month' || period === 'day' || period === 'week') {
 		intlConfig.month = 'numeric';
 	}
 
-	if (period === 'day') {
+	if (period === 'day' || period === 'week') {
 		intlConfig.day = 'numeric';
 	}
 
