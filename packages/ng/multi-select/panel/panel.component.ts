@@ -143,7 +143,7 @@ export class LuMultiSelectPanelComponent<T> implements AfterViewInit, CoreSelect
 						s.delete(groupKey);
 						return s;
 					});
-					this.#applyGroupToggle(allGroupOptions as T[], allGroupOptions as T[]);
+					this.#applyGroupToggle(allGroupOptions, allGroupOptions);
 				})
 				.catch(() => {
 					this.groupLoadingKeys.update((keys) => {
