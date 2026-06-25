@@ -289,6 +289,87 @@ export const Basic = generateStory({
 
 export const BasicTEST = createTestStory(Basic, basePlay);
 
+export const WithClue = generateStory({
+	name: 'Clue',
+	description: `Il est possible d'afficher une barre de recherche pour filtrer les options en écoutant l'évènement \`(clueChange)\`.`,
+	template: `<lu-multi-select
+	#selectRef
+	[clearable]="clearable"
+	[loading]="loading"
+	[keepSearchAfterSelection]="keepSearchAfterSelection"
+	[(ngModel)]="selectedLegumes"
+	[options]="legumes | filterLegumes:clue"
+	(clueChange)="clue = $event"
+	[maxValuesShown]="maxValuesShown"
+/>`,
+	neededImports: {
+		'@lucca-front/ng/multi-select': ['LuMultiSelectInputComponent'],
+	},
+	storyPartial: {
+		args: {
+			selectedLegumes: [],
+			keepSearchAfterSelection: false,
+		},
+	},
+});
+
+export const WithClueTEST = createTestStory(WithClue, async (context) => {
+	await basePlay(context);
+	const canvas = within(context.canvasElement);
+	const input = canvas.getByRole('combobox');
+
+	await context.step('Search filters options', async () => {
+		const clearButton = canvas.queryAllByRole('button').find((b) => b.className.includes('clear'));
+		if (clearButton) {
+			await userEvent.click(clearButton);
+			await waitForAngular();
+		}
+		await userEvent.click(input);
+		await waitForAngular();
+		await expect(screen.getByRole('listbox')).toBeVisible();
+		await userEvent.type(input, 'artichaut');
+		await waitForAngular();
+		const panel = within(screen.getByRole('listbox'));
+		const options = await panel.findAllByRole('option');
+		await expect(options).toHaveLength(1);
+		await expect(options[0]).toHaveTextContent('Artichaut');
+		await userEvent.click(options[0]);
+		await waitForAngular();
+		await userEvent.keyboard('{Escape}');
+		await waitForAngular();
+		await waitFor(() => {
+			expect(screen.queryByRole('listbox')).not.toBeInTheDocument();
+		});
+		await checkValues(input, ['Artichaut']);
+	});
+
+	await context.step('Keyboard: search and select', async () => {
+		const clearButton = canvas.queryAllByRole('button').find((b) => b.className.includes('clear'));
+		if (clearButton) {
+			await userEvent.click(clearButton);
+			await waitForAngular();
+		}
+		input.focus();
+		await expect(input).toHaveFocus();
+		await userEvent.keyboard('{ArrowDown}');
+		await waitForAngular();
+		await expect(screen.getByRole('listbox')).toBeVisible();
+		await userEvent.type(input, 'carotte');
+		await waitForAngular();
+		const panel = within(screen.getByRole('listbox'));
+		const options = await panel.findAllByRole('option');
+		await expect(options).toHaveLength(1);
+		await userEvent.keyboard('{Enter}');
+		await waitForAngular();
+		await userEvent.keyboard('{Escape}');
+		await waitForAngular();
+		await waitFor(() => {
+			expect(screen.queryByRole('listbox')).not.toBeInTheDocument();
+		});
+		await checkValues(input, ['Carotte']);
+	});
+});
+
 export const WithMultiDisplayer = generateStory({
 	name: 'With MultiDisplayer',
 	description:
