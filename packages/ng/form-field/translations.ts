@@ -23,4 +23,7 @@
 	en: {
 		counter: 'Your message is {{current}} characters long. A maximum of {{max}} characters is allowed.',
 	},
+	pl: {
+		counter: 'Publikacja ma długość {{current}} znaków. Dozwolona jest maksymalna długość {{max}} znaków.',
+	},
 };
