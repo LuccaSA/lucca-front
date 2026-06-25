@@ -7,11 +7,11 @@ import { GridColumnComponent } from '@lucca-front/ng/grid';
 	selector: 'lu-test',
 	standalone: true,
 	template: `
-		<lu-grid>
-			<lu-grid-column colspan="6">div migrated</lu-grid-column>
-			<lu-grid-column colspan="6">span migrated</lu-grid-column>
+		<div class="grid">
+			<div class="grid-column" style="--grid-colspan: 6">div migrated</div>
+			<span class="grid-column" style="--grid-colspan: 6">span migrated</span>
 			<button class="grid-column" style="--grid-colspan: 6">button skipped</button>
-		</lu-grid>
+		</div>
 		<lu-grid mode="auto">
 			<lu-grid-column>span auto migrated</lu-grid-column>
 		</lu-grid>

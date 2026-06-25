@@ -37,6 +37,7 @@ export interface HtmlGridColumn {
 	nodeOffset: number;
 	filePath: string;
 	componentTS: SourceFile;
+
 }
 
 // --- CSS custom properties helpers ---
@@ -101,4 +102,3 @@ type NeutralHtmlElement = (typeof NEUTRAL_HTML_ELEMENTS)[number];
 export function isNeutralElement(name: string): name is NeutralHtmlElement {
 	return (NEUTRAL_HTML_ELEMENTS as readonly string[]).includes(name);
 }
-

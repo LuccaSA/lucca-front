@@ -1,3 +1,4 @@
+import { TmplAstElement } from '@angular/compiler';
 import { Tree } from '@angular-devkit/schematics';
 import { Change, applyToUpdateRecorder } from '@schematics/angular/utility/change';
 import { SourceFile } from 'typescript';
@@ -175,6 +176,16 @@ function migrateGridColumnNode(col: HtmlGridColumn, templateUpdate: any): void {
 
 // --- Finders ---
 
+function gridHasNonNeutralColumnChildren(node: TmplAstElement): boolean {
+	return node.children.some((child: unknown) => {
+		if (!isInterestingNode(child) || isNeutralElement(child.name)) {
+			return false;
+		}
+		const childClasses = child.attributes.find((attr) => attr.name === 'class')?.value;
+		return !!childClasses?.match(/(^|\s)grid-column(\s|$)/);
+	});
+}
+
 function findHTMLGrids(sourceFile: SourceFile, basePath: string, tree: Tree): HtmlGrid[] {
 	const results: HtmlGrid[] = [];
 	const ngTemplates = extractNgTemplatesIncludingHtml(sourceFile, tree, basePath);
@@ -187,6 +198,9 @@ function findHTMLGrids(sourceFile: SourceFile, basePath: string, tree: Tree): Ht
 			}
 			const classes = node.attributes.find((attr) => attr.name === 'class')?.value;
 			if (!classes?.match(/(^|\s)grid(\s|$)/)) {
+				return;
+			}
+			if (gridHasNonNeutralColumnChildren(node)) {
 				return;
 			}
 
@@ -222,7 +236,7 @@ function findHTMLGridColumns(sourceFile: SourceFile, basePath: string, tree: Tre
 	ngTemplates.forEach((template) => {
 		const htmlAst = new HtmlAst(template.content);
 		htmlAst.visitNodes((node, parent) => {
-			if (!isInterestingNode(node) || !isNeutralElement(node.name)) {
+			if (!isInterestingNode(node)) {
 				return;
 			}
 			const classes = node.attributes.find((attr) => attr.name === 'class')?.value;
@@ -236,6 +250,9 @@ function findHTMLGridColumns(sourceFile: SourceFile, basePath: string, tree: Tre
 			}
 			const parentClasses = parent.attributes.find((attr) => attr.name === 'class')?.value;
 			if (!parentClasses?.match(/(^|\s)grid(\s|$)/)) {
+				return;
+			}
+			if (gridHasNonNeutralColumnChildren(parent)) {
 				return;
 			}
 
