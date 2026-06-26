@@ -1,6 +1,7 @@
 import { ConnectedPosition, Overlay, OverlayConfig, OverlayPositionBuilder, OverlayRef, PositionStrategy, ScrollStrategyOptions } from '@angular/cdk/overlay';
 import { ComponentPortal } from '@angular/cdk/portal';
 import { ChangeDetectorRef, ComponentRef, ElementRef, inject, Injectable, Injector, ViewContainerRef } from '@angular/core';
+import { getPushPanelViewportMargin } from '@lucca-front/ng/core';
 import { addAttributesOnCdkContainer, SELECT_ID, SELECT_LABEL_ID } from '@lucca-front/ng/core-select';
 import { takeUntil } from 'rxjs';
 import { LuMultiSelectPanelComponent } from '../panel';
@@ -141,7 +142,7 @@ export class LuMultiSelectPanelRefFactory {
 			.flexibleConnectedTo(this.elementRef)
 			.withGrowAfterOpen(true)
 			.withLockedPosition(false)
-			.withViewportMargin(8)
+			.withViewportMargin(getPushPanelViewportMargin(this.elementRef.nativeElement.ownerDocument, 8))
 			.withPositions([
 				this.buildPosition('bottom', 'right', config),
 				this.buildPosition('bottom', 'left', config),
