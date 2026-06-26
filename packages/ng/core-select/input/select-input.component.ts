@@ -24,26 +24,8 @@ import { outputFromObservable, toObservable, toSignal } from '@angular/core/rxjs
 import { ControlValueAccessor } from '@angular/forms';
 import { isNotNil, PortalContent, ɵeffectWithDeps } from '@lucca-front/ng/core';
 import { FILTER_PILL_HOST_COMPONENT, FILTER_PILL_INPUT_COMPONENT, FilterPillInputComponent } from '@lucca-front/ng/filter-pills';
-import {
-	BehaviorSubject,
-	catchError,
-	concatMap,
-	defer,
-	distinctUntilChanged,
-	finalize,
-	map,
-	Observable,
-	of,
-	ReplaySubject,
-	scan,
-	startWith,
-	Subject,
-	switchMap,
-	takeUntil,
-	takeWhile,
-	tap,
-	timer,
-} from 'rxjs';
+import { BehaviorSubject, defer, finalize, map, of, ReplaySubject, startWith, Subject, switchMap, takeUntil, tap } from 'rxjs';
+import { buildOptionsFromDataSource } from './select-input.utils';
 import { LuSimpleSelectDefaultOptionComponent } from '../option';
 import { LuSelectPanelRef } from '../panel';
 import { CoreSelectAddOptionStrategy, LuOptionComparer, LuOptionContext, LuOptionGrouping, SELECT_LABEL, SELECT_LABEL_ID, SelectDataSource, SelectDataSourceParams } from '../select.model';
@@ -259,7 +241,19 @@ export abstract class ALuSelectInputComponent<TOption, TValue> implements OnDest
 
 	readonly dataSource = model<SelectDataSource<TOption, unknown>>(this.getDefaultDataSource());
 
-	readonly dataSourceOptions = toSignal(toObservable(this.dataSource).pipe(switchMap((ds) => this.#buildOptionsFromDataSource(ds))), { initialValue: [] as readonly TOption[] });
+	readonly dataSourceOptions = toSignal(
+		toObservable(this.dataSource).pipe(
+			switchMap((ds) =>
+				buildOptionsFromDataSource(ds, {
+					nextPage$: this.nextPage$,
+					clue$: this.clue$,
+					isPanelOpen$: this.isPanelOpen$,
+					setLoading: (v) => this.loading.set(v),
+				}),
+			),
+		),
+		{ initialValue: [] as readonly TOption[] },
+	);
 	clue: string | null = null;
 	// This is the clue stored after we selected an option to know if we should emit an empty clue on open or not
 	lastEmittedClue: string = '';
@@ -396,66 +390,6 @@ export abstract class ALuSelectInputComponent<TOption, TValue> implements OnDest
 		if (this.labelElement) {
 			this.labelElement.id = this.labelId;
 		}
-	}
-
-	#buildOptionsFromDataSource(ds: SelectDataSource<TOption>): Observable<readonly TOption[]> {
-		const page$ = this.nextPage$.pipe(
-			scan((page) => page + 1, 0),
-			startWith(0),
-		);
-
-		const clue$ = this.clue$.pipe(
-			map((clue) => clue ?? ''),
-			distinctUntilChanged(),
-		);
-
-		// If a debounce is specified:
-		// - empty clue ('' ) passes through immediately (initial state / clear)
-		// - non-empty clue is debounced (user is typing)
-		const debouncedClue$ = ds.clueDebounceMs ? clue$.pipe(switchMap((clue) => (clue ? timer(ds.clueDebounceMs!).pipe(map(() => clue)) : of(clue)))) : clue$;
-
-		return this.isPanelOpen$.pipe(
-			distinctUntilChanged(),
-			switchMap((isOpen) => {
-				if (!isOpen) {
-					return of([] as readonly TOption[]);
-				}
-
-				return debouncedClue$.pipe(
-					switchMap((clue) => {
-						ds.reset?.();
-						return page$.pipe(
-							concatMap((page) => {
-								this.loading.set(true);
-								return ds.getOptions({ clue, page }).pipe(
-									catchError(() => of([] as readonly TOption[])),
-									tap(() => this.loading.set(false)),
-									startWith([] as readonly TOption[]),
-									map((items) => ({ items, page })),
-								);
-							}),
-							scan(
-								(acc, { items, page }) => {
-									acc[page] = items;
-									return acc;
-								},
-								{} as Record<number, readonly TOption[]>,
-							),
-							// Stop calling pages when last two pages are empty
-							takeWhile((pages) => {
-								const indexes = Object.keys(pages)
-									.map((p) => parseInt(p))
-									.sort((a, b) => a - b);
-								const lastIndexes = indexes.slice(-2);
-								return lastIndexes.length < 2 || !lastIndexes.every((i) => pages[i]?.length === 0);
-							}),
-							map((pages) => Object.values(pages).flat()),
-							finalize(() => this.loading.set(false)), // Avoid infinite loading on complete API or error
-						);
-					}),
-				);
-			}),
-		);
 	}
 
 	clearValue(event?: Event): void {
