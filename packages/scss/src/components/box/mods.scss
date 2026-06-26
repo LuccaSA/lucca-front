@@ -35,9 +35,7 @@
 	inset-block-end: var(--components-box-arrow-bottom);
 	inset-inline-start: var(--components-box-arrow-left);
 
-	// .mod-grey is deprecated
-	&.mod-neutral,
-	&.mod-grey {
+	&.mod-neutral {
 		--components-box-arrow-background: var(--palettes-neutral-25);
 	}
 }
