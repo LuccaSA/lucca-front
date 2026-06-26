@@ -267,7 +267,9 @@ export function updateRgbaToTransparentize(
 				return;
 			}
 
-			if (isRgba) {
+			const hasAlpha = funcNode.nodes.some((n) => n.type === 'word');
+
+			if (isRgba || hasAlpha) {
 				varNode.nodes = [{ type: 'word', value: newVarName, sourceIndex: 0, sourceEndIndex: newVarName.length }];
 				funcNode.value = 'color.transparentize';
 				hasRgba = true;
