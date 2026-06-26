@@ -1,5 +1,5 @@
 import type { AtRule, Container, Declaration, Node, Root } from 'postcss';
-import type { Node as ValueNode, ValueParser } from 'postcss-value-parser';
+import type { FunctionNode, Node as ValueNode, ValueParser } from 'postcss-value-parser';
 import { ScssValueAst } from './scss-value-ast.js';
 
 export type PostCssSelectorParserLib = typeof import('./local-deps/postcss-selector-parser.js').postcssSelectorParser;
@@ -229,6 +229,74 @@ export function wrapWithCalcFunctionNode(rootValueNode: ScssValueAst, node: Valu
 		parent.nodes = newNodes;
 	} else {
 		rootValueNode.nodes = newNodes;
+	}
+}
+
+const COLOR_UTILS_IMPORT = '@lucca-front/scss/src/commons/utils/color';
+
+/**
+ * Transforms rgba(var(--x-rgb), alpha) → color.transparentize(var(--palette-x), alpha)
+ * and rgb(var(--x-rgb)) → var(--palette-x).
+ * Adds @use for the color utils if any rgba replacement happened.
+ */
+export function updateRgbaToTransparentize(
+	root: Root,
+	rgbVarMappings: Record<string, string>,
+	postcssValueParser: ValueParser,
+	postCss: PostCssLib,
+): void {
+	let hasRgba = false;
+
+	root.walkDecls((decl) => {
+		const valueAst = new ScssValueAst(decl.value, postcssValueParser);
+		let changed = false;
+
+		valueAst.walkFunction(/^rgba?$/, (funcNode) => {
+			const isRgba = funcNode.value === 'rgba';
+
+			const varNode = funcNode.nodes.find(
+				(n): n is FunctionNode => n.type === 'function' && n.value === 'var',
+			);
+			if (!varNode) {
+				return;
+			}
+
+			const varName = varNode.nodes[0]?.value ?? '';
+			const newVarName = rgbVarMappings[varName];
+			if (!newVarName) {
+				return;
+			}
+
+			if (isRgba) {
+				varNode.nodes = [{ type: 'word', value: newVarName, sourceIndex: 0, sourceEndIndex: newVarName.length }];
+				funcNode.value = 'color.transparentize';
+				hasRgba = true;
+			} else {
+				// rgb(var(--x-rgb)) → var(--palette-x)
+				funcNode.value = 'var';
+				funcNode.nodes = [{ type: 'word', value: newVarName, sourceIndex: 0, sourceEndIndex: newVarName.length }];
+			}
+			changed = true;
+		});
+
+		if (changed) {
+			decl.value = valueAst.toString();
+		}
+	});
+
+	if (!hasRgba) {
+		return;
+	}
+
+	let colorImportExists = false;
+	root.walkAtRules(/(import|use)/, (rule) => {
+		if (rule.params.includes(COLOR_UTILS_IMPORT)) {
+			colorImportExists = true;
+		}
+	});
+
+	if (!colorImportExists) {
+		addMixinImport(root, COLOR_UTILS_IMPORT, postCss);
 	}
 }
 
