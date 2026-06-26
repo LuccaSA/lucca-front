@@ -17,6 +17,27 @@
 					</button>
 					<button luButton="outlined" size="S" (click)="showToast()">Show Toast</button>
 				</div>
+
+				<!-- Connected overlays anchored to the inline-end edge: they must be pushed out of the pushPanel zone, never overflow into it -->
+				<div class="pr-u-marginTop400 pr-u-displayFlex pr-u-flexDirectionColumn pr-u-alignItemsFlexEnd pr-u-gap100 connectedOverlays">
+					<div class="pr-u-displayFlex pr-u-gap100">
+						<button luButton="outlined" size="S" [luPopover2]="popover" luPopoverPosition="below">Open Popover</button>
+						<button
+							luButton="outlined"
+							size="S"
+							luTooltip="This tooltip is intentionally long so it spans a wide box and would overflow into the push panel zone unless it gets pushed back to the inline-start."
+							luTooltipPosition="below"
+						>
+							Hover for Tooltip
+						</button>
+					</div>
+					<lu-form-field label="Simple select">
+						<lu-simple-select placeholder="Placeholder" clearable [options]="allLegumes" [(ngModel)]="simpleExample" />
+					</lu-form-field>
+					<lu-form-field label="Multi select">
+						<lu-multi-select placeholder="Placeholder" clearable [options]="allLegumes" [(ngModel)]="multiExample" />
+					</lu-form-field>
+				</div>
 			</lu-container>
 		</lu-main-layout-block>
 	</lu-main-layout>
@@ -79,6 +100,10 @@
 			</div>
 		</lu-dialog-footer>
 	</lu-dialog>
+</ng-template>
+
+<ng-template #popover>
+	<p style="inline-size: 24rem">This popover is intentionally wide so it would overflow into the push panel zone unless it gets pushed back to the inline-start.</p>
 </ng-template>
 
 <!-- To tell the ui-diff tool that the page has finished rendering -->
