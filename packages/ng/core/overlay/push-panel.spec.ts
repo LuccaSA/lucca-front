@@ -6,7 +6,7 @@ describe('push-panel overlay helpers', () => {
 	function withPushPanelValue(value: string): Document {
 		getComputedStyleSpy.mockReturnValue({
 			getPropertyValue: (prop: string) => (prop === '--commons-pushPanel-inlineSize' ? value : ''),
-		} as unknown as CSSStyleDeclaration);
+		});
 		return { documentElement: {} } as unknown as Document;
 	}
 
