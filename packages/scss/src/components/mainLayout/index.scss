@@ -6,8 +6,16 @@
 		@include vars;
 		@include component;
 
-		@include media.min('S') {
-			@include wide;
+		&:not(.mod-wideM) {
+			@include media.min('S') {
+				@include wide;
+			}
+		}
+
+		&.mod-wideM {
+			@include media.min('M') {
+				@include wide;
+			}
 		}
 	}
 
