@@ -17,20 +17,36 @@
 		</lu-chip>
 	}
 	@if (secondaryTags().length) {
-		<lu-filter-pill [label]="intl().selectTag">
-			<lu-simple-select
-				[formControl]="selectedTagControl"
-				[options]="filteredSecondaryTags()"
-				(clueChange)="tagSearch.set($event)"
-				#tagsSelect
-			>
-				@if (secondaryHasGroup()) {
-					<ng-container *luOptionGroup="let group; by: groupByTagGroup; select: tagsSelect">
-						{{ group.key }}
-					</ng-container>
-				}
-				<ng-container *luOption="let tag; select: tagsSelect">{{ tag.description }}</ng-container>
-			</lu-simple-select>
-		</lu-filter-pill>
+		<button
+			luButton="ghost"
+			type="button"
+			size="XS"
+			[luPopover2]="tagsPopover"
+			[customPositions]="popoverPositions"
+			[attr.aria-expanded]="tagsTrigger.opened()"
+			#tagButton
+			#tagsTrigger="luPopover2"
+		>
+			<lu-icon icon="mathsPlus" />
+			{{ intl().selectTag }}
+		</button>
+
+		<ng-template #tagsPopover>
+			<div class="popover-contentOptional">
+				<lu-simple-select
+					[formControl]="selectedTagControl"
+					[options]="filteredSecondaryTags()"
+					(clueChange)="tagSearch.set($event)"
+					#tagsSelect
+				>
+					@if (secondaryHasGroup()) {
+						<ng-container *luOptionGroup="let group; by: groupByTagGroup; select: tagsSelect">
+							{{ group.key }}
+						</ng-container>
+					}
+					<ng-container *luOption="let tag; select: tagsSelect">{{ tag.description }}</ng-container>
+				</lu-simple-select>
+			</div>
+		</ng-template>
 	}
 </div>
