@@ -83,6 +83,12 @@ export default {
 		presentation: {
 			description: '[v21.1] Transforme le champ de formulaire en donnée textuelle non éditable.',
 		},
+		panelOpened: {
+			description: "Événement déclenché à l'ouverture du calendrier.",
+		},
+		panelClosed: {
+			description: 'Événement déclenché à la fermeture du calendrier.',
+		},
 	},
 	render: (args, { argTypes }) => {
 		const { selected, min, max, focusedDate, presentation, ...flags } = args;

@@ -4,7 +4,7 @@ import { PALETTE } from '@lucca/prisme/core';
 import { Meta, moduleMetadata, StoryObj } from '@storybook/angular';
 import { createTestStory, generateInputs, setStoryOptions } from 'stories/helpers/stories';
 import { waitForAngular } from 'stories/helpers/test';
-import { expect, userEvent, within } from 'storybook/test';
+import { expect, userEvent } from 'storybook/test';
 
 export default {
 	title: 'Documentation/Feedback/Callout Disclosure/Angular',
@@ -72,6 +72,9 @@ export default {
 		},
 		open: {
 			description: 'Place le callout dans son état déplié.',
+		},
+		openChange: {
+			description: "Événement déclenché lors du changement d'état déplié/replié du callout.",
 		},
 	},
 } as Meta;
