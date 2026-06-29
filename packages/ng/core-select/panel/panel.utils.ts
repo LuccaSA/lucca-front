@@ -20,21 +20,4 @@ export function getGroupTemplateLocation(hasGrouping: Signal<boolean>, clue: Sig
 
 		return hasClue() ? 'option' : 'group-header';
 	});
-
-	// 		const getGroupTemplateLocation$ = (hasClue: boolean) =>
-	// 			options$.pipe(
-	// 				skip(1),
-	// 				take(1),
-	// 				map((): GroupTemplateLocation => (hasClue ? 'option' : 'group-header')),
-	// 				startWith('group-header' as const satisfies GroupTemplateLocation),
-	// 			);
-	// 		return searchable
-	// 			? clueChange$.pipe(
-	// 					map((clue) => !!clue),
-	// 					distinctUntilChanged(),
-	// 					switchMap(getGroupTemplateLocation$),
-	// 				)
-	// 			: getGroupTemplateLocation$(false);
-	// 	}),
-	// );
 }
