@@ -25,12 +25,12 @@ import { ControlValueAccessor } from '@angular/forms';
 import { isNotNil, PortalContent, ɵeffectWithDeps } from '@lucca-front/ng/core';
 import { FILTER_PILL_HOST_COMPONENT, FILTER_PILL_INPUT_COMPONENT, FilterPillInputComponent } from '@lucca-front/ng/filter-pills';
 import { BehaviorSubject, defer, finalize, map, of, ReplaySubject, startWith, Subject, switchMap, takeUntil, tap } from 'rxjs';
-import { buildOptionsFromDataSource } from './select-input.utils';
 import { LuSimpleSelectDefaultOptionComponent } from '../option';
 import { LuSelectPanelRef } from '../panel';
 import { CoreSelectAddOptionStrategy, LuOptionComparer, LuOptionContext, LuOptionGrouping, SELECT_LABEL, SELECT_LABEL_ID, SelectDataSource, SelectDataSourceParams } from '../select.model';
 import { LuCoreSelectLabel } from '../select.translate';
 import { TreeNode } from './model';
+import { buildOptionsFromDataSource } from './select-input.utils';
 import { TreeGenerator } from './tree-generator';
 
 export const coreSelectDefaultOptionComparer: LuOptionComparer<unknown> = (option1, option2) => JSON.stringify(option1) === JSON.stringify(option2);
@@ -287,26 +287,31 @@ export abstract class ALuSelectInputComponent<TOption, TValue> implements OnDest
 
 	protected readonly destroyed$ = new Subject<void>();
 
+	private readonly injector = inject(Injector);
+
 	constructor() {
 		if (this.filterPillHost) {
 			this.filterPillHost.registerInput(this);
 		}
 
-		ɵeffectWithDeps([this.options], (options, onCleanup) => {
+		ɵeffectWithDeps([this.options], (options) => {
 			if (isNotNil(options)) {
 				this.manualOptions$.next(options);
-				if (this.panelRef) {
-					const ref = afterNextRender(
-						() => {
-							this.panelRef?.updatePosition();
-							this.updatePositionFn?.();
-							// If no fixes are found, last resort fix is here
-							// window.dispatchEvent(new Event('resize'));
-						},
-						{ injector: this.#injector },
-					);
-					onCleanup(() => ref.destroy());
-				}
+			}
+		});
+
+		// When options arrive asynchronously via a dataSource, dataSourceOptions changes but options doesn't.
+		// We need to reposition the panel after the DOM updates in both cases.
+		ɵeffectWithDeps([this.dataSourceOptions], (_options, onCleanup) => {
+			if (isNotNil(this.panelRef)) {
+				const ref = afterNextRender(
+					() => {
+						this.panelRef?.updatePosition();
+						this.updatePositionFn?.();
+					},
+					{ injector: this.injector },
+				);
+				onCleanup(() => ref.destroy());
 			}
 		});
 	}
