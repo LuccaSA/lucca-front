@@ -24,6 +24,7 @@
 			[luPopover2]="tagsPopover"
 			[customPositions]="popoverPositions"
 			[attr.aria-expanded]="tagsTrigger.opened()"
+			(luPopoverClosed)="tagSearch.set('')"
 			#tagButton
 			#tagsTrigger="luPopover2"
 		>
