@@ -110,7 +110,6 @@ export class RichTextPluginTagComponent implements RichTextPluginComponent, OnDe
 			if (ref) {
 				untracked(() => {
 					ref.enableFilterPillMode();
-					ref.registerFilterPillClosePopover(this.closePopover);
 					ref.registerFilterPillUpdatePosition?.(this.updatePosition);
 					ref.onFilterPillOpened?.();
 				});

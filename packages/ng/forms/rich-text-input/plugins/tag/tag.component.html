@@ -23,7 +23,6 @@
 			size="XS"
 			[luPopover2]="tagsPopover"
 			[customPositions]="popoverPositions"
-			[attr.aria-expanded]="tagsTrigger.opened()"
 			(luPopoverClosed)="tagSearch.set('')"
 			#tagButton
 			#tagsTrigger="luPopover2"
@@ -38,6 +37,7 @@
 					[formControl]="selectedTagControl"
 					[options]="filteredSecondaryTags()"
 					(clueChange)="tagSearch.set($event)"
+					(panelClosed)="closePopover()"
 					#tagsSelect
 				>
 					@if (secondaryHasGroup()) {
