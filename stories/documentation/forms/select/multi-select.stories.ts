@@ -661,7 +661,7 @@ export const LegalUnitsWithArchived = generateStory({
 <pr-story-model-display>{{ selectedLegalUnits | json }}</pr-story-model-display>`,
 	neededImports: {
 		'@lucca-front/ng/multi-select': ['LuMultiSelectInputComponent'],
-		'@lucca-front/ng/core-select/legal-units': ['LuCoreSelectLegalUnitsDirective'],
+		'@lucca-front/ng/core-select/legal-units': ['LuCoreSelectLegalUnitsDirective', 'LuCoreSelectArchivedLegalUnitsComponent'],
 	},
 	storyPartial: {
 		args: {
