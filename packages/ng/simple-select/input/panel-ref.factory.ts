@@ -121,7 +121,7 @@ export class LuSimpleSelectPanelRefFactory {
 		const overlayConfig: OverlayConfig = overlayConfigOverride || {};
 		overlayConfig.positionStrategy = this.positionBuilder
 			.flexibleConnectedTo(this.elementRef)
-			.withViewportMargin(getPushPanelViewportMargin(this.elementRef.nativeElement.ownerDocument, 8))
+			.withViewportMargin(getPushPanelViewportMargin(this.elementRef.nativeElement, 8))
 			.withPositions([
 				{
 					originX: 'start',

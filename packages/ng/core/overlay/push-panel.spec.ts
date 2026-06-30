@@ -3,11 +3,11 @@ import { getPushPanelInlineSize, getPushPanelViewportMargin } from './push-panel
 describe('push-panel overlay helpers', () => {
 	let getComputedStyleSpy: jest.SpyInstance;
 
-	function withPushPanelValue(value: string): Document {
+	function withPushPanelValue(value: string): Element {
 		getComputedStyleSpy.mockReturnValue({
 			getPropertyValue: (prop: string) => (prop === '--commons-pushPanel-inlineSize' ? value : ''),
 		});
-		return { documentElement: {} } as unknown as Document;
+		return {} as unknown as Element;
 	}
 
 	beforeEach(() => {

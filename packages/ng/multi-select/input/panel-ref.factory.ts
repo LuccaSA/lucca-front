@@ -142,7 +142,7 @@ export class LuMultiSelectPanelRefFactory {
 			.flexibleConnectedTo(this.elementRef)
 			.withGrowAfterOpen(true)
 			.withLockedPosition(false)
-			.withViewportMargin(getPushPanelViewportMargin(this.elementRef.nativeElement.ownerDocument, 8))
+			.withViewportMargin(getPushPanelViewportMargin(this.elementRef.nativeElement, 8))
 			.withPositions([
 				this.buildPosition('bottom', 'right', config),
 				this.buildPosition('bottom', 'left', config),

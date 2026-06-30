@@ -532,7 +532,7 @@ export abstract class ALuPopoverTrigger<TPanel extends ILuPopoverPanel = ILuPopo
 		return this._overlay
 			.position()
 			.flexibleConnectedTo(element)
-			.withViewportMargin(getPushPanelViewportMargin((element.nativeElement as HTMLElement).ownerDocument))
+			.withViewportMargin(getPushPanelViewportMargin(element.nativeElement))
 			.withPositions([
 				{
 					originX: connectionPosition.originX,

@@ -438,7 +438,7 @@ export class LuTooltipTriggerDirective implements OnDestroy {
 		return this.#overlay
 			.position()
 			.flexibleConnectedTo(this.#resolveAnchor())
-			.withViewportMargin(getPushPanelViewportMargin(this.#host.nativeElement.ownerDocument))
+			.withViewportMargin(getPushPanelViewportMargin(this.#host.nativeElement))
 			.withPositions([
 				{
 					originX: connectionPosition.originX,

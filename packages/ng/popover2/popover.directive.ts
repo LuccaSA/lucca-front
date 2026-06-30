@@ -247,7 +247,7 @@ export class PopoverDirective implements OnDestroy {
 				positionStrategy: this.overlay
 					.position()
 					.flexibleConnectedTo(this.luPopoverAnchor())
-					.withViewportMargin(getPushPanelViewportMargin(this.elementRef.nativeElement.ownerDocument))
+					.withViewportMargin(getPushPanelViewportMargin(this.elementRef.nativeElement))
 					.withPositions(this.customPositions || this.#buildPositions()),
 				scrollStrategy: this.overlay.scrollStrategies[this.overlayScrollStrategy ?? 'reposition'](),
 				hasBackdrop: withBackdrop,
