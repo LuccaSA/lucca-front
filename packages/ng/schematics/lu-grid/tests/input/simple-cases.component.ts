@@ -23,6 +23,9 @@ import { ButtonComponent } from '@lucca-front/ng/button';
 			<div class="grid-column" style="--grid-colspan: 12; --grid-colspanAtMediaMinXS: 4">col</div>
 			<div class="grid-column" style="--grid-colspan: 12; --grid-colspanAtMediaMinXS: 8">col</div>
 		</div>
+		<div class="grid mod-form">
+			<div class="grid-column"><div class="gridDemo">form</div></div>
+		</div>
 	`,
 	imports: [
 		ButtonComponent

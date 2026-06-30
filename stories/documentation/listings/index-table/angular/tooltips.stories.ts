@@ -1,4 +1,4 @@
-import { bob } from '@/stories/users/user.mocks';
+import { finn } from '@/stories/users/user.mocks';
 import { ButtonComponent } from '@lucca-front/ng/button';
 import { IconComponent } from '@lucca-front/ng/icon';
 import {
@@ -100,6 +100,6 @@ const Template = (args: BasicStory) => ({
 });
 
 export const Basic: StoryObj<BasicStory> = {
-	args: { bob },
+	args: { bob: finn },
 	render: Template,
 };

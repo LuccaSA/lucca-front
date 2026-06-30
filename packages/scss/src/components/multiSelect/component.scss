@@ -32,10 +32,11 @@
 			flex: 1;
 		}
 
-		.multipleSelect-displayer-value {
-			display: flex;
+		.multipleSelect-displayer-suffix {
+			display: var(--components-multiSelect-displayer-suffix-display);
 			gap: var(--pr-t-spacings-50);
-			flex-wrap: wrap;
+			flex: 1;
+			order: 1;
 		}
 
 		.multipleSelect-displayer-chip.chip {

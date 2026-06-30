@@ -1,3 +1,4 @@
+@use '@lucca-front/scss/src/commons/utils/color';
 @use 'exports' as *;
 
 // stylelint-disable-next-line selector-disallowed-list -- .menu is deprecated
@@ -67,6 +68,13 @@
 		&[aria-selected='true'],
 		&.is-active {
 			@include active;
+		}
+
+		// .active is deprecated
+		&:not(.active, [aria-current='page'], [aria-selected='true']) {
+			.numericBadge {
+				@include color.palette;
+			}
 		}
 
 		&.disabled, // .disabled is deprecated

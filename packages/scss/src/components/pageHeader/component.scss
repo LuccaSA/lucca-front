@@ -14,8 +14,8 @@
 			display: flex;
 			justify-content: space-between;
 			align-items: flex-start;
-			gap: var(--pr-t-spacings-100);
-			flex-wrap: var(--components-pageHeader-content-flexWrap);
+			flex-wrap: wrap;
+			row-gap: var(--pr-t-spacings-100);
 		}
 
 		.pageHeader-content-title {
@@ -42,7 +42,6 @@
 			align-items: center;
 			flex-wrap: wrap;
 			row-gap: var(--pr-t-spacings-200);
-			flex-shrink: var(--components-pageHeader-content-action-flexShrink);
 
 			.button {
 				margin: 0;

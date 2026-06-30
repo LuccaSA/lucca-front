@@ -22,10 +22,14 @@ export default {
 			description: 'Applique un container autour des liens pour aligner le composant avec le contenu de la page.',
 		},
 		currentIndex: {
+			description: "[Story] Définit l'index de l'onglet sélectionné.",
 			control: {
 				min: 0,
 				max: 3,
 			},
+		},
+		disabled: {
+			description: 'Désactive un onglet.',
 		},
 	},
 	decorators: [

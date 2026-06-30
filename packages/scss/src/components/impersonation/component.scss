@@ -12,7 +12,7 @@
 		.impersonation-trigger {
 			@include reset.button;
 
-			border: 1px solid var(--components-impersonation-trigger-borderColor);
+			box-shadow: 0 0 0 1px var(--components-impersonation-trigger-borderColor);
 			background-color: var(--components-impersonation-trigger-backgroundColor);
 			border-radius: var(--pr-t-border-radius-200);
 			inline-size: fit-content;
@@ -24,7 +24,6 @@
 			min-block-size: var(--pr-t-spacings-500);
 			font-weight: var(--components-impersonation-trigger-fontWeight);
 			color: var(--components-impersonation-trigger-color);
-			box-shadow: var(--components-impersonation-trigger-boxShadow);
 			transition-property: box-shadow, border-color;
 			transition-duration: var(--commons-animations-durations-fast);
 		}

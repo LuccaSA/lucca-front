@@ -1,4 +1,15 @@
 <div class="textField mod-multilanguage">
+	@if (hasNoInvariant()) {
+		<div class="textField-prefix">
+			<div class="textField-prefix-lang">
+				@if (formFieldRef.isInputRequired()) {
+					{{ cultureCodeDisplay() }}<sup class="formLabel-required" aria-hidden="true">*</sup>
+				} @else {
+					{{ cultureCodeDisplay() }}
+				}
+			</div>
+		</div>
+	}
 	<div class="textField-input">
 		<input
 			luInput
@@ -74,7 +85,7 @@
 									[ngModelOptions]="{ standalone: true }"
 									[disabled]="disabledInternal()"
 									[autocomplete]="autocomplete()"
-									[suffix]="{ content: aiSuffix, ariaLabel: '' }"
+									[suffix]="hasAIButtons() ? { content: aiSuffix, ariaLabel: '' } : null"
 								/>
 							</lu-form-field>
 						}

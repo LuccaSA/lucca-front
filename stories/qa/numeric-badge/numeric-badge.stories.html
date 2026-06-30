@@ -2,21 +2,35 @@
 	<tbody>
 		<tr>
 			<td></td>
-			<td>
+			<td style="inline-size: 50%">
 				<div class="demo-QAtable-list">HTML</div>
 			</td>
-			<td>
+			<td style="inline-size: 50%">
 				<div class="demo-QAtable-list">Angular</div>
 			</td>
 		</tr>
 		<tr>
 			<td>Default</td>
 			<td>
-				<div class="demo-QAtable-list"><span class="numericBadge">7</span></div>
+				<div class="demo-QAtable-list">
+					<span class="numericBadge">7</span>
+				</div>
 			</td>
 			<td>
 				<div class="demo-QAtable-list">
 					<lu-numeric-badge [value]="7" />
+				</div>
+			</td>
+		</tr>
+		<tr>
+			<td>Max Value</td>
+			<td>
+				<div class="demo-QAtable-list">
+					<span class="numericBadge">999+</span>
+				</div>
+			</td>
+			<td>
+				<div class="demo-QAtable-list">
 					<lu-numeric-badge [value]="1000" />
 				</div>
 			</td>
@@ -32,7 +46,7 @@
 			</td>
 			<td>
 				<div class="demo-QAtable-list">
-					<lu-numeric-badge size="M" [value]="7" />
+					<lu-numeric-badge [value]="7" />
 					<lu-numeric-badge size="S" [value]="7" />
 					<lu-numeric-badge size="XS" [value]="7" />
 				</div>
@@ -43,8 +57,10 @@
 			<td>
 				<div class="demo-QAtable-list">
 					<span class="numericBadge palette-product">7</span>
-					<span class="numericBadge palette-product mod-S">7</span>
-					<span class="numericBadge palette-product mod-XS">7</span>
+					<span class="numericBadge palette-neutral">7</span>
+					<span class="numericBadge palette-success">7</span>
+					<span class="numericBadge palette-warning">7</span>
+					<span class="numericBadge palette-error">7</span>
 				</div>
 			</td>
 			<td>
@@ -61,25 +77,63 @@
 			<td>Loading</td>
 			<td>
 				<div class="demo-QAtable-list">
-					<span class="numericBadge is-loading palette-product"></span>
-					<span class="numericBadge is-loading mod-S palette-product"></span>
-					<span class="numericBadge is-loading mod-XS palette-product"></span>
-					<span class="numericBadge is-loading" aria-hidden="true"></span>
-					<span class="numericBadge is-loading mod-S" aria-hidden="true"></span>
-					<span class="numericBadge is-loading mod-XS" aria-hidden="true"></span>
+					<span class="numericBadge is-loading">7</span>
 				</div>
 			</td>
 			<td>
 				<div class="demo-QAtable-list">
 					<lu-numeric-badge loading [value]="7" />
+				</div>
+			</td>
+		</tr>
+		<tr>
+			<td>Loading + Max Value</td>
+			<td>
+				<div class="demo-QAtable-list">
+					<span class="numericBadge is-loading">999+</span>
+				</div>
+			</td>
+			<td>
+				<div class="demo-QAtable-list">
+					<lu-numeric-badge loading [value]="1000" />
+				</div>
+			</td>
+		</tr>
+		<tr>
+			<td>Loading + Sizes</td>
+			<td>
+				<div class="demo-QAtable-list">
+					<span class="numericBadge is-loading">7</span>
+					<span class="numericBadge is-loading mod-S">7</span>
+					<span class="numericBadge is-loading mod-XS">7</span>
+				</div>
+			</td>
+			<td>
+				<div class="demo-QAtable-list">
+					<lu-numeric-badge loading [value]="7" />
+					<lu-numeric-badge loading [value]="7" size="S" />
+					<lu-numeric-badge loading [value]="7" size="XS" />
+				</div>
+			</td>
+		</tr>
+		<tr>
+			<td>Loading + Palettes</td>
+			<td>
+				<div class="demo-QAtable-list">
+					<span class="numericBadge is-loading palette-product">7</span>
+					<span class="numericBadge is-loading palette-neutral">7</span>
+					<span class="numericBadge is-loading palette-success">7</span>
+					<span class="numericBadge is-loading palette-warning">7</span>
+					<span class="numericBadge is-loading palette-error">7</span>
+				</div>
+			</td>
+			<td>
+				<div class="demo-QAtable-list">
 					<lu-numeric-badge loading palette="product" [value]="7" />
 					<lu-numeric-badge loading palette="neutral" [value]="7" />
 					<lu-numeric-badge loading palette="success" [value]="7" />
 					<lu-numeric-badge loading palette="warning" [value]="7" />
 					<lu-numeric-badge loading palette="error" [value]="7" />
-					<lu-numeric-badge loading size="M" [value]="7" />
-					<lu-numeric-badge loading size="S" [value]="7" />
-					<lu-numeric-badge loading size="XS" [value]="7" />
 				</div>
 			</td>
 		</tr>

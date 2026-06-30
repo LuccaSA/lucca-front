@@ -31,4 +31,8 @@
 		select: 'Select all',
 		deselect: 'Deselect all',
 	},
+	pl: {
+		select: 'Zaznacz wszystko',
+		deselect: 'Odznacz wszystko',
+	},
 };

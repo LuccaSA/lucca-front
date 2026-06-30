@@ -80,7 +80,7 @@ async function checkValues(input: HTMLElement, values: string[]) {
 		await expect(counter).toHaveTextContent(values.length.toString());
 	} else {
 		for (const value of values) {
-			await expect(input.parentElement).toHaveTextContent(value.trim());
+			await expect(input.parentElement.parentElement).toHaveTextContent(value.trim());
 		}
 	}
 }
@@ -234,24 +234,28 @@ export const SelectAllTEST = createTestStory(SelectAll, async (context) => {
 		const clearButton = buttons.find((button) => button.className.includes('multipleSelect-clear'));
 		if (clearButton) {
 			await userEvent.click(clearButton);
+			await waitForAngular();
 		}
 	}
 	await userEvent.click(input);
-	await sleep(200);
+	await waitForAngular();
 	const panel = within(screen.getByRole('listbox'));
-	const selectAllCheckbox = panel.getByLabelText('Tout sélectionner');
+	const selectAllCheckbox = await panel.findByLabelText('Tout sélectionner');
 	await userEvent.click(selectAllCheckbox);
-	const options = await panel.findAllByRole('option').then((options) => options.filter((el) => !el.id.includes('select-all')));
+	await waitForAngular();
+	const options = await panel.findAllByRole('option').then((opts) => opts.filter((el) => !el.id.includes('select-all')));
 	const optionValues = options.map((option) => option.textContent);
-	await checkValues(input, optionValues);
 	await userEvent.keyboard('{Escape}');
-	context.step('Select all keyboard interactions', async () => {
+	await waitFor(() => expect(screen.queryByRole('listbox')).not.toBeInTheDocument());
+	await waitForAngular();
+	await waitFor(() => checkValues(input, optionValues));
+	await context.step('Select all keyboard interactions', async () => {
 		input.focus();
 		await userEvent.keyboard('{ArrowDown}');
 		await waitForAngular();
 		await userEvent.keyboard('{Enter}');
-		// We should have unselected everything with this keyboard input sequence
-		await checkValues(input, []);
+		await waitForAngular();
+		await waitFor(() => checkValues(input, []));
 	});
 });
 
@@ -284,6 +288,87 @@ export const Basic = generateStory({
 });
 
 export const BasicTEST = createTestStory(Basic, basePlay);
+
+export const WithClue = generateStory({
+	name: 'Clue',
+	description: `Il est possible d'afficher une barre de recherche pour filtrer les options en écoutant l'évènement \`(clueChange)\`.`,
+	template: `<lu-multi-select
+	#selectRef
+	[clearable]="clearable"
+	[loading]="loading"
+	[keepSearchAfterSelection]="keepSearchAfterSelection"
+	[(ngModel)]="selectedLegumes"
+	[options]="legumes | filterLegumes:clue"
+	(clueChange)="clue = $event"
+	[maxValuesShown]="maxValuesShown"
+/>`,
+	neededImports: {
+		'@lucca-front/ng/multi-select': ['LuMultiSelectInputComponent'],
+	},
+	storyPartial: {
+		args: {
+			selectedLegumes: [],
+			keepSearchAfterSelection: false,
+		},
+	},
+});
+
+export const WithClueTEST = createTestStory(WithClue, async (context) => {
+	await basePlay(context);
+	const canvas = within(context.canvasElement);
+	const input = canvas.getByRole('combobox');
+
+	await context.step('Search filters options', async () => {
+		const clearButton = canvas.queryAllByRole('button').find((b) => b.className.includes('clear'));
+		if (clearButton) {
+			await userEvent.click(clearButton);
+			await waitForAngular();
+		}
+		await userEvent.click(input);
+		await waitForAngular();
+		await expect(screen.getByRole('listbox')).toBeVisible();
+		await userEvent.type(input, 'artichaut');
+		await waitForAngular();
+		const panel = within(screen.getByRole('listbox'));
+		const options = await panel.findAllByRole('option');
+		await expect(options).toHaveLength(1);
+		await expect(options[0]).toHaveTextContent('Artichaut');
+		await userEvent.click(options[0]);
+		await waitForAngular();
+		await userEvent.keyboard('{Escape}');
+		await waitForAngular();
+		await waitFor(() => {
+			expect(screen.queryByRole('listbox')).not.toBeInTheDocument();
+		});
+		await checkValues(input, ['Artichaut']);
+	});
+
+	await context.step('Keyboard: search and select', async () => {
+		const clearButton = canvas.queryAllByRole('button').find((b) => b.className.includes('clear'));
+		if (clearButton) {
+			await userEvent.click(clearButton);
+			await waitForAngular();
+		}
+		input.focus();
+		await expect(input).toHaveFocus();
+		await userEvent.keyboard('{ArrowDown}');
+		await waitForAngular();
+		await expect(screen.getByRole('listbox')).toBeVisible();
+		await userEvent.type(input, 'carotte');
+		await waitForAngular();
+		const panel = within(screen.getByRole('listbox'));
+		const options = await panel.findAllByRole('option');
+		await expect(options).toHaveLength(1);
+		await userEvent.keyboard('{Enter}');
+		await waitForAngular();
+		await userEvent.keyboard('{Escape}');
+		await waitForAngular();
+		await waitFor(() => {
+			expect(screen.queryByRole('listbox')).not.toBeInTheDocument();
+		});
+		await checkValues(input, ['Carotte']);
+	});
+});
 
 export const WithMultiDisplayer = generateStory({
 	name: 'With MultiDisplayer',
@@ -387,8 +472,9 @@ export const WithPagination = generateStory({
 	template: `<lu-multi-select
 	#selectRef
 	[(ngModel)]="selectedLegumes"
-	[options]="legumes.slice(0, page * 10)"
+	[options]="(legumes | filterLegumes:clue).slice(0, page * 10)"
 	(nextPage)="page = page + 1"
+	(clueChange)="clue = $event"
 	[maxValuesShown]="maxValuesShown"
 >
 	<ng-container *luOption="let legume; select: selectRef">{{ legume.name }}</ng-container>
@@ -512,7 +598,8 @@ export const Tree = generateStory({
 	name: 'Tree Select',
 	description: '',
 	template: `<lu-multi-select
-	[options]="legumes"
+	[options]="legumes | filterLegumes:clue"
+	(clueChange)="clue = $event"
 	[treeSelect]="groupingFn"
 	[(ngModel)]="selectedTree"
 />{{ selectedTree | json }}`,

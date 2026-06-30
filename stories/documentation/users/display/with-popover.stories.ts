@@ -1,4 +1,4 @@
-import { bob } from '@/stories/users/user.mocks';
+import { finn } from '@/stories/users/user.mocks';
 import { provideHttpClient } from '@angular/common/http';
 import { provideAnimations } from '@angular/platform-browser/animations';
 import { ButtonComponent } from '@lucca-front/ng/button';
@@ -19,7 +19,7 @@ export default {
 	render: () => {
 		return {
 			props: {
-				finn: bob,
+				finn: finn,
 			},
 			template: `<button type="button" class="userPopover_trigger" [luUserPopover]="finn" translate="no">{{ finn | luUserDisplay : 'lf' }}</button>`,
 		};

@@ -100,3 +100,33 @@ jobs:
                 body,
               });
             }
+
+  qa:
+    if: ${{ github.event_name == 'pull_request' }}
+    runs-on: ubuntu-latest
+    needs: [deploy]
+    steps:
+      - name: Trigger QA webservice
+        env:
+          QA_WEBSERVICE_URL: ${{ secrets.QA_WEBSERVICE_URL }}
+          QA_WEBSERVICE_TOKEN: ${{ secrets.QA_WEBSERVICE_TOKEN }}
+          HEAD_REF: ${{ github.head_ref }}
+          AUTHOR_GITHUB_LOGIN: ${{ github.event.pull_request.user.login }}
+        run: |
+          payload=$(jq -n \
+            --arg branch "$HEAD_REF" \
+            --argjson pullRequestNumber '${{ github.event.number }}' \
+            --arg authorGithubLogin "$AUTHOR_GITHUB_LOGIN" \
+            --arg executorSource "${{ github.server_url }}/${{ github.repository }}/actions/runs/${{ github.run_id }}" \
+            '{
+              branch: $branch,
+              pullRequestNumber: $pullRequestNumber,
+              qaJsonBranch: null,
+              authorGithubLogin: $authorGithubLogin,
+              executorSource: $executorSource,
+              stepsToRun: "all"
+            }')
+          curl --fail-with-body -sS -X POST "$QA_WEBSERVICE_URL" \
+            -H "Authorization: Bearer $QA_WEBSERVICE_TOKEN" \
+            -H "Content-Type: application/json" \
+            -d "$payload"

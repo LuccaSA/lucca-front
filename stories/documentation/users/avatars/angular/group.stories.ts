@@ -1,7 +1,7 @@
 import { ChangeDetectionStrategy, Component, input } from '@angular/core';
 import { LuUserPictureModule } from '@lucca-front/ng/user';
 import { Meta, StoryObj } from '@storybook/angular-vite';
-import { squidwards } from '../../user.mocks';
+import { jake } from '../../user.mocks';
 
 @Component({
 	selector: 'avatar-stories',
@@ -240,7 +240,7 @@ import { squidwards } from '../../user.mocks';
 class AvatarStory {
 	sizes = input<string>();
 
-	user = squidwards;
+	user = jake;
 }
 
 export default {

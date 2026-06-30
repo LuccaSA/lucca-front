@@ -23,4 +23,7 @@
 	pt: {
 		close: 'Fechar',
 	},
+	pl: {
+		close: 'Zamknij',
+	},
 };

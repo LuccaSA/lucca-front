@@ -1,13 +1,13 @@
 import { Meta, StoryObj } from '@storybook/angular-vite';
 
-interface AlignementHorizontalStory {}
+interface AlignmentHorizontalStory {}
 
 export default {
-	title: 'Documentation/Listings/Data table/HTML&CSS/Horizontal alignement',
+	title: 'Documentation/Listings/Data table/HTML&CSS/Horizontal Alignment',
 	argTypes: {},
 } as Meta;
 
-function getTemplate(args: AlignementHorizontalStory): string {
+function getTemplate(args: AlignmentHorizontalStory): string {
 	return `<div class="dataTableWrapper">
 	<table class="dataTable">
 		<thead class="dataTable-head">
@@ -33,12 +33,12 @@ function getTemplate(args: AlignementHorizontalStory): string {
 </div>`;
 }
 
-const Template = (args: AlignementHorizontalStory) => ({
+const Template = (args: AlignmentHorizontalStory) => ({
 	props: args,
 	template: getTemplate(args),
 });
 
-export const AlignementHorizontal: StoryObj<AlignementHorizontalStory> = {
+export const AlignmentHorizontal: StoryObj<AlignmentHorizontalStory> = {
 	args: {},
 	render: Template,
 };

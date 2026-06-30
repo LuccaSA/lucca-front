@@ -19,19 +19,28 @@ let nextID = 0;
 	imports: [AsyncPipe, LuTooltipModule, ɵLuOptionOutletDirective, FormsModule, LuMultiSelectDisplayerInputDirective, ChipComponent, IconComponent],
 	template: `
 		<div class="multipleSelect-displayer">
-			<input [attr.aria-labelledby]="valueID" autocomplete="off" #inputElement (keydown.backspace)="inputBackspace()" (keydown.space)="inputSpace($event)" luMultiSelectDisplayerInput />
-			<div [attr.id]="valueID" class="multipleSelect-displayer-value">
-				@for (option of displayedOptions$ | async; track option; let index = $index) {
-					<lu-chip class="multipleSelect-displayer-chip" withEllipsis (kill)="unselectOption(option, $event)" [unkillable]="select.disabled$ | async">
-						<ng-container *luOptionOutlet="select.displayerTpl(); value: option" />
-					</lu-chip>
-				}
-				@if (overflowOptions$ | async; as overflow) {
-					<lu-chip class="multipleSelect-displayer-chip" unkillable>+ {{ overflow }}</lu-chip>
+			<div class="multipleSelect-displayer-suffix">
+				<input [attr.aria-labelledby]="valueID" autocomplete="off" #inputElement (keydown.backspace)="inputBackspace()" (keydown.space)="inputSpace($event)" luMultiSelectDisplayerInput />
+				@if (select.filterPillMode) {
+					<lu-icon icon="searchMagnifyingGlass" class="multiSelect-field-icon mod-search" />
 				}
 			</div>
-			@if (select.filterPillMode) {
-				<lu-icon icon="searchMagnifyingGlass" class="multiSelect-field-icon mod-search" />
+			<div [attr.id]="valueID" class="pr-u-mask">
+				@for (option of displayedOptions$ | async; track option; let index = $index) {
+					<ng-container *luOptionOutlet="select.displayerTpl(); value: option" />&ngsp;
+				}
+				@if (overflowOptions$ | async; as overflow) {
+					+ {{ overflow }}
+				}
+			</div>
+
+			@for (option of displayedOptions$ | async; track option; let index = $index) {
+				<lu-chip aria-hidden="true" class="multipleSelect-displayer-chip" withEllipsis (kill)="unselectOption(option, $event)" [unkillable]="select.disabled$ | async">
+					<ng-container *luOptionOutlet="select.displayerTpl(); value: option" />
+				</lu-chip>
+			}
+			@if (overflowOptions$ | async; as overflow) {
+				<lu-chip aria-hidden="true" class="multipleSelect-displayer-chip" unkillable>+ {{ overflow }}</lu-chip>
 			}
 		</div>
 	`,

@@ -165,7 +165,7 @@
 		<tr>
 			<td>Numeric Badge</td>
 			<td>
-				<div class="horizontalNavigation palette-product">
+				<div class="horizontalNavigation">
 					<ul class="horizontalNavigation-list">
 						<li class="horizontalNavigation-list-item">
 							<a class="horizontalNavigation-list-item-action" href="#" aria-current="page">Page <span class="numericBadge">9</span></a>
@@ -181,6 +181,35 @@
 			</td>
 			<td>
 				<lu-horizontal-navigation>
+					<a *luHorizontalNavigationLink class="horizontalNavigation-list-item-action" href="#" aria-current="page"
+						>Page<lu-numeric-badge value="9"
+					/></a>
+					<a *luHorizontalNavigationLink class="horizontalNavigation-list-item-action" href="#">Page<lu-numeric-badge value="9" /></a>
+					<a *luHorizontalNavigationLink disabled class="horizontalNavigation-list-item-action" href="#"
+						>Page<lu-numeric-badge value="9"
+					/></a>
+				</lu-horizontal-navigation>
+			</td>
+		</tr>
+		<tr>
+			<td>Numeric Badge and palette</td>
+			<td>
+				<div class="horizontalNavigation palette-pineapple">
+					<ul class="horizontalNavigation-list">
+						<li class="horizontalNavigation-list-item">
+							<a class="horizontalNavigation-list-item-action" href="#" aria-current="page">Page <span class="numericBadge">9</span></a>
+						</li>
+						<li class="horizontalNavigation-list-item">
+							<a class="horizontalNavigation-list-item-action" href="#">Page <span class="numericBadge">9</span></a>
+						</li>
+						<li class="horizontalNavigation-list-item">
+							<a class="horizontalNavigation-list-item-action is-disabled" href="#">Page <span class="numericBadge">9</span></a>
+						</li>
+					</ul>
+				</div>
+			</td>
+			<td>
+				<lu-horizontal-navigation palette="pineapple">
 					<a *luHorizontalNavigationLink class="horizontalNavigation-list-item-action" href="#" aria-current="page"
 						>Page<lu-numeric-badge value="9"
 					/></a>

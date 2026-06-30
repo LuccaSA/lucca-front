@@ -1,21 +1,22 @@
 import { LOCALE_ID } from '@angular/core';
 import { applicationConfig } from '@storybook/angular-vite';
+import { registerLocaleData } from '@angular/common';
 import localeDe from '@angular/common/locales/de';
 import localeEn from '@angular/common/locales/en';
 import localeEs from '@angular/common/locales/es';
 import localeFr from '@angular/common/locales/fr';
 import localeIt from '@angular/common/locales/it';
 import localeNl from '@angular/common/locales/nl';
+import localePl from '@angular/common/locales/pl';
 import localePt from '@angular/common/locales/pt';
-import { registerLocaleData } from '@angular/common';
 
-[localeDe, localeEn, localeEs, localeFr, localeIt, localeNl, localePt].forEach((locale) => registerLocaleData(locale));
+[localeDe, localeEn, localeEs, localeFr, localeIt, localeNl, localePt, localePl].forEach((locale) => registerLocaleData(locale));
 
-const availableLanguages = ['en', 'de', 'en-US', 'es', 'fr', 'it', 'nl', 'nl-BE', 'pt'];
+const availableLanguages = ['en', 'de', 'en-US', 'es', 'fr', 'it', 'nl', 'nl-BE', 'pt', 'pl'];
 
 export default {
 	init() {
-		[localeDe, localeEn, localeEs, localeFr, localeIt, localeNl, localePt].forEach((locale) => registerLocaleData(locale));
+		[localeDe, localeEn, localeEs, localeFr, localeIt, localeNl, localePt, localePl].forEach((locale) => registerLocaleData(locale));
 	},
 	decorator: applicationConfig({
 		providers: [

@@ -4,7 +4,7 @@ import { LuDisplayInitials, LuUserPictureComponent, USER_PICTURE_SIZE } from '@l
 import { LuUserPopoverDirective } from '@lucca-front/ng/user-popover';
 import { applicationConfig, Meta, moduleMetadata, StoryObj } from '@storybook/angular-vite';
 import { setStoryOptions } from '@/helpers/stories';
-import { bob, georges, squidwards } from '../../user.mocks';
+import { finn, georges, jake } from '../../user.mocks';
 
 export default {
 	title: 'Documentation/Users/Avatar/Angular/Basic',
@@ -42,9 +42,9 @@ export default {
 			description: '[Story] Affiche la photo de l’utilisateur ou ses initiales.',
 			options: ['Avec image', 'Avec image erronée', 'Sans image'],
 			mapping: {
-				'Avec image': bob,
+				'Avec image': finn,
 				'Avec image erronée': georges,
-				'Sans image': squidwards,
+				'Sans image': jake,
 			},
 		},
 		sizes: {
@@ -74,7 +74,7 @@ export default {
 
 export const Basic: StoryObj<LuUserPictureComponent & { sizes: string; placeholder: boolean; AI: boolean }> = {
 	args: {
-		user: bob,
+		user: finn,
 		sizes: '',
 		placeholder: false,
 		displayFormat: LuDisplayInitials.firstlast,

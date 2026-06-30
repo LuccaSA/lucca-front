@@ -1,3 +1,4 @@
+import { CdkDrag, CdkDragDrop, CdkDropList, moveItemInArray } from '@angular/cdk/drag-drop';
 import { ChangeDetectionStrategy, Component } from '@angular/core';
 import { FormsModule } from '@angular/forms';
 import { ButtonComponent } from '@lucca-front/ng/button';
@@ -10,6 +11,7 @@ import {
 	DataTableRowCellHeaderComponent,
 	DataTableRowComponent,
 } from '@lucca-front/ng/data-table';
+import { EmptyStateSectionComponent } from '@lucca-front/ng/empty-state';
 import { FormFieldComponent } from '@lucca-front/ng/form-field';
 import { TextInputComponent } from '@lucca-front/ng/forms';
 import { IconComponent } from '@lucca-front/ng/icon';
@@ -41,6 +43,9 @@ import { Meta, StoryObj } from '@storybook/angular-vite';
 		StatusBadgeComponent,
 		TagComponent,
 		LuUserPictureComponent,
+		CdkDropList,
+		CdkDrag,
+		EmptyStateSectionComponent,
 	],
 	styles: [
 		`
@@ -55,7 +60,17 @@ import { Meta, StoryObj } from '@storybook/angular-vite';
 	],
 	changeDetection: ChangeDetectionStrategy.OnPush,
 })
-class DataTableStory {}
+class DataTableStory {
+	listItem: Array<{ id: number; header: string; cell: string }> = [
+		{ id: 1, header: 'Header 1', cell: 'cell 1' },
+		{ id: 2, header: 'Header 2', cell: 'cell 2' },
+		{ id: 3, header: 'Header 3', cell: 'cell 3' },
+	];
+
+	drop(event: CdkDragDrop<string[]>) {
+		moveItemInArray(this.listItem, event.previousIndex, event.currentIndex);
+	}
+}
 
 export default {
 	title: 'QA/DataTable',
