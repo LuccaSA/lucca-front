@@ -5,9 +5,6 @@ import { defaultToastDuration, LuToastInput, LuToastsComponent, LuToastsService,
 import { applicationConfig, Meta, StoryObj } from '@storybook/angular';
 import { Observable, ReplaySubject, Subject } from 'rxjs';
 import { map } from 'rxjs/operators';
-import { createTestStory } from 'stories/helpers/stories';
-import { waitForAngular } from 'stories/helpers/test';
-import { expect, userEvent, within } from 'storybook/test';
 
 @Component({
 	selector: 'toasts-stories',
@@ -84,7 +81,7 @@ const template = (args: ToastsStory) => ({
 });
 
 const code = `
-/* Ajouter l'encre <lu-toasts /> dans le app.component.html */
+/* Ajouter l'encre <lu-toasts /> dans app.component.html, en dessous de <lu-app-layout />, afin que les toasts soient affichés au-dessus de tous les overlays (voir la structure complète sur la page AppLayout).*/
 <lu-toasts [bottom]="true" [sources]="[]" />
 
 /* Ajouter un toast avec la méthode addToast(..) du LuToastsService */
