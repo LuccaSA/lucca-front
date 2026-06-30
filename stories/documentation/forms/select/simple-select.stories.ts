@@ -15,7 +15,7 @@ import { LuCoreSelectApiV3Directive, LuCoreSelectApiV4Directive } from '@lucca-f
 import { LuCoreSelectDepartmentsDirective } from '@lucca-front/ng/core-select/department';
 import { LuCoreSelectEstablishmentsDirective } from '@lucca-front/ng/core-select/establishment';
 import { LuCoreSelectJobQualificationsDirective } from '@lucca-front/ng/core-select/job-qualification';
-import { LuCoreSelectLegalUnitsDirective } from '@lucca-front/ng/core-select/legal-units';
+import { LuCoreSelectArchivedLegalUnitsComponent, LuCoreSelectLegalUnitsDirective } from '@lucca-front/ng/core-select/legal-units';
 import { LuCoreSelectOccupationCategoriesDirective } from '@lucca-front/ng/core-select/occupation-category';
 import { LuCoreSelectUserOptionDirective, LuCoreSelectUsersDirective, provideCoreSelectCurrentUserId } from '@lucca-front/ng/core-select/user';
 import { IconComponent } from '@lucca-front/ng/icon';
@@ -620,6 +620,20 @@ export const LegalUnits = generateStory({
 	},
 });
 
+export const LegalUnitsWithArchived = generateStory({
+	name: 'LegalUnit Select with Archived',
+	description: 'Utiliser l’input `enableArchivedLegalUnits` pour afficher un bouton dans le panel permettant d’inclure les entités légales archivées.',
+	template: `<lu-simple-select
+	legalUnits
+	[enableArchivedLegalUnits]="true"
+	[(ngModel)]="selectedLegalUnit"
+></lu-simple-select>`,
+	neededImports: {
+		'@lucca-front/ng/simple-select': ['LuSimpleSelectInputComponent'],
+		'@lucca-front/ng/core-select/legal-units': ['LuCoreSelectLegalUnitsDirective', 'LuCoreSelectArchivedLegalUnitsComponent'],
+	},
+});
+
 export const GroupBy = generateStory({
 	name: 'Group options',
 	description: 'Pour grouper les options, il suffit d’utiliser la directive `luOptionGroup`.',
@@ -784,6 +798,7 @@ const meta: Meta<InputAlias<LuSimpleSelectInputStoryComponent, SelectCommonAlias
 				LuCoreSelectUserOptionDirective,
 				LuCoreSelectJobQualificationsDirective,
 				LuCoreSelectLegalUnitsDirective,
+				LuCoreSelectArchivedLegalUnitsComponent,
 				LuCoreSelectOccupationCategoriesDirective,
 				LuCoreSelectPanelHeaderDirective,
 				LuDisabledOptionDirective,
