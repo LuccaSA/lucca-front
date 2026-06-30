@@ -1,5 +1,3 @@
-import { createTestStory } from '@/helpers/stories';
-import { waitForAngular } from '@/helpers/test';
 import { LOCALE_ID } from '@angular/core';
 import { ActivityFeedComponent, ActivityFeedStepComponent, ActivityFeedUpdateComponent } from '@lucca-front/ng/activity-feed';
 import { CommentComponent } from '@lucca-front/ng/comment';
