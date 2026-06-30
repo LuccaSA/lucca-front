@@ -30,6 +30,14 @@ describe('push-panel overlay helpers', () => {
 		it('returns 0 when the token is not parseable', () => {
 			expect(getPushPanelInlineSize(withPushPanelValue('var(--whatever)'))).toBe(0);
 		});
+
+		it('returns 0 for a non-pixel unit', () => {
+			expect(getPushPanelInlineSize(withPushPanelValue('2rem'))).toBe(0);
+		});
+
+		it('returns 0 for a negative pixel value', () => {
+			expect(getPushPanelInlineSize(withPushPanelValue('-200px'))).toBe(0);
+		});
 	});
 
 	describe('getPushPanelViewportMargin', () => {

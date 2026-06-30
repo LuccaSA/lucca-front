@@ -5,8 +5,8 @@
  */
 export function getPushPanelInlineSize(element: Element): number {
 	const raw = getComputedStyle(element).getPropertyValue('--commons-pushPanel-inlineSize').trim();
-	const px = Number.parseFloat(raw);
-	return Number.isFinite(px) ? px : 0;
+	const match = /^(\d+(?:\.\d+)?)px$/.exec(raw);
+	return match ? Number.parseFloat(match[1]) : 0;
 }
 
 /**
