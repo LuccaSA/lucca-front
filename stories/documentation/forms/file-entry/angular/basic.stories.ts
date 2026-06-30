@@ -61,6 +61,12 @@ export default {
 		withFileSize: {
 			control: 'boolean',
 		},
+		deleteFile: {
+			description: 'Événement déclenché lors du clic sur le bouton de suppression du fichier.',
+		},
+		passwordChange: {
+			description: 'Événement déclenché lors de la modification du mot de passe du fichier.',
+		},
 	},
 	decorators: [
 		moduleMetadata({

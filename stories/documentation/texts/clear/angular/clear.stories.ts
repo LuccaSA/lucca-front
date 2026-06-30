@@ -51,6 +51,9 @@ export const Template: StoryObj = {
 		hidden: {
 			description: 'Masque le bouton.',
 		},
+		onClear: {
+			description: 'Événement déclenché lors du clic sur le bouton.',
+		},
 	},
 	args: {
 		disabled: false,

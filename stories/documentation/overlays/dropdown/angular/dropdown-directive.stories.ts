@@ -35,6 +35,12 @@ export default {
 			control: 'select',
 			options: ['above', 'below', 'before', 'after'],
 		},
+		luDropdownOnOpen: {
+			description: "Événement déclenché à l'ouverture du dropdown.",
+		},
+		luDropdownOnClose: {
+			description: 'Événement déclenché à la fermeture du dropdown.',
+		},
 	},
 } as Meta;
 

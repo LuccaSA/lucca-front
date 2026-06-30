@@ -48,6 +48,9 @@ export default {
 				type: 'select',
 			},
 		},
+		kill: {
+			description: 'Événement déclenché lors du clic sur le bouton de suppression du chip.',
+		},
 	},
 	decorators: [
 		moduleMetadata({

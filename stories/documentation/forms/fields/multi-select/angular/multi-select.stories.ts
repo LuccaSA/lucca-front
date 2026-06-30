@@ -73,6 +73,12 @@ export default {
 		presentation: {
 			description: '[v21.1] Transforme le champ de formulaire en donnée textuelle non éditable.',
 		},
+		onOpen: {
+			description: "Événement déclenché à l'ouverture du panneau de sélection.",
+		},
+		onClose: {
+			description: 'Événement déclenché à la fermeture du panneau de sélection.',
+		},
 		clueChange: HiddenArgType,
 		nextPage: HiddenArgType,
 		previousPage: HiddenArgType,
