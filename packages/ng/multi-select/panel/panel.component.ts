@@ -1,6 +1,6 @@
 import { A11yModule } from '@angular/cdk/a11y';
 import { AsyncPipe, NgTemplateOutlet } from '@angular/common';
-import { AfterViewInit, ChangeDetectionStrategy, Component, computed, forwardRef, inject, signal, TrackByFunction } from '@angular/core';
+import { afterNextRender, AfterViewInit, ChangeDetectionStrategy, Component, computed, forwardRef, inject, Injector, signal, TrackByFunction } from '@angular/core';
 import { toObservable, toSignal } from '@angular/core/rxjs-interop';
 import { FormsModule } from '@angular/forms';
 import { isNotNil, PortalDirective } from '@lucca-front/ng/core';
@@ -85,6 +85,7 @@ export class LuMultiSelectPanelComponent<T> implements AfterViewInit, CoreSelect
 	readonly pointerNavigation = signal(false);
 
 	readonly keyManager = inject<CoreSelectKeyManager<T>>(CoreSelectKeyManager);
+	readonly #injector = inject(Injector);
 
 	onKeydown(): void {
 		this.pointerNavigation.set(false);
@@ -138,7 +139,7 @@ export class LuMultiSelectPanelComponent<T> implements AfterViewInit, CoreSelect
 		const matchingOption = this.selectedOptions.find((o) => this.optionComparer()(o, option));
 		this.selectedOptions = matchingOption && option ? this.selectedOptions.filter((o) => o !== matchingOption) : [...this.selectedOptions, option];
 		this.panelRef.emitValue(this.selectedOptions);
-		setTimeout(() => this.panelRef.updatePosition());
+		afterNextRender(() => this.panelRef.updatePosition(), { injector: this.#injector });
 	}
 
 	toggleOptions(notSelectedOptions: T[], groupOptions: T[]): void {
@@ -160,7 +161,7 @@ export class LuMultiSelectPanelComponent<T> implements AfterViewInit, CoreSelect
 		}
 
 		this.panelRef.emitValue(this.selectedOptions);
-		setTimeout(() => this.panelRef.updatePosition());
+		afterNextRender(() => this.panelRef.updatePosition(), { injector: this.#injector });
 	}
 
 	protected initKeyManager(): void {

@@ -1,5 +1,5 @@
 import { AsyncPipe } from '@angular/common';
-import { ChangeDetectionStrategy, Component, DestroyRef, ElementRef, inject, input, OnInit, viewChild } from '@angular/core';
+import { afterNextRender, ChangeDetectionStrategy, Component, DestroyRef, ElementRef, inject, Injector, input, OnInit, viewChild } from '@angular/core';
 import { takeUntilDestroyed } from '@angular/core/rxjs-interop';
 import { FormsModule } from '@angular/forms';
 import { ChipComponent } from '@lucca-front/ng/chip';
@@ -54,6 +54,7 @@ export class LuMultiSelectDefaultDisplayerComponent<T> implements OnInit {
 	valueID = `value-${++nextID}`;
 
 	protected destroyRef = inject(DestroyRef);
+	readonly #injector = inject(Injector);
 
 	readonly inputElementRef = viewChild<ElementRef<HTMLInputElement>>('inputElement');
 
@@ -87,12 +88,15 @@ export class LuMultiSelectDefaultDisplayerComponent<T> implements OnInit {
 			this.value.filter((o) => o !== option),
 			true,
 		);
-		setTimeout(() => {
-			this.select.panelRef?.updatePosition();
-			this.select.updatePosition();
-			this.inputElementRef()?.nativeElement.focus();
-			this.select.panelRef?.updateSelectedOptions(this.value);
-		});
+		afterNextRender(
+			() => {
+				this.select.panelRef?.updatePosition();
+				this.select.updatePosition();
+				this.inputElementRef()?.nativeElement.focus();
+				this.select.panelRef?.updateSelectedOptions(this.value);
+			},
+			{ injector: this.#injector },
+		);
 	}
 
 	inputBackspace(): void {

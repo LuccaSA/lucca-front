@@ -1,5 +1,5 @@
 import { CdkDialogContainer } from '@angular/cdk/dialog';
-import { ChangeDetectionStrategy, Component, contentChild, Directive, ElementRef, inject, input, OnInit, Renderer2, ViewEncapsulation } from '@angular/core';
+import { afterNextRender, ChangeDetectionStrategy, Component, contentChild, Directive, ElementRef, inject, Injector, input, OnInit, Renderer2, ViewEncapsulation } from '@angular/core';
 import { ButtonComponent } from '@lucca-front/ng/button';
 import { intlInputOptions } from '@lucca-front/ng/core';
 import { IconComponent } from '@lucca-front/ng/icon';
@@ -41,6 +41,7 @@ export class DialogHeaderComponent implements OnInit {
 	#elementRef = inject<ElementRef<HTMLElement>>(ElementRef);
 
 	#renderer = inject(Renderer2);
+	#injector = inject(Injector);
 
 	close(): void {
 		this.#ref.dismiss();
@@ -51,15 +52,17 @@ export class DialogHeaderComponent implements OnInit {
 	readonly optionalSubtitle = contentChild(DialogHeaderSubtitle);
 
 	ngOnInit(): void {
-		// Using setTimeout here to make sure this will be handled in the next Cd cycle, not the current one.
-		setTimeout(() => {
-			const header = this.#elementRef.nativeElement.querySelector('h1');
-			const id = header?.id || `lu-dialog-header-${nextId++}`;
-			if (header) {
-				this.#renderer.setAttribute(header, 'id', id);
-				this.#renderer.addClass(header, 'dialog-inside-header-container-title');
-			}
-			(this.#ref.cdkRef.containerInstance as CdkDialogContainer)?._addAriaLabelledBy(id);
-		});
+		afterNextRender(
+			() => {
+				const header = this.#elementRef.nativeElement.querySelector('h1');
+				const id = header?.id || `lu-dialog-header-${nextId++}`;
+				if (header) {
+					this.#renderer.setAttribute(header, 'id', id);
+					this.#renderer.addClass(header, 'dialog-inside-header-container-title');
+				}
+				(this.#ref.cdkRef.containerInstance as CdkDialogContainer)?._addAriaLabelledBy(id);
+			},
+			{ injector: this.#injector },
+		);
 	}
 }

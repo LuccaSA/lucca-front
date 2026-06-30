@@ -1,6 +1,7 @@
 import { ConnectionPositionPair } from '@angular/cdk/overlay';
 import { NgTemplateOutlet } from '@angular/common';
 import {
+	afterNextRender,
 	booleanAttribute,
 	ChangeDetectionStrategy,
 	Component,
@@ -248,9 +249,12 @@ export class DateInputComponent extends AbstractDateComponent implements OnInit,
 			}
 			if (!this.isNavigationButtonFocused && !this.inputFocused()) {
 				this.calendar()?.blurTabbableDate();
-				setTimeout(() => {
-					this.calendar()?.focusTabbableDate();
-				});
+				afterNextRender(
+					() => {
+						this.calendar()?.focusTabbableDate();
+					},
+					{ injector: this.#injector },
+				);
 			}
 		});
 	}
@@ -284,10 +288,12 @@ export class DateInputComponent extends AbstractDateComponent implements OnInit,
 		if (!this.isFilterPill) {
 			ref.openPopover(true, true);
 			// Once popover is opened, aka in the next CD cycle, focus current tabbable date
-
-			setTimeout(() => {
-				this.calendar()?.focusTabbableDate();
-			});
+			afterNextRender(
+				() => {
+					this.calendar()?.focusTabbableDate();
+				},
+				{ injector: this.#injector },
+			);
 		}
 	}
 
