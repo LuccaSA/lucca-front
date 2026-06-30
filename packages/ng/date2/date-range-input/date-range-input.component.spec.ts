@@ -7,7 +7,7 @@ import { DateRangeInputComponent } from './date-range-input.component';
 import localeFr from '@angular/common/locales/fr';
 import { registerLocaleData } from '@angular/common';
 
-registerLocaleData(localeFr);
+registerLocaleData(localeFr, 'fr-FR');
 
 @Component({
 	template: `<lu-date-range-input [(ngModel)]="selected" (ngModelChange)="ngModelChangeCallback($event)" />`,
