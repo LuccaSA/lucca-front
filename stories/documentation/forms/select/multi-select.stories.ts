@@ -50,7 +50,7 @@ type LuMultiSelectInputStoryComponent = LuCoreSelectInputStoryComponent & {
 	selectedAxisSection: LuMultiSelection<{ id: number; name: string }>;
 	selectedEstablishment: LuMultiSelection<{ id: number; name: string }>;
 	selectedDepartments: LuMultiSelection<{ id: number; name: string }>;
-	selectedLegalUnits: LuMultiSelection<{ id: number; name: string }>;
+	selectedLegalUnits: { id: number; name: string }[];
 	selectLegume(legume: ILegume, legumes: ILegume[]): ILegume[];
 	groupingFn?: TreeGroupingFn<ILegume>;
 } & LuMultiSelectInputComponent<ILegume>;
@@ -644,7 +644,7 @@ export const LegalUnits = generateStory({
 	},
 	storyPartial: {
 		args: {
-			selectedLegalUnits: { mode: 'none' },
+			selectedLegalUnits: [],
 		},
 	},
 });
