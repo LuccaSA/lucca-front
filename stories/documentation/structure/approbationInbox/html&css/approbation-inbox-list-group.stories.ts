@@ -10,8 +10,8 @@ export default {
 function getTemplate(args: ApprobationInboxGroupStory): string {
 	return `<div class="approbationInbox">
 	<div class="approbationInbox-list-groupOptional">
-		<button type="button" aria-expanded="false" class="approbationInbox-list-groupOptional-action">
-			<span class="lucca-icon icon-arrowChevronBottom approbationInbox-list-groupOptional-action-icon" aria-hidden="true"></span>
+		<button type="button" aria-expanded="false" class="approbationInbox-list-groupOptional-header-action">
+			<span class="lucca-icon icon-arrowChevronBottom approbationInbox-list-groupOptional-header-action-icon" aria-hidden="true"></span>
 			Group label
 		</button>
 		<div class="approbationInbox-list-groupOptional-content">
@@ -31,8 +31,8 @@ function getTemplate(args: ApprobationInboxGroupStory): string {
 		</div>
 	</div>
 	<div class="approbationInbox-list-groupOptional">
-		<button type="button" aria-expanded="true" class="approbationInbox-list-groupOptional-action">
-			<span class="lucca-icon icon-arrowChevronBottom approbationInbox-list-groupOptional-action-icon" aria-hidden="true"></span>
+		<button type="button" aria-expanded="true" class="approbationInbox-list-groupOptional-header-action">
+			<span class="lucca-icon icon-arrowChevronBottom approbationInbox-list-groupOptional-header-action-icon" aria-hidden="true"></span>
 			Group label
 		</button>
 		<div class="approbationInbox-list-groupOptional-content">

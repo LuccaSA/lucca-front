@@ -1,8 +1,20 @@
 <div class="approbationInbox-list-groupOptional">
-	<button type="button" [attr.aria-expanded]="expanded()" (click)="expandedToggle()" class="approbationInbox-list-groupOptional-action">
-		<lu-icon icon="arrowChevronBottom" class="approbationInbox-list-groupOptional-action-icon" />
-		{{ label() }}
-	</button>
+	<div class="approbationInbox-list-groupOptional-header">
+		@if (selectable()) {
+			<lu-form-field label="Sélectionner…" hiddenLabel class="approbationInbox-list-item-formfieldOptional">
+				<lu-checkbox-input [(ngModel)]="example" />
+			</lu-form-field>
+		}
+		<button
+			type="button"
+			[attr.aria-expanded]="expanded()"
+			(click)="expandedToggle()"
+			class="approbationInbox-list-groupOptional-header-action"
+		>
+			<lu-icon icon="arrowChevronBottom" class="approbationInbox-list-groupOptional-header-action-icon" />
+			{{ label() }}
+		</button>
+	</div>
 	<div class="approbationInbox-list-groupOptional-content">
 		<ng-content />
 	</div>

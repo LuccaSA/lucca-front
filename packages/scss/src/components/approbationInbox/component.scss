@@ -4,22 +4,28 @@
 @mixin component($atRoot: namespace.$defaultAtRoot) {
 	@at-root ($atRoot) {
 		.approbationInbox-list {
-			background-color: var(--pr-t-elevation-surface-sunken);
-			padding: var(--pr-t-spacings-200);
-			border-radius: var(--pr-t-border-radius-structure);
 			margin: var(--pr-t-spacings-300);
 			block-size: calc(100% - var(--pr-t-spacings-300) * 2);
-			overflow: auto;
 			inline-size: var(--components-approbationInbox-list-inlineSize);
 			display: flex;
 			flex-direction: column;
 			gap: var(--pr-t-spacings-100);
 		}
 
+		.approbationInbox-list-content {
+			background-color: var(--pr-t-elevation-surface-sunken);
+			display: flex;
+			flex-direction: column;
+			gap: var(--pr-t-spacings-100);
+			padding: var(--pr-t-spacings-100);
+			border-radius: var(--pr-t-border-radius-structure);
+			overflow: auto;
+		}
+
 		.approbationInbox-list-header {
 			display: flex;
 			flex-direction: column;
-			gap: var(--pr-t-spacings-150);
+			gap: var(--pr-t-spacings-100);
 		}
 
 		.approbationInbox-list-header-title {
@@ -32,6 +38,8 @@
 		}
 
 		.approbationInbox-list-header-filterBar {
+			margin-block-end: var(--pr-t-spacings-100);
+
 			&:empty {
 				display: none;
 			}
@@ -93,6 +101,13 @@
 			align-items: var(--components-approbationInbox-list-item-content-info-alignItems);
 		}
 
+		.approbationInbox-list-item-content-info-start,
+		.approbationInbox-list-item-content-info-end {
+			&:empty {
+				display: none;
+			}
+		}
+
 		.approbationInbox-list-item-content-info-main {
 			flex-grow: 1;
 		}
@@ -129,13 +144,31 @@
 			}
 		}
 
+		.approbationInbox-list-groupOptional-header {
+			display: flex;
+			gap: var(--pr-t-spacings-150);
+			align-items: center;
+
+			&:has(.approbationInbox-list-groupOptional-header-action[aria-expanded='true']) {
+				.approbationInbox-list-groupOptional-header-action-icon .lucca-icon {
+					--components-approbationInbox-list-groupOptional-header-action-icon-backgroundColor-transform: rotate(180deg);
+				}
+			}
+
+			&:has(.approbationInbox-list-groupOptional-header-action[aria-expanded='false']) {
+				+ .approbationInbox-list-groupOptional-content {
+					--components-approbationInbox-list-groupOptional-content-display: none;
+				}
+			}
+		}
+
 		.approbationInbox-list-groupOptional-content {
 			display: var(--components-approbationInbox-list-groupOptional-content-display);
 			flex-direction: column;
 			gap: var(--pr-t-spacings-100);
 		}
 
-		.approbationInbox-list-groupOptional-action {
+		.approbationInbox-list-groupOptional-header-action {
 			@include reset.button;
 
 			inline-size: fit-content;
@@ -148,38 +181,26 @@
 			border-radius: var(--pr-t-border-radius-small);
 
 			&:hover {
-				.approbationInbox-list-groupOptional-action-icon {
-					--components-approbationInbox-list-groupOptional-action-icon-backgroundColor: var(--palettes-100, var(--palettes-neutral-100));
+				.approbationInbox-list-groupOptional-header-action-icon {
+					--components-approbationInbox-list-groupOptional-header-action-icon-backgroundColor: var(--palettes-100, var(--palettes-neutral-100));
 				}
 			}
 
 			&:active {
-				.approbationInbox-list-groupOptional-action-icon {
-					--components-approbationInbox-list-groupOptional-action-icon-backgroundColor: var(--palettes-200, var(--palettes-neutral-200));
-				}
-			}
-
-			&[aria-expanded='true'] {
-				.approbationInbox-list-groupOptional-action-icon .lucca-icon {
-					--components-approbationInbox-list-groupOptional-action-icon-backgroundColor-transform: rotate(180deg);
-				}
-			}
-
-			&[aria-expanded='false'] {
-				+ .approbationInbox-list-groupOptional-content {
-					--components-approbationInbox-list-groupOptional-content-display: none;
+				.approbationInbox-list-groupOptional-header-action-icon {
+					--components-approbationInbox-list-groupOptional-header-action-icon-backgroundColor: var(--palettes-200, var(--palettes-neutral-200));
 				}
 			}
 		}
 
-		.approbationInbox-list-groupOptional-action-icon {
+		.approbationInbox-list-groupOptional-header-action-icon {
 			border-radius: var(--pr-t-border-radius-small);
-			background-color: var(--components-approbationInbox-list-groupOptional-action-icon-backgroundColor);
+			background-color: var(--components-approbationInbox-list-groupOptional-header-action-icon-backgroundColor);
 
 			.lucca-icon {
 				transition-property: transform;
 				transition-duration: var(--commons-animations-durations-fast);
-				transform: var(--components-approbationInbox-list-groupOptional-action-icon-backgroundColor-transform);
+				transform: var(--components-approbationInbox-list-groupOptional-header-action-icon-backgroundColor-transform);
 			}
 		}
 	}

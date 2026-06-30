@@ -1,4 +1,4 @@
-import { ChangeDetectionStrategy, Component, input, ViewEncapsulation } from '@angular/core';
+import { booleanAttribute, ChangeDetectionStrategy, Component, input, ViewEncapsulation } from '@angular/core';
 import { PortalContent, PortalDirective } from '@lucca-front/ng/core';
 
 @Component({
@@ -14,4 +14,5 @@ import { PortalContent, PortalDirective } from '@lucca-front/ng/core';
 })
 export class ApprobationInboxListComponent {
 	readonly label = input.required<PortalContent>();
+	readonly selectable = input(false, { transform: booleanAttribute });
 }

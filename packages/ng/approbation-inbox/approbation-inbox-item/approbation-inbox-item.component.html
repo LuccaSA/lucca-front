@@ -1,12 +1,8 @@
 <div class="approbationInbox-list-item">
 	@if (selectable()) {
-		<div class="form-field approbationInbox-list-item-formfieldOptional">
-			<label class="formLabel pr-u-mask" for="ID">Sélectionner…</label>
-			<span class="checkboxField">
-				<input type="checkbox" class="checkboxField-input" id="ID" />
-				<span class="checkboxField-icon" aria-hidden="true"><span class="checkboxField-icon-check"></span></span>
-			</span>
-		</div>
+		<lu-form-field label="Sélectionner…" hiddenLabel class="approbationInbox-list-item-formfieldOptional">
+			<lu-checkbox-input [(ngModel)]="example" />
+		</lu-form-field>
 	}
 	<div class="approbationInbox-list-item-content">
 		<div class="approbationInbox-list-item-content-info" [class.mod-center]="center()">
