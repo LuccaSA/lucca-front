@@ -1,6 +1,5 @@
 import { provideHttpClient } from '@angular/common/http';
-import { fakeAsync, tick } from '@angular/core/testing';
-import { fireEvent, render, screen } from '@testing-library/angular';
+import { fireEvent, render, screen, waitFor } from '@testing-library/angular';
 import userEvent from '@testing-library/user-event';
 import { axe } from 'jest-axe';
 import { of } from 'rxjs';
@@ -41,7 +40,7 @@ describe('lu-api-select', () => {
 		expect(dial).toBeInTheDocument();
 	});
 
-	it('should trigger search when clue is typed in', fakeAsync(async () => {
+	it('should trigger search when clue is typed in', async () => {
 		await render(apiSelectStoryTemplate, {
 			imports: [LuApiSelectInputComponent],
 			providers: [provideHttpClient()],
@@ -53,17 +52,15 @@ describe('lu-api-select', () => {
 			],
 		});
 
-		const luSelectElement = await screen.findByTestId('lu-select');
-
+		const luSelectElement = screen.getByTestId('lu-select');
 		expect(luSelectElement).toBeInTheDocument();
 		fireEvent.click(luSelectElement);
-		tick(250); // debouncetime du composant
-		expect(mock.searchPaged).toHaveBeenCalledWith('', 0);
-		const input: HTMLInputElement = await screen.findByRole('textbox');
+		await waitFor(() => expect(mock.searchPaged).toHaveBeenCalledWith('', 0));
+
+		const input: HTMLInputElement = screen.getByRole('textbox');
 		fireEvent.input(input, { target: { value: 'Test' } });
-		tick(250); // debouncetime du composant
-		expect(mock.searchPaged).toHaveBeenCalledWith('Test', 0);
-	}));
+		await waitFor(() => expect(mock.searchPaged).toHaveBeenCalledWith('Test', 0));
+	});
 
 	it('should check a11y', async () => {
 		await render(apiSelectStoryTemplate, {
