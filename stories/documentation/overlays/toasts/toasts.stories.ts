@@ -84,7 +84,11 @@ const template = (args: ToastsStory) => ({
 });
 
 const code = `
-/* Ajouter l'encre <lu-toasts /> dans le app.component.html */
+/* Ajouter l'encre <lu-toasts /> dans le app.component.html.
+   ⚠️ Le <lu-toasts /> doit se trouver EN DEHORS du <lu-app-layout />.
+   Le host .appLayout a \`isolation: isolate\`, ce qui enfermerait le z-index
+   du toast dans un stacking context, sous le .cdk-overlay-container des overlays
+   (dialogs) : les toasts passeraient alors derrière les dialogs. */
 <lu-toasts [bottom]="true" [sources]="[]" />
 
 /* Ajouter un toast avec la méthode addToast(..) du LuToastsService */
