@@ -90,7 +90,7 @@ export default {
 			if: { arg: 'heading', truthy: true },
 		},
 		removedChange: {
-			description: 'Événement déclenché lorsque le bouton de suppression est cliqué.',
+			description: 'Événement déclenché lors de l’activation du bouton de suppression.',
 		},
 		AI: {
 			description: '[v20.3] Applique les couleurs IA.',
