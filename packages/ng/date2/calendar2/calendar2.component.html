@@ -5,25 +5,21 @@
 				@if (disableModeChange()) {
 					{{ currentMonthLabel() }}&ngsp; {{ currentYearLabel() }}
 				} @else {
-					<button type="button" class="calendar-name-button"
-									(click)="displayMode.set('month')">{{ currentMonthLabel() }}
-					</button>&ngsp;
-					<button type="button" class="calendar-name-button"
-									(click)="displayMode.set('year')">{{ currentYearLabel() }}
-					</button>
+					<button type="button" class="calendar-name-button" (click)="displayMode.set('month')">{{ currentMonthLabel() }}</button>&ngsp;
+					<button type="button" class="calendar-name-button" (click)="displayMode.set('year')">{{ currentYearLabel() }}</button>
 				}
 				<span class="pr-u-mask">{{ intl().directionKeysTip }} </span>
 			</div>
 			<table class="calendar-table" role="grid" aria-labelledby="calendar-name">
 				<thead class="calendar-table-head">
-				<tr class="calendar-table-head-row">
-					@for (day of daysOfWeek; track day.long) {
-						<th class="calendar-table-head-row-cell" scope="col">
-							<span [attr.data-content-after]="day.short.substring(0, 1)" aria-hidden="true"></span>
-							<span class="pr-u-mask">{{ day.long }}</span>
-						</th>
-					}
-				</tr>
+					<tr class="calendar-table-head-row">
+						@for (day of daysOfWeek; track day.long) {
+							<th class="calendar-table-head-row-cell" scope="col">
+								<span [attr.data-content-after]="day.short.substring(0, 1)" aria-hidden="true"></span>
+								<span class="pr-u-mask">{{ day.long }}</span>
+							</th>
+						}
+					</tr>
 				</thead>
 				<tbody class="calendar-table-body">
 					@for (week of monthGridDisplay(); track $index; let isLastWeek = $last) {
@@ -63,13 +59,12 @@
 									}
 								</td>
 							}
-							<td class="calendar-table-body-row-cell is-overflow"
-									*luRepeatTimes="isLastWeek ? 7 - week.length : 0"></td>
+							<td class="calendar-table-body-row-cell is-overflow" *luRepeatTimes="isLastWeek ? 7 - week.length : 0"></td>
 						</tr>
 					}
-				<tr class="calendar-table-body-row" *luRepeatTimes="6 - monthGridDisplay().length">
-					<td class="calendar-table-body-row-cell is-overflow" *luRepeatTimes="7"></td>
-				</tr>
+					<tr class="calendar-table-body-row" *luRepeatTimes="6 - monthGridDisplay().length">
+						<td class="calendar-table-body-row-cell is-overflow" *luRepeatTimes="7"></td>
+					</tr>
 				</tbody>
 			</table>
 			@if (hasTodayButton()) {
@@ -103,34 +98,34 @@
 				@if (disableModeChange()) {
 					{{ currentMonthLabel() }}&ngsp; {{ currentYearLabel() }}
 				} @else {
-					<button type="button" class="calendar-name-button"
-									(click)="displayMode.set('month')">{{ currentMonthLabel() }}
-					</button>&ngsp;
-					<button type="button" class="calendar-name-button"
-									(click)="displayMode.set('year')">{{ currentYearLabel() }}
-					</button>
+					<button type="button" class="calendar-name-button" (click)="displayMode.set('month')">{{ currentMonthLabel() }}</button>&ngsp;
+					<button type="button" class="calendar-name-button" (click)="displayMode.set('year')">{{ currentYearLabel() }}</button>
 				}
 				<span class="pr-u-mask">{{ intl().directionKeysTip }} </span>
 			</div>
 			<table class="calendar-table" role="grid" aria-labelledby="calendar-week-name">
 				<thead class="calendar-table-head">
-				<tr class="calendar-table-head-row">
-					<th scope="col" class="calendar-table-head-row-cell"><span class="pr-u-mask">{{ intl().weekNumber }}</span></th>
-					@for (day of daysOfWeek; track day.long) {
-						<th class="calendar-table-head-row-cell" scope="col">
-							<span [attr.data-content-after]="day.short.substring(0, 1)" aria-hidden="true"></span>
-							<span class="pr-u-mask">{{ day.long }}</span>
+					<tr class="calendar-table-head-row">
+						<th scope="col" class="calendar-table-head-row-cell">
+							<span class="pr-u-mask">{{ intl().weekNumber }}</span>
 						</th>
-					}
-				</tr>
+						@for (day of daysOfWeek; track day.long) {
+							<th class="calendar-table-head-row-cell" scope="col">
+								<span [attr.data-content-after]="day.short.substring(0, 1)" aria-hidden="true"></span>
+								<span class="pr-u-mask">{{ day.long }}</span>
+							</th>
+						}
+					</tr>
 				</thead>
 				<tbody class="calendar-table-body">
 					@for (week of monthGridDisplay(); track $index; let isLastWeek = $last) {
 						<tr class="calendar-table-body-row">
-							<th scope="row"
+							<th
+								scope="row"
 								class="calendar-table-body-row-cell"
 								[class]="getWeekRowClasses(week)"
-								[attr.aria-selected]="week[0].isSelected || null">
+								[attr.aria-selected]="week[0].isSelected || null"
+							>
 								<button
 									type="button"
 									class="calendar-table-body-row-cell-action"
@@ -181,13 +176,12 @@
 									}
 								</td>
 							}
-							<td class="calendar-table-body-row-cell is-overflow"
-									*luRepeatTimes="isLastWeek ? 7 - week.length : 0"></td>
+							<td class="calendar-table-body-row-cell is-overflow" *luRepeatTimes="isLastWeek ? 7 - week.length : 0"></td>
 						</tr>
 					}
-				<tr class="calendar-table-body-row" *luRepeatTimes="6 - monthGridDisplay().length">
-					<td class="calendar-table-body-row-cell is-overflow" *luRepeatTimes="7"></td>
-				</tr>
+					<tr class="calendar-table-body-row" *luRepeatTimes="6 - monthGridDisplay().length">
+						<td class="calendar-table-body-row-cell is-overflow" *luRepeatTimes="7"></td>
+					</tr>
 				</tbody>
 			</table>
 			@if (hasTodayButton()) {
@@ -221,9 +215,7 @@
 				@if (disableModeChange()) {
 					{{ currentYearLabel() }}
 				} @else {
-					<button type="button" class="calendar-name-button"
-									(click)="displayMode.set('year')">{{ currentYearLabel() }}
-					</button>
+					<button type="button" class="calendar-name-button" (click)="displayMode.set('year')">{{ currentYearLabel() }}</button>
 				}
 				<span class="pr-u-mask">{{ intl().directionKeysTip }} </span>
 			</div>

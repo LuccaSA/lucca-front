@@ -1,18 +1,5 @@
 import { isNil } from '@lucca-front/ng/core';
-import {
-	Day,
-	format,
-	isSameDay,
-	isSameMonth,
-	isSameWeek,
-	isSameYear,
-	parse,
-	startOfDecade,
-	startOfMonth,
-	startOfWeek,
-	startOfYear,
-	WeekOptions,
-} from "date-fns";
+import { Day, format, isSameDay, isSameMonth, isSameWeek, isSameYear, parse, startOfDecade, startOfMonth, startOfYear, WeekOptions } from 'date-fns';
 import { CalendarWeekDay, CalendarWeekInfo } from './calendar.token';
 import { CalendarMode } from './calendar2/calendar-mode';
 import { DateRange, DateRangeInput } from './calendar2/date-range';
