@@ -69,6 +69,7 @@ export default {
 		},
 		mixed: {
 			if: { arg: 'selectable', truthy: true },
+			description: "Applique un état de sélection mixte (-) à la checkbox d'une ligne.",
 		},
 		disabled: {
 			if: { arg: 'selectable', truthy: true },
