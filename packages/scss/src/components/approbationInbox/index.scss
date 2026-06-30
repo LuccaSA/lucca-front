@@ -1,0 +1,52 @@
+@use 'exports' as *;
+@use '@lucca-front/scss/src/commons/utils/media';
+
+.approbationInbox {
+	@layer components {
+		@include vars;
+		@include component;
+	}
+}
+
+.approbationInbox-list-item {
+	&:has(.checkboxField-input:checked) {
+		@layer mods {
+			@include selected;
+		}
+	}
+}
+
+.approbationInbox-list-item {
+	&:has(.approbationInbox-list-item-content-action[aria-current='page']),
+	&:has(.approbationInbox-list-item-content-action.is-current) {
+		@layer mods {
+			@include current;
+		}
+	}
+}
+
+.approbationInbox-list-item-content {
+	&:focus-within {
+		@include focused;
+	}
+}
+
+.approbationInbox-list {
+	@layer mods {
+		@include media.min('M') {
+			--components-approbationInbox-list-inlineSize: 17rem;
+		}
+
+		@include media.min('L') {
+			--components-approbationInbox-list-inlineSize: 22.5rem;
+		}
+	}
+}
+
+.approbationInbox-list-item-content-info {
+	@layer mods {
+		&.mod-center {
+			@include center;
+		}
+	}
+}

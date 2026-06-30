@@ -1,9 +1,12 @@
 import { FormsModule } from '@angular/forms';
 import { CalloutComponent } from '@lucca-front/ng/callout';
 import { DividerComponent } from '@lucca-front/ng/divider';
+import { FilterBarComponent, FilterPillAddonAfterDirective, FilterPillAddonBeforeDirective, FilterPillComponent } from '@lucca-front/ng/filter-pills';
 import { FormFieldComponent } from '@lucca-front/ng/form-field';
 import { CheckboxInputComponent } from '@lucca-front/ng/forms';
+import { NumericBadgeComponent } from '@lucca-front/ng/numeric-badge';
 import { ResourceCardComponent, ResourceCardLinkComponent, ResourceCardWrapperComponent } from '@lucca-front/ng/resource-card';
+import { SegmentedControlComponent, SegmentedControlFilterComponent } from '@lucca-front/ng/segmented-control';
 import { ButtonComponent } from '@lucca/prisme/button';
 import { IconComponent } from '@lucca/prisme/icon';
 import { Meta, moduleMetadata } from '@storybook/angular';
@@ -35,6 +38,13 @@ export default {
 				FormsModule,
 				DividerComponent,
 				CalloutComponent,
+				FilterBarComponent,
+				FilterPillAddonAfterDirective,
+				FilterPillAddonBeforeDirective,
+				FilterPillComponent,
+				SegmentedControlComponent,
+				SegmentedControlFilterComponent,
+				NumericBadgeComponent,
 			],
 		}),
 	],
@@ -190,6 +200,10 @@ export default {
 				margin-block-end: var(--pr-t-spacings-150);
 		}
 
+		.approbationInbox-list-filterBar {
+			margin-block: var(--pr-t-spacings-150) var(--pr-t-spacings-200);
+		}
+
 		.button.mod-disclosure {
 				margin-inline-start: calc(var(--pr-t-spacings-100) * -1);
 				--components-button-paddingInlineStart: var(--pr-t-spacings-100);
@@ -214,6 +228,17 @@ export default {
 			<div class="mainLayout-sidebar">
 				<div class="approbationInbox-list">
 					<h3>À approuver</h3>
+					<lu-filter-bar class="approbationInbox-list-filterBar">
+						<lu-segmented-control class="filterBar-segmentedControl" *luFilterPillAddonBefore [(ngModel)]="example">
+							<ng-template #label0>Par vous <lu-numeric-badge [value]="12" /></ng-template>
+							<ng-template #label1>Par d’autres <lu-numeric-badge [value]="5" /></ng-template>
+							<lu-segmented-control-filter [label]="label0" value="0" />
+							<lu-segmented-control-filter [label]="label1" value="1" />
+						</lu-segmented-control>
+						<lu-filter-pill label="Inclure les collaborateurs partis" optional name="includeFormerEmployees">
+								<lu-checkbox-input [ngModel]="false" />
+						</lu-filter-pill>
+					</lu-filter-bar>
 					<lu-form-field label="Tout sélectionner">
 						<lu-checkbox-input [(ngModel)]="example0" />
 					</lu-form-field>
