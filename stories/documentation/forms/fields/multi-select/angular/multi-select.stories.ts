@@ -75,7 +75,6 @@ export default {
 		},
 		clueChange: HiddenArgType,
 		nextPage: HiddenArgType,
-		previousPage: HiddenArgType,
 		optionComparer: HiddenArgType,
 		options: HiddenArgType,
 		optionTpl: HiddenArgType,

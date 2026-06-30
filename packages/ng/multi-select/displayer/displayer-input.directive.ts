@@ -56,7 +56,7 @@ export class LuMultiSelectDisplayerInputDirective<T> implements OnInit {
 	}
 
 	get readonly() {
-		return !this.select.searchable;
+		return this.select.searchable ? null : true;
 	}
 
 	onInput() {

@@ -64,7 +64,7 @@ export class LuCoreSelectDepartmentsDirective<T extends ILuDepartment = ILuDepar
 			);
 	}
 
-	trim(options: TreeNode<T>[], clue: string): TreeNode<T>[] {
+	trim(options: readonly TreeNode<T>[], clue: string): TreeNode<T>[] {
 		return options
 			.map((option) => {
 				if (option.node.name.toLowerCase().includes(clue.toLowerCase())) {
@@ -93,7 +93,7 @@ export class LuCoreSelectDepartmentsDirective<T extends ILuDepartment = ILuDepar
 		}),
 	);
 
-	public readonly totalCount$ = this.select.options$.pipe(
+	public readonly totalCount$ = toObservable(this.select.dataSourceOptions).pipe(
 		filter((opts) => opts.length > 0),
 		map((opts) => {
 			return opts.map((branch) => this.flattenTree(branch)).flat().length;
