@@ -51,7 +51,6 @@ export const coreSelectDefaultOptionKey: (option: unknown) => unknown = (option)
 export abstract class ALuSelectInputComponent<TOption, TValue> implements OnDestroy, OnInit, ControlValueAccessor, FilterPillInputComponent {
 	public parentInput = inject(FILTER_PILL_INPUT_COMPONENT, { optional: true, skipSelf: true });
 	protected changeDetectorRef = inject(ChangeDetectorRef);
-	readonly #injector = inject(Injector);
 	protected overlayContainerRef: HTMLElement = inject(OverlayContainer).getContainerElement();
 
 	protected labelElement: HTMLElement | undefined = inject(SELECT_LABEL);
