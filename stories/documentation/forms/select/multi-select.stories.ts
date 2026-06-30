@@ -17,6 +17,7 @@ import { LuCoreSelectApiV3Directive, LuCoreSelectApiV4Directive } from '@lucca-f
 import { LuCoreSelectDepartmentsDirective } from '@lucca-front/ng/core-select/department';
 import { LuCoreSelectEstablishmentsDirective } from '@lucca-front/ng/core-select/establishment';
 import { LuCoreSelectJobQualificationsDirective } from '@lucca-front/ng/core-select/job-qualification';
+import { LuCoreSelectLegalUnitsDirective } from '@lucca-front/ng/core-select/legal-units';
 import { LuCoreSelectOccupationCategoriesDirective } from '@lucca-front/ng/core-select/occupation-category';
 import { LuCoreSelectUsersDirective, provideCoreSelectCurrentUserId } from '@lucca-front/ng/core-select/user';
 import {
@@ -49,6 +50,7 @@ type LuMultiSelectInputStoryComponent = LuCoreSelectInputStoryComponent & {
 	selectedAxisSection: LuMultiSelection<{ id: number; name: string }>;
 	selectedEstablishment: LuMultiSelection<{ id: number; name: string }>;
 	selectedDepartments: LuMultiSelection<{ id: number; name: string }>;
+	selectedLegalUnits: LuMultiSelection<{ id: number; name: string }>;
 	selectLegume(legume: ILegume, legumes: ILegume[]): ILegume[];
 	groupingFn?: TreeGroupingFn<ILegume>;
 } & LuMultiSelectInputComponent<ILegume>;
@@ -627,6 +629,26 @@ export const OccupationCategory = generateStory({
 	},
 });
 
+export const LegalUnits = generateStory({
+	name: 'LegalUnit Select',
+	description: 'Pour saisir une entité légale, il suffit d’utiliser la directive `legalUnits`',
+	template: `<lu-multi-select
+	legalUnits
+	[(ngModel)]="selectedLegalUnits"
+	[keepSearchAfterSelection]="keepSearchAfterSelection"
+/>
+<pr-story-model-display>{{ selectedLegalUnits | json }}</pr-story-model-display>`,
+	neededImports: {
+		'@lucca-front/ng/multi-select': ['LuMultiSelectInputComponent'],
+		'@lucca-front/ng/core-select/legal-units': ['LuCoreSelectLegalUnitsDirective'],
+	},
+	storyPartial: {
+		args: {
+			selectedLegalUnits: { mode: 'none' },
+		},
+	},
+});
+
 export const GroupBy = generateStory({
 	name: 'Group options',
 	description: 'Pour grouper les options, il suffit d’utiliser la directive `luOptionGroup`.',
@@ -861,6 +883,7 @@ const meta: Meta<InputAlias<LuMultiSelectInputStoryComponent, SelectCommonAliasI
 				LuCoreSelectDepartmentsDirective,
 				LuCoreSelectUsersDirective,
 				LuCoreSelectJobQualificationsDirective,
+				LuCoreSelectLegalUnitsDirective,
 				LuCoreSelectOccupationCategoriesDirective,
 				LuCoreSelectPanelHeaderDirective,
 				LuDisabledOptionDirective,
