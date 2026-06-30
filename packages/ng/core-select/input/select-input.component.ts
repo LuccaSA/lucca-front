@@ -1,5 +1,6 @@
 import { OverlayConfig, OverlayContainer } from '@angular/cdk/overlay';
 import {
+	afterNextRender,
 	booleanAttribute,
 	ChangeDetectorRef,
 	computed,
@@ -7,6 +8,7 @@ import {
 	ElementRef,
 	EventEmitter,
 	inject,
+	Injector,
 	input,
 	linkedSignal,
 	model,
@@ -49,6 +51,7 @@ export const coreSelectDefaultOptionKey: (option: unknown) => unknown = (option)
 export abstract class ALuSelectInputComponent<TOption, TValue> implements OnDestroy, OnInit, ControlValueAccessor, FilterPillInputComponent {
 	public parentInput = inject(FILTER_PILL_INPUT_COMPONENT, { optional: true, skipSelf: true });
 	protected changeDetectorRef = inject(ChangeDetectorRef);
+	readonly #injector = inject(Injector);
 	protected overlayContainerRef: HTMLElement = inject(OverlayContainer).getContainerElement();
 
 	protected labelElement: HTMLElement | undefined = inject(SELECT_LABEL);
@@ -259,15 +262,16 @@ export abstract class ALuSelectInputComponent<TOption, TValue> implements OnDest
 			if (isNotNil(options)) {
 				this.options$.next(options);
 				if (this.panelRef) {
-					// We have to put it in a setTimeout so it'll be triggered AFTER the DOM is updated and not right now,
-					// which is before the panel size has been modified by the arrival of the new options
-					const timeoutId = setTimeout(() => {
-						this.panelRef?.updatePosition();
-						this.updatePositionFn?.();
-						// If no fixes are found, last resort fix is here
-						// window.dispatchEvent(new Event('resize'));
-					});
-					onCleanup(() => clearTimeout(timeoutId));
+					const ref = afterNextRender(
+						() => {
+							this.panelRef?.updatePosition();
+							this.updatePositionFn?.();
+							// If no fixes are found, last resort fix is here
+							// window.dispatchEvent(new Event('resize'));
+						},
+						{ injector: this.#injector },
+					);
+					onCleanup(() => ref.destroy());
 				}
 			}
 		});
