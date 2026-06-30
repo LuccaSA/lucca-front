@@ -60,7 +60,7 @@
           "builder": "@storybook/angular-vite:start-storybook",
           "options": {
             "configDir": ".storybook",
-            "compodoc": false,
+            "compodoc": true,
             "compodocArgs": ["-e", "json", "-d", ".storybook"],
             "port": 6006,
             "styles": [
@@ -75,7 +75,7 @@
           "builder": "@storybook/angular-vite:build-storybook",
           "options": {
             "configDir": ".storybook",
-            "compodoc": false,
+            "compodoc": true,
             "compodocArgs": ["-e", "json", "-d", ".storybook"],
             "outputDir": "storybook-static",
             "styles": [
