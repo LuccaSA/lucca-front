@@ -6,6 +6,9 @@ import { createBaseConfig } from './vitest.shared-config';
 export default mergeConfig(createBaseConfig(__dirname), {
 	root: __dirname,
 	cacheDir: './node_modules/.vite',
+	resolve: {
+		tsconfigPaths: true,
+	},
 	test: {
 		name: 'lucca-front',
 		include: ['packages/**/*.spec.ts', 'packages/**/*.spec.*.ts', 'stories/**/*.spec.ts'],

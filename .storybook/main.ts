@@ -1,10 +1,10 @@
 import { StorybookConfig } from '@storybook/angular-vite';
-import viteTsConfigPaths from 'vite-tsconfig-paths';
 import { mergeConfig } from 'vite';
 
 import { dirname } from 'path';
 
 import { fileURLToPath } from 'url';
+import { createBaseConfig } from '../vitest.shared-config';
 
 /**
  * This function is used to resolve the absolute path of a package.
@@ -25,7 +25,9 @@ const config: StorybookConfig = {
 	staticDirs: ['./public'],
 	viteFinal: async (config) => {
 		return mergeConfig(config, {
-			plugins: [viteTsConfigPaths()],
+			resolve: {
+				tsconfigPaths: true,
+			},
 		});
 	},
 };
