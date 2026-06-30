@@ -1,5 +1,6 @@
 import { CommonModule } from '@angular/common';
 import {
+	afterRenderEffect,
 	booleanAttribute,
 	ChangeDetectionStrategy,
 	Component,
@@ -7,10 +8,10 @@ import {
 	contentChildren,
 	effect,
 	ElementRef,
-	forwardRef,
 	inject,
 	InjectionToken,
 	input,
+	model,
 	OnDestroy,
 	OnInit,
 	Signal,
@@ -19,11 +20,11 @@ import {
 	ViewEncapsulation,
 	WritableSignal,
 } from '@angular/core';
-import { ControlValueAccessor, NG_VALUE_ACCESSOR } from '@angular/forms';
+import { FormValueControl } from '@angular/forms/signals';
 import { createEmptyHistoryState, registerHistory } from '@lexical/history';
 import { $canShowPlaceholderCurry, $isRootTextContentEmpty } from '@lexical/text';
 import { mergeRegister } from '@lexical/utils';
-import { isNil } from '@lucca-front/ng/core';
+import { isNil, ɵeffectWithDeps } from '@lucca-front/ng/core';
 import { FormFieldComponent, InputDirective, ɵPresentationDisplayDefaultDirective } from '@lucca-front/ng/form-field';
 import { $getRoot, createEditor, Klass, LexicalEditor, LexicalNode, LexicalNodeReplacement, SKIP_DOM_SELECTION_TAG, UpdateListenerPayload } from 'lexical';
 import { RICH_TEXT_FORMATTER, RichTextFormatter } from './formatters';
@@ -54,16 +55,15 @@ export const RICH_TEXT_PLUGIN_COMPONENT = new InjectionToken<RichTextPluginCompo
 	templateUrl: './rich-text-input.component.html',
 	styleUrl: './rich-text-input.component.scss',
 	encapsulation: ViewEncapsulation.None,
-	providers: [
-		{
-			provide: NG_VALUE_ACCESSOR,
-			useExisting: forwardRef(() => RichTextInputComponent),
-			multi: true,
-		},
-	],
 	changeDetection: ChangeDetectionStrategy.OnPush,
 })
-export class RichTextInputComponent implements OnInit, OnDestroy, ControlValueAccessor {
+export class RichTextInputComponent implements OnInit, OnDestroy, FormValueControl<string | null> {
+	readonly value = model<string | null>(null);
+	// Writable interaction state - control updates these
+	readonly touched = model<boolean>(false);
+
+	readonly disabled = input<boolean>(false);
+
 	readonly #richTextFormatter = inject<RichTextFormatter>(RICH_TEXT_FORMATTER);
 	readonly #formField = inject(FormFieldComponent, { optional: true });
 
@@ -82,7 +82,6 @@ export class RichTextInputComponent implements OnInit, OnDestroy, ControlValueAc
 	readonly toolsProjection = viewChild.required<ElementRef<HTMLElement>>('toolsProjection');
 
 	readonly currentCanShowPlaceholder = signal(false);
-	readonly isDisabled = signal(false);
 	readonly formFieldId = computed(() => this.#formField?.id());
 	readonly toolsPortal = computed(() => new DomPortal(this.toolsProjection()));
 
@@ -92,14 +91,12 @@ export class RichTextInputComponent implements OnInit, OnDestroy, ControlValueAc
 			.flat(),
 	);
 	readonly #allPlugins = computed(() => this.#flattenPlugins(this.pluginComponents()));
-	readonly #isTouched = signal(false);
 
-	#onChange?: (markdown: string | null) => void;
-	#onTouch?: () => void;
 	#cleanup?: () => void;
 	#focusedPlugin: number = 0;
 	#editor?: LexicalEditor;
 	#isRootElementInitialized = false;
+	#lastEmittedValue: string | null = null;
 
 	constructor() {
 		effect(() => {
@@ -108,9 +105,26 @@ export class RichTextInputComponent implements OnInit, OnDestroy, ControlValueAc
 				this.#editor?.setEditable(false);
 			} else if (this.content()) {
 				this.#editor?.setRootElement(this.content()?.nativeElement ?? null);
-				this.#editor?.setEditable(true);
+				this.#editor?.setEditable(!this.disabled());
 			}
 			this.#isRootElementInitialized = true;
+		});
+
+		ɵeffectWithDeps([this.disabled, this.pluginComponents], (isDisabled, pluginComponents) => {
+			this.#editor?.setEditable(!isDisabled);
+			pluginComponents.forEach((c) => c.setDisabledState(isDisabled));
+		});
+
+		afterRenderEffect({
+			earlyRead: () => {
+				return this.value();
+			},
+			write: (value) => {
+				const v = value();
+				if (v !== this.#lastEmittedValue) {
+					this.writeValue(v);
+				}
+			},
 		});
 	}
 
@@ -171,20 +185,6 @@ export class RichTextInputComponent implements OnInit, OnDestroy, ControlValueAc
 		}
 	}
 
-	registerOnChange(onChange: (markdown: string | null) => void): void {
-		this.#onChange = onChange;
-	}
-
-	registerOnTouched(onTouch: () => void): void {
-		this.#onTouch = onTouch;
-	}
-
-	setDisabledState(isDisabled: boolean): void {
-		this.#editor?.setEditable(!isDisabled);
-		this.isDisabled.set(isDisabled);
-		this.pluginComponents().forEach((c) => c.setDisabledState(isDisabled));
-	}
-
 	focusSiblingPlugin(event: Event, direction: -1 | 1) {
 		event.preventDefault();
 		const plugins = this.#allPlugins();
@@ -200,11 +200,6 @@ export class RichTextInputComponent implements OnInit, OnDestroy, ControlValueAc
 
 	focus() {
 		this.content()?.nativeElement.focus();
-	}
-
-	touch() {
-		this.#isTouched.set(true);
-		this.#onTouch?.();
 	}
 
 	#flattenPlugins(plugins: readonly RichTextPluginComponent[]): RichTextPluginComponent[] {
@@ -226,8 +221,9 @@ export class RichTextInputComponent implements OnInit, OnDestroy, ControlValueAc
 				if (!$isRootTextContentEmpty(isComposing ?? false, false) && this.#editor) {
 					result = this.#richTextFormatter.format(this.#editor);
 				}
-				this.touch();
-				this.#onChange?.(result);
+				this.#lastEmittedValue = result;
+				this.touched.set(true);
+				this.value.set(result);
 			});
 		}
 		const currentCanShowPlaceholder = this.#editor?.getEditorState().read($canShowPlaceholderCurry(isComposing ?? false));

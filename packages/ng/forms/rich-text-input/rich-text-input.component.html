@@ -1,15 +1,15 @@
-<div class="richTextField" [class.is-disabled]="isDisabled()" [class.mod-autoResize]="autoResize()">
+<div class="richTextField" [class.is-disabled]="disabled()" [class.mod-autoResize]="autoResize()">
 	<div
 		#content
 		luInput
 		class="richTextField-content textFlow"
 		role="textbox"
-		[attr.contenteditable]="!isDisabled()"
-		[attr.aria-disabled]="isDisabled()"
+		[attr.contenteditable]="!disabled()"
+		[attr.aria-disabled]="disabled()"
 		[attr.aria-placeholder]="currentCanShowPlaceholder() ? placeholder() : null"
 		[attr.aria-labelledby]="formFieldId() + '-label'"
 		[attr.spellcheck]="!disableSpellcheck()"
-		(blur)="touch()"
+		(blur)="touched.set(true)"
 	></div>
 	@if (currentCanShowPlaceholder()) {
 		<div aria-hidden="true" class="richTextField-content-placeholder">{{ placeholder() }}</div>
