@@ -11,7 +11,18 @@ import tsParser from '@typescript-eslint/parser';
 
 export default defineConfig(
 	{
-		ignores: ['dist/', '.storybook/**', '**/schematics/**/tests/', 'node_modules/', '.angular/', '**/stories/**'],
+		ignores: [
+			'dist/',
+			'.storybook/**',
+			'**/schematics/**/tests/',
+			'node_modules/',
+			'.angular/',
+			'vitest.config.ts',
+			'vitest.shared-config.ts',
+			// schematics && stories can be strictified
+			'packages/ng/schematics/**/*.ts',
+			'stories/**/*.ts',
+		],
 	},
 	{
 		linterOptions: {
@@ -24,7 +35,13 @@ export default defineConfig(
 		processor: angular.processInlineTemplates,
 		languageOptions: {
 			parserOptions: {
-				project: ['tsconfig.json', 'packages/ng/tsconfig.json', '.storybook/tsconfig.json'],
+				project: [
+					'tsconfig.json',
+					'packages/ng/tsconfig.json',
+					'packages/prisme/tsconfig.json',
+					'packages/eslint-plugin/tsconfig.json',
+					'.storybook/tsconfig.json',
+				],
 				createDefaultProgram: true,
 			},
 		},
@@ -126,7 +143,13 @@ export default defineConfig(
 		languageOptions: {
 			parser: tsParser,
 			parserOptions: {
-				project: ['tsconfig.lint.json', 'packages/ng/tsconfig.lint.json', '.storybook/tsconfig.lint.json'],
+				project: [
+					'tsconfig.lint.json',
+					'packages/ng/tsconfig.lint.json',
+					'packages/prisme/tsconfig.lint.json',
+					'packages/eslint-plugin/tsconfig.json',
+					'.storybook/tsconfig.lint.json',
+				],
 			},
 		},
 		plugins: {
@@ -138,6 +161,17 @@ export default defineConfig(
 			'@typescript-eslint/no-unsafe-return': 'warn',
 			'@typescript-eslint/no-unsafe-member-access': 'warn',
 			'@typescript-eslint/no-unsafe-call': 'warn',
+		},
+	},
+	{
+		files: ['**/*.spec.ts', '**/*.spec.*.ts'],
+		rules: {
+			'@typescript-eslint/no-unsafe-call': 'off',
+			'@typescript-eslint/no-unsafe-member-access': 'off',
+			'@typescript-eslint/no-unsafe-assignment': 'off',
+			'@typescript-eslint/no-unsafe-return': 'off',
+			'@typescript-eslint/no-unsafe-argument': 'off',
+			'@typescript-eslint/no-unnecessary-type-assertion': 'off',
 		},
 	},
 	{
