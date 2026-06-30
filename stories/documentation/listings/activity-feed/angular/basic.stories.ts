@@ -1,3 +1,5 @@
+import { createTestStory } from '@/helpers/stories';
+import { waitForAngular } from '@/helpers/test';
 import { LOCALE_ID } from '@angular/core';
 import { ActivityFeedComponent, ActivityFeedStepComponent, ActivityFeedUpdateComponent } from '@lucca-front/ng/activity-feed';
 import { CommentComponent } from '@lucca-front/ng/comment';
@@ -6,6 +8,7 @@ import { ReadMoreComponent } from '@lucca-front/ng/read-more';
 import { StatusBadgeComponent } from '@lucca-front/ng/status-badge';
 import { ButtonComponent } from '@lucca/prisme/button';
 import { applicationConfig, Meta, moduleMetadata, StoryObj } from '@storybook/angular-vite';
+import { expect, within } from 'storybook/test';
 
 interface ActivityFeedBasicStory {
 	statusStep: boolean;

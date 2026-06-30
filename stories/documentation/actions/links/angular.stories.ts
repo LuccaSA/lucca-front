@@ -3,7 +3,7 @@ import { provideRouter, RouterLink } from '@angular/router';
 import { LinkComponent } from '@lucca-front/ng/link';
 import { applicationConfig, Meta, moduleMetadata, StoryObj } from '@storybook/angular-vite';
 import { timer } from 'rxjs';
-import { HiddenArgType } from 'stories/helpers/common-arg-types';
+import { HiddenArgType } from '@/helpers/common-arg-types';
 
 export default {
 	title: 'Documentation/Actions/Link/Angular/Basic',
