@@ -164,27 +164,6 @@ export default defineConfig(
 		},
 	},
 	{
-		files: ['**/*.ts'],
-		languageOptions: {
-			parser: tsParser,
-			parserOptions: {
-				project: [
-					'tsconfig.lint.json',
-					'packages/ng/tsconfig.lint.json',
-					'packages/prisme/tsconfig.lint.json',
-					'packages/eslint-plugin/tsconfig.json',
-					'.storybook/tsconfig.lint.json',
-				],
-			},
-		},
-		plugins: {
-			'@lucca-front': localRules,
-		},
-		rules: {
-			'@lucca-front/ts-error': 'error',
-		},
-	},
-	{
 		files: ['**/*.spec.ts', '**/*.spec.*.ts'],
 		rules: {
 			'@typescript-eslint/no-unsafe-call': 'off',
