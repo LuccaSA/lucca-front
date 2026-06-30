@@ -198,6 +198,7 @@ export default {
 		</main>
 	</div>
 </div>
+<!-- <lu-toasts /> -->
 `,
 		};
 	},

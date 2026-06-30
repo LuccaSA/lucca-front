@@ -216,7 +216,9 @@ export default {
 		${content}
 		${footerContainer}
 	</lu-main-layout>
-</lu-app-layout>`,
+</lu-app-layout>
+<!-- <lu-toasts /> -->
+`,
 		};
 	},
 } as Meta;
