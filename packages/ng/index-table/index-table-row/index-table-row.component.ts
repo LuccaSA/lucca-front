@@ -52,5 +52,6 @@ export class IndexTableRowComponent implements LuTooltipAnchorRef {
 	readonly selected = model<boolean>(false);
 	readonly selectedLabel = input<string | null>(null);
 	readonly disabled = input(false, { transform: booleanAttribute });
+	readonly mixed = input(false, { transform: booleanAttribute });
 	readonly stack = input(1, { transform: numberAttribute });
 }
