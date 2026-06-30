@@ -5,5 +5,11 @@
 	</div>
 </header>
 <div class="approbationInbox-list-content">
+	@if (selectable()) {
+		<lu-form-field label="Tout sélectionner" class="approbationInbox-list-item-formfieldOptional">
+			<lu-checkbox-input [ngModel]="selectAllState() === true" [mixed]="selectAllState() === 'mixed'" (ngModelChange)="toggleSelectAll()" />
+		</lu-form-field>
+		<lu-divider />
+	}
 	<ng-content />
 </div>

@@ -49,6 +49,16 @@ export default {
 			? `<lu-approbation-inbox-group label="Group label">
 			<lu-approbation-inbox-item center>
 				<ng-container approbationInboxListItemStart>slot start</ng-container>
+				slot main with <a href="#" lu-approbation-inbox-action current>link</a>
+				<ng-container approbationInboxListItemEnd>slot end</ng-container>
+			</lu-approbation-inbox-item>
+			<lu-approbation-inbox-item center>
+				<ng-container approbationInboxListItemStart>slot start</ng-container>
+				slot main with <a href="#" lu-approbation-inbox-action>link</a>
+				<ng-container approbationInboxListItemEnd>slot end</ng-container>
+			</lu-approbation-inbox-item>
+			<lu-approbation-inbox-item center>
+				<ng-container approbationInboxListItemStart>slot start</ng-container>
 				slot main with <a href="#" lu-approbation-inbox-action>link</a>
 				<ng-container approbationInboxListItemEnd>slot end</ng-container>
 			</lu-approbation-inbox-item>
@@ -58,8 +68,14 @@ export default {
 		</lu-approbation-inbox-group>`
 			: `<lu-approbation-inbox-item center>
 			<ng-container approbationInboxListItemStart>slot start</ng-container>
-			slot main with <a href="#" lu-approbation-inbox-action>link</a>
+			slot main with <a href="#" lu-approbation-inbox-action current>link</a>
 			<ng-container approbationInboxListItemEnd>slot end</ng-container>
+		</lu-approbation-inbox-item>
+		<lu-approbation-inbox-item center>
+			slot main with <button type="button" lu-approbation-inbox-action>button</button>
+		</lu-approbation-inbox-item>
+		<lu-approbation-inbox-item center>
+			slot main with <button type="button" lu-approbation-inbox-action>button</button>
 		</lu-approbation-inbox-item>
 		<lu-approbation-inbox-item center>
 			slot main with <button type="button" lu-approbation-inbox-action>button</button>
@@ -81,9 +97,8 @@ export default {
 			</lu-filter-bar>
 		</ng-container>
 		${tplGroup}
-		${tplGroup}
-		${tplGroup}
 	</lu-approbation-inbox-list>
+	<!--
 	<lu-approbation-inbox-details-main-block label="Sit amet">
 		Dolor sit amet
 	</lu-approbation-inbox-details-main-block>
@@ -93,6 +108,7 @@ export default {
 	<lu-approbation-inbox-details-main-block label="Circuit d’approbation">
 		Dolor sit amet
 	</lu-approbation-inbox-details-main-block>
+	-->
 </div>`,
 		};
 	},
