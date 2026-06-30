@@ -1,7 +1,6 @@
 import { booleanAttribute, ChangeDetectionStrategy, Component, computed, effect, ElementRef, inject, input, LOCALE_ID, model, OnInit, output, viewChildren, ViewEncapsulation } from '@angular/core';
 import { intlInputOptions } from '@lucca-front/ng/core';
 import { LuTooltipTriggerDirective } from '@lucca-front/ng/tooltip';
-import { getWeek, Interval } from "date-fns";
 import {
 	addHours,
 	addMonths,
@@ -14,6 +13,8 @@ import {
 	endOfMonth,
 	endOfWeek,
 	endOfYear,
+	getWeek,
+	Interval,
 	isAfter,
 	isSameDay,
 	isSameMonth,
