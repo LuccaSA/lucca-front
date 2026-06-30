@@ -583,5 +583,6 @@ export type LuccaIcon =
 	| 'weight'
 	| 'window'
 	| 'windowAside'
+	| 'windowAsideLarge'
 	| 'windowCornerBottom'
 	| 'windowCornerTop';
