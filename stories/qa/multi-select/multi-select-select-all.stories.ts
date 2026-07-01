@@ -14,7 +14,7 @@ registerLocaleData(localesFr);
 	selector: 'multi-select-stories',
 	imports: [JsonPipe, FormsModule, LuMultiSelectInputComponent, LuMultiSelectWithSelectAllDirective, FormFieldComponent, LuCoreSelectTotalCountDirective],
 	template: `
-		<lu-form-field>
+		<lu-form-field label="Légumes">
 			<lu-multi-select
 				withSelectAll
 				[totalCount]="legumes.length"
