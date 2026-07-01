@@ -4,7 +4,6 @@ import { mergeConfig } from 'vite';
 import { dirname } from 'path';
 
 import { fileURLToPath } from 'url';
-import { createBaseConfig } from '../vitest.shared-config';
 
 /**
  * This function is used to resolve the absolute path of a package.
