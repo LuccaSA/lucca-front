@@ -1,7 +1,7 @@
 <div class="approbationInbox-list-groupOptional">
 	<div class="approbationInbox-list-groupOptional-header">
 		@if (selectable()) {
-			<lu-form-field label="Sélectionner…" hiddenLabel class="approbationInbox-list-item-formfieldOptional">
+			<lu-form-field label="Sélectionner…" hiddenLabel class="approbationInbox-list-groupOptional-header-formfieldOptional">
 				<lu-checkbox-input [ngModel]="allChecked()" [mixed]="groupMixed()" (ngModelChange)="onGroupChange($event)" />
 			</lu-form-field>
 		}
@@ -11,7 +11,7 @@
 			(click)="expandedToggle()"
 			class="approbationInbox-list-groupOptional-header-action"
 		>
-			<lu-icon icon="arrowChevronBottom" class="approbationInbox-list-groupOptional-header-action-icon" />
+			<lu-icon icon="arrowChevronBottom" size="XS" class="approbationInbox-list-groupOptional-header-action-icon" />
 			{{ label() }}
 		</button>
 	</div>

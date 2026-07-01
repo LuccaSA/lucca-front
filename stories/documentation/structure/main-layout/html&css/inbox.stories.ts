@@ -1,4 +1,12 @@
 import { FormsModule } from '@angular/forms';
+import {
+	ApprobationInboxButtonComponent,
+	ApprobationInboxDetailsMainBlockComponent,
+	ApprobationInboxGroupComponent,
+	ApprobationInboxItemComponent,
+	ApprobationInboxLinkComponent,
+	ApprobationInboxListComponent,
+} from '@lucca-front/ng/approbation-inbox';
 import { CalloutComponent } from '@lucca-front/ng/callout';
 import { DividerComponent } from '@lucca-front/ng/divider';
 import { FilterBarComponent, FilterPillAddonAfterDirective, FilterPillAddonBeforeDirective, FilterPillComponent } from '@lucca-front/ng/filter-pills';
@@ -45,6 +53,12 @@ export default {
 				SegmentedControlComponent,
 				SegmentedControlFilterComponent,
 				NumericBadgeComponent,
+				ApprobationInboxDetailsMainBlockComponent,
+				ApprobationInboxListComponent,
+				ApprobationInboxGroupComponent,
+				ApprobationInboxItemComponent,
+				ApprobationInboxLinkComponent,
+				ApprobationInboxButtonComponent,
 			],
 		}),
 	],
@@ -85,29 +99,10 @@ export default {
 			--commons-container-maxWidth: 50rem;
 		}
 
-		.approbationInbox-list {
-			background-color: var(--palettes-neutral-50);
-			padding: var(--pr-t-spacings-250);
-			border-radius: var(--pr-t-border-radius-structure);
-
-			max-inline-size: 100%;
-			margin: var(--pr-t-spacings-300);
-			block-size: calc(100% - var(--pr-t-spacings-300) * 2);
-			overflow: auto;
-
-			@media (min-width: 64em) {
-				inline-size: 17rem;
-			}
-
-			@media (min-width: 80em) {
-				inline-size: 22.5rem;
-			}
-		}
-
 		.approbationInbox-detail {
 				display: flex;
 				flex-direction: column;
-				gap: var(--pr-t-spacings-25);
+				gap: var(--pr-t-spacings-50);
 				margin: var(--pr-t-spacings-300);
 				min-block-size: calc(100% - var(--pr-t-spacings-300) * 2);
 		}
@@ -158,67 +153,6 @@ export default {
 				}
 			}
 		}
-
-		.approbationInbox-list-groupOptional-content {
-			display: flex;
-			flex-direction: column;
-			gap: var(--pr-t-spacings-100);
-		}
-
-		.approbationInbox-list-item {
-				display: flex;
-				gap: var(--pr-t-spacings-150);
-
-				.form-field {
-					padding-block-start: var(--pr-t-spacings-150);
-				}
-		}
-
-		.resourceCard {
-			flex-grow: 1;
-		}
-
-		.approbationInbox-details-main-block {
-				margin-block-start: var(--pr-t-spacings-300);
-
-				&:first-child {
-					margin-block-start: 0;
-				}
-
-				.divider {
-					margin-block-start: var(--pr-t-spacings-300);
-				}
-
-				&:last-child {
-					.divider {
-						display: none;
-					}
-				}
-		}
-
-		.approbationInbox-details-main-block-title {
-				margin-block-end: var(--pr-t-spacings-150);
-		}
-
-		.approbationInbox-list-filterBar {
-			margin-block: var(--pr-t-spacings-150) var(--pr-t-spacings-200);
-		}
-
-		.button.mod-disclosure {
-				margin-inline-start: calc(var(--pr-t-spacings-100) * -1);
-				--components-button-paddingInlineStart: var(--pr-t-spacings-100);
-				--components-button-paddingInlineEnd: var(--pr-t-spacings-150) !important;
-				--components-button-paddingBlockStart: var(--pr-t-spacings-50);
-				--components-button-paddingBlockEnd: var(--pr-t-spacings-50);
-
-				margin-block: var(--pr-t-spacings-50);
-
-				&[aria-expanded="false"] {
-					+ * {
-						display: none;
-					}
-				}
-		}
 	}
 }
 				`,
@@ -226,105 +160,41 @@ export default {
 			template: `
 		<main role="main" class="mainLayout mod-wideM approbationInbox">
 			<div class="mainLayout-sidebar">
-				<div class="approbationInbox-list">
-					<h3>À approuver</h3>
-					<lu-filter-bar class="approbationInbox-list-filterBar">
-						<lu-segmented-control class="filterBar-segmentedControl" *luFilterPillAddonBefore [(ngModel)]="example">
-							<ng-template #label0>Par vous <lu-numeric-badge [value]="12" /></ng-template>
-							<ng-template #label1>Par d’autres <lu-numeric-badge [value]="5" /></ng-template>
-							<lu-segmented-control-filter [label]="label0" value="0" />
-							<lu-segmented-control-filter [label]="label1" value="1" />
-						</lu-segmented-control>
-						<lu-filter-pill label="Inclure les collaborateurs partis" optional name="includeFormerEmployees">
+				<lu-approbation-inbox-list label="Test" selectable>
+					<ng-container approbationInboxListFilterBar>
+						<lu-filter-bar>
+							<lu-segmented-control class="filterBar-segmentedControl" *luFilterPillAddonBefore [(ngModel)]="example">
+									<ng-template #label0>Par vous <lu-numeric-badge [value]="12" /></ng-template>
+									<ng-template #label1>Par d’autres <lu-numeric-badge [value]="5" /></ng-template>
+									<lu-segmented-control-filter [label]="label0" value="0" />
+									<lu-segmented-control-filter [label]="label1" value="1" />
+							</lu-segmented-control>
+							<lu-filter-pill label="Inclure les collaborateurs partis" optional name="includeFormerEmployees">
 								<lu-checkbox-input [ngModel]="false" />
-						</lu-filter-pill>
-					</lu-filter-bar>
-					<lu-form-field label="Tout sélectionner">
-						<lu-checkbox-input [(ngModel)]="example0" />
-					</lu-form-field>
-					<div class="approbationInbox-list-groupOptional">
-						<button type="button" luButton="text" disclosure aria-expanded="true">
-							<lu-icon icon="arrowChevronBottom" alt="" size="S" />
-							Bragoulet Marie
-						</button>
-						<div class="approbationInbox-list-groupOptional-content">
-							<div class="approbationInbox-list-item">
-								<lu-form-field label="Sélectionner cette demande" hiddenLabel>
-									<lu-checkbox-input [(ngModel)]="example1" />
-								</lu-form-field>
-								<lu-resource-card size="S">
-									<a href="#" luResourceCardAction luTooltip luTooltipWhenEllipsis>Lorem ipsum dolor</a>
-									<ng-container resourceCardContent>
-										Lorem ipsum dolor
-									</ng-container>
-								</lu-resource-card>
-							</div>
-							<div class="approbationInbox-list-item">
-								<lu-form-field label="Sélectionner cette demande" hiddenLabel>
-									<lu-checkbox-input [(ngModel)]="example2" />
-								</lu-form-field>
-								<lu-resource-card size="S">
-									<a href="#" luResourceCardAction luTooltip luTooltipWhenEllipsis>Lorem ipsum dolor</a>
-									<ng-container resourceCardContent>
-										Lorem ipsum dolor
-									</ng-container>
-								</lu-resource-card>
-							</div>
-							<div class="approbationInbox-list-item">
-								<lu-form-field label="Sélectionner cette demande" hiddenLabel>
-									<lu-checkbox-input [(ngModel)]="example3" />
-								</lu-form-field>
-								<lu-resource-card size="S">
-									<a href="#" luResourceCardAction luTooltip luTooltipWhenEllipsis>Lorem ipsum dolor</a>
-									<ng-container resourceCardContent>
-										Lorem ipsum dolor
-									</ng-container>
-								</lu-resource-card>
-							</div>
-						</div>
-					</div>
-					<div class="approbationInbox-list-groupOptional">
-						<button type="button" luButton="text" disclosure aria-expanded="true">
-							<lu-icon icon="arrowChevronBottom" alt="" size="S" />
-							Bragoulet Marie
-						</button>
-						<div class="approbationInbox-list-groupOptional-content">
-							<div class="approbationInbox-list-item">
-								<lu-form-field label="Sélectionner cette demande" hiddenLabel>
-									<lu-checkbox-input [(ngModel)]="example4" />
-								</lu-form-field>
-								<lu-resource-card size="S">
-									<a href="#" luResourceCardAction luTooltip luTooltipWhenEllipsis>Lorem ipsum dolor</a>
-									<ng-container resourceCardContent>
-										Lorem ipsum dolor
-									</ng-container>
-								</lu-resource-card>
-							</div>
-							<div class="approbationInbox-list-item">
-								<lu-form-field label="Sélectionner cette demande" hiddenLabel>
-									<lu-checkbox-input [(ngModel)]="example5" />
-								</lu-form-field>
-								<lu-resource-card size="S">
-									<a href="#" luResourceCardAction luTooltip luTooltipWhenEllipsis>Lorem ipsum dolor</a>
-									<ng-container resourceCardContent>
-										Lorem ipsum dolor
-									</ng-container>
-								</lu-resource-card>
-							</div>
-							<div class="approbationInbox-list-item">
-								<lu-form-field label="Sélectionner cette demande" hiddenLabel>
-									<lu-checkbox-input [(ngModel)]="example6" />
-								</lu-form-field>
-								<lu-resource-card size="S">
-									<a href="#" luResourceCardAction luTooltip luTooltipWhenEllipsis>Lorem ipsum dolor</a>
-									<ng-container resourceCardContent>
-										Lorem ipsum dolor
-									</ng-container>
-								</lu-resource-card>
-							</div>
-						</div>
-					</div>
-				</div>
+							</lu-filter-pill>
+						</lu-filter-bar>
+					</ng-container>
+					<lu-approbation-inbox-group label="Group label">
+						<lu-approbation-inbox-item>
+							<ng-container approbationInboxListItemStart>slot start</ng-container>
+							slot main with <a href="#" lu-approbation-inbox-action current>link</a>
+							<ng-container approbationInboxListItemEnd>slot end</ng-container>
+						</lu-approbation-inbox-item>
+						<lu-approbation-inbox-item center>
+							<ng-container approbationInboxListItemStart>slot start</ng-container>
+							slot main with <a href="#" lu-approbation-inbox-action>link</a>
+							<ng-container approbationInboxListItemEnd>slot end</ng-container>
+						</lu-approbation-inbox-item>
+						<lu-approbation-inbox-item center>
+							<ng-container approbationInboxListItemStart>slot start</ng-container>
+							slot main with <a href="#" lu-approbation-inbox-action>link</a>
+							<ng-container approbationInboxListItemEnd>slot end</ng-container>
+						</lu-approbation-inbox-item>
+						<lu-approbation-inbox-item center>
+						slot main with <button type="button" lu-approbation-inbox-action>button</button>
+						</lu-approbation-inbox-item>
+					</lu-approbation-inbox-group>
+				</lu-approbation-inbox-list>
 			</div>
 			<div class="mainLayout-content">
 				<div class="mainLayout-content-inside">
@@ -343,21 +213,7 @@ export default {
 							<lu-callout state="warning">
 									<p>Feedback description</p>
 							</lu-callout>
-							<div class="approbationInbox-details-main-block">
-								<h3 class="approbationInbox-details-main-block-title">Lorem</h3>
-								approbationInbox-detail-main
-								<lu-divider />
-							</div>
-							<div class="approbationInbox-details-main-block">
-								<h3 class="approbationInbox-details-main-block-title">Ipsum</h3>
-								approbationInbox-detail-main
-								<lu-divider />
-							</div>
-							<div class="approbationInbox-details-main-block">
-								<h3 class="approbationInbox-details-main-block-title">Circuit d’approbation</h3>
-								approbationInbox-detail-main
-								<lu-divider />
-							</div>
+							ici
 						</div>
 					</div>
 				</div>

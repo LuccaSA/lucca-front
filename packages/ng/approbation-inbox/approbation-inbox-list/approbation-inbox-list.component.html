@@ -1,15 +1,22 @@
 <header class="approbationInbox-list-header">
-	<h1 class="approbationInbox-list-header-title"><ng-container *luPortal="label()" /></h1>
+	<h1 class="approbationInbox-list-header-title" [id]="titleId"><ng-container *luPortal="label()" /></h1>
 	<div class="approbationInbox-list-header-filterBar">
 		<ng-content select="[approbationInboxListFilterBar]" />
 	</div>
 </header>
 <div class="approbationInbox-list-content">
 	@if (selectable()) {
-		<lu-form-field label="Tout sélectionner" class="approbationInbox-list-item-formfieldOptional">
+		<lu-form-field label="Tout sélectionner" class="approbationInbox-list-formfieldOptional">
 			<lu-checkbox-input [ngModel]="selectAllState() === true" [mixed]="selectAllState() === 'mixed'" (ngModelChange)="toggleSelectAll()" />
 		</lu-form-field>
 		<lu-divider />
 	}
 	<ng-content />
 </div>
+@if (checkedCount() > 0) {
+	<footer class="approbationInbox-list-footer">
+		<h2 class="approbationInbox-list-footer-title">8 dépenses sélectionnées</h2>
+		<button luButton type="submit" block>Approuver les dépenses</button>
+		<button luButton="outlined" type="button" block>Transférer les demandes</button>
+	</footer>
+}
