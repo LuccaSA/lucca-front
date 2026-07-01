@@ -173,6 +173,7 @@ export default {
 		],
 		'unit-layout-mappings': 'flow-relative',
 		'value-keyword-case': null,
+		'value-keyword-layout-mappings': 'flow-relative',
 
 		// Formatting with @stylistic
 		// SEE: https://github.com/stylelint-stylistic/stylelint-stylistic/blob/main/docs/user-guide/rules.md
