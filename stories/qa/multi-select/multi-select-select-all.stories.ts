@@ -6,7 +6,7 @@ import { LuCoreSelectTotalCountDirective } from '@lucca-front/ng/core-select';
 import { FormFieldComponent } from '@lucca-front/ng/form-field';
 import { LuMultiSelectInputComponent, LuMultiSelectWithSelectAllDirective, LuMultiSelection } from '@lucca-front/ng/multi-select';
 import { Meta, StoryObj } from '@storybook/angular-vite';
-import { ILegume, allLegumes } from '../../documentation/forms/select/select.utils';
+import { ILegume, allLegumes } from '@/stories/forms/select/select.utils';
 
 registerLocaleData(localesFr);
 
