@@ -1,7 +1,6 @@
 import { NgPlural, NgPluralCase } from '@angular/common';
 import { ChangeDetectionStrategy, Component } from '@angular/core';
 import { FormsModule } from '@angular/forms';
-import { provideAnimations } from '@angular/platform-browser/animations';
 import { ClearComponent } from '@lucca-front/ng/clear';
 import { LuInputDirective, LuInputDisplayerDirective } from '@lucca-front/ng/input';
 import { LuOptionModule } from '@lucca-front/ng/option';
@@ -65,7 +64,7 @@ export default {
 	title: 'Documentation/Forms/SelectAdvanced',
 	component: SelectAdvancedStory,
 	argTypes: {},
-	decorators: [applicationConfig({ providers: [provideAnimations()] })],
+	decorators: [applicationConfig({ providers: [] })],
 } as Meta;
 
 const template = (args: SelectAdvancedStory) => ({

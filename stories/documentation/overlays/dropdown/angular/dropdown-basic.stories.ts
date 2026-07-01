@@ -1,5 +1,4 @@
 import { ChangeDetectionStrategy, Component } from '@angular/core';
-import { provideAnimations } from '@angular/platform-browser/animations';
 import { LuDropdownModule } from '@lucca-front/ng/dropdown';
 import { applicationConfig, Meta, StoryObj } from '@storybook/angular';
 
@@ -16,7 +15,7 @@ class DropdownBasicStory {
 export default {
 	title: 'Documentation/Overlays/Dropdown/Angular/Basic',
 	component: DropdownBasicStory,
-	decorators: [applicationConfig({ providers: [provideAnimations()] })],
+	decorators: [applicationConfig({ providers: [] })],
 } as Meta;
 
 const Template = (args: DropdownBasicStory) => ({

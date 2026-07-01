@@ -1,5 +1,4 @@
 import { ChangeDetectionStrategy, Component, inject, input, Type } from '@angular/core';
-import { provideAnimations } from '@angular/platform-browser/animations';
 import { ButtonComponent } from '@lucca-front/ng/button';
 import { ILuModalContent, LU_MODAL_DATA, LuModal, LuModalConfig, LuModalModule } from '@lucca-front/ng/modal';
 import { LuToastsModule, LuToastsService } from '@lucca-front/ng/toast';
@@ -311,7 +310,7 @@ const meta: Meta<StoryComponent> = {
 	component: ModalStories,
 	decorators: [
 		applicationConfig({
-			providers: [provideAnimations()],
+			providers: [],
 		}),
 		moduleMetadata({
 			imports: [LuModalModule],

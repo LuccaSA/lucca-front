@@ -1,6 +1,5 @@
 import { JsonPipe } from '@angular/common';
 import { FormControl, FormGroup, FormsModule, ReactiveFormsModule, Validators } from '@angular/forms';
-import { BrowserAnimationsModule } from '@angular/platform-browser/animations';
 import { FormFieldComponent, InputDirective } from '@lucca-front/ng/form-field';
 import { RadioComponent, RadioGroupInputComponent, TextInputComponent } from '@lucca-front/ng/forms';
 import { Meta, moduleMetadata, StoryObj } from '@storybook/angular';
@@ -14,7 +13,6 @@ export default {
 			imports: [
 				FormFieldComponent,
 				InputDirective,
-				BrowserAnimationsModule,
 				FormsModule,
 				ReactiveFormsModule,
 				RadioGroupInputComponent,

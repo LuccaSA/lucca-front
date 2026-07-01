@@ -1,5 +1,4 @@
 import { FormsModule } from '@angular/forms';
-import { BrowserAnimationsModule } from '@angular/platform-browser/animations';
 import { FORM_FIELD_WIDTH, FormFieldComponent, InputDirective } from '@lucca-front/ng/form-field';
 import { INLINE_MESSAGE_STATE } from '@lucca-front/ng/inline-message';
 import { Meta, moduleMetadata, StoryObj } from '@storybook/angular';
@@ -12,7 +11,7 @@ export default {
 	component: FormFieldComponent,
 	decorators: [
 		moduleMetadata({
-			imports: [FormFieldComponent, InputDirective, BrowserAnimationsModule, FormsModule],
+			imports: [FormFieldComponent, InputDirective, FormsModule],
 		}),
 	],
 	argTypes: {

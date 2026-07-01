@@ -1,4 +1,3 @@
-import { provideAnimations } from '@angular/platform-browser/animations';
 import { IconComponent } from '@lucca-front/ng/icon';
 import { LuTooltipModule, LuTooltipTriggerDirective } from '@lucca-front/ng/tooltip';
 import { applicationConfig, Meta, moduleMetadata, StoryObj } from '@storybook/angular';
@@ -11,7 +10,7 @@ import { AsyncPipe } from '@angular/common';
 export default {
 	title: 'Documentation/Overlays/Tooltip/Real Time Update',
 	decorators: [
-		applicationConfig({ providers: [provideAnimations()] }),
+		applicationConfig({ providers: [] }),
 		moduleMetadata({
 			imports: [LuTooltipModule, AsyncPipe],
 		}),

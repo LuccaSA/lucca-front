@@ -1,19 +1,19 @@
 import { ChangeDetectionStrategy, Component } from '@angular/core';
-import { provideAnimations } from '@angular/platform-browser/animations';
-import { luScaleAnimationFactory } from '@lucca-front/ng/animations';
-import { applicationConfig, Meta, StoryObj } from '@storybook/angular';
+import { LuScaleAnimation } from '@lucca-front/ng/animations';
+import { Meta, StoryObj } from '@storybook/angular';
 
 @Component({
 	selector: 'story-scale-animation',
+	standalone: true,
+	imports: [LuScaleAnimation],
 	template: `
 		<div class="grid mod-auto">
 			<div class="grid-column ng-demo-block">
 				<h3 class="pr-u-margin0">
-					Scale
-					<button class="button mod-S" (click)="scalingCenter = !scalingCenter">{{ scalingCenter ? 'Show' : 'Hide' }}</button>
+					Center <button class="button mod-S" (click)="scalingCenter = !scalingCenter">{{ scalingCenter ? 'Show' : 'Hide' }}</button>
 				</h3>
 				@if (!scalingCenter) {
-					<div class="animated-block" [@scaleAnimation]>Scale from center</div>
+					<div class="animated-block" luScaleAnimation="center">Scale from center</div>
 				}
 			</div>
 			<div class="grid-column ng-demo-block">
@@ -21,134 +21,70 @@ import { applicationConfig, Meta, StoryObj } from '@storybook/angular';
 					Left <button class="button mod-S" (click)="scalingLeft = !scalingLeft">{{ scalingLeft ? 'Show' : 'Hide' }}</button>
 				</h3>
 				@if (!scalingLeft) {
-					<div class="animated-block" [@scaleAnimation]="'left'">Scale from left</div>
+					<div class="animated-block" luScaleAnimation="left">Scale from left</div>
 				}
 			</div>
 			<div class="grid-column ng-demo-block">
 				<h3 class="pr-u-margin0">
-					Right
-					<button class="button mod-S" (click)="scalingRight = !scalingRight">{{ scalingRight ? 'Show' : 'Hide' }}</button>
+					Right <button class="button mod-S" (click)="scalingRight = !scalingRight">{{ scalingRight ? 'Show' : 'Hide' }}</button>
 				</h3>
 				@if (!scalingRight) {
-					<div class="animated-block" [@scaleAnimation]="'right'">Scale from right</div>
+					<div class="animated-block" luScaleAnimation="right">Scale from right</div>
 				}
 			</div>
 			<div class="grid-column ng-demo-block">
 				<h3 class="pr-u-margin0">
-					Top
-					<button class="button mod-S" (click)="scalingTop = !scalingTop">{{ scalingTop ? 'Show' : 'Hide' }}</button>
+					Top <button class="button mod-S" (click)="scalingTop = !scalingTop">{{ scalingTop ? 'Show' : 'Hide' }}</button>
 				</h3>
 				@if (!scalingTop) {
-					<div class="animated-block" [@scaleAnimation]="'top'">Scale from top</div>
+					<div class="animated-block" luScaleAnimation="top">Scale from top</div>
 				}
 			</div>
 			<div class="grid-column ng-demo-block">
 				<h3 class="pr-u-margin0">
-					Bottom
-					<button class="button mod-S" (click)="scalingBottom = !scalingBottom">{{ scalingBottom ? 'Show' : 'Hide' }}</button>
+					Bottom <button class="button mod-S" (click)="scalingBottom = !scalingBottom">{{ scalingBottom ? 'Show' : 'Hide' }}</button>
 				</h3>
 				@if (!scalingBottom) {
-					<div class="animated-block" [@scaleAnimation]="'bottom'">Scale from bottom</div>
+					<div class="animated-block" luScaleAnimation="bottom">Scale from bottom</div>
 				}
 			</div>
 		</div>
 	`,
 	styleUrl: './animations.scss',
-	animations: [luScaleAnimationFactory()],
 	changeDetection: ChangeDetectionStrategy.OnPush,
 })
 class ScaleAnimationStory {
+	scalingCenter = false;
 	scalingLeft = false;
 	scalingRight = false;
 	scalingTop = false;
 	scalingBottom = false;
-	scalingCenter = false;
 }
 
 export default {
 	title: 'Documentation/Toolbox/Animations/Scale',
 	component: ScaleAnimationStory,
-	decorators: [applicationConfig({ providers: [provideAnimations()] })],
 } as Meta;
-
-const template = (args: ScaleAnimationStory) => ({
-	props: args,
-});
 
 export const Scale: StoryObj<ScaleAnimationStory> = {
 	args: {},
-	render: template,
+	render: (args) => ({ props: args }),
 };
 
 const code = `
-/* 1. Appeler provideAnimations */
-Appeler { provideAnimations } from '@angular/platform-browser/animations';
+import { LuScaleAnimation } from '@lucca-front/ng/animations';
 
-@NgModule({
-	providers: [provideAnimations()]
-})
-class AppModule {}
-
-/* 2. Utiliser luScaleAnimationFactory() */
 @Component({
 	selector: 'story-scale-animation',
+	imports: [LuScaleAnimation],
 	template: \`
-		<div class="grid">
-			<div class="grid-column ng-demo-block">
-				<h3 class="pr-u-margin0">
-					Scale
-					<button class="button mod-S" (click)="scalingCenter = !scalingCenter">{{ scalingCenter ? 'Show' : 'Hide' }}</button>
-				</h3>
-				@if (!scalingCenter) {
-					<div class="animated-block" [@scaleAnimation]>Scale from center</div>
-				}
-			</div>
-			<div class="grid-column ng-demo-block">
-				<h3 class="pr-u-margin0">
-					Left <button class="button mod-S" (click)="scalingLeft = !scalingLeft">{{ scalingLeft ? 'Show' : 'Hide' }}</button>
-				</h3>
-				@if (!scalingLeft) {
-					<div class="animated-block" [@scaleAnimation]="'left'">Scale from left</div>
-				}
-			</div>
-			<div class="grid-column ng-demo-block">
-				<h3 class="pr-u-margin0">
-					Right
-					<button class="button mod-S" (click)="scalingRight = !scalingRight">{{ scalingRight ? 'Show' : 'Hide' }}</button>
-				</h3>
-				@if (!scalingRight) {
-					<div class="animated-block" [@scaleAnimation]="'right'">Scale from right</div>
-				}
-			</div>
-			<div class="grid-column ng-demo-block">
-				<h3 class="pr-u-margin0">
-					Top
-					<button class="button mod-S" (click)="scalingTop = !scalingTop">{{ scalingTop ? 'Show' : 'Hide' }}</button>
-				</h3>
-				@if (!scalingTop) {
-					<div class="animated-block" [@scaleAnimation]="'top'">Scale from top</div>
-				}
-			</div>
-			<div class="grid-column ng-demo-block">
-				<h3 class="pr-u-margin0">
-					Bottom
-					<button class="button mod-S" (click)="scalingBottom = !scalingBottom">{{ scalingBottom ? 'Show' : 'Hide' }}</button>
-				</h3>
-				@if (!scalingBottom) {
-					<div class="animated-block" [@scaleAnimation]="'bottom'">Scale from bottom</div>
-				}
-			</div>
-		</div>
+		@if (visible) {
+			<div luScaleAnimation="center">Scale from center</div>
+		}
 	\`,
-	styleUrl: './animations.scss',
-	animations: [luScaleAnimationFactory()],
 })
 class ScaleAnimationStory {
-	scalingLeft = false;
-	scalingRight = false;
-	scalingTop = false;
-	scalingBottom = false;
-	scalingCenter = false;
+	visible = true;
 }`;
 
 Scale.parameters = {
@@ -157,6 +93,98 @@ Scale.parameters = {
 			language: 'ts',
 			type: 'code',
 			code,
+		},
+	},
+};
+
+// Composition via `hostDirectives`, without exposing any input: the direction is fixed.
+@Component({
+	selector: 'scale-card',
+	standalone: true,
+	hostDirectives: [LuScaleAnimation],
+	template: `<ng-content />`,
+	styles: `:host { display: block; }`,
+})
+class ScaleCard {}
+
+// Composition via `hostDirectives`, exposing the directive's input (renamed to `direction`).
+@Component({
+	selector: 'scale-card-directional',
+	standalone: true,
+	hostDirectives: [{ directive: LuScaleAnimation, inputs: ['luScaleAnimation: direction'] }],
+	template: `<ng-content />`,
+	styles: `:host { display: block; }`,
+})
+class ScaleCardDirectional {}
+
+@Component({
+	selector: 'story-scale-host-directive',
+	standalone: true,
+	imports: [ScaleCard, ScaleCardDirectional],
+	template: `
+		<div class="grid mod-auto">
+			<div class="grid-column ng-demo-block">
+				<h3 class="pr-u-margin0">
+					No input <button class="button mod-S" (click)="fixed = !fixed">{{ fixed ? 'Show' : 'Hide' }}</button>
+				</h3>
+				@if (!fixed) {
+					<scale-card class="animated-block">Fixed direction (center)</scale-card>
+				}
+			</div>
+			<div class="grid-column ng-demo-block">
+				<h3 class="pr-u-margin0">
+					With input <button class="button mod-S" (click)="dynamic = !dynamic">{{ dynamic ? 'Show' : 'Hide' }}</button>
+				</h3>
+				@if (!dynamic) {
+					<scale-card-directional direction="top" class="animated-block">Direction = top</scale-card-directional>
+				}
+			</div>
+		</div>
+	`,
+	styleUrl: './animations.scss',
+	changeDetection: ChangeDetectionStrategy.OnPush,
+})
+class ScaleHostDirectiveStory {
+	fixed = false;
+	dynamic = false;
+}
+
+export const HostDirective: StoryObj<ScaleHostDirectiveStory> = {
+	args: {},
+	render: (args) => ({ props: args, moduleMetadata: { imports: [ScaleHostDirectiveStory] }, template: `<story-scale-host-directive />` }),
+};
+
+const hostDirectiveCode = `
+import { LuScaleAnimation } from '@lucca-front/ng/animations';
+
+// Without inputs: the direction is fixed to the directive default (center).
+@Component({
+	selector: 'scale-card',
+	hostDirectives: [LuScaleAnimation],
+	template: \`<ng-content />\`,
+})
+class ScaleCard {}
+
+// With inputs: expose the directive input, renamed to \`direction\`.
+@Component({
+	selector: 'scale-card-directional',
+	hostDirectives: [{ directive: LuScaleAnimation, inputs: ['luScaleAnimation: direction'] }],
+	template: \`<ng-content />\`,
+})
+class ScaleCardDirectional {}
+
+// Usage
+@if (visible) {
+	<scale-card>Fixed direction</scale-card>
+	<scale-card-directional direction="top">Direction = top</scale-card-directional>
+}`;
+
+HostDirective.parameters = {
+	docs: {
+		source: {
+			language: 'ts',
+			type: 'code',
+			code: hostDirectiveCode,
 		},
 	},
 };

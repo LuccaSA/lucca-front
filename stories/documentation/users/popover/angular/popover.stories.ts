@@ -1,6 +1,5 @@
 import { provideHttpClient } from '@angular/common/http';
 import { ChangeDetectionStrategy, Component, input } from '@angular/core';
-import { provideAnimations } from '@angular/platform-browser/animations';
 import { ILuUser } from '@lucca-front/ng/user';
 import { LuUserPopoverDirective } from '@lucca-front/ng/user-popover';
 import { applicationConfig, Meta, StoryObj } from '@storybook/angular';
@@ -24,7 +23,7 @@ class UserPopoverStory {
 export default {
 	title: 'Documentation/Users/Popover/Angular',
 	component: UserPopoverStory,
-	decorators: [applicationConfig({ providers: [provideAnimations(), provideHttpClient()] })],
+	decorators: [applicationConfig({ providers: [provideHttpClient()] })],
 	argsTypes: {
 		luUserPopover: { control: { type: 'object' } },
 		luUserPopoverEnterDelay: { control: { type: 'number' } },

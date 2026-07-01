@@ -1,4 +1,3 @@
-﻿import { BrowserAnimationsModule } from '@angular/platform-browser/animations';
 import { ButtonComponent } from '@lucca-front/ng/button';
 import {
 	CALLOUT_POPOVER_SIZE,
@@ -19,7 +18,7 @@ export default {
 	component: CalloutPopoverComponent,
 	decorators: [
 		moduleMetadata({
-			imports: [CalloutFeedbackItemComponent, CalloutFeedbackListComponent, CalloutFeedbackItemComponent, CalloutFeedbackItemDescriptionDirective, ButtonComponent, BrowserAnimationsModule],
+			imports: [CalloutFeedbackItemComponent, CalloutFeedbackListComponent, CalloutFeedbackItemComponent, CalloutFeedbackItemDescriptionDirective, ButtonComponent],
 		}),
 	],
 	render: ({ items, customText, ...args }, { argTypes }) => {

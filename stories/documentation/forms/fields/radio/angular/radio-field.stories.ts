@@ -1,5 +1,4 @@
 import { FormsModule } from '@angular/forms';
-import { BrowserAnimationsModule } from '@angular/platform-browser/animations';
 import { FormFieldComponent } from '@lucca-front/ng/form-field';
 import { RADIO_GROUP_INPUT_SIZE, RadioComponent, RadioGroupInputComponent } from '@lucca-front/ng/forms';
 import { INLINE_MESSAGE_STATE } from '@lucca-front/ng/inline-message';
@@ -13,7 +12,7 @@ export default {
 	title: 'Documentation/Forms/Fields/RadioField/Angular',
 	decorators: [
 		moduleMetadata({
-			imports: [RadioGroupInputComponent, RadioComponent, FormFieldComponent, FormsModule, BrowserAnimationsModule, StoryModelDisplayComponent],
+			imports: [RadioGroupInputComponent, RadioComponent, FormFieldComponent, FormsModule, StoryModelDisplayComponent],
 		}),
 	],
 	argTypes: {

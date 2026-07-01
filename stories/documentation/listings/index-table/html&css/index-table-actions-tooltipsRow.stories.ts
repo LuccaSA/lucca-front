@@ -1,5 +1,4 @@
 import { provideHttpClient } from '@angular/common/http';
-import { provideAnimations } from '@angular/platform-browser/animations';
 import { LuTooltipModule } from '@lucca-front/ng/tooltip';
 import { LuUserDisplayModule, LuUserPictureComponent } from '@lucca-front/ng/user';
 import { LuUserPopoverDirective } from '@lucca-front/ng/user-popover';
@@ -15,7 +14,7 @@ export default {
 			imports: [LuTooltipModule, LuUserPopoverDirective, LuUserDisplayModule, LuUserPictureComponent],
 		}),
 		applicationConfig({
-			providers: [provideAnimations(), provideHttpClient()],
+			providers: [provideHttpClient()],
 		}),
 	],
 } as Meta;

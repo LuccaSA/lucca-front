@@ -3,7 +3,6 @@ import { DOCUMENT } from '@angular/common';
 import { AfterViewInit, ChangeDetectionStrategy, ChangeDetectorRef, Component, ContentChildren, Directive, forwardRef, Inject, QueryList } from '@angular/core';
 import { ALuOnCloseSubscriber, ALuOnOpenSubscriber, ALuOnScrollBottomSubscriber, ILuOnCloseSubscriber, ILuOnOpenSubscriber, ILuOnScrollBottomSubscriber, ILuTree } from '@lucca-front/ng/core';
 import { ALuPickerPanel } from '@lucca-front/ng/picker';
-import { luTransformPopover } from '@lucca-front/ng/popover';
 import { LuScrollDirective } from '@lucca-front/ng/scroll';
 import { merge, Observable } from 'rxjs';
 import { first, map, mergeAll, shareReplay, startWith } from 'rxjs/operators';
@@ -123,7 +122,6 @@ export abstract class ALuTreeOptionPickerAdvancedComponent<T, O extends import('
 	selector: 'lu-tree-option-picker-advanced',
 	templateUrl: './tree-option-picker-advanced.component.html',
 	changeDetection: ChangeDetectionStrategy.OnPush,
-	animations: [luTransformPopover],
 	exportAs: 'LuOptionPicker',
 	imports: [LuScrollDirective, A11yModule],
 	providers: [

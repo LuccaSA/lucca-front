@@ -2,7 +2,6 @@ import { AsyncPipe, I18nPluralPipe } from '@angular/common';
 import { provideHttpClient } from '@angular/common/http';
 import { LOCALE_ID } from '@angular/core';
 import { FormsModule } from '@angular/forms';
-import { provideAnimations } from '@angular/platform-browser/animations';
 import {
 	LuCoreSelectPanelHeaderDirective,
 	LuCoreSelectTotalCountDirective,
@@ -873,7 +872,7 @@ const meta: Meta<InputAlias<LuMultiSelectInputStoryComponent, SelectCommonAliasI
 			],
 		}),
 		applicationConfig({
-			providers: [provideAnimations(), provideHttpClient(), provideCoreSelectCurrentUserId(() => 66)],
+			providers: [provideHttpClient(), provideCoreSelectCurrentUserId(() => 66)],
 		}),
 	],
 	args: {
