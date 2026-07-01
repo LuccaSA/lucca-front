@@ -1,7 +1,6 @@
 import angular from '@analogjs/vite-plugin-angular';
 import { join } from 'path';
 import type { UserConfig } from 'vite';
-import tsconfigPaths from 'vite-tsconfig-paths';
 import { defineConfig, type Plugin } from 'vitest/config';
 
 process.env['TZ'] = 'UTC';
@@ -30,7 +29,7 @@ function resolveTestNameDotName(): Plugin {
 
 export function createBaseConfig(projectRoot: string): UserConfig {
 	return defineConfig({
-		plugins: [tsconfigPaths({ root: projectRoot }), angular({ tsconfig: join(projectRoot, 'tsconfig.spec.json') }), resolveTestNameDotName()],
+		plugins: [angular({ tsconfig: join(projectRoot, 'tsconfig.spec.json') }), resolveTestNameDotName()],
 		test: {
 			watch: false,
 			fileParallelism: true,
