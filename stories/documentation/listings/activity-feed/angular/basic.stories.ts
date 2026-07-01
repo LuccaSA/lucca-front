@@ -1,3 +1,4 @@
+import { finn } from '@/stories/users/user.mocks';
 import { LOCALE_ID } from '@angular/core';
 import { ActivityFeedComponent, ActivityFeedStepComponent, ActivityFeedUpdateComponent } from '@lucca-front/ng/activity-feed';
 import { CommentComponent } from '@lucca-front/ng/comment';

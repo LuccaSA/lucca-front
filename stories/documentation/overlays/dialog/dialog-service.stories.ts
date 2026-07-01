@@ -62,7 +62,7 @@ import { Meta, StoryObj, applicationConfig } from '@storybook/angular-vite';
 	],
 	changeDetection: ChangeDetectionStrategy.OnPush,
 })
-export class DialogContentStoryComponent {
+class DialogContentStoryComponent {
 	ref = injectDialogRef<string>();
 	data = injectDialogData<number>();
 
@@ -80,7 +80,7 @@ export class DialogContentStoryComponent {
 	providers: [provideLuDialog()],
 	changeDetection: ChangeDetectionStrategy.OnPush,
 })
-export class DialogStory {
+class DialogStory {
 	dialog = inject(LuDialogService);
 
 	openDialog(): void {

@@ -21,7 +21,6 @@ registerLocaleData(localesFr);
 				withSelectAllDisplayerLabel="légumes"
 				class="multiSelect"
 				placeholder="placeholder"
-				[clearable]="clearable"
 				[(ngModel)]="legumeSelection"
 				[options]="legumes"
 			/>

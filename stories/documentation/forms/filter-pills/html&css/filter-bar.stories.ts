@@ -49,7 +49,7 @@ export default {
 function getTemplate(args: FilterBarBasicStory): string {
 	return `
 	<form>
-		<div class="filterBar" [ngModel]="group" [ngModelOptions]="{ standalone: true }">
+		<div class="filterBar">
 			<lu-scroll-box class="filterBar-scrollBox">
 				<div class="filterBar-scrollBox-group">
 					<ul class="segmentedControl filterBar-segmentedControl" role="presentation">
