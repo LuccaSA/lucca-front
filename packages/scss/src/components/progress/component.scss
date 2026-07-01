@@ -26,7 +26,7 @@
 		.progress-bar {
 			background-color: var(--palettes-700, var(--components-progress-bar-background));
 			transition-duration: var(--commons-animations-durations-fast);
-			transition-property: background-color, width;
+			transition-property: background-color, inline-size;
 			inset-block: 0;
 			inset-inline-start: 0;
 			position: absolute;
