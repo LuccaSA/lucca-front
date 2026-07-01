@@ -44,6 +44,7 @@
     "lint:style": "stylelint \"packages/**/*.scss\" --report-needless-disables --report-unscoped-disables --report-invalid-scope-disables",
     "nglint": "ng lint --quiet",
     "nglint:fix": "npm run nglint -- --fix",
+    "stylelint:fix": "npm run lint:style -- --fix",
     "icons:update": "node ./packages/icons/update-icons.js",
     "i18n:update": "lucca translate && prettier --write 'packages/ng/**/translations.ts'",
     "skills:generate": "ts-node --project scripts/generate-skills/tsconfig.json scripts/generate-skills/index.ts"
