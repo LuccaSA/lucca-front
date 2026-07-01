@@ -23,6 +23,18 @@ describe('push-panel overlay helpers', () => {
 			expect(getPushPanelInlineSize(withPushPanelValue('200px'))).toBe(200);
 		});
 
+		it('resolves a flat calc() sum of pixels', () => {
+			expect(getPushPanelInlineSize(withPushPanelValue('calc(32px + 348px)'))).toBe(380);
+		});
+
+		it('resolves a calc() difference of pixels', () => {
+			expect(getPushPanelInlineSize(withPushPanelValue('calc(400px - 20px)'))).toBe(380);
+		});
+
+		it('returns 0 for a calc() mixing non-pixel units', () => {
+			expect(getPushPanelInlineSize(withPushPanelValue('calc(2rem + 348px)'))).toBe(0);
+		});
+
 		it('returns 0 when the token is unset', () => {
 			expect(getPushPanelInlineSize(withPushPanelValue(''))).toBe(0);
 		});
