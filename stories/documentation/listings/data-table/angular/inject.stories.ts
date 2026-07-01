@@ -33,7 +33,7 @@ import { Meta, moduleMetadata, StoryObj } from '@storybook/angular-vite';
 		<td luDataTableCell>cell</td>
 	</tr>`,
 })
-export class TrComponent {}
+class TrComponent {}
 
 export default {
 	title: 'Documentation/Listings/Data table/Angular/Inject',
