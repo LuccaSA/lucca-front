@@ -1,7 +1,7 @@
-import type { Preview } from '@analogjs/storybook-angular';
+import type { Preview } from '@storybook/angular-vite';
 import DocumentationTemplate from './DocumentationTemplate.mdx';
 import { setCompodocJson } from '@storybook/addon-docs/angular';
-import docJson from './documentation.json';
+import docJson from '../documentation.json';
 import MswPlugin from './plugins/msw';
 import LocaleId from './plugins/locale-id';
 
