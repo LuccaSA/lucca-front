@@ -1,7 +1,7 @@
-import { TableOfContentComponent, TableOfContentLinkDirective } from '@lucca-front/ng/table-of-content';
-import { Meta, moduleMetadata } from '@storybook/angular-vite';
 import { cleanupTemplate, createTestStory } from '@/helpers/stories';
 import { waitForAngular } from '@/helpers/test';
+import { TableOfContentComponent, TableOfContentLinkDirective } from '@lucca-front/ng/table-of-content';
+import { Meta, moduleMetadata } from '@storybook/angular-vite';
 import { expect, userEvent, within } from 'storybook/test';
 
 interface TableOfContentBasicStory {
@@ -27,10 +27,10 @@ export default {
 		const disabled = args.disabled ? ` disabled` : '';
 		return {
 			template: cleanupTemplate(`<lu-table-of-content>
-	<a *luTableOfContentLink class="is-active" href="#">Section 1</a>
-	<a *luTableOfContentLink href="#"${disabled}>Section 2</a>
-	<a *luTableOfContentLink href="#"${disabled}>Section 3</a>
-	<a *luTableOfContentLink href="#"${disabled}>Section 4</a>
+	<a *luTableOfContentLink class="is-active" href="#" (click)="$event.preventDefault()">Section 1</a>
+	<a *luTableOfContentLink href="#" (click)="$event.preventDefault()"${disabled}>Section 2</a>
+	<a *luTableOfContentLink href="#" (click)="$event.preventDefault()"${disabled}>Section 3</a>
+	<a *luTableOfContentLink href="#" (click)="$event.preventDefault()"${disabled}>Section 4</a>
 </lu-table-of-content>`),
 		};
 	},
