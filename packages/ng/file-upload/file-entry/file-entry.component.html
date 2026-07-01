@@ -66,9 +66,9 @@
 						<li class="fileToolbar-list-item">
 							<a
 								[href]="downloadURL()"
-								target="_blank"
-								rel="noopener noreferrer"
-								download="download"
+								[attr.target]="openInNewTab() ? '_blank' : null"
+								[attr.rel]="openInNewTab() ? 'noopener noreferrer' : null"
+								[attr.download]="openInNewTab() ? null : 'download'"
 								class="fileToolbar-list-item-button"
 								type="button"
 								luButton
