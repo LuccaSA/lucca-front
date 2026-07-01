@@ -17,7 +17,7 @@ export default {
 			control: {
 				type: 'text',
 			},
-			description: 'Modifie le texte principal d’un élément de liste.',
+			description: 'Modifie le texte principal d’un élément de liste. [PortalContent]',
 		},
 		helperMessage: {
 			control: {
