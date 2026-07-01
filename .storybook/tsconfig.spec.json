@@ -8,5 +8,5 @@
     "types": ["vitest/globals", "vitest/importMeta", "vite/client", "node"],
     "target": "es2015"
   },
-  "include": ["vitest.config.ts", "vitest.shared-config.ts", "vitest.pre-setup.ts", "vitest.setup.ts", "**/*.d.ts"]
+  "include": ["vitest.config.ts", "vitest.shared-config.ts", "vitest.pre-setup.ts", "vitest.setup.ts", "**/*.spec.ts", "**/*.spec.*.ts", "**/*.d.ts"]
 }

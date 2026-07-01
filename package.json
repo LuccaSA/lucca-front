@@ -36,7 +36,7 @@
     "test": "vitest",
     "build-compodoc": "compodoc -p ./tsconfig.compodoc-html.json -d compodoc-static",
     "build-storybook": "ng run ng:build-storybook",
-    "test-storybook": "test-storybook --url http://localhost:6006",
+    "test-storybook": "npx vitest --config .storybook/vitest.config.ts --project=storybook",
     "test-storybook:coverage": "test-storybook --url http://localhost:6006 --coverage",
     "lint": "npm run lint:es && npm run lint:style",
     "lint:fix": "npm run lint:es -- --fix && npm run lint:style -- --fix",
@@ -77,6 +77,8 @@
     "zone.js": "~0.16.2"
   },
   "devDependencies": {
+    "@analogjs/vite-plugin-angular": "^2.6.1",
+    "@analogjs/vitest-angular": "^2.6.1",
     "@angular-devkit/architect": "0.2200.1",
     "@angular-devkit/core": "22.0.1",
     "@angular-devkit/schematics": "22.0.1",
@@ -87,8 +89,6 @@
     "@anthropic-ai/sdk": "^0.91.1",
     "@compodoc/compodoc": "1.1.16",
     "@jsdevtools/coverage-istanbul-loader": "3.0.5",
-    "@analogjs/vite-plugin-angular": "^2.6.1",
-    "@analogjs/vitest-angular": "^2.6.1",
     "@lucca-front/eslint-plugin": "workspace:*",
     "@lucca/stylelint-config-prisme": "file:packages/stylelint-config",
     "@mdx-js/loader": "^3.1.1",
@@ -96,9 +96,9 @@
     "@storybook/addon-coverage": "~3.0.1",
     "@storybook/addon-docs": "~10.5.0-alpha.9",
     "@storybook/addon-mcp": "~0.6.0",
+    "@storybook/addon-vitest": "~10.5.0-alpha.9",
     "@storybook/angular-vite": "^10.5.0-alpha.9",
-    "sass-embedded": "^1.100.0",
-    "@storybook/test-runner": "~0.24.2",
+    "@storybook/test-runner": "~0.24.4",
     "@swc/core": "^1.13.5",
     "@testing-library/angular": "^18.1.1",
     "@testing-library/dom": "^10.4.0",
@@ -136,13 +136,16 @@
     "postcss-value-parser": "^4.2.0",
     "prettier": "^3.5.1",
     "sass": "^1.62.1",
+    "sass-embedded": "^1.100.0",
     "storybook": "~10.5.0-alpha.9",
     "stylelint": "^17.4.0",
     "ts-node": "~10.9.1",
     "typescript": "6.0.3",
     "typescript-eslint": "~8.59.4",
     "vite": "8.0.6",
-    "vitest": "^4.1.9"
+    "vitest": "^4.1.9",
+    "playwright": "^1.61.1",
+    "@vitest/browser-playwright": "4.1.9"
   },
   "volta": {
     "node": "24.15.0"
@@ -155,7 +158,8 @@
       "pdfjs-dist": "4.2.67"
     },
     "@storybook/addon-mcp": {
-      "storybook": "~10.5.0-alpha.9"
+      "storybook": "~10.5.0-alpha.9",
+      "@storybook/addon-vitest": "~10.5.0-alpha.9"
     },
     "@storybook/angular-vite": {
       "typescript": "6.0.3"
