@@ -130,7 +130,7 @@ export default [
 		versionDeleted: '22.0.0',
 	},
 	{
-		// Utilitaires renommés très utilisés
+		// Widely used renamed utilities
 		objectPattern: [
 			/\.pr-u-textPrimary/,
 			/\.pr-u-textProduct/,
@@ -150,7 +150,7 @@ export default [
 		versionDeprecated: '21.0.0',
 	},
 	{
-		// Utilitaires renommés peu ou pas utilisés
+		// Barely to never used renamed utilities
 		objectPattern: [
 			/\.pr-u-textSuccessContrasted/,
 			/\.pr-u-textWarningContrasted/,
