@@ -1,5 +1,5 @@
 import { StorybookConfig } from '@storybook/angular-vite';
-import { mergeConfig } from 'vite';
+import { mergeConfig, UserConfig } from 'vite';
 
 import { dirname } from 'path';
 
@@ -23,11 +23,19 @@ const config: StorybookConfig = {
 	logLevel: process.env['CI'] ? 'error' : 'info',
 	staticDirs: ['./public'],
 	viteFinal: async (config) => {
-		return mergeConfig(config, {
+		const userConfig: UserConfig = {
+			build: {
+				rolldownOptions: {
+					output: {
+						chunkFileNames: '[hash].js',
+					},
+				},
+			},
 			resolve: {
 				tsconfigPaths: true,
 			},
-		});
+		};
+		return mergeConfig(config, userConfig);
 	},
 };
 export default config;
