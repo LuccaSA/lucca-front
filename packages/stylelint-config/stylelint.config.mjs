@@ -171,6 +171,7 @@ export default {
 				ignorePseudoElements: ['ng-deep'],
 			},
 		],
+		'unit-layout-mappings': 'flow-relative',
 		'value-keyword-case': null,
 
 		// Formatting with @stylistic
