@@ -2,14 +2,14 @@
 
 Pipeline **déterministe** (zéro IA) qui génère la documentation des composants Lucca Front pour les **Agent Skills**.
 
-Chaque version produit une **skill self-contained** sous `.github/skills/lucca-front/lucca-front-<M>-<m>-<p>/` : un `SKILL.md` + tous les fichiers `references/` de cette version. Le nom du dossier (tirets, pas de point) = `name:` du SKILL.md = dossier d'install APM (leaf), pour un shorthand APM sur une ligne sans collision entre versions.
+Chaque version produit une **skill self-contained** sous `.claude/skills/lucca-front/lucca-front-<M>-<m>-<p>/` : un `SKILL.md` + tous les fichiers `references/` de cette version. Le nom du dossier (tirets, pas de point) = `name:` du SKILL.md = dossier d'install APM (leaf), pour un shorthand APM sur une ligne sans collision entre versions.
 
 Une passe finale assemble une skill **agrégat** `lucca-front-all/` : **un seul** `SKILL.md` routeur + le `references/` de chaque version sous `references/<version>/` (sans les SKILL.md par version, pour ne pas dupliquer les descriptions). Le routeur détecte la version de `@lucca-front/ng` (node_modules puis `package.json`) et compose les chemins vers `references/<version>/…`. Deux usages couverts :
 
 - **install global** (machine) : installer `lucca-front-all` → n'importe quel repo obtient la bonne version automatiquement ;
 - **install par repo** : installer une/deux `lucca-front-<M>-<m>-<p>` précises (fetch plus léger, version figée).
 
-Distribution via APM (voir `.github/skills/UPDATE.md`).
+Distribution via APM (voir `.claude/skills/UPDATE.md`).
 
 ## Prérequis
 
@@ -118,7 +118,7 @@ Trois mécanismes garantissent un rendu reproductible malgré des sources distan
      propriétés/variantes est seulement **signalée** dans le rapport de fin de run.
    - `--accept-shrink` entérine : le frais est accepté et les baselines mises à jour.
 3. **Manifeste d'échecs + rejeu ciblé** : les échecs transients épuisés (réseau, 5xx, 429, HTML,
-   shrink) sont écrits dans `.github/skills/_fetch-failures.json` avec leur *scope* (composant, page
+   shrink) sont écrits dans `.claude/skills/_fetch-failures.json` avec leur *scope* (composant, page
    doc, outil, deprecated). `--retry-failed` rejoue uniquement ces unités via leur collecteur, puis
    rafraîchit SKILL.md et l'agrégat. Itérable jusqu'à manifeste vide ; seuls les `shrink` légitimes
    nécessitent un `--accept-shrink` humain.
@@ -132,7 +132,7 @@ batché** ; la sérialisation + cadence + retries `Retry-After` ne restent qu'en
 Layout **flat self-contained par version** (aucun segment de version interne) :
 
 ```
-.github/skills/lucca-front/
+.claude/skills/lucca-front/
 ├── _versions.json                    # Manifeste des versions générées (métadonnée dist, hors skill)
 ├── changelog/<version>.md            # Diff de review humain entre versions (hors skill, non distribué)
 ├── lucca-front-all/                  # Skill agrégat : UN seul SKILL.md + references/ par version
@@ -335,4 +335,4 @@ Côté consommateur, deux modèles :
 - **skill par version** (`lucca-front-<M>-<m>-<p>`) : la version n'est **pas détectée**, la skill installée **est** une version donnée. Pour un repo qui fige une/deux versions.
 - **skill agrégat** (`lucca-front-all`) : embarque toutes les versions sous `references/<version>/`, son unique `SKILL.md` **détecte** la version (`node_modules/@lucca-front/ng` puis `package.json`) et compose les chemins. Pour une install globale machine qui sert n'importe quel repo. C'est le seul cas où le check `package.json` est réintroduit (garde-fou « stop si version indéterminée »).
 
-La distribution et la mise à jour sont décrites dans `.github/skills/UPDATE.md`.
+La distribution et la mise à jour sont décrites dans `.claude/skills/UPDATE.md`.

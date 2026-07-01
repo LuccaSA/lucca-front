@@ -22,7 +22,7 @@ export function loadConfig(): Config {
 			fileKey: cfg.figma?.fileKey || 'PQEOcUF9CYfKNqaejAGLWP',
 		},
 		output: {
-			skillsDir: cfg.output?.skillsDir || path.join(__dirname, '..', '..', '.github', 'skills'),
+			skillsDir: cfg.output?.skillsDir || path.join(__dirname, '..', '..', '.claude', 'skills'),
 		},
 		concurrency: cfg.concurrency || 5,
 	};
