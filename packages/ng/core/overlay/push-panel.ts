@@ -5,7 +5,24 @@
  */
 export function getPushPanelInlineSize(element: Element): number {
 	const raw = getComputedStyle(element).getPropertyValue('--commons-pushPanel-inlineSize').trim();
-	const match = /^(\d+(?:\.\d+)?)px$/.exec(raw);
+	if (raw === '') {
+		return 0;
+	}
+
+	// Custom properties aren't resolved by the browser (getComputedStyle returns them verbatim), so a
+	// value like `calc(32px + 348px)` never matches a plain px regex. Assign it to a real <length>
+	// property on a probe element and read back the computed value, which the browser always resolves to px.
+	const probe = document.createElement('div');
+	probe.style.position = 'absolute';
+	probe.style.width = raw;
+	// `element` may be a void element (e.g. an <input> carrying the trigger) that can't hold children,
+	// so probe from its parent: custom properties inherit, so the resolution context is the same.
+	const host = element.parentElement ?? element.ownerDocument.body;
+	host.appendChild(probe);
+	const computed = getComputedStyle(probe).width;
+	probe.remove();
+
+	const match = /^(\d+(?:\.\d+)?)px$/.exec(computed);
 	return match ? Number.parseFloat(match[1]) : 0;
 }
 
