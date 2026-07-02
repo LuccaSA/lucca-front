@@ -1,7 +1,7 @@
 import { IconComponent } from '@lucca-front/ng/icon';
 import { ListboxComponent, OptionComponent } from '@lucca-front/ng/listbox';
-import { Meta, moduleMetadata } from '@storybook/angular';
-import { cleanupTemplate } from 'stories/helpers/stories';
+import { Meta, moduleMetadata } from '@storybook/angular-vite';
+import { cleanupTemplate } from '@/helpers/stories';
 
 interface OptionBasicStory {
 	multiple: boolean;

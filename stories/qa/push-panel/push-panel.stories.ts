@@ -8,7 +8,7 @@ import { FormFieldComponent } from '@lucca-front/ng/form-field';
 import { SwitchInputComponent } from '@lucca-front/ng/forms';
 import { MainLayoutBlockComponent, MainLayoutComponent } from '@lucca-front/ng/main-layout';
 import { LuToastsComponent, LuToastsService } from '@lucca-front/ng/toast';
-import { Meta } from '@storybook/angular';
+import { Meta } from '@storybook/angular-vite';
 
 @Component({
 	selector: 'push-panel-stories',

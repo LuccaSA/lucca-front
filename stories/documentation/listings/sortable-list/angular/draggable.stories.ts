@@ -1,8 +1,8 @@
 import { CdkDrag, CdkDragDrop, CdkDropList, moveItemInArray } from '@angular/cdk/drag-drop';
 import { ChangeDetectionStrategy, Component, input } from '@angular/core';
 import { SortableListComponent, SortableListItemComponent } from '@lucca-front/ng/sortable-list';
-import { Meta, StoryObj } from '@storybook/angular';
-import { HiddenArgType } from 'stories/helpers/common-arg-types';
+import { Meta, StoryObj } from '@storybook/angular-vite';
+import { HiddenArgType } from '@/helpers/common-arg-types';
 
 @Component({
 	selector: 'sortable-list-draggable-stories',

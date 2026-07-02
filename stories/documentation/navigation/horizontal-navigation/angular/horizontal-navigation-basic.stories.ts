@@ -1,9 +1,9 @@
 import { provideRouter } from '@angular/router';
 import { HORIZONTAL_NAVIGATION_SIZE, HorizontalNavigationComponent, HorizontalNavigationLinkDirective } from '@lucca-front/ng/horizontal-navigation';
 import { NumericBadgeComponent } from '@lucca-front/ng/numeric-badge';
-import { applicationConfig, Meta, moduleMetadata } from '@storybook/angular';
-import { createTestStory, generateInputs, setStoryOptions } from 'stories/helpers/stories';
-import { waitForAngular } from 'stories/helpers/test';
+import { applicationConfig, Meta, moduleMetadata } from '@storybook/angular-vite';
+import { createTestStory, generateInputs, setStoryOptions } from '@/helpers/stories';
+import { waitForAngular } from '@/helpers/test';
 import { expect, userEvent, within } from 'storybook/test';
 
 export default {

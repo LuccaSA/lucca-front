@@ -1,3 +1,5 @@
+import { LOCALE_ID } from '@angular/core';
+import { applicationConfig } from '@storybook/angular-vite';
 import { registerLocaleData } from '@angular/common';
 import localeDe from '@angular/common/locales/de';
 import localeEn from '@angular/common/locales/en';
@@ -7,8 +9,6 @@ import localeIt from '@angular/common/locales/it';
 import localeNl from '@angular/common/locales/nl';
 import localePl from '@angular/common/locales/pl';
 import localePt from '@angular/common/locales/pt';
-import { LOCALE_ID } from '@angular/core';
-import { applicationConfig } from '@storybook/angular';
 
 [localeDe, localeEn, localeEs, localeFr, localeIt, localeNl, localePt, localePl].forEach((locale) => registerLocaleData(locale));
 

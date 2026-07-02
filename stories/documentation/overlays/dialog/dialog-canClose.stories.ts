@@ -17,7 +17,7 @@ import {
 } from '@lucca-front/ng/dialog';
 import { FormFieldComponent } from '@lucca-front/ng/form-field';
 import { LuSimpleSelectInputComponent } from '@lucca-front/ng/simple-select';
-import { Meta, StoryObj, applicationConfig } from '@storybook/angular';
+import { Meta, StoryObj, applicationConfig } from '@storybook/angular-vite';
 
 @Component({
 	selector: 'sb-dialog-content',
@@ -62,7 +62,7 @@ import { Meta, StoryObj, applicationConfig } from '@storybook/angular';
 	],
 	changeDetection: ChangeDetectionStrategy.OnPush,
 })
-export class DialogContentStoryComponent {
+class DialogContentStoryComponent {
 	ref = injectDialogRef<string>();
 	data = injectDialogData<number>();
 
@@ -80,7 +80,7 @@ export class DialogContentStoryComponent {
 	providers: [provideLuDialog()],
 	changeDetection: ChangeDetectionStrategy.OnPush,
 })
-export class DialogStory {
+class DialogStory {
 	dialog = inject(LuDialogService);
 
 	canClose = input<boolean>(true);

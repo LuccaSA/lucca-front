@@ -2,8 +2,8 @@ import { provideHttpClient } from '@angular/common/http';
 import { provideAnimations } from '@angular/platform-browser/animations';
 import { LuDisplayInitials, LuUserPictureComponent, USER_PICTURE_SIZE } from '@lucca-front/ng/user';
 import { LuUserPopoverDirective } from '@lucca-front/ng/user-popover';
-import { applicationConfig, Meta, moduleMetadata, StoryObj } from '@storybook/angular';
-import { setStoryOptions } from 'stories/helpers/stories';
+import { applicationConfig, Meta, moduleMetadata, StoryObj } from '@storybook/angular-vite';
+import { setStoryOptions } from '@/helpers/stories';
 import { finn, georges, jake } from '../../user.mocks';
 
 export default {

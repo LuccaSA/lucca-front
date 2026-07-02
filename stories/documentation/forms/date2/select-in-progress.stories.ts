@@ -1,7 +1,7 @@
 import { LOCALE_ID } from '@angular/core';
 import { FormsModule } from '@angular/forms';
 import { Calendar2Component, CalendarMode } from '@lucca-front/ng/date2';
-import { applicationConfig, Meta, moduleMetadata, StoryObj } from '@storybook/angular';
+import { applicationConfig, Meta, moduleMetadata, StoryObj } from '@storybook/angular-vite';
 
 export default {
 	title: 'Documentation/Forms/Date2/Calendar',

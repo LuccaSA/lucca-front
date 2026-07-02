@@ -1,5 +1,5 @@
 import { LuTooltipModule } from '@lucca-front/ng/tooltip';
-import { Meta, moduleMetadata, StoryObj } from '@storybook/angular';
+import { Meta, moduleMetadata, StoryObj } from '@storybook/angular-vite';
 
 interface CheckboxBasicStory {
 	label: string;

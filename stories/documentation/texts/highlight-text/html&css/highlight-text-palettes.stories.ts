@@ -1,5 +1,13 @@
+import { DECORATIVE_PALETTE, PALETTE } from '@lucca/prisme/core';
+import { Meta, StoryObj } from '@storybook/angular-vite';
+import { setStoryOptions } from '@/helpers/stories';
 import { HIGHLIGHT_DATA_PALETTE } from '@lucca-front/ng/highlight-data';
-import { Meta, StoryObj } from '@storybook/angular';
+
+interface TextHighlightStory {
+	palette: string;
+}
+
+
 
 export default {
 	title: 'Documentation/Texts/Highlight Text/HTML&CSS/Palettes',
