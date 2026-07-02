@@ -42,8 +42,8 @@
 			flex-grow: 1;
 			display: block;
 			block-size: 100%;
-			overflow-inline: hidden;
-			overflow-block: auto;
+			overflow-x: hidden;
+			overflow-y: auto;
 			position: relative;
 			scrollbar-face-color: var(--components-navSide-scrollbar-thumb-color);
 			scrollbar-arrow-color: var(--components-navSide-scrollbar-arrow-color);

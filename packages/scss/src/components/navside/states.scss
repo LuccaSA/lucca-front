@@ -31,8 +31,8 @@
 
 @mixin mobileOpen {
 	block-size: 100vb;
-	overflow-inline: hidden;
-	overflow-block: auto;
+	overflow-x: hidden;
+	overflow-y: auto;
 
 	.navSide-bottomSection,
 	.navSide-scrollWrapper {

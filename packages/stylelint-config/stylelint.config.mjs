@@ -136,7 +136,14 @@ export default {
 				severity: (property) => getDisallowedData(LFDeprecatedProperties, property).severity,
 			},
 		],
-		'property-layout-mappings': 'flow-relative',
+		'property-layout-mappings': [
+			'flow-relative',
+			{
+				// overflow-x / overflow-y logical equivalents (overflow-inline / overflow-block)
+				// are not yet Baseline widely available (Chrome 135+, Safari 26+).
+				ignoreProperties: ['overflow-x', 'overflow-y'],
+			},
+		],
 		'property-no-unknown': [
 			true,
 			{
