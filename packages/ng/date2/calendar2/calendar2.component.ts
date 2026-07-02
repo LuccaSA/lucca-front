@@ -34,11 +34,11 @@ import {
 import { WEEK_INFO } from '../calendar.token';
 import { LU_DATE2_TRANSLATIONS } from '../date2.translate';
 import { RepeatTimesDirective } from '../repeat-times.directive';
-import { comparePeriods, getIntlWeekDay, getJSFirstDayOfWeek } from '../utils';
+import { comparePeriods, getIntlWeekDay, getJSFirstDayOfWeek, getWeekNumberOptions } from '../utils';
 import { CalendarCellInfo, CalendarMonthInfo, CalendarYearInfo } from './calendar-cell-info';
 import { CalendarMode } from './calendar-mode';
 import { Calendar2CellDirective } from './calendar2-cell.directive';
-import { CALENDAR_CELLS, CALENDAR_TABBABLE_DATE } from './calendar2.tokens';
+import { CALENDAR_CELLS, CALENDAR_DISPLAY_MODE, CALENDAR_TABBABLE_DATE } from './calendar2.tokens';
 import { CellStatus } from './cell-status';
 import { DateRange } from './date-range';
 
@@ -61,6 +61,10 @@ const WEEK_MODE_HIERARCHY: Array<CalendarMode | null> = ['week', 'month', 'year'
 			provide: CALENDAR_TABBABLE_DATE,
 			useFactory: () => inject(Calendar2Component).tabbableDate,
 		},
+		{
+			provide: CALENDAR_DISPLAY_MODE,
+			useFactory: () => inject(Calendar2Component).displayMode,
+		},
 	],
 })
 export class Calendar2Component implements OnInit {
@@ -79,6 +83,8 @@ export class Calendar2Component implements OnInit {
 	#intlMonthsShort = new Intl.DateTimeFormat(this.#locale, { month: 'short' });
 
 	#weekOptions: WeekOptions = { weekStartsOn: getJSFirstDayOfWeek(this.#weekInfo) };
+
+	#weekNumberOptions = getWeekNumberOptions(this.#weekInfo);
 
 	readonly intl = input(...intlInputOptions(LU_DATE2_TRANSLATIONS));
 
@@ -391,7 +397,7 @@ export class Calendar2Component implements OnInit {
 
 		return {
 			day: date.getDate(),
-			week: getWeek(date),
+			week: getWeek(date, this.#weekNumberOptions),
 			status,
 			label: status.label || rangeInfo?.label,
 			date,
@@ -421,11 +427,18 @@ export class Calendar2Component implements OnInit {
 		};
 	}
 
+	// The week rowheader must not inherit the overflow status of the week's first cell:
+	// a week containing days of the displayed month stays selectable even when its first
+	// days belong to the previous month and overflow is disabled or hidden.
+	getWeekHeaderCell(week: CalendarCellInfo[]): CalendarCellInfo {
+		return week.find((day) => !day.isOverflow) ?? week[0];
+	}
+
 	getWeekRowClasses(week: CalendarCellInfo[]): Record<string, boolean> {
-		const firstDay = week[0];
+		const header = this.getWeekHeaderCell(week);
 		return {
-			'is-selected': firstDay?.isSelected ?? false,
-			'is-start': firstDay?.classes['is-start'] ?? false,
+			'is-selected': header?.isSelected ?? false,
+			'is-start': header?.classes['is-start'] ?? false,
 		};
 	}
 

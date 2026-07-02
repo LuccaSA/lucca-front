@@ -1,6 +1,6 @@
 import { booleanAttribute, ChangeDetectionStrategy, Component, computed, effect, inject, input, LOCALE_ID, model, output, signal } from '@angular/core';
 import { intlInputOptions, isNotNil } from '@lucca-front/ng/core';
-import { addMonths, addYears, isAfter, isBefore, isSameMonth, isSameWeek, startOfDay, startOfMonth, startOfWeek, WeekOptions } from 'date-fns';
+import { addMonths, addYears, isAfter, isBefore, isSameMonth, startOfDay, startOfMonth, startOfWeek, WeekOptions } from 'date-fns';
 import { WEEK_INFO } from './calendar.token';
 import { CalendarMode } from './calendar2/calendar-mode';
 import { CellStatus } from './calendar2/cell-status';
@@ -94,10 +94,9 @@ export abstract class AbstractDateComponent {
 		switch (mode) {
 			case 'day':
 				return min.getTime() <= date.getTime();
-			case 'week': {
-				const opts = this.weekOptions;
-				return isBefore(startOfWeek(min, opts), startOfWeek(date, opts)) || isSameWeek(min, date, opts);
-			}
+			case 'week':
+				// In week mode the emitted value is the start of the week, so min applies to it
+				return startOfWeek(date, this.weekOptions).getTime() >= min.getTime();
 			case 'month':
 				return isBefore(startOfMonth(min), startOfMonth(date)) || isSameMonth(min, date);
 			case 'year':
@@ -113,10 +112,9 @@ export abstract class AbstractDateComponent {
 			switch (mode) {
 				case 'day':
 					return max.getTime() >= date.getTime();
-				case 'week': {
-					const opts = this.weekOptions;
-					return isAfter(startOfWeek(max, opts), startOfWeek(date, opts)) || isSameWeek(max, date, opts);
-				}
+				case 'week':
+					// In week mode the emitted value is the start of the week, so max applies to it
+					return startOfWeek(date, this.weekOptions).getTime() <= max.getTime();
 				case 'month':
 					return isAfter(startOfMonth(max), startOfMonth(date)) || isSameMonth(max, date);
 				case 'year':

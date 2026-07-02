@@ -119,26 +119,27 @@
 				</thead>
 				<tbody class="calendar-table-body">
 					@for (week of monthGridDisplay(); track $index; let isLastWeek = $last) {
+						@let weekHeader = getWeekHeaderCell(week);
 						<tr class="calendar-table-body-row">
 							<th
 								scope="row"
 								class="calendar-table-body-row-cell"
 								[class]="getWeekRowClasses(week)"
-								[attr.aria-selected]="week[0].isSelected || null"
+								[attr.aria-selected]="weekHeader.isSelected || null"
 							>
 								<button
 									type="button"
 									class="calendar-table-body-row-cell-action"
 									[luCalendar2Cell]="0"
-									[luCalendar2Date]="week[0].date"
+									[luCalendar2Date]="weekHeader.date"
 									luCalendar2Mode="week"
-									[attr.aria-disabled]="week[0].disabled ? 'true' : null"
-									(click)="!week[0].disabled ? onCellClicked(week[0].date) : null"
-									(keydown.space)="!week[0].disabled ? onCellClicked(week[0].date) : null"
-									(focus)="dateHovered.set(week[0].date)"
+									[attr.aria-disabled]="weekHeader.disabled ? 'true' : null"
+									(click)="!weekHeader.disabled ? onCellClicked(weekHeader.date) : null"
+									(keydown.space)="!weekHeader.disabled ? onCellClicked(weekHeader.date) : null"
+									(focus)="dateHovered.set(weekHeader.date)"
 									(blur)="dateHovered.set(null)"
 								>
-									<span class="calendar-table-body-row-cell-action-week">{{ week[0]?.week }}</span>
+									<span class="calendar-table-body-row-cell-action-week">{{ weekHeader.week }}</span>
 								</button>
 							</th>
 							@for (day of week; track dayIndex; let dayIndex = $index; let isLastDay = $last) {
