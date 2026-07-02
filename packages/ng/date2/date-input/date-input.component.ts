@@ -26,7 +26,7 @@ import { FILTER_PILL_INPUT_COMPONENT, FilterPillDisplayerDirective, FilterPillIn
 import { InputDirective, PresentationDisplayDirective } from '@lucca-front/ng/form-field';
 import { IconComponent } from '@lucca-front/ng/icon';
 import { PopoverDirective } from '@lucca-front/ng/popover2';
-import { isSameDay, parse, startOfDay } from 'date-fns';
+import { parse, startOfDay, startOfWeek } from 'date-fns';
 import { AbstractDateComponent } from '../abstract-date-component';
 import { CalendarMode } from '../calendar2/calendar-mode';
 import { Calendar2Component } from '../calendar2/calendar2.component';
@@ -212,9 +212,10 @@ export class DateInputComponent extends AbstractDateComponent implements OnInit,
 					parsed = null;
 				}
 				if (parsed instanceof Date && parsed.getFullYear() > 999) {
-					this.selectedDate.set(startOfDay(parsed));
-					this.currentDate.set(startOfDay(parsed));
-					this.tabbableDate.set(startOfDay(parsed));
+					const normalized = this.#normalizeDate(parsed);
+					this.selectedDate.set(normalized);
+					this.currentDate.set(normalized);
+					this.tabbableDate.set(normalized);
 				} else if (!this.isFilterPill) {
 					this.selectedDate.set(parsed);
 				}
@@ -265,8 +266,16 @@ export class DateInputComponent extends AbstractDateComponent implements OnInit,
 		this.ngControl = this.#injector.get(NgControl);
 	}
 
+	// The value is a Date in every mode, but two dates are "the same value" only if they belong
+	// to the same period for the current mode (same week in week mode, same day in day mode, etc.)
 	#safeCompareDate(a: Date | null, b: Date | null): boolean {
-		return a === b || (!!a && !!b && isSameDay(a, b));
+		return a === b || (!!a && !!b && comparePeriods(this.mode(), a, b, this.weekOptions));
+	}
+
+	// The emitted value is always the start of the period matching the current mode:
+	// start of day, or start of week in week mode.
+	#normalizeDate(date: Date): Date {
+		return this.mode() === 'week' ? startOfWeek(date, this.weekOptions) : startOfDay(date);
 	}
 
 	registerFilterPillClosePopover(closeFn: () => void): void {
@@ -354,16 +363,16 @@ export class DateInputComponent extends AbstractDateComponent implements OnInit,
 		}
 
 		const _date = transformDateInputToDate(date);
+		const normalized = isNotNil(_date) ? this.#normalizeDate(_date) : null;
 
 		if (this.initialValue() === undefined) {
-			this.initialValue.set(_date);
+			this.initialValue.set(normalized);
 		}
 
-		if (isNotNil(date) && isNotNil(_date)) {
-			const start = startOfDay(_date);
-			this.dateFromWriteValue.set(start);
-			this.selectedDate.set(start);
-			this.currentDate.set(start);
+		if (isNotNil(date) && isNotNil(normalized)) {
+			this.dateFromWriteValue.set(normalized);
+			this.selectedDate.set(normalized);
+			this.currentDate.set(normalized);
 		} else {
 			this.reset();
 		}
@@ -399,9 +408,10 @@ export class DateInputComponent extends AbstractDateComponent implements OnInit,
 	}
 
 	dateClicked(date: Date, popoverRef: PopoverDirective): void {
-		this.selectedDate.set(date);
-		this.currentDate.set(date);
-		this.tabbableDate.set(date);
+		const normalized = this.#normalizeDate(date);
+		this.selectedDate.set(normalized);
+		this.currentDate.set(normalized);
+		this.tabbableDate.set(normalized);
 		if (!this.isFilterPill) {
 			popoverRef.close();
 			this.inputRef()?.nativeElement.focus();

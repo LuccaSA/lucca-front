@@ -4,7 +4,7 @@ import { add, addMonths, addYears, endOfWeek, startOfWeek, sub, subMonths, subYe
 import { WEEK_INFO } from '../calendar.token';
 import { comparePeriods, getJSFirstDayOfWeek } from '../utils';
 import { CalendarMode } from './calendar-mode';
-import { CALENDAR_TABBABLE_DATE } from './calendar2.tokens';
+import { CALENDAR_DISPLAY_MODE, CALENDAR_TABBABLE_DATE } from './calendar2.tokens';
 
 const modeToDurationKey: Record<CalendarMode, keyof Duration> = {
 	day: 'days',
@@ -24,6 +24,7 @@ export class Calendar2CellDirective {
 	#host = inject<ElementRef<HTMLButtonElement>>(ElementRef);
 
 	readonly #tabbableDate = inject(CALENDAR_TABBABLE_DATE);
+	readonly #displayMode = inject(CALENDAR_DISPLAY_MODE);
 	#weekInfo = inject(WEEK_INFO);
 
 	// Index of this day in the current week display row, not depending on locale, 0 is first day of week and 6 is last
@@ -38,6 +39,12 @@ export class Calendar2CellDirective {
 	}
 
 	readonly isTabbableDate = computed(() => {
+		// In week display mode, day cells share the grid with the week rowheaders: only the cell
+		// whose own mode matches the calendar's display mode can be tabbable, so a tabbable date
+		// never makes both a week rowheader and a day cell tabbable at the same time.
+		if (this.luCalendar2Mode() !== this.#displayMode()) {
+			return false;
+		}
 		return comparePeriods(this.luCalendar2Mode(), this.luCalendar2Date(), this.#tabbableDate(), { weekStartsOn: getJSFirstDayOfWeek(this.#weekInfo) });
 	});
 
