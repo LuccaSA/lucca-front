@@ -34,6 +34,7 @@ export default [
 	},
 	{
 		objectPattern: /--commons-borderRadius-(M|L|XL|full)/,
-		versionDeprecated: '22.0',
+		versionDeprecated: '20.2.0',
+		versionDeleted: '22.0.0',
 	},
 ];
