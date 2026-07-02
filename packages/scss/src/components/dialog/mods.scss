@@ -47,7 +47,8 @@
 @mixin fromBottom {
 	--components-dialog-animationOpening: slideFromBottom;
 	--components-dialog-maxHeight: calc(100dvb - var(--pr-t-spacings-200));
-	--components-dialog-maxHeightFallback: calc(100vb - var(--pr-t-spacings-200));
+	// stylelint-disable-next-line unit-layout-mappings -- Physical fallback: browsers without `dvb` do not support `vb` either.
+	--components-dialog-maxHeightFallback: calc(100vh - var(--pr-t-spacings-200));
 	--components-dialog-maxWidth: none;
 	--components-dialog-inset: auto calc(var(--pr-t-spacings-100) + var(--commons-pushPanel-inlineSize)) var(--pr-t-spacings-100) var(--pr-t-spacings-100);
 	--components-dialog-borderRadius: var(--pr-t-border-radius-structure);
