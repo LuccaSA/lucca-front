@@ -126,8 +126,9 @@ function comparePatterns(faultyPattern, disallowedPattern) {
  * @return {string}
  */
 function getMessage(objectData) {
+	const status = isDeleted(objectData) ? 'deleted' : 'deprecated';
+
 	let pattern = `${objectData.faultyPattern}`;
-	let status = 'deprecated';
 	let messageDeprecated = '';
 	let messageDeleted = '';
 	let messageLFVersionWarning = '';
@@ -147,10 +148,6 @@ function getMessage(objectData) {
 		const daysLeft = Math.ceil((objectData.dateDeleted.getTime() - new Date().getTime()) / (1000 * 60 * 60 * 24));
 		const dayString = new Intl.RelativeTimeFormat().format(daysLeft, 'day');
 
-		if (daysLeft <= 0) {
-			status = 'deleted';
-		}
-
 		messageDeleted = ` | until ${objectData.dateDeleted.toLocaleDateString()} (${dayString}, LF ${objectData.versionDeleted})`;
 	}
 
@@ -158,17 +155,21 @@ function getMessage(objectData) {
 }
 
 /**
- * Is the current version at or past the deletion version?
+ * Is the element deleted for the current LF version?
+ * Single source of truth for getMessage() and getSeverity().
  * Compares dot-separated versions component by component so the most significant
  * difference decides — a plain string comparison would misorder them (e.g. `9.0.0` > `22.0.0`).
  *
- * @param {string} currentVersion - The current LF version
- * @param {string} deletedVersion - The version the element is deleted in
- * @return {boolean} - true if currentVersion >= deletedVersion
+ * @param {DisallowedObject} objectData
+ * @return {boolean} - true if the current LF version is at or past versionDeleted
  */
-function isDeleted(currentVersion, deletedVersion) {
-	const currentParts = currentVersion.split('.');
-	const deletedParts = deletedVersion.split('.');
+function isDeleted(objectData) {
+	if (!currentLFVersion || !objectData.versionDeleted) {
+		return false;
+	}
+
+	const currentParts = currentLFVersion.split('.');
+	const deletedParts = objectData.versionDeleted.split('.');
 	const length = Math.max(currentParts.length, deletedParts.length);
 
 	for (let i = 0; i < length; i++) {
@@ -194,17 +195,5 @@ function isDeleted(currentVersion, deletedVersion) {
  * @return {'warning'|'error'}
  */
 function getSeverity(objectData) {
-	if (!currentLFVersion) {
-		return 'warning';
-	}
-
-	if (!objectData.versionDeleted) {
-		return 'warning';
-	}
-
-	if (!isDeleted(currentLFVersion, objectData.versionDeleted)) {
-		return 'warning';
-	}
-
-	return 'error';
+	return isDeleted(objectData) ? 'error' : 'warning';
 }
