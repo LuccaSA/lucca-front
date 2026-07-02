@@ -71,7 +71,7 @@
 			&:is(textarea, div) {
 				max-block-size: var(--component-textField-maxHeight);
 
-				@supports not (height: 1dvh) {
+				@supports not (height: 1dvb) {
 					--component-textField-maxHeight: var(--component-textField-maxHeightFallback);
 				}
 			}
