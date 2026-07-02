@@ -4,6 +4,10 @@ import { FormControl, FormsModule, ReactiveFormsModule } from '@angular/forms';
 import { addMonths } from 'date-fns';
 import { DateRange } from '../calendar2/date-range';
 import { DateRangeInputComponent } from './date-range-input.component';
+import localeFr from '@angular/common/locales/fr';
+import { registerLocaleData } from '@angular/common';
+
+registerLocaleData(localeFr, 'fr-FR');
 
 @Component({
 	template: `<lu-date-range-input [(ngModel)]="selected" (ngModelChange)="ngModelChangeCallback($event)" />`,

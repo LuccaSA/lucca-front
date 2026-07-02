@@ -14,6 +14,7 @@ export interface Date2Translate {
 	previous: string;
 	next: string;
 	clear: string;
+	weekNumber: string;
 }
 
 export const luDate2Translations: LuTranslation<Date2Translate> = Translations;
