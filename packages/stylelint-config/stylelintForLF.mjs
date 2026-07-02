@@ -7,9 +7,7 @@ import currentLFVersion from './currentLFVersion.mjs';
  * @return {Array[Regex | String]}
  */
 export function getDisallowedObjects(disallowedObjects) {
-	return disallowedObjects.reduce((output, object) => {
-		return output.concat(object.objectPattern);
-	}, []);
+	return disallowedObjects.flatMap((object) => object.objectPattern).filter((pattern) => pattern != null);
 }
 
 /**
@@ -96,7 +94,16 @@ function getDateForVersion(version) {
  * @return boolean
  */
 function comparePatterns(faultyPattern, disallowedPattern) {
-	return typeof disallowedPattern === 'string' ? faultyPattern === disallowedPattern : disallowedPattern.test(faultyPattern);
+	//  A missing pattern never matches: this keeps a broken object from crashing Stylelint.
+	if (disallowedPattern == null) {
+		return false;
+	}
+
+	if (typeof disallowedPattern === 'string') {
+		return faultyPattern === disallowedPattern;
+	}
+
+	return disallowedPattern.test(faultyPattern);
 }
 
 /**
