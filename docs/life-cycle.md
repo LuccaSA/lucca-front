@@ -2,7 +2,7 @@
 
 Reference: [Cycle de vie des composants](https://prisme.lucca.io/94310e217/p/40c515-cycle-de-vie-des-composants/b/95175f) – section "Classes & Inputs".
 
-> **Note :** contrairement à la page Prisme, les tables *Classes* et *Variables CSS* conservent les dépréciations dont la suppression est déjà livrée. Prisme purge les entrées une fois la suppression livrée ; le linter (et cette page) les conserve pour signaler l'usage résiduel.
+> **Note :** contrairement à la page Prisme, les tables *Classes* et *Variables CSS* conservent les dépréciations dont la suppression est effective. Prisme purge les entrées une fois la suppression livrée ; le linter (et cette page) les conserve pour signaler l'usage résiduel.
 
 <style>
   table {
