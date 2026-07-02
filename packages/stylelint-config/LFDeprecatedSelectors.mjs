@@ -54,7 +54,9 @@ export default [
 		versionDeleted: '22.0.0',
 	},
 	{
-		objectPattern: /\.u-(padding|margin|gap)X*(S|M|L)/,
+		// Old t-shirt sized utilities
+		// SEE https://regex101.com/r/rTqNoc.
+		objectPattern: /\.u-((padding|margin)((Inline|Block)|(Top|Right|Bottom|Left)?)|(columnG|rowG|g)ap)(Auto|0|(X{1,2}(S|L))|(S|M|L))/,
 		versionDeprecated: '17.4.0',
 		versionDeleted: '19.1.0',
 	},
