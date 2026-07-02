@@ -21,7 +21,7 @@ Element.prototype.scrollIntoView = () => {};
 
 const originalError = console.error;
 const hideCssParseError = (...args: unknown[]) => {
-	if (args[0] && typeof args[0] === 'object' && args[0].constructor.name === 'Error' && args[0]['type'] === 'css parsing') {
+	if (args[0] && typeof args[0] === 'object' && args[0].constructor?.name === 'Error' && args[0]['type'] === 'css parsing') {
 		return;
 	}
 	originalError(...args);
