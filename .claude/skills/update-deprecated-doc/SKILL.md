@@ -60,7 +60,7 @@ table. All tables share the same `<thead>`, mirroring Prisme's headers:
 
 ## Conventions (match these exactly)
 
-- **Widths via the `<style>` block** (`table-layout: fixed`, last `th` 50%) — no
+- **Widths via the `<style>` block** (`table-layout: fixed`, last `th` 39%) — no
   `<colgroup>`, no inline `style`.
 - **`Action à réaliser`: `actions` markdown → HTML** — `` `code` `` → `<code>`,
   `[text](url)` → `<a>`, `*` lists → `<ul><li>`, blank-line paragraphs → `<p>`,
@@ -109,7 +109,7 @@ table. All tables share the same `<thead>`, mirroring Prisme's headers:
   }
 
   table thead th:last-of-type {
-    inline-size: 50% !important;
+    inline-size: 39% !important;
   }
 
   td > :is(ol, ul) {
