@@ -11,7 +11,7 @@ export default {
 			files: ['**/*.scss'],
 			rules: {
 				// Disable for now because of bugs with SCSS files.
-				// SEE https://github.com/stylelint-scss/stylelint-config-standard-scss/issues/252
+				// SEE https://github.com/stylelint-scss/stylelint-config-standard-scss/issues/269
 				'no-invalid-position-declaration': null,
 			},
 		},
@@ -23,6 +23,12 @@ export default {
 			},
 		},
 	],
+	languageOptions: {
+		directionality: {
+			block: 'top-to-bottom',
+			inline: 'left-to-right',
+		},
+	},
 	rules: {
 		// SCSS specific
 		// ============================================================================================
@@ -130,6 +136,14 @@ export default {
 				severity: (property) => getDisallowedData(LFDeprecatedProperties, property).severity,
 			},
 		],
+		'property-layout-mappings': [
+			'flow-relative',
+			{
+				// overflow-x / overflow-y logical equivalents (overflow-inline / overflow-block)
+				// are not yet Baseline widely available (Chrome 135+, Safari 26+).
+				ignoreProperties: ['overflow-x', 'overflow-y'],
+			},
+		],
 		'property-no-unknown': [
 			true,
 			{
@@ -157,13 +171,16 @@ export default {
 				message: (selectorId) => `Expected "${selectorId}" to match pattern #foo(-bar(Baz)*)*`,
 			},
 		],
+		'selector-no-deprecated': true,
 		'selector-pseudo-element-no-unknown': [
 			true,
 			{
 				ignorePseudoElements: ['ng-deep'],
 			},
 		],
+		'unit-layout-mappings': 'flow-relative',
 		'value-keyword-case': null,
+		'value-keyword-layout-mappings': 'flow-relative',
 
 		// Formatting with @stylistic
 		// SEE: https://github.com/stylelint-stylistic/stylelint-stylistic/blob/main/docs/user-guide/rules.md
@@ -183,6 +200,7 @@ export default {
 				alignQuotes: true,
 			},
 		],
+		'@stylistic/no-multiple-whitespaces': null, // Allow people to align values as they wish.
 		'@stylistic/string-quotes': 'single',
 	},
 };

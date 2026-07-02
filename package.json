@@ -44,6 +44,7 @@
     "lint:style": "stylelint \"packages/**/*.scss\" --report-needless-disables --report-unscoped-disables --report-invalid-scope-disables",
     "nglint": "ng lint --quiet",
     "nglint:fix": "npm run nglint -- --fix",
+    "stylelint:fix": "npm run lint:style -- --fix",
     "icons:update": "node ./packages/icons/update-icons.js",
     "i18n:update": "lucca translate && prettier --write 'packages/ng/**/translations.ts'",
     "skills:generate": "ts-node --project scripts/generate-skills/tsconfig.json scripts/generate-skills/index.ts"
@@ -135,7 +136,7 @@
     "prettier": "^3.5.1",
     "sass": "^1.62.1",
     "storybook": "~10.1.9",
-    "stylelint": "^17.4.0",
+    "stylelint": "^17.14.0",
     "ts-node": "~10.9.1",
     "typescript": "5.9.3",
     "typescript-eslint": "~8.59.4"

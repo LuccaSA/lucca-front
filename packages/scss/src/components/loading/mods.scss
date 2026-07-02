@@ -39,7 +39,7 @@
 	@include popin;
 
 	// legacy, approximate centering
-	--components-loading-transform: translateY(35vh);
+	--components-loading-transform: translateY(35vb);
 }
 
 @mixin fullPage {
@@ -47,7 +47,7 @@
 
 	// legacy, approximate centering
 	--components-loading-margin: 0 auto;
-	--components-loading-transform: translateY(35vh);
+	--components-loading-transform: translateY(35vb);
 }
 
 @mixin hiddenLabel {

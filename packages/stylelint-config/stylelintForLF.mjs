@@ -71,8 +71,16 @@ function isValidDate(date) {
  * @return {Date|undefined}
  */
 function getDateForVersion(version) {
-	if (version && version in LFVersions) {
-		const date = new Date(LFVersions[version]);
+	if (!version) {
+		return;
+	}
+
+	// LFVersions keys are normalised to a patch version (e.g. `22.0` → `22.0.0`) in LFVersions.mjs,
+	// so normalise the lookup the same way; otherwise a two-part version silently misses the map.
+	const normalizedVersion = version.split('.').length === 2 ? `${version}.0` : version;
+
+	if (normalizedVersion in LFVersions) {
+		const date = new Date(LFVersions[normalizedVersion]);
 
 		if (isValidDate(date)) {
 			return date;
@@ -130,6 +138,36 @@ function getMessage(objectData) {
 }
 
 /**
+ * Is the current version at or past the deletion version?
+ * Compares dot-separated versions component by component so the most significant
+ * difference decides — a plain string comparison would misorder them (e.g. `9.0.0` > `22.0.0`).
+ *
+ * @param {string} currentVersion - The current LF version
+ * @param {string} deletedVersion - The version the element is deleted in
+ * @return {boolean} - true if currentVersion >= deletedVersion
+ */
+function isDeleted(currentVersion, deletedVersion) {
+	const currentParts = currentVersion.split('.');
+	const deletedParts = deletedVersion.split('.');
+	const length = Math.max(currentParts.length, deletedParts.length);
+
+	for (let i = 0; i < length; i++) {
+		const diff = (parseInt(currentParts[i], 10) || 0) - (parseInt(deletedParts[i], 10) || 0);
+
+		if (diff < 0) {
+			return false;
+		}
+
+		if (diff > 0) {
+			return true;
+		}
+	}
+
+	// Current version equals the deleted version.
+	return true;
+}
+
+/**
  * Get severity based on version used.
  *
  * @param {String} objectData
@@ -144,7 +182,7 @@ function getSeverity(objectData) {
 		return 'warning';
 	}
 
-	if (currentLFVersion < objectData.versionDeleted) {
+	if (!isDeleted(currentLFVersion, objectData.versionDeleted)) {
 		return 'warning';
 	}
 
