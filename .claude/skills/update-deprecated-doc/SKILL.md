@@ -98,7 +98,13 @@ table. All tables share the same `<thead>`, mirroring Prisme's headers:
 - **Historical entries are kept.** The `.mjs` files (and therefore Classes /
   Variables CSS) retain deprecations whose deletion already shipped; Prisme
   prunes those. This divergence is **by design** — don't flag or "fix" it. The
-  doc intro carries a note explaining it.
+  doc intro carries a note explaining it — keep it verbatim, and never pin a
+  version number in it (it would go stale):
+
+  > **Note :** contrairement à la page Prisme, les tables *Classes* et
+  > *Variables CSS* conservent les dépréciations dont la suppression est
+  > effective. Prisme purge les entrées une fois la suppression livrée ; le
+  > linter (et cette page) les conserve pour signaler l'usage résiduel.
 
 ## Skeleton
 
