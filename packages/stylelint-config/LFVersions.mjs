@@ -44,7 +44,10 @@ if (LFVersions === null) {
 		console.info(`Fetching from Github to ${CACHE_FILE_PATH}…`);
 	}
 
-	const githubMilestones = await fetch('https://api.github.com/repos/LuccaSA/lucca-front/milestones?state=all&sort=due_on&direction=desc');
+	// per_page raises the default 30 results to the API maximum: old milestones must resolve too.
+	const githubMilestones = await fetch(
+		'https://api.github.com/repos/LuccaSA/lucca-front/milestones?state=all&sort=due_on&direction=desc&per_page=100',
+	);
 
 	if (githubMilestones.ok) {
 		const milestones = await githubMilestones.json();
