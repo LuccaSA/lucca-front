@@ -71,8 +71,16 @@ function isValidDate(date) {
  * @return {Date|undefined}
  */
 function getDateForVersion(version) {
-	if (version && version in LFVersions) {
-		const date = new Date(LFVersions[version]);
+	if (!version) {
+		return;
+	}
+
+	// LFVersions keys are normalised to a patch version (e.g. `22.0` → `22.0.0`) in LFVersions.mjs,
+	// so normalise the lookup the same way; otherwise a two-part version silently misses the map.
+	const normalizedVersion = version.split('.').length === 2 ? `${version}.0` : version;
+
+	if (normalizedVersion in LFVersions) {
+		const date = new Date(LFVersions[normalizedVersion]);
 
 		if (isValidDate(date)) {
 			return date;

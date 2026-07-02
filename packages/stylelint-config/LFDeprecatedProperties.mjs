@@ -15,7 +15,7 @@ export default [
 	{
 		objectPattern: /--palettes-(grey|primary|secondary|lucca)-[0-9]{2,3}/,
 		versionDeprecated: '17.3.0',
-		versionDeleted: '22.0',
+		versionDeleted: '22.0.0',
 	},
 	{
 		objectPattern: /--spacings-X*(S|M|L)/,
@@ -25,7 +25,7 @@ export default [
 	{
 		objectPattern: /--colors-(black|white)-color/,
 		versionDeprecated: '18.2.0',
-		versionDeleted: '22.0',
+		versionDeleted: '22.0.0',
 	},
 	{
 		objectPattern: /--commons-navSide-compact-width/,
