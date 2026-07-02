@@ -1,4 +1,4 @@
-import LFVersions from './LFVersions.mjs';
+import LFVersions, { normalizeVersion } from './LFVersions.mjs';
 import currentLFVersion from './currentLFVersion.mjs';
 
 /**
@@ -86,9 +86,8 @@ function getDateForVersion(version) {
 		return;
 	}
 
-	// LFVersions keys are normalised to a patch version (e.g. `22.0` → `22.0.0`) in LFVersions.mjs,
-	// so normalise the lookup the same way; otherwise a two-part version silently misses the map.
-	const normalizedVersion = version.split('.').length === 2 ? `${version}.0` : version;
+	// LFVersions keys are normalised; a non-normalised lookup would silently miss the map.
+	const normalizedVersion = normalizeVersion(version);
 
 	if (normalizedVersion in LFVersions) {
 		const date = new Date(LFVersions[normalizedVersion]);

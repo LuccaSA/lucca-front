@@ -4,6 +4,19 @@ import { join } from 'node:path';
 
 let LFVersions = null;
 
+/**
+ * Normalise a version to a patch version.
+ * e.g. `22.0` → `22.0.0`
+ *
+ * Used on both sides: LFVersions keys (built from milestone titles) and lookups.
+ *
+ * @param {string} version - Dot-separated LF version
+ * @return {string}
+ */
+export function normalizeVersion(version) {
+	return version.split('.').length === 2 ? `${version}.0` : version;
+}
+
 // Check if the `showCachePath` parameter is present when executing the script.
 const showCachePath = process.argv.includes('showCachePath');
 const CACHE_FILE_PATH = join(os.tmpdir(), 'stylelint-LFVersions.json');
@@ -37,17 +50,12 @@ if (LFVersions === null) {
 		const milestones = await githubMilestones.json();
 
 		for (const milestone of milestones) {
-			let version = milestone.title;
+			const version = milestone.title;
 
 			if (version) {
 				const date = new Date(milestone.due_on);
 
-				// If version doesn't have patch version, add it as .0
-				if (version.split('.').length === 2) {
-					version += '.0';
-				}
-
-				LFVersions[version] = date.toLocaleDateString();
+				LFVersions[normalizeVersion(version)] = date.toLocaleDateString();
 			}
 		}
 	}
