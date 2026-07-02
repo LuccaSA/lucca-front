@@ -120,7 +120,8 @@
 	}
 
 	:host-context(.mod-multiple),
-	.formerEmployeeDisplayer {
+	.formerEmployeeDisplayer,
+	.archivedLegalUnitsDisplayer {
 		.optionItem-value {
 			@layer mods {
 				position: relative;
