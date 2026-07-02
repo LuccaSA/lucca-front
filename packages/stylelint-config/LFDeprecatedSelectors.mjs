@@ -55,10 +55,22 @@ export default [
 	},
 	{
 		// Old t-shirt sized utilities
-		// SEE https://regex101.com/r/rTqNoc.
-		objectPattern: /\.u-((padding|margin)((Inline|Block)|(Top|Right|Bottom|Left)?)|(columnG|rowG|g)ap)(Auto|0|(X{1,2}(S|L))|(S|M|L))/,
+		// - Sizes: 0, XXS-XXL, Auto (margins only).
+		// - Directions: physical, Inline, Block. Gaps: gap, rowGap, columnGap.
+		// - Excluded: `.u-{margin|padding}{Inline|Block}0`, still shipping (SEE next entry).
+		// - Trailing `\b`: no match on longer names, e.g. `.u-marginBlockStart`.
+		// SEE https://regex101.com/r/YCDDc8.
+		objectPattern:
+			/\.u-((margin|padding)(Top|Right|Bottom|Left)?(Auto|0|X{1,2}[SL]|[SML])|(margin|padding)(Inline|Block)(Auto|X{1,2}[SL]|[SML])|(columnGap|rowGap|gap)(0|X{1,2}[SL]|[SML]))\b/,
 		versionDeprecated: '17.4.0',
 		versionDeleted: '19.1.0',
+	},
+	{
+		// Zero spacing utilities with the deprecated `.u-` prefix, renamed `.pr-u-` in 20.2.0
+		// SEE https://github.com/LuccaSA/lucca-front/pull/3814.
+		// SEE https://regex101.com/r/GwCS3W.
+		objectPattern: /\.u-(margin|padding|inset)(Inline|Block)(Start|End)?0\b/,
+		versionDeprecated: '20.2.0',
 	},
 	{
 		objectPattern: [/\.u-textLeft/, /\.u-textCenter/, /\.u-textRight/],
