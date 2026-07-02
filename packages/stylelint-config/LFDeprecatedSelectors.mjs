@@ -62,6 +62,7 @@ export default [
 		},
 	},
 	{
+		objectPattern: /\.u-(padding|margin|gap)X*(S|M|L)/,
 		versionDeprecated: '17.4.0',
 		versionDeleted: '19.1.0',
 	},
