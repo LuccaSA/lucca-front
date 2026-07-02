@@ -168,8 +168,8 @@ function isDeleted(objectData) {
 		return false;
 	}
 
-	const currentParts = currentLFVersion.split('.');
-	const deletedParts = objectData.versionDeleted.split('.');
+	const [currentParts, currentPrerelease] = parseVersion(currentLFVersion);
+	const [deletedParts, deletedPrerelease] = parseVersion(objectData.versionDeleted);
 	const length = Math.max(currentParts.length, deletedParts.length);
 
 	for (let i = 0; i < length; i++) {
@@ -184,8 +184,29 @@ function isDeleted(objectData) {
 		}
 	}
 
-	// Current version equals the deleted version.
+	// Equal release versions: per semver, a prerelease sorts before its release (`22.0.0-rc.1` < `22.0.0`).
+	if (currentPrerelease && !deletedPrerelease) {
+		return false;
+	}
+
 	return true;
+}
+
+/**
+ * Split a version into its numeric release parts and its prerelease tag.
+ * e.g. `22.0.0-rc.1` → [['22', '0', '0'], 'rc.1']
+ *
+ * @param {string} version - semver formatted LF version
+ * @return {[string[], string]}
+ */
+function parseVersion(version) {
+	const hyphenIndex = version.indexOf('-');
+
+	if (hyphenIndex === -1) {
+		return [version.split('.'), ''];
+	}
+
+	return [version.slice(0, hyphenIndex).split('.'), version.slice(hyphenIndex + 1)];
 }
 
 /**
