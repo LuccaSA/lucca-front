@@ -2,9 +2,22 @@ import LFVersions from './LFVersions.mjs';
 import currentLFVersion from './currentLFVersion.mjs';
 
 /**
+ * @typedef {object} DisallowedObject - Object found in the list of disallowed objects
+ * @property {(RegExp | string)[] | RegExp | string} [objectPattern] - Pattern(s) matching the deprecated element
+ * @property {string} versionDeprecated - LF version deprecating the element
+ * @property {string} [versionDeleted] - LF version deleting the element
+ * @property {string} [actions] - Migration actions
+ * @property {object} [urls] - Related URLs
+ * @property {Date} [dateDeprecated] - Deprecation date, added by setDates()
+ * @property {Date} [dateDeleted] - Deletion date, added by setDates()
+ * @property {string} [faultyPattern] - Pattern reported by Stylelint, added by getDisallowedData()
+ */
+
+/**
  * Get all blacklisted elements from all versions.
  *
- * @return {Array[Regex | String]}
+ * @param {DisallowedObject[]} disallowedObjects - List of disallowed objects
+ * @return {(RegExp | string)[]}
  */
 export function getDisallowedObjects(disallowedObjects) {
 	return disallowedObjects.flatMap((object) => object.objectPattern).filter((pattern) => pattern != null);
@@ -13,9 +26,9 @@ export function getDisallowedObjects(disallowedObjects) {
 /**
  * Get data related to object.
  *
- * @param {Array[Object{objectPattern, versionDeprecated, versionDeleted}]} disallowedObjects - List of disallowed objects
- * @param {String} faultyPattern - Pattern provided by Stylelint, to check against list of custom patterns
- * @return {{message: String, severity: String}}
+ * @param {DisallowedObject[]} disallowedObjects - List of disallowed objects
+ * @param {string} faultyPattern - Pattern provided by Stylelint, to check against list of custom patterns
+ * @return {{message: string, severity: string}}
  */
 export function getDisallowedData(disallowedObjects, faultyPattern) {
 	let objectData = disallowedObjects.find((haystack) => {
@@ -41,8 +54,8 @@ export function getDisallowedData(disallowedObjects, faultyPattern) {
 /**
  * Set deprecation and deletion dates for an object.
  *
- * @param {Object} objectData - Object found in the list of disallowed objects
- * @return {Object}           - objectData with dates.
+ * @param {DisallowedObject} objectData
+ * @return {DisallowedObject}           - objectData with dates.
  */
 function setDates(objectData) {
 	return {
@@ -55,8 +68,8 @@ function setDates(objectData) {
 /**
  * Is the parameter a valid date?
  *
- * @param {*} date - Value to analise
- * @return boolean
+ * @param {*} date - Value to analyse
+ * @return {boolean}
  */
 function isValidDate(date) {
 	return date instanceof Date && !isNaN(date);
@@ -89,9 +102,9 @@ function getDateForVersion(version) {
 /**
  * Compare the faulty pattern with disallowed patterns.
  *
- * @param {String} faultyPattern - faultyPattern returned by Stylelint
- * @param {Array[RegExp | String] | RegExp | String} disallowedPattern - Custom pattern to match
- * @return boolean
+ * @param {string} faultyPattern - faultyPattern returned by Stylelint
+ * @param {(RegExp | string)[] | RegExp | string} disallowedPattern - Custom pattern to match
+ * @return {boolean}
  */
 function comparePatterns(faultyPattern, disallowedPattern) {
 	//  A missing pattern never matches: this keeps a broken object from crashing Stylelint.
@@ -109,8 +122,8 @@ function comparePatterns(faultyPattern, disallowedPattern) {
 /**
  * Format message based on versions criticity.
  *
- * @param {Object} objectData
- * @return {String}
+ * @param {DisallowedObject} objectData
+ * @return {string}
  */
 function getMessage(objectData) {
 	let pattern = `${objectData.faultyPattern}`;
@@ -177,7 +190,7 @@ function isDeleted(currentVersion, deletedVersion) {
 /**
  * Get severity based on version used.
  *
- * @param {String} objectData
+ * @param {DisallowedObject} objectData
  * @return {'warning'|'error'}
  */
 function getSeverity(objectData) {
