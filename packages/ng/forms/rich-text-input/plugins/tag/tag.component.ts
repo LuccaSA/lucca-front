@@ -1,12 +1,11 @@
 import { ConnectionPositionPair } from '@angular/cdk/overlay';
-import { ChangeDetectionStrategy, Component, computed, effect, ElementRef, forwardRef, inject, input, OnDestroy, signal, untracked, viewChild, viewChildren, ViewContainerRef } from '@angular/core';
+import { ChangeDetectionStrategy, Component, computed, effect, ElementRef, forwardRef, inject, input, OnDestroy, signal, viewChildren, ViewContainerRef } from '@angular/core';
 import { takeUntilDestroyed } from '@angular/core/rxjs-interop';
 import { FormControl, ReactiveFormsModule } from '@angular/forms';
 import { ButtonComponent } from '@lucca-front/ng/button';
 import { ChipComponent } from '@lucca-front/ng/chip';
 import { intlInputOptions, isNotNil } from '@lucca-front/ng/core';
 import { LuOptionDirective, LuOptionGroupDirective } from '@lucca-front/ng/core-select';
-import { PopoverDirective } from '@lucca-front/ng/popover2';
 import { LuSimpleSelectInputComponent } from '@lucca-front/ng/simple-select';
 import { IconComponent } from '@lucca/prisme/icon';
 import { $getNodeByKey, $getRoot, $getSelection, type Klass, type LexicalEditor, type LexicalNode, type NodeKey, SKIP_DOM_SELECTION_TAG } from 'lexical';
@@ -14,6 +13,7 @@ import { INITIAL_UPDATE_TAG, RICH_TEXT_PLUGIN_COMPONENT, RichTextPluginComponent
 import { LU_RICH_TEXT_INPUT_TRANSLATIONS } from '../../rich-text-input.translate';
 import { $createTagNode, TagNode } from './tag-node';
 import type { Tag } from './tag.model';
+import { FilterPillComponent } from '@lucca-front/ng/filter-pills';
 
 const areSetsEqual = (a: Set<string>, b: Set<string>): boolean => a.size === b.size && [...a].every((value) => b.has(value));
 
@@ -22,7 +22,7 @@ const areSetsEqual = (a: Set<string>, b: Set<string>): boolean => a.size === b.s
 	changeDetection: ChangeDetectionStrategy.OnPush,
 	templateUrl: './tag.component.html',
 	styleUrl: './tag.component.scss',
-	imports: [ButtonComponent, ChipComponent, IconComponent, LuSimpleSelectInputComponent, PopoverDirective, LuOptionGroupDirective, LuOptionDirective, ReactiveFormsModule],
+	imports: [ButtonComponent, ChipComponent, IconComponent, LuSimpleSelectInputComponent, LuOptionGroupDirective, LuOptionDirective, ReactiveFormsModule, FilterPillComponent],
 	providers: [
 		{
 			provide: RICH_TEXT_PLUGIN_COMPONENT,
@@ -51,10 +51,6 @@ export class RichTextPluginTagComponent implements RichTextPluginComponent, OnDe
 	readonly secondaryHasGroup = computed(() => this.secondaryTags().some((s) => isNotNil(s.group)));
 	readonly tagSearch = signal<string>('');
 	readonly selectedTagControl = new FormControl<Tag | null>(null);
-
-	// The select panel only exists once the popover is opened, so these queries resolve lazily.
-	readonly tagsSelectRef = viewChild<LuSimpleSelectInputComponent<Tag>>(LuSimpleSelectInputComponent);
-	readonly popoverRef = viewChild(PopoverDirective);
 
 	// Anchor the dropdown to the trigger button, opening below it (flipping above if there isn't room).
 	readonly popoverPositions: ConnectionPositionPair[] = [
@@ -102,29 +98,7 @@ export class RichTextPluginTagComponent implements RichTextPluginComponent, OnDe
 				this.insertTag(tag);
 			}
 		});
-
-		// Render the select's panel inline inside our own popover (instead of through a filter-pill).
-		// The select component only appears once the popover opens, so we wire it up reactively.
-		effect(() => {
-			const ref = this.tagsSelectRef();
-			if (ref) {
-				untracked(() => {
-					ref.enableFilterPillMode();
-					ref.registerFilterPillUpdatePosition?.(this.updatePosition);
-					ref.onFilterPillOpened?.();
-				});
-			}
-		});
 	}
-
-	closePopover = () => {
-		this.popoverRef()?.close();
-		this.tagsSelectRef()?.onFilterPillClosed?.();
-	};
-
-	updatePosition = () => {
-		this.popoverRef()?.updatePosition();
-	};
 
 	setEditorInstance(editor: LexicalEditor): void {
 		this.editor = editor;

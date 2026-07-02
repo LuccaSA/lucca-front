@@ -1,1 +1,6 @@
 @use '@lucca-front/scss/src/components/chip';
+
+.tagSelect {
+	visibility: collapse;
+	height: 0;
+}
