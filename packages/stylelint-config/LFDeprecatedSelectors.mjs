@@ -93,9 +93,12 @@ export default [
 	},
 	{
 		// Zero spacing utilities with the deprecated `.u-` prefix, renamed `.pr-u-` in 20.2.0
+		// - Box models: margin, padding, inset. Directions: Inline, Block, and their `-start`/`-end` children.
+		// - Names are generated `.u-{box}{capitalize(direction)}0`, so directional children stay hyphenated
+		//   and lower-cased (`.u-marginInline-start0`, not `.u-marginInlineStart0`); bare `.u-inset0` has no direction.
 		// SEE https://github.com/LuccaSA/lucca-front/pull/3814.
 		// SEE https://regex101.com/r/GwCS3W.
-		objectPattern: /\.u-(margin|padding|inset)(Inline|Block)(Start|End)?0(?![\w-])/,
+		objectPattern: /\.u-(inset0|(margin|padding|inset)(Inline|Block)(-(start|end))?0)(?![\w-])/,
 		versionDeprecated: '20.2.0',
 	},
 	{
