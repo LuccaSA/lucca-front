@@ -1,3 +1,11 @@
 @mixin center {
 	--components-approbationInbox-list-item-content-info-alignItems: center;
 }
+
+@mixin wide {
+	--components-approbationInbox-details-display: flex;
+}
+
+@mixin noDescription {
+	--components-approbationInbox-details-header-main-infos-title-paddingBlockStart: calc(var(--pr-t-spacings-150));
+}

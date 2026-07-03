@@ -98,7 +98,6 @@ export default {
 		</ng-container>
 		${tplGroup}
 	</lu-approbation-inbox-list>
-	<!--
 	<lu-approbation-inbox-details-main-block label="Sit amet">
 		Dolor sit amet
 	</lu-approbation-inbox-details-main-block>
@@ -108,7 +107,6 @@ export default {
 	<lu-approbation-inbox-details-main-block label="Circuit d’approbation">
 		Dolor sit amet
 	</lu-approbation-inbox-details-main-block>
-	-->
 </div>`,
 		};
 	},

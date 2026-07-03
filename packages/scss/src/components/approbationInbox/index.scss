@@ -6,6 +6,20 @@
 		@include vars;
 		@include component;
 	}
+
+	@layer mods {
+		&:has(.approbationInbox-list) {
+			&:has(.approbationInbox-detail) {
+				@include media.min('M') {
+					@include wide;
+				}
+			}
+		}
+
+		&:has(.approbationInbox-detail-header-main-infos-description:empty) {
+			@include noDescription;
+		}
+	}
 }
 
 .approbationInbox-list-item {
@@ -26,14 +40,20 @@
 }
 
 .approbationInbox-list-item-content {
-	&:focus-within {
-		@include focused;
+	&:has(.approbationInbox-list-item-content-action:focus-visible) {
+		@include focusVisible;
 	}
 }
 
 .approbationInbox-list {
 	@layer mods {
+		@include media.min('S') {
+			--components-approbationInbox-list-marginInlineEnd: var(--pr-t-spacings-400);
+			--components-approbationInbox-list-marginInlineStart: var(--pr-t-spacings-400);
+		}
+
 		@include media.min('M') {
+			--components-approbationInbox-list-marginInlineEnd: 0;
 			--components-approbationInbox-list-inlineSize: 17rem;
 		}
 

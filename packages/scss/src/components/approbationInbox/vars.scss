@@ -1,4 +1,7 @@
 @mixin vars {
+	--components-approbationInbox-details-display: none;
+	--components-approbationInbox-list-marginInlineEnd: var(--pr-t-spacings-200);
+	--components-approbationInbox-list-marginInlineStart: var(--pr-t-spacings-200);
 	--components-approbationInbox-list-inlineSize: auto;
 	--components-approbationInbox-details-main-block-marginBlockStart: var(--pr-t-spacings-300);
 	--components-approbationInbox-list-groupOptional-header-action-icon-backgroundColor: transparent;
@@ -7,4 +10,5 @@
 	--components-approbationInbox-list-item-content-info-alignItems: start;
 	--commponents-approbationInbox-list-item-content-before-background: var(--pr-t-elevation-surface-raised);
 	--commponents-approbationInbox-list-item-content-before-boxShadow: var(--pr-t-elevation-shadow-raised);
+	--components-approbationInbox-details-header-main-infos-title-paddingBlock: 0;
 }

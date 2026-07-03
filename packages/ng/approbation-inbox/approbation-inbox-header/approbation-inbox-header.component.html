@@ -1,0 +1,23 @@
+<div class="approbationInbox-detail-header-start">
+	<ng-content select="[approbationInboxDetailStart]" />
+</div>
+<div class="approbationInbox-detail-header-main">
+	<div class="approbationInbox-detail-header-main-infos">
+		<h1 class="approbationInbox-detail-header-main-infos-title">{{ label() }}</h1>
+		<div class="approbationInbox-detail-header-main-infos-description">
+			<ng-content />
+		</div>
+		@if (delegation()) {
+			<div class="approbationInbox-detail-header-main-delegation">
+				<lu-tag withEllipsis [label]="delegation()" />
+			</div>
+		}
+	</div>
+	<div class="approbationInbox-detail-header-main-actions">
+		<button luButton type="button">Approuver</button>
+		<button luButton="outlined" type="button">Refuser</button>
+		<button luButton="ghost" type="button">
+			<lu-icon icon="menuDots" alt="Plus d’options" />
+		</button>
+	</div>
+</div>
