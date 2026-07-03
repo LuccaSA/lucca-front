@@ -32,7 +32,7 @@ let nextId = 0;
 	changeDetection: ChangeDetectionStrategy.OnPush,
 	encapsulation: ViewEncapsulation.None,
 })
-export class TimePickerComponent extends BasePickerComponent implements FormValueControl<ISO8601Time> {
+export class TimePickerComponent extends BasePickerComponent implements FormValueControl<ISO8601Time | null> {
 	#timeRangePicker = inject(LU_TIME_RANGE_PICKER_INSTANCE, { optional: true });
 	readonly intl = input(...intlInputOptions(LU_TIME_PICKER_TRANSLATIONS));
 	protected localeId = inject(LOCALE_ID);
@@ -43,7 +43,9 @@ export class TimePickerComponent extends BasePickerComponent implements FormValu
 
 	readonly postMeridiemRef = viewChild<ElementRef<HTMLInputElement>>('postMeridiemRef');
 
-	value = model<ISO8601Time>(DEFAULT_MIN_TIME);
+	value = model<ISO8601Time | null>(DEFAULT_MIN_TIME);
+
+	readonly #time = computed(() => this.value() ?? DEFAULT_MIN_TIME);
 
 	readonly max = input<ISO8601Time | undefined>(MAX_TIME);
 
@@ -74,13 +76,13 @@ export class TimePickerComponent extends BasePickerComponent implements FormValu
 	readonly nextPicker = output<void>();
 	readonly nonDigitKeyPressed = output<void>();
 
-	protected readonly hoursDisplay = computed(() => getHoursDisplayPartFromIsoTime(this.value(), this.enableMeridiemDisplay()));
-	protected readonly minutesDisplay = computed(() => getMinutesDisplayPartFromIsoTime(this.value()));
+	protected readonly hoursDisplay = computed(() => getHoursDisplayPartFromIsoTime(this.#time(), this.enableMeridiemDisplay()));
+	protected readonly minutesDisplay = computed(() => getMinutesDisplayPartFromIsoTime(this.#time()));
 
-	protected readonly hours = computed(() => getHoursPartFromIsoTime(this.value()));
+	protected readonly hours = computed(() => getHoursPartFromIsoTime(this.#time()));
 	// Empty must stay '––', not 0, or typing "0" is a deduped no-op.
-	protected readonly hoursInputValue = computed<number | '––'>(() => getHoursDisplayPartFromIsoTime(this.value()));
-	protected readonly minutes = computed(() => getMinutesPartFromIsoTime(this.value()));
+	protected readonly hoursInputValue = computed<number | '––'>(() => getHoursDisplayPartFromIsoTime(this.#time()));
+	protected readonly minutes = computed(() => getMinutesPartFromIsoTime(this.#time()));
 	protected readonly pickerClasses = computed(() => {
 		return {
 			timePicker: true,
@@ -264,8 +266,8 @@ export class TimePickerComponent extends BasePickerComponent implements FormValu
 	}
 
 	switchMeridiem(newValue: 'AM' | 'PM') {
-		let hours = getHoursPartFromIsoTime(this.value());
-		const minutes = getMinutesPartFromIsoTime(this.value());
+		let hours = getHoursPartFromIsoTime(this.#time());
+		const minutes = getMinutesPartFromIsoTime(this.#time());
 		if (newValue === 'PM') {
 			hours = circularize(hours + 12, 23);
 		} else {
