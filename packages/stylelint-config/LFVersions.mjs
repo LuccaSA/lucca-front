@@ -44,12 +44,22 @@ if (LFVersions === null) {
 		console.info(`Fetching from Github to ${CACHE_FILE_PATH}…`);
 	}
 
-	// per_page raises the default 30 results to the API maximum: old milestones must resolve too.
-	const githubMilestones = await fetch(
-		'https://api.github.com/repos/LuccaSA/lucca-front/milestones?state=all&sort=due_on&direction=desc&per_page=100',
-	);
+	// The API caps page size at 100 and the repo already has >100 milestones, so paginate to the last
+	// page: every referenced version must resolve, not just the 100 most recent.
+	const PER_PAGE = 100;
+	const MAX_PAGES = 20; // Safety bound against an unbounded loop; far exceeds the milestone count.
+	let page = 1;
+	let hasMore = true;
 
-	if (githubMilestones.ok) {
+	while (hasMore && page <= MAX_PAGES) {
+		const githubMilestones = await fetch(
+			`https://api.github.com/repos/LuccaSA/lucca-front/milestones?state=all&sort=due_on&direction=desc&per_page=${PER_PAGE}&page=${page}`,
+		);
+
+		if (!githubMilestones.ok) {
+			break;
+		}
+
 		const milestones = await githubMilestones.json();
 
 		for (const milestone of milestones) {
@@ -61,6 +71,9 @@ if (LFVersions === null) {
 				LFVersions[normalizeVersion(version)] = date.toLocaleDateString();
 			}
 		}
+
+		hasMore = milestones.length === PER_PAGE;
+		page++;
 	}
 
 	writeFileSync(CACHE_FILE_PATH, JSON.stringify({ LFVersions, createdAt: Date.now() }), 'utf8');
