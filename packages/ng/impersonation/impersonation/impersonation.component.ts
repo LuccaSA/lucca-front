@@ -1,6 +1,5 @@
 import { ConnectionPositionPair } from '@angular/cdk/overlay';
 import { booleanAttribute, ChangeDetectionStrategy, Component, computed, effect, ElementRef, inject, input, model, output, untracked, viewChild, ViewEncapsulation } from '@angular/core';
-import { FormsModule } from '@angular/forms';
 import { ClearComponent } from '@lucca-front/ng/clear';
 import { LuOptionDirective } from '@lucca-front/ng/core-select';
 import { LU_CORE_SELECT_USER_TRANSLATIONS, LuCoreSelectUsersDirective, ɵLU_CORE_SELECT_CURRENT_USER_ID } from '@lucca-front/ng/core-select/user';
@@ -13,7 +12,7 @@ import { intlInputOptions } from '@lucca-front/ng/core';
 
 @Component({
 	selector: 'lu-impersonation',
-	imports: [PopoverDirective, FormsModule, LuSimpleSelectInputComponent, LuCoreSelectUsersDirective, LuUserDisplayPipe, LuOptionDirective, LuUserPictureComponent, IconComponent, ClearComponent],
+	imports: [PopoverDirective, LuSimpleSelectInputComponent, LuCoreSelectUsersDirective, LuUserDisplayPipe, LuOptionDirective, LuUserPictureComponent, IconComponent, ClearComponent],
 	templateUrl: './impersonation.component.html',
 	styleUrl: './impersonation.component.scss',
 	encapsulation: ViewEncapsulation.None,
@@ -31,7 +30,7 @@ export class ImpersonationComponent {
 
 	readonly popoverRef = viewChild(PopoverDirective);
 
-	readonly selectedUser = model<ILuUser>();
+	readonly selectedUser = model<ILuUser | null>(null);
 
 	readonly enableFormerEmployees = input(false, { transform: booleanAttribute });
 

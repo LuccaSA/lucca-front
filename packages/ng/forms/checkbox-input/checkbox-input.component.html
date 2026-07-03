@@ -4,7 +4,10 @@
 		type="checkbox"
 		class="checkboxField-input"
 		[class.inputFramed-header-input]="framed"
-		[formControl]="ngControl.control"
+		[checked]="checked()"
+		[disabled]="disabled()"
+		(change)="checked.set($any($event.target).checked)"
+		(blur)="touch.emit()"
 		[attr.aria-checked]="mixed() ? 'mixed' : null"
 	/>
 	<span class="checkboxField-icon" [class.inputFramed-header-icon]="framed" aria-hidden="true"
@@ -16,9 +19,9 @@
 	<button
 		type="button"
 		class="filterPill mod-checkbox"
-		[attr.aria-pressed]="ngControl.control.value"
-		[attr.disabled]="ngControl.control.disabled ? 'disabled' : null"
-		(click)="ngControl.control.setValue(!ngControl.control.value)"
+		[attr.aria-pressed]="checked()"
+		[attr.disabled]="disabled() ? 'disabled' : null"
+		(click)="checked.set(!checked())"
 		#button
 	>
 		<span class="filterPill-checkbox">
@@ -33,4 +36,4 @@
 		</span>
 	</button>
 </ng-container>
-<ng-container *luPresentationDisplayDefault>{{ ngControl.value ? intl.yes : intl.no }}</ng-container>
+<ng-container *luPresentationDisplayDefault>{{ checked() ? intl.yes : intl.no }}</ng-container>
