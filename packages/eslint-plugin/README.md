@@ -255,7 +255,6 @@ rules: {
 
 1. **Single-element checks only** — descendant selector patterns (e.g. `.lu-select-value .label`) can never match a single `class` attribute and are silently inert (their individual classes are usually covered by other entries).
 2. **Static analysis only** — class names computed in TypeScript code are invisible to the rule.
-3. **Loose source patterns over-match** — entries without `\b` can match longer class names (e.g. `/\.u-text(X?S|M|X{0,3}L)/` also matches `.u-textLight`). Fix belongs in `LFDeprecatedSelectors.mjs`, as it affects stylelint consumers identically.
 
 ## 📐 Design notes
 
