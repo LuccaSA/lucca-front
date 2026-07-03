@@ -52,10 +52,11 @@ class ClassListCollector extends RecursiveAstVisitor {
 		super.visitLiteralPrimitive(ast, context);
 	}
 
-	override visitLiteralMap(ast: LiteralMap, context: unknown): void {
+	override visitLiteralMap(ast: LiteralMap, _context: unknown): void {
 		// [ngClass]="{ 'palette-grey': cond }" — classes are the keys (spread keys have none).
+		// Don't recurse into the values: they are truthiness conditions, not class lists, and a
+		// string literal there (e.g. `{ 'is-active': mode === 'menu' }`) would falsely match `.menu`.
 		this.classLists.push(...ast.keys.flatMap((k) => ('key' in k ? [k.key] : [])));
-		super.visitLiteralMap(ast, context);
 	}
 
 	override visitInterpolation(ast: Interpolation, context: unknown): void {

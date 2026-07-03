@@ -60,6 +60,11 @@ ruleTester.run(RULE_NAME, rule, {
 			options,
 		},
 		{
+			name: '✅ Deprecated token in an ngClass condition value is not a class',
+			code: `<div [ngClass]="{ 'is-active': mode === 'mod-link' }"></div>`,
+			options,
+		},
+		{
 			name: '✅ Deprecated token in a non-class attribute is ignored',
 			code: `<div title="u-textLight" [luTooltip]="'mod-link'"></div>`,
 			options,
