@@ -17,7 +17,7 @@ export default [
 	{
 		// Any combination of .button and .mod-counter, with any non-whitespace character between
 		// SEE https://regex101.com/r/9WOlXc.
-		objectPattern: /(?=\S*\.\bbutton\b)(?=\S*\.\bmod-counter\b)\S*/,
+		objectPattern: /(?=\S*\.button\b)(?=\S*\.mod-counter\b)\S*/,
 		versionDeleted: '18.1.0',
 	},
 	{
@@ -27,7 +27,7 @@ export default [
 	{
 		// Any combination of .callout and .mod-tiny, with any non-whitespace character between
 		// SEE https://regex101.com/r/rW039S.
-		objectPattern: /(?=\S*\.\bcallout\b)(?=\S*\.\bmod-tiny\b)\S*/,
+		objectPattern: /(?=\S*\.callout\b)(?=\S*\.mod-tiny\b)\S*/,
 		versionDeleted: '18.1.0',
 	},
 	// Any occurrence of one of these selectors in any part of a selector
@@ -38,7 +38,7 @@ export default [
 	},
 	{
 		// Any combination of .button and .mod-icon, with any non-whitespace character between
-		objectPattern: /(?=\S*\.\bbutton\b)(?=\S*\.\bmod-icon\b)\S*/,
+		objectPattern: /(?=\S*\.button\b)(?=\S*\.mod-icon\b)\S*/,
 		versionDeprecated: '17.2.0',
 		versionDeleted: '19.1.0',
 	},
@@ -76,7 +76,7 @@ export default [
 	{
 		// Any combination of .table-head-row-cell and .mod-sortable, .sortedAscending or .sortedAscending, with any non-whitespace character between
 		// SEE https://regex101.com/r/NFrjBF.
-		objectPattern: /(?=\S*\.\btable-head-row-cell\b)(?=\S*\.\b(mod-sortable|sortedAscending|sortedDescending)\b)\S*/,
+		objectPattern: /(?=\S*\.table-head-row-cell\b)(?=\S*\.(mod-sortable|sortedAscending|sortedDescending)\b)\S*/,
 		versionDeprecated: '18.2.0',
 		versionDeleted: '20.1.0',
 	},
@@ -120,7 +120,7 @@ export default [
 	{
 		// Any combination of .button and .mod-text, .mod-deleted or .loading, with any non-whitespace character between
 		// SEE https://regex101.com/r/5qB2gm.
-		objectPattern: /(?=\S*\.\bbutton\b)(?=\S*\.\b(mod-text|mod-deleted|loading)\b)\S*/,
+		objectPattern: /(?=\S*\.button\b)(?=\S*\.(mod-text|mod-deleted|loading)\b)\S*/,
 		versionDeprecated: '20.2.0',
 		versionDeleted: '22.0.0',
 	},
