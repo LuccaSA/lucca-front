@@ -3,7 +3,7 @@ import storybook from 'eslint-plugin-storybook';
 
 import eslint from '@eslint/js';
 import angular from 'angular-eslint';
-import localRules, { setDeprecationMessageBuilder } from './packages/eslint-plugin/index.ts';
+import localRules, { createDeprecatedClassesConfig } from './packages/eslint-plugin/index.ts';
 import LFDeprecatedSelectors from './packages/stylelint-config/LFDeprecatedSelectors.mjs';
 import { getDisallowedData, getSeverity } from './packages/stylelint-config/stylelintForLF.mjs';
 import prettier from 'eslint-plugin-prettier/recommended';
@@ -11,18 +11,15 @@ import typescript from 'typescript-eslint';
 import { defineConfig } from 'eslint/config';
 import tsParser from '@typescript-eslint/parser';
 
-// Reuse the stylelint deprecation list (single source of truth) for template linting:
-// the rule matches these selector regexes against class attributes and bindings.
-// Messages come verbatim from stylelint-config's formatter, injected here because
-// ESLint structuredClones rule options (functions cannot travel through them).
-setDeprecationMessageBuilder((deprecations, matchedSelector) => getDisallowedData(deprecations, matchedSelector).message);
-
-// Version-aware split mirroring stylelint's warn-until-deleted policy: classes already deleted
-// at the installed LF version are errors, still-deprecated ones are warnings. Same rule under two
-// ids because ESLint severity is per rule id. getSeverity() returns 'warning' when the LF version
-// cannot be resolved (as inside this repo, scss version 0.0.0), so both buckets stay warnings here.
-const deletedClassesOptions = { deprecations: LFDeprecatedSelectors.filter((entry) => getSeverity(entry) === 'error') };
-const deprecatedClassesOptions = { deprecations: LFDeprecatedSelectors.filter((entry) => getSeverity(entry) !== 'error') };
+// Ready-made deprecated/deleted class rules block, fed the stylelint deprecation list (single source
+// of truth), its message formatter, and its warn-until-deleted severity policy. The plugin's factory
+// applies the version-aware split; inside this repo getSeverity() returns 'warning' for everything
+// (scss version 0.0.0), so both buckets stay warnings here.
+const deprecatedClassesConfig = createDeprecatedClassesConfig({
+	deprecations: LFDeprecatedSelectors,
+	buildMessage: (deprecations, matchedSelector) => getDisallowedData(deprecations, matchedSelector).message,
+	isDeleted: (entry) => getSeverity(entry) === 'error',
+});
 
 export default defineConfig(
 	{
@@ -181,15 +178,11 @@ export default defineConfig(
 			'@lucca-front/ts-error': 'error',
 		},
 	},
+	deprecatedClassesConfig,
 	{
 		files: ['**/*.html'],
 		extends: [...angular.configs.templateRecommended],
-		plugins: {
-			'@lucca-front': localRules,
-		},
 		rules: {
-			'@lucca-front/no-deprecated-classes': ['warn', deprecatedClassesOptions],
-			'@lucca-front/no-deleted-classes': ['error', deletedClassesOptions],
 			'@angular-eslint/template/button-has-type': 'error',
 			'@angular-eslint/template/prefer-self-closing-tags': 'error',
 			'@angular-eslint/template/prefer-control-flow': 'error',

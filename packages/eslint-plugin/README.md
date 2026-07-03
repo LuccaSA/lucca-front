@@ -228,27 +228,46 @@ Reports usage of deprecated Lucca Front CSS classes in Angular templates.
 
 - Requires `@angular-eslint/template-parser` (the rule visits `TextAttribute` / `BoundAttribute` nodes; wrong parser fails fast).
 - Options take the raw `LFDeprecatedSelectors` entries — no mapping layer. String entries are rejected by the schema (near-inert against class attributes).
-- The `setDeprecationMessageBuilder()` call is load-bearing: without it, messages degrade to a plain fallback.
 - One rule implementation, registered under two ids — `no-deprecated-classes` (`warn`) and `no-deleted-classes` (`error`).
-- The list is split by `getSeverity()`, mirroring stylelint's warn-until-deleted policy: still-deprecated classes warn, already-deleted ones error.
+- `createDeprecatedClassesConfig()` returns the ready flat-config block: it wires the message builder and applies the version-aware split (warn-until-deleted) in one call.
+- The plugin stays decoupled from Lucca data — the list, message formatter, and severity policy are all passed in.
 - Wired in `eslint.config.mjs`:
 
 ```javascript
-import localRules, { setDeprecationMessageBuilder } from './packages/eslint-plugin/index.ts';
+import { createDeprecatedClassesConfig } from './packages/eslint-plugin/index.ts';
 import LFDeprecatedSelectors from './packages/stylelint-config/LFDeprecatedSelectors.mjs';
 import { getDisallowedData, getSeverity } from './packages/stylelint-config/stylelintForLF.mjs';
 
-setDeprecationMessageBuilder((deprecations, matchedSelector) => getDisallowedData(deprecations, matchedSelector).message);
+const deprecatedClassesConfig = createDeprecatedClassesConfig({
+	deprecations: LFDeprecatedSelectors,
+	buildMessage: (deprecations, matchedSelector) => getDisallowedData(deprecations, matchedSelector).message,
+	isDeleted: (entry) => getSeverity(entry) === 'error',
+});
 
-const deleted = { deprecations: LFDeprecatedSelectors.filter((entry) => getSeverity(entry) === 'error') };
-const deprecated = { deprecations: LFDeprecatedSelectors.filter((entry) => getSeverity(entry) !== 'error') };
-
-// in the `**/*.html` block (angular template parser):
-rules: {
-	'@lucca-front/no-deprecated-classes': ['warn', deprecated],
-	'@lucca-front/no-deleted-classes': ['error', deleted],
-}
+// then spread `deprecatedClassesConfig` into the flat config array.
 ```
+
+## 📦 Using in another project
+
+- The factory is data-agnostic, so any Angular project can reuse the rules with its own deprecation list:
+
+```javascript
+import { createDeprecatedClassesConfig } from '@lucca-front/eslint-plugin';
+
+export default [
+	createDeprecatedClassesConfig({
+		deprecations: [{ objectPattern: /\.legacy-\w+/, versionDeleted: '3.0.0' }],
+		// buildMessage and isDeleted are optional; omit them for a plain warning on every match.
+	}),
+	// ...the consumer's `**/*.html` block must use `@angular-eslint/template-parser`.
+];
+```
+
+- A Lucca product app passes `@lucca-front/stylelint-config`'s `LFDeprecatedSelectors` + `getDisallowedData`/`getSeverity`, exactly like `eslint.config.mjs` above.
+- **Not yet publishable as-is** — before an external install works:
+  - Add a build step (emit `.js` + `.d.ts`; the source uses `.ts` import specifiers) and point `exports`/`main`/`types` at the built entry.
+  - Publish `@lucca-front/eslint-plugin` and `@lucca/stylelint-config-prisme` (both currently unpublished, versions `1.0.0`/`0.0.0`).
+  - The `@angular-eslint/*` peers are now declared; consumers already on `angular-eslint` satisfy them.
 
 ## 🔍 Coverage
 

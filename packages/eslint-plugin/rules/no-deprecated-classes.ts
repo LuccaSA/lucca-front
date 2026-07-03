@@ -6,11 +6,7 @@ import { createRule } from './create-rule.ts';
 
 export const RULE_NAME = 'no-deprecated-classes';
 
-/**
- * Entry shape of @lucca-front/stylelint-config's LFDeprecatedSelectors.mjs, passed raw.
- * Only RegExp patterns are supported: stylelint's exact-string entries would be near-inert
- * against class attributes, so the schema rejects them loudly instead.
- */
+/** An entry of @lucca-front/stylelint-config's LFDeprecatedSelectors.mjs, passed raw (RegExp only). */
 export interface DisallowedObject {
 	objectPattern: RegExp[] | RegExp;
 	versionDeprecated?: string;
@@ -24,23 +20,20 @@ type MessageBuilder = (deprecations: DisallowedObject[], matchedSelector: string
 let messageBuilder: MessageBuilder | undefined;
 
 /**
- * Injects the message formatter (stylelint-config's getDisallowedData) at module level:
- * ESLint structuredClones rule options, so functions cannot travel through them, and
- * the plugin cannot import stylelintForLF.mjs itself (jest cannot load its top-level
- * await chain) — eslint.config.mjs does the injection under Node ESM.
- * The builder receives only the entry that matched, so messages carry that entry's versions.
+ * Injects the message formatter. Done at module level because ESLint structuredClones rule options
+ * (a function can't travel through them) and the plugin can't import stylelintForLF.mjs directly
+ * (jest chokes on its top-level await). eslint.config.mjs wires stylelint-config's getDisallowedData.
  */
 export function setDeprecationMessageBuilder(builder: MessageBuilder): void {
 	messageBuilder = builder;
 }
 
-// Minimal shapes of the @angular-eslint/template-parser AST nodes we visit
+// Shapes of the @angular-eslint/template-parser nodes we visit.
 interface TemplateTextAttribute {
 	name: string;
 	value: string;
 	loc: TSESTree.SourceLocation;
 }
-
 interface TemplateBoundAttribute {
 	name: string;
 	keySpan?: { details?: string | null };
@@ -48,152 +41,84 @@ interface TemplateBoundAttribute {
 	loc: TSESTree.SourceLocation;
 }
 
-/**
- * Collects every chunk of an Angular expression that may hold a class list:
- * string literals, ngClass object-literal keys and the static parts of interpolations.
- */
+const isClassAttr = (name: string): boolean => name === 'class' || name === 'ngClass';
+
+/** Collects class-list chunks from an expression: string literals, ngClass keys, interpolation statics. */
 class ClassListCollector extends RecursiveAstVisitor {
 	readonly classLists: string[] = [];
 
 	override visitLiteralPrimitive(ast: LiteralPrimitive, context: unknown): void {
-		if (typeof ast.value === 'string') {
-			this.classLists.push(ast.value);
-		}
+		if (typeof ast.value === 'string') this.classLists.push(ast.value);
 		super.visitLiteralPrimitive(ast, context);
 	}
 
 	override visitLiteralMap(ast: LiteralMap, context: unknown): void {
-		// [ngClass]="{ 'palette-grey': cond }": classes are the map keys (spread keys have none)
-		this.classLists.push(...ast.keys.flatMap((mapKey) => ('key' in mapKey ? [mapKey.key] : [])));
+		// [ngClass]="{ 'palette-grey': cond }" — classes are the keys (spread keys have none).
+		this.classLists.push(...ast.keys.flatMap((k) => ('key' in k ? [k.key] : [])));
 		super.visitLiteralMap(ast, context);
 	}
 
 	override visitInterpolation(ast: Interpolation, context: unknown): void {
-		// class="foo {{ expr }}": the static parts form the literal class list.
-		// A fragment touching an expression is an incomplete token (class="u-textLight{{ suffix }}"
-		// renders as some other class) and must not be matched.
-		const completeTokens = ast.strings.map((part, index) => {
-			let tokens = part;
-			if (index > 0) {
-				tokens = tokens.replace(/^\S+/, '');
-			}
-			if (index < ast.strings.length - 1) {
-				tokens = tokens.replace(/\S+$/, '');
-			}
-			return tokens;
+		// A fragment touching {{…}} is an incomplete token (class="u-textLight{{ x }}"); keep whole ones.
+		const last = ast.strings.length - 1;
+		const whole = ast.strings.map((part, i) => {
+			if (i > 0) part = part.replace(/^\S+/, '');
+			if (i < last) part = part.replace(/\S+$/, '');
+			return part;
 		});
-		this.classLists.push(completeTokens.join(' '));
+		this.classLists.push(whole.join(' '));
 		super.visitInterpolation(ast, context);
 	}
 }
 
-interface CompiledEntry {
-	// All patterns of the entry merged into one alternation
-	regex: RegExp;
-	// The raw entry, kept so reports are attributed to the entry that actually matched
-	source: DisallowedObject;
-}
-
-// ESLint calls create() once per linted file with the same options object; compile once per process.
-const compiledEntriesCache = new WeakMap<Options[0], CompiledEntry[]>();
-
-function compileEntries(options: Options[0]): CompiledEntry[] {
-	let compiled = compiledEntriesCache.get(options);
-
-	if (!compiled) {
-		compiled = options.deprecations.map((source) => {
-			const patterns = Array.isArray(source.objectPattern) ? source.objectPattern : [source.objectPattern];
-
-			return {
-				regex: new RegExp(patterns.map((pattern) => `(?:${pattern.source})`).join('|')),
-				source,
-			};
-		});
-		compiledEntriesCache.set(options, compiled);
-	}
-
-	return compiled;
-}
-
-/**
- * Convert a whitespace-separated class list into a CSS compound selector
- * (e.g. "button mod-counter" -> ".button.mod-counter") so that the selector
- * regexes from LFDeprecatedSelectors can be applied verbatim.
- */
-function toCompoundSelector(classList: string): string {
-	return classList
+/** "button mod-counter" -> ".button.mod-counter", so the selector regexes apply verbatim. */
+const toCompoundSelector = (classList: string): string =>
+	classList
 		.split(/\s+/)
 		.filter(Boolean)
-		.map((token) => `.${token}`)
+		.map((t) => `.${t}`)
 		.join('');
-}
 
 export default createRule<Options, 'deprecatedClass'>({
 	create: (context) => {
 		ensureTemplateParser(context);
 
-		// context.options[0] is the raw config-provided object: a stable reference, required as the
-		// WeakMap cache key. RuleCreator's defaults-merged options would be a fresh object per file
-		// (and are only passed as the unused second create() argument — defaultOptions is inert here;
-		// the ?? below is the real default).
-		const options = context.options[0] ?? { deprecations: [] };
-		const entries = compileEntries(options);
+		// defaultOptions is inert with an arrow create(), so ?? is the real default.
+		const { deprecations } = context.options[0] ?? { deprecations: [] };
+		const entries = deprecations.map((source) => {
+			const patterns = Array.isArray(source.objectPattern) ? source.objectPattern : [source.objectPattern];
+			return { regex: new RegExp(patterns.map((p) => `(?:${p.source})`).join('|')), source };
+		});
 
-		function checkClassList(classList: string, loc: TSESTree.SourceLocation): void {
-			const compoundSelector = toCompoundSelector(classList);
-
-			if (!compoundSelector) {
-				return;
-			}
-
-			for (const entry of entries) {
-				const match = entry.regex.exec(compoundSelector);
-
-				if (match) {
-					context.report({
-						messageId: 'deprecatedClass',
-						// Only the matching entry is handed to the builder: re-searching the whole
-						// list with the matched text could attribute the report to another entry.
-						data: { deprecationMessage: messageBuilder?.([entry.source], match[0]) ?? `Deprecated Lucca class usage "${match[0]}"` },
-						loc,
-					});
-				}
+		function check(classList: string, loc: TSESTree.SourceLocation): void {
+			const selector = toCompoundSelector(classList);
+			for (const { regex, source } of entries) {
+				const match = regex.exec(selector);
+				// Pass only the matching entry: re-searching the list could pick another entry's versions.
+				if (match) context.report({ messageId: 'deprecatedClass', loc, data: { deprecationMessage: messageBuilder?.([source], match[0]) ?? `Deprecated Lucca class usage "${match[0]}"` } });
 			}
 		}
 
 		return {
 			TextAttribute(node: TemplateTextAttribute) {
-				if (node.name === 'class' || node.name === 'ngClass') {
-					checkClassList(node.value, node.loc);
-				}
+				if (isClassAttr(node.name)) check(node.value, node.loc);
 			},
 			BoundAttribute(node: TemplateBoundAttribute) {
 				if (node.keySpan?.details?.startsWith('class.')) {
-					// [class.foo]="condition": the class name is the attribute name itself
-					checkClassList(node.name, node.loc);
-					return;
-				}
-
-				if (node.name === 'class' || node.name === 'ngClass') {
-					// [class]="expr", [attr.class]="expr", [ngClass]="expr" or class="{{ expr }}"
+					check(node.name, node.loc); // [class.foo]="cond" — the class name is the attribute name
+				} else if (isClassAttr(node.name)) {
+					// [class]/[attr.class]/[ngClass]="expr" or class="{{ expr }}"
 					const collector = new ClassListCollector();
 					node.value?.visit(collector);
-
-					for (const classList of collector.classLists) {
-						checkClassList(classList, node.loc);
-					}
+					collector.classLists.forEach((list) => check(list, node.loc));
 				}
 			},
 		};
 	},
 	name: RULE_NAME,
 	meta: {
-		docs: {
-			description: 'Disallow deprecated Lucca Front CSS classes in Angular templates',
-		},
-		messages: {
-			deprecatedClass: '{{deprecationMessage}}',
-		},
+		docs: { description: 'Disallow deprecated Lucca Front CSS classes in Angular templates' },
+		messages: { deprecatedClass: '{{deprecationMessage}}' },
 		type: 'problem',
 		schema: [
 			{
@@ -203,11 +128,9 @@ export default createRule<Options, 'deprecatedClass'>({
 						type: 'array',
 						items: {
 							type: 'object',
+							// RegExp instances validate as plain objects in JSON schema.
 							properties: {
-								// RegExp instances validate as plain objects in JSON schema
-								objectPattern: {
-									oneOf: [{ type: 'object' }, { type: 'array', items: { type: 'object' }, minItems: 1 }],
-								},
+								objectPattern: { oneOf: [{ type: 'object' }, { type: 'array', items: { type: 'object' }, minItems: 1 }] },
 								versionDeprecated: { type: 'string' },
 								versionDeleted: { type: 'string' },
 							},
