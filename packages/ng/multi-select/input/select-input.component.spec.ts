@@ -1,6 +1,6 @@
 import { ChangeDetectionStrategy, Component } from '@angular/core';
 import { ComponentFixture, MetadataOverride, TestBed } from '@angular/core/testing';
-import { FormControl, FormsModule, NgControl, ReactiveFormsModule } from '@angular/forms';
+import { FormControl, NgControl } from '@angular/forms';
 import { isNotNil } from '@lucca-front/ng/core';
 import { LuCoreSelectTotalCountDirective } from '@lucca-front/ng/core-select';
 import { vi } from 'vitest';
@@ -20,12 +20,14 @@ const options = [
 ];
 
 @Component({
-	selector: 'lu-multi-select-ng-model-host',
-	imports: [FormsModule, LuMultiSelectInputComponent, LuMultiSelectWithSelectAllDirective, LuCoreSelectTotalCountDirective],
+	selector: 'lu-multi-select-value-host',
+	imports: [LuMultiSelectInputComponent, LuMultiSelectWithSelectAllDirective, LuCoreSelectTotalCountDirective],
 	changeDetection: ChangeDetectionStrategy.OnPush,
-	template: ` <lu-multi-select [ngModel]="selectedOptions" (ngModelChange)="setSelectedOptions($event)" [options]="options" withSelectAll withSelectAllLabel="lol" [totalCount]="options.length" /> `,
+	template: `
+		<lu-multi-select [value]="$any(selectedOptions)" (valueChange)="setSelectedOptions($any($event))" [options]="options" withSelectAll withSelectAllLabel="lol" [totalCount]="options.length" />
+	`,
 })
-class MultiSelectNgModelHostComponent {
+class MultiSelectValueHostComponent {
 	selectedOptions: LuMultiSelection<TestEntity> = { mode: 'none' };
 
 	options: TestEntity[] = options;
@@ -33,18 +35,6 @@ class MultiSelectNgModelHostComponent {
 	setSelectedOptions(value: LuMultiSelection<TestEntity>) {
 		this.selectedOptions = value;
 	}
-}
-
-@Component({
-	selector: 'lu-multi-select-form-control-host',
-	imports: [ReactiveFormsModule, LuMultiSelectInputComponent, LuMultiSelectWithSelectAllDirective, LuCoreSelectTotalCountDirective],
-	changeDetection: ChangeDetectionStrategy.OnPush,
-	template: ` <lu-multi-select [formControl]="formControl" [options]="options" withSelectAll withSelectAllLabel="lol" [totalCount]="options.length" /> `,
-})
-class MultiSelectFormControlHostComponent {
-	formControl = new FormControl<LuMultiSelection<TestEntity>>({ mode: 'none' }, { nonNullable: true });
-
-	options: TestEntity[] = options;
 }
 
 describe('LuMultiSelectInputComponent', () => {
@@ -55,7 +45,7 @@ describe('LuMultiSelectInputComponent', () => {
 		searchControl = new FormControl();
 
 		TestBed.configureTestingModule({
-			imports: [LuMultiSelectInputComponent, MultiSelectFormControlHostComponent, MultiSelectNgModelHostComponent],
+			imports: [LuMultiSelectInputComponent, MultiSelectValueHostComponent],
 			providers: [
 				// The input inside the displayer needs a NgControl
 				{
@@ -86,9 +76,9 @@ describe('LuMultiSelectInputComponent', () => {
 		let emittedSelectValues: Array<LuMultiSelection<TestEntity> | TestEntity[]>;
 
 		describe('parent set a value', () => {
-			it('should not emit a new value when parent write a value (with NgModel)', () => {
+			it('should not emit a new value when parent write a value', () => {
 				// Arrange
-				const hostFixture = TestBed.createComponent(MultiSelectNgModelHostComponent);
+				const hostFixture = TestBed.createComponent(MultiSelectValueHostComponent);
 				const hostComponent = hostFixture.componentInstance;
 
 				vi.spyOn(hostComponent, 'setSelectedOptions');
@@ -99,23 +89,6 @@ describe('LuMultiSelectInputComponent', () => {
 
 				// Assert
 				expect(hostComponent.setSelectedOptions).not.toHaveBeenCalled();
-			});
-
-			it('should not emit a new value when parent write a value (with FormControl)', () => {
-				// Arrange
-				const hostFixture = TestBed.createComponent(MultiSelectFormControlHostComponent);
-				const hostComponent = hostFixture.componentInstance;
-				hostFixture.detectChanges();
-
-				const onChange = vi.fn();
-				hostComponent.formControl.valueChanges.subscribe(onChange);
-
-				// Act
-				hostComponent.formControl.setValue({ mode: 'include', values: [options[0]] }, { emitEvent: false });
-				hostFixture.detectChanges();
-
-				// Assert
-				expect(onChange).not.toHaveBeenCalled();
 			});
 		});
 
@@ -133,7 +106,7 @@ describe('LuMultiSelectInputComponent', () => {
 
 				const { componentInstance } = fixture;
 				selectAllDirective = fixture.componentRef.injector.get<LuMultiSelectWithSelectAllDirective<TestEntity>>(LuMultiSelectWithSelectAllDirective);
-				componentInstance.registerOnChange((value) => emittedSelectValues.push(value));
+				componentInstance.value.subscribe((value) => emittedSelectValues.push(value as unknown as LuMultiSelection<TestEntity>));
 
 				componentInstance.options = options;
 
@@ -301,7 +274,10 @@ describe('LuMultiSelectInputComponent', () => {
 				const { componentInstance } = fixture;
 
 				// Act
-				const act = () => componentInstance.writeValue([options[0]]);
+				const act = () => {
+					componentInstance.value.set([options[0]]);
+					TestBed.flushEffects();
+				};
 
 				// Assert
 				expect(act).toThrow('MultiSelectWithSelectAllDirective does not support array values. The form value or ngModel must be a LuMultiSelection<TValue>.');
@@ -312,10 +288,11 @@ describe('LuMultiSelectInputComponent', () => {
 				const { componentInstance } = fixture;
 
 				// Act
-				selectAllDirective.writeValue({ mode: 'include', values: [options[0]] });
+				componentInstance.value.set({ mode: 'include', values: [options[0]] } as unknown as Entity[]);
+				TestBed.flushEffects();
 
 				// Assert
-				expect(componentInstance.value).toEqual([options[0]]);
+				expect(componentInstance.selectedOptions()).toEqual([options[0]]);
 			});
 		});
 	});
