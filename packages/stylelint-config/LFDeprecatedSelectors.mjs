@@ -38,8 +38,7 @@ export default [
 	},
 	{
 		// Any combination of .button and .mod-icon, with any non-whitespace character between
-		// SEE https://regex101.com/r/6yQzje.
-		objectPattern: /(\.button|\.mod-icon)[\S]*(\.button|\.mod-icon)/,
+		objectPattern: /(?=\S*\.\bbutton\b)(?=\S*\.\bmod-icon\b)\S*/,
 		versionDeprecated: '17.2.0',
 		versionDeleted: '19.1.0',
 	},
@@ -80,10 +79,6 @@ export default [
 		objectPattern: /(?=\S*\.\btable-head-row-cell\b)(?=\S*\.\b(mod-sortable|sortedAscending|sortedDescending)\b)\S*/,
 		versionDeprecated: '18.2.0',
 		versionDeleted: '20.1.0',
-	},
-	{
-		objectPattern: /\.u-text(Left|Center|Right)\b/,
-		versionDeprecated: '18.2.0',
 	},
 	{
 		objectPattern: [/\.comment-content-textContainer\b/, /\.mod-withMenuCompact\b/],
@@ -157,7 +152,6 @@ export default [
 			/\.pr-u-textBrandContrasted\b/,
 			/\.pr-u-textNavigation\b/,
 			/\.pr-u-textAI\b/,
-			/\.pr-u-textProduct\b/,
 			/\.pr-u-textPagga\b/,
 			/\.pr-u-textPoplee\b/,
 			/\.pr-u-textCoreHR\b/,
