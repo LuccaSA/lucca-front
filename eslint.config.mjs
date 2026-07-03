@@ -4,10 +4,21 @@ import storybook from 'eslint-plugin-storybook';
 import eslint from '@eslint/js';
 import angular from 'angular-eslint';
 import localRules from './packages/eslint-plugin/index.ts';
+import LFDeprecatedSelectors from './packages/stylelint-config/LFDeprecatedSelectors.mjs';
 import prettier from 'eslint-plugin-prettier/recommended';
 import typescript from 'typescript-eslint';
 import { defineConfig } from 'eslint/config';
 import tsParser from '@typescript-eslint/parser';
+
+// Reuse the stylelint deprecation list (single source of truth) for template linting:
+// the rule matches these selector regexes against class attributes and bindings.
+const deprecatedClassesOptions = {
+	deprecations: LFDeprecatedSelectors.map(({ objectPattern, versionDeprecated, versionDeleted }) => ({
+		patterns: (Array.isArray(objectPattern) ? objectPattern : [objectPattern]).map((pattern) => pattern.source),
+		...(versionDeprecated && { versionDeprecated }),
+		...(versionDeleted && { versionDeleted }),
+	})),
+};
 
 export default defineConfig(
 	{
@@ -169,7 +180,11 @@ export default defineConfig(
 	{
 		files: ['**/*.html'],
 		extends: [...angular.configs.templateRecommended],
+		plugins: {
+			'@lucca-front': localRules,
+		},
 		rules: {
+			'@lucca-front/no-deprecated-classes': ['error', deprecatedClassesOptions],
 			'@angular-eslint/template/button-has-type': 'error',
 			'@angular-eslint/template/prefer-self-closing-tags': 'error',
 			'@angular-eslint/template/prefer-control-flow': 'error',

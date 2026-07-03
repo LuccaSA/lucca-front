@@ -1,3 +1,4 @@
+import noDeprecatedClassesRule, { RULE_NAME as noDeprecatedClassesRuleName } from './rules/no-deprecated-classes.ts';
 import tsErrorRule, { RULE_NAME as tsErrorRuleName } from './rules/ts-error.ts';
 
 const plugin = {
@@ -7,6 +8,7 @@ const plugin = {
 	},
 	rules: {
 		[tsErrorRuleName]: tsErrorRule,
+		[noDeprecatedClassesRuleName]: noDeprecatedClassesRule,
 	},
 };
 

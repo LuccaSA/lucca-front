@@ -211,4 +211,66 @@ Verify that:
 
 ---
 
+# ESLint Rule `no-deprecated-classes`
+
+Reports usage of deprecated Lucca Front CSS classes in Angular templates — both external `.html` templates and inline component templates (through `angular.processInlineTemplates`).
+
+## 🎯 Overview
+
+The deprecation list lives in `@lucca-front/stylelint-config` (`LFDeprecatedSelectors.mjs`) as regexes written against **CSS selectors** (e.g. `/\.mod-link/`, or lookahead combinations like `/(?=\S*\.\bbutton\b)(?=\S*\.\bmod-counter\b)\S*/`). To reuse them verbatim, the rule converts every class list it finds into a compound selector before matching:
+
+```
+class="button mod-counter"  →  ".button.mod-counter"
+```
+
+Word boundaries (`\b`) and same-element combination lookaheads keep working unchanged, so the stylelint list remains the single source of truth.
+
+## 🚀 Configuration
+
+Requires `@angular-eslint/template-parser` (the rule visits `TextAttribute` / `BoundAttribute` nodes). Wired in `eslint.config.mjs`:
+
+```javascript
+import LFDeprecatedSelectors from './packages/stylelint-config/LFDeprecatedSelectors.mjs';
+
+const deprecatedClassesOptions = {
+	deprecations: LFDeprecatedSelectors.map(({ objectPattern, versionDeprecated, versionDeleted }) => ({
+		patterns: (Array.isArray(objectPattern) ? objectPattern : [objectPattern]).map((pattern) => pattern.source),
+		...(versionDeprecated && { versionDeprecated }),
+		...(versionDeleted && { versionDeleted }),
+	})),
+};
+
+// in the `**/*.html` block (angular template parser):
+rules: {
+	'@lucca-front/no-deprecated-classes': ['error', deprecatedClassesOptions],
+}
+```
+
+## 🔍 Coverage
+
+| Template syntax                              | How it is checked                                                 |
+| -------------------------------------------- | ----------------------------------------------------------------- |
+| `class="button mod-counter"`                 | Whole class list, as a compound selector                          |
+| `ngClass="u-comma"` (static)                 | Same as `class`                                                   |
+| `[class.mod-link]="cond"`                    | The bound class name itself                                       |
+| `[class]="expr"` / `[attr.class]="expr"`     | String literals found in the expression source                    |
+| `[ngClass]="{ 'palette-grey': cond }"`       | String literals found in the expression source                    |
+| `class="foo {{ expr }}"`                     | Static parts of the interpolation + string literals in `expr`     |
+
+## ⚠️ Limitations
+
+1. **Single-element checks only** — descendant selector patterns (e.g. `.lu-select-value .label`) can never match a single `class` attribute and are silently inert (their individual classes are usually covered by other entries).
+2. **Expression scanning is textual** — string literals are extracted from the expression source; class names computed in TypeScript code are invisible to the rule.
+3. **Loose source patterns over-match** — entries without `\b` can match longer class names (e.g. `/\.u-text(X?S|M|X{0,3}L)/` also matches `.u-textLight`). Fix belongs in `LFDeprecatedSelectors.mjs`, as it affects stylelint consumers identically.
+
+## 📋 Known violations in this repository
+
+Existing violations are documented and suppressed with an explaining `eslint-disable` comment instead of being fixed:
+
+| File                                                                          | Class          | Status                                                              |
+| ----------------------------------------------------------------------------- | -------------- | ------------------------------------------------------------------- |
+| `packages/ng/forms/rich-text-input/plugins/link/link-dialog/link-dialog.component.html` | `.dialog-form` | Deprecated since LF 18.3.0, removed in 22.0.0 — replace with `.dialog-inside-formOptional` |
+
+---
+
 **Version**: Compatible with ESLint 8.57+ and ESLint 9+

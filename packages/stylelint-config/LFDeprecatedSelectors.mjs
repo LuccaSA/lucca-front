@@ -5,7 +5,7 @@ export default [
 		objectPattern: [
 			/\.active/,
 			/\.disabled/,
-			/\.error/,
+			/\.error\b/,
 			/\.label/,
 			/\.mod-delete/,
 			/\.mod-link/,
@@ -86,7 +86,7 @@ export default [
 		versionDeprecated: '18.2.0',
 	},
 	{
-		objectPattern: [/\.comment-content-textContainer/, /\.mod-withMenuCompact/],
+		objectPattern: [/\.comment-content-textContainer\b/, /\.mod-withMenuCompact/],
 		versionDeprecated: '18.3.0',
 		versionDeleted: '20.1.0',
 	},
