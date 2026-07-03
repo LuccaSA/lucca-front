@@ -23,6 +23,10 @@ export function getDisallowedObjects(disallowedObjects) {
 	return disallowedObjects.flatMap((object) => object.objectPattern).filter((pattern) => pattern != null);
 }
 
+// Results are constant per (list, faultyPattern) within a run; Stylelint calls getDisallowedData once for
+// the message and once for the severity of every warning, so memoise to compute each result only once.
+const disallowedDataCache = new WeakMap();
+
 /**
  * Get data related to object.
  *
@@ -31,6 +35,17 @@ export function getDisallowedObjects(disallowedObjects) {
  * @return {{message: string, severity: string}}
  */
 export function getDisallowedData(disallowedObjects, faultyPattern) {
+	let cache = disallowedDataCache.get(disallowedObjects);
+
+	if (!cache) {
+		cache = new Map();
+		disallowedDataCache.set(disallowedObjects, cache);
+	}
+
+	if (cache.has(faultyPattern)) {
+		return cache.get(faultyPattern);
+	}
+
 	let objectData = disallowedObjects.find((haystack) => {
 		// If the patterns are within an array, parse it.
 		if (Array.isArray(haystack.objectPattern)) {
@@ -45,10 +60,14 @@ export function getDisallowedData(disallowedObjects, faultyPattern) {
 	objectData = setDates(objectData);
 	objectData.faultyPattern = faultyPattern;
 
-	return {
+	const result = {
 		message: getMessage(objectData),
 		severity: getSeverity(objectData),
 	};
+
+	cache.set(faultyPattern, result);
+
+	return result;
 }
 
 /**
