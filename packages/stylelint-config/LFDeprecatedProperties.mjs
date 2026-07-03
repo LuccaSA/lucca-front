@@ -3,7 +3,7 @@
 
 export default [
 	{
-		objectPattern: /--commons-elevations-elevation-[1-6]]/,
+		objectPattern: /--commons-elevations-elevation-[1-6]/,
 		versionDeprecated: '17.3.0',
 		versionDeleted: '19.1.0',
 	},

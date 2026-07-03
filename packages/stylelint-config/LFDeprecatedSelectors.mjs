@@ -89,7 +89,7 @@ export default [
 		versionDeleted: '20.1.0',
 	},
 	{
-		// Any combination of .table-head-row-cell and .mod-sortable, .sortedAscending or .sortedAscending, with any non-whitespace character between
+		// Any combination of .table-head-row-cell and .mod-sortable, .sortedAscending or .sortedDescending, with any non-whitespace character between
 		// SEE https://regex101.com/r/NFrjBF.
 		objectPattern: /(?=\S*\.table-head-row-cell\b)(?=\S*\.(mod-sortable|sortedAscending|sortedDescending)\b)\S*/,
 		versionDeprecated: '18.2.0',
