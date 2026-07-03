@@ -10,7 +10,10 @@ const plugin = {
 	},
 	rules: {
 		[tsErrorRuleName]: tsErrorRule,
+		// Same rule, registered under two ids so the config can give deprecated-but-not-yet-deleted
+		// classes a `warn` severity and already-deleted ones an `error` (ESLint severity is per rule id).
 		[noDeprecatedClassesRuleName]: noDeprecatedClassesRule,
+		'no-deleted-classes': noDeprecatedClassesRule,
 	},
 };
 

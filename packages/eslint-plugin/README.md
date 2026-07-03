@@ -229,18 +229,24 @@ Reports usage of deprecated Lucca Front CSS classes in Angular templates.
 - Requires `@angular-eslint/template-parser` (the rule visits `TextAttribute` / `BoundAttribute` nodes; wrong parser fails fast).
 - Options take the raw `LFDeprecatedSelectors` entries — no mapping layer. String entries are rejected by the schema (near-inert against class attributes).
 - The `setDeprecationMessageBuilder()` call is load-bearing: without it, messages degrade to a plain fallback.
+- One rule implementation, registered under two ids — `no-deprecated-classes` (`warn`) and `no-deleted-classes` (`error`).
+- The list is split by `getSeverity()`, mirroring stylelint's warn-until-deleted policy: still-deprecated classes warn, already-deleted ones error.
 - Wired in `eslint.config.mjs`:
 
 ```javascript
 import localRules, { setDeprecationMessageBuilder } from './packages/eslint-plugin/index.ts';
 import LFDeprecatedSelectors from './packages/stylelint-config/LFDeprecatedSelectors.mjs';
-import { getDisallowedData } from './packages/stylelint-config/stylelintForLF.mjs';
+import { getDisallowedData, getSeverity } from './packages/stylelint-config/stylelintForLF.mjs';
 
 setDeprecationMessageBuilder((deprecations, matchedSelector) => getDisallowedData(deprecations, matchedSelector).message);
 
+const deleted = { deprecations: LFDeprecatedSelectors.filter((entry) => getSeverity(entry) === 'error') };
+const deprecated = { deprecations: LFDeprecatedSelectors.filter((entry) => getSeverity(entry) !== 'error') };
+
 // in the `**/*.html` block (angular template parser):
 rules: {
-	'@lucca-front/no-deprecated-classes': ['error', { deprecations: LFDeprecatedSelectors }],
+	'@lucca-front/no-deprecated-classes': ['warn', deprecated],
+	'@lucca-front/no-deleted-classes': ['error', deleted],
 }
 ```
 
@@ -268,8 +274,9 @@ rules: {
 - The builder receives only the entry that matched, so a report always carries its own entry's versions.
 - Without injection (e.g. under jest), the rule falls back to a plain static message.
 - Message dates come from `LFVersions.mjs`, which fetches release data (1-hour tmp cache): message text varies with network/cache state, and in-repo messages always carry `| LF version not found` (scss version `0.0.0`).
-- The `getSeverity()` policy (warning until `versionDeleted` is reached) is not reused: ESLint severity is fixed per rule, and `currentLFVersion` resolves to `null` inside this repo.
-- A flat `error` severity is correct here: this repo is always at HEAD of Lucca Front.
+- ESLint severity is fixed per rule id, so the warn/error split is done by registering the rule twice and partitioning the list with `getSeverity()` (see Configuration).
+- Inside this repo `currentLFVersion` is `null` (scss version `0.0.0`), so `getSeverity()` returns `warning` for every entry: the whole list lands in the `warn` bucket and the `error` bucket is empty.
+- Consequently `lint:es` (which passes `--quiet`) prints nothing from these rules in-repo; the deprecated-class warnings still show in editors and in a non-`--quiet` run. The split becomes an actual error only in consumer repos installed at an LF version that has reached a class's `versionDeleted`.
 - `\b` boundaries stop camelCase over-matches but not hyphen ones (`.error-message` still matches `\.error\b`): a stricter `(?![\w-])` would break dash-separated deprecated families like `.menu-link`, so the looseness is kept knowingly.
 
 ## 📋 Known violations in this repository
