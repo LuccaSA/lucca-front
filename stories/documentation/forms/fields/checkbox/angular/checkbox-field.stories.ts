@@ -1,19 +1,21 @@
-import { cleanupTemplate, createTestStory, generateInputs, setStoryOptions } from '@/helpers/stories';
-import { StoryModelDisplayComponent } from '@/helpers/story-model-display.component';
-import { waitForAngular } from '@/helpers/test';
-import { FormsModule } from '@angular/forms';
+import { JsonPipe } from '@angular/common';
+import { ChangeDetectionStrategy, Component, signal } from '@angular/core';
+import { form, FormField } from '@angular/forms/signals';
 import { BrowserAnimationsModule } from '@angular/platform-browser/animations';
 import { FORM_FIELD_SIZE, FormFieldComponent } from '@lucca-front/ng/form-field';
 import { CheckboxInputComponent } from '@lucca-front/ng/forms';
 import { INLINE_MESSAGE_STATE } from '@lucca-front/ng/inline-message';
 import { Meta, moduleMetadata, StoryObj } from '@storybook/angular-vite';
+import { cleanupTemplate, createTestStory, generateInputs, setStoryOptions } from '@/helpers/stories';
+import { waitForAngular } from '@/helpers/test';
 import { expect, userEvent, within } from 'storybook/test';
+import { StoryModelDisplayComponent } from '@/helpers/story-model-display.component';
 
 export default {
 	title: 'Documentation/Forms/Fields/CheckboxField/Angular',
 	decorators: [
 		moduleMetadata({
-			imports: [CheckboxInputComponent, FormFieldComponent, FormsModule, StoryModelDisplayComponent],
+			imports: [CheckboxInputComponent, FormFieldComponent, StoryModelDisplayComponent],
 		}),
 	],
 	argTypes: {
@@ -93,11 +95,11 @@ export const Basic: StoryObj<CheckboxInputComponent & FormFieldComponent & { req
 				},
 				argTypes,
 			)}>
-	<lu-checkbox-input [(ngModel)]="example"${generateInputs(inputArgs, argTypes)} />
+	<lu-checkbox-input [(checked)]="example"${generateInputs(inputArgs, argTypes)} />
 </lu-form-field>
 <pr-story-model-display>{{ example }}</pr-story-model-display>`),
 			moduleMetadata: {
-				imports: [CheckboxInputComponent, FormsModule, BrowserAnimationsModule],
+				imports: [CheckboxInputComponent, BrowserAnimationsModule],
 			},
 		};
 	},
@@ -112,6 +114,37 @@ export const Basic: StoryObj<CheckboxInputComponent & FormFieldComponent & { req
 		checklist: false,
 		presentation: false,
 	},
+};
+
+@Component({
+	selector: 'checkbox-field-signal-forms-story',
+	imports: [CheckboxInputComponent, FormFieldComponent, FormField, StoryModelDisplayComponent, JsonPipe],
+	changeDetection: ChangeDetectionStrategy.OnPush,
+	template: `
+		<lu-form-field label="Conditions générales">
+			<lu-checkbox-input [formField]="form.accepted" />
+		</lu-form-field>
+		<pr-story-model-display>{{ form().value() | json }}</pr-story-model-display>
+	`,
+})
+class CheckboxFieldSignalFormsStory {
+	readonly model = signal({ accepted: false });
+	readonly form = form(this.model);
+}
+
+export const SignalForms: StoryObj = {
+	parameters: {
+		docs: {
+			description: {
+				story:
+					'Pilotage par signal forms : `lu-checkbox-input` implémente `FormCheckboxControl` et se branche sur un champ via la directive `[formField]`, qui pilote son model `checked` (et non `value`).',
+			},
+		},
+	},
+	render: () => ({
+		moduleMetadata: { imports: [CheckboxFieldSignalFormsStory] },
+		template: `<checkbox-field-signal-forms-story />`,
+	}),
 };
 
 export const BasicTEST = createTestStory(Basic, async ({ canvasElement, step }) => {

@@ -1,6 +1,5 @@
 import { provideHttpClient } from '@angular/common/http';
 import { ChangeDetectionStrategy, Component, LOCALE_ID } from '@angular/core';
-import { FormsModule } from '@angular/forms';
 import { ButtonComponent } from '@lucca-front/ng/button';
 import { LuCoreSelectApiV4Directive } from '@lucca-front/ng/core-select/api';
 import { DateInputComponent, DateRangeInputComponent } from '@lucca-front/ng/date2';
@@ -21,7 +20,6 @@ import { StoryModelDisplayComponent } from '@/helpers/story-model-display.compon
 		FilterBarComponent,
 		FilterPillComponent,
 		CheckboxInputComponent,
-		FormsModule,
 		DateRangeInputComponent,
 		DateInputComponent,
 		StoryModelDisplayComponent,

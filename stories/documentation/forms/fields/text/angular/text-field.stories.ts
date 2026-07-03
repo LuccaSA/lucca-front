@@ -1,6 +1,6 @@
-import { AsyncPipe } from '@angular/common';
-import { LOCALE_ID } from '@angular/core';
-import { FormsModule, ReactiveFormsModule } from '@angular/forms';
+import { AsyncPipe, JsonPipe } from '@angular/common';
+import { ChangeDetectionStrategy, Component, LOCALE_ID, signal } from '@angular/core';
+import { form, FormField, maxLength, required } from '@angular/forms/signals';
 import { BrowserAnimationsModule } from '@angular/platform-browser/animations';
 import { FORM_FIELD_SIZE, FORM_FIELD_WIDTH, FormFieldComponent } from '@lucca-front/ng/form-field';
 import { TextInputComponent } from '@lucca-front/ng/forms';
@@ -16,7 +16,7 @@ export default {
 	title: 'Documentation/Forms/Fields/TextField/Angular',
 	decorators: [
 		moduleMetadata({
-			imports: [TextInputComponent, FormFieldComponent, FormsModule, ReactiveFormsModule, BrowserAnimationsModule, AsyncPipe, StoryModelDisplayComponent],
+			imports: [TextInputComponent, FormFieldComponent, BrowserAnimationsModule, AsyncPipe, StoryModelDisplayComponent],
 		}),
 		applicationConfig({
 			providers: [{ provide: LOCALE_ID, useValue: 'fr-FR' }],
@@ -147,12 +147,12 @@ export const Basic: StoryObj<TextInputComponent & { disabled: boolean; required:
 			)}>
 	<lu-text-input
 	${generateInputs(inputArgs, argTypes)}
-		[(ngModel)]="example">
+		[(value)]="example">
 	</lu-text-input>
 </lu-form-field>
 <pr-story-model-display>{{ example }}</pr-story-model-display>`),
 			moduleMetadata: {
-				imports: [TextInputComponent, FormFieldComponent, FormsModule, BrowserAnimationsModule],
+				imports: [TextInputComponent, FormFieldComponent, BrowserAnimationsModule],
 			},
 		};
 	},
@@ -200,12 +200,12 @@ export const IBANFormat: StoryObj<TextInputComponent & { disabled: boolean; requ
 			)}>
 	<lu-text-input
 	${generateInputs(inputArgs, argTypes)}
-		[(ngModel)]="example" mask="SS00 AAAA 0000 0000 0000 9999 9999 9999 99">
+		[(value)]="example" mask="SS00 AAAA 0000 0000 0000 9999 9999 9999 99">
 	</lu-text-input>
 </lu-form-field>
 {{example}}`),
 			moduleMetadata: {
-				imports: [TextInputComponent, FormFieldComponent, FormsModule, BrowserAnimationsModule],
+				imports: [TextInputComponent, FormFieldComponent, BrowserAnimationsModule],
 			},
 		};
 	},
@@ -255,12 +255,12 @@ export const PasswordVisiblity: StoryObj<
 			)}>
 	<lu-text-input ${generateInputs(inputArgs, argTypes)}
 		type="password"
-		[(ngModel)]="example">
+		[(value)]="example">
 	</lu-text-input>
 </lu-form-field>
 <pr-story-model-display>{{ example }}</pr-story-model-display>`,
 			moduleMetadata: {
-				imports: [TextInputComponent, FormFieldComponent, FormsModule, BrowserAnimationsModule],
+				imports: [TextInputComponent, FormFieldComponent, BrowserAnimationsModule],
 			},
 		};
 	},
@@ -310,12 +310,12 @@ export const WithPrefixAndSuffix: StoryObj<
 		${generateInputs(inputArgs, argTypes)}
 		[prefix]="prefix"
 		[suffix]="suffix"
-		[(ngModel)]="example">
+		[(value)]="example">
 	</lu-text-input>
 </lu-form-field>
 <pr-story-model-display>{{ example }}</pr-story-model-display>`),
 			moduleMetadata: {
-				imports: [TextInputComponent, FormFieldComponent, FormsModule, BrowserAnimationsModule],
+				imports: [TextInputComponent, FormFieldComponent, BrowserAnimationsModule],
 			},
 		};
 	},
@@ -370,12 +370,12 @@ export const AI: StoryObj<FormFieldComponent & TextInputComponent> = {
 				},
 				argTypes,
 			)}>
-	<lu-text-input [(ngModel)]="example" />
+	<lu-text-input [(value)]="example" />
 </lu-form-field>
 <pr-story-model-display>{{example}}</pr-story-model-display>
 `),
 			moduleMetadata: {
-				imports: [TextInputComponent, FormFieldComponent, FormsModule, BrowserAnimationsModule],
+				imports: [TextInputComponent, FormFieldComponent, BrowserAnimationsModule],
 			},
 		};
 	},
@@ -384,6 +384,40 @@ export const AI: StoryObj<FormFieldComponent & TextInputComponent> = {
 		iconAIalt: 'Assistant IA',
 		iconAItooltip: 'Donnée remplie automatiquement',
 	},
+};
+
+@Component({
+	selector: 'text-field-signal-forms-story',
+	imports: [TextInputComponent, FormFieldComponent, FormField, StoryModelDisplayComponent, JsonPipe],
+	changeDetection: ChangeDetectionStrategy.OnPush,
+	template: `
+		<lu-form-field label="Nom" inlineMessage="Requis, 12 caractères max">
+			<lu-text-input [formField]="form.name" />
+		</lu-form-field>
+		<pr-story-model-display>{{ form().value() | json }}</pr-story-model-display>
+	`,
+})
+class TextFieldSignalFormsStory {
+	readonly model = signal({ name: 'Signal forms' });
+	readonly form = form(this.model, (p) => {
+		required(p.name);
+		maxLength(p.name, 12);
+	});
+}
+
+export const SignalForms: StoryObj = {
+	parameters: {
+		docs: {
+			description: {
+				story:
+					'Pilotage par signal forms : `lu-text-input` implémente `FormValueControl<string>` et se branche sur un champ via la directive `[formField]`. La validation (`required`, `maxLength`…) est déclarée dans le schema du `form()`.',
+			},
+		},
+	},
+	render: () => ({
+		moduleMetadata: { imports: [TextFieldSignalFormsStory] },
+		template: `<text-field-signal-forms-story />`,
+	}),
 };
 
 export const BasicTEST = createTestStory(Basic, async ({ canvasElement, step }) => {

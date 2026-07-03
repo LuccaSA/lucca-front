@@ -1,7 +1,6 @@
 import { JsonPipe } from '@angular/common';
 import { ChangeDetectionStrategy, Component, computed, inject, Injectable, input, numberAttribute, signal } from '@angular/core';
 import { toSignal } from '@angular/core/rxjs-interop';
-import { FormsModule } from '@angular/forms';
 import { ActivatedRoute, provideRouter, Router, RouterLink, RouterOutlet, Routes, withComponentInputBinding } from '@angular/router';
 import { ButtonComponent } from '@lucca-front/ng/button';
 import { CalloutComponent } from '@lucca-front/ng/callout';
@@ -76,7 +75,6 @@ class DismissedComponent {}
 		TextInputComponent,
 		FormFieldComponent,
 		CheckboxInputComponent,
-		FormsModule,
 		StoryModelDisplayComponent,
 		FormComponent,
 	],
@@ -89,13 +87,13 @@ class DismissedComponent {}
 				<lu-dialog-content>
 					<button luButton (click)="router.navigateByUrl('/')">Navigate away</button>
 					<lu-form-field label="Data received by dialog">
-						<lu-number-input [(ngModel)]="dataNum" name="num" />
+						<lu-number-input [(value)]="dataNum" />
 					</lu-form-field>
 					<lu-form-field label="Additionnal data to submit" class="pr-u-marginBlockStart200">
-						<lu-text-input [(ngModel)]="dataString" name="string" />
+						<lu-text-input [(value)]="dataString" />
 					</lu-form-field>
 					<lu-form-field label="I agree to allow this dialog to close" class="pr-u-marginBlockStart200">
-						<lu-checkbox-input [(ngModel)]="allowThisDialogToClose" name="canDeactivate" />
+						<lu-checkbox-input [(checked)]="allowThisDialogToClose" />
 					</lu-form-field>
 				</lu-dialog-content>
 				<lu-dialog-footer>

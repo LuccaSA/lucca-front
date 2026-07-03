@@ -1,6 +1,4 @@
-import { allLegumes } from '@/stories/forms/select/select.utils';
 import { ChangeDetectionStrategy, Component, inject } from '@angular/core';
-import { FormsModule } from '@angular/forms';
 import { AppLayoutComponent } from '@lucca-front/ng/app-layout';
 import { ButtonComponent } from '@lucca-front/ng/button';
 import { ContainerComponent } from '@lucca-front/ng/container';
@@ -8,11 +6,7 @@ import { DialogComponent, DialogContentComponent, DialogFooterComponent, DialogH
 import { FormFieldComponent } from '@lucca-front/ng/form-field';
 import { SwitchInputComponent } from '@lucca-front/ng/forms';
 import { MainLayoutBlockComponent, MainLayoutComponent } from '@lucca-front/ng/main-layout';
-import { LuMultiSelectInputComponent } from '@lucca-front/ng/multi-select';
-import { PopoverDirective } from '@lucca-front/ng/popover2';
-import { LuSimpleSelectInputComponent } from '@lucca-front/ng/simple-select';
 import { LuToastsComponent, LuToastsService } from '@lucca-front/ng/toast';
-import { LuTooltipTriggerDirective } from '@lucca-front/ng/tooltip';
 import { Meta } from '@storybook/angular-vite';
 
 @Component({
@@ -32,11 +26,6 @@ import { Meta } from '@storybook/angular-vite';
 		ContainerComponent,
 		FormFieldComponent,
 		SwitchInputComponent,
-		FormsModule,
-		PopoverDirective,
-		LuTooltipTriggerDirective,
-		LuSimpleSelectInputComponent,
-		LuMultiSelectInputComponent,
 	],
 	changeDetection: ChangeDetectionStrategy.OnPush,
 	styles: [
@@ -122,10 +111,6 @@ import { Meta } from '@storybook/angular-vite';
 						--commons-container-maxWidth: 50rem;
 					}
 
-					.connectedOverlays lu-form-field {
-						inline-size: 16rem;
-					}
-
 					.fakeContent {
 						background-color: var(--pr-t-elevation-surface-raised);
 						border: 1px solid var(--palettes-neutral-50);
@@ -145,10 +130,6 @@ import { Meta } from '@storybook/angular-vite';
 })
 class PushPanelStory {
 	private toasts = inject(LuToastsService);
-
-	allLegumes = allLegumes;
-	simpleExample = allLegumes[0];
-	multiExample = allLegumes;
 
 	showPushPanel = false;
 

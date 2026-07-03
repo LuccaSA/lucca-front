@@ -1,4 +1,3 @@
-import { FormsModule } from '@angular/forms';
 import { BrowserAnimationsModule } from '@angular/platform-browser/animations';
 import { FormFieldComponent } from '@lucca-front/ng/form-field';
 import { RADIO_GROUP_INPUT_SIZE, RadioComponent, RadioGroupInputComponent } from '@lucca-front/ng/forms';
@@ -13,7 +12,7 @@ export default {
 	title: 'Documentation/Forms/Fields/RadioField/Angular',
 	decorators: [
 		moduleMetadata({
-			imports: [RadioGroupInputComponent, RadioComponent, FormFieldComponent, FormsModule, BrowserAnimationsModule, StoryModelDisplayComponent],
+			imports: [RadioGroupInputComponent, RadioComponent, FormFieldComponent, BrowserAnimationsModule, StoryModelDisplayComponent],
 		}),
 	],
 	argTypes: {
@@ -85,7 +84,7 @@ export const Basic: StoryObj<RadioGroupInputComponent & FormFieldComponent & { r
 				},
 				argTypes,
 			)}>
-	<lu-radio-group-input${generateInputs(inputArgs, argTypes)} [(ngModel)]="example">
+	<lu-radio-group-input${generateInputs(inputArgs, argTypes)} [(value)]="example">
 		<lu-radio [value]="1" inlineMessage="Option text">Option A</lu-radio>
 		<lu-radio [value]="2" inlineMessage="Option text">Option B</lu-radio>
 		<ng-template #template><strong>Option</strong> text</ng-template>

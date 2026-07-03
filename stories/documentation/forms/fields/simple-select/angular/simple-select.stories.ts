@@ -1,22 +1,24 @@
-import { StoryModelDisplayComponent } from '@/helpers/story-model-display.component';
-import { allLegumes, FilterLegumesPipe } from '@/stories/forms/select/select.utils';
-import { FormsModule } from '@angular/forms';
+import { allLegumes, FilterLegumesPipe, ILegume } from '@/stories/forms/select/select.utils';
+import { JsonPipe } from '@angular/common';
+import { ChangeDetectionStrategy, Component, signal } from '@angular/core';
+import { form, FormField, required } from '@angular/forms/signals';
 import { BrowserAnimationsModule } from '@angular/platform-browser/animations';
 import { LuOptionDirective } from '@lucca-front/ng/core-select';
 import { FORM_FIELD_SIZE, FORM_FIELD_WIDTH, FormFieldComponent } from '@lucca-front/ng/form-field';
 import { INLINE_MESSAGE_STATE } from '@lucca-front/ng/inline-message';
 import { LuSimpleSelectInputComponent } from '@lucca-front/ng/simple-select';
 import { Meta, moduleMetadata, StoryObj } from '@storybook/angular-vite';
-import { expect, screen, userEvent, within } from 'storybook/test';
+import { StoryModelDisplayComponent } from '@/helpers/story-model-display.component';
 import { HiddenArgType } from '../../../../../helpers/common-arg-types';
-import { createTestStory, generateInputs, InputAlias, SelectCommonAliasInput, setStoryOptions } from '../../../../../helpers/stories';
+import { createTestStory, generateInputs, setStoryOptions } from '../../../../../helpers/stories';
 import { waitForAngular } from '../../../../../helpers/test';
+import { expect, screen, userEvent, within } from 'storybook/test';
 
 export default {
 	title: 'Documentation/Forms/Fields/Simple Select/Angular',
 	decorators: [
 		moduleMetadata({
-			imports: [LuSimpleSelectInputComponent, FormFieldComponent, FormsModule, BrowserAnimationsModule, LuOptionDirective, FilterLegumesPipe, StoryModelDisplayComponent],
+			imports: [LuSimpleSelectInputComponent, FormFieldComponent, BrowserAnimationsModule, LuOptionDirective, FilterLegumesPipe, StoryModelDisplayComponent],
 		}),
 	],
 	argTypes: {
@@ -70,12 +72,6 @@ export default {
 		presentation: {
 			description: '[v21.1] Transforme le champ de formulaire en donnée textuelle non éditable.',
 		},
-		onOpen: {
-			description: "Événement déclenché à l'ouverture du panneau de sélection.",
-		},
-		onClose: {
-			description: 'Événement déclenché à la fermeture du panneau de sélection.',
-		},
 		optionComparer: HiddenArgType,
 		options: HiddenArgType,
 		optionTpl: HiddenArgType,
@@ -83,17 +79,15 @@ export default {
 		valueTpl: HiddenArgType,
 		clueChange: HiddenArgType,
 		nextPage: HiddenArgType,
+		previousPage: HiddenArgType,
 	},
 } as Meta;
 
 export const Basic: StoryObj<
-	InputAlias<
-		LuSimpleSelectInputComponent<unknown> &
-			FormFieldComponent & {
-				disabled: boolean;
-			},
-		SelectCommonAliasInput
-	>
+	LuSimpleSelectInputComponent<unknown> &
+		FormFieldComponent & {
+			disabled: boolean;
+		}
 > = {
 	render: (args, { argTypes }) => {
 		const { label, hiddenLabel, tooltip, inlineMessage, inlineMessageState, size, width, presentation, ...inputArgs } = args;
@@ -115,12 +109,12 @@ export const Basic: StoryObj<
 	<lu-simple-select ${generateInputs(inputArgs, argTypes)}
 		[options]="legumes | filterLegumes:clue"
 		(clueChange)="clue = $event"
-		[(ngModel)]="example">
+		[(value)]="example">
 	</lu-simple-select>
 </lu-form-field>
 <pr-story-model-display>{{ example | json }}</pr-story-model-display>`,
 			moduleMetadata: {
-				imports: [LuSimpleSelectInputComponent, FormFieldComponent, FormsModule, BrowserAnimationsModule],
+				imports: [LuSimpleSelectInputComponent, FormFieldComponent, BrowserAnimationsModule],
 			},
 		};
 	},
@@ -136,6 +130,40 @@ export const Basic: StoryObj<
 		disabled: false,
 		presentation: false,
 	},
+};
+
+@Component({
+	selector: 'simple-select-signal-forms-story',
+	imports: [LuSimpleSelectInputComponent, FormFieldComponent, FormField, StoryModelDisplayComponent, JsonPipe],
+	changeDetection: ChangeDetectionStrategy.OnPush,
+	template: `
+		<lu-form-field label="Légume" inlineMessage="Requis">
+			<lu-simple-select [formField]="form.legume" [options]="legumes" />
+		</lu-form-field>
+		<pr-story-model-display>{{ form().value() | json }}</pr-story-model-display>
+	`,
+})
+class SimpleSelectSignalFormsStory {
+	readonly legumes = allLegumes;
+	readonly model = signal<{ legume: ILegume | null }>({ legume: null });
+	readonly form = form(this.model, (p) => {
+		required(p.legume);
+	});
+}
+
+export const SignalForms: StoryObj = {
+	parameters: {
+		docs: {
+			description: {
+				story:
+					'Pilotage par signal forms : `lu-simple-select` implémente `FormValueControl` (valeur typée, ici `ILegume | null`) et se branche sur un champ via la directive `[formField]`. La validation (`required`…) est déclarée dans le schema du `form()`.',
+			},
+		},
+	},
+	render: () => ({
+		moduleMetadata: { imports: [SimpleSelectSignalFormsStory] },
+		template: `<simple-select-signal-forms-story />`,
+	}),
 };
 
 export const BasicTEST = createTestStory(Basic, async ({ canvasElement, step }) => {

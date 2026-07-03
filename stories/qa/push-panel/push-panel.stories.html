@@ -6,7 +6,7 @@
 			<lu-container>
 				<div class="pr-u-marginBottom200">
 					<lu-form-field label="Show Push Panel">
-						<lu-switch-input [(ngModel)]="showPushPanel" (ngModelChange)="togglePushPanel()" />
+						<lu-switch-input [(checked)]="showPushPanel" (checkedChange)="togglePushPanel()" />
 					</lu-form-field>
 				</div>
 				<div class="pr-u-displayFlex pr-u-gap100">

@@ -10,7 +10,7 @@
 			<td>Empty Model</td>
 			<td>
 				<lu-form-field label="Label" tooltip="Tooltip message" inlineMessage="Helper text" inlineMessageState="default">
-					<lu-duration-picker [(ngModel)]="emptyDuration" />
+					<lu-duration-picker [(value)]="emptyDuration" />
 				</lu-form-field>
 			</td>
 		</tr>
@@ -18,7 +18,7 @@
 			<td>Filled Model</td>
 			<td>
 				<lu-form-field label="Label" tooltip="Tooltip message" inlineMessage="Helper text" inlineMessageState="default">
-					<lu-duration-picker [(ngModel)]="filledDuration" />
+					<lu-duration-picker [(value)]="filledDuration" />
 				</lu-form-field>
 			</td>
 		</tr>
@@ -26,7 +26,7 @@
 			<td>Empty Form</td>
 			<td>
 				<lu-form-field label="Label" tooltip="Tooltip message" inlineMessage="Helper text" inlineMessageState="default">
-					<lu-duration-picker [formControl]="emptyDurationControl" />
+					<lu-duration-picker [(value)]="emptyDurationForm" />
 				</lu-form-field>
 			</td>
 		</tr>
@@ -34,7 +34,7 @@
 			<td>Filled Form</td>
 			<td>
 				<lu-form-field label="Label" tooltip="Tooltip message" inlineMessage="Helper text" inlineMessageState="default">
-					<lu-duration-picker [formControl]="filledDurationControl" />
+					<lu-duration-picker [(value)]="filledDurationForm" />
 				</lu-form-field>
 			</td>
 		</tr>
@@ -42,7 +42,7 @@
 			<td>Filled Form 1000h</td>
 			<td>
 				<lu-form-field label="Label" tooltip="Tooltip message" inlineMessage="Helper text" inlineMessageState="default">
-					<lu-duration-picker [formControl]="filledDuration1000hControl" max="PT9999H" />
+					<lu-duration-picker [(value)]="filledDuration1000h" max="PT9999H" />
 				</lu-form-field>
 			</td>
 		</tr>
@@ -50,7 +50,7 @@
 			<td>Size</td>
 			<td>
 				<lu-form-field label="Label" tooltip="Tooltip message" inlineMessage="Helper text" inlineMessageState="default">
-					<lu-duration-picker [(ngModel)]="emptyDuration" size="S" />
+					<lu-duration-picker [(value)]="emptyDuration" size="S" />
 				</lu-form-field>
 			</td>
 		</tr>
@@ -58,10 +58,10 @@
 			<td>Disabled</td>
 			<td>
 				<lu-form-field label="Label" tooltip="Tooltip message" inlineMessage="Helper text" inlineMessageState="default">
-					<lu-duration-picker [(ngModel)]="emptyDuration" disabled />
+					<lu-duration-picker [(value)]="emptyDuration" disabled />
 				</lu-form-field>
 				<lu-form-field label="Label" tooltip="Tooltip message" inlineMessage="Helper text" inlineMessageState="default">
-					<lu-duration-picker [(ngModel)]="filledDuration" disabled />
+					<lu-duration-picker [(value)]="filledDuration" disabled />
 				</lu-form-field>
 			</td>
 		</tr>
@@ -69,10 +69,10 @@
 			<td>Display Arrows</td>
 			<td>
 				<lu-form-field label="Label" tooltip="Tooltip message" inlineMessage="Helper text" inlineMessageState="default">
-					<lu-duration-picker [(ngModel)]="emptyDuration" displayArrows />
+					<lu-duration-picker [(value)]="emptyDuration" displayArrows />
 				</lu-form-field>
 				<lu-form-field label="Label" tooltip="Tooltip message" inlineMessage="Helper text" inlineMessageState="default">
-					<lu-duration-picker [(ngModel)]="filledDuration" displayArrows />
+					<lu-duration-picker [(value)]="filledDuration" displayArrows />
 				</lu-form-field>
 			</td>
 		</tr>

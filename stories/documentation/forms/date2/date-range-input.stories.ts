@@ -1,6 +1,7 @@
-import { LOCALE_ID } from '@angular/core';
-import { FormsModule } from '@angular/forms';
-import { CALENDAR_MODE, CalendarShortcut, DATE2_CLEAR_BEHAVIOR, DATE_FORMAT_CONST, DateRange, DateRangeInputComponent, PremadeShortcuts } from '@lucca-front/ng/date2';
+import { JsonPipe } from '@angular/common';
+import { ChangeDetectionStrategy, Component, LOCALE_ID, signal } from '@angular/core';
+import { form, FormField } from '@angular/forms/signals';
+import { CALENDAR_MODE, CalendarShortcut, DATE2_CLEAR_BEHAVIOR, DATE_FORMAT_CONST, DateRange, DateRangeInputComponent, PremadeShortcuts, validDateRange } from '@lucca-front/ng/date2';
 import { FormFieldComponent } from '@lucca-front/ng/form-field';
 import { applicationConfig, Meta, moduleMetadata, StoryObj } from '@storybook/angular-vite';
 import { userEvent, within } from 'storybook/test';
@@ -13,7 +14,7 @@ export default {
 	component: DateRangeInputComponent,
 	decorators: [
 		moduleMetadata({
-			imports: [DateRangeInputComponent, FormsModule, StoryModelDisplayComponent, FormFieldComponent],
+			imports: [DateRangeInputComponent, StoryModelDisplayComponent, FormFieldComponent],
 		}),
 		applicationConfig({
 			providers: [{ provide: LOCALE_ID, useValue: 'fr-FR' }],
@@ -103,7 +104,7 @@ export default {
 				focusedDate: args['focusedDate'] ? focusedDateValue : null,
 			},
 			template: cleanupTemplate(`<lu-form-field label="Date range input example" inlineMessage="Inline message example" ${generateInputs({ presentation }, argTypes)}>
-				<lu-date-range-input [(ngModel)]="selected" [min]="min" [max]="max" [focusedDate]="focusedDate" ${generateInputs(flags, argTypes)} />
+				<lu-date-range-input [(value)]="selected" [min]="min" [max]="max" [focusedDate]="focusedDate" ${generateInputs(flags, argTypes)} />
 			</lu-form-field>
 
 			<pr-story-model-display>{{ selected | json }}</pr-story-model-display>`),
@@ -155,7 +156,7 @@ export const WithShortcuts: StoryObj<DateRangeInputComponent & { selected: DateR
 
 			template: cleanupTemplate(`
 			<lu-form-field label="Date range input example" inlineMessage="Inline message example" ${generateInputs({ presentation }, argTypes)}>
-				<lu-date-range-input [(ngModel)]="selected" [min]="min" [max]="max" [shortcuts]="shortcuts" ${generateInputs(flags, argTypes)} />
+				<lu-date-range-input [(value)]="selected" [min]="min" [max]="max" [shortcuts]="shortcuts" ${generateInputs(flags, argTypes)} />
 			</lu-form-field>
 
 			<pr-story-model-display>{{ selected | json }}</pr-story-model-display>`),
@@ -171,6 +172,39 @@ export const WithShortcuts: StoryObj<DateRangeInputComponent & { selected: DateR
 		presentation: false,
 		selected: { start: new Date(), end: null },
 	},
+};
+
+@Component({
+	selector: 'date-range-input-signal-forms-story',
+	imports: [DateRangeInputComponent, FormFieldComponent, FormField, StoryModelDisplayComponent, JsonPipe],
+	changeDetection: ChangeDetectionStrategy.OnPush,
+	template: `
+		<lu-form-field label="Période" inlineMessage="Les deux bornes doivent être des dates valides">
+			<lu-date-range-input [formField]="form.period" />
+		</lu-form-field>
+		<pr-story-model-display>{{ form().value() | json }}</pr-story-model-display>
+	`,
+})
+class DateRangeInputSignalFormsStory {
+	readonly model = signal<{ period: DateRange | null }>({ period: null });
+	readonly form = form(this.model, (p) => {
+		validDateRange(p.period);
+	});
+}
+
+export const SignalForms: StoryObj = {
+	parameters: {
+		docs: {
+			description: {
+				story:
+					'Pilotage par signal forms : `lu-date-range-input` implémente `FormValueControl<DateRange | null>` et se branche sur un champ via la directive `[formField]`. La validation (`validDateRange`…) est déclarée dans le schema du `form()`.',
+			},
+		},
+	},
+	render: () => ({
+		moduleMetadata: { imports: [DateRangeInputSignalFormsStory] },
+		template: `<date-range-input-signal-forms-story />`,
+	}),
 };
 
 export const BasicTEST = createTestStory(Basic, async ({ canvasElement, step }) => {

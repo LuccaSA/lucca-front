@@ -1,5 +1,4 @@
 import { LOCALE_ID } from '@angular/core';
-import { FormControl, FormsModule, ReactiveFormsModule } from '@angular/forms';
 import { BrowserAnimationsModule } from '@angular/platform-browser/animations';
 import { FORM_FIELD_WIDTH, FormFieldComponent } from '@lucca-front/ng/form-field';
 import { MultilanguageInputComponent, MultilanguageTranslation } from '@lucca-front/ng/forms';
@@ -12,7 +11,7 @@ export default {
 	title: 'Documentation/Forms/Fields/MultilanguageField/Angular',
 	decorators: [
 		moduleMetadata({
-			imports: [MultilanguageInputComponent, FormFieldComponent, ReactiveFormsModule, BrowserAnimationsModule, StoryModelDisplayComponent, FormsModule],
+			imports: [MultilanguageInputComponent, FormFieldComponent, BrowserAnimationsModule, StoryModelDisplayComponent],
 		}),
 		applicationConfig({
 			providers: [{ provide: LOCALE_ID, useValue: 'fr-FR' }],
@@ -107,7 +106,7 @@ export const Basic: StoryObj<
 > = {
 	render: (args, { argTypes }) => {
 		const { label, hiddenLabel, tooltip, inlineMessage, inlineMessageState, size, width, presentation, disabled, ...inputArgs } = args;
-		const formControl = new FormControl<MultilanguageTranslation[]>([
+		const example: MultilanguageTranslation[] = [
 			{
 				cultureCode: 'invariant',
 				value: 'Invariant value',
@@ -124,13 +123,11 @@ export const Basic: StoryObj<
 				cultureCode: 'de-DE',
 				value: "I don't speak German",
 			},
-		]);
-		if (disabled) {
-			formControl.disable();
-		}
+		];
 		return {
 			props: {
-				formControl,
+				example,
+				disabled,
 			},
 			template: cleanupTemplate(`<lu-form-field${generateInputs(
 				{
@@ -145,9 +142,9 @@ export const Basic: StoryObj<
 				},
 				argTypes,
 			)}>
-	<lu-multilanguage-input [formControl]="formControl"${generateInputs(inputArgs, argTypes)} />
+	<lu-multilanguage-input [(value)]="example" [disabled]="disabled"${generateInputs(inputArgs, argTypes)} />
 </lu-form-field>
-<pr-story-model-display>{{ formControl.value | json }}</pr-story-model-display>`),
+<pr-story-model-display>{{ example | json }}</pr-story-model-display>`),
 		};
 	},
 	args: {

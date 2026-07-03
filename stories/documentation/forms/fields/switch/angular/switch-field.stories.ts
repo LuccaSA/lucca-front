@@ -1,4 +1,3 @@
-import { FormsModule } from '@angular/forms';
 import { BrowserAnimationsModule } from '@angular/platform-browser/animations';
 import { FORM_FIELD_SIZE, FormFieldComponent } from '@lucca-front/ng/form-field';
 import { CheckboxInputComponent, SwitchInputComponent } from '@lucca-front/ng/forms';
@@ -13,7 +12,7 @@ export default {
 	title: 'Documentation/Forms/Fields/SwitchField/Angular',
 	decorators: [
 		moduleMetadata({
-			imports: [SwitchInputComponent, FormFieldComponent, FormsModule, StoryModelDisplayComponent],
+			imports: [SwitchInputComponent, FormFieldComponent, StoryModelDisplayComponent],
 		}),
 	],
 	argTypes: {
@@ -81,11 +80,11 @@ export const Basic: StoryObj<SwitchInputComponent & FormFieldComponent & { requi
 				},
 				argTypes,
 			)}>
-	<lu-switch-input [(ngModel)]="example"${generateInputs(inputArgs, argTypes)} />
+	<lu-switch-input [(checked)]="example"${generateInputs(inputArgs, argTypes)} />
 </lu-form-field>
 <pr-story-model-display>{{ example }}</pr-story-model-display>`,
 			moduleMetadata: {
-				imports: [CheckboxInputComponent, FormFieldComponent, FormsModule, BrowserAnimationsModule],
+				imports: [CheckboxInputComponent, FormFieldComponent, BrowserAnimationsModule],
 			},
 		};
 	},

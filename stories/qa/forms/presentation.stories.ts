@@ -1,6 +1,5 @@
 import { allLegumes } from '@/stories/forms/select/select.utils';
 import { LOCALE_ID } from '@angular/core';
-import { FormsModule } from '@angular/forms';
 import { DateInputComponent } from '@lucca-front/ng/date2';
 import { FormComponent } from '@lucca-front/ng/form';
 import { DataPresentationComponent, FormFieldComponent } from '@lucca-front/ng/form-field';
@@ -46,7 +45,6 @@ export default {
 				RadioGroupInputComponent,
 				RadioComponent,
 				FormFieldComponent,
-				FormsModule,
 				FormComponent,
 				DataPresentationComponent,
 				RichTextInputComponent,
@@ -99,7 +97,7 @@ export const Basic: StoryObj = {
 				},
 				argTypes,
 			)}>
-	<lu-checkbox-input [(ngModel)]="boolean" />
+	<lu-checkbox-input [(checked)]="boolean" />
 </lu-form-field>
 <br>
 <br>
@@ -110,7 +108,7 @@ export const Basic: StoryObj = {
 				},
 				argTypes,
 			)}>
-	<lu-switch-input [(ngModel)]="boolean" />
+	<lu-switch-input [(checked)]="boolean" />
 </lu-form-field>
 <br>
 <br>
@@ -121,7 +119,7 @@ export const Basic: StoryObj = {
 				},
 				argTypes,
 			)}>
-	<lu-text-input [(ngModel)]="text"/>
+	<lu-text-input [(value)]="text"/>
 </lu-form-field>
 <br>
 <br>
@@ -132,7 +130,7 @@ export const Basic: StoryObj = {
 				},
 				argTypes,
 			)}>
-	<lu-textarea-input [(ngModel)]="textAreaValue"/>
+	<lu-textarea-input [(value)]="textAreaValue"/>
 </lu-form-field>
 <br>
 <br>
@@ -143,7 +141,7 @@ export const Basic: StoryObj = {
 				},
 				argTypes,
 			)}>
-	<lu-date-input [(ngModel)]="dateValue" />
+	<lu-date-input [(value)]="dateValue" />
 </lu-form-field>
 <br>
 <br>
@@ -154,7 +152,7 @@ export const Basic: StoryObj = {
 				},
 				argTypes,
 			)}>
-	<lu-multilanguage-input [(ngModel)]="multiLanguageValue" />
+	<lu-multilanguage-input [(value)]="multiLanguageValue" />
 </lu-form-field>
 <br>
 <br>
@@ -165,7 +163,7 @@ export const Basic: StoryObj = {
 				},
 				argTypes,
 			)}>
-	<lu-number-input [(ngModel)]="numberValue" />
+	<lu-number-input [(value)]="numberValue" />
 </lu-form-field>
 <br>
 <br>
@@ -176,7 +174,7 @@ export const Basic: StoryObj = {
 				},
 				argTypes,
 			)}>
-	<lu-number-format-input [(ngModel)]="numberValue" />
+	<lu-number-format-input [(value)]="numberValue" />
 </lu-form-field>
 <br>
 <br>
@@ -187,7 +185,7 @@ export const Basic: StoryObj = {
 				},
 				argTypes,
 			)}>
-	<lu-phone-number-input [(ngModel)]="phoneNumberValue" />
+	<lu-phone-number-input [(value)]="phoneNumberValue" />
 </lu-form-field>
 <br>
 <br>
@@ -198,7 +196,7 @@ export const Basic: StoryObj = {
 				},
 				argTypes,
 			)}>
-	<lu-simple-select [options]="legumes" [(ngModel)]="legume" />
+	<lu-simple-select [options]="legumes" [(value)]="legume" />
 </lu-form-field>
 <br>
 <br>
@@ -209,7 +207,7 @@ export const Basic: StoryObj = {
 				},
 				argTypes,
 			)}>
-	<lu-multi-select [options]="legumes" [(ngModel)]="legumes" />
+	<lu-multi-select [options]="legumes" [(value)]="legumes" />
 </lu-form-field>
 <br>
 <br>
@@ -220,7 +218,7 @@ export const Basic: StoryObj = {
 				},
 				argTypes,
 			)}>
-	<lu-radio-group-input	[ngModel]="2">
+	<lu-radio-group-input	[value]="2">
 		<lu-radio [value]="1" inlineMessage="Option text">Option A</lu-radio>
 		<lu-radio [value]="2" inlineMessage="Option text">Option B</lu-radio>
 		<lu-radio [value]="3" [inlineMessage]="template" disabled>Option C</lu-radio>
@@ -229,7 +227,7 @@ export const Basic: StoryObj = {
 <br>
 <br>
 <lu-form-field presentation label="Rich Text Editor">
-	<lu-rich-text-input placeholder="Placeholder…" autoResize	[(ngModel)]="richTextContent">
+	<lu-rich-text-input placeholder="Placeholder…" autoResize	[(value)]="richTextContent">
 		<lu-rich-text-input-toolbar />
 	</lu-rich-text-input>
 </lu-form-field>
@@ -291,7 +289,7 @@ export const GlobalToForm: StoryObj = {
 		},
 		argTypes,
 	)}>
-		<lu-checkbox-input [(ngModel)]="boolean" [ngModelOptions]="{standalone: true}" />
+		<lu-checkbox-input [(checked)]="boolean" />
 	</lu-form-field>
 	<br>
 	<br>
@@ -302,7 +300,7 @@ export const GlobalToForm: StoryObj = {
 		},
 		argTypes,
 	)}>
-		<lu-switch-input [(ngModel)]="boolean" [ngModelOptions]="{standalone: true}" />
+		<lu-switch-input [(checked)]="boolean" />
 	</lu-form-field>
 	<br>
 	<br>
@@ -313,7 +311,7 @@ export const GlobalToForm: StoryObj = {
 		},
 		argTypes,
 	)}>
-		<lu-text-input [(ngModel)]="text" [ngModelOptions]="{standalone: true}"/>
+		<lu-text-input [(value)]="text"/>
 	</lu-form-field>
 	<br>
 	<br>
@@ -324,7 +322,7 @@ export const GlobalToForm: StoryObj = {
 		},
 		argTypes,
 	)}>
-		<lu-textarea-input [(ngModel)]="textAreaValue" [ngModelOptions]="{standalone: true}"/>
+		<lu-textarea-input [(value)]="textAreaValue"/>
 	</lu-form-field>
 	<br>
 	<br>
@@ -335,7 +333,7 @@ export const GlobalToForm: StoryObj = {
 		},
 		argTypes,
 	)}>
-		<lu-date-input [(ngModel)]="dateValue" [ngModelOptions]="{standalone: true}" />
+		<lu-date-input [(value)]="dateValue" />
 	</lu-form-field>
 	<br>
 	<br>
@@ -346,7 +344,7 @@ export const GlobalToForm: StoryObj = {
 		},
 		argTypes,
 	)}>
-		<lu-multilanguage-input [(ngModel)]="multiLanguageValue" [ngModelOptions]="{standalone: true}" />
+		<lu-multilanguage-input [(value)]="multiLanguageValue" />
 	</lu-form-field>
 	<br>
 	<br>
@@ -357,7 +355,7 @@ export const GlobalToForm: StoryObj = {
 		},
 		argTypes,
 	)}>
-		<lu-number-input [(ngModel)]="numberValue" [ngModelOptions]="{standalone: true}" />
+		<lu-number-input [(value)]="numberValue" />
 	</lu-form-field>
 	<br>
 	<br>
@@ -368,7 +366,7 @@ export const GlobalToForm: StoryObj = {
 		},
 		argTypes,
 	)}>
-		<lu-number-format-input [(ngModel)]="numberValue" [ngModelOptions]="{standalone: true}" />
+		<lu-number-format-input [(value)]="numberValue" />
 	</lu-form-field>
 	<br>
 	<br>
@@ -379,7 +377,7 @@ export const GlobalToForm: StoryObj = {
 		},
 		argTypes,
 	)}>
-		<lu-phone-number-input [(ngModel)]="phoneNumberValue" [ngModelOptions]="{standalone: true}" />
+		<lu-phone-number-input [(value)]="phoneNumberValue" />
 	</lu-form-field>
 	<br>
 	<br>
@@ -390,7 +388,7 @@ export const GlobalToForm: StoryObj = {
 		},
 		argTypes,
 	)}>
-		<lu-simple-select [options]="legumes" [(ngModel)]="legume" [ngModelOptions]="{standalone: true}" />
+		<lu-simple-select [options]="legumes" [(value)]="legume" />
 	</lu-form-field>
 	<br>
 	<br>
@@ -401,7 +399,7 @@ export const GlobalToForm: StoryObj = {
 		},
 		argTypes,
 	)}>
-		<lu-multi-select [options]="legumes" [(ngModel)]="legumes" [ngModelOptions]="{standalone: true}" />
+		<lu-multi-select [options]="legumes" [(value)]="legumes" />
 	</lu-form-field>
 	<br>
 	<br>
@@ -412,7 +410,7 @@ export const GlobalToForm: StoryObj = {
 		},
 		argTypes,
 	)}>
-		<lu-radio-group-input	[ngModel]="2" [ngModelOptions]="{standalone: true}">
+		<lu-radio-group-input	[value]="2">
 			<lu-radio [value]="1" inlineMessage="Option text">Option A</lu-radio>
 			<lu-radio [value]="2" inlineMessage="Option text">Option B</lu-radio>
 			<lu-radio [value]="3" [inlineMessage]="template" disabled>Option C</lu-radio>
