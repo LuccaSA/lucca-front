@@ -39,7 +39,8 @@
 	@include popin;
 
 	// legacy, approximate centering
-	--components-loading-transform: translateY(35vb);
+	// stylelint-disable-next-line unit-layout-mappings -- translateY is physical; pair it with physical vh.
+	--components-loading-transform: translateY(35vh);
 }
 
 @mixin fullPage {
@@ -47,7 +48,8 @@
 
 	// legacy, approximate centering
 	--components-loading-margin: 0 auto;
-	--components-loading-transform: translateY(35vb);
+	// stylelint-disable-next-line unit-layout-mappings -- translateY is physical; pair it with physical vh.
+	--components-loading-transform: translateY(35vh);
 }
 
 @mixin hiddenLabel {
