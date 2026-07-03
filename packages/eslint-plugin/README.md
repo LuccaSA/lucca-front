@@ -268,11 +268,8 @@ rules: {
 ## 📋 Known violations in this repository
 
 - Existing violations are suppressed with an explaining inline `eslint-disable` comment, not fixed.
+- Each comment names the deprecated class and its replacement.
 - Find them all with `grep -r "eslint-disable.*no-deprecated-classes"`.
-
-| File                                                                          | Class          | Status                                                              |
-| ----------------------------------------------------------------------------- | -------------- | ------------------------------------------------------------------- |
-| `packages/ng/forms/rich-text-input/plugins/link/link-dialog/link-dialog.component.html` | `.dialog-form` | Deprecated since LF 18.3.0, removed in 22.0.0 — replace with `.dialog-inside-formOptional` |
 
 ---
 
