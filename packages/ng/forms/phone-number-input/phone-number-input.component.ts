@@ -126,10 +126,19 @@ export class PhoneNumberInputComponent implements FormValueControl<string> {
 			if (!rawValue) {
 				return { value: '' };
 			}
-			const { number, isValid } = tryParsePhoneNumber(rawValue, untracked(() => this.countryCode()));
+			const { number, isValid } = tryParsePhoneNumber(
+				rawValue,
+				untracked(() => this.countryCode()),
+			);
 			return isValid ? { value: number } : { value: number, error: { kind: 'phoneNumber' } };
 		},
-		format: (value) => (value ? (tryParsePhoneNumber(value, untracked(() => this.countryCode())).nationalNumber ?? value) : ''),
+		format: (value) =>
+			value
+				? (tryParsePhoneNumber(
+						value,
+						untracked(() => this.countryCode()),
+					).nationalNumber ?? value)
+				: '',
 	});
 
 	readonly prefixEntry = computed(() => this.#prefixEntries().find((p) => p.country === this.countryCode()));
