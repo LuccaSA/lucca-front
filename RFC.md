@@ -42,14 +42,18 @@ Non-objectifs :
 
 ```ts
 const model = signal<Employee>({ lastName: '', email: '', departmentId: null });
-const employeeForm = form(model, p => {
-	required(p.lastName);
-	email(p.email);
-	hidden(p.departmentId, ({ valueOf }) => valueOf(p.lastName) === '');
-}, { submission: { action: async f => saveEmployee(f().value()) } });
+const employeeForm = form(
+  model,
+  (p) => {
+    required(p.lastName);
+    email(p.email);
+    hidden(p.departmentId, ({ valueOf }) => valueOf(p.lastName) === '');
+  },
+  { submission: { action: async (f) => saveEmployee(f().value()) } },
+);
 
-employeeForm.email;            // FieldTree<string> — nœud navigable
-employeeForm.email();          // FieldState : value, errors(), touched(), required(), hidden(), disabled()…
+employeeForm.email; // FieldTree<string> — nœud navigable
+employeeForm.email(); // FieldState : value, errors(), touched(), required(), hidden(), disabled()…
 ```
 
 Points exploités par le builder :
@@ -66,14 +70,11 @@ Angular 22 permet la création dynamique **avec directives et bindings réactifs
 
 ```ts
 viewContainerRef.createComponent(LuMultiSelectInputComponent, {
-	directives: [
-		{ type: FormField, bindings: [inputBinding('formField', () => this.field)] },
-		{ type: LuCoreSelectUsersDirective, bindings: [inputBinding('enableFormerEmployees', () => true)] },
-	],
-	bindings: [
-		inputBinding('placeholder', () => 'Choisir…'),
-		outputBinding('panelOpened', () => this.trackOpen()),
-	],
+  directives: [
+    { type: FormField, bindings: [inputBinding('formField', () => this.field)] },
+    { type: LuCoreSelectUsersDirective, bindings: [inputBinding('enableFormerEmployees', () => true)] },
+  ],
+  bindings: [inputBinding('placeholder', () => 'Choisir…'), outputBinding('panelOpened', () => this.trackOpen())],
 });
 ```
 
@@ -85,7 +86,7 @@ viewContainerRef.createComponent(LuMultiSelectInputComponent, {
 
 ## 3. Principes de design
 
-1. **Le schema signal forms est écrit par le consommateur, en API native.** Le builder ne wrappe jamais `required()`/`validate()`/`applyWhen()` derrière son propre vocabulaire (au pire il les *replace* syntaxiquement, Design A).
+1. **Le schema signal forms est écrit par le consommateur, en API native.** Le builder ne wrappe jamais `required()`/`validate()`/`applyWhen()` derrière son propre vocabulaire (au pire il les _replace_ syntaxiquement, Design A).
 2. **Un champ = (FieldTree, Type de brique, inputs typés, outputs typés, directives typées, options de wrapper).** Rien de plus. Tout ce que le composant sait faire est accessible.
 3. **Le renderer est bête** : il instancie `lu-form-field` + brique + directives, branche `FormField`, lit `hidden()`. Toute l'intelligence (validation, conditionnels, arrays) vit dans signal forms.
 4. **Échappatoires partout** : accès au `ComponentRef` créé, insertion de composants/templates arbitraires, rendu champ-par-champ possible hors renderer global.
@@ -98,34 +99,33 @@ viewContainerRef.createComponent(LuMultiSelectInputComponent, {
 
 ```ts
 type UnwrapInput<T> =
-	T extends InputSignalWithTransform<unknown, infer W> ? W
-	: T extends InputSignal<infer V> ? V
-	: T extends ModelSignal<infer V> ? V
-	: never;
+  T extends InputSignalWithTransform<unknown, infer W>
+    ? W
+    : T extends InputSignal<infer V>
+      ? V
+      : T extends ModelSignal<infer V>
+        ? V
+        : never;
 
 /** Valeur statique, ou fonction réactive (re-bindée quand ses signals changent). */
 type BindableValue<T> = T | (() => T);
 
 export type LuInputsOf<C> = {
-	[K in keyof C as C[K] extends InputSignal<unknown> | InputSignalWithTransform<unknown, unknown> | ModelSignal<unknown> ? K : never]?:
-		BindableValue<UnwrapInput<C[K]>>;
+  [K in keyof C as C[K] extends InputSignal<unknown> | InputSignalWithTransform<unknown, unknown> | ModelSignal<unknown>
+    ? K
+    : never]?: BindableValue<UnwrapInput<C[K]>>;
 };
 
 export type LuOutputsOf<C> = {
-	[K in keyof C as C[K] extends OutputRef<unknown> ? K : never]?:
-		(event: C[K] extends OutputRef<infer E> ? E : never) => void;
+  [K in keyof C as C[K] extends OutputRef<unknown> ? K : never]?: (event: C[K] extends OutputRef<infer E> ? E : never) => void;
 };
 
 export type LuModelsOf<C> = {
-	[K in keyof C as C[K] extends ModelSignal<unknown> ? K : never]?:
-		WritableSignal<C[K] extends ModelSignal<infer V> ? V : never>;
+  [K in keyof C as C[K] extends ModelSignal<unknown> ? K : never]?: WritableSignal<C[K] extends ModelSignal<infer V> ? V : never>;
 };
 
 /** Type de valeur d'une brique, dérivé du contrat signal forms — clef de voûte du typage du builder. */
-export type LuValueOf<C> =
-	C extends FormValueControl<infer V> ? V
-	: C extends FormCheckboxControl ? boolean
-	: never;
+export type LuValueOf<C> = C extends FormValueControl<infer V> ? V : C extends FormCheckboxControl ? boolean : never;
 ```
 
 - `inputs.placeholder: 'Rechercher…'` → `inputBinding('placeholder', () => 'Rechercher…')`.
@@ -137,13 +137,13 @@ export type LuValueOf<C> =
 
 ```ts
 export interface LuDirectiveDef<D> {
-	type: Type<D>;
-	inputs?: LuInputsOf<D>;
-	outputs?: LuOutputsOf<D>;
+  type: Type<D>;
+  inputs?: LuInputsOf<D>;
+  outputs?: LuOutputsOf<D>;
 }
 
 export function attach<D>(type: Type<D>, opts?: Omit<LuDirectiveDef<D>, 'type'>): LuDirectiveDef<D> {
-	return { type, ...opts };
+  return { type, ...opts };
 }
 ```
 
@@ -157,14 +157,14 @@ Composant interne `LuFieldHostComponent` (un par champ), dont le template contie
 
 ```html
 @if (!fieldState().hidden()) {
-	<lu-form-field
-		[label]="def.label"
-		[field]="def.field"                       <!-- nouvel input, cf. §4.4 -->
-		[tooltip]="wrapper.tooltip ?? null"
-		[size]="wrapper.size ?? null"
-		[inlineMessage]="wrapper.inlineMessage ?? null" …>
-		<ng-container #controlOutlet />
-	</lu-form-field>
+ <lu-form-field
+  [label]="def.label"
+  [field]="def.field"                       <!-- nouvel input, cf. §4.4 -->
+  [tooltip]="wrapper.tooltip ?? null"
+  [size]="wrapper.size ?? null"
+  [inlineMessage]="wrapper.inlineMessage ?? null" …>
+  <ng-container #controlOutlet />
+ </lu-form-field>
 }
 ```
 
@@ -186,7 +186,7 @@ Composant interne `LuFieldHostComponent` (un par champ), dont le template contie
    - `required` ← `field().required()` (metadata auto des validators) ;
    - invalid ← `field().invalid() && field().touched()` ;
    - erreurs ← `field().errors()` rendues automatiquement dans le `lu-inline-message` d'erreur (mapping messages §4.5), sauf si `errorInlineMessage` est fourni (priorité au consommateur).
-   Remplace la détection par content queries, inopérante en dynamique. Utile aussi hors builder (usage template classique avec signal forms).
+     Remplace la détection par content queries, inopérante en dynamique. Utile aussi hors builder (usage template classique avec signal forms).
 
 La rétro-compat est préservée (`formControl`/`ngModel`/content queries continuent de fonctionner) ; seul `generateMirrorControl()` disparaît, remplacé par le contrat natif.
 
@@ -212,30 +212,33 @@ Les erreurs serveur (retour de `submit()`) transitent par le même canal (`field
 function luForm<TModel>(model: WritableSignal<TModel>, config: LuFormConfig<TModel>): LuBuiltForm<TModel>;
 
 interface LuFormConfig<TModel> {
-	/** Schema signal forms natif, appliqué en plus des validate par champ (cross-field, applyWhen…). */
-	schema?: SchemaFn<TModel>;
-	fields: LuFieldsConfig<TModel>;          // clés = clés du modèle (typé), récursif sur les objets
-	layout?: LuLayoutNode<TModel>[];         // défaut : ordre de déclaration, un champ par ligne
-	submission?: FormSubmitOptions<TModel>;  // passé tel quel à form()
+  /** Schema signal forms natif, appliqué en plus des validate par champ (cross-field, applyWhen…). */
+  schema?: SchemaFn<TModel>;
+  fields: LuFieldsConfig<TModel>; // clés = clés du modèle (typé), récursif sur les objets
+  layout?: LuLayoutNode<TModel>[]; // défaut : ordre de déclaration, un champ par ligne
+  submission?: FormSubmitOptions<TModel>; // passé tel quel à form()
 }
 
-function luField<C extends FormValueControl<unknown> | FormCheckboxControl>(component: Type<C>, def: {
-	label: PortalContent;
-	/** Validation locale au champ, en API signal forms native. */
-	validate?: (p: SchemaPath<LuValueOf<C>>) => void;
-	inputs?: LuInputsOf<C>;
-	outputs?: LuOutputsOf<C>;
-	models?: LuModelsOf<C>;
-	directives?: LuDirectiveDef<unknown>[];
-	wrapper?: LuWrapperOptions;              // tooltip, size, inlineMessage, hiddenLabel, width…
-	errorMessages?: LuErrorMessages;
-}): LuFieldConfig<C>;
+function luField<C extends FormValueControl<unknown> | FormCheckboxControl>(
+  component: Type<C>,
+  def: {
+    label: PortalContent;
+    /** Validation locale au champ, en API signal forms native. */
+    validate?: (p: SchemaPath<LuValueOf<C>>) => void;
+    inputs?: LuInputsOf<C>;
+    outputs?: LuOutputsOf<C>;
+    models?: LuModelsOf<C>;
+    directives?: LuDirectiveDef<unknown>[];
+    wrapper?: LuWrapperOptions; // tooltip, size, inlineMessage, hiddenLabel, width…
+    errorMessages?: LuErrorMessages;
+  },
+): LuFieldConfig<C>;
 // La clé du modèle doit porter un type assignable à LuValueOf<C> — vérifié par le type LuFieldsConfig<TModel>.
 
 interface LuBuiltForm<TModel> {
-	readonly form: FieldTree<TModel>;        // le FieldTree natif — PAS caché
-	readonly nodes: LuRenderNode[];          // consommé par <lu-form-renderer>
-	submit(): Promise<boolean>;              // délègue à submit(this.form)
+  readonly form: FieldTree<TModel>; // le FieldTree natif — PAS caché
+  readonly nodes: LuRenderNode[]; // consommé par <lu-form-renderer>
+  submit(): Promise<boolean>; // délègue à submit(this.form)
 }
 ```
 
@@ -243,108 +246,123 @@ interface LuBuiltForm<TModel> {
 
 ```ts
 interface EmployeeModel {
-	lastName: string;
-	email: string;
-	birthDate: Date | null;
-	departmentId: number | null;
-	managerIds: number[];
-	contractType: 'cdi' | 'cdd' | null;
-	remote: boolean;
+  lastName: string;
+  email: string;
+  birthDate: Date | null;
+  departmentId: number | null;
+  managerIds: number[];
+  contractType: 'cdi' | 'cdd' | null;
+  remote: boolean;
 }
 
 @Component({
-	selector: 'app-employee-form',
-	imports: [LuFormRenderer, FormRoot, ButtonComponent],
-	template: `
-		<form luForm [formRoot]="ef.form">
-			<lu-form-renderer [form]="ef" />
-			<button luButton type="submit" [disabled]="ef.form().submitting()">Enregistrer</button>
-		</form>
-	`,
+  selector: 'app-employee-form',
+  imports: [LuFormRenderer, FormRoot, ButtonComponent],
+  template: `
+    <form luForm [formRoot]="ef.form">
+      <lu-form-renderer [form]="ef" />
+      <button luButton type="submit" [disabled]="ef.form().submitting()">Enregistrer</button>
+    </form>
+  `,
 })
 export class EmployeeFormComponent {
-	readonly #api = inject(EmployeeApi);
-	readonly model = signal<EmployeeModel>({
-		lastName: '', email: '', birthDate: null,
-		departmentId: null, managerIds: [], contractType: null, remote: false,
-	});
+  readonly #api = inject(EmployeeApi);
+  readonly model = signal<EmployeeModel>({
+    lastName: '',
+    email: '',
+    birthDate: null,
+    departmentId: null,
+    managerIds: [],
+    contractType: null,
+    remote: false,
+  });
 
-	readonly ef = luForm(this.model, {
-		// cross-field / conditionnel : API signal forms native, non wrappée
-		schema: p => {
-			hidden(p.managerIds, ({ valueOf }) => valueOf(p.departmentId) === null);
-			applyWhen(p, ({ value }) => value().contractType === 'cdd', pp => {
-				// …règles spécifiques CDD
-			});
-		},
-		fields: {
-			lastName: luField(TextInputComponent, {
-				label: 'Nom',
-				validate: p => { required(p); maxLength(p, 100); },
-				inputs: { placeholder: 'Dupont', hasClearer: true },
-				outputs: { blur: () => this.trackBlur('lastName') },
-			}),
-			email: luField(TextInputComponent, {
-				label: 'Email',
-				validate: p => { required(p); email(p); },
-				inputs: { type: 'email' },
-				errorMessages: { email: 'Adresse invalide (ex : jean@lucca.fr)' },
-			}),
-			birthDate: luField(DateInputComponent, {
-				label: 'Date de naissance',
-				validate: p => maxDate(p, new Date()),
-				inputs: { clearable: true },
-			}),
-			departmentId: luField(LuSimpleSelectInputComponent<LuDepartment>, {
-				label: 'Département',
-				validate: p => required(p),
-				inputs: { clearable: true, placeholder: 'Choisir un département…' },
-				directives: [attach(LuCoreSelectDepartmentsDirective)],
-			}),
-			managerIds: luField(LuMultiSelectInputComponent<LuUser>, {
-				label: 'Managers',
-				inputs: { keepSearchAfterSelection: true },
-				directives: [
-					attach(LuCoreSelectUsersDirective, { inputs: { enableFormerEmployees: false } }),
-					attach(LuMultiSelectWithSelectAllDirective),
-				],
-				outputs: { panelOpened: () => this.trackOpen('managers') },
-			}),
-			contractType: luField(RadioGroupInputComponent, {
-				label: 'Contrat',
-				validate: p => required(p),
-				inputs: { framed: true },
-				wrapper: { layout: 'fieldset' },
-				// options de radio : cf. §9.4 (host interne @for → lu-radio)
-				radioOptions: [
-					{ value: 'cdi', label: 'CDI' },
-					{ value: 'cdd', label: 'CDD' },
-				],
-			}),
-			remote: luField(SwitchInputComponent, { label: 'Télétravail' }),
-		},
-		layout: [
-			luFieldset('Identité', ['lastName', 'email', 'birthDate']),
-			luFieldset('Organisation', [luRow('departmentId', 'managerIds'), 'contractType', 'remote']),
-		],
-		submission: {
-			action: async f => {
-				const res = await this.#api.save(f().value());
-				return res.ok ? undefined : { kind: 'server', message: res.error };
-			},
-		},
-	});
+  readonly ef = luForm(this.model, {
+    // cross-field / conditionnel : API signal forms native, non wrappée
+    schema: (p) => {
+      hidden(p.managerIds, ({ valueOf }) => valueOf(p.departmentId) === null);
+      applyWhen(
+        p,
+        ({ value }) => value().contractType === 'cdd',
+        (pp) => {
+          // …règles spécifiques CDD
+        },
+      );
+    },
+    fields: {
+      lastName: luField(TextInputComponent, {
+        label: 'Nom',
+        validate: (p) => {
+          required(p);
+          maxLength(p, 100);
+        },
+        inputs: { placeholder: 'Dupont', hasClearer: true },
+        outputs: { blur: () => this.trackBlur('lastName') },
+      }),
+      email: luField(TextInputComponent, {
+        label: 'Email',
+        validate: (p) => {
+          required(p);
+          email(p);
+        },
+        inputs: { type: 'email' },
+        errorMessages: { email: 'Adresse invalide (ex : jean@lucca.fr)' },
+      }),
+      birthDate: luField(DateInputComponent, {
+        label: 'Date de naissance',
+        validate: (p) => maxDate(p, new Date()),
+        inputs: { clearable: true },
+      }),
+      departmentId: luField(LuSimpleSelectInputComponent<LuDepartment>, {
+        label: 'Département',
+        validate: (p) => required(p),
+        inputs: { clearable: true, placeholder: 'Choisir un département…' },
+        directives: [attach(LuCoreSelectDepartmentsDirective)],
+      }),
+      managerIds: luField(LuMultiSelectInputComponent<LuUser>, {
+        label: 'Managers',
+        inputs: { keepSearchAfterSelection: true },
+        directives: [
+          attach(LuCoreSelectUsersDirective, { inputs: { enableFormerEmployees: false } }),
+          attach(LuMultiSelectWithSelectAllDirective),
+        ],
+        outputs: { panelOpened: () => this.trackOpen('managers') },
+      }),
+      contractType: luField(RadioGroupInputComponent, {
+        label: 'Contrat',
+        validate: (p) => required(p),
+        inputs: { framed: true },
+        wrapper: { layout: 'fieldset' },
+        // options de radio : cf. §9.4 (host interne @for → lu-radio)
+        radioOptions: [
+          { value: 'cdi', label: 'CDI' },
+          { value: 'cdd', label: 'CDD' },
+        ],
+      }),
+      remote: luField(SwitchInputComponent, { label: 'Télétravail' }),
+    },
+    layout: [
+      luFieldset('Identité', ['lastName', 'email', 'birthDate']),
+      luFieldset('Organisation', [luRow('departmentId', 'managerIds'), 'contractType', 'remote']),
+    ],
+    submission: {
+      action: async (f) => {
+        const res = await this.#api.save(f().value());
+        return res.ok ? undefined : { kind: 'server', message: res.error };
+      },
+    },
+  });
 }
 ```
 
 ### 5.3 Analyse
 
-| ✅ | ❌ |
-| --- | --- |
-| Une seule déclaration, lisible top-down, très proche de formly (migration mentale facile) | `validate` par champ + `schema` global = **deux endroits** pour la validation ; la frontière (cross-field → schema) doit être apprise |
-| Le builder possède tout le cycle (il peut optimiser, générer le layout par défaut, dériver des stories) | `form()` est appelé par le builder → le `FieldTree` existe *après* la config ; impossible de référencer `this.ef.form.email` *dans* la config (d'où les clés string typées) |
-| Clés du modèle vérifiées par le compilateur (`fields: { lastNam: … }` = erreur) | Champs non-feuilles (objets imbriqués) : la config devient récursive, le typage aussi — coût de maintenance du type `LuFieldsConfig` |
-| `layout` par références de clés = compact | Toute la souplesse "je mets ce que je veux où je veux" passe par des nœuds spéciaux (`luCustom`, `luTemplate`) |
+| ✅                                                                                                      | ❌                                                                                                                                                                          |
+| ------------------------------------------------------------------------------------------------------- | --------------------------------------------------------------------------------------------------------------------------------------------------------------------------- |
+| Une seule déclaration, lisible top-down, très proche de formly (migration mentale facile)               | `validate` par champ + `schema` global = **deux endroits** pour la validation ; la frontière (cross-field → schema) doit être apprise                                       |
+| Le builder possède tout le cycle (il peut optimiser, générer le layout par défaut, dériver des stories) | `form()` est appelé par le builder → le `FieldTree` existe _après_ la config ; impossible de référencer `this.ef.form.email` _dans_ la config (d'où les clés string typées) |
+| Clés du modèle vérifiées par le compilateur (`fields: { lastNam: … }` = erreur)                         | Champs non-feuilles (objets imbriqués) : la config devient récursive, le typage aussi — coût de maintenance du type `LuFieldsConfig`                                        |
+| `layout` par références de clés = compact                                                               | Toute la souplesse "je mets ce que je veux où je veux" passe par des nœuds spéciaux (`luCustom`, `luTemplate`)                                                              |
 
 **Verdict si retenu seul** : bonne DX de départ, mais le double canal de validation et la config récursive typée sont les points durs. La réponse ferme : viable, à condition d'assumer `validate` = sucre optionnel et de documenter "dès que c'est cross-field → `schema`".
 
@@ -352,21 +370,25 @@ export class EmployeeFormComponent {
 
 ## 6. Design B — « Signal-forms-first » (form natif + vue séparée)
 
-**Philosophie** : le consommateur écrit `form()` **exactement comme la doc Angular**. Le builder n'est qu'une *vue* : une liste ordonnée de champs, chacun pointant un `FieldTree`. Zéro recouvrement avec signal forms.
+**Philosophie** : le consommateur écrit `form()` **exactement comme la doc Angular**. Le builder n'est qu'une _vue_ : une liste ordonnée de champs, chacun pointant un `FieldTree`. Zéro recouvrement avec signal forms.
 
 ### 6.1 API
 
 ```ts
-function luField<C extends FormValueControl<unknown> | FormCheckboxControl>(field: FieldTree<LuValueOf<C>>, component: Type<C>, def: {
-	label: PortalContent;
-	inputs?: LuInputsOf<C>;
-	outputs?: LuOutputsOf<C>;
-	models?: LuModelsOf<C>;
-	directives?: LuDirectiveDef<unknown>[];
-	wrapper?: LuWrapperOptions;
-	errorMessages?: LuErrorMessages;
-	onRendered?: (ref: ComponentRef<C>) => void;
-}): LuFieldNode<C>;
+function luField<C extends FormValueControl<unknown> | FormCheckboxControl>(
+  field: FieldTree<LuValueOf<C>>,
+  component: Type<C>,
+  def: {
+    label: PortalContent;
+    inputs?: LuInputsOf<C>;
+    outputs?: LuOutputsOf<C>;
+    models?: LuModelsOf<C>;
+    directives?: LuDirectiveDef<unknown>[];
+    wrapper?: LuWrapperOptions;
+    errorMessages?: LuErrorMessages;
+    onRendered?: (ref: ComponentRef<C>) => void;
+  },
+): LuFieldNode<C>;
 // FieldTree<Date | null> + TextInputComponent (FormValueControl<string>) = erreur de compilation.
 
 /** Nœuds de structure : mêmes briques de layout que Design A. */
@@ -386,83 +408,89 @@ Template : `<lu-form-renderer [view]="view" />` — le renderer ne connaît pas 
 
 ```ts
 @Component({
-	selector: 'app-employee-form',
-	imports: [LuFormRenderer, FormRoot, ButtonComponent],
-	template: `
-		<form luForm [formRoot]="employeeForm">
-			<lu-form-renderer [view]="view" />
-			<button luButton type="submit" [disabled]="employeeForm().submitting()">Enregistrer</button>
-		</form>
-	`,
+  selector: 'app-employee-form',
+  imports: [LuFormRenderer, FormRoot, ButtonComponent],
+  template: `
+    <form luForm [formRoot]="employeeForm">
+      <lu-form-renderer [view]="view" />
+      <button luButton type="submit" [disabled]="employeeForm().submitting()">Enregistrer</button>
+    </form>
+  `,
 })
 export class EmployeeFormComponent {
-	readonly #api = inject(EmployeeApi);
-	readonly model = signal<EmployeeModel>({ /* … */ });
+  readonly #api = inject(EmployeeApi);
+  readonly model = signal<EmployeeModel>({
+    /* … */
+  });
 
-	// ── 1. Le form : 100 % API Angular, rien de Lucca ─────────────────────────
-	readonly employeeForm = form(this.model, p => {
-		required(p.lastName);
-		maxLength(p.lastName, 100);
-		required(p.email);
-		email(p.email);
-		maxDate(p.birthDate, new Date());
-		required(p.departmentId);
-		required(p.contractType);
-		hidden(p.managerIds, ({ valueOf }) => valueOf(p.departmentId) === null);
-	}, {
-		submission: {
-			action: async f => {
-				const res = await this.#api.save(f().value());
-				return res.ok ? undefined : { kind: 'server', message: res.error };
-			},
-		},
-	});
+  // ── 1. Le form : 100 % API Angular, rien de Lucca ─────────────────────────
+  readonly employeeForm = form(
+    this.model,
+    (p) => {
+      required(p.lastName);
+      maxLength(p.lastName, 100);
+      required(p.email);
+      email(p.email);
+      maxDate(p.birthDate, new Date());
+      required(p.departmentId);
+      required(p.contractType);
+      hidden(p.managerIds, ({ valueOf }) => valueOf(p.departmentId) === null);
+    },
+    {
+      submission: {
+        action: async (f) => {
+          const res = await this.#api.save(f().value());
+          return res.ok ? undefined : { kind: 'server', message: res.error };
+        },
+      },
+    },
+  );
 
-	// ── 2. La vue : liste de briques LF pointant les FieldTree ────────────────
-	readonly view = luFormView([
-		luFieldset('Identité', [
-			luField(this.employeeForm.lastName, TextInputComponent, {
-				label: 'Nom',
-				inputs: { placeholder: 'Dupont', hasClearer: true },
-				outputs: { blur: () => this.trackBlur('lastName') },
-			}),
-			luField(this.employeeForm.email, TextInputComponent, {
-				label: 'Email',
-				inputs: { type: 'email' },
-				errorMessages: { email: 'Adresse invalide (ex : jean@lucca.fr)' },
-			}),
-			luField(this.employeeForm.birthDate, DateInputComponent, {
-				label: 'Date de naissance',
-				inputs: { clearable: true },
-			}),
-		]),
-		luFieldset('Organisation', [
-			luRow(
-				luField(this.employeeForm.departmentId, LuSimpleSelectInputComponent<LuDepartment>, {
-					label: 'Département',
-					inputs: { clearable: true, placeholder: 'Choisir un département…' },
-					directives: [attach(LuCoreSelectDepartmentsDirective)],
-				}),
-				luField(this.employeeForm.managerIds, LuMultiSelectInputComponent<LuUser>, {
-					label: 'Managers',
-					inputs: { keepSearchAfterSelection: true },
-					directives: [
-						attach(LuCoreSelectUsersDirective, { inputs: { enableFormerEmployees: false } }),
-						attach(LuMultiSelectWithSelectAllDirective),
-					],
-				}),
-			),
-			luRadioGroup(this.employeeForm.contractType, {
-				label: 'Contrat',
-				framed: true,
-				options: [
-					{ value: 'cdi', label: 'CDI' },
-					{ value: 'cdd', label: 'CDD' },
-				],
-			}),
-			luField(this.employeeForm.remote, SwitchInputComponent, { label: 'Télétravail' }),
-		]),
-	]);
+  // ── 2. La vue : liste de briques LF pointant les FieldTree ────────────────
+  readonly view = luFormView([
+    luFieldset('Identité', [
+      luField(this.employeeForm.lastName, TextInputComponent, {
+        label: 'Nom',
+        inputs: { placeholder: 'Dupont', hasClearer: true },
+        outputs: { blur: () => this.trackBlur('lastName') },
+      }),
+      luField(this.employeeForm.email, TextInputComponent, {
+        label: 'Email',
+        inputs: { type: 'email' },
+        errorMessages: { email: 'Adresse invalide (ex : jean@lucca.fr)' },
+      }),
+      luField(this.employeeForm.birthDate, DateInputComponent, {
+        label: 'Date de naissance',
+        inputs: { clearable: true },
+      }),
+    ]),
+    luFieldset('Organisation', [
+      luRow(
+        luField(this.employeeForm.departmentId, LuSimpleSelectInputComponent<LuDepartment>, {
+          label: 'Département',
+          inputs: { clearable: true, placeholder: 'Choisir un département…' },
+          directives: [attach(LuCoreSelectDepartmentsDirective)],
+        }),
+        luField(this.employeeForm.managerIds, LuMultiSelectInputComponent<LuUser>, {
+          label: 'Managers',
+          inputs: { keepSearchAfterSelection: true },
+          directives: [
+            attach(LuCoreSelectUsersDirective, { inputs: { enableFormerEmployees: false } }),
+            attach(LuMultiSelectWithSelectAllDirective),
+          ],
+        }),
+      ),
+      luRadioGroup(this.employeeForm.contractType, {
+        label: 'Contrat',
+        inputs: { framed: true },
+        options: [
+          { value: 'cdi', label: 'CDI' },
+          { value: 'cdd', label: 'CDD' },
+        ],
+      }),
+      luField(this.employeeForm.remote, SwitchInputComponent, { label: 'Télétravail' }),
+    ]),
+  ]);
 }
 ```
 
@@ -473,12 +501,12 @@ export class EmployeeFormComponent {
 
 ### 6.3 Analyse
 
-| ✅ | ❌ |
-| --- | --- |
-| **Zéro API de validation/état inventée** — la doc Angular s'applique mot pour mot, y compris les évolutions futures (on ne court pas derrière) | Deux blocs à écrire (schema + vue) ; l'ordre des champs est répété entre le modèle et la vue |
-| Le `FieldTree` est déjà là → autocomplete réel (`this.employeeForm.dep…`), refactoring safe, navigation IDE | Un champ oublié dans la vue ne provoque pas d'erreur de compilation (mitigable : assertion dev-mode du renderer « fields du form non couverts par la vue », opt-out) |
-| La vue est une simple liste → composable, découpable en fonctions privées, réutilisable (sous-vues partagées entre create/edit) | Verbosité unitaire un peu plus élevée que A (le nom du champ apparaît deux fois : schema + vue) |
-| Renderer trivial (aucune compilation de config), surface de bug minimale | — |
+| ✅                                                                                                                                             | ❌                                                                                                                                                                   |
+| ---------------------------------------------------------------------------------------------------------------------------------------------- | -------------------------------------------------------------------------------------------------------------------------------------------------------------------- |
+| **Zéro API de validation/état inventée** — la doc Angular s'applique mot pour mot, y compris les évolutions futures (on ne court pas derrière) | Deux blocs à écrire (schema + vue) ; l'ordre des champs est répété entre le modèle et la vue                                                                         |
+| Le `FieldTree` est déjà là → autocomplete réel (`this.employeeForm.dep…`), refactoring safe, navigation IDE                                    | Un champ oublié dans la vue ne provoque pas d'erreur de compilation (mitigable : assertion dev-mode du renderer « fields du form non couverts par la vue », opt-out) |
+| La vue est une simple liste → composable, découpable en fonctions privées, réutilisable (sous-vues partagées entre create/edit)                | Verbosité unitaire un peu plus élevée que A (le nom du champ apparaît deux fois : schema + vue)                                                                      |
+| Renderer trivial (aucune compilation de config), surface de bug minimale                                                                       | —                                                                                                                                                                    |
 
 **Verdict si retenu seul** : le plus aligné avec les contraintes (§1). La verbosité se traite par la couche C ci-dessous, pas en réintroduisant une config.
 
@@ -486,60 +514,98 @@ export class EmployeeFormComponent {
 
 ## 7. Design C — DSL par brique (couche sucre, compatible A et B)
 
-**Philosophie** : des factories **par brique** qui aplatissent `inputs`/`wrapper` dans un seul objet d'options (toujours dérivé des vrais inputs — pas de renommage), pré-câblent les directives connues, et fixent le type de valeur attendu par brique. C'est une couche au-dessus du `luField` générique, jamais un remplacement : `luField` reste l'échappatoire universelle.
+**Philosophie** : des factories **par brique** qui fixent le composant et le type de valeur attendu. Les options gardent la même forme que `luField` (`inputs`/`wrapper`/`outputs` séparés, toujours dérivés des vrais inputs — pas de renommage ni d'aplatissement). Les directives s'attachent via des **features** (pattern `provideHttpClient(withInterceptors(…))`) exportées par l'entry de chaque directive — `form-builder` n'importe **aucune** directive. C'est une couche au-dessus du `luField` générique, jamais un remplacement : `luField` reste l'échappatoire universelle.
 
 ### 7.1 API (extraits)
 
 ```ts
-// Chaque factory contraint le type du FieldTree accepté :
-function luText(field: FieldTree<string>, opts: { label: PortalContent } & LuInputsOf<TextInputComponent> & LuWrapperOptions & LuFieldExtras<TextInputComponent>): LuFieldNode;
-function luNumber(field: FieldTree<number | null>, opts: …NumberInputComponent…): LuFieldNode;
-function luCheckbox(field: FieldTree<boolean>, opts: …): LuFieldNode;
-function luSwitch(field: FieldTree<boolean>, opts: …): LuFieldNode;
-function luDate(field: FieldTree<Date | null>, opts: …DateInputComponent…): LuFieldNode;
-function luTextarea(field: FieldTree<string>, opts: …): LuFieldNode;
-function luRadioGroup<T>(field: FieldTree<T>, opts: { options: LuRadioOption<T>[]; … }): LuFieldNode;
-
-// Selects : builder chaînable pour les sources (les directives restent visibles/attachables à la main)
-function luSelect<T>(field: FieldTree<T | null>, opts?: …): LuSelectNodeBuilder<T>;
-function luMultiSelect<T>(field: FieldTree<T[]>, opts?: …): LuMultiSelectNodeBuilder<T>;
-
-interface LuSelectNodeBuilder<T> extends LuFieldNode {
-	options(source: BindableValue<readonly T[]> | SelectDataSource<T>): this;
-	apiV4(url: BindableValue<string>, opts?: LuInputsOf<LuCoreSelectApiV4Directive>): this;
-	apiV3(url: BindableValue<string>, opts?: …): this;
-	users(opts?: LuInputsOf<LuCoreSelectUsersDirective>): this;       // FieldTree<LuUser | null> exigé
-	departments(opts?: …): this;
-	establishments(opts?: …): this;
-	legalUnits(opts?: …): this;
-	jobQualifications(opts?: …): this;
-	occupationCategories(opts?: …): this;
-	displayer(component: Type<unknown> | TemplateRef<unknown>): this; // valueTpl / valuesTpl
-	option(component: Type<unknown> | TemplateRef<unknown>): this;    // optionTpl
-	directive<D>(type: Type<D>, opts?: { inputs?: LuInputsOf<D>; outputs?: LuOutputsOf<D> }): this; // échappatoire
+// Options communes : même forme que luField (def sans le composant), jamais aplaties.
+interface LuFieldOptions<C> {
+  label: PortalContent;
+  inputs?: LuInputsOf<C>;
+  outputs?: LuOutputsOf<C>;
+  models?: LuModelsOf<C>;
+  wrapper?: LuWrapperOptions;
+  errorMessages?: LuErrorMessages;
+  onRendered?: (ref: ComponentRef<C>) => void;
 }
-// LuMultiSelectNodeBuilder ajoute : withSelectAll(), totalCount(), keepSearchAfterSelection étant déjà un input
+
+// Chaque factory contraint le type du FieldTree accepté :
+function luText(field: FieldTree<string>, opts: LuFieldOptions<TextInputComponent>): LuFieldNode;
+function luNumber(field: FieldTree<number | null>, opts: LuFieldOptions<NumberInputComponent>): LuFieldNode;
+function luCheckbox(field: FieldTree<boolean>, opts: LuFieldOptions<CheckboxInputComponent>): LuFieldNode;
+function luSwitch(field: FieldTree<boolean>, opts: LuFieldOptions<SwitchInputComponent>): LuFieldNode;
+function luDate(field: FieldTree<Date | null>, opts: LuFieldOptions<DateInputComponent>): LuFieldNode;
+function luTextarea(field: FieldTree<string>, opts: LuFieldOptions<TextareaInputComponent>): LuFieldNode;
+function luRadioGroup<T>(
+  field: FieldTree<T>,
+  opts: LuFieldOptions<RadioGroupInputComponent> & { options: LuRadioOption<T>[] },
+): LuFieldNode;
+
+// Selects : sources et comportements attachés par features (rest params)
+function luSelect<T>(
+  field: FieldTree<T | null>,
+  opts: LuFieldOptions<LuSimpleSelectInputComponent<T>>,
+  ...features: LuSelectFeature<T>[]
+): LuFieldNode;
+function luMultiSelect<T>(
+  field: FieldTree<T[]>,
+  opts: LuFieldOptions<LuMultiSelectInputComponent<T>>,
+  ...features: LuMultiSelectFeature<T>[]
+): LuFieldNode;
+
+/** Une feature = un paquet de LuDirectiveDef pré-typés, rien d'autre. Défini dans form-builder. */
+interface LuSelectFeature<T> {
+  directives: LuDirectiveDef<unknown>[];
+  /** phantom brand : rend T invariant (sinon LuSelectFeature<LuUser> serait assignable par covariance) */
+  __value?: (v: T) => T;
+}
+interface LuMultiSelectFeature<T> extends LuSelectFeature<T> {
+  __multi?: true;
+}
 ```
 
-Chaque méthode `users()`/`departments()`/… ne fait *que* `this.directives.push(attach(LuCoreSelectUsersDirective, opts))` — la liste des méthodes est générée depuis les directives existantes et **chaque nouvelle directive core-select ajoute sa méthode** (règle de contribution documentée). Rien n'est fermé : `.directive(MaNouvelleDirective, …)` couvre l'écart.
+Les features sont exportées par **l'entry de leur directive**, pas par `form-builder` :
+
+```ts
+// @lucca-front/ng/core-select/user
+export function withUsers(opts?: LuInputsOf<LuCoreSelectUsersDirective>): LuSelectFeature<LuUser> {
+  return { directives: [attach(LuCoreSelectUsersDirective, { inputs: opts })] };
+}
+// @lucca-front/ng/core-select/api
+export function withApiV4<T>(url: BindableValue<string>, opts?: LuInputsOf<LuCoreSelectApiV4Directive>): LuSelectFeature<T>;
+// @lucca-front/ng/multi-select
+export function withSelectAll<T>(): LuMultiSelectFeature<T>;
+export function withTotalCount<T>(): LuMultiSelectFeature<T>;
+// idem withDepartments, withEstablishments, withLegalUnits, withJobQualifications, withOccupationCategories…
+```
+
+Conséquences structurelles :
+
+- **Dépendance inversée** : `form-builder` ne dépend d'aucune entry core-select ; chaque directive dépend (types seulement) de `form-builder` pour `LuSelectFeature`. Une nouvelle directive livre sa feature dans sa propre entry — aucun fichier central à patcher.
+- **Tree-shaking réel** : seules les features importées par l'app embarquent leur directive. Le builder chaînable (méthode par source sur une interface) aurait figé toutes les directives dans le bundle du builder.
+- Une feature peut embarquer **plusieurs** directives ou pré-câbler des inputs (ex. `withUsers` pourrait aussi poser le displayer user par défaut) — impossible proprement avec des méthodes chaînées.
+- Échappatoire inchangée : `attach()` accepté à côté des features (`luSelect(f, opts, withUsers(), attach(MaDirective, …))` — `LuDirectiveDef` est traité comme une feature à une directive).
 
 ### 7.2 Le même bloc « Organisation » avec la couche C
 
 ```ts
 luFieldset('Organisation', [
-	luRow(
-		luSelect(this.employeeForm.departmentId, { label: 'Département', clearable: true, placeholder: 'Choisir…' })
-			.departments(),
-		luMultiSelect(this.employeeForm.managerIds, { label: 'Managers', keepSearchAfterSelection: true })
-			.users({ enableFormerEmployees: false })
-			.withSelectAll(),
-	),
-	luRadioGroup(this.employeeForm.contractType, {
-		label: 'Contrat',
-		framed: true,
-		options: [{ value: 'cdi', label: 'CDI' }, { value: 'cdd', label: 'CDD' }],
-	}),
-	luSwitch(this.employeeForm.remote, { label: 'Télétravail' }),
+ luRow(
+  luSelect(this.employeeForm.departmentId, { label: 'Département', inputs: { clearable: true, placeholder: 'Choisir…' } },
+   withDepartments(),
+  ),
+  luMultiSelect(this.employeeForm.managerIds, { label: 'Managers', inputs: { keepSearchAfterSelection: true } },
+   withUsers({ enableFormerEmployees: false }),
+   withSelectAll(),
+  ),
+ ),
+ luRadioGroup(this.employeeForm.contractType, {
+  label: 'Contrat',
+  inputs: { framed: true },
+  options: [{ value: 'cdi', label: 'CDI' }, { value: 'cdd', label: 'CDD' }],
+ }),
+ luSwitch(this.employeeForm.remote, { label: 'Télétravail' }),
 ]),
 ```
 
@@ -554,31 +620,34 @@ luText(this.employeeForm.birthDate, { label: '…' })
 luSelect(this.employeeForm.managerIds, …)
 // ❌ FieldTree<number[]> → il faut luMultiSelect
 
-luMultiSelect(this.employeeForm.managerIds, { label: '…' }).users()
-// ❌ .users() exige FieldTree<LuUser[]> (ou surcharge id-based si LF en fournit une)
+luMultiSelect(this.employeeForm.managerIds, { label: '…' }, withUsers())
+// ❌ withUsers() est un LuSelectFeature<LuUser> : exige FieldTree<LuUser[]> (ou surcharge id-based si LF en fournit une)
+
+luSelect(this.employeeForm.departmentId, { label: '…' }, withSelectAll())
+// ❌ withSelectAll() est un LuMultiSelectFeature — refusé sur un simple select
 ```
 
 ### 7.4 Analyse
 
-| ✅ | ❌ |
-| --- | --- |
-| Densité maximale, découverte par autocomplete (`luSelect(…).` liste toutes les sources) | Une factory par brique à maintenir (mais triviale : ~10 lignes chacune, options = types dérivés) |
-| Erreurs de type plus lisibles que le générique (type attendu fixé par la factory) | L'aplatissement inputs+wrapper dans un seul objet impose d'éviter les collisions de noms (`size` existe des deux côtés → préfixe `wrapper: {…}` conservé pour les ambigus) |
-| Purement additif : émet des `LuFieldNode` standards, mixable librement avec `luField` générique | — |
+| ✅                                                                                                | ❌                                                                                                                                                                                          |
+| ------------------------------------------------------------------------------------------------- | ------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------- |
+| Densité maximale ; features tree-shakables, zéro dépendance de `form-builder` vers les directives | Une factory par brique + une feature par directive à maintenir (mais triviales : ~10 lignes chacune, options = types dérivés)                                                               |
+| Erreurs de type plus lisibles que le générique (type attendu fixé par la factory / la feature)    | Un cran plus verbeux qu'un objet aplati (`inputs: {…}` explicite) — assumé : zéro collision de noms brique/wrapper, et même forme d'options que `luField` (une seule grammaire à apprendre) |
+| Purement additif : émet des `LuFieldNode` standards, mixable librement avec `luField` générique   | Découvrabilité moindre qu'un builder chaînable (pas de `.` qui liste les sources) — mitigée par la convention de nommage `withX` et l'export depuis l'entry déjà connue de la directive     |
 
 ---
 
 ## 8. Comparatif et recommandation
 
-| Critère | A (config-first) | B (signal-forms-first) | C (DSL briques) |
-| --- | --- | --- | --- |
-| Alignement signal forms | Moyen (validation replacée) | **Maximal** | = B (couche au-dessus) |
-| Rien de caché (inputs/outputs/directives) | Oui | Oui | Oui (types dérivés) |
-| Verbosité | Faible | Moyenne | **Minimale** |
-| Typage valeur↔brique | Oui (contrat) | Oui (contrat) | Oui (contrat + factories) |
-| Coût d'implémentation / maintenance | Élevé (config récursive typée, compilation schema) | **Faible** | Moyen (n factories simples) |
-| Risque de divergence future avec Angular | Réel (chaque nouveauté schema doit être re-exposée) | Nul | Nul |
-| Champ oublié détecté à la compilation | Oui (clés du modèle) | Non (assertion runtime dev) | Non (idem B) |
+| Critère                                   | A (config-first)                                    | B (signal-forms-first)      | C (DSL briques)             |
+| ----------------------------------------- | --------------------------------------------------- | --------------------------- | --------------------------- |
+| Alignement signal forms                   | Moyen (validation replacée)                         | **Maximal**                 | = B (couche au-dessus)      |
+| Rien de caché (inputs/outputs/directives) | Oui                                                 | Oui                         | Oui (types dérivés)         |
+| Verbosité                                 | Faible                                              | Moyenne                     | **Minimale**                |
+| Typage valeur↔brique                      | Oui (contrat)                                       | Oui (contrat)               | Oui (contrat + factories)   |
+| Coût d'implémentation / maintenance       | Élevé (config récursive typée, compilation schema)  | **Faible**                  | Moyen (n factories simples) |
+| Risque de divergence future avec Angular  | Réel (chaque nouveauté schema doit être re-exposée) | Nul                         | Nul                         |
+| Champ oublié détecté à la compilation     | Oui (clés du modèle)                                | Non (assertion runtime dev) | Non (idem B)                |
 
 **Recommandation : B comme socle + C comme couche publique principale.** Le duo donne la densité de A sans dupliquer la validation, et chaque étage reste utilisable seul (`luField` générique → brique exotique ou composant maison ; `luFormView` → structure dynamique). A n'est pas retenu : son seul avantage exclusif (exhaustivité des clés vérifiée à la compilation) est obtenable en B par un check dev-mode, alors que son coût (deuxième grammaire de validation + config récursive) est permanent.
 
@@ -594,18 +663,18 @@ Signal forms : `applyEach` pour les règles, mutation du signal modèle pour la 
 
 ```ts
 readonly addressesForm = form(this.model, p => {
-	applyEach(p.addresses, addr => {
-		required(addr.street);
-		required(addr.city);
-	});
+ applyEach(p.addresses, addr => {
+  required(addr.street);
+  required(addr.city);
+ });
 });
 
 luRepeat(this.employeeForm.addresses, (addr, index) => [
-	luRow(
-		luText(addr.street, { label: 'Rue' }),
-		luText(addr.city, { label: 'Ville' }),
-	),
-	luCustom(RemoveAddressButton, { outputs: { remove: () => this.removeAddress(index()) } }),
+ luRow(
+  luText(addr.street, { label: 'Rue' }),
+  luText(addr.city, { label: 'Ville' }),
+ ),
+ luCustom(RemoveAddressButton, { outputs: { remove: () => this.removeAddress(index()) } }),
 ]),
 // Ajout : this.model.update(m => ({ ...m, addresses: [...m.addresses, emptyAddress()] }))
 ```
@@ -642,6 +711,7 @@ Inchangée par construction : c'est le vrai `lu-form-field` qui rend label/aria/
 - Nouvelle secondary entry **`@lucca-front/ng/form-builder`** (pattern existant : dossier + `ng-package.json` + `public-api.ts`).
 - `peerDependencies` du package : `@angular/core ^22`, `@angular/forms ^22` (le builder importe `@angular/forms/signals`) — la montée LF 22.0 est donc un prérequis (faite dans cette branche).
 - Aucune dépendance nouvelle.
+- Sens des dépendances entre entries : `form-builder` n'importe aucune entry de briques/directives ; les entries de directives qui livrent une feature (§7.1) importent `form-builder` (types `LuSelectFeature`/`LuDirectiveDef` + `attach`). Pas de cycle : `form-builder` ne référence jamais les entries de directives.
 
 ---
 
@@ -660,7 +730,6 @@ Inchangée par construction : c'est le vrai `lu-form-field` qui rend label/aria/
 - **Erreurs de parse `date2`** : valider que `ParseResult`/`transformedValue` couvre « saisie non parsable » + `min`/`max` côté contrôle ; sinon définir le fallback (erreur custom poussée dans le schema ? kind dédié ?). À instruire en début de phase 1 — c'est la seule inconnue API réelle.
 - **Contrainte du contrat** : `FormValueControl` exige l'absence de `checked`, `FormCheckboxControl` l'absence de `value` — audit de nommage des inputs existants par brique avant migration (collisions → renommages breaking).
 - **Bindings dynamiques sur les `model()`** (`optionTpl`, `calendarMode`…) : `twoWayBinding` exige un `WritableSignal` — OK, mais à vérifier brique par brique (certains models sont initialisés avec des composants par défaut).
-- **Collisions de noms inputs brique / options wrapper** dans la couche C (`size`, `placeholder`) : convention = l'input de la brique gagne, les options wrapper ambiguës restent sous `wrapper: {…}`.
 - **Interception du Enter dans les selects** (panel ouvert) déjà gérée par les briques ; à re-tester sous `FormRoot` (qui soumet via `submit()`).
 - **Ordre d'application des directives** dans `createComponent` : `FormField` est ajoutée en premier ; vérifier qu'aucune directive core-select ne dépend d'un ordre d'instanciation particulier vis-à-vis du canal valeur.
 - **Filter pills** : plusieurs briques implémentent `FilterPillInputComponent` — hors périmètre v1, mais le socle (création dynamique + directives) est réutilisable pour un futur builder de filter bar.
