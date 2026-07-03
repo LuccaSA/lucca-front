@@ -1,5 +1,6 @@
-import { ChangeDetectionStrategy, Component, computed, forwardRef, inject, input, LOCALE_ID, output, signal, ViewEncapsulation } from '@angular/core';
-import { AbstractControl, ControlValueAccessor, FormsModule, NG_VALIDATORS, NG_VALUE_ACCESSOR, ValidationErrors, Validator } from '@angular/forms';
+import { booleanAttribute, ChangeDetectionStrategy, Component, computed, inject, input, linkedSignal, LOCALE_ID, model, output, signal, untracked, ViewEncapsulation } from '@angular/core';
+import { FormsModule } from '@angular/forms';
+import { transformedValue, type FormValueControl } from '@angular/forms/signals';
 import { LuDisplayerDirective, LuOptionDirective } from '@lucca-front/ng/core-select';
 import { InputDirective, ɵPresentationDisplayDefaultDirective } from '@lucca-front/ng/form-field';
 import { LuSimpleSelectInputComponent } from '@lucca-front/ng/simple-select';
@@ -7,7 +8,6 @@ import { type CountryCallingCode, formatIncompletePhoneNumber, getCountries, get
 import examples from 'libphonenumber-js/mobile/examples';
 import { PhoneNumberInputAutocomplete } from './phone-number-input.type';
 import { CountryCode, E164Number } from './types';
-import { PhoneNumberValidators } from './validators';
 
 interface PrefixEntry {
 	country: CountryCode;
@@ -47,20 +47,8 @@ function tryParsePhoneNumber(phoneNumber: string, countryCode?: CountryCode): Pa
 	styleUrl: './phone-number-input.component.scss',
 	encapsulation: ViewEncapsulation.None,
 	changeDetection: ChangeDetectionStrategy.OnPush,
-	providers: [
-		{
-			provide: NG_VALUE_ACCESSOR,
-			useExisting: forwardRef(() => PhoneNumberInputComponent),
-			multi: true,
-		},
-		{
-			provide: NG_VALIDATORS,
-			useExisting: forwardRef(() => PhoneNumberInputComponent),
-			multi: true,
-		},
-	],
 })
-export class PhoneNumberInputComponent implements ControlValueAccessor, Validator {
+export class PhoneNumberInputComponent implements FormValueControl<string> {
 	#locale = inject(LOCALE_ID);
 
 	readonly label = input<string>();
@@ -80,13 +68,11 @@ export class PhoneNumberInputComponent implements ControlValueAccessor, Validato
 
 	readonly countryChange = output<CountryCode>();
 
-	readonly currentValue = signal<string>('');
+	readonly value = model<string>('');
 
-	#onChange?: (value: E164Number) => void;
+	readonly disabled = input(false, { transform: booleanAttribute });
 
-	#onTouched?: () => void;
-
-	disabled = false;
+	readonly touch = output<void>();
 
 	#displayNames = new Intl.DisplayNames(this.#locale, { type: 'region' });
 
@@ -118,7 +104,15 @@ export class PhoneNumberInputComponent implements ControlValueAccessor, Validato
 		});
 	});
 
-	countryCodeSelected = signal<CountryCode | undefined>(undefined);
+	readonly countryCodeSelected = linkedSignal<string, CountryCode | undefined>({
+		source: this.value,
+		computation: (value, previous) => {
+			if (!value) {
+				return previous?.value;
+			}
+			return tryParsePhoneNumber(value, previous?.value ?? untracked(() => this.defaultCountryCode())).country ?? previous?.value;
+		},
+	});
 
 	countryCode = computed(() => this.countryCodeSelected() ?? this.defaultCountryCode());
 
@@ -127,7 +121,16 @@ export class PhoneNumberInputComponent implements ControlValueAccessor, Validato
 		return exampleNumber?.formatNational() ?? '';
 	});
 
-	displayedNumber = signal<string | undefined>(undefined);
+	readonly displayedNumber = transformedValue(this.value, {
+		parse: (rawValue: string) => {
+			if (!rawValue) {
+				return { value: '' };
+			}
+			const { number, isValid } = tryParsePhoneNumber(rawValue, untracked(() => this.countryCode()));
+			return isValid ? { value: number } : { value: number, error: { kind: 'phoneNumber' } };
+		},
+		format: (value) => (value ? (tryParsePhoneNumber(value, untracked(() => this.countryCode())).nationalNumber ?? value) : ''),
+	});
 
 	readonly prefixEntry = computed(() => this.#prefixEntries().find((p) => p.country === this.countryCode()));
 
@@ -135,87 +138,36 @@ export class PhoneNumberInputComponent implements ControlValueAccessor, Validato
 
 	protected prefixComparator = (a: PrefixEntry, b: PrefixEntry) => this.getPrefixKey(a) === this.getPrefixKey(b);
 
-	writeValue(value: string): void {
-		try {
-			if (value) {
-				const { country, number, nationalNumber } = tryParsePhoneNumber(value, this.countryCode());
-				this.displayedNumber.set(nationalNumber);
-				this.countryCodeSelected.set(country);
-				if (value !== number) {
-					this.#onChange?.(number);
-				}
-			} else {
-				this.displayedNumber.set(undefined);
-			}
-		} catch {
-			this.displayedNumber.set(value);
+	updatePrefix(prefixEntry: PrefixEntry | null) {
+		if (!prefixEntry) {
+			return;
 		}
-		this.currentValue.set(value);
-		this.formatNationalNumber();
-	}
-
-	registerOnChange(fn: (value: E164Number) => void): void {
-		this.#onChange = fn;
-	}
-
-	registerOnTouched(fn: () => void): void {
-		this.#onTouched = fn;
-	}
-
-	setDisabledState?(isDisabled: boolean): void {
-		this.disabled = isDisabled;
-	}
-
-	updatePrefix(prefixEntry: PrefixEntry) {
 		this.countryCodeSelected.set(prefixEntry.country);
 		this.countryChange.emit(prefixEntry.country);
-		this.touched();
-		this.updateModel();
+		this.touch.emit();
 		this.formatNationalNumber();
 	}
 
 	updateNumber(number: string) {
+		const previousCountry = untracked(() => this.countryCodeSelected());
 		this.displayedNumber.set(number);
-		this.updateModel();
-	}
-
-	updateModel(): void {
-		const displayedNumber = this.displayedNumber();
-		const countryCode = this.countryCode();
-
-		try {
-			const { country, number } = tryParsePhoneNumber(displayedNumber, countryCode);
-			if (country && country !== countryCode) {
-				this.countryCodeSelected.set(country);
-				this.countryChange.emit(country);
-			}
-			this.#onChange?.(number);
-			return;
-		} catch {
-			this.#onChange?.(displayedNumber as E164Number);
+		const country = this.countryCodeSelected();
+		if (country && country !== previousCountry) {
+			this.countryChange.emit(country);
 		}
 	}
 
-	touched(): void {
-		this.#onTouched?.();
-	}
-
 	formatNationalNumber(): void {
-		const countryCode = this.countryCode();
+		const countryCode = untracked(() => this.countryCode());
 		const displayedNumber = this.displayedNumber();
-		try {
+
+		if (displayedNumber) {
 			const { isValid, nationalNumber } = tryParsePhoneNumber(displayedNumber, countryCode);
-			if (isValid) {
+			if (isValid && nationalNumber) {
 				this.displayedNumber.set(nationalNumber);
 			} else if (countryCode) {
 				this.displayedNumber.set(formatIncompletePhoneNumber(displayedNumber, countryCode));
 			}
-		} catch {
-			// do nothing
 		}
-	}
-
-	validate(control: AbstractControl<string, string>): ValidationErrors {
-		return PhoneNumberValidators.validPhoneNumber(control, this.countryCode());
 	}
 }
