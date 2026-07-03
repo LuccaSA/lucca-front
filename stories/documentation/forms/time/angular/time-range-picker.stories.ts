@@ -1,8 +1,9 @@
 import { JsonPipe } from '@angular/common';
-import { FormsModule } from '@angular/forms';
+import { ChangeDetectionStrategy, Component, signal } from '@angular/core';
+import { form, FormField } from '@angular/forms/signals';
 import { BrowserAnimationsModule } from '@angular/platform-browser/animations';
 import { FormFieldComponent } from '@lucca-front/ng/form-field';
-import { TimePickerComponent, TimeRangePickerComponent } from '@lucca-front/ng/time';
+import { endTimeBeforeStartTime, TimePickerComponent, TimeRangePickerComponent, TimeRangePickerRange, validTimeRange } from '@lucca-front/ng/time';
 import { Meta, moduleMetadata, StoryObj } from '@storybook/angular-vite';
 import { createTestStory } from '@/helpers/stories';
 import { StoryModelDisplayComponent } from '@/helpers/story-model-display.component';
@@ -14,7 +15,7 @@ export default {
 	title: 'Documentation/Forms/Time/Angular/TimeRangePicker',
 	decorators: [
 		moduleMetadata({
-			imports: [TimePickerComponent, FormFieldComponent, FormsModule, BrowserAnimationsModule, StoryModelDisplayComponent, TimeRangePickerComponent, JsonPipe],
+			imports: [TimePickerComponent, FormFieldComponent, BrowserAnimationsModule, StoryModelDisplayComponent, TimeRangePickerComponent, JsonPipe],
 		}),
 	],
 	argTypes: {
@@ -99,7 +100,7 @@ export const Basic: StoryObj<TimePickerComponent & FormFieldComponent & { requir
 		const { label, hiddenLabel, tooltip, inlineMessage, inlineMessageState, size, forceMeridiemDisplay, presentation, ...inputArgs } = args;
 		return {
 			template: `<lu-form-field label="${label}"${generateInputs({ hiddenLabel, tooltip, inlineMessage, inlineMessageState, size, presentation }, argTypes)}>
-	<lu-time-range-picker${generateInputs(inputArgs, argTypes)} ${forceMeridiemDisplay !== null ? `[forceMeridiemDisplay]="${forceMeridiemDisplay}"` : ''} [(ngModel)]="example" />
+	<lu-time-range-picker${generateInputs(inputArgs, argTypes)} ${forceMeridiemDisplay !== null ? `[forceMeridiemDisplay]="${forceMeridiemDisplay}"` : ''} [(value)]="example" />
 </lu-form-field>
 
 <pr-story-model-display>{{ example | json }}</pr-story-model-display>
@@ -120,6 +121,40 @@ export const Basic: StoryObj<TimePickerComponent & FormFieldComponent & { requir
 		forceMeridiemDisplay: false,
 		presentation: false,
 	},
+};
+
+@Component({
+	selector: 'time-range-picker-signal-forms-story',
+	imports: [TimeRangePickerComponent, FormFieldComponent, FormField, StoryModelDisplayComponent, JsonPipe],
+	changeDetection: ChangeDetectionStrategy.OnPush,
+	template: `
+		<lu-form-field label="Période" inlineMessage="L’heure de fin doit être postérieure à l’heure de début">
+			<lu-time-range-picker [formField]="form.period" />
+		</lu-form-field>
+		<pr-story-model-display>{{ form().value() | json }}</pr-story-model-display>
+	`,
+})
+class TimeRangePickerSignalFormsStory {
+	readonly model = signal<{ period: TimeRangePickerRange | null }>({ period: null });
+	readonly form = form(this.model, (p) => {
+		validTimeRange(p.period);
+		endTimeBeforeStartTime(p.period);
+	});
+}
+
+export const SignalForms: StoryObj = {
+	parameters: {
+		docs: {
+			description: {
+				story:
+					'Pilotage par signal forms : `lu-time-range-picker` implémente `FormValueControl<TimeRangePickerRange | null>` et se branche sur un champ via la directive `[formField]`. La validation (`validTimeRange`, `endTimeBeforeStartTime`) est déclarée dans le schema du `form()`.',
+			},
+		},
+	},
+	render: () => ({
+		moduleMetadata: { imports: [TimeRangePickerSignalFormsStory] },
+		template: `<time-range-picker-signal-forms-story />`,
+	}),
 };
 
 const basePlay = async ({ canvasElement, step, context }) => {

@@ -1,4 +1,3 @@
-import { FormsModule } from '@angular/forms';
 import { BrowserAnimationsModule } from '@angular/platform-browser/animations';
 import { FormFieldComponent } from '@lucca-front/ng/form-field';
 import { INLINE_MESSAGE_STATE } from '@lucca-front/ng/inline-message';
@@ -11,7 +10,7 @@ export default {
 	title: 'Documentation/Forms/Time/Angular/Basic',
 	decorators: [
 		moduleMetadata({
-			imports: [TimePickerComponent, FormFieldComponent, FormsModule, BrowserAnimationsModule, StoryModelDisplayComponent],
+			imports: [TimePickerComponent, FormFieldComponent, BrowserAnimationsModule, StoryModelDisplayComponent],
 		}),
 	],
 	argTypes: {
@@ -97,7 +96,7 @@ export const Basic: StoryObj<TimePickerComponent & FormFieldComponent & { requir
 		return {
 			template: `
 <lu-form-field [label]="labelID" [rolePresentationLabel]="true"${generateInputs({ hiddenLabel, tooltip, inlineMessage, inlineMessageState, size, presentation }, argTypes)}>
-	<lu-time-picker label="${label}"${generateInputs(inputArgs, argTypes)} ${forceMeridiemDisplay !== null ? `[forceMeridiemDisplay]="${forceMeridiemDisplay}"` : ''} [(ngModel)]="example" />
+	<lu-time-picker label="${label}"${generateInputs(inputArgs, argTypes)} ${forceMeridiemDisplay !== null ? `[forceMeridiemDisplay]="${forceMeridiemDisplay}"` : ''} [(value)]="example" />
 	<ng-template #labelID>
 		<span aria-hidden="true">${label}</span>
 	</ng-template>

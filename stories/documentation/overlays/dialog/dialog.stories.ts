@@ -1,4 +1,5 @@
-import { FormControl, FormGroup, FormsModule, ReactiveFormsModule, Validators } from '@angular/forms';
+import { ChangeDetectionStrategy, Component, input, signal } from '@angular/core';
+import { form, FormField, required } from '@angular/forms/signals';
 import { ButtonComponent } from '@lucca-front/ng/button';
 import {
 	configureLuDialog,
@@ -12,6 +13,7 @@ import {
 	DialogHeaderComponent,
 	DialogHeaderSubtitle,
 	DialogOpenDirective,
+	LuDialogConfig,
 } from '@lucca-front/ng/dialog';
 import { FormComponent } from '@lucca-front/ng/form';
 import { FormFieldComponent } from '@lucca-front/ng/form-field';
@@ -42,8 +44,6 @@ export default {
 				DialogDismissDirective,
 				FormFieldComponent,
 				TextInputComponent,
-				FormsModule,
-				ReactiveFormsModule,
 				IconComponent,
 				DialogHeaderAction,
 				DialogHeaderSubtitle,
@@ -152,7 +152,7 @@ export const Focus: StoryObj = {
 
 		<lu-dialog-content>
 			<lu-form-field label="Example input">
-				<lu-text-input [ngModel]="example" placeholder="This will be focused if autoFocus is set to first-input" />
+				<lu-text-input [value]="example" placeholder="This will be focused if autoFocus is set to first-input" />
 			</lu-form-field>
 		</lu-dialog-content>
 
@@ -174,42 +174,69 @@ export const Focus: StoryObj = {
 	},
 };
 
+@Component({
+	selector: 'dialog-with-form-story',
+	imports: [
+		ButtonComponent,
+		DialogOpenDirective,
+		DialogComponent,
+		DialogHeaderComponent,
+		DialogContentComponent,
+		DialogFooterComponent,
+		DialogCloseDirective,
+		DialogDismissDirective,
+		FormFieldComponent,
+		TextInputComponent,
+		FormComponent,
+		FormField,
+	],
+	changeDetection: ChangeDetectionStrategy.OnPush,
+	template: `
+		<button luButton [luDialogOpen]="dialogTpl" [luDialogConfig]="config()">Open Template-driven Dialog with Form inside</button>
+
+		<ng-template #dialogTpl>
+			<lu-dialog #dialog>
+				<form luForm>
+					<lu-dialog-header><h1>Template driven header</h1></lu-dialog-header>
+
+					<lu-dialog-content>
+						<lu-form-field label="Example input">
+							<lu-text-input [formField]="form.example" placeholder="This will be focused if autoFocus is set to first-input" />
+						</lu-form-field>
+					</lu-dialog-content>
+
+					<lu-dialog-footer>
+						<div class="footer-actions">
+							<button type="submit" luButton luDialogClose>Submit</button>
+							<button type="button" luButton="ghost" luDialogDismiss>Cancel</button>
+						</div>
+					</lu-dialog-footer>
+				</form>
+			</lu-dialog>
+		</ng-template>
+	`,
+})
+class DialogWithFormStoryComponent {
+	readonly config = input<LuDialogConfig<unknown>>();
+
+	readonly model = signal({ example: '' });
+	readonly form = form(this.model, (p) => {
+		required(p.example);
+	});
+}
+
 export const WithForm: StoryObj = {
 	render: (args) => {
 		return {
 			props: {
 				config: args,
-				form: new FormGroup({
-					example: new FormControl('', Validators.required),
-				}),
+			},
+			moduleMetadata: {
+				imports: [DialogWithFormStoryComponent],
 			},
 			template: `<!-- config: ${JSON.stringify(args)} -->
 
-<button luButton [luDialogOpen]="dialogTpl" [luDialogConfig]="config">Open Template-driven Dialog with Form inside</button>
-
-<ng-template #dialogTpl>
-	<lu-dialog #dialog>
-		<!--form = new FormGroup({
-			example: new FormControl('', Validators.required)
-		})-->
-		<form luForm [formGroup]="form">
-			<lu-dialog-header><h1>Template driven header</h1></lu-dialog-header>
-
-			<lu-dialog-content>
-				<lu-form-field label="Example input">
-					<lu-text-input formControlName="example" placeholder="This will be focused if autoFocus is set to first-input" />
-				</lu-form-field>
-			</lu-dialog-content>
-
-			<lu-dialog-footer>
-				<div class="footer-actions">
-					<button type="submit" luButton luDialogClose>Submit</button>
-					<button type="button" luButton="ghost" luDialogDismiss>Cancel</button>
-				</div>
-			</lu-dialog-footer>
-		</form>
-	</lu-dialog>
-</ng-template>`,
+<dialog-with-form-story [config]="config" />`,
 		};
 	},
 	args: {

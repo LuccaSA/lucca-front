@@ -1,7 +1,6 @@
 import { I18nPluralPipe, SlicePipe } from '@angular/common';
 import { provideHttpClient } from '@angular/common/http';
 import { LOCALE_ID } from '@angular/core';
-import { FormsModule } from '@angular/forms';
 import {
 	LuCoreSelectNoClueDirective,
 	LuCoreSelectPanelHeaderDirective,
@@ -91,7 +90,7 @@ export const Basic = generateStory({
 	(clueChange)="clue = $event"
 	[clearable]="clearable"
 	[loading]="loading"
-	[(ngModel)]="selectedLegume"
+	[(value)]="selectedLegume"
 >
 	<ng-container *luOption="let legume; select: selectRef">{{ legume.name }}</ng-container>
 </lu-simple-select>`,
@@ -112,7 +111,7 @@ export const Minimal = generateStory({
 	name: 'Minimal',
 	description: 'Pas besoin systématiquement de `*luOption`, le simple-select affiche par défaut la propriété `name` ou l’option elle-même.',
 	template: `<lu-simple-select
-	[(ngModel)]="selectedLegume"
+	[(value)]="selectedLegume"
 	[options]="legumes | filterLegumes:clue"
 	(clueChange)="clue = $event"
 ></lu-simple-select>`,
@@ -128,7 +127,7 @@ export const WithDisplayer = generateStory({
 	description: 'Il est possible de customiser l’affichage de l’option sélectionnée en utilisant `*luDisplayer`.',
 	template: `<lu-simple-select
 	#selectRef
-	[(ngModel)]="selectedLegume"
+	[(value)]="selectedLegume"
 	[options]="legumes | filterLegumes:clue"
 	(clueChange)="clue = $event"
 >
@@ -151,7 +150,7 @@ export const WithIcon = generateStory({
 	description: 'Il est possible de customiser l’affichage des options ainsi que de l’option sélectionnée en utilisant `*luOption`.',
 	template: `<lu-simple-select
 	#selectRef
-	[(ngModel)]="selectedLegume"
+	[(value)]="selectedLegume"
 	[options]="legumes | filterLegumes:clue"
 	(clueChange)="clue = $event"
 >
@@ -181,7 +180,7 @@ export const WithPrefix = generateStory({
 	template: `<lu-simple-select
 	#selectRef
 	placeholder="Placeholder…"
-	[(ngModel)]="selectedLegume"
+	[(value)]="selectedLegume"
 	[options]="legumes | filterLegumes:clue"
 	(clueChange)="clue = $event"
 	[prefix]="prefix"
@@ -201,7 +200,7 @@ export const WithClue = generateStory({
 	description: 'Il est possible d’afficher une barre de recherche pour filtrer les options en écoutant l’évènement `(clueChange)`.',
 	template: `<lu-simple-select
 	#selectRef
-	[(ngModel)]="selectedLegume"
+	[(value)]="selectedLegume"
 	[options]="legumes | filterLegumes:clue"
 	(clueChange)="clue = $event"
 >
@@ -233,7 +232,7 @@ export const WithPagination = generateStory({
 	description: 'Il est possible de charger les options au fur et à mesure en écoutant l’évènement `(nextPage)`.',
 	template: `<lu-simple-select
 	#selectRef
-	[(ngModel)]="selectedLegume"
+	[(value)]="selectedLegume"
 	[options]="legumes | filterLegumes:clue | slice : 0 : page * 10"
 	(nextPage)="page = page + 1"
 	(clueChange)="clue = $event"
@@ -253,7 +252,7 @@ export const WithClearer = generateStory({
 	description: 'Il est possible vider le contenu du select via l’input clearable',
 	template: `<lu-simple-select
 	#selectRef
-	[(ngModel)]="selectedLegume"
+	[(value)]="selectedLegume"
 	[options]="legumes | filterLegumes:clue"
 	(clueChange)="clue = $event"
 	clearable
@@ -282,7 +281,7 @@ export const WithDisabledOptions = generateStory({
 	description: 'Il est possible de désactiver certaines options en utilisant la directive `luDisabledOption` sur l’option.',
 	template: `<lu-simple-select
 	#selectRef
-	[(ngModel)]="selectedLegume"
+	[(value)]="selectedLegume"
 	[options]="legumes | filterLegumes:clue"
 	(clueChange)="clue = $event"
 >
@@ -311,7 +310,7 @@ export const ApiV3 = generateStory({
 	Plus d'informations sur les directives API personnalisée sur la [documentation dédiée](https://github.com/LuccaSA/lucca-front/blob/master/docs/core-select-api-directive.md).`,
 	template: `<lu-simple-select
 	apiV3="/api/v3/axisSections"
-	[(ngModel)]="selectedAxisSection"
+	[(value)]="selectedAxisSection"
 ></lu-simple-select>`,
 	neededImports: {
 		'@lucca-front/ng/simple-select': ['LuSimpleSelectInputComponent'],
@@ -328,7 +327,7 @@ export const ApiV4 = generateStory({
 	Plus d'informations sur les directives API personnalisée sur la [documentation dédiée](https://github.com/LuccaSA/lucca-front/blob/master/docs/core-select-api-directive.md).`,
 	template: `<lu-simple-select
 	apiV4="/organization/structure/api/establishments"
-	[(ngModel)]="selectedEstablishment"
+	[(value)]="selectedEstablishment"
 ></lu-simple-select>`,
 	neededImports: {
 		'@lucca-front/ng/simple-select': ['LuSimpleSelectInputComponent'],
@@ -345,7 +344,7 @@ export const ApiV4NoCLue = generateStory({
 	template: `<lu-simple-select
 	apiV4="/organization/structure/api/establishments"
 	noClue
-	[(ngModel)]="selectedEstablishment"
+	[(value)]="selectedEstablishment"
 ></lu-simple-select>`,
 	neededImports: {
 		'@lucca-front/ng/simple-select': ['LuSimpleSelectInputComponent'],
@@ -410,7 +409,7 @@ La première fois que cette directive est utilisée, il faut ajouter \`provideCo
 Plus d'informations sur les directives users personnalisée sur la [documentation dédiée](https://github.com/LuccaSA/lucca-front/blob/master/docs/core-select-users-directive.md).`,
 	template: `<lu-simple-select
 	users
-	[(ngModel)]="selectedUser"
+	[(value)]="selectedUser"
 ></lu-simple-select>
 	`,
 	neededImports: {
@@ -430,7 +429,7 @@ export const UserCustom = generateStory({
 	template: `<lu-simple-select
 	#usersRef="luCustomUsers"
 	customUsers
-	[(ngModel)]="selectedUser"
+	[(value)]="selectedUser"
 >
 	<ng-container *luDisplayer="let user; select: usersRef.select">
 		👉👉👉 <span translate="no">{{ user | luUserDisplay }}</span> 👈👈👈
@@ -456,7 +455,7 @@ export const UserCustomTemplate = generateStory({
 	template: `<lu-simple-select
 	users
 	#usersRef="luUsers"
-	[(ngModel)]="selectedUser"
+	[(value)]="selectedUser"
 >
 	<span translate="no" *luUserOption="let user; usersRef: usersRef">👉👉👉 {{ user | luUserDisplay }} 👈👈👈</span>
 </lu-simple-select>
@@ -473,7 +472,7 @@ export const UserAvatarTemplate = generateStory({
 	template: `<lu-simple-select
 	users
 	#usersRef="luUsers"
-	[(ngModel)]="selectedUser"
+	[(value)]="selectedUser"
 >
 	<ng-container *luUserOption="let user; usersRef: usersRef">
 		<lu-user-picture size="XS" [user]="user" aria-hidden="true" />
@@ -494,7 +493,7 @@ export const FormerUser = generateStory({
 	template: `<lu-simple-select
 	users
 	enableFormerEmployees
-	[(ngModel)]="selectedUsers"
+	[(value)]="selectedUsers"
 ></lu-simple-select>`,
 	neededImports: {
 		'@lucca-front/ng/simple-select': ['LuSimpleSelectInputComponent'],
@@ -507,7 +506,7 @@ export const Establishment = generateStory({
 	description: 'Pour saisir un établissement, il suffit d’utiliser la directive `establishments`',
 	template: `<lu-simple-select
 	establishments
-	[(ngModel)]="selectedEstablishment"
+	[(value)]="selectedEstablishment"
 ></lu-simple-select>`,
 	neededImports: {
 		'@lucca-front/ng/simple-select': ['LuSimpleSelectInputComponent'],
@@ -521,7 +520,7 @@ export const EstablishmentCustom = generateStory({
 	template: `<lu-simple-select
 	#establishmentsRef="luCustomEstablishments"
 	customEstablishments
-	[(ngModel)]="selectedEstablishment"
+	[(value)]="selectedEstablishment"
 >
 	<ng-container *luDisplayer="let establishment; select: establishmentsRef.select">
 		👉👉👉 <span translate="no">{{ establishment.name }}</span> 👈👈👈
@@ -548,7 +547,7 @@ export const Tree = generateStory({
 	[treeSelect]="groupingFn"
 	[options]="legumes | filterLegumes:clue"
 	(clueChange)="clue = $event"
-	[(ngModel)]="selectedTree"
+	[(value)]="selectedTree"
 ></lu-simple-select>`,
 	neededImports: {
 		'@lucca-front/ng/simple-select': ['LuSimpleSelectInputComponent'],
@@ -572,7 +571,7 @@ export const Department = generateStory({
 	description: 'Pour saisir un département, il suffit d’utiliser la directive `departments`',
 	template: `<lu-simple-select
 	departments
-	[(ngModel)]="selectedDepartment"
+	[(value)]="selectedDepartment"
 ></lu-simple-select>`,
 	neededImports: {
 		'@lucca-front/ng/simple-select': ['LuSimpleSelectInputComponent'],
@@ -585,7 +584,7 @@ export const JobQualification = generateStory({
 	description: 'Pour saisir une qualification, il suffit d’utiliser la directive `jobQualifications`',
 	template: `<lu-simple-select
 	jobQualifications
-	[(ngModel)]="selectedJobQualifications"
+	[(value)]="selectedJobQualifications"
 ></lu-simple-select>`,
 	neededImports: {
 		'@lucca-front/ng/simple-select': ['LuSimpleSelectInputComponent'],
@@ -599,7 +598,7 @@ export const OccupationCategory = generateStory({
 	template: `<lu-simple-select
 	placeholder="Placeholder…"
 	occupationCategories
-	[(ngModel)]="selectedOccupationCategories"
+	[(value)]="selectedOccupationCategories"
 ></lu-simple-select>`,
 	neededImports: {
 		'@lucca-front/ng/simple-select': ['LuSimpleSelectInputComponent'],
@@ -612,7 +611,7 @@ export const GroupBy = generateStory({
 	description: 'Pour grouper les options, il suffit d’utiliser la directive `luOptionGroup`.',
 	template: `<lu-simple-select
 	#selectRef
-	[(ngModel)]="selectedLegume"
+	[(value)]="selectedLegume"
 	[options]="legumes | filterLegumes:clue | sortLegumes:(clue ? ['name', legumeColor] : [legumeColor])"
 	(clueChange)="clue = $event"
 >
@@ -638,7 +637,7 @@ export const AddOption = generateStory({
 	template: `<div class="pr-u-marginBlockEnd200">There is <span data-testid="legumes-count">{{ legumes.length }}</span> legumes in the list.</div>
 <lu-simple-select
 	#selectRef
-	[(ngModel)]="selectedLegume"
+	[(value)]="selectedLegume"
 	[options]="legumes | filterLegumes:clue"
 	[addOptionLabel]="addOptionLabel || ('Ajouter ' + (clue || 'un légume'))"
 	[addOptionStrategy]="addOptionStrategy"
@@ -698,7 +697,7 @@ export const CustomPanelHeader = generateStory({
 	description: 'Pour customiser l’en-tête du panel, il suffit d’utiliser la directive `luCoreSelectPanelHeader`.',
 	template: `<lu-simple-select
 	#selectRef
-	[(ngModel)]="selectedLegume"
+	[(value)]="selectedLegume"
 	[options]="legumes | filterLegumes:clue"
 	(clueChange)="clue = $event"
 >
@@ -727,7 +726,7 @@ export const IntlOverride = generateStory({
 	#selectRef
 	[options]="legumes | filterLegumes:clue"
 	(clueChange)="clue = $event"
-	[(ngModel)]="selectedLegume"
+	[(value)]="selectedLegume"
 	[intl]="{
 		placeholder: 'Choose a vegetable...',
 		clear: 'Remove selection',
@@ -752,7 +751,6 @@ const meta: Meta<LuSimpleSelectInputStoryComponent> = {
 	decorators: [
 		moduleMetadata({
 			imports: [
-				FormsModule,
 				I18nPluralPipe,
 				LuDisplayerDirective,
 				LuOptionDirective,

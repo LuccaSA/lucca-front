@@ -1,5 +1,4 @@
 import { ChangeDetectionStrategy, Component, inject } from '@angular/core';
-import { FormsModule } from '@angular/forms';
 import { AppLayoutComponent } from '@lucca-front/ng/app-layout';
 import { ButtonComponent } from '@lucca-front/ng/button';
 import { ContainerComponent } from '@lucca-front/ng/container';
@@ -27,7 +26,6 @@ import { Meta } from '@storybook/angular-vite';
 		ContainerComponent,
 		FormFieldComponent,
 		SwitchInputComponent,
-		FormsModule,
 	],
 	changeDetection: ChangeDetectionStrategy.OnPush,
 	styles: [

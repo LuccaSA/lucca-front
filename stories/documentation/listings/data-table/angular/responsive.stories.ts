@@ -1,4 +1,3 @@
-import { FormsModule } from '@angular/forms';
 import { ButtonComponent } from '@lucca-front/ng/button';
 import {
 	DataTableBodyComponent,
@@ -40,7 +39,6 @@ export default {
 				DataTableRowCellHeaderComponent,
 				FormFieldComponent,
 				TextInputComponent,
-				FormsModule,
 				ButtonComponent,
 				IconComponent,
 			],
@@ -129,7 +127,7 @@ export default {
 		const editableContent = editable
 			? `
 				<lu-form-field label="Label" hiddenLabel>
-					<lu-text-input type="text" [(ngModel)]="example" />
+					<lu-text-input type="text" [(value)]="example" />
 				</lu-form-field>
 			`
 			: text;

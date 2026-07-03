@@ -1,5 +1,5 @@
-import { LOCALE_ID } from '@angular/core';
-import { FormsModule } from '@angular/forms';
+import { ChangeDetectionStrategy, Component, LOCALE_ID, signal } from '@angular/core';
+import { form, FormField } from '@angular/forms/signals';
 import { BrowserAnimationsModule } from '@angular/platform-browser/animations';
 import { FORM_FIELD_SIZE, FormFieldComponent } from '@lucca-front/ng/form-field';
 import { PHONE_NUMBER_INPUT_AUTOCOMPLETE, PhoneNumberInputComponent } from '@lucca-front/ng/forms/phone-number-input';
@@ -14,7 +14,7 @@ export default {
 	title: 'Documentation/Forms/Fields/PhoneNumberField/Angular',
 	decorators: [
 		moduleMetadata({
-			imports: [PhoneNumberInputComponent, FormFieldComponent, FormsModule, BrowserAnimationsModule, StoryModelDisplayComponent],
+			imports: [PhoneNumberInputComponent, FormFieldComponent, BrowserAnimationsModule, StoryModelDisplayComponent],
 		}),
 		applicationConfig({
 			providers: [{ provide: LOCALE_ID, useValue: 'en-US' }],
@@ -44,11 +44,8 @@ export const Basic: StoryObj<PhoneNumberInputComponent & FormFieldComponent & { 
 				},
 				argTypes,
 			)}>
-	<lu-phone-number-input label="${label}" [country]="country" [(ngModel)]="example" #result="ngModel" ${generateInputs(inputArgs, argTypes)} />
+	<lu-phone-number-input label="${label}" [country]="country" [(value)]="example" ${generateInputs(inputArgs, argTypes)} />
 </lu-form-field>
-@if(result.invalid && result.errors.validPhoneNumber){
-  <div>{{result.errors.validPhoneNumber}}</div>
-}
 <pr-story-model-display>{{ example }}</pr-story-model-display>
 `),
 		};
@@ -128,6 +125,37 @@ export const Basic: StoryObj<PhoneNumberInputComponent & FormFieldComponent & { 
 		noAutoPlaceholder: false,
 		presentation: false,
 	},
+};
+
+@Component({
+	selector: 'phone-number-input-signal-forms-story',
+	imports: [PhoneNumberInputComponent, FormFieldComponent, FormField, StoryModelDisplayComponent],
+	changeDetection: ChangeDetectionStrategy.OnPush,
+	template: `
+		<lu-form-field label="Téléphone" [rolePresentationLabel]="true">
+			<lu-phone-number-input label="Téléphone" [formField]="form.phone" />
+		</lu-form-field>
+		<pr-story-model-display>{{ form().value().phone }}</pr-story-model-display>
+	`,
+})
+class PhoneNumberInputSignalFormsStory {
+	readonly model = signal({ phone: '+33612345678' });
+	readonly form = form(this.model);
+}
+
+export const SignalForms: StoryObj = {
+	parameters: {
+		docs: {
+			description: {
+				story:
+					'Pilotage par signal forms : `lu-phone-number-input` implémente `FormValueControl<string>` et se branche sur un champ via la directive `[formField]`. Aucun validator n’est nécessaire dans le schema : une saisie non valide remonte automatiquement une parse error de kind `phoneNumber` sur le champ.',
+			},
+		},
+	},
+	render: () => ({
+		moduleMetadata: { imports: [PhoneNumberInputSignalFormsStory] },
+		template: `<phone-number-input-signal-forms-story />`,
+	}),
 };
 
 export const BasicTEST = createTestStory(Basic, async ({ canvasElement, step }) => {

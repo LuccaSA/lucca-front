@@ -1,4 +1,3 @@
-import { FormsModule } from '@angular/forms';
 import { ButtonComponent } from '@lucca-front/ng/button';
 import { FormComponent } from '@lucca-front/ng/form';
 import { FormFieldComponent } from '@lucca-front/ng/form-field';
@@ -75,7 +74,7 @@ export default {
 	},
 	decorators: [
 		moduleMetadata({
-			imports: [FieldsetComponent, GridComponent, GridColumnComponent, FormFieldComponent, TextInputComponent, FormsModule, ButtonComponent, FormComponent],
+			imports: [FieldsetComponent, GridComponent, GridColumnComponent, FormFieldComponent, TextInputComponent, ButtonComponent, FormComponent],
 		}),
 	],
 	render: ({ expanded, size, helper, action, withAction, presentation, horizontal, maxWidth, ...args }, { argTypes }) => {
@@ -98,12 +97,12 @@ export default {
 		<lu-grid mode="form">
 			<lu-grid-column colspan="2">
 				<lu-form-field label="Label"${generateInputs({ presentation }, argTypes)}>
-					<lu-text-input type="text" ngModel [ngModelOptions]="{ standalone: true }" />
+					<lu-text-input type="text" />
 				</lu-form-field>
 			</lu-grid-column>
 			<lu-grid-column colspan="2">
 				<lu-form-field label="Label"${generateInputs({ presentation }, argTypes)}>
-					<lu-text-input type="text" ngModel [ngModelOptions]="{ standalone: true }" />
+					<lu-text-input type="text" />
 				</lu-form-field>
 			</lu-grid-column>
 		</lu-grid>
