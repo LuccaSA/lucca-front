@@ -19,10 +19,11 @@ import { LU_DURATION_PICKER_TRANSLATIONS } from './duration-picker.translate';
 	changeDetection: ChangeDetectionStrategy.OnPush,
 	encapsulation: ViewEncapsulation.None,
 })
-export class DurationPickerComponent extends BasePickerComponent implements FormValueControl<ISO8601Duration> {
+export class DurationPickerComponent extends BasePickerComponent implements FormValueControl<ISO8601Duration | null> {
 	readonly intl = input(...intlInputOptions(LU_DURATION_PICKER_TRANSLATIONS));
 
-	value = model<ISO8601Duration>('PT0S');
+	value = model<ISO8601Duration | null>('PT0S');
+	readonly #duration = computed(() => this.value() ?? 'PT0S');
 	readonly max = input<ISO8601Duration | undefined>('PT99H');
 
 	readonly displayArrows = input(false, { transform: booleanAttribute });
@@ -35,8 +36,8 @@ export class DurationPickerComponent extends BasePickerComponent implements Form
 
 	keyPressed = signal(false);
 
-	protected readonly hours = computed(() => getHoursPartFromDuration(this.value()));
-	protected readonly minutes = computed(() => getMinutesPartFromDuration(this.value()));
+	protected readonly hours = computed(() => getHoursPartFromDuration(this.#duration()));
+	protected readonly minutes = computed(() => getMinutesPartFromDuration(this.#duration()));
 	protected readonly shouldHideValue = computed(() => this.hideZeroValue() && this.hours() === 0 && this.minutes() === 0);
 
 	protected readonly maxDigits = computed(() => {
