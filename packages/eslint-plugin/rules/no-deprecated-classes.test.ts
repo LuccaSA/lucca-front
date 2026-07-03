@@ -2,8 +2,9 @@ import * as templateParser from '@angular-eslint/template-parser';
 import { RuleTester } from '@typescript-eslint/rule-tester';
 import rule, { Options, RULE_NAME, setDeprecationMessageBuilder } from './no-deprecated-classes';
 
-// Stands in for stylelint-config's getDisallowedData().message (index.ts injects the real one)
-setDeprecationMessageBuilder((_deprecations, matchedSelector) => `stylelint says: ${matchedSelector}`);
+// Stands in for stylelint-config's getDisallowedData().message (eslint.config.mjs injects the real one).
+// Echoes the received entry's versionDeleted so tests can pin report-to-entry attribution.
+setDeprecationMessageBuilder((deprecations, matchedSelector) => `stylelint says: ${matchedSelector} (deleted: ${deprecations[0]?.versionDeleted ?? 'never'})`);
 
 const ruleTester = new RuleTester({
 	languageOptions: {
@@ -26,10 +27,6 @@ const options: Options = [
 				objectPattern: /\.palette-(grey|primary|secondary|lucca)/,
 				versionDeprecated: '17.3.0',
 				versionDeleted: '22.0.0',
-			},
-			{
-				// String entries are exact selector matches (stylelint's comparePatterns)
-				objectPattern: '.exact-legacy',
 			},
 		],
 	},
@@ -68,11 +65,6 @@ ruleTester.run(RULE_NAME, rule, {
 			options,
 		},
 		{
-			name: '✅ String entry only matches the exact selector',
-			code: `<div class="exact-legacy other"></div>`,
-			options,
-		},
-		{
 			name: '✅ No options configured',
 			code: `<div class="u-textLight"></div>`,
 		},
@@ -82,25 +74,29 @@ ruleTester.run(RULE_NAME, rule, {
 			name: '❌ Deprecated static class, message from the injected builder',
 			code: `<span class="u-textLight">text</span>`,
 			options,
-			errors: [{ messageId: 'deprecatedClass', data: { deprecationMessage: 'stylelint says: .u-textLight' } }],
+			errors: [{ messageId: 'deprecatedClass', data: { deprecationMessage: 'stylelint says: .u-textLight (deleted: never)' } }],
 		},
 		{
-			name: '❌ Deprecated class combination, regardless of order',
+			name: '❌ Deprecated class combination: message attributed to the matching entry',
 			code: `<button class="mod-counter button">3</button>`,
 			options,
-			errors: [{ messageId: 'deprecatedClass', data: { deprecationMessage: 'stylelint says: .mod-counter.button' } }],
+			errors: [{ messageId: 'deprecatedClass', data: { deprecationMessage: 'stylelint says: .mod-counter.button (deleted: 18.1.0)' } }],
+		},
+		{
+			name: "❌ Combination match containing another entry's class keeps its own entry's message",
+			code: `<button class="button mod-counter mod-link">3</button>`,
+			options,
+			errors: [
+				// entry 0 (.mod-link, no versions) and entry 1 (combination, deleted 18.1.0) both report
+				{ messageId: 'deprecatedClass', data: { deprecationMessage: 'stylelint says: .mod-link (deleted: never)' } },
+				{ messageId: 'deprecatedClass', data: { deprecationMessage: 'stylelint says: .button.mod-counter.mod-link (deleted: 18.1.0)' } },
+			],
 		},
 		{
 			name: '❌ Deprecated class with versions',
 			code: `<div class="palette-grey"></div>`,
 			options,
-			errors: [{ messageId: 'deprecatedClass' }],
-		},
-		{
-			name: '❌ Deprecated class matched by a string entry',
-			code: `<div class="exact-legacy"></div>`,
-			options,
-			errors: [{ messageId: 'deprecatedClass', data: { deprecationMessage: 'stylelint says: .exact-legacy' } }],
+			errors: [{ messageId: 'deprecatedClass', data: { deprecationMessage: 'stylelint says: .palette-grey (deleted: 22.0.0)' } }],
 		},
 		{
 			name: '❌ Deprecated class in [class.x] binding',

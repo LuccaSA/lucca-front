@@ -1,15 +1,18 @@
 import { Interpolation, LiteralMap, LiteralPrimitive, RecursiveAstVisitor } from '@angular-eslint/bundled-angular-compiler';
 import type { AST } from '@angular-eslint/bundled-angular-compiler';
 import type { TSESTree } from '@typescript-eslint/utils';
+import { ensureTemplateParser } from '@angular-eslint/utils';
 import { createRule } from './create-rule.ts';
 
 export const RULE_NAME = 'no-deprecated-classes';
 
 /**
  * Entry shape of @lucca-front/stylelint-config's LFDeprecatedSelectors.mjs, passed raw.
+ * Only RegExp patterns are supported: stylelint's exact-string entries would be near-inert
+ * against class attributes, so the schema rejects them loudly instead.
  */
 export interface DisallowedObject {
-	objectPattern: (RegExp | string)[] | RegExp | string;
+	objectPattern: RegExp[] | RegExp;
 	versionDeprecated?: string;
 	versionDeleted?: string;
 }
@@ -23,7 +26,9 @@ let messageBuilder: MessageBuilder | undefined;
 /**
  * Injects the message formatter (stylelint-config's getDisallowedData) at module level:
  * ESLint structuredClones rule options, so functions cannot travel through them, and
- * jest cannot load stylelintForLF.mjs (top-level await) — index.ts does it under Node ESM.
+ * the plugin cannot import stylelintForLF.mjs itself (jest cannot load its top-level
+ * await chain) — eslint.config.mjs does the injection under Node ESM.
+ * The builder receives only the entry that matched, so messages carry that entry's versions.
  */
 export function setDeprecationMessageBuilder(builder: MessageBuilder): void {
 	messageBuilder = builder;
@@ -71,10 +76,10 @@ class ClassListCollector extends RecursiveAstVisitor {
 }
 
 interface CompiledEntry {
-	// All RegExp patterns of the entry merged into one alternation
-	regex?: RegExp;
-	// String patterns are exact selector matches, mirroring stylelint's comparePatterns
-	strings: string[];
+	// All patterns of the entry merged into one alternation
+	regex: RegExp;
+	// The raw entry, kept so reports are attributed to the entry that actually matched
+	source: DisallowedObject;
 }
 
 // ESLint calls create() once per linted file with the same options object; compile once per process.
@@ -84,15 +89,12 @@ function compileEntries(options: Options[0]): CompiledEntry[] {
 	let compiled = compiledEntriesCache.get(options);
 
 	if (!compiled) {
-		compiled = options.deprecations.map(({ objectPattern }) => {
-			const patterns = Array.isArray(objectPattern) ? objectPattern : [objectPattern];
-			// `instanceof RegExp` is realm-sensitive (options are structuredCloned, jest runs in a vm):
-			// duck-type on `source` instead
-			const regexSources = patterns.filter((pattern): pattern is RegExp => typeof pattern === 'object' && pattern !== null && 'source' in pattern).map((pattern) => `(?:${pattern.source})`);
+		compiled = options.deprecations.map((source) => {
+			const patterns = Array.isArray(source.objectPattern) ? source.objectPattern : [source.objectPattern];
 
 			return {
-				...(regexSources.length && { regex: new RegExp(regexSources.join('|')) }),
-				strings: patterns.filter((pattern): pattern is string => typeof pattern === 'string'),
+				regex: new RegExp(patterns.map((pattern) => `(?:${pattern.source})`).join('|')),
+				source,
 			};
 		});
 		compiledEntriesCache.set(options, compiled);
@@ -116,8 +118,12 @@ function toCompoundSelector(classList: string): string {
 
 export default createRule<Options, 'deprecatedClass'>({
 	create: (context) => {
+		ensureTemplateParser(context);
+
 		// context.options[0] is the raw config-provided object: a stable reference, required as the
-		// WeakMap cache key. RuleCreator's defaults-merged options would be a fresh object per file.
+		// WeakMap cache key. RuleCreator's defaults-merged options would be a fresh object per file
+		// (and are only passed as the unused second create() argument — defaultOptions is inert here;
+		// the ?? below is the real default).
 		const options = context.options[0] ?? { deprecations: [] };
 		const entries = compileEntries(options);
 
@@ -129,12 +135,14 @@ export default createRule<Options, 'deprecatedClass'>({
 			}
 
 			for (const entry of entries) {
-				const matched = entry.regex?.exec(compoundSelector)?.[0] ?? entry.strings.find((pattern) => pattern === compoundSelector);
+				const match = entry.regex.exec(compoundSelector);
 
-				if (matched) {
+				if (match) {
 					context.report({
 						messageId: 'deprecatedClass',
-						data: { deprecationMessage: messageBuilder?.(options.deprecations, matched) ?? `Deprecated Lucca class usage "${matched}"` },
+						// Only the matching entry is handed to the builder: re-searching the whole
+						// list with the matched text could attribute the report to another entry.
+						data: { deprecationMessage: messageBuilder?.([entry.source], match[0]) ?? `Deprecated Lucca class usage "${match[0]}"` },
 						loc,
 					});
 				}
@@ -183,7 +191,16 @@ export default createRule<Options, 'deprecatedClass'>({
 						type: 'array',
 						items: {
 							type: 'object',
+							properties: {
+								// RegExp instances validate as plain objects in JSON schema
+								objectPattern: {
+									oneOf: [{ type: 'object' }, { type: 'array', items: { type: 'object' }, minItems: 1 }],
+								},
+								versionDeprecated: { type: 'string' },
+								versionDeleted: { type: 'string' },
+							},
 							required: ['objectPattern'],
+							additionalProperties: false,
 						},
 					},
 				},

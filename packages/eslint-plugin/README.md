@@ -226,13 +226,17 @@ Reports usage of deprecated Lucca Front CSS classes in Angular templates.
 
 ## 🚀 Configuration
 
-- Requires `@angular-eslint/template-parser` (the rule visits `TextAttribute` / `BoundAttribute` nodes).
-- Options take the raw `LFDeprecatedSelectors` entries — no mapping layer.
+- Requires `@angular-eslint/template-parser` (the rule visits `TextAttribute` / `BoundAttribute` nodes; wrong parser fails fast).
+- Options take the raw `LFDeprecatedSelectors` entries — no mapping layer. String entries are rejected by the schema (near-inert against class attributes).
+- The `setDeprecationMessageBuilder()` call is load-bearing: without it, messages degrade to a plain fallback.
 - Wired in `eslint.config.mjs`:
 
 ```javascript
-import localRules from './packages/eslint-plugin/index.ts';
+import localRules, { setDeprecationMessageBuilder } from './packages/eslint-plugin/index.ts';
 import LFDeprecatedSelectors from './packages/stylelint-config/LFDeprecatedSelectors.mjs';
+import { getDisallowedData } from './packages/stylelint-config/stylelintForLF.mjs';
+
+setDeprecationMessageBuilder((deprecations, matchedSelector) => getDisallowedData(deprecations, matchedSelector).message);
 
 // in the `**/*.html` block (angular template parser):
 rules: {
@@ -261,9 +265,12 @@ rules: {
 - Messages come verbatim from `stylelint-config`'s `getDisallowedData()` — same wording as stylelint, dates included.
 - The formatter is injected via `setDeprecationMessageBuilder()` in `eslint.config.mjs`, not via options.
 - Two constraints force that indirection: ESLint `structuredClone`s rule options (functions cannot travel through them), and the plugin cannot import `stylelintForLF.mjs` itself (jest cannot load it: its `currentLFVersion` import uses top-level await).
+- The builder receives only the entry that matched, so a report always carries its own entry's versions.
 - Without injection (e.g. under jest), the rule falls back to a plain static message.
-- The `getSeverity()` policy (warning until `versionDeleted` is reached) is not reused: ESLint severity is fixed per rule, and `currentLFVersion` resolves to `null` inside this repo (scss version `0.0.0`).
+- Message dates come from `LFVersions.mjs`, which fetches release data (1-hour tmp cache): message text varies with network/cache state, and in-repo messages always carry `| LF version not found` (scss version `0.0.0`).
+- The `getSeverity()` policy (warning until `versionDeleted` is reached) is not reused: ESLint severity is fixed per rule, and `currentLFVersion` resolves to `null` inside this repo.
 - A flat `error` severity is correct here: this repo is always at HEAD of Lucca Front.
+- `\b` boundaries stop camelCase over-matches but not hyphen ones (`.error-message` still matches `\.error\b`): a stricter `(?![\w-])` would break dash-separated deprecated families like `.menu-link`, so the looseness is kept knowingly.
 
 ## 📋 Known violations in this repository
 
