@@ -139,11 +139,11 @@ export default {
 							<h2 class="pr-u-h4"><a href="#" lu-approbation-inbox-action>Title</a></h2>
 							<p class="pr-u-bodyS pr-u-colorTextSubtle">Metadata</p>
 							<ng-container approbationInboxListItemEnd>
-								<p class="pr-u-bodyM">Main data</p>
+								<p class="pr-u-bodyM">Metadata</p>
 								<p class="pr-u-displayFlex pr-u-colorTextSubtle pr-u-gap25">
 									<lu-icon size="XS" class="pr-u-focusVisible pr-u-borderRadiusSmall" icon="formatClipperAttachment" alt="Contient une pièce jointe" luTooltip="Contient une pièce jointe" luTooltipOnlyForDisplay />
 									<lu-icon size="XS" class="pr-u-focusVisible pr-u-borderRadiusSmall" icon="bubbleSpeech" alt="Contient un commentaire" luTooltip="Contient un commentaire" luTooltipOnlyForDisplay />
-									<!-- <lu-icon size="XS" icon="signWarning" alt="Contient un avertissement" /> -->
+									<lu-icon size="XS" class="pr-u-textWarning" icon="signWarning" alt="Contient un avertissement" luTooltip="Contient un avertissement" luTooltipOnlyForDisplay />
 								</p>
 							</ng-container>
 						</lu-approbation-inbox-item>

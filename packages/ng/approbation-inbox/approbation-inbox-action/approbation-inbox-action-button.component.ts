@@ -1,4 +1,5 @@
 import { booleanAttribute, ChangeDetectionStrategy, Component, input, ViewEncapsulation } from '@angular/core';
+import { injectMediaMinBreakpoint } from '@lucca-front/ng/core';
 
 @Component({
 	// eslint-disable-next-line @angular-eslint/component-selector
@@ -13,4 +14,6 @@ import { booleanAttribute, ChangeDetectionStrategy, Component, input, ViewEncaps
 })
 export class ApprobationInboxButtonComponent {
 	readonly current = input(false, { transform: booleanAttribute });
+
+	readonly mediaMaxM = injectMediaMinBreakpoint('M', true);
 }

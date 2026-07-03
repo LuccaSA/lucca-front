@@ -1,4 +1,5 @@
 import { booleanAttribute, ChangeDetectionStrategy, Component, input, ViewEncapsulation } from '@angular/core';
+import { injectMediaMinBreakpoint } from '@lucca-front/ng/core';
 
 @Component({
 	// eslint-disable-next-line @angular-eslint/component-selector
@@ -8,10 +9,14 @@ import { booleanAttribute, ChangeDetectionStrategy, Component, input, ViewEncaps
 	encapsulation: ViewEncapsulation.None,
 	host: {
 		class: 'approbationInbox-list-item-content-action',
-		'[attr.aria-current]': 'current() ? "page" : null',
+		'[attr.aria-current]': '!mediaMaxM() && current() ? "page" : null',
+		'[attr.role]': 'mediaMaxM() ? "button" : null',
+		'[class.is-current]': 'mediaMaxM() && current()',
 	},
 	changeDetection: ChangeDetectionStrategy.OnPush,
 })
 export class ApprobationInboxLinkComponent {
 	readonly current = input(false, { transform: booleanAttribute });
+
+	readonly mediaMaxM = injectMediaMinBreakpoint('M', true);
 }
