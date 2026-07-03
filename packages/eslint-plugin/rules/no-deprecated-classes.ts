@@ -1,3 +1,5 @@
+import { Interpolation, LiteralMap, LiteralPrimitive, RecursiveAstVisitor } from '@angular-eslint/bundled-angular-compiler';
+import type { AST } from '@angular-eslint/bundled-angular-compiler';
 import type { TSESTree } from '@typescript-eslint/utils';
 import { createRule } from './create-rule.ts';
 
@@ -37,12 +39,36 @@ interface TemplateTextAttribute {
 interface TemplateBoundAttribute {
 	name: string;
 	keySpan?: { details?: string | null };
-	value?: { source?: string | null };
+	value?: AST;
 	loc: TSESTree.SourceLocation;
 }
 
-const STRING_LITERAL = /'((?:[^'\\]|\\.)*)'|"((?:[^"\\]|\\.)*)"/g;
-const INTERPOLATION = /\{\{[\s\S]*?\}\}/g;
+/**
+ * Collects every chunk of an Angular expression that may hold a class list:
+ * string literals, ngClass object-literal keys and the static parts of interpolations.
+ */
+class ClassListCollector extends RecursiveAstVisitor {
+	readonly classLists: string[] = [];
+
+	override visitLiteralPrimitive(ast: LiteralPrimitive, context: unknown): void {
+		if (typeof ast.value === 'string') {
+			this.classLists.push(ast.value);
+		}
+		super.visitLiteralPrimitive(ast, context);
+	}
+
+	override visitLiteralMap(ast: LiteralMap, context: unknown): void {
+		// [ngClass]="{ 'palette-grey': cond }": classes are the map keys (spread keys have none)
+		this.classLists.push(...ast.keys.flatMap((mapKey) => ('key' in mapKey ? [mapKey.key] : [])));
+		super.visitLiteralMap(ast, context);
+	}
+
+	override visitInterpolation(ast: Interpolation, context: unknown): void {
+		// class="foo {{ expr }}": the static parts form the literal class list
+		this.classLists.push(ast.strings.join(' '));
+		super.visitInterpolation(ast, context);
+	}
+}
 
 interface CompiledEntry {
 	// All RegExp patterns of the entry merged into one alternation
@@ -88,25 +114,6 @@ function toCompoundSelector(classList: string): string {
 		.join('');
 }
 
-/**
- * Extract every chunk of an Angular expression that may hold a class list:
- * the static parts of an interpolation, and every string literal.
- */
-function classListsFromExpression(source: string): string[] {
-	const classLists: string[] = [];
-
-	const staticParts = source.replace(INTERPOLATION, ' ');
-	if (staticParts !== source) {
-		classLists.push(staticParts);
-	}
-
-	for (const match of source.matchAll(STRING_LITERAL)) {
-		classLists.push(match[1] ?? match[2]);
-	}
-
-	return classLists;
-}
-
 export default createRule<Options, 'deprecatedClass'>({
 	create: (context) => {
 		// context.options[0] is the raw config-provided object: a stable reference, required as the
@@ -149,7 +156,10 @@ export default createRule<Options, 'deprecatedClass'>({
 
 				if (node.name === 'class' || node.name === 'ngClass') {
 					// [class]="expr", [attr.class]="expr", [ngClass]="expr" or class="{{ expr }}"
-					for (const classList of classListsFromExpression(node.value?.source ?? '')) {
+					const collector = new ClassListCollector();
+					node.value?.visit(collector);
+
+					for (const classList of collector.classLists) {
 						checkClassList(classList, node.loc);
 					}
 				}

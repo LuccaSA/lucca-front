@@ -247,14 +247,14 @@ rules: {
 | `class="button mod-counter"`                 | Whole class list, as a compound selector                          |
 | `ngClass="u-comma"` (static)                 | Same as `class`                                                   |
 | `[class.mod-link]="cond"`                    | The bound class name itself                                       |
-| `[class]="expr"` / `[attr.class]="expr"`     | String literals found in the expression source                    |
-| `[ngClass]="{ 'palette-grey': cond }"`       | String literals found in the expression source                    |
-| `class="foo {{ expr }}"`                     | Static parts of the interpolation + string literals in `expr`     |
+| `[class]="expr"` / `[attr.class]="expr"`     | String literals in the expression AST                             |
+| `[ngClass]="{ 'palette-grey': cond }"`       | Object-literal keys and string literals in the expression AST     |
+| `class="foo {{ expr }}"`                     | Static interpolation parts + literals in `expr`                   |
 
 ## ⚠️ Limitations
 
 1. **Single-element checks only** — descendant selector patterns (e.g. `.lu-select-value .label`) can never match a single `class` attribute and are silently inert (their individual classes are usually covered by other entries).
-2. **Expression scanning is textual** — string literals are extracted from the expression source; class names computed in TypeScript code are invisible to the rule.
+2. **Static analysis only** — class names computed in TypeScript code are invisible to the rule.
 3. **Loose source patterns over-match** — entries without `\b` can match longer class names (e.g. `/\.u-text(X?S|M|X{0,3}L)/` also matches `.u-textLight`). Fix belongs in `LFDeprecatedSelectors.mjs`, as it affects stylelint consumers identically.
 
 ## 📐 Design notes

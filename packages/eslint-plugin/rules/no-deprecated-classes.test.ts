@@ -115,6 +115,12 @@ ruleTester.run(RULE_NAME, rule, {
 			errors: [{ messageId: 'deprecatedClass' }],
 		},
 		{
+			name: '❌ Deprecated class as unquoted ngClass object key',
+			code: `<div [ngClass]="{ modLink: cond }"></div>`,
+			options: [{ deprecations: [{ objectPattern: /\.modLink\b/ }] }],
+			errors: [{ messageId: 'deprecatedClass' }],
+		},
+		{
 			name: '❌ Deprecated class in static ngClass attribute',
 			code: `<div ngClass="u-textLight"></div>`,
 			options,
