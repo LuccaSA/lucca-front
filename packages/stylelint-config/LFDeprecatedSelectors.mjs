@@ -21,6 +21,7 @@ export default [
 		versionDeleted: '18.1.0',
 	},
 	{
+		// SEE https://regex101.com/r/AUlf21.
 		objectPattern: [/\.button-counter\b/, /\.navSide-item-alert\b/, /\.textfield-actionClear\b/, /\.lu-select-value \.label\b/],
 		versionDeleted: '18.1.0',
 	},
@@ -30,9 +31,9 @@ export default [
 		objectPattern: /(?=\S*\.callout\b)(?=\S*\.mod-tiny\b)\S*/,
 		versionDeleted: '18.1.0',
 	},
-	// Any occurrence of one of these selectors in any part of a selector
-	// SEE https://regex101.com/r/VHfdte.
 	{
+		// Any occurrence of one of these selectors in any part of a selector
+		// SEE https://regex101.com/r/VHfdte.
 		objectPattern: [/\.user-info\b/, /\.user-tile(-(title|label|footnote))?\b/, /\.picture\b/],
 		versionDeleted: '20.1.0',
 	},
@@ -44,11 +45,13 @@ export default [
 		versionDeleted: '19.1.0',
 	},
 	{
+		// SEE https://regex101.com/r/VGtzuM.
 		objectPattern: [/\.u-comma\b/, /\.u-unit\b/],
 		versionDeprecated: '17.3.0',
 		versionDeleted: '19.1.0',
 	},
 	{
+		// SEE https://regex101.com/r/nPMyQZ.
 		objectPattern: /\.palette-(grey|primary|secondary|lucca)\b/,
 		versionDeprecated: '17.3.0',
 		versionDeleted: '22.0.0',
@@ -73,11 +76,13 @@ export default [
 		versionDeprecated: '20.2.0',
 	},
 	{
+		// SEE https://regex101.com/r/y2kYBk.
 		objectPattern: [/\.u-textLeft\b/, /\.u-textCenter\b/, /\.u-textRight\b/],
 		versionDeprecated: '18.1.0',
 		versionDeleted: '22.0.0',
 	},
 	{
+		// SEE https://regex101.com/r/HoanMW.
 		objectPattern: /\.mod-columnSticky\b/,
 		versionDeprecated: '18.2.0',
 		versionDeleted: '20.1.0',
@@ -96,21 +101,25 @@ export default [
 		versionDeleted: '20.1.0',
 	},
 	{
+		// SEE https://regex101.com/r/8f4B4g.
 		objectPattern: [/\.comment-content-textContainer\b/, /\.mod-withMenuCompact\b/],
 		versionDeprecated: '18.3.0',
 		versionDeleted: '20.1.0',
 	},
 	{
+		// SEE https://regex101.com/r/Ndh0bQ.
 		objectPattern: [/\.dialog-form\b/, /\.dialog-formOptional\b/],
 		versionDeprecated: '18.3.0',
 		versionDeleted: '22.0.0',
 	},
 	{
+		// SEE https://regex101.com/r/43OspP.
 		objectPattern: /\.u-elevate.*/,
 		versionDeprecated: '19.1.0',
 		versionDeleted: '19.1.0',
 	},
 	{
+		// SEE https://regex101.com/r/7wO4Oc.
 		objectPattern: /\.lu-dropdown-(content|options|options-item|options-item-action)\b/,
 		versionDeprecated: '19.2.0',
 		versionDeleted: '22.0.0',
@@ -122,6 +131,7 @@ export default [
 		versionDeleted: '21.1.0',
 	},
 	{
+		// SEE https://regex101.com/r/1eWJ0d.
 		objectPattern: /\.menu\b/,
 		versionDeprecated: '19.3.0',
 		versionDeleted: '22.0.0',
@@ -141,6 +151,7 @@ export default [
 	},
 	{
 		// Utilitaires renommés très utilisés
+		// SEE https://regex101.com/r/TdUmb8.
 		objectPattern: [
 			/\.pr-u-textPrimary\b/,
 			/\.pr-u-textProduct\b/,
@@ -161,6 +172,7 @@ export default [
 	},
 	{
 		// Utilitaires renommés peu ou pas utilisés
+		// SEE https://regex101.com/r/Dk4cFs.
 		objectPattern: [
 			/\.pr-u-textSuccessContrasted\b/,
 			/\.pr-u-textWarningContrasted\b/,
