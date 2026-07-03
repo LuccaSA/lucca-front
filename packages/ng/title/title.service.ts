@@ -1,4 +1,5 @@
-import { Inject, Injectable } from '@angular/core';
+import { DestroyRef, Inject, inject, Injectable } from '@angular/core';
+import { takeUntilDestroyed } from '@angular/core/rxjs-interop';
 import { Title } from '@angular/platform-browser';
 import { ActivatedRouteSnapshot, ActivationEnd, Router } from '@angular/router';
 import { BehaviorSubject, combineLatest, ObservableInput, of } from 'rxjs';
@@ -11,6 +12,8 @@ import { PageTitle, TitleSeparator } from './title.model';
  */
 @Injectable()
 export class LuTitleService {
+	private destroyRef = inject(DestroyRef);
+
 	private titlePartsSubject = new BehaviorSubject<Array<string | ObservableInput<string>>>(['Lucca']);
 	titleParts$ = this.titlePartsSubject.asObservable();
 	title$ = this.titleParts$.pipe(
@@ -36,10 +39,16 @@ export class LuTitleService {
 				map((titleParts: Array<string>) => [...titleParts, this.translateService.translate(applicationNameTranslationKey, {}), 'Lucca'].filter((x) => !!x)),
 				distinctUntilChanged(),
 				tap((titleParts) => this.titlePartsSubject.next(titleParts)),
+				takeUntilDestroyed(this.destroyRef),
 			)
 			.subscribe();
 
-		this.title$.pipe(tap((title) => this.title.setTitle(title))).subscribe();
+		this.title$
+			.pipe(
+				tap((title) => this.title.setTitle(title)),
+				takeUntilDestroyed(this.destroyRef),
+			)
+			.subscribe();
 	}
 
 	prependTitle(title: string | ObservableInput<string>) {
