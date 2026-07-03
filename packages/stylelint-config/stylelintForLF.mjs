@@ -4,7 +4,7 @@ import currentLFVersion from './currentLFVersion.mjs';
 /**
  * @typedef {object} DisallowedObject - Object found in the list of disallowed objects
  * @property {(RegExp | string)[] | RegExp | string} [objectPattern] - Pattern(s) matching the deprecated element
- * @property {string} versionDeprecated - LF version deprecating the element
+ * @property {string} [versionDeprecated] - LF version deprecating the element
  * @property {string} [versionDeleted] - LF version deleting the element
  * @property {string} [actions] - Migration actions
  * @property {object} [urls] - Related URLs
