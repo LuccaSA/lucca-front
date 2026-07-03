@@ -1,7 +1,6 @@
 import { OverlayConfig, OverlayContainer } from '@angular/cdk/overlay';
 import {
 	booleanAttribute,
-	ChangeDetectorRef,
 	computed,
 	Directive,
 	ElementRef,
@@ -22,7 +21,7 @@ import {
 	ViewChild,
 } from '@angular/core';
 import { outputFromObservable, toSignal } from '@angular/core/rxjs-interop';
-import { ControlValueAccessor } from '@angular/forms';
+import type { FormValueControl } from '@angular/forms/signals';
 import { PortalContent } from '@lucca-front/ng/core';
 import { FILTER_PILL_HOST_COMPONENT, FILTER_PILL_INPUT_COMPONENT, FilterPillInputComponent } from '@lucca-front/ng/filter-pills';
 import { BehaviorSubject, defer, map, Observable, of, ReplaySubject, startWith, Subject, switchMap, take } from 'rxjs';
@@ -42,9 +41,8 @@ export const coreSelectDefaultOptionKey: (option: unknown) => unknown = (option)
 		'[class.mod-compact]': 'compact()',
 	},
 })
-export abstract class ALuSelectInputComponent<TOption, TValue> implements OnDestroy, OnInit, ControlValueAccessor, FilterPillInputComponent {
+export abstract class ALuSelectInputComponent<TOption, TValue> implements OnDestroy, OnInit, FormValueControl<TValue | null>, FilterPillInputComponent {
 	public parentInput = inject(FILTER_PILL_INPUT_COMPONENT, { optional: true, skipSelf: true });
-	protected changeDetectorRef = inject(ChangeDetectorRef);
 	protected overlayContainerRef: HTMLElement = inject(OverlayContainer).getContainerElement();
 
 	protected labelElement: HTMLElement | undefined = inject(SELECT_LABEL);
@@ -72,8 +70,8 @@ export abstract class ALuSelectInputComponent<TOption, TValue> implements OnDest
 
 	public placeholder$ = new BehaviorSubject('');
 
-	public disabled$ = new BehaviorSubject(false);
-	filterPillDisabled = toSignal(this.disabled$);
+	readonly disabled = input(false, { transform: booleanAttribute });
+	readonly filterPillDisabled = this.disabled;
 
 	prefix = input<PortalContent | null>(null);
 
@@ -123,7 +121,7 @@ export abstract class ALuSelectInputComponent<TOption, TValue> implements OnDest
 
 	@HostBinding('class.is-searchFilled')
 	protected get isSearchFilledClass(): boolean {
-		return this.clue?.length > 0;
+		return (this.clue()?.length ?? 0) > 0;
 	}
 
 	protected abstract hasValue(): boolean;
@@ -214,28 +212,18 @@ export abstract class ALuSelectInputComponent<TOption, TValue> implements OnDest
 	nextPage = outputFromObservable(this.nextPage$);
 	previousPage = output<void>();
 	addOption = output<string>();
+	readonly touch = output<void>();
 
-	public valueSignal = signal<TValue>(null);
-	isFilterPillEmpty = computed(() => this.valueSignal() === null);
+	readonly value = model<TValue | null>(null);
+	isFilterPillEmpty = computed(() => this.value() === null);
 	isFilterPillClearable = computed(() => this.#clearable());
 
-	public get value(): TValue {
-		return this._value;
-	}
-
-	protected set value(value: TValue) {
-		// TODO remove once migrated to signal, but there's an override
-		this._value = value;
-		this.valueSignal.set(value);
-		this.changeDetectorRef.markForCheck();
-	}
-
 	public get inputPlaceholder(): string | null {
-		return this.value ? null : this.placeholder$.value;
+		return this.value() ? null : this.placeholder$.value;
 	}
 
 	public clueChanged(clue: string, skipPanelOpen = false): void {
-		this.clue = clue;
+		this.clue.set(clue);
 
 		if (!skipPanelOpen && !this.isPanelOpen) {
 			this.openPanel(clue);
@@ -245,14 +233,12 @@ export abstract class ALuSelectInputComponent<TOption, TValue> implements OnDest
 		}
 	}
 
-	protected _value?: TValue;
-
 	options$ = new ReplaySubject<readonly TOption[]>(1);
 	loading$ = new BehaviorSubject(false);
-	clue: string | null = null;
+	readonly clue = signal<string | null>(null);
 	// This is the clue stored after we selected an option to know if we should emit an empty clue on open or not
 	lastEmittedClue: string = '';
-	clue$ = defer(() => this.clueChange$.pipe(startWith(this.clue)));
+	clue$ = defer(() => this.clueChange$.pipe(startWith(this.clue())));
 
 	addOptionStrategy$ = new BehaviorSubject<CoreSelectAddOptionStrategy>('never');
 	shouldDisplayAddOption$ = this.addOptionStrategy$.pipe(
@@ -269,9 +255,6 @@ export abstract class ALuSelectInputComponent<TOption, TValue> implements OnDest
 			}
 		}),
 	);
-
-	protected onChange?: (value: TValue | null) => void;
-	protected onTouched?: () => void;
 
 	public get panelRef(): LuSelectPanelRef<TOption, TValue> | undefined {
 		return this._panelRef;
@@ -327,7 +310,7 @@ export abstract class ALuSelectInputComponent<TOption, TValue> implements OnDest
 			case 'ArrowDown':
 			case 'ArrowUp':
 				// Initial space should just open the panel, not trigger a clue change
-				if (!this.clue && $event.key === ' ') {
+				if (!this.clue() && $event.key === ' ') {
 					$event.preventDefault();
 				}
 				if (this.isPanelOpen) {
@@ -345,19 +328,6 @@ export abstract class ALuSelectInputComponent<TOption, TValue> implements OnDest
 				}
 				break;
 		}
-	}
-
-	registerOnChange(onChange: (value: TValue) => void): void {
-		this.onChange = onChange;
-	}
-
-	registerOnTouched(onTouched: () => void): void {
-		this.onTouched = onTouched;
-	}
-
-	setDisabledState(isDisabled: boolean): void {
-		this.disabled$.next(isDisabled);
-		this.changeDetectorRef.markForCheck();
 	}
 
 	ngOnDestroy(): void {
@@ -381,7 +351,7 @@ export abstract class ALuSelectInputComponent<TOption, TValue> implements OnDest
 	}
 
 	openPanel(clue: string = ''): void {
-		if (this.filterPillMode || this.isPanelOpen || this.disabled$.value) {
+		if (this.filterPillMode || this.isPanelOpen || this.disabled()) {
 			return;
 		}
 
@@ -414,7 +384,7 @@ export abstract class ALuSelectInputComponent<TOption, TValue> implements OnDest
 	}
 
 	emitAddOption(): void {
-		this.addOption.emit(this.clue);
+		this.addOption.emit(this.clue() ?? '');
 		this.panelRef?.close();
 	}
 
@@ -432,7 +402,6 @@ export abstract class ALuSelectInputComponent<TOption, TValue> implements OnDest
 
 		this.panelRef.activeOptionIdChanged.subscribe((optionId) => {
 			this.activeDescendant$.next(optionId);
-			this.changeDetectorRef.markForCheck();
 		});
 		this.panelRef.closed.subscribe(() => this.closePanel());
 	}
@@ -444,9 +413,8 @@ export abstract class ALuSelectInputComponent<TOption, TValue> implements OnDest
 	}
 
 	protected emptyClue(): void {
-		if (this.clue) {
-			this.clue = null;
-			this.changeDetectorRef.markForCheck();
+		if (this.clue()) {
+			this.clue.set(null);
 		}
 	}
 
@@ -457,8 +425,7 @@ export abstract class ALuSelectInputComponent<TOption, TValue> implements OnDest
 		this.panelClosed.emit();
 		this.emptyClue();
 		this.activeDescendant$.next('');
-		this.changeDetectorRef.markForCheck();
-		this.onTouched?.();
+		this.touch.emit();
 		if (!this.filterPillMode) {
 			this.isPanelOpen$.next(false);
 			this.panelRef?.close();
@@ -468,18 +435,17 @@ export abstract class ALuSelectInputComponent<TOption, TValue> implements OnDest
 		this.afterCloseFn?.();
 	}
 
-	public writeValue(value: TValue): void {
-		this.value = value;
+	public setValue(value: TValue | null): void {
+		this.value.set(value);
 	}
 
-	public updateValue(value: TValue, skipPanelOpen = false, noClear = false): void {
-		this.value = value;
+	public updateValue(value: TValue | null, skipPanelOpen = false, noClear = false): void {
+		this.setValue(value);
 		if (!noClear) {
 			this.emptyClue();
 			this.clueChanged('', skipPanelOpen);
 		}
-		this.onChange?.(value);
-		this.onTouched?.();
+		this.touch.emit();
 	}
 
 	// Ensure nextPage/previousPage does not emit too often

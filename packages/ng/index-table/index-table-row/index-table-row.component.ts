@@ -1,6 +1,5 @@
 import { NgTemplateOutlet } from '@angular/common';
 import { booleanAttribute, ChangeDetectionStrategy, Component, contentChildren, ElementRef, forwardRef, inject, input, model, numberAttribute, ViewEncapsulation } from '@angular/core';
-import { FormsModule } from '@angular/forms';
 import { FormFieldComponent } from '@lucca-front/ng/form-field';
 import { CheckboxInputComponent } from '@lucca-front/ng/forms';
 import { LuTooltipAnchorRef } from '@lucca-front/ng/tooltip';
@@ -25,7 +24,7 @@ import { LU_INDEX_TABLE_ROW_INSTANCE } from './index-table-row.token';
 		'[class.mod-stack2]': 'stack() === 2',
 		'[class.mod-stack3]': 'stack() === 3',
 	},
-	imports: [CheckboxInputComponent, FormFieldComponent, FormsModule, NgTemplateOutlet],
+	imports: [CheckboxInputComponent, FormFieldComponent, NgTemplateOutlet],
 	providers: [
 		{
 			provide: LU_INDEX_TABLE_ROW_INSTANCE,

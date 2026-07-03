@@ -1,6 +1,7 @@
 import { ConnectionPositionPair } from '@angular/cdk/overlay';
-import { booleanAttribute, ChangeDetectionStrategy, Component, computed, effect, forwardRef, inject, input, LOCALE_ID, output, signal, ViewEncapsulation, WritableSignal } from '@angular/core';
-import { ControlValueAccessor, FormsModule, NG_VALUE_ACCESSOR, ReactiveFormsModule } from '@angular/forms';
+import { booleanAttribute, ChangeDetectionStrategy, Component, computed, effect, inject, input, LOCALE_ID, model, output, ViewEncapsulation } from '@angular/core';
+import { FormsModule } from '@angular/forms';
+import type { FormValueControl } from '@angular/forms/signals';
 import { intlInputOptions, IntlParamsPipe } from '@lucca-front/ng/core';
 import { FORM_FIELD_INSTANCE, FormFieldComponent, InputDirective, ɵPresentationDisplayDefaultDirective } from '@lucca-front/ng/form-field';
 import { PopoverDirective } from '@lucca-front/ng/popover2';
@@ -15,7 +16,6 @@ import { LU_MULTILANGUAGE_INPUT_TRANSLATIONS } from './multilanguage-input.trans
 	selector: 'lu-multilanguage-input',
 	imports: [
 		FormFieldComponent,
-		ReactiveFormsModule,
 		PopoverDirective,
 		TextInputComponent,
 		FormFieldComponent,
@@ -29,17 +29,10 @@ import { LU_MULTILANGUAGE_INPUT_TRANSLATIONS } from './multilanguage-input.trans
 	],
 	templateUrl: './multilanguage-input.component.html',
 	styleUrl: './multilanguage-input.component.scss',
-	providers: [
-		{
-			provide: NG_VALUE_ACCESSOR,
-			useExisting: forwardRef(() => MultilanguageInputComponent),
-			multi: true,
-		},
-	],
 	encapsulation: ViewEncapsulation.None,
 	changeDetection: ChangeDetectionStrategy.OnPush,
 })
-export class MultilanguageInputComponent implements ControlValueAccessor {
+export class MultilanguageInputComponent implements FormValueControl<MultilanguageTranslation[]> {
 	#localeId = inject(LOCALE_ID);
 
 	#intlDisplay = new Intl.DisplayNames([this.#localeId], { type: 'language', languageDisplay: 'dialect' });
@@ -50,9 +43,11 @@ export class MultilanguageInputComponent implements ControlValueAccessor {
 
 	formFieldSize = this.formFieldRef.size;
 
-	protected onTouched = () => {};
+	readonly value = model<MultilanguageTranslation[]>([]);
 
-	protected onChange = (_value: MultilanguageTranslation[]) => {};
+	readonly disabled = input(false, { transform: booleanAttribute });
+
+	readonly touch = output<void>();
 
 	placeholder = input('');
 
@@ -70,16 +65,13 @@ export class MultilanguageInputComponent implements ControlValueAccessor {
 
 	shouldOpenOnFocus = computed(() => this.openOnFocus() || this.hasNoInvariant());
 
-	// Suffixed with Internal to avoid conflict with NgModel's disabled attribute
-	disabledInternal = signal(false);
-
-	model: WritableSignal<MultilanguageTranslation[]> = signal([] as MultilanguageTranslation[]);
+	readonly #translations = computed(() => this.value() ?? []);
 
 	displayRow = computed(() => {
 		if (this.hasNoInvariant()) {
-			return this.model().find((row) => row.cultureCode === this.displayLocale()) || { value: '', required: false, cultureCode: this.displayLocale() };
+			return this.#translations().find((row) => row.cultureCode === this.displayLocale()) || { value: '', required: false, cultureCode: this.displayLocale() };
 		} else {
-			return this.model().find((row) => row.cultureCode === INVARIANT_CULTURE_CODE) || { value: '', required: false, cultureCode: INVARIANT_CULTURE_CODE };
+			return this.#translations().find((row) => row.cultureCode === INVARIANT_CULTURE_CODE) || { value: '', required: false, cultureCode: INVARIANT_CULTURE_CODE };
 		}
 	});
 
@@ -88,11 +80,11 @@ export class MultilanguageInputComponent implements ControlValueAccessor {
 	});
 
 	panelInputs = computed(() => {
-		return this.model().filter((row) => (this.hasNoInvariant() ? row.cultureCode !== this.displayLocale() && row.cultureCode !== INVARIANT_CULTURE_CODE : row.cultureCode !== INVARIANT_CULTURE_CODE));
+		return this.#translations().filter((row) => (this.hasNoInvariant() ? row.cultureCode !== this.displayLocale() && row.cultureCode !== INVARIANT_CULTURE_CODE : row.cultureCode !== INVARIANT_CULTURE_CODE));
 	});
 
 	presentationValue = computed(() => {
-		return this.model().find((row) => row.cultureCode === this.#localeId)?.value || this.displayRow()?.value;
+		return this.#translations().find((row) => row.cultureCode === this.#localeId)?.value || this.displayRow()?.value;
 	});
 
 	popoverPositions: ConnectionPositionPair[] = [
@@ -109,6 +101,12 @@ export class MultilanguageInputComponent implements ControlValueAccessor {
 				console.warn('[Multilanguage Input] Input with no invariant should have `displayLocale` input filled.');
 			}
 		});
+		effect(() => {
+			const translations = this.#translations();
+			if (translations.length > 0 && !this.hasNoInvariant() && !translations.some((row) => row.cultureCode === INVARIANT_CULTURE_CODE)) {
+				throw new Error('Please provide an invariant translation in translation array');
+			}
+		});
 	}
 
 	getLocaleDisplayName(locale: string): string {
@@ -122,31 +120,12 @@ export class MultilanguageInputComponent implements ControlValueAccessor {
 		return referenceWidth / 16 + 1;
 	}
 
-	writeValue(value: MultilanguageTranslation[]): void {
-		if (!value) {
-			value = [];
+	updateRowValue(cultureCode: string, newValue: string): void {
+		const translations = this.#translations();
+		if (translations.some((row) => row.cultureCode === cultureCode)) {
+			this.value.set(translations.map((row) => (row.cultureCode === cultureCode ? { ...row, value: newValue } : row)));
+		} else {
+			this.value.set([...translations, { cultureCode, value: newValue }]);
 		}
-		if (value.length > 0) {
-			if (!this.hasNoInvariant() && !value.some((row) => row.cultureCode === INVARIANT_CULTURE_CODE)) {
-				throw new Error('Please provide an invariant translation in translation array');
-			}
-			this.model.set(value);
-		}
-	}
-
-	registerOnChange(fn: (value: MultilanguageTranslation[]) => void): void {
-		this.onChange = fn;
-	}
-
-	registerOnTouched(fn: () => void): void {
-		this.onTouched = fn;
-	}
-
-	setDisabledState?(isDisabled: boolean): void {
-		this.disabledInternal.set(isDisabled);
-	}
-
-	valueChange(): void {
-		this.onChange?.(this.model());
 	}
 }

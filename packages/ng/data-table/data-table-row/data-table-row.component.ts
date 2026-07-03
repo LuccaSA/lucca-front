@@ -1,7 +1,6 @@
 import { CdkDragHandle } from '@angular/cdk/drag-drop';
 import { NgTemplateOutlet } from '@angular/common';
 import { booleanAttribute, ChangeDetectionStrategy, Component, contentChildren, ElementRef, forwardRef, inject, input, model, ViewEncapsulation } from '@angular/core';
-import { FormsModule } from '@angular/forms';
 import { intlInputOptions } from '@lucca-front/ng/core';
 import { FormFieldComponent } from '@lucca-front/ng/form-field';
 import { CheckboxInputComponent } from '@lucca-front/ng/forms';
@@ -26,7 +25,7 @@ import { LU_DATA_TABLE_ROW_INSTANCE } from './data-table-row.token';
 		'[class.mod-selectable]': 'tableRef.selectable() ?? false',
 		'[class.mod-draggable]': 'tableRef.drag() ?? false',
 	},
-	imports: [CheckboxInputComponent, FormFieldComponent, FormsModule, NgTemplateOutlet, IconComponent, CdkDragHandle],
+	imports: [CheckboxInputComponent, FormFieldComponent, NgTemplateOutlet, IconComponent, CdkDragHandle],
 	providers: [
 		{
 			provide: LU_DATA_TABLE_ROW_INSTANCE,

@@ -13,11 +13,11 @@
 		[attr.aria-expanded]="panelOpenSignal()"
 		[attr.aria-controls]="ariaControls"
 		[attr.placeholder]="inputPlaceholder ? inputPlaceholder : intl().placeholder"
-		[ngModel]="clue"
+		[ngModel]="clue()"
 		(ngModelChange)="clueChanged($event)"
 		[ngModelOptions]="{ standalone: true }"
 		[readonly]="!searchable"
-		[disabled]="disabled$ | async"
+		[disabled]="disabled()"
 		(keyup.space)="inputSpace($event)"
 		luInput
 		#inputElement
@@ -29,7 +29,7 @@
 		<ng-container *ngTemplateOutlet="currentValueDisplayerTpl" />
 	</div>
 	@if (!filterPillMode && !impersonation()) {
-		@if (clearable && hasValue() && (disabled$ | async) === false) {
+		@if (clearable && hasValue() && !disabled()) {
 			<lu-clear class="simpleSelect-field-clear" (onClear)="clearValue($event); inputElement.focus()">{{ intl().clear }}</lu-clear>
 		}
 		<lu-icon icon="arrowChevronBottom" class="simpleSelect-field-icon" />
@@ -42,12 +42,12 @@
 </ng-container>
 
 <ng-template #currentValueDisplayerTpl>
-	<ng-container *luOptionOutlet="displayerTpl(); value: value" />
+	<ng-container *luOptionOutlet="displayerTpl(); value: value()" />
 </ng-template>
 
 @if (!ignorePresentation()) {
 	<ng-container *luPresentationDisplayDefault>
-		@if (value) {
+		@if (value()) {
 			<ng-container *ngTemplateOutlet="currentValueDisplayerTpl" />
 		} @else {
 			<span aria-hidden="true" data-content-before="–"></span>

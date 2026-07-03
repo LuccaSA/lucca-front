@@ -1,7 +1,7 @@
-<ng-container *luOptionOutlet="valuesTpl(); value: value || []" />
+<ng-container *luOptionOutlet="valuesTpl(); value: selectedOptions()" />
 
 @if (!filterPillMode) {
-	@if (hasValue() && clearable && (disabled$ | async) === false) {
+	@if (hasValue() && clearable && !disabled()) {
 		<lu-clear class="multipleSelect-clear" (onClear)="clearValue($event)">{{ intl().clear }}</lu-clear>
 	}
 
@@ -14,7 +14,7 @@
 	<div class="multipleSelect-displayer-filter">
 		@if (useSingleOptionDisplayer() && valueLength() === 1) {
 			<div class="multipleSelect-pill-displayer-chip">
-				<ng-container *luOptionOutlet="displayerTpl(); value: value[0]" />
+				<ng-container *luOptionOutlet="displayerTpl(); value: selectedOptions()[0]" />
 			</div>
 		}
 	</div>
@@ -32,7 +32,7 @@
 </ng-container>
 @if (!ignorePresentation()) {
 	<ng-container *luPresentationDisplayDefault>
-		@for (v of value; track $index) {
+		@for (v of selectedOptions(); track $index) {
 			@if ($last) {
 				<ng-container *ngTemplateOutlet="noComma; context: { $implicit: v }" />
 			} @else {

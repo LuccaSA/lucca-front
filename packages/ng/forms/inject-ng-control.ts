@@ -6,6 +6,11 @@ import { FormControl, FormControlDirective, FormControlName, NgControl, NgModel 
 import { FormField } from '@angular/forms/signals';
 import { distinctUntilChanged, map } from 'rxjs';
 
+/**
+ * @deprecated Form bricks now implement the signal forms `FormValueControl` / `FormCheckboxControl`
+ * contract; use `[formField]` (signal forms) or the component's `value` / `checked` model instead
+ * of `formControl` / `ngModel`. Will be removed in a future major version.
+ */
 export function injectNgControl() {
 	const ngControl = inject(NgControl, { self: true, optional: true });
 

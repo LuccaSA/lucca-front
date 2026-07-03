@@ -16,12 +16,12 @@
 			type="text"
 			class="textField-input-value"
 			[placeholder]="placeholder()"
-			[(ngModel)]="displayRow().value"
-			(ngModelChange)="valueChange()"
+			[ngModel]="displayRow().value"
+			(ngModelChange)="updateRowValue(displayRow().cultureCode, $event)"
 			[ngModelOptions]="{ standalone: true }"
-			(blur)="onTouched?.()"
+			(blur)="touch.emit()"
 			(focus)="shouldOpenOnFocus() ? popoverRef.openPopover(true, true, true) : null"
-			[disabled]="disabledInternal()"
+			[disabled]="disabled()"
 			[autocomplete]="autocomplete()"
 			#inputElement
 		/>
@@ -64,7 +64,7 @@
 									luButton="AI"
 									[luTooltip]="intl().translateWithAI"
 									luTooltipOnlyForDisplay
-									[disabled]="disabledInternal()"
+									[disabled]="disabled()"
 									(click)="translateWithAI.emit(row.cultureCode)"
 									class="multilanguage_popover-content-button"
 								>
@@ -79,11 +79,10 @@
 							>
 								<lu-text-input
 									[prefix]="{ content: prefixLang, ariaLabel: '' }"
-									[(ngModel)]="row.value"
+									[value]="row.value"
+									(valueChange)="updateRowValue(row.cultureCode, $event)"
 									[required]="formFieldRef.isInputRequired()"
-									(ngModelChange)="valueChange()"
-									[ngModelOptions]="{ standalone: true }"
-									[disabled]="disabledInternal()"
+									[disabled]="disabled()"
 									[autocomplete]="autocomplete()"
 									[suffix]="hasAIButtons() ? { content: aiSuffix, ariaLabel: '' } : null"
 								/>

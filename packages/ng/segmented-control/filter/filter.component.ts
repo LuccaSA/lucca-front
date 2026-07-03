@@ -1,5 +1,4 @@
-import { booleanAttribute, ChangeDetectionStrategy, Component, inject, input, ViewEncapsulation } from '@angular/core';
-import { ReactiveFormsModule } from '@angular/forms';
+import { booleanAttribute, ChangeDetectionStrategy, Component, computed, inject, input, ViewEncapsulation } from '@angular/core';
 import { PortalContent, PortalDirective } from '@lucca-front/ng/core';
 import { LU_SEGMENTEDCONTROL_INSTANCE } from '../segmented-control.token';
 
@@ -9,7 +8,7 @@ let nextId = 0;
 	selector: 'lu-segmented-control-filter',
 	templateUrl: './filter.component.html',
 	encapsulation: ViewEncapsulation.None,
-	imports: [ReactiveFormsModule, PortalDirective],
+	imports: [PortalDirective],
 	changeDetection: ChangeDetectionStrategy.OnPush,
 	host: {
 		class: 'segmentedControl-item',
@@ -35,9 +34,15 @@ export class SegmentedControlFilterComponent<T = unknown> {
 	readonly label = input<PortalContent>();
 
 	readonly id = `${this.segmentedControlRef.id}item${nextId++}`;
-	readonly name = this.segmentedControlRef.id;
 
-	public get formControl() {
-		return this.segmentedControlRef.ngControl.control;
+	protected readonly checked = computed(() => this.segmentedControlRef.value() === this.value());
+	protected readonly isDisabled = computed(() => this.segmentedControlRef.disabled() || this.disabled());
+
+	protected onChange() {
+		this.segmentedControlRef.value.set(this.value());
+	}
+
+	protected onBlur() {
+		this.segmentedControlRef.touch.emit();
 	}
 }

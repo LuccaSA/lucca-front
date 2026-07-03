@@ -274,6 +274,6 @@ export class FormFieldComponent implements OnDestroy, DoCheck {
 		if (statusControlOverride) {
 			return statusControlOverride.invalid && this.ownControls().some((c) => c?.touched);
 		}
-		return this.ownControls().some((c) => c.invalid && c.touched);
+		return this.ownControls().some((c) => c.invalid && c.touched) || this.ownFormFields().some((f) => f.state().invalid() && f.state().touched());
 	}
 }

@@ -12,7 +12,7 @@
 <ng-template #input>
 	@if (!footRef && selectedLabel()) {
 		<lu-form-field [label]="selectedLabel()" hiddenLabel>
-			<lu-checkbox-input class="indexTable-head-row-cell-checkbox" [(ngModel)]="selected" [disabled]="disabled()" />
+			<lu-checkbox-input class="indexTable-head-row-cell-checkbox" [(checked)]="selected" [disabled]="disabled()" />
 		</lu-form-field>
 	}
 </ng-template>

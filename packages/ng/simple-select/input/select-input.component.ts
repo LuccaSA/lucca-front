@@ -1,7 +1,7 @@
 import { OverlayModule } from '@angular/cdk/overlay';
 import { AsyncPipe, NgTemplateOutlet } from '@angular/common';
 import { booleanAttribute, ChangeDetectionStrategy, Component, forwardRef, inject, input, viewChild, ViewContainerRef, ViewEncapsulation } from '@angular/core';
-import { ControlValueAccessor, FormsModule, NG_VALUE_ACCESSOR } from '@angular/forms';
+import { FormsModule } from '@angular/forms';
 import { ClearComponent } from '@lucca-front/ng/clear';
 import { intlInputOptions, PortalDirective } from '@lucca-front/ng/core';
 import { ALuSelectInputComponent, LU_CORE_SELECT_TRANSLATIONS, LuSelectPanelRef, provideLuSelectLabelsAndIds, ɵLuOptionOutletDirective } from '@lucca-front/ng/core-select';
@@ -39,11 +39,6 @@ let nextID = 0;
 	],
 	providers: [
 		{
-			provide: NG_VALUE_ACCESSOR,
-			useExisting: forwardRef(() => LuSimpleSelectInputComponent),
-			multi: true,
-		},
-		{
 			provide: ALuSelectInputComponent,
 			useExisting: forwardRef(() => LuSimpleSelectInputComponent),
 		},
@@ -56,7 +51,7 @@ let nextID = 0;
 	],
 	encapsulation: ViewEncapsulation.None,
 })
-export class LuSimpleSelectInputComponent<T> extends ALuSelectInputComponent<T, T> implements ControlValueAccessor {
+export class LuSimpleSelectInputComponent<T> extends ALuSelectInputComponent<T, T> {
 	intl = input(...intlInputOptions(LU_CORE_SELECT_TRANSLATIONS, LU_SIMPLE_SELECT_TRANSLATIONS));
 
 	valueID = `value-${++nextID}`;
@@ -75,7 +70,7 @@ export class LuSimpleSelectInputComponent<T> extends ALuSelectInputComponent<T, 
 
 	inputSpace(event: Event): void {
 		if (this.filterPillMode || this.impersonation()) {
-			if (this.clue?.length === 0) {
+			if (this.clue()?.length === 0) {
 				event.preventDefault();
 				this.panelRef?.selectCurrentlyHighlightedValue();
 			}
@@ -83,7 +78,7 @@ export class LuSimpleSelectInputComponent<T> extends ALuSelectInputComponent<T, 
 	}
 
 	protected hasValue(): boolean {
-		return this.value !== null && this.value !== undefined;
+		return this.value() !== null && this.value() !== undefined;
 	}
 
 	override enableFilterPillMode() {

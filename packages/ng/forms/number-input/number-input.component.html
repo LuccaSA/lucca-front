@@ -43,7 +43,10 @@
 			type="number"
 			class="textField-input-value"
 			[placeholder]="placeholder()"
-			[formControl]="ngControl.control"
+			[value]="value()"
+			[disabled]="disabled()"
+			(input)="onInput(inputElement)"
+			(blur)="touch.emit()"
 			[step]="step()"
 			[min]="min()"
 			[max]="max()"
@@ -60,8 +63,8 @@
 </div>
 
 <ng-container *luPresentationDisplayDefault>
-	@if (ngControl.value) {
-		{{ ngControl.value }}
+	@if (value()) {
+		{{ value() }}
 	} @else {
 		<span aria-hidden="true" data-content-before="–"></span>
 	}

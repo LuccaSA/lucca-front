@@ -76,7 +76,7 @@ export class LuSelectPanelComponent<T> implements AfterViewInit, CoreSelectPanel
 	trackGroupsBy: TrackByFunction<LuOptionGroup<T, unknown>> = (_, group) => group.key;
 	trackBranchesBy: TrackByFunction<TreeNode<T>> = (_, option) => this.optionKey(option.node);
 
-	initialValue: T | undefined = this.selectInput.value;
+	initialValue: T | null = this.selectInput.value();
 	optionTpl = this.selectInput.optionTpl;
 
 	options = signal<ɵCoreSelectPanelElement<T>[]>([]);
@@ -94,7 +94,7 @@ export class LuSelectPanelComponent<T> implements AfterViewInit, CoreSelectPanel
 
 	public keyManager = inject<CoreSelectKeyManager<T>>(CoreSelectKeyManager);
 
-	public selected = computed(() => this.selectInput.valueSignal());
+	public readonly selected = computed(() => this.selectInput.value());
 
 	hasGrouping$ = toObservable(this.grouping).pipe(map((grouping) => !!grouping));
 	public clueChange$ = this.selectInput.clue$;
@@ -124,7 +124,7 @@ export class LuSelectPanelComponent<T> implements AfterViewInit, CoreSelectPanel
 			clueChange$: this.selectInput.searchable ? this.selectInput.clueChange$ : EMPTY,
 		});
 
-		if (this.initialValue && !this.selectInput.clue) {
+		if (this.initialValue !== null && !this.selectInput.clue()) {
 			this.keyManager.highlightOption(this.initialValue);
 		}
 	}

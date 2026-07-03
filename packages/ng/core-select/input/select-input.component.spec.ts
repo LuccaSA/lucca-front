@@ -91,7 +91,7 @@ export function runALuSelectInputComponentTestSuite<TValue>(config: LuSelectInpu
 	it('should not open the panel when clicking the clearer', () => {
 		// Arrange
 		component.clearable = true;
-		component.writeValue(config.exampleValue);
+		component.setValue(config.exampleValue);
 		fixture.detectChanges();
 
 		const clearer = nativeElement.querySelector(config.clearerSelector);
@@ -105,7 +105,7 @@ export function runALuSelectInputComponentTestSuite<TValue>(config: LuSelectInpu
 
 		// Assert
 		expect(component.isPanelOpen).toBe(false);
-		expect(component.value).toEqual(config.emptyValue);
+		expect(component.value()).toEqual(config.emptyValue);
 	});
 
 	it.each(['ArrowLeft', 'ArrowRight', 'Backspace', 'Meta'])('should not open the panel when sending not a letter events (%s)', (key) => {
@@ -119,5 +119,16 @@ export function runALuSelectInputComponentTestSuite<TValue>(config: LuSelectInpu
 		// Assert
 		expect(component.isPanelOpen).toBe(false);
 		expect(clueChangeSpy).not.toHaveBeenCalled();
+	});
+
+	it('should update filter pill disabled signal when disabled state changes', () => {
+		// Assert initial state
+		expect(component.filterPillDisabled?.()).toBe(false);
+
+		// Act
+		fixture.componentRef.setInput('disabled', true);
+
+		// Assert
+		expect(component.filterPillDisabled?.()).toBe(true);
 	});
 }

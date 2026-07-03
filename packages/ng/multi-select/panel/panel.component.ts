@@ -74,7 +74,7 @@ export class LuMultiSelectPanelComponent<T> implements AfterViewInit, CoreSelect
 	trackGroupsBy: TrackByFunction<LuOptionGroup<T, unknown>> = (_, group) => group.key;
 	trackBranchesBy: TrackByFunction<TreeNode<T>> = (_, option) => this.optionKey(option.node);
 
-	selectedOptions: T[] = this.selectInput.value || [];
+	selectedOptions: T[] = this.selectInput.selectedOptions();
 	optionTpl = this.selectInput.optionTpl;
 
 	options = signal<ɵCoreSelectPanelElement<T>[]>([]);

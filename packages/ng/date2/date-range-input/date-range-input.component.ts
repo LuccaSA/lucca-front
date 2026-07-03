@@ -13,18 +13,20 @@ import {
 	inject,
 	Injector,
 	input,
-	OnInit,
+	model,
 	Signal,
 	signal,
+	untracked,
 	viewChild,
 	viewChildren,
 	ViewEncapsulation,
 } from '@angular/core';
 import { toSignal } from '@angular/core/rxjs-interop';
-import { AbstractControl, ControlValueAccessor, FormsModule, NG_VALIDATORS, NG_VALUE_ACCESSOR, NgControl, NgModel, ValidationErrors, Validator } from '@angular/forms';
+import { FormsModule } from '@angular/forms';
+import { FormValueControl } from '@angular/forms/signals';
 import { LuccaIcon } from '@lucca-front/icons';
 import { ClearComponent } from '@lucca-front/ng/clear';
-import { isNil, LuClass, PortalContent, PortalDirective, ɵeffectWithDeps } from '@lucca-front/ng/core';
+import { isNotNil, LuClass, PortalContent, PortalDirective, ɵeffectWithDeps } from '@lucca-front/ng/core';
 import { FILTER_PILL_INPUT_COMPONENT, FilterPillDisplayerDirective, FilterPillInputComponent } from '@lucca-front/ng/filter-pills';
 import { FORM_FIELD_INSTANCE, InputDirective, ɵPresentationDisplayDefaultDirective } from '@lucca-front/ng/form-field';
 import { IconComponent } from '@lucca-front/ng/icon';
@@ -35,8 +37,8 @@ import { AbstractDateComponent } from '../abstract-date-component';
 import { CalendarMode } from '../calendar2/calendar-mode';
 import { Calendar2Component } from '../calendar2/calendar2.component';
 import { CellStatus } from '../calendar2/cell-status';
-import { DateRange, DateRangeInput } from '../calendar2/date-range';
-import { compareCalendarPeriods, startOfPeriod, transformDateRangeInputToDateRange, transformDateRangeToDateRangeInput } from '../utils';
+import { DateRange } from '../calendar2/date-range';
+import { compareCalendarPeriods, startOfPeriod } from '../utils';
 import { CalendarShortcut } from './calendar-shortcut';
 
 let nextId = 0;
@@ -65,26 +67,15 @@ let nextId = 0;
 	changeDetection: ChangeDetectionStrategy.OnPush,
 	providers: [
 		{
-			provide: NG_VALUE_ACCESSOR,
-			useExisting: forwardRef(() => DateRangeInputComponent),
-			multi: true,
-		},
-		{
-			provide: NG_VALIDATORS,
-			useExisting: forwardRef(() => DateRangeInputComponent),
-			multi: true,
-		},
-		{
 			provide: FILTER_PILL_INPUT_COMPONENT,
 			useExisting: forwardRef(() => DateRangeInputComponent),
 		},
 		LuClass,
 	],
 })
-export class DateRangeInputComponent extends AbstractDateComponent implements OnInit, ControlValueAccessor, Validator, FilterPillInputComponent {
+export class DateRangeInputComponent extends AbstractDateComponent implements Omit<FormValueControl<DateRange | null>, 'min' | 'max'>, FilterPillInputComponent {
 	public parentInput = inject(FILTER_PILL_INPUT_COMPONENT, { optional: true, skipSelf: true });
 	#injector = inject(Injector);
-	#ngControl: NgControl; // Initialized in ngOnInit
 	#luClass = inject(LuClass);
 
 	#formFieldRef = inject(FORM_FIELD_INSTANCE, { optional: true });
@@ -101,8 +92,7 @@ export class DateRangeInputComponent extends AbstractDateComponent implements On
 	endTextInputRef = viewChild<ElementRef<HTMLInputElement>>('end');
 	endUserTextInput = signal('ɵ');
 
-	// CVA stuff
-	#onChange?: (value: DateRange) => void;
+	readonly value = model<DateRange | null>(null);
 
 	initialValue = signal<DateRange | null>(undefined);
 	selectedRange = signal<DateRange | null>(null);
@@ -229,7 +219,7 @@ export class DateRangeInputComponent extends AbstractDateComponent implements On
 
 	filterPillPopoverCloseFn?: () => void;
 
-	filterPillDisabled = signal(false);
+	readonly filterPillDisabled = computed(() => this.disabled());
 
 	get isNavigationButtonFocused(): boolean {
 		return [this.previousButton()?.nativeElement, this.nextButton()?.nativeElement].includes(document.activeElement);
@@ -249,6 +239,17 @@ export class DateRangeInputComponent extends AbstractDateComponent implements On
 				'mod-month': this.mode() === 'month',
 				'mod-year': this.mode() === 'year',
 			});
+		});
+
+		effect(() => {
+			const range = this.value();
+			if (range === untracked(this.selectedRange)) {
+				return;
+			}
+			this.selectedRange.set(range);
+			if (isNotNil(range)) {
+				this.currentDate.set(startOfDay(range.start));
+			}
 		});
 
 		ɵeffectWithDeps([this.calendarMode, this.tabbableDate], (calendarMode, tabbableDate) => {
@@ -288,10 +289,6 @@ export class DateRangeInputComponent extends AbstractDateComponent implements On
 		});
 	}
 
-	ngOnInit() {
-		this.#ngControl = this.#injector.get(NgControl);
-	}
-
 	getNextCalendarDate(date: Date): Date {
 		switch (this.mode()) {
 			case 'day':
@@ -313,7 +310,7 @@ export class DateRangeInputComponent extends AbstractDateComponent implements On
 	}
 
 	inputBlur(): void {
-		this.onTouched?.();
+		this.touch.emit();
 		this.inputFocused.set(false);
 		this.startUserTextInput.set('ɵ');
 		this.endUserTextInput.set('ɵ');
@@ -329,7 +326,7 @@ export class DateRangeInputComponent extends AbstractDateComponent implements On
 				end: range.start,
 				start: range.end,
 			});
-			this.#onChange?.(this.selectedRange());
+			this.value.set(this.selectedRange());
 		}
 	}
 
@@ -419,7 +416,7 @@ export class DateRangeInputComponent extends AbstractDateComponent implements On
 			}
 		}
 
-		this.#onChange?.(this.selectedRange());
+		this.value.set(this.selectedRange());
 	}
 
 	arrowDown(popoverRef: PopoverDirective, fieldToFocus: 'start' | 'end'): void {
@@ -431,49 +428,11 @@ export class DateRangeInputComponent extends AbstractDateComponent implements On
 		}
 	}
 
-	validate(control: AbstractControl<DateRange | DateRangeInput | null>): ValidationErrors | null {
-		if (!control.value) {
-			return null;
-		}
-		const dateRange = transformDateRangeInputToDateRange(control.value);
-
-		return this.isValidDate(dateRange?.start) ? null : { date: true };
-	}
-
-	writeValue(dateRange: DateRange | DateRangeInput | null): void {
-		if (this.#ngControl instanceof NgModel && isNil(this.#onChange)) {
-			// avoid phantom call for ngModel
-			// https://github.com/angular/angular/issues/14988#issuecomment-1310420293
-			return;
-		}
-		const _dateRange = transformDateRangeInputToDateRange(dateRange);
-
-		if (isNil(this.initialValue())) {
-			this.selectedRange.set(this.clearBehavior() === 'reset' ? this.initialValue() : _dateRange);
-		}
-
-		if (dateRange != null) {
-			this.selectedRange.set(_dateRange);
-			this.currentDate.set(startOfDay(dateRange.start));
-		}
-	}
-
-	registerOnChange(fn: (value: DateRange | DateRangeInput | null) => void): void {
-		this.#onChange = (dateRange: DateRange | null) => {
-			fn(dateRange && this.inDateISOFormat() ? transformDateRangeToDateRangeInput(dateRange) : dateRange);
-		};
-	}
-
-	override setDisabledState(isDisabled: boolean) {
-		this.filterPillDisabled.set(isDisabled);
-		super.setDisabledState(isDisabled);
-	}
-
 	clear() {
 		const newValue = this.clearBehavior() === 'reset' ? this.initialValue() : null;
 		this.selectedRange.set(newValue);
-		this.#onChange?.(this.selectedRange());
-		this.onTouched?.();
+		this.value.set(newValue);
+		this.touch.emit();
 		this.startTextInputRef()?.nativeElement.focus();
 	}
 
@@ -498,7 +457,7 @@ export class DateRangeInputComponent extends AbstractDateComponent implements On
 
 	selectShortcut(shortcut: CalendarShortcut, popover: PopoverDirective): void {
 		this.selectedRange.set(shortcut.range);
-		this.#onChange?.(this.selectedRange());
+		this.value.set(shortcut.range);
 		popover?.close();
 		this.filterPillPopoverCloseFn?.();
 	}
@@ -559,6 +518,6 @@ export class DateRangeInputComponent extends AbstractDateComponent implements On
 		} else {
 			this.selectedRange.set(currentRange);
 		}
-		this.#onChange?.(this.selectedRange());
+		this.value.set(this.selectedRange());
 	}
 }
