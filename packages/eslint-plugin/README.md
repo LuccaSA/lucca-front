@@ -227,16 +227,16 @@ Reports usage of deprecated Lucca Front CSS classes in Angular templates.
 ## 🚀 Configuration
 
 - Requires `@angular-eslint/template-parser` (the rule visits `TextAttribute` / `BoundAttribute` nodes).
-- The exported `fromLFDeprecatedSelectors()` helper maps the stylelint list to the rule options.
+- Options take the raw `LFDeprecatedSelectors` entries — no mapping layer.
 - Wired in `eslint.config.mjs`:
 
 ```javascript
-import localRules, { fromLFDeprecatedSelectors } from './packages/eslint-plugin/index.ts';
+import localRules from './packages/eslint-plugin/index.ts';
 import LFDeprecatedSelectors from './packages/stylelint-config/LFDeprecatedSelectors.mjs';
 
 // in the `**/*.html` block (angular template parser):
 rules: {
-	'@lucca-front/no-deprecated-classes': ['error', fromLFDeprecatedSelectors(LFDeprecatedSelectors)],
+	'@lucca-front/no-deprecated-classes': ['error', { deprecations: LFDeprecatedSelectors }],
 }
 ```
 
@@ -256,6 +256,15 @@ rules: {
 1. **Single-element checks only** — descendant selector patterns (e.g. `.lu-select-value .label`) can never match a single `class` attribute and are silently inert (their individual classes are usually covered by other entries).
 2. **Expression scanning is textual** — string literals are extracted from the expression source; class names computed in TypeScript code are invisible to the rule.
 3. **Loose source patterns over-match** — entries without `\b` can match longer class names (e.g. `/\.u-text(X?S|M|X{0,3}L)/` also matches `.u-textLight`). Fix belongs in `LFDeprecatedSelectors.mjs`, as it affects stylelint consumers identically.
+
+## 📐 Design notes
+
+- Messages come verbatim from `stylelint-config`'s `getDisallowedData()` — same wording as stylelint, dates included.
+- The formatter is injected via `setDeprecationMessageBuilder()` in `eslint.config.mjs`, not via options.
+- Two constraints force that indirection: ESLint `structuredClone`s rule options (functions cannot travel through them), and the plugin cannot import `stylelintForLF.mjs` itself (jest cannot load it: its `currentLFVersion` import uses top-level await).
+- Without injection (e.g. under jest), the rule falls back to a plain static message.
+- The `getSeverity()` policy (warning until `versionDeleted` is reached) is not reused: ESLint severity is fixed per rule, and `currentLFVersion` resolves to `null` inside this repo (scss version `0.0.0`).
+- A flat `error` severity is correct here: this repo is always at HEAD of Lucca Front.
 
 ## 📋 Known violations in this repository
 

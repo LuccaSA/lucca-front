@@ -4,42 +4,27 @@ import { createRule } from './create-rule.ts';
 export const RULE_NAME = 'no-deprecated-classes';
 
 /**
- * A deprecation entry. `patterns` are regex sources written against CSS selectors (e.g. "\\.mod-link").
+ * Entry shape of @lucca-front/stylelint-config's LFDeprecatedSelectors.mjs, passed raw.
  */
-interface Deprecation {
-	patterns: string[];
-	versionDeprecated?: string;
-	versionDeleted?: string;
-}
-
-export type Options = [{ deprecations: Deprecation[] }];
-
-/**
- * Entry shape of @lucca-front/stylelint-config's LFDeprecatedSelectors.mjs.
- */
-interface LFDeprecatedSelector {
+export interface DisallowedObject {
 	objectPattern: (RegExp | string)[] | RegExp | string;
 	versionDeprecated?: string;
 	versionDeleted?: string;
 }
 
-// stylelint's comparePatterns treats string entries as exact selector strings, not regexes
-function toRegexSource(pattern: RegExp | string): string {
-	return pattern instanceof RegExp ? pattern.source : pattern.replace(/[.*+?^${}()|[\]\\]/g, '\\$&');
-}
+export type Options = [{ deprecations: DisallowedObject[] }];
+
+type MessageBuilder = (deprecations: DisallowedObject[], matchedSelector: string) => string;
+
+let messageBuilder: MessageBuilder | undefined;
 
 /**
- * Convert the LFDeprecatedSelectors list into this rule's options,
- * keeping the stylelint list as the single source of truth.
+ * Injects the message formatter (stylelint-config's getDisallowedData) at module level:
+ * ESLint structuredClones rule options, so functions cannot travel through them, and
+ * jest cannot load stylelintForLF.mjs (top-level await) — index.ts does it under Node ESM.
  */
-export function fromLFDeprecatedSelectors(selectors: LFDeprecatedSelector[]): Options[0] {
-	return {
-		deprecations: selectors.map(({ objectPattern, versionDeprecated, versionDeleted }) => ({
-			patterns: (Array.isArray(objectPattern) ? objectPattern : [objectPattern]).map(toRegexSource),
-			...(versionDeprecated && { versionDeprecated }),
-			...(versionDeleted && { versionDeleted }),
-		})),
-	};
+export function setDeprecationMessageBuilder(builder: MessageBuilder): void {
+	messageBuilder = builder;
 }
 
 // Minimal shapes of the @angular-eslint/template-parser AST nodes we visit
@@ -60,8 +45,10 @@ const STRING_LITERAL = /'((?:[^'\\]|\\.)*)'|"((?:[^"\\]|\\.)*)"/g;
 const INTERPOLATION = /\{\{[\s\S]*?\}\}/g;
 
 interface CompiledEntry {
-	regex: RegExp;
-	versions: string;
+	// All RegExp patterns of the entry merged into one alternation
+	regex?: RegExp;
+	// String patterns are exact selector matches, mirroring stylelint's comparePatterns
+	strings: string[];
 }
 
 // ESLint calls create() once per linted file with the same options object; compile once per process.
@@ -71,13 +58,17 @@ function compileEntries(options: Options[0]): CompiledEntry[] {
 	let compiled = compiledEntriesCache.get(options);
 
 	if (!compiled) {
-		compiled = options.deprecations.map((deprecation) => ({
-			regex: new RegExp(deprecation.patterns.map((pattern) => `(?:${pattern})`).join('|')),
-			versions: [
-				deprecation.versionDeprecated ? ` | deprecated since LF ${deprecation.versionDeprecated}` : '',
-				deprecation.versionDeleted ? ` | removed in LF ${deprecation.versionDeleted}` : '',
-			].join(''),
-		}));
+		compiled = options.deprecations.map(({ objectPattern }) => {
+			const patterns = Array.isArray(objectPattern) ? objectPattern : [objectPattern];
+			// `instanceof RegExp` is realm-sensitive (options are structuredCloned, jest runs in a vm):
+			// duck-type on `source` instead
+			const regexSources = patterns.filter((pattern): pattern is RegExp => typeof pattern === 'object' && pattern !== null && 'source' in pattern).map((pattern) => `(?:${pattern.source})`);
+
+			return {
+				...(regexSources.length && { regex: new RegExp(regexSources.join('|')) }),
+				strings: patterns.filter((pattern): pattern is string => typeof pattern === 'string'),
+			};
+		});
 		compiledEntriesCache.set(options, compiled);
 	}
 
@@ -118,7 +109,10 @@ function classListsFromExpression(source: string): string[] {
 
 export default createRule<Options, 'deprecatedClass'>({
 	create: (context) => {
-		const entries = compileEntries(context.options[0] ?? { deprecations: [] });
+		// context.options[0] is the raw config-provided object: a stable reference, required as the
+		// WeakMap cache key. RuleCreator's defaults-merged options would be a fresh object per file.
+		const options = context.options[0] ?? { deprecations: [] };
+		const entries = compileEntries(options);
 
 		function checkClassList(classList: string, loc: TSESTree.SourceLocation): void {
 			const compoundSelector = toCompoundSelector(classList);
@@ -128,12 +122,12 @@ export default createRule<Options, 'deprecatedClass'>({
 			}
 
 			for (const entry of entries) {
-				const match = entry.regex.exec(compoundSelector);
+				const matched = entry.regex?.exec(compoundSelector)?.[0] ?? entry.strings.find((pattern) => pattern === compoundSelector);
 
-				if (match) {
+				if (matched) {
 					context.report({
 						messageId: 'deprecatedClass',
-						data: { matched: match[0], versions: entry.versions },
+						data: { deprecationMessage: messageBuilder?.(options.deprecations, matched) ?? `Deprecated Lucca class usage "${matched}"` },
 						loc,
 					});
 				}
@@ -168,7 +162,7 @@ export default createRule<Options, 'deprecatedClass'>({
 			description: 'Disallow deprecated Lucca Front CSS classes in Angular templates',
 		},
 		messages: {
-			deprecatedClass: 'Deprecated Lucca class usage "{{matched}}"{{versions}}',
+			deprecatedClass: '{{deprecationMessage}}',
 		},
 		type: 'problem',
 		schema: [
@@ -179,17 +173,7 @@ export default createRule<Options, 'deprecatedClass'>({
 						type: 'array',
 						items: {
 							type: 'object',
-							properties: {
-								patterns: {
-									type: 'array',
-									items: { type: 'string' },
-									minItems: 1,
-								},
-								versionDeprecated: { type: 'string' },
-								versionDeleted: { type: 'string' },
-							},
-							required: ['patterns'],
-							additionalProperties: false,
+							required: ['objectPattern'],
 						},
 					},
 				},

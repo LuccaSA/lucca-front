@@ -1,6 +1,9 @@
 import * as templateParser from '@angular-eslint/template-parser';
 import { RuleTester } from '@typescript-eslint/rule-tester';
-import rule, { fromLFDeprecatedSelectors, Options, RULE_NAME } from './no-deprecated-classes';
+import rule, { Options, RULE_NAME, setDeprecationMessageBuilder } from './no-deprecated-classes';
+
+// Stands in for stylelint-config's getDisallowedData().message (index.ts injects the real one)
+setDeprecationMessageBuilder((_deprecations, matchedSelector) => `stylelint says: ${matchedSelector}`);
 
 const ruleTester = new RuleTester({
 	languageOptions: {
@@ -9,20 +12,24 @@ const ruleTester = new RuleTester({
 });
 
 // Representative subset of @lucca-front/stylelint-config's LFDeprecatedSelectors,
-// as regex sources (RegExp#source), the way eslint.config.mjs feeds them.
+// passed raw, the way eslint.config.mjs feeds them.
 const options: Options = [
 	{
 		deprecations: [
-			{ patterns: ['\\.u-textLight', '\\.mod-outline\\b', '\\.mod-link'] },
+			{ objectPattern: [/\.u-textLight/, /\.mod-outline\b/, /\.mod-link/] },
 			{
 				// Combination of .button and .mod-counter on the same element
-				patterns: ['(?=\\S*\\.\\bbutton\\b)(?=\\S*\\.\\bmod-counter\\b)\\S*'],
+				objectPattern: /(?=\S*\.\bbutton\b)(?=\S*\.\bmod-counter\b)\S*/,
 				versionDeleted: '18.1.0',
 			},
 			{
-				patterns: ['\\.palette-(grey|primary|secondary|lucca)'],
+				objectPattern: /\.palette-(grey|primary|secondary|lucca)/,
 				versionDeprecated: '17.3.0',
 				versionDeleted: '22.0.0',
+			},
+			{
+				// String entries are exact selector matches (stylelint's comparePatterns)
+				objectPattern: '.exact-legacy',
 			},
 		],
 	},
@@ -61,33 +68,39 @@ ruleTester.run(RULE_NAME, rule, {
 			options,
 		},
 		{
+			name: '✅ String entry only matches the exact selector',
+			code: `<div class="exact-legacy other"></div>`,
+			options,
+		},
+		{
 			name: '✅ No options configured',
 			code: `<div class="u-textLight"></div>`,
 		},
 	],
 	invalid: [
 		{
-			name: '❌ Deprecated static class',
+			name: '❌ Deprecated static class, message from the injected builder',
 			code: `<span class="u-textLight">text</span>`,
 			options,
-			errors: [{ messageId: 'deprecatedClass', data: { matched: '.u-textLight', versions: '' } }],
+			errors: [{ messageId: 'deprecatedClass', data: { deprecationMessage: 'stylelint says: .u-textLight' } }],
 		},
 		{
 			name: '❌ Deprecated class combination, regardless of order',
 			code: `<button class="mod-counter button">3</button>`,
 			options,
-			errors: [{ messageId: 'deprecatedClass', data: { matched: '.mod-counter.button', versions: ' | removed in LF 18.1.0' } }],
+			errors: [{ messageId: 'deprecatedClass', data: { deprecationMessage: 'stylelint says: .mod-counter.button' } }],
 		},
 		{
-			name: '❌ Deprecated class with both versions in message',
+			name: '❌ Deprecated class with versions',
 			code: `<div class="palette-grey"></div>`,
 			options,
-			errors: [
-				{
-					messageId: 'deprecatedClass',
-					data: { matched: '.palette-grey', versions: ' | deprecated since LF 17.3.0 | removed in LF 22.0.0' },
-				},
-			],
+			errors: [{ messageId: 'deprecatedClass' }],
+		},
+		{
+			name: '❌ Deprecated class matched by a string entry',
+			code: `<div class="exact-legacy"></div>`,
+			options,
+			errors: [{ messageId: 'deprecatedClass', data: { deprecationMessage: 'stylelint says: .exact-legacy' } }],
 		},
 		{
 			name: '❌ Deprecated class in [class.x] binding',
@@ -132,18 +145,4 @@ ruleTester.run(RULE_NAME, rule, {
 			errors: [{ messageId: 'deprecatedClass' }, { messageId: 'deprecatedClass' }],
 		},
 	],
-});
-
-describe('fromLFDeprecatedSelectors', () => {
-	it('maps single regexes, regex arrays and exact strings to the rule options shape', () => {
-		expect(
-			fromLFDeprecatedSelectors([
-				{ objectPattern: /\.mod-link/ },
-				{ objectPattern: [/\.u-comma/, /\.u-unit/], versionDeprecated: '17.3.0' },
-				{ objectPattern: '.exact-class', versionDeleted: '22.0.0' },
-			]),
-		).toEqual({
-			deprecations: [{ patterns: ['\\.mod-link'] }, { patterns: ['\\.u-comma', '\\.u-unit'], versionDeprecated: '17.3.0' }, { patterns: ['\\.exact-class'], versionDeleted: '22.0.0' }],
-		});
-	});
 });

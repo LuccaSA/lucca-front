@@ -3,8 +3,9 @@ import storybook from 'eslint-plugin-storybook';
 
 import eslint from '@eslint/js';
 import angular from 'angular-eslint';
-import localRules, { fromLFDeprecatedSelectors } from './packages/eslint-plugin/index.ts';
+import localRules, { setDeprecationMessageBuilder } from './packages/eslint-plugin/index.ts';
 import LFDeprecatedSelectors from './packages/stylelint-config/LFDeprecatedSelectors.mjs';
+import { getDisallowedData } from './packages/stylelint-config/stylelintForLF.mjs';
 import prettier from 'eslint-plugin-prettier/recommended';
 import typescript from 'typescript-eslint';
 import { defineConfig } from 'eslint/config';
@@ -12,7 +13,10 @@ import tsParser from '@typescript-eslint/parser';
 
 // Reuse the stylelint deprecation list (single source of truth) for template linting:
 // the rule matches these selector regexes against class attributes and bindings.
-const deprecatedClassesOptions = fromLFDeprecatedSelectors(LFDeprecatedSelectors);
+// Messages come verbatim from stylelint-config's formatter, injected here because
+// ESLint structuredClones rule options (functions cannot travel through them).
+setDeprecationMessageBuilder((deprecations, matchedSelector) => getDisallowedData(deprecations, matchedSelector).message);
+const deprecatedClassesOptions = { deprecations: LFDeprecatedSelectors };
 
 export default defineConfig(
 	{
