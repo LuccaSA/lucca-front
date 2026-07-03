@@ -69,8 +69,20 @@ class ClassListCollector extends RecursiveAstVisitor {
 	}
 
 	override visitInterpolation(ast: Interpolation, context: unknown): void {
-		// class="foo {{ expr }}": the static parts form the literal class list
-		this.classLists.push(ast.strings.join(' '));
+		// class="foo {{ expr }}": the static parts form the literal class list.
+		// A fragment touching an expression is an incomplete token (class="u-textLight{{ suffix }}"
+		// renders as some other class) and must not be matched.
+		const completeTokens = ast.strings.map((part, index) => {
+			let tokens = part;
+			if (index > 0) {
+				tokens = tokens.replace(/^\S+/, '');
+			}
+			if (index < ast.strings.length - 1) {
+				tokens = tokens.replace(/\S+$/, '');
+			}
+			return tokens;
+		});
+		this.classLists.push(completeTokens.join(' '));
 		super.visitInterpolation(ast, context);
 	}
 }

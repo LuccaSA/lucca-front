@@ -65,6 +65,11 @@ ruleTester.run(RULE_NAME, rule, {
 			options,
 		},
 		{
+			name: '✅ Token fragment adjacent to an interpolation is not a complete class',
+			code: `<div class="u-textLight{{ suffix }}"></div>`,
+			options,
+		},
+		{
 			name: '✅ No options configured',
 			code: `<div class="u-textLight"></div>`,
 		},
