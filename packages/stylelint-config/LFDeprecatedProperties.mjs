@@ -1,5 +1,10 @@
 // WARNING!
 // Always check for variables with regular expressions. A string will match all the value, not part of it.
+// {string} --token -> --token ✓ | var(--token) ✗
+//
+// Boundary convention:
+// - Each pattern ends with `(?![\w-])`: matches the exact token only; the guard blocks a trailing word char OR `-`.
+//   --token ✓ | --token-x ✗ | --tokenX ✗
 
 export default [
 	{

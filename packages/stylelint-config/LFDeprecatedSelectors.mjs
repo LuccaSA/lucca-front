@@ -1,3 +1,21 @@
+// Deprecated selectors — used by Stylelint's selector-disallowed-list (see stylelint.config.mjs).
+// Each `objectPattern` is matched with `.test()` against a selector.
+//
+// WARNING!
+// Always match selectors with regular expressions. A string will match the whole selector, not part of it.
+// {string} .token -> .token ✓ | .foo .token ✗ | .token.mod-x ✗
+//
+// Boundary conventions:
+// - Exact token — `\.token(?![\w-])`: matches the token only; the guard blocks a trailing word char OR `-`.
+//   .token ✓ | .token-x ✗ | .tokenX ✗
+// - Component root — `\.token\b`: also flags hyphen-children (`\b` counts `-` as a boundary); not camelCase or plural.
+//   .token ✓ | .token-child ✓ | .tokens ✗
+// - Enumerated children — `\.token(-(a|b))?(?![\w-])`: base plus only its known children (avoids a broad root).
+//   .token ✓ | .token-a ✓ | .token-c ✗
+// - Order-independent combo — `(?=\S*\.a(?![\w-]))(?=\S*\.b(?![\w-]))\S*`: both tokens, any order; `\S*` never crosses whitespace (no descendant match).
+//   .a.b ✓ | .b.a ✓ | .a .b ✗
+// - Catch-all — `\.token.*`: base plus any suffix.
+//   .token ✓ | .tokenX ✓ | .other ✗
 export default [
 	// Any occurrence of one of these selectors in any part of a selector
 	// SEE https://regex101.com/r/OTnSEg
@@ -67,7 +85,6 @@ export default [
 		// - Sizes: 0, XXS-XXL, Auto (margins only).
 		// - Directions: physical, Inline, Block. Gaps: gap, rowGap, columnGap.
 		// - Excluded: `.u-{margin|padding}{Inline|Block}0`, still shipping (SEE next entry).
-		// - Trailing `(?![\w-])`: no match on longer names, e.g. `.u-marginBlockStart` or `.u-margin0-reset`.
 		// SEE https://regex101.com/r/YCDDc8.
 		objectPattern:
 			/\.u-((margin|padding)(Top|Right|Bottom|Left)?(Auto|0|X{1,2}[SL]|[SML])|(margin|padding)(Inline|Block)(Auto|X{1,2}[SL]|[SML])|(columnGap|rowGap|gap)(0|X{1,2}[SL]|[SML]))(?![\w-])/,
