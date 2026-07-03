@@ -3,7 +3,7 @@ import { FormsModule } from '@angular/forms';
 import { CALENDAR_MODE, CalendarShortcut, DATE2_CLEAR_BEHAVIOR, DATE_FORMAT_CONST, DateRange, DateRangeInputComponent, PremadeShortcuts } from '@lucca-front/ng/date2';
 import { FormFieldComponent } from '@lucca-front/ng/form-field';
 import { applicationConfig, Meta, moduleMetadata, StoryObj } from '@storybook/angular-vite';
-import { expect, userEvent, within } from 'storybook/test';
+import { userEvent, within } from 'storybook/test';
 import { cleanupTemplate, createTestStory, generateInputs, setStoryOptions } from '../../../helpers/stories';
 import { StoryModelDisplayComponent } from '../../../helpers/story-model-display.component';
 import { expectNgModelDisplay, pickDay, waitForAngular } from '../../../helpers/test';
@@ -196,10 +196,15 @@ export const BasicTEST = createTestStory(Basic, async ({ canvasElement, step }) 
 	});
 
 	await step('Invalid date', async () => {
+		const targetEndDay = today.getDate() === 20 ? 21 : 20;
+		const expectedEnd = new Date(today.getFullYear(), today.getMonth(), targetEndDay);
+
 		await userEvent.clear(startInput);
 		await userEvent.type(startInput, 'not a date');
 		await userEvent.keyboard('{Escape}');
 		await waitForAngular();
-		await expect(startInput).toHaveAttribute('aria-invalid', 'true');
+		// Control-side validation was removed with the FormValueControl migration:
+		// an unparsable input leaves the start date unset, invalidity is declared schema-side (validDateRange).
+		await expectNgModelDisplay(canvasElement, `{ "end": "${expectedEnd.toISOString()}", "scope": "day" }`);
 	});
 });
