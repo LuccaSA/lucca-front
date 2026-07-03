@@ -1,6 +1,8 @@
 import noDeprecatedClassesRule, { RULE_NAME as noDeprecatedClassesRuleName } from './rules/no-deprecated-classes.ts';
 import tsErrorRule, { RULE_NAME as tsErrorRuleName } from './rules/ts-error.ts';
 
+export { fromLFDeprecatedSelectors } from './rules/no-deprecated-classes.ts';
+
 const plugin = {
 	meta: {
 		name: '@lucca-front/eslint-plugin',

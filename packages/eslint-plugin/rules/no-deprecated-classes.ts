@@ -1,17 +1,10 @@
 import type { TSESTree } from '@typescript-eslint/utils';
-import { ESLintUtils } from '@typescript-eslint/utils';
-
-const createRule = ESLintUtils.RuleCreator((ruleName) => ruleName);
+import { createRule } from './create-rule.ts';
 
 export const RULE_NAME = 'no-deprecated-classes';
 
-export const messageIds = {
-	deprecatedClass: 'deprecatedClass',
-} as const;
-
 /**
- * A deprecation entry, mirroring the shape of @lucca-front/stylelint-config's LFDeprecatedSelectors.
- * `patterns` are regex sources written against CSS selectors (e.g. "\\.mod-link").
+ * A deprecation entry. `patterns` are regex sources written against CSS selectors (e.g. "\\.mod-link").
  */
 interface Deprecation {
 	patterns: string[];
@@ -19,7 +12,35 @@ interface Deprecation {
 	versionDeleted?: string;
 }
 
-type Options = [{ deprecations: Deprecation[] }];
+export type Options = [{ deprecations: Deprecation[] }];
+
+/**
+ * Entry shape of @lucca-front/stylelint-config's LFDeprecatedSelectors.mjs.
+ */
+interface LFDeprecatedSelector {
+	objectPattern: (RegExp | string)[] | RegExp | string;
+	versionDeprecated?: string;
+	versionDeleted?: string;
+}
+
+// stylelint's comparePatterns treats string entries as exact selector strings, not regexes
+function toRegexSource(pattern: RegExp | string): string {
+	return pattern instanceof RegExp ? pattern.source : pattern.replace(/[.*+?^${}()|[\]\\]/g, '\\$&');
+}
+
+/**
+ * Convert the LFDeprecatedSelectors list into this rule's options,
+ * keeping the stylelint list as the single source of truth.
+ */
+export function fromLFDeprecatedSelectors(selectors: LFDeprecatedSelector[]): Options[0] {
+	return {
+		deprecations: selectors.map(({ objectPattern, versionDeprecated, versionDeleted }) => ({
+			patterns: (Array.isArray(objectPattern) ? objectPattern : [objectPattern]).map(toRegexSource),
+			...(versionDeprecated && { versionDeprecated }),
+			...(versionDeleted && { versionDeleted }),
+		})),
+	};
+}
 
 // Minimal shapes of the @angular-eslint/template-parser AST nodes we visit
 interface TemplateTextAttribute {
@@ -30,18 +51,38 @@ interface TemplateTextAttribute {
 
 interface TemplateBoundAttribute {
 	name: string;
-	// BindingType from @angular/compiler, preserved by @angular-eslint/template-parser
-	__originalType?: number;
 	keySpan?: { details?: string | null };
 	value?: { source?: string | null };
 	loc: TSESTree.SourceLocation;
 }
 
-// BindingType.Class in @angular/compiler ([class.foo]="...")
-const CLASS_BINDING_TYPE = 2;
-
 const STRING_LITERAL = /'((?:[^'\\]|\\.)*)'|"((?:[^"\\]|\\.)*)"/g;
 const INTERPOLATION = /\{\{[\s\S]*?\}\}/g;
+
+interface CompiledEntry {
+	regex: RegExp;
+	versions: string;
+}
+
+// ESLint calls create() once per linted file with the same options object; compile once per process.
+const compiledEntriesCache = new WeakMap<Options[0], CompiledEntry[]>();
+
+function compileEntries(options: Options[0]): CompiledEntry[] {
+	let compiled = compiledEntriesCache.get(options);
+
+	if (!compiled) {
+		compiled = options.deprecations.map((deprecation) => ({
+			regex: new RegExp(deprecation.patterns.map((pattern) => `(?:${pattern})`).join('|')),
+			versions: [
+				deprecation.versionDeprecated ? ` | deprecated since LF ${deprecation.versionDeprecated}` : '',
+				deprecation.versionDeleted ? ` | removed in LF ${deprecation.versionDeleted}` : '',
+			].join(''),
+		}));
+		compiledEntriesCache.set(options, compiled);
+	}
+
+	return compiled;
+}
 
 /**
  * Convert a whitespace-separated class list into a CSS compound selector
@@ -75,14 +116,9 @@ function classListsFromExpression(source: string): string[] {
 	return classLists;
 }
 
-export default createRule<Options, keyof typeof messageIds>({
+export default createRule<Options, 'deprecatedClass'>({
 	create: (context) => {
-		const { deprecations } = context.options[0] ?? { deprecations: [] };
-
-		const entries = deprecations.map((deprecation) => ({
-			...deprecation,
-			regexes: deprecation.patterns.map((pattern) => new RegExp(pattern)),
-		}));
+		const entries = compileEntries(context.options[0] ?? { deprecations: [] });
 
 		function checkClassList(classList: string, loc: TSESTree.SourceLocation): void {
 			const compoundSelector = toCompoundSelector(classList);
@@ -92,21 +128,14 @@ export default createRule<Options, keyof typeof messageIds>({
 			}
 
 			for (const entry of entries) {
-				for (const regex of entry.regexes) {
-					const match = regex.exec(compoundSelector);
+				const match = entry.regex.exec(compoundSelector);
 
-					if (match) {
-						const versions = [entry.versionDeprecated ? ` | deprecated since LF ${entry.versionDeprecated}` : '', entry.versionDeleted ? ` | removed in LF ${entry.versionDeleted}` : ''].join('');
-
-						context.report({
-							messageId: 'deprecatedClass',
-							data: { matched: match[0], versions },
-							loc,
-						});
-
-						// One report per deprecation entry is enough
-						break;
-					}
+				if (match) {
+					context.report({
+						messageId: 'deprecatedClass',
+						data: { matched: match[0], versions: entry.versions },
+						loc,
+					});
 				}
 			}
 		}
@@ -118,9 +147,7 @@ export default createRule<Options, keyof typeof messageIds>({
 				}
 			},
 			BoundAttribute(node: TemplateBoundAttribute) {
-				const isClassBinding = node.__originalType === CLASS_BINDING_TYPE || Boolean(node.keySpan?.details?.startsWith('class.'));
-
-				if (isClassBinding) {
+				if (node.keySpan?.details?.startsWith('class.')) {
 					// [class.foo]="condition": the class name is the attribute name itself
 					checkClassList(node.name, node.loc);
 					return;

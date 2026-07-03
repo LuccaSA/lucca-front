@@ -1,6 +1,6 @@
 import * as templateParser from '@angular-eslint/template-parser';
 import { RuleTester } from '@typescript-eslint/rule-tester';
-import rule, { RULE_NAME } from './no-deprecated-classes';
+import rule, { fromLFDeprecatedSelectors, Options, RULE_NAME } from './no-deprecated-classes';
 
 const ruleTester = new RuleTester({
 	languageOptions: {
@@ -10,7 +10,7 @@ const ruleTester = new RuleTester({
 
 // Representative subset of @lucca-front/stylelint-config's LFDeprecatedSelectors,
 // as regex sources (RegExp#source), the way eslint.config.mjs feeds them.
-const options: [{ deprecations: { patterns: string[]; versionDeprecated?: string; versionDeleted?: string }[] }] = [
+const options: Options = [
 	{
 		deprecations: [
 			{ patterns: ['\\.u-textLight', '\\.mod-outline\\b', '\\.mod-link'] },
@@ -132,4 +132,18 @@ ruleTester.run(RULE_NAME, rule, {
 			errors: [{ messageId: 'deprecatedClass' }, { messageId: 'deprecatedClass' }],
 		},
 	],
+});
+
+describe('fromLFDeprecatedSelectors', () => {
+	it('maps single regexes, regex arrays and exact strings to the rule options shape', () => {
+		expect(
+			fromLFDeprecatedSelectors([
+				{ objectPattern: /\.mod-link/ },
+				{ objectPattern: [/\.u-comma/, /\.u-unit/], versionDeprecated: '17.3.0' },
+				{ objectPattern: '.exact-class', versionDeleted: '22.0.0' },
+			]),
+		).toEqual({
+			deprecations: [{ patterns: ['\\.mod-link'] }, { patterns: ['\\.u-comma', '\\.u-unit'], versionDeprecated: '17.3.0' }, { patterns: ['\\.exact-class'], versionDeleted: '22.0.0' }],
+		});
+	});
 });

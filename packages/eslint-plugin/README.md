@@ -213,36 +213,30 @@ Verify that:
 
 # ESLint Rule `no-deprecated-classes`
 
-Reports usage of deprecated Lucca Front CSS classes in Angular templates — both external `.html` templates and inline component templates (through `angular.processInlineTemplates`).
+Reports usage of deprecated Lucca Front CSS classes in Angular templates.
 
 ## 🎯 Overview
 
-The deprecation list lives in `@lucca-front/stylelint-config` (`LFDeprecatedSelectors.mjs`) as regexes written against **CSS selectors** (e.g. `/\.mod-link/`, or lookahead combinations like `/(?=\S*\.\bbutton\b)(?=\S*\.\bmod-counter\b)\S*/`). To reuse them verbatim, the rule converts every class list it finds into a compound selector before matching:
-
-```
-class="button mod-counter"  →  ".button.mod-counter"
-```
-
-Word boundaries (`\b`) and same-element combination lookaheads keep working unchanged, so the stylelint list remains the single source of truth.
+- Covers external `.html` templates and inline component templates (through `angular.processInlineTemplates`).
+- The deprecation list lives in `@lucca-front/stylelint-config` (`LFDeprecatedSelectors.mjs`).
+- Its regexes are written against **CSS selectors** (e.g. `/\.mod-link/`, or same-element lookahead combinations).
+- The rule converts each class list into a compound selector before matching: `class="button mod-counter"` → `".button.mod-counter"`.
+- The stylelint regexes therefore apply verbatim — `\b` boundaries and combinations included.
+- The stylelint list stays the single source of truth.
 
 ## 🚀 Configuration
 
-Requires `@angular-eslint/template-parser` (the rule visits `TextAttribute` / `BoundAttribute` nodes). Wired in `eslint.config.mjs`:
+- Requires `@angular-eslint/template-parser` (the rule visits `TextAttribute` / `BoundAttribute` nodes).
+- The exported `fromLFDeprecatedSelectors()` helper maps the stylelint list to the rule options.
+- Wired in `eslint.config.mjs`:
 
 ```javascript
+import localRules, { fromLFDeprecatedSelectors } from './packages/eslint-plugin/index.ts';
 import LFDeprecatedSelectors from './packages/stylelint-config/LFDeprecatedSelectors.mjs';
-
-const deprecatedClassesOptions = {
-	deprecations: LFDeprecatedSelectors.map(({ objectPattern, versionDeprecated, versionDeleted }) => ({
-		patterns: (Array.isArray(objectPattern) ? objectPattern : [objectPattern]).map((pattern) => pattern.source),
-		...(versionDeprecated && { versionDeprecated }),
-		...(versionDeleted && { versionDeleted }),
-	})),
-};
 
 // in the `**/*.html` block (angular template parser):
 rules: {
-	'@lucca-front/no-deprecated-classes': ['error', deprecatedClassesOptions],
+	'@lucca-front/no-deprecated-classes': ['error', fromLFDeprecatedSelectors(LFDeprecatedSelectors)],
 }
 ```
 
@@ -265,7 +259,8 @@ rules: {
 
 ## 📋 Known violations in this repository
 
-Existing violations are documented and suppressed with an explaining `eslint-disable` comment instead of being fixed:
+- Existing violations are suppressed with an explaining inline `eslint-disable` comment, not fixed.
+- Find them all with `grep -r "eslint-disable.*no-deprecated-classes"`.
 
 | File                                                                          | Class          | Status                                                              |
 | ----------------------------------------------------------------------------- | -------------- | ------------------------------------------------------------------- |
