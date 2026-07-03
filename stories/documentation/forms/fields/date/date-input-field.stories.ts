@@ -133,8 +133,9 @@ export const BasicTEST = createTestStory(Basic, async ({ canvasElement, args, co
 		await userEvent.clear(input);
 		await userEvent.type(input, 'not a date');
 		await userEvent.keyboard('{Escape}');
-		await expectNgModelDisplay(canvasElement, 'Invalid Date');
-		await expect(input).toHaveAttribute('aria-invalid', 'true');
+		// Control-side validation was removed with the FormValueControl migration:
+		// an unparsable input resolves to a null value, invalidity is declared schema-side (validDate).
+		await expectNgModelDisplay(canvasElement, '');
 	});
 	await waitForAngular();
 
