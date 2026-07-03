@@ -30,6 +30,7 @@ export default {
 			description: 'Modifie la taille du composant.',
 		},
 		clickable: {
+			control: 'boolean',
 			description: 'Rend les lignes cliquables.',
 		},
 		unclearable: {
