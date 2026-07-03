@@ -7,6 +7,7 @@ export default [
 			/\.disabled(?![\w-])/,
 			/\.error(?![\w-])/,
 			/\.label(?![\w-])/,
+			/\.label-icon(?![\w-])/,
 			/\.mod-delete(?![\w-])/,
 			/\.mod-link(?![\w-])/,
 			/\.mod-outline(?![\w-])/,
