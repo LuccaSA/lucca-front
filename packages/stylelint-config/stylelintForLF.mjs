@@ -156,8 +156,8 @@ function getMessage(objectData) {
 /**
  * Is the element deleted for the current LF version?
  * Single source of truth for getMessage() and getSeverity().
- * Compares dot-separated versions component by component so the most significant
- * difference decides — a plain string comparison would misorder them (e.g. `9.0.0` > `22.0.0`).
+ * Compares dot-separated versions part by part so the most significant difference decides.
+ * A plain string comparison would misorder them (e.g. `9.0.0` > `22.0.0`).
  *
  * @param {DisallowedObject} objectData
  * @return {boolean} - true if the current LF version is at or past versionDeleted
