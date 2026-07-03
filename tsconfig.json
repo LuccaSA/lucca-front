@@ -2,7 +2,6 @@
 {
   "compileOnSave": false,
   "compilerOptions": {
-    "baseUrl": "./",
     "outDir": "./dist/out-tsc",
     "forceConsistentCasingInFileNames": true,
     "strict": false,
@@ -17,16 +16,16 @@
     ],
     "paths": {
       "@lucca-front/icons": [
-        "packages/icons/index.d.ts"
+        "./packages/icons/index.d.ts"
       ],
       "@lucca-front/ng/*": [
-        "packages/ng/*/public-api.ts"
+        "./packages/ng/*/public-api.ts"
       ],
       "@lucca/prisme/*": [
-        "packages/prisme/*/public-api.ts"
+        "./packages/prisme/*/public-api.ts"
       ],
       "@/stories/*": [
-        "stories/documentation/*"
+        "./stories/documentation/*"
       ]
     },
     "declaration": false,

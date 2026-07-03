@@ -1,6 +1,6 @@
 import { FocusTrap, InteractivityChecker } from '@angular/cdk/a11y';
 import { DOCUMENT } from '@angular/common';
-import { inject, NgZone } from '@angular/core';
+import { inject, Injector, NgZone } from '@angular/core';
 
 export class PopoverFocusTrap extends FocusTrap {
 	override startAnchorListener = () => {
@@ -17,6 +17,6 @@ export class PopoverFocusTrap extends FocusTrap {
 		element: HTMLElement,
 		private triggerElement: HTMLElement,
 	) {
-		super(element, inject(InteractivityChecker), inject(NgZone), inject(DOCUMENT), true);
+		super(element, inject(InteractivityChecker), inject(NgZone), inject(DOCUMENT), true, inject(Injector));
 	}
 }

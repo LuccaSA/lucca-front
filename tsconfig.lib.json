@@ -8,13 +8,13 @@
     "types": [],
     "paths": {
       "@lucca-front/ng": [
-        "dist/ng/root"
+        "./dist/ng/root"
       ],
       "@lucca-front/ng/*": [
-        "dist/ng/*"
+        "./dist/ng/*"
       ],
       "@lucca/prisme/*": [
-        "dist/prisme/*"
+        "./dist/prisme/*"
       ]
     }
   },
