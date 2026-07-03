@@ -80,7 +80,9 @@ export class MultilanguageInputComponent implements FormValueControl<Multilangua
 	});
 
 	panelInputs = computed(() => {
-		return this.#translations().filter((row) => (this.hasNoInvariant() ? row.cultureCode !== this.displayLocale() && row.cultureCode !== INVARIANT_CULTURE_CODE : row.cultureCode !== INVARIANT_CULTURE_CODE));
+		return this.#translations().filter((row) =>
+			this.hasNoInvariant() ? row.cultureCode !== this.displayLocale() && row.cultureCode !== INVARIANT_CULTURE_CODE : row.cultureCode !== INVARIANT_CULTURE_CODE,
+		);
 	});
 
 	presentationValue = computed(() => {

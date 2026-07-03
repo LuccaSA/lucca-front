@@ -22,9 +22,7 @@ export function endTimeBeforeStartTimeValidator(): ValidatorFn {
  * Signal forms validator that requires the range to have both a start and an end time.
  * Reports a `time` error otherwise.
  */
-export function validTimeRange<TValue extends TimeRangePickerRange | null, TPathKind extends PathKind = PathKind.Root>(
-	path: SchemaPath<TValue, SchemaPathRules.Supported, TPathKind>,
-): void {
+export function validTimeRange<TValue extends TimeRangePickerRange | null, TPathKind extends PathKind = PathKind.Root>(path: SchemaPath<TValue, SchemaPathRules.Supported, TPathKind>): void {
 	validate(path, ({ value }) => {
 		const range = value();
 		return isNil(range) || isValidTimeRangePicker(range) ? undefined : { kind: 'time' };
@@ -35,9 +33,7 @@ export function validTimeRange<TValue extends TimeRangePickerRange | null, TPath
  * Signal forms validator that requires the end time not to be before the start time.
  * Reports an `endTimeBeforeStartTime` error otherwise.
  */
-export function endTimeBeforeStartTime<TValue extends TimeRangePickerRange | null, TPathKind extends PathKind = PathKind.Root>(
-	path: SchemaPath<TValue, SchemaPathRules.Supported, TPathKind>,
-): void {
+export function endTimeBeforeStartTime<TValue extends TimeRangePickerRange | null, TPathKind extends PathKind = PathKind.Root>(path: SchemaPath<TValue, SchemaPathRules.Supported, TPathKind>): void {
 	validate(path, ({ value }) => {
 		const range = value();
 		return !isNil(range) && isEndTimeBeforeStartTime(range) ? { kind: 'endTimeBeforeStartTime' } : undefined;

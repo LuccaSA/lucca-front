@@ -1,4 +1,19 @@
-import { afterNextRender, booleanAttribute, ChangeDetectionStrategy, Component, computed, forwardRef, inject, Injector, input, LOCALE_ID, model, output, signal, ViewEncapsulation } from '@angular/core';
+import {
+	afterNextRender,
+	booleanAttribute,
+	ChangeDetectionStrategy,
+	Component,
+	computed,
+	forwardRef,
+	inject,
+	Injector,
+	input,
+	LOCALE_ID,
+	model,
+	output,
+	signal,
+	ViewEncapsulation,
+} from '@angular/core';
 import { FormValueControl } from '@angular/forms/signals';
 import { intlInputOptions } from '@lucca-front/ng/core';
 import { FORM_FIELD_INSTANCE, ɵPresentationDisplayDefaultDirective } from '@lucca-front/ng/form-field';

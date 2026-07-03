@@ -11,7 +11,6 @@ import {
 	forwardRef,
 	HostBinding,
 	inject,
-	Injector,
 	input,
 	model,
 	Signal,
@@ -75,7 +74,6 @@ let nextId = 0;
 })
 export class DateRangeInputComponent extends AbstractDateComponent implements Omit<FormValueControl<DateRange | null>, 'min' | 'max'>, FilterPillInputComponent {
 	public parentInput = inject(FILTER_PILL_INPUT_COMPONENT, { optional: true, skipSelf: true });
-	#injector = inject(Injector);
 	#luClass = inject(LuClass);
 
 	#formFieldRef = inject(FORM_FIELD_INSTANCE, { optional: true });
