@@ -21,7 +21,7 @@ export default [
 		versionDeleted: '18.1.0',
 	},
 	{
-		objectPattern: [/\.button-counter\b/, /\.navSide-item-alert\b/, /\.textfield-actionClear\b/, /\.lu-select-value .label\b/],
+		objectPattern: [/\.button-counter\b/, /\.navSide-item-alert\b/, /\.textfield-actionClear\b/, /\.lu-select-value \.label\b/],
 		versionDeleted: '18.1.0',
 	},
 	{
