@@ -1,3 +1,3 @@
 <div class="progress" [class]="stateClass()" [class.mod-indeterminate]="indeterminate()">
-	<div class="progress-bar" [attr.style]="'inline-size:' + value() + '%'"></div>
+	<div class="progress-bar" [style.inline-size.%]="value()"></div>
 </div>
