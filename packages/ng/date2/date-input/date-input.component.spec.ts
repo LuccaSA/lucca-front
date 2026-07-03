@@ -1,28 +1,31 @@
 import { ChangeDetectionStrategy, Component, LOCALE_ID } from '@angular/core';
 import { ComponentFixture, TestBed, fakeAsync, tick } from '@angular/core/testing';
-import { FormControl, FormsModule, ReactiveFormsModule } from '@angular/forms';
 import { DateInputComponent } from './date-input.component';
 
 @Component({
-	template: `<lu-date-input [formControl]="formControl" />`,
-	imports: [FormsModule, ReactiveFormsModule, DateInputComponent],
+	template: `<lu-date-input [value]="value" (valueChange)="onValueChange($event)" />`,
+	imports: [DateInputComponent],
 	changeDetection: ChangeDetectionStrategy.OnPush,
 })
 class HostComponent {
-	formControl = new FormControl<Date | null>(null);
+	value: Date | null = null;
+
+	onValueChange(value: Date | null) {
+		this.value = value;
+	}
 }
 
 describe('DateInputComponent', () => {
 	let fixture: ComponentFixture<HostComponent>;
 
-	function createHost(formControl: FormControl<Date | null>): HTMLInputElement {
+	function createHost(value: Date | null): HTMLInputElement {
 		TestBed.configureTestingModule({
 			imports: [HostComponent],
 			providers: [{ provide: LOCALE_ID, useValue: 'fr-FR' }],
 		});
 
 		fixture = TestBed.createComponent(HostComponent);
-		fixture.componentInstance.formControl = formControl;
+		fixture.componentInstance.value = value;
 		fixture.detectChanges();
 
 		return (fixture.nativeElement as HTMLElement).querySelector('[data-testid="lu-date-input"]') as HTMLInputElement;
@@ -35,63 +38,42 @@ describe('DateInputComponent', () => {
 	}
 
 	it('should emit null when user clear the input', () => {
-		const valueChanges = vi.fn();
-
-		const formControl = new FormControl(new Date('2024-01-01T00:00:00.000Z'));
-		formControl.valueChanges.subscribe((value) => {
-			valueChanges(value);
-		});
-
-		const input = createHost(formControl);
+		const input = createHost(new Date('2024-01-01T00:00:00.000Z'));
 		expect(input).toBeTruthy();
 
 		typeInElement('', input);
+		TestBed.flushEffects();
 
-		expect(formControl.value).toBeNull();
+		expect(fixture.componentInstance.value).toBeNull();
 	});
 
-	it('should emit error when user enter a invalid date', () => {
-		const valueChanges = vi.fn();
-
-		const formControl = new FormControl(new Date('2024-01-01T00:00:00.000Z'));
-		formControl.valueChanges.subscribe((value) => {
-			valueChanges(value);
-		});
-
-		const input = createHost(formControl);
+	it('should emit null when user enter an invalid date', () => {
+		const input = createHost(new Date('2024-01-01T00:00:00.000Z'));
 		expect(input).toBeTruthy();
 
 		typeInElement('12', input);
+		TestBed.flushEffects();
 
-		expect(valueChanges).toHaveBeenCalledTimes(1);
-		expect(formControl.errors).toEqual({ date: true });
+		expect(fixture.componentInstance.value).toBeNull();
 	});
 
 	it('should not emit value at init if null value', fakeAsync(() => {
-		const valueChanges = vi.fn();
-
-		const formControl = new FormControl(null);
-		formControl.valueChanges.subscribe((value) => {
-			valueChanges(value);
-		});
-
-		createHost(formControl);
+		const host = createHost(null);
+		expect(host).toBeTruthy();
+		const onValueChange = vi.spyOn(fixture.componentInstance, 'onValueChange');
 
 		tick();
-		expect(valueChanges).toHaveBeenCalledTimes(0);
+		TestBed.flushEffects();
+		expect(onValueChange).toHaveBeenCalledTimes(0);
 	}));
 
 	it('should not emit value at init if there is a value', fakeAsync(() => {
-		const valueChanges = vi.fn();
-
-		const formControl = new FormControl(new Date('2024-01-01T00:00:00.000Z'));
-		formControl.valueChanges.subscribe((value) => {
-			valueChanges(value);
-		});
-
-		createHost(formControl);
+		const host = createHost(new Date('2024-01-01T00:00:00.000Z'));
+		expect(host).toBeTruthy();
+		const onValueChange = vi.spyOn(fixture.componentInstance, 'onValueChange');
 
 		tick();
-		expect(valueChanges).toHaveBeenCalledTimes(0);
+		TestBed.flushEffects();
+		expect(onValueChange).toHaveBeenCalledTimes(0);
 	}));
 });
