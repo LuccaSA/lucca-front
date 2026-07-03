@@ -65,10 +65,10 @@ if (LFVersions === null) {
 		for (const milestone of milestones) {
 			const version = milestone.title;
 
-			if (version) {
-				const date = new Date(milestone.due_on);
-
-				LFVersions[normalizeVersion(version)] = date.toLocaleDateString();
+			// due_on is already ISO 8601 UTC; store as-is (a locale string breaks new Date() outside en-US).
+			// Skip milestones with no due date so they don't resolve to the epoch.
+			if (version && milestone.due_on) {
+				LFVersions[normalizeVersion(version)] = milestone.due_on;
 			}
 		}
 
