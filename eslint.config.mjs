@@ -214,6 +214,8 @@ export default defineConfig(
 			'@angular-eslint/template/prefer-self-closing-tags': 'off',
 			// TODO A lot of issues currently so a lot of rules are turned off. Would be nice to enable them but requires a lot of fixes
 			'@angular-eslint/template/button-has-type': 'off',
+			// Stories deliberately showcase deprecated classes (QA pages, migration docs): ~137 occurrences
+			'@lucca-front/no-deprecated-classes': 'off',
 		},
 	},
 	// Scripts: generate-skills is tooling code, downgrade strict rules to warn

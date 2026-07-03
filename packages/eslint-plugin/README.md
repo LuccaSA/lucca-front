@@ -277,6 +277,7 @@ rules: {
 - Existing violations are suppressed with an explaining inline `eslint-disable` comment, not fixed.
 - Each comment names the deprecated class and its replacement.
 - Find them all with `grep -r "eslint-disable.*no-deprecated-classes"`.
+- Exception: the rule is `off` for `stories/**/*.html` — stories deliberately showcase deprecated classes (~137 occurrences).
 
 ---
 
