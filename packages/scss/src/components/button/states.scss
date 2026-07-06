@@ -29,6 +29,10 @@
 
 	@include loading.spinner(var(--pr-t-font-body-M-lineHeight));
 
+	&:disabled {
+		--components-button-color: transparent;
+	}
+
 	.numericBadge {
 		@include numericBadge.state;
 	}
