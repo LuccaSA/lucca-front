@@ -16,6 +16,5 @@ import { IconComponent } from '@lucca/prisme/icon';
 })
 export class ApprobationInboxHeaderComponent {
 	readonly label = input.required<string>();
-
 	readonly delegation = input<string | null>();
 }

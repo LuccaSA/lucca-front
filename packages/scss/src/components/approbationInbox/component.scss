@@ -67,13 +67,14 @@
 		}
 
 		.approbationInbox-detail {
-			display: var(--components-approbationInbox-details-display);
+			display: flex;
 			flex-direction: column;
+			gap: var(--pr-t-spacings-200);
 			flex-grow: 1;
 		}
 
 		.approbationInbox-detail-container.container {
-			display: flex;
+			display: var(--components-approbationInbox-details-container-display);
 			flex-direction: column;
 			gap: var(--pr-t-spacings-50);
 			margin-block: var(--pr-t-spacings-300);
@@ -85,7 +86,7 @@
 		.approbationInbox-detail-header,
 		.approbationInbox-detail-main {
 			background-color: var(--pr-t-elevation-surface-raised);
-			padding: var(--pr-t-spacings-300);
+			padding: var(--components-approbationInbox-details-headerMain-padding);
 			border-radius: var(--pr-t-border-radius-structure);
 		}
 
@@ -99,7 +100,7 @@
 		}
 
 		.approbationInbox-detail-header-main-actions {
-			display: flex;
+			display: var(--components-approbationInbox-details-header-main-actions-display);
 			gap: var(--pr-t-spacings-100);
 		}
 
@@ -196,7 +197,9 @@
 			gap: var(--pr-t-spacings-100);
 			align-items: var(--components-approbationInbox-list-item-content-info-alignItems);
 
-			[tabindex] {
+			[tabindex],
+			a,
+			button {
 				position: relative;
 			}
 		}

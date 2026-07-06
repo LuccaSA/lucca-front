@@ -88,7 +88,7 @@ type BaseLuDialogConfig<C, TData = LuDialogData<C>> = {
 	/**
 	 * Should it be a modal (default), a drawer? a drawer from bottom?
 	 */
-	mode?: 'default' | 'drawer' | 'drawer-from-bottom' | 'fancy';
+	mode?: 'default' | 'drawer' | 'drawer-from-bottom' | 'fancy' | 'sheet';
 
 	/**
 	 * Classes to add to the panel

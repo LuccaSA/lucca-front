@@ -48,6 +48,10 @@
 
 			&:where(.mod-fromBottom) {
 				@include fromBottom;
+
+				&:where(.mod-sheet) {
+					@include sheet;
+				}
 			}
 
 			@include media.max('S') {

@@ -37,7 +37,7 @@ interface MainLayoutHTMLBasicStory {
 }
 
 export default {
-	title: 'Documentation/Structure/Main Layout/HTML&CSS/Inbox',
+	title: 'Documentation/Structure/Main Layout/Angular/Inbox',
 	argTypes: {},
 	decorators: [
 		moduleMetadata({
@@ -76,8 +76,6 @@ export default {
 		}),
 	],
 	render: (args: MainLayoutHTMLBasicStory) => {
-		let content = `content`;
-
 		return {
 			styles: [
 				`
@@ -94,16 +92,15 @@ export default {
 			border-bottom: 1px solid var(--palettes-neutral-200);
 
 			@media (min-width: 64em) {
-				margin-inline-start: 15rem;
+				margin-inline-start: calc(15rem / 1);
 
 				&::before {
 					content: '';
 					position: absolute;
 					inset: 0 auto auto 0;
 					background-color: #192157;
-					inline-size: 15rem;
-					min-block-size: 296px;
-					block-size: 657px;
+					inline-size: calc(15rem / 1);
+					block-size: 100dvh;
 				}
 			}
 		}
@@ -134,6 +131,7 @@ export default {
 						<lu-approbation-inbox-item>
 							<a href="#" lu-approbation-inbox-action>link</a>
 						</lu-approbation-inbox-item>
+						<!-- TODO inbox -->
 						<lu-approbation-inbox-item center>
 							<lu-user-picture size="S" approbationInboxListItemStart />
 							<h2 class="pr-u-h4"><a href="#" lu-approbation-inbox-action>Title</a></h2>
@@ -168,11 +166,17 @@ export default {
 				<div class="mainLayout-content-inside">
 					<lu-approbation-inbox-detail>
 						<lu-approbation-inbox-detail-header approbationInboxDetailHeader label="Lorem ispum dolor" delegation="Délégué par Marie Bragoulet">
+							<!-- TODO inbox -->
 							<lu-user-picture size="L" approbationInboxDetailStart />
 							<lu-listing inline divider>
 								<lu-listing-item>Lorem ipsum</lu-listing-item>
 								<lu-listing-item>Dolor sit amet</lu-listing-item>
 							</lu-listing>
+							<ng-container approbationInboxDetailEnd>
+								<button luButton="ghost" type="button">
+									<lu-icon icon="menuDots" alt="Plus d’options" />
+								</button>
+							</ng-container>
 						</lu-approbation-inbox-detail-header>
 						<lu-callout state="warning">
 							<p>Callout feedback description</p>
@@ -198,10 +202,5 @@ export default {
 } as Meta;
 
 export const Basic = {
-	args: {
-		header: false,
-		headerSticky: false,
-		footer: false,
-		sidebar: true,
-	},
+	args: {},
 };

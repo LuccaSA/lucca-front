@@ -9,14 +9,13 @@ import { injectMediaMinBreakpoint } from '@lucca-front/ng/core';
 	encapsulation: ViewEncapsulation.None,
 	host: {
 		class: 'approbationInbox-list-item-content-action',
-		'[attr.aria-current]': '!mediaMaxM() && current() ? "page" : null',
-		'[attr.role]': 'mediaMaxM() ? "button" : null',
-		'[class.is-current]': 'mediaMaxM() && current()',
+		'[attr.aria-current]': 'mediaMinM() && current() ? "page" : null',
+		'[attr.role]': '!mediaMinM() ? "button" : null',
 	},
 	changeDetection: ChangeDetectionStrategy.OnPush,
 })
 export class ApprobationInboxLinkComponent {
 	readonly current = input(false, { transform: booleanAttribute });
 
-	readonly mediaMaxM = injectMediaMinBreakpoint('M', true);
+	readonly mediaMinM = injectMediaMinBreakpoint('M');
 }

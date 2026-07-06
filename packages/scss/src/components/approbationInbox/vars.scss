@@ -1,5 +1,4 @@
 @mixin vars {
-	--components-approbationInbox-details-display: none;
 	--components-approbationInbox-list-marginInlineEnd: var(--pr-t-spacings-200);
 	--components-approbationInbox-list-marginInlineStart: var(--pr-t-spacings-200);
 	--components-approbationInbox-list-inlineSize: auto;
@@ -11,4 +10,7 @@
 	--commponents-approbationInbox-list-item-content-before-background: var(--pr-t-elevation-surface-raised);
 	--commponents-approbationInbox-list-item-content-before-boxShadow: var(--pr-t-elevation-shadow-raised);
 	--components-approbationInbox-details-header-main-infos-title-paddingBlock: 0;
+	--components-approbationInbox-details-header-main-actions-display: flex;
+	--components-approbationInbox-details-container-display: flex;
+	--components-approbationInbox-details-headerMain-padding: var(--pr-t-spacings-300);
 }

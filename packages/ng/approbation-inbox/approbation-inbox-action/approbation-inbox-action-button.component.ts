@@ -8,12 +8,12 @@ import { injectMediaMinBreakpoint } from '@lucca-front/ng/core';
 	encapsulation: ViewEncapsulation.None,
 	host: {
 		class: 'approbationInbox-list-item-content-action',
-		'[class.is-current]': 'current()',
+		'[class.is-current]': 'mediaMinM() && current()',
 	},
 	changeDetection: ChangeDetectionStrategy.OnPush,
 })
 export class ApprobationInboxButtonComponent {
 	readonly current = input(false, { transform: booleanAttribute });
 
-	readonly mediaMaxM = injectMediaMinBreakpoint('M', true);
+	readonly mediaMinM = injectMediaMinBreakpoint('M');
 }

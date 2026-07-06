@@ -14,10 +14,9 @@
 		}
 	</div>
 	<div class="approbationInbox-detail-header-main-actions">
+		<!-- TODO inbox -->
 		<button luButton type="button">Approuver</button>
 		<button luButton="outlined" type="button">Refuser</button>
-		<button luButton="ghost" type="button">
-			<lu-icon icon="menuDots" alt="Plus d’options" />
-		</button>
+		<ng-content select="[approbationInboxDetailEnd]" />
 	</div>
 </div>

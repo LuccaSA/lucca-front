@@ -1,23 +1,37 @@
 @use 'exports' as *;
 @use '@lucca-front/scss/src/commons/utils/media';
 
-.approbationInbox {
+.approbationInbox-detail,
+.approbationInbox-list {
 	@layer components {
 		@include vars;
+	}
+}
+
+.approbationInbox-list {
+	@layer components {
 		@include component;
+	}
+}
+
+.approbationInbox-detail {
+	@layer components {
+		@include vars;
 	}
 
 	@layer mods {
-		&:has(.approbationInbox-list) {
-			&:has(.approbationInbox-detail) {
-				@include media.min('M') {
-					@include wide;
-				}
-			}
-		}
-
 		&:has(.approbationInbox-detail-header-main-infos-description:empty) {
 			@include noDescription;
+		}
+
+		&.mod-insideDialog {
+			@include insideDialog;
+		}
+
+		&:not(.mod-insideDialog) {
+			@include media.max('M') {
+				@include outsideDialog;
+			}
 		}
 	}
 }
@@ -48,17 +62,15 @@
 .approbationInbox-list {
 	@layer mods {
 		@include media.min('S') {
-			--components-approbationInbox-list-marginInlineEnd: var(--pr-t-spacings-400);
-			--components-approbationInbox-list-marginInlineStart: var(--pr-t-spacings-400);
+			@include narrowS;
 		}
 
 		@include media.min('M') {
-			--components-approbationInbox-list-marginInlineEnd: 0;
-			--components-approbationInbox-list-inlineSize: 17rem;
+			@include wideM;
 		}
 
 		@include media.min('L') {
-			--components-approbationInbox-list-inlineSize: 22.5rem;
+			@include wideL;
 		}
 	}
 }
