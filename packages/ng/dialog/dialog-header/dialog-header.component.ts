@@ -1,5 +1,5 @@
 import { CdkDialogContainer } from '@angular/cdk/dialog';
-import { afterNextRender, ChangeDetectionStrategy, Component, contentChild, Directive, DoCheck, ElementRef, inject, Injector, input, OnDestroy, Renderer2, ViewEncapsulation } from '@angular/core';
+import { afterRenderEffect, ChangeDetectionStrategy, Component, contentChild, Directive, ElementRef, inject, input, OnDestroy, Renderer2, ViewEncapsulation } from '@angular/core';
 import { ButtonComponent } from '@lucca-front/ng/button';
 import { intlInputOptions } from '@lucca-front/ng/core';
 import { IconComponent } from '@lucca-front/ng/icon';
@@ -31,7 +31,7 @@ export class DialogHeaderSubtitle {}
 		class: 'dialog-inside-header',
 	},
 })
-export class DialogHeaderComponent implements DoCheck, OnDestroy {
+export class DialogHeaderComponent implements OnDestroy {
 	#ref = inject(LuDialogRef);
 
 	intl = input(...intlInputOptions(LU_DIALOG_HEADER_TRANSLATIONS));
@@ -42,9 +42,11 @@ export class DialogHeaderComponent implements DoCheck, OnDestroy {
 
 	#renderer = inject(Renderer2);
 
-	#injector = inject(Injector);
-
 	#registeredAriaLabelledById: string | undefined;
+
+	constructor() {
+		afterRenderEffect(() => this.#syncAriaLabelledBy());
+	}
 
 	close(): void {
 		this.#ref.dismiss();
@@ -53,11 +55,6 @@ export class DialogHeaderComponent implements DoCheck, OnDestroy {
 	optionalAction = contentChild(DialogHeaderAction);
 
 	optionalSubtitle = contentChild(DialogHeaderSubtitle);
-
-	ngDoCheck(): void {
-		// Runs after every check so a title that appears, disappears or gets swapped later (e.g. behind an @if) stays in sync.
-		afterNextRender(() => this.#syncAriaLabelledBy(), { injector: this.#injector });
-	}
 
 	ngOnDestroy(): void {
 		this.#unregisterAriaLabelledBy();
