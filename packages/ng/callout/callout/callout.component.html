@@ -2,13 +2,13 @@
 	<div class="callout" [class]="calloutClasses()" [class.mod-AI]="AI()">
 		@if (state() | luCalloutIcon: icon(); as calloutIcon) {
 			<div class="callout-icon">
-				<lu-icon [icon]="calloutIcon" [alt]="iconAlt()" />
+				<lu-icon [icon]="calloutIcon" [alt]="iconAlt() ?? undefined" />
 			</div>
 		}
 		<div class="callout-content">
-			@if (heading()) {
+			@if (heading(); as heading) {
 				<p [attr.role]="hx() ? 'heading' : null" [attr.aria-level]="hx() ? hx() : null" class="callout-content-title">
-					<ng-container *luPortal="heading()" />
+					<ng-container *luPortal="heading" />
 				</p>
 			}
 			<div class="callout-content-description">

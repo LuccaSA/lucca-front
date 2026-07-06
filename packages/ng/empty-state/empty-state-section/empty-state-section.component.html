@@ -1,23 +1,23 @@
 <section class="emptyState" [class.mod-center]="center()" [attr.role]="heading() ? null : 'presentation'">
 	<div class="emptyState-container">
 		<div class="emptyState-content">
-			@if (iconOrIllustration()) {
+			@if (iconOrIllustration(); as iconOrIllustration) {
 				<div class="emptyState-content-icon">
-					<lu-bubble-illustration [action]="actionIllustration()" [illustration]="iconOrIllustration()" size="L" [palette]="palette()" />
+					<lu-bubble-illustration [action]="actionIllustration()" [illustration]="iconOrIllustration" size="L" [palette]="palette()" />
 				</div>
 			}
 			<div class="emptyState-content-text">
 				@if (heading()) {
 					<div role="heading" [attr.aria-level]="hx()" class="emptyState-content-heading">{{ heading() }}</div>
 				}
-				@if (description()) {
-					@if (isStringPortalContent(description())) {
+				@if (description(); as description) {
+					@if (isStringPortalContent(description)) {
 						<p class="emptyState-content-description">
-							<ng-container *luPortal="description()" />
+							<ng-container *luPortal="description" />
 						</p>
 					} @else {
 						<div class="emptyState-content-description">
-							<ng-container *luPortal="description()" />
+							<ng-container *luPortal="description" />
 						</div>
 					}
 				}

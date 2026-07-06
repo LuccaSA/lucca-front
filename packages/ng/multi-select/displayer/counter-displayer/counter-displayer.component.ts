@@ -14,7 +14,7 @@ import { LuMultiSelectDisplayerInputDirective } from '../displayer-input.directi
 	selector: 'lu-multi-select-counter-displayer',
 	imports: [AsyncPipe, LuTooltipModule, ChipComponent, ɵLuOptionOutletDirective, FormsModule, LuMultiSelectDisplayerInputDirective],
 	template: `
-		<div class="multipleSelect-displayer mod-filter" [class.is-filled]="(selectedOptions$ | async)?.length > 0">
+		<div class="multipleSelect-displayer mod-filter" [class.is-filled]="((selectedOptions$ | async)?.length ?? 0) > 0">
 			<input type="text" autocomplete="off" #inputElement luMultiSelectDisplayerInput />
 			@if (selectedOptions$ | async; as selectedOptions) {
 				<div class="multipleSelect-displayer-filter">
@@ -23,7 +23,7 @@ import { LuMultiSelectDisplayerInputDirective } from '../displayer-input.directi
 							<ng-container *luOptionOutlet="select.displayerTpl(); value: selectedOptions[0]" />
 						</lu-chip>
 					}
-					@if (selectedOptions?.length > 1) {
+					@if ((selectedOptions?.length ?? 0) > 1) {
 						<lu-chip class="multipleSelect-displayer-chip" unkillable>{{ selectedOptions?.length }} {{ label() }}</lu-chip>
 					}
 				</div>

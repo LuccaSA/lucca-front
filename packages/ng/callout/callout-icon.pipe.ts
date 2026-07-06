@@ -12,7 +12,7 @@ import { getCalloutIcon } from './callout.utils';
 	name: 'luCalloutIcon',
 })
 export class CalloutIconPipe implements PipeTransform {
-	transform(state: CalloutState, icon: LuccaIcon): LuccaIcon | undefined {
+	transform(state: CalloutState | undefined, icon: LuccaIcon | undefined): LuccaIcon | undefined {
 		return getCalloutIcon(state, icon);
 	}
 }

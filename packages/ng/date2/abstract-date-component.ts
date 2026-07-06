@@ -33,7 +33,9 @@ export abstract class AbstractDateComponent {
 	readonly format = input<DateFormat>(DATE_FORMAT.DATE);
 	protected readonly inDateISOFormat = computed(() => this.format() === DATE_FORMAT.DATE_ISO);
 
-	readonly ranges = input([], { transform: (v: readonly DateRange[] | readonly DateRangeInput[]) => v.map(transformDateRangeInputToDateRange) });
+	readonly ranges = input([], {
+		transform: (v: readonly DateRange[] | readonly DateRangeInput[]) => v.map(transformDateRangeInputToDateRange).filter((range): range is DateRange => range !== null),
+	});
 	readonly hideToday = input(false, { transform: booleanAttribute });
 	readonly hasTodayButton = input(false, { transform: booleanAttribute });
 	readonly clearable = input(null, { transform: booleanAttribute });

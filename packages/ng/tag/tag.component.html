@@ -1,14 +1,14 @@
 @if (link()) {
 	<a [routerLink]="link()" class="tag" [class]="tagClasses()" [class.mod-outlined]="!AI() && outlined()" [class.mod-AI]="AI()">
-		@if (icon()) {
-			<lu-icon [icon]="icon()" />
+		@if (icon(); as icon) {
+			<lu-icon [icon]="icon" />
 		}
 		<span class="tag-content">{{ label() }}</span>
 	</a>
 } @else {
 	<span class="tag" [class]="tagClasses()" [class.mod-outlined]="!AI() && outlined()" [class.mod-AI]="AI()">
-		@if (icon()) {
-			<lu-icon [icon]="icon()" />
+		@if (icon(); as icon) {
+			<lu-icon [icon]="icon" />
 		}
 		@if (withEllipsis()) {
 			<span class="tag-content pr-u-ellipsis" luTooltip luTooltipWhenEllipsis>{{ label() }}</span>

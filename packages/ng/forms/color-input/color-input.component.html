@@ -3,7 +3,7 @@
 	noClueIcon
 	noClue
 	colorPicker
-	[placeholder]="compact() ? ' ' : null"
+	[placeholder]="compact() ? ' ' : undefined"
 	[panelFooterTpl]="footer"
 	[compact]="compact()"
 	[clearable]="clearable()"
@@ -18,7 +18,7 @@
 			size="XL"
 			hiddenName
 			[value]="color.background"
-			[borderColor]="color.borderColor"
+			[borderColor]="color.borderColor ?? null"
 			(mouseenter)="mouseHighlighted.set(color.name)"
 			(mouseleave)="mouseHighlighted.set('')"
 		>
@@ -26,7 +26,7 @@
 		</lu-color>
 	</ng-container>
 	<ng-container *luDisplayer="let color; select: selectRef">
-		<lu-color size="L" [borderColor]="color.borderColor" [value]="color.background">{{ color.name }}</lu-color>
+		<lu-color size="L" [borderColor]="color.borderColor ?? null" [value]="color.background">{{ color.name }}</lu-color>
 	</ng-container>
 	<ng-template #footer>
 		<div class="colorPanel-highlighted">
@@ -37,9 +37,10 @@
 </lu-simple-select>
 
 <ng-container *luPresentationDisplayDefault>
-	@if (ngControl?.control?.value) {
-		@let color = currentColorPresentation();
-		<lu-color [borderColor]="color.borderColor" [value]="color.background">{{ color.name }}</lu-color>
+	@if (ngControl.control.value) {
+		@if (currentColorPresentation(); as color) {
+			<lu-color [borderColor]="color.borderColor ?? null" [value]="color.background">{{ color.name }}</lu-color>
+		}
 	} @else {
 		<span aria-hidden="true" data-content-before="–"></span>
 	}

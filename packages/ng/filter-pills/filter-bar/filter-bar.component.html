@@ -38,7 +38,7 @@
 					<input
 						type="checkbox"
 						class="checkboxField-input"
-						[name]="pill.name()"
+						[name]="pill.name() ?? ''"
 						[attr.id]="'filterPillOptions' + index"
 						[(ngModel)]="pill.displayed"
 					/>

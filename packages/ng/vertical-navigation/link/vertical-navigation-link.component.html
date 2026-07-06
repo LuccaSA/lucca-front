@@ -1,4 +1,4 @@
-@if (icon()) {
-	<lu-icon class="verticalNavigation-list-item-link-icon" [icon]="icon()" />
+@if (icon(); as icon) {
+	<lu-icon class="verticalNavigation-list-item-link-icon" [icon]="icon" />
 }
 <ng-content />

@@ -45,8 +45,8 @@
 			[placeholder]="placeholder()"
 			[formControl]="ngControl.control"
 			[step]="step()"
-			[min]="min()"
-			[max]="max()"
+			[min]="min() ?? null"
+			[max]="max() ?? null"
 			[class.pr-u-noSpinButtons]="noSpinButtons()"
 			(wheel)="$event.preventDefault()"
 			#inputElement
