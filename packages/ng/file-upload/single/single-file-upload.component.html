@@ -2,7 +2,7 @@
 	class="fileUpload"
 	[class.is-droppable]="droppable"
 	[class.mod-L]="size() === 'L'"
-	[class.is-hidden]="!!entry()"
+	[class.is-hidden]="!!fileEntry()"
 	[class.mod-structure]="structure()"
 >
 	<input
@@ -14,7 +14,7 @@
 		(dragenter)="droppable = true"
 		(dragleave)="droppable = false"
 		(change)="filesChange($event)"
-		[attr.disabled]="!!entry() ? 'disabled' : null"
+		[attr.disabled]="!!fileEntry() ? 'disabled' : null"
 		[attr.aria-describedby]="'fileUpload-instruction-' + idSuffix"
 	/>
 	<div class="fileUpload-status">
@@ -42,16 +42,4 @@
 	</div>
 	<span class="fileUpload-button button" [class.mod-filled]="buttonFilled()" aria-hidden="true">{{ intl().selectFile.one }}</span>
 </div>
-@if (entry()) {
-	<lu-file-entry
-		[media]="size() === 'L'"
-		[size]="'L'"
-		[previewUrl]="previewUrl()"
-		[entry]="entry()"
-		[state]="state()"
-		(deleteFile)="deleteFile.emit()"
-		[inlineMessageError]="inlineMessageError()"
-		[displayFileName]="displayFileName()"
-		[structure]="structure()"
-	/>
-}
+<ng-content select="lu-file-entry" />
