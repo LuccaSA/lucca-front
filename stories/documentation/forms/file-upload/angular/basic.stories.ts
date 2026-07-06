@@ -302,15 +302,22 @@ export const Multi = {
 export const Single = {
 	render: (args, { argTypes }) => {
 		const multi = Multi.render(args, { argTypes });
-		const { accept, ...mainArgs } = args;
+		const { media, size, displayFileName, accept, ...mainArgs } = args;
+		const mediaParam = media ? ` media` : ``;
+		const displayFileNameParam = displayFileName && media ? ` displayFileName` : ``;
+		const sizeLFileUploadParam = size ? ` size="L"` : ``;
+		const sizeLFileEntryParam = media ? `` : sizeLFileUploadParam;
+		const fileEntry = `@if (fileUpload) {
+			<lu-file-entry${sizeLFileEntryParam}${displayFileNameParam}${mediaParam} [entry]="fileUpload | fileUploadToLFEntry" [state]="fileUpload.state" [previewUrl]="getPreviewUrl(fileUpload)" [inlineMessageError]="fileUpload.error?.detail" (deleteFile)="deleteFile(fileUpload)" />
+		}`;
 		if (args.AItag) {
 			return {
 				props: { ...multi.props, accept },
 				template: `@let fileUpload = fileUploadFeature.fileUploads()[0];
 <lu-form-field label="Label">
-	<lu-single-file-upload ${generateInputs(mainArgs, argTypes)} [accept]="accept" (filePicked)="fileUploadFeature.uploadFiles([$event])"
-		[entry]="fileUpload | fileUploadToLFEntry" [state]="fileUpload?.state" [previewUrl]="getPreviewUrl(fileUpload)" [inlineMessageError]="fileUpload?.error?.detail" (deleteFile)="deleteFile(fileUpload)">
+	<lu-single-file-upload${sizeLFileUploadParam}${generateInputs(mainArgs, argTypes)} [accept]="accept" (filePicked)="fileUploadFeature.uploadFiles([$event])">
 		<lu-tag icon="weatherStars" label="Scan intelligent" AI />
+		${fileEntry}
 	</lu-single-file-upload>
 </lu-form-field>`,
 			};
@@ -319,8 +326,9 @@ export const Single = {
 				props: { ...multi.props, accept },
 				template: `@let fileUpload = fileUploadFeature.fileUploads()[0];
 <lu-form-field label="Label">
-	<lu-single-file-upload ${generateInputs(mainArgs, argTypes)} [accept]="accept" (filePicked)="fileUploadFeature.uploadFiles([$event])"
-		[entry]="fileUpload | fileUploadToLFEntry" [state]="fileUpload?.state" [previewUrl]="getPreviewUrl(fileUpload)" [inlineMessageError]="fileUpload?.error?.detail" (deleteFile)="deleteFile(fileUpload)" />
+	<lu-single-file-upload${sizeLFileUploadParam}${generateInputs(mainArgs, argTypes)} [accept]="accept" (filePicked)="fileUploadFeature.uploadFiles([$event])">
+		${fileEntry}
+	</lu-single-file-upload>
 </lu-form-field>`,
 			};
 		}
