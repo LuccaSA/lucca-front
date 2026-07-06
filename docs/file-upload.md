@@ -33,14 +33,21 @@ Once the files are sent, the display management changes depending on the approac
 
 ### Single File Upload
 
+Just like the multi variant, you render the `lu-file-entry` yourself and project it into
+`lu-single-file-upload`. When a `lu-file-entry` is projected, the dropzone is hidden and replaced
+by the entry.
+
 ```html
 
 <lu-form-field label="Label">
   @let fileUpload = fileUploadFeature.fileUploads()[0];
-  <lu-single-file-upload [accept]="accept" (filePicked)="fileUploadFeature.uploadFiles([$event])"
-                         [entry]="fileUpload | luFileEntry" [state]="fileUpload?.state"
-                         [previewUrl]="getPreviewUrl(fileUpload)" [inlineMessageError]="fileUpload?.error?.detail"
-                         (deleteFile)="deleteFile(fileUpload)" />
+  <lu-single-file-upload [accept]="accept" (filePicked)="fileUploadFeature.uploadFiles([$event])">
+    @if (fileUpload) {
+      <lu-file-entry [entry]="fileUpload | luFileEntry" [state]="fileUpload.state"
+                     [previewUrl]="getPreviewUrl(fileUpload)" [inlineMessageError]="fileUpload.error?.detail"
+                     (deleteFile)="deleteFile(fileUpload)" />
+    }
+  </lu-single-file-upload>
 </lu-form-field>
 ```
 
