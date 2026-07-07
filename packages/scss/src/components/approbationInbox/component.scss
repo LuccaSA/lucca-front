@@ -1,6 +1,10 @@
 @use '@lucca-front/scss/src/commons/utils/namespace';
 @use '@lucca-front/scss/src/commons/utils/reset';
 @use '@lucca-front/scss/src/commons/utils/a11y';
+@use '@lucca-front/scss/src/commons/utils/text';
+
+@use '@lucca-front/scss/src/components/avatar/exports' as avatar;
+@use '@lucca-front/scss/src/components/button/exports' as button;
 
 @mixin component($atRoot: namespace.$defaultAtRoot) {
 	@at-root ($atRoot) {
@@ -12,6 +16,10 @@
 			display: flex;
 			flex-direction: column;
 			gap: var(--pr-t-spacings-50);
+
+			.mainLayout-sidebar:has(&) {
+				block-size: 100%;
+			}
 		}
 
 		.approbationInbox-list-content {
@@ -27,12 +35,19 @@
 			&:focus-visible {
 				@include a11y.focusVisible;
 			}
+
+			&:empty {
+				display: none;
+			}
 		}
 
 		.approbationInbox-list-footer {
-			background-color: var(--pr-t-elevation-surface-sunken);
-			padding: var(--pr-t-spacings-100);
-			border-radius: var(--pr-t-border-radius-structure);
+			background-color: var(--components-approbationInbox-list-footer-backgroundColor);
+			border-radius: var(--components-approbationInbox-list-footer-borderRadius);
+			padding-block: var(--components-approbationInbox-list-footer-paddingBlock);
+			margin-block: var(--components-approbationInbox-list-footer-marginBlock);
+			margin-inline: var(--components-approbationInbox-list-footer-marginInline);
+			padding-inline: var(--components-approbationInbox-list-footer-paddingInline);
 			display: flex;
 			flex-direction: column;
 			gap: var(--pr-t-spacings-100);
@@ -69,7 +84,7 @@
 		.approbationInbox-detail {
 			display: flex;
 			flex-direction: column;
-			gap: var(--pr-t-spacings-200);
+			gap: var(--components-approbationInbox-details-gap);
 			flex-grow: 1;
 		}
 
@@ -87,6 +102,7 @@
 		.approbationInbox-detail-main {
 			background-color: var(--pr-t-elevation-surface-raised);
 			padding: var(--components-approbationInbox-details-headerMain-padding);
+			margin: var(--components-approbationInbox-details-headerMain-margin);
 			border-radius: var(--pr-t-border-radius-structure);
 		}
 
@@ -102,6 +118,22 @@
 		.approbationInbox-detail-header-main-actions {
 			display: var(--components-approbationInbox-details-header-main-actions-display);
 			gap: var(--pr-t-spacings-100);
+
+			.button {
+				&:nth-child(2) {
+					@include button.outlined;
+				}
+			}
+		}
+
+		.approbationInbox-detail-header-main-actions-more {
+			&:empty {
+				display: none;
+			}
+
+			.button {
+				@include button.ghost;
+			}
 		}
 
 		.approbationInbox-detail-header-main {
@@ -125,9 +157,10 @@
 		}
 
 		.approbationInbox-detail-header-main-infos-title {
+			@include text.ellipsis;
+
 			font: var(--pr-t-font-heading-2);
 			color: var(--pr-t-color-text-heading);
-			padding-block-start: var(--components-approbationInbox-details-header-main-infos-title-paddingBlockStart);
 		}
 
 		.approbationInbox-detail-header-start {
@@ -137,10 +170,14 @@
 			&:empty {
 				display: none;
 			}
+
+			.avatar {
+				@include avatar.L;
+			}
 		}
 
 		.approbationInbox-detail-header-main-delegation {
-			margin-block-start: var(--pr-t-spacings-150);
+			margin-block-start: var(--components-approbationInbox-details-header-main-delegation-marginBlockStart);
 		}
 
 		.approbationInbox-details-main-block {
@@ -178,8 +215,8 @@
 				position: absolute;
 				inset: 0;
 				border-radius: var(--pr-t-border-radius-default);
-				background-color: var(--commponents-approbationInbox-list-item-content-before-background);
-				box-shadow: var(--commponents-approbationInbox-list-item-content-before-boxShadow);
+				background-color: var(--components-approbationInbox-list-item-content-before-background);
+				box-shadow: var(--components-approbationInbox-list-item-content-before-boxShadow);
 				transition-property: inset;
 				transition-duration: var(--commons-animations-durations-fast);
 			}
@@ -211,8 +248,19 @@
 			}
 		}
 
+		.approbationInbox-list-item-content-info-start {
+			.avatar {
+				@include avatar.S;
+			}
+		}
+
 		.approbationInbox-list-item-content-info-main {
 			flex-grow: 1;
+		}
+
+		.approbationInbox-list-item-content-info-main-title {
+			font: var(--pr-t-font-heading-4);
+			color: var(--pr-t-color-text-heading);
 		}
 
 		.approbationInbox-list-item-content-action {

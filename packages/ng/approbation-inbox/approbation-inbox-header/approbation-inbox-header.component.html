@@ -1,9 +1,9 @@
 <div class="approbationInbox-detail-header-start">
-	<ng-content select="[approbationInboxDetailStart]" />
+	<ng-content select="[approbationInboxDetailIllustration]" />
 </div>
 <div class="approbationInbox-detail-header-main">
 	<div class="approbationInbox-detail-header-main-infos">
-		<h1 class="approbationInbox-detail-header-main-infos-title">{{ label() }}</h1>
+		<h1 class="approbationInbox-detail-header-main-infos-title" luTooltip luTooltipWhenEllipsis>{{ label() }}</h1>
 		<div class="approbationInbox-detail-header-main-infos-description">
 			<ng-content />
 		</div>
@@ -14,9 +14,9 @@
 		}
 	</div>
 	<div class="approbationInbox-detail-header-main-actions">
-		<!-- TODO inbox -->
-		<button luButton type="button">Approuver</button>
-		<button luButton="outlined" type="button">Refuser</button>
-		<ng-content select="[approbationInboxDetailEnd]" />
+		<ng-content select="[approbationInboxDetailActions]" />
+		<span class="approbationInbox-detail-header-main-actions-more">
+			<ng-content select="[approbationInboxDetailActionsMore]" />
+		</span>
 	</div>
 </div>

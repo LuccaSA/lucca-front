@@ -51,12 +51,18 @@
 
 				&:where(.mod-sheet) {
 					@include sheet;
+
+					@include media.max('XXS') {
+						@include sheetNarrow;
+					}
 				}
 			}
 
-			@include media.max('S') {
-				@include fromBottom;
-				@include maxContent;
+			&:where(:not(.mod-sheet)) {
+				@include media.max('S') {
+					@include fromBottom;
+					@include maxContent;
+				}
 			}
 		}
 

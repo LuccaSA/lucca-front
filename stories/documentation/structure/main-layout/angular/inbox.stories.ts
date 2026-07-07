@@ -11,6 +11,7 @@ import {
 import { CalloutComponent } from '@lucca-front/ng/callout';
 import { ContainerComponent } from '@lucca-front/ng/container';
 import { DividerComponent } from '@lucca-front/ng/divider';
+import { DropdownActionComponent, DropdownItemComponent, DropdownMenuComponent, LuDropdownTriggerDirective } from '@lucca-front/ng/dropdown';
 import { FilterBarComponent, FilterPillAddonAfterDirective, FilterPillAddonBeforeDirective, FilterPillComponent } from '@lucca-front/ng/filter-pills';
 import { FormFieldComponent } from '@lucca-front/ng/form-field';
 import { CheckboxInputComponent } from '@lucca-front/ng/forms';
@@ -72,6 +73,10 @@ export default {
 				ListingItemComponent,
 				LuUserPictureComponent,
 				LuTooltipTriggerDirective,
+				LuDropdownTriggerDirective,
+				DropdownMenuComponent,
+				DropdownItemComponent,
+				DropdownActionComponent,
 			],
 		}),
 	],
@@ -110,7 +115,7 @@ export default {
 			],
 			template: `
 
-		<main role="main" class="mainLayout mod-wideM approbationInbox">
+		<main role="main" class="mainLayout mod-wideM">
 			<div class="mainLayout-sidebar">
 				<lu-approbation-inbox-list label="Test" selectable>
 					<lu-filter-bar approbationInboxListFilterBar>
@@ -131,17 +136,17 @@ export default {
 						<lu-approbation-inbox-item>
 							<a href="#" lu-approbation-inbox-action>link</a>
 						</lu-approbation-inbox-item>
-						<!-- TODO inbox -->
 						<lu-approbation-inbox-item center>
-							<lu-user-picture size="S" approbationInboxListItemStart />
-							<h2 class="pr-u-h4"><a href="#" lu-approbation-inbox-action>Title</a></h2>
+							<lu-user-picture approbationInboxListItemStart />
+							<a href="#" lu-approbation-inbox-action approbationInboxListItemTitle>Title</a>
+							<!-- TODO inbox -->
 							<p class="pr-u-bodyS pr-u-colorTextSubtle">Metadata</p>
 							<ng-container approbationInboxListItemEnd>
 								<p class="pr-u-bodyM">Metadata</p>
 								<p class="pr-u-displayFlex pr-u-colorTextSubtle pr-u-gap25">
 									<lu-icon size="XS" class="pr-u-focusVisible pr-u-borderRadiusSmall" icon="formatClipperAttachment" alt="Contient une pièce jointe" luTooltip="Contient une pièce jointe" luTooltipOnlyForDisplay />
 									<lu-icon size="XS" class="pr-u-focusVisible pr-u-borderRadiusSmall" icon="bubbleSpeech" alt="Contient un commentaire" luTooltip="Contient un commentaire" luTooltipOnlyForDisplay />
-									<lu-icon size="XS" class="pr-u-textWarning" icon="signWarning" alt="Contient un avertissement" luTooltip="Contient un avertissement" luTooltipOnlyForDisplay />
+									<lu-icon size="XS" class="pr-u-focusVisible pr-u-borderRadiusSmall pr-u-textWarning" icon="signWarning" alt="Contient un avertissement" luTooltip="Contient un avertissement" luTooltipOnlyForDisplay />
 								</p>
 							</ng-container>
 						</lu-approbation-inbox-item>
@@ -166,16 +171,38 @@ export default {
 				<div class="mainLayout-content-inside">
 					<lu-approbation-inbox-detail>
 						<lu-approbation-inbox-detail-header approbationInboxDetailHeader label="Lorem ispum dolor" delegation="Délégué par Marie Bragoulet">
-							<!-- TODO inbox -->
-							<lu-user-picture size="L" approbationInboxDetailStart />
+							<lu-user-picture approbationInboxDetailIllustration />
 							<lu-listing inline divider>
 								<lu-listing-item>Lorem ipsum</lu-listing-item>
 								<lu-listing-item>Dolor sit amet</lu-listing-item>
 							</lu-listing>
-							<ng-container approbationInboxDetailEnd>
-								<button luButton="ghost" type="button">
-									<lu-icon icon="menuDots" alt="Plus d’options" />
+							<ng-container approbationInboxDetailActions>
+								<button luButton type="button">Approuver</button>
+								<button luButton type="button">Refuser</button>
+							</ng-container>
+							<ng-container approbationInboxDetailActionsMore>
+								<button luButton type="button" [luDropdown]="dropdownOtherOptions">
+									<lu-icon icon="menuDots" alt="Autres options" />
 								</button>
+								<ng-template #dropdownOtherOptions>
+									<lu-dropdown-menu>
+										<lu-dropdown-item>
+											<button lu-dropdown-action type="button">
+												Lorem
+											</button>
+										</lu-dropdown-item>
+										<lu-dropdown-item>
+											<button lu-dropdown-action type="button">
+												Ipsum
+											</button>
+										</lu-dropdown-item>
+										<lu-dropdown-item>
+											<button lu-dropdown-action type="button">
+												Dolor
+											</button>
+										</lu-dropdown-item>
+									</lu-dropdown-menu>
+								</ng-template>
 							</ng-container>
 						</lu-approbation-inbox-detail-header>
 						<lu-callout state="warning">

@@ -15,7 +15,7 @@
 </div>
 @if (checkedCount() > 0) {
 	<footer class="approbationInbox-list-footer">
-		<h2 class="approbationInbox-list-footer-title">8 dépenses sélectionnées</h2>
+		<h2 class="approbationInbox-list-footer-title">{{ checkedCount() }} dépenses sélectionnées</h2>
 		<button luButton type="submit" block>Approuver les dépenses</button>
 		<button luButton="outlined" type="button" block>Transférer les demandes</button>
 	</footer>

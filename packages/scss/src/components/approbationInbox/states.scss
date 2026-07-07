@@ -7,10 +7,10 @@
 }
 
 @mixin selected {
-	--commponents-approbationInbox-list-item-content-before-background: var(--palettes-product-50);
-	--commponents-approbationInbox-list-item-content-before-boxShadow: 0 0 0 1px var(--palettes-product-500);
+	--components-approbationInbox-list-item-content-before-background: var(--palettes-product-50);
+	--components-approbationInbox-list-item-content-before-boxShadow: 0 0 0 1px var(--palettes-product-500);
 }
 
 @mixin current {
-	--commponents-approbationInbox-list-item-content-before-boxShadow: 0 0 0 1px var(--palettes-product-400), 0 0 0 1px var(--palettes-product-400) inset;
+	--components-approbationInbox-list-item-content-before-boxShadow: 0 0 0 1px var(--palettes-product-400), 0 0 0 1px var(--palettes-product-400) inset;
 }

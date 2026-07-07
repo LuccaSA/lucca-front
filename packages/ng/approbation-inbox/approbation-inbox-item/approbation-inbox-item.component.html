@@ -7,6 +7,7 @@
 	<div class="approbationInbox-list-item-content-info" [class.mod-center]="center()">
 		<div class="approbationInbox-list-item-content-info-start"><ng-content select="[approbationInboxListItemStart]" /></div>
 		<div class="approbationInbox-list-item-content-info-main">
+			<h2 class="approbationInbox-list-item-content-info-main-title"><ng-content select="[approbationInboxListItemTitle]" /></h2>
 			<ng-content />
 		</div>
 		<div class="approbationInbox-list-item-content-info-end"><ng-content select="[approbationInboxListItemEnd]" /></div>

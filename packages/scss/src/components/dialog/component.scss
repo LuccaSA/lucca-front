@@ -122,6 +122,10 @@
 			&.footer {
 				@include footer.insideDialog;
 			}
+
+			.icon-menuDots {
+				display: var(--components-dialog-inside-footer-actions-button-icon-menuDots-display) !important;
+			}
 		}
 
 		.dialog-inside-header {

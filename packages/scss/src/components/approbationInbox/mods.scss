@@ -3,30 +3,49 @@
 }
 
 @mixin noDescription {
-	--components-approbationInbox-details-header-main-infos-title-paddingBlockStart: calc(var(--pr-t-spacings-150));
+	--components-approbationInbox-details-header-main-delegation-marginBlockStart: 0;
 }
 
 @mixin insideDialog {
 	--components-approbationInbox-details-header-main-actions-display: none;
 	--components-approbationInbox-details-container-display: contents;
-	--components-approbationInbox-details-headerMain-padding: 0;
+	--components-approbationInbox-details-headerMain-padding: var(--pr-t-spacings-150) var(--pr-t-spacings-150) var(--pr-t-spacings-300);
+	--components-approbationInbox-details-headerMain-margin: 0 calc(var(--pr-t-spacings-150) * -1);
+	--components-approbationInbox-details-gap: var(--pr-t-spacings-50);
+
+	.dialog-inside-content:has(&) {
+		display: flex;
+		flex-direction: column;
+	}
 }
 
 @mixin outsideDialog {
 	display: none;
 }
 
-@mixin narrowS {
+@mixin mediaMinS {
 	--components-approbationInbox-list-marginInlineEnd: var(--pr-t-spacings-400);
 	--components-approbationInbox-list-marginInlineStart: var(--pr-t-spacings-400);
 }
 
-// TODO inbox
-@mixin wideM {
-	--components-approbationInbox-list-marginInlineEnd: 0;
+@mixin mediaMinM {
 	--components-approbationInbox-list-inlineSize: 17rem;
+	--components-approbationInbox-list-marginInlineEnd: 0;
 }
 
-@mixin wideL {
+@mixin mediaMinL {
 	--components-approbationInbox-list-inlineSize: 22.5rem;
+}
+
+@mixin mediaMaxM {
+	--components-approbationInbox-list-footer-backgroundColor: var(--pr-t-elevation-surface-raised);
+	--components-approbationInbox-list-footer-borderRadius: 0;
+	--components-approbationInbox-list-footer-marginBlock: var(--pr-t-spacings-150) calc(var(--pr-t-spacings-300) * -1);
+	--components-approbationInbox-list-footer-paddingBlock: var(--pr-t-spacings-100) var(--pr-t-spacings-200);
+	--components-approbationInbox-list-footer-paddingInline: var(--pr-t-spacings-400);
+	--components-approbationInbox-list-footer-marginInline: calc(var(--components-approbationInbox-list-footer-paddingInline) * -1);
+}
+
+@mixin mediaMaxS {
+	--components-approbationInbox-list-footer-paddingInline: var(--pr-t-spacings-300);
 }

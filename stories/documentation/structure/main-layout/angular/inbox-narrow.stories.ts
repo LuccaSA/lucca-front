@@ -4,6 +4,7 @@ import {
 	ApprobationInboxDetailComponent,
 	ApprobationInboxDetailsMainBlockComponent,
 	ApprobationInboxGroupComponent,
+	ApprobationInboxHeaderComponent,
 	ApprobationInboxItemComponent,
 	ApprobationInboxLinkComponent,
 	ApprobationInboxListComponent,
@@ -12,6 +13,7 @@ import { CalloutComponent } from '@lucca-front/ng/callout';
 import { ContainerComponent } from '@lucca-front/ng/container';
 import { DialogCloseDirective, DialogComponent, DialogContentComponent, DialogDismissDirective, DialogFooterComponent, DialogHeaderComponent, DialogOpenDirective } from '@lucca-front/ng/dialog';
 import { DividerComponent } from '@lucca-front/ng/divider';
+import { DropdownActionComponent, DropdownItemComponent, DropdownMenuComponent, LuDropdownTriggerDirective } from '@lucca-front/ng/dropdown';
 import { FilterBarComponent, FilterPillAddonAfterDirective, FilterPillAddonBeforeDirective, FilterPillComponent } from '@lucca-front/ng/filter-pills';
 import { FormComponent } from '@lucca-front/ng/form';
 import { FormFieldComponent } from '@lucca-front/ng/form-field';
@@ -25,7 +27,6 @@ import { LuUserPictureComponent } from '@lucca-front/ng/user';
 import { ButtonComponent } from '@lucca/prisme/button';
 import { IconComponent } from '@lucca/prisme/icon';
 import { Meta, moduleMetadata } from '@storybook/angular';
-import { ApprobationInboxHeaderComponent } from 'packages/ng/approbation-inbox/approbation-inbox-header/approbation-inbox-header.component';
 
 interface MainLayoutHTMLBasicStory {
 	header: boolean;
@@ -82,33 +83,32 @@ export default {
 				DialogCloseDirective,
 				DialogDismissDirective,
 				FormComponent,
+				LuDropdownTriggerDirective,
+				DropdownMenuComponent,
+				DropdownItemComponent,
+				DropdownActionComponent,
 			],
 		}),
 	],
 	render: (args: MainLayoutHTMLBasicStory) => {
 		return {
-			template: `<button luButton type="button" [luDialogOpen]="approbationInboxDetailsTpl" [luDialogConfig]="{ size: 'maxContent', mode: 'sheet'}">
+			template: `<button luButton type="button" [luDialogOpen]="approbationInboxDetailsTpl" [luDialogConfig]="{ surfaceDefault: true, size: 'maxContent', mode: 'sheet'}">
 	Approbation inbox details
 </button>
 <ng-template #approbationInboxDetailsTpl>
 	<lu-dialog #dialog>
 		<form luForm>
 			<lu-dialog-header>
-				<h1>Approbation</h1>
+				<h1>Abscence à approuver</h1>
 			</lu-dialog-header>
 			<lu-dialog-content>
 				<lu-approbation-inbox-detail>
 					<lu-approbation-inbox-detail-header approbationInboxDetailHeader label="Lorem ispum dolor" delegation="Délégué par Marie Bragoulet">
-						<lu-user-picture size="L" approbationInboxDetailStart />
+						<lu-user-picture size="L" approbationInboxDetailIllustration />
 						<lu-listing inline divider>
 							<lu-listing-item>Lorem ipsum</lu-listing-item>
 							<lu-listing-item>Dolor sit amet</lu-listing-item>
 						</lu-listing>
-						<ng-container approbationInboxDetailEnd>
-							<button luButton="ghost" type="button">
-								<lu-icon icon="menuDots" alt="Plus d’options" />
-							</button>
-						</ng-container>
 					</lu-approbation-inbox-detail-header>
 					<lu-callout state="warning">
 						<p>Callout feedback description</p>
@@ -131,14 +131,34 @@ export default {
 				<div class="footer-actions">
 					<button type="submit" luButton luDialogClose>Approuver</button>
 					<button type="button" luButton="outlined" luDialogDismiss>Refuser</button>
-					<button luButton="ghost" type="button">
-						<lu-icon icon="menuDots" alt="Plus d’options" />
+					<button type="button" luButton="ghost" [luDropdown]="dropdownOtherOptions">
+						<lu-icon icon="menuDots" alt="Autres options" />
 					</button>
+					<ng-template #dropdownOtherOptions>
+						<lu-dropdown-menu>
+							<lu-dropdown-item>
+								<button lu-dropdown-action type="button">
+									Lorem
+								</button>
+							</lu-dropdown-item>
+							<lu-dropdown-item>
+								<button lu-dropdown-action type="button">
+									Ipsum
+								</button>
+							</lu-dropdown-item>
+							<lu-dropdown-item>
+								<button lu-dropdown-action type="button">
+									Dolor
+								</button>
+							</lu-dropdown-item>
+						</lu-dropdown-menu>
+					</ng-template>
 				</div>
 			</lu-dialog-footer>
 		</form>
 	</lu-dialog>
-</ng-template>`,
+</ng-template>
+`,
 		};
 	},
 } as Meta;

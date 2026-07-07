@@ -62,15 +62,23 @@
 .approbationInbox-list {
 	@layer mods {
 		@include media.min('S') {
-			@include narrowS;
+			@include mediaMinS;
 		}
 
 		@include media.min('M') {
-			@include wideM;
+			@include mediaMinM;
 		}
 
 		@include media.min('L') {
-			@include wideL;
+			@include mediaMinL;
+		}
+
+		@include media.max('M') {
+			@include mediaMaxM;
+		}
+
+		@include media.max('S') {
+			@include mediaMaxM;
 		}
 	}
 }
