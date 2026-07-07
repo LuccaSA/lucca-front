@@ -1,4 +1,4 @@
-import { $getSelection, $isRangeSelection, COMMAND_PRIORITY_NORMAL, createCommand, INSERT_PARAGRAPH_COMMAND, LexicalEditor, SELECTION_CHANGE_COMMAND } from 'lexical';
+import { $getSelection, $isRangeSelection, COMMAND_PRIORITY_NORMAL, createCommand, INSERT_PARAGRAPH_COMMAND, KEY_ENTER_COMMAND, LexicalEditor, SELECTION_CHANGE_COMMAND } from 'lexical';
 import { $handleListInsertParagraph, $insertList, $removeList, ListNode, ListType } from '@lexical/list';
 import { $getNearestNodeOfType, mergeRegister } from '@lexical/utils';
 import { getSelectedNode } from '../../utils';
@@ -29,6 +29,27 @@ export function registerListsGlobal(editor: LexicalEditor) {
 		),
 		// end list with enter key on an empty list item node
 		editor.registerCommand(INSERT_PARAGRAPH_COMMAND, () => $handleListInsertParagraph(), COMMAND_PRIORITY_NORMAL),
+		// Shift+Enter (soft line break) inside a list cannot be represented in Markdown,
+		// so redirect it to a new list item, matching the plain Enter behaviour.
+		editor.registerCommand(
+			KEY_ENTER_COMMAND,
+			(event) => {
+				if (!event?.shiftKey) {
+					return false;
+				}
+				const selection = $getSelection();
+				if (!$isRangeSelection(selection)) {
+					return false;
+				}
+				const parent = $getNearestNodeOfType(getSelectedNode(selection), ListNode);
+				if (!parent) {
+					return false;
+				}
+				event.preventDefault();
+				return editor.dispatchCommand(INSERT_PARAGRAPH_COMMAND, undefined);
+			},
+			COMMAND_PRIORITY_NORMAL,
+		),
 	);
 }
 
