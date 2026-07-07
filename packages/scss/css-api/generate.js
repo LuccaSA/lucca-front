@@ -327,12 +327,97 @@ function extract() {
 		}
 	}
 
+	// Validate replacements: a `replacement` must point to an existing,
+	// non-deprecated utility. Follow chains (e.g. u-marginTop100 →
+	// pr-u-marginTop100 → pr-u-marginBlockStart100) so a deprecated hop resolves
+	// to its own modern target. Drop replacements that can't be resolved.
+	for (const [name, entry] of utilities) {
+		if (!entry.replacement) {
+			continue;
+		}
+		const resolved = resolveReplacement(name, entry.replacement, utilities);
+		if (resolved) {
+			entry.replacement = resolved;
+		} else {
+			// Warn only for a genuine miss: a derived target that doesn't exist as
+			// a class (worth investigating). Silently drop when the target exists
+			// but is a deprecated dead-end with no modern twin (expected).
+			if (!utilities.has(entry.replacement)) {
+				// eslint-disable-next-line no-console
+				console.warn(`[css-api] dropping non-existent replacement for ${name}: ${entry.replacement}`);
+			}
+			delete entry.replacement;
+		}
+	}
+
+	// Resolve var() chains in utility declarations for hover display.
+	for (const [, entry] of utilities) {
+		for (const block of entry.css) {
+			if (block.decls.includes('var(')) {
+				const resolved = resolveDecls(block.decls, rawValues);
+				if (resolved !== block.decls) {
+					block.resolved = resolved;
+				}
+			}
+		}
+	}
+
 	return {
 		manifestVersion: MANIFEST_VERSION,
 		package: '@lucca-front/scss',
 		variables: mapToObject(variables),
 		utilities: mapToObject(utilities),
 	};
+}
+
+/**
+ * Follows a replacement chain to the first existing, non-deprecated utility.
+ * Returns undefined when the chain dead-ends (missing or only-deprecated).
+ * @param {string} from origin class name (to break self-cycles)
+ * @param {string} replacement initial replacement target
+ * @param {Map<string, { deprecated?: boolean, replacement?: string }>} utilities
+ * @returns {string | undefined}
+ */
+function resolveReplacement(from, replacement, utilities) {
+	const seen = new Set([from]);
+	let target = replacement;
+	while (target && !seen.has(target)) {
+		seen.add(target);
+		const entry = utilities.get(target);
+		if (!entry) {
+			return undefined; // target doesn't exist
+		}
+		if (!entry.deprecated) {
+			return target; // reached a modern class
+		}
+		target = entry.replacement; // hop to its replacement
+	}
+	return undefined;
+}
+
+/**
+ * Resolves var() references inside a `prop: value; prop: value` declaration
+ * string, preserving property names and `!important`.
+ * @param {string} decls
+ * @param {Map<string, string>} rawValues
+ * @returns {string}
+ */
+function resolveDecls(decls, rawValues) {
+	return decls
+		.split('; ')
+		.map((segment) => {
+			const idx = segment.indexOf(': ');
+			if (idx === -1) {
+				return segment;
+			}
+			const prop = segment.slice(0, idx);
+			const value = segment.slice(idx + 2);
+			if (!value.includes('var(')) {
+				return segment;
+			}
+			return `${prop}: ${resolveValue(value, rawValues)}`;
+		})
+		.join('; ');
 }
 
 /**
@@ -426,6 +511,26 @@ function selfCheck(manifest) {
 	const responsive = manifest.utilities['pr-u-displayNoneAtMediaMinS'];
 	if (!responsive || !responsive.css.some((b) => b.media)) {
 		errors.push(`pr-u-displayNoneAtMediaMinS media sentinel failed: ${JSON.stringify(responsive)}`);
+	}
+	// Derived replacement sentinel.
+	const marginTop = manifest.utilities['pr-u-marginTop100'];
+	if (!marginTop || marginTop.replacement !== 'pr-u-marginBlockStart100') {
+		errors.push(`pr-u-marginTop100 replacement sentinel failed: ${JSON.stringify(marginTop)}`);
+	}
+	// Resolved utility-value sentinel.
+	const marginInline = manifest.utilities['pr-u-marginInlineStart100'];
+	const resolvedBlock = marginInline && marginInline.css.find((b) => b.resolved);
+	if (!resolvedBlock || resolvedBlock.resolved.includes('var(')) {
+		errors.push(`pr-u-marginInlineStart100 resolved sentinel failed: ${JSON.stringify(marginInline)}`);
+	}
+	// Every replacement must point to an existing, non-deprecated utility.
+	for (const [name, utility] of Object.entries(manifest.utilities)) {
+		if (utility.replacement) {
+			const target = manifest.utilities[utility.replacement];
+			if (!target || target.deprecated) {
+				errors.push(`${name} has invalid replacement ${utility.replacement}`);
+			}
+		}
 	}
 
 	if (errors.length) {
