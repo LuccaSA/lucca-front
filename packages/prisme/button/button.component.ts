@@ -14,6 +14,7 @@ import { ButtonSize, ButtonState, ButtonType } from './button.type';
 	host: {
 		class: 'button',
 		'[class.is-error]': 'notifyError()',
+		'[attr.disabled]': "isDisabled() ? '' : null",
 		'(click)': 'triggerErrorIfNeeded()',
 		'(animationend)': 'notifyError.set(false)',
 	},
@@ -33,6 +34,11 @@ export class ButtonComponent {
 	 * Apply block display
 	 */
 	readonly block = input(false, { transform: booleanAttribute });
+
+	/**
+	 * Disables the Button. Also applied automatically when `state` is `loading`
+	 */
+	readonly disabled = input(false, { transform: booleanAttribute });
 
 	/**
 	 * Indicates an action with significant or irreversible consequences on hover and focus. Only compatible with outlined and ghost
@@ -68,6 +74,8 @@ export class ButtonComponent {
 	readonly prButton = input<ButtonType>('');
 
 	readonly buttonType = computed(() => this.luButton() || this.prButton());
+
+	readonly isDisabled = computed(() => this.disabled() || this.state() === 'loading');
 
 	readonly iconComponentRef = contentChild<IconComponent, ElementRef<HTMLElement>>(IconComponent, { read: ElementRef });
 
