@@ -4,7 +4,9 @@ import * as vscode from 'vscode';
 
 import { analyze, Finding } from './analyzer';
 import { CONFIG_SECTION, CSS_LANGUAGES, DIAGNOSTIC_SOURCE, MARKUP_LANGUAGES } from '../constants';
+import { ManifestIndex } from '../manifest/index-model';
 import { ManifestService } from '../manifest/manifest-service';
+import { closestUtilities } from '../manifest/suggestions';
 
 const DEBOUNCE_MS = 300;
 const SUPPORTED = new Set([...CSS_LANGUAGES, ...MARKUP_LANGUAGES]);
@@ -68,18 +70,20 @@ export class DiagnosticsController implements vscode.Disposable {
 		const findings = analyze(doc.getText(), doc.languageId, index);
 		this.collection.set(
 			doc.uri,
-			findings.map((f) => this.toDiagnostic(doc, f, deprecatedSeverity, unknownSeverity)),
+			findings.map((f) => this.toDiagnostic(doc, f, index, deprecatedSeverity, unknownSeverity)),
 		);
 	}
 
-	private toDiagnostic(doc: vscode.TextDocument, finding: Finding, deprecatedSeverity: vscode.DiagnosticSeverity, unknownSeverity: vscode.DiagnosticSeverity): vscode.Diagnostic {
+	private toDiagnostic(doc: vscode.TextDocument, finding: Finding, index: ManifestIndex, deprecatedSeverity: vscode.DiagnosticSeverity, unknownSeverity: vscode.DiagnosticSeverity): vscode.Diagnostic {
 		const range = new vscode.Range(doc.positionAt(finding.startOffset), doc.positionAt(finding.endOffset));
 		let message: string;
 		let severity: vscode.DiagnosticSeverity;
 		const tags: vscode.DiagnosticTag[] = [];
 
 		if (finding.kind === 'unknown-class') {
-			message = `\`${finding.name}\` is not a utility class in the installed @lucca-front/scss. Check the spelling, or upgrade the package.`;
+			const [suggestion] = closestUtilities(finding.name, index.utilityNames, 1);
+			const hint = suggestion ? ` Did you mean \`${suggestion}\`?` : ' Check the spelling, or upgrade the package.';
+			message = `\`${finding.name}\` is not a utility class in the installed @lucca-front/scss.${hint}`;
 			severity = unknownSeverity;
 		} else if (finding.kind === 'deprecated-class') {
 			const replacement = finding.replacement ? ` Use \`${finding.replacement}\` instead.` : '';

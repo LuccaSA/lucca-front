@@ -12,8 +12,11 @@
 	"utilities": {
 		"pr-u-displayFlex": { "css": [{ "decls": "display: flex !important" }] },
 		"pr-u-displayNoneAtMediaMinS": { "css": [{ "decls": "display: none !important", "media": "(min-width: 50em)" }] },
-		"pr-u-marginInlineStart100": { "css": [{ "decls": "margin-inline-start: var(--pr-t-spacings-100) !important" }] },
-		"pr-u-textBrand": { "css": [{ "decls": "color: var(--palettes-brand-700) !important" }], "deprecated": true, "replacement": "pr-u-colorTextBrand" },
+		"pr-u-marginInlineStart100": { "css": [{ "decls": "margin-inline-start: var(--pr-t-spacings-100) !important", "resolved": "margin-inline-start: 0.5rem !important" }] },
+		"pr-u-marginBlockStart100": { "css": [{ "decls": "margin-block-start: var(--pr-t-spacings-100) !important", "resolved": "margin-block-start: 0.5rem !important" }] },
+		"pr-u-marginTop100": { "css": [{ "decls": "margin-top: var(--pr-t-spacings-100) !important", "resolved": "margin-top: 0.5rem !important" }], "deprecated": true, "replacement": "pr-u-marginBlockStart100" },
+		"pr-u-colorTextBrand": { "css": [{ "decls": "color: var(--palettes-brand-700) !important", "resolved": "color: #e06029 !important" }] },
+		"pr-u-textBrand": { "css": [{ "decls": "color: var(--palettes-brand-700) !important", "resolved": "color: #e06029 !important" }], "deprecated": true, "replacement": "pr-u-colorTextBrand" },
 		"u-displayFlex": { "css": [{ "decls": "display: flex !important" }], "deprecated": true, "replacement": "pr-u-displayFlex" }
 	}
 }

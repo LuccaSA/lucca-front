@@ -20,6 +20,8 @@ export interface ManifestIndex {
 	readonly utilities: ReadonlyMap<string, UtilityClass>;
 	readonly propertyCompletions: readonly CompletionSeed[];
 	readonly utilityCompletions: readonly CompletionSeed[];
+	/** All utility class names, for close-match suggestions. */
+	readonly utilityNames: readonly string[];
 	readonly variableCount: number;
 	readonly utilityCount: number;
 }
@@ -54,10 +56,13 @@ function utilityDocumentation(utility: UtilityClass): string {
 	for (const block of utility.css) {
 		const condition = block.media ? `@media ${block.media}` : block.container ? `@container ${block.container}` : undefined;
 		const selectorNote = block.sel ? `/* &${block.sel} */\n` : '';
+		// When declarations reference custom properties, show the resolved values
+		// as a comment beneath, keeping the token relationship visible.
+		const resolvedNote = block.resolved && block.resolved !== block.decls ? `\n/* = ${block.resolved.replace(/ !important/g, '')} */` : '';
 		if (condition) {
-			lines.push('```css', `${condition} {`, `  ${selectorNote}${block.decls};`, '}', '```');
+			lines.push('```css', `${condition} {`, `  ${selectorNote}${block.decls};${resolvedNote}`, '}', '```');
 		} else {
-			lines.push('```css', `${selectorNote}${block.decls};`, '```');
+			lines.push('```css', `${selectorNote}${block.decls};${resolvedNote}`, '```');
 		}
 	}
 	if (utility.deprecated) {
@@ -106,6 +111,7 @@ export function buildIndex(manifest: Manifest): ManifestIndex {
 		utilities,
 		propertyCompletions,
 		utilityCompletions,
+		utilityNames: [...utilities.keys()],
 		variableCount: properties.size,
 		utilityCount: utilities.size,
 	};
@@ -119,4 +125,13 @@ export function propertyHover(name: string, prop: CustomProperty): string {
 /** Builds the hover markdown for a utility class. */
 export function utilityHover(name: string, utility: UtilityClass): string {
 	return `**\`.${name}\`**\n\n${utilityDocumentation(utility)}`;
+}
+
+/** Builds the hover markdown for an unknown utility class, with close matches. */
+export function unknownUtilityHover(name: string, suggestions: readonly string[]): string {
+	const lines = [`**\`${name}\`** is not a utility class in the installed \`@lucca-front/scss\`.`];
+	if (suggestions.length) {
+		lines.push('', `Did you mean ${suggestions.map((s) => `\`${s}\``).join(', ')}?`);
+	}
+	return lines.join('\n');
 }

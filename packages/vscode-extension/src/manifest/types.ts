@@ -15,6 +15,8 @@ export interface CustomProperty {
 /** A single applied CSS block for a utility class (for hover display). */
 export interface UtilityCssBlock {
 	decls: string;
+	/** Declarations with var() chains resolved to concrete values; absent when `decls` has no var(). */
+	resolved?: string;
 	/** Pseudo-selector suffix, e.g. `:focus-visible`. */
 	sel?: string;
 	/** Media query params when the class only applies under a media condition. */

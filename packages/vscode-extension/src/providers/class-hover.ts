@@ -5,7 +5,9 @@ import * as vscode from 'vscode';
 import { getClassAttributeContext } from '../context/class-context';
 import { getInlineTemplateRegionAt } from '../context/inline-template';
 import { ManifestService } from '../manifest/manifest-service';
-import { utilityHover } from '../manifest/index-model';
+import { closestUtilities } from '../manifest/suggestions';
+import { unknownUtilityHover, utilityHover } from '../manifest/index-model';
+import { UTILITY_PREFIX } from '../constants';
 
 export class ClassHoverProvider implements vscode.HoverProvider {
 	constructor(private readonly service: ManifestService) {}
@@ -20,10 +22,6 @@ export class ClassHoverProvider implements vscode.HoverProvider {
 			return undefined;
 		}
 		const name = document.getText(range);
-		const utility = index.utilities.get(name);
-		if (!utility) {
-			return undefined;
-		}
 
 		// Verify the hovered token really sits inside a class attribute (not prose).
 		const text = document.getText();
@@ -43,6 +41,16 @@ export class ClassHoverProvider implements vscode.HoverProvider {
 			return undefined;
 		}
 
-		return new vscode.Hover(new vscode.MarkdownString(utilityHover(name, utility)), range);
+		const utility = index.utilities.get(name);
+		if (utility) {
+			return new vscode.Hover(new vscode.MarkdownString(utilityHover(name, utility)), range);
+		}
+		// Unknown but pr-u-prefixed: offer close matches (skip bare `u-` to avoid
+		// noise on other class systems that happen to start with u-).
+		if (name.startsWith(UTILITY_PREFIX)) {
+			const suggestions = closestUtilities(name, index.utilityNames);
+			return new vscode.Hover(new vscode.MarkdownString(unknownUtilityHover(name, suggestions)), range);
+		}
+		return undefined;
 	}
 }
