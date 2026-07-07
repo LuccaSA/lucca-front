@@ -1,0 +1,19 @@
+{
+	"manifestVersion": 1,
+	"package": "@lucca-front/scss",
+	"variables": {
+		"--pr-t-spacings-200": { "value": "1rem", "category": "token" },
+		"--pr-t-font-body-M": { "value": "var(--pr-t-font-body-M-fontSize)", "resolved": "1rem", "category": "token" },
+		"--palettes-brand-500": { "value": "#ff9361", "category": "palette" },
+		"--breakpoints-S-breakAt": { "value": "800px", "category": "breakpoint" },
+		"--commons-font-family": { "value": "'SourceSans', Tahoma, sans-serif", "category": "commons", "deprecated": true, "note": "use --pr-t-font-family instead" },
+		"--colors-white-color": { "value": "#ffffff", "category": "commons", "deprecated": true }
+	},
+	"utilities": {
+		"pr-u-displayFlex": { "css": [{ "decls": "display: flex !important" }] },
+		"pr-u-displayNoneAtMediaMinS": { "css": [{ "decls": "display: none !important", "media": "(min-width: 50em)" }] },
+		"pr-u-marginInlineStart100": { "css": [{ "decls": "margin-inline-start: var(--pr-t-spacings-100) !important" }] },
+		"pr-u-textBrand": { "css": [{ "decls": "color: var(--palettes-brand-700) !important" }], "deprecated": true, "replacement": "pr-u-colorTextBrand" },
+		"u-displayFlex": { "css": [{ "decls": "display: flex !important" }], "deprecated": true, "replacement": "pr-u-displayFlex" }
+	}
+}

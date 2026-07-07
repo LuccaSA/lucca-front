@@ -11,7 +11,7 @@ import tsParser from '@typescript-eslint/parser';
 
 export default defineConfig(
 	{
-		ignores: ['dist/', '.storybook/**', '**/schematics/**/tests/', 'node_modules/', '.angular/', '**/stories/**'],
+		ignores: ['dist/', '**/dist/', '.storybook/**', '**/schematics/**/tests/', 'node_modules/', '.angular/', '**/stories/**'],
 	},
 	{
 		linterOptions: {
@@ -24,7 +24,7 @@ export default defineConfig(
 		processor: angular.processInlineTemplates,
 		languageOptions: {
 			parserOptions: {
-				project: ['tsconfig.json', 'packages/ng/tsconfig.json', '.storybook/tsconfig.json'],
+				project: ['tsconfig.json', 'packages/ng/tsconfig.json', '.storybook/tsconfig.json', 'packages/vscode-extension/tsconfig.json'],
 				createDefaultProgram: true,
 			},
 		},
@@ -126,7 +126,7 @@ export default defineConfig(
 		languageOptions: {
 			parser: tsParser,
 			parserOptions: {
-				project: ['tsconfig.lint.json', 'packages/ng/tsconfig.lint.json', '.storybook/tsconfig.lint.json'],
+				project: ['tsconfig.lint.json', 'packages/ng/tsconfig.lint.json', '.storybook/tsconfig.lint.json', 'packages/vscode-extension/tsconfig.json'],
 			},
 		},
 		plugins: {

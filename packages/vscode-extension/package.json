@@ -1,0 +1,67 @@
+{
+	"name": "lucca-front-intellisense",
+	"displayName": "Lucca Front IntelliSense",
+	"description": "Autocomplete, hover and diagnostics for @lucca-front/scss custom properties and pr-u-* utility classes",
+	"version": "0.1.0",
+	"publisher": "lucca",
+	"private": true,
+	"license": "MIT",
+	"repository": {
+		"type": "git",
+		"url": "git+https://github.com/LuccaSA/lucca-front.git",
+		"directory": "packages/vscode-extension"
+	},
+	"engines": {
+		"vscode": "^1.90.0"
+	},
+	"categories": ["Programming Languages", "Linters"],
+	"main": "./dist/extension.js",
+	"activationEvents": ["onLanguage:css", "onLanguage:scss", "onLanguage:less", "onLanguage:html", "onLanguage:typescript"],
+	"contributes": {
+		"commands": [
+			{
+				"command": "luccaFront.reloadManifest",
+				"title": "Lucca Front: Reload CSS API manifest"
+			}
+		],
+		"configuration": {
+			"title": "Lucca Front IntelliSense",
+			"properties": {
+				"luccaFront.diagnostics.enabled": {
+					"type": "boolean",
+					"default": true,
+					"description": "Report deprecated tokens/classes and unknown pr-u-* classes as diagnostics."
+				},
+				"luccaFront.diagnostics.deprecatedSeverity": {
+					"type": "string",
+					"enum": ["error", "warning", "information", "hint"],
+					"default": "warning",
+					"description": "Severity for deprecated custom properties and utility classes."
+				},
+				"luccaFront.diagnostics.unknownClassSeverity": {
+					"type": "string",
+					"enum": ["error", "warning", "information", "hint"],
+					"default": "warning",
+					"description": "Severity for pr-u-* classes not present in the installed @lucca-front/scss version."
+				},
+				"luccaFront.manifestPath": {
+					"type": "string",
+					"default": "",
+					"scope": "machine-overridable",
+					"description": "Absolute path to a manifest.json, overriding node_modules discovery (for library development/testing)."
+				}
+			}
+		}
+	},
+	"scripts": {
+		"build": "tsc -p tsconfig.build.json",
+		"watch": "tsc -p tsconfig.build.json --watch",
+		"typecheck": "tsc -p tsconfig.json --noEmit",
+		"test": "jest --config jest.config.js",
+		"vsix": "npm run build && vsce package --no-dependencies"
+	},
+	"devDependencies": {
+		"@types/vscode": "1.90.0",
+		"@vscode/vsce": "^3.3.0"
+	}
+}
