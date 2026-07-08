@@ -1,0 +1,5478 @@
+{
+	"version": 1,
+	"package": "@lucca-front/scss",
+	"entries": [
+		{
+			"kind": "sass-api",
+			"name": "config palette: grey",
+			"replacement": null,
+			"note": "Deprecated palette name.",
+			"since": null,
+			"scope": "commons/config"
+		},
+		{
+			"kind": "sass-api",
+			"name": "config palette: lucca",
+			"replacement": null,
+			"note": "Deprecated palette name.",
+			"since": null,
+			"scope": "commons/config"
+		},
+		{
+			"kind": "sass-api",
+			"name": "config palette: primary",
+			"replacement": null,
+			"note": "Deprecated palette name.",
+			"since": null,
+			"scope": "commons/config"
+		},
+		{
+			"kind": "sass-api",
+			"name": "config palette: secondary",
+			"replacement": null,
+			"note": "Deprecated palette name.",
+			"since": null,
+			"scope": "commons/config"
+		},
+		{
+			"kind": "sass-api",
+			"name": "config.$borderRadius",
+			"replacement": "config.$borderRadiusVars",
+			"note": null,
+			"since": null,
+			"scope": "commons/config"
+		},
+		{
+			"kind": "sass-api",
+			"name": "config.$colors",
+			"replacement": null,
+			"note": "Use palette custom properties (--palettes-*) instead.",
+			"since": null,
+			"scope": "commons/config"
+		},
+		{
+			"kind": "sass-api",
+			"name": "config.$colorsRgb",
+			"replacement": null,
+			"note": "Use palette custom properties (--palettes-*) instead.",
+			"since": null,
+			"scope": "commons/config"
+		},
+		{
+			"kind": "sass-api",
+			"name": "config.$deprecatedCardBoxMargin",
+			"replacement": null,
+			"note": "Escape-hatch flag for legacy card/box margins.",
+			"since": null,
+			"scope": "commons/config"
+		},
+		{
+			"kind": "sass-api",
+			"name": "config.$deprecatedSpacings",
+			"replacement": null,
+			"note": "Escape-hatch flag for legacy element spacing.",
+			"since": null,
+			"scope": "commons/config"
+		},
+		{
+			"kind": "sass-api",
+			"name": "config.$deprecatedUtilityPrefix",
+			"replacement": null,
+			"note": "Escape-hatch flag; the u- prefix will be removed.",
+			"since": null,
+			"scope": "commons/config"
+		},
+		{
+			"kind": "sass-api",
+			"name": "core.borderRadius",
+			"replacement": "core.borderRadiusTokens",
+			"note": null,
+			"since": null,
+			"scope": "commons/core"
+		},
+		{
+			"kind": "sass-api",
+			"name": "core.sizes",
+			"replacement": null,
+			"note": "Use the typography utilities/tokens instead.",
+			"since": null,
+			"scope": "commons/core"
+		},
+		{
+			"kind": "class",
+			"name": "pr-u-borderBottom0",
+			"replacement": "pr-u-borderBlockEnd0",
+			"note": null,
+			"since": null,
+			"scope": "commons/utils"
+		},
+		{
+			"kind": "class",
+			"name": "pr-u-borderBottomLeftRadiusFull",
+			"replacement": null,
+			"note": "Use border-radius token utilities (pr-u-borderRadius{Structure,Default,Small,Full,Input}) instead.",
+			"since": null,
+			"scope": "commons/utils"
+		},
+		{
+			"kind": "class",
+			"name": "pr-u-borderBottomLeftRadiusL",
+			"replacement": null,
+			"note": "Use border-radius token utilities (pr-u-borderRadius{Structure,Default,Small,Full,Input}) instead.",
+			"since": null,
+			"scope": "commons/utils"
+		},
+		{
+			"kind": "class",
+			"name": "pr-u-borderBottomLeftRadiusM",
+			"replacement": null,
+			"note": "Use border-radius token utilities (pr-u-borderRadius{Structure,Default,Small,Full,Input}) instead.",
+			"since": null,
+			"scope": "commons/utils"
+		},
+		{
+			"kind": "class",
+			"name": "pr-u-borderBottomLeftRadiusXL",
+			"replacement": null,
+			"note": "Use border-radius token utilities (pr-u-borderRadius{Structure,Default,Small,Full,Input}) instead.",
+			"since": null,
+			"scope": "commons/utils"
+		},
+		{
+			"kind": "class",
+			"name": "pr-u-borderBottomRightRadiusFull",
+			"replacement": null,
+			"note": "Use border-radius token utilities (pr-u-borderRadius{Structure,Default,Small,Full,Input}) instead.",
+			"since": null,
+			"scope": "commons/utils"
+		},
+		{
+			"kind": "class",
+			"name": "pr-u-borderBottomRightRadiusL",
+			"replacement": null,
+			"note": "Use border-radius token utilities (pr-u-borderRadius{Structure,Default,Small,Full,Input}) instead.",
+			"since": null,
+			"scope": "commons/utils"
+		},
+		{
+			"kind": "class",
+			"name": "pr-u-borderBottomRightRadiusM",
+			"replacement": null,
+			"note": "Use border-radius token utilities (pr-u-borderRadius{Structure,Default,Small,Full,Input}) instead.",
+			"since": null,
+			"scope": "commons/utils"
+		},
+		{
+			"kind": "class",
+			"name": "pr-u-borderBottomRightRadiusXL",
+			"replacement": null,
+			"note": "Use border-radius token utilities (pr-u-borderRadius{Structure,Default,Small,Full,Input}) instead.",
+			"since": null,
+			"scope": "commons/utils"
+		},
+		{
+			"kind": "class",
+			"name": "pr-u-borderEndEndRadiusFull",
+			"replacement": null,
+			"note": "Use border-radius token utilities (pr-u-borderRadius{Structure,Default,Small,Full,Input}) instead.",
+			"since": null,
+			"scope": "commons/utils"
+		},
+		{
+			"kind": "class",
+			"name": "pr-u-borderEndEndRadiusL",
+			"replacement": null,
+			"note": "Use border-radius token utilities (pr-u-borderRadius{Structure,Default,Small,Full,Input}) instead.",
+			"since": null,
+			"scope": "commons/utils"
+		},
+		{
+			"kind": "class",
+			"name": "pr-u-borderEndEndRadiusM",
+			"replacement": null,
+			"note": "Use border-radius token utilities (pr-u-borderRadius{Structure,Default,Small,Full,Input}) instead.",
+			"since": null,
+			"scope": "commons/utils"
+		},
+		{
+			"kind": "class",
+			"name": "pr-u-borderEndEndRadiusXL",
+			"replacement": null,
+			"note": "Use border-radius token utilities (pr-u-borderRadius{Structure,Default,Small,Full,Input}) instead.",
+			"since": null,
+			"scope": "commons/utils"
+		},
+		{
+			"kind": "class",
+			"name": "pr-u-borderEndStartRadiusFull",
+			"replacement": null,
+			"note": "Use border-radius token utilities (pr-u-borderRadius{Structure,Default,Small,Full,Input}) instead.",
+			"since": null,
+			"scope": "commons/utils"
+		},
+		{
+			"kind": "class",
+			"name": "pr-u-borderEndStartRadiusL",
+			"replacement": null,
+			"note": "Use border-radius token utilities (pr-u-borderRadius{Structure,Default,Small,Full,Input}) instead.",
+			"since": null,
+			"scope": "commons/utils"
+		},
+		{
+			"kind": "class",
+			"name": "pr-u-borderEndStartRadiusM",
+			"replacement": null,
+			"note": "Use border-radius token utilities (pr-u-borderRadius{Structure,Default,Small,Full,Input}) instead.",
+			"since": null,
+			"scope": "commons/utils"
+		},
+		{
+			"kind": "class",
+			"name": "pr-u-borderEndStartRadiusXL",
+			"replacement": null,
+			"note": "Use border-radius token utilities (pr-u-borderRadius{Structure,Default,Small,Full,Input}) instead.",
+			"since": null,
+			"scope": "commons/utils"
+		},
+		{
+			"kind": "class",
+			"name": "pr-u-borderLeft0",
+			"replacement": "pr-u-borderInlineStart0",
+			"note": null,
+			"since": null,
+			"scope": "commons/utils"
+		},
+		{
+			"kind": "class",
+			"name": "pr-u-borderRadiusL",
+			"replacement": null,
+			"note": "Use border-radius token utilities (pr-u-borderRadius{Structure,Default,Small,Full,Input}) instead.",
+			"since": null,
+			"scope": "commons/utils"
+		},
+		{
+			"kind": "class",
+			"name": "pr-u-borderRadiusM",
+			"replacement": null,
+			"note": "Use border-radius token utilities (pr-u-borderRadius{Structure,Default,Small,Full,Input}) instead.",
+			"since": null,
+			"scope": "commons/utils"
+		},
+		{
+			"kind": "class",
+			"name": "pr-u-borderRadiusXL",
+			"replacement": null,
+			"note": "Use border-radius token utilities (pr-u-borderRadius{Structure,Default,Small,Full,Input}) instead.",
+			"since": null,
+			"scope": "commons/utils"
+		},
+		{
+			"kind": "class",
+			"name": "pr-u-borderRight0",
+			"replacement": "pr-u-borderInlineEnd0",
+			"note": null,
+			"since": null,
+			"scope": "commons/utils"
+		},
+		{
+			"kind": "class",
+			"name": "pr-u-borderStartEndRadiusFull",
+			"replacement": null,
+			"note": "Use border-radius token utilities (pr-u-borderRadius{Structure,Default,Small,Full,Input}) instead.",
+			"since": null,
+			"scope": "commons/utils"
+		},
+		{
+			"kind": "class",
+			"name": "pr-u-borderStartEndRadiusL",
+			"replacement": null,
+			"note": "Use border-radius token utilities (pr-u-borderRadius{Structure,Default,Small,Full,Input}) instead.",
+			"since": null,
+			"scope": "commons/utils"
+		},
+		{
+			"kind": "class",
+			"name": "pr-u-borderStartEndRadiusM",
+			"replacement": null,
+			"note": "Use border-radius token utilities (pr-u-borderRadius{Structure,Default,Small,Full,Input}) instead.",
+			"since": null,
+			"scope": "commons/utils"
+		},
+		{
+			"kind": "class",
+			"name": "pr-u-borderStartEndRadiusXL",
+			"replacement": null,
+			"note": "Use border-radius token utilities (pr-u-borderRadius{Structure,Default,Small,Full,Input}) instead.",
+			"since": null,
+			"scope": "commons/utils"
+		},
+		{
+			"kind": "class",
+			"name": "pr-u-borderStartStartRadiusFull",
+			"replacement": null,
+			"note": "Use border-radius token utilities (pr-u-borderRadius{Structure,Default,Small,Full,Input}) instead.",
+			"since": null,
+			"scope": "commons/utils"
+		},
+		{
+			"kind": "class",
+			"name": "pr-u-borderStartStartRadiusL",
+			"replacement": null,
+			"note": "Use border-radius token utilities (pr-u-borderRadius{Structure,Default,Small,Full,Input}) instead.",
+			"since": null,
+			"scope": "commons/utils"
+		},
+		{
+			"kind": "class",
+			"name": "pr-u-borderStartStartRadiusM",
+			"replacement": null,
+			"note": "Use border-radius token utilities (pr-u-borderRadius{Structure,Default,Small,Full,Input}) instead.",
+			"since": null,
+			"scope": "commons/utils"
+		},
+		{
+			"kind": "class",
+			"name": "pr-u-borderStartStartRadiusXL",
+			"replacement": null,
+			"note": "Use border-radius token utilities (pr-u-borderRadius{Structure,Default,Small,Full,Input}) instead.",
+			"since": null,
+			"scope": "commons/utils"
+		},
+		{
+			"kind": "class",
+			"name": "pr-u-borderTop0",
+			"replacement": "pr-u-borderBlockStart0",
+			"note": null,
+			"since": null,
+			"scope": "commons/utils"
+		},
+		{
+			"kind": "class",
+			"name": "pr-u-borderTopLeftRadiusFull",
+			"replacement": null,
+			"note": "Use border-radius token utilities (pr-u-borderRadius{Structure,Default,Small,Full,Input}) instead.",
+			"since": null,
+			"scope": "commons/utils"
+		},
+		{
+			"kind": "class",
+			"name": "pr-u-borderTopLeftRadiusL",
+			"replacement": null,
+			"note": "Use border-radius token utilities (pr-u-borderRadius{Structure,Default,Small,Full,Input}) instead.",
+			"since": null,
+			"scope": "commons/utils"
+		},
+		{
+			"kind": "class",
+			"name": "pr-u-borderTopLeftRadiusM",
+			"replacement": null,
+			"note": "Use border-radius token utilities (pr-u-borderRadius{Structure,Default,Small,Full,Input}) instead.",
+			"since": null,
+			"scope": "commons/utils"
+		},
+		{
+			"kind": "class",
+			"name": "pr-u-borderTopLeftRadiusXL",
+			"replacement": null,
+			"note": "Use border-radius token utilities (pr-u-borderRadius{Structure,Default,Small,Full,Input}) instead.",
+			"since": null,
+			"scope": "commons/utils"
+		},
+		{
+			"kind": "class",
+			"name": "pr-u-borderTopRightRadiusFull",
+			"replacement": null,
+			"note": "Use border-radius token utilities (pr-u-borderRadius{Structure,Default,Small,Full,Input}) instead.",
+			"since": null,
+			"scope": "commons/utils"
+		},
+		{
+			"kind": "class",
+			"name": "pr-u-borderTopRightRadiusL",
+			"replacement": null,
+			"note": "Use border-radius token utilities (pr-u-borderRadius{Structure,Default,Small,Full,Input}) instead.",
+			"since": null,
+			"scope": "commons/utils"
+		},
+		{
+			"kind": "class",
+			"name": "pr-u-borderTopRightRadiusM",
+			"replacement": null,
+			"note": "Use border-radius token utilities (pr-u-borderRadius{Structure,Default,Small,Full,Input}) instead.",
+			"since": null,
+			"scope": "commons/utils"
+		},
+		{
+			"kind": "class",
+			"name": "pr-u-borderTopRightRadiusXL",
+			"replacement": null,
+			"note": "Use border-radius token utilities (pr-u-borderRadius{Structure,Default,Small,Full,Input}) instead.",
+			"since": null,
+			"scope": "commons/utils"
+		},
+		{
+			"kind": "class",
+			"name": "pr-u-bottom0",
+			"replacement": "pr-u-insetBlockEnd0",
+			"note": null,
+			"since": null,
+			"scope": "commons/utils"
+		},
+		{
+			"kind": "class",
+			"name": "pr-u-bottomReset",
+			"replacement": "pr-u-insetBlockEnd0",
+			"note": null,
+			"since": null,
+			"scope": "commons/utils"
+		},
+		{
+			"kind": "class",
+			"name": "pr-u-clear",
+			"replacement": "pr-u-clearBoth",
+			"note": null,
+			"since": null,
+			"scope": "commons/utils"
+		},
+		{
+			"kind": "class",
+			"name": "pr-u-clearLeft",
+			"replacement": "pr-u-clearInlineStart",
+			"note": null,
+			"since": null,
+			"scope": "commons/utils"
+		},
+		{
+			"kind": "class",
+			"name": "pr-u-clearRight",
+			"replacement": "pr-u-clearInlineEnd",
+			"note": null,
+			"since": null,
+			"scope": "commons/utils"
+		},
+		{
+			"kind": "class",
+			"name": "pr-u-floatLeft",
+			"replacement": "pr-u-floatInlineStart",
+			"note": null,
+			"since": null,
+			"scope": "commons/utils"
+		},
+		{
+			"kind": "class",
+			"name": "pr-u-floatRight",
+			"replacement": "pr-u-floatInlineEnd",
+			"note": null,
+			"since": null,
+			"scope": "commons/utils"
+		},
+		{
+			"kind": "class",
+			"name": "pr-u-h5",
+			"replacement": null,
+			"note": "Use pr-u-h1 through pr-u-h4 or body utilities instead.",
+			"since": null,
+			"scope": "commons/utils"
+		},
+		{
+			"kind": "class",
+			"name": "pr-u-h6",
+			"replacement": null,
+			"note": "Use pr-u-h1 through pr-u-h4 or body utilities instead.",
+			"since": null,
+			"scope": "commons/utils"
+		},
+		{
+			"kind": "class",
+			"name": "pr-u-insetReset",
+			"replacement": "pr-u-inset0",
+			"note": null,
+			"since": null,
+			"scope": "commons/utils"
+		},
+		{
+			"kind": "class",
+			"name": "pr-u-left0",
+			"replacement": "pr-u-insetInlineStart0",
+			"note": null,
+			"since": null,
+			"scope": "commons/utils"
+		},
+		{
+			"kind": "class",
+			"name": "pr-u-leftReset",
+			"replacement": "pr-u-insetInlineStart0",
+			"note": null,
+			"since": null,
+			"scope": "commons/utils"
+		},
+		{
+			"kind": "class",
+			"name": "pr-u-marginBottom0",
+			"replacement": "pr-u-marginBlockEnd0",
+			"note": null,
+			"since": null,
+			"scope": "commons/utils"
+		},
+		{
+			"kind": "class",
+			"name": "pr-u-marginBottom100",
+			"replacement": "pr-u-marginBlockEnd100",
+			"note": null,
+			"since": null,
+			"scope": "commons/utils"
+		},
+		{
+			"kind": "class",
+			"name": "pr-u-marginBottom150",
+			"replacement": "pr-u-marginBlockEnd150",
+			"note": null,
+			"since": null,
+			"scope": "commons/utils"
+		},
+		{
+			"kind": "class",
+			"name": "pr-u-marginBottom200",
+			"replacement": "pr-u-marginBlockEnd200",
+			"note": null,
+			"since": null,
+			"scope": "commons/utils"
+		},
+		{
+			"kind": "class",
+			"name": "pr-u-marginBottom25",
+			"replacement": "pr-u-marginBlockEnd25",
+			"note": null,
+			"since": null,
+			"scope": "commons/utils"
+		},
+		{
+			"kind": "class",
+			"name": "pr-u-marginBottom250",
+			"replacement": "pr-u-marginBlockEnd250",
+			"note": null,
+			"since": null,
+			"scope": "commons/utils"
+		},
+		{
+			"kind": "class",
+			"name": "pr-u-marginBottom300",
+			"replacement": "pr-u-marginBlockEnd300",
+			"note": null,
+			"since": null,
+			"scope": "commons/utils"
+		},
+		{
+			"kind": "class",
+			"name": "pr-u-marginBottom400",
+			"replacement": "pr-u-marginBlockEnd400",
+			"note": null,
+			"since": null,
+			"scope": "commons/utils"
+		},
+		{
+			"kind": "class",
+			"name": "pr-u-marginBottom50",
+			"replacement": "pr-u-marginBlockEnd50",
+			"note": null,
+			"since": null,
+			"scope": "commons/utils"
+		},
+		{
+			"kind": "class",
+			"name": "pr-u-marginBottom500",
+			"replacement": "pr-u-marginBlockEnd500",
+			"note": null,
+			"since": null,
+			"scope": "commons/utils"
+		},
+		{
+			"kind": "class",
+			"name": "pr-u-marginBottom600",
+			"replacement": "pr-u-marginBlockEnd600",
+			"note": null,
+			"since": null,
+			"scope": "commons/utils"
+		},
+		{
+			"kind": "class",
+			"name": "pr-u-marginBottom700",
+			"replacement": "pr-u-marginBlockEnd700",
+			"note": null,
+			"since": null,
+			"scope": "commons/utils"
+		},
+		{
+			"kind": "class",
+			"name": "pr-u-marginBottom75",
+			"replacement": "pr-u-marginBlockEnd75",
+			"note": null,
+			"since": null,
+			"scope": "commons/utils"
+		},
+		{
+			"kind": "class",
+			"name": "pr-u-marginBottom800",
+			"replacement": "pr-u-marginBlockEnd800",
+			"note": null,
+			"since": null,
+			"scope": "commons/utils"
+		},
+		{
+			"kind": "class",
+			"name": "pr-u-marginBottomAuto",
+			"replacement": "pr-u-marginBlockEndAuto",
+			"note": null,
+			"since": null,
+			"scope": "commons/utils"
+		},
+		{
+			"kind": "class",
+			"name": "pr-u-marginLeft0",
+			"replacement": "pr-u-marginInlineStart0",
+			"note": null,
+			"since": null,
+			"scope": "commons/utils"
+		},
+		{
+			"kind": "class",
+			"name": "pr-u-marginLeft100",
+			"replacement": "pr-u-marginInlineStart100",
+			"note": null,
+			"since": null,
+			"scope": "commons/utils"
+		},
+		{
+			"kind": "class",
+			"name": "pr-u-marginLeft150",
+			"replacement": "pr-u-marginInlineStart150",
+			"note": null,
+			"since": null,
+			"scope": "commons/utils"
+		},
+		{
+			"kind": "class",
+			"name": "pr-u-marginLeft200",
+			"replacement": "pr-u-marginInlineStart200",
+			"note": null,
+			"since": null,
+			"scope": "commons/utils"
+		},
+		{
+			"kind": "class",
+			"name": "pr-u-marginLeft25",
+			"replacement": "pr-u-marginInlineStart25",
+			"note": null,
+			"since": null,
+			"scope": "commons/utils"
+		},
+		{
+			"kind": "class",
+			"name": "pr-u-marginLeft250",
+			"replacement": "pr-u-marginInlineStart250",
+			"note": null,
+			"since": null,
+			"scope": "commons/utils"
+		},
+		{
+			"kind": "class",
+			"name": "pr-u-marginLeft300",
+			"replacement": "pr-u-marginInlineStart300",
+			"note": null,
+			"since": null,
+			"scope": "commons/utils"
+		},
+		{
+			"kind": "class",
+			"name": "pr-u-marginLeft400",
+			"replacement": "pr-u-marginInlineStart400",
+			"note": null,
+			"since": null,
+			"scope": "commons/utils"
+		},
+		{
+			"kind": "class",
+			"name": "pr-u-marginLeft50",
+			"replacement": "pr-u-marginInlineStart50",
+			"note": null,
+			"since": null,
+			"scope": "commons/utils"
+		},
+		{
+			"kind": "class",
+			"name": "pr-u-marginLeft500",
+			"replacement": "pr-u-marginInlineStart500",
+			"note": null,
+			"since": null,
+			"scope": "commons/utils"
+		},
+		{
+			"kind": "class",
+			"name": "pr-u-marginLeft600",
+			"replacement": "pr-u-marginInlineStart600",
+			"note": null,
+			"since": null,
+			"scope": "commons/utils"
+		},
+		{
+			"kind": "class",
+			"name": "pr-u-marginLeft700",
+			"replacement": "pr-u-marginInlineStart700",
+			"note": null,
+			"since": null,
+			"scope": "commons/utils"
+		},
+		{
+			"kind": "class",
+			"name": "pr-u-marginLeft75",
+			"replacement": "pr-u-marginInlineStart75",
+			"note": null,
+			"since": null,
+			"scope": "commons/utils"
+		},
+		{
+			"kind": "class",
+			"name": "pr-u-marginLeft800",
+			"replacement": "pr-u-marginInlineStart800",
+			"note": null,
+			"since": null,
+			"scope": "commons/utils"
+		},
+		{
+			"kind": "class",
+			"name": "pr-u-marginLeftAuto",
+			"replacement": "pr-u-marginInlineStartAuto",
+			"note": null,
+			"since": null,
+			"scope": "commons/utils"
+		},
+		{
+			"kind": "class",
+			"name": "pr-u-marginRight0",
+			"replacement": "pr-u-marginInlineEnd0",
+			"note": null,
+			"since": null,
+			"scope": "commons/utils"
+		},
+		{
+			"kind": "class",
+			"name": "pr-u-marginRight100",
+			"replacement": "pr-u-marginInlineEnd100",
+			"note": null,
+			"since": null,
+			"scope": "commons/utils"
+		},
+		{
+			"kind": "class",
+			"name": "pr-u-marginRight150",
+			"replacement": "pr-u-marginInlineEnd150",
+			"note": null,
+			"since": null,
+			"scope": "commons/utils"
+		},
+		{
+			"kind": "class",
+			"name": "pr-u-marginRight200",
+			"replacement": "pr-u-marginInlineEnd200",
+			"note": null,
+			"since": null,
+			"scope": "commons/utils"
+		},
+		{
+			"kind": "class",
+			"name": "pr-u-marginRight25",
+			"replacement": "pr-u-marginInlineEnd25",
+			"note": null,
+			"since": null,
+			"scope": "commons/utils"
+		},
+		{
+			"kind": "class",
+			"name": "pr-u-marginRight250",
+			"replacement": "pr-u-marginInlineEnd250",
+			"note": null,
+			"since": null,
+			"scope": "commons/utils"
+		},
+		{
+			"kind": "class",
+			"name": "pr-u-marginRight300",
+			"replacement": "pr-u-marginInlineEnd300",
+			"note": null,
+			"since": null,
+			"scope": "commons/utils"
+		},
+		{
+			"kind": "class",
+			"name": "pr-u-marginRight400",
+			"replacement": "pr-u-marginInlineEnd400",
+			"note": null,
+			"since": null,
+			"scope": "commons/utils"
+		},
+		{
+			"kind": "class",
+			"name": "pr-u-marginRight50",
+			"replacement": "pr-u-marginInlineEnd50",
+			"note": null,
+			"since": null,
+			"scope": "commons/utils"
+		},
+		{
+			"kind": "class",
+			"name": "pr-u-marginRight500",
+			"replacement": "pr-u-marginInlineEnd500",
+			"note": null,
+			"since": null,
+			"scope": "commons/utils"
+		},
+		{
+			"kind": "class",
+			"name": "pr-u-marginRight600",
+			"replacement": "pr-u-marginInlineEnd600",
+			"note": null,
+			"since": null,
+			"scope": "commons/utils"
+		},
+		{
+			"kind": "class",
+			"name": "pr-u-marginRight700",
+			"replacement": "pr-u-marginInlineEnd700",
+			"note": null,
+			"since": null,
+			"scope": "commons/utils"
+		},
+		{
+			"kind": "class",
+			"name": "pr-u-marginRight75",
+			"replacement": "pr-u-marginInlineEnd75",
+			"note": null,
+			"since": null,
+			"scope": "commons/utils"
+		},
+		{
+			"kind": "class",
+			"name": "pr-u-marginRight800",
+			"replacement": "pr-u-marginInlineEnd800",
+			"note": null,
+			"since": null,
+			"scope": "commons/utils"
+		},
+		{
+			"kind": "class",
+			"name": "pr-u-marginRightAuto",
+			"replacement": "pr-u-marginInlineEndAuto",
+			"note": null,
+			"since": null,
+			"scope": "commons/utils"
+		},
+		{
+			"kind": "class",
+			"name": "pr-u-marginTop0",
+			"replacement": "pr-u-marginBlockStart0",
+			"note": null,
+			"since": null,
+			"scope": "commons/utils"
+		},
+		{
+			"kind": "class",
+			"name": "pr-u-marginTop100",
+			"replacement": "pr-u-marginBlockStart100",
+			"note": null,
+			"since": null,
+			"scope": "commons/utils"
+		},
+		{
+			"kind": "class",
+			"name": "pr-u-marginTop150",
+			"replacement": "pr-u-marginBlockStart150",
+			"note": null,
+			"since": null,
+			"scope": "commons/utils"
+		},
+		{
+			"kind": "class",
+			"name": "pr-u-marginTop200",
+			"replacement": "pr-u-marginBlockStart200",
+			"note": null,
+			"since": null,
+			"scope": "commons/utils"
+		},
+		{
+			"kind": "class",
+			"name": "pr-u-marginTop25",
+			"replacement": "pr-u-marginBlockStart25",
+			"note": null,
+			"since": null,
+			"scope": "commons/utils"
+		},
+		{
+			"kind": "class",
+			"name": "pr-u-marginTop250",
+			"replacement": "pr-u-marginBlockStart250",
+			"note": null,
+			"since": null,
+			"scope": "commons/utils"
+		},
+		{
+			"kind": "class",
+			"name": "pr-u-marginTop300",
+			"replacement": "pr-u-marginBlockStart300",
+			"note": null,
+			"since": null,
+			"scope": "commons/utils"
+		},
+		{
+			"kind": "class",
+			"name": "pr-u-marginTop400",
+			"replacement": "pr-u-marginBlockStart400",
+			"note": null,
+			"since": null,
+			"scope": "commons/utils"
+		},
+		{
+			"kind": "class",
+			"name": "pr-u-marginTop50",
+			"replacement": "pr-u-marginBlockStart50",
+			"note": null,
+			"since": null,
+			"scope": "commons/utils"
+		},
+		{
+			"kind": "class",
+			"name": "pr-u-marginTop500",
+			"replacement": "pr-u-marginBlockStart500",
+			"note": null,
+			"since": null,
+			"scope": "commons/utils"
+		},
+		{
+			"kind": "class",
+			"name": "pr-u-marginTop600",
+			"replacement": "pr-u-marginBlockStart600",
+			"note": null,
+			"since": null,
+			"scope": "commons/utils"
+		},
+		{
+			"kind": "class",
+			"name": "pr-u-marginTop700",
+			"replacement": "pr-u-marginBlockStart700",
+			"note": null,
+			"since": null,
+			"scope": "commons/utils"
+		},
+		{
+			"kind": "class",
+			"name": "pr-u-marginTop75",
+			"replacement": "pr-u-marginBlockStart75",
+			"note": null,
+			"since": null,
+			"scope": "commons/utils"
+		},
+		{
+			"kind": "class",
+			"name": "pr-u-marginTop800",
+			"replacement": "pr-u-marginBlockStart800",
+			"note": null,
+			"since": null,
+			"scope": "commons/utils"
+		},
+		{
+			"kind": "class",
+			"name": "pr-u-marginTopAuto",
+			"replacement": "pr-u-marginBlockStartAuto",
+			"note": null,
+			"since": null,
+			"scope": "commons/utils"
+		},
+		{
+			"kind": "class",
+			"name": "pr-u-paddingBottom0",
+			"replacement": "pr-u-paddingBlockEnd0",
+			"note": null,
+			"since": null,
+			"scope": "commons/utils"
+		},
+		{
+			"kind": "class",
+			"name": "pr-u-paddingBottom100",
+			"replacement": "pr-u-paddingBlockEnd100",
+			"note": null,
+			"since": null,
+			"scope": "commons/utils"
+		},
+		{
+			"kind": "class",
+			"name": "pr-u-paddingBottom150",
+			"replacement": "pr-u-paddingBlockEnd150",
+			"note": null,
+			"since": null,
+			"scope": "commons/utils"
+		},
+		{
+			"kind": "class",
+			"name": "pr-u-paddingBottom200",
+			"replacement": "pr-u-paddingBlockEnd200",
+			"note": null,
+			"since": null,
+			"scope": "commons/utils"
+		},
+		{
+			"kind": "class",
+			"name": "pr-u-paddingBottom25",
+			"replacement": "pr-u-paddingBlockEnd25",
+			"note": null,
+			"since": null,
+			"scope": "commons/utils"
+		},
+		{
+			"kind": "class",
+			"name": "pr-u-paddingBottom250",
+			"replacement": "pr-u-paddingBlockEnd250",
+			"note": null,
+			"since": null,
+			"scope": "commons/utils"
+		},
+		{
+			"kind": "class",
+			"name": "pr-u-paddingBottom300",
+			"replacement": "pr-u-paddingBlockEnd300",
+			"note": null,
+			"since": null,
+			"scope": "commons/utils"
+		},
+		{
+			"kind": "class",
+			"name": "pr-u-paddingBottom400",
+			"replacement": "pr-u-paddingBlockEnd400",
+			"note": null,
+			"since": null,
+			"scope": "commons/utils"
+		},
+		{
+			"kind": "class",
+			"name": "pr-u-paddingBottom50",
+			"replacement": "pr-u-paddingBlockEnd50",
+			"note": null,
+			"since": null,
+			"scope": "commons/utils"
+		},
+		{
+			"kind": "class",
+			"name": "pr-u-paddingBottom500",
+			"replacement": "pr-u-paddingBlockEnd500",
+			"note": null,
+			"since": null,
+			"scope": "commons/utils"
+		},
+		{
+			"kind": "class",
+			"name": "pr-u-paddingBottom600",
+			"replacement": "pr-u-paddingBlockEnd600",
+			"note": null,
+			"since": null,
+			"scope": "commons/utils"
+		},
+		{
+			"kind": "class",
+			"name": "pr-u-paddingBottom700",
+			"replacement": "pr-u-paddingBlockEnd700",
+			"note": null,
+			"since": null,
+			"scope": "commons/utils"
+		},
+		{
+			"kind": "class",
+			"name": "pr-u-paddingBottom75",
+			"replacement": "pr-u-paddingBlockEnd75",
+			"note": null,
+			"since": null,
+			"scope": "commons/utils"
+		},
+		{
+			"kind": "class",
+			"name": "pr-u-paddingBottom800",
+			"replacement": "pr-u-paddingBlockEnd800",
+			"note": null,
+			"since": null,
+			"scope": "commons/utils"
+		},
+		{
+			"kind": "class",
+			"name": "pr-u-paddingLeft0",
+			"replacement": "pr-u-paddingInlineStart0",
+			"note": null,
+			"since": null,
+			"scope": "commons/utils"
+		},
+		{
+			"kind": "class",
+			"name": "pr-u-paddingLeft100",
+			"replacement": "pr-u-paddingInlineStart100",
+			"note": null,
+			"since": null,
+			"scope": "commons/utils"
+		},
+		{
+			"kind": "class",
+			"name": "pr-u-paddingLeft150",
+			"replacement": "pr-u-paddingInlineStart150",
+			"note": null,
+			"since": null,
+			"scope": "commons/utils"
+		},
+		{
+			"kind": "class",
+			"name": "pr-u-paddingLeft200",
+			"replacement": "pr-u-paddingInlineStart200",
+			"note": null,
+			"since": null,
+			"scope": "commons/utils"
+		},
+		{
+			"kind": "class",
+			"name": "pr-u-paddingLeft25",
+			"replacement": "pr-u-paddingInlineStart25",
+			"note": null,
+			"since": null,
+			"scope": "commons/utils"
+		},
+		{
+			"kind": "class",
+			"name": "pr-u-paddingLeft250",
+			"replacement": "pr-u-paddingInlineStart250",
+			"note": null,
+			"since": null,
+			"scope": "commons/utils"
+		},
+		{
+			"kind": "class",
+			"name": "pr-u-paddingLeft300",
+			"replacement": "pr-u-paddingInlineStart300",
+			"note": null,
+			"since": null,
+			"scope": "commons/utils"
+		},
+		{
+			"kind": "class",
+			"name": "pr-u-paddingLeft400",
+			"replacement": "pr-u-paddingInlineStart400",
+			"note": null,
+			"since": null,
+			"scope": "commons/utils"
+		},
+		{
+			"kind": "class",
+			"name": "pr-u-paddingLeft50",
+			"replacement": "pr-u-paddingInlineStart50",
+			"note": null,
+			"since": null,
+			"scope": "commons/utils"
+		},
+		{
+			"kind": "class",
+			"name": "pr-u-paddingLeft500",
+			"replacement": "pr-u-paddingInlineStart500",
+			"note": null,
+			"since": null,
+			"scope": "commons/utils"
+		},
+		{
+			"kind": "class",
+			"name": "pr-u-paddingLeft600",
+			"replacement": "pr-u-paddingInlineStart600",
+			"note": null,
+			"since": null,
+			"scope": "commons/utils"
+		},
+		{
+			"kind": "class",
+			"name": "pr-u-paddingLeft700",
+			"replacement": "pr-u-paddingInlineStart700",
+			"note": null,
+			"since": null,
+			"scope": "commons/utils"
+		},
+		{
+			"kind": "class",
+			"name": "pr-u-paddingLeft75",
+			"replacement": "pr-u-paddingInlineStart75",
+			"note": null,
+			"since": null,
+			"scope": "commons/utils"
+		},
+		{
+			"kind": "class",
+			"name": "pr-u-paddingLeft800",
+			"replacement": "pr-u-paddingInlineStart800",
+			"note": null,
+			"since": null,
+			"scope": "commons/utils"
+		},
+		{
+			"kind": "class",
+			"name": "pr-u-paddingRight0",
+			"replacement": "pr-u-paddingInlineEnd0",
+			"note": null,
+			"since": null,
+			"scope": "commons/utils"
+		},
+		{
+			"kind": "class",
+			"name": "pr-u-paddingRight100",
+			"replacement": "pr-u-paddingInlineEnd100",
+			"note": null,
+			"since": null,
+			"scope": "commons/utils"
+		},
+		{
+			"kind": "class",
+			"name": "pr-u-paddingRight150",
+			"replacement": "pr-u-paddingInlineEnd150",
+			"note": null,
+			"since": null,
+			"scope": "commons/utils"
+		},
+		{
+			"kind": "class",
+			"name": "pr-u-paddingRight200",
+			"replacement": "pr-u-paddingInlineEnd200",
+			"note": null,
+			"since": null,
+			"scope": "commons/utils"
+		},
+		{
+			"kind": "class",
+			"name": "pr-u-paddingRight25",
+			"replacement": "pr-u-paddingInlineEnd25",
+			"note": null,
+			"since": null,
+			"scope": "commons/utils"
+		},
+		{
+			"kind": "class",
+			"name": "pr-u-paddingRight250",
+			"replacement": "pr-u-paddingInlineEnd250",
+			"note": null,
+			"since": null,
+			"scope": "commons/utils"
+		},
+		{
+			"kind": "class",
+			"name": "pr-u-paddingRight300",
+			"replacement": "pr-u-paddingInlineEnd300",
+			"note": null,
+			"since": null,
+			"scope": "commons/utils"
+		},
+		{
+			"kind": "class",
+			"name": "pr-u-paddingRight400",
+			"replacement": "pr-u-paddingInlineEnd400",
+			"note": null,
+			"since": null,
+			"scope": "commons/utils"
+		},
+		{
+			"kind": "class",
+			"name": "pr-u-paddingRight50",
+			"replacement": "pr-u-paddingInlineEnd50",
+			"note": null,
+			"since": null,
+			"scope": "commons/utils"
+		},
+		{
+			"kind": "class",
+			"name": "pr-u-paddingRight500",
+			"replacement": "pr-u-paddingInlineEnd500",
+			"note": null,
+			"since": null,
+			"scope": "commons/utils"
+		},
+		{
+			"kind": "class",
+			"name": "pr-u-paddingRight600",
+			"replacement": "pr-u-paddingInlineEnd600",
+			"note": null,
+			"since": null,
+			"scope": "commons/utils"
+		},
+		{
+			"kind": "class",
+			"name": "pr-u-paddingRight700",
+			"replacement": "pr-u-paddingInlineEnd700",
+			"note": null,
+			"since": null,
+			"scope": "commons/utils"
+		},
+		{
+			"kind": "class",
+			"name": "pr-u-paddingRight75",
+			"replacement": "pr-u-paddingInlineEnd75",
+			"note": null,
+			"since": null,
+			"scope": "commons/utils"
+		},
+		{
+			"kind": "class",
+			"name": "pr-u-paddingRight800",
+			"replacement": "pr-u-paddingInlineEnd800",
+			"note": null,
+			"since": null,
+			"scope": "commons/utils"
+		},
+		{
+			"kind": "class",
+			"name": "pr-u-paddingTop0",
+			"replacement": "pr-u-paddingBlockStart0",
+			"note": null,
+			"since": null,
+			"scope": "commons/utils"
+		},
+		{
+			"kind": "class",
+			"name": "pr-u-paddingTop100",
+			"replacement": "pr-u-paddingBlockStart100",
+			"note": null,
+			"since": null,
+			"scope": "commons/utils"
+		},
+		{
+			"kind": "class",
+			"name": "pr-u-paddingTop150",
+			"replacement": "pr-u-paddingBlockStart150",
+			"note": null,
+			"since": null,
+			"scope": "commons/utils"
+		},
+		{
+			"kind": "class",
+			"name": "pr-u-paddingTop200",
+			"replacement": "pr-u-paddingBlockStart200",
+			"note": null,
+			"since": null,
+			"scope": "commons/utils"
+		},
+		{
+			"kind": "class",
+			"name": "pr-u-paddingTop25",
+			"replacement": "pr-u-paddingBlockStart25",
+			"note": null,
+			"since": null,
+			"scope": "commons/utils"
+		},
+		{
+			"kind": "class",
+			"name": "pr-u-paddingTop250",
+			"replacement": "pr-u-paddingBlockStart250",
+			"note": null,
+			"since": null,
+			"scope": "commons/utils"
+		},
+		{
+			"kind": "class",
+			"name": "pr-u-paddingTop300",
+			"replacement": "pr-u-paddingBlockStart300",
+			"note": null,
+			"since": null,
+			"scope": "commons/utils"
+		},
+		{
+			"kind": "class",
+			"name": "pr-u-paddingTop400",
+			"replacement": "pr-u-paddingBlockStart400",
+			"note": null,
+			"since": null,
+			"scope": "commons/utils"
+		},
+		{
+			"kind": "class",
+			"name": "pr-u-paddingTop50",
+			"replacement": "pr-u-paddingBlockStart50",
+			"note": null,
+			"since": null,
+			"scope": "commons/utils"
+		},
+		{
+			"kind": "class",
+			"name": "pr-u-paddingTop500",
+			"replacement": "pr-u-paddingBlockStart500",
+			"note": null,
+			"since": null,
+			"scope": "commons/utils"
+		},
+		{
+			"kind": "class",
+			"name": "pr-u-paddingTop600",
+			"replacement": "pr-u-paddingBlockStart600",
+			"note": null,
+			"since": null,
+			"scope": "commons/utils"
+		},
+		{
+			"kind": "class",
+			"name": "pr-u-paddingTop700",
+			"replacement": "pr-u-paddingBlockStart700",
+			"note": null,
+			"since": null,
+			"scope": "commons/utils"
+		},
+		{
+			"kind": "class",
+			"name": "pr-u-paddingTop75",
+			"replacement": "pr-u-paddingBlockStart75",
+			"note": null,
+			"since": null,
+			"scope": "commons/utils"
+		},
+		{
+			"kind": "class",
+			"name": "pr-u-paddingTop800",
+			"replacement": "pr-u-paddingBlockStart800",
+			"note": null,
+			"since": null,
+			"scope": "commons/utils"
+		},
+		{
+			"kind": "class",
+			"name": "pr-u-right0",
+			"replacement": "pr-u-insetInlineEnd0",
+			"note": null,
+			"since": null,
+			"scope": "commons/utils"
+		},
+		{
+			"kind": "class",
+			"name": "pr-u-rightReset",
+			"replacement": "pr-u-insetInlineEnd0",
+			"note": null,
+			"since": null,
+			"scope": "commons/utils"
+		},
+		{
+			"kind": "class",
+			"name": "pr-u-textAlignLeft",
+			"replacement": "pr-u-textAlignStart",
+			"note": null,
+			"since": null,
+			"scope": "commons/utils"
+		},
+		{
+			"kind": "class",
+			"name": "pr-u-textAlignRight",
+			"replacement": "pr-u-textAlignEnd",
+			"note": null,
+			"since": null,
+			"scope": "commons/utils"
+		},
+		{
+			"kind": "class",
+			"name": "pr-u-textBlueberry",
+			"replacement": "pr-u-colorTextBlueberry",
+			"note": null,
+			"since": null,
+			"scope": "commons/utils"
+		},
+		{
+			"kind": "class",
+			"name": "pr-u-textBrand",
+			"replacement": "pr-u-colorTextBrand",
+			"note": null,
+			"since": null,
+			"scope": "commons/utils"
+		},
+		{
+			"kind": "class",
+			"name": "pr-u-textBrandContrasted",
+			"replacement": "pr-u-colorTextBrandContrasted",
+			"note": null,
+			"since": null,
+			"scope": "commons/utils"
+		},
+		{
+			"kind": "class",
+			"name": "pr-u-textCc",
+			"replacement": "pr-u-colorTextCc",
+			"note": null,
+			"since": null,
+			"scope": "commons/utils"
+		},
+		{
+			"kind": "class",
+			"name": "pr-u-textCenter",
+			"replacement": "pr-u-textAlignCenter",
+			"note": null,
+			"since": null,
+			"scope": "commons/utils"
+		},
+		{
+			"kind": "class",
+			"name": "pr-u-textCleemy",
+			"replacement": "pr-u-colorTextCleemy",
+			"note": null,
+			"since": null,
+			"scope": "commons/utils"
+		},
+		{
+			"kind": "class",
+			"name": "pr-u-textCoreHR",
+			"replacement": "pr-u-colorTextCoreHR",
+			"note": null,
+			"since": null,
+			"scope": "commons/utils"
+		},
+		{
+			"kind": "class",
+			"name": "pr-u-textCritical",
+			"replacement": "pr-u-colorTextCritical",
+			"note": null,
+			"since": null,
+			"scope": "commons/utils"
+		},
+		{
+			"kind": "class",
+			"name": "pr-u-textCucumber",
+			"replacement": "pr-u-colorTextCucumber",
+			"note": null,
+			"since": null,
+			"scope": "commons/utils"
+		},
+		{
+			"kind": "class",
+			"name": "pr-u-textDefault",
+			"replacement": null,
+			"note": null,
+			"since": null,
+			"scope": "commons/utils"
+		},
+		{
+			"kind": "class",
+			"name": "pr-u-textError",
+			"replacement": "pr-u-colorTextError",
+			"note": null,
+			"since": null,
+			"scope": "commons/utils"
+		},
+		{
+			"kind": "class",
+			"name": "pr-u-textGlacier",
+			"replacement": "pr-u-colorTextGlacier",
+			"note": null,
+			"since": null,
+			"scope": "commons/utils"
+		},
+		{
+			"kind": "class",
+			"name": "pr-u-textGrape",
+			"replacement": "pr-u-colorTextGrape",
+			"note": null,
+			"since": null,
+			"scope": "commons/utils"
+		},
+		{
+			"kind": "class",
+			"name": "pr-u-textGrey",
+			"replacement": "pr-u-colorTextGrey",
+			"note": null,
+			"since": null,
+			"scope": "commons/utils"
+		},
+		{
+			"kind": "class",
+			"name": "pr-u-textKiwi",
+			"replacement": "pr-u-colorTextKiwi",
+			"note": null,
+			"since": null,
+			"scope": "commons/utils"
+		},
+		{
+			"kind": "class",
+			"name": "pr-u-textL",
+			"replacement": null,
+			"note": "Use typography utilities (pr-u-body*, pr-u-h*) instead.",
+			"since": null,
+			"scope": "commons/utils"
+		},
+		{
+			"kind": "class",
+			"name": "pr-u-textLagoon",
+			"replacement": "pr-u-colorTextLagoon",
+			"note": null,
+			"since": null,
+			"scope": "commons/utils"
+		},
+		{
+			"kind": "class",
+			"name": "pr-u-textLavender",
+			"replacement": "pr-u-colorTextLavender",
+			"note": null,
+			"since": null,
+			"scope": "commons/utils"
+		},
+		{
+			"kind": "class",
+			"name": "pr-u-textLeft",
+			"replacement": "pr-u-textAlignStart",
+			"note": null,
+			"since": null,
+			"scope": "commons/utils"
+		},
+		{
+			"kind": "class",
+			"name": "pr-u-textLight",
+			"replacement": null,
+			"note": null,
+			"since": null,
+			"scope": "commons/utils"
+		},
+		{
+			"kind": "class",
+			"name": "pr-u-textLime",
+			"replacement": "pr-u-colorTextLime",
+			"note": null,
+			"since": null,
+			"scope": "commons/utils"
+		},
+		{
+			"kind": "class",
+			"name": "pr-u-textLucca",
+			"replacement": "pr-u-colorTextLucca",
+			"note": null,
+			"since": null,
+			"scope": "commons/utils"
+		},
+		{
+			"kind": "class",
+			"name": "pr-u-textM",
+			"replacement": null,
+			"note": "Use typography utilities (pr-u-body*, pr-u-h*) instead.",
+			"since": null,
+			"scope": "commons/utils"
+		},
+		{
+			"kind": "class",
+			"name": "pr-u-textMint",
+			"replacement": "pr-u-colorTextMint",
+			"note": null,
+			"since": null,
+			"scope": "commons/utils"
+		},
+		{
+			"kind": "class",
+			"name": "pr-u-textNavigation",
+			"replacement": "pr-u-colorTextNavigation",
+			"note": null,
+			"since": null,
+			"scope": "commons/utils"
+		},
+		{
+			"kind": "class",
+			"name": "pr-u-textNeutral",
+			"replacement": "pr-u-colorTextNeutral",
+			"note": null,
+			"since": null,
+			"scope": "commons/utils"
+		},
+		{
+			"kind": "class",
+			"name": "pr-u-textOrchid",
+			"replacement": "pr-u-colorTextOrchid",
+			"note": null,
+			"since": null,
+			"scope": "commons/utils"
+		},
+		{
+			"kind": "class",
+			"name": "pr-u-textPagga",
+			"replacement": "pr-u-colorTextPagga",
+			"note": null,
+			"since": null,
+			"scope": "commons/utils"
+		},
+		{
+			"kind": "class",
+			"name": "pr-u-textPineapple",
+			"replacement": "pr-u-colorTextPineapple",
+			"note": null,
+			"since": null,
+			"scope": "commons/utils"
+		},
+		{
+			"kind": "class",
+			"name": "pr-u-textPineappleContrasted",
+			"replacement": "pr-u-colorTextPineappleContrasted",
+			"note": null,
+			"since": null,
+			"scope": "commons/utils"
+		},
+		{
+			"kind": "class",
+			"name": "pr-u-textPlaceholder",
+			"replacement": "pr-u-colorInputTextPlaceholder",
+			"note": null,
+			"since": null,
+			"scope": "commons/utils"
+		},
+		{
+			"kind": "class",
+			"name": "pr-u-textPoplee",
+			"replacement": "pr-u-colorTextPoplee",
+			"note": null,
+			"since": null,
+			"scope": "commons/utils"
+		},
+		{
+			"kind": "class",
+			"name": "pr-u-textPrimary",
+			"replacement": "pr-u-colorTextPrimary",
+			"note": null,
+			"since": null,
+			"scope": "commons/utils"
+		},
+		{
+			"kind": "class",
+			"name": "pr-u-textProduct",
+			"replacement": "pr-u-colorTextProduct",
+			"note": null,
+			"since": null,
+			"scope": "commons/utils"
+		},
+		{
+			"kind": "class",
+			"name": "pr-u-textPumpkin",
+			"replacement": "pr-u-colorTextPumpkin",
+			"note": null,
+			"since": null,
+			"scope": "commons/utils"
+		},
+		{
+			"kind": "class",
+			"name": "pr-u-textRight",
+			"replacement": "pr-u-textAlignEnd",
+			"note": null,
+			"since": null,
+			"scope": "commons/utils"
+		},
+		{
+			"kind": "class",
+			"name": "pr-u-textS",
+			"replacement": null,
+			"note": "Use typography utilities (pr-u-body*, pr-u-h*) instead.",
+			"since": null,
+			"scope": "commons/utils"
+		},
+		{
+			"kind": "class",
+			"name": "pr-u-textSecondary",
+			"replacement": "pr-u-colorTextSecondary",
+			"note": null,
+			"since": null,
+			"scope": "commons/utils"
+		},
+		{
+			"kind": "class",
+			"name": "pr-u-textSuccess",
+			"replacement": "pr-u-colorTextSuccess",
+			"note": null,
+			"since": null,
+			"scope": "commons/utils"
+		},
+		{
+			"kind": "class",
+			"name": "pr-u-textSuccessContrasted",
+			"replacement": "pr-u-colorTextSuccessContrasted",
+			"note": null,
+			"since": null,
+			"scope": "commons/utils"
+		},
+		{
+			"kind": "class",
+			"name": "pr-u-textTimmi",
+			"replacement": "pr-u-colorTextTimmi",
+			"note": null,
+			"since": null,
+			"scope": "commons/utils"
+		},
+		{
+			"kind": "class",
+			"name": "pr-u-textWarning",
+			"replacement": "pr-u-colorTextWarning",
+			"note": null,
+			"since": null,
+			"scope": "commons/utils"
+		},
+		{
+			"kind": "class",
+			"name": "pr-u-textWarningContrasted",
+			"replacement": "pr-u-colorTextWarningContrasted",
+			"note": null,
+			"since": null,
+			"scope": "commons/utils"
+		},
+		{
+			"kind": "class",
+			"name": "pr-u-textWatermelon",
+			"replacement": "pr-u-colorTextWatermelon",
+			"note": null,
+			"since": null,
+			"scope": "commons/utils"
+		},
+		{
+			"kind": "class",
+			"name": "pr-u-textXL",
+			"replacement": null,
+			"note": "Use typography utilities (pr-u-body*, pr-u-h*) instead.",
+			"since": null,
+			"scope": "commons/utils"
+		},
+		{
+			"kind": "class",
+			"name": "pr-u-textXS",
+			"replacement": null,
+			"note": "Use typography utilities (pr-u-body*, pr-u-h*) instead.",
+			"since": null,
+			"scope": "commons/utils"
+		},
+		{
+			"kind": "class",
+			"name": "pr-u-textXXL",
+			"replacement": null,
+			"note": "Use typography utilities (pr-u-body*, pr-u-h*) instead.",
+			"since": null,
+			"scope": "commons/utils"
+		},
+		{
+			"kind": "class",
+			"name": "pr-u-textXXXL",
+			"replacement": null,
+			"note": "Use typography utilities (pr-u-body*, pr-u-h*) instead.",
+			"since": null,
+			"scope": "commons/utils"
+		},
+		{
+			"kind": "class",
+			"name": "pr-u-top0",
+			"replacement": "pr-u-insetBlockStart0",
+			"note": null,
+			"since": null,
+			"scope": "commons/utils"
+		},
+		{
+			"kind": "class",
+			"name": "pr-u-topReset",
+			"replacement": "pr-u-insetBlockStart0",
+			"note": null,
+			"since": null,
+			"scope": "commons/utils"
+		},
+		{
+			"kind": "class",
+			"name": "u-alignItemsBaseline",
+			"replacement": "pr-u-alignItemsBaseline",
+			"note": "The u- prefix is deprecated.",
+			"since": null,
+			"scope": "commons/utils"
+		},
+		{
+			"kind": "class",
+			"name": "u-alignItemsCenter",
+			"replacement": "pr-u-alignItemsCenter",
+			"note": "The u- prefix is deprecated.",
+			"since": null,
+			"scope": "commons/utils"
+		},
+		{
+			"kind": "class",
+			"name": "u-alignItemsFlexEnd",
+			"replacement": "pr-u-alignItemsFlexEnd",
+			"note": "The u- prefix is deprecated.",
+			"since": null,
+			"scope": "commons/utils"
+		},
+		{
+			"kind": "class",
+			"name": "u-alignItemsFlexStart",
+			"replacement": "pr-u-alignItemsFlexStart",
+			"note": "The u- prefix is deprecated.",
+			"since": null,
+			"scope": "commons/utils"
+		},
+		{
+			"kind": "class",
+			"name": "u-alignItemsStretch",
+			"replacement": "pr-u-alignItemsStretch",
+			"note": "The u- prefix is deprecated.",
+			"since": null,
+			"scope": "commons/utils"
+		},
+		{
+			"kind": "class",
+			"name": "u-alignSelfBaseline",
+			"replacement": "pr-u-alignSelfBaseline",
+			"note": "The u- prefix is deprecated.",
+			"since": null,
+			"scope": "commons/utils"
+		},
+		{
+			"kind": "class",
+			"name": "u-alignSelfCenter",
+			"replacement": "pr-u-alignSelfCenter",
+			"note": "The u- prefix is deprecated.",
+			"since": null,
+			"scope": "commons/utils"
+		},
+		{
+			"kind": "class",
+			"name": "u-alignSelfFlexEnd",
+			"replacement": "pr-u-alignSelfFlexEnd",
+			"note": "The u- prefix is deprecated.",
+			"since": null,
+			"scope": "commons/utils"
+		},
+		{
+			"kind": "class",
+			"name": "u-alignSelfFlexStart",
+			"replacement": "pr-u-alignSelfFlexStart",
+			"note": "The u- prefix is deprecated.",
+			"since": null,
+			"scope": "commons/utils"
+		},
+		{
+			"kind": "class",
+			"name": "u-alignSelfStretch",
+			"replacement": "pr-u-alignSelfStretch",
+			"note": "The u- prefix is deprecated.",
+			"since": null,
+			"scope": "commons/utils"
+		},
+		{
+			"kind": "class",
+			"name": "u-animated",
+			"replacement": "pr-u-animated",
+			"note": "The u- prefix is deprecated.",
+			"since": null,
+			"scope": "commons/utils"
+		},
+		{
+			"kind": "class",
+			"name": "u-blockSize100\\%",
+			"replacement": "pr-u-blockSize100\\%",
+			"note": "The u- prefix is deprecated.",
+			"since": null,
+			"scope": "commons/utils"
+		},
+		{
+			"kind": "class",
+			"name": "u-blockSizeFitContent",
+			"replacement": "pr-u-blockSizeFitContent",
+			"note": "The u- prefix is deprecated.",
+			"since": null,
+			"scope": "commons/utils"
+		},
+		{
+			"kind": "class",
+			"name": "u-bodyM",
+			"replacement": "pr-u-bodyM",
+			"note": "The u- prefix is deprecated.",
+			"since": null,
+			"scope": "commons/utils"
+		},
+		{
+			"kind": "class",
+			"name": "u-bodyS",
+			"replacement": "pr-u-bodyS",
+			"note": "The u- prefix is deprecated.",
+			"since": null,
+			"scope": "commons/utils"
+		},
+		{
+			"kind": "class",
+			"name": "u-bodyXS",
+			"replacement": "pr-u-bodyXS",
+			"note": "The u- prefix is deprecated.",
+			"since": null,
+			"scope": "commons/utils"
+		},
+		{
+			"kind": "class",
+			"name": "u-borderBottomLeftRadiusFull",
+			"replacement": null,
+			"note": "The u- prefix is deprecated; use border-radius token utilities instead.",
+			"since": null,
+			"scope": "commons/utils"
+		},
+		{
+			"kind": "class",
+			"name": "u-borderBottomLeftRadiusL",
+			"replacement": null,
+			"note": "The u- prefix is deprecated; use border-radius token utilities instead.",
+			"since": null,
+			"scope": "commons/utils"
+		},
+		{
+			"kind": "class",
+			"name": "u-borderBottomLeftRadiusM",
+			"replacement": null,
+			"note": "The u- prefix is deprecated; use border-radius token utilities instead.",
+			"since": null,
+			"scope": "commons/utils"
+		},
+		{
+			"kind": "class",
+			"name": "u-borderBottomLeftRadiusXL",
+			"replacement": null,
+			"note": "The u- prefix is deprecated; use border-radius token utilities instead.",
+			"since": null,
+			"scope": "commons/utils"
+		},
+		{
+			"kind": "class",
+			"name": "u-borderBottomRightRadiusFull",
+			"replacement": null,
+			"note": "The u- prefix is deprecated; use border-radius token utilities instead.",
+			"since": null,
+			"scope": "commons/utils"
+		},
+		{
+			"kind": "class",
+			"name": "u-borderBottomRightRadiusL",
+			"replacement": null,
+			"note": "The u- prefix is deprecated; use border-radius token utilities instead.",
+			"since": null,
+			"scope": "commons/utils"
+		},
+		{
+			"kind": "class",
+			"name": "u-borderBottomRightRadiusM",
+			"replacement": null,
+			"note": "The u- prefix is deprecated; use border-radius token utilities instead.",
+			"since": null,
+			"scope": "commons/utils"
+		},
+		{
+			"kind": "class",
+			"name": "u-borderBottomRightRadiusXL",
+			"replacement": null,
+			"note": "The u- prefix is deprecated; use border-radius token utilities instead.",
+			"since": null,
+			"scope": "commons/utils"
+		},
+		{
+			"kind": "class",
+			"name": "u-borderEndEndRadiusFull",
+			"replacement": null,
+			"note": "The u- prefix is deprecated; use border-radius token utilities instead.",
+			"since": null,
+			"scope": "commons/utils"
+		},
+		{
+			"kind": "class",
+			"name": "u-borderEndEndRadiusL",
+			"replacement": null,
+			"note": "The u- prefix is deprecated; use border-radius token utilities instead.",
+			"since": null,
+			"scope": "commons/utils"
+		},
+		{
+			"kind": "class",
+			"name": "u-borderEndEndRadiusM",
+			"replacement": null,
+			"note": "The u- prefix is deprecated; use border-radius token utilities instead.",
+			"since": null,
+			"scope": "commons/utils"
+		},
+		{
+			"kind": "class",
+			"name": "u-borderEndEndRadiusXL",
+			"replacement": null,
+			"note": "The u- prefix is deprecated; use border-radius token utilities instead.",
+			"since": null,
+			"scope": "commons/utils"
+		},
+		{
+			"kind": "class",
+			"name": "u-borderEndStartRadiusFull",
+			"replacement": null,
+			"note": "The u- prefix is deprecated; use border-radius token utilities instead.",
+			"since": null,
+			"scope": "commons/utils"
+		},
+		{
+			"kind": "class",
+			"name": "u-borderEndStartRadiusL",
+			"replacement": null,
+			"note": "The u- prefix is deprecated; use border-radius token utilities instead.",
+			"since": null,
+			"scope": "commons/utils"
+		},
+		{
+			"kind": "class",
+			"name": "u-borderEndStartRadiusM",
+			"replacement": null,
+			"note": "The u- prefix is deprecated; use border-radius token utilities instead.",
+			"since": null,
+			"scope": "commons/utils"
+		},
+		{
+			"kind": "class",
+			"name": "u-borderEndStartRadiusXL",
+			"replacement": null,
+			"note": "The u- prefix is deprecated; use border-radius token utilities instead.",
+			"since": null,
+			"scope": "commons/utils"
+		},
+		{
+			"kind": "class",
+			"name": "u-borderRadiusFull",
+			"replacement": null,
+			"note": "The u- prefix is deprecated; use border-radius token utilities instead.",
+			"since": null,
+			"scope": "commons/utils"
+		},
+		{
+			"kind": "class",
+			"name": "u-borderRadiusL",
+			"replacement": null,
+			"note": "The u- prefix is deprecated; use border-radius token utilities instead.",
+			"since": null,
+			"scope": "commons/utils"
+		},
+		{
+			"kind": "class",
+			"name": "u-borderRadiusM",
+			"replacement": null,
+			"note": "The u- prefix is deprecated; use border-radius token utilities instead.",
+			"since": null,
+			"scope": "commons/utils"
+		},
+		{
+			"kind": "class",
+			"name": "u-borderRadiusXL",
+			"replacement": null,
+			"note": "The u- prefix is deprecated; use border-radius token utilities instead.",
+			"since": null,
+			"scope": "commons/utils"
+		},
+		{
+			"kind": "class",
+			"name": "u-borderStartEndRadiusFull",
+			"replacement": null,
+			"note": "The u- prefix is deprecated; use border-radius token utilities instead.",
+			"since": null,
+			"scope": "commons/utils"
+		},
+		{
+			"kind": "class",
+			"name": "u-borderStartEndRadiusL",
+			"replacement": null,
+			"note": "The u- prefix is deprecated; use border-radius token utilities instead.",
+			"since": null,
+			"scope": "commons/utils"
+		},
+		{
+			"kind": "class",
+			"name": "u-borderStartEndRadiusM",
+			"replacement": null,
+			"note": "The u- prefix is deprecated; use border-radius token utilities instead.",
+			"since": null,
+			"scope": "commons/utils"
+		},
+		{
+			"kind": "class",
+			"name": "u-borderStartEndRadiusXL",
+			"replacement": null,
+			"note": "The u- prefix is deprecated; use border-radius token utilities instead.",
+			"since": null,
+			"scope": "commons/utils"
+		},
+		{
+			"kind": "class",
+			"name": "u-borderStartStartRadiusFull",
+			"replacement": null,
+			"note": "The u- prefix is deprecated; use border-radius token utilities instead.",
+			"since": null,
+			"scope": "commons/utils"
+		},
+		{
+			"kind": "class",
+			"name": "u-borderStartStartRadiusL",
+			"replacement": null,
+			"note": "The u- prefix is deprecated; use border-radius token utilities instead.",
+			"since": null,
+			"scope": "commons/utils"
+		},
+		{
+			"kind": "class",
+			"name": "u-borderStartStartRadiusM",
+			"replacement": null,
+			"note": "The u- prefix is deprecated; use border-radius token utilities instead.",
+			"since": null,
+			"scope": "commons/utils"
+		},
+		{
+			"kind": "class",
+			"name": "u-borderStartStartRadiusXL",
+			"replacement": null,
+			"note": "The u- prefix is deprecated; use border-radius token utilities instead.",
+			"since": null,
+			"scope": "commons/utils"
+		},
+		{
+			"kind": "class",
+			"name": "u-borderTopLeftRadiusFull",
+			"replacement": null,
+			"note": "The u- prefix is deprecated; use border-radius token utilities instead.",
+			"since": null,
+			"scope": "commons/utils"
+		},
+		{
+			"kind": "class",
+			"name": "u-borderTopLeftRadiusL",
+			"replacement": null,
+			"note": "The u- prefix is deprecated; use border-radius token utilities instead.",
+			"since": null,
+			"scope": "commons/utils"
+		},
+		{
+			"kind": "class",
+			"name": "u-borderTopLeftRadiusM",
+			"replacement": null,
+			"note": "The u- prefix is deprecated; use border-radius token utilities instead.",
+			"since": null,
+			"scope": "commons/utils"
+		},
+		{
+			"kind": "class",
+			"name": "u-borderTopLeftRadiusXL",
+			"replacement": null,
+			"note": "The u- prefix is deprecated; use border-radius token utilities instead.",
+			"since": null,
+			"scope": "commons/utils"
+		},
+		{
+			"kind": "class",
+			"name": "u-borderTopRightRadiusFull",
+			"replacement": null,
+			"note": "The u- prefix is deprecated; use border-radius token utilities instead.",
+			"since": null,
+			"scope": "commons/utils"
+		},
+		{
+			"kind": "class",
+			"name": "u-borderTopRightRadiusL",
+			"replacement": null,
+			"note": "The u- prefix is deprecated; use border-radius token utilities instead.",
+			"since": null,
+			"scope": "commons/utils"
+		},
+		{
+			"kind": "class",
+			"name": "u-borderTopRightRadiusM",
+			"replacement": null,
+			"note": "The u- prefix is deprecated; use border-radius token utilities instead.",
+			"since": null,
+			"scope": "commons/utils"
+		},
+		{
+			"kind": "class",
+			"name": "u-borderTopRightRadiusXL",
+			"replacement": null,
+			"note": "The u- prefix is deprecated; use border-radius token utilities instead.",
+			"since": null,
+			"scope": "commons/utils"
+		},
+		{
+			"kind": "class",
+			"name": "u-bottom0",
+			"replacement": "pr-u-insetBlockEnd0",
+			"note": "The u- prefix is deprecated.",
+			"since": null,
+			"scope": "commons/utils"
+		},
+		{
+			"kind": "class",
+			"name": "u-bottomReset",
+			"replacement": "pr-u-insetBlockEnd0",
+			"note": "The u- prefix is deprecated.",
+			"since": null,
+			"scope": "commons/utils"
+		},
+		{
+			"kind": "class",
+			"name": "u-buttonReset",
+			"replacement": "pr-u-buttonReset",
+			"note": "The u- prefix is deprecated.",
+			"since": null,
+			"scope": "commons/utils"
+		},
+		{
+			"kind": "class",
+			"name": "u-clear",
+			"replacement": "pr-u-clearBoth",
+			"note": "The u- prefix is deprecated.",
+			"since": null,
+			"scope": "commons/utils"
+		},
+		{
+			"kind": "class",
+			"name": "u-clearBoth",
+			"replacement": "pr-u-clearBoth",
+			"note": "The u- prefix is deprecated.",
+			"since": null,
+			"scope": "commons/utils"
+		},
+		{
+			"kind": "class",
+			"name": "u-clearfix",
+			"replacement": "pr-u-clearfix",
+			"note": "The u- prefix is deprecated.",
+			"since": null,
+			"scope": "commons/utils"
+		},
+		{
+			"kind": "class",
+			"name": "u-clearInlineEnd",
+			"replacement": "pr-u-clearInlineEnd",
+			"note": "The u- prefix is deprecated.",
+			"since": null,
+			"scope": "commons/utils"
+		},
+		{
+			"kind": "class",
+			"name": "u-clearInlineStart",
+			"replacement": "pr-u-clearInlineStart",
+			"note": "The u- prefix is deprecated.",
+			"since": null,
+			"scope": "commons/utils"
+		},
+		{
+			"kind": "class",
+			"name": "u-clearLeft",
+			"replacement": "pr-u-clearInlineStart",
+			"note": "The u- prefix is deprecated.",
+			"since": null,
+			"scope": "commons/utils"
+		},
+		{
+			"kind": "class",
+			"name": "u-clearRight",
+			"replacement": "pr-u-clearInlineEnd",
+			"note": "The u- prefix is deprecated.",
+			"since": null,
+			"scope": "commons/utils"
+		},
+		{
+			"kind": "class",
+			"name": "u-cursorAuto",
+			"replacement": "pr-u-cursorAuto",
+			"note": "The u- prefix is deprecated.",
+			"since": null,
+			"scope": "commons/utils"
+		},
+		{
+			"kind": "class",
+			"name": "u-cursorDefault",
+			"replacement": "pr-u-cursorDefault",
+			"note": "The u- prefix is deprecated.",
+			"since": null,
+			"scope": "commons/utils"
+		},
+		{
+			"kind": "class",
+			"name": "u-cursorPointer",
+			"replacement": "pr-u-cursorPointer",
+			"note": "The u- prefix is deprecated.",
+			"since": null,
+			"scope": "commons/utils"
+		},
+		{
+			"kind": "class",
+			"name": "u-cursorText",
+			"replacement": "pr-u-cursorText",
+			"note": "The u- prefix is deprecated.",
+			"since": null,
+			"scope": "commons/utils"
+		},
+		{
+			"kind": "class",
+			"name": "u-descriptionListReset",
+			"replacement": "pr-u-descriptionListReset",
+			"note": "The u- prefix is deprecated.",
+			"since": null,
+			"scope": "commons/utils"
+		},
+		{
+			"kind": "class",
+			"name": "u-displayBlock",
+			"replacement": "pr-u-displayBlock",
+			"note": "The u- prefix is deprecated.",
+			"since": null,
+			"scope": "commons/utils"
+		},
+		{
+			"kind": "class",
+			"name": "u-displayContents",
+			"replacement": "pr-u-displayContents",
+			"note": "The u- prefix is deprecated.",
+			"since": null,
+			"scope": "commons/utils"
+		},
+		{
+			"kind": "class",
+			"name": "u-displayFlex",
+			"replacement": "pr-u-displayFlex",
+			"note": "The u- prefix is deprecated.",
+			"since": null,
+			"scope": "commons/utils"
+		},
+		{
+			"kind": "class",
+			"name": "u-displayGrid",
+			"replacement": "pr-u-displayGrid",
+			"note": "The u- prefix is deprecated.",
+			"since": null,
+			"scope": "commons/utils"
+		},
+		{
+			"kind": "class",
+			"name": "u-displayInline",
+			"replacement": "pr-u-displayInline",
+			"note": "The u- prefix is deprecated.",
+			"since": null,
+			"scope": "commons/utils"
+		},
+		{
+			"kind": "class",
+			"name": "u-displayInlineBlock",
+			"replacement": "pr-u-displayInlineBlock",
+			"note": "The u- prefix is deprecated.",
+			"since": null,
+			"scope": "commons/utils"
+		},
+		{
+			"kind": "class",
+			"name": "u-displayInlineFlex",
+			"replacement": "pr-u-displayInlineFlex",
+			"note": "The u- prefix is deprecated.",
+			"since": null,
+			"scope": "commons/utils"
+		},
+		{
+			"kind": "class",
+			"name": "u-displayInlineGrid",
+			"replacement": "pr-u-displayInlineGrid",
+			"note": "The u- prefix is deprecated.",
+			"since": null,
+			"scope": "commons/utils"
+		},
+		{
+			"kind": "class",
+			"name": "u-displayNone",
+			"replacement": "pr-u-displayNone",
+			"note": "The u- prefix is deprecated.",
+			"since": null,
+			"scope": "commons/utils"
+		},
+		{
+			"kind": "class",
+			"name": "u-ellipsis",
+			"replacement": "pr-u-ellipsis",
+			"note": "The u- prefix is deprecated.",
+			"since": null,
+			"scope": "commons/utils"
+		},
+		{
+			"kind": "class",
+			"name": "u-flexBasis0",
+			"replacement": "pr-u-flexBasis0",
+			"note": "The u- prefix is deprecated.",
+			"since": null,
+			"scope": "commons/utils"
+		},
+		{
+			"kind": "class",
+			"name": "u-flexBasisAuto",
+			"replacement": "pr-u-flexBasisAuto",
+			"note": "The u- prefix is deprecated.",
+			"since": null,
+			"scope": "commons/utils"
+		},
+		{
+			"kind": "class",
+			"name": "u-flexDirectionColumn",
+			"replacement": "pr-u-flexDirectionColumn",
+			"note": "The u- prefix is deprecated.",
+			"since": null,
+			"scope": "commons/utils"
+		},
+		{
+			"kind": "class",
+			"name": "u-flexDirectionColumnReverse",
+			"replacement": "pr-u-flexDirectionColumnReverse",
+			"note": "The u- prefix is deprecated.",
+			"since": null,
+			"scope": "commons/utils"
+		},
+		{
+			"kind": "class",
+			"name": "u-flexDirectionRow",
+			"replacement": "pr-u-flexDirectionRow",
+			"note": "The u- prefix is deprecated.",
+			"since": null,
+			"scope": "commons/utils"
+		},
+		{
+			"kind": "class",
+			"name": "u-flexDirectionRowReverse",
+			"replacement": "pr-u-flexDirectionRowReverse",
+			"note": "The u- prefix is deprecated.",
+			"since": null,
+			"scope": "commons/utils"
+		},
+		{
+			"kind": "class",
+			"name": "u-flexGrow0",
+			"replacement": "pr-u-flexGrow0",
+			"note": "The u- prefix is deprecated.",
+			"since": null,
+			"scope": "commons/utils"
+		},
+		{
+			"kind": "class",
+			"name": "u-flexGrow1",
+			"replacement": "pr-u-flexGrow1",
+			"note": "The u- prefix is deprecated.",
+			"since": null,
+			"scope": "commons/utils"
+		},
+		{
+			"kind": "class",
+			"name": "u-flexShrink0",
+			"replacement": "pr-u-flexShrink0",
+			"note": "The u- prefix is deprecated.",
+			"since": null,
+			"scope": "commons/utils"
+		},
+		{
+			"kind": "class",
+			"name": "u-flexShrink1",
+			"replacement": "pr-u-flexShrink1",
+			"note": "The u- prefix is deprecated.",
+			"since": null,
+			"scope": "commons/utils"
+		},
+		{
+			"kind": "class",
+			"name": "u-flexWrapNowrap",
+			"replacement": "pr-u-flexWrapNowrap",
+			"note": "The u- prefix is deprecated.",
+			"since": null,
+			"scope": "commons/utils"
+		},
+		{
+			"kind": "class",
+			"name": "u-flexWrapWrap",
+			"replacement": "pr-u-flexWrapWrap",
+			"note": "The u- prefix is deprecated.",
+			"since": null,
+			"scope": "commons/utils"
+		},
+		{
+			"kind": "class",
+			"name": "u-flexWrapWrapReverse",
+			"replacement": "pr-u-flexWrapWrapReverse",
+			"note": "The u- prefix is deprecated.",
+			"since": null,
+			"scope": "commons/utils"
+		},
+		{
+			"kind": "class",
+			"name": "u-floatInlineEnd",
+			"replacement": "pr-u-floatInlineEnd",
+			"note": "The u- prefix is deprecated.",
+			"since": null,
+			"scope": "commons/utils"
+		},
+		{
+			"kind": "class",
+			"name": "u-floatInlineStart",
+			"replacement": "pr-u-floatInlineStart",
+			"note": "The u- prefix is deprecated.",
+			"since": null,
+			"scope": "commons/utils"
+		},
+		{
+			"kind": "class",
+			"name": "u-floatLeft",
+			"replacement": "pr-u-floatInlineStart",
+			"note": "The u- prefix is deprecated.",
+			"since": null,
+			"scope": "commons/utils"
+		},
+		{
+			"kind": "class",
+			"name": "u-floatRight",
+			"replacement": "pr-u-floatInlineEnd",
+			"note": "The u- prefix is deprecated.",
+			"since": null,
+			"scope": "commons/utils"
+		},
+		{
+			"kind": "class",
+			"name": "u-fontFamily",
+			"replacement": "pr-u-fontFamily",
+			"note": "The u- prefix is deprecated.",
+			"since": null,
+			"scope": "commons/utils"
+		},
+		{
+			"kind": "class",
+			"name": "u-fontFamilyBrand",
+			"replacement": "pr-u-fontFamilyBrand",
+			"note": "The u- prefix is deprecated.",
+			"since": null,
+			"scope": "commons/utils"
+		},
+		{
+			"kind": "class",
+			"name": "u-fontFamilyCursive",
+			"replacement": "pr-u-fontFamilyCursive",
+			"note": "The u- prefix is deprecated.",
+			"since": null,
+			"scope": "commons/utils"
+		},
+		{
+			"kind": "class",
+			"name": "u-fontStyleItalic",
+			"replacement": "pr-u-fontStyleItalic",
+			"note": "The u- prefix is deprecated.",
+			"since": null,
+			"scope": "commons/utils"
+		},
+		{
+			"kind": "class",
+			"name": "u-fontStyleNormal",
+			"replacement": "pr-u-fontStyleNormal",
+			"note": "The u- prefix is deprecated.",
+			"since": null,
+			"scope": "commons/utils"
+		},
+		{
+			"kind": "class",
+			"name": "u-fontWeight400",
+			"replacement": "pr-u-fontWeight400",
+			"note": "The u- prefix is deprecated.",
+			"since": null,
+			"scope": "commons/utils"
+		},
+		{
+			"kind": "class",
+			"name": "u-fontWeight600",
+			"replacement": "pr-u-fontWeight600",
+			"note": "The u- prefix is deprecated.",
+			"since": null,
+			"scope": "commons/utils"
+		},
+		{
+			"kind": "class",
+			"name": "u-fontWeight700",
+			"replacement": "pr-u-fontWeight700",
+			"note": "The u- prefix is deprecated.",
+			"since": null,
+			"scope": "commons/utils"
+		},
+		{
+			"kind": "class",
+			"name": "u-fontWeight900",
+			"replacement": "pr-u-fontWeight900",
+			"note": "The u- prefix is deprecated.",
+			"since": null,
+			"scope": "commons/utils"
+		},
+		{
+			"kind": "class",
+			"name": "u-fontWeightBold",
+			"replacement": "pr-u-fontWeightBold",
+			"note": "The u- prefix is deprecated.",
+			"since": null,
+			"scope": "commons/utils"
+		},
+		{
+			"kind": "class",
+			"name": "u-fontWeightNormal",
+			"replacement": "pr-u-fontWeightNormal",
+			"note": "The u- prefix is deprecated.",
+			"since": null,
+			"scope": "commons/utils"
+		},
+		{
+			"kind": "class",
+			"name": "u-fontWeightRegular",
+			"replacement": "pr-u-fontWeightRegular",
+			"note": "The u- prefix is deprecated.",
+			"since": null,
+			"scope": "commons/utils"
+		},
+		{
+			"kind": "class",
+			"name": "u-fontWeightSemiBold",
+			"replacement": "pr-u-fontWeightSemiBold",
+			"note": "The u- prefix is deprecated.",
+			"since": null,
+			"scope": "commons/utils"
+		},
+		{
+			"kind": "class",
+			"name": "u-h1",
+			"replacement": "pr-u-h1",
+			"note": "The u- prefix is deprecated.",
+			"since": null,
+			"scope": "commons/utils"
+		},
+		{
+			"kind": "class",
+			"name": "u-h2",
+			"replacement": "pr-u-h2",
+			"note": "The u- prefix is deprecated.",
+			"since": null,
+			"scope": "commons/utils"
+		},
+		{
+			"kind": "class",
+			"name": "u-h3",
+			"replacement": "pr-u-h3",
+			"note": "The u- prefix is deprecated.",
+			"since": null,
+			"scope": "commons/utils"
+		},
+		{
+			"kind": "class",
+			"name": "u-h4",
+			"replacement": "pr-u-h4",
+			"note": "The u- prefix is deprecated.",
+			"since": null,
+			"scope": "commons/utils"
+		},
+		{
+			"kind": "class",
+			"name": "u-h5",
+			"replacement": null,
+			"note": "The u- prefix is deprecated.",
+			"since": null,
+			"scope": "commons/utils"
+		},
+		{
+			"kind": "class",
+			"name": "u-h6",
+			"replacement": null,
+			"note": "The u- prefix is deprecated.",
+			"since": null,
+			"scope": "commons/utils"
+		},
+		{
+			"kind": "class",
+			"name": "u-height100\\%",
+			"replacement": "pr-u-height100\\%",
+			"note": "The u- prefix is deprecated.",
+			"since": null,
+			"scope": "commons/utils"
+		},
+		{
+			"kind": "class",
+			"name": "u-heightFitContent",
+			"replacement": "pr-u-heightFitContent",
+			"note": "The u- prefix is deprecated.",
+			"since": null,
+			"scope": "commons/utils"
+		},
+		{
+			"kind": "class",
+			"name": "u-inlineSize100\\%",
+			"replacement": "pr-u-inlineSize100\\%",
+			"note": "The u- prefix is deprecated.",
+			"since": null,
+			"scope": "commons/utils"
+		},
+		{
+			"kind": "class",
+			"name": "u-inlineSizeFitContent",
+			"replacement": "pr-u-inlineSizeFitContent",
+			"note": "The u- prefix is deprecated.",
+			"since": null,
+			"scope": "commons/utils"
+		},
+		{
+			"kind": "class",
+			"name": "u-inset0",
+			"replacement": "pr-u-inset0",
+			"note": "The u- prefix is deprecated.",
+			"since": null,
+			"scope": "commons/utils"
+		},
+		{
+			"kind": "class",
+			"name": "u-insetBlock-end0",
+			"replacement": "pr-u-insetBlock-end0",
+			"note": "The u- prefix is deprecated.",
+			"since": null,
+			"scope": "commons/utils"
+		},
+		{
+			"kind": "class",
+			"name": "u-insetBlock-start0",
+			"replacement": "pr-u-insetBlock-start0",
+			"note": "The u- prefix is deprecated.",
+			"since": null,
+			"scope": "commons/utils"
+		},
+		{
+			"kind": "class",
+			"name": "u-insetBlock0",
+			"replacement": "pr-u-insetBlock0",
+			"note": "The u- prefix is deprecated.",
+			"since": null,
+			"scope": "commons/utils"
+		},
+		{
+			"kind": "class",
+			"name": "u-insetInline-end0",
+			"replacement": "pr-u-insetInline-end0",
+			"note": "The u- prefix is deprecated.",
+			"since": null,
+			"scope": "commons/utils"
+		},
+		{
+			"kind": "class",
+			"name": "u-insetInline-start0",
+			"replacement": "pr-u-insetInline-start0",
+			"note": "The u- prefix is deprecated.",
+			"since": null,
+			"scope": "commons/utils"
+		},
+		{
+			"kind": "class",
+			"name": "u-insetInline0",
+			"replacement": "pr-u-insetInline0",
+			"note": "The u- prefix is deprecated.",
+			"since": null,
+			"scope": "commons/utils"
+		},
+		{
+			"kind": "class",
+			"name": "u-insetReset",
+			"replacement": "pr-u-inset0",
+			"note": "The u- prefix is deprecated.",
+			"since": null,
+			"scope": "commons/utils"
+		},
+		{
+			"kind": "class",
+			"name": "u-justifyContentCenter",
+			"replacement": "pr-u-justifyContentCenter",
+			"note": "The u- prefix is deprecated.",
+			"since": null,
+			"scope": "commons/utils"
+		},
+		{
+			"kind": "class",
+			"name": "u-justifyContentFlexEnd",
+			"replacement": "pr-u-justifyContentFlexEnd",
+			"note": "The u- prefix is deprecated.",
+			"since": null,
+			"scope": "commons/utils"
+		},
+		{
+			"kind": "class",
+			"name": "u-justifyContentFlexStart",
+			"replacement": "pr-u-justifyContentFlexStart",
+			"note": "The u- prefix is deprecated.",
+			"since": null,
+			"scope": "commons/utils"
+		},
+		{
+			"kind": "class",
+			"name": "u-justifyContentSpaceAround",
+			"replacement": "pr-u-justifyContentSpaceAround",
+			"note": "The u- prefix is deprecated.",
+			"since": null,
+			"scope": "commons/utils"
+		},
+		{
+			"kind": "class",
+			"name": "u-justifyContentSpaceBetween",
+			"replacement": "pr-u-justifyContentSpaceBetween",
+			"note": "The u- prefix is deprecated.",
+			"since": null,
+			"scope": "commons/utils"
+		},
+		{
+			"kind": "class",
+			"name": "u-justifyContentSpaceEvenly",
+			"replacement": "pr-u-justifyContentSpaceEvenly",
+			"note": "The u- prefix is deprecated.",
+			"since": null,
+			"scope": "commons/utils"
+		},
+		{
+			"kind": "class",
+			"name": "u-left0",
+			"replacement": "pr-u-insetInlineStart0",
+			"note": "The u- prefix is deprecated.",
+			"since": null,
+			"scope": "commons/utils"
+		},
+		{
+			"kind": "class",
+			"name": "u-leftReset",
+			"replacement": "pr-u-insetInlineStart0",
+			"note": "The u- prefix is deprecated.",
+			"since": null,
+			"scope": "commons/utils"
+		},
+		{
+			"kind": "class",
+			"name": "u-listReset",
+			"replacement": "pr-u-listReset",
+			"note": "The u- prefix is deprecated.",
+			"since": null,
+			"scope": "commons/utils"
+		},
+		{
+			"kind": "class",
+			"name": "u-marginBlock-end0",
+			"replacement": "pr-u-marginBlock-end0",
+			"note": "The u- prefix is deprecated.",
+			"since": null,
+			"scope": "commons/utils"
+		},
+		{
+			"kind": "class",
+			"name": "u-marginBlock-start0",
+			"replacement": "pr-u-marginBlock-start0",
+			"note": "The u- prefix is deprecated.",
+			"since": null,
+			"scope": "commons/utils"
+		},
+		{
+			"kind": "class",
+			"name": "u-marginBlock0",
+			"replacement": "pr-u-marginBlock0",
+			"note": "The u- prefix is deprecated.",
+			"since": null,
+			"scope": "commons/utils"
+		},
+		{
+			"kind": "class",
+			"name": "u-marginInline-end0",
+			"replacement": "pr-u-marginInline-end0",
+			"note": "The u- prefix is deprecated.",
+			"since": null,
+			"scope": "commons/utils"
+		},
+		{
+			"kind": "class",
+			"name": "u-marginInline-start0",
+			"replacement": "pr-u-marginInline-start0",
+			"note": "The u- prefix is deprecated.",
+			"since": null,
+			"scope": "commons/utils"
+		},
+		{
+			"kind": "class",
+			"name": "u-marginInline0",
+			"replacement": "pr-u-marginInline0",
+			"note": "The u- prefix is deprecated.",
+			"since": null,
+			"scope": "commons/utils"
+		},
+		{
+			"kind": "class",
+			"name": "u-mask",
+			"replacement": "pr-u-mask",
+			"note": "The u- prefix is deprecated.",
+			"since": null,
+			"scope": "commons/utils"
+		},
+		{
+			"kind": "class",
+			"name": "u-maxInlineSize100\\%",
+			"replacement": "pr-u-maxInlineSize100\\%",
+			"note": "The u- prefix is deprecated.",
+			"since": null,
+			"scope": "commons/utils"
+		},
+		{
+			"kind": "class",
+			"name": "u-maxInlineSizeFitContent",
+			"replacement": "pr-u-maxInlineSizeFitContent",
+			"note": "The u- prefix is deprecated.",
+			"since": null,
+			"scope": "commons/utils"
+		},
+		{
+			"kind": "class",
+			"name": "u-minBlockSize0",
+			"replacement": "pr-u-minBlockSize0",
+			"note": "The u- prefix is deprecated.",
+			"since": null,
+			"scope": "commons/utils"
+		},
+		{
+			"kind": "class",
+			"name": "u-minHeight0",
+			"replacement": "pr-u-minHeight0",
+			"note": "The u- prefix is deprecated.",
+			"since": null,
+			"scope": "commons/utils"
+		},
+		{
+			"kind": "class",
+			"name": "u-minInlineSize0",
+			"replacement": "pr-u-minInlineSize0",
+			"note": "The u- prefix is deprecated.",
+			"since": null,
+			"scope": "commons/utils"
+		},
+		{
+			"kind": "class",
+			"name": "u-minWidth0",
+			"replacement": "pr-u-minWidth0",
+			"note": "The u- prefix is deprecated.",
+			"since": null,
+			"scope": "commons/utils"
+		},
+		{
+			"kind": "class",
+			"name": "u-noSpinButtons",
+			"replacement": "pr-u-noSpinButtons",
+			"note": "The u- prefix is deprecated.",
+			"since": null,
+			"scope": "commons/utils"
+		},
+		{
+			"kind": "class",
+			"name": "u-onlyPrintDisplayBlock",
+			"replacement": "pr-u-onlyPrintDisplayBlock",
+			"note": "The u- prefix is deprecated.",
+			"since": null,
+			"scope": "commons/utils"
+		},
+		{
+			"kind": "class",
+			"name": "u-onlyPrintDisplayContents",
+			"replacement": "pr-u-onlyPrintDisplayContents",
+			"note": "The u- prefix is deprecated.",
+			"since": null,
+			"scope": "commons/utils"
+		},
+		{
+			"kind": "class",
+			"name": "u-onlyPrintDisplayFlex",
+			"replacement": "pr-u-onlyPrintDisplayFlex",
+			"note": "The u- prefix is deprecated.",
+			"since": null,
+			"scope": "commons/utils"
+		},
+		{
+			"kind": "class",
+			"name": "u-onlyPrintDisplayGrid",
+			"replacement": "pr-u-onlyPrintDisplayGrid",
+			"note": "The u- prefix is deprecated.",
+			"since": null,
+			"scope": "commons/utils"
+		},
+		{
+			"kind": "class",
+			"name": "u-onlyPrintDisplayInline",
+			"replacement": "pr-u-onlyPrintDisplayInline",
+			"note": "The u- prefix is deprecated.",
+			"since": null,
+			"scope": "commons/utils"
+		},
+		{
+			"kind": "class",
+			"name": "u-onlyPrintDisplayInlineBlock",
+			"replacement": "pr-u-onlyPrintDisplayInlineBlock",
+			"note": "The u- prefix is deprecated.",
+			"since": null,
+			"scope": "commons/utils"
+		},
+		{
+			"kind": "class",
+			"name": "u-onlyPrintDisplayInlineFlex",
+			"replacement": "pr-u-onlyPrintDisplayInlineFlex",
+			"note": "The u- prefix is deprecated.",
+			"since": null,
+			"scope": "commons/utils"
+		},
+		{
+			"kind": "class",
+			"name": "u-onlyPrintDisplayInlineGrid",
+			"replacement": "pr-u-onlyPrintDisplayInlineGrid",
+			"note": "The u- prefix is deprecated.",
+			"since": null,
+			"scope": "commons/utils"
+		},
+		{
+			"kind": "class",
+			"name": "u-onlyPrintDisplayNone",
+			"replacement": "pr-u-onlyPrintDisplayNone",
+			"note": "The u- prefix is deprecated.",
+			"since": null,
+			"scope": "commons/utils"
+		},
+		{
+			"kind": "class",
+			"name": "u-order1",
+			"replacement": "pr-u-order1",
+			"note": "The u- prefix is deprecated.",
+			"since": null,
+			"scope": "commons/utils"
+		},
+		{
+			"kind": "class",
+			"name": "u-orderMinus1",
+			"replacement": "pr-u-orderMinus1",
+			"note": "The u- prefix is deprecated.",
+			"since": null,
+			"scope": "commons/utils"
+		},
+		{
+			"kind": "class",
+			"name": "u-overflowAuto",
+			"replacement": "pr-u-overflowAuto",
+			"note": "The u- prefix is deprecated.",
+			"since": null,
+			"scope": "commons/utils"
+		},
+		{
+			"kind": "class",
+			"name": "u-overflowHidden",
+			"replacement": "pr-u-overflowHidden",
+			"note": "The u- prefix is deprecated.",
+			"since": null,
+			"scope": "commons/utils"
+		},
+		{
+			"kind": "class",
+			"name": "u-overflowScroll",
+			"replacement": "pr-u-overflowScroll",
+			"note": "The u- prefix is deprecated.",
+			"since": null,
+			"scope": "commons/utils"
+		},
+		{
+			"kind": "class",
+			"name": "u-overflowVisible",
+			"replacement": "pr-u-overflowVisible",
+			"note": "The u- prefix is deprecated.",
+			"since": null,
+			"scope": "commons/utils"
+		},
+		{
+			"kind": "class",
+			"name": "u-paddingBlock-end0",
+			"replacement": "pr-u-paddingBlock-end0",
+			"note": "The u- prefix is deprecated.",
+			"since": null,
+			"scope": "commons/utils"
+		},
+		{
+			"kind": "class",
+			"name": "u-paddingBlock-start0",
+			"replacement": "pr-u-paddingBlock-start0",
+			"note": "The u- prefix is deprecated.",
+			"since": null,
+			"scope": "commons/utils"
+		},
+		{
+			"kind": "class",
+			"name": "u-paddingBlock0",
+			"replacement": "pr-u-paddingBlock0",
+			"note": "The u- prefix is deprecated.",
+			"since": null,
+			"scope": "commons/utils"
+		},
+		{
+			"kind": "class",
+			"name": "u-paddingInline-end0",
+			"replacement": "pr-u-paddingInline-end0",
+			"note": "The u- prefix is deprecated.",
+			"since": null,
+			"scope": "commons/utils"
+		},
+		{
+			"kind": "class",
+			"name": "u-paddingInline-start0",
+			"replacement": "pr-u-paddingInline-start0",
+			"note": "The u- prefix is deprecated.",
+			"since": null,
+			"scope": "commons/utils"
+		},
+		{
+			"kind": "class",
+			"name": "u-paddingInline0",
+			"replacement": "pr-u-paddingInline0",
+			"note": "The u- prefix is deprecated.",
+			"since": null,
+			"scope": "commons/utils"
+		},
+		{
+			"kind": "class",
+			"name": "u-pointerEventsAuto",
+			"replacement": "pr-u-pointerEventsAuto",
+			"note": "The u- prefix is deprecated.",
+			"since": null,
+			"scope": "commons/utils"
+		},
+		{
+			"kind": "class",
+			"name": "u-pointerEventsNone",
+			"replacement": "pr-u-pointerEventsNone",
+			"note": "The u- prefix is deprecated.",
+			"since": null,
+			"scope": "commons/utils"
+		},
+		{
+			"kind": "class",
+			"name": "u-positionAbsolute",
+			"replacement": "pr-u-positionAbsolute",
+			"note": "The u- prefix is deprecated.",
+			"since": null,
+			"scope": "commons/utils"
+		},
+		{
+			"kind": "class",
+			"name": "u-positionFixed",
+			"replacement": "pr-u-positionFixed",
+			"note": "The u- prefix is deprecated.",
+			"since": null,
+			"scope": "commons/utils"
+		},
+		{
+			"kind": "class",
+			"name": "u-positionRelative",
+			"replacement": "pr-u-positionRelative",
+			"note": "The u- prefix is deprecated.",
+			"since": null,
+			"scope": "commons/utils"
+		},
+		{
+			"kind": "class",
+			"name": "u-positionStatic",
+			"replacement": "pr-u-positionStatic",
+			"note": "The u- prefix is deprecated.",
+			"since": null,
+			"scope": "commons/utils"
+		},
+		{
+			"kind": "class",
+			"name": "u-positionSticky",
+			"replacement": "pr-u-positionSticky",
+			"note": "The u- prefix is deprecated.",
+			"since": null,
+			"scope": "commons/utils"
+		},
+		{
+			"kind": "class",
+			"name": "u-right0",
+			"replacement": "pr-u-insetInlineEnd0",
+			"note": "The u- prefix is deprecated.",
+			"since": null,
+			"scope": "commons/utils"
+		},
+		{
+			"kind": "class",
+			"name": "u-rightReset",
+			"replacement": "pr-u-insetInlineEnd0",
+			"note": "The u- prefix is deprecated.",
+			"since": null,
+			"scope": "commons/utils"
+		},
+		{
+			"kind": "class",
+			"name": "u-scrollBehaviorAuto",
+			"replacement": "pr-u-scrollBehaviorAuto",
+			"note": "The u- prefix is deprecated.",
+			"since": null,
+			"scope": "commons/utils"
+		},
+		{
+			"kind": "class",
+			"name": "u-scrollBehaviorSmooth",
+			"replacement": "pr-u-scrollBehaviorSmooth",
+			"note": "The u- prefix is deprecated.",
+			"since": null,
+			"scope": "commons/utils"
+		},
+		{
+			"kind": "class",
+			"name": "u-summaryReset",
+			"replacement": "pr-u-summaryReset",
+			"note": "The u- prefix is deprecated.",
+			"since": null,
+			"scope": "commons/utils"
+		},
+		{
+			"kind": "class",
+			"name": "u-textAlignCenter",
+			"replacement": "pr-u-textAlignCenter",
+			"note": "The u- prefix is deprecated.",
+			"since": null,
+			"scope": "commons/utils"
+		},
+		{
+			"kind": "class",
+			"name": "u-textAlignEnd",
+			"replacement": "pr-u-textAlignEnd",
+			"note": "The u- prefix is deprecated.",
+			"since": null,
+			"scope": "commons/utils"
+		},
+		{
+			"kind": "class",
+			"name": "u-textAlignLeft",
+			"replacement": "pr-u-textAlignStart",
+			"note": "The u- prefix is deprecated.",
+			"since": null,
+			"scope": "commons/utils"
+		},
+		{
+			"kind": "class",
+			"name": "u-textAlignRight",
+			"replacement": "pr-u-textAlignEnd",
+			"note": "The u- prefix is deprecated.",
+			"since": null,
+			"scope": "commons/utils"
+		},
+		{
+			"kind": "class",
+			"name": "u-textAlignStart",
+			"replacement": "pr-u-textAlignStart",
+			"note": "The u- prefix is deprecated.",
+			"since": null,
+			"scope": "commons/utils"
+		},
+		{
+			"kind": "class",
+			"name": "u-textBlueberry",
+			"replacement": "pr-u-colorTextBlueberry",
+			"note": "The u- prefix is deprecated.",
+			"since": null,
+			"scope": "commons/utils"
+		},
+		{
+			"kind": "class",
+			"name": "u-textBrand",
+			"replacement": "pr-u-colorTextBrand",
+			"note": "The u- prefix is deprecated.",
+			"since": null,
+			"scope": "commons/utils"
+		},
+		{
+			"kind": "class",
+			"name": "u-textBrandContrasted",
+			"replacement": "pr-u-colorTextBrandContrasted",
+			"note": "The u- prefix is deprecated.",
+			"since": null,
+			"scope": "commons/utils"
+		},
+		{
+			"kind": "class",
+			"name": "u-textCc",
+			"replacement": "pr-u-colorTextCc",
+			"note": "The u- prefix is deprecated.",
+			"since": null,
+			"scope": "commons/utils"
+		},
+		{
+			"kind": "class",
+			"name": "u-textCenter",
+			"replacement": "pr-u-textAlignCenter",
+			"note": "The u- prefix is deprecated.",
+			"since": null,
+			"scope": "commons/utils"
+		},
+		{
+			"kind": "class",
+			"name": "u-textCleemy",
+			"replacement": "pr-u-colorTextCleemy",
+			"note": "The u- prefix is deprecated.",
+			"since": null,
+			"scope": "commons/utils"
+		},
+		{
+			"kind": "class",
+			"name": "u-textCoreHR",
+			"replacement": "pr-u-colorTextCoreHR",
+			"note": "The u- prefix is deprecated.",
+			"since": null,
+			"scope": "commons/utils"
+		},
+		{
+			"kind": "class",
+			"name": "u-textCritical",
+			"replacement": "pr-u-colorTextCritical",
+			"note": "The u- prefix is deprecated.",
+			"since": null,
+			"scope": "commons/utils"
+		},
+		{
+			"kind": "class",
+			"name": "u-textCucumber",
+			"replacement": "pr-u-colorTextCucumber",
+			"note": "The u- prefix is deprecated.",
+			"since": null,
+			"scope": "commons/utils"
+		},
+		{
+			"kind": "class",
+			"name": "u-textDecorationLineThrough",
+			"replacement": "pr-u-textDecorationLineThrough",
+			"note": "The u- prefix is deprecated.",
+			"since": null,
+			"scope": "commons/utils"
+		},
+		{
+			"kind": "class",
+			"name": "u-textDecorationNone",
+			"replacement": "pr-u-textDecorationNone",
+			"note": "The u- prefix is deprecated.",
+			"since": null,
+			"scope": "commons/utils"
+		},
+		{
+			"kind": "class",
+			"name": "u-textDecorationUnderline",
+			"replacement": "pr-u-textDecorationUnderline",
+			"note": "The u- prefix is deprecated.",
+			"since": null,
+			"scope": "commons/utils"
+		},
+		{
+			"kind": "class",
+			"name": "u-textDefault",
+			"replacement": null,
+			"note": "The u- prefix is deprecated.",
+			"since": null,
+			"scope": "commons/utils"
+		},
+		{
+			"kind": "class",
+			"name": "u-textError",
+			"replacement": "pr-u-colorTextError",
+			"note": "The u- prefix is deprecated.",
+			"since": null,
+			"scope": "commons/utils"
+		},
+		{
+			"kind": "class",
+			"name": "u-textGlacier",
+			"replacement": "pr-u-colorTextGlacier",
+			"note": "The u- prefix is deprecated.",
+			"since": null,
+			"scope": "commons/utils"
+		},
+		{
+			"kind": "class",
+			"name": "u-textGrape",
+			"replacement": "pr-u-colorTextGrape",
+			"note": "The u- prefix is deprecated.",
+			"since": null,
+			"scope": "commons/utils"
+		},
+		{
+			"kind": "class",
+			"name": "u-textGrey",
+			"replacement": "pr-u-colorTextGrey",
+			"note": "The u- prefix is deprecated.",
+			"since": null,
+			"scope": "commons/utils"
+		},
+		{
+			"kind": "class",
+			"name": "u-textKiwi",
+			"replacement": "pr-u-colorTextKiwi",
+			"note": "The u- prefix is deprecated.",
+			"since": null,
+			"scope": "commons/utils"
+		},
+		{
+			"kind": "class",
+			"name": "u-textL",
+			"replacement": null,
+			"note": "The u- prefix is deprecated; use typography utilities (pr-u-body*, pr-u-h*) instead.",
+			"since": null,
+			"scope": "commons/utils"
+		},
+		{
+			"kind": "class",
+			"name": "u-textLagoon",
+			"replacement": "pr-u-colorTextLagoon",
+			"note": "The u- prefix is deprecated.",
+			"since": null,
+			"scope": "commons/utils"
+		},
+		{
+			"kind": "class",
+			"name": "u-textLavender",
+			"replacement": "pr-u-colorTextLavender",
+			"note": "The u- prefix is deprecated.",
+			"since": null,
+			"scope": "commons/utils"
+		},
+		{
+			"kind": "class",
+			"name": "u-textLeft",
+			"replacement": "pr-u-textAlignStart",
+			"note": "The u- prefix is deprecated.",
+			"since": null,
+			"scope": "commons/utils"
+		},
+		{
+			"kind": "class",
+			"name": "u-textLight",
+			"replacement": null,
+			"note": "The u- prefix is deprecated.",
+			"since": null,
+			"scope": "commons/utils"
+		},
+		{
+			"kind": "class",
+			"name": "u-textLime",
+			"replacement": "pr-u-colorTextLime",
+			"note": "The u- prefix is deprecated.",
+			"since": null,
+			"scope": "commons/utils"
+		},
+		{
+			"kind": "class",
+			"name": "u-textLucca",
+			"replacement": "pr-u-colorTextLucca",
+			"note": "The u- prefix is deprecated.",
+			"since": null,
+			"scope": "commons/utils"
+		},
+		{
+			"kind": "class",
+			"name": "u-textM",
+			"replacement": null,
+			"note": "The u- prefix is deprecated; use typography utilities (pr-u-body*, pr-u-h*) instead.",
+			"since": null,
+			"scope": "commons/utils"
+		},
+		{
+			"kind": "class",
+			"name": "u-textMint",
+			"replacement": "pr-u-colorTextMint",
+			"note": "The u- prefix is deprecated.",
+			"since": null,
+			"scope": "commons/utils"
+		},
+		{
+			"kind": "class",
+			"name": "u-textNavigation",
+			"replacement": "pr-u-colorTextNavigation",
+			"note": "The u- prefix is deprecated.",
+			"since": null,
+			"scope": "commons/utils"
+		},
+		{
+			"kind": "class",
+			"name": "u-textNeutral",
+			"replacement": "pr-u-colorTextNeutral",
+			"note": "The u- prefix is deprecated.",
+			"since": null,
+			"scope": "commons/utils"
+		},
+		{
+			"kind": "class",
+			"name": "u-textOrchid",
+			"replacement": "pr-u-colorTextOrchid",
+			"note": "The u- prefix is deprecated.",
+			"since": null,
+			"scope": "commons/utils"
+		},
+		{
+			"kind": "class",
+			"name": "u-textPagga",
+			"replacement": "pr-u-colorTextPagga",
+			"note": "The u- prefix is deprecated.",
+			"since": null,
+			"scope": "commons/utils"
+		},
+		{
+			"kind": "class",
+			"name": "u-textPineapple",
+			"replacement": "pr-u-colorTextPineapple",
+			"note": "The u- prefix is deprecated.",
+			"since": null,
+			"scope": "commons/utils"
+		},
+		{
+			"kind": "class",
+			"name": "u-textPineappleContrasted",
+			"replacement": "pr-u-colorTextPineappleContrasted",
+			"note": "The u- prefix is deprecated.",
+			"since": null,
+			"scope": "commons/utils"
+		},
+		{
+			"kind": "class",
+			"name": "u-textPlaceholder",
+			"replacement": "pr-u-colorInputTextPlaceholder",
+			"note": "The u- prefix is deprecated.",
+			"since": null,
+			"scope": "commons/utils"
+		},
+		{
+			"kind": "class",
+			"name": "u-textPoplee",
+			"replacement": "pr-u-colorTextPoplee",
+			"note": "The u- prefix is deprecated.",
+			"since": null,
+			"scope": "commons/utils"
+		},
+		{
+			"kind": "class",
+			"name": "u-textPrimary",
+			"replacement": "pr-u-colorTextPrimary",
+			"note": "The u- prefix is deprecated.",
+			"since": null,
+			"scope": "commons/utils"
+		},
+		{
+			"kind": "class",
+			"name": "u-textProduct",
+			"replacement": "pr-u-colorTextProduct",
+			"note": "The u- prefix is deprecated.",
+			"since": null,
+			"scope": "commons/utils"
+		},
+		{
+			"kind": "class",
+			"name": "u-textPumpkin",
+			"replacement": "pr-u-colorTextPumpkin",
+			"note": "The u- prefix is deprecated.",
+			"since": null,
+			"scope": "commons/utils"
+		},
+		{
+			"kind": "class",
+			"name": "u-textRight",
+			"replacement": "pr-u-textAlignEnd",
+			"note": "The u- prefix is deprecated.",
+			"since": null,
+			"scope": "commons/utils"
+		},
+		{
+			"kind": "class",
+			"name": "u-textS",
+			"replacement": null,
+			"note": "The u- prefix is deprecated; use typography utilities (pr-u-body*, pr-u-h*) instead.",
+			"since": null,
+			"scope": "commons/utils"
+		},
+		{
+			"kind": "class",
+			"name": "u-textSecondary",
+			"replacement": "pr-u-colorTextSecondary",
+			"note": "The u- prefix is deprecated.",
+			"since": null,
+			"scope": "commons/utils"
+		},
+		{
+			"kind": "class",
+			"name": "u-textSuccess",
+			"replacement": "pr-u-colorTextSuccess",
+			"note": "The u- prefix is deprecated.",
+			"since": null,
+			"scope": "commons/utils"
+		},
+		{
+			"kind": "class",
+			"name": "u-textSuccessContrasted",
+			"replacement": "pr-u-colorTextSuccessContrasted",
+			"note": "The u- prefix is deprecated.",
+			"since": null,
+			"scope": "commons/utils"
+		},
+		{
+			"kind": "class",
+			"name": "u-textTimmi",
+			"replacement": "pr-u-colorTextTimmi",
+			"note": "The u- prefix is deprecated.",
+			"since": null,
+			"scope": "commons/utils"
+		},
+		{
+			"kind": "class",
+			"name": "u-textWarning",
+			"replacement": "pr-u-colorTextWarning",
+			"note": "The u- prefix is deprecated.",
+			"since": null,
+			"scope": "commons/utils"
+		},
+		{
+			"kind": "class",
+			"name": "u-textWarningContrasted",
+			"replacement": "pr-u-colorTextWarningContrasted",
+			"note": "The u- prefix is deprecated.",
+			"since": null,
+			"scope": "commons/utils"
+		},
+		{
+			"kind": "class",
+			"name": "u-textWatermelon",
+			"replacement": "pr-u-colorTextWatermelon",
+			"note": "The u- prefix is deprecated.",
+			"since": null,
+			"scope": "commons/utils"
+		},
+		{
+			"kind": "class",
+			"name": "u-textXL",
+			"replacement": null,
+			"note": "The u- prefix is deprecated; use typography utilities (pr-u-body*, pr-u-h*) instead.",
+			"since": null,
+			"scope": "commons/utils"
+		},
+		{
+			"kind": "class",
+			"name": "u-textXS",
+			"replacement": null,
+			"note": "The u- prefix is deprecated; use typography utilities (pr-u-body*, pr-u-h*) instead.",
+			"since": null,
+			"scope": "commons/utils"
+		},
+		{
+			"kind": "class",
+			"name": "u-textXXL",
+			"replacement": null,
+			"note": "The u- prefix is deprecated; use typography utilities (pr-u-body*, pr-u-h*) instead.",
+			"since": null,
+			"scope": "commons/utils"
+		},
+		{
+			"kind": "class",
+			"name": "u-textXXXL",
+			"replacement": null,
+			"note": "The u- prefix is deprecated; use typography utilities (pr-u-body*, pr-u-h*) instead.",
+			"since": null,
+			"scope": "commons/utils"
+		},
+		{
+			"kind": "class",
+			"name": "u-top0",
+			"replacement": "pr-u-insetBlockStart0",
+			"note": "The u- prefix is deprecated.",
+			"since": null,
+			"scope": "commons/utils"
+		},
+		{
+			"kind": "class",
+			"name": "u-topReset",
+			"replacement": "pr-u-insetBlockStart0",
+			"note": "The u- prefix is deprecated.",
+			"since": null,
+			"scope": "commons/utils"
+		},
+		{
+			"kind": "class",
+			"name": "u-verticalAlignBaseline",
+			"replacement": "pr-u-verticalAlignBaseline",
+			"note": "The u- prefix is deprecated.",
+			"since": null,
+			"scope": "commons/utils"
+		},
+		{
+			"kind": "class",
+			"name": "u-verticalAlignBottom",
+			"replacement": "pr-u-verticalAlignBottom",
+			"note": "The u- prefix is deprecated.",
+			"since": null,
+			"scope": "commons/utils"
+		},
+		{
+			"kind": "class",
+			"name": "u-verticalAlignMiddle",
+			"replacement": "pr-u-verticalAlignMiddle",
+			"note": "The u- prefix is deprecated.",
+			"since": null,
+			"scope": "commons/utils"
+		},
+		{
+			"kind": "class",
+			"name": "u-verticalAlignSub",
+			"replacement": "pr-u-verticalAlignSub",
+			"note": "The u- prefix is deprecated.",
+			"since": null,
+			"scope": "commons/utils"
+		},
+		{
+			"kind": "class",
+			"name": "u-verticalAlignSuper",
+			"replacement": "pr-u-verticalAlignSuper",
+			"note": "The u- prefix is deprecated.",
+			"since": null,
+			"scope": "commons/utils"
+		},
+		{
+			"kind": "class",
+			"name": "u-verticalAlignTextBottom",
+			"replacement": "pr-u-verticalAlignTextBottom",
+			"note": "The u- prefix is deprecated.",
+			"since": null,
+			"scope": "commons/utils"
+		},
+		{
+			"kind": "class",
+			"name": "u-verticalAlignTextTop",
+			"replacement": "pr-u-verticalAlignTextTop",
+			"note": "The u- prefix is deprecated.",
+			"since": null,
+			"scope": "commons/utils"
+		},
+		{
+			"kind": "class",
+			"name": "u-verticalAlignTop",
+			"replacement": "pr-u-verticalAlignTop",
+			"note": "The u- prefix is deprecated.",
+			"since": null,
+			"scope": "commons/utils"
+		},
+		{
+			"kind": "class",
+			"name": "u-visibilityCollapse",
+			"replacement": "pr-u-visibilityCollapse",
+			"note": "The u- prefix is deprecated.",
+			"since": null,
+			"scope": "commons/utils"
+		},
+		{
+			"kind": "class",
+			"name": "u-visibilityHidden",
+			"replacement": "pr-u-visibilityHidden",
+			"note": "The u- prefix is deprecated.",
+			"since": null,
+			"scope": "commons/utils"
+		},
+		{
+			"kind": "class",
+			"name": "u-visibilityVisible",
+			"replacement": "pr-u-visibilityVisible",
+			"note": "The u- prefix is deprecated.",
+			"since": null,
+			"scope": "commons/utils"
+		},
+		{
+			"kind": "class",
+			"name": "u-whiteSpaceNormal",
+			"replacement": "pr-u-whiteSpaceNormal",
+			"note": "The u- prefix is deprecated.",
+			"since": null,
+			"scope": "commons/utils"
+		},
+		{
+			"kind": "class",
+			"name": "u-whiteSpaceNowrap",
+			"replacement": "pr-u-whiteSpaceNowrap",
+			"note": "The u- prefix is deprecated.",
+			"since": null,
+			"scope": "commons/utils"
+		},
+		{
+			"kind": "class",
+			"name": "u-whiteSpacePreLine",
+			"replacement": "pr-u-whiteSpacePreLine",
+			"note": "The u- prefix is deprecated.",
+			"since": null,
+			"scope": "commons/utils"
+		},
+		{
+			"kind": "class",
+			"name": "u-width100\\%",
+			"replacement": "pr-u-width100\\%",
+			"note": "The u- prefix is deprecated.",
+			"since": null,
+			"scope": "commons/utils"
+		},
+		{
+			"kind": "class",
+			"name": "u-widthFitContent",
+			"replacement": "pr-u-widthFitContent",
+			"note": "The u- prefix is deprecated.",
+			"since": null,
+			"scope": "commons/utils"
+		},
+		{
+			"kind": "class",
+			"name": "u-prefersContrastMore",
+			"replacement": "pr-u-prefersContrastMore",
+			"note": "The u- prefix is deprecated.",
+			"since": null,
+			"scope": "commons/vars"
+		},
+		{
+			"kind": "css-variable",
+			"name": "--colors-black-color",
+			"replacement": null,
+			"note": "Use palette custom properties (--palettes-*) instead.",
+			"since": null,
+			"scope": "commons/vars"
+		},
+		{
+			"kind": "css-variable",
+			"name": "--colors-grey-400-rgb",
+			"replacement": null,
+			"note": "Use palette custom properties (--palettes-*) instead.",
+			"since": null,
+			"scope": "commons/vars"
+		},
+		{
+			"kind": "css-variable",
+			"name": "--colors-grey-900-rgb",
+			"replacement": null,
+			"note": "Use palette custom properties (--palettes-*) instead.",
+			"since": null,
+			"scope": "commons/vars"
+		},
+		{
+			"kind": "css-variable",
+			"name": "--colors-neutral-400-rgb",
+			"replacement": null,
+			"note": "Use palette custom properties (--palettes-*) instead.",
+			"since": null,
+			"scope": "commons/vars"
+		},
+		{
+			"kind": "css-variable",
+			"name": "--colors-neutral-900-rgb",
+			"replacement": null,
+			"note": "Use palette custom properties (--palettes-*) instead.",
+			"since": null,
+			"scope": "commons/vars"
+		},
+		{
+			"kind": "css-variable",
+			"name": "--colors-white-color",
+			"replacement": null,
+			"note": "Use palette custom properties (--palettes-*) instead.",
+			"since": null,
+			"scope": "commons/vars"
+		},
+		{
+			"kind": "css-variable",
+			"name": "--colors-white-rgb",
+			"replacement": null,
+			"note": "Use palette custom properties (--palettes-*) instead.",
+			"since": null,
+			"scope": "commons/vars"
+		},
+		{
+			"kind": "css-variable",
+			"name": "--commons-background-base",
+			"replacement": "--pr-t-elevation-surface-default",
+			"note": null,
+			"since": null,
+			"scope": "commons/vars"
+		},
+		{
+			"kind": "css-variable",
+			"name": "--commons-divider-color",
+			"replacement": null,
+			"note": "Use --palettes-neutral-200 instead.",
+			"since": null,
+			"scope": "commons/vars"
+		},
+		{
+			"kind": "css-variable",
+			"name": "--commons-font-family",
+			"replacement": "--pr-t-font-family",
+			"note": null,
+			"since": null,
+			"scope": "commons/vars"
+		},
+		{
+			"kind": "css-variable",
+			"name": "--commons-font-family-brand",
+			"replacement": "--pr-t-font-family-brand",
+			"note": null,
+			"since": null,
+			"scope": "commons/vars"
+		},
+		{
+			"kind": "css-variable",
+			"name": "--commons-font-family-cursive",
+			"replacement": "--pr-t-font-family-cursive",
+			"note": null,
+			"since": null,
+			"scope": "commons/vars"
+		},
+		{
+			"kind": "css-variable",
+			"name": "--palettes-blueberry-text",
+			"replacement": null,
+			"note": null,
+			"since": null,
+			"scope": "commons/vars"
+		},
+		{
+			"kind": "css-variable",
+			"name": "--palettes-brand-text",
+			"replacement": null,
+			"note": null,
+			"since": null,
+			"scope": "commons/vars"
+		},
+		{
+			"kind": "css-variable",
+			"name": "--palettes-brandContrasted-text",
+			"replacement": null,
+			"note": null,
+			"since": null,
+			"scope": "commons/vars"
+		},
+		{
+			"kind": "css-variable",
+			"name": "--palettes-cc-text",
+			"replacement": null,
+			"note": null,
+			"since": null,
+			"scope": "commons/vars"
+		},
+		{
+			"kind": "css-variable",
+			"name": "--palettes-cleemy-text",
+			"replacement": null,
+			"note": null,
+			"since": null,
+			"scope": "commons/vars"
+		},
+		{
+			"kind": "css-variable",
+			"name": "--palettes-coreHR-text",
+			"replacement": null,
+			"note": null,
+			"since": null,
+			"scope": "commons/vars"
+		},
+		{
+			"kind": "css-variable",
+			"name": "--palettes-critical-text",
+			"replacement": null,
+			"note": null,
+			"since": null,
+			"scope": "commons/vars"
+		},
+		{
+			"kind": "css-variable",
+			"name": "--palettes-cucumber-text",
+			"replacement": null,
+			"note": null,
+			"since": null,
+			"scope": "commons/vars"
+		},
+		{
+			"kind": "css-variable",
+			"name": "--palettes-error-text",
+			"replacement": null,
+			"note": null,
+			"since": null,
+			"scope": "commons/vars"
+		},
+		{
+			"kind": "css-variable",
+			"name": "--palettes-glacier-text",
+			"replacement": null,
+			"note": null,
+			"since": null,
+			"scope": "commons/vars"
+		},
+		{
+			"kind": "css-variable",
+			"name": "--palettes-grape-text",
+			"replacement": null,
+			"note": null,
+			"since": null,
+			"scope": "commons/vars"
+		},
+		{
+			"kind": "css-variable",
+			"name": "--palettes-grey-0",
+			"replacement": null,
+			"note": null,
+			"since": null,
+			"scope": "commons/vars"
+		},
+		{
+			"kind": "css-variable",
+			"name": "--palettes-grey-100",
+			"replacement": null,
+			"note": null,
+			"since": null,
+			"scope": "commons/vars"
+		},
+		{
+			"kind": "css-variable",
+			"name": "--palettes-grey-200",
+			"replacement": null,
+			"note": null,
+			"since": null,
+			"scope": "commons/vars"
+		},
+		{
+			"kind": "css-variable",
+			"name": "--palettes-grey-25",
+			"replacement": null,
+			"note": null,
+			"since": null,
+			"scope": "commons/vars"
+		},
+		{
+			"kind": "css-variable",
+			"name": "--palettes-grey-300",
+			"replacement": null,
+			"note": null,
+			"since": null,
+			"scope": "commons/vars"
+		},
+		{
+			"kind": "css-variable",
+			"name": "--palettes-grey-400",
+			"replacement": null,
+			"note": null,
+			"since": null,
+			"scope": "commons/vars"
+		},
+		{
+			"kind": "css-variable",
+			"name": "--palettes-grey-50",
+			"replacement": null,
+			"note": null,
+			"since": null,
+			"scope": "commons/vars"
+		},
+		{
+			"kind": "css-variable",
+			"name": "--palettes-grey-500",
+			"replacement": null,
+			"note": null,
+			"since": null,
+			"scope": "commons/vars"
+		},
+		{
+			"kind": "css-variable",
+			"name": "--palettes-grey-600",
+			"replacement": null,
+			"note": null,
+			"since": null,
+			"scope": "commons/vars"
+		},
+		{
+			"kind": "css-variable",
+			"name": "--palettes-grey-700",
+			"replacement": null,
+			"note": null,
+			"since": null,
+			"scope": "commons/vars"
+		},
+		{
+			"kind": "css-variable",
+			"name": "--palettes-grey-800",
+			"replacement": null,
+			"note": null,
+			"since": null,
+			"scope": "commons/vars"
+		},
+		{
+			"kind": "css-variable",
+			"name": "--palettes-grey-900",
+			"replacement": null,
+			"note": null,
+			"since": null,
+			"scope": "commons/vars"
+		},
+		{
+			"kind": "css-variable",
+			"name": "--palettes-grey-text",
+			"replacement": null,
+			"note": null,
+			"since": null,
+			"scope": "commons/vars"
+		},
+		{
+			"kind": "css-variable",
+			"name": "--palettes-kiwi-text",
+			"replacement": null,
+			"note": null,
+			"since": null,
+			"scope": "commons/vars"
+		},
+		{
+			"kind": "css-variable",
+			"name": "--palettes-lagoon-text",
+			"replacement": null,
+			"note": null,
+			"since": null,
+			"scope": "commons/vars"
+		},
+		{
+			"kind": "css-variable",
+			"name": "--palettes-lavender-text",
+			"replacement": null,
+			"note": null,
+			"since": null,
+			"scope": "commons/vars"
+		},
+		{
+			"kind": "css-variable",
+			"name": "--palettes-lime-text",
+			"replacement": null,
+			"note": null,
+			"since": null,
+			"scope": "commons/vars"
+		},
+		{
+			"kind": "css-variable",
+			"name": "--palettes-lucca-0",
+			"replacement": null,
+			"note": null,
+			"since": null,
+			"scope": "commons/vars"
+		},
+		{
+			"kind": "css-variable",
+			"name": "--palettes-lucca-100",
+			"replacement": null,
+			"note": null,
+			"since": null,
+			"scope": "commons/vars"
+		},
+		{
+			"kind": "css-variable",
+			"name": "--palettes-lucca-200",
+			"replacement": null,
+			"note": null,
+			"since": null,
+			"scope": "commons/vars"
+		},
+		{
+			"kind": "css-variable",
+			"name": "--palettes-lucca-300",
+			"replacement": null,
+			"note": null,
+			"since": null,
+			"scope": "commons/vars"
+		},
+		{
+			"kind": "css-variable",
+			"name": "--palettes-lucca-400",
+			"replacement": null,
+			"note": null,
+			"since": null,
+			"scope": "commons/vars"
+		},
+		{
+			"kind": "css-variable",
+			"name": "--palettes-lucca-50",
+			"replacement": null,
+			"note": null,
+			"since": null,
+			"scope": "commons/vars"
+		},
+		{
+			"kind": "css-variable",
+			"name": "--palettes-lucca-500",
+			"replacement": null,
+			"note": null,
+			"since": null,
+			"scope": "commons/vars"
+		},
+		{
+			"kind": "css-variable",
+			"name": "--palettes-lucca-600",
+			"replacement": null,
+			"note": null,
+			"since": null,
+			"scope": "commons/vars"
+		},
+		{
+			"kind": "css-variable",
+			"name": "--palettes-lucca-700",
+			"replacement": null,
+			"note": null,
+			"since": null,
+			"scope": "commons/vars"
+		},
+		{
+			"kind": "css-variable",
+			"name": "--palettes-lucca-800",
+			"replacement": null,
+			"note": null,
+			"since": null,
+			"scope": "commons/vars"
+		},
+		{
+			"kind": "css-variable",
+			"name": "--palettes-lucca-900",
+			"replacement": null,
+			"note": null,
+			"since": null,
+			"scope": "commons/vars"
+		},
+		{
+			"kind": "css-variable",
+			"name": "--palettes-lucca-text",
+			"replacement": null,
+			"note": null,
+			"since": null,
+			"scope": "commons/vars"
+		},
+		{
+			"kind": "css-variable",
+			"name": "--palettes-mint-text",
+			"replacement": null,
+			"note": null,
+			"since": null,
+			"scope": "commons/vars"
+		},
+		{
+			"kind": "css-variable",
+			"name": "--palettes-navigation-text",
+			"replacement": null,
+			"note": null,
+			"since": null,
+			"scope": "commons/vars"
+		},
+		{
+			"kind": "css-variable",
+			"name": "--palettes-neutral-text",
+			"replacement": null,
+			"note": null,
+			"since": null,
+			"scope": "commons/vars"
+		},
+		{
+			"kind": "css-variable",
+			"name": "--palettes-orchid-text",
+			"replacement": null,
+			"note": null,
+			"since": null,
+			"scope": "commons/vars"
+		},
+		{
+			"kind": "css-variable",
+			"name": "--palettes-pagga-text",
+			"replacement": null,
+			"note": null,
+			"since": null,
+			"scope": "commons/vars"
+		},
+		{
+			"kind": "css-variable",
+			"name": "--palettes-pineapple-text",
+			"replacement": null,
+			"note": null,
+			"since": null,
+			"scope": "commons/vars"
+		},
+		{
+			"kind": "css-variable",
+			"name": "--palettes-pineappleContrasted-text",
+			"replacement": null,
+			"note": null,
+			"since": null,
+			"scope": "commons/vars"
+		},
+		{
+			"kind": "css-variable",
+			"name": "--palettes-poplee-text",
+			"replacement": null,
+			"note": null,
+			"since": null,
+			"scope": "commons/vars"
+		},
+		{
+			"kind": "css-variable",
+			"name": "--palettes-primary-0",
+			"replacement": null,
+			"note": null,
+			"since": null,
+			"scope": "commons/vars"
+		},
+		{
+			"kind": "css-variable",
+			"name": "--palettes-primary-100",
+			"replacement": null,
+			"note": null,
+			"since": null,
+			"scope": "commons/vars"
+		},
+		{
+			"kind": "css-variable",
+			"name": "--palettes-primary-200",
+			"replacement": null,
+			"note": null,
+			"since": null,
+			"scope": "commons/vars"
+		},
+		{
+			"kind": "css-variable",
+			"name": "--palettes-primary-300",
+			"replacement": null,
+			"note": null,
+			"since": null,
+			"scope": "commons/vars"
+		},
+		{
+			"kind": "css-variable",
+			"name": "--palettes-primary-400",
+			"replacement": null,
+			"note": null,
+			"since": null,
+			"scope": "commons/vars"
+		},
+		{
+			"kind": "css-variable",
+			"name": "--palettes-primary-50",
+			"replacement": null,
+			"note": null,
+			"since": null,
+			"scope": "commons/vars"
+		},
+		{
+			"kind": "css-variable",
+			"name": "--palettes-primary-500",
+			"replacement": null,
+			"note": null,
+			"since": null,
+			"scope": "commons/vars"
+		},
+		{
+			"kind": "css-variable",
+			"name": "--palettes-primary-600",
+			"replacement": null,
+			"note": null,
+			"since": null,
+			"scope": "commons/vars"
+		},
+		{
+			"kind": "css-variable",
+			"name": "--palettes-primary-700",
+			"replacement": null,
+			"note": null,
+			"since": null,
+			"scope": "commons/vars"
+		},
+		{
+			"kind": "css-variable",
+			"name": "--palettes-primary-800",
+			"replacement": null,
+			"note": null,
+			"since": null,
+			"scope": "commons/vars"
+		},
+		{
+			"kind": "css-variable",
+			"name": "--palettes-primary-900",
+			"replacement": null,
+			"note": null,
+			"since": null,
+			"scope": "commons/vars"
+		},
+		{
+			"kind": "css-variable",
+			"name": "--palettes-primary-text",
+			"replacement": null,
+			"note": null,
+			"since": null,
+			"scope": "commons/vars"
+		},
+		{
+			"kind": "css-variable",
+			"name": "--palettes-product-text",
+			"replacement": null,
+			"note": null,
+			"since": null,
+			"scope": "commons/vars"
+		},
+		{
+			"kind": "css-variable",
+			"name": "--palettes-pumpkin-text",
+			"replacement": null,
+			"note": null,
+			"since": null,
+			"scope": "commons/vars"
+		},
+		{
+			"kind": "css-variable",
+			"name": "--palettes-secondary-0",
+			"replacement": null,
+			"note": null,
+			"since": null,
+			"scope": "commons/vars"
+		},
+		{
+			"kind": "css-variable",
+			"name": "--palettes-secondary-100",
+			"replacement": null,
+			"note": null,
+			"since": null,
+			"scope": "commons/vars"
+		},
+		{
+			"kind": "css-variable",
+			"name": "--palettes-secondary-200",
+			"replacement": null,
+			"note": null,
+			"since": null,
+			"scope": "commons/vars"
+		},
+		{
+			"kind": "css-variable",
+			"name": "--palettes-secondary-300",
+			"replacement": null,
+			"note": null,
+			"since": null,
+			"scope": "commons/vars"
+		},
+		{
+			"kind": "css-variable",
+			"name": "--palettes-secondary-400",
+			"replacement": null,
+			"note": null,
+			"since": null,
+			"scope": "commons/vars"
+		},
+		{
+			"kind": "css-variable",
+			"name": "--palettes-secondary-50",
+			"replacement": null,
+			"note": null,
+			"since": null,
+			"scope": "commons/vars"
+		},
+		{
+			"kind": "css-variable",
+			"name": "--palettes-secondary-500",
+			"replacement": null,
+			"note": null,
+			"since": null,
+			"scope": "commons/vars"
+		},
+		{
+			"kind": "css-variable",
+			"name": "--palettes-secondary-600",
+			"replacement": null,
+			"note": null,
+			"since": null,
+			"scope": "commons/vars"
+		},
+		{
+			"kind": "css-variable",
+			"name": "--palettes-secondary-700",
+			"replacement": null,
+			"note": null,
+			"since": null,
+			"scope": "commons/vars"
+		},
+		{
+			"kind": "css-variable",
+			"name": "--palettes-secondary-800",
+			"replacement": null,
+			"note": null,
+			"since": null,
+			"scope": "commons/vars"
+		},
+		{
+			"kind": "css-variable",
+			"name": "--palettes-secondary-900",
+			"replacement": null,
+			"note": null,
+			"since": null,
+			"scope": "commons/vars"
+		},
+		{
+			"kind": "css-variable",
+			"name": "--palettes-secondary-text",
+			"replacement": null,
+			"note": null,
+			"since": null,
+			"scope": "commons/vars"
+		},
+		{
+			"kind": "css-variable",
+			"name": "--palettes-success-text",
+			"replacement": null,
+			"note": null,
+			"since": null,
+			"scope": "commons/vars"
+		},
+		{
+			"kind": "css-variable",
+			"name": "--palettes-successContrasted-text",
+			"replacement": null,
+			"note": null,
+			"since": null,
+			"scope": "commons/vars"
+		},
+		{
+			"kind": "css-variable",
+			"name": "--palettes-timmi-text",
+			"replacement": null,
+			"note": null,
+			"since": null,
+			"scope": "commons/vars"
+		},
+		{
+			"kind": "css-variable",
+			"name": "--palettes-warning-text",
+			"replacement": null,
+			"note": null,
+			"since": null,
+			"scope": "commons/vars"
+		},
+		{
+			"kind": "css-variable",
+			"name": "--palettes-warningContrasted-text",
+			"replacement": null,
+			"note": null,
+			"since": null,
+			"scope": "commons/vars"
+		},
+		{
+			"kind": "css-variable",
+			"name": "--palettes-watermelon-text",
+			"replacement": null,
+			"note": null,
+			"since": null,
+			"scope": "commons/vars"
+		},
+		{
+			"kind": "css-variable",
+			"name": "--sizes-L-fontSize",
+			"replacement": null,
+			"note": "Use --pr-t-font-* tokens instead.",
+			"since": null,
+			"scope": "commons/vars"
+		},
+		{
+			"kind": "css-variable",
+			"name": "--sizes-L-lineHeight",
+			"replacement": null,
+			"note": "Use --pr-t-font-* tokens instead.",
+			"since": null,
+			"scope": "commons/vars"
+		},
+		{
+			"kind": "css-variable",
+			"name": "--sizes-L-verticalPadding",
+			"replacement": null,
+			"note": "Use --pr-t-font-* tokens instead.",
+			"since": null,
+			"scope": "commons/vars"
+		},
+		{
+			"kind": "css-variable",
+			"name": "--sizes-M-fontSize",
+			"replacement": null,
+			"note": "Use --pr-t-font-* tokens instead.",
+			"since": null,
+			"scope": "commons/vars"
+		},
+		{
+			"kind": "css-variable",
+			"name": "--sizes-M-lineHeight",
+			"replacement": null,
+			"note": "Use --pr-t-font-* tokens instead.",
+			"since": null,
+			"scope": "commons/vars"
+		},
+		{
+			"kind": "css-variable",
+			"name": "--sizes-M-verticalPadding",
+			"replacement": null,
+			"note": "Use --pr-t-font-* tokens instead.",
+			"since": null,
+			"scope": "commons/vars"
+		},
+		{
+			"kind": "css-variable",
+			"name": "--sizes-S-fontSize",
+			"replacement": null,
+			"note": "Use --pr-t-font-* tokens instead.",
+			"since": null,
+			"scope": "commons/vars"
+		},
+		{
+			"kind": "css-variable",
+			"name": "--sizes-S-lineHeight",
+			"replacement": null,
+			"note": "Use --pr-t-font-* tokens instead.",
+			"since": null,
+			"scope": "commons/vars"
+		},
+		{
+			"kind": "css-variable",
+			"name": "--sizes-S-verticalPadding",
+			"replacement": null,
+			"note": "Use --pr-t-font-* tokens instead.",
+			"since": null,
+			"scope": "commons/vars"
+		},
+		{
+			"kind": "css-variable",
+			"name": "--sizes-XL-fontSize",
+			"replacement": null,
+			"note": "Use --pr-t-font-* tokens instead.",
+			"since": null,
+			"scope": "commons/vars"
+		},
+		{
+			"kind": "css-variable",
+			"name": "--sizes-XL-lineHeight",
+			"replacement": null,
+			"note": "Use --pr-t-font-* tokens instead.",
+			"since": null,
+			"scope": "commons/vars"
+		},
+		{
+			"kind": "css-variable",
+			"name": "--sizes-XL-verticalPadding",
+			"replacement": null,
+			"note": "Use --pr-t-font-* tokens instead.",
+			"since": null,
+			"scope": "commons/vars"
+		},
+		{
+			"kind": "css-variable",
+			"name": "--sizes-XS-fontSize",
+			"replacement": null,
+			"note": "Use --pr-t-font-* tokens instead.",
+			"since": null,
+			"scope": "commons/vars"
+		},
+		{
+			"kind": "css-variable",
+			"name": "--sizes-XS-lineHeight",
+			"replacement": null,
+			"note": "Use --pr-t-font-* tokens instead.",
+			"since": null,
+			"scope": "commons/vars"
+		},
+		{
+			"kind": "css-variable",
+			"name": "--sizes-XS-verticalPadding",
+			"replacement": null,
+			"note": "Use --pr-t-font-* tokens instead.",
+			"since": null,
+			"scope": "commons/vars"
+		},
+		{
+			"kind": "css-variable",
+			"name": "--sizes-XXL-fontSize",
+			"replacement": null,
+			"note": "Use --pr-t-font-* tokens instead.",
+			"since": null,
+			"scope": "commons/vars"
+		},
+		{
+			"kind": "css-variable",
+			"name": "--sizes-XXL-lineHeight",
+			"replacement": null,
+			"note": "Use --pr-t-font-* tokens instead.",
+			"since": null,
+			"scope": "commons/vars"
+		},
+		{
+			"kind": "css-variable",
+			"name": "--sizes-XXL-verticalPadding",
+			"replacement": null,
+			"note": "Use --pr-t-font-* tokens instead.",
+			"since": null,
+			"scope": "commons/vars"
+		},
+		{
+			"kind": "css-variable",
+			"name": "--sizes-XXXL-fontSize",
+			"replacement": null,
+			"note": "Use --pr-t-font-* tokens instead.",
+			"since": null,
+			"scope": "commons/vars"
+		},
+		{
+			"kind": "css-variable",
+			"name": "--sizes-XXXL-lineHeight",
+			"replacement": null,
+			"note": "Use --pr-t-font-* tokens instead.",
+			"since": null,
+			"scope": "commons/vars"
+		},
+		{
+			"kind": "css-variable",
+			"name": "--sizes-XXXL-verticalPadding",
+			"replacement": null,
+			"note": "Use --pr-t-font-* tokens instead.",
+			"since": null,
+			"scope": "commons/vars"
+		},
+		{
+			"kind": "selector",
+			"name": ".lu-user-picture",
+			"replacement": ".avatar",
+			"note": null,
+			"since": null,
+			"scope": "component:avatar"
+		},
+		{
+			"kind": "selector",
+			"name": ".box.mod-grey",
+			"replacement": ".box.mod-neutral",
+			"note": null,
+			"since": null,
+			"scope": "component:box"
+		},
+		{
+			"kind": "selector",
+			"name": ".box.mod-toggle",
+			"replacement": null,
+			"note": "The toggle box variant is deprecated.",
+			"since": null,
+			"scope": "component:box"
+		},
+		{
+			"kind": "selector",
+			"name": ".active",
+			"replacement": ".is-active",
+			"note": null,
+			"since": null,
+			"scope": "component:breadcrumbs"
+		},
+		{
+			"kind": "selector",
+			"name": ".mod-compact",
+			"replacement": null,
+			"note": "The compact breadcrumbs variant is deprecated.",
+			"since": null,
+			"scope": "component:breadcrumbs"
+		},
+		{
+			"kind": "css-variable",
+			"name": "--components-button-font-size",
+			"replacement": "--components-button-font",
+			"note": null,
+			"since": null,
+			"scope": "component:button"
+		},
+		{
+			"kind": "css-variable",
+			"name": "--components-button-line-height",
+			"replacement": "--components-button-font",
+			"note": null,
+			"since": null,
+			"scope": "component:button"
+		},
+		{
+			"kind": "selector",
+			"name": ".button.disabled",
+			"replacement": ".button.is-disabled",
+			"note": null,
+			"since": null,
+			"scope": "component:button"
+		},
+		{
+			"kind": "selector",
+			"name": ".button.error",
+			"replacement": ".button.is-error",
+			"note": null,
+			"since": null,
+			"scope": "component:button"
+		},
+		{
+			"kind": "selector",
+			"name": ".button.loading",
+			"replacement": ".button.is-loading",
+			"note": null,
+			"since": null,
+			"scope": "component:button"
+		},
+		{
+			"kind": "selector",
+			"name": ".button.success",
+			"replacement": ".button.is-success",
+			"note": null,
+			"since": null,
+			"scope": "component:button"
+		},
+		{
+			"kind": "selector",
+			"name": ".mod-delete",
+			"replacement": ".mod-critical",
+			"note": null,
+			"since": null,
+			"scope": "component:button"
+		},
+		{
+			"kind": "selector",
+			"name": ".mod-invert",
+			"replacement": ".mod-inverted",
+			"note": null,
+			"since": null,
+			"scope": "component:button"
+		},
+		{
+			"kind": "selector",
+			"name": ".mod-link",
+			"replacement": ".mod-ghost",
+			"note": null,
+			"since": null,
+			"scope": "component:button"
+		},
+		{
+			"kind": "selector",
+			"name": ".mod-outline",
+			"replacement": ".mod-outlined",
+			"note": null,
+			"since": null,
+			"scope": "component:button"
+		},
+		{
+			"kind": "selector",
+			"name": ".mod-text",
+			"replacement": ".mod-ghost",
+			"note": null,
+			"since": null,
+			"scope": "component:button"
+		},
+		{
+			"kind": "css-variable",
+			"name": "--components-callout-fontSize",
+			"replacement": "--components-callout-font",
+			"note": null,
+			"since": null,
+			"scope": "component:callout"
+		},
+		{
+			"kind": "css-variable",
+			"name": "--components-callout-lineHeight",
+			"replacement": "--components-callout-font",
+			"note": null,
+			"since": null,
+			"scope": "component:callout"
+		},
+		{
+			"kind": "css-variable",
+			"name": "--components-calloutFeedbackList-fontSize",
+			"replacement": "--components-calloutFeedbackList-font",
+			"note": null,
+			"since": null,
+			"scope": "component:calloutFeedbackList"
+		},
+		{
+			"kind": "css-variable",
+			"name": "--components-calloutFeedbackList-lineHeight",
+			"replacement": "--components-calloutFeedbackList-font",
+			"note": null,
+			"since": null,
+			"scope": "component:calloutFeedbackList"
+		},
+		{
+			"kind": "selector",
+			"name": ".card.mod-grey",
+			"replacement": ".card.mod-neutral",
+			"note": null,
+			"since": null,
+			"scope": "component:card"
+		},
+		{
+			"kind": "css-variable",
+			"name": "--components-chip-fontSize",
+			"replacement": "--components-chip-font",
+			"note": null,
+			"since": null,
+			"scope": "component:chip"
+		},
+		{
+			"kind": "css-variable",
+			"name": "--components-chip-lineHeight",
+			"replacement": "--components-chip-font",
+			"note": null,
+			"since": null,
+			"scope": "component:chip"
+		},
+		{
+			"kind": "css-variable",
+			"name": "--components-comment-text-fontSize",
+			"replacement": "--components-comment-text-font",
+			"note": null,
+			"since": null,
+			"scope": "component:comment"
+		},
+		{
+			"kind": "css-variable",
+			"name": "--components-comment-text-lineHeight",
+			"replacement": "--components-comment-text-font",
+			"note": null,
+			"since": null,
+			"scope": "component:comment"
+		},
+		{
+			"kind": "css-variable",
+			"name": "--components-container-max-width",
+			"replacement": "--commons-container-maxWidth",
+			"note": null,
+			"since": null,
+			"scope": "component:container"
+		},
+		{
+			"kind": "css-variable",
+			"name": "--components-container-padding",
+			"replacement": "--commons-container-padding",
+			"note": null,
+			"since": null,
+			"scope": "component:container"
+		},
+		{
+			"kind": "selector",
+			"name": ".dialog-form",
+			"replacement": ".dialog-inside-formOptional",
+			"note": null,
+			"since": null,
+			"scope": "component:dialog"
+		},
+		{
+			"kind": "selector",
+			"name": ".dialog-formOptional",
+			"replacement": ".dialog-inside-formOptional",
+			"note": null,
+			"since": null,
+			"scope": "component:dialog"
+		},
+		{
+			"kind": "css-variable",
+			"name": "--components-divider-fontSize",
+			"replacement": "--components-divider-font",
+			"note": null,
+			"since": null,
+			"scope": "component:divider"
+		},
+		{
+			"kind": "css-variable",
+			"name": "--components-divider-lineHeight",
+			"replacement": "--components-divider-font",
+			"note": null,
+			"since": null,
+			"scope": "component:divider"
+		},
+		{
+			"kind": "selector",
+			"name": ".lu-dropdown-content",
+			"replacement": ".dropdown",
+			"note": null,
+			"since": null,
+			"scope": "component:dropdown"
+		},
+		{
+			"kind": "selector",
+			"name": ".lu-dropdown-options",
+			"replacement": ".dropdown-list",
+			"note": null,
+			"since": null,
+			"scope": "component:dropdown"
+		},
+		{
+			"kind": "selector",
+			"name": ".lu-dropdown-options-item",
+			"replacement": ".dropdown-list-option",
+			"note": null,
+			"since": null,
+			"scope": "component:dropdown"
+		},
+		{
+			"kind": "selector",
+			"name": ".lu-dropdown-options-item-action",
+			"replacement": ".dropdown-list-option-action",
+			"note": null,
+			"since": null,
+			"scope": "component:dropdown"
+		},
+		{
+			"kind": "selector",
+			"name": ".filterBarDeprecated",
+			"replacement": null,
+			"note": "Entire component is deprecated, including all .filterBarDeprecated-* descendants.",
+			"since": null,
+			"scope": "component:filterBarDeprecated"
+		},
+		{
+			"kind": "sass-api",
+			"name": "form.componentDeprecated",
+			"replacement": null,
+			"note": "The legacy form component mixin is deprecated.",
+			"since": null,
+			"scope": "component:form"
+		},
+		{
+			"kind": "css-variable",
+			"name": "--components-formLabel-fontSize",
+			"replacement": "--components-formLabel-font",
+			"note": null,
+			"since": null,
+			"scope": "component:formLabel"
+		},
+		{
+			"kind": "css-variable",
+			"name": "--components-formLabel-lineHeight",
+			"replacement": "--components-formLabel-font",
+			"note": null,
+			"since": null,
+			"scope": "component:formLabel"
+		},
+		{
+			"kind": "css-variable",
+			"name": "--components-gauge-height",
+			"replacement": "--components-gauge-blockSize",
+			"note": null,
+			"since": null,
+			"scope": "component:gauge"
+		},
+		{
+			"kind": "sass-api",
+			"name": "gauge.vertical",
+			"replacement": null,
+			"note": "The vertical gauge mixin is deprecated.",
+			"since": null,
+			"scope": "component:gauge"
+		},
+		{
+			"kind": "sass-api",
+			"name": "gauge.verticalThin",
+			"replacement": null,
+			"note": "The verticalThin gauge mixin is deprecated.",
+			"since": null,
+			"scope": "component:gauge"
+		},
+		{
+			"kind": "selector",
+			"name": ".mod-vertical",
+			"replacement": null,
+			"note": "The vertical gauge variant is deprecated.",
+			"since": null,
+			"scope": "component:gauge"
+		},
+		{
+			"kind": "selector",
+			"name": ".disabled",
+			"replacement": ".is-disabled",
+			"note": null,
+			"since": null,
+			"scope": "component:horizontalNavigation"
+		},
+		{
+			"kind": "selector",
+			"name": ".menu",
+			"replacement": ".horizontalNavigation",
+			"note": null,
+			"since": null,
+			"scope": "component:horizontalNavigation"
+		},
+		{
+			"kind": "selector",
+			"name": ".menu-containerOptional",
+			"replacement": null,
+			"note": "Legacy .menu-* selector; use the .horizontalNavigation-* equivalent.",
+			"since": null,
+			"scope": "component:horizontalNavigation"
+		},
+		{
+			"kind": "selector",
+			"name": ".menu-link",
+			"replacement": null,
+			"note": "Legacy .menu-* selector; use the .horizontalNavigation-* equivalent.",
+			"since": null,
+			"scope": "component:horizontalNavigation"
+		},
+		{
+			"kind": "selector",
+			"name": ".menu-link-placeholder",
+			"replacement": null,
+			"note": "Legacy .menu-* selector; use the .horizontalNavigation-* equivalent.",
+			"since": null,
+			"scope": "component:horizontalNavigation"
+		},
+		{
+			"kind": "selector",
+			"name": ".menu-list",
+			"replacement": ".horizontalNavigation-list",
+			"note": null,
+			"since": null,
+			"scope": "component:horizontalNavigation"
+		},
+		{
+			"kind": "selector",
+			"name": ".menu-list-item-action",
+			"replacement": ".horizontalNavigation-list-item-action",
+			"note": null,
+			"since": null,
+			"scope": "component:horizontalNavigation"
+		},
+		{
+			"kind": "selector",
+			"name": ".indexTable-body-row-cell-action",
+			"replacement": null,
+			"note": "The indexTable row cell action selector is deprecated.",
+			"since": null,
+			"scope": "component:indexTable"
+		},
+		{
+			"kind": "selector",
+			"name": ".lucca-icon:first-child",
+			"replacement": ".inlineMessage-statusIcon",
+			"note": null,
+			"since": null,
+			"scope": "component:inlineMessage"
+		},
+		{
+			"kind": "selector",
+			"name": ".label",
+			"replacement": null,
+			"note": "The .label component is deprecated.",
+			"since": null,
+			"scope": "component:label"
+		},
+		{
+			"kind": "selector",
+			"name": ".mod-dialog",
+			"replacement": ".mod-popin",
+			"note": null,
+			"since": null,
+			"scope": "component:loading"
+		},
+		{
+			"kind": "selector",
+			"name": ".mod-sidePanel",
+			"replacement": ".mod-drawer",
+			"note": null,
+			"since": null,
+			"scope": "component:loading"
+		},
+		{
+			"kind": "css-variable",
+			"name": "--components-navSide-fullwidth-palette-alert-color",
+			"replacement": null,
+			"note": "Use the selected-alert palette custom properties instead.",
+			"since": null,
+			"scope": "component:navside"
+		},
+		{
+			"kind": "css-variable",
+			"name": "--components-navSide-fullwidth-palette-alert-text",
+			"replacement": null,
+			"note": "Use the selected-alert palette custom properties instead.",
+			"since": null,
+			"scope": "component:navside"
+		},
+		{
+			"kind": "selector",
+			"name": ".mod-withMenuCompact",
+			"replacement": ".navSide.mod-compact",
+			"note": null,
+			"since": null,
+			"scope": "component:navside"
+		},
+		{
+			"kind": "selector",
+			"name": ".mod-withMenu",
+			"replacement": ".mod-withHorizontalNavigation",
+			"note": null,
+			"since": null,
+			"scope": "component:pageHeader"
+		},
+		{
+			"kind": "selector",
+			"name": ".section.mod-grey",
+			"replacement": ".section.mod-neutral",
+			"note": null,
+			"since": null,
+			"scope": "component:section"
+		},
+		{
+			"kind": "selector",
+			"name": ".viewTabs",
+			"replacement": ".segmentedControl",
+			"note": null,
+			"since": null,
+			"scope": "component:segmentedControl"
+		},
+		{
+			"kind": "selector",
+			"name": ".viewTabs_panel",
+			"replacement": ".segmentedControl_panel",
+			"note": null,
+			"since": null,
+			"scope": "component:segmentedControl"
+		},
+		{
+			"kind": "selector",
+			"name": ".viewTabs-item",
+			"replacement": ".segmentedControl-item",
+			"note": null,
+			"since": null,
+			"scope": "component:segmentedControl"
+		},
+		{
+			"kind": "selector",
+			"name": ".viewTabs-item-tab",
+			"replacement": ".segmentedControl-item-action",
+			"note": null,
+			"since": null,
+			"scope": "component:segmentedControl"
+		},
+		{
+			"kind": "css-variable",
+			"name": "--components-sortableList-description-fontSize",
+			"replacement": "--components-sortableList-description-font",
+			"note": null,
+			"since": null,
+			"scope": "component:sortableList"
+		},
+		{
+			"kind": "css-variable",
+			"name": "--components-sortableList-description-lineHeight",
+			"replacement": "--components-sortableList-description-font",
+			"note": null,
+			"since": null,
+			"scope": "component:sortableList"
+		},
+		{
+			"kind": "selector",
+			"name": ".mod-actionsHidden",
+			"replacement": null,
+			"note": "Hidden table actions are deprecated.",
+			"since": null,
+			"scope": "component:table"
+		},
+		{
+			"kind": "selector",
+			"name": ".table.mod-layoutFixed",
+			"replacement": null,
+			"note": "Entire tableFixedDeprecated component is deprecated, including all its descendant selectors.",
+			"since": null,
+			"scope": "component:tableFixedDeprecated"
+		},
+		{
+			"kind": "selector",
+			"name": ".table.mod-stickyColumn",
+			"replacement": null,
+			"note": "Entire tableStickedDeprecated component is deprecated, including all its descendant selectors.",
+			"since": null,
+			"scope": "component:tableStickedDeprecated"
+		},
+		{
+			"kind": "css-variable",
+			"name": "--components-tag-fontSize",
+			"replacement": "--components-tag-font",
+			"note": null,
+			"since": null,
+			"scope": "component:tag"
+		},
+		{
+			"kind": "css-variable",
+			"name": "--components-tag-lineHeight",
+			"replacement": "--components-tag-font",
+			"note": null,
+			"since": null,
+			"scope": "component:tag"
+		},
+		{
+			"kind": "selector",
+			"name": ".mod-clickable",
+			"replacement": null,
+			"note": "Clickable tags are inferred from the a/button element; the modifier is deprecated.",
+			"since": null,
+			"scope": "component:tag"
+		},
+		{
+			"kind": "css-variable",
+			"name": "--component-textField-fontSize",
+			"replacement": "--component-textField-font",
+			"note": null,
+			"since": null,
+			"scope": "component:textField"
+		},
+		{
+			"kind": "css-variable",
+			"name": "--component-textField-lineHeight",
+			"replacement": "--component-textField-font",
+			"note": null,
+			"since": null,
+			"scope": "component:textField"
+		},
+		{
+			"kind": "css-variable",
+			"name": "--components-toasts-background",
+			"replacement": null,
+			"note": "Toast background is no longer customizable.",
+			"since": null,
+			"scope": "component:toast"
+		},
+		{
+			"kind": "css-variable",
+			"name": "--components-toasts-padding",
+			"replacement": null,
+			"note": "Toast padding is no longer customizable.",
+			"since": null,
+			"scope": "component:toast"
+		},
+		{
+			"kind": "sass-api",
+			"name": "userTile.XL",
+			"replacement": null,
+			"note": "The XL userTile size mixin is deprecated.",
+			"since": null,
+			"scope": "component:userTile"
+		},
+		{
+			"kind": "sass-api",
+			"name": "userTile.XXL",
+			"replacement": null,
+			"note": "The XXL userTile size mixin is deprecated.",
+			"since": null,
+			"scope": "component:userTile"
+		},
+		{
+			"kind": "sass-api",
+			"name": "userTile.XXXL",
+			"replacement": null,
+			"note": "The XXXL userTile size mixin is deprecated.",
+			"since": null,
+			"scope": "component:userTile"
+		},
+		{
+			"kind": "selector",
+			"name": ".mod-XL",
+			"replacement": null,
+			"note": "The XL userTile size is deprecated.",
+			"since": null,
+			"scope": "component:userTile"
+		},
+		{
+			"kind": "selector",
+			"name": ".mod-XXL",
+			"replacement": null,
+			"note": "The XXL userTile size is deprecated.",
+			"since": null,
+			"scope": "component:userTile"
+		},
+		{
+			"kind": "selector",
+			"name": ".mod-XXXL",
+			"replacement": null,
+			"note": "The XXXL userTile size is deprecated.",
+			"since": null,
+			"scope": "component:userTile"
+		}
+	]
+}

@@ -21,5 +21,7 @@ jobs:
           node-version: 24.13.0
       - run: npm install
       - run: npm run build --if-present
+      - name: Check deprecations.json is up to date
+        run: npm run scss:deprecations -- --check
       - run: npm run ci-test
       - run: npm run lint
