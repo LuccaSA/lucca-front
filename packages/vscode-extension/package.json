@@ -22,6 +22,10 @@
 			{
 				"command": "luccaFront.reloadManifest",
 				"title": "Lucca Front: Reload CSS API manifest"
+			},
+			{
+				"command": "luccaFront.showProblems",
+				"title": "Lucca Front: Show problems"
 			}
 		],
 		"configuration": {

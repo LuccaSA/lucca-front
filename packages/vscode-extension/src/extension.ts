@@ -10,7 +10,7 @@ import { QuickFixProvider } from './providers/code-actions';
 import { DiagnosticsController } from './diagnostics/diagnostics-controller';
 import { ManifestService } from './manifest/manifest-service';
 import { StatusBar } from './status/status-bar';
-import { COMMAND_RELOAD, CONFIG_SECTION, CSS_LANGUAGES, MARKUP_LANGUAGES } from './constants';
+import { COMMAND_RELOAD, COMMAND_SHOW_PROBLEMS, CONFIG_SECTION, CSS_LANGUAGES, MARKUP_LANGUAGES } from './constants';
 
 const RELOAD_DEBOUNCE_MS = 500;
 
@@ -40,8 +40,14 @@ export function activate(context: vscode.ExtensionContext): void {
 		}),
 	);
 
-	// Reload command.
-	context.subscriptions.push(vscode.commands.registerCommand(COMMAND_RELOAD, () => service.reload()));
+	// Commands.
+	context.subscriptions.push(
+		vscode.commands.registerCommand(COMMAND_RELOAD, () => service.reload()),
+		vscode.commands.registerCommand(COMMAND_SHOW_PROBLEMS, () => vscode.commands.executeCommand('workbench.actions.view.problems')),
+	);
+
+	// Keep the status-bar health count live as diagnostics change.
+	context.subscriptions.push(vscode.languages.onDidChangeDiagnostics(() => statusBar.update()));
 
 	// Reload triggers (debounced).
 	let reloadTimer: NodeJS.Timeout | undefined;

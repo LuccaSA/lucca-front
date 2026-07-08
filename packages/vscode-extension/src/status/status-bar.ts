@@ -2,7 +2,7 @@
 
 import * as vscode from 'vscode';
 
-import { COMMAND_RELOAD } from '../constants';
+import { COMMAND_SHOW_PROBLEMS, DIAGNOSTIC_SOURCE } from '../constants';
 import { FolderState, ManifestService } from '../manifest/manifest-service';
 
 const DISMISSED_KEY = 'luccaFront.noManifestNoticeDismissed';
@@ -15,7 +15,7 @@ export class StatusBar implements vscode.Disposable {
 		private readonly memento: vscode.Memento,
 	) {
 		this.item = vscode.window.createStatusBarItem(vscode.StatusBarAlignment.Right, 0);
-		this.item.command = COMMAND_RELOAD;
+		this.item.command = COMMAND_SHOW_PROBLEMS;
 	}
 
 	update(): void {
@@ -25,8 +25,11 @@ export class StatusBar implements vscode.Disposable {
 		const unsupported = states.find((s): s is Extract<FolderState, { kind: 'unsupported-version' }> => s.kind === 'unsupported-version');
 
 		if (loaded) {
-			this.item.text = `$(symbol-color) LF ${loaded.libVersion}`;
-			this.item.tooltip = `Lucca Front IntelliSense — @lucca-front/scss ${loaded.libVersion}\n${loaded.index.variableCount} custom properties, ${loaded.index.utilityCount} utility classes`;
+			const { deprecated, unknown } = this.countIssues();
+			const total = deprecated + unknown;
+			this.item.text = total > 0 ? `$(symbol-color) LF ${loaded.libVersion} $(warning) ${total}` : `$(symbol-color) LF ${loaded.libVersion}`;
+			const health = total > 0 ? `${deprecated} deprecated, ${unknown} unknown across open files\nClick to view in Problems` : 'No issues in open files';
+			this.item.tooltip = `Lucca Front IntelliSense — @lucca-front/scss ${loaded.libVersion}\n${health}`;
 			this.item.show();
 			return;
 		}
@@ -45,6 +48,25 @@ export class StatusBar implements vscode.Disposable {
 		}
 		// not-installed: stay silent.
 		this.item.hide();
+	}
+
+	/** Tallies our diagnostics across open files, grouped by kind. */
+	private countIssues(): { deprecated: number; unknown: number } {
+		let deprecated = 0;
+		let unknown = 0;
+		for (const [, diagnostics] of vscode.languages.getDiagnostics()) {
+			for (const diagnostic of diagnostics) {
+				if (diagnostic.source !== DIAGNOSTIC_SOURCE) {
+					continue;
+				}
+				if (diagnostic.code === 'unknown-class') {
+					unknown++;
+				} else {
+					deprecated++;
+				}
+			}
+		}
+		return { deprecated, unknown };
 	}
 
 	private maybeNotify(libVersion: string): void {
