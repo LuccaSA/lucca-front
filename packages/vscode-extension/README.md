@@ -32,7 +32,7 @@ Deprecation signals (diagnostics, hover notices, completion strikethrough) are *
 | `luccaFront.diagnostics.deprecatedSeverity` | `warning` | Severity for deprecated tokens/classes. |
 | `luccaFront.diagnostics.unknownClassSeverity` | `warning` | Severity for unknown `pr-u-*` classes. |
 | `luccaFront.experimental.cssDeprecations` | `false` | **Experimental.** Flag deprecated custom properties and `pr-u-*` classes. |
-| `luccaFront.docs.storybookBaseUrl` | `""` | Storybook base URL (e.g. `https://<host>/v21.1/storybook`) for per-family utility doc links. |
+| `luccaFront.docs.storybookBaseUrl` | `""` | Storybook base URL for per-family utility doc links. Fixed (e.g. `https://<host>/main/storybook`) or with a `{version}` placeholder filled from the installed version (e.g. `https://lucca-front.lucca.io/{version}/storybook` → `.../v21.0/storybook`). |
 | `luccaFront.manifestPath` | `""` | Absolute path to a `manifest.json`, overriding node_modules discovery (for library development). |
 
 ## Out of scope (v1)

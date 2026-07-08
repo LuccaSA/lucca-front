@@ -1,4 +1,4 @@
-import { propertyDocLinks, PRISME_DOCS_URL, utilityDocLinks } from './links';
+import { propertyDocLinks, PRISME_DOCS_URL, utilityDocLinks, versionSegment } from './links';
 
 describe('utilityDocLinks', () => {
 	it('always includes the Prisme link', () => {
@@ -34,6 +34,30 @@ describe('utilityDocLinks', () => {
 
 	it('omits the Storybook link when no base URL is configured', () => {
 		expect(utilityDocLinks('pr-u-displayFlex', '')).toHaveLength(1);
+	});
+
+	it('fills a {version} placeholder from the installed version (minor level)', () => {
+		const links = utilityDocLinks('pr-u-displayFlex', 'https://lucca-front.lucca.io/{version}/storybook', '21.0.5');
+		expect(links[1].url).toBe('https://lucca-front.lucca.io/v21.0/storybook/?path=/docs/documentation-integration-utilities-display--docs');
+	});
+
+	it('drops the placeholder link when the version is unparseable or the dev sentinel', () => {
+		expect(utilityDocLinks('pr-u-displayFlex', 'https://host/{version}/storybook', '0.0.0')).toHaveLength(1);
+		expect(utilityDocLinks('pr-u-displayFlex', 'https://host/{version}/storybook', 'override')).toHaveLength(1);
+		expect(utilityDocLinks('pr-u-displayFlex', 'https://host/{version}/storybook', undefined)).toHaveLength(1);
+	});
+});
+
+describe('versionSegment', () => {
+	it('keeps major.minor and drops the patch', () => {
+		expect(versionSegment('21.0.5')).toBe('v21.0');
+		expect(versionSegment('21.2.0')).toBe('v21.2');
+	});
+
+	it('returns undefined for the dev sentinel and non-semver versions', () => {
+		expect(versionSegment('0.0.0')).toBeUndefined();
+		expect(versionSegment('override')).toBeUndefined();
+		expect(versionSegment(undefined)).toBeUndefined();
 	});
 });
 

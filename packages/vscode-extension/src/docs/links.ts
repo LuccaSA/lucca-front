@@ -53,14 +53,45 @@ function storybookUrl(base: string, slug: string): string {
 	return `${base.replace(/\/+$/, '')}/?path=/docs/documentation-integration-utilities-${slug}--docs`;
 }
 
+/** Placeholder in the configured base URL, replaced with the installed version alias. */
+const VERSION_PLACEHOLDER = '{version}';
+
+/**
+ * The Storybook path segment for a lib version, e.g. `20.3.1` → `v20.3`
+ * (deployments publish a stable `v<major>.<minor>` alias). Returns undefined
+ * when the version can't be parsed (dev/link installs, override).
+ */
+export function versionSegment(libVersion: string | undefined): string | undefined {
+	const match = /^(\d+)\.(\d+)/.exec(libVersion ?? '');
+	if (!match || match[1] === '0') {
+		// Major 0 is the dev/workspace-link sentinel (0.0.0) — no published storybook.
+		return undefined;
+	}
+	return `v${match[1]}.${match[2]}`;
+}
+
+/**
+ * Resolves the configured base URL. If it contains `{version}`, the placeholder
+ * is filled from the installed lib version; when that can't be derived, the
+ * base is unusable and undefined is returned (so we fall back to Prisme only).
+ */
+function resolveBase(base: string, libVersion: string | undefined): string | undefined {
+	if (!base.includes(VERSION_PLACEHOLDER)) {
+		return base;
+	}
+	const segment = versionSegment(libVersion);
+	return segment ? base.split(VERSION_PLACEHOLDER).join(segment) : undefined;
+}
+
 const prismeLink: DocLink = { label: '📘 Prisme docs', url: PRISME_DOCS_URL };
 
 /** Links for a utility class: always Prisme, plus a Storybook family page when derivable and configured. */
-export function utilityDocLinks(className: string, storybookBaseUrl: string): DocLink[] {
+export function utilityDocLinks(className: string, storybookBaseUrl: string, libVersion?: string): DocLink[] {
 	const links: DocLink[] = [prismeLink];
 	const slug = familySlug(className);
-	if (storybookBaseUrl && slug) {
-		links.push({ label: '📖 Storybook', url: storybookUrl(storybookBaseUrl, slug) });
+	const base = storybookBaseUrl ? resolveBase(storybookBaseUrl, libVersion) : undefined;
+	if (base && slug) {
+		links.push({ label: '📖 Storybook', url: storybookUrl(base, slug) });
 	}
 	return links;
 }

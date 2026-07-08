@@ -1,5 +1,9 @@
 # Changelog
 
+## 0.3.1
+
+- `luccaFront.docs.storybookBaseUrl` now supports a `{version}` placeholder, filled from the installed package version at minor granularity (e.g. `https://lucca-front.lucca.io/{version}/storybook` → `.../v21.0/storybook`). Fixed URLs keep working unchanged.
+
 ## 0.3.0
 
 - **Quick Fixes** (`Ctrl+.`): replace an unknown `pr-u-*` class with a close match, or a deprecated class with its recommended replacement.

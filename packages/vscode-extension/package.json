@@ -2,7 +2,7 @@
 	"name": "lucca-front-intellisense",
 	"displayName": "Lucca Front IntelliSense",
 	"description": "Autocomplete, hover and diagnostics for @lucca-front/scss custom properties and pr-u-* utility classes",
-	"version": "0.3.0",
+	"version": "0.3.1",
 	"publisher": "lucca",
 	"private": true,
 	"license": "MIT",
@@ -62,7 +62,7 @@
 				"luccaFront.docs.storybookBaseUrl": {
 					"type": "string",
 					"default": "",
-					"markdownDescription": "Base URL of a Storybook deployment (e.g. `https://<host>/v21.1/storybook`). When set, utility-class hovers include a deep link to the matching Storybook docs page. Tokens and unmapped utilities always link to the Prisme design-system site instead."
+					"markdownDescription": "Base URL of a Storybook deployment. When set, utility-class hovers include a deep link to the matching Storybook docs page. Use a fixed URL (e.g. `https://<host>/main/storybook`), or include the `{version}` placeholder to target the versioned deployment matching the installed package — e.g. `https://lucca-front.lucca.io/{version}/storybook` becomes `.../v21.0/storybook` (minor-level; patch is dropped). Tokens and unmapped utilities always link to the Prisme design-system site instead."
 				}
 			}
 		}

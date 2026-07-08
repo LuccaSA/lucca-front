@@ -91,6 +91,12 @@ export class ManifestService implements vscode.Disposable {
 		return state.kind === 'loaded' ? state.index : undefined;
 	}
 
+	/** The installed @lucca-front/scss version for a document, when loaded. */
+	getLibVersion(uri: vscode.Uri): string | undefined {
+		const state = this.getState(uri);
+		return state.kind === 'loaded' ? state.libVersion : undefined;
+	}
+
 	/** All folder states, for status/notice decisions. */
 	allStates(): FolderState[] {
 		return [...this.states.values()];
