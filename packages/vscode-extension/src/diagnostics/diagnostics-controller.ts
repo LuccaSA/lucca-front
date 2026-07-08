@@ -7,6 +7,7 @@ import { CONFIG_SECTION, CSS_LANGUAGES, DIAGNOSTIC_SOURCE, MARKUP_LANGUAGES } fr
 import { ManifestIndex } from '../manifest/index-model';
 import { ManifestService } from '../manifest/manifest-service';
 import { closestUtilities } from '../manifest/suggestions';
+import { deprecationsEnabled } from '../settings';
 
 const DEBOUNCE_MS = 300;
 const SUPPORTED = new Set([...CSS_LANGUAGES, ...MARKUP_LANGUAGES]);
@@ -67,7 +68,7 @@ export class DiagnosticsController implements vscode.Disposable {
 
 		const deprecatedSeverity = toSeverity(config.get<string>('diagnostics.deprecatedSeverity', 'warning'));
 		const unknownSeverity = toSeverity(config.get<string>('diagnostics.unknownClassSeverity', 'warning'));
-		const findings = analyze(doc.getText(), doc.languageId, index);
+		const findings = analyze(doc.getText(), doc.languageId, index, { deprecations: deprecationsEnabled() });
 		this.collection.set(
 			doc.uri,
 			findings.map((f) => this.toDiagnostic(doc, f, index, deprecatedSeverity, unknownSeverity)),

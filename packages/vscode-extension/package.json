@@ -49,6 +49,11 @@
 					"default": "",
 					"scope": "machine-overridable",
 					"description": "Absolute path to a manifest.json, overriding node_modules discovery (for library development/testing)."
+				},
+				"luccaFront.experimental.cssDeprecations": {
+					"type": "boolean",
+					"default": false,
+					"markdownDescription": "**Experimental.** Flag deprecated custom properties and `pr-u-*` utility classes (diagnostics, hover notices, completion tags). Off by default because deprecation metadata in `@lucca-front/scss` is still incomplete."
 				}
 			}
 		}

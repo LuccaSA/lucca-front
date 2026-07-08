@@ -8,8 +8,8 @@ import { Manifest } from '../manifest/types';
 const manifest = JSON.parse(fs.readFileSync(path.join(__dirname, '../../test-fixtures/manifest.sample.json'), 'utf8')) as Manifest;
 const index = buildIndex(manifest);
 
-function names(text: string, lang: string) {
-	return analyze(text, lang, index).map((f) => `${f.kind}:${f.name}`);
+function names(text: string, lang: string, deprecations = true) {
+	return analyze(text, lang, index, { deprecations }).map((f) => `${f.kind}:${f.name}`);
 }
 
 describe('analyze — css', () => {
@@ -52,5 +52,15 @@ describe('analyze — typescript inline templates', () => {
 	it('flags classes only inside inline templates', () => {
 		const ts = 'const x = \'pr-u-nope\'; @Component({ template: `<div class="pr-u-displayFlexx"></div>` })';
 		expect(names(ts, 'typescript')).toEqual(['unknown-class:pr-u-displayFlexx']);
+	});
+});
+
+describe('analyze — deprecations disabled (experimental toggle off)', () => {
+	it('suppresses deprecated custom-property findings', () => {
+		expect(names('.a { font-family: var(--commons-font-family); }', 'scss', false)).toEqual([]);
+	});
+
+	it('suppresses deprecated-class findings but keeps unknown-class', () => {
+		expect(names('<div class="pr-u-textBrand pr-u-displayFlexx"></div>', 'html', false)).toEqual(['unknown-class:pr-u-displayFlexx']);
 	});
 });

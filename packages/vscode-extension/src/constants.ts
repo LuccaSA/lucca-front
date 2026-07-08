@@ -17,5 +17,9 @@ export const CSS_LANGUAGES = ['css', 'scss', 'less'];
 export const MARKUP_LANGUAGES = ['html', 'typescript'];
 
 export const COMMAND_RELOAD = 'luccaFront.reloadManifest';
+export const COMMAND_SHOW_PROBLEMS = 'luccaFront.showProblems';
 export const CONFIG_SECTION = 'luccaFront';
 export const DIAGNOSTIC_SOURCE = 'lucca-front';
+
+/** Experimental: flag deprecated custom properties and utility classes. */
+export const CONFIG_DEPRECATIONS = 'experimental.cssDeprecations';

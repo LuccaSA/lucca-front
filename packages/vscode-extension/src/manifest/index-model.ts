@@ -10,8 +10,10 @@ export interface CompletionSeed {
 	name: string;
 	/** Short detail shown to the right of the label. */
 	detail: string;
-	/** Markdown documentation body. */
+	/** Markdown documentation body, with the deprecation notice included. */
 	documentation: string;
+	/** Same documentation with the deprecation notice omitted (experimental toggle off). */
+	documentationNoDep: string;
 	deprecated: boolean;
 }
 
@@ -37,7 +39,7 @@ export function formatPropertyValue(prop: CustomProperty): string {
 	return prop.value;
 }
 
-function propertyDocumentation(name: string, prop: CustomProperty): string {
+function propertyDocumentation(name: string, prop: CustomProperty, showDeprecation = true): string {
 	const lines: string[] = [];
 	if (prop.resolved && prop.resolved !== prop.value) {
 		lines.push('```css', `${name}: ${prop.value};`, `/* = ${prop.resolved} */`, '```');
@@ -45,13 +47,13 @@ function propertyDocumentation(name: string, prop: CustomProperty): string {
 		lines.push('```css', `${name}: ${prop.value};`, '```');
 	}
 	lines.push(`Category: \`${prop.category}\``);
-	if (prop.deprecated) {
+	if (showDeprecation && prop.deprecated) {
 		lines.push('', `⚠️ **Deprecated**${prop.note ? ` — ${prop.note}` : ''}`);
 	}
 	return lines.join('\n');
 }
 
-function utilityDocumentation(utility: UtilityClass): string {
+function utilityDocumentation(utility: UtilityClass, showDeprecation = true): string {
 	const lines: string[] = [];
 	for (const block of utility.css) {
 		const condition = block.media ? `@media ${block.media}` : block.container ? `@container ${block.container}` : undefined;
@@ -65,7 +67,7 @@ function utilityDocumentation(utility: UtilityClass): string {
 			lines.push('```css', `${selectorNote}${block.decls};${resolvedNote}`, '```');
 		}
 	}
-	if (utility.deprecated) {
+	if (showDeprecation && utility.deprecated) {
 		const replacement = utility.replacement ? ` — use \`${utility.replacement}\` instead` : '';
 		lines.push('', `⚠️ **Deprecated**${replacement}${utility.note ? ` (${utility.note})` : ''}`);
 	}
@@ -91,7 +93,8 @@ export function buildIndex(manifest: Manifest): ManifestIndex {
 		propertyCompletions.push({
 			name,
 			detail: formatPropertyValue(prop),
-			documentation: propertyDocumentation(name, prop),
+			documentation: propertyDocumentation(name, prop, true),
+			documentationNoDep: propertyDocumentation(name, prop, false),
 			deprecated: Boolean(prop.deprecated),
 		});
 	}
@@ -101,7 +104,8 @@ export function buildIndex(manifest: Manifest): ManifestIndex {
 		utilityCompletions.push({
 			name,
 			detail: utilityDetail(utility),
-			documentation: utilityDocumentation(utility),
+			documentation: utilityDocumentation(utility, true),
+			documentationNoDep: utilityDocumentation(utility, false),
 			deprecated: Boolean(utility.deprecated),
 		});
 	}
@@ -118,13 +122,13 @@ export function buildIndex(manifest: Manifest): ManifestIndex {
 }
 
 /** Builds the hover markdown for a custom property. */
-export function propertyHover(name: string, prop: CustomProperty): string {
-	return `**\`${name}\`**\n\n${propertyDocumentation(name, prop)}`;
+export function propertyHover(name: string, prop: CustomProperty, showDeprecation = true): string {
+	return `**\`${name}\`**\n\n${propertyDocumentation(name, prop, showDeprecation)}`;
 }
 
 /** Builds the hover markdown for a utility class. */
-export function utilityHover(name: string, utility: UtilityClass): string {
-	return `**\`.${name}\`**\n\n${utilityDocumentation(utility)}`;
+export function utilityHover(name: string, utility: UtilityClass, showDeprecation = true): string {
+	return `**\`.${name}\`**\n\n${utilityDocumentation(utility, showDeprecation)}`;
 }
 
 /** Builds the hover markdown for an unknown utility class, with close matches. */

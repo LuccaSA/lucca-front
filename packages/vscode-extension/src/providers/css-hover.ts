@@ -4,6 +4,7 @@ import * as vscode from 'vscode';
 
 import { ManifestService } from '../manifest/manifest-service';
 import { propertyHover } from '../manifest/index-model';
+import { deprecationsEnabled } from '../settings';
 
 export class CssHoverProvider implements vscode.HoverProvider {
 	constructor(private readonly service: ManifestService) {}
@@ -22,6 +23,6 @@ export class CssHoverProvider implements vscode.HoverProvider {
 		if (!prop) {
 			return undefined;
 		}
-		return new vscode.Hover(new vscode.MarkdownString(propertyHover(name, prop)), range);
+		return new vscode.Hover(new vscode.MarkdownString(propertyHover(name, prop, deprecationsEnabled())), range);
 	}
 }

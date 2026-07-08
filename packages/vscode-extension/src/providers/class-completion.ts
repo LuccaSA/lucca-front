@@ -2,14 +2,15 @@
 
 import * as vscode from 'vscode';
 
-import { CompletionSeed } from '../manifest/index-model';
+import { CompletionItemCache } from './completion-items';
 import { getClassAttributeContext } from '../context/class-context';
 import { getInlineTemplateRegionAt } from '../context/inline-template';
 import { ManifestService } from '../manifest/manifest-service';
 import { UTILITY_PREFIX } from '../constants';
+import { deprecationsEnabled } from '../settings';
 
 export class ClassCompletionProvider implements vscode.CompletionItemProvider {
-	private cache = new WeakMap<readonly CompletionSeed[], vscode.CompletionItem[]>();
+	private readonly cache = new CompletionItemCache(vscode.CompletionItemKind.Value);
 
 	constructor(private readonly service: ManifestService) {}
 
@@ -43,26 +44,9 @@ export class ClassCompletionProvider implements vscode.CompletionItemProvider {
 		}
 
 		const range = new vscode.Range(document.positionAt(chunkOffset + context.tokenStart), document.positionAt(chunkOffset + context.tokenEnd));
-		const items = this.itemsFor(index.utilityCompletions);
+		const items = this.cache.items(index.utilityCompletions, deprecationsEnabled());
 		for (const item of items) {
 			item.range = range;
-		}
-		return items;
-	}
-
-	private itemsFor(seeds: readonly CompletionSeed[]): vscode.CompletionItem[] {
-		let items = this.cache.get(seeds);
-		if (!items) {
-			items = seeds.map((seed) => {
-				const item = new vscode.CompletionItem(seed.name, vscode.CompletionItemKind.Value);
-				item.detail = seed.detail;
-				item.documentation = new vscode.MarkdownString(seed.documentation);
-				if (seed.deprecated) {
-					item.tags = [vscode.CompletionItemTag.Deprecated];
-				}
-				return item;
-			});
-			this.cache.set(seeds, items);
 		}
 		return items;
 	}

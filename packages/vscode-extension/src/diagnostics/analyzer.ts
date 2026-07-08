@@ -23,26 +23,34 @@ export interface Finding {
 // `--…` names are never flagged (local/theming vars are legitimate).
 const PROPERTY_RE = /--(?:pr-t|palettes|commons|breakpoints|sizes|colors)-[\w-]+/g;
 
-export function analyze(text: string, languageId: string, index: ManifestIndex): Finding[] {
+export interface AnalyzeFlags {
+	/** When false, no deprecation findings are produced (experimental toggle off). */
+	deprecations: boolean;
+}
+
+export function analyze(text: string, languageId: string, index: ManifestIndex, flags: AnalyzeFlags): Finding[] {
 	if (CSS_LANGUAGES.includes(languageId)) {
-		return analyzeCss(text, index);
+		return analyzeCss(text, index, flags);
 	}
 	if (languageId === 'html') {
-		return analyzeClassSpans(text, findClassAttributeValues(text), index);
+		return analyzeClassSpans(text, findClassAttributeValues(text), index, flags);
 	}
 	if (languageId === 'typescript') {
 		const findings: Finding[] = [];
 		for (const region of findInlineTemplateRegions(text)) {
 			const slice = text.slice(region.start, region.end);
 			const spans = findClassAttributeValues(slice).map((s) => ({ start: s.start + region.start, end: s.end + region.start }));
-			findings.push(...analyzeClassSpans(text, spans, index));
+			findings.push(...analyzeClassSpans(text, spans, index, flags));
 		}
 		return findings;
 	}
 	return [];
 }
 
-function analyzeCss(text: string, index: ManifestIndex): Finding[] {
+function analyzeCss(text: string, index: ManifestIndex, flags: AnalyzeFlags): Finding[] {
+	if (!flags.deprecations) {
+		return []; // custom-property deprecation is the only CSS finding
+	}
 	const findings: Finding[] = [];
 	PROPERTY_RE.lastIndex = 0;
 	let match: RegExpExecArray | null;
@@ -62,7 +70,7 @@ function analyzeCss(text: string, index: ManifestIndex): Finding[] {
  * attribute values, only flagging `pr-u-` prefixed unknowns) prevents false
  * positives on prose, comments, or other class systems.
  */
-function analyzeClassSpans(text: string, spans: Array<{ start: number; end: number }>, index: ManifestIndex): Finding[] {
+function analyzeClassSpans(text: string, spans: Array<{ start: number; end: number }>, index: ManifestIndex, flags: AnalyzeFlags): Finding[] {
 	const findings: Finding[] = [];
 	for (const span of spans) {
 		const value = text.slice(span.start, span.end);
@@ -74,7 +82,7 @@ function analyzeClassSpans(text: string, spans: Array<{ start: number; end: numb
 			const end = start + name.length;
 			const utility = index.utilities.get(name);
 			if (utility) {
-				if (utility.deprecated) {
+				if (flags.deprecations && utility.deprecated) {
 					findings.push({ startOffset: start, endOffset: end, kind: 'deprecated-class', name, replacement: utility.replacement, note: utility.note });
 				}
 			} else if (name.startsWith(UTILITY_PREFIX)) {

@@ -8,6 +8,7 @@ import { ManifestService } from '../manifest/manifest-service';
 import { closestUtilities } from '../manifest/suggestions';
 import { unknownUtilityHover, utilityHover } from '../manifest/index-model';
 import { UTILITY_PREFIX } from '../constants';
+import { deprecationsEnabled } from '../settings';
 
 export class ClassHoverProvider implements vscode.HoverProvider {
 	constructor(private readonly service: ManifestService) {}
@@ -43,7 +44,7 @@ export class ClassHoverProvider implements vscode.HoverProvider {
 
 		const utility = index.utilities.get(name);
 		if (utility) {
-			return new vscode.Hover(new vscode.MarkdownString(utilityHover(name, utility)), range);
+			return new vscode.Hover(new vscode.MarkdownString(utilityHover(name, utility, deprecationsEnabled())), range);
 		}
 		// Unknown but pr-u-prefixed: offer close matches (skip bare `u-` to avoid
 		// noise on other class systems that happen to start with u-).
