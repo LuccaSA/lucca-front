@@ -65,5 +65,9 @@
 }
 
 @mixin mainLayoutSidebar {
+	overflow: visible;
+}
+
+@mixin mainLayoutSidebarMediaMaxM {
 	block-size: 100%;
 }

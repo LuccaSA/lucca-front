@@ -13,8 +13,10 @@
 		@include component;
 
 		.mainLayout-sidebar:has(&) {
+			@include mainLayoutSidebar;
+
 			@include media.max('M') {
-				@include mainLayoutSidebar;
+				@include mainLayoutSidebarMediaMaxM;
 			}
 		}
 	}
