@@ -42,6 +42,8 @@
     "lint:fix": "npm run lint:es -- --fix && npm run lint:style -- --fix",
     "lint:es": "eslint --quiet packages/",
     "lint:style": "stylelint \"packages/**/*.scss\" --report-needless-disables --report-unscoped-disables --report-invalid-scope-disables",
+    "scss:deprecations": "node packages/scss/css-api/extract-deprecations.js",
+    "scss:audit": "node packages/scss/tools/audit-size.js",
     "icons:update": "node ./packages/icons/update-icons.js",
     "i18n:update": "lucca translate && prettier --write 'packages/ng/**/translations.ts'",
     "skills:generate": "ts-node --project scripts/generate-skills/tsconfig.json scripts/generate-skills/index.ts"
