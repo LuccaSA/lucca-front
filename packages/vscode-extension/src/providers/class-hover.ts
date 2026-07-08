@@ -7,8 +7,9 @@ import { getInlineTemplateRegionAt } from '../context/inline-template';
 import { ManifestService } from '../manifest/manifest-service';
 import { closestUtilities } from '../manifest/suggestions';
 import { unknownUtilityHover, utilityHover } from '../manifest/index-model';
+import { propertyDocLinks, renderDocLinks, utilityDocLinks } from '../docs/links';
 import { UTILITY_PREFIX } from '../constants';
-import { deprecationsEnabled } from '../settings';
+import { deprecationsEnabled, storybookBaseUrl } from '../settings';
 
 export class ClassHoverProvider implements vscode.HoverProvider {
 	constructor(private readonly service: ManifestService) {}
@@ -44,13 +45,15 @@ export class ClassHoverProvider implements vscode.HoverProvider {
 
 		const utility = index.utilities.get(name);
 		if (utility) {
-			return new vscode.Hover(new vscode.MarkdownString(utilityHover(name, utility, deprecationsEnabled())), range);
+			const markdown = `${utilityHover(name, utility, deprecationsEnabled())}\n\n${renderDocLinks(utilityDocLinks(name, storybookBaseUrl()))}`;
+			return new vscode.Hover(new vscode.MarkdownString(markdown), range);
 		}
 		// Unknown but pr-u-prefixed: offer close matches (skip bare `u-` to avoid
 		// noise on other class systems that happen to start with u-).
 		if (name.startsWith(UTILITY_PREFIX)) {
 			const suggestions = closestUtilities(name, index.utilityNames);
-			return new vscode.Hover(new vscode.MarkdownString(unknownUtilityHover(name, suggestions)), range);
+			const markdown = `${unknownUtilityHover(name, suggestions)}\n\n${renderDocLinks(propertyDocLinks())}`;
+			return new vscode.Hover(new vscode.MarkdownString(markdown), range);
 		}
 		return undefined;
 	}

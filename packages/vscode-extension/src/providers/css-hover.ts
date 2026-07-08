@@ -4,6 +4,7 @@ import * as vscode from 'vscode';
 
 import { ManifestService } from '../manifest/manifest-service';
 import { propertyHover } from '../manifest/index-model';
+import { propertyDocLinks, renderDocLinks } from '../docs/links';
 import { deprecationsEnabled } from '../settings';
 
 export class CssHoverProvider implements vscode.HoverProvider {
@@ -23,6 +24,7 @@ export class CssHoverProvider implements vscode.HoverProvider {
 		if (!prop) {
 			return undefined;
 		}
-		return new vscode.Hover(new vscode.MarkdownString(propertyHover(name, prop, deprecationsEnabled())), range);
+		const markdown = `${propertyHover(name, prop, deprecationsEnabled())}\n\n${renderDocLinks(propertyDocLinks())}`;
+		return new vscode.Hover(new vscode.MarkdownString(markdown), range);
 	}
 }

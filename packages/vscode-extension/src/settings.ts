@@ -11,3 +11,8 @@ import { CONFIG_DEPRECATIONS, CONFIG_SECTION } from './constants';
 export function deprecationsEnabled(): boolean {
 	return vscode.workspace.getConfiguration(CONFIG_SECTION).get<boolean>(CONFIG_DEPRECATIONS, false);
 }
+
+/** Base URL of a Storybook deployment, for per-family utility doc links. Empty = disabled. */
+export function storybookBaseUrl(): string {
+	return vscode.workspace.getConfiguration(CONFIG_SECTION).get<string>('docs.storybookBaseUrl', '').trim();
+}
