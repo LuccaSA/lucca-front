@@ -28,6 +28,7 @@
 		}
 
 		@include deprecated.selector('.viewTabs-item', $replacement: '.segmentedControl-item', $scope: 'component:segmentedControl');
+
 		.segmentedControl-item,
 		.viewTabs-item {
 			flex-grow: 1;

@@ -25,6 +25,7 @@
 
 	@include deprecated.cssVariable('--components-button-font-size', $replacement: '--components-button-font', $scope: 'component:button');
 	--components-button-font-size: var(--pr-t-font-body-M-fontSize);
+
 	@include deprecated.cssVariable('--components-button-line-height', $replacement: '--components-button-font', $scope: 'component:button');
 	--components-button-line-height: var(--pr-t-font-body-M-lineHeight);
 }

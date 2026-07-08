@@ -13,6 +13,7 @@
 			}
 
 			@include deprecated.selector('.mod-withMenuCompact', $replacement: '.navSide.mod-compact', $scope: 'component:navside');
+
 			&:has(.navSide.mod-compact, .mod-withMenuCompact) {
 				--commons-navSide-width: 7.5rem;
 			}

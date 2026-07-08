@@ -105,6 +105,7 @@
 			@include actions;
 
 			@include deprecated.selector('.mod-actionsHidden', $note: 'Hidden table actions are deprecated.', $scope: 'component:table');
+
 			&.mod-actionsHidden {
 				@include actionsHidden;
 			}

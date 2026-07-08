@@ -17,6 +17,7 @@
 		}
 
 		@include deprecated.selector('.mod-vertical', $note: 'The vertical gauge variant is deprecated.', $scope: 'component:gauge');
+
 		&.mod-vertical {
 			@include vertical;
 

@@ -2,6 +2,7 @@
 @use '@lucca-front/scss/src/commons/deprecated';
 
 @include deprecated.selector('.lu-user-picture', $replacement: '.avatar', $scope: 'component:avatar');
+
 .avatar,
 .lu-user-picture {
 	@layer components {

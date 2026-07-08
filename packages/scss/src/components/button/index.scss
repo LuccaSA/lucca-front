@@ -43,6 +43,7 @@
 		}
 
 		@include deprecated.selector('.mod-outline', $replacement: '.mod-outlined', $scope: 'component:button');
+
 		&.mod-outline,
 		&.mod-outlined {
 			&:where(:not(.is-success, .is-error)) {
@@ -52,6 +53,7 @@
 
 		@include deprecated.selector('.mod-link', $replacement: '.mod-ghost', $scope: 'component:button');
 		@include deprecated.selector('.mod-text', $replacement: '.mod-ghost', $scope: 'component:button');
+
 		&.mod-link,
 		&.mod-text,
 		&.mod-ghost {
@@ -111,6 +113,7 @@
 		}
 
 		@include deprecated.selector('.mod-delete', $replacement: '.mod-critical', $scope: 'component:button');
+
 		&.mod-delete,
 		&.mod-critical {
 			@include critical;
@@ -127,6 +130,7 @@
 		}
 
 		@include deprecated.selector('.mod-invert', $replacement: '.mod-inverted', $scope: 'component:button');
+
 		&.mod-invert,
 		&.mod-inverted {
 			@include inverted;
@@ -145,6 +149,7 @@
 		}
 
 		@include deprecated.selector('.button.loading', $replacement: '.button.is-loading', $scope: 'component:button');
+
 		&.loading,
 		&.is-loading {
 			@include loading;
@@ -167,12 +172,14 @@
 		}
 
 		@include deprecated.selector('.button.error', $replacement: '.button.is-error', $scope: 'component:button');
+
 		&.error,
 		&.is-error {
 			@include error;
 		}
 
 		@include deprecated.selector('.button.success', $replacement: '.button.is-success', $scope: 'component:button');
+
 		&.success,
 		&.is-success {
 			@include success;
@@ -188,6 +195,7 @@
 		}
 
 		@include deprecated.selector('.button.disabled', $replacement: '.button.is-disabled', $scope: 'component:button');
+
 		&.disabled,
 		&.is-disabled,
 		&[aria-disabled='true'] {

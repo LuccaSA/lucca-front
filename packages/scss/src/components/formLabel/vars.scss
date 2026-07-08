@@ -12,6 +12,7 @@
 
 	@include deprecated.cssVariable('--components-formLabel-fontSize', $replacement: '--components-formLabel-font', $scope: 'component:formLabel');
 	--components-formLabel-fontSize: var(--pr-t-font-body-M-fontSize);
+
 	@include deprecated.cssVariable('--components-formLabel-lineHeight', $replacement: '--components-formLabel-font', $scope: 'component:formLabel');
 	--components-formLabel-lineHeight: var(--pr-t-font-body-M-lineHeight);
 }

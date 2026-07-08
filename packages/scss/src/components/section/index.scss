@@ -10,6 +10,7 @@
 
 	@layer mods {
 		@include deprecated.selector('.section.mod-grey', $replacement: '.section.mod-neutral', $scope: 'component:section');
+
 		&.mod-neutral,
 		&.mod-grey {
 			@include neutral;

@@ -409,18 +409,21 @@
 	}
 
 	@include deprecated.class('pr-u-clear', $replacement: 'pr-u-clearBoth', $scope: 'commons/utils');
+
 	.pr-u-clearBoth,
 	.pr-u-clear {
 		@extend %clearBoth;
 	}
 
 	@include deprecated.class('pr-u-clearLeft', $replacement: 'pr-u-clearInlineStart', $scope: 'commons/utils');
+
 	.pr-u-clearInlineStart,
 	.pr-u-clearLeft {
 		@extend %clearInlineStart;
 	}
 
 	@include deprecated.class('pr-u-clearRight', $replacement: 'pr-u-clearInlineEnd', $scope: 'commons/utils');
+
 	.pr-u-clearInlineEnd,
 	.pr-u-clearRight {
 		@extend %clearInlineEnd;
@@ -463,11 +466,13 @@
 	}
 
 	@include deprecated.class('pr-u-h5', $note: 'Use pr-u-h1 through pr-u-h4 or body utilities instead.', $scope: 'commons/utils');
+
 	.pr-u-h5 {
 		@extend %h5;
 	}
 
 	@include deprecated.class('pr-u-h6', $note: 'Use pr-u-h1 through pr-u-h4 or body utilities instead.', $scope: 'commons/utils');
+
 	.pr-u-h6 {
 		@extend %h6;
 	}
@@ -485,32 +490,38 @@
 	}
 
 	@include deprecated.class('pr-u-textLeft', $replacement: 'pr-u-textAlignStart', $scope: 'commons/utils');
+
 	.pr-u-textLeft {
 		@extend %textLeft;
 	}
 
 	@include deprecated.class('pr-u-textRight', $replacement: 'pr-u-textAlignEnd', $scope: 'commons/utils');
+
 	.pr-u-textRight {
 		@extend %textRight;
 	}
 
 	@include deprecated.class('pr-u-textCenter', $replacement: 'pr-u-textAlignCenter', $scope: 'commons/utils');
+
 	.pr-u-textCenter {
 		@extend %textCenter;
 	}
 
 	@include deprecated.class('pr-u-textLight', $scope: 'commons/utils');
+
 	.pr-u-textLight {
 		@extend %textLight;
 	}
 
 	@include deprecated.class('pr-u-textPlaceholder', $replacement: 'pr-u-colorInputTextPlaceholder', $scope: 'commons/utils');
+
 	.pr-u-textPlaceholder,
 	.pr-u-colorInputTextPlaceholder {
 		@extend %textPlaceholder;
 	}
 
 	@include deprecated.class('pr-u-textDefault', $scope: 'commons/utils');
+
 	.pr-u-textDefault {
 		@extend %textDefault;
 	}
@@ -645,12 +656,14 @@
 	@each $direction in core.$boxDirection {
 		@if $direction == '' {
 			@include deprecated.class('pr-u-insetReset', $replacement: 'pr-u-inset0', $scope: 'commons/utils');
+
 			.pr-u-inset0,
 			.pr-u-insetReset {
 				@extend %inset0;
 			}
 		} @else if $direction == 'top' or $direction == 'bottom' or $direction == 'left' or $direction == 'right' {
 			$logical: map.get(core.$physicalDirectionToLogical, $direction);
+
 			@include deprecated.class('pr-u-#{$direction}0', $replacement: 'pr-u-inset#{transform.capitalize(transform.camelize($logical))}0', $scope: 'commons/utils');
 			@include deprecated.class('pr-u-#{$direction}Reset', $replacement: 'pr-u-inset#{transform.capitalize(transform.camelize($logical))}0', $scope: 'commons/utils');
 			.pr-u-#{$direction}0,
@@ -877,12 +890,14 @@
 			@if $direction == '' {
 				@include deprecated.class('u-inset0', $replacement: 'pr-u-inset0', $note: 'The u- prefix is deprecated.', $scope: 'commons/utils');
 				@include deprecated.class('u-insetReset', $replacement: 'pr-u-inset0', $note: 'The u- prefix is deprecated.', $scope: 'commons/utils');
+
 				.u-inset0,
 				.u-insetReset {
 					@extend %inset0;
 				}
 			} @else if $direction == 'top' or $direction == 'bottom' or $direction == 'left' or $direction == 'right' {
 				$logical: map.get(core.$physicalDirectionToLogical, $direction);
+
 				@include deprecated.class('u-#{$direction}0', $replacement: 'pr-u-inset#{transform.capitalize(transform.camelize($logical))}0', $note: 'The u- prefix is deprecated.', $scope: 'commons/utils');
 				@include deprecated.class('u-#{$direction}Reset', $replacement: 'pr-u-inset#{transform.capitalize(transform.camelize($logical))}0', $note: 'The u- prefix is deprecated.', $scope: 'commons/utils');
 				.u-#{$direction}0,

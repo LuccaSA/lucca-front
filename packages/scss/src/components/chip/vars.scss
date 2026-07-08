@@ -12,6 +12,7 @@
 
 	@include deprecated.cssVariable('--components-chip-fontSize', $replacement: '--components-chip-font', $scope: 'component:chip');
 	--components-chip-fontSize: var(--pr-t-font-body-S-fontSize);
+
 	@include deprecated.cssVariable('--components-chip-lineHeight', $replacement: '--components-chip-font', $scope: 'component:chip');
 	--components-chip-lineHeight: var(--pr-t-font-body-S-lineHeight);
 }

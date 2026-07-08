@@ -94,9 +94,11 @@
 	@each $key, $value in config.$colors {
 		@include deprecated.cssVariable('--colors-#{$key}-color', $note: 'Use palette custom properties (--palettes-*) instead.', $scope: 'commons/vars');
 	}
+
 	@each $key, $value in config.$colorsRgb {
 		@include deprecated.cssVariable('--colors-#{$key}-rgb', $note: 'Use palette custom properties (--palettes-*) instead.', $scope: 'commons/vars');
 	}
+
 	@include core.cssvars('colors', config.$colors, '-color');
 	@include core.cssvars('colors', config.$colorsRgb, '-rgb');
 
@@ -125,6 +127,7 @@
 	// Deprecated
 	@include deprecated.cssVariable('--commons-font-family', $replacement: '--pr-t-font-family', $scope: 'commons/vars');
 	--commons-font-family: '#{config.$fontFamily}', Tahoma, sans-serif;
+
 	@include deprecated.cssVariable('--commons-font-family-brand', $replacement: '--pr-t-font-family-brand', $scope: 'commons/vars');
 	--commons-font-family-brand: '#{config.$fontFamilyBrand}', sans-serif;
 
@@ -152,6 +155,7 @@
 		@each $property, $value in $map {
 			@include deprecated.cssVariable('--sizes-#{$key}-#{$property}', $note: 'Use --pr-t-font-* tokens instead.', $scope: 'commons/vars');
 		}
+
 		@include core.cssvars('sizes-#{$key}', $map);
 	}
 

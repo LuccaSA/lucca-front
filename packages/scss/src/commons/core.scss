@@ -70,6 +70,7 @@ $cursor: 'pointer', 'auto', 'default', 'text';
 
 		@if map.has-key($physicalDirectionToLogical, $boxDirection) {
 			$logical: map.get($physicalDirectionToLogical, $boxDirection);
+
 			@include deprecated.class($class, $replacement: 'pr-u-#{transform.camelize($boxModel)}#{transform.capitalize(transform.camelize($logical))}#{transform.capitalize($key)}', $scope: 'commons/utils');
 		}
 
@@ -137,6 +138,7 @@ $cursor: 'pointer', 'auto', 'default', 'text';
 
 			@if map.has-key($deprecated, $property) {
 				$modern: 'pr-u-#{transform.camelize($name)}#{transform.capitalize(transform.camelize(map.get($deprecated, $property)))}';
+
 				@include deprecated.class($prName, $replacement: $modern, $scope: 'commons/utils');
 			}
 
@@ -147,6 +149,7 @@ $cursor: 'pointer', 'auto', 'default', 'text';
 			// Deprecated .u- utilities
 			@if config.$deprecatedUtilityPrefix {
 				$uName: 'u-#{transform.camelize($name)}#{$minusString}#{transform.capitalize(transform.camelize($property))}';
+
 				@include deprecated.class($uName, $replacement: $modern, $note: 'The u- prefix is deprecated.', $scope: 'commons/utils');
 
 				.#{$uName} {
@@ -163,6 +166,7 @@ $cursor: 'pointer', 'auto', 'default', 'text';
 			// Deprecated .u- utilities
 			@if config.$deprecatedUtilityPrefix {
 				$uName: 'u-#{$prefix}#{transform.capitalize(transform.camelize($name))}#{$minusString}#{transform.capitalize(transform.camelize($property))}';
+
 				@include deprecated.class($uName, $replacement: $prName, $note: 'The u- prefix is deprecated.', $scope: 'commons/utils');
 
 				.#{$uName} {
@@ -266,11 +270,12 @@ $cursor: 'pointer', 'auto', 'default', 'text';
 	@each $corner in $corners {
 		@each $key, $value in config.$borderRadius {
 			$class: 'pr-u-border#{transform.capitalize(transform.camelize($corner))}Radius#{transform.capitalize($key)}';
+
 			// pr-u-borderRadiusFull (plain corner) is a live border-radius token utility, not deprecated.
 			$isTokenAlias: $corner == '' and $key == 'full';
 
 			@if not $isTokenAlias {
-				@include deprecated.class($class, $note: 'Use border-radius token utilities (pr-u-borderRadius{Structure,Default,Small,Full,Input}) instead.', $scope: 'commons/utils');
+				@include deprecated.class($class, $note: 'Use border-radius token utilities such as pr-u-borderRadiusDefault instead.', $scope: 'commons/utils');
 			}
 
 			.#{$class} {

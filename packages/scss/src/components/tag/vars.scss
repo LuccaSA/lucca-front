@@ -13,6 +13,7 @@
 
 	@include deprecated.cssVariable('--components-tag-fontSize', $replacement: '--components-tag-font', $scope: 'component:tag');
 	--components-tag-fontSize: var(--pr-t-font-body-S-fontSize);
+
 	@include deprecated.cssVariable('--components-tag-lineHeight', $replacement: '--components-tag-font', $scope: 'component:tag');
 	--components-tag-lineHeight: var(--pr-t-font-body-S-lineHeight);
 }

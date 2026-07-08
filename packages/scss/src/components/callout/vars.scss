@@ -15,6 +15,7 @@
 
 	@include deprecated.cssVariable('--components-callout-fontSize', $replacement: '--components-callout-font', $scope: 'component:callout');
 	--components-callout-fontSize: inherit;
+
 	@include deprecated.cssVariable('--components-callout-lineHeight', $replacement: '--components-callout-font', $scope: 'component:callout');
 	--components-callout-lineHeight: inherit;
 }

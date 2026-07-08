@@ -9,6 +9,7 @@
 
 	@layer mods {
 		@include deprecated.selector('.box.mod-grey', $replacement: '.box.mod-neutral', $scope: 'component:box');
+
 		&.mod-neutral,
 		&.mod-grey {
 			@include neutral;
@@ -19,6 +20,7 @@
 		}
 
 		@include deprecated.selector('.box.mod-toggle', $note: 'The toggle box variant is deprecated.', $scope: 'component:box');
+
 		&.mod-toggle {
 			@include toggle;
 		}

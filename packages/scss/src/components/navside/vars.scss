@@ -21,6 +21,7 @@
 
 	@include deprecated.cssVariable('--components-navSide-fullwidth-palette-alert-color', $note: 'Use the selected-alert palette custom properties instead.', $scope: 'component:navside');
 	--components-navSide-fullwidth-palette-alert-color: var(--palettes-brand-200);
+
 	@include deprecated.cssVariable('--components-navSide-fullwidth-palette-alert-text', $note: 'Use the selected-alert palette custom properties instead.', $scope: 'component:navside');
 	--components-navSide-fullwidth-palette-alert-text: var(--palettes-brand-800);
 

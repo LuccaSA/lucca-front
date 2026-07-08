@@ -17,6 +17,7 @@
 		}
 
 		@include deprecated.selector('.mod-clickable', $note: 'Clickable tags are inferred from the a/button element; the modifier is deprecated.', $scope: 'component:tag');
+
 		&:is(a, button),
 		&.mod-clickable {
 			@include clickable;

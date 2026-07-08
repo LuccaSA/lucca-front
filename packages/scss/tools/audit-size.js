@@ -82,8 +82,17 @@ async function snapshotSizes(repoRoot) {
 	modules['bundle (maximal config)'] = measure(maximal.css);
 
 	// Per module — plain compressed (autoprefixer is identical on both sides, so it
-	// adds nothing to a delta and doubles the cost across 125 compiles).
-	modules['commons (main.scss)'] = measure(sass.compile(path.join(src, 'main.scss'), opts).css);
+	// adds nothing to a delta and doubles the cost across 125 compiles). Some modules
+	// may not compile standalone in a given tree (pre-existing broken component); record
+	// those as errored rather than aborting the whole audit.
+	const compileModule = (key, input) => {
+		try {
+			modules[key] = measure(sass.compile(input, opts).css);
+		} catch (e) {
+			modules[key] = { error: e.message.split('\n')[0] };
+		}
+	};
+	compileModule('commons (main.scss)', path.join(src, 'main.scss'));
 	const componentsDir = path.join(src, 'components');
 	for (const dirent of fs.readdirSync(componentsDir, { withFileTypes: true }).sort((a, b) => a.name.localeCompare(b.name))) {
 		if (!dirent.isDirectory() || dirent.name.startsWith('_')) {
@@ -91,7 +100,7 @@ async function snapshotSizes(repoRoot) {
 		}
 		const index = path.join(componentsDir, dirent.name, 'index.scss');
 		if (fs.existsSync(index)) {
-			modules[`components/${dirent.name}`] = measure(sass.compile(index, opts).css);
+			compileModule(`components/${dirent.name}`, index);
 		}
 	}
 	return modules;
@@ -141,15 +150,20 @@ function buildReport({ base, head, before, after, beforeMarkers, afterManifest }
 	let identical = 0;
 	let changed = 0;
 	const rows = [];
+	let errored = 0;
 	for (const key of keys) {
 		const b = before[key];
 		const a = after[key];
-		if (b && a) {
+		if (b && a && !b.error && !a.error) {
 			const same = b.sha256 === a.sha256;
 			same ? identical++ : changed++;
 			if (!same || process.argv.includes('--full')) {
 				rows.push(`| \`${key}\` | ${fmtBytes(b.raw)} | ${fmtBytes(a.raw)} | ${a.raw - b.raw} | ${fmtBytes(b.gzip)} | ${fmtBytes(a.gzip)} | ${same ? '✅' : '⚠️ changed'} |`);
 			}
+		} else if ((b && b.error) || (a && a.error)) {
+			errored++;
+			const note = (a && a.error) || (b && b.error);
+			rows.push(`| \`${key}\` | ${b && !b.error ? fmtBytes(b.raw) : 'n/a'} | ${a && !a.error ? fmtBytes(a.raw) : 'n/a'} | n/a | — | — | ⓘ does not compile standalone (${note.replace(/\|/g, '\\|')}) |`);
 		} else {
 			changed++;
 			rows.push(`| \`${key}\` | ${b ? fmtBytes(b.raw) : '—'} | ${a ? fmtBytes(a.raw) : '—'} | ${b && a ? a.raw - b.raw : 'n/a'} | ${b ? fmtBytes(b.gzip) : '—'} | ${a ? fmtBytes(a.gzip) : '—'} | ${b ? '➖ removed' : '➕ added'} |`);
@@ -162,7 +176,7 @@ function buildReport({ base, head, before, after, beforeMarkers, afterManifest }
 	out.push(`- **Head** (after): \`${head}\``);
 	out.push('');
 	out.push('## Compiled + compressed size', '');
-	out.push(`**${identical}/${identical + changed} outputs are byte-identical** (sha256).`, '');
+	out.push(`**${identical}/${identical + changed} comparable outputs are byte-identical** (sha256)${errored ? `; ${errored} module(s) do not compile standalone in one of the trees and are excluded` : ''}.`, '');
 	out.push('| Module | Before (B) | After (B) | Δ raw | gzip before | gzip after | Status |');
 	out.push('| --- | ---: | ---: | ---: | ---: | ---: | :---: |');
 	out.push(...(rows.length ? rows : ['| _(all modules byte-identical; run with `--full` to list)_ | | | | | | |']));
@@ -203,7 +217,10 @@ function buildReport({ base, head, before, after, beforeMarkers, afterManifest }
 }
 
 async function main() {
-	const base = git(['merge-base', 'HEAD', 'origin/rc']);
+	// `--base <ref>` isolates a specific change (e.g. the commit before a refactor);
+	// otherwise compare against the merge-base with rc.
+	const baseArgIndex = process.argv.indexOf('--base');
+	const base = baseArgIndex !== -1 ? git(['rev-parse', process.argv[baseArgIndex + 1]]) : git(['merge-base', 'HEAD', 'origin/rc']);
 	const head = git(['rev-parse', 'HEAD']);
 	const worktree = path.join(os.tmpdir(), `lf-audit-before-${base.slice(0, 8)}`);
 

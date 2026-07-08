@@ -3,6 +3,7 @@
 @use '@lucca-front/scss/src/commons/deprecated';
 
 @include deprecated.selector('.viewTabs', $replacement: '.segmentedControl', $scope: 'component:segmentedControl');
+
 .segmentedControl,
 .viewTabs {
 	@layer components {
@@ -27,6 +28,7 @@
 
 @layer mods {
 	@include deprecated.selector('.viewTabs-item-tab', $replacement: '.segmentedControl-item-action', $scope: 'component:segmentedControl');
+
 	.segmentedControl-item-action,
 	.viewTabs-item-tab {
 		.segmentedControl-item-input:checked + &,
@@ -41,6 +43,7 @@
 	}
 
 	@include deprecated.selector('.viewTabs_panel', $replacement: '.segmentedControl_panel', $scope: 'component:segmentedControl');
+
 	.segmentedControl_panel,
 	.viewTabs_panel {
 		// .active is deprecated

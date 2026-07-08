@@ -13,6 +13,7 @@
 
 	@include deprecated.cssVariable('--components-toasts-background', $note: 'Toast background is no longer customizable.', $scope: 'component:toast');
 	--components-toasts-background: var(--palettes-neutral-800);
+
 	@include deprecated.cssVariable('--components-toasts-padding', $note: 'Toast padding is no longer customizable.', $scope: 'component:toast');
 	--components-toasts-padding: var(--pr-t-spacings-100) var(--pr-t-spacings-200);
 }

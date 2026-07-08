@@ -13,6 +13,7 @@
 
 	@include deprecated.cssVariable('--components-comment-text-fontSize', $replacement: '--components-comment-text-font', $scope: 'component:comment');
 	--components-comment-text-fontSize: var(--pr-t-font-body-M-fontSize);
+
 	@include deprecated.cssVariable('--components-comment-text-lineHeight', $replacement: '--components-comment-text-font', $scope: 'component:comment');
 	--components-comment-text-lineHeight: var(--pr-t-font-body-M-lineHeight);
 }

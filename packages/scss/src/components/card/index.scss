@@ -9,6 +9,7 @@
 
 	@layer mods {
 		@include deprecated.selector('.card.mod-grey', $replacement: '.card.mod-neutral', $scope: 'component:card');
+
 		&.mod-neutral,
 		&.mod-grey {
 			@include neutral;

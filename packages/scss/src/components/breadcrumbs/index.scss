@@ -9,6 +9,7 @@
 
 	@layer mods {
 		@include deprecated.selector('.mod-compact', $note: 'The compact breadcrumbs variant is deprecated.', $scope: 'component:breadcrumbs');
+
 		&.mod-compact {
 			@include compact;
 		}
@@ -20,6 +21,7 @@
 .breadcrumbs-list-item > a {
 	@layer mods {
 		@include deprecated.selector('.active', $replacement: '.is-active', $scope: 'component:breadcrumbs');
+
 		&.active,
 		&.is-active,
 		&[aria-current='page'] {

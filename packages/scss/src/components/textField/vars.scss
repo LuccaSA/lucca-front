@@ -19,6 +19,7 @@
 
 	@include deprecated.cssVariable('--component-textField-fontSize', $replacement: '--component-textField-font', $scope: 'component:textField');
 	--component-textField-fontSize: var(--pr-t-font-body-M-fontSize);
+
 	@include deprecated.cssVariable('--component-textField-lineHeight', $replacement: '--component-textField-font', $scope: 'component:textField');
 	--component-textField-lineHeight: var(--pr-t-font-body-M-lineHeight);
 }

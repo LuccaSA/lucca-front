@@ -10,6 +10,7 @@
 
 	@layer mods {
 		@include deprecated.selector('.mod-withMenu', $replacement: '.mod-withHorizontalNavigation', $scope: 'component:pageHeader');
+
 		&.mod-withHorizontalNavigation,
 		&:has(.horizontalNavigation),
 		&.mod-withMenu {

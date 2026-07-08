@@ -13,6 +13,7 @@
 
 	@include deprecated.cssVariable('--components-divider-fontSize', $replacement: '--components-divider-font', $scope: 'component:divider');
 	--components-divider-fontSize: var(--pr-t-font-body-M-fontSize);
+
 	@include deprecated.cssVariable('--components-divider-lineHeight', $replacement: '--components-divider-font', $scope: 'component:divider');
 	--components-divider-lineHeight: var(--pr-t-font-body-M-lineHeight);
 }

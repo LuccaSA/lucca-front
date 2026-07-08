@@ -202,6 +202,7 @@
 		}
 
 		@include deprecated.selector('.indexTable-body-row-cell-action', $note: 'The indexTable row cell action selector is deprecated.', $scope: 'component:indexTable');
+
 		.indexTable-body-row-cell-action {
 			@include a11y.mask;
 		}

@@ -21,12 +21,14 @@
 		}
 
 		@include deprecated.selector('.mod-dialog', $replacement: '.mod-popin', $scope: 'component:loading');
+
 		&.mod-popin,
 		&.mod-dialog {
 			@include popin;
 		}
 
 		@include deprecated.selector('.mod-sidePanel', $replacement: '.mod-drawer', $scope: 'component:loading');
+
 		&.mod-drawer,
 		&.mod-sidePanel {
 			@include drawer;

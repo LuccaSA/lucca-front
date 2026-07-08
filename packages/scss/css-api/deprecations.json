@@ -110,7 +110,7 @@
 			"kind": "class",
 			"name": "pr-u-borderBottomLeftRadiusFull",
 			"replacement": null,
-			"note": "Use border-radius token utilities (pr-u-borderRadius{Structure,Default,Small,Full,Input}) instead.",
+			"note": "Use border-radius token utilities such as pr-u-borderRadiusDefault instead.",
 			"since": null,
 			"scope": "commons/utils"
 		},
@@ -118,7 +118,7 @@
 			"kind": "class",
 			"name": "pr-u-borderBottomLeftRadiusL",
 			"replacement": null,
-			"note": "Use border-radius token utilities (pr-u-borderRadius{Structure,Default,Small,Full,Input}) instead.",
+			"note": "Use border-radius token utilities such as pr-u-borderRadiusDefault instead.",
 			"since": null,
 			"scope": "commons/utils"
 		},
@@ -126,7 +126,7 @@
 			"kind": "class",
 			"name": "pr-u-borderBottomLeftRadiusM",
 			"replacement": null,
-			"note": "Use border-radius token utilities (pr-u-borderRadius{Structure,Default,Small,Full,Input}) instead.",
+			"note": "Use border-radius token utilities such as pr-u-borderRadiusDefault instead.",
 			"since": null,
 			"scope": "commons/utils"
 		},
@@ -134,7 +134,7 @@
 			"kind": "class",
 			"name": "pr-u-borderBottomLeftRadiusXL",
 			"replacement": null,
-			"note": "Use border-radius token utilities (pr-u-borderRadius{Structure,Default,Small,Full,Input}) instead.",
+			"note": "Use border-radius token utilities such as pr-u-borderRadiusDefault instead.",
 			"since": null,
 			"scope": "commons/utils"
 		},
@@ -142,7 +142,7 @@
 			"kind": "class",
 			"name": "pr-u-borderBottomRightRadiusFull",
 			"replacement": null,
-			"note": "Use border-radius token utilities (pr-u-borderRadius{Structure,Default,Small,Full,Input}) instead.",
+			"note": "Use border-radius token utilities such as pr-u-borderRadiusDefault instead.",
 			"since": null,
 			"scope": "commons/utils"
 		},
@@ -150,7 +150,7 @@
 			"kind": "class",
 			"name": "pr-u-borderBottomRightRadiusL",
 			"replacement": null,
-			"note": "Use border-radius token utilities (pr-u-borderRadius{Structure,Default,Small,Full,Input}) instead.",
+			"note": "Use border-radius token utilities such as pr-u-borderRadiusDefault instead.",
 			"since": null,
 			"scope": "commons/utils"
 		},
@@ -158,7 +158,7 @@
 			"kind": "class",
 			"name": "pr-u-borderBottomRightRadiusM",
 			"replacement": null,
-			"note": "Use border-radius token utilities (pr-u-borderRadius{Structure,Default,Small,Full,Input}) instead.",
+			"note": "Use border-radius token utilities such as pr-u-borderRadiusDefault instead.",
 			"since": null,
 			"scope": "commons/utils"
 		},
@@ -166,7 +166,7 @@
 			"kind": "class",
 			"name": "pr-u-borderBottomRightRadiusXL",
 			"replacement": null,
-			"note": "Use border-radius token utilities (pr-u-borderRadius{Structure,Default,Small,Full,Input}) instead.",
+			"note": "Use border-radius token utilities such as pr-u-borderRadiusDefault instead.",
 			"since": null,
 			"scope": "commons/utils"
 		},
@@ -174,7 +174,7 @@
 			"kind": "class",
 			"name": "pr-u-borderEndEndRadiusFull",
 			"replacement": null,
-			"note": "Use border-radius token utilities (pr-u-borderRadius{Structure,Default,Small,Full,Input}) instead.",
+			"note": "Use border-radius token utilities such as pr-u-borderRadiusDefault instead.",
 			"since": null,
 			"scope": "commons/utils"
 		},
@@ -182,7 +182,7 @@
 			"kind": "class",
 			"name": "pr-u-borderEndEndRadiusL",
 			"replacement": null,
-			"note": "Use border-radius token utilities (pr-u-borderRadius{Structure,Default,Small,Full,Input}) instead.",
+			"note": "Use border-radius token utilities such as pr-u-borderRadiusDefault instead.",
 			"since": null,
 			"scope": "commons/utils"
 		},
@@ -190,7 +190,7 @@
 			"kind": "class",
 			"name": "pr-u-borderEndEndRadiusM",
 			"replacement": null,
-			"note": "Use border-radius token utilities (pr-u-borderRadius{Structure,Default,Small,Full,Input}) instead.",
+			"note": "Use border-radius token utilities such as pr-u-borderRadiusDefault instead.",
 			"since": null,
 			"scope": "commons/utils"
 		},
@@ -198,7 +198,7 @@
 			"kind": "class",
 			"name": "pr-u-borderEndEndRadiusXL",
 			"replacement": null,
-			"note": "Use border-radius token utilities (pr-u-borderRadius{Structure,Default,Small,Full,Input}) instead.",
+			"note": "Use border-radius token utilities such as pr-u-borderRadiusDefault instead.",
 			"since": null,
 			"scope": "commons/utils"
 		},
@@ -206,7 +206,7 @@
 			"kind": "class",
 			"name": "pr-u-borderEndStartRadiusFull",
 			"replacement": null,
-			"note": "Use border-radius token utilities (pr-u-borderRadius{Structure,Default,Small,Full,Input}) instead.",
+			"note": "Use border-radius token utilities such as pr-u-borderRadiusDefault instead.",
 			"since": null,
 			"scope": "commons/utils"
 		},
@@ -214,7 +214,7 @@
 			"kind": "class",
 			"name": "pr-u-borderEndStartRadiusL",
 			"replacement": null,
-			"note": "Use border-radius token utilities (pr-u-borderRadius{Structure,Default,Small,Full,Input}) instead.",
+			"note": "Use border-radius token utilities such as pr-u-borderRadiusDefault instead.",
 			"since": null,
 			"scope": "commons/utils"
 		},
@@ -222,7 +222,7 @@
 			"kind": "class",
 			"name": "pr-u-borderEndStartRadiusM",
 			"replacement": null,
-			"note": "Use border-radius token utilities (pr-u-borderRadius{Structure,Default,Small,Full,Input}) instead.",
+			"note": "Use border-radius token utilities such as pr-u-borderRadiusDefault instead.",
 			"since": null,
 			"scope": "commons/utils"
 		},
@@ -230,7 +230,7 @@
 			"kind": "class",
 			"name": "pr-u-borderEndStartRadiusXL",
 			"replacement": null,
-			"note": "Use border-radius token utilities (pr-u-borderRadius{Structure,Default,Small,Full,Input}) instead.",
+			"note": "Use border-radius token utilities such as pr-u-borderRadiusDefault instead.",
 			"since": null,
 			"scope": "commons/utils"
 		},
@@ -246,7 +246,7 @@
 			"kind": "class",
 			"name": "pr-u-borderRadiusL",
 			"replacement": null,
-			"note": "Use border-radius token utilities (pr-u-borderRadius{Structure,Default,Small,Full,Input}) instead.",
+			"note": "Use border-radius token utilities such as pr-u-borderRadiusDefault instead.",
 			"since": null,
 			"scope": "commons/utils"
 		},
@@ -254,7 +254,7 @@
 			"kind": "class",
 			"name": "pr-u-borderRadiusM",
 			"replacement": null,
-			"note": "Use border-radius token utilities (pr-u-borderRadius{Structure,Default,Small,Full,Input}) instead.",
+			"note": "Use border-radius token utilities such as pr-u-borderRadiusDefault instead.",
 			"since": null,
 			"scope": "commons/utils"
 		},
@@ -262,7 +262,7 @@
 			"kind": "class",
 			"name": "pr-u-borderRadiusXL",
 			"replacement": null,
-			"note": "Use border-radius token utilities (pr-u-borderRadius{Structure,Default,Small,Full,Input}) instead.",
+			"note": "Use border-radius token utilities such as pr-u-borderRadiusDefault instead.",
 			"since": null,
 			"scope": "commons/utils"
 		},
@@ -278,7 +278,7 @@
 			"kind": "class",
 			"name": "pr-u-borderStartEndRadiusFull",
 			"replacement": null,
-			"note": "Use border-radius token utilities (pr-u-borderRadius{Structure,Default,Small,Full,Input}) instead.",
+			"note": "Use border-radius token utilities such as pr-u-borderRadiusDefault instead.",
 			"since": null,
 			"scope": "commons/utils"
 		},
@@ -286,7 +286,7 @@
 			"kind": "class",
 			"name": "pr-u-borderStartEndRadiusL",
 			"replacement": null,
-			"note": "Use border-radius token utilities (pr-u-borderRadius{Structure,Default,Small,Full,Input}) instead.",
+			"note": "Use border-radius token utilities such as pr-u-borderRadiusDefault instead.",
 			"since": null,
 			"scope": "commons/utils"
 		},
@@ -294,7 +294,7 @@
 			"kind": "class",
 			"name": "pr-u-borderStartEndRadiusM",
 			"replacement": null,
-			"note": "Use border-radius token utilities (pr-u-borderRadius{Structure,Default,Small,Full,Input}) instead.",
+			"note": "Use border-radius token utilities such as pr-u-borderRadiusDefault instead.",
 			"since": null,
 			"scope": "commons/utils"
 		},
@@ -302,7 +302,7 @@
 			"kind": "class",
 			"name": "pr-u-borderStartEndRadiusXL",
 			"replacement": null,
-			"note": "Use border-radius token utilities (pr-u-borderRadius{Structure,Default,Small,Full,Input}) instead.",
+			"note": "Use border-radius token utilities such as pr-u-borderRadiusDefault instead.",
 			"since": null,
 			"scope": "commons/utils"
 		},
@@ -310,7 +310,7 @@
 			"kind": "class",
 			"name": "pr-u-borderStartStartRadiusFull",
 			"replacement": null,
-			"note": "Use border-radius token utilities (pr-u-borderRadius{Structure,Default,Small,Full,Input}) instead.",
+			"note": "Use border-radius token utilities such as pr-u-borderRadiusDefault instead.",
 			"since": null,
 			"scope": "commons/utils"
 		},
@@ -318,7 +318,7 @@
 			"kind": "class",
 			"name": "pr-u-borderStartStartRadiusL",
 			"replacement": null,
-			"note": "Use border-radius token utilities (pr-u-borderRadius{Structure,Default,Small,Full,Input}) instead.",
+			"note": "Use border-radius token utilities such as pr-u-borderRadiusDefault instead.",
 			"since": null,
 			"scope": "commons/utils"
 		},
@@ -326,7 +326,7 @@
 			"kind": "class",
 			"name": "pr-u-borderStartStartRadiusM",
 			"replacement": null,
-			"note": "Use border-radius token utilities (pr-u-borderRadius{Structure,Default,Small,Full,Input}) instead.",
+			"note": "Use border-radius token utilities such as pr-u-borderRadiusDefault instead.",
 			"since": null,
 			"scope": "commons/utils"
 		},
@@ -334,7 +334,7 @@
 			"kind": "class",
 			"name": "pr-u-borderStartStartRadiusXL",
 			"replacement": null,
-			"note": "Use border-radius token utilities (pr-u-borderRadius{Structure,Default,Small,Full,Input}) instead.",
+			"note": "Use border-radius token utilities such as pr-u-borderRadiusDefault instead.",
 			"since": null,
 			"scope": "commons/utils"
 		},
@@ -350,7 +350,7 @@
 			"kind": "class",
 			"name": "pr-u-borderTopLeftRadiusFull",
 			"replacement": null,
-			"note": "Use border-radius token utilities (pr-u-borderRadius{Structure,Default,Small,Full,Input}) instead.",
+			"note": "Use border-radius token utilities such as pr-u-borderRadiusDefault instead.",
 			"since": null,
 			"scope": "commons/utils"
 		},
@@ -358,7 +358,7 @@
 			"kind": "class",
 			"name": "pr-u-borderTopLeftRadiusL",
 			"replacement": null,
-			"note": "Use border-radius token utilities (pr-u-borderRadius{Structure,Default,Small,Full,Input}) instead.",
+			"note": "Use border-radius token utilities such as pr-u-borderRadiusDefault instead.",
 			"since": null,
 			"scope": "commons/utils"
 		},
@@ -366,7 +366,7 @@
 			"kind": "class",
 			"name": "pr-u-borderTopLeftRadiusM",
 			"replacement": null,
-			"note": "Use border-radius token utilities (pr-u-borderRadius{Structure,Default,Small,Full,Input}) instead.",
+			"note": "Use border-radius token utilities such as pr-u-borderRadiusDefault instead.",
 			"since": null,
 			"scope": "commons/utils"
 		},
@@ -374,7 +374,7 @@
 			"kind": "class",
 			"name": "pr-u-borderTopLeftRadiusXL",
 			"replacement": null,
-			"note": "Use border-radius token utilities (pr-u-borderRadius{Structure,Default,Small,Full,Input}) instead.",
+			"note": "Use border-radius token utilities such as pr-u-borderRadiusDefault instead.",
 			"since": null,
 			"scope": "commons/utils"
 		},
@@ -382,7 +382,7 @@
 			"kind": "class",
 			"name": "pr-u-borderTopRightRadiusFull",
 			"replacement": null,
-			"note": "Use border-radius token utilities (pr-u-borderRadius{Structure,Default,Small,Full,Input}) instead.",
+			"note": "Use border-radius token utilities such as pr-u-borderRadiusDefault instead.",
 			"since": null,
 			"scope": "commons/utils"
 		},
@@ -390,7 +390,7 @@
 			"kind": "class",
 			"name": "pr-u-borderTopRightRadiusL",
 			"replacement": null,
-			"note": "Use border-radius token utilities (pr-u-borderRadius{Structure,Default,Small,Full,Input}) instead.",
+			"note": "Use border-radius token utilities such as pr-u-borderRadiusDefault instead.",
 			"since": null,
 			"scope": "commons/utils"
 		},
@@ -398,7 +398,7 @@
 			"kind": "class",
 			"name": "pr-u-borderTopRightRadiusM",
 			"replacement": null,
-			"note": "Use border-radius token utilities (pr-u-borderRadius{Structure,Default,Small,Full,Input}) instead.",
+			"note": "Use border-radius token utilities such as pr-u-borderRadiusDefault instead.",
 			"since": null,
 			"scope": "commons/utils"
 		},
@@ -406,7 +406,7 @@
 			"kind": "class",
 			"name": "pr-u-borderTopRightRadiusXL",
 			"replacement": null,
-			"note": "Use border-radius token utilities (pr-u-borderRadius{Structure,Default,Small,Full,Input}) instead.",
+			"note": "Use border-radius token utilities such as pr-u-borderRadiusDefault instead.",
 			"since": null,
 			"scope": "commons/utils"
 		},

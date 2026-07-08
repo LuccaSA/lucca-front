@@ -21,16 +21,19 @@
 		}
 
 		@include deprecated.selector('.mod-XL', $note: 'The XL userTile size is deprecated.', $scope: 'component:userTile');
+
 		&.mod-XL {
 			@include XL;
 		}
 
 		@include deprecated.selector('.mod-XXL', $note: 'The XXL userTile size is deprecated.', $scope: 'component:userTile');
+
 		&.mod-XXL {
 			@include XXL;
 		}
 
 		@include deprecated.selector('.mod-XXXL', $note: 'The XXXL userTile size is deprecated.', $scope: 'component:userTile');
+
 		&.mod-XXXL {
 			@include XXXL;
 		}

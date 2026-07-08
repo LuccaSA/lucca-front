@@ -8,6 +8,7 @@
 
 	@include deprecated.cssVariable('--components-container-max-width', $replacement: '--commons-container-maxWidth', $scope: 'component:container');
 	--components-container-max-width: var(--commons-container-maxWidth);
+
 	@include deprecated.cssVariable('--components-container-padding', $replacement: '--commons-container-padding', $scope: 'component:container');
 	--components-container-padding: var(--commons-container-padding);
 }
