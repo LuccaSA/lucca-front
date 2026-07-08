@@ -56,6 +56,3 @@ scripts/generate-skills/generate-skills-config.json
 /coverage/
 
 *storybook.log
-
-# scss deprecation size audit (generated evidence, pasted into PRs)
-scss-size-audit.md
