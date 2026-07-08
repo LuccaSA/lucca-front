@@ -5,7 +5,7 @@ import { CheckboxInputComponent } from '@lucca-front/ng/forms';
 import { INLINE_MESSAGE_STATE } from '@lucca-front/ng/inline-message';
 import { Meta, moduleMetadata, StoryObj } from '@storybook/angular';
 import { cleanupTemplate, createTestStory, generateInputs, setStoryOptions } from 'stories/helpers/stories';
-import { sleep, waitForAngular } from 'stories/helpers/test';
+import { waitForAngular } from 'stories/helpers/test';
 import { expect, userEvent, within } from 'storybook/test';
 import { StoryModelDisplayComponent } from 'stories/helpers/story-model-display.component';
 
@@ -127,7 +127,7 @@ export const BasicTEST = createTestStory(Basic, async ({ canvasElement, step }) 
 	await step('Interaction souris - cocher', async () => {
 		const checkbox = canvas.getByRole('checkbox');
 		await userEvent.click(checkbox);
-		await sleep(200);
+		await waitForAngular();
 		await expect(checkbox).toBeChecked();
 	});
 

@@ -1,5 +1,5 @@
 import { NgTemplateOutlet } from '@angular/common';
-import { AfterContentInit, ChangeDetectionStrategy, Component, computed, ElementRef, forwardRef, inject, input, model, ViewEncapsulation } from '@angular/core';
+import { AfterContentInit, ChangeDetectionStrategy, Component, computed, DestroyRef, ElementRef, forwardRef, inject, input, model, ViewEncapsulation } from '@angular/core';
 import { toSignal } from '@angular/core/rxjs-interop';
 import { FormsModule } from '@angular/forms';
 import { ButtonComponent } from '@lucca-front/ng/button';
@@ -43,6 +43,7 @@ const SORT_VALUES = ['none', 'ascending', 'descending'] as const;
 })
 export class DataTableRowCellHeaderComponent extends BaseDataTableCell implements AfterContentInit {
 	elementRef = inject<ElementRef<HTMLTableCellElement>>(ElementRef);
+	#destroyRef = inject(DestroyRef);
 
 	sort = model<DataTableSort | null>(null);
 	fixedWidth = input<string | null>(null);
@@ -83,9 +84,9 @@ export class DataTableRowCellHeaderComponent extends BaseDataTableCell implement
 	inlineSizePx = toSignal(this.#inlineSizePx$);
 
 	ngAfterContentInit(): void {
-		new ResizeObserver(() => {
-			this.#inlineSizePx$.next(this.elementRef.nativeElement.clientWidth);
-		}).observe(this.elementRef.nativeElement);
+		const observer = new ResizeObserver(() => this.#inlineSizePx$.next(this.elementRef.nativeElement.clientWidth));
+		observer.observe(this.elementRef.nativeElement);
+		this.#destroyRef.onDestroy(() => observer.disconnect());
 	}
 
 	toggleSort(): void {

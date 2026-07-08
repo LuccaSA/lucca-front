@@ -1,7 +1,4 @@
-import { bob } from '@/stories/users/user.mocks';
-import { createTestStory } from 'stories/helpers/stories';
-import { waitForAngular } from 'stories/helpers/test';
-import { expect, within } from 'storybook/test';
+import { finn } from '@/stories/users/user.mocks';
 import { LOCALE_ID } from '@angular/core';
 import { ActivityFeedComponent, ActivityFeedStepComponent, ActivityFeedUpdateComponent } from '@lucca-front/ng/activity-feed';
 import { CommentComponent } from '@lucca-front/ng/comment';
@@ -10,6 +7,9 @@ import { ReadMoreComponent } from '@lucca-front/ng/read-more';
 import { StatusBadgeComponent } from '@lucca-front/ng/status-badge';
 import { ButtonComponent } from '@lucca/prisme/button';
 import { applicationConfig, Meta, moduleMetadata, StoryObj } from '@storybook/angular';
+import { createTestStory } from 'stories/helpers/stories';
+import { waitForAngular } from 'stories/helpers/test';
+import { expect, within } from 'storybook/test';
 
 interface ActivityFeedBasicStory {
 	statusStep: boolean;
@@ -117,7 +117,7 @@ const Template = (args: ActivityFeedBasicStory) => ({
 
 export const Basic: StoryObj<ActivityFeedBasicStory> = {
 	args: {
-		user: bob,
+		user: finn,
 		statusStep: false,
 		pendingStep: false,
 		updated: false,

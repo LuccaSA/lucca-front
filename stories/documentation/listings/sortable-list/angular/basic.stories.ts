@@ -17,7 +17,7 @@ export default {
 			control: {
 				type: 'text',
 			},
-			description: 'Modifie le texte principal d’un élément de liste.',
+			description: 'Modifie le texte principal d’un élément de liste. [PortalContent]',
 		},
 		helperMessage: {
 			control: {
@@ -30,6 +30,7 @@ export default {
 			description: 'Modifie la taille du composant.',
 		},
 		clickable: {
+			control: 'boolean',
 			description: 'Rend les lignes cliquables.',
 		},
 		unclearable: {

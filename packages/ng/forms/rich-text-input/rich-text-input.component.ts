@@ -27,6 +27,7 @@ import { FormFieldComponent, InputDirective, ɵPresentationDisplayDefaultDirecti
 import { $getRoot, createEditor, Klass, LexicalEditor, LexicalNode, LexicalNodeReplacement, SKIP_DOM_SELECTION_TAG, UpdateListenerPayload } from 'lexical';
 import { RICH_TEXT_FORMATTER, RichTextFormatter } from './formatters';
 import { CdkPortalOutlet, DomPortal } from '@angular/cdk/portal';
+import { isNil } from '@lucca-front/ng/core';
 
 export const INITIAL_UPDATE_TAG = 'initial-update';
 
@@ -99,6 +100,7 @@ export class RichTextInputComponent implements OnInit, OnDestroy, ControlValueAc
 	#focusedPlugin: number = 0;
 	#editor?: LexicalEditor;
 	#isRootElementInitialized = false;
+	#pendingValue: string | null = null;
 
 	constructor() {
 		effect(() => {
@@ -137,6 +139,10 @@ export class RichTextInputComponent implements OnInit, OnDestroy, ControlValueAc
 		if (this.#allPlugins().length > 0) {
 			this.#allPlugins()[this.#focusedPlugin].tabindex?.set(0);
 		}
+
+		if (this.#pendingValue) {
+			this.writeValue(this.#pendingValue);
+		}
 	}
 
 	ngOnDestroy(): void {
@@ -144,16 +150,22 @@ export class RichTextInputComponent implements OnInit, OnDestroy, ControlValueAc
 	}
 
 	writeValue(value: string | null): void {
+		const editorRef = this.#editor;
+		if (isNil(editorRef)) {
+			this.#pendingValue = value;
+			return;
+		}
+
 		const updateTags = [SKIP_DOM_SELECTION_TAG, INITIAL_UPDATE_TAG];
 		if (value) {
-			this.#editor?.update(
+			editorRef.update(
 				() => {
-					this.#richTextFormatter.parse(this.#editor, value);
+					this.#richTextFormatter.parse(editorRef, value);
 				},
 				{ tag: updateTags },
 			);
-		} else if (!this.#editor?.getEditorState().isEmpty()) {
-			this.#editor?.update(
+		} else if (!editorRef.getEditorState().isEmpty()) {
+			editorRef.update(
 				() => {
 					const root = $getRoot();
 					root.clear();

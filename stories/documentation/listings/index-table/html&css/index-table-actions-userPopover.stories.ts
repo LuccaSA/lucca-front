@@ -1,4 +1,4 @@
-import { bob } from '@/stories/users/user.mocks';
+import { finn } from '@/stories/users/user.mocks';
 import { provideHttpClient } from '@angular/common/http';
 import { provideAnimations } from '@angular/platform-browser/animations';
 import { LuUserDisplayModule, LuUserPictureComponent } from '@lucca-front/ng/user';
@@ -53,6 +53,6 @@ const Template = (args: IndexTableActionsUserPopoverCellStory) => ({
 });
 
 export const UserPopover: StoryObj<IndexTableActionsUserPopoverCellStory> = {
-	args: { bob },
+	args: { bob: finn },
 	render: Template,
 };

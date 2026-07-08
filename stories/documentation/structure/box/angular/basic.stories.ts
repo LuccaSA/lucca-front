@@ -11,6 +11,9 @@ export default {
 		killable: {
 			description: 'Ajoute un bouton de fermeture.',
 		},
+		killed: {
+			description: 'Événement déclenché lorsque la box est fermée.',
+		},
 	},
 	decorators: [
 		moduleMetadata({

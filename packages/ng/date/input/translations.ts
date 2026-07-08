@@ -39,4 +39,9 @@
 		placeholderMonth: 'MM/YYYY',
 		placeholderYear: 'YYYY',
 	},
+	pl: {
+		placeholderDay: 'DD/MM/RRRR',
+		placeholderMonth: 'MM/RRRR',
+		placeholderYear: 'RRRR',
+	},
 };

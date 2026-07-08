@@ -1,7 +1,7 @@
 import { ChangeDetectionStrategy, Component, input } from '@angular/core';
 import { ILuUser, LuDisplayFormat, LuDisplayFullname, LuDisplayHybrid, LuDisplayInitials, LuUserDisplayModule } from '@lucca-front/ng/user';
 import { Meta, StoryObj } from '@storybook/angular';
-import { bob, patrick, squidwards } from '../user.mocks';
+import { finn, marceline } from '../user.mocks';
 
 const formatters = {
 	enLongConjFormatter: new Intl.ListFormat('en', { style: 'long', type: 'conjunction' }),
@@ -16,7 +16,7 @@ const formatters = {
 	changeDetection: ChangeDetectionStrategy.OnPush,
 })
 class DisplayStory {
-	users = input<ILuUser[]>([bob, patrick, squidwards]);
+	users = input<ILuUser[]>([finn, marceline]);
 	displayFormat = input<LuDisplayFormat>(LuDisplayFullname.lastfirst);
 	separator = input<string>(', ');
 	formatter = input<Intl.ListFormat>(formatters.enLongConjFormatter);

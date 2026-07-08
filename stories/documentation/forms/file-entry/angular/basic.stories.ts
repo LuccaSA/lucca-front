@@ -37,6 +37,10 @@ export default {
 		downloadURL: {
 			description: 'URL de téléchargement du fichier.',
 		},
+		openInNewTab: {
+			description: 'Ouvre le fichier dans un nouvel onglet au lieu de le télécharger. Peut varier selon les navigateurs ou les réglages utilisateurs.',
+			if: { arg: 'downloadURL', truthy: true },
+		},
 		inlineMessageError: {
 			description: 'Message d’erreur affiché sous le composant.',
 		},
@@ -60,6 +64,12 @@ export default {
 		},
 		withFileSize: {
 			control: 'boolean',
+		},
+		deleteFile: {
+			description: 'Événement déclenché lors du clic sur le bouton de suppression du fichier.',
+		},
+		passwordChange: {
+			description: 'Événement déclenché lors de la modification du mot de passe du fichier.',
 		},
 	},
 	decorators: [
@@ -97,6 +107,7 @@ export const Basic = {
 		previewUrl: 'https://dummyimage.com/500',
 		inlineMessageError: 'Virus détecté dans le fichier.',
 		downloadURL: '',
+		openInNewTab: false,
 		deletable: true,
 		withPassword: false,
 	},

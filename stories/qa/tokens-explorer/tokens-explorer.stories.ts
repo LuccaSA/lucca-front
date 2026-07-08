@@ -11,11 +11,12 @@ import { LuTooltipModule } from '@lucca-front/ng/tooltip';
 import { Meta, StoryObj } from '@storybook/angular';
 
 type TokenCategory = 'all' | 'palette' | 'color' | 'spacing' | 'radius' | 'typography' | 'elevation';
-type TokenPreview = 'swatch' | 'text' | 'spacing' | 'radius' | 'font' | 'fontSize' | 'lineHeight' | 'fontWeight' | 'fontFamily' | 'shadow' | 'surface' | 'raw';
+type TokenPreview = 'swatch' | 'text' | 'gradient-text' | 'border' | 'spacing' | 'radius' | 'font' | 'fontSize' | 'lineHeight' | 'fontWeight' | 'fontFamily' | 'shadow' | 'surface' | 'raw';
 
 interface TokenEntry {
 	name: string;
 	previewVar?: string;
+	fallbackVar?: string;
 	value: string;
 	category: TokenCategory;
 	group: string;
@@ -65,16 +66,6 @@ function buildPaletteTokens(): TokenEntry[] {
 		}
 	}
 
-	for (const shade of PALETTE_SHADES) {
-		out.push({
-			name: `--palettes-ai-${shade}`,
-			value: `AI ${shade}`,
-			category: 'palette',
-			group: 'AI',
-			preview: 'swatch',
-		});
-	}
-
 	return out;
 }
 
@@ -88,6 +79,12 @@ const SEMANTIC_COLOR_TOKENS: TokenEntry[] = [
 	{ name: '--pr-t-color-text-success', value: 'Success 700', category: 'color', group: 'Text', preview: 'text' },
 	{ name: '--pr-t-color-text-warning', value: 'Warning 700', category: 'color', group: 'Text', preview: 'text' },
 	{ name: '--pr-t-color-text-critical', value: 'Critical 700', category: 'color', group: 'Text', preview: 'text' },
+];
+
+const COLOR_AI_TOKENS: TokenEntry[] = [
+	{ name: '--pr-t-color-border-ai', fallbackVar: '--palettes-ai-300', value: 'AI 300', category: 'color', group: 'AI', preview: 'border' },
+	{ name: '--pr-t-color-background-ai', fallbackVar: '--palettes-ai-50', value: 'AI 50', category: 'color', group: 'AI', preview: 'swatch' },
+	{ name: '--pr-t-color-icon-ai', fallbackVar: '--palettes-ai-600', value: 'AI 600', category: 'color', group: 'AI', preview: 'gradient-text' },
 ];
 
 const SPACING_KEYS = ['0', '25', '50', '75', '100', '150', '200', '250', '300', '400', '500', '600', '700', '800'] as const;
@@ -225,7 +222,7 @@ const ELEVATION_TOKENS: TokenEntry[] = [
 	{ name: '--pr-t-elevation-shadow-overlay', value: 'Popover / dropdown shadow', category: 'elevation', group: 'Shadow', preview: 'shadow' },
 ];
 
-const ALL_TOKENS: TokenEntry[] = [...buildPaletteTokens(), ...SEMANTIC_COLOR_TOKENS, ...SPACING_TOKENS, ...RADIUS_TOKENS, ...TYPOGRAPHY_TOKENS, ...ELEVATION_TOKENS];
+const ALL_TOKENS: TokenEntry[] = [...buildPaletteTokens(), ...SEMANTIC_COLOR_TOKENS, ...COLOR_AI_TOKENS, ...SPACING_TOKENS, ...RADIUS_TOKENS, ...TYPOGRAPHY_TOKENS, ...ELEVATION_TOKENS];
 
 const PRODUCT_OPTIONS: Array<{ value: string; name: string }> = [
 	{ value: 'pagga', name: 'Pagga' },
@@ -385,8 +382,30 @@ const PRODUCT_OPTIONS: Array<{ value: string; name: string }> = [
 				border: 2px solid var(--palettes-neutral-600);
 			}
 
+			.tokensExplorer-card-preview.mod-border {
+				padding: 2px;
+				background: var(--tokensExplorer-preview-gradient);
+			}
+
+			.tokensExplorer-card-preview.mod-border .tokensExplorer-card-preview-border {
+				inline-size: 100%;
+				block-size: 100%;
+				background-color: var(--pr-t-elevation-surface-raised);
+				border-radius: calc(var(--pr-t-border-radius-small) - 1px);
+			}
+
+			.tokensExplorer-card-preview-gradient-text {
+				background: var(--tokensExplorer-preview-gradient);
+				-webkit-background-clip: text;
+				background-clip: text;
+				-webkit-text-fill-color: transparent;
+				font-size: var(--pr-t-font-fontSize-200);
+				line-height: 1;
+			}
+
 			.tokensExplorer-card-preview-font {
 				color: var(--pr-t-color-text-heading);
+				font-size: var(--pr-t-font-fontSize-200);
 				line-height: 1;
 				text-overflow: ellipsis;
 				overflow: hidden;

@@ -288,23 +288,23 @@ export default {
 		const modelEditableDisplayer = editable ? `<pr-story-model-display>{{ example }}</pr-story-model-display>` : ``;
 		const tbodyTpl = emptyAttr
 			? `<tr luDataTableRow>
-				<th luDataTableCell colspan="${cols}">
-					<lu-empty-state-section
-						hx="3"
-						illustration="magnifyingGlass"
-						heading="Empty State"
-						description="Flatus obsequiorum potest inanes pomerium obsequiorum credi homines vero caelibes orbos potest vile diversitate flatus."
-					/>
-				</th>
-			</tr>`
+			<th luDataTableCell colspan="${cols}">
+				<lu-empty-state-section
+					hx="3"
+					illustration="magnifyingGlass"
+					heading="Empty State"
+					description="Flatus obsequiorum potest inanes pomerium obsequiorum credi homines vero caelibes orbos potest vile diversitate flatus."
+				/>
+			</th>
+		</tr>`
 			: `${linesContent}<tr luDataTableRow${selectableLabelAttr}>
-				<th luDataTableCell>${textHeader}${verticalAlignContent}</th>${colsContent}
-				<td luDataTableCell${actionsAttr}>${actionsContent}</td>
-			</tr>
-			<tr luDataTableRow${selectableLabelAttr}${selectedAttr}${disabledAttr}>
-				<th luDataTableCell>${textHeader}</th>${colsContent}
-				<td luDataTableCell${editableAttr}>${editableContent}</td>
-			</tr>`;
+			<th luDataTableCell>${textHeader}${verticalAlignContent}</th>${colsContent}
+			<td luDataTableCell${actionsAttr}>${actionsContent}</td>
+		</tr>
+		<tr luDataTableRow${selectableLabelAttr}${selectedAttr}${disabledAttr}>
+			<th luDataTableCell>${textHeader}</th>${colsContent}
+			<td luDataTableCell${editableAttr}>${editableContent}</td>
+		</tr>`;
 
 		return {
 			props: { example: text },

@@ -5,7 +5,7 @@
 
 Ils sont exportés depuis `@lucca-front/ng/forms`.
 
-### Principe général
+#### Principe général
 
 Le composant manipule une valeur de type `MultilanguageTranslation[]` :
 
@@ -18,7 +18,7 @@ type MultilanguageTranslation = {
 
 Les validateurs retournent des clés d’erreur standard Angular sur le `FormControl`, que vous pouvez ensuite afficher dans le `lu-form-field` parent ou dans votre template.
 
-### Valideur `allLanguagesRequired`
+#### Valideur `allLanguagesRequired`
 
 Ce valideur vérifie que **toutes** les lignes de traduction contiennent une valeur non vide.
 
@@ -32,7 +32,7 @@ allLanguagesRequired(control) =>
 
 À utiliser quand chaque langue de votre modèle est obligatoire.
 
-### Valideur `invariantRequired`
+#### Valideur `invariantRequired`
 
 Ce valideur vérifie que la traduction `invariant` est renseignée.
 
@@ -46,7 +46,7 @@ invariantRequired(control) =>
 
 À utiliser quand seule la valeur principale (invariante) est obligatoire.
 
-### Exemple (Reactive Forms)
+#### Exemple (Reactive Forms)
 
 ```ts
 import { FormControl } from '@angular/forms';
@@ -83,7 +83,7 @@ get errorMessage(): string {
 }
 ```
 
-### Erreurs inline dans le popover
+#### Erreurs inline dans le popover
 
 Indépendamment des validateurs ci-dessus, le composant affiche une erreur inline sur chaque langue du panneau quand :
 
@@ -92,7 +92,7 @@ Indépendamment des validateurs ci-dessus, le composant affiche une erreur inlin
 
 Le message utilisé est la traduction `requiredError` (par défaut : `La traduction est obligatoire` en français).
 
-### Cas particulier : invariant manquant dans la valeur
+#### Cas particulier : invariant manquant dans la valeur
 
 Lors de `writeValue`, si vous fournissez un tableau non vide sans entrée `cultureCode: 'invariant'`, le composant lève une erreur :
 

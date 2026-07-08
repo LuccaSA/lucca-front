@@ -1,13 +1,13 @@
 import { ILuUser } from '@lucca-front/ng/user';
 
-export const bob: ILuUser = {
+export const finn: ILuUser = {
 	id: 12,
 	firstName: 'Finn',
 	lastName: 'Mertens',
 	pictureHref: 'https://cdn.lucca.fr/lucca-front/avatars/finn.png',
 	jobTitle: 'Hero',
 };
-export const patrick: ILuUser = {
+export const marceline: ILuUser = {
 	id: 13,
 	firstName: 'Marceline',
 	lastName: 'Abadeer',
@@ -16,7 +16,7 @@ export const patrick: ILuUser = {
 	},
 	jobTitle: 'Vampire',
 };
-export const squidwards: ILuUser = {
+export const jake: ILuUser = {
 	id: 14,
 	firstName: 'Jake',
 	lastName: 'The Dog',
