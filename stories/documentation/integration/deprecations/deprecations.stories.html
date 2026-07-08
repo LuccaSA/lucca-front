@@ -1,0 +1,73 @@
+<div class="deprecations">
+	<p class="deprecations-intro">
+		Every deprecated utility class, CSS custom property, component selector and Sass API in <code>@lucca-front/scss</code>, with its recommended replacement. This
+		page is generated from <code>packages/scss/css-api/deprecations.json</code>, which is built from the deprecation registry in the SCSS sources — it updates
+		automatically whenever something new is deprecated.
+	</p>
+
+	<lu-filter-bar>
+		<lu-segmented-control
+			class="filterBar-segmentedControl"
+			[ngModel]="kind()"
+			(ngModelChange)="kind.set($event)"
+			[ngModelOptions]="{ standalone: true }"
+		>
+			@for (option of kindOptions; track option.value) {
+				<ng-template #label>{{ option.label }} <lu-numeric-badge [value]="option.count" /></ng-template>
+				<lu-segmented-control-filter [label]="label" [value]="option.value" />
+			}
+		</lu-segmented-control>
+
+		<lu-form-field label="Search a deprecation" hiddenLabel>
+			<lu-text-input
+				[ngModel]="search()"
+				(ngModelChange)="search.set($event ?? '')"
+				[ngModelOptions]="{ standalone: true }"
+				placeholder="Search…"
+				hasSearchIcon
+				hasClearer
+			/>
+		</lu-form-field>
+
+		<span *luFilterPillAddonAfter class="deprecations-results">{{ filtered().length }} result(s)</span>
+	</lu-filter-bar>
+
+	@if (filtered().length === 0) {
+		<div class="deprecations-empty">No deprecation matches your search.</div>
+	} @else {
+		@for (group of grouped(); track group.label) {
+			<section class="deprecations-group">
+				@if (group.label) {
+					<h2 class="deprecations-group-title">{{ group.label }}</h2>
+				}
+				<table class="deprecations-table">
+					<thead>
+						<tr>
+							<th scope="col">Deprecated</th>
+							<th scope="col">Replacement</th>
+							<th scope="col">Note</th>
+						</tr>
+					</thead>
+					<tbody>
+						@for (entry of group.entries; track entry.kind + '|' + entry.name) {
+							<tr>
+								<td class="deprecations-name"><code>{{ entry.name }}</code></td>
+								<td class="deprecations-replacement">
+									@if (entry.replacement) {
+										<code>{{ entry.replacement }}</code>
+									} @else {
+										<span class="deprecations-replacement-none">— no direct replacement</span>
+									}
+								</td>
+								<td class="deprecations-note">{{ entry.note }}</td>
+							</tr>
+						}
+					</tbody>
+				</table>
+			</section>
+		}
+	}
+</div>
+
+<!-- To tell the ui-diff tool that the page has finished rendering -->
+<span id="ready"></span>
