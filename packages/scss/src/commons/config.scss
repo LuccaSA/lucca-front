@@ -1,6 +1,7 @@
 @use 'sass:list';
 @use 'sass:map';
 
+@use '@lucca-front/scss/src/commons/deprecated';
 @use '@lucca-front/scss/src/commons/function';
 
 $layers: 'reset, base, components, mods, product, utils';
@@ -789,13 +790,11 @@ $textLink: (
 
 // Deprecated
 
-// $colors are deprecated
 $colors: (
 	'white': #ffffff,
 	'black': #121212,
 );
 
-// $colorsRgb are deprecated
 $colorsRgb: (
 	'white': '255, 255, 255',
 	'neutral-400': '172, 187, 215',
@@ -804,10 +803,22 @@ $colorsRgb: (
 	'grey-900': '19, 29, 53',
 ) !default;
 
-// $borderRadius are deprecated
 $borderRadius: (
 	'M': 4px,
 	'L': 8px,
 	'XL': 12px,
 	'full': 9999px,
 ) !default;
+
+// Register the deprecated Sass API surface (flags, maps, deprecated palette names).
+// Emits no CSS.
+@include deprecated.sassApi('config.$deprecatedSpacings', $note: 'Escape-hatch flag for legacy element spacing.', $scope: 'commons/config');
+@include deprecated.sassApi('config.$deprecatedCardBoxMargin', $note: 'Escape-hatch flag for legacy card/box margins.', $scope: 'commons/config');
+@include deprecated.sassApi('config.$deprecatedUtilityPrefix', $note: 'Escape-hatch flag; the u- prefix will be removed.', $scope: 'commons/config');
+@include deprecated.sassApi('config.$colors', $note: 'Use palette custom properties (--palettes-*) instead.', $scope: 'commons/config');
+@include deprecated.sassApi('config.$colorsRgb', $note: 'Use palette custom properties (--palettes-*) instead.', $scope: 'commons/config');
+@include deprecated.sassApi('config.$borderRadius', $replacement: 'config.$borderRadiusVars', $scope: 'commons/config');
+
+@each $deprecatedPalette in $palettesDeprecated {
+	@include deprecated.sassApi('config palette: #{$deprecatedPalette}', $note: 'Deprecated palette name.', $scope: 'commons/config');
+}

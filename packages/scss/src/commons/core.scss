@@ -1,13 +1,15 @@
+@use 'sass:map';
 @use 'sass:meta';
 @use 'sass:string';
 
 @use '@lucca-front/scss/src/commons/config';
+@use '@lucca-front/scss/src/commons/deprecated';
 @use '@lucca-front/icons/src/commons/core' as transform;
 
 $contents: '100\\%', 'fit-content';
 $boxModel: 'margin', 'padding', 'border', 'inset';
-$boxDirection: '', 'top', 'bottom', 'left', 'right', 'inline', 'block', 'block-start', 'block-end', 'inline-start', 'inline-end'; // top, bottom, left and right are deprecated
-$corners: '', 'top-left-', 'top-right-', 'bottom-left-', 'bottom-right-', 'start-start-', 'start-end-', 'end-start-', 'end-end-'; // top-left, top-right, bottom-left and bottom-right are deprecated
+$boxDirection: '', 'top', 'bottom', 'left', 'right', 'inline', 'block', 'block-start', 'block-end', 'inline-start', 'inline-end';
+$corners: '', 'top-left-', 'top-right-', 'bottom-left-', 'bottom-right-', 'start-start-', 'start-end-', 'end-start-', 'end-end-';
 $gaps: 'column-gap', 'row-gap', 'gap';
 $displays: 'block', 'flex', 'grid', 'inline', 'inline-flex', 'inline-block', 'inline-grid', 'contents', 'none';
 $direction: 'column', 'column-reverse', 'row', 'row-reverse';
@@ -17,14 +19,37 @@ $align: 'flex-start', 'flex-end', 'baseline', 'stretch', 'center';
 $flex: '0', '1';
 $basis: '0', 'auto';
 $order: '-1', '1';
-$textAlign: 'left', 'center', 'right', 'start', 'end'; // left and right are deprecated
+$textAlign: 'left', 'center', 'right', 'start', 'end';
 $visibility: 'visible', 'hidden', 'collapse';
 $fontWeight: '400', '600', '700', '900', 'normal', 'bold';
 $fontStyle: 'normal', 'italic';
 $pointerEvents: 'none', 'auto';
 $scrollBehavior: 'auto', 'smooth';
 $whiteSpace: 'normal', 'nowrap', 'pre-line';
-$float: 'left', 'right', 'inline-start', 'inline-end'; // left and right are deprecated
+$float: 'left', 'right', 'inline-start', 'inline-end';
+
+// Deprecation data: physical values superseded by logical equivalents. Colocated with the
+// value lists above; consumed by the mixins below and by utils to register deprecations.
+$physicalDirectionToLogical: (
+	'top': 'block-start',
+	'bottom': 'block-end',
+	'left': 'inline-start',
+	'right': 'inline-end',
+);
+$textAlignDeprecated: (
+	'left': 'start',
+	'right': 'end',
+);
+$floatDeprecated: (
+	'left': 'inline-start',
+	'right': 'inline-end',
+);
+$cornersDeprecated: (
+	'top-left-': 'start-start-',
+	'top-right-': 'start-end-',
+	'bottom-left-': 'end-start-',
+	'bottom-right-': 'end-end-',
+);
 $verticalAlign: 'baseline', 'sub', 'super', 'text-top', 'text-bottom', 'middle', 'top', 'bottom';
 $position: 'absolute', 'relative', 'static', 'fixed', 'sticky';
 $decoration: 'underline', 'line-through', 'none';
@@ -41,7 +66,14 @@ $cursor: 'pointer', 'auto', 'default', 'text';
 	}
 
 	@if $boxModel != 'inset' or ($boxDirection != 'top' and $boxDirection != 'bottom' and $boxDirection != 'left' and $boxDirection != 'right') {
-		.pr-u-#{transform.camelize($boxModel)}#{transform.capitalize(transform.camelize($boxDirection))}#{transform.capitalize($key)} {
+		$class: 'pr-u-#{transform.camelize($boxModel)}#{transform.capitalize(transform.camelize($boxDirection))}#{transform.capitalize($key)}';
+
+		@if map.has-key($physicalDirectionToLogical, $boxDirection) {
+			$logical: map.get($physicalDirectionToLogical, $boxDirection);
+			@include deprecated.class($class, $replacement: 'pr-u-#{transform.camelize($boxModel)}#{transform.capitalize(transform.camelize($logical))}#{transform.capitalize($key)}', $scope: 'commons/utils');
+		}
+
+		.#{$class} {
 			#{$boxModel}#{$boxDirectionString}#{$boxDirection}: var(--pr-t-spacings-#{$key}) #{$suffix};
 		}
 	}
@@ -91,7 +123,7 @@ $cursor: 'pointer', 'auto', 'default', 'text';
 	}
 }
 
-@mixin classes($name, $properties, $suffix: '!important', $prefix: '') {
+@mixin classes($name, $properties, $suffix: '!important', $prefix: '', $deprecated: ()) {
 	@each $property in $properties {
 		$minusString: '';
 
@@ -100,24 +132,40 @@ $cursor: 'pointer', 'auto', 'default', 'text';
 		}
 
 		@if $prefix == '' {
-			.pr-u-#{transform.camelize($name)}#{$minusString}#{transform.capitalize(transform.camelize($property))} {
+			$prName: 'pr-u-#{transform.camelize($name)}#{$minusString}#{transform.capitalize(transform.camelize($property))}';
+			$modern: $prName;
+
+			@if map.has-key($deprecated, $property) {
+				$modern: 'pr-u-#{transform.camelize($name)}#{transform.capitalize(transform.camelize(map.get($deprecated, $property)))}';
+				@include deprecated.class($prName, $replacement: $modern, $scope: 'commons/utils');
+			}
+
+			.#{$prName} {
 				#{$name}: #{transform.replace($property, '\\', '')} #{$suffix};
 			}
 
 			// Deprecated .u- utilities
 			@if config.$deprecatedUtilityPrefix {
-				.u-#{transform.camelize($name)}#{$minusString}#{transform.capitalize(transform.camelize($property))} {
+				$uName: 'u-#{transform.camelize($name)}#{$minusString}#{transform.capitalize(transform.camelize($property))}';
+				@include deprecated.class($uName, $replacement: $modern, $note: 'The u- prefix is deprecated.', $scope: 'commons/utils');
+
+				.#{$uName} {
 					#{$name}: #{transform.replace($property, '\\', '')} #{$suffix};
 				}
 			}
 		} @else {
-			.pr-u-#{$prefix}#{transform.capitalize(transform.camelize($name))}#{$minusString}#{transform.capitalize(transform.camelize($property))} {
+			$prName: 'pr-u-#{$prefix}#{transform.capitalize(transform.camelize($name))}#{$minusString}#{transform.capitalize(transform.camelize($property))}';
+
+			.#{$prName} {
 				#{$name}: #{transform.replace($property, '\\', '')} #{$suffix};
 			}
 
 			// Deprecated .u- utilities
 			@if config.$deprecatedUtilityPrefix {
-				.u-#{$prefix}#{transform.capitalize(transform.camelize($name))}#{$minusString}#{transform.capitalize(transform.camelize($property))} {
+				$uName: 'u-#{$prefix}#{transform.capitalize(transform.camelize($name))}#{$minusString}#{transform.capitalize(transform.camelize($property))}';
+				@include deprecated.class($uName, $replacement: $prName, $note: 'The u- prefix is deprecated.', $scope: 'commons/utils');
+
+				.#{$uName} {
 					#{$name}: #{transform.replace($property, '\\', '')} #{$suffix};
 				}
 			}
@@ -126,14 +174,17 @@ $cursor: 'pointer', 'auto', 'default', 'text';
 }
 
 @mixin palettes($suffix: '!important') {
-	// .pr-u-text is deprecated
 	@each $palette in config.$palettesAll {
+		@include deprecated.class('pr-u-text#{transform.capitalize($palette)}', $replacement: 'pr-u-colorText#{transform.capitalize($palette)}', $scope: 'commons/utils');
+
 		.pr-u-text#{transform.capitalize($palette)}, .pr-u-colorText#{transform.capitalize($palette)} {
 			color: var(--palettes-#{$palette}-700) #{$suffix};
 		}
 
 		// Deprecated .u- utilities
 		@if config.$deprecatedUtilityPrefix {
+			@include deprecated.class('u-text#{transform.capitalize($palette)}', $replacement: 'pr-u-colorText#{transform.capitalize($palette)}', $note: 'The u- prefix is deprecated.', $scope: 'commons/utils');
+
 			.u-text#{transform.capitalize($palette)} {
 				color: var(--palettes-#{$palette}-700) #{$suffix};
 			}
@@ -187,8 +238,13 @@ $cursor: 'pointer', 'auto', 'default', 'text';
 
 // DEPRECATED
 
+@include deprecated.sassApi('core.sizes', $note: 'Use the typography utilities/tokens instead.', $scope: 'commons/core');
+@include deprecated.sassApi('core.borderRadius', $replacement: 'core.borderRadiusTokens', $scope: 'commons/core');
+
 @mixin sizes($suffix: '!important') {
 	@each $key, $value in config.$sizes {
+		@include deprecated.class('pr-u-text#{transform.capitalize($key)}', $note: 'Use typography utilities (pr-u-body*, pr-u-h*) instead.', $scope: 'commons/utils');
+
 		.pr-u-text#{transform.capitalize($key)} {
 			font-size: var(--sizes-#{$key}-fontSize) #{$suffix};
 			line-height: var(--sizes-#{$key}-lineHeight) #{$suffix};
@@ -196,6 +252,8 @@ $cursor: 'pointer', 'auto', 'default', 'text';
 
 		// Deprecated .u- utilities
 		@if config.$deprecatedUtilityPrefix {
+			@include deprecated.class('u-text#{transform.capitalize($key)}', $note: 'The u- prefix is deprecated; use typography utilities (pr-u-body*, pr-u-h*) instead.', $scope: 'commons/utils');
+
 			.u-text#{transform.capitalize($key)} {
 				font-size: var(--sizes-#{$key}-fontSize) #{$suffix};
 				line-height: var(--sizes-#{$key}-lineHeight) #{$suffix};
@@ -207,12 +265,22 @@ $cursor: 'pointer', 'auto', 'default', 'text';
 @mixin borderRadius($suffix: '!important') {
 	@each $corner in $corners {
 		@each $key, $value in config.$borderRadius {
-			.pr-u-border#{transform.capitalize(transform.camelize($corner))}Radius#{transform.capitalize($key)} {
+			$class: 'pr-u-border#{transform.capitalize(transform.camelize($corner))}Radius#{transform.capitalize($key)}';
+			// pr-u-borderRadiusFull (plain corner) is a live border-radius token utility, not deprecated.
+			$isTokenAlias: $corner == '' and $key == 'full';
+
+			@if not $isTokenAlias {
+				@include deprecated.class($class, $note: 'Use border-radius token utilities (pr-u-borderRadius{Structure,Default,Small,Full,Input}) instead.', $scope: 'commons/utils');
+			}
+
+			.#{$class} {
 				border-#{$corner}radius: var(--commons-borderRadius-#{$key}) #{$suffix};
 			}
 
 			// Deprecated .u- utilities
 			@if config.$deprecatedUtilityPrefix {
+				@include deprecated.class('u-border#{transform.capitalize(transform.camelize($corner))}Radius#{transform.capitalize($key)}', $note: 'The u- prefix is deprecated; use border-radius token utilities instead.', $scope: 'commons/utils');
+
 				.u-border#{transform.capitalize(transform.camelize($corner))}Radius#{transform.capitalize($key)} {
 					border-#{$corner}radius: var(--commons-borderRadius-#{$key}) #{$suffix};
 				}
