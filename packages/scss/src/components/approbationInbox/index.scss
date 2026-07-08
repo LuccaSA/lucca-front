@@ -11,6 +11,12 @@
 .approbationInbox-list {
 	@layer components {
 		@include component;
+
+		.mainLayout-sidebar:has(&) {
+			@include media.max('M') {
+				@include mainLayoutSidebar;
+			}
+		}
 	}
 }
 
@@ -30,32 +36,46 @@
 
 		&:not(.mod-insideDialog) {
 			@include media.max('M') {
-				@include outsideDialog;
+				@include outsideDialogMediaMaxM;
+			}
+		}
+
+		&:not(:has(.approbationInbox-detail-header)) {
+			&:has(.approbationInbox-detail-main:empty) {
+				@include empty;
 			}
 		}
 	}
 }
 
 .approbationInbox-list-item {
-	&:has(.checkboxField-input:checked) {
-		@layer mods {
+	@layer mods {
+		&:has(.checkboxField-input:checked) {
 			@include selected;
 		}
 	}
 }
 
 .approbationInbox-list-item {
-	&:has(.approbationInbox-list-item-content-action[aria-current='page']),
-	&:has(.approbationInbox-list-item-content-action.is-current) {
-		@layer mods {
+	@layer mods {
+		&:has(.approbationInbox-list-item-content-action[aria-current='page']),
+		&:has(.approbationInbox-list-item-content-action.is-current) {
 			@include current;
 		}
 	}
 }
 
 .approbationInbox-list-item-content {
-	&:has(.approbationInbox-list-item-content-action:focus-visible) {
-		@include focusVisible;
+	@layer mods {
+		&:has(.approbationInbox-list-item-content-action:focus-visible) {
+			@include focusVisible;
+		}
+	}
+}
+
+.approbationInbox-details-main-block:last-child {
+	@layer mods {
+		@include blockLastChild;
 	}
 }
 

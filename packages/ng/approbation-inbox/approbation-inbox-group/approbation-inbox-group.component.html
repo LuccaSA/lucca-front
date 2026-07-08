@@ -2,7 +2,12 @@
 	<div class="approbationInbox-list-groupOptional-header">
 		@if (selectable()) {
 			<lu-form-field label="Sélectionner…" hiddenLabel class="approbationInbox-list-groupOptional-header-formfieldOptional">
-				<lu-checkbox-input [ngModel]="allChecked()" [mixed]="groupMixed()" (ngModelChange)="onGroupChange($event)" />
+				<lu-checkbox-input
+					[ngModel]="allChecked()"
+					[ngModelOptions]="{ standalone: true }"
+					[mixed]="groupMixed()"
+					(ngModelChange)="onGroupChange($event)"
+				/>
 			</lu-form-field>
 		}
 		<button

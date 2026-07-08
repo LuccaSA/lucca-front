@@ -9,17 +9,23 @@
 @mixin insideDialog {
 	--components-approbationInbox-details-header-main-actions-display: none;
 	--components-approbationInbox-details-container-display: contents;
-	--components-approbationInbox-details-headerMain-padding: var(--pr-t-spacings-150) var(--pr-t-spacings-150) var(--pr-t-spacings-300);
+	--components-approbationInbox-details-headerMain-padding: var(--pr-t-spacings-150);
 	--components-approbationInbox-details-headerMain-margin: 0 calc(var(--pr-t-spacings-150) * -1);
 	--components-approbationInbox-details-gap: var(--pr-t-spacings-50);
+	--components-approbationInbox-details-main-gap: var(--pr-t-spacings-150);
+	--components-approbationInbox-details-header-main-block-content-paddingBlockEnd: var(--pr-t-spacings-150);
 
 	.dialog-inside-content:has(&) {
 		display: flex;
 		flex-direction: column;
 	}
+
+	.approbationInbox-details-main-block-divider.divider {
+		margin: var(--components-divider-margin);
+	}
 }
 
-@mixin outsideDialog {
+@mixin outsideDialogMediaMaxM {
 	display: none;
 }
 
@@ -48,4 +54,16 @@
 
 @mixin mediaMaxS {
 	--components-approbationInbox-list-footer-paddingInline: var(--pr-t-spacings-300);
+}
+
+@mixin blockLastChild {
+	--components-approbationInbox-details-header-main-block-content-paddingBlockEnd: 0;
+
+	.approbationInbox-details-main-block-divider.divider {
+		--components-divider-display: none;
+	}
+}
+
+@mixin mainLayoutSidebar {
+	block-size: 100%;
 }

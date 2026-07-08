@@ -18,8 +18,8 @@ import { generateInputs } from 'stories/helpers/stories';
 
 export default {
 	title: 'Documentation/Structure/Approbation Inbox/Angular/List',
+	// TODO inbox
 	argTypes: {
-		// TODO inbox
 		group: {
 			description: '',
 		},
@@ -33,7 +33,23 @@ export default {
 		},
 		itemCount: {
 			description: '',
-			control: { type: 'range', min: 1, max: 5 },
+			control: { type: 'range', min: 0, max: 5 },
+		},
+		emptyIllustration: {
+			description: '',
+			options: ['', 'awardRibbon'],
+			control: {
+				type: 'select',
+			},
+			if: { arg: 'itemCount', eq: 0 },
+		},
+		emptyLabel: {
+			description: '',
+			if: { arg: 'itemCount', eq: 0 },
+		},
+		emptyResetLabel: {
+			description: '',
+			if: { arg: 'itemCount', eq: 0 },
 		},
 	},
 	decorators: [
@@ -87,8 +103,11 @@ export default {
 		<lu-approbation-inbox-item>
 			<a href="#" lu-approbation-inbox-action approbationInboxListItemTitle>Title</a>
 		</lu-approbation-inbox-item>`;
-		const itemTpl = `<lu-approbation-inbox-item${centerParam}${checkedParam}>${startTpl}${centerTpl}${endTpl}
-		</lu-approbation-inbox-item>`;
+		const itemTpl =
+			itemCount != 0
+				? `<lu-approbation-inbox-item${centerParam}${checkedParam}>${startTpl}${centerTpl}${endTpl}
+		</lu-approbation-inbox-item>`
+				: ``;
 		const filterBarTpl = filterBar
 			? `
 	<lu-filter-bar approbationInboxListFilterBar>
@@ -104,7 +123,7 @@ export default {
 	</lu-filter-bar>`
 			: ``;
 		const itemsTpl = `
-		${itemTpl}${defaultItemTpl.repeat(itemCount - 1)}
+		${itemTpl}${defaultItemTpl.repeat(itemCount - 1 < 0 ? 0 : itemCount - 1)}
 	`;
 		const groupTpl = group
 			? `
@@ -146,5 +165,8 @@ export const Basic: StoryObj<
 		end: false,
 		center: false,
 		itemCount: 1,
+		emptyIllustration: '',
+		emptyLabel: 'Votre recherche ne donne aucun résultat.',
+		emptyResetLabel: 'Réinitialiser les filtres',
 	},
 };

@@ -14,3 +14,7 @@
 @mixin current {
 	--components-approbationInbox-list-item-content-before-boxShadow: 0 0 0 1px var(--palettes-product-400), 0 0 0 1px var(--palettes-product-400) inset;
 }
+
+@mixin empty {
+	--components-approbationInbox-details-empty-display: flex;
+}

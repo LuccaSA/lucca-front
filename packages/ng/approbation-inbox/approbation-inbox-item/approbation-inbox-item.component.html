@@ -1,6 +1,6 @@
 @if (selectable()) {
 	<lu-form-field label="Sélectionner…" hiddenLabel class="approbationInbox-list-item-formfieldOptional">
-		<lu-checkbox-input [ngModel]="checked()" (ngModelChange)="checked.set($event)" />
+		<lu-checkbox-input [ngModel]="checked()" [ngModelOptions]="{ standalone: true }" (ngModelChange)="checked.set($event)" />
 	</lu-form-field>
 }
 <div class="approbationInbox-list-item-content">

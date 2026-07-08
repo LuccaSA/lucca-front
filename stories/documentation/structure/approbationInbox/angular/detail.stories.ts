@@ -10,19 +10,27 @@ import { generateInputs } from 'stories/helpers/stories';
 
 export default {
 	title: 'Documentation/Structure/Approbation Inbox/Angular/Detail',
+	// TODO inbox
 	argTypes: {
-		// TODO inbox
 		blockCount: {
 			description: '',
-			control: { type: 'range', min: 1, max: 5 },
+			control: { type: 'range', min: 0, max: 5 },
 		},
 		blockLabel: {
 			description: '',
-			if: { arg: 'blockCount', neq: 1 },
+			if: { arg: 'blockCount', neq: 0 },
 		},
 		calloutLabel: {
 			description: '',
 			if: { arg: 'callout', truthy: true },
+		},
+		emptyIllustration: {
+			description: '',
+			options: ['magnifying-glass', 'post-it-success'],
+			control: {
+				type: 'select',
+			},
+			if: { arg: 'blockCount', eq: 0 },
 		},
 	},
 	decorators: [
@@ -44,7 +52,9 @@ export default {
 			],
 		}),
 	],
-	render: ({ headerContent, callout, calloutLabel, blockLabel, blockCount, moreActions, illustration, ...args }, { argTypes }) => {
+	render: ({ insideDialog, headerContent, callout, calloutLabel, blockLabel, blockCount, moreActions, illustration, emptyIllustration, ...args }, { argTypes }) => {
+		const insideDialogParam = insideDialog ? ` insideDialog` : ``;
+		const emptyIllustrationParam = emptyIllustration != 'magnifying-glass' && emptyIllustration != '' ? ` emptyIllustration="${emptyIllustration}"` : ``;
 		const contentTpl = `
 	<lu-approbation-inbox-details-main-block label="${blockLabel}">
 		Dolor sit amet
@@ -55,7 +65,7 @@ export default {
 		<p>${calloutLabel}</p>
 	</lu-callout>`
 			: ``;
-		const headerTpl = headerContent
+		const headerContentTpl = headerContent
 			? `
 		<lu-listing inline divider>
 			<lu-listing-item>Lorem ipsum</lu-listing-item>
@@ -81,26 +91,45 @@ export default {
 			</ng-template>
 		</ng-container>`
 			: ``;
-		return {
-			template: `<lu-approbation-inbox-detail>
-	<lu-approbation-inbox-detail-header approbationInboxDetailHeader${generateInputs(args, argTypes)}>${headerIllustrationTpl}${headerTpl}
+		const headerTpl =
+			blockCount != 0
+				? `
+	<lu-approbation-inbox-detail-header approbationInboxDetailHeader${generateInputs(args, argTypes)}>${headerIllustrationTpl}${headerContentTpl}
 		<ng-container approbationInboxDetailActions>
 			<button luButton type="button">Approuver</button>
 			<button luButton type="button">Refuser</button>
 		</ng-container>${moreActionsTpl}
-	</lu-approbation-inbox-detail-header>${calloutTpl}${contentTpl.repeat(blockCount - 1)}
+	</lu-approbation-inbox-detail-header>`
+				: ``;
+		const contentDefaultTpl =
+			blockCount != 0
+				? `
 	<lu-approbation-inbox-details-main-block label="Circuit d’approbation">
 		Dolor sit amet
-	</lu-approbation-inbox-details-main-block>
+	</lu-approbation-inbox-details-main-block>`
+				: ``;
+		return {
+			template: `<lu-approbation-inbox-detail${emptyIllustrationParam}${insideDialogParam}>${headerTpl}${calloutTpl}${contentTpl.repeat(blockCount - 1 < 0 ? 0 : blockCount - 1)}${contentDefaultTpl}
 </lu-approbation-inbox-detail>`,
 		};
 	},
 } as Meta;
 
 export const Basic: StoryObj<
-	ApprobationInboxHeaderComponent & { headerContent: boolean; moreActions: boolean; callout: boolean; calloutLabel: string; blockLabel: string; blockCount: number; illustration: boolean }
+	ApprobationInboxHeaderComponent & {
+		insideDialog: boolean;
+		headerContent: boolean;
+		moreActions: boolean;
+		callout: boolean;
+		calloutLabel: string;
+		blockLabel: string;
+		blockCount: number;
+		illustration: boolean;
+		emptyIllustration: string;
+	}
 > = {
 	args: {
+		insideDialog: false,
 		label: 'Title',
 		illustration: false,
 		headerContent: false,
@@ -108,7 +137,8 @@ export const Basic: StoryObj<
 		moreActions: false,
 		callout: false,
 		calloutLabel: 'Callout feedback description',
-		blockCount: 1,
 		blockLabel: 'Title',
+		blockCount: 1,
+		emptyIllustration: 'magnifying-glass',
 	},
 };

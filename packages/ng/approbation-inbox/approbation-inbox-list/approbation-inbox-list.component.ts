@@ -1,5 +1,6 @@
 import { booleanAttribute, ChangeDetectionStrategy, Component, computed, input, signal, ViewEncapsulation, WritableSignal } from '@angular/core';
 import { FormsModule } from '@angular/forms';
+import { BubbleIllustration, BubbleIllustrationComponent } from '@lucca-front/ng/bubble-illustration';
 import { generateId, PortalContent, PortalDirective } from '@lucca-front/ng/core';
 import { DividerComponent } from '@lucca-front/ng/divider';
 import { FormFieldComponent } from '@lucca-front/ng/form-field';
@@ -15,7 +16,7 @@ interface SelectableItem {
 	templateUrl: './approbation-inbox-list.component.html',
 	styleUrl: './approbation-inbox-list.component.scss',
 	encapsulation: ViewEncapsulation.None,
-	imports: [PortalDirective, FormsModule, FormFieldComponent, CheckboxInputComponent, DividerComponent, ButtonComponent],
+	imports: [PortalDirective, FormsModule, FormFieldComponent, CheckboxInputComponent, DividerComponent, ButtonComponent, BubbleIllustrationComponent],
 	host: {
 		class: 'approbationInbox-list',
 		role: 'region',
@@ -29,9 +30,15 @@ export class ApprobationInboxListComponent {
 	readonly label = input.required<PortalContent>();
 	readonly selectable = input(false, { transform: booleanAttribute });
 
+	readonly emptyIllustration = input<BubbleIllustration | string>('magnifyingGlass');
+	readonly emptyLabel = input.required<string>();
+	readonly emptyResetLabel = input<string | null>();
+
 	private readonly items = signal<SelectableItem[]>([]);
 
 	readonly checkedCount = computed(() => this.items().filter((item) => item.checked()).length);
+
+	readonly empty = computed(() => this.items().length === 0);
 
 	readonly selectAllState = computed(() => {
 		const all = this.items();
@@ -53,5 +60,15 @@ export class ApprobationInboxListComponent {
 	toggleSelectAll(): void {
 		const newValue = this.selectAllState() !== true;
 		this.items().forEach((item) => item.checked.set(newValue));
+	}
+
+	// TODO inbox
+	submit() {
+		alert('submit');
+	}
+
+	// TODO inbox
+	reset() {
+		alert('reset');
 	}
 }

@@ -117,7 +117,7 @@ export default {
 
 		<main role="main" class="mainLayout mod-wideM">
 			<div class="mainLayout-sidebar">
-				<lu-approbation-inbox-list label="Test" selectable>
+				<lu-approbation-inbox-list label="Test" selectable noResultLabel="Votre recherche ne donne aucun résultat.">
 					<lu-filter-bar approbationInboxListFilterBar>
 						<lu-segmented-control class="filterBar-segmentedControl" *luFilterPillAddonBefore [(ngModel)]="example">
 								<ng-template #label0>Par vous <lu-numeric-badge [value]="12" /></ng-template>
@@ -139,7 +139,6 @@ export default {
 						<lu-approbation-inbox-item center>
 							<lu-user-picture approbationInboxListItemStart />
 							<a href="#" lu-approbation-inbox-action approbationInboxListItemTitle>Title</a>
-							<!-- TODO inbox -->
 							<p class="pr-u-bodyS pr-u-colorTextSubtle">Metadata</p>
 							<ng-container approbationInboxListItemEnd>
 								<p class="pr-u-bodyM">Metadata</p>
