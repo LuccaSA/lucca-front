@@ -1,5 +1,12 @@
 # Changelog
 
+## 0.3.0
+
+- **Quick Fixes** (`Ctrl+.`): replace an unknown `pr-u-*` class with a close match, or a deprecated class with its recommended replacement.
+- **Status-bar health snapshot**: shows the number of deprecated/unknown issues across open files; click to open the Problems panel.
+- **Documentation links** in hovers: a Prisme design-system link for every token/class, plus a per-family Storybook deep link for utilities when `luccaFront.docs.storybookBaseUrl` is set.
+- **Experimental deprecation toggle** (`luccaFront.experimental.cssDeprecations`, default off): deprecation diagnostics, hover notices, and completion tags are now opt-in while the scss package's deprecation metadata matures.
+
 ## 0.2.0
 
 - Utility-class hover now shows the resolved value beneath any `var()`-based declaration.

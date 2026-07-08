@@ -9,10 +9,16 @@ The extension is **version-aware**: it reads a manifest shipped inside the `@luc
 - **Completion**
   - Custom properties in CSS/SCSS/LESS, inside `var(…)` and in value positions. Inside `var(`, the full list is offered even before you type `--`, so `var(spacings` filters straight to the spacing tokens.
   - `pr-u-*` utility classes inside `class="…"` attributes in HTML and inside Angular inline `template: `…`` strings in `.ts` files.
-- **Hover** — the resolved value of a custom property, or the CSS a utility class applies (including responsive `@media`/`@container` variants), plus a deprecation note where relevant.
+- **Hover** — the resolved value of a custom property, or the CSS a utility class applies (including responsive `@media`/`@container` variants), plus a deprecation note where relevant and links to the documentation.
 - **Diagnostics**
-  - Deprecated custom properties and utility classes are underlined (strikethrough) with the recommended replacement.
   - `pr-u-*` classes that don't exist in the installed version are flagged (catches typos and version mismatches).
+  - When the experimental deprecation toggle is on, deprecated custom properties and utility classes are underlined (strikethrough) with the recommended replacement.
+- **Quick Fixes** (`Ctrl+.` / `Cmd+.`) — replace an unknown class with a close match, or a deprecated class with its recommended replacement.
+- **Status bar** — a health snapshot of the open files (`LF <version> ⚠ <n>`); click to open the Problems panel.
+
+## Experimental: deprecation flagging
+
+Deprecation signals (diagnostics, hover notices, completion strikethrough) are **off by default** and enabled via `luccaFront.experimental.cssDeprecations`, because deprecation metadata in `@lucca-front/scss` is still incomplete. Unknown-class detection is always on.
 
 ## Requirements
 
@@ -25,6 +31,8 @@ The extension is **version-aware**: it reads a manifest shipped inside the `@luc
 | `luccaFront.diagnostics.enabled` | `true` | Toggle all diagnostics. |
 | `luccaFront.diagnostics.deprecatedSeverity` | `warning` | Severity for deprecated tokens/classes. |
 | `luccaFront.diagnostics.unknownClassSeverity` | `warning` | Severity for unknown `pr-u-*` classes. |
+| `luccaFront.experimental.cssDeprecations` | `false` | **Experimental.** Flag deprecated custom properties and `pr-u-*` classes. |
+| `luccaFront.docs.storybookBaseUrl` | `""` | Storybook base URL (e.g. `https://<host>/v21.1/storybook`) for per-family utility doc links. |
 | `luccaFront.manifestPath` | `""` | Absolute path to a `manifest.json`, overriding node_modules discovery (for library development). |
 
 ## Out of scope (v1)
