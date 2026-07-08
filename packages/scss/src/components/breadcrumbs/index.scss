@@ -1,4 +1,5 @@
 @use 'exports' as *;
+@use '@lucca-front/scss/src/commons/deprecated';
 
 .breadcrumbs {
 	@layer components {
@@ -7,7 +8,7 @@
 	}
 
 	@layer mods {
-		// .mod-compact is deprecated
+		@include deprecated.selector('.mod-compact', $note: 'The compact breadcrumbs variant is deprecated.', $scope: 'component:breadcrumbs');
 		&.mod-compact {
 			@include compact;
 		}
@@ -18,7 +19,7 @@
 .breadcrumbs-list-item-action,
 .breadcrumbs-list-item > a {
 	@layer mods {
-		// .active is deprecated
+		@include deprecated.selector('.active', $replacement: '.is-active', $scope: 'component:breadcrumbs');
 		&.active,
 		&.is-active,
 		&[aria-current='page'] {

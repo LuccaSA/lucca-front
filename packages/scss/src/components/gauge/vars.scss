@@ -1,4 +1,7 @@
-// --components-gauge-height is deprecated
+@use '@lucca-front/scss/src/commons/deprecated';
+
+@include deprecated.cssVariable('--components-gauge-height', $replacement: '--components-gauge-blockSize', $scope: 'component:gauge');
+
 @mixin vars {
 	--components-gauge-blockSize: var(--components-gauge-height, var(--pr-t-spacings-100));
 	--components-gauge-inlineSize: auto;

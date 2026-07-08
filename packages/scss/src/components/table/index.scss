@@ -1,4 +1,5 @@
 @use 'exports' as *;
+@use '@lucca-front/scss/src/commons/deprecated';
 
 .table {
 	@layer components {
@@ -103,7 +104,7 @@
 		&.mod-actions {
 			@include actions;
 
-			// .mod-actionsHidden is deprecated
+			@include deprecated.selector('.mod-actionsHidden', $note: 'Hidden table actions are deprecated.', $scope: 'component:table');
 			&.mod-actionsHidden {
 				@include actionsHidden;
 			}

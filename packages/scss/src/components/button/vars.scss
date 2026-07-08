@@ -1,3 +1,5 @@
+@use '@lucca-front/scss/src/commons/deprecated';
+
 @mixin vars {
 	--components-button-font: var(--pr-t-font-body-M);
 	--components-button-borderRadius: var(--pr-t-border-radius-default);
@@ -21,7 +23,8 @@
 	--components-button-arrow-transform: none;
 	--components-button-AI-background-opacity: 25%;
 
-	// Deprecated
+	@include deprecated.cssVariable('--components-button-font-size', $replacement: '--components-button-font', $scope: 'component:button');
 	--components-button-font-size: var(--pr-t-font-body-M-fontSize);
+	@include deprecated.cssVariable('--components-button-line-height', $replacement: '--components-button-font', $scope: 'component:button');
 	--components-button-line-height: var(--pr-t-font-body-M-lineHeight);
 }

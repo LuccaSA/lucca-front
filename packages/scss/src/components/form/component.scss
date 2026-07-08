@@ -2,6 +2,9 @@
 @use '@lucca-front/scss/src/components/formLabel/exports' as formLabel;
 @use '@lucca-front/scss/src/components/inlineMessage/exports' as inlineMessage;
 @use '@lucca-front/scss/src/commons/utils/namespace';
+@use '@lucca-front/scss/src/commons/deprecated';
+
+@include deprecated.sassApi('form.componentDeprecated', $note: 'The legacy form component mixin is deprecated.', $scope: 'component:form');
 
 @mixin component($atRoot: namespace.$defaultAtRoot) {
 	display: block;

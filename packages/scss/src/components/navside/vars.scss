@@ -1,5 +1,6 @@
 @use '@lucca-front/scss/src/commons/utils/namespace';
 @use '@lucca-front/scss/src/commons/utils/media';
+@use '@lucca-front/scss/src/commons/deprecated';
 
 @mixin vars($atRoot: namespace.$defaultAtRoot) {
 	// for this component some variables are placed in common
@@ -18,9 +19,9 @@
 	--components-navSide-fullwidth-palette-selected-alert-color: var(--palettes-brand-200);
 	--components-navSide-fullwidth-palette-selected-alert-text: var(--palettes-brand-800);
 
-	// --components-navSide-fullwidth-palette-alert-color is deprecated
-	// --components-navSide-fullwidth-palette-alert-text is deprecated
+	@include deprecated.cssVariable('--components-navSide-fullwidth-palette-alert-color', $note: 'Use the selected-alert palette custom properties instead.', $scope: 'component:navside');
 	--components-navSide-fullwidth-palette-alert-color: var(--palettes-brand-200);
+	@include deprecated.cssVariable('--components-navSide-fullwidth-palette-alert-text', $note: 'Use the selected-alert palette custom properties instead.', $scope: 'component:navside');
 	--components-navSide-fullwidth-palette-alert-text: var(--palettes-brand-800);
 
 	--components-navSide-compact-palette-bg-color: var(--palettes-navigation-800);

@@ -1,12 +1,13 @@
 @use '@lucca-front/scss/src/commons/utils/namespace';
+@use '@lucca-front/scss/src/commons/deprecated';
 
 @mixin vars($atRoot: namespace.$defaultAtRoot) {
 	--components-container-minInlineSize: 0;
 
 	// for this component some variables are placed in root
 
-	// --components-container-max-width is deprecated
-	// --components-container-padding is deprecated
+	@include deprecated.cssVariable('--components-container-max-width', $replacement: '--commons-container-maxWidth', $scope: 'component:container');
 	--components-container-max-width: var(--commons-container-maxWidth);
+	@include deprecated.cssVariable('--components-container-padding', $replacement: '--commons-container-padding', $scope: 'component:container');
 	--components-container-padding: var(--commons-container-padding);
 }

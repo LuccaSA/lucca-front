@@ -1,6 +1,7 @@
 @use 'exports' as *;
+@use '@lucca-front/scss/src/commons/deprecated';
 
-// lu-user-picture is deprecated
+@include deprecated.selector('.lu-user-picture', $replacement: '.avatar', $scope: 'component:avatar');
 .avatar,
 .lu-user-picture {
 	@layer components {

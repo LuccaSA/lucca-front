@@ -1,3 +1,5 @@
+@use '@lucca-front/scss/src/commons/deprecated';
+
 @mixin vars {
 	--components-divider-font: var(--pr-t-font-body-M);
 	--components-divider-marginBlock: var(--pr-t-spacings-50);
@@ -9,7 +11,8 @@
 	--components-divider-justify: normal;
 	--components-divider-alignSelf: '';
 
-	// Deprecated
+	@include deprecated.cssVariable('--components-divider-fontSize', $replacement: '--components-divider-font', $scope: 'component:divider');
 	--components-divider-fontSize: var(--pr-t-font-body-M-fontSize);
+	@include deprecated.cssVariable('--components-divider-lineHeight', $replacement: '--components-divider-font', $scope: 'component:divider');
 	--components-divider-lineHeight: var(--pr-t-font-body-M-lineHeight);
 }

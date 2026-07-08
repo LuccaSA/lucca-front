@@ -1,5 +1,6 @@
 @use '@lucca-front/scss/src/commons/utils/a11y';
 @use '@lucca-front/scss/src/commons/utils/namespace';
+@use '@lucca-front/scss/src/commons/deprecated';
 
 @mixin compact {
 	background-color: var(--components-navSide-compact-palette-bg-color);
@@ -11,7 +12,7 @@
 				--commons-navSide-width: 15rem;
 			}
 
-			// .mod-withMenuCompact is deprecated
+			@include deprecated.selector('.mod-withMenuCompact', $replacement: '.navSide.mod-compact', $scope: 'component:navside');
 			&:has(.navSide.mod-compact, .mod-withMenuCompact) {
 				--commons-navSide-width: 7.5rem;
 			}

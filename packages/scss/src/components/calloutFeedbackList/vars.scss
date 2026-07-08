@@ -1,8 +1,11 @@
+@use '@lucca-front/scss/src/commons/deprecated';
+
 @mixin vars {
 	--components-calloutFeedbackList-font: var(--pr-t-font-body-M);
 	--components-calloutFeedbackList-gap: var(--pr-t-spacings-150);
 
-	// Deprecated
+	@include deprecated.cssVariable('--components-calloutFeedbackList-fontSize', $replacement: '--components-calloutFeedbackList-font', $scope: 'component:calloutFeedbackList');
 	--components-calloutFeedbackList-fontSize: var(--pr-t-font-body-M-fontSize);
+	@include deprecated.cssVariable('--components-calloutFeedbackList-lineHeight', $replacement: '--components-calloutFeedbackList-font', $scope: 'component:calloutFeedbackList');
 	--components-calloutFeedbackList-lineHeight: var(--pr-t-font-body-M-lineHeight);
 }

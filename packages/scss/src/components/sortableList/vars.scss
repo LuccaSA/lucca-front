@@ -1,10 +1,13 @@
+@use '@lucca-front/scss/src/commons/deprecated';
+
 @mixin vars {
 	--components-sortableList-padding: var(--pr-t-spacings-100) var(--pr-t-spacings-150);
 	--components-sortableList-handler-size: var(--pr-t-font-body-M-lineHeight);
 	--components-sortableList-description-font: var(--pr-t-font-body-M);
 	--components-sortableList-helper-font: var(--pr-t-font-body-S);
 
-	// Deprecated
+	@include deprecated.cssVariable('--components-sortableList-description-fontSize', $replacement: '--components-sortableList-description-font', $scope: 'component:sortableList');
 	--components-sortableList-description-fontSize: var(--pr-t-font-body-M-fontSize);
+	@include deprecated.cssVariable('--components-sortableList-description-lineHeight', $replacement: '--components-sortableList-description-font', $scope: 'component:sortableList');
 	--components-sortableList-description-lineHeight: var(--pr-t-font-body-M-lineHeight);
 }

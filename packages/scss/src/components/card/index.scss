@@ -1,4 +1,5 @@
 @use 'exports' as *;
+@use '@lucca-front/scss/src/commons/deprecated';
 
 .card {
 	@layer components {
@@ -7,7 +8,7 @@
 	}
 
 	@layer mods {
-		// .mod-grey is deprecated
+		@include deprecated.selector('.card.mod-grey', $replacement: '.card.mod-neutral', $scope: 'component:card');
 		&.mod-neutral,
 		&.mod-grey {
 			@include neutral;
