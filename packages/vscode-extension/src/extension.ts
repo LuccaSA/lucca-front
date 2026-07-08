@@ -6,6 +6,7 @@ import { ClassCompletionProvider } from './providers/class-completion';
 import { ClassHoverProvider } from './providers/class-hover';
 import { CssCompletionProvider } from './providers/css-completion';
 import { CssHoverProvider } from './providers/css-hover';
+import { QuickFixProvider } from './providers/code-actions';
 import { DiagnosticsController } from './diagnostics/diagnostics-controller';
 import { ManifestService } from './manifest/manifest-service';
 import { StatusBar } from './status/status-bar';
@@ -34,6 +35,9 @@ export function activate(context: vscode.ExtensionContext): void {
 		vscode.languages.registerCompletionItemProvider(MARKUP_LANGUAGES, classCompletion, '"', "'", ' ', '-'),
 		vscode.languages.registerHoverProvider(CSS_LANGUAGES, new CssHoverProvider(service)),
 		vscode.languages.registerHoverProvider(MARKUP_LANGUAGES, new ClassHoverProvider(service)),
+		vscode.languages.registerCodeActionsProvider([...CSS_LANGUAGES, ...MARKUP_LANGUAGES], new QuickFixProvider(service), {
+			providedCodeActionKinds: QuickFixProvider.kinds,
+		}),
 	);
 
 	// Reload command.
