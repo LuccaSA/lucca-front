@@ -150,3 +150,59 @@ Below is the current list of all available components. Import only the ones you 
 ```
 
 
+
+## Marking something as deprecated
+
+Deprecation metadata for this package lives in **one** place: the registry module
+`src/commons/deprecated.scss`. Its mixins record what is deprecated while emitting
+**zero CSS**, so the shipped stylesheet is unaffected. A build step reads the registry
+out to a committed JSON manifest (`css-api/deprecations.json`) that powers the Storybook
+"Deprecations" page and downstream tooling (VS Code IntelliSense, stylelint, codemods).
+
+Register a deprecation at the declaration site, colocated with the thing it documents:
+
+```scss
+@use '@lucca-front/scss/src/commons/deprecated';
+
+// A utility/component class (bare name, no dot)
+@include deprecated.class('pr-u-textLeft', $replacement: 'pr-u-textAlignStart', $scope: 'commons/utils');
+
+// A CSS custom property (with leading dashes)
+@include deprecated.cssVariable('--commons-font-family', $replacement: '--pr-t-font-family', $scope: 'commons/vars');
+
+// A compound/legacy selector (full selector, with dots)
+@include deprecated.selector('.box.mod-grey', $replacement: '.box.mod-neutral', $scope: 'component:box');
+
+// A Sass API surface (variable, mixin, config flag)
+@include deprecated.sassApi('config.$borderRadius', $replacement: 'config.$borderRadiusVars', $scope: 'commons/config');
+```
+
+For loop-generated names, register inside the loop using the same interpolation that
+builds the emitted name, so the recorded name is exact by construction. Use `$note`
+instead of `$replacement` when there is no one-to-one modern equivalent. `$scope` must be
+`commons/<file>` or `component:<name>`.
+
+Rule of thumb: **a deprecation is not a deprecation until it is registered.** Plain
+`// deprecated` comments are invisible to tooling.
+
+### Regenerating the manifest
+
+```
+npm run scss:deprecations          # rewrite css-api/deprecations.json from the sources
+npm run scss:deprecations -- --check   # CI: fail if the committed manifest is stale
+```
+
+The manifest is committed so Storybook and typecheck work from a clean checkout; CI runs
+`--check` to catch drift.
+
+### Auditing size impact
+
+Registry calls must never change compiled output. To prove a change is size-neutral:
+
+```
+npm run scss:audit                 # compare bundle + every module vs the rc merge-base
+npm run scss:audit -- --base <ref> # compare against a specific commit
+```
+
+It writes `scss-size-audit.md` with per-module before/after compressed + gzip sizes, a
+sha256 byte-identity summary, and the before/after deprecation inventory.
