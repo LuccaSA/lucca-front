@@ -81,7 +81,12 @@ export class DiagnosticsController implements vscode.Disposable {
 		let severity: vscode.DiagnosticSeverity;
 		const tags: vscode.DiagnosticTag[] = [];
 
-		if (finding.kind === 'unknown-class') {
+		if (finding.kind === 'missing-mixin-import') {
+			const ns = finding.name.split('.')[0];
+			const importPath = index.mixinNamespaces.get(ns);
+			message = `Namespace \`${ns}\` is not imported. Add \`@use '${importPath}';\`.`;
+			severity = vscode.DiagnosticSeverity.Warning;
+		} else if (finding.kind === 'unknown-class') {
 			const [suggestion] = closestUtilities(finding.name, index.utilityNames, 1);
 			const hint = suggestion ? ` Did you mean \`${suggestion}\`?` : ' Check the spelling, or upgrade the package.';
 			message = `\`${finding.name}\` is not a utility class in the installed @lucca-front/scss.${hint}`;

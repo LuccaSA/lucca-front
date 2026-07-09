@@ -3,7 +3,7 @@
  * unit-tested directly. Downstream providers read only from here.
  */
 
-import { CustomProperty, Manifest, UtilityClass } from './types';
+import { CustomProperty, Manifest, MixinDef, UtilityClass } from './types';
 
 export interface CompletionSeed {
 	/** Insertion text and completion label, e.g. `--pr-t-spacings-200` or `pr-u-displayFlex`. */
@@ -24,6 +24,12 @@ export interface ManifestIndex {
 	readonly utilityCompletions: readonly CompletionSeed[];
 	/** All utility class names, for close-match suggestions. */
 	readonly utilityNames: readonly string[];
+	/** Consumer-facing mixins (empty when the manifest predates mixin support). */
+	readonly mixins: readonly MixinDef[];
+	/** Mixins keyed by `namespace.name`, for hover/diagnostics lookup. */
+	readonly mixinLookup: ReadonlyMap<string, MixinDef>;
+	/** Namespace → `@use` import path, for auto-import. */
+	readonly mixinNamespaces: ReadonlyMap<string, string>;
 	readonly variableCount: number;
 	readonly utilityCount: number;
 }
@@ -110,15 +116,47 @@ export function buildIndex(manifest: Manifest): ManifestIndex {
 		});
 	}
 
+	const mixins = manifest.mixins ?? [];
+	const mixinLookup = new Map<string, MixinDef>();
+	const mixinNamespaces = new Map<string, string>();
+	for (const mixin of mixins) {
+		mixinLookup.set(`${mixin.namespace}.${mixin.name}`, mixin);
+		if (!mixinNamespaces.has(mixin.namespace)) {
+			mixinNamespaces.set(mixin.namespace, mixin.import);
+		}
+	}
+
 	return {
 		properties,
 		utilities,
 		propertyCompletions,
 		utilityCompletions,
 		utilityNames: [...utilities.keys()],
+		mixins,
+		mixinLookup,
+		mixinNamespaces,
 		variableCount: properties.size,
 		utilityCount: utilities.size,
 	};
+}
+
+/** Markdown documentation body for a mixin (signature, doc, import hint). */
+export function mixinDocumentation(mixin: MixinDef): string {
+	const lines = ['```scss', `@include ${mixin.namespace}.${mixin.signature};`, '```'];
+	if (mixin.doc) {
+		lines.push('', mixin.doc);
+	}
+	lines.push('', `Import: \`@use '${mixin.import}';\``);
+	return lines.join('\n');
+}
+
+/** Hover markdown for a mixin; notes when its namespace isn't imported in the file. */
+export function mixinHover(mixin: MixinDef, imported: boolean): string {
+	const lines = [`**\`${mixin.namespace}.${mixin.name}\`**`, '', mixinDocumentation(mixin)];
+	if (!imported) {
+		lines.push('', `⚠️ Namespace \`${mixin.namespace}\` is not imported in this file — use the Quick Fix (Ctrl+.) to add \`@use '${mixin.import}';\`.`);
+	}
+	return lines.join('\n');
 }
 
 /** Builds the hover markdown for a custom property. */

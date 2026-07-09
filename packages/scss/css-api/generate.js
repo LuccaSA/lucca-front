@@ -29,6 +29,13 @@ const MANIFEST_VERSION = 1;
 const REPO_ROOT = path.resolve(__dirname, '..', '..', '..');
 const NODE_MODULES = path.join(REPO_ROOT, 'node_modules');
 
+/** Source folder holding the consumer-facing `@mixin` definitions. */
+const UTILS_DIR = path.join(REPO_ROOT, 'packages', 'scss', 'src', 'commons', 'utils');
+/** Import-path prefix a consumer writes to `@use` a util module. */
+const MIXIN_IMPORT_BASE = '@lucca-front/scss/src/commons/utils';
+/** Util files that expose only internal/plumbing mixins — excluded from the public surface. */
+const EXCLUDED_MIXIN_FILES = new Set(['index', 'namespace', 'highlight-prisme']);
+
 /**
  * Public custom-property prefixes we expose. `--components-*` / `--component-*`
  * are deliberately absent (internal implementation, not consumer API).
@@ -154,8 +161,119 @@ function readDeprecatedComment(node) {
 }
 
 /**
+ * Collects the contiguous `//`/`///` comment lines immediately above `index`,
+ * as a single trimmed string (or undefined). Doc for the mixin, when present.
+ * @param {string} source
+ * @param {number} index offset of the `@mixin` keyword
+ * @returns {string | undefined}
+ */
+function leadingComment(source, index) {
+	const lines = source.slice(0, index).split('\n');
+	lines.pop(); // the (partial) line the @mixin sits on
+	const comments = [];
+	for (let i = lines.length - 1; i >= 0; i--) {
+		const line = lines[i].trim();
+		if (line.startsWith('//')) {
+			comments.unshift(line.replace(/^\/+\s?/, ''));
+		} else {
+			break;
+		}
+	}
+	const doc = comments.join(' ').trim();
+	return doc || undefined;
+}
+
+/**
+ * Parses `@mixin` definitions out of a SCSS source string. Scans the parameter
+ * list with balanced-paren matching so defaults containing parens (`var(...)`,
+ * `linear-gradient(...)`) survive intact.
+ * @param {string} source
+ * @returns {Array<{ name: string, params: string, doc?: string }>}
+ */
+function parseMixins(source) {
+	const result = [];
+	const re = /@mixin\s+([\w-]+)/g;
+	let match;
+	while ((match = re.exec(source)) !== null) {
+		const name = match[1];
+		let i = re.lastIndex;
+		while (i < source.length && /\s/.test(source[i])) {
+			i++;
+		}
+		let params = '';
+		if (source[i] === '(') {
+			const start = i;
+			let depth = 0;
+			for (; i < source.length; i++) {
+				if (source[i] === '(') {
+					depth++;
+				} else if (source[i] === ')') {
+					depth--;
+					if (depth === 0) {
+						i++;
+						break;
+					}
+				}
+			}
+			params = source
+				.slice(start + 1, i - 1)
+				.trim()
+				.replace(/\s+/g, ' ');
+		}
+		const entry = { name, params };
+		const doc = leadingComment(source, match.index);
+		if (doc) {
+			entry.doc = doc;
+		}
+		result.push(entry);
+	}
+	return result;
+}
+
+/**
+ * Enumerates the consumer-facing mixins in `commons/utils/*.scss`. Each entry
+ * carries the `@use` import path and namespace (the file basename) a consumer
+ * writes to call it, so the extension can offer completion + auto-import.
+ * @returns {Array<{ name: string, namespace: string, module: string, import: string, params: string, signature: string, doc?: string }>}
+ */
+function extractMixins() {
+	const out = [];
+	let files;
+	try {
+		files = fs.readdirSync(UTILS_DIR);
+	} catch {
+		return out;
+	}
+	for (const file of files.sort()) {
+		if (!file.endsWith('.scss')) {
+			continue;
+		}
+		const base = file.replace(/\.scss$/, '').replace(/^_/, '');
+		if (EXCLUDED_MIXIN_FILES.has(base)) {
+			continue;
+		}
+		const source = fs.readFileSync(path.join(UTILS_DIR, file), 'utf8');
+		for (const mixin of parseMixins(source)) {
+			const entry = {
+				name: mixin.name,
+				namespace: base,
+				module: `commons/utils/${base}`,
+				import: `${MIXIN_IMPORT_BASE}/${base}`,
+				params: mixin.params,
+				signature: mixin.params ? `${mixin.name}(${mixin.params})` : mixin.name,
+			};
+			if (mixin.doc) {
+				entry.doc = mixin.doc;
+			}
+			out.push(entry);
+		}
+	}
+	return out;
+}
+
+/**
  * Compiles the SCSS surface and extracts the manifest.
- * @returns {{ manifestVersion: number, package: string, variables: object, utilities: object }}
+ * @returns {{ manifestVersion: number, package: string, variables: object, utilities: object, mixins: object[] }}
  */
 function extract() {
 	const compiled = sass.compileString(ENTRY_SCSS, {
@@ -367,6 +485,7 @@ function extract() {
 		package: '@lucca-front/scss',
 		variables: mapToObject(variables),
 		utilities: mapToObject(utilities),
+		mixins: extractMixins(),
 	};
 }
 
@@ -533,6 +652,22 @@ function selfCheck(manifest) {
 		}
 	}
 
+	// Mixins.
+	const mixins = manifest.mixins || [];
+	if (mixins.length < 30) {
+		errors.push(`Expected >=30 mixins, got ${mixins.length}`);
+	}
+	const mixinKeys = new Set(mixins.map((m) => `${m.namespace}.${m.name}`));
+	for (const expected of ['media.min', 'media.max', 'a11y.focusVisible', 'loading.spinner', 'reset.clearfix']) {
+		if (!mixinKeys.has(expected)) {
+			errors.push(`Missing expected mixin ${expected}`);
+		}
+	}
+	const spinner = mixins.find((m) => m.namespace === 'loading' && m.name === 'spinner');
+	if (!spinner || !spinner.import.endsWith('/commons/utils/loading') || !/\$size/.test(spinner.params)) {
+		errors.push(`loading.spinner mixin sentinel failed: ${JSON.stringify(spinner)}`);
+	}
+
 	if (errors.length) {
 		throw new Error(`CSS API manifest self-check failed:\n  - ${errors.join('\n  - ')}`);
 	}
@@ -560,7 +695,8 @@ if (require.main === module) {
 	const manifest = generateCssApi({ output });
 	const varCount = Object.keys(manifest.variables).length;
 	const utilCount = Object.keys(manifest.utilities).length;
+	const mixinCount = manifest.mixins.length;
 	const bytes = fs.statSync(output).size;
 	console.log(`CSS API manifest written to ${output}`);
-	console.log(`  ${varCount} custom properties, ${utilCount} utility classes, ${(bytes / 1024).toFixed(1)} KB`);
+	console.log(`  ${varCount} custom properties, ${utilCount} utility classes, ${mixinCount} mixins, ${(bytes / 1024).toFixed(1)} KB`);
 }

@@ -26,6 +26,34 @@ describe('analyze — css', () => {
 	});
 });
 
+describe('analyze — scss mixin imports', () => {
+	it('flags a known mixin whose namespace is not imported', () => {
+		expect(names(".a { @include media.min('M') { color: red; } }", 'scss')).toEqual(['missing-mixin-import:media.min']);
+	});
+
+	it('stays silent once the namespace is imported', () => {
+		const text = "@use '@lucca-front/scss/src/commons/utils/media';\n.a { @include media.min('M') { color: red; } }";
+		expect(names(text, 'scss')).toEqual([]);
+	});
+
+	it('honours an `as` alias for the import', () => {
+		const text = "@use '@lucca-front/scss/src/commons/utils/media' as media;\n.a { @include media.min('M') {} }";
+		expect(names(text, 'scss')).toEqual([]);
+	});
+
+	it('does not flag an unknown namespace/mixin (not a Lucca mixin)', () => {
+		expect(names('.a { @include grid.cols(3); }', 'scss')).toEqual([]);
+	});
+
+	it('is independent of the deprecation toggle', () => {
+		expect(names('.a { @include loading.spinner(); }', 'scss', false)).toEqual(['missing-mixin-import:loading.spinner']);
+	});
+
+	it('does not run for plain css', () => {
+		expect(names('.a { @include media.min(); }', 'css')).toEqual([]);
+	});
+});
+
 describe('analyze — html', () => {
 	it('flags an unknown pr-u-* class', () => {
 		expect(names('<div class="pr-u-displayFlexx"></div>', 'html')).toEqual(['unknown-class:pr-u-displayFlexx']);

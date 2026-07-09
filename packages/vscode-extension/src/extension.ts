@@ -6,11 +6,13 @@ import { ClassCompletionProvider } from './providers/class-completion';
 import { ClassHoverProvider } from './providers/class-hover';
 import { CssCompletionProvider } from './providers/css-completion';
 import { CssHoverProvider } from './providers/css-hover';
+import { MixinCompletionProvider } from './providers/mixin-completion';
+import { MixinHoverProvider } from './providers/mixin-hover';
 import { QuickFixProvider } from './providers/code-actions';
 import { DiagnosticsController } from './diagnostics/diagnostics-controller';
 import { ManifestService } from './manifest/manifest-service';
 import { StatusBar } from './status/status-bar';
-import { COMMAND_RELOAD, COMMAND_SHOW_PROBLEMS, CONFIG_SECTION, CSS_LANGUAGES, MARKUP_LANGUAGES } from './constants';
+import { COMMAND_RELOAD, COMMAND_SHOW_PROBLEMS, CONFIG_SECTION, CSS_LANGUAGES, MARKUP_LANGUAGES, SCSS_LANGUAGES } from './constants';
 
 const RELOAD_DEBOUNCE_MS = 500;
 
@@ -30,10 +32,13 @@ export function activate(context: vscode.ExtensionContext): void {
 	// Providers.
 	const cssCompletion = new CssCompletionProvider(service);
 	const classCompletion = new ClassCompletionProvider(service);
+	const mixinCompletion = new MixinCompletionProvider(service);
 	context.subscriptions.push(
 		vscode.languages.registerCompletionItemProvider(CSS_LANGUAGES, cssCompletion, '-', '('),
 		vscode.languages.registerCompletionItemProvider(MARKUP_LANGUAGES, classCompletion, '"', "'", ' ', '-'),
+		vscode.languages.registerCompletionItemProvider(SCSS_LANGUAGES, mixinCompletion, ' ', '.'),
 		vscode.languages.registerHoverProvider(CSS_LANGUAGES, new CssHoverProvider(service)),
+		vscode.languages.registerHoverProvider(SCSS_LANGUAGES, new MixinHoverProvider(service)),
 		vscode.languages.registerHoverProvider(MARKUP_LANGUAGES, new ClassHoverProvider(service)),
 		vscode.languages.registerCodeActionsProvider([...CSS_LANGUAGES, ...MARKUP_LANGUAGES], new QuickFixProvider(service), {
 			providedCodeActionKinds: QuickFixProvider.kinds,

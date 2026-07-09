@@ -32,9 +32,29 @@ export interface UtilityClass {
 	note?: string;
 }
 
+/** A consumer-facing `@mixin` from `commons/utils/*.scss`. */
+export interface MixinDef {
+	/** Mixin name, e.g. `min`. */
+	name: string;
+	/** Namespace a consumer calls it under (the util file basename), e.g. `media`. */
+	namespace: string;
+	/** Source module path, e.g. `commons/utils/media`. */
+	module: string;
+	/** The `@use` import string, e.g. `@lucca-front/scss/src/commons/utils/media`. */
+	import: string;
+	/** Raw parameter list (empty when the mixin takes none). */
+	params: string;
+	/** `name(params)` (or just `name` when parameterless), for display. */
+	signature: string;
+	/** Doc text harvested from the leading source comment, when present. */
+	doc?: string;
+}
+
 export interface Manifest {
 	manifestVersion: number;
 	package: string;
 	variables: Record<string, CustomProperty>;
 	utilities: Record<string, UtilityClass>;
+	/** Absent in manifests generated before mixin support was added. */
+	mixins?: MixinDef[];
 }

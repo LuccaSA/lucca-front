@@ -4,11 +4,12 @@
  */
 
 import { findClassAttributeValues } from '../context/class-context';
+import { findImportedNamespaces, findMixinIncludes } from '../context/scss-mixin-context';
 import { findInlineTemplateRegions } from '../context/inline-template';
 import { ManifestIndex } from '../manifest/index-model';
 import { CSS_LANGUAGES, UTILITY_PREFIX } from '../constants';
 
-export type FindingKind = 'deprecated-property' | 'deprecated-class' | 'unknown-class';
+export type FindingKind = 'deprecated-property' | 'deprecated-class' | 'unknown-class' | 'missing-mixin-import';
 
 export interface Finding {
 	startOffset: number;
@@ -30,7 +31,11 @@ export interface AnalyzeFlags {
 
 export function analyze(text: string, languageId: string, index: ManifestIndex, flags: AnalyzeFlags): Finding[] {
 	if (CSS_LANGUAGES.includes(languageId)) {
-		return analyzeCss(text, index, flags);
+		const findings = analyzeCss(text, index, flags);
+		if (languageId === 'scss') {
+			findings.push(...analyzeMixinImports(text, index));
+		}
+		return findings;
 	}
 	if (languageId === 'html') {
 		return analyzeClassSpans(text, findClassAttributeValues(text), index, flags);
@@ -45,6 +50,26 @@ export function analyze(text: string, languageId: string, index: ManifestIndex, 
 		return findings;
 	}
 	return [];
+}
+
+/**
+ * Flags `@include namespace.mixin` references to known Lucca mixins whose
+ * namespace isn't `@use`d in the file (a Sass compile error). Independent of the
+ * deprecation toggle — a genuinely actionable, always-on finding.
+ */
+function analyzeMixinImports(text: string, index: ManifestIndex): Finding[] {
+	if (index.mixins.length === 0) {
+		return [];
+	}
+	const imported = findImportedNamespaces(text);
+	const findings: Finding[] = [];
+	for (const ref of findMixinIncludes(text)) {
+		const key = `${ref.namespace}.${ref.name}`;
+		if (index.mixinLookup.has(key) && !imported.has(ref.namespace)) {
+			findings.push({ startOffset: ref.start, endOffset: ref.end, kind: 'missing-mixin-import', name: key });
+		}
+	}
+	return findings;
 }
 
 function analyzeCss(text: string, index: ManifestIndex, flags: AnalyzeFlags): Finding[] {

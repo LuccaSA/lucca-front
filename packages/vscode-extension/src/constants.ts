@@ -13,6 +13,9 @@ export const UTILITY_PREFIX = 'pr-u-';
 /** Languages whose documents may contain custom-property references. */
 export const CSS_LANGUAGES = ['css', 'scss', 'less'];
 
+/** Languages that support `@mixin` / `@include` (mixin features are SCSS-only). */
+export const SCSS_LANGUAGES = ['scss'];
+
 /** Languages whose documents may contain utility-class usage. */
 export const MARKUP_LANGUAGES = ['html', 'typescript'];
 
