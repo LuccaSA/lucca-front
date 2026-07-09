@@ -1,4 +1,4 @@
-import { ChangeDetectionStrategy, Component, computed, effect, ElementRef, inject } from '@angular/core';
+import { afterNextRender, ChangeDetectionStrategy, Component, computed, effect, ElementRef, inject, Injector } from '@angular/core';
 import { outputToObservable, takeUntilDestroyed } from '@angular/core/rxjs-interop';
 import { FormsModule } from '@angular/forms';
 import { ɵCoreSelectPanelElement } from '@lucca-front/ng/core-select';
@@ -33,14 +33,19 @@ export class LuMultiSelectAllHeaderComponent {
 	readonly isSelected = computed(() => this.selectAllContext.mode() === 'all' || this.mixed());
 	readonly #selectableItem = inject(ɵCoreSelectPanelElement);
 	readonly #elementRef = inject<ElementRef<HTMLElement>>(ElementRef);
+	readonly #injector = inject(Injector);
 
 	constructor() {
 		this.#selectableItem.id.set(`multi-select-select-all`);
-		effect(() => {
+		effect((onCleanup) => {
 			if (this.#selectableItem.isHighlighted()) {
-				setTimeout(() => {
-					this.#elementRef.nativeElement.scrollIntoView();
-				}, 50);
+				const ref = afterNextRender(
+					() => {
+						this.#elementRef.nativeElement.scrollIntoView();
+					},
+					{ injector: this.#injector },
+				);
+				onCleanup(() => ref.destroy());
 			}
 			if (this.isSelected()) {
 				this.#selectableItem.isSelected.set(true);

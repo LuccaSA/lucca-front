@@ -6,7 +6,7 @@ import { ButtonComponent } from '@lucca-front/ng/button';
 import { getIntl, Palette } from '@lucca-front/ng/core';
 import { DialogComponent, DialogContentComponent, DialogFooterComponent, DialogHeaderComponent, injectDialogData, injectDialogRef } from '@lucca-front/ng/dialog';
 import { NumericBadgeComponent } from '@lucca-front/ng/numeric-badge';
-import { isObservable, Observable, of, ReplaySubject, Subject } from 'rxjs';
+import { isObservable, Observable, of, ReplaySubject, Subject, timer } from 'rxjs';
 import { delay, distinctUntilChanged, map, switchMap, tap } from 'rxjs/operators';
 import { ALuModalRef } from '../../modal-ref.model';
 import { ILuModalContent, LuModalContentResult } from '../../modal.model';
@@ -83,9 +83,9 @@ export class DialogContentAdapterComponent<D, C extends ILuModalContent> impleme
 						error: (err) => {
 							this.submitClass.set('is-error');
 							this.error$.next(err);
-							setTimeout(() => {
-								this.submitClass.set('');
-							}, 2000);
+							timer(2000)
+								.pipe(takeUntilDestroyed(this.#destroyRef))
+								.subscribe(() => this.submitClass.set(''));
 						},
 						complete: () => this.submitClass.set(''),
 					});

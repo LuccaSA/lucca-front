@@ -6,7 +6,6 @@ import { skip } from 'rxjs';
 import { ComponentFixture, TestBed, fakeAsync, tick } from '@angular/core/testing';
 import { LuSimpleSelectInputComponent } from '@lucca-front/ng/simple-select';
 import { MAGIC_DEBOUNCE_DURATION } from '../api/api.directive';
-import { MAGIC_OPTION_SCROLL_DELAY } from '../option/option.component';
 import { provideCoreSelectCurrentUserId } from './me.provider';
 import { LuCoreSelectUser } from './user-option.model';
 import { LuCoreSelectUsersDirective } from './users.directive';
@@ -61,7 +60,7 @@ describe('LuCoreSelectUsersDirective', () => {
 	it('should not make any call on init', fakeAsync(() => {
 		// Act
 		fixture.detectChanges();
-		tick(MAGIC_OPTION_SCROLL_DELAY);
+		tick();
 
 		// Assert
 		httpTestingController.verify();
@@ -71,7 +70,7 @@ describe('LuCoreSelectUsersDirective', () => {
 		// Act
 		simpleSelect.openPanel();
 		fixture.detectChanges();
-		tick(MAGIC_OPTION_SCROLL_DELAY);
+		tick();
 
 		// Assert (Me + Initial list)
 		httpTestingController.expectOne(`/api/v3/users/search?fields=${fields}&id=${CURRENT_USER_ID}`);
@@ -87,18 +86,18 @@ describe('LuCoreSelectUsersDirective', () => {
 
 		const page1 = [createUser(1), createUser(2), createUser(3)];
 
-		tick(MAGIC_OPTION_SCROLL_DELAY);
+		tick();
 
 		// Act
 		const meReq = httpTestingController.expectOne(`/api/v3/users/search?fields=${fields}&id=${CURRENT_USER_ID}`);
 		meReq.flush(null, { status: 500, statusText: 'Server Error' });
 		fixture.detectChanges();
-		tick(MAGIC_OPTION_SCROLL_DELAY);
+		tick();
 
 		const page1Req = httpTestingController.expectOne(`/api/v3/users/search?fields=${fields}&paging=0,3`);
 		page1Req.flush(usersResponse(page1));
 		fixture.detectChanges();
-		tick(MAGIC_OPTION_SCROLL_DELAY);
+		tick();
 
 		// Assert
 		let options: readonly LuCoreSelectUser[] = [];
@@ -155,18 +154,18 @@ describe('LuCoreSelectUsersDirective', () => {
 		const page1 = [createUser(1), createUser(2), createUser(3)];
 		const page2 = [createUser(4), meUser, createUser(6)];
 
-		tick(MAGIC_OPTION_SCROLL_DELAY);
+		tick();
 
 		// Act (Page 1)
 		const meReq = httpTestingController.expectOne(`/api/v3/users/search?fields=${fields}&id=${CURRENT_USER_ID}`);
 		meReq.flush(usersResponse([meUser]));
 		fixture.detectChanges();
-		tick(MAGIC_OPTION_SCROLL_DELAY);
+		tick();
 
 		const page1Req = httpTestingController.expectOne(`/api/v3/users/search?fields=${fields}&paging=0,3`);
 		page1Req.flush(usersResponse(page1));
 		fixture.detectChanges();
-		tick(MAGIC_OPTION_SCROLL_DELAY);
+		tick();
 
 		// Assert (Page 1)
 		expect(simpleSelect.dataSourceOptions()).toEqual([meUser, ...page1]);
@@ -174,12 +173,12 @@ describe('LuCoreSelectUsersDirective', () => {
 		// Act (Page 2)
 		simpleSelect.nextPage$.next();
 		fixture.detectChanges();
-		tick(MAGIC_OPTION_SCROLL_DELAY);
+		tick();
 
 		const page2Req = httpTestingController.expectOne(`/api/v3/users/search?fields=${fields}&paging=3,3`);
 		page2Req.flush(usersResponse(page2));
 		fixture.detectChanges();
-		tick(MAGIC_OPTION_SCROLL_DELAY);
+		tick();
 
 		// Assert (Page 2)
 		expect(simpleSelect.dataSourceOptions()).toEqual([meUser, ...page1, ...page2.filter((u) => u.id !== CURRENT_USER_ID)]);
@@ -192,7 +191,7 @@ describe('LuCoreSelectUsersDirective', () => {
 		simpleSelect.openPanel();
 		fixture.detectChanges();
 
-		tick(MAGIC_OPTION_SCROLL_DELAY);
+		tick();
 
 		const meUser = createUser(CURRENT_USER_ID);
 		const user1 = createUser(1);
