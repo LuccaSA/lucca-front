@@ -73,7 +73,7 @@
 					<dl class="highlightData-content">
 						<dt class="highlightData-content-title">Title</dt>
 						<dd class="highlightData-content-value">Content</dd>
-						<dd class="highlightData-content-action"><button type="button" class="button mod-outlined">Action</button></dd>
+						<dd class="highlightData-content-action"><button type="button" class="button mod-outlined palette-neutral">Action</button></dd>
 					</dl>
 					<div class="highlightData-illustrations">
 						<img
@@ -90,9 +90,26 @@
 				</div>
 			</td>
 			<td>
-				<lu-highlight-data heading="Title" value="Content" bubble="1" illustration="polaroid-male"
-					><button luButton="outlined" type="button">Action</button></lu-highlight-data
-				>
+				<lu-highlight-data heading="Title" value="Content" bubble="1" illustration="polaroid-male">
+					<button luButton="outlined" palette="neutral" type="button">Action</button>
+				</lu-highlight-data>
+			</td>
+		</tr>
+		<tr>
+			<td>Actions & palette</td>
+			<td>
+				<div class="highlightData mod-dark palette-critical">
+					<dl class="highlightData-content">
+						<dt class="highlightData-content-title">Title</dt>
+						<dd class="highlightData-content-value">Content</dd>
+						<dd class="highlightData-content-action"><button type="button" class="button mod-outlined palette-neutral">Action</button></dd>
+					</dl>
+				</div>
+			</td>
+			<td>
+				<lu-highlight-data heading="Title" value="Content" theme="dark" palette="critical">
+					<button luButton="outlined" palette="neutral" type="button">Action</button>
+				</lu-highlight-data>
 			</td>
 		</tr>
 		<tr>
@@ -102,12 +119,14 @@
 					<dl class="highlightData-content">
 						<dt class="highlightData-content-title">Title</dt>
 						<dd class="highlightData-content-value">Content</dd>
-						<dd class="highlightData-content-action"><button type="button" class="button mod-outlined">Action</button></dd>
+						<dd class="highlightData-content-action"><button type="button" class="button mod-outlined palette-neutral">Action</button></dd>
 					</dl>
 				</div>
 			</td>
 			<td>
-				<lu-highlight-data heading="Title" value="Content"><button luButton="outlined" type="button">Action</button></lu-highlight-data>
+				<lu-highlight-data heading="Title" value="Content">
+					<button luButton="outlined" palette="neutral" type="button">Action</button>
+				</lu-highlight-data>
 			</td>
 		</tr>
 		<tr>

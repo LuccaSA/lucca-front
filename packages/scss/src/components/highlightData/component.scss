@@ -1,6 +1,5 @@
 @use '@lucca-front/scss/src/commons/utils/namespace';
 @use '@lucca-front/scss/src/commons/utils/reset';
-@use '@lucca-front/scss/src/commons/utils/color';
 
 @mixin component($atRoot: namespace.$defaultAtRoot) {
 	display: block;
@@ -53,10 +52,6 @@
 			.link {
 				--commons-text-link-color: var(--palettes-700, var(--palettes-product-700));
 				--commons-text-link-hover: var(--palettes-800, var(--palettes-product-800));
-			}
-
-			.button {
-				@include color.palette('neutral');
 			}
 		}
 

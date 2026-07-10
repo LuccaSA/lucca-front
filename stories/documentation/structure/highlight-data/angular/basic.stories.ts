@@ -21,7 +21,7 @@ export default {
 
 		let actionContent = '';
 		if (action === 'button') {
-			actionContent = '<button luButton="outlined" type="button">Action</button>';
+			actionContent = '<button luButton="outlined" palette="neutral" type="button">Action</button>';
 		} else if (action === 'link') {
 			actionContent = '<a luLink>Link</a>';
 		}

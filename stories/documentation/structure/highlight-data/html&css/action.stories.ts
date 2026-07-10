@@ -12,7 +12,7 @@ function getTemplate(args: ActionStory): string {
 	<dl class="highlightData-content">
 		<dt class="highlightData-content-title">Title</dt>
 		<dd class="highlightData-content-value">Content</dd>
-		<dd class="highlightData-content-action"><button type="button" class="button mod-outlined">Action</button></dd>
+		<dd class="highlightData-content-action"><button type="button" class="button mod-outlined palette-neutral">Action</button></dd>
 	</dl>
 </div>`;
 }
