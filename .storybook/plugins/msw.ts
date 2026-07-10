@@ -18,7 +18,10 @@ export default {
 					// Points to the custom location of the Service Worker file.
 					url: `${pathname}/mockServiceWorker.js`,
 					options: {
-						scope: '/',
+						// The Service Worker can only claim a scope at or below the
+						// directory it is served from. When Storybook is deployed under
+						// a subpath (e.g. `/PR-5136/`), a hardcoded `/` scope is rejected.
+						scope: `${pathname}/`,
 					},
 				},
 				onUnhandledRequest: 'bypass',
