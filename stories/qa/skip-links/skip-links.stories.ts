@@ -1,3 +1,4 @@
+import { LuSkipLinksComponent } from '@lucca-front/ng/a11y';
 import { ChangeDetectionStrategy, Component } from '@angular/core';
 import { Meta, StoryObj } from '@storybook/angular-vite';
 

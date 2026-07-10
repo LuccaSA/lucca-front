@@ -4,7 +4,7 @@ import { provideAnimations } from '@angular/platform-browser/animations';
 import { LuDisplayInitials, LuUserPictureComponent, USER_PICTURE_SIZE } from '@lucca-front/ng/user';
 import { LuUserPopoverDirective } from '@lucca-front/ng/user-popover';
 import { applicationConfig, Meta, moduleMetadata, StoryObj } from '@storybook/angular-vite';
-import { georges } from '../../user.mocks';
+import { finn, georges, jake } from '../../user.mocks';
 
 export default {
 	title: 'Documentation/Users/Avatar/Angular/Basic',

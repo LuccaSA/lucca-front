@@ -1,6 +1,6 @@
 import { CdkDrag, CdkDragDrop, CdkDropList, moveItemInArray } from '@angular/cdk/drag-drop';
 import { SortableListComponent, SortableListItemComponent } from '@lucca-front/ng/sortable-list';
-import { Meta, StoryObj } from '@storybook/angular-vite';
+import { Meta, moduleMetadata, StoryObj } from '@storybook/angular-vite';
 
 interface SortableListDraggableStory {
 	label: string;

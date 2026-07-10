@@ -1,6 +1,7 @@
 import { ChangeDetectionStrategy, Component, input } from '@angular/core';
 import { LuUserPictureModule } from '@lucca-front/ng/user';
 import { Meta, StoryObj } from '@storybook/angular-vite';
+import { jake } from '../../user.mocks';
 
 @Component({
 	selector: 'avatar-stories',
