@@ -1082,6 +1082,7 @@
 			"breadcrumbs": null,
 			"leading": null,
 			"leadingContent": null,
+			"impersonation": null,
 			"Screen size": [
 				"M",
 				"S"

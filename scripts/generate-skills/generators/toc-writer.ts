@@ -111,7 +111,7 @@ Le lien exact (nom et chemin du type) est donné dans la section « Type definit
 ### Outils
 
 \`./references/tools/<slug>.md\`
-Slugs : animations, mixins, numbers, scrollbox, utilitaires
+Slugs : animations, mixins, numbers, scrollbox, utilitaires, angular-api (providers/tokens/pipes/services des packages sans composant, avec leurs dépréciations)
 
 ### Migrations (montée de version)
 
