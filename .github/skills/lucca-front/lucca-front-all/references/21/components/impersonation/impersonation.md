@@ -27,15 +27,15 @@ import { ImpersonationComponent } from '@lucca-front/ng/impersonation';
 
 #### Outputs
 
-| Property | Binding name | Type |
-|----------|-------------|------|
-| `clear` | `clear` | `void` |
+| Property | Binding name | Type | Notes |
+|----------|-------------|------|-------|
+| `clear` | `clear` | `void` | — |
 
 #### Models (two-way binding)
 
-| Property | Type | Required |
-|----------|------|----------|
-| `selectedUser` | `ILuUser` | — |
+| Property | Type | Required | Notes |
+|----------|------|----------|-------|
+| `selectedUser` | `ILuUser` | — | — |
 
 ## Related files
 

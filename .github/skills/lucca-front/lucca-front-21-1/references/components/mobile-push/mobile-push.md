@@ -27,10 +27,10 @@ import { MobilePushComponent } from '@lucca-front/ng/mobile-push';
 
 #### Outputs
 
-| Property | Binding name | Type |
-|----------|-------------|------|
-| `appStoreLinkClicked` | `appStoreLinkClicked` | `void` |
-| `googlePlayLinkClicked` | `googlePlayLinkClicked` | `void` |
+| Property | Binding name | Type | Notes |
+|----------|-------------|------|-------|
+| `appStoreLinkClicked` | `appStoreLinkClicked` | `void` | — |
+| `googlePlayLinkClicked` | `googlePlayLinkClicked` | `void` | — |
 
 ## Related files
 

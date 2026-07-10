@@ -28,6 +28,12 @@ import { CalloutPopoverComponent } from '@lucca-front/ng/callout';
 | `state` | `state` | `'success' \| 'warning' \| 'error'` | — | — | — | État du callout. |
 | `heading` | `heading` | `PortalContent` | — | — | — | Ajoute un titre au popover. |
 
+### Injection tokens
+
+| Token | Type | Description |
+|-------|------|-------------|
+| `LU_CALLOUT_TRANSLATIONS` | `unknown` | — |
+
 ## Type definitions
 
 - [`LuccaIcon`](../../types/LuccaIcon.md) — 574 available values

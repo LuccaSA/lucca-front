@@ -26,7 +26,7 @@ import { ButtonComponent } from '@lucca-front/ng/button';
 | `size` | `size` | `'M' \| 'S' \| 'XS'` | — | — | — | Modifie la taille du composant. |
 | `block` | `block` | `boolean` | `false` | — | `booleanAttribute` | Applique display: block. |
 | `critical` | `critical` | `boolean` | `false` | — | `booleanAttribute` | [v20.2] Marque une action aux conséquences importantes ou irréversibles au survol et focus. Seulement compatible avec ou… |
-| `delete` | `delete` | `boolean` | `false` | — | `booleanAttribute` | [Deprecated] Remplacé par critical. |
+| `delete` | `delete` | `boolean` | `false` | — | `booleanAttribute` | ⚠️ **Déprécié** : use `critical` input instead [Deprecated] Remplacé par critical. |
 | `disclosure` | `disclosure` | `boolean` | `false` | — | `booleanAttribute` | Indique le présence d'un menu. |
 | `palette` | `palette` | `'success' \| 'warning' \| 'error' \| 'product' \| 'neutral' \| 'none' \| 'primary' \| 'grey' \| 'brand'` | `'none'` | — | — | Applique une palette de couleurs au bouton. |
 | `state` | `state` | `'default' \| 'loading' \| 'error' \| 'success'` | `'default'` | — | — | Modifie l'état du bouton. |

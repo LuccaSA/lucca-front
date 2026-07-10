@@ -25,9 +25,15 @@ import { CalloutDisclosureComponent } from '@lucca-front/ng/callout';
 
 #### Outputs
 
-| Property | Binding name | Type |
-|----------|-------------|------|
-| `openChange` | `openChange` | `boolean` |
+| Property | Binding name | Type | Notes |
+|----------|-------------|------|-------|
+| `openChange` | `openChange` | `boolean` | — |
+
+### Injection tokens
+
+| Token | Type | Description |
+|-------|------|-------------|
+| `LU_CALLOUT_TRANSLATIONS` | `unknown` | — |
 
 ## Type definitions
 

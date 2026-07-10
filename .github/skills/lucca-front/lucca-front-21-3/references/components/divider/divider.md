@@ -25,7 +25,7 @@ import { DividerComponent } from '@lucca-front/ng/divider';
 | `separatorRole` | `separatorRole` | `boolean` | `false` | — | `booleanAttribute` | Permet de restituer Divider comme un séparateur natif (hr). Son éventuel contenu textuel ne sera alors plus restitué. |
 | `vertical` | `vertical` | `boolean` | `false` | — | `booleanAttribute` | — |
 | `size` | `size` | `DividerSize \| null` | `null` | — | — | — |
-| `withRole` | `withRole` | `boolean` | `false` | — | `booleanAttribute` | — |
+| `withRole` | `withRole` | `boolean` | `false` | — | `booleanAttribute` | ⚠️ **Déprécié** : Déprécié.  |
 
 ## Related files
 

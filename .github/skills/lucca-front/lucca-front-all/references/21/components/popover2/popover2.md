@@ -33,16 +33,16 @@ import { PopoverDirective, PopoverContentComponent } from '@lucca-front/ng/popov
 
 #### Outputs
 
-| Property | Binding name | Type |
-|----------|-------------|------|
-| `luPopoverClosed` | `luPopoverClosed` | `void` |
-| `luPopoverOpened` | `luPopoverOpened` | `void` |
+| Property | Binding name | Type | Notes |
+|----------|-------------|------|-------|
+| `luPopoverClosed` | `luPopoverClosed` | `void` | — |
+| `luPopoverOpened` | `luPopoverOpened` | `void` | — |
 
 #### Models (two-way binding)
 
-| Property | Type | Required |
-|----------|------|----------|
-| `luPopoverTrigger` | `'click' | 'click+hover' | 'hover+focus'` | — |
+| Property | Type | Required | Notes |
+|----------|------|----------|-------|
+| `luPopoverTrigger` | `'click' \| 'click+hover' \| 'hover+focus'` | — | — |
 
 ### PopoverContentComponent (component)
 
@@ -53,6 +53,19 @@ import { PopoverDirective, PopoverContentComponent } from '@lucca-front/ng/popov
 | Property | Binding name | Type | Default | Required | Transform | Description |
 |----------|-------------|------|---------|----------|-----------|-------------|
 | `intl` | `intl` | `unknown` | — | — | — | — |
+
+### Providers
+
+| Fonction | Signature | Description |
+|----------|-----------|-------------|
+| `configureLuPopover` | `(): EnvironmentProviders` | — |
+
+### Injection tokens
+
+| Token | Type | Description |
+|-------|------|-------------|
+| `LU_POPOVER2_TRANSLATIONS` | `unknown` | — |
+| `POPOVER_CONFIG` | `PopoverConfig` | — |
 
 ## Related files
 

@@ -23,6 +23,12 @@ import { LuApiSelectInputComponent } from '@lucca-front/ng/api';
 | `orderBy` | `orderBy` | `string` | — | — | — | — |
 | `sort` | `sort` | `string` | — | — | — | — |
 
+### Modules dépréciés
+
+- ⚠️ `LuApiModule` — use `LuApiFeederComponent, LuApiPagedSearcherComponent, LuApiSearcherComponent, LuApiPagerComponent, LuApiSelectInputComponent` instead
+- ⚠️ `LuApiSelectModule` — use `LuApiFeederComponent, LuApiPagedSearcherComponent, LuApiSearcherComponent, LuApiPagerComponent, LuApiSelectInputComponent` instead
+- ⚠️ `LuApiSelectInputModule` — use `LuApiSelectInputComponent` instead
+
 ## Related files
 
 - 📋 [Changelog](./api-select.changelog.md)

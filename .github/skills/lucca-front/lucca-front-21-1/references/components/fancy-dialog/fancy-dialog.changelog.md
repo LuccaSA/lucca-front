@@ -6,6 +6,7 @@
 
 `DialogHeaderComponent` :
   + `intl` : unknown
++ provider `provideDialogRoutingReuseStrategy` : (): EnvironmentProviders
 
 ## 21.0.0
 

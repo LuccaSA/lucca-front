@@ -25,6 +25,10 @@ import { LuCoreSelectEstablishmentsDirective } from '@lucca-front/ng/core-select
 | `appInstanceId` | `appInstanceId` | `number \| null` | `null` | — | — | — |
 | `searchDelimiter` | `searchDelimiter` | `string` | `' '` | — | — | — |
 
+### Services
+
+#### EstablishmentGroupingService
+
 ## Related files
 
 - 📋 [Changelog](./core-select-establishment.changelog.md)

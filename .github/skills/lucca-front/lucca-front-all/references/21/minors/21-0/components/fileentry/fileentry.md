@@ -39,10 +39,10 @@ import { FileDropzoneComponent, FileEntryComponent, MultiFileUploadComponent, Si
 
 #### Outputs
 
-| Property | Binding name | Type |
-|----------|-------------|------|
-| `passwordChange` | `passwordChange` | `void` |
-| `deleteFile` | `deleteFile` | `void` |
+| Property | Binding name | Type | Notes |
+|----------|-------------|------|-------|
+| `passwordChange` | `passwordChange` | `void` | — |
+| `deleteFile` | `deleteFile` | `void` | — |
 
 ### MultiFileUploadComponent (component)
 
@@ -64,9 +64,9 @@ import { FileDropzoneComponent, FileEntryComponent, MultiFileUploadComponent, Si
 
 #### Outputs
 
-| Property | Binding name | Type |
-|----------|-------------|------|
-| `deleteFile` | `deleteFile` | `void` |
+| Property | Binding name | Type | Notes |
+|----------|-------------|------|-------|
+| `deleteFile` | `deleteFile` | `void` | — |
 
 ## Related files
 

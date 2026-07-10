@@ -16,7 +16,7 @@ import { EmptyStateSectionComponent } from '@lucca-front/ng/empty-state';
 
 | Property | Binding name | Type | Default | Required | Transform | Description |
 |----------|-------------|------|---------|----------|-----------|-------------|
-| `icon` | `icon` | `string \| null` | `null` | — | — | — |
+| `icon` | `icon` | `string \| null` | `null` | — | — | ⚠️ **Déprécié** : use illustration and action  |
 | `illustration` | `illustration` | `BubbleIllustration \| string \| null` | `null` | — | — | — |
 | `action` | `action` | `boolean` | `false` | — | `booleanAttribute` | — |
 | `palette` | `palette` | `Palette` | `'none'` | — | — | — |

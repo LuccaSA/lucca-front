@@ -29,6 +29,11 @@ import { LuUserPictureComponent } from '@lucca-front/ng/user';
 | `size` | `size` | `'XS' \| 'S' \| 'M' \| 'L' \| 'XL' \| 'XXL' \| 'XXXL'` | `'M'` | — | — | — |
 | `imageLoadingAttribute` | `imageLoadingAttribute` | `HTMLImageElement['loading']` | `'lazy'` | — | — | — |
 
+### Modules dépréciés
+
+- ⚠️ `LuUserPictureModule` — use `LuUserPictureComponent` instead
+- ⚠️ `LuUserModule` — use `LuUserDisplayPipe, LuUserPictureComponent, LuUserTileComponent` instead
+
 ## Related files
 
 - 📝 [Code & implementation](./avatar.component.md)

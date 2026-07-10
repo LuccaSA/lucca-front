@@ -23,4 +23,5 @@
 | `breadcrumbs` | BOOLEAN | — |
 | `leading` | BOOLEAN | — |
 | `leadingContent` | INSTANCE_SWAP | — |
+| `impersonation` | BOOLEAN | — |
 | `Screen size` | VARIANT | `M` · `S` |

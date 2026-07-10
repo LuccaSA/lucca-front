@@ -49,13 +49,15 @@ import { DropdownActionComponent, DropdownDividerComponent, DropdownGroupCompone
 
 #### Outputs
 
-| Property | Binding name | Type |
-|----------|-------------|------|
-| `onSelect` | `onSelect` | `boolean` |
+| Property | Binding name | Type | Notes |
+|----------|-------------|------|-------|
+| `onSelect` | `onSelect` | `boolean` | — |
 
 ### LuDropdownPanelComponent (component)
 
 **Selector:** `lu-dropdown`
+
+> ⚠️ **Déprécié** : prefer the new menu approach: https://prisme.lucca.io/94310e217/p/557682-dropdown
 
 **exportAs:** `LuDropdownPanel`
 
@@ -68,11 +70,11 @@ import { DropdownActionComponent, DropdownDividerComponent, DropdownGroupCompone
 
 #### Outputs
 
-| Property | Binding name | Type |
-|----------|-------------|------|
-| `close` | `close` | `void` |
-| `open` | `open` | `void` |
-| `hovered` | `hovered` | `boolean` |
+| Property | Binding name | Type | Notes |
+|----------|-------------|------|-------|
+| `close` | `close` | `void` | — |
+| `open` | `open` | `void` | — |
+| `hovered` | `hovered` | `boolean` | — |
 
 ### LuDropdownTriggerDirective (directive)
 
@@ -85,6 +87,13 @@ import { DropdownActionComponent, DropdownDividerComponent, DropdownGroupCompone
 | Property | Binding name | Type | Default | Required | Transform | Description |
 |----------|-------------|------|---------|----------|-----------|-------------|
 | `inputPanel` | `luDropdown` | `TemplateRef<unknown> \| Type<unknown> \| ALuPopoverPanel` | — | — | — | — |
+
+### Modules dépréciés
+
+- ⚠️ `LuDropdownModule` — use `LuDropdownTriggerDirective, LuDropdownPanelComponent, LuDropdownItemDirective` instead
+- ⚠️ `LuDropdownItemModule` — use `LuDropdownItemDirective` instead
+- ⚠️ `LuDropdownPanelModule` — use `LuDropdownPanelComponent` instead
+- ⚠️ `LuDropdownTriggerModule` — use `LuDropdownTriggerDirective` instead
 
 ## Related files
 

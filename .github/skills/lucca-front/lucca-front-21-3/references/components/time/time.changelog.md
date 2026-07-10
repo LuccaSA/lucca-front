@@ -10,6 +10,7 @@
   + (output) `nextPicker` : void
   + (output) `nonDigitKeyPressed` : void
   + (output) `touched` : void
++ token `LU_TIME_RANGE_PICKER_TRANSLATIONS` : unknown
 
 ## 21.1.0
 

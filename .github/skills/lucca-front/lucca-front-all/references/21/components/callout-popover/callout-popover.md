@@ -31,6 +31,12 @@ import { CalloutPopoverComponent } from '@lucca-front/ng/callout';
 | `customPopoverPositions` | `customPopoverPositions` | `ConnectionPositionPair[]` | — | — | — | — |
 | `popoverDisabled` | `popoverDisabled` | `boolean` | `false` | — | `booleanAttribute` | — |
 
+### Injection tokens
+
+| Token | Type | Description |
+|-------|------|-------------|
+| `LU_CALLOUT_TRANSLATIONS` | `unknown` | — |
+
 ## Type definitions
 
 - [`LuccaIcon`](../../types/LuccaIcon.md) — 582 available values

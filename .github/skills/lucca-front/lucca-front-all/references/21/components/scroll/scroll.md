@@ -22,13 +22,17 @@ import { LuScrollDirective } from '@lucca-front/ng/scroll';
 
 #### Outputs
 
-| Property | Binding name | Type |
-|----------|-------------|------|
-| `onScroll` | `onScroll` | `Event` |
-| `onScrollTop` | `onScrollTop` | `Event` |
-| `onScrollBottom` | `onScrollBottom` | `Event` |
-| `onScrollLeft` | `onScrollLeft` | `Event` |
-| `onScrollRight` | `onScrollRight` | `Event` |
+| Property | Binding name | Type | Notes |
+|----------|-------------|------|-------|
+| `onScroll` | `onScroll` | `Event` | — |
+| `onScrollTop` | `onScrollTop` | `Event` | — |
+| `onScrollBottom` | `onScrollBottom` | `Event` | — |
+| `onScrollLeft` | `onScrollLeft` | `Event` | — |
+| `onScrollRight` | `onScrollRight` | `Event` | — |
+
+### Modules dépréciés
+
+- ⚠️ `LuScrollModule` — use `LuScrollDirective` instead
 
 ## Related files
 

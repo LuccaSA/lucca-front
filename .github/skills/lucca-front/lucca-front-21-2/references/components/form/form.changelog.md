@@ -5,6 +5,7 @@
 ## 21.1.0
 
 + `presentation` : boolean
++ token `LU_FORM_INSTANCE` : FormComponent
 
 ## 21.0.0
 

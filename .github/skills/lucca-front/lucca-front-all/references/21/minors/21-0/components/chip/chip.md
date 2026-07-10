@@ -32,9 +32,9 @@ import { ChipComponent } from '@lucca-front/ng/chip';
 
 #### Outputs
 
-| Property | Binding name | Type |
-|----------|-------------|------|
-| `kill` | `kill` | `Event` |
+| Property | Binding name | Type | Notes |
+|----------|-------------|------|-------|
+| `kill` | `kill` | `Event` | — |
 
 ## Type definitions
 

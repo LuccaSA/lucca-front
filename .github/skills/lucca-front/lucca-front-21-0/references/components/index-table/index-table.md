@@ -36,9 +36,9 @@ import { IndexTableActionFileComponent, IndexTableActionComponent, IndexTableBod
 
 #### Models (two-way binding)
 
-| Property | Type | Required |
-|----------|------|----------|
-| `expanded` | `unknown` | — |
+| Property | Type | Required | Notes |
+|----------|------|----------|-------|
+| `expanded` | `unknown` | — | — |
 
 ### IndexTableRowCellHeaderComponent (component)
 
@@ -55,9 +55,9 @@ import { IndexTableActionFileComponent, IndexTableActionComponent, IndexTableBod
 
 #### Models (two-way binding)
 
-| Property | Type | Required |
-|----------|------|----------|
-| `sort` | `null | 'none' | 'ascending' | 'descending'` | — |
+| Property | Type | Required | Notes |
+|----------|------|----------|-------|
+| `sort` | `null \| 'none' \| 'ascending' \| 'descending'` | — | — |
 
 ### IndexTableRowCellComponent (component)
 
@@ -92,9 +92,9 @@ import { IndexTableActionFileComponent, IndexTableActionComponent, IndexTableBod
 
 #### Models (two-way binding)
 
-| Property | Type | Required |
-|----------|------|----------|
-| `selected` | `boolean` | — |
+| Property | Type | Required | Notes |
+|----------|------|----------|-------|
+| `selected` | `boolean` | — | — |
 
 ### IndexTableComponent (component)
 

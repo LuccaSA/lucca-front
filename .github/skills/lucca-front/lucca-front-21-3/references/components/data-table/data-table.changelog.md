@@ -8,6 +8,7 @@
   ~ (model) `sort` : null | 'none' | 'ascending' | 'descending' → DataTableSort | null
 `DataTableComponent` :
   ~ `verticalAlign` : null | 'top' | 'middle' | 'bottom' → DataTableVerticalAlign | null
++ token `LU_DATA_TABLE_INSTANCE` : DataTableComponent
 
 ## 21.1.0
 

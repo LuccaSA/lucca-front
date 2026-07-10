@@ -24,9 +24,15 @@ import { PhoneNumberInputComponent } from '@lucca-front/ng/forms/phone-number-in
 
 #### Outputs
 
-| Property | Binding name | Type |
-|----------|-------------|------|
-| `countryChange` | `countryChange` | `CountryCode` |
+| Property | Binding name | Type | Notes |
+|----------|-------------|------|-------|
+| `countryChange` | `countryChange` | `CountryCode` | — |
+
+### Pipes
+
+| Pipe | Classe | transform | Description |
+|------|--------|-----------|-------------|
+| `luPhoneNumberFormat` | `PhoneNumberFormatPipe` | `(value: E164Number, format: NumberFormat = 'NATIONAL'): unknown` | — |
 
 ## Related files
 

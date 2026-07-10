@@ -32,9 +32,9 @@ import { SegmentedControlTabsPanelComponent, SegmentedControlTabsComponent } fro
 
 #### Models (two-way binding)
 
-| Property | Type | Required |
-|----------|------|----------|
-| `active` | `T` | — |
+| Property | Type | Required | Notes |
+|----------|------|----------|-------|
+| `active` | `T` | — | — |
 
 ## Related files
 

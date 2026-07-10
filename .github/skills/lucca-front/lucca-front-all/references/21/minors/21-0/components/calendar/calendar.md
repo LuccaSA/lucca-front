@@ -21,6 +21,11 @@ import { LuCalendarInputComponent } from '@lucca-front/ng/date';
 | `granularity` | `granularity` | `LuDateGranularity` | `ELuDateGranularity.day` | — | — | — |
 | `startOn` | `startOn` | `D` | `this._adapter.forgeToday()` | — | — | — |
 
+### Modules dépréciés
+
+- ⚠️ `LuCalendarInputModule` — use `LuCalendarInputComponent` instead
+- ⚠️ `LuDateModule` — use `LuCalendarInputComponent, LuDatePickerComponent, LuDateInputDirective, LuDateAdapterPipe, LuDateSelectInputComponent` instead
+
 ## Related files
 
 - 📝 [Code & implementation](./calendar.component.md)

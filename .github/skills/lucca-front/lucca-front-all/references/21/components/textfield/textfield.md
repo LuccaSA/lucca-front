@@ -30,9 +30,15 @@ import { TextInputComponent } from '@lucca-front/ng/forms';
 
 #### Outputs
 
-| Property | Binding name | Type |
-|----------|-------------|------|
-| `blur` | `blur` | `FocusEvent` |
+| Property | Binding name | Type | Notes |
+|----------|-------------|------|-------|
+| `blur` | `blur` | `FocusEvent` | — |
+
+### Injection tokens
+
+| Token | Type | Description |
+|-------|------|-------------|
+| `LU_TEXTFIELD_TRANSLATIONS` | `unknown` | — |
 
 ## Type definitions
 

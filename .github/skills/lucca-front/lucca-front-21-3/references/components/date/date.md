@@ -53,12 +53,12 @@ import { LuCalendarInputComponent, LuDateInputDirective, LuDatePickerComponent, 
 
 #### Outputs
 
-| Property | Binding name | Type |
-|----------|-------------|------|
-| `close` | `close` | `void` |
-| `open` | `open` | `void` |
-| `hovered` | `hovered` | `boolean` |
-| `onSelectValue` | `onSelectValue` | `D` |
+| Property | Binding name | Type | Notes |
+|----------|-------------|------|-------|
+| `close` | `close` | `void` | — |
+| `open` | `open` | `void` | — |
+| `hovered` | `hovered` | `boolean` | — |
+| `onSelectValue` | `onSelectValue` | `D` | — |
 
 ### LuDateSelectInputComponent (component)
 
@@ -74,6 +74,33 @@ import { LuCalendarInputComponent, LuDateInputDirective, LuDatePickerComponent, 
 | `inputPlaceholder` | `placeholder` | `string` | — | — | — | — |
 | `hideClearer` | `hideClearer` | `boolean` | `false` | — | — | — |
 | `startOn` | `startOn` | `D` | — | — | — | — |
+
+### Injection tokens
+
+| Token | Type | Description |
+|-------|------|-------------|
+| `LU_DATE_INPUT_TRANSLATIONS` | `unknown` | — |
+| `LU_DATE_SELECT_INPUT_TRANSLATIONS` | `unknown` | — |
+
+### Pipes
+
+| Pipe | Classe | transform | Description |
+|------|--------|-----------|-------------|
+| `luDate` | `LuDateAdapterPipe` | `(d: D, format = 'mediumDate'): string` | — |
+| `luHumanizeDate` | `LuHumanizeDatePipe` | `(value: Date \| string \| number, allowedUnits?: readonly LuRelativeTimeFormatUnit[]): Observable<string>` | — |
+
+### Services
+
+#### LuHumanizeDateFormatter
+
+- `format(relativeTime: LuRelativeTime): string`
+
+### Modules dépréciés
+
+- ⚠️ `LuDateAdapterModule` — use `LuDateAdapterPipe` instead
+- ⚠️ `LuDateModule` — use `LuCalendarInputComponent, LuDatePickerComponent, LuDateInputDirective, LuDateAdapterPipe, LuDateSelectInputComponent` instead
+- ⚠️ `LuDatePickerModule` — use `LuDatePickerComponent` instead
+- ⚠️ `LuDateSelectInputModule` — use `LuDateSelectInputComponent` instead
 
 ## Related files
 

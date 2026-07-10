@@ -36,11 +36,11 @@ import { TreeSelectDirective, TreeBranchComponent } from '@lucca-front/ng/tree-s
 
 #### Outputs
 
-| Property | Binding name | Type |
-|----------|-------------|------|
-| `toggleOne` | `toggleOne` | `T` |
-| `selectMany` | `selectMany` | `T[]` |
-| `unselectMany` | `unselectMany` | `T[]` |
+| Property | Binding name | Type | Notes |
+|----------|-------------|------|-------|
+| `toggleOne` | `toggleOne` | `T` | — |
+| `selectMany` | `selectMany` | `T[]` | — |
+| `unselectMany` | `unselectMany` | `T[]` | — |
 
 ## Related files
 

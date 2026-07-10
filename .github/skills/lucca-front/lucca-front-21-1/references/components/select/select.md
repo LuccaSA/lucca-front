@@ -12,6 +12,13 @@ import { LuSelectInputComponent } from '@lucca-front/ng/select';
 
 **Selector:** `lu-select`
 
+> ⚠️ **Déprécié** : prefer SimpleSelect or MultipleSelect
+
+### Modules dépréciés
+
+- ⚠️ `LuSelectModule` — prefer SimpleSelect or MultipleSelect
+- ⚠️ `LuSelectInputModule` — prefer SimpleSelect or MultipleSelect
+
 ## Related files
 
 - 📝 [Code & implementation](./select.component.md)

@@ -28,9 +28,9 @@ import { PLGPushComponent } from '@lucca-front/ng/plg-push';
 
 #### Models (two-way binding)
 
-| Property | Type | Required |
-|----------|------|----------|
-| `removed` | `unknown` | — |
+| Property | Type | Required | Notes |
+|----------|------|----------|-------|
+| `removed` | `unknown` | — | — |
 
 ## Related files
 

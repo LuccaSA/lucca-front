@@ -24,9 +24,9 @@ import { FilterPillComponent, FilterBarComponent, FilterPillAddonBeforeDirective
 
 #### Models (two-way binding)
 
-| Property | Type | Required |
-|----------|------|----------|
-| `displayed` | `unknown` | — |
+| Property | Type | Required | Notes |
+|----------|------|----------|-------|
+| `displayed` | `unknown` | — | — |
 
 ### FilterBarComponent (component)
 
@@ -47,6 +47,13 @@ import { FilterPillComponent, FilterBarComponent, FilterPillAddonBeforeDirective
 ### FilterPillLabelDirective (directive)
 
 **Selector:** `[luFilterPillLabel]`
+
+### Injection tokens
+
+| Token | Type | Description |
+|-------|------|-------------|
+| `FILTER_PILL_INPUT_COMPONENT` | `FilterPillInputComponent` | — |
+| `FILTER_PILL_HOST_COMPONENT` | `FilterPillComponent` | — |
 
 ## Type definitions
 

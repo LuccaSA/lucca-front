@@ -26,9 +26,9 @@ import { MultilanguageInputComponent } from '@lucca-front/ng/forms';
 
 #### Outputs
 
-| Property | Binding name | Type |
-|----------|-------------|------|
-| `translateWithAI` | `translateWithAI` | `string` |
+| Property | Binding name | Type | Notes |
+|----------|-------------|------|-------|
+| `translateWithAI` | `translateWithAI` | `string` | — |
 
 ## Related files
 

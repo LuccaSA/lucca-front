@@ -63,6 +63,43 @@ import { LuCoreSelectTotalCountDirective, LuCoreSelectNoClueDirective, LuDisable
 |----------|-------------|------|---------|----------|-----------|-------------|
 | `select` | `luSelectPanelHeader` | `ALuSelectInputComponent<unknown, unknown> \| ALuSelectInputComponent<unknown, unknown[]>` | — | ✅ | — | — |
 
+### Providers
+
+| Fonction | Signature | Description |
+|----------|-----------|-------------|
+| `provideLuSelectLabelsAndIds` | `(): Provider[]` | — |
+| `provideOptionContext` | `(): Provider` | — |
+
+### Injection tokens
+
+| Token | Type | Description |
+|-------|------|-------------|
+| `LU_OPTION_CONTEXT` | `ILuOptionContext<unknown>` | — |
+| `SELECT_PANEL_INSTANCE` | `CoreSelectPanelInstance` | — |
+| `SELECT_ID` | `number` | — |
+| `SELECT_LABEL` | `HTMLLabelElement \| undefined` | — |
+| `SELECT_LABEL_ID` | `string` | — |
+| `CORE_SELECT_API_TOTAL_COUNT_PROVIDER` | `CoreSelectApiTotalCountProvider` | — |
+| `LU_CORE_SELECT_TRANSLATIONS` | `unknown` | — |
+
+### Pipes
+
+| Pipe | Classe | transform | Description |
+|------|--------|-----------|-------------|
+| `luTreeDisplay` | `TreeDisplayPipe` | `(items: T[], treeGenerator: TreeGenerator<T, TreeNode<T>>): TreeNode<T>[]` | — |
+| `luOptionGroup` | `LuOptionGroupPipe` | `(options: T[], selector: (option: T) => TGroup)` | — |
+| `luIsOptionSelected` | `LuIsOptionSelectedPipe` | `(option: T, comparer: LuOptionComparer<T>, selectedOptions: T[]): boolean` | — |
+
+### Services
+
+#### CoreSelectKeyManager
+
+- `init(options: CoreSelectKeyManagerOptions<T>): void`
+- `onKeydown(event: KeyboardEvent): void`
+- `setActiveItem(index: number): void`
+- `setActiveItemByElement(item: CoreSelectPanelElement<T>): void`
+- `highlightOption(option: T): void`
+
 ## Related files
 
 - 📋 [Changelog](./select-templating.changelog.md)

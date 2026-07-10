@@ -32,9 +32,9 @@ import { FieldsetComponent } from '@lucca-front/ng/forms';
 
 #### Models (two-way binding)
 
-| Property | Type | Required |
-|----------|------|----------|
-| `expanded` | `unknown` | — |
+| Property | Type | Required | Notes |
+|----------|------|----------|-------|
+| `expanded` | `unknown` | — | — |
 
 ## Related files
 

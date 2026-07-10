@@ -6,6 +6,7 @@
 
 `IndexTableRowCellHeaderComponent` :
   ~ (model) `sort` : null | 'none' | 'ascending' | 'descending' → IndexTableSort | null
++ token `LU_INDEX_TABLE_INSTANCE` : IndexTableComponent
 
 ## 21.0.0
 

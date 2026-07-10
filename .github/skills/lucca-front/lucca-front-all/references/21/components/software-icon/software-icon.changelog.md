@@ -39,6 +39,7 @@
 	'business-expenses' | 'invoices' | 'payment-methods' | 'accounting-assistant' | 'certified-einvoicing-platform' | // Compensation and Benefits
 	'compensation' | 'payslip' | 'benefits' | 'payroll-assistant' | // Lucca
 	'cloud-control' | 'ask-lucca' | 'calendar' | 'administration' | 'client-center' | 'sandbox' | 'store' | 'lucca'
++ token `LU_SOFTWARE_ICON_WRAPPER` : boolean
 
 ## 21.2.2
 

@@ -21,6 +21,11 @@ import { LuUserTileComponent } from '@lucca-front/ng/user';
 | `role` | `role` | `string` | — | — | — | Rôle de l’utilisateur affiché sous son nom. |
 | `size` | `size` | `'L' \| 'M' \| 'S' \| 'XS'` | — | — | — | Taille du composant. |
 
+### Modules dépréciés
+
+- ⚠️ `LuUserTileModule` — use `LuUserTileComponent` instead
+- ⚠️ `LuUserModule` — use `LuUserDisplayPipe, LuUserPictureComponent, LuUserTileComponent` instead
+
 ## Related files
 
 - 📝 [Code & implementation](./tile.component.md)

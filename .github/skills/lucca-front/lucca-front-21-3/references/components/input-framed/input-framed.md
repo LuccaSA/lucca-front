@@ -26,6 +26,14 @@ import { InputFramedComponent } from '@lucca-front/ng/form-field';
 | `center` | `center` | `boolean` | `false` | — | `booleanAttribute` | Aligne le champ et son illustration verticalement lorsque le label est trop court. |
 | `size` | `size` | `InputFramedSize \| null` | `null` | — | — | — |
 
+### Injection tokens
+
+| Token | Type | Description |
+|-------|------|-------------|
+| `FORM_FIELD_INSTANCE` | `FormFieldComponent` | — |
+| `LU_FORM_FIELD_TRANSLATIONS` | `unknown` | — |
+| `INPUT_FRAMED_INSTANCE` | `InputFramedComponent` | — |
+
 ## Related files
 
 - 📝 [Code & implementation](./input-framed.component.md)

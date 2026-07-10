@@ -36,10 +36,10 @@ import { FormFieldComponent, InputDirective } from '@lucca-front/ng/form-field';
 
 #### Models (two-way binding)
 
-| Property | Type | Required |
-|----------|------|----------|
-| `rolePresentationLabel` | `unknown` | — |
-| `layout` | `'default' | 'checkable' | 'fieldset'` | — |
+| Property | Type | Required | Notes |
+|----------|------|----------|-------|
+| `rolePresentationLabel` | `unknown` | — | — |
+| `layout` | `'default' \| 'checkable' \| 'fieldset'` | — | — |
 
 ### InputDirective (directive)
 
@@ -50,6 +50,14 @@ import { FormFieldComponent, InputDirective } from '@lucca-front/ng/form-field';
 | Property | Binding name | Type | Default | Required | Transform | Description |
 |----------|-------------|------|---------|----------|-----------|-------------|
 | `standalone` | `luInputStandalone` | `boolean` | `false` | — | `booleanAttribute` | — |
+
+### Injection tokens
+
+| Token | Type | Description |
+|-------|------|-------------|
+| `FORM_FIELD_INSTANCE` | `FormFieldComponent` | — |
+| `LU_FORM_FIELD_TRANSLATIONS` | `unknown` | — |
+| `INPUT_FRAMED_INSTANCE` | `InputFramedComponent` | — |
 
 ## Related files
 

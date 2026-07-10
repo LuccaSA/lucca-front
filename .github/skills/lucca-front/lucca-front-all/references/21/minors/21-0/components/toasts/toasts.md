@@ -19,6 +19,24 @@ import { LuToastsComponent } from '@lucca-front/ng/toast';
 | `bottom` | `bottom` | `boolean` | `false` | — | — | — |
 | `sources` | `sources` | `Array<Observable<LuToastInput>>` | — | — | — | — |
 
+### Injection tokens
+
+| Token | Type | Description |
+|-------|------|-------------|
+| `LU_TOAST_TRANSLATIONS` | `unknown` | — |
+
+### Services
+
+#### LuToastsService
+
+- `addToast(toastInput: LuToastInput): LuToast`
+- `removeToast(toast: LuToast): void`
+- `isOnlyDismissibleManually({ duration }: LuToastInput): boolean`
+
+### Modules dépréciés
+
+- ⚠️ `LuToastsModule` — use `LuToastsComponent` instead
+
 ## Related files
 
 - 📝 [Code & implementation](./toasts.component.md)

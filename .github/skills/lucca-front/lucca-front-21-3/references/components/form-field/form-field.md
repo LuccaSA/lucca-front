@@ -38,10 +38,10 @@ import { FormFieldComponent, InputDirective, PresentationDisplayDirective } from
 
 #### Models (two-way binding)
 
-| Property | Type | Required |
-|----------|------|----------|
-| `rolePresentationLabel` | `unknown` | — |
-| `layout` | `FormFieldLayout` | — |
+| Property | Type | Required | Notes |
+|----------|------|----------|-------|
+| `rolePresentationLabel` | `unknown` | — | — |
+| `layout` | `FormFieldLayout` | — | — |
 
 ### InputDirective (directive)
 
@@ -56,6 +56,14 @@ import { FormFieldComponent, InputDirective, PresentationDisplayDirective } from
 ### PresentationDisplayDirective (directive)
 
 **Selector:** `[luPresentationDisplay]`
+
+### Injection tokens
+
+| Token | Type | Description |
+|-------|------|-------------|
+| `FORM_FIELD_INSTANCE` | `FormFieldComponent` | — |
+| `LU_FORM_FIELD_TRANSLATIONS` | `unknown` | — |
+| `INPUT_FRAMED_INSTANCE` | `InputFramedComponent` | — |
 
 ## Related files
 
