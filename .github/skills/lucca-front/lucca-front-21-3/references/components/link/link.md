@@ -28,6 +28,12 @@ import { LinkComponent, LuRouterLink } from '@lucca-front/ng/link';
 
 **Selector:** `[luRouterLink]`
 
+### Injection tokens
+
+| Token | Type | Description |
+|-------|------|-------------|
+| `LU_LINK_INSTANCE` | `boolean` | — |
+
 ## Related files
 
 - 📝 [Code & implementation](./link.component.md)

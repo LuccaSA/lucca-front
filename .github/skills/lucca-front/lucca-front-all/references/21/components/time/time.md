@@ -31,15 +31,15 @@ import { DurationPickerComponent, TimePickerComponent, TimeRangePickerComponent 
 
 #### Outputs
 
-| Property | Binding name | Type |
-|----------|-------------|------|
-| `durationChange` | `durationChange` | `DurationChangeEvent` |
+| Property | Binding name | Type | Notes |
+|----------|-------------|------|-------|
+| `durationChange` | `durationChange` | `DurationChangeEvent` | — |
 
 #### Models (two-way binding)
 
-| Property | Type | Required |
-|----------|------|----------|
-| `value` | `ISO8601Duration` | — |
+| Property | Type | Required | Notes |
+|----------|------|----------|-------|
+| `value` | `ISO8601Duration` | — | — |
 
 ### TimePickerComponent (component)
 
@@ -57,19 +57,19 @@ import { DurationPickerComponent, TimePickerComponent, TimeRangePickerComponent 
 
 #### Outputs
 
-| Property | Binding name | Type |
-|----------|-------------|------|
-| `timeChange` | `timeChange` | `TimeChangeEvent` |
-| `prevPicker` | `prevPicker` | `void` |
-| `nextPicker` | `nextPicker` | `void` |
-| `nonDigitKeyPressed` | `nonDigitKeyPressed` | `void` |
-| `touched` | `touched` | `void` |
+| Property | Binding name | Type | Notes |
+|----------|-------------|------|-------|
+| `timeChange` | `timeChange` | `TimeChangeEvent` | — |
+| `prevPicker` | `prevPicker` | `void` | — |
+| `nextPicker` | `nextPicker` | `void` | — |
+| `nonDigitKeyPressed` | `nonDigitKeyPressed` | `void` | — |
+| `touched` | `touched` | `void` | — |
 
 #### Models (two-way binding)
 
-| Property | Type | Required |
-|----------|------|----------|
-| `value` | `ISO8601Time` | — |
+| Property | Type | Required | Notes |
+|----------|------|----------|-------|
+| `value` | `ISO8601Time` | — | — |
 
 ### TimeRangePickerComponent (component)
 
@@ -86,6 +86,14 @@ import { DurationPickerComponent, TimePickerComponent, TimeRangePickerComponent 
 | `size` | `size` | `'S' \| 'M'` | — | — | — | Modifie la taille du champ. |
 | `max` | `max` | ``${string}:${string}:${string}`` | `MAX_TIME` | — | — | — |
 | `step` | `step` | `ISO8601Duration \| null` | `null` | — | — | — |
+
+### Injection tokens
+
+| Token | Type | Description |
+|-------|------|-------------|
+| `LU_DURATION_PICKER_TRANSLATIONS` | `unknown` | — |
+| `LU_TIME_PICKER_TRANSLATIONS` | `unknown` | — |
+| `LU_TIME_RANGE_PICKER_TRANSLATIONS` | `unknown` | — |
 
 ## Related files
 

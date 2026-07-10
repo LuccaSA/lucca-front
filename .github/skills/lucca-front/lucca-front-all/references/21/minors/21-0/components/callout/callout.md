@@ -64,9 +64,15 @@ import { CalloutActionsComponent, CalloutFeedbackItemDescriptionDirective, Callo
 
 #### Outputs
 
-| Property | Binding name | Type |
-|----------|-------------|------|
-| `removedChange` | `removedChange` | `boolean` |
+| Property | Binding name | Type | Notes |
+|----------|-------------|------|-------|
+| `removedChange` | `removedChange` | `boolean` | — |
+
+### Injection tokens
+
+| Token | Type | Description |
+|-------|------|-------------|
+| `LU_CALLOUT_TRANSLATIONS` | `unknown` | — |
 
 ## Type definitions
 

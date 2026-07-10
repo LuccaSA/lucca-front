@@ -31,9 +31,9 @@ import { LuCoreSelectUsersDirective, LuCoreSelectUserOptionDirective } from '@lu
 
 #### Models (two-way binding)
 
-| Property | Type | Required |
-|----------|------|----------|
-| `customUserOptionTpl` | `TemplateRef<LuOptionContext<T>> | Type<unknown> | undefined` | — |
+| Property | Type | Required | Notes |
+|----------|------|----------|-------|
+| `customUserOptionTpl` | `TemplateRef<LuOptionContext<T>> \| Type<unknown> \| undefined` | — | — |
 
 ### LuCoreSelectUserOptionDirective (directive)
 
@@ -44,6 +44,20 @@ import { LuCoreSelectUsersDirective, LuCoreSelectUserOptionDirective } from '@lu
 | Property | Binding name | Type | Default | Required | Transform | Description |
 |----------|-------------|------|---------|----------|-----------|-------------|
 | `usersDirective` | `luUserOptionUsersRef` | `LuCoreSelectUsersDirective<T>` | `null` | — | — | — |
+
+### Providers
+
+| Fonction | Signature | Description |
+|----------|-----------|-------------|
+| `provideCoreSelectUsersContext` | `<T extends LuCoreSelectUser = LuCoreSelectUser>(directiveFn: () => Type<LuCoreSelectUsersDirective<T>>): Provider[]` | — |
+| `provideCoreSelectCurrentUserId` | `(factory: () => number): Provider` | — |
+
+### Injection tokens
+
+| Token | Type | Description |
+|-------|------|-------------|
+| `LU_CORE_SELECT_USER_TRANSLATIONS` | `unknown` | — |
+| `LU_CORE_SELECT_CURRENT_USER_ID` | `number` | — |
 
 ## Related files
 

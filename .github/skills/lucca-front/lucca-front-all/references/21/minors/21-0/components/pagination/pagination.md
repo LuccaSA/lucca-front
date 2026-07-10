@@ -25,10 +25,10 @@ import { PaginationComponent } from '@lucca-front/ng/pagination';
 
 #### Outputs
 
-| Property | Binding name | Type |
-|----------|-------------|------|
-| `previousPage` | `previousPage` | `void` |
-| `nextPage` | `nextPage` | `void` |
+| Property | Binding name | Type | Notes |
+|----------|-------------|------|-------|
+| `previousPage` | `previousPage` | `void` | — |
+| `nextPage` | `nextPage` | `void` | — |
 
 ## Related files
 

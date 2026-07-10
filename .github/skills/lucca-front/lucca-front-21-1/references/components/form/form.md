@@ -19,6 +19,12 @@ import { FormComponent } from '@lucca-front/ng/form';
 | `maxWidth` | `maxWidth` | `boolean` | `false` | — | `booleanAttribute` | — |
 | `presentation` | `presentation` | `boolean` | `false` | — | `booleanAttribute` | — |
 
+### Injection tokens
+
+| Token | Type | Description |
+|-------|------|-------------|
+| `LU_FORM_INSTANCE` | `FormComponent` | — |
+
 ## Related files
 
 - 📋 [Changelog](./form.changelog.md)

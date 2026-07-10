@@ -28,11 +28,11 @@ import { LuPopoverPanelComponent, LuPopoverTargetDirective, LuPopoverTriggerDire
 
 #### Outputs
 
-| Property | Binding name | Type |
-|----------|-------------|------|
-| `close` | `close` | `void` |
-| `open` | `open` | `void` |
-| `hovered` | `hovered` | `boolean` |
+| Property | Binding name | Type | Notes |
+|----------|-------------|------|-------|
+| `close` | `close` | `void` | — |
+| `open` | `open` | `void` | — |
+| `hovered` | `hovered` | `boolean` | — |
 
 ### LuPopoverTargetDirective (directive)
 
@@ -74,10 +74,15 @@ import { LuPopoverPanelComponent, LuPopoverTargetDirective, LuPopoverTriggerDire
 
 #### Outputs
 
-| Property | Binding name | Type |
-|----------|-------------|------|
-| `onOpen` | `luPopoverOnOpen` | `void` |
-| `onClose` | `luPopoverOnClose` | `void` |
+| Property | Binding name | Type | Notes |
+|----------|-------------|------|-------|
+| `onOpen` | `luPopoverOnOpen` | `void` | — |
+| `onClose` | `luPopoverOnClose` | `void` | — |
+
+### Modules dépréciés
+
+- ⚠️ `LuPopoverPanelModule` — use `LuPopoverPanelComponent` instead
+- ⚠️ `LuPopoverModule` — use `LuPopoverPanelComponent, LuPopoverTargetDirective, LuPopoverTriggerDirective` instead
 
 ## Related files
 

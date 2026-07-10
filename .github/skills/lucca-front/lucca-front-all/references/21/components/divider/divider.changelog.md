@@ -6,6 +6,10 @@
 
 ~ `size` : 'M' | 'S' | null → DividerSize | null
 
+## 21.0.3
+
+~ `withRole` : devient déprécié
+
 ## 21.0.0
 
 Composant introduit (`DividerComponent`).

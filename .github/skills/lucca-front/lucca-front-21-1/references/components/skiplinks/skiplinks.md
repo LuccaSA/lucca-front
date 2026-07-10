@@ -18,6 +18,12 @@ import { LuSkipLinksComponent } from '@lucca-front/ng/a11y';
 |----------|-------------|------|---------|----------|-----------|-------------|
 | `intl` | `intl` | `unknown` | — | — | — | — |
 
+### Injection tokens
+
+| Token | Type | Description |
+|-------|------|-------------|
+| `LU_SKIP_LINKS_TRANSLATIONS` | `LuTranslation<ILuSkipLinksLabel>` | — |
+
 ## Related files
 
 - 📝 [Code & implementation](./skiplinks.component.md)

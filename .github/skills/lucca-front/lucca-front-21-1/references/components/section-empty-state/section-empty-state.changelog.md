@@ -10,7 +10,7 @@
 
 + `illustration` : BubbleIllustration | null
 + `action` : boolean
-~ `icon` : string → string | null, défaut 'https://cdn.lucca.fr/lucca-front/assets/empty-states/icons/iconBanknote.svg' → null
+~ `icon` : string → string | null, défaut 'https://cdn.lucca.fr/lucca-front/assets/empty-states/icons/iconBanknote.svg' → null, devient déprécié (use illustration and action)
 
 ## 21.0.0
 

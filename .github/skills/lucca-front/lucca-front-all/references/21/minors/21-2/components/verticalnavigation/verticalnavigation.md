@@ -44,9 +44,9 @@ import { VerticalNavigationLinkComponent, VerticalNavigationComponent, VerticalN
 
 #### Models (two-way binding)
 
-| Property | Type | Required |
-|----------|------|----------|
-| `expanded` | `unknown` | — |
+| Property | Type | Required | Notes |
+|----------|------|----------|-------|
+| `expanded` | `unknown` | — | — |
 
 ### VerticalNavigationItemComponent (component)
 
@@ -62,9 +62,9 @@ import { VerticalNavigationLinkComponent, VerticalNavigationComponent, VerticalN
 
 #### Models (two-way binding)
 
-| Property | Type | Required |
-|----------|------|----------|
-| `expanded` | `unknown` | — |
+| Property | Type | Required | Notes |
+|----------|------|----------|-------|
+| `expanded` | `unknown` | — | — |
 
 ## Type definitions
 

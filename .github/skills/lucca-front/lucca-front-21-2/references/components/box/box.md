@@ -29,9 +29,9 @@ import { BoxComponent } from '@lucca-front/ng/box';
 
 #### Outputs
 
-| Property | Binding name | Type |
-|----------|-------------|------|
-| `killed` | `killed` | `void` |
+| Property | Binding name | Type | Notes |
+|----------|-------------|------|-------|
+| `killed` | `killed` | `void` | — |
 
 ## Related files
 

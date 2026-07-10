@@ -12,6 +12,8 @@ import { LuDepartmentSelectInputComponent } from '@lucca-front/ng/department';
 
 **Selector:** `lu-department-select`
 
+> ⚠️ **Déprécié** : Déprécié.
+
 #### Inputs
 
 | Property | Binding name | Type | Default | Required | Transform | Description |
@@ -20,6 +22,18 @@ import { LuDepartmentSelectInputComponent } from '@lucca-front/ng/department';
 | `operations` | `operations` | `number[]` | — | — | — | — |
 | `filters` | `filters` | `string[]` | `[]` | — | — | — |
 | `uniqueOperation` | `uniqueOperation` | `number` | — | — | — | — |
+
+### Injection tokens
+
+| Token | Type | Description |
+|-------|------|-------------|
+| `LU_DEPARTMENT_SELECT_INPUT_TRANSLATIONS` | `unknown` | — |
+
+### Modules dépréciés
+
+- ⚠️ `LuDepartmentModule` — use `LuDepartmentFeederComponent, LuDepartmentSelectInputComponent` instead
+- ⚠️ `LuDepartmentSelectModule` — use `LuDepartmentFeederComponent, LuDepartmentSelectInputComponent` instead
+- ⚠️ `LuDepartmentSelectInputModule` — use `LuDepartmentSelectInputComponent` instead
 
 ## Related files
 

@@ -27,6 +27,12 @@ import { NumberInputComponent } from '@lucca-front/ng/forms';
 | `valueAlignRight` | `valueAlignRight` | `boolean` | `false` | — | `booleanAttribute` | — |
 | `intl` | `intl` | `unknown` | — | — | — | — |
 
+### Injection tokens
+
+| Token | Type | Description |
+|-------|------|-------------|
+| `LU_NUMBERFIELD_TRANSLATIONS` | `unknown` | — |
+
 ## Related files
 
 - 📋 [Changelog](./number-input.changelog.md)

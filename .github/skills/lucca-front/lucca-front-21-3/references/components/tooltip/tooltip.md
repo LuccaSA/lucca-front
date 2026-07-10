@@ -32,6 +32,11 @@ import { LuTooltipPanelComponent, LuTooltipTriggerDirective } from '@lucca-front
 | `luTooltipAnchor` | `luTooltipAnchor` | `FlexibleConnectedPositionStrategyOrigin \| LuTooltipAnchorRef \| null \| undefined` | `this.#host` | — | — | — |
 | `id` | `id` | `string` | ``${this.#host.nativeElement.tagName.toLowerCase()}-tooltip-${nextId++}`` | — | — | — |
 
+### Modules dépréciés
+
+- ⚠️ `LuTooltipTriggerModule` — use `LuTooltipTriggerDirective` instead
+- ⚠️ `LuTooltipModule` — use `LuTooltipTriggerDirective, LuTooltipPanelComponent` instead
+
 ## Related files
 
 - 📝 [Code & implementation](./tooltip.component.md)

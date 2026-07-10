@@ -28,9 +28,9 @@ import { DataTableBodyComponent, DataTableRowCellHeaderComponent, DataTableRowCe
 
 #### Models (two-way binding)
 
-| Property | Type | Required |
-|----------|------|----------|
-| `expanded` | `unknown` | — |
+| Property | Type | Required | Notes |
+|----------|------|----------|-------|
+| `expanded` | `unknown` | — | — |
 
 ### DataTableRowCellHeaderComponent (component)
 
@@ -45,9 +45,9 @@ import { DataTableBodyComponent, DataTableRowCellHeaderComponent, DataTableRowCe
 
 #### Models (two-way binding)
 
-| Property | Type | Required |
-|----------|------|----------|
-| `sort` | `null | 'none' | 'ascending' | 'descending'` | — |
+| Property | Type | Required | Notes |
+|----------|------|----------|-------|
+| `sort` | `null \| 'none' \| 'ascending' \| 'descending'` | — | — |
 
 ### DataTableRowCellComponent (component)
 
@@ -87,9 +87,9 @@ import { DataTableBodyComponent, DataTableRowCellHeaderComponent, DataTableRowCe
 
 #### Models (two-way binding)
 
-| Property | Type | Required |
-|----------|------|----------|
-| `selected` | `boolean` | — |
+| Property | Type | Required | Notes |
+|----------|------|----------|-------|
+| `selected` | `boolean` | — | — |
 
 ### DataTableComponent (component)
 

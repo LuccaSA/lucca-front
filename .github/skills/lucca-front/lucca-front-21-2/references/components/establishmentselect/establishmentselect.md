@@ -12,6 +12,8 @@ import { LuEstablishmentSelectInputComponent } from '@lucca-front/ng/establishme
 
 **Selector:** `lu-establishment-select`
 
+> ⚠️ **Déprécié** : prefer SimpleSelect or MultipleSelect with establishments directive
+
 #### Inputs
 
 | Property | Binding name | Type | Default | Required | Transform | Description |
@@ -20,6 +22,18 @@ import { LuEstablishmentSelectInputComponent } from '@lucca-front/ng/establishme
 | `filters` | `filters` | `string[]` | — | — | — | — |
 | `appInstanceId` | `appInstanceId` | `number` | — | — | — | — |
 | `operations` | `operations` | `number[]` | — | — | — | — |
+
+### Injection tokens
+
+| Token | Type | Description |
+|-------|------|-------------|
+| `LU_ESTABLISHMENT_SELECT_INPUT_TRANSLATIONS` | `unknown` | — |
+
+### Modules dépréciés
+
+- ⚠️ `LuEstablishmentModule` — prefer SimpleSelect or MultipleSelect with establishments directive
+- ⚠️ `LuEstablishmentSelectModule` — prefer SimpleSelect or MultipleSelect with establishments directive
+- ⚠️ `LuEstablishmentSelectInputModule` — use `LuEstablishmentSelectInputComponent` instead
 
 ## Related files
 

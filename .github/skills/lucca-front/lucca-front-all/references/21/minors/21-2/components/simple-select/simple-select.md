@@ -23,6 +23,12 @@ import { LuSimpleSelectInputComponent, LuSelectPanelComponent } from '@lucca-fro
 
 **Selector:** `lu-select-panel`
 
+### Injection tokens
+
+| Token | Type | Description |
+|-------|------|-------------|
+| `LU_SIMPLE_SELECT_TRANSLATIONS` | `unknown` | — |
+
 ## Related files
 
 - 📝 [Code & implementation](./simple-select.component.md)

@@ -65,9 +65,17 @@ import { LuMultiSelectContentDisplayerComponent, LuMultiSelectCounterDisplayerCo
 
 #### Models (two-way binding)
 
-| Property | Type | Required |
-|----------|------|----------|
-| `valuesTpl` | `TemplateRef<LuOptionContext<T[]>> | Type<unknown>` | — |
+| Property | Type | Required | Notes |
+|----------|------|----------|-------|
+| `valuesTpl` | `TemplateRef<LuOptionContext<T[]>> \| Type<unknown>` | — | — |
+
+### Injection tokens
+
+| Token | Type | Description |
+|-------|------|-------------|
+| `LU_MULTI_SELECT_DISPLAYER_TRANSLATIONS` | `unknown` | — |
+| `LU_MULTI_SELECT_TRANSLATIONS` | `unknown` | — |
+| `MULTI_SELECT_INPUT` | `LuMultiSelectInputComponent<unknown>` | — |
 
 ## Related files
 

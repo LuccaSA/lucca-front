@@ -6,6 +6,7 @@
 
 `LinkComponent` :
   + `hiddenIcon` : boolean
++ token `LU_LINK_INSTANCE` : boolean
 
 ## 21.1.0
 

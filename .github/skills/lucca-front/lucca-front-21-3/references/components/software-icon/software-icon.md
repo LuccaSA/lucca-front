@@ -34,6 +34,12 @@ import { SoftwareIconComponent } from '@lucca-front/ng/software-icon';
 | `iconAlt` | `iconAlt` | `string` | `''` | — | — | Texte alternatif de l’illustration restitué par les lecteurs d’écran. |
 | `size` | `size` | `SoftwareIconSize \| ''` | `''` | — | — | Modifie la taille du composant. |
 
+### Injection tokens
+
+| Token | Type | Description |
+|-------|------|-------------|
+| `LU_SOFTWARE_ICON_WRAPPER` | `boolean` | — |
+
 ## Related files
 
 - 📝 [Code & implementation](./software-icon.component.md)

@@ -25,6 +25,13 @@ import { DataPresentationComponent } from '@lucca-front/ng/form-field';
 | `label` | `label` | `PortalContent` | — | ✅ | — | — |
 | `noValue` | `noValue` | `boolean` | `false` | — | `booleanAttribute` | — |
 
+### Injection tokens
+
+| Token | Type | Description |
+|-------|------|-------------|
+| `FORM_FIELD_INSTANCE` | `FormFieldComponent` | — |
+| `LU_FORM_FIELD_TRANSLATIONS` | `unknown` | — |
+
 ## Related files
 
 - 📝 [Code & implementation](./data-presentation.component.md)

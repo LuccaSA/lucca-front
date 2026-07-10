@@ -6,6 +6,10 @@
 
 + selector `span[luButton]`
 
+## 21.0.3
+
+~ `delete` : devient déprécié (use `critical` input instead)
+
 ## 21.0.0
 
 Composant introduit (`ButtonComponent`).

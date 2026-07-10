@@ -25,6 +25,20 @@ import { LuUserPopoverComponent, LuUserPopoverDirective } from '@lucca-front/ng/
 | `luUserPopover` | `luUserPopover` | `ILuUser` | — | ✅ | — | — |
 | `luUserPopoverDisabled` | `luUserPopoverDisabled` | `boolean` | — | — | — | — |
 
+### Providers
+
+| Fonction | Signature | Description |
+|----------|-----------|-------------|
+| `provideLuUserPopover` | `()` | — |
+
+### Injection tokens
+
+| Token | Type | Description |
+|-------|------|-------------|
+| `LU_POPUP_EMPLOYEE_TRANSLATIONS` | `unknown` | — |
+| `LU_USER_POPOVER_USER` | `Signal<ILuUser>` | — |
+| `USER_POPOVER_IS_ACTIVATED` | `Observable<boolean>` | — |
+
 ## Related files
 
 - 📝 [Code & implementation](./userpopover.component.md)

@@ -25,9 +25,9 @@ import { ClearComponent } from '@lucca-front/ng/clear';
 
 #### Outputs
 
-| Property | Binding name | Type |
-|----------|-------------|------|
-| `onClear` | `onClear` | `T` |
+| Property | Binding name | Type | Notes |
+|----------|-------------|------|-------|
+| `onClear` | `onClear` | `T` | — |
 
 ## Related files
 

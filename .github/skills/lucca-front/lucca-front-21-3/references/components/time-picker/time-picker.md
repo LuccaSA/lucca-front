@@ -24,19 +24,25 @@ import { TimePickerComponent } from '@lucca-front/ng/time';
 
 #### Outputs
 
-| Property | Binding name | Type |
-|----------|-------------|------|
-| `timeChange` | `timeChange` | `TimeChangeEvent` |
-| `prevPicker` | `prevPicker` | `void` |
-| `nextPicker` | `nextPicker` | `void` |
-| `nonDigitKeyPressed` | `nonDigitKeyPressed` | `void` |
-| `touched` | `touched` | `void` |
+| Property | Binding name | Type | Notes |
+|----------|-------------|------|-------|
+| `timeChange` | `timeChange` | `TimeChangeEvent` | — |
+| `prevPicker` | `prevPicker` | `void` | — |
+| `nextPicker` | `nextPicker` | `void` | — |
+| `nonDigitKeyPressed` | `nonDigitKeyPressed` | `void` | — |
+| `touched` | `touched` | `void` | — |
 
 #### Models (two-way binding)
 
-| Property | Type | Required |
-|----------|------|----------|
-| `value` | `ISO8601Time` | — |
+| Property | Type | Required | Notes |
+|----------|------|----------|-------|
+| `value` | `ISO8601Time` | — | — |
+
+### Injection tokens
+
+| Token | Type | Description |
+|-------|------|-------------|
+| `LU_TIME_PICKER_TRANSLATIONS` | `unknown` | — |
 
 ## Related files
 

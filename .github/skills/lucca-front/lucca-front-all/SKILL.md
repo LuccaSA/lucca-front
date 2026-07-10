@@ -50,7 +50,7 @@ La doc reflète le **dernier patch publié** de la mineure. Si le patch du proje
 | Changelog | `components/<slug>/<slug>.changelog.md` |
 | Types partagés | `types/<TypeName>.md` |
 | Documentation transverse | `documentation/<dossier>/<slug>.md` |
-| Outils | `tools/<slug>.md` (animations, mixins, numbers, scrollbox, utilitaires) |
+| Outils | `tools/<slug>.md` (animations, mixins, numbers, scrollbox, utilitaires, angular-api) |
 | Migrations | `migrations.md` |
 | Correctifs de patch | `fixes/<M-m-p>.md` |
 

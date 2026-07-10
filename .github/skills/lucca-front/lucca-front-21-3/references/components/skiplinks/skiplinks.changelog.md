@@ -5,6 +5,7 @@
 ## 21.3.0
 
 + directive `SkipLinkDirective` ([luSkipLinkTarget])
++ service `SkipLinksService` (2 méthode·s)
 
 ## 21.1.0
 

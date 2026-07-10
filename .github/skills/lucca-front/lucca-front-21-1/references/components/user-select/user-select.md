@@ -12,6 +12,8 @@ import { LuUserSelectInputComponent } from '@lucca-front/ng/user';
 
 **Selector:** `lu-user-select`
 
+> ⚠️ **Déprécié** : prefer SimpleSelect or MultipleSelect with luCustomUsers directive
+
 #### Inputs
 
 | Property | Binding name | Type | Default | Required | Transform | Description |
@@ -25,6 +27,18 @@ import { LuUserSelectInputComponent } from '@lucca-front/ng/user';
 | `operations` | `operations` | `number[]` | — | — | — | — |
 | `enableFormerEmployees` | `enableFormerEmployees` | `boolean` | `false` | — | — | — |
 | `disablePrincipal` | `disablePrincipal` | `boolean` | `false` | — | — | — |
+
+### Injection tokens
+
+| Token | Type | Description |
+|-------|------|-------------|
+| `LU_USER_SELECT_INPUT_TRANSLATIONS` | `unknown` | — |
+
+### Modules dépréciés
+
+- ⚠️ `LuUserSelectModule` — prefer SimpleSelect or MultipleSelect with luCustomUsers directive
+- ⚠️ `LuUserSelectInputModule` — prefer SimpleSelect or MultipleSelect with luCustomUsers directive
+- ⚠️ `LuUserModule` — use `LuUserDisplayPipe, LuUserPictureComponent, LuUserTileComponent` instead
 
 ## Related files
 

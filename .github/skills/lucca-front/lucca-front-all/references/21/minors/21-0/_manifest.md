@@ -2,7 +2,7 @@
 
 - **Dernier patch publié de cette mineure** : `21.0.5` (patchs : 21.0.0, 21.0.1, 21.0.2, 21.0.3, 21.0.4, 21.0.5)
 - **Storybook exact** : https://lucca-front.lucca.io/v21.0.5/storybook
-- **Fichiers overrides** : 367 — pour tout chemin, lire d'abord ce dossier, sinon la base `../../`.
+- **Fichiers overrides** : 370 — pour tout chemin, lire d'abord ce dossier, sinon la base `../../`.
 - **Règle URL** : dans les fichiers lus depuis la base, remplacer `v21.3.1` par `v21.0.5` dans les URLs Storybook.
 - **Changelogs & migrations** : lire ceux de la base (cumulatifs, entrées étiquetées par version) en **ignorant les entrées postérieures à `21.0.5`**.
 

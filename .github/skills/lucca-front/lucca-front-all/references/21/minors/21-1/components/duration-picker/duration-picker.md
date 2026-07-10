@@ -24,15 +24,21 @@ import { DurationPickerComponent } from '@lucca-front/ng/time';
 
 #### Outputs
 
-| Property | Binding name | Type |
-|----------|-------------|------|
-| `durationChange` | `durationChange` | `DurationChangeEvent` |
+| Property | Binding name | Type | Notes |
+|----------|-------------|------|-------|
+| `durationChange` | `durationChange` | `DurationChangeEvent` | — |
 
 #### Models (two-way binding)
 
-| Property | Type | Required |
-|----------|------|----------|
-| `value` | `ISO8601Duration` | — |
+| Property | Type | Required | Notes |
+|----------|------|----------|-------|
+| `value` | `ISO8601Duration` | — | — |
+
+### Injection tokens
+
+| Token | Type | Description |
+|-------|------|-------------|
+| `LU_DURATION_PICKER_TRANSLATIONS` | `unknown` | — |
 
 ## Related files
 

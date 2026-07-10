@@ -29,21 +29,21 @@ import { Calendar2Component } from '@lucca-front/ng/date2';
 
 #### Outputs
 
-| Property | Binding name | Type |
-|----------|-------------|------|
-| `nextPage` | `nextPage` | `void` |
-| `previousPage` | `previousPage` | `void` |
-| `dateClicked` | `dateClicked` | `Date` |
+| Property | Binding name | Type | Notes |
+|----------|-------------|------|-------|
+| `nextPage` | `nextPage` | `void` | — |
+| `previousPage` | `previousPage` | `void` | — |
+| `dateClicked` | `dateClicked` | `Date` | — |
 
 #### Models (two-way binding)
 
-| Property | Type | Required |
-|----------|------|----------|
-| `date` | `Date` | ✅ |
-| `tabbableDate` | `Date | null` | — |
-| `mode` | `CalendarMode` | — |
-| `displayMode` | `CalendarMode | null` | — |
-| `dateHovered` | `Date | null` | — |
+| Property | Type | Required | Notes |
+|----------|------|----------|-------|
+| `date` | `Date` | ✅ | — |
+| `tabbableDate` | `Date \| null` | — | — |
+| `mode` | `CalendarMode` | — | — |
+| `displayMode` | `CalendarMode \| null` | — | — |
+| `dateHovered` | `Date \| null` | — | — |
 
 ## Related files
 

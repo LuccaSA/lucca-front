@@ -46,9 +46,9 @@ import { HorizontalNavigationLinkDirective, HorizontalNavigationTabComponent, Ho
 
 #### Models (two-way binding)
 
-| Property | Type | Required |
-|----------|------|----------|
-| `currentIndex` | `number` | — |
+| Property | Type | Required | Notes |
+|----------|------|----------|-------|
+| `currentIndex` | `number` | — | — |
 
 ## Related files
 

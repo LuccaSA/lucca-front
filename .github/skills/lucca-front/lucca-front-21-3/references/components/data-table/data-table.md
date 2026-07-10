@@ -28,9 +28,9 @@ import { DataTableBodyComponent, DataTableRowCellHeaderComponent, DataTableRowCe
 
 #### Models (two-way binding)
 
-| Property | Type | Required |
-|----------|------|----------|
-| `expanded` | `unknown` | — |
+| Property | Type | Required | Notes |
+|----------|------|----------|-------|
+| `expanded` | `unknown` | — | — |
 
 ### DataTableRowCellHeaderComponent (component)
 
@@ -45,9 +45,9 @@ import { DataTableBodyComponent, DataTableRowCellHeaderComponent, DataTableRowCe
 
 #### Models (two-way binding)
 
-| Property | Type | Required |
-|----------|------|----------|
-| `sort` | `DataTableSort | null` | — |
+| Property | Type | Required | Notes |
+|----------|------|----------|-------|
+| `sort` | `DataTableSort \| null` | — | — |
 
 ### DataTableRowCellComponent (component)
 
@@ -87,9 +87,9 @@ import { DataTableBodyComponent, DataTableRowCellHeaderComponent, DataTableRowCe
 
 #### Models (two-way binding)
 
-| Property | Type | Required |
-|----------|------|----------|
-| `selected` | `boolean` | — |
+| Property | Type | Required | Notes |
+|----------|------|----------|-------|
+| `selected` | `boolean` | — | — |
 
 ### DataTableComponent (component)
 
@@ -110,6 +110,12 @@ import { DataTableBodyComponent, DataTableRowCellHeaderComponent, DataTableRowCe
 | `verticalAlign` | `verticalAlign` | `DataTableVerticalAlign \| null` | `null` | — | — | Aligne le contenu des cellules verticalement. |
 | `stickyColsStart` | `stickyColsStart` | `number` | `0` | — | `numberAttribute` | Nombre de colonnes figées depuis la gauche. Non compatible avec l’usage de colspan. |
 | `stickyColsEnd` | `stickyColsEnd` | `number` | `0` | — | `numberAttribute` | Nombre de colonnes figées depuis la droite. Non compatible avec l’usage de colspan. |
+
+### Injection tokens
+
+| Token | Type | Description |
+|-------|------|-------------|
+| `LU_DATA_TABLE_INSTANCE` | `DataTableComponent` | — |
 
 ## Related files
 

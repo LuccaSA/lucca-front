@@ -32,9 +32,9 @@ import { SortableListItemComponent, SortableListComponent } from '@lucca-front/n
 
 #### Outputs
 
-| Property | Binding name | Type |
-|----------|-------------|------|
-| `delete` | `delete` | `void` |
+| Property | Binding name | Type | Notes |
+|----------|-------------|------|-------|
+| `delete` | `delete` | `void` | — |
 
 ### SortableListComponent (component)
 

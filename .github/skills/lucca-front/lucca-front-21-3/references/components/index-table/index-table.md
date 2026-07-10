@@ -36,9 +36,9 @@ import { IndexTableActionFileComponent, IndexTableActionComponent, IndexTableBod
 
 #### Models (two-way binding)
 
-| Property | Type | Required |
-|----------|------|----------|
-| `expanded` | `unknown` | — |
+| Property | Type | Required | Notes |
+|----------|------|----------|-------|
+| `expanded` | `unknown` | — | — |
 
 ### IndexTableRowCellHeaderComponent (component)
 
@@ -55,9 +55,9 @@ import { IndexTableActionFileComponent, IndexTableActionComponent, IndexTableBod
 
 #### Models (two-way binding)
 
-| Property | Type | Required |
-|----------|------|----------|
-| `sort` | `IndexTableSort | null` | — |
+| Property | Type | Required | Notes |
+|----------|------|----------|-------|
+| `sort` | `IndexTableSort \| null` | — | — |
 
 ### IndexTableRowCellComponent (component)
 
@@ -92,9 +92,9 @@ import { IndexTableActionFileComponent, IndexTableActionComponent, IndexTableBod
 
 #### Models (two-way binding)
 
-| Property | Type | Required |
-|----------|------|----------|
-| `selected` | `boolean` | — |
+| Property | Type | Required | Notes |
+|----------|------|----------|-------|
+| `selected` | `boolean` | — | — |
 
 ### IndexTableComponent (component)
 
@@ -108,6 +108,12 @@ import { IndexTableActionFileComponent, IndexTableActionComponent, IndexTableBod
 | `layoutFixed` | `layoutFixed` | `boolean` | `false` | — | `booleanAttribute` | Applique une largeur fixe aux colonnes. |
 | `empty` | `empty` | `boolean` | `false` | — | `booleanAttribute` | Affiche un empty state à la place des lignes de tableau. |
 | `responsive` | `responsive` | `ResponsiveConfig<'layoutFixed', true>` | — | — | — | — |
+
+### Injection tokens
+
+| Token | Type | Description |
+|-------|------|-------------|
+| `LU_INDEX_TABLE_INSTANCE` | `IndexTableComponent` | — |
 
 ## Related files
 

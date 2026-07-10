@@ -99,6 +99,13 @@ import { ClearFormatComponent, HeadingsComponent, LinkComponent, ListStyleToolba
 | `autoResize` | `autoResize` | `boolean` | `false` | — | `booleanAttribute` | Active / désactive l’autoresize du champ. |
 | `hideToolbar` | `hideToolbar` | `boolean` | `false` | — | `booleanAttribute` | Masque les options de mise en forme. |
 
+### Injection tokens
+
+| Token | Type | Description |
+|-------|------|-------------|
+| `RICH_TEXT_FORMATTER` | `RichTextFormatter` | — |
+| `RICH_TEXT_PLUGIN_COMPONENT` | `RichTextPluginComponent` | — |
+
 ## Type definitions
 
 - [`LuccaIcon`](../../types/LuccaIcon.md) — 582 available values

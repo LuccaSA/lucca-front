@@ -69,6 +69,29 @@ import { DialogContentComponent, DialogFooterComponent, DialogHeaderAction, Dial
 | `dialog` | `luDialogOpen` | `TemplateRef<void>` | — | ✅ | — | — |
 | `luDialogConfig` | `luDialogConfig` | `LuDialogConfig<unknown>` | — | — | — | — |
 
+### Providers
+
+| Fonction | Signature | Description |
+|----------|-----------|-------------|
+| `provideDialogRoutingReuseStrategy` | `(): EnvironmentProviders` | — |
+| `configureLuDialog` | `(): EnvironmentProviders` | — |
+| `provideLuDialog` | `(): Provider` | — |
+
+### Injection tokens
+
+| Token | Type | Description |
+|-------|------|-------------|
+| `LU_DIALOG_HEADER_TRANSLATIONS` | `unknown` | — |
+| `DIALOG_ROUTE_CLOSE_TRIGGER` | `DialogRouteCloseTrigger` | — |
+| `DIALOG_ROUTE_DISMISS_TRIGGER` | `DialogRouteDismissTrigger` | — |
+| `DIALOG_ROUTE_CONFIG` | `DialogRouteConfig<unknown>` | — |
+
+### Services
+
+#### LuDialogService
+
+- `open<C, TData = LuDialogData<C>>(config: LuDialogConfig<C, NoInfer<TData>>): LuDialogRef<C, TData>`
+
 ## Related files
 
 - 📝 [Code & implementation](./dialog.component.md)
