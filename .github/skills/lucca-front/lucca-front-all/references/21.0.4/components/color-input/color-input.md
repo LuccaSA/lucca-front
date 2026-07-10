@@ -1,3 +1,0 @@
-# color-input
-
-## Related files
