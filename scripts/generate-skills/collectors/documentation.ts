@@ -43,11 +43,24 @@ export async function collectDocumentation(
 	for (const entry of entries) {
 		const replaySlug = `${category}/${entry.slug}`;
 		try {
-			const zhData = await fetchZeroHeightPageGuarded(entry.zhPagePath, version.zhReleaseId, {
-				scope: 'documentation',
-				slug: replaySlug,
-				version: bareVersion,
-			});
+			// A page moved in the styleguide changes of uid between releases: try the primary path,
+			// then the alternates (see DocumentationEntry.zhPagePathAlternates). Only the LAST
+			// failure propagates — earlier candidates failing is expected.
+			const candidatePaths = [entry.zhPagePath, ...(entry.zhPagePathAlternates ?? [])];
+			let zhData = null;
+			for (let c = 0; c < candidatePaths.length; c++) {
+				try {
+					zhData = await fetchZeroHeightPageGuarded(candidatePaths[c], version.zhReleaseId, {
+						scope: 'documentation',
+						slug: replaySlug,
+						version: bareVersion,
+					});
+					if (zhData) break;
+				} catch (err) {
+					if (c === candidatePaths.length - 1) throw err;
+					console.warn(`     ↪️  ${category}/${entry.slug}: uid ${candidatePaths[c]} sans markdown, essai de l'alternate ${candidatePaths[c + 1]}…`);
+				}
+			}
 
 			if (!zhData) {
 				console.warn(`  ⚠️  No ZH content for ${category}/${entry.slug}`);

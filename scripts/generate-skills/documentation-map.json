@@ -6,7 +6,7 @@
 		{ "slug": "elevations", "title": "Élévations", "zhPagePath": "673d94" },
 		{ "slug": "arrondis", "title": "Arrondis", "zhPagePath": "895fc2" },
 		{ "slug": "design-tokens", "title": "Design tokens", "zhPagePath": "442f0b" },
-		{ "slug": "noms-de-logiciels", "title": "Noms de logiciels", "zhPagePath": "784b6c" }
+		{ "slug": "noms-de-logiciels", "title": "Noms de logiciels", "zhPagePath": "784b6c", "zhPagePathAlternates": ["933984"] }
 	],
 	"content": [
 		{ "slug": "voix-humaine", "title": "Notre voix, 100 % humaine", "zhPagePath": "701bd6", "subcategory": "regles-redaction" },
