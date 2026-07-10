@@ -119,7 +119,9 @@ export class LuCoreSelectUsersDirective<T extends LuCoreSelectUser = LuCoreSelec
 	protected meParams$ = toObservable(
 		computed(() => ({
 			fields: this.#userFields,
-			...this.filters(),
+			// The "me" request is a lookup by id and must not carry the search `filters`:
+			// they target the search API and aren't necessarily supported by the endpoint
+			// resolving the current user (e.g. API v3), which would fail the request.
 			...(this.uniqueOperationIds() ? { uniqueOperations: this.uniqueOperationIds()?.join(',') } : {}),
 			...(this.operationIds() ? { operations: this.operationIds()?.join(',') } : {}),
 			...(this.appInstanceId() ? { appInstanceId: this.appInstanceId() } : {}),
