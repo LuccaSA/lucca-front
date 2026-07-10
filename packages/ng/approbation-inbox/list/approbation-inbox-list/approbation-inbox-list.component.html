@@ -1,0 +1,49 @@
+<ng-template #content>
+	<header class="approbationInbox-list-header">
+		<h1 class="approbationInbox-list-header-title" [id]="titleId"><ng-container *luPortal="label()" /></h1>
+		<div class="approbationInbox-list-header-filterBar">
+			<ng-content select="[approbationInboxListFilterBar]" />
+		</div>
+	</header>
+	<div class="approbationInbox-list-content">
+		@if (selectable() && !empty()) {
+			<!-- TODO inbox: trad -->
+			<lu-form-field label="Tout sélectionner" class="approbationInbox-list-formSelectionOptional-formfield">
+				<lu-checkbox-input
+					[ngModel]="selectAllState() === true"
+					[ngModelOptions]="{ standalone: true }"
+					[mixed]="selectAllState() === 'mixed'"
+					(ngModelChange)="toggleSelectAll()"
+				/>
+			</lu-form-field>
+			<lu-divider />
+		}
+		<ul class="approbationInbox-list-content-items">
+			<ng-content />
+		</ul>
+		@if (empty()) {
+			<div class="approbationInbox-list-content-empty">
+				<lu-bubble-illustration [illustration]="emptyIllustration()" />
+				<p>{{ emptyLabel() }}</p>
+				@if (emptyResetLabel()) {
+					<button type="reset" luButton="outlined">{{ emptyResetLabel() }}</button>
+				}
+			</div>
+		}
+	</div>
+	@if (selectable() && checkedCount() > 0) {
+		<footer class="approbationInbox-list-footer">
+			<!-- TODO inbox: trad -->
+			<h2 class="approbationInbox-list-footer-title">{{ checkedCount() }} dépenses sélectionnées</h2>
+			<ng-content select="[approbationInboxListFooter]" />
+		</footer>
+	}
+</ng-template>
+
+@if (selectable() && !empty()) {
+	<form class="approbationInbox-list-formSelectionOptional" (submit)="submit()" (reset)="reset()">
+		<ng-container *ngTemplateOutlet="content" />
+	</form>
+} @else {
+	<ng-container *ngTemplateOutlet="content" />
+}

@@ -1,0 +1,17 @@
+<ul class="approbationInbox-list-content-items-item-content-info-data-icons">
+	@for (icon of icons(); track icon.icon) {
+		<li>
+			<lu-icon
+				size="XS"
+				[icon]="icon.icon"
+				[alt]="icon.alt"
+				[class.pr-u-textWarning]="icon.state === 'warning'"
+				[class.pr-u-textCritical]="icon.state === 'critical'"
+				[class.pr-u-textSuccess]="icon.state === 'success'"
+				[luTooltip]="icon.alt"
+				luTooltipOnlyForDisplay
+				class="approbationInbox-list-content-items-item-content-info-data-icons-icon"
+			/>
+		</li>
+	}
+</ul>

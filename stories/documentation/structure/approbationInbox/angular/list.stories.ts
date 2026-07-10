@@ -2,15 +2,19 @@ import { FormsModule } from '@angular/forms';
 import {
 	ApprobationInboxButtonComponent,
 	ApprobationInboxGroupComponent,
+	ApprobationInboxIcon,
+	ApprobationInboxIconsComponent,
 	ApprobationInboxItemComponent,
 	ApprobationInboxLinkComponent,
 	ApprobationInboxListComponent,
+	ApprobationInboxSubtleComponent,
 } from '@lucca-front/ng/approbation-inbox';
 import { FilterBarComponent, FilterPillAddonAfterDirective, FilterPillAddonBeforeDirective, FilterPillComponent } from '@lucca-front/ng/filter-pills';
 import { NumericBadgeComponent } from '@lucca-front/ng/numeric-badge';
 import { SegmentedControlComponent, SegmentedControlFilterComponent } from '@lucca-front/ng/segmented-control';
 import { LuTooltipTriggerDirective } from '@lucca-front/ng/tooltip';
 import { LuUserPictureComponent } from '@lucca-front/ng/user';
+import { ButtonComponent } from '@lucca/prisme/button';
 import { IconComponent } from '@lucca/prisme/icon';
 import { Meta, moduleMetadata, StoryObj } from '@storybook/angular';
 
@@ -18,7 +22,7 @@ import { generateInputs } from 'stories/helpers/stories';
 
 export default {
 	title: 'Documentation/Structure/Approbation Inbox/Angular/List',
-	// TODO inbox
+	// TODO inbox: descriptions
 	argTypes: {
 		group: {
 			description: '',
@@ -51,6 +55,11 @@ export default {
 			description: '',
 			if: { arg: 'itemCount', eq: 0 },
 		},
+		icons: {
+			description: '',
+			control: { type: 'object' },
+			if: { arg: 'data', truthy: true },
+		},
 	},
 	decorators: [
 		moduleMetadata({
@@ -60,6 +69,8 @@ export default {
 				ApprobationInboxLinkComponent,
 				ApprobationInboxButtonComponent,
 				ApprobationInboxGroupComponent,
+				ApprobationInboxIconsComponent,
+				ApprobationInboxSubtleComponent,
 				FilterBarComponent,
 				FilterPillAddonAfterDirective,
 				FilterPillAddonBeforeDirective,
@@ -71,47 +82,45 @@ export default {
 				LuUserPictureComponent,
 				IconComponent,
 				LuTooltipTriggerDirective,
+				ButtonComponent,
 			],
 		}),
 	],
-	render: ({ filterBar, group, groupLabel, button, start, end, center, checked, itemCount, itemLabel, current, ...args }, { argTypes }) => {
+	render: ({ filterBar, group, groupLabel, button, illustration, data, center, checked, itemCount, itemLabel, current, icons, ...args }, { argTypes }) => {
 		const centerParam = center ? ` center` : ``;
 		const checkedParam = checked ? ` [checked]="true"` : ``;
 		const currentParam = current ? ` current` : ``;
-		const startTpl = start
+		const startTpl = illustration
 			? `
-			<lu-user-picture approbationInboxListItemStart />`
+			<lu-user-picture approbationInboxListItemIllustration />`
 			: ``;
-		const endTpl = end
+		const endTpl = data
 			? `
-			<ng-container approbationInboxListItemEnd>
-				<p class="pr-u-bodyM">Metadata</p>
-				<p class="pr-u-displayFlex pr-u-colorTextSubtle pr-u-gap25">
-					<lu-icon size="XS" class="pr-u-focusVisible pr-u-borderRadiusSmall" icon="formatClipperAttachment" alt="Contient une pièce jointe" luTooltip="Contient une pièce jointe" luTooltipOnlyForDisplay />
-					<lu-icon size="XS" class="pr-u-focusVisible pr-u-borderRadiusSmall" icon="bubbleSpeech" alt="Contient un commentaire" luTooltip="Contient un commentaire" luTooltipOnlyForDisplay />
-					<lu-icon size="XS" class="pr-u-focusVisible pr-u-borderRadiusSmall pr-u-textWarning" icon="signWarning" alt="Contient un avertissement" luTooltip="Contient un avertissement" luTooltipOnlyForDisplay />
-				</p>
+			<ng-container approbationInboxListItemData>
+				<lu-approbation-inbox-list-icons [icons]="icons" />
+				Data
+				<lu-approbation-inbox-list-subtle>Data</lu-approbation-inbox-list-subtle>
 			</ng-container>`
 			: ``;
 		const actionTpl = button
-			? `<button type="button"${currentParam} lu-approbation-inbox-action approbationInboxListItemTitle>${itemLabel}</button>`
-			: `<a href="#"${currentParam} lu-approbation-inbox-action approbationInboxListItemTitle>${itemLabel}</a>`;
+			? `<button type="button"${currentParam} lu-approbation-inbox-list-action approbationInboxListItemTitle>${itemLabel}</button>`
+			: `<a href="#"${currentParam} lu-approbation-inbox-list-action approbationInboxListItemTitle>${itemLabel}</a>`;
 		const centerTpl = `
 			${actionTpl}
-			<p class="pr-u-bodyS pr-u-colorTextSubtle">Metadata</p>`;
+			Metadata`;
 		const defaultItemTpl = `
-		<lu-approbation-inbox-item>
-			<a href="#" lu-approbation-inbox-action approbationInboxListItemTitle>Title</a>
-		</lu-approbation-inbox-item>`;
+		<lu-approbation-inbox-list-item>
+			<a href="#" lu-approbation-inbox-list-action approbationInboxListItemTitle>Title</a>
+		</lu-approbation-inbox-list-item>`;
 		const itemTpl =
 			itemCount != 0
-				? `<lu-approbation-inbox-item${centerParam}${checkedParam}>${startTpl}${centerTpl}${endTpl}
-		</lu-approbation-inbox-item>`
+				? `<lu-approbation-inbox-list-item${centerParam}${checkedParam}>${startTpl}${centerTpl}${endTpl}
+		</lu-approbation-inbox-list-item>`
 				: ``;
 		const filterBarTpl = filterBar
 			? `
 	<lu-filter-bar approbationInboxListFilterBar>
-		<lu-segmented-control class="filterBar-segmentedControl" *luFilterPillAddonBefore [(ngModel)]="example">
+		<lu-segmented-control *luFilterPillAddonBefore [(ngModel)]="example">
 			<ng-template #label0>Par vous <lu-numeric-badge [value]="12" /></ng-template>
 			<ng-template #label1>Par d’autres <lu-numeric-badge [value]="5" /></ng-template>
 			<lu-segmented-control-filter [label]="label0" value="0" />
@@ -127,11 +136,22 @@ export default {
 	`;
 		const groupTpl = group
 			? `
-	<lu-approbation-inbox-group label="${groupLabel}">${itemsTpl}</lu-approbation-inbox-group>
+	<lu-approbation-inbox-list-group label="${groupLabel}">${itemsTpl}</lu-approbation-inbox-list-group>
 `
 			: `${itemsTpl}`;
+		const footerTpl = args['selectable']
+			? `
+	<ng-container approbationInboxListFooter>
+		<button luButton type="submit">Approuver les dépenses</button>
+		<button luButton type="button">Transférer les demandes</button>
+	</ng-container>
+`
+			: ``;
 		return {
-			template: `<lu-approbation-inbox-list${generateInputs(args, argTypes)}>${filterBarTpl}${groupTpl}</lu-approbation-inbox-list>`,
+			props: {
+				icons,
+			},
+			template: `<lu-approbation-inbox-list${generateInputs(args, argTypes)}>${filterBarTpl}${groupTpl}${footerTpl}</lu-approbation-inbox-list>`,
 		};
 	},
 } as Meta;
@@ -143,12 +163,13 @@ export const Basic: StoryObj<
 		groupLabel: string;
 		button: boolean;
 		current: boolean;
-		start: boolean;
-		end: boolean;
+		illustration: boolean;
+		data: boolean;
 		center: boolean;
 		checked: boolean;
 		itemCount: number;
 		itemLabel: string;
+		icons: ApprobationInboxIcon[];
 	}
 > = {
 	args: {
@@ -161,8 +182,13 @@ export const Basic: StoryObj<
 		button: false,
 		current: false,
 		itemLabel: 'Title',
-		start: false,
-		end: false,
+		illustration: false,
+		data: false,
+		icons: [
+			{ icon: 'formatClipperAttachment', alt: 'Contient une pièce jointe' },
+			{ icon: 'bubbleSpeech', alt: 'Contient un commentaire' },
+			{ icon: 'signWarning', alt: 'Contient un avertissement', state: 'warning' },
+		],
 		center: false,
 		itemCount: 1,
 		emptyIllustration: '',

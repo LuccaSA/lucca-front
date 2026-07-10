@@ -1,26 +1,26 @@
 @mixin center {
-	--components-approbationInbox-list-item-content-info-alignItems: center;
+	--components-approbationInbox-list-content-items-item-content-info-alignItems: center;
 }
 
 @mixin noDescription {
-	--components-approbationInbox-details-header-main-delegation-marginBlockStart: 0;
+	--components-approbationInbox-detail-header-main-delegation-marginBlockStart: 0;
 }
 
 @mixin insideDialog {
-	--components-approbationInbox-details-header-main-actions-display: none;
-	--components-approbationInbox-details-container-display: contents;
-	--components-approbationInbox-details-headerMain-padding: var(--pr-t-spacings-150);
-	--components-approbationInbox-details-headerMain-margin: 0 calc(var(--pr-t-spacings-150) * -1);
-	--components-approbationInbox-details-gap: var(--pr-t-spacings-50);
-	--components-approbationInbox-details-main-gap: var(--pr-t-spacings-150);
-	--components-approbationInbox-details-header-main-block-content-paddingBlockEnd: var(--pr-t-spacings-150);
+	--components-approbationInbox-detail-header-main-actions-display: none;
+	--components-approbationInbox-detail-container-display: contents;
+	--components-approbationInbox-detail-headerMain-padding: var(--pr-t-spacings-150);
+	--components-approbationInbox-detail-headerMain-margin: 0 calc(var(--pr-t-spacings-150) * -1);
+	--components-approbationInbox-detail-gap: var(--pr-t-spacings-50);
+	--components-approbationInbox-detail-main-gap: var(--pr-t-spacings-150);
+	--components-approbationInbox-detail-header-main-block-content-paddingBlockEnd: var(--pr-t-spacings-150);
 
 	.dialog-inside-content:has(&) {
 		display: flex;
 		flex-direction: column;
 	}
 
-	.approbationInbox-details-main-block-divider.divider {
+	.approbationInbox-detail-main-block-divider.divider {
 		margin: var(--components-divider-margin);
 	}
 }
@@ -29,21 +29,21 @@
 	display: none;
 }
 
-@mixin mediaMinS {
+@mixin listMediaMinS {
 	--components-approbationInbox-list-marginInlineEnd: var(--pr-t-spacings-400);
 	--components-approbationInbox-list-marginInlineStart: var(--pr-t-spacings-400);
 }
 
-@mixin mediaMinM {
+@mixin listMediaMinM {
 	--components-approbationInbox-list-inlineSize: 17rem;
 	--components-approbationInbox-list-marginInlineEnd: 0;
 }
 
-@mixin mediaMinL {
+@mixin listMediaMinL {
 	--components-approbationInbox-list-inlineSize: 22.5rem;
 }
 
-@mixin mediaMaxM {
+@mixin listMediaMaxM {
 	--components-approbationInbox-list-footer-backgroundColor: var(--pr-t-elevation-surface-raised);
 	--components-approbationInbox-list-footer-borderRadius: 0;
 	--components-approbationInbox-list-footer-marginBlock: var(--pr-t-spacings-150) calc(var(--pr-t-spacings-300) * -1);
@@ -52,14 +52,14 @@
 	--components-approbationInbox-list-footer-marginInline: calc(var(--components-approbationInbox-list-footer-paddingInline) * -1);
 }
 
-@mixin mediaMaxS {
+@mixin listMediaMaxS {
 	--components-approbationInbox-list-footer-paddingInline: var(--pr-t-spacings-300);
 }
 
 @mixin blockLastChild {
-	--components-approbationInbox-details-header-main-block-content-paddingBlockEnd: 0;
+	--components-approbationInbox-detail-header-main-block-content-paddingBlockEnd: 0;
 
-	.approbationInbox-details-main-block-divider.divider {
+	.approbationInbox-detail-main-block-divider.divider {
 		--components-divider-display: none;
 	}
 }
@@ -70,4 +70,8 @@
 
 @mixin mainLayoutSidebarMediaMaxM {
 	block-size: 100%;
+}
+
+@mixin detailMediaMaxL {
+	--components-approbationInbox-detail-header-main-flexWrap: wrap;
 }

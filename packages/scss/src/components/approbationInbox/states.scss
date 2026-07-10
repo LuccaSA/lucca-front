@@ -7,14 +7,14 @@
 }
 
 @mixin selected {
-	--components-approbationInbox-list-item-content-before-background: var(--palettes-product-50);
-	--components-approbationInbox-list-item-content-before-boxShadow: 0 0 0 1px var(--palettes-product-500);
+	--components-approbationInbox-list-content-items-item-content-before-background: var(--palettes-product-50);
+	--components-approbationInbox-list-content-items-item-content-before-boxShadow: 0 0 0 1px var(--palettes-product-500);
 }
 
 @mixin current {
-	--components-approbationInbox-list-item-content-before-boxShadow: 0 0 0 1px var(--palettes-product-400), 0 0 0 1px var(--palettes-product-400) inset;
+	--components-approbationInbox-list-content-items-item-content-before-boxShadow: 0 0 0 1px var(--palettes-product-400), 0 0 0 1px var(--palettes-product-400) inset;
 }
 
 @mixin empty {
-	--components-approbationInbox-details-empty-display: flex;
+	--components-approbationInbox-detail-empty-display: flex;
 }

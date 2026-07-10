@@ -1,0 +1,20 @@
+@if (selectable()) {
+	<!-- TODO inbox: trad -->
+	<lu-form-field label="Sélectionner…" hiddenLabel class="approbationInbox-list-content-items-item-formfieldOptional">
+		<lu-checkbox-input [ngModel]="checked()" [ngModelOptions]="{ standalone: true }" (ngModelChange)="checked.set($event)" />
+	</lu-form-field>
+}
+<div class="approbationInbox-list-content-items-item-content">
+	<div class="approbationInbox-list-content-items-item-content-info" [class.mod-center]="center()">
+		<div class="approbationInbox-list-content-items-item-content-info-illustration">
+			<ng-content select="[approbationInboxListItemIllustration]" />
+		</div>
+		<div class="approbationInbox-list-content-items-item-content-info-main">
+			<div class="approbationInbox-list-content-items-item-content-info-main-title">
+				<ng-content select="[approbationInboxListItemTitle]" />
+			</div>
+			<ng-content />
+		</div>
+		<div class="approbationInbox-list-content-items-item-content-info-data"><ng-content select="[approbationInboxListItemData]" /></div>
+	</div>
+</div>

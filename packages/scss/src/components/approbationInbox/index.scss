@@ -47,10 +47,14 @@
 				@include empty;
 			}
 		}
+
+		@include media.max('L') {
+			@include detailMediaMaxL;
+		}
 	}
 }
 
-.approbationInbox-list-item {
+.approbationInbox-list-content-items-item {
 	@layer mods {
 		&:has(.checkboxField-input:checked) {
 			@include selected;
@@ -58,24 +62,24 @@
 	}
 }
 
-.approbationInbox-list-item {
+.approbationInbox-list-content-items-item {
 	@layer mods {
-		&:has(.approbationInbox-list-item-content-action[aria-current='page']),
-		&:has(.approbationInbox-list-item-content-action.is-current) {
+		&:has(.approbationInbox-list-content-items-item-content-action[aria-current='page']),
+		&:has(.approbationInbox-list-content-items-item-content-action.is-current) {
 			@include current;
 		}
 	}
 }
 
-.approbationInbox-list-item-content {
+.approbationInbox-list-content-items-item-content {
 	@layer mods {
-		&:has(.approbationInbox-list-item-content-action:focus-visible) {
+		&:has(.approbationInbox-list-content-items-item-content-action:focus-visible) {
 			@include focusVisible;
 		}
 	}
 }
 
-.approbationInbox-details-main-block:last-child {
+.approbationInbox-detail-main-block:last-child {
 	@layer mods {
 		@include blockLastChild;
 	}
@@ -84,28 +88,28 @@
 .approbationInbox-list {
 	@layer mods {
 		@include media.min('S') {
-			@include mediaMinS;
+			@include listMediaMinS;
 		}
 
 		@include media.min('M') {
-			@include mediaMinM;
+			@include listMediaMinM;
 		}
 
 		@include media.min('L') {
-			@include mediaMinL;
+			@include listMediaMinL;
 		}
 
 		@include media.max('M') {
-			@include mediaMaxM;
+			@include listMediaMaxM;
 		}
 
 		@include media.max('S') {
-			@include mediaMaxM;
+			@include listMediaMaxM;
 		}
 	}
 }
 
-.approbationInbox-list-item-content-info {
+.approbationInbox-list-content-items-item-content-info {
 	@layer mods {
 		&.mod-center {
 			@include center;

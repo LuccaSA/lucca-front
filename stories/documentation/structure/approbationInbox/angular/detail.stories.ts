@@ -1,4 +1,4 @@
-import { ApprobationInboxDetailComponent, ApprobationInboxDetailsMainBlockComponent, ApprobationInboxHeaderComponent } from '@lucca-front/ng/approbation-inbox';
+import { ApprobationInboxDetailComponent, ApprobationInboxDetailMainBlockComponent, ApprobationInboxHeaderComponent } from '@lucca-front/ng/approbation-inbox';
 import { CalloutComponent } from '@lucca-front/ng/callout';
 import { DropdownActionComponent, DropdownItemComponent, DropdownMenuComponent, LuDropdownTriggerDirective } from '@lucca-front/ng/dropdown';
 import { ListingComponent, ListingItemComponent } from '@lucca-front/ng/listing';
@@ -10,15 +10,11 @@ import { generateInputs } from 'stories/helpers/stories';
 
 export default {
 	title: 'Documentation/Structure/Approbation Inbox/Angular/Detail',
-	// TODO inbox
+	// TODO inbox: descriptions
 	argTypes: {
 		blockCount: {
 			description: '',
 			control: { type: 'range', min: 0, max: 5 },
-		},
-		blockLabel: {
-			description: '',
-			if: { arg: 'blockCount', neq: 0 },
 		},
 		calloutLabel: {
 			description: '',
@@ -38,7 +34,7 @@ export default {
 			imports: [
 				ApprobationInboxDetailComponent,
 				ApprobationInboxHeaderComponent,
-				ApprobationInboxDetailsMainBlockComponent,
+				ApprobationInboxDetailMainBlockComponent,
 				ListingComponent,
 				ListingItemComponent,
 				CalloutComponent,
@@ -54,11 +50,11 @@ export default {
 	],
 	render: ({ insideDialog, headerContent, callout, calloutLabel, blockLabel, blockCount, moreActions, illustration, emptyIllustration, ...args }, { argTypes }) => {
 		const insideDialogParam = insideDialog ? ` insideDialog` : ``;
-		const emptyIllustrationParam = emptyIllustration != 'magnifying-glass' && emptyIllustration != '' ? ` emptyIllustration="${emptyIllustration}"` : ``;
+		const emptyIllustrationParam = emptyIllustration !== 'magnifying-glass' && emptyIllustration !== '' && emptyIllustration !== undefined ? ` emptyIllustration="${emptyIllustration}"` : ``;
 		const contentTpl = `
-	<lu-approbation-inbox-details-main-block label="${blockLabel}">
+	<lu-approbation-inbox-detail-main-block label="${blockLabel}">
 		Dolor sit amet
-	</lu-approbation-inbox-details-main-block>`;
+	</lu-approbation-inbox-detail-main-block>`;
 		const calloutTpl = callout
 			? `
 	<lu-callout state="warning">
@@ -104,9 +100,9 @@ export default {
 		const contentDefaultTpl =
 			blockCount != 0
 				? `
-	<lu-approbation-inbox-details-main-block label="Circuit d’approbation">
+	<lu-approbation-inbox-detail-main-block label="Circuit d’approbation">
 		Dolor sit amet
-	</lu-approbation-inbox-details-main-block>`
+	</lu-approbation-inbox-detail-main-block>`
 				: ``;
 		return {
 			template: `<lu-approbation-inbox-detail${emptyIllustrationParam}${insideDialogParam}>${headerTpl}${calloutTpl}${contentTpl.repeat(blockCount - 1 < 0 ? 0 : blockCount - 1)}${contentDefaultTpl}
@@ -136,7 +132,7 @@ export const Basic: StoryObj<
 		delegation: '',
 		moreActions: false,
 		callout: false,
-		calloutLabel: 'Callout feedback description',
+		calloutLabel: 'Callout feedback description. ',
 		blockLabel: 'Title',
 		blockCount: 1,
 		emptyIllustration: 'magnifying-glass',

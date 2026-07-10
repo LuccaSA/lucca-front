@@ -1,13 +1,12 @@
 import { ChangeDetectionStrategy, Component, ViewEncapsulation } from '@angular/core';
 
 @Component({
-	selector: 'lu-text-flow',
+	selector: 'lu-approbation-inbox-list-subtle',
 	template: '<ng-content />',
-	styleUrl: './text-flow.component.scss',
 	encapsulation: ViewEncapsulation.None,
 	changeDetection: ChangeDetectionStrategy.OnPush,
 	host: {
-		class: 'textFlow',
+		class: 'approbationInbox-list-content-items-item-content-info-data-subtle',
 	},
 })
-export class TextFlowComponent {}
+export class ApprobationInboxSubtleComponent {}
