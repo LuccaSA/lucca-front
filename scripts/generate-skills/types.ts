@@ -83,6 +83,12 @@ export interface DocumentationEntry {
 	slug: string;
 	title: string;
 	zhPagePath: string;
+	/**
+	 * Alternate ZH page uids to try when `zhPagePath` doesn't serve markdown. A page moved in the
+	 * styleguide gets a NEW uid in later releases while the old uid keeps working on pinned ones
+	 * (and vice versa) — e.g. « Noms des logiciels » : 784b6c (≤ 21.2) / 933984 (≥ 21.3).
+	 */
+	zhPagePathAlternates?: string[];
 	subcategory?: string;
 }
 
@@ -308,15 +314,28 @@ export interface SharedTypeDef {
 
 // ─── Versions manifest ───────────────────────────────────────────────────────
 
-export interface VersionManifestEntry {
+/** One published patch of a minor (fixes/<M-m-p>.md documents its delta). */
+export interface PatchManifestEntry {
+	tag: string;
+	storybookBaseUrl: string;
+	generatedAt: string;
+}
+
+/** One generated minor skill. references/ documents `latestPatch`; fixes/ covers the others. */
+export interface MinorManifestEntry {
+	/** Latest published patch of the minor, e.g. "21.2.5" — what references/ documents. */
+	latestPatch: string;
 	tag: string;
 	zhReleaseId: number | null;
 	storybookBaseUrl: string;
 	generatedAt: string;
 	componentCount: number;
+	/** Every published patch of the minor, ascending ("21.2.0" → …). */
+	patches: Record<string, PatchManifestEntry>;
 }
 
 export interface VersionManifest {
+	/** Latest generated minor, e.g. "21.3". */
 	latest: string;
-	versions: Record<string, VersionManifestEntry>;
+	minors: Record<string, MinorManifestEntry>;
 }

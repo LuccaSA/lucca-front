@@ -14,7 +14,8 @@
  *   npx ts-node --project scripts/generate-skills/tsconfig.json scripts/generate-skills/index.ts [options]
  *
  * Options:
- *   --version <tag>      Version(s) to generate (e.g. "21.2.1"), repeatable, required
+ *   --version <M.m>      Minor(s) to generate (e.g. "21.2"), repeatable, required.
+ *                        references/ = latest published patch, fixes/ = per-patch deltas.
  *   --component <slug>   Generate only the specified component
  *   --skip-figma         Skip Figma data collection
  *   --skip-zeroheight    Skip ZeroHeight data collection
@@ -74,10 +75,11 @@ import {
 } from './generators/skill-writer';
 import { writeToc } from './generators/toc-writer';
 import { buildComponentChangelog } from './generators/changelog-writer';
+import { writeFixes } from './generators/fixes-writer';
 import { writeVersionChangelog } from './generators/version-diff-writer';
 import { writeAggregateSkill, listGeneratedVersionStrings } from './generators/aggregate-writer';
 import { ensureZhReleaseIds } from './zh-release-guard';
-import { resolveVersion } from './version-config';
+import { MinorResolution, parseVersion, resolveMinorVersion } from './version-config';
 import { collectAllDocumentation } from './collectors/documentation';
 import { collectDeprecated } from './collectors/deprecated';
 import { collectSchematics } from './collectors/schematics';
@@ -262,8 +264,29 @@ async function main(): Promise<void> {
 	}
 
 	if (flags.versions.length === 0) {
-		console.error('❌ --version is required (e.g. --version 21.2.1 --version 21.1.0)');
+		console.error('❌ --version is required (e.g. --version 21.2 --version 21.1)');
 		process.exit(1);
+	}
+
+	// Minor-only targets: the pipeline generates one skill per MINOR (references/ = latest patch,
+	// fixes/ = per-patch deltas). A full patch version is refused to prevent generating a skill
+	// whose content silently differs from the minor's latest patch.
+	for (const v of flags.versions) {
+		if (parseVersion(v)) {
+			console.error(`❌ --version ${v} : le pipeline génère par mineure. Utilise --version ${v.split('.').slice(0, 2).join('.')} (le contenu reflète le dernier patch publié, les patchs sont couverts par fixes/).`);
+			process.exit(1);
+		}
+	}
+
+	// Resolve every minor upfront (fails fast on an unknown minor, before any heavy work).
+	const resolutions = new Map<string, MinorResolution>();
+	for (const v of flags.versions) {
+		try {
+			resolutions.set(v, resolveMinorVersion(v));
+		} catch (err: any) {
+			console.error(`❌ ${err.message}`);
+			process.exit(1);
+		}
 	}
 
 	clearFailures();
@@ -285,8 +308,9 @@ async function main(): Promise<void> {
 
 	for (let vi = 0; vi < flags.versions.length; vi++) {
 		const versionStr = flags.versions[vi];
-		const version = resolveVersion(versionStr);
-		console.log(`\n━━━━━━ Version ${vi + 1}/${flags.versions.length} : ${version.tag} ━━━━━━`);
+		const resolution = resolutions.get(versionStr)!;
+		const version = resolution.version;
+		console.log(`\n━━━━━━ Mineure ${vi + 1}/${flags.versions.length} : ${resolution.minorKey} (dernier patch : ${version.tag}, ${resolution.patchTags.length} patch·s publié·s) ━━━━━━`);
 
 		// Documentation collection (ZH pages: tokens, content, guidelines, patterns)
 		if (!flags.skipDocumentation && !flags.component) {
@@ -344,39 +368,55 @@ async function main(): Promise<void> {
 		}
 
 		// Component collection (skip if --documentation-only)
+		let componentMap: ComponentMap = {};
 		if (!flags.documentationOnly) {
-			const { success, errors } = await processVersion(versionStr, config);
-			totalSuccess += success;
-			totalErrors += errors;
+			const result = await processVersion(resolution, config);
+			totalSuccess += result.success;
+			totalErrors += result.errors;
+			componentMap = result.componentMap;
 		}
 
-		// Per-version SKILL.md (entry point) — written after this version's files exist on disk
+		// Per-patch fixes (delta vs previous published patch) — deterministic, git-sourced.
+		// Needs the discovered component list, so it follows the component pass.
+		if (!flags.dryRun && !flags.component && !flags.documentationOnly) {
+			const { written } = writeFixes(config.output.skillsDir, {
+				version,
+				patchTags: resolution.patchTags,
+				components: Object.entries(componentMap).map(([slug, entry]) => ({
+					slug,
+					ngPackage: entry.ngPackage ?? null,
+					ngSelectors: entry.ngSelectors,
+				})),
+			});
+			console.log(`🩹 Fixes: ${written} fichier(s) (patchs > ${resolution.minorKey}.0)`);
+		}
+
+		// Per-minor SKILL.md (entry point) — written after this minor's files exist on disk
 		if (!flags.dryRun && !flags.component) {
-			const tocPath = writeToc(config.output.skillsDir, version);
+			const tocPath = writeToc(config.output.skillsDir, version, resolution.patchTags);
 			console.log(`📑 SKILL.md: ${path.relative(config.output.skillsDir, tocPath)}`);
 		}
 	}
 
-	// Version-level review changelog (human PR-aid, not consumed by the skill) — run after the
-	// loop so every target version's folder is on disk to diff against its predecessor.
+	// Minor-level review changelog (human PR-aid, not consumed by the skill) — run after the
+	// loop so every target minor's folder is on disk to diff against its predecessor.
 	if (!flags.dryRun && !flags.component) {
 		for (const versionStr of flags.versions) {
-			const v = resolveVersion(versionStr);
-			const clPath = writeVersionChangelog(config.output.skillsDir, v);
+			const clPath = writeVersionChangelog(config.output.skillsDir, resolutions.get(versionStr)!.version);
 			if (clPath) console.log(`📝 Review changelog: ${path.relative(config.output.skillsDir, clPath)}`);
 		}
 	}
 
-	// Aggregate "all versions" skill (lucca-front-all): bundles every generated version + a router
-	// SKILL.md that detects the project's LF version and delegates to the matching version folder.
-	// Built after all per-version folders are on disk. Skipped for single-component or partial runs.
+	// Aggregate "all versions" skill (lucca-front-all): one content folder per MAJOR (base = the
+	// major's newest minor, older minors as override folders) + a router SKILL.md. Built after all
+	// per-minor folders are on disk. Skipped for single-component or partial runs.
 	if (!flags.dryRun && !flags.component && !flags.skipAggregate) {
-		// Bundle EVERY version present on disk, not just this run's — writeAggregateSkill wipes the
-		// aggregate before rebuilding, so passing only flags.versions would drop the other versions
-		// (a single-version run must not nuke the others from lucca-front-all).
-		const bundled = listGeneratedVersionStrings(config.output.skillsDir).map(resolveVersion);
+		// Bundle EVERY minor present on disk, not just this run's — writeAggregateSkill wipes the
+		// aggregate before rebuilding, so passing only flags.versions would drop the other minors
+		// (a single-minor run must not nuke the others from lucca-front-all).
+		const bundled = listGeneratedVersionStrings(config.output.skillsDir).map((m) => resolveMinorVersion(m));
 		const { skillPath, versionCount } = writeAggregateSkill(config.output.skillsDir, bundled);
-		console.log(`📦 Aggregate: ${path.relative(config.output.skillsDir, skillPath)} (${versionCount} versions)`);
+		console.log(`📦 Aggregate: ${path.relative(config.output.skillsDir, skillPath)} (${versionCount} mineure·s)`);
 	}
 
 	// Surface ZH/Figma fetch failures (content missing) and persist them for replay.
@@ -403,15 +443,18 @@ async function retryFailedRun(config: ReturnType<typeof loadConfig>, manifestPat
 
 	clearFailures();
 
-	// Group failures by version (scope read per failure; absent = 'component', pre-scope manifests).
+	// Group failures by MINOR (failures are recorded with the patch-exact version string, e.g.
+	// "21.2.5" — the minor's latest patch at generation time; scope absent = 'component').
 	const byVersion = new Map<string, FetchFailure[]>();
 	for (const f of prev) {
-		const list = byVersion.get(f.version) ?? [];
+		const p = parseVersion(f.version);
+		const minorKey = p ? `${p.major}.${p.minor}` : f.version;
+		const list = byVersion.get(minorKey) ?? [];
 		list.push(f);
-		byVersion.set(f.version, list);
+		byVersion.set(minorKey, list);
 	}
 
-	console.log(`↻ Rejeu : ${prev.length} échec(s) sur ${byVersion.size} version(s)\n`);
+	console.log(`↻ Rejeu : ${prev.length} échec(s) sur ${byVersion.size} mineure(s)\n`);
 
 	// Same ZeroHeight release-ID guard as the main path: a retry re-fetches ZH, so an unpinned,
 	// superseded minor must be resolved first (the newest minor needs --zh-latest or interactive y).
@@ -424,15 +467,16 @@ async function retryFailedRun(config: ReturnType<typeof loadConfig>, manifestPat
 		}
 	}
 
-	const touchedVersions: string[] = [];
-	for (const [versionStr, items] of byVersion) {
-		const version = resolveVersion(versionStr);
+	const touched: MinorResolution[] = [];
+	for (const [minorKey, items] of byVersion) {
+		const resolution = resolveMinorVersion(minorKey);
+		const version = resolution.version;
 		const componentSlugs = new Set(items.filter((f) => (f.scope ?? 'component') === 'component').map((f) => f.slug));
 		const docSlugs = new Set(items.filter((f) => f.scope === 'documentation').map((f) => f.slug));
 		const toolSlugs = new Set(items.filter((f) => f.scope === 'tools').map((f) => f.slug));
 		const hasDeprecated = items.some((f) => f.scope === 'deprecated');
 
-		console.log(`\n━━━━━━ Rejeu ${versionStr} (${items.length} échec·s) ━━━━━━`);
+		console.log(`\n━━━━━━ Rejeu ${minorKey} (${items.length} échec·s) ━━━━━━`);
 
 		if (docSlugs.size > 0 && !flags.dryRun) {
 			console.log(`\n📖 Rejeu documentation (${docSlugs.size} page·s)...`);
@@ -447,20 +491,21 @@ async function retryFailedRun(config: ReturnType<typeof loadConfig>, manifestPat
 			await collectAllTools(config.output.skillsDir, version, { skipStorybook: flags.skipStorybook, only: toolSlugs });
 		}
 		if (componentSlugs.size > 0) {
-			await processVersion(versionStr, config, componentSlugs);
+			await processVersion(resolution, config, componentSlugs);
 		}
-		touchedVersions.push(versionStr);
+		touched.push(resolution);
 	}
 
-	// Refresh the touched versions' SKILL.md, then rebuild the aggregate from all on-disk versions.
+	// Refresh the touched minors' SKILL.md, then rebuild the aggregate from all on-disk minors.
+	// fixes/ are NOT rewritten here: they are git-sourced only, unaffected by ZH/Figma retries.
 	if (!flags.dryRun) {
-		for (const versionStr of touchedVersions) {
-			writeToc(config.output.skillsDir, resolveVersion(versionStr));
+		for (const resolution of touched) {
+			writeToc(config.output.skillsDir, resolution.version, resolution.patchTags);
 		}
 		if (!flags.skipAggregate) {
-			const all = listGeneratedVersionStrings(config.output.skillsDir).map(resolveVersion);
+			const all = listGeneratedVersionStrings(config.output.skillsDir).map((m) => resolveMinorVersion(m));
 			const { versionCount } = writeAggregateSkill(config.output.skillsDir, all);
-			console.log(`\n📦 Agrégat reconstruit (${versionCount} versions)`);
+			console.log(`\n📦 Agrégat reconstruit (${versionCount} mineure·s)`);
 		}
 	}
 
@@ -469,19 +514,19 @@ async function retryFailedRun(config: ReturnType<typeof loadConfig>, manifestPat
 }
 
 async function processVersion(
-	versionStr: string,
+	resolution: MinorResolution,
 	config: ReturnType<typeof loadConfig>,
 	replaySlugs?: Set<string>,
 ): Promise<{ success: number; errors: number; componentMap: ComponentMap }> {
-	const version = resolveVersion(versionStr);
+	const version = resolution.version;
 	// Component-scoped run = single --component OR a replay of specific failed slugs. In both
 	// cases we touch only those components and skip metadata sync / TOC rewrites.
 	const componentScoped = !!flags.component || (!!replaySlugs && replaySlugs.size > 0);
 
-	console.log(`\n🚀 Generating skills for Lucca Front ${version.tag}\n`);
+	console.log(`\n🚀 Generating skills for Lucca Front ${resolution.minorKey} (content: ${version.tag})\n`);
 	console.log(`   ZeroHeight release: ${version.zhReleaseId ?? 'none'}`);
 	console.log(`   Storybook: ${version.storybookBaseUrl}`);
-	console.log(`   Flags: ${JSON.stringify({ ...flags, versions: undefined, version: versionStr })}\n`);
+	console.log(`   Flags: ${JSON.stringify({ ...flags, versions: undefined, version: resolution.minorKey })}\n`);
 
 	// Collect Storybook index (primary source for component discovery)
 	let storybookMap = new Map<string, StorybookGroup>();
@@ -782,7 +827,7 @@ async function processVersion(
 	// Write version manifest — full runs only: a component-scoped run (--component or replay)
 	// would overwrite componentCount with the partial count of this run.
 	if (!flags.dryRun && !componentScoped) {
-		writeVersionManifest(config.output.skillsDir, version, successCount);
+		writeVersionManifest(config.output.skillsDir, version, successCount, resolution.patchTags);
 		console.log(`\n📋 Version manifest updated`);
 	}
 

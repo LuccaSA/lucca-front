@@ -492,6 +492,11 @@
 	"28382:11798": {
 		"componentName": "ConfirmationDialog",
 		"properties": {
+			"type": [
+				"confirmation",
+				"delete",
+				"exit"
+			],
 			"criticity": [
 				"low",
 				"high",

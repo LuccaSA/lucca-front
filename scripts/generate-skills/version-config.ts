@@ -84,6 +84,49 @@ export function parseVersion(versionStr: string): { major: number; minor: number
 }
 
 /**
+ * Parses a minor version string like "21.2" (or "v21.2") into components.
+ * Full patch versions ("21.2.1") are rejected — the pipeline generates per minor.
+ */
+export function parseMinor(versionStr: string): { major: number; minor: number } | null {
+	const match = versionStr.match(/^v?(\d+)\.(\d+)$/);
+	if (!match) return null;
+	return { major: parseInt(match[1], 10), minor: parseInt(match[2], 10) };
+}
+
+/** A generation target: one minor, resolved to its latest stable patch. */
+export interface MinorResolution {
+	/** VersionConfig of the LATEST stable patch of the minor — what references/ documents. */
+	version: VersionConfig;
+	/** "major.minor", e.g. "21.2". */
+	minorKey: string;
+	/** ALL stable published patch tags of the minor, ascending (e.g. ["v21.2.0", "v21.2.1", …]).
+	 * Phantom tags never published to npm are excluded by listStableTags (UNPUBLISHED_TAGS). */
+	patchTags: string[];
+}
+
+/**
+ * Resolves a minor ("21.2") to its latest stable patch tag + the full patch tag list.
+ * Throws if the minor has no stable tag in git.
+ */
+export function resolveMinorVersion(minorStr: string): MinorResolution {
+	const parsed = parseMinor(minorStr);
+	if (!parsed) {
+		throw new Error(`Invalid minor version format: "${minorStr}". Expected "M.m" (e.g. "21.2") — the pipeline generates one skill per minor.`);
+	}
+	const { major, minor } = parsed;
+	const patchTags = listStableTags(major).filter((t) => parseVersion(t)!.minor === minor);
+	if (patchTags.length === 0) {
+		throw new Error(`No stable git tag found for minor ${major}.${minor} (expected tags like v${major}.${minor}.0).`);
+	}
+	const latestTag = patchTags[patchTags.length - 1];
+	return {
+		version: resolveVersion(latestTag),
+		minorKey: `${major}.${minor}`,
+		patchTags,
+	};
+}
+
+/**
  * Resolves a full VersionConfig for a given version string.
  *
  * @param versionStr — e.g. "21.2.1" or "v21.2.1"
@@ -136,9 +179,18 @@ export function compareTags(a: string, b: string): number {
 const stableTagCache = new Map<number, string[]>();
 
 /**
- * Lists the **stable** release git tags for a major (e.g. v21.0.0 … v21.2.4), ascending.
- * Excludes pre-releases (-rc, -experimental, -split, …). Sourced from git, cached per major.
- * Used to walk the real release history for the per-component changelog.
+ * Tags that exist in git but were NEVER published to npm (phantom releases). They must not
+ * produce a skill, a fix file, or a changelog entry: their changes actually ship with the
+ * NEXT published patch, which is where the walk attributes them once the phantom is skipped.
+ * Add any future tag that never reached npm.
+ */
+const UNPUBLISHED_TAGS = new Set(['v21.1.5', 'v21.2.3']);
+
+/**
+ * Lists the **stable, published** release git tags for a major (e.g. v21.0.0 … v21.2.4), ascending.
+ * Excludes pre-releases (-rc, -experimental, -split, …) and phantom tags never published to npm
+ * (UNPUBLISHED_TAGS). Sourced from git, cached per major.
+ * Used to walk the real release history for the per-component changelog and the per-patch fixes.
  */
 export function listStableTags(major: number): string[] {
 	const cached = stableTagCache.get(major);
@@ -150,7 +202,8 @@ export function listStableTags(major: number): string[] {
 		tags = out
 			.split('\n')
 			.map((t) => t.trim())
-			.filter((t) => /^v\d+\.\d+\.\d+$/.test(t)); // stable only
+			.filter((t) => /^v\d+\.\d+\.\d+$/.test(t)) // stable only
+			.filter((t) => !UNPUBLISHED_TAGS.has(t));
 	} catch {
 		tags = [];
 	}
@@ -159,53 +212,3 @@ export function listStableTags(major: number): string[] {
 	return tags;
 }
 
-/**
- * Returns all known ZeroHeight release IDs.
- * Useful for listing available versions.
- */
-export function getKnownMinorVersions(): string[] {
-	return Object.keys(ZH_RELEASE_IDS).sort((a, b) => {
-		const [aMaj, aMin] = a.split('.').map(Number);
-		const [bMaj, bMin] = b.split('.').map(Number);
-		return bMaj - aMaj || bMin - aMin;
-	});
-}
-
-/**
- * Finds the closest available version for a requested version.
- * Used for fallback when an exact patch version isn't generated yet.
- *
- * @param requestedVersion — e.g. "21.2.3"
- * @param availableVersions — list of generated version strings, e.g. ["21.2.1", "21.1.4"]
- * @returns The best matching version string, or null if no match
- */
-export function findClosestVersion(requestedVersion: string, availableVersions: string[]): string | null {
-	const requested = parseVersion(requestedVersion);
-	if (!requested) return null;
-
-	const parsed = availableVersions
-		.map((v) => ({ raw: v, ...parseVersion(v)! }))
-		.filter((v) => v.major !== undefined)
-		.sort((a, b) => b.major - a.major || b.minor - a.minor || b.patch - a.patch);
-
-	// 1. Exact match
-	const exact = parsed.find((v) => v.major === requested.major && v.minor === requested.minor && v.patch === requested.patch);
-	if (exact) return exact.raw;
-
-	// 2. Same minor, closest patch (prefer lower or equal patch)
-	const sameMinor = parsed.filter((v) => v.major === requested.major && v.minor === requested.minor);
-	const lowerPatch = sameMinor.filter((v) => v.patch <= requested.patch);
-	if (lowerPatch.length > 0) return lowerPatch[0].raw;
-	if (sameMinor.length > 0) return sameMinor[sameMinor.length - 1].raw;
-
-	// 3. Same major, closest minor (prefer lower or equal minor)
-	const sameMajor = parsed.filter((v) => v.major === requested.major);
-	const lowerMinor = sameMajor.filter((v) => v.minor <= requested.minor);
-	if (lowerMinor.length > 0) return lowerMinor[0].raw;
-	if (sameMajor.length > 0) return sameMajor[sameMajor.length - 1].raw;
-
-	// 4. Closest major
-	if (parsed.length > 0) return parsed[0].raw;
-
-	return null;
-}

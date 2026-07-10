@@ -1,39 +1,41 @@
 import fs from 'fs';
 import path from 'path';
-import { VersionConfig, VersionManifest, VersionManifestEntry, WriteResult } from '../types';
+import { MinorManifestEntry, VersionConfig, VersionManifest, WriteResult } from '../types';
 
 const SKILLS_BASE = 'lucca-front';
 
 /**
- * Flat, self-contained per-version layout. Each version is a complete skill:
+ * Flat, self-contained per-MINOR layout. Each minor is a complete skill:
  *
- * lucca-front/<version>/                 (e.g. lucca-front/21.2.3/ — bare, matches the APM path)
+ * lucca-front/lucca-front-21-2/          (folder = skill name = install dir leaf)
  * ├── SKILL.md
- * └── references/
- *     ├── components/<slug>/
- *     │   ├── <slug>.md
- *     │   ├── <slug>.component.md
- *     │   ├── <slug>.figma.md
- *     │   ├── <slug>.changelog.md
- *     │   ├── design/{_index.md, <section>.md}
- *     │   └── stories/<fileSlug>.md
- *     ├── types/<TypeName>.md
- *     ├── documentation/<category>/<file>.md
- *     └── tools/<file>.md
+ * ├── references/                        ← content of the LATEST published patch of the minor
+ * │   ├── components/<slug>/
+ * │   │   ├── <slug>.md
+ * │   │   ├── <slug>.component.md
+ * │   │   ├── <slug>.figma.md
+ * │   │   ├── <slug>.changelog.md
+ * │   │   ├── design/{_index.md, <section>.md}
+ * │   │   └── stories/<fileSlug>.md
+ * │   ├── types/<TypeName>.md
+ * │   ├── documentation/<category>/<file>.md
+ * │   ├── tools/<file>.md
+ * │   └── migrations.md
+ * └── fixes/<M-m-p>.md                   ← one file per published patch > .0 (delta vs previous)
  *
- * No interior version segments: the version lives once, at the top folder. A consumer
- * installs a single version, so cross-version dedup is irrelevant.
+ * No interior version segments: the minor lives once, at the top folder. A consumer installs a
+ * single minor; patch-level history is carried by fixes/ and the cumulative changelogs.
  */
 
 /**
- * Version skill folder/name, e.g. "lucca-front-21-2-3".
+ * Minor skill folder/name, e.g. "lucca-front-21-2".
  *
- * Dashes (not dots): APM reads a dotted leaf segment as a file extension and rejects it, and the
- * install dir is named from this leaf — so folder = skill name = APM install dir, all aligned.
- * Distinct per-version names let a monorepo install several versions side by side without collision.
+ * Dashes (not dots): the distribution layer reads a dotted leaf segment as a file extension and
+ * rejects it, and the install dir is named from this leaf — so folder = skill name = install dir.
+ * Distinct per-minor names let a monorepo install several minors side by side without collision.
  */
 export function versionFolder(version: VersionConfig): string {
-	return `${SKILLS_BASE}-${version.major}-${version.minor}-${version.patch}`;
+	return `${SKILLS_BASE}-${version.major}-${version.minor}`;
 }
 
 /** Root of a single self-contained version skill: lucca-front/<version>/ */
@@ -134,47 +136,76 @@ export function figmaSkillExists(skillsDir: string, slug: string, version: Versi
 
 /**
  * Writes/updates the _versions.json manifest at the dist root (lucca-front/_versions.json).
- * Generator/dist metadata — not part of any single version skill, not fetched by APM.
+ * Generator/dist metadata — not part of any single minor skill, not distributed.
+ *
+ * One entry per MINOR; `patches` records every published patch of the minor (its tag and
+ * patch-exact Storybook URL), so no patch-level metadata is lost by the minor granularity.
  */
-export function writeVersionManifest(skillsDir: string, version: VersionConfig, componentCount: number): void {
+export function writeVersionManifest(skillsDir: string, version: VersionConfig, componentCount: number, patchTags: string[]): void {
 	const manifestPath = path.resolve(skillsDir, SKILLS_BASE, '_versions.json');
 	let manifest: VersionManifest;
 
 	if (fs.existsSync(manifestPath)) {
 		try {
 			manifest = JSON.parse(fs.readFileSync(manifestPath, 'utf-8'));
+			if (!manifest.minors) manifest = { latest: '', minors: {} }; // legacy per-patch schema → reset
 		} catch {
-			manifest = { latest: '', versions: {} };
+			manifest = { latest: '', minors: {} };
 		}
 	} else {
 		fs.mkdirSync(path.dirname(manifestPath), { recursive: true });
-		manifest = { latest: '', versions: {} };
+		manifest = { latest: '', minors: {} };
 	}
 
-	const versionKey = `${version.major}.${version.minor}.${version.patch}`;
-	const entry: VersionManifestEntry = {
+	const minorKey = `${version.major}.${version.minor}`;
+	const generatedAt = new Date().toISOString();
+	const entry: MinorManifestEntry = {
+		latestPatch: `${version.major}.${version.minor}.${version.patch}`,
 		tag: version.tag,
 		zhReleaseId: version.zhReleaseId,
 		storybookBaseUrl: version.storybookBaseUrl,
-		generatedAt: new Date().toISOString(),
+		generatedAt,
 		componentCount,
+		patches: Object.fromEntries(
+			patchTags.map((tag) => {
+				const bare = tag.replace(/^v/, '');
+				return [bare, { tag, storybookBaseUrl: `https://lucca-front.lucca.io/${tag}/storybook`, generatedAt }];
+			}),
+		),
 	};
 
-	manifest.versions[versionKey] = entry;
+	manifest.minors[minorKey] = entry;
 
-	// Update latest to the highest version
-	const allVersions = Object.keys(manifest.versions).sort((a, b) => {
-		const [aMaj, aMin, aPat] = a.split('.').map(Number);
-		const [bMaj, bMin, bPat] = b.split('.').map(Number);
-		return aMaj !== bMaj ? bMaj - aMaj : aMin !== bMin ? bMin - aMin : bPat - aPat;
+	// Update latest to the highest minor
+	const allMinors = Object.keys(manifest.minors).sort((a, b) => {
+		const [aMaj, aMin] = a.split('.').map(Number);
+		const [bMaj, bMin] = b.split('.').map(Number);
+		return aMaj !== bMaj ? bMaj - aMaj : bMin - aMin;
 	});
-	manifest.latest = allVersions[0] ?? versionKey;
+	manifest.latest = allMinors[0] ?? minorKey;
 
-	// Re-emit versions in chronological (ascending) order — insertion order would otherwise drift
-	// whenever a patch of an older minor is (re)generated after a newer version (ends up last).
-	manifest.versions = Object.fromEntries([...allVersions].reverse().map((v) => [v, manifest.versions[v]]));
+	// Re-emit minors in ascending order — insertion order would otherwise drift whenever an older
+	// minor is (re)generated after a newer one (ends up last).
+	manifest.minors = Object.fromEntries([...allMinors].reverse().map((v) => [v, manifest.minors[v]]));
 
 	fs.writeFileSync(manifestPath, JSON.stringify(manifest, null, 2) + '\n', 'utf-8');
+}
+
+// ─── Fixes writers ────────────────────────────────────────────────────────────
+
+/**
+ * Writes a per-patch fix file (delta vs the previous published patch).
+ * Output: <minor>/fixes/<M-m-p>.md (e.g. lucca-front-21-2/fixes/21-2-1.md)
+ */
+export function writeFixFile(skillsDir: string, version: VersionConfig, patchVersion: string, content: string): WriteResult {
+	const dir = path.join(versionRoot(skillsDir, version), 'fixes');
+	return writeFile(dir, `${patchVersion.replace(/\./g, '-')}.md`, content);
+}
+
+/** Removes the fixes/ folder of a minor before a fresh generation (stale fix files). */
+export function cleanFixesDirectory(skillsDir: string, version: VersionConfig): void {
+	const dir = path.join(versionRoot(skillsDir, version), 'fixes');
+	if (fs.existsSync(dir)) fs.rmSync(dir, { recursive: true });
 }
 
 // ─── Shared type writers ──────────────────────────────────────────────────────

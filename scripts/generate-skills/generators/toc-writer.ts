@@ -4,19 +4,23 @@ import { DocumentationMap, VersionConfig } from '../types';
 import { versionRoot, versionFolder } from './skill-writer';
 
 /**
- * Writes the per-version SKILL.md — the entry point of a single self-contained version skill.
+ * Writes the per-minor SKILL.md — the entry point of a single self-contained minor skill.
  *
- * Output: lucca-front/<version>/SKILL.md
+ * Output: lucca-front/lucca-front-<M>-<m>/SKILL.md
  *
- * The version is implicit (one version per installed skill): no package.json detection, no
- * fix/minor distinction, no version guardrail. All paths are flat and relative to this folder.
- * The component list (§6) is sourced from the generated folders on disk — the single source of
- * truth, so every listed slug is a navigable path.
+ * The minor is implicit (one minor per installed skill): no package.json detection, no version
+ * guardrail. references/ documents the minor's LATEST published patch; fixes/ carries the
+ * per-patch deltas. All paths are flat and relative to this folder. The component list (§6) is
+ * sourced from the generated folders on disk — the single source of truth, so every listed slug
+ * is a navigable path.
  */
-export function writeToc(skillsDir: string, version: VersionConfig): string {
+export function writeToc(skillsDir: string, version: VersionConfig, patchTags: string[]): string {
 	const root = versionRoot(skillsDir, version);
-	const bareVersion = `${version.major}.${version.minor}.${version.patch}`;
+	const minorVersion = `${version.major}.${version.minor}`;
+	const latestPatch = `${version.major}.${version.minor}.${version.patch}`;
 	const skillName = versionFolder(version);
+	const patchList = patchTags.map((t) => t.replace(/^v/, ''));
+	const fixPatches = patchList.slice(1); // every published patch > x.y.0 has a fix file
 
 	// ── Build component list: flat, alphabetical, sourced from generated folders ──
 	const componentsDir = path.join(root, 'references', 'components');
@@ -64,17 +68,19 @@ export function writeToc(skillsDir: string, version: VersionConfig): string {
 	const content = `---
 name: ${skillName}
 description: >
-  Design system Lucca Front / Prisme (Angular). À charger pour tout fichier d'un projet qui dépend de @lucca-front/ng ou @lucca-front/scss,
+  Design system Lucca Front / Prisme (Angular), versions ${minorVersion}.x. À charger pour tout fichier d'un projet qui dépend de @lucca-front/ng ou @lucca-front/scss,
   ou contenant des sélecteurs lu-*, pr-* ou des directives commençant par 'lu' (ex: luButton, luTooltip, luForm).
 ---
 
-# Design System Prisme — Lucca Front
+# Design System Prisme — Lucca Front ${minorVersion}
 
 **RÈGLE** : Avant toute génération ou modification de code impliquant \`lu-*\`, \`luX\` ou \`pr-*\`, consulte la documentation du composant ci-dessous. Sans cette consultation, toute réponse est invalide.
 
 ## 1. Version
 
-Cette skill documente **Lucca Front ${bareVersion}**. C'est la version installée sur le projet — tous les chemins ci-dessous lui sont relatifs. Il n'y a rien à détecter.
+Cette skill couvre **Lucca Front ${minorVersion}.x** (patchs publiés : ${patchList.join(', ')}). C'est la mineure installée sur le projet — tous les chemins ci-dessous lui sont relatifs. Il n'y a rien à détecter.
+
+La documentation \`references/\` reflète le **dernier patch publié : ${latestPatch}**. Si le projet est sur un patch antérieur, les correctifs livrés après sa version sont décrits dans \`fixes/\` (voir §2) — ils ne sont **pas** dans son code.
 
 ## 2. Chemins
 
@@ -111,6 +117,12 @@ Slugs : animations, mixins, numbers, scrollbox, utilitaires
 
 \`./references/migrations.md\` — codemods de migration (\`ng generate @lucca-front/ng:<nom>\`) cumulatifs jusqu'à cette version, avec leur version d'introduction.
 
+### Correctifs de patch (fixes/)
+
+\`./fixes/<M-m-p>.md\` — un fichier par patch publié de la mineure (delta vs le patch précédent : API, types partagés, codemods, sources de stories).${fixPatches.length > 0 ? ` Fichiers : ${fixPatches.map((p) => `\`${p.replace(/\./g, '-')}.md\``).join(', ')}.` : ' _(aucun patch publié après le .0 pour l\'instant)_'}
+
+À consulter quand : le projet est sur un patch **antérieur** à ${latestPatch} (les fixes postérieurs à sa version décrivent des correctifs absents de son code), ou pour comprendre ce qu'un patch précis a changé.
+
 ### Exemple
 
 Bouton → API : \`./references/components/button/button.md\`, Figma : \`./references/components/button/button.figma.md\`
@@ -129,6 +141,7 @@ Bouton → API : \`./references/components/button/button.md\`, Figma : \`./refer
 | Mixins / animations SCSS | Outils (dossier \`tools/\`) |
 | Composant déprécié | \`./references/documentation/deprecated/deprecated.md\` |
 | Monter de version | \`./references/migrations.md\` + le \`<slug>.changelog.md\` de chaque composant touché |
+| Projet sur un patch antérieur à ${latestPatch} / comportement inattendu sur un patch | \`./fixes/<M-m-p>.md\` |
 
 ## 4. Workflow Code
 
