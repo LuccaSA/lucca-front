@@ -20,14 +20,6 @@ export default {
 			description: '',
 			if: { arg: 'callout', truthy: true },
 		},
-		emptyIllustration: {
-			description: '',
-			options: ['magnifying-glass', 'post-it-success'],
-			control: {
-				type: 'select',
-			},
-			if: { arg: 'blockCount', eq: 0 },
-		},
 	},
 	decorators: [
 		moduleMetadata({
@@ -48,9 +40,8 @@ export default {
 			],
 		}),
 	],
-	render: ({ insideDialog, headerContent, callout, calloutLabel, blockLabel, blockCount, moreActions, illustration, emptyIllustration, ...args }, { argTypes }) => {
+	render: ({ insideDialog, headerContent, callout, calloutLabel, blockLabel, blockCount, moreActions, illustration, ...args }, { argTypes }) => {
 		const insideDialogParam = insideDialog ? ` insideDialog` : ``;
-		const emptyIllustrationParam = emptyIllustration !== 'magnifying-glass' && emptyIllustration !== '' && emptyIllustration !== undefined ? ` emptyIllustration="${emptyIllustration}"` : ``;
 		const contentTpl = `
 	<lu-approbation-inbox-detail-main-block label="${blockLabel}">
 		Dolor sit amet
@@ -105,7 +96,7 @@ export default {
 	</lu-approbation-inbox-detail-main-block>`
 				: ``;
 		return {
-			template: `<lu-approbation-inbox-detail${emptyIllustrationParam}${insideDialogParam}>${headerTpl}${calloutTpl}${contentTpl.repeat(blockCount - 1 < 0 ? 0 : blockCount - 1)}${contentDefaultTpl}
+			template: `<lu-approbation-inbox-detail${insideDialogParam}>${headerTpl}${calloutTpl}${contentTpl.repeat(blockCount - 1 < 0 ? 0 : blockCount - 1)}${contentDefaultTpl}
 </lu-approbation-inbox-detail>`,
 		};
 	},
@@ -121,7 +112,6 @@ export const Basic: StoryObj<
 		blockLabel: string;
 		blockCount: number;
 		illustration: boolean;
-		emptyIllustration: string;
 	}
 > = {
 	args: {
@@ -135,6 +125,5 @@ export const Basic: StoryObj<
 		calloutLabel: 'Callout feedback description. ',
 		blockLabel: 'Title',
 		blockCount: 1,
-		emptyIllustration: 'magnifying-glass',
 	},
 };

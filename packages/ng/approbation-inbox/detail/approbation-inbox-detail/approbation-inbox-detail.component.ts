@@ -21,7 +21,6 @@ import { ApprobationInboxHeaderComponent } from '../approbation-inbox-detail-hea
 export class ApprobationInboxDetailComponent {
 	protected readonly dialogRef = inject(LuDialogRef, { optional: true });
 
-	readonly emptyIllustration = input<'magnifying-glass' | 'post-it-success' | string>('magnifying-glass');
 	readonly insideDialog = input(false, { transform: booleanAttribute });
 
 	private readonly header = contentChild(ApprobationInboxHeaderComponent);

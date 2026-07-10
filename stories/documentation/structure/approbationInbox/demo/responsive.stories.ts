@@ -215,12 +215,6 @@ export default {
 						<lu-approbation-inbox-detail-main-block label="Sit amet">
 							Dolor sit amet
 						</lu-approbation-inbox-detail-main-block>
-						<lu-approbation-inbox-detail-main-block label="Sit amet">
-							Dolor sit amet
-						</lu-approbation-inbox-detail-main-block>
-						<lu-approbation-inbox-detail-main-block label="Sit amet">
-							Dolor sit amet
-						</lu-approbation-inbox-detail-main-block>
 						<lu-approbation-inbox-detail-main-block label="Circuit d’approbation">
 							Dolor sit amet
 						</lu-approbation-inbox-detail-main-block>
