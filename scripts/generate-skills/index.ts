@@ -74,6 +74,7 @@ import {
 	writeSharedType,
 } from './generators/skill-writer';
 import { writeToc } from './generators/toc-writer';
+import { writeAngularApiPage } from './generators/angular-api-writer';
 import { buildComponentChangelog } from './generators/changelog-writer';
 import { writeFixes } from './generators/fixes-writer';
 import { writeVersionChangelog } from './generators/version-diff-writer';
@@ -374,6 +375,17 @@ async function main(): Promise<void> {
 			totalSuccess += result.success;
 			totalErrors += result.errors;
 			componentMap = result.componentMap;
+		}
+
+		// Angular API of orphan symbols (providers/tokens/pipes/services documented on no component
+		// page) — git-sourced, deterministic. Needs the discovered component list to subtract what
+		// the component pages already render, so it follows the component pass.
+		if (!flags.dryRun && !flags.component && !flags.documentationOnly && !flags.skipTools) {
+			const attachments = Object.values(componentMap)
+				.filter((e) => e.ngPackage)
+				.map((e) => ({ ngPackage: e.ngPackage!, ngSelectors: e.ngSelectors }));
+			const result = writeAngularApiPage(config.output.skillsDir, version, attachments);
+			if (result) console.log(`🧩 tools/angular-api.md — ${result.status}`);
 		}
 
 		// Per-patch fixes (delta vs previous published patch) — deterministic, git-sourced.

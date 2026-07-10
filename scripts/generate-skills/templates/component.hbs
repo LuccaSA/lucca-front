@@ -24,6 +24,10 @@ import { {{#each api.apis}}{{className}}{{#unless @last}}, {{/unless}}{{/each}} 
 
 **Selector{{#if (gt selectors.length 1)}}s{{/if}}:** `{{join selectors "`, `"}}`
 
+{{#if deprecated}}
+> ⚠️ **Déprécié** : {{deprecated}}
+{{/if}}
+
 {{#if exportAs}}
 **exportAs:** `{{exportAs}}`
 {{/if}}
@@ -34,31 +38,82 @@ import { {{#each api.apis}}{{className}}{{#unless @last}}, {{/unless}}{{/each}} 
 | Property | Binding name | Type | Default | Required | Transform | Description |
 |----------|-------------|------|---------|----------|-----------|-------------|
 {{#each inputs}}
-| `{{propName}}` | `{{bindingName}}` | `{{escapePipe type}}` | {{#if default}}`{{escapePipe default}}`{{else}}—{{/if}} | {{#if required}}✅{{else}}—{{/if}} | {{#if transform}}`{{transform}}`{{else}}—{{/if}} | {{#if description}}{{description}}{{else}}—{{/if}} |
+| `{{propName}}` | `{{bindingName}}` | `{{escapePipe type}}` | {{#if default}}`{{escapePipe default}}`{{else}}—{{/if}} | {{#if required}}✅{{else}}—{{/if}} | {{#if transform}}`{{transform}}`{{else}}—{{/if}} | {{#if deprecated}}⚠️ **Déprécié** : {{escapePipe deprecated}} {{/if}}{{#if description}}{{description}}{{else}}{{#unless deprecated}}—{{/unless}}{{/if}} |
 {{/each}}
 {{/if}}
 
 {{#if outputs.length}}
 #### Outputs
 
-| Property | Binding name | Type |
-|----------|-------------|------|
+| Property | Binding name | Type | Notes |
+|----------|-------------|------|-------|
 {{#each outputs}}
-| `{{propName}}` | `{{bindingName}}` | `{{type}}` |
+| `{{propName}}` | `{{bindingName}}` | `{{escapePipe type}}` | {{#if deprecated}}⚠️ **Déprécié** : {{escapePipe deprecated}}{{else}}—{{/if}} |
 {{/each}}
 {{/if}}
 
 {{#if models.length}}
 #### Models (two-way binding)
 
-| Property | Type | Required |
-|----------|------|----------|
+| Property | Type | Required | Notes |
+|----------|------|----------|-------|
 {{#each models}}
-| `{{propName}}` | `{{type}}` | {{#if required}}✅{{else}}—{{/if}} |
+| `{{propName}}` | `{{escapePipe type}}` | {{#if required}}✅{{else}}—{{/if}} | {{#if deprecated}}⚠️ **Déprécié** : {{escapePipe deprecated}}{{else}}—{{/if}} |
 {{/each}}
 {{/if}}
 
 {{/each}}
+{{#if api.providers.length}}
+### Providers
+
+| Fonction | Signature | Description |
+|----------|-----------|-------------|
+{{#each api.providers}}
+| `{{name}}` | `{{escapePipe signature}}` | {{#if deprecated}}⚠️ **Déprécié** : {{escapePipe deprecated}} {{/if}}{{#if description}}{{description}}{{else}}{{#unless deprecated}}—{{/unless}}{{/if}} |
+{{/each}}
+{{/if}}
+
+{{#if api.tokens.length}}
+### Injection tokens
+
+| Token | Type | Description |
+|-------|------|-------------|
+{{#each api.tokens}}
+| `{{name}}` | `{{escapePipe type}}` | {{#if deprecated}}⚠️ **Déprécié** : {{escapePipe deprecated}} {{/if}}{{#if description}}{{description}}{{else}}{{#unless deprecated}}—{{/unless}}{{/if}} |
+{{/each}}
+{{/if}}
+
+{{#if api.pipes.length}}
+### Pipes
+
+| Pipe | Classe | transform | Description |
+|------|--------|-----------|-------------|
+{{#each api.pipes}}
+| `{{name}}` | `{{className}}` | {{#if transformSignature}}`{{escapePipe transformSignature}}`{{else}}—{{/if}} | {{#if deprecated}}⚠️ **Déprécié** : {{escapePipe deprecated}} {{/if}}{{#if description}}{{description}}{{else}}{{#unless deprecated}}—{{/unless}}{{/if}} |
+{{/each}}
+{{/if}}
+
+{{#if api.services.length}}
+### Services
+
+{{#each api.services}}
+#### {{className}}{{#if deprecated}} — ⚠️ Déprécié : {{deprecated}}{{/if}}
+
+{{#if description}}{{description}}
+{{/if}}
+{{#each methods}}
+- `{{this}}`
+{{/each}}
+{{/each}}
+{{/if}}
+
+{{#if api.deprecatedModules.length}}
+### Modules dépréciés
+
+{{#each api.deprecatedModules}}
+- ⚠️ `{{className}}` — {{deprecated}}
+{{/each}}
+{{/if}}
 {{/if}}
 
 {{#if expandedTypeDefs.length}}

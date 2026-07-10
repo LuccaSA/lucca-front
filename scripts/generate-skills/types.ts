@@ -116,6 +116,8 @@ export interface ExtractedInput {
 	transform?: string;
 	/** Source: 'signal' for input(), 'decorator' for @Input(). */
 	source: 'signal' | 'decorator';
+	/** JSDoc @deprecated message (non-empty when the member is deprecated). */
+	deprecated?: string;
 	/** Human-readable description from Storybook argTypes. */
 	description?: string;
 	/**
@@ -140,6 +142,8 @@ export interface ExtractedOutput {
 	type: string;
 	/** Source: 'signal' for output(), 'decorator' for @Output(). */
 	source: 'signal' | 'decorator';
+	/** JSDoc @deprecated message (non-empty when the member is deprecated). */
+	deprecated?: string;
 }
 
 export interface ExtractedModel {
@@ -151,6 +155,8 @@ export interface ExtractedModel {
 	type: string;
 	/** Whether the model is required. */
 	required: boolean;
+	/** JSDoc @deprecated message (non-empty when the member is deprecated). */
+	deprecated?: string;
 }
 
 export interface ExtractedAPI {
@@ -172,6 +178,65 @@ export interface ExtractedAPI {
 	exportAs?: string;
 	/** Whether the component is standalone. */
 	standalone?: boolean;
+	/** JSDoc @deprecated message on the class itself. */
+	deprecated?: string;
+	/** Source file the class was extracted from (attachment heuristics; not rendered). */
+	sourceFile?: string;
+}
+
+/** An exported `provide*()` / `configure*()` function (environment/component providers). */
+export interface ExtractedProvider {
+	/** Function name, e.g. "provideLuDialog". */
+	name: string;
+	/** Terse signature: params + return type, e.g. "(): Provider". */
+	signature: string;
+	/** JSDoc summary (first prose line). */
+	description?: string;
+	/** JSDoc @deprecated message. */
+	deprecated?: string;
+	/** Source file (attachment heuristics; not rendered). */
+	sourceFile?: string;
+}
+
+/** An exported `InjectionToken` const. */
+export interface ExtractedToken {
+	/** Const name, e.g. "USER_POPOVER_IS_ACTIVATED". */
+	name: string;
+	/** Token value type (InjectionToken generic), e.g. "boolean". */
+	type: string;
+	description?: string;
+	deprecated?: string;
+	sourceFile?: string;
+}
+
+/** An exported `@Pipe` class. */
+export interface ExtractedPipe {
+	/** Template name, e.g. "luDate". */
+	name: string;
+	className: string;
+	/** transform() signature, e.g. "(value: Date | string, format?: string): string". */
+	transformSignature?: string;
+	description?: string;
+	deprecated?: string;
+	sourceFile?: string;
+}
+
+/** An exported `@Injectable` service class (imperative API). */
+export interface ExtractedService {
+	/** Class name, e.g. "LuDialogService". */
+	className: string;
+	/** Public method signatures, e.g. "open<C>(config: LuDialogConfig<C>): LuDialogRef<C>". */
+	methods: string[];
+	description?: string;
+	deprecated?: string;
+	sourceFile?: string;
+}
+
+/** An exported `@NgModule` carrying a @deprecated JSDoc (captured for migration info only). */
+export interface DeprecatedModule {
+	className: string;
+	deprecated: string;
+	sourceFile?: string;
 }
 
 /** All APIs extracted for a component package (may contain multiple directives/components). */
@@ -180,6 +245,16 @@ export interface PackageAPI {
 	ngPackage: string;
 	/** All Angular classes exported by this package. */
 	apis: ExtractedAPI[];
+	/** Exported provide/configure functions of the package (scoped by file affinity). */
+	providers: ExtractedProvider[];
+	/** Exported InjectionToken consts. */
+	tokens: ExtractedToken[];
+	/** Exported @Pipe classes. */
+	pipes: ExtractedPipe[];
+	/** Exported @Injectable services (imperative API). */
+	services: ExtractedService[];
+	/** Exported @NgModule classes that are @deprecated. */
+	deprecatedModules: DeprecatedModule[];
 }
 
 // ─── Storybook ────────────────────────────────────────────────────────────────
