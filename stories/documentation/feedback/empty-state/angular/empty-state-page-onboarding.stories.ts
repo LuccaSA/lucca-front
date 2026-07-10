@@ -3,7 +3,7 @@ import { ButtonComponent } from '@lucca-front/ng/button';
 import { EmptyStatePageComponent, EmptyStatePageIllustration } from '@lucca-front/ng/empty-state';
 import { ListingComponent, ListingItemComponent } from '@lucca-front/ng/listing';
 import { TagComponent } from '@lucca-front/ng/tag';
-import { Meta, moduleMetadata, StoryObj } from '@storybook/angular';
+import { Meta, moduleMetadata, StoryObj } from '@storybook/angular-vite';
 
 export default {
 	title: 'Documentation/Feedback/Empty State/Angular/Onboarding page',

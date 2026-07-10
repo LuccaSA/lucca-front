@@ -13,7 +13,7 @@ import { PopoverDirective } from '@lucca-front/ng/popover2';
 import { LuSimpleSelectInputComponent } from '@lucca-front/ng/simple-select';
 import { LuToastsComponent, LuToastsService } from '@lucca-front/ng/toast';
 import { LuTooltipTriggerDirective } from '@lucca-front/ng/tooltip';
-import { Meta } from '@storybook/angular';
+import { Meta } from '@storybook/angular-vite';
 
 @Component({
 	selector: 'push-panel-stories',

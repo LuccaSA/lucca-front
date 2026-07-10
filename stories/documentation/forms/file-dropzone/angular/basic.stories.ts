@@ -1,6 +1,6 @@
 import { provideHttpClient } from '@angular/common/http';
 import { FileDropzoneComponent } from '@lucca-front/ng/file-upload';
-import { applicationConfig, Meta, moduleMetadata } from '@storybook/angular';
+import { applicationConfig, Meta, moduleMetadata } from '@storybook/angular-vite';
 
 export default {
 	title: 'Documentation/File/FileDropzone/Angular/Basic',

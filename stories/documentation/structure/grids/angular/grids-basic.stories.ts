@@ -1,6 +1,6 @@
 import { GRID_COLUMN_ALIGNMENT, GRID_GAP, GRID_MODE, GridColumnComponent, GridComponent } from '@lucca-front/ng/grid';
-import { Meta, moduleMetadata, StoryObj } from '@storybook/angular';
-import { cleanupTemplate, generateInputs, setStoryOptions } from 'stories/helpers/stories';
+import { Meta, moduleMetadata, StoryObj } from '@storybook/angular-vite';
+import { cleanupTemplate, generateInputs, setStoryOptions } from '@/helpers/stories';
 
 const OTHER_GAP = ['1px', '2em', '3%'];
 

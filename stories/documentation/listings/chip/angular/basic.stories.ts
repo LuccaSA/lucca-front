@@ -1,6 +1,6 @@
 import { CHIP_STATE, ChipComponent } from '@lucca-front/ng/chip';
-import { Meta, moduleMetadata, StoryObj } from '@storybook/angular';
-import { setStoryOptions } from 'stories/helpers/stories';
+import { Meta, moduleMetadata, StoryObj } from '@storybook/angular-vite';
+import { setStoryOptions } from '@/helpers/stories';
 
 interface ChipBasicStory {
 	unkillable: boolean;
