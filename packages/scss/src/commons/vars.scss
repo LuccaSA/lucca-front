@@ -104,8 +104,9 @@
 	--commons-border-200: var(--palettes-neutral-200);
 	--commons-pushPanel-inlineSize: 0px;
 
-	// Deprecated
+	/* @deprecated use --pr-t-font-family instead */
 	--commons-font-family: '#{config.$fontFamily}', Tahoma, sans-serif;
+	/* @deprecated use --pr-t-font-family-brand instead */
 	--commons-font-family-brand: '#{config.$fontFamilyBrand}', sans-serif;
 
 	--commons-background-base: var(--pr-t-elevation-surface-default);

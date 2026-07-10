@@ -56,3 +56,6 @@ scripts/generate-skills/generate-skills-config.json
 /coverage/
 
 *storybook.log
+
+# VS Code extension packaged artifact
+packages/vscode-extension/*.vsix
