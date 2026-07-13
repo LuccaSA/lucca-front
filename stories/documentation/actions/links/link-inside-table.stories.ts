@@ -11,7 +11,7 @@ import {
 	IndexTableRowComponent,
 } from '@lucca-front/ng/index-table';
 import { LinkComponent } from '@lucca-front/ng/link';
-import { applicationConfig, Meta, moduleMetadata, StoryObj } from '@storybook/angular';
+import { applicationConfig, Meta, moduleMetadata, StoryObj } from '@storybook/angular-vite';
 import { timer } from 'rxjs';
 
 export default {

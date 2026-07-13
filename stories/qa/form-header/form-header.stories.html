@@ -1,0 +1,80 @@
+<table class="demo-QAtable">
+	<tbody>
+		<tr>
+			<td></td>
+			<td>
+				<div class="demo-QAtable-list">HTML</div>
+			</td>
+			<td>
+				<div class="demo-QAtable-list">Angular</div>
+			</td>
+		</tr>
+		<tr>
+			<td>Default (aria-level 1)</td>
+			<td>
+				<div class="demo-QAtable-list">
+					<div class="form-header">
+						<div class="form-header-title" role="heading" aria-level="1">Form title</div>
+					</div>
+				</div>
+			</td>
+			<td>
+				<div class="demo-QAtable-list">
+					<lu-form-header>Form title</lu-form-header>
+				</div>
+			</td>
+		</tr>
+		<tr>
+			<td>Heading level 2</td>
+			<td>
+				<div class="demo-QAtable-list">
+					<div class="form-header">
+						<div class="form-header-title" role="heading" aria-level="2">Form title</div>
+					</div>
+				</div>
+			</td>
+			<td>
+				<div class="demo-QAtable-list">
+					<lu-form-header [headingLevel]="2">Form title</lu-form-header>
+				</div>
+			</td>
+		</tr>
+		<tr>
+			<td>Heading level 6</td>
+			<td>
+				<div class="demo-QAtable-list">
+					<div class="form-header">
+						<div class="form-header-title" role="heading" aria-level="6">Form title</div>
+					</div>
+				</div>
+			</td>
+			<td>
+				<div class="demo-QAtable-list">
+					<lu-form-header [headingLevel]="6">Form title</lu-form-header>
+				</div>
+			</td>
+		</tr>
+		<tr>
+			<td>Titre long</td>
+			<td>
+				<div class="demo-QAtable-list">
+					<div class="form-header">
+						<div class="form-header-title" role="heading" aria-level="1">
+							Lorem ipsum dolor sit amet, consectetur adipiscing elit, sed do eiusmod tempor incididunt ut labore et dolore magna aliqua
+						</div>
+					</div>
+				</div>
+			</td>
+			<td>
+				<div class="demo-QAtable-list">
+					<lu-form-header>
+						Lorem ipsum dolor sit amet, consectetur adipiscing elit, sed do eiusmod tempor incididunt ut labore et dolore magna aliqua
+					</lu-form-header>
+				</div>
+			</td>
+		</tr>
+	</tbody>
+</table>
+
+<!-- To tell the ui-diff tool that the page has finished rendering -->
+<span id="ready"></span>

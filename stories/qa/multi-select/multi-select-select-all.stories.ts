@@ -5,8 +5,8 @@ import { FormsModule } from '@angular/forms';
 import { LuCoreSelectTotalCountDirective } from '@lucca-front/ng/core-select';
 import { FormFieldComponent } from '@lucca-front/ng/form-field';
 import { LuMultiSelectInputComponent, LuMultiSelectWithSelectAllDirective, LuMultiSelection } from '@lucca-front/ng/multi-select';
-import { Meta, StoryObj } from '@storybook/angular';
-import { ILegume, allLegumes } from '../../documentation/forms/select/select.utils';
+import { Meta, StoryObj } from '@storybook/angular-vite';
+import { ILegume, allLegumes } from '@/stories/forms/select/select.utils';
 
 registerLocaleData(localesFr);
 
@@ -14,14 +14,13 @@ registerLocaleData(localesFr);
 	selector: 'multi-select-stories',
 	imports: [JsonPipe, FormsModule, LuMultiSelectInputComponent, LuMultiSelectWithSelectAllDirective, FormFieldComponent, LuCoreSelectTotalCountDirective],
 	template: `
-		<lu-form-field>
+		<lu-form-field label="Légumes">
 			<lu-multi-select
 				withSelectAll
 				[totalCount]="legumes.length"
 				withSelectAllDisplayerLabel="légumes"
 				class="multiSelect"
 				placeholder="placeholder"
-				[clearable]="clearable"
 				[(ngModel)]="legumeSelection"
 				[options]="legumes"
 			/>

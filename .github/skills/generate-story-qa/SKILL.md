@@ -54,7 +54,7 @@ stories/qa/<composant>/
 ```typescript
 import { ChangeDetectionStrategy, Component } from '@angular/core';
 import { MonComposantComponent } from '@lucca-front/ng/mon-composant';
-import { Meta, StoryObj } from '@storybook/angular';
+import { Meta, StoryObj } from '@storybook/angular-vite';
 
 @Component({
 	selector: 'mon-composant-stories',

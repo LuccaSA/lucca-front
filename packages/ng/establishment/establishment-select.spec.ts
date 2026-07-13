@@ -1,8 +1,5 @@
 import { HttpClientModule } from '@angular/common/http';
-import { discardPeriodicTasks, fakeAsync, tick } from '@angular/core/testing';
-import { RenderTemplateOptions, fireEvent, render, screen } from '@testing-library/angular';
-import { createMock } from '@testing-library/angular/jest-utils';
-import '@testing-library/jest-dom';
+import { RenderTemplateOptions, fireEvent, render, screen, waitFor } from '@testing-library/angular';
 import userEvent from '@testing-library/user-event';
 import { axe } from 'jest-axe';
 import { of } from 'rxjs';
@@ -34,13 +31,15 @@ const estMock: ILuEstablishment[] = [
 	},
 ];
 
-const mockEstablishment = createMock(LuEstablishmentService);
-mockEstablishment.searchPaged = jest.fn(() => of(estMock));
-mockEstablishment.getAll = jest.fn(() => of(estMock));
-mockEstablishment.count = jest.fn(() => of(3));
-const mockLegalUnit = createMock(LuLegalUnitService);
-mockLegalUnit.getAll = jest.fn(() => of([]));
-mockLegalUnit.count = jest.fn(() => of(0));
+const mockEstablishment = {
+	searchPaged: vi.fn(() => of(estMock)),
+	getAll: vi.fn(() => of(estMock)),
+	count: vi.fn(() => of(3)),
+} as Partial<LuEstablishmentService> as LuEstablishmentService;
+const mockLegalUnit = {
+	getAll: vi.fn(() => of([])),
+	count: vi.fn(() => of(0)),
+} as Partial<LuLegalUnitService> as LuLegalUnitService;
 
 describe('establishment select', () => {
 	const testingStoryTemplate = `<label class="textfield mod-inline pr-u-marginInlineEnd200">
@@ -77,22 +76,20 @@ describe('establishment select', () => {
 			expect(dial).toBeInTheDocument();
 		});
 
-		it('should trigger search when clue is typed in', fakeAsync(async () => {
-			discardPeriodicTasks();
-
+		it('should trigger search when clue is typed in', async () => {
 			await render(testingStoryTemplate, rendererTemplateOptions);
-			const luSelectElement = await screen.findByTestId('lu-select');
+			const luSelectElement = screen.getByTestId('lu-select');
 
 			expect(luSelectElement).toBeInTheDocument();
 			fireEvent.click(luSelectElement);
-			tick(100); // debouncetime du composant
-			expect(mockEstablishment.searchPaged).toHaveBeenCalledWith(null, 0);
-			mockEstablishment.searchPaged.mockClear();
-			const input: HTMLInputElement = await screen.findByRole('textbox');
+			// clueControl.reset() emits null on open, not ''
+			await waitFor(() => expect(mockEstablishment.searchPaged).toHaveBeenCalledWith(null, 0));
+			vi.mocked(mockEstablishment.searchPaged).mockClear();
+
+			const input: HTMLInputElement = screen.getByRole('textbox');
 			fireEvent.input(input, { target: { value: 'FR' } });
-			tick(100); // debouncetime du composant
-			expect(mockEstablishment.searchPaged).toHaveBeenCalledWith('FR', 0);
-		}));
+			await waitFor(() => expect(mockEstablishment.searchPaged).toHaveBeenCalledWith('FR', 0));
+		});
 
 		it('should check a11y', async () => {
 			await render(testingStoryTemplate, rendererTemplateOptions);
@@ -112,36 +109,43 @@ describe('establishment select', () => {
 			expect(dial).toBeInTheDocument();
 		});
 
-		it('should select all establishment', fakeAsync(async () => {
+		it('should select all establishment', async () => {
 			await render(testingStoryTemplate, rendererTemplateOptions);
 
-			const luSelectElement = await screen.findByTestId('lu-select-multiple');
+			const luSelectElement = screen.getByTestId('lu-select-multiple');
 			expect(luSelectElement).toBeInTheDocument();
 
 			fireEvent.click(luSelectElement);
-			tick(100); // debouncetime du composant
+			// Wait for options to load after debounce fires
+			await screen.findByText('Lucca FR');
 			const button: HTMLButtonElement = await screen.findByRole('button', { name: 'Select all' });
 			fireEvent.click(button);
 			// // FIXME could not query by role checkbox
-			const selectedValues = screen.getByTestId('dialog-panel').querySelectorAll('.optionItem-value.is-selected');
-			expect(selectedValues).toHaveLength(3);
-		}));
+			await waitFor(() => {
+				const selectedValues = screen.getByTestId('dialog-panel').querySelectorAll('.optionItem-value.is-selected');
+				expect(selectedValues).toHaveLength(3);
+			});
+		});
 
-		it('should deselect all establishment', fakeAsync(async () => {
+		it('should deselect all establishment', async () => {
 			await render(testingStoryTemplate, rendererTemplateOptions);
-			const luSelectElement = await screen.findByTestId('lu-select-multiple');
+			const luSelectElement = screen.getByTestId('lu-select-multiple');
 			fireEvent.click(luSelectElement);
-			tick(300); // debouncetime du composant
+			// Wait for options to load after debounce fires
+			await screen.findByText('Lucca FR');
 			const t: HTMLButtonElement = await screen.findByRole('button', { name: 'Select all' });
 			fireEvent.click(t);
-			let selectedValues = screen.getByTestId('dialog-panel').querySelectorAll('.optionItem-value.is-selected');
-			expect(selectedValues).toHaveLength(3);
+			let selectedValues: NodeListOf<Element>;
+			await waitFor(() => {
+				selectedValues = screen.getByTestId('dialog-panel').querySelectorAll('.optionItem-value.is-selected');
+				expect(selectedValues).toHaveLength(3);
+			});
 			const button: HTMLButtonElement = screen.getByRole('button', { name: 'Deselect all' });
 			fireEvent.click(button);
 			// FIXME could not query by role checkbox
 			selectedValues = screen.getByTestId('dialog-panel').querySelectorAll('.optionItem-value.is-selected');
 			expect(selectedValues).toHaveLength(0);
-		}));
+		});
 
 		it('should check a11y', async () => {
 			await render(testingStoryTemplate, rendererTemplateOptions);

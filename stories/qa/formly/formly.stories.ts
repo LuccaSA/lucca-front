@@ -5,7 +5,7 @@ import { AbstractControl, FormGroup, ReactiveFormsModule } from '@angular/forms'
 import { ALuDateAdapter, LuNativeDateAdapter } from '@lucca-front/ng/core';
 import { provideLuFormly } from '@lucca-front/ng/formly';
 import { FormlyFieldConfig, FormlyModule } from '@ngx-formly/core';
-import { Meta, StoryObj, applicationConfig } from '@storybook/angular';
+import { Meta, StoryObj, applicationConfig } from '@storybook/angular-vite';
 
 @Component({
 	selector: 'formly-stories',

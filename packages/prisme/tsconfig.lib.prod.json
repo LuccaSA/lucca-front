@@ -4,13 +4,16 @@
   "compilerOptions": {
     "declarationMap": false,
     "paths": {
-      "@lucca/prisme/*": [
-        "dist/prisme/*",
-        "dist/prisme"
-      ]
+      "@lucca/prisme/*": ["../../dist/prisme/*", "../../dist/prisme"]
     }
   },
   "angularCompilerOptions": {
-    "compilationMode": "partial"
+    "compilationMode": "partial",
+    "extendedDiagnostics": {
+      "checks": {
+        "nullishCoalescingNotNullable": "suppress",
+        "optionalChainNotNullable": "suppress"
+      }
+    }
   }
 }

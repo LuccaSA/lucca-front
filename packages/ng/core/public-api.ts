@@ -3,6 +3,7 @@ export * from './event/index';
 export * from './group/index';
 export * from './id/index';
 export * from './misc';
+export * from './overlay/index';
 export * from './portal/index';
 export * from './route';
 export * from './signal';
