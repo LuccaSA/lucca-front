@@ -5,9 +5,11 @@ import {
 	ApprobationInboxDetailMainBlockComponent,
 	ApprobationInboxGroupComponent,
 	ApprobationInboxHeaderComponent,
+	ApprobationInboxIconsComponent,
 	ApprobationInboxItemComponent,
 	ApprobationInboxLinkComponent,
 	ApprobationInboxListComponent,
+	ApprobationInboxSubtleComponent,
 } from '@lucca-front/ng/approbation-inbox';
 
 import { CalloutComponent } from '@lucca-front/ng/callout';
@@ -69,6 +71,8 @@ export default {
 				ApprobationInboxButtonComponent,
 				ApprobationInboxDetailComponent,
 				ApprobationInboxHeaderComponent,
+				ApprobationInboxIconsComponent,
+				ApprobationInboxSubtleComponent,
 				ContainerComponent,
 				ListingComponent,
 				ListingItemComponent,
@@ -115,16 +119,15 @@ export default {
 				`,
 			],
 			template: `
-
 		<main role="main" class="mainLayout mod-wideM">
 			<div class="mainLayout-sidebar">
 				<lu-approbation-inbox-list label="Test" selectable noResultLabel="Votre recherche ne donne aucun résultat.">
 					<lu-filter-bar approbationInboxListFilterBar>
 						<lu-segmented-control *luFilterPillAddonBefore [(ngModel)]="example">
-								<ng-template #label0>Par vous <lu-numeric-badge [value]="12" /></ng-template>
-								<ng-template #label1>Par d’autres <lu-numeric-badge [value]="5" /></ng-template>
-								<lu-segmented-control-filter [label]="label0" value="0" />
-								<lu-segmented-control-filter [label]="label1" value="1" />
+							<ng-template #label0>Par vous <lu-numeric-badge [value]="12" /></ng-template>
+							<ng-template #label1>Par d’autres <lu-numeric-badge [value]="5" /></ng-template>
+							<lu-segmented-control-filter [label]="label0" value="0" />
+							<lu-segmented-control-filter [label]="label1" value="1" />
 						</lu-segmented-control>
 						<lu-filter-pill label="Inclure les collaborateurs partis" optional name="includeFormerEmployees">
 							<lu-checkbox-input [ngModel]="false" />
@@ -132,42 +135,39 @@ export default {
 					</lu-filter-bar>
 					<lu-approbation-inbox-list-group label="Group label">
 						<lu-approbation-inbox-list-item>
-							<a href="#" lu-approbation-inbox-list-action current>link</a>
+							<a href="#" lu-approbation-inbox-list-action approbationInboxListItemTitle current>link</a>
 						</lu-approbation-inbox-list-item>
 						<lu-approbation-inbox-list-item>
-							<a href="#" lu-approbation-inbox-list-action>link</a>
+							<a href="#" lu-approbation-inbox-list-action approbationInboxListItemTitle>link</a>
 						</lu-approbation-inbox-list-item>
-						<lu-approbation-inbox-list-item center>
+						<lu-approbation-inbox-list-item>
 							<lu-user-picture approbationInboxListItemIllustration />
 							<a href="#" lu-approbation-inbox-list-action approbationInboxListItemTitle>Title</a>
-							<p class="pr-u-bodyS pr-u-colorTextSubtle">Metadata</p>
+							Metadata
 							<ng-container approbationInboxListItemData>
-								<p class="pr-u-bodyM">Metadata</p>
-								<p class="pr-u-displayFlex pr-u-colorTextSubtle pr-u-gap25">
-									<lu-icon size="XS" class="pr-u-focusVisible pr-u-borderRadiusSmall" icon="formatClipperAttachment" alt="Contient une pièce jointe" luTooltip="Contient une pièce jointe" luTooltipOnlyForDisplay />
-									<lu-icon size="XS" class="pr-u-focusVisible pr-u-borderRadiusSmall" icon="bubbleSpeech" alt="Contient un commentaire" luTooltip="Contient un commentaire" luTooltipOnlyForDisplay />
-									<lu-icon size="XS" class="pr-u-focusVisible pr-u-borderRadiusSmall pr-u-textWarning" icon="signWarning" alt="Contient un avertissement" luTooltip="Contient un avertissement" luTooltipOnlyForDisplay />
-								</p>
+								<lu-approbation-inbox-list-icons [icons]="[ { icon: 'formatClipperAttachment', alt: 'Contient une pièce jointe' }, { icon: 'bubbleSpeech', alt: 'Contient un commentaire' }, { icon: 'signWarning', alt: 'Contient un avertissement', state: 'warning' } ]" />
+								Data
+								<lu-approbation-inbox-list-subtle>Data</lu-approbation-inbox-list-subtle>
 							</ng-container>
 						</lu-approbation-inbox-list-item>
 						<lu-approbation-inbox-list-item>
-							<button type="button" lu-approbation-inbox-list-action>button</button>
+							<button type="button" lu-approbation-inbox-list-action approbationInboxListItemTitle>button</button>
 						</lu-approbation-inbox-list-item>
 					</lu-approbation-inbox-list-group>
 					<lu-approbation-inbox-list-group label="Group label">
 						<lu-approbation-inbox-list-item>
-							<a href="#" lu-approbation-inbox-list-action>link</a>
+							<a href="#" lu-approbation-inbox-list-action approbationInboxListItemTitle>link</a>
 						</lu-approbation-inbox-list-item>
 						<lu-approbation-inbox-list-item>
-							<a href="#" lu-approbation-inbox-list-action>link</a>
+							<a href="#" lu-approbation-inbox-list-action approbationInboxListItemTitle>link</a>
 						</lu-approbation-inbox-list-item>
 						<lu-approbation-inbox-list-item>
-							<a href="#" lu-approbation-inbox-list-action>link</a>
+							<a href="#" lu-approbation-inbox-list-action approbationInboxListItemTitle>link</a>
 						</lu-approbation-inbox-list-item>
 					</lu-approbation-inbox-list-group>
 					<ng-container approbationInboxListFooter>
-						<button luButton type="submit">Approuver les dépenses</button>
-						<button luButton type="button">Transférer les demandes</button>
+						<button luButton type="submit">Approuver les objets</button>
+						<button luButton type="button">Transférer les objets</button>
 					</ng-container>
 				</lu-approbation-inbox-list>
 			</div>

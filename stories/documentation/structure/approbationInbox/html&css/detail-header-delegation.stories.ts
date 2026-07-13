@@ -15,6 +15,11 @@ function getTemplate(args: ApprobationInboxDetailHeaderStory): string {
 				<h1 class="approbationInbox-detail-header-main-infos-title">
 					<span class="approbationInbox-detail-header-main-infos-title-content">Title</span>
 				</h1>
+				<div class="approbationInbox-detail-header-main-delegation">
+					<span class="tag mod-M palette-none">
+						<span class="tag-content pr-u-ellipsis">Délégation</span>
+					</span>
+				</div>
 			</div>
 			<div class="approbationInbox-detail-header-main-actions">
 				<button type="button" class="button">Approuver</button>
@@ -30,6 +35,6 @@ const Template = (args: ApprobationInboxDetailHeaderStory) => ({
 	template: getTemplate(args),
 });
 
-export const Basic: StoryObj<ApprobationInboxDetailHeaderStory> = {
+export const Delegation: StoryObj<ApprobationInboxDetailHeaderStory> = {
 	render: Template,
 };

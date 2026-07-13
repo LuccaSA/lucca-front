@@ -1,7 +1,10 @@
 <div class="approbationInbox-list-content-groupOptional-header">
 	@if (selectable()) {
-		<!-- TODO inbox: trad -->
-		<lu-form-field label="Sélectionner…" hiddenLabel class="approbationInbox-list-content-groupOptional-header-formfieldOptional">
+		<lu-form-field
+			[label]="intl().selectGroup | intlParams: { label: label() }"
+			hiddenLabel
+			class="approbationInbox-list-content-groupOptional-header-formfieldOptional"
+		>
 			<lu-checkbox-input
 				[ngModel]="allChecked()"
 				[ngModelOptions]="{ standalone: true }"

@@ -1,12 +1,13 @@
 import { NgTemplateOutlet } from '@angular/common';
-import { booleanAttribute, ChangeDetectionStrategy, Component, computed, input, signal, ViewEncapsulation, WritableSignal } from '@angular/core';
+import { booleanAttribute, ChangeDetectionStrategy, Component, computed, inject, input, signal, ViewEncapsulation, WritableSignal } from '@angular/core';
 import { FormsModule } from '@angular/forms';
 import { BubbleIllustration, BubbleIllustrationComponent } from '@lucca-front/ng/bubble-illustration';
-import { generateId, PortalContent, PortalDirective } from '@lucca-front/ng/core';
+import { generateId, getIntlPluralLabel, intlInputOptions, IntlParamsPipe, LOCALE_PLURAL_RULES, PortalContent, PortalDirective } from '@lucca-front/ng/core';
 import { DividerComponent } from '@lucca-front/ng/divider';
 import { FormFieldComponent } from '@lucca-front/ng/form-field';
 import { CheckboxInputComponent } from '@lucca-front/ng/forms';
 import { ButtonComponent } from '@lucca/prisme/button';
+import { LU_APPROBATION_INBOX_LIST_TRANSLATIONS } from './approbation-inbox-list.translate';
 
 interface SelectableItem {
 	checked: WritableSignal<boolean>;
@@ -17,7 +18,7 @@ interface SelectableItem {
 	templateUrl: './approbation-inbox-list.component.html',
 	styleUrl: './approbation-inbox-list.component.scss',
 	encapsulation: ViewEncapsulation.None,
-	imports: [PortalDirective, FormsModule, FormFieldComponent, CheckboxInputComponent, DividerComponent, ButtonComponent, BubbleIllustrationComponent, NgTemplateOutlet],
+	imports: [PortalDirective, FormsModule, FormFieldComponent, CheckboxInputComponent, DividerComponent, ButtonComponent, BubbleIllustrationComponent, NgTemplateOutlet, IntlParamsPipe],
 	host: {
 		class: 'approbationInbox-list',
 		role: 'region',
@@ -26,6 +27,10 @@ interface SelectableItem {
 	changeDetection: ChangeDetectionStrategy.OnPush,
 })
 export class ApprobationInboxListComponent {
+	protected readonly intl = input(...intlInputOptions(LU_APPROBATION_INBOX_LIST_TRANSLATIONS));
+
+	private readonly pluralRules = inject(LOCALE_PLURAL_RULES);
+
 	readonly titleId = `approbationInboxListTitle-${generateId()}`;
 
 	readonly label = input.required<PortalContent>();
@@ -38,6 +43,8 @@ export class ApprobationInboxListComponent {
 	private readonly items = signal<SelectableItem[]>([]);
 
 	readonly checkedCount = computed(() => this.items().filter((item) => item.checked()).length);
+
+	readonly selectedCountLabel = computed(() => getIntlPluralLabel(this.pluralRules, this.intl().selectedCount, this.checkedCount()));
 
 	readonly empty = computed(() => this.items().length === 0);
 

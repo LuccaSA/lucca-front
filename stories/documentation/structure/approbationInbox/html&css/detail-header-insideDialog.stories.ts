@@ -8,7 +8,7 @@ export default {
 } as Meta;
 
 function getTemplate(args: ApprobationInboxDetailHeaderStory): string {
-	return `<div class="approbationInbox-detail">
+	return `<div class="approbationInbox-detail mod-insideDialog">
 	<header class="approbationInbox-detail-header">
 		<div class="approbationInbox-detail-header-main">
 			<div class="approbationInbox-detail-header-main-infos">
@@ -30,6 +30,6 @@ const Template = (args: ApprobationInboxDetailHeaderStory) => ({
 	template: getTemplate(args),
 });
 
-export const Basic: StoryObj<ApprobationInboxDetailHeaderStory> = {
+export const InsideDialog: StoryObj<ApprobationInboxDetailHeaderStory> = {
 	render: Template,
 };

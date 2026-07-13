@@ -22,25 +22,24 @@ import { generateInputs } from 'stories/helpers/stories';
 
 export default {
 	title: 'Documentation/Structure/Approbation Inbox/Angular/List',
-	// TODO inbox: descriptions
 	argTypes: {
 		group: {
-			description: '',
+			description: 'Groupe les éléments.',
 		},
 		groupLabel: {
-			description: '',
+			description: 'Titre du groupe (aussi reprit dans l’intitulé masqué de sa sélection).',
 			if: { arg: 'group', truthy: true },
 		},
 		checked: {
-			description: '',
+			description: 'Sélectionne un élément et affiche le footer de la sélection multiple.',
 			if: { arg: 'selectable', truthy: true },
 		},
 		itemCount: {
-			description: '',
+			description: 'Nombre d’éléments affichés dans la liste.',
 			control: { type: 'range', min: 0, max: 5 },
 		},
 		emptyIllustration: {
-			description: '',
+			description: 'Illustration affichée lorsque la liste est vide.',
 			options: ['', 'awardRibbon'],
 			control: {
 				type: 'select',
@@ -48,15 +47,42 @@ export default {
 			if: { arg: 'itemCount', eq: 0 },
 		},
 		emptyLabel: {
-			description: '',
+			description: 'Texte affiché lorsque la liste est vide.',
 			if: { arg: 'itemCount', eq: 0 },
 		},
 		emptyResetLabel: {
-			description: '',
+			description: 'Texte du bouton de réinitialisation des filtres affiché lorsque la liste est vide.',
 			if: { arg: 'itemCount', eq: 0 },
 		},
+		label: {
+			description: 'Titre de la liste.',
+		},
+		button: {
+			description: 'Exemple d’élément qui ne serait pas géré via un lien.',
+		},
+		current: {
+			description: 'Définit le lien (ou le bouton) comme l’élément courant affiché.',
+		},
+		filterBar: {
+			description: 'Exemple de barre de filtres.',
+		},
+		selectable: {
+			description: 'Active la sélection multiple',
+		},
+		data: {
+			description: 'Exemple de données complémentaires.',
+		},
+		illustration: {
+			description: 'Affiche un exemple d’illustration au début d’un élément.',
+		},
+		itemLabel: {
+			description: 'Titre de l’élément (aussi reprit dans l’intitulé masqué de sa sélection).',
+		},
+		center: {
+			description: 'Centre verticalement les données d’un élément',
+		},
 		icons: {
-			description: '',
+			description: 'Icônes affichées dans les données complémentaires.',
 			control: { type: 'object' },
 			if: { arg: 'data', truthy: true },
 		},
@@ -142,8 +168,8 @@ export default {
 		const footerTpl = args['selectable']
 			? `
 	<ng-container approbationInboxListFooter>
-		<button luButton type="submit">Approuver les dépenses</button>
-		<button luButton type="button">Transférer les demandes</button>
+		<button luButton type="submit">Approuver les objets</button>
+		<button luButton type="button">Transférer les objets</button>
 	</ng-container>
 `
 			: ``;

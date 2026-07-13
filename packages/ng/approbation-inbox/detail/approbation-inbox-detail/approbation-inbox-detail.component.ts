@@ -1,7 +1,6 @@
 import { booleanAttribute, ChangeDetectionStrategy, Component, computed, contentChild, inject, input, ViewEncapsulation } from '@angular/core';
 import { ContainerComponent } from '@lucca-front/ng/container';
 import { LuDialogRef } from '@lucca-front/ng/dialog';
-import { LuSafeExternalSvgPipe } from '@lucca-front/ng/safe-content';
 import { ApprobationInboxHeaderComponent } from '../approbation-inbox-detail-header/approbation-inbox-detail-header.component';
 
 @Component({
@@ -9,7 +8,7 @@ import { ApprobationInboxHeaderComponent } from '../approbation-inbox-detail-hea
 	templateUrl: './approbation-inbox-detail.component.html',
 	styleUrl: './approbation-inbox-detail.component.scss',
 	encapsulation: ViewEncapsulation.None,
-	imports: [ContainerComponent, LuSafeExternalSvgPipe],
+	imports: [ContainerComponent],
 	host: {
 		class: 'approbationInbox-detail',
 		role: 'region',

@@ -15,7 +15,7 @@ function getTemplate(args: ApprobationInboxListItemStory): string {
 				<div class="approbationInbox-list-content-items-item-content-info">
 					<div class="approbationInbox-list-content-items-item-content-info-main">
 						<div class="approbationInbox-list-content-items-item-content-info-main-title">
-							<a href="#" class="approbationInbox-list-content-items-item-content-action">Title</a>
+							<a href="#" class="approbationInbox-list-content-items-item-content-action" aria-current="page">Title</a>
 						</div>
 					</div>
 				</div>
@@ -36,6 +36,6 @@ const Template = (args: ApprobationInboxListItemStory) => ({
 	],
 });
 
-export const Basic: StoryObj<ApprobationInboxListItemStory> = {
+export const Current: StoryObj<ApprobationInboxListItemStory> = {
 	render: Template,
 };

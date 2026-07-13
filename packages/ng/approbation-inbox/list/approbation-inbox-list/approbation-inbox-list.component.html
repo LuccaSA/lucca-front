@@ -7,8 +7,7 @@
 	</header>
 	<div class="approbationInbox-list-content">
 		@if (selectable() && !empty()) {
-			<!-- TODO inbox: trad -->
-			<lu-form-field label="Tout sélectionner" class="approbationInbox-list-formSelectionOptional-formfield">
+			<lu-form-field [label]="intl().selectAll" class="approbationInbox-list-formSelectionOptional-formfield">
 				<lu-checkbox-input
 					[ngModel]="selectAllState() === true"
 					[ngModelOptions]="{ standalone: true }"
@@ -33,8 +32,7 @@
 	</div>
 	@if (selectable() && checkedCount() > 0) {
 		<footer class="approbationInbox-list-footer">
-			<!-- TODO inbox: trad -->
-			<h2 class="approbationInbox-list-footer-title">{{ checkedCount() }} dépenses sélectionnées</h2>
+			<h2 class="approbationInbox-list-footer-title">{{ selectedCountLabel() | intlParams: { count: checkedCount() } }}</h2>
 			<ng-content select="[approbationInboxListFooter]" />
 		</footer>
 	}

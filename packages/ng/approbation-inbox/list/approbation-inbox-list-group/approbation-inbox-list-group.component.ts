@@ -1,16 +1,18 @@
 import { ChangeDetectionStrategy, Component, computed, contentChildren, inject, input, model, ViewEncapsulation } from '@angular/core';
 import { FormsModule } from '@angular/forms';
+import { intlInputOptions, IntlParamsPipe } from '@lucca-front/ng/core';
 import { FormFieldComponent } from '@lucca-front/ng/form-field';
 import { CheckboxInputComponent } from '@lucca-front/ng/forms';
 import { IconComponent } from '@lucca/prisme/icon';
 import { ApprobationInboxItemComponent } from '../approbation-inbox-list-item/approbation-inbox-list-item.component';
 import { ApprobationInboxListComponent } from '../approbation-inbox-list/approbation-inbox-list.component';
+import { LU_APPROBATION_INBOX_LIST_GROUP_TRANSLATIONS } from './approbation-inbox-list-group.translate';
 
 @Component({
 	selector: 'lu-approbation-inbox-list-group',
 	templateUrl: './approbation-inbox-list-group.component.html',
 	encapsulation: ViewEncapsulation.None,
-	imports: [IconComponent, FormFieldComponent, CheckboxInputComponent, FormsModule],
+	imports: [IconComponent, FormFieldComponent, CheckboxInputComponent, FormsModule, IntlParamsPipe],
 	host: {
 		class: 'approbationInbox-list-content-groupOptional',
 		role: 'listitem',
@@ -18,6 +20,8 @@ import { ApprobationInboxListComponent } from '../approbation-inbox-list/approba
 	changeDetection: ChangeDetectionStrategy.OnPush,
 })
 export class ApprobationInboxGroupComponent {
+	protected readonly intl = input(...intlInputOptions(LU_APPROBATION_INBOX_LIST_GROUP_TRANSLATIONS));
+
 	private readonly list = inject(ApprobationInboxListComponent);
 
 	readonly selectable = computed(() => this.list?.selectable() ?? false);

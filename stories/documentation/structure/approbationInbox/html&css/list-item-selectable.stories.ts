@@ -11,6 +11,17 @@ function getTemplate(args: ApprobationInboxListItemStory): string {
 	return `<div class="approbationInbox-list">
 	<ul class="approbationInbox-list-content-items">
 		<li class="approbationInbox-list-content-items-item">
+			<div class="approbationInbox-list-content-items-item-formfieldOptional form-field">
+				<label class="formLabel pr-u-mask" for="input">
+					<span>Sélectionner « Title »</span>
+				</label>
+				<div class="checkboxField">
+					<input type="checkbox" class="checkboxField-input" id="input">
+					<span aria-hidden="true" class="checkboxField-icon">
+						<span class="checkboxField-icon-check"></span>
+					</span>
+				</div>
+			</div>
 			<div class="approbationInbox-list-content-items-item-content">
 				<div class="approbationInbox-list-content-items-item-content-info">
 					<div class="approbationInbox-list-content-items-item-content-info-main">
@@ -36,6 +47,6 @@ const Template = (args: ApprobationInboxListItemStory) => ({
 	],
 });
 
-export const Basic: StoryObj<ApprobationInboxListItemStory> = {
+export const Selectable: StoryObj<ApprobationInboxListItemStory> = {
 	render: Template,
 };

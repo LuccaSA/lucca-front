@@ -150,11 +150,13 @@
 			display: flex;
 			flex-direction: column;
 			gap: var(--components-approbationInbox-detail-main-gap);
+			flex-grow: 1;
 		}
 
 		.approbationInbox-detail-header {
 			display: flex;
 			gap: var(--pr-t-spacings-150);
+			min-block-size: var(--components-approbationInbox-detail-header-minBlockSize);
 		}
 
 		.approbationInbox-detail-header-main-actions {
@@ -207,9 +209,13 @@
 			@include text.ellipsis;
 
 			display: block;
+
+			&:focus-visible {
+				@include a11y.focusVisible($borderRadius: var(--pr-t-border-radius-small));
+			}
 		}
 
-		.approbationInbox-detail-header-start {
+		.approbationInbox-detail-header-illustration {
 			padding-block: var(--pr-t-spacings-25);
 			align-self: start;
 

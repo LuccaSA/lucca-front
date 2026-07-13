@@ -10,6 +10,13 @@ export default {
 function getTemplate(args: ApprobationInboxDetailHeaderStory): string {
 	return `<div class="approbationInbox-detail">
 	<header class="approbationInbox-detail-header">
+		<div class="approbationInbox-detail-header-illustration">
+			<div class="avatar mod-M">
+				<div class="avatar-picture" style="background-color: rgb(214, 92, 92)">
+					<span translate="no" class="avatar-picture-initials">VV</span>
+				</div>
+			</div>
+		</div>
 		<div class="approbationInbox-detail-header-main">
 			<div class="approbationInbox-detail-header-main-infos">
 				<h1 class="approbationInbox-detail-header-main-infos-title">
@@ -30,6 +37,6 @@ const Template = (args: ApprobationInboxDetailHeaderStory) => ({
 	template: getTemplate(args),
 });
 
-export const Basic: StoryObj<ApprobationInboxDetailHeaderStory> = {
+export const Illustration: StoryObj<ApprobationInboxDetailHeaderStory> = {
 	render: Template,
 };

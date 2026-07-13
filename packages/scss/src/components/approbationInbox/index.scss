@@ -28,7 +28,8 @@
 	}
 
 	@layer mods {
-		&:has(.approbationInbox-detail-header-main-infos-description:empty) {
+		&:has(.approbationInbox-detail-header-main-infos-description:empty),
+		&:not(:has(.approbationInbox-detail-header-main-infos-description)) {
 			@include noDescription;
 		}
 

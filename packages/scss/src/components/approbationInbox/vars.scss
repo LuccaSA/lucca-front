@@ -25,4 +25,5 @@
 	--components-approbationInbox-detail-header-main-delegation-marginBlockStart: var(--pr-t-spacings-150);
 	--components-approbationInbox-detail-empty-display: none;
 	--components-approbationInbox-detail-header-main-flexWrap: nowrap;
+	--components-approbationInbox-detail-header-minBlockSize: calc(var(--components-approbationInbox-detail-headerMain-padding) * 2 + var(--pr-t-spacings-600) + var(--pr-t-spacings-50));
 }

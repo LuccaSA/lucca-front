@@ -1,18 +1,18 @@
 import { Meta, StoryObj } from '@storybook/angular';
 
-interface ApprobationInboxListGroupStory {}
+interface ApprobationInboxListGroupCollapsedStory {}
 
 export default {
 	title: 'Documentation/Structure/Approbation Inbox/HTML&CSS/List/Group',
 	argTypes: {},
 } as Meta;
 
-function getTemplate(args: ApprobationInboxListGroupStory): string {
+function getTemplate(args: ApprobationInboxListGroupCollapsedStory): string {
 	return `<div class="approbationInbox-list">
 	<div class="approbationInbox-list-content">
 		<div class="approbationInbox-list-content-groupOptional">
 			<div class="approbationInbox-list-content-groupOptional-header">
-				<button type="button" class="approbationInbox-list-content-groupOptional-header-action" aria-expanded="true">
+				<button type="button" class="approbationInbox-list-content-groupOptional-header-action" aria-expanded="false">
 					<span class="approbationInbox-list-content-groupOptional-header-action-icon">
 						<span aria-hidden="true" class="lucca-icon icon-arrowChevronBottom mod-XS"></span>
 					</span>
@@ -47,22 +47,17 @@ function getTemplate(args: ApprobationInboxListGroupStory): string {
 						<div class="approbationInbox-list-content-items-item-content-info">Content</div>
 					</div>
 				</div>
-				<div class="approbationInbox-list-content-items-item">
-					<div class="approbationInbox-list-content-items-item-content">
-						<div class="approbationInbox-list-content-items-item-content-info">Content</div>
-					</div>
-				</div>
 			</div>
 		</div>
 	</div>
 </div>`;
 }
 
-const Template = (args: ApprobationInboxListGroupStory) => ({
+const Template = (args: ApprobationInboxListGroupCollapsedStory) => ({
 	props: args,
 	template: getTemplate(args),
 });
 
-export const Basic: StoryObj<ApprobationInboxListGroupStory> = {
+export const Collapsed: StoryObj<ApprobationInboxListGroupCollapsedStory> = {
 	render: Template,
 };

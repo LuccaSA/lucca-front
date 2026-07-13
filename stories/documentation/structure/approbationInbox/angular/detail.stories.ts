@@ -10,15 +10,38 @@ import { generateInputs } from 'stories/helpers/stories';
 
 export default {
 	title: 'Documentation/Structure/Approbation Inbox/Angular/Detail',
-	// TODO inbox: descriptions
 	argTypes: {
-		blockCount: {
-			description: '',
-			control: { type: 'range', min: 0, max: 5 },
+		insideDialog: {
+			description: 'Adapte l’affichage du composant à une utilisation dans une dialog.',
+		},
+		label: {
+			description: 'Titre affiché dans l’en-tête du composant.',
+		},
+		illustration: {
+			description: 'Affiche une illustration au début de l’en-tête.',
+		},
+		headerContent: {
+			description: 'Exemple d’informations complémentaires possibles sous le titre de l’en-tête.',
+		},
+		delegation: {
+			description: 'Affiche une étiquette indiquant que l’objet est traité en délégation.',
+		},
+		moreActions: {
+			description: 'Affiche un bouton d’actions tertaires sous forme de menu déroulant.',
+		},
+		callout: {
+			description: 'Affiche un callout d’avertissement dans le contenu principal.',
 		},
 		calloutLabel: {
-			description: '',
+			description: 'Texte affiché dans le callout.',
 			if: { arg: 'callout', truthy: true },
+		},
+		blockLabel: {
+			description: 'Titre des blocs de contenu supplémentaires.',
+		},
+		blockCount: {
+			description: 'Nombre de blocs affichés dans le contenu principal.',
+			control: { type: 'range', min: 0, max: 5 },
 		},
 	},
 	decorators: [
