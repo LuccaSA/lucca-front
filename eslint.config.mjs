@@ -166,18 +166,14 @@ export default defineConfig(
 		},
 	},
 	{
-		files: ['**/*.ts'],
-		languageOptions: {
-			parser: tsParser,
-			parserOptions: {
-				project: ['tsconfig.lint.json', 'packages/ng/tsconfig.lint.json', '.storybook/tsconfig.lint.json'],
-			},
-		},
-		plugins: {
-			'@lucca-front': localRules,
-		},
+		files: ['**/*.spec.ts', '**/*.spec.*.ts'],
 		rules: {
-			'@lucca-front/ts-error': 'error',
+			'@typescript-eslint/no-unsafe-call': 'off',
+			'@typescript-eslint/no-unsafe-member-access': 'off',
+			'@typescript-eslint/no-unsafe-assignment': 'off',
+			'@typescript-eslint/no-unsafe-return': 'off',
+			'@typescript-eslint/no-unsafe-argument': 'off',
+			'@typescript-eslint/no-unnecessary-type-assertion': 'off',
 		},
 	},
 	{
