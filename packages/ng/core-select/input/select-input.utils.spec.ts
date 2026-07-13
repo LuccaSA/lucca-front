@@ -1,4 +1,5 @@
 import { fakeAsync, tick } from '@angular/core/testing';
+import type { Mock } from 'vitest';
 import { BehaviorSubject, of, Subject, throwError } from 'rxjs';
 import { SelectDataSource } from '../select.model';
 import { buildOptionsFromDataSource, BuildOptionsFromDataSourceDeps } from './select-input.utils';
@@ -12,21 +13,21 @@ function createDeps(): {
 	nextPage$: Subject<void>;
 	clue$: Subject<string | null>;
 	isPanelOpen$: BehaviorSubject<boolean>;
-	setLoading: jest.Mock;
+	setLoading: Mock;
 	deps: BuildOptionsFromDataSourceDeps;
 } {
 	const nextPage$ = new Subject<void>();
 	const clue$ = new Subject<string | null>();
 	const isPanelOpen$ = new BehaviorSubject<boolean>(false);
-	const setLoading = jest.fn();
+	const setLoading = vi.fn();
 	return { nextPage$, clue$, isPanelOpen$, setLoading, deps: { nextPage$, clue$, isPanelOpen$, setLoading } };
 }
 
-function createDs(pages: TestOption[][]): SelectDataSource<TestOption> & { getOptions: jest.Mock; reset: jest.Mock } {
+function createDs(pages: TestOption[][]): SelectDataSource<TestOption> & { getOptions: Mock; reset: Mock } {
 	let callIndex = 0;
 	return {
-		getOptions: jest.fn(() => of(pages[callIndex++] ?? [])),
-		reset: jest.fn(),
+		getOptions: vi.fn(() => of(pages[callIndex++] ?? [])),
+		reset: vi.fn(),
 	};
 }
 
@@ -158,8 +159,8 @@ describe('buildOptionsFromDataSource', () => {
 	it('should not debounce empty clue even when clueDebounceMs is set', fakeAsync(() => {
 		const debounceMs = 300;
 		const { deps, isPanelOpen$, clue$ } = createDeps();
-		const ds: SelectDataSource<TestOption> & { getOptions: jest.Mock } = {
-			getOptions: jest.fn(() => of([{ id: 1, name: 'A' }])),
+		const ds: SelectDataSource<TestOption> & { getOptions: Mock } = {
+			getOptions: vi.fn(() => of([{ id: 1, name: 'A' }])),
 			clueDebounceMs: debounceMs,
 		};
 
@@ -178,8 +179,8 @@ describe('buildOptionsFromDataSource', () => {
 	it('should debounce non-empty clue when clueDebounceMs is set', fakeAsync(() => {
 		const debounceMs = 300;
 		const { deps, isPanelOpen$, clue$ } = createDeps();
-		const ds: SelectDataSource<TestOption> & { getOptions: jest.Mock } = {
-			getOptions: jest.fn(() => of([{ id: 1, name: 'A' }])),
+		const ds: SelectDataSource<TestOption> & { getOptions: Mock } = {
+			getOptions: vi.fn(() => of([{ id: 1, name: 'A' }])),
 			clueDebounceMs: debounceMs,
 		};
 
@@ -201,7 +202,7 @@ describe('buildOptionsFromDataSource', () => {
 	it('should return empty array on getOptions error', fakeAsync(() => {
 		const { deps, isPanelOpen$, clue$ } = createDeps();
 		const ds: SelectDataSource<TestOption> = {
-			getOptions: jest.fn(() => throwError(() => new Error('API error'))),
+			getOptions: vi.fn(() => throwError(() => new Error('API error'))),
 		};
 		const emitted: (readonly TestOption[])[] = [];
 
@@ -237,8 +238,8 @@ describe('buildOptionsFromDataSource', () => {
 
 	it('should reset accumulated options when clue changes', fakeAsync(() => {
 		const { deps, isPanelOpen$, clue$ } = createDeps();
-		const ds: SelectDataSource<TestOption> & { getOptions: jest.Mock } = {
-			getOptions: jest
+		const ds: SelectDataSource<TestOption> & { getOptions: Mock } = {
+			getOptions: vi
 				.fn()
 				.mockReturnValueOnce(of([{ id: 1, name: 'First clue result' }]))
 				.mockReturnValueOnce(of([{ id: 2, name: 'Second clue result' }])),
@@ -262,8 +263,8 @@ describe('buildOptionsFromDataSource', () => {
 
 	it('should pass clue and page number to getOptions', fakeAsync(() => {
 		const { deps, isPanelOpen$, clue$, nextPage$ } = createDeps();
-		const ds: SelectDataSource<TestOption> & { getOptions: jest.Mock } = {
-			getOptions: jest
+		const ds: SelectDataSource<TestOption> & { getOptions: Mock } = {
+			getOptions: vi
 				.fn()
 				.mockReturnValueOnce(of([{ id: 1, name: 'A' }]))
 				.mockReturnValueOnce(of([{ id: 2, name: 'B' }]))

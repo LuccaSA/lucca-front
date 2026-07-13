@@ -82,8 +82,8 @@ describe('establishment select', () => {
 
 			expect(luSelectElement).toBeInTheDocument();
 			fireEvent.click(luSelectElement);
-			// clueControl.reset() emits null on open, not ''
-			await waitFor(() => expect(mockEstablishment.searchPaged).toHaveBeenCalledWith(null, 0));
+			// clue is normalized to '' before reaching the data source (see buildOptionsFromDataSource)
+			await waitFor(() => expect(mockEstablishment.searchPaged).toHaveBeenCalledWith('', 0));
 			vi.mocked(mockEstablishment.searchPaged).mockClear();
 
 			const input: HTMLInputElement = screen.getByRole('textbox');
