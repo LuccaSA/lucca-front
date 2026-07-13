@@ -194,7 +194,7 @@ export class PhoneNumberInputComponent implements ControlValueAccessor, Validato
 				this.#onChange?.(number);
 				return;
 			} catch {
-				this.#onChange?.(displayedNumber as E164Number);
+				this.#onChange?.(displayedNumber);
 			}
 		}
 	}
