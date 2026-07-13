@@ -1,0 +1,104 @@
+<table class="demo-QAtable">
+	<tbody>
+		<tr>
+			<td></td>
+			<td>
+				<div class="demo-QAtable-list">Angular</div>
+			</td>
+		</tr>
+		<tr>
+			<td>Default</td>
+			<td>
+				<div class="demo-QAtable-list">
+					<lu-segmented-control-tabs>
+						<lu-segmented-control-tabs-panel label="Lorem" value="0">Content Lorem</lu-segmented-control-tabs-panel>
+						<lu-segmented-control-tabs-panel label="Ipsum" value="1">Content Ipsum</lu-segmented-control-tabs-panel>
+						<lu-segmented-control-tabs-panel label="Dolor sit amet" value="2">Content Dolor sit amet</lu-segmented-control-tabs-panel>
+					</lu-segmented-control-tabs>
+				</div>
+			</td>
+		</tr>
+		<tr>
+			<td>Deuxième onglet actif</td>
+			<td>
+				<div class="demo-QAtable-list">
+					<lu-segmented-control-tabs active="1">
+						<lu-segmented-control-tabs-panel label="Lorem" value="0">Content Lorem</lu-segmented-control-tabs-panel>
+						<lu-segmented-control-tabs-panel label="Ipsum" value="1">Content Ipsum</lu-segmented-control-tabs-panel>
+						<lu-segmented-control-tabs-panel label="Dolor sit amet" value="2">Content Dolor sit amet</lu-segmented-control-tabs-panel>
+					</lu-segmented-control-tabs>
+				</div>
+			</td>
+		</tr>
+		<tr>
+			<td>Numeric badge</td>
+			<td>
+				<div class="demo-QAtable-list">
+					<ng-template #labelWithBadge>Lorem <lu-numeric-badge value="8" /></ng-template>
+					<lu-segmented-control-tabs>
+						<lu-segmented-control-tabs-panel [label]="labelWithBadge" value="0">Content Lorem</lu-segmented-control-tabs-panel>
+						<lu-segmented-control-tabs-panel label="Ipsum" value="1">Content Ipsum</lu-segmented-control-tabs-panel>
+						<lu-segmented-control-tabs-panel label="Dolor sit amet" value="2">Content Dolor sit amet</lu-segmented-control-tabs-panel>
+					</lu-segmented-control-tabs>
+				</div>
+			</td>
+		</tr>
+		<tr>
+			<td>Size S</td>
+			<td>
+				<div class="demo-QAtable-list">
+					<lu-segmented-control-tabs small>
+						<lu-segmented-control-tabs-panel label="Lorem" value="0">Content Lorem</lu-segmented-control-tabs-panel>
+						<lu-segmented-control-tabs-panel label="Ipsum" value="1">Content Ipsum</lu-segmented-control-tabs-panel>
+						<lu-segmented-control-tabs-panel label="Dolor sit amet" value="2">Content Dolor sit amet</lu-segmented-control-tabs-panel>
+					</lu-segmented-control-tabs>
+				</div>
+			</td>
+		</tr>
+		<tr>
+			<td>Vertical</td>
+			<td>
+				<div class="demo-QAtable-list">
+					<lu-segmented-control-tabs vertical>
+						<lu-segmented-control-tabs-panel label="Lorem" value="0">Content Lorem</lu-segmented-control-tabs-panel>
+						<lu-segmented-control-tabs-panel label="Ipsum" value="1">Content Ipsum</lu-segmented-control-tabs-panel>
+						<lu-segmented-control-tabs-panel label="Dolor sit amet" value="2">Content Dolor sit amet</lu-segmented-control-tabs-panel>
+					</lu-segmented-control-tabs>
+				</div>
+			</td>
+		</tr>
+		<tr>
+			<td>Vertical + S</td>
+			<td>
+				<div class="demo-QAtable-list">
+					<lu-segmented-control-tabs vertical small>
+						<lu-segmented-control-tabs-panel label="Lorem" value="0">Content Lorem</lu-segmented-control-tabs-panel>
+						<lu-segmented-control-tabs-panel label="Ipsum" value="1">Content Ipsum</lu-segmented-control-tabs-panel>
+						<lu-segmented-control-tabs-panel label="Dolor sit amet" value="2">Content Dolor sit amet</lu-segmented-control-tabs-panel>
+					</lu-segmented-control-tabs>
+				</div>
+			</td>
+		</tr>
+		<tr>
+			<td>Libellés longs</td>
+			<td>
+				<div class="demo-QAtable-list">
+					<lu-segmented-control-tabs>
+						<lu-segmented-control-tabs-panel label="Lorem ipsum dolor sit amet consectetur" value="0">
+							Content Lorem
+						</lu-segmented-control-tabs-panel>
+						<lu-segmented-control-tabs-panel label="Consectetur adipisicing elit sed do eiusmod" value="1">
+							Content Ipsum
+						</lu-segmented-control-tabs-panel>
+						<lu-segmented-control-tabs-panel label="Tempor incididunt ut labore et dolore magna" value="2">
+							Content Dolor sit amet
+						</lu-segmented-control-tabs-panel>
+					</lu-segmented-control-tabs>
+				</div>
+			</td>
+		</tr>
+	</tbody>
+</table>
+
+<!-- To tell the ui-diff tool that the page has finished rendering -->
+<span id="ready"></span>

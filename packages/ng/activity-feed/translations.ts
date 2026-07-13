@@ -23,4 +23,7 @@
 	pt: {
 		replaceByAlt: 'foi substituído por',
 	},
+	pl: {
+		replaceByAlt: 'został zastąpiony przez',
+	},
 };

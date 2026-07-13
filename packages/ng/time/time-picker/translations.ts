@@ -1,28 +1,28 @@
 ﻿export const Translations = {
 	pt: {
-		timePickerHours: 'Horas',
+		timePickerHours: 'horas',
 		timePickerTimeSeparator: ':',
-		timePickerMinutes: 'Minutos',
+		timePickerMinutes: 'minutos',
 	},
 	es: {
-		timePickerHours: 'Horas',
+		timePickerHours: 'horas',
 		timePickerTimeSeparator: ':',
-		timePickerMinutes: 'Minutos',
+		timePickerMinutes: 'minutos',
 	},
 	'nl-BE': {
-		timePickerHours: 'Uren',
+		timePickerHours: 'uren',
 		timePickerTimeSeparator: ':',
-		timePickerMinutes: 'Minuten',
+		timePickerMinutes: 'minuten',
 	},
 	nl: {
-		timePickerHours: 'Uren',
+		timePickerHours: 'uren',
 		timePickerTimeSeparator: ':',
-		timePickerMinutes: 'Minuten',
+		timePickerMinutes: 'minuten',
 	},
 	it: {
-		timePickerHours: 'Ore',
+		timePickerHours: 'ore',
 		timePickerTimeSeparator: ':',
-		timePickerMinutes: 'Minuti',
+		timePickerMinutes: 'minuti',
 	},
 	de: {
 		timePickerHours: 'Stunden',
@@ -30,13 +30,18 @@
 		timePickerMinutes: 'Minuten',
 	},
 	fr: {
-		timePickerHours: 'Heures',
+		timePickerHours: 'heures',
 		timePickerTimeSeparator: ':',
-		timePickerMinutes: 'Minutes',
+		timePickerMinutes: 'minutes',
 	},
 	en: {
-		timePickerHours: 'Hours',
+		timePickerHours: 'hours',
 		timePickerTimeSeparator: ':',
-		timePickerMinutes: 'Minutes',
+		timePickerMinutes: 'minutes',
+	},
+	pl: {
+		timePickerHours: 'godziny',
+		timePickerTimeSeparator: ':',
+		timePickerMinutes: 'minuty',
 	},
 };

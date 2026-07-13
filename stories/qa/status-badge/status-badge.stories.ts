@@ -1,6 +1,6 @@
 import { ChangeDetectionStrategy, Component } from '@angular/core';
 import { StatusBadgeComponent } from '@lucca-front/ng/status-badge';
-import { Meta, StoryObj } from '@storybook/angular';
+import { Meta, StoryObj } from '@storybook/angular-vite';
 
 @Component({
 	selector: 'status-badge-stories',

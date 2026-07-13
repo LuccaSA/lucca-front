@@ -5,7 +5,7 @@ description: 'Génère un markdown pour une version spécifique à destination d
 
 # Skill : generate-version-changelog-markdown
 
-Génère le corps markdown d'une GitHub Release pour lucca-front, à partir d'une liste de PRs associée à une version spécifique (mergées ou non). Le markdown suit une structure précise avec des sections dédiées aux actions de mise à jour, aux nouvelles fonctionnalités, aux corrections, etc. Chaque entrée est formatée de manière concise avec un lien vers la PR correspondante.
+Génère le corps markdown d'une GitHub Release pour lucca-front, à partir d'une liste de PRs associée à une version spécifique (mergées, ou ouvertes et non encore mergées). Les PRs fermées sans merge sont exclues. Le markdown suit une structure précise avec des sections dédiées aux actions de mise à jour, aux nouvelles fonctionnalités, aux corrections, etc. Chaque entrée est formatée de manière concise avec un lien vers la PR correspondante.
 
 ---
 
@@ -74,6 +74,10 @@ https://github.com/LuccaSA/lucca-front/milestone/<id>?closed=1
 ## Format de sortie
 
 Toujours encadrer le résultat dans un bloc de code markdown :
+
+Après avoir généré le bloc markdown, indiquer sur une ligne séparée le nombre de PRs incluses dans le changelog, par exemple :
+
+> 42 PRs incluses dans ce changelog.
 
 ````
 ```markdown

@@ -23,8 +23,8 @@
 		.appLayout-navSide {
 			min-inline-size: 0;
 			grid-area: navSide;
-			overflow-y: var(--components-appLayout-navSide-overflowX);
-			overflow-x: var(--components-appLayout-navSide-overflowY);
+			overflow-x: var(--components-appLayout-navSide-overflowX);
+			overflow-y: var(--components-appLayout-navSide-overflowY);
 
 			&:focus-visible {
 				@include a11y.focusVisible($offset: -4px);

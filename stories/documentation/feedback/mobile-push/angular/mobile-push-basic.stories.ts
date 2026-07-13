@@ -1,8 +1,8 @@
 import { IconComponent } from '@lucca-front/ng/icon';
 import { MobilePushComponent } from '@lucca-front/ng/mobile-push';
-import { Meta, moduleMetadata, StoryObj } from '@storybook/angular';
-import { createTestStory, generateInputs } from 'stories/helpers/stories';
-import { waitForAngular } from 'stories/helpers/test';
+import { Meta, moduleMetadata, StoryObj } from '@storybook/angular-vite';
+import { createTestStory, generateInputs } from '@/helpers/stories';
+import { waitForAngular } from '@/helpers/test';
 import { expect, within } from 'storybook/test';
 
 export default {

@@ -5,7 +5,7 @@ import { FormsModule } from '@angular/forms';
 import { provideAnimations } from '@angular/platform-browser/animations';
 import { ALuDateAdapter, LuNativeDateAdapter } from '@lucca-front/ng/core';
 import { LuCalendarInputComponent, LuDateAdapterPipe } from '@lucca-front/ng/date';
-import { applicationConfig, Meta, StoryObj } from '@storybook/angular';
+import { applicationConfig, Meta, StoryObj } from '@storybook/angular-vite';
 
 registerLocaleData(localesFr);
 

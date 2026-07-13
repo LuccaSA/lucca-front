@@ -2,61 +2,656 @@
 	<tbody>
 		<tr>
 			<td></td>
-			<td style="width: 100%">
-				<div class="demo-QAtable-list">Angular</div>
-			</td>
+			<td style="inline-size: 50%">Default</td>
+			<td style="inline-size: 50%">Compact</td>
 		</tr>
 		<tr>
 			<td>Default</td>
 			<td>
-				<div class="demo-QAtable-list">
-					<lu-form-field label="Couleur" inlineMessage="Helper text">
-						<lu-color-input [colors]="colorDecoratives500" [ngModel]="null" />
-					</lu-form-field>
-					<lu-form-field label="Couleur" inlineMessage="Helper text">
-						<lu-color-input [colors]="colorDecoratives500" [(ngModel)]="selectedColor" />
-					</lu-form-field>
-				</div>
+				<lu-form-field label="Couleur" inlineMessage="Helper text">
+					<lu-color-input [colors]="colorDecoratives500" [ngModel]="null" />
+				</lu-form-field>
+			</td>
+			<td>
+				<lu-form-field label="Couleur" inlineMessage="Helper text">
+					<lu-color-input compact [colors]="colorDecoratives500" [ngModel]="null" />
+				</lu-form-field>
 			</td>
 		</tr>
 		<tr>
-			<td>Compact</td>
+			<td>Selected</td>
 			<td>
-				<div class="demo-QAtable-list">
-					<lu-form-field label="Couleur">
-						<lu-color-input compact [colors]="colorDecoratives500" [ngModel]="null" />
-					</lu-form-field>
-					<lu-form-field label="Couleur">
-						<lu-color-input compact [colors]="colorDecoratives500" [(ngModel)]="selectedColor" />
-					</lu-form-field>
-				</div>
+				<lu-form-field label="Couleur" inlineMessage="Helper text">
+					<lu-color-input [colors]="colorDecoratives500" [(ngModel)]="selectedColor" />
+				</lu-form-field>
+			</td>
+			<td>
+				<lu-form-field label="Couleur" inlineMessage="Helper text">
+					<lu-color-input compact [colors]="colorDecoratives500" [(ngModel)]="selectedColor" />
+				</lu-form-field>
 			</td>
 		</tr>
 		<tr>
 			<td>Clearable</td>
 			<td>
-				<div class="demo-QAtable-list">
-					<lu-form-field label="Couleur">
-						<lu-color-input clearable [colors]="colorDecoratives500" [(ngModel)]="selectedColor" />
-					</lu-form-field>
-					<lu-form-field label="Couleur">
-						<lu-color-input clearable compact [colors]="colorDecoratives500" [(ngModel)]="selectedColor" />
-					</lu-form-field>
-				</div>
+				<lu-form-field label="Couleur">
+					<lu-color-input clearable [colors]="colorDecoratives500" [(ngModel)]="selectedColor" />
+				</lu-form-field>
+			</td>
+			<td>
+				<lu-form-field label="Couleur">
+					<lu-color-input clearable compact [colors]="colorDecoratives500" [(ngModel)]="selectedColor" />
+				</lu-form-field>
 			</td>
 		</tr>
 		<tr>
-			<td>Avec bordures</td>
+			<td>Borders</td>
 			<td>
-				<div class="demo-QAtable-list">
-					<lu-form-field label="Couleur">
-						<lu-color-input [colors]="colorDecoratives50" [ngModel]="null" />
-					</lu-form-field>
-					<lu-form-field label="Couleur">
-						<lu-color-input [colors]="colorDecoratives50" [(ngModel)]="selectedBorderColor" />
-					</lu-form-field>
+				<lu-form-field label="Couleur">
+					<lu-color-input [colors]="colorDecoratives50" [ngModel]="selectedBorderColor" />
+				</lu-form-field>
+			</td>
+			<td>
+				<lu-form-field label="Couleur">
+					<lu-color-input compact [colors]="colorDecoratives50" [(ngModel)]="selectedBorderColor" />
+				</lu-form-field>
+			</td>
+		</tr>
+		<tr>
+			<td>Panel</td>
+			<td>
+				<div class="demo-QAtable-list" style="gap: 1rem">
+					<div class="colorPanel" style="max-inline-size: 17rem !important">
+						<div class="lu-picker-panel lu-option-picker-panel">
+							<div class="lu-picker-content">
+								<div role="listbox" class="lu-picker-content-option">
+									<div role="option" class="optionItem is-highlighted" id="lu-select-260-option-0" aria-selected="false">
+										<div class="optionItem-value">
+											<div class="color mod-XL">
+												<span
+													class="color-value"
+													[attr.style]="'--components-color-value-backgroundColor: var(--palettes-blueberry-500)'"
+												></span>
+												<span class="color-name pr-u-mask">Myrtille</span>
+											</div>
+										</div>
+									</div>
+									<div role="option" class="optionItem" id="lu-select-260-option-1" aria-selected="false">
+										<div class="optionItem-value">
+											<div class="color mod-XL">
+												<span
+													class="color-value"
+													[attr.style]="'--components-color-value-backgroundColor: var(--palettes-cucumber-500)'"
+												></span>
+												<span class="color-name pr-u-mask">Concombre</span>
+											</div>
+										</div>
+									</div>
+									<div role="option" class="optionItem" id="lu-select-260-option-2" aria-selected="true">
+										<div class="optionItem-value">
+											<div class="color mod-XL">
+												<span
+													class="color-value"
+													[attr.style]="'--components-color-value-backgroundColor: var(--palettes-glacier-500)'"
+												></span>
+												<span class="color-name pr-u-mask">Glacier</span>
+											</div>
+										</div>
+									</div>
+									<div role="option" class="optionItem" id="lu-select-260-option-3" aria-selected="false">
+										<div class="optionItem-value">
+											<div class="color mod-XL">
+												<span
+													class="color-value"
+													[attr.style]="'--components-color-value-backgroundColor: var(--palettes-grape-500)'"
+												></span>
+												<span class="color-name pr-u-mask">Raisin</span>
+											</div>
+										</div>
+									</div>
+									<div role="option" class="optionItem" id="lu-select-260-option-4" aria-selected="false">
+										<div class="optionItem-value">
+											<div class="color mod-XL">
+												<span
+													class="color-value"
+													[attr.style]="'--components-color-value-backgroundColor: var(--palettes-kiwi-500)'"
+												></span>
+												<span class="color-name pr-u-mask">Kiwi</span>
+											</div>
+										</div>
+									</div>
+									<div role="option" class="optionItem" id="lu-select-260-option-5" aria-selected="false">
+										<div class="optionItem-value">
+											<div class="color mod-XL">
+												<span
+													class="color-value"
+													[attr.style]="'--components-color-value-backgroundColor: var(--palettes-lagoon-500)'"
+												></span>
+												<span class="color-name pr-u-mask">Lagon</span>
+											</div>
+										</div>
+									</div>
+									<div role="option" class="optionItem" id="lu-select-260-option-6" aria-selected="false">
+										<div class="optionItem-value">
+											<div class="color mod-XL">
+												<span
+													class="color-value"
+													[attr.style]="'--components-color-value-backgroundColor: var(--palettes-lavender-500)'"
+												></span>
+												<span class="color-name pr-u-mask">Lavande</span>
+											</div>
+										</div>
+									</div>
+									<div role="option" class="optionItem" id="lu-select-260-option-7" aria-selected="false">
+										<div class="optionItem-value">
+											<div class="color mod-XL">
+												<span
+													class="color-value"
+													[attr.style]="'--components-color-value-backgroundColor: var(--palettes-lime-500)'"
+												></span>
+												<span class="color-name pr-u-mask">Citron</span>
+											</div>
+										</div>
+									</div>
+									<div role="option" class="optionItem" id="lu-select-260-option-8" aria-selected="false">
+										<div class="optionItem-value">
+											<div class="color mod-XL">
+												<span
+													class="color-value"
+													[attr.style]="'--components-color-value-backgroundColor: var(--palettes-mint-500)'"
+												></span>
+												<span class="color-name pr-u-mask">Menthe</span>
+											</div>
+										</div>
+									</div>
+									<div role="option" class="optionItem" id="lu-select-260-option-9" aria-selected="false">
+										<div class="optionItem-value">
+											<div class="color mod-XL">
+												<span
+													class="color-value"
+													[attr.style]="'--components-color-value-backgroundColor: var(--palettes-pineapple-500)'"
+												></span>
+												<span class="color-name pr-u-mask">Ananas</span>
+											</div>
+										</div>
+									</div>
+									<div role="option" class="optionItem" id="lu-select-260-option-10" aria-selected="false">
+										<div class="optionItem-value">
+											<div class="color mod-XL">
+												<span
+													class="color-value"
+													[attr.style]="'--components-color-value-backgroundColor: var(--palettes-pumpkin-500)'"
+												></span>
+												<span class="color-name pr-u-mask">Citrouille</span>
+											</div>
+										</div>
+									</div>
+									<div role="option" class="optionItem" id="lu-select-260-option-11" aria-selected="false">
+										<div class="optionItem-value">
+											<div class="color mod-XL">
+												<span
+													class="color-value"
+													[attr.style]="'--components-color-value-backgroundColor: var(--palettes-watermelon-500)'"
+												></span>
+												<span class="color-name pr-u-mask">Pastèque</span>
+											</div>
+										</div>
+									</div>
+								</div>
+								<div>
+									<div class="colorPanel-highlighted">
+										<span class="pr-u-colorTextSubtle">Color: </span><span class="pr-u-ellipsis">Glacier</span>
+									</div>
+								</div>
+							</div>
+						</div>
+					</div>
+					<div class="colorPanel" style="max-inline-size: 17rem !important">
+						<div class="lu-picker-panel lu-option-picker-panel">
+							<div class="lu-picker-content">
+								<div role="listbox" class="lu-picker-content-option">
+									<div role="option" class="optionItem is-highlighted" id="lu-select-260-option-0" aria-selected="false">
+										<div class="optionItem-value">
+											<div class="color mod-XL">
+												<span
+													class="color-value"
+													[attr.style]="'--components-color-value-backgroundColor: var(--palettes-blueberry-500)'"
+												></span>
+												<span class="color-name pr-u-mask">Myrtille</span>
+											</div>
+										</div>
+									</div>
+									<div role="option" class="optionItem" id="lu-select-260-option-1" aria-selected="false">
+										<div class="optionItem-value">
+											<div class="color mod-XL">
+												<span
+													class="color-value"
+													[attr.style]="'--components-color-value-backgroundColor: var(--palettes-cucumber-500)'"
+												></span>
+												<span class="color-name pr-u-mask">Concombre</span>
+											</div>
+										</div>
+									</div>
+									<div role="option" class="optionItem" id="lu-select-260-option-2" aria-selected="false">
+										<div class="optionItem-value">
+											<div class="color mod-XL">
+												<span
+													class="color-value"
+													[attr.style]="'--components-color-value-backgroundColor: var(--palettes-glacier-500)'"
+												></span>
+												<span class="color-name pr-u-mask">Glacier</span>
+											</div>
+										</div>
+									</div>
+									<div role="option" class="optionItem" id="lu-select-260-option-3" aria-selected="false">
+										<div class="optionItem-value">
+											<div class="color mod-XL">
+												<span
+													class="color-value"
+													[attr.style]="'--components-color-value-backgroundColor: var(--palettes-grape-500)'"
+												></span>
+												<span class="color-name pr-u-mask">Raisin</span>
+											</div>
+										</div>
+									</div>
+									<div role="option" class="optionItem" id="lu-select-260-option-4" aria-selected="false">
+										<div class="optionItem-value">
+											<div class="color mod-XL">
+												<span
+													class="color-value"
+													[attr.style]="'--components-color-value-backgroundColor: var(--palettes-kiwi-500)'"
+												></span>
+												<span class="color-name pr-u-mask">Kiwi</span>
+											</div>
+										</div>
+									</div>
+									<div role="option" class="optionItem" id="lu-select-260-option-5" aria-selected="false">
+										<div class="optionItem-value">
+											<div class="color mod-XL">
+												<span
+													class="color-value"
+													[attr.style]="'--components-color-value-backgroundColor: var(--palettes-lagoon-500)'"
+												></span>
+												<span class="color-name pr-u-mask">Lagon</span>
+											</div>
+										</div>
+									</div>
+									<div role="option" class="optionItem" id="lu-select-260-option-6" aria-selected="false">
+										<div class="optionItem-value">
+											<div class="color mod-XL">
+												<span
+													class="color-value"
+													[attr.style]="'--components-color-value-backgroundColor: var(--palettes-lavender-500)'"
+												></span>
+												<span class="color-name pr-u-mask">Lavande</span>
+											</div>
+										</div>
+									</div>
+									<div role="option" class="optionItem" id="lu-select-260-option-7" aria-selected="false">
+										<div class="optionItem-value">
+											<div class="color mod-XL">
+												<span
+													class="color-value"
+													[attr.style]="'--components-color-value-backgroundColor: var(--palettes-lime-500)'"
+												></span>
+												<span class="color-name pr-u-mask">Citron</span>
+											</div>
+										</div>
+									</div>
+									<div role="option" class="optionItem" id="lu-select-260-option-8" aria-selected="true">
+										<div class="optionItem-value">
+											<div class="color mod-XL">
+												<span
+													class="color-value"
+													[attr.style]="'--components-color-value-backgroundColor: var(--palettes-mint-500)'"
+												></span>
+												<span class="color-name pr-u-mask">Menthe</span>
+											</div>
+										</div>
+									</div>
+									<div role="option" class="optionItem" id="lu-select-260-option-9" aria-selected="false">
+										<div class="optionItem-value">
+											<div class="color mod-XL">
+												<span
+													class="color-value"
+													[attr.style]="'--components-color-value-backgroundColor: var(--palettes-pineapple-500)'"
+												></span>
+												<span class="color-name pr-u-mask">Ananas</span>
+											</div>
+										</div>
+									</div>
+									<div role="option" class="optionItem" id="lu-select-260-option-10" aria-selected="false">
+										<div class="optionItem-value">
+											<div class="color mod-XL">
+												<span
+													class="color-value"
+													[attr.style]="'--components-color-value-backgroundColor: var(--palettes-pumpkin-500)'"
+												></span>
+												<span class="color-name pr-u-mask">Citrouille</span>
+											</div>
+										</div>
+									</div>
+									<div role="option" class="optionItem" id="lu-select-260-option-11" aria-selected="false">
+										<div class="optionItem-value">
+											<div class="color mod-XL">
+												<span
+													class="color-value"
+													[attr.style]="'--components-color-value-backgroundColor: var(--palettes-watermelon-500)'"
+												></span>
+												<span class="color-name pr-u-mask">Pastèque</span>
+											</div>
+										</div>
+									</div>
+								</div>
+								<div>
+									<div class="colorPanel-highlighted">
+										<span class="pr-u-colorTextSubtle">Color: </span><span class="pr-u-ellipsis">Menthe</span>
+									</div>
+								</div>
+							</div>
+						</div>
+					</div>
 				</div>
 			</td>
+			<td></td>
+		</tr>
+		<tr>
+			<td>Panel borders</td>
+			<td>
+				<div class="demo-QAtable-list" style="gap: 1rem">
+					<div class="colorPanel" style="max-inline-size: 17rem !important">
+						<div class="lu-picker-panel lu-option-picker-panel">
+							<div class="lu-picker-content">
+								<div role="listbox" class="lu-picker-content-option">
+									<div role="option" class="optionItem is-highlighted" id="lu-select-260-option-0" aria-selected="false">
+										<div class="optionItem-value">
+											<div class="color mod-XL">
+												<span
+													class="color-value"
+													[attr.style]="'--components-color-value-boxShadowColor: var(--palettes-blueberry-500); --components-color-value-backgroundColor: var(--palettes-blueberry-50)'"
+												></span>
+												<span class="color-name pr-u-mask">Myrtille 50</span>
+											</div>
+										</div>
+									</div>
+									<div role="option" class="optionItem" id="lu-select-260-option-1" aria-selected="false">
+										<div class="optionItem-value">
+											<div class="color mod-XL">
+												<span
+													class="color-value"
+													[attr.style]="'--components-color-value-boxShadowColor: var(--palettes-cucumber-500); --components-color-value-backgroundColor: var(--palettes-cucumber-50)'"
+												></span>
+												<span class="color-name pr-u-mask">Concombre 50</span>
+											</div>
+										</div>
+									</div>
+									<div role="option" class="optionItem" id="lu-select-260-option-2" aria-selected="true">
+										<div class="optionItem-value">
+											<div class="color mod-XL">
+												<span
+													class="color-value"
+													[attr.style]="'--components-color-value-boxShadowColor: var(--palettes-glacier-500); --components-color-value-backgroundColor: var(--palettes-glacier-50)'"
+												></span>
+												<span class="color-name pr-u-mask">Glacier 50</span>
+											</div>
+										</div>
+									</div>
+									<div role="option" class="optionItem" id="lu-select-260-option-3" aria-selected="false">
+										<div class="optionItem-value">
+											<div class="color mod-XL">
+												<span
+													class="color-value"
+													[attr.style]="'--components-color-value-boxShadowColor: var(--palettes-grape-500); --components-color-value-backgroundColor: var(--palettes-grape-50)'"
+												></span>
+												<span class="color-name pr-u-mask">Raisin 50</span>
+											</div>
+										</div>
+									</div>
+									<div role="option" class="optionItem" id="lu-select-260-option-4" aria-selected="false">
+										<div class="optionItem-value">
+											<div class="color mod-XL">
+												<span
+													class="color-value"
+													[attr.style]="'--components-color-value-boxShadowColor: var(--palettes-kiwi-500); --components-color-value-backgroundColor: var(--palettes-kiwi-50)'"
+												></span>
+												<span class="color-name pr-u-mask">Kiwi 50</span>
+											</div>
+										</div>
+									</div>
+									<div role="option" class="optionItem" id="lu-select-260-option-5" aria-selected="false">
+										<div class="optionItem-value">
+											<div class="color mod-XL">
+												<span
+													class="color-value"
+													[attr.style]="'--components-color-value-boxShadowColor: var(--palettes-lagoon-500); --components-color-value-backgroundColor: var(--palettes-lagoon-50)'"
+												></span>
+												<span class="color-name pr-u-mask">Lagon 50</span>
+											</div>
+										</div>
+									</div>
+									<div role="option" class="optionItem" id="lu-select-260-option-6" aria-selected="false">
+										<div class="optionItem-value">
+											<div class="color mod-XL">
+												<span
+													class="color-value"
+													[attr.style]="'--components-color-value-boxShadowColor: var(--palettes-lavender-500); --components-color-value-backgroundColor: var(--palettes-lavender-50)'"
+												></span>
+												<span class="color-name pr-u-mask">Lavande 50</span>
+											</div>
+										</div>
+									</div>
+									<div role="option" class="optionItem" id="lu-select-260-option-7" aria-selected="false">
+										<div class="optionItem-value">
+											<div class="color mod-XL">
+												<span
+													class="color-value"
+													[attr.style]="'--components-color-value-boxShadowColor: var(--palettes-lime-500); --components-color-value-backgroundColor: var(--palettes-lime-50)'"
+												></span>
+												<span class="color-name pr-u-mask">Citron 50</span>
+											</div>
+										</div>
+									</div>
+									<div role="option" class="optionItem" id="lu-select-260-option-8" aria-selected="false">
+										<div class="optionItem-value">
+											<div class="color mod-XL">
+												<span
+													class="color-value"
+													[attr.style]="'--components-color-value-boxShadowColor: var(--palettes-mint-500); --components-color-value-backgroundColor: var(--palettes-mint-50)'"
+												></span>
+												<span class="color-name pr-u-mask">Menthe 50</span>
+											</div>
+										</div>
+									</div>
+									<div role="option" class="optionItem" id="lu-select-260-option-9" aria-selected="false">
+										<div class="optionItem-value">
+											<div class="color mod-XL">
+												<span
+													class="color-value"
+													[attr.style]="'--components-color-value-boxShadowColor: var(--palettes-pineapple-500); --components-color-value-backgroundColor: var(--palettes-pineapple-50)'"
+												></span>
+												<span class="color-name pr-u-mask">Ananas 50</span>
+											</div>
+										</div>
+									</div>
+									<div role="option" class="optionItem" id="lu-select-260-option-10" aria-selected="false">
+										<div class="optionItem-value">
+											<div class="color mod-XL">
+												<span
+													class="color-value"
+													[attr.style]="'--components-color-value-boxShadowColor: var(--palettes-pumpkin-500); --components-color-value-backgroundColor: var(--palettes-pumpkin-50)'"
+												></span>
+												<span class="color-name pr-u-mask">Citrouille 50</span>
+											</div>
+										</div>
+									</div>
+									<div role="option" class="optionItem" id="lu-select-260-option-11" aria-selected="false">
+										<div class="optionItem-value">
+											<div class="color mod-XL">
+												<span
+													class="color-value"
+													[attr.style]="'--components-color-value-boxShadowColor: var(--palettes-watermelon-500); --components-color-value-backgroundColor: var(--palettes-watermelon-50)'"
+												></span>
+												<span class="color-name pr-u-mask">Pastèque 50</span>
+											</div>
+										</div>
+									</div>
+								</div>
+								<div>
+									<div class="colorPanel-highlighted">
+										<span class="pr-u-colorTextSubtle">Color: </span><span class="pr-u-ellipsis">Glacier 50</span>
+									</div>
+								</div>
+							</div>
+						</div>
+					</div>
+					<div class="colorPanel" style="max-inline-size: 17rem !important">
+						<div class="lu-picker-panel lu-option-picker-panel">
+							<div class="lu-picker-content">
+								<div role="listbox" class="lu-picker-content-option">
+									<div role="option" class="optionItem is-highlighted" id="lu-select-260-option-0" aria-selected="false">
+										<div class="optionItem-value">
+											<div class="color mod-XL">
+												<span
+													class="color-value"
+													[attr.style]="'--components-color-value-boxShadowColor: var(--palettes-blueberry-500); --components-color-value-backgroundColor: var(--palettes-blueberry-50)'"
+												></span>
+												<span class="color-name pr-u-mask">Myrtille 50</span>
+											</div>
+										</div>
+									</div>
+									<div role="option" class="optionItem" id="lu-select-260-option-1" aria-selected="false">
+										<div class="optionItem-value">
+											<div class="color mod-XL">
+												<span
+													class="color-value"
+													[attr.style]="'--components-color-value-boxShadowColor: var(--palettes-cucumber-500); --components-color-value-backgroundColor: var(--palettes-cucumber-50)'"
+												></span>
+												<span class="color-name pr-u-mask">Concombre 50</span>
+											</div>
+										</div>
+									</div>
+									<div role="option" class="optionItem" id="lu-select-260-option-2" aria-selected="false">
+										<div class="optionItem-value">
+											<div class="color mod-XL">
+												<span
+													class="color-value"
+													[attr.style]="'--components-color-value-boxShadowColor: var(--palettes-glacier-500); --components-color-value-backgroundColor: var(--palettes-glacier-50)'"
+												></span>
+												<span class="color-name pr-u-mask">Glacier 50</span>
+											</div>
+										</div>
+									</div>
+									<div role="option" class="optionItem" id="lu-select-260-option-3" aria-selected="false">
+										<div class="optionItem-value">
+											<div class="color mod-XL">
+												<span
+													class="color-value"
+													[attr.style]="'--components-color-value-boxShadowColor: var(--palettes-grape-500); --components-color-value-backgroundColor: var(--palettes-grape-50)'"
+												></span>
+												<span class="color-name pr-u-mask">Raisin 50</span>
+											</div>
+										</div>
+									</div>
+									<div role="option" class="optionItem" id="lu-select-260-option-4" aria-selected="false">
+										<div class="optionItem-value">
+											<div class="color mod-XL">
+												<span
+													class="color-value"
+													[attr.style]="'--components-color-value-boxShadowColor: var(--palettes-kiwi-500); --components-color-value-backgroundColor: var(--palettes-kiwi-50)'"
+												></span>
+												<span class="color-name pr-u-mask">Kiwi 50</span>
+											</div>
+										</div>
+									</div>
+									<div role="option" class="optionItem" id="lu-select-260-option-5" aria-selected="false">
+										<div class="optionItem-value">
+											<div class="color mod-XL">
+												<span
+													class="color-value"
+													[attr.style]="'--components-color-value-boxShadowColor: var(--palettes-lagoon-500); --components-color-value-backgroundColor: var(--palettes-lagoon-50)'"
+												></span>
+												<span class="color-name pr-u-mask">Lagon 50</span>
+											</div>
+										</div>
+									</div>
+									<div role="option" class="optionItem" id="lu-select-260-option-6" aria-selected="false">
+										<div class="optionItem-value">
+											<div class="color mod-XL">
+												<span
+													class="color-value"
+													[attr.style]="'--components-color-value-boxShadowColor: var(--palettes-lavender-500); --components-color-value-backgroundColor: var(--palettes-lavender-50)'"
+												></span>
+												<span class="color-name pr-u-mask">Lavande 50</span>
+											</div>
+										</div>
+									</div>
+									<div role="option" class="optionItem" id="lu-select-260-option-7" aria-selected="false">
+										<div class="optionItem-value">
+											<div class="color mod-XL">
+												<span
+													class="color-value"
+													[attr.style]="'--components-color-value-boxShadowColor: var(--palettes-lime-500); --components-color-value-backgroundColor: var(--palettes-lime-50)'"
+												></span>
+												<span class="color-name pr-u-mask">Citron 50</span>
+											</div>
+										</div>
+									</div>
+									<div role="option" class="optionItem" id="lu-select-260-option-8" aria-selected="true">
+										<div class="optionItem-value">
+											<div class="color mod-XL">
+												<span
+													class="color-value"
+													[attr.style]="'--components-color-value-boxShadowColor: var(--palettes-mint-500); --components-color-value-backgroundColor: var(--palettes-mint-50)'"
+												></span>
+												<span class="color-name pr-u-mask">Menthe 50</span>
+											</div>
+										</div>
+									</div>
+									<div role="option" class="optionItem" id="lu-select-260-option-9" aria-selected="false">
+										<div class="optionItem-value">
+											<div class="color mod-XL">
+												<span
+													class="color-value"
+													[attr.style]="'--components-color-value-boxShadowColor: var(--palettes-pineapple-500); --components-color-value-backgroundColor: var(--palettes-pineapple-50)'"
+												></span>
+												<span class="color-name pr-u-mask">Ananas 50</span>
+											</div>
+										</div>
+									</div>
+									<div role="option" class="optionItem" id="lu-select-260-option-10" aria-selected="false">
+										<div class="optionItem-value">
+											<div class="color mod-XL">
+												<span
+													class="color-value"
+													[attr.style]="'--components-color-value-boxShadowColor: var(--palettes-pumpkin-500); --components-color-value-backgroundColor: var(--palettes-pumpkin-50)'"
+												></span>
+												<span class="color-name pr-u-mask">Citrouille 50</span>
+											</div>
+										</div>
+									</div>
+									<div role="option" class="optionItem" id="lu-select-260-option-11" aria-selected="false">
+										<div class="optionItem-value">
+											<div class="color mod-XL">
+												<span
+													class="color-value"
+													[attr.style]="'--components-color-value-boxShadowColor: var(--palettes-watermelon-500); --components-color-value-backgroundColor: var(--palettes-watermelon-50)'"
+												></span>
+												<span class="color-name pr-u-mask">Pastèque 50</span>
+											</div>
+										</div>
+									</div>
+								</div>
+								<div>
+									<div class="colorPanel-highlighted">
+										<span class="pr-u-colorTextSubtle">Color: </span><span class="pr-u-ellipsis">Menthe 50</span>
+									</div>
+								</div>
+							</div>
+						</div>
+					</div>
+				</div>
+			</td>
+			<td></td>
 		</tr>
 	</tbody>
 </table>

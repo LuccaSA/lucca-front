@@ -12,7 +12,7 @@ import {
 } from '@angular/cdk/overlay';
 import { ComponentPortal, TemplatePortal } from '@angular/cdk/portal';
 import { ElementRef, ViewContainerRef } from '@angular/core';
-import { generateId } from '@lucca-front/ng/core';
+import { generateId, getPushPanelViewportMargin } from '@lucca-front/ng/core';
 import { Observable, Subject, Subscription, timer } from 'rxjs';
 import { debounce, distinctUntilChanged, map } from 'rxjs/operators';
 import { ILuPopoverPanel, LuPopoverScrollStrategy } from '../panel/index';
@@ -536,6 +536,7 @@ export abstract class ALuPopoverTrigger<TPanel extends ILuPopoverPanel = ILuPopo
 		return this._overlay
 			.position()
 			.flexibleConnectedTo(element)
+			.withViewportMargin(getPushPanelViewportMargin(element.nativeElement as Element))
 			.withPositions([
 				{
 					originX: connectionPosition.originX,

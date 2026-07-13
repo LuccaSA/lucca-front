@@ -23,4 +23,7 @@
 	en: {
 		clear: 'Clear this field',
 	},
+	pl: {
+		clear: 'Wyczyść to pole',
+	},
 };

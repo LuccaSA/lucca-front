@@ -1,8 +1,8 @@
 import { IconsList } from '@/stories/icons-list';
 import { ListingComponent, ListingItemComponent } from '@lucca-front/ng/listing';
-import { Meta, moduleMetadata, StoryObj } from '@storybook/angular';
-import { HiddenArgType, PaletteAllArgType } from 'stories/helpers/common-arg-types';
-import { generateInputs } from 'stories/helpers/stories';
+import { Meta, moduleMetadata, StoryObj } from '@storybook/angular-vite';
+import { HiddenArgType, PaletteAllArgType } from '@/helpers/common-arg-types';
+import { generateInputs } from '@/helpers/stories';
 
 interface ListingBasicStory {
 	checklist: boolean;

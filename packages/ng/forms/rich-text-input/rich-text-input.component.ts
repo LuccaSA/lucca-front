@@ -1,3 +1,4 @@
+import { CdkPortalOutlet, DomPortal } from '@angular/cdk/portal';
 import { CommonModule } from '@angular/common';
 import {
 	booleanAttribute,
@@ -27,7 +28,6 @@ import { isNil } from '@lucca-front/ng/core';
 import { FormFieldComponent, InputDirective, ɵPresentationDisplayDefaultDirective } from '@lucca-front/ng/form-field';
 import { $getRoot, createEditor, Klass, LexicalEditor, LexicalNode, LexicalNodeReplacement, SKIP_DOM_SELECTION_TAG, UpdateListenerPayload } from 'lexical';
 import { RICH_TEXT_FORMATTER, RichTextFormatter } from './formatters';
-import { CdkPortalOutlet, DomPortal } from '@angular/cdk/portal';
 
 export const INITIAL_UPDATE_TAG = 'initial-update';
 
@@ -100,6 +100,7 @@ export class RichTextInputComponent implements OnInit, OnDestroy, ControlValueAc
 	#focusedPlugin: number = 0;
 	#editor?: LexicalEditor;
 	#isRootElementInitialized = false;
+	#pendingValue: string | null = null;
 
 	constructor() {
 		effect(() => {
@@ -140,6 +141,10 @@ export class RichTextInputComponent implements OnInit, OnDestroy, ControlValueAc
 		if (this.#allPlugins().length > 0) {
 			this.#allPlugins()[this.#focusedPlugin].tabindex?.set(0);
 		}
+
+		if (this.#pendingValue) {
+			this.writeValue(this.#pendingValue);
+		}
 	}
 
 	ngOnDestroy(): void {
@@ -149,8 +154,10 @@ export class RichTextInputComponent implements OnInit, OnDestroy, ControlValueAc
 	writeValue(value: string | null): void {
 		const editorRef = this.#editor;
 		if (isNil(editorRef)) {
+			this.#pendingValue = value;
 			return;
 		}
+
 		const updateTags = [SKIP_DOM_SELECTION_TAG, INITIAL_UPDATE_TAG];
 
 		if (value) {
