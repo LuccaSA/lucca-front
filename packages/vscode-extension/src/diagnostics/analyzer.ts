@@ -99,7 +99,8 @@ function analyzeClassSpans(text: string, spans: Array<{ start: number; end: numb
 	const findings: Finding[] = [];
 	for (const span of spans) {
 		const value = text.slice(span.start, span.end);
-		const tokenRe = /[\w-]+/g;
+		// Trailing `%` is part of the class name (e.g. `pr-u-width100%`).
+		const tokenRe = /[\w-]+%?/g;
 		let match: RegExpExecArray | null;
 		while ((match = tokenRe.exec(value)) !== null) {
 			const name = match[0];

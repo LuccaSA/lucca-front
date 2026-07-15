@@ -13,7 +13,8 @@ export interface ClassContext {
 	token: string;
 }
 
-const CLASS_TOKEN_CHAR = /[\w-]/;
+// `%` is a valid trailing class-name char (e.g. `pr-u-width100%`).
+const CLASS_TOKEN_CHAR = /[\w%-]/;
 // Matches the opening of a `class` (or `className`) attribute value.
 const CLASS_ATTR_RE = /(?:^|[\s"'`])(class|className)\s*=\s*(["'])/gi;
 

@@ -19,7 +19,7 @@ export class ClassHoverProvider implements vscode.HoverProvider {
 		if (!index) {
 			return undefined;
 		}
-		const range = document.getWordRangeAtPosition(position, /(?:pr-)?u-[\w-]+/);
+		const range = document.getWordRangeAtPosition(position, /(?:pr-)?u-[\w-]+%?/);
 		if (!range) {
 			return undefined;
 		}

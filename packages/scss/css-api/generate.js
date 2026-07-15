@@ -50,7 +50,9 @@ const VARIABLE_CATEGORIES = [
 ];
 
 const COMPONENT_VAR_RE = /^--components?-/;
-const UTILITY_SELECTOR_RE = /^(?::root\s+)?\.((?:pr-)?u-[A-Za-z0-9]+)((?:::?)[A-Za-z-][\w-]*)?$/;
+// The class-name group allows CSS-escaped characters (`\.`) so selectors like
+// `.pr-u-width100\%` are captured; the escape is stripped when the name is stored.
+const UTILITY_SELECTOR_RE = /^(?::root\s+)?\.((?:pr-)?u-(?:[A-Za-z0-9]|\\.)+)((?:::?)[A-Za-z-][\w-]*)?$/;
 
 /**
  * The synthetic entry compiled to expose the entire API surface. Mirrors
@@ -373,7 +375,9 @@ function extract() {
 			if (!match) {
 				continue;
 			}
-			const className = match[1];
+			// Strip CSS escapes so the stored name matches what a consumer writes
+			// in markup (`.pr-u-width100\%` selector → `pr-u-width100%` class).
+			const className = match[1].replace(/\\(.)/g, '$1');
 			const pseudo = match[2];
 			if (!decls) {
 				continue;
@@ -630,6 +634,11 @@ function selfCheck(manifest) {
 	const responsive = manifest.utilities['pr-u-displayNoneAtMediaMinS'];
 	if (!responsive || !responsive.css.some((b) => b.media)) {
 		errors.push(`pr-u-displayNoneAtMediaMinS media sentinel failed: ${JSON.stringify(responsive)}`);
+	}
+	// Escaped-selector sentinel: `.pr-u-width100\%` must be stored as `pr-u-width100%`.
+	const width100 = manifest.utilities['pr-u-width100%'];
+	if (!width100 || !width100.css.some((b) => b.decls === 'width: 100% !important')) {
+		errors.push(`pr-u-width100% escaped-selector sentinel failed: ${JSON.stringify(width100)}`);
 	}
 	// Derived replacement sentinel.
 	const marginTop = manifest.utilities['pr-u-marginTop100'];

@@ -26,6 +26,21 @@ describe('analyze — css', () => {
 	});
 });
 
+describe('analyze — utility classes ending in %', () => {
+	it('recognises a known `%` class (not flagged unknown)', () => {
+		expect(names('<div class="pr-u-width100%"></div>', 'html')).toEqual([]);
+	});
+
+	it('still flags a genuinely unknown `%` class', () => {
+		expect(names('<div class="pr-u-width200%"></div>', 'html')).toEqual(['unknown-class:pr-u-width200%']);
+	});
+
+	it('flags the deprecated `u-` `%` twin with its replacement', () => {
+		const [finding] = analyze('<div class="u-width100%"></div>', 'html', index, { deprecations: true });
+		expect(finding).toMatchObject({ kind: 'deprecated-class', name: 'u-width100%', replacement: 'pr-u-width100%' });
+	});
+});
+
 describe('analyze — scss mixin imports', () => {
 	it('flags a known mixin whose namespace is not imported', () => {
 		expect(names(".a { @include media.min('M') { color: red; } }", 'scss')).toEqual(['missing-mixin-import:media.min']);

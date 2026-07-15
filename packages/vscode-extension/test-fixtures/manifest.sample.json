@@ -17,7 +17,9 @@
 		"pr-u-marginTop100": { "css": [{ "decls": "margin-top: var(--pr-t-spacings-100) !important", "resolved": "margin-top: 0.5rem !important" }], "deprecated": true, "replacement": "pr-u-marginBlockStart100" },
 		"pr-u-colorTextBrand": { "css": [{ "decls": "color: var(--palettes-brand-700) !important", "resolved": "color: #e06029 !important" }] },
 		"pr-u-textBrand": { "css": [{ "decls": "color: var(--palettes-brand-700) !important", "resolved": "color: #e06029 !important" }], "deprecated": true, "replacement": "pr-u-colorTextBrand" },
-		"u-displayFlex": { "css": [{ "decls": "display: flex !important" }], "deprecated": true, "replacement": "pr-u-displayFlex" }
+		"u-displayFlex": { "css": [{ "decls": "display: flex !important" }], "deprecated": true, "replacement": "pr-u-displayFlex" },
+		"pr-u-width100%": { "css": [{ "decls": "width: 100% !important" }] },
+		"u-width100%": { "css": [{ "decls": "width: 100% !important" }], "deprecated": true, "replacement": "pr-u-width100%" }
 	},
 	"mixins": [
 		{ "name": "min", "namespace": "media", "module": "commons/utils/media", "import": "@lucca-front/scss/src/commons/utils/media", "params": "$breakpoint, $property: 'width', $at: 'media'", "signature": "min($breakpoint, $property: 'width', $at: 'media')" },
