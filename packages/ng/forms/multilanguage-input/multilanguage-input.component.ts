@@ -119,7 +119,7 @@ export class MultilanguageInputComponent implements ControlValueAccessor {
 		const inputContainer = inputElement.closest('.textField-input');
 		const referenceWidth = (inputContainer instanceof HTMLElement ? inputContainer : inputElement).getBoundingClientRect().width;
 
-		return referenceWidth / 16 + 1;
+		return this.hasNoInvariant() ? referenceWidth / 16 + 3.25 : referenceWidth / 16 + 0.5;
 	}
 
 	writeValue(value: MultilanguageTranslation[]): void {
