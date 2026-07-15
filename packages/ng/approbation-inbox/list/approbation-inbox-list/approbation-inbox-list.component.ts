@@ -34,15 +34,17 @@ export class ApprobationInboxListComponent {
 	readonly titleId = `approbationInboxListTitle-${generateId()}`;
 
 	readonly label = input.required<PortalContent>();
+	readonly submitLabel = input.required<string>();
+	readonly forwardLabel = input.required<string>();
 	readonly selectable = input(false, { transform: booleanAttribute });
 
 	readonly emptyIllustration = input<BubbleIllustration | string>('magnifyingGlass');
 	readonly emptyLabel = input.required<string>();
 	readonly emptyResetLabel = input<string | null>();
-	
-	readonly submit = output<void>();
-	readonly reset = output<void>();
-	readonly forward = output<void>();
+
+	readonly submitEvent = output<void>();
+	readonly resetEvent = output<void>();
+	readonly forwardEvent = output<void>();
 
 	private readonly items = signal<SelectableItem[]>([]);
 

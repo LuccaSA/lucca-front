@@ -10,19 +10,22 @@ import { LuDialogService, provideLuDialog } from '@lucca-front/ng/dialog';
 		class: 'approbationInbox-list-content-items-item-content-action',
 		'[attr.aria-current]': 'mediaMinM() && current() ? "page" : null',
 		'[attr.role]': '!mediaMinM() ? "button" : null',
-		'(click)': 'mediaMinM() ? null : openDialog()',
+		'(click)': 'mediaMinM() ? null : openDialog($event)',
 	},
 	providers: [provideLuDialog()],
 	changeDetection: ChangeDetectionStrategy.OnPush,
 })
 export class ApprobationInboxLinkComponent {
 	readonly current = input(false, { transform: booleanAttribute });
-	readonly dialogTpl = input<TemplateRef<unknown>>();
+	readonly detailTpl = input<TemplateRef<unknown>>();
+	readonly detailActionsTpl = input<TemplateRef<unknown>>();
 	readonly dialogService = inject(LuDialogService);
 
 	readonly mediaMinM = injectMediaMinBreakpoint('M');
 
-	openDialog() {
+	openDialog($event: Event) {
+		$event.preventDefault();
+		// TODO inbox: open dialog with detailTpl and detailActionsTpl
 		// this.dialogService.open;
 	}
 }

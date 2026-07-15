@@ -46,9 +46,9 @@ function getTemplate(args: ApprobationInboxListSelectedStory): string {
 			</ul>
 		</div>
 		<footer class="approbationInbox-list-footer">
-			<h2 class="approbationInbox-list-footer-title">1 objet sélectionné</h2>
-			<button type="submit" class="button">Approuver l’objet</button>
-			<button type="button" class="button">Transférer l’objet</button>
+			<h2 class="approbationInbox-list-footer-title">1 élément sélectionné</h2>
+			<button type="submit" class="button">Approuver l’élément</button>
+			<button type="button" class="button">Transférer l’élément</button>
 		</footer>
 	</form>
 </section>`;

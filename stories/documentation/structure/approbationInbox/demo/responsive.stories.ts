@@ -121,7 +121,7 @@ export default {
 			template: `
 		<main role="main" class="mainLayout mod-wideM">
 			<div class="mainLayout-sidebar">
-				<lu-approbation-inbox-list label="Test" selectable noResultLabel="Votre recherche ne donne aucun résultat.">
+				<lu-approbation-inbox-list label="Test" submitLabel="Approuver les objets" forwardLabel="Transférer les objets" selectable noResultLabel="Votre recherche ne donne aucun résultat.">
 					<lu-filter-bar approbationInboxListFilterBar>
 						<lu-segmented-control *luFilterPillAddonBefore [(ngModel)]="example">
 							<ng-template #label0>Par vous <lu-numeric-badge [value]="12" /></ng-template>

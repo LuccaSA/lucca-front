@@ -30,7 +30,7 @@ export default {
 			description: 'Titre du groupe (aussi reprit dans l’intitulé masqué de sa sélection).',
 			if: { arg: 'group', truthy: true },
 		},
-		checked: {
+		selected: {
 			description: 'Sélectionne un élément et affiche le footer de la sélection multiple.',
 			if: { arg: 'selectable', truthy: true },
 		},
@@ -56,6 +56,14 @@ export default {
 		},
 		label: {
 			description: 'Titre de la liste.',
+		},
+		submitLabel: {
+			description: 'Intitulé du bouton de soumission du formulaire.',
+			if: { arg: 'selectable', truthy: true },
+		},
+		forwardLabel: {
+			description: 'Intitulé du bouton de transfert du formulaire.',
+			if: { arg: 'selectable', truthy: true },
 		},
 		button: {
 			description: 'Exemple d’élément qui ne serait pas géré via un lien.',
@@ -112,9 +120,9 @@ export default {
 			],
 		}),
 	],
-	render: ({ filterBar, group, groupLabel, button, illustration, data, center, checked, itemCount, itemLabel, current, icons, ...args }, { argTypes }) => {
+	render: ({ filterBar, group, groupLabel, button, illustration, data, center, selected, itemCount, itemLabel, current, icons, ...args }, { argTypes }) => {
 		const centerParam = center ? ` center` : ``;
-		const checkedParam = checked ? ` [checked]="true"` : ``;
+		const selectedParam = selected ? ` [checked]="true"` : ``;
 		const currentParam = current ? ` current` : ``;
 		const startTpl = illustration
 			? `
@@ -140,7 +148,7 @@ export default {
 		</lu-approbation-inbox-list-item>`;
 		const itemTpl =
 			itemCount != 0
-				? `<lu-approbation-inbox-list-item${centerParam}${checkedParam}>${startTpl}${centerTpl}${endTpl}
+				? `<lu-approbation-inbox-list-item${centerParam}${selectedParam}>${startTpl}${centerTpl}${endTpl}
 		</lu-approbation-inbox-list-item>`
 				: ``;
 		const filterBarTpl = filterBar
@@ -165,14 +173,11 @@ export default {
 	<lu-approbation-inbox-list-group label="${groupLabel}">${itemsTpl}</lu-approbation-inbox-list-group>
 `
 			: `${itemsTpl}`;
-		const footerTpl = args['selectable']
-			? ``
-			: ``;
 		return {
 			props: {
 				icons,
 			},
-			template: `<lu-approbation-inbox-list${generateInputs(args, argTypes)}>${filterBarTpl}${groupTpl}${footerTpl}</lu-approbation-inbox-list>`,
+			template: `<lu-approbation-inbox-list${generateInputs(args, argTypes)}>${filterBarTpl}${groupTpl}</lu-approbation-inbox-list>`,
 		};
 	},
 } as Meta;
@@ -187,7 +192,7 @@ export const Basic: StoryObj<
 		illustration: boolean;
 		data: boolean;
 		center: boolean;
-		checked: boolean;
+		selected: boolean;
 		itemCount: number;
 		itemLabel: string;
 		icons: ApprobationInboxIcon[];
@@ -197,7 +202,9 @@ export const Basic: StoryObj<
 		label: 'Lorem ipsum',
 		filterBar: false,
 		selectable: false,
-		checked: false,
+		selected: false,
+		submitLabel: 'Approve items',
+		forwardLabel: 'Transfer items',
 		group: false,
 		groupLabel: 'Group',
 		button: false,
