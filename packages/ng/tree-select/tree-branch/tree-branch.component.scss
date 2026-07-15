@@ -8,6 +8,12 @@
 		lu-tree-branch {
 			lu-select-option {
 				@include nestedSimple($level: 1);
+
+				// Listbox rendering: indentation applies to the content padding, the checkbox
+				// (real element inside the content) follows it, unlike the legacy pseudo-element
+				.listboxOption-content {
+					padding-inline-start: calc(var(--pr-t-spacings-100) + var(--pr-t-spacings-100) * var(--components-treeBranch-level));
+				}
 			}
 		}
 
@@ -19,6 +25,19 @@
 		.optionItem-value:hover {
 			.optionItem-icons {
 				opacity: 1;
+			}
+		}
+
+		.listboxOption-content {
+			.optionItem-icons {
+				margin-inline-start: auto;
+			}
+
+			&:hover,
+			&.is-hovered {
+				.optionItem-icons {
+					opacity: 1;
+				}
 			}
 		}
 	}
