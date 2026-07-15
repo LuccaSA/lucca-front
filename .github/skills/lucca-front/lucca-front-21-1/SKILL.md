@@ -11,9 +11,20 @@ description: >
 
 ## 1. Version
 
-Cette skill couvre **Lucca Front 21.1.x** (patchs publiés : 21.1.0, 21.1.1, 21.1.2, 21.1.3, 21.1.4). C'est la mineure installée sur le projet — tous les chemins ci-dessous lui sont relatifs. Il n'y a rien à détecter.
+Cette skill couvre **Lucca Front 21.1.x** (patchs publiés : 21.1.0, 21.1.1, 21.1.2, 21.1.3, 21.1.4). La **mineure** est celle installée sur le projet — tous les chemins ci-dessous lui sont relatifs, il n'y a pas de mineure à résoudre.
 
-La documentation `references/` reflète le **dernier patch publié : 21.1.4**. Si le projet est sur un patch antérieur, les correctifs livrés après sa version sont décrits dans `fixes/` (voir §2) — ils ne sont **pas** dans son code.
+**Détecte le patch installé** (obligatoire, ne le suppose jamais) :
+
+1. en priorité `node_modules/@lucca-front/ng/package.json` → champ `version` (version résolue exacte, ex: `21.1.4`) ;
+2. à défaut, la dépendance `@lucca-front/ng` (ou `@lucca-front/scss`) dans le `package.json` du projet (ex: `^21.1.4` → `21.1.4`).
+
+La documentation `references/` reflète le **dernier patch publié : 21.1.4**. Si le patch du projet est **antérieur**, les correctifs livrés après sa version sont décrits dans `fixes/` (voir §2) — ils ne sont **pas** dans son code : consulte tous les `fixes/<M-m-p>.md` de version **strictement supérieure** au patch installé et ignore ces changements.
+
+**Vérifie la cohérence entre la version détectée et cette skill avant de coder.** Dans chacun de ces cas, **arrête-toi et demande à l'utilisateur** — ne suppose jamais une version, ne code pas :
+
+- la **mineure** détectée n'est pas `21.1` (ex: le projet est monté de version mais la skill n'a pas été mise à jour, ou la mauvaise skill est chargée) ;
+- le **patch** détecté est **postérieur** à 21.1.4 (dernier patch connu de cette skill → skill périmée, l'API réelle peut différer) ;
+- le patch (ou la version `@lucca-front/ng`) **ne peut pas être déterminé**.
 
 ## 2. Chemins
 

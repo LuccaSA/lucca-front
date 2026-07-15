@@ -304,6 +304,12 @@ ${availableLines || '- (aucune version générée)'}
 
 Si la version ne peut pas être déterminée → **s'arrêter et demander à l'utilisateur**. Ne jamais supposer une version par défaut.
 
+**Contrôle de cohérence (anti-péremption).** La version détectée doit être couverte par la liste ci-dessus. Dans chacun de ces cas, **arrête-toi et demande à l'utilisateur** — ne suppose jamais, ne code pas :
+
+- la **majeure** détectée n'apparaît pas ci-dessus (ex: projet monté en majeure supérieure alors que la skill n'a pas été mise à jour) ;
+- la **mineure** détectée est plus récente que la base de sa majeure (mineure publiée après cette skill → non documentée) ;
+- le **patch** détecté est **postérieur** au dernier patch connu de sa mineure (le dernier patch de la base est indiqué ci-dessus ; celui d'une mineure antérieure dans son \`_manifest.md\` → skill périmée, l'API réelle peut différer).
+
 ## 2. Résolution des chemins
 
 Le dossier \`./references/<majeure>/\` contient la documentation complète de la **base** (la mineure la plus récente de la majeure). Les mineures antérieures sont des dossiers d'**overrides** : \`./references/<majeure>/minors/<M-m>/\`.
