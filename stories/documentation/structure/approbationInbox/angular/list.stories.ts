@@ -166,12 +166,7 @@ export default {
 `
 			: `${itemsTpl}`;
 		const footerTpl = args['selectable']
-			? `
-	<ng-container approbationInboxListFooter>
-		<button luButton type="submit">Approuver les objets</button>
-		<button luButton type="button">Transférer les objets</button>
-	</ng-container>
-`
+			? ``
 			: ``;
 		return {
 			props: {

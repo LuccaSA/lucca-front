@@ -165,10 +165,6 @@ export default {
 							<a href="#" lu-approbation-inbox-list-action approbationInboxListItemTitle>link</a>
 						</lu-approbation-inbox-list-item>
 					</lu-approbation-inbox-list-group>
-					<ng-container approbationInboxListFooter>
-						<button luButton type="submit">Approuver les objets</button>
-						<button luButton type="button">Transférer les objets</button>
-					</ng-container>
 				</lu-approbation-inbox-list>
 			</div>
 			<div class="mainLayout-content">

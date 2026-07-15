@@ -33,13 +33,14 @@
 	@if (selectable() && checkedCount() > 0) {
 		<footer class="approbationInbox-list-footer">
 			<h2 class="approbationInbox-list-footer-title">{{ selectedCountLabel() | intlParams: { count: checkedCount() } }}</h2>
-			<ng-content select="[approbationInboxListFooter]" />
+			<button luButton type="submit">Approuver les objets</button>
+			<button luButton type="button" (click)="forward.emit()">Transférer les objets</button>
 		</footer>
 	}
 </ng-template>
 
 @if (selectable() && !empty()) {
-	<form class="approbationInbox-list-formSelectionOptional" (submit)="submit()" (reset)="reset()">
+	<form class="approbationInbox-list-formSelectionOptional" (submit)="submit.emit()" (reset)="reset.emit()">
 		<ng-container *ngTemplateOutlet="content" />
 	</form>
 } @else {

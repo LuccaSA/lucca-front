@@ -1,5 +1,5 @@
 import { NgTemplateOutlet } from '@angular/common';
-import { booleanAttribute, ChangeDetectionStrategy, Component, computed, inject, input, signal, ViewEncapsulation, WritableSignal } from '@angular/core';
+import { booleanAttribute, ChangeDetectionStrategy, Component, computed, inject, input, output, signal, ViewEncapsulation, WritableSignal } from '@angular/core';
 import { FormsModule } from '@angular/forms';
 import { BubbleIllustration, BubbleIllustrationComponent } from '@lucca-front/ng/bubble-illustration';
 import { generateId, getIntlPluralLabel, intlInputOptions, IntlParamsPipe, LOCALE_PLURAL_RULES, PortalContent, PortalDirective } from '@lucca-front/ng/core';
@@ -39,6 +39,10 @@ export class ApprobationInboxListComponent {
 	readonly emptyIllustration = input<BubbleIllustration | string>('magnifyingGlass');
 	readonly emptyLabel = input.required<string>();
 	readonly emptyResetLabel = input<string | null>();
+	
+	readonly submit = output<void>();
+	readonly reset = output<void>();
+	readonly forward = output<void>();
 
 	private readonly items = signal<SelectableItem[]>([]);
 
@@ -69,10 +73,4 @@ export class ApprobationInboxListComponent {
 		const newValue = this.selectAllState() !== true;
 		this.items().forEach((item) => item.checked.set(newValue));
 	}
-
-	// TODO inbox: emit event
-	submit() {}
-
-	// TODO inbox: emit event
-	reset() {}
 }
