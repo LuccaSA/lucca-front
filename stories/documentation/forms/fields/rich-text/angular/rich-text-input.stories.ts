@@ -133,6 +133,10 @@ export const WithTagPluginWithNoInitialValue: StoryObj<RichTextInputComponent & 
 																			description: 'Tag 2',
 																		},
 																		{
+																			key: 'tag3',
+																			description: 'Tag 3',
+																		},
+																		{
 																			key: 'tag4',
 																			description: 'Tag 4',
 																			secondary: true,
