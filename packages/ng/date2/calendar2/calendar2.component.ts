@@ -320,7 +320,7 @@ export class Calendar2Component implements OnInit {
 		const status = this.getCellInfo()(date, this.displayMode());
 
 		// We need to store a boolean for day mode, because some logic is specific to day display (like weekends for instance)
-		const isDayMode = this.displayMode() === 'day';
+		const isDayMode = this.displayMode() === 'day' || this.displayMode() === 'week';
 
 		// Keeping consumer's classes aside
 		const classes: string[] = status?.classes || [];
@@ -414,7 +414,7 @@ export class Calendar2Component implements OnInit {
 				'is-overflow': isOverflow,
 				'is-current': isCurrent,
 				'is-start': Boolean(!isOverflow && (rangeInfo?.isStart || status.selected) && !isInProgress),
-				'is-end': Boolean(!isOverflow && (rangeInfo?.isEnd || status.selected) && !isInProgress),
+				'is-end': Boolean((this.displayMode() === 'week' || !isOverflow) && (rangeInfo?.isEnd || status.selected) && !isInProgress),
 				'is-selected': isSelected,
 				// Range in progress statuses
 				'is-selectionInProgress': isProgressBody,

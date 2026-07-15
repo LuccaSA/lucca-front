@@ -26,7 +26,7 @@ import { FILTER_PILL_INPUT_COMPONENT, FilterPillDisplayerDirective, FilterPillIn
 import { InputDirective, PresentationDisplayDirective } from '@lucca-front/ng/form-field';
 import { IconComponent } from '@lucca-front/ng/icon';
 import { PopoverDirective } from '@lucca-front/ng/popover2';
-import { parse, startOfDay, startOfWeek } from 'date-fns';
+import { addDays, parse, startOfDay, startOfWeek } from 'date-fns';
 import { AbstractDateComponent } from '../abstract-date-component';
 import { CalendarMode } from '../calendar2/calendar-mode';
 import { Calendar2Component } from '../calendar2/calendar2.component';
@@ -275,7 +275,7 @@ export class DateInputComponent extends AbstractDateComponent implements OnInit,
 	// The emitted value is always the start of the period matching the current mode:
 	// start of day, or start of week in week mode.
 	#normalizeDate(date: Date): Date {
-		return this.mode() === 'week' ? startOfWeek(date, this.weekOptions) : startOfDay(date);
+		return this.mode() === 'week' ? addDays(startOfWeek(date, this.weekOptions), 3) : startOfDay(date);
 	}
 
 	registerFilterPillClosePopover(closeFn: () => void): void {

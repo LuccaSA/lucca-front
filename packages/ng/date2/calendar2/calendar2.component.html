@@ -120,7 +120,7 @@
 				<tbody class="calendar-table-body">
 					@for (week of monthGridDisplay(); track $index; let isLastWeek = $last) {
 						@let weekHeader = getWeekHeaderCell(week);
-						<tr class="calendar-table-body-row">
+						<tr class="calendar-table-body-row" (click)="!weekHeader.disabled ? onCellClicked(weekHeader.date) : null">
 							<th
 								scope="row"
 								class="calendar-table-body-row-cell"
@@ -134,7 +134,6 @@
 									[luCalendar2Date]="weekHeader.date"
 									luCalendar2Mode="week"
 									[attr.aria-disabled]="weekHeader.disabled ? 'true' : null"
-									(click)="!weekHeader.disabled ? onCellClicked(weekHeader.date) : null"
 									(keydown.space)="!weekHeader.disabled ? onCellClicked(weekHeader.date) : null"
 									(focus)="dateHovered.set(weekHeader.date)"
 									(blur)="dateHovered.set(null)"
@@ -154,7 +153,7 @@
 											[luCalendar2Cell]="dayIndex"
 											[luCalendar2Date]="day.date"
 											luCalendar2Mode="day"
-											class="calendar-table-body-row-cell-action"
+											class="calendar-table-body-row-cell-action mod-week"
 											type="button"
 											[attr.aria-disabled]="day.disabled ? 'true' : null"
 											(click)="day.disabled ? null : onCellClicked(day.date)"

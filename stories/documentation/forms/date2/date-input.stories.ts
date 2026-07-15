@@ -4,10 +4,10 @@ import { CALENDAR_MODE, DATE2_CLEAR_BEHAVIOR, DATE_FORMAT_CONST, DateInputCompon
 import { FormFieldComponent } from '@lucca-front/ng/form-field';
 import { IconComponent } from '@lucca-front/ng/icon';
 import { applicationConfig, Meta, moduleMetadata, StoryObj } from '@storybook/angular-vite';
+import { expect, screen, userEvent, within } from 'storybook/test';
 import { createTestStory, generateInputs, setStoryOptions } from '../../../helpers/stories';
 import { StoryModelDisplayComponent } from '../../../helpers/story-model-display.component';
 import { waitForAngular } from '../../../helpers/test';
-import { expect, screen, userEvent, within } from 'storybook/test';
 
 export default {
 	title: 'Documentation/Forms/Date2/DateInput',
@@ -68,6 +68,7 @@ export default {
 		},
 		hideOverflow: {
 			description: 'Masque les jours du mois précédent ou suivant visibles sur le mois en cours.',
+			if: { arg: 'mode', neq: 'week' },
 		},
 		hideWeekend: {
 			description: 'Retire l’effet grisé visible sur les jours du isWeekend.',
@@ -97,8 +98,8 @@ export default {
 				focusedDate: args['focusedDate'] ? focusedDateValue : null,
 			},
 			template: `
-			<lu-form-field label="Date input example" inlineMessage="Inline message example" ${generateInputs({ presentation }, argTypes)}>
-				<lu-date-input [(ngModel)]="selected" [min]="min" [max]="max" [focusedDate]="focusedDate" autocomplete="off" ${generateInputs(flags, argTypes)} />
+			<lu-form-field label="Date input example" inlineMessage="Inline message example"${generateInputs({ presentation }, argTypes)}>
+				<lu-date-input [(ngModel)]="selected" [min]="min" [max]="max" [focusedDate]="focusedDate" autocomplete="off"${generateInputs(flags, argTypes)} />
 			</lu-form-field>
 
 			<pr-story-model-display>{{ selected }}</pr-story-model-display>

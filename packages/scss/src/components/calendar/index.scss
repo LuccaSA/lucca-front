@@ -14,6 +14,10 @@
 		&.mod-daysOverflowingHidden {
 			@include daysOverflowingHidden;
 		}
+
+		&:has(.calendar-table-body-row-cell-action-week) {
+			@include week;
+		}
 	}
 }
 
@@ -45,7 +49,7 @@
 			}
 
 			.calendar-table-body-row {
-				&:not(:has(.calendar-table-body-row-cell.is-selected)) {
+				&:not(:has(.calendar-table-body-row-cell.is-selected), :has(.calendar-table-body-row-cell:nth-child(7):empty)) {
 					&:hover {
 						@include weekHover;
 					}
@@ -95,7 +99,10 @@
 			@include current;
 		}
 
-		&.is-selected,
+		&.is-selected {
+			@include selected;
+		}
+
 		&.is-selectionInProgress {
 			&:not(.is-overflow) {
 				@include selected;
