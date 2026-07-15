@@ -1,5 +1,7 @@
+import { NgTemplateOutlet } from '@angular/common';
 import { booleanAttribute, ChangeDetectionStrategy, ChangeDetectorRef, Component, ElementRef, inject, input, OnInit, output, TemplateRef, Type, untracked, viewChild } from '@angular/core';
 import { intlInputOptions, isNil, PortalDirective, ɵeffectWithDeps } from '@lucca-front/ng/core';
+import { OptionComponent as ListboxOptionComponent } from '@lucca-front/ng/listbox';
 import { LuTooltipTriggerDirective } from '@lucca-front/ng/tooltip';
 import { asyncScheduler, observeOn } from 'rxjs';
 import { CoreSelectPanelInstance, SELECT_PANEL_INSTANCE } from '../panel/panel.instance';
@@ -18,15 +20,22 @@ export const MAGIC_OPTION_SCROLL_DELAY = 15;
 	templateUrl: './option.component.html',
 	styleUrl: './option.component.scss',
 	host: {
-		class: 'optionItem',
+		'[class.optionItem]': '!listbox()',
 	},
 	changeDetection: ChangeDetectionStrategy.OnPush,
-	imports: [LuOptionOutletDirective, PortalDirective, LuOptionGroupPipe, LuTooltipTriggerDirective],
+	imports: [LuOptionOutletDirective, PortalDirective, LuOptionGroupPipe, LuTooltipTriggerDirective, NgTemplateOutlet, ListboxOptionComponent],
 })
 export class LuOptionComponent<T> implements OnInit {
 	readonly #panelRef = inject<CoreSelectPanelInstance<T>>(SELECT_PANEL_INSTANCE);
 	protected selectableItem = inject(CoreSelectPanelElement);
 	readonly intl = input(...intlInputOptions(LU_OPTION_TRANSLATIONS));
+
+	/**
+	 * When true, the option renders a presentation-mode `lu-listbox-option` instead of the
+	 * legacy `optionItem` markup. The host element keeps the option semantics (role, id,
+	 * aria-selected) through the `luCoreSelectPanelElement` directive.
+	 */
+	readonly listbox = input(false, { transform: booleanAttribute });
 
 	readonly optionTpl = input<TemplateRef<LuOptionContext<T>> | Type<unknown>>();
 

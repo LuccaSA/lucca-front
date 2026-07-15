@@ -10,7 +10,8 @@
 		&.mod-add {
 			@include add;
 
-			&:hover {
+			&:hover,
+			&:has(> .listboxOption-content.is-hovered) {
 				@include addHover;
 			}
 
@@ -53,7 +54,8 @@
 		}
 
 		&[aria-selected='true'],
-		&[aria-checked='true'] {
+		&[aria-checked='true'],
+		&.is-selected {
 			> .listboxOption-content {
 				@include selected;
 
@@ -68,7 +70,8 @@
 			}
 		}
 
-		&[aria-disabled='true'] {
+		&[aria-disabled='true'],
+		&.is-disabled {
 			> .listboxOption-content {
 				@include disabled;
 
@@ -78,7 +81,8 @@
 			}
 
 			&[aria-selected='true'],
-			&[aria-checked='true'] {
+			&[aria-checked='true'],
+			&.is-selected {
 				> .listboxOption-content {
 					@include selectedDisabled;
 				}
@@ -134,7 +138,8 @@
 
 				.listboxOption {
 					&:hover,
-					&.is-hovered {
+					&.is-hovered,
+					&:has(> .listboxOption-content.is-hovered) {
 						@include multipleHover;
 					}
 
@@ -143,7 +148,8 @@
 					}
 
 					&[aria-selected='true'],
-					&[aria-checked='true'] {
+					&[aria-checked='true'],
+					&.is-selected {
 						> .listboxOption-content {
 							@include multipleSelected;
 
@@ -173,13 +179,15 @@
 						}
 					}
 
-					&[aria-disabled='true'], {
+					&[aria-disabled='true'],
+					&.is-disabled {
 						> .listboxOption-content {
 							@include multipleDisabled;
 						}
 
 						&[aria-selected='true'],
-						&[aria-checked='true'] {
+						&[aria-checked='true'],
+						&.is-selected {
 							> .listboxOption-content {
 								@include multipleSelectedDisabled;
 							}

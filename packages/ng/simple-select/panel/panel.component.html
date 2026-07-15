@@ -5,18 +5,18 @@
 				<ng-container *luPortal="tpl" />
 			</div>
 		}
-		<div role="listbox">
+		<lu-listbox [state]="listboxState()" [statusMsg]="listboxStatusMsg()">
 			@if (grouping() && groupTemplateLocation() === "group-header") {
 				@for (group of dataSourceOptions() | luOptionGroup: grouping().selector; track group.key; let groupIndex = $index) {
-					<div class="lu-picker-content-option-group" role="group" [attr.aria-labelledby]="selectId + '-group-' + group.key">
-						<span class="lu-picker-content-option-group-title" role="presentation" [id]="selectId + '-group-' + group.key">
-							<ng-container *luPortal="grouping().content; context: { $implicit: group }" />
-						</span>
-						<ng-template
-							[ngTemplateOutlet]="optionsList"
-							[ngTemplateOutletContext]="{ $implicit: group.options, groupIndex: groupIndex }"
-						/>
-					</div>
+					<lu-listbox-option group [groupId]="selectId + '-group-' + group.key">
+						<ng-container *luPortal="grouping().content; context: { $implicit: group }" />
+						<div optgroup class="listboxOptionWrapper">
+							<ng-template
+								[ngTemplateOutlet]="optionsList"
+								[ngTemplateOutletContext]="{ $implicit: group.options, groupIndex: groupIndex }"
+							/>
+						</div>
+					</lu-listbox-option>
 				}
 			}
 			@if (!grouping() || groupTemplateLocation() !== "group-header") {
@@ -26,6 +26,7 @@
 				@if (treeGenerator) {
 					@for (branch of options | luTreeDisplay: treeGenerator; let index = $index; track optionKey()(branch.node)) {
 						<lu-tree-branch
+							listbox
 							[branch]="branch"
 							[optionTpl]="optionTpl()"
 							[optionComparer]="optionComparer()"
@@ -38,6 +39,7 @@
 				} @else {
 					@for (option of options; track optionKey()(option); let index = $index) {
 						<lu-select-option
+							listbox
 							luCoreSelectPanelElement
 							[option]="option"
 							[optionTpl]="optionTpl()"
@@ -54,30 +56,20 @@
 					}
 				}
 			</ng-template>
-			@if (dataSourceOptions().length === 0 && !loading()) {
-				<div class="lu-picker-content-option-emptyState">
-					{{ clue().length ? intl().emptyResults : intl().emptyOptions }}
-				</div>
-			}
-		</div>
-		@if (loading()) {
-			<div class="lu-picker-content-loading">
-				<div class="loading">{{ intl().loading }}</div>
-			</div>
-		}
+		</lu-listbox>
 		@if (shouldDisplayAddOption()) {
-			<div
-				class="addOption palette-product is-stuck"
+			<lu-listbox-option
+				add
+				class="palette-product"
+				luCoreSelectPanelElement
+				#addOptionElement="luCoreSelectPanelElement"
+				elementId="picker-content-add"
+				[hovered]="addOptionElement.isHighlighted()"
 				(click)="selectInput.emitAddOption()"
 				(selected)="selectInput.emitAddOption()"
-				elementId="picker-content-add"
-				luCoreSelectPanelElement
 			>
-				<div class="addOption-content">
-					<lu-icon icon="mathsPlus" />
-					<ng-container *luPortal="selectInput.addOptionLabel" />
-				</div>
-			</div>
+				<ng-container *luPortal="selectInput.addOptionLabel" />
+			</lu-listbox-option>
 		}
 		@if (selectInput.panelFooterTpl(); as tpl) {
 			<div>

@@ -1,4 +1,20 @@
-<div class="optionItem-value" [class.is-disabled]="selectableItem.disabled" (click)="selectOption($event)">
+@if (listbox()) {
+	<lu-listbox-option
+		presentation
+		[checked]="selectableItem.isSelected()"
+		[hovered]="selectableItem.isHighlighted()"
+		[disabled]="selectableItem.disabled"
+		(click)="selectOption($event)"
+	>
+		<ng-container [ngTemplateOutlet]="optionContent" />
+	</lu-listbox-option>
+} @else {
+	<div class="optionItem-value" [class.is-disabled]="selectableItem.disabled" (click)="selectOption($event)">
+		<ng-container [ngTemplateOutlet]="optionContent" />
+	</div>
+}
+
+<ng-template #optionContent>
 	<ng-container *luOptionOutlet="optionTpl(); value: selectableItem.option()" />
 
 	@if (groupTemplateLocation() === "option") {
@@ -47,4 +63,4 @@
 			</span>
 		</div>
 	}
-</div>
+</ng-template>

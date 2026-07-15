@@ -15,6 +15,7 @@ let nextId = 0;
 	host: {
 		class: 'listboxOptionWrapper',
 		'[attr.role]': 'tree() ? "tree" : "listbox"',
+		'[attr.aria-multiselectable]': 'multiple() ? true : null',
 		'[class.mod-multiple]': 'multiple()',
 		'[attr.aria-busy]': 'state() === "loading"',
 		'[attr.aria-describedby]': 'state() === "empty" ? listboxId : null',

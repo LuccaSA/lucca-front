@@ -16,7 +16,7 @@ import {
 	ɵLuOptionComponent,
 	ɵLuOptionGroupPipe,
 } from '@lucca-front/ng/core-select';
-import { IconComponent } from '@lucca-front/ng/icon';
+import { ListboxComponent, ListboxState, OptionComponent as ListboxOptionComponent } from '@lucca-front/ng/listbox';
 import { TreeBranchComponent } from '@lucca-front/ng/tree-select';
 import { EMPTY } from 'rxjs';
 import { map } from 'rxjs/operators';
@@ -43,7 +43,8 @@ import { LuIsOptionSelectedPipe } from './option-selected.pipe';
 		LuIsOptionSelectedPipe,
 		PortalDirective,
 		ɵCoreSelectPanelElement,
-		IconComponent,
+		ListboxComponent,
+		ListboxOptionComponent,
 		TreeBranchComponent,
 		TreeDisplayPipe,
 	],
@@ -92,6 +93,16 @@ export class LuSelectPanelComponent<T> implements AfterViewInit, CoreSelectPanel
 	public readonly clue = toSignal(this.selectInput.clue$.pipe(map((clue) => clue ?? '')), { initialValue: '' });
 	public shouldDisplayAddOption = this.selectInput.shouldDisplayAddOption;
 	public groupTemplateLocation = ɵgetGroupTemplateLocation(this.hasGrouping, this.clue, this.searchable);
+
+	// Loading takes precedence over empty so the "no result" message never flashes during a fetch
+	readonly listboxState = computed<ListboxState | null>(() => (this.loading() ? 'loading' : this.dataSourceOptions().length === 0 ? 'empty' : null));
+
+	readonly listboxStatusMsg = computed(() => {
+		if (this.loading()) {
+			return this.intl().loading;
+		}
+		return this.clue().length ? this.intl().emptyResults : this.intl().emptyOptions;
+	});
 
 	onScroll(evt: Event): void {
 		if (!(evt.target instanceof HTMLElement)) {

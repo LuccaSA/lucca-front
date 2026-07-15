@@ -33,6 +33,11 @@ export class TreeBranchComponent<T> {
 
 	readonly simpleMode = input(false, { transform: booleanAttribute });
 
+	/**
+	 * Renders the branch options with the listbox visuals (see `ɵLuOptionComponent.listbox`).
+	 */
+	readonly listbox = input(false, { transform: booleanAttribute });
+
 	readonly depth = input(1);
 
 	constructor() {
