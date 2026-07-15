@@ -1,6 +1,7 @@
 /**
  * Quick Fix code actions for our diagnostics: replace an unknown pr-u-* class
- * with a close match, or a deprecated class with its recommended replacement.
+ * with a close match, replace a deprecated class with its recommended
+ * replacement, add a missing mixin `@use`, or remove an unused one.
  * Reachable via the standard Quick Fix menu (Ctrl+. / Cmd+.).
  */
 
@@ -9,7 +10,7 @@ import * as vscode from 'vscode';
 import { DIAGNOSTIC_SOURCE } from '../constants';
 import { ManifestService } from '../manifest/manifest-service';
 import { closestUtilities } from '../manifest/suggestions';
-import { computeUseInsertion } from '../context/scss-mixin-context';
+import { computeUseInsertion, findUseImports } from '../context/scss-mixin-context';
 
 export class QuickFixProvider implements vscode.CodeActionProvider {
 	static readonly kinds = [vscode.CodeActionKind.QuickFix];
@@ -34,6 +35,10 @@ export class QuickFixProvider implements vscode.CodeActionProvider {
 				}
 				continue;
 			}
+			if (diagnostic.code === 'unused-mixin-import') {
+				actions.push(this.makeRemoveImportFix(document, diagnostic));
+				continue;
+			}
 			const replacements = this.replacementsFor(diagnostic.code, name, index.utilities.get(name)?.replacement, index.utilityNames);
 			replacements.forEach((replacement, i) => {
 				actions.push(this.makeFix(document, diagnostic, name, replacement, i === 0));
@@ -53,6 +58,20 @@ export class QuickFixProvider implements vscode.CodeActionProvider {
 		const action = new vscode.CodeAction(`Add @use import for '${ns}'`, vscode.CodeActionKind.QuickFix);
 		action.edit = new vscode.WorkspaceEdit();
 		action.edit.insert(document.uri, document.positionAt(insertion.offset), insertion.text);
+		action.diagnostics = [diagnostic];
+		action.isPreferred = true;
+		return action;
+	}
+
+	/** Builds a fix that deletes the unused `@use` statement (whole line). */
+	private makeRemoveImportFix(document: vscode.TextDocument, diagnostic: vscode.Diagnostic): vscode.CodeAction {
+		const [use] = findUseImports(document.getText(diagnostic.range));
+		const namespace = use?.namespace ?? '';
+		const startLine = diagnostic.range.start.line;
+		const range = new vscode.Range(new vscode.Position(startLine, 0), new vscode.Position(diagnostic.range.end.line + 1, 0));
+		const action = new vscode.CodeAction(`Remove unused @use '${namespace}'`, vscode.CodeActionKind.QuickFix);
+		action.edit = new vscode.WorkspaceEdit();
+		action.edit.delete(document.uri, range);
 		action.diagnostics = [diagnostic];
 		action.isPreferred = true;
 		return action;

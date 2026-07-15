@@ -41,6 +41,34 @@ describe('analyze — utility classes ending in %', () => {
 	});
 });
 
+describe('analyze — unused scss @use imports', () => {
+	it('flags a Lucca util import that is never referenced', () => {
+		expect(names("@use '@lucca-front/scss/src/commons/utils/media';\n.a { color: red; }", 'scss')).toEqual(['unused-mixin-import:media']);
+	});
+
+	it('does not flag when the namespace is referenced', () => {
+		const text = "@use '@lucca-front/scss/src/commons/utils/media';\n.a { @include media.min('M') {} }";
+		expect(names(text, 'scss')).toEqual([]);
+	});
+
+	it('does not flag a non-Lucca import (side effects unknown)', () => {
+		expect(names("@use 'some/other/media';\n.a { color: red; }", 'scss')).toEqual([]);
+	});
+
+	it('does not flag a wildcard import', () => {
+		expect(names("@use '@lucca-front/scss/src/commons/utils/media' as *;\n.a { color: red; }", 'scss')).toEqual([]);
+	});
+
+	it('counts function/variable references, not just @include', () => {
+		const text = "@use '@lucca-front/scss/src/commons/utils/media';\n.a { width: media.$foo; }";
+		expect(names(text, 'scss')).toEqual([]);
+	});
+
+	it('ignores @forward entirely', () => {
+		expect(names("@forward '@lucca-front/scss/src/commons/utils/media';", 'scss')).toEqual([]);
+	});
+});
+
 describe('analyze — scss mixin imports', () => {
 	it('flags a known mixin whose namespace is not imported', () => {
 		expect(names(".a { @include media.min('M') { color: red; } }", 'scss')).toEqual(['missing-mixin-import:media.min']);

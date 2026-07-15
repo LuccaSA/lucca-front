@@ -1,4 +1,4 @@
-import { computeUseInsertion, findImportedNamespaces, findMixinIncludes, getMixinCompletionContext } from './scss-mixin-context';
+import { computeUseInsertion, findImportedNamespaces, findMixinIncludes, findUseImports, getMixinCompletionContext, isNamespaceReferenced } from './scss-mixin-context';
 
 /** Places the cursor at the `|` marker and returns the completion context. */
 function at(input: string) {
@@ -52,6 +52,42 @@ describe('findMixinIncludes', () => {
 		expect(ref.namespace).toBe('media');
 		expect(ref.name).toBe('min');
 		expect(text.slice(ref.start, ref.end)).toBe('media.min');
+	});
+});
+
+describe('findUseImports', () => {
+	it('captures namespace, path and offsets, spanning the terminating ;', () => {
+		const text = "@use '@lucca-front/scss/src/commons/utils/media';\n.a {}";
+		const [use] = findUseImports(text);
+		expect(use.namespace).toBe('media');
+		expect(use.path).toBe('@lucca-front/scss/src/commons/utils/media');
+		expect(text.slice(use.start, use.end)).toBe("@use '@lucca-front/scss/src/commons/utils/media';");
+	});
+
+	it('handles `as` aliases and `with (...)` configuration', () => {
+		const uses = findUseImports("@use 'a/media' as mq;\n@use 'b/config' with ($x: 1);");
+		expect(uses[0].namespace).toBe('mq');
+		expect(uses[1].namespace).toBe('config');
+	});
+
+	it('reports a wildcard import as having no namespace', () => {
+		const [use] = findUseImports("@use 'a/media' as *;");
+		expect(use.namespace).toBeUndefined();
+	});
+});
+
+describe('isNamespaceReferenced', () => {
+	const text = "@use 'x/media';\n.a { @include media.min('M') {} }";
+	const use = findUseImports(text)[0];
+
+	it('finds a reference outside the @use statement', () => {
+		expect(isNamespaceReferenced(text, 'media', use.start, use.end)).toBe(true);
+	});
+
+	it('does not count the @use statement itself', () => {
+		const only = "@use 'x/media';";
+		const u = findUseImports(only)[0];
+		expect(isNamespaceReferenced(only, 'media', u.start, u.end)).toBe(false);
 	});
 });
 

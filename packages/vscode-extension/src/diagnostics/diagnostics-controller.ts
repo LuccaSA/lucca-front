@@ -86,6 +86,10 @@ export class DiagnosticsController implements vscode.Disposable {
 			const importPath = index.mixinNamespaces.get(ns);
 			message = `Namespace \`${ns}\` is not imported. Add \`@use '${importPath}';\`.`;
 			severity = vscode.DiagnosticSeverity.Warning;
+		} else if (finding.kind === 'unused-mixin-import') {
+			message = `\`@use\` of \`${finding.name}\` is never referenced in this file and can be removed.`;
+			severity = vscode.DiagnosticSeverity.Hint;
+			tags.push(vscode.DiagnosticTag.Unnecessary);
 		} else if (finding.kind === 'unknown-class') {
 			const [suggestion] = closestUtilities(finding.name, index.utilityNames, 1);
 			const hint = suggestion ? ` Did you mean \`${suggestion}\`?` : ' Check the spelling, or upgrade the package.';

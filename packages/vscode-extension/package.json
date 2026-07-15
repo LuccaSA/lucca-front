@@ -2,7 +2,7 @@
 	"name": "lucca-front-intellisense",
 	"displayName": "Lucca Front IntelliSense",
 	"description": "Autocomplete, hover and diagnostics for @lucca-front/scss custom properties, pr-u-* utility classes and commons/utils mixins",
-	"version": "0.4.0",
+	"version": "0.5.0",
 	"publisher": "lucca",
 	"private": true,
 	"license": "MIT",

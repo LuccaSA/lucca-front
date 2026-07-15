@@ -4,12 +4,15 @@
  */
 
 import { findClassAttributeValues } from '../context/class-context';
-import { findImportedNamespaces, findMixinIncludes } from '../context/scss-mixin-context';
+import { findImportedNamespaces, findMixinIncludes, findUseImports, isNamespaceReferenced } from '../context/scss-mixin-context';
 import { findInlineTemplateRegions } from '../context/inline-template';
 import { ManifestIndex } from '../manifest/index-model';
 import { CSS_LANGUAGES, UTILITY_PREFIX } from '../constants';
 
-export type FindingKind = 'deprecated-property' | 'deprecated-class' | 'unknown-class' | 'missing-mixin-import';
+export type FindingKind = 'deprecated-property' | 'deprecated-class' | 'unknown-class' | 'missing-mixin-import' | 'unused-mixin-import';
+
+/** A commons/utils import path, e.g. `@lucca-front/scss/src/commons/utils/media`. */
+const UTIL_IMPORT_RE = /(?:^|\/)commons\/utils\/([\w-]+)$/;
 
 export interface Finding {
 	startOffset: number;
@@ -34,6 +37,7 @@ export function analyze(text: string, languageId: string, index: ManifestIndex, 
 		const findings = analyzeCss(text, index, flags);
 		if (languageId === 'scss') {
 			findings.push(...analyzeMixinImports(text, index));
+			findings.push(...analyzeUnusedImports(text, index));
 		}
 		return findings;
 	}
@@ -67,6 +71,35 @@ function analyzeMixinImports(text: string, index: ManifestIndex): Finding[] {
 		const key = `${ref.namespace}.${ref.name}`;
 		if (index.mixinLookup.has(key) && !imported.has(ref.namespace)) {
 			findings.push({ startOffset: ref.start, endOffset: ref.end, kind: 'missing-mixin-import', name: key });
+		}
+	}
+	return findings;
+}
+
+/**
+ * Flags `@use` of a Lucca `commons/utils` module whose namespace is never
+ * referenced in the file, so it can be safely removed. Scoped to these modules
+ * on purpose: they only define mixins/functions/variables (no CSS side effects
+ * on import), so "no `namespace.` reference" reliably means "dead import".
+ *
+ * Deliberately conservative: `@use … as *` (wildcard, members used unqualified)
+ * and aliased imports of unknown namespaces are never flagged, and `@forward`
+ * is ignored entirely — it re-exports to other files, so local use can't be
+ * determined here.
+ */
+function analyzeUnusedImports(text: string, index: ManifestIndex): Finding[] {
+	if (index.mixins.length === 0) {
+		return [];
+	}
+	const findings: Finding[] = [];
+	for (const use of findUseImports(text)) {
+		const utilMatch = UTIL_IMPORT_RE.exec(use.path.replace(/\.scss$/, ''));
+		// Only known, side-effect-free util modules imported under their default namespace.
+		if (!utilMatch || !use.namespace || use.namespace !== utilMatch[1] || !index.mixinNamespaces.has(use.namespace)) {
+			continue;
+		}
+		if (!isNamespaceReferenced(text, use.namespace, use.start, use.end)) {
+			findings.push({ startOffset: use.start, endOffset: use.end, kind: 'unused-mixin-import', name: use.namespace });
 		}
 	}
 	return findings;

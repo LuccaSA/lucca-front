@@ -61,6 +61,53 @@ export function findImportedNamespaces(text: string): Set<string> {
 	return set;
 }
 
+export interface UseImport {
+	/** Namespace the module is bound to, or undefined for `@use … as *` (wildcard). */
+	namespace: string | undefined;
+	/** The imported module path (quotes stripped). */
+	path: string;
+	/** Offset of the `@use` keyword. */
+	start: number;
+	/** Offset just past the terminating `;`. */
+	end: number;
+}
+
+/** Every `@use` statement in the document, with its bound namespace and offsets. */
+export function findUseImports(text: string): UseImport[] {
+	const out: UseImport[] = [];
+	const re = /@use\s+['"]([^'"]+)['"]([^;]*);/g;
+	let match: RegExpExecArray | null;
+	while ((match = re.exec(text)) !== null) {
+		const path = match[1];
+		const aliasMatch = /\bas\s+([\w*-]+)/.exec(match[2]);
+		let namespace: string | undefined;
+		if (aliasMatch) {
+			namespace = aliasMatch[1] === '*' ? undefined : aliasMatch[1];
+		} else {
+			const basename = path.split('/').pop() ?? path;
+			namespace = basename.replace(/^_/, '').replace(/\.scss$/, '');
+		}
+		out.push({ namespace, path, start: match.index, end: match.index + match[0].length });
+	}
+	return out;
+}
+
+/**
+ * True when a `namespace.` member reference (variable, function, or mixin)
+ * appears anywhere in `text` outside the `[excludeStart, excludeEnd)` range
+ * (the `@use` statement itself).
+ */
+export function isNamespaceReferenced(text: string, namespace: string, excludeStart: number, excludeEnd: number): boolean {
+	const re = new RegExp(`\\b${namespace.replace(/[.*+?^${}()|[\\]\\\\]/g, '\\$&')}\\.`, 'g');
+	let match: RegExpExecArray | null;
+	while ((match = re.exec(text)) !== null) {
+		if (match.index < excludeStart || match.index >= excludeEnd) {
+			return true;
+		}
+	}
+	return false;
+}
+
 export interface MixinInclude {
 	namespace: string;
 	name: string;
