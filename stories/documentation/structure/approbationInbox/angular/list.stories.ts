@@ -1,6 +1,5 @@
 import { FormsModule } from '@angular/forms';
 import {
-	ApprobationInboxButtonComponent,
 	ApprobationInboxGroupComponent,
 	ApprobationInboxIcon,
 	ApprobationInboxIconsComponent,
@@ -65,9 +64,6 @@ export default {
 			description: 'Intitulé du bouton de transfert du formulaire.',
 			if: { arg: 'selectable', truthy: true },
 		},
-		button: {
-			description: 'Exemple d’élément qui ne serait pas géré via un lien.',
-		},
 		current: {
 			description: 'Définit le lien (ou le bouton) comme l’élément courant affiché.',
 		},
@@ -101,7 +97,6 @@ export default {
 				ApprobationInboxListComponent,
 				ApprobationInboxItemComponent,
 				ApprobationInboxLinkComponent,
-				ApprobationInboxButtonComponent,
 				ApprobationInboxGroupComponent,
 				ApprobationInboxIconsComponent,
 				ApprobationInboxSubtleComponent,
@@ -120,7 +115,7 @@ export default {
 			],
 		}),
 	],
-	render: ({ filterBar, group, groupLabel, button, illustration, data, center, selected, itemCount, itemLabel, current, icons, ...args }, { argTypes }) => {
+	render: ({ filterBar, group, groupLabel, illustration, data, center, selected, itemCount, itemLabel, current, icons, ...args }, { argTypes }) => {
 		const centerParam = center ? ` center` : ``;
 		const selectedParam = selected ? ` [checked]="true"` : ``;
 		const currentParam = current ? ` current` : ``;
@@ -136,9 +131,7 @@ export default {
 				<lu-approbation-inbox-list-subtle>Data</lu-approbation-inbox-list-subtle>
 			</ng-container>`
 			: ``;
-		const actionTpl = button
-			? `<button type="button"${currentParam} lu-approbation-inbox-list-action approbationInboxListItemTitle>${itemLabel}</button>`
-			: `<a href="#"${currentParam} lu-approbation-inbox-list-action approbationInboxListItemTitle>${itemLabel}</a>`;
+		const actionTpl = `<a href="#"${currentParam} lu-approbation-inbox-list-action approbationInboxListItemTitle>${itemLabel}</a>`;
 		const centerTpl = `
 			${actionTpl}
 			Metadata`;
@@ -187,7 +180,6 @@ export const Basic: StoryObj<
 		filterBar: boolean;
 		group: false;
 		groupLabel: string;
-		button: boolean;
 		current: boolean;
 		illustration: boolean;
 		data: boolean;
@@ -207,7 +199,6 @@ export const Basic: StoryObj<
 		forwardLabel: 'Transfer items',
 		group: false,
 		groupLabel: 'Group',
-		button: false,
 		current: false,
 		itemLabel: 'Title',
 		illustration: false,

@@ -1,6 +1,5 @@
 import { FormsModule } from '@angular/forms';
 import {
-	ApprobationInboxButtonComponent,
 	ApprobationInboxDetailComponent,
 	ApprobationInboxDetailMainBlockComponent,
 	ApprobationInboxGroupComponent,
@@ -67,7 +66,6 @@ export default {
 				ApprobationInboxGroupComponent,
 				ApprobationInboxItemComponent,
 				ApprobationInboxLinkComponent,
-				ApprobationInboxButtonComponent,
 				ApprobationInboxDetailComponent,
 				ApprobationInboxHeaderComponent,
 				ContainerComponent,

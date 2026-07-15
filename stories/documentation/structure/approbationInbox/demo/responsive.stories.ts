@@ -1,6 +1,5 @@
 import { FormsModule } from '@angular/forms';
 import {
-	ApprobationInboxButtonComponent,
 	ApprobationInboxDetailComponent,
 	ApprobationInboxDetailMainBlockComponent,
 	ApprobationInboxGroupComponent,
@@ -68,7 +67,6 @@ export default {
 				ApprobationInboxGroupComponent,
 				ApprobationInboxItemComponent,
 				ApprobationInboxLinkComponent,
-				ApprobationInboxButtonComponent,
 				ApprobationInboxDetailComponent,
 				ApprobationInboxHeaderComponent,
 				ApprobationInboxIconsComponent,
@@ -149,9 +147,6 @@ export default {
 								Data
 								<lu-approbation-inbox-list-subtle>Data</lu-approbation-inbox-list-subtle>
 							</ng-container>
-						</lu-approbation-inbox-list-item>
-						<lu-approbation-inbox-list-item>
-							<button type="button" lu-approbation-inbox-list-action approbationInboxListItemTitle>button</button>
 						</lu-approbation-inbox-list-item>
 					</lu-approbation-inbox-list-group>
 					<lu-approbation-inbox-list-group label="Group label">
