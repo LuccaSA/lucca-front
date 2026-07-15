@@ -38,7 +38,7 @@ export class RichTextPluginTagComponent implements RichTextPluginComponent, OnDe
 	readonly isDisabled = signal(false);
 	readonly focusIndex = signal<number>(0);
 
-	readonly focusableElements = viewChildren('tagButton', { read: ElementRef });
+	readonly focusableElements = viewChildren('focusable', { read: ElementRef });
 	readonly primaryTags = computed(() => this.tags().filter((t) => !t.secondary));
 	readonly secondaryTags = computed(() => this.tags().filter((t) => t.secondary));
 	readonly filteredSecondaryTags = computed(() => {

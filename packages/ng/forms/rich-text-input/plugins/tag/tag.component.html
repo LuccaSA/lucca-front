@@ -9,7 +9,7 @@
 			(keyup.enter)="!isDisabled() ? insertTag(tag) : null"
 			class="richTextField-toolbar-chips-chip"
 			palette="product"
-			#tagButton
+			#focusable
 			unkillable
 		>
 			<span class="pr-u-mask">{{ intl().insertTag }}</span>
@@ -17,10 +17,11 @@
 		</lu-chip>
 	}
 	@if (secondaryTags().length) {
-		<lu-filter-pill [label]="intl().selectTag" class="tagSelect" #filterPillRef>
+		<lu-filter-pill [label]="intl().selectTag" class="tagSelect" tabindex="-1" aria-hidden="true" #filterPillRef>
 			<lu-simple-select
 				[formControl]="selectedTagControl"
 				[options]="filteredSecondaryTags()"
+				[disabled]="isDisabled()"
 				(clueChange)="tagSearch.set($event)"
 				size="XS"
 				#tagsSelect
@@ -34,7 +35,15 @@
 			</lu-simple-select>
 		</lu-filter-pill>
 
-		<button luButton="ghost" type="button" size="XS" (click)="filterPillRef.popoverRef().openPopover(true)">
+		<button
+			luButton="ghost"
+			type="button"
+			size="XS"
+			(click)="filterPillRef.popoverRef().openPopover(true)"
+			[disabled]="isDisabled()"
+			[attr.tabindex]="isDisabled() ? null : !primaryTags().length ? 0 : -1"
+			#focusable
+		>
 			<lu-icon icon="mathsPlus" />
 			{{ intl().selectTag }}
 		</button>
