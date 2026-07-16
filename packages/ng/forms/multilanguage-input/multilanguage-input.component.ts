@@ -117,9 +117,12 @@ export class MultilanguageInputComponent implements ControlValueAccessor {
 
 	protected getPopoverInlineSizeRem(inputElement: HTMLInputElement): number {
 		const inputContainer = inputElement.closest('.textField-input');
-		const referenceWidth = (inputContainer instanceof HTMLElement ? inputContainer : inputElement).getBoundingClientRect().width;
+		const inputContainerInlineSize = (inputContainer instanceof HTMLElement ? inputContainer : inputElement).getBoundingClientRect().width;
 
-		return this.hasNoInvariant() ? referenceWidth / 16 + 3.25 : referenceWidth / 16 + 0.5;
+		// Add to the inline size of the input container (converted from px to rem):
+		// 2.75rem, which corresponds to the width of the prefix before the field when in "no invariant" mode
+		// 0.5rem, which corresponds to the offset needed to make the poppover slightly wider than the input container
+		return this.hasNoInvariant() ? inputContainerInlineSize / 16 + 2.75 + 0.5 : inputContainerInlineSize / 16 + 0.5;
 	}
 
 	writeValue(value: MultilanguageTranslation[]): void {
