@@ -33,7 +33,7 @@ function tryParsePhoneNumber(phoneNumber: string, countryCode?: CountryCode): Pa
 		};
 	} catch {
 		return {
-			number: phoneNumber,
+			number: phoneNumber as E164Number,
 			nationalNumber: phoneNumber,
 			isValid: false,
 		};
@@ -194,7 +194,7 @@ export class PhoneNumberInputComponent implements ControlValueAccessor, Validato
 				this.#onChange?.(number);
 				return;
 			} catch {
-				this.#onChange?.(displayedNumber);
+				this.#onChange?.(displayedNumber as E164Number);
 			}
 		}
 	}
