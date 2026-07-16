@@ -6,12 +6,16 @@
 		tabindex="0"
 		(scroll)="onScroll($event)"
 	>
-		@if (selectInput.panelHeaderTpl(); as tpl) {
-			<div>
-				<ng-container *luPortal="tpl" />
-			</div>
-		}
 		<lu-listbox multiple class="lu-picker-content-option" [state]="listboxState()" [statusMsg]="listboxStatusMsg()">
+			<!-- The header is projected inside the listbox because it can contain selectable elements
+			(e.g. the select-all checkbox) that are referenced by aria-activedescendant -->
+			<ng-container ngProjectAs="[listbox-header]">
+				@if (selectInput.panelHeaderTpl(); as tpl) {
+					<div>
+						<ng-container *luPortal="tpl" />
+					</div>
+				}
+			</ng-container>
 			@if (grouping() && groupTemplateLocation() === "group-header") {
 				@for (group of dataSourceOptions() | luOptionGroup: grouping().selector; track group.key; let groupIndex = $index) {
 					<div class="lu-picker-content-group" role="group" attr.aria-labelledby="lu-select-{{ selectId }}-group-{{ groupIndex }}">
