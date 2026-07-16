@@ -1,6 +1,6 @@
 import { EmbeddedViewRef, TemplateRef, ViewContainerRef } from '@angular/core';
 import { AutoLinkNode, LinkAttributes, LinkNode, SerializedAutoLinkNode } from '@lexical/link';
-import { DOMExportOutput, EditorConfig, LexicalEditor, type NodeKey } from 'lexical';
+import { DOMExportOutput, EditorConfig, ElementDOMSlot, LexicalEditor, type NodeKey } from 'lexical';
 import { LinkTemplateContext } from './link-template-context';
 
 export class PopoverAutoLinkNode extends AutoLinkNode {
@@ -50,11 +50,16 @@ export class PopoverAutoLinkNode extends AutoLinkNode {
 			}
 			// Create the view
 			this.#view = this.#viewContainerRef.createEmbeddedView(this.#templateRef, context);
+			this.#view.detectChanges();
 
 			// Return the template DOM element
 			return this.#view.rootNodes[0] as HTMLElement;
 		}
 		return super.createDOM(config);
+	}
+
+	override getDOMSlot(element: HTMLElement): ElementDOMSlot {
+		return super.getDOMSlot(element.getElementsByClassName('link-text')[0] as HTMLElement);
 	}
 
 	override updateDOM(prevNode: this): boolean {
@@ -72,6 +77,10 @@ export class PopoverAutoLinkNode extends AutoLinkNode {
 		return {
 			element: super.createDOM(editor._config),
 		};
+	}
+
+	static override importDOM(): null {
+		return AutoLinkNode.importDOM();
 	}
 
 	override remove(preserveEmptyParent?: boolean) {
