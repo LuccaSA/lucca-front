@@ -39,6 +39,7 @@
 
 			.calendar-table-body-row-cell {
 				&.is-selected {
+					@include selected;
 					@include weekSelected;
 				}
 			}
@@ -137,10 +138,6 @@
 			&[aria-disabled='true'] {
 				@include disabled;
 			}
-		}
-
-		&:is(th):has(+ .calendar-table-body-row-cell.is-current) {
-			@include current;
 		}
 	}
 }

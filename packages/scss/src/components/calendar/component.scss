@@ -255,10 +255,12 @@
 
 		.calendar-table-body-row-cell-action-week {
 			outline: 1px solid var(--components-calendar-table-body-row-cell-action-week-outlineColor);
-			padding: var(--pr-t-spacings-25) var(--pr-t-spacings-50);
 			line-height: var(--pr-t-font-body-XS-lineHeight);
 			border-radius: var(--pr-t-border-radius-small);
-			min-inline-size: var(--pr-t-spacings-300);
+			min-inline-size: calc(var(--pr-t-spacings-250) + var(--pr-t-spacings-25));
+			aspect-ratio: 1;
+			display: grid;
+			place-items: center;
 		}
 
 		.calendar-table-body-row-cell-action-stripes {
