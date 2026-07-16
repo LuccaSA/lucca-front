@@ -2,8 +2,8 @@ import { HttpClientModule } from '@angular/common/http';
 import { BUBBLE_ILLUSTRATION, BUBBLE_ILLUSTRATION_SIZE } from '@lucca-front/ng/bubble-illustration';
 import { LuSafeExternalSvgPipe } from '@lucca-front/ng/safe-content';
 import { DECORATIVE_PALETTE, PALETTE } from '@lucca/prisme/core';
-import { Meta, moduleMetadata, StoryObj } from '@storybook/angular';
-import { setStoryOptions } from 'stories/helpers/stories';
+import { Meta, moduleMetadata, StoryObj } from '@storybook/angular-vite';
+import { setStoryOptions } from '@/helpers/stories';
 
 interface BubbleIllustrationBasicStory {
 	illustration: string;

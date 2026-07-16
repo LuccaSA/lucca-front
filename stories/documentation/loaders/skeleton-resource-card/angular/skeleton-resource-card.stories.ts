@@ -1,6 +1,6 @@
 import { provideRouter } from '@angular/router';
 import { SkeletonResourceCardComponent } from '@lucca-front/ng/skeleton';
-import { applicationConfig, Meta, StoryObj } from '@storybook/angular';
+import { applicationConfig, Meta, StoryObj } from '@storybook/angular-vite';
 
 export default {
 	title: 'Documentation/Loaders/Skeleton/Skeleton Resource Card',

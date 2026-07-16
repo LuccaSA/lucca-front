@@ -2,9 +2,9 @@ import { ButtonComponent } from '@lucca-front/ng/button';
 import { DropdownActionComponent, DropdownDividerComponent, DropdownGroupComponent, DropdownItemComponent, DropdownMenuComponent, LuDropdownTriggerDirective } from '@lucca-front/ng/dropdown';
 import { IconComponent } from '@lucca-front/ng/icon';
 import { PopoverPosition } from '@lucca-front/ng/popover2';
-import { Meta, moduleMetadata, StoryObj } from '@storybook/angular';
-import { createTestStory } from 'stories/helpers/stories';
-import { waitForAngular } from 'stories/helpers/test';
+import { Meta, moduleMetadata, StoryObj } from '@storybook/angular-vite';
+import { createTestStory } from '@/helpers/stories';
+import { waitForAngular } from '@/helpers/test';
 import { expect, screen, userEvent, within } from 'storybook/test';
 
 interface DropdownBasicStory {

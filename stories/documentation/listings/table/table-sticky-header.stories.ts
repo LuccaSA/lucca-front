@@ -1,4 +1,4 @@
-import { Meta, StoryObj } from '@storybook/angular';
+import { Meta, StoryObj } from '@storybook/angular-vite';
 
 interface TableStickyHeaderStory {}
 
@@ -51,7 +51,7 @@ function getTemplate(args: TableStickyHeaderStory): string {
 				</tr>
 			</tbody>
 		</table>
-	
+
 	`;
 }
 

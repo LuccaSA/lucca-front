@@ -1,3 +1,5 @@
+import { HiddenArgType } from '@/helpers/common-arg-types';
+import { createTestStory, getStoryGenerator, useDocumentationStory } from '@/helpers/stories';
 import { I18nPluralPipe, SlicePipe } from '@angular/common';
 import { provideHttpClient } from '@angular/common/http';
 import { LOCALE_ID } from '@angular/core';
@@ -21,9 +23,7 @@ import { IconComponent } from '@lucca-front/ng/icon';
 import { LuSimpleSelectInputComponent } from '@lucca-front/ng/simple-select';
 import { TreeSelectDirective } from '@lucca-front/ng/tree-select';
 import { LuUserDisplayPipe, LuUserPictureComponent } from '@lucca-front/ng/user';
-import { applicationConfig, Meta, moduleMetadata } from '@storybook/angular';
-import { HiddenArgType } from 'stories/helpers/common-arg-types';
-import { createTestStory, getStoryGenerator, useDocumentationStory } from 'stories/helpers/stories';
+import { applicationConfig, Meta, moduleMetadata } from '@storybook/angular-vite';
 import { expect, screen, userEvent, waitFor, within } from 'storybook/test';
 import { waitForAngular } from '../../../helpers/test';
 import { LuCoreSelectLegumesDirective } from './custom-api-example.component';

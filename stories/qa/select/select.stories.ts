@@ -4,7 +4,7 @@ import { FormsModule } from '@angular/forms';
 import { FormFieldComponent } from '@lucca-front/ng/form-field';
 import { LuMultiDisplayerDirective, LuMultiSelectCounterDisplayerComponent, LuMultiSelectDisplayerInputDirective, LuMultiSelectInputComponent } from '@lucca-front/ng/multi-select';
 import { LuSimpleSelectInputComponent } from '@lucca-front/ng/simple-select';
-import { Meta } from '@storybook/angular';
+import { Meta } from '@storybook/angular-vite';
 
 @Component({
 	selector: 'select-stories',
