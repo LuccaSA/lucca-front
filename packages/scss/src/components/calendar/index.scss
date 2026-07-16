@@ -33,7 +33,8 @@
 			@include third;
 		}
 
-		&:has(.calendar-table-body-row-cell-action-week) {
+		// if rows have height columns (display for weeks)
+		&:has(.calendar-table-body-row-cell:nth-child(8):last-child) {
 			@include week;
 
 			.calendar-table-body-row-cell {
@@ -99,10 +100,7 @@
 			@include current;
 		}
 
-		&.is-selected {
-			@include selected;
-		}
-
+		&.is-selected,
 		&.is-selectionInProgress {
 			&:not(.is-overflow) {
 				@include selected;
@@ -139,6 +137,10 @@
 			&[aria-disabled='true'] {
 				@include disabled;
 			}
+		}
+
+		&:is(th):has(+ .calendar-table-body-row-cell.is-current) {
+			@include current;
 		}
 	}
 }

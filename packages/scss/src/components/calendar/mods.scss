@@ -19,7 +19,7 @@
 }
 
 @mixin week {
-	--components-calendarWidth: var(--components-calendarWrapperWidth, 19.5rem);
+	--components-calendarWrapperWidth: 19.5rem;
 	--components-calendar-table-body-row-cellSelectedBeforeBackgroundColor: var(--palettes-700, var(--palettes-product-700));
 	--components-calendar-table-body-row-cellSelectedBeforeInset: 1px 0;
 }
