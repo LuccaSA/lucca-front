@@ -176,7 +176,7 @@ export const WithHtmlFormatter: StoryObj<RichTextInputComponent & { value: strin
 		};
 	},
 	args: {
-		value: 'Lorem <b>ipsum</b> dolor',
+		value: '<a href="https://example.com">Lorem</a> <b>ipsum</b> dolor https://example.com',
 		placeholder: 'Placeholder…',
 		disabled: false,
 		required: false,
