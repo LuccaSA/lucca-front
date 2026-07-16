@@ -1,6 +1,6 @@
 import { CodeComponent } from '@lucca-front/ng/code';
-import { Meta, moduleMetadata } from '@storybook/angular';
-import { cleanupTemplate } from 'stories/helpers/stories';
+import { Meta, moduleMetadata } from '@storybook/angular-vite';
+import { cleanupTemplate } from '@/helpers/stories';
 
 interface CodeBasicStory {
 	block: boolean;

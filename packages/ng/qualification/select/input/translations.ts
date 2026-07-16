@@ -23,4 +23,7 @@
 	en: {
 		qualifications: 'qualifications',
 	},
+	pl: {
+		qualifications: 'kwalifikacje',
+	},
 };

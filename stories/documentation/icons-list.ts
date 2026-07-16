@@ -581,4 +581,9 @@ export const IconsList = [
 	{ icon: 'weatherSunny', deprecated: false },
 	{ icon: 'weatherSun', deprecated: true },
 	{ icon: 'weight', deprecated: false },
+	{ icon: 'window', deprecated: false },
+	{ icon: 'windowAside', deprecated: false },
+	{ icon: 'windowAsideLarge', deprecated: false },
+	{ icon: 'windowCornerBottom', deprecated: false },
+	{ icon: 'windowCornerTop', deprecated: false },
 ];

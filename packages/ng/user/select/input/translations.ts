@@ -31,4 +31,8 @@
 		users: 'users',
 		me: 'Me:',
 	},
+	pl: {
+		users: 'użytkownicy',
+		me: 'Ja:',
+	},
 };

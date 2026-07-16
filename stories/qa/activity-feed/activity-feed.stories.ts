@@ -4,7 +4,7 @@ import { ActivityFeedComponent, ActivityFeedStepComponent, ActivityFeedUpdateCom
 import { CommentComponent } from '@lucca-front/ng/comment';
 import { StatusBadgeComponent } from '@lucca-front/ng/status-badge';
 import { ButtonComponent } from '@lucca/prisme/button';
-import { Meta, StoryObj } from '@storybook/angular';
+import { Meta, StoryObj } from '@storybook/angular-vite';
 
 @Component({
 	selector: 'activity-feed-stories',

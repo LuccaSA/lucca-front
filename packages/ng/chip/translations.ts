@@ -39,4 +39,9 @@
 		warning: 'Warning',
 		error: 'Error',
 	},
+	pl: {
+		delete: 'Usuń',
+		warning: 'Ostrzeżenie',
+		error: 'Błąd',
+	},
 };

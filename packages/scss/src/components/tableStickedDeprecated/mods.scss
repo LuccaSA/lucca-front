@@ -190,14 +190,14 @@
 
 @mixin stickyHeaderBanner {
 	.table-head-row-cell {
-		inset-block-start: var(commons-banner-height);
+		inset-block-start: var(--commons-banner-height);
 	}
 
 	.table-body-row-cell,
 	.table-foot-row-cell {
 		inset-block-start:
 			calc(
-				var(commons-banner-height)
+				var(--commons-banner-height)
 				+ var(--sticky-header-shadow-offset-top)
 				+ var(--components-tableFixed-column-sticky-shadow-width)
 			);
@@ -206,7 +206,7 @@
 			&::after {
 				inset-block-start:
 					calc(
-						var(commons-banner-height)
+						var(--commons-banner-height)
 						+ var(--sticky-header-shadow-offset-top)
 						+ var(--components-tableFixed-column-sticky-shadow-width)
 					);

@@ -1,6 +1,6 @@
 import { BoxComponent } from '@lucca-front/ng/box';
-import { Meta, moduleMetadata, StoryObj } from '@storybook/angular';
-import { cleanupTemplate, generateInputs } from 'stories/helpers/stories';
+import { Meta, moduleMetadata, StoryObj } from '@storybook/angular-vite';
+import { cleanupTemplate, generateInputs } from '@/helpers/stories';
 
 export default {
 	title: 'Documentation/Structure/Box/Angular/Basic',
@@ -10,6 +10,9 @@ export default {
 		},
 		killable: {
 			description: 'Ajoute un bouton de fermeture.',
+		},
+		killed: {
+			description: 'Événement déclenché lorsque la box est fermée.',
 		},
 	},
 	decorators: [

@@ -3,6 +3,7 @@ import { ComponentFixture, TestBed, fakeAsync, tick } from '@angular/core/testin
 import { By } from '@angular/platform-browser';
 import { LuSimpleSelectInputComponent } from '@lucca-front/ng/simple-select';
 import { NEVER, Observable, map, of } from 'rxjs';
+import type { MockInstance } from 'vitest';
 import { MAGIC_OPTION_SCROLL_DELAY } from '../option/option.component';
 import { ALuCoreSelectApiDirective, MAGIC_DEBOUNCE_DURATION } from './api.directive';
 
@@ -57,7 +58,7 @@ describe('ALuCoreSelectApiDirective', () => {
 	let selectElement: HTMLElement;
 	let select: LuSimpleSelectInputComponent<TestEntity>;
 	let testApi: TestDirective;
-	let getOptionsSpy: jest.SpyInstance<Observable<TestEntity[]>, []>;
+	let getOptionsSpy: MockInstance;
 
 	beforeEach(() => {
 		TestBed.configureTestingModule({
@@ -70,7 +71,7 @@ describe('ALuCoreSelectApiDirective', () => {
 		selectElement = selectDebugElement.nativeElement as HTMLElement;
 		select = selectDebugElement.componentInstance as LuSimpleSelectInputComponent<TestEntity>;
 		testApi = fixture.debugElement.query(By.directive(TestDirective)).injector.get(TestDirective);
-		getOptionsSpy = jest.spyOn(testApi, 'getOptions');
+		getOptionsSpy = vi.spyOn(testApi, 'getOptions');
 	});
 
 	it('should query options when clicking on the select', fakeAsync(() => {
@@ -185,7 +186,7 @@ describe('ALuCoreSelectApiDirective', () => {
 		tick(); // Component initialization uses a setTimeout :see_no_evil:
 		testApi.setPageSize(2);
 
-		const getPageSpy = jest.spyOn(testApi, 'getOptionsPage');
+		const getPageSpy = vi.spyOn(testApi, 'getOptionsPage');
 		getPageSpy.mockImplementation((_params, page) => {
 			// Emit one list, then the same list with one more item
 			return of(

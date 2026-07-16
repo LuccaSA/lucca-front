@@ -1,40 +1,28 @@
 import { CdkDrag, CdkDragDrop, CdkDropList, moveItemInArray } from '@angular/cdk/drag-drop';
-import { ChangeDetectionStrategy, Component, input } from '@angular/core';
 import { SortableListComponent, SortableListItemComponent } from '@lucca-front/ng/sortable-list';
-import { Meta, StoryObj } from '@storybook/angular';
-import { HiddenArgType } from 'stories/helpers/common-arg-types';
+import { Meta, moduleMetadata, StoryObj } from '@storybook/angular-vite';
 
-@Component({
-	selector: 'sortable-list-draggable-stories',
-	imports: [SortableListComponent, SortableListItemComponent, CdkDropList, CdkDrag],
-	templateUrl: './draggable.stories.html',
-	changeDetection: ChangeDetectionStrategy.OnPush,
-})
-class SortableListDraggableStory {
-	small = input<boolean>(false);
-	clickable = input<boolean>(false);
-	unclearable = input<boolean>(false);
-
-	listItem: Array<{ id: number; label: string; helperMessage: string }> = [
-		{ id: 1, label: 'Label 1', helperMessage: 'help 1' },
-		{ id: 2, label: 'Label 2', helperMessage: 'help 2' },
-		{ id: 3, label: 'Label 3', helperMessage: 'help 3' },
-	];
-
-	drop(event: CdkDragDrop<string[]>) {
-		moveItemInArray(this.listItem, event.previousIndex, event.currentIndex);
-	}
+interface SortableListDraggableStory {
+	label: string;
+	helperMessage: string;
+	small: boolean;
+	clickable: boolean;
+	unclearable: boolean;
 }
 
 export default {
 	title: 'Documentation/Listings/Sortable List/Angular/Draggable',
-	component: SortableListDraggableStory,
+	decorators: [
+		moduleMetadata({
+			imports: [SortableListComponent, SortableListItemComponent, CdkDropList, CdkDrag],
+		}),
+	],
 	argTypes: {
 		label: {
 			control: {
 				type: 'text',
 			},
-			description: 'Modifie le texte principal d’un élément de liste.',
+			description: 'Modifie le texte principal d’un élément de liste. [PortalContent]',
 		},
 		helperMessage: {
 			control: {
@@ -47,6 +35,7 @@ export default {
 			description: 'Modifie la taille du composant.',
 		},
 		clickable: {
+			control: 'boolean',
 			description: 'Rend les lignes cliquables.',
 		},
 		unclearable: {
@@ -56,43 +45,33 @@ export default {
 		drop: {
 			description: 'Événement déclenché au drop.',
 		},
-		listItem: HiddenArgType,
+	},
+	render: (args: SortableListDraggableStory) => {
+		const unclearable = args.unclearable ? ' unclearable' : '';
+		const clickable = args.clickable ? ' clickable' : '';
+		const small = args.small ? ' small' : '';
+		const listItem = [{ id: 1 }, { id: 2 }, { id: 3 }];
+
+		return {
+			props: {
+				listItem,
+				drop: (event: CdkDragDrop<unknown[]>) => moveItemInArray(listItem, event.previousIndex, event.currentIndex),
+			},
+			template: `<lu-sortable-list cdkDropList (cdkDropListDropped)="drop($event)">
+	<lu-sortable-list-item label="${args.label}" helperMessage="${args.helperMessage}"${unclearable}${clickable}${small} drag cdkDrag />
+	<lu-sortable-list-item label="${args.label}" helperMessage="${args.helperMessage}"${unclearable}${clickable}${small} drag cdkDrag />
+	<lu-sortable-list-item label="${args.label}" helperMessage="${args.helperMessage}"${unclearable}${clickable}${small} drag cdkDrag />
+</lu-sortable-list>`,
+		};
 	},
 } as Meta;
 
 export const Basic: StoryObj<SortableListDraggableStory> = {
 	args: {
+		label: 'Label',
+		helperMessage: 'Helper message',
 		small: false,
 		clickable: false,
 		unclearable: false,
-	},
-};
-
-const code = `<lu-sortable-list cdkDropList (cdkDropListDropped)="drop($event)">
-	<lu-sortable-list-item
-		label="Label 1"
-		helperMessage="help 1"
-		[unclearable]="unclearable()"
-		[clickable]="clickable()"
-		[small]="small()"
-		cdkDrag
-	/>
-	<lu-sortable-list-item
-		label="Label 2"
-		helperMessage="help 2"
-		[unclearable]="unclearable()"
-		[clickable]="clickable()"
-		[small]="small()"
-		cdkDrag
-	/>
-</lu-sortable-list>`;
-
-Basic.parameters = {
-	docs: {
-		source: {
-			language: 'html',
-			type: 'code',
-			code,
-		},
 	},
 };

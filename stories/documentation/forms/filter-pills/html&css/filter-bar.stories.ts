@@ -10,8 +10,8 @@ import { IconComponent } from '@lucca-front/ng/icon';
 import { PopoverDirective } from '@lucca-front/ng/popover2';
 import { ScrollBoxComponent } from '@lucca-front/ng/scroll-box';
 import { LuTooltipModule } from '@lucca-front/ng/tooltip';
-import { applicationConfig, Meta, moduleMetadata, StoryObj } from '@storybook/angular';
-import { StoryModelDisplayComponent } from 'stories/helpers/story-model-display.component';
+import { applicationConfig, Meta, moduleMetadata, StoryObj } from '@storybook/angular-vite';
+import { StoryModelDisplayComponent } from '@/helpers/story-model-display.component';
 
 interface FilterBarBasicStory {
 	label: string;
@@ -49,7 +49,7 @@ export default {
 function getTemplate(args: FilterBarBasicStory): string {
 	return `
 	<form>
-		<div class="filterBar" [ngModel]="group" [ngModelOptions]="{ standalone: true }">
+		<div class="filterBar">
 			<lu-scroll-box class="filterBar-scrollBox">
 				<div class="filterBar-scrollBox-group">
 					<ul class="segmentedControl filterBar-segmentedControl" role="presentation">

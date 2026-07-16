@@ -37,6 +37,7 @@ export const SOFTWARE_ICON = [
 	// Lucca
 	'cloud-control',
 	'ask-lucca',
+	'ask-salesforce',
 	'calendar',
 	'administration',
 	'client-center',

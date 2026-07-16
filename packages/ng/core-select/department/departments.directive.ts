@@ -6,7 +6,7 @@ import { CORE_SELECT_API_TOTAL_COUNT_PROVIDER, CoreSelectApiTotalCountProvider, 
 import { ALuCoreSelectApiDirective } from '@lucca-front/ng/core-select/api';
 import { ILuDepartment } from '@lucca-front/ng/department';
 import { combineLatest, map, Observable, of } from 'rxjs';
-import { filter } from 'rxjs/operators';
+import { debounceTime, switchMap } from 'rxjs/operators';
 import { NoopTreeSelectDirective } from './noop-tree-select.directive';
 
 @Directive({
@@ -26,6 +26,7 @@ export class LuCoreSelectDepartmentsDirective<T extends ILuDepartment = ILuDepar
 	protected httpClient = inject(HttpClient);
 
 	readonly url = input<string>('/organization/structure/api/departments/tree');
+	readonly countUrl = input<string>('/organization/structure/api/departments');
 	readonly filters = input<Record<string, string | number | boolean> | null>(null);
 	readonly operationIds = input<readonly number[] | null>(null);
 	readonly uniqueOperationIds = input<readonly number[] | null>(null);
@@ -93,11 +94,18 @@ export class LuCoreSelectDepartmentsDirective<T extends ILuDepartment = ILuDepar
 		}),
 	);
 
-	public readonly totalCount$ = toObservable(this.select.dataSourceOptions).pipe(
-		filter((opts) => opts.length > 0),
-		map((opts) => {
-			return opts.map((branch) => this.flattenTree(branch)).flat().length;
-		}),
+	public readonly totalCount$ = toObservable(computed(() => ({ url: this.countUrl(), filters: this.filters() }))).pipe(
+		debounceTime(250),
+		switchMap(({ url, filters }) =>
+			this.httpClient.get<{ count: number }>(url, {
+				params: {
+					...filters,
+					limit: 0,
+					['fields.root']: 'count',
+				},
+			}),
+		),
+		map((res) => res?.count ?? 0),
 	);
 
 	protected flattenTree(branch: TreeNode<T>): T[] {

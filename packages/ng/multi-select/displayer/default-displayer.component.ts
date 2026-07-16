@@ -66,8 +66,9 @@ export class LuMultiSelectDefaultDisplayerComponent<T> implements OnInit {
 
 	readonly displayedOptions$ = this.context.option$.pipe(
 		map((options) => {
-			if (this.select.maxValuesShown) {
-				return (options || []).slice(0, this.select.maxValuesShown());
+			const maxValuesShown = this.select.maxValuesShown();
+			if (maxValuesShown) {
+				return (options || []).slice(0, maxValuesShown);
 			}
 			return options;
 		}),
