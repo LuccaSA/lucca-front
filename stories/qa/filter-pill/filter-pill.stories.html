@@ -5,34 +5,112 @@
 			<td>
 				<div class="demo-QAtable-list">Angular</div>
 			</td>
+			<td>
+				<div class="demo-QAtable-list">Angular selected</div>
+			</td>
+			<td>
+				<div class="demo-QAtable-list">Angular selected clearable</div>
+			</td>
 		</tr>
 		<tr>
-			<td>Default</td>
+			<td>Checkbox</td>
 			<td>
 				<div class="demo-QAtable-list">
-					<lu-filter-pill label="Inclure les collaborateurs partis">
+					<lu-filter-pill label="Arroser">
 						<lu-checkbox-input [ngModel]="false" />
 					</lu-filter-pill>
-					<lu-filter-pill label="With Select all" name="legume">
-						<lu-multi-select
-							[ngModel]="{ mode: 'none' }"
-							clearable="false"
-							[options]="legumes | filterLegumes: clue"
-							[totalCount]="legumes.length"
-							(clueChange)="clue = $event"
-							filterPillLabelPlural="légumes"
-						/>
+				</div>
+			</td>
+			<td>
+				<lu-filter-pill label="Arroser">
+					<lu-checkbox-input [ngModel]="true" />
+				</lu-filter-pill>
+			</td>
+			<td></td>
+		</tr>
+		<tr>
+			<td>Select simple</td>
+			<td>
+				<div class="demo-QAtable-list">
+					<lu-filter-pill label="Légume">
+						<lu-simple-select [ngModel]="null" clearable="false" [options]="legumes" />
 					</lu-filter-pill>
-					<lu-filter-pill label="Département" name="department">
-						<lu-simple-select [ngModel]="null" clearable="false" departments />
+				</div>
+			</td>
+			<td>
+				<div class="demo-QAtable-list">
+					<lu-filter-pill label="Légume">
+						<lu-simple-select [ngModel]="'Artichaut'" clearable="false" [options]="legumes" />
 					</lu-filter-pill>
-					<lu-filter-pill label="Départements" name="departments">
-						<lu-multi-select [ngModel]="[]" clearable="false" filterPillLabelPlural="départements" departments />
+				</div>
+			</td>
+			<td>
+				<div class="demo-QAtable-list">
+					<lu-filter-pill label="Légume">
+						<lu-simple-select [ngModel]="'Artichaut'" [options]="legumes" />
 					</lu-filter-pill>
-					<lu-filter-pill label="Tree simple">
+				</div>
+			</td>
+		</tr>
+		<tr>
+			<td>Select multi</td>
+			<td>
+				<div class="demo-QAtable-list">
+					<lu-filter-pill label="Légumes">
+						<lu-multi-select [ngModel]="[]" clearable="false" filterPillLabelPlural="légumes" [options]="legumes" />
+					</lu-filter-pill>
+				</div>
+			</td>
+			<td>
+				<div class="demo-QAtable-list">
+					<lu-filter-pill label="Légumes">
+						<lu-multi-select [ngModel]="['Artichaut']" clearable="false" filterPillLabelPlural="légumes" [options]="legumes" />
+					</lu-filter-pill>
+					<lu-filter-pill label="Légumes">
+						<lu-multi-select [ngModel]="['Artichaut', 'Asperge']" clearable="false" filterPillLabelPlural="légumes" [options]="legumes" />
+					</lu-filter-pill>
+				</div>
+			</td>
+			<td>
+				<div class="demo-QAtable-list">
+					<lu-filter-pill label="Légumes">
+						<lu-multi-select [ngModel]="['Artichaut']" filterPillLabelPlural="légumes" [options]="legumes" />
+					</lu-filter-pill>
+					<lu-filter-pill label="Légumes">
+						<lu-multi-select [ngModel]="['Artichaut', 'Asperge']" filterPillLabelPlural="légumes" [options]="legumes" />
+					</lu-filter-pill>
+				</div>
+			</td>
+		</tr>
+		<tr>
+			<td>Tree select simple</td>
+			<td>
+				<div class="demo-QAtable-list">
+					<lu-filter-pill label="Légume">
 						<lu-simple-select [ngModel]="null" clearable="false" [treeSelect]="groupingFn" [options]="legumes" />
 					</lu-filter-pill>
-					<lu-filter-pill label="Tree multi">
+				</div>
+			</td>
+			<td>
+				<div class="demo-QAtable-list">
+					<lu-filter-pill label="Légume">
+						<lu-simple-select [ngModel]="'Artichaut'" clearable="false" [treeSelect]="groupingFn" [options]="legumes" />
+					</lu-filter-pill>
+				</div>
+			</td>
+			<td>
+				<div class="demo-QAtable-list">
+					<lu-filter-pill label="Légume">
+						<lu-simple-select [ngModel]="'Artichaut'" [treeSelect]="groupingFn" [options]="legumes" />
+					</lu-filter-pill>
+				</div>
+			</td>
+		</tr>
+		<tr>
+			<td>Tree select multi</td>
+			<td>
+				<div class="demo-QAtable-list">
+					<lu-filter-pill label="Légumes">
 						<lu-multi-select
 							[ngModel]="[]"
 							clearable="false"
@@ -41,11 +119,144 @@
 							[options]="legumes"
 						/>
 					</lu-filter-pill>
+				</div>
+			</td>
+			<td>
+				<div class="demo-QAtable-list">
+					<lu-filter-pill label="Légumes">
+						<lu-multi-select
+							[ngModel]="['Artichaut']"
+							clearable="false"
+							filterPillLabelPlural="légumes"
+							[treeSelect]="groupingFn"
+							[options]="legumes"
+						/>
+					</lu-filter-pill>
+					<lu-filter-pill label="Légumes">
+						<lu-multi-select
+							[ngModel]="['Artichaut', 'Asperge']"
+							clearable="false"
+							filterPillLabelPlural="légumes"
+							[treeSelect]="groupingFn"
+							[options]="legumes"
+						/>
+					</lu-filter-pill>
+				</div>
+			</td>
+			<td>
+				<div class="demo-QAtable-list">
+					<lu-filter-pill label="Légumes">
+						<lu-multi-select [ngModel]="['Artichaut']" filterPillLabelPlural="légumes" [treeSelect]="groupingFn" [options]="legumes" />
+					</lu-filter-pill>
+					<lu-filter-pill label="Légumes">
+						<lu-multi-select
+							[ngModel]="['Artichaut', 'Asperge']"
+							filterPillLabelPlural="légumes"
+							[treeSelect]="groupingFn"
+							[options]="legumes"
+						/>
+					</lu-filter-pill>
+				</div>
+			</td>
+		</tr>
+		<tr>
+			<td>Departement simple</td>
+			<td>
+				<div class="demo-QAtable-list">
+					<lu-filter-pill label="Département" name="department">
+						<lu-simple-select [ngModel]="null" clearable="false" departments />
+					</lu-filter-pill>
+				</div>
+			</td>
+			<td>
+				<div class="demo-QAtable-list">
+					<lu-filter-pill label="Département" name="department">
+						<lu-simple-select [ngModel]="selectedDepartment" clearable="false" departments />
+					</lu-filter-pill>
+				</div>
+			</td>
+			<td>
+				<div class="demo-QAtable-list">
+					<lu-filter-pill label="Département" name="department">
+						<lu-simple-select [ngModel]="selectedDepartment" departments />
+					</lu-filter-pill>
+				</div>
+			</td>
+		</tr>
+		<tr>
+			<td>Departement multi</td>
+			<td>
+				<div class="demo-QAtable-list">
+					<lu-filter-pill label="Départements" name="departments">
+						<lu-multi-select [ngModel]="[]" clearable="false" filterPillLabelPlural="départements" departments />
+					</lu-filter-pill>
+				</div>
+			</td>
+			<td>
+				<div class="demo-QAtable-list">
+					<lu-filter-pill label="Départements" name="departments">
+						<lu-multi-select [ngModel]="[selectedDepartment]" clearable="false" filterPillLabelPlural="départements" departments />
+					</lu-filter-pill>
+					<lu-filter-pill label="Départements" name="departments">
+						<lu-multi-select [ngModel]="selectedDepartments" clearable="false" filterPillLabelPlural="départements" departments />
+					</lu-filter-pill>
+				</div>
+			</td>
+			<td>
+				<div class="demo-QAtable-list">
+					<lu-filter-pill label="Départements" name="departments">
+						<lu-multi-select [ngModel]="[selectedDepartment]" filterPillLabelPlural="départements" departments />
+					</lu-filter-pill>
+					<lu-filter-pill label="Départements" name="departments">
+						<lu-multi-select [ngModel]="selectedDepartments" filterPillLabelPlural="départements" departments />
+					</lu-filter-pill>
+				</div>
+			</td>
+		</tr>
+		<tr>
+			<td>Date</td>
+			<td>
+				<div class="demo-QAtable-list">
 					<lu-filter-pill label="Date de début">
 						<lu-date-input [ngModel]="null" clearable="false" />
 					</lu-filter-pill>
+				</div>
+			</td>
+			<td>
+				<div class="demo-QAtable-list">
+					<lu-filter-pill label="Date de début">
+						<lu-date-input [ngModel]="selectedDate" clearable="false" />
+					</lu-filter-pill>
+				</div>
+			</td>
+			<td>
+				<div class="demo-QAtable-list">
+					<lu-filter-pill label="Date de début">
+						<lu-date-input [ngModel]="selectedDate" />
+					</lu-filter-pill>
+				</div>
+			</td>
+		</tr>
+		<tr>
+			<td>Period</td>
+			<td>
+				<div class="demo-QAtable-list">
 					<lu-filter-pill label="Période">
-						<lu-date-range-input [ngModel]="null" clearable="false" [(ngModel)]="dateRange" />
+						<lu-date-range-input [ngModel]="null" clearable="false" />
+					</lu-filter-pill>
+				</div>
+			</td>
+			<td>
+				<div class="demo-QAtable-list">
+					<lu-filter-pill label="Période">
+						<lu-date-range-input [ngModel]="selectedDateRange" clearable="false" />
+					</lu-filter-pill>
+				</div>
+			</td>
+			<td>
+				<div class="demo-QAtable-list">
+					<lu-filter-pill label="Période">
+						<lu-date-range-input [ngModel]="selectedDateRange" />
 					</lu-filter-pill>
 				</div>
 			</td>
