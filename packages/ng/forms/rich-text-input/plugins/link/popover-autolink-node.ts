@@ -59,7 +59,7 @@ export class PopoverAutoLinkNode extends AutoLinkNode {
 	}
 
 	override getDOMSlot(element: HTMLElement): ElementDOMSlot {
-		return super.getDOMSlot(element.getElementsByClassName('link-text')[0] as HTMLElement);
+		return super.getDOMSlot((element.getElementsByClassName('link-text')[0] as HTMLElement) ?? element);
 	}
 
 	override updateDOM(prevNode: this): boolean {
@@ -79,7 +79,7 @@ export class PopoverAutoLinkNode extends AutoLinkNode {
 		};
 	}
 
-	static override importDOM(): null {
+	static override importDOM() {
 		return AutoLinkNode.importDOM();
 	}
 

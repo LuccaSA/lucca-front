@@ -1,6 +1,6 @@
 import { EmbeddedViewRef, TemplateRef, ViewContainerRef } from '@angular/core';
 import { LinkAttributes, LinkNode, SerializedLinkNode } from '@lexical/link';
-import { DOMConversionMap, DOMExportOutput, EditorConfig, ElementDOMSlot, LexicalEditor, type NodeKey } from 'lexical';
+import { DOMExportOutput, EditorConfig, ElementDOMSlot, LexicalEditor, type NodeKey } from 'lexical';
 import { LinkTemplateContext } from './link-template-context';
 
 export class PopoverLinkNode extends LinkNode {
@@ -58,7 +58,7 @@ export class PopoverLinkNode extends LinkNode {
 	}
 
 	override getDOMSlot(element: HTMLElement): ElementDOMSlot {
-		return super.getDOMSlot(element.getElementsByClassName('link-text')[0] as HTMLElement);
+		return super.getDOMSlot((element.getElementsByClassName('link-text')[0] as HTMLElement) ?? element);
 	}
 
 	override updateDOM(prevNode: this): boolean {
@@ -78,7 +78,7 @@ export class PopoverLinkNode extends LinkNode {
 		};
 	}
 
-	static override importDOM(): DOMConversionMap | null {
+	static override importDOM() {
 		return LinkNode.importDOM();
 	}
 
