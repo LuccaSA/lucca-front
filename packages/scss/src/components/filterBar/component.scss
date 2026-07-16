@@ -51,6 +51,8 @@
 			margin-inline-start: auto;
 			padding-inline-start: var(--pr-t-spacings-200);
 			flex-shrink: 0;
+			display: flex;
+			gap: var(--pr-t-spacings-100);
 		}
 	}
 }
