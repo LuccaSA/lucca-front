@@ -15,6 +15,18 @@
 	gap: var(--commons-divider-width);
 	white-space: var(--components-segmentedControl-whiteSpace);
 
+	.button.mod-disclosure {
+		margin-block: calc(var(--pr-t-spacings-25) * -1);
+
+		&:focus-visible {
+			@include a11y.focusVisible($offset: 0);
+		}
+
+		&:last-child {
+			margin-inline-end: calc(var(--pr-t-spacings-100) * -1);
+		}
+	}
+
 	@at-root ($atRoot) {
 		.segmentedControl-item-input {
 			@include a11y.mask;
