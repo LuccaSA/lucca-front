@@ -1,11 +1,15 @@
 <div class="lu-picker-panel lu-option-picker-panel" cdkTrapFocus>
 	<div class="lu-picker-content" [class.is-loading]="loading()" (scroll)="onScroll($event)">
-		@if (selectInput.panelHeaderTpl(); as tpl) {
-			<div>
-				<ng-container *luPortal="tpl" />
-			</div>
-		}
 		<lu-listbox [state]="listboxState()" [statusMsg]="listboxStatusMsg()">
+			<!-- The header is projected inside the listbox because it can contain selectable elements
+			that are referenced by aria-activedescendant -->
+			<ng-container ngProjectAs="[listbox-header]">
+				@if (selectInput.panelHeaderTpl(); as tpl) {
+					<div>
+						<ng-container *luPortal="tpl" />
+					</div>
+				}
+			</ng-container>
 			@if (grouping() && groupTemplateLocation() === "group-header") {
 				@for (group of dataSourceOptions() | luOptionGroup: grouping().selector; track group.key; let groupIndex = $index) {
 					<lu-listbox-option group [groupId]="selectId + '-group-' + group.key">
