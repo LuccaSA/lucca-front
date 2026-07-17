@@ -432,7 +432,7 @@ Source: [LFDeprecatedSelectors.mjs](https://github.com/LuccaSA/lucca-front/blob/
 				</td>
 			<td>21.0.0</td>
 			<td>–</td>
-			<td>Remplacer par les <a href="https://prisme.lucca.io/94310e217/p/21a286-utilitaires">nouvelles classes</a> liées aux tokens (<code>.pr-u-color</code>…)</td>
+			<td>Remplacer par les <a href="https://prisme.lucca.io/94310e217/p/21a286-utilitaires">nouvelles classes</a> liées aux tokens (<code>.pr-u-color</code>…) (<a href="https://prisme.lucca.io/94310e217/p/40c515-cycle-de-vie-des-composants/t/17d7fdfdaf">schematics</a>)</td>
 		</tr>
 	</tbody>
 </table>
