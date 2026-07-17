@@ -33,7 +33,7 @@
 							{{ group.key }}
 						</ng-container>
 					}
-					<ng-container *luOption="let tag; select: tagsSelect">{{ tag.description }}</ng-container>
+					<ng-container *luOption="let tag; select: tagsSelect">{{ tag.description ?? tag.key }}</ng-container>
 				</lu-simple-select>
 			</lu-filter-pill>
 
