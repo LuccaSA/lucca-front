@@ -373,6 +373,66 @@ export const WithClueTEST = createTestStory(WithClue, async (context) => {
 	});
 });
 
+export const ScrollOnOpen = generateStory({
+	name: 'Scroll on open',
+	description: `À l’ouverture, le panneau doit être positionné en haut de la liste (aucun défilement parasite), même si aucune valeur n’est sélectionnée.`,
+	template: `<lu-multi-select
+	#selectRef
+	[(ngModel)]="selectedLegumes"
+	[options]="legumes | filterLegumes:clue"
+	(clueChange)="clue = $event"
+/>`,
+	neededImports: {
+		'@lucca-front/ng/multi-select': ['LuMultiSelectInputComponent'],
+	},
+	storyPartial: {
+		args: {
+			selectedLegumes: [],
+		},
+	},
+});
+
+export const ScrollOnOpenTEST = createTestStory(ScrollOnOpen, async ({ canvasElement, step }) => {
+	await waitForAngular();
+	const canvas = within(canvasElement);
+	const input = canvas.getByRole('combobox');
+
+	// Walk up from the listbox to the scrollable ancestor (.lu-picker-content)
+	const getPanelScrollTop = () => {
+		let el: HTMLElement | null = screen.getByRole('listbox');
+		while (el && el.scrollHeight <= el.clientHeight + 1) {
+			el = el.parentElement;
+		}
+		return el?.scrollTop ?? 0;
+	};
+
+	await step('Opening with the mouse shows the top of the list', async () => {
+		await userEvent.click(input);
+		await waitForAngular();
+		const panel = within(screen.getByRole('listbox'));
+		const options = await panel.findAllByRole('option');
+		// The list must be scrollable for the assertion to be meaningful
+		await expect(options.length).toBeGreaterThan(10);
+		await expect(options[0]).toBeVisible();
+		// No spurious scroll should be applied on open: the panel stays at the top
+		await waitFor(() => expect(getPanelScrollTop()).toBeLessThan(10));
+		await userEvent.keyboard('{Escape}');
+		await waitForAngular();
+		await waitFor(() => expect(screen.queryByRole('listbox')).not.toBeInTheDocument());
+	});
+
+	await step('Opening with the keyboard shows the top of the list', async () => {
+		input.focus();
+		await userEvent.keyboard('{ArrowDown}');
+		await waitForAngular();
+		await expect(screen.getByRole('listbox')).toBeVisible();
+		await waitFor(() => expect(getPanelScrollTop()).toBeLessThan(10));
+		await userEvent.keyboard('{Escape}');
+		await waitForAngular();
+		await waitFor(() => expect(screen.queryByRole('listbox')).not.toBeInTheDocument());
+	});
+});
+
 export const WithMultiDisplayer = generateStory({
 	name: 'With MultiDisplayer',
 	description:
